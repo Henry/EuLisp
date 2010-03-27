@@ -9,5 +9,5 @@ developed in an attempt to reconcile the differences with the ultimate aim to
 create a consistent definition and implementation which is as close to
 EuLisp-1.0 as is possible to ascertain from the remaining documents related to
 the standardisation process.  More details are available from the github pages
-for this [EuLisp](http://henry.github.com/EuLisp. "EuLisp GitHub Project
+for this [EuLisp](http://henry.github.com/EuLisp "EuLisp GitHub Project
 Homepage") project.
