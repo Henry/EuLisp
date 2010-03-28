@@ -1,0 +1,2482 @@
+<HTML>
+<HEAD>
+  <TITLE>Tk Commands in EuLisp</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFF0" TEXT="#000000">
+<P>
+
+<a name="index">
+<a href="special-cases.html"><img align=right border=off src="graphics/next.gif" height=35 width=98></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=35 width=98></a>
+<a href="general.html#event-driven"><img align=right border=off src="graphics/previous.gif" height=35 width=98></a>
+
+<h1>Tk_Commands in EuLisp.</h1>
+
+<!-- Ini-index -->
+<table width=100%>
+<tr align=left><th><a href="#eul-associate"><font size=-1>eul-associate</a><th><a href="#tk-find-canvas-all"><font size=-1>tk-find-canvas-all</a><th><a href="#tk-make-scale"><font size=-1>tk-make-scale</a>
+<tr align=left><th><a href="#Tcl_DoOneEvent "><font size=-1>Tcl_DoOneEvent </a><th><a href="#tk-find-canvas-below "><font size=-1>tk-find-canvas-below </a><th><a href="#tk-make-scrollbar"><font size=-1>tk-make-scrollbar</a>
+<tr align=left><th><a href="#tk-add-arc-canvas"><font size=-1>tk-add-arc-canvas</a><th><a href="#tk-find-canvas-enclosed "><font size=-1>tk-find-canvas-enclosed </a><th><a href="#tk-make-text"><font size=-1>tk-make-text</a>
+<tr align=left><th><a href="#tk-add-bitmap-canvas"><font size=-1>tk-add-bitmap-canvas</a><th><a href="#tk-find-canvas-overlapping "><font size=-1>tk-find-canvas-overlapping </a><th><a href="#tk-make-toplevel"><font size=-1>tk-make-toplevel</a>
+<tr align=left><th><a href="#tk-add-image-canvas"><font size=-1>tk-add-image-canvas</a><th><a href="#tk-find-canvas-withtag "><font size=-1>tk-find-canvas-withtag </a><th><a href="#tk-map-widget"><font size=-1>tk-map-widget</a>
+<tr align=left><th><a href="#tk-add-line-canvas"><font size=-1>tk-add-line-canvas</a><th><a href="#tk-focus"><font size=-1>tk-focus</a><th><a href="#tk-menu-add"><font size=-1>tk-menu-add</a>
+<tr align=left><th><a href="#tk-add-oval-canvas"><font size=-1>tk-add-oval-canvas</a><th><a href="#tk-get-result"><font size=-1>tk-get-result</a><th><a href="#tk-move-item-canvas"><font size=-1>tk-move-item-canvas</a>
+<tr align=left><th><a href="#tk-add-polygon-canvas"><font size=-1>tk-add-polygon-canvas</a><th><a href="#tk-get-value-widget"><font size=-1>tk-get-value-widget</a><th><a href="#tk-name"><font size=-1>tk-name</a>
+<tr align=left><th><a href="#tk-add-rectangle-canvas"><font size=-1>tk-add-rectangle-canvas</a><th><a href="#tk-get-variable"><font size=-1>tk-get-variable</a><th><a href="#tk-names-image"><font size=-1>tk-names-image</a>
+<tr align=left><th><a href="#tk-add-text-canvas"><font size=-1>tk-add-text-canvas</a><th><a href="#tk-grab-set"><font size=-1>tk-grab-set</a><th><a href="#tk-object-p"><font size=-1>tk-object-p</a>
+<tr align=left><th><a href="#tk-add-window-canvas"><font size=-1>tk-add-window-canvas</a><th><a href="#tk-handler"><font size=-1>tk-handler</a><th><a href="#tk-pack"><font size=-1>tk-pack</a>
+<tr align=left><th><a href="#tk-bind"><font size=-1>tk-bind</a><th><a href="#tk-height-image"><font size=-1>tk-height-image</a><th><a href="#tk-scrollbar-p"><font size=-1>tk-scrollbar-p</a>
+<tr align=left><th><a href="#tk-bind-item-canvas"><font size=-1>tk-bind-item-canvas</a><th><a href="#tk-insert"><font size=-1>tk-insert</a><th><a href="#tk-scroll-set"><font size=-1>tk-scroll-set</a>
+<tr align=left><th><a href="#tk-bind-tag-text"><font size=-1>tk-bind-tag-text</a><th><a href="#tk-item-canvas-p"><font size=-1>tk-item-canvas-p</a><th><a href="#tk-selection-get"><font size=-1>tk-selection-get</a>
+<tr align=left><th><a href="#tk-button-flash"><font size=-1>tk-button-flash</a><th><a href="#tk-listbox-curselection"><font size=-1>tk-listbox-curselection</a><th><a href="#tk-set-variable"><font size=-1>tk-set-variable</a>
+<tr align=left><th><a href="#tk-button-p"><font size=-1>tk-button-p</a><th><a href="#tk-listbox-p"><font size=-1>tk-listbox-p</a><th><a href="#tk-text-index"><font size=-1>tk-text-index</a>
+<tr align=left><th><a href="#tk-canvas-p"><font size=-1>tk-canvas-p</a><th><a href="#tk-lower-item-canvas"><font size=-1>tk-lower-item-canvas</a><th><a href="#tk-text-mark"><font size=-1>tk-text-mark</a>
+<tr align=left><th><a href="#tk-conf-item-canvas"><font size=-1>tk-conf-item-canvas</a><th><a href="#Tk_MainLoop "><font size=-1>Tk_MainLoop </a><th><a href="#tk-text-p"><font size=-1>tk-text-p</a>
+<tr align=left><th><a href="#tk-conf-tag-text"><font size=-1>tk-conf-tag-text</a><th><a href="#tk-make-button"><font size=-1>tk-make-button</a><th><a href="#tk-text-tag-add"><font size=-1>tk-text-tag-add</a>
+<tr align=left><th><a href="#tk-conf-widget"><font size=-1>tk-conf-widget</a><th><a href="#tk-make-canvas"><font size=-1>tk-make-canvas</a><th><a href="#tk-toplevel-p"><font size=-1>tk-toplevel-p</a>
+<tr align=left><th><a href="#tk-coords-item-canvas"><font size=-1>tk-coords-item-canvas</a><th><a href="#tk-make-checkbutton"><font size=-1>tk-make-checkbutton</a><th><a href="#tk-type-image"><font size=-1>tk-type-image</a>
+<tr align=left><th><a href="#tk-create-image"><font size=-1>tk-create-image</a><th><a href="#tk-make-entry"><font size=-1>tk-make-entry</a><th><a href="#tk-types-image"><font size=-1>tk-types-image</a>
+<tr align=left><th><a href="#tk-delete"><font size=-1>tk-delete</a><th><a href="#tk-make-frame"><font size=-1>tk-make-frame</a><th><a href="#tk-unmap-widget"><font size=-1>tk-unmap-widget</a>
+<tr align=left><th><a href="#tk-delete-image"><font size=-1>tk-delete-image</a><th><a href="#tk-make-label"><font size=-1>tk-make-label</a><th><a href="#tk-width-image"><font size=-1>tk-width-image</a>
+<tr align=left><th><a href="#tk-delete-item-canvas"><font size=-1>tk-delete-item-canvas</a><th><a href="#tk-make-listbox"><font size=-1>tk-make-listbox</a><th><a href="#tk-wm"><font size=-1>tk-wm</a>
+<tr align=left><th><a href="#tk-destroy"><font size=-1>tk-destroy</a><th><a href="#tk-make-menu"><font size=-1>tk-make-menu</a><th><a href="#tk-xview"><font size=-1>tk-xview</a>
+<tr align=left><th><a href="#tk-entry-p"><font size=-1>tk-entry-p</a><th><a href="#tk-make-menubutton"><font size=-1>tk-make-menubutton</a><th><a href="#tk-yview"><font size=-1>tk-yview</a>
+<tr align=left><th><a href="#tk-exit"><font size=-1>tk-exit</a><th><a href="#tk-make-message"><font size=-1>tk-make-message</a><th><a href="#Types-Supported"><font size=-1>Types-Supported</a>
+<tr align=left><th><a href="#tk-find-canvas-above "><font size=-1>tk-find-canvas-above </a><th><a href="#tk-make-radiobutton"><font size=-1>tk-make-radiobutton</a>
+</table>
+<!-- End-index -->
+
+
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="Types-Supported">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  Types-Supported
+</h2>
+
+<h3>
+  &lt;tk-button&gt;<br> 
+  &lt;tk-label&gt;<br>  
+  &lt;tk-frame&gt;<br>   
+  &lt;tk-canvas&gt;<br> 
+  &lt;tk-checkbutton&gt;<br>  
+  &lt;tk-entry&gt;<br>  
+  &lt;tk-listbox&gt;<br>  
+  &lt;tk-menu&gt;<br>  
+  &lt;tk-menubutton&gt;<br>  
+  &lt;tk-message&gt;<br>  
+  &lt;tk-radiobutton&gt;<br>  
+  &lt;tk-scale&gt;<br>  
+  &lt;tk-scrollbar&gt;<br>  
+  &lt;tk-text&gt;<br>  
+  &lt;tk-toplevel&gt;<br>  
+  &lt;tk-object&gt;<br> 
+</h3>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="eul-associate">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  eul-associate
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (eul-associate ((canvas &lt;tk-canvas&gt;) (scroll &lt;tk-scrollbar&gt;) 'horizontal))
+*  (eul-associate ((canvas &lt;tk-canvas&gt;) (scroll &lt;tk-scrollbar&gt;) 'vertical))
+
+*  (eul-associate ((listbox &lt;tk-listbox&gt;) (scroll &lt;tk-scrollbar&gt;) 'horizontal))
+*  (eul-associate ((listbox &lt;tk-listbox&gt;) (scroll &lt;tk-scrollbar&gt;) 'vertical))
+
+*  (eul-associate ((text &lt;tk-text&gt;) (scroll &lt;tk-scrollbar&gt;) 'horizontal))
+*  (eul-associate ((text &lt;tk-text&gt;) (scroll &lt;tk-scrollbar&gt;) 'vertical))
+ 
+*  (eul-associate ((entry &lt;tk-entry&gt;) (scroll &lt;tk-scrollbar&gt;) 'horizontal))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This special function allows the user to avoid the tedious callback system that
+the scrollbars associated to widge require.
+
+(See general information about <a href="special-cases.html#scrolls">How to manage Scrolls</a> for more detail.)
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+N/A
+
+<DT><B>C Module:</B>
+<DD><P>
+N/A
+</DL></PRE>
+<P>
+ 
+<!-- *********************************************************************************************  -->
+<a name="Tcl_DoOneEvent">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  Tcl_DoOneEvent 
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (Tcl_DoOneEvent 0)
+*  (Tcl_DoOneEvent 1)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_general.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This function dispatches one event. The user can decide if the function will block or not.
+  
+  0  Wait until one event is served.
+  1  Do not wait. If there is an event waiting, then it is served.
+                  If there is no event, then return without doing nothing.
+
+(See general information about <a href="general.html#event-driven">Event-Driven Applications</a> for more detail.)
+
+<DT><B>Result:</B>
+<DD><P>
+  1 whether an event has been served.
+  0 otherwise.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+ 
+<DT><B>Foreign C function:</B>
+<DD><P>
+Tcl_DoOneEvent(int flags)
+
+<DT><B>C Module:</B>
+<DD><P>
+(tk library)
+</DL></PRE>
+<P>
+
+
+<!-- *********************************************************************************************  -->
+<a name="tk-add-arc-canvas">
+<a name="tk-add-bitmap-canvas">
+<a name="tk-add-image-canvas">
+<a name="tk-add-line-canvas">
+<a name="tk-add-oval-canvas">
+<a name="tk-add-polygon-canvas">
+<a name="tk-add-rectangle-canvas">
+<a name="tk-add-text-canvas">
+<a name="tk-add-window-canvas">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-add-arc-canvas<BR>
+  tk-add-bitmap-canvas<BR>
+  tk-add-image-canvas<BR>
+  tk-add-line-canvas<BR>
+  tk-add-oval-canvas<BR>
+  tk-add-polygon-canvas<BR>
+  tk-add-rectangle-canvas<BR>
+  tk-add-text-canvas<BR>
+  tk-add-window-canvas<BR>
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+* (tk-add-arc-canvas ((canvas &lt;tk-canvas&gt;) (x1 &lt;int&gt;) (y1 &lt;int&gt;) 
+                      (x2 &lt;int&gt;) (y2 &lt;int&gt;) options)) 
+* (tk-add-bitmap-canvas ((canvas &lt;tk-canvas&gt;) (x &lt;int&gt;) (y &lt;int&gt;) options)) 
+* (tk-add-image-canvas ((canvas &lt;tk-canvas&gt;) (x &lt;int&gt;) (y &lt;int&gt;) options)) 
+* (tk-add-line-canvas ((canvas &lt;tk-canvas&gt;)(x1 &lt;int&gt;) (y1 &lt;int&gt;) ... 
+                       (xn &lt;int&gt;) (yn &lt;int&gt;) options))    
+* (tk-add-oval-canvas ((canvas &lt;tk-canvas&gt;) (x1 &lt;int&gt;) (y1 &lt;int&gt;) 
+                       (x2 &lt;int&gt;) (y2 &lt;int&gt;) options)) 
+* (tk-add-polygon-canvas ((canvas &lt;tk-canvas&gt;) (x1 &lt;int&gt;) (y1 &lt;int&gt;) 
+                          (x2 &lt;int&gt;) (y2 &lt;int&gt;) ... (xn &lt;int&gt;) (yn &lt;int&gt;) options))
+* (tk-add-rectangle-canvas ((canvas &lt;tk-canvas&gt;) (x1 &lt;int&gt;) (y1 &lt;int&gt;) 
+                            (x2 &lt;int&gt;) (y2 &lt;int&gt;) options)) 
+* (tk-add-text-canvas ((canvas &lt;tk-canvas&gt;) (x &lt;int&gt;) (y &lt;int&gt;) options))
+  (tk-add-window-canvas ((canvas &lt;tk-canvas&gt;) (x &lt;int&gt;) (y &lt;int&gt;) options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The <b><em>accessor:</em></b> represents the tcl/tk option, and <b><em>value</em></b> is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+The three dots wants to say that the function can receive an unlimited number
+of coordinates. It is useful for cases like lines and polygons. The quantity
+of coordinates has to be even.
+
+<DT><B>Result:</B>
+<DD><P>
+() Failure in the creation of the item.<br>
+&lt;tk-item-canvas&gt; The new created item for the canvas.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname create arc x1 y1 x2 y2 ?option value option value....? 
+pathname create bitmap x y ?option value option value....? 
+pathname create image x y ?option value option value....? 
+pathname create line x1 y1 ... xn yn ?option value option value....? 
+pathname create oval x1 y1 x2 y2 ?option value option value....? 
+pathname create polygon x1 y1 x2 y2 ... xn yn ?option value option value....? 
+pathname create rectangle x1 y1 x2 y2 ?option value option value....?
+pathname create text x y ?option value option value....? 
+pathname create window x y ?option value option value....?
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_create_item_canvas (char* type, char* nameWidget, Command* cmdPtr,
+			LispRef options) 
+
+where type says the kind of item canvas that is going to be created.
+  
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-bind">
+<HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-bind
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-bind ((widget &lt;tk-object&gt;) (event &lt;string&gt;) (function &lt;simple-function&gt;)))
+*  (tk-bind ((widget &lt;tk-object&gt;) (event &lt;string&gt;) 
+             (function &lt;simple-function&gt;) (list-accessors &lt;cons&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+<b><em>list-accessors</em></b> is a list of event information parameters that the function
+will receive. It also can have infomation about the possible normal parameters
+that the callback function will be expecting.<br>
+The notation has been adapted to EuLisp world.
+
+(See general information about
+<a href="special-cases.html#callbacks-user">How to manage callbacks</a> for more detail.)
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+bind tag sequence script
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_bind (char* nameWidget, char* event, char* fn_key, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+
+
+<!-- *********************************************************************************************  -->
+<a name="tk-bind-item-canvas">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-bind-item-canvas
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+* (tk-bind-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;) (event &lt;string&gt;) 
+                        (function &lt;simple-function&gt;)))
+* (tk-bind-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;) (event &lt;string&gt;) 
+                        (function &lt;simple-function&gt;) (list-accessors &lt;cons&gt;)))
+
+* (tk-bind-item-canvas ((item &lt;tk-item-canvas&gt;) (tag &lt;string&gt;) (event &lt;string&gt;) 
+                        (function &lt;simple-function&gt;)))
+* (tk-bind-item-canvas ((item &lt;tk-item-canvas&gt;) (event &lt;string&gt;) 
+                        (function &lt;simple-function&gt;) (list-accessors &lt;cons&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+<b><em>list-accessors</em></b> is a list of event information parameters that the function
+will receive. It also can have infomation about the possible normal parameters
+that the callback function will be expecting.<br>
+The notation has been adapted to EuLisp world.
+
+(See general information about <a href="special-cases.html#callbacks-user">How to manage callbacks</a> for more detail.)
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname tagOrId ?sequence? ?command? where pathname refers to a canvas widget.
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_bind_element (char* nameWidget, Command* cmdPtr, 
+		     char* id_or_tag, char* event, char* fn_key, LispRef,args)
+
+where the last argument will conatin the list of parameters that the function will
+receive.
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+<!-- *********************************************************************************************  -->
+<a name="tk-bind-tag-text">
+<HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-bind-tag-text
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-bind-tag-text ((text &lt;tk-text&gt;) (tag &lt;string&gt;) (event &lt;string&gt;) 
+                      (tag &lt;string&gt;) (function &lt;simple-function&gt;)))
+
+*  (tk-bind-tag-text ((text &lt;tk-text&gt;) (tag &lt;string&gt;) (event &lt;string&gt;) 
+                      (tag &lt;string&gt;) (function &lt;simple-function&gt;) (list-accessors &lt;cons&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+<b><em>list-accessors</em></b> is a list of event information parameters that the function
+will receive. It also can have infomation about the possible normal parameters
+that the callback function will be expecting.<br>
+The notation has been adapted to EuLisp world.
+
+(See general information about <a href="special-cases.html#callbacks-user">How to manage callbacks</a> for more detail.)
+ 
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname tag bind tagName sequence script
+
+where pathname points to a text widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_bind_element (char* nameWidget, Command* cmdPtr, char *type,
+	             char* id_or_tag, char* event, char* fn_key, LispRef,args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-button-flash">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-button-flash
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+* (tk-button-flash (button &lt;tk-button&gt;))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname flash where pathname represents the button widget that is going
+to be flashed.
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_button_flash (char* name, Command* cmdPtr)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-conf-item-canvas">
+<HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-conf-item-canvas
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+* (tk-conf-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;) options))
+  (tk-conf-item-canvas ((item &lt;tk-item-canvas&gt;) options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The <b><em>accessor:</em></b> represents the tcl/tk option, and <b><em>value</em></b> is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname itemconfigure tagOrId ?option value? ?option value....? where pathname
+should represent a widget canvas.
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_item_canvas (char* nameWidget, Command* cmdPtr, 
+			char* id_or_tag, LispRef args, char* nameCommand) 
+
+where the nameCommand is "itemconfigure"
+  
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-conf-tag-text">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-conf-tag-text
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-conf-tag-text ((text &lt;tk-text&gt;) (tag &lt;string&gt;) options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The accessor: represents the tcl/tk option, and value is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname tag configure tagName ?option? ?value? ?option value...?
+
+where pathname represents a text widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_text (char* name, Command* cmdPtr,
+                 char* command, LispRef args)
+
+where the command will be "tag" and the specification of the "configure" type will be given
+in the last argument, as part of a list.
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+
+<!-- *********************************************************************************************  -->
+<a name="tk-conf-widget">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-conf-widget
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-conf-widget ((x &lt;tk-object&gt;) options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The <b><em>accessor:</em></b> represents the tcl/tk option, and <b><em>value</em></b> is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname configure ?option? ?value option value ...?
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_conf_widget (char* name, Command* cmdPtr, LispRef listArgs)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+<!-- *********************************************************************************************  -->
+<a name="tk-coords-item-canvas">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-coords-item-canvas
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+  (tk-coords-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;)))
+  (tk-coords-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;) (x1 &lt;int&gt;) 
+                          (y1 &lt;int&gt;) ... (xn &lt;int&gt;) (yn &lt;int&gt;)))
+
+* (tk-coords-item-canvas ((item &lt;tk-item-canvas&gt;)) 
+* (tk-coords-item-canvas ((item &lt;tk-item-canvas&gt;) (x1 &lt;int&gt;) (y1 &lt;int&gt;) ... 
+                          (xn &lt;int&gt;) (yn &lt;int&gt;)))
+  
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+  
+<DT><B>Comments:</B>
+<DD><P>
+  
+<DT><B>Result:</B>
+<DD><P>
+Call without coordinates acts as a consultant. It returns: a list of strings
+with the coordinates for the specfied item: (&lt;string&gt; ...
+&lt;string&gt;) Call with coordinates will return () or t depending on the
+failure or success of the Lisp function.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname coords tagOrId ?x0 y0 ...? 
+
+where pathname correponds to a canvas widget.
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_item_canvas (char* nameWidget, Command* cmdPtr, 
+			char* id_or_tag, LispRef args, char* nameCommand) 
+
+where the nameCommand is "coords"
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-create-image">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-create-image
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-create-image 'bitmap options)
+*  (tk-create-image 'photo options)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_images.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The <b><em>accessor:</em></b> represents the tcl/tk option, and <b><em>value</em></b> is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+
+<DT><B>Result:</B>
+<DD><P>
+The name of the image in a string.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+image create type ?name ?option value ...?
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_image_cmd (char* nameImage, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCimages.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-delete">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-delete
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-delete ((entry &lt;tk-entry&gt;) (first &lt;string&gt)))
+*  (tk-delete ((entry &lt;tk-entry&gt;) (first &lt;string&gt) (last &lt;string&gt)))
+
+*  (tk-delete ((listbox &lt;tk-listbox&gt;) (first &lt;string&gt)))
+*  (tk-delete ((listbox &lt;tk-listbox&gt;) (first &lt;string&gt) (last &lt;string&gt)))
+
+*  (tk-delete ((text &lt;tk-listbox&gt;) (first &lt;string&gt)))
+*  (tk-delete ((text &lt;tk-listbox&gt;) (first &lt;string&gt) (last &lt;string&gt)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+<u>first</u> and <u>last</u> are indexes. If the <u>last</u> index is not specified, then a 
+single character is deleted (the <u>first</u> one).
+ 
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname delete first ?last?
+
+where pathname could represent either an entry, a listbox or a text widget.
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_delete_command (char* nameWidget, Command* cmdPtr, char* first, LispRef,last)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-delete-image">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-delete-image
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-delete-image ((image &lt;string&gt;)))
+*  (tk-delete-image ((image1 &lt;string&gt;) ... (imagen &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_images.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+image delete ?name name ...?
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_image_cmd (char* nameImage, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCimages.c
+</DL></PRE>
+<P>  
+<!-- *********************************************************************************************  -->
+<a name ="tk-delete-item-canvas">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-delete-item-canvas
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-delete-item-canvas ((canvas &lt;tk-canvas&gt;) item-or-tag1 ... item-or-tagn))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+  tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+<u>list-or-tag</u> arguments could be either a tag, that is, an string, or a &lt;tk-item-canvas-object&gt;.
+ 
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+ 
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname delete tagOrId ... tagOrId
+
+where pathname represents the canvas.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_item_canvas (char* nameWidget, Command* cmdPtr, 
+			char* id_or_tag, LispRef args, char* nameCommand) 
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+
+<!-- *********************************************************************************************  -->
+<a name="tk-destroy">
+<HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-destroy
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-destroy ((widget1 &lt;tk-object&gt;) ... (widgetn &lt;tk-object&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This command could receive one or more widgets. All of them will be destroyed
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+detroy ?window window...?
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_destroy(char * nameWidget, LispRef moreObjects)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="tk-exit">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-exit
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-exit)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This command destroys the root window.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+exit
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_exit ()
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P> 
+
+
+<!-- *********************************************************************************************  -->
+<a name="tk-find-canvas-above">
+<a name="tk-find-canvas-all">
+<a name="tk-find-canvas-below">
+<a name="tk-find-canvas-enclosed">
+<a name="tk-find-canvas-overlapping">
+<a name="tk-find-canvas-withtag">
+ <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-find-canvas-above <BR>
+  tk-find-canvas-all<BR>
+  tk-find-canvas-below <BR>
+  tk-find-canvas-enclosed <BR>
+  tk-find-canvas-overlapping <BR>
+  tk-find-canvas-withtag <BR>
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+  (tk-find-canvas-above ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;)))
+  (tk-find-canvas-above ((item &lt;tk-item-canvas&gt;))) 
+
+* (tk-find-canvas-all ((canvas &lt;tk-canvas&gt;)))
+
+  (tk-find-canvas-below ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;))) 
+  (tk-find-canvas-below ((item &lt;tk-item-canvas&gt;))) 
+
+* (tk-find-canvas-enclosed ((canvas &lt;tk-canvas&gt;) (x1 &lt;int&gt;) (y1 &lt;int&gt;) 
+                            (x2 &lt;int&gt;) (y2 &lt;int&gt;))) 
+
+* (tk-find-canvas-overlapping ((canvas &lt;tk-canvas&gt;)(x1 &lt;int&gt;) (y1 &lt;int&gt;) 
+                               (x2 &lt;int&gt;) (y2 &lt;int&gt;))) 
+
+* (tk-find-canvas-withtag ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;)))
+* (tk-find-canvas-withtag ((item &lt;tk-item-canvas&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+List with the identifiers of the selected items. The identifiers are strings.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname find above tagOrId pathname find all pathname find below tagOrId
+pathname find enclosed x1 y1 x2 y2 pathname find overlapping x1 y1 x2 y2
+pathname withtag tagOrId where pathname refers to a canvas widget.
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_find_canvas (char* nameWidget, Command* cmdPtr, 
+		    char* search_cmd, LispRef args) 
+
+where search_cmd could be above, all, below, enclosed, overlapping or withtag.
+  
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="tk-focus">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-focus
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-focus)
+*  (tk-focus ())
+*  (tk-focus ((item-canvas &lt;tk-item-canvas&gt;)))
+*  (tk-focus ((widget &lt;tk-object&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The first one allows the user to know which widow is having the focus.
+The other ones are use to get the focus.
+
+<DT><B>Result:</B>
+<DD><P>
+String with the window containing the focus, in the first case.
+
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+focus
+focus window
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_focus (char* name, char* id)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="tk-get-result">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-get-result
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-get-result)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+It is usefull to consult the tcl/tk messages.
+
+<DT><B>Result:</B>
+<DD><P>
+String containing tcl/tk message.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_get_result()
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-get-value-widget">
+<HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-get-value-widget
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-get-value-widget ((entry &lt;tk-entry&gt;)))
+
+*  (tk-get-value-widget ((scale &lt;tk-scale&gt;)))
+
+*  (tk-get-value-widget ((text &lt;tk-text&gt;) (index1 &lt;string&gt;)))
+*  (tk-get-value-widget ((text &lt;tk-text&gt;) (index1 &lt;string&gt;) (index2 &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+  Value of the specified widget.
+  In the case of the text, there are two possibilities.
+
+  - If one index is given , the result is the character represented by this index is given
+  - If both indexes are given, the result is the string of characters between the two indexes.
+ 
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname get
+
+where pathname is either a scale or an entry
+
+pathname get index1 ?index2?
+
+where pathname is representing a text widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_get_value_widget (char* name, Command* cmdPtr, LispRef indexs)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+ 
+
+<!-- *********************************************************************************************  -->
+<a name ="#tk-get-variable">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-get-variable
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-get-variable ((tcl-variable &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+At the moment only integer varibles can be consulted.<br>
+An extension to string values can be easily done.
+
+<DT><B>Result:</B>
+<DD><P>
+&lt;int&gt; containing the value of the tcl variable.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+set varName
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_get_variable (char* nameVar)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.em
+</DL></PRE>
+<P>
+
+
+<!-- *********************************************************************************************  -->
+<a name ="#tk-grab-set">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-grab-set
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-grab-set ((toplevel &lt;tk-toplevel&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This function is only permitted if the received widget is a top-level widget.<br>
+Only local grab will be set. No global grabs are possible.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+grab set window
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_grab_set (char* name)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-handler">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-handler
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-handler ((widget &lt;tk-object&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+  tk_general.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The use of this command makes sense when a foreign function is going to be called.
+
+<DT><B>Result:</B>
+<DD><P>
+Pointer reference to the C structure storing the information of this widget.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+N/A
+
+<DT><B>C Module:</B>
+<DD><P>
+N/A
+</DL></PRE>
+<P>
+
+
+<!-- *********************************************************************************************  -->
+<a name="tk-height-image">
+ <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-height-image
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-height-image ((image &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_images.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+String containig the height of the specified image.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+image height name
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_image_cmd (char* nameImage, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCimages.c
+</DL></PRE>
+<P>
+ <!-- *********************************************************************************************  -->
+<a name="tk-insert">
+ <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-insert
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-insert ((entry &lt;tk-entry&gt;) (index &lt;string&gt;) (text &lt;string&gt;)))
+
+*  (tk-insert ((listbox &lt;tk-listbox&gt;) (index &lt;string&gt;) (text &lt;string&gt;)))
+*  (tk-insert ((listbox &lt;tk-listbox&gt;) (index &lt;string&gt;) (num &lt;int&gt;)))
+
+*  (tk-insert ((text &lt;tk-text&gt;) (index &lt;string&gt;) (text &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname insert index string
+
+where pathname could represent either an entry, a listbox or a text widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_insert_command (char* nameWidget, Command* cmdPtr, char* type, char* text)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+ <!-- *********************************************************************************************  -->
+<a name="tk-listbox-curselection">
+ <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-listbox-curselection
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+   (tk-listbox-curselection ((listbox &lt;tk-listbox&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+  String containing the numerical indices of all the elements selected in the listbox.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname curselection
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_listbox_command (char* name, Command* cmdPtr, char* command)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+<!-- *********************************************************************************************  -->
+<a name="tk-lower-item-canvas">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-lower-item-canvas
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+  (tk-lower-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;)))
+  (tk-lower-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;) (belowThis &lt;string&gt;)))
+  (tk-lower-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;) (belowThis &lt;tk-item-canvas&gt;)))
+* (tk-lower-item-canvas ((&lt;item &lt;tk-item-canvas&gt;)))
+  (tk-lower-item-canvas ((item &lt;tk-item-canvas&gt;) (belowThis &lt;string&gt;)))
+  (tk-lower-item-canvas ((item &lt;tk-item-canvas&gt;) (belowThis &lt;tk-item-canvas&gt;)))
+
+<DT><B>Lisp Module: </B>
+<DD><P>
+tk_class2.em
+  
+<DT><B>Comments: </B>
+<DD><P>
+This function can receive either a &lt;tk-canvas&gt;, specifying the tag
+or an &lt;tk-item-canvas&gt;. The belowThis argument can be either tag or
+and specific item in the canvas.
+
+<DT><B>Result: </B>
+<DD><P>
+() or t depending on the failure or the success of the operation.
+  
+<DT><B>Tcl/Tk command: </B>
+<DD><P>
+pathname lower tagOrId ?belowThis?
+  
+where pathname should correspond to a canvas widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_item_canvas (char* nameWidget, Command* cmdPtr,
+		        char* id_or_tag, LispRef args,
+			char* nameCommand)
+
+where nameCommand represents the name of the Tcl/Tk command to be executed. In that
+case we will use "lower" as the name of the command.
+
+<DT><B>C Module: </B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="Tk_MainLoop">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  Tk_MainLoop 
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (Tk_MainLoop)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_general.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This command loops dispatching tcl/tk events. It finishes when all the widgets are destroyed.
+
+(See general information about <a href="general.html#event-driven">Event-Driven Applications</a> for more detail.)
+
+<DT><B>Result:</B>
+<DD><P>
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+TK_MainLoop()
+
+<DT><B>C Module:</B>
+<DD><P>
+(tk library)
+</DL></PRE>
+<P>
+<!-- *********************************************************************************************  -->
+<a name="tk-make-button">
+<a name="tk-make-label">
+<a name="tk-make-frame">
+<a name="tk-make-canvas">
+<a name="tk-make-checkbutton">
+<a name="tk-make-entry">
+<a name="tk-make-listbox">        
+<a name="tk-make-menu">
+<a name="tk-make-menubutton">     
+<a name="tk-make-message">
+<a name="tk-make-radiobutton">    
+<a name="tk-make-scale">
+<a name="tk-make-scrollbar">      
+<a name="tk-make-text">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<pre>
+<h2>
+tk-make-button                  tk-make-label
+tk-make-frame                   tk-make-canvas
+tk-make-checkbutton        tk-make-entry
+tk-make-listbox                  tk-make-menu
+tk-make-menubutton        tk-make-message
+tk-make-radiobutton         tk-make-scale
+tk-make-scrollbar              tk-make-text
+tk-make-toplevel
+</h2>
+</pre>
+<pre><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-make-button (parent options))
+*  (tk-make-label (parent options))
+*  (tk-make-frame (parent options))                 
+*  (tk-make-canvas (parent options))
+*  (tk-make-checkbutton (parent options))  
+*  (tk-make-entry (parent options))
+*  (tk-make-listbox (parent options))         
+*  (tk-make-menu (parent options))
+*  (tk-make-menubutton (parent options))    
+*  (tk-make-message (parent options))
+*  (tk-make-radiobutton (parent options))     
+*  (tk-make-scale (parent options))
+*  (tk-make-scrollbar (parent options))       
+*  (tk-make-text (parent options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The <u>parent</u> could be either a &lt;tk-object&gt; or (). The empty list represents
+the root widget (or window)
+
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The <b><em>accessor:</em></b> represents the tcl/tk option, and <b><em>value</em></b> is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation. 
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+button pathname options
+label pathname options 
+frame pathname options
+canvas pathname options
+checkbutton pathname options
+listbox pathname options
+menubutton pathname options
+message pathname options
+radiobutton pathname options
+scale pathname options
+scrollbar pathname options
+text pathname options
+toplevel pathname options
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_create_widget(char* type, char* name, LispRef listArgs)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="#tk-map-widget">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-map-widget
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-map-widget ())
+*  (tk-map-widget ((widget &lt;tk-object&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The first one maps the root window. That is, the main widget.
+THe second one maps the specified widget.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.  
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_map_widget (char* name)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-menu-add">
+ <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-menu-add
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-menu-add ((menu &lt;tk-menu&gt;) 'command options))
+*  (tk-menu-add ((menu &lt;tk-menu&gt;) 'checkbutton options))
+*  (tk-menu-add ((menu &lt;tk-menu&gt;) 'radiobutton options))
+*  (tk-menu-add ((menu &lt;tk-menu&gt;) 'separator options))
+*  (tk-menu-add ((menu &lt;tk-menu&gt;) 'cascade options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The <b><em>accessor:</em></b> represents the tcl/tk option, and <b><em>value</em></b> is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.  
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname add command ?option value option value...?
+pathname add checkbutton ?option value option value...?
+pathname add radiobutton ?option value option value...?
+pathname add separator ?option value option value...?
+pathname add cascade ?option value option value...?
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_add_menu_command (char* nameMenu, Command* cmdPtr, LispRef listArgs)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+ <!-- *********************************************************************************************  -->
+<a name="tk-move-item-canvas">
+ <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-move-item-canvas
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+  (tk-move-item-canvas ((canvas &lt;tk-canvas&gt;) (tag &lt;string&gt;) (x-incr &lt;int&gt;) (y-incr &lt;int&gt;))) 
+* (tk-move-item-canvas ((item &lt;tk-item-canvas&gt;) (x-incr &lt;int&gt;) (y-incr &lt;int&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname move tagOrId xAmount yAmount where pathname should correspont to
+a canvas widget
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_item_canvas (char* nameWidget, Command* cmdPtr, char* id_or_tag,
+<DT>			LispRef args, char* nameCommand)
+<DD> 
+<DD>where the nameCommand is "move"
+<P>
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+
+<!-- *********************************************************************************************  -->
+<a name = "tk-name">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-name
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-name ((widget &lt;tk-object&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_general.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+The string containing the internal name of the widget. 
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+N/A
+
+<DT><B>C Module:</B>
+<DD><P>
+N/A
+</DL></PRE>
+<P>
+
+
+
+<!-- *********************************************************************************************  -->
+<a name="tk-names-image">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-names-image
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-names-image)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_images.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+List of strings with the names of the current images.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+image names
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_image_cmd (char* nameImage, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCimages.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-object-p">  
+<a name="tk-button-p">
+<a name="tk-canvas-p">
+<a name="tk-entry-p"> 
+<a name="tk-listbox-p"> 
+<a name="tk-scrollbar-p"> 
+<a name="tk-text-p">
+<a name="tk-toplevel-p">
+<a name="tk-item-canvas-p">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-object-p<br>  
+  tk-button-p<br>
+  tk-canvas-p<br>
+  tk-entry-p<br> 
+  tk-listbox-p<br> 
+  tk-scrollbar-p<br> 
+  tk-text-p<br>
+  tk-toplevel-p<br>
+  tk-item-canvas-p<br>
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-object-p x)  
+*  (tk-button-p x)
+*  (tk-canvas-p x)
+*  (tk-entry-p x) 
+*  (tk-listbox-p x) 
+*  (tk-scrollbar-p x) 
+*  (tk-text-p x)
+*  (tk-toplevel-p x)
+*  (tk-item-canvas-p x)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_general.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+Gives () or t depending whether or not the object corresponts to the specific class.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+N/A
+
+<DT><B>C Module:</B>
+<DD><P>
+N/A
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-pack">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-pack
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-pack ((widget1 &lt;tk-object&gt;) ... (widgetn &lt;tk-object&gt;) options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+THis function can pack more than one object at a time.
+
+The <u>options</u> argument represents a succession of pairs <b><em>{accessor: value}*</em></b>.
+The accessor: represents the tcl/tk option, and value is the value. The value
+in that case has always to be a number or a string. Options argument is optional.
+
+<DT><B>Result:</B>
+<DD><P>
+ () or t depending on the success or the failure of the operation.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pack window ... ?window option value option value...?
+ 
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_pack (char* name, LispRef options)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+ 
+
+<!-- *********************************************************************************************  -->
+<a name="tk-scroll-set">
+ <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-scroll-set
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-scroll-set ((scroll &lt;tk-scrollbar&gt;) (first-entry &lt;string&gt;) (last-entry &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The last two arguments, that is, <u>first-entry</u>, <u>last-entry</u>, are added automatically
+by tcl/tk when the callback function, set with <b><em>xscollcommand:</b></em> or <b><em>yscrollcommand:</b></em> in 
+the widget creation or configuration, is invoked. The user 
+do not have to worry about it. The callback function associated to the widget will
+be the responsible of calling tk-scroll-set.
+
+(See general information about <a href="special-cases.html#scrolls">How to manage Scrolls</a> for more detail.)
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname set first last
+
+where pathname is the name of the scrollbar widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_set_scrollbar_command (char* nameWidget, Command* cmdPtr,
+		           char* first_entry, char* last_entry)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="tk-selection-get">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-selection-get
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-selection-get)
+*  (tk-selection-get ((option &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+<u>option</u> could be one of the representations formats, like: "STRING","ATOM","INTEGER"...
+
+<DT><B>Result:</B>
+<DD><P>
+Information of the selected element.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+selection get
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_selection_get (LispRef option)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="#tk-set-variable">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-set-variable
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-set-variable ((tcl-variable &lt;string&gt;) (value &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.  
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+set varName value
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_set_variable (char* nameVar,char* value)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+ 
+
+<!-- *********************************************************************************************  -->
+<a name="tk-text-index">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-text-index
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-text-index ((text &lt;tk-text&gt;) (index &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+Returns the string with the information of the index in the form "line.char"
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname index index
+
+where pathname represents the text widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_text (char* name, Command* cmdPtr, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-text-mark">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-text-mark
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+  (tk-text-mark ((text &lt;tk-text&gt;) 'set  (mark &lt;string&gt;) (index &lt;string&gt;)))
+  (tk-text-mark ((text &lt;tk-text&gt;) 'unset  (mark &lt;string&gt;))) 
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname mark set markName index
+pathname mark unset markName
+
+where pathname represents the text widget.
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_text (char* name, Command* cmdPtr, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>  
+
+<!-- *********************************************************************************************  -->
+<a name="tk-text-tag-add">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-text-tag-add
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-text-tag-add ((text &lt;tk-text&gt;) (tag &lt;string&gt;) 
+                     (index1 &lt;string&gt;) ... (index2 &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class2.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This commanmd could receive an even number of indexes. The tag is added to all the characters between the
+first and the last index of every pair of indexes.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname tag add tagName index1 ?index2 index1 index2 ...?
+
+where pathname represents the text widget.
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_cmd_text (char* name, Command* cmdPtr,
+                 char* command, LispRef args)
+
+where the command will be "tag" and the specification of the "add" type will be given
+in the last argument, as part of a list.
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-type-image">
+<HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-type-image
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-type-image ((image &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_images.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+String stroing the type of the image: bitmap or photo.
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+image type name
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_image_cmd (char* nameImage, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCimages.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-types-image">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-types-image
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-types-image)
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_images.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+List of strings containing the information of the supported image types.  
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+image types
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_image_cmd (char* nameImage, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCimages.c
+</DL></PRE>
+<P>
+
+
+
+<!-- *********************************************************************************************  -->
+<a name ="#tk-unmap-widget">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-unmap-widget
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-unmap-widget ())
+*  (tk-unmap-widget ((widget &lt;tk-object&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The first one unmaps the main widget.
+The second one unmaps the specified widget.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+ 
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+N/A
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_unmap_widget (char* name)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name="tk-width-image">
+<HR>
+
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-width-image
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-width-image ((image &lt;string&gt;)))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_images.em
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+String containing the width of the specified image.
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+image width name
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_image_cmd (char* nameImage, char* command, LispRef args)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCimages.c
+</DL></PRE>
+<P>
+
+<!-- *********************************************************************************************  -->
+<a name ="tk-wm">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+<H2>
+  tk-wm
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-wm ((operation &lt;string&gt;) () options))
+*  (tk-wm ((operation &lt;string&gt;) (widget &lt;tk-object&gt;) options))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_commands.em
+
+<DT><B>Comments:</B>
+<DD><P>
+This method permits to call the widow manager. The user will be able to arrange some aspects of the general window.<br>
+<u>options</u> argument could be a list of arguments, accepted by <code>wm</code> tk command.
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.
+ 
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+wm option window ?args?
+
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_tk_wm (char* operation, LispRef listArgs)
+
+<DT><B>C Module:</B>
+<DD><P>
+FnCcommands.c
+</DL></PRE>
+<P>
+<!-- *********************************************************************************************  -->
+<a name="tk-xview">
+<a name="tk-yview">
+  <HR>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+  tk-xview<BR>
+  tk-yview<BR>
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+*  (tk-xview ((listbox &lt;tk-listbox&gt;) (type &lt;string&gt;) (entry &lt;string&gt;) units))
+*  (tk-yview ((listbox &lt;tk-listbox&gt;) (type &lt;string&gt;) (entry &lt;string&gt;) units))
+
+*  (tk-xview ((text &lt;tk-text&gt;) (type &lt;string&gt;) (entry &lt;string&gt;) units))
+*  (tk-yview ((text &lt;tk-text&gt;) (type &lt;string&gt;) (entry &lt;string&gt;) units))
+
+*  (tk-xview ((entryWidget &lt;tk-entry&gt;) (type &lt;string&gt;) (entry &lt;string&gt;) units))
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+tk_class.em
+
+<DT><B>Comments:</B>
+<DD><P>
+The last three arguments, that is, <u>type</u> <u>entry</u> <u>units</u>, are added automatically
+by tcl/tk when the callabck function associated to the scrollbar widget is invoked. The user 
+do not have to worry about it. The callback function associated to the scrollbar widget will
+be the responsible of calling tk-xview or tk-yview.
+
+(See general information about <a href="special-cases.html#scrolls">How to manage Scrolls</a> for more detail.)
+
+<DT><B>Result:</B>
+<DD><P>
+() or t depending on the success or the failure of the operation.  
+
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+pathname xview
+pathname yview
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+eul_xview_command (char* nameWidget, Command* cmdPtr, char* type,
+                   char* entry, LispRef units)
+
+eul_yview_command (char* nameWidget, Command* cmdPtr, char* type,
+                   char* entry, LispRef units)
+ 
+<DT><B>C Module:</B>
+<DD><P>
+FnCwidgets.c
+</DL></PRE>
+<P>
+
+
+
+<!-- *********************************************************************************************  -->
+<a name ="???">
+<hr>
+<a href="#index"><img align=right border=off src="graphics/index.gif" height=55 width=139></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=55 width=139></a>
+
+
+<H2>
+</H2>
+<PRE><DL><P>
+<DT><B>Possible invocations:</B>
+<DD><P>
+
+<DT><B>Lisp Module:</B>
+<DD><P>
+
+<DT><B>Comments:</B>
+<DD><P>
+
+<DT><B>Result:</B>
+<DD><P>
+  
+<DT><B>Tcl/Tk command:</B>
+<DD><P>
+  
+<DT><B>Foreign C function:</B>
+<DD><P>
+
+<DT><B>C Module:</B>
+<DD><P>
+
+</DL></PRE>
+<P>
+
+
+</BODY></HTML>
+
+
+

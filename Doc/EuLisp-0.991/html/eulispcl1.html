@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>1 Language Structure</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- html,1,next,noannex,xhtml --> 
+<meta name="src" content="eulisp.tex" /> 
+<meta name="date" content="2010-03-28 21:18:00" /> 
+<link rel="stylesheet" type="text/css" href="eulisp.css" /> 
+</head><body 
+>
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl2.html" >next</a>] [<a 
+href="eulispli1.html" >prev</a>] [<a 
+href="eulispli1.html#taileulispli1.html" >prev-tail</a>] [<a 
+href="#taileulispcl1.html">tail</a>] [<a 
+href="eulisp.html#eulispcl1.html" >up</a>] </p></div>
+<h3 class="clauseHead"> 1 <a 
+ id="x3-50001"></a>Language Structure</h3>
+<a 
+ id="dx3-5001"></a>
+<!--l. 1--><p class="noindent" >The  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;definition comprises the following items:
+    </p><dl class="description"> <dt class="description">
+    <span 
+class="cmbx-9">Level-0:</span> </dt><dd 
+class="description"><a 
+ id="dx3-5002"></a>  comprises  all  the  level-0  classes,  functions,
+    macros and special forms<a 
+ id="dx3-5003"></a>, which is this text minus Annex
+    <a 
+href="eulispcl18.html#x23-83800018">18<!--tex4ht:ref: annex:level-1 --></a>. The object system can be extended by user-defined
+    structure classes, and generic functions.
+    </dd> <dt class="description">
+    <span 
+class="cmbx-9">Level-1:</span> </dt><dd 
+class="description"><a 
+ id="dx3-5004"></a>  extends  level-0  with  the  classes,  functions,
+    macros  and  special  forms  defined  in  Annex  <a 
+href="eulispcl18.html#x23-83800018">18<!--tex4ht:ref: annex:level-1 --></a>.  The
+    object  system  can  be  extended  by  user-defined  classes
+    and  metaclasses.  The  implementation  of  level-1  is  not
+    necessarily  written  or  writable  as  a  conforming  level-0
+    program.</dd></dl>
+<!--l. 16--><p class="noindent" >A <span 
+class="cmti-9">level-0 function </span>is a (generic) function defined in this text to
+be part of a conforming processor for level-0. A function
+defined in terms of level-0 operations is an example of a <span 
+class="cmti-9">level-0</span>
+<span 
+class="cmti-9">application</span>.
+</p><!--l. 20--><p class="noindent" >Much of the functionality of  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;is defined in terms of
+modules<a 
+ id="dx3-5005"></a><a 
+ id="dx3-5006"></a>. These modules might be available (and used) at any
+level, but certain modules are required at a given level. Whenever a
+module depends on the operations available at a given level, that
+dependency will be specified.
+</p><!--l. 27--><p class="noindent" ><span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;level-0<a 
+ id="dx3-5007"></a> is provided by the module <span 
+class="cmtt-9">eulisp0</span><a 
+ id="dx3-5008"></a>. This module
+imports and re-exports the modules specified in Table&#x00A0;<a 
+href="#x3-50001">1<!--tex4ht:ref: level-0-modules --></a>.
+</p><!--l. 31--><p class="noindent" >Modules comprising <span 
+class="cmtt-9">eulisp0</span>: </p>
+<div class="center" 
+>
+<!--l. 32--><p class="noindent" >
+</p>
+<div class="tabular"> <table id="TBL-1" class="tabular" 
+cellspacing="0" cellpadding="0" rules="groups" 
+><colgroup id="TBL-1-1g"><col 
+id="TBL-1-1" /><col 
+id="TBL-1-2" /></colgroup><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-1-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-1-1"  
+class="td11">Module        </td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-1-2"  
+class="td11">Section(s)</td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-2-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-2-1"  
+class="td11"><span 
+class="cmtt-9">character   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-2-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-29500017.1">17.1<!--tex4ht:ref: character --></a>        </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-3-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-3-1"  
+class="td11"><span 
+class="cmtt-9">collection </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-3-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-32100017.2">17.2<!--tex4ht:ref: collection --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-4-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-4-1"  
+class="td11"><span 
+class="cmtt-9">condition   </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-4-2"  
+class="td11"><a 
+href="eulispcl13.html#x17-15500013">13<!--tex4ht:ref: condition --></a>          </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-5-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-5-1"  
+class="td11"><span 
+class="cmtt-9">convert </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-5-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-39900017.3">17.3<!--tex4ht:ref: convert --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-6-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-6-1"  
+class="td11"><span 
+class="cmtt-9">copy        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-6-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-41000017.4">17.4<!--tex4ht:ref: copy --></a>        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-7-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-7-1"  
+class="td11"><span 
+class="cmtt-9">double      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-7-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-42500017.5">17.5<!--tex4ht:ref: double-float --></a>        </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-8-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-8-1"  
+class="td11"><span 
+class="cmtt-9">mathlib </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-8-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-44600017.6">17.6<!--tex4ht:ref: elementary-functions --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-9-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-9-1"  
+class="td11"><span 
+class="cmtt-9">fpi         </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-9-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-49000017.8">17.8<!--tex4ht:ref: fpi --></a>        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-10-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-10-1"  
+class="td11"><span 
+class="cmtt-9">formatted-io</span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-10-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-50900017.9">17.9<!--tex4ht:ref: formatted-io --></a>        </td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-11-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-11-1"  
+class="td11"><span 
+class="cmtt-9">function </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-11-2"  
+class="td11"><a 
+href="eulispcl16.html#x20-20500016.2">16.2<!--tex4ht:ref: function --></a></td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-12-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-12-1"  
+class="td11"><span 
+class="cmtt-9">list        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-12-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-54400017.12">17.12<!--tex4ht:ref: list --></a>      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-13-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-13-1"  
+class="td11"><span 
+class="cmtt-9">lock        </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-13-2"  
+class="td11"><a 
+href="eulispcl12.html#x16-14400012.2">12.2<!--tex4ht:ref: lock --></a>        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-14-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-14-1"  
+class="td11"><span 
+class="cmtt-9">number      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-14-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-58600017.13">17.13<!--tex4ht:ref: number --></a>      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-15-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-15-1"  
+class="td11"><span 
+class="cmtt-9">telos0      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-15-2"  
+class="td11"><a 
+href="eulispcl11.html#x13-6300011">11<!--tex4ht:ref: obj-0 --></a>          </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-16-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-16-1"  
+class="td11"><span 
+class="cmtt-9">stream      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-16-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-63300017.14">17.14<!--tex4ht:ref: stream --></a>      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-17-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-17-1"  
+class="td11"><span 
+class="cmtt-9">string      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-17-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-76500017.15">17.15<!--tex4ht:ref: string --></a>      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-18-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-18-1"  
+class="td11"><span 
+class="cmtt-9">symbol      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-18-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-79100017.16">17.16<!--tex4ht:ref: symbol --></a>      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-19-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-19-1"  
+class="td11"><span 
+class="cmtt-9">table       </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-19-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-81200017.17">17.17<!--tex4ht:ref: table --></a>      </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-20-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-20-1"  
+class="td11"><span 
+class="cmtt-9">thread      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-20-2"  
+class="td11"><a 
+href="eulispcl12.html#x16-11500012.1">12.1<!--tex4ht:ref: thread --></a>        </td>
+</tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-21-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-21-1"  
+class="td11"><span 
+class="cmtt-9">vector      </span></td><td  style="white-space:nowrap; text-align:left;" id="TBL-1-21-2"  
+class="td11"><a 
+href="eulispcl17.html#x21-81900017.18">17.18<!--tex4ht:ref: vector --></a>      </td>
+</tr><tr 
+class="hline"><td><hr /></td><td><hr /></td></tr><tr  
+ style="vertical-align:baseline;" id="TBL-1-22-"><td  style="white-space:nowrap; text-align:left;" id="TBL-1-22-1"  
+class="td11">            </td>
+</tr></table></div></div>
+<!--l. 62--><p class="noindent" >This definition is organized in three parts:
+    </p><dl class="description"> <dt class="description">
+    <span 
+class="cmbx-9">Sections </span><a 
+href="eulispcl9.html#x11-440009"><span 
+class="cmbx-9">9</span><!--tex4ht:ref: syntax --></a><span 
+class="cmbx-9">&#8211;</span><a 
+href="eulispcl16.html#x20-18900016"><span 
+class="cmbx-9">16</span><!--tex4ht:ref: control-0 --></a><span 
+class="cmbx-9">:</span> </dt><dd 
+class="description">describes the core of level-0 of  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>,
+    covering  modules,  simple  classes,  objects  and  generic
+    functions, threads, conditions, control forms and events.
+    These sections contain the information about <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;that
+    characterizes the language.                                 </dd> <dt class="description">
+        <span 
+class="cmbx-9">Annex A:</span> </dt><dd 
+class="description">describes  the  additional  classes  required  at
+        level-0 and the operations defined on instances of those
+        classes<a 
+ id="dx3-5009"></a>. The annex is organized by module in alphabetical
+        order.  These  sections  contain  information  about  the
+        predefined classes in  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;that are necessary to make
+        the language usable, but is not central to an appreciation
+        of the language.
+        </dd> <dt class="description">
+        <span 
+class="cmbx-9">Annex B:</span> </dt><dd 
+class="description">describes the reflective aspects of the object
+        system and how to program the metaobject protocol and
+        some additional control forms.</dd></dl>
+  <!--l. 82--><p class="noindent" >Prior to these, sections <a 
+href="eulispcl2.html#x4-60002">2<!--tex4ht:ref: scope --></a>&#8211;<a 
+href="eulispcl8.html#x10-430008">8<!--tex4ht:ref: sec:definitions --></a> define the scope of the text, cite
+  normative references, conformance definitions, error definitions,
+  typographical and layout conventions and terminology definitions
+  used in this text. </p><!--l. 105--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl2.html" >next</a>] [<a 
+href="eulispli1.html" >prev</a>] [<a 
+href="eulispli1.html#taileulispli1.html" >prev-tail</a>] [<a 
+href="eulispcl1.html" >front</a>] [<a 
+href="eulisp.html#eulispcl1.html" >up</a>] </p></div>
+  <!--l. 105--><p class="noindent" ><a 
+ id="taileulispcl1.html"></a> </p> 
+</body></html> 

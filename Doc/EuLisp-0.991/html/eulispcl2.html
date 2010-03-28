@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>2 Scope</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- html,1,next,noannex,xhtml --> 
+<meta name="src" content="eulisp.tex" /> 
+<meta name="date" content="2010-03-28 21:18:00" /> 
+<link rel="stylesheet" type="text/css" href="eulisp.css" /> 
+</head><body 
+>
+<!--l. 105--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl3.html" >next</a>] [<a 
+href="eulispcl1.html" >prev</a>] [<a 
+href="eulispcl1.html#taileulispcl1.html" >prev-tail</a>] [<a 
+href="#taileulispcl2.html">tail</a>] [<a 
+href="eulisp.html#eulispcl2.html" >up</a>] </p></div>
+<h3 class="clauseHead"> 2 <a 
+ id="x4-60002"></a>Scope</h3>
+<!--l. 1--><p class="noindent" >This text specifies the syntax and semantics of the computer
+programming language  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;by defining the requirements for a
+conforming  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;processor and a conforming  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;program
+(the textual representation of data and algorithms). This text does
+not specify:
+</p><!--l. 13--><p class="noindent" >
+      </p><ol  class="enumerate1" >
+      <li 
+  class="enumerate" id="x4-6002x1">The  size  or  complexity  of  a    <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U </span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;program  that
+      will exceed the capacity of any specific configuration or
+      processor, nor the actions to be taken when those limits
+      are exceeded.
+      </li>
+      <li 
+  class="enumerate" id="x4-6004x2">The  minimal  requirements  of  a  configuration  that  is
+      capable  of  supporting  an  implementation  of  a     <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span>
+       <span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;processor.
+      </li>
+      <li 
+  class="enumerate" id="x4-6006x3">The  method  of  preparation  of  a    <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U </span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;program
+      for  execution  or  the  method  of  activation  of  this   <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span>
+       <span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;program once prepared.
+      </li>
+      <li 
+  class="enumerate" id="x4-6008x4">The method of reporting errors, warnings or exceptions to
+      the client of a  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;processor.
+      </li>
+      <li 
+  class="enumerate" id="x4-6010x5">The typographical representation of a  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span><span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>&#x00A0;program
+      for human reading.
+      </li>
+      <li 
+  class="enumerate" id="x4-6012x6">The means to map module names to the filing system or
+      other object storage system attached to the processor.</li></ol>
+<!--l. 35--><p class="noindent" >To clarify certain instances of the use of English in this text the
+following definitions are provided:(
+      </p><dl class="description"> <dt class="description">
+                                                                                                  
+                                                                                                  
+    <span 
+class="cmbx-9">must:</span> </dt><dd 
+class="description">a verbal form used to introduce a <span 
+class="cmti-9">required </span>property.
+    All conforming processors must satisfy the property.
+    </dd> <dt class="description">
+    <span 
+class="cmbx-9">should:</span> </dt><dd 
+class="description">A  verbal  form  used  to  introduce  a  <span 
+class="cmti-9">strongly</span>
+    <span 
+class="cmti-9">recommended  </span>property.  Implementors  of  processors  are
+    urged (but not required) to satisfy the property.</dd></dl>
+<!--l. 157--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl3.html" >next</a>] [<a 
+href="eulispcl1.html" >prev</a>] [<a 
+href="eulispcl1.html#taileulispcl1.html" >prev-tail</a>] [<a 
+href="eulispcl2.html" >front</a>] [<a 
+href="eulisp.html#eulispcl2.html" >up</a>] </p></div>
+<!--l. 157--><p class="noindent" ><a 
+ id="taileulispcl2.html"></a> </p> 
+</body></html> 

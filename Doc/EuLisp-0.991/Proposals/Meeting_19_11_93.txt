@@ -1,0 +1,423 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:            *Notes of the EuLisp meeting 19/11/93*
+#+OPTIONS: ^:{} author:nil
+
+* Notes of the EuLisp meeting 93/11/19, the Emerald Meeting
+
+*** Friday 19th, notes by Russell Bradford
+*** Saturday 20th, notes by David DeRoure
+
+    These are outlines of the discussions at the meeting: Julian will email a
+    summary of the proposals shortly.
+
+*** Present were
+    Julian Padget, Harley Davis, Nitsan Seniak, Horst Friedrich, Klaus Daessler,
+    Richard Tobin, Willem van der Poel, Christian Queinnec, Neil Berrington,
+    John Fitch, Russell Bradford, Juergen Kopp, Harry Bretthauer, Toni Moreno,
+    Ulises Cortes, and David DeRoure.
+
+------------------------------------------------------------------------------
+* Friday 19th.
+  We proceeded the email list of points, with some held over for the arrival of
+  DDER on Saturday.
+
+*** static errors might be signalled
+    JAP: two proposals (1) extend definition of 'dynamic signal' (2) extend
+    definition of 'static signal', HD added (3) remove distinction. KD described
+    the way Prolog distinguishes static violations and run-time static errors,
+    and this general approach was adopted. Thus 'static error' becomes
+    'violation' (RT noted that violations should produce diagnostics in the PPU
+    == program preparation unit). Other errors might be detected by the PPU, but
+    if a runnable program is produced, this program must signal an error.
+
+*** macros -> syntax functions, remove defmacro
+    HD noted that macros are equivalent to functions only in the presence of
+    symbol-function, otherwise we have two namespaces.  General disquiet
+    resolved to ignore this proposal.
+
+*** add export-syntax
+    HD proposed the definition be more clear that macros are bound in a lexical
+    environment, and consequently export-syntax is useful.  Also that macro
+    names are not bound to anything in the program (macros are only meaningful
+    to the PPU). Changes needed in section 13.2.2.3.  We shall explicitly allow
+    macros to have the same names as functions (due to modules), and we make
+    explicit that apparent ambiguities are resolved in favour of the macro by
+    the PPU (after all, anything else is meaningless).  Sections 9.7, 9.5.
+
+    Export-syntax will make module processing simpler; it will be a violation to
+    export-syntax a function (and vice versa for export and macros).
+
+*** defconstant redundant
+    As a side point, HD remarked that defconstant is not useful in practice, it
+    does not allow in general any significant optimisations.  Ilog Talk
+    additionally has defliteral (cf C's #define) that is expanded in
+    non-functional positions.  HD to send proposal.
+
+*** level-0 telos conditions
+    subsumed by static errors above.
+
+*** add <wrong-number-of-args>
+    OK.  This is an error (not a violation).
+
+*** case in format directives
+    HD proposed the POSIX view of function names fprintf, sprintf and % for
+    formats. Plus the additional %a corresponding to print.  Also %s will
+    convert its argument to a string as in write.  There is a need to list the %
+    operations with relevant converter methods.  HD also proposed the inclusion
+    of eprintf, a print function guaranteed never to signal an error (as far as
+    is possible), to confound infinite loops that arise when there is an error
+    in a print method.  JPFF noted that scanf should be made compatible, while
+    HD argued for its removal.  HD will send a proposal.
+
+*** add read function
+    OK.
+
+*** class-specific input functions
+    These were proposed as an aid to type inference, which RT felt was
+    insufficient reason (there are too many other similar changes we could
+    make).  HD described how something like (convert (read) <integer>) could be
+    used for extreme cases.  It was decided to defer this pending better
+    understanding of the consequences, and after discussions of streams.
+
+*** invariant gf application behaviour
+    This was deemed a good principle ('definition before use'), but raised the
+    difficulties consequent of undefined module initialisation order.  Invariant
+    behaviour was seen as a partial sealing of the class hierarchy (NB sealing
+    upwards from a class), and there was discomfort from some that this sealing
+    was a side effect, and not explicit.  This led to the general problem of
+    development vs run-time environments, and it was revealed by HD that there
+    is no way to check for a correct program if certain errors (e.g., add-method
+    to an existing method) are ignored in a development system. Restrictions
+    that currently exist to aid the compiler should be "an error", not "signal
+    an error". HB will find such cases (in Telos).  RT was of the opinion that
+    there are too many small tweaks for efficiency, and that more wide-ranging
+    techniques might be considered (e.g., declarations, sealing...)
+
+    Back to invariant behaviour.  RT inquired as to the behaviour of a method
+    that adds a new method super to itself, and then calls call-next-method....
+
+    Lunch was held at a variety of pizzeria.
+
+    ... CQ suggested a new subclass of immutable gfs as a solution.  This was
+    deferred to be discussed later.
+
+*** method default specialisers
+    This was felt to be unhelpful, and difficult to implement in the case of
+    unattached method-lambdas.  Some mooted that all arguments specialised in
+    the defgeneric must always be specialised in the method, but there was no
+    enthusiasm for this.  It was decided that the default will be <object>, and
+    an error will be signalled if a method attempts to widen a gf's domain. In
+    summary, no change.
+
+*** rest args in gfs
+    OK.  A short dicussion of the name of the new initarg 'rest' vs 'restp'.
+    The former for future use in a generalised type scheme.
+
+*** remove method-function-lambda et al
+    HD felt that these functions were necessary to avoid an extra function call
+    in the execution of gfs (e.g., the MOP has compute-primitive-reader return a
+    function that must be wrapped by a method-lambda). On the other hand HB
+    wanted method-lambdas to be indecomposable, and described congruency
+    problems with lambda lists of method-lambdas and their functions.  These
+    could be solved by the introduction of functions method-lambda-list and
+    function-lambda-list. These were shelved for future consideration. It was
+    noted that (make <method>) would make a method that was 1 funcall more
+    expensive to call than one created by method-lambda, unless a method was
+    initialised from a method-lambda rather than a function.  Discussion would
+    continue offline.
+
+*** additional scan directives held over.
+
+*** deep-copy and shallow-copy
+    NS wanted the definition only to require equal of an object and its copy.
+    This was considered to be another case of ad-hocness around the edges and
+    dropped.  It is related to specification of "result types",
+    below. Summary---leave as is.
+
+*** specification of result types
+    OK.
+
+*** abstract classes
+    JK described how having abstractness defined by a metaclass was
+    inappropriate.  The proposal to have abstractness encoded by a slot in the
+    class was accepted, with the reader renamed from abstractp to
+    abstract-class-p [editor's note: wouldn't class-abstract-p be more
+    consistent?]
+
+*** add required initargs
+    HD opined that 'initarg' as a word was not understood by many, and it was
+    agreed to change the term to 'initkey'.  After discussion of where to put
+    things, it was decided to introduce a new slot option 'requiredp' to
+    indicate that the initkey for this slot is required.  However, class
+    initargs would remain unchanged, it would be the responsibility of the
+    programmer to check for the required class initkeys, as this would require
+    minimal extra work (since the programmer has already to look for the value
+    of the initkey). HB noted that this would prevent an easy
+    'class-required-initargs'.
+
+    Further renamings were agreed, namely 'initkey' to 'keyword', 'initform' to
+    'default' and the dependent compound names.
+
+*** add openp for streams
+    OK.
+
+*** D or E for exponent in numbers
+    It was decided to use E, as it was felt that support for the input of
+    single-precision floats wasn't needed, quads are more important.
+
+*** module initialisation order
+    OK.
+
+*** arg order of (setter element)
+    This was only relevant to objects referred to by keys, viz., using element.
+    Thus this is left as is.
+
+*** <collection> and <sequence>
+    This was felt to be generally OK, but would have consequences, such as the
+    clarification of sequence objects vs collection objects, and the allowing of
+    defstruct to subclass any abstract class.  This was postponed until the
+    discussion of the class hierarchy later.
+
+*** thread-start, thread-value generic
+    OK.
+
+*** add generic-signal
+    OK, but the last argument of signal (the optional thread) becomes the first
+    argument of generic-signal, and the function is to be called
+    signal-using-thread.
+
+*** wait method on <lock>
+    It was felt that a timeout on a lock would be desirable, but then there
+    might be breaking of abstraction with a zero timeout.  RJB suggested an
+    optional timeout argument to the function lock.  More discussion tomorrow.
+
+*** non-hygenic semantics for syntax functions
+    Extra documentation on the pitfalls of macros will be added.
+
+*** status of and and or
+    This arose from the wish to pass 'and' as a function argument.  After the
+    discussion of macros above, it is clear that this is an error, no such
+    binding.  Suggested names for functional and generic variants included:
+    binary-and, binary-or, ||, &&, generic-and, generic-or, every, any, all,
+    some, both, either, strict-or, strict-and.
+
+    This ended the email list. Further points arose.
+
+*** character naming conventions
+    For uniformity over characters and strings, replace extended character names
+    by the names used in strings, e.g., #\newline -> #\\n
+
+*** keywords
+    HD wanted the introduction of keywords as a class (aside: there are some
+    missing characters in the table on p.9, namely colon).  A minimal change
+    could be the convention of using :s in names (at the end) to indicate a
+    keyword, but they would still need to be quoted.  In Ilog Talk there is a
+    hierarchy <id> <symbol> <keyword> (the class <id> was later renamed <name>),
+    with keywords acting like self-evaluating, non bindable symbols, denoted by
+    a terminal colon.
+
+*** with-handler
+    The example of with-handler in the document was revealed to be poor, as it
+    used generic-lambda, which is expensive to set up, while handlers should be
+    cheap to install.  Since with-handler is a special form, it could have a
+    lazy computation of the handler function, but this is complicated.  It was
+    decided to fix the example.
+
+    Dinner was held at the Commission Restaurant.  Conversation was lively, as
+    was some of the seafood.
+
+------------------------------------------------------------------------------
+* Saturday 20th
+
+*** Organisation of class hierarchy.
+    Harley proposed that, as a general principle of organisation, concrete
+    classes should not inherit from concrete classes.
+
+    Implications on fig 3 p.13 - these are the classes:
+
+    A = abstract,  C = concrete,  S = subclassable,  S1 = subclassable at L1
+
+        object A S
+                character C
+                condition A S
+                function A S
+                        continuation C
+                        simple-function C
+                        generic function A S1
+                                simple-generic-function C
+                collection A S
+                        sequence A S
+                                list A
+                                        cons C
+                                        null C
+                                character-sequence A S
+                                        string C
+                                vector C
+                        table A S
+                                hash-table C
+                lock C
+                number A S
+                        integer A S
+                                fixed-precision-integer C
+                                variable-precision-integer C
+                float A S
+                        double-float C
+                stream A S
+                        string-stream C
+                        char-file-stream C
+                name A S
+                        symbol C
+                        keyword C
+                thread A S
+                        simple-thread C
+
+Level 1
+                class A S
+                        built-in-class A
+                        simple-class C
+                        function-class C
+                slot A S                                (was slot description)
+                        local-slot C
+                function A S
+                        generic-function A S
+                                simple-generic-function C
+                method A S
+                        simple-method C
+
+
+    After discussion, character was not an abstract class.  Then after further
+    discussion it was.  Then after yet more discussion there was an implicit
+    majority and it wasn't again.  Stronger case for strings, hence
+    character-sequence introduced as abstract class.  Should streams be a
+    subclass of sequence/collection?  Not yet.  Harley and Harry agreed that
+    structure and structure-class are not needed.  Now we don't need defstruct
+    (accessors by default are now functions, not generic; default metaclass is
+    simple-class).  The question of what is inherited from abstract classes is
+    too complicated to address now.
+
+    We need to be able to subclass some abstract classes at level 0 - so we
+    don't need structure class anymore.
+
+    Should variable precision integers be added?  Not such a big deal these days
+    (eg DEC or GNU libraries). Julian to decide.
+
+    Harry: Definition permits implementor to introduce extra classes but no new
+    relationships.
+
+    Harley: p.70 tables: remove `unique' else requires perfect hash
+
+    Harley: condition classes - we should distinguish between lexical syntax
+    errors and syntax errors which arise given a correct s-expression.  So
+    `syntax' error condition from read should be called read-error.
+
+    dder: text for function call and apply should accommodate continuations,
+    i.e. `if the function returns...'
+
+
+*** AGENDA
+
+    wait method on locks
+    minor points raised by mail
+    streams
+    which generic functions on collections are specialised to sequence
+    n-ary comparators
+    publication schedule
+
+    After an informal vote, we are all in favour of having another meeting.
+    Date not fixed.
+
+    Wait method - delegated to dder/jap/nb dder observed lack of orthogonality
+    of wait.  Richard observed that ways of waiting on collections of objects
+    not in definition.
+
+*** Minor points:
+
+    + p.59 number class metaclass to be removed (because this is level 0) need a
+      class hierarchy for level 1 with metaclasses harry: in appendix B need a
+      _complete_ hierarchy
+
+    + p.52 cross reference to binary< etc
+
+    + p.59 how are mixed number args handled?  All we have now is floating point
+        contagion (section A.13).
+
+      nitsan:  + etc call lift on args of binary+ etc
+      jpff: floating point contagion on comparison is
+      a bad strategy.  So lifting not to be used for
+      comparators.  Position agreed - further work needed
+      before version 1.
+
+    + p.14 10.3.1.3 initform - reference to dynamic env of make should apply to
+        use of constructors as well as make.  Also, defconstructor description
+        should require compliance of constructor and make. Agreed.
+
+        We have initialisation options on conditions, but we don't name the
+        accessors for these slots - are they the same as the initargs?  If so
+        there will be some name clashes (see Ulrich's mail).  Agreed to merge
+        slots - generic-function-condition has two slots, i.e. generic function
+        and message.  Format of message needs to be specified in definition too.
+
+     + BTW No longer need defcondition since we can use defclass.
+
+*** n-ary comparators
+    + Harley wants n-ary >, >=, <=.  Agreed.
+    + Do we want != to be n-ary?  No, this is not n-ary in Dylan.
+
+
+*** Apres pizza
+
+        Harley: no comment
+
+        accumulate      C
+        accumulate1     C
+        anyp            C
+        do              C
+        element         C
+        emptyp          C       what about fill value?  (see below)
+        fill            C       begin or end, or set of keys
+        map             C
+        member          C       returns rest of list (only) (historical)
+        size            C       number of keys, not size allocated
+                                (but what is size of circular list?)
+        delete          C       destructive
+        remove          C       constructive
+
+        concatenate     S       because of hash tables
+        reverse         S
+        first           S
+        second          S
+        forty-second    S
+        last            S
+        sort            S
+
+    We should change the fill value default mechanism to a fill function: this
+    is a lambda of two args, the condition and the key.  Nitsan, Harley, Dave,
+    Russell would like vector-ref and string-ref, and associated setters.  Also
+    lengths, i.e. list-length, vector-length, string-length, table-size/length.
+    Names still need discussion.
+
+    Some discussion of remove and delete (non-destructive and destructive).
+
+*** Publication schedule.
+    We need a guillotine.  Publish and be damned.  Target is next Spring.
+    Harley will manage negotiations with commission; he noted his
+    concern at this expectation.  It was suggested that objectors to the
+    publication can have their names removed from the contributors list.
+
+*** streams.
+    History.  Edinburgh meeting.  Dave explained the stream protocol
+    solution.  Harley explained the `posix' style solution.  This
+    was well received.  Harley to send text to Julian.
+
+*** Pathnames. Renamed filenames.
+    VMS, symbolics etc compatibility no longer a
+    priority. UNIX and Windows NT are the priorities instead.
+    Syntax #F"..."
+
+    + string->filename        "/hux/baz/foo.bar"
+    + basename        "foo.bar"
+    + extension       ".bar"
+    + dirname         "/hux/baz"
+    + device          "C:"
+    + merge-filenames

@@ -1,0 +1,3291 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:            *Email discussions for November 1993*
+#+OPTIONS: ^:{} author:nil
+#+TAGS: From
+
+* defcondition
+  :From: E. Ulrich Kriegel
+
+Hi there,
+after having implemented the condition system for Apply/Eu2C I would
+like to propose some changes of the described condition system
+(EL0.99)
+=====================================================================
+12.1.8 page 23
+(defcondition super-condition initargs*)
+As far as I understood right, the idea of having
+      (defcondition condition-class-name superclass-name init-option*)
+is to
+allow a programmer to define its own condition classes. However , the
+above syntax makes not clear, whether or not it is allowed to define
+new slots or not. If the definition of new slots is not possible, then
+the benefit of defining own condition classes is relatively
+restricted.
+However, if new slots are possible, then the question arises, how to
+access them, what about default values, etc. .
+Therefore I would prefer a syntax which is analogously to that
+of defstruct except for constructor and predicate which seem to be
+useless in case of condition classes.
+
+======================================================================
+13.4 page 59
+<division-by-zero>
+Signalled by any of binary/, binary% and binary-mod
+
+Signalling <division-by-zero> in any of the above cases results in an
+additional test in the implementation of these functions or methods
+which  decreases the numerical performance. All numeric functions
+should rely on hardware signals like SIGFPE on unix shells. A
+SIGFPE-trap then could be used to signal <arithmetic-condition>.
+Only if there are special hardware signals for IEEE-related codes,
+<division-by-zero> should be signalled.
+
+Yours
+--ulrich
+
+* defcondition
+  :From: jap
+
+Thanks for these points.
+
+Re defcondition: in 0.99 this is underspecified.  The syntax _is_
+supposed to be consistent with defstruct.  Since constructor and
+predicate are optional, I don't feel it is harmful to leave them in
+the syntax for defcondition---for the implementation it is just
+another restriction to police, which is not entirely necessary.
+Predicates could still serve a purpose, remembering that level-0 does
+not have class-of, otherwise the only way to distinguish the condition
+class is via a generic function.
+
+Re <division-by-zero>: I agree it is too restrictive on the
+implementation to check this in advance and think it is best dealt
+with by the "level below", but could that not deliver the signal to
+some handler which then signals <division-by-zero> to the application?
+
+--Julian.
+
+* defcondition
+  :From: E. Ulrich Kriegel
+
+>Thanks for these points.
+>
+>Re defcondition: in 0.99 this is underspecified.  The syntax _is_
+>supposed to be consistent with defstruct.  Since constructor and
+>predicate are optional, I don't feel it is harmful to leave them in
+>the syntax for defcondition---for the implementation it is just
+>another restriction to police, which is not entirely necessary.
+>Predicates could still serve a purpose, remembering that level-0 does
+>not have class-of, otherwise the only way to distinguish the condition
+>class is via a generic function.
+>
+
+Thats fine
+>Re <division-by-zero>: I agree it is too restrictive on the
+>implementation to check this in advance and think it is best dealt
+>with by the "level below", but could that not deliver the signal to
+>some handler which then signals <division-by-zero> to the application?
+>
+IMHO, that depends on the hardware and the language one uses to implement
+EuLisp.
+In the current Eu2C-implementation I catch the SIGFPE signal and than I
+signal <arithmetic-condition>
+because I'm not sure if SIGFPE is rised only in cases of division by zero.
+However, if e.g. C supports special ieee-signals rised by hardware, one
+could distinguish easily distinguish between several subconditions.
+
+Common to both cases is that arithmetic-condition>'s are not continuable!!!!
+
+
+--ulrich
+
+* Pre-Eulisp meeting proposals
+:From: jap
+
+We had a pre-Eulisp meeting in Bath on Thursday and Friday because we
+had visitors from GMD, Kiel and ISST---Southampton came too.  The
+result is some issues for discussion on Friday and Saturday in
+Brussels.
+
+I have attempted to write up each issue briefly (tho' not to the
+standards of X3J13) and hope they can form the starting point for
+discussions (but hopefully not meta-discussions!).
+
+--Julian.
+
+------------------------------------------------------------------------
+
+INVARIANT GENERIC FUNCTION APPLICATION BEHAVIOUR
+
+This issue is concerned with the application of generic functions
+before all their methods have been defined.  It is proposed that an
+error be signalled if a method is defined on a generic function for a
+class to which it has previously been applied.
+
+Example:
+
+(defgeneric f (x) method (((x <object>)) x))
+(f 1) ==> 1
+(defmethod f ((x <integer>)) ...) ==> error
+(defmethod f ((x <string>)) ...)  ==> OK
+
+The first is an error because f has already been applied to an
+instance of <integer>, but the second is OK because f has not been
+applied to a string yet.  Otherwise, f behaves differently on
+instances of the same class, depending on the time when methods are
+added to a generic function.
+
+Generic functions should be consistent with respect to their
+application on a specific argument class.  In consequence, an
+implementation does not need to reset a gf cache, but only extend it.
+
+------------------------------------------------------------------------
+
+STATIC ERRORS MIGHT BE SIGNALLED
+
+Due to the definition not having taken proper consideration of the
+issues arising from total compilation, a number of errors which are
+defined to be signalled (and which a programmer may rely upon being
+signalled), could equally well be detected statically.  A new
+definition of static error is proposed.
+
+The wording of definition 4.3 (section 4, p4, v0.99) is revised as
+follows:
+
+4.3 static error: An error which is detected during the preparation of
+a \eulisp\ program for execution, such as a violation of the syntax or
+static semantics of \eulisp\ by the program under preparation.
+
+\begin{note}
+The violation of the syntactic or static semantic requirements is not
+an error, but an error might be signalled by the program performing the
+analysis of the \eulisp\ program.  This program might be that which is
+also responsible for the execution of the \eulisp\ program, in which
+case a static error might be signalled during the execution of the
+prepared \eulisp\ program.  In this case, a static error can be
+handled in the same way as a dynamic error.
+\end{note}
+
+All errors specified in this definition are dynamic unless explicitly
+stated otherwise.
+
+------------------------------------------------------------------------
+
+METHOD DEFAULT SPECIALIZERS
+
+If the domain of a generic function is restricted what is the default
+specialization of a method argument?
+
+Example:
+
+(defgeneric f ((x <number>) (y <stream>))
+(defmethod f (x (y <string-stream>))...)
+
+It is proposed that x default to the restriction specified for the
+generic function.  However, this has implications for method-lambda,
+since the identity of the host gf is not known at that time.
+
+------------------------------------------------------------------------
+
+REMOVE: DEFMACRO
+MACROS RENAMED SYNTAX FUNCTIONS
+ADD: EXPORT-SYNTAX FOR MODULES
+
+It is observed that macros are functions which are called at syntax
+expansion time.  Therefore, there is no difference between defmacro
+and defun and the former should be dropped and the nomenclature
+"syntax function" be used instead.
+
+To distinguish between functions exported for runtime and syntax
+functions exported for syntax expansion time a second form of
+exportation is proposed, namely export-syntax.
+
+------------------------------------------------------------------------
+
+LEVEL-0 TELOS CONDITIONS EXCEPT <NO-APPLICABLE-METHOD> BECOME STATIC
+ERRORS
+
+As a consequence of the redefinition of static error, all but one of
+the telos-conditions at level-0 should be reclassified as static
+errors.  However, the condition classes will remain defined, because
+they could be signalled in some implementations.
+
+------------------------------------------------------------------------
+
+ADD: STATIC ERROR <WRONG-NUMBER-OF-ARGUMENTS>
+
+For function call and apply.
+
+------------------------------------------------------------------------
+
+CASE IN FORMAT DIRECTIVES
+
+Allow both upper and lower case for format directives, eg. ~a and ~A.
+
+------------------------------------------------------------------------
+
+REST ARGUMENTS IN GENERIC FUNCTIONS
+
+This is straightforward at level-0 and the current syntax for
+defgeneric and for defmethod allows for rest arguments.  Issue is
+how this should affect generic-function-domain (at level-1).
+
+Proposal is that generic-function-domain be unchanged, so it only
+returns information about the fixed arguments.  The following
+changes are proposed:
+
+add argument "rest" to compute-method-lookup-function
+add argument "rest" to compute-discriminating-function
+add initarg 'rest to the initialize method for gf (section B.11.1)
+add function generic-function-rest (section B.7)
+add function method-rest (section B.8)
+
+------------------------------------------------------------------------
+
+REMOVE: METHOD-FUNCTION-LAMBDA, CALL-METHOD-FUNCTION, AND
+APPLY-METHOD-FUNCTION
+
+Little extra functionality is gained, but security is lost by their
+inclusion.
+
+------------------------------------------------------------------------
+
+CLASS-SPECIFIC INPUT FUNCTIONS:
+
+Add functions to read class-specific objects.
+
+These are: read-character, read-float, read-integer, read-list,
+read-string, read-symbol, read-vector.
+
+------------------------------------------------------------------------
+
+ADDITIONAL SCAN DIRECTIVES FOR OBJECTS OF CLASSES THAT CAN BE READ
+
+This proposal stems from the one for class-specific input functions.
+The argument is that those functions should be reflected in
+class-specific scan directives for character, float, integer, list,
+string, symbol, vector.
+
+------------------------------------------------------------------------
+
+DOMAIN AND RANGE ON DEEP-COPY AND SHALLOW-COPY IDENTICAL
+
+It should be explicitly stated that the range of deep-copy and
+shallow-copy shall be the same class as the domain.  Furthermore, it
+is an error for any method to transgress this requirement.
+
+------------------------------------------------------------------------
+
+SPECIFICATION OF RESULT TYPES
+
+It is written informally in various places that a result will be a
+"list of x".  Proposal is to interpret this precisely and specify that
+the result is an instance of <list> and each element thereof is an
+instance of <x>.
+
+------------------------------------------------------------------------
+
+REMOVE: <ABSTRACT-CLASS>
+ADD: CLASS OPTION ABSTRACT FOR CLASSES AND A FUNCTION ABSTRACTP.
+
+The use of a single class <abstract-class> to indicate that a class is
+not instantiable turns out to create some difficulties when
+metaprogramming and dispatching on the class of a
+class---specifically, it is not possible to distinguish between
+objects which are different (example from JAK).
+
+Proposal is to remove <abstract-class> and to add a new class option
+("abstract") by which abstractness will be denoted.
+
+------------------------------------------------------------------------
+
+ADD: REQUIRED-INITARGS CLASS OPTION
+
+At present there is no means to indicate whether an initarg is
+required when an instance is made.  This option will permit that
+facility.  The new class option will be followed by a list of initargs
+which are to be required.
+
+------------------------------------------------------------------------
+
+ADD: OPENP FOR STREAMS
+
+There is no means to test whether a stream is open or not.  Proposal
+is to add such a function.
+
+------------------------------------------------------------------------
+
+USE 'D' OR 'E' AS EXPONENT MARKER?
+
+Present syntax defines the exponent marker character as 'd' or 'D'
+because level-0 only supports double precision floats.
+
+Proposal is to replace 'd' and 'D' by 'e' and 'E'.
+
+------------------------------------------------------------------------
+
+MODULE INITIALIZATION ORDER
+
+It is easy to write a program which unintentionally relies on the
+initialization order of the module dependencies.  At present the
+initialization order of modules is undefined---although the order
+within a module is.
+
+Proposal is to add (section 9.7): a conforming program must not rely
+on the total order of the initialization of modules, but only on the
+partial order arising from the module dependencies.  This partial
+order must be preserved by a conforming configuration.
+
+------------------------------------------------------------------------
+
+ARGUMENT ORDER OF (SETTER ELEMENT)
+
+The argument order for (setter element) is defined as collection, key,
+value, where the association of key and value is to be added to or
+modified in collection.  This is awkward for collections in which
+associations are defined by a combination of keys.
+
+Proposal is to place the value immediately after collection and the
+remaining arguments be keys, eg. ((setter element) collection value
+key1 key2 ...).
+
+------------------------------------------------------------------------
+
+ADD: READ
+
+This is not present in 0.99.
+
+Proposal is to add a function with this name, which will parse the
+given stream and return s-expressions.
+
+------------------------------------------------------------------------
+
+ADD: <COLLECTION> AND <SEQUENCE> AS ABSTRACT CLASSES
+
+At level-0, new structures can be defined and these can be
+incorporated into the collection mechanism by adding a method either
+to collectionp or sequencep and whatever else is required for other
+collection operations.
+
+At level-1, new classes can be defined and incorporated similarly, but
+those new classes can also be subclasses of existing collection
+classes, such as <vector>.  It is attractive that the new subclass be
+a collection by virtue of its superclass.
+
+Proposal is to add <collection> and <sequence> as abstract classes to
+form the following initial hierarchy:
+
+	<collection>
+	  <table>
+	  <sequence>
+	    <list>
+	      <cons>
+	      <null>
+	    <string>
+	    <vector>
+
+------------------------------------------------------------------------
+
+
+MAKE THREAD-START AND THREAD-VALUE GENERIC.
+ADD: GENERIC-SIGNAL
+ADD: WAIT METHOD FOR <LOCK>
+
+At level-1 it is possible to subclass <thread>, therefore it may be
+necessary to define specialized behaviour for the thread manipulation
+functions.  Furthermore, the third argument of signal may be a thread,
+so this too may require specialization.
+
+Proposal: make thread-start and thread-value generic.  Add
+generic-signal (three arguments) and define signal to call
+generic-signal.
+
+Given the defined functionality of wait, it seems reasonable to expect
+to be able to wait on a lock.
+
+Proposal: add a wait method for <lock>.
+
+------------------------------------------------------------------------
+
+CLASS HIERARCHY ORGANIZATION
+ADD: ABSTRACT SUPERCLASS FOR <VECTOR>
+
+The initial class hierarchy is not consistent in the provision of
+abstract classes.  Should there be an abstract class for thread,
+vector, string etc.?
+
+Proposal: class hierarchy should be reexamined to ensure consistent
+usage of abstract classes and new abstract classes for vector, thread
+(what else?) should be defined.
+
+------------------------------------------------------------------------
+
+NON-HYGENIC SEMANTICS FOR SYNTAX FUNCTIONS (MACROS)
+
+The semantics of syntax functions is nowhere defined.
+
+Proposal: add (section 9.7) a description of non-hygienic syntax
+expansion.  This will describe inadvertent capture, inadvertent
+shadowing and the problem peculiar to Eulisp which follows from
+modules, namely the need to import whatever the expansion might depend
+upon.
+
+------------------------------------------------------------------------
+
+* again about conditions
+  :From: E. Ulrich Kriegel
+
+Hi there,
+there is another problem with conditions which should be discussed in Bruxelles.
+Now conditions are something like structures in level-0. In 0.99 for most
+of the conditions there are initialization options.
+However, it is not yet defined, how to acces the information stored in
+conditions.
+If one creates accessors (reader should be sufficient) named as the init
+args there are name clashes for 3 conditions:
+<no-next-method>
+                with slot method
+<non-congruent-lambda-lists>
+                with slots method and generic
+<incompatible-method-domain>
+                with slots method and generic
+<method-domain-clash>
+                with slot generic
+
+IMHO, there are 3 solutions
+1. specification of the names of all accessor fcn's
+2. definition of a common super-condition
+3. neglect slot reader and use some table-based mechanism instead to access
+the values.
+
+
+--ulrich
+
+* topics
+  :From: Peter A. Broadbery
+
+
+Hi Julian,
+	There are a few problems with your gf. related proposals ---
+That it will make interactive development tricky, if not
+downright impossible --- one finds situations in which one discovers
+the need for an additional method on a subclass quite often. Simple
+example: Windowing systems, and you are adding additional expose event
+handlers.
+
+Is it still possible to create a method (at compile-time), say, and
+add it to the system at runtime (eg to a class which can only be
+created after the program has started --- a persistent dbase, a copy
+of a program from another part of a multi-eulisp process
+network)? Maybe a hierachette for abstract-gf, gf, and
+really-woefully-inefficient-but-flexible-gf should be added instead,
+with gf disallowing runtime add-methods.
+
+The other proposals seem good, though (In fact, the current version of
+feel probably implements the bit on method default specialisers --- if
+you add a method outside the domain, it will be ignored), and calling
+outside the domain is treated as an unsignalled error. My view is that
+if you say declare that you are using a particular domain, then you
+deserve everything you get if you turn out to have been lying.
+
+Pete
+
+* Opinions
+  :From: Peter A. Broadbery
+
+We should be able to iterate over things that are not subclasses of
+collection, (asharp has an operation default mechanism for this, but I
+guess I'm digressing...). In any case, if rjb hasn't let you know
+already, the place to look is in Feel/Boot/streams1.em. As far as I
+can tell, the eos action is set, but never called. The obvious change
+is to the default input method to fix this. In may well be worth
+fiddling it to return a sequence (ie a string of one char) --- I think
+the definition specifies this, but I ain't sure. Plus the
+corresponding changes to output could be made.
+
+By the way --- Where are you holding the working version of feel?
+
+Have fun,
+	Pete
+
+* topics
+  :From: Ingo Mohr
+
+>------------------------------------------------------------------------
+>
+>STATIC ERRORS MIGHT BE SIGNALLED
+I would extend this by
+DYNAMIC ERRORS MIGHT BE DETECTED DURING THE PREPARATION FOR EXECUTION
+>
+>Due to the definition not having taken proper consideration of the
+>issues arising from total compilation, a number of errors which are
+>defined to be signalled (and which a programmer may rely upon being
+>signalled), could equally well be detected statically.  A new
+>definition of static error is proposed.
+
+In my opinion it seems to be better to extend the definition of "dynamic error".
+My proposal was that a conforming processor should be free to detect
+dynamic errors also during preparation of a program for execution. If a
+dynamic error is detected before execution it must be signalled in an
+unspecified way and must either
+a) prevent the program from execution or
+b) allow to repair the program or
+c) signal the error during execution as if it was detected during execution.
+A conforming program should NOT rely on the fact that a condition IS
+signalled as described during execution. But it should be possible to
+assume that a condition is signalled as described if the error is NOT
+detected during preparation of the program, which means before execution.
+
+My proposal for 4.1. dynamic error:
+
+4.1. dynamic error: An error which is detected **normally** during the
+execution of a \eulisp\ program or which is a violation of the defined
+dynamic behaviour of \eulisp\. A conforming processor is free to detect and
+report dynamic errors during preparation of a program for execution instead
+of signalling them during execution of the program. Dynamic errors have two
+classifications:
+
+a) ...
+--- replace ---
+A conforming \eulisp\ program can rely on the fact that this condition will
+be signalled.
+--- by --------
+A conforming \eulisp\ program can rely on the fact that this condition will
+be signalled if the error is not detected and reported during preparation
+of the program.
+---------------
+
+>
+>The wording of definition 4.3 (section 4, p4, v0.99) is revised as
+>follows:
+>
+>4.3 static error: An error which is detected during the preparation of
+
+To be conform with my changes above I would write:
+4.3 static error: An error which is **normally** detected during the
+preparation of
+
+>a \eulisp\ program for execution, such as a violation of the syntax or
+>static semantics of \eulisp\ by the program under preparation.
+
+Here "a violation of the syntax ..." IS an error.
+
+>
+>\begin{note}
+>The violation of the syntactic or static semantic requirements is not
+>an error,
+
+But here "The violation of the syntactic ..." IS NOT an error ????
+
+>but an error might be signalled by the program performing the
+>analysis of the \eulisp\ program.  This program might be that which is
+>also responsible for the execution of the \eulisp\ program, in which
+>case a static error might be signalled during the execution of the
+>prepared \eulisp\ program.  In this case, a static error can be
+>handled in the same way as a dynamic error.
+
+Which instance is signalled in such a case? A program should be able to
+catch also such errors if signalled during execution , at least in a very
+simple way. For example instances of <static-error> may be signalled.
+Also possible would be the addition \it{(condition class if detected
+dynamically: <...>)} in the description of an erroneous situation.
+
+>\end{note}
+>------------------------------------------------------------------------
+>
+>METHOD DEFAULT SPECIALIZERS
+>
+>If the domain of a generic function is restricted what is the default
+>specialization of a method argument?
+>
+>Example:
+>
+>(defgeneric f ((x <number>) (y <stream>))
+>(defmethod f (x (y <string-stream>))...)
+>
+>It is proposed that x default to the restriction specified for the
+>generic function.  However, this has implications for method-lambda,
+>since the identity of the host gf is not known at that time.
+>
+
+To use unspecialized parameters is the only way to define default method
+without knowledge about the gf signature. But this requires that a list
+describing a method domain (see initialize /method/ and method-domain) can
+also contain () which specifies that the corresponding class in the gf
+domain is to be used.
+
+>------------------------------------------------------------------------
+>
+>REMOVE: DEFMACRO
+>MACROS RENAMED SYNTAX FUNCTIONS
+>ADD: EXPORT-SYNTAX FOR MODULES
+>
+>It is observed that macros are functions which are called at syntax
+>expansion time.  Therefore, there is no difference between defmacro
+>and defun and the former should be dropped and the nomenclature
+>"syntax function" be used instead.
+>
+>To distinguish between functions exported for runtime and syntax
+>functions exported for syntax expansion time a second form of
+>exportation is proposed, namely export-syntax.
+
+Should it be possible to export for example "+" with syntax-export after
+importing it ?
+
+What about "defsyntaxmodule" (eventually with some restrictions) where all
+exports are syntax and which are initialized during syntax expansion time?
+
+>------------------------------------------------------------------------
+>
+>LEVEL-0 TELOS CONDITIONS EXCEPT <NO-APPLICABLE-METHOD> BECOME STATIC
+>ERRORS
+>
+>As a consequence of the redefinition of static error, all but one of
+>the telos-conditions at level-0 should be reclassified as static
+>errors.  However, the condition classes will remain defined, because
+>they could be signalled in some implementations.
+
+But no conforming program can catch such errors because defmethod and
+defgeneric are defining forms and so they cannot appear inside
+with-handler. So the knowledge about these telos-conditions makes no sense
+at level-0. I propose that the definitions of these telos-conditions will
+be moved to the Level-1-part (appendix B). And there they can remain
+dynamic errors when taking into account my proposal for the extended
+definition of "dynamic error".
+
+>------------------------------------------------------------------------
+>
+>ADD: <COLLECTION> AND <SEQUENCE> AS ABSTRACT CLASSES
+>
+>At level-0, new structures can be defined and these can be
+>incorporated into the collection mechanism by adding a method either
+>to collectionp or sequencep and whatever else is required for other
+>collection operations.
+>
+>At level-1, new classes can be defined and incorporated similarly, but
+>those new classes can also be subclasses of existing collection
+>classes, such as <vector>.  It is attractive that the new subclass be
+>a collection by virtue of its superclass.
+>
+>Proposal is to add <collection> and <sequence> as abstract classes to
+>form the following initial hierarchy:
+>
+>        <collection>
+>          <table>
+>          <sequence>
+>            <list>
+>              <cons>
+>              <null>
+>            <string>
+>            <vector>
+
+This means that it is impossible to extend the set of collection classes on
+level-0 because all classes defined using defstruct are subclasses of
+<structure>. I like the proposal above, but then we should change something
+with structures. For example, I want to define a new collection class
+<range> and appropriate methods, which should be possible at level-0.
+My proposal:
+1. removal of <structure>
+2. the default superclass for defstruct is <object>
+3. the superclass of a defstruct class may be <object>, <collection>,
+<sequence> or any other class defined using defstruct
+4. level-1 should introduce <structure-class>, the class of all classes
+defined by defstruct.
+
+>------------------------------------------------------------------------
+
+Ingo
+
+* topics
+  :From: Jeff Dalton
+
+From Ingo Mohr:
+> >STATIC ERRORS MIGHT BE SIGNALLED
+> I would extend this by
+> DYNAMIC ERRORS MIGHT BE DETECTED DURING THE PREPARATION FOR EXECUTION
+> >
+> >Due to the definition not having taken proper consideration of the
+> >issues arising from total compilation, a number of errors which are
+> >defined to be signalled (and which a programmer may rely upon being
+> >signalled), could equally well be detected statically.  A new
+> >definition of static error is proposed.
+>
+> In my opinion it seems to be better to extend the definition of "dynamic
+> error".
+> My proposal was that a conforming processor should be free to detect
+> dynamic errors also during preparation of a program for execution.
+
+That seems reasonable to me.  E.g. (/ x 0)  I don't mind if a
+perfectly ordinary compiler (never mind total compilers) figures
+out at compile time that this will go wrong.
+
+On the other hand, an interpreter might not detect much of anything
+until run-time.
+
+So it's not clear to me what a static error is.  Whether an error is
+detected by static analysis or not seems much more a property of
+the implementation than of the error.  So why is it an error type?
+
+> >METHOD DEFAULT SPECIALIZERS
+> >
+> >If the domain of a generic function is restricted what is the default
+> >specialization of a method argument?
+> >
+> >Example:
+> >
+> >(defgeneric f ((x <number>) (y <stream>))
+> >(defmethod f (x (y <string-stream>))...)
+> >
+> >It is proposed that x default to the restriction specified for the
+> >generic function.  However, this has implications for method-lambda,
+> >since the identity of the host gf is not known at that time.
+
+Totally losing!  It prevents me from looking at the _method_ and
+seeing what the arg class will be.
+
+The only reasonable proposal in this area that I can see would be
+to require that the method parameter be explicitly restricted to
+a subclass of the class given in the defgeneric.  So in the example
+above
+
+  (defmethod f (x (y <string-stream>))...)
+
+would be an error, while the following would be correct:
+
+  (defmethod f ((x <integer>) (y <string-stream>))...)
+
+(Well, correct if <integer> is a class.  I forget.)
+
+> To use unspecialized parameters is the only way to define default method
+> without knowledge about the gf signature.
+
+If we have rule that x defaults to the restriction in the generic,
+then people are always having to know the gf signature in order to
+understand method (and to write them).  SO if the reason for this
+rule is to make default methods eraier to write, I think its wrong.
+
+> >------------------------------------------------------------------------
+> >
+> >REMOVE: DEFMACRO
+> >MACROS RENAMED SYNTAX FUNCTIONS
+> >ADD: EXPORT-SYNTAX FOR MODULES
+> >
+> >It is observed that macros are functions which are called at syntax
+> >expansion time.  Therefore, there is no difference between defmacro
+> >and defun and the former should be dropped and the nomenclature
+> >"syntax function" be used instead.
+
+This makes no sense to me.  The part after "therefore" is a
+non sequitur.  It simply doesn't follow from macros being functions
+called at expansion time that there is no difference between defun
+and defmacro.
+
+> >To distinguish between functions exported for runtime and syntax
+> >functions exported for syntax expansion time a second form of
+> >exportation is proposed, namely export-syntax.
+
+Didn't we already have this 100,000 years ago?
+
+> What about "defsyntaxmodule" (eventually with some restrictions) where all
+> exports are syntax and which are initialized during syntax expansion time?
+
+Yuck!  (That means I don't like it.)
+
+> >LEVEL-0 TELOS CONDITIONS EXCEPT <NO-APPLICABLE-METHOD> BECOME STATIC
+> >ERRORS
+> >
+> >As a consequence of the redefinition of static error, all but one of
+> >the telos-conditions at level-0 should be reclassified as static
+> >errors.  However, the condition classes will remain defined, because
+> >they could be signalled in some implementations.
+>
+> But no conforming program can catch such errors because defmethod and
+> defgeneric are defining forms and so they cannot appear inside
+> with-handler. So the knowledge about these telos-conditions makes no sense
+> at level-0.
+
+They can be errors that can't be handled by user code.  We might,
+for instance, require that they be signalled rather than allow
+implementations just to keep going.
+
+> I propose that the definitions of these telos-conditions will
+> be moved to the Level-1-part (appendix B). And there they can remain
+> dynamic errors when taking into account my proposal for the extended
+> definition of "dynamic error".
+
+That may make sense.  But I think people are getting confused about
+errors because of this concept of a static error, for which see above.
+
+> >ADD: <COLLECTION> AND <SEQUENCE> AS ABSTRACT CLASSES
+
+> >Proposal is to add <collection> and <sequence> as abstract classes to
+> >form the following initial hierarchy:
+> >
+> >        <collection>
+> >          <table>
+> >          <sequence>
+> >            <list>
+> >              <cons>
+> >              <null>
+> >            <string>
+> >            <vector>
+>
+> This means that it is impossible to extend the set of collection classes on
+> level-0 because all classes defined using defstruct are subclasses of
+> <structure>. I like the proposal above, but then we should change something
+> with structures. For example, I want to define a new collection class
+> <range> and appropriate methods, which should be possible at level-0.
+> My proposal:
+> 1. removal of <structure>
+
+What do we get from <structure>?  I.e., what's the cost of removing it?
+
+-- jeff
+
+* topics
+  :From: Harley Davis
+
+In article Jeff Dalton writes:
+
+   From Ingo Mohr:
+   > >STATIC ERRORS MIGHT BE SIGNALLED
+   > I would extend this by
+   > DYNAMIC ERRORS MIGHT BE DETECTED DURING THE PREPARATION FOR EXECUTION
+   > >
+   > >Due to the definition not having taken proper consideration of the
+   > >issues arising from total compilation, a number of errors which are
+   > >defined to be signalled (and which a programmer may rely upon being
+   > >signalled), could equally well be detected statically.  A new
+   > >definition of static error is proposed.
+
+   So it's not clear to me what a static error is.  Whether an error is
+   detected by static analysis or not seems much more a property of
+   the implementation than of the error.  So why is it an error type?
+
+This business of error types is a little bizarre.  The original idea,
+as I recall, was that the EuLisp compiler need not be EuLisp program
+so we could not say exactly what a static error looks like.  However,
+given that there are macros with unlimited power, the EuLisp compiler
+basically has to be in EuLisp.  The fact that we offer no interface to
+the compiler means that errors signaled by the compiler cannot be
+handled portably.  Nevertheless, it might be useful to specify these
+conditions given that every implementation will have some interface to
+its compiler.  You could then write a portable static error handler,
+but the part that does (with-handler static-error-handler
+(compile-module ...)) would not be portable.  In this case, it becomes
+useful to distinguish between errors in the program preparation
+between, for example, errors signaled by macro expansion.
+
+A solution might be to add another reader to error conditions
+specifying whether the error has been signaled dynamically or
+statically.  For instance, <division-by-zero> might be signaled
+statically or dynamically, but the same condition type is signaled
+with the new field set to a boolean depending on who discovered the
+error.  Not all <division-by-zero> errors signaled during compilation
+would be static --- a macro which did a division by zero during
+macro-expansion would be signaled as a dynamic error, while the
+compilation of the code (/ x 0) might signal it as a static error.
+
+In this way, there are no error types as Jeff puts it, but there is
+still a distinction which can be determined dynamically by the
+handler.  I think this idea is in line with Ingo Mohr's proposal.
+
+I think this important because a macro expansion funcion might have a
+with-handler in it, and if the compiler is not careful about signaling
+its errors, the handler could become confused between macro-expansion
+errors, which presumably the with-handler wants to treat, and compiler
+errors, which presumably should be passed on to the user.
+
+   > >METHOD DEFAULT SPECIALIZERS
+   > >
+   > >If the domain of a generic function is restricted what is the default
+   > >specialization of a method argument?
+   > >
+   > >Example:
+   > >
+   > >(defgeneric f ((x <number>) (y <stream>))
+   > >(defmethod f (x (y <string-stream>))...)
+   > >
+   > >It is proposed that x default to the restriction specified for the
+   > >generic function.  However, this has implications for method-lambda,
+   > >since the identity of the host gf is not known at that time.
+
+   Totally losing!  It prevents me from looking at the _method_ and
+   seeing what the arg class will be.
+
+I completely agree with Jeff.  Note that under my previous idea for
+errors, the condition type <method-domain-out-of-bounds> might still
+be signaled by the compiler, but with a note that it is a static
+error.
+
+   > >------------------------------------------------------------------------
+   > >
+   > >REMOVE: DEFMACRO
+   > >MACROS RENAMED SYNTAX FUNCTIONS
+   > >ADD: EXPORT-SYNTAX FOR MODULES
+   > >
+   > >It is observed that macros are functions which are called at syntax
+   > >expansion time.  Therefore, there is no difference between defmacro
+   > >and defun and the former should be dropped and the nomenclature
+   > >"syntax function" be used instead.
+
+   This makes no sense to me.  The part after "therefore" is a
+   non sequitur.  It simply doesn't follow from macros being functions
+   called at expansion time that there is no difference between defun
+   and defmacro.
+
+To elaborate on Jeff's point, I think confusing the lexical
+environment namespace with the macro namespace is a conceptual error
+which will only lead to programmer confusion.  People will start
+wondering why (if p (and x y z) (or x y z)) is not the same as
+((if p and or) x y z).  (Even worse, if we aren't careful about the
+specification, some implementations may make these cases the same!
+For instance, they might prove that p is always true and do a naive
+source code transformation.) If we clearly state that macros are in a
+different namespace and only have effect when they are the car of a
+form, this case becomes much easier to explain.
+
+My proposal would be that a macro is not bound to anything in any
+directly accessible environment; they are gathered by the "program
+preparer" in a separate namespace only accessible during program
+preparation when the car of an evaluated form names a macro imported
+by the module.  Macros are exported differently from functions, as
+they are under the current definition.  The macro expansion functions
+themselves can access the lexical environment of the module which
+defines the macro.
+
+(With minor modifications due to Lisp-n-iness, this is the solution we
+have been using in Ilog Talk for about 4 years, and we are quite happy
+with it.)
+
+   > >To distinguish between functions exported for runtime and syntax
+   > >functions exported for syntax expansion time a second form of
+   > >exportation is proposed, namely export-syntax.
+
+   Didn't we already have this 100,000 years ago?
+
+Right.  Well, I approve of the proposal that we don't abandon it.
+
+   > I propose that the definitions of these telos-conditions will
+   > be moved to the Level-1-part (appendix B). And there they can remain
+   > dynamic errors when taking into account my proposal for the extended
+   > definition of "dynamic error".
+
+   That may make sense.  But I think people are getting confused about
+   errors because of this concept of a static error, for which see
+   above.
+
+There is no need for this move if we adopt my error proposal above.
+
+   > >ADD: <COLLECTION> AND <SEQUENCE> AS ABSTRACT CLASSES
+
+   > >Proposal is to add <collection> and <sequence> as abstract classes to
+   > >form the following initial hierarchy:
+   > >
+   > >        <collection>
+   > >          <table>
+   > >          <sequence>
+   > >            <list>
+   > >              <cons>
+   > >              <null>
+   > >            <string>
+   > >            <vector>
+   >
+   > This means that it is impossible to extend the set of collection
+   > classes on level-0 because all classes defined using defstruct
+   > are subclasses of <structure>. I like the proposal above, but
+   > then we should change something with structures. For example, I
+   > want to define a new collection class <range> and appropriate
+   > methods, which should be possible at level-0.
+   > My proposal:
+   > 1. removal of <structure>
+
+   What do we get from <structure>?  I.e., what's the cost of removing it?
+
+You can tell which objects are structures.  However, if we have both
+class-of and <structure-class> at level-0, this can still be detected.
+
+Old: (defpredicate structurep <structure>)
+New: (defun structurep (x) (eq (class-of (class-of x)) <structure-class>))
+
+However, I forget where we are about putting class-of in level-0.
+
+BTW, I like the new hierarchy.  By sheer coincidence, it is identical
+to the hierarchy we have in Ilog Talk, except that we have an abstract
+class <table> and a concrete class <hash-table>.  We also do iterators
+in a more efficient way.
+
+-- Harley
+
+* topics: static errors
+  :From: Jeff Dalton
+
+> In article Jeff Dalton writes:
+>
+>    From Ingo Mohr:
+>    > >STATIC ERRORS MIGHT BE SIGNALLED
+>    > I would extend this by
+>    > DYNAMIC ERRORS MIGHT BE DETECTED DURING THE PREPARATION FOR EXECUTION
+>    > >
+>    > >Due to the definition not having taken proper consideration of the
+>    > >issues arising from total compilation, a number of errors which are
+>    > >defined to be signalled (and which a programmer may rely upon being
+>    > >signalled), could equally well be detected statically.  A new
+>    > >definition of static error is proposed.
+>
+>    So it's not clear to me what a static error is.  Whether an error is
+>    detected by static analysis or not seems much more a property of
+>    the implementation than of the error.  So why is it an error type?
+>
+> This business of error types is a little bizarre.  The original idea,
+> as I recall, was that the EuLisp compiler need not be EuLisp program
+> so we could not say exactly what a static error looks like.
+
+But this is saying we can't say what an error looks like when
+signalled by the compiler.  Fortunately, since we couldn't catch the
+error (if the compiler worked that way), it wouldn't matter.
+
+(I'm assuming that not being written in EuLisp is supposed to
+matter.  If, say, a C program could still signal (or cause to be
+signalled) ordinary Eulisp conditions, then we're in the same
+case as when the compiler is written in Eulisp).
+
+> However,
+> given that there are macros with unlimited power, the EuLisp compiler
+> basically has to be in EuLisp.  The fact that we offer no interface to
+> the compiler means that errors signaled by the compiler cannot be
+> handled portably.
+
+This is still a question of when the error is detected, not the
+type of the error.
+
+> Nevertheless, it might be useful to specify these
+> conditions given that every implementation will have some interface to
+> its compiler.  You could then write a portable static error handler,
+> but the part that does (with-handler static-error-handler
+> (compile-module ...)) would not be portable.
+
+I thought at least some implementations would not have a compiler
+that could be called from within a program (except to the extent
+that a program could ask the OS to run something which might be
+the compiler).
+
+> In this case, it becomes
+> useful to distinguish between errors in the program preparation
+> between, for example, errors signaled by macro expansion.
+
+Do macro-expanders (things that compute expansions) signal static
+errors for, say, syntax errors?
+
+If macro expansion could happen during execution (rather than in
+a pre-pass), then handlers could see such conditions.  But doesn't
+the condition already indicatre that it's a syntax error, or whatever?
+I'm not sure what we additionally gain by knowing it was detected
+by "static" analysis.
+
+> A solution might be to add another reader to error conditions
+> specifying whether the error has been signaled dynamically or
+> statically.
+
+I think "signaled dynamically or statically" is confusing.  It
+sounds like different ways to signal, or something, rather than
+differences in when or how the error was detected.  We have to
+be careful about this, or we'll end up with something confusing
+in the definition, meeting minutes, etc, and later misunderstand
+ourselves.
+
+>              For instance, <division-by-zero> might be signaled
+> statically or dynamically, but the same condition type is signaled
+> with the new field set to a boolean depending on who discovered the
+> error.  Not all <division-by-zero> errors signaled during compilation
+> would be static --- a macro which did a division by zero during
+> macro-expansion would be signaled as a dynamic error, while the
+> compilation of the code (/ x 0) might signal it as a static error.
+
+This would make sense, if handlers might ever care.
+
+My point, really, is that we need to know what "static error" is
+good for.  Is it something handlers can see at all?  Would they
+ever care?  And so on.
+
+> In this way, there are no error types as Jeff puts it, but there is
+> still a distinction which can be determined dynamically by the
+> handler.  I think this idea is in line with Ingo Mohr's proposal.
+>
+> I think this important because a macro expansion funcion might have a
+> with-handler in it, and if the compiler is not careful about signaling
+> its errors, the handler could become confused between macro-expansion
+> errors, which presumably the with-handler wants to treat, and compiler
+> errors, which presumably should be passed on to the user.
+
+I don't quite understant what the situation is here.  If the macro's
+just computing an expansion, how would a compiler error result?
+Why would they be different from macro-expansion errors (that the
+macro might handle, as opposed to ones it might signal)?
+
+-- jeff
+
+* Validation suite
+  :From: Nick North
+
+> I would like to make a plea for a validation suite for Haskell.
+
+Hear hear.
+
+> One of the best specified procedural languages is Pascal, which is similar in
+> size to Haskell.  The Pascal standard defines Pascal rather tighter than the
+> Haskell report defines Haskell, but in practice the limiting cases are defined
+> by a suite of several hundred (mostly pathological) test programs.
+
+The Pascal validation suite and its followers (CHILL, Ada etc) have a
+variety of tests:
+
+1. For each occurrence of 'shall' in the standard, a test to ensure that
+   the feature is implemented.
+
+2. For each occurrence of 'shall not', a test to ensure that the thing
+   forbidden is in fact forbidden.
+
+3. "Gut feeling" tests where you guess an invalid implementation strategy
+   and deduce a test which reveals its existence (a GOTO into a FOR loop
+   which then prints the value of the loop variable is a good one).
+
+4. "Evaluation" tests which check out the limits of the compiler (MAXINT,
+   maximum length variable names etc).
+
+5. "Pathological" tests whose result is unclear. These illustrate problems
+   in the standard and don't properly belong in the validation suite (as
+   you can't expect the compiler to know what to do with them).
+
+6. "Quality" tests to check out goodness of the implementation e.g. compile
+   and run-time error handling.
+
+7. Really nasty tests whose result is defined but they don't go in the
+   validation suite because compiler writers would have to expend too
+   much effort to fix their systems.
+
+Moral: the pathological tests are useful for language definers to focus
+their attention on problems; the other sorts are more useful for compiler
+writers. However, the pathological ones are far more interesting to write.
+
+I would suggest that a Haskell suite consists of whatever tests people want
+to submit, with the following provisos:
+
+1. The test should state which bit of the Haskell report it is testing.
+
+2. It should test exactly one feature and be as short as is sensible.
+   You might make an exception for tests which every compiler should pass
+   easily e.g. one test might check correct reading in of all possible escaped
+   characters in strings (one compiler, which shall remain nameless, used
+   to get this wrong).
+
+3. It should say what the expected result is.
+
+4. If at all possible it should be self-checking (i.e. print out PASS or
+   FAIL at the end). This makes regression testing easier.
+
+Nick North
+
+* topics
+  :From: Dave De Roure
+
+> I have attempted to write up each issue briefly (tho' not to the
+> standards of X3J13) and hope they can form the starting point for
+> discussions (but hopefully not meta-discussions!).
+
+I'll just comment on a couple of these which have affected me recently
+in teaching, as I won't be at the first day of the meeting...
+
+> STATIC ERRORS MIGHT BE SIGNALLED
+>
+> Due to the definition not having taken proper consideration of the
+> issues arising from total compilation, a number of errors which are
+> defined to be signalled (and which a programmer may rely upon being
+> signalled), could equally well be detected statically.  A new
+> definition of static error is proposed.
+
+A sufficiently smart compiler (eg one which has an abstract interpreter)
+might spot many `dynamic' errors.  A simple interpreter (like the one
+I'm using for teaching) might not spot anything `statically' (unless
+you regard load-time as static, in which case it detects bad syntax for
+top level special forms).  Hence the concept of `static' errors seems to
+be a feature of the environment, and should perhaps be distinguished from
+the language definition.
+
+What are we saying to whom by including this in the definition?
+Is it to give hints to implementors, or is it necessary information
+for programmers in writing their programs?
+
+> METHOD DEFAULT SPECIALIZERS
+>
+> If the domain of a generic function is restricted what is the default
+> specialization of a method argument?
+>
+> Example:
+>
+> (defgeneric f ((x <number>) (y <stream>))
+> (defmethod f (x (y <string-stream>))...)
+>
+> It is proposed that x default to the restriction specified for the
+> generic function.  However, this has implications for method-lambda,
+> since the identity of the host gf is not known at that time.
+
+I agree with the proposal.  If I put a method on a generic function
+written by someone else (eg generic-write), I might not want to have
+to restrict one of the arguments (eg the stream argument) because that
+would involve finding out the generic function definition and becoming
+dependent on it.  If I therefore leave the argument unrestricted I don't
+want it to default to (s <object>) if that would violate the generic
+function definition which restricts it.  For me, an unspecialized method
+argument means "I don't care" rather than <object>.  Bondage programmers
+may well disagree!
+
+A related issue, which also arose in an exercise, is the need
+to put methods on binary+, binary/ etc for user-defined classes
+(ie structures) which are not subclasses of the class mentioned in
+the generic function definition.  In other words, if binary+ is
+restricted to <number> and its subclasses, how can I add matrices,
+polynomials etc?
+
+(This is a restriction vs specialization issue and I'm sure the debate
+will run and run... :-)
+
+> REMOVE: DEFMACRO
+>
+> It is observed that macros are functions which are called at syntax
+> expansion time.  Therefore, there is no difference between defmacro
+> and defun and the former should be dropped and the nomenclature
+> "syntax function" be used instead.
+
+This appeals because anything which simplifies the language is a good
+thing.  But I'm sure I could offer a counterargument in terms of
+expressiveness.  Never mind, if I want defmacro then I can always
+define it as a macro (sorry, syntax function) for defun... :-)
+
+The distinction between `macros' and special forms is still significant:
+with `macros' the programmer can expect to find the corresponding
+syntax-functions, and the compiler-writer can't distinguish their usage
+from the use of the expanded expression.  So are the defining forms
+(defun etc) macros or special forms, or what?  And do we really
+want to dictate that `if' is a special form (therefore no syntax
+function) and `cond' is macro (with corresponding syntax function?).
+I could understand the distinction if we had a semantics which identified
+the special forms (sort of semantic primitives, out of which macros are
+built), but I'm not sure that we have.
+
+(I'm sorry these comments raise questions rather than offer solutions!)
+
+Regards to everyone,
+
+* topics: static errors
+  :From: Harley Davis
+
+   Date: Wed, 17 Nov 93 17:24:55 GMT
+
+   >    So it's not clear to me what a static error is.  Whether an error is
+   >    detected by static analysis or not seems much more a property of
+   >    the implementation than of the error.  So why is it an error type?
+   >
+   > This business of error types is a little bizarre.  The original idea,
+   > as I recall, was that the EuLisp compiler need not be EuLisp program
+   > so we could not say exactly what a static error looks like.
+
+   But this is saying we can't say what an error looks like when
+   signalled by the compiler.  Fortunately, since we couldn't catch the
+   error (if the compiler worked that way), it wouldn't matter.
+
+   (I'm assuming that not being written in EuLisp is supposed to
+   matter.  If, say, a C program could still signal (or cause to be
+   signalled) ordinary Eulisp conditions, then we're in the same
+   case as when the compiler is written in Eulisp).
+
+The only point I wanted to make was that any EuLisp program
+preparation system has to be equivalent in power and functionality to
+the EuLisp runtime so that it can do macros.  Therefore, this system
+has to be able to signal conditions.  It is our choice whether we
+expose this capability or not.
+
+   > Nevertheless, it might be useful to specify these
+   > conditions given that every implementation will have some interface to
+   > its compiler.  You could then write a portable static error handler,
+   > but the part that does (with-handler static-error-handler
+   > (compile-module ...)) would not be portable.
+
+   I thought at least some implementations would not have a compiler
+   that could be called from within a program (except to the extent
+   that a program could ask the OS to run something which might be
+   the compiler).
+
+This is one of those cases of "provide a portable way to do something
+in those implementations that choose to support a certain
+functionality."
+
+   > In this case, it becomes
+   > useful to distinguish between errors in the program preparation
+   > between, for example, errors signaled by macro expansion.
+
+   Do macro-expanders (things that compute expansions) signal static
+   errors for, say, syntax errors?
+
+   If macro expansion could happen during execution (rather than in
+   a pre-pass), then handlers could see such conditions.  But doesn't
+   the condition already indicatre that it's a syntax error, or whatever?
+   I'm not sure what we additionally gain by knowing it was detected
+   by "static" analysis.
+
+I was thinking of the division by zero case, where the compiler might
+get eager about signaling what we normally consider to be runtime
+errors.  But macro expansion might also signal those errors, and if we
+are going to consider this idea of specifying compile-time errors,
+it seems reasonable that these two cases be distinguishable.
+
+Inasmuch as macros might be considered to be minor-league compiler
+extensions, I think it is reasonable for them to signal syntax errors
+as "static" errors.
+
+This debate is interesting to me because we have actually done
+something with all of this: In Ilog Talk, the compiler signals a large
+number of condition types.  Our whole development environment is based
+around defining handlers for these conditions.  Using this system, we
+have been able to implement three different development environments
+so far without touching the compiler.
+
+The compiler also implements a handler method for all errors signaled
+by macros, and it resignals them as conditions of type
+<macroexpansion-error>, where this condition object contains the
+original macro error in a slot.  This is sufficient for us, and might
+work here as well.  I don't know if anyone else really finds these
+"static" conditions useful, or if this is just a theoretical debate
+about cleanliness for most people.  If I'm the only one really
+interested in programming with static conditions, I'll shut up.
+
+   > A solution might be to add another reader to error conditions
+   > specifying whether the error has been signaled dynamically or
+   > statically.
+
+   I think "signaled dynamically or statically" is confusing.  It
+   sounds like different ways to signal, or something, rather than
+   differences in when or how the error was detected.  We have to
+   be careful about this, or we'll end up with something confusing
+   in the definition, meeting minutes, etc, and later misunderstand
+   ourselves.
+
+Yes, the terminology should be "signaled during program preparation"
+or "signaled during program execution", where preparation/execution is
+relative to the code being prepared/executed.  IE, a macroexpansion
+function is executed during the preparation of some other code.  The
+macroexpansion code itself has had an earlier preparation phase.
+
+   >              For instance, <division-by-zero> might be signaled
+   > statically or dynamically, but the same condition type is signaled
+   > with the new field set to a boolean depending on who discovered the
+   > error.  Not all <division-by-zero> errors signaled during compilation
+   > would be static --- a macro which did a division by zero during
+   > macro-expansion would be signaled as a dynamic error, while the
+   > compilation of the code (/ x 0) might signal it as a static error.
+
+   This would make sense, if handlers might ever care.
+
+In our case, this difference could be important.  We wouldn't want to
+highlight the error in Emacs the same way, for instance, if the signal
+is due to macroexpansion code or early detection of runtime errors.
+
+   My point, really, is that we need to know what "static error" is
+   good for.  Is it something handlers can see at all?  Would they
+   ever care?  And so on.
+
+I think the answer is yes, it matters for development environments.
+We have thousands of lines of code to deal with signaling and handling
+this sort of condition.
+
+However, it might be reasonable to argue that writing portable EuLisp
+development environments is not an important goal for EuLisp.
+Offhand, I can't think of any other possible uses for this sort of
+distinction.
+
+   > In this way, there are no error types as Jeff puts it, but there is
+   > still a distinction which can be determined dynamically by the
+   > handler.  I think this idea is in line with Ingo Mohr's proposal.
+   >
+   > I think this important because a macro expansion funcion might have a
+   > with-handler in it, and if the compiler is not careful about signaling
+   > its errors, the handler could become confused between macro-expansion
+   > errors, which presumably the with-handler wants to treat, and compiler
+   > errors, which presumably should be passed on to the user.
+
+   I don't quite understant what the situation is here.  If the macro's
+   just computing an expansion, how would a compiler error result?
+   Why would they be different from macro-expansion errors (that the
+   macro might handle, as opposed to ones it might signal)?
+
+Sorry, I misspoke.  The macroexpansion function doesn't have the
+with-handler (although it could); it's the development environment
+which wants to monitor the macroexpansions and the preparation in
+general.  If the handler is completely outside the compilation
+process, it can't distinguish from the phases of the compiler which
+call (the equivalent of) macroexpand, and the optimization phases,
+etc.
+
+-- Harley
+
+* topics
+  :From: Jeff Dalton
+
+> > METHOD DEFAULT SPECIALIZERS
+> >
+> > If the domain of a generic function is restricted what is the default
+> > specialization of a method argument?
+> >
+> > Example:
+> >
+> > (defgeneric f ((x <number>) (y <stream>))
+> > (defmethod f (x (y <string-stream>))...)
+> >
+> > It is proposed that x default to the restriction specified for the
+> > generic function.  However, this has implications for method-lambda,
+> > since the identity of the host gf is not known at that time.
+>
+> I agree with the proposal.  If I put a method on a generic function
+> written by someone else (eg generic-write), I might not want to have
+> to restrict one of the arguments (eg the stream argument) because that
+> would involve finding out the generic function definition and becoming
+> dependent on it.
+
+You mean you're going to write methods for a gf without knowing
+the protocol or the gf's signature?  How do you know what classes
+yuo _can_ specialize to?  You're fine in only the "don't care"
+case.  But I, reading your code, am not fine even then, because
+I can't tell by local inspection what the rules for this method
+are.
+
+> If I therefore leave the argument unrestricted I don't
+> want it to default to (s <object>) if that would violate the generic
+> function definition which restricts it.  For me, an unspecialized method
+> argument means "I don't care" rather than <object>.  Bondage programmers
+> may well disagree!
+
+Do you really not care, or do you want it to be restricted to
+the gf's signature?
+
+> A related issue, which also arose in an exercise, is the need
+> to put methods on binary+, binary/ etc for user-defined classes
+> (ie structures) which are not subclasses of the class mentioned in
+> the generic function definition.  In other words, if binary+ is
+> restricted to <number> and its subclasses, how can I add matrices,
+> polynomials etc?
+>
+> (This is a restriction vs specialization issue and I'm sure the debate
+> will run and run... :-)
+
+If the debate will run and run, we should do something conservative.
+Like requiring that parameters be specialized to a subclass of the
+class given for that parameter in the gf definition.
+
+> > REMOVE: DEFMACRO
+> >
+> > It is observed that macros are functions which are called at syntax
+> > expansion time.  Therefore, there is no difference between defmacro
+> > and defun and the former should be dropped and the nomenclature
+> > "syntax function" be used instead.
+>
+> This appeals because anything which simplifies the language is a good
+> thing.
+
+I don't think this simplifies the language.  I think it makes it
+bizarre and difficult to understand.  It removes useful information,
+and it seems to be based on a confusion.  The part after the
+"therefore" doesn't follow from the part before.  (See earlier
+messages.)
+
+Defmacro extablishes a fn as a macro expander; defun doesn't.
+Defemacro tells me that the name being defined will be a macro name,
+etc; defun doesn't.  Defun does something with a function.  But so do
+other forms.  The fact that something is a function doesn't mean that
+it sould always be dealt with by defun.  The "reasoning" behind this
+proposal makes almost no sense to me.  It looks like a case where
+people are letting an abstract consideration make the language worse
+in practice.  If defmacro is redundant (which is about the worst that
+can reasonably be said of it), that's good.  A degree of redundancy
+makes languages easier to understad.
+
+Harley -- I am relying on you to resist this during the meeting.
+
+-- jeff
+
+* topics: static errors
+  :From: Jeff Dalton
+
+> This debate is interesting to me because we have actually done
+> something with all of this: In Ilog Talk, the compiler signals a large
+> number of condition types.  Our whole development environment is based
+> around defining handlers for these conditions.  Using this system, we
+> have been able to implement three different development environments
+> so far without touching the compiler.
+>
+> The compiler also implements a handler method for all errors signaled
+> by macros, and it resignals them as conditions of type
+> <macroexpansion-error>, where this condition object contains the
+> original macro error in a slot.  This is sufficient for us, and might
+> work here as well.  I don't know if anyone else really finds these
+> "static" conditions useful, or if this is just a theoretical debate
+> about cleanliness for most people.  If I'm the only one really
+> interested in programming with static conditions, I'll shut up.
+
+I was wondering whether the static / dynamic distinction would
+be good for anything in practice.  If you've found that it is useful,
+that's good enough for me, so long as you're sure the distinction we
+have is the useful one (or a useful one).
+
+Another approach would be for the original static signaller
+to signal a consition of type <static-condition> that contained
+some other condition object -- this rather than having a slot
+in all condition objects aying whether they were static or
+not, and rather than having a static/dynamic branch in the
+condition class hierarchy.
+
+(That is, model it on how your compiler handles macro-expansion
+errors; do the same kind of thing for the original error instead
+(or as well.))
+
+-- jeff
+
+* Streams at last!
+  :From: Jeff Dalton
+
+EuLisp streams
+--------------
+These are (finally!) some notes from the meeting Dave deRoure, Richard
+Tobin, and I had in Edinburgh back whenever it was.
+
+Background
+----------
+We (the EuLisp group, not the Edinburgh meeting) wanted to use
+TELOS in a useful way when defining stream classes but found it
+difficult to make things work out neatly using only single inheritance.
+For instance, <character-input-stream> couldn't be a subclass of
+<character-stream> and <input-stream>, and <io-stream> couldn't
+be a subclass of <input-stream> and <output-stream>.  Moreover, it
+wasn't clear whether the main division should be between character
+and integer streams (which could be extended to other types such as
+float) or between input and output streams.  And there was Dave's
+concern with encoding.
+
+It began to look like we should provide only the "leaf" classes
+made by taking the cartesian product of various attributes such
+as {character,integer} and {input,output} without specifying any
+higher-level classes other than <stream>.
+
+Then Harley suggested that we could do something like having mixin
+classes for attributes without inheriting from these classes (and
+hence requiring some kind of multiple-inheritance) if we instead
+stored the attributes as parts (slots) of the streams.  The slot
+value would be an instance of some attribute class.
+
+For instance, there could be a direction slot which could contain an
+instance of <input-stream> or <output-stream>.  If a function was
+going to discriminate on direction, the attribute could be brought up
+to the top on a call to a second function, just as a class is brought
+up when calling slot-value-using-class in the CLOS MOP.  For instance
+(I'm making this up, because I don't have any of the actual examples
+handy):
+
+  (defmethod input-stream-p ((s <stream>))
+    (input-stream-using-direction s (stream-direction s)))
+
+  (defmethod input-stream-using-direction ((s <stream>) (d <input-stream>))
+    t)
+
+  (defmethod input-stream-using-direction ((s <stream>) d)
+    ;; This is the default
+    nil)
+
+Our meeting was basically to see what we could do with these ideas
+and with some (then) recent work that Dave deRoure had been doing.
+
+Richard's list of desirable properties for a object-based I/O
+system was also on the table:
+
+----------------------------------------------------------------------
+We have so far been unable to decide on how the class structure for
+i/o streams should look.
+
+Here are some things that we should be able to do with i/o in EuLisp:
+
+(0) Have streams with different attributes - streams that can do
+    input, streams that involve a character representation, streams
+    that allow random access.
+
+(1) Have a stream that uses some user-defined character i/o mechanism,
+    that automatically allows the use of read and print etc.
+
+(2) Have a stream that doesn't have an underlying character representation,
+    for example a queue of lisp objects.
+
+(3) Intercept all i/o to an existing stream at object or character level
+    so as to modify it or record statistics about it.
+
+(4) Change the way objects are printed, and define ways to print and
+    read new classes, and have this work for all character streams.
+
+(n) Do the above things in a way that makes natural use of
+    the class system.
+
+(n+1) Do the above things reasonably efficiently, or at least make the
+      usual case efficient.
+
+So far, we haven't even solved the problem of combining 0, n and n+1.
+----------------------------------------------------------------------
+
+Meeting report
+--------------
+
+This is a bit tricky, since all I have is what I wrote on the back
+of a single piece of paper.  So this will be a bit note-like.
+
+Text inside [] was added for this message.  Text inside () is
+something I'm interpreting as a parenthetical remark in my notes.
+If some of this doesn't make much sense, remember that I'm trying
+not to interpret my notes too much, lest I get it wrong.  So
+some more interpretation may still have to be supplied.
+
+  [The system we considered is an extension of Harley's suggestion
+  that there be slots that contain instances of attribute classes.
+  The main differences are that it handles Dave's concerns about
+  encoding and that attribute objects sometimes contain relevant
+  data.
+
+  One attribute specifies the combination of source (or destination)
+  and the "transaction unit" that is represented directly in the
+  source or destination.  For instance, we might have a file of chars,
+  a file of floats (in some "direct" representation), or a string of
+  chars.  So this is the "kind of io" we'll be doing, and hence we
+  have an abstract class <io> with subclasses such as <char-file-io>.
+  An instance of an <io> attribute class (ie of a subclass of <io>)
+  would contain the actual source (ie the file, string, or whatever).
+
+  Another attribute specifies the encoding, for instance how objects
+  of a variety of types are represented as sequences of chars (which
+  is what print does).  The abstract class here is <coding>, which
+  has subclasses such as <standard-coding> (which is what print uses)
+  and <identity-coding> (in which objects are "encoded" as themselves).
+
+  A third attribute says whether the stream is random access.  The
+  abstract class is (maybe) <seek>.
+
+  N.B. In the notes below I'll sometimes talk only about input or
+  only about output.  This is just to make things simpler.  Both
+  directions must be considered.  Sometimes I switch from input to
+  output or vice versa from one sentence to the next.  Sorry.]
+
+  Two function model: The encoder calls the output function, perhaps
+  more than once (eg to output all the chars in a printed representation).
+
+  We need to specify 3 things and do it by specifying 2 functions.
+  We specify the functions by:
+    1. an input class (specifies unit and source);
+    2. an encoding class.
+
+  A source might be a file, string, etc.
+
+    (input) source       | done by the input function
+    (input) unit type    V   |
+    (input) result type      V done by the encoder
+
+  [The "two functions" would presumably be methods.  That is, we
+  end up with a method for producing instances of the unit type
+  from the source and a method for constructing the result objects
+  from a sequence of unit objects.  Something like that.]
+
+  Some of the mode fanciful encodings: rot-13, encryption.
+
+  We may want more than one way to output chars to a file, so [perhaps]
+  the output function shouldn't just be specialized on unit x source.
+  Instead we [could] have classes such as
+    <std-char-input>       (ie from Unix fd)
+    <std-counting-input>   (same but counts chars)
+    <string-char-input>    (reads from a string)
+
+  The string or fd are in a slot of the (instance of the) input class.
+
+  Stream slots:
+   input          -- source-unit combination
+   output         -- source-unit combination
+   input-coding                                   [was called input-encoding]
+   output-coding                                  [was called output-encoding]
+   positionablep  -- covers both input and output [was called seek]
+
+  The positionablep (seek?) slot will contain nil or an instance
+  of <positionable> (<seekable>?).
+
+  (It's possible to have several seek types.  E.g., ordinary seek,
+  fast-forward, arbitrary seek vs seek only to places for which
+  the position was requested earlier.  Perhaps this depends on the
+  io class instead?)
+
+  Sample attribute hierarchy:
+
+    <stream-property>
+       <io>
+          <char-io>
+             <char-string-io>
+             <char-file-io>
+       <coding>
+          <standard-coding>
+          <identity-coding>
+          <bills-object<->char-coding>
+       <seek>
+
+  (Pretty-print, princ, etc: operation x coding determines the
+  characters produced via pprint-using-coding (or pp could just
+  call output).)
+
+  (Each stream has two slots for each property: one for input,
+  another for output.  We could unify the stream hierarchy
+  with the io or coding hierarchy (& have the others as slots)
+  but we might in the future want a different kind of stream
+  that works completely differently.)
+
+-- jeff
+
+* topics: static errors
+  :From: Harley Davis
+
+   Date: Thu, 18 Nov 93 00:51:02 GMT
+   :From: Jeff Dalton
+
+   > This debate is interesting to me because we have actually done
+   > something with all of this: In Ilog Talk, the compiler signals a large
+   > number of condition types.  Our whole development environment is based
+   > around defining handlers for these conditions.  Using this system, we
+   > have been able to implement three different development environments
+   > so far without touching the compiler.
+
+   I was wondering whether the static / dynamic distinction would
+   be good for anything in practice.  If you've found that it is useful,
+   that's good enough for me, so long as you're sure the distinction we
+   have is the useful one (or a useful one).
+
+What I find useful principally is the idea that conditions can be
+signaled during program preparation.  I am not completely convinced
+that the current distinction, or any of the proposed distinctions, is
+more useful than ad hoc, implementation-based methods of signaling
+such conditions.  However, I am willing to discuss the issue to see if
+anything which seems generally useful and specifiable comes out.
+
+   Another approach would be for the original static signaller
+   to signal a consition of type <static-condition> that contained
+   some other condition object -- this rather than having a slot
+   in all condition objects aying whether they were static or
+   not, and rather than having a static/dynamic branch in the
+   condition class hierarchy.
+
+This could work too.
+
+-- Harley
+
+* topics
+  :From: Dave De Roure
+
+> >
+> > I agree with the proposal.  If I put a method on a generic function
+> > written by someone else (eg generic-write), I might not want to have
+> > to restrict one of the arguments (eg the stream argument) because that
+> > would involve finding out the generic function definition and becoming
+> > dependent on it.
+>
+> You mean you're going to write methods for a gf without knowing
+> the protocol or the gf's signature?  How do you know what classes
+> yuo _can_ specialize to?  You're fine in only the "don't care"
+> case.  But I, reading your code, am not fine even then, because
+> I can't tell by local inspection what the rules for this method
+> are.
+
+Yes, my point is that it is useful to be able to say `I don't care' and
+to effect this we need the method argument restriction to default to the
+class in the gf, as proposed.  If it defaults to <object>, which is one
+of the options that has been discussed in the past, then I am obliged
+to care in case this violates the gf.
+
+generic-write may be a bad example (it's just the one that came up in
+an exercise), but it does capture the idea that sometimes we write methods
+which someone else is going to call, and they may have arguments that
+are opaque to us (we merely have to propagate them to other calls).
+So it's an example of the kind of situation where I want to `not care'.
+
+(Someone might argue that I *should* always care - the signature
+of the gf is part of the agreed protocol.  In which case, all
+args specialized in the gf must *always* be specialized in methods.
+But we already have a more relaxed situation than this, otherwise
+the question wouldn't have arisen in the first place.)
+
+> > A related issue, which also arose in an exercise, is the need
+> > to put methods on binary+, binary/ etc for user-defined classes
+> > (ie structures) which are not subclasses of the class mentioned in
+> > the generic function definition.  In other words, if binary+ is
+> > restricted to <number> and its subclasses, how can I add matrices,
+> > polynomials etc?
+> >
+> > (This is a restriction vs specialization issue and I'm sure the debate
+> > will run and run... :-)
+>
+> If the debate will run and run, we should do something conservative.
+> Like requiring that parameters be specialized to a subclass of the
+> class given for that parameter in the gf definition.
+
+I agree, but there's atill a decision to be made.  If I want to be able
+to introduce matrices etc, I must make them a subclass of <number>;
+if that isn't acceptable, binary+ et al should not be restricted to
+<number> in the definition.
+
+> > > REMOVE: DEFMACRO
+> > >
+> > > It is observed that macros are functions which are called at syntax
+> > > expansion time.  Therefore, there is no difference between defmacro
+> > > and defun and the former should be dropped and the nomenclature
+> > > "syntax function" be used instead.
+> >
+> > This appeals because anything which simplifies the language is a good
+> > thing.
+
+> If defmacro is redundant (which is about the worst that
+> can reasonably be said of it), that's good.  A degree of redundancy
+> makes languages easier to understad.
+
+Umm, yes, I think you've just elaborated on my point that there's a case
+for including it for expressiveness.
+
+> Harley -- I am relying on you to resist this during the meeting.
+
+I won't be there on Friday to slow you down :-)
+
+Regards,
+
+-- Dave
+
+* topics
+  :From: Harley Davis
+
+In article Jeff Dalton writes:
+
+   > A related issue, which also arose in an exercise, is the need
+   > to put methods on binary+, binary/ etc for user-defined classes
+   > (ie structures) which are not subclasses of the class mentioned in
+   > the generic function definition.  In other words, if binary+ is
+   > restricted to <number> and its subclasses, how can I add matrices,
+   > polynomials etc?
+   >
+   > (This is a restriction vs specialization issue and I'm sure the debate
+   > will run and run... :-)
+
+   If the debate will run and run, we should do something conservative.
+   Like requiring that parameters be specialized to a subclass of the
+   class given for that parameter in the gf definition.
+
+I don't think this one is very hard.  I see two reasonable possibilites:
+
+1. Make <number> subclassable by defstruct.  Then your matrix classes,
+   etc, must be subclasses of <number>.
+
+2. If you think it is a violation of all mathematical intuition to
+   have a matrix or a polynomial be a kind of number, define a new
+   abstract superclass of <number> which becomes the domain for
+   binary+ etc and then let this new class be subclassed by defstruct.
+   (Then we can have endless but fun debate about the name of this
+   class.  Just for starters, let me propose <math-object>, which
+   leaves all doors open.)
+
+   > > REMOVE: DEFMACRO
+   > >
+   > > It is observed that macros are functions which are called at syntax
+   > > expansion time.  Therefore, there is no difference between defmacro
+   > > and defun and the former should be dropped and the nomenclature
+   > > "syntax function" be used instead.
+   >
+   > This appeals because anything which simplifies the language is a good
+   > thing.
+
+   I don't think this simplifies the language.  I think it makes it
+   bizarre and difficult to understand.  It removes useful information,
+   and it seems to be based on a confusion.  The part after the
+   "therefore" doesn't follow from the part before.  (See earlier
+   messages.)
+
+   Defmacro extablishes a fn as a macro expander; defun doesn't.
+   Defemacro tells me that the name being defined will be a macro name,
+   etc; defun doesn't.  Defun does something with a function.  But so do
+   other forms.  The fact that something is a function doesn't mean that
+   it sould always be dealt with by defun.  The "reasoning" behind this
+   proposal makes almost no sense to me.  It looks like a case where
+   people are letting an abstract consideration make the language worse
+   in practice.  If defmacro is redundant (which is about the worst that
+   can reasonably be said of it), that's good.  A degree of redundancy
+   makes languages easier to understad.
+
+   Harley -- I am relying on you to resist this during the meeting.
+
+The more I think about this off-the-wall idea, the more convinced I am
+that it is bad and has no redeeming features whatsoever.  It will
+never enter into EuLisp as long as *I* have anything to say about it!
+What fool thought this up?  All of its supporters should be (and will
+be) taken out and shot.  I'm bringing a pistol to the meeting.
+
+(How's that for resistance?  And I haven't even begun to fight! :^)
+
+-- Harley
+
+* topics: static errors
+  :From: Ingo Mohr
+
+Reading through the whole bunch of mails, I came to the conclusion that the
+distinction between static and dynamic errors is not needed. For simple
+programs (not concerning tricky macros) we should distinct between
+
+1. program errors
+detection during preparation or during execution
+a) errors which must be detected and signalled
+   a conforming program can rely on the facts
+   * that the error is signalled as defined if it is detected during execution
+   * that the error is signalled either during preparation (in an undefined way)
+     or during execution
+b) errors which might or might not be detected
+
+2. environmental errors
+
+This is in fact a mix between the former dynamic and static errors.
+
+Another question is, how to handle errors during macro expansion. But the
+way how to signal errors during syntax expansion can be defined later. Now
+I think that it is enough to say that this way is undefined for now. So
+there is some time for discussion about this until EuLisp 1.n :-)
+
+with best regards for the meeting tomorrow (I won't be there, but Horst
+Friedrich is coming)
+
+Ingo
+
+* Definition 0.96
+  :From: Jeff Dalton
+
+I just had a superficial look at 0.96, in order to answer e-mail
+from Richard O'Keefe, and it looked pretty good.  I remember
+disliking the new 2-col format at the Bath meeting, but that may
+be because it was printed 2 pages per page in flipover order.
+
+0.99 (which I just looked at a few pages of) looks the same at
+this level.
+
+Anyway, I still find it difficult to see quickly what the
+arguments to a function are.  I find "one line" "signatures"
+helpful, but maybe it's to hard to add them or fit them on
+the page.
+
+The defgeneric method syntax that I didn't like is still there too.
+Is there no hope of changing this?
+
+Finally, Richard tells me that there was a question of the order
+of segs to a setter.  Putting the new-value argument 1st or 2nd
+makes a fair amount of sense, odd thought it is.  In any case,
+I think people would be less sensitive to this issue if we had
+a syntax for generalized assignment like T's set of CL's setf.
+That is, we'd have soemthing like
+
+  (SET (f obj a*) v) == ((SETTER f) obj ... a* and v in some order ...)
+
+This has been talked about year after year, but I don't know if
+it ever got into the def'n.
+
+-- jeff
+
+* Talk Deliverance, part 1 (of 2)
+  :From: Jeff Dalton
+
+(1) I think "Talk Delivery" might read better.  "Deliverance" makes it
+almost sound as if the reader might be delivered _from_ Talk.
+
+(2) I'm glad to see a paper on this topic, but I think this paper
+suffers from the usual problem of EuLisp papers about modules, namely
+that it seems to be trying to make a radical break with some other way
+of doing things, while showing this other way to be fundamentally
+incorrect, when things are actually much less extreme.
+
+I think the attempt to identify radical differences makes it harder
+to see the real advantages of the Talk approach.  Since (in my view),
+there aren't such radical differences, you end up with a presentation
+that overstates its case.  Then, since you say a lot of things that seem
+to me incorrect, I keep wondering whether you mistaken about what
+you've gained.  You also end up with a presentation that isn't very
+clear.
+
+To me, it looks like this paper might be fundamentally mistaken on
+several points.  But I can't really tell.  Perhaps it's fundamentally
+ok, but this is concealed by the presentation.  For it's written in
+what we might call "deniable form".  That is, it suggests certain
+impressions to the reader without coming right out and saying that,
+for instance, Lisp _is_ big and slow, or that Lisp implementors have
+failed to remedy this, or that their best efforts are tree-shaking
+(rather than, say, making Lisp linkable with C), or that the negative
+preconception is correct.  When a paper does come right out and say
+such things, its possible to check whether it's correct.  But this
+way it's hard to see what the real issues are.
+
+So here's one possible clear text:
+
+  In industry, Lisp has a reputation for being big and slow and
+  inappropriate for product delivery.  This is because it is big
+  and slow and inappropriate for product delivery.  The best efforts
+  of (other) Lisp implementors (to date) -- type declarations, tree
+  shaking, and autoloading -- have failed to produce sufficiently
+  fast and small deliverables.  And no wonder!  The basic Lisp
+  philosophy makes it too difficult, because <insert clear explanation
+  here>.
+
+On the other hand, maybe what you're actually getting at is this:
+
+  In industry, Lisp has a reputation for being big and slow and
+  inappropriate for product delivery.  This view is understandable,
+  because many Lisp implementations are big and slow and inappropriate
+  for product delivery.  The best efforts of Lisp implementors failed
+  to break through this preconception -- even when they've produced
+  small, fast deliverables, made Lisp linkable with C, packaged
+  Lisp as a shared library, etc.  And no wonder!  The basic Lisp
+  philosophy makes it seem that existing impressions are correct.
+  To break through, we have to present something as a radical break
+  with Lisp philosophy (even if it isn't).
+
+Now, I suspect (and hope) that the first "clear text" is more nearly
+correct as an account of what you're saying, though I think it's wrong
+about certain facts.
+
+But what is this Lisp philosophy?  I can't tell from the Moon quote.
+Perhaps the quote is clear in context, but your paper ought to be
+sufficient for telling me what you're talking about, at least for the
+first few paragraphs.  Moreover, you might be wrong about what Moon
+meant, and he might be wrong about Lisp philosophy.
+
+I don't think there's anything about Lisp philosophy that requires
+that Lisp be large, slow, and inappropriate for product delivery.
+Nor do I think that "simpler is better" is the opposite of "the
+traditional Lisp philosophy", which here we're evidently meant to
+suppose is "more complex is better", or something like that.
+
+-- jd
+
+* eval-when
+  :From: Jeff Dalton
+
+This is sort of in place of "Talk Deliverance, part 2", which I haven't
+written yet.
+
+In Common Lisp:
+
+----------------------------------------------------------------------
+;;; N.B. No eval-when is needed
+
+(defmacro deffoo ()
+  `(defmacro foo () ''foo-result))
+
+(deffoo)
+
+(defun f () (foo))
+----------------------------------------------------------------------
+
+1> (compile-file "test.lsp")
+#"test.o"
+
+5> (load *)
+
+6> (f)
+foo-result
+
+Note that I don't find myself in the "unenviable situation of relying
+on module-loading during parsing, and therefore back in the world
+where constructs such as EVAL-WHEN are necessary."  Calling a macro in
+the same module in which it's defined doesn't require loading anything
+(that isn't needed for computing macro expansions) and doesn't require
+EVAL-WHEN.  Since you have to load things just to compute macro
+expansions anyway, what's the problem?  (Sure, you might have to load
+more things than if all macro-expanders were already compiled, but I
+don't think that makes much difference.  It's not like things become
+orders of magnitude more difficult because of this.)
+
+Nor can you say you don't want anything to be executing during
+"parsing" (confusing compile and run time, or somethign like that),
+because the macro expanders will have to execute.
+
+So perhaps what it comes down to is you don't want to be able to
+define anything -- but that's not a reason for not being able to
+define anything.
+
+BTW, if you want to keep programmers out of situations that require
+EVAL-WHEN, simply don't have EVAL-WHEN in the language.  Then all
+the cases that don't require EVAL-WHEN will work, and the others
+will be excluded in a natural way, the bizarre required mechanism
+not being available.
+
+In any case, I don't use EVAL-WHEN to ensure that a system has the
+right compilation environment; I use DEFSYSTEM.  In Franz, I used
+something like
+
+  (environment
+    ((compile) (<file>+))
+    ((load) (<file>+)))
+
+Essentially, this is a description of what modules are required
+to compile or load/run a module.  ENVIRONMENT can be (and may have
+been) done with EVAL-WHEN, but that's an implementation detail.
+EVAL-WHEN could be deleted and this kept.
+
+EVAL-WHEN is/was used for cases like this: a definition needs to
+make certain information available at compile-time and certain
+information available when the compiled definition is loaded.
+There is an env issue here, when you're compiling things that
+are used by the compiler, because you don't want to actually
+install the new definitions.  But there are vaious ways to manage
+that.  I don't think it requires EVAL-WHEN.  (How does it work
+in Talk?)
+
+-- jd
+
+* eval-when
+  :From: Harley Davis
+
+   This is sort of in place of "Talk Deliverance, part 2", which I haven't
+   written yet.
+
+   In Common Lisp:
+
+   ----------------------------------------------------------------------
+   ;;; N.B. No eval-when is needed
+
+   (defmacro deffoo ()
+     `(defmacro foo () ''foo-result))
+
+   (deffoo)
+
+   (defun f () (foo))
+   ----------------------------------------------------------------------
+
+   1> (compile-file "test.lsp")
+   #"test.o"
+
+   5> (load *)
+
+   6> (f)
+   foo-result
+
+   Note that I don't find myself in the "unenviable situation of relying
+   on module-loading during parsing, and therefore back in the world
+   where constructs such as EVAL-WHEN are necessary."
+
+Yes you are.  How does this work unless you evaluate each form before
+you compile it?  In this simple case, you don't need eval-when, but
+slightly more complicated cases do need it.
+
+Look, we're not saying that CommonLisp doesn't work.  That would be
+absurd.  However, it does make it much more difficult to distinguish
+between compile-time and runtime program requirements, thus reducing
+final application size.  In the Talk module system, that distinction
+is built into the language; in CommonLisp, it is difficult to see any
+principled way to do it.  Thus, heuristic solutions such as tree
+shakers.
+
+As far as eval-when as a construct, Le-Lisp has had it for about 7
+years.  Practically none of our customers understands how it works or
+uses it at all.  Many of the Le-Lisp programmers at Ilog don't
+understand it very well.  All they know is that sometimes, for
+mysterious reasons, you need to stick in an eval-when to get things to
+compile.  In fact, many of our customers don't compile at all.
+(Fortunately, the Le-Lisp interpreter is extremely fast.)  The fact
+that Le-Lisp has a kind of module system (more similar to defsystem
+than Talk or EuLisp) doesn't help them much at all.
+
+On the other hand, our Talk customers have appreciated above all the
+ease of going from interpreted modules to compiled modules to small
+libraries and executables.  This has been much more important to them
+than specific language features like closures which also didn't exist
+in Le-Lisp, because they feel secure that once they start writing
+code, that code will be deliverable and they won't waste time later on
+making it deliverable.
+
+   Calling a macro in
+   the same module in which it's defined doesn't require loading anything
+   (that isn't needed for computing macro expansions) and doesn't require
+   EVAL-WHEN.
+
+How do you know what's needed for computing macro expansions without
+loading everything or using eval-when?  This is the fundamental problem.
+
+   Since you have to load things just to compute macro
+   expansions anyway, what's the problem?  (Sure, you might have to load
+   more things than if all macro-expanders were already compiled, but I
+   don't think that makes much difference.  It's not like things become
+   orders of magnitude more difficult because of this.)
+
+As I said above, it's a question of determining what you need in the
+runtime of your application.  We can peel off many layers of fat by
+not having any macros or their complex expansion functions (eg
+defclass, loop, etc.) in the final application.
+
+   Nor can you say you don't want anything to be executing during
+   "parsing" (confusing compile and run time, or somethign like that),
+   because the macro expanders will have to execute.
+
+No, of course the macro expanders still have to execute.  What we
+don't want is to evaluate a module when compiling it.  It's because
+CommonLisp does that that it needs eval-when.
+
+Tell me Jeff --- why do you think eval-when exists?
+
+   So perhaps what it comes down to is you don't want to be able to
+   define anything -- but that's not a reason for not being able to
+   define anything.
+
+I don't understant where this comes from.  The only thing we're doing
+is disallowing definition by a module during its compilation.  Nothing
+in a module is executed when it's compiled, and everything is executed
+when it's loaded.  That's all.
+
+   In any case, I don't use EVAL-WHEN to ensure that a system has the
+   right compilation environment; I use DEFSYSTEM.  In Franz, I used
+   something like
+
+     (environment
+       ((compile) (<file>+))
+       ((load) (<file>+)))
+
+Our module system fulfills all of the needs met by defsystem, but in a
+way which is formalized and completely integrated into the language.
+
+   Essentially, this is a description of what modules are required
+   to compile or load/run a module.  ENVIRONMENT can be (and may have
+   been) done with EVAL-WHEN, but that's an implementation detail.
+   EVAL-WHEN could be deleted and this kept.
+
+But that's not what happened.  Instead, eval-when was kept and
+defsystem remains outside the language.
+
+   EVAL-WHEN is/was used for cases like this: a definition needs to
+   make certain information available at compile-time and certain
+   information available when the compiled definition is loaded.
+   There is an env issue here, when you're compiling things that
+   are used by the compiler, because you don't want to actually
+   install the new definitions.  But there are vaious ways to manage
+   that.  I don't think it requires EVAL-WHEN.  (How does it work
+   in Talk?)
+
+As the paper states (apparently not clearly enough) each module has a
+list of modules needed for its compilation and another list needed for
+its execution.  Before compiling a module, its compilation environment
+is loaded.  Before loading a module, its execution environment is
+loaded.  This is just like your defsystem example, except that the
+information is declarative and made part of the language rather than
+being in one of a number of mutually incompatible but always
+unspecified libraries that the programmer might or might not have.  It
+also means there are no holes or exceptions, which simplifies (or even
+makes possible) writing higher-level tools such as development
+environments which can automate the entire process while still
+maintaining its benefits.
+
+That's why we want a module system in the language, right?
+
+-- Harley
+
+* proposal list
+  :From: Russell Bradford
+Date: Tue, 23 Nov 93 17:39:37 GMT
+
+ >It may be useful to read this in
+ >conjunction with Russell's meeting report of the discussion that
+ >surrounded a particular issue.
+Russell -> Russell and David
+
+ >1. STATIC ERRORS MIGHT BE SIGNALLED
+ >To rename static error as violation.  To note that a preparation
+ >program must issue a diagnostic if it detects a violation.  To note
+ >that a preparation program must issue a diagnostic if it detects a
+ >dynamic error.  The result of preparation must signal a dynamic error
+ >detected by the preparation program.
+The last sentence is a bit weird: if a PPU produces a runnable program, then
+that program must signal any dynamic errors.
+
+ >27. KEYWORDS
+ >To expand the minimal character set (table 2) to be ISO Latin 1.  To
+ >add the (concrete) class <keyword>, the abstract class <id> and make
+ ><symbol> a subclass of <id>.
+<id> was renamed <name>, I believe.
+
+ >29. CLASS HIERARCHY REVISION
+ >To replace figure 3 by the (level 0) hierarchy given in RJB's message
+ >and to add a new figure in Annex B showing the full level 0 and level
+ >1 hierarchy.  To note that only abstract classes are subclassable.
+Strictly this is true: but note also that <built-in-class> is abstract
+and not subclassable (maybe we should check this point with Harry/Harley).
+
+ >....  To remove <structure> and
+ ><structure-class>.  To replace defstruct at level-0 by defclass.
+There are also references to <structure-class> throughout the text.
+Whoops, I've just noticed that <structure-class> is not in the general
+index. Nor is <class> or the other metaclasses.
+
+ >30. POINTS RAISED BY ULRICH KRIEGEL
+ >arithmetic coercions: to add the generic function lift, to define
+ >methods on it to describe coercion consistent with "floating point"
+ >contagion, execpt in the case of comparison operators and to describe
+               ^^
+ >its interaction with the n-ary arithmetic operators.  (Note: lift is
+ >not to be called by the binary generic operators).
+Hmmm...unsure of this parenthesised note.  How to macroexpand body of
+(defun foo (a b) (+ a b)) ?
+
+ >To note that
+ >coercion of a <vpi> to a <double-float> may overflow and that case "is
+ >an error".
+Also the addition of <vpi>, <variable-precision-integer> and appropriate
+methods everywhere...
+
+ >32. COLLECTION AND SEQUENCE FUNCTIONS
+ >...  To add the
+ >class-specific operators: vref, sref, lref, htref, corresponding
+I thought the names were vector-ref et al?
+
+ >34. STREAMS
+Harley to send proposal on use of POSIX style fopen, fclose, etc., which
+use buffering as in getc.
+
+ >35. FILENAMES
+ >To add the (concrete) class <filename> (where??) with the external
+ >syntax #F"...".  To add definitions of the functions: basename, ext,
+ >dirname, device and merge-filenames.
+ext -> extension. Plus function string->filename (converter method).  This, too
+was a proposal to be supplied by Harley (including POSIX rename, unlink, tmpdir
+...).
+
+--Russell
+
+* Eulisp external data format
+  :From: Erik Sandewall
+
+Hello,
+
+I have recently run across the work on Eulisp and became very
+interested in it, and now I have some questions. First by way of
+introduction, I am regularly at Linkoeping University in Sweden
+but right now I'm spending a sabbatical at LAAS in Toulouse.
+
+Although the Eulisp proposal contains many good things, there is
+one thing that I'm missing and where I am thinking of maybe
+putting in some work. This concerns the external, i.e. printed
+representation of data structures as character sequences. It
+seems to me that one of the most important design decisions of
+classical Lisp was to define the S-expressions as I/O format,
+so that arbitrary data structures could be printed and read.
+This basic capability is of course retained in any Lisp, but I
+think that now one could do considerably more in the direction
+of defining higher-level data structures not only internally but
+also externally.
+
+A first step in that direction is to define I/O representations
+for members of classes in EuLisp level 1. Maybe it has alreqdy been
+done. Additional representations could also be considered.
+
+Therefore I wanted to ask about the current status of I/O for
+EuLisp. In particular:
+
+-  The 0.99 version of the language definition makes passing
+   reference to a mechanism for defining the output methods for
+   additional types of objects, and also (if I understand it
+   correctly) indicates some way of telling a generic READ
+   function about the syntax extensions that are obtained in
+   that fashion. Are there any more specific accounts of that?
+
+-  Suppose I define my own module which uses its own, special
+   purpose data structures, for example a kind of data base
+   system. It is straight forward enough to let that module
+   have its own I/O. However in writing programs that use that
+   module I may want to refer to objects in it, which means
+   that whatever comes after a ' (quote) in the program should
+   be parsed relative to the conventions in the lower module.
+   Has a handle on READ been defined for this purpose?
+
+-  Any thoughts or agreements about the usage of additional
+   seven bit characters that are not being used in the 0.99
+   definition, such as [] and {} ?
+
+-  Any thoughts or agreements about the extended ISO character
+   set(s) e.g. for latin characters with diacritics ?
+
+-  I understand that <...> has been reserved for use with
+   class names. Any agreement about what to do with an expression
+   like, say,
+      <man lastname: jones age: 45>
+   which might be a reasonable way of representing an object in
+   the class <man> ?
+
+Finally, a meta-question: Are there any people who have already
+signalled an interest in this type of questions?
+
+Sincerely
+
+Erik Sandewall
+
+* minutes of the hours
+  :From: Russell Bradford
+
+           Notes of the EuLisp meeting 93/11/19, the Emerald Meeting
+
+                    Friday 19th, notes by Russell Bradford
+                     Saturday 20th, notes by David DeRoure
+
+These are outlines of the discussions at the meeting: Julian will email a
+summary of the proposals shortly.
+
+Present were
+Julian Padget, Harley Davis, Nitsan Seniak, Horst Friedrich, Klaus Daessler,
+Richard Tobin, Willem van der Poel, Christian Queinnec, Neil Berrington, John
+Fitch, Russell Bradford, Juergen Kopp, Harry Bretthauer, Toni Moreno, Ulises
+Cortes, and David DeRoure.
+
+------------------------------------------------------------------------------
+Friday 19th.
+
+We proceeded through the email list of points, with some held over for the
+arrival of DDER on Saturday.
+
+"static errors might be signalled"
+JAP: two proposals (1) extend definition of 'dynamic signal' (2) extend
+definition of 'static signal', HD added (3) remove distinction. KD
+described the way Prolog distinguishes static violations and run-time static
+errors, and this general approach was adopted. Thus 'static error' becomes
+'violation' (RT noted that violations should produce diagnostics in the
+PPU == program preparation unit). Other errors might be detected by the PPU,
+but if a runnable program is produced, this program must signal an error.
+
+"macros -> syntax functions, remove defmacro"
+HD noted that macros are equivalent to functions only in the presence of
+symbol-function, otherwise we have two namespaces.  General disquiet resolved
+to ignore this proposal.
+
+"add export-syntax"
+HD proposed the definition be more clear that macros are bound in a lexical
+environment, and consequently export-syntax is useful.  Also that macro names
+are not bound to anything in the program (macros are only meaningful to the
+PPU). Changes needed in section 13.2.2.3.  We shall explicitly allow macros to
+have the same names as functions (due to modules), and we make explicit that
+apparent ambiguities are resolved in favour of the macro by the PPU (after all,
+anything else is meaningless).  Sections 9.7, 9.5.
+
+Export-syntax will make module processing simpler; it will be a violation
+to export-syntax a function (and vice versa for export and macros).
+
+As a side point, HD remarked that defconstant is not useful in practice, it
+does not allow in general any significant optimisations.  Ilog Talk
+additionally has defliteral (cf C's #define) that is expanded in non-functional
+positions.  HD to send proposal.
+
+"level-0 telos conditions..." subsumed by static errors above.
+
+"add <wrong-number-of-args>"
+OK.  This is an error (not a violation).
+
+"case in format directives"
+HD proposed the POSIX view of function names fprintf, sprintf and % for
+formats. Plus the additional %a corresponding to print.  Also %s will convert
+its argument to a string as in write.  There is a need to list the % operations
+with relevant converter methods.  HD also proposed the inclusion of eprintf,
+a print function guaranteed never to signal an error (as far as is possible),
+to confound infinite loops that arise when there is an error in a print method.
+JPFF noted that scanf should be made compatible, while HD argued for its
+removal.  HD will send a proposal.
+
+"add read function"
+OK.
+
+"class-specific input functions"
+These were proposed as an aid to type inference, which RT felt was insufficient
+reason (there are too many other similar changes we could make).  HD
+described how something like (convert (read) <integer>) could be used for
+extreme cases.  It was decided to defer this pending better understanding of
+the consequences, and after discussions of streams.
+
+"invariant gf application behaviour"
+This was deemed a good principle ('definition before use'), but raised the
+difficulties consequent of undefined module initialisation order.  Invariant
+behaviour was seen as a partial sealing of the class hierarchy (NB sealing
+upwards from a class), and there was discomfort from some that this sealing
+was a side effect, and not explicit.  This led to the general problem of
+development vs run-time environments, and it was revealed by HD that there is
+no way to check for a correct program if certain errors (e.g., add-method to
+an existing method) are ignored in a development system. Restrictions that
+currently exist to aid the compiler should be "an error", not "signal an
+error". HB will find such cases (in Telos).  RT was of the opinion that
+there are too many small tweaks for efficiency, and that more wide-ranging
+techniques might be considered (e.g., declarations, sealing...)
+
+Back to invariant behaviour.  RT inquired as to the behaviour of a method
+that adds a new method super to itself, and then calls call-next-method....
+
+Lunch was held at a variety of pizzeria.
+
+... CQ suggested a new subclass of immutable gfs as a solution.  This
+was deferred to be discussed later.
+
+"method default specialisers"
+This was felt to be unhelpful, and difficult to implement in the case of
+unattached method-lambdas.  Some mooted that all arguments specialised in the
+defgeneric must always be specialised in the method, but there was no
+enthusiasm for this.  It was decided that the default will be <object>, and an
+error will be signalled if a method attempts to widen a gf's domain. In
+summary, no change.
+
+"rest args in gfs"
+OK.  A short dicussion of the name of the new initarg 'rest' vs 'restp'.
+The former for future use in a generalised type scheme.
+
+"remove method-function-lambda et al"
+HD felt that these functions were necessary to avoid an extra function call
+in the execution of gfs (e.g., the MOP has compute-primitive-reader return
+a function that must be wrapped by a method-lambda). On the other hand HB
+wanted method-lambdas to be indecomposable, and described congruency
+problems with lambda lists of method-lambdas and their functions.  These could
+be solved by the introduction of functions method-lambda-list and
+function-lambda-list. These were shelved for future consideration. It was noted
+that (make <method>) would make a method that was 1 funcall more expensive to
+call than one created by method-lambda, unless a method was initialised from
+a method-lambda rather than a function.  Discussion would continue offline.
+
+"additional scan directives" held over.
+
+"deep-copy and shallow-copy"
+NS wanted the definition only to require equal of an object and its copy.  This
+was considered to be another case of ad-hocness around the edges and dropped.
+It is related to "specification of result types", below. Summary---leave as
+is.
+
+"specification of result types"
+OK.
+
+"abstract classes"
+JK described how having abstractness defined by a metaclass was inappropriate.
+The proposal to have abstractness encoded by a slot in the class was
+accepted, with the reader renamed from abstractp to abstract-class-p
+[editor's note: wouldn't class-abstract-p be more consistent?]
+
+"add required initargs"
+HD opined that 'initarg' as a word was not understood by many, and it was
+agreed to change the term to 'initkey'.  After discussion of where to put
+things, it was decided to introduce a new slot option 'requiredp' to indicate
+that the initkey for this slot is required.  However, class initargs would
+remain unchanged, it would be the responsibility of the programmer to
+check for the required class initkeys, as this would require minimal extra work
+(since the programmer has already to look for the value of the initkey). HB
+noted that this would prevent an easy 'class-required-initargs'.
+
+Further renamings were agreed, namely 'initkey' to 'keyword', 'initform' to
+'default' and the dependent compound names.
+
+"add openp for streams"
+OK.
+
+"D or E for exponent in numbers"
+It was decided to use E, as it was felt that support for the input of
+single-precision floats wasn't needed, quads are more important.
+
+"module initialisation order"
+OK.
+
+"arg order of (setter element)"
+This was only relevant to objects referred to by keys, viz., using element.
+Thus this is left as is.
+
+"<collection> and <sequence>"
+This was felt to be generally OK, but would have consequences, such as the
+clarification of sequence objects vs collection objects, and the allowing
+of defstruct to subclass any abstract class.  This was postponed until the
+discussion of the class hierarchy later.
+
+"thread-start, thread-value generic"
+OK.
+
+"add generic-signal"
+OK, but the last argument of signal (the optional thread) becomes the first
+argument of generic-signal, and the function is to be called
+signal-using-thread.
+
+"wait method on <lock>"
+It was felt that a timeout on a lock would be desirable, but then
+there might be breaking of abstraction with a zero timeout.  RJB suggested
+an optional timeout argument to the function lock.  More discussion tomorrow.
+
+"non-hygenic semantics for syntax functions"
+Extra documentation on the pitfalls of macros will be added.
+
+"status of and and or"
+This arose from the wish to pass 'and' as a function argument.  After the
+discussion of macros above, it is clear that this is an error, no such binding.
+Suggested names for functional and generic variants included: binary-and,
+binary-or, ||, &&, generic-and, generic-or, every, any, all, some, both,
+either, strict-or, strict-and.
+
+This ended the email list. Further points arose.
+
+"character naming conventions"
+For uniformity over characters and strings, replace extended character
+names by the names used in strings, e.g., #\newline -> #\\n
+
+"keywords"
+HD wanted the introduction of keywords as a class (aside: there are some
+missing characters in the table on p.9, namely colon).  A minimal
+change could be the convention of using :s in names (at the end) to indicate
+a keyword, but they would still need to be quoted.  In Ilog Talk there is a
+hierarchy <id>
+            <symbol>
+            <keyword>
+(the class <id> was later renamed <name>), with keywords acting like
+self-evaluating, non bindable symbols, denoted by a terminal colon.
+
+"with-handler"
+The example of with-handler in the document was revealed to be poor, as
+it used generic-lambda, which is expensive to set up, while handlers
+should be cheap to install.   Since with-handler is a special form, it
+could have a lazy computation of the handler function, but this is complicated.
+It was decided to fix the example.
+
+Dinner was held at the Commission Restaurant.  Conversation was lively,
+as was some of the seafood.
+
+------------------------------------------------------------------------------
+Saturday 20th
+
+Organisation of class hierarchy.
+
+Harley proposed that, as a general principle of organisation, concrete
+classes should not inherit from concrete classes.
+
+Implications on fig 3 p.13 - these are the classes:
+
+A = abstract,  C = concrete,  S = subclassable,  S1 = subclassable at L1
+
+        object A S
+                character C
+                condition A S
+                function A S
+                        continuation C
+                        simple-function C
+                        generic function A S1
+                                simple-generic-function C
+                collection A S
+                        sequence A S
+                                list A
+                                        cons C
+                                        null C
+                                character-sequence A S
+                                        string C
+                                vector C
+                        table A S
+                                hash-table C
+                lock C
+                number A S
+                        integer A S
+                                fixed-precision-integer C
+                                variable-precision-integer C
+                float A S
+                        double-float C
+                stream A S
+                        string-stream C
+                        char-file-stream C
+                name A S
+                        symbol C
+                        keyword C
+                thread A S
+                        simple-thread C
+
+Level 1
+                class A S
+                        built-in-class A
+                        simple-class C
+                        function-class C
+                slot A S                                (was slot description)
+                        local-slot C
+                function A S
+                        generic-function A S
+                                simple-generic-function C
+                method A S
+                        simple-method C
+
+
+After discussion, character was not an abstract class.  Then after
+further discussion it was.  Then after yet more discussion there
+was an implicit majority and it wasn't again.
+Stronger case for strings, hence character-sequence introduced as
+abstract class.  Should streams be a subclass of sequence/collection?
+Not yet.  Harley and Harry agreed that structure and structure-class are not
+needed.  Now we don't need defstruct (accessors by default are now functions,
+not generic; default metaclass is simple-class).  The question of what is
+inherited from abstract classes is too complicated to address now.
+
+We need to be able to subclass some abstract classes at level 0 - so we
+don't need structure class anymore.
+
+Should variable precision integers be added?  Not such a big deal
+these days (eg DEC or GNU libraries). Julian to decide.
+
+Harry: Definition permits implementor to introduce extra classes but no
+new relationships.
+
+Harley: p.70 tables: remove `unique' else requires perfect hash
+
+Harley: condition classes - we should distinguish between lexical
+syntax errors and syntax errors which arise given a correct s-expression.
+So `syntax' error condition from read should be called read-error.
+
+dder: text for function call and apply should accommodate continuations,
+i.e. `if the function returns...'
+
+
+AGENDA
+
+        wait method on locks
+        minor points raised by mail
+        streams
+        which generic functions on collections are specialised to sequence
+        n-ary comparators
+        publication schedule
+
+After an informal vote, we are all in favour of having another meeting.
+Date not fixed.
+
+Wait method - delegated to dder/jap/nb  dder observed lack of orthogonality
+of wait.  Richard observed that ways of waiting on collections of objects
+not in definition.
+
+Minor points:
+
+        p.59 number class metaclass to be removed (because this is level 0)
+        need a class hierarchy for level 1 with metaclasses
+        harry: in appendix B need a _complete_ hierarchy
+
+        p.52 cross reference to binary< etc
+
+        p.59 how are mixed number args handled?  All we have now
+        is floating point contagion (section A.13).
+
+                nitsan:  + etc call lift on args of binary+ etc
+                jpff: floating point contagion on comparison is
+                a bad strategy.  So lifting not to be used for
+                comparators.  Position agreed - further work needed
+                before version 1.
+
+        p.14 10.3.1.3 initform - reference to dynamic env of make
+        should apply to use of constructors as well as make.  Also,
+        defconstructor description should require compliance of
+        constructor and make. Agreed.
+
+        We have initialisation options on conditions, but we don't
+        name the accessors for these slots - are they the same as
+        the initargs?  If so there will be some name clashes (see
+        Ulrich's mail).  Agreed to merge slots - generic-function-condition
+        has two slots, i.e. generic function and message.  Format
+        of message needs to be specified in definition too.
+
+        BTW No longer need defcondition since we can use defclass.
+
+n-ary comparators
+
+        Harley wants n-ary >, >=, <=.  Agreed.
+        Do we want != to be n-ary?  No, this is not n-ary in Dylan.
+
+
+Apres pizza
+
+        Harley: no comment
+
+        accumulate      C
+        accumulate1     C
+        anyp            C
+        do              C
+        element         C
+        emptyp          C       what about fill value?  (see below)
+        fill            C       begin or end, or set of keys
+        map             C
+        member          C       returns rest of list (only) (historical)
+        size            C       number of keys, not size allocated
+                                (but what is size of circular list?)
+        delete          C       destructive
+        remove          C       constructive
+
+        concatenate     S       because of hash tables
+        reverse         S
+        first           S
+        second          S
+        forty-second    S
+        last            S
+        sort            S
+
+We should change the fill value default mechanism to a fill function: this
+is a lambda of two args, the condition and the key.
+Nitsan, Harley, Dave, Russell would like vector-ref and string-ref,
+and associated setters.  Also lengths, i.e. list-length, vector-length,
+string-length, table-size/length.  Names still need discussion.
+
+Some discussion of remove and delete (non-destructive and destructive).
+
+Publication schedule.
+
+We need a guillotine.  Publish and be damned.  Target is next Spring.
+Harley will manage negotiations with commission; he noted his
+concern at this expectation.  It was suggested that objectors to the
+publication can have their names removed from the contributors list.
+
+streams.
+
+History.  Edinburgh meeting.  Dave explained the stream protocol
+solution.  Harley explained the `posix' style solution.  This
+was well received.  Harley to send text to Julian.
+
+Pathnames. Renamed filenames.  VMS, symbolics etc compatibility no longer a
+priority. UNIX and Windows NT are the priorities instead.
+Syntax #F"..."
+
+        string->filename        "/hux/baz/foo.bar"
+        basename        "foo.bar"
+        extension       ".bar"
+        dirname         "/hux/baz"
+        device          "C:"
+        merge-filenames
+
+* Eulisp external data format
+  :From: jap
+
+The timing of your message is excellent, since this is something that
+has been concerning me much of late.
+
+The reason is that a lot of the work at Bath on top of EuLisp involves
+distributed processing and therefore the transfer of data structures
+from one memory to another.  One project is in data-parallel
+processing using a MasPar machine and the other is in distributed
+multiprocessing, using networked workstations and shared-memory
+multiprocessors.  Both of these projects developed ad-hoc solutions,
+but I feel the time is ripe to define a proper XDR (as I believe these
+things are called).
+
+At present we have only defined external representations for a small
+subset of the classes in EuLisp and postponed discussion of the rest
+(and of extensible methods) until we had got the rest of the language
+in shape.  That is to say we have not defined any I/O representations
+for the classes at Level 1...and it's not on anyone's agenda at the
+moment.
+
+For your particular questions it is easier for me to paste them in and
+follow them with an explanation.
+
+   -  The 0.99 version of the language definition makes passing
+      reference to a mechanism for defining the output methods for
+      additional types of objects, and also (if I understand it
+      correctly) indicates some way of telling a generic READ
+      function about the syntax extensions that are obtained in
+      that fashion. Are there any more specific accounts of that?
+
+This is the least well developed or considered part of the language.
+There are two fundamental themes we would like to explo(i) the
+provision of streams (even from files) as compositions of filters
+(this is partly inspired by the System V notion of streams) with an
+interface to the collection operators (ii) the provision of scanners
+as specializable objects which can be used in those filters.  You will
+have noticed another ommission (the absence of a read function is just
+an editorial oversight!) from earlier Lisps, namely readtables.  The
+scanner idea aims to provide a much cleaner and more powerful such
+facility.
+
+   -  Suppose I define my own module which uses its own, special
+      purpose data structures, for example a kind of data base
+      system. It is straight forward enough to let that module
+      have its own I/O. However in writing programs that use that
+      module I may want to refer to objects in it, which means
+      that whatever comes after a ' (quote) in the program should
+      be parsed relative to the conventions in the lower module.
+      Has a handle on READ been defined for this purpose?
+
+No.  This is something we have never considered.  I suppose the ideas
+sketched above might be able to accomodate this.  A question to
+consider is whether the scanning capability should be integral to
+read, in which case your module would define a new read function and
+export it for use by clients, or whether read should be parameterised
+by the scanner.  This question might even be subsumed by the stream
+functionality and the scanner be incorporated at that point.
+
+   -  Any thoughts or agreements about the usage of additional
+      seven bit characters that are not being used in the 0.99
+      definition, such as [] and {} ?
+
+0.99 defined something called the minimal character set (table 2)
+which is just those characters needed to process the language elements
+given in the definition.  At the meeting we had last weekend it was
+agreed that the intent of the table should be changed to mean the
+character set _supported_ by a conforming implementation and be
+extended to ISO Latin 1.  The characters you mention would be
+classified as "other character" as would all other characters
+supported by an implementation.
+
+   -  Any thoughts or agreements about the extended ISO character
+      set(s) e.g. for latin characters with diacritics ?
+
+None, apart from the classification as other character, permitting
+them to be used in strings, identifiers and symbols.  The reason is
+that none of has experience with or support for additional character
+sets and are therefore disinclined to expend effort and get it wrong!
+
+   -  I understand that <...> has been reserved for use with
+      class names. Any agreement about what to do with an expression
+      like, say,
+	 <man lastname: jones age: 45>
+      which might be a reasonable way of representing an object in
+      the class <man> ?
+
+An interesting suggestion.  Again, something we have not considered.
+
+   Finally, a meta-question: Are there any people who have already
+   signalled an interest in this type of questions?
+
+In the earlier issues, yes...as you can infer from the more detailed
+responses.  No-one is looking hard at the later questions as far as I
+know.
+
+Would you like me to add your name to the mailing list for discussions
+of EuLisp related matters?
+
+Finally, I understand from your message that you have seen a copy of
+0.99, which we are currently revising.  Have you also seen volume 6
+numbers 1/2 (double edition) of Lisp and Symbolic Computation?  This
+contains the first part of the definition (ca. 0.99) but also six
+other papers about EuLisp, which might be of interest for background
+information.
+
+--Julian Padget.
+
+* eval-when
+  :From: Jeff Dalton
+
+>    Note that I don't find myself in the "unenviable situation of relying
+>    on module-loading during parsing, and therefore back in the world
+>    where constructs such as EVAL-WHEN are necessary."
+>
+> Yes you are.  How does this work unless you evaluate each form before
+> you compile it?  In this simple case, you don't need eval-when, but
+> slightly more complicated cases do need it.
+
+Harley, your reply is a fine example of "deniability" in action.
+
+Making claims in deniable form works surprisingly well.  Think of all
+the trouble George Bush got into because of his "Read my lips: no new
+taxes".  That's a bit categorical, no?  It's kinda' hard to make out
+that what you really meant was "no new taxes unless conditions change
+to the point where they're required".
+
+British politicians have been a bit trickier about this sort of thing.
+Instead of "I won't do X", they say something about not having any
+plans to do X, or even about not being able to see any circumstances
+in which they would do X.  Just go back and point to key deniability
+aids -- plans, see, circumstances -- and you have a defense against
+popular counter-claims such as "you lying bastard".  After all, the
+claim _might_ have been made in good faith.
+
+This way politicians get some of the effects of the strong claim --
+namely that many people believe they won't do X -- while being
+protected from straightforward refutations such as "but you did X".
+If the other side can't offer a straightforward refutation, it has
+to do something more complex.  In a debate, that's a way to lose.
+People are bored, they stop reading, and the point gets lost.
+
+So there are some advantages to deniability in a debate (which, I
+hope is not what we're having here).  But it becomes difficult to
+tell what people really have in mind and what the real issues are,
+and suspicions are aroused.
+
+The key deniability aid for this issue is the phrase "to a world".
+Something takes you "back to a world where constructs such as
+EVAL-WHEN are necessary".  So we get the impression that our dislike
+of EVAL-WHEN should apply to this proposal as well.  EVAL-WHEN isn't
+actually needed in the example that was supposed to show this, but
+that's ok because there are more complicated cases where it is needed.
+
+Actually, there aren't such cases in this language.  If EVAL-WHEN
+doesn't exist, they can't be expressed.  Sure, you can describe
+something that EVAL-WHEN would allow you to do; but if you can't
+do it without EVAL-WHEN, then the constructs that are in the language
+don't have the bad consequences of EVAL-WHEN.  They may have other
+bad consequences, or some of the same ones, but that point can and
+should be made directly.  Consider an analogy.  Suppose you want
+to argue against CASE.  You could point out various unfortunate
+properties of CASE.  Or you could say that CASE takes us back to
+a world where constructs such as GOTO are necessary.
+
+Since this is an analogy, it can be attacked in several standard ways.
+But I'm not offering it as an argument in itself.  I'm offering it as
+something that may help you to understand how I see this.
+
+The proposal here is that macros can be called in the module in which
+they're defined but can't call functions defined in the same module.
+I think a good case can be made against this proposal.  But the case
+you present doesn't work for me.  It makes me wonder what the real
+problem is.  It makes me wonder if there is a real problem.  It makes
+we wonder whether you've been misled by Common Lisp into thinking
+locally callable macros are worse than they are.
+
+This is what I'm getting at with this talk of "deniability": I can't
+tell what the real issues are, and it's hard to figure out how you see
+the problem and whether you've misunderstood things or not.  I happen
+to think that it's better to offer a clear, understandable case that
+can be defended directly, even if it's a bit dull.
+
+So I like it when you point out that, for instance, DEFSYSTEM isn't
+part of Common Lisp while your system is part of Talk.  It's true,
+and it has consequences that can be explained clearly and directly.
+It doesn't show that Talk modules are the greatest things ever,
+but once I can see how they solve (or remove) various problems in
+Common Lisp, maybe I can figure that out for myself.
+
+More generally, I think you can make a good case that Talk's
+approach is better than Common Lisp's.
+
+> Look, we're not saying that CommonLisp doesn't work.  That would be
+> absurd.  However, it does make it much more difficult to distinguish
+> between compile-time and runtime program requirements, thus reducing
+> final application size.  In the Talk module system, that distinction
+> is built into the language; in CommonLisp, it is difficult to see any
+> principled way to do it.  Thus, heuristic solutions such as tree
+> shakers.
+
+If you want to make a case that talk modules are better than what
+Common Lisp does, I think you should confine yourself to that, or at
+least distinguish it from other things.  It would be a lot easier to
+understand.  As it is, all kinds of things are getting mixed up.  For
+instance, I wasn't defending Common Lisp; if I was defending anything,
+it was locally callable macros.  I did this by pointing out that you
+could have them (even in Common Lisp), restricted in the suggested
+way, without calling on EVAL-WHEN.  If you want to say you're better
+than Common Lisp, fine.  But if you want to say you're better than a
+Lisp that has locally callable macros but otherwise does things
+differently than Common Lisp, you need a different set of arguments.
+
+A similar point can be made about DEFSYSTEM and systems that in
+general say what compile- and run-time environment is needed.  Talk
+has the advantage of an analysis phase that figures out what's needed;
+but these other systems don't necessarily fail to distinguish a
+module's execution environment from it's compilation environment;
+they can do that just fine.
+
+>    Calling a macro in
+>    the same module in which it's defined doesn't require loading anything
+>    (that isn't needed for computing macro expansions) and doesn't require
+>    EVAL-WHEN.
+>
+> How do you know what's needed for computing macro expansions without
+> loading everything or using eval-when?  This is the fundamental problem.
+
+Well, just for instance, I could write down, in the module definition,
+what it needs at compile-time and at run-time.  Indeed, I'll be doing
+this anyway (ie, apart from locally callable macros), because I need
+to say what's needed to macroexpand the module.
+
+Note that the compile-time requirements can be different from the
+run-time requirements.  This seems to be a further point of confusion,
+because the next thing you say is:
+
+>    Since you have to load things just to compute macro
+>    expansions anyway, what's the problem?  [...]
+>
+> As I said above, it's a question of determining what you need in the
+> runtime of your application.  We can peel off many layers of fat by
+> not having any macros or their complex expansion functions (eg
+> defclass, loop, etc.) in the final application.
+
+I can peel off the very same layers.  So that isn't the problem.
+
+Let me try to make this clear.  For one thing, I can certainly peel
+off the very same layers if I don't have locally callable macros.  So
+let's consider one that's called locally.  If a macro in module M is
+defined and exported, then there are presumably clients of M that want
+to call this macro (probably only at compile-time).  So it stays.
+Otherwise, it can be discarded after compilation is complete.
+
+Now you might be able to win by doing a finer-grained analysis than
+what I'll do when specifying what's needed.  But that's a point in favor
+of analysis, not a point against locally callable macros.  If locally
+callable macros systematically defeat analysis, you need to make that
+point directly so people can see how the problem occurs.
+
+Anyway, here's an argument I'll give you for free: if locally
+callable macros are defined at compile-time using the compile-time
+env, and (if exported) at run-time using the run-time environment,
+what if the two are different?  (If you think you've already made
+this argument, you need to make it more clearly.)
+
+That's one reason why my (Pseudo-)Eulisp had a separate defining form
+for locally callable macros.  A macro then had to be one kind or the
+other, not both.
+
+>    Nor can you say you don't want anything to be executing during
+>    "parsing" (confusing compile and run time, or something like that),
+>    because the macro expanders will have to execute.
+>
+> No, of course the macro expanders still have to execute.  What we
+> don't want is to evaluate a module when compiling it.  It's because
+> CommonLisp does that that it needs eval-when.
+>
+> Tell me Jeff --- why do you think eval-when exists?
+
+Well, one reason is that the file compiler is going to do some things
+at compile time and some things at load time.  So I might have a macro
+that implements a defining form and want to make some information
+available at compile time and other information available at load
+time.  If so, I would put an EVAL-WHEN in the expansion of my macro.
+Perhaps you're thinking of cases like this.  If so, locally callable
+macros aren't a difficult case.  (More about the general case at the end.)
+
+Now, Common Lisp does not execute a module when it compiles it.  It
+does certain things at compile-time and certain things at load-time.
+Among the compile-time things is defining macros, but not defining
+functions.  So if I have a macro that will be called in the file that
+defines it and that macro needs to call a function in the same file in
+order to compute its expansion, then I will have to write (EVAL-WHEN
+(COMPILE) ...) around the definition of that function.  Perhaps you're
+also thinking of cases like this.  But they are precisely the cases
+ruled out by the proposal we're discussing.
+
+A third use of EVAl-WHEN is to set up an environment, e.g. to make
+sure certain modules have been loaded at compile-time.  These cases
+are better handled by other mechanisms such as DEFSYSTEM.
+
+>    So perhaps what it comes down to is you don't want to be able to
+>    define anything -- but that's not a reason for not being able to
+>    define anything.
+>
+> I don't understant where this comes from.  The only thing we're doing
+> is disallowing definition by a module during its compilation.
+
+Just so.
+
+>    In any case, I don't use EVAL-WHEN to ensure that a system has the
+>    right compilation environment; I use DEFSYSTEM.  In Franz, I used
+>    something like
+>
+>      (environment
+>        ((compile) (<file>+))
+>        ((load) (<file>+)))
+>
+> Our module system fulfills all of the needs met by defsystem, but in a
+> way which is formalized and completely integrated into the language.
+
+Yes, and I have no quarrel with that.
+
+>    Essentially, this is a description of what modules are required
+>    to compile or load/run a module.  ENVIRONMENT can be (and may have
+>    been) done with EVAL-WHEN, but that's an implementation detail.
+>    EVAL-WHEN could be deleted and this kept.
+>
+> But that's not what happened.  Instead, eval-when was kept and
+> defsystem remains outside the language.
+
+I'm talking about Franz Lisp here, remember?  Both EVAL-WHEN and
+ENVIRONMENT were in the language.
+
+Again, if you want to argue against Common Lisp, go ahead.
+But if there's something wrong with locally callable macros,
+they should be blackened directly rather than by association
+with Common Lisp.
+
+>    EVAL-WHEN is/was used for cases like this: a definition needs to
+>    make certain information available at compile-time and certain
+>    information available when the compiled definition is loaded.
+>    There is an env issue here, when you're compiling things that
+>    are used by the compiler, because you don't want to actually
+>    install the new definitions.  But there are various ways to manage
+>    that.  I don't think it requires EVAL-WHEN.  (How does it work
+>    in Talk?)
+>
+> As the paper states (apparently not clearly enough) each module has a
+> list of modules needed for its compilation and another list needed for
+> its execution.  Before compiling a module, its compilation environment
+> is loaded.  Before loading a module, its execution environment is
+> loaded.
+
+Ok.  I wasn't actually worried about that aspect.  But there's an
+issue here that I should bring out more clearly.  It's independent of
+the question of locally callable macros.  Suppose I define a defining
+macro D in module M1 and use M1 when compiling M2.  What if D wants to
+make certain information available at compile time (perhaps for the
+use of another macro in M1 or for later calls to D) and different
+information available when M2 is loaded?  For instance, (I don't know
+if this is really a good example), maybe a DEFGENERIC-like macro wants
+to record some things at compile-time for use by later DEFMETHODs but
+doesn't want to actually define the generic function (which happens
+only at load-time).
+
+>        This is just like your defsystem example, except that the
+> information is declarative and made part of the language rather than
+> [...]
+
+> That's why we want a module system in the language, right?
+
+Sure.  But I have no quarrel with that either.
+
+-- jd
+
+* minutes of the hours: streams
+  :From: Jeff Dalton
+
+> History.  Edinburgh meeting.  Dave explained the stream protocol
+> solution.  Harley explained the `posix' style solution.  This
+> was well received.  Harley to send text to Julian.
+
+Did people think there was a conflict between the two "solutions"?
+I don't think there is (at a sufficiently abstract, but not too
+abstract, level).
+
+-- jeff
+
+* published and be binned
+  :From: Jeff Dalton
+
+> Publication schedule.
+>
+> We need a guillotine.  Publish and be damned.  Target is next Spring.
+
+Have we given up on macros and modules?  I think we should consider
+Scheming it.  Look at Scheme 48, e.g.
+
+Anyway, if we're going to publish, we should look eveything over
+carefully to make sure people can implement EuLisp -- or parts of
+EuLisp -- without being us.
+
+-- jeff
+
+* published and be binned
+  :From: jap
+
+Date: Tue, 23 Nov 93 18:34:11 GMT
+:From:     Jeff Dalton
+
+> Publication schedule.
+>
+> We need a guillotine.  Publish and be damned.  Target is next Spring.
+
+  Have we given up on macros and modules?  I think we should consider Scheming
+  it.  Look at Scheme 48, e.g.
+
+I thought it had been policy for some time that we would describe a
+non-hygenic macro system for version 1, but in such a way that we
+could bring a hygenic system in over it at a later date.
+
+  Anyway, if we're going to publish, we should look eveything over carefully to
+  make sure people can implement EuLisp -- or parts of EuLisp -- without being
+  us.
+
+That is the great service that the people at FhG (ISST) in Berlin are
+doing in their part of the APPLY project.  They came to EuLisp quite
+late in its life and have been working largely from the definition,
+but also with advice from Harry.  They have been finding lots of
+minor---and the odd major---bug in the definition, although, as yet,
+they have not found anything "unimplementable".
+
+--Julian.

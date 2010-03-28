@@ -1,0 +1,357 @@
+<HTML>
+<HEAD>
+  <TITLE>User guide: Special cases </TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFF0" TEXT="#000000">
+<H1>
+Special cases.</h1>
+
+<a name="scrolls">
+<hr>
+<a href="#callbacks-user"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="functions.html#index"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<h3>
+How to manage Scrolls</h3>
+
+<p>
+Nowadays, Scrollbars are a very common feature in interfaces. The Tk library deals with them is sometimes very tricky. <b>youtoo/Tk</b> provides a simpler method to bind scrollbars and widgets.
+<p>
+The best way to show that is with a couple of examples:
+
+
+<dl>
+<dt><h5><u>Simple bindings.</u></h5>
+<dd>
+<p>
+This is the case for doing normal bindings between widgets and scrollbars.
+<p>
+In Tk the binding to a scrollbar requires a couple of callbacks that have to be set by the user. <b>youtoo/Tk</b> gives an encapsulation of that. The user do not have to know anything about the callbacks.
+<p>
+Example
+<dl>
+<dt>
+<dd>
+<pre>
+(defun test-scrollbar ()
+  (tk-wm "title" () "Test Scrollbar")
+  (let ((text (tk-make-text () relief: "sunken" bd: "2"))
+        (scroll-1 (tk-make-scrollbar ())))
+   
+    (eul-associate text scroll-1 'vertical)
+    
+    (tk-pack text side: "left")
+    (tk-pack scroll-1 side: "right" fill: "y")
+  )
+  
+  (Tk_MainLoop)
+)
+</pre>
+</dl>
+<p>
+See <a href="functions.html#eul-associate">eul-associate</a> command for detailes information.
+
+<dt><h5><u>Special bindings</u></h5>
+<dd>
+<p>
+This is the case for more complicated bindings. Sometimes the user requires to do special actions when the scrollbar is modified. THe previous example only produce the modification of the view in the associated widget.
+<p>
+The next example will show how to produce the correspondent callbacks. This example shows how one scrollbar could be bound to a four listboxes. The movement of the scrollbar will produce the modification of the view in the four listboxes, "simultaneously".
+<p>
+The first two functions are necessary in order to control the scroll widget.
+The scroll widget will append two or three
+arguments to his <b><em>command:</b></em> function.
+Listboxes (and generally all the possible widgets that are able to carry a scrollbar) will append two arguments to its <b><em>yscrollcommand:</b></em> function.
+<p>
+Example
+<dl>
+<dt>
+<dd>
+<pre>
+(defmodule tk_scrollbar2
+  (syntax (macros)
+  import (level1 tcl-tk)
+   )
+(deflocal *lb1* ())
+(deflocal *lb2* ())
+(deflocal *lb3* ())
+(deflocal *lb4* ())
+(deflocal *scroll* ())
+(deflocal i 0)
+
+(defun Fun-scroll-callback (type entry . units)
+  (tk-yview *lb1* type entry units)
+  (tk-yview *lb2* type entry units)
+  (tk-yview *lb3* type entry units)
+  (tk-yview *lb4* type entry units))
+
+(defun Fun-listbox-callback (first-entry last-entry)
+  (tk-scroll-set *scroll* first-entry last-entry))
+
+(defun prove ()
+  (setq *scroll* (tk-make-scrollbar () command: Fun-scroll-callback))
+  (setq *lb1* (tk-make-listbox () relief: "sunken"  
+			       yscrollcommand: Fun-listbox-callback))
+  (setq *lb2* (tk-make-listbox () relief: "sunken"  
+			       yscrollcommand: Fun-listbox-callback))
+  (setq *lb3* (tk-make-listbox () relief: "sunken"  
+			       yscrollcommand: Fun-listbox-callback))
+  (setq *lb4* (tk-make-listbox () relief: "sunken"  
+			       yscrollcommand: Fun-listbox-callback))
+
+  (tk-pack *lb1* *lb2* *lb3* *lb4* side: "left")
+  (tk-pack *scroll* side: "right" fill: "y")
+
+  (while (< i 20)
+    (tk-insert *lb1* "end" i)
+    (tk-insert *lb2* "end" i)
+    (tk-insert *lb3* "end" i)
+    (tk-insert *lb4* "end" i)
+    (setq i (+ i 1)))
+
+  (Tk_MainLoop))
+
+(prove)
+)
+
+</pre>
+This example is available in the module <code>scrolls-example.em</code> in <a href="./examples/index.html">Examples</a> section.
+
+</dl>
+</dl>
+<a name="callbacks-user">
+<hr>
+<a href="#menus"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#scrolls"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<H3>
+  How to manage callbacks.
+</H3>
+<P>
+<P>
+There are different ways where callback functions are required. Tcl/Tk
+is a package that works over X system. That means that almost everything
+is event-driven. 
+<P>
+Callback is a procedure whose address is store in advance, and later, at
+some significant time, the address is used to invoke the procedure. The idea
+is: set this widget to invoke this function (with this address) when this event
+occurs. So that, when the event occurs, the procedure is invoked (call it back).
+<P>
+<P>
+Tcl/Tk supplies this callback mechanism. <b>youtoo/Tk</b> is also able to manage
+callback procedures.
+<P>
+There are two differents situations where callback functions can be set:
+<P>
+<OL>
+  <LI>
+    Using the <b><em>command:</b></em> option in the creation or configuration of the widgets
+    that support this option.
+  <LI>
+    Using the <code>bind</code> command. This could be done using the general command (<code>tk-bind</code>)
+    or the specific ones (<code>tk-bind-item-canvas, tk-bind-tag-text</code>).
+</OL>
+<P>
+<h5><u>
+  1. Using <b><em>command:</b></em> option
+</u></h5>
+<dl><dt><dd>
+<P>
+There are several widgets that support this option. We are going to use the button widget 
+for the examples, but everything works with all the widgets supporting this option. It works for
+creation and configuration operation.
+
+<h5>
+Callback without arguments
+</h5>
+<P>
+This is the case when the widget will call a function, without giving any parameters.<br>
+This is the simplest case:
+<p>
+<pre>
+  (defun button-callback ()
+    (format t "Hello World\n")
+    (flush))
+
+
+  (tk-make-button () text: "Hello World" command: button-callback)
+</pre>
+<h5>
+Callback with several arguments 
+</h5>
+<p>
+However, not everything is that easy. Most of the times the callback function requires arguments.<br>
+To give back arguments to the callback the <b><em>args:</b></em> accessor is needed. It can be seen as another pair option value. <br>
+The option is args: and the value should be a list with all of the arguments 
+that the callback expect to receive. <br>
+The only restriction is that the pair <b><em>args: list</em></b> has to be after the pair <b><em>command: function</em></b>, otherwise<br>
+an error will be reported.
+<p>
+An example of that could be:
+<p>
+<pre>
+  (defun button-callback (name surname)
+    (format t "Hello ~s ~s\n" name surname)
+    (flush))
+
+  (tk-make-button () text: "Hello" command: button-callback args: (list "Xec" "Xarop"))
+</pre>
+
+Another possibility is to give back, as an argument, the same widget that is beig created or configurated.<br>
+The widget is represented by the accessor <b><em>self:</em></b> in the list of arguments.<br>
+So that:
+<p>
+<pre>
+  (defun button-callback (but name)
+    (tk-conf-button but text: name))
+
+
+  (tk-make-button () text: "Hello World" 
+                     command: button-callback 
+                     args: (list self: "Xec"))
+
+</pre>
+</dl>
+<h5><u>
+  2. Using <b><em>bind</b></em> command.
+</u></h5>
+<dl><dt><dd>
+<p>
+Up to date there are three functions to bind widgets or elements of widgets to a callbacks. These the commands are the next ones:
+<ol>
+<li><a href="functions.html#tk-bind"><code>tk-bind</code></a>
+<li><a href="functions.html#tk-bind-item-canvas"><code>tk-bind-item-canvas</code></a>
+<li><a href="functions.html#tk-bind-tag-text"><code>tk-bind-tag-text</code></a>
+</ol>
+
+<h5>
+Callback without arguments
+</h5>
+<P>
+This is the case when the callback function do not need any arguments.<br>
+From this point forward <code>tk-bind</code>, <code>tk-bind-item-canvas</code> and <code>tk-bind-tag-text</code> commands are used indifferently for the examples, but everything works in the same way for all of them.
+This is the simplest case:
+<p>
+<pre>
+  (defun enter-label-callback ()
+    (format t "Hello World\n")
+    (flush))
+
+  (setq label (tk-make-label () text: "Hello World" )
+  (tk-bind label "<Enter>" enter-label-callback)
+</pre>
+<h5>
+Callback with several arguments 
+</h5>
+<p> 
+Nevertheless, arguments back to the callback will be required most of the times.<br>
+And the user also needs to know some information about the produced event.<br>
+So that, if the user wants to use the position of the mouse in a Button click, the binding
+need to have the next syntax: 
+<pre>
+  (tk-bind-item-canvas item "&lt;Button-1&gt;" draw-point x: y:)
+</pre>
+where <b><em>x: y:</em></b> represent the same as "%x" "%y" in Tcl/Tk world.
+<p>
+The function draw-point will receive a couple of arguments (x and y position of the mouse).
+<p>
+There is also the possibility of giving back arguments with the accessor <b><em>args:</b></em>. 
+Following this accessor a list with the arguments has to be given. If the user want to use this accessor
+and the previous ones (information of the event), they have to appear in order. That is, first the 
+accessors to event information and then <b><em>args:</em></b> accessor with the list of arguments.
+<p>
+Let's see a couple of examples to illustrate that:
+<ol>
+<li>Only event information is given back.
+<pre>
+   (defun draw-point (it)
+   ...
+   )
+   
+   (tk-bind-item-canvas item "&lt;Button-1&gt;" draw-point args: (list item)) 
+</pre>
+<li>Other arguments.
+<pre>
+   (defun draw-point (x y it)
+   ...
+   )
+
+   (tk-bind-item-canvas item "&lt;Button-1&gt;" draw-point x: y: args: (list item))
+</pre>
+</ol>
+</dl>
+<a name="menus">
+<hr>
+
+<a href="examples/index.html"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#callbacks-user"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+<h3>
+  How to manage Menus.
+</h3>
+<p>
+Menus are a common tool when the user wants to build an interface. The next example will show how
+the creation and configuration of menus should be done in <b>youtoo/Tk</b>.
+<p>
+<b>youtoo/Tk</b> system does not allow to construct pull-down menus in the way that Tcl does. 
+The menu widget has to be descendent of the menubutton, but menubutton will not be able to be 
+constructed before the creation of the menu. 
+<p>
+The suggestion to solve this problem is given in the following list of steps:
+<ol>
+<li> Menubutton creation. E.g.
+<pre>
+    (setq text (tk-make-menubutton ()))
+</pre>
+<li>Menu creation and configuration as a descendent of the button created in step 1. E.g.
+<pre>
+    (setq menu-text (tk-make-menu text))
+    (tk-menu-add menu-text 'radiobutton ...)
+    (tk-menu-add menu-text 'command ...)
+</pre>
+<li>Menubutton configuration. E.g.
+<pre>
+    (tk-conf-widget text text: "Text" underline: "0" menu: menu-text)
+</pre>
+</ol>
+<p>
+A complete version with descendent menus is available in the module <code>tk_test_menu.em</code> in 
+<a href="examples/index.html">Examples</a> section.
+<p>
+Example:
+<pre>
+(defun test-menu ()
+  (let* 
+    ((mbar (tk-make-frame () relief: "raised" bd: "2"))
+     (dummy (tk-make-frame () width: "10c" height: "5c"))
+     (file (tk-make-menubutton mbar))
+     (edit (tk-make-menubutton mbar))
+     (help (tk-make-menubutton mbar))
+       
+     (menu-file (tk-make-menu file tearoff: "0"))
+     (menu-edit (tk-make-menu edit tearoff: "0"))
+     (menu-help (tk-make-menu help tearoff: "0"))
+      
+    (tk-pack mbar dummy side: "top" fill: "x") 
+       
+    ;;  Because is necessary that the menus were descendents of the menubutton
+    ;;  we have to put on the widgets.
+  
+    (tk-conf-widget file text: "File" underline: "0" menu: menu-file) 
+    (tk-conf-widget edit text: "Edit" underline: "0" menu: menu-edit) 
+    (tk-conf-widget help text: "Help" underline: "0" menu: menu-help)
+
+    ;; Creation of the File menu.
+ 
+    (tk-menu-add menu-file 'command label: "Exit" command: tk-exit)
+       
+    (tk-pack file edit side: "left")
+    (tk-pack help side: "right"))
+  (Tk_MainLoop))
+)
+</pre>
+
+</BODY></HTML>

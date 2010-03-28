@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>14 Condition Classes</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- html,1,next,noannex,xhtml --> 
+<meta name="src" content="eulisp.tex" /> 
+<meta name="date" content="2010-03-28 21:18:00" /> 
+<link rel="stylesheet" type="text/css" href="eulisp.css" /> 
+</head><body 
+>
+<!--l. 91--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl15.html" >next</a>] [<a 
+href="eulispcl13.html" >prev</a>] [<a 
+href="eulispcl13.html#taileulispcl13.html" >prev-tail</a>] [<a 
+href="#taileulispcl14.html">tail</a>] [<a 
+href="eulisp.html#eulispcl14.html" >up</a>] </p></div>
+<h3 class="clauseHead"> 14 <a 
+ id="x18-15600014"></a>Condition Classes</h3>
+<a 
+ id="dx18-156001"></a>
+<a 
+ id="dx18-156002"></a>
+<!--l. 2--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-156003r5"></a><span 
+class="cmbx-9">14.0.5   </span><span 
+class="cmtt-9">defcondition</span>
+<a 
+ id="Q1-18-202"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">defining form </span></i></b></div><br /> <hr />
+</p>
+<h5 class="syntaxssclauseHead"> 14.0.5.1 <a 
+ id="x18-15700014.0.5.1"></a><span 
+class="cmbx-8">Syntax</span></h5>  <a 
+ id="x18-157001"></a> <div class="framebox-c" 
+style="width:27.14em;">    <!--l. 7--><p class="noindent" ><span class="obeylines-h"><span 
+class="cmtt-8">defcondition</span><span 
+class="cmtt-8">&#x00A0;form</span>
+   <br /><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;=</span><span 
+class="cmtt-8">&#x00A0;&#8217;(&#8217;,</span><span 
+class="cmtt-8">&#x00A0;&#8217;defcondition&#8217;,</span>
+   <br /><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;condition</span><span 
+class="cmtt-8">&#x00A0;class</span><span 
+class="cmtt-8">&#x00A0;name,</span>
+   <br /><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;condition</span><span 
+class="cmtt-8">&#x00A0;superclass</span><span 
+class="cmtt-8">&#x00A0;name,</span>
+   <br /><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;{slot</span><span 
+class="cmtt-8">&#x00A0;name},</span><span 
+class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
+   <br /></span>                                                        </div>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x18-15800014.0.5.1"></a><span 
+class="cmbx-8">Arguments</span></h5>
+    <dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">condition class name </span>: </dt><dd 
+class="arguments">
+    <!--l. 18--><p class="noindent" >A symbol naming a binding to be initialized with the new
+    condition class.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">superclass name </span>: </dt><dd 
+class="arguments">
+    <!--l. 21--><p class="noindent" >A symbol naming a binding of a class to be used as the
+    superclass of the new condition class.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">slot names </span>: </dt><dd 
+class="arguments">
+    <!--l. 24--><p class="noindent" >A  sequence  of  keywords  used  to  name  and  to  identify
+    additional slots begin defined for this condition class.</p></dd></dl>
+<!--l. 29--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x18-15900014.0.5.1"></a><span 
+class="cmbx-8">Remarks</span></h5>This defining form defines a new condition class. The
+first argument is the name to which the new condition class
+will be bound. The second is the name of the superclass of
+the new condition class and an <span 
+class="cmti-9">init-option </span>is an identifier
+followed by its (default) initial value. If <span 
+class="cmti-9">superclass-name </span>is
+<a 
+href="eulispcl17.html#x21-544007r1"><span 
+class="cmtt-9">()</span></a>, the superclass is taken to be <a 
+href="#x18-159003r6"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a>. Otherwise
+<span 
+class="cmti-9">superclass-name </span>must be <a 
+href="#x18-159003r6"><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;or the name of one of its
+subclasses.
+<a 
+ id="dx18-159001"></a>                                                   <a 
+ id="dx18-159002"></a>
+  <!--l. 39--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-159003r6"></a><span 
+class="cmbx-9">14.0.6   </span><span 
+class="cmtt-9">&#x003C;condition&#x003E;</span>
+ <a 
+ id="Q1-18-206"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">class </span></i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x18-1600006"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+       <dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">message </span><a 
+href="eulispcl17.html#x21-766007r2"><span 
+class="cmtt-9">&#x003C;string&#x003E;</span></a> :  </dt><dd 
+class="initoptions">
+        <!--l. 43--><p class="noindent" >A string, containing information which should pertain to
+        the situation which caused the condition to be signalled.
+        </p></dd><dt class="initoptions">
+  <span 
+class="cmtt-9">message-arguments</span> <span 
+class="cmbx-9">??</span> :  </dt><dd 
+class="initoptions">
+        <!--l. 46--><p class="noindent" >A  list  of  objects  to  be  used  in  processing  the  message
+        format string.</p></dd></dl>
+  <!--l. 51--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x18-1610006"></a> <span 
+class="cmbx-8">Remarks</span></h5>The class which is the superclass of all condition
+  classes.
+  <a 
+ id="dx18-161001"></a>
+  <a 
+ id="dx18-161002"></a>
+  <!--l. 54--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-161003r7"></a><span 
+class="cmbx-9">14.0.7   </span><span 
+class="cmtt-9">conditionp</span>
+ <a 
+ id="Q1-18-209"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x18-1620007"></a><span 
+class="cmbx-8">Arguments</span></h5>
+       <dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">object </span>:  </dt><dd 
+class="arguments">
+        <!--l. 57--><p class="noindent" >An object to examine.</p></dd></dl>
+  <!--l. 60--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x18-1630007"></a><span 
+class="cmbx-8">Result</span></h5>Returns <span 
+class="cmti-9">object </span>if it is a condition, otherwise <a 
+href="eulispcl17.html#x21-544007r1"><span 
+class="cmtt-9">()</span></a>.
+  <a 
+ id="dx18-163001"></a>
+  <a 
+ id="dx18-163002"></a>
+  <!--l. 63--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-163003r8"></a><span 
+class="cmbx-9">14.0.8   </span><span 
+class="cmtt-9">initialize</span>
+ <a 
+ id="Q1-18-212"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">method </span></i></b></div><br /> <hr />
+                                                                                                  
+                                                                                                  
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x18-1640008"></a><span 
+class="cmbx-8">Specialized Arguments</span></h5>
+    <dl class="specargs1"><dt class="specargs">
+<span 
+class="cmti-9">condition </span><span 
+class="cmtt-9">&#x003C;condition&#x003E; </span>: </dt><dd 
+class="specargs">
+    <!--l. 66--><p class="noindent" >a condition.
+    </p></dd><dt class="specargs">
+<span 
+class="cmti-9">initlist </span>: </dt><dd 
+class="specargs">
+    <!--l. 67--><p class="noindent" >A list of initialization options as follows:
+       </p><dl class="options2"><dt class="options">
+    <span 
+class="cmtt-9">message </span><a 
+href="eulispcl17.html#x21-766007r2"><span 
+class="cmtt-9">&#x003C;string&#x003E;</span></a> : </dt><dd 
+class="options">
+       <!--l. 69--><p class="noindent" >A string, containing information which should pertain
+       to  the  situation  which  caused  the  condition  to  be
+       signalled.
+       </p></dd><dt class="options">
+    <span 
+class="cmtt-9">message-arguments</span> <span 
+class="cmbx-9">??</span> : </dt><dd 
+class="options">
+       <!--l. 72--><p class="noindent" >A list of objects to be used in processing the message
+       format string.</p></dd></dl>
+    </dd></dl>
+<!--l. 77--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x18-1650008"></a><span 
+class="cmbx-8">Result</span></h5>A new, initialized condition.
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x18-1660008"></a><span 
+class="cmbx-8">Remarks</span></h5>First calls <a 
+href="eulispcl11.html#x13-91004r1"><span 
+class="cmtt-9">call-next-method</span></a> to carry out initialization
+specified by superclasses then does the <span 
+class="cmbx-9">??</span> specific initialization.
+<a 
+ id="dx18-166001"></a>
+<!--l. 86--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-166002r9"></a><span 
+class="cmbx-9">14.0.9   </span><span 
+class="cmtt-9">general-condition</span>
+<a 
+ id="Q1-18-216"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">condition </span></i></b></div><br /> <hr /> This is the general condition class for conditions
+arising from the execution of programs by the processor.
+<a 
+ id="dx18-166003"></a>
+<hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-166004r10"></a><span 
+class="cmbx-9">14.0.10   </span><span 
+class="cmtt-9">domain-condition</span>
+<a 
+ id="Q1-18-217"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">general-condition </span></i></b></div><br /> <hr />
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x18-16700010"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+    <dl class="initoptions1"><dt class="initoptions">
+<span 
+class="cmtt-9">argument </span><a 
+href="eulispcl11.html#x13-64004r1"><span 
+class="cmtt-9">&#x003C;object&#x003E;</span></a> : </dt><dd 
+class="initoptions">
+    <!--l. 94--><p class="noindent" >An  argument,  which  was  not  of  the  expected  class,  or
+    outside a defined range and therefore lead to the signalling
+    of this condition.</p></dd></dl>
+<a 
+ id="dx18-167001"></a>
+                                                   <!--l. 99--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-167002r11"></a><span 
+class="cmbx-9">14.0.11   </span><span 
+class="cmtt-9">range-condition</span>
+ <a 
+ id="Q1-18-219"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">general-condition </span></i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x18-16800011"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+       <dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">result </span><a 
+href="eulispcl11.html#x13-64004r1"><span 
+class="cmtt-9">&#x003C;object&#x003E;</span></a> :  </dt><dd 
+class="initoptions">
+        <!--l. 102--><p class="noindent" >A result, which was not of the expected class, or outside
+        a defined range and therefore lead to the signalling of this
+        condition.</p></dd></dl>
+  <a 
+ id="dx18-168001"></a>
+  <!--l. 107--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-168002r12"></a><span 
+class="cmbx-9">14.0.12   </span><span 
+class="cmtt-9">environment-condition</span>
+ <a 
+ id="Q1-18-221"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">condition </span></i></b></div><br /> <hr /> This is the general condition class for conditions
+  arising from the environment of the processor.
+  <a 
+ id="dx18-168003"></a>
+  <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x18-168004r13"></a><span 
+class="cmbx-9">14.0.13   </span><span 
+class="cmtt-9">wrong-condition-class</span>
+ <a 
+ id="Q1-18-222"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">thread-condition </span></i></b></div><br /> <hr />
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x18-16900013"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+       <dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">condition </span><span 
+class="cmti-9">condition </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 115--><p class="noindent" >A condition.</p></dd></dl>
+  <!--l. 118--><p class="noindent" >Signalled by <a 
+href="eulispcl15.html#x19-170004r14"><span 
+class="cmtt-9">signal</span></a> if the given condition is not an instance of the
+  condition class <a 
+href="eulispcl12.html#x16-137006r10"><span 
+class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>.
+                                                                                                  
+                                                                                                  
+</p>
+<!--l. 216--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl15.html" >next</a>] [<a 
+href="eulispcl13.html" >prev</a>] [<a 
+href="eulispcl13.html#taileulispcl13.html" >prev-tail</a>] [<a 
+href="eulispcl14.html" >front</a>] [<a 
+href="eulisp.html#eulispcl14.html" >up</a>] </p></div>
+<!--l. 216--><p class="noindent" ><a 
+ id="taileulispcl14.html"></a> </p> 
+</body></html> 

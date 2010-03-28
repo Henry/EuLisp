@@ -1,0 +1,499 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>7 Conventions</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- html,1,next,noannex,xhtml --> 
+<meta name="src" content="eulisp.tex" /> 
+<meta name="date" content="2010-03-28 21:18:00" /> 
+<link rel="stylesheet" type="text/css" href="eulisp.css" /> 
+</head><body 
+>
+<!--l. 399--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl8.html" >next</a>] [<a 
+href="eulispcl6.html" >prev</a>] [<a 
+href="eulispcl6.html#taileulispcl6.html" >prev-tail</a>] [<a 
+href="#taileulispcl7.html">tail</a>] [<a 
+href="eulisp.html#eulispcl7.html" >up</a>] </p></div>
+<h3 class="clauseHead"> 7 <a 
+ id="x9-110007"></a>Conventions</h3>
+<a 
+ id="dx9-11001"></a>
+<!--l. 1--><p class="noindent" >This section defines the conventions employed in this text,
+how definitions will be laid out, the typeface to be used, the
+meta-language used in descriptions and the naming conventions. A
+later section (<a 
+href="eulispcl8.html#x10-430008">8<!--tex4ht:ref: sec:definitions --></a>) contains definitions of the terms used in this
+text.
+</p><!--l. 7--><p class="noindent" >A standard function<a 
+ id="dx9-11002"></a> denotes an immutable top-lexical binding of
+the defined name. All the definitions in this text are bindings in
+some module except for the special form operators, which have no
+definition anywhere. All bindings and all the special form operators
+can be renamed.       <a 
+ id="x9-11003r1"></a>
+</p><div class="note">
+<span 
+class="cmr-8">NOTE</span><span 
+class="cmr-8">&#x00A0;1</span>   <span 
+class="cmr-8">A description making mention of &#8220;an x&#8221; where &#8220;x&#8221; is the</span>
+<span 
+class="cmr-8">name a class usually means &#8220;an instance of </span><span 
+class="cmtt-8">&#x003C;x&#x003E;</span><span 
+class="cmr-8">&#8221;.</span></div>
+<!--l. 18--><p class="noindent" >Frequently, a class-descriptive name will be used in the argument
+list of a function description to indicate a restriction on the domain
+to which that argument belongs. In the case of a function, it is an
+error to call it with a value outside the specified domain. A
+generic function can be defined with a particular domain
+and/or range. In this case, any new methods must respect
+the domain and/or range of the generic function to which
+they are to be attached. The use of a class-descriptive name
+in the context of a generic function definition defines the
+intention of the definition, and is not necessarily a policed
+restriction.
+</p><!--l. 28--><p class="noindent" >The <span 
+class="cmti-9">result-class </span>of an operation, except in one case, refers to a
+primitive or a defined class described in this definition. The
+exception is for predicates. Predicates are defined to return either
+the empty list&#8212;written <a 
+href="eulispcl17.html#x21-544007r1"><span 
+class="cmtt-9">()</span></a>&#8212;representing the boolean value false<a 
+ id="dx9-11004"></a>,
+or any value other than <a 
+href="eulispcl17.html#x21-544007r1"><span 
+class="cmtt-9">()</span></a>, representing true<a 
+ id="dx9-11005"></a>. Although the class
+containing exactly this set of values is not defined in the language,
+notation is abused for convenience and <span 
+class="cmti-9">boolean</span><a 
+ id="dx9-11006"></a> is defined, for the
+purposes of this report, to mean that set of values. If the true value
+is a useful value, it is specified precisely in the description of the
+function.
+</p>
+<h4 class="sclauseHead"> 7.1 <a 
+ id="x9-120007.1"></a>Layout and Typography</h4>
+Both layout and fonts are used to help in the description of  <span 
+class="cmr-8">E</span><span 
+class="cmr-7">U</span>
+<span 
+class="cmr-8">L</span><span 
+class="cmr-7">ISP</span>. A language element is defined as an entry with its name as
+the heading of a clause, coupled with its classification. Examples of
+several kinds of entry are now given. Some subsections of entries
+are optional and are only given where it is felt necessary.
+                                                                                                  
+                                                                                                  
+<a 
+ id="dx9-12001"></a><a 
+ id="dx9-12002"></a>
+<hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-12003r1"></a><span 
+class="cmbx-9">7.1.1   </span><span 
+class="cmtt-9">a-special-form</span>
+<a 
+ id="Q1-9-13"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">special form </span></i></b></div><br /> <hr />
+<h5 class="syntaxssclauseHead"> 7.1.1.1 <a 
+ id="x9-130007.1.1.1"></a><span 
+class="cmbx-8">Syntax</span></h5>  <a 
+ id="x9-13001"></a> <div class="framebox-c" 
+style="width:27.14em;">    <!--l. 10--><p class="noindent" ><span class="obeylines-h"><span 
+class="cmtt-8">a-special-form</span>
+   <br /><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;=</span><span 
+class="cmtt-8">&#x00A0;&#8217;(&#8217;,</span><span 
+class="cmtt-8">&#x00A0;a-special-form,</span><span 
+class="cmtt-8">&#x00A0;{form},</span><span 
+class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
+   <br /></span>                                                        </div>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-140007.1.1.1"></a><span 
+class="cmbx-8">Arguments</span></h5>
+    <dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">form</span><sub><span 
+class="cmr-6">1</span></sub> : </dt><dd 
+class="arguments">
+    <!--l. 17--><p class="noindent" >description of structure and rôle of <span 
+class="cmti-9">form</span><sub><span 
+class="cmr-6">1</span></sub>.<br 
+class="newline" /><img 
+src="eulisp0x.png" alt=".
+.."  class="vdots"  />
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">form</span><sub><span 
+class="cmmi-6">n</span></sub> : </dt><dd 
+class="arguments">
+    <!--l. 19--><p class="noindent" >description of structure and rôle of <span 
+class="cmti-9">form</span><sub><span 
+class="cmmi-6">n</span></sub>.</p></dd></dl>
+<!--l. 22--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-150007.1.1.1"></a><span 
+class="cmbx-8">Result</span></h5>A description of the result.
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-160007.1.1.1"></a><span 
+class="cmbx-8">Remarks</span></h5>Any additional information defining the behaviour of
+<span 
+class="cmtt-9">a-special-form</span>.
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-170007.1.1.1"></a><span 
+class="cmbx-8">Examples</span></h5>Some examples of use of the special form and the
+behaviour that should result.
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-180007.1.1.1"></a><span 
+class="cmbx-8">See</span><span 
+class="cmbx-8">&#x00A0;also</span></h5>Cross references to related entries. <a 
+ id="dx9-18001"></a><a 
+ id="dx9-18002"></a>
+<hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-18003r2"></a><span 
+class="cmbx-9">7.1.2   </span><span 
+class="cmtt-9">a-function</span>
+<a 
+ id="Q1-9-20"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-190002"></a><span 
+class="cmbx-8">Arguments</span></h5>
+    <dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">argument-a </span>: </dt><dd 
+class="arguments">
+    <!--l. 39--><p class="noindent" >information about the class or classes of <span 
+class="cmti-9">argument-a</span>.<br 
+class="newline" /><img 
+src="eulisp1x.png" alt=".
+.."  class="vdots"  />
+    </p></dd><dt class="arguments">                                               <span 
+class="cmtt-9">[</span><span 
+class="cmti-9">argument-n</span><span 
+class="cmtt-9">] </span>:  </dt><dd 
+class="arguments">
+        <!--l. 42--><p class="noindent" >information  about  the  class  or  classes  of  the  optional
+        argument <span 
+class="cmti-9">argument-n</span>.</p></dd></dl>
+  <!--l. 46--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-200002"></a><span 
+class="cmbx-8">Result</span></h5>A description of the result and, possibly, its class.
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-210002"></a> <span 
+class="cmbx-8">Remarks</span></h5>Any additional information about the actions of
+  <span 
+class="cmtt-9">a-function</span>.
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-220002"></a><span 
+class="cmbx-8">Examples</span></h5>Some examples of calling the function with certain
+  arguments and the result that should be returned.
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-230002"></a><span 
+class="cmbx-8">See</span><span 
+class="cmbx-8">&#x00A0;also</span></h5>Cross references to related entries. <a 
+ id="dx9-23001"></a><a 
+ id="dx9-23002"></a>
+  <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-23003r3"></a><span 
+class="cmbx-9">7.1.3   </span><span 
+class="cmtt-9">a-generic</span>
+ <a 
+ id="Q1-9-26"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">generic function </span></i></b></div><br /> <hr />
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-240003"></a><span 
+class="cmbx-8">Generic Arguments</span></h5>
+       <dl class="genericargs1"><dt class="genericargs">
+  <span 
+class="cmti-9">argument-a </span><span 
+class="cmtt-9">&#x003C;class-a&#x003E; </span>:  </dt><dd 
+class="genericargs">
+        <!--l. 62--><p class="noindent" >means   that   <span 
+class="cmti-9">argument-a  </span>of   <span 
+class="cmtt-9">a-generic  </span>must   be   an
+        instance of <span 
+class="cmtt-9">&#x003C;class-a&#x003E; </span>and that <span 
+class="cmti-9">argument-a </span>is one of the
+        arguments on which <span 
+class="cmtt-9">a-generic </span>specializes. Furthermore,
+        each method defined on <span 
+class="cmtt-9">a-generic </span>may specialize only on
+        a subclass of <span 
+class="cmtt-9">&#x003C;class-a&#x003E; </span>for <span 
+class="cmti-9">argument-a</span>.<br 
+class="newline" /><img 
+src="eulisp2x.png" alt="..."  class="vdots"  />
+        </p></dd><dt class="genericargs">
+  <span 
+class="cmti-9">argument-n </span>:   </dt><dd 
+class="genericargs">
+        <!--l. 68--><p class="noindent" >means that (i) <span 
+class="cmti-9">argument-n </span>is an instance of <span 
+class="cmtt-9">&#x003C;object&#x003E;</span>, <span 
+class="cmti-9">i.e.</span>
+       it is unconstrained, (ii) <span 
+class="cmtt-9">a-generic </span>does not specialize on
+        <span 
+class="cmti-9">argument-n</span>, (iii) no method on <span 
+class="cmtt-9">a-generic </span>can specialize
+        on <span 
+class="cmti-9">argument-n</span>.</p></dd></dl>
+  <!--l. 74--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-250003"></a><span 
+class="cmbx-8">Result</span></h5>A description of the result and, possibly, its class.
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-260003"></a> <span 
+class="cmbx-8">Remarks</span></h5>Any additional information about the actions of
+  <span 
+class="cmtt-9">a-generic</span>. This can take two forms depending on the function.
+  This will probably be in general terms, since the actual behaviour
+  will be determined by the methods.
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-270003"></a><span 
+class="cmbx-8">See</span><span 
+class="cmbx-8">&#x00A0;also</span></h5>Cross references to related entries. <a 
+ id="dx9-27001"></a><a 
+ id="dx9-27002"></a>
+                                                                                                  
+                                                                                                  
+<hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-27003r4"></a><span 
+class="cmbx-9">7.1.4   </span><span 
+class="cmtt-9">a-generic</span>
+<a 
+ id="Q1-9-31"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">method </span></i></b></div><br /> <hr /> (A method on <span 
+class="cmtt-9">a-generic </span>with the following specialized
+arguments.)
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-280004"></a><span 
+class="cmbx-8">Specialized Arguments</span></h5>
+    <dl class="specargs1"><dt class="specargs">
+<span 
+class="cmti-9">argument-a </span><span 
+class="cmtt-9">&#x003C;class-a&#x003E; </span>: </dt><dd 
+class="specargs">
+    <!--l. 91--><p class="noindent" >means that <span 
+class="cmti-9">argument-a </span>of the method must be an instance
+    of <span 
+class="cmtt-9">&#x003C;class-a&#x003E;</span>. Of course, this argument must be one which
+    was defined in <span 
+class="cmtt-9">a-generic </span>as being open to specialization
+    and <span 
+class="cmtt-9">&#x003C;class-a&#x003E; </span>must be a subclass of the class.<br 
+class="newline" /><img 
+src="eulisp3x.png" alt="..
+."  class="vdots"  />
+    </p></dd><dt class="specargs">
+<span 
+class="cmti-9">argument-n </span>: </dt><dd 
+class="specargs">
+    <!--l. 96--><p class="noindent" >means that (i) <span 
+class="cmti-9">argument-n </span>is an instance of <span 
+class="cmtt-9">&#x003C;object&#x003E;</span>, <span 
+class="cmti-9">i.e.</span>
+    it is unconstrained, because <span 
+class="cmtt-9">a-generic </span>does not specialize
+    on <span 
+class="cmti-9">argument-n</span>.</p></dd></dl>
+<!--l. 101--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-290004"></a><span 
+class="cmbx-8">Result</span></h5>A description of the result and, possibly, its class.
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-300004"></a><span 
+class="cmbx-8">Remarks</span></h5>Any additional information about the actions of this
+method attached to <span 
+class="cmtt-9">a-generic</span>.
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-310004"></a><span 
+class="cmbx-8">See</span><span 
+class="cmbx-8">&#x00A0;also</span></h5>Cross references to related entries. <a 
+ id="dx9-31001"></a>
+<hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-31002r5"></a><span 
+class="cmbx-9">7.1.5   </span><span 
+class="cmtt-9">a-condition</span>
+<a 
+ id="Q1-9-36"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">a-condition-superclass </span></i></b></div><br /> <hr />
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x9-320005"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+    <dl class="initoptions1"><dt class="initoptions">
+<span 
+class="cmtt-9">initarg-a </span><span 
+class="cmti-9">value-a </span>: </dt><dd 
+class="initoptions">
+    <!--l. 114--><p class="noindent" >means that an instance of <span 
+class="cmtt-9">&#x003C;a-condition&#x003E; </span>has a slot called
+    <span 
+class="cmtt-9">initarg-a </span>which should be initialized to <span 
+class="cmti-9">value-a</span>, where
+    <span 
+class="cmti-9">value-a </span>is often the name of a class, indicating that <span 
+class="cmti-9">value-a</span>
+    should be an instance of that class and a description of
+    the information that <span 
+class="cmti-9">value-a </span>is supposed to provide about
+    the exceptional situation that has arisen.<br 
+class="newline" /><img 
+src="eulisp4x.png" alt=".
+.."  class="vdots"  />
+    </p></dd><dt class="initoptions">
+<span 
+class="cmtt-9">initarg-n </span><span 
+class="cmti-9">value-n </span>: </dt><dd 
+class="initoptions">
+    <!--l. 121--><p class="noindent" >As for <span 
+class="cmtt-9">initarg-a</span>.</p></dd></dl>
+<!--l. 124--><p class="noindent" >                                                   </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-330005"></a><span 
+class="cmbx-8">Remarks</span></h5>Any additional information about the circumstances in
+  which the condition will be signalled. <a 
+ id="dx9-33001"></a><a 
+ id="dx9-33002"></a>
+  <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-33003r6"></a><span 
+class="cmbx-9">7.1.6   </span><span 
+class="cmtt-9">&#x003C;class-name&#x003E;</span>
+ <a 
+ id="Q1-9-39"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">class </span></i></b></div><br /> <hr />
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-340006"></a><span 
+class="cmbx-8">Initialization Options</span></h5>
+       <dl class="initoptions1"><dt class="initoptions">
+  <span 
+class="cmtt-9">initarg-a </span><span 
+class="cmti-9">value-a </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 131--><p class="noindent" >means that <span 
+class="cmtt-9">&#x003C;class-name&#x003E; </span>has an initarg whose name is
+        <span 
+class="cmtt-9">initarg-a </span>and the description will usually say of what
+        class  (or  classes)  <span 
+class="cmti-9">value-a  </span>should  be  an  instance.  This
+        initarg is required.<br 
+class="newline" /><img 
+src="eulisp5x.png" alt="..."  class="vdots"  />
+        </p></dd><dt class="initoptions">
+  <span 
+class="cmtt-9">[initarg-n </span><span 
+class="cmti-9">value-n</span><span 
+class="cmtt-9">] </span>:  </dt><dd 
+class="initoptions">
+        <!--l. 135--><p class="noindent" >The enclosing square brackets denote that this initarg is
+        optional. Otherwise the interpretation of the definition is
+        as for <span 
+class="cmtt-9">initarg-a</span>.</p></dd></dl>
+  <!--l. 141--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-350006"></a><span 
+class="cmbx-8">Remarks</span></h5>A description of the rôle of <span 
+class="cmtt-9">&#x003C;class-name&#x003E;</span>.
+  <h4 class="sclauseHead"> 7.2 <a 
+ id="x9-360007.2"></a>Naming</h4>
+  Naming conventions are applied in the descriptions of primitive
+  and defined classes as well as in the choice of other function names.
+  Here is a list of the conventions and some examples of their
+  use.
+  <h5 class="subdefinitionHead"> 7.1 <a 
+ id="x9-370007.1"></a><span 
+class="cmbx-9">&#8220;</span><span 
+class="cmtt-9">&#x003C;name&#x003E;</span><span 
+class="cmbx-9">&#8221; wrapping: </span></h5> By convention, classes have names
+  which begin with &#8220;<span 
+class="cmtt-9">&#x003C;</span>&#8221; and end with &#8220;<span 
+class="cmtt-9">&#x003E;</span>&#8221;.
+  <h5 class="subdefinitionHead"> 7.2 <a 
+ id="x9-380007.2"></a><span 
+class="cmbx-9">&#8220;</span><span 
+class="cmtt-9">binary</span><span 
+class="cmbx-9">&#8221; prefix: </span></h5> The two argument version of a n-ary
+  argument function. For example <span 
+class="cmtt-9">binary+ </span>is the two argument
+  (generic) function corresponding to the n-ary argument <span 
+class="cmtt-9">+</span>
+ function.
+  <h5 class="subdefinitionHead"> 7.3 <a 
+ id="x9-390007.3"></a><span 
+class="cmbx-9">&#8220;</span><span 
+class="cmtt-9">-class</span><span 
+class="cmbx-9">&#8221; suffix: </span></h5> The name of a metaclass of a set of related
+  classes. For example, <span 
+class="cmtt-9">&#x003C;function-class&#x003E;</span>, which is the class of
+  <span 
+class="cmtt-9">&#x003C;simple-function&#x003E;</span>, <span 
+class="cmtt-9">&#x003C;generic-function&#x003E; </span>and any of their
+  subclasses and <span 
+class="cmtt-9">&#x003C;condition-class&#x003E; </span>is the class of all condition
+  classes. The exception is <span 
+class="cmtt-9">&#x003C;class&#x003E; </span>itself which is the default
+  metaclass. The prefix should describe the general domain of the
+  classes in question, but not necessarily any particular class in the
+  set.
+  <h5 class="subdefinitionHead"> 7.4 <a 
+ id="x9-400007.4"></a><span 
+class="cmbx-9">&#8220;</span><span 
+class="cmtt-9">generic-</span><span 
+class="cmbx-9">&#8221; prefix: </span></h5> The generic version of the function
+  named by the stem.
+                                                                                                  
+                                                                                                  
+<h5 class="subdefinitionHead"> 7.5 <a 
+ id="x9-410007.5"></a><span 
+class="cmbx-9">hyphenation: </span></h5> Function and class names made up
+of more than one word are hyphenated, for example:
+<span 
+class="cmtt-9">compute-specialized-slot-class</span>.
+<h5 class="subdefinitionHead"> 7.6 <a 
+ id="x9-420007.6"></a><span 
+class="cmbx-9">&#8220;</span><span 
+class="cmtt-9">p</span><span 
+class="cmbx-9">&#8221; suffix: </span></h5> A predicate function is named by a &#8220;<span 
+class="cmtt-9">p</span>&#8221; suffix if
+the function or class name (after removing the enclosing <span 
+class="cmtt-9">&#x003C; </span>and <span 
+class="cmtt-9">&#x003E;</span>) is
+not hyphenated, for instance, <span 
+class="cmtt-9">consp</span>, and is named by a &#8220;<span 
+class="cmtt-9">-p</span>&#8221; suffix
+if it is, for instance <span 
+class="cmtt-9">double-float-p</span>.
+                                                 
+                                                                                                  
+                                                                                                  
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl8.html" >next</a>] [<a 
+href="eulispcl6.html" >prev</a>] [<a 
+href="eulispcl6.html#taileulispcl6.html" >prev-tail</a>] [<a 
+href="eulispcl7.html" >front</a>] [<a 
+href="eulisp.html#eulispcl7.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
+ id="taileulispcl7.html"></a>  </p> 
+</body></html> 
