@@ -1,0 +1,195 @@
+\sclause{Double Precision Floats}
+\index{general}{double float}
+\label{double-float}
+\index{general}{level-0 modules!double-float}
+\index{general}{double float!module}
+%
+\begin{optDefinition}
+\noindent
+
+The defined name of this module is {\tt double}.  Arithmetic operations for
+\classref{double-float}\ are defined by methods on the generic functions defined
+in the number module (\ref{number}):
+%
+\begin{flushleft}
+    \genericref{binary+},\ttindex{binary+}\indexmeth{binary+}
+    \genericref{binary-},\ttindex{binary-}\indexmeth{binary-}
+    \genericref{binary*},\ttindex{binary*}\indexmeth{binary*}
+    \genericref{binary/},\ttindex{binary/}\indexmeth{binary/}
+    \genericref{binary<},\ttindex{binary<}\indexmeth{binary<}
+    \genericref{binary=},\ttindex{binary=}\indexmeth{binary=}
+    \genericref{mod},\ttindex{mod}\indexmeth{mod}
+    \genericref{negate},\ttindex{negate}\indexmeth{negate}
+    \genericref{zerop}\ttindex{zerop}\indexmeth{zerop}
+\end{flushleft}
+%
+\noindent
+the float module (\ref{float}):
+\begin{flushleft}
+\genericref{ceiling},\ttindex{ceiling}\indexmeth{ceiling}
+\genericref{floor},\ttindex{floor}\indexmeth{floor}
+\genericref{round},\ttindex{round}\indexmeth{round}
+\genericref{truncate}\ttindex{truncate}\indexmeth{truncate}
+\end{flushleft}
+%
+\noindent
+and the elementary functions module (\ref{elementary-functions}):
+\begin{flushleft}
+\genericref{acos},\ttindex{acos}\indexmeth{acos}
+\genericref{asin},\ttindex{asin}\indexmeth{asin}
+\genericref{atan},\ttindex{atan}\indexmeth{atan}
+\genericref{atan2},\ttindex{atan2}\indexmeth{atan2}
+\genericref{cos},\ttindex{cos}\indexmeth{cos}
+\genericref{sin},\ttindex{sin}\indexmeth{sin}
+\genericref{tan},\ttindex{tan}\indexmeth{tan}
+\genericref{cosh},\ttindex{cosh}\indexmeth{cosh}
+\genericref{sinh},\ttindex{sinh}\indexmeth{sinh}
+\genericref{tanh},\ttindex{tanh}\indexmeth{tanh}
+\genericref{exp},\ttindex{exp}\indexmeth{exp}
+\genericref{log},\ttindex{log}\indexmeth{log}
+\genericref{log10},\ttindex{log10}\indexmeth{log10}
+\genericref{pow},\ttindex{pow}\indexmeth{pow}
+\genericref{sqrt}\ttindex{sqrt}\indexmeth{sqrt}
+\end{flushleft}
+%
+\noindent
+The behaviour of these functions is defined in the modules noted
+above.
+
+\class{double-float}
+\index{general}{level-0 classes!\theclass{double-float}}
+%
+The class of all double precision floating point numbers.
+
+The syntax for the exponent of a double precision floating point is given below.
+The general syntax for floating point numbers is given in section~\ref{float}.
+%
+\savesyntax\doubleFloatSyntax\vbox{\small\syntax
+double exponent
+   = ('d' | 'D'), [sign], decimal integer; (* \[\ref{integer}\] *)
+\endsyntax}
+\syntaxtable{double}{\doubleFloatSyntax}
+
+\function{double-float-p}
+%
+\begin{arguments}
+    \item[object] Object to examine.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is a double float, otherwise \nil.
+%
+\seealso%
+\functionref{floatp} (\ref{number}).
+
+\constant{most-positive-double-float}{double-float}
+\index{general}{implementation-defined!most positive double precision float}
+\index{general}{conformity-clause!most positive double precision float}
+%
+\remarks%
+The value of \constantref{most-positive-double-float} is that positive double
+precision floating point number closest in value to (but not equal to) positive
+infinity that the processor provides.
+
+\constant{least-positive-double-float}{double-float}
+\index{general}{implementation-defined!least positive double precision float}
+\index{general}{conformity-clause!least positive double precision float}
+%
+\remarks%
+The value of \constantref{least-positive-double-float} is that positive double
+precision floating point number closest in value to (but not equal to) zero that
+the processor provides.
+
+\constant{least-negative-double-float}{double-float}
+\index{general}{implementation-defined!least negative double precision float}
+\index{general}{conformity-clause!least negative double precision float}
+%
+\remarks%
+The value of \constantref{least-negative-double-float} is that negative double
+precision floating point number closest in value to (but not equal to) zero that
+the processor provides.  Even if the processor provide negative zero, this value
+must not be negative zero.
+
+\constant{most-negative-double-float}{double-float}
+\index{general}{implementation-defined!most negative double precision float}
+\index{general}{conformity-clause!most negative double precision float}
+%
+\remarks%
+The value of \constantref{most-negative-double-float} is that negative double
+precision floating point number closest in value to (but not equal to) negative
+infinity that the processor provides.
+
+\method{equal}
+%
+\begin{specargs}
+    \item[double$_1$, \classref{double-float}] A double precision float.
+    \item[double$_2$, \classref{double-float}] A double precision float.
+\end{specargs}
+%
+\result%
+The result of calling \genericref{binary=} on {\em double$_1$} and {\em
+    double$_2$}.
+
+\converter{string}
+%
+\begin{specargs}
+    \item[x, \classref{double-float}] A double precision float.
+\end{specargs}
+%
+\result%
+Constructs and returns a string, the characters of which correspond to the
+external representation of {\em x\/} as produced by {\tt generic-prin}, namely
+that specified in the syntax as {\em {\tt[}sign{\tt]}float format 3}.
+
+\converter{fixed-precision-integer}
+%
+\begin{specargs}
+    \item[x, \classref{double-float}] A double precision float.
+\end{specargs}
+%
+\result%
+A fixed precision integer.
+
+\remarks%
+This function is the same as \genericref{round}.  It is defined for the
+sake of symmetry.
+
+\method{generic-prin}
+%
+\begin{specargs}
+    \item[double, \classref{double-float}]%
+    The double float to be output on {\em stream}.
+    \item[stream, \classref{stream}]%
+    The stream on which the representation is to be output.
+\end{specargs}
+%
+\result%
+The double float supplied as the first argument.
+%
+\remarks%
+Outputs the external representation of {\em double\/} on {\em stream}, as an
+optional sign preceding the syntax defined by {\em float format 3}.  Finer
+control over the format of the output of floating point numbers is provided by
+some of the formatting specifications of {\tt format} (see
+section~\ref{formatted-io}).
+
+\method{generic-write}
+%
+\begin{specargs}
+    \item[double, \classref{double-float}]%
+    The double float to be output on {\em stream}.
+    \item[stream, \classref{stream}]%
+    The stream on which the representation is to be output.
+\end{specargs}
+%
+\result%
+The double float supplied as the first argument.
+%
+\remarks%
+Outputs the external representation of {\em double\/} on {\em stream}, as an
+optional sign preceding the syntax defined by {\em float format 3}.  Finer
+control over the format of the output of floating point numbers is provided by
+some of the formatting specifications of {\tt format} (see
+section~\ref{formatted-io}).
+%
+\end{optDefinition}

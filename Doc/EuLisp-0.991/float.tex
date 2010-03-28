@@ -1,0 +1,116 @@
+\sclause{Floating Point Numbers}
+\index{general}{float}
+\index{general}{float!module}
+\label{float}
+\index{general}{level-0 modules!float}
+%
+\begin{optDefinition}
+\noindent
+The defined name of this module is {\tt float}.  This module defines the
+abstract class \classref{float}\ and the behaviour of some generic functions on
+floating point numbers.  Further operations on numbers are defined in the
+numbers module (\ref{number}) and further operations on floating point numbers
+are defined in the elementary functions module (\ref{elementary-functions}).  A
+concrete float class is defined in the double float module (\ref{double-float}).
+
+\syntaxform{float}
+%
+The syntax for the external representation of floating point literals is defined
+in Table~\ref{float-syntax}.  The representation used by \functionref{write} and
+\functionref{prin} is that of a sign, a whole part and a fractional part without
+an exponent, namely that defined by {\em float format 3}.  Finer control over
+the format of the output of floating point numbers is provided by some of the
+formatting specifications of \functionref{format} (section~\ref{formatted-io}).
+%
+\Syntax
+\label{float-syntax}
+\savesyntax\floatSyntax\vbox{\small\syntax
+float
+   = [sign] unsigned float [exponent];
+sign
+   = '+' | '-';
+unsigned float
+   = float format 1
+   | float format 2
+   | float format 3;
+float format 1
+   = decimal integer, '.'; (* \[\S\ref{integer}\] *)
+float format 2
+   = '.', decimal integer; (* \[\S\ref{integer}\] *)
+float format 3
+   = float format 1, decimal integer; (* \[\S\ref{integer}\] *)
+exponent
+   = double exponent; (* \[\S\ref{double-float}\] *)
+\endsyntax}
+\syntaxtable{float}{\floatSyntax}
+%
+A floating point number\index{general}{external representation!floating point}
+has six forms of external representation depending on whether either or both the
+whole and the fractional part are specified and on whether an exponent is
+specified.  In addition, a positive floating point number is optionally preceded
+by a plus sign and a negative floating point number is preceded by a minus sign.
+For example:
+%
+\verb|+123.| ({\em float format 1\/}),
+\verb|-.456| ({\em float format 2\/}),
+\verb|123.456| ({\em float format 3\/}); and with exponents:
+\verb|+123456.D-3|,
+\verb|1.23455D2|,
+\verb|-.123456D3|.
+
+\class{float}
+\index{general}{level-0 classes!\theclass{float}}
+%
+The abstract class which is the superclass of all floating point
+numbers.
+%
+\function{floatp}
+\begin{arguments}
+    \item[objext] Object to examine.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is a floating point number, otherwise \nil.
+
+\generic{ceiling}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Returns the smallest integral value not less than {\em float\/} expressed as a
+float of the same class as the argument.
+
+\generic{floor}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Returns the largest integral value not greater than {\em float\/} expressed as a
+float of the same class as the argument.
+
+\generic{round}
+%
+\begin{arguments}
+    \item[float] A floating point number.
+\end{arguments}
+%
+\result%
+Returns the integer whose value is closest to {\em float}, except in the case
+when {\em float\/} is exactly half-way between two integers, when it is rounded
+to the one that is even.
+
+\generic{truncate}
+%
+\begin{arguments}
+    \item[float] A floating point number.
+\end{arguments}
+%
+\result%
+Returns the greatest integer value whose magnitude is less than or equal to {\em
+    float}.
+%
+\end{optDefinition}

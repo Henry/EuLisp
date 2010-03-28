@@ -1,0 +1,29 @@
+(literalize goal
+    want
+    object
+    number
+    direction
+    value
+    id
+    seq
+    status)
+
+(literalize task-list
+    task
+    object
+    subtask
+    subtask-object)
+
+
+(p sequence-1
+    (goal ^want { << orient position >> <w> } ^object <o>
+          ^id <id> ^status consider)
+    (task-list ^task <w> ^object <o> ^subtask <st> ^subtask-object <sto>)
+   -(goal ^want <st> ^object <sto> ^status done)
+   -(goal ^want rotate ^status active)
+-->
+    (write (crlf) (crlf) suspending task to <w> <o>)
+    (write (crlf) considering task to <st> <sto>)
+    (modify 1 ^status pending)
+    (make goal ^want <st> ^object <sto> ^id (compute <id> + 1)
+               ^status consider))

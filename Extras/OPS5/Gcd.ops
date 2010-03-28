@@ -1,0 +1,26 @@
+(literalize number value id)
+
+(p get-arguments
+  (start)
+  -->
+  (write (crlf) Enter a non-negative integer)
+  (make number ^value (accept) ^id 1)
+  (write (crlf) Enter another non-negative integer)
+  (make number ^value (accept) ^id 2))
+
+(p gcd-step
+  (number ^id <id-1> ^value <larger-value>)
+  (number ^id <> <id-1> ^value { <smaller-value> > 0 <= <larger-value>} )
+  -->
+  (modify 1 ^value (compute <larger-value> % <smaller-value>)))
+
+(p gcd-result
+  (number ^id <id-1> ^value 0)
+  (number ^id <> <id-1> ^value { <gcd> >= 0})
+  -->
+  (write (crlf) |The greatest common divisor is| <gcd>)
+  (remove 1)
+  (remove 2))
+
+
+   

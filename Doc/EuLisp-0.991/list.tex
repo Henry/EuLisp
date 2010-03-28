@@ -1,0 +1,320 @@
+\sclause{Lists}
+\index{general}{null}
+\label{null}
+\index{general}{list}
+\index{general}{list!module}
+\label{list}
+\index{general}{pair}
+\label{pair}
+%
+\begin{optDefinition}
+The name of this module is {\tt list}.  The class \classref{list}\ is an
+abstract class and has two subclasses: \classref{null}\ and \classref{cons}.
+The only instance of \classref{null}\ is the empty list.  The combination of
+these two classes allows the creation of proper lists, since a proper list is
+one whose last pair contains the empty list in its \functionref{cdr} field.  See
+also section~\ref{collection} (collections) for further operations on lists.
+
+% The class \syntaxref{pair}\index{general}{pair} (also known as a {\em dotted
+%     pair}) is a 2-tuple, whose fields are called, for historical reasons, car
+% and cdr.  Pairs are created by the function \functionref{cons} and the fields
+% are accessed by the functions \functionref{car} and \functionref{cdr}.  The
+% major use of pairs is in the construction of (proper) lists.  A (proper)
+% list\index{general}{list} is defined as either the empty list (denoted by {\tt
+%     '()}) or a pair whose \functionref{cdr} is a proper list.  An improper
+% list is one containing a \functionref{cdr} which is not a list.
+
+\syntaxform{()}
+%
+\remarks%
+The empty list\index{general}{external representation!null (empty list)},
+which is the only instance of the class \classref{null}, has as its
+external representation an open parenthesis followed by a close
+parenthesis.  The empty list is also used to denote the boolean value
+{\em false}.
+
+\class{null}
+\index{general}{level-0 classes!\theclass{null}}
+
+The class whose only instance is the empty list, denoted \nil.
+
+\function{null}
+%
+\begin{arguments}
+    \item[object] Object to examine.
+\end{arguments}
+%
+\result%
+Returns \true\/ if {\em object} is the empty list, otherwise \nil.
+
+\method{generic-prin}
+%
+\begin{specargs}
+    \item[null] The empty list.
+    \item[stream] The stream on which the representation is to be output.
+\end{specargs}
+%
+\result%
+The empty list.
+%
+\remarks%
+Output the external representation of the empty list on {\em stream\/}
+as described above.
+
+\method{generic-write}
+%
+\begin{specargs}
+    \item[null] The empty list.
+    \item[stream] The stream on which the representation is to be output.
+\end{specargs}
+%
+\result%
+The empty list.
+%
+\remarks%
+Output the external representation of the empty list on {\em stream\/}
+as described above.
+
+\syntaxform{pair}
+%
+A pair\index{general}{external representation!pair} is written as \verb+(+{\em
+    object}$_1$ \verb+.+ {\em object}$_2$\verb+)+, where {\em object}$_1$ is
+called the \functionref{car} and {\em object}$_2$ is called the
+\functionref{cdr}.  There are two special cases in the external representation
+of pair.  If {\em object}$_2$ is the empty list, then the pair is written as
+\verb+(+{\em object}$_1$\verb+)+.  If {\em object$_2$} is an instance of
+\syntaxref{pair}, then the pair is written as \verb+(+{\em object}$_1$ {\em
+    object}$_3$ . {\em object$_4$}\verb+)+, where {\em object$_3$} is the
+\functionref{car} of {\em object$_2$} and {\em object$_4$} is the
+\functionref{cdr} with the above rule for the empty list applying.  By
+induction, a list of length $n$ is written as\index{general}{external
+    representation!list} \verb+(+{\em object}$_1$ \ldots {\em object$_{n-1}$}
+. {\em object}$_n$\verb+)+, with the above rule for the empty list applying.
+The representations of {\em object$_1$} and {\em object$_2$} are determined by
+the external representations defined in other sections of this definition (see
+\classref{character}\ (\ref{character}), \classref{double-float}\
+(\ref{double-float}),
+% \classref{null}\ (\ref{null}),
+\classref{fixed-precision-integer}\ (\ref{spint}),
+\classref{string}\ (\ref{string}),
+\classref{symbol}\ (\ref{symbol}) and
+\classref{vector}\ (\ref{vector}), as well as instances of \classref{cons}\
+itself.  The syntax for the external representation of pairs and lists
+is defined in Table~\ref{pair-syntax}.
+
+\Syntax
+\label{pair-syntax}
+\savesyntax\listSyntax\vbox{\small\syntax
+null
+   = '(', ')';
+pair
+   = '(', object, '.', object, ')';
+list
+   = empty list | proper list | improper list;
+empty list
+   = '()';
+proper list
+   = '(', {object}, ')';
+improper list
+   = '(', {object}, '.', object, ')';
+\endsyntax}
+\syntaxtable{list}{\listSyntax}
+%
+\examples
+\begin{tabular}{ll}
+    \nil & the empty list\\
+    {\tt (1)} & a list whose \functionref{car} is {\tt 1} and \functionref{cdr} is \nil\\
+    {\tt (1 . 2)} & a pair whose \functionref{car} is {\tt 1} and \functionref{cdr} is
+    {\tt 2}\\
+    {\tt (1 2)} & a list whose \functionref{car} is {\tt 1} and \functionref{cdr} is {\tt
+        (2)}
+\end{tabular}
+
+\class{cons}
+\index{general}{level-0 classes!\theclass{pair}}
+
+The class of all instances of \classref{cons}.  An instance of the class
+\classref{cons}\ (also known informally as a {\em dotted pair\/} or a {\em
+    pair\/}) is a 2-tuple, whose slots are called, for historical reasons,
+\functionref{car} and \functionref{cdr}.  Pairs are created by the function
+\functionref{cons} and the slots are accessed by the functions \functionref{car}
+and \functionref{cdr}.  The major use of pairs is in the construction of
+(proper) lists.  A (proper) list\index{general}{list} is defined as either the
+empty list (denoted by \nil) or a pair whose \functionref{cdr} is a proper list.
+An improper list is one containing a \functionref{cdr} which is not a list (see
+Table~\ref{pair-syntax}).
+
+It is an error to apply \functionref{car} or \functionref{cdr} or their
+\functionref{setter} functions to anything other than a pair.  The empty list is
+not a pair and {\tt (car ())} or {\tt (cdr ())} is an error.
+
+\function{consp}
+%
+\begin{arguments}
+    \item[object] Object to examine.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is a pair, otherwise \nil.
+
+\function{atom}
+%
+\begin{arguments}
+    \item[object] Object to examine.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is not a pair, otherwise \nil.
+
+\function{cons}
+%
+\begin{arguments}
+    \item[object$_1$] An object.  pair.
+    \item[object$_2$] An object.  pair.
+\end{arguments}
+%
+\result%
+Allocates a new pair whose slots are initialized with {\em object$_1$} in the
+\functionref{car} and {\em object$_2$} in the \functionref{cdr}.
+
+\function{car}
+%
+\begin{arguments}
+    \item[pair] A pair.
+\end{arguments}
+%
+\result%
+Given a pair, such as the result of {\tt (cons {\em object$_1$} {\em
+        object$_2$})}, then the function \functionref{car} returns {\em
+    object$_1$}.
+
+\function{cdr}
+%
+\begin{arguments}
+    \item[pair] A pair.
+\end{arguments}
+%
+\result%
+Given a pair, such as the result of {\tt (cons {\em object$_1$} {\em
+        object$_2$})}, then the function \functionref{cdr} returns {\em
+    object$_2$}.
+
+\setter{car}
+%
+\begin{arguments}
+    \item[pair] A pair.
+    \item[object] An object.
+\end{arguments}
+%
+\result%
+Given a pair, such as the result of {\tt (cons {\em object$_1$} {\em
+        object$_2$})}, then the function {\tt (setter car)} replaces {\em
+    object$_1$} with {\em object}.  The result is {\em object}.
+
+\setter{cdr}
+%
+\begin{arguments}
+    \item[pair] A pair.
+    \item[object] An object.
+\end{arguments}
+%
+\result%
+Given a pair, such as the result of {\tt (cons {\em object$_1$} {\em
+        object$_2$})}, then the function {\tt (setter cdr)} replaces {\em
+    object$_2$} with {\em object}.  The result is {\em object}.
+%
+\remarks%
+Note that if {\em object\/} is not a proper list, then the use of {\tt
+(setter cdr)} might change {\em pair\/} into an improper list.
+
+\method{equal}
+%
+\begin{specargs}
+    \item[pair$_1$] A pair.
+    \item[pair$_2$] A pair.
+\end{specargs}
+%
+\result%
+The result is the conjunction of the pairwise application of \genericref{equal}
+to the \functionref{car} fields and the \functionref{cdr} fields of the
+arguments.
+
+\method{deep-copy}
+%
+\begin{specargs}
+    \item[pair, \classref{cons}] A pair.
+\end{specargs}
+%
+\result%
+Constructs and returns a copy of the list starting at {\em pair\/} copying both
+the \functionref{car} and the \functionref{cdr} slots of the list.  The list can
+be proper or improper.  Treatment of the objects stored in the \functionref{car}
+slot (and the \functionref{cdr} slot in the case of the final pair of an
+improper list) is determined by the \genericref{deep-copy} method for the class
+of the object.
+
+\method{shallow-copy}
+%
+\begin{specargs}
+    \item[pair, \classref{cons}] A pair.
+\end{specargs}
+%
+\result%
+Constructs and returns a copy of the list starting at {\em pair\/} but copying
+only the \functionref{cdr} slots of the list, terminating when a pair is
+encountered whose \functionref{cdr} slot is not a pair.  The list beginning at
+{\em pair\/} can be proper or improper.
+
+\function{list}
+%
+\begin{arguments}
+    \item[{\optional{object$_1$ ... object$_n$}}] A sequence of objects.
+\end{arguments}
+%
+\result%
+Allocates a set of pairs each of which has been initialized with {\em
+object$_i$} in the \functionref{car} field and the pair whose \functionref{car} field
+contains {\em object$_{i+1}$} in the \functionref{cdr} field.  Returns the pair
+whose \functionref{car} field contains {\em object$_1$}.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb|(list)| &\Ra& \verb|()|\\
+    \verb|(list 1 2 3)| &\Ra& \verb|(1 2 3)|
+\end{tabular}
+
+\method{generic-prin}
+%
+\begin{specargs}
+    \item[pair, \classref{cons}] The pair to be output on {\em stream}.
+    \item[stream, \classref{stream}] The stream on which the representation is
+    to be output.
+\end{specargs}
+%
+\result%
+The pair supplied as the first argument.
+%
+\remarks%
+Output the external representation of {\em pair\/} on {\em stream\/} as
+described at the beginning of this section.  Uses \genericref{generic-prin} to
+produce the external representation of the contents of the \functionref{car} and
+\functionref{cdr} slots of {\em pair}.
+
+\method{generic-write}
+%
+\begin{specargs}
+    \item[pair, \classref{cons}] The pair to be output on {\em stream}.
+    \item[stream, \classref{stream}] The stream on which the representation is
+    to be output.
+\end{specargs}
+%
+\result%
+The pair supplied as the first argument.
+%
+\remarks%
+Output the external representation of {\em pair\/} on {\em stream\/} as
+described at the beginning of this section.  Uses \genericref{generic-write} to
+produce the external representation of the contents of the \functionref{car} and
+\functionref{cdr} slots of {\em pair}.
+
+\end{optDefinition}

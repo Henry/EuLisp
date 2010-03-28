@@ -1,0 +1,23 @@
+#!/bin/sh
+
+## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+
+## -----------------------------------------------------------------------
+##                     EuLisp System 'youtoo'
+## -----------------------------------------------------------------------
+##  Description: shell script to make Linux shared libraries; first argument
+##               is name of output library; rest of arguments are object
+##               files; you probably have to run 'ldconfig -v' to make Linux
+##               aware of shared libs (should be part of the boot process)
+## -----------------------------------------------------------------------
+
+CC=$1
+
+shift 1
+LIBRARY=$1
+SONAME=`basename $1`
+
+shift 1
+OBJECTS=$*
+
+gcc -shared -o ${LIBRARY} ${OBJECTS}

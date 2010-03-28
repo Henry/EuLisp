@@ -1,0 +1,1266 @@
+\clause{Expressions, Definitions and Control Forms}
+%
+\label{control-0}
+\index{general}{level-0}
+\indexmodule{level-0}
+\indexmodule{level-0-macros}
+%
+\begin{optDefinition}
+\noindent
+This section gives the syntax of well-formed expressions and describes the
+semantics of the special-forms, functions and macros of the level-0 language.
+In the case of level-0 macros, the description includes a set of expansion
+rules.  However, these descriptions are not prescriptive of any processor and a
+conforming program cannot rely on adherence to these expansions.
+\end{optDefinition}
+
+\sclause{Simple Expressions}
+%
+\begin{optPrivate}
+    What happens with vectors, instances etc.  They can be printed out, so why
+    can't they be constants too.
+
+    Describe relationship of empty list to nil here.
+
+    HED wants ids as well as ids and initializers for \macroref{let}.
+\end{optPrivate}
+%
+\begin{optDefinition}
+\noindent
+%
+\metasyntaxform{constant}
+\ttindex{constant}
+\noindent
+There are two kinds of constants\index{general}{constant!literal}, literal
+constants and defined constants\index{general}{constant!defined}.  Only the
+first kind are considered here.  A literal constant is a number, a string, a
+character, or the empty list.  The result of processing such a literal constant
+is the constant itself---that is, it denotes
+itself\index{general}{processing!constants}.
+%
+\examples
+\begin{tabular}{ll}
+    \verb+()+ & the empty list\\
+    \verb+123+ & a fixed precision integer\\
+    \verb+#\a+ & a character\\
+    \verb+"abc"+ & a string
+\end{tabular}
+
+\defform{defconstant}
+%
+\Syntax
+\savesyntax\defconstantSyntax\vbox{\small\syntax
+defconstant form
+   = '(', 'defconstant', identifier, form, ')';
+\endsyntax}
+\syntaxtable{defconstant}{\defconstantSyntax}
+%
+\begin{arguments}
+    \item[identifier] A symbol naming an immutable top-lexical binding to be
+    initialized with the value of {\em form}.
+
+    \item[form] The {\em form} whose value will be stored in the binding of {\em
+        identifier}.
+\end{arguments}
+%
+\remarks%
+The value of {\em form} is stored in the top-lexical binding of {\em
+    identifier}.  It is a violation to attempt to modify the binding of a
+defined constant.
+
+\constant{nil}{\classref{null}}
+%
+\remarks%
+The symbol {\tt nil} is defined to be immutably bound to the empty list, which
+is represented as \nil.  The empty list is used to denote the abstract boolean
+value {\em false}.
+
+\constant{t}{\classref{symbol}}
+%
+\remarks%
+This may be used to denote the abstract boolean value {\em true}, but so may any
+other value than \nil.
+
+\metasyntaxform{symbol}
+\ttindex{symbol}
+\noindent
+The current lexical binding of \syntaxref{symbol} is
+returned\index{general}{processing!symbols}.  A symbol can also name a defined
+constant---that is, an immutable top-lexical binding.
+
+\defform{deflocal}
+%
+\Syntax
+\savesyntax\deflocalSyntax\vbox{\small\syntax
+deflocal form
+   = '(', 'deflocal', identifier, form, ')';
+\endsyntax}
+\syntaxtable{deflocal}{\deflocalSyntax}
+%
+\begin{arguments}
+    \item[identifier] A symbol naming a binding containing the value of {\em
+        form}.
+
+    \item[form] The {\em form} whose value will be stored in the binding of {\em
+        identifier}.
+\end{arguments}
+%
+\remarks%
+The value of {\em form} is stored in the top-lexical binding of {\em
+    identifier}.  The binding created by a \defformref{deflocal} form is mutable.
+%
+\seealso%
+\keywordref{setq}.
+
+\keyword{quote}
+\index{general}{literal}
+%
+\Syntax
+\savesyntax\quoteSyntax\vbox{\small\syntax
+quote form
+   = '(', 'quote', object, ')';
+\endsyntax}
+\syntaxtable{quote}{\quoteSyntax}
+%
+\begin{arguments}
+    \item[object] the {\em object} to be quoted.
+\end{arguments}
+%
+\result%
+The result is {\em object}.
+%
+\remarks%
+The result of processing the expression {\tt (quote {\em object})} is {\em
+    object}.  The {\em object} can be any object having an external
+representation\index{general}{external representation (see also
+    \functionref{prin} and \functionref{write})}.  The special form
+\keywordref{quote} can be abbreviated using {\em apostrophe}---graphic
+representation~\verb+'+\ttindex{quote!abbreviation with {\tt '}}---so that {\tt
+    (quote a)} can be written {\tt 'a}.  These two notations are used to
+incorporate literal constants\index{general}{literal!quotation} in programs.  It
+is an error to modify a literal expression\index{general}{literal!modification
+    of}.
+\end{optDefinition}
+
+\sclause{Functions: creation, definition and application}
+\label{function}
+%
+\begin{optPrivate}
+    Need more detail about \functionref{apply}.
+
+    The stuff about macroexpand is probably redundant now?  Although I
+    suppose we need something at top-level??
+\end{optPrivate}
+%
+\begin{optDefinition}
+%
+\keyword{lambda}
+%
+\Syntax
+\label{lambda-syntax-table}
+\savesyntax\lambdaSyntax\vbox{\small\syntax
+lambda form
+   = '(', 'lambda', lambda list, {form}, ')';
+lambda list
+   = identifier     (* \[\S\ref{symbol}\] *)
+   | simple list
+   | rest list;
+simple list
+   = '(', {identifier}, ')';   (* \[\S\ref{symbol}\] *)
+rest list
+   = '(', {identifier}, '.', identifier, ')';
+\endsyntax}
+\syntaxtable{lambda}{\lambdaSyntax}
+%
+\begin{arguments}
+    \item[lambda-list] The parameter list of the function conforming to the
+    syntax \ref{lambda-syntax-table}.
+    \item[form] An expression.
+\end{arguments}
+%
+\result%
+A function with the specified {\em lambda-list\/} and sequence of {\em
+form\/}s.
+%
+\remarks%
+The function construction operator is \keywordref{lambda}.  Access to the
+lexical environment of definition is guaranteed.  The syntax of {\em
+    lambda-list} is defined in ref{lambda-syntax-table}.
+
+If {\em lambda-list} is an {\em identifier}, it is bound to a newly allocated
+list of the actual parameters.  This binding\index{general}{scope and extent!of
+    \keywordref{lambda} bindings} has lexical scope and indefinite extent.  If
+{\em lambda-list} is a {\em simple-list}, the arguments are bound to the
+corresponding {\em identifiers}.  Otherwise, {\em lambda-list} must be a {\em
+    rest-list}.  In this case, each {\em identifier} preceding the dot is bound
+to the corresponding argument and the {\em identifier} succeeding the dot is
+bound to a newly allocated list whose elements are the remaining arguments.
+These bindings have lexical scope and indefinite extent.  It is a violation
+if the same identifier appears more than once in a {\em lambda-list}.  It is an
+error to modify {\em rest-list}.
+
+\syntaxform{defmacro}
+%
+\Syntax
+\savesyntax\defmacroSyntax\vbox{\small\syntax
+defmacro form
+   = '(', 'defmacro', macro name, lambda list,
+     {form}, ')';
+\endsyntax}
+\syntaxtable{defmacro}{\defmacroSyntax}
+%
+\begin{arguments}
+    \item[macro-name] A symbol naming an immutable top-lexical binding to be
+    initialized with a function having the specified {\em lambda-list} and {\em
+        body}.
+
+    \item[lambda-list] The parameter list of the function conforming to the
+    syntax specified under \keywordref{lambda}.
+
+    \item[body] A sequence of forms.
+\end{arguments}
+%
+\remarks%
+The \defformref{defmacro} form defines a function\index{general}{macro} named by
+{\em macro-name} and stores the definition as the top-lexical binding of {\em
+    macro-name}\index{general}{macro!definition by
+    \defformref{defmacro}}\index{general}{binding!module}.  The interpretation
+of the {\em lambda-list} is as defined for \keywordref{lambda} (see
+\ref{lambda-syntax-table}).
+%
+\begin{note}
+    A macro is automatically exported from the the module which defines it.  A
+    macro cannot be used in the module which defines it.
+\end{note}
+%
+\seealso%
+\keywordref{lambda}.
+
+\syntaxform{defun}
+%
+\Syntax
+\savesyntax\defunSyntax\vbox{\small\syntax
+defun form
+   = simple defun
+   | setter defun;
+simple defun
+   = '(', 'defun', function name, lambda list,
+     {form}, ')';
+setter defun
+   = '(', 'defun',
+          '(', 'setter', function name, ')',
+          lambda list, {form}, ')';
+\endsyntax}
+\syntaxtable{defun}{\defunSyntax}
+%
+\begin{arguments}
+    \item[function-name] A symbol naming an immutable top-lexical binding to be
+    initialized with a function having the specified {\em lambda-list} and {\em
+        body}.
+
+    \item[{\tt (setter {\em function-name})}] An expression denoting the setter
+    function to correspond to {\em function-name}.
+
+    \item[lambda-list] The parameter list of the function conforming to the
+    syntax specified under \keywordref{lambda}.
+
+    \item[body] A sequence of forms.
+\end{arguments}
+%
+\remarks%
+The \syntaxref{defun} form defines a function named by {\em function-name} and
+stores the definition (i) as the top-lexical binding of {\em function-name} or
+(ii) as the setter function of {\em function-name}.  The interpretation of the
+{\em lambda-list} is as defined for \keywordref{lambda}.  The rewrite rules for
+\syntaxref{defun} are given below.
+%
+\savesyntax\defunRewrites\vbox{\begin{center}
+{\small\tt\begin{tabular}{lll}
+&&\\
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(de\=fun {\em identifier}\\
+   \>{\em lambda-list}\\
+   \>{\em body})
+\end{tabbing}
+\end{minipage}
+& $\equiv$ &
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(de\=fconstant {\em identifier}\\
+   \>(lambda {\em lambda-list} {\em body}))
+\end{tabbing}
+\end{minipage}\\
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(de\=fun\\
+   \>(setter {\em identifier})\\
+   \>{\em lambda-list} {\em body})
+\end{tabbing}
+\end{minipage}
+& $\equiv$ &
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+((s\=etter setter) {\em identifier}\\
+   \>(lambda {\em lambda-list} {\em body}))
+\end{tabbing}
+\end{minipage}\\
+&&\\
+\end{tabular}}
+\end{center}}
+\syntaxtable{defun {\normalfont rewrite rules}}{\defunRewrites}
+
+\metasyntaxform{function call}
+\index{general}{function!calling}
+%
+\Syntax
+\savesyntax\functioncallSyntax\vbox{\small\syntax
+function call form
+   = '(', operator, {operand}, ')';
+\endsyntax}
+\syntaxtable{{\normalfont function call}}{\functioncallSyntax}
+%
+\begin{arguments}
+    \item[operator] This may be a symbol---being either the name of a special
+    form, or a lexical variable---or a function call, which must result in an
+    instance of \classref{function}.
+
+    An error is signalled (condition class:
+    \conditionref{invalid-operator}\indexcondition{invalid-operator}) if the
+    operator is not a function.
+
+    \item[operand\/$^*$] Each {\em operand} must be either an atomic expression,
+    a literal expression or a function call.
+\end{arguments}
+%
+\result%
+The result is the value of the application of {\em operator} to the
+evaluation of {\em operand\/$^*$}.
+%
+\remarks%
+The {\em operand} expressions are evaluated in order from left to
+right.  The {\em operator} expression may be evaluated at any time
+before, during or after the evaluation of the operands.
+%
+\begin{note}
+    The above rule for the evaluation of function calls was finally agreed upon
+    for this version since it is in line with one strand of common practice, but
+    it may be revised in a future version.
+\end{note}
+%
+\seealso%
+\metasyntaxref{constant}, \syntaxref{symbol}, \keywordref{quote}.
+
+\condition{invalid-operator}{general-condition}
+%
+\begin{initoptions}
+    \item[invalid-operator, object] The object which was being used as an
+    operator.
+
+    \item[operand-list, list] The operands prepared for the operator.
+\end{initoptions}
+%
+\remarks%
+Signalled by function call if the operator is not an instance of
+\classref{function}.
+
+\function{apply}
+%
+\Syntax
+\savesyntax\applySyntax\vbox{\small\syntax
+apply form
+   = '(', 'apply', function, {form}, ')';
+\endsyntax}
+\syntaxtable{apply}{\applySyntax}
+%
+\begin{arguments}
+    \item[function] An expression which must evaluate to an instance of
+    \classref{function}.
+
+    \item[form$_1$ ... form$_{n-1}$] A sequence of expressions, which will be
+    evaluated according to the rules given in {\em function call}.
+
+    \item[form$_n$] An expression which must evaluate to a proper list.  It is
+    an error if {\em obj$_n$} is not a proper list.
+\end{arguments}
+%
+\result%
+The result is the result of calling {\em function} with the actual parameter
+list created by appending {\em form}$_n$ to a list of the arguments {\em
+    form}$_1$ through {\em form}$_{n-1}$.  An error is signalled (condition
+class: \conditionref{invalid-operator}\indexcondition{invalid-operator}) if the
+first argument is not an instance of \classref{function}.
+%
+\seealso%
+{\em function call}, \conditionref{invalid-operator}.
+\end{optDefinition}
+
+\sclause{Destructive Operations}
+%
+\begin{optPrivate}
+    The term {\em closer} is a weak specification---cross ref terminology?
+\end{optPrivate}
+%
+\begin{optDefinition}
+\noindent
+An assignment operation\index{general}{assignment} modifies the contents of a
+binding named by a identifier---that is, a variable.
+
+\keyword{setq}
+%
+\Syntax
+\savesyntax\setqSyntax\vbox{\small\syntax
+setq form
+   = '(', 'setq', identifier, form, ')';
+\endsyntax}
+\syntaxtable{setq}{\setqSyntax}
+%
+\begin{arguments}
+    \item[identifier] The identifier whose lexical binding is to be updated.
+
+    \item[form] An expression whose value is to be stored in the binding of {\em
+        identifier}.
+\end{arguments}
+%
+\result%
+The result is the value of {\em form}.
+%
+\remarks%
+The {\em form} is evaluated and the result is stored in the closest lexical
+binding named by {\em identifier}.  It is a violation to modify an immutable
+binding.
+
+\function{setter}
+%
+\begin{arguments}
+    \item[reader] An expression which must evaluate to an instance of
+    \classref{function}.
+\end{arguments}
+%
+\result%
+The {\em writer\/} corresponding to {\em reader}.
+%
+\remarks%
+A generalized place update facility is provided by \functionref{setter}.  Given
+{\em reader}\index{general}{function!reader}, \functionref{setter} returns the
+corresponding update function\index{general}{function!writer}.  If no such
+function is known to \functionref{setter}, an error is signalled (condition
+class: \conditionref{no-setter}\indexcondition{no-setter}).  Thus {\tt
+    (\functionref{setter} \functionref{car})} returns the function to update the
+\functionref{car} of a pair.  New update functions can be added by using
+{setter}'s update function, which is accessed by the expression {\tt
+    (\functionref{setter} \functionref{setter})}.  Thus {\tt
+    ((\functionref{setter} \functionref{setter}) a-reader a-writer)} installs
+the function which is the value of {\tt a-writer} as the writer of the reader
+function which is the value of {\tt a-reader}.  All writer functions in this
+definition and user-defined writers have the same immutable status as other
+standard functions, such that attempting to redefine such a function, for
+example {\tt ((\functionref{setter} \functionref{setter}) \functionref{car}
+    a-new-value)}, signals an error (condition class:
+\conditionref{cannot-update-setter}\indexcondition{<cannot-update-setter>})
+%
+\seealso%
+\defformref{defgeneric}, \macroref{defmethod}, \defformref{defclass},
+\defformref{defun}.
+
+\condition{no-setter}{general-condition}
+%
+\begin{initoptions}
+    \item[object, object] The object given to \functionref{setter}.
+\end{initoptions}
+%
+\remarks%
+Signalled by \functionref{setter} if there is no updater for the given
+function.
+
+\condition{cannot-update-setter}{general-condition}
+%
+\begin{initoptions}
+    \item[accessor, object$_1$] The given accessor object.
+
+    \item[updater, object$_2$] The given updater object.
+\end{initoptions}
+%
+\remarks%
+Signalled by {\tt (\functionref{setter} \functionref{setter})} if the updater of
+the given accessor is immutable.
+%
+\seealso%
+\functionref{setter}.
+%
+\end{optDefinition}
+
+\sclause{Conditional Expressions}
+%
+\begin{optPrivate}
+    \macroref{cond} rules are strange (RPG).
+
+    Added \macroref{when} and \macroref{unless}.
+
+    Moved these here after October '90 meeting.
+\end{optPrivate}
+%
+\begin{optDefinition}
+%
+\keyword{if}
+%
+\Syntax
+\savesyntax\ifSyntax\vbox{\small\syntax
+if form
+   = '(', 'if', antecedent, consequent,
+     alternative, ')';
+\endsyntax}
+\syntaxtable{if}{\ifSyntax}
+%
+\begin{arguments}
+    \item[antecedent] A form.
+
+    \item[consequent] A form.
+
+    \item[alternative] A form.
+\end{arguments}
+%
+\result%
+Either the value of {\em consequence\/} or {\em alternative\/} depending on the
+value of {\em antecedent}.
+%
+\remarks%
+The {\em antecedent\/} is evaluated.  If the result is {\em true\/} the {\em
+    consequence\/} is evaluated, otherwise the {\em alternative\/} is evaluated.
+Both {\em consequence\/} and {\em alternative\/} must be specified.  The result
+of \keywordref{if} is the result of the evaluation of whichever of {\em
+    consequence\/} or {\em alternative\/} is chosen.
+
+\macro{cond}
+%
+\Syntax
+\savesyntax\condSyntax\vbox{\small\syntax
+cond macro
+   = '(', 'cond',
+          {'(', antecedent, {consequent}, ')'}, ')';
+\endsyntax}
+\syntaxtable{cond}{\condSyntax}
+%
+\remarks%
+The \macroref{cond} macro provides a convenient syntax for collections of {\em
+    if-then-elseif...else} expressions.  The rewrite rules for \macroref{cond}
+are given below.
+%
+\savesyntax\condRewrites\vbox{\begin{center}
+{\small{\tt
+\begin{tabular}{lll}
+&&\\
+(cond) & $\equiv$ & () \\
+
+(cond ({\em antecedent}) \ldots) & $\equiv$ & (or {\em antecedent} (cond \ldots)) \\
+
+%(cond (t {\em form}$^*$)) & $\equiv$ & (progn {\em form}$^*$) \\
+
+\begin{minipage}[t]{0.45\columnwidth}
+\begin{tabbing}
+(c\=ond \\
+  \>({\em antecedent}$_1$) \\
+  \>({\em antecedent}$_2$ {\em form}$^*$) \\
+  \>\ldots)
+\end{tabbing}
+\end{minipage}
+& $\equiv$ &
+\begin{minipage}[t]{0.45\columnwidth}
+\begin{tabbing}
+(or \={\em antecedent}$_1$ \\
+    \>(c\=ond \\
+    \>  \>({\em antecedent}$_2$ {\em form}$^*$) \\
+    \>  \>\ldots))
+\end{tabbing}
+\end{minipage} \\
+
+\begin{minipage}[t]{0.45\columnwidth}
+\begin{tabbing}
+(c\=ond \\
+  \>({\em antecedent}$_1$ {\em form}$^*$) \\
+  \>({\em antecedent}$_2$ {\em form}$^*$) \\
+  \>\ldots)
+\end{tabbing}
+\end{minipage}
+& $\equiv$ &
+\begin{minipage}[t]{0.45\columnwidth}
+\begin{tabbing}
+(if \={\em antecedent}$_1$ \\
+    \>(progn {\em form}$^*$) \\
+    \>(c\=ond \\
+    \>  \>({\em antecedent}$_2$ {\em form}$^*$) \\
+    \>  \>\ldots))
+\end{tabbing}
+\end{minipage}\\
+&&\\
+\end{tabular}
+}}
+\end{center}}
+\syntaxtable{cond {\normalfont rewrite rules}}{\condRewrites}
+
+\macro{and}
+%
+\Syntax
+\savesyntax\andSyntax\vbox{\small\syntax
+and macro
+   = '(', 'and', {form}, ')';
+\endsyntax}
+\syntaxtable{and}{\andSyntax}
+%
+\remarks%
+The expansion of an \macroref{and} form leads to the evaluation of the
+sequence of {\em form}s from left to right.  The first {\em form} in
+the sequence that evaluates to \nil\/ stops evaluation and none of
+the {\em form}s to its right will be evaluated---that is to say, it is
+non-strict.  The result of {\tt (\macroref{and})} is \true.  If none of the {\em
+form}s evaluate to \nil, the value of the last {\em form} is
+returned.  The rewrite rules for \macroref{and} are given below.
+%
+\savesyntax\andRewrites\vbox{\begin{center}
+{\small\tt
+\begin{tabular}{lll}
+&&\\
+(and) & $\equiv$ & t \\
+(and {\em form}) & $\equiv$ & {\em form} \\
+(and {\em form}$_1$ {\em form}$_2$ \ldots) & $\equiv$ &
+\begin{minipage}[t]{0.45\columnwidth}\begin{tabbing}
+(if \={\em form}$_1$\\
+    \>(and {\em form}$_2$ \ldots)\\
+    \>())
+\end{tabbing}\end{minipage}\\
+&&\\
+\end{tabular}}
+\end{center}}
+\syntaxtable{and {\normalfont rewrite rules}}{\andRewrites}
+
+\macro{or}
+%
+\Syntax
+\savesyntax\orSyntax\vbox{\small\syntax
+or macro
+   = '(', 'or', {form}, ')';
+\endsyntax}
+\syntaxtable{or}{\orSyntax}
+%
+\remarks%
+The expansion of an \macroref{or} form leads to the evaluation of the sequence
+of {\em form}s from left to right.  The value of the first {\em form} that
+evaluates to {\em true} is the result of the \macroref{or} form and none of the
+{\em form}s to its right will be evaluated---that is to say, it is non-strict.
+If none of the forms evaluate to {\em true}, the value of the last {\em form} is
+returned.  The rewrite rules for \macroref{or} are given below.  Note that {\tt
+    x} does not occur free in any of {\em form}$_2$ \ldots {\em form}$_n$.
+%
+\savesyntax\orRewrites\vbox{\begin{center}
+{\small\tt
+\begin{tabular}{lll}
+&&\\
+(or) & $\equiv$ & () \\
+(or {\em form}) & $\equiv$ & {\em form} \\
+(or {\em form}$_1$ {\em form}$_2$ \ldots) & $\equiv$ &
+\begin{minipage}[t]{0.45\columnwidth}\begin{tabbing}
+(le\=t ((x {\em form}$_1$))\\
+   \>(if \=x\\
+         \>x\\
+         \>(or {\em form}$_2$ \ldots)))
+\end{tabbing}
+\end{minipage}\\
+&&\\
+\end{tabular}}
+\end{center}}
+\syntaxtable{or {\normalfont rewrite rules}}{\orRewrites}
+%
+\end{optDefinition}
+
+\sclause{Variable Binding and Sequences}
+\label{subsubsec:variable-binding}
+%
+\begin{optPrivate}
+    The term {\em closure} is not defined.  Should expand on syntactic variants
+    and precise the definition of the scope and extent of the binding.
+
+    Should make clear that {\em body} is a sequence of forms.  The term
+    continuation is not defined.  RPG finds ``The invocation...invalidated''
+    obscure.
+
+    In {\tt make-values} is the object copied or shared?  Rather sparse!
+
+    The phrase ``...object named by variable'' is weak.
+
+    Does {\tt multiple-argument-values} copy or not?
+
+    JAP removed all the multiple argument junk until a better model can be
+    proposed.
+
+    JAP would like to weaken the requirement that let/cc ``signal an error'' to
+    be ``is an error''.  Done.  Perhaps someone will notice this issue now.
+
+    Should {\em lambda-list} become {\em specialized-lambda-list}?
+\end{optPrivate}
+%
+\begin{optDefinition}
+
+\keyword{let/cc}
+\ttindex{let/cc!see also \macroref{block} and \macroref{return-from}}
+%
+\Syntax
+\savesyntax\letccSyntax\vbox{\small\syntax
+let/cc form
+   = '(', 'let/cc', identifier, {form}, ')';
+\endsyntax}
+\syntaxtable{let/cc}{\letccSyntax}
+%
+\begin{arguments}
+    \item[identifier] To be bound to the continuation of the \keywordref{let/cc}
+    form.
+    \item[body] A sequence of forms.
+\end{arguments}
+%
+\result%
+The result of evaluating the last form in {\em body} or the value of
+the argument given to the continuation bound to {\em identifier}.
+%
+\remarks%
+The {\em identifier} is bound to a new location, which is initialized with the
+continuation of the \keywordref{let/cc} form.  This binding is immutable and has
+lexical scope and indefinite extent\index{general}{scope and extent!of
+    \keywordref{let/cc} binding}.  Each form in {\em body} is evaluated in order
+in the environment extended by the above binding.  It is an error to call the
+continuation outside the dynamic extent of the \keywordref{let/cc} form that
+created it.  The continuation is a function of one argument.  Calling the
+continuation causes the restoration of the lexical environment and dynamic
+environment that existed before entering the \keywordref{let/cc} form.
+%
+\examples%
+An example of the use of \keywordref{let/cc} is given in
+example~\ref{example:pathopen}.  The function {\tt path-open} takes a list of
+paths, the name of a file and list of options to pass to {\tt open}.  It tries
+to open the file by appending the name to each path in turn.  Each time {\tt
+    open} fails, it signals a condition that the file was not found which is
+trapped by the handler function.  That calls the continuation bound to fail to
+cause it to try the next path in the list.  When {\tt open} does find a file,
+the continuation bound to {\tt succeed} is called with the stream as its
+argument, which is subsequently returned to the caller of {\tt path-open}.  If
+the path list is exhausted, \genericref{map} (section~\ref{collection})
+terminates and an error (condition class: \conditionref{cannot-open-path}) is
+signalled.
+%
+\begin{example}
+    \label{example:pathopen}
+    \examplecaption{using {\tt let/cc}}
+    {\small\syntax
+    (defun path-open (pathlist name . options)
+      (let/cc succeed
+        (map
+          (lambda (path)
+            (let/cc fail
+              (with-handler
+                (lambda (condition resume) (fail ()))
+                (succeed (apply open
+                           (format nil "~a/~a" path name)
+                           options)))))
+          pathlist)
+        (error
+          (format nil
+            "path-open: cannot open stream for (~a) ~a"
+            pathlist name)
+          <cannot-open-path>)))
+    \endsyntax}
+\end{example}
+%
+\seealso%
+\macroref{block}, \macroref{return-from}.
+
+\macro{block}
+%
+\ttindex{block!see also \keywordref{let/cc}}
+\Syntax
+\savesyntax\blockSyntax\vbox{\small\syntax
+block macro
+   = '(', 'block', identifier, {form}, ')';
+\endsyntax}
+\syntaxtable{block}{\blockSyntax}
+%
+\remarks%
+The block expression is used to establish a statically scoped binding of an
+escape function.  The block {\em variable} is bound to the
+continuation\index{general}{continuation} of the block.  The continuation can be
+invoked anywhere within the block by using \macroref{return-from}.  The {\em
+    form}s are evaluated in sequence and the value of the last one is returned
+as the value of the block form.  See also \keywordref{let/cc}.  The rewrite
+rules for \macroref{block} are given below.
+% in Table~\ref{block-return-from-rules}.
+
+The rewrite for \macroref{block}, does not prevent the \macroref{block} being
+exited from anywhere in its dynamic extent, since the function bound
+to {\em identifier} is a first-class item and can be passed as an
+argument like other values.
+%
+\savesyntax\blockRewrites\vbox{\begin{center}
+{\small\tt
+\begin{tabular}{lll}
+&&\\
+%(block) & $\equiv$ & {\rm Is an error}\\
+(block {\em identifier}) & $\equiv$ & ()\\
+(block {\em identifier} {\em form}$^*$) & $\equiv$ & (let/cc {\em identifier} {\em form}$^*$) \\
+&&\\
+\end{tabular}}
+\end{center}}
+\syntaxtable{block {\normalfont rewrite rules}}{\blockRewrites}
+%
+\seealso%
+\macroref{return-from}.
+
+\macro{return-from}
+\ttindex{return-from!see also \keywordref{let/cc}}
+%
+\Syntax
+\savesyntax\returnfromSyntax\vbox{\small\syntax
+return from macro
+   = '(', 'return-from', identifier, [form], ')';
+\endsyntax}
+\syntaxtable{return-from}{\returnfromSyntax}
+%
+\remarks%
+In \macroref{return-from}, the {\em identifier} names the continuation of
+the (lexical) \macroref{block} from which to return.
+%An error is signalled
+%(condition class: {\tt
+%<invalid-return-continuation>}\indexcondition{invalid-return-continuation})
+%if the value of the variable named by {\em identifier} is not a
+%continuation.
+\macroref{return-from} is the invocation of the continuation of the block
+named by {\em identifier}.  The {\em form} is evaluated and the value
+is returned as the value of the block named by {\em identifier}.  The
+rewrite rules for \macroref{return-from} are given below.
+%
+\savesyntax\returnFromRewrites\vbox{\begin{center}
+{\small\tt
+\begin{tabular}{lll}
+&&\\
+%(return-from) & $\equiv$ & {\rm Is an error}\\
+(return-from {\em identifier}) & $\equiv$ & ({\em identifier} ())\\
+\begin{minipage}[t]{0.45\columnwidth}\begin{tabbing}
+(re\=turn-from\\
+   \>{\em identifier} {\em form})
+\end{tabbing}\end{minipage}
+& $\equiv$ & ({\em identifier} {\em form})\\
+&&\\
+\end{tabular}}
+\end{center}}
+\syntaxtable{return-from {\normalfont rewrite rules}}{\returnFromRewrites}
+%
+\seealso%
+\macroref{block}.
+
+\keyword{labels}
+%
+\Syntax
+\savesyntax\labelsSyntax\vbox{\small\syntax
+labels form
+   = '(', 'labels',
+          '(', {function definition}, ')',
+          {form}, ')';
+function definition
+   = '(', identifier, lambda list, {form}, ')';
+\endsyntax}
+\syntaxtable{labels}{\labelsSyntax}
+%
+\begin{arguments}
+    \item[identifier] A symbol naming a new inner-lexical binding to be
+    initialized with the function having the {\em lambda-list} and {\em body}
+    specified.
+
+    \item[lambda-list] The parameter list of the function conforming to the
+    syntax specified below.
+
+    \item[body] A sequence of forms.
+
+    \item[labels-body] A sequence of forms.
+\end{arguments}
+%
+\result%
+The \keywordref{labels} operator provides for local mutually recursive function
+creation.  Each {\em identifier} is bound to a new inner-lexical binding
+initialized with the function constructed from {\em lambda-list} and {\em body}.
+The scope of the {\em identifier}s is the entire \keywordref{labels}
+form\index{general}{scope and extent!in \keywordref{labels} expressions}.  The
+{\em lambda-list} is either a single variable or a list of variables---see
+\keywordref{lambda}.  Each form in {\em labels-body} is evaluated in order in
+the lexical environment extended with the bindings of the {\em identifier}s.
+The result of evaluating the last form in {\em labels-body}\/ is returned as the
+result of the \keywordref{labels} form.
+
+\macro{let}
+%
+\Syntax
+\savesyntax\letSyntax\vbox{\small\syntax
+let macro
+   = '(', 'let', [identifier], '(', {binding}, ')',
+     {form}, ')';
+binding
+   = identifier
+   | '(' identifier, form, ')';
+\endsyntax}
+\syntaxtable{let}{\letSyntax}
+%
+\remarks%
+The optional {\em identifier}\/ denotes that the let form can be called from
+within its {\em body}.  This is an abbreviation for \keywordref{labels} form in
+which {\em identifier} is bound to a function whose parameters are the
+identifiers of the {\em binding\/}s of the \macroref{let}, whose body is that of
+the \macroref{let} and whose initial call passes the values of the initializing
+form of the {\em binding\/}s.  A binding is specified by either an identifier or
+a two element list of an identifier and an initializing form.  All the
+initializing forms are evaluated in order from left to right in the current
+environment and the variables named by the identifiers in the {\em binding}s are
+bound to new locations holding the results.  Each form in {\em body} is
+evaluated in order in the environment extended by the above bindings.  The
+result of evaluating the last form in {\em body} is returned as the result of
+the \macroref{let} form.  The rewrite rules for \macroref{let} are given below.
+%
+\savesyntax\letRewrites\vbox{\begin{center}
+{\small{\tt
+\begin{tabular}{lll}
+(let () {\em form}$^*$) & $\equiv$ & (progn {\em form}$^*$) \\
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(l\=et (\=({\em id}$_1$ {\em form}$_1$) \\
+  \>    \>({\em id}$_2$ {\em form}$_2$) \\
+  \>    \>{\em id}$_3$ \\
+  \>    \>\ldots)\\
+  \>{\em form}$^*$)
+\end{tabbing}
+\end{minipage}
+& $\equiv$ &
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(\=(l\=ambda ({\em id}$_1$ {\em id}$_2$ {\em id}$_3$ \ldots) \\
+ \>  \>{\em form}$^*$) \\
+ \>{\em form}$_1$ {\em form}$_2$ () \ldots) \\
+\end{tabbing}
+\end{minipage}\\
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(l\=et \={\em id$_0$}\\
+  \>   \>(\=({\em id}$_1$ {\em form}$_1$) \\
+  \>   \> \>{\em id}$_2$ \\
+  \>   \> \>\ldots)\\
+  \>{\em form}$^*$)
+\end{tabbing}
+\end{minipage}
+& $\equiv$ &
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(l\=abels\\
+  \>(\=({\em id}$_0$ ({\em id}$_1$ {\em id}$_2$ \ldots) \\
+  \> \>{\em form}$^*$)) \\
+  \>({\em id$_0$} {\em form}$_1$ () \ldots))
+\end{tabbing}
+\end{minipage}\\
+&&\\
+\end{tabular}}}
+\end{center}}
+\syntaxtable{let {\normalfont rewrite rules}}{\letRewrites}
+
+\macro{let*}
+%
+\Syntax
+\savesyntax\letstarSyntax\vbox{\small\syntax
+let star macro
+   = '(', 'let*', '(', {binding}, ')', {form}, ')';
+\endsyntax}
+\syntaxtable{let*}{\letstarSyntax}
+%
+\remarks%
+A {\em binding} is specified by a two element list of a variable and an
+initializing form.  The first initializing form is evaluated in the
+current environment and the corresponding variable is bound to a new
+location containing that result.  Subsequent bindings are processed in
+turn, evaluating the initializing form in the environment extended by
+the previous binding.  Each form in {\em body} is evaluated in order in
+the environment extended by the above bindings.  The result of
+evaluating the last form is returned as the result of the \macroref{let*}
+form.  The rewrite rules for \macroref{let*} are given below.
+%
+\savesyntax\letStarRewrites\vbox{\begin{center}
+{\small\tt
+\begin{tabular}{lll}
+(let* () {\em form}$^*$) & $\equiv$ & (progn {\em form}$^*$) \\
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(l\=et* (\=({\em var}$_1$ {\em form}$_1$) \\
+  \>     \>({\em var}$_2$ {\em form}$_2$) \\
+  \>     \>{\em var}$_3$\\
+  \>     \>\ldots) \\
+  \>{\em form}$^*$)\\
+\end{tabbing}
+\end{minipage}
+& $\equiv$ &
+\begin{minipage}[t]{\columnwidth}
+\begin{tabbing}
+(l\=et (({\em var}$_1$ {\em form}$_1$)) \\
+  \>(l\=et* (\=({\em var}$_2$ {\em form}$_2$) \\
+  \>  \>     \>{\em var}$_3$\\
+  \>  \>     \>\ldots) \\
+  \>  \>{\em form}$^*$))\\
+\end{tabbing}
+\end{minipage}\\
+\end{tabular}
+}
+\end{center}}
+\syntaxtable{let* {\normalfont rewrite rules}}{\letStarRewrites}
+
+\keyword{progn}
+%
+\Syntax
+\savesyntax\prognSyntax\vbox{\small\syntax
+progn form
+   = '(', 'progn', {form}, ')';
+\endsyntax}
+\syntaxtable{progn}{\prognSyntax}
+%
+\begin{arguments}
+    \item[form\/$^*$] A sequence of forms and in certain circumstances, defining
+    forms.
+\end{arguments}
+%
+\result%
+The sequence of {\em form}s is evaluated from left to right, returning the value
+of the last one as the result of the \keywordref{progn} form.  If the sequence
+of forms is empty, \keywordref{progn} returns \nil.
+%
+\remarks%
+If the \keywordref{progn} form occurs enclosed only by \keywordref{progn} forms
+and a \defformref{defmodule} form, then the {\em form}s within the
+\keywordref{progn} can be defining forms, since they appear in the top-lexical
+environment.  It is a violation for defining forms to appear in inner-lexical
+environments.
+
+%\keyword{multiple-value-bind}{lambda-list form body}{obj}
+%\gdef\multipleValueBind{\verb+(multiple-value-bind+ lambda-list form body\verb+)+}
+%The {\em form} is evaluated and the elements of {\em lambda-list} are
+%bound to the resulting values.  The cardinality of the resulting
+%values might not agree with the arity of the {\tt multiple-value-bind}
+%{\em lambda-list}.  If the number of values is less than the arity,
+%the excess formal parameters receive the value \nil.  It is an
+%error if the number of values is greater than the arity.  A conforming
+%processor must support a minimum {\tt multiple-value-bind} arity of
+%15.  If {\em lambda-list} is an {\em identifier}, it is bound to a
+%newly allocated list of the multiple values.  If {\em lambda-list}
+%is a {\em rest-list}, each {\em identifier} preceding the dot is bound
+%to its corresponding value in the multiple value and the {\em
+%identifier} succeeding the dot is bound to a newly allocated list of
+%the remaining elements of the multiple value.  These bindings have
+%lexical scope and extent.  Each form in {\em body} is evaluated in
+%order in the environment extended by the above bindings.
+%
+%\standard{values}{obj$_1$ ... obj$_n$}{multiple-value(obj)}
+%The values {\em obj$_1$} to {\em obj$_n$} are passed to the
+%dynamically closest enclosing instance of {\tt multiple-value-bind}.
+%If there is no such enclosing {\tt multiple-value-bind}, the
+%excess values are discarded and only {\em obj$_1$} is returned.
+
+\keyword{unwind-protect}
+%
+\Syntax
+\savesyntax\unwindprotectSyntax\vbox{\small\syntax
+unwind protect form
+   = '(', 'unwind-protect', protected form,
+     {after form}, ')';
+\endsyntax}
+\syntaxtable{unwind-protect}{\unwindprotectSyntax}
+%
+\begin{arguments}
+    \item[protected-form] A form.
+    \item[after-form$^*$] A sequence of forms.
+\end{arguments}
+%
+\result%
+The value of {\em protected-form}.
+%
+\remarks%
+The normal action of \keywordref{unwind-protect} is to process {\em
+    protected-form} and then each of {\em after-form}s in order, returning the
+value of {\em protected-form} as the result of \keywordref{unwind-protect}.  A
+non-local exit from the dynamic extent of {\em protected-form}, which can be
+caused by processing a non-local exit form, will cause each of {\em after-form}s
+to be processed before control goes to the continuation specified in the
+non-local exit form.  The {\em after-form}s are not protected in any way by the
+current \keywordref{unwind-protect}.  Should any kind of non-local exit occur
+during the processing of the {\em after-form}s, the {\em after-form}s being
+processed are not reentered.  Instead, control is transferred to wherever
+specified by the new non-local exit but the {\em after-form}s of any intervening
+\keywordref{unwind-protect}s between the dynamic extent of the target of control
+transfer and the current \keywordref{unwind-protect} are evaluated in increasing
+order of dynamic extent.
+%
+\examples
+%
+\begin{example}
+\label{example:unwind-loop}
+\examplecaption{Interaction of \keywordref{unwind-protect} with non-local exits}
+{\small\syntax
+(progn
+  (let/cc k1
+    (labels
+      ((loop
+         (let/cc k2 (unwind-protect (k1 10) (k2 99))
+         ;; continuation bound to {\tt k2}
+         (loop))))
+      (loop)))
+  ;; continuation bound to {\tt k1}
+  ...)
+\endsyntax}
+\end{example}
+%
+The code fragment in example~\ref{example:unwind-loop} illustrates both the use
+of \keywordref{unwind-protect} and of a difference between the semantics of
+\eulisp\ and some other Lisps.  Stepping through the evaluation of this form:
+{\tt k1} is bound to the continuation of its \keywordref{let/cc} form; a
+recursive function named {\tt loop} is constructed, {\tt loop} is called from
+the body of the \keywordref{labels} form; {\tt k2} is bound to the continuation
+of its \keywordref{let/cc} form; \keywordref{unwind-protect} calls {\tt k1}; the
+after forms of \keywordref{unwind-protect} are evaluated in order; {\tt k2} is
+called; {\tt loop} is called; etc..  This program loops indefinitely.
+%
+\end{optDefinition}
+
+\sclause{Quasiquotation Expressions}
+\gdef\module{syntax-0}
+\label{backquote}
+\index{general}{quasiquotation}
+\index{general}{backquoting}
+%
+\begin{optPrivate}
+    Should it be an error to splice an improper list even if its the last item?
+\end{optPrivate}
+%
+\begin{optDefinition}
+
+\macro{quasiquote}
+%
+\Syntax
+\savesyntax\quasiquoteSyntax\vbox{\small\syntax
+quasiquote macro
+   = '(', 'quasiquote', skeleton, ')';
+\endsyntax}
+\syntaxtable{quasiquote}{\quasiquoteSyntax}
+%
+\remarks%
+Quasiquotation is also known as backquoting.  A \macroref{quasiquote}d
+expression is a convenient way of building a structure.  The {\em skeleton}
+describes the shape and, generally, many of the entries in the structure but
+some holes remain to be filled.  The \macroref{quasiquote} macro can be
+abbreviated by using the glyph called {\em grave accent}
+(\verb+`+)\ttindex{quasiquote!abbreviation with {\tt `}}, so that {\tt
+    (\macroref{quasiquote} {\em expression})} can be written {\tt `{\em
+        expression}}.
+%A complete definition of the syntax of quasiquote
+%expressions is given in Table~\ref{quasiquote-syntax}.
+
+\syntaxform{unquote}
+%
+\ttindex{unquote}
+\Syntax
+\savesyntax\unquoteSyntax\vbox{\small\syntax
+unquote syntax
+   = '(', 'unquote', form, ')'
+   | ',', form;
+\endsyntax}
+\syntaxtable{unquote}{\unquoteSyntax}
+%
+\remarks%
+See \syntaxref{unquote-splicing}.
+
+\syntaxform{unquote-splicing}
+\ttindex{unquote-splicing}
+%
+\Syntax
+\savesyntax\unquotespliceSyntax\vbox{\small\syntax
+unquotespliceing syntax
+   = '(', 'unquote-splicing', form, ')'
+   | ',@', form;
+\endsyntax}
+\syntaxtable{unquote-splicing}{\unquotespliceSyntax}
+%
+\remarks%
+The holes in a quasiquoted expression are identified by unquote expressions of
+which there are two kinds---forms whose value is to be inserted at that location
+in the structure and forms whose value is to be spliced into the structure at
+that location.  The former is indicated by an \syntaxref{unquote} expression and
+the latter by an \syntaxref{unquote-splicing} expression.  In
+\syntaxref{unquote-splice} the {\em form} must result in a proper list.  The
+insertion of the result of an unquote-splice expression is as if the opening and
+closing parentheses of the list are removed and all the elements of the list are
+appended in place of the unquote-splice expression.
+%An
+%error is signalled (condition class: {\tt
+%<unquote-no-context>}\indexcondition{unquote-no-context}) if either of
+%these syntaxes occurs outside the scope of a {\tt quasiquote}
+%expression.
+
+The syntax forms \syntaxref{unquote} and \syntaxref{unquote-splicing} can be
+abbreviated respectively by using the glyph called {\em comma}
+(\verb+,+)\ttindex{unquote!abbreviation with {\tt ,}} preceding an expression
+and by using the diphthong {\em comma} followed by the glyph called {\em
+    commercial at} (\verb+,@+)\ttindex{unquote-splicing!abbreviation to ,@}
+preceding a form.  Thus, {\tt (\syntaxref{unquote} a)} may be written {\tt ,a}
+and {\tt (\syntaxref{unquote-splicing} a)} can be written {\tt ,@a}.
+%
+\examples
+{\small\tt\begin{tabular}{lll}
+        `(a ,(list 1 2) b) & $\rightarrow$ & (a (1 2) b)\\
+        `(a ,@(list 1 2) b) & $\rightarrow$ & (a 1 2 b)
+\end{tabular}}
+%
+\end{optDefinition}
+
+\sclause{Summary of Level-0 Expressions and Definitions}
+%
+\begin{optDefinition}
+\noindent
+This section gives the syntax of all level-0 expressions and definitions
+together.  The syntax of data objects is given in the section pertaining to the
+class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
+%
+\ssclause{Syntax of Level-0 defining forms}
+%
+\usebox{\defmoduleZeroSyntax}
+\usebox{\defclassSyntax}
+\usebox{\defgenericSyntax}
+\usebox{\defmethodSyntax}
+\usebox{\defconstantSyntax}
+\usebox{\deflocalSyntax}
+\usebox{\defmacroSyntax}
+\usebox{\defunSyntax}
+
+\ssclause{Syntax of Level-0 expressions}
+%
+\usebox{\genericLambdaSyntax}
+\usebox{\lambdaSyntax}
+\usebox{\functioncallSyntax}
+\usebox{\quoteSyntax}
+\usebox{\setqSyntax}
+\usebox{\ifSyntax}
+\usebox{\letccSyntax}
+\usebox{\labelsSyntax}
+\usebox{\prognSyntax}
+\usebox{\unwindprotectSyntax}
+\usebox{\applySyntax}
+
+\ssclause{Syntax of Level-0 macros}
+%
+\usebox{\condSyntax}
+\usebox{\andSyntax}
+\usebox{\orSyntax}
+\usebox{\blockSyntax}
+\usebox{\returnfromSyntax}
+\usebox{\letSyntax}
+\usebox{\letstarSyntax}
+\usebox{\quasiquoteSyntax}
+\usebox{\unquoteSyntax}
+\usebox{\unquotespliceSyntax}
+
+\flushbottom
+\end{optDefinition}

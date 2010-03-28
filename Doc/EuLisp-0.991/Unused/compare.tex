@@ -1,0 +1,271 @@
+\sclause{Comparison}
+\label{compare}
+\index{general}{level-0 modules!compare}
+\index{general}{compare!module}
+\begin{optPrivate}
+Move comparing, copying, class-of, etc to here
+
+The definition of {\tt =} is generally badly thought out.
+
+What is the relationship of {\tt equal} and its methods to {\tt eq}
+and to symbols?
+
+Is copy of integer, float and character the identity function?
+Depends on the implementation/representation.
+
+How are we to handle multiple character sets in {\tt equal}?
+\end{optPrivate}
+\begin{optDefinition}
+The defined name of this module is {\tt compare}.
+There are four functions for comparing objects for equality, of which
+{\tt =} is specifically for comparing numeric values and {\tt eq},
+{\tt eql} and {\tt equal} are for all objects.  The latter three are
+related in the following way:
+
+\begin{center}
+\begin{tabular}{rcccl}
+{\tt (eq {\em a} {\em b})} & $\Rightarrow$ & {\tt (eql {\em a} {\em
+b})} & $\Rightarrow$ & {\tt (equal {\em a} {\em b})}\\
+{\tt (eq {\em a} {\em b})} & $\not\Leftarrow$ & {\tt (eql {\em a} {\em
+b})} & $\not\Leftarrow$ & {\tt (equal {\em a} {\em b})}\\
+\end{tabular}
+\end{center}
+
+There is one function for comparing objects by order, which is called
+{\tt <}, and which is implemented by the generic function {\tt
+binary<}.  A summary of the comparison functions and the classes for
+which they have defined behaviour is given below.
+
+\framebox[\linewidth]
+{
+\begin{tabular}{|ll|}\hline
+{\tt eq}: & \objectclass$\times$\objectclass\\\hline
+{\tt eql}: & \objectclass$\times$\objectclass\\
+           & \characterclass$\times$\characterclass \Ra {\tt equal}\\
+           & \fpintclass$\times$\fpintclass \Ra {\tt binary=}\\
+           & \doublefloatclass$\times$\doublefloatclass \Ra {\tt binary=}\\\hline
+{\tt equal}: & \objectclass$\times$\objectclass\\
+             & \characterclass$\times$\characterclass\\
+             & \nullclass$\times$\nullclass\\
+             & \numberclass$\times$\numberclass \Ra {\tt eql}\\
+             & \pairclass$\times$\pairclass\\
+             & \stringclass$\times$\stringclass\\
+             & \vectorclass$\times$\vectorclass\\\hline
+{\tt =}: & \numberclass$\times$\numberclass \Ra {\tt binary=}\\\hline
+{\tt binary=}: & \fpintclass$\times$\fpintclass\\
+               & \doublefloatclass$\times$\doublefloatclass\\\hline
+{\tt <}: & \objectclass$\times$\objectclass \Ra {\tt binary<}\\\hline
+{\tt binary<}: & \characterclass$\times$\characterclass\\
+               & \fpintclass$\times$\fpintclass\\
+               & \doublefloatclass$\times$\doublefloatclass\\
+               & \stringclass$\times$\stringclass\\\hline
+\end{tabular}
+}
+
+\function{eq}
+
+\begin{arguments}
+\item[object$_1$] An object.
+\item[object$_2$] An object.
+\end{arguments}
+
+\result%
+Compares {\em object$_1$} and {\em object$_2$} and returns {\tt t} if
+they are the {\em same\/} object, otherwise {\tt ()}.  {\em Same\/} in
+this context means ``identifies the same memory location''.
+
+\remarks%
+In the case of numbers and characters the behaviour of {\tt eq} might
+differ between processors because of implementation choices about
+internal representations.  Therefore, {\tt eq} might return {\tt t} or
+{\tt ()} for numbers which are {\tt =} and similarly for characters
+which are {\tt eql}, depending on the
+implementation\ttindex{eq!implementation-defined
+behaviour}\index{general}{implementation-defined!behaviour of {\tt eq}}.
+
+\examples
+\begin{tabular}{lcl}
+\verb+(eq 'a 'a)+ & \Ra & \verb+t+\\
+\verb+(eq 'a 'b)+ & \Ra & \verb+()+\\
+\verb+(eq 3 3)+ & \Ra & \verb+t+ or \verb+()+\\
+\verb+(eq 3 3.0)+ & \Ra & \verb+()+\\
+\verb+(eq 3.0 3.0)+ & \Ra & \verb+t+ or \verb+()+\\
+\verb+(eq (cons 'a 'b) (cons 'a 'c))+ & \Ra & \verb+()+\\
+\verb+(eq (cons 'a 'b) (cons 'a 'b))+ & \Ra & \verb+()+\\
+\verb+(eq '(a . b) '(a . b))+ & \Ra & \verb+t+ or \verb+()+\\
+\verb+(let ((x (cons 'a 'b))) (eq x x))+ & \Ra & \verb+t+\\
+\verb+(let ((x '(a . b))) (eq x x))+ & \Ra & \verb+t+\\
+\verb+(eq #\a #\a)+ & \Ra & \verb+t+ or \verb+()+\\
+\verb+(eq "string" "string")+ & \Ra & \verb+t+ or \verb+()+\\
+\verb+(eq #('a 'b) #('a 'b))+ & \Ra & \verb+t+ or \verb+()+\\
+\verb+(let ((x #('a 'b))) (eq x x))+ & \Ra & \verb+t+\\
+\end{tabular}
+
+\function{eql}
+
+\begin{arguments}
+\item[object$_1$] An object.
+\item[object$_2$] An object.
+\end{arguments}
+
+\result%
+If the class of {\em object$_1$} and of {\em object$_2$} is the same and is
+a subclass of {\tt number}, the result is that of comparing them under
+{\tt =}.  If the class of {\em object$_1$} and of {\em object$_2$} is the
+same and is a subclass of {\tt character}, the result is that of
+comparing them under {\tt equal}.  Otherwise the result is that of
+comparing them under {\tt eq}.
+
+\examples
+Given the same set of examples as for {\tt eq}, the same result is
+obtained except in the following cases:
+
+\begin{tabular}{lcl}
+%\verb+(eql 'a 'a)+ & \Ra & \verb+t+\\
+%\verb+(eql 'a 'b)+ & \Ra & \verb+()+\\
+\verb+(eql 3 3)+ & \Ra & \verb+t+\\
+%\verb+(eql 3 3.0)+ & \Ra & \verb+()+\\
+\verb+(eql 3.0 3.0)+ & \Ra & \verb+t+\\
+%\verb+(eql (cons 'a 'b) (cons 'a 'c))+ & \Ra & \verb+()+\\
+%\verb+(eql (cons 'a 'b) (cons 'a 'b))+ & \Ra & \verb+()+\\
+%\verb+(eql '(a . b) '(a . b))+ & \Ra & \verb+t+ or \verb+()\\
+%\verb+(let ((x (cons 'a 'b))) (eql x x))+ & \Ra & \verb+t+\\
+%\verb+(let ((x '(a . b))) (eql x x))+ & \Ra & \verb+t+\\
+\verb+(eql #\a #\a)+ & \Ra & \verb+t+\\
+%\verb+(eql "string" "string")+ & \Ra & \verb+t+ or \verb+()+\\
+%\verb+(eql #('a 'b) #('a 'b))+ & \Ra & \verb+t+ or \verb+()+\\
+%\verb+(let ((x #('a 'b))) (eql x x))+ & \Ra & \verb+t+\\
+\end{tabular}
+
+\generic{equal}
+
+\begin{arguments}
+\item[object$_1$] An object.
+\item[object$_2$] An object.
+\end{arguments}
+
+\result%
+Returns true or false according to the method for the class(es) of
+{\em object$_1$} and {\em object$_2$}. It is an error if either or
+both of the arguments is self-referential.
+% It is implementation-defined whether or not {\tt equal}
+% will terminate on self-referential
+% structures\index{general}{implementation-defined!behaviour of {\tt equal}}.
+
+\seealso%
+Class specific methods on {\tt equal} are defined for characters
+(\ref{character}), lists (\ref{list}), numbers (\ref{number}), strings
+(\ref{string}) and vectors (\ref{vector}).  All other cases are
+handled by the default method.
+
+\method{equal}
+
+\begin{specargs}
+\item[object$_1$, \objectclass] An object.
+\item[object$_2$, \objectclass] An object.
+\end{specargs}
+
+\result%
+The result is as if {\tt eql} had been called with the arguments
+supplied.
+
+\remarks%
+Note that in the case of this method being invoked from {\tt equal},
+the arguments cannot be characters or numbers.
+
+\function{=}
+
+\begin{arguments}
+\item[{number$_1$ \ldots}] A non-empty sequence of numbers.
+\end{arguments}
+
+\result%
+Given one argument the result is true.  Given more than one argument
+the result is determined by {\tt binary=}, returning true if all the
+arguments are the same, otherwise {\tt ()}.
+
+\generic{binary=}
+
+\begin{genericargs}
+\item[number$_1$, \numberclass] A number.
+\item[number$_2$, \numberclass] A number.
+\end{genericargs}
+
+\result%
+One of the arguments, or {\tt ()}.
+
+\remarks%
+The result is either a number or {\tt ()}.  This is determined by
+whichever class specific method is most applicable for the supplied
+arguments.
+
+\seealso%
+Class specific methods on {\tt binary=} are defined for fixed
+precision integer (\ref{spint}) and double float (\ref{double-float}).
+
+%\method{binary=}
+%
+%\begin{specargs}
+%\item[obj$_1$, \objectclass] An object.
+%\item[obj$_2$, \objectclass] An object.
+%\end{specargs}
+%
+%\result%
+%This is the default method for {\tt biary=}.  The result is always
+%{\tt ()}.
+
+\function{<}
+
+\begin{arguments}
+\item[object$_1$ \ldots] A non-empty sequence of objects.
+\end{arguments}
+
+\result%
+Given one argument the result is true.  Given more than one argument
+the result is true if the sequence of objects {\em object$_1$} up to
+{\em object$_n$} is strictly increasing according to the generic
+function {\tt binary<}.  Otherwise, the result is {\tt ()}.
+
+\generic{binary<}
+
+\begin{genericargs}
+\item[object$_1$, \objectclass] An object.
+\item[object$_2$, \objectclass] An object.
+\end{genericargs}
+
+\result%
+The first argument if it is less than the second, according to the
+method for the class of the arguments, otherwise {\tt ()}.
+
+\seealso%
+Class specific methods on {\tt binary<} are defined for characters
+(\ref{character}), strings (\ref{string}), fixed precision integers
+(\ref{spint}) and double floats (\ref{double-float}).
+
+\function{max}
+
+\begin{arguments}
+
+\item[object$_1$ \ldots] A non-empty sequence of objects.
+
+\end{arguments}
+
+\result%
+The maximal element of the sequence of objects {\em object$_1$} up to
+{\em object$_n$} using the generic function {\tt binary<}.  Zero
+arguments is an error.  One argument returns {\em object$_1$}.
+
+\function{min}
+
+\begin{arguments}
+
+\item[object$_1$ \ldots] A non-empty sequence of objects.
+
+\end{arguments}
+
+\result%
+The minimal element of the sequence of objects {\em object$_1$} up to
+{\em object$_n$} using the generic function {\tt binary<}.  Zero
+arguments is an error.  One argument returns {\em object$_1$}.
+
+\end{optDefinition}

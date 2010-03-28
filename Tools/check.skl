@@ -1,0 +1,42 @@
+## -------------------------------*- sh -*--------------------------------
+## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+## -----------------------------------------------------------------------
+##                     EuLisp System 'youtoo'
+## -----------------------------------------------------------------------
+##  Description: shell script to check the correct installation.
+##  Parameter -gc also checks the garbage collector.
+## -----------------------------------------------------------------------
+
+if (test -z "$*") then
+    FLAGS="${EUL_LIB_DIR}/eul-appl.o ${EUL_LIB_DIR}/gc-fake.o -L${EUL_LIB_DIR} \
+         -leulvm -llevel1 ${CLIBS}"
+elif (test $1 = -gc) then
+    FLAGS="${EUL_LIB_DIR}/eul-appl.o -L${EUL_LIB_DIR} \
+         -leulvm -llevel1 -lgc ${CLIBS}"
+else
+    echo "*** ERROR: bad parameter(s)  \`$*\`"
+    exit
+fi
+
+echo ".CHECKING INSTALLATION OF youtoo ..."
+
+${CC} ${CFLAGS} -o Test/hello1 Test/hello1.c Test/hello1_.c ${FLAGS}
+${CC} ${CFLAGS} -o Test/hello4 Test/hello4.c Test/hello4_.c ${FLAGS}
+
+RES1=`Test/hello1 | grep "Hello"`
+RES4=`Test/hello4 | grep "Hello"`
+
+if (test -z "${RES1}") then
+    echo "*** ERROR: bad installation"
+    echo ".DONE"
+    exit
+elif (test -z "${RES4}") then
+    echo "*** ERROR: bad installation"
+    echo ".DONE"
+    exit
+fi
+
+echo "Installation appears to be OK."
+echo ".DONE"
+
+## -----------------------------------------------------------------------

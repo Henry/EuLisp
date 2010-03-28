@@ -1,0 +1,444 @@
+\clause{Concurrency}
+\index{general}{thread}
+\index{general}{level-0 modules!thread}
+\index{general}{lock}
+\index{general}{level-0 modules!lock}
+%
+\begin{optPrivate}
+Added this section since it seems to need an introduction rather than
+just falling over the definition of the operations.
+
+Integrated Russell's modifications to thread state diagram. gbn.
+\end{optPrivate}
+%
+\begin{optDefinition}
+The basic elements of parallel processing in \eulisp\ are processes and
+mutual exclusion, which are provided by the classes \classref{thread}\ and
+\classref{lock}\ respectively.
+
+A thread is allocated and initialized, by calling \functionref{make}.  The
+initarg of a thread specifies the initial function, which is where execution
+starts the first time the thread is dispatched by the scheduler.  In this
+discussion four states of a thread are identified: {\it new}, {\it running},
+{\it aborted} and {\it finished}.  These are for conceptual purposes only and a
+EuLisp program cannot distinguish between new and running or between aborted and
+finished.  (Although accessing the result of a thread would permit such a
+distinction retrospectively, since an aborted thread will cause a condition to
+be signalled on the accessing thread and a finished thread will not.)  In
+practice, the running state is likely to have several internal states, but these
+distinctions and the information about a thread's current state can serve no
+useful purpose to a running program, since the information may be incorrect as
+soon as it is known.  The initial state of a thread is new.  The union of the
+two final states is known as {\em determined}.  Although a program can find out
+whether a thread is determined or not by means of {\tt wait} with a timeout of
+\true\/ (denoting a poll), the information is only useful if the thread has been
+determined.
+
+A thread is made available for dispatch by starting it, using the function
+\functionref{thread-start}, which changes its state from new to running.  After
+running a thread becomes either finished or aborted.  When a thread is finished,
+the result of the initial function may be accessed using
+\functionref{thread-value}.  If a thread is aborted, which can only occur as a
+result of a signal handled by the default handler (installed when the thread is
+created), then \functionref{thread-value} will signal the condition that aborted
+the thread on the thread accessing the value.  Note that
+\functionref{thread-value} suspends the calling thread if the thread whose
+result is sought is not determined.
+
+While a thread is running, its progress can be suspended by accessing a lock, by
+a stream operation or by calling \functionref{thread-value} on an undetermined
+thread.  In each of these cases, \functionref{thread-reschedule} is called to
+allow another thread to execute.  This function may also be called voluntarily.
+Progress can resume when the lock becomes unlocked, the input/output operation
+completes or the undetermined thread becomes determined.
+
+The actions of a thread can be influenced externally by \functionref{signal}.
+This function registers a condition to be signalled no later than when the
+specified thread is rescheduled for execution---when
+\functionref{thread-reschedule} returns.  The condition must be an instance of
+\conditionref{thread-condition}.  Conditions are delivered to the thread in
+order of receipt.  This ordering requirement is only important in the case of a
+thread sending more than one signal to the same thread, but in other
+circumstances the delivery order cannot be verified.  A \functionref{signal} on
+a determined thread has no discernable effect on either the signalled or
+signalling thread unless the condition is not an instance of
+\conditionref{thread-condition}, in which case an error is signalled on the
+signalling thread.  See also Section~\ref{condition}.
+
+A lock is an abstract data type protecting a binary value which denotes whether
+the lock is locked or unlocked.  The operations on a lock are \functionref{lock}
+and \functionref{unlock}.  Executing a \functionref{lock} operation will
+eventually give the calling thread exclusive control of a lock.  The
+\functionref{unlock} operation unlocks the lock so that either a thread
+subsequently calling \functionref{lock} or one of the threads which has already
+called \functionref{lock} on the lock can gain exclusive access.
+%
+\begin{note}
+    It is intended that implementations of locks based on spin-locks, semaphores
+    or channels should all be capable of satisfying the above description.
+    However, to be a conforming implementation, the use of a spin-lock must
+    observe the fairness requirement, which demands that between attempts to
+    acquire the lock, control must be ceded to the scheduler.
+\end{note}
+%
+The programming model is that of concurrently executing threads,
+regardless of whether the configuration is a multi-processor or not,
+with some constraints and some weak fairness guarantees.
+%
+\begin{enumerate}
+    \item A processor is free to use run-to-completion, timeslicing and/or
+    concurrent execution.
+
+    \item A conforming program must assume the possibility of concurrent
+    execution of threads and will have the same semantics in all cases---see
+    discussion of fairness which follows.
+
+    \item The default condition handler for a new thread, when invoked, will
+    change the state of the thread to {\it aborted}, save the signalled
+    condition and reschedule the thread.
+
+    \item A continuation must only be called from within its dynamic extent.
+    This does not include threads created within the dynamic extent.  An error
+    is signalled (condition class:
+    \conditionref{wrong-thread-continuation}\indexcondition{wrong-thread-continuation}),
+    if a continuation is called on a thread other than the one on which it was
+    created.
+
+    \item The lexical environment (inner and top) associated with the initial
+    function may be shared, as is the top-dynamic environment, but each thread
+    has a distinct inner-dynamic environment.  In consequence, any modifications
+    of bindings in the lexical environment or in the top-dynamic environment
+    should be mediated by locks to avoid non-deterministic behaviour.
+
+    \item The creation and starting of a thread represent changes to the state
+    of the processor and as such are not affected by the processor's handling of
+    errors signalled subsequently on the creating/starting thread
+    (c.f. streams).  That is to say, a non-local exit to a point dynamically
+    outside the creation of the subsidiary thread has no default effect on the
+    subsidiary thread.
+
+    \item The behaviour of i/o on the same stream by multiple threads is
+    undefined unless it is mediated by explicit locks.
+\end{enumerate}
+
+The parallel semantics are preserved on a sequential run-to-completion
+implementation by requiring communication between threads to use only
+thread primitives and shared data protected by locks---both the
+thread primitives and locks will cause rescheduling, so other
+threads can be assumed to have a chance of execution.
+
+There is no guarantee about which thread is selected next.  However, a
+fairness guarantee is needed to provide the illusion that every other
+thread is running.  A strong guarantee would ensure that every other
+thread gets scheduled before a thread which reschedules itself is
+scheduled again.  Such a scheme is usually called ``round-robin''.
+This could be stronger than the guarantee provided by a parallel
+implementation or the scheduler of the host operating system and
+cannot be mandated in this definition.
+
+A weak but sufficient guarantee is that if any thread reschedules
+infinitely often then every other thread will be scheduled infinitely
+often.  Hence if a thread is waiting for shared data to be changed by
+another thread and is using a lock, the other thread is
+guaranteed to have the opportunity to change the data.  If it is not
+using a lock, the fairness guarantee ensures that in the same
+scenario the following loop will exit eventually:
+%
+{\small\syntax
+(while (= data 0) (thread-reschedule))
+\endsyntax}
+%
+\end{optDefinition}
+
+\sclause{Threads}
+\index{general}{thread}
+\label{thread}
+\gdef\module{thread}
+%
+\begin{optPrivate}
+    Fixed semaphore discussion as per Harry Bretthauer's observation and changed
+    from binary to counting as agreed at October '90 meeting.
+\end{optPrivate}
+%
+\begin{optRationale}
+    Many threads can exist and process concurrently.  Switching processing
+    between threads can happen either when a thread voluntarily relinquishes
+    control, or perhaps at regular intervals, under the control of a preemptive
+    scheduler.
+\end{optRationale}
+%
+\begin{optDefinition}
+The defined name of this module is {\tt thread}.
+This section defines the operations on threads.
+
+\class{thread}
+\index{general}{level-0 classes!\theclass{thread}}
+%
+\noindent
+The class of all instances of \classref{thread}.
+%
+\begin{initoptions}
+%
+    \item[init-function, fn] an instance of \classref{<function>} which will be
+    called when the resulting thread is started by \functionref{thread-start}.
+%
+\end{initoptions}
+%
+\function{threadp}
+%
+\begin{arguments}
+    \item[object] An object to examine.
+\end{arguments}
+%
+\result%
+The supplied argument if it is an instance of \classref{thread}, otherwise
+\nil.
+
+\function{thread-reschedule}
+%
+\noindent
+This function takes no arguments.
+%
+\result%
+The result is \nil.
+%
+\remarks%
+This function is called for side-effect only and may cause the thread
+which calls it to be suspended, while other threads are run.  In
+addition, if the thread's condition queue is not empty, the first
+condition is removed from the queue and signalled on the thread.  The
+resume continuation of the signal will be one which will eventually
+call the continuation of the call to \functionref{thread-reschedule}.
+%
+\seealso%
+\functionref{thread-value}, \functionref{signal} and
+Section~\ref{condition} for details of conditions and signalling.
+
+\function{current-thread}
+\noindent
+This function takes no arguments.
+%
+\result%
+The thread on which \functionref{current-thread} was executed.
+
+\function{thread-start}
+\begin{arguments}
+%
+    \item[thread] the thread to be started, which must be new.  If {\em thread}
+    is not new, an error is signalled (condition class: \classref{
+        <thread-already-started>}\indexcondition{thread-already-started}).
+%
+    \item[obj$_1$ \ldots obj$_n$] values to be passed as the arguments to the
+    initial function of {\em thread}.
+%
+\end{arguments}
+%
+\result%
+The thread which was supplied as the first argument.
+%
+\remarks%
+The state of thread is changed to running.  The values {\em obj$_1$} to {\em
+    obj$_n$} will be passed as arguments to the initial function of {\em
+    thread}.
+
+\function{thread-value}
+\begin{arguments}
+    \item[thread] the thread whose finished value is to be accessed.
+\end{arguments}
+%
+\result%
+The result of the initial function applied to the arguments passed
+from \functionref{thread-start}.  However, if a condition is signalled on {\em
+thread} which is handled by the default handler the condition will now
+be signalled on the thread calling \functionref{thread-value}---that is the
+condition will be propagated to the accessing thread.
+%
+\remarks%
+If {\em thread} is not determined, each thread calling \functionref{
+thread-value} is suspended until {\em thread} is determined, when each
+will either get the thread's value or signal the condition.
+%
+\seealso%
+\functionref{thread-reschedule}, \functionref{signal}.
+
+\generic{wait}
+%
+\begin{genericargs}
+%
+    \item[obj] An object.
+%
+    \item[timeout, \classref{object}] One of \nil, \true\/ or a non-negative
+    integer.
+%
+\end{genericargs}
+%
+\result%
+Returns \nil\/ if {\em timeout} was reached, otherwise a
+non-\nil\/ value.
+%
+\remarks%
+\genericref{wait} provides a generic interface to operations which may block.
+Execution of the current thread will continue beyond the \genericref{wait}
+form only when one of the following happened:
+\begin{enumerate}
+    \item\label{case-a} A condition associated with {\em obj} returns true;
+    \item\label{case-b} {\em timeout} time units elapse;
+    \item\label{case-c} A condition is raised by another thread on this thread.
+\end{enumerate}
+\genericref{wait} returns \nil\/ if timeout occurs, else it returns a
+non-nil value.
+
+A {\em timeout} argument of \nil\/ or zero denotes a polling
+operation.  A {\em timeout} argument of \true\/ denotes indefinite
+blocking (cases \ref{case-a} or \ref{case-c} above).  A {\em timeout}
+argument of a non-negative integer denotes the minimum number of time
+units before timeout.  The number of time units in a second is given by
+the implementation-defined constant \constantref{ticks-per-second}.
+%
+\examples
+This code fragment copies characters from stream {\tt s} to the
+current output stream until no data is received on the stream for a
+period of at least 1 second.
+%
+{\small\syntax
+(labels
+  ((loop ()
+     (when (wait s (round ticks-per-second))
+           (print (read-char s))
+           (loop))))
+   (loop))
+\endsyntax}
+%
+\seealso%
+threads (section~\ref{thread}), streams (section~\ref{stream}).
+
+\method{wait}
+%
+\begin{specargs}
+%
+    \item[thread, \classref{thread}] The thread on which to wait.
+%
+    \item[timeout, <object>] The timeout period which is specified by one of
+    \nil, \true, and non-negative integer.
+%
+\end{specargs}
+%
+\result%
+Result is either {\em thread} or \nil.  If {\em timeout} is \nil, the
+result is {\em thread} if it is {\em determined}.  If {\em timeout} is \true,
+{\em thread} suspends until {\em thread} is {\em determined} and the result is
+guaranteed to be {\em thread}.  If {\em timeout} is a non-negative integer, the
+call blocks until either {\em thread} is determined, in which case the result is
+{\em thread}, or until the {\em timeout} period is reached, in which case the
+result is \nil, whichever is the sooner.  The units for the non-negative integer
+timeout are the number of clock ticks to wait.  The implementation-defined
+constant \constantref{ticks-per-second} is used to make timeout periods processor
+independent.
+%
+\seealso%
+\genericref{wait} and \constantref{ticks-per-second} (Section~\ref{condition}).
+%
+\constant{ticks-per-second}{\classref{double-float}}
+The number of time units in a second expressed as a double precision
+floating point number.  This value is
+implementation-defined\index{general}{implementation-defined!time units per
+second}.
+
+\condition{thread-condition}{condition}
+%
+\begin{initoptions}
+    \item[current-thread, thread] The thread which is signalling the condition.
+\end{initoptions}
+%
+\remarks%
+This is the general condition class for all conditions arising from
+thread operations.
+
+\condition{wrong-thread-continuation}{thread-condition}
+%
+\begin{initoptions}
+%
+    \item[continuation, continuation] A continuation.
+%
+    \item[thread, thread] The thread on which {\em continuation} was created.
+%
+\end{initoptions}
+%
+\remarks%
+Signalled if the given continuation is called on a thread other than
+the one on which it was created.
+
+\condition{thread-already-started}{thread-condition}
+%
+\begin{initoptions}
+    \item[thread, thread] A thread.
+\end{initoptions}
+%
+\remarks%
+Signalled by \functionref{thread-start} if the given thread has been started
+already.
+
+\sclause{Locks}
+\index{general}{lock}
+\label{lock}
+\gdef\module{lock}
+The defined name of this module is {\tt lock}.
+
+\class{lock}
+\index{general}{level-0 classes!\theclass{lock}}
+%
+The class of all instances of \classref{lock}.  This class has no
+init-options.  The result of calling \functionref{make} on \classref{lock}
+is a new, open lock.
+
+\function{lockp}
+%
+\begin{arguments}
+    \item[object] An object to examine.
+\end{arguments}
+%
+\result%
+The supplied argument if it is an instance of \classref{lock},
+otherwise \nil.
+
+\function{lock}
+%
+\begin{arguments}
+    \item[lock] the lock to be acquired.
+\end{arguments}
+%
+\result%
+The lock supplied as argument.
+%
+\remarks%
+Executing a \classref{lock} operation will eventually give the
+calling thread exclusive control of {\em lock}.  A consequence of
+calling \classref{lock} is that a condition from another thread may be
+signalled on this thread.  Such a condition will be signalled before
+{\em lock} has been acquired, so a thread which does not handle the
+condition will not lead to starvation; the condition will be signalled
+continuably so that the process of acquiring the lock may continue
+after the condition has been handled.
+%
+\seealso%
+\functionref{unlock} and Section~\ref{condition} for details of conditions and
+signalling.
+
+\function{unlock}
+%
+\begin{arguments}
+    \item[lock] the lock to be released.
+\end{arguments}
+%
+\result%
+The lock supplied as argument.
+%
+\remarks%
+The \functionref{unlock} operation unlocks {\em lock} so that either a thread
+subsequently calling \classref{lock} or one of the threads which has
+already called \classref{lock} on the lock can gain exclusive access.
+%
+\seealso%
+\classref{lock}.
+%
+\end{optDefinition}

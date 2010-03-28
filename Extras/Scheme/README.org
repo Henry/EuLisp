@@ -1,0 +1,69 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:            IEEE Scheme written in Youtoo 0.93
+#+AUTHOR:                     Andreas Kind
+#+DATE:               July 1997\\Updated February 2010
+#+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
+#+OPTIONS: ^:{} email:nil
+
+* Copyright
+  Youtoo is free software; you can redistribute it and/or modify it under the
+  terms of the GNU General Public License as published by the Free Software
+  Foundation; either version 2 of the License, or (at your option) any later
+  version.  See the file COPYING in this directory, for a description of the GNU
+  General Public License terms under which you can copy the files.
+
+* [[file:../../README.org][Youtoo README]]
+
+* General Description
+  This is IEEE Scheme implemented in youtoo.
+
+* Installation
+  + Install the bignums module in directory /Extras/Bignum/.
+  + Run 'make' in directory /Extras/Scheme/; this creates /libscheme.{i,a}/.
+  + Run 'make test' in directory /Extras/Scheme/; this tests libscheme.{i,a}.
+
+*** Installation of the scmtoo Scheme interpreter
+    + Run 'make scmtoo' in directory /Extras/Scheme/; this creates Scheme image.
+    + Run 'Bin.${ARCH}/scmtoo.sh'.
+
+*** Installation of the scm2tk Scheme-Tk Interpreter
+    + Edit the /Extras/Scheme/Makefile/ (if necessary).
+    + Run 'make scm2tk'.
+    + Make sure your ~LD_LIBRARY_PATH~ environment variable is set correctly
+      (you could edit Bin.${ARCH}/scm2tk.sh to add ~EUL_TCL_LIB_PATH~
+      ~EUL_TK_LIB_PATH~ and ~EUL_X_LIB_PATH~).
+
+***** Example test for scm2tk
+      Run 'Bin.${ARCH}/scm2tk.sh' and type
+      #+BEGIN_SRC scheme
+        (define (foo b x)
+          (display b)
+          (newline)
+          (tk-button-flash b))
+
+        (let ((b1 (tk-make-button () text: "foo" command: foo args: '(self: 42)))
+              (b2 (tk-make-button () text: "exit" fg: "red" command: tk-exit)))
+          (tk-pack b1 b2 padx: "10" pady: "3"))
+
+        (tk-main-loop)
+      #+END_SRC
+
+* Notes
+*** Scheme for Teaching
+    The Scheme image is tailored to teaching first-year students with
+
+    Harold Abelson and Gerald Jay Sussman and Julie Sussman \\
+    "Structure and Interpretation of Computer Programs" \\
+    The MIT Press, 1996. \\
+
+    This book is based on IEEE (which is not R4RS or R5RS).  For better
+    debugging and simpler interaction there is a flag called
+    =*first-year-students*= that triggers inlining the rep and other
+    things. This flag can be toggled in scmtoo or scm2tk with
+    =first-year-students:=.
+
+*** EuLisp-Tk Documentation
+    See http://www.cs.bath.ac.uk/~jap/ma5jg/youtoo-Tk-docs/ for documentation
+    and some Tk examples in EuLisp syntax or send mail to Julian Padget at
+    jap@maths.bath.ac.uk for more Tk teaching code.

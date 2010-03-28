@@ -1,0 +1,685 @@
+\clause{Language Structure}
+\label{subsec:lang-struct}
+\index{general}{languageStructure}
+%
+\begin{optPrivate}
+    Restriction on level-0 generics seems wierd.
+
+    I [jwd] changed the paragraph on level-0 functions and level-0 applications
+    to be, I think, clearer.  But we still don't say what a level-n function is
+    for n > 0, we don't define level-n application for any n, and the claim that
+    a level-n function is a level-(n-1) application may not be the right one.
+
+    Someone queried use of define and proposed describe, but can't see how this
+    helps.
+\end{optPrivate}
+%
+\begin{optDefinition}
+The \eulisp\ definition comprises the following items:
+\begin{description}
+    \item[Level-0]\index{general}{EuLisp@\eulisp!level-0} comprises all the
+    level-0 classes, functions, macros and special forms\index{general}{special
+        form}, which is this text minus Annex \ref{annex:level-1}.  The object
+    system can be extended by user-defined structure classes, and generic
+    functions.
+
+    \item[Level-1]\index{general}{EuLisp@\eulisp!level-1} extends level-0 with
+    the classes, functions, macros and special forms defined in Annex
+    \ref{annex:level-1}.  The object system can be extended by user-defined
+    classes and metaclasses.  The implementation of level-1 is not
+    necessarily written or writable as a conforming level-0 program.
+\end{description}
+%
+A {\em level-0 function\/} is a (generic) function defined in this text to be
+part of a conforming processor for level-0.  A function defined in terms of
+level-0 operations is an example of a {\em level-0 application}.
+
+Much of the functionality of \eulisp\ is defined in terms of
+modules\index{general}{standard
+    module}\index{general}{EuLisp@\eulisp!libraries}.  These modules might be
+available (and used) at any level, but certain modules are required at a given
+level.  Whenever a module depends on the operations available at a given level,
+that dependency will be specified.
+
+\eulisp\ level-0\index{general}{level-0 modules} is provided by the module {\tt
+    eulisp0}\index{general}{level-0 modules!eulisp0}.  This module imports and
+re-exports the modules specified in Table~\ref{level-0-modules}.
+
+Modules comprising {\tt eulisp0}:
+\begin{center}
+    \label{level-0-modules}
+    \begin{tabular}{|ll|}\hline
+        Module & Section(s)\\\hline
+        {\tt character} & \ref{character}\\
+        {\tt collection} & \ref{collection}\\
+        %{\tt compare} & \ref{compare}\\
+        {\tt condition} & \ref{condition}\\
+        {\tt convert} & \ref{convert}\\
+        {\tt copy} & \ref{copy}\\
+        {\tt double} & \ref{double-float}\\
+        {\tt mathlib} & \ref{elementary-functions}\\
+        % {\tt event} & \ref{event}\\
+        {\tt fpi} & \ref{fpi}\\
+        {\tt formatted-io} & \ref{formatted-io}\\
+        {\tt function} & \ref{function}\\
+        {\tt list} & \ref{list}\\
+        {\tt lock} & \ref{lock}\\
+        {\tt number} & \ref{number}\\
+        {\tt telos0} & \ref{obj-0}\\
+        {\tt stream} & \ref{stream}\\
+        {\tt string} & \ref{string}\\
+        {\tt symbol} & \ref{symbol}\\
+        % {\tt syntax-0} & \ref{backquote}\\
+        {\tt table} & \ref{table}\\
+        {\tt thread} & \ref{thread}\\
+        {\tt vector} & \ref{vector}\\\hline
+    \end{tabular}
+\end{center}
+%
+\noindent
+This definition is organized in three parts:
+\begin{description}
+    %
+    \item[Sections \ref{syntax}--\ref{control-0}] describes the core of level-0
+    of \eulisp, covering modules, simple classes, objects and generic functions,
+    threads, conditions, control forms and events.  These sections contain the
+    information about \eulisp\ that characterizes the language.
+    %
+    \item[Annex A] describes the additional classes required at level-0 and the
+    operations defined on instances of those classes\index{general}{level-0
+        classes}.  The annex is organized by module in alphabetical order.
+    These sections contain information about the predefined classes in \eulisp\
+    that are necessary to make the language usable, but is not central to an
+    appreciation of the language.
+    %
+    \item[Annex B] describes the reflective aspects of the object system and how
+    to program the metaobject protocol and some additional control forms.
+\end{description}
+%
+Prior to these, sections \ref{scope}--\ref{sec:definitions} define the scope of
+the text, cite normative references, conformance definitions, error definitions,
+typographical and layout conventions and terminology definitions used in this
+text.
+\end{optDefinition}
+%
+\clause{Scope}\label{scope}
+\begin{optDefinition}
+This text specifies the syntax and semantics of the computer
+programming language \eulisp\ by defining the requirements for a
+conforming \eulisp\ processor and a conforming \eulisp\ program (the
+textual representation of data and algorithms).
+%
+% {\em\begin{verse}
+%         NOTE---the term ``program'' is avoided in this definition because of
+%         the ambiguity in the representation of such an entity.
+%     \end{verse}}
+%
+\noindent
+This text does not specify:
+\begin{enumerate}
+    %
+    \item The size or complexity of a \eulisp\ program that will exceed the
+    capacity of any specific configuration or processor, nor the actions to be
+    taken when those limits are exceeded.
+    %
+    \item The minimal requirements of a configuration that is capable of
+    supporting an implementation of a \eulisp\ processor.
+    %
+    \item The method of preparation of a \eulisp\ program for execution or the
+    method of activation of this \eulisp\ program once prepared.
+    %
+    \item The method of reporting errors, warnings or exceptions to the client
+    of a \eulisp\ processor.
+    %
+    \item The typographical representation of a \eulisp\ program for human
+    reading.
+    %
+    \item The means to map module names to the filing system or other object
+    storage system attached to the processor.
+\end{enumerate}
+%
+To clarify certain instances of the use of English in this text the following
+definitions are provided:(
+\begin{description}
+    \item[must] a verbal form used to introduce a {\em required} property.  All
+    conforming processors must satisfy the property.
+    %
+    % \item[shall:] A verbal form used to introduce a {\em required}
+    % property.  All conforming processors must satisfy the property.
+    %
+    \item[should] A verbal form used to introduce a {\em strongly recommended}
+    property.  Implementors of processors are urged (but not required) to
+    satisfy the property.
+    %
+\end{description}
+\end{optDefinition}
+%
+\clause{Normative References}\index{general}{normativeReferences}
+\begin{optDefinition}
+The following standards contain provisions, which through references
+in this text constitute provisions of this definition.  At the
+time of writing, the editions indicated were valid.  All standards are
+subject to revision and parties making use of this definition are
+encouraged to apply the most recent edition of the standard listed
+below.
+\begin{references}
+    %
+    \bibitem[ISO 646] {iso646} Information processing --- ISO 7-bit coded
+    character set for information interchange, 1983.  Note: this standard is
+    currently under revision and the interested reader should see the 1990 Draft
+    International Standard version of ISO/IEC 646.
+    %
+    \bibitem[ISO 2382] {iso2382} Data processing --- vocabulary.
+    %
+    % \item
+    % {\bf ISO/IEC 10646: 1990}, {\em Information processing---ISO
+    %     multi-byte coded character set for information interchange.}  Note:
+    % this is not yet a standard and the given name may not be the final
+    % one.  Only the code number is correct.
+    % \item
+    % {\bf ISO/IEC CD 10967: 1991}, {\em Information technology---Programming
+    %     languages---Language compatible arithmetic.}  Note: this is not yet a
+    % standard and the reference cited here is to a Committee Draft (version
+    % 3.1).
+    % \item
+    % {\em Language compatible complex arithmetic.} Note: no formal
+    % reference to this standard in development was available at the time of
+    % writing.
+    %
+    % \bibitem[ISO ????] {clid}
+    % Common language independent calling mechanism and datatypes.
+    % Language-Independent Datatypes: working draft 5, JTC1/SC22/WG11/N233
+    % (also X3T2/91-109).  Note: no formal reference for the calling
+    % mechanism was available at the time of writing.
+    %
+    \bibitem[ISO TR 10034 : 1990] {iso10034} Information technology ---
+    Guidelines for the preparation of conformity clauses in programming language
+    standards.
+    %
+    \bibitem[ISO TR 10176 : 1991] {iso10176} Information technology ---
+    Guidelines for the preparation of programming language standards. Note: this
+    is currently a draft technical report.
+    %
+    \bibitem[BS 6154] {bs6154} Method of defining --- Syntactic metalanguage,
+    1981.
+    %
+    \bibitem[ISO/IEC 9899 : 1990] {iso9899} Programming Languages --- C.
+    %
+\end{references}
+\end{optDefinition}
+%
+\clause{Conformance Definitions}\index{general}{conformance}
+\label{subsubsec:cse}
+\begin{optPrivate}
+    JWD: What I think's happened is that a number of convenient definitions have
+    been put it, but we haven't yet sorted out just which ones we want and (in
+    some cases) just what they should mean.  Anyway, here are some questions:
+
+    Why isn't "processor-undefined" just "undefined"?
+
+    "Portable code" refers to "conforming code", but the latter is not defined.
+
+    It seems that, by omission, "conforming programs" can depend on
+    "processor-dependent" behaviour.
+
+    If we're going to have both "portable code" and "conforming program", there
+    ought to be some straightforward relationship between them.
+
+    We need to relate the later parts of 2.3.1 to the earlier parts.  For
+    example, what are the implications for conformance when something "is an
+    error"?
+
+    The first two paragraphs of [section 2.5] give two different definitions of
+    "variable".  The second is the Scheme definition.
+
+    The definition of "variable" in the description env isn't quite a
+    definition.  It says "denotes a binding ...".
+
+    "Extent" can be for things other than bindings.
+
+    "Dynamic scope" is defined in terms of "control region" which is not
+    defined.
+
+    The order of definitions in the section 2.5 description env looks reasonable
+    of you look just at the items, but I think it would be easier to read of the
+    different kinds of "scope" ("extent") were defined together rather than the
+    different applications of "indefinite" ("dynamic").
+
+    Updated conformance section as per draft guidelines referenced in the text.
+
+    910527---added Klaus' terminology with slight adaptations.
+\end{optPrivate}
+%
+\begin{optDefinition}
+The following terms are general in that they could be applied to the
+definition of any programming language.  They are derived from ISO/IEC
+TR 10034: 1990.
+%
+\begin{definitions}
+    \definition{configuration}\index{general}{configuration} Host and target
+    computers, any operating systems(s) and software (run-time system) used to
+    operate a language {\em processor}.
+    %
+    \definition{conformity clause}\index{general}{conformity clause} Statement
+    that is not part of the language definition but that specifies requirements
+    for compliance with the language standard.
+    %
+    \definition{conforming program}\index{general}{conforming program} Program
+    which is written in the language defined by the language standard and which
+    obeys all the {\em conformity} {\em clauses} for programs in the language
+    standard.
+    %
+    \definition{conforming processor}\index{general}{conforming processor} {\em
+        Processor} which processes {\em conforming} {\em programs} and program
+    units and which obeys all the {\em conformity} {\em clauses} for {\em
+        processors} in the language standard.
+    %
+    \definition{error}\index{general}{error} Incorrect program construct or
+    incorrect functioning of a program as defined by the language standard.
+    %
+    \definition{extension}\index{general}{extension} Facility in the {\em
+        processor} that is not specified in the language standard but that does
+    not cause any ambiguity or contradiction when added to the language
+    standard.
+    %
+    \definition{implementation-defined}\index{general}{implementation-defined}
+    Specific to the {\em processor}, but required by the language standard to be
+    defined and documented by the implementer.
+    %
+    \definition{processor}\index{general}{processor} Compiler, translator or
+    interpreter working in combination with a {\em configuration}.
+    %
+\end{definitions}
+\end{optDefinition}
+%
+\clause{Error Definitions}\index{general}{errors}
+\begin{optDefinition}
+Errors in the language described in this definition fall into one of
+the following three classes:
+%
+\begin{definitions}
+%
+    \definition{static error}\index{general}{static
+        error}\index{general}{error!static} An error which is detected during
+    the execution of a \eulisp\ program or which is a violation of the defined
+    behaviour of \eulisp.  Static errors have two classifications:
+    \begin{enumerate}
+        \item Where a {\em conforming} {\em processor} is required to detect the
+        erroneous situation or behaviour and report it.  This is signified by
+        the phrase {\em an error is signalled}\index{general}{error!signalled}.
+        The condition class to be signalled is specified.  Signalling an error
+        consists of identifying the condition class related to the error and
+        allocating an instance of it.  This instance is initialized with
+        information dependent on the condition class.  A conforming \eulisp\
+        program can rely on the fact that this condition will be signalled.
+
+        \item Where a {\em conforming} {\em processor} might or might not detect
+        and report upon the error.  This is signified by the phrase {\em \ldots
+            is an error}.  A processor should provide a mode where such errors
+        are detected and reported where possible\index{general}{error!can be
+            signalled}.
+    \end{enumerate}
+    If the result of preparation is a runnable program, then that program must
+    signal any static error.
+
+    \definition{environmental error}\index{general}{environmental
+        error}\index{general}{error!environmental} An error which is detected by
+    the configuration supporting the \eulisp\ processor.  The processor must
+    signal the corresponding static error which is identified and handled as
+    described above.
+    \definition{violation}\index{general}{error}\index{general}{violation}\index{general}{error!violation}
+    An error which is detected during the preparation of a \eulisp\ program for
+    execution, such as a violation of the syntax or static semantics of \eulisp\
+    by the program under preparation.  A {\em conforming} {\em processor} is
+    required to issue a diagnostic if a violation is detected.
+\end{definitions}
+%
+All errors specified in this definition are static unless explicitly stated
+otherwise.
+\end{optDefinition}
+%
+\clause{Compliance}\index{general}{compliance}
+\begin{optDefinition}
+An \eulisp\ processor can conform\index{general}{compliance} at either of the
+two levels defined under Language Structure in the Introduction.
+Thus a level-0\index{general}{conformance!level-0} conforming processor
+must support all the basic expressions, classes and class operations
+defined at level-0.  A level-1\index{general}{conformance!level-1}
+conforming processor must support all the basic expressions, classes,
+class operations and modules defined at level-1 and at level-0.
+
+The following two statements govern the conformance of a processor at a given
+level.
+\begin{enumerate}
+    %
+    \item A {\em conforming processor\/} must correctly process all programs
+    conforming both to the standard at the specified level and the {\em
+        implementation-defined} features of the {\em processor}.
+    %
+    \item A {\em conforming processor\/} should offer a facility to report the
+    use of an {\em extension} which is statically determinable solely from
+    inspection of a program, without execution.  (It is also considered
+    desirable that a facility to report the use of an {\em extension} which is
+    only determinable dynamically be offered.)
+    %
+\end{enumerate}
+%
+A level-0\index{general}{conformance!level-0} conforming program is one which
+observes the syntax and semantics defined for level-0.  A level-0 conforming
+program might not conform at level-1.  A {\em strictly-conforming\/} level-0
+program is one that also conforms at level-1.  A level-1 conforming program
+observes the syntax and semantics defined for level-1.
+
+In addition, a {\em conforming program\/} at any level must not use any {\em
+    extensions\/} implemented by a language {\em processor\/}, but it can rely
+on {\em implementation-defined\/} features.
+
+\noindent
+The documentation of a {\em conforming processor\/} must include:
+\begin{enumerate}
+    %
+    \item A list of all the {\em implementation-defined\/} definitions or
+    values.
+    %
+    \item A list of all the features of the language standard which are
+    dependent on the {\em processor\/} and not implemented by this {\em
+        processor\/} due to non-support of a particular facility, where such
+    non-support is permitted by the standard.
+    %
+    \item A list of all the features of the language implemented by this {\em
+        processor\/} which are {\em extensions\/} to the standard language.
+    %
+    \item A statement of conformity, giving the complete reference of the
+    language standard with which conformity is claimed, and, if appropriate, the
+    level of the language supported by this processor.
+    %
+\end{enumerate}
+\end{optDefinition}
+%
+\clause{Conventions}\index{general}{conventions}
+\label{conventions}
+\begin{optPrivate}
+    Should note error behaviour in reference to constant module binding (RPG).
+    Reorganize the naming convention stuff into a list layout to make it easier
+    to read---done (JAP).  What is the original value that is restored on exit?
+    (RPG).  Various undefined terms are: object, class, metaclass, function,
+    control region, closure, continuation, closer lexically, closer dynamically.
+    Note: missing sample names for ``c'' and ``q'' suffixes.
+
+    Someone proposed should define notation for rest lists here, but since they
+    do not (and cannot?) occur in the definition, I have not done anything about
+    it.
+\end{optPrivate}
+%
+\begin{optDefinition}
+This section defines the conventions employed in this text, how
+definitions will be laid out, the typeface to be used, the
+meta-language used in descriptions and the naming conventions.  A
+later section (\ref{sec:definitions}) contains definitions of the
+terms used in this text.
+
+A standard function\index{general}{function!standard function} denotes an
+immutable top-lexical binding of the defined name.  All the definitions in this
+text are bindings in some module except for the special form operators, which
+have no definition anywhere.  All bindings and all the special form operators
+can be renamed.
+%
+\begin{note}
+    A description making mention of ``an x'' where ``x'' is the name a
+    class usually means ``an instance of {\tt <x>}''.
+\end{note}
+%
+Frequently, a class-descriptive name will be used in the argument list of a
+function description to indicate a restriction on the domain to which that
+argument belongs.  In the case of a function, it is an error to call it with a
+value outside the specified domain.  A generic function can be defined with a
+particular domain and/or range.  In this case, any new methods must respect the
+domain and/or range of the generic function to which they are to be attached.
+The use of a class-descriptive name in the context of a generic function
+definition defines the intention of the definition, and is not necessarily a
+policed restriction.
+
+The {\em result-class} of an operation, except in one case, refers to a
+primitive or a defined class described in this definition.  The exception is for
+predicates.  Predicates are defined to return either the empty list---written
+\nil---representing the boolean value false\index{general}{false}, or any
+value other than \nil, representing true\index{general}{true}.  Although the
+class containing exactly this set of values is not defined in the language,
+notation is abused for convenience and {\em boolean}\index{general}{boolean} is
+defined, for the purposes of this report, to mean that set of values.  If the
+true value is a useful value, it is specified precisely in the description of
+the function.
+\end{optDefinition}
+%
+\sclause{Layout and Typography}
+\begin{optDefinition}
+Both layout and fonts are used to help in the description of \eulisp.
+A language element is defined as an entry with its name as the heading of a
+clause, coupled with its classification.  Examples of several kinds of
+entry are now given.  Some subsections of entries are optional and are
+only given where it is felt necessary.
+%
+\keyword{a-special-form}
+\Syntax
+\label{a-special-form-syntax}
+\savesyntax\aspecialformSyntax\vbox{\small\syntax
+a-special-form
+    = '(', a-special-form, {form}, ')';
+\endsyntax}
+\syntaxtable{a-special-form}{\aspecialformSyntax}
+%
+\begin{arguments}
+    \item[form$_1$] description of structure and r\^ole of {\em form$_1$}.\\
+    $\vdots$
+    \item[form$_n$] description of structure and r\^ole of {\em form$_n$}.
+\end{arguments}
+%
+\result%
+A description of the result.
+%
+\remarks%
+Any additional information defining the behaviour of {\tt
+    a-special-form}.
+%
+\examples
+Some examples of use of the special form and the behaviour that should
+result.
+%
+\seealso%
+Cross references to related entries.
+%
+\function{a-function}
+%
+\begin{arguments}
+    \item[argument-a] information about the class or classes of {\em
+        argument-a}.\\
+    $\vdots$
+    \item[\optional{argument-n}] information about the class or classes of
+    the optional argument {\em argument-n}.
+\end{arguments}
+%
+\result%
+A description of the result and, possibly, its class.
+%
+\remarks%
+Any additional information about the actions of {\tt a-function}.
+%
+\examples
+Some examples of calling the function with certain arguments and the
+result that should be returned.
+%
+\seealso%
+Cross references to related entries.
+%
+\generic{a-generic}
+%
+\begin{genericargs}
+    \item[argument-a, <class-a>] means that {\em argument-a} of {\tt a-generic}
+    must be an instance of {\tt <class-a>} and that {\em argument-a} is one of
+    the arguments on which {\tt a-generic} specializes.  Furthermore, each
+    method defined on {\tt a-generic} may
+    specialize only on a subclass of {\tt <class-a>} for {\em argument-a}.\\
+    $\vdots$
+    \item[argument-n] means that (i) {\em argument-n} is an instance of {\tt
+        <object>}, {\em i.e.} it is unconstrained, (ii) {\tt a-generic} does not
+    specialize on {\em argument-n}, (iii) no method on {\tt a-generic} can
+    specialize on {\em argument-n}.
+\end{genericargs}
+%
+\result%
+A description of the result and, possibly, its class.
+%
+\remarks%
+Any additional information about the actions of {\tt a-generic}.  This
+can take two forms depending on the function.  This will probably be
+in general terms, since the actual behaviour will be determined by the
+methods.
+%
+\seealso%
+Cross references to related entries.
+%
+\method{a-generic}
+%
+(A method on {\tt a-generic} with the following specialized arguments.)
+%
+\begin{specargs}
+    \item[argument-a, <class-a>] means that {\em argument-a} of the method must
+    be an instance of {\tt <class-a>}.  Of course, this argument must be one
+    which was defined in {\tt a-generic} as being open to
+    specialization and {\tt <class-a>} must be a subclass of the class.\\
+    $\vdots$
+    \item[argument-n] means that (i) {\em argument-n} is an instance of {\tt
+        <object>}, {\em i.e.} it is unconstrained, because {\tt a-generic} does
+    not specialize on {\em argument-n}.
+\end{specargs}
+%
+\result%
+A description of the result and, possibly, its class.
+%
+\remarks%
+Any additional information about the actions of this method attached
+to {\tt a-generic}.
+%
+\seealso%
+Cross references to related entries.
+%
+\condition{a-condition}{a-condition-superclass}
+%
+\begin{initoptions}
+    \item[initarg-a, value-a] means that an instance of {\tt <a-condition>} has
+    a slot called {\tt initarg-a} which should be initialized to {\em value-a},
+    where {\em value-a} is often the name of a class, indicating that {\em
+        value-a} should be an instance of that class and a description of the
+    information that {\em value-a} is
+    supposed to provide about the exceptional situation that has arisen.\\
+    $\vdots$
+    \item[initarg-n, value-n] As for {\tt initarg-a}.
+\end{initoptions}
+%
+\remarks%
+Any additional information about the circumstances in which the
+condition will be signalled.
+%
+\class{class-name}
+%
+\begin{initoptions}
+    \item[initarg-a, value-a] means that {\tt <class-name>} has an
+    initarg whose name is {\tt initarg-a} and the description will usually
+    say of what class (or classes) {\em value-a} should be an instance.
+    This initarg is required.\\ $\vdots$
+    \item[{\tt[}initarg-n, value-n{\tt]}]
+    The enclosing square brackets denote that this initarg is optional.
+    Otherwise the interpretation of the definition is as for {\tt
+        initarg-a}.
+\end{initoptions}
+%
+\remarks%
+A description of the r\^ole of {\tt <class-name>}.
+%
+\end{optDefinition}
+%
+\sclause{Naming}
+%
+\begin{optPrivate}
+    Consider adopting Scheme conventions for destructive and predicate
+    functions.
+\end{optPrivate}
+%
+\begin{optDefinition}
+Naming conventions are applied in the descriptions of primitive and
+defined classes as well as in the choice of other function names.
+Here is a list of the conventions and some examples of their use.
+%
+\subdefinition{``{\tt <name>}'' wrapping} By convention, classes have names
+which begin with ``{\tt <}'' and end with ``{\tt >}''.
+%
+\subdefinition{``{\tt binary}'' prefix} The two argument version of a n-ary
+argument function.  For example {\tt binary+} is the two argument (generic)
+function corresponding to the n-ary argument {\tt +} function.
+%
+% \subdefinition{``{\tt c}'' suffix}
+% The version of the function named {\tt foo} that is
+% guaranteed to terminate on self-referential structures is usually
+% named {\tt fooc}.
+%
+\subdefinition{``{\tt -class}'' suffix} The name of a metaclass of a set of
+related classes.  For example, {\tt <function-class>}, which is the class of
+{\tt <simple-function>}, {\tt <generic-function>} and any of their subclasses
+and {\tt <condition-class>} is the class of all condition classes.  The
+exception is {\tt <class>} itself which is the default metaclass.  The prefix
+should describe the general domain of the classes in question, but not
+necessarily any particular class in the set.
+%
+\subdefinition{``{\tt generic-}'' prefix} The generic version of the function
+named by the stem.
+% ---usually
+% required to allow for optional or variable numbers of arguments to
+% {\tt abc}.
+%
+\subdefinition{hyphenation} Function and class names made up of more than one
+word are hyphenated, for example: {\tt
+    compute-specialized-slot-class}.
+%
+% \subdefinition{``{\tt make-}'' prefix}
+% For most primitive or defined classes there is constructor function,
+% which is usually named {\tt make-}{\em class-name}---except where
+% historical precedent is strong, for example, {\tt cons} is used in
+% preference to {\tt make-pair}.
+%
+% \subdefinition{``{\tt n}'' prefix}
+% The destructive version of the function named {\tt foo} is usually
+% named {\tt nfoo}, for example the destructive version of {\tt reverse}
+% is named {\tt nreverse}.
+%
+\subdefinition{``{\tt p}'' suffix} A predicate function is named by a ``{\tt
+    p}'' suffix if the function or class name (after removing the enclosing {\tt
+    <} and {\tt >}) is not hyphenated, for instance, {\tt consp}, and is named
+by a ``{\tt -p}'' suffix if it is, for instance {\tt double-float-p}.
+%
+% \subdefinition{``{\tt q}'' suffix}
+% The version of the function named {\tt foo} that uses {\tt eq} for
+% comparison is usually named {\tt fooq}.
+%
+% \subdefinition{``{\tt -ref}'' suffix}
+% A slot reader is named {\em class-name}{\tt{}-ref}---where
+% appropriate---and as is the corresponding slot writer {\tt (setter
+%     {\em class-name}-ref)}---also where appropriate, for example {\tt
+%     table-ref}.  This convention is broken by historical precedent for the
+% accessors to slots of pairs, which are called {\tt car} and {\tt cdr}.
+%
+% \subdefinition{``{\tt -using-}'' infix}
+% This function name convention is used when calls are cascaded using
+% objects derived from the original object so that users can write
+% methods on the relevant classes.  For example, in the case of {\tt
+%     slot-value}, the class and slot description corresponding to the
+% original object and slot name are retrieved, and the new generic
+% functions are called ({\tt slot-value-using-class} and {\tt
+%     slot-value-using-slot}).
+%
+% When an operation depends on a global value, such as the current input
+% stream, the value might also be made accessible via a function, for
+% example {\tt (a-global-value)} and can be updated using the
+% corresponding setter function, for example {\tt ((setter
+%     a-global-value) another-value)}.
+%
+\end{optDefinition}

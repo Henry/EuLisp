@@ -1,0 +1,178 @@
+<HTML>
+<HEAD>
+  <TITLE>General Information</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFF0" TEXT="#000000">
+<h1>
+General Information</h1>
+
+<a name="intro">
+<hr>
+<a href="#this-documentation"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<h3>Introduction</h3>
+
+<p>
+This library of EuLisp modules is trying to provide the possibility of  calling Tk functionality 
+from <code>youtoo</code> interpreter. We use to refer to this library as <b>youtoo/Tk</b> system.
+<p>
+<dl>
+<dt>
+<em><b>What is Tk?</b></em> 
+<dd>Tk is nothing else than a toolkit for the X Window system. Tk provides commands 
+for building user interfaces, so that the programmer will be able to construct Motif-like user interfaces 
+easily and faster. Tk gives the programmer a set of functions to create and handle user interface widgets. 
+Consequently the coder does not need to write large and criptyc C codes that have to interact with the X 
+System. Tk was created as an extension to Tcl, which is a simple scripting language for controlling 
+applications.
+<p>
+
+<dt>
+<em><b>What is <code>youtoo</code>?</b></em> 
+<dd><code>youtoo</code> is one possible implementation of the object oriented programming 
+language EuLisp. <code>youtoo</code> was built and is still being improved by 
+<a href="http://www.maths.bath.ac.uk">The School of Mathematical Sciences</a> in 
+the <a href="http://www.bath.ac.uk">University of Bath</a>. EuLisp is a dialect of Lisp. 
+It is being discussed and created since 1985. 
+EuLisp provides new features to the former definitions and implementations of Lisp language. 
+The most important ones are:
+<p>
+<ol>
+<li>The integration of the classical Lisp type system and the object system into a single class hierarchy.
+<li>The complementary abstraction facilities provided by the class and the module mechanism.
+<li>Support for concurrent execution.
+</ol>
+<p>
+<code>youtoo</code> provides all these features defined in EuLisp language definition.
+<p>
+</dl>
+Lots of information could be found in <a href="http://www.maths.bath.ac.uk/~jap/ak1/youtoo/">youtoo site</a>
+
+<a name="this-documentation">
+<hr>
+<a href="#get-started"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#intro"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+
+<h3>This documentation</h3>
+
+<p>
+This documentation shows some aspects of the produced binding. Some of the
+commands of Tcl/Tk are not implemented, because youtoo provides the necessary features.
+<p>
+The next description tries to explain what has been done. The EuLisp commands always
+have the correspondent Tcl/Tk command. The general syntax is the same 
+that the manual pages for Tcl7.5 and tk4.1 use. 
+<p>The manual pages could be found in the next URL: 
+<a href="http://www.sco.com/Technology/tcl/Tcl.html">http://www.sco.com/Technology/tcl/Tcl.html</a>
+
+
+<a name="get-started">
+<hr>  
+<a href="#event-driven"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#this-documentation"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<h3>Getting Started</h3>
+
+<p>
+This section will explain the necessary steps in order to start producing the interface.
+<p>
+<ol>
+<li>Import the module <code>tcl-tk</code> in your import list. That is:<br>
+<pre>
+         (defmodule your-module
+            (syntax (macros)
+             import (level1 tcl-tk))
+</pre>
+<li>Add all the commands and functions to create and manage Tk widgets from youtoo.<br>
+There is a list of commands in <a href="functions.html">Tk commands in EuLisp</a> section.
+<p>
+<li>Add the event service loop at the end of your main module.<br>
+More details are given in the next section <a href="#event-driven">Event-Driven applications.</a>
+<p>
+<li>Compilation. <a href="technical.html#install">Have you install the correspondent libraries?</a>
+<ol>
+<li>Be sure that the path for tcl/Tk libraries is correct in your <i>.eulrc</i> file. <br>
+Path for the X library also need to be specified. That is:
+<pre>
+   (CLIBS . "-L<em>path</em> -lX11 
+             -L<em>path</em> -ltk4.1 
+             -L<em>path</em> -ltcl7.5 
+             -lm")
+</pre>
+<li>Compile your module. Use:
+<pre>
+youtoo your-module -l level1 -l tcl-tk
+</pre>
+</ol>
+<li>Execute your EuLisp program. Remember to set properly the environment variable DISPLAY.<br>
+The generated program can also handle the <code>display</code> variable. So that:
+<pre>
+   your-module -display <em>your-display</em>
+</pre>
+</ol>
+
+
+<a name="event-driven">
+<hr>
+<a href="functions.html#index"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#get-started"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+
+<h3>Event - Driven</h3>
+
+<p>
+Tk library works over the X System, that implies that almost everything is event-driven. That is, the execution flow is controled by events. The application reacts to determinate events.
+
+<p>
+youtoo/Tk is not indifferent to that. The applications in youtoo/Tk will be event-driven.
+
+<p>
+This is possible thanks to a couple of features that youtoo/Tk provides:
+<ol>
+<li>Callback mecanism. See <a href="special-cases.html#callbacks-user">How to manage callbacks</a> section. 
+<li>Special functions to dispatch events.
+<p>
+<ol>
+<li><code>Tcl_DoOneEvent. </code><a href="functions.html#Tcl_DoOneEvent">Go to Tk commands section</a>
+<li><code>Tk_MainLoop. </code><a href="functions.html#Tk_MainLoop">Go to Tk commands section</a>
+</ol>
+<p>
+These two functions are enough to produce event-driven applications with youtto/Tk.
+<code>Tk_MainLoop</code> loops calling <code>Tcl_DoOneEvent</code> with the blocking option.
+
+<p>
+The idea is that, if your application is single threaded it is enough using <code>Tcl_MainLoop</code>.<br>
+If your application needs to be doing different things apart from being dispatching Tk event, then create a new thread. The next example will show this:
+
+<pre>
+(defun loop-function ()
+  (while t
+    (Tcl_DoOneEvent 1)
+    (thread-reschedule)))
+
+(deflocal loop-thread (make &lt;thread&gt; function: loop-function))
+(thread-start loop-thread)
+</pre>
+</ol>
+<br>
+<br><br>
+<br><br>
+<br><br>
+<br>
+<br>
+
+
+</BODY></HTML>
+
+
+
+
+
+
+

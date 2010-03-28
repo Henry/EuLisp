@@ -1,0 +1,88 @@
+\sclause{Copying}
+\label{copy}
+\index{general}{level-0 modules!copy}
+\index{general}{copy!module}
+%
+\begin{optPrivate}
+    I have a cryptic note in my hardcopy which says {\tt (find-method copy
+        integer)}, but I don't know why.
+\end{optPrivate}
+%
+\begin{optDefinition}
+\noindent
+The defined name of this module is {\tt copy}.
+
+\generic{deep-copy}
+%
+\begin{genericargs}
+    \item[object] An object to be copied.
+\end{genericargs}
+%
+\result%
+Constructs and returns a copy of the source which is the same (under some class
+specific predicate) as the source and whose slots contain copies of the objects
+stored in the corresponding slots of the source, and so on.  The exact behaviour
+for each class of {\em object\/} is defined by the most applicable method for
+{\em object}.
+%
+\seealso%
+Class specific sections which define methods on \genericref{deep-copy}:
+list~(\ref{list}), string~(\ref{string}), table~(\ref{table}) and
+vector~(\ref{vector}).
+
+\method{deep-copy}
+%
+\begin{specargs}
+    \item[object, \classref{object}] An object.
+\end{specargs}
+%
+\result%
+Returns {\em object}.
+
+\method{deep-copy}
+%
+\begin{specargs}
+    \item[class, \classref{class}] A class.
+\end{specargs}
+%
+\result%
+Constructs and returns a new structure whose slots are initialized with copies
+(using \genericref{deep-copy}) of the contents of the slots of {\em class}.
+
+\generic{shallow-copy}
+%
+\begin{genericargs}
+    \item[object] An object to be copied.
+\end{genericargs}
+%
+\result%
+Constructs and returns a copy of the source which is the same (under
+some class specific predicate) as the source.  The exact behaviour for
+each class of {\em object\/} is defined by the most applicable method
+for {\em object}.
+%
+\seealso%
+Class specific sections which define methods on \genericref{shallow-copy}:
+pair~(\ref{pair}), string~(\ref{string}), table~(\ref{table}) and
+vector~(\ref{vector}).
+
+\method{shallow-copy}
+%
+\begin{specargs}
+    \item[object, \classref{object}] An object.
+\end{specargs}
+%
+\result%
+Returns {\em object}.
+%
+\method{shallow-copy}
+%
+\begin{specargs}
+    \item[class, \classref{class}] A class.
+\end{specargs}
+%
+\result
+Constructs and returns a new structure whose slots are initialized
+with the contents of the correpsonding slots of {\em struct}.
+%
+\end{optDefinition}

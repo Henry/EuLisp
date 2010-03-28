@@ -1,0 +1,972 @@
+%%% ----------------------------------------------------------------------------
+%%% Streams
+\sclause{Streams}
+\index{general}{stream}
+\index{general}{stream!module}
+\label{stream}
+\index{general}{level-0 modules!stream}
+\begin{optDefinition}
+The defined name of this module is {\tt stream}.
+
+The aim of the stream design presented here is an open architecture for
+programming with streams, which should be applicable when the interface to some
+object can be characterized by either serial access to, or delivery of,
+objects.
+
+The two specific objectives are: (i) transfer of objects between a process and
+disk storage; (ii) transfer of objects between one process and another.
+
+The fundamental purpose of a stream object in the scheme presented here is to
+provide an interface between two objects through the two functions
+\functionref{read}, for streams from which objects are received, and
+\functionref{write}, for streams to which objects are sent.
+
+%%%  ---------------------------------------------------------------------------
+%%%  Stream classes
+\ssclause{Stream classes}
+
+% ------------------------------------------------------------------------------
+\class{stream}
+% ------------------------------------------------------------------------------
+\index{general}{level-0 classes!\classref{stream}}
+%
+This is the root of the stream class hierarchy and also defines the basic
+stream class.
+%
+\begin{initoptions}
+    \item[read-action, \classref{function}] A function which is called by the
+    \classref{stream} \genericref{generic-read} method. The accessor for this slot is called
+    {\tt stream-read-action}.
+    %
+    \item[write-action, \classref{function}] A function which is called by the
+    \classref{stream} \genericref{generic-write} method. The accessor for this slot
+    is called {\tt stream-write-action}.
+\end{initoptions}
+%
+The following accessor functions are defined for \classref{stream}
+%
+\begin{functions}
+    \item[stream-lock] A lock, to be used to allow exclusive access to a stream.
+    %
+    \item[stream-source] An object to which the stream is connected and from
+    which input is read.
+    %
+    \item[stream-sink] An object to which the stream is connected and to which
+    ouptut is written.
+    %
+    \item[stream-buffer] An object which is used to buffer data by some
+    subclasses of \classref{stream}. Its default value is \nil.
+    %
+    \item[stream-buffer-size] The maximum number of objects that can be stored in
+    {\em stream-buffer}. Its default value is 0.
+\end{functions}
+%
+\noindent
+The transaction unit of \classref{stream} is \classref{object}.
+
+% ------------------------------------------------------------------------------
+\function{streamp}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+  \item[object, \classref{object}] The object to be examined.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is a stream, otherwise \nil.
+
+% ------------------------------------------------------------------------------
+\function{from-stream}
+% ------------------------------------------------------------------------------
+A constructor function of one argument for \classref{stream} which
+returns a stream whose {\tt stream-read-action} is the given argument.
+
+% ------------------------------------------------------------------------------
+\function{to-stream}
+% ------------------------------------------------------------------------------
+A constructor function of one argument for \classref{stream} which returns a stream
+whose {\tt stream-write-action} is the given argument.
+
+% ------------------------------------------------------------------------------
+\class{buffered-stream}
+% ------------------------------------------------------------------------------
+\index{general}{level-0 classes!\theclass{buffered-stream}}
+%
+This class specializes \classref{stream} by the use of a buffer which may grow
+arbitrarily large. The transaction unit of \classref{buffered-stream} is
+\classref{object}.
+
+% ------------------------------------------------------------------------------
+\class{fixed-buffered-stream}
+% ------------------------------------------------------------------------------
+\index{general}{level-0 classes!\theclass{fixed-buffered-stream}}
+%
+This class specializes \classref{buffered-stream} by placing a bound on the
+growth of the buffer. The transaction unit of \classref{fixed-buffered-stream}
+is \classref{object}.
+
+% ------------------------------------------------------------------------------
+\class{file-stream}
+% ------------------------------------------------------------------------------
+\index{general}{level-0 classes!\theclass{file-stream}}
+%
+This class specializes \classref{fixed-buffered-stream} by providing an interface to data
+stored in files on disk. The transaction unit of \classref{file-stream} is
+\classref{character}. The following additional accessor functions are defined for
+\classref{file-stream}:
+%
+\begin{functions}
+    \item[file-stream-filename] The path identifying the file system object
+    associated with the stream.
+    %
+    \item[file-stream-mode] The mode of the connection between the stream and
+    the file system object (usually either read or write).
+    %
+    \item[file-stream-buffer-position] A key identifying the current position in
+    the stream's buffer.
+\end{functions}
+
+% ------------------------------------------------------------------------------
+\function{file-stream-p}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+  \item[object, \classref{object}] The object to be examined.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is a \classref{file-stream} otherwise \nil.
+
+% ------------------------------------------------------------------------------
+\class{string-stream}
+% ------------------------------------------------------------------------------
+\index{general}{level-0 classes!\theclass{string-stream}}
+%
+The class of the default string stream.
+%
+\seealso The \hyperref[stringstrconv]{\tt converter} method for
+\classref{string-stream}\ to \classref{string}.
+
+% ------------------------------------------------------------------------------
+\function{string-stream-p}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[object, \classref{object}] The object to be examined.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is a \classref{string-stream} otherwise \nil.
+
+%%%  ---------------------------------------------------------------------------
+%%%  Stream operators
+\ssclause{Stream operators}
+
+% ------------------------------------------------------------------------------
+\function{connect}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[source] The source object from which the stream will read data.
+    \item[sink] The sink object to which the stream will write data.
+    \item[\optional{options}] An optional argument for specifying
+    implementation-defined options.
+\end{arguments}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Connects {\em source\/} to {\em sink\/} according to the class-specific
+behaviours of \genericref{generic-connect}.
+
+% ------------------------------------------------------------------------------
+\generic{generic-connect}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[source, \classref{object}] The source object from which the stream will
+    read data.
+    \item[sink, \classref{object}] The sink object to which the stream will write
+    data.
+    \item[\optional{options}, \classref{list}] An optional argument for specifying
+    implementation-defined options.
+\end{genericargs}
+%
+\remarks%
+Generic form of \functionref{connect}.
+
+% ------------------------------------------------------------------------------
+\method{generic-connect}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[source, \classref{stream}] The stream which is to be the source of {\em
+        sink}.
+    \item[sink, \classref{stream}] The stream which is to be the sink of {\em
+        source}.
+    \item[options, \classref{list}] A list of implementation-defined options.
+\end{specargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Connects the source of {\em sink\/} to {\em source\/} and the sink of
+{\em source\/} to {\em sink}.
+
+% ------------------------------------------------------------------------------
+\method{generic-connect}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[source, \theclass{path}] A path name.
+    \item[sink, \classref{file-stream}] The stream via which data will be
+    received from the file named by {\em path}.
+    \item[options, \classref{list}] A list of implementation-defined options.
+\end{specargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Opens the object identified by the path {\em source\/} for reading and
+connects {\em sink\/} to it. Hereafter, {\em sink\/} may be used for reading
+data from {\em sink\/}, until {\em sink\/} is disconnected or
+reconnected. Implementation-defined options for the opening of files may be
+specified using the third argument.
+%
+\seealso%
+\functionref{open-input-file}.
+
+% ------------------------------------------------------------------------------
+\method{generic-connect}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[source, \classref{file-stream}] The stream via which data will be sent
+    to the file named by {\em path}.
+    \item[sink, \theclass{path}] A path name.
+    \item[options, \classref{list}] A list of implementation-defined options.
+\end{specargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Opens the object identifed by the path {\em sink\/} for writing and
+connects {\em source\/} to it. Hereafter, {\em source\/} may be used for writing
+data to {\em sink}, until {\em source\/} is disconnected or
+reconnected. Implementation-defined options for the opening of files may be
+specified using the third argument.
+%
+\seealso%
+\functionref{open-output-file}.
+
+% ------------------------------------------------------------------------------
+\generic{reconnect}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[s1, \classref{stream}] A stream.
+    \item[s2, \classref{stream}] A stream.
+\end{genericargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Transfers the source and sink connections of {\em s1\/} to {\em s2},
+leaving {\em s1\/} disconnected.
+
+% ------------------------------------------------------------------------------
+\method{reconnect}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[s1, \classref{stream}] A stream.
+    \item[s2, \classref{stream}] A stream.
+\end{specargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Implements the \genericref{reconnect} operation for objects of class
+\classref{stream}.
+
+% ------------------------------------------------------------------------------
+\generic{disconnect}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[s, \classref{stream}] A stream.
+\end{genericargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Disconnects the stream {\em s\/} from its source and/or its sink.
+
+% ------------------------------------------------------------------------------
+\method{disconnect}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[s, \classref{stream}] A stream.
+\end{specargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Implements the diconnect operation for objects of class \classref{stream}.
+
+% ------------------------------------------------------------------------------
+\method{disconnect}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[s, \classref{file-stream}] A file stream.
+\end{specargs}
+%
+\result%
+The return value is \nil.
+%
+\remarks%
+Implements the diconnect operation for objects of class
+\classref{file-stream}. In particular, this involves closing the file associated
+with the stream {\em s}.
+
+%%%  ---------------------------------------------------------------------------
+%%%  Stream objects
+\ssclause{Stream objects}
+
+% ------------------------------------------------------------------------------
+\instance{stdin}{file-stream}
+% ------------------------------------------------------------------------------
+\remarks%
+The standard input stream, which is a file-stream and whose transaction unit is
+therefore character. In Posix compliant configurations, this object is
+initialized from the Posix \instanceref{stdin} object. Note that although
+\instanceref{stdin} itself is a constant binding, it may be connected to
+different files by the \genericref{reconnect} operation.
+
+% ------------------------------------------------------------------------------
+\instance{lispin}{stream}
+% ------------------------------------------------------------------------------
+\remarks%
+The standard lisp input stream, and its transaction unit is object. This stream
+is initially connected to \instanceref{stdin} (although not necessarily
+directly), thus a \genericref{read} operation on \instanceref{lispin} will case
+characters to be read from \instanceref{stdin} and construct and return an
+object corresponding to the next lisp expression. Note that although
+\instanceref{lispin} itself is a constant binding, it may be connected to
+different source streams by the \genericref{reconnect} operation.
+
+% ------------------------------------------------------------------------------
+\instance{stdout}{file-stream}
+% ------------------------------------------------------------------------------
+\remarks%
+The standard output stream, which is a file-stream and whose transaction unit is
+therefore character. In Posix compliant configurations, this object is
+initialized from the Posix \instanceref{stdout} object. Note that although
+\instanceref{stdout} itself is a constant binding, it may be connected to
+different files by the \genericref{reconnect} operation.
+
+% ------------------------------------------------------------------------------
+\instance{stderr}{file-stream}
+% ------------------------------------------------------------------------------
+\remarks%
+The standard error stream, which is a file-stream and whose transaction unit is
+therefore character. In Posix compliant configurations, this object is
+initialized from the Posix \instanceref{stderr} object. Note that although
+\instanceref{stderr} itself is a constant binding, it may be connected to
+different files by the \genericref{reconnect} operation.
+
+%%%  ---------------------------------------------------------------------------
+%%%  Buffer management
+\ssclause{Buffer management}
+\label{Buffer-management}
+
+% ------------------------------------------------------------------------------
+\generic{fill-buffer}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[stream, \classref{buffered-stream}] A stream.
+\end{genericargs}
+%
+\result%
+The buffer associated with {\em stream\/} is refilled from its {\em
+    source\/}.  Returns a count of the number of items read.
+%
+\remarks%
+This
+function is guaranteed to be called when an attempt is made to read from a
+buffered stream whose buffer is either empty, or from which all the items have
+been read.
+
+% ------------------------------------------------------------------------------
+\method{fill-buffer}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{buffered-stream}] A stream.
+\end{specargs}
+
+% ------------------------------------------------------------------------------
+\method{fill-buffer}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{file-stream}] A stream.
+\end{specargs}
+
+% ------------------------------------------------------------------------------
+\generic{flush-buffer}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[stream, \classref{buffered-stream}] A stream.
+\end{genericargs}
+%
+\result%
+The contents of the buffer associated with {\em stream} is flushed to
+its sink. If this operation succeeds, a true value is returned, otherwise the
+result is \nil.
+%
+\remarks%
+This function is guaranteed to be called when an attempt is made to
+write to a buffered stream whose buffer is full.
+
+% ------------------------------------------------------------------------------
+\method{flush-buffer}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{buffered-stream}] A stream.
+\end{specargs}
+%
+\result%
+The contents of the buffer associated with {\em stream} is flushed to
+its sink. If this operation succeeds, a true value is returned, otherwise the
+result is \nil.
+%
+\remarks%
+Implements the \genericref{flush-buffer} operation for objects of class
+\classref{buffered-stream}.
+
+% ------------------------------------------------------------------------------
+\method{flush-buffer}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{file-stream}] A stream.
+\end{specargs}
+%
+\result%
+The contents of the buffer associated with {\em stream} is flushed to
+its sink. If this operation succeeds, a true value is returned, otherwise the
+result is \nil.
+%
+\remarks%
+Implements the \genericref{flush-buffer} operation for objects of
+\classref{file-stream}. This method is called both when the buffer is full and
+after a newline character is written to the buffer.
+
+% ------------------------------------------------------------------------------
+\condition{end-of-stream}{stream-condition}
+% ------------------------------------------------------------------------------
+\begin{initoptions}
+    \item[stream, \classref{stream}] A stream.
+\end{initoptions}
+%
+\remarks%
+Signalled by the default end of stream action, as a consequence of a
+read operation on {\em stream\/}, when it is at end of stream.
+%
+\seealso%
+\genericref{generic-read}.
+
+% ------------------------------------------------------------------------------
+\generic{end-of-stream}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[stream, \classref{buffered-stream}] A stream.
+\end{genericargs}
+%
+\remarks%
+This function is guaranteed to be called when a read operation
+encounters the end of {\em stream\/} and the {\tt eos-error-p} argument to read
+has a non-\nil\/ value.
+
+% ------------------------------------------------------------------------------
+\method{end-of-stream}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{buffered-stream}] A stream.
+\end{specargs}
+%
+\remarks%
+Signals the end of stream condition.
+
+% ------------------------------------------------------------------------------
+\method{end-of-stream}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{file-stream}] A stream.
+\end{specargs}
+%
+\remarks%
+Disconnects {\em stream\/} and signals the end of stream condition.
+
+%%%  ---------------------------------------------------------------------------
+%%%  Reading from streams
+\ssclause{Reading from streams}
+
+% ------------------------------------------------------------------------------
+\function{read}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[\optional{stream}] A stream.
+    \item[\optional{eos-error-p}] A boolean.
+    \item[\optional{eos-value}] Value to be returned to indicate end of stream.
+\end{arguments}
+%
+\result%
+That of calling \genericref{generic-read} with the arguments supplied or
+defaulted as described.
+%
+\remarks%
+The {\em stream\/} defaults to \instanceref{lispin}, {\em
+    eos-error-p\/} defaults to \nil\/ and {\em eos-value\/} defaults to {\tt
+    eos-default-value}.
+
+% ------------------------------------------------------------------------------
+\generic{generic-read}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[stream, \classref{stream}] A stream.
+    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-value, \classref{object}] Value to be returned to indicate end of
+    stream.
+\end{genericargs}
+%
+\result%
+The next transaction unit from {\em stream}.
+%
+\remarks If the end of {\em stream\/} is encountered and the value of {\em
+    eos-error-p} is \nil, the result is {\em eos-value\/}. If the end of {\em
+    stream} is encountered and the value of {\tt eos-error-p} is non-\nil,
+the function \functionref{end-of-stream} is called with the argument {\em
+    stream}.
+
+% ------------------------------------------------------------------------------
+\method{generic-read}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{stream}] A stream.
+    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-value, \classref{object}] Value to be returned to indicate end of
+    stream.
+\end{specargs}
+%
+\result%
+That of calling the {\em read-action\/} of stream with the arguments {\em stream\/},
+{\em eos-error-p\/} and {\em eos-value}.  Returns \true.
+%
+\remarks%
+Implements the \genericref{generic-read} operation for objects of class
+\classref{stream}.
+
+% ------------------------------------------------------------------------------
+\method{generic-read}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{buffered-stream}] A buffered stream.
+    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-value, \classref{object}] Value to be returned to indicate end of
+    stream.
+\end{specargs}
+%
+\result%
+The next object stored in the stream buffer.  If the buffer is empty,
+the function \functionref{fill-buffer} is called. If the refilling operation did
+not succeed, the end of stream action is carried out as described under
+\genericref{generic-read}.  Returns \true.
+%
+\remarks%
+Implements the \genericref{generic-read} operation for objects of class
+\classref{buffered-stream}.
+
+% ------------------------------------------------------------------------------
+\method{generic-read}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[stream, \classref{file-stream}] A file stream.
+    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-value, \classref{object}] Value to be returned to indicate end of
+    stream.
+\end{specargs}
+%
+\result%
+The next object stored in the stream buffer.  If the buffer is empty,
+the function \functionref{fill-buffer} is called. If the refilling operation did
+not succeed, the end of stream action is carried out as described under
+\genericref{generic-read}.  Returns \true.
+%
+\remarks%
+Implements the \genericref{generic-read} operation for objects of class
+\classref{file-stream}.
+
+%%%  ---------------------------------------------------------------------------
+%%%  Writing to streams
+\ssclause{Writing to streams}
+
+% ------------------------------------------------------------------------------
+\function{write}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[object] An object to be written to {\em stream}.
+    \item[\optional{stream}] Stream to which {\em object\/} is
+    to be written.
+\end{arguments}
+%
+\result%
+Returns {\em object}.
+%
+\remarks%
+Outputs the external representation of {\em object\/} on the output
+stream {\em stream\/} using \genericref{generic-write}.  If {\em stream\/} is
+not specified the standard output stream is used.
+%
+\seealso%
+\instanceref{stdout}, \genericref{generic-write}.
+
+% ------------------------------------------------------------------------------
+\generic{generic-write}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[object, \classref{object}] An object to be written to {\em stream}.
+    \item[stream, \classref{stream}] Stream to which {\em object\/} is to be written.
+\end{genericargs}
+%
+\result%
+Returns {\em object}.
+%
+\remarks%
+Outputs the external representation of {\em object\/} on the output stream
+{\em stream}.
+%
+\seealso%
+Methods on \genericref{generic-write} are defined for
+\classref{character}, \classref{double-float}, \classref{fixed-precision-integer},
+\classref{list}, \classref{string}, \classref{symbol} and \classref{vector}.
+
+% ------------------------------------------------------------------------------
+\method{generic-write}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[object, \classref{object}] An object to be written to {\em stream}.
+    \item[stream, \classref{stream}] Stream to which {\em object\/} is to be written.
+\end{specargs}
+
+% ------------------------------------------------------------------------------
+\method{generic-write}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[object, \classref{object}] An object to be written to {\em stream}.
+    \item[stream, \classref{buffered-stream}] Stream to which {\em object\/} is
+    to be written.
+\end{specargs}
+
+% ------------------------------------------------------------------------------
+\method{generic-write}
+% ------------------------------------------------------------------------------
+\begin{specargs}
+    \item[object, \classref{object}] An object to be written to {\em stream}.
+    \item[stream, \classref{file-stream}] Stream to which {\em object\/} is
+    to be written.
+\end{specargs}
+
+%%%  ---------------------------------------------------------------------------
+%%%  Additional functions
+\ssclause{Additional functions}
+
+% ------------------------------------------------------------------------------
+\function{read-line}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[stream] A stream.
+    \item[\optional{eos-error-p}] A boolean.
+    \item[\optional{eos-value}] Value to be returned to indicate end of stream.
+\end{arguments}
+%
+\result%
+A string.
+%
+\remarks%
+Reads a line (terminated by a newline character or the end of the
+stream) from the stream of characters which is {\em stream}.  Returns
+the line as a string, discarding the terminating newline, if any.  If
+the stream is already at end of stream, then the stream action is
+called: the default stream action is to signal an error: (condition
+class: \conditionref{end-of-stream}\indexcondition{end-of-stream}).
+
+% ------------------------------------------------------------------------------
+\function{prin}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[object] An object to be output on {\em stream}.
+    \item[\optional{stream}] A character stream on which {\em object\/} is to
+    be output.
+\end{arguments}
+%
+\result%
+Returns {\em object}.
+%
+\remarks%
+Outputs the external representation of {\em object\/} on the output
+stream {\em stream\/} using \genericref{generic-prin}.  If {\em stream\/} is
+not specified \instanceref{stdout} is used.
+%
+\seealso%
+\instanceref{stdout}, \genericref{generic-prin}.
+
+% ------------------------------------------------------------------------------
+\function{print}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[object] An object to be output on {\em stream}.
+    \item[\optional{stream}] A character stream on which {\em object\/} is
+    to be output.
+\end{arguments}
+%
+\result%
+Returns {\em object}.
+%
+\remarks%
+Outputs the external representation of {\em object\/} on the output
+stream {\em stream\/} using \genericref{generic-prin}, followed by a newline
+character.  If {\em stream\/} is not specified \instanceref{stdout} is used.
+%
+\seealso%
+\instanceref{stdout}, \genericref{generic-prin}.
+
+% ------------------------------------------------------------------------------
+\generic{flush}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[stream, \classref{stream}] A stream.
+\end{genericargs}
+%
+\result%
+Returns \true\/ if the flush operation was successful, otherwise {\tt
+    ()}.
+%
+\remarks%
+{\tt flush} causes any buffered data for the stream to be written to
+the stream. The stream remains open.
+
+% ------------------------------------------------------------------------------
+\function{newline}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[\optional{stream}] A stream on which the newline is to be output.
+\end{arguments}
+%
+\result%
+Returns \verb|#\newline|.
+%
+\remarks%
+Outputs a newline character to {\em stream}.  If {\em stream\/} is not
+specified \instanceref{stdout} is used.
+%
+\seealso%
+\instanceref{stdout}.
+
+% ------------------------------------------------------------------------------
+\function{prin-char}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[char] Character to be written.
+    \item[\optional{stream}] A stream on which the newline is to be output.
+    \item[\optional{times}] Integer count.
+\end{arguments}
+%
+\result%
+Outputs char on stream. The stream defaults to
+\instanceref{stdout}. The count {\em times\/} defaults to 1.
+%
+\remarks%
+If {\em times\/} is specified, then stream must also be specified.
+
+% ------------------------------------------------------------------------------
+\function{sread}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[stream] A stream.
+    \item[\optional{eos-error-p}] A boolean.
+    \item[\optional{eos-value}] Value to be returned to indicate end of stream.
+\end{arguments}
+
+% ------------------------------------------------------------------------------
+\function{sprin}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[object] Object to be written.
+    \item[\optional{stream}] Stream for writing.
+\end{arguments}
+
+%%% ---------------------------------------------------------------------------
+%%%  Convenience forms
+\ssclause{Convenience forms}
+
+% ------------------------------------------------------------------------------
+\function{open-input-file}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[path] A path identifying a file system object.
+\end{arguments}
+%
+\result%
+Allocates and returns a new \classref{file-stream} object whose source
+is connected to the file system object identified by {\em path}.
+
+% ------------------------------------------------------------------------------
+\function{open-output-file}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[path] A path identifying a file system object.
+\end{arguments}
+%
+\result%
+Allocates and returns a new \classref{file-stream} object whose sink is
+connected to the file system object identified by {\em path}.
+
+% ------------------------------------------------------------------------------
+\macro{with-input-file}
+% ------------------------------------------------------------------------------
+\Syntax
+\savesyntax\withinputfileSyntax\vbox{\small\syntax
+with-input-file macro
+   = '(', 'with-input-file', path,  {form}, ')';
+\endsyntax}
+\syntaxtable{with-input-file}{\withinputfileSyntax}
+
+% ------------------------------------------------------------------------------
+\macro{with-output-file}
+% ------------------------------------------------------------------------------
+\Syntax
+\savesyntax\withoutputfileSyntax\vbox{\small\syntax
+with-output-file macro
+   = '(', 'with-output-file', path,  {form}, ')';
+\endsyntax}
+\syntaxtable{with-output-file}{\withoutputfileSyntax}
+
+
+% ------------------------------------------------------------------------------
+\macro{with-source}
+% ------------------------------------------------------------------------------
+\Syntax
+\savesyntax\withoutputfileSyntax\vbox{\small\syntax
+with-source macro
+   = '(', 'with-source',
+          '(', identifier, expression, ')', {form}, ')';
+\endsyntax}
+\syntaxtable{with-output-file}{\withoutputfileSyntax}
+
+% ------------------------------------------------------------------------------
+\macro{with-sink}
+% ------------------------------------------------------------------------------
+\Syntax
+\savesyntax\withoutputfileSyntax\vbox{\small\syntax
+with-sink macro
+   = '(', 'with-sink',
+          '(', identifier, expression, ')', {form}, ')';
+\endsyntax}
+\syntaxtable{with-output-file}{\withoutputfileSyntax}
+
+\end{optDefinition}
+%
+\begin{optPrivate}
+%
+%%%  ---------------------------------------------------------------------------
+%%%  Posix bindings
+\ssclause{Posix bindings}
+
+% ------------------------------------------------------------------------------
+\function{fopen}
+% ------------------------------------------------------------------------------
+
+Arguments
+
+stream
+A stream to connect to a file.
+path
+A path identifying a file system object.
+mode
+How the file is to be opened.
+
+Connects stream to the file system object identified by path according to the
+specified mode. The mode is specified by one of the following symbols:
+
+r
+Opens file for reading.
+w
+Opens file for writing, creating the file if it does not exist.
+a
+Opens file for append output, creating the file if it does not exist. If
+the file exists, the stream position points to the end of the file, so any
+output adds to the file.
+r+
+Opens the file for update. Both input and output can be performed on the
+stream. Any existing data in the file is preserved.
+w+
+Opens the file for update. Both input and output can be performed on the
+stream. Any existing data in the file is eliminated; the file is re-created
+if it exists.
+a+
+Opens the file for update. The file can be read at any location, but any
+output to the file occurs starting from its current end.
+
+The result is stream.
+
+% ------------------------------------------------------------------------------
+\function{fclose}
+% ------------------------------------------------------------------------------
+
+Arguments
+
+stream
+A stream.
+
+Closes the file stream stream and returns (). The stream is disconnected from
+the file system object with which it was associated and may no longer be used
+for read or write operations. The stream buffer is flushed to the file system
+before the file is closed.
+
+% ------------------------------------------------------------------------------
+\function{fcntl}
+% ------------------------------------------------------------------------------
+
+Arguments
+
+stream
+A stream.
+[cmds]
+fcntl commands as defined below.
+
+This function returns or sets information about an open file stream. The symbol
+command determines the action of fcntl and in some cases, the third argument
+command-values must also be supplied. The command can be any one of the
+following symbols, which are a subset of those defined in 1990:??? (POSIX C
+API):
+
+F_GETFL
+This is the default value. In this case, fcntl returns a list of symbols or
+integers, in no particular order, describing the stream's attributes. These
+values can be among the following:
+
+O_APPEND
+The file is open in append mode.
+O_NONBLOCK
+Waiting for data does not cause blocking.
+O_RDONLY
+The file is open for read only.
+O_RDWR
+The file is open for read and write.
+O_WRONLY
+The file is open for write only.
+Other implementation-defined values specified as integers.
+
+F_SETFL
+In this case the the third argument command-values must be a list of
+attributes from the set described above for F_GETFL. However, according to
+1990:???, only the values O_APPEND and O_NONBLOCK can be modified.
+\end{optPrivate}
+
+%%% ----------------------------------------------------------------------------

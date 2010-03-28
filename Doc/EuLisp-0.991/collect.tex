@@ -1,0 +1,663 @@
+\sclause{Collections}
+\index{general}{collection}
+\label{collection}
+\index{general}{level-0 modules!collection}
+\index{general}{collection!module}
+%
+\begin{optPrivate}
+    Some terms which may need defining: natural order indexed objects versus
+    stretchy objects
+\end{optPrivate}
+%
+\begin{optDefinition}
+%
+The defined name of this module is {\tt collection}.  A {\em collection\/}
+is defined as an instance of one of \classref{list}, \classref{string}, \classref{vector},
+\classref{table}\ or any user-defined class for which a method is added to any of
+the collection manipulation functions.  Collection does not name a class and
+does not form a part of the class hierarchy.  This module defines a set of
+operators on collections as generic functions and default methods with the
+behaviours given here.
+
+When iterating over a single collection, the order in which elements are
+processed might not be important, but as soon as more than one collection is
+involved, it is necessary to specify how the collections are
+aligned\index{general}{collection!alignment} so that it is clear which elements
+of the collections will be processed together.  This is quite straightforward in
+the cases of \classref{list}, \classref{string}\ and \classref{vector}, since there is an
+intuitive {\em natural\/} order for the elements which allows them to be
+identified by a non-negative integer.  Thus, when iterating over a combination
+of any of these, all the elements at index position $i$ will be processed
+together, starting with the elements at position $0$ and finishing with those at
+position $n-1$ where $n$ is the size of the smallest collection in the
+combination.  The subset of collections which have natural order is called {\em
+    sequence\/} and members of this set can be identified by the predicate {\tt
+    sequencep}, while collections in general can be identified by {\tt
+    collectionp}.
+
+Collection alignment is more complicated when tables are involved since they use
+explicit keys rather than natural order to identify their elements.  In any
+iteration over a combination of collections including a table or some tables,
+the set of keys used is the intersection of the keys of the tables and the
+implicit keys of the other collection classes present; this identifies the
+elements of the collections with common keys.  Thus, for an iteration to process
+any elements from the combination of a collection with natural order and a
+table, the table must have some integer keys and they must be in the range
+$[0\ldots{}size)$ of the collection with natural order.
+
+A conforming level-0 implementation must define methods on these functions to
+support operations on lists (\ref{list}), strings (\ref{string}), tables
+(\ref{table}), vector (\ref{vector}) and any combination of these.
+
+\condition{collection-condition}{condition} This is the condition class for all
+collection processing conditions.
+
+\generic{accumulate}
+%
+\begin{genericargs}
+    \item[function, \classref{function}] A function of two arguments.
+%
+    \item[obj, \classref{object}] The object which is the initial value for the
+    accumulation operation.
+%
+    \item[collection, \classref{collection}] The collection which is the subject of
+    the accumulation operation.
+\end{genericargs}
+%
+\result%
+The result is the result of the application of {\em function\/} to the
+accumulated result and successive elements of {\em collection}.  The initial
+value of the accumulated result is supplied by {\em obj}.
+%
+\examples
+Note that the order of the elements in the result of the second example depends
+on the hashing algorithm of the implementation and does not prescribe the result
+that any particular implementation must give.
+%
+\begin{tabular}{lcl}
+    \verb+(accumulate * 1 #(1 2 3 4 5))+ & \Ra & \verb+120+\\
+    \begin{minipage}[t]{\columnwidth}
+        {\tt\begin{tabbing}
+                (a\=ccumulate\\
+                \>(lambda (a v) (cons v a))\\
+                \>()\\
+                \>(m\=ake <table>\\
+                \>  \>'entries\\
+                \> \>'((1 . b) (0 . a) (2 . c))))
+            \end{tabbing}}
+    \end{minipage}
+    & \Ra &
+    \verb+(c b a)+\\
+\end{tabular}
+
+\generic{accumulate1}
+%
+\begin{genericargs}
+    \item[function, \classref{function}] A function of two arguments.
+%
+    \item[collection, \classref{collection}] The collection which is the subject of the
+    accumulation operation.
+\end{genericargs}
+%
+\result%
+The result is the result of the application of {\em function\/} to the
+accumulated result and successive elements of {\em collection\/} starting with
+the second element.  The initial value of the accumulated result is the first
+element of {\em collection}.  The terms first and second correspond to the
+appropriate elements of a natural order collection, but no elements in
+particular of an explicit key collection.  If {\em collection\/} is empty, the
+result is \nil.
+%
+\examples
+\begin{tabular}{lcl}
+\begin{minipage}[t]{\columnwidth}
+{\tt
+    \begin{tabbing}
+        (a\=ccumulate1\\
+        \>(l\=ambda (a v)\\
+        \>  \>(if (evenp v) (cons v a) a))\\
+        \>'(1 2 3 4 5))
+    \end{tabbing}
+}
+\end{minipage}
+& \Ra &
+\verb+(4 2)+\\
+\end{tabular}
+
+\generic{anyp}
+%
+\begin{genericargs}
+    \item[function, \classref{function}] A function to be used as a predicate on the
+    elements of the collection(s).
+%
+    \item[collection, \classref{collection}] A collection.
+%
+    \item[\optional{more-collections}] More collections.
+\end{genericargs}
+%
+\result%
+The {\em function\/} is applied to argument lists constructed from corresponding
+successive elements of {\em collection\/} and {\em more-collections}.  If the
+result is true, the result of \genericref{anyp} is true and there are no further
+applications of {\em function\/} to elements of {\em collection\/} and {\em
+    more-collections}.  If any of the collections is exhausted, the result of
+\genericref{anyp} is \nil.
+%
+\examples
+\begin{tabular}{lcl}
+\verb+(anyp even #(1 2 3 4))+ & \Ra & {\em true}\\
+\begin{minipage}[t]{\columnwidth}
+{\tt
+    \begin{tabbing}
+        (l\=et ((x (list 1 2 3 4)))\\
+        \>(anyp > x (cdr x)))
+    \end{tabbing}}
+\end{minipage}
+& \Ra & \nil\\
+\begin{minipage}[t]{\columnwidth}
+{\tt
+    \begin{tabbing}
+        (a\=nyp\\
+        \>(lambda (a b) (= (\% a b) 0))\\
+        \>\verb|#(3 2) '(1 0))|
+    \end{tabbing}}
+\end{minipage}
+& \Ra & {\em true}
+\end{tabular}
+
+\generic{collectionp}
+%
+\begin{genericargs}
+    \item[object, \classref{object}] An object to examine.
+\end{genericargs}
+%
+\result%
+Returns true if {\em object\/} is a collection, otherwise \nil.
+%
+\remarks%
+This predicate does not return {\em object\/} because \nil\/ is a
+collection.
+
+\generic{concatenate}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] A collection.
+%
+    \item[\optional{more-collections}] More collections.
+\end{genericargs}
+%
+\result%
+The result is an object of the same class as {\em collection}.
+%
+\remarks%
+The contents of the result object depend on whether {\em collection\/}
+has natural order or not:
+\begin{enumerate}
+    \item If {\em collection\/} has natural order then the size of the result is
+    the sum of the sizes of {\em collection\/} and {\em more-collections}.  The
+    result collection is initialized with the elements of {\em collection\/}
+    followed by the elements of each of {\em more-collections\/} taken in turn.
+    If any element cannot be stored in the result collection, for example, if
+    the result is a string and some element is not a character, an error is
+    signalled (condition class: {\tt
+        collection-condition}\indexcondition{collection-condition}).
+%
+    \item If {\em collection\/} does not have natural order, then the result
+    will contain associations for each of the keys in {\em collection\/} and
+    {\em more-collections}.  If any key occurs more than once, the associated
+    value in the result is the value of the last occurrence of that key after
+    processing {\em collection\/} and each of {\em more-collections\/} taken in
+    turn.
+\end{enumerate}
+%
+\examples
+\begin{tabular}{lcl}
+\verb+(concatenate #(1) '(2) "bc")+ & \Ra & \verb+#(1 2 #\b #\c))+\\
+\verb+(concatenate "a" '(#\b))+ & \Ra & \verb+"ab"+\\
+\begin{minipage}[t]{0.6\columnwidth}
+{\tt\begin{tabbing}
+(c\=oncatenate\\
+  \>(make <table>)\\
+  \>'(a b)\\
+  \>"c")\\
+\end{tabbing}}\end{minipage}
+& \Ra & %
+\begin{minipage}[t]{0.3\columnwidth}
+\begin{verbatim}
+#<table:
+  0 -> "c",
+  1 -> b>
+\end{verbatim}
+\end{minipage}
+\end{tabular}
+
+\generic{delete}
+%
+\begin{genericargs}
+    \item[object, \classref{object}] Object to be removed.
+    %
+    \item[collection, \classref{collection}] A collection.
+    %
+    \item[\optional{test}] The function to be used to compare {\em object|/} and
+    the elements of {\em collection\/}.
+\end{genericargs}
+%
+\result%
+If there is an element of {\em collection\/} such that test returns true
+when applied to {\em object|/} and that element, then the result is the modified
+{\em collection\/}, less that element. Otherwise, the result is {\em
+    collection\/}.
+%
+\remarks%
+\genericref{delete} is destructive. The {\em test\/} function defaults
+to \functionref{eql}.
+
+\generic{do}
+%
+\begin{genericargs}
+    \item[function, \classref{function}] A function.
+    %
+    \item[collection, \classref{collection}] A collection.
+    %
+    \item[\optional{more-collections}] More collections.
+\end{genericargs}
+%
+\result%
+The result is \nil.  This operator is used for side-effect only.  The {\em
+    function\/} is applied to argument lists constructed from corresponding
+successive elements of {\em collection\/} and {\em more-collections\/} and the
+result is discarded.  Application stops if any of the collections is exhausted.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb|(do prin '(1 b #\c))| &\Ra& \verb|1bc|\\
+    \verb|(do write '(1 b #\c))| &\Ra& \verb|1b#\c|\\
+\end{tabular}
+
+\generic{element}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] The object to be accessed or updated.
+    %
+    \item[key, \classref{object}] The object identifying the key of the element in
+    {\em collection}.
+\end{genericargs}
+%
+\result%
+The value associated with {\em key\/} in {\em collection}.
+%
+\examples
+\begin{tabular}{lcl}
+\verb+(element "abc" 1)+ & \Ra & \verb+#\b+\\
+\verb+(element '(a b c) 1)+ & \Ra & \verb+b+\\
+\verb+(element #(a b c) 1)+ & \Ra & \verb+b+\\
+\begin{minipage}[t]{\columnwidth}
+{\tt\begin{tabbing}
+(e\=lement\\
+  \>(m\=ake <table> 'fill-value 'b)\\
+  \>1)
+\end{tabbing}}\end{minipage}
+& \Ra & \verb+b+\\
+\end{tabular}
+
+\setter{element}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] The object to be accessed or updated.
+    %
+    \item[key, \classref{object}] The object identifying the key of the element in
+    {\em collection}.
+    %
+    \item[value, \classref{object}] The object to replace the value associated with
+    {\em key\/} in {\em collection\/} (for setter).
+\end{genericargs}
+%
+\result%
+The argument supplied as {\em value\/}, having updated the association
+of {\em key\/} in {\em collection\/} to refer to {\em value}.
+% Note: can't say ``is an error'' to reference a key outside range of
+% collection because that conflicts with tables.
+
+\generic{emptyp}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] The object to be examined.
+\end{genericargs}
+%
+\result%
+Returns true if {\em collection\/} is the object identified with the
+empty object for that class of collection.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb+(emptyp "")+ & \Ra & {\em true}\\
+    \verb+(emptyp ())+ & \Ra & {\em true}\\
+    \verb+(emptyp #())+ & \Ra & {\em true}\\
+    \verb+(emptyp (make <table>))+ & \Ra & {\em true}\\
+\end{tabular}
+
+\generic{fill}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] A collection to be (partially) filled.
+    %
+    \item[object, \classref{object}] The object with which to fill {\em collection}.
+    %
+    \item[\optional{keys}] The keys with which {\em object\/} is to be
+    associated.
+    %
+\end{genericargs}
+%
+\result%
+The result is \nil.
+%
+\remarks%
+This function side-effects {\em collection\/} by updating the values
+associated with each of the specified {\em keys\/} with {\em obj}.  If
+no {\em keys\/} are specified, the whole collection is filled with
+{\em obj}.  Otherwise, the key specification can take two forms:
+%
+\begin{enumerate}
+    \item A collection, in which case the values of the collection are taken to
+    be the keys of {\em collection\/} to be associated with {\em obj}.
+    %
+    \item Two fixed precision integers, denoting the start and end keys,
+    respectively, in a natural order collection to be associated with {\em obj}.
+    An error is signalled (condition class: {\tt
+        collection-condition}\index{general}{collection-condition}) if {\em
+        collection\/} does not have natural order.  It is an error if the start
+    and end do not specify an ascending sub-interval of the interval $[0,size)$,
+    where {\em size\/} is that of {\em collection}.
+\end{enumerate}
+
+\generic{find-key}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] A collection.
+    %
+    \item[test, \classref{function}] A function.
+    %
+    \item[\optional{skip}] An integer.
+    %
+    \item[\optional{failure}] An integer.
+\end{genericargs}
+%
+\result%
+The function {\em test\/} is applied to successive elements of {\em
+    collection}. If {\em test\/} returns true when applied to an element, then the
+result of \genericref{find-key} is the key associated with that element.
+%
+\remarks%
+The value {\em skip\/}, which defaults to zero, indicates how many
+successful tests are to be made before returning a result. The value {\em
+    failure}, which defaults to \nil, is returned if no key satisfying the
+test was found. Note that {\em skip\/} and {\em failure\/} are positional arguments
+and that {\em skip\/} must be specified if {\em failure\/} is specified.
+
+\generic{first}
+%
+\begin{genericargs}
+    \item[sequence, \classref{sequence}] A sequence.
+\end{genericargs}
+%
+\result%
+The result is contents of index position 0 of {\em sequence}.
+
+\generic{key-sequence}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] A collection.
+\end{genericargs}
+%
+\result%
+The result is a collection comprising the keys of {\em collection}.
+
+\generic{map}
+%
+\begin{genericargs}
+    \item[function, \classref{function}] A function.
+    %
+    \item[collection, \classref{collection}] A collection.
+    %
+    \item[\optional{more-collections}] More collections.
+\end{genericargs}
+
+\result%
+The result is an object of the same class as {\em collection}.  The
+elements of the result are computed by the application of {\em function\/} to
+argument lists constructed from corresponding successive elements of {\em
+    collection\/} and {\em more-collections}.  Application stops if any of the
+collections is exhausted.
+%
+\examples
+\begin{tabular}{lcl}
+\verb+(map cons #(1 2) '(3))+ & \Ra & \verb+#((1 . 3))+\\
+\begin{minipage}[t]{\columnwidth}
+{\tt\begin{tabbing}
+(m\=ap\\
+  \>(lambda (f) (f 1 2))\\
+  \>\verb|#(+ - * %))|
+\end{tabbing}}\end{minipage}
+&\Ra& \verb|#(3 -1 2 1)|
+\end{tabular}
+
+\generic{member}
+%
+\begin{genericargs}
+    \item[object, \classref{object}] The object to be searched for in {\em
+        collection}.
+    %
+    \item[collection, \classref{collection}] The collection to be searched.
+    %
+    \item[\optional{test}] The function to be used to
+    compare {\em object\/} and the elements of {\em collection}.
+\end{genericargs}
+%
+\result%
+Returns true if there is an element of {\em collection\/} such that the
+result of the application of {\em test\/} to {\em object\/} and that element is
+true.  If {\em test\/} is not supplied, \genericref{eql} is used by default.  Note that
+true denotes any value that is not \nil\/ and that the class of the result
+depends on the class of {\em collection}.  In particular, if {\em collection\/}
+is a list, the result of \genericref{member} is a list.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb+(member #\b "abc")+ & \Ra & {\em true}\\
+    \verb+(member 'b '(a b c))+ & \Ra & \verb+(b c)+\\
+    \verb+(member 'b #(a b c))+ & \Ra & {\em true}\\
+    \begin{minipage}[t]{\columnwidth}
+        {\tt\begin{tabbing}
+                (m\=ember\\
+                \>'b\\
+                \>(m\=ake <table>\\
+                \>  \>'entries\\
+                \>  \>'((1 . b) (0 . a) (2 . c))))
+            \end{tabbing}}\end{minipage}
+    & \Ra & {\em true}\\
+\end{tabular}
+
+\generic{remove}
+%
+\begin{genericargs}
+    \item[object, \classref{object}] Object to be removed.
+    %
+    \item[collection, \classref{collection}] A collection.
+    %
+    \item[\optional{test}] The function to be used to compare {\em object\/} and
+    the elements of {\em collection}.
+\end{genericargs}
+%
+\result%
+If there is an element of {\em collection\/} such that test returns true when
+applied to {\em object\/} and that element, then the result is a shallow copy of
+{\em collection\/} less that element. Otherwise, the result is {\em collection}.
+%
+\remarks%
+The test function defaults to \genericref{eql}.
+
+\generic{reverse}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] A collection.
+\end{genericargs}
+%
+\result%
+The result is an object of the same class as {\em collection\/} whose
+elements are the same as those in {\em collection}, but in the reverse order
+with respect to the natural order of {\em collection}.  If {\em collection\/}
+does not have natural order, the result is equal to the argument.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb+(reverse "abc")+ & \Ra & \verb+"cba"+\\
+    \verb+(reverse '(1 2 3))+ & \Ra & \verb+(3 2 1)+\\
+    \verb+(reverse #(a b c))+ & \Ra & \verb+#(c b a)+
+\end{tabular}
+
+\generic{second}
+%
+\begin{genericargs}
+    \item[sequence, \classref{sequence}] A sequence.
+\end{genericargs}
+%
+\result%
+The result is contents of index position 1 of {\em sequence}.
+
+\generic{sequencep}
+%
+\begin{genericargs}
+    \item[object, \classref{object}] An object to examine.
+\end{genericargs}
+%
+\result%
+Returns true if {\em object\/} is a sequence (has natural order),
+otherwise \nil.
+%
+\remarks%
+This predicate does not return {\em object\/} because \nil\/ is a
+sequence.
+
+\generic{size}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] The object to be examined.
+\end{genericargs}
+%
+\result%
+An integer which denotes the size of {\em collection\/} according to
+the method for the class of {\em collection}.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb+(size "")+ & \Ra & \verb+0+\\
+    \verb+(size ())+ & \Ra & \verb+0+\\
+    \verb+(size #())+ & \Ra & \verb+0+\\
+    \verb+(size (make <table>))+ & \Ra & \verb+0+\\
+    \verb+(size "abc")+ & \Ra & \verb+3+\\
+    \verb+(size (cons 1 ()))+ & \Ra &\verb+1+\\
+    \verb+(size (cons 1 . 2))+ & \Ra &\verb+1+\\
+    \verb+(size (cons 1 (cons 2 . 3)))+ & \Ra & \verb+2+\\
+    \verb+(size '(1 2 3))+ & \Ra & \verb+3+\\
+    \verb+(size #(a b c))+ & \Ra & \verb+3+\\
+    \verb+(size (make <table> 'entries '((0 . a)))+ & \Ra & \verb+1+\\
+\end{tabular}
+
+\generic{sort}
+%
+\begin{genericargs}
+    \item[sequence, \classref{sequence}] A sequence.
+    \item[comparator, \classref{function}] A function.
+\end{genericargs}
+%
+\result%
+ The result of sort is a new {\em sequence}. comprising the elements of
+ {\em sequence\/} ordered according to {\em comparator}.
+%
+\remarks%
+Methods on this function are only defined for \classref{list} and \classref{vector}.
+
+\generic{third}
+%
+\begin{genericargs}
+    \item[sequence, \classref{sequence}] A sequence.
+\end{genericargs}
+%
+\result%
+The result is contents of index position 2 of {\em sequence}.
+
+\converter{list}
+%
+\begin{specargs}
+    \item[collection, \classref{collection}] A collection to be converted into a
+    list.
+\end{specargs}
+%
+\result%
+If {\em collection\/} is a list, the result is the argument.  Otherwise
+a list is constructed and returned whose elements are the elements of {\em
+    collection}.  If {\em collection\/} has natural order, then the elements
+will appear in the result in the same order as in {\em collection}.  If {\em
+    collection\/} does not have natural order, the order in the resulting list
+is undefined.
+%
+\seealso%
+Conversion (\ref{convert}).
+
+\converter{string}
+%
+\begin{specargs}
+    \item[collection, \classref{collection}] A collection to be converted into a
+    string.
+\end{specargs}
+%
+\result%
+If {\em collection\/} is a string, the result is the argument.
+Otherwise a string is constructed and returned whose elements are the elements
+of {\em collection\/} as long as {\em all\/} the elements of {\em collection\/}
+are characters.  An error is signalled (condition class: {\tt
+    conversion-condition}\indexcondition{conversion-condition}) if any element
+of {\em collection\/} is not a character.  If {\em collection\/} has natural
+order, then the elements will appear in the result in the same order as in {\em
+    collection}.  If {\em collection\/} does not have natural order, the order
+in the resulting string is undefined.
+%
+\seealso%
+Conversion (\ref{convert}).
+
+\converter{table}
+%
+\begin{specargs}
+    \item[collection, \classref{collection}] A collection to be converted into a
+    table.
+\end{specargs}
+%
+\result%
+If {\em collection\/} is a table, the result is the argument.  Otherwise
+a table is constructed and returned whose elements are the elements of {\em
+    collection}.  If {\em collection\/} has natural order, then the elements
+will be stored under integer keys in the range $[0\ldots{}size)$, otherwise the
+keys used will be the keys associated with the elements of {\em collection}.
+%
+\seealso%
+Conversion (\ref{convert}).
+
+\converter{vector}
+%
+\begin{specargs}
+    \item[collection, \classref{collection}] A collection to be converted into a
+    vector.
+\end{specargs}
+%
+\result%
+If {\em collection\/} is a vector, the result is the argument.
+Otherwise a vector is constructed and returned whose elements are the elements
+of {\em collection}.  If {\em collection\/} has natural order, then the elements
+will appear in the result in the same order as in {\em collection}.  If {\em
+    collection\/} does not have natural order, the order in the resulting vector
+is undefined.
+%
+\seealso%
+Conversion (\ref{convert}).
+%
+\end{optDefinition}

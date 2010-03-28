@@ -1,0 +1,88 @@
+#!/bin/sh
+
+## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+
+## -----------------------------------------------------------------------
+##                     EuLisp System 'youtoo'
+## -----------------------------------------------------------------------
+##  Description: Script to convert Lib.${ARCH}/liblevel1.i to Vm/level1i.c
+##  (should be a perl file in the future)
+## -----------------------------------------------------------------------
+
+if (test -z "$1") then
+    ARCH=`uname -m`
+else
+    ARCH=$1
+fi
+
+FILE=Vm/level1i.c
+FILE_SKL=Vm/level1i.skl.c
+SOURCE=Lib.${ARCH}/liblevel1.i
+SOURCE_MATH=Lib.${ARCH}/libmath.i
+SOURCE_EULYSSES_1=Comptime2/i-param.i
+SOURCE_EULYSSES_2=Comptime2/p-env.i
+SOURCE_EULYSSES_3=Comptime2/i-compile.i
+SOURCE_EULYSSES_4=Comptime2/i-rep.i
+SOURCE_EULYSSES_5=Comptime2/sx-node.i
+SOURCE_EULYSSES_7=Comptime2/aux-table.i
+SOURCE_EULYSSES_8=Comptime2/sx-obj.i
+SOURCE_EULYSSES_9=Comptime2/i-modify.i
+
+SOURCE_SYNTAX_1=Runtime/macros.i
+SOURCE_SYNTAX_2=Comptime2/i-aux0.i
+
+## -----------------------------------------------------------------------
+echo .CREATING $FILE
+cat $FILE_SKL > $FILE
+
+## --------------------------------------------------------------------
+## Create fill_level1_table
+## --------------------------------------------------------------------
+
+echo "void fill_level1_table() {" >> $FILE
+
+echo "  eul_level1_lexical_module_name = \"level1\";" >> $FILE
+echo "  eul_level1_syntax_module_name = \"macros\";" >> $FILE
+
+echo "  eul_level1_module_names = \"level1 string convert copy integer number fpi bit collect compare condition event thread dynamic let-cc callback telos boot1 boot mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc character float random stream3 vector stream stream1 lock stream2 socket list format convert1 table1 table handler symbol read math\";" >> $FILE
+
+grep "((name . " $SOURCE | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_MATH | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_1 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_2 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_3 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_4 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_5 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_7 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_8 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_EULYSSES_9 | grep "(pos . " | grep -v "(class . ff)" | sed "s/ *((name \. /  eul_fast_table_set(level1_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+echo "}" >> $FILE
+echo >> $FILE
+
+## --------------------------------------------------------------------
+## Create fill_level1_syntax_table
+## --------------------------------------------------------------------
+
+echo "void fill_level1_syntax_table() {" >> $FILE
+
+grep "((name . " $SOURCE_SYNTAX_1 | grep "(pos . " | sed "s/ *((name \. /  eul_fast_table_set(level1_syntax_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+grep "((name . " $SOURCE_SYNTAX_2 | grep "(pos . " | sed "s/ *((name \. /  eul_fast_table_set(level1_syntax_tab,\"/1" | sed "s/) (pos \. /\", make_entry(/1" | sed "s/) (origin /, \"/1" | sed "s/ \. /\", \"/1" | sed "s/).*/\"));/1" >> $FILE
+
+echo "}" >> $FILE
+echo >> $FILE
+
+echo "/* eof */" >> $FILE
+
+
+echo .DONE

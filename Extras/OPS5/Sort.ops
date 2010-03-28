@@ -1,0 +1,19 @@
+(literalize Person name age)
+
+(p Find::Oldest
+    (Person ^name <oldest> ^age <age-old>)
+    (Person ^name <> <oldest> ^age { <age-next> <= <age-old> })
+  - (Person ^age { > <age-next> <> <age-old> })
+    -->
+    (write (crlf) <oldest> aged <age-old>)
+    (write (crlf) is about (compute <age-old> - <age-next>))
+    (write years older than anyone else))
+
+(p start
+    (start)
+    -->
+    (make Person ^name Fred ^age 10)
+    (make Person ^name John ^age 45)
+    (make Person ^name Bert ^age 33)
+    (make Person ^name Vera ^age 102)
+    (make Person ^name Alf  ^age 91))   

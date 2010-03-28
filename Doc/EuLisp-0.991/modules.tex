@@ -1,0 +1,415 @@
+\clause{Modules}
+%
+\label{sec:modules}
+\index{general}{module}
+%
+\begin{optDefinition}
+The \eulisp\ module scheme has several influences:
+LeLisp's\index{general}{LeLisp} module system and module compiler (complice),
+Haskell\index{general}{Haskell}, ML\index{general}{Standard
+    ML}~\bref{ML-modules}, MIT-Scheme's {\tt make-environment} and T's locales.
+
+All bindings of objects in \eulisp\ reside in some module somewhere.  Also, all
+programs in \eulisp\ are written as one or more modules.  Almost every module
+imports a number of other modules to make its definition meaningful.  These
+imports have two purposes, which are separated in \eulisp: firstly the bindings
+needed to process the syntax in which the module is written, and secondly the
+bindings needed to resolve the free variables in the module after syntax
+expansion.  These bindings are made accessible by specifying which modules are
+to be imported for which purpose in a directive at the beginning of each module.
+The names of modules are bound in a disjoint binding
+environment\index{general}{module!name bindings}\index{general}{binding!of
+    module names} which is only accessible via the module definition form.  That
+is to say, modules are not first-class.  The body of a module definition
+comprises a list of directives followed by a sequence of definitions,
+expressions and export forms.
+
+The module mechanism provides abstraction and security in a form complementary
+to that provided by the object system.  Indeed, although objects do support data
+abstraction, they do not support all forms of information hiding and they are
+usually conceptually smaller units than modules.  A module defines a mapping
+between a set of names and either local or imported bindings of those names.
+Most such bindings are immutable.  The exception are those bindings created by
+\defformref{deflocal} which may be modified by both the defining and importing
+modules.  There are no implicit imports into a module---not even the special
+forms are available in a module that imports nothing.  A module exports nothing
+by default.  Mutually referential modules are not possible because a module must
+be defined before it can be used.  Hence, the importation dependencies form a
+directed acyclic graph.
+%
+\begin{note}
+    The issue of mutually referential modules will be addressed in a future
+    version of the definition of \eulisp.
+\end{note}
+%
+\begin{figure*}[t]
+\begin{example}
+\label{example:module}
+\examplecaption{module directives}
+\begin{center}
+\begin{minipage}[t]{\textwidth}
+{\small%
+\syntax
+(defmodule a-module
+  (import
+    (module-1                                        ;; import everything from {\tt module-1}
+     (except (binding-a) module-2)                   ;; all but {\tt binding-a} from {\tt module-2}
+     (only (binding-b) module-3)                     ;; only {\tt binding-b} from {\tt module-3}
+     (rename
+      ((binding-c binding-d) (binding-d binding-c))  ;; all of {\tt module-4}, but exchange
+      module-4))                                     ;; the names of {\tt binding-c} and {\tt binding-d}
+
+   syntax
+    (syntax-module-1                                 ;; all of the module {\tt syntax-module-1}
+     (rename ((syntax-a syntax-b))                   ;; rename the binding of {\tt syntax-a}
+      syntax-module-2)                               ;; of {\tt syntax-module-2} as {\tt syntax-b}
+     (rename ((syntax-c syntax-a))                   ;; rename the binding of {\tt syntax-c}
+      syntax-module-3))                              ;; of {\tt syntax-module-3} as {\tt syntax-a}
+
+   expose
+    ((except (binding-e) module-5)                   ;; all but {\tt binding-e} from {\tt module-5}
+     module-6)                                       ;; export all of {\tt module-6}
+
+   export
+    (binding-1 binding-2 binding-3))                 ;; and three bindings from this module
+  ...
+  (export local-binding-4)                           ;; a fourth binding from this module
+  ...
+  (export binding-c)                                 ;; the imported binding {\tt binding-c}
+  ...)
+\endsyntax
+}
+\end{minipage}
+\end{center}
+\end{example}
+\end{figure*}
+%
+The processing of a module definition uses three environments, which are
+initially empty.  These are the top-lexical, the external and the syntax
+environments of the module.
+%
+\begin{description}
+    \item[top-lexical] The top-lexical environment comprises all the locally
+    defined bindings and all the imported bindings.
+
+    \item[external] The external environment comprises all the exposed
+    bindings---bindings from modules being exposed by this module but not
+    necessarily imported---and all the exported bindings, which are either local
+    or imported.  Thus, the external environment might not be a subset of the
+    top-lexical environment because, by virtue of an expose directive, it can
+    contain bindings from modules which have not been imported.  This is the
+    environment received by any module importing this module.
+
+    \item[syntax] The syntax environment comprises all the bindings available
+    for the syntax expansion of the module.
+\end{description}
+%
+Each binding is a pair of a local-name and a module-name.  It is a violation
+if any two instances of local-name in any one of these environments have
+different module-names.  This is called a name clash.  These environments do not
+all need to exist at the same time, but it is simpler for the purposes of
+definition to describe module processing as if they do.
+\end{optDefinition}
+
+\sclause{Directives}
+\index{general}{module!directives}
+\label{directives}
+%
+\begin{optDefinition}
+The list of module directives is a sequence of keywords and forms, where the
+keywords indicate the interpretation of the forms (see
+Table~\ref{defmodule-syntax}).  This representation allows for the addition of
+further keywords at other levels of the definition and also for
+implementation-defined keywords\index{general}{implementation-defined!module
+    directives}.  For the keywords given here, there is no defined order of
+appearance, nor is there any restriction on the number of times that a keyword
+can appear.  Multiple occurrences of any of the directives defined here are
+treated as if there is a single directive whose form is the combination of each
+of the occurrences.  This definition describes the processing of four keywords,
+which are now described in detail.  The syntax of all the directives is given in
+Table~\ref{defmodule-syntax} and an example of their use appears in
+example~\ref{example:module}.
+\end{optDefinition}
+%
+\sclause{Export Directive}
+%
+\index{general}{module!export}
+\begin{optDefinition}
+This is denoted by the keyword \keywordref{export} followed by a sequence of
+names of top-lexical bindings---these could be either locally-defined or
+imported---and has the effect of making those bindings accessible to any module
+importing this module by adding them to the external environment of the module.
+A name clash can arise in the external environment from interaction with exposed
+modules.
+\end{optDefinition}
+%
+\sclause{Import Directive}
+%
+\index{general}{module!import}
+\label{import}
+%
+\begin{optDefinition}
+This is denoted by the keyword {\tt import} followed by a sequence of
+{\em module descriptor}s (see Table~\ref{defmodule-syntax}), being module names
+or the filters {\tt except}, {\tt only} and {\tt rename}.  This sequence denotes
+the union of all the names generated by each element of the sequence.  A filter
+can, in turn, be applied to a sequence of module descriptors, and so the effect
+of different kinds of filters can be combined by nesting them.  An import
+directive specifies either the importation of a module in its entirety or the
+selective importation of specified bindings from a module.
+
+The purpose of this directive is to specify the imported bindings which
+constitute part of the top-lexical environment of a module.  These are the
+explicit run-time dependencies of the module.  Additional run-time dependencies
+may arise as a result of syntax expansion.  These are called implicit run-time
+dependencies.
+
+In processing import directives, every name should be thought of as a pair of a
+{\em module name} and a {\em local-name}.  Intuitively, a namelist of such pairs
+is generated by reference to the module name and then filtered by {\tt except},
+{\tt only} and {\tt rename}.  In an import directive, when a namelist has been
+filtered, the names are regarded as being defined in the top-lexical environment
+of the module into which they have been imported.  A name clash can arise in the
+top-lexical environment from interaction between different imported modules.
+Elements of an import directive are interpreted as follows:
+%
+\begin{description}
+    \item[{\tt except}] Filters the names from each {\em module descriptor}
+    discarding those specified and keeping all other names.  The {\tt except}
+    directive is convenient when almost all of the names exported by a module
+    are required, since it is only necessary to name those few that are not
+    wanted to exclude them.
+
+    \item[{\em module name}] All the exported names from {\em module name}.
+
+    \item[{\tt only}] Filters the names from each {\em module descriptor}
+    keeping only those names specified and discarding all other names.  The {\tt
+        only} directive is convenient when only a few names exported by a module
+    are required, since it is only necessary to name those that are wanted to
+    include them.
+
+    \item[{\tt rename}] Filters the names from each {\em module descriptor}
+    replacing those with {\em old-name} by {\em new-name}.  Any name not
+    mentioned in the replacement list is passed unchanged.  Note that once a
+    name has been replaced the new-name is not compared against the replacement
+    list again.  Thus, a binding can only be renamed once by a single {\tt
+        rename} directive.  In consequence, name exchanges are possible.
+\end{description}
+\end{optDefinition}
+%
+\sclause{Expose Directive}
+\index{general}{module!expose}
+\begin{optDefinition}
+This is denoted by the keyword {\tt expose} followed by a list of {\em module
+    directive\/}s (see Table~\ref{defmodule-syntax}).  The purpose of this
+directive is to allow a module to export subsets of the external environments of
+various modules without importing them itself.  Processing an expose directive
+employs the same model as for imports, namely, a pair of a module-name and a
+local-name with the same filtering operations.  When the namelist has been
+filtered, the names are added to the external environment of the module begin
+processed.  A name clash can arise in the external environment from interaction
+with exports or between different exposed modules.  As an example of the use of
+{\tt expose}, a possible implementation of the {\tt
+    eulisp0}\index{general}{level-0 modules!eulisp0} module is shown in
+example~\ref{example:exposes}.
+%
+\begin{example}
+\label{example:exposes}
+\examplecaption{module using {\tt expose}}
+{\small%
+\syntax
+(defmodule eulisp-level-0
+  (expose
+    (character collection compare condition convert copy
+     double-float elementary-functions event
+     formatted-io fixed-precision-integer function list
+     lock number object-0 stream string symbol syntax-0
+     table thread vector)))
+\endsyntax
+}
+\end{example}
+%
+It is also meaningful for a module to include itself in an expose
+directive.  In this way, it is possible to refer to all the bindings
+in the module being defined.  This is convenient, in combination with
+{\tt except} (see Section~\ref{import}), as a way of exporting all but
+a few bindings in a module, especially if syntax expansion creates
+additional bindings whose names are not known, but should be exported.
+\end{optDefinition}
+%
+\sclause{Syntax Directive}
+\label{syntax-directive}
+\index{general}{module!syntax}
+\begin{optDefinition}
+This directive is processed in the same way as an import directive,
+except that the bindings are added to the syntax environment.  This
+environment is used in the second phase of module processing (syntax
+expansion).  These constitute the dependencies for the syntax expansion
+of the definitions and expressions in the body of the module.  A name
+clash can arise in the syntax environment from interaction between
+different syntax modules.
+
+It is important to note that special forms are considered part of the
+syntax and they may also be renamed.
+\end{optDefinition}
+
+\sclause{Definitions and Expressions}
+%
+\begin{optDefinition}
+Definitions in a module only contain unqualified names---that is, {\em
+    local-name}s, using the above terminology.  A top-lexical binding is created
+exactly once and shared with all modules that import its exported name from the
+module that created the binding.  A name clash can arise in the top-lexical
+environment from interaction between local definitions and between local
+definitions and imported modules.  Only top-lexical bindings created by
+\defformref{deflocal} are mutable---both in the defining module and in any
+importing module.  It is a violation to modify an immutable binding.
+Expressions, that is non-defining forms, are collected and evaluated in order of
+appearance at the end of the module definition process when the top-lexical
+environment is complete---that is after the creation and initialization of the
+top-lexical bindings.  The exception to this is the \keywordref{progn} form,
+which is descended and the forms within it are treated as if the
+\keywordref{progn} were not present.  Definitions may only appear either at
+top-level within a module definition or inside any number of \keywordref{progn}
+forms.  This is specified more precisely in the grammar for a module given
+below.
+%
+\Syntax
+\savesyntax\defmoduleZeroSyntax\vbox
+{\small%
+\syntax
+module
+   = '(', 'defmodule', module name,
+     module directives, {level 0 module form}, ')';
+module name
+   = identifier; (* \[\S\ref{symbol}\] *)
+module directives
+   = '(', {module directive}, ')';
+module directive
+   = 'export', '(', {identifier}, ')'
+   | 'expose', '(', {module descriptor}, ')'
+   | 'import', '(', {module descriptor}, ')'
+   | 'syntax', '(', {module descriptor}, ')';
+level 0 module form
+   = '(', 'export', {identifier}, ')'
+   | level 0 expression (* \[\S\ref{control-0}\] *)
+   | defining form (* \[\S\ref{control-0}\] *)
+   | '(', 'progn', {level 0 module form}, ')';
+module descriptor
+   = module name
+   | module filter;
+module filter
+   = '(', 'except', '(', {identifier}, ')',
+     module descriptor, ')'
+   | '(', 'only', '(', {identifier}, ')',
+     module descriptor, ')'
+   | '(', 'rename', '(', {rename pair}, ')',
+     module descriptor, ')';
+rename pair
+   = '(', identifier, identifier, ')';
+\endsyntax
+}
+%
+\savesyntax\defmoduleOneSyntax\vbox{\small
+\syntax
+module
+   = '(', 'defmodule', module name,
+     module directives, {level 1 module form}, ')';
+level 1 module form
+   = level 1 expression (* \[\S\ref{control-1}\] *)
+   | level 0 module form;
+\endsyntax
+}
+\label{defmodule-syntax}
+\syntaxtable{module}{\defmoduleZeroSyntax}
+%
+\end{optDefinition}
+
+\sclause{Module Processing}
+%
+\begin{optPrivate}
+    GN is unhappy with the definition before use requirement.  It could be
+    cleaned up by requiring the source to exist but not th e processed module.
+\end{optPrivate}
+%
+\begin{optDefinition}
+The following steps summarize the module definition process:
+%
+\begin{description}
+    \item[{\bf directive processing}] This is described in detail in
+    Sections~\ref{directives}--\ref{syntax-directive}.  This step creates and
+    initializes the top-lexical, syntax and external environments.
+
+    \item[{\bf syntax expansion}] \index{general}{macros---see also syntax}
+    \index{general}{macro expansion---see also syntax} \index{general}{syntax}
+    \index{general}{syntax expansion} The body of the module is expanded
+    according to the operators defined in the syntax environment constructed
+    from the syntax directive.
+    \begin{note}
+        The semantics of syntax expansion are still under discussion and will be
+        described fully in a future version of the \eulisp\ definition.  In
+        outline, however, it is intended that the mechanism should provide for
+        hygenic expansion of forms in such a way that the programmer need have
+        no knowledge of the expansion-time or run-time dependencies of the
+        syntax defining module.
+    \end{note}
+
+    \item[{\bf static analysis}] The expanded body of the module is analyzed.
+    Names referenced in export forms are added to the external environment.
+    Names defined by defining forms are added to the top-lexical environment. It
+    is a violation, if a free identifier in an expression or defining form
+    does not have a binding in the top-lexical environment.
+    \begin{note}
+        Additional implementation-defined steps may be added here, such as
+        compilation.
+    \end{note}
+
+    \item[{\bf initialization}] The top-lexical bindings of the module (created
+    above) are initialized by evaluating the defining forms in the body of the
+    module in the order they appear.
+    \begin{note}
+        In this sense, a module can be regarded as a generalization of the
+        \keywordref{labels} form of this and other Lisp dialects.
+    \end{note}
+
+    \item[{\bf expression evaluation}] The expressions in the body of the module
+    are evaluated in the order in which they appear.
+\end{description}
+%
+\end{optDefinition}
+%
+\sclause{Module Definition}
+\label{defmodule}
+\ttindex{defmodule}
+%
+\begin{optDefinition}
+%
+\syntaxform{defmodule}
+\Syntax
+\noindent
+The syntax of a module and its constituents is defined in
+Table~\ref{defmodule-syntax}.
+%
+\begin{arguments}
+    \item[module name] A symbol used to name the module.
+    \item[module directives] A form specifying the exported names, exposed
+    modules, imported modules and syntax modules used by this module.
+    \item[module form] One of a defining form, an expression or an export
+    directive.
+\end{arguments}
+%
+\remarks%
+The \defformref{defmodule} form defines a module named by {\em module name}
+and associates the name {\em module name} with a module object in the
+module binding environment\index{general}{binding!of module
+names}\index{general}{module!name bindings}.
+\begin{note}
+    Intentionally, nothing is defined about any relationship between modules and
+    files.
+\end{note}
+%
+\examples
+An example module definition with explanatory comments is given in
+example~\ref{example:module}.
+%
+\end{optDefinition}

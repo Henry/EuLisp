@@ -1,0 +1,25 @@
+## -------------------------------*- sh -*--------------------------------
+## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+## -----------------------------------------------------------------------
+##                     EuLisp System 'youtoo'
+## -----------------------------------------------------------------------
+##  Description: shell script to run the system
+## -----------------------------------------------------------------------
+
+export EUL_LOAD_PATH="${EUL_LOAD_PATH}:`pwd`:${EUL_DIR}/Lib.${EUL_ARCH}"
+export EUL_LIBRARY_LOAD_PATH="${EUL_LIBRARY_LOAD_PATH}:`pwd`:${EUL_DIR}/Lib.${EUL_ARCH}"
+export LD_LIBRARY_PATH=${EUL_DIR}/Lib.${EUL_ARCH}:${LD_LIBRARY_PATH}
+
+if (test ! -z "$*") then
+    if (test $1 = -script) then
+        SCRIPT=$2
+        shift 2
+        cat ${SCRIPT} | grep -v "#!" | eval exec ${EUL_DIR}/Bin.${EUL_ARCH}/you2tk -script $*
+    else
+        eval exec ${EUL_DIR}/Bin.${EUL_ARCH}/you2tk $*
+    fi
+else
+    eval exec ${EUL_DIR}/Bin.${EUL_ARCH}/you2tk $*
+fi
+
+## -----------------------------------------------------------------------

@@ -1,0 +1,32 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:                Pipe module for Youtoo 0.93
+#+AUTHOR:               Rob Simmons and Andreas Kind
+#+DATE:               July 1997\\Updated February 2010
+#+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
+#+OPTIONS: ^:{} email:nil
+
+* Copyright
+  Youtoo is free software; you can redistribute it and/or modify it under the
+  terms of the GNU General Public License as published by the Free Software
+  Foundation; either version 2 of the License, or (at your option) any later
+  version.  See the file COPYING in this directory, for a description of the GNU
+  General Public License terms under which you can copy the files.
+
+* [[file:../../README.org][Youtoo README]]
+
+* General Description
+  Library for pipes, forked child processes and control i/o with a stream
+  object.
+
+* Installation
+  + Run 'make' in directory /Extras/Pipe/.
+  + Run 'make test' in directory /Extras/Pipe/.
+  + Add -lpipe to CLIBS in /youtoo/\.eulrc.${ARCH}/.
+
+* Files
+  The pipe library consists of single EuLisp module:
+  - /pipe.em/ -- root module
+
+  And a foreign-function interface file:
+  - /eul-pipe.c/ -- C interface for pipe functions

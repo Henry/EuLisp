@@ -1,0 +1,12 @@
+      
+      DOUBLE PRECISION FUNCTION FOO(I,D)
+      INTEGER I
+      DOUBLE PRECISION D
+
+      EXTERNAL BAR
+
+      FOO = BAR(I,D)
+
+      RETURN
+
+      END

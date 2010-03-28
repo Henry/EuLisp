@@ -1,0 +1,135 @@
+\begin{foreword}
+\label{history}
+\begin{optDefinition}
+The \eulisp\ group first met in September 1985 at IRCAM in Paris to discuss the
+idea of a new dialect of Lisp, which should be less constrained by the past than
+Common Lisp and less minimalist than Scheme.  Subsequent meetings formulated the
+view of \eulisp\ that was presented at the 1986 ACM Conference on Lisp and
+Functional Programming held at MIT, Cambridge, Massachusetts \bref{desiderata}
+and at the European Conference on Artificial Intelligence (ECAI-86) held in
+Brighton, Sussex \bref{stoyan}.  Since then, progress has not been steady, but
+happening as various people had sufficient time and energy to develop part of
+the language.  Consequently, although the vision of the language has in the most
+part been shared over this period, only certain parts were turned into physical
+descriptions and implementations.  For a nine month period starting in January
+1989, through the support of INRIA, it became possible to start writing the
+\eulisp\ definition.  Since then, affairs have returned to their previous state,
+but with the evolution of the implementations of \eulisp\ and the background of
+the foundations laid by the INRIA-supported work, there is convergence to a
+consistent and practical definition.
+\end{optDefinition}
+
+\begin{optDefinition}
+The acknowledgments for this definition fall into three categories:
+intellectual, personal, and financial.
+
+The ancestors of \eulisp\ (in alphabetical order) are
+\cl\index{general}{cl@\cl}~\bref{CLtl},
+\interlisp\index{general}{interlisp@\interlisp}~\bref{interlisp},
+\lelisp\index{general}{lelisp@\lelisp}~\bref{le-lisp},
+\lisp/VM\index{general}{lispVM@\lisp/VM}~\bref{lisp/vm}, Scheme~\bref{scheme-3},
+and T\index{general}{T}~\bref{t-manual} \bref{t-book}.  Thus, the authors of
+this report are pleased to acknowledge both the authors of the manuals and
+definitions of the above languages and the many who have dissected and extended
+those languages in individual papers.  The various papers on Standard
+ML\index{general}{Standard ML}~\bref{std-ml} and the draft report on
+Haskell\index{general}{Haskell}~\bref{haskell} have also provided much useful
+input.
+
+The writing of this report has, at various stages, been supported by Bull S.A.,
+Gesellschaft f\"ur Mathematik und Datenverarbeitung (GMD, Sankt Augustin), Ecole
+Polytechnique (LIX), ILOG S.A., Institut National de Recherche en Informatique
+et en Automatique (INRIA), University of Bath, and Universit\'e Paris VI (LITP).
+The authors gratefully acknowledge this support.  Many people from European
+Community countries have attended and contributed to \eulisp\ meetings since
+they started, and the authors would like to thank all those who have helped in
+the development of the language.
+
+In the beginning, the work of the \eulisp\ group was supported by the
+institutions or companies where the participants worked, but in 1987 DG XIII
+(Information technology directorate) of the Commission of the European
+Communities agreed to support the continuation of the working group by funding
+meetings and providing places to meet.  It can honestly be said that without
+this support \eulisp\ would not have reached its present state.  In addition,
+the \eulisp\ group is grateful for the support of:
+
+British Council in France (Alliance programme),
+British Council in Spain (Acciones Integradas programme),
+British Council in Germany (Academic Research Collaboration programme),
+British Standards Institute,
+Deutscher Akademischer Austauschdienst (DAAD),
+Departament de Llenguatges i Sistemes Inform\`atics (LSI, Universitat
+Polit\`ecnica de Catalunya),
+Fraunhofer Gesellschaft Institut f\"ur Software und Systemtechnik,
+Gesellschaft f\"ur Mathematik und Datenverarbeitung (GMD),
+ILOG S.A.,
+Insiders GmbH,
+Institut National de Recherche en Informatique et en Automatique (INRIA),
+Institut de Recherche et de Coordination Acoustique Musique (IRCAM),
+Ministerio de Educacion y Ciencia (MEC),
+Rank Xerox France,
+Science and Engineering Research Council (UK),
+Siemens AG,
+University of Bath,
+University of Technology, Delft,
+University of Edinburgh,
+Universit\"at Erlangen
+and
+Universit\'e Paris VI (LITP).
+
+The following people (in alphabetical order) have contributed in
+various ways to the evolution of the language:
+Giuseppe Attardi,
+Javier B\'ejar,
+Neil Berrington,
+Russell Bradford,
+Harry Bretthauer,
+Peter Broadbery,
+Christopher Burdorf,
+J\'er\^ome Chailloux,
+Odile Chenetier,
+Thomas Christaller,
+Jeff Dalton,
+Klaus D\"a{\ss}ler,
+Harley Davis,
+David DeRoure,
+John Fitch,
+Richard Gabriel,
+Brigitte Glas,
+Nicolas Graube,
+Dieter Kolb,
+J\"urgen Kopp,
+Antonio Moreno,
+Eugen Neidl,
+Greg Nuyens,
+Pierre Parquier,
+Keith Playford,
+Willem van der Poel,
+Christian Queinnec,
+Nitsan Seniak,
+Enric Sesa,
+Herbert Stoyan,
+and
+Richard Tobin.
+
+The editors of the \eulisp\ definition wish particularly to acknowledge the work
+of Harley Davis on the first versions of the description of the object system.
+The second version was largely the work of Harry Bretthauer, with the assistance
+of J\"urgen Kopp, Harley Davis and Keith Playford.
+
+Julian Padget ({\bf \tt jap@maths.bath.ac.uk})\\
+School of Mathematical Sciences\\
+University of Bath\\
+Bath, Avon, BA2 7AY, UK\\
+
+\noindent
+Harry Bretthauer ({\bf \tt harry.bretthauer@gmd.de})
+GMD mbH\\
+Postfach 1316\\
+53737 Sankt Augustin\\
+Germany\\
+
+\noindent
+editors.
+\end{optDefinition}
+\end{foreword}

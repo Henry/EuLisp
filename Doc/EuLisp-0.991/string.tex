@@ -1,0 +1,291 @@
+\sclause{Strings}
+\index{general}{string}
+\index{general}{string!module}
+\index{general}{level-0 modules!string}
+\label{string}
+\begin{optDefinition}
+The defined name of this module is {\tt string}.  See also
+section~\ref{collection} (collections) for further operations on
+strings.
+%
+\syntaxform{string}
+%
+String literals\index{general}{external representation!string} are
+delimited by the glyph called {\em quotation mark\/} (\verb+"+).  For
+example, \verb+"abcd"+.
+
+Sometimes it might be desirable to include string delimiter characters
+in strings.  The aim of escaping in strings\index{general}{string!escaping
+in} is to fulfill this need.  The {\em
+string-escape\/}\index{general}{string!string-escape glyph} glyph is
+defined as {\em reverse solidus\/} (\verb+\+).  String escaping can also
+be used to include certain other characters that would otherwise be
+difficult to denote.  The set of named special characters (see
+sections~\ref{syntax} and~\ref{character}) have a particular syntax to
+allow their inclusion in strings.  To allow arbitrary characters to
+appear in strings, the hex-insertion digram is followed by an integer
+denoting the position of the character in the current character set.
+Some examples of string literals appear in
+Table~\ref{example:string-literal}.  The syntax for the external
+representation of strings is defined below.
+%
+\Syntax
+\label{string-syntax}
+\newbox\stringSyntax
+\begingroup
+
+\def\a{\string\a}
+\def\b{\string\b}
+\def\d{\string\d}
+\def\f{\string\f}
+\def\l{\string\l}
+\def\n{\string\n}
+\def\r{\string\r}
+\def\t{\string\t}
+\def\v{\string\v}
+\def\x{\string\x}
+\def\'{\string\'}
+\def\"{\string\"}
+\def\\{\string\\}
+
+% \global so it doesn't get reset to void when we leave this group...
+\global\setbox\stringSyntax\vbox{\small\syntax
+string token
+   = '"' {string constituent} '"';
+string constituent
+   = normal string constituent
+   | digram string constituent
+   | numeric string constituent;
+normal string constituent
+   = level 0 character - ( '"' | '\' )
+digram string constituent
+   = '\a' (* \[\em alert\] *)
+   | '\b' (* \[\em backspace\] *)
+   | '\d' (* \[\em delete\] *)
+   | '\f' (* \[\em formfeed\] *)
+   | '\l' (* \[\em linefeed\] *)
+   | '\n' (* \[\em newline\] *)
+   | '\r' (* \[\em return\] *)
+   | '\t' (* \[\em tab\] *)
+   | '\v' (* \[\em vertical tab\] *)
+   | '\"' (* \[\em string delimiter\] *)
+   | '\\' ;  (* \[\em string escape\] *)
+numeric string constituent
+   = '\x' hex digit
+   | '\x' hex digit, hex digit
+   | '\x' hex digit, hex digit, hex digit
+   | '\x' hex digit, hex digit, hex digit,
+     hex digit;
+\endsyntax}
+\endgroup
+\syntaxtable{string}{\stringSyntax}
+%
+\begin{example}
+    \label{example:string-literal}
+    \examplecaption{Examples of string literals}
+    \begin{center}
+        \begin{tabular}{|ll|}\hline
+            Example & Contents\\\hline
+            \verb+"a\nb"+ & \verb+#\a+, \verb+#\newline+ and \verb+#\b+\\
+            \verb+"c\\"+ & \verb+#\c+ and \verb+#\\+\\
+            \verb+"\x1 "+ & \verb+#\x1+ followed by \verb+#\space+\\
+            \verb+"\xabcde"+ & \verb+#\xabcd+ followed by \verb+#\e+\\
+            \verb+"\x1\x2"+ & \verb+#\x1+ followed by \verb+#\x2+\\
+            \verb-"\x12+"- & \verb+#\x12+ followed by \verb-#\+-\\
+            \verb+"\xabcg"+ & \verb+#\xabc+ followed by \verb+#\g+\\
+            \verb+"\x00abc"+ & \verb+#\xab+ followed by \verb+#\c+\\\hline
+        \end{tabular}
+    \end{center}
+\end{example}
+%
+\begin{note}
+    At present this document refers to the ``current character set'' but
+    defines no means of selecting alternative character sets.  This is to
+    allow for future extensions and implementation-defined extensions
+    which support more than one character set.
+\end{note}
+%
+The function \functionref{write} outputs a re-readable form of any escaped
+characters in the string.  For example, \verb+"a\n\\b"+ (input
+notation) is the string containing the characters \verb+#\newline+,
+\verb+#\a+, \verb+#\\+ and \verb+#\b+.  The function \functionref{write}
+produces \verb+"a\n\\b"+, whilst \functionref{prin} produces
+%
+\begin{verbatim}
+a
+\b
+\end{verbatim}
+%
+The function \functionref{write} outputs characters which do not have a glyph
+associated with their position in the character set as a hex insertion
+in which all four hex digits are specified, even if there are leading
+zeros, as in the last example in Table~\ref{example:string-literal}.
+The function \functionref{prin} outputs the interpretation of the characters
+according to the definitions in section~\ref{character} without the
+delimiting quotation marks.
+%
+\class{string}
+\index{general}{level-0 classes!\theclass{string}}
+%
+The class of all instances of \classref{string}.
+%
+\begin{initoptions}
+%
+\item[size, \classref{fixed-precision-integer}]
+The number of characters in the string.  Strings are zero-based and
+thus the maximum index is {\em size-1}.  If not specified the {\em
+size\/} is zero.
+%
+\item[fill-value, \classref{character}]
+A character with which to initialize the string.  The default fill
+character is \verb|#\x0|.
+%
+\end{initoptions}
+%
+\examples
+%
+\begin{tabular}{lcl}
+\verb|(make <string>)| &\Ra& \verb|""|\\
+\verb|(make <string> 'size 2)| &\Ra& \verb|"\x0000\x0000"|\\
+\verb|(make <string> 'size 3| &\Ra& \verb|"aaa"|\\
+\verb|  'fill-value #\a)|&&\\
+\end{tabular}
+%
+\function{stringp}
+%
+\begin{arguments}
+    %
+    \item[object] Object to examine.
+    %
+\end{arguments}
+%
+\result
+Returns {\em object\/} if it is a string, otherwise \nil.
+%
+\converter{symbol}
+\begin{specargs}
+    \item[string, \classref{string}] A string to be converted to a symbol.
+\end{specargs}
+%
+\result
+If the result of \functionref{symbol-exists-p} when applied to {\em string\/}
+is a symbol, that symbol is returned.  If the result is \nil, then
+a new symbol is constructed whose name is {\em string}.  This new
+symbol is returned.
+%
+\method{equal}
+%
+\begin{specargs}
+    \item[string$_1$, \classref{string}] A string.
+    \item[string$_2$, \classref{string}] A string.
+\end{specargs}
+%
+\result
+If the size of {\em string$_1$} is the same (under {\tt =}) as that of
+{\em string$_2$}, then the result is the conjunction of the pairwise
+application of \genericref{equal} to the elements of the arguments.  If not
+the result is \nil.
+%
+\method{deep-copy}
+%
+\begin{specargs}
+    \item[string, \classref{string}] A string.
+\end{specargs}
+%
+\result
+Constructs and returns a copy of {\em string\/} in which each element
+is \genericref{eql} to the corresponding element in {\em string}.
+%
+\method{shallow-copy}
+%
+\begin{specargs}
+    \item[string, \classref{string}] A string.
+\end{specargs}
+%
+\result
+Constructs and returns a copy of {\em string\/} in which each element
+is \genericref{eql} to the corresponding element in {\em string}.
+%
+\method{binary<}
+%
+\begin{specargs}
+    \item[string$_1$, \classref{string}] A string.
+    \item[string$_2$, \classref{string}] A string.
+\end{specargs}
+%
+\result%
+If the second argument is longer than the first, the result is \nil.  Otherwise,
+if the sequence of characters in {\em string$_1$} is pairwise less than that in
+{\em string$_2$} according to \genericref{binary<} the result is \true.
+Otherwise the result is \nil.  Since it is an error to compare lower case, upper
+case and digit characters with any other kind than themselves, so it is an error
+to compare two strings which require such comparisons and the results are
+undefined.
+%
+\examples
+\begin{tabular}{lcl}
+\verb|(< "a" "b")| &\Ra& \verb|t|\\
+\verb|(< "b" "a")| &\Ra& \verb|()|\\
+\verb|(< "a" "a")| &\Ra& \verb|()|\\
+\verb|(< "a" "ab")| &\Ra& \verb|t|\\
+\verb|(< "ab" "a")| &\Ra& \verb|()|\\
+\verb|(< "A" "B")| &\Ra& \verb|t|\\
+\verb|(< "0" "1")| &\Ra& \verb|t|\\
+\verb|(< "a1" "a2")| &\Ra& \verb|t|\\
+\verb|(< "a1" "bb")| &\Ra& \verb|t|\\
+\verb|(< "a1" "ab")| &\Ra& {\em undefined}
+\end{tabular}
+%
+\seealso
+Method on \genericref{binary<} (\ref{compare}) for characters (\ref{character}).
+%
+\method{as-lowercase}
+%
+\begin{specargs}
+    \item[string, \classref{string}] A string.
+\end{specargs}
+%
+\result
+Returns a copy of {\em string\/} in which each character denoting an
+upper case character, is replaced by a character denoting its lower
+case counterpart.  The result must not be \genericref{eq} to {\em string}.
+%
+\method{as-uppercase}
+%
+\begin{specargs}
+    \item[string, \classref{string}] A string.
+\end{specargs}
+%
+\result
+Returns a copy of {\em string\/} in which each character denoting an
+lower case character, is replaced by a character denoting its upper
+case counterpart.  The result must not be \genericref{eq} to {\em string}.
+%
+\method{generic-prin}
+\begin{specargs}
+    \item[string, \classref{string}] String to be ouptut on {\em stream}.
+    \item[stream, \classref{stream}] Stream on which {\em string} is to be ouptut.
+\end{specargs}
+%
+\result
+The string {\em string}.
+%
+Output external representation of {\em string\/} on {\em stream\/} as
+described in the introduction to this section, interpreting each of
+the characters in the string.  The opening and closing quotation marks
+are not output.
+%
+\method{generic-write}
+\begin{specargs}
+    \item[string, \classref{string}] String to be ouptut on {\em stream}.
+    \item[stream, \classref{stream}] Stream on which {\em string\/} is to be ouptut.
+\end{specargs}
+%
+\result
+The string {\em string}.
+%
+Output external representation of {\em string\/} on {\em stream\/} as
+described in the introduction to this section, replacing single
+characters with escape sequences if necessary.  Opening and closing
+quotation marks are output.
+\end{optDefinition}

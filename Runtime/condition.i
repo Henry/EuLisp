@@ -1,0 +1,57 @@
+;;; EuLisp system 'youtoo'
+;;;   Interface file for module condition
+
+(definterface condition
+  (import (telos thread dynamic let-cc)
+   syntax (_macros)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos event thread dynamic let-cc)
+   export (
+    ((name . pop-error-handlers) (pos . 6) (origin dynamic . pop-error-handlers))
+    ((name . <general-condition>) (pos . 5) (origin condition . <general-condition>) (class . constant))
+    ((name . error) (pos . 21) (origin boot . error))
+    ((name . <condition>) (pos . 9) (origin condition . <condition>) (class . constant))
+    ((name . signal) (pos . 2) (origin condition . signal))
+    ((name . *default-error-handler*) (pos . 3) (origin condition . *default-error-handler*))
+    ((name . condition-message) (pos . 8) (origin condition . condition-message) (inline (G00872 (static-ref0) (binding-ref ? <condition>) (primitive-relative-ref))) (setter (G00874 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <condition>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . output-condition-contents) (pos . 4) (origin condition . output-condition-contents))
+    ((name . push-error-handler) (pos . 5) (origin dynamic . push-error-handler))
+    ((name . cerror) (pos . 7) (origin condition . cerror))
+    ((name . conditionp) (pos . 6) (origin condition . conditionp))
+   )
+   local-literals (
+    (top-level . 54)
+    (signal . 53)
+    (output-condition-contents . 52)
+    (cerror . 51)
+    (condition-message . 50)
+    ("
+*** ERROR [~a]: ~a
+" . 44)
+    ("    ~a: ~a
+" . 42)
+    (call/ep-lambda . 39)
+    (anonymous . 37)
+    (error . 34)
+    (|(method conditionp)| . 33)
+    (|(setter condition-message)| . 32)
+    (default-error-handler . 31)
+    (conditionp . 30)
+    ((arguments:) . 29)
+    (general-condition . 28)
+    (arguments: . 27)
+    (arguments . 26)
+    ((message:) . 25)
+    (direct-keywords: . 24)
+    (direct-slots: . 23)
+    (direct-superclasses: . 22)
+    (condition . 21)
+    (keyword: . 20)
+    (message . 19)
+    (name: . 18)
+    ("***    See Backtrace? (y/n) " . 16)
+    ("***    Do you want to continue? (y/n) " . 15)
+    (message: . 10)
+   )
+   literals (
+   )
+))

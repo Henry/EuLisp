@@ -1,0 +1,92 @@
+\sclause{Low Level Allocation Primitives}
+%
+\begin{optDefinition}
+This module provides primitives which are necessary to implement new allocation
+methods portably. However, they should be defined in such a way that objects
+cannot be destroyed unintentionally.  In consequence it is an error to use
+\functionref{primitive-class-of}, \functionref{primitive-ref} and their setters
+on objects not created by \functionref{primitive-allocate}.
+
+\function{primitive-allocate}
+%
+\begin{arguments}
+    \item[class] A class.
+    \item[size] An integer.
+\end{arguments}
+%
+\result%
+An instance of the first argument.
+%
+\remarks%
+This function returns a new instance of the first argument which has a
+vector-like structure of length {\em size}. The components of the new instance
+can be accessed using \functionref{primitive-ref} and updated using
+\setterref{primitive-ref}.  It is intended to be used in new
+\genericref{allocate} methods defined for new metaclasses.
+
+\function{primitive-class-of}
+%
+\begin{arguments}
+    \item[object] An object created by \functionref{primitive-allocate}.
+\end{arguments}
+%
+\result%
+A class.
+%
+\remarks%
+This function returns the class of an object. It is similar to
+\functionref{class-of}, which has a defined behaviour on any object. It is an
+error to use \functionref{primitive-class-of} on objects which were not created
+by \functionref{primitive-allocate}.
+
+\setter{primitive-class-of}
+%
+\begin{arguments}
+    \item[object] An object created by \functionref{primitive-allocate}.
+    \item[class] A class.
+\end{arguments}
+%
+\result%
+The {\em class}.
+%
+\remarks%
+This function supports portable implementations of
+\begin{enumerate}
+    \item dynamic classification like {\tt change-class} in CLOS.
+    \item automatic instance updating of redefined classes.
+\end{enumerate}
+
+\function{primitive-ref}
+%
+\begin{arguments}
+    \item[object] An object created by \functionref{primitive-allocate}.
+    \item[index] The index of a component.
+\end{arguments}
+%
+\result%
+An object.
+%
+\remarks%
+Returns the value of the objects component corresponding to the supplied index.
+It is an error if {\em index} is outside the index range of {\em object}.  This
+function is intended to be used when defining new kinds of accessors for new
+metaclasses.
+
+\setter{primitive-ref}
+%
+\begin{arguments}
+    \item[object] An object created by \functionref{primitive-allocate}.
+    \item[index] The index of a component.
+    \item[value] The new value, which can be any object.
+\end{arguments}
+%
+\result%
+The new value.
+%
+\remarks%
+Stores and returns the new value as the objects component corresponding to the
+supplied index.  It is an error if {\em index} is outside the index range of
+{\em object}.  This function is intended to be used when defining new kinds of
+accessors for new metaclasses.
+
+\end{optDefinition}

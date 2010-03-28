@@ -1,0 +1,42 @@
+;;; EuLisp system 'youtoo'
+;;;   Interface file for module float
+
+(definterface float
+  (import (telos number)
+   syntax (_telos0)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos copy compare callback let-cc dynamic thread event condition number)
+   export (
+    ((name . floor) (pos . 7) (origin float . floor))
+    ((name . <float>) (pos . 4) (origin float . <float>) (class . constant))
+    ((name . ceiling) (pos . 9) (origin float . ceiling))
+    ((name . truncate) (pos . 3) (origin float . truncate))
+    ((name . floatp) (pos . 2) (origin float . floatp))
+    ((name . <double-float>) (pos . 8) (origin float . <double-float>) (class . constant))
+    ((name . round) (pos . 5) (origin float . round))
+    ((name . doublep) (pos . 10) (origin float . doublep))
+    ((name . <double>) (pos . 6) (origin float . <double>) (class . constant))
+   )
+   local-literals (
+    (top-level . 34)
+    ((converter <double>) . 32)
+    (<double> . 31)
+    (converter . 30)
+    (|(method doublep)| . 29)
+    (double . 28)
+    (|(method floatp)| . 27)
+    (truncate . 26)
+    (round . 25)
+    (floor . 24)
+    (ceiling . 23)
+    (doublep . 22)
+    (floatp . 21)
+    (abstractp: . 20)
+    (direct-keywords: . 19)
+    (direct-slots: . 18)
+    (direct-superclasses: . 17)
+    (float . 16)
+    (name: . 15)
+   )
+   literals (
+   )
+))

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>IEEE Scheme written in Youtoo 0.93</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="July 1997\\Updated February 2010"/>
+<meta name="author" content="Andreas Kind"/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color:lightblue; font-weight:normal }
+  .target { }
+  .timestamp { color: grey }
+  .timestamp-kwd { color: CadetBlue }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*/-->
+</script>
+</head><body>
+<h1 class="title">IEEE Scheme written in Youtoo 0.93</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Copyright </a></li>
+<li><a href="#sec-2">2 Youtoo README </a></li>
+<li><a href="#sec-3">3 General Description </a></li>
+<li><a href="#sec-4">4 Installation </a></li>
+<li><a href="#sec-5">5 Notes </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1">1 Copyright </h2>
+<div id="text-1">
+
+<p>Youtoo is free software; you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation; either version 2 of the License, or (at your option) any later
+version.  See the file COPYING in this directory, for a description of the GNU
+General Public License terms under which you can copy the files.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2">2 <a href="../../README.html">Youtoo README</a> </h2>
+<div id="text-2">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3">3 General Description </h2>
+<div id="text-3">
+
+<p>This is IEEE Scheme implemented in youtoo.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4">4 Installation </h2>
+<div id="text-4">
+
+<ul>
+<li>
+Install the bignums module in directory <i>Extras/Bignum</i>.
+</li>
+<li>
+Run 'make' in directory <i>Extras/Scheme</i>; this creates <i>libscheme.{i,a}</i>.
+</li>
+<li>
+Run 'make test' in directory <i>Extras/Scheme</i>; this tests libscheme.{i,a}.
+
+</li>
+<li id="sec-4.1">Installation of the scmtoo Scheme interpreter <br/>
+<ul>
+<li>
+Run 'make scmtoo' in directory <i>Extras/Scheme</i>; this creates Scheme image.
+</li>
+<li>
+Run 'Bin.${ARCH}/scmtoo.sh'.
+
+</li>
+</ul>
+</li>
+<li id="sec-4.2">Installation of the scm2tk Scheme-Tk Interpreter <br/>
+<ul>
+<li>
+Edit the <i>Extras/Scheme/Makefile</i> (if necessary).
+</li>
+<li>
+Run 'make scm2tk'.
+</li>
+<li>
+Make sure your <code>LD_LIBRARY_PATH</code> environment variable is set correctly
+(you could edit Bin.${ARCH}/scm2tk.sh to add <code>EUL_TCL_LIB_PATH</code>
+<code>EUL_TK_LIB_PATH</code> and <code>EUL_X_LIB_PATH</code>).
+
+</li>
+<li id="sec-4.2.1">Example test for scm2tk <br/>
+Run 'Bin.${ARCH}/scm2tk.sh' and type
+#+BEGIN_SRC scheme
+(define (foo b x)
+(display b)
+(newline)
+(tk-button-flash b))
+
+<p>
+(let ((b1 (tk-make-button () text: "foo" command: foo args: '(self: 42)))
+(b2 (tk-make-button () text: "exit" fg: "red" command: tk-exit)))
+(tk-pack b1 b2 padx: "10" pady: "3"))
+</p>
+<p>
+(tk-main-loop)
+#+END_SRC
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5">5 Notes </h2>
+<div id="text-5">
+
+<ul>
+<li id="sec-5.1">Scheme for Teaching <br/>
+The Scheme image is tailored to teaching first-year students with
+
+<p>
+Harold Abelson and Gerald Jay Sussman and Julie Sussman <br/>
+"Structure and Interpretation of Computer Programs" <br/>
+The MIT Press, 1996. <br/>
+</p>
+<p>
+This book is based on IEEE (which is not R4RS or R5RS).  For better
+debugging and simpler interaction there is a flag called
+<code>*first-year-students*</code> that triggers inlining the rep and other
+things. This flag can be toggled in scmtoo or scm2tk with
+<code>first-year-students:</code>.
+</p>
+</li>
+<li id="sec-5.2">EuLisp-Tk Documentation <br/>
+See <a href="http://www.cs.bath.ac.uk/~jap/ma5jg/youtoo-Tk-docs/">http://www.cs.bath.ac.uk/~jap/ma5jg/youtoo-Tk-docs/</a> for documentation
+and some Tk examples in EuLisp syntax or send mail to Julian Padget at
+jap@maths.bath.ac.uk for more Tk teaching code.
+</li>
+</ul>
+</div>
+</div>
+<div id="postamble"><p class="author"> Author: Andreas Kind
+<a href="mailto:henry@dm.opencfd.co.uk">&lt;henry@dm.opencfd.co.uk&gt;</a>
+</p>
+<p class="date"> Date: July 1997\\Updated February 2010</p>
+<p>HTML generated by org-mode 6.21b in emacs 23</p>
+</div></body>
+</html>

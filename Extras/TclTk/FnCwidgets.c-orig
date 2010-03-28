@@ -1,0 +1,601 @@
+
+#include "globalvariables.h"
+/* #include "tclInt.h" */
+#include "tk.h"
+#include "StrOperations.h"
+#include <eulisp.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+typedef struct {
+    char *name; 			/* Name of the type of widget.*/
+    Tcl_CmdProc *proc; 		/* Procedure that creates the widget */
+} CommandInfo;
+
+
+
+static CommandInfo creationFns[] = {
+    /*
+     * Functions for each type of widget.
+     */
+ 
+    {"button", 		Tk_ButtonCmd},
+    {"label",           Tk_LabelCmd},
+    {"frame",           Tk_FrameCmd},
+    {"canvas", 		Tk_CanvasCmd},
+    {"checkbutton", 	Tk_CheckbuttonCmd},
+    {"entry", 		Tk_EntryCmd},
+    {"listbox", 		Tk_ListboxCmd},
+    {"menu", 		Tk_MenuCmd},
+    {"menubutton", 	Tk_MenubuttonCmd},
+    {"message", 		Tk_MessageCmd},
+    {"radiobutton", 	Tk_RadiobuttonCmd},
+    {"scale", 		Tk_ScaleCmd},
+    {"scrollbar", 	Tk_ScrollbarCmd},
+    {"text", 		Tk_TextCmd},
+    {"toplevel", 	Tk_ToplevelCmd},
+    {NULL, 		(Tcl_CmdProc *) NULL}
+};
+
+
+Tcl_CmdProc *FindCreationFn(char *type)
+{
+  int i=0;
+  char *name;
+
+  name = creationFns[i].name;
+  while ((strcmp(name, type)!=0) && (name != NULL)) {
+    i++;
+    name = creationFns[i].name;
+  }
+ 
+  return creationFns[i].proc;
+}
+
+
+Tcl_CmdInfo* eul_tk_create_widget(char * type, char * name, LispRef listArgs)
+{
+
+  struct infoargs infoArgs;
+  int result;
+  Tcl_CmdProc *proc;
+  Tcl_CmdInfo *cmdPtr;
+/*   register Tcl_Interp *iPtr = (Tcl_Interp *) interp; */
+  Tcl_HashEntry *hPtr;
+
+ /* We will construct the correct structure to pass the information to 
+    the Tk library in the expected way.*/
+
+  ParseArguments2(&infoArgs, type, name, listArgs);
+ 
+  proc = FindCreationFn(type);
+  
+  result = (proc)((ClientData) mainWindow, interp, infoArgs.argc, infoArgs.argv);
+
+
+/* Now I'll try to find the command and the pointer to its clientData */
+
+/*   hPtr = Tcl_FindHashEntry(&iPtr->commandTable, name); */
+/*   if (hPtr == NULL) { */
+/*     fprintf(stdout, "Error Trying to create %s %s\n", type, name); */
+/*     fflush(stdout); */
+/*     return (void *) NULL; */
+/*   } */
+/*   cmdPtr = (Tcl_CmdInfo *) Tcl_GetHashValue(hPtr); */
+  cmdPtr = (Tcl_CmdInfo *) malloc(sizeof(Tcl_CmdInfo));
+  Tcl_GetCommandInfo(interp, name, cmdPtr);
+ 
+  return cmdPtr;
+}
+
+
+
+
+LispRef eul_create_item_canvas (char * type, char * name,
+				Tcl_CmdInfo * cmdPtr, LispRef listArgs)
+{
+  struct infoargs infoArgs;
+  int result;
+  static char command[]="create";
+  LispRef loc;
+  char *string;
+
+  ParseArguments3(&infoArgs, name, command, type, listArgs);
+ 
+  Tcl_ResetResult(interp);
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+ 
+  if (result == TCL_ERROR)
+    loc = eul_nil;
+  else {
+    string = (char *) gc_malloc (strlen(interp->result));
+    strcpy(string, interp->result);
+    eul_allocate_string(loc, string);
+  }
+
+  return loc;
+}
+
+LispRef eul_tk_conf_widget (char * name, Tcl_CmdInfo * cmdPtr, LispRef listArgs)
+{
+  struct infoargs infoArgs;
+  static char command[] = "configure";
+  int result;
+
+  
+  /* Attention to the change of the order in the arguments, name and command.*/
+  ParseArguments2(&infoArgs, name, command, listArgs);
+
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+
+  if (result == TCL_ERROR)
+    return eul_nil;
+  else
+    return eul_true;
+}
+
+
+/* The next function executes the find command for canvases. The result of
+  this function should be a proper EuLisp function. The result is a list of strings.
+  Each string is the id of the items selected.*/
+
+/* LispRef eul_tk_find_canvas (char * nameWidget, Tcl_CmdInfo * cmdPtr, */
+/* 		     char * search_cmd, LispRef  args) */
+/* { */
+/*   struct infoargs infoArgs; */
+/*   static char command[] = "find"; */
+/*   int result, i; */
+/*   char * list; */
+/*   LispRef list_result=eul_nil; */
+/*   LispRef list_element; */
+
+/*   int argc; */
+/*   char **argv; */
+
+/*   ParseArguments3(&infoArgs, nameWidget, command, search_cmd, args); */
+/*   Tcl_ResetResult(interp);  */
+/*   result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv); */
+
+/*   if (result == TCL_OK) { */
+/*     list = (char *) gc_malloc (strlen(interp->result)); */
+/*     strcpy (list, interp->result); */
+    
+/*     Tcl_ResetResult(interp); */
+/*     result = Tcl_SplitList(interp, list, &argc, &argv); */
+/*     if (result == TCL_OK) { */
+/*       for(i=(argc-1); i>=0; i--) { */
+/* 	eul_allocate_string(list_element, argv[i]); */
+/* 	eul_allocate_cons(list_result, list_element, list_result); */
+/*       } */
+/*     } */
+/*   } */
+
+/*   return list_result; */
+/* } */
+
+
+/* LispRef eul_tk_move_item_canvas (char * nameWidget, Tcl_CmdInfo * cmdPtr, */
+/* 				 char * id_or_tag, LispRef args) */
+/* { */
+/*   struct infoargs infoArgs; */
+/*   char command[]= "move"; */
+/*   int result; */
+
+/*   ParseArguments3(&infoArgs, nameWidget, command, id_or_tag, args); */
+
+/*   result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv); */
+  
+/*   if (result == TCL_ERROR) */
+/*      return eul_nil; */
+/*   else */
+/*      return eul_true; */
+/* } */
+
+
+LispRef eul_tk_cmd_item_canvas (char * nameWidget, Tcl_CmdInfo * cmdPtr,
+				char * aux, LispRef args,
+				char * nameCommand)
+
+     /* aux can be an id, a tag or another kind of argument. 
+	In find command aux coulb be: above, all, below, enclosed, overlapping, withtag, */
+{
+  struct infoargs infoArgs;
+  int result, argc, i;
+  char **argv;
+  char *list;
+  LispRef list_result, list_element;
+  
+  list_result=eul_nil;
+  
+  
+  Tcl_ResetResult(interp);
+  ParseArguments3(&infoArgs, nameWidget, nameCommand, aux, args);
+  Tcl_ResetResult(interp); 
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+  
+  if (result == TCL_ERROR)
+    return list_result;
+  else {
+    if (((args == eul_nil) && (strcmp(nameCommand, "coords") == 0)) ||
+	(strcmp(nameCommand, "find")==0)) {
+      list = (char *) gc_malloc (strlen(interp->result));
+      strcpy (list, interp->result);
+      Tcl_ResetResult(interp);
+      result = Tcl_SplitList(interp, list, &argc, &argv);
+      if (result == TCL_OK) {
+	for(i=(argc-1); i>=0; i--) {
+	  eul_allocate_string(list_element, argv[i]);
+	  eul_allocate_cons(list_result, list_element, list_result);
+	}
+      }
+    } else {
+      return eul_true;
+    }
+  }
+}
+
+LispRef eul_add_menu_command (char * nameMenu, Tcl_CmdInfo * cmdPtr, LispRef listArgs)
+{
+  struct infoargs infoArgs;
+  char command[]= "add";
+  int result;
+
+  ParseArguments2(&infoArgs, nameMenu, command, listArgs);
+
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+  
+  if (result == TCL_ERROR)
+     return eul_nil;
+  else
+     return eul_true;
+
+}
+  
+
+
+
+LispRef eul_insert_command (char * nameWidget, Tcl_CmdInfo * cmdPtr,
+			    char * type, char * text)
+{
+  int argc, result;
+  char **argv;
+  static char command[] = "insert";
+
+  /* Attention to the change of the order in the arguments, name and command*/
+
+  argc = 4;
+  argv = (char **)gc_malloc(argc*P_CHARSIZE);
+
+  argv[0] = nameWidget;
+  argv[1] = command;
+  argv[2] = type;
+  argv[3] = text;
+
+ result = (cmdPtr->proc)(cmdPtr->clientData, interp, argc, argv);
+
+ if (result == TCL_ERROR)
+     return eul_nil;
+  else
+     return eul_true;
+}
+
+ 
+
+LispRef eul_delete_command (char * nameWidget, Tcl_CmdInfo * cmdPtr,
+			    char * first, LispRef last)
+{
+  int argc, result;
+  char **argv;
+  static char command[] = "delete";
+
+  /* Attention to the change of the order in the arguments, name and command*/
+ 
+  if (last != eul_nil) 
+    argc = 4;
+  else 
+    argc = 3;
+
+  argv = (char **)gc_malloc(argc*P_CHARSIZE);
+
+  argv[0] = nameWidget;
+  argv[1] = command;
+  argv[2] = first;
+
+  if (argc == 4) 
+    argv[3] = eul_string_as_c_string(eul_car(last));
+
+
+ result = (cmdPtr->proc)(cmdPtr->clientData, interp, argc, argv);
+
+ if (result == TCL_ERROR)
+     return eul_nil;
+  else
+     return eul_true;
+}
+
+
+LispRef eul_view_cmd (char * nameWidget, Tcl_CmdInfo * cmdPtr,
+		      char * type, char * entry, LispRef units, char * xcmd)
+{
+  int argc, result;
+  char **argv;
+/*   static char command[] = "xview"; */
+
+ 
+  if (units != eul_nil) 
+    argc = 5;
+  else 
+    argc = 4;
+
+  argv = (char **)gc_malloc(argc*P_CHARSIZE);
+
+  argv[0] = nameWidget;
+  argv[1] = xcmd;
+  argv[2] = type;
+  argv[3] = entry;
+
+  if (argc == 5) 
+    argv[4] = eul_string_as_c_string(eul_car(units));
+
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, argc, argv);
+  
+  if (result == TCL_ERROR)
+    return eul_nil;
+  else 
+    return eul_true;
+}
+
+/* LispRef eul_yview_command (char * nameWidget, Tcl_CmdInfo * cmdPtr, */
+/* 				   char * type, char * entry, LispRef units) */
+/* { */
+/*   int argc, result; */
+/*   char **argv; */
+/*   static char command[] = "yview"; */
+
+ 
+/*   if (units != eul_nil)  */
+/*     argc = 5; */
+/*   else  */
+/*     argc = 4; */
+
+/*   argv = (char **)gc_malloc(argc*P_CHARSIZE); */
+
+/*   argv[0] = nameWidget; */
+/*   argv[1] = command; */
+/*   argv[2] = type; */
+/*   argv[3] = entry; */
+
+/*   if (argc == 5)  */
+/*     argv[4] = eul_string_as_c_string(eul_car(units)); */
+
+
+/*   result = (cmdPtr->proc)(cmdPtr->clientData, interp, argc, argv); */
+  
+/*   if (result == TCL_ERROR) */
+/*     return eul_nil; */
+/*   else  */
+/*     return eul_true; */
+/* } */
+ 
+
+
+LispRef eul_set_scrollbar_command (char * nameWidget, Tcl_CmdInfo * cmdPtr,
+				  char * first_entry, char * last_entry)
+
+{
+  int argc, result, i;
+  char **argv;
+  static char command[] = "set";
+
+  /* Attention to the change of the order in the arguments, name and command*/
+
+  argc = 4;
+  argv = (char **)gc_malloc(argc*P_CHARSIZE);
+
+  argv[0] = nameWidget;
+  argv[1] = command;
+
+ 
+  argv[2] = first_entry;
+  argv[3] = last_entry;
+
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, argc, argv);
+  
+  if (result == TCL_ERROR)
+     return eul_nil;
+  else
+    return eul_true;
+}
+
+
+LispRef eul_tk_get_value_widget (char * name, Tcl_CmdInfo * cmdPtr, LispRef indexs)
+{
+  
+  int value, result, i;
+  struct infoargs infoArgs;
+  static char command[] = "get";
+  LispRef loc;
+
+  ParseArguments2(&infoArgs, name, command, indexs);
+ 
+  Tcl_ResetResult(interp); /* fixed by jap */
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+ 
+  if (result == TCL_ERROR)
+    loc = eul_nil;
+  else {
+    char *string;
+    string = (char *) gc_malloc (strlen(interp->result));
+    strcpy(string, interp->result);
+    eul_allocate_string(loc, string);
+  }
+/* Replaced by else above (Ally <ma3alh@bath.ac.uk>, jap) */
+/*     eul_allocate_string(loc, interp->result); */
+
+  return loc;
+}
+
+LispRef eul_tk_set_value_widget (char * name, Tcl_CmdInfo * cmdPtr, char * index)
+{
+  
+  int value, result, i;
+  struct infoargs infoArgs;
+  static char command[] = "set";
+  LispRef loc;
+
+  ParseArguments3(&infoArgs, name, command, index, eul_nil);
+ 
+  Tcl_ResetResult(interp); /* fixed by jap */
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+ 
+  if (result == TCL_ERROR)
+    return eul_nil;
+  else
+    return eul_true;
+}
+
+
+LispRef eul_tk_cmd_text (char * name, Tcl_CmdInfo * cmdPtr,
+			    char * command, LispRef args)
+
+{ 
+  int result;
+  struct infoargs infoArgs;
+  LispRef loc;
+
+  ParseArguments2(&infoArgs, name, command, args);
+
+  Tcl_ResetResult(interp);
+
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+
+  if (result == TCL_OK) {
+    loc = eul_true;
+    if (strcmp(command, "index") == 0) {
+      eul_allocate_string(loc, interp->result);
+    }
+    else 
+      loc=eul_nil;
+  }
+  return loc;
+
+}
+
+
+LispRef eul_tk_bind_element (char * nameWidget, Tcl_CmdInfo * cmdPtr, char * type,
+				 char * id_or_tag, char * event, char * fn_key,
+				 LispRef args)
+{
+  int argc, result, i=0;
+  char **argv;
+  char command[] = "bind";
+  char tk_command[] = "eul_interpret ";
+ 
+  if (strcmp(type, "tag")==0)
+    argc = 6;
+  else 
+    argc = 5;
+
+  argv = (char **)gc_malloc(argc*P_CHARSIZE);
+
+  argv[i++] = nameWidget;
+  if (strcmp(type, "tag")==0)
+    argv[i++] = type;
+  argv[i++] = command;
+  argv[i++] = id_or_tag;
+  argv[i++] = event;
+
+  argv[i] = (char *) gc_malloc(MAX_LONG_SCRIPT);
+  strcpy (argv[i], tk_command);
+  strcat (argv[i], fn_key); 
+
+ /* The next piece of code is adding the possible arguments to
+    the bind function.*/
+  while(args != eul_nil) {
+    strcat(argv[i], " ");
+    strcat(argv[i], eul_string_as_c_string(eul_car(args)));   
+    args = eul_cdr(args);
+  }
+
+ /*  fprintf(stdout, "Estic a eul_tyk_bind_element\n"); */
+/*   fflush(stdout); */
+
+/*   for (i=0; i<argc; i++) */
+/*     fprintf(stdout, "arg: %d value: %s\n", i, argv[i]); */
+/*   fflush(stdout); */
+      
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, argc, argv);
+ 
+  if (result == TCL_ERROR)
+    return eul_nil;
+  else
+    return eul_true;
+
+}
+
+
+
+LispRef eul_tk_button_flash (char * name, Tcl_CmdInfo * cmdPtr)
+{ 
+  char command[]="flash";
+  int result;
+  struct infoargs infoArgs;
+  LispRef loc;
+
+  ParseArguments2(&infoArgs, name, command, eul_nil);
+
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, infoArgs.argc, infoArgs.argv);
+ 
+  if (result== TCL_OK)
+    return eul_true;
+  else 
+    return eul_nil;
+}
+
+
+LispRef eul_tk_listbox_cmd (char * name,
+			Tcl_CmdInfo * cmdPtr,
+			char * command)
+{
+  int result, value, i;
+  int argc = 2, argc1;
+  char *list;
+
+  LispRef list_element, list_result = eul_nil;
+  char **argv;
+  char **argv1;
+
+  argv = (char **)gc_malloc(argc*P_CHARSIZE);
+
+  command = "curselection";
+  argv[0] = name;
+  argv[1] = command;
+
+  Tcl_ResetResult(interp);  
+  result = (cmdPtr->proc)(cmdPtr->clientData, interp, argc, argv);
+ 
+  if (result == TCL_OK) {
+    list = (char *) gc_malloc (strlen(interp->result));
+    strcpy (list, interp->result);
+    Tcl_ResetResult(interp);
+  
+    result = Tcl_SplitList(interp, list, &argc1, &argv1);
+  
+    if (result == TCL_OK) {
+      for(i=(argc1-1); i>=0; i--) {
+	eul_allocate_string(list_element, argv1[i]);
+	eul_allocate_cons(list_result, list_element, list_result);
+      }
+      return list_result;
+    } else    
+      return eul_nil;
+  } else
+    return eul_nil;
+
+}
+
+
+
+

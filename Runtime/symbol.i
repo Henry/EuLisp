@@ -1,0 +1,40 @@
+;;; EuLisp system 'youtoo'
+;;;   Interface file for module symbol
+
+(definterface symbol
+  (import (telos convert compare collect character string table fpi)
+   syntax (_telos0)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc convert callback compare collect string copy integer number fpi character table1 vector list table)
+   export (
+    ((name . <keyword>) (pos . 81) (origin mop-class . <keyword>) (class . constant))
+    ((name . name) (pos . 7) (origin collect . name))
+    ((name . symbol-name) (pos . 62) (origin mop-class . symbol-name) (inline (G00735 (static-ref0) (primitive-ref))))
+    ((name . keywordp) (pos . 3) (origin symbol . keywordp))
+    ((name . symbolp) (pos . 43) (origin boot1 . symbolp) (inline (G0045 (symbolp))))
+    ((name . <name>) (pos . 34) (origin mop-class . <name>) (class . constant))
+    ((name . gensym) (pos . 6) (origin symbol . gensym))
+    ((name . keyword-name) (pos . 7) (origin mop-class . keyword-name) (inline (G00737 (static-ref0) (primitive-ref))))
+    ((name . <symbol>) (pos . 6) (origin mop-class . <symbol>) (class . constant))
+    ((name . symbol-exists-p) (pos . 2) (origin symbol . symbol-exists-p))
+   )
+   local-literals (
+    (top-level . 36)
+    (symbol-exists-p . 35)
+    (keywordp . 34)
+    (gensym . 33)
+    ("G00" . 31)
+    (|(method (converter <symbol>))| . 27)
+    ((converter <symbol>) . 26)
+    (<symbol> . 25)
+    (converter . 24)
+    (|(method concatenate)| . 23)
+    (|(method binary<)| . 22)
+    (|(method namep)| . 21)
+    (|(method initialize)| . 20)
+    (namep . 19)
+    (anonymous . 12)
+    (name: . 9)
+   )
+   literals (
+   )
+))

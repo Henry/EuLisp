@@ -1,0 +1,96 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:                         *TODO*
+#+AUTHOR: nil
+#+OPTIONS: author:nil email:nil ^:{}
+
+* Youtoo
+*** DONE Split of word-length dependent functionality into separate modules
+    CLOSED: [2010-02-23 Tue 19:31]
+    Split files
+    + Comptime2/64bit/cg-exec.em
+    + Comptime2/32bit/cg-exec.em
+    Into
+    + Comptime2/cg-exec.em
+    + Comptime2/64bit/cg-exec-nbit.em
+    + Comptime2/32bit/cg-exec-nbit.em
+*** DONE Regenerate all the .c files from the .em files to remove
+    CLOSED: [2010-02-08 Mon 10:14]
+    + ARGDECL
+    + PROTOTYPE
+*** DONE Regenerate all the .c files from the .em files to eul_const
+    CLOSED: [2010-02-08 Mon 14:37]
+*** DONE Remove compat.h
+    CLOSED: [2010-02-08 Mon 22:54]
+    when backward compatibility is no longer needed.
+*** DONE Change all the Makefiles of all the Extras and Examples
+    CLOSED: [2010-02-23 Tue 19:31]
+    so that the libraries and executables are located in platform/$(ARCH)
+    or /Lib.$(ARCH) and /Bin.$(ARCH) directories.
+*** DONE Investigate warning messages from Examples/Misc/ffi2.c
+    CLOSED: [2010-02-08 Mon 22:54]
+    Creating stand-alone application of module ffi2 ...
+    Compiling ffi2.c using gcc ...
+    /home/dm2/henry/EuLisp/youtoo/Examples/Misc/ffi2.c: In function ‘ff_stub_ext_foo_in
+*** TODO Resolve warning messages from ffi applications
+    by introducing an option to allow a header file declaring the ff's to be
+    included in the stubs files.
+***** Add header-files including the ffi definitions to all the "Extras" libraries.
+*** TODO Investigate when Lib.${ARCH}/*.i should be copied to Lib
+*** DONE Sort out the Extras/Bignum/Makefile
+    CLOSED: [2010-02-23 Tue 19:31]
+    Currently the linking of the gmp library is hard-coded.
+*** DONE Upgrade the TclTk library to 8.5
+    CLOSED: [2010-02-14 Sun 23:27]
+*** DONE Investigate problems with the Extras/OS (object serialisation) lib
+    CLOSED: [2010-02-23 Tue 19:30]
+*** TODO Change the MPI interface to work with OpenMPI
+*** TODO Comptime2/youtoo.em sometimes ends-up in the wrong state
+    should be
+    #+BEGIN_SRC lisp
+      (defmodule youtoo
+      ;; Final, proper executable!
+      (import (level1 math eval i-aux0 macros))
+
+      (main *argv*)
+
+      )  ; end of module
+    #+END_SRC
+    but sometimes remains in the intermediate build state
+    #+BEGIN_SRC lisp
+      (defmodule youtoo
+      ;; Preliminary executable!
+      (import (level1 math eval))
+
+      (main *argv*)
+
+      )  ; end of module
+    #+END_SRC
+    during the boot-strap build.  The consequence is that the final executable
+    is unable to compile module files correctly issuing errors like
+    #+BEGIN_SRC lisp
+      *** ERROR [nuseq][top-level]: exported lexical binding subseq not available
+      *** ERROR [nuseq][top-level]: no lexical binding defgeneric available
+      *** ERROR [nuseq][top-level]: no lexical binding subseq available
+      *** ERROR [nuseq][top-level]: no lexical binding seq available
+    #+END_SRC
+*** DONE Split the "boot" section of Comptime2/Makefile
+    CLOSED: [2010-02-16 Tue 15:06]
+    into the two parts to make the preliminary and final executables.
+    Also move the "driver" part into the top-level Makefile.
+*** TODO Change the Extras/Pipe/test1.em app
+    to obtain the path of the youtoo script from the global settings obtained
+    from the .eulrc.${ARCH} file.
+*** DONE Clean all .em files
+    CLOSED: [2010-02-26 Fri 15:01]
+    to remove blank line at beginning, tabs and trailing white-space.
+*** TODO Add support in the REPL to load dynamically-linked module libraries
+*** TODO Add support for #;(sexp) comments in Runtime/Ff/eul-ntok.c
+*** TODO Add line-number counting to Runtime/Ff/eul-ntok.c
+    This also requires the introduction of a line-number counting stream to hold
+    the line-number and provide access to the error reporting system.
+
+* EuLisp Definition
+*** TODO Update EuLisp definition and Youtoo implementation
+    to correspond to the EuLisp-1.0 proposals.
+    See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].

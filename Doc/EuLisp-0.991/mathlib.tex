@@ -1,0 +1,207 @@
+\sclause{Elementary Functions}
+\indexmodule{mathlib}
+\index{general}{elementary functions}
+\label{elementary-functions}
+\index{general}{level-0 modules!mathlib}
+\index{general}{mathlib!module}
+%\gdef\module{elementary-functions}
+\begin{optPrivate}
+APL is probably the source for these definitions, which have been
+subsequently adapted for Lisp.  More detail is required.
+
+910520--Improved matters some by simplifying some of the stuff from
+CLtl2.  Also checked out Fortran-90 but that is under-specified for my
+liking.
+\end{optPrivate}
+\begin{optDefinition}
+The defined name of this module is {\tt mathlib}.  The functionality defined for
+this module is intentionally precisely that of the trigonmetric functions,
+hyperbolic functions, exponential and logarithmic functions and power functions
+defined for {\tt <math.h>} in ISO/IEC 9899~:~1990 with the exceptions of {\tt
+    frexp}, {\tt ldexp} and {\tt modf}.
+
+\constant{pi}{double-float}
+%
+\remarks%
+The value of \constantref{pi} is the ratio the circumference of a circle to its
+diameter stored to double precision floating point accuracy.
+
+\generic{acos}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the principal value of the arc cosine of {\em float} which is a value
+in the range $[0,\pi]$ radians.  An error is signalled (condition-class:
+\conditionref{domain-condition}\indexcondition{domain-condition}) if {\em float}
+is not in the range $[-1,+1]$.
+
+\generic{asin}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the principal value of the arc sine of {\em float} which is a value in
+the range $[-\pi/2,+\pi/2]$ radians.  An error is signalled (condition-class:
+\conditionref{domain-condition}\indexcondition{domain-condition}) if {\em float}
+is not in the range $[-1,+1]$.
+
+\generic{atan}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the principal value of the arc tangent of {\em float}
+which is a value in the range $[-\pi/2,+\pi/2]$ radians.
+
+\generic{atan2}
+%
+\begin{genericargs}
+    \item[float$_1$, \classref{float}] A floating point number.
+    \item[float$_2$, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the principal value of the arc tangent of {\em float$_1$}/{\em
+    float$_2$}, which is a value in the range $[-\pi,+\pi]$ radians, using the
+signs of both arguments to determine the quadrant of the result.  An error might
+be signalled (condition-class:
+\conditionref{domain-condition}\indexcondition{domain-condition}) if either {\em
+    float$_1$} or {\em float$_2$} is zero.
+
+\generic{cos}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the cosine of {\em float} (measured in radians).
+
+\generic{sin}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the sine of {\em float} (measured in radians).
+
+\generic{tan}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the tangent of {\em float} (measured in radians).
+
+\generic{cosh}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the hyperbolic cosine of {\em float}.  An error might be signalled
+(condition class:
+\conditionref{range-condition}\indexcondition{range-condition}) if the magnitude
+of {\em float} is too large.
+
+\generic{sinh}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the hyperbolic sine of {\em float}.  An error might be signalled
+(condition class:
+\conditionref{range-condition}\indexcondition{range-condition}) if the magnitude
+of {\em float} is too large.
+
+\generic{tanh}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the hyperbolic tangent of {\em float}.
+
+\generic{exp}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the exponential function of {\em float}.  An error might be signalled
+(condition class:
+\conditionref{range-condition}\indexcondition{range-condition}) if the magnitude
+of {\em float} is too large.
+
+\generic{log}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the natural logarithm of {\em float}.  An error is signalled (condition
+class: \conditionref{domain-condition}\indexcondition{domain-condition}) if {\em
+    float} is negative. An error might be signalled (condition class:
+\conditionref{range-condition}\indexcondition{range-condition}) if {\em float}
+is zero.
+
+\generic{log10}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the base-ten logarithm of {\em float}.  An error is signalled
+(condition class:
+\conditionref{domain-condition}\indexcondition{domain-condition}) if {\em float}
+is negative. An error might be signalled (condition class:
+\conditionref{range-condition}\indexcondition{range-condition}) if {\em float}
+is zero.
+
+\generic{pow}
+%
+\begin{genericargs}
+    \item[float$_1$, \classref{float}] A floating point number.
+    \item[float$_2$, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes {\em float$_1$} raised to the power {\em float$_2$}.  An error is
+signalled (condition class:
+\conditionref{domain-condition}\indexcondition{domain-condition}) if {\em
+    float$_1$} is negative and {\em float$_2$} is not integral.  An error is
+signalled (condition class: \conditionref{domain-condition}) if the result
+cannot be represented when {\em float$_1$} is zero and {\em float$_2$} is less
+than or equal to zero.  An error might be signalled (condition class:
+\conditionref{range-condition}\index{general}{range-condition}) if the result
+cannot be represented.
+
+\generic{sqrt}
+%
+\begin{genericargs}
+    \item[float, \classref{float}] A floating point number.
+\end{genericargs}
+%
+\result%
+Computes the non-negative square root of {\em float}.  An error is signalled
+(condition class:
+\conditionref{domain-condition}\indexcondition{domain-condition}) if {\em float}
+is negative.
+%
+\end{optDefinition}

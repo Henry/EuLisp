@@ -1,0 +1,336 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:                 *Proposals for EuLisp-1.0*
+#+OPTIONS: ^:{} author:nil
+
+#+TODO: ACCEPTED DEF+YOUTOO YOUTOO DEF | DONE REJECTED
+
+* DONE 1. Static Errors Might Be Signalled
+  CLOSED: [2010-03-21 Sun 21:25]
+  To rename static error as violation.  To note that a preparation program must
+  issue a diagnostic if it detects a violation.  To note that a preparation
+  program must issue a diagnostic if it detects a dynamic error.  If the result
+  of preparation is a runnable program, then that program must signal any
+  dynamic error.
+
+  JAP: further revision is to rename dynamic error as static error now
+  that the need to distinguish the two flavours has gone.
+
+* ACCEPTED 2. Add: export-syntax
+  To expand sections 9.5 and 9.7 to note that macro definitions extend the
+  syntax environment and may be visible externally via the export-syntax
+  directive.  To define the purpose and behaviour of export-syntax in
+  section 9. To modify 13.2.2.3 consistent with the foregoing.
+
+* REJECTED 3. defliteral
+  CLOSED: [2010-03-20 Sat 22:08]
+  See [[./Reports/eulisp-proposals.ps]]
+*** Rationale for rejection
+    + defconstant could be used in most cases.
+    + Where replacement of the symbol with the value is required at syntax/macro
+      expansion time defmacro could be used.
+    + There doesn't seem to be a good argument for cluttering the syntax with
+      this additional defform.
+
+* DEF+YOUTOO 4. Level-0 telos conditions become static errors
+  except <no-applicable-method>
+
+  As a consequence of the redefinition of static error, all but one of
+  the telos-conditions at level-0 should be reclassified as static
+  errors.  However, the condition classes will remain defined, because
+  they could be signalled in some implementations.
+
+  Moot given proposal 1.
+
+* ACCEPTED 5. Add static error <wrong-number-of-arguments>
+  for function call and apply.
+
+  To modify 13.2
+
+* REJECTED 6. Changes to formatted output
+  CLOSED: [2010-03-20 Sat 21:32]
+*** REJECTED Replace format with printf etc.
+  CLOSED: [2010-03-20 Sat 19:33]
+  Title is unlreated to proposal.  To replace format with a collection of printf
+  functions (fprintf, sprintf, eprintf, printf) and adopt ISO C syntax for
+  format directives extended by %a.  To remove scanf.  HED will e-mail a more
+  detailed write-up.
+*** REJECTED Allow upper and lower format directives
+    CLOSED: [2010-03-20 Sat 21:32]
+  Allow both upper and lower case for format directives, eg. ~a and ~A.
+
+* DONE 7. Add: read
+  CLOSED: [2010-03-20 Sat 22:14]
+  Proposal is to add a function with this name, which will parse the given
+  stream and return s-expressions.  To add definition of read to A.14.
+
+* DEF+YOUTOO 8. Class-specific input functions
+  Add functions to read class-specific objects.
+
+  These are: read-character, read-float, read-integer, read-list,
+  read-string, read-symbol, read-vector.
+
+* DEF+YOUTOO 9. Invariant generic-function application behaviour
+  This issue is concerned with the application of generic functions before all
+  their methods have been defined.  It is proposed that an error be signalled if
+  a method is defined on a generic function for a class to which it has
+  previously been applied.
+
+  Example:
+
+  (defgeneric f (x) method (((x <object>)) x))
+  (f 1) ==> 1
+  (defmethod f ((x <integer>)) ...) ==> error
+  (defmethod f ((x <string>)) ...)  ==> OK
+
+  The first is an error because f has already been applied to an
+  instance of <integer>, but the second is OK because f has not been
+  applied to a string yet.  Otherwise, f behaves differently on
+  instances of the same class, depending on the time when methods are
+  added to a generic function.
+
+  Generic functions should be consistent with respect to their
+  application on a specific argument class.  In consequence, an
+  implementation does not need to reset a gf cache, but only extend it.
+
+* DEF+YOUTOO 10. Method default specializers
+  If the domain of a generic function is restricted what is the default
+  specialization of a method argument?
+
+  Example:
+
+  (defgeneric f ((x <number>) (y <stream>))
+  (defmethod f (x (y <string-stream>))...)
+
+  It is proposed that x default to the restriction specified for the
+  generic function.  However, this has implications for method-lambda,
+  since the identity of the host gf is not known at that time.
+
+* DEF+YOUTOO 11. Rest arguments in generic-functions
+  This is straightforward at level-0 and the current syntax for
+  defgeneric and for defmethod allows for rest arguments.  Issue is
+  how this should affect generic-function-domain (at level-1).
+
+  Proposal is that generic-function-domain be unchanged, so it only
+  returns information about the fixed arguments.  The following
+  changes are proposed:
+
+  add argument "rest" to compute-method-lookup-function
+  add argument "rest" to compute-discriminating-function
+  add initarg 'rest to the initialize method for gf (section B.11.1)
+  add function generic-function-rest (section B.7)
+  add function method-rest (section B.8)
+
+  To add argument "rest" to B15.1-4.  To add initarg 'rest to B.11.1.
+  To add definition of generic-function-rest to B.7.  To add definition
+  of method-rest to B.8.
+
+* DONE 12. Remove: method-lambda-function, call-method-function, apply-method-function
+  CLOSED: [2010-03-20 Sat 22:23]
+  Little extra functionality is gained, but security is lost by their inclusion.
+
+* DEF+YOUTOO 13. Additional scan directives
+  for objects of classes that can be read
+
+  This proposal stems from the one for class-specific input functions see 8.
+  The argument is that those functions should be reflected in class-specific
+  scan directives for character, float, integer, list, string, symbol, vector.
+
+* DEF+YOUTOO 14. Domain and range of deep-copy and shallow-copy
+  It should be explicitly stated that the range of deep-copy and shallow-copy
+  shall be the same class as the domain.  Furthermore, it is an error for any
+  method to transgress this requirement.  See 15.
+
+* DEF+YOUTOO 15. Specification of result types
+  To add more specific information regarding the class of the result where
+  appropriate.
+
+  It is written informally in various places that a result will be a "list of
+  x".  Proposal is to interpret this precisely and specify that the result is an
+  instance of <list> and each element thereof is an instance of <x>.
+
+* ACCEPTED 16. Remove: <abstract-class>
+  To remove references to abstract classes (note figure B.1).  To add 'abstract
+  class option in B.1.1.  To add definition of abstract-class-p in B.5.
+
+  The use of a single class <abstract-class> to indicate that a class is not
+  instantiable turns out to create some difficulties when metaprogramming and
+  dispatching on the class of a class---specifically, it is not possible to
+  distinguish between objects which are different (example from JAK).
+
+  Proposal is to remove <abstract-class> and to add a new class option
+  ("abstract") by which abstractness will be denoted.
+
+* DEF+YOUTOO 17. Add: 'required-initargs class option
+  To add requiredp as a slot option (Table 5) taking a boolean value.  To
+  replace initarg by keyword.  To replace initform by default.  To replace
+  initfunction (eg. B.6.4) by default-function.
+
+  At present there is no means to indicate whether an initarg is required when
+  an instance is made.  This option will permit that facility.  The new class
+  option will be followed by a list of initargs which are to be required.
+
+* REJECTED 18. Add: openp
+  CLOSED: [2010-03-21 Sun 21:47]
+  To add definition of openp to A.14.
+
+* DEF+YOUTOO 19. Use 'd' or 'e' exponent marker?
+  Present syntax defines the exponent marker character as 'd' or 'D'
+  because level-0 only supports double precision floats.
+
+  To replace d|D by e|E.
+
+* DEF+YOUTOO 20. Module initialization order.
+  To add the wording in the proposal to 9.7.
+
+  It is easy to write a program which unintentionally relies on the
+  initialization order of the module dependencies.  At present the
+  initialization order of modules is undefined---although the order within a
+  module is.
+
+  Proposal is to add (section 9.7): a conforming program must not rely on the
+  total order of the initialization of modules, but only on the partial order
+  arising from the module dependencies.  This partial order must be preserved by
+  a conforming configuration.
+
+* DEF+YOUTOO 21. Argument order to (setter element)
+  The argument order for (setter element) is defined as collection, key, value,
+  where the association of key and value is to be added to or modified in
+  collection.  This is awkward for collections in which associations are defined
+  by a combination of keys.
+
+  Proposal is to place the value immediately after collection and the remaining
+  arguments be keys, eg. ((setter element) collection value key1 key2 ...).
+
+* DEF+YOUTOO 22. Add: <collection> and <sequence> as abstract classes
+  At level-0, new structures can be defined and these can be incorporated into
+  the collection mechanism by adding a method either to collectionp or sequencep
+  and whatever else is required for other collection operations.
+
+  At level-1, new classes can be defined and incorporated similarly, but those
+  new classes can also be subclasses of existing collection classes, such as
+  <vector>.  It is attractive that the new subclass be a collection by virtue of
+  its superclass.
+
+  Proposal is to add <collection> and <sequence> as abstract classes to form the
+  following initial hierarchy:
+
+	<collection>
+	  <table>
+	  <sequence>
+	    <list>
+	      <cons>
+	      <null>
+	    <string>
+	    <vector>
+
+* DEF+YOUTOO 23. Make thread-start and thread-value generic
+  add: generic-signal
+  add: wait method for <lock>
+
+  To modify 11.1.5-6 to make these function generic and to add default methods
+  for them.  To extend 12.2 with the definition of signal-using-thread, a
+  generic function, whose first argument is the thread on which to signal the
+  condition.  To modify 12.2.2 to reflect the use of signal-using-thread.  A
+  proposal on the wait method will be made later by RJB, DDER, NRB and JAP.
+
+  At level-1 it is possible to subclass <thread>, therefore it may be necessary
+  to define specialized behaviour for the thread manipulation functions.
+  Furthermore, the third argument of signal may be a thread, so this too may
+  require specialization.
+
+  Proposal: make thread-start and thread-value generic.  Add generic-signal
+  (three arguments) and define signal to call generic-signal.
+
+  Given the defined functionality of wait, it seems reasonable to expect to be
+  able to wait on a lock.
+
+  Proposal: add a wait method for <lock>.
+
+* DEF+YOUTOO 24. Non-hygenic semantics for macros
+  To expand the description of syntax expansion in 9.7, in particular to
+  enumerate some of the typical problems stemming from non-hygenic expansion.
+
+  The semantics of syntax functions is nowhere defined.
+
+  Proposal: add (section 9.7) a description of non-hygienic syntax expansion.
+  This will describe inadvertent capture, inadvertent shadowing and the problem
+  peculiar to Eulisp which follows from modules, namely the need to import
+  whatever the expansion might depend upon.
+
+* DEF+YOUTOO 25. Status of and and or
+  Partially clarified by 2.  Functional versions also to be defined with the
+  same names as the macros (13.4).
+
+* DEF+YOUTOO 26. Character naming conventions
+  To replace the extended names for special characters (eg. #\newline) by their
+  string digram equivalents (see table A.7), eg. #\\n.
+
+* DEF+YOUTOO 27. Keywords
+  To expand the minimal character set (table 2) to be ISO Latin 1.  To add the
+  (concrete) class <keyword>, the abstract class <name> and make <symbol> a
+  subclass of <name>.
+
+* DEF+YOUTOO 28. With-handler
+  To change the example (fig. 5) to use an externally defined generic function
+  rather than a dynamically constructed gf and to use catch/throw instead of
+  let/cc.
+
+* DEF+YOUTOO 29. Class hierarchy revision
+  To replace figure 3 by the (level 0) hierarchy given in RJB's message
+  [[Meeting_19_11_93.org]] and to add a new figure in Annex B showing the full level
+  0 and level 1 hierarchy.  To note that only abstract classes are subclassable
+  and that <builtin-class> (abstract) is not subclassable.
+*** DONE Renaming
+    CLOSED: [2010-03-22 Mon 22:45] To rename <execution-condition> as
+    <general-condition>.  To rename <syntax-error> as <read-error>.  To rename
+    <slot-description> as <slot> (and all other such references).  To remove
+    <structure> and <structure-class>.  To replace defstruct at level-0 by
+    defclass.  Additions to the hierarchy as per RJB/DDERs' diagram.
+
+* DEF+YOUTOO 30. Points raised by ulrich kriegel
+  arithmetic coercions: to add the generic function lift, to define methods on
+  it to describe coercion consistent with "floating point" contagion, except in
+  the case of comparison operators and to describe its interaction with the
+  n-ary arithmetic operators.  (Note: lift is not to be called by the binary
+  generic operators).  To note that coercion of a <vpi> to a <double-float> may
+  overflow and that case "is an error".  To add <vpi>
+  (<variable-precision-integer>) and all the necessary methods.
+
+  JAP: not clear to me how lift can work given the parenthetical remark
+  above...unless it takes the operator to be applied as an argument.  Should (+
+  a b c) ==> (lift a (lift b c binary+) binary+)??
+
+  condition class accessors: to define <condition> with two slots, message and
+  message-args, where message is a format string matching the message-args.  To
+  remove all defined slots in subclasses of <condition>.  To remove
+  defcondition.
+
+* DEF+YOUTOO 31. Add: n-ary comparators
+  To expand A.3 with >, >=, <= as n-ary functions and != as a binary function.
+
+* DEF+YOUTOO 32. Collection and sequence functions
+  To add definitions of first, second, last and sort as <sequence> functions.
+  To add definitions of delete (destructive) and remove (constructive) as
+  <collection> functions.  To add the notion of explicit keys and to clarify the
+  meaning of operations on infinite collections.  To change the specification of
+  <table> to replace the initarg fill-value by fill-function, which is a
+  function of two arguments taking the key and the collection.  To add the
+  class-specific operators: vector-ref, string-ref, list-ref, hash-table-ref,
+  corresponding setters, vector-length, string-length, list-length and
+  hash-table-size.
+
+* DONE 33. Publication
+  CLOSED: [2010-03-20 Sat 22:46]
+  To add Nitsan, Neil and Odile to the list of contributors.  To transfer Greg
+  from the editors to the contributors.
+
+* DEF+YOUTOO 34. Streams
+  A detailed proposal based on POSIX and buffered I/O will be sent by HED.
+
+* DEF+YOUTOO 35. Filenames
+  To add the (concrete) class <filename> (where??) with the external
+  syntax #F"...".  To add definitions of the functions: basename, extension,
+  dirname, device and merge-filenames.  To add a converter method from <string>
+  to <filename>.  An additional proposal to add file and directory operations
+  based on POSIX will be sent by HED.

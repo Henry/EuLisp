@@ -1,0 +1,41 @@
+;;; EuLisp system 'youtoo'
+;;;   Interface file for module mop-inspect
+
+(definterface mop-inspect
+  (import (boot mop-prim mop-class mop-init)
+   syntax (_boot0)
+   full-import (boot1 boot mop-prim mop-class mop-init)
+   export (
+    ((name . subclassp) (pos . 9) (origin mop-inspect . subclassp))
+    ((name . methodp) (pos . 11) (origin mop-inspect . methodp))
+    ((name . generic-function-p) (pos . 8) (origin mop-inspect . generic-function-p))
+    ((name . cpl-subclass-p) (pos . 10) (origin mop-inspect . cpl-subclass-p))
+    ((name . class-of) (pos . 5) (origin mop-inspect . class-of) (inline (G001459 (primitive-class-of))))
+    ((name . functionp) (pos . 6) (origin mop-inspect . functionp))
+    ((name . slotp) (pos . 12) (origin mop-inspect . slotp))
+    ((name . primitive-metaclass-p) (pos . 14) (origin mop-inspect . primitive-metaclass-p))
+    ((name . primitive-slot-value) (pos . 3) (origin mop-inspect . primitive-slot-value))
+    ((name . classp) (pos . 2) (origin mop-inspect . classp))
+    ((name . primitive-find-slot-position) (pos . 7) (origin mop-inspect . primitive-find-slot-position))
+   )
+   local-literals (
+    (top-level . 45)
+    (classp . 44)
+    (primitive-slot-value . 43)
+    (subcodep . 42)
+    (class-of . 41)
+    (functionp . 40)
+    (primitive-find-slot-position . 39)
+    (generic-function-p . 38)
+    (subclassp . 37)
+    (cpl-subclass-p . 36)
+    (methodp . 35)
+    (slotp . 34)
+    (primitive-metaclass-p . 33)
+    (anonymous . 27)
+    ("slot ~a not found in class ~a" . 23)
+    (|(setter primitive-slot-value)| . 16)
+   )
+   literals (
+   )
+))

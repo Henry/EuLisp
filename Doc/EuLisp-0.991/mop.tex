@@ -1,0 +1,1536 @@
+\sclause{Object Introspection}
+%
+\begin{optDefinition}
+\noindent
+The only reflective capability which every object possesses is the ability to
+find its class.
+
+\function{class-of}
+%
+\begin{arguments}
+    \item[object] An object.
+\end{arguments}
+%
+\result%
+The class of the object.
+%
+\remarks%
+The function \functionref{class-of} can take any \lisp\ object as argument and
+returns an instance of \classref{class} representing the class of that entity.
+%
+%\examples
+%In the following examples we explore the class hierarchy starting from
+%the single precision integer {\tt 1}.
+%
+%{\tt\begin{tabbing}
+%(cl\=ass-of 1) \\
+%   \>$\rightarrow$ \verb+#<single-precision-integer>+\\
+%(class-of (class-of 1)) \\
+%   \> $\rightarrow$ \verb+#<class>+\\
+%(class-of (class-of (class-of 1))) \\
+%   \>$\rightarrow$ \verb+#<metaclass>+\\
+%(class-of (class-of (class-of (class-of 1))))\\
+%   \>$\rightarrow$ \verb+#<metaclass>+
+%\end{tabbing}}
+\end{optDefinition}
+
+\sclause{Class Introspection}
+%
+\begin{optDefinition}
+\noindent
+Standard classes are not redefinable and support single inheritance only.
+General multiple inheritance can be provided by extensions.  Nor is it possible
+to use a class as a superclass which is not defined at the time of class
+definition.  Again, such forward reference facilities can be provided by
+extensions. The distinction between metaclasses and non-metaclasses is made
+explicit by a special class, named \classref{metaclass}, which is the class of
+all metaclasses. This is different from ObjVlisp, where whether a class is a
+metaclass depends on the superclass list of the class in question.  It is
+implementation-defined whether \classref{metaclass} itself is specializable or
+not. This implies that implementations are free to restrict the instantiation
+tree (excluding the selfinstantiation loop of \classref{metaclass}) to a depth
+of three levels.
+
+The minimum information associated with a class metaobject is:
+%
+\begin{enumerate}
+    \item The class precedence list, ordered most specific first, beginning with
+    the class itself.
+    \item The list of (effective) slot descriptions.
+    \item The list of (effective) initargs.
+\end{enumerate}
+%
+Standard classes support local slots only. Shared slots can be provided by
+extensions.  The minimal information associated with a slot description
+metaobject is:
+%
+\begin{enumerate}
+    \item The name, which is required to perform inheritance computations.
+    \item The initfunction, called by default to compute the initial slot value
+    when creating a new instance.
+    \item The reader, which is a function to read the corresponding slot value
+    of an instance.
+    \item The writer, which is a function to write the corresponding slot of an
+    instance.
+    \item The initarg, which is a symbol to access the value which can be
+    supplied to a \functionref{make} call in order to initialize the corresponding slot
+    in a newly created object.
+\end{enumerate}
+%
+The metaobject classes defined for slot descriptions at level-1 are shown in
+Table~\ref{level-1-class-hierarchy}.
+%
+\begin{figure}
+{\tt%
+\classref{class} \\
+%not in youtoo \tts\classref{built-in-class} \\
+\tts\classref{simple-class} \\
+\tts\classref{function-class}  \\
+\classref{slot} \\
+\tts\classref{local-slot} \\
+\classref{function} \\
+\tts\classref{generic-function} \\
+\tts\tts\classref{simple-generic-function} \\
+\classref{method} \\
+\tts\classref{simple-method}%
+}%
+\caption{Level-1 class hierarchy}
+\label{level-1-class-hierarchy}
+\end{figure}
+
+\function{class-precedence-list}
+%
+\begin{arguments}
+    \item[class] A class.
+\end{arguments}
+%
+\result%
+A list of classes, starting with {\em class} itself, succeeded by the
+superclasses of {\em class} and ending with \classref{object}. This list is
+equivalent to the result of calling \functionref{compute-class-precedence-list}.
+%
+\remarks%
+The class precedence list is used to control the inheritance of slots and
+methods.
+
+\function{class-slots}
+%
+\begin{arguments}
+    \item[class] A class.
+\end{arguments}
+%
+\result%
+A list of slots, one for each of the slots of an instance
+of {\em class}.
+%
+\remarks%
+The slots determine the instance size (number of slots)
+and the slot access.
+
+\function{class-initargs}
+%
+\begin{arguments}
+    \item[class] A class.
+\end{arguments}
+%
+\result%
+A list of symbols, which can be used as legal keywords to initialize
+instances of the class.
+%
+\remarks%
+The initargs correspond to the keywords specified in the {\tt initarg}
+slot-option or the {\tt initargs} class-option when the
+class and its superclasses were defined.
+%
+\end{optDefinition}
+
+\sclause{Slot Introspection}
+%
+\begin{optDefinition}
+\class{slot}
+
+The abstract class of all slot descriptions.
+
+\class{local-slot}
+
+The class of all local slot descriptions.
+%
+\begin{initoptions}
+    \item[name, string] The name of the slot.%; useful for debugging only.
+    \item[reader, function] The function to access the slot.
+    \item[writer, function] The function to update the slot.
+    \item[initfunction, function] The function to compute the initial value in
+    the absence of a supplied value.
+    \item[initarg, symbol] The key to access a supplied initial value.
+\end{initoptions}
+
+The default value for all initoptions is \nil.
+
+\function{slot-name}
+%
+\begin{arguments}
+    \item[slot] A slot description.
+\end{arguments}
+%
+\result%
+The symbol which was used to name the slot when the class, of which
+the slot is part, was defined.
+%
+\remarks%
+The slot description name is used to identify a slot description in a
+class. It has no effect on bindings.
+
+\function{slot-initfunction}
+%
+\begin{arguments}
+    \item[slot] A slot description.
+\end{arguments}
+%
+\result%
+A function of no arguments that is used to compute the initial value of the
+slot in the absence of a supplied value.
+
+\function{slot-slot-reader}
+%
+\begin{arguments}
+    \item[slot] A slot description.
+\end{arguments}
+%
+\result%
+A function of one argument that returns the value of the slot
+in that argument.
+
+\function{slot-slot-writer}
+%
+\begin{arguments}
+    \item[slot] A slot description.
+\end{arguments}
+%
+\result%
+A function of two arguments that installs the second argument as the value of
+the slot in the first argument.
+\end{optDefinition}
+
+\sclause{Generic Function Introspection}
+%
+\begin{optDefinition}
+The default generic dispatch scheme is class-based; that is, methods
+are class specific.  The default argument precedence order is
+left-to-right.
+
+The minimum information associated with a generic function metaobject is:
+
+\begin{enumerate}
+    \item The domain, restricting the domain of each added method to a
+    sub-domain.
+    \item The method class, restricting each added method to be an instance
+    of that class.
+    \item The list of all added methods.
+    \item The method look-up function used to collect and sort the
+    applicable methods for a given domain.
+    \item The discriminating function used to perform the generic dispatch.
+\end{enumerate}
+
+\function{generic-function-domain}
+%
+\begin{arguments}
+    \item[generic-function] A generic function.
+\end{arguments}
+%
+\result%
+A list of classes.
+%
+\remarks%
+This function returns the domain of a generic function. The domains of all
+methods attached to a generic function are constrained to be within this domain.
+In other words, the domain classes of each method must be subclasses of the
+corresponding generic function domain class.  It is an error to modify this
+list.
+
+\function{generic-function-method-class}
+%
+\begin{arguments}
+    \item[generic-function] A generic function.
+\end{arguments}
+%
+\result%
+This function returns the class which is the class of all methods of the generic
+function.  Each method attached to a generic function must be an instance of
+this class. When a method is created using \macroref{defmethod},
+\macroref{method-lambda}, or by using the \genericref{method} generic function
+option in a \defformref{defgeneric} or \macroref{generic-lambda}, it will be an
+instance of this class by default.
+
+\function{generic-function-methods}
+%
+\begin{arguments}
+    \item[generic-function] A generic function.
+\end{arguments}
+%
+\result%
+This function returns a list of the methods attached to the generic function.
+The order of the methods in this list is undefined.  It is an error to modify
+this list.
+
+\function{generic-function-method-lookup-function}
+%
+\begin{arguments}
+    \item[generic-function] A generic function.
+\end{arguments}
+%
+\result%
+A function.
+%
+\remarks%
+This function returns a function which, when applied to the arguments given to
+the generic function, returns a sorted list of applicable methods.  The order of
+the methods in this list is determined by
+\genericref{compute-method-lookup-function}.
+%How many arguments does this function take --- 1 or n?  hb: n
+
+\function{generic-function-discriminating-function}
+%
+\begin{arguments}
+    \item[generic-function] A generic function.
+\end{arguments}
+%
+\result%
+A function.
+%
+\remarks%
+This function returns a function which may be applied to the same arguments as
+the generic function.  This function is called to perform the generic dispatch
+operation to determine the applicable methods whenever the generic function is
+called, and call the most specific applicable method function.  This function is
+created by \genericref{compute-discriminating-function}.
+
+\end{optDefinition}
+
+\sclause{Method Introspection}
+\begin{optDefinition}
+The minimal information associated with a method metaobject is:
+
+\begin{enumerate}
+    \item The domain, which is a list of classes.
+    \item The function comprising the code of the method.
+    \item The generic function to which the method has been added, or \nil\/ if it
+    is attached to no generic function.
+\end{enumerate}
+%
+The metaobject classes for generic functions defined at level-1 are
+shown in Table~\ref{level-1-class-hierarchy}.
+
+\function{method-domain}
+%
+\begin{arguments}
+    \item[method] A method.
+\end{arguments}
+%
+\result%
+A list of classes defining the domain of a method.
+
+\function{method-function}
+%
+\begin{arguments}
+    \item[method] A method.
+\end{arguments}
+%
+\result%
+This function returns a function which implements the method.  The returned
+function which is called when {\em method} is called, either by calling the
+generic function with appropriate arguments, through a
+\keywordref{call-next-method}, or by using \functionref{call-method}.  A method
+metaobject itself cannot be applied or called as a function.
+
+\function{method-generic-function}
+%
+\begin{arguments}
+    \item[method] A method.
+\end{arguments}
+%
+\result%
+This function returns the generic function to which {\em method} is attached; if
+{\em method} is not attached to a generic function, it returns \nil.
+\end{optDefinition}
+
+\sclause{Class Initialization}
+%
+\begin{optDefinition}
+\method{initialize}
+%
+\begin{specargs}
+    \item[class, \classref{class}] A class.
+    \item[initlist, \classref{list}] A list of initialization options as follows:
+
+    \begin{options}
+        \item[name, symbol] Name of the class being initialized.
+        \item[direct-superclasses, list] List of direct superclasses.
+        \item[direct-slots, list] List of direct slot specifications.
+        \item[direct-initargs, list] List of direct initargs.
+    \end{options}
+\end{specargs}
+%
+\result%
+The initialized class.
+%
+\remarks%
+The initialization of a class takes place as follows:
+%
+\begin{enumerate}
+    \item Check compatibility of direct superclasses
+    % \item Transform textual slot descriptions into slot description objects
+    % (this is better done under the control of class beeing initialized).
+
+    \item Perform the logical inheritance computations of:
+    \begin{enumerate}
+        \item class precedence list
+        \item initargs
+        \item slot descriptions
+    \end{enumerate}
+
+    \item Compute new slot accessors and ensure all (new and inherited)
+    accessors to work correctly on instances of the new class.
+
+    % \item Compute predicates and constructors if required.
+
+    \item Make the results accessible by class readers.
+\end{enumerate}
+%
+The basic call structure is laid out in figure~\ref{call-structure}
+%
+\begin{optPrivate}
+\begin{verbatim}
+COMPATIBLE-SUPERCLASSES-P cl direct-superclasses -> boolean
+  COMPATIBLE-SUPERCLASS-P cl superclass -> boolean
+COMPUTE-CLASS-PRECEDENCE-LIST
+cl direct-superclasses -> list(class)
+COMPUTE-INHERITED-INITARGS
+cl direct-superclasses -> list(list(initarg))
+COMPUTE-INITARGS
+cl direct-initargs <inherited-initargs> -> list(initarg)
+COMPUTE-INHERITED-SLOTS
+cl direct-superclasses -> list(list(slotd))
+COMPUTE-SLOTS
+cl direct-slotds <inherited-slotds> -> list(slotd)
+  COMPUTE-DEFINED-SLOT
+  cl slotd-init-list -> slotd
+    COMPUTE-DEFINED-SLOT-CLASS
+    cl slotd-init-list -> slotd-class
+  -or-
+  COMPUTE-SPECIALIZED-SLOT
+  cl inherited-slotds slotd-init-list -> slotd
+    COMPUTE-SPECIALIZED-SLOT-CLASS
+    cl inherited-slotds slotd-init-list -> slotd-class
+COMPUTE-AND-ENSURE-SLOT-ACCESSORS
+cl <effective-slotds> <inherited-slotds> -> list(slotd)
+  COMPUTE-SLOT-READER
+  cl slotd <effective-slotds> -> function
+  COMPUTE-SLOT-WRITER
+  cl slotd <effective-slotds> -> function
+  ENSURE-SLOT-READER
+  cl slotd <effective-slotds> reader -> function
+    COMPUTE-PRIMITIVE-READER-USING-SLOT
+    slotd cl <effective-slotds> -> function
+      COMPUTE-PRIMITIVE-READER-USING-CLASS
+      cl slotd <effective-slotds> -> function
+  ENSURE-SLOT-WRITER cl slotd writer -> function
+    COMPUTE-PRIMITIVE-WRITER-USING-SLOT
+    slotd cl <effective-slotds> -> function
+      COMPUTE-PRIMITIVE-WRITER-USING-CLASS
+      cl slotd <effective-slotds> -> function
+\end{verbatim}
+\end{optPrivate}
+
+\begin{figure*}[t]
+\begin{center}\begin{minipage}[t]{\textwidth}
+{\small\tt\begin{tabbing}
+co\=mpatible-superclasses-p {\em cl direct-superclasses\/} $\rightarrow$ {\em boolean}\\
+  \>compatible-superclass-p {\em cl superclass\/} $\rightarrow$ {\em boolean}\\
+compute-class-precedence-list {\em cl direct-superclasses\/} $\rightarrow$ ({\em cl\/}$^*$)\\
+compute-inherited-initargs {\em cl direct-superclasses\/} $\rightarrow$ (({\em initarg\/}$^*$)$^*$)\\
+compute-initargs {\em cl direct-initargs inherited-initargs\/} $\rightarrow$ ({\em initarg\/}$^*$)\\
+compute-inherited-slots {\em cl direct-superclasses\/} $\rightarrow$ (({\em sd\/}$^*$)$^*$)\\
+compute-slots {\em cl slot-specs inherited-sds\/} $\rightarrow$ ({\em sd\/}$^*$)\\
+  \>{\em either}\\
+  \>co\=mpute-defined-slot {\em cl slot-spec\/} $\rightarrow$ {\em sd}\\
+  \>  \>compute-defined-slot\=-description-class {\em cl slot-spec\/} $\rightarrow$ {\em sd-class}\\
+  \>{\em or}\\
+  \>compute-specialized-slot {\em cl inherited-sds slot-spec\/} $\rightarrow$ {\em sd}\\
+  \>  \>compute-specialized-slot-class\\
+  \>  \>                    \>{\em cl inherited-sds slot-spec\/} $\rightarrow$ {\em sd-class}\\
+compute-instance-size {\em cl effective-sds\/} $\rightarrow$ {\em integer}\\
+compute-and-ensure-slot-accessors {\em cl effective-sds inherited-sds\/} $\rightarrow$ ({\em sd\/}$^*$)\\
+  \>compute-slot-reader {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
+  \>compute-slot-writer {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
+  \>ensure-slot-reader {\em cl sd effective-sds reader\/} $\rightarrow$ {\em function}\\
+  \>  \>co\=mpute-primitive-reader\=-using-slot\\
+  \>  \>  \>                      \>{\em sd cl effective-sds\/} $\rightarrow$ {\em function}\\
+  \>  \>  \>compute-primitive-reader-using-class {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
+  \>ensure-slot-writer {\em cl sd effective-sds writer\/} $\rightarrow$ {\em function}\\
+  \>  \>compute-primitive-writer-using-slot\\
+  \>  \>  \>                      \>{\em sd cl effective-sds\/} $\rightarrow$ {\em function}\\
+  \>  \>  \>compute-primitive-writer-using-class {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
+\end{tabbing}}
+\end{minipage}\end{center}
+\caption{Initialization Call Structure}
+\label{call-structure}
+\end{figure*}
+%
+Note that \genericref{compute-initargs} is called by the default
+\genericref{initialize} method with all direct initargs as the second argument:
+those specified as slot option and those specified as class option.
+
+\generic{compute-predicate}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] A class.
+\end{genericargs}
+%
+\result%
+Computes and returns a function of one argument, which is a predicate
+function for {\em class}.
+
+\method{compute-predicate}
+%
+\begin{specargs}
+    \item[class, \classref{class}] A class.
+\end{specargs}
+%
+\result%
+Computes and returns a function of one argument, which returns true when applied
+to direct or indirect instances of {\em class} and \nil\/ otherwise.
+
+\generic{compute-constructor}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] A class.
+    \item[parameters, \classref{list}] The argument list of the function being
+    created.
+\end{genericargs}
+%
+\result%
+Computes and returns a constructor function for {\em class}.
+
+\method{compute-constructor}
+%
+\begin{specargs}
+    \item[class, \classref{class}] A class.
+    \item[parameters, \classref{list}] The argument list of the function being
+    created.
+\end{specargs}
+%
+\result%
+Computes and returns a constructor function, which returns a new
+instance of {\em class}.
+
+\generic{allocate}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] A class.
+    \item[initlist, \classref{list}] A list of initialization arguments.
+\end{genericargs}
+%
+\result%
+An instance of the first argument.
+%
+\remarks%
+Creates an instance of the first argument.  Users may define new
+methods for new metaclasses.
+
+\method{allocate}
+%
+\begin{specargs}
+    \item[class, \classref{class}] A class.
+    \item[initlist, \classref{list}] A list of initialization arguments.
+\end{specargs}
+%
+\result%
+An instance of the first argument.
+%
+\remarks%
+The default method creates a new uninitialized instance of the first
+argument.  The initlist is not used by this \genericref{allocate} method.
+%
+\end{optDefinition}
+
+\sclause{Slot Description Initialization}
+%
+\begin{optDefinition}
+%
+\method{initialize}
+%
+\begin{specargs}
+    \item[slot, \classref{slot}] A slot description.
+    \item[initlist, \classref{list}] A list of initialization options as follows:
+    \begin{options}
+        \item[name, symbol] The name of the slot.
+        \item[initfunction, function] A function.
+        \item[initarg, symbol] A symbol.
+        \item[reader, function] A slot reader function.
+        \item[writer, function] A slot writer function.
+    \end{options}
+    % \item[initlist] A list of initialization arguments.
+\end{specargs}
+%
+\result%
+The initialized slot description.
+%
+\end{optDefinition}
+
+\sclause{Generic Function Initialization}
+%
+\begin{optDefinition}
+
+\method{initialize}
+%
+\begin{specargs}
+    \item[gf, \classref{generic-function}] A generic function.
+
+    \item[initlist, \classref{list}] A list of initialization options as follows:
+    \begin{options}
+        \item[name, symbol] The name of the generic function.
+        \item[domain, list] List of argument classes.
+        % \item[range, class] The class of the result.
+        \item[method-class, class] Class of attached methods.
+        \item[method, method-description] A method to be attached.  This
+        option may be specified more than once.
+        % hb: no!
+    \end{options}
+\end{specargs}
+%
+\result%
+The initialized generic function.
+%
+\remarks%
+This method initializes and returns the {\em generic-function}.  The specified
+methods are attached to the generic function by \genericref{add-method}, and its
+slots are initialized from the information passed in {\em initlist} and from the
+results of calling \genericref{compute-method-lookup-function} and
+\genericref{compute-discriminating-function} on the generic function.  Note that
+these two functions may not be called during the call to
+\genericref{initialize}, and that they may be called several times for the
+generic function.
+
+The basic call structure is:
+\smallskip
+\noindent
+{\small\tt
+    add-method {\em gf method\/} -> {\em gf}\\
+    compute-method-lookup-function {\em gf domain \/} -> {\em function}\\
+    compute-discriminating-function {\em gf domain lookup-fn methods\/} -> {\em function}}
+\smallskip
+%
+\end{optDefinition}
+
+\sclause{Method Initialization}
+%
+\begin{optDefinition}
+%
+\method{initialize}
+%
+\begin{specargs}
+    \item[method, \classref{method}] A method.
+
+    \item[initlist, \classref{list}] A list of initialization options as follows:
+    \begin{options}
+        \item[domain, list] The list of argument classes.
+        % \item[range, class] The class of the result.
+        \item[function, fn] A function, created with
+        \macroref{method-function-lambda}.
+        \item[generic-function, gf] A generic function.
+    \end{options}
+\end{specargs}
+%
+\result%
+This method returns the initialized method metaobject {\em method}.  If
+the {\em generic-function\/} option is supplied, \genericref{add-method} is called
+to install the new method in the {\em generic-function}.
+%
+\end{optDefinition}
+
+\sclause{Inheritance Protocol}
+%
+\begin{optDefinition}
+%
+\generic{compatible-superclasses-p}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] A class.
+    \item[direct-superclasses, \classref{list}] A list of potential direct
+    superclasses of {\em class}.
+\end{genericargs}
+%
+\result%
+Returns {\em t} if {\em class} is compatible with {\em
+direct-superclasses}, otherwise \nil.
+
+\method{compatible-superclasses-p}
+%
+\begin{specargs}
+    \item[class, \classref{class}] A class.
+    \item[direct-superclasses, \classref{list}] A list of potential direct
+    superclasses.
+\end{specargs}
+%
+\result%
+Returns the result of calling \genericref{compatible-superclass-p} on {\em
+    class} and the first element of the {\em direct-superclasses} (single
+inheritance assumption).
+
+\generic{compatible-superclass-p}
+%
+\begin{genericargs}
+    \item[subclass, \classref{class}] A class.
+    \item[superclass, \classref{class}] A potential direct superclass.
+\end{genericargs}
+%
+\result%
+Returns \true\/ if {\em subclass} is compatible with {\em superclass},
+otherwise \nil.
+
+\method{compatible-superclass-p}
+%
+\begin{specargs}
+    \item[subclass, \classref{class}] A class.
+    \item[superclass, \classref{class}] A potential direct superclass.
+\end{specargs}
+%
+\result%
+Returns \true\/ if the class of the first argument is a subclass of
+the class of the second argument, otherwise \nil.
+
+If the implementation wishes to restrict the instantiation tree (see
+introduction to B.4), this method should return \nil\/ if {\em superclass}
+is \classref{metaclass}.
+
+\method{compatible-superclass-p}
+%
+\begin{specargs}
+    \item[subclass, \classref{class}] A class.
+    \item[superclass, \classref{cabstract-class}] A potential direct superclass.
+\end{specargs}
+%
+\result%
+Always returns \true.
+
+\method{compatible-superclass-p}
+%
+\begin{specargs}
+    \item[subclass, \classref{abstract-class}] A class.
+    \item[superclass, \classref{class}] A potential direct superclass.
+\end{specargs}
+%
+\result%
+Always returns \nil.
+
+\method{compatible-superclass-p}
+%
+\begin{specargs}
+    \item[subclass, \classref{abstract-class}] A class.
+    \item[superclass, \classref{abstract-class}] A potential direct superclass.
+\end{specargs}
+%
+\result%
+Always returns \true.
+
+\generic{compute-class-precedence-list}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[direct-superclasses, \classref{list}] List of direct superclasses.
+\end{genericargs}
+%
+\result%
+Computes and returns a list of classes which represents the linearized
+inheritance hierarchy of {\em class} and the given list of direct superclasses,
+beginning with {\em class} and ending with \classref{object}.
+
+\method{compute-class-precedence-list}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[direct-superclasses, \classref{list}] List of direct superclasses.
+\end{specargs}
+%
+\result%
+A list of classes.
+%
+\remarks%
+This method can be considered to return a
+cons of {\em class} and the class precedence list of the first element
+of {\em direct-superclasses} (single inheritance assumption). If no {\em
+direct-superclasses} has been supplied, the result is the list of two elements:
+{\em class} and \classref{object}.
+
+\generic{compute-slots}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[direct-slot-specifications, \classref{list}] A list of direct slot specification.
+    \item[inherited-slots, \classref{list}] A list of lists of inherited slot
+    descriptions.
+\end{genericargs}
+%
+\result%
+Computes and returns the list of effective slot descriptions of {\em class}.
+%
+\seealso%
+\genericref{compute-inherited-slots}.
+
+\method{compute-slots}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[slot-specs, \classref{list}] List of (direct) slot specifications.
+    \item[inherited-slot-lists, \classref{list}] A list of lists (in
+    fact one list in single inheritance) of inherited slot descriptions.
+\end{specargs}
+%
+\result%
+A list of effective slot descriptions.
+%
+\remarks%
+% Update!
+The default method computes two sublists:
+\begin{enumerate}
+    \item Calling \genericref{compute-specialized-slot} with the
+    three arguments (i) {\em class}, (ii) each {\em inherited-slot}
+    as a singleton list, (iii) the {\em slot-spec} corresponding (by having the
+    same name) to the slot description, if it exists, otherwise \nil, giving a
+    list of the specialized slot descriptions.
+
+    \item Calling \genericref{compute-defined-slot} with the three
+    arguments (i) {\em class}, (ii) each {\em slot-specification} which does not
+    have a corresponding (by having the same name) {\em
+        inherited-slot}.
+\end{enumerate}
+%
+The method returns the concatenation of these two lists as its result.  The
+order of elements in the list is significant. All specialized slot descriptions
+have the same position as in the effective slot descriptions list of the direct
+superclass (due to the single inheritance). The slot accessors (computed later)
+may rely on this assumption minimizing the number of methods to one for all
+subclasses and minimizing the access time to an indexed reference.
+%
+\seealso%
+\genericref{compute-specialized-slot},
+\genericref{compute-defined-slot},
+\genericref{compute-and-ensure-slot-accessors}.
+
+\generic{compute-initargs}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[initargs, \classref{list}] List of direct initargs.
+    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited initargs.
+\end{genericargs}
+%
+\result%
+List of symbols.
+%
+\remarks%
+Computes and returns all legal initargs for {\em class}.
+%
+\seealso%
+\genericref{compute-inherited-initargs}.
+
+\method{compute-initargs}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[initargs, \classref{list}] List of direct initargs.
+    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited initargs.
+\end{specargs}
+%
+\result%
+List of symbols.
+%
+\remarks%
+This method appends the second argument with the first element of the third
+argument (single inheritance assumption), removes duplicates and returns the
+result. Note that \genericref{compute-initargs} is called by the default
+\genericref{initialize} method with all direct initargs as the second argument:
+those specified as slot option and those specified as class option.
+
+\generic{compute-inherited-slots}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[direct-superclasses, \classref{list}] List of direct superclasses.
+\end{genericargs}
+%
+\result%
+List of lists of inherited slot descriptions.
+%
+\remarks%
+Computes and returns a list of lists of effective slot descriptions.
+%
+\seealso%
+\genericref{compute-slots}.
+
+\method{compute-inherited-slots}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[direct-superclasses, \classref{list}] List of direct superclasses.
+\end{specargs}
+%
+\result%
+List of lists of inherited slot descriptions.
+%
+\remarks%
+The result of the default method is a list of one element: a list of effective
+slot descriptions of the first element of the second argument (single
+inheritance assumption). Its result is used by
+\genericref{compute-slots} as an argument.
+
+\generic{compute-inherited-initargs}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[direct-superclasses, \classref{list}] List of direct superclasses.
+\end{genericargs}
+%
+\result%
+List of lists of symbols.
+\remarks%
+Computes and returns a list of lists of initargs. Its result is used by
+\genericref{compute-initargs} as an argument.
+%
+\seealso%
+\genericref{compute-initargs}.
+
+\method{compute-inherited-initargs}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[direct-superclasses, \classref{list}] List of direct superclasses.
+\end{specargs}
+%
+\result%
+List of lists of symbols.
+%
+\remarks%
+The result of the default method
+contains one list of legal initargs of the first element of the second
+argument (single inheritance assumption).
+
+\generic{compute-defined-slot}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification.
+\end{genericargs}
+%
+\result%
+Slot description.
+%
+\remarks%
+Computes and returns a new effective slot description.  It is called by
+\genericref{compute-slots} on each slot specification which has no
+corresponding inherited slot descriptions.  \seealso%
+\genericref{compute-defined-slot-class}.
+
+\method{compute-defined-slot}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification.
+\end{specargs}
+%
+\result%
+Slot description.
+%
+\remarks%
+Computes and returns a new effective slot description.  The class of the result
+is determined by calling \genericref{compute-defined-slot-class}.
+%
+\seealso%
+\genericref{compute-defined-slot-class}.
+
+\generic{compute-defined-slot-class}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification.
+\end{genericargs}
+%
+\result%
+Slot description class.
+%
+\remarks%
+Determines and returns the slot description class corresponding to {\em class}
+and {\em slot-spec} .  \seealso \genericref{compute-defined-slot}.
+
+\method{compute-defined-slot-class}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification.
+\end{specargs}
+%
+\result%
+The class \classref{local-slot}.
+%
+\remarks%
+This method just returns the class \classref{local-slot}.
+
+\generic{compute-specialized-slot}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[inherited-slots, \classref{list}] List of inherited slot descriptions
+    (each of the same name as the slot being defined).
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+\end{genericargs}
+%
+\result%
+Slot description.
+%
+\remarks%
+Computes and returns a new effective slot description. It is called by
+\genericref{compute-slots} on the class, each list of inherited
+slots with the same name and with the specialising slot specification
+list or \nil\/ if no one is specified with the same name.
+%
+\seealso%
+\genericref{compute-specialized-slot-class}.
+
+\method{compute-specialized-slot}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[inherited-slots, \classref{list}] List of inherited slot descriptions.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+\end{specargs}
+%
+\result%
+Slot description.
+%
+\remarks%
+Computes and returns a new effective slot description.  The class of the result
+is determined by calling
+\genericref{compute-specialized-slot-class}.
+%
+\seealso%
+\genericref{compute-specialized-slot-class}.
+
+\generic{compute-specialized-slot-class}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[inherited-slots, \classref{list}] List of inherited slot descriptions.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+\end{genericargs}
+%
+\result%
+Slot description class.
+%
+\remarks%
+Determines and returns the slot description class corresponding to (i)
+the class being defined, (ii) the inherited slot descriptions being
+specialized (iii) the specializing information in {\em slot-spec}.
+%
+\seealso%
+\genericref{compute-specialized-slot}.
+
+\method{compute-specialized-slot-class}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[inherited-slots, \classref{list}] List of inherited slot
+    descriptions.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+\end{specargs}
+%
+\result%
+The class \classref{local-slot}.
+%
+\remarks%
+This method just returns the class \classref{local-slot}.
+%
+\end{optDefinition}
+
+\sclause{Slot Access Protocol}
+%
+\begin{optDefinition}
+The slot access protocol is defined via accessors (readers and writers)
+only. There is no primitive like CLOS's {\tt slot-value}. The accessors are
+generic for standard classes, since they have to work on subclasses and should
+do the applicability check anyway.  The key idea is that the discrimination on
+slots and classes is performed once at class definition time rather
+than again and again at slot access time.
+
+Each slot has exactly one reader and one writer as anonymous
+objects. If a reader/writer slot-option is specified in a class definition, the
+anonymous reader/writer of that slot is bound to the specified
+identifier. Thus, if a reader/writer option is specified more than once, the
+same object is bound to all the identifiers. If the accessor slot-option is
+specified the anonymous writer will be installed as the setter of the reader.
+Specialized slots refer to the same objects as those in the
+superclasses (single inheritance makes that possible).  Since the
+readers/writers are generic, it is possible for a subclass (at the meta-level)
+to add new methods for inherited slots in order to make the
+readers/writers applicable on instances of the subclass. A new method might be
+necessary if the subclasses have a different instance allocation or if the slot
+positions cannot be kept the same as in the superclass (in multiple inheritance
+extensions).  This can be done during the initialization computations.
+
+\generic{compute-and-ensure-slot-accessors}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+    \item[inherited-slots, \classref{list}] List of lists of
+    inherited slot descriptions.
+\end{genericargs}
+%
+\result%
+List of effective slot descriptions.
+%
+\remarks%
+Computes new accessors or ensures that inherited accessors work
+correctly for each effective slot description.
+
+\method{compute-and-ensure-slot-accessors}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class being defined.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+    \item[inherited-slots, \classref{list}] List of lists of
+    inherited slot descriptions.
+\end{specargs}
+%
+\result%
+List of effective slot descriptions.
+%
+\remarks%
+For each slot description in {\em slots\/} the default method
+checks if it is a new slot description and not an
+inherited one. If the slot description is new,
+\begin{enumerate}
+    % \item computes the slot position in an instance
+    % calling \genericref{compute-slot-position}, and stores the result;
+
+    \item calls \genericref{compute-slot-reader} to compute a new slot reader and
+    stores the result in the slot description;
+
+    \item calls \genericref{compute-slot-writer} to compute a new slot writer and
+    stores the result in the slot description;
+\end{enumerate}
+%
+Otherwise, it assumes that the inherited values remain valid.
+
+Finally, for every slot description (new or inherited) it ensures the reader and
+writer work correctly on instances of {\em class} by means of
+\genericref{ensure-slot-reader} and \genericref{ensure-slot-writer}.
+
+\generic{compute-slot-reader}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slot-list, \classref{list}] List of effective slot descriptions.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Computes and returns a new slot reader applicable to instances of {\em class}
+returning the slot value corresponding to {\em slot}. The third
+argument can be used in order to compute the logical slot position.
+
+\method{compute-slot-reader}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{specargs}
+%
+\result%
+Generic function.
+%
+\remarks%
+The default method returns a new generic function of one argument
+without any methods. Its domain is {\em class}.
+
+\generic{compute-slot-writer}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Computes and returns a new slot writer applicable to instances of {\em
+class} and any value to be stored as the new slot value corresponding
+to {\em slot}. The third argument can be used in order to
+compute the logical slot position.
+
+\method{compute-slot-writer}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{specargs}
+%
+\result%
+Generic function.
+%
+\remarks%
+The default method returns a new generic function of two arguments
+without any methods. Its domain is {\em class} $\times$ \classref{object}.
+
+\generic{ensure-slot-reader}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+    \item[reader, \classref{function}] The slot reader.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Ensures {\em function} correctly fetches the value of the slot from
+instances of {\em class}.
+
+\method{ensure-slot-reader}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot descriptions.
+    \item[reader, \classref{generic-function}] The slot reader.
+\end{specargs}
+%
+\result%
+Generic function.
+%
+\remarks%
+The default method checks if there is a method in the {\em
+generic-function}. If not, it creates and adds a new one, otherwise it
+assumes that the existing method works correctly. The domain
+of the new method is {\em class} and the function is
+{\tt\begin{tabbing}
+(me\=thod-function-lambda ((object {\em class}))\\
+   \>(primitive-reader object))
+\end{tabbing}}
+\genericref{compute-primitive-reader-using-slot} is called by
+\genericref{ensure-slot-reader} method to compute the primitive reader used
+in the function of the new created reader method.
+
+\generic{ensure-slot-writer}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+    \item[writer, \classref{function}] The slot writer.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Ensures {\em function} correctly updates the value of the slot in
+instances of {\em class}.
+
+\method{ensure-slot-writer}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slot-list, \classref{list}] List of effective slot
+    descriptions.
+    \item[writer, \classref{generic-function}] The slot writer.
+\end{specargs}
+%
+\result%
+Generic function.
+%
+\remarks%
+The default method checks if there is a method in the {\em
+generic-function}. If not, creates and adds a new one, otherwise it
+assumes that the existing method works correctly. The domain of
+the new method is {\em class} $\times$ \classref{object} and the
+function is:
+{\tt\begin{tabbing}
+(me\=thod-function-lambda (\=(obj {\em class})\\
+\>                      \>(new-value \classref{object}))\\
+   \>(primitive-writer obj new-value))
+\end{tabbing}}
+\genericref{compute-primitive-writer-using-slot} is called by
+\genericref{ensure-slot-writer} method to compute the primitive writer used in the
+function of the new created writer method.
+
+\generic{compute-primitive-reader-using-slot}
+%
+\begin{genericargs}
+    \item[slot, \classref{slot}] Slot description.
+    \item[class, \classref{class}] Class.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Computes and returns a function which returns a slot value when
+applied to an instance of {\em class}.
+
+\method{compute-primitive-reader-using-slot}
+%
+\begin{specargs}
+    \item[slot, \classref{slot}] Slot description.
+    \item[class, \classref{class}] Class.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{specargs}
+%
+\result%
+Function.
+%
+\remarks%
+Calls \genericref{compute-primitive-reader-using-class}.  This is the default
+method.
+
+\generic{compute-primitive-reader-using-class}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Computes and returns a function which returns the slot value when
+applied to an instance of {\em class}.
+
+\method{compute-primitive-reader-using-class}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{specargs}
+%
+\result%
+Function.
+%
+\remarks%
+The default method returns a function of one argument.
+
+\generic{compute-primitive-writer-using-slot}
+%
+\begin{genericargs}
+    \item[slot, \classref{slot}] Slot description.
+    \item[class, \classref{class}] Class.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Computes and returns a function which stores a new slot value when
+applied on an instance of {\em class} and a new value.
+
+\method{compute-primitive-writer-using-slot}
+%
+\begin{specargs}
+    \item[slot, \classref{slot}] Slot description.
+    \item[class, \classref{class}] Class.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{specargs}
+%
+\result%
+Function.
+%
+\remarks%
+Calls \genericref{compute-primitive-writer-using-class}.  This is the default
+method.
+
+\generic{compute-primitive-writer-using-class}
+%
+\begin{genericargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{genericargs}
+%
+\result%
+Function.
+%
+\remarks%
+Computes and returns a function which stores the new slot value when
+applied on an instance of {\em class} and new value.
+
+\method{compute-primitive-reader-using-class}
+%
+\begin{specargs}
+    \item[class, \classref{class}] Class.
+    \item[slot, \classref{slot}] Slot description.
+    \item[slots, \classref{list}] List of effective slot
+    descriptions.
+\end{specargs}
+%
+\result%
+Function.
+%
+\remarks%
+The default method returns a function of two arguments.
+%
+\end{optDefinition}
+
+\sclause{Method Lookup and Generic Dispatch}
+%
+\begin{optDefinition}
+%
+\generic{compute-method-lookup-function}
+%
+\begin{genericargs}
+    \item[gf, \classref{generic-function}] A generic function.
+    \item[domain, \classref{list}] A list of classes which cover the domain.
+\end{genericargs}
+%
+\result%
+A function.
+%
+\remarks%
+Computes and returns a function which will be called at least once for
+each domain to select and sort the applicable methods by the default
+dispatch mechanism.  New methods may be defined for this function to
+implement different method lookup strategies. Although only one method
+lookup function generating method is provided by the system, each
+generic function has its own specific lookup function which may vary
+from generic function to generic function.
+
+\method{compute-method-lookup-function}
+%
+\begin{specargs}
+    \item[gf, \classref{generic-function}] A generic function.
+    \item[domain, \classref{list}] A list of classes which cover the domain.
+\end{specargs}
+%
+\result%
+A function.
+%
+\remarks%
+Computes and returns a function which will be called at least once for
+each domain to select and sort the applicable methods by the default
+dispatch mechanism.  It is not defined, whether each generic function
+may have its own lookup function.
+
+\generic{compute-discriminating-function}
+%
+\begin{genericargs}
+    \item[gf, \classref{generic-function}] A generic function.
+    \item[domain, \classref{list}] A list of classes which span the domain.
+    \item[lookup-fn, \classref{function}] The method lookup function.
+    \item[methods, \classref{list}] A list of methods attached to the {\em
+        generic-function}.
+\end{genericargs}
+%
+\result%
+A function.
+%
+\remarks%
+This generic function computes and returns a function which is called
+whenever the generic function is called. The returned function
+controls the generic dispatch.  Users may define methods on this
+function for new generic function classes to implement non-default
+dispatch strategies.
+
+\method{compute-discriminating-function}
+%
+\begin{specargs}
+    \item[gf, \classref{generic-function}] A generic function.
+    \item[domain, \classref{list}] A list of classes which span the domain.
+    \item[lookup-fn, \classref{function}] The method lookup function.
+    \item[methods, \classref{list}] A list of methods attached to the {\em
+        generic-function}.
+\end{specargs}
+%
+\result%
+A function.
+%
+\remarks%
+This method computes and returns a function which is called whenever
+the generic function is called.  This default method implements the
+standard dispatch strategy:  The generic function's methods are sorted
+using the function returned by \genericref{compute-method-lookup-function},
+and the first is called as if by \functionref{call-method}, passing the others
+as the list of next methods.  Note that \functionref{call-method} need not be
+directly called.
+
+\generic{add-method}
+%
+\begin{genericargs}
+    \item[gf, \classref{generic-function}] A generic function.
+    \item[method, \classref{method}] A method to be attached to the generic
+    function.
+\end{genericargs}
+%
+\result%
+This generic function adds {\em method} to the generic function {\em
+gf}.  This method will then be taken into account when {\em gf} is
+called with appropriate arguments.  It returns the generic function
+{\em gf}.  New methods may be defined on this generic function for new
+generic function and method classes.
+%
+\remarks%
+In contrast to CLOS, \genericref{add-method} does not remove a method with
+the same domain as the method being added. Instead, a noncontinuable
+error is signalled.
+
+\method{add-method}
+%
+\begin{specargs}
+    \item[gf, \classref{generic-function}] A generic function.
+    \item[method, \classref{method}] A method to be attached.
+\end{specargs}
+%
+\result%
+The generic function.
+%
+\remarks%
+This method checks that the domain classes of the method are subclasses of those
+of the generic function, and that the method is an instance of the generic
+function's method class.  If not, signals an error (condition:
+\conditionref{incompatible-method-and-gf}
+\indexcondition{incompatible-method-and-gf}).  It also checks if there is a
+method with the same domain already attached to the generic function.  If so, a
+noncontinuable error is signaled (condition:
+\conditionref{methods-exists}\indexcondition{method-exists}). If no error
+occurs, the method is added to the generic function.  Depending on particular
+optimizations of the generic dispatch, adding a method may cause some updating
+computations, e.g., by calling compute-method-lookup-function and
+compute-discriminating-function.
+%
+\end{optDefinition}

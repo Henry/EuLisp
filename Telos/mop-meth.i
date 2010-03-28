@@ -1,0 +1,51 @@
+;;; EuLisp system 'youtoo'
+;;;   Interface file for module mop-meth
+
+(definterface mop-meth
+  (import (boot mop-prim mop-key mop-class mop-inspect mop-gf)
+   syntax (_boot0 _mop-gf0 _mop-meth0)
+   full-import (boot1 boot mop-prim mop-key mop-class mop-init mop-inspect mop-gf)
+   export (
+    ((name . add-method) (pos . 8) (origin mop-meth . add-method))
+    ((name . compute-discriminating-function) (pos . 12) (origin mop-meth . compute-discriminating-function))
+    ((name . compute-method-lookup-function) (pos . 7) (origin mop-meth . compute-method-lookup-function))
+    ((name . make-method) (pos . 3) (origin mop-meth . make-method))
+    ((name . stable-add-method) (pos . 5) (origin mop-meth . stable-add-method))
+   )
+   local-literals (
+    (top-level . 64)
+    (primitive-add-method . 63)
+    (make-method . 62)
+    (check-method-domain . 61)
+    (stable-add-method . 60)
+    (primitive-find-method . 59)
+    (primitive-remove-method . 58)
+    ("method extends domain of generic function ~a
+    method domain: ~a
+    generic function domain: ~a" . 52)
+    (function: . 49)
+    (domain: . 48)
+    (|(method generic-format)| . 45)
+    (|(method compute-discriminating-function)| . 44)
+    (|(method compute-method-lookup-function)| . 43)
+    (|(method initialize)| . 42)
+    (|(method finalize-generic)| . 41)
+    (|(method remove-method)| . 40)
+    (|(method find-method)| . 39)
+    (|(method add-method)| . 38)
+    (compute-discriminating-function . 37)
+    (compute-method-lookup-function . 36)
+    (finalize-generic . 35)
+    (remove-method . 34)
+    (find-method . 33)
+    (add-method . 32)
+    ("mismatch between class of generic function ~a and method class ~a" . 30)
+    (anonymous . 25)
+    (methods: . 24)
+    (generic-function: . 21)
+    (method-lookup-function . 19)
+    (discriminating-function . 16)
+   )
+   literals (
+   )
+))

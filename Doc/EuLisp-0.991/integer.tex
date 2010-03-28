@@ -1,0 +1,128 @@
+\sclause{Integers}
+\index{general}{integer}
+\index{general}{integer}{module}
+\label{integer}
+\index{general}{level-0 modules!integer}
+%
+\begin{optDefinition}
+The defined name of this module is {\tt integer}.  This module defines
+the abstract class \classref{integer}\ and the behaviour of some generic
+functions on integers.  Further operations on numbers are defined in
+the numbers module (\ref{number}).  A concrete integer class is
+defined in the fixed precision integer module (\ref{fpi}).
+
+\syntaxform{integer}
+
+A positive integer\index{general}{external representation!integer} is has its
+external representation as a sequence of digits optionally preceded by a plus
+sign.  A negative integer\index{general}{external representation!integer} is
+written as a sequence of digits preceded by a minus sign.  For example,
+\verb+1234567890+, \verb+-456+, \verb-+1959-.
+
+Integer literals have an external representation in any base up to base
+36\index{general}{base}\index{general}{base!limitation on input}.  For
+convenience, base 2\index{general}{binary
+    literals}\index{general}{literal!binary}, base 8\index{general}{octal
+    literals}\index{general}{literal!octal} and base
+16\index{general}{hexadecimal literals}\index{general}{literal!hexadecimal} have
+distinguished notations---\verb+#b+, \verb+#o+ and \verb+#x+, respectively.  For
+example: \verb+1234+, \verb+#b10011010010+, \verb+#o2322+ and \verb+#x4d2+ all
+denote the same value.
+
+The general notation\index{general}{literal!arbitrary
+    base}\index{general}{base!arbitrary base literals} for an arbitrary base is
+\verb+#+{\em base\/}\verb+r+, where {\em base\/} is an unsigned decimal number.
+Thus, the above examples may also be written: \verb+#10r1234+,
+\verb+#2r10011010010+, \verb+#8r2322+, \verb+#16r4d2+ or \verb+#36rya+.  The
+reading of any number is terminated on encountering a character which cannot be
+a constituent of that number.  The syntax for the external representation of
+integer literals is defined below.
+
+\Syntax
+\label{integer-syntax}
+\savesyntax\integerSyntax\vbox{\small\syntax
+integer
+   = [sign] unsigned integer;
+sign
+   = '+' | '-';
+unsigned integer
+   = binary integer
+   | octal integer
+   | decimal integer
+   | hexadecimal integer
+   | specified base integer
+binary integer
+   = '#b', binary digit, {binary digit};
+binary digit
+   = '0' | '1';
+octal integer
+   = '#o', octal digit, {octal digit};
+octal digit
+   = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
+decimal integer
+   = decimal digit, {decimal digit};
+hexadecimal integer
+   = '#x', hexadecimal digit, {hexadecimal digit};
+hexadecimal digit
+   = decimal digit
+   | hex lower letter
+   | hex upper letter;
+hex lower letter
+   = 'a' | 'b' | 'c' | 'd' | 'e' | 'f';
+hex upper letter
+   = 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
+specified base integer
+   = '#', base specification, 'r',
+     specified base digit,
+     {specified base digit};
+base specification
+   = decimal digit - ('0' | '1')
+   | ( '1' | '2' ), decimal digit
+   | '3', ('0' | '1' | '2' | '3' | '4' | '5' | '6');
+specified base digit
+   = decimal digit | letter;
+\endsyntax}
+\syntaxtable{integer}{\integerSyntax}
+
+\begin{note}
+    At present this text does not define a class integer with variable
+    precision.  It is planned this should appear in a future version at level-1
+    of the language.  The class will be named
+    \classref{variable-precision-integer}.  The syntax given here is applicable
+    to both fixed and variable precision integers.
+\end{note}
+
+\class{integer}
+\index{general}{level-0 classes!\theclass{integer}}
+%
+The abstract class which is the superclass of all integer numbers.
+
+\function{integerp}
+%
+\begin{arguments}
+    \item[object] Object to examine.
+\end{arguments}
+%
+\result
+Returns {\em object} if it is an integer, otherwise \nil.
+
+\generic{evenp}
+%
+\begin{arguments}
+    \item[integer, \classref{integer}] An integer.
+\end{arguments}
+%
+\result
+Returns \true\/ if two divides {\em integer}, otherwise \nil.
+
+\function{oddp}
+%
+\begin{arguments}
+    \item[integer] An integer.
+\end{arguments}
+%
+\result
+Returns the equivalent of the logical negation of \genericref{evenp} applied to
+{\em integer}.
+%
+\end{optDefinition}

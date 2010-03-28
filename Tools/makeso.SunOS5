@@ -1,0 +1,26 @@
+#!/bin/sh
+
+## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+
+## -----------------------------------------------------------------------
+##                     EuLisp System 'youtoo'
+## -----------------------------------------------------------------------
+##  Description: shell script to make Solaris shared libraries; first argument
+##               is name of output library; rest of arguments are object
+##               files
+## -----------------------------------------------------------------------
+
+CC=$1
+
+shift 1
+LIBRARY=$1
+SONAME=`basename $1`
+
+shift 1
+OBJECTS=$*
+
+if (test ${CC} = cc) then
+  ld -o ${LIBRARY} -G -h ${SONAME} ${OBJECTS}
+else
+  gcc -shared -o ${LIBRARY} ${OBJECTS}
+fi

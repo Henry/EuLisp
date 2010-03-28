@@ -1,0 +1,275 @@
+\sclause{Dynamic Binding}
+\label{control-1}
+%
+\begin{optPrivate}
+    HED wants ids as well as ids and initializers for \keywordref{dynamic-let}.
+\end{optPrivate}
+%
+\begin{optDefinition}
+%
+\keyword{dynamic}
+%
+\Syntax
+\savesyntax\dynamicSyntax\vbox{\small\syntax
+dynamic form
+   = '(', 'dynamic', identifier, ')';
+\endsyntax}
+\syntaxtable{dynamic}{\dynamicSyntax}
+%
+\begin{arguments}
+    \item[identifier] A symbol naming a dynamic binding.
+\end{arguments}
+%
+\result%
+The value of closest dynamic binding of {\em identifier} is returned.  If no
+visible binding exists, an error is signaled (condition:
+\conditionref{unbound-dynamic-variable}\indexcondition{unbound-dynamic-variable}).
+
+\keyword{dynamic-setq}
+%
+\Syntax
+\savesyntax\dynamicSetqSyntax\vbox{\small\syntax
+dynamic setq form
+   = '(', 'dynamic-setq', identifier, form, ')';
+\endsyntax}
+\syntaxtable{dynamic-setq}{\dynamicSetqSyntax}
+%
+\begin{arguments}
+    \item[identifier] A symbol naming a dynamic binding to be updated.
+
+    \item[form] An expression whose value will be stored in the dynamic binding
+    of {\em identifier}.
+\end{arguments}
+%
+\result%
+The value of {\em form}.
+%
+\remarks%
+The {\em form} is evaluated and the result is stored in the closest dynamic
+binding of {\em identifier}.  If no visible binding exists, an error is signaled
+(condition:
+\conditionref{unbound-dynamic-variable}\indexcondition{unbound-dynamic-variable}).
+
+\condition{unbound-dynamic-variable}{general-condition}
+%
+\begin{initoptions}
+    \item[symbol, symbol] A symbol naming the (unbound) dynamic variable.
+\end{initoptions}
+%
+\remarks%
+Signalled by \keywordref{dynamic} or \keywordref{dynamic-setq} if the given
+dynamic variable has no visible dynamic binding.
+
+\keyword{dynamic-let}
+%
+\Syntax
+\savesyntax\dynamicLetSyntax\vbox{\small\syntax
+dynamic let form
+   = '(', 'dynamic-let',
+     {binding}, (* \[\S\ref{control-0}\] *)
+     {form}, ')';
+\endsyntax}
+\syntaxtable{dynamic-let}{\dynamicLetSyntax}
+%
+\begin{arguments}
+    \item[binding\/$^*$] A list of binding specifiers.
+
+    \item[body] A sequence of forms.
+\end{arguments}
+%
+\result%
+The sequence of {\em form}s is evaluated in order, returning the value of the
+last one as the result of the \keywordref{dynamic-let} form.
+%
+\remarks%
+A binding specifier is either an identifier or a two element list of an
+identifier and an initializing form.  All the initializing forms are evaluated
+from left to right in the current environment and the new bindings for the
+symbols named by the identifiers are created in the dynamic environment to hold
+the results.  These bindings have dynamic scope and dynamic
+extent\index{general}{scope and extent!of \keywordref{dynamic-let} bindings}.
+Each form in {\em body} is evaluated in order in the environment extended by the
+above bindings.  The result of evaluating the last form in {\em body} is
+returned as the result of \keywordref{dynamic-let}.
+
+\defform{defglobal}
+%
+\Syntax
+\savesyntax\defglobalSyntax\vbox{\small\syntax
+defglobal form
+   = '(', 'defglobal', identifier, expression, ')';
+\endsyntax}
+\syntaxtable{defglobal}{\defglobalSyntax}
+%
+\begin{arguments}
+    \item[identifier] A symbol naming a top dynamic binding containing the value
+    of {\em form}.
+
+    \item[form] The {\em form} whose value will be stored in the top dynamic
+    binding of {\em identifier}.
+\end{arguments}
+%
+\remarks%
+The value of {\em form} is stored as the top dynamic value of the symbol named
+by {\em identifier}\index{general}{binding!top dynamic}.  The binding created by
+\defformref{defglobal} is mutable.  An error is signaled (condition:
+\conditionref{dynamic-multiply-defined}\indexcondition{dynamic-multiply-defined}),
+on processing this form more than once for the same {\em identifier}.
+%
+\begin{note}
+    The problems engendered by cross-module reference necessitated by a single
+    top-dynamic environment are leading to a reconsideration of the defined
+    model.  Another unpleasant aspect of the current model is that it is not
+    clear how to address the issue of importing (or hiding) dynamic
+    variables---they are in every sense global, which conflicts with the
+    principle of module abstraction.  A model, in which a separate top-dynamic
+    environment is associated with each module is under consideration for a
+    later version of the definition.
+\end{note}
+
+\condition{dynamic-multiply-defined}{general-condition}
+%
+\begin{initoptions}
+    \item[symbol, symbol] A symbol naming the dynamic variable which has already
+    been defined.
+\end{initoptions}
+%
+\remarks%
+Signalled by \defformref{defglobal} if the named dynamic variable already
+exists.
+\end{optDefinition}
+
+\sclause{Exit Extensions}
+%
+\label{subsubsec:exitext}
+\begin{optPrivate}
+    There is no prevention mechanism in CL either---can capture
+    \macroref{return-from} in a function and pass it down (RPG).
+
+    GN would like arbitrary tags for \macroref{catch} and \macroref{throw}---not
+    just symbols.
+\end{optPrivate}
+%
+\begin{optDefinition}
+
+\macro{catch}
+%
+\Syntax
+\savesyntax\catchSyntax\vbox{\small\syntax
+catch macro
+   = '(', 'catch', tag, {form}, ')';
+tag
+   = symbol; (* \[\S\ref{symbol}\] *)
+\endsyntax}
+\syntaxtable{catch}{\catchSyntax}
+%
+\remarks%
+The \macroref{catch} operator is similar to \macroref{block}, except that the
+scope of the name ({\em tag}) of the exit function is dynamic.  The catch {\em
+    tag} must be a \syntaxref{symbol} because it is used as a dynamic variable
+to create a dynamically scoped binding of {\em tag} to the continuation of the
+\macroref{catch} form.  The continuation can be invoked anywhere within the
+dynamic extent of the \macroref{catch} form by using \macroref{throw}.  The {\em
+    form}s are evaluated in sequence and the value of the last one is returned
+as the value of the \macroref{catch} form.  The rewrite rules for
+\macroref{catch} are:
+%
+\savesyntax\catchRewrites\vbox{\begin{center}
+{\small\tt
+\begin{tabular}{lll}
+(catch) & $\equiv$ & {\rm Is an error}\\
+(catch {\em tag}) & $\equiv$ & (progn {\em tag} ())\\
+(catch {\em tag} {\em form}$^*$) & $\equiv$ &
+\begin{minipage}[t]{0.3\columnwidth}
+\begin{tabbing}
+(le\=t/cc tmp\\
+   \>(dy\=namic-let (({\em tag} tmp))\\
+   \>   \>{\em form}$^*$))\\
+\end{tabbing}
+\end{minipage}
+\end{tabular}
+}
+\end{center}}
+\syntaxtable{catch {\normalfont rewrite rules}}{\catchRewrites}
+%
+\noindent
+Exiting from a \macroref{catch}, by whatever means, causes the restoration of
+the lexical environment and dynamic environment that existed before the
+\macroref{catch} was entered.  The above rewrite for \macroref{catch}, causes
+the variable {\tt tmp} to be shadowed.  This is an artifact of the above
+presentation only and a conforming processor must not shadow any variables that
+could occur in the body of \macroref{catch} in this way.
+
+\seealso%
+\macroref{throw}.
+
+\macro{throw}
+
+\Syntax
+\savesyntax\throwSyntax\vbox{\small\syntax
+throw macro
+   = '(', 'throw', tag, {form}, ')';
+\endsyntax}
+\syntaxtable{throw}{\throwSyntax}
+
+\remarks%
+In \macroref{throw}, the {\em tag} names the continuation of the \macroref{catch} from which to return.
+% One of two conditions might arise in \macroref{throw} depending on whether the
+% dynamic value of {\em tag} is undefined (condition:
+% \conditionref{unbound-dynamic-variable}\indexcondition{unbound-dynamic-variable})
+% or its value is not a continuation (condition:
+% \conditionref{invalid-throw-continuation}\indexcondition{invalid-throw-continuation}).
+\macroref{throw} is the invocation of the
+continuation\index{general}{continuation} of the catch named {\em tag}.  The
+{\em form} is evaluated and the value are returned as the value of the catch
+named by {\em variable}.  The {\em tag} ia a symbol because it used to access
+the current dynamic binding of the symbol, which is where the continuation is
+bound.  The rewrite rules for \macroref{throw} are:
+%
+\savesyntax\throwRewrites\vbox{\begin{center}
+{\small\tt
+\begin{tabular}{lll}
+(throw) & $\equiv$ & {\rm Is an error}\\
+(throw {\em tag}) & $\equiv$ & ((dynamic {\em tag}) ())\\
+(throw {\em tag} {\em form}) & $\equiv$ & ((dynamic {\em tag}) {\em form})\\
+\end{tabular}
+}
+\end{center}}
+\syntaxtable{throw {\normalfont rewrite rules}}{\throwRewrites}
+%
+\seealso%
+\macroref{catch}.
+%
+\end{optDefinition}
+
+\sclause{Summary of Level-1 Expressions and Definitions}
+%
+\begin{optDefinition}
+\noindent
+This section gives the syntax of all level-1 expressions and definitions
+together.  Any productions undefined here appear elsewhere in the definition,
+specifically: the syntax of most expressions and definitions is given in the
+section defining level-0.
+\raggedbottom
+%
+\ssclause{Syntax of Level-1 defining forms}
+\usebox{\defmoduleOneSyntax}
+\usebox{\defclassSyntax}
+\usebox{\defgenericOneSyntax}
+\usebox{\defmethodOneSyntax}
+\usebox{\defglobalSyntax}
+%
+\ssclause{Syntax of Level-1 expressions}
+\usebox{\dynamicSyntax}
+\usebox{\dynamicSetqSyntax}
+\usebox{\dynamicLetSyntax}
+\usebox{\genericLambdaOneSyntax}
+\usebox{\methodLambdaOneSyntax}
+%
+% \ssclause{Syntax of Level-1 macros}
+\usebox{\catchSyntax}
+\usebox{\throwSyntax}
+%
+\flushbottom
+%
+\end{optDefinition}

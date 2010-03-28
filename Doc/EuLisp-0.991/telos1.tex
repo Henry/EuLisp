@@ -1,0 +1,486 @@
+\sclause{Classes and Objects}
+%
+\begin{optDefinition}
+\defform{defclass}
+\label{defclass-1}
+%
+\Syntax
+\label{defclass-syntax}
+\savesyntax\defclassSyntax\vbox{\small\syntax
+defclass form
+   = '(', 'defclass',
+     class name, (* \[\S\ref{defclass}\] *)
+     superclass list,
+     defclass slot description list,
+     {defclass class option}, ')';
+superclass list
+   = '(', {superclass name}, ')'; (* \[\S\ref{defclass}\] *)
+defclass slot description list
+   = '(', {defclass slot description}, ')';
+defclass slot option
+   = 'initform', level 1 expression
+   | identifier, level 1 expression
+   | defclass slot option; (* \[\S\ref{defclass}\] *)
+defclass class option
+   = 'class', class name
+   | identifier, level 1 expression
+   | defclass class option; (* \[\S\ref{defclass}\] *)
+\endsyntax}
+\syntaxtable{defclass}{\defclassSyntax}
+
+\begin{arguments}
+    \item[class-name] A symbol naming a binding to be initialised with the new
+    class.
+
+    \item[\group{superclass\/$^*$}] A list of symbols naming bindings of classes
+    to be used as the superclasses of the new class (multiple
+    inheritance\index{general}{inheritance!multiple}\index{general}{multiple
+        inheritance}).  This is different from \defformref{defclass} at level-0,
+    where only one superclass may be specified.
+
+    \item[\group{slot\/$^*$}] A list of slot specifications (see
+    below), comprising either a {\em slot-name} or a list of a {\em slot-name}
+    followed by some {\em slot-option}s.  One of the class options (see below)
+    allows the specification of the class of the slot description.
+
+    \item[class-option\/$^*$] A sequence of keys and values (see below).  One of
+    the class options (\classref{class}) allows the specification of the class
+    of the class being defined.
+\end{arguments}
+%
+\remarks%
+This defining form defines a new class.  The resulting class will be
+bound to {\em class-name}.  The second argument is a list of
+superclasses.  If this list is empty, the superclass is \classref{object}.
+The third argument is a list of slots.  The remaining
+arguments are class options.  All the slot options and class options
+are exactly the same way as for \defformref{defclass} (\ref{defclass}).
+
+\noindent
+The {\em slot-option}\/s are interpreted as follows:
+\begin{options}
+    \item[initarg, symbol]%
+    The value of this option is a identifier naming a symbol, which is the name
+    of an argument to be supplied in the {\em init-option\/}s of a call to
+    \functionref{make} on the new class.  The value of this argument in the call
+    to \functionref{make} is the initial value of the slot.  This option must
+    only be specified once for a particular slot.  The same initarg name may be
+    used for several slots, in which case they will share the same initial value
+    if the initarg is given to \functionref{make}.
+
+    \item[initform, form]%
+    The value of this option is a form, which is evaluated as the default value
+    of the slot, to be used if no initarg is defined for the slot or given to a
+    call to \functionref{make}.  The form is evaluated in the lexical
+    environment of the call to \defformref{defclass} and the dynamic environment
+    of the call to \functionref{make}.  The form is evaluated each time
+    \functionref{make} is called and the default value is called for.  The order
+    of evaluation of the initforms in all the slots is determined by
+    \genericref{initialize}.  This option must only be specified once for a
+    particular slot.
+
+    \item[reader, symbol]%
+    The value is the identifier of the variable to which the reader function
+    will be bound.  The reader function is a means to access the slot.  The
+    reader function is a function of one argument, which should be an instance
+    of the new class.  No writer function is automatically bound with this
+    option.  This option can be specified more than once for a slot, creating
+    several readers.  It is an error to specify the same reader, writer, or
+    accessor name for two different slots.
+
+    \item[writer, symbol]%
+    The value is the identifier of the variable to which the writer function
+    will be bound.  The writer function is a means to change the slot value.
+    The creation of the writer is analogous to that of the reader function.
+    This option can be specified more than once for a slot.  It is an error to
+    specify the same reader, writer, or accessor name for two different slots.
+
+    \item[accessor, symbol]%
+    The value is the identifier of the variable to which the reader function
+    will be bound. In addition, the use of this {\em slot-option} causes that
+    the writer function is associated to the reader {\em via} the
+    \functionref{setter} mechanism. This option can be specified more than once
+    for a slot. It is an error to specify the same reader, writer, or accessor
+    name for two different slots.
+
+    % \item[slot-class, class]%
+    % The corresponding value is a subclass of \classref{slot}.An
+    % implementation conforming at level-1
+    % provides the slot description class \classref{local-slot}, for
+    % slots particular to instances. Extension modules can define \classref{
+    %     shared-slot}, for slots whose values are shared by all the
+    % instances of the class. New slot description classes can be defined and
+    % used here. This option can only be specified once for a particular
+    % slot. Within a class different slots can have different slot description
+    % classes.
+
+    \item[{\em identifier}, expression]%
+    The symbol named by {\em identifier} and the value of {\em expression} are
+    passed to \functionref{make} of the slot description class along with other
+    slot options.  The values are evaluated in the lexical and dynamic
+    environment of the \defformref{defclass}.  For the language defined slot
+    description classes, no slot initargs are defined which are not specified by
+    particular \defformref{defclass} slot options.
+\end{options}
+%
+The {\em class-option}\/s are interpreted as follows:
+\begin{options}
+    \item[initargs, list]%
+    The value of this option is a list of identifiers naming symbols, which
+    extend the inherited names of arguments to be supplied in the {\em
+        init-option\/}s of a call to \functionref{make} on the new class.
+    Initargs are inherited by union. The values of all legal arguments in the
+    call to \functionref{make} are the initial values of corresponding slots if
+    they name a slot or are ignored by the default \genericref{initialize}
+    method, otherwise. This option must only be specified once for a
+    class.  %\functionref{make}.
+
+    \item[constructor, constructor-spec]%
+    Creates a constructor function for the new class.  The constructor
+    specification gives the name to which the constructor function will be
+    bound, followed by a sequence of legal initargs for the class.  The new
+    function creates an instance of the class and fills in the slots according
+    to the match between the specified initargs and the given arguments to the
+    constructor function.  This option may be specified more than once.
+
+    \item[predicate, symbol]%
+    Creates a predicate function for the new class.  The predicate specification
+    gives the name to which the predicate function will be bound.  This option
+    may be specified any number of times for a class.
+
+    \item[class, class]%
+    The value of this option is the class of the new class.  By default, this is
+    \classref{class}.  This option must only be specified once for the new
+    class.
+
+    \item[{\em identifier}, expression]%
+    The symbol named by {\em identifier} and the value of {\em expression} are
+    passed to \functionref{make} on the class of the new class.  This list is
+    appended to the end of the list that \defformref{defclass} constructs.  The
+    values are evaluated in the lexical and dynamic environment of the
+    \defformref{defclass}.  This option is used for metaclasses which need extra
+    information not provided by the standard options.
+\end{options}
+%
+\end{optDefinition}
+
+\sclause{Generic Functions}
+
+\begin{optDefinition}
+\macro{generic-lambda}
+\label{generic-lambda-1}
+%
+\Syntax
+\savesyntax\genericLambdaOneSyntax\vbox{\small\syntax
+generic lambda form
+   = '(', 'generic-lambda', gf lambda list,
+     {level 1 init option}, ')';
+level 1 init option
+   = 'class', class name
+   | 'method-class', class name
+   | 'method' level 1 method description
+   | identifier, level 1 expression;
+   | level 0 init option;
+level 1 method description
+   = '(', {method init option},
+     specialized lambda list,  (* \[\ref{defgeneric-0}\] *)
+     {form}, ')';
+method init option
+   = 'class', class name
+   | identifier level 1 expression
+\endsyntax}
+\syntaxtable{generic-lambda}{\genericLambdaOneSyntax}
+%
+\begin{arguments}
+    \item[gf-lambda-list] As level-0.  See section~\ref{defgeneric-0}.
+
+    \item[level-1-init-option\/$^*$] Format as level-0, but with additional
+    options, which are defined below.
+\end{arguments}
+%
+\result%
+A generic function.
+%
+\remarks%
+The syntax of \macroref{generic-lambda} is an extension of the level-0
+syntax allowing additional init-options.  These allow the
+specification of the class of the new generic function, which defaults
+to \classref{generic-function}, the class of all methods, which defaults
+to \classref{method}, and non-standard options. The latter are evaluated
+in the lexical and dynamic environment of \macroref{generic-lambda} and
+passed to \functionref{make} of the generic function as additional
+initialization arguments.  The additional {\em init-option\/}s over
+level-0 are interpreted as follows:
+%
+\begin{options}
+
+    \item[class, gf-class] The class of the new generic function.  This must be
+    a subclass of \classref{generic-function}.  The default is
+    \classref{generic-function}.
+
+    \item[method-class, method-class] The class of all methods to be defined on
+    this generic function.  All methods of a generic function must be instances
+    of this class.  The {\em method-class} must be a subclass of
+    \classref{method} and defaults to \classref{method}.
+
+    \item[{\em identifier}, expression] The symbol named by {\em identifier} and
+    the value of {\em expression} are passed to \functionref{make} as initargs.
+    % and each new method.
+    The values are evaluated in the lexical and dynamic environment of the
+    \defformref{defgeneric}.  This option is used for classes which need extra
+    information not provided by the standard options.
+\end{options}
+%
+In addition, method init options can be specified for the individual
+methods on a generic function.  These are interpreted as follows:
+%
+\begin{options}
+    \item[class, method-class]%
+    The class of the method to be defined. The method class must be a subclass
+    of \classref{method} and is, by default, \classref{method}. The value is
+    passed to \functionref{make} as the first argument. The symbol and the value
+    are not passed as initargs to \functionref{make}.
+
+    \item[{\em identifier}, expression]%
+    The symbol named by {\em identifier} and the value of {\em expression} are
+    passed to \functionref{make} creating a new method as initargs.  The values
+    are evaluated in the lexical and dynamic environment of the
+    \macroref{generic-lambda}.  This option is used for classes which need extra
+    information not provided by the standard options.
+\end{options}
+%
+\examples
+ In the following example an anonymous version of {\tt gf-1} (see
+\defformref{defgeneric}) is defined.  In all other respects the resulting object
+is the same as {\tt gf-1}.
+%
+{\small\syntax
+(generic-lambda (arg1 (arg2 <class-a>))
+
+  class <another-gf-class>
+  class-key-a class-value-a
+  class-key-b class-value-b
+
+  method-class <another-method-class-a>
+
+  method (class <another-method-class-b>
+          method-class-b-key-a method-class-b-value-a
+          ((m1-arg1 <class-b>) (m1-arg2 <class-c>))
+          ...)
+  method (method-class-a-key-a method-class-a-value-a
+          ((m2-arg1 <class-d>) (m2-arg2 <class-e>))
+          ...)
+  method (class <another-method-class-c>
+          method-class-c-key-a method-class-c-value-a
+          ((m3-arg1 <class-f>) (m3-arg2 <class-g>))
+          ...)
+)
+\endsyntax}
+%
+\seealso%
+\defformref{defgeneric}.
+
+\defform{defgeneric}
+\label{defgeneric-1}
+%
+\Syntax
+\savesyntax\defgenericOneSyntax\vbox{\small\syntax
+defgeneric form
+   = '(', 'defgeneric',
+     gf name, (* \[\ref{defgeneric-0}\] *)
+     gf lambda list, (* \[\ref{defgeneric-0}\] *)
+     {level 1 init option}, ')';
+\endsyntax}
+\syntaxtable{defgeneric}{\defgenericOneSyntax}
+%
+\begin{arguments}
+    \item[gf name] As level-0.  See section~\ref{defgeneric-0}.
+
+    \item[gf lambda list] As level-0.  See section~\ref{defgeneric-0}.
+
+    \item[init option\/$^*$] As for \macroref{generic-lambda}, defined above.
+    below.
+\end{arguments}
+%
+\remarks%
+This defining form defines a new generic function.  The resulting
+generic function will be bound to {\em gf-name}.  The second argument is the
+formal parameter list.  An error is signalled (condition:
+\conditionref{non-congruent-lambda-lists}\indexcondition{non-congruent-lambda-lists})
+if any of the methods defined on this generic function do not have lambda lists
+congruent to that of the generic function.  This applies both to methods defined
+at the same time as the generic function and to any methods added subsequently
+by \defformref{defmethod} or \genericref{add-method}.  An {\em init-option} is a
+identifier followed by its initial value.  The syntax of \defformref{defgeneric}
+is an extension of the level-0 syntax.  The rewrite rules for the
+\defformref{defgeneric} form are identical to those given in
+Table~\ref{defgeneric-rewrite-table} except that {\em level 1 init option}
+replaces {\em level 0 init option}.
+%
+\examples
+In the following example of the use of \defformref{defgeneric} a generic
+function named {\tt gf-1} is defined.  The differences between this
+function and {\tt gf-0} (see~\ref{defgeneric-0}) are
+\begin{enumerate}
+    \item The class of the generic function is specified
+    (\theclass{another-gf-class}) along with some init-options related to the
+    creation of an instance of that class.
+
+    \item The default class of the methods to be attached to the generic
+    function is specified (\theclass{another-method-class-a}) along with an
+    init-option related to the creation of an instance of that class.
+
+    \item In addition, some of the methods to be attached are of a different
+    method class (\theclass{another-method-class-b} and
+    \theclass{another-method-class-c}) also with method specific init-options.
+    These method classes are subclasses of \theclass{another-method-class-a}.
+\end{enumerate}
+%
+\begin{optPrivate}
+{\small\begin{verbatim}
+(defgeneric gf-1 (arg1 (arg2 <class-a>))
+  class <another-gf-class>
+  class-key-a class-value-a
+  class-key-b class-value-b
+
+  method-class <another-method-class>
+  method-class-key-a method-class-value-a
+
+  method (((m1-arg1 <class-b>) (m1-arg2 <class-c>))
+          ...)
+  method (((m2-arg1 <class-d>) (m2-arg2 <class-e>))
+          ...)
+  method (((m3-arg1 <class-f>) (m3-arg2 <class-g>))
+          ...)
+)\end{verbatim}}
+%
+\end{optPrivate}
+{\small\syntax
+(defgeneric gf-1 (arg1 (arg2 <class-a>))
+
+  class <another-gf-class>
+  class-key-a class-value-a
+  class-key-b class-value-b
+
+  method-class <another-method-class-a>
+
+  method (class <another-method-class-b>
+          method-class-b-key-a method-class-b-value-a
+          ((m1-arg1 <class-b>) (m1-arg2 <class-c>))
+          ...)
+  method (method-class-a-key-a method-class-a-value-a
+          ((m2-arg1 <class-d>) (m2-arg2 <class-e>))
+          ...)
+  method (class <another-method-class-c>
+          method-class-c-key-a method-class-c-value-a
+          ((m3-arg1 <class-f>) (m3-arg2 <class-g>))
+          ...)
+)
+\endsyntax}
+
+\sclause{Methods}
+
+\macro{method-lambda}
+\Syntax
+\savesyntax\methodLambdaOneSyntax\vbox{\small\syntax
+method lambda form
+   = '(', 'method-lambda',
+     {method init option}, (* \[\S\ref{generic-lambda-1}\] *)
+     specialized lambda list,
+     {form}, ')';
+\endsyntax}
+\syntaxtable{method-lambda}{\methodLambdaOneSyntax}
+%
+\begin{arguments}
+    \item[method init option] A quoted symbol followed by an expression.
+
+    \item[specialized lambda list] As defined under \macroref{generic-lambda}.
+
+    \item[form] An expression.
+\end{arguments}
+%
+\result%
+This syntax creates and returns an anonymous method with the given
+lambda list and body.  This anonymous method can later be added to a generic
+function with a congruent lambda list via the generic function
+\genericref{add-method}.  Note that the lambda list can be specialized to
+specify the method's domain.  The value of the special initarg \classref{class}
+determines the class to instantiate; the rest of the initlist is passed to
+\functionref{make} called with this class.  The default method class is
+\classref{method}.
+%
+\remarks%
+The additional {\em method-init-option\/}s includes \classref{class}, for
+specifying the class of the method to be defined, and non-standard
+options, which are evaluated in the lexical and dynamic environment of
+\macroref{method-lambda} and passed to \genericref{initialize} of that method.
+
+\macro{defmethod}
+\Syntax
+\savesyntax\defmethodOneSyntax\vbox{\small\syntax
+defmethod form
+   = '(', 'defmethod', gf name,
+     {method init option}, (* \[\S\ref{generic-lambda-1}\] *)
+     specialized lambda list,
+     {form}, ')';
+\endsyntax}
+\syntaxtable{defmethod}{\defmethodOneSyntax}
+%
+\remarks%
+The \defformref{defmethod} form of level-1 extends that of level-0 to accept
+{\em method-init-option\/}s.  This allows for the specification of the
+method class by means of the \classref{class} init option.  This class must
+be a subclass of the method class of the host generic function. The
+method class otherwise defaults to that of the host generic function.
+In all other respects, the behaviour is as that defined in level-0.
+
+\macro{method-function-lambda}
+%
+\begin{arguments}
+    \item[lambda-list] A lambda list
+    \item[form$^*$] A sequence of forms.
+\end{arguments}
+%
+This macro creates and returns an anonymous method function with the given
+lambda list and body. This anonymous method function can later be added to a
+method using \setterref{method-function}, or as the {\tt function}
+initialization value in a call of \functionref{make} on an instance of
+\classref{method}.  A function of this type is also returned by the method
+accessor \functionref{method-function}.  Only functions created using this macro
+can be used as method functions.  Note that the lambda list must not be
+specialized; a method's domain is stored in the method itself.
+
+% hb: there are no setters specified yet!
+\function{call-method}
+%
+\begin{arguments}
+    \item[method] A method.
+    \item[next-methods] A list of methods.
+    \item[arg$^*$] A sequence of expressions.
+\end{arguments}
+%
+This function calls the method {\em method} with arguments {\em args}.
+The argument {\em next-methods} is a list of methods which are used as
+the applicable method list for {\em args}; it is an error if this list
+is different from the methods which would be produced by the method
+lookup function of the generic function of {\em method}.  If {\em
+method} is not attached to a generic function, its behavior is
+unspecified.  The {\em next-methods} are used to determine the next
+method to call when \keywordref{call-next-method} is called within {\em
+method-fn}.
+
+\function{apply-method}
+%
+\begin{arguments}
+    \item[method] A method.
+    \item[next-methods] A list of methods.
+    \item[form$_1$ \ldots form$_{n-1}$] A sequence of expressions.
+    \item[form$_n$] An expression.
+\end{arguments}
+%
+This function is identical to \functionref{call-method} except that its last
+argument is a list whose elements are the other arguments to pass to
+the method's method function.  The difference is the same as that
+between normal function application and \functionref{apply}.
+%
+\end{optDefinition}

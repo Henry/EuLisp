@@ -1,0 +1,169 @@
+% -----------------------------------------------------------------------
+%%% Programming Language EuLisp Version 0.991
+\documentclass[twocolumn,wd,9pt]{isov2}
+
+\setlength\textwidth{180mm}
+\setlength\oddsidemargin{-15mm}
+\setlength\evensidemargin{-5mm}
+
+\usepackage{makeidx}
+\usepackage{multind}
+\usepackage{url}
+
+\ifpdf
+    %\pdfoutput=0
+    \usepackage[
+        plainpages=false,
+        pdfpagelabels,
+        bookmarksnumbered,
+        hyperindex=true
+     ]{hyperref}
+
+     \usepackage[usenames,dvipsnames]{color}
+     %\definecolor{linkcolor}{rgb}{1,0,0}
+
+    \hypersetup{
+        bookmarks=true,         % show bookmarks bar?
+        unicode=false,          % non-Latin characters in Acrobat’s bookmarks
+        pdftoolbar=true,        % show Acrobat’s toolbar?
+        pdfmenubar=true,        % show Acrobat’s menu?
+        pdffitwindow=false,     % window fit to page when opened
+        pdfstartview={FitH},    % fits the width of the page to the window
+        pdftitle={My title},    % title
+        pdfauthor={Author},     % author
+        pdfsubject={Subject},   % subject of the document
+        pdfcreator={Creator},   % creator of the document
+        pdfproducer={Producer}, % producer of the document
+        pdfkeywords={keywords}, % list of keywords
+        pdfnewwindow=true,      % links in new window
+        colorlinks=true,        % false: boxed links; true: colored links
+        linkcolor=red,          % color of internal links
+        citecolor=green,        % color of links to bibliography
+        filecolor=magenta,      % color of file links
+        urlcolor=cyan           % color of external links
+    }
+\fi
+
+\usepackage{eulisp}
+\includecomment{optDefinition}
+% \includecomment{optRationale}
+% \includecomment{optPrivate}
+
+\standard{Programming Language EuLisp}
+\yearofedition{2010}
+\languageofedition{(E)}
+\newcommand{\version}{0.991}
+\renewcommand{\extrahead}{Version \version}
+
+\setcounter{tocdepth}{3} % add more levels to table of contents
+
+% ensure generation of indexes
+\makeindex{function}
+\makeindex{macro}
+\makeindex{generic}
+\makeindex{method}
+\makeindex{condition}
+\makeindex{constant}
+\makeindex{class}
+% \makeindex{module}
+
+\makeindex{general}
+
+% -----------------------------------------------------------------------
+%%% Begin document
+\begin{document}
+
+% -----------------------------------------------------------------------
+%%% Cover page
+\begin{cover}
+    \vspace*{\fill}
+    \hrule
+    \vspace{0.3cm}
+    {\Huge \thestandard} \\
+    \vspace{0.3cm}
+    {\LARGE Version \version} \\
+    \ISname \\
+    \vspace{0.5cm}
+    \hrule
+    \clearpage
+\end{cover}
+
+\input{foreword}
+
+% -----------------------------------------------------------------------
+%%% Title page
+\title{}{\thestandard}{\extrahead}
+
+% -----------------------------------------------------------------------
+%%% Introduction
+\input{introduction}
+
+% -----------------------------------------------------------------------
+%%% level-0
+
+\input{structure}
+\input{terms}
+\newpage\input{syntax}
+\newpage\input{modules}
+
+\gdef\module{telos0} \newpage\input{telos0}
+\gdef\module{threads} \newpage\input{threads}
+\gdef\module{condition} \newpage\input{conditions}
+\gdef\module{eulisp0} \newpage\input{control0}
+
+% -----------------------------------------------------------------------
+%%% library functions
+\normannex{Level-0 Module Library}
+\label{annex:level-0}
+
+\gdef\module{character} \input{character}
+\gdef\module{collection} \newpage\input{collect}
+\gdef\module{compare} \newpage\input{compare}
+\gdef\module{convert} \newpage\input{convert}
+\gdef\module{copy} \newpage\input{copy}
+\gdef\module{double} \newpage\input{double}
+\gdef\module{mathlib} \newpage\input{mathlib}
+\gdef\module{float} \newpage\input{float}
+\gdef\module{fpint} \newpage\input{fpint}
+\gdef\module{formatted-io} \newpage\input{format}
+\gdef\module{integer} \newpage\input{integer}
+\gdef\module{keyword} \newpage\input{keyword}
+\gdef\module{list} \newpage\input{list}
+\gdef\module{number} \newpage\input{number}
+\gdef\module{stream} \newpage\input{stream}
+\gdef\module{string} \newpage\input{string}
+\gdef\module{symbol} \newpage\input{symbol}
+\gdef\module{table} \newpage\input{table}
+\gdef\module{vector} \newpage\input{vector}
+\gdef\module{level-0}\newpage\input{syntaxa}
+
+% -----------------------------------------------------------------------
+%%% level 1
+\normannex{Programming Language EuLisp, Level-1}
+\label{annex:level-1}
+
+\gdef\module{level-1}\input{telos1}
+\gdef\module{level-1}\newpage\input{mop}
+\gdef\module{level-1}\newpage\input{prim}
+\gdef\module{level-1}\newpage\input{control1}
+
+% -----------------------------------------------------------------------
+%%% Bibliography
+\input{bibliography}
+
+% -----------------------------------------------------------------------
+%%% Indexes
+
+\printindex{function}{Function Index}
+\printindex{macro}{Macro Index}
+\printindex{generic}{Generic Function Index}
+\printindex{method}{Method Index}
+\printindex{condition}{Condition Index}
+\printindex{constant}{Constant Index}
+\printindex{class}{Class Index}
+% \printindex{module}{Module Index}
+\printindex{general}{Index}
+
+% -----------------------------------------------------------------------
+\end{document}
+% -----------------------------------------------------------------------

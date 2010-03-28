@@ -1,0 +1,10 @@
+
+      DOUBLE PRECISION FUNCTION FOO(I,D)
+      INTEGER I
+      DOUBLE PRECISION D
+
+      FOO = I + D
+
+      RETURN
+
+      END

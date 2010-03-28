@@ -1,0 +1,353 @@
+\sclause{Numbers}
+\index{general}{number}
+\index{general}{number!module}
+\label{number}
+\index{general}{level-0 modules!number}
+\index{general}{generic arithmetic}
+%
+\begin{optPrivate}
+    Need to discuss issue of ordering and how that fits in with gaussian
+    extensions.  Is it simply enough that there is no applicable method in each
+    case?  Where is class number in this hierachy?  Perhaps number is ring?
+
+    Ring defines 0, 1, +, -, * and possibly **.  Euclidean domain adds div,
+    factor etc.  Field adds /, etc.
+\end{optPrivate}
+%
+\begin{optRationale}
+    In keeping with Lisp tradition, many of the arithmetic operators are n-ary.
+    However, because \eulisp\ uses its generic function facility to describe the
+    arithmetic operations---so that the user can add new arithmetics and
+    integrate them with the rest of the system---and because n-argument
+    discrimination cannot be satisfactorily defined, the actual generic
+    arithmetic functions are all binary.  The meaning of each n-ary function in
+    terms of the binary operator is defined by saying the binary operation is
+    left-associative.  Thus, {\tt (+ a b c d)} must be evaluated as {\tt
+        (binary+ (binary+ (binary+ a b) c) d)}.  The operators affected by this
+    requirement are: \functionref{+}, \functionref{-}, \functionref{*},
+    \functionref{/}, \functionref{max} and \functionref{min}.  The arithmetic
+    comparison functions are also n-ary, so that {\tt (< a b c d)} must be
+    evaluated in the same way.  The operators affected are: \functionref{=} and
+    \functionref{<}.
+\end{optRationale}
+%
+\begin{optDefinition}
+\noindent
+The defined name of this module is {\tt number}.
+
+Numbers can take on many forms with unusual properties, specialized for
+different tasks, but two classes of number suffice for the majority of needs,
+namely integers (\classref{integer}, \classref{fpi}) and floating point numbers
+(\classref{float}, \classref{double-float}).  Thus, these only are defined at
+level-0.
+
+In figure~\ref{level-0-number-class-hierarchy} shows the initial number class
+hierarchy at level-0.  The inheritance relationships by this diagram are part of
+this definition, but it is not defined whether they are direct or not.  For
+example, \classref{integer}\ and \classref{float}\ are not necessarily direct
+subclasses of \classref{number}, while the class of each number class might be a
+subclass of {\em number-class}.  Since there are only two concrete number
+classes at level-0,
+coercion\index{general}{coercion}\index{general}{number!coercion} is simple,
+namely from \classref{fixed-precision-integer}\ to \classref{double-float}.  Any
+level-0 version of a library module, for example, {\em elementary-functions}
+\ref{elementary-functions}, need only define methods for these two classes.
+Mathematically, the reals are regarded as a superset of the integers and for the
+purposes of this definition we regard \classref{float}\ as a superset of
+\classref{integer}\ (even though this will cause representation problems when
+variable precision integers are introduced).  Hence, \classref{float}\ is
+referred to as being {\em higher} that \classref{integer}\ and arithmetic
+involving instances of both classes will cause integers to be converted to an
+equivalent floating point value, before the calculation proceeds\footnote{This
+    behaviour is popularly referred to as {\em floating point contagion}} (see
+in particular \genericref{binary/},
+\genericreflabel{binary\protect\%}{binarypercent} and \genericref{binary-mod}).
+
+\begin{figure}[h]
+\caption{Level-0 number class hierarchy}
+\label{level-0-number-class-hierarchy}
+\begin{center}
+{\tt\begin{tabbing}
+<num\=ber> [<number-class>]\\
+    \><flo\=at> [<number-class>]\\
+    \>    \><double-float> [<number-class>]\\
+    \><integer> [<number-class>]\\
+    \>    \><fixed-precision-integer> [<number-class>]
+\end{tabbing}}
+\end{center}
+\end{figure}
+
+\class{number}
+%
+The abstract class which is the superclass of all number classes.
+
+\function{numberp}
+%
+\begin{arguments}
+    \item[object] Object to examine.
+\end{arguments}
+%
+\result%
+Returns {\em object\/} if it is a number, otherwise \nil.
+
+\condition{arithmetic-condition}{condition}
+
+\begin{initoptions}
+    \item[operator, object] The operator which signalled the condition.
+    \item[operand-list, list] The operands passed to the operator.
+\end{initoptions}
+%
+\remarks%
+This is the general condition class for conditions arising from arithmetic
+operations.
+
+\condition{division-by-zero}{arithmetic-condition}
+%
+Signalled by any of \genericref{binary/},
+\genericreflabel{binary\protect\%}{binarypercent} and \genericref{binary-mod} if
+their second argument is zero.
+
+\function{+}
+%
+\begin{arguments}
+    \item[{\optional{number$_1$ number$_2$ ...}}] A sequence of numbers.
+\end{arguments}
+%
+\result%
+Computes the sum of the arguments using the generic function
+\genericref{binary+}.  Given zero arguments, \functionref{+} returns {\tt 0} of
+class \classref{integer}.  One argument returns that argument.  The arguments
+are combined left-associatively.
+
+\function{-}
+%
+\begin{arguments}
+    \item[{number$_1$ \optional{number$_2$ ...}}] A non-empty sequence of
+    numbers.
+\end{arguments}
+%
+\result%
+Computes the result of subtracting successive arguments---from the second to the
+last---from the first using the generic function \genericref{binary-}.  Zero
+arguments is an error.  One argument returns the negation of the argument, using
+the generic function \genericref{negate}.  The arguments are combined
+left-associatively.
+
+\function{*}
+%
+\begin{arguments}
+    \item[{\optional{number$_1$ number$_2$ ...}}] A sequence of numbers.
+\end{arguments}
+%
+\result%
+Computes the product of the arguments using the generic function
+\genericref{binary*}.  Given zero arguments, \functionref{*} returns {\tt 1} of
+class \classref{integer}.  One argument returns that argument.  The arguments
+are combined left-associatively.
+
+\function{/}
+%
+\begin{arguments}
+    \item[{number$_1$ \optional{number$_2$ ...}}] A non-empty sequence of
+    numbers.
+\end{arguments}
+%
+\result%
+Computes the result of dividing the first argument by its succeeding arguments
+using the generic function \genericref{binary/}.  Zero arguments is an
+error.  One argument computes the reciprocal of the argument.  It is an error in
+the single argument case, if the argument is zero.
+
+\functionlabeled{\protect\%}{percent}
+%
+\begin{arguments}
+    \item[{number$_1$ \optional{number$_2$ ...}}] A non-empty sequence of
+    numbers.
+\end{arguments}
+%
+\result%
+Computes the result of taking the remainder of dividing the first argument by
+its succeeding arguments using the generic function
+\genericreflabel{binary\protect\%}{binarypercent}.  Zero arguments is an error.
+One argument returns that argument.
+
+\function{gcd}
+%
+\begin{arguments}
+    \item[{number$_1$ \optional{number$_2$ ...}}] A non-empty sequence of
+    numbers.
+\end{arguments}
+%
+\result%
+Computes the greatest common divisor of {\em number$_1$} up to {\em number$_n$}
+using the generic function \genericref{binary-gcd}.  Zero arguments is an error.  One
+argument returns {\em number$_1$}.
+
+\function{lcm}
+%
+\begin{arguments}
+    \item[{number$_1$ \optional{number$_2$ ...}}] A non-empty sequence of
+    numbers.
+\end{arguments}
+%
+\result%
+Computes the least common multiple of {\em number$_1$} up to {\em number$_n$}
+using the generic function \genericref{binary-lcm}.  Zero arguments is an error.  One
+argument returns {\em number$_1$}.
+
+\function{abs}
+%
+\begin{arguments}
+    \item[number] A number.
+\end{arguments}
+%
+\result%
+Computes the absolute value of {\em number}.
+
+\generic{zerop}
+%
+\begin{genericargs}
+    \item[number] A number.
+\end{genericargs}
+%
+\result%
+Compares {\em number\/} with the zero element of the class of {\em number\/}
+using the generic function \genericref{binary=}.
+
+\generic{negate}
+%
+\begin{genericargs}
+    \item[number, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the additive inverse of {\em number}.
+
+\function{signum}
+%
+\begin{arguments}
+    \item[number] A number.
+\end{arguments}
+%
+\result%
+Returns {\em number\/} if \genericref{zerop} applied to {\em number\/} is true.
+Otherwise returns the result of converting $\pm$1 to the class of {\em number\/}
+with the sign of {\em number}.
+
+\function{positivep}
+%
+\begin{arguments}
+    \item[number] A number.
+\end{arguments}
+%
+\result%
+Compares {\em number\/} against the zero element of the class of {\em number\/}
+using the generic function \genericref{binary<}.
+
+\function{negativep}
+%
+\begin{arguments}
+    \item[number] A number.
+\end{arguments}
+%
+\result%
+Compares {\em number\/} against the zero element of the class of {\em number\/}
+using the generic function \genericref{binary<}.
+
+\generic{binary+}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the sum of {\em number$_1$} and {\em number$_2$}.
+
+\generic{binary-}
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the difference of {\em number$_1$} and {\em number$_2$}.
+
+\generic{binary*}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the product of {\em number$_1$} and {\em number$_2$}.
+
+\generic{binary/}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the division of {\em number$_1$} by {\em number$_2$} expressed as a
+number of the class of the higher of the classes of the two arguments.  The sign
+of the result is positive if the signs the arguments are the same.  If the signs
+are different, the sign of the result is negative.  If the second argument is
+zero, the result might be zero or an error might be signalled (condition class:
+\conditionref{division-by-zero}\indexcondition{division-by-zero}).
+
+\genericlabeled{binary\protect\%}{binarypercent}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the value of {\em{}number$_1$}$-i*${\em{}number$_2$} expressed as a
+number of the class of the higher of the classes of the two arguments, for some
+integer $i$ such that, if {\em number$_2$} is non-zero, the result has the same
+sign as {\em number$_1$} and magnitude less then the magnitude of {\em
+    number$_2$}.  If the second argument is zero, the result might be zero or an
+error might be signalled (condition class:
+\conditionref{division-by-zero}\indexcondition{division-by-zero}).
+
+\generic{binary-mod}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the largest integral value not greater than {\em
+    number$_1$}$\over${\em{}number$_2$} expressed as a number of the class of
+the higher of the classes of the two arguments, such that if {\em number$_2$} is
+non-zero, the result has the same sign as {\em number$_2$} and magnitude less
+than {\em number$_2$}.  If the second argument is zero, the result might be zero
+or an error might be signalled (condition class:
+\conditionref{division-by-zero}\indexcondition{division-by-zero}).
+
+\generic{binary-gcd}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the greatest common divisor of {\em number$_1$} and {\em number$_2$}.
+
+\generic{binary-lcm}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Computes the lowest common multiple of {\em number$_1$} and {\em number$_2$}.
+%
+\end{optDefinition}

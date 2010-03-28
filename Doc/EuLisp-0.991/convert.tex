@@ -1,0 +1,110 @@
+\sclause{Conversion}
+\label{convert}
+\index{general}{level-0 modules!convert}
+\index{general}{convert!module}
+%
+\begin{optDefinition}
+The defined name of this module is {\tt convert}.
+
+The mechanism for the conversion of an instance of one class to an instance of
+another is defined by a user-extensible framework which has some similarity to
+the {\tt setter} mechanism.
+
+To the user, the interface to conversion is via the function {\tt convert},
+which takes an object and some class to which the object is to be converted.
+The target class is used to access an associated {\em converter\/} function, in
+fact, a generic function, which is applied to the source instance, dispatching
+on its class to select the method which implements the appropriate conversion.
+Thus, having defined a new class to which it may be desirable to convert
+instances of other classes, the programmer defines a generic function:
+
+{\small\syntax
+(defgeneric (converter \[{\em new-class}\]) (instance))
+\endsyntax}
+
+Hereafter, new converter methods may be defined for {\em new-class\/}
+using a similar extended syntax for {\tt defmethod}:
+
+{\small\syntax
+(defmethod (converter \[{\em new-class}\])
+           ((instance \[{\em other-class}\])))
+\endsyntax}
+
+The conversion is implemented by defining methods on the converter for {\em
+    new-class\/} which specialize on the source class.  This is also how methods
+are documented in this text: by an entry for a method on the converter function
+for the target class.  In general, the method for a given source class is
+defined in the section about that class, for example, converters from one kind
+of collection to another are defined in section~\ref{collection}, converters
+from string in section~\ref{string}, etc..
+
+\function{convert}
+%
+\begin{arguments}
+    \item[object] An instance of some class to be converted to an instance of
+    {\em class}.
+    %
+    \item[class] The class to which {\em object\/} is to be converted.
+\end{arguments}
+%
+\result%
+Returns an instance of {\em class\/} which is equivalent in some
+class-specific sense to {\em object\/}, which may be an instance of any type.
+Calls the converter function associated with {\em class\/} to carry out the
+conversion operation.  An error is signalled (condition: {\tt
+    no-converter}\indexcondition{no-converter}) if there is no associated
+function.  An error is signalled (condition: {\tt
+    no-applicable-method}\indexcondition{no-applicable-method}) if there is no
+method to convert an instance of the class of {\em object\/} to an instance of
+{\em class\/}.
+
+\condition{conversion-condition}{condition}
+%
+This is the general condition class for all conditions arising from conversion
+operations.
+%
+\begin{initoptions}
+    \item[source, \classref{object}] The object to be converted into an instance of
+    {\em target-class}.
+    %
+    \item[target-class, \classref{class}] The target class for the conversion
+    operation.
+\end{initoptions}
+%
+\remarks%
+Should be signalled by {\tt convert} or a converter method.
+
+\function{converter}
+%
+\begin{arguments}
+    \item[target-class] The class whose set of conversion methods is required.
+\end{arguments}
+%
+\result%
+The accessor returns the converter function for the class {\em
+    target-class}.  The converter is a generic-function with methods specialized
+on the class of the object to be converted.
+
+\setter{converter}
+%
+\begin{arguments}
+    \item[target-class] The class whose converter function is to be replaced.
+    %
+    \item[generic-function] The new converter function.
+\end{arguments}
+%
+\result%
+The new converter function.  The setter function replaces the converter
+function for the class {\em target-class\/} by {\em generic-function}.  The new
+converter function must be an instance of {\tt <generic-function>}.
+%
+\remarks%
+Converter methods from one class to another are defined in the section
+pertaining to the source class.
+%
+\seealso%
+Converter methods are defined for collections (\ref{collection}), double
+float (\ref{double-float}), fixed precision integer (\ref{fpi}),
+string (\ref{string}), symbol (\ref{symbol}), vector (\ref{vector}).
+%
+\end{optDefinition}

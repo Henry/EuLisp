@@ -1,0 +1,42 @@
+;;; EuLisp system 'youtoo'
+;;;   Interface file for module mop-defcl
+
+(definterface mop-defcl
+  (import (boot mop-prim mop-inspect mop-key mop-class mop-init mop-gf mop-meth)
+   syntax (_boot0 _mop-gf0 _mop-meth0)
+   full-import (boot1 boot mop-prim mop-init mop-class mop-inspect mop-key mop-gf mop-meth)
+   export (
+    ((name . remove-class) (pos . 4) (origin mop-defcl . remove-class))
+    ((name . find-slot) (pos . 8) (origin mop-defcl . find-slot))
+    ((name . predefined-reader) (pos . 6) (origin mop-defcl . predefined-reader))
+    ((name . predefined-writer) (pos . 3) (origin mop-defcl . predefined-writer))
+    ((name . slot-value-using-slot) (pos . 10) (origin mop-defcl . slot-value-using-slot))
+    ((name . add-subclass) (pos . 9) (origin mop-defcl . add-subclass))
+    ((name . slot-value) (pos . 7) (origin mop-defcl . slot-value))
+   )
+   local-literals (
+    (top-level . 73)
+    (predefined-writer . 72)
+    (predefined-reader . 71)
+    (slot-value . 70)
+    (find-slot . 69)
+    (make-slotds . 68)
+    (primitive-make-slot . 67)
+    (required: . 65)
+    ("slot ~a not found in class ~a" . 60)
+    (code . 53)
+    (anonymous . 52)
+    (|(setter slot-value)| . 51)
+    (|(method (setter slot-value-using-slot))| . 50)
+    ((setter slot-value-using-slot) . 49)
+    (setter . 48)
+    (|(method slot-value-using-slot)| . 47)
+    (|(method remove-class)| . 46)
+    (|(method add-subclass)| . 45)
+    (slot-value-using-slot . 44)
+    (remove-class . 43)
+    (add-subclass . 42)
+   )
+   literals (
+   )
+))

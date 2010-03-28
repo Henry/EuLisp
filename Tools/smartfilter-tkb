@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# echo sed "s/$1/$2/" 1>&2
+sed "s/$1/$2/" <$3 >$3.new
+mv $3.new $3

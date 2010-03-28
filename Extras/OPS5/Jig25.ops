@@ -1,0 +1,216 @@
+(literalize Jigsawedge      ;element class representing an piece edge
+     pieceid                ;1 to 9 pieces for a 9 piece puzzle
+     edgeno                 ;1 to 24 for a 9 piece puzzle
+     piecetype              ;boundary or nil
+     piececolor             ;blue,red,or grey
+)
+
+(literalize start)          ;element class for initialization
+
+
+
+  (p fitjigsawpuzzle--deletion
+  { <r4> (Jigsawedge ^pieceid <x4> ^edgeno <y4> ^piecetype boundary) }
+  -(Jigsawedge ^pieceid { <w4> <> <x4> } ^edgeno <y4>)
+ -->
+ (write (crlf) 4 deleting edges <y4> on boundary piece <x4> (crlf))
+ (remove <r4>))
+
+
+
+
+(p fitjigsawpuzzle--boundary-color
+ { <r11> (Jigsawedge ^pieceid <x> ^edgeno <y> ^piecetype boundary
+                   ^piececolor <z>) }
+ { <r12> (Jigsawedge ^pieceid { <w> <> <x> } ^edgeno <y> ^piecetype boundary
+                   ^piececolor <z>) }
+ -->
+ (write (crlf) 1 put pieces <x> and <w> on boundary and color criterion <z>
+  together on edge <y> (crlf))
+ (remove <r11>)
+ (remove <r12>))
+
+
+
+
+(p fitjigsawpuzzle--boundary
+    { <r21> (Jigsawedge ^pieceid <x1> ^edgeno <y1> ^piecetype
+boundary) }
+  { <r22> (Jigsawedge ^pieceid { <w1> <> <x1> } ^edgeno <y1>
+                      ^piecetype boundary) }
+-->
+(write(crlf) 2 put pieces <x1> and <w1> on boundary criterion together on
+ edge <y1> (crlf))
+ (remove <r21>)
+ (remove <r22>))
+
+
+
+
+(p fitjigsawpuzzle--color
+  { <r31> (Jigsawedge ^pieceid <x3> ^edgeno <y3> ^piececolor <z3>) }
+  { <r32> (Jigsawedge ^pieceid { <w3> <> <x3> } ^edgeno <y3>
+^piececolor <z3>) }
+  -->
+  (write (crlf) 3 put pieces <x3> and <w3> together on color criterion <z3>
+   on edge <y3> (crlf))
+  (remove <r31>)
+  (remove <r32>))
+
+
+
+(p fitjigsawpuzzle--
+ { <r51> (Jigsawedge ^pieceid <x2> ^edgeno <y2>) }
+ { <r52> (Jigsawedge ^pieceid { <w2> <> <x2> } ^edgeno <y2>) } 
+-->
+(write (crlf) 5 put pieces <x2> and <w2> on random criterion together on
+ edge <y2> (crlf))
+(remove <r51>)
+(remove <r52>))
+
+
+
+
+
+
+ (p Initialize
+    { (start) <initialize> }
+
+  -->
+
+(make Jigsawedge ^pieceid 1 ^edgeno 1 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 1 ^edgeno 2 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 1 ^edgeno 3 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 1 ^edgeno 4 ^piecetype boundary ^piececolor red)
+
+(make Jigsawedge ^pieceid 2 ^edgeno 3 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 2 ^edgeno 5 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 2 ^edgeno 6 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 2 ^edgeno 7 ^piecetype boundary ^piececolor red)
+
+(make Jigsawedge ^pieceid 3 ^edgeno 6 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 3 ^edgeno 8 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 3 ^edgeno 9 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 3 ^edgeno 10 ^piecetype boundary ^piececolor red)
+
+(make Jigsawedge ^pieceid 4 ^edgeno 11 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 4 ^edgeno 12 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 4 ^edgeno 13 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 4 ^edgeno  9 ^piecetype boundary ^piececolor red)
+
+(make Jigsawedge ^pieceid 5 ^edgeno 12 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 5 ^edgeno 14 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 5 ^edgeno 15 ^piecetype boundary ^piececolor red)
+(make Jigsawedge ^pieceid 5 ^edgeno 16 ^piecetype boundary ^piececolor red)
+
+(make Jigsawedge ^pieceid 6 ^edgeno 4  ^piecetype boundary ^piececolor blue)
+(make Jigsawedge ^pieceid 6 ^edgeno 17 ^piecetype boundary ^piececolor blue)
+(make Jigsawedge ^pieceid 6 ^edgeno 18 ^piecetype boundary ^piececolor blue)
+(make Jigsawedge ^pieceid 6 ^edgeno 19 ^piecetype boundary ^piececolor blue)
+
+(make Jigsawedge ^pieceid 7 ^edgeno 7  ^piececolor blue)
+(make Jigsawedge ^pieceid 7 ^edgeno 18  ^piececolor blue)
+(make Jigsawedge ^pieceid 7 ^edgeno 20  ^piececolor blue)
+(make Jigsawedge ^pieceid 7 ^edgeno 21  ^piececolor blue)
+
+(make Jigsawedge ^pieceid 8 ^edgeno 10  ^piececolor blue)
+(make Jigsawedge ^pieceid 8 ^edgeno 20  ^piececolor blue)
+(make Jigsawedge ^pieceid 8 ^edgeno 22  ^piececolor blue)
+(make Jigsawedge ^pieceid 8 ^edgeno 23  ^piececolor blue)
+
+(make Jigsawedge ^pieceid 9 ^edgeno 22  ^piececolor blue)
+(make Jigsawedge ^pieceid 9 ^edgeno 13  ^piececolor blue)
+(make Jigsawedge ^pieceid 9 ^edgeno 24  ^piececolor blue)
+(make Jigsawedge ^pieceid 9 ^edgeno 25  ^piececolor blue)
+
+(make Jigsawedge ^pieceid 10 ^edgeno 24  ^piecetype boundary ^piececolor blue)
+(make Jigsawedge ^pieceid 10 ^edgeno 16 ^piecetype boundary ^piececolor blue)
+(make Jigsawedge ^pieceid 10 ^edgeno 27 ^piecetype boundary ^piececolor blue)
+(make Jigsawedge ^pieceid 10 ^edgeno 26 ^piecetype boundary ^piececolor blue)
+
+(make Jigsawedge ^pieceid 11 ^edgeno 29  ^piecetype boundary ^piececolor green)
+(make Jigsawedge ^pieceid 11 ^edgeno 30 ^piecetype boundary ^piececolor green)
+(make Jigsawedge ^pieceid 11 ^edgeno 28 ^piecetype boundary ^piececolor green)
+(make Jigsawedge ^pieceid 11 ^edgeno 19 ^piecetype boundary ^piececolor green)
+
+(make Jigsawedge ^pieceid 12 ^edgeno 21  ^piececolor green)
+(make Jigsawedge ^pieceid 12 ^edgeno 30  ^piececolor green)
+(make Jigsawedge ^pieceid 12 ^edgeno 31  ^piececolor green)
+(make Jigsawedge ^pieceid 12 ^edgeno 32  ^piececolor green)
+
+(make Jigsawedge ^pieceid 13 ^edgeno 31  ^piececolor green)
+(make Jigsawedge ^pieceid 13 ^edgeno 23  ^piececolor green)
+(make Jigsawedge ^pieceid 13 ^edgeno 33  ^piececolor green)
+(make Jigsawedge ^pieceid 13 ^edgeno 34  ^piececolor green)
+
+(make Jigsawedge ^pieceid 14 ^edgeno 25  ^piececolor green)
+(make Jigsawedge ^pieceid 14 ^edgeno 36  ^piececolor green)
+(make Jigsawedge ^pieceid 14 ^edgeno 33  ^piececolor green)
+(make Jigsawedge ^pieceid 14 ^edgeno 35  ^piececolor green)
+
+(make Jigsawedge ^pieceid 15 ^edgeno 27  ^piecetype boundary ^piececolor green)
+(make Jigsawedge ^pieceid 15 ^edgeno 35  ^piecetype boundary ^piececolor green)
+(make Jigsawedge ^pieceid 15 ^edgeno 38  ^piecetype boundary ^piececolor green)
+(make Jigsawedge ^pieceid 15 ^edgeno 37  ^piecetype boundary ^piececolor green)
+
+(make Jigsawedge ^pieceid 16 ^edgeno 39  ^piecetype boundary ^piececolor violet)
+(make Jigsawedge ^pieceid 16 ^edgeno 40  ^piecetype boundary ^piececolor violet)
+(make Jigsawedge ^pieceid 16 ^edgeno 29  ^piecetype boundary ^piececolor violet)
+(make Jigsawedge ^pieceid 16 ^edgeno 41  ^piecetype boundary ^piececolor violet)
+
+(make Jigsawedge ^pieceid 17 ^edgeno 42  ^piececolor violet)
+(make Jigsawedge ^pieceid 17 ^edgeno 43  ^piececolor violet)
+(make Jigsawedge ^pieceid 17 ^edgeno 32  ^piececolor violet)
+(make Jigsawedge ^pieceid 17 ^edgeno 41  ^piececolor violet)
+
+(make Jigsawedge ^pieceid 18 ^edgeno 42  ^piececolor violet)
+(make Jigsawedge ^pieceid 18 ^edgeno 44  ^piececolor violet)
+(make Jigsawedge ^pieceid 18 ^edgeno 45  ^piececolor violet)
+(make Jigsawedge ^pieceid 18 ^edgeno 34  ^piececolor violet)
+
+(make Jigsawedge ^pieceid 19 ^edgeno 46  ^piececolor violet)
+(make Jigsawedge ^pieceid 19 ^edgeno 47  ^piececolor violet)
+(make Jigsawedge ^pieceid 19 ^edgeno 36  ^piececolor violet)
+(make Jigsawedge ^pieceid 19 ^edgeno 44  ^piececolor violet)
+
+(make Jigsawedge ^pieceid 20 ^edgeno 46  ^piecetype boundary ^piececolor violet)
+(make Jigsawedge ^pieceid 20 ^edgeno 48  ^piecetype boundary ^piececolor violet)
+(make Jigsawedge ^pieceid 20 ^edgeno 49  ^piecetype boundary ^piececolor violet)
+(make Jigsawedge ^pieceid 20 ^edgeno 38  ^piecetype boundary ^piececolor violet)
+
+(make Jigsawedge ^pieceid 21 ^edgeno 40  ^piecetype boundary ^piececolor white)
+(make Jigsawedge ^pieceid 21 ^edgeno 50  ^piecetype boundary ^piececolor white)
+(make Jigsawedge ^pieceid 21 ^edgeno 52  ^piecetype boundary ^piececolor white)
+(make Jigsawedge ^pieceid 21 ^edgeno 51  ^piecetype boundary ^piececolor white)
+
+(make Jigsawedge ^pieceid 22 ^edgeno 43  ^piececolor white)
+(make Jigsawedge ^pieceid 22 ^edgeno 53  ^piececolor white)
+(make Jigsawedge ^pieceid 22 ^edgeno 54  ^piececolor white)
+(make Jigsawedge ^pieceid 22 ^edgeno 52  ^piececolor white)
+
+(make Jigsawedge ^pieceid 23 ^edgeno 45  ^piececolor white)
+(make Jigsawedge ^pieceid 23 ^edgeno 53  ^piececolor white)
+(make Jigsawedge ^pieceid 23 ^edgeno 55  ^piececolor white)
+(make Jigsawedge ^pieceid 23 ^edgeno 56  ^piececolor white)
+
+(make Jigsawedge ^pieceid 24 ^edgeno 47  ^piececolor white)
+(make Jigsawedge ^pieceid 24 ^edgeno 55  ^piececolor white)
+(make Jigsawedge ^pieceid 24 ^edgeno 57  ^piececolor white)
+(make Jigsawedge ^pieceid 24 ^edgeno 58  ^piececolor white)
+
+(make Jigsawedge ^pieceid 25 ^edgeno 49  ^piecetype boundary ^piececolor white)
+(make Jigsawedge ^pieceid 25 ^edgeno 57  ^piecetype boundary ^piececolor white)
+(make Jigsawedge ^pieceid 25 ^edgeno 59  ^piecetype boundary ^piececolor white)
+(make Jigsawedge ^pieceid 25 ^edgeno 60  ^piecetype boundary ^piececolor white)
+
+(remove <initialize>))
+
+
+
+
+
+
+
+
+
+

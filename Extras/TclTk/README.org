@@ -1,0 +1,64 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:              Tcl/Tk connection for Youtoo 0.93
+#+AUTHOR:      Juli Garcia Moreno, Julian Padget and Andreas Kind
+#+DATE:               July 1997\\Updated February 2010
+#+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
+#+OPTIONS: ^:{} email:nil
+
+* Copyright
+  Youtoo is free software; you can redistribute it and/or modify it under the
+  terms of the GNU General Public License as published by the Free Software
+  Foundation; either version 2 of the License, or (at your option) any later
+  version.  See the file COPYING in this directory, for a description of the GNU
+  General Public License terms under which you can copy the files.
+
+* [[file:../../README.org][Youtoo README]]
+
+* General Description
+  This directory contains the Tcl/Tk connection for youtoo. This file tells you
+  how to install it.
+
+* [[file:Doc/index.html][Documentation]]
+  The HTML documentation for this module is available
+  [[http://www.cs.bath.ac.uk/~jap/ma5jg/youtoo-Tk-docs/][online]] and in the
+  [[file:Doc/index.html][Doc]] sub-directory.
+
+* Installation
+  + Edit the /Makefile/ (if necessary).
+  + Run 'make' in directory /TclTk/
+  + Add '-ltcltk -lX11 -ltk83 -ltcl83' to CLIBS in /youtoo/\.eulrc.${ARCH}/;
+    perhaps also -ldl (eg for Linux) is necessary
+  + Add '-L<EUL_X_LIB_DIR> -L<EUL_TCL_LIB_DIR> -L<EUL_TK_LIB_DIR>'
+    to CLIBS in EuLysses/.eulrc if necessary.
+  + Add '-I<EUL_X_INCLUDE_DIR> -I<EUL_TCL_INCLUDE_DIR> -I<EUL_TK_INCLUDE_DIR>"
+    to CFLAGS in EuLysses.eulrc if necessary.
+  + Test with 'cd /Test/; /Bin.${ARCH}/youtoo.sh/ tk_graph_editor -l level1 -l
+    tcltk'
+
+*** Installation of the you2tk' youtoo/Tk Interpreter
+    + Run 'make you2tk'
+    + make sure your ~LD_LIBRARY_PATH~ environment variable is set correctly
+      (you could edit EuLysses/you2tk to add <EUL_TCL_LIB_DIR> <EUL_TK_LIB_DIR>
+      <EUL_X_LIB_DIR>)
+
+***** Example test for you2tk
+      Run 'Bin.${ARCH}/you2tk.sh' and type
+      #+BEGIN_SRC lisp
+      (defun foo (b x)
+        (print b)
+        (tk-button-flash b))
+
+        (let ((b1 (tk-make-button () text: "foo" command: foo args: '(self: 42)))
+          (b2 (tk-make-button () text: "exit" fg: "red" command: tk-exit)))
+          (tk-pack b1 b2 padx: "10" pady: "3"))
+
+        (tk-main-loop)
+
+      #+END_SRC
+
+* WARNING
+  The original version of the Tcl/Tk code used various Tk internals that changed
+  completely between the 7.6/4.2 and 8.3.4/8.3.4 releases.  The code has since
+  been crudely beaten into a semblance of submission, but it is surely full of
+  resentment and bugs.

@@ -1,0 +1,164 @@
+\sclause{Formatted-IO}
+\index{general}{formatted-io}
+\index{general}{formatted-io!module}
+\label{formatted-io}
+\index{general}{level-0 modules!formatted-io}
+%
+\begin{optDefinition}
+\noindent
+The defined name of this module is {\tt formatted-io}.
+%
+\function{scan}
+%
+\begin{arguments}
+    \item[format-string] A string containing format directives.
+    \item[\optional{stream}] A stream from which input is to be taken.
+\end{arguments}
+%
+\result%
+Returns a list of the objects read from {\em stream}.
+%
+\remarks This function provides support for formatted input.  The {\em
+    format-string\/} specifies reading directives, and inputs are matched
+according to these directives.  An error is signaled (condition:
+\conditionref{scan-mismatch}\indexcondition{scan-mismatch}) if the class of the
+object read is not compatible with the specified directive.  The second
+(optional) argument specifies a stream from which to take input.  If {\em
+    stream\/} is not supplied, input is taken from \instanceref{stdin}.  Scan
+returns a list of the objects read in.
+%
+\begin{description}
+    \item[{\tt\textasciitilde a} any] any object.
+
+    \item[{\tt\textasciitilde b} binary] an integer in binary format.
+
+    \item[{\tt\textasciitilde c} character] a single character
+
+    \item[{\tt\textasciitilde d} decimal] an integer decimal format.
+
+    \item[{\tt\textasciitilde }\optional{{\em n}}{\tt e}] a exponential-format
+    floating-point number.
+
+    \item[{\tt\textasciitilde }\optional{{\em n}}{\tt f}] a fixed-format floating-point
+    number.
+
+    \item[{\tt\textasciitilde o} octal] an integer in octal format.
+
+    \item[{\tt\textasciitilde r} radix] an integer in specified radix format.
+
+    \item[{\tt\textasciitilde x} hexadecimal] an integer in hexadecimal format.
+
+    \item[{\tt\textasciitilde \%} newline] matches a \verb+\#newline+ character in the
+    input.
+\end{description}
+
+\condition{scan-mismatch}{stream-condition}
+%
+\begin{initoptions}
+    \item[format-string, string] The value of this option is the format string
+    that was passed to \functionref{scan}.
+    \item[input, list] The value of this option is a list of the items read by
+    \functionref{scan} up to and including the object that caused the condition
+    to be signaled.
+\end{initoptions}
+%
+\remarks%
+This condition is signalled by \functionref{scan} if the format string does not
+match the data input from {\em stream}.
+
+\function{format}
+%
+\begin{arguments}
+    \item[stream] One of \nil, \true\/ or a stream.
+    \item[format-string] A string containing format directives.
+    \item[\optional{object$_1$ \ldots}] A sequence of objects to be output
+    on {\em stream}.
+\end{arguments}
+%
+\result%
+Returns a list comprising those objects left in the sequence after the
+last format directive was processed.
+%
+\remarks%
+Has side-effect of outputting {\em object\/}s according the formats specified in
+{\em format-string}.  If {\em stream\/} is \true\/ the output is to the current
+output stream.  If {\em stream\/} is \nil, a formatted string is returned as the
+result of the call.  Otherwise {\em stream\/} must be a valid output stream.
+Characters are output as if the string were output by the \functionref{prin}
+function with the exception of those prefixed by {\em tilde\/}---graphic
+representation {\tt\textasciitilde}---which are treated specially as detailed in
+the following list.  These formatting directives are intentionally compatible
+with the facilities defined for the function {\tt fprintf} in ISO/IEC
+9899~:~1990.
+%
+\begin{description}
+    \item[{\tt\textasciitilde a} any]%
+    uses \functionref{prin} to output the argument.
+
+    \item[{\tt\textasciitilde b} binary]%
+    the argument must be an integer and is output in binary notation
+    (Table~\ref{integer-syntax}).
+
+    \item[{\tt\textasciitilde c} character]%
+    the argument must be a character and is output using \functionref{write}
+    (Table~\ref{character-syntax}).
+
+    \item[{\tt\textasciitilde d} decimal]%
+    the argument must be an integer and is output using \functionref{write}
+    (Table~\ref{integer-syntax}).
+
+    \item[{\tt\textasciitilde}\optional{{\em m}}\optional{{\tt.}{\em n}}{\tt e}
+    exponential-format floating-point]%
+    the argument must be a floating point number.  It is output in the style
+    \mbox{\em\optional{-}d.ddd{\tt{e}}$\pm$dd}, in a field of width {\em m\/}
+    characters, where there are {\em n\/} precision digits after the decimal
+    point, or 6 digits, if {\em n\/} is not specified
+    (Table~\ref{float-syntax}).  If the value to be output has fewer characters
+    than {\em m\/} it is padded on the left with spaces.
+
+    \item[{\tt\textasciitilde}\optional{{\em m}}\optional{{\tt.}{\em n}}{\tt f}
+    fixed-format floating-point]%
+    the argument must be a floating point number.  It is output in the style
+    \mbox{\em\optional{-}ddd.ddd}, in a field of width {\em m\/} characters,
+    where the are {\em n\/} precision digits after the decimal point, or 6
+    digits, if {\em n\/} is not specified (Table~\ref{float-syntax}).  The value
+    is rounded to the appropriate number of digits.  If the value to be output
+    has fewer characters than {\em m\/} it is padded on the left with spaces.
+
+    \item[{\tt\textasciitilde}\optional{{\em m}}\optional{{\tt.}{\em n}}{\tt g}
+    generalized floating-point]%
+    the argument must be a floating point number.  It is output in either
+    fixed-format or exponential notation as appropriate
+    (Table~\ref{float-syntax}).
+
+    \item[{\tt\textasciitilde o} octal]%
+    the argument must be an integer and is output in octal notation
+    (Table~\ref{integer-syntax}).
+
+    \item[{\tt\textasciitilde}{\em n}{\tt r} radix]%
+    the argument must be an integer and is output in radix {\em n\/} notation
+    (Table~\ref{integer-syntax}).
+
+    \item[{\tt\textasciitilde s} s-expression]%
+    uses \functionref{write} to output the argument (Table~\ref{object-syntax}).
+
+    \item[{\tt\textasciitilde}\optional{\em{n}}\true\/ tab]%
+    output sufficient spaces to reach the next tab-stop, if {\em n\/} is not
+    specified, or the {\em n$^{th}$} tab stop if it is.
+
+    \item[{\tt\textasciitilde x} hexadecimal]%
+    the argument must be an integer and is output in hexadecimal notation
+    (Table~\ref{integer-syntax}).
+
+    \item[{\tt\textasciitilde \%} newline]%
+    output a \verb+\#newline+ character using {\tt newline}.
+
+    \item[{\tt\textasciitilde \&} conditional newline]%
+    output a \verb+\#newline+ character using {\tt newline}, if it cannot be
+    determined that the output stream is at the beginning of a fresh line.
+
+    \item[{\tt\textasciitilde \textasciitilde} tilde]%
+    output a tilde character using \functionref{prin}.
+\end{description}
+%
+\end{optDefinition}
