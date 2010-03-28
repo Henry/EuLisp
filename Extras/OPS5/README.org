@@ -2,7 +2,7 @@
 #
 #+TITLE:            OPS5 Rule-Based System for Youtoo 0.93
 #+AUTHOR:              Tracy Gardner and Andreas Kind
-#+DATE:               July 1997\\Updated February 2010
+#+DATE:               July 1997; Updated February 2010
 #+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
 #+EMAIL: no-reply
 #+OPTIONS: ^:{} email:nil
