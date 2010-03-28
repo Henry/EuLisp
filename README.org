@@ -1,9 +1,10 @@
 #                            -*- mode: org; -*-
 #+TITLE:                         *EuLisp*
 #+AUTHOR: nil
+#+EMAIL: no-reply
 #+OPTIONS: author:nil email:nil ^:{}
 
-* [[file:./COPYING][Copyright]]
+* [[http://henry.github.com/EuLisp/COPYING][Copyright]]
   Youtoo is free software; you can redistribute it and/or modify it under the
   terms of the GNU General Public License as published by the Free Software
   Foundation; either version 2 of the License, or (at your option) any later
@@ -20,7 +21,7 @@
     This release of Youtoo started life as
     [[http://www.cs.bath.ac.uk/~jap/EuLisp/youtoo/youtoo0.93.tar.gz][Youtoo-0.93]]
     developed by Andreas Kind, Julian Padget and others.  More details are
-    available from the original [[file:./README.orig][README]] file and
+    available from the original [[http://henry.github.com/EuLisp/README.orig][README]] file and
     [[http://www.cs.bath.ac.uk/~jap/ak1/youtoo/][the youtoo home page]].  The
     /b2h/ and /i2doc/ tools needed to bootstrap youtoo were reverse engineered
     and provided by
@@ -264,53 +265,52 @@
     Directory /Examples/ contains modules for explanation and reuse.
 
 * Extras
-*** [[file:Extras/Bignum/README.org][GNU Bignum]]: /Extras/Bignum/
+*** [[http://henry.github.com/EuLisp/Extras/Bignum/README.html][GNU Bignum]]: /Extras/Bignum/
     Danius Michaelides wrote a port to the GNU bignum library (gmp).
-*** [[file:Extras/MPI/README.org][MPI]]: /Extras/MPI/
+*** [[http://henry.github.com/EuLisp/Extras/MPI/README.html][MPI]]: /Extras/MPI/
 
-*** [[file:Extras/TclTk/README.org][Tcl/Tk]]: /Extras/TclTk/
+*** [[http://henry.github.com/EuLisp/Extras/TclTk/README.html][Tcl/Tk]]: /Extras/TclTk/
 
-*** [[file:Extras/Fthread/README.org][Foreign thread libraries]]: /Extras/Fthread/
+*** [[http://henry.github.com/EuLisp/Extras/Fthread/README.html][Foreign thread libraries]]: /Extras/Fthread/
 
-*** [[file:Extras/Scheme/README.org][Scheme]]: /Extras/Scheme/
+*** [[http://henry.github.com/EuLisp/Extras/Scheme/README.html][Scheme]]: /Extras/Scheme/
     Modules /./Extras/Scheme/scheme0.em/ and /./Extras/Scheme/scheme.em/
     provide support for writing Scheme programs with youtoo.
 
-*** [[file:Extras/Matching/README.org][Matching]]: /Extras/Match/
+*** [[http://henry.github.com/EuLisp/Extras/Matching/README.html][Matching]]: /Extras/Match/
     Modulized version of match-slib.scm badly hacked for EuLisp.
 
-*** [[file:Extras/OS/README.org][Object serialisation]]: /Extras/OS/
+*** [[http://henry.github.com/EuLisp/Extras/OS/README.html][Object serialisation]]: /Extras/OS/
 Julian Padget\    includes support for closures and threads.
 
-*** [[file:Extras/OPS5/README.org][OPS5 rule-based system]] : /Extras/OPS5/
+*** [[http://henry.github.com/EuLisp/Extras/OPS5/README.html][OPS5 rule-based system]] : /Extras/OPS5/
     An object-oriented version of the OPS5 rule-based system.
 
-***  [[file:Extras/Pipe/README.org][Pipes and forked child processes]]:  /Extras/Pipe/
+***  [[http://henry.github.com/EuLisp/Extras/Pipe/README.html][Pipes and forked child processes]]:  /Extras/Pipe/
     Thanks to Rob Simmons there is support for pipes to forked child
     processes.
 
 * Documentation
 *** EuLisp definition
     is provided in both HTML and PDF formats:
-    + [[file:Doc/EuLisp-0.991/html/eulisp.html][EuLisp Definition Version 0.991 (HTML)]]
-    + [[file:Doc/EuLisp-0.991/html1/eulisp.html][EuLisp Definition Version 0.991 (HTML single page)]]
-    + [[file:Doc/EuLisp-0.991/eulisp.pdf][EuLisp Definition Version 0.991 (PDF)]]
+    + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/html/eulisp.html][EuLisp Definition Version 0.991 (HTML)]]
+    + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/eulisp.pdf][EuLisp Definition Version 0.991 (PDF)]]
 *** EuLisp-1.0 Proposals
     are in the folowing
-    [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]] and
+    [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]] and
     discussed in the minutes of the
-    [[file:Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt][meeting on
+    [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt][meeting on
     19/11/93]] and in the
-    [[file:Doc/EuLisp-0.991/Proposals/nov93.txt][preceding]] and
-    [[file:Doc/EuLisp-0.991/Proposals/dec93.txt][subsequent]] Email correspondence.
+    [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/nov93.txt][preceding]] and
+    [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/dec93.txt][subsequent]] Email correspondence.
     The following reports are discussed in the above:
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/eulisp-proposals.ps][eulisp-proposals.ps]]
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/genarith.ps][genarith.ps]]
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/adv-genarith.ps][adv-genarith.ps]]
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps][eulisp-ffi.ps]]
+    + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Reports/eulisp-proposals.ps][eulisp-proposals.ps]]
+    + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Reports/genarith.ps][genarith.ps]]
+    + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Reports/adv-genarith.ps][adv-genarith.ps]]
+    + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps][eulisp-ffi.ps]]
 *** Bindings
     The current set of supported bindings in Youtoo are in the file
-    [[file:Doc/bindings.txt][bindings.txt]]
+    [[http://henry.github.com/EuLisp/Doc/bindings.txt][bindings.txt]]
 
 * Recent Developments
 *** Support for 64bit Operation
@@ -335,4 +335,4 @@ Julian Padget\    includes support for closures and threads.
     and the EuLisp-0.99 definition and the documents relating to the creation of
     EuLisp-1.0.
 
-* [[file:./TODO.org][To Do]]
+* [[http://henry.github.com/EuLisp/TODO.html][To Do]]
