@@ -14,6 +14,7 @@ include ../Lib.$(ARCH)/Makefile
 ## ----------------------------------------------------------------------------
 
 EXTRAS_DIRS = Bignum OS OPS5 Pipe Match Scheme TclTk
+EXTRAS_DOC_DIRS = $(EXTRAS_DIRS) MPI
 
 ## ----------------------------------------------------------------------------
 ## Commands
@@ -34,7 +35,7 @@ test:
 .PHONY: README
 README:
 	@echo ".BUILDING README.html in EXTRASs ..."
-	@$(call makeAll,$(EXTRAS_DIRS),$@)
+	@$(call makeAll,$(EXTRAS_DOC_DIRS),$@)
 	@echo ".DONE."
 
 .PHONY: clean
