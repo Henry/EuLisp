@@ -4,7 +4,7 @@ EuLisp
 Aim
 ---
 
-This version of the Youtoo implementation and the EuLisp definition are being
+This version of the EuLisp definition and Youtoo implementation are being
 developed in an attempt to reconcile the differences with the ultimate aim to
 create a consistent definition and implementation which is as close to
 EuLisp-1.0 as is possible to ascertain from the remaining documents related to
