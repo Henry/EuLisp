@@ -7,87 +7,87 @@
 #define eul_instr_branch(x) (eul_instr_info[(x)].branch)
 
 struct {int inlined_arg_size, branch;} eul_instr_info[256]= {
-  {0, 0}, /* instruction 0 (0): noop */
-  {0, 0}, /* instruction 1 (1): primitive-allocate */
-  {0, 0}, /* instruction 2 (2): primitive-ref */
-  {0, 0}, /* instruction 3 (3): set-primitive-ref */
-  {0, 0}, /* instruction 4 (4): primitive-class-of */
-  {0, 0}, /* instruction 5 (5): set-primitive-class-of */
-  {0, 0}, /* instruction 6 (6): primitive-size */
-  {0, 0}, /* instruction 7 (7): test-and-set-lock */
-  {0, 0}, /* instruction 8 (8): primitive-relative-ref */
-  {0, 0}, /* instruction 9 (9): set-primitive-relative-ref */
+  {0, 0}, /* instruction 0 (0): (undefined) */
+  {0, 0}, /* instruction 1 (1): (undefined) */
+  {0, 0}, /* instruction 2 (2): (undefined) */
+  {0, 0}, /* instruction 3 (3): (undefined) */
+  {0, 0}, /* instruction 4 (4): (undefined) */
+  {0, 0}, /* instruction 5 (5): (undefined) */
+  {0, 0}, /* instruction 6 (6): (undefined) */
+  {0, 0}, /* instruction 7 (7): (undefined) */
+  {0, 0}, /* instruction 8 (8): (undefined) */
+  {0, 0}, /* instruction 9 (9): (undefined) */
   {0, 0}, /* instruction 10 (a): (undefined) */
-  {0, 0}, /* instruction 11 (b): string-ref */
-  {0, 0}, /* instruction 12 (c): set-string-ref */
-  {0, 0}, /* instruction 13 (d): CAR */
-  {0, 0}, /* instruction 14 (e): CDR */
-  {0, 0}, /* instruction 15 (f): cons */
-  {0, 0}, /* instruction 16 (10): car */
-  {0, 0}, /* instruction 17 (11): cdr */
-  {0, 0}, /* instruction 18 (12): null */
-  {1, 0}, /* instruction 19 (13): listify */
-  {0, 0}, /* instruction 20 (14): fpi-sum */
-  {0, 0}, /* instruction 21 (15): fpi-difference */
-  {0, 0}, /* instruction 22 (16): fpi-product */
-  {0, 0}, /* instruction 23 (17): fpi-quotient */
-  {0, 0}, /* instruction 24 (18): fpi-remainder */
-  {0, 0}, /* instruction 25 (19): fpi-equal */
-  {0, 0}, /* instruction 26 (1a): fpi-lt */
-  {0, 0}, /* instruction 27 (1b): stack-ref0 */
-  {0, 0}, /* instruction 28 (1c): stack-ref1 */
-  {0, 0}, /* instruction 29 (1d): stack-ref2 */
-  {0, 0}, /* instruction 30 (1e): swap */
-  {1, 0}, /* instruction 31 (1f): stack-ref */
-  {1, 0}, /* instruction 32 (20): set-stack-ref */
-  {1, 0}, /* instruction 33 (21): pop */
-  {1, 0}, /* instruction 34 (22): nobble */
-  {4, 0}, /* instruction 35 (23): static-ref */
-  {4, 0}, /* instruction 36 (24): binding-ref */
-  {4, 0}, /* instruction 37 (25): set-binding-ref */
-  {4, 0}, /* instruction 38 (26): static-fpi-ref */
-  {1, 0}, /* instruction 39 (27): static-character-ref */
-  {1, 0}, /* instruction 40 (28): register-ref */
-  {1, 0}, /* instruction 41 (29): set-register-ref */
-  {0, 0}, /* instruction 42 (2a): pop1 */
-  {0, 0}, /* instruction 43 (2b): fpi-inc */
-  {0, 0}, /* instruction 44 (2c): fpi-dec */
-  {0, 0}, /* instruction 45 (2d): fpi-zerop */
+  {0, 0}, /* instruction 11 (b): (undefined) */
+  {0, 0}, /* instruction 12 (c): (undefined) */
+  {0, 0}, /* instruction 13 (d): (undefined) */
+  {0, 0}, /* instruction 14 (e): (undefined) */
+  {0, 0}, /* instruction 15 (f): (undefined) */
+  {0, 0}, /* instruction 16 (10): (undefined) */
+  {0, 0}, /* instruction 17 (11): (undefined) */
+  {0, 0}, /* instruction 18 (12): (undefined) */
+  {0, 0}, /* instruction 19 (13): (undefined) */
+  {0, 0}, /* instruction 20 (14): (undefined) */
+  {0, 0}, /* instruction 21 (15): (undefined) */
+  {0, 0}, /* instruction 22 (16): (undefined) */
+  {0, 0}, /* instruction 23 (17): (undefined) */
+  {0, 0}, /* instruction 24 (18): (undefined) */
+  {0, 0}, /* instruction 25 (19): (undefined) */
+  {0, 0}, /* instruction 26 (1a): (undefined) */
+  {0, 0}, /* instruction 27 (1b): (undefined) */
+  {0, 0}, /* instruction 28 (1c): (undefined) */
+  {0, 0}, /* instruction 29 (1d): (undefined) */
+  {0, 0}, /* instruction 30 (1e): (undefined) */
+  {0, 0}, /* instruction 31 (1f): (undefined) */
+  {0, 0}, /* instruction 32 (20): (undefined) */
+  {0, 0}, /* instruction 33 (21): (undefined) */
+  {0, 0}, /* instruction 34 (22): (undefined) */
+  {0, 0}, /* instruction 35 (23): (undefined) */
+  {0, 0}, /* instruction 36 (24): (undefined) */
+  {0, 0}, /* instruction 37 (25): (undefined) */
+  {0, 0}, /* instruction 38 (26): (undefined) */
+  {0, 0}, /* instruction 39 (27): (undefined) */
+  {0, 0}, /* instruction 40 (28): (undefined) */
+  {0, 0}, /* instruction 41 (29): (undefined) */
+  {0, 0}, /* instruction 42 (2a): (undefined) */
+  {0, 0}, /* instruction 43 (2b): (undefined) */
+  {0, 0}, /* instruction 44 (2c): (undefined) */
+  {0, 0}, /* instruction 45 (2d): (undefined) */
   {0, 0}, /* instruction 46 (2e): (undefined) */
   {0, 0}, /* instruction 47 (2f): (undefined) */
   {0, 0}, /* instruction 48 (30): (undefined) */
   {0, 0}, /* instruction 49 (31): (undefined) */
-  {4, 1}, /* instruction 50 (32): branch */
-  {4, 1}, /* instruction 51 (33): branch-true */
-  {4, 1}, /* instruction 52 (34): branch-nil */
-  {1, -1}, /* instruction 53 (35): branch-neg */
-  {1, 1}, /* instruction 54 (36): branch-pos */
-  {1, 0}, /* instruction 55 (37): call-next-method */
-  {2, 0}, /* instruction 56 (38): tail-call-next-method */
-  {1, 1}, /* instruction 57 (39): branch-long-pos */
-  {1, -1}, /* instruction 58 (3a): branch-true-neg */
-  {1, 0}, /* instruction 59 (3b): make-lambda */
-  {1, 0}, /* instruction 60 (3c): call-operator */
-  {2, 0}, /* instruction 61 (3d): tail-call-operator */
-  {1, 1}, /* instruction 62 (3e): branch-true-pos */
-  {1, 1}, /* instruction 63 (3f): branch-true-long-pos */
-  {1, -1}, /* instruction 64 (40): branch-nil-neg */
-  {4, 0}, /* instruction 65 (41): call-foreign-function */
-  {0, 0}, /* instruction 66 (42): write-object */
-  {1, 0}, /* instruction 67 (43): check-arguments */
-  {1, 1}, /* instruction 68 (44): branch-nil-pos */
-  {1, 0}, /* instruction 69 (45): return */
-  {1, 0}, /* instruction 70 (46): alloc */
-  {2, 0}, /* instruction 71 (47): display-ref */
-  {2, 0}, /* instruction 72 (48): set-display-ref */
-  {0, 0}, /* instruction 73 (49): dealloc */
-  {1, 1}, /* instruction 74 (4a): branch-nil-long-pos */
-  {1, -1}, /* instruction 75 (4b): branch-long-neg */
-  {1, -1}, /* instruction 76 (4c): branch-true-long-neg */
-  {1, -1}, /* instruction 77 (4d): branch-nil-long-neg */
+  {0, 0}, /* instruction 50 (32): (undefined) */
+  {0, 0}, /* instruction 51 (33): (undefined) */
+  {0, 0}, /* instruction 52 (34): (undefined) */
+  {0, 0}, /* instruction 53 (35): (undefined) */
+  {0, 0}, /* instruction 54 (36): (undefined) */
+  {0, 0}, /* instruction 55 (37): (undefined) */
+  {0, 0}, /* instruction 56 (38): (undefined) */
+  {0, 0}, /* instruction 57 (39): (undefined) */
+  {0, 0}, /* instruction 58 (3a): (undefined) */
+  {0, 0}, /* instruction 59 (3b): (undefined) */
+  {0, 0}, /* instruction 60 (3c): (undefined) */
+  {0, 0}, /* instruction 61 (3d): (undefined) */
+  {0, 0}, /* instruction 62 (3e): (undefined) */
+  {0, 0}, /* instruction 63 (3f): (undefined) */
+  {0, 0}, /* instruction 64 (40): (undefined) */
+  {0, 0}, /* instruction 65 (41): (undefined) */
+  {0, 0}, /* instruction 66 (42): (undefined) */
+  {0, 0}, /* instruction 67 (43): (undefined) */
+  {0, 0}, /* instruction 68 (44): (undefined) */
+  {0, 0}, /* instruction 69 (45): (undefined) */
+  {0, 0}, /* instruction 70 (46): (undefined) */
+  {0, 0}, /* instruction 71 (47): (undefined) */
+  {0, 0}, /* instruction 72 (48): (undefined) */
+  {0, 0}, /* instruction 73 (49): (undefined) */
+  {0, 0}, /* instruction 74 (4a): (undefined) */
+  {0, 0}, /* instruction 75 (4b): (undefined) */
+  {0, 0}, /* instruction 76 (4c): (undefined) */
+  {0, 0}, /* instruction 77 (4d): (undefined) */
   {0, 0}, /* instruction 78 (4e): (undefined) */
   {0, 0}, /* instruction 79 (4f): (undefined) */
-  {0, 0}, /* instruction 80 (50): eq */
+  {0, 0}, /* instruction 80 (50): (undefined) */
   {0, 0}, /* instruction 81 (51): (undefined) */
   {0, 0}, /* instruction 82 (52): (undefined) */
   {0, 0}, /* instruction 83 (53): (undefined) */
@@ -95,65 +95,65 @@ struct {int inlined_arg_size, branch;} eul_instr_info[256]= {
   {0, 0}, /* instruction 85 (55): (undefined) */
   {0, 0}, /* instruction 86 (56): (undefined) */
   {0, 0}, /* instruction 87 (57): (undefined) */
-  {0, 0}, /* instruction 88 (58): unflush-stacks */
+  {0, 0}, /* instruction 88 (58): (undefined) */
   {0, 0}, /* instruction 89 (59): (undefined) */
-  {0, 0}, /* instruction 90 (5a): fill-thread-state */
-  {0, 0}, /* instruction 91 (5b): restore-thread-state */
-  {0, 0}, /* instruction 92 (5c): fill-state */
-  {0, 0}, /* instruction 93 (5d): restore-state */
+  {0, 0}, /* instruction 90 (5a): (undefined) */
+  {0, 0}, /* instruction 91 (5b): (undefined) */
+  {0, 0}, /* instruction 92 (5c): (undefined) */
+  {0, 0}, /* instruction 93 (5d): (undefined) */
   {0, 0}, /* instruction 94 (5e): (undefined) */
-  {0, 0}, /* instruction 95 (5f): state-ref */
-  {0, 0}, /* instruction 96 (60): set-state-ref */
+  {0, 0}, /* instruction 95 (5f): (undefined) */
+  {0, 0}, /* instruction 96 (60): (undefined) */
   {0, 0}, /* instruction 97 (61): (undefined) */
-  {0, 0}, /* instruction 98 (62): character-as-fpi */
-  {0, 0}, /* instruction 99 (63): fpi-as-character */
+  {0, 0}, /* instruction 98 (62): (undefined) */
+  {0, 0}, /* instruction 99 (63): (undefined) */
   {0, 0}, /* instruction 100 (64): (undefined) */
   {0, 0}, /* instruction 101 (65): (undefined) */
-  {0, 0}, /* instruction 102 (66): exit */
+  {0, 0}, /* instruction 102 (66): (undefined) */
   {0, 0}, /* instruction 103 (67): (undefined) */
   {0, 0}, /* instruction 104 (68): (undefined) */
-  {0, 0}, /* instruction 105 (69): intern */
-  {0, 0}, /* instruction 106 (6a): assq */
-  {0, 0}, /* instruction 107 (6b): iniq */
-  {0, 0}, /* instruction 108 (6c): memq */
+  {0, 0}, /* instruction 105 (69): (undefined) */
+  {0, 0}, /* instruction 106 (6a): (undefined) */
+  {0, 0}, /* instruction 107 (6b): (undefined) */
+  {0, 0}, /* instruction 108 (6c): (undefined) */
   {0, 0}, /* instruction 109 (6d): (undefined) */
   {0, 0}, /* instruction 110 (6e): (undefined) */
   {0, 0}, /* instruction 111 (6f): (undefined) */
   {0, 0}, /* instruction 112 (70): (undefined) */
   {0, 0}, /* instruction 113 (71): (undefined) */
-  {0, 0}, /* instruction 114 (72): caar */
-  {0, 0}, /* instruction 115 (73): cadr */
-  {0, 0}, /* instruction 116 (74): cdar */
-  {0, 0}, /* instruction 117 (75): cddr */
-  {0, 0}, /* instruction 118 (76): caddr */
-  {0, 0}, /* instruction 119 (77): cadddr */
+  {0, 0}, /* instruction 114 (72): (undefined) */
+  {0, 0}, /* instruction 115 (73): (undefined) */
+  {0, 0}, /* instruction 116 (74): (undefined) */
+  {0, 0}, /* instruction 117 (75): (undefined) */
+  {0, 0}, /* instruction 118 (76): (undefined) */
+  {0, 0}, /* instruction 119 (77): (undefined) */
   {0, 0}, /* instruction 120 (78): (undefined) */
   {0, 0}, /* instruction 121 (79): (undefined) */
-  {0, 0}, /* instruction 122 (7a): consp */
-  {0, 0}, /* instruction 123 (7b): listp */
-  {0, 0}, /* instruction 124 (7c): symbolp */
-  {0, 0}, /* instruction 125 (7d): stringp */
-  {0, 0}, /* instruction 126 (7e): fpip */
-  {0, 0}, /* instruction 127 (7f): lambdap */
-  {0, 0}, /* instruction 128 (80): gfp */
-  {0, 0}, /* instruction 129 (81): characterp */
-  {0, 0}, /* instruction 130 (82): static-ref0 */
-  {0, 0}, /* instruction 131 (83): static-ref1 */
-  {0, 0}, /* instruction 132 (84): static-ref2 */
-  {0, 0}, /* instruction 133 (85): static-ref-1 */
-  {0, 0}, /* instruction 134 (86): static-ref-nil */
-  {0, 0}, /* instruction 135 (87): static-ref-t */
+  {0, 0}, /* instruction 122 (7a): (undefined) */
+  {0, 0}, /* instruction 123 (7b): (undefined) */
+  {0, 0}, /* instruction 124 (7c): (undefined) */
+  {0, 0}, /* instruction 125 (7d): (undefined) */
+  {0, 0}, /* instruction 126 (7e): (undefined) */
+  {0, 0}, /* instruction 127 (7f): (undefined) */
+  {0, 0}, /* instruction 128 (80): (undefined) */
+  {0, 0}, /* instruction 129 (81): (undefined) */
+  {0, 0}, /* instruction 130 (82): (undefined) */
+  {0, 0}, /* instruction 131 (83): (undefined) */
+  {0, 0}, /* instruction 132 (84): (undefined) */
+  {0, 0}, /* instruction 133 (85): (undefined) */
+  {0, 0}, /* instruction 134 (86): (undefined) */
+  {0, 0}, /* instruction 135 (87): (undefined) */
   {0, 0}, /* instruction 136 (88): (undefined) */
-  {4, 0}, /* instruction 137 (89): set-and-get-binding-ref */
-  {1, 0}, /* instruction 138 (8a): static-fpi-byte-ref */
+  {0, 0}, /* instruction 137 (89): (undefined) */
+  {0, 0}, /* instruction 138 (8a): (undefined) */
   {0, 0}, /* instruction 139 (8b): (undefined) */
-  {0, 0}, /* instruction 140 (8c): context-stack-ref */
-  {0, 0}, /* instruction 141 (8d): value-stack-ref */
-  {0, 0}, /* instruction 142 (8e): apply */
-  {0, 0}, /* instruction 143 (8f): set-car */
-  {0, 0}, /* instruction 144 (90): set-cdr */
-  {0, 0}, /* instruction 145 (91): setter */
-  {0, 0}, /* instruction 146 (92): set-setter */
+  {0, 0}, /* instruction 140 (8c): (undefined) */
+  {0, 0}, /* instruction 141 (8d): (undefined) */
+  {0, 0}, /* instruction 142 (8e): (undefined) */
+  {0, 0}, /* instruction 143 (8f): (undefined) */
+  {0, 0}, /* instruction 144 (90): (undefined) */
+  {0, 0}, /* instruction 145 (91): (undefined) */
+  {0, 0}, /* instruction 146 (92): (undefined) */
   {0, 0}, /* instruction 147 (93): (undefined) */
   {0, 0}, /* instruction 148 (94): (undefined) */
   {0, 0}, /* instruction 149 (95): (undefined) */
@@ -174,14 +174,14 @@ struct {int inlined_arg_size, branch;} eul_instr_info[256]= {
   {0, 0}, /* instruction 164 (a4): (undefined) */
   {0, 0}, /* instruction 165 (a5): (undefined) */
   {0, 0}, /* instruction 166 (a6): (undefined) */
-  {0, 0}, /* instruction 167 (a7): check-arguments-2 */
-  {0, 0}, /* instruction 168 (a8): check-arguments-1 */
-  {0, 0}, /* instruction 169 (a9): check-arguments0 */
-  {0, 0}, /* instruction 170 (aa): check-arguments1 */
-  {0, 0}, /* instruction 171 (ab): check-arguments2 */
-  {0, 0}, /* instruction 172 (ac): return0 */
-  {0, 0}, /* instruction 173 (ad): return1 */
-  {0, 0}, /* instruction 174 (ae): return2 */
+  {0, 0}, /* instruction 167 (a7): (undefined) */
+  {0, 0}, /* instruction 168 (a8): (undefined) */
+  {0, 0}, /* instruction 169 (a9): (undefined) */
+  {0, 0}, /* instruction 170 (aa): (undefined) */
+  {0, 0}, /* instruction 171 (ab): (undefined) */
+  {0, 0}, /* instruction 172 (ac): (undefined) */
+  {0, 0}, /* instruction 173 (ad): (undefined) */
+  {0, 0}, /* instruction 174 (ae): (undefined) */
   {0, 0}, /* instruction 175 (af): (undefined) */
   {0, 0}, /* instruction 176 (b0): (undefined) */
   {0, 0}, /* instruction 177 (b1): (undefined) */

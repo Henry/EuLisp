@@ -45,7 +45,10 @@ HTML1_DIR = html1
 ## ----------------------------------------------------------------------------
 
 .PHONY: all
-all: pdf html html1
+all: pdf html
+
+.PHONY: all1
+all1: pdf html html1
 
 .PHONY: pdf
 pdf: $(DOCUMENT).pdf

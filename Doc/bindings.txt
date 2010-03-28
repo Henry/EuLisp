@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 25 March 2010, 16:26:29
+  Generated 28 March 2010, 21:13:58
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -17,7 +17,7 @@ youtoo Functions
   details.
 
 ---------------------------------------------------------------------------
-1. Bindings in /home/dm2/henry/EuLisp/youtoo/Lib.x86_64/liblevel1
+1. Bindings in /home/dm2/henry/GitHub/EuLisp/Lib.x86_64/liblevel1
 ---------------------------------------------------------------------------
 
   % 14 number %
@@ -570,7 +570,7 @@ youtoo Functions
   zerop 8 number zerop
 
 ---------------------------------------------------------------------------
-2. Bindings in /home/dm2/henry/EuLisp/youtoo/Runtime/macros
+2. Bindings in /home/dm2/henry/GitHub/EuLisp/Runtime/macros
 ---------------------------------------------------------------------------
 
   and 4 boot0 and
@@ -620,7 +620,7 @@ youtoo Functions
   with-source 5 stream0 with-source
 
 ---------------------------------------------------------------------------
-3. Bindings in /home/dm2/henry/EuLisp/youtoo/Lib.x86_64/libeval
+3. Bindings in /home/dm2/henry/GitHub/EuLisp/Lib.x86_64/libeval
 ---------------------------------------------------------------------------
 
   *first-year-students* 32 i-param *first-year-students*

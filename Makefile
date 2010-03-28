@@ -96,6 +96,7 @@ clean:
 	@cd Test; $(MAKE) $@
 	@cd Extras; $(MAKE) $@
 	@cd Examples; $(MAKE) $@
+	@cd Doc; $(MAKE) $@
 	@echo ".DONE."
 
 .PHONY: distclean
@@ -105,6 +106,7 @@ distclean: clean
 	@cd Test; $(MAKE) $@
 	@cd Extras; $(MAKE) $@
 	@cd Examples; $(MAKE) $@
+	@cd Doc; $(MAKE) $@
 	@rm -rf */platforms Bin.* Lib.*
 	@rm -f .eulrc.*
 	@echo ".DONE."
