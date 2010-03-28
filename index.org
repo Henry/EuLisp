@@ -294,7 +294,6 @@ Julian Padget\    includes support for closures and threads.
 *** EuLisp definition
     is provided in both HTML and PDF formats:
     + [[file:Doc/EuLisp-0.991/html/eulisp.html][EuLisp Definition Version 0.991 (HTML)]]
-    + [[file:Doc/EuLisp-0.991/html1/eulisp.html][EuLisp Definition Version 0.991 (HTML single page)]]
     + [[file:Doc/EuLisp-0.991/eulisp.pdf][EuLisp Definition Version 0.991 (PDF)]]
 *** EuLisp-1.0 Proposals
     are in the folowing
