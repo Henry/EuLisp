@@ -71,9 +71,8 @@ test:
 	@echo ".DONE."
 
 .PHONY: README
-README: README.html TODO.html
+README: index.html TODO.html
 	@echo ".BUILDING all README.html ..."
-	@cp README.html index.html
 	@cd Extras; $(MAKE) $@
 	@echo ".DONE."
 
