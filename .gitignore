@@ -1,7 +1,6 @@
 # Ignore editor and misc backup files - anywhere
 *~
 .*~
-*.orig
 *.bak
 \#*\#
 .directory

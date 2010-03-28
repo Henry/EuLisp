@@ -1,0 +1,245 @@
+----------------------------------------------------------------------------
+
+                                 youtoo 0.93
+
+                                  July 1997
+                       Andreas Kind and Julian Padget
+                             University of Bath
+                   http://www.maths.bath.ac.uk/~ak1/youtoo
+
+----------------------------------------------------------------------------
+1. General Description
+----------------------------------------------------------------------------
+
+The youtoo system is a public domain implementation of the object-oriented
+dynamic programming language EuLisp. EuLisp is a single-valued dialect of
+Lisp with an integrated object system, a defined meta-object protocol,
+modules and a simple light-weight process mechanism (threads). The system
+comes "as is" without any warranty. See the GNU General Public Licence in
+COPYING for copyright conditions.
+
+The youtoo compiler/interpreter compiles EuLisp into C-embedded virtual
+machine code which can be statically or dynamically linked with the virtual
+machine, the conservative garbage collector, the EuLisp language library and
+arbitrary other Lisp and foreign code (C, C++ and Fortran). Resulting
+stand-alone executables are portable, interoperable and efficient (see The
+Lisp Performance Page). The language implementation is extended towards a
+Virtual Multicomputer Architecture (see Denton and VIM Projects). Object
+serialization and inter-process communication (Sockets, MPI, Harvest Object
+Cache) support the migration of arbitray data and code.
+
+The system reuses ideas from the Oaklisp system written by Barak Perlmutter
+and Kevin Lang. The meta-object protocol (Telos) was originally implemented
+in Common Lisp by Russell Bradford. By default, a garbage collector written
+by Hans Boehm and Alan Demers is used.
+
+----------------------------------------------------------------------------
+2. Installation
+----------------------------------------------------------------------------
+
+* Unpack version X with gunzip youtooX.tar.gz and tar -xvf youtooX.tar.
+
+* Run ./configure and check the settings. Edit the configure file to reflect
+your system if necessary and re-run ./configure.
+
+* Run make. If you want to use shared libraries (which we really recomend
+for IRIX, Solaris and Linux), run make shared and add the directory
+.../youtoo/Lib.${ARCH} to the environment variable LD_LIBRARY_PATH (see
+./makeso.Path).
+
+* You should now be able to run the script Bin.${ARCH}/youtoo.sh
+(see next section).
+
+----------------------------------------------------------------------------
+3. Getting Started
+----------------------------------------------------------------------------
+
+* Run Bin.${ARCH}/youtoo.sh -help to see the compiler options.
+
+* Run Bin.${ARCH}/youtoo.sh fact -l level1 to compile module fact in (built-in)
+load directory Misc into a stand-alone executable. With shared libraries the
+executable should be less the 40K.
+
+* Run Bin.${ARCH}/youtoo.sh without options to start the EuLisp interpreter. The
+read-eval-print loop provides extra commands (type help:).
+
+----------------------------------------------------------------------------
+5. Notes
+----------------------------------------------------------------------------
+
+* EuLisp module files have the extension .em.
+
+* EuLisp language level1 is provided in the library liblevel1.a. Standard
+macros are defined in the syntax module macros. Thus, the default module
+body looks like this:
+
+    (defmodule foo
+      (syntax (macros)
+       import (level1))
+
+       ...
+
+    )  ;; end of module
+
+* Function pprint provides generic pretty printing.
+
+* Directory ./Misc contains modules for explanation and reuse.
+
+* There is no main entry function. Top-level forms in modules are executed
+with with respect to the module hierarchy. Global variables *argc* and
+*argv* are provided.
+
+* See ./Doc/bindings.txt for a list of standard bindings.
+
+* The compiler checks before compiling a module which (directly and
+indirectly) imported modules really need to be (re)compiled. This feature
+can be switched off with -no_recompile.
+
+* The following functions support the foreign-function interface to C in
+Vm/eulisp.h:
+
+    Data conversion from EuLisp to C:
+    ---------------------------------
+    int     eul_int_as_c_int(LispRef x)
+    int     eul_bool_as_c_int(LispRef x)
+    double  eul_double_as_c_double(LispRef x)
+    LispRef eul_int_as_dbl(LispRef x)
+    char    eul_char_as_c_char(LispRef x)
+    char    *eul_string_as_c_string(LispRef x)
+    char    *eul_symbol_as_c_string(LispRef x)
+
+    Data conversion from C to EuLisp:
+    ---------------------------------
+    LispRef c_int_as_eul_int(int x)
+    LispRef c_char_as_eul_char(int x)
+
+    Creating symbols and keywords:
+    ------------------------------
+    eul_intern_symbol(LispRef loc, char *str)
+    eul_intern_keyword(LispRef loc, char *str)
+
+    EuLisp data allocation:
+    -----------------------
+    eul_allocate_int(LispRef loc, int x)
+    eul_allocate_double(LispRef loc, double x)
+    eul_allocate_char(LispRef loc, char x)
+    eul_allocate_string(LispRef loc, char *str)
+    eul_allocate_cons(LispRef loc, LispRef x, LispRef y)
+    eul_allocate_vector(LispRef loc,int n, LispRef init)
+    eul_allocate_object(LispRef loc, LispRef class, LispRef n, LispRef init)
+
+    EuLisp constants:
+    -----------------
+    LispRef eul_nil
+    LispRef eul_t
+
+    EuLisp data access:
+    -------------------
+    LispRef eul_car(LispRef x)
+    LispRef eul_cdr(LispRef x)
+    LispRef eul_slot_ref(LispRef x, int i)
+    LispRef eul_symbol_name(LispRef x)
+    LispRef eul_keyword_name(LispRef x)
+    LispRef eul_class_of(LispRef x)
+    LispRef eul_size_of(LispRef x)
+    LispRef eul_string_size(LispRef x)
+
+    EuLisp data predicates:
+    -----------------------
+    int eul_null(LispRef x)
+    int eul_is_symbol(LispRef x)
+    int eul_is_keyword(LispRef x)
+    int eul_is_int(LispRef x)
+    int eul_is_double(LispRef x)
+    int eul_is_char(LispRef x)
+    int eul_is_string(LispRef x)
+    int eul_is_cons(LispRef x)
+    int eul_is_list(LispRef x)
+    int eul_is_gf(LispRef x)
+    int eul_is_lambda(LispRef x)
+    int eul_is_operator(LispRef x)
+
+* The foreign-function interface uses automatic converters. Here is an
+example how atoi can be used from Lisp:
+
+     (defextern atoi () )
+
+If the desired external function foo is in library libbar.a and should be
+called baz in Lisp the following defining form is necessary:
+
+     (defextern baz (...) ... "foo")
+
+To link the library libbar.a, put a copy of ./.eulrc in your home directory
+and add -lbar to the list of CLIBS; the library path must be given with
+-L<bar-path> in the list of CFLAGS. The following automatic converters are
+available:
+
+     Lisp                        C
+    -----------------------------------------
+     <int>                      int
+     <character>                char
+     <double>                   double
+     <string>                   char *
+     boolean                    int
+     ptr                        void *
+     <int*>                     int *
+     <double*>                  double *
+     <string*>                  char **
+
+The ptr converter can be used to pass arbitrary C structures to Lisp, so
+that they can be passed back to C at a later stage. The ptr converter is
+also useful to pass a Lisp object unconverted to C.
+
+Defextern definitions can not be linked dynamically.
+
+Foreign in-calls have to use the DEFINTERN() macro. Examples for
+in/out-calls to/from Lisp can be found in the directories ./Misc, ./Fortran,
+and ./C++.
+
+* For private customisation, put a copy of ./.eulrc in your home directory.
+For example, remove the optimisation flag of the C compiler.
+
+* Macro expansion is un-hygienic.
+
+* You find support for MPI, foreign thread libraries and Tcl/Tk in the
+corresponding sudirectories.
+
+* Modules ./Misc/scheme0.em and ./Misc/scheme.em give you support in writing
+Scheme programs with youtoo.
+
+* Use #!/../youtoo -script to write EuLisp scripts (see ./Misc/script.em).
+
+* Danius Michaelides wrote a port to the GNU bignum library (gmp). See
+Extras/Bignum/README.
+
+* Multi-threading based on MIT or DEC Pthreads requires a version of the
+Boehm garbage collector which is hacked by Ian Piumarta from INRIA
+(piumarta@prof.inria.fr): see the youtoo ftp site or
+ftp://alix.inria.fr/pub/gc.
+
+* Thanks to Rob Simmons (rwjs@maths.bath.ac.uk) there is support for pipes
+to forked child processes.
+
+* The examples in directory C++ and Fortran show how to interoperate
+with these languages.
+
+* Arithmetic functions +, - and / operate as set union, differnce and
+intersection on lists.
+
+----------------------------------------------------------------------------
+6. To Do
+----------------------------------------------------------------------------
+
+* Built-in threads with asynchronous system calls
+
+* Function apropos to launch HTML Browser with corresoding EuLisp page of
+the language definition
+
+* Module event
+
+* Load .h files as modules
+
+----------------------------------------------------------------------------
+7. This is the original README file supplied with youtoo 0.93
+   The README file which corresponds to this version is README.org
+----------------------------------------------------------------------------
