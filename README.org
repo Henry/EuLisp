@@ -1,6 +1,7 @@
 #                            -*- mode: org; -*-
 #+TITLE:                         *EuLisp*
 #+AUTHOR: nil
+#+EMAIL: no-reply
 #+OPTIONS: author:nil email:nil ^:{}
 
 * [[http://henry.github.com/EuLisp/COPYING][Copyright]]

@@ -4,7 +4,9 @@
 #+AUTHOR:           Danius Michaelides and Andreas Kind
 #+DATE:               July 1997\\Updated February 2010
 #+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
+#+EMAIL: no-reply
 #+OPTIONS: ^:{} email:nil
+
 * Copyright
   Youtoo is free software; you can redistribute it and/or modify it under the
   terms of the GNU General Public License as published by the Free Software

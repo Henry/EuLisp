@@ -4,6 +4,7 @@
 #+AUTHOR:                     Andreas Kind
 #+DATE:               July 1997\\Updated February 2010
 #+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
+#+EMAIL: no-reply
 #+OPTIONS: ^:{} email:nil
 
 * Copyright
