@@ -48,6 +48,16 @@ DEFAULT_EUL_GC_DIR=/usr/local
 DEFAULT_CC=
 
 ## --------------------------------------------------------------------
+## Emacs org-mode used to generate README.html files.
+##
+## Any version including org-mode will work but newer is better.
+## eemacs is the version used here which includes a more recent
+## org-mode than released with emacs.
+## --------------------------------------------------------------------
+
+EMACS=eemacs
+
+## --------------------------------------------------------------------
 ## Word length of the machine architecture/OS, 32 or 64.
 ## May be reset automatically for the paricular architecture.
 ## --------------------------------------------------------------------
@@ -429,7 +439,7 @@ echo EUL_TK_FLAGS = ${EUL_TK_FLAGS} >> $name
 echo >> $name
 echo '.SUFFIXES: .org .html' >> $name
 echo '.org.html:' >> $name
-echo '	eemacs $< --batch --eval "(org-export-as-html t)"' >> $name
+echo '	'${EMACS}' $< --batch --eval "(org-export-as-html t)"' >> $name
 echo >> $name
 echo "## --------------------------------------------------------------------" >> $name
 echo "## Functions" >> $name
