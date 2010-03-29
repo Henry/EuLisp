@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
                "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
@@ -6,18 +7,20 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-03-28 22:49:48 BST"/>
+<meta name="generated" content="2010-03-29 15:27:53 BST"/>
 <meta name="author" content="nil"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   html { font-family: Times, serif; font-size: 12pt; }
   .title  { text-align: center; }
   .todo   { color: red; }
   .done   { color: green; }
-  .tag    { background-color:lightblue; font-weight:normal }
+  .tag    { background-color: #add8e6; font-weight:normal }
   .target { }
-  .timestamp { color: grey }
-  .timestamp-kwd { color: CadetBlue }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
   p.verse { margin-left: 3% }
   pre {
 	border: 1pt solid #AEBDCC;
@@ -32,6 +35,7 @@ lang="en" xml:lang="en">
   dt { font-weight: bold; }
   div.figure { padding: 0.5em; }
   div.figure p { text-align: center; }
+  textarea { overflow-x: auto; }
   .linenr { font-size:smaller }
   .code-highlighted {background-color:#ffff00;}
   .org-info-js_info-navigation { border-style:none; }
@@ -61,9 +65,12 @@ lang="en" xml:lang="en">
    if(elem.cacheClassTarget)
      target.className = elem.cacheClassTarget;
  }
-/*]]>*/-->
+/*]]>*///-->
 </script>
-</head><body>
+</head>
+<body>
+<div id="content">
+
 <h1 class="title"><b>TODO</b></h1>
 
 
@@ -78,12 +85,12 @@ lang="en" xml:lang="en">
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1">1 Youtoo </h2>
-<div id="text-1">
+<h2 id="sec-1"><span class="section-number-2">1</span> Youtoo </h2>
+<div class="outline-text-2" id="text-1">
 
 <ul>
-<li id="sec-1.1"><span class="done">DONE</span> Split of word-length dependent functionality into separate modules <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span><br/>
+<li id="sec-1.1"><span class="done DONE"> DONE</span> Split of word-length dependent functionality into separate modules <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 Split files
 <ul>
 <li>
@@ -107,8 +114,8 @@ Comptime2/32bit/cg-exec-nbit.em
 </li>
 </ul>
 </li>
-<li id="sec-1.2"><span class="done">DONE</span> Regenerate all the .c files from the .em files to remove <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 10:14</span><br/>
+<li id="sec-1.2"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to remove <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 10:14</span></span><br/>
 <ul>
 <li>
 ARGDECL
@@ -118,25 +125,25 @@ PROTOTYPE
 </li>
 </ul>
 </li>
-<li id="sec-1.3"><span class="done">DONE</span> Regenerate all the .c files from the .em files to eul_const <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 14:37</span><br/>
+<li id="sec-1.3"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to eul_const <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 14:37</span></span><br/>
 </li>
-<li id="sec-1.4"><span class="done">DONE</span> Remove compat.h <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span><br/>
+<li id="sec-1.4"><span class="done DONE"> DONE</span> Remove compat.h <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span></span><br/>
 when backward compatibility is no longer needed.
 </li>
-<li id="sec-1.5"><span class="done">DONE</span> Change all the Makefiles of all the Extras and Examples <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span><br/>
+<li id="sec-1.5"><span class="done DONE"> DONE</span> Change all the Makefiles of all the Extras and Examples <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 so that the libraries and executables are located in platform/$(ARCH)
 or /Lib.$(ARCH) and /Bin.$(ARCH) directories.
 </li>
-<li id="sec-1.6"><span class="done">DONE</span> Investigate warning messages from Examples/Misc/ffi2.c <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span><br/>
+<li id="sec-1.6"><span class="done DONE"> DONE</span> Investigate warning messages from Examples/Misc/ffi2.c <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span></span><br/>
 Creating stand-alone application of module ffi2 &hellip;
 Compiling ffi2.c using gcc &hellip;
 /home/dm2/henry/EuLisp/youtoo/Examples/Misc/ffi2.c: In function ‘ff_stub_ext_foo_in
 </li>
-<li id="sec-1.7"><span class="todo">TODO</span> Resolve warning messages from ffi applications <br/>
+<li id="sec-1.7"><span class="todo TODO"> TODO</span> Resolve warning messages from ffi applications <br/>
 by introducing an option to allow a header file declaring the ff's to be
 included in the stubs files.
 <ul>
@@ -144,72 +151,82 @@ included in the stubs files.
 </li>
 </ul>
 </li>
-<li id="sec-1.8"><span class="todo">TODO</span> Investigate when Lib.${ARCH}/*.i should be copied to Lib <br/>
+<li id="sec-1.8"><span class="todo TODO"> TODO</span> Investigate when Lib.${ARCH}/*.i should be copied to Lib <br/>
 </li>
-<li id="sec-1.9"><span class="done">DONE</span> Sort out the Extras/Bignum/Makefile <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span><br/>
+<li id="sec-1.9"><span class="done DONE"> DONE</span> Sort out the Extras/Bignum/Makefile <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 Currently the linking of the gmp library is hard-coded.
 </li>
-<li id="sec-1.10"><span class="done">DONE</span> Upgrade the TclTk library to 8.5 <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-14 Sun 23:27</span><br/>
+<li id="sec-1.10"><span class="done DONE"> DONE</span> Upgrade the TclTk library to 8.5 <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-14 Sun 23:27</span></span><br/>
 </li>
-<li id="sec-1.11"><span class="done">DONE</span> Investigate problems with the Extras/OS (object serialisation) lib <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:30</span><br/>
+<li id="sec-1.11"><span class="done DONE"> DONE</span> Investigate problems with the Extras/OS (object serialisation) lib <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:30</span></span><br/>
 </li>
-<li id="sec-1.12"><span class="todo">TODO</span> Change the MPI interface to work with OpenMPI <br/>
+<li id="sec-1.12"><span class="todo TODO"> TODO</span> Change the MPI interface to work with OpenMPI <br/>
 </li>
-<li id="sec-1.13"><span class="todo">TODO</span> Comptime2/youtoo.em sometimes ends-up in the wrong state <br/>
+<li id="sec-1.13"><span class="todo TODO"> TODO</span> Comptime2/youtoo.em sometimes ends-up in the wrong state <br/>
 should be
-#+BEGIN_SRC lisp
-(defmodule youtoo
-;; Final, proper executable!
-(import (level1 math eval i-aux0 macros))
+
+
+
+<pre class="src src-lisp">(defmodule youtoo
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">Final, proper executable!
+</span>(import (level1 math eval i-aux0 macros))
+
+(main *argv*)
+
+)  <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">end of module
+</span></pre>
+
 
 <p>
-(main <b>argv</b>)
-</p>
-<p>
-)  ; end of module
-#+END_SRC
 but sometimes remains in the intermediate build state
-#+BEGIN_SRC lisp
-(defmodule youtoo
-;; Preliminary executable!
-(import (level1 math eval))
 </p>
+
+
+<pre class="src src-lisp">(defmodule youtoo
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">Preliminary executable!
+</span>(import (level1 math eval))
+
+(main *argv*)
+
+)  <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">end of module
+</span></pre>
+
+
 <p>
-(main <b>argv</b>)
-</p>
-<p>
-)  ; end of module
-#+END_SRC
 during the boot-strap build.  The consequence is that the final executable
 is unable to compile module files correctly issuing errors like
-#+BEGIN_SRC lisp
-*** ERROR [nuseq][top-level]: exported lexical binding subseq not available
+</p>
+
+
+<pre class="src src-lisp">*** ERROR [nuseq][top-level]: exported lexical binding subseq not available
 *** ERROR [nuseq][top-level]: no lexical binding defgeneric available
 *** ERROR [nuseq][top-level]: no lexical binding subseq available
 *** ERROR [nuseq][top-level]: no lexical binding seq available
-#+END_SRC
-</p></li>
-<li id="sec-1.14"><span class="done">DONE</span> Split the "boot" section of Comptime2/Makefile <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-16 Tue 15:06</span><br/>
+</pre>
+
+
+</li>
+<li id="sec-1.17"><span class="done DONE"> DONE</span> Split the "boot" section of Comptime2/Makefile <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-16 Tue 15:06</span></span><br/>
 into the two parts to make the preliminary and final executables.
 Also move the "driver" part into the top-level Makefile.
 </li>
-<li id="sec-1.15"><span class="todo">TODO</span> Change the Extras/Pipe/test1.em app <br/>
+<li id="sec-1.18"><span class="todo TODO"> TODO</span> Change the Extras/Pipe/test1.em app <br/>
 to obtain the path of the youtoo script from the global settings obtained
 from the .eulrc.${ARCH} file.
 </li>
-<li id="sec-1.16"><span class="done">DONE</span> Clean all .em files <br/>
-<span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-26 Fri 15:01</span><br/>
+<li id="sec-1.19"><span class="done DONE"> DONE</span> Clean all .em files <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-26 Fri 15:01</span></span><br/>
 to remove blank line at beginning, tabs and trailing white-space.
 </li>
-<li id="sec-1.17"><span class="todo">TODO</span> Add support in the REPL to load dynamically-linked module libraries <br/>
+<li id="sec-1.20"><span class="todo TODO"> TODO</span> Add support in the REPL to load dynamically-linked module libraries <br/>
 </li>
-<li id="sec-1.18"><span class="todo">TODO</span> Add support for #;(sexp) comments in Runtime/Ff/eul-ntok.c <br/>
+<li id="sec-1.21"><span class="todo TODO"> TODO</span> Add support for #;(sexp) comments in Runtime/Ff/eul-ntok.c <br/>
 </li>
-<li id="sec-1.19"><span class="todo">TODO</span> Add line-number counting to Runtime/Ff/eul-ntok.c <br/>
+<li id="sec-1.22"><span class="todo TODO"> TODO</span> Add line-number counting to Runtime/Ff/eul-ntok.c <br/>
 This also requires the introduction of a line-number counting stream to hold
 the line-number and provide access to the error reporting system.
 
@@ -220,18 +237,21 @@ the line-number and provide access to the error reporting system.
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2">2 EuLisp Definition </h2>
-<div id="text-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> EuLisp Definition </h2>
+<div class="outline-text-2" id="text-2">
 
 <ul>
-<li id="sec-2.1"><span class="todo">TODO</span> Update EuLisp definition and Youtoo implementation <br/>
+<li id="sec-2.1"><span class="todo TODO"> TODO</span> Update EuLisp definition and Youtoo implementation <br/>
 to correspond to the EuLisp-1.0 proposals.
 See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 </li>
 </ul>
 </div>
 </div>
-<div id="postamble"><p class="date"> Date: 2010-03-28 22:49:48 BST</p>
-<p>HTML generated by org-mode 6.21b in emacs 23</p>
-</div></body>
+<div id="postamble">
+<p class="date"> Date: 2010-03-29 15:27:53 BST</p>
+<p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
+</div>
+</div>
+</body>
 </html>
