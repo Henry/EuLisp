@@ -281,7 +281,7 @@
     Modulized version of match-slib.scm badly hacked for EuLisp.
 
 *** [[file:Extras/OS/README.org][Object serialisation]]: /Extras/OS/
-Julian Padget\    includes support for closures and threads.
+    includes support for closures and threads.
 
 *** [[file:Extras/OPS5/README.org][OPS5 rule-based system]] : /Extras/OPS5/
     An object-oriented version of the OPS5 rule-based system.
