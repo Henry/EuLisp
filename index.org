@@ -4,7 +4,7 @@
 #+EMAIL: no-reply
 #+OPTIONS: author:nil email:nil ^:{}
 
-* [[file:./COPYING][Copyright]]
+* [[file:COPYING][Copyright]]
   Youtoo is free software; you can redistribute it and/or modify it under the
   terms of the GNU General Public License as published by the Free Software
   Foundation; either version 2 of the License, or (at your option) any later
@@ -21,7 +21,7 @@
     This release of Youtoo started life as
     [[http://www.cs.bath.ac.uk/~jap/EuLisp/youtoo/youtoo0.93.tar.gz][Youtoo-0.93]]
     developed by Andreas Kind, Julian Padget and others.  More details are
-    available from the original [[file:./README.orig][README]] file and
+    available from the original [[file:README.orig][README]] file and
     [[http://www.cs.bath.ac.uk/~jap/ak1/youtoo/][the youtoo home page]].  The
     /b2h/ and /i2doc/ tools needed to bootstrap youtoo were reverse engineered
     and provided by
@@ -335,4 +335,4 @@ Julian Padget\    includes support for closures and threads.
     and the EuLisp-0.99 definition and the documents relating to the creation of
     EuLisp-1.0.
 
-* [[file:./TODO.org][To Do]]
+* [[file:TODO.org][To Do]]
