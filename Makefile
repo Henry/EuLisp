@@ -70,12 +70,6 @@ test:
 	@cd Test; $(U2) hello4 -l level1 -recompile; ./hello4
 	@echo ".DONE."
 
-.PHONY: README
-README: index.html TODO.html
-	@echo ".BUILDING all README.html ..."
-	@cd Extras; $(MAKE) $@
-	@echo ".DONE."
-
 .PHONY: touch
 touch:
 	@echo ".TOUCHING youtoo ..."
@@ -108,6 +102,15 @@ distclean: clean
 	@cd Doc; $(MAKE) $@
 	@rm -rf */platforms Bin.* Lib.*
 	@rm -f .eulrc.*
+	@echo ".DONE."
+
+README.org: index.org
+	@sed 's%file:%http://henry.github.com/EuLisp/%' $< > $@
+
+.PHONY: README
+README: index.html TODO.html README.org
+	@echo ".BUILDING all README.html ..."
+	@cd Extras; $(MAKE) $@
 	@echo ".DONE."
 
 .PHONY: doc
