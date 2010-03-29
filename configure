@@ -429,7 +429,7 @@ echo EUL_TK_FLAGS = ${EUL_TK_FLAGS} >> $name
 echo >> $name
 echo '.SUFFIXES: .org .html' >> $name
 echo '.org.html:' >> $name
-echo '	emacs $< --batch --eval "(org-export-as-html t)"' >> $name
+echo '	eemacs $< --batch --eval "(org-export-as-html t)"' >> $name
 echo >> $name
 echo "## --------------------------------------------------------------------" >> $name
 echo "## Functions" >> $name
