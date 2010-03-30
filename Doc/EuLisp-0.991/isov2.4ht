@@ -20,6 +20,9 @@
 %%       with added features to support the eulisp style.
 \typeout{[isov2.4ht 2000/01/20 version v0.1 heavily hacked for eulisp.sty]}
 
+% Remove decoration from href links
+\Css{a {text-decoration:none}}
+
 % Add support for the noannex option which converts the A,B,C... numbered
 % annexes into the 1,2,3... numbered clauses so that TeX4ht can split the
 % HTML into separate files based on the section number correctly.
