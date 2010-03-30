@@ -33,7 +33,7 @@ external representation an open parenthesis followed by a close
 parenthesis.  The empty list is also used to denote the boolean value
 {\em false}.
 
-\class{null}
+\derivedclass{null}{list}
 \index{general}{level-0 classes!\theclass{null}}
 
 The class whose only instance is the empty list, denoted \nil.
@@ -130,7 +130,7 @@ improper list
         (2)}
 \end{tabular}
 
-\class{cons}
+\derivedclass{cons}{list}
 \index{general}{level-0 classes!\theclass{pair}}
 
 The class of all instances of \classref{cons}.  An instance of the class

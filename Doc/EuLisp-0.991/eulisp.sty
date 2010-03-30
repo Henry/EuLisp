@@ -239,12 +239,21 @@
 }
 \newcommand{\classref}[1]{\hyperref[\classlabel{#1}]{{\tt{}<#1>}}}
 
+%%% Derived class
+\newcommand{\derivedclass}[2]
+{%
+    \index{general}{#1@{\tt <#1>}}%
+    \index{class}{#1@{\tt{}<#1>} (\module)}%
+    \entryclause{<#1>}{\classref{#2}}%
+    \label{\classlabel{#1}}%
+}
+
 %%%  Instance
 \newcommand{\instancelabel}[1]{instance:#1}
 \newcommand{\instance}[2]
 {
     \ttindex{#1}%
-    \entryclause{#1}{{\tt<}#2{\tt>}}%
+    \entryclause{#1}{\classref{#2}}%
     \label{\instancelabel{#1}}%
 }
 \newcommand{\instanceref}[1]{\hyperref[\instancelabel{#1}]{{\tt{}#1}}}

@@ -94,3 +94,6 @@
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
     See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].
+*** TODO Check all hanging links
+    + Add missing entries.
+    + Correct erroneous links.

@@ -115,7 +115,7 @@ which is shown in Table~\ref{level-0-class-hierarchy}.
 \classref{object} \\
 \tts\classref{character} \\
 \tts\classref{condition} \\
-\tts\tts{\normalfont See Table~\ref{condition-class-hierarchy}}
+\tts\tts{\normalfont See Table~\ref{condition-class-hierarchy}}\\
 \tts\classref{function} \\
 %NotYoutoo \tts\tts\classref{continuation} \\
 \tts\tts\classref{simple-function} \\
@@ -174,44 +174,11 @@ initialization options are specified for \classref{object}.
 
 \class{class}
 \index{general}{level-0 classes!\theclass{class}}
-%\begin{inherits}
-%\item[direct-superclass: <object>]
-%\item[class-precedence-list: (<class> <object>)] The linearized inheritance
-%hierarchy.
-%\item[slots: ()]
-%\item[initargs: ()]
-%\end{inherits}
-
-The default superclass classes. All classes defined using the
+%
+The default super-class classes.  All classes defined using the
 \defformref{defclass} form are direct or indirect subclasses of
 \classref{class}.  Thus, this class is specializable by user-defined classes at
 level-0.
-
-\condition{generic-function-condition}{condition}
-%
-This is the general condition class for conditions arising from operations in
-the object system at level 0. The following direct subclasses of
-<generic-function-condition> are defined at level 0:
-%
-\begin{subclasses}
-    \item[no-applicable-method] signalled by a generic function when there is
-    no method which is applicable to the arguments.
-    %
-    \item[incompatible-method-domain] signalled by if the domain of the method
-    being added to a generic function is not a subdomain of the generic
-    function's domain.
-    %
-    \item[non-congruent-lambda-lists] signalled if the lambda list of the
-    method being added to a generic function is not congruent to that of the
-    generic function.
-    %
-    \item[method-domain-clash] signalled if the method being added to a
-    generic function has the same domain as a method already attached to the
-    generic function.
-    %
-    \item[no-next-method] signalled by call-next-method if there is no next
-    most specific method.
-\end{subclasses}
 %
 \end{optDefinition}
 
@@ -349,16 +316,6 @@ the class of an instance is supported by structure classes\footnote{In
     removal nor method combination, this imbues level-0 programs with static
     semantics.}.
 
-% The first argument is
-%the name to which the new class will be bound.  The second is an
-%identifier which names a variable to which the superclass is bound.
-%If
-%{\em superclass} is \nil, the superclass is taken to be the root
-%class \classref{class}.
-%The list of {\em
-%slot}s is described below.  Finally, a {\em class-option\/}
-%is an identifier followed by a corresponding value, which, taken
-%together, apply to the class as a whole.
 The {\em slot option\/}s are interpreted as follows:
 \begin{options}
     \item[keyword, identifier]%
@@ -471,6 +428,16 @@ The class options are interpreted as follows:
 %
 \sclause{Defining Generic Functions and Methods}
 \begin{optDefinition}
+%
+\derivedclass{function}{object}
+\index{general}{level-0 classes!\theclass{function}}
+%
+The class of all functions.
+
+\derivedclass{generic-function}{function}
+\index{general}{level-0 classes!\theclass{generic-function}}
+%
+The class of all generic functions.
 
 \defform{defgeneric}
 \label{defgeneric-0}
@@ -658,53 +625,7 @@ is defined.  In all other respects the resulting object is the same as {\tt
 %
 \seealso%
 \defformref{defgeneric}.
-
-\condition{no-applicable-method}{generic-function-condition}
 %
-\begin{initoptions}
-    \item[generic, function] The generic function which was applied.
-    \item[arguments, list] The arguments of the generic function which was applied.
-\end{initoptions}
-%
-\remarks%
-Signalled by a generic function when there is no method which is
-applicable to the arguments.
-
-\condition{incompatible-method-domain}{generic-function-condition}
-%
-\begin{initoptions}
-    \item[generic, function] The generic function to be extended.
-    \item[method, method] The method to be added.
-\end{initoptions}
-%
-\remarks%
-Signalled by one of \defformref{defgeneric}, \macroref{defmethod} or
-\macroref{generic-lambda} if the domain of the method would not be a subdomain
-of the generic function's domain.
-
-\condition{non-congruent-lambda-lists}{generic-function-condition}
-%
-\begin{initoptions}
-    \item[generic, function] The generic function to be extended.
-    \item[method, method] The method to be added.
-\end{initoptions}
-%
-\remarks%
-Signalled by one of \defformref{defgeneric}, \macroref{defmethod} or
-\macroref{generic-lambda} if the lambda list of the method is not congruent to
-that of the generic function.
-
-\condition{method-domain-clash}{generic-function-condition}
-%
-\begin{initoptions}
-    \item[generic, function] The generic function to be extended.
-    \item[methods, list] The methods with the same domain.
-\end{initoptions}
-%
-\remarks%
-Signalled by one of \defformref{defgeneric}, \macroref{defmethod} or
-\macroref{generic-lambda} if there would be methods with the same domain
-attached to the generic function.
 \end{optDefinition}
 
 \sclause{Specializing Methods}
@@ -750,21 +671,7 @@ is no next most specific method.
 \result%
 If there is a next most specific method, {\tt next-method-p} returns
 a non-\nil\/ value, otherwise, it returns \nil.
-
-\condition{no-next-method}{generic-function-condition}
 %
-\begin{initoptions}
-    % \item[generic] The generic function to which the method belongs.
-
-    \item[method, method] The method which called \keywordref{call-next-method}.
-
-    \item[operand-list, list] A list of the arguments to have been passed to the
-    next method.
-\end{initoptions}
-%
-\remarks%
-Signalled by \keywordref{call-next-method} if there is no next most specific
-method.
 \end{optDefinition}
 
 \sclause{Method Lookup and Generic Dispatch}

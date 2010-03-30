@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-30 10:17:00" /> 
+<meta name="date" content="2010-03-30 22:00:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
-<!--l. 216--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 304--><div class="crosslinks"><p class="noindent">[<a 
 href="eulispcl16.html" >next</a>] [<a 
 href="eulispcl14.html" >prev</a>] [<a 
 href="eulispcl14.html#taileulispcl14.html" >prev-tail</a>] [<a 
@@ -36,23 +36,23 @@ resumes the condition. It is the first handler accepting the
 condition that is used and this may not necessarily be the
 most specific. Handlers are established by the special form
 <a 
-href="#x19-176003r16"><span 
+href="#x19-176003r22"><span 
 class="cmtt-9">with-handler</span></a>.
 <a 
  id="dx19-170002"></a>
 <a 
  id="dx19-170003"></a>
 </p><!--l. 14--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x19-170004r14"></a><span 
-class="cmbx-9">15.0.14   </span><span 
+ id="x19-170004r20"></a><span 
+class="cmbx-9">15.0.20   </span><span 
 class="cmtt-9">signal</span>
 <a 
- id="Q1-19-225"></a>
+ id="Q1-19-227"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-17100014"></a><span 
+ id="x19-17100020"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -76,7 +76,7 @@ class="cmtt-9">] </span>: </dt><dd
 class="arguments">
     <!--l. 24--><p class="noindent" >If this argument is not supplied, the condition is signalled
     on  the  thread  which  called  <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>,  otherwise,  <span 
 class="cmti-9">thread</span>
     indicates the thread on which <span 
@@ -84,19 +84,18 @@ class="cmti-9">condition </span>is to be signalled.</p></dd></dl>
 <!--l. 31--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-17200014"></a><span 
+ id="x19-17200020"></a><span 
 class="cmbx-8">Result</span></h5><a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> should never return. It is an error to call <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>&#8217;s
 continuation.
-                                                   <h5 class="likesyntaxssclauseHead"><a 
- id="x19-17300014"></a><span 
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-17300020"></a><span 
 class="cmbx-8">Remarks</span></h5>Called to indicate that a specified condition has arisen
-  during the execution of a program. If the third argument is
-  not supplied, <a 
-href="#x19-170004r14"><span 
+during the execution of a program. If the third argument is     not supplied, <a 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> calls the dynamically closest handler
   with <span 
 class="cmti-9">condition </span>and <span 
@@ -112,50 +111,50 @@ class="cmtt-9">()</span></a>, it
   condition&#8212;in this way the handler is informed of the signaler&#8217;s
   intention.
   <!--l. 48--><p class="noindent" >If the third argument is supplied, <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> registers the specified
   condition to be signalled on <span 
 class="cmti-9">thread</span>. The condition must be an
   instance of the condition class <a 
-href="eulispcl12.html#x16-137006r10"><span 
+href="eulispcl12.html#x16-127006r10"><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>, otherwise an
   error is signalled (condition class: <a 
-href="eulispcl14.html#x18-168004r13"><span 
+href="eulispcl14.html#x18-158004r13"><span 
 class="cmtt-9">&#x003C;wrong-condition-class&#x003E;</span></a><a 
  id="dx19-173001"></a>) on
   the thread calling <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>. A <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> on a determined thread has no
   effect on either the signalled or signalling thread except in the case
   of the above error.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x19-17400014"></a><span 
+ id="x19-17400020"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="eulispcl12.html#x16-118003r3"><span 
+href="eulispcl12.html#x16-108003r3"><span 
 class="cmtt-9">thread-reschedule</span></a>, <a 
-href="eulispcl12.html#x16-125003r6"><span 
+href="eulispcl12.html#x16-115003r6"><span 
 class="cmtt-9">thread-value</span></a>, <a 
-href="#x19-176003r16"><span 
+href="#x19-176003r22"><span 
 class="cmtt-9">with-handler</span></a>.
   <a 
  id="dx19-174001"></a>
   <a 
  id="dx19-174002"></a>
   <!--l. 60--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x19-174003r15"></a><span 
-class="cmbx-9">15.0.15   </span><span 
+ id="x19-174003r21"></a><span 
+class="cmbx-9">15.0.21   </span><span 
 class="cmtt-9">call-next-handler</span>
  <a 
- id="Q1-19-230"></a>
+ id="Q1-19-232"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
   </p>
-  <h5 class="syntaxssclauseHead"> 15.0.15.1 <a 
- id="x19-17500015.0.15.1"></a><span 
+  <h5 class="syntaxssclauseHead"> 15.0.21.1 <a 
+ id="x19-17500015.0.21.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
  id="x19-175001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 64--><p class="noindent" ><span class="obeylines-h"><span 
@@ -171,19 +170,19 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x19-17600015.0.15.1"></a><span 
+ id="x19-17600015.0.21.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The <a 
-href="#x19-174003r15"><span 
+href="#x19-174003r21"><span 
 class="cmtt-9">call-next-handler</span></a> special form calls the next
   enclosing handler. It is an error to evaluate this form other than
   within an established handler function. The <a 
-href="#x19-174003r15"><span 
+href="#x19-174003r21"><span 
 class="cmtt-9">call-next-handler</span></a>
  special form is normally used when a handler function does not
   know how to deal with the class of condition. However, it may also
   be used to combine handler function behaviour in a similar but
   orthogonal way to <a 
-href="eulispcl11.html#x13-91004r1"><span 
+href="eulispcl11.html#x13-83004r1"><span 
 class="cmtt-9">call-next-method</span></a> (assuming a generic handler
   function).
   <a 
@@ -191,18 +190,18 @@ class="cmtt-9">call-next-method</span></a> (assuming a generic handler
   <a 
  id="dx19-176002"></a>
   <!--l. 79--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x19-176003r16"></a><span 
-class="cmbx-9">15.0.16   </span><span 
+ id="x19-176003r22"></a><span 
+class="cmbx-9">15.0.22   </span><span 
 class="cmtt-9">with-handler</span>
  <a 
- id="Q1-19-233"></a>
+ id="Q1-19-235"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
   </p>
                                                                                                   
                                                                                                   
-<h5 class="syntaxssclauseHead"> 15.0.16.1 <a 
- id="x19-17700015.0.16.1"></a><span 
+<h5 class="syntaxssclauseHead"> 15.0.22.1 <a 
+ id="x19-17700015.0.22.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
  id="x19-177001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 83--><p class="noindent" ><span class="obeylines-h"><span 
@@ -241,7 +240,7 @@ class="cmtt-8">&#x00A0;expression;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-17800015.0.16.1"></a><span 
+ id="x19-17800015.0.22.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -257,14 +256,14 @@ class="cmti-9">protected-form</span>s and there are no
     a  condition,  and  a  <span 
 class="cmti-9">resume  </span>function/continuation.  The
     condition is the condition object that was passed to <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>
     as  its  first  argument.  The  <span 
 class="cmti-9">resume  </span>continuation  is  the
     continuation (or <a 
 href="eulispcl17.html#x21-544007r1"><span 
 class="cmtt-9">()</span></a>) that was given to <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> as its second
     argument.
     </p></dd><dt class="arguments">
@@ -277,13 +276,13 @@ class="cmti-9">handler function </span>specified above.</p></dd></dl>
 <!--l. 108--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-17900015.0.16.1"></a><span 
+ id="x19-17900015.0.22.1"></a><span 
 class="cmbx-8">Result</span></h5>The value of the last form in the sequence of <span 
 class="cmti-9">form</span>s.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18000015.0.16.1"></a><span 
+ id="x19-18000015.0.22.1"></a><span 
 class="cmbx-8">Remarks</span></h5>A <a 
-href="#x19-176003r16"><span 
+href="#x19-176003r22"><span 
 class="cmtt-9">with-handler</span></a> form is evaluated in three steps:
 <!--l. 114--><p class="noindent" >
     </p><ol  class="enumerate1" >
@@ -298,7 +297,7 @@ class="cmti-9">handler-function </span>is evaluated. This now identifies
 class="cmti-9">form</span>s  is  evaluated  in  order  and  the
     value  of  the  last  one  is  returned  as  the  result  of  the
     <a 
-href="#x19-176003r16"><span 
+href="#x19-176003r22"><span 
 class="cmtt-9">with-handler</span></a> expression.
     </li>
     <li 
@@ -307,27 +306,27 @@ class="cmti-9">handler-function  </span>is  disestablished  as  the  nearest
     enclosing handler, and the previous handler function is
     restored as the nearest enclosing.</li></ol>
 <!--l. 128--><p class="noindent" >The above is the normal behaviour of <a 
-href="#x19-176003r16"><span 
+href="#x19-176003r22"><span 
 class="cmtt-9">with-handler</span></a>. The
 exceptional behaviour of <a 
-href="#x19-176003r16"><span 
+href="#x19-176003r22"><span 
 class="cmtt-9">with-handler</span></a> happens when there is a
 call to <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> during the evaluation of <span 
 class="cmti-9">protected-form</span>. <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> calls
 the nearest closing <span 
 class="cmti-9">handler-function </span>passing on the first two
 arguments given to <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>. The <span 
 class="cmti-9">handler-function </span>is executed in
 the dynamic extent of the call to <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>. However, any <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>s
 occurring during the execution of <span 
 class="cmti-9">handler-function </span>are dealt with
@@ -338,13 +337,13 @@ class="cmti-9">handler-function</span>. It is an error if there       is no encl
   implementation-defined way. Errors arising in the dynamic extent
   of the handler function are signalled in the dynamic extent of the
   original <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> but are handled in the enclosing dynamic extent of
   the handler.
   </p><!--l. 144--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18100015.0.16.1"></a><span 
+ id="x19-18100015.0.22.1"></a><span 
 class="cmbx-8">Examples</span></h5>There are three ways in which a <span 
 class="cmti-9">handler-function </span>can
   respond: actions:
@@ -358,7 +357,7 @@ class="cmti-9">handler-function </span>can
         <li 
   class="enumerate" id="x19-181004x2">The situation can be corrected by the handler, so it does
         and then returns. Thus the call to <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> returns with the
         result passed back from the handler function.
         </li>
@@ -366,7 +365,7 @@ class="cmtt-9">signal</span></a> returns with the
   class="enumerate" id="x19-181006x3">The  handler  function  does  not  know  how  to  deal  with
         the class of condition signalled; control is passed explicitly
         to the next enclosing handler via the <a 
-href="#x19-174003r15"><span 
+href="#x19-174003r21"><span 
 class="cmtt-9">call-next-handler</span></a>
      special form.</li></ol>
   <!--l. 162--><p class="noindent" >An illustration of the use of all three cases is given here:         <a 
@@ -432,26 +431,26 @@ class="cmtt-8">&#x00A0;(something-which-might-signal-an-error))</span>
 <!--l. 179--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18200015.0.16.1"></a><span 
+ id="x19-18200015.0.22.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>.
 <a 
  id="dx19-182001"></a>
 <a 
  id="dx19-182002"></a>
 <!--l. 182--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x19-182003r17"></a><span 
-class="cmbx-9">15.0.17   </span><span 
+ id="x19-182003r23"></a><span 
+class="cmbx-9">15.0.23   </span><span 
 class="cmtt-9">error</span>
 <a 
- id="Q1-19-240"></a>
+ id="Q1-19-242"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18300017"></a><span 
+ id="x19-18300023"></a><span 
 class="cmbx-8">Arguments</span></h5>
       <dl class="arguments1"><dt class="arguments">
 <span 
@@ -477,17 +476,17 @@ class="cmtt-9">initialize-instance</span>
 <!--l. 193--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18400017"></a><span 
+ id="x19-18400023"></a><span 
 class="cmbx-8">Result</span></h5>The result is <a 
 href="eulispcl17.html#x21-544007r1"><span 
 class="cmtt-9">()</span></a>.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18500017"></a><span 
+ id="x19-18500023"></a><span 
 class="cmbx-8">Remarks</span></h5>The <a 
-href="#x19-182003r17"><span 
+href="#x19-182003r23"><span 
 class="cmtt-9">error</span></a> function signals a non-continuable error. It
 calls <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> with an instance of a condition of <span 
 class="cmti-9">condition-class</span>
 initialized from <span 
@@ -503,16 +502,16 @@ signalled continuably.
 <a 
  id="dx19-185002"></a>
 <!--l. 203--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x19-185003r18"></a><span 
-class="cmbx-9">15.0.18   </span><span 
+ id="x19-185003r24"></a><span 
+class="cmbx-9">15.0.24   </span><span 
 class="cmtt-9">cerror</span>
 <a 
- id="Q1-19-244"></a>
+ id="Q1-19-246"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18600018"></a><span 
+ id="x19-18600024"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -536,24 +535,24 @@ class="cmtt-9">initialize-instance</span>
 <!--l. 214--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18700018"></a><span 
+ id="x19-18700024"></a><span 
 class="cmbx-8">Result</span></h5>The result is <a 
 href="eulispcl17.html#x21-544007r1"><span 
 class="cmtt-9">()</span></a>.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x19-18800018"></a><span 
+ id="x19-18800024"></a><span 
 class="cmbx-8">Remarks</span></h5>The <a 
-href="#x19-185003r18"><span 
+href="#x19-185003r24"><span 
 class="cmtt-9">cerror</span></a> function signals a continuable error. It calls
 <a 
-href="#x19-170004r14"><span 
+href="#x19-170004r20"><span 
 class="cmtt-9">signal</span></a> with an instance of a condition of <span 
 class="cmti-9">condition-class </span>initializedfrom <span 
 class="cmti-9">init-option</span>s, the <span 
 class="cmti-9">error-message </span>and a <span 
 class="cmti-9">resume </span>continuation
  value which is the continuation of the <a 
-href="#x19-185003r18"><span 
+href="#x19-185003r24"><span 
 class="cmtt-9">cerror</span></a> expression. A non-<a 
 href="eulispcl17.html#x21-544007r1"><span 
 class="cmtt-9">()</span></a>

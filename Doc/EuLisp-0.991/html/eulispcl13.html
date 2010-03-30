@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-30 10:17:00" /> 
+<meta name="date" content="2010-03-30 22:00:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -21,18 +21,18 @@ href="eulispcl12.html#taileulispcl12.html" >prev-tail</a>] [<a
 href="#taileulispcl13.html">tail</a>] [<a 
 href="eulisp.html#eulispcl13.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 13 <a 
- id="x17-15500013"></a>Conditions</h3>
+ id="x17-14500013"></a>Conditions</h3>
 <a 
- id="dx17-155001"></a>
+ id="dx17-145001"></a>
 <a 
- id="dx17-155002"></a>
+ id="dx17-145002"></a>
 <!--l. 1--><p class="noindent" >The defined name of this module is <span 
 class="cmtt-9">condition</span>.
 </p><!--l. 3--><p class="noindent" >The condition system was influenced by the Common Lisp error
 system &#x00A0;[<a 
 href="eulisp.html#x1-113501616">16<!--tex4ht:ref: Pit-errors --></a>] <a 
- id="dx17-155003"></a>and the Standard ML<a 
- id="dx17-155004"></a> exception mechanism. It is a
+ id="dx17-145003"></a>and the Standard ML<a 
+ id="dx17-145004"></a> exception mechanism. It is a
 simplification of the former and an extension of the latter.
 Following standard practice, this text defines the actions
 of functions in terms of their normal behaviour. Where an
@@ -40,7 +40,7 @@ exceptional behaviour might arise, this has been defined in terms
 of a condition. However, not all exceptional situations are
 errors. Following Pitman, we use <span 
 class="cmti-9">condition</span><a 
- id="dx17-155005"></a> to be a kind of
+ id="dx17-145005"></a> to be a kind of
 occasion in a program when an exceptional situation has
 been signalled. An error is a kind of condition&#8212;error and
 condition are also used as terms for the objects that represent
@@ -52,8 +52,8 @@ continued.
 </p><!--l. 21--><p class="noindent" >
     </p><ol  class="enumerate1" >
     <li 
-  class="enumerate" id="x17-155007x1"><a 
- id="dx17-155008"></a> A  condition  might  be  signalled  when  some  limit  has
+  class="enumerate" id="x17-145007x1"><a 
+ id="dx17-145008"></a> A  condition  might  be  signalled  when  some  limit  has
     been transgressed and some corrective action is needed
     before processing can resume. For example, memory zone
     exhaustion on attempting to heap-allocate an item can be
@@ -66,21 +66,21 @@ continued.
     when there is a strategy for recovery from the condition.
     </li>
     <li 
-  class="enumerate" id="x17-155010x2"><a 
- id="dx17-155011"></a> Alternatively, a condition might be signalled when some
+  class="enumerate" id="x17-145010x2"><a 
+ id="dx17-145011"></a> Alternatively, a condition might be signalled when some
     catastrophic situation is recognized, such as the memory
     manager being unable to allocate more memory or unable
     to recover sufficient memory from that already allocated.
     A  condition  should  be  signalled  non-continuably  when
     there is no reasonable way to resume processing.</li></ol>
 <!--l. 42--><p class="noindent" >A   condition   class   is   defined   using   <a 
-href="eulispcl14.html#x18-156003r5"><span 
+href="eulispcl14.html#x18-146003r5"><span 
 class="cmtt-9">defcondition</span></a>  (see
 Section&#x00A0;<a 
-href="eulispcl14.html#x18-156003r5">14.0.5<!--tex4ht:ref: defcondition --></a>).  The  definition  of  a  condition  causes  the
+href="eulispcl14.html#x18-146003r5">14.0.5<!--tex4ht:ref: defcondition --></a>).  The  definition  of  a  condition  causes  the
 creation of a new class of condition. A condition is signalled
 using the function <a 
-href="eulispcl15.html#x19-170004r14"><span 
+href="eulispcl15.html#x19-170004r20"><span 
 class="cmtt-9">signal</span></a>, which has two required arguments
 and  one  optional  argument:  an  instance  of  a  condition,  a
 resume continuation or the empty list&#8212;the latter signifying
@@ -90,15 +90,15 @@ class="cmtt-9">with-handler</span>, which takes a
 function&#8212;the handler function&#8212;and a sequence of forms to
 be protected. The initial condition class hierarchy is shown in
 Table&#x00A0;<a 
-href="#x17-1550122">2<!--tex4ht:ref: condition-class-hierarchy --></a>. </p><hr class="figure" /><div class="figure" 
+href="#x17-1450122">2<!--tex4ht:ref: condition-class-hierarchy --></a>. </p><hr class="figure" /><div class="figure" 
 >  <a 
- id="x17-1550122"></a><a 
+ id="x17-1450122"></a><a 
  id="x19-181007r1"></a><a 
  id="x20-258001r1"></a><a 
  id="x20-281001r2"></a><span 
 class="cmbx-9">??</span><br 
 class="newline" />  <a 
-href="eulispcl14.html#x18-166002r9"><span 
+href="eulispcl14.html#x18-156002r9"><span 
 class="cmtt-9">&#x003C;general-condition&#x003E;</span></a><br 
 class="newline" />    <a 
 href="eulispcl16.html#x20-221002r5"><span 
@@ -110,7 +110,7 @@ class="newline" />    <a
 href="eulispcl16.html#x20-236002r3"><span 
 class="cmtt-9">&#x003C;no-setter&#x003E;</span></a><br 
 class="newline" />  <a 
-href="eulispcl14.html#x18-168002r12"><span 
+href="eulispcl14.html#x18-158002r12"><span 
 class="cmtt-9">&#x003C;environment-condition&#x003E;</span></a><br 
 class="newline" />  <a 
 href="eulispcl17.html#x21-588002r3"><span 
@@ -131,34 +131,34 @@ class="cmtt-9">&#x003C;end-of-stream&#x003E;</span></a><br
 class="newline" />  <span 
 class="cmbx-9">??</span><br 
 class="newline" />   <a 
-href="eulispcl12.html#x16-137006r10"><span 
+href="eulispcl12.html#x16-127006r10"><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl12.html#x16-141002r12"><span 
+href="eulispcl12.html#x16-131002r12"><span 
 class="cmtt-9">&#x003C;thread-already-started&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl12.html#x16-139002r11"><span 
+href="eulispcl12.html#x16-129002r11"><span 
 class="cmtt-9">&#x003C;wrong-thread-continuation&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl14.html#x18-168004r13"><span 
+href="eulispcl14.html#x18-158004r13"><span 
 class="cmtt-9">&#x003C;wrong-condition-class&#x003E;</span></a><br 
 class="newline" />  <a 
-href="eulispcl11.html#x13-64011r3"><span 
+href="eulispcl14.html#x18-159002r14"><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl11.html#x13-96002r3"><span 
+href="eulispcl14.html#x18-167002r19"><span 
 class="cmtt-9">&#x003C;no-next-method&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl11.html#x13-86002r7"><span 
+href="eulispcl14.html#x18-163002r17"><span 
 class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl11.html#x13-84002r6"><span 
+href="eulispcl14.html#x18-161002r16"><span 
 class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl11.html#x13-82002r5"><span 
+href="eulispcl14.html#x18-159004r15"><span 
 class="cmtt-9">&#x003C;no-applicable-method&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl11.html#x13-88002r8"><span 
+href="eulispcl14.html#x18-165002r18"><span 
 class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a><br 
 class="newline" />
  <br /> <div align="center" class="caption"><table class="caption" 

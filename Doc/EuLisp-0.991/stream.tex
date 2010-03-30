@@ -26,7 +26,7 @@ provide an interface between two objects through the two functions
 \ssclause{Stream classes}
 
 % ------------------------------------------------------------------------------
-\class{stream}
+\derivedclass{stream}{object}
 % ------------------------------------------------------------------------------
 \index{general}{level-0 classes!\classref{stream}}
 %
@@ -87,7 +87,7 @@ A constructor function of one argument for \classref{stream} which returns a str
 whose {\tt stream-write-action} is the given argument.
 
 % ------------------------------------------------------------------------------
-\class{buffered-stream}
+\derivedclass{buffered-stream}{stream}
 % ------------------------------------------------------------------------------
 \index{general}{level-0 classes!\theclass{buffered-stream}}
 %
@@ -96,7 +96,7 @@ arbitrarily large. The transaction unit of \classref{buffered-stream} is
 \classref{object}.
 
 % ------------------------------------------------------------------------------
-\class{fixed-buffered-stream}
+\derivedclass{fixed-buffered-stream}{buffered-stream}
 % ------------------------------------------------------------------------------
 \index{general}{level-0 classes!\theclass{fixed-buffered-stream}}
 %
@@ -105,7 +105,7 @@ growth of the buffer. The transaction unit of \classref{fixed-buffered-stream}
 is \classref{object}.
 
 % ------------------------------------------------------------------------------
-\class{file-stream}
+\derivedclass{file-stream}{fixed-buffered-stream}
 % ------------------------------------------------------------------------------
 \index{general}{level-0 classes!\theclass{file-stream}}
 %
@@ -136,7 +136,7 @@ stored in files on disk. The transaction unit of \classref{file-stream} is
 Returns {\em object\/} if it is a \classref{file-stream} otherwise \nil.
 
 % ------------------------------------------------------------------------------
-\class{string-stream}
+\derivedclass{string-stream}{buffered-stream}
 % ------------------------------------------------------------------------------
 \index{general}{level-0 classes!\theclass{string-stream}}
 %

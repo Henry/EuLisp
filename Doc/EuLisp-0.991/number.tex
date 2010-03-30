@@ -46,7 +46,7 @@ hierarchy at level-0.  The inheritance relationships by this diagram are part of
 this definition, but it is not defined whether they are direct or not.  For
 example, \classref{integer}\ and \classref{float}\ are not necessarily direct
 subclasses of \classref{number}, while the class of each number class might be a
-subclass of {\em number-class}.  Since there are only two concrete number
+subclass of \classref{number}.  Since there are only two concrete number
 classes at level-0,
 coercion\index{general}{coercion}\index{general}{number!coercion} is simple,
 namely from \classref{fixed-precision-integer}\ to \classref{double-float}.  Any
@@ -68,16 +68,16 @@ in particular \genericref{binary/},
 \label{level-0-number-class-hierarchy}
 \begin{center}
 {\tt\begin{tabbing}
-<num\=ber> [<number-class>]\\
-    \><flo\=at> [<number-class>]\\
-    \>    \><double-float> [<number-class>]\\
-    \><integer> [<number-class>]\\
-    \>    \><fixed-precision-integer> [<number-class>]
+<num\=ber> \\
+    \><flo\=at> \\
+    \>    \><double-float> \\
+    \><integer> \\
+    \>    \><fixed-precision-integer>
 \end{tabbing}}
 \end{center}
 \end{figure}
 
-\class{number}
+\derivedclass{number}{object}
 %
 The abstract class which is the superclass of all number classes.
 
