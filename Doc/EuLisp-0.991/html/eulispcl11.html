@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-30 22:00:00" /> 
+<meta name="date" content="2010-03-31 22:39:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -100,26 +100,26 @@ indirect instances of this class. The inheritance rules, the
 applicability of methods and the generic dispatch are described in
 detail later in this section.
 </p><!--l. 43--><p class="noindent" >Classes are defined using the <a 
-href="eulispcl18.html#x23-839003r1"><span 
+href="eulispcl18.html#x23-873003r1"><span 
 class="cmtt-9">defclass</span></a> (<a 
 href="#x13-66003r1">11.3.1<!--tex4ht:ref: defclass --></a>) and <a 
-href="eulispcl14.html#x18-146003r5"><span 
+href="eulispcl14.html#x18-148003r5"><span 
 class="cmtt-9">defcondition</span></a>
 (<a 
-href="eulispcl14.html#x18-146003r5">14.0.5<!--tex4ht:ref: defcondition --></a>) defining forms, both of which create top-lexical bindings.
+href="eulispcl14.html#x18-148003r5">14.0.5<!--tex4ht:ref: defcondition --></a>) defining forms, both of which create top-lexical bindings.
 </p><!--l. 47--><p class="noindent" >Generic functions are defined using the <a 
-href="eulispcl18.html#x23-849003r2"><span 
+href="eulispcl18.html#x23-883003r2"><span 
 class="cmtt-9">defgeneric</span></a><a 
  id="dx13-63004"></a> defining form,which creates a named generic function in the top-lexical environment
  of the module in which it appears and <a 
-href="eulispcl18.html#x23-843003r1"><span 
+href="eulispcl18.html#x23-877003r1"><span 
 class="cmtt-9">generic-lambda</span></a><a 
  id="dx13-63005"></a>, which
  creates an anonymous generic function. These forms are described
  in detail later in this section.
  </p><!--l. 54--><p class="noindent" >Methods can either be defined at the same time as the generic
  function, or else defined separately using the <a 
-href="eulispcl18.html#x23-858003r2"><span 
+href="eulispcl18.html#x23-892003r2"><span 
 class="cmtt-9">defmethod</span></a> macro,
  which adds a new method to an existing generic function. This
  macro is described in detail later in this section.
@@ -146,13 +146,13 @@ href="#x13-640011">1<!--tex4ht:ref: level-0-class-hierarchy --></a>. <hr class="
 href="#x13-64004r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a> <br 
 class="newline" />  <a 
-href="eulispcl17.html#x21-296005r2"><span 
+href="eulispcl17.html#x21-298005r2"><span 
 class="cmtt-9">&#x003C;character&#x003E;</span></a> <br 
 class="newline" />  <a 
-href="eulispcl14.html#x18-149003r6"><span 
+href="eulispcl14.html#x18-151003r6"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a> <br 
 class="newline" />    See Table&#x00A0;<a 
-href="eulispcl13.html#x17-1450122">2<!--tex4ht:ref: condition-class-hierarchy --></a><br 
+href="eulispcl13.html#x17-1470122">2<!--tex4ht:ref: condition-class-hierarchy --></a><br 
 class="newline" />  <a 
 href="#x13-71003r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a> <br 
@@ -161,71 +161,75 @@ class="cmbx-9">??</span> <br
 class="newline" />    <a 
 href="#x13-71007r2"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> <br 
-class="newline" />  <span 
-class="cmbx-9">??</span> <br 
-class="newline" />    <span 
-class="cmbx-9">??</span> <br 
-class="newline" />     <span 
-class="cmbx-9">??</span> <br 
+class="newline" />  <a 
+href="eulispcl17.html#x21-323007r1"><span 
+class="cmtt-9">&#x003C;collection&#x003E;</span></a> <br 
+class="newline" />    <a 
+href="eulispcl17.html#x21-323011r2"><span 
+class="cmtt-9">&#x003C;sequence&#x003E;</span></a> <br 
+class="newline" />     <a 
+href="eulispcl17.html#x21-575007r1"><span 
+class="cmtt-9">&#x003C;list&#x003E;</span></a> <br 
 class="newline" />       <a 
-href="eulispcl17.html#x21-555003r7"><span 
+href="eulispcl17.html#x21-586003r8"><span 
 class="cmtt-9">&#x003C;cons&#x003E;</span></a> <br 
 class="newline" />       <a 
-href="eulispcl17.html#x21-545004r2"><span 
+href="eulispcl17.html#x21-576004r3"><span 
 class="cmtt-9">&#x003C;null&#x003E;</span></a><br 
 class="newline" />     <span 
 class="cmbx-9">??</span> <br 
 class="newline" />       <a 
-href="eulispcl17.html#x21-766007r2"><span 
+href="eulispcl17.html#x21-800007r2"><span 
 class="cmtt-9">&#x003C;string&#x003E;</span></a> <br 
 class="newline" />     <a 
-href="eulispcl17.html#x21-820004r2"><span 
+href="eulispcl17.html#x21-854004r2"><span 
 class="cmtt-9">&#x003C;vector&#x003E;</span></a> <br 
 class="newline" />    <a 
-href="eulispcl17.html#x21-812006r1"><span 
+href="eulispcl17.html#x21-846006r1"><span 
 class="cmtt-9">&#x003C;table&#x003E;</span></a> <br 
 class="newline" />     <span 
 class="cmbx-9">??</span> <br 
 class="newline" />  <a 
-href="eulispcl12.html#x16-134004r1"><span 
+href="eulispcl12.html#x16-136004r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a> <br 
 class="newline" />  <a 
-href="eulispcl17.html#x21-586011r1"><span 
+href="eulispcl17.html#x21-617011r1"><span 
 class="cmtt-9">&#x003C;number&#x003E;</span></a> <br 
 class="newline" />    <a 
-href="eulispcl17.html#x21-519005r2"><span 
+href="eulispcl17.html#x21-550005r2"><span 
 class="cmtt-9">&#x003C;integer&#x003E;</span></a><br 
 class="newline" />     <a 
-href="eulispcl17.html#x21-490032r1"><span 
+href="eulispcl17.html#x21-521032r1"><span 
 class="cmtt-9">&#x003C;fixed-precision-integer&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl17.html#x21-479005r2"><span 
+href="eulispcl17.html#x21-510005r2"><span 
 class="cmtt-9">&#x003C;float&#x003E;</span></a><br 
 class="newline" />     <a 
-href="eulispcl17.html#x21-425062r1"><span 
+href="eulispcl17.html#x21-456062r1"><span 
 class="cmtt-9">&#x003C;double-float&#x003E;</span></a><br 
 class="newline" />  <a 
-href="eulispcl17.html#x21-634003r1"><span 
+href="eulispcl17.html#x21-669003r1"><span 
 class="cmtt-9">&#x003C;stream&#x003E;</span></a> <br 
 class="newline" />    <a 
-href="eulispcl17.html#x21-637009r5"><span 
+href="eulispcl17.html#x21-672009r5"><span 
 class="cmtt-9">&#x003C;buffered-stream&#x003E;</span></a><br 
 class="newline" />     <a 
-href="eulispcl17.html#x21-639003r9"><span 
+href="eulispcl17.html#x21-674003r9"><span 
 class="cmtt-9">&#x003C;string-stream&#x003E;</span></a><br 
 class="newline" />     <a 
-href="eulispcl17.html#x21-637017r7"><span 
+href="eulispcl17.html#x21-672017r7"><span 
 class="cmtt-9">&#x003C;file-stream&#x003E;</span></a><br 
-class="newline" />  <span 
-class="cmbx-9">??</span> <br 
+class="newline" />  <a 
+href="#x13-104003r1"><span 
+class="cmtt-9">&#x003C;name&#x003E;</span></a> <br 
 class="newline" />    <a 
-href="eulispcl17.html#x21-792004r2"><span 
+href="eulispcl17.html#x21-826004r2"><span 
 class="cmtt-9">&#x003C;symbol&#x003E;</span></a><br 
 class="newline" />    <a 
-href="eulispcl17.html#x21-526011r2"><span 
+href="eulispcl17.html#x21-557011r2"><span 
 class="cmtt-9">&#x003C;keyword&#x003E;</span></a><br 
 class="newline" />  <a 
-href="eulispcl12.html#x16-105004r1"><span 
+href="eulispcl12.html#x16-107004r1"><span 
 class="cmtt-9">&#x003C;thread&#x003E;</span></a> <br 
 class="newline" />    <span 
 class="cmbx-9">??</span><br 
@@ -239,7 +243,7 @@ class="content">Level-0 class hierarchy</td></tr></table></div>
 </div><hr class="endfigure" />
 <!--l. 46--><p class="noindent" >Indentation indicates a subclass relationship to the class under
 which the line has been indented, for example, <a 
-href="eulispcl14.html#x18-149003r6"><span 
+href="eulispcl14.html#x18-151003r6"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;is a
 subclass of <a 
 href="#x13-64004r1"><span 
@@ -248,10 +252,10 @@ bindings of names to classes as they are exported from the
 level-0 modules. Classes directly relevant to the object system
 are described in this section while others are described in
 corresponding sections, e.g. <a 
-href="eulispcl14.html#x18-149003r6"><span 
+href="eulispcl14.html#x18-151003r6"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;is described in
 Section&#x00A0;<a 
-href="eulispcl13.html#x17-14500013">13<!--tex4ht:ref: condition --></a>. In this definition, unless otherwise specified, classes
+href="eulispcl13.html#x17-14700013">13<!--tex4ht:ref: condition --></a>. In this definition, unless otherwise specified, classes
 declared to be subclasses of other classes may be indirect
 subclasses. Classes not declared to be in a subclass relationship are
 disjoint. Furthermore, unless otherwise specified, all objects
@@ -290,7 +294,7 @@ class="cmtt-9">&#x003C;class&#x003E;</span>
 class="cmti-9">class </span></i></b></div><br /> <hr /> <a 
  id="dx13-64009"></a> The default super-class classes. All classes defined using
 the <a 
-href="eulispcl18.html#x23-839003r1"><span 
+href="eulispcl18.html#x23-873003r1"><span 
 class="cmtt-9">defclass</span></a> form are direct or indirect subclasses of <a 
 href="#x13-64008r2"><span 
 class="cmtt-9">&#x003C;class&#x003E;</span></a>.
@@ -399,8 +403,8 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">superclass</span><span 
@@ -413,8 +417,8 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">slot</span><span 
@@ -455,8 +459,8 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">slot</span><span 
@@ -470,8 +474,8 @@ class="cmtt-8">&#x00A0;keyword</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -484,7 +488,7 @@ class="cmtt-8">&#x00A0;expression</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-18900016"><span 
+href="eulispcl16.html#x20-19100016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -496,8 +500,8 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -508,8 +512,8 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -520,8 +524,8 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -556,8 +560,8 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -622,7 +626,7 @@ class="arguments">
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-6900011.3.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5><a 
-href="eulispcl18.html#x23-839003r1"><span 
+href="eulispcl18.html#x23-873003r1"><span 
 class="cmtt-9">defclass</span></a> defines a new structure class. Structure classes
 support single inheritance as described above. Neither class redefinition
 nor changing the class of an instance is supported by structure
@@ -667,7 +671,7 @@ href="#x13-90005r1"><span
 class="cmtt-9">make</span></a>.
     The expression is evaluated in the lexical environment of
     the call to <a 
-href="eulispcl18.html#x23-839003r1"><span 
+href="eulispcl18.html#x23-873003r1"><span 
 class="cmtt-9">defclass</span></a> and the dynamic environment of the
     call to <a 
 href="#x13-90005r1"><span 
@@ -722,7 +726,7 @@ class="options">
 class="cmti-9">slot option </span>causes the writer function to be associated to
         the reader <span 
 class="cmti-9">via </span>the <a 
-href="eulispcl16.html#x20-232003r2"><span 
+href="eulispcl16.html#x20-234003r2"><span 
 class="cmtt-9">setter</span></a> mechanism. This option can be
         specified more than once for a slot. It is a violation to
         specify the same reader, writer, or accessor name for two
@@ -808,7 +812,7 @@ class="cmti-9">object </span>: </dt><dd
 class="arguments">
     <!--l. 421--><p class="noindent" >Returns <span 
 class="cmti-9">object</span>, if it is an abstract class, otherwise <a 
-href="eulispcl17.html#x21-544007r1"><span 
+href="eulispcl17.html#x21-575011r2"><span 
 class="cmtt-9">()</span></a>.</p></dd></dl>
 <a 
  id="x13-70001r1"></a>
@@ -909,8 +913,8 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">gf</span><span 
@@ -980,8 +984,8 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">specialized</span><span 
@@ -1001,8 +1005,8 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -1015,8 +1019,8 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /></span>                                                        </div>
  </p>
@@ -1063,14 +1067,14 @@ class="cmti-9">congruent </span>iff:
         other lambda list has a rest formal parameter too, and vice
         versa.</li></ol>
   <!--l. 65--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-163002r17"><span 
+href="eulispcl14.html#x18-165002r17"><span 
 class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a><a 
  id="dx13-74005"></a>)
   if any method defined on this generic function does not have a
   lambda list <span 
 class="cmti-9">congruent </span>to that of the generic function.
   </p><!--l. 70--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-161002r16"><span 
+href="eulispcl14.html#x18-163002r16"><span 
 class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a><a 
  id="dx13-74006"></a>)
   if the method&#8217;s specialized lambda list widens the domain of the
@@ -1080,19 +1084,19 @@ class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a><a
                                                                                                   
                                                                                                   
 </p><!--l. 76--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-165002r18"><span 
+href="eulispcl14.html#x18-167002r18"><span 
 class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a><a 
  id="dx13-74007"></a>) if
 any methods defined on this generic function have the same
 domain. These conditions apply both to methods defined at the
 same time as the generic function and to any methods added
 subsequently by <a 
-href="eulispcl18.html#x23-858003r2"><span 
+href="eulispcl18.html#x23-892003r2"><span 
 class="cmtt-9">defmethod</span></a>. An <span 
 class="cmti-9">init-option </span>is an identifier followed
 by a corresponding value.
 </p><!--l. 83--><p class="noindent" >An error is signalled (condition class: <a 
-href="eulispcl14.html#x18-159004r15"><span 
+href="eulispcl14.html#x18-161004r15"><span 
 class="cmtt-9">&#x003C;no-applicable-method&#x003E;</span></a><a 
  id="dx13-74008"></a>) if
 an attempt is made to apply a generic function which has no
@@ -1112,7 +1116,7 @@ class="options">
     function definition appears. This option may be specified
     more than once.</p></dd></dl>
 <!--l. 98--><p class="noindent" >The rewrite rules for <a 
-href="eulispcl18.html#x23-849003r2"><span 
+href="eulispcl18.html#x23-883003r2"><span 
 class="cmtt-9">defgeneric</span></a> are:
 <a 
  id="dx13-74009"></a>
@@ -1244,7 +1248,7 @@ class="cmtt-8">&#x00A0;option}))</span>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x13-7500011.4.3.1"></a><span 
 class="cmbx-8">Examples</span></h5>In the following example of the use of <a 
-href="eulispcl18.html#x23-849003r2"><span 
+href="eulispcl18.html#x23-883003r2"><span 
 class="cmtt-9">defgeneric</span></a> a generic
 function named <span 
 class="cmtt-9">gf-0 </span>is defined with three methods attached to it.
@@ -1256,7 +1260,7 @@ class="cmsy-9">&#x00D7; </span><span
 class="cmtt-9">&#x003C;class-a&#x003E;</span>.
 In consequence, each method added to the generic function, both
 here and later (by <a 
-href="eulispcl18.html#x23-858003r2"><span 
+href="eulispcl18.html#x23-892003r2"><span 
 class="cmtt-9">defmethod</span></a>), must have a domain which is a
 subclass of <a 
 href="#x13-64004r1"><span 
@@ -1306,9 +1310,9 @@ class="cmtt-8">&#x00A0;...))</span>
  id="x13-7600011.4.3.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="eulispcl18.html#x23-858003r2"><span 
+href="eulispcl18.html#x23-892003r2"><span 
 class="cmtt-9">defmethod</span></a>, <a 
-href="eulispcl18.html#x23-843003r1"><span 
+href="eulispcl18.html#x23-877003r1"><span 
 class="cmtt-9">generic-lambda</span></a>.
 <a 
  id="dx13-76001"></a>
@@ -1389,18 +1393,18 @@ class="cmti-9">gf-name</span>, which
   function. If the specialized-lambda-list is not congruent with that
   of the generic function, an error is signalled (condition class:
   <a 
-href="eulispcl14.html#x18-163002r17"><span 
+href="eulispcl14.html#x18-165002r17"><span 
 class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a><a 
  id="dx13-78001"></a>). An error is signalled (condition
   class: <a 
-href="eulispcl14.html#x18-161002r16"><span 
+href="eulispcl14.html#x18-163002r16"><span 
 class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a><a 
  id="dx13-78002"></a>) if the method&#8217;s specialized
   lambda list would widen the domain of the generic function. If
   there is a method with the same domain already defined on
   this gneric function, an error is signalled (condition class:
   <a 
-href="eulispcl14.html#x18-165002r18"><span 
+href="eulispcl14.html#x18-167002r18"><span 
 class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a><a 
  id="dx13-78003"></a>).
   <a 
@@ -1448,7 +1452,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
  <h5 class="likesyntaxssclauseHead"><a 
  id="x13-8000011.4.5.1"></a><span 
 class="cmbx-8">Remarks</span></h5><a 
-href="eulispcl18.html#x23-843003r1"><span 
+href="eulispcl18.html#x23-877003r1"><span 
 class="cmtt-9">generic-lambda</span></a> creates and returns an anonymous
   generic function that can be applied immediately, much like the
   normal <a 
@@ -1465,7 +1469,7 @@ class="cmti-9">special form </span></i></b></div><br /> <hr /> . The <span
 class="cmti-9">gen-lambda-list </span>and the <span 
 class="cmti-9">init-option</span>s are
   interpreted exactly as for the level-0 definition of <a 
-href="eulispcl18.html#x23-849003r2"><span 
+href="eulispcl18.html#x23-883003r2"><span 
 class="cmtt-9">defgeneric</span></a>.
                                                                                                   
                                                                                                   
@@ -1474,7 +1478,7 @@ class="cmtt-9">defgeneric</span></a>.
 class="cmbx-8">Examples</span></h5>In the following example an anonymous version of <span 
 class="cmtt-9">gf-0</span>
 (see <a 
-href="eulispcl18.html#x23-849003r2"><span 
+href="eulispcl18.html#x23-883003r2"><span 
 class="cmtt-9">defgeneric</span></a> above) is defined. In all other respects the
 resulting object is the same as <span 
 class="cmtt-9">gf-0</span>.
@@ -1516,7 +1520,7 @@ class="cmtt-8">&#x00A0;...))</span>
  id="x13-820006"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="eulispcl18.html#x23-849003r2"><span 
+href="eulispcl18.html#x23-883003r2"><span 
 class="cmtt-9">defgeneric</span></a>.
 <!--l. 631--><p class="noindent" >
 </p>
@@ -1581,17 +1585,18 @@ class="cmtt-9">(next-method-p)</span>
 class="cmbx-8">Result</span></h5>If there is a next most specific method, <span 
 class="cmtt-9">next-method-p</span>
  returns a non-<a 
-href="eulispcl17.html#x21-544007r1"><span 
+href="eulispcl17.html#x21-575011r2"><span 
 class="cmtt-9">()</span></a> value, otherwise, it returns <a 
-href="eulispcl17.html#x21-544007r1"><span 
+href="eulispcl17.html#x21-575011r2"><span 
 class="cmtt-9">()</span></a>.
   <!--l. 677--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 11.6 <a 
  id="x13-8900011.6"></a>Method Lookup and Generic Dispatch</h4>
-  <!--l. 1--><p class="noindent" >The system defined method lookup and generic function dispatch
-  is purely class based. <span 
-class="cmbx-9">??</span> methods known from  <span 
+  <!--l. 1--><p class="noindent" >The system defined method lookup and generic function dispatch is
+  purely class based. <a 
+href="eulispcl17.html#x21-408003r3"><span 
+class="cmtt-9">equal</span></a> methods known from  <span 
 class="cmr-8">CLOS</span>&#x00A0;are
   excluded.
   </p><!--l. 4--><p class="noindent" >The application behaviour of a generic function can be described in
@@ -1873,14 +1878,14 @@ class="cmbx-8">Remarks</span></h5>The general constructor <a
 href="#x13-90005r1"><span 
 class="cmtt-9">make</span></a> creates a new object calling
   <a 
-href="eulispcl18.html#x23-921003r6"><span 
+href="eulispcl18.html#x23-955003r6"><span 
 class="cmtt-9">allocate</span></a> and initializes it by calling <a 
 href="#x13-96003r3"><span 
 class="cmtt-9">initialize</span></a>. <a 
 href="#x13-90005r1"><span 
 class="cmtt-9">make</span></a> returns
   whatever <a 
-href="eulispcl18.html#x23-921003r6"><span 
+href="eulispcl18.html#x23-955003r6"><span 
 class="cmtt-9">allocate</span></a> returns as its result.
   <a 
  id="dx13-93001"></a>
@@ -1919,7 +1924,7 @@ class="cmbx-8">Remarks</span></h5>The <span
 class="cmti-9">class </span>must be a structure class, the <span 
 class="cmti-9">initlist </span>is
   ignored. The behaviour of <a 
-href="eulispcl18.html#x23-921003r6"><span 
+href="eulispcl18.html#x23-955003r6"><span 
 class="cmtt-9">allocate</span></a> is extended at level-1 for
   classes not accessible at level-0. The level-0 behaviour is not
   affected by the level-1 extension.
@@ -1965,7 +1970,7 @@ the result. It is called by <a
 href="#x13-90005r1"><span 
 class="cmtt-9">make</span></a> on a new uninitialized object created
 by calling <a 
-href="eulispcl18.html#x23-921003r6"><span 
+href="eulispcl18.html#x23-955003r6"><span 
 class="cmtt-9">allocate</span></a>.
 <!--l. 69--><p class="noindent" >Users may extend <a 
 href="#x13-96003r3"><span 
@@ -2039,20 +2044,42 @@ class="cmtt-9">call-next-method</span></a>.
   functions (accessors) only. For system defined object classes there
   are predefined readers and writers. Some of the writers are
   accessible using the <a 
-href="eulispcl16.html#x20-232003r2"><span 
+href="eulispcl16.html#x20-234003r2"><span 
 class="cmtt-9">setter</span></a> function. If there is no writer for a slot,
   its value cannot be changed. When users define new classes, they
   can specify which readers and writers should be accessible in a
   module and by which binding. Accessor bindings are not exported
   automatically when a class (binding) is exported. They can only be
   exported explicitly.
-  <!--l. 110--><p class="noindent" >
+  <!--l. 10--><p class="noindent" >
+  </p>
+  <h4 class="sclauseHead"> 11.9 <a 
+ id="x13-10400011.9"></a>Other Abstract Classes</h4> <a 
+ id="dx13-104001"></a><a 
+ id="dx13-104002"></a>
+  <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x13-104003r1"></a><span 
+class="cmbx-9">11.9.1   </span><span 
+class="cmtt-9">&#x003C;name&#x003E;</span>
+ <a 
+ id="Q1-13-129"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x13-64004r1"><span 
+class="cmtt-9">&#x003C;object&#x003E;</span></a> </i></b></div><br /> <hr /> <a 
+ id="dx13-104004"></a> The class of all &#8220;names&#8221;.
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x13-1050001"></a><span 
+class="cmbx-8">See</span><span 
+class="cmbx-8">&#x00A0;also</span></h5><a 
+href="eulispcl17.html#x21-826004r2"><span 
+class="cmtt-9">&#x003C;symbol&#x003E;</span></a> and <a 
+href="eulispcl17.html#x21-557011r2"><span 
+class="cmtt-9">&#x003C;keyword&#x003E;</span></a>.
                                                                                                   
                                                                                                   
                                                  
                                                                                                   
                                                                                                   
-</p>
 <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
 href="eulispcl12.html" >next</a>] [<a 
 href="eulispcl10.html" >prev</a>] [<a 
@@ -2060,5 +2087,5 @@ href="eulispcl10.html#taileulispcl10.html" >prev-tail</a>] [<a
 href="eulispcl11.html" >front</a>] [<a 
 href="eulisp.html#eulispcl11.html" >up</a>] </p></div>
 <!--l. 1--><p class="noindent" ><a 
- id="taileulispcl11.html"></a> </p> 
+ id="taileulispcl11.html"></a>  </p> 
 </body></html> 

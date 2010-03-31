@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-30 22:00:00" /> 
+<meta name="date" content="2010-03-31 22:39:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -33,7 +33,7 @@ class="cmr-7">ISP</span>&#x00A0;module scheme has several influences: LeLisp&#82
 module system and module compiler (complice), Haskell<a 
  id="dx12-49003"></a>, ML<a 
  id="dx12-49004"></a>&#x00A0;[<a 
-href="eulisp.html#x1-113501313">13<!--tex4ht:ref: ML-modules --></a>],
+href="eulisp.html#x1-116901313">13<!--tex4ht:ref: ML-modules --></a>],
 MIT-Scheme&#8217;s <span 
 class="cmtt-9">make-environment </span>and T&#8217;s locales.
 </p><!--l. 6--><p class="noindent" >All bindings of objects in  <span 
@@ -74,7 +74,7 @@ smaller units than modules. A module defines a mapping between
 a set of names and either local or imported bindings of those
 names. Most such bindings are immutable. The exception are those
 bindings created by <a 
-href="eulispcl16.html#x20-196008r6"><span 
+href="eulispcl16.html#x20-198008r6"><span 
 class="cmtt-9">deflocal</span></a> which may be modified by both the
 defining and importing modules. There are no implicit imports
 into a module&#8212;not even the special forms are available in a
@@ -786,11 +786,11 @@ href="#x12-49008r1">1<!--tex4ht:ref: example:module --></a>.
  id="x12-5100010.2"></a>Export Directive</h4> <a 
  id="dx12-51001"></a>
 This is denoted by the keyword <span 
-class="cmbx-9">??</span> followed by a sequence of names
-of top-lexical bindings&#8212;these could be either locally-defined or
-imported&#8212;and has the effect of making those bindings accessible
-to any module importing this module by adding them to the
-external environment of the module. A name clash can arise
+class="cmtt-9">export </span>followed by a sequence of
+names of top-lexical bindings&#8212;these could be either locally-defined
+or imported&#8212;and has the effect of making those bindings
+accessible to any module importing this module by adding them to
+the external environment of the module. A name clash can arise
 in the external environment from interaction with exposed
 modules.
 <h4 class="sclauseHead"> 10.3 <a 
@@ -994,7 +994,7 @@ exported name from the module that created the binding. A name
 clash can arise in the top-lexical environment from interaction
 between local definitions and between local definitions and
 imported modules. Only top-lexical bindings created by <a 
-href="eulispcl16.html#x20-196008r6"><span 
+href="eulispcl16.html#x20-198008r6"><span 
 class="cmtt-9">deflocal</span></a>
 are mutable&#8212;both in the defining module and in any importing
 module. It is a violation to modify an immutable binding.
@@ -1003,14 +1003,14 @@ in order of appearance at the end of the module definition process
 when the top-lexical environment is complete&#8212;that is after
 the creation and initialization of the top-lexical bindings.
 The exception to this is the <a 
-href="eulispcl16.html#x20-272004r7"><span 
+href="eulispcl16.html#x20-274004r7"><span 
 class="cmtt-9">progn</span></a> form, which is descended
 and the forms within it are treated as if the <a 
-href="eulispcl16.html#x20-272004r7"><span 
+href="eulispcl16.html#x20-274004r7"><span 
 class="cmtt-9">progn</span></a> were not
 present. Definitions may only appear either at top-level within a
 module definition or inside any number of <a 
-href="eulispcl16.html#x20-272004r7"><span 
+href="eulispcl16.html#x20-274004r7"><span 
 class="cmtt-9">progn</span></a> forms. This is
 specified more precisely in the grammar for a module given
 below.
@@ -1051,8 +1051,8 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-79100017.16"><span 
-class="cmr-8">17.16</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-82500017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">module</span><span 
@@ -1126,7 +1126,7 @@ class="cmtt-8">&#x00A0;expression</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-18900016"><span 
+href="eulispcl16.html#x20-19100016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -1138,7 +1138,7 @@ class="cmtt-8">&#x00A0;form</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-18900016"><span 
+href="eulispcl16.html#x20-19100016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -1314,7 +1314,7 @@ class="cmr-8">&#x00A0;3</span>  <span
 class="cmr-8">In  this  sense,  a  module  can  be  regarded  as  a</span>
     <span 
 class="cmr-8">generalization of the </span><a 
-href="eulispcl16.html#x20-265003r4"><span 
+href="eulispcl16.html#x20-267003r4"><span 
 class="cmtt-8">labels</span></a> <span 
 class="cmr-8">form of this and other Lisp dialects.</span></div>
     </dd> <dt class="description">
