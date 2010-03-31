@@ -24,14 +24,14 @@ processed might not be important, but as soon as more than one collection is
 involved, it is necessary to specify how the collections are
 aligned\index{general}{collection!alignment} so that it is clear which elements
 of the collections will be processed together.  This is quite straightforward in
-the cases of \classref{list}, \classref{string}\ and \classref{vector}, since there is an
-intuitive {\em natural\/} order for the elements which allows them to be
-identified by a non-negative integer.  Thus, when iterating over a combination
-of any of these, all the elements at index position $i$ will be processed
-together, starting with the elements at position $0$ and finishing with those at
-position $n-1$ where $n$ is the size of the smallest collection in the
-combination.  The subset of collections which have natural order is called {\em
-    sequence\/} and members of this set can be identified by the predicate {\tt
+the cases of \classref{list}, \classref{string}\ and \classref{vector}, since
+there is an intuitive {\em natural\/} order for the elements which allows them
+to be identified by a non-negative integer.  Thus, when iterating over a
+combination of any of these, all the elements at index position $i$ will be
+processed together, starting with the elements at position $0$ and finishing
+with those at position $n-1$ where $n$ is the size of the smallest collection in
+the combination.  The subset of collections which have natural order is called
+{\em sequence\/} and members of this set can be identified by the predicate {\tt
     sequencep}, while collections in general can be identified by {\tt
     collectionp}.
 
@@ -48,6 +48,16 @@ $[0\ldots{}size)$ of the collection with natural order.
 A conforming level-0 implementation must define methods on these functions to
 support operations on lists (\ref{list}), strings (\ref{string}), tables
 (\ref{table}), vector (\ref{vector}) and any combination of these.
+
+\derivedclass{collection}{object}
+\index{general}{level-0 classes!\theclass{collection}}
+%
+The class of all collections.
+
+\derivedclass{sequence}{collection}
+\index{general}{level-0 classes!\theclass{sequence}}
+%
+The class of all sequences, the subset of collections which have natural order.
 
 \condition{collection-condition}{condition} This is the condition class for all
 collection processing conditions.
@@ -454,10 +464,10 @@ collections is exhausted.
 \end{genericargs}
 %
 \result%
-Returns true if there is an element of {\em collection\/} such that the
-result of the application of {\em test\/} to {\em object\/} and that element is
-true.  If {\em test\/} is not supplied, \genericref{eql} is used by default.  Note that
-true denotes any value that is not \nil\/ and that the class of the result
+Returns true if there is an element of {\em collection\/} such that the result
+of the application of {\em test\/} to {\em object\/} and that element is true.
+If {\em test\/} is not supplied, \functionref{eql} is used by default.  Note
+that true denotes any value that is not \nil\/ and that the class of the result
 depends on the class of {\em collection}.  In particular, if {\em collection\/}
 is a list, the result of \genericref{member} is a list.
 %
@@ -494,7 +504,7 @@ applied to {\em object\/} and that element, then the result is a shallow copy of
 {\em collection\/} less that element. Otherwise, the result is {\em collection}.
 %
 \remarks%
-The test function defaults to \genericref{eql}.
+The test function defaults to \functionref{eql}.
 
 \generic{reverse}
 %

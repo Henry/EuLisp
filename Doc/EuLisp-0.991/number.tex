@@ -37,9 +37,9 @@ The defined name of this module is {\tt number}.
 
 Numbers can take on many forms with unusual properties, specialized for
 different tasks, but two classes of number suffice for the majority of needs,
-namely integers (\classref{integer}, \classref{fpi}) and floating point numbers
-(\classref{float}, \classref{double-float}).  Thus, these only are defined at
-level-0.
+namely integers (\classref{integer}, \constantref{<fpi>}) and floating point
+numbers (\classref{float}, \classref{double-float}).  Thus, these only are
+defined at level-0.
 
 In figure~\ref{level-0-number-class-hierarchy} shows the initial number class
 hierarchy at level-0.  The inheritance relationships by this diagram are part of
@@ -107,6 +107,16 @@ Signalled by any of \genericref{binary/},
 \genericreflabel{binary\protect\%}{binarypercent} and \genericref{binary-mod} if
 their second argument is zero.
 
+\function{=}
+%
+\begin{arguments}
+    \item[{\optional{number$_1$ number$_2$ ...}}] A sequence of numbers.
+\end{arguments}
+%
+\result%
+Compares the arguments for equality using the generic function
+\genericref{binary=}.  Zero arguments is an error.  One argument returns \true.
+
 \function{+}
 %
 \begin{arguments}
@@ -170,6 +180,19 @@ Computes the result of taking the remainder of dividing the first argument by
 its succeeding arguments using the generic function
 \genericreflabel{binary\protect\%}{binarypercent}.  Zero arguments is an error.
 One argument returns that argument.
+
+\function{mod}
+%
+\begin{arguments}
+    \item[{number$_1$ \optional{number$_2$ ...}}] A non-empty sequence of
+    numbers.
+\end{arguments}
+%
+\result%
+Computes the largest integral value not greater than the result of dividing the
+first argument by its succeeding arguments using the generic function
+\genericref{binary-mod}.  Zero arguments is an error.  One argument returns {\em
+    number$_1$}.
 
 \function{gcd}
 %

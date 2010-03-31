@@ -12,10 +12,6 @@ defined here are redundant.  Names in {\tt courier} font refer to
 entities defined in the language.
 %
 \begin{definitions}
-    % \definition{accessor}
-    % \index{general}{accessor}\index{general}{slot!accessor} An accessor is a
-    % association of a {\em reader} and a {\em writer}.
-    %
     % \definition{applicable method} \index{general}{applicable method}
     % \index{general}{method!applicable} A {\em method} is applicable for a
     % particular set of arguments if each element in its {\em domain} is a {\em
@@ -108,8 +104,8 @@ entities defined in the language.
     \definition{defining form}\index{general}{defining form} Any form or any
     {\em macro expression} expanding into a form whose operator is one of
     \defformref{defclass}, \defformref{defcondition}, \defformref{defconstant},
-    \defformref{defgeneric}, \defformref{deflocal}, \defformref{defmacro},
-    \defformref{defun}, or \defformref{defglobal}.
+    \defformref{defgeneric}, \defformref{deflocal}, \syntaxref{defmacro},
+    \syntaxref{defun}, or \defformref{defglobal}.
 
     \definition{direct instance}\index{general}{direct
         instance}\index{general}{instance!direct} A direct instance of a class
@@ -416,7 +412,7 @@ entities defined in the language.
 
     \definition{slot option} \index{general}{slot option} A keyword and its
     associated value applying to one of the slots appearing in a class
-    definition form, for example: the \keywordref{accessor} keyword and its
+    definition form, for example: the {\tt accessor} keyword and its
     value, which defines a function used to read or write the value of a
     particular slot.
 
@@ -460,7 +456,7 @@ entities defined in the language.
     are created in the {\em top} {\em lexical} environment of a module by
     \begin{flushleft} \defformref{defclass}, \defformref{defcondition},
         \defformref{defconstant}, \defformref{defgeneric},
-        \defformref{defmacro}, \defformref{defclass}, \defformref{defun}.
+        \syntaxref{defmacro}, \defformref{defclass}, \syntaxref{defun}.
     \end{flushleft}
     All these bindings are immutable.  \defformref{deflocal} creates a mutable
     top-lexical binding.  All such bindings are referenced by {\em variables}

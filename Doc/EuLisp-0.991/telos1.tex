@@ -303,9 +303,9 @@ defgeneric form
 \end{arguments}
 %
 \remarks%
-This defining form defines a new generic function.  The resulting
-generic function will be bound to {\em gf-name}.  The second argument is the
-formal parameter list.  An error is signalled (condition:
+This defining form defines a new generic function.  The resulting generic
+function will be bound to {\em gf-name}.  The second argument is the formal
+parameter list.  An error is signalled (condition:
 \conditionref{non-congruent-lambda-lists}\indexcondition{non-congruent-lambda-lists})
 if any of the methods defined on this generic function do not have lambda lists
 congruent to that of the generic function.  This applies both to methods defined
@@ -314,7 +314,7 @@ by \defformref{defmethod} or \genericref{add-method}.  An {\em init-option} is a
 identifier followed by its initial value.  The syntax of \defformref{defgeneric}
 is an extension of the level-0 syntax.  The rewrite rules for the
 \defformref{defgeneric} form are identical to those given in
-Table~\ref{defgeneric-rewrite-table} except that {\em level 1 init option}
+section~\ref{defgeneric-rewrite-rules} except that {\em level 1 init option}
 replaces {\em level 0 init option}.
 %
 \examples

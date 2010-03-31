@@ -94,6 +94,28 @@
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
     See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].
-*** TODO Check all hanging links
-    + Add missing entries.
-    + Correct erroneous links.
+*** TODO Undefined references [20/24]
+    + [X] class:collection
+    + [X] class:<function>
+    + [-] class:hash-table
+    + [X] class:list
+    + [-] class:metaclass
+    + [-] class:method
+    + [X] class:name
+    + [X] class:sequence
+    + [-] class:super-class
+    + [X] defform:defmacro
+    + [X] defform:defun
+    + [X] function:eq
+    + [X] function:eql
+    + [X] function:=
+    + [X] generic:binary<
+    + [X] generic:binary=
+    + [X] generic:eql
+    + [X] generic:eq
+    + [X] generic:equal
+    + [X] generic:method
+    + [X] generic:mod
+    + [X] generic:read
+    + [X] keyword:accessor
+    + [X] keyword:export

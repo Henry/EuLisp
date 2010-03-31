@@ -257,7 +257,7 @@ list.
 This function returns the class which is the class of all methods of the generic
 function.  Each method attached to a generic function must be an instance of
 this class. When a method is created using \macroref{defmethod},
-\macroref{method-lambda}, or by using the \genericref{method} generic function
+\macroref{method-lambda}, or by using the {\tt method} generic function
 option in a \defformref{defgeneric} or \macroref{generic-lambda}, it will be an
 instance of this class by default.
 
@@ -442,8 +442,10 @@ cl <effective-slotds> <inherited-slotds> -> list(slotd)
 \end{optPrivate}
 
 \begin{figure*}[t]
+\caption{Initialization Call Structure}
+\label{call-structure}
 \begin{center}\begin{minipage}[t]{\textwidth}
-{\small\tt\begin{tabbing}
+\small\tt\begin{tabbing}
 co\=mpatible-superclasses-p {\em cl direct-superclasses\/} $\rightarrow$ {\em boolean}\\
   \>compatible-superclass-p {\em cl superclass\/} $\rightarrow$ {\em boolean}\\
 compute-class-precedence-list {\em cl direct-superclasses\/} $\rightarrow$ ({\em cl\/}$^*$)\\
@@ -470,10 +472,9 @@ compute-and-ensure-slot-accessors {\em cl effective-sds inherited-sds\/} $\right
   \>  \>compute-primitive-writer-using-slot\\
   \>  \>  \>                      \>{\em sd cl effective-sds\/} $\rightarrow$ {\em function}\\
   \>  \>  \>compute-primitive-writer-using-class {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
-\end{tabbing}}
-\end{minipage}\end{center}
-\caption{Initialization Call Structure}
-\label{call-structure}
+\end{tabbing}
+\end{minipage}
+\end{center}
 \end{figure*}
 %
 Note that \genericref{compute-initargs} is called by the default

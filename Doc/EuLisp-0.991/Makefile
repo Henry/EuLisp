@@ -22,7 +22,7 @@ TEX_FILES = \
     prim.tex          telos1.tex        control0.tex   terms.tex \
     control1.tex      integer.tex       stream.tex     threads.tex \
     convert.tex       introduction.tex  string.tex     vector.tex \
-    copy.tex          list.tex          structure.tex \
+    copy.tex          list.tex          structure.tex  compare.tex \
     double.tex        mathlib.tex       symbol.tex
 
 STY_FILES = eulisp.sty
@@ -77,6 +77,11 @@ $(HTML1_DIR)/$(DOCUMENT).html: $(SOURCE_FILES) $(4HT_FILES)
 	$(MAKE) tex4htindex
 	xhlatex $(DOCUMENT) "html" "" "-d./$(HTML1_DIR)/"
 	xhlatex $(DOCUMENT) "html" "" "-d./$(HTML1_DIR)/"
+
+.PHONY: undefined
+undefined: $(DOCUMENT).pdf
+	grep "undefined on input" eulisp.log \
+	| awk '{print $$5}' | sort | uniq > undefined.txt
 
 ## ----------------------------------------------------------------------------
 ## Generate the index files

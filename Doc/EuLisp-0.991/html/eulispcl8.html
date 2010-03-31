@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-30 22:00:00" /> 
+<meta name="date" content="2010-03-31 22:39:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -33,29 +33,29 @@ class="cmtt-9">courier </span>font refer to entities defined in the
 language.
 <a 
  id="x10-43001r42"></a>
-</p><!--l. 41--><p class="noindent" ><span 
+</p><!--l. 37--><p class="noindent" ><span 
 class="cmbx-9">8.1</span><span 
 class="cmbx-9">&#x00A0;boolean</span><br /><a 
  id="dx10-43002"></a>
-</p><!--l. 41--><p class="noindent" >A boolean value is either <span 
+</p><!--l. 37--><p class="noindent" >A boolean value is either <span 
 class="cmti-9">false</span><a 
  id="dx10-43003"></a>, which is represented by the empty
 list&#8212;written <a 
-href="eulispcl17.html#x21-544007r1"><span 
+href="eulispcl17.html#x21-575011r2"><span 
 class="cmtt-9">()</span></a> and is also the value of <span 
 class="cmtt-9">nil</span>&#8212;or <span 
 class="cmti-9">true</span><a 
  id="dx10-43004"></a>, which is
 represented by any other value than <a 
-href="eulispcl17.html#x21-544007r1"><span 
+href="eulispcl17.html#x21-575011r2"><span 
 class="cmtt-9">()</span></a>.
 <a 
  id="x10-43005r42"></a>
-</p><!--l. 53--><p class="noindent" ><span 
+</p><!--l. 49--><p class="noindent" ><span 
 class="cmbx-9">8.2</span><span 
 class="cmbx-9">&#x00A0;class</span><br /><a 
  id="dx10-43006"></a>
-</p><!--l. 53--><p class="noindent" >A class is an <span 
+</p><!--l. 49--><p class="noindent" >A class is an <span 
 class="cmti-9">object </span>which describes the structure and behaviour of
 a set of <span 
 class="cmti-9">objects </span>which are its <span 
@@ -85,33 +85,35 @@ class="cmtt-9">&#x003C;class&#x003E;</span></a> are <span
 class="cmti-9">classes</span>.
 <a 
  id="x10-43007r42"></a>
-</p><!--l. 104--><p class="noindent" ><span 
+</p><!--l. 100--><p class="noindent" ><span 
 class="cmbx-9">8.3</span><span 
 class="cmbx-9">&#x00A0;defining</span>
 <span 
 class="cmbx-9">form</span><br /><a 
  id="dx10-43008"></a>
-</p><!--l. 104--><p class="noindent" >Any form or any <span 
+</p><!--l. 100--><p class="noindent" >Any form or any <span 
 class="cmti-9">macro expression </span>expanding into a form whose
 operator is one of <a 
-href="eulispcl18.html#x23-839003r1"><span 
+href="eulispcl18.html#x23-873003r1"><span 
 class="cmtt-9">defclass</span></a>, <a 
-href="eulispcl14.html#x18-146003r5"><span 
+href="eulispcl14.html#x18-148003r5"><span 
 class="cmtt-9">defcondition</span></a>, <a 
-href="eulispcl16.html#x20-191003r2"><span 
+href="eulispcl16.html#x20-193003r2"><span 
 class="cmtt-9">defconstant</span></a>,
 <a 
-href="eulispcl18.html#x23-849003r2"><span 
+href="eulispcl18.html#x23-883003r2"><span 
 class="cmtt-9">defgeneric</span></a>, <a 
-href="eulispcl16.html#x20-196008r6"><span 
-class="cmtt-9">deflocal</span></a>, <span 
-class="cmbx-9">??</span>, <span 
-class="cmbx-9">??</span>, or <a 
-href="eulispcl18.html#x23-1119004r5"><span 
+href="eulispcl16.html#x20-198008r6"><span 
+class="cmtt-9">deflocal</span></a>, <a 
+href="eulispcl16.html#x20-211004r2"><span 
+class="cmtt-9">defmacro</span></a>, <a 
+href="eulispcl16.html#x20-215003r3"><span 
+class="cmtt-9">defun</span></a>, or <a 
+href="eulispcl18.html#x23-1153004r5"><span 
 class="cmtt-9">defglobal</span></a>.
 <a 
  id="x10-43009r42"></a>
-</p><!--l. 110--><p class="noindent" ><span 
+</p><!--l. 106--><p class="noindent" ><span 
 class="cmbx-9">8.4</span><span 
 class="cmbx-9">&#x00A0;direct</span>
 <span 
@@ -119,7 +121,7 @@ class="cmbx-9">instance</span><br /><a
  id="dx10-43010"></a>
 <a 
  id="dx10-43011"></a>
-</p><!--l. 111--><p class="noindent" >A direct instance of a class <span 
+</p><!--l. 107--><p class="noindent" >A direct instance of a class <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> is any <span 
 class="cmti-9">object </span>whose most specific
@@ -129,7 +131,7 @@ class="cmti-9">class</span><sub><span
 class="cmr-6">1</span></sub>.
 <a 
  id="x10-43012r42"></a>
-</p><!--l. 120--><p class="noindent" ><span 
+</p><!--l. 116--><p class="noindent" ><span 
 class="cmbx-9">8.5</span><span 
 class="cmbx-9">&#x00A0;direct</span>
 <span 
@@ -137,7 +139,7 @@ class="cmbx-9">subclass</span><br /><a
  id="dx10-43013"></a>
 <a 
  id="dx10-43014"></a>
-</p><!--l. 121--><p class="noindent" >A <span 
+</p><!--l. 117--><p class="noindent" >A <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> is a direct <span 
 class="cmti-9">subclass </span>of <span 
@@ -165,14 +167,14 @@ class="cmti-9">class</span><sub><span
 class="cmr-6">2</span></sub>.
 <a 
  id="x10-43015r42"></a>
-</p><!--l. 127--><p class="noindent" ><span 
+</p><!--l. 123--><p class="noindent" ><span 
 class="cmbx-9">8.6</span><span 
 class="cmbx-9">&#x00A0;direct</span>
 <span 
 class="cmbx-9">superclass</span><br /><a 
  id="dx10-43016"></a>
 <a 
- id="dx10-43017"></a>                                                  </p><!--l. 128--><p class="noindent" >A <span 
+ id="dx10-43017"></a>                                                  </p><!--l. 124--><p class="noindent" >A <span 
 class="cmti-9">direct superclass </span>of a class <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> is any <span 
@@ -183,23 +185,23 @@ class="cmr-6">1</span></sub> is a
 class="cmti-9">subclass</span>.
   <a 
  id="x10-43018r42"></a>
-  </p><!--l. 148--><p class="noindent" ><span 
+  </p><!--l. 144--><p class="noindent" ><span 
 class="cmbx-9">8.7</span><span 
 class="cmbx-9">&#x00A0;dynamic</span>
  <span 
 class="cmbx-9">environment</span><br /> <a 
  id="dx10-43019"></a>
- </p><!--l. 148--><p class="noindent" >The <span 
+ </p><!--l. 144--><p class="noindent" >The <span 
 class="cmti-9">inner </span>and <span 
 class="cmti-9">top dynamic </span>environment, taken together, are
   referred to as the dynamic environment.
   <a 
  id="x10-43020r42"></a>
-  </p><!--l. 180--><p class="noindent" ><span 
+  </p><!--l. 176--><p class="noindent" ><span 
 class="cmbx-9">8.8</span><span 
 class="cmbx-9">&#x00A0;function</span><br /> <a 
  id="dx10-43021"></a>
- </p><!--l. 180--><p class="noindent" >A function is either a <span 
+ </p><!--l. 176--><p class="noindent" >A function is either a <span 
 class="cmti-9">continuation</span>, a <span 
 class="cmti-9">simple function </span>or a <span 
 class="cmti-9">generic</span>
@@ -207,13 +209,13 @@ class="cmti-9">generic</span>
 class="cmti-9">function</span>.
   <a 
  id="x10-43022r42"></a>
-  </p><!--l. 183--><p class="noindent" ><span 
+  </p><!--l. 179--><p class="noindent" ><span 
 class="cmbx-9">8.9</span><span 
 class="cmbx-9">&#x00A0;generic</span>
  <span 
 class="cmbx-9">function</span><br /> <a 
  id="dx10-43023"></a>
- </p><!--l. 183--><p class="noindent" >Generic functions are <span 
+ </p><!--l. 179--><p class="noindent" >Generic functions are <span 
 class="cmti-9">functions </span>for which the <span 
 class="cmti-9">method </span>executed
   depends on the <span 
@@ -225,7 +227,7 @@ class="cmti-9">methods </span>which describe the action of the generic
 class="cmti-9">domain</span>.
   <a 
  id="x10-43024r42"></a>
-  </p><!--l. 203--><p class="noindent" ><span 
+  </p><!--l. 199--><p class="noindent" ><span 
 class="cmbx-9">8.10</span><span 
 class="cmbx-9">&#x00A0;indirect</span>
  <span 
@@ -233,7 +235,7 @@ class="cmbx-9">instance</span><br /> <a
  id="dx10-43025"></a>
  <a 
  id="dx10-43026"></a>
- </p><!--l. 204--><p class="noindent" >An indirect instance of a class <span 
+ </p><!--l. 200--><p class="noindent" >An indirect instance of a class <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> is any <span 
 class="cmti-9">object </span>whose <span 
@@ -244,7 +246,7 @@ class="cmti-9">class</span><sub><span
 class="cmr-6">1</span></sub>.
   <a 
  id="x10-43027r42"></a>
-  </p><!--l. 217--><p class="noindent" ><span 
+  </p><!--l. 213--><p class="noindent" ><span 
 class="cmbx-9">8.11</span><span 
 class="cmbx-9">&#x00A0;indirect</span>
  <span 
@@ -252,7 +254,7 @@ class="cmbx-9">subclass</span><br /> <a
  id="dx10-43028"></a>
  <a 
  id="dx10-43029"></a>
- </p><!--l. 218--><p class="noindent" >A <span 
+ </p><!--l. 214--><p class="noindent" >A <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> is an indirect subclass of <span 
 class="cmti-9">class</span><sub><span 
@@ -279,13 +281,13 @@ class="cmti-9">class</span><sub><span
 class="cmr-6">2</span></sub>.
   <a 
  id="x10-43030r42"></a>
-  </p><!--l. 224--><p class="noindent" ><span 
+  </p><!--l. 220--><p class="noindent" ><span 
 class="cmbx-9">8.12</span><span 
 class="cmbx-9">&#x00A0;inheritance</span>
  <span 
 class="cmbx-9">graph</span><br /> <a 
  id="dx10-43031"></a>
- </p><!--l. 224--><p class="noindent" >A directed labelled acyclic graph whose nodes are <span 
+ </p><!--l. 220--><p class="noindent" >A directed labelled acyclic graph whose nodes are <span 
 class="cmti-9">classes </span>and
   whose edges are defined by the <span 
 class="cmti-9">direct subclass </span>relations between the
@@ -298,7 +300,7 @@ class="cmti-9">superclass </span>of every <span
 class="cmti-9">class</span>.
   <a 
  id="x10-43032r42"></a>
-  </p><!--l. 230--><p class="noindent" ><span 
+  </p><!--l. 226--><p class="noindent" ><span 
 class="cmbx-9">8.13</span><span 
 class="cmbx-9">&#x00A0;inherited</span>
  <span 
@@ -306,7 +308,7 @@ class="cmbx-9">slot</span>
  <span 
 class="cmbx-9">description</span><br /> <a 
  id="dx10-43033"></a>
- </p><!--l. 231--><p class="noindent" >A <span 
+ </p><!--l. 227--><p class="noindent" >A <span 
 class="cmti-9">slot description </span>is inherited for a <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> if the <span 
@@ -320,11 +322,11 @@ class="cmti-9">class</span><sub><span
 class="cmr-6">1</span></sub>.
   <a 
  id="x10-43034r42"></a>
-  </p><!--l. 236--><p class="noindent" ><span 
+  </p><!--l. 232--><p class="noindent" ><span 
 class="cmbx-9">8.14</span><span 
 class="cmbx-9">&#x00A0;initarg</span><br /> <a 
  id="dx10-43035"></a>
- </p><!--l. 236--><p class="noindent" >A <span 
+ </p><!--l. 232--><p class="noindent" >A <span 
 class="cmti-9">symbol </span>used as a keyword in an <span 
 class="cmti-9">initlist </span>to mark the value of some
   <span 
@@ -346,11 +348,11 @@ class="cmtt-9">option</span>.
                                                                                                   
 <a 
  id="x10-43036r42"></a>
-</p><!--l. 244--><p class="noindent" ><span 
+</p><!--l. 240--><p class="noindent" ><span 
 class="cmbx-9">8.15</span><span 
 class="cmbx-9">&#x00A0;initform</span><br /><a 
  id="dx10-43037"></a>
-</p><!--l. 244--><p class="noindent" >A form which is evaluated to produce a default initial <span 
+</p><!--l. 240--><p class="noindent" >A form which is evaluated to produce a default initial <span 
 class="cmti-9">slot </span>value.
 Initforms are closed in their <span 
 class="cmti-9">lexical </span>environments and the resulting
@@ -365,11 +367,11 @@ class="cmti-9">slot</span>
 class="cmti-9">option</span>.
 <a 
  id="x10-43038r42"></a>
-</p><!--l. 250--><p class="noindent" ><span 
+</p><!--l. 246--><p class="noindent" ><span 
 class="cmbx-9">8.16</span><span 
 class="cmbx-9">&#x00A0;initfunction</span><br /><a 
  id="dx10-43039"></a>
-</p><!--l. 250--><p class="noindent" >A <span 
+</p><!--l. 246--><p class="noindent" >A <span 
 class="cmti-9">function </span>of no arguments whose result is used as the default
 value of a <span 
 class="cmti-9">slot</span>. Initfunctions capture the <span 
@@ -378,29 +380,29 @@ class="cmti-9">lexical </span>environment of an
 class="cmti-9">initform </span>declaration in a class definition form.
 <a 
  id="x10-43040r42"></a>
-</p><!--l. 255--><p class="noindent" ><span 
+</p><!--l. 251--><p class="noindent" ><span 
 class="cmbx-9">8.17</span><span 
 class="cmbx-9">&#x00A0;initlist</span><br /><a 
  id="dx10-43041"></a>
-</p><!--l. 255--><p class="noindent" >A list of alternating keywords and values which describes some
+</p><!--l. 251--><p class="noindent" >A list of alternating keywords and values which describes some
 not-yet instantiated object. Generally the keywords correspond to
 the <span 
 class="cmti-9">initargs </span>of some <span 
 class="cmti-9">class</span>.
 <a 
  id="x10-43042r42"></a>
-</p><!--l. 259--><p class="noindent" ><span 
+</p><!--l. 255--><p class="noindent" ><span 
 class="cmbx-9">8.18</span><span 
 class="cmbx-9">&#x00A0;inner</span>
 <span 
 class="cmbx-9">dynamic</span><br /><a 
  id="dx10-43043"></a>
-</p><!--l. 259--><p class="noindent" >Inner dynamic bindings are created by <span 
+</p><!--l. 255--><p class="noindent" >Inner dynamic bindings are created by <span 
 class="cmbx-9">??</span>, referenced by
 <a 
-href="eulispcl18.html#x23-1106003r1"><span 
+href="eulispcl18.html#x23-1140003r1"><span 
 class="cmtt-9">dynamic</span></a> and modified by <a 
-href="eulispcl18.html#x23-1109004r2"><span 
+href="eulispcl18.html#x23-1143004r2"><span 
 class="cmtt-9">dynamic-setq</span></a>. Inner dynamic bindings
 extend&#8212;and can shadow&#8212;the dynamically enclosing <span 
 class="cmti-9">dynamic</span>
@@ -408,35 +410,35 @@ class="cmti-9">dynamic</span>
 class="cmti-9">environment</span>.
 <a 
  id="x10-43044r42"></a>
-</p><!--l. 265--><p class="noindent" ><span 
+</p><!--l. 261--><p class="noindent" ><span 
 class="cmbx-9">8.19</span><span 
 class="cmbx-9">&#x00A0;inner</span>
 <span 
 class="cmbx-9">lexical</span><br /><a 
  id="dx10-43045"></a>
-</p><!--l. 265--><p class="noindent" >Inner lexical bindings are created by <a 
-href="eulispcl16.html#x20-205003r1"><span 
+</p><!--l. 261--><p class="noindent" >Inner lexical bindings are created by <a 
+href="eulispcl16.html#x20-207003r1"><span 
 class="cmtt-9">lambda</span></a> and <a 
-href="eulispcl16.html#x20-253003r1"><span 
+href="eulispcl16.html#x20-255003r1"><span 
 class="cmtt-9">let/cc</span></a>,
 referenced by <span 
 class="cmti-9">variables </span>and modified by <a 
-href="eulispcl16.html#x20-228004r1"><span 
+href="eulispcl16.html#x20-230004r1"><span 
 class="cmtt-9">setq</span></a>. Inner lexical
 bindings extend&#8212;and can shadow&#8212;the lexically enclosing
 <span 
 class="cmti-9">lexical environment</span>. Note that <a 
-href="eulispcl16.html#x20-253003r1"><span 
+href="eulispcl16.html#x20-255003r1"><span 
 class="cmtt-9">let/cc</span></a> creates an immutable
 <span 
 class="cmti-9">binding</span>.
 <a 
  id="x10-43046r42"></a>
-</p><!--l. 271--><p class="noindent" ><span 
+</p><!--l. 267--><p class="noindent" ><span 
 class="cmbx-9">8.20</span><span 
 class="cmbx-9">&#x00A0;instance</span><br /><a 
  id="dx10-43047"></a>
-</p><!--l. 271--><p class="noindent" >Every <span 
+</p><!--l. 267--><p class="noindent" >Every <span 
 class="cmti-9">object </span>is the instance of some <span 
 class="cmti-9">class</span>. An instance thus
 describes an <span 
@@ -449,13 +451,13 @@ class="cmti-9">direct </span>or <span
 class="cmti-9">indirect</span>.
 <a 
  id="x10-43048r42"></a>
-</p><!--l. 277--><p class="noindent" ><span 
+</p><!--l. 273--><p class="noindent" ><span 
 class="cmbx-9">8.21</span><span 
 class="cmbx-9">&#x00A0;instantiation</span>
 <span 
 class="cmbx-9">graph</span><br /><a 
  id="dx10-43049"></a>
-</p><!--l. 277--><p class="noindent" >A directed graph whose nodes are <span 
+</p><!--l. 273--><p class="noindent" >A directed graph whose nodes are <span 
 class="cmti-9">objects </span>and whose edges are
 defined by the <span 
 class="cmti-9">instance </span>relations between the <span 
@@ -468,23 +470,23 @@ href="eulispcl11.html#x13-64008r2"><span
 class="cmtt-9">&#x003C;class&#x003E;</span></a> is the root.
 <a 
  id="x10-43050r42"></a>
-</p><!--l. 287--><p class="noindent" ><span 
+</p><!--l. 283--><p class="noindent" ><span 
 class="cmbx-9">8.22</span><span 
 class="cmbx-9">&#x00A0;lexical</span>
 <span 
 class="cmbx-9">environment</span><br /><a 
  id="dx10-43051"></a>
-</p><!--l. 287--><p class="noindent" >The <span 
+</p><!--l. 283--><p class="noindent" >The <span 
 class="cmti-9">inner </span>and <span 
 class="cmti-9">top lexical </span>environment of a module are together
 referred to as the lexical environment except when it is necessary
 to distinguish between them.
 <a 
  id="x10-43052r42"></a>
-</p><!--l. 307--><p class="noindent" ><span 
+</p><!--l. 303--><p class="noindent" ><span 
 class="cmbx-9">8.23</span><span 
 class="cmbx-9">&#x00A0;metaclass</span><br /><a 
- id="dx10-43053"></a>                                     </p><!--l. 307--><p class="noindent" >A metaclass is a <span 
+ id="dx10-43053"></a>                                     </p><!--l. 303--><p class="noindent" >A metaclass is a <span 
 class="cmti-9">class object </span>whose <span 
 class="cmti-9">instances </span>are themselves
   <span 
@@ -506,11 +508,11 @@ href="eulispcl11.html#x13-64008r2"><span
 class="cmtt-9">&#x003C;class&#x003E;</span></a> is a metaclass.
   <a 
  id="x10-43054r42"></a>
-  </p><!--l. 313--><p class="noindent" ><span 
+  </p><!--l. 309--><p class="noindent" ><span 
 class="cmbx-9">8.24</span><span 
 class="cmbx-9">&#x00A0;method</span><br /> <a 
  id="dx10-43055"></a>
- </p><!--l. 313--><p class="noindent" >A method describes the action of a <span 
+ </p><!--l. 309--><p class="noindent" >A method describes the action of a <span 
 class="cmti-9">generic function </span>for a
   particular list of argument classes called the method&#8217;s <span 
 class="cmti-9">domain</span>. A
@@ -526,7 +528,7 @@ class="cmti-9">function </span>representing the method&#8217;s
   behaviour.
   <a 
  id="x10-43056r42"></a>
-  </p><!--l. 336--><p class="noindent" ><span 
+  </p><!--l. 332--><p class="noindent" ><span 
 class="cmbx-9">8.25</span><span 
 class="cmbx-9">&#x00A0;method</span>
  <span 
@@ -534,7 +536,7 @@ class="cmbx-9">specificity</span><br /> <a
  id="dx10-43057"></a>
  <a 
  id="dx10-43058"></a>
- </p><!--l. 337--><p class="noindent" >A domain <span 
+ </p><!--l. 333--><p class="noindent" >A domain <span 
 class="cmti-9">domain</span><sub><span 
 class="cmr-6">1</span></sub> is more specific than another <span 
 class="cmti-9">domain</span><sub><span 
@@ -555,31 +557,31 @@ class="cmti-9">domain</span><sub><span
 class="cmr-6">2</span></sub>.
   <a 
  id="x10-43059r42"></a>
-  </p><!--l. 343--><p class="noindent" ><span 
+  </p><!--l. 339--><p class="noindent" ><span 
 class="cmbx-9">8.26</span><span 
 class="cmbx-9">&#x00A0;multi-method</span><br /> <a 
  id="dx10-43060"></a>
- </p><!--l. 343--><p class="noindent" >A <span 
+ </p><!--l. 339--><p class="noindent" >A <span 
 class="cmti-9">method </span>which specializes on more than one argument.
   <a 
  id="x10-43061r42"></a>
-  </p><!--l. 346--><p class="noindent" ><span 
+  </p><!--l. 342--><p class="noindent" ><span 
 class="cmbx-9">8.27</span><span 
 class="cmbx-9">&#x00A0;new</span>
  <span 
 class="cmbx-9">instance</span><br /> <a 
  id="dx10-43062"></a>
- </p><!--l. 346--><p class="noindent" >A newly allocated <span 
+ </p><!--l. 342--><p class="noindent" >A newly allocated <span 
 class="cmti-9">instance</span>, which is distinct, but can be
   isomorphic to other <span 
 class="cmti-9">instances</span>.
   <a 
  id="x10-43063r42"></a>
-  </p><!--l. 366--><p class="noindent" ><span 
+  </p><!--l. 362--><p class="noindent" ><span 
 class="cmbx-9">8.28</span><span 
 class="cmbx-9">&#x00A0;reflective</span><br /> <a 
  id="dx10-43064"></a>
- </p><!--l. 366--><p class="noindent" >A system which can examine and modify its own state is said to be
+ </p><!--l. 362--><p class="noindent" >A system which can examine and modify its own state is said to be
   <span 
 class="cmti-9">reflective</span>.  <span 
 class="cmr-8">E</span><span 
@@ -592,7 +594,7 @@ class="cmti-9">metaclasses</span>, and user-extensible operations upon
   them.
   <a 
  id="x10-43065r42"></a>
-  </p><!--l. 375--><p class="noindent" ><span 
+  </p><!--l. 371--><p class="noindent" ><span 
 class="cmbx-9">8.29</span><span 
 class="cmbx-9">&#x00A0;self-instantiated</span>
  <span 
@@ -600,7 +602,7 @@ class="cmbx-9">class</span><br /> <a
  id="dx10-43066"></a>
  <a 
  id="dx10-43067"></a>
- </p><!--l. 376--><p class="noindent" >A <span 
+ </p><!--l. 372--><p class="noindent" >A <span 
 class="cmti-9">class </span>which is an <span 
 class="cmti-9">instance </span>of itself. In  <span 
 class="cmr-8">E</span><span 
@@ -612,24 +614,24 @@ class="cmtt-9">&#x003C;class&#x003E;</span></a> is the
   only example of a self-instantiated class.
   <a 
  id="x10-43068r42"></a>
-  </p><!--l. 380--><p class="noindent" ><span 
+  </p><!--l. 376--><p class="noindent" ><span 
 class="cmbx-9">8.30</span><span 
 class="cmbx-9">&#x00A0;setter</span>
  <span 
 class="cmbx-9">function</span><br /> <a 
  id="dx10-43069"></a>
- </p><!--l. 380--><p class="noindent" >The function associated with the function that accesses a
+ </p><!--l. 376--><p class="noindent" >The function associated with the function that accesses a
   place in an entity, which changes the value stored in that
   place.
   <a 
  id="x10-43070r42"></a>
-  </p><!--l. 392--><p class="noindent" ><span 
+  </p><!--l. 388--><p class="noindent" ><span 
 class="cmbx-9">8.31</span><span 
 class="cmbx-9">&#x00A0;simple</span>
  <span 
 class="cmbx-9">function</span><br /> <a 
  id="dx10-43071"></a>
- </p><!--l. 392--><p class="noindent" >A function comprises at least: an expression, a set of identifiers,
+ </p><!--l. 388--><p class="noindent" >A function comprises at least: an expression, a set of identifiers,
   which occur in the expression, called the parameters and the
   closure of the expression with respect to the <span 
 class="cmti-9">lexical environment </span>in
@@ -640,11 +642,11 @@ class="cmbx-9">??</span>.
  id="x10-43072r42"></a>
                                                                                                   
                                                                                                   
-</p><!--l. 399--><p class="noindent" ><span 
+</p><!--l. 395--><p class="noindent" ><span 
 class="cmbx-9">8.32</span><span 
 class="cmbx-9">&#x00A0;slot</span><br /><a 
  id="dx10-43073"></a>
-</p><!--l. 399--><p class="noindent" >A named component of an <span 
+</p><!--l. 395--><p class="noindent" >A named component of an <span 
 class="cmti-9">object </span>which can be accessed using the
 slot&#8217;s <span 
 class="cmti-9">accessor</span>. Each <span 
@@ -662,13 +664,13 @@ class="cmti-9">object</span>, this usually means its set of
 class="cmti-9">slots</span>.
 <a 
  id="x10-43074r42"></a>
-</p><!--l. 405--><p class="noindent" ><span 
+</p><!--l. 401--><p class="noindent" ><span 
 class="cmbx-9">8.33</span><span 
 class="cmbx-9">&#x00A0;slot</span>
 <span 
 class="cmbx-9">description</span><br /><a 
  id="dx10-43075"></a>
-</p><!--l. 405--><p class="noindent" >A slot description describes a <span 
+</p><!--l. 401--><p class="noindent" >A slot description describes a <span 
 class="cmti-9">slot </span>in the <span 
 class="cmti-9">instances </span>of a <span 
 class="cmti-9">class</span>. This
@@ -679,74 +681,74 @@ class="cmti-9">instances</span>, and a way to determine its default value. A <sp
 class="cmti-9">class&#8217;s </span>slot
 descriptions may be accessed through the <span 
 class="cmti-9">function </span><a 
-href="eulispcl18.html#x23-871003r2"><span 
+href="eulispcl18.html#x23-905003r2"><span 
 class="cmtt-9">class-slots</span></a>. A
 slot description can be either <span 
 class="cmti-9">direct </span>or <span 
 class="cmti-9">inherited</span>.
 <a 
  id="x10-43076r42"></a>
-</p><!--l. 413--><p class="noindent" ><span 
+</p><!--l. 409--><p class="noindent" ><span 
 class="cmbx-9">8.34</span><span 
 class="cmbx-9">&#x00A0;slot</span>
 <span 
 class="cmbx-9">option</span><br /><a 
  id="dx10-43077"></a>
-</p><!--l. 413--><p class="noindent" >A keyword and its associated value applying to one of the slots
+</p><!--l. 409--><p class="noindent" >A keyword and its associated value applying to one of the slots
 appearing in a class definition form, for example: the <span 
-class="cmbx-9">??</span> keyword
-and its value, which defines a function used to read or write the
-value of a particular slot.
+class="cmtt-9">accessor</span>
+keyword and its value, which defines a function used to read or
+write the value of a particular slot.
 <a 
  id="x10-43078r42"></a>
-</p><!--l. 419--><p class="noindent" ><span 
+</p><!--l. 415--><p class="noindent" ><span 
 class="cmbx-9">8.35</span><span 
 class="cmbx-9">&#x00A0;slot</span>
 <span 
 class="cmbx-9">specification</span><br /><a 
  id="dx10-43079"></a>
-</p><!--l. 419--><p class="noindent" >A list of alternating keywords and values (starting with a keyword)
+</p><!--l. 415--><p class="noindent" >A list of alternating keywords and values (starting with a keyword)
 which represents a not-yet-created <span 
 class="cmti-9">slot description </span>during class
 initialization.
 <a 
  id="x10-43080r42"></a>
-</p><!--l. 424--><p class="noindent" ><span 
+</p><!--l. 420--><p class="noindent" ><span 
 class="cmbx-9">8.36</span><span 
 class="cmbx-9">&#x00A0;special</span>
 <span 
 class="cmbx-9">form</span><br /><a 
  id="dx10-43081"></a>
-</p><!--l. 424--><p class="noindent" >A special form is a semantic primitive of the language. In
+</p><!--l. 420--><p class="noindent" >A special form is a semantic primitive of the language. In
 consequence, any processor (for example, a compiler or a
 code-walker) need be able to process only the special forms of the
 language and compositions of them.
 <a 
  id="x10-43082r42"></a>
-</p><!--l. 429--><p class="noindent" ><span 
+</p><!--l. 425--><p class="noindent" ><span 
 class="cmbx-9">8.37</span><span 
 class="cmbx-9">&#x00A0;specialize</span><br /><a 
  id="dx10-43083"></a>
-</p><!--l. 429--><p class="noindent" >A verbal form used to describe the creation of a more specific
+</p><!--l. 425--><p class="noindent" >A verbal form used to describe the creation of a more specific
 version of some entity. Normally applied to classes, slots and
 methods.
 <a 
  id="x10-43084r42"></a>
-</p><!--l. 433--><p class="noindent" ><span 
+</p><!--l. 429--><p class="noindent" ><span 
 class="cmbx-9">8.38</span><span 
 class="cmbx-9">&#x00A0;specialize</span>
 <span 
 class="cmbx-9">on</span><br /><a 
  id="dx10-43085"></a>
-</p><!--l. 433--><p class="noindent" >A verbal form used to describe relationship of methods and the
+</p><!--l. 429--><p class="noindent" >A verbal form used to describe relationship of methods and the
 classes specified in their domains.
 <a 
  id="x10-43086r42"></a>
-</p><!--l. 437--><p class="noindent" ><span 
+</p><!--l. 433--><p class="noindent" ><span 
 class="cmbx-9">8.39</span><span 
 class="cmbx-9">&#x00A0;subclass</span><br /><a 
  id="dx10-43087"></a>
-</p><!--l. 437--><p class="noindent" >The behaviour and structure defined by a class <span 
+</p><!--l. 433--><p class="noindent" >The behaviour and structure defined by a class <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> are inherited
 by a set of <span 
@@ -760,11 +762,11 @@ class="cmti-9">direct </span>or <span
 class="cmti-9">indirect </span>or itself.
 <a 
  id="x10-43088r42"></a>
-</p><!--l. 442--><p class="noindent" ><span 
+</p><!--l. 438--><p class="noindent" ><span 
 class="cmbx-9">8.40</span><span 
 class="cmbx-9">&#x00A0;superclass</span><br /><a 
  id="dx10-43089"></a>
-</p><!--l. 442--><p class="noindent" >A <span 
+</p><!--l. 438--><p class="noindent" >A <span 
 class="cmti-9">class</span><sub><span 
 class="cmr-6">1</span></sub> is a superclass of <span 
 class="cmti-9">class</span><sub><span 
@@ -778,60 +780,62 @@ class="cmti-9">superclass </span>can be either <span
 class="cmti-9">direct </span>or <span 
 class="cmti-9">indirect </span>or itself.
 <a 
- id="x10-43090r42"></a>                                                   </p><!--l. 450--><p class="noindent" ><span 
+ id="x10-43090r42"></a>                                                   </p><!--l. 446--><p class="noindent" ><span 
 class="cmbx-9">8.41</span><span 
 class="cmbx-9">&#x00A0;top</span>
  <span 
 class="cmbx-9">dynamic</span><br /> <a 
  id="dx10-43091"></a>
- </p><!--l. 450--><p class="noindent" >Top dynamic bindings are created by <a 
-href="eulispcl18.html#x23-1119004r5"><span 
+ </p><!--l. 446--><p class="noindent" >Top dynamic bindings are created by <a 
+href="eulispcl18.html#x23-1153004r5"><span 
 class="cmtt-9">defglobal</span></a>, referenced by
   <a 
-href="eulispcl18.html#x23-1106003r1"><span 
+href="eulispcl18.html#x23-1140003r1"><span 
 class="cmtt-9">dynamic</span></a> and modified by <a 
-href="eulispcl18.html#x23-1109004r2"><span 
+href="eulispcl18.html#x23-1143004r2"><span 
 class="cmtt-9">dynamic-setq</span></a>. There is only one <span 
 class="cmti-9">top</span>
   <span 
 class="cmti-9">dynamic </span>environment.
   <a 
  id="x10-43092r42"></a>
-  </p><!--l. 455--><p class="noindent" ><span 
+  </p><!--l. 451--><p class="noindent" ><span 
 class="cmbx-9">8.42</span><span 
 class="cmbx-9">&#x00A0;top</span>
  <span 
 class="cmbx-9">lexical</span><br /> <a 
  id="dx10-43093"></a>
- </p><!--l. 455--><p class="noindent" >Top lexical bindings are created in the <span 
+ </p><!--l. 451--><p class="noindent" >Top lexical bindings are created in the <span 
 class="cmti-9">top lexical </span>environment of a
   module by </p>
   <div class="flushleft" 
 >
-  <!--l. 457--><p class="noindent" >
+  <!--l. 453--><p class="noindent" >
    <a 
-href="eulispcl18.html#x23-839003r1"><span 
+href="eulispcl18.html#x23-873003r1"><span 
 class="cmtt-9">defclass</span></a>, <a 
-href="eulispcl14.html#x18-146003r5"><span 
+href="eulispcl14.html#x18-148003r5"><span 
 class="cmtt-9">defcondition</span></a>, <a 
-href="eulispcl16.html#x20-191003r2"><span 
+href="eulispcl16.html#x20-193003r2"><span 
 class="cmtt-9">defconstant</span></a>, <a 
-href="eulispcl18.html#x23-849003r2"><span 
-class="cmtt-9">defgeneric</span></a>, <span 
-class="cmbx-9">??</span>,
+href="eulispcl18.html#x23-883003r2"><span 
+class="cmtt-9">defgeneric</span></a>,
   <a 
-href="eulispcl18.html#x23-839003r1"><span 
-class="cmtt-9">defclass</span></a>, <span 
-class="cmbx-9">??</span>.</p></div>
-  <!--l. 461--><p class="noindent" >All these bindings are immutable. <a 
-href="eulispcl16.html#x20-196008r6"><span 
+href="eulispcl16.html#x20-211004r2"><span 
+class="cmtt-9">defmacro</span></a>, <a 
+href="eulispcl18.html#x23-873003r1"><span 
+class="cmtt-9">defclass</span></a>, <a 
+href="eulispcl16.html#x20-215003r3"><span 
+class="cmtt-9">defun</span></a>.</p></div>
+  <!--l. 457--><p class="noindent" >All these bindings are immutable. <a 
+href="eulispcl16.html#x20-198008r6"><span 
 class="cmtt-9">deflocal</span></a> creates a mutable
   top-lexical binding. All such bindings are referenced by <span 
 class="cmti-9">variables</span>
   and those made by <a 
-href="eulispcl16.html#x20-196008r6"><span 
+href="eulispcl16.html#x20-198008r6"><span 
 class="cmtt-9">deflocal</span></a> are modified by <a 
-href="eulispcl16.html#x20-228004r1"><span 
+href="eulispcl16.html#x20-230004r1"><span 
 class="cmtt-9">setq</span></a>. Each module
   defines its own distinct <span 
 class="cmti-9">top lexical </span>environment.

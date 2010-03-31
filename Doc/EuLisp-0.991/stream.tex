@@ -141,9 +141,6 @@ Returns {\em object\/} if it is a \classref{file-stream} otherwise \nil.
 \index{general}{level-0 classes!\theclass{string-stream}}
 %
 The class of the default string stream.
-%
-\seealso The \hyperref[stringstrconv]{\tt converter} method for
-\classref{string-stream}\ to \classref{string}.
 
 % ------------------------------------------------------------------------------
 \function{string-stream-p}
@@ -346,7 +343,7 @@ different files by the \genericref{reconnect} operation.
 \remarks%
 The standard lisp input stream, and its transaction unit is object. This stream
 is initially connected to \instanceref{stdin} (although not necessarily
-directly), thus a \genericref{read} operation on \instanceref{lispin} will case
+directly), thus a \functionref{read} operation on \instanceref{lispin} will case
 characters to be read from \instanceref{stdin} and construct and return an
 object corresponding to the next lisp expression. Note that although
 \instanceref{lispin} itself is a constant binding, it may be connected to

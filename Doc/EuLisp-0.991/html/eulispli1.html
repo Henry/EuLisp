@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-30 22:00:00" /> 
+<meta name="date" content="2010-03-31 22:39:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -91,160 +91,164 @@ href="eulispcl11.html#x13-9000011.7" id="QQ2-13-110">Creating and Initializing O
 href="eulispcl11.html#x13-10300011.8" id="QQ2-13-127">Accessing Slots</a></span>
                                                                                                   
                                                                                                   
+<br />&#x00A0;<span class="sclauseToc">11.9 <a 
+href="eulispcl11.html#x13-10400011.9" id="QQ2-13-128">Other Abstract Classes</a></span>
 <br /><span class="clauseToc">12 <a 
-href="eulispcl12.html#x16-10400012">Concurrency</a></span>
+href="eulispcl12.html#x16-10600012">Concurrency</a></span>
 <br />&#x00A0;<span class="sclauseToc">12.1 <a 
-href="eulispcl12.html#x16-10500012.1" id="QQ2-16-129">Threads</a></span>
+href="eulispcl12.html#x16-10700012.1" id="QQ2-16-132">Threads</a></span>
 <br />&#x00A0;<span class="sclauseToc">12.2 <a 
-href="eulispcl12.html#x16-13400012.2" id="QQ2-16-170">Locks</a></span>
+href="eulispcl12.html#x16-13600012.2" id="QQ2-16-173">Locks</a></span>
 <br /><span class="clauseToc">13 <a 
-href="eulispcl13.html#x17-14500013">Conditions</a></span>
+href="eulispcl13.html#x17-14700013">Conditions</a></span>
 <br /><span class="clauseToc">14 <a 
-href="eulispcl14.html#x18-14600014">Condition Classes</a></span>
+href="eulispcl14.html#x18-14800014">Condition Classes</a></span>
 <br /><span class="clauseToc">15 <a 
-href="eulispcl15.html#x19-17000015">Condition Signalling and Handling</a></span>
+href="eulispcl15.html#x19-17200015">Condition Signalling and Handling</a></span>
 <br /><span class="clauseToc">16 <a 
-href="eulispcl16.html#x20-18900016">Expressions, Definitions and Control Forms</a></span>
+href="eulispcl16.html#x20-19100016">Expressions, Definitions and Control Forms</a></span>
 <br />&#x00A0;<span class="sclauseToc">16.1 <a 
-href="eulispcl16.html#x20-19000016.1" id="QQ2-20-251">Simple Expressions</a></span>
+href="eulispcl16.html#x20-19200016.1" id="QQ2-20-254">Simple Expressions</a></span>
 <br />&#x00A0;<span class="sclauseToc">16.2 <a 
-href="eulispcl16.html#x20-20500016.2" id="QQ2-20-273">Functions: creation, definition and application</a></span>
+href="eulispcl16.html#x20-20700016.2" id="QQ2-20-276">Functions: creation, definition and application</a></span>
 <br />&#x00A0;<span class="sclauseToc">16.3 <a 
-href="eulispcl16.html#x20-22800016.3" id="QQ2-20-302">Destructive Operations</a></span>
+href="eulispcl16.html#x20-23000016.3" id="QQ2-20-305">Destructive Operations</a></span>
 <br />&#x00A0;<span class="sclauseToc">16.4 <a 
-href="eulispcl16.html#x20-24200016.4" id="QQ2-20-320">Conditional Expressions</a></span>
+href="eulispcl16.html#x20-24400016.4" id="QQ2-20-323">Conditional Expressions</a></span>
 <br />&#x00A0;<span class="sclauseToc">16.5 <a 
-href="eulispcl16.html#x20-25300016.5" id="QQ2-20-335">Variable Binding and Sequences</a></span>
+href="eulispcl16.html#x20-25500016.5" id="QQ2-20-338">Variable Binding and Sequences</a></span>
 <br />&#x00A0;<span class="sclauseToc">16.6 <a 
-href="eulispcl16.html#x20-28200016.6" id="QQ2-20-372">Quasiquotation Expressions</a></span>
+href="eulispcl16.html#x20-28400016.6" id="QQ2-20-375">Quasiquotation Expressions</a></span>
 <br />&#x00A0;<span class="sclauseToc">16.7 <a 
-href="eulispcl16.html#x20-29000016.7" id="QQ2-20-383">Summary of Level-0 Expressions and Definitions</a></span>
+href="eulispcl16.html#x20-29200016.7" id="QQ2-20-386">Summary of Level-0 Expressions and Definitions</a></span>
 <br />&#x00A0;&#x00A0;<span class="ssclauseToc">16.7.1 <a 
-href="eulispcl16.html#x20-29100016.7.1" id="QQ2-20-384">Syntax of Level-0 defining forms</a></span>
+href="eulispcl16.html#x20-29300016.7.1" id="QQ2-20-387">Syntax of Level-0 defining forms</a></span>
 <br />&#x00A0;&#x00A0;<span class="ssclauseToc">16.7.2 <a 
-href="eulispcl16.html#x20-29200016.7.2" id="QQ2-20-385">Syntax of Level-0 expressions</a></span>
+href="eulispcl16.html#x20-29400016.7.2" id="QQ2-20-388">Syntax of Level-0 expressions</a></span>
 <br />&#x00A0;&#x00A0;<span class="ssclauseToc">16.7.3 <a 
-href="eulispcl16.html#x20-29300016.7.3" id="QQ2-20-386">Syntax of Level-0 macros</a></span>
+href="eulispcl16.html#x20-29500016.7.3" id="QQ2-20-389">Syntax of Level-0 macros</a></span>
 <br /><span class="clauseToc">17 <a 
-href="eulispcl17.html#x21-29400017">Annex (normative) Level-0 Module Library</a></span>
+href="eulispcl17.html#x21-29600017">Annex (normative) Level-0 Module Library</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.1 <a 
-href="eulispcl17.html#x21-29500017.1" id="QQ2-21-388">Characters</a></span>
+href="eulispcl17.html#x21-29700017.1" id="QQ2-21-391">Characters</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.2 <a 
-href="eulispcl17.html#x21-32100017.2" id="QQ2-21-425">Collections</a></span>
+href="eulispcl17.html#x21-32300017.2" id="QQ2-21-428">Collections</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.3 <a 
-href="eulispcl17.html#x21-39900017.3" id="QQ2-21-531">Conversion</a></span>
+href="eulispcl17.html#x21-40100017.3" id="QQ2-21-536">Comparison</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.4 <a 
-href="eulispcl17.html#x21-41000017.4" id="QQ2-21-546">Copying</a></span>
+href="eulispcl17.html#x21-43000017.4" id="QQ2-21-575">Conversion</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.5 <a 
-href="eulispcl17.html#x21-42500017.5" id="QQ2-21-567">Double Precision Floats</a></span>
+href="eulispcl17.html#x21-44100017.5" id="QQ2-21-590">Copying</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.6 <a 
-href="eulispcl17.html#x21-44600017.6" id="QQ2-21-599">Elementary Functions</a></span>
+href="eulispcl17.html#x21-45600017.6" id="QQ2-21-611">Double Precision Floats</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.7 <a 
-href="eulispcl17.html#x21-47800017.7" id="QQ2-21-647">Floating Point Numbers</a></span>
+href="eulispcl17.html#x21-47700017.7" id="QQ2-21-643">Elementary Functions</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.8 <a 
-href="eulispcl17.html#x21-49000017.8" id="QQ2-21-666">Fixed Precision Integers</a></span>
+href="eulispcl17.html#x21-50900017.8" id="QQ2-21-691">Floating Point Numbers</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.9 <a 
-href="eulispcl17.html#x21-50900017.9" id="QQ2-21-695">Formatted-IO</a></span>
+href="eulispcl17.html#x21-52100017.9" id="QQ2-21-710">Fixed Precision Integers</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.10 <a 
-href="eulispcl17.html#x21-51800017.10" id="QQ2-21-707">Integers</a></span>
+href="eulispcl17.html#x21-54000017.10" id="QQ2-21-739">Formatted-IO</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.11 <a 
-href="eulispcl17.html#x21-52600017.11" id="QQ2-21-720">Keywords</a></span>
+href="eulispcl17.html#x21-54900017.11" id="QQ2-21-751">Integers</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.12 <a 
-href="eulispcl17.html#x21-54400017.12" id="QQ2-21-746">Lists</a></span>
+href="eulispcl17.html#x21-55700017.12" id="QQ2-21-764">Keywords</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.13 <a 
-href="eulispcl17.html#x21-58600017.13" id="QQ2-21-808">Numbers</a></span>
+href="eulispcl17.html#x21-57500017.13" id="QQ2-21-790">Lists</a></span>
 <br />&#x00A0;<span class="sclauseToc">17.14 <a 
-href="eulispcl17.html#x21-63300017.14" id="QQ2-21-881">Streams</a></span>
-<br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.1 <a 
-href="eulispcl17.html#x21-63400017.14.1" id="QQ2-21-882">Stream classes</a></span>
-<br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.2 <a 
-href="eulispcl17.html#x21-64300017.14.2" id="QQ2-21-901">Stream operators</a></span>
-<br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.3 <a 
-href="eulispcl17.html#x21-67500017.14.3" id="QQ2-21-943">Stream objects</a></span>
-<br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.4 <a 
-href="eulispcl17.html#x21-68000017.14.4" id="QQ2-21-952">Buffer management</a></span>
-                                                   <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.5 <a 
-href="eulispcl17.html#x21-70400017.14.5" id="QQ2-21-986">Reading from streams</a></span>
-  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.6 <a 
-href="eulispcl17.html#x21-72000017.14.6" id="QQ2-21-1007">Writing to streams</a></span>
-  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.7 <a 
-href="eulispcl17.html#x21-73200017.14.7" id="QQ2-21-1024">Additional functions</a></span>
-  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.14.8 <a 
-href="eulispcl17.html#x21-75600017.14.8" id="QQ2-21-1056">Convenience forms</a></span>
-  <br />&#x00A0;<span class="sclauseToc">17.15 <a 
-href="eulispcl17.html#x21-76500017.15" id="QQ2-21-1071">Strings</a></span>
+href="eulispcl17.html#x21-61700017.14" id="QQ2-21-853">Numbers</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.15 <a 
+href="eulispcl17.html#x21-66800017.15" id="QQ2-21-932">Streams</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.1 <a 
+href="eulispcl17.html#x21-66900017.15.1" id="QQ2-21-933">Stream classes</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.2 <a 
+href="eulispcl17.html#x21-67700017.15.2" id="QQ2-21-951">Stream operators</a></span>
+                                                   <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.3 <a 
+href="eulispcl17.html#x21-70900017.15.3" id="QQ2-21-993">Stream objects</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.4 <a 
+href="eulispcl17.html#x21-71400017.15.4" id="QQ2-21-1002">Buffer management</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.5 <a 
+href="eulispcl17.html#x21-73800017.15.5" id="QQ2-21-1036">Reading from streams</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.6 <a 
+href="eulispcl17.html#x21-75400017.15.6" id="QQ2-21-1057">Writing to streams</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.7 <a 
+href="eulispcl17.html#x21-76600017.15.7" id="QQ2-21-1074">Additional functions</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.8 <a 
+href="eulispcl17.html#x21-79000017.15.8" id="QQ2-21-1106">Convenience forms</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.16 <a 
-href="eulispcl17.html#x21-79100017.16" id="QQ2-21-1109">Symbols</a></span>
+href="eulispcl17.html#x21-79900017.16" id="QQ2-21-1121">Strings</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.17 <a 
-href="eulispcl17.html#x21-81200017.17" id="QQ2-21-1139">Tables</a></span>
+href="eulispcl17.html#x21-82500017.17" id="QQ2-21-1159">Symbols</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.18 <a 
-href="eulispcl17.html#x21-81900017.18" id="QQ2-21-1149">Vectors</a></span>
+href="eulispcl17.html#x21-84600017.18" id="QQ2-21-1189">Tables</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.19 <a 
-href="eulispcl17.html#x21-83700017.19" id="QQ2-21-1176">Syntax of Level-0 objects</a></span>
+href="eulispcl17.html#x21-85300017.19" id="QQ2-21-1199">Vectors</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.20 <a 
+href="eulispcl17.html#x21-87100017.20" id="QQ2-21-1226">Syntax of Level-0 objects</a></span>
   <br /><span class="clauseToc">18 <a 
-href="eulispcl18.html#x23-83800018">Annex (normative) Programming Language EuLisp, Level-1</a></span>
+href="eulispcl18.html#x23-87200018">Annex (normative) Programming Language EuLisp, Level-1</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.1 <a 
-href="eulispcl18.html#x23-83900018.1" id="QQ2-23-1178">Classes and Objects</a></span>
+href="eulispcl18.html#x23-87300018.1" id="QQ2-23-1228">Classes and Objects</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.2 <a 
-href="eulispcl18.html#x23-84300018.2" id="QQ2-23-1183">Generic Functions</a></span>
+href="eulispcl18.html#x23-87700018.2" id="QQ2-23-1233">Generic Functions</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.3 <a 
-href="eulispcl18.html#x23-85400018.3" id="QQ2-23-1196">Methods</a></span>
+href="eulispcl18.html#x23-88800018.3" id="QQ2-23-1246">Methods</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.4 <a 
-href="eulispcl18.html#x23-86400018.4" id="QQ2-23-1211">Object Introspection</a></span>
+href="eulispcl18.html#x23-89800018.4" id="QQ2-23-1261">Object Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.5 <a 
-href="eulispcl18.html#x23-86800018.5" id="QQ2-23-1216">Class Introspection</a></span>
+href="eulispcl18.html#x23-90200018.5" id="QQ2-23-1266">Class Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.6 <a 
-href="eulispcl18.html#x23-87800018.6" id="QQ2-23-1230">Slot Introspection</a></span>
+href="eulispcl18.html#x23-91200018.6" id="QQ2-23-1280">Slot Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.7 <a 
-href="eulispcl18.html#x23-88900018.7" id="QQ2-23-1247">Generic Function Introspection</a></span>
+href="eulispcl18.html#x23-92300018.7" id="QQ2-23-1297">Generic Function Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.8 <a 
-href="eulispcl18.html#x23-90300018.8" id="QQ2-23-1266">Method Introspection</a></span>
+href="eulispcl18.html#x23-93700018.8" id="QQ2-23-1316">Method Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.9 <a 
-href="eulispcl18.html#x23-91000018.9" id="QQ2-23-1276">Class Initialization</a></span>
+href="eulispcl18.html#x23-94400018.9" id="QQ2-23-1326">Class Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.10 <a 
-href="eulispcl18.html#x23-92800018.10" id="QQ2-23-1302">Slot Description Initialization</a></span>
+href="eulispcl18.html#x23-96200018.10" id="QQ2-23-1352">Slot Description Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.11 <a 
-href="eulispcl18.html#x23-93100018.11" id="QQ2-23-1306">Generic Function Initialization</a></span>
+href="eulispcl18.html#x23-96500018.11" id="QQ2-23-1356">Generic Function Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.12 <a 
-href="eulispcl18.html#x23-93500018.12" id="QQ2-23-1311">Method Initialization</a></span>
+href="eulispcl18.html#x23-96900018.12" id="QQ2-23-1361">Method Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.13 <a 
-href="eulispcl18.html#x23-93800018.13" id="QQ2-23-1315">Inheritance Protocol</a></span>
+href="eulispcl18.html#x23-97200018.13" id="QQ2-23-1365">Inheritance Protocol</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.14 <a 
-href="eulispcl18.html#x23-101600018.14" id="QQ2-23-1418">Slot Access Protocol</a></span>
+href="eulispcl18.html#x23-105000018.14" id="QQ2-23-1468">Slot Access Protocol</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.15 <a 
-href="eulispcl18.html#x23-107100018.15" id="QQ2-23-1491">Method Lookup and Generic Dispatch</a></span>
+href="eulispcl18.html#x23-110500018.15" id="QQ2-23-1541">Method Lookup and Generic Dispatch</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.16 <a 
-href="eulispcl18.html#x23-109000018.16" id="QQ2-23-1516">Low Level Allocation Primitives</a></span>
+href="eulispcl18.html#x23-112400018.16" id="QQ2-23-1566">Low Level Allocation Primitives</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.17 <a 
-href="eulispcl18.html#x23-110600018.17" id="QQ2-23-1537">Dynamic Binding</a></span>
+href="eulispcl18.html#x23-114000018.17" id="QQ2-23-1587">Dynamic Binding</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.18 <a 
-href="eulispcl18.html#x23-112500018.18" id="QQ2-23-1562">Exit Extensions</a></span>
+href="eulispcl18.html#x23-115900018.18" id="QQ2-23-1612">Exit Extensions</a></span>
   <br />&#x00A0;<span class="sclauseToc">18.19 <a 
-href="eulispcl18.html#x23-113200018.19" id="QQ2-23-1571">Summary of Level-1 Expressions and Definitions</a></span>
+href="eulispcl18.html#x23-116600018.19" id="QQ2-23-1621">Summary of Level-1 Expressions and Definitions</a></span>
   <br />&#x00A0;&#x00A0;<span class="ssclauseToc">18.19.1 <a 
-href="eulispcl18.html#x23-113300018.19.1" id="QQ2-23-1572">Syntax of Level-1 defining forms</a></span>
+href="eulispcl18.html#x23-116700018.19.1" id="QQ2-23-1622">Syntax of Level-1 defining forms</a></span>
   <br />&#x00A0;&#x00A0;<span class="ssclauseToc">18.19.2 <a 
-href="eulispcl18.html#x23-113400018.19.2" id="QQ2-23-1573">Syntax of Level-1 expressions</a></span>
+href="eulispcl18.html#x23-116800018.19.2" id="QQ2-23-1623">Syntax of Level-1 expressions</a></span>
   <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-113500018.19.2">Bibliography</a></span>
+href="eulisp.html#x1-116900018.19.2">Bibliography</a></span>
   <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-113600018.19.2">Function Index</a></span>
+href="eulisp.html#x1-117000018.19.2">Function Index</a></span>
   <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-113700018.19.2">Macro Index</a></span>
-  <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-113800018.19.2">Generic Function Index</a></span>
-  <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-113900018.19.2">Method Index</a></span>
+href="eulisp.html#x1-117100018.19.2">Macro Index</a></span>
                                                                                                   
                                                                                                   
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-114000018.19.2">Condition Index</a></span>
+href="eulisp.html#x1-117200018.19.2">Generic Function Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-114100018.19.2">Constant Index</a></span>
+href="eulisp.html#x1-117300018.19.2">Method Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-114200018.19.2">Class Index</a></span>
+href="eulisp.html#x1-117400018.19.2">Condition Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-114300018.19.2">Index</a></span>
+href="eulisp.html#x1-117500018.19.2">Constant Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-117600018.19.2">Class Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-117700018.19.2">Index</a></span>
 </div> <span 
 class="cmbx-9">Figures</span>
 <div class="tableofcontents"><span class="lofToc">&#x00A0;<a 
@@ -272,150 +276,150 @@ class="cmtt-9">defmethod</span></a></span><br /><span class="lofToc">&#x00A0;<a
 href="eulispcl11.html#x13-79001">Syntax
 <span 
 class="cmtt-9">generic-lambda</span></a></span><br /><span class="lofToc">2&#x00A0;<a 
-href="eulispcl13.html#x17-1450122">Condition   class   hierarchy</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl14.html#x18-147001">Syntax   <span 
+href="eulispcl13.html#x17-1470122">Condition   class   hierarchy</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl14.html#x18-149001">Syntax   <span 
 class="cmtt-9">defcondition</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl15.html#x19-175001">Syntax
+href="eulispcl15.html#x19-177001">Syntax
 <span 
 class="cmtt-9">call-next-handler</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl15.html#x19-177001">Syntax   <span 
+href="eulispcl15.html#x19-179001">Syntax   <span 
 class="cmtt-9">with-handler</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl15.html#x19-181008">Example1 handler   actions</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-192001">Syntax
+href="eulispcl15.html#x19-183008">Example1 handler   actions</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-194001">Syntax
 <span 
 class="cmtt-9">defconstant</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-197001">Syntax <span 
+href="eulispcl16.html#x20-199001">Syntax <span 
 class="cmtt-9">deflocal</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-201001">Syntax <span 
+href="eulispcl16.html#x20-203001">Syntax <span 
 class="cmtt-9">quote</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-206001">Syntax <span 
+href="eulispcl16.html#x20-208001">Syntax <span 
 class="cmtt-9">lambda</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-210001">Syntax <span 
+href="eulispcl16.html#x20-212001">Syntax <span 
 class="cmtt-9">defmacro</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-214001">Syntax
+href="eulispcl16.html#x20-216001">Syntax
 <span 
 class="cmtt-9">defun</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-216001">Syntax <span 
+href="eulispcl16.html#x20-218001">Syntax <span 
 class="cmtt-9">defun </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-217001">Syntax function call</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-224001">Syntax <span 
+href="eulispcl16.html#x20-219001">Syntax function call</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-226001">Syntax <span 
 class="cmtt-9">apply</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-229001">Syntax <span 
+href="eulispcl16.html#x20-231001">Syntax <span 
 class="cmtt-9">setq</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-243001">Syntax
+href="eulispcl16.html#x20-245001">Syntax
 <span 
 class="cmtt-9">if</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-247001">Syntax <span 
-class="cmtt-9">cond</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-248001">Syntax <span 
-class="cmtt-9">cond </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
 href="eulispcl16.html#x20-249001">Syntax <span 
-class="cmtt-9">and</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+class="cmtt-9">cond</span></a></span><br /><span class="lofToc">&#x00A0;<a 
 href="eulispcl16.html#x20-250001">Syntax <span 
+class="cmtt-9">cond </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-251001">Syntax <span 
+class="cmtt-9">and</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-252001">Syntax <span 
 class="cmtt-9">and </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-251001">Syntax
+href="eulispcl16.html#x20-253001">Syntax
 <span 
 class="cmtt-9">or</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-252001">Syntax <span 
-class="cmtt-9">or </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
 href="eulispcl16.html#x20-254001">Syntax <span 
+class="cmtt-9">or </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-256001">Syntax <span 
 class="cmtt-9">let/cc</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-258002">Example1 using <span 
+href="eulispcl16.html#x20-260002">Example1 using <span 
 class="cmtt-9">let/cc</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-260001">Syntax <span 
+href="eulispcl16.html#x20-262001">Syntax <span 
 class="cmtt-9">block</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-261002">Syntax
+href="eulispcl16.html#x20-263002">Syntax
 <span 
 class="cmtt-9">block </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-263001">Syntax <span 
+href="eulispcl16.html#x20-265001">Syntax <span 
 class="cmtt-9">return-from</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-264001">Syntax <span 
+href="eulispcl16.html#x20-266001">Syntax <span 
 class="cmtt-9">return-from </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-266001">Syntax
+href="eulispcl16.html#x20-268001">Syntax
 <span 
 class="cmtt-9">labels</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-269001">Syntax <span 
-class="cmtt-9">let</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-270001">Syntax <span 
-class="cmtt-9">let </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
 href="eulispcl16.html#x20-271001">Syntax <span 
-class="cmtt-9">let*</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+class="cmtt-9">let</span></a></span><br /><span class="lofToc">&#x00A0;<a 
 href="eulispcl16.html#x20-272001">Syntax <span 
+class="cmtt-9">let </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-273001">Syntax <span 
+class="cmtt-9">let*</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-274001">Syntax <span 
 class="cmtt-9">let* </span>rewrite
 rules</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-273001">Syntax <span 
+href="eulispcl16.html#x20-275001">Syntax <span 
 class="cmtt-9">progn</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-277001">Syntax <span 
+href="eulispcl16.html#x20-279001">Syntax <span 
 class="cmtt-9">unwind-protect</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-281002">Example2 Interaction of <span 
+href="eulispcl16.html#x20-283002">Example2 Interaction of <span 
 class="cmtt-9">unwind-protect </span>with
 non-local exits</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl16.html#x20-283001">Syntax <span 
-class="cmtt-9">quasiquote</span></a></span><br /><span class="lofToc">&#x00A0;<a 
 href="eulispcl16.html#x20-285001">Syntax <span 
-class="cmtt-9">unquote</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+class="cmtt-9">quasiquote</span></a></span><br /><span class="lofToc">&#x00A0;<a 
 href="eulispcl16.html#x20-287001">Syntax <span 
+class="cmtt-9">unquote</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-289001">Syntax <span 
 class="cmtt-9">unquote-splicing</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-296001">Syntax
+href="eulispcl17.html#x21-298001">Syntax
 <span 
 class="cmtt-9">character</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-425064">Syntax <span 
+href="eulispcl17.html#x21-456064">Syntax <span 
 class="cmtt-9">double</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-479001">Syntax <span 
+href="eulispcl17.html#x21-510001">Syntax <span 
 class="cmtt-9">float</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-519001">Syntax <span 
+href="eulispcl17.html#x21-550001">Syntax <span 
 class="cmtt-9">integer</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-554001">Syntax <span 
+href="eulispcl17.html#x21-585001">Syntax <span 
 class="cmtt-9">list</span></a></span><br /><span class="lofToc">3&#x00A0;<a 
-href="eulispcl17.html#x21-5860083">Level-0
+href="eulispcl17.html#x21-6170083">Level-0
 number class hierarchy</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-761001">Syntax <span 
+href="eulispcl17.html#x21-795001">Syntax <span 
 class="cmtt-9">with-input-file</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-762001">Syntax <span 
+href="eulispcl17.html#x21-796001">Syntax <span 
 class="cmtt-9">with-output-file</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-763001">Syntax
+href="eulispcl17.html#x21-797001">Syntax
 <span 
 class="cmtt-9">with-output-file</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-764001">Syntax <span 
+href="eulispcl17.html#x21-798001">Syntax <span 
 class="cmtt-9">with-output-file</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-766001">Syntax <span 
+href="eulispcl17.html#x21-800001">Syntax <span 
 class="cmtt-9">string</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-766003">Example1 Examples of string
+href="eulispcl17.html#x21-800003">Example1 Examples of string
 literals</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-792001">Syntax <span 
+href="eulispcl17.html#x21-826001">Syntax <span 
 class="cmtt-9">symbol</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl17.html#x21-820001">Syntax <span 
+href="eulispcl17.html#x21-854001">Syntax <span 
 class="cmtt-9">vector</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-840001">Syntax <span 
+href="eulispcl18.html#x23-874001">Syntax <span 
 class="cmtt-9">defclass</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-844001">Syntax <span 
+href="eulispcl18.html#x23-878001">Syntax <span 
 class="cmtt-9">generic-lambda</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-850001">Syntax
+href="eulispcl18.html#x23-884001">Syntax
 <span 
 class="cmtt-9">defgeneric</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-855001">Syntax <span 
+href="eulispcl18.html#x23-889001">Syntax <span 
 class="cmtt-9">method-lambda</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-859001">Syntax <span 
+href="eulispcl18.html#x23-893001">Syntax <span 
 class="cmtt-9">defmethod</span></a></span><br /><span class="lofToc">4&#x00A0;<a 
-href="eulispcl18.html#x23-8680174">Level-1 class hierarchy</a></span><br /><span class="lofToc">5&#x00A0;<a 
-href="eulispcl18.html#x23-9130155">Initialization
+href="eulispcl18.html#x23-9020174">Level-1 class hierarchy</a></span><br /><span class="lofToc">5&#x00A0;<a 
+href="eulispcl18.html#x23-9470155">Initialization
 Call Structure</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1107001">Syntax <span 
+href="eulispcl18.html#x23-1141001">Syntax <span 
 class="cmtt-9">dynamic</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1110001">Syntax <span 
+href="eulispcl18.html#x23-1144001">Syntax <span 
 class="cmtt-9">dynamic-setq</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1116001">Syntax <span 
+href="eulispcl18.html#x23-1150001">Syntax <span 
 class="cmtt-9">dynamic-let</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1120001">Syntax
+href="eulispcl18.html#x23-1154001">Syntax
 <span 
 class="cmtt-9">defglobal</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1126001">Syntax <span 
+href="eulispcl18.html#x23-1160001">Syntax <span 
 class="cmtt-9">catch</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1127001">Syntax <span 
+href="eulispcl18.html#x23-1161001">Syntax <span 
 class="cmtt-9">catch </span>rewrite rules</a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1129001">Syntax <span 
+href="eulispcl18.html#x23-1163001">Syntax <span 
 class="cmtt-9">throw</span></a></span><br /><span class="lofToc">&#x00A0;<a 
-href="eulispcl18.html#x23-1130002">Syntax <span 
+href="eulispcl18.html#x23-1164002">Syntax <span 
 class="cmtt-9">throw </span>rewrite rules</a></span><br />
 </div>
                                                  

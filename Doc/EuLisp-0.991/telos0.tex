@@ -697,7 +697,7 @@ runtime function \functionref{compute-applicable-methods}.
 
 \begin{optDefinition}
 The system defined  method lookup and generic function dispatch is purely
-class based. \genericref{eql} methods known from \clos\ are excluded.
+class based. \genericref{equal} methods known from \clos\ are excluded.
 
 The application behaviour of a generic function can be described in terms
 of {\em method lookup\/} and {\em generic dispatch}. The method lookup
@@ -911,8 +911,14 @@ accessible in a module and by which binding.  Accessor bindings are not exported
 automatically when a class (binding) is exported. They can only be exported
 explicitly.
 
-%At the metalevel there is a protocol which allows user defined methods
-%for the computation of special accessors, for example, those checking
-%the type of a value when storing a new one.
-
+\sclause{Other Abstract Classes}
+%
+\derivedclass{name}{object}
+\index{general}{level-0 classes!\theclass{name}}
+%
+The class of all ``names''.
+%
+\seealso%
+\classref{symbol} and \classref{keyword}.
+%
 \end{optDefinition}
