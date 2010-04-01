@@ -94,16 +94,16 @@
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
     See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].
-*** TODO Undefined references [20/24]
+*** TODO Undefined references [22/24]
     + [X] class:collection
     + [X] class:<function>
     + [-] class:hash-table
     + [X] class:list
-    + [-] class:metaclass
+    + [X] class:metaclass
     + [-] class:method
     + [X] class:name
     + [X] class:sequence
-    + [-] class:super-class
+    + [X] class:super-class
     + [X] defform:defmacro
     + [X] defform:defun
     + [X] function:eq
@@ -119,3 +119,10 @@
     + [X] generic:read
     + [X] keyword:accessor
     + [X] keyword:export
+***** TODO Add entry for the <method> class in Level-1
+***** TODO Add details of the <hash-table> class and functions
+*** TODO Update stream module
+    to corresponding to the Youtoo implementation.
+*** TODO Add descriptions of constants to "Layout and Typography"
+    in structure.tex.  Include details of constant instances of classes and
+    constant bindings to classes (class aliases).

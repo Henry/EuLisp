@@ -52,13 +52,12 @@ Modules comprising {\tt eulisp0}:
         Module & Section(s)\\\hline
         {\tt character} & \ref{character}\\
         {\tt collection} & \ref{collection}\\
-        %{\tt compare} & \ref{compare}\\
+        {\tt compare} & \ref{compare}\\
         {\tt condition} & \ref{condition}\\
         {\tt convert} & \ref{convert}\\
         {\tt copy} & \ref{copy}\\
         {\tt double} & \ref{double-float}\\
         {\tt mathlib} & \ref{elementary-functions}\\
-        % {\tt event} & \ref{event}\\
         {\tt fpi} & \ref{fpi}\\
         {\tt formatted-io} & \ref{formatted-io}\\
         {\tt function} & \ref{function}\\
@@ -69,7 +68,6 @@ Modules comprising {\tt eulisp0}:
         {\tt stream} & \ref{stream}\\
         {\tt string} & \ref{string}\\
         {\tt symbol} & \ref{symbol}\\
-        % {\tt syntax-0} & \ref{backquote}\\
         {\tt table} & \ref{table}\\
         {\tt thread} & \ref{thread}\\
         {\tt vector} & \ref{vector}\\\hline
@@ -580,10 +578,10 @@ Cross references to related entries.
 Any additional information about the circumstances in which the
 condition will be signalled.
 %
-\derivedclass{class-name}{super-class}
+\derivedclass{a-class}{class}
 %
 \begin{initoptions}
-    \item[initarg-a, value-a] means that {\tt <class-name>} has an
+    \item[initarg-a, value-a] means that {\tt <a-class>} has an
     initarg whose name is {\tt initarg-a} and the description will usually
     say of what class (or classes) {\em value-a} should be an instance.
     This initarg is required.\\ $\vdots$
@@ -594,10 +592,13 @@ condition will be signalled.
 \end{initoptions}
 %
 \remarks%
-A description of the r\^ole of {\tt <class-name>}.
+A description of the r\^ole of {\tt <a-class>}.
 %
 \end{optDefinition}
 %
+\constant{a-constant}{a-class}
+\constant{<a-class-alias>}{a-class}
+
 \sclause{Naming}
 %
 \begin{optPrivate}
@@ -614,8 +615,8 @@ Here is a list of the conventions and some examples of their use.
 which begin with ``{\tt <}'' and end with ``{\tt >}''.
 %
 \subdefinition{``{\tt binary}'' prefix} The two argument version of a n-ary
-argument function.  For example {\tt binary+} is the two argument (generic)
-function corresponding to the n-ary argument {\tt +} function.
+argument function.  For example \genericref{binary+} is the two argument
+(generic) function corresponding to the n-ary argument \functionref{+} function.
 %
 % \subdefinition{``{\tt c}'' suffix}
 % The version of the function named {\tt foo} that is
@@ -626,7 +627,7 @@ function corresponding to the n-ary argument {\tt +} function.
 related classes.  For example, {\tt <function-class>}, which is the class of
 {\tt <simple-function>}, {\tt <generic-function>} and any of their subclasses
 and {\tt <condition-class>} is the class of all condition classes.  The
-exception is {\tt <class>} itself which is the default metaclass.  The prefix
+exception is \classref{class} itself which is the default metaclass.  The prefix
 should describe the general domain of the classes in question, but not
 necessarily any particular class in the set.
 %
@@ -653,8 +654,9 @@ word are hyphenated, for example: {\tt
 %
 \subdefinition{``{\tt p}'' suffix} A predicate function is named by a ``{\tt
     p}'' suffix if the function or class name (after removing the enclosing {\tt
-    <} and {\tt >}) is not hyphenated, for instance, {\tt consp}, and is named
-by a ``{\tt -p}'' suffix if it is, for instance {\tt double-float-p}.
+    <} and {\tt >}) is not hyphenated, for instance, \functionref{consp}, and is
+named by a ``{\tt -p}'' suffix if it is, for instance
+\functionref{double-float-p}.
 %
 % \subdefinition{``{\tt q}'' suffix}
 % The version of the function named {\tt foo} that uses {\tt eq} for

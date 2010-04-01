@@ -43,12 +43,12 @@ General multiple inheritance can be provided by extensions.  Nor is it possible
 to use a class as a superclass which is not defined at the time of class
 definition.  Again, such forward reference facilities can be provided by
 extensions. The distinction between metaclasses and non-metaclasses is made
-explicit by a special class, named \classref{metaclass}, which is the class of
+explicit by a special class, named \theclass{metaclass}, which is the class of
 all metaclasses. This is different from ObjVlisp, where whether a class is a
 metaclass depends on the superclass list of the class in question.  It is
-implementation-defined whether \classref{metaclass} itself is specializable or
+implementation-defined whether \theclass{metaclass} itself is specializable or
 not. This implies that implementations are free to restrict the instantiation
-tree (excluding the selfinstantiation loop of \classref{metaclass}) to a depth
+tree (excluding the selfinstantiation loop of \theclass{metaclass}) to a depth
 of three levels.
 
 The minimum information associated with a class metaobject is:
@@ -81,6 +81,8 @@ The metaobject classes defined for slot descriptions at level-1 are shown in
 Table~\ref{level-1-class-hierarchy}.
 %
 \begin{figure}
+\caption{Level-1 class hierarchy}
+\label{level-1-class-hierarchy}
 {\tt%
 \classref{class} \\
 %not in youtoo \tts\classref{built-in-class} \\
@@ -94,8 +96,6 @@ Table~\ref{level-1-class-hierarchy}.
 \classref{method} \\
 \tts\classref{simple-method}%
 }%
-\caption{Level-1 class hierarchy}
-\label{level-1-class-hierarchy}
 \end{figure}
 
 \function{class-precedence-list}
@@ -702,7 +702,7 @@ the class of the second argument, otherwise \nil.
 
 If the implementation wishes to restrict the instantiation tree (see
 introduction to B.4), this method should return \nil\/ if {\em superclass}
-is \classref{metaclass}.
+is \theclass{metaclass}.
 
 \method{compatible-superclass-p}
 %
