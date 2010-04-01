@@ -10,7 +10,7 @@
 ;;;
 ;;;    current-thread current-thread-queue thread-suspend thread-reschedule
 ;;; -----------------------------------------------------------------------
-(defmodule thread 
+(defmodule thread
   (syntax (_macros)
    import (telos event)
    export (<thread> <abstract-thread> threadp <simple-thread> simple-thread-p
@@ -27,7 +27,6 @@
 ;;; --------------------------------------------------------------------
 ;;; Classes <abstract-thread> and <simple-thread>
 ;;; --------------------------------------------------------------------
-     
   (defclass <abstract-thread> ()
     ((error-handlers
       accessor: thread-error-handlers
@@ -67,8 +66,8 @@
         (error "missing required keyword ~a" function:))
       (call1/cc
        (lambda (k)
-         (let ((args (call1/cc 
-                      (lambda (new-k) 
+         (let ((args (call1/cc
+                      (lambda (new-k)
                         ((setter thread-continuation) thrd new-k)
                         ((setter thread-state) thrd 'limbo)
                         (k thrd)))))
@@ -84,7 +83,7 @@
     (call1/cc
       (lambda (k)
         (let ((old-k (thread-continuation thrd)))
-          (call1/cc 
+          (call1/cc
             (lambda (new-k)
               ((setter thread-continuation) thrd new-k)
               (k thrd)))

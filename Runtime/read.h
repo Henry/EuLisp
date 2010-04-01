@@ -21,6 +21,7 @@ extern LispRef read_bindings[];
 #define eos_fn_index 6 
 #define quote_mark_fn_index 20 
 #define lispin_fn_index 12 
+#define _read_error__X60_X62_fn_index 9 
 #define list_start_fn_index 14 
 #define quasiquote_mark_fn_index 21 
 #define sread_s_expression_fn_index 4 

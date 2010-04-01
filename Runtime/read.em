@@ -10,12 +10,13 @@
   (syntax (_macros)
    import (telos condition convert convert1 vector string lock dynamic
            table stream)
-   export (lispin
+   export (<read-error> lispin
            read read-line read-char read-s-expression read-token
            sread sread-s-expression
            list-start list-stop dot vector-start vector-stop special-tokens
            quote-mark quasiquote-mark unquote-mark unquote-splicing-mark
            eos *dispatch-macro-character-table* set-dispatch-macro-character))
+
 ;;; --------------------------------------------------------------------
 ;;; Lispin
 ;;; --------------------------------------------------------------------
@@ -24,6 +25,7 @@
           source: stdin
           read-action: (lambda (s eos-error-p eos-value)
                          (parse (stream-source s) eos-error-p eos-value))))
+
 ;;; --------------------------------------------------------------------
 ;;; Read syntax expression
 ;;; --------------------------------------------------------------------
@@ -33,12 +35,14 @@
                 (eos-error-p t)
                 (eos-value (eos-default-value)))
                (generic-read stream eos-error-p eos-value)))
+
   (defun read-s-expression options
     (match-let options
                ((stream stdin)
                 (eos-error-p t)
                 (eos-value (eos-default-value)))
       (parse stream eos-error-p eos-value)))
+
   (defun parse (s eos-error-p eos-value)
     (let parse-loop ((tok (ntok s special-tokens))
                      (in-quasiquote nil))
@@ -63,21 +67,21 @@
                            (reverse-onto so-far
                                          (cons 'unquote
                                                (list (parse-loop tail2 ()))))
-                         (error "misplaced dot/unquote after ~s"
+                         (read-error s "misplaced dot/unquote after ~s"
                                 (reverse-list so-far)))))
                     ((null (eq (ntok s special-tokens) list-stop))
-                     (error "misplaced dot after ~s" (reverse-list so-far)))
+                     (read-error s "misplaced dot after ~s" (reverse-list so-far)))
                     (t (reverse-onto so-far tail)))))
 ;               ((eq tok dot)
 ;                (let ((tail (ntok s special-tokens)))
 ;                  (if (null (eq (ntok s special-tokens) list-stop))
 ;                      (progn
-;                        (error "misplaced dot after ~s"
+;                        (read-error s "misplaced dot after ~s"
 ;                                      (reverse-list so-far))
 ;                        (reverse-list so-far))
 ;                    (reverse-onto so-far tail))))
                 ((eq tok eos)
-                 (error "unexpected end of file during list ~a"
+                 (read-error s "unexpected end of file during list ~a"
                         ;; Avoid printing very long lists
                         (let ((l (reverse-list so-far)))
                           (if (int-binary< (list-size l) 128) l
@@ -95,7 +99,7 @@
                 ((eq tok vector-stop)
                  (make-vector1 (list-size so-far) (reverse-list so-far)))
                 ((eq tok eos)
-                 (error "unexpected end of file during vector ~a"
+                 (read-error s "unexpected end of file during vector ~a"
                                (reverse-list so-far))
                  (make-vector1 (list-size so-far) (reverse-list so-far)))
                 (t (let ((tmp (parse-loop tok in-quasiquote)))
@@ -111,36 +115,40 @@
               (cons 'unquote
                     (list (parse-loop (ntok s special-tokens) ())))
             (progn
-              (error "misplaced unquote")
+              (read-error s "misplaced unquote")
               (parse-loop (ntok s special-tokens) in-quasiquote))))
          ((eq tok unquote-splicing-mark)
           (if in-quasiquote
               (cons 'unquote-splicing
                     (list (parse-loop (ntok s special-tokens) ())))
             (progn
-              (error "misplaced unquote-splicing")
+              (read-error s "misplaced unquote-splicing")
               (parse-loop (ntok s special-tokens) in-quasiquote))))
          ((eq tok eos)
           (if eos-error-p (end-of-stream s) eos-value))
-         (t (error "unexpected token ~a" (tag tok))
+         (t (read-error s "unexpected token ~a" (tag tok))
             ())))
        (t
         (let ((fun (table-ref *dispatch-macro-character-table* tok)))
           (if (functionp fun)
               (fun s tok ())
             tok))))))
+
   (defun reverse-onto (a b)
     (if (null a) b
       (reverse-onto (cdr a) (cons (car a) b))))
+
 ;;; --------------------------------------------------------------------
 ;;; Macro dispatch characters
 ;;; --------------------------------------------------------------------
   (deflocal *dispatch-macro-character-table* (make <table>))
+
   (defun set-dispatch-macro-character (char1 char2 fun)
     (let ((mdcharsym
            (make <symbol> name: (convert (list char1 char2) <string>))))
     ((setter table-ref)
      *dispatch-macro-character-table* mdcharsym fun)))
+
 ;;; --------------------------------------------------------------------
 ;;; Read character
 ;;; --------------------------------------------------------------------
@@ -150,6 +158,7 @@
                 (eos-error-p t)
                 (eos-value (eos-default-value)))
                (generic-read stream eos-error-p eos-value)))
+
 ;;; --------------------------------------------------------------------
 ;;; Read next line string
 ;;; --------------------------------------------------------------------
@@ -171,6 +180,7 @@
                      (t
                       (loop (generic-read stream eos-error-p eos-value)
                             (cons c result)))))))
+
 ;;; --------------------------------------------------------------------
 ;;; Read token
 ;;; --------------------------------------------------------------------
@@ -183,10 +193,12 @@
         (if (eq tok eos)
             (if eos-error-p (end-of-stream stream) eos-value)
           tok))))
+
 ;;; --------------------------------------------------------------------
 ;;; Read into string
 ;;; --------------------------------------------------------------------
   (deflocal *sread-string-stream* (make <string-stream> string: ""))
+
   (defun sread (string . options)
     (match-let options
                ((eos-error-p t)
@@ -196,6 +208,7 @@
                                       (list buffer: string))
                           (read *sread-string-stream*
                                 eos-error-p eos-value))))
+
   (defun sread-s-expression (string . options)
     (match-let options
                ((eos-error-p t)
@@ -210,8 +223,9 @@
 ;;; Read error
 ;;; --------------------------------------------------------------------
   (defclass <read-error> (<condition>) ())
-  (defun read-error (msg . args)
-    (apply error msg args))
+
+  (defun read-error (s msg . args)
+    (error (apply format () msg args) <read-error> value: s))
 
 ;;; --------------------------------------------------------------------
 ;;; Special tags
@@ -219,6 +233,7 @@
   (defclass <special> ()
     ((tag keyword: tag: accessor: tag))
     predicate: specialp)
+
   (defconstant list-start (make <special> tag: "(" ))
   (defconstant list-stop  (make <special> tag: ")" ))
   (defconstant vector-start (make <special> tag: "#(" ))
@@ -229,6 +244,7 @@
   (defconstant unquote-splicing-mark (make <special> tag: ",@" ))
   (defconstant dot (make <special> tag: "." ))
   (defconstant eos (make <special> tag: "<end of stream>" ))
+
   (defconstant special-tokens
     (make-vector 10
                  list-start
@@ -242,6 +258,7 @@
                  dot
                  eos))
 )  ; end of module
+
 ;;; --------------------------------------------------------------------
 ;;; Test
 ;;; --------------------------------------------------------------------

@@ -527,6 +527,7 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"compatible-superclasses-p", make_entry(10, "mop-alloc", "compatible-superclasses-p"));
   eul_fast_table_set(level1_tab,"push-error-handler", make_entry(5, "dynamic", "push-error-handler"));
   eul_fast_table_set(level1_tab,"%", make_entry(14, "number", "%"));
+  eul_fast_table_set(level1_tab,"<read-error>", make_entry(9, "read", "<read-error>"));
   eul_fast_table_set(level1_tab,"init-class", make_entry(3, "mop-init", "init-class"));
   eul_fast_table_set(level1_tab,"binary+", make_entry(13, "number", "binary+"));
   eul_fast_table_set(level1_tab,"compute-inherited-keywords", make_entry(9, "mop-alloc", "compute-inherited-keywords"));

@@ -481,6 +481,7 @@ extern LispRef level1_bindings[];
 #define compatible_superclasses_p_fn_index 10 
 #define push_error_handler_fn_index 5 
 #define __X37_fn_index 14 
+#define _read_error__X60_X62_fn_index 9 
 #define init_class_fn_index 3 
 #define binary__X43_fn_index 13 
 #define compute_inherited_keywords_fn_index 9 

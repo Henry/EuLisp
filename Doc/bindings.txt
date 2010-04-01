@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 31 March 2010, 22:40:10
+  Generated 01 April 2010, 21:31:57
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -78,6 +78,7 @@ youtoo Functions
   <null> 26 mop-class <null>
   <number> 5 number <number>
   <object> 21 mop-class <object>
+  <read-error> 9 read <read-error>
   <semaphore> 8 lock <semaphore>
   <sequence> 6 collect <sequence>
   <simple-class> 71 mop-class <simple-class>
