@@ -1032,7 +1032,7 @@ of forms is empty, \keywordref{progn} returns \nil.
 %
 \remarks%
 If the \keywordref{progn} form occurs enclosed only by \keywordref{progn} forms
-and a \defformref{defmodule} form, then the {\em form}s within the
+and a \syntaxref{defmodule} form, then the {\em form}s within the
 \keywordref{progn} can be defining forms, since they appear in the top-lexical
 environment.  It is a violation for defining forms to appear in inner-lexical
 environments.
@@ -1190,7 +1190,7 @@ which there are two kinds---forms whose value is to be inserted at that location
 in the structure and forms whose value is to be spliced into the structure at
 that location.  The former is indicated by an \syntaxref{unquote} expression and
 the latter by an \syntaxref{unquote-splicing} expression.  In
-\syntaxref{unquote-splice} the {\em form} must result in a proper list.  The
+\syntaxref{unquote-splicing} the {\em form} must result in a proper list.  The
 insertion of the result of an unquote-splice expression is as if the opening and
 closing parentheses of the list are removed and all the elements of the list are
 appended in place of the unquote-splice expression.

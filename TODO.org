@@ -8,44 +8,44 @@
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
     Split files
-    + Comptime2/64bit/cg-exec.em
-    + Comptime2/32bit/cg-exec.em
+    + /Comptime2/64bit/cg-exec.em/
+    + /Comptime2/32bit/cg-exec.em/
     Into
-    + Comptime2/cg-exec.em
-    + Comptime2/64bit/cg-exec-nbit.em
-    + Comptime2/32bit/cg-exec-nbit.em
+    + /Comptime2/cg-exec.em/
+    + /Comptime2/64bit/cg-exec-nbit.em/
+    + /Comptime2/32bit/cg-exec-nbit.em/
 *** DONE Regenerate all the .c files from the .em files to remove
     CLOSED: [2010-02-08 Mon 10:14]
-    + ARGDECL
-    + PROTOTYPE
-*** DONE Regenerate all the .c files from the .em files to eul_const
+    + =ARGDECL=
+    + =PROTOTYPE=
+*** DONE Regenerate all the .c files from the .em files to remove =eul_const=
     CLOSED: [2010-02-08 Mon 14:37]
-*** DONE Remove compat.h
+*** DONE Remove /compat.h/
     CLOSED: [2010-02-08 Mon 22:54]
     when backward compatibility is no longer needed.
-*** DONE Change all the Makefiles of all the Extras and Examples
+*** DONE Change all the /Makefiles/ of all the /Extras/ and /Examples/
     CLOSED: [2010-02-23 Tue 19:31]
-    so that the libraries and executables are located in platform/$(ARCH)
-    or /Lib.$(ARCH) and /Bin.$(ARCH) directories.
-*** DONE Investigate warning messages from Examples/Misc/ffi2.c
+    so that the libraries and executables are located in /platform/$(ARCH)/
+    or //Lib.$(ARCH)/ and //Bin.$(ARCH)/ directories.
+*** DONE Investigate warning messages from /Examples/Misc/ffi2.c/
     CLOSED: [2010-02-08 Mon 22:54]
     Creating stand-alone application of module ffi2 ...
-    Compiling ffi2.c using gcc ...
-    /home/dm2/henry/EuLisp/youtoo/Examples/Misc/ffi2.c: In function ‘ff_stub_ext_foo_in
+    Compiling /ffi2.c/ using gcc ...
+    //home/dm2/henry/EuLisp/youtoo/Examples/Misc/ffi2.c/: In function ‘ff_stub_ext_foo_in
 *** TODO Resolve warning messages from ffi applications
     by introducing an option to allow a header file declaring the ff's to be
     included in the stubs files.
-***** Add header-files including the ffi definitions to all the "Extras" libraries.
-*** TODO Investigate when Lib.${ARCH}/*.i should be copied to Lib
-*** DONE Sort out the Extras/Bignum/Makefile
+***** Add header-files including the ffi definitions to all the /Extras/ libraries.
+*** TODO Investigate when /Lib.${ARCH}/*.i/ should be copied to Lib
+*** DONE Sort out the /Extras/Bignum/Makefile/
     CLOSED: [2010-02-23 Tue 19:31]
     Currently the linking of the gmp library is hard-coded.
 *** DONE Upgrade the TclTk library to 8.5
     CLOSED: [2010-02-14 Sun 23:27]
-*** DONE Investigate problems with the Extras/OS (object serialisation) lib
+*** DONE Investigate problems with the /Extras/OS/ (object serialisation) lib
     CLOSED: [2010-02-23 Tue 19:30]
 *** TODO Change the MPI interface to work with OpenMPI
-*** TODO Comptime2/youtoo.em sometimes ends-up in the wrong state
+*** TODO /Comptime2/youtoo.em/ sometimes ends-up in the wrong state
     should be
     #+BEGIN_SRC lisp
       (defmodule youtoo
@@ -74,55 +74,81 @@
       *** ERROR [nuseq][top-level]: no lexical binding subseq available
       *** ERROR [nuseq][top-level]: no lexical binding seq available
     #+END_SRC
-*** DONE Split the "boot" section of Comptime2/Makefile
+*** DONE Split the "boot" section of /Comptime2/Makefile/
     CLOSED: [2010-02-16 Tue 15:06]
     into the two parts to make the preliminary and final executables.
     Also move the "driver" part into the top-level Makefile.
-*** TODO Change the Extras/Pipe/test1.em app
+*** TODO Change the /Extras/Pipe/test1.em app/
     to obtain the path of the youtoo script from the global settings obtained
-    from the .eulrc.${ARCH} file.
+    from the /.eulrc.${ARCH}/ file.
 *** DONE Clean all .em files
     CLOSED: [2010-02-26 Fri 15:01]
     to remove blank line at beginning, tabs and trailing white-space.
 *** TODO Add support in the REPL to load dynamically-linked module libraries
-*** TODO Add support for #;(sexp) comments in Runtime/Ff/eul-ntok.c
-*** TODO Add line-number counting to Runtime/Ff/eul-ntok.c
+*** TODO Add support for #;(sexp) comments in /Runtime/Ff/eul-ntok.c/
+*** TODO Add line-number counting to /Runtime/Ff/eul-ntok.c/
     This also requires the introduction of a line-number counting stream to hold
     the line-number and provide access to the error reporting system.
-
+*** DONE =read-error=
+    CLOSED: [2010-04-01 Thu 21:31]
+    Replace the use of =error= with =read-error= in /read.em/
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
     See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].
-*** TODO Undefined references [22/24]
+*** TODO Undefined references [34/41]
+    + [X] class:abstract-class
+    + [X] class:character-sequence
     + [X] class:collection
+    + [X] class:condition-class
     + [X] class:<function>
+    + [-] class:function-class
     + [-] class:hash-table
     + [X] class:list
     + [X] class:metaclass
     + [-] class:method
     + [X] class:name
     + [X] class:sequence
+    + [-] class:simple-class
+    + [-] class:simple-function
+    + [-] class:simple-method
+    + [-] class:simple-thread
     + [X] class:super-class
+    + [X] condition:condition
+    + [X] condition:no-converter
+    + [X] condition:methods-exists
+    + [X] condition:read-error
     + [X] defform:defmacro
     + [X] defform:defun
     + [X] function:eq
     + [X] function:eql
+    + [X] function:end-of-stream
+    + [X] function:fill-buffer
     + [X] function:=
     + [X] generic:binary<
     + [X] generic:binary=
     + [X] generic:eql
-    + [X] generic:eq
+    + [X] generic:eq|
     + [X] generic:equal
+    + [X] generic:generic-prin
     + [X] generic:method
     + [X] generic:mod
     + [X] generic:read
     + [X] keyword:accessor
     + [X] keyword:export
-***** TODO Add entry for the <method> class in Level-1
-***** TODO Add details of the <hash-table> class and functions
+    + [X] setter:method-function
+    + [X] syntax:unquote-splice
+*** TODO Add entry for the =<method>= class in Level-1
+*** TODO Add details of the =<hash-table>= class and functions
 *** TODO Update stream module
     to corresponding to the Youtoo implementation.
-*** TODO Add descriptions of constants to "Layout and Typography"
+*** DONE Add descriptions of constants to "Layout and Typography"
+    CLOSED: [2010-04-01 Thu 12:16]
     in structure.tex.  Include details of constant instances of classes and
     constant bindings to classes (class aliases).
+*** <thread> vs <abstract-thread>
+    Sort out the difference between the EuLisp definition and the Youtoo
+    implementation with respect to the name of the abstract base-class for
+    threads.  In the definition it is =<thread>= whereas in Youtoo it is
+    =<abstract-thread>= and =<thread>= is used for the currently used thread
+    type.

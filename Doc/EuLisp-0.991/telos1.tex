@@ -306,16 +306,16 @@ defgeneric form
 This defining form defines a new generic function.  The resulting generic
 function will be bound to {\em gf-name}.  The second argument is the formal
 parameter list.  An error is signalled (condition:
-\conditionref{non-congruent-lambda-lists}\indexcondition{non-congruent-lambda-lists})
-if any of the methods defined on this generic function do not have lambda lists
-congruent to that of the generic function.  This applies both to methods defined
-at the same time as the generic function and to any methods added subsequently
-by \defformref{defmethod} or \genericref{add-method}.  An {\em init-option} is a
-identifier followed by its initial value.  The syntax of \defformref{defgeneric}
-is an extension of the level-0 syntax.  The rewrite rules for the
-\defformref{defgeneric} form are identical to those given in
-section~\ref{defgeneric-rewrite-rules} except that {\em level 1 init option}
-replaces {\em level 0 init option}.
+\conditionref{non-congruent-lambda-lists}
+\indexcondition{non-congruent-lambda-lists}) if any of the methods defined on
+this generic function do not have lambda lists congruent to that of the generic
+function.  This applies both to methods defined at the same time as the generic
+function and to any methods added subsequently by \macroref{defmethod} or
+\genericref{add-method}.  An {\em init-option} is a identifier followed by its
+initial value.  The syntax of \defformref{defgeneric} is an extension of the
+level-0 syntax.  The rewrite rules for the \defformref{defgeneric} form are
+identical to those given in section~\ref{defgeneric-rewrite-rules} except that
+{\em level 1 init option} replaces {\em level 0 init option}.
 %
 \examples
 In the following example of the use of \defformref{defgeneric} a generic
@@ -427,7 +427,7 @@ defmethod form
 \syntaxtable{defmethod}{\defmethodOneSyntax}
 %
 \remarks%
-The \defformref{defmethod} form of level-1 extends that of level-0 to accept
+The \macroref{defmethod} form of level-1 extends that of level-0 to accept
 {\em method-init-option\/}s.  This allows for the specification of the
 method class by means of the \classref{class} init option.  This class must
 be a subclass of the method class of the host generic function. The

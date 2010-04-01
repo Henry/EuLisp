@@ -99,10 +99,9 @@ with some constraints and some weak fairness guarantees.
 
     \item A continuation must only be called from within its dynamic extent.
     This does not include threads created within the dynamic extent.  An error
-    is signalled (condition class:
-    \conditionref{wrong-thread-continuation}\indexcondition{wrong-thread-continuation}),
-    if a continuation is called on a thread other than the one on which it was
-    created.
+    is signalled (condition class: \conditionref{wrong-thread-continuation}
+    \indexcondition{wrong-thread-continuation}), if a continuation is called on
+    a thread other than the one on which it was created.
 
     \item The lexical environment (inner and top) associated with the initial
     function may be shared, as is the top-dynamic environment, but each thread
@@ -174,16 +173,13 @@ This section defines the operations on threads.
 \derivedclass{thread}{object}
 \index{general}{level-0 classes!\theclass{thread}}
 %
-\noindent
 The class of all instances of \classref{thread}.
 %
 \begin{initoptions}
-%
     \item[init-function, fn] an instance of \classref{function} which will be
     called when the resulting thread is started by \functionref{thread-start}.
-%
 \end{initoptions}
-%
+
 \function{threadp}
 %
 \begin{arguments}
@@ -196,26 +192,25 @@ The supplied argument if it is an instance of \classref{thread}, otherwise
 
 \function{thread-reschedule}
 %
-\noindent
 This function takes no arguments.
 %
 \result%
 The result is \nil.
 %
 \remarks%
-This function is called for side-effect only and may cause the thread
-which calls it to be suspended, while other threads are run.  In
-addition, if the thread's condition queue is not empty, the first
-condition is removed from the queue and signalled on the thread.  The
-resume continuation of the signal will be one which will eventually
-call the continuation of the call to \functionref{thread-reschedule}.
+This function is called for side-effect only and may cause the thread which
+calls it to be suspended, while other threads are run.  In addition, if the
+thread's condition queue is not empty, the first condition is removed from the
+queue and signalled on the thread.  The resume continuation of the signal will
+be one which will eventually call the continuation of the call to
+\functionref{thread-reschedule}.
 %
 \seealso%
-\functionref{thread-value}, \functionref{signal} and
-Section~\ref{condition} for details of conditions and signalling.
+\functionref{thread-value}, \functionref{signal} and Section~\ref{condition} for
+details of conditions and signalling.
 
 \function{current-thread}
-\noindent
+%
 This function takes no arguments.
 %
 \result%
@@ -223,14 +218,12 @@ The thread on which \functionref{current-thread} was executed.
 
 \function{thread-start}
 \begin{arguments}
-%
     \item[thread] the thread to be started, which must be new.  If {\em thread}
-    is not new, an error is signalled (condition class: \classref{
-        <thread-already-started>}\indexcondition{thread-already-started}).
-%
+    is not new, an error is signalled (condition class:
+    \classref{thread-already-started}\indexcondition{thread-already-started}).
+
     \item[obj$_1$ \ldots obj$_n$] values to be passed as the arguments to the
     initial function of {\em thread}.
-%
 \end{arguments}
 %
 \result%
@@ -247,16 +240,16 @@ The state of thread is changed to running.  The values {\em obj$_1$} to {\em
 \end{arguments}
 %
 \result%
-The result of the initial function applied to the arguments passed
-from \functionref{thread-start}.  However, if a condition is signalled on {\em
-thread} which is handled by the default handler the condition will now
-be signalled on the thread calling \functionref{thread-value}---that is the
+The result of the initial function applied to the arguments passed from
+\functionref{thread-start}.  However, if a condition is signalled on {\em
+    thread} which is handled by the default handler the condition will now be
+signalled on the thread calling \functionref{thread-value}---that is the
 condition will be propagated to the accessing thread.
 %
 \remarks%
-If {\em thread} is not determined, each thread calling \functionref{
-thread-value} is suspended until {\em thread} is determined, when each
-will either get the thread's value or signal the condition.
+If {\em thread} is not determined, each thread calling
+\functionref{thread-value} is suspended until {\em thread} is determined, when
+each will either get the thread's value or signal the condition.
 %
 \seealso%
 \functionref{thread-reschedule}, \functionref{signal}.
@@ -278,8 +271,8 @@ non-\nil\/ value.
 %
 \remarks%
 \genericref{wait} provides a generic interface to operations which may block.
-Execution of the current thread will continue beyond the \genericref{wait}
-form only when one of the following happened:
+Execution of the current thread will continue beyond the \genericref{wait} form
+only when one of the following happened:
 \begin{enumerate}
     \item\label{case-a} A condition associated with {\em obj} returns true;
     \item\label{case-b} {\em timeout} time units elapse;
@@ -288,12 +281,12 @@ form only when one of the following happened:
 \genericref{wait} returns \nil\/ if timeout occurs, else it returns a
 non-nil value.
 
-A {\em timeout} argument of \nil\/ or zero denotes a polling
-operation.  A {\em timeout} argument of \true\/ denotes indefinite
-blocking (cases \ref{case-a} or \ref{case-c} above).  A {\em timeout}
-argument of a non-negative integer denotes the minimum number of time
-units before timeout.  The number of time units in a second is given by
-the implementation-defined constant \constantref{ticks-per-second}.
+A {\em timeout} argument of \nil\/ or zero denotes a polling operation.  A {\em
+    timeout} argument of \true\/ denotes indefinite blocking (cases \ref{case-a}
+or \ref{case-c} above).  A {\em timeout} argument of a non-negative integer
+denotes the minimum number of time units before timeout.  The number of time
+units in a second is given by the implementation-defined constant
+\constantref{ticks-per-second}.
 %
 \examples
 This code fragment copies characters from stream {\tt s} to the
@@ -324,25 +317,26 @@ threads (section~\ref{thread}), streams (section~\ref{stream}).
 \end{specargs}
 %
 \result%
-Result is either {\em thread} or \nil.  If {\em timeout} is \nil, the
-result is {\em thread} if it is {\em determined}.  If {\em timeout} is \true,
-{\em thread} suspends until {\em thread} is {\em determined} and the result is
-guaranteed to be {\em thread}.  If {\em timeout} is a non-negative integer, the
-call blocks until either {\em thread} is determined, in which case the result is
-{\em thread}, or until the {\em timeout} period is reached, in which case the
+Result is either {\em thread} or \nil.  If {\em timeout} is \nil, the result is
+{\em thread} if it is {\em determined}.  If {\em timeout} is \true, {\em thread}
+suspends until {\em thread} is {\em determined} and the result is guaranteed to
+be {\em thread}.  If {\em timeout} is a non-negative integer, the call blocks
+until either {\em thread} is determined, in which case the result is {\em
+    thread}, or until the {\em timeout} period is reached, in which case the
 result is \nil, whichever is the sooner.  The units for the non-negative integer
 timeout are the number of clock ticks to wait.  The implementation-defined
-constant \constantref{ticks-per-second} is used to make timeout periods processor
-independent.
+constant \constantref{ticks-per-second} is used to make timeout periods
+processor independent.
 %
 \seealso%
 \genericref{wait} and \constantref{ticks-per-second} (Section~\ref{condition}).
 %
 \constant{ticks-per-second}{double-float}
-The number of time units in a second expressed as a double precision
-floating point number.  This value is
+%
+The number of time units in a second expressed as a double precision floating
+point number.  This value is
 implementation-defined\index{general}{implementation-defined!time units per
-second}.
+    second}.
 
 \condition{thread-condition}{condition}
 %
@@ -411,14 +405,13 @@ otherwise \nil.
 The lock supplied as argument.
 %
 \remarks%
-Executing a \classref{lock} operation will eventually give the
-calling thread exclusive control of {\em lock}.  A consequence of
-calling \classref{lock} is that a condition from another thread may be
-signalled on this thread.  Such a condition will be signalled before
-{\em lock} has been acquired, so a thread which does not handle the
-condition will not lead to starvation; the condition will be signalled
-continuably so that the process of acquiring the lock may continue
-after the condition has been handled.
+Executing a \classref{lock} operation will eventually give the calling thread
+exclusive control of {\em lock}.  A consequence of calling \classref{lock} is
+that a condition from another thread may be signalled on this thread.  Such a
+condition will be signalled before {\em lock} has been acquired, so a thread
+which does not handle the condition will not lead to starvation; the condition
+will be signalled continuably so that the process of acquiring the lock may
+continue after the condition has been handled.
 %
 \seealso%
 \functionref{unlock} and Section~\ref{condition} for details of conditions and
@@ -435,8 +428,8 @@ The lock supplied as argument.
 %
 \remarks%
 The \functionref{unlock} operation unlocks {\em lock} so that either a thread
-subsequently calling \classref{lock} or one of the threads which has
-already called \classref{lock} on the lock can gain exclusive access.
+subsequently calling \classref{lock} or one of the threads which has already
+called \classref{lock} on the lock can gain exclusive access.
 %
 \seealso%
 \classref{lock}.

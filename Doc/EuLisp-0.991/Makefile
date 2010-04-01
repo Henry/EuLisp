@@ -80,7 +80,7 @@ $(HTML1_DIR)/$(DOCUMENT).html: $(SOURCE_FILES) $(4HT_FILES)
 
 .PHONY: undefined
 undefined: $(DOCUMENT).pdf
-	grep "undefined on input" eulisp.log \
+	grep "undefined" eulisp.log \
 	| awk '{print $$5}' | sort | uniq > undefined.txt
 
 ## ----------------------------------------------------------------------------

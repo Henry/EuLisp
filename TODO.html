@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-03-31 22:40:08 BST"/>
+<meta name="generated" content="2010-04-01 21:31:50 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -94,23 +94,23 @@ lang="en" xml:lang="en">
 Split files
 <ul>
 <li>
-Comptime2/64bit/cg-exec.em
+<i>Comptime2/64bit/cg-exec.em</i>
 </li>
 <li>
-Comptime2/32bit/cg-exec.em
+<i>Comptime2/32bit/cg-exec.em</i>
 </li>
 </ul>
 
 <p>Into
 </p><ul>
 <li>
-Comptime2/cg-exec.em
+<i>Comptime2/cg-exec.em</i>
 </li>
 <li>
-Comptime2/64bit/cg-exec-nbit.em
+<i>Comptime2/64bit/cg-exec-nbit.em</i>
 </li>
 <li>
-Comptime2/32bit/cg-exec-nbit.em
+<i>Comptime2/32bit/cg-exec-nbit.em</i>
 </li>
 </ul>
 </li>
@@ -118,54 +118,54 @@ Comptime2/32bit/cg-exec-nbit.em
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 10:14</span></span><br/>
 <ul>
 <li>
-ARGDECL
+<code>ARGDECL</code>
 </li>
 <li>
-PROTOTYPE
+<code>PROTOTYPE</code>
 </li>
 </ul>
 </li>
-<li id="sec-1.3"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to eul_const <br/>
+<li id="sec-1.3"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to remove <code>eul_const</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 14:37</span></span><br/>
 </li>
-<li id="sec-1.4"><span class="done DONE"> DONE</span> Remove compat.h <br/>
+<li id="sec-1.4"><span class="done DONE"> DONE</span> Remove <i>compat.h</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span></span><br/>
 when backward compatibility is no longer needed.
 </li>
-<li id="sec-1.5"><span class="done DONE"> DONE</span> Change all the Makefiles of all the Extras and Examples <br/>
+<li id="sec-1.5"><span class="done DONE"> DONE</span> Change all the <i>Makefiles</i> of all the <i>Extras</i> and <i>Examples</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
-so that the libraries and executables are located in platform/$(ARCH)
-or /Lib.$(ARCH) and /Bin.$(ARCH) directories.
+so that the libraries and executables are located in <i>platform/$(ARCH)</i>
+or //Lib.$(ARCH)/ and //Bin.$(ARCH)/ directories.
 </li>
-<li id="sec-1.6"><span class="done DONE"> DONE</span> Investigate warning messages from Examples/Misc/ffi2.c <br/>
+<li id="sec-1.6"><span class="done DONE"> DONE</span> Investigate warning messages from <i>Examples/Misc/ffi2.c</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span></span><br/>
 Creating stand-alone application of module ffi2 &hellip;
-Compiling ffi2.c using gcc &hellip;
-/home/dm2/henry/EuLisp/youtoo/Examples/Misc/ffi2.c: In function ‘ff_stub_ext_foo_in
+Compiling <i>ffi2.c</i> using gcc &hellip;
+//home/dm2/henry/EuLisp/youtoo/Examples/Misc/ffi2.c/: In function ‘ff_stub_ext_foo_in
 </li>
 <li id="sec-1.7"><span class="todo TODO"> TODO</span> Resolve warning messages from ffi applications <br/>
 by introducing an option to allow a header file declaring the ff's to be
 included in the stubs files.
 <ul>
-<li id="sec-1.7.1">Add header-files including the ffi definitions to all the "Extras" libraries. <br/>
+<li id="sec-1.7.1">Add header-files including the ffi definitions to all the <i>Extras</i> libraries. <br/>
 </li>
 </ul>
 </li>
-<li id="sec-1.8"><span class="todo TODO"> TODO</span> Investigate when Lib.${ARCH}/*.i should be copied to Lib <br/>
+<li id="sec-1.8"><span class="todo TODO"> TODO</span> Investigate when <i>Lib.${ARCH}/*.i</i> should be copied to Lib <br/>
 </li>
-<li id="sec-1.9"><span class="done DONE"> DONE</span> Sort out the Extras/Bignum/Makefile <br/>
+<li id="sec-1.9"><span class="done DONE"> DONE</span> Sort out the <i>Extras/Bignum/Makefile</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 Currently the linking of the gmp library is hard-coded.
 </li>
 <li id="sec-1.10"><span class="done DONE"> DONE</span> Upgrade the TclTk library to 8.5 <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-14 Sun 23:27</span></span><br/>
 </li>
-<li id="sec-1.11"><span class="done DONE"> DONE</span> Investigate problems with the Extras/OS (object serialisation) lib <br/>
+<li id="sec-1.11"><span class="done DONE"> DONE</span> Investigate problems with the <i>Extras/OS</i> (object serialisation) lib <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:30</span></span><br/>
 </li>
 <li id="sec-1.12"><span class="todo TODO"> TODO</span> Change the MPI interface to work with OpenMPI <br/>
 </li>
-<li id="sec-1.13"><span class="todo TODO"> TODO</span> Comptime2/youtoo.em sometimes ends-up in the wrong state <br/>
+<li id="sec-1.13"><span class="todo TODO"> TODO</span> <i>Comptime2/youtoo.em</i> sometimes ends-up in the wrong state <br/>
 should be
 
 
@@ -209,14 +209,14 @@ is unable to compile module files correctly issuing errors like
 
 
 </li>
-<li id="sec-1.17"><span class="done DONE"> DONE</span> Split the "boot" section of Comptime2/Makefile <br/>
+<li id="sec-1.17"><span class="done DONE"> DONE</span> Split the "boot" section of <i>Comptime2/Makefile</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-16 Tue 15:06</span></span><br/>
 into the two parts to make the preliminary and final executables.
 Also move the "driver" part into the top-level Makefile.
 </li>
-<li id="sec-1.18"><span class="todo TODO"> TODO</span> Change the Extras/Pipe/test1.em app <br/>
+<li id="sec-1.18"><span class="todo TODO"> TODO</span> Change the <i>Extras/Pipe/test1.em app</i> <br/>
 to obtain the path of the youtoo script from the global settings obtained
-from the .eulrc.${ARCH} file.
+from the <i>.eulrc.${ARCH}</i> file.
 </li>
 <li id="sec-1.19"><span class="done DONE"> DONE</span> Clean all .em files <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-26 Fri 15:01</span></span><br/>
@@ -224,12 +224,15 @@ to remove blank line at beginning, tabs and trailing white-space.
 </li>
 <li id="sec-1.20"><span class="todo TODO"> TODO</span> Add support in the REPL to load dynamically-linked module libraries <br/>
 </li>
-<li id="sec-1.21"><span class="todo TODO"> TODO</span> Add support for #;(sexp) comments in Runtime/Ff/eul-ntok.c <br/>
+<li id="sec-1.21"><span class="todo TODO"> TODO</span> Add support for #;(sexp) comments in <i>Runtime/Ff/eul-ntok.c</i> <br/>
 </li>
-<li id="sec-1.22"><span class="todo TODO"> TODO</span> Add line-number counting to Runtime/Ff/eul-ntok.c <br/>
+<li id="sec-1.22"><span class="todo TODO"> TODO</span> Add line-number counting to <i>Runtime/Ff/eul-ntok.c</i> <br/>
 This also requires the introduction of a line-number counting stream to hold
 the line-number and provide access to the error reporting system.
-
+</li>
+<li id="sec-1.23"><span class="done DONE"> DONE</span> <code>read-error</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-01 Thu 21:31</span></span><br/>
+Replace the use of <code>error</code> with <code>read-error</code> in <i>read.em</i>
 </li>
 </ul>
 </div>
@@ -245,13 +248,25 @@ the line-number and provide access to the error reporting system.
 to correspond to the EuLisp-1.0 proposals.
 See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 </li>
-<li id="sec-2.2"><span class="todo TODO"> TODO</span> Undefined references [20/24] <br/>
+<li id="sec-2.2"><span class="todo TODO"> TODO</span> Undefined references [34/41] <br/>
 <ul>
+<li>
+<b>[X]</b> class:abstract-class
+</li>
+<li>
+<b>[X]</b> class:character-sequence
+</li>
 <li>
 <b>[X]</b> class:collection
 </li>
 <li>
+<b>[X]</b> class:condition-class
+</li>
+<li>
 <b>[X]</b> class:&lt;function&gt;
+</li>
+<li>
+[-] class:function-class
 </li>
 <li>
 [-] class:hash-table
@@ -260,7 +275,7 @@ See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 <b>[X]</b> class:list
 </li>
 <li>
-[-] class:metaclass
+<b>[X]</b> class:metaclass
 </li>
 <li>
 [-] class:method
@@ -272,7 +287,31 @@ See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 <b>[X]</b> class:sequence
 </li>
 <li>
-[-] class:super-class
+[-] class:simple-class
+</li>
+<li>
+[-] class:simple-function
+</li>
+<li>
+[-] class:simple-method
+</li>
+<li>
+[-] class:simple-thread
+</li>
+<li>
+<b>[X]</b> class:super-class
+</li>
+<li>
+<b>[X]</b> condition:condition
+</li>
+<li>
+<b>[X]</b> condition:no-converter
+</li>
+<li>
+<b>[X]</b> condition:methods-exists
+</li>
+<li>
+<b>[X]</b> condition:read-error
 </li>
 <li>
 <b>[X]</b> defform:defmacro
@@ -287,6 +326,12 @@ See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 <b>[X]</b> function:eql
 </li>
 <li>
+<b>[X]</b> function:end-of-stream
+</li>
+<li>
+<b>[X]</b> function:fill-buffer
+</li>
+<li>
 <b>[X]</b> function:=
 </li>
 <li>
@@ -299,10 +344,13 @@ See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 <b>[X]</b> generic:eql
 </li>
 <li>
-<b>[X]</b> generic:eq
+<b>[X]</b> generic:eq|
 </li>
 <li>
 <b>[X]</b> generic:equal
+</li>
+<li>
+<b>[X]</b> generic:generic-prin
 </li>
 <li>
 <b>[X]</b> generic:method
@@ -319,13 +367,38 @@ See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 <li>
 <b>[X]</b> keyword:export
 </li>
+<li>
+<b>[X]</b> setter:method-function
+</li>
+<li>
+<b>[X]</b> syntax:unquote-splice
+</li>
 </ul>
+</li>
+<li id="sec-2.3"><span class="todo TODO"> TODO</span> Add entry for the <code>&lt;method&gt;</code> class in Level-1 <br/>
+</li>
+<li id="sec-2.4"><span class="todo TODO"> TODO</span> Add details of the <code>&lt;hash-table&gt;</code> class and functions <br/>
+</li>
+<li id="sec-2.5"><span class="todo TODO"> TODO</span> Update stream module <br/>
+to corresponding to the Youtoo implementation.
+</li>
+<li id="sec-2.6"><span class="done DONE"> DONE</span> Add descriptions of constants to "Layout and Typography" <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-01 Thu 12:16</span></span><br/>
+in structure.tex.  Include details of constant instances of classes and
+constant bindings to classes (class aliases).
+</li>
+<li id="sec-2.7">&lt;thread&gt; vs &lt;abstract-thread&gt; <br/>
+Sort out the difference between the EuLisp definition and the Youtoo
+implementation with respect to the name of the abstract base-class for
+threads.  In the definition it is <code>&lt;thread&gt;</code> whereas in Youtoo it is
+<code>&lt;abstract-thread&gt;</code> and <code>&lt;thread&gt;</code> is used for the currently used thread
+type.
 </li>
 </ul>
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-03-31 22:40:08 BST</p>
+<p class="date"> Date: 2010-04-01 21:31:50 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

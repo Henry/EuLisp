@@ -597,7 +597,14 @@ A description of the r\^ole of {\tt <a-class>}.
 \end{optDefinition}
 %
 \constant{a-constant}{a-class}
+%
+\remarks%
+A constant of type \classref{a-class}.
+
 \constant{<a-class-alias>}{a-class}
+%
+\remarks%
+A constant binding whose value is \classref{a-class}, {\em i.e.} a class alias.
 
 \sclause{Naming}
 %
@@ -624,12 +631,11 @@ argument function.  For example \genericref{binary+} is the two argument
 % named {\tt fooc}.
 %
 \subdefinition{``{\tt -class}'' suffix} The name of a metaclass of a set of
-related classes.  For example, {\tt <function-class>}, which is the class of
-{\tt <simple-function>}, {\tt <generic-function>} and any of their subclasses
-and {\tt <condition-class>} is the class of all condition classes.  The
-exception is \classref{class} itself which is the default metaclass.  The prefix
-should describe the general domain of the classes in question, but not
-necessarily any particular class in the set.
+related classes.  For example, \classref{function-class}, which is the class of
+\classref{simple-function}, \classref{generic-function} and any of their
+subclasses.  The exception is \classref{class} itself which is the default
+metaclass.  The prefix should describe the general domain of the classes in
+question, but not necessarily any particular class in the set.
 %
 \subdefinition{``{\tt generic-}'' prefix} The generic version of the function
 named by the stem.

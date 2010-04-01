@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-31 23:00:00" /> 
+<meta name="date" content="2010-04-01 21:32:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -21,9 +21,9 @@ href="eulispcl15.html#taileulispcl15.html" >prev-tail</a>] [<a
 href="#taileulispcl16.html">tail</a>] [<a 
 href="eulisp.html#eulispcl16.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 16 <a 
- id="x20-19100016"></a>Expressions, Definitions and Control Forms</h3>
+ id="x20-19300016"></a>Expressions, Definitions and Control Forms</h3>
 <a 
- id="dx20-191001"></a>
+ id="dx20-193001"></a>
 <!--l. 1--><p class="noindent" >This section gives the syntax of well-formed expressions and
 describes the semantics of the special-forms, functions and
 macros of the level-0 language. In the case of level-0 macros,
@@ -34,28 +34,28 @@ expansions.
 </p><!--l. 17--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 16.1 <a 
- id="x20-19200016.1"></a>Simple Expressions</h4>
+ id="x20-19400016.1"></a>Simple Expressions</h4>
 <a 
- id="dx20-192001"></a><a 
- id="dx20-192002"></a>
+ id="dx20-194001"></a><a 
+ id="dx20-194002"></a>
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-192003r1"></a><span 
+ id="x20-194003r1"></a><span 
 class="cmbx-9">16.1.1   </span><span 
 class="cmtt-9">constant</span>
 <a 
- id="Q1-20-255"></a>
+ id="Q1-20-259"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr /> <a 
- id="dx20-192004"></a> There are two kinds of constants<a 
- id="dx20-192005"></a>, literal constants and
+ id="dx20-194004"></a> There are two kinds of constants<a 
+ id="dx20-194005"></a>, literal constants and
 defined constants<a 
- id="dx20-192006"></a>. Only the first kind are considered here. A literal
+ id="dx20-194006"></a>. Only the first kind are considered here. A literal
 constant is a number, a string, a character, or the empty list. The
 result of processing such a literal constant is the constant
 itself&#8212;that is, it denotes itself<a 
- id="dx20-192007"></a>.
+ id="dx20-194007"></a>.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-1930001"></a><span 
+ id="x20-1950001"></a><span 
 class="cmbx-8">Examples</span></h5><!--tex4ht:inline--><div class="tabular"> <table id="TBL-2" class="tabular" 
 cellspacing="0" cellpadding="0"  
 ><colgroup id="TBL-2-1g"><col 
@@ -82,22 +82,22 @@ class="cmtt-9">"abc"</span></span></span></td><td  style="white-space:nowrap; te
 class="td11">a string                     </td>
 </tr></table></div>
 <a 
- id="dx20-193001"></a>
+ id="dx20-195001"></a>
 <a 
- id="dx20-193002"></a>
+ id="dx20-195002"></a>
 <!--l. 21--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-193003r2"></a><span 
+ id="x20-195003r2"></a><span 
 class="cmbx-9">16.1.2   </span><span 
 class="cmtt-9">defconstant</span>
 <a 
- id="Q1-20-257"></a>
+ id="Q1-20-261"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">defining form </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.1.2.1 <a 
- id="x20-19400016.1.2.1"></a><span 
+ id="x20-19600016.1.2.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-194001"></a> <div class="framebox-c" 
+ id="x20-196001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 24--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">defconstant</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -112,7 +112,7 @@ class="cmtt-8">&#x00A0;form,</span><span
 class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>                                                  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-19500016.1.2.1"></a><span 
+ id="x20-19700016.1.2.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
        <dl class="arguments1"><dt class="arguments">
   <span 
@@ -132,93 +132,93 @@ class="cmti-9">identifier</span>.</p></dd></dl>
   <!--l. 38--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-19600016.1.2.1"></a><span 
+ id="x20-19800016.1.2.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The value of <span 
 class="cmti-9">form </span>is stored in the top-lexical binding of
   <span 
 class="cmti-9">identifier</span>. It is a violation to attempt to modify the binding of a
   defined constant.
   <a 
- id="dx20-196001"></a>
+ id="dx20-198001"></a>
   <a 
- id="dx20-196002"></a>
+ id="dx20-198002"></a>
   <!--l. 43--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-196003r3"></a><span 
+ id="x20-198003r3"></a><span 
 class="cmbx-9">16.1.3   </span><span 
 class="cmtt-9">nil</span>
  <a 
- id="Q1-20-261"></a>
+ id="Q1-20-265"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
-href="eulispcl17.html#x21-576004r3"><span 
+href="eulispcl17.html#x21-580004r3"><span 
 class="cmtt-9">&#x003C;null&#x003E;</span></a> </i></b></div><br /> <hr />
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-1970003"></a><span 
+ id="x20-1990003"></a><span 
 class="cmbx-8">Remarks</span></h5>The symbol <span 
 class="cmtt-9">nil </span>is defined to be immutably bound to the
   empty list, which is represented as <a 
-href="eulispcl17.html#x21-575011r2"><span 
+href="eulispcl17.html#x21-579011r2"><span 
 class="cmtt-9">()</span></a>. The empty list is used to
   denote the abstract boolean value <span 
 class="cmti-9">false</span>.
   <a 
- id="dx20-197001"></a>
+ id="dx20-199001"></a>
   <a 
- id="dx20-197002"></a>
+ id="dx20-199002"></a>
   <!--l. 50--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-197003r4"></a><span 
+ id="x20-199003r4"></a><span 
 class="cmbx-9">16.1.4   </span><span 
 class="cmtt-9">t</span>
  <a 
- id="Q1-20-263"></a>
+ id="Q1-20-267"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
-href="eulispcl17.html#x21-826004r2"><span 
+href="eulispcl17.html#x21-835004r2"><span 
 class="cmtt-9">&#x003C;symbol&#x003E;</span></a> </i></b></div><br /> <hr />
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-1980004"></a><span 
+ id="x20-2000004"></a><span 
 class="cmbx-8">Remarks</span></h5>This may be used to denote the abstract boolean value
   <span 
 class="cmti-9">true</span>, but so may any other value than <a 
-href="eulispcl17.html#x21-575011r2"><span 
+href="eulispcl17.html#x21-579011r2"><span 
 class="cmtt-9">()</span></a>.
   <a 
- id="dx20-198001"></a>
+ id="dx20-200001"></a>
   <a 
- id="dx20-198002"></a>
+ id="dx20-200002"></a>
   <!--l. 56--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-198003r5"></a><span 
+ id="x20-200003r5"></a><span 
 class="cmbx-9">16.1.5   </span><span 
 class="cmtt-9">symbol</span>
  <a 
- id="Q1-20-265"></a>
+ id="Q1-20-269"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr /> <a 
- id="dx20-198004"></a> The current lexical binding of <a 
-href="eulispcl17.html#x21-825006r1"><span 
+ id="dx20-200004"></a> The current lexical binding of <a 
+href="eulispcl17.html#x21-834006r1"><span 
 class="cmtt-9">symbol</span></a> is returned<a 
- id="dx20-198005"></a>. A
+ id="dx20-200005"></a>. A
   symbol can also name a defined constant&#8212;that is, an immutable
   top-lexical binding.
   <a 
- id="dx20-198006"></a>
+ id="dx20-200006"></a>
   <a 
- id="dx20-198007"></a>
+ id="dx20-200007"></a>
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-198008r6"></a><span 
+ id="x20-200008r6"></a><span 
 class="cmbx-9">16.1.6   </span><span 
 class="cmtt-9">deflocal</span>
                                                                                                   
                                                                                                   
 <a 
- id="Q1-20-266"></a>
+ id="Q1-20-270"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">defining form </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.1.6.1 <a 
- id="x20-19900016.1.6.1"></a><span 
+ id="x20-20100016.1.6.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-199001"></a> <div class="framebox-c" 
+ id="x20-201001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 66--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">deflocal</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -234,7 +234,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-20000016.1.6.1"></a><span 
+ id="x20-20200016.1.6.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -253,37 +253,37 @@ class="cmti-9">identifier</span>.</p></dd></dl>
 <!--l. 80--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-20100016.1.6.1"></a><span 
+ id="x20-20300016.1.6.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The value of <span 
 class="cmti-9">form </span>is stored in the top-lexical binding of
 <span 
 class="cmti-9">identifier</span>. The binding created by a <a 
-href="#x20-198008r6"><span 
+href="#x20-200008r6"><span 
 class="cmtt-9">deflocal</span></a> form is mutable.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-20200016.1.6.1"></a><span 
+ id="x20-20400016.1.6.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x20-230004r1"><span 
+href="#x20-232004r1"><span 
 class="cmtt-9">setq</span></a>.
 <a 
- id="dx20-202001"></a>
+ id="dx20-204001"></a>
 <a 
- id="dx20-202002"></a>
+ id="dx20-204002"></a>
 <!--l. 87--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-202003r7"></a><span 
+ id="x20-204003r7"></a><span 
 class="cmbx-9">16.1.7   </span><span 
 class="cmtt-9">quote</span>
 <a 
- id="Q1-20-271"></a>
+ id="Q1-20-275"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr /> <a 
- id="dx20-202004"></a>
+ id="dx20-204004"></a>
 </p>
 <h5 class="syntaxssclauseHead"> 16.1.7.1 <a 
- id="x20-20300016.1.7.1"></a><span 
+ id="x20-20500016.1.7.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-203001"></a> <div class="framebox-c" 
+ id="x20-205001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 91--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">quote</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -298,7 +298,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-20400016.1.7.1"></a><span 
+ id="x20-20600016.1.7.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -308,11 +308,11 @@ class="arguments">
 class="cmti-9">object </span>to be quoted.</p></dd></dl>
 <!--l. 101--><p class="noindent" >
 </p>                                                   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-20500016.1.7.1"></a><span 
+ id="x20-20700016.1.7.1"></a><span 
 class="cmbx-8">Result</span></h5>The result is <span 
 class="cmti-9">object</span>.
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-20600016.1.7.1"></a><span 
+ id="x20-20800016.1.7.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The result of processing the expression <span 
 class="cmtt-9">(quote </span><span 
 class="cmitt-10x-x-90">object</span><span 
@@ -321,39 +321,39 @@ class="cmtt-9">)</span>
 class="cmti-9">object</span>. The <span 
 class="cmti-9">object </span>can be any object having an external
   representation<a 
- id="dx20-206001"></a>. The special form <a 
-href="#x20-202003r7"><span 
+ id="dx20-208001"></a>. The special form <a 
+href="#x20-204003r7"><span 
 class="cmtt-9">quote</span></a> can be abbreviated using
   <span 
 class="cmti-9">apostrophe</span>&#8212;graphic representation&#x00A0;<span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">&#8217;</span></span></span><a 
- id="dx20-206002"></a>&#8212;so that <span 
+ id="dx20-208002"></a>&#8212;so that <span 
 class="cmtt-9">(quote a) </span>can
   be written <span 
 class="cmtt-9">&#8217;a</span>. These two notations are used to incorporate
   literal constants<a 
- id="dx20-206003"></a> in programs. It is an error to modify a literal
+ id="dx20-208003"></a> in programs. It is an error to modify a literal
   expression<a 
- id="dx20-206004"></a>.
+ id="dx20-208004"></a>.
   <!--l. 145--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 16.2 <a 
- id="x20-20700016.2"></a>Functions: creation, definition and application</h4>
+ id="x20-20900016.2"></a>Functions: creation, definition and application</h4>
   <a 
- id="dx20-207001"></a><a 
- id="dx20-207002"></a>
+ id="dx20-209001"></a><a 
+ id="dx20-209002"></a>
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-207003r1"></a><span 
+ id="x20-209003r1"></a><span 
 class="cmbx-9">16.2.1   </span><span 
 class="cmtt-9">lambda</span>
  <a 
- id="Q1-20-277"></a>
+ id="Q1-20-281"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
   <h5 class="syntaxssclauseHead"> 16.2.1.1 <a 
- id="x20-20800016.2.1.1"></a><span 
+ id="x20-21000016.2.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5>  <a 
- id="x20-208001"></a> <div class="framebox-c" 
+ id="x20-210001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 6--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">lambda</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -382,7 +382,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -412,7 +412,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -430,7 +430,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-20900016.2.1.1"></a><span 
+ id="x20-21100016.2.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
        <dl class="arguments1"><dt class="arguments">
   <span 
@@ -438,7 +438,7 @@ class="cmti-9">lambda-list </span>:  </dt><dd
 class="arguments">
         <!--l. 21--><p class="noindent" >The  parameter  list  of  the  function  conforming  to  the
         syntax <a 
-href="#x20-20800016.2.1.1">16.2.1.1<!--tex4ht:ref: lambda-syntax-table --></a>.
+href="#x20-21000016.2.1.1">16.2.1.1<!--tex4ht:ref: lambda-syntax-table --></a>.
         </p></dd><dt class="arguments">
   <span 
 class="cmti-9">form </span>:  </dt><dd 
@@ -447,15 +447,15 @@ class="arguments">
   <!--l. 26--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-21000016.2.1.1"></a><span 
+ id="x20-21200016.2.1.1"></a><span 
 class="cmbx-8">Result</span></h5>A function with the specified <span 
 class="cmti-9">lambda-list </span>and sequence of
   <span 
 class="cmti-9">form</span>s.
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-21100016.2.1.1"></a><span 
+ id="x20-21300016.2.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The function construction operator is <a 
-href="#x20-207003r1"><span 
+href="#x20-209003r1"><span 
 class="cmtt-9">lambda</span></a>. Access to
   the lexical environment of definition is guaranteed. The syntax of
   <span 
@@ -466,7 +466,7 @@ class="cmti-9">lambda-list </span>is defined in reflambda-syntax-table.
 class="cmti-9">lambda-list </span>is an <span 
 class="cmti-9">identifier</span>, it is bound to a newly allocated list of
 the actual parameters. This binding<a 
- id="dx20-211001"></a> has lexical scope and indefinite
+ id="dx20-213001"></a> has lexical scope and indefinite
 extent. If <span 
 class="cmti-9">lambda-list </span>is a <span 
 class="cmti-9">simple-list</span>, the arguments are bound to
@@ -486,22 +486,22 @@ class="cmti-9">lambda-list</span>. It is an error to modify
 <span 
 class="cmti-9">rest-list</span>.
 <a 
- id="dx20-211002"></a>
+ id="dx20-213002"></a>
 <a 
- id="dx20-211003"></a>
+ id="dx20-213003"></a>
 </p><!--l. 47--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-211004r2"></a><span 
+ id="x20-213004r2"></a><span 
 class="cmbx-9">16.2.2   </span><span 
 class="cmtt-9">defmacro</span>
 <a 
- id="Q1-20-282"></a>
+ id="Q1-20-286"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.2.2.1 <a 
- id="x20-21200016.2.2.1"></a><span 
+ id="x20-21400016.2.2.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-212001"></a> <div class="framebox-c" 
+ id="x20-214001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 50--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">defmacro</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -525,7 +525,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-21300016.2.2.1"></a><span 
+ id="x20-21500016.2.2.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -542,7 +542,7 @@ class="cmti-9">lambda-list </span>: </dt><dd
 class="arguments">
     <!--l. 62--><p class="noindent" >The  parameter  list  of  the  function  conforming  to  the
     syntax specified under <a 
-href="#x20-207003r1"><span 
+href="#x20-209003r1"><span 
 class="cmtt-9">lambda</span></a>.
     </p></dd><dt class="arguments">
 <span 
@@ -552,23 +552,23 @@ class="arguments">
 <!--l. 68--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-21400016.2.2.1"></a> <span 
+ id="x20-21600016.2.2.1"></a> <span 
 class="cmbx-8">Remarks</span></h5>The <a 
-href="#x20-211004r2"><span 
+href="#x20-213004r2"><span 
 class="cmtt-9">defmacro</span></a> form defines a function<a 
- id="dx20-214001"></a> named by
+ id="dx20-216001"></a> named by
 <span 
 class="cmti-9">macro-name </span>and stores the definition as the top-lexical binding of
 <span 
 class="cmti-9">macro-name</span><a 
- id="dx20-214002"></a><a 
- id="dx20-214003"></a>. The interpretation of the <span 
+ id="dx20-216002"></a><a 
+ id="dx20-216003"></a>. The interpretation of the <span 
 class="cmti-9">lambda-list </span>is as defined for
 <a 
-href="#x20-207003r1"><span 
+href="#x20-209003r1"><span 
 class="cmtt-9">lambda</span></a> (see <a 
-href="#x20-20800016.2.1.1">16.2.1.1<!--tex4ht:ref: lambda-syntax-table --></a>).       <a 
- id="x20-214004r1"></a>
+href="#x20-21000016.2.1.1">16.2.1.1<!--tex4ht:ref: lambda-syntax-table --></a>).       <a 
+ id="x20-216004r1"></a>
 <div class="note">
 <span 
 class="cmr-8">NOTE</span><span 
@@ -580,28 +580,28 @@ class="cmr-8">which defines it. A macro cannot be used in the module which defin
 class="cmr-8">it.</span></div>
 <!--l. 81--><p class="noindent" >
 </p>                                                   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-21500016.2.2.1"></a> <span 
+ id="x20-21700016.2.2.1"></a> <span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x20-207003r1"><span 
+href="#x20-209003r1"><span 
 class="cmtt-9">lambda</span></a>.
   <a 
- id="dx20-215001"></a>
+ id="dx20-217001"></a>
   <a 
- id="dx20-215002"></a>
+ id="dx20-217002"></a>
   <!--l. 84--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-215003r3"></a><span 
+ id="x20-217003r3"></a><span 
 class="cmbx-9">16.2.3   </span><span 
 class="cmtt-9">defun</span>
  <a 
- id="Q1-20-287"></a>
+ id="Q1-20-291"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr />
   </p>
   <h5 class="syntaxssclauseHead"> 16.2.3.1 <a 
- id="x20-21600016.2.3.1"></a><span 
+ id="x20-21800016.2.3.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-216001"></a> <div class="framebox-c" 
+ id="x20-218001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 87--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">defun</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -678,7 +678,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-21700016.2.3.1"></a><span 
+ id="x20-21900016.2.3.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
        <dl class="arguments1"><dt class="arguments">
   <span 
@@ -704,7 +704,7 @@ class="cmti-9">lambda-list </span>:  </dt><dd
 class="arguments">
         <!--l. 109--><p class="noindent" >The  parameter  list  of  the  function  conforming  to  the
         syntax specified under <a 
-href="#x20-207003r1"><span 
+href="#x20-209003r1"><span 
 class="cmtt-9">lambda</span></a>.
         </p></dd><dt class="arguments">
   <span 
@@ -714,9 +714,9 @@ class="arguments">
   <!--l. 115--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-21800016.2.3.1"></a> <span 
+ id="x20-22000016.2.3.1"></a> <span 
 class="cmbx-8">Remarks</span></h5>The <a 
-href="#x20-215003r3"><span 
+href="#x20-217003r3"><span 
 class="cmtt-9">defun</span></a> form defines a function named by
   <span 
 class="cmti-9">function-name </span>and stores the definition (i) as the top-lexical
@@ -726,11 +726,11 @@ class="cmti-9">function-name </span>or (ii) as the setter function of
 class="cmti-9">function-name</span>. The interpretation of the <span 
 class="cmti-9">lambda-list </span>is as defined
   for <a 
-href="#x20-207003r1"><span 
+href="#x20-209003r1"><span 
 class="cmtt-9">lambda</span></a>. The rewrite rules for <a 
-href="#x20-215003r3"><span 
+href="#x20-217003r3"><span 
 class="cmtt-9">defun</span></a> are given below.  <a 
- id="x20-218001"></a>
+ id="x20-220001"></a>
                                                                                                   
                                                                                                   
 <div class="framebox-c" 
@@ -858,23 +858,23 @@ class="td11"> </td>
 </tr></table>
 </div></div>                                                </div>
 <a 
- id="dx20-218002"></a>
+ id="dx20-220002"></a>
 <a 
- id="dx20-218003"></a>
+ id="dx20-220003"></a>
 <!--l. 158--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-218004r4"></a><span 
+ id="x20-220004r4"></a><span 
 class="cmbx-9">16.2.4   </span><span 
 class="cmtt-9">function call</span>
 <a 
- id="Q1-20-291"></a>
+ id="Q1-20-295"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr /> <a 
- id="dx20-218005"></a>
+ id="dx20-220005"></a>
 </p>
 <h5 class="syntaxssclauseHead"> 16.2.4.1 <a 
- id="x20-21900016.2.4.1"></a><span 
+ id="x20-22100016.2.4.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-219001"></a> <div class="framebox-c" 
+ id="x20-221001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 162--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">function</span><span 
 class="cmtt-8">&#x00A0;call</span><span 
@@ -890,7 +890,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-22000016.2.4.1"></a><span 
+ id="x20-22200016.2.4.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -899,13 +899,13 @@ class="arguments">
     <!--l. 169--><p class="noindent" >This may be a symbol&#8212;being either the name of a special
     form, or a lexical variable&#8212;or a function call, which must
     result in an instance of <a 
-href="eulispcl11.html#x13-71003r1"><span 
+href="eulispcl11.html#x13-73003r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a>.
     </p><!--l. 173--><p class="noindent" >An      error      is      signalled      (condition      class:
     <a 
-href="#x20-223002r5"><span 
+href="#x20-225002r5"><span 
 class="cmtt-9">&#x003C;invalid-operator&#x003E;</span></a><a 
- id="dx20-220001"></a>) if the operator is not a function.
+ id="dx20-222001"></a>) if the operator is not a function.
     </p></dd><dt class="arguments">
 <span 
 class="cmti-9">operand</span><sup><span 
@@ -917,20 +917,20 @@ class="cmti-9">operand </span>must be either an atomic expression, a literal
 <!--l. 181--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-22100016.2.4.1"></a><span 
+ id="x20-22300016.2.4.1"></a><span 
 class="cmbx-8">Result</span></h5>The result is the value of the application of <span 
 class="cmti-9">operator </span>to the
 evaluation of <span 
 class="cmti-9">operand</span><sup><span 
 class="cmsy-6">*</span></sup>.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-22200016.2.4.1"></a><span 
+ id="x20-22400016.2.4.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The <span 
 class="cmti-9">operand </span>expressions are evaluated in order from leftto right. The <span 
 class="cmti-9">operator </span>expression may be evaluated at any
  time before, during or after the evaluation of the operands.
  <a 
- id="x20-222001r2"></a>
+ id="x20-224001r2"></a>
  <div class="note">
  <span 
 class="cmr-8">NOTE</span><span 
@@ -943,28 +943,28 @@ class="cmr-8">of common practice, but it may be revised in a future version.</sp
  <!--l. 196--><p class="noindent" >
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-22300016.2.4.1"></a> <span 
+ id="x20-22500016.2.4.1"></a> <span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x20-192003r1"><span 
+href="#x20-194003r1"><span 
 class="cmtt-9">constant</span></a>, <a 
-href="eulispcl17.html#x21-825006r1"><span 
+href="eulispcl17.html#x21-834006r1"><span 
 class="cmtt-9">symbol</span></a>, <a 
-href="#x20-202003r7"><span 
+href="#x20-204003r7"><span 
 class="cmtt-9">quote</span></a>.
  <a 
- id="dx20-223001"></a>
+ id="dx20-225001"></a>
  <!--l. 199--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-223002r5"></a><span 
+ id="x20-225002r5"></a><span 
 class="cmbx-9">16.2.5   </span><span 
 class="cmtt-9">invalid-operator</span>
  <a 
- id="Q1-20-297"></a>
+ id="Q1-20-301"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">general-condition </span></i></b></div><br /> <hr />
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2240005"></a><span 
+ id="x20-2260005"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
     <dl class="initoptions1"><dt class="initoptions">
  <span 
@@ -981,28 +981,28 @@ class="initoptions">
  <!--l. 208--><p class="noindent" >
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2250005"></a><span 
+ id="x20-2270005"></a><span 
 class="cmbx-8">Remarks</span></h5>Signalled by function call if the operator is not an
  instance of <a 
-href="eulispcl11.html#x13-71003r1"><span 
+href="eulispcl11.html#x13-73003r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a>.
  <a 
- id="dx20-225001"></a>
+ id="dx20-227001"></a>
  <a 
- id="dx20-225002"></a>
+ id="dx20-227002"></a>
  <!--l. 212--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-225003r6"></a><span 
+ id="x20-227003r6"></a><span 
 class="cmbx-9">16.2.6   </span><span 
 class="cmtt-9">apply</span>
  <a 
- id="Q1-20-300"></a>
+ id="Q1-20-304"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
  </p>
  <h5 class="syntaxssclauseHead"> 16.2.6.1 <a 
- id="x20-22600016.2.6.1"></a><span 
+ id="x20-22800016.2.6.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-226001"></a> <div class="framebox-c" 
+ id="x20-228001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 215--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">apply</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -1018,7 +1018,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-22700016.2.6.1"></a><span 
+ id="x20-22900016.2.6.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
  <span 
@@ -1028,7 +1028,7 @@ class="arguments">
                                                                                                   
     <!--l. 222--><p class="noindent" >An  expression  which  must  evaluate  to  an  instance  of
     <a 
-href="eulispcl11.html#x13-71003r1"><span 
+href="eulispcl11.html#x13-73003r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a>.
     </p></dd><dt class="arguments">
 <span 
@@ -1054,7 +1054,7 @@ class="cmmi-6">n</span></sub> is not a proper list.</p></dd></dl>
 <!--l. 232--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-22800016.2.6.1"></a><span 
+ id="x20-23000016.2.6.1"></a><span 
 class="cmbx-8">Result</span></h5>The result is the result of calling <span 
 class="cmti-9">function </span>with the actual
 parameter list created by appending <span 
@@ -1068,43 +1068,43 @@ class="cmmi-6">n</span><span
 class="cmsy-6">-</span><span 
 class="cmr-6">1</span></sub>. An error is signalled (condition
 class: <a 
-href="#x20-223002r5"><span 
+href="#x20-225002r5"><span 
 class="cmtt-9">&#x003C;invalid-operator&#x003E;</span></a><a 
- id="dx20-228001"></a>) if the first argument is not an instance
+ id="dx20-230001"></a>) if the first argument is not an instance
 of <a 
-href="eulispcl11.html#x13-71003r1"><span 
+href="eulispcl11.html#x13-73003r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a>.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-22900016.2.6.1"></a><span 
+ id="x20-23100016.2.6.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><span 
 class="cmti-9">function call</span>, <a 
-href="#x20-223002r5"><span 
+href="#x20-225002r5"><span 
 class="cmtt-9">&#x003C;invalid-operator&#x003E;</span></a>.
 <!--l. 398--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 16.3 <a 
- id="x20-23000016.3"></a>Destructive Operations</h4>
+ id="x20-23200016.3"></a>Destructive Operations</h4>
 An assignment operation<a 
- id="dx20-230001"></a> modifies the contents of a binding named
+ id="dx20-232001"></a> modifies the contents of a binding named
 by a identifier&#8212;that is, a variable.
 <a 
- id="dx20-230002"></a>
+ id="dx20-232002"></a>
 <a 
- id="dx20-230003"></a>
+ id="dx20-232003"></a>
 <!--l. 5--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-230004r1"></a><span 
+ id="x20-232004r1"></a><span 
 class="cmbx-9">16.3.1   </span><span 
 class="cmtt-9">setq</span>
 <a 
- id="Q1-20-306"></a>
+ id="Q1-20-310"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.3.1.1 <a 
- id="x20-23100016.3.1.1"></a><span 
+ id="x20-23300016.3.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-231001"></a> <div class="framebox-c" 
+ id="x20-233001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 8--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">setq</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -1120,7 +1120,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-23200016.3.1.1"></a><span 
+ id="x20-23400016.3.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -1136,31 +1136,31 @@ class="cmti-9">identifier</span>.</p></dd></dl>
   <!--l. 21--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-23300016.3.1.1"></a><span 
+ id="x20-23500016.3.1.1"></a><span 
 class="cmbx-8">Result</span></h5>The result is the value of <span 
 class="cmti-9">form</span>.
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-23400016.3.1.1"></a><span 
+ id="x20-23600016.3.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The <span 
 class="cmti-9">form </span>is evaluated and the result is stored in the
   closest lexical binding named by <span 
 class="cmti-9">identifier</span>. It is a violation to
   modify an immutable binding.
   <a 
- id="dx20-234001"></a>
+ id="dx20-236001"></a>
   <a 
- id="dx20-234002"></a>
+ id="dx20-236002"></a>
   <!--l. 29--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-234003r2"></a><span 
+ id="x20-236003r2"></a><span 
 class="cmbx-9">16.3.2   </span><span 
 class="cmtt-9">setter</span>
  <a 
- id="Q1-20-311"></a>
+ id="Q1-20-315"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2350002"></a><span 
+ id="x20-2370002"></a><span 
 class="cmbx-8">Arguments</span></h5>
        <dl class="arguments1"><dt class="arguments">
   <span 
@@ -1168,55 +1168,55 @@ class="cmti-9">reader </span>:  </dt><dd
 class="arguments">
         <!--l. 32--><p class="noindent" >An  expression  which  must  evaluate  to  an  instance  of
         <a 
-href="eulispcl11.html#x13-71003r1"><span 
+href="eulispcl11.html#x13-73003r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a>.</p></dd></dl>
   <!--l. 36--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2360002"></a><span 
+ id="x20-2380002"></a><span 
 class="cmbx-8">Result</span></h5>The <span 
 class="cmti-9">writer </span>corresponding to <span 
 class="cmti-9">reader</span>.
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2370002"></a><span 
+ id="x20-2390002"></a><span 
 class="cmbx-8">Remarks</span></h5>A generalized place update facility is provided by
   <a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a>. Given <span 
 class="cmti-9">reader</span><a 
- id="dx20-237001"></a>, <a 
-href="#x20-234003r2"><span 
+ id="dx20-239001"></a>, <a 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a> returns the corresponding update
   function<a 
- id="dx20-237002"></a>. If no such function is known to <a 
-href="#x20-234003r2"><span 
+ id="dx20-239002"></a>. If no such function is known to <a 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a>, an error is
   signalled (condition class: <a 
-href="#x20-238002r3"><span 
+href="#x20-240002r3"><span 
 class="cmtt-9">&#x003C;no-setter&#x003E;</span></a><a 
- id="dx20-237003"></a>). Thus <span 
+ id="dx20-239003"></a>). Thus <span 
 class="cmtt-9">(</span><a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a> <a 
-href="eulispcl17.html#x21-592003r12"><span 
+href="eulispcl17.html#x21-596003r12"><span 
 class="cmtt-9">car</span></a><span 
 class="cmtt-9">)</span>
  returns the function to update the <a 
-href="eulispcl17.html#x21-592003r12"><span 
+href="eulispcl17.html#x21-596003r12"><span 
 class="cmtt-9">car</span></a> of a pair. New update
   functions can be added by using setter&#8217;s update function,
   which is accessed by the expression <span 
 class="cmtt-9">(</span><a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a> <a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a><span 
 class="cmtt-9">)</span>. Thus
   <span 
 class="cmtt-9">((</span><a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a> <a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a><span 
 class="cmtt-9">) a-reader a-writer) </span>installs the function
   which is the value of <span 
@@ -1227,46 +1227,46 @@ class="cmtt-9">a-reader</span>. All writer functions
   immutable status as other standard functions, such that
   attempting to redefine such a function, for example <span 
 class="cmtt-9">((</span><a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a>
  <a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a><span 
 class="cmtt-9">) </span><a 
-href="eulispcl17.html#x21-592003r12"><span 
+href="eulispcl17.html#x21-596003r12"><span 
 class="cmtt-9">car</span></a> <span 
 class="cmtt-9">a-new-value)</span>, signals an error (condition class:
   <a 
-href="#x20-240002r4"><span 
+href="#x20-242002r4"><span 
 class="cmtt-9">&#x003C;cannot-update-setter&#x003E;</span></a><a 
- id="dx20-237004"></a>)
+ id="dx20-239004"></a>)
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2380002"></a><span 
+ id="x20-2400002"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="eulispcl18.html#x23-883003r2"><span 
-class="cmtt-9">defgeneric</span></a>, <a 
 href="eulispcl18.html#x23-892003r2"><span 
+class="cmtt-9">defgeneric</span></a>, <a 
+href="eulispcl18.html#x23-901003r2"><span 
 class="cmtt-9">defmethod</span></a>, <a 
-href="eulispcl18.html#x23-873003r1"><span 
+href="eulispcl18.html#x23-882003r1"><span 
 class="cmtt-9">defclass</span></a>, <a 
-href="#x20-215003r3"><span 
+href="#x20-217003r3"><span 
 class="cmtt-9">defun</span></a>.
   <a 
- id="dx20-238001"></a>
+ id="dx20-240001"></a>
   <!--l. 62--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-238002r3"></a><span 
+ id="x20-240002r3"></a><span 
 class="cmbx-9">16.3.3   </span><span 
 class="cmtt-9">no-setter</span>
  <a 
- id="Q1-20-316"></a>
+ id="Q1-20-320"></a>
                                                                                                   
                                                                                                   
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">general-condition </span></i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2390003"></a><span 
+ id="x20-2410003"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
     <dl class="initoptions1"><dt class="initoptions">
 <span 
@@ -1274,29 +1274,29 @@ class="cmtt-9">object </span><span
 class="cmti-9">object </span>: </dt><dd 
 class="initoptions">
     <!--l. 65--><p class="noindent" >The object given to <a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a>.</p></dd></dl>
 <!--l. 68--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2400003"></a><span 
+ id="x20-2420003"></a><span 
 class="cmbx-8">Remarks</span></h5>Signalled by <a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a> if there is no updater for the given
 function.
 <a 
- id="dx20-240001"></a>
+ id="dx20-242001"></a>
 <!--l. 72--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-240002r4"></a><span 
+ id="x20-242002r4"></a><span 
 class="cmbx-9">16.3.4   </span><span 
 class="cmtt-9">cannot-update-setter</span>
 <a 
- id="Q1-20-319"></a>
+ id="Q1-20-323"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">general-condition </span></i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2410004"></a><span 
+ id="x20-2430004"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
     <dl class="initoptions1"><dt class="initoptions">
 <span 
@@ -1315,40 +1315,40 @@ class="initoptions">
 <!--l. 80--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2420004"></a><span 
+ id="x20-2440004"></a><span 
 class="cmbx-8">Remarks</span></h5>Signalled by <span 
 class="cmtt-9">(</span><a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a> <a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a><span 
 class="cmtt-9">) </span>if the updater of the given
 accessor is immutable.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-2430004"></a><span 
+ id="x20-2450004"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x20-234003r2"><span 
+href="#x20-236003r2"><span 
 class="cmtt-9">setter</span></a>.
 <!--l. 493--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 16.4 <a 
- id="x20-24400016.4"></a>Conditional Expressions</h4>
+ id="x20-24600016.4"></a>Conditional Expressions</h4>
 <a 
- id="dx20-244001"></a><a 
- id="dx20-244002"></a>
+ id="dx20-246001"></a><a 
+ id="dx20-246002"></a>
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-244003r1"></a><span 
+ id="x20-246003r1"></a><span 
 class="cmbx-9">16.4.1   </span><span 
 class="cmtt-9">if</span>
 <a 
- id="Q1-20-324"></a>
+ id="Q1-20-328"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
                                                    <h5 class="syntaxssclauseHead"> 16.4.1.1 <a 
- id="x20-24500016.4.1.1"></a><span 
+ id="x20-24700016.4.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-245001"></a> <div class="framebox-c" 
+ id="x20-247001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 5--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">if</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -1370,7 +1370,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-24600016.4.1.1"></a><span 
+ id="x20-24800016.4.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
        <dl class="arguments1"><dt class="arguments">
   <span 
@@ -1390,14 +1390,14 @@ class="arguments">
   <!--l. 20--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-24700016.4.1.1"></a><span 
+ id="x20-24900016.4.1.1"></a><span 
 class="cmbx-8">Result</span></h5>Either the value of <span 
 class="cmti-9">consequence </span>or <span 
 class="cmti-9">alternative </span>depending on
   the value of <span 
 class="cmti-9">antecedent</span>.
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-24800016.4.1.1"></a><span 
+ id="x20-25000016.4.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The <span 
 class="cmti-9">antecedent </span>is evaluated. If the result is <span 
 class="cmti-9">true </span>the
@@ -1408,28 +1408,28 @@ class="cmti-9">alternative </span>is evaluated.
 class="cmti-9">consequence </span>and <span 
 class="cmti-9">alternative </span>must be specified. The result of
   <a 
-href="#x20-244003r1"><span 
+href="#x20-246003r1"><span 
 class="cmtt-9">if</span></a> is the result of the evaluation of whichever of <span 
 class="cmti-9">consequence </span>or
   <span 
 class="cmti-9">alternative </span>is chosen.
   <a 
- id="dx20-248001"></a>
+ id="dx20-250001"></a>
   <a 
- id="dx20-248002"></a>
+ id="dx20-250002"></a>
   <!--l. 31--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-248003r2"></a><span 
+ id="x20-250003r2"></a><span 
 class="cmbx-9">16.4.2   </span><span 
 class="cmtt-9">cond</span>
  <a 
- id="Q1-20-329"></a>
+ id="Q1-20-333"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr />
   </p>
   <h5 class="syntaxssclauseHead"> 16.4.2.1 <a 
- id="x20-24900016.4.2.1"></a><span 
+ id="x20-25100016.4.2.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-249001"></a> <div class="framebox-c" 
+ id="x20-251001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 34--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">cond</span><span 
 class="cmtt-8">&#x00A0;macro</span>
@@ -1457,18 +1457,18 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-25000016.4.2.1"></a><span 
+ id="x20-25200016.4.2.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The <a 
-href="#x20-248003r2"><span 
+href="#x20-250003r2"><span 
 class="cmtt-9">cond</span></a> macro provides a convenient syntax for collections
   of <span 
 class="cmti-9">if-then-elseif...else </span>expressions. The rewrite rules for <a 
-href="#x20-248003r2"><span 
+href="#x20-250003r2"><span 
 class="cmtt-9">cond</span></a> are given
                                                                                                   
                                                                                                   
 below.  <a 
- id="x20-250001"></a> <div class="framebox-c" 
+ id="x20-252001"></a> <div class="framebox-c" 
 style="width:27.14em;"><div class="center" 
 >
 <!--l. 46--><p class="noindent" >
@@ -1693,22 +1693,22 @@ class="td11"> </td>
 </tr></table>
 </div> </div>                                                          </div>
 <a 
- id="dx20-250002"></a>
+ id="dx20-252002"></a>
 <a 
- id="dx20-250003"></a>
+ id="dx20-252003"></a>
 <!--l. 98--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-250004r3"></a><span 
+ id="x20-252004r3"></a><span 
 class="cmbx-9">16.4.3   </span><span 
 class="cmtt-9">and</span>
 <a 
- id="Q1-20-332"></a>
+ id="Q1-20-336"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.4.3.1 <a 
- id="x20-25100016.4.3.1"></a><span 
+ id="x20-25300016.4.3.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-251001"></a> <div class="framebox-c" 
+ id="x20-253001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 101--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">and</span><span 
 class="cmtt-8">&#x00A0;macro</span>
@@ -1723,33 +1723,33 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-25200016.4.3.1"></a><span 
+ id="x20-25400016.4.3.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The expansion of an <a 
-href="#x20-250004r3"><span 
+href="#x20-252004r3"><span 
 class="cmtt-9">and</span></a> form leads to the evaluation of the
 sequence of <span 
 class="cmti-9">form</span>s from left to right. The first <span 
 class="cmti-9">form </span>in the sequence
 that evaluates to <a 
-href="eulispcl17.html#x21-575011r2"><span 
+href="eulispcl17.html#x21-579011r2"><span 
 class="cmtt-9">()</span></a> stops evaluation and none of the <span 
 class="cmti-9">form</span>s to its
 right will be evaluated&#8212;that is to say, it is non-strict. The result of
 <span 
 class="cmtt-9">(</span><a 
-href="#x20-250004r3"><span 
+href="#x20-252004r3"><span 
 class="cmtt-9">and</span></a><span 
 class="cmtt-9">) </span>is <a 
-href="#x20-197003r4"><span 
+href="#x20-199003r4"><span 
 class="cmtt-9">t</span></a>. If none of the <span 
 class="cmti-9">form</span>s evaluate to <a 
-href="eulispcl17.html#x21-575011r2"><span 
+href="eulispcl17.html#x21-579011r2"><span 
 class="cmtt-9">()</span></a>, the value of the last
 <span 
 class="cmti-9">form </span>is returned. The rewrite rules for <a 
-href="#x20-250004r3"><span 
+href="#x20-252004r3"><span 
 class="cmtt-9">and</span></a> are given below.  <a 
- id="x20-252001"></a>
+ id="x20-254001"></a>
 <div class="framebox-c" 
 style="width:27.14em;"><div class="center" 
 >
@@ -1830,21 +1830,21 @@ class="td11">                           </td></tr><tr
 class="td11"> </td>
 </tr></table></div></div>                                                </div>
 <a 
- id="dx20-252002"></a>                                                  <a 
- id="dx20-252003"></a>
+ id="dx20-254002"></a>                                                  <a 
+ id="dx20-254003"></a>
  <!--l. 133--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-252004r4"></a><span 
+ id="x20-254004r4"></a><span 
 class="cmbx-9">16.4.4   </span><span 
 class="cmtt-9">or</span>
  <a 
- id="Q1-20-335"></a>
+ id="Q1-20-339"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr />
   </p>
   <h5 class="syntaxssclauseHead"> 16.4.4.1 <a 
- id="x20-25300016.4.4.1"></a><span 
+ id="x20-25500016.4.4.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-253001"></a> <div class="framebox-c" 
+ id="x20-255001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 136--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">or</span><span 
 class="cmtt-8">&#x00A0;macro</span>
@@ -1859,16 +1859,16 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-25400016.4.4.1"></a><span 
+ id="x20-25600016.4.4.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The expansion of an <a 
-href="#x20-252004r4"><span 
+href="#x20-254004r4"><span 
 class="cmtt-9">or</span></a> form leads to the evaluation of
   the sequence of <span 
 class="cmti-9">form</span>s from left to right. The value of the first <span 
 class="cmti-9">form</span>
   that evaluates to <span 
 class="cmti-9">true </span>is the result of the <a 
-href="#x20-252004r4"><span 
+href="#x20-254004r4"><span 
 class="cmtt-9">or</span></a> form and none of the
   <span 
 class="cmti-9">form</span>s to its right will be evaluated&#8212;that is to say, it is non-strict.
@@ -1876,7 +1876,7 @@ class="cmti-9">form</span>s to its right will be evaluated&#8212;that is to say,
 class="cmti-9">true</span>, the value of the last
   <span 
 class="cmti-9">form </span>is returned. The rewrite rules for <a 
-href="#x20-252004r4"><span 
+href="#x20-254004r4"><span 
 class="cmtt-9">or</span></a> are given below.
   Note that <span 
 class="cmtt-9">x </span>does not occur free in any of <span 
@@ -1884,7 +1884,7 @@ class="cmti-9">form</span><sub><span
 class="cmr-6">2</span></sub> &#x2026;<span 
 class="cmti-9">form</span><sub><span 
 class="cmmi-6">n</span></sub>.  <a 
- id="x20-254001"></a>
+ id="x20-256001"></a>
   <div class="framebox-c" 
 style="width:27.14em;"><div class="center" 
 >
@@ -1978,27 +1978,27 @@ class="td11"> </td>
  <!--l. 675--><p class="noindent" >
  </p>
  <h4 class="sclauseHead"> 16.5 <a 
- id="x20-25500016.5"></a>Variable Binding and Sequences</h4>
+ id="x20-25700016.5"></a>Variable Binding and Sequences</h4>
   <a 
- id="dx20-255001"></a>
+ id="dx20-257001"></a>
   <a 
- id="dx20-255002"></a>
+ id="dx20-257002"></a>
   <!--l. 2--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-255003r1"></a><span 
+ id="x20-257003r1"></a><span 
 class="cmbx-9">16.5.1   </span><span 
 class="cmtt-9">let/cc</span>
  <a 
- id="Q1-20-339"></a>
+ id="Q1-20-343"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr /> <a 
- id="dx20-255004"></a>
+ id="dx20-257004"></a>
   </p>
                                                                                                   
                                                                                                   
 <h5 class="syntaxssclauseHead"> 16.5.1.1 <a 
- id="x20-25600016.5.1.1"></a><span 
+ id="x20-25800016.5.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-256001"></a> <div class="framebox-c" 
+ id="x20-258001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 6--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">let/cc</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -2014,14 +2014,14 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-25700016.5.1.1"></a><span 
+ id="x20-25900016.5.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
 class="cmti-9">identifier </span>: </dt><dd 
 class="arguments">
     <!--l. 13--><p class="noindent" >To be bound to the continuation of the <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a> form.
     </p></dd><dt class="arguments">
 <span 
@@ -2031,39 +2031,39 @@ class="arguments">
 <!--l. 18--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-25800016.5.1.1"></a><span 
+ id="x20-26000016.5.1.1"></a><span 
 class="cmbx-8">Result</span></h5>The result of evaluating the last form in <span 
 class="cmti-9">body </span>or the
 value of the argument given to the continuation bound to
 <span 
 class="cmti-9">identifier</span>.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-25900016.5.1.1"></a><span 
+ id="x20-26100016.5.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The <span 
 class="cmti-9">identifier </span>is bound to a new location, which is
 initialized with the continuation of the <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a> form. This binding
 is immutable and has lexical scope and indefinite extent<a 
- id="dx20-259001"></a>. Each
+ id="dx20-261001"></a>. Each
 form in <span 
 class="cmti-9">body </span>is evaluated in order in the environment extended by
 the above binding. It is an error to call the continuation
 outside the dynamic extent of the <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a> form that created it.
 The continuation is a function of one argument. Calling the
 continuation causes the restoration of the lexical environment and
 dynamic environment that existed before entering the <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a>
 form.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-26000016.5.1.1"></a><span 
+ id="x20-26200016.5.1.1"></a><span 
 class="cmbx-8">Examples</span></h5>An example of the use of <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a> is given in example&#x00A0;<a 
-href="eulispcl13.html#x20-260001r1">1<!--tex4ht:ref: example:pathopen --></a>.
+href="eulispcl13.html#x20-262001r1">1<!--tex4ht:ref: example:pathopen --></a>.
 The function <span 
 class="cmtt-9">path-open </span>takes a list of paths, the name of a file
 and list of options to pass to <span 
@@ -2080,13 +2080,12 @@ class="cmtt-9">succeed </span>is called with the stream as its argument, which i
 subsequently returned to the caller of <span 
 class="cmtt-9">path-open</span>. If the path list
 is exhausted, <a 
-href="eulispcl17.html#x21-363003r18"><span 
+href="eulispcl17.html#x21-365003r19"><span 
 class="cmtt-9">map</span></a> (section&#x00A0;<a 
-href="eulispcl17.html#x21-32300017.2">17.2<!--tex4ht:ref: collection --></a>) terminates and an error
+href="eulispcl17.html#x21-32500017.2">17.2<!--tex4ht:ref: collection --></a>) terminates and an error
 (condition class: <span 
-class="cmbx-9">??</span>) is signalled. <a 
- id="x20-260001r1"></a>        <a 
- id="x20-260002"></a><br /> <div align="center" class="caption"><table class="caption" 
+class="cmbx-9">??</span>) is signalled.         <a 
+ id="x20-262002"></a><br /> <div align="center" class="caption"><table class="caption" 
 ><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;1: </td><td  
 class="content">using <span 
 class="cmtt-9">let/cc</span></td></tr></table></div>
@@ -2341,31 +2340,31 @@ class="cmtt-8">&#x00A0;</span> </span>
 <!--l. 70--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-26100016.5.1.1"></a><span 
+ id="x20-26300016.5.1.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x20-261003r2"><span 
+href="#x20-263003r2"><span 
 class="cmtt-9">block</span></a>, <a 
-href="#x20-264003r3"><span 
+href="#x20-266003r3"><span 
 class="cmtt-9">return-from</span></a>.
 <a 
- id="dx20-261001"></a>
+ id="dx20-263001"></a>
 <a 
- id="dx20-261002"></a>
+ id="dx20-263002"></a>
 <!--l. 73--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-261003r2"></a><span 
+ id="x20-263003r2"></a><span 
 class="cmbx-9">16.5.2   </span><span 
 class="cmtt-9">block</span>
 <a 
- id="Q1-20-346"></a>
+ id="Q1-20-350"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr /> <a 
- id="dx20-261004"></a>
+ id="dx20-263004"></a>
 </p>
 <h5 class="syntaxssclauseHead"> 16.5.2.1 <a 
- id="x20-26200016.5.2.1"></a><span 
+ id="x20-26400016.5.2.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-262001"></a> <div class="framebox-c" 
+ id="x20-264001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 77--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">block</span><span 
 class="cmtt-8">&#x00A0;macro</span>
@@ -2381,33 +2380,33 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-26300016.5.2.1"></a><span 
+ id="x20-26500016.5.2.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The block expression is used to establish a statically
 scoped binding of an escape function. The block <span 
 class="cmti-9">variable </span>is bound
 to the continuation<a 
- id="dx20-263001"></a> of the block. The continuation can be invoked
+ id="dx20-265001"></a> of the block. The continuation can be invoked
 anywhere within the block by using <a 
-href="#x20-264003r3"><span 
+href="#x20-266003r3"><span 
 class="cmtt-9">return-from</span></a>. The <span 
 class="cmti-9">form</span>s are
 evaluated in sequence and the value of the last one is returned as
 the value of the block form. See also <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a>. The rewrite rules for
 <a 
-href="#x20-261003r2"><span 
+href="#x20-263003r2"><span 
 class="cmtt-9">block</span></a> are given below.
 <!--l. 93--><p class="noindent" >The rewrite for <a 
-href="#x20-261003r2"><span 
+href="#x20-263003r2"><span 
 class="cmtt-9">block</span></a>, does not prevent the <a 
-href="#x20-261003r2"><span 
+href="#x20-263003r2"><span 
 class="cmtt-9">block</span></a> being exited from
 anywhere in its dynamic extent, since the function bound to <span 
 class="cmti-9">identifier</span>
 is a first-class item and can be passed as an argument like other values.
 <a 
- id="x20-263002"></a> <div class="framebox-c" 
+ id="x20-265002"></a> <div class="framebox-c" 
 style="width:27.14em;"></p>
 <div class="center" 
 >
@@ -2455,31 +2454,31 @@ class="td11">                         </td></tr><tr
 class="td11"> </td>
 </tr></table></div></div>                                                           </div>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-26400016.5.2.1"></a><span 
+ id="x20-26600016.5.2.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x20-264003r3"><span 
+href="#x20-266003r3"><span 
 class="cmtt-9">return-from</span></a>.
 <a 
- id="dx20-264001"></a>
+ id="dx20-266001"></a>
 <a 
- id="dx20-264002"></a>
+ id="dx20-266002"></a>
 <!--l. 113--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-264003r3"></a><span 
+ id="x20-266003r3"></a><span 
 class="cmbx-9">16.5.3   </span><span 
 class="cmtt-9">return-from</span>
 <a 
- id="Q1-20-350"></a>
+ id="Q1-20-354"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr /> <a 
- id="dx20-264004"></a>
+ id="dx20-266004"></a>
                                                                                                   
                                                                                                   
 </p>
 <h5 class="syntaxssclauseHead"> 16.5.3.1 <a 
- id="x20-26500016.5.3.1"></a><span 
+ id="x20-26700016.5.3.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-265001"></a> <div class="framebox-c" 
+ id="x20-267001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 117--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">return</span><span 
 class="cmtt-8">&#x00A0;from</span><span 
@@ -2496,15 +2495,15 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-26600016.5.3.1"></a><span 
+ id="x20-26800016.5.3.1"></a><span 
 class="cmbx-8">Remarks</span></h5>In <a 
-href="#x20-264003r3"><span 
+href="#x20-266003r3"><span 
 class="cmtt-9">return-from</span></a>, the <span 
 class="cmti-9">identifier </span>names the continuation of
 the (lexical) <a 
-href="#x20-261003r2"><span 
+href="#x20-263003r2"><span 
 class="cmtt-9">block</span></a> from which to return. <a 
-href="#x20-264003r3"><span 
+href="#x20-266003r3"><span 
 class="cmtt-9">return-from</span></a> is the invocation
 of the continuation of the block named by <span 
 class="cmti-9">identifier</span>. The <span 
@@ -2512,9 +2511,9 @@ class="cmti-9">form </span>is
 evaluated and the value is returned as the value of the block named
 by <span 
 class="cmti-9">identifier</span>. The rewrite rules for <a 
-href="#x20-264003r3"><span 
+href="#x20-266003r3"><span 
 class="cmtt-9">return-from</span></a> are given below.  <a 
- id="x20-266001"></a>
+ id="x20-268001"></a>
 <div class="framebox-c" 
 style="width:27.14em;"><div class="center" 
 >
@@ -2576,28 +2575,28 @@ class="td11">                 </td></tr><tr
 class="td11"> </td>
 </tr></table></div></div>                                                </div>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-26700016.5.3.1"></a><span 
+ id="x20-26900016.5.3.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5><a 
-href="#x20-261003r2"><span 
+href="#x20-263003r2"><span 
 class="cmtt-9">block</span></a>.
 <a 
- id="dx20-267001"></a>
+ id="dx20-269001"></a>
 <a 
- id="dx20-267002"></a>
+ id="dx20-269002"></a>
 <!--l. 155--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-267003r4"></a><span 
+ id="x20-269003r4"></a><span 
 class="cmbx-9">16.5.4   </span><span 
 class="cmtt-9">labels</span>
 <a 
- id="Q1-20-354"></a>
+ id="Q1-20-358"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.5.4.1 <a 
- id="x20-26800016.5.4.1"></a><span 
+ id="x20-27000016.5.4.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-268001"></a> <div class="framebox-c" 
+ id="x20-270001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 158--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">labels</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -2649,7 +2648,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-26900016.5.4.1"></a><span 
+ id="x20-27100016.5.4.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -2678,9 +2677,9 @@ class="arguments">
   <!--l. 181--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x20-27000016.5.4.1"></a><span 
+ id="x20-27200016.5.4.1"></a><span 
 class="cmbx-8">Result</span></h5>The <a 
-href="#x20-267003r4"><span 
+href="#x20-269003r4"><span 
 class="cmtt-9">labels</span></a> operator provides for local mutually recursive
   function creation. Each <span 
 class="cmti-9">identifier </span>is bound to a new inner-lexical
@@ -2689,13 +2688,13 @@ class="cmti-9">lambda-list</span>
   and <span 
 class="cmti-9">body</span>. The scope of the <span 
 class="cmti-9">identifier</span>s is the entire <a 
-href="#x20-267003r4"><span 
+href="#x20-269003r4"><span 
 class="cmtt-9">labels</span></a> form<a 
- id="dx20-270001"></a>.
+ id="dx20-272001"></a>.
   The <span 
 class="cmti-9">lambda-list </span>is either a single variable or a list of variables&#8212;see
   <a 
-href="#x20-207003r1"><span 
+href="#x20-209003r1"><span 
 class="cmtt-9">lambda</span></a>. Each form in <span 
 class="cmti-9">labels-body </span>is evaluated in order in the lexical
   environment extended with the bindings of the <span 
@@ -2703,25 +2702,25 @@ class="cmti-9">identifier</span>s. The
   result of evaluating the last form in <span 
 class="cmti-9">labels-body </span>is returned as the
   result of the <a 
-href="#x20-267003r4"><span 
+href="#x20-269003r4"><span 
 class="cmtt-9">labels</span></a> form.
   <a 
- id="dx20-270002"></a>
+ id="dx20-272002"></a>
   <a 
- id="dx20-270003"></a>
+ id="dx20-272003"></a>
   <!--l. 193--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-270004r5"></a><span 
+ id="x20-272004r5"></a><span 
 class="cmbx-9">16.5.5   </span><span 
 class="cmtt-9">let</span>
  <a 
- id="Q1-20-358"></a>
+ id="Q1-20-362"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr />
   </p>
   <h5 class="syntaxssclauseHead"> 16.5.5.1 <a 
- id="x20-27100016.5.5.1"></a><span 
+ id="x20-27300016.5.5.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-271001"></a> <div class="framebox-c" 
+ id="x20-273001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 196--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">let</span><span 
 class="cmtt-8">&#x00A0;macro</span>
@@ -2760,20 +2759,20 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-27200016.5.5.1"></a><span 
+ id="x20-27400016.5.5.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The optional <span 
 class="cmti-9">identifier </span>denotes that the let form can be
   called from within its <span 
 class="cmti-9">body</span>. This is an abbreviation for <a 
-href="#x20-267003r4"><span 
+href="#x20-269003r4"><span 
 class="cmtt-9">labels</span></a> form
   in which <span 
 class="cmti-9">identifier </span>is bound to a function whose parameters are the
   identifiers of the <span 
 class="cmti-9">binding</span>s of the <a 
-href="#x20-270004r5"><span 
+href="#x20-272004r5"><span 
 class="cmtt-9">let</span></a>, whose body is that of the <a 
-href="#x20-270004r5"><span 
+href="#x20-272004r5"><span 
 class="cmtt-9">let</span></a>
  and whose initial call passes the values of the initializing form of
   the <span 
@@ -2789,11 +2788,11 @@ class="cmti-9">body </span>is evaluated in order in the
   evaluating the last form in <span 
 class="cmti-9">body </span>is returned as the result of
   the <a 
-href="#x20-270004r5"><span 
+href="#x20-272004r5"><span 
 class="cmtt-9">let</span></a> form. The rewrite rules for <a 
-href="#x20-270004r5"><span 
+href="#x20-272004r5"><span 
 class="cmtt-9">let</span></a> are given below.  <a 
- id="x20-272001"></a>
+ id="x20-274001"></a>
                                                                                                   
                                                                                                   
 <div class="framebox-c" 
@@ -3046,22 +3045,22 @@ class="td11"> </td>
 </tr></table>
 </div></div>                                                </div>
 <a 
- id="dx20-272002"></a>
+ id="dx20-274002"></a>
 <a 
- id="dx20-272003"></a>
+ id="dx20-274003"></a>
 <!--l. 265--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-272004r6"></a><span 
+ id="x20-274004r6"></a><span 
 class="cmbx-9">16.5.6   </span><span 
 class="cmtt-9">let*</span>
 <a 
- id="Q1-20-361"></a>
+ id="Q1-20-365"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.5.6.1 <a 
- id="x20-27300016.5.6.1"></a><span 
+ id="x20-27500016.5.6.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-273001"></a> <div class="framebox-c" 
+ id="x20-275001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 268--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">let</span><span 
 class="cmtt-8">&#x00A0;star</span><span 
@@ -3080,7 +3079,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-27400016.5.6.1"></a><span 
+ id="x20-27600016.5.6.1"></a><span 
 class="cmbx-8">Remarks</span></h5>A <span 
 class="cmti-9">binding </span>is specified by a two element list of a variable
 and an initializing form. The first initializing form is evaluated in
@@ -3092,11 +3091,11 @@ class="cmti-9">body</span>
 is evaluated in order in the environment extended by the above
 bindings. The result of evaluating the last form is returned as the
 result of the <a 
-href="#x20-272004r6"><span 
+href="#x20-274004r6"><span 
 class="cmtt-9">let*</span></a> form. The rewrite rules for <a 
-href="#x20-272004r6"><span 
+href="#x20-274004r6"><span 
 class="cmtt-9">let*</span></a> are given below.<a 
- id="x20-274001"></a><div class="framebox-c" 
+ id="x20-276001"></a><div class="framebox-c" 
 style="width:27.14em;"><div class="center" 
 >
 <!--l. 285--><p class="noindent" >
@@ -3256,22 +3255,22 @@ class="td11">                                                           </td>
 </tr></table>
 </div> </div>                                               </div>
  <a 
- id="dx20-274002"></a>
+ id="dx20-276002"></a>
  <a 
- id="dx20-274003"></a>
+ id="dx20-276003"></a>
  <!--l. 313--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-274004r7"></a><span 
+ id="x20-276004r7"></a><span 
 class="cmbx-9">16.5.7   </span><span 
 class="cmtt-9">progn</span>
  <a 
- id="Q1-20-364"></a>
+ id="Q1-20-368"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
  </p>
  <h5 class="syntaxssclauseHead"> 16.5.7.1 <a 
- id="x20-27500016.5.7.1"></a><span 
+ id="x20-27700016.5.7.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-275001"></a> <div class="framebox-c" 
+ id="x20-277001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 316--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">progn</span><span 
 class="cmtt-8">&#x00A0;form</span>
@@ -3286,7 +3285,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-27600016.5.7.1"></a><span 
+ id="x20-27800016.5.7.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
  <span 
@@ -3298,51 +3297,52 @@ class="arguments">
  <!--l. 327--><p class="noindent" >
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-27700016.5.7.1"></a><span 
+ id="x20-27900016.5.7.1"></a><span 
 class="cmbx-8">Result</span></h5>The sequence of <span 
 class="cmti-9">form</span>s is evaluated from left to right,
  returning the value of the last one as the result of the <a 
-href="#x20-274004r7"><span 
+href="#x20-276004r7"><span 
 class="cmtt-9">progn</span></a> form.
  If the sequence of forms is empty, <a 
-href="#x20-274004r7"><span 
+href="#x20-276004r7"><span 
 class="cmtt-9">progn</span></a> returns <a 
-href="eulispcl17.html#x21-575011r2"><span 
+href="eulispcl17.html#x21-579011r2"><span 
 class="cmtt-9">()</span></a>.
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-27800016.5.7.1"></a><span 
+ id="x20-28000016.5.7.1"></a><span 
 class="cmbx-8">Remarks</span></h5>If the <a 
-href="#x20-274004r7"><span 
+href="#x20-276004r7"><span 
 class="cmtt-9">progn</span></a> form occurs enclosed only by <a 
-href="#x20-274004r7"><span 
+href="#x20-276004r7"><span 
 class="cmtt-9">progn</span></a> forms
- and a <span 
-class="cmbx-9">??</span> form, then the <span 
+ and a <a 
+href="eulispcl10.html#x12-60004r1"><span 
+class="cmtt-9">defmodule</span></a> form, then the <span 
 class="cmti-9">form</span>s within the <a 
-href="#x20-274004r7"><span 
-class="cmtt-9">progn</span></a> can be defining
- forms, since they appear in the top-lexical environment. It
+href="#x20-276004r7"><span 
+class="cmtt-9">progn</span></a> can be
+ defining forms, since they appear in the top-lexical environment. It
  is a violation for defining forms to appear in inner-lexical
  environments.
  <a 
- id="dx20-278001"></a>
+ id="dx20-280001"></a>
  <a 
- id="dx20-278002"></a>
+ id="dx20-280002"></a>
  <!--l. 363--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-278003r8"></a><span 
+ id="x20-280003r8"></a><span 
 class="cmbx-9">16.5.8   </span><span 
 class="cmtt-9">unwind-protect</span>
  <a 
- id="Q1-20-369"></a>
+ id="Q1-20-373"></a>
                                                                                                   
                                                                                                   
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special form </span></i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 16.5.8.1 <a 
- id="x20-27900016.5.8.1"></a><span 
+ id="x20-28100016.5.8.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-279001"></a> <div class="framebox-c" 
+ id="x20-281001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 366--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">unwind</span><span 
 class="cmtt-8">&#x00A0;protect</span><span 
@@ -3366,7 +3366,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-28000016.5.8.1"></a><span 
+ id="x20-28200016.5.8.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
     <dl class="arguments1"><dt class="arguments">
 <span 
@@ -3382,20 +3382,20 @@ class="arguments">
 <!--l. 378--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-28100016.5.8.1"></a><span 
+ id="x20-28300016.5.8.1"></a><span 
 class="cmbx-8">Result</span></h5>The value of <span 
 class="cmti-9">protected-form</span>.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-28200016.5.8.1"></a><span 
+ id="x20-28400016.5.8.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The normal action of <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a> is to process
 <span 
 class="cmti-9">protected-form </span>and then each of <span 
 class="cmti-9">after-form</span>s in order, returning the
 value of <span 
 class="cmti-9">protected-form </span>as the result of <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a>. A
 non-local exit from the dynamic extent of <span 
 class="cmti-9">protected-form</span>, which
@@ -3405,7 +3405,7 @@ class="cmti-9">after-form</span>s to be processed before control goes to the
 continuation specified in the non-local exit form. The <span 
 class="cmti-9">after-form</span>s
 are not protected in any way by the current <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a>.
 Should any kind of non-local exit occur during the processing of
 the <span 
@@ -3415,19 +3415,19 @@ Instead, control is transferred to wherever specified by the
 new non-local exit but the <span 
 class="cmti-9">after-form</span>s of any intervening
 <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a>s between the dynamic extent of the target of
 control transfer and the current <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a> are evaluated in
 increasing order of dynamic extent.
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-28300016.5.8.1"></a><span 
+ id="x20-28500016.5.8.1"></a><span 
 class="cmbx-8">Examples</span></h5>       <a 
- id="x20-283002"></a><br /> <div align="center" class="caption"><table class="caption" 
+ id="x20-285002"></a><br /> <div align="center" class="caption"><table class="caption" 
 ><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;2: </td><td  
 class="content">Interaction of <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a> with
 non-local exits</td></tr></table></div>
    <span class="obeylines-h"><span 
@@ -3510,9 +3510,9 @@ class="cmtt-8">&#x00A0;...)</span>
    <br />
 </span>
 <!--l. 416--><p class="noindent" >The code fragment in example&#x00A0;<a 
-href="eulispcl13.html#x20-283001r2">2<!--tex4ht:ref: example:unwind-loop --></a> illustrates both the use of
+href="eulispcl13.html#x20-285001r2">2<!--tex4ht:ref: example:unwind-loop --></a> illustrates both the use of
 <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a> and of a difference between the semantics of  <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span>
@@ -3521,22 +3521,22 @@ class="cmr-8">L</span><span
 class="cmr-7">ISP</span>&#x00A0;and some other Lisps. Stepping through the evaluation of this
 form: <span 
 class="cmtt-9">k1 </span>is bound to the continuation of its <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a> form; a     recursive function named <span 
 class="cmtt-9">loop </span>is constructed, <span 
 class="cmtt-9">loop </span>is called from
   the body of the <a 
-href="#x20-267003r4"><span 
+href="#x20-269003r4"><span 
 class="cmtt-9">labels</span></a> form; <span 
 class="cmtt-9">k2 </span>is bound to the continuation of its
   <a 
-href="#x20-255003r1"><span 
+href="#x20-257003r1"><span 
 class="cmtt-9">let/cc</span></a> form; <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a> calls <span 
 class="cmtt-9">k1</span>; the after forms of
   <a 
-href="#x20-278003r8"><span 
+href="#x20-280003r8"><span 
 class="cmtt-9">unwind-protect</span></a> are evaluated in order; <span 
 class="cmtt-9">k2 </span>is called; <span 
 class="cmtt-9">loop </span>is called;
@@ -3544,26 +3544,26 @@ class="cmtt-9">loop </span>is called;
   </p><!--l. 1129--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 16.6 <a 
- id="x20-28400016.6"></a>Quasiquotation Expressions</h4>  <a 
- id="dx20-284001"></a> <a 
- id="dx20-284002"></a>
+ id="x20-28600016.6"></a>Quasiquotation Expressions</h4>  <a 
+ id="dx20-286001"></a> <a 
+ id="dx20-286002"></a>
   <a 
- id="dx20-284003"></a>
+ id="dx20-286003"></a>
   <a 
- id="dx20-284004"></a>
+ id="dx20-286004"></a>
   <!--l. 2--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-284005r1"></a><span 
+ id="x20-286005r1"></a><span 
 class="cmbx-9">16.6.1   </span><span 
 class="cmtt-9">quasiquote</span>
  <a 
- id="Q1-20-376"></a>
+ id="Q1-20-380"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">macro </span></i></b></div><br /> <hr />
   </p>
   <h5 class="syntaxssclauseHead"> 16.6.1.1 <a 
- id="x20-28500016.6.1.1"></a><span 
+ id="x20-28700016.6.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-285001"></a> <div class="framebox-c" 
+ id="x20-287001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 5--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">quasiquote</span><span 
 class="cmtt-8">&#x00A0;macro</span>
@@ -3578,23 +3578,23 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-28600016.6.1.1"></a><span 
+ id="x20-28800016.6.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>Quasiquotation is also known as backquoting. A
   <a 
-href="#x20-284005r1"><span 
+href="#x20-286005r1"><span 
 class="cmtt-9">quasiquote</span></a>d expression is a convenient way of building a
   structure. The <span 
 class="cmti-9">skeleton </span>describes the shape and, generally, many of
   the entries in the structure but some holes remain to be filled. The
   <a 
-href="#x20-284005r1"><span 
+href="#x20-286005r1"><span 
 class="cmtt-9">quasiquote</span></a> macro can be abbreviated by using the glyph called
   <span 
 class="cmti-9">grave accent </span>(<span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">&#8216;</span></span></span>)<a 
- id="dx20-286001"></a>, so that <span 
+ id="dx20-288001"></a>, so that <span 
 class="cmtt-9">(</span><a 
-href="#x20-284005r1"><span 
+href="#x20-286005r1"><span 
 class="cmtt-9">quasiquote</span></a> <span 
 class="cmitt-10x-x-90">expression</span><span 
 class="cmtt-9">) </span>can be written
@@ -3602,23 +3602,23 @@ class="cmtt-9">) </span>can be written
 class="cmtt-9">&#8216;</span><span 
 class="cmitt-10x-x-90">expression</span>.
   <a 
- id="dx20-286002"></a>
+ id="dx20-288002"></a>
   <a 
- id="dx20-286003"></a>
+ id="dx20-288003"></a>
   <!--l. 23--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-286004r2"></a><span 
+ id="x20-288004r2"></a><span 
 class="cmbx-9">16.6.2   </span><span 
 class="cmtt-9">unquote</span>
  <a 
- id="Q1-20-379"></a>
+ id="Q1-20-383"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr /> <a 
- id="dx20-286005"></a>
+ id="dx20-288005"></a>
   </p>
   <h5 class="syntaxssclauseHead"> 16.6.2.1 <a 
- id="x20-28700016.6.2.1"></a><span 
+ id="x20-28900016.6.2.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-287001"></a> <div class="framebox-c" 
+ id="x20-289001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 27--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">unquote</span><span 
 class="cmtt-8">&#x00A0;syntax</span>
@@ -3639,30 +3639,30 @@ class="cmtt-8">&#x00A0;form;</span>
    <br /></span>                                                        </div>
  </p>
  <h5 class="likesyntaxssclauseHead"><a 
- id="x20-28800016.6.2.1"></a><span 
+ id="x20-29000016.6.2.1"></a><span 
 class="cmbx-8">Remarks</span></h5>See <a 
-href="#x20-288003r3"><span 
+href="#x20-290003r3"><span 
 class="cmtt-9">unquote-splicing</span></a>.
   <a 
- id="dx20-288001"></a>
+ id="dx20-290001"></a>
   <a 
- id="dx20-288002"></a>
+ id="dx20-290002"></a>
                                                                                                   
                                                                                                   
 <!--l. 37--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x20-288003r3"></a><span 
+ id="x20-290003r3"></a><span 
 class="cmbx-9">16.6.3   </span><span 
 class="cmtt-9">unquote-splicing</span>
 <a 
- id="Q1-20-382"></a>
+ id="Q1-20-386"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr /> <a 
- id="dx20-288004"></a>
+ id="dx20-290004"></a>
 </p>
 <h5 class="syntaxssclauseHead"> 16.6.3.1 <a 
- id="x20-28900016.6.3.1"></a><span 
+ id="x20-29100016.6.3.1"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x20-289001"></a> <div class="framebox-c" 
+ id="x20-291001"></a> <div class="framebox-c" 
 style="width:27.14em;">    <!--l. 41--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">unquotespliceing</span><span 
 class="cmtt-8">&#x00A0;syntax</span>
@@ -3683,18 +3683,19 @@ class="cmtt-8">&#x00A0;form;</span>
    <br /></span>                                                        </div>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-29000016.6.3.1"></a><span 
+ id="x20-29200016.6.3.1"></a><span 
 class="cmbx-8">Remarks</span></h5>The holes in a quasiquoted expression are identified by
 unquote expressions of which there are two kinds&#8212;forms whose
-value is to be inserted at that location in the structure and
-forms whose value is to be spliced into the structure at that
-location. The former is indicated by an <a 
-href="#x20-286004r2"><span 
-class="cmtt-9">unquote</span></a> expression
-and the latter by an <a 
-href="#x20-288003r3"><span 
-class="cmtt-9">unquote-splicing</span></a> expression. In <span 
-class="cmbx-9">??</span>
+value is to be inserted at that location in the structure and forms
+whose value is to be spliced into the structure at that location. The
+former is indicated by an <a 
+href="#x20-288004r2"><span 
+class="cmtt-9">unquote</span></a> expression and the latter
+by an <a 
+href="#x20-290003r3"><span 
+class="cmtt-9">unquote-splicing</span></a> expression. In <a 
+href="#x20-290003r3"><span 
+class="cmtt-9">unquote-splicing</span></a>
 the <span 
 class="cmti-9">form </span>must result in a proper list. The insertion of the
 result of an unquote-splice expression is as if the opening
@@ -3702,35 +3703,35 @@ and closing parentheses of the list are removed and all the
 elements of the list are appended in place of the unquote-splice
 expression.
 <!--l. 64--><p class="noindent" >The syntax forms <a 
-href="#x20-286004r2"><span 
+href="#x20-288004r2"><span 
 class="cmtt-9">unquote</span></a> and <a 
-href="#x20-288003r3"><span 
+href="#x20-290003r3"><span 
 class="cmtt-9">unquote-splicing</span></a> can be
 abbreviated respectively by using the glyph called <span 
 class="cmti-9">comma </span>(<span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">,</span></span></span>)<a 
- id="dx20-290001"></a>
+ id="dx20-292001"></a>
 preceding an expression and by using the diphthong <span 
 class="cmti-9">comma</span>
 followed by the glyph called <span 
 class="cmti-9">commercial at </span>(<span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">,@</span></span></span>)<a 
- id="dx20-290002"></a> preceding a form.
+ id="dx20-292002"></a> preceding a form.
 Thus, <span 
 class="cmtt-9">(</span><a 
-href="#x20-286004r2"><span 
+href="#x20-288004r2"><span 
 class="cmtt-9">unquote</span></a> <span 
 class="cmtt-9">a) </span>may be written <span 
 class="cmtt-9">,a </span>and <span 
 class="cmtt-9">(</span><a 
-href="#x20-288003r3"><span 
+href="#x20-290003r3"><span 
 class="cmtt-9">unquote-splicing</span></a> <span 
 class="cmtt-9">a)</span>
 can be written <span 
 class="cmtt-9">,@a</span>.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x20-29100016.6.3.1"></a><span 
+ id="x20-29300016.6.3.1"></a><span 
 class="cmbx-8">Examples</span></h5> <!--tex4ht:inline--><div class="tabular"> <table id="TBL-11" class="tabular" 
 cellspacing="0" cellpadding="0"  
 ><colgroup id="TBL-11-1g"><col 
@@ -3756,13 +3757,13 @@ class="cmtt-8">(a 1 2 b)  </span></td>
 <!--l. 1219--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 16.7 <a 
- id="x20-29200016.7"></a>Summary of Level-0 Expressions and Definitions</h4>
+ id="x20-29400016.7"></a>Summary of Level-0 Expressions and Definitions</h4>
 This section gives the syntax of all level-0 expressions and
 definitions together. The syntax of data objects is given in the
 section pertaining to the class and is summarized in section&#x00A0;<a 
-href="eulispcl17.html#x21-87100017.20">17.20<!--tex4ht:ref: object-syntax-summary --></a>.
+href="eulispcl17.html#x21-88000017.20">17.20<!--tex4ht:ref: object-syntax-summary --></a>.
 <h5 class="ssclauseHead"> 16.7.1 <a 
- id="x20-29300016.7.1"></a>Syntax of Level-0 defining forms</h5>
+ id="x20-29500016.7.1"></a>Syntax of Level-0 defining forms</h5>
                                                        <!--l. 22--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">module</span>
      <br /><span 
@@ -3796,7 +3797,7 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -3871,7 +3872,7 @@ class="cmtt-8">&#x00A0;expression</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-19100016"><span 
+href="eulispcl16.html#x20-19300016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -3883,7 +3884,7 @@ class="cmtt-8">&#x00A0;form</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-19100016"><span 
+href="eulispcl16.html#x20-19300016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4013,7 +4014,7 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4027,7 +4028,7 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4069,7 +4070,7 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4084,7 +4085,7 @@ class="cmtt-8">&#x00A0;keyword</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4098,7 +4099,7 @@ class="cmtt-8">&#x00A0;expression</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-19100016"><span 
+href="eulispcl16.html#x20-19300016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4110,7 +4111,7 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4122,7 +4123,7 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4134,7 +4135,7 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4170,7 +4171,7 @@ class="cmtt-8">&#x00A0;identifier</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4237,7 +4238,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -4308,7 +4309,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -4329,7 +4330,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -4343,7 +4344,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
    <br />
@@ -4528,7 +4529,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
 <!--l. 17--><p class="noindent" >
 </p>
 <h5 class="ssclauseHead"> 16.7.2 <a 
- id="x20-29400016.7.2"></a>Syntax of Level-0 expressions</h5>
+ id="x20-29600016.7.2"></a>Syntax of Level-0 expressions</h5>
    <!--l. 173--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">generic</span><span 
 class="cmtt-8">&#x00A0;lambda</span><span 
@@ -4582,7 +4583,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4612,7 +4613,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-82500017.17"><span 
+href="eulispcl17.html#x21-83400017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
 class="cmtt-8">&#x00A0;*)</span>
      <br /><span 
@@ -4796,7 +4797,7 @@ class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
  <!--l. 31--><p class="noindent" >
  </p>
  <h5 class="ssclauseHead"> 16.7.3 <a 
- id="x20-29500016.7.3"></a>Syntax of Level-0 macros</h5>
+ id="x20-29700016.7.3"></a>Syntax of Level-0 macros</h5>
       <!--l. 34--><p class="noindent" ><span class="obeylines-h"><span 
 class="cmtt-8">cond</span><span 
 class="cmtt-8">&#x00A0;macro</span>

@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-03-31 23:00:00" /> 
+<meta name="date" content="2010-04-01 21:32:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
-<!--l. 399--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 397--><div class="crosslinks"><p class="noindent">[<a 
 href="eulispcl8.html" >next</a>] [<a 
 href="eulispcl6.html" >prev</a>] [<a 
 href="eulispcl6.html#taileulispcl6.html" >prev-tail</a>] [<a 
@@ -28,7 +28,7 @@ href="eulisp.html#eulispcl7.html" >up</a>] </p></div>
 how definitions will be laid out, the typeface to be used, the
 meta-language used in descriptions and the naming conventions. A
 later section (<a 
-href="eulispcl8.html#x10-430008">8<!--tex4ht:ref: sec:definitions --></a>) contains definitions of the terms used in this
+href="eulispcl8.html#x10-450008">8<!--tex4ht:ref: sec:definitions --></a>) contains definitions of the terms used in this
 text.
 </p><!--l. 7--><p class="noindent" >A standard function<a 
  id="dx9-11002"></a> denotes an immutable top-lexical binding of
@@ -62,11 +62,11 @@ class="cmti-9">result-class </span>of an operation, except in one case, refers t
 primitive or a defined class described in this definition. The
 exception is for predicates. Predicates are defined to return either
 the empty list&#8212;written <a 
-href="eulispcl17.html#x21-575011r2"><span 
+href="eulispcl17.html#x21-579011r2"><span 
 class="cmtt-9">()</span></a>&#8212;representing the boolean value false<a 
  id="dx9-11004"></a>,
 or any value other than <a 
-href="eulispcl17.html#x21-575011r2"><span 
+href="eulispcl17.html#x21-579011r2"><span 
 class="cmtt-9">()</span></a>, representing true<a 
  id="dx9-11005"></a>. Although the class
 containing exactly this set of values is not defined in the language,
@@ -378,11 +378,12 @@ class="cmbx-8">Remarks</span></h5>Any additional information about the circumsta
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x9-33003r6"></a><span 
 class="cmbx-9">7.1.6   </span><span 
-class="cmtt-9">&#x003C;class-name&#x003E;</span>
+class="cmtt-9">&#x003C;a-class&#x003E;</span>
  <a 
  id="Q1-9-39"></a>
- </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmbx-9">??</span> </i></b></div><br /> <hr />
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="eulispcl11.html#x13-66008r2"><span 
+class="cmtt-9">&#x003C;class&#x003E;</span></a> </i></b></div><br /> <hr />
  <h5 class="likesyntaxssclauseHead"><a 
  id="x9-340006"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
@@ -391,15 +392,16 @@ class="cmbx-8">Initialization Options</span></h5>
 class="cmtt-9">initarg-a </span><span 
 class="cmti-9">value-a </span>:  </dt><dd 
 class="initoptions">
-        <!--l. 131--><p class="noindent" >means that <span 
-class="cmtt-9">&#x003C;class-name&#x003E; </span>has an initarg whose name is
+        <!--l. 131--><p class="noindent" >means  that  <span 
+class="cmtt-9">&#x003C;a-class&#x003E; </span>has  an  initarg  whose  name  is
         <span 
 class="cmtt-9">initarg-a </span>and the description will usually say of what
         class  (or  classes)  <span 
 class="cmti-9">value-a  </span>should  be  an  instance.  This
         initarg is required.<br 
 class="newline" /><img 
-src="eulisp5x.png" alt="..."  class="vdots"  />
+src="eulisp5x.png" alt=".
+.."  class="vdots"  />
         </p></dd><dt class="initoptions">
   <span 
 class="cmtt-9">[initarg-n </span><span 
@@ -415,64 +417,104 @@ class="cmtt-9">initarg-a</span>.</p></dd></dl>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x9-350006"></a><span 
 class="cmbx-8">Remarks</span></h5>A description of the rôle of <span 
-class="cmtt-9">&#x003C;class-name&#x003E;</span>.
+class="cmtt-9">&#x003C;a-class&#x003E;</span>. <a 
+ id="dx9-35001"></a><a 
+ id="dx9-35002"></a>
+  <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-35003r7"></a><span 
+class="cmbx-9">7.1.7   </span><span 
+class="cmtt-9">a-constant</span>
+ <a 
+ id="Q1-9-42"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x9-33003r6"><span 
+class="cmtt-9">&#x003C;a-class&#x003E;</span></a> </i></b></div><br /> <hr />
+ <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-360007"></a><span 
+class="cmbx-8">Remarks</span></h5>A constant of type <a 
+href="#x9-33003r6"><span 
+class="cmtt-9">&#x003C;a-class&#x003E;</span></a>.
+  <a 
+ id="dx9-36001"></a>
+  <a 
+ id="dx9-36002"></a>
+  <!--l. 604--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x9-36003r8"></a><span 
+class="cmbx-9">7.1.8   </span><span 
+class="cmtt-9">&#x003C;a-class-alias&#x003E;</span>
+ <a 
+ id="Q1-9-44"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x9-33003r6"><span 
+class="cmtt-9">&#x003C;a-class&#x003E;</span></a> </i></b></div><br /> <hr />
+ </p>
+ <h5 class="likesyntaxssclauseHead"><a 
+ id="x9-370008"></a><span 
+class="cmbx-8">Remarks</span></h5>A constant binding whose value is <a 
+href="#x9-33003r6"><span 
+class="cmtt-9">&#x003C;a-class&#x003E;</span></a>, <span 
+class="cmti-9">i.e. </span>a class
+  alias.
+  <!--l. 609--><p class="noindent" >
+  </p>
   <h4 class="sclauseHead"> 7.2 <a 
- id="x9-360007.2"></a>Naming</h4>
-  Naming conventions are applied in the descriptions of primitive
-  and defined classes as well as in the choice of other function names.
-  Here is a list of the conventions and some examples of their
-  use.
-  <h5 class="subdefinitionHead"> 7.1 <a 
- id="x9-370007.1"></a><span 
+ id="x9-380007.2"></a>Naming</h4>
+                                                                                                  
+                                                                                                  
+Naming conventions are applied in the descriptions of primitive
+and defined classes as well as in the choice of other function names.
+Here is a list of the conventions and some examples of their
+use.
+<h5 class="subdefinitionHead"> 7.1 <a 
+ id="x9-390007.1"></a><span 
 class="cmbx-9">&#8220;</span><span 
 class="cmtt-9">&#x003C;name&#x003E;</span><span 
 class="cmbx-9">&#8221; wrapping: </span></h5> By convention, classes have names
-  which begin with &#8220;<span 
+which begin with &#8220;<span 
 class="cmtt-9">&#x003C;</span>&#8221; and end with &#8220;<span 
 class="cmtt-9">&#x003E;</span>&#8221;.
-  <h5 class="subdefinitionHead"> 7.2 <a 
- id="x9-380007.2"></a><span 
+<h5 class="subdefinitionHead"> 7.2 <a 
+ id="x9-400007.2"></a><span 
 class="cmbx-9">&#8220;</span><span 
 class="cmtt-9">binary</span><span 
 class="cmbx-9">&#8221; prefix: </span></h5> The two argument version of a n-ary
-  argument function. For example <span 
-class="cmtt-9">binary+ </span>is the two argument
-  (generic) function corresponding to the n-ary argument <span 
-class="cmtt-9">+</span>
- function.
-  <h5 class="subdefinitionHead"> 7.3 <a 
- id="x9-390007.3"></a><span 
+argument function. For example <a 
+href="eulispcl17.html#x21-655003r20"><span 
+class="cmtt-9">binary+</span></a> is the two argument
+(generic) function corresponding to the n-ary argument <a 
+href="eulispcl17.html#x21-627003r6"><span 
+class="cmtt-9">+</span></a>
+function.
+<h5 class="subdefinitionHead"> 7.3 <a 
+ id="x9-410007.3"></a><span 
 class="cmbx-9">&#8220;</span><span 
 class="cmtt-9">-class</span><span 
-class="cmbx-9">&#8221; suffix: </span></h5> The name of a metaclass of a set of related
-  classes. For example, <span 
-class="cmtt-9">&#x003C;function-class&#x003E;</span>, which is the class of
-  <span 
-class="cmtt-9">&#x003C;simple-function&#x003E;</span>, <span 
-class="cmtt-9">&#x003C;generic-function&#x003E; </span>and any of their
-  subclasses and <span 
-class="cmtt-9">&#x003C;condition-class&#x003E; </span>is the class of all condition
-  classes. The exception is <span 
-class="cmtt-9">&#x003C;class&#x003E; </span>itself which is the default
-  metaclass. The prefix should describe the general domain of the
-  classes in question, but not necessarily any particular class in the
-  set.
-  <h5 class="subdefinitionHead"> 7.4 <a 
- id="x9-400007.4"></a><span 
+class="cmbx-9">&#8221; suffix: </span></h5> The name of a metaclass of a set of
+related classes. For example, <span 
+class="cmbx-9">??</span>, which is the class of <span 
+class="cmbx-9">??</span>,
+<a 
+href="eulispcl11.html#x13-73007r2"><span 
+class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> and any of their subclasses. The exception is
+<a 
+href="eulispcl11.html#x13-66008r2"><span 
+class="cmtt-9">&#x003C;class&#x003E;</span></a> itself which is the default metaclass. The prefix should
+describe the general domain of the classes in question, but not
+necessarily any particular class in the set.
+<h5 class="subdefinitionHead"> 7.4 <a 
+ id="x9-420007.4"></a><span 
 class="cmbx-9">&#8220;</span><span 
 class="cmtt-9">generic-</span><span 
 class="cmbx-9">&#8221; prefix: </span></h5> The generic version of the function
-  named by the stem.
-                                                                                                  
-                                                                                                  
+named by the stem.
 <h5 class="subdefinitionHead"> 7.5 <a 
- id="x9-410007.5"></a><span 
+ id="x9-430007.5"></a><span 
 class="cmbx-9">hyphenation: </span></h5> Function and class names made up
 of more than one word are hyphenated, for example:
 <span 
 class="cmtt-9">compute-specialized-slot-class</span>.
 <h5 class="subdefinitionHead"> 7.6 <a 
- id="x9-420007.6"></a><span 
+ id="x9-440007.6"></a><span 
 class="cmbx-9">&#8220;</span><span 
 class="cmtt-9">p</span><span 
 class="cmbx-9">&#8221; suffix: </span></h5> A predicate function is named by a &#8220;<span 
@@ -480,11 +522,13 @@ class="cmtt-9">p</span>&#8221; suffix if
 the function or class name (after removing the enclosing <span 
 class="cmtt-9">&#x003C; </span>and <span 
 class="cmtt-9">&#x003E;</span>) is
-not hyphenated, for instance, <span 
-class="cmtt-9">consp</span>, and is named by a &#8220;<span 
+not hyphenated, for instance, <a 
+href="eulispcl17.html#x21-590008r9"><span 
+class="cmtt-9">consp</span></a>, and is named by a &#8220;<span 
 class="cmtt-9">-p</span>&#8221; suffix
-if it is, for instance <span 
-class="cmtt-9">double-float-p</span>.
+if it is, for instance <a 
+href="eulispcl17.html#x21-460067r2"><span 
+class="cmtt-9">double-float-p</span></a>.
                                                  
                                                                                                   
                                                                                                   

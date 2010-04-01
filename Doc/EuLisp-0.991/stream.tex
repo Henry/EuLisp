@@ -505,6 +505,18 @@ Disconnects {\em stream\/} and signals the end of stream condition.
 \ssclause{Reading from streams}
 
 % ------------------------------------------------------------------------------
+\condition{read-error}{condition}
+% ------------------------------------------------------------------------------
+%
+\begin{genericargs}
+    \item[stream, \classref{stream}] A stream.
+\end{genericargs}
+%
+\remarks%
+Signalled by a \functionref{read} operation which fails in some manner other
+than when it is at end of stream.
+
+% ------------------------------------------------------------------------------
 \function{read}
 % ------------------------------------------------------------------------------
 \begin{arguments}
@@ -535,11 +547,11 @@ The {\em stream\/} defaults to \instanceref{lispin}, {\em
 \result%
 The next transaction unit from {\em stream}.
 %
-\remarks If the end of {\em stream\/} is encountered and the value of {\em
-    eos-error-p} is \nil, the result is {\em eos-value\/}. If the end of {\em
-    stream} is encountered and the value of {\tt eos-error-p} is non-\nil,
-the function \functionref{end-of-stream} is called with the argument {\em
-    stream}.
+\remarks%
+If the end of {\em stream\/} is encountered and the value of {\em eos-error-p}
+is \nil, the result is {\em eos-value\/}. If the end of {\em stream} is
+encountered and the value of {\tt eos-error-p} is non-\nil, the function
+\genericref{end-of-stream} is called with the argument {\em stream}.
 
 % ------------------------------------------------------------------------------
 \method{generic-read}
@@ -571,7 +583,7 @@ Implements the \genericref{generic-read} operation for objects of class
 %
 \result%
 The next object stored in the stream buffer.  If the buffer is empty,
-the function \functionref{fill-buffer} is called. If the refilling operation did
+the function \genericref{fill-buffer} is called. If the refilling operation did
 not succeed, the end of stream action is carried out as described under
 \genericref{generic-read}.  Returns \true.
 %
@@ -591,7 +603,7 @@ Implements the \genericref{generic-read} operation for objects of class
 %
 \result%
 The next object stored in the stream buffer.  If the buffer is empty,
-the function \functionref{fill-buffer} is called. If the refilling operation did
+the function \genericref{fill-buffer} is called. If the refilling operation did
 not succeed, the end of stream action is carried out as described under
 \genericref{generic-read}.  Returns \true.
 %
@@ -712,6 +724,21 @@ not specified \instanceref{stdout} is used.
 %
 \seealso%
 \instanceref{stdout}, \genericref{generic-prin}.
+
+% ------------------------------------------------------------------------------
+\generic{generic-prin}
+% ------------------------------------------------------------------------------
+\begin{genericargs}
+    \item[object, \classref{object}] An object to be output on {\em stream}.
+    \item[\optional{stream}, \classref{stream}] A character stream on which {\em
+        object\/} is to be output.
+\end{genericargs}
+%
+\result%
+Returns {\em object}.
+%
+\remarks%
+Generic form of \functionref{prin}.
 
 % ------------------------------------------------------------------------------
 \function{print}

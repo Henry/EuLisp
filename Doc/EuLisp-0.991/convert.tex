@@ -48,15 +48,14 @@ from string in section~\ref{string}, etc..
 \end{arguments}
 %
 \result%
-Returns an instance of {\em class\/} which is equivalent in some
-class-specific sense to {\em object\/}, which may be an instance of any type.
-Calls the converter function associated with {\em class\/} to carry out the
-conversion operation.  An error is signalled (condition: {\tt
-    no-converter}\indexcondition{no-converter}) if there is no associated
-function.  An error is signalled (condition: {\tt
-    no-applicable-method}\indexcondition{no-applicable-method}) if there is no
-method to convert an instance of the class of {\em object\/} to an instance of
-{\em class\/}.
+Returns an instance of {\em class\/} which is equivalent in some class-specific
+sense to {\em object\/}, which may be an instance of any type.  Calls the
+converter function associated with {\em class\/} to carry out the conversion
+operation.  An error is signalled (condition: \conditionref{no-converter}
+\indexcondition{no-converter}) if there is no associated function.  An error is
+signalled (condition: \conditionref{no-applicable-method}
+\indexcondition{no-applicable-method}) if there is no method to convert an
+instance of the class of {\em object\/} to an instance of {\em class\/}.
 
 \condition{conversion-condition}{condition}
 %
@@ -64,8 +63,8 @@ This is the general condition class for all conditions arising from conversion
 operations.
 %
 \begin{initoptions}
-    \item[source, \classref{object}] The object to be converted into an instance of
-    {\em target-class}.
+    \item[source, \classref{object}] The object to be converted into an instance
+    of {\em target-class}.
     %
     \item[target-class, \classref{class}] The target class for the conversion
     operation.
@@ -73,6 +72,19 @@ operations.
 %
 \remarks%
 Should be signalled by {\tt convert} or a converter method.
+
+\condition{no-converter}{conversion-condition}
+%
+\begin{initoptions}
+    \item[source, \classref{object}] The object to be converted into an instance
+    of {\em target-class}.
+    %
+    \item[target-class, \classref{class}] The target class for the conversion
+    operation.
+\end{initoptions}
+%
+\remarks%
+Should be signalled by {\tt convert} if there is no associated function.
 
 \function{converter}
 %

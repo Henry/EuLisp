@@ -342,6 +342,16 @@ generic function with appropriate arguments, through a
 \keywordref{call-next-method}, or by using \functionref{call-method}.  A method
 metaobject itself cannot be applied or called as a function.
 
+\setter{method-function}
+%
+\begin{arguments}
+    \item[method] A method.
+    \item[function] A function.
+\end{arguments}
+%
+\result%
+This function sets the function which implements the method.
+
 \function{method-generic-function}
 %
 \begin{arguments}
@@ -708,7 +718,7 @@ is \theclass{metaclass}.
 %
 \begin{specargs}
     \item[subclass, \classref{class}] A class.
-    \item[superclass, \classref{cabstract-class}] A potential direct superclass.
+    \item[superclass, \theclass{abstract-class}] A potential direct superclass.
 \end{specargs}
 %
 \result%
@@ -717,7 +727,7 @@ Always returns \true.
 \method{compatible-superclass-p}
 %
 \begin{specargs}
-    \item[subclass, \classref{abstract-class}] A class.
+    \item[subclass, \theclass{abstract-class}] A class.
     \item[superclass, \classref{class}] A potential direct superclass.
 \end{specargs}
 %
@@ -727,8 +737,8 @@ Always returns \nil.
 \method{compatible-superclass-p}
 %
 \begin{specargs}
-    \item[subclass, \classref{abstract-class}] A class.
-    \item[superclass, \classref{abstract-class}] A potential direct superclass.
+    \item[subclass, \theclass{abstract-class}] A class.
+    \item[superclass, \theclass{abstract-class}] A potential direct superclass.
 \end{specargs}
 %
 \result%
@@ -1527,11 +1537,10 @@ function's method class.  If not, signals an error (condition:
 \conditionref{incompatible-method-and-gf}
 \indexcondition{incompatible-method-and-gf}).  It also checks if there is a
 method with the same domain already attached to the generic function.  If so, a
-noncontinuable error is signaled (condition:
-\conditionref{methods-exists}\indexcondition{method-exists}). If no error
-occurs, the method is added to the generic function.  Depending on particular
-optimizations of the generic dispatch, adding a method may cause some updating
-computations, e.g., by calling compute-method-lookup-function and
-compute-discriminating-function.
+noncontinuable error is signaled (condition: \conditionref{method-domain-clash}
+\indexcondition{method-domain-clash}). If no error occurs, the method is added
+to the generic function.  Depending on particular optimizations of the generic
+dispatch, adding a method may cause some updating computations, {\em e.g.} by
+calling compute-method-lookup-function and compute-discriminating-function.
 %
 \end{optDefinition}
