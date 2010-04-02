@@ -18,20 +18,6 @@ The class of the object.
 The function \functionref{class-of} can take any \lisp\ object as argument and
 returns an instance of \classref{class} representing the class of that entity.
 %
-%\examples
-%In the following examples we explore the class hierarchy starting from
-%the single precision integer {\tt 1}.
-%
-%{\tt\begin{tabbing}
-%(cl\=ass-of 1) \\
-%   \>$\rightarrow$ \verb+#<single-precision-integer>+\\
-%(class-of (class-of 1)) \\
-%   \> $\rightarrow$ \verb+#<class>+\\
-%(class-of (class-of (class-of 1))) \\
-%   \>$\rightarrow$ \verb+#<metaclass>+\\
-%(class-of (class-of (class-of (class-of 1))))\\
-%   \>$\rightarrow$ \verb+#<metaclass>+
-%\end{tabbing}}
 \end{optDefinition}
 
 \sclause{Class Introspection}
@@ -451,41 +437,87 @@ cl <effective-slotds> <inherited-slotds> -> list(slotd)
 \end{verbatim}
 \end{optPrivate}
 
-\begin{figure*}[t]
+\begin{figure}
 \caption{Initialization Call Structure}
 \label{call-structure}
-\begin{center}\begin{minipage}[t]{\textwidth}
-\small\tt\begin{tabbing}
-co\=mpatible-superclasses-p {\em cl direct-superclasses\/} $\rightarrow$ {\em boolean}\\
-  \>compatible-superclass-p {\em cl superclass\/} $\rightarrow$ {\em boolean}\\
-compute-class-precedence-list {\em cl direct-superclasses\/} $\rightarrow$ ({\em cl\/}$^*$)\\
-compute-inherited-initargs {\em cl direct-superclasses\/} $\rightarrow$ (({\em initarg\/}$^*$)$^*$)\\
-compute-initargs {\em cl direct-initargs inherited-initargs\/} $\rightarrow$ ({\em initarg\/}$^*$)\\
-compute-inherited-slots {\em cl direct-superclasses\/} $\rightarrow$ (({\em sd\/}$^*$)$^*$)\\
-compute-slots {\em cl slot-specs inherited-sds\/} $\rightarrow$ ({\em sd\/}$^*$)\\
-  \>{\em either}\\
-  \>co\=mpute-defined-slot {\em cl slot-spec\/} $\rightarrow$ {\em sd}\\
-  \>  \>compute-defined-slot\=-description-class {\em cl slot-spec\/} $\rightarrow$ {\em sd-class}\\
-  \>{\em or}\\
-  \>compute-specialized-slot {\em cl inherited-sds slot-spec\/} $\rightarrow$ {\em sd}\\
-  \>  \>compute-specialized-slot-class\\
-  \>  \>                    \>{\em cl inherited-sds slot-spec\/} $\rightarrow$ {\em sd-class}\\
-compute-instance-size {\em cl effective-sds\/} $\rightarrow$ {\em integer}\\
-compute-and-ensure-slot-accessors {\em cl effective-sds inherited-sds\/} $\rightarrow$ ({\em sd\/}$^*$)\\
-  \>compute-slot-reader {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
-  \>compute-slot-writer {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
-  \>ensure-slot-reader {\em cl sd effective-sds reader\/} $\rightarrow$ {\em function}\\
-  \>  \>co\=mpute-primitive-reader\=-using-slot\\
-  \>  \>  \>                      \>{\em sd cl effective-sds\/} $\rightarrow$ {\em function}\\
-  \>  \>  \>compute-primitive-reader-using-class {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
-  \>ensure-slot-writer {\em cl sd effective-sds writer\/} $\rightarrow$ {\em function}\\
-  \>  \>compute-primitive-writer-using-slot\\
-  \>  \>  \>                      \>{\em sd cl effective-sds\/} $\rightarrow$ {\em function}\\
-  \>  \>  \>compute-primitive-writer-using-class {\em cl sd effective-sds\/} $\rightarrow$ {\em function}\\
-\end{tabbing}
-\end{minipage}
-\end{center}
-\end{figure*}
+\framebox[\linewidth]
+{
+\begin{tabular*}{\linewidth}{l}
+    {\tt compatible-superclasses-p}\\
+    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    $\rightarrow$ {\em boolean}\\
+    \tts{\tt compatible-superclass-p}\\
+    \tts\tts\tts\tts\tts {\em cl superclass\/}
+    $\rightarrow$ {\em boolean}\\
+    \hline
+    {\tt compute-class-precedence-list}\\
+    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    $\rightarrow$ ({\em cl\/}$^*$)\\
+    \hline
+    {\tt compute-inherited-initargs}\\
+    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    $\rightarrow$ (({\em initarg\/}$^*$)$^*$)\\
+    \hline
+    {\tt compute-initargs}\\
+    \tts\tts\tts\tts{\em cl direct-initargs inherited-initargs\/}
+    $\rightarrow$ ({\em initarg\/}$^*$)\\
+    \hline
+    {\tt compute-inherited-slots}\\
+    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    $\rightarrow$ (({\em sd\/}$^*$)$^*$)\\
+    \hline
+    {\tt compute-slots}\\
+    \tts\tts\tts\tts{\em cl slot-specs inherited-sds\/}
+    $\rightarrow$ ({\em sd\/}$^*$)\\
+    \tts{\em either}\\
+    \tts\tts{\tt compute-defined-slot}\\
+    \tts\tts\tts\tts\tts\tts{\em cl slot-spec\/}
+    $\rightarrow$ {\em sd}\\
+    \tts\tts\tts{\tt compute-defined-slot-description-class}\\
+    \tts\tts\tts\tts\tts\tts\tts{\em cl slot-spec\/}
+    $\rightarrow$ {\em sd-class}\\
+    \tts{\em or}\\
+    \tts\tts{\tt compute-specialized-slot}\\
+    \tts\tts\tts\tts\tts\tts{\em cl inherited-sds slot-spec\/}
+    $\rightarrow$ {\em sd}\\
+    \tts\tts\tts{\tt compute-specialized-slot-class}\\
+    \tts\tts\tts\tts\tts\tts\tts{\em cl inherited-sds slot-spec\/}
+    $\rightarrow$ {\em sd-class}\\
+    \hline
+    {\tt compute-instance-size}\\
+    \tts\tts\tts\tts{\em cl effective-sds\/}
+    $\rightarrow$ {\em integer}\\
+    \hline
+    {\tt compute-and-ensure-slot-accessors}\\
+    \tts\tts\tts\tts{\em cl effective-sds inherited-sds\/}
+    $\rightarrow$ ({\em sd\/}$^*$)\\
+    \tts{\tt compute-slot-reader}\\
+    \tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
+    $\rightarrow$ {\em function}\\
+    \tts{\tt compute-slot-writer}\\
+    \tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
+    $\rightarrow$ {\em function}\\
+    \tts{\tt ensure-slot-reader}\\
+    \tts\tts\tts\tts\tts{\em cl sd effective-sds reader\/}
+    $\rightarrow$ {\em function}\\
+    \tts\tts{\tt compute-primitive-reader-using-slot}\\
+    \tts\tts\tts\tts\tts\tts{\em sd cl effective-sds\/}
+    $\rightarrow$ {\em function}\\
+    \tts\tts\tts{\tt compute-primitive-reader-using-class}\\
+    \tts\tts\tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
+    $\rightarrow$ {\em function}\\
+    \tts{\tt ensure-slot-writer}\\
+    \tts\tts\tts\tts\tts{\em cl sd effective-sds writer\/}
+    $\rightarrow$ {\em function}\\
+    \tts\tts{\tt compute-primitive-writer-using-slot}\\
+    \tts\tts\tts\tts\tts\tts{\em sd cl effective-sds\/}
+    $\rightarrow$ {\em function}\\
+    \tts\tts\tts{\tt compute-primitive-writer-using-class}\\
+    \tts\tts\tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
+    $\rightarrow$ {\em function}
+\end{tabular*}
+}
+\end{figure}
 %
 Note that \genericref{compute-initargs} is called by the default
 \genericref{initialize} method with all direct initargs as the second argument:
@@ -1238,10 +1270,10 @@ The default method checks if there is a method in the {\em
 generic-function}. If not, it creates and adds a new one, otherwise it
 assumes that the existing method works correctly. The domain
 of the new method is {\em class} and the function is
-{\tt\begin{tabbing}
-(me\=thod-function-lambda ((object {\em class}))\\
-   \>(primitive-reader object))
-\end{tabbing}}
+{\tt
+(method-function-lambda ((object {\em class}))\\
+\tts(primitive-reader object))
+}
 \genericref{compute-primitive-reader-using-slot} is called by
 \genericref{ensure-slot-reader} method to compute the primitive reader used
 in the function of the new created reader method.
@@ -1282,14 +1314,16 @@ generic-function}. If not, creates and adds a new one, otherwise it
 assumes that the existing method works correctly. The domain of
 the new method is {\em class} $\times$ \classref{object} and the
 function is:
-{\tt\begin{tabbing}
-(me\=thod-function-lambda (\=(obj {\em class})\\
-\>                      \>(new-value \classref{object}))\\
-   \>(primitive-writer obj new-value))
-\end{tabbing}}
+%
+{\tt
+(method-function-lambda ((obj {\em class})\\
+\tts\tts(new-value \classref{object}))\\
+\tts(primitive-writer obj new-value))
+}
+%
 \genericref{compute-primitive-writer-using-slot} is called by
-\genericref{ensure-slot-writer} method to compute the primitive writer used in the
-function of the new created writer method.
+\genericref{ensure-slot-writer} method to compute the primitive writer used in
+the function of the new created writer method.
 
 \generic{compute-primitive-reader-using-slot}
 %

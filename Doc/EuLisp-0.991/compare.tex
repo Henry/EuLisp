@@ -39,32 +39,43 @@ There is one function for comparing objects by order, which is called
 \genericref{binary<}.  A summary of the comparison functions and the classes for
 which they have defined behaviour is given below:
 
-\begin{tabular}{|ll|}\hline
-    \functionref{eq}: & \classref{object}$\times$\classref{object}\\\hline
+\framebox[\linewidth]
+{
+\begin{tabular*}{\linewidth}{ll}
+    \functionref{eq}: & \classref{object}$\times$\classref{object}\\
+    \hline
     \functionref{eql}: & \classref{object}$\times$\classref{object}\\
     & \classref{character}$\times$\classref{character} \Ra \genericref{equal}\\
     & \classref{fixed-precision-integer}$\times$\\
     & \classref{fixed-precision-integer} \Ra \genericref{binary=}\\
-    & \classref{double-float}$\times$\classref{double-float} \Ra \genericref{binary=}\\\hline
+    & \classref{double-float}$\times$\classref{double-float} \Ra
+    \genericref{binary=}\\
+    \hline
     \genericref{equal}: & \classref{object}$\times$\classref{object}\\
     & \classref{character}$\times$\classref{character}\\
     & \classref{null}$\times$\classref{null}\\
     & \classref{number}$\times$\classref{number} \Ra \functionref{eql}\\
     & \classref{cons}$\times$\classref{cons}\\
     & \classref{string}$\times$\classref{string}\\
-    & \classref{vector}$\times$\classref{vector}\\\hline
+    & \classref{vector}$\times$\classref{vector}\\
+    \hline
     \functionref{=}: & \classref{number}$\times$\classref{number} \Ra
-    \genericref{binary=}\\\hline
+    \genericref{binary=}\\
+    \hline
     \genericref{binary=}: & \classref{fixed-precision-integer}$\times$\\
     & \classref{fixed-precision-integer}\\
-    & \classref{double-float}$\times$\classref{double-float}\\\hline
-    \functionref{<}: & \classref{object}$\times$\classref{object} \Ra \genericref{binary<}\\\hline
+    & \classref{double-float}$\times$\classref{double-float}\\
+    \hline
+    \functionref{<}: & \classref{object}$\times$\classref{object} \Ra
+    \genericref{binary<}\\
+    \hline
     \genericref{binary<}: & \classref{character}$\times$\classref{character}\\
     & \classref{fixed-precision-integer}$\times$\\
     & \classref{fixed-precision-integer}\\
     & \classref{double-float}$\times$\classref{double-float}\\
-    & \classref{string}$\times$\classref{string}\\\hline
-\end{tabular}
+    & \classref{string}$\times$\classref{string}\\
+\end{tabular*}
+}
 
 \function{eq}
 %
