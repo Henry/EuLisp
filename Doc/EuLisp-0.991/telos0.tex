@@ -111,8 +111,6 @@ The basic classes of \eulisp\ are elements of the object system class hierarchy,
 which is shown in Table~\ref{level-0-class-hierarchy}.
 %
 \begin{figure}
-\caption{Level-0 class hierarchy}
-\label{level-0-class-hierarchy}
 {\tt
 \classref{object} \\
 \tts\classref{character} \\
@@ -149,6 +147,8 @@ which is shown in Table~\ref{level-0-class-hierarchy}.
 \tts\classref{thread} \\
 \tts\tts\classref{simple-thread}\\
 }%
+\caption{Level-0 class hierarchy}
+\label{level-0-class-hierarchy}
 \end{figure}
 %
 Indentation indicates a subclass relationship to the class under which the line
@@ -156,7 +156,7 @@ has been indented, for example, \classref{condition}\ is a subclass of
 \classref{object}.  The names given here correspond to the bindings of names to
 classes as they are exported from the level-0 modules.  Classes directly
 relevant to the object system are described in this section while others are
-described in corresponding sections, {\em e.g.} \classref{condition}\ is described in
+described in corresponding sections, e.g. \classref{condition}\ is described in
 Section~\ref{condition}.
 %
 In this definition, unless otherwise specified, classes declared to be
@@ -258,7 +258,7 @@ kept, defclass should be described here also.
 \defform{defclass}
 \label{defclass}
 \Syntax
-\savesyntax\defclassSyntax\vbox{\small\syntax
+\savesyntax\defclassSyntax\vbox{\syntax
 defclass form
    = '(', 'defclass', class name, superclass name,
      slot list, {class option}, ')';
@@ -417,6 +417,12 @@ The class options are interpreted as follows:
 %
 \function{abstract-class-p}
 %
+\savesyntax\abstractClassPSyntax\vbox{\syntax
+abstract-class-p form
+   = '(', 'abstract-class-p', object, ')';
+\endsyntax}
+\syntaxtable{abstract-class-p}{\abstractClassPSyntax}
+%
 \begin{arguments}
     \item[object] Returns {\em object\/}, if it is an abstract class, otherwise
     \nil.
@@ -443,7 +449,7 @@ The class of all generic functions.
 \label{defgeneric-0}
 %
 \Syntax
-\savesyntax\defgenericSyntax\vbox{\small\syntax
+\savesyntax\defgenericSyntax\vbox{\syntax
 defgeneric form
    = '(', 'defgeneric', gf name, gf lambda list,
      {level 0 init option}, ')';
@@ -493,15 +499,17 @@ are said to be {\em congruent\/} iff:
 \end{enumerate}
 %
 An error is signalled (condition class:
-\conditionref{non-congruent-lambda-lists}\indexcondition{non-congruent-lambda-lists})
-if any method defined on this generic function does not have a lambda list {\em
-    congruent\/} to that of the generic function.
+\conditionref{non-congruent-lambda-lists}
+\indexcondition{non-congruent-lambda-lists}) if any method defined on this
+generic function does not have a lambda list {\em congruent\/} to that of the
+generic function.
 
 An error is signalled (condition class:
-\conditionref{incompatible-method-domain}\indexcondition{incompatible-method-domain})
-if the method's specialized lambda list widens the domain of the generic
-function.  In other words, the lambda lists of all methods must specialize on
-subclasses of the classes in the lambda list of the generic function.
+\conditionref{incompatible-method-domain}
+\indexcondition{incompatible-method-domain}) if the method's specialized lambda
+list widens the domain of the generic function.  In other words, the lambda
+lists of all methods must specialize on subclasses of the classes in the lambda
+list of the generic function.
 
 An error is signalled (condition class:
 \conditionref{method-domain-clash}\indexcondition{method-domain-clash}) if any
@@ -527,7 +535,7 @@ The {\em level 0 init-option\/} is:
 %
 The rewrite rules for \defformref{defgeneric} are:
 
-\savesyntax\defgenericRewrites\vbox{\small\syntax
+\savesyntax\defgenericRewrites\vbox{\syntax
 (defgeneric identifier
   gf-lambda-list {level 0 init option})
    = (defconstant identifier
@@ -559,7 +567,7 @@ a domain which is a subclass of \classref{object}\ $\times$ {\tt <class-a>},
 which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
 <class-g>} must all be subclasses of {\tt <class-a>}.
 %
-{\small\syntax
+{\syntax
 (defgeneric gf-0 (arg1 (arg2 <class-a>))
   method (((m1-arg1 <class-b>) (m1-arg2 <class-c>)) ...)
   method (((m2-arg1 <class-d>) (m2-arg2 <class-e>)) ...)
@@ -571,7 +579,7 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
 
 \macro{defmethod}
 \Syntax
-\savesyntax\defmethodSyntax\vbox{\small\syntax
+\savesyntax\defmethodSyntax\vbox{\syntax
 defmethod form
    = '(', 'defmethod', gf locator,
      specialized lambda list,
@@ -600,7 +608,7 @@ gneric function, an error is signalled (condition class:
 
 \macro{generic-lambda}
 \Syntax
-\savesyntax\genericLambdaSyntax\vbox{\small\syntax
+\savesyntax\genericLambdaSyntax\vbox{\syntax
 generic lambda form
    = '(', 'generic-lambda', gf lambda list,
      {level 0 init option}, ')';
@@ -616,7 +624,7 @@ example an anonymous version of {\tt gf-0} (see \defformref{defgeneric} above)
 is defined.  In all other respects the resulting object is the same as {\tt
     gf-0}.
 %
-{\small\syntax
+{\syntax
 (generic-lambda ((arg1 <object>) (arg2 <class-a>))
   method (((m1-arg1 <class-b>) (m1-arg2 <class-c>)) ...)
   method (((m2-arg1 <class-d>) (m2-arg2 <class-e>)) ...)
@@ -651,8 +659,11 @@ of the method.
 
 \keyword{call-next-method}
 \Syntax
-\noindent
-{\tt (call-next-method)}
+\savesyntax\callNextMethodSyntax\vbox{\syntax
+call-next-method form
+   = '(', 'call-next-method', ')';
+\endsyntax}
+\syntaxtable{call-next-method}{\callNextMethodSyntax}
 %
 \result%
 The result of calling the next most specific applicable method.
@@ -660,17 +671,20 @@ The result of calling the next most specific applicable method.
 \remarks%
 The next most specific applicable method is called with the same
 arguments as the current method.  An error is signalled (condition
-class: {\tt <no-next-method>}\indexcondition{no-next-method}) if there
+class: \conditionref{no-next-method}\indexcondition{no-next-method}) if there
 is no next most specific method.
 
 \keyword{next-method-p}
 \Syntax
-\noindent
-{\tt (next-method-p)}
+\savesyntax\nextMethodPSyntax\vbox{\syntax
+next-method-p form
+   = '(', 'next-method-p', ')';
+\endsyntax}
+\syntaxtable{next-method-p}{\nextMethodPSyntax}
 %
 \result%
-If there is a next most specific method, {\tt next-method-p} returns
-a non-\nil\/ value, otherwise, it returns \nil.
+If there is a next most specific method, \keywordref{next-method-p} returns a
+non-\nil\/ value, otherwise, it returns \nil.
 %
 \end{optDefinition}
 
@@ -795,20 +809,8 @@ Objects can be created by calling
 \begin{itemize}
     \item constructors (predefined or user defined) or
     \item \functionref{make}, the general constructor function or
-    \item {\tt allocate}, the general allocator function.
+    \item \functionref{allocate}, the general allocator function.
 \end{itemize}
-
-% The general constructor \functionref{make} creates a new object calling
-% \genericref{allocate} and initializes it calling
-% \genericref{initialize}. \genericref{allocate} discriminates on the class,
-% while \genericref{initialize} discriminates on the new object.  Both
-% \genericref{initialize} and \genericref{allocate}, as well as more specific
-% constructors, are described in more detail in section~\ref{class-0}. The
-% default \genericref{allocate} method creates a new uninitialized object, that
-% is, all slots are unbound.  The default \genericref{initialize} method (see
-% below) is applicable to any object, although there are also more specific
-% methods for classes (\ref{class-0}) and for generic functions and methods
-% (\ref{gf-0}).
 
 \function{make}
 %

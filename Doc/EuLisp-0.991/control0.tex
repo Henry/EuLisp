@@ -272,13 +272,12 @@ The \syntaxref{defun} form defines a function named by {\em function-name} and
 stores the definition (i) as the top-lexical binding of {\em function-name} or
 (ii) as the setter function of {\em function-name}.  The interpretation of the
 {\em lambda-list} is as defined for \keywordref{lambda}.  The rewrite rules for
-\syntaxref{defun} are given below.
-%
-\savesyntax\defunRewrites\vbox{\begin{center}
-{\small\tt\begin{tabular}{lll}
-&&\\
-\begin{minipage}[t]{\columnwidth}
-\begin{tabbing}
+\syntaxref{defun} are given below:
+
+\savesyntax\defunRewrites\vbox{%
+{\small\tt\begin{tabular}{lll}%
+\begin{minipage}[t]{\columnwidth}%
+\begin{tabbing}%
 (de\=fun {\em identifier}\\
    \>{\em lambda-list}\\
    \>{\em body})
@@ -303,11 +302,9 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
 \begin{tabbing}
 ((s\=etter setter) {\em identifier}\\
    \>(lambda {\em lambda-list} {\em body}))
-\end{tabbing}
-\end{minipage}\\
-&&\\
-\end{tabular}}
-\end{center}}
+\end{tabbing}%
+\end{minipage}%
+\end{tabular}}}%
 \syntaxtable{defun {\normalfont rewrite rules}}{\defunRewrites}
 
 \metasyntaxform{function call}
@@ -544,12 +541,11 @@ cond macro
 \remarks%
 The \macroref{cond} macro provides a convenient syntax for collections of {\em
     if-then-elseif...else} expressions.  The rewrite rules for \macroref{cond}
-are given below.
-%
-\savesyntax\condRewrites\vbox{\begin{center}
-{\small{\tt
-\begin{tabular}{lll}
-&&\\
+are given below:
+
+\savesyntax\condRewrites\vbox{%
+{\small{\tt%
+\begin{tabular}{lll}%
 (cond) & $\equiv$ & () \\
 
 (cond ({\em antecedent}) \ldots) & $\equiv$ & (or {\em antecedent} (cond \ldots)) \\
@@ -590,12 +586,10 @@ are given below.
     \>(c\=ond \\
     \>  \>({\em antecedent}$_2$ {\em form}$^*$) \\
     \>  \>\ldots))
-\end{tabbing}
-\end{minipage}\\
-&&\\
-\end{tabular}
-}}
-\end{center}}
+\end{tabbing}%
+\end{minipage}%
+\end{tabular}%
+}}}%
 \syntaxtable{cond {\normalfont rewrite rules}}{\condRewrites}
 
 \macro{and}
@@ -614,12 +608,11 @@ the sequence that evaluates to \nil\/ stops evaluation and none of
 the {\em form}s to its right will be evaluated---that is to say, it is
 non-strict.  The result of {\tt (\macroref{and})} is \true.  If none of the {\em
 form}s evaluate to \nil, the value of the last {\em form} is
-returned.  The rewrite rules for \macroref{and} are given below.
-%
-\savesyntax\andRewrites\vbox{\begin{center}
-{\small\tt
-\begin{tabular}{lll}
-&&\\
+returned.  The rewrite rules for \macroref{and} are given below:
+
+\savesyntax\andRewrites\vbox{%
+{\small\tt%
+\begin{tabular}{lll}%
 (and) & $\equiv$ & t \\
 (and {\em form}) & $\equiv$ & {\em form} \\
 (and {\em form}$_1$ {\em form}$_2$ \ldots) & $\equiv$ &
@@ -627,10 +620,9 @@ returned.  The rewrite rules for \macroref{and} are given below.
 (if \={\em form}$_1$\\
     \>(and {\em form}$_2$ \ldots)\\
     \>())
-\end{tabbing}\end{minipage}\\
-&&\\
-\end{tabular}}
-\end{center}}
+\end{tabbing}%
+\end{minipage}%
+\end{tabular}}}%
 \syntaxtable{and {\normalfont rewrite rules}}{\andRewrites}
 
 \macro{or}
@@ -648,13 +640,11 @@ of {\em form}s from left to right.  The value of the first {\em form} that
 evaluates to {\em true} is the result of the \macroref{or} form and none of the
 {\em form}s to its right will be evaluated---that is to say, it is non-strict.
 If none of the forms evaluate to {\em true}, the value of the last {\em form} is
-returned.  The rewrite rules for \macroref{or} are given below.  Note that {\tt
-    x} does not occur free in any of {\em form}$_2$ \ldots {\em form}$_n$.
-%
-\savesyntax\orRewrites\vbox{\begin{center}
-{\small\tt
-\begin{tabular}{lll}
-&&\\
+returned.  The rewrite rules for \macroref{or} are given below:
+
+\savesyntax\orRewrites\vbox{%
+{\small\tt%
+\begin{tabular}{lll}%
 (or) & $\equiv$ & () \\
 (or {\em form}) & $\equiv$ & {\em form} \\
 (or {\em form}$_1$ {\em form}$_2$ \ldots) & $\equiv$ &
@@ -663,12 +653,13 @@ returned.  The rewrite rules for \macroref{or} are given below.  Note that {\tt
    \>(if \=x\\
          \>x\\
          \>(or {\em form}$_2$ \ldots)))
-\end{tabbing}
-\end{minipage}\\
-&&\\
-\end{tabular}}
-\end{center}}
+\end{tabbing}%
+\end{minipage}%
+\end{tabular}}}%
 \syntaxtable{or {\normalfont rewrite rules}}{\orRewrites}
+
+Note that {\tt x} does not occur free in any of {\em form}$_2$ \ldots {\em
+    form}$_n$.
 %
 \end{optDefinition}
 
@@ -788,25 +779,21 @@ continuation\index{general}{continuation} of the block.  The continuation can be
 invoked anywhere within the block by using \macroref{return-from}.  The {\em
     form}s are evaluated in sequence and the value of the last one is returned
 as the value of the block form.  See also \keywordref{let/cc}.  The rewrite
-rules for \macroref{block} are given below.
-% in Table~\ref{block-return-from-rules}.
+rules for \macroref{block} are given below:
+
+\savesyntax\blockRewrites\vbox{%
+    {\small\tt%
+        \begin{tabular}{lll}%
+            % (block) & $\equiv$ & {\rm Is an error}\\
+            (block {\em identifier}) & $\equiv$ & ()\\
+            (block {\em identifier} {\em form}$^*$) & $\equiv$ & (let/cc {\em identifier} {\em form}$^*$) \\
+        \end{tabular}}}%
+\syntaxtable{block {\normalfont rewrite rules}}{\blockRewrites}
 
 The rewrite for \macroref{block}, does not prevent the \macroref{block} being
 exited from anywhere in its dynamic extent, since the function bound
 to {\em identifier} is a first-class item and can be passed as an
 argument like other values.
-%
-\savesyntax\blockRewrites\vbox{\begin{center}
-{\small\tt
-\begin{tabular}{lll}
-&&\\
-%(block) & $\equiv$ & {\rm Is an error}\\
-(block {\em identifier}) & $\equiv$ & ()\\
-(block {\em identifier} {\em form}$^*$) & $\equiv$ & (let/cc {\em identifier} {\em form}$^*$) \\
-&&\\
-\end{tabular}}
-\end{center}}
-\syntaxtable{block {\normalfont rewrite rules}}{\blockRewrites}
 %
 \seealso%
 \macroref{return-from}.
@@ -832,22 +819,19 @@ the (lexical) \macroref{block} from which to return.
 \macroref{return-from} is the invocation of the continuation of the block
 named by {\em identifier}.  The {\em form} is evaluated and the value
 is returned as the value of the block named by {\em identifier}.  The
-rewrite rules for \macroref{return-from} are given below.
-%
-\savesyntax\returnFromRewrites\vbox{\begin{center}
-{\small\tt
-\begin{tabular}{lll}
-&&\\
+rewrite rules for \macroref{return-from} are given below:
+
+\savesyntax\returnFromRewrites\vbox{%
+{\small\tt%
+\begin{tabular}{lll}%
 %(return-from) & $\equiv$ & {\rm Is an error}\\
 (return-from {\em identifier}) & $\equiv$ & ({\em identifier} ())\\
 \begin{minipage}[t]{0.45\columnwidth}\begin{tabbing}
 (re\=turn-from\\
    \>{\em identifier} {\em form})
 \end{tabbing}\end{minipage}
-& $\equiv$ & ({\em identifier} {\em form})\\
-&&\\
-\end{tabular}}
-\end{center}}
+& $\equiv$ & ({\em identifier} {\em form})
+\end{tabular}}}%
 \syntaxtable{return-from {\normalfont rewrite rules}}{\returnFromRewrites}
 %
 \seealso%
@@ -917,11 +901,11 @@ environment and the variables named by the identifiers in the {\em binding}s are
 bound to new locations holding the results.  Each form in {\em body} is
 evaluated in order in the environment extended by the above bindings.  The
 result of evaluating the last form in {\em body} is returned as the result of
-the \macroref{let} form.  The rewrite rules for \macroref{let} are given below.
-%
-\savesyntax\letRewrites\vbox{\begin{center}
-{\small{\tt
-\begin{tabular}{lll}
+the \macroref{let} form.  The rewrite rules for \macroref{let} are given below:
+
+\savesyntax\letRewrites\vbox{%
+{\small{\tt%
+\begin{tabular}{lll}%
 (let () {\em form}$^*$) & $\equiv$ & (progn {\em form}$^*$) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
@@ -956,11 +940,9 @@ the \macroref{let} form.  The rewrite rules for \macroref{let} are given below.
   \>(\=({\em id}$_0$ ({\em id}$_1$ {\em id}$_2$ \ldots) \\
   \> \>{\em form}$^*$)) \\
   \>({\em id$_0$} {\em form}$_1$ () \ldots))
-\end{tabbing}
-\end{minipage}\\
-&&\\
-\end{tabular}}}
-\end{center}}
+\end{tabbing}%
+\end{minipage}%
+\end{tabular}}}}%
 \syntaxtable{let {\normalfont rewrite rules}}{\letRewrites}
 
 \macro{let*}
@@ -981,11 +963,11 @@ turn, evaluating the initializing form in the environment extended by
 the previous binding.  Each form in {\em body} is evaluated in order in
 the environment extended by the above bindings.  The result of
 evaluating the last form is returned as the result of the \macroref{let*}
-form.  The rewrite rules for \macroref{let*} are given below.
-%
-\savesyntax\letStarRewrites\vbox{\begin{center}
-{\small\tt
-\begin{tabular}{lll}
+form.  The rewrite rules for \macroref{let*} are given below:
+
+\savesyntax\letStarRewrites\vbox{%
+{\small\tt%
+\begin{tabular}{lll}%
 (let* () {\em form}$^*$) & $\equiv$ & (progn {\em form}$^*$) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
@@ -994,21 +976,19 @@ form.  The rewrite rules for \macroref{let*} are given below.
   \>     \>{\em var}$_3$\\
   \>     \>\ldots) \\
   \>{\em form}$^*$)\\
-\end{tabbing}
-\end{minipage}
+\end{tabbing}%
+\end{minipage}%
 & $\equiv$ &
-\begin{minipage}[t]{\columnwidth}
-\begin{tabbing}
+\begin{minipage}[t]{\columnwidth}%
+\begin{tabbing}%
 (l\=et (({\em var}$_1$ {\em form}$_1$)) \\
   \>(l\=et* (\=({\em var}$_2$ {\em form}$_2$) \\
   \>  \>     \>{\em var}$_3$\\
   \>  \>     \>\ldots) \\
-  \>  \>{\em form}$^*$))\\
-\end{tabbing}
-\end{minipage}\\
-\end{tabular}
-}
-\end{center}}
+  \>  \>{\em form}$^*$))
+\end{tabbing}%
+\end{minipage}%
+\end{tabular}}}%
 \syntaxtable{let* {\normalfont rewrite rules}}{\letStarRewrites}
 
 \keyword{progn}

@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-04-01 21:32:00" /> 
+<meta name="date" content="2010-04-05 22:48:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -21,34 +21,34 @@ href="eulispcl9.html#taileulispcl9.html" >prev-tail</a>] [<a
 href="#taileulispcl10.html">tail</a>] [<a 
 href="eulisp.html#eulispcl10.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 10 <a 
- id="x12-5100010"></a>Modules</h3>
+ id="x12-5000010"></a>Modules</h3>
 <a 
- id="dx12-51001"></a>
-<!--l. 1--><p class="noindent" >The  <span 
+ id="dx12-50001"></a>
+<!--l. 1--><p class="noindent" >The <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;module scheme has several influences: LeLisp&#8217;s<a 
- id="dx12-51002"></a>
+ id="dx12-50002"></a>
 module system and module compiler (complice), Haskell<a 
- id="dx12-51003"></a>, ML<a 
- id="dx12-51004"></a>&#x00A0;[<a 
-href="eulisp.html#x1-118001313">13<!--tex4ht:ref: ML-modules --></a>],
+ id="dx12-50003"></a>, ML<a 
+ id="dx12-50004"></a>&#x00A0;[<a 
+href="eulisp.html#x1-117901313">13<!--tex4ht:ref: ML-modules --></a>],
 MIT-Scheme&#8217;s <span 
 class="cmtt-9">make-environment </span>and T&#8217;s locales.
-</p><!--l. 6--><p class="noindent" >All bindings of objects in  <span 
+</p><!--l. 6--><p class="noindent" >All bindings of objects in <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;reside in some module
-somewhere. Also, all programs in  <span 
+somewhere. Also, all programs in <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;are written as one or
 more modules. Almost every module imports a number of other
 modules to make its definition meaningful. These imports have
-two purposes, which are separated in  <span 
+two purposes, which are separated in <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
@@ -60,8 +60,8 @@ are made accessible by specifying which modules are to be
 imported for which purpose in a directive at the beginning of
 each module. The names of modules are bound in a disjoint
 binding environment<a 
- id="dx12-51005"></a><a 
- id="dx12-51006"></a> which is only accessible via the module
+ id="dx12-50005"></a><a 
+ id="dx12-50006"></a> which is only accessible via the module
 definition form. That is to say, modules are not first-class. The
 body of a module definition comprises a list of directives
 followed by a sequence of definitions, expressions and export
@@ -74,7 +74,7 @@ smaller units than modules. A module defines a mapping between
 a set of names and either local or imported bindings of those
 names. Most such bindings are immutable. The exception are those
 bindings created by <a 
-href="eulispcl16.html#x20-200008r6"><span 
+href="eulispcl16.html#x20-199008r6"><span 
 class="cmtt-9">deflocal</span></a> which may be modified by both the
 defining and importing modules. There are no implicit imports
 into a module&#8212;not even the special forms are available in a
@@ -83,33 +83,33 @@ by default. Mutually referential modules are not possible
 because a module must be defined before it can be used. Hence,
 the importation dependencies form a directed acyclic graph.
 <a 
- id="x12-51007r1"></a>
+ id="x12-50007r1"></a>
 </p><div class="note">
 <span 
 class="cmr-8">NOTE</span><span 
 class="cmr-8">&#x00A0;1</span>  <span 
 class="cmr-8">The  issue  of  mutually  referential  modules  will  be</span>
 <span 
-class="cmr-8">addressed in a future version of the definition of  E</span><span 
+class="cmr-8">addressed in a future version of the definition of E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span><span 
 class="cmr-8">.</span></div>
 <!--l. 39--><p class="noindent" ><a 
- id="x12-51008r1"></a><a 
- id="x12-55003r1"></a></p><hr class="float" /><div class="float" 
+ id="x12-50008r1"></a><a 
+ id="x12-54003r1"></a></p><hr class="float" /><div class="float" 
 >
                                                  
                                                                                                   
                                                                                                   
 <a 
- id="x12-51009"></a>
+ id="x12-50009"></a>
 <br /> <div align="center" class="caption"><table class="caption" 
 ><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;1: </td><td  
 class="content">module directives</td></tr></table></div>
 <div class="example">
 <div class="minipage">
-   <!--l. 46--><p class="noindent" ><span class="obeylines-h"><span 
+   <div class="obeylines-v"> <span 
 class="cmtt-8">(defmodule</span><span 
 class="cmtt-8">&#x00A0;a-module</span>
    <br /><span 
@@ -723,8 +723,7 @@ class="cmtt-8">&#x00A0;binding-c}</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;...)</span>
-   <br />
-</span></p></div></div>
+   <br /></div></div></div>
                                                  
                                                                                                   
                                                                                                   
@@ -762,15 +761,15 @@ time, but it is simpler for the purposes of definition to describe
 module processing as if they do.
 </p>
 <h4 class="sclauseHead"> 10.1 <a 
- id="x12-5200010.1"></a>Directives</h4> <a 
- id="dx12-52001"></a>
+ id="x12-5100010.1"></a>Directives</h4> <a 
+ id="dx12-51001"></a>
 The list of module directives is a sequence of keywords and forms,
 where the keywords indicate the interpretation of the forms (see
 Table&#x00A0;<a 
-href="#x12-5800010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). This representation allows for the addition of
+href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). This representation allows for the addition of
 further keywords at other levels of the definition and also for
 implementation-defined keywords<a 
- id="dx12-52002"></a>. For the keywords given
+ id="dx12-51002"></a>. For the keywords given
 here, there is no defined order of appearance, nor is there
 any restriction on the number of times that a keyword can
 appear. Multiple occurrences of any of the directives defined
@@ -779,12 +778,12 @@ the combination of each of the occurrences. This definition
 describes the processing of four keywords, which are now
 described in detail. The syntax of all the directives is given
 in Table&#x00A0;<a 
-href="#x12-5800010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a> and an example of their use appears in
+href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a> and an example of their use appears in
 example&#x00A0;<a 
-href="#x12-51008r1">1<!--tex4ht:ref: example:module --></a>.
+href="#x12-50008r1">1<!--tex4ht:ref: example:module --></a>.
 <h4 class="sclauseHead"> 10.2 <a 
- id="x12-5300010.2"></a>Export Directive</h4> <a 
- id="dx12-53001"></a>
+ id="x12-5200010.2"></a>Export Directive</h4> <a 
+ id="dx12-52001"></a>
 This is denoted by the keyword <span 
 class="cmtt-9">export </span>followed by a sequence of
 names of top-lexical bindings&#8212;these could be either locally-defined
@@ -794,13 +793,13 @@ the external environment of the module. A name clash can arise
 in the external environment from interaction with exposed
 modules.
 <h4 class="sclauseHead"> 10.3 <a 
- id="x12-5400010.3"></a>Import Directive</h4> <a 
- id="dx12-54001"></a>
+ id="x12-5300010.3"></a>Import Directive</h4> <a 
+ id="dx12-53001"></a>
 This is denoted by the keyword <span 
 class="cmtt-9">import </span>followed by a sequence of
 <span 
 class="cmti-9">module descriptor</span>s (see Table&#x00A0;<a 
-href="#x12-5800010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>), being module names or
+href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>), being module names or
 the filters <span 
 class="cmtt-9">except</span>, <span 
 class="cmtt-9">only </span>and <span 
@@ -876,13 +875,13 @@ class="cmtt-9">rename</span>
   <!--l. 200--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 10.4 <a 
- id="x12-5500010.4"></a>Expose Directive</h4> <a 
- id="dx12-55001"></a>
+ id="x12-5400010.4"></a>Expose Directive</h4> <a 
+ id="dx12-54001"></a>
   This is denoted by the keyword <span 
 class="cmtt-9">expose </span>followed by a list of
   <span 
 class="cmti-9">module directive</span>s (see Table&#x00A0;<a 
-href="#x12-5800010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). The purpose of this
+href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). The purpose of this
   directive is to allow a module to export subsets of the external
   environments of various modules without importing them itself.
   Processing an expose directive employs the same model as for
@@ -895,14 +894,15 @@ href="#x12-5800010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). The
   <span 
 class="cmtt-9">expose</span>, a possible implementation of the <span 
 class="cmtt-9">eulisp0</span><a 
- id="dx12-55002"></a> module is
-  shown in example&#x00A0;<a 
-href="#x12-55003r1">1<!--tex4ht:ref: example:exposes --></a>.         <a 
- id="x12-55004"></a><br /> <div align="center" class="caption"><table class="caption" 
+ id="dx12-54002"></a> module
+  is shown in example&#x00A0;<a 
+href="#x12-54003r1">1<!--tex4ht:ref: example:exposes --></a>.          <a 
+ id="x12-54004"></a><br /> <div align="center" class="caption"><table class="caption" 
 ><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;1: </td><td  
-class="content">module using <span 
+class="content">module using
+  <span 
 class="cmtt-9">expose</span></td></tr></table></div>
-    <span class="obeylines-h"><span 
+    <div class="obeylines-v"> <span 
 class="cmtt-8">(defmodule</span><span 
 class="cmtt-8">&#x00A0;eulisp-level-0</span>
      <br /><span 
@@ -957,21 +957,20 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;table</span><span 
 class="cmtt-8">&#x00A0;thread</span><span 
 class="cmtt-8">&#x00A0;vector)))</span>
-   <br />
-</span>
+   <br /></div>
 <!--l. 30--><p class="noindent" >It is also meaningful for a module to include itself in an expose
 directive. In this way, it is possible to refer to all the bindings in
 the module being defined. This is convenient, in combination with
 <span 
 class="cmtt-9">except </span>(see Section&#x00A0;<a 
-href="#x12-5400010.3">10.3<!--tex4ht:ref: import --></a>), as a way of exporting all but a few
+href="#x12-5300010.3">10.3<!--tex4ht:ref: import --></a>), as a way of exporting all but a few
 bindings in a module, especially if syntax expansion creates
 additional bindings whose names are not known, but should be
 exported.
 </p>
 <h4 class="sclauseHead"> 10.5 <a 
- id="x12-5600010.5"></a>Syntax Directive</h4> <a 
- id="dx12-56001"></a>
+ id="x12-5500010.5"></a>Syntax Directive</h4> <a 
+ id="dx12-55001"></a>
 This directive is processed in the same way as an import directive,
 except that the bindings are added to the syntax environment.
 This environment is used in the second phase of module
@@ -985,7 +984,7 @@ syntax and they may also be renamed.
 </p><!--l. 256--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 10.6 <a 
- id="x12-5700010.6"></a>Definitions and Expressions</h4>
+ id="x12-5600010.6"></a>Definitions and Expressions</h4>
 Definitions in a module only contain unqualified names&#8212;that is,
 <span 
 class="cmti-9">local-name</span>s, using the above terminology. A top-lexical binding is
@@ -994,7 +993,7 @@ exported name from the module that created the binding. A name
 clash can arise in the top-lexical environment from interaction
 between local definitions and between local definitions and
 imported modules. Only top-lexical bindings created by <a 
-href="eulispcl16.html#x20-200008r6"><span 
+href="eulispcl16.html#x20-199008r6"><span 
 class="cmtt-9">deflocal</span></a>
 are mutable&#8212;both in the defining module and in any importing
 module. It is a violation to modify an immutable binding.
@@ -1003,22 +1002,22 @@ in order of appearance at the end of the module definition process
 when the top-lexical environment is complete&#8212;that is after
 the creation and initialization of the top-lexical bindings.
 The exception to this is the <a 
-href="eulispcl16.html#x20-276004r7"><span 
+href="eulispcl16.html#x20-275004r7"><span 
 class="cmtt-9">progn</span></a> form, which is descended
 and the forms within it are treated as if the <a 
-href="eulispcl16.html#x20-276004r7"><span 
+href="eulispcl16.html#x20-275004r7"><span 
 class="cmtt-9">progn</span></a> were not
 present. Definitions may only appear either at top-level within a
 module definition or inside any number of <a 
-href="eulispcl16.html#x20-276004r7"><span 
+href="eulispcl16.html#x20-275004r7"><span 
 class="cmtt-9">progn</span></a> forms. This is
 specified more precisely in the grammar for a module given
 below.
-                                                   <h5 class="syntaxssclauseHead"> 10.6.0.3 <a 
- id="x12-5800010.6.0.3"></a><span 
-class="cmbx-8">Syntax</span></h5>  <a 
- id="x12-58001"></a> <div class="framebox-c" 
-style="width:27.14em;">    <!--l. 22--><p class="noindent" ><span class="obeylines-h"><span 
+<h5 class="syntaxssclauseHead"> 10.6.0.3 <a 
+ id="x12-5700010.6.0.3"></a><span 
+class="cmbx-8">Syntax</span></h5><a 
+ id="x12-57001"></a>                                      <!--l. 66--><p class="noindent" ><div class="framebox-c" 
+style="width:27.14em;">    <div class="obeylines-v"> <span 
 class="cmtt-8">module</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -1051,8 +1050,8 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-83400017.17"><span 
-class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a><span 
+href="eulispcl17.html#x21-83300017.17"><span 
+class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">module</span><span 
@@ -1126,8 +1125,8 @@ class="cmtt-8">&#x00A0;expression</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-19300016"><span 
-class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
+href="eulispcl16.html#x20-19200016"><span 
+class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -1138,8 +1137,8 @@ class="cmtt-8">&#x00A0;form</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-19300016"><span 
-class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a><span 
+href="eulispcl16.html#x20-19200016"><span 
+class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -1233,31 +1232,31 @@ class="cmtt-8">&#x00A0;&#8217;(&#8217;,</span><span
 class="cmtt-8">&#x00A0;identifier,</span><span 
 class="cmtt-8">&#x00A0;identifier,</span><span 
 class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
-   <br /></span>                                                        </div>
+   <br /></div>                                                        </div>
  </p><!--l. 328--><p class="noindent" >
  </p>
  <h4 class="sclauseHead"> 10.7 <a 
- id="x12-5900010.7"></a>Module Processing</h4>
+ id="x12-5800010.7"></a>Module Processing</h4>
   The following steps summarize the module definition process:
         <dl class="description"> <dt class="description">
         <span 
 class="cmbx-9">directive processing:</span> </dt><dd 
 class="description">This  is  described  in  detail  in
         Sections&#x00A0;<a 
-href="#x12-5200010.1">10.1<!--tex4ht:ref: directives --></a>&#8211;<a 
-href="#x12-5600010.5">10.5<!--tex4ht:ref: syntax-directive --></a>. This step creates and initializes the
+href="#x12-5100010.1">10.1<!--tex4ht:ref: directives --></a>&#8211;<a 
+href="#x12-5500010.5">10.5<!--tex4ht:ref: syntax-directive --></a>. This step creates and initializes the
         top-lexical, syntax and external environments.
         </dd> <dt class="description">
         <span 
 class="cmbx-9">syntax expansion:</span> </dt><dd 
 class="description"><a 
- id="dx12-59001"></a> <a 
- id="dx12-59002"></a><a 
- id="dx12-59003"></a> <a 
- id="dx12-59004"></a>The body of the module is expanded
+ id="dx12-58001"></a> <a 
+ id="dx12-58002"></a><a 
+ id="dx12-58003"></a> <a 
+ id="dx12-58004"></a>The body of the module is expanded
         according to the operators defined in the syntax environment
         constructed from the syntax directive.       <a 
- id="x12-59005r1"></a>
+ id="x12-58005r1"></a>
         <div class="note">
         <span 
 class="cmr-8">NOTE</span><span 
@@ -1289,7 +1288,7 @@ class="description">The expanded body of the module is
         violation, if a free identifier in an expression or defining form
         does not have a binding in the top-lexical environment.
         <a 
- id="x12-59006r2"></a>
+ id="x12-58006r2"></a>
         <div class="note">
         <span 
 class="cmr-8">NOTE</span><span 
@@ -1301,12 +1300,12 @@ class="cmr-8">added here, such as compilation.</span></div>
         <span 
 class="cmbx-9">initialization:</span> </dt><dd 
 class="description">The top-lexical bindings of the module
+        (created above) are initialized by evaluating the defining forms
                                                                                                   
                                                                                                   
-    (created above) are initialized by evaluating the defining forms
     in the body of the module in the order they appear.
     <a 
- id="x12-59007r3"></a>
+ id="x12-58007r3"></a>
     <div class="note">
     <span 
 class="cmr-8">NOTE</span><span 
@@ -1314,7 +1313,7 @@ class="cmr-8">&#x00A0;3</span>  <span
 class="cmr-8">In  this  sense,  a  module  can  be  regarded  as  a</span>
     <span 
 class="cmr-8">generalization of the </span><a 
-href="eulispcl16.html#x20-269003r4"><span 
+href="eulispcl16.html#x20-268003r4"><span 
 class="cmtt-8">labels</span></a> <span 
 class="cmr-8">form of this and other Lisp dialects.</span></div>
     </dd> <dt class="description">
@@ -1326,28 +1325,31 @@ class="description">The expressions in the body of
 <!--l. 381--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 10.8 <a 
- id="x12-6000010.8"></a>Module Definition</h4> <a 
- id="dx12-60001"></a>
+ id="x12-5900010.8"></a>Module Definition</h4> <a 
+ id="dx12-59001"></a>
 <a 
- id="dx12-60002"></a><a 
- id="dx12-60003"></a>
+ id="dx12-59002"></a><a 
+ id="dx12-59003"></a>
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x12-60004r1"></a><span 
+ id="x12-59004r1"></a><span 
 class="cmbx-9">10.8.1   </span><span 
 class="cmtt-9">defmodule</span>
 <a 
- id="Q1-12-69"></a>
+ id="Q1-12-66"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr />
 <h5 class="syntaxssclauseHead"> 10.8.1.1 <a 
- id="x12-6100010.8.1.1"></a><span 
-class="cmbx-8">Syntax</span></h5>The syntax of a module and its constituents is
-defined in Table&#x00A0;<a 
-href="#x12-5800010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>.
+ id="x12-6000010.8.1.1"></a><span 
+class="cmbx-8">Syntax</span></h5>
+<!--l. 4--><p class="noindent" >The syntax of a module and its constituents is defined in
+Table&#x00A0;<a 
+href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>.
+</p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x12-6200010.8.1.1"></a><span 
+ id="x12-6100010.8.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
-    <dl class="arguments1"><dt class="arguments">
+<!--l. 8--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
 <span 
 class="cmti-9">module name </span>: </dt><dd 
 class="arguments">
@@ -1368,19 +1370,19 @@ class="arguments">
 <!--l. 16--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x12-6300010.8.1.1"></a><span 
-class="cmbx-8">Remarks</span></h5>The <a 
-href="#x12-60004r1"><span 
+ id="x12-6200010.8.1.1"></a><span 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 17--><p class="noindent" >The <a 
+href="#x12-59004r1"><span 
 class="cmtt-9">defmodule</span></a> form defines a module named by <span 
-class="cmti-9">module</span>
-<span 
-class="cmti-9">name </span>and associates the name <span 
-class="cmti-9">module name </span>with a module object
-in the module binding environment<a 
- id="dx12-63001"></a><a 
- id="dx12-63002"></a>.       <a 
- id="x12-63003r1"></a>
-<div class="note">
+class="cmti-9">module name </span>and
+associates the name <span 
+class="cmti-9">module name </span>with a module object in the
+module binding environment<a 
+ id="dx12-62001"></a><a 
+ id="dx12-62002"></a>.       <a 
+ id="x12-62003r1"></a>
+</p><div class="note">
 <span 
 class="cmr-8">NOTE</span><span 
 class="cmr-8">&#x00A0;1</span>  <span 
@@ -1388,12 +1390,13 @@ class="cmr-8">Intentionally, nothing is defined about any relationship</span>
 <span 
 class="cmr-8">between modules and files.</span></div>
 <!--l. 26--><p class="noindent" >
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
- id="x12-6400010.8.1.1"></a> <span 
-class="cmbx-8">Examples</span></h5>An example module definition with explanatory
-comments is given in example&#x00A0;<a 
-href="#x12-51008r1">1<!--tex4ht:ref: example:module --></a>.                         <!--l. 109--><p class="noindent" >
+</p>                                                   <h5 class="likesyntaxssclauseHead"><a 
+ id="x12-6300010.8.1.1"></a> <span 
+class="cmbx-8">Examples</span></h5>
+  <!--l. 27--><p class="noindent" >An example module definition with explanatory comments is given
+  in example&#x00A0;<a 
+href="#x12-50008r1">1<!--tex4ht:ref: example:module --></a>.
+  </p><!--l. 109--><p class="noindent" >
                                                                                                   
                                                                                                   
                                                  

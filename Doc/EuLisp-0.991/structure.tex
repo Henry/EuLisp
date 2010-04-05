@@ -116,7 +116,7 @@ textual representation of data and algorithms).
 This text does not specify:
 \begin{enumerate}
     %
-    \item The size or complexity of a \eulisp\ program that will exceed the
+    \item The size or complexity of an \eulisp\ program that will exceed the
     capacity of any specific configuration or processor, nor the actions to be
     taken when those limits are exceeded.
     %
@@ -137,7 +137,7 @@ This text does not specify:
 \end{enumerate}
 %
 To clarify certain instances of the use of English in this text the following
-definitions are provided:(
+definitions are provided:
 \begin{description}
     \item[must] a verbal form used to introduce a {\em required} property.  All
     conforming processors must satisfy the property.
@@ -325,13 +325,15 @@ the following three classes:
     the configuration supporting the \eulisp\ processor.  The processor must
     signal the corresponding static error which is identified and handled as
     described above.
-    \definition{violation}\index{general}{error}\index{general}{violation}\index{general}{error!violation}
-    An error which is detected during the preparation of a \eulisp\ program for
-    execution, such as a violation of the syntax or static semantics of \eulisp\
-    by the program under preparation.  A {\em conforming} {\em processor} is
-    required to issue a diagnostic if a violation is detected.
+
+    \definition{violation}\index{general}{error}\index{general}{violation}
+    \index{general}{error!violation} An error which is detected during the
+    preparation of a \eulisp\ program for execution, such as a violation of the
+    syntax or static semantics of \eulisp\ in the program under preparation.  A
+    {\em conforming} {\em processor} is required to issue a diagnostic if a
+    violation is detected.
 \end{definitions}
-%
+
 All errors specified in this definition are static unless explicitly stated
 otherwise.
 \end{optDefinition}
@@ -344,7 +346,7 @@ Thus a level-0\index{general}{conformance!level-0} conforming processor
 must support all the basic expressions, classes and class operations
 defined at level-0.  A level-1\index{general}{conformance!level-1}
 conforming processor must support all the basic expressions, classes,
-class operations and modules defined at level-1 and at level-0.
+class operations and modules defined at level-0 and at level-1.
 
 The following two statements govern the conformance of a processor at a given
 level.
@@ -411,7 +413,7 @@ The documentation of a {\em conforming processor\/} must include:
 %
 \begin{optDefinition}
 This section defines the conventions employed in this text, how
-definitions will be laid out, the typeface to be used, the
+definitions will be laid out, the typefaces to be used, the
 meta-language used in descriptions and the naming conventions.  A
 later section (\ref{sec:definitions}) contains definitions of the
 terms used in this text.
@@ -446,7 +448,7 @@ class containing exactly this set of values is not defined in the language,
 notation is abused for convenience and {\em boolean}\index{general}{boolean} is
 defined, for the purposes of this report, to mean that set of values.  If the
 true value is a useful value, it is specified precisely in the description of
-the function.
+the function and written as \true.
 \end{optDefinition}
 %
 \sclause{Layout and Typography}
@@ -460,7 +462,7 @@ only given where it is felt necessary.
 \keyword{a-special-form}
 \Syntax
 \label{a-special-form-syntax}
-\savesyntax\aspecialformSyntax\vbox{\small\syntax
+\savesyntax\aspecialformSyntax\vbox{\syntax
 a-special-form
     = '(', a-special-form, {form}, ')';
 \endsyntax}
@@ -488,12 +490,20 @@ Cross references to related entries.
 %
 \function{a-function}
 %
+\Syntax
+\label{a-function-syntax}
+\savesyntax\aFunctionSyntax\vbox{\syntax
+a-function form
+   = '(', a-function, argument a, ..., argument n, ')';
+\endsyntax}
+\syntaxtable{a-function}{\aFunctionSyntax}
+%
 \begin{arguments}
-    \item[argument-a] information about the class or classes of {\em
-        argument-a}.\\
+    \item[argument a] information about the class or classes of {\em
+        argument a}.\\
     $\vdots$
-    \item[\optional{argument-n}] information about the class or classes of
-    the optional argument {\em argument-n}.
+    \item[\optional{argument n}] information about the class or classes of
+    the optional argument {\em argument n}.
 \end{arguments}
 %
 \result%
@@ -596,16 +606,6 @@ A description of the r\^ole of {\tt <a-class>}.
 %
 \end{optDefinition}
 %
-\constant{a-constant}{a-class}
-%
-\remarks%
-A constant of type \classref{a-class}.
-
-\constant{<a-class-alias>}{a-class}
-%
-\remarks%
-A constant binding whose value is \classref{a-class}, {\em i.e.} a class alias.
-
 \sclause{Naming}
 %
 \begin{optPrivate}

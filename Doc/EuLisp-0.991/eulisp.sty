@@ -1,6 +1,8 @@
 %%% ----------------------------------------------------------------------------
 \typeout{Document style `EuLisp'  - May 89, July 92, Mar 2010}
 
+\RequirePackage{ifthen}%
+
 % ------------------------------------------------------------------------------
 %%% Default page layout
 
@@ -24,13 +26,13 @@
 \newcommand{\lisp}{{\small L}{\scriptsize ISP}}
 \newcommand{\lelisp}{{\small L}{\scriptsize E}$\!${\small -}$\!$\lisp}
 \newcommand{\mceyx}{$\mu${\small C}{\scriptsize EYX}}
-\newcommand{\eulisp}{{\small E}{\scriptsize U}$\!\!$\lisp}
+\newcommand{\eulisp}{$\!\!${\small E}{\scriptsize U}$\!\!$\lisp}
 \newcommand{\cl}{Common Lisp}
-\newcommand{\interlisp}{{\small I}{\scriptsize nter}\lisp}
+\newcommand{\interlisp}{{\small I}{\scriptsize nter}$\!\!$\lisp}
 \newcommand{\clos}{{\small CLOS}}
 \newcommand{\ools}{object-oriented languages}
 \newcommand{\Cpp}{C\raise.22ex\hbox{+}\raise.22ex\hbox{+}}
-\newcommand{\youtoo}{youtoo}
+\newcommand{\youtoo}{Youtoo}
 
 % ------------------------------------------------------------------------------
 %%% General typesetting macros
@@ -79,8 +81,17 @@
 \def\@entrysect#1#2#3#4#5#6[#7]#8#9{%
     \vbox%
     {%
-        \vskip5pt\vfil\hrule height.3mm%
-        \orig@sect{#1}{#2}{#3}{#4}{#5}{#6}[#7]{\hbox{#8}\hfill\hbox{#9\,}}%
+        \vskip6pt\vfil\hrule height.3mm%
+        \settowidth{\@tempdima}{{\normalsize\bf A.14.44444}{{\tt #8}}{{\em #9}}}%
+        \ifthenelse{\lengthtest{\@tempdima > \linewidth}}%
+        {%
+            \orig@sect{#1}{#2}{#3}{#4}{#5}{#6}[#7]%
+            {\hbox{#8}\hfill\\\hbox{}\hfill\hbox{#9\,}}%
+        }%
+        {%
+            \orig@sect{#1}{#2}{#3}{#4}{#5}{#6}[#7]%
+            {\hbox{#8}\hfill\hbox{#9\,}}%
+        }%
         \vskip8pt\vfil\hrule height.3mm%
     }%
 }
@@ -96,6 +107,7 @@
     {\normalsize\bf}%
     {{\tt #1}}{{\em #2}}%
     \let\@sect=\orig@sect%
+    \vskip -5pt%
 }
 
 %%%  function
@@ -223,7 +235,7 @@
 {%
     \ttindex{#1}%
     \indexconst{#1}%
-    \entryclause{#1}{\classref{#2}}
+    \entryclause{#1 \classref{#2}}{constant}
     \label{\constantlabel{#1}}%
 }
 \newcommand{\constantref}[1]{\hyperref[\constantlabel{#1}]{{\tt{}#1}}}
@@ -244,7 +256,7 @@
 {%
     \index{general}{#1@{\tt <#1>}}%
     \index{class}{#1@{\tt{}<#1>} (\module)}%
-    \entryclause{<#1>}{\classref{#2}}%
+    \entryclause{<#1> \classref{#2}}{class}%
     \label{\classlabel{#1}}%
 }
 
@@ -253,7 +265,7 @@
 \newcommand{\instance}[2]
 {
     \ttindex{#1}%
-    \entryclause{#1}{\classref{#2}}%
+    \entryclause{#1 \classref{#2}}{instance}%
     \label{\instancelabel{#1}}%
 }
 \newcommand{\instanceref}[1]{\hyperref[\instancelabel{#1}]{{\tt{}#1}}}
@@ -263,7 +275,7 @@
 \newcommand{\condition}[2]
 {%
     \indexcond{#1}%
-    \entryclause{#1}{#2}%
+    \entryclause{<#1> \conditionref{#2}}{condition}%
     \label{\conditionlabel{#1}}%
 }
 \newcommand{\conditionref}[1]{\hyperref[\conditionlabel{#1}]{{\tt{}<#1>}}}
@@ -287,8 +299,7 @@
 % \newcommand{\syntaxssclausefont}{\mdseries}
 \newcommand{\syntaxssclausefont}{\normalfont\small\bfseries$\!$}
 
-\newcommand{\Syntax}{\syntaxssclause{\syntaxssclausefont Syntax}}
-%\newcommand{\Syntax}{}
+\newcommand{\Syntax}{\syntaxssclause{\syntaxssclausefont Syntax}\vskip -8pt}
 
 %%%  Syntax box/table (not a float)
 
@@ -365,6 +376,7 @@
 {%
     \syntaxssclause*{\syntaxssclausefont Arguments}%
     \optionsquote%
+    \vskip -8pt%
     \list{}{\let\makelabel\argumentlabel}%
 }
 {%
@@ -383,6 +395,7 @@
 {%
     \syntaxssclause*{\syntaxssclausefont Generic Arguments}%
     \optionsquote%
+    \vskip -8pt%
     \list{}{\let\makelabel\genargslabel}%
 }
 {%
@@ -396,6 +409,7 @@
 {%
     \syntaxssclause*{\syntaxssclausefont Specialized Arguments}%
     \optionsquote%
+    \vskip -8pt%
     \list{}{\let\makelabel\genargslabel}%
 }
 {%
@@ -411,6 +425,7 @@
 {%
     \syntaxssclause*{\syntaxssclausefont Initialization Options}%
     \optionsquote%
+    \vskip -8pt%
     \list{}{\let\makelabel\optionlabel}%
 }
 {%
@@ -420,6 +435,7 @@
 \newenvironment{options}
 {%
     \optionsquote%
+    \vskip -8pt%
     \list{}{\let\makelabel\optionlabel}%
 }
 {%
@@ -429,10 +445,10 @@
 
 %%%  Other
 
-\newcommand{\result}{\syntaxssclause*{\syntaxssclausefont Result}}
-\newcommand{\remarks}{\syntaxssclause*{\syntaxssclausefont Remarks}}
-\newcommand{\examples}{\syntaxssclause*{\syntaxssclausefont Examples}}
-\renewcommand{\seealso}{\syntaxssclause*{\syntaxssclausefont See~also}}
+\newcommand{\result}{\syntaxssclause*{\syntaxssclausefont Result}\vskip -8pt}
+\newcommand{\remarks}{\syntaxssclause*{\syntaxssclausefont Remarks}\vskip -8pt}
+\newcommand{\examples}{\syntaxssclause*{\syntaxssclausefont Examples}\vskip -8pt}
+\renewcommand{\seealso}{\syntaxssclause*{\syntaxssclausefont See~also}\vskip -8pt}
 
 %%%  Sub-classes
 
@@ -441,6 +457,7 @@
 {%
     %\syntaxssclause*{\syntaxssclausefont Sub-classes}%
     \optionsquote%
+    \vskip -8pt%
     \list{}{\let\makelabel\subclasslabel}%
 }
 {%
@@ -455,6 +472,7 @@
 {%
     % \syntaxssclause*{\syntaxssclausefont Sub-classes}%
     \optionsquote%
+    \vskip -8pt%
     \list{}{\let\makelabel\functionslabel}%
 }
 {%
@@ -497,15 +515,15 @@
 
 \gdef\savesyntax#1{\newbox#1\global\setbox#1}
 
-\newcommand{\syntaxfont}{\tt}
+\newcommand{\syntaxfont}{\small\tt}
 \newcommand{\syntaxcommentfont}{\it}
 
 \newdimen\syntaxindent \syntaxindent=0.5cm%
 
-\newcommand{\syntaxbeforehook}{\smallskip\@@par\noindent}
+\newcommand{\syntaxbeforehook}{\vskip4pt}
 \newcommand{\syntaxbegineveryline}{\relax}
 \newcommand{\syntaxendeveryline}{\relax}
-\newcommand{\syntaxafterhook}{\smallskip\@@par}
+\newcommand{\syntaxafterhook}{\vskip-5pt}
 
 \newif\iffirstsyntaxpar
 

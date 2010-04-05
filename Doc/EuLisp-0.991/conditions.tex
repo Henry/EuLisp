@@ -10,23 +10,20 @@ The defined name of this module is {\tt condition}.
 The condition system was influenced by the Common Lisp error system
 ~\bref{Pit-errors} \index{general}{Common Lisp Error System} and the Standard
 ML\index{general}{Standard ML} exception mechanism.  It is a simplification of
-the former and an extension of the latter.  Following standard
-practice, this text defines the actions of functions in terms of their
-normal behaviour.  Where an exceptional behaviour might arise, this
-has been defined in terms of a condition.  However, not all
-exceptional situations are errors.  Following Pitman, we use {\em
-condition}\index{general}{condition} to be a kind of occasion in a program when
-an exceptional situation has been signalled.  An error is a kind of
-condition---error and condition are also used as terms for the objects
-that represent exceptional situations.  A condition can be signalled
-continuably by passing a continuation for the resumption to signal.
-If a continuation is not supplied then the condition cannot be
-continued.
+the former and an extension of the latter.  Following standard practice, this
+text defines the actions of functions in terms of their normal behaviour.  Where
+an exceptional behaviour might arise, this has been defined in terms of a
+condition.  However, not all exceptional situations are errors.  Following
+Pitman, we use {\em condition} \index{general}{condition} to be a kind of
+occasion in a program when an exceptional situation has been signalled.  An
+error is a kind of condition---error and condition are also used as terms for
+the objects that represent exceptional situations.  A condition can be signalled
+continuably by passing a continuation for the resumption to signal.  If a
+continuation is not supplied then the condition cannot be continued.
 
 \noindent
 These two categories are characterized as follows:
 \begin{enumerate}
-%
     \item \index{general}{condition!continuable} A condition might be signalled
     when some limit has been transgressed and some corrective action is needed
     before processing can resume.  For example, memory zone exhaustion on
@@ -36,14 +33,13 @@ These two categories are characterized as follows:
     IEEE floating point arithmetic, where a condition might be signalled to
     indicate divergence of an operation.  A condition should be signalled
     continuably when there is a strategy for recovery from the condition.
-%
+
     \item \index{general}{condition!non-continuable} Alternatively, a condition
     might be signalled when some catastrophic situation is recognized, such as
     the memory manager being unable to allocate more memory or unable to recover
     sufficient memory from that already allocated.  A condition should be
     signalled non-continuably when there is no reasonable way to resume
     processing.
-%
 \end{enumerate}
 %
 A condition class is defined using \defformref{defcondition} (see
@@ -57,35 +53,35 @@ with-handler}, which takes a function---the handler function---and a
 sequence of forms to be protected.  The initial condition class
 hierarchy is shown in Table~\ref{condition-class-hierarchy}.
 %
-\begin{figure}
+\begin{table}
 \caption{Condition class hierarchy}
 \label{condition-class-hierarchy}
 {\tt
-\classref{condition}\\
-\tts\conditionref{general-condition}\\
-\tts\tts\conditionref{invalid-operator}\\
-\tts\tts\conditionref{cannot-update-setter}\\
-\tts\tts\conditionref{no-setter}\\
-\tts\conditionref{environment-condition}\\
-\tts\conditionref{arithmetic-condition}\\
-\tts\tts \conditionref{division-by-zero}\\
-\tts\conditionref{conversion-condition}\\
-\tts\tts\conditionref{no-converter}\\
-\tts\conditionref{stream-condition}\\
-\tts\tts\conditionref{end-of-stream}\\
-\tts\conditionref{read-error}\\
-\tts\conditionref{thread-condition}\\
-\tts\tts\conditionref{thread-already-started}\\
-\tts\tts\conditionref{wrong-thread-continuation}\\
-\tts\tts\conditionref{wrong-condition-class}\\
-\tts\conditionref{generic-function-condition}\\
-\tts\tts\conditionref{no-next-method}\\
-\tts\tts\conditionref{non-congruent-lambda-lists}\\
-\tts\tts\conditionref{incompatible-method-domain}\\
-\tts\tts\conditionref{no-applicable-method}\\
-\tts\tts\conditionref{method-domain-clash}\\
+    \classref{condition}\\
+    \tts\conditionref{general-condition}\\
+    \tts\tts\conditionref{invalid-operator}\\
+    \tts\tts\conditionref{cannot-update-setter}\\
+    \tts\tts\conditionref{no-setter}\\
+    \tts\conditionref{environment-condition}\\
+    \tts\conditionref{arithmetic-condition}\\
+    \tts\tts \conditionref{division-by-zero}\\
+    \tts\conditionref{conversion-condition}\\
+    \tts\tts\conditionref{no-converter}\\
+    \tts\conditionref{stream-condition}\\
+    \tts\tts\conditionref{end-of-stream}\\
+    \tts\conditionref{read-error}\\
+    \tts\conditionref{thread-condition}\\
+    \tts\tts\conditionref{thread-already-started}\\
+    \tts\tts\conditionref{wrong-thread-continuation}\\
+    \tts\tts\conditionref{wrong-condition-class}\\
+    \tts\conditionref{generic-function-condition}\\
+    \tts\tts\conditionref{no-next-method}\\
+    \tts\tts\conditionref{non-congruent-lambda-lists}\\
+    \tts\tts\conditionref{incompatible-method-domain}\\
+    \tts\tts\conditionref{no-applicable-method}\\
+    \tts\tts\conditionref{method-domain-clash}\\
 }%
-\end{figure}
+\end{table}
 \end{optDefinition}
 %
 \clause{Condition Classes}
@@ -97,7 +93,7 @@ hierarchy is shown in Table~\ref{condition-class-hierarchy}.
 %
 \Syntax
 \label{defcondition-syntax}
-\savesyntax\defconditionSyntax\vbox{\small\syntax
+\savesyntax\defconditionSyntax\vbox{\syntax
 defcondition form
    = '(', 'defcondition',
      condition class name,
@@ -107,38 +103,34 @@ defcondition form
 \syntaxtable{defcondition}{\defconditionSyntax}
 %
 \begin{arguments}
-    %
     \item[condition class name] A symbol naming a binding to be initialized with
     the new condition class.
-    %
+
     \item[superclass name] A symbol naming a binding of a class to be used as
     the superclass of the new condition class.
-    %
+
     \item[slot names] A sequence of keywords used to name and to
     identify additional slots begin defined for this condition class.
-    %
 \end{arguments}
 %
 \remarks%
-This defining form defines a new condition class.  The first argument
-is the name to which the new condition class will be bound.  The
-second is the name of the superclass of the new condition class and an
-{\em init-option\/} is an identifier followed by its (default) initial
-value.  If {\em superclass-name\/} is \nil, the superclass is
-taken to be
-\classref{condition}.  Otherwise {\em superclass-name\/} must be \classref{condition}\
-or the name of one of its subclasses.
+This defining form defines a new condition class.  The first argument is the
+name to which the new condition class will be bound.  The second is the name of
+the superclass of the new condition class and an {\em init-option\/} is an
+identifier followed by its (default) initial value.  If {\em superclass-name\/}
+is \nil, the superclass is taken to be \classref{condition}.  Otherwise {\em
+    superclass-name\/} must be \classref{condition}\ or the name of one of its
+subclasses.
 
 \derivedclass{condition}{object}
+\label{\conditionlabel{condition}}
 %
 \begin{initoptions}
-%
-    \item[message, \classref{string}] A string, containing information which should
-    pertain to the situation which caused the condition to be signalled.
-%
+    \item[message, \classref{string}] A string, containing information which
+    should pertain to the situation which caused the condition to be signalled.
+
     \item[message-arguments, \classref{list}] A list of objects to be used in
     processing the message format string.
-%
 \end{initoptions}
 %
 \remarks%
@@ -162,8 +154,9 @@ Returns {\em object\/} if it is a condition, otherwise \nil.
         \item[message, \classref{string}] A string, containing information which
         should pertain to the situation which caused the condition to be
         signalled.
-        \item[message-arguments, \classref{list}] A list of objects to be used in
-        processing the message format string.
+
+        \item[message-arguments, \classref{list}] A list of objects to be used
+        in processing the message format string.
     \end{options}
 \end{specargs}
 %
@@ -171,9 +164,8 @@ Returns {\em object\/} if it is a condition, otherwise \nil.
 A new, initialized condition.
 %
 \remarks%
-First calls \keywordref{call-next-method} to carry out initialization
-specified by superclasses then does the \classref{condition} specific
-initialization.
+First calls \keywordref{call-next-method} to carry out initialization specified
+by superclasses then does the \classref{condition} specific initialization.
 %
 
 \condition{general-condition}{condition}
@@ -184,17 +176,17 @@ execution of programs by the processor.
 \condition{domain-condition}{general-condition}
 %
 \begin{initoptions}
-    \item[argument, \classref{object}] An argument, which was not of the expected
-    class, or outside a defined range and therefore lead to the signalling of
-    this condition.
+    \item[argument, \classref{object}] An argument, which was not of the
+    expected class, or outside a defined range and therefore lead to the
+    signalling of this condition.
 \end{initoptions}
 
 \condition{range-condition}{general-condition}
 %
 \begin{initoptions}
-    \item[result, \classref{object}] A result, which was not of the expected class,
-    or outside a defined range and therefore lead to the signalling of this
-    condition.
+    \item[result, \classref{object}] A result, which was not of the expected
+    class, or outside a defined range and therefore lead to the signalling of
+    this condition.
 \end{initoptions}
 
 \condition{environment-condition}{condition}
@@ -241,12 +233,13 @@ the object system at level 0. The following direct subclasses of
 %
 \begin{initoptions}
     \item[generic, function] The generic function which was applied.
-    \item[arguments, list] The arguments of the generic function which was applied.
+    \item[arguments, list] The arguments of the generic function which was
+    applied.
 \end{initoptions}
 %
 \remarks%
-Signalled by a generic function when there is no method which is
-applicable to the arguments.
+Signalled by a generic function when there is no method which is applicable to
+the arguments.
 
 \condition{incompatible-method-domain}{generic-function-condition}
 %
@@ -317,33 +310,30 @@ method.
 %
 \begin{optDefinition}
 %
-Conditions are handled with a function called a {\em
-handler}\index{general}{error!handler}.  Handlers are established
-dynamically and have dynamic scope and extent.  Thus, when a condition
-is signalled, the processor will call the dynamically closest handler.
-This can accept, resume or decline the condition (see {\tt
-with-handler} for a full discussion and definition of this
-terminology).  If it declines, then the next dynamically closest
-handler is called, and so on, until a handler accepts or resumes the
-condition.  It is the first handler accepting the condition
-that is used and this may not necessarily be the most specific.
-Handlers are established by the special form \keywordref{with-handler}.
+Conditions are handled with a function called a {\em handler}
+\index{general}{error!handler}.  Handlers are established dynamically and have
+dynamic scope and extent.  Thus, when a condition is signalled, the processor
+will call the dynamically closest handler.  This can accept, resume or decline
+the condition (see {\tt with-handler} for a full discussion and definition of
+this terminology).  If it declines, then the next dynamically closest handler is
+called, and so on, until a handler accepts or resumes the condition.  It is the
+first handler accepting the condition that is used and this may not necessarily
+be the most specific.  Handlers are established by the special form
+\keywordref{with-handler}.
 
 \function{signal}
 %
 \begin{arguments}
-%
     \item[condition] The condition to be signalled.
-%
+
     \item[function] The function to be called if the condition is handled and
     resumed, that is to say, the condition is continuable, or \nil
     otherwise.
-%
+
     \item[\optional{thread}] If this argument is not supplied, the condition is
     signalled on the thread which called \functionref{signal}, otherwise, {\em
         thread} indicates the thread on which {\em condition} is to be
     signalled.
-%
 \end{arguments}
 %
 \result%
@@ -351,17 +341,16 @@ Handlers are established by the special form \keywordref{with-handler}.
 \functionref{signal}'s continuation.
 %
 \remarks%
-Called to indicate that a specified condition has arisen during the
-execution of a program.
+Called to indicate that a specified condition has arisen during the execution of
+a program.
 %
 If the third argument is not supplied, \functionref{signal} calls the
-dynamically closest handler with {\em condition} and {\em
-continuation}.  If the second argument is a subclass of {\tt
-function}, it is the {\em resume} continuation to be used in the case
-of a handler deciding to resume from a continuable condition.  If the
-second argument is \nil, it indicates that the condition was
-signalled as a non-continuable condition---in this way the handler is
-informed of the signaler's intention.
+dynamically closest handler with {\em condition} and {\em continuation}.  If the
+second argument is a subclass of {\tt function}, it is the {\em resume}
+continuation to be used in the case of a handler deciding to resume from a
+continuable condition.  If the second argument is \nil, it indicates that the
+condition was signalled as a non-continuable condition---in this way the handler
+is informed of the signaler's intention.
 
 If the third argument is supplied, \functionref{signal} registers the specified
 condition to be signalled on {\em thread}.  The condition must be an instance of
@@ -386,12 +375,12 @@ call-next-handler form
 \syntaxtable{call-next-handler}{\callnexthandlerSyntax}
 %
 \remarks%
-The \keywordref{call-next-handler} special form calls the next
-enclosing handler. It is an error to evaluate this form other than within an
-established handler function. The \keywordref{call-next-handler} special form is
-normally used when a handler function does not know how to deal with the class
-of condition. However, it may also be used to combine handler function behaviour
-in a similar but orthogonal way to \keywordref{call-next-method} (assuming a
+The \keywordref{call-next-handler} special form calls the next enclosing
+handler. It is an error to evaluate this form other than within an established
+handler function. The \keywordref{call-next-handler} special form is normally
+used when a handler function does not know how to deal with the class of
+condition. However, it may also be used to combine handler function behaviour in
+a similar but orthogonal way to \keywordref{call-next-method} (assuming a
 generic handler function).
 
 \keyword{with-handler}
@@ -415,12 +404,12 @@ handler function
         protected-form}s and there are no intervening handler functions which
     accept or resume the condition.  A handler function takes two arguments: a
     condition, and a {\em resume} function/continuation.  The condition is the
-    condition object that was passed to \functionref{signal} as its first argument.  The
-    {\em resume} continuation is the continuation (or \nil) that was given
-    to \functionref{signal} as its second argument.
-    %
-    \item[forms] The sequence of forms whose execution is protected
-    by the {\em handler function} specified above.
+    condition object that was passed to \functionref{signal} as its first
+    argument.  The {\em resume} continuation is the continuation (or \nil) that
+    was given to \functionref{signal} as its second argument.
+
+    \item[forms] The sequence of forms whose execution is protected by the {\em
+        handler function} specified above.
 \end{arguments}
 %
 \result%
@@ -501,9 +490,9 @@ An illustration of the use of all three cases is given here:
 %
 \begin{arguments}
     \item[error-message] a string containing relevant information.
-%
+
     \item[condition-class] the class of condition to be signalled.
-%
+
     \item[init-option\/$^*$] a sequence of options to be passed to {\tt
         initialize-instance} when making the instance of condition.
 \end{arguments}
@@ -514,17 +503,17 @@ The result is \nil.
 \remarks%
 The \functionref{error} function signals a non-continuable error.  It calls
 \functionref{signal} with an instance of a condition of {\em condition-class}
-initialized from {\em init-option}\/s, the {\em error-message} and a
-{\em resume} continuation value of \nil, signifying that the
-condition was not signalled continuably.
+initialized from {\em init-option}\/s, the {\em error-message} and a {\em
+    resume} continuation value of \nil, signifying that the condition was not
+signalled continuably.
 
 \function{cerror}
 %
 \begin{arguments}
     \item[error-message] a string containing relevant information.
-%
+
     \item[condition-class] the class of condition to be signalled.
-%
+
     \item[init-option\/$^*$] a sequence of options to be passed to {\tt
         initialize-instance} when making the instance of condition.
 \end{arguments}
@@ -533,11 +522,11 @@ condition was not signalled continuably.
 The result is \nil.
 %
 \remarks%
-The \functionref{cerror} function signals a continuable error.  It
-calls \functionref{signal} with an instance of a condition of {\em
-    condition-class} initialized from {\em init-option}\/s, the {\em
-    error-message} and a {\em resume} continuation value which is the
-continuation of the \functionref{cerror} expression.  A non-\nil\/ resume
-continuation signifies that the condition has been signalled continuably.
+The \functionref{cerror} function signals a continuable error.  It calls
+\functionref{signal} with an instance of a condition of {\em condition-class}
+initialized from {\em init-option}\/s, the {\em error-message} and a {\em
+    resume} continuation value which is the continuation of the
+\functionref{cerror} expression.  A non-\nil\/ resume continuation signifies
+that the condition has been signalled continuably.
 %
 \end{optDefinition}

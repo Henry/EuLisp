@@ -10,7 +10,7 @@
 \keyword{dynamic}
 %
 \Syntax
-\savesyntax\dynamicSyntax\vbox{\small\syntax
+\savesyntax\dynamicSyntax\vbox{\syntax
 dynamic form
    = '(', 'dynamic', identifier, ')';
 \endsyntax}
@@ -28,7 +28,7 @@ visible binding exists, an error is signaled (condition:
 \keyword{dynamic-setq}
 %
 \Syntax
-\savesyntax\dynamicSetqSyntax\vbox{\small\syntax
+\savesyntax\dynamicSetqSyntax\vbox{\syntax
 dynamic setq form
    = '(', 'dynamic-setq', identifier, form, ')';
 \endsyntax}
@@ -63,7 +63,7 @@ dynamic variable has no visible dynamic binding.
 \keyword{dynamic-let}
 %
 \Syntax
-\savesyntax\dynamicLetSyntax\vbox{\small\syntax
+\savesyntax\dynamicLetSyntax\vbox{\syntax
 dynamic let form
    = '(', 'dynamic-let',
      {binding}, (* \[\S\ref{control-0}\] *)
@@ -95,7 +95,7 @@ returned as the result of \keywordref{dynamic-let}.
 \defform{defglobal}
 %
 \Syntax
-\savesyntax\defglobalSyntax\vbox{\small\syntax
+\savesyntax\defglobalSyntax\vbox{\syntax
 defglobal form
    = '(', 'defglobal', identifier, expression, ')';
 \endsyntax}
@@ -155,7 +155,7 @@ exists.
 \macro{catch}
 %
 \Syntax
-\savesyntax\catchSyntax\vbox{\small\syntax
+\savesyntax\catchSyntax\vbox{\syntax
 catch macro
    = '(', 'catch', tag, {form}, ')';
 tag
@@ -173,45 +173,43 @@ dynamic extent of the \macroref{catch} form by using \macroref{throw}.  The {\em
     form}s are evaluated in sequence and the value of the last one is returned
 as the value of the \macroref{catch} form.  The rewrite rules for
 \macroref{catch} are:
-%
-\savesyntax\catchRewrites\vbox{\begin{center}
-{\small\tt
-\begin{tabular}{lll}
-(catch) & $\equiv$ & {\rm Is an error}\\
-(catch {\em tag}) & $\equiv$ & (progn {\em tag} ())\\
-(catch {\em tag} {\em form}$^*$) & $\equiv$ &
-\begin{minipage}[t]{0.3\columnwidth}
-\begin{tabbing}
-(le\=t/cc tmp\\
-   \>(dy\=namic-let (({\em tag} tmp))\\
-   \>   \>{\em form}$^*$))\\
-\end{tabbing}
-\end{minipage}
+
+\savesyntax\catchRewrites\vbox{%
+{\small\tt%
+\begin{tabular}{lll}%
+    (catch) & $\equiv$ & {\rm Is an error}\\
+    (catch {\em tag}) & $\equiv$ & (progn {\em tag} ())\\
+    (catch {\em tag} {\em form}$^*$) & $\equiv$ &
+    \begin{minipage}[t]{0.3\columnwidth}
+        \begin{tabbing}
+            (le\=t/cc tmp\\
+            \>(dy\=namic-let (({\em tag} tmp))\\
+            \>   \>{\em form}$^*$))
+        \end{tabbing}
+    \end{minipage}
 \end{tabular}
-}
-\end{center}}
+}}
 \syntaxtable{catch {\normalfont rewrite rules}}{\catchRewrites}
-%
-\noindent
+
 Exiting from a \macroref{catch}, by whatever means, causes the restoration of
 the lexical environment and dynamic environment that existed before the
 \macroref{catch} was entered.  The above rewrite for \macroref{catch}, causes
 the variable {\tt tmp} to be shadowed.  This is an artifact of the above
 presentation only and a conforming processor must not shadow any variables that
 could occur in the body of \macroref{catch} in this way.
-
+%
 \seealso%
 \macroref{throw}.
 
 \macro{throw}
-
+%
 \Syntax
-\savesyntax\throwSyntax\vbox{\small\syntax
+\savesyntax\throwSyntax\vbox{\syntax
 throw macro
    = '(', 'throw', tag, {form}, ')';
 \endsyntax}
 \syntaxtable{throw}{\throwSyntax}
-
+%
 \remarks%
 In \macroref{throw}, the {\em tag} names the continuation of the \macroref{catch} from which to return.
 % One of two conditions might arise in \macroref{throw} depending on whether the
@@ -225,16 +223,15 @@ continuation\index{general}{continuation} of the catch named {\em tag}.  The
 named by {\em variable}.  The {\em tag} ia a symbol because it used to access
 the current dynamic binding of the symbol, which is where the continuation is
 bound.  The rewrite rules for \macroref{throw} are:
-%
-\savesyntax\throwRewrites\vbox{\begin{center}
-{\small\tt
+
+\savesyntax\throwRewrites\vbox{%
+{\small\tt%
 \begin{tabular}{lll}
 (throw) & $\equiv$ & {\rm Is an error}\\
 (throw {\em tag}) & $\equiv$ & ((dynamic {\em tag}) ())\\
-(throw {\em tag} {\em form}) & $\equiv$ & ((dynamic {\em tag}) {\em form})\\
+(throw {\em tag} {\em form}) & $\equiv$ & ((dynamic {\em tag}) {\em form})
 \end{tabular}
-}
-\end{center}}
+}}
 \syntaxtable{throw {\normalfont rewrite rules}}{\throwRewrites}
 %
 \seealso%
@@ -245,7 +242,7 @@ bound.  The rewrite rules for \macroref{throw} are:
 \sclause{Summary of Level-1 Expressions and Definitions}
 %
 \begin{optDefinition}
-\noindent
+%
 This section gives the syntax of all level-1 expressions and definitions
 together.  Any productions undefined here appear elsewhere in the definition,
 specifically: the syntax of most expressions and definitions is given in the

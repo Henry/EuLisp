@@ -1,54 +1,55 @@
 \begin{introduction}
 \label{sec:intro}
 \begin{optPrivate}
-The behaviour of macros is never explained, especially with respect to how many
-times they might be expanded.
+    The behaviour of macros is never explained, especially with respect to how
+    many times they might be expanded.
 
-The hierarchy of types (classes) is not specified anywhere.  The coercion
-ladder, if taken as part of the hierarchy, is upside down in some places (if the
-class systems is taken as prototypical of types).
+    The hierarchy of types (classes) is not specified anywhere.  The coercion
+    ladder, if taken as part of the hierarchy, is upside down in some places (if
+    the class systems is taken as prototypical of types).
 
-Nothing about the behaviour of \telos\ is specified.  How is the CPL calculated?
-When are methods invoked?  What is method combination?  (Note: it seems someone
-else wrote this part.  It seems much less smooth than the rest).
+    Nothing about the behaviour of \telos\ is specified.  How is the CPL
+    calculated?  When are methods invoked?  What is method combination?  (Note:
+    it seems someone else wrote this part.  It seems much less smooth than the
+    rest).
 
-Threads are hardly discussed.  How can tail-recursion be specified
-linguistically (RPG).
+    Threads are hardly discussed.  How can tail-recursion be specified
+    linguistically (RPG).
 
-The next paragraph is somewhat awkward.  [jwd]
+    The next paragraph is somewhat awkward.  [jwd]
 
-Why are modules not first-class? (RPG).  Abstraction to optimization is a poor
-link (RPG)---action: remove (JAP).  The ...recursive behaviour... definition is
-incorrect (RPG).  Implicit here is that {\tt symbol-value} and {\tt dynamic} are
-disjoint (RPG).
+    Why are modules not first-class? (RPG).  Abstraction to optimization is a
+    poor link (RPG)---action: remove (JAP).  The ...recursive
+    behaviour... definition is incorrect (RPG).  Implicit here is that {\tt
+        symbol-value} and {\tt dynamic} are disjoint (RPG).
 
-JWD: We ought to consider whether we really want to require tail recursion
-optimization.  It is somewhat difficult to define precisely what the requirement
-means (see mail on the Scheme Standard list), and it makes it harder to use
-certain implementation strategies (eg, compile to C).  On the other hand, we
-don't have any other means for expressing iteration and I suspect many of us are
-inclined to follow Scheme.  A Rationale entry is required, at least.
+    JWD: We ought to consider whether we really want to require tail recursion
+    optimization.  It is somewhat difficult to define precisely what the
+    requirement means (see mail on the Scheme Standard list), and it makes it
+    harder to use certain implementation strategies (eg, compile to C).  On the
+    other hand, we don't have any other means for expressing iteration and I
+    suspect many of us are inclined to follow Scheme.  A Rationale entry is
+    required, at least.
 
-JWD: The Rationale should explain why dynamic variables are not by-module.  It
-is possible to implement dynamic variables so that different vars with the same
-name can exist in different modules.  We would have to have some way to refer to
-(or import) variables in another module.
+    JWD: The Rationale should explain why dynamic variables are not by-module.
+    It is possible to implement dynamic variables so that different vars with
+    the same name can exist in different modules.  We would have to have some
+    way to refer to (or import) variables in another module.
 
-Rewrote (once again) the description of the binding environments and gave them
-new names.  This removes the false distinction between lexical and module
-bindings that people complained about at Dec '90 meeting.  Any further
-complaints about this must be accompanied by revised wording.
+    Rewrote (once again) the description of the binding environments and gave
+    them new names.  This removes the false distinction between lexical and
+    module bindings that people complained about at Dec '90 meeting.  Any
+    further complaints about this must be accompanied by revised wording.
 \end{optPrivate}
 
 \begin{optDefinition}
 \eulisp\ is a dialect of Lisp and as such owes much to the great body of work
-that has been done on language design in the name of Lisp over the last thirty
+that has been done on language design in the name of Lisp over the last forty
 years.  The distinguishing features of \eulisp\ are (i) the integration of the
 classical Lisp type system and the object system into a single class hierarchy
 (ii) the complementary abstraction facilities provided by the class and the
 module mechanism (iii) support for concurrent execution.
 
-\noindent
 Here is a brief summary of the main features of the language.
 \begin{itemize}
 
@@ -83,6 +84,7 @@ Here is a brief summary of the main features of the language.
     bindings by requiring the manipulation of the latter via special forms.
 
 \end{itemize}
+%
 \eulisp\ does not claim any particular Lisp dialect as its closest relative,
 although parts of it were influenced by features found in
 \cl\index{general}{cl@\cl}, \interlisp\index{general}{interlisp@\interlisp},
@@ -101,6 +103,7 @@ ObjVLisp\index{general}{ObjVLisp}~\bref{objvlisp},
 Oaklisp\index{general}{Oaklisp}~\bref{oaklisp},
 MicroCeyx\index{general}{MicroCeyx}~\bref{lelisp-manual}, and
 MCS\index{general}{MCS}~\bref{mcs}.
+%
 \end{optDefinition}
 
 \end{introduction}
