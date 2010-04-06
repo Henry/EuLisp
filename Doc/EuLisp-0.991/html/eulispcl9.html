@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-04-05 22:48:00" /> 
+<meta name="date" content="2010-04-06 22:50:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -21,11 +21,11 @@ href="eulispcl8.html#taileulispcl8.html" >prev-tail</a>] [<a
 href="#taileulispcl9.html">tail</a>] [<a 
 href="eulisp.html#eulispcl9.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 9 <a 
- id="x11-450009"></a>Syntax</h3>
+ id="x11-470009"></a>Syntax</h3>
 <a 
- id="dx11-45001"></a>
+ id="dx11-47001"></a>
 <!--l. 2--><p class="noindent" >Case<a 
- id="dx11-45002"></a> is distinguished in each of characters, strings and identifiers,
+ id="dx11-47002"></a> is distinguished in each of characters, strings and identifiers,
 so that <span 
 class="cmtt-9">variable-name </span>and <span 
 class="cmtt-9">Variable-name </span>are different, but where
@@ -38,14 +38,14 @@ standard function names are lower case. In this section, and
 throughout this text, the names for individual character glyphs are
 those used in ISO/IEC DIS 646:1990.
 </p><!--l. 11--><p class="noindent" >The minimal character set<a 
- id="dx11-45003"></a><a 
- id="dx11-45004"></a> to support <span 
+ id="dx11-47003"></a><a 
+ id="dx11-47004"></a> to support <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
-class="cmr-7">ISP</span>&#x00A0;is defined in
-Table&#x00A0;<a 
-href="#x11-460009.0.0.1">9.0.0.1<!--tex4ht:ref: character-set --></a>. The language as defined in this text uses only the
+class="cmr-7">ISP</span>&#x00A0;is defined in syntax
+table&#x00A0;<a 
+href="#x11-480009.0.0.1">9.0.0.1<!--tex4ht:ref: character-set --></a>. The language as defined in this text uses only the
 characters given in this table. Thus, left hand sides of the
 productions in this table define and name groups of characters
 which are used later in this definition: <span 
@@ -60,12 +60,12 @@ character not specified here is classified under <span
 class="cmti-9">other character</span>,
 which permits its use as an initial or a constituent character of an
 identifier (see section&#x00A0;<a 
-href="eulispcl17.html#x21-83300017.17">17.17<!--tex4ht:ref: symbol --></a>).
+href="eulispcl17.html#x21-83500017.17">17.17<!--tex4ht:ref: symbol --></a>).
 </p>
 <h5 class="syntaxssclauseHead"> 9.0.0.1 <a 
- id="x11-460009.0.0.1"></a><span 
+ id="x11-480009.0.0.1"></a><span 
 class="cmbx-8">Syntax</span></h5><a 
- id="x11-46001"></a>
+ id="x11-48001"></a>
 <!--l. 55--><p class="noindent" ><div class="framebox-c" 
 style="width:27.14em;">   <div class="obeylines-v"> <span 
 class="cmtt-8">decimal</span><span 
@@ -318,9 +318,9 @@ class="cmtt-8">&#x00A0;character;</span>
    <br /></div>                                             </div>
 </p>
 <h4 class="sclauseHead"> 9.1 <a 
- id="x11-470009.1"></a>Whitespace and Comments</h4>
+ id="x11-490009.1"></a>Whitespace and Comments</h4>
 Whitespace characters<a 
- id="dx11-47001"></a> are space and newline. The newline     character is also used to represent end of record for configurations
+ id="dx11-49001"></a> are space and newline. The newline     character is also used to represent end of record for configurations
   providing such an input model, thus, a reference to newline in this
   definition should also be read as a reference to end of record. The
   only use of whitespace is to improve the legibility of programs for
@@ -328,9 +328,9 @@ Whitespace characters<a
   significant in a string or when it occurs escaped within an
   identifier.
   <!--l. 9--><p class="noindent" >A comment<a 
- id="dx11-47002"></a> is introduced by the <span 
+ id="dx11-49002"></a> is introduced by the <span 
 class="cmti-9">comment-begin</span><a 
- id="dx11-47003"></a> glyph, called
+ id="dx11-49003"></a> glyph, called
   <span 
 class="cmti-9">semicolon </span>(<span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">;</span></span></span>) and continues up to, but does not include,
@@ -338,7 +338,7 @@ class="cmtt-9">;</span></span></span>) and continues up to, but does not include
   middle of a token because of the whitespace in the form of
   the newline. Thus a comment is equivalent to whitespace.
   <a 
- id="x11-47004r1"></a>
+ id="x11-49004r1"></a>
   </p><div class="note">
   <span 
 class="cmr-8">NOTE</span><span 
@@ -351,18 +351,18 @@ class="cmr-8">&#x00A0;for block comments.</span></div>
   <!--l. 98--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 9.2 <a 
- id="x11-480009.2"></a>Objects</h4>
+ id="x11-500009.2"></a>Objects</h4>
   The syntax of the classes of objects that can be read by <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;is
   defined in the section of this definition corresponding to the class
-  as defined below.
+  as defined below:
   <h5 class="syntaxssclauseHead"> 9.2.0.2 <a 
- id="x11-490009.2.0.2"></a><span 
+ id="x11-510009.2.0.2"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="x11-49001"></a>
+ id="x11-51001"></a>
   <!--l. 16--><p class="noindent" ><div class="framebox-c" 
 style="width:27.14em;">    <div class="obeylines-v"> <span 
 class="cmtt-8">object</span>
@@ -375,7 +375,7 @@ class="cmtt-8">&#x00A0;character</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-29800017.1"><span 
+href="eulispcl17.html#x21-30000017.1"><span 
 class="cmr-8">17.1</span><!--tex4ht:ref: character --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -387,7 +387,7 @@ class="cmtt-8">&#x00A0;float</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-51200017.8"><span 
+href="eulispcl17.html#x21-51400017.8"><span 
 class="cmr-8">17.8</span><!--tex4ht:ref: float --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -399,7 +399,7 @@ class="cmtt-8">&#x00A0;integer</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-55200017.11"><span 
+href="eulispcl17.html#x21-55400017.11"><span 
 class="cmr-8">17.11</span><!--tex4ht:ref: integer --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -411,7 +411,7 @@ class="cmtt-8">&#x00A0;list</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-57800017.13"><span 
+href="eulispcl17.html#x21-58000017.13"><span 
 class="cmr-8">17.13</span><!--tex4ht:ref: list --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -423,7 +423,7 @@ class="cmtt-8">&#x00A0;string</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-80700017.16"><span 
+href="eulispcl17.html#x21-80900017.16"><span 
 class="cmr-8">17.16</span><!--tex4ht:ref: string --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -435,7 +435,7 @@ class="cmtt-8">&#x00A0;symbol</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-83300017.17"><span 
+href="eulispcl17.html#x21-83500017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -447,13 +447,13 @@ class="cmtt-8">&#x00A0;vector</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-86100017.19"><span 
+href="eulispcl17.html#x21-86300017.19"><span 
 class="cmr-8">17.19</span><!--tex4ht:ref: vector --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /></div>                                                        </div>
  </p><!--l. 18--><p class="noindent" >The syntax for identifiers <a 
- id="dx11-49002"></a><a 
- id="dx11-49003"></a> corresponds to that for symbols.
+ id="dx11-51002"></a><a 
+ id="dx11-51003"></a> corresponds to that for symbols.
                                                                                                   
                                                                                                   
                                                  

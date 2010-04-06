@@ -63,7 +63,7 @@ circumstances the delivery order cannot be verified.  A \functionref{signal} on
 a determined thread has no discernable effect on either the signalled or
 signalling thread unless the condition is not an instance of
 \conditionref{thread-condition}, in which case an error is signalled on the
-signalling thread.  See also Section~\ref{condition}.
+signalling thread.  See also \S~\ref{condition}.
 
 A lock is an abstract data type protecting a binary value which denotes whether
 the lock is locked or unlocked.  The operations on a lock are \functionref{lock}
@@ -206,7 +206,7 @@ be one which will eventually call the continuation of the call to
 \functionref{thread-reschedule}.
 %
 \seealso%
-\functionref{thread-value}, \functionref{signal} and Section~\ref{condition} for
+\functionref{thread-value}, \functionref{signal} and \S~\ref{condition} for
 details of conditions and signalling.
 
 \function{current-thread}
@@ -329,7 +329,7 @@ constant \constantref{ticks-per-second} is used to make timeout periods
 processor independent.
 %
 \seealso%
-\genericref{wait} and \constantref{ticks-per-second} (Section~\ref{condition}).
+\genericref{wait} and \constantref{ticks-per-second} (\S~\ref{condition}).
 %
 \constant{ticks-per-second}{double-float}
 %
@@ -414,7 +414,7 @@ will be signalled continuably so that the process of acquiring the lock may
 continue after the condition has been handled.
 %
 \seealso%
-\functionref{unlock} and Section~\ref{condition} for details of conditions and
+\functionref{unlock} and \S~\ref{condition} for details of conditions and
 signalling.
 
 \function{unlock}

@@ -108,48 +108,51 @@ this section.
 \begin{optDefinition}
 \noindent
 The basic classes of \eulisp\ are elements of the object system class hierarchy,
-which is shown in Table~\ref{level-0-class-hierarchy}.
+which is shown in table~\ref{level-0-class-hierarchy}.
 %
-\begin{figure}
-{\tt
-\classref{object} \\
-\tts\classref{character} \\
-\tts\classref{condition} \\
-\tts\tts{\normalfont See Table~\ref{condition-class-hierarchy}}\\
-\tts\classref{function} \\
-%NotYoutoo \tts\tts\classref{continuation} \\
-\tts\tts\classref{simple-function} \\
-\tts\tts\classref{generic-function} \\
-\tts\classref{collection} \\
-\tts\tts\classref{sequence} \\
-\tts\tts\tts\classref{list} \\
-\tts\tts\tts\tts\classref{cons} \\
-\tts\tts\tts\tts\classref{null}\\
-\tts\tts\tts\classref{character-sequence} \\
-\tts\tts\tts\tts\classref{string} \\
-\tts\tts\tts\classref{vector} \\
-\tts\tts\classref{table} \\
-\tts\tts\tts\classref{hash-table} \\
-\tts\classref{lock} \\
-\tts\classref{number} \\
-\tts\tts\classref{integer}\\
-\tts\tts\tts\classref{fixed-precision-integer}\\
-%NotYoutoo \tts\tts\tts\classref{variable-precision-integer}\\
-\tts\tts\classref{float}\\
-\tts\tts\tts\classref{double-float}\\
-\tts\classref{stream} \\
-\tts\tts\classref{buffered-stream}\\
-\tts\tts\tts\classref{string-stream}\\
-\tts\tts\tts\classref{file-stream}\\
-\tts\classref{name} \\
-\tts\tts\classref{symbol}\\
-\tts\tts\classref{keyword}\\
-\tts\classref{thread} \\
-\tts\tts\classref{simple-thread}\\
+\begin{table}%
+\caption{Level-0 class hierarchy}%
+\label{level-0-class-hierarchy}%
+{\tt%
+\begin{tabbing}%
+    00\=00\=00\=00\= \kill%
+    \classref{object} \\
+    \>\classref{character} \\
+    \>\classref{condition} \\
+    \>\>{\normalfont See table~\ref{condition-class-hierarchy}}\\
+    \>\classref{function} \\
+    % NotYoutoo \>\>\classref{continuation} \\
+    \>\>\classref{simple-function} \\
+    \>\>\classref{generic-function} \\
+    \>\classref{collection} \\
+    \>\>\classref{sequence} \\
+    \>\>\>\classref{list} \\
+    \>\>\>\>\classref{cons} \\
+    \>\>\>\>\classref{null}\\
+    \>\>\>\classref{character-sequence} \\
+    \>\>\>\>\classref{string} \\
+    \>\>\>\classref{vector} \\
+    \>\>\classref{table} \\
+    \>\>\>\classref{hash-table} \\
+    \>\classref{lock} \\
+    \>\classref{number} \\
+    \>\>\classref{integer}\\
+    \>\>\>\classref{fixed-precision-integer}\\
+    % NotYoutoo \>\>\>\classref{variable-precision-integer}\\
+    \>\>\classref{float}\\
+    \>\>\>\classref{double-float}\\
+    \>\classref{stream} \\
+    \>\>\classref{buffered-stream}\\
+    \>\>\>\classref{string-stream}\\
+    \>\>\>\classref{file-stream}\\
+    \>\classref{name} \\
+    \>\>\classref{symbol}\\
+    \>\>\classref{keyword}\\
+    \>\classref{thread} \\
+    \>\>\classref{simple-thread}%
+\end{tabbing}%
 }%
-\caption{Level-0 class hierarchy}
-\label{level-0-class-hierarchy}
-\end{figure}
+\end{table}%
 %
 Indentation indicates a subclass relationship to the class under which the line
 has been indented, for example, \classref{condition}\ is a subclass of
@@ -157,7 +160,7 @@ has been indented, for example, \classref{condition}\ is a subclass of
 classes as they are exported from the level-0 modules.  Classes directly
 relevant to the object system are described in this section while others are
 described in corresponding sections, e.g. \classref{condition}\ is described in
-Section~\ref{condition}.
+\S~\ref{condition}.
 %
 In this definition, unless otherwise specified, classes declared to be
 subclasses of other classes may be indirect subclasses. Classes not declared to
@@ -175,7 +178,7 @@ initialization options are specified for \classref{object}.
 \class{class}
 \index{general}{level-0 classes!\theclass{class}}
 %
-The default super-class classes.  All classes defined using the
+The default super-class including for itself.  All classes defined using the
 \defformref{defclass} form are direct or indirect subclasses of
 \classref{class}.  Thus, this class is specializable by user-defined classes at
 level-0.
@@ -231,9 +234,9 @@ superclasses, which defines the classes from which the class inherits structure
 and behaviour. For single inheritance classes, this list is defined recursively
 as follows:
 \begin{enumerate}
-    \item the {\em CPL\/} of \classref{object}\ is a list of one element containing
-    \classref{object}\ itself;
-    %
+    \item the {\em CPL\/} of \classref{object}\ is a list of one element
+    containing \classref{object}\ itself;
+
     \item the {\em CPL\/} of any other class is a list of classes beginning with
     the class itself followed by the elements of the {\em CPL\/} of its direct
     superclass which is \classref{object}\ by default.
@@ -274,7 +277,7 @@ slot
 slot name
    = identifier; (* \[\S\ref{symbol}\] *)
 slot option
-   = 'keyword:' keyword (* \[\S\ref{symbol}\] *)
+   = 'keyword:' identifier (* \[\S\ref{symbol}\] *)
    | 'default:' level 0 expression (* \[\S\ref{control-0}\] *)
    | 'reader:' identifier (* \[\S\ref{symbol}\] *)
    | 'writer:' identifier (* \[\S\ref{symbol}\] *)
@@ -330,7 +333,7 @@ The {\em slot option\/}s are interpreted as follows:
     one. That means, a subclass can not shadow or add a new initarg, if a
     superclass has already defined one.
 
-    \item[default, expression]%
+    \item[default, level-0 expression]%
     The value of this option is an expression, which is evaluated as the default
     value of the slot, to be used if no initarg is defined for the slot or given
     to a call to \functionref{make}.  The expression is evaluated in the lexical
@@ -475,14 +478,14 @@ specialized parameter
 \syntaxtable{defgeneric}{\defgenericSyntax}
 %
 \begin{arguments}
-    \item[gf-name] One of a symbol, or a form denoting a setter function or a
+    \item[gf name] One of a symbol, or a form denoting a setter function or a
     converter function.
 
-    \item[gen-lambda-list] The parameter list of the generic function, which may
+    \item[gen lambda list] The parameter list of the generic function, which may
     be specialized to restrict the domain of methods to be attached to the
     generic function.
 
-    \item[level-0-init-option\/$^*$\/] Options as specified below.
+    \item[level 0 init option\/$^*$\/] Options as specified below.
 \end{arguments}
 %
 \remarks%
@@ -523,7 +526,7 @@ An error is signalled (condition class:
 attempt is made to apply a generic function which has no applicable methods for
 the classes of the arguments supplied.
 
-The {\em level 0 init-option\/} is:
+A {\em level 0 init-option\/} is:
 \begin{options}
     \item[method, method-spec] This option is followed by a method description.
     A method description is a list comprising the specialized lambda list of the
@@ -580,7 +583,7 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
 \macro{defmethod}
 \Syntax
 \savesyntax\defmethodSyntax\vbox{\syntax
-defmethod form
+defmethod macro
    = '(', 'defmethod', gf locator,
      specialized lambda list,
      {form}, ')';
@@ -617,7 +620,7 @@ generic lambda form
 %
 \remarks%
 \macroref{generic-lambda} creates and returns an anonymous generic function that
-can be applied immediately, much like the normal \keyword{lambda}.  The {\em
+can be applied immediately, much like the normal \keywordref{lambda}.  The {\em
     gen-lambda-list} and the {\em init-option\/}s are interpreted exactly as for
 the level-0 definition of \defformref{defgeneric}.  \examples In the following
 example an anonymous version of {\tt gf-0} (see \defformref{defgeneric} above)

@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-04-05 22:48:00" /> 
+<meta name="date" content="2010-04-06 22:50:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -21,19 +21,19 @@ href="eulispcl9.html#taileulispcl9.html" >prev-tail</a>] [<a
 href="#taileulispcl10.html">tail</a>] [<a 
 href="eulisp.html#eulispcl10.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 10 <a 
- id="x12-5000010"></a>Modules</h3>
+ id="x12-5200010"></a>Modules</h3>
 <a 
- id="dx12-50001"></a>
+ id="dx12-52001"></a>
 <!--l. 1--><p class="noindent" >The <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;module scheme has several influences: LeLisp&#8217;s<a 
- id="dx12-50002"></a>
+ id="dx12-52002"></a>
 module system and module compiler (complice), Haskell<a 
- id="dx12-50003"></a>, ML<a 
- id="dx12-50004"></a>&#x00A0;[<a 
-href="eulisp.html#x1-117901313">13<!--tex4ht:ref: ML-modules --></a>],
+ id="dx12-52003"></a>, ML<a 
+ id="dx12-52004"></a>&#x00A0;[<a 
+href="eulisp.html#x1-118101313">13<!--tex4ht:ref: ML-modules --></a>],
 MIT-Scheme&#8217;s <span 
 class="cmtt-9">make-environment </span>and T&#8217;s locales.
 </p><!--l. 6--><p class="noindent" >All bindings of objects in <span 
@@ -60,8 +60,8 @@ are made accessible by specifying which modules are to be
 imported for which purpose in a directive at the beginning of
 each module. The names of modules are bound in a disjoint
 binding environment<a 
- id="dx12-50005"></a><a 
- id="dx12-50006"></a> which is only accessible via the module
+ id="dx12-52005"></a><a 
+ id="dx12-52006"></a> which is only accessible via the module
 definition form. That is to say, modules are not first-class. The
 body of a module definition comprises a list of directives
 followed by a sequence of definitions, expressions and export
@@ -74,36 +74,27 @@ smaller units than modules. A module defines a mapping between
 a set of names and either local or imported bindings of those
 names. Most such bindings are immutable. The exception are those
 bindings created by <a 
-href="eulispcl16.html#x20-199008r6"><span 
+href="eulispcl16.html#x20-201008r6"><span 
 class="cmtt-9">deflocal</span></a> which may be modified by both the
 defining and importing modules. There are no implicit imports
 into a module&#8212;not even the special forms are available in a
 module that imports nothing. A module exports nothing
 by default. Mutually referential modules are not possible
-because a module must be defined before it can be used. Hence,
-the importation dependencies form a directed acyclic graph.
-<a 
- id="x12-50007r1"></a>
-</p><div class="note">
-<span 
-class="cmr-8">NOTE</span><span 
-class="cmr-8">&#x00A0;1</span>  <span 
-class="cmr-8">The  issue  of  mutually  referential  modules  will  be</span>
-<span 
-class="cmr-8">addressed in a future version of the definition of E</span><span 
-class="cmr-7">U</span><span 
-class="cmr-8">L</span><span 
-class="cmr-7">ISP</span><span 
-class="cmr-8">.</span></div>
-<!--l. 39--><p class="noindent" ><a 
- id="x12-50008r1"></a><a 
- id="x12-54003r1"></a></p><hr class="float" /><div class="float" 
+because a module must be defined before it can be used.
+Hence, the importation dependencies form a directed acyclic
+graph.
+                                                 
+                                                                                                  
+                                                                                                  
+</p><!--l. 34--><p class="noindent" ><a 
+ id="x12-52007r1"></a><a 
+ id="x12-56003r1"></a></p><hr class="float" /><div class="float" 
 >
                                                  
                                                                                                   
                                                                                                   
 <a 
- id="x12-50009"></a>
+ id="x12-52008"></a>
 <br /> <div align="center" class="caption"><table class="caption" 
 ><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;1: </td><td  
 class="content">module directives</td></tr></table></div>
@@ -163,8 +154,7 @@ class="cmtt-8">&#x00A0;;;</span><span
 class="cmtt-8">&#x00A0;import</span><span 
 class="cmtt-8">&#x00A0;everything</span><span 
 class="cmtt-8">&#x00A0;from</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;module-1}</span>
+class="cmtt-8">&#x00A0;module-1</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -194,11 +184,9 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;;;</span><span 
 class="cmtt-8">&#x00A0;all</span><span 
 class="cmtt-8">&#x00A0;but</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;binding-a}</span><span 
+class="cmtt-8">&#x00A0;binding-a</span><span 
 class="cmtt-8">&#x00A0;from</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;module-2}</span>
+class="cmtt-8">&#x00A0;module-2</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -229,11 +217,9 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;;;</span><span 
 class="cmtt-8">&#x00A0;only</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;binding-b}</span><span 
+class="cmtt-8">&#x00A0;binding-b</span><span 
 class="cmtt-8">&#x00A0;from</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;module-3}</span>
+class="cmtt-8">&#x00A0;module-3</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -254,8 +240,7 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;;;</span><span 
 class="cmtt-8">&#x00A0;all</span><span 
 class="cmtt-8">&#x00A0;of</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;module-4},</span><span 
+class="cmtt-8">&#x00A0;module-4,</span><span 
 class="cmtt-8">&#x00A0;but</span><span 
 class="cmtt-8">&#x00A0;exchange</span>
    <br /><span 
@@ -305,11 +290,9 @@ class="cmtt-8">&#x00A0;;;</span><span
 class="cmtt-8">&#x00A0;the</span><span 
 class="cmtt-8">&#x00A0;names</span><span 
 class="cmtt-8">&#x00A0;of</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;binding-c}</span><span 
+class="cmtt-8">&#x00A0;binding-c</span><span 
 class="cmtt-8">&#x00A0;and</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;binding-d}</span>
+class="cmtt-8">&#x00A0;binding-d</span>
    <br />
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -357,8 +340,7 @@ class="cmtt-8">&#x00A0;all</span><span
 class="cmtt-8">&#x00A0;of</span><span 
 class="cmtt-8">&#x00A0;the</span><span 
 class="cmtt-8">&#x00A0;module</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;syntax-module-1}</span>
+class="cmtt-8">&#x00A0;syntax-module-1</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -390,8 +372,7 @@ class="cmtt-8">&#x00A0;rename</span><span
 class="cmtt-8">&#x00A0;the</span><span 
 class="cmtt-8">&#x00A0;binding</span><span 
 class="cmtt-8">&#x00A0;of</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;syntax-a}</span>
+class="cmtt-8">&#x00A0;syntax-a</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -431,11 +412,9 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;;;</span><span 
 class="cmtt-8">&#x00A0;of</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;syntax-module-2}</span><span 
+class="cmtt-8">&#x00A0;syntax-module-2</span><span 
 class="cmtt-8">&#x00A0;as</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;syntax-b}</span>
+class="cmtt-8">&#x00A0;syntax-b</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -467,8 +446,7 @@ class="cmtt-8">&#x00A0;rename</span><span
 class="cmtt-8">&#x00A0;the</span><span 
 class="cmtt-8">&#x00A0;binding</span><span 
 class="cmtt-8">&#x00A0;of</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;syntax-c}</span>
+class="cmtt-8">&#x00A0;syntax-c</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -507,11 +485,9 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;;;</span><span 
 class="cmtt-8">&#x00A0;of</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;syntax-module-3}</span><span 
+class="cmtt-8">&#x00A0;syntax-module-3</span><span 
 class="cmtt-8">&#x00A0;as</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;syntax-a}</span>
+class="cmtt-8">&#x00A0;syntax-a</span>
    <br />
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -545,11 +521,9 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;;;</span><span 
 class="cmtt-8">&#x00A0;all</span><span 
 class="cmtt-8">&#x00A0;but</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;binding-e}</span><span 
+class="cmtt-8">&#x00A0;binding-e</span><span 
 class="cmtt-8">&#x00A0;from</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;module-5}</span>
+class="cmtt-8">&#x00A0;module-5</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -598,8 +572,7 @@ class="cmtt-8">&#x00A0;;;</span><span
 class="cmtt-8">&#x00A0;export</span><span 
 class="cmtt-8">&#x00A0;all</span><span 
 class="cmtt-8">&#x00A0;of</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;module-6}</span>
+class="cmtt-8">&#x00A0;module-6</span>
    <br />
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -718,8 +691,7 @@ class="cmtt-8">&#x00A0;;;</span><span
 class="cmtt-8">&#x00A0;the</span><span 
 class="cmtt-8">&#x00A0;imported</span><span 
 class="cmtt-8">&#x00A0;binding</span><span 
-class="cmtt-8">&#x00A0;{</span><span 
-class="cmtt-8">&#x00A0;binding-c}</span>
+class="cmtt-8">&#x00A0;binding-c</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;...)</span>
@@ -728,7 +700,7 @@ class="cmtt-8">&#x00A0;...)</span>
                                                                                                   
                                                                                                   
 </div><hr class="endfloat" />
-<!--l. 81--><p class="noindent" >The processing of a module definition uses three environments,
+<!--l. 76--><p class="noindent" >The processing of a module definition uses three environments,
 which are initially empty. These are the top-lexical, the external
 and the syntax environments of the module.
     </p><dl class="description"> <dt class="description">
@@ -753,7 +725,7 @@ class="description">The  external  environment  comprises  all  the
 class="cmbx-9">syntax:</span> </dt><dd 
 class="description">The   syntax   environment   comprises   all   the
     bindings available for the syntax expansion of the module.</dd></dl>
-<!--l. 101--><p class="noindent" >Each binding is a pair of a local-name and a module-name. It is a
+<!--l. 96--><p class="noindent" >Each binding is a pair of a local-name and a module-name. It is a
 violation if any two instances of local-name in any one of these
 environments have different module-names. This is called a name
 clash. These environments do not all need to exist at the same
@@ -761,29 +733,29 @@ time, but it is simpler for the purposes of definition to describe
 module processing as if they do.
 </p>
 <h4 class="sclauseHead"> 10.1 <a 
- id="x12-5100010.1"></a>Directives</h4> <a 
- id="dx12-51001"></a>
+ id="x12-5300010.1"></a>Directives</h4> <a 
+ id="dx12-53001"></a>
 The list of module directives is a sequence of keywords and forms,
 where the keywords indicate the interpretation of the forms (see
-Table&#x00A0;<a 
-href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). This representation allows for the addition of
-further keywords at other levels of the definition and also for
+syntax table&#x00A0;<a 
+href="#x12-5900010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). This representation allows for the addition
+of further keywords at other levels of the definition and also for
 implementation-defined keywords<a 
- id="dx12-51002"></a>. For the keywords given
-here, there is no defined order of appearance, nor is there
-any restriction on the number of times that a keyword can
-appear. Multiple occurrences of any of the directives defined
-here are treated as if there is a single directive whose form is
-the combination of each of the occurrences. This definition
-describes the processing of four keywords, which are now
-described in detail. The syntax of all the directives is given
-in Table&#x00A0;<a 
-href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a> and an example of their use appears in
+ id="dx12-53002"></a>. For the keywords given here,
+there is no defined order of appearance, nor is there any
+restriction on the number of times that a keyword can appear.
+Multiple occurrences of any of the directives defined here are
+treated as if there is a single directive whose form is the
+combination of each of the occurrences. This definition describes
+the processing of four keywords, which are now described in
+detail. The syntax of all the directives is given in syntax
+syntax table&#x00A0;<a 
+href="#x12-5900010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a> and an example of their use appears in
 example&#x00A0;<a 
-href="#x12-50008r1">1<!--tex4ht:ref: example:module --></a>.
+href="#x12-52007r1">1<!--tex4ht:ref: example:module --></a>.
 <h4 class="sclauseHead"> 10.2 <a 
- id="x12-5200010.2"></a>Export Directive</h4> <a 
- id="dx12-52001"></a>
+ id="x12-5400010.2"></a>Export Directive</h4> <a 
+ id="dx12-54001"></a>
 This is denoted by the keyword <span 
 class="cmtt-9">export </span>followed by a sequence of
 names of top-lexical bindings&#8212;these could be either locally-defined
@@ -793,122 +765,123 @@ the external environment of the module. A name clash can arise
 in the external environment from interaction with exposed
 modules.
 <h4 class="sclauseHead"> 10.3 <a 
- id="x12-5300010.3"></a>Import Directive</h4> <a 
- id="dx12-53001"></a>
+ id="x12-5500010.3"></a>Import Directive</h4> <a 
+ id="dx12-55001"></a>
 This is denoted by the keyword <span 
 class="cmtt-9">import </span>followed by a sequence of
 <span 
-class="cmti-9">module descriptor</span>s (see Table&#x00A0;<a 
-href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>), being module names or
-the filters <span 
+class="cmti-9">module descriptor</span>s (see syntax table&#x00A0;<a 
+href="#x12-5900010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>), being module
+names or the filters <span 
 class="cmtt-9">except</span>, <span 
 class="cmtt-9">only </span>and <span 
-class="cmtt-9">rename</span>. This sequence denotes the
-union of all the names generated by each element of the sequence.
-A filter can, in turn, be applied to a sequence of module
-descriptors, and so the effect of different kinds of filters can be   combined by nesting them. An import directive specifies either the
-  importation of a module in its entirety or the selective importation
-  of specified bindings from a module.
-  <!--l. 10--><p class="noindent" >The purpose of this directive is to specify the imported bindings
-  which constitute part of the top-lexical environment of a
-  module. These are the explicit run-time dependencies of the
-  module. Additional run-time dependencies may arise as a
-  result of syntax expansion. These are called implicit run-time
-  dependencies.
-  </p><!--l. 16--><p class="noindent" >In processing import directives, every name should be thought of
-  as a pair of a <span 
+class="cmtt-9">rename</span>. This sequence
+denotes the union of all the names generated by each element of
+the sequence. A filter can, in turn, be applied to a sequence of
+module descriptors, and so the effect of different kinds of filters canbe combined by nesting them. An import directive specifies either
+ the importation of a module in its entirety or the selective
+ importation of specified bindings from a module.
+ <!--l. 10--><p class="noindent" >The purpose of this directive is to specify the imported bindings
+ which constitute part of the top-lexical environment of a
+ module. These are the explicit run-time dependencies of the
+ module. Additional run-time dependencies may arise as a
+ result of syntax expansion. These are called implicit run-time
+ dependencies.
+ </p><!--l. 16--><p class="noindent" >In processing import directives, every name should be thought of
+ as a pair of a <span 
 class="cmti-9">module name </span>and a <span 
 class="cmti-9">local-name</span>. Intuitively, a
-  namelist of such pairs is generated by reference to the module
-  name and then filtered by <span 
+ namelist of such pairs is generated by reference to the module
+ name and then filtered by <span 
 class="cmtt-9">except</span>, <span 
 class="cmtt-9">only </span>and <span 
 class="cmtt-9">rename</span>. In an import
-  directive, when a namelist has been filtered, the names are
-  regarded as being defined in the top-lexical environment of the
-  module into which they have been imported. A name clash can
-  arise in the top-lexical environment from interaction between
-  different imported modules. Elements of an import directive are
-  interpreted as follows:
-        </p><dl class="description"> <dt class="description">
-        <span 
-class="cmtt-9">except:</span> </dt><dd 
-class="description">Filters the names from each <span 
-class="cmti-9">module descriptor</span>
-       discarding those specified and keeping all other names.
-        The  <span 
-class="cmtt-9">except </span>directive  is  convenient  when  almost  all  of
-        the names exported by a module are required, since it is
-        only necessary to name those few that are not wanted to
-        exclude them.
-        </dd> <dt class="description">
-        <span 
+ directive, when a namelist has been filtered, the names are
+ regarded as being defined in the top-lexical environment of the
+ module into which they have been imported. A name clash can
+ arise in the top-lexical environment from interaction between
+ different imported modules. Elements of an import directive are
+ interpreted as follows:
+    </p><dl class="description"> <dt class="description">
+    <span 
 class="cmbxti-10x-x-90">module name:</span> </dt><dd 
 class="description">All  the  exported  names  from  <span 
 class="cmti-9">module</span>
-       <span 
+    <span 
 class="cmti-9">name</span>.
-        </dd> <dt class="description">
-        <span 
+    </dd> <dt class="description">
+    <span 
+class="cmtt-9">except:</span> </dt><dd 
+class="description">Filters the names from each <span 
+class="cmti-9">module descriptor</span>
+    discarding those specified and keeping all other names.
+    The  <span 
+class="cmtt-9">except </span>directive  is  convenient  when  almost  all  of
+    the names exported by a module are required, since it is
+    only necessary to name those few that are not wanted to
+    exclude them.
+    </dd> <dt class="description">
+    <span 
 class="cmtt-9">only:</span> </dt><dd 
 class="description">Filters  the  names  from  each  <span 
 class="cmti-9">module  descriptor</span>
-       keeping only those names specified and discarding all other
-        names. The <span 
+    keeping only those names specified and discarding all other
+    names. The <span 
 class="cmtt-9">only </span>directive is convenient when only a few
-        names exported by a module are required, since it is only
-        necessary to name those that are wanted to include them.
-        </dd> <dt class="description">
-        <span 
+    names exported by a module are required, since it is only
+    necessary to name those that are wanted to include them.
+    </dd> <dt class="description">
+    <span 
 class="cmtt-9">rename:</span> </dt><dd 
 class="description">Filters the names from each <span 
 class="cmti-9">module descriptor</span>
-       replacing those with <span 
+    replacing those with <span 
 class="cmti-9">old-name </span>by <span 
 class="cmti-9">new-name</span>. Any name
-        not mentioned in the replacement list is passed unchanged.
-        Note that once a name has been replaced the new-name
-        is not compared against the replacement list again. Thus,
-        a binding can only be renamed once by a single <span 
+    not mentioned in the replacement list is passed unchanged.
+    Note that once a name has been replaced the new-name
+    is not compared against the replacement list again. Thus,
+    a binding can only be renamed once by a single <span 
 class="cmtt-9">rename</span>
-     directive. In consequence, name exchanges are possible.</dd></dl>
-  <!--l. 200--><p class="noindent" >
-  </p>
-  <h4 class="sclauseHead"> 10.4 <a 
- id="x12-5400010.4"></a>Expose Directive</h4> <a 
- id="dx12-54001"></a>
-  This is denoted by the keyword <span 
-class="cmtt-9">expose </span>followed by a list of
-  <span 
-class="cmti-9">module directive</span>s (see Table&#x00A0;<a 
-href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). The purpose of this
-  directive is to allow a module to export subsets of the external
-  environments of various modules without importing them itself.
-  Processing an expose directive employs the same model as for
-  imports, namely, a pair of a module-name and a local-name with
-  the same filtering operations. When the namelist has been
-  filtered, the names are added to the external environment
-  of the module begin processed. A name clash can arise in
-  the external environment from interaction with exports or
-  between different exposed modules. As an example of the use of
-  <span 
+    directive. In consequence, name exchanges are possible.</dd></dl>
+ <!--l. 195--><p class="noindent" >
+ </p>
+ <h4 class="sclauseHead"> 10.4 <a 
+ id="x12-5600010.4"></a>Expose Directive</h4> <a 
+ id="dx12-56001"></a>
+ This is denoted by the keyword <span 
+class="cmtt-9">expose </span>followed by a list of <span 
+class="cmti-9">module</span>
+ <span 
+class="cmti-9">directive</span>s (see syntax table&#x00A0;<a 
+href="#x12-5900010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>). The purpose of this
+ directive is to allow a module to export subsets of the external
+ environments of various modules without importing them itself.
+ Processing an expose directive employs the same model as for
+ imports, namely, a pair of a module-name and a local-name with
+ the same filtering operations. When the namelist has been
+ filtered, the names are added to the external environment
+ of the module begin processed. A name clash can arise in
+ the external environment from interaction with exports or
+ between different exposed modules. As an example of the use of
+ <span 
 class="cmtt-9">expose</span>, a possible implementation of the <span 
 class="cmtt-9">eulisp0</span><a 
- id="dx12-54002"></a> module
-  is shown in example&#x00A0;<a 
-href="#x12-54003r1">1<!--tex4ht:ref: example:exposes --></a>.          <a 
- id="x12-54004"></a><br /> <div align="center" class="caption"><table class="caption" 
+ id="dx12-56002"></a> module
+ is shown in example&#x00A0;<a 
+href="#x12-56003r1">1<!--tex4ht:ref: example:exposes --></a>.          <a 
+ id="x12-56004"></a><br /> <div align="center" class="caption"><table class="caption" 
 ><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;1: </td><td  
 class="content">module using
-  <span 
+ <span 
 class="cmtt-9">expose</span></td></tr></table></div>
     <div class="obeylines-v"> <span 
 class="cmtt-8">(defmodule</span><span 
 class="cmtt-8">&#x00A0;eulisp-level-0</span>
-     <br /><span 
+    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;(expose</span>
-     <br /><span 
+    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -935,42 +908,44 @@ class="cmtt-8">&#x00A0;</span><span
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;formatted-io</span><span 
 class="cmtt-8">&#x00A0;fixed-precision-integer</span><span 
-class="cmtt-8">&#x00A0;function</span><span 
-class="cmtt-8">&#x00A0;list</span>
+class="cmtt-8">&#x00A0;function</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;keyword</span><span 
+class="cmtt-8">&#x00A0;list</span><span 
 class="cmtt-8">&#x00A0;lock</span><span 
 class="cmtt-8">&#x00A0;number</span><span 
 class="cmtt-8">&#x00A0;object-0</span><span 
 class="cmtt-8">&#x00A0;stream</span><span 
-class="cmtt-8">&#x00A0;string</span><span 
-class="cmtt-8">&#x00A0;symbol</span><span 
-class="cmtt-8">&#x00A0;syntax-0</span>
+class="cmtt-8">&#x00A0;string</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
+class="cmtt-8">&#x00A0;symbol</span><span 
+class="cmtt-8">&#x00A0;syntax-0</span><span 
 class="cmtt-8">&#x00A0;table</span><span 
 class="cmtt-8">&#x00A0;thread</span><span 
 class="cmtt-8">&#x00A0;vector)))</span>
    <br /></div>
 <!--l. 30--><p class="noindent" >It is also meaningful for a module to include itself in an expose
 directive. In this way, it is possible to refer to all the bindings in
-the module being defined. This is convenient, in combination with
-<span 
-class="cmtt-9">except </span>(see Section&#x00A0;<a 
-href="#x12-5300010.3">10.3<!--tex4ht:ref: import --></a>), as a way of exporting all but a few
+the module being defined. This is convenient, in combination
+with <span 
+class="cmtt-9">except </span>(see <span 
+class="cmsy-9">§</span>&#x00A0;<a 
+href="#x12-5500010.3">10.3<!--tex4ht:ref: import --></a>), as a way of exporting all but a few
 bindings in a module, especially if syntax expansion creates
 additional bindings whose names are not known, but should be
 exported.
 </p>
 <h4 class="sclauseHead"> 10.5 <a 
- id="x12-5500010.5"></a>Syntax Directive</h4> <a 
- id="dx12-55001"></a>
+ id="x12-5700010.5"></a>Syntax Directive</h4> <a 
+ id="dx12-57001"></a>
 This directive is processed in the same way as an import directive,
 except that the bindings are added to the syntax environment.
 This environment is used in the second phase of module
@@ -981,10 +956,10 @@ syntax environment from interaction between different syntax
 modules.
 <!--l. 9--><p class="noindent" >It is important to note that special forms are considered part of the
 syntax and they may also be renamed.
-</p><!--l. 256--><p class="noindent" >
+</p><!--l. 251--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 10.6 <a 
- id="x12-5600010.6"></a>Definitions and Expressions</h4>
+ id="x12-5800010.6"></a>Definitions and Expressions</h4>
 Definitions in a module only contain unqualified names&#8212;that is,
 <span 
 class="cmti-9">local-name</span>s, using the above terminology. A top-lexical binding is
@@ -993,7 +968,7 @@ exported name from the module that created the binding. A name
 clash can arise in the top-lexical environment from interaction
 between local definitions and between local definitions and
 imported modules. Only top-lexical bindings created by <a 
-href="eulispcl16.html#x20-199008r6"><span 
+href="eulispcl16.html#x20-201008r6"><span 
 class="cmtt-9">deflocal</span></a>
 are mutable&#8212;both in the defining module and in any importing
 module. It is a violation to modify an immutable binding.
@@ -1002,23 +977,24 @@ in order of appearance at the end of the module definition process
 when the top-lexical environment is complete&#8212;that is after
 the creation and initialization of the top-lexical bindings.
 The exception to this is the <a 
-href="eulispcl16.html#x20-275004r7"><span 
+href="eulispcl16.html#x20-277004r7"><span 
 class="cmtt-9">progn</span></a> form, which is descended
 and the forms within it are treated as if the <a 
-href="eulispcl16.html#x20-275004r7"><span 
+href="eulispcl16.html#x20-277004r7"><span 
 class="cmtt-9">progn</span></a> were not
 present. Definitions may only appear either at top-level within a
 module definition or inside any number of <a 
-href="eulispcl16.html#x20-275004r7"><span 
+href="eulispcl16.html#x20-277004r7"><span 
 class="cmtt-9">progn</span></a> forms. This is
 specified more precisely in the grammar for a module given
 below.
 <h5 class="syntaxssclauseHead"> 10.6.0.3 <a 
- id="x12-5700010.6.0.3"></a><span 
+ id="x12-5900010.6.0.3"></a><span 
 class="cmbx-8">Syntax</span></h5><a 
- id="x12-57001"></a>                                      <!--l. 66--><p class="noindent" ><div class="framebox-c" 
+ id="x12-59001"></a>                                      <!--l. 66--><p class="noindent" ><div class="framebox-c" 
 style="width:27.14em;">    <div class="obeylines-v"> <span 
-class="cmtt-8">module</span>
+class="cmtt-8">module</span><span 
+class="cmtt-8">&#x00A0;syntax</span>
    <br /><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmtt-8">&#x00A0;</span><span 
@@ -1050,7 +1026,7 @@ class="cmtt-8">&#x00A0;identifier;</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl17.html#x21-83300017.17"><span 
+href="eulispcl17.html#x21-83500017.17"><span 
 class="cmr-8">17.17</span><!--tex4ht:ref: symbol --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -1125,7 +1101,7 @@ class="cmtt-8">&#x00A0;expression</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-19200016"><span 
+href="eulispcl16.html#x20-19400016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -1137,7 +1113,7 @@ class="cmtt-8">&#x00A0;form</span><span
 class="cmtt-8">&#x00A0;(*</span><span 
 class="cmtt-8">&#x00A0;</span><span 
 class="cmsy-8">§</span><a 
-href="eulispcl16.html#x20-19200016"><span 
+href="eulispcl16.html#x20-19400016"><span 
 class="cmr-8">16</span><!--tex4ht:ref: control-0 --></a> <span 
 class="cmtt-8">&#x00A0;*)</span>
    <br /><span 
@@ -1233,30 +1209,31 @@ class="cmtt-8">&#x00A0;identifier,</span><span
 class="cmtt-8">&#x00A0;identifier,</span><span 
 class="cmtt-8">&#x00A0;&#8217;)&#8217;;</span>
    <br /></div>                                                        </div>
- </p><!--l. 328--><p class="noindent" >
+ </p><!--l. 323--><p class="noindent" >
  </p>
  <h4 class="sclauseHead"> 10.7 <a 
- id="x12-5800010.7"></a>Module Processing</h4>
+ id="x12-6000010.7"></a>Module Processing</h4>
   The following steps summarize the module definition process:
         <dl class="description"> <dt class="description">
         <span 
 class="cmbx-9">directive processing:</span> </dt><dd 
 class="description">This  is  described  in  detail  in
-        Sections&#x00A0;<a 
-href="#x12-5100010.1">10.1<!--tex4ht:ref: directives --></a>&#8211;<a 
-href="#x12-5500010.5">10.5<!--tex4ht:ref: syntax-directive --></a>. This step creates and initializes the
+        <span 
+class="cmsy-9">§</span>&#x00A0;<a 
+href="#x12-5300010.1">10.1<!--tex4ht:ref: directives --></a>&#8211;<a 
+href="#x12-5700010.5">10.5<!--tex4ht:ref: syntax-directive --></a>.   This   step   creates   and   initializes   the
         top-lexical, syntax and external environments.
         </dd> <dt class="description">
         <span 
 class="cmbx-9">syntax expansion:</span> </dt><dd 
 class="description"><a 
- id="dx12-58001"></a> <a 
- id="dx12-58002"></a><a 
- id="dx12-58003"></a> <a 
- id="dx12-58004"></a>The body of the module is expanded
+ id="dx12-60001"></a> <a 
+ id="dx12-60002"></a><a 
+ id="dx12-60003"></a> <a 
+ id="dx12-60004"></a>The body of the module is expanded
         according to the operators defined in the syntax environment
         constructed from the syntax directive.       <a 
- id="x12-58005r1"></a>
+ id="x12-60005r1"></a>
         <div class="note">
         <span 
 class="cmr-8">NOTE</span><span 
@@ -1277,7 +1254,9 @@ class="cmr-8">such a way that the programmer need have no knowledge of the</span
         <span 
 class="cmr-8">expansion-time or run-time dependencies of the syntax defining</span>
         <span 
-class="cmr-8">module.</span></div>
+class="cmr-8">module. Currently syntax expansion is unhygienic to allow a</span>
+        <span 
+class="cmr-8">simple syntax for syntax macro definition.</span></div>
         </dd> <dt class="description">
         <span 
 class="cmbx-9">static analysis:</span> </dt><dd 
@@ -1288,7 +1267,7 @@ class="description">The expanded body of the module is
         violation, if a free identifier in an expression or defining form
         does not have a binding in the top-lexical environment.
         <a 
- id="x12-58006r2"></a>
+ id="x12-60006r2"></a>
         <div class="note">
         <span 
 class="cmr-8">NOTE</span><span 
@@ -1300,12 +1279,12 @@ class="cmr-8">added here, such as compilation.</span></div>
         <span 
 class="cmbx-9">initialization:</span> </dt><dd 
 class="description">The top-lexical bindings of the module
-        (created above) are initialized by evaluating the defining forms
                                                                                                   
                                                                                                   
+    (created above) are initialized by evaluating the defining forms
     in the body of the module in the order they appear.
     <a 
- id="x12-58007r3"></a>
+ id="x12-60007r3"></a>
     <div class="note">
     <span 
 class="cmr-8">NOTE</span><span 
@@ -1313,7 +1292,7 @@ class="cmr-8">&#x00A0;3</span>  <span
 class="cmr-8">In  this  sense,  a  module  can  be  regarded  as  a</span>
     <span 
 class="cmr-8">generalization of the </span><a 
-href="eulispcl16.html#x20-268003r4"><span 
+href="eulispcl16.html#x20-270003r4"><span 
 class="cmtt-8">labels</span></a> <span 
 class="cmr-8">form of this and other Lisp dialects.</span></div>
     </dd> <dt class="description">
@@ -1322,31 +1301,31 @@ class="cmbx-9">expression evaluation:</span> </dt><dd
 class="description">The expressions in the body of
     the module are evaluated in the order in which they
     appear.</dd></dl>
-<!--l. 381--><p class="noindent" >
+<!--l. 377--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 10.8 <a 
- id="x12-5900010.8"></a>Module Definition</h4> <a 
- id="dx12-59001"></a>
+ id="x12-6100010.8"></a>Module Definition</h4> <a 
+ id="dx12-61001"></a>
 <a 
- id="dx12-59002"></a><a 
- id="dx12-59003"></a>
+ id="dx12-61002"></a><a 
+ id="dx12-61003"></a>
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x12-59004r1"></a><span 
+ id="x12-61004r1"></a><span 
 class="cmbx-9">10.8.1   </span><span 
 class="cmtt-9">defmodule</span>
 <a 
- id="Q1-12-66"></a>
+ id="Q1-12-70"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">syntax </span></i></b></div><br /> <hr />
 <h5 class="syntaxssclauseHead"> 10.8.1.1 <a 
- id="x12-6000010.8.1.1"></a><span 
+ id="x12-6200010.8.1.1"></a><span 
 class="cmbx-8">Syntax</span></h5>
-<!--l. 4--><p class="noindent" >The syntax of a module and its constituents is defined in
-Table&#x00A0;<a 
-href="#x12-5700010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>.
+<!--l. 4--><p class="noindent" >The syntax of a module and its constituents is defined in syntax
+table&#x00A0;<a 
+href="#x12-5900010.6.0.3">10.6.0.3<!--tex4ht:ref: defmodule-syntax --></a>.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x12-6100010.8.1.1"></a><span 
+ id="x12-6300010.8.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
 <!--l. 8--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
@@ -1370,18 +1349,18 @@ class="arguments">
 <!--l. 16--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x12-6200010.8.1.1"></a><span 
+ id="x12-6400010.8.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 17--><p class="noindent" >The <a 
-href="#x12-59004r1"><span 
+href="#x12-61004r1"><span 
 class="cmtt-9">defmodule</span></a> form defines a module named by <span 
 class="cmti-9">module name </span>and
 associates the name <span 
 class="cmti-9">module name </span>with a module object in the
 module binding environment<a 
- id="dx12-62001"></a><a 
- id="dx12-62002"></a>.       <a 
- id="x12-62003r1"></a>
+ id="dx12-64001"></a><a 
+ id="dx12-64002"></a>.       <a 
+ id="x12-64003r1"></a>
 </p><div class="note">
 <span 
 class="cmr-8">NOTE</span><span 
@@ -1389,13 +1368,13 @@ class="cmr-8">&#x00A0;1</span>  <span
 class="cmr-8">Intentionally, nothing is defined about any relationship</span>
 <span 
 class="cmr-8">between modules and files.</span></div>
-<!--l. 26--><p class="noindent" >
-</p>                                                   <h5 class="likesyntaxssclauseHead"><a 
- id="x12-6300010.8.1.1"></a> <span 
+<!--l. 26--><p class="noindent" >                                                   </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x12-6500010.8.1.1"></a> <span 
 class="cmbx-8">Examples</span></h5>
   <!--l. 27--><p class="noindent" >An example module definition with explanatory comments is given
   in example&#x00A0;<a 
-href="#x12-50008r1">1<!--tex4ht:ref: example:module --></a>.
+href="#x12-52007r1">1<!--tex4ht:ref: example:module --></a>.
   </p><!--l. 109--><p class="noindent" >
                                                                                                   
                                                                                                   

@@ -97,23 +97,23 @@ with the facilities defined for the function {\tt fprintf} in ISO/IEC
 
     \item[{\tt\textasciitilde b} binary]%
     the argument must be an integer and is output in binary notation
-    (Table~\ref{integer-syntax}).
+    (syntax table~\ref{integer-syntax}).
 
     \item[{\tt\textasciitilde c} character]%
     the argument must be a character and is output using \functionref{write}
-    (Table~\ref{character-syntax}).
+    (syntax table~\ref{character-syntax}).
 
     \item[{\tt\textasciitilde d} decimal]%
     the argument must be an integer and is output using \functionref{write}
-    (Table~\ref{integer-syntax}).
+    (syntax table~\ref{integer-syntax}).
 
     \item[{\tt\textasciitilde}\optional{{\em m}}\optional{{\tt.}{\em n}}{\tt e}
     exponential-format floating-point]%
     the argument must be a floating point number.  It is output in the style
     \mbox{\em\optional{-}d.ddd{\tt{e}}$\pm$dd}, in a field of width {\em m\/}
     characters, where there are {\em n\/} precision digits after the decimal
-    point, or 6 digits, if {\em n\/} is not specified
-    (Table~\ref{float-syntax}).  If the value to be output has fewer characters
+    point, or 6 digits, if {\em n\/} is not specified (syntax
+    table~\ref{float-syntax}).  If the value to be output has fewer characters
     than {\em m\/} it is padded on the left with spaces.
 
     \item[{\tt\textasciitilde}\optional{{\em m}}\optional{{\tt.}{\em n}}{\tt f}
@@ -121,26 +121,28 @@ with the facilities defined for the function {\tt fprintf} in ISO/IEC
     the argument must be a floating point number.  It is output in the style
     \mbox{\em\optional{-}ddd.ddd}, in a field of width {\em m\/} characters,
     where the are {\em n\/} precision digits after the decimal point, or 6
-    digits, if {\em n\/} is not specified (Table~\ref{float-syntax}).  The value
-    is rounded to the appropriate number of digits.  If the value to be output
-    has fewer characters than {\em m\/} it is padded on the left with spaces.
+    digits, if {\em n\/} is not specified (syntax table~\ref{float-syntax}).
+    The value is rounded to the appropriate number of digits.  If the value to
+    be output has fewer characters than {\em m\/} it is padded on the left with
+    spaces.
 
     \item[{\tt\textasciitilde}\optional{{\em m}}\optional{{\tt.}{\em n}}{\tt g}
     generalized floating-point]%
     the argument must be a floating point number.  It is output in either
     fixed-format or exponential notation as appropriate
-    (Table~\ref{float-syntax}).
+    (syntax table~\ref{float-syntax}).
 
     \item[{\tt\textasciitilde o} octal]%
     the argument must be an integer and is output in octal notation
-    (Table~\ref{integer-syntax}).
+    (syntax table~\ref{integer-syntax}).
 
     \item[{\tt\textasciitilde}{\em n}{\tt r} radix]%
     the argument must be an integer and is output in radix {\em n\/} notation
-    (Table~\ref{integer-syntax}).
+    (syntax table~\ref{integer-syntax}).
 
     \item[{\tt\textasciitilde s} s-expression]%
-    uses \functionref{write} to output the argument (Table~\ref{object-syntax}).
+    uses \functionref{write} to output the argument (syntax
+    table~\ref{object-syntax}).
 
     \item[{\tt\textasciitilde}\optional{\em{n}}\true\/ tab]%
     output sufficient spaces to reach the next tab-stop, if {\em n\/} is not
@@ -148,7 +150,7 @@ with the facilities defined for the function {\tt fprintf} in ISO/IEC
 
     \item[{\tt\textasciitilde x} hexadecimal]%
     the argument must be an integer and is output in hexadecimal notation
-    (Table~\ref{integer-syntax}).
+    (syntax table~\ref{integer-syntax}).
 
     \item[{\tt\textasciitilde \%} newline]%
     output a \verb+\#newline+ character using {\tt newline}.

@@ -105,7 +105,7 @@ the external representations defined in other sections of this definition (see
 \classref{symbol}\ (\ref{symbol}) and
 \classref{vector}\ (\ref{vector}), as well as instances of \classref{cons}\
 itself.  The syntax for the external representation of pairs and lists
-is defined in Table~\ref{pair-syntax}.
+is defined in syntax table~\ref{pair-syntax}.
 
 \Syntax
 \label{pair-syntax}
@@ -147,7 +147,7 @@ and \functionref{cdr}.  The major use of pairs is in the construction of
 (proper) lists.  A (proper) list\index{general}{list} is defined as either the
 empty list (denoted by \nil) or a pair whose \functionref{cdr} is a proper list.
 An improper list is one containing a \functionref{cdr} which is not a list (see
-Table~\ref{pair-syntax}).
+syntax table~\ref{pair-syntax}).
 
 It is an error to apply \functionref{car} or \functionref{cdr} or their
 \functionref{setter} functions to anything other than a pair.  The empty list is

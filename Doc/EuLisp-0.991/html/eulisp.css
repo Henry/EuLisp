@@ -17,6 +17,7 @@
 .cmsy-6{font-size:60%;}
 .cmr-8{font-size:80%;}
 .cmti-9{font-size:90%; font-style: italic;}
+.cmbsy-9{font-size:90%;font-weight: bold;}
 .cmtt-8{font-size:80%;font-family: monospace;}
 .cmtt-8{font-family: monospace;}
 .cmtt-8{font-family: monospace;}
@@ -119,6 +120,7 @@ table.pmatrix {width:100%;}
 span.bar-css {text-decoration:overline;}
 img.cdots{vertical-align:middle;}
 a {text-decoration:none}
+.tabbing-right {text-align:right;}
 .framebox-c, .framebox-l, .framebox-r { padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
 .framebox-c {text-align:left;}
 .framebox-l {text-align:left;}

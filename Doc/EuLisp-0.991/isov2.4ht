@@ -45,6 +45,39 @@
         {\ignorespaces #3}}%
 }
 
+% Debugged version of the tabbing environment.
+% style="width:..." should specify the type of the width,
+% in this case pixels (px).
+\Configure{tabbing}[1.5]{%
+    \ifvmode \IgnorePar\fi\EndP \leavevmode\ht:special{t4ht=<table
+        \Hnewline\:zbsp{tabbing}><tr \Hnewline style="vertical-align:baseline;"
+        class="tabbing">}}
+{\ht:special{t4ht=</tr></table>}\ShowPar \csname par\endcsname
+    \Configure{HtmlPar}
+    {\EndP\HCode{<!--l.9 \the\inputlineno-->%
+            <p \csname a:!P\endcsname
+            class="no\ifHCond par\else indent\fi" \a:LRdir>}}
+    {\EndP\HCode{<!--l.10 \the\inputlineno-->%
+    }}
+    {\:xhtml{\Tg</p>}}%
+    %
+}
+{\ht:special{t4ht=<td \ifx \TabWidth\empty \else
+        style="width:\TabWidth px;"\fi \Hnewline
+        class="tabbing\ifx \`\TabType -right\fi">}}
+{\ht:special{t4ht=</td>}}
+\ConfigureEnv{tabbing}{\IgnorePar\EndP}{}{}{}
+\Css{.tabbing-right {text-align:right;}}
+
+\:CheckOption{pic-tabbing'} \if:Option
+\:CheckOption{pic-tabbing'} \if:Option
+\edef\:temp{\LikeRef{.}}%
+\def\:tempa{.}\ifx \:temp\:tempa
+\ConfigureEnv{tabbing}{\Picture*{}}{\EndPicture}{}{}
+\fi
+\fi
+\fi
+
 \Configure{framebox}
   {\HCode{<div class="framebox-\frameboxAlign"\Hnewline
           style="width:\frameboxWidth;">}}

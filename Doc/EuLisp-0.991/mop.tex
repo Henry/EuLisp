@@ -59,30 +59,33 @@ metaobject is:
     \item The writer, which is a function to write the corresponding slot of an
     instance.
     \item The initarg, which is a symbol to access the value which can be
-    supplied to a \functionref{make} call in order to initialize the corresponding slot
-    in a newly created object.
+    supplied to a \functionref{make} call in order to initialize the
+    corresponding slot in a newly created object.
 \end{enumerate}
 %
 The metaobject classes defined for slot descriptions at level-1 are shown in
-Table~\ref{level-1-class-hierarchy}.
+table~\ref{level-1-class-hierarchy}.
 %
-\begin{figure}
+\begin{table}
 \caption{Level-1 class hierarchy}
 \label{level-1-class-hierarchy}
-{\tt%
-\classref{class} \\
-%not in youtoo \tts\classref{built-in-class} \\
-\tts\classref{simple-class} \\
-\tts\classref{function-class}  \\
-\classref{slot} \\
-\tts\classref{local-slot} \\
-\classref{function} \\
-\tts\classref{generic-function} \\
-\tts\tts\classref{simple-generic-function} \\
-\classref{method} \\
-\tts\classref{simple-method}%
-}%
-\end{figure}
+{\tt
+\begin{tabbing}
+    00\=00\=00\=00\= \kill
+    \classref{class} \\
+    % not in youtoo \>\classref{built-in-class} \\
+    \>\classref{simple-class} \\
+    \>\classref{function-class}  \\
+    \classref{slot} \\
+    \>\classref{local-slot} \\
+    \classref{function} \\
+    \>\classref{generic-function} \\
+    \>\>\classref{simple-generic-function} \\
+    \classref{method} \\
+    \>\classref{simple-method}
+\end{tabbing}
+}
+\end{table}
 
 \function{class-precedence-list}
 %
@@ -299,12 +302,12 @@ The minimal information associated with a method metaobject is:
 \begin{enumerate}
     \item The domain, which is a list of classes.
     \item The function comprising the code of the method.
-    \item The generic function to which the method has been added, or \nil\/ if it
-    is attached to no generic function.
+    \item The generic function to which the method has been added, or \nil\/ if
+    it is attached to no generic function.
 \end{enumerate}
 %
 The metaobject classes for generic functions defined at level-1 are
-shown in Table~\ref{level-1-class-hierarchy}.
+shown in table~\ref{level-1-class-hierarchy}.
 
 \function{method-domain}
 %
@@ -356,7 +359,8 @@ This function returns the generic function to which {\em method} is attached; if
 %
 \begin{specargs}
     \item[class, \classref{class}] A class.
-    \item[initlist, \classref{list}] A list of initialization options as follows:
+    \item[initlist, \classref{list}] A list of initialization options as
+    follows:
 
     \begin{options}
         \item[name, symbol] Name of the class being initialized.
@@ -436,88 +440,87 @@ cl <effective-slotds> <inherited-slotds> -> list(slotd)
       cl slotd <effective-slotds> -> function
 \end{verbatim}
 \end{optPrivate}
-
-\begin{figure}
-\caption{Initialization Call Structure}
-\label{call-structure}
-\framebox[\linewidth]
-{
-\begin{tabular*}{\linewidth}{l}
+%
+\begin{table}%
+\caption{Initialization Call Structure}%
+\label{call-structure}%
+\tt%
+\begin{tabbing}%
+    00\=00\=00\=00\=00\=00\=00\=00\= \kill
     {\tt compatible-superclasses-p}\\
-    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    \>\>\>\>{\em cl direct-superclasses\/}
     $\rightarrow$ {\em boolean}\\
-    \tts{\tt compatible-superclass-p}\\
-    \tts\tts\tts\tts\tts {\em cl superclass\/}
+    \>{\tt compatible-superclass-p}\\
+    \>\>\>\>\> {\em cl superclass\/}
     $\rightarrow$ {\em boolean}\\
-    \hline
+    %\hline
     {\tt compute-class-precedence-list}\\
-    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    \>\>\>\>{\em cl direct-superclasses\/}
     $\rightarrow$ ({\em cl\/}$^*$)\\
-    \hline
+    %\hline
     {\tt compute-inherited-initargs}\\
-    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    \>\>\>\>{\em cl direct-superclasses\/}
     $\rightarrow$ (({\em initarg\/}$^*$)$^*$)\\
-    \hline
+    %\hline
     {\tt compute-initargs}\\
-    \tts\tts\tts\tts{\em cl direct-initargs inherited-initargs\/}
-    $\rightarrow$ ({\em initarg\/}$^*$)\\
-    \hline
+    \>\>\>\>{\em cl direct-initargs inherited-initargs\/}\\
+    \>\>\>\>$\rightarrow$ ({\em initarg\/}$^*$)\\
+    %\hline
     {\tt compute-inherited-slots}\\
-    \tts\tts\tts\tts{\em cl direct-superclasses\/}
+    \>\>\>\>{\em cl direct-superclasses\/}
     $\rightarrow$ (({\em sd\/}$^*$)$^*$)\\
-    \hline
+    %\hline
     {\tt compute-slots}\\
-    \tts\tts\tts\tts{\em cl slot-specs inherited-sds\/}
+    \>\>\>\>{\em cl slot-specs inherited-sds\/}
     $\rightarrow$ ({\em sd\/}$^*$)\\
-    \tts{\em either}\\
-    \tts\tts{\tt compute-defined-slot}\\
-    \tts\tts\tts\tts\tts\tts{\em cl slot-spec\/}
+    \>{\em either}\\
+    \>\>{\tt compute-defined-slot}\\
+    \>\>\>\>\>\>{\em cl slot-spec\/}
     $\rightarrow$ {\em sd}\\
-    \tts\tts\tts{\tt compute-defined-slot-description-class}\\
-    \tts\tts\tts\tts\tts\tts\tts{\em cl slot-spec\/}
+    \>\>\>{\tt compute-defined-slot-description-class}\\
+    \>\>\>\>\>\>\>{\em cl slot-spec\/}
     $\rightarrow$ {\em sd-class}\\
-    \tts{\em or}\\
-    \tts\tts{\tt compute-specialized-slot}\\
-    \tts\tts\tts\tts\tts\tts{\em cl inherited-sds slot-spec\/}
+    \>{\em or}\\
+    \>\>{\tt compute-specialized-slot}\\
+    \>\>\>\>\>\>{\em cl inherited-sds slot-spec\/}
     $\rightarrow$ {\em sd}\\
-    \tts\tts\tts{\tt compute-specialized-slot-class}\\
-    \tts\tts\tts\tts\tts\tts\tts{\em cl inherited-sds slot-spec\/}
-    $\rightarrow$ {\em sd-class}\\
-    \hline
+    \>\>\>{\tt compute-specialized-slot-class}\\
+    \>\>\>\>\>\>\>{\em cl inherited-sds slot-spec\/}\\
+    \>\>\>\>\>\>\>$\rightarrow$ {\em sd-class}\\
+    %\hline
     {\tt compute-instance-size}\\
-    \tts\tts\tts\tts{\em cl effective-sds\/}
+    \>\>\>\>{\em cl effective-sds\/}
     $\rightarrow$ {\em integer}\\
-    \hline
+    %\hline
     {\tt compute-and-ensure-slot-accessors}\\
-    \tts\tts\tts\tts{\em cl effective-sds inherited-sds\/}
+    \>\>\>\>{\em cl effective-sds inherited-sds\/}
     $\rightarrow$ ({\em sd\/}$^*$)\\
-    \tts{\tt compute-slot-reader}\\
-    \tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
+    \>{\tt compute-slot-reader}\\
+    \>\>\>\>\>{\em cl sd effective-sds\/}
     $\rightarrow$ {\em function}\\
-    \tts{\tt compute-slot-writer}\\
-    \tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
+    \>{\tt compute-slot-writer}\\
+    \>\>\>\>\>{\em cl sd effective-sds\/}
     $\rightarrow$ {\em function}\\
-    \tts{\tt ensure-slot-reader}\\
-    \tts\tts\tts\tts\tts{\em cl sd effective-sds reader\/}
+    \>{\tt ensure-slot-reader}\\
+    \>\>\>\>\>{\em cl sd effective-sds reader\/}
     $\rightarrow$ {\em function}\\
-    \tts\tts{\tt compute-primitive-reader-using-slot}\\
-    \tts\tts\tts\tts\tts\tts{\em sd cl effective-sds\/}
+    \>\>{\tt compute-primitive-reader-using-slot}\\
+    \>\>\>\>\>\>{\em sd cl effective-sds\/}
     $\rightarrow$ {\em function}\\
-    \tts\tts\tts{\tt compute-primitive-reader-using-class}\\
-    \tts\tts\tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
+    \>\>\>{\tt compute-primitive-reader-using-class}\\
+    \>\>\>\>\>\>\>{\em cl sd effective-sds\/}
     $\rightarrow$ {\em function}\\
-    \tts{\tt ensure-slot-writer}\\
-    \tts\tts\tts\tts\tts{\em cl sd effective-sds writer\/}
+    \>{\tt ensure-slot-writer}\\
+    \>\>\>\>\>{\em cl sd effective-sds writer\/}
     $\rightarrow$ {\em function}\\
-    \tts\tts{\tt compute-primitive-writer-using-slot}\\
-    \tts\tts\tts\tts\tts\tts{\em sd cl effective-sds\/}
+    \>\>{\tt compute-primitive-writer-using-slot}\\
+    \>\>\>\>\>\>{\em sd cl effective-sds\/}
     $\rightarrow$ {\em function}\\
-    \tts\tts\tts{\tt compute-primitive-writer-using-class}\\
-    \tts\tts\tts\tts\tts\tts\tts{\em cl sd effective-sds\/}
-    $\rightarrow$ {\em function}
-\end{tabular*}
-}
-\end{figure}
+    \>\>\>{\tt compute-primitive-writer-using-class}\\
+    \>\>\>\>\>\>\>{\em cl sd effective-sds\/}
+    $\rightarrow$ {\em function}%
+\end{tabbing}%
+\end{table}%
 %
 Note that \genericref{compute-initargs} is called by the default
 \genericref{initialize} method with all direct initargs as the second argument:
@@ -604,7 +607,8 @@ argument.  The initlist is not used by this \genericref{allocate} method.
 %
 \begin{specargs}
     \item[slot, \classref{slot}] A slot description.
-    \item[initlist, \classref{list}] A list of initialization options as follows:
+    \item[initlist, \classref{list}] A list of initialization options as
+    follows:
     \begin{options}
         \item[name, symbol] The name of the slot.
         \item[initfunction, function] A function.
@@ -629,7 +633,8 @@ The initialized slot description.
 \begin{specargs}
     \item[gf, \classref{generic-function}] A generic function.
 
-    \item[initlist, \classref{list}] A list of initialization options as follows:
+    \item[initlist, \classref{list}] A list of initialization options as
+    follows:
     \begin{options}
         \item[name, symbol] The name of the generic function.
         \item[domain, list] List of argument classes.
@@ -674,7 +679,8 @@ The basic call structure is:
 \begin{specargs}
     \item[method, \classref{method}] A method.
 
-    \item[initlist, \classref{list}] A list of initialization options as follows:
+    \item[initlist, \classref{list}] A list of initialization options as
+    follows:
     \begin{options}
         \item[domain, list] The list of argument classes.
         % \item[range, class] The class of the result.
@@ -685,9 +691,9 @@ The basic call structure is:
 \end{specargs}
 %
 \result%
-This method returns the initialized method metaobject {\em method}.  If
-the {\em generic-function\/} option is supplied, \genericref{add-method} is called
-to install the new method in the {\em generic-function}.
+This method returns the initialized method metaobject {\em method}.  If the {\em
+    generic-function\/} option is supplied, \genericref{add-method} is called to
+install the new method in the {\em generic-function}.
 %
 \end{optDefinition}
 
@@ -809,7 +815,8 @@ direct-superclasses} has been supplied, the result is the list of two elements:
 %
 \begin{genericargs}
     \item[class, \classref{class}] Class being defined.
-    \item[direct-slot-specifications, \classref{list}] A list of direct slot specification.
+    \item[direct-slot-specifications, \classref{list}] A list of direct slot
+    specification.
     \item[inherited-slots, \classref{list}] A list of lists of inherited slot
     descriptions.
 \end{genericargs}
@@ -865,7 +872,8 @@ subclasses and minimizing the access time to an indexed reference.
 \begin{genericargs}
     \item[class, \classref{class}] Class being defined.
     \item[initargs, \classref{list}] List of direct initargs.
-    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited initargs.
+    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited
+    initargs.
 \end{genericargs}
 %
 \result%
@@ -882,7 +890,8 @@ Computes and returns all legal initargs for {\em class}.
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
     \item[initargs, \classref{list}] List of direct initargs.
-    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited initargs.
+    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited
+    initargs.
 \end{specargs}
 %
 \result%
@@ -1157,11 +1166,11 @@ inherited one. If the slot description is new,
     % \item computes the slot position in an instance
     % calling \genericref{compute-slot-position}, and stores the result;
 
-    \item calls \genericref{compute-slot-reader} to compute a new slot reader and
-    stores the result in the slot description;
+    \item calls \genericref{compute-slot-reader} to compute a new slot reader
+    and stores the result in the slot description;
 
-    \item calls \genericref{compute-slot-writer} to compute a new slot writer and
-    stores the result in the slot description;
+    \item calls \genericref{compute-slot-writer} to compute a new slot writer
+    and stores the result in the slot description;
 \end{enumerate}
 %
 Otherwise, it assumes that the inherited values remain valid.
@@ -1271,8 +1280,11 @@ generic-function}. If not, it creates and adds a new one, otherwise it
 assumes that the existing method works correctly. The domain
 of the new method is {\em class} and the function is
 {\tt
-(method-function-lambda ((object {\em class}))\\
-\tts(primitive-reader object))
+\begin{tabbing}
+    00\=00\=00\=00\= \kill
+    (method-function-lambda ((object {\em class}))\\
+    \>(primitive-reader object))
+\end{tabbing}
 }
 \genericref{compute-primitive-reader-using-slot} is called by
 \genericref{ensure-slot-reader} method to compute the primitive reader used
@@ -1316,9 +1328,12 @@ the new method is {\em class} $\times$ \classref{object} and the
 function is:
 %
 {\tt
-(method-function-lambda ((obj {\em class})\\
-\tts\tts(new-value \classref{object}))\\
-\tts(primitive-writer obj new-value))
+\begin{tabbing}
+    00\=00\=00\=00\= \kill%
+    (method-function-lambda ((obj {\em class})\\
+    \>\>(new-value \classref{object}))\\
+    \>(primitive-writer obj new-value))
+\end{tabbing}
 }
 %
 \genericref{compute-primitive-writer-using-slot} is called by

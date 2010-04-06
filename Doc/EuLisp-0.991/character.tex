@@ -14,14 +14,15 @@ Character literals\index{general}{literal!character} are denoted by the {\em
     character-extension\/}\index{general}{character!character-extension glyph}
 glyph, called {\em reverse solidus\/} (\verb+\+), followed by the name of the
 character.  The syntax for the external representation of characters is defined
-in Table~\ref{character-syntax}.  For most characters, their name is the same as
-the glyph associated with the character, for example: the character ``a'' has
-the name ``a'' and has the external representation \verb+#\a+.  Certain
-characters in the group named {\em special\/} (see Table~\ref{character-set} and
-also Table~\ref{character-syntax}) have symbolic names, for example: the newline
-character has the name {\em newline\/} and has the external representation
-\verb+#\newline+.  These special cases are the characters in the production {\em
-    special character token} in Table~\ref{character-syntax}.
+in syntax table~\ref{character-syntax}.  For most characters, their name is the
+same as the glyph associated with the character, for example: the character
+``a'' has the name ``a'' and has the external representation \verb+#\a+.
+Certain characters in the group named {\em special\/} (see
+table~\ref{character-set} and also syntax table~\ref{character-syntax}) have
+symbolic names, for example: the newline character has the name {\em newline\/}
+and has the external representation \verb+#\newline+.  These special cases are
+the characters in the production {\em special character token} in syntax
+table~\ref{character-syntax}.
 %
 \Syntax
 \label{character-syntax}
@@ -85,7 +86,7 @@ character literals are \verb+#\x0+ and \verb+#\xabcd+, which denote,
 respectively, the characters at position 0 and at position 43981 in the
 character set current at the time of reading or writing.  The syntax for the
 external representation of characters is defined in
-Table~\ref{character-syntax}.
+syntax table~\ref{character-syntax}.
 %
 \begin{note}
     This text refers to the ``current character set'' but defines no means of

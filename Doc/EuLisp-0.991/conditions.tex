@@ -43,7 +43,7 @@ These two categories are characterized as follows:
 \end{enumerate}
 %
 A condition class is defined using \defformref{defcondition} (see
-Section~\ref{defcondition}).  The definition of a condition causes the
+\S~\ref{defcondition}).  The definition of a condition causes the
 creation of a new class of condition.  A condition is signalled using
 the function \functionref{signal}, which has two required arguments and one
 optional argument: an instance of a condition, a resume continuation
@@ -51,39 +51,43 @@ or the empty list---the latter signifying a non-continuable signal---and a
 thread.  A condition can be handled using the special form {\tt
 with-handler}, which takes a function---the handler function---and a
 sequence of forms to be protected.  The initial condition class
-hierarchy is shown in Table~\ref{condition-class-hierarchy}.
+hierarchy is shown in table~\ref{condition-class-hierarchy}.
 %
-\begin{table}
-\caption{Condition class hierarchy}
-\label{condition-class-hierarchy}
-{\tt
-    \classref{condition}\\
-    \tts\conditionref{general-condition}\\
-    \tts\tts\conditionref{invalid-operator}\\
-    \tts\tts\conditionref{cannot-update-setter}\\
-    \tts\tts\conditionref{no-setter}\\
-    \tts\conditionref{environment-condition}\\
-    \tts\conditionref{arithmetic-condition}\\
-    \tts\tts \conditionref{division-by-zero}\\
-    \tts\conditionref{conversion-condition}\\
-    \tts\tts\conditionref{no-converter}\\
-    \tts\conditionref{stream-condition}\\
-    \tts\tts\conditionref{end-of-stream}\\
-    \tts\conditionref{read-error}\\
-    \tts\conditionref{thread-condition}\\
-    \tts\tts\conditionref{thread-already-started}\\
-    \tts\tts\conditionref{wrong-thread-continuation}\\
-    \tts\tts\conditionref{wrong-condition-class}\\
-    \tts\conditionref{generic-function-condition}\\
-    \tts\tts\conditionref{no-next-method}\\
-    \tts\tts\conditionref{non-congruent-lambda-lists}\\
-    \tts\tts\conditionref{incompatible-method-domain}\\
-    \tts\tts\conditionref{no-applicable-method}\\
-    \tts\tts\conditionref{method-domain-clash}\\
+\begin{table}%
+\caption{Condition class hierarchy}%
+\label{condition-class-hierarchy}%
+{\tt%
+    \begin{tabbing}%
+    00\=00\=00\=00\= \kill%
+    \classref{condition} \\
+    \>\conditionref{general-condition} \\
+    \>\>\conditionref{invalid-operator} \\
+    \>\>\conditionref{cannot-update-setter} \\
+    \>\>\conditionref{no-setter} \\
+    \>\conditionref{environment-condition} \\
+    \>\conditionref{arithmetic-condition} \\
+    \>\> \conditionref{division-by-zero} \\
+    \>\conditionref{conversion-condition} \\
+    \>\>\conditionref{no-converter} \\
+    \>\conditionref{stream-condition} \\
+    \>\>\conditionref{end-of-stream} \\
+    \>\conditionref{read-error} \\
+    \>\conditionref{thread-condition} \\
+    \>\>\conditionref{thread-already-started} \\
+    \>\>\conditionref{wrong-thread-continuation} \\
+    \>\>\conditionref{wrong-condition-class} \\
+    \>\conditionref{generic-function-condition} \\
+    \>\>\conditionref{no-next-method} \\
+    \>\>\conditionref{non-congruent-lambda-lists} \\
+    \>\>\conditionref{incompatible-method-domain} \\
+    \>\>\conditionref{no-applicable-method} \\
+    \>\>\conditionref{method-domain-clash}
+\end{tabbing}%
 }%
 \end{table}
-\end{optDefinition}
 %
+\end{optDefinition}
+
 \clause{Condition Classes}
 
 \begin{optDefinition}
