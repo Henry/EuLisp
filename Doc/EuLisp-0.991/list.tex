@@ -41,7 +41,7 @@ parenthesis.  The empty list is also used to denote the boolean value
 \derivedclass{null}{list}
 \index{general}{level-0 classes!\theclass{null}}
 
-The class whose only instance is the empty list, denoted \nil.
+The class whose only instance is the empty list, denoted \nil{}.
 
 \function{null}
 %
@@ -50,7 +50,7 @@ The class whose only instance is the empty list, denoted \nil.
 \end{arguments}
 %
 \result%
-Returns \true\/ if {\em object} is the empty list, otherwise \nil.
+Returns \true\/ if {\em object} is the empty list, otherwise \nil{}.
 
 \method{generic-prin}
 %
@@ -127,8 +127,8 @@ improper list
 %
 \examples
 \begin{tabular}{ll}
-    \nil & the empty list\\
-    {\tt (1)} & a list whose \functionref{car} is {\tt 1} and \functionref{cdr} is \nil\\
+    \nil{} & the empty list\\
+    {\tt (1)} & a list whose \functionref{car} is {\tt 1} and \functionref{cdr} is \nil{}\\
     {\tt (1 . 2)} & a pair whose \functionref{car} is {\tt 1} and \functionref{cdr} is
     {\tt 2}\\
     {\tt (1 2)} & a list whose \functionref{car} is {\tt 1} and \functionref{cdr} is {\tt
@@ -145,7 +145,7 @@ The class of all instances of \classref{cons}.  An instance of the class
 \functionref{cons} and the slots are accessed by the functions \functionref{car}
 and \functionref{cdr}.  The major use of pairs is in the construction of
 (proper) lists.  A (proper) list\index{general}{list} is defined as either the
-empty list (denoted by \nil) or a pair whose \functionref{cdr} is a proper list.
+empty list (denoted by \nil{}) or a pair whose \functionref{cdr} is a proper list.
 An improper list is one containing a \functionref{cdr} which is not a list (see
 syntax table~\ref{pair-syntax}).
 
@@ -160,7 +160,7 @@ not a pair and {\tt (car ())} or {\tt (cdr ())} is an error.
 \end{arguments}
 %
 \result%
-Returns {\em object\/} if it is a pair, otherwise \nil.
+Returns {\em object\/} if it is a pair, otherwise \nil{}.
 
 \function{atom}
 %
@@ -169,7 +169,7 @@ Returns {\em object\/} if it is a pair, otherwise \nil.
 \end{arguments}
 %
 \result%
-Returns {\em object\/} if it is not a pair, otherwise \nil.
+Returns {\em object\/} if it is not a pair, otherwise \nil{}.
 
 \function{cons}
 %

@@ -11,13 +11,13 @@
 %
 \begin{optDefinition}
 %
-The defined name of this module is {\tt collection}.  A {\em collection\/}
-is defined as an instance of one of \classref{list}, \classref{string}, \classref{vector},
-\classref{table}\ or any user-defined class for which a method is added to any of
-the collection manipulation functions.  Collection does not name a class and
-does not form a part of the class hierarchy.  This module defines a set of
-operators on collections as generic functions and default methods with the
-behaviours given here.
+The defined name of this module is {\tt collection}.  A {\em collection\/} is
+defined as an instance of one of \classref{list}, \classref{string},
+\classref{vector}, \classref{table}\ or any user-defined class for which a
+method is added to any of the collection manipulation functions.  Collection
+does not name a class and does not form a part of the class hierarchy.  This
+module defines a set of operators on collections as generic functions and
+default methods with the behaviours given here.
 
 When iterating over a single collection, the order in which elements are
 processed might not be important, but as soon as more than one collection is
@@ -122,7 +122,7 @@ the second element.  The initial value of the accumulated result is the first
 element of {\em collection}.  The terms first and second correspond to the
 appropriate elements of a natural order collection, but no elements in
 particular of an explicit key collection.  If {\em collection\/} is empty, the
-result is \nil.
+result is \nil{}.
 %
 \examples
 \begin{tabular}{lcl}
@@ -157,7 +157,7 @@ successive elements of {\em collection\/} and {\em more-collections}.  If the
 result is true, the result of \genericref{anyp} is true and there are no further
 applications of {\em function\/} to elements of {\em collection\/} and {\em
     more-collections}.  If any of the collections is exhausted, the result of
-\genericref{anyp} is \nil.
+\genericref{anyp} is \nil{}.
 %
 \examples
 \begin{tabular}{lcl}
@@ -169,7 +169,7 @@ applications of {\em function\/} to elements of {\em collection\/} and {\em
         \>(anyp > x (cdr x)))
     \end{tabbing}}
 \end{minipage}
-& \Ra & \nil\\
+& \Ra & \nil{}\\
 \begin{minipage}[t]{\columnwidth}
 {\tt
     \begin{tabbing}
@@ -188,10 +188,10 @@ applications of {\em function\/} to elements of {\em collection\/} and {\em
 \end{genericargs}
 %
 \result%
-Returns true if {\em object\/} is a collection, otherwise \nil.
+Returns true if {\em object\/} is a collection, otherwise \nil{}.
 %
 \remarks%
-This predicate does not return {\em object\/} because \nil\/ is a
+This predicate does not return {\em object\/} because \nil{}\/ is a
 collection.
 
 \generic{concatenate}
@@ -279,7 +279,7 @@ to \functionref{eql}.
 \end{genericargs}
 %
 \result%
-The result is \nil.  This operator is used for side-effect only.  The {\em
+The result is \nil{}.  This operator is used for side-effect only.  The {\em
     function\/} is applied to argument lists constructed from corresponding
 successive elements of {\em collection\/} and {\em more-collections\/} and the
 result is discarded.  Application stops if any of the collections is exhausted.
@@ -365,7 +365,7 @@ empty object for that class of collection.
 \end{genericargs}
 %
 \result%
-The result is \nil.
+The result is \nil{}.
 %
 \remarks%
 This function side-effects {\em collection\/} by updating the values
@@ -406,7 +406,7 @@ result of \genericref{find-key} is the key associated with that element.
 \remarks%
 The value {\em skip\/}, which defaults to zero, indicates how many
 successful tests are to be made before returning a result. The value {\em
-    failure}, which defaults to \nil, is returned if no key satisfying the
+    failure}, which defaults to \nil{}, is returned if no key satisfying the
 test was found. Note that {\em skip\/} and {\em failure\/} are positional arguments
 and that {\em skip\/} must be specified if {\em failure\/} is specified.
 
@@ -473,7 +473,7 @@ collections is exhausted.
 Returns true if there is an element of {\em collection\/} such that the result
 of the application of {\em test\/} to {\em object\/} and that element is true.
 If {\em test\/} is not supplied, \functionref{eql} is used by default.  Note
-that true denotes any value that is not \nil\/ and that the class of the result
+that true denotes any value that is not \nil{}\/ and that the class of the result
 depends on the class of {\em collection}.  In particular, if {\em collection\/}
 is a list, the result of \genericref{member} is a list.
 %
@@ -548,10 +548,10 @@ The result is contents of index position 1 of {\em sequence}.
 %
 \result%
 Returns true if {\em object\/} is a sequence (has natural order),
-otherwise \nil.
+otherwise \nil{}.
 %
 \remarks%
-This predicate does not return {\em object\/} because \nil\/ is a
+This predicate does not return {\em object\/} because \nil{}\/ is a
 sequence.
 
 \generic{size}

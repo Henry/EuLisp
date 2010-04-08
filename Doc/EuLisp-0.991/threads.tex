@@ -188,14 +188,14 @@ The class of all instances of \classref{thread}.
 %
 \result%
 The supplied argument if it is an instance of \classref{thread}, otherwise
-\nil.
+\nil{}.
 
 \function{thread-reschedule}
 %
 This function takes no arguments.
 %
 \result%
-The result is \nil.
+The result is \nil{}.
 %
 \remarks%
 This function is called for side-effect only and may cause the thread which
@@ -260,14 +260,14 @@ each will either get the thread's value or signal the condition.
 %
     \item[obj] An object.
 %
-    \item[timeout, \classref{object}] One of \nil, \true\/ or a non-negative
+    \item[timeout, \classref{object}] One of \nil{}, \true\/ or a non-negative
     integer.
 %
 \end{genericargs}
 %
 \result%
-Returns \nil\/ if {\em timeout} was reached, otherwise a
-non-\nil\/ value.
+Returns \nil{}\/ if {\em timeout} was reached, otherwise a
+non-\nil{}\/ value.
 %
 \remarks%
 \genericref{wait} provides a generic interface to operations which may block.
@@ -278,10 +278,10 @@ only when one of the following happened:
     \item\label{case-b} {\em timeout} time units elapse;
     \item\label{case-c} A condition is raised by another thread on this thread.
 \end{enumerate}
-\genericref{wait} returns \nil\/ if timeout occurs, else it returns a
+\genericref{wait} returns \nil{}\/ if timeout occurs, else it returns a
 non-nil value.
 
-A {\em timeout} argument of \nil\/ or zero denotes a polling operation.  A {\em
+A {\em timeout} argument of \nil{}\/ or zero denotes a polling operation.  A {\em
     timeout} argument of \true\/ denotes indefinite blocking (cases \ref{case-a}
 or \ref{case-c} above).  A {\em timeout} argument of a non-negative integer
 denotes the minimum number of time units before timeout.  The number of time
@@ -312,18 +312,18 @@ threads (section~\ref{thread}), streams (section~\ref{stream}).
     \item[thread, \classref{thread}] The thread on which to wait.
 %
     \item[timeout, <object>] The timeout period which is specified by one of
-    \nil, \true, and non-negative integer.
+    \nil{}, \true, and non-negative integer.
 %
 \end{specargs}
 %
 \result%
-Result is either {\em thread} or \nil.  If {\em timeout} is \nil, the result is
+Result is either {\em thread} or \nil{}.  If {\em timeout} is \nil{}, the result is
 {\em thread} if it is {\em determined}.  If {\em timeout} is \true, {\em thread}
 suspends until {\em thread} is {\em determined} and the result is guaranteed to
 be {\em thread}.  If {\em timeout} is a non-negative integer, the call blocks
 until either {\em thread} is determined, in which case the result is {\em
     thread}, or until the {\em timeout} period is reached, in which case the
-result is \nil, whichever is the sooner.  The units for the non-negative integer
+result is \nil{}, whichever is the sooner.  The units for the non-negative integer
 timeout are the number of clock ticks to wait.  The implementation-defined
 constant \constantref{ticks-per-second} is used to make timeout periods
 processor independent.
@@ -393,7 +393,7 @@ is a new, open lock.
 %
 \result%
 The supplied argument if it is an instance of \classref{lock},
-otherwise \nil.
+otherwise \nil{}.
 
 \function{lock}
 %

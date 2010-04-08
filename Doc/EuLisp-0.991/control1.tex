@@ -21,9 +21,10 @@ dynamic form
 \end{arguments}
 %
 \result%
-The value of closest dynamic binding of {\em identifier} is returned.  If no
+The value of closest dynamic binding of \identifier{} is returned.  If no
 visible binding exists, an error is signaled (condition:
-\conditionref{unbound-dynamic-variable}\indexcondition{unbound-dynamic-variable}).
+\conditionref{unbound-dynamic-variable}
+\indexcondition{unbound-dynamic-variable}).
 
 \keyword{dynamic-setq}
 %
@@ -38,7 +39,7 @@ dynamic setq form
     \item[identifier] A symbol naming a dynamic binding to be updated.
 
     \item[form] An expression whose value will be stored in the dynamic binding
-    of {\em identifier}.
+    of \identifier{}.
 \end{arguments}
 %
 \result%
@@ -46,9 +47,9 @@ The value of {\em form}.
 %
 \remarks%
 The {\em form} is evaluated and the result is stored in the closest dynamic
-binding of {\em identifier}.  If no visible binding exists, an error is signaled
-(condition:
-\conditionref{unbound-dynamic-variable}\indexcondition{unbound-dynamic-variable}).
+binding of \identifier{}.  If no visible binding exists, an error is
+signalled (condition: \conditionref{unbound-dynamic-variable}
+\indexcondition{unbound-dynamic-variable}).
 
 \condition{unbound-dynamic-variable}{general-condition}
 %
@@ -86,9 +87,9 @@ A binding specifier is either an identifier or a two element list of an
 identifier and an initializing form.  All the initializing forms are evaluated
 from left to right in the current environment and the new bindings for the
 symbols named by the identifiers are created in the dynamic environment to hold
-the results.  These bindings have dynamic scope and dynamic
-extent\index{general}{scope and extent!of \keywordref{dynamic-let} bindings}.
-Each form in {\em body} is evaluated in order in the environment extended by the
+the results.  These bindings have dynamic scope and dynamic extent
+\index{general}{scope and extent!of \keywordref{dynamic-let} bindings}.  Each
+form in {\em body} is evaluated in order in the environment extended by the
 above bindings.  The result of evaluating the last form in {\em body} is
 returned as the result of \keywordref{dynamic-let}.
 
@@ -106,15 +107,16 @@ defglobal form
     of {\em form}.
 
     \item[form] The {\em form} whose value will be stored in the top dynamic
-    binding of {\em identifier}.
+    binding of \identifier{}.
 \end{arguments}
 %
 \remarks%
 The value of {\em form} is stored as the top dynamic value of the symbol named
-by {\em identifier}\index{general}{binding!top dynamic}.  The binding created by
+by \identifier{} \index{general}{binding!top dynamic}.  The binding created by
 \defformref{defglobal} is mutable.  An error is signaled (condition:
-\conditionref{dynamic-multiply-defined}\indexcondition{dynamic-multiply-defined}),
-on processing this form more than once for the same {\em identifier}.
+\conditionref{dynamic-multiply-defined}
+\indexcondition{dynamic-multiply-defined}), on processing this form more than
+once for the same \identifier{}.
 %
 \begin{note}
     The problems engendered by cross-module reference necessitated by a single
@@ -171,25 +173,28 @@ to create a dynamically scoped binding of {\em tag} to the continuation of the
 \macroref{catch} form.  The continuation can be invoked anywhere within the
 dynamic extent of the \macroref{catch} form by using \macroref{throw}.  The {\em
     form}s are evaluated in sequence and the value of the last one is returned
-as the value of the \macroref{catch} form.  The rewrite rules for
-\macroref{catch} are:
-
-\savesyntax\catchRewrites\vbox{%
-{\small\tt%
+as the value of the \macroref{catch} form.
+%
+\rewriterules
+%
+\savesyntax\catchRewrite\vbox{\tt%
 \begin{tabular}{lll}%
-    (catch) & $\equiv$ & {\rm Is an error}\\
-    (catch {\em tag}) & $\equiv$ & (progn {\em tag} ())\\
-    (catch {\em tag} {\em form}$^*$) & $\equiv$ &
+    (\macroref{catch}) & \rewrite &
+        {\rm Is an error}\\
+    (\macroref{catch} {\em tag}) & \rewrite &
+        (\keywordref{progn} {\em tag} ())\\
+    (\macroref{catch} {\em tag} \forms) & \rewrite &
     \begin{minipage}[t]{0.3\columnwidth}
-        \begin{tabbing}
-            (le\=t/cc tmp\\
-            \>(dy\=namic-let (({\em tag} tmp))\\
-            \>   \>{\em form}$^*$))
-        \end{tabbing}
+    \begin{tabbing}
+        00\=00\= \kill
+        (\keywordref{let/cc} tmp\\
+        \>(\keywordref{dynamic-let} (({\em tag} tmp))\\
+        \>\>\forms))
+    \end{tabbing}
     \end{minipage}
 \end{tabular}
-}}
-\syntaxtable{catch {\normalfont rewrite rules}}{\catchRewrites}
+}
+\rewritetable{catch}{\catchRewrite}
 
 Exiting from a \macroref{catch}, by whatever means, causes the restoration of
 the lexical environment and dynamic environment that existed before the
@@ -211,28 +216,27 @@ throw macro
 \syntaxtable{throw}{\throwSyntax}
 %
 \remarks%
-In \macroref{throw}, the {\em tag} names the continuation of the \macroref{catch} from which to return.
-% One of two conditions might arise in \macroref{throw} depending on whether the
-% dynamic value of {\em tag} is undefined (condition:
-% \conditionref{unbound-dynamic-variable}\indexcondition{unbound-dynamic-variable})
-% or its value is not a continuation (condition:
-% \conditionref{invalid-throw-continuation}\indexcondition{invalid-throw-continuation}).
-\macroref{throw} is the invocation of the
-continuation\index{general}{continuation} of the catch named {\em tag}.  The
+In \macroref{throw}, the {\em tag} names the continuation of the
+\macroref{catch} from which to return.  \macroref{throw} is the invocation of
+the continuation\index{general}{continuation} of the catch named {\em tag}.  The
 {\em form} is evaluated and the value are returned as the value of the catch
 named by {\em variable}.  The {\em tag} ia a symbol because it used to access
 the current dynamic binding of the symbol, which is where the continuation is
-bound.  The rewrite rules for \macroref{throw} are:
-
-\savesyntax\throwRewrites\vbox{%
-{\small\tt%
+bound.
+%
+\rewriterules
+%
+\savesyntax\throwRewrite\vbox{\tt%
 \begin{tabular}{lll}
-(throw) & $\equiv$ & {\rm Is an error}\\
-(throw {\em tag}) & $\equiv$ & ((dynamic {\em tag}) ())\\
-(throw {\em tag} {\em form}) & $\equiv$ & ((dynamic {\em tag}) {\em form})
+    (\macroref{throw}) & \rewrite &
+        {\rm Is an error}\\
+    (\macroref{throw} {\em tag}) & \rewrite &
+        ((\keywordref{dynamic} {\em tag}) ())\\
+    (\macroref{throw} {\em tag} \form) & \rewrite &
+        ((\keywordref{dynamic} {\em tag}) \form)
 \end{tabular}
-}}
-\syntaxtable{throw {\normalfont rewrite rules}}{\throwRewrites}
+}
+\rewritetable{throw}{\throwRewrite}
 %
 \seealso%
 \macroref{catch}.

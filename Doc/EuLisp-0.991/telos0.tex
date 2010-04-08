@@ -428,7 +428,7 @@ abstract-class-p form
 %
 \begin{arguments}
     \item[object] Returns {\em object\/}, if it is an abstract class, otherwise
-    \nil.
+    \nil{}.
 \end{arguments}
 %
 \begin{note}
@@ -454,13 +454,13 @@ The class of all generic functions.
 \Syntax
 \savesyntax\defgenericSyntax\vbox{\syntax
 defgeneric form
-   = '(', 'defgeneric', gf name, gf lambda list,
-     {level 0 init option}, ')';
+   = '(', 'defgeneric', gf name, gf-lambda-list,
+     {level-0-init-option}, ')';
 gf name
    = identifier;     (* \[\ref{symbol}\] *)
-gf lambda list
+gf-lambda-list
    = specialized lambda list;
-level 0 init option
+level-0-init-option
    = 'method', method description;
 method description
    = '(', specialized lambda list, {form}, ')';
@@ -481,16 +481,16 @@ specialized parameter
     \item[gf name] One of a symbol, or a form denoting a setter function or a
     converter function.
 
-    \item[gen lambda list] The parameter list of the generic function, which may
+    \item[gf-lambda-list] The parameter list of the generic function, which may
     be specialized to restrict the domain of methods to be attached to the
     generic function.
 
-    \item[level 0 init option\/$^*$\/] Options as specified below.
+    \item[level-0-init-option\/$^*$\/] Options as specified below.
 \end{arguments}
 %
 \remarks%
 This defining form defines a new generic function.  The resulting
-generic function will be bound to {\em gf-name}.  The second argument
+generic function will be bound to {\em gf name}.  The second argument
 is the formal parameter list.  The method's specialized lamba list
 must be congruent to that of the generic function.  Two lambda lists
 are said to be {\em congruent\/} iff:
@@ -536,29 +536,68 @@ A {\em level 0 init-option\/} is:
     than once.
 \end{options}
 %
-The rewrite rules for \defformref{defgeneric} are:
-
-\savesyntax\defgenericRewrites\vbox{\syntax
-(defgeneric identifier
-  gf-lambda-list {level 0 init option})
-   = (defconstant identifier
-       (generic-lambda
-         gf-lambda-list {level 0 init option}))
-(defgeneric (setter identifier)
-  gf-lambda-list {level 0 init option})
-   = ((setter setter) identifier
-       (generic-lambda
-         gf-lambda-list {level 0 init option}))
-(defgeneric (converter identifier)
-  gf-lambda-list {level 0 init option})
-   = ((setter converter) identifier
-       (generic-lambda
-         gf-lambda-list {level 0 init option}))
-\endsyntax}
+\rewriterules
+%
+\savesyntax\defgenericRewrite\vbox{\tt
+\begin{tabular}{l}%
+\begin{minipage}[t]{9cm}
+    \begin{tabbing}
+        00\=00\= \kill
+        (\defformref{defgeneric} \identifier \\
+        \>{\em gf-lambda-list} {\em level-0-init-option$^*$})
+    \end{tabbing}
+\end{minipage}\\
+\hspace{1cm}$\equiv$
+\begin{minipage}[t]{9cm}
+    \begin{tabbing}
+        00\=00\= \kill
+        (\defformref{defconstant} \identifier\\
+        \>(\macroref{generic-lambda} \\
+        \>\>{\em gf-lambda-list} {\em level-0-init-option$^*$}))
+    \end{tabbing}
+\end{minipage}\\
+%
+\begin{minipage}[t]{9cm}
+    \begin{tabbing}
+        00\=00\= \kill
+        (\defformref{defgeneric} \\
+        \>(\functionref{setter} \identifier) \\
+        \>{\em gf-lambda-list} {\em \{level-0-init-option\}})
+    \end{tabbing}
+\end{minipage}\\
+\hspace{1cm}$\equiv$
+\begin{minipage}[t]{9cm}
+    \begin{tabbing}
+        00\=00\= \kill
+        ((\functionref{setter} \functionref{setter}) \identifier\\
+        \>(\macroref{generic-lambda} \\
+        \>\> {\em gf-lambda-list} {\em level-0-init-option$^*$}))
+    \end{tabbing}
+\end{minipage}\\
+%
+\begin{minipage}[t]{9cm}
+    \begin{tabbing}
+        00\=00\= \kill
+        (\defformref{defgeneric} \\
+        \>(\functionref{converter} \identifier) \\
+        \>{\em gf-lambda-list} {\em level-0-init-option$^*$})
+    \end{tabbing}
+\end{minipage}\\
+\hspace{1cm}$\equiv$
+\begin{minipage}[t]{9cm}
+    \begin{tabbing}
+        00\=00\= \kill
+        ((\functionref{setter} \functionref{converter})\\
+        \>\identifier\\
+        \>(\macroref{generic-lambda} \\
+        \>\>{\em gf-lambda-list} {\em level-0-init-option$^*$}))
+    \end{tabbing}
+\end{minipage}
+\end{tabular}}%
 \label{defgeneric-rewrite-rules}
 \index{general}{generic function!rewrite rules}
-\index{general}{syntax!generic function rewrite rules}
-\syntaxtable{defgeneric {\normalfont rewrite rules}}{\defgenericRewrites}
+\index{general}{rewrite rules!generic function}
+\rewritetable{defgeneric}{\defgenericRewrite}
 %
 \examples
 In the following example of the use of \defformref{defgeneric} a generic
@@ -598,34 +637,35 @@ gf locator
 This macro is used for defining new methods on generic functions.  A new method
 object is defined with the specified body and with the domain given by the
 specialized lambda list.  This method is added to the generic function bound to
-{\em gf-name\/}, which is an identifier, or a form denoting a setter function or
+{\em gf name\/}, which is an identifier, or a form denoting a setter function or
 a converter function. If the specialized-lambda-list is not congruent with that
 of the generic function, an error is signalled (condition class:
-\conditionref{non-congruent-lambda-lists}\indexcondition{non-congruent-lambda-lists}).
-An error is signalled (condition class:
-\conditionref{incompatible-method-domain}\indexcondition{incompatible-method-domain})
-if the method's specialized lambda list would widen the domain of the generic
-function.  If there is a method with the same domain already defined on this
-gneric function, an error is signalled (condition class:
+\conditionref{non-congruent-lambda-lists}
+\indexcondition{non-congruent-lambda-lists}).  An error is signalled (condition
+class: \conditionref{incompatible-method-domain}
+\indexcondition{incompatible-method-domain}) if the method's specialized lambda
+list would widen the domain of the generic function.  If there is a method with
+the same domain already defined on this gneric function, an error is signalled
+(condition class:
 \conditionref{method-domain-clash}\indexcondition{method-domain-clash}).
 
 \macro{generic-lambda}
 \Syntax
 \savesyntax\genericLambdaSyntax\vbox{\syntax
 generic lambda form
-   = '(', 'generic-lambda', gf lambda list,
-     {level 0 init option}, ')';
+   = '(', 'generic-lambda', gf-lambda-list,
+     {level-0-init-option}, ')';
 \endsyntax}
 \syntaxtable{generic-lambda}{\genericLambdaSyntax}
 %
 \remarks%
 \macroref{generic-lambda} creates and returns an anonymous generic function that
 can be applied immediately, much like the normal \keywordref{lambda}.  The {\em
-    gen-lambda-list} and the {\em init-option\/}s are interpreted exactly as for
-the level-0 definition of \defformref{defgeneric}.  \examples In the following
-example an anonymous version of {\tt gf-0} (see \defformref{defgeneric} above)
-is defined.  In all other respects the resulting object is the same as {\tt
-    gf-0}.
+    gf-lambda-list} and the {\em level-0-init-option\/}s are interpreted exactly
+as for the level-0 definition of \defformref{defgeneric}.  \examples In the
+following example an anonymous version of {\tt gf-0} (see
+\defformref{defgeneric} above) is defined.  In all other respects the resulting
+object is the same as {\tt gf-0}.
 %
 {\syntax
 (generic-lambda ((arg1 <object>) (arg2 <class-a>))
@@ -687,7 +727,7 @@ next-method-p form
 %
 \result%
 If there is a next most specific method, \keywordref{next-method-p} returns a
-non-\nil\/ value, otherwise, it returns \nil.
+non-\nil{}\/ value, otherwise, it returns \nil{}.
 %
 \end{optDefinition}
 

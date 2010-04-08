@@ -45,7 +45,13 @@
 % ------------------------------------------------------------------------------
 %%% Index typesetting
 
-\newcommand{\ttindex}[1]{\index{general}{#1@{\tt{}#1}}}
+%\newcommand*{\ii}[1]{{\it #1}}
+\newcommand*{\hyperii}[1]{{\bfseries\em\hyperpage{#1}}}
+\newcommand*{\ttindexlabel}[1]{#1@{\tt #1}}
+\newcommand*{\ttindex}[1]{\index{general}{\ttindexlabel{#1}}}
+\newcommand*{\ttiindex}[1]{\index{general}{\ttindexlabel{#1}|hyperii}}
+%\newcommand*{\ttiindex}[1]{\index{general}{\ttindexlabel{#1}}}
+\newcommand*{\ttsubindex}[2]{\index{general}{\ttindexlabel{#1}!#2}}
 
 \newcommand{\undefmod}{undefined-module}
 \newcommand{\module}{\undefmod}
@@ -113,7 +119,7 @@
 \newcommand{\functionlabel}[1]{function:#1}
 \newcommand{\functionlabeled}[2]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \indexfunc{#1}%
     \entryclause{#1}{function}%
     \label{\functionlabel{#2}}%
@@ -151,7 +157,7 @@
 \newcommand{\genericlabel}[1]{generic:#1}
 \newcommand{\genericlabeled}[2]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \indexgen{#1}%
     \entryclause{#1}{generic function}%
     \label{\genericlabel{#2}}%
@@ -167,7 +173,7 @@
 \newcommand{\methodlabel}[1]{method:#1}
 \newcommand{\method}[1]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \indexmeth{#1}%
     \entryclause{#1}{method}%
     \label{\methodlabel{#1}}%
@@ -178,7 +184,7 @@
 \newcommand{\syntaxlabel}[1]{syntax:#1}
 \newcommand{\syntaxform}[1]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \index{general}{syntax!#1}%
     \entryclause{#1}{syntax}%
     \label{\syntaxlabel{#1}}%
@@ -189,7 +195,7 @@
 \newcommand{\metasyntaxlabel}[1]{metasyntax:#1}
 \newcommand{\metasyntaxform}[1]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \index{general}{syntax!#1}%
     \entryclause{#1}{syntax}%
     \label{\metasyntaxlabel{#1}}%
@@ -200,7 +206,7 @@
 \newcommand{\keywordlabel}[1]{keyword:#1}
 \newcommand{\keyword}[1]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \index{general}{special form!#1}%
     \entryclause{#1}{special form}%
     \label{\keywordlabel{#1}}%
@@ -211,7 +217,7 @@
 \newcommand{\macrolabel}[1]{macro:#1}
 \newcommand{\macro}[1]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \indexmac{#1}%
     \entryclause{#1}{macro}%
     \label{\macrolabel{#1}}%
@@ -222,7 +228,7 @@
 \newcommand{\defformlabel}[1]{defform:#1}
 \newcommand{\defform}[1]
 {%
-    \ttindex{#1}\index{general}{defining form!#1}%
+    \ttiindex{#1}\index{general}{defining form!#1}%
     \entryclause{#1}{defining form}%
     \label{\defformlabel{#1}}%
 }
@@ -232,7 +238,7 @@
 \newcommand{\constantlabel}[1]{constant:#1}
 \newcommand{\constant}[2]
 {%
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \indexconst{#1}%
     \entryclause{#1 \classref{#2}}{constant}
     \label{\constantlabel{#1}}%
@@ -263,7 +269,7 @@
 \newcommand{\instancelabel}[1]{instance:#1}
 \newcommand{\instance}[2]
 {
-    \ttindex{#1}%
+    \ttiindex{#1}%
     \entryclause{#1 \classref{#2}}{instance}%
     \label{\instancelabel{#1}}%
 }
@@ -330,7 +336,7 @@
 
 \newcommand{\@syntaxaddtolot}[1]
 {%
-    \addtotoc{lof}{syntax}{{\tt{}#1}}
+    \addtotoc{lot}{syntax}{{\tt{}#1}}
 }
 
 \newcommand{\syntaxbox}[2][\linewidth]
@@ -343,7 +349,40 @@
 
 \newcommand{\syntaxtable}[3][\linewidth]
 {%
+    \ttsubindex{#2}{syntax table}%
+    \index{general}{syntax table!#2@{\tt #2}}%
     \@syntaxaddtolot{#2}%
+    \syntaxbox[#1]{#3}%
+}
+
+\newcommand{\rewritename}{Rewrite}
+\newcommand{\therewrite}{}
+
+\newcommand{\l@rewrite}[2]{%
+    \vskip \z@ \@plus.2\p@
+    {%
+        \leftskip 0em
+        \rightskip \@tocrmarg
+        \parfillskip -\rightskip
+        \parindent 0em\@afterindenttrue
+        \interlinepenalty\@M
+        \leavevmode
+        \@tempdima 2.75em
+        \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+        {\let\numberline\loftnumberline \normalfont\rewritename{} #1}\nobreak
+        \loftfillnum{#2}}
+}
+
+\newcommand{\@rewriteaddtolot}[1]
+{%
+    \addtotoc{lot}{rewrite}{{\tt{}#1}}
+}
+
+\newcommand{\rewritetable}[3][\linewidth]
+{%
+    \ttsubindex{#2}{rewrite rules}%
+    \index{general}{rewrite rules!#2@{\tt #2}}%
+    \@rewriteaddtolot{#2}%
     \syntaxbox[#1]{#3}%
 }
 
@@ -446,6 +485,7 @@
 
 \newcommand{\result}{\syntaxssclause*{\syntaxssclausefont Result}\vskip -8pt}
 \newcommand{\remarks}{\syntaxssclause*{\syntaxssclausefont Remarks}\vskip -8pt}
+\newcommand{\rewriterules}{\syntaxssclause{\syntaxssclausefont Rewrite Rules}\vskip -8pt}
 \newcommand{\examples}{\syntaxssclause*{\syntaxssclausefont Examples}\vskip -8pt}
 \renewcommand{\seealso}{\syntaxssclause*{\syntaxssclausefont See~also}\vskip -8pt}
 
@@ -478,6 +518,14 @@
     \endlist%
     \stopoptionsquote%
 }
+
+%%%  Other typsetting macros
+\newcommand{\seq}[1]{{\em #1$^*$}}
+\newcommand{\forms}{\seq{form}}
+\newcommand{\rewrite}{{$\equiv$}}
+\newcommand{\form}{{\em form}}
+\newcommand{\identifier}{{\em identifier}}
+\newcommand{\tts}{{\tt\phantom{00}}}
 
 % ------------------------------------------------------------------------------
 %%% Sub-definition

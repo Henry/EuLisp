@@ -23,6 +23,10 @@
 % Remove decoration from href links
 \Css{a {text-decoration:none}}
 
+% add support for specially formatted index page numbers
+\def\yhbLNK#1{\expandafter\let\expandafter\LNKidx\csname
+    #1\endcsname\LNK}
+
 % Add support for the noannex option which converts the A,B,C... numbered
 % annexes into the 1,2,3... numbered clauses so that TeX4ht can split the
 % HTML into separate files based on the section number correctly.

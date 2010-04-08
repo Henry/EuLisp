@@ -152,3 +152,7 @@
     threads.  In the definition it is =<thread>= whereas in Youtoo it is
     =<abstract-thread>= and =<thread>= is used for the currently used thread
     type.
+*** TODO Reformat the =defgeneric= rewrite rules to conform to the others
+*** TODO Consider reformatting all of the rewrite rules
+    to be more consistent with the syntax description.
+*** TODO Add the return type to the syntax descriptions

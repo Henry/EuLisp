@@ -160,7 +160,7 @@ character is \verb|#\x0|.
 \end{arguments}
 %
 \result
-Returns {\em object\/} if it is a string, otherwise \nil.
+Returns {\em object\/} if it is a string, otherwise \nil{}.
 %
 \converter{symbol}
 \begin{specargs}
@@ -169,7 +169,7 @@ Returns {\em object\/} if it is a string, otherwise \nil.
 %
 \result
 If the result of \functionref{symbol-exists-p} when applied to {\em string\/}
-is a symbol, that symbol is returned.  If the result is \nil, then
+is a symbol, that symbol is returned.  If the result is \nil{}, then
 a new symbol is constructed whose name is {\em string}.  This new
 symbol is returned.
 %
@@ -184,7 +184,7 @@ symbol is returned.
 If the size of {\em string$_1$} is the same (under {\tt =}) as that of
 {\em string$_2$}, then the result is the conjunction of the pairwise
 application of \genericref{equal} to the elements of the arguments.  If not
-the result is \nil.
+the result is \nil{}.
 %
 \method{deep-copy}
 %
@@ -214,13 +214,13 @@ is \functionref{eql} to the corresponding element in {\em string}.
 \end{specargs}
 %
 \result%
-If the second argument is longer than the first, the result is \nil.  Otherwise,
-if the sequence of characters in {\em string$_1$} is pairwise less than that in
-{\em string$_2$} according to \genericref{binary<} the result is \true.
-Otherwise the result is \nil.  Since it is an error to compare lower case, upper
-case and digit characters with any other kind than themselves, so it is an error
-to compare two strings which require such comparisons and the results are
-undefined.
+If the second argument is longer than the first, the result is \nil{}.
+Otherwise, if the sequence of characters in {\em string$_1$} is pairwise less
+than that in {\em string$_2$} according to \genericref{binary<} the result is
+\true.  Otherwise the result is \nil{}.  Since it is an error to compare lower
+case, upper case and digit characters with any other kind than themselves, so it
+is an error to compare two strings which require such comparisons and the
+results are undefined.
 %
 \examples
 \begin{tabular}{lcl}

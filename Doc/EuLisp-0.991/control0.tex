@@ -57,14 +57,14 @@ defconstant form
 %
 \begin{arguments}
     \item[identifier] A symbol naming an immutable top-lexical binding to be
-    initialized with the value of {\em form}.
+    initialized with the value of \form.
 
-    \item[form] The {\em form} whose value will be stored in the binding of {\em
+    \item[form] The \form{} whose value will be stored in the binding of {\em
         identifier}.
 \end{arguments}
 %
 \remarks%
-The value of {\em form} is stored in the top-lexical binding of {\em
+The value of \form{} is stored in the top-lexical binding of {\em
     identifier}.  It is a violation to attempt to modify the binding of a
 defined constant.
 
@@ -72,14 +72,14 @@ defined constant.
 %
 \remarks%
 The symbol {\tt nil} is defined to be immutably bound to the empty list, which
-is represented as \nil.  The empty list is used to denote the abstract boolean
+is represented as \nil{}.  The empty list is used to denote the abstract boolean
 value {\em false}.
 
 \constant{t}{symbol}
 %
 \remarks%
 This may be used to denote the abstract boolean value {\em true}, but so may any
-other value than \nil.
+other value than \nil{}.
 
 \metasyntaxform{symbol}
 \ttindex{symbol}
@@ -101,12 +101,12 @@ deflocal form
     \item[identifier] A symbol naming a binding containing the value of {\em
         form}.
 
-    \item[form] The {\em form} whose value will be stored in the binding of {\em
+    \item[form] The \form{} whose value will be stored in the binding of {\em
         identifier}.
 \end{arguments}
 %
 \remarks%
-The value of {\em form} is stored in the top-lexical binding of {\em
+The value of \form{} is stored in the top-lexical binding of {\em
     identifier}.  The binding created by a \defformref{deflocal} form is mutable.
 %
 \seealso%
@@ -134,9 +134,9 @@ The result of processing the expression {\tt (quote {\em object})} is {\em
     object}.  The {\em object} can be any object having an external
 representation\index{general}{external representation (see also
     \functionref{prin} and \functionref{write})}.  The special form
-\keywordref{quote} can be abbreviated using {\em apostrophe}---graphic
-representation~\verb+'+\ttindex{quote!abbreviation with {\tt '}}---so that {\tt
-    (quote a)} can be written {\tt 'a}.  These two notations are used to
+\keywordref{quote} can be abbreviated using {\em apostrophe} --- graphic
+representation~\verb+'+\ttsubindex{quote}{abbreviation with {\tt '}} --- so that
+{\tt (quote a)} can be written {\tt 'a}.  These two notations are used to
 incorporate literal constants\index{general}{literal!quotation} in programs.  It
 is an error to modify a literal expression\index{general}{literal!modification
     of}.
@@ -187,13 +187,13 @@ The function construction operator is \keywordref{lambda}.  Access to the
 lexical environment of definition is guaranteed.  The syntax of {\em
     lambda-list} is defined in ref{lambda-syntax-table}.
 
-If {\em lambda-list} is an {\em identifier}, it is bound to a newly allocated
+If {\em lambda-list} is an \identifier, it is bound to a newly allocated
 list of the actual parameters.  This binding\index{general}{scope and extent!of
     \keywordref{lambda} bindings} has lexical scope and indefinite extent.  If
 {\em lambda-list} is a {\em simple-list}, the arguments are bound to the
 corresponding {\em identifiers}.  Otherwise, {\em lambda-list} must be a {\em
-    rest-list}.  In this case, each {\em identifier} preceding the dot is bound
-to the corresponding argument and the {\em identifier} succeeding the dot is
+    rest-list}.  In this case, each \identifier{} preceding the dot is bound
+to the corresponding argument and the \identifier{} succeeding the dot is
 bound to a newly allocated list whose elements are the remaining arguments.
 These bindings have lexical scope and indefinite extent.  It is a violation
 if the same identifier appears more than once in a {\em lambda-list}.  It is an
@@ -271,42 +271,52 @@ setter defun
 The \syntaxref{defun} form defines a function named by {\em function-name} and
 stores the definition (i) as the top-lexical binding of {\em function-name} or
 (ii) as the setter function of {\em function-name}.  The interpretation of the
-{\em lambda-list} is as defined for \keywordref{lambda}.  The rewrite rules for
-\syntaxref{defun} are given below:
-
-\savesyntax\defunRewrites\vbox{%
-{\small\tt\begin{tabular}{lll}%
+{\em lambda-list} is as defined for \keywordref{lambda}.
+%
+\rewriterules
+%
+\savesyntax\defunRewrite\vbox{\tt%
+\begin{tabular}{lll}%
 \begin{minipage}[t]{\columnwidth}%
-\begin{tabbing}%
-(de\=fun {\em identifier}\\
-   \>{\em lambda-list}\\
-   \>{\em body})
-\end{tabbing}
+    \begin{tabbing}%
+        00\= \kill
+        (\syntaxref{defun} \identifier\\
+        \>{\em lambda-list}\\
+        \>{\em body})
+    \end{tabbing}
 \end{minipage}
-& $\equiv$ &
+&\rewrite&
 \begin{minipage}[t]{\columnwidth}
-\begin{tabbing}
-(de\=fconstant {\em identifier}\\
-   \>(lambda {\em lambda-list} {\em body}))
-\end{tabbing}
+    \begin{tabbing}
+        00\= \kill
+        (\defformref{defconstant} \identifier\\
+        \>(\keywordref{lambda} {\em lambda-list} \\
+        \>{\em body}))
+    \end{tabbing}
 \end{minipage}\\
+\\
 \begin{minipage}[t]{\columnwidth}
-\begin{tabbing}
-(de\=fun\\
-   \>(setter {\em identifier})\\
-   \>{\em lambda-list} {\em body})
-\end{tabbing}
+    \begin{tabbing}
+        00\= \kill
+        (\syntaxref{defun}\\
+        \>(\functionref{setter} \identifier)\\
+        \>{\em lambda-list} \\
+        \>{\em body})
+    \end{tabbing}
 \end{minipage}
-& $\equiv$ &
+&\rewrite&
 \begin{minipage}[t]{\columnwidth}
-\begin{tabbing}
-((s\=etter setter) {\em identifier}\\
-   \>(lambda {\em lambda-list} {\em body}))
-\end{tabbing}%
+    \begin{tabbing}
+        00\= \kill
+        ((\functionref{setter} \functionref{setter}) \\
+        \>\identifier\\
+        \>(\keywordref{lambda} {\em lambda-list} \\
+        \>{\em body}))
+    \end{tabbing}%
 \end{minipage}%
-\end{tabular}}}%
-\syntaxtable{defun {\normalfont rewrite rules}}{\defunRewrites}
-
+\end{tabular}}%
+\rewritetable{defun}{\defunRewrite}
+%
 \metasyntaxform{function call}
 \index{general}{function!calling}
 %
@@ -383,8 +393,8 @@ apply form
 %
 \result%
 The result is the result of calling {\em function} with the actual parameter
-list created by appending {\em form}$_n$ to a list of the arguments {\em
-    form}$_1$ through {\em form}$_{n-1}$.  An error is signalled (condition
+list created by appending \form$_n$ to a list of the arguments {\em
+    form}$_1$ through \form$_{n-1}$.  An error is signalled (condition
 class: \conditionref{invalid-operator}\indexcondition{invalid-operator}) if the
 first argument is not an instance of \classref{function}.
 %
@@ -420,11 +430,11 @@ setq form
 \end{arguments}
 %
 \result%
-The result is the value of {\em form}.
+The result is the value of \form.
 %
 \remarks%
-The {\em form} is evaluated and the result is stored in the closest lexical
-binding named by {\em identifier}.  It is a violation to modify an immutable
+The \form{} is evaluated and the result is stored in the closest lexical
+binding named by \identifier.  It is a violation to modify an immutable
 binding.
 
 \function{setter}
@@ -540,57 +550,59 @@ cond macro
 %
 \remarks%
 The \macroref{cond} macro provides a convenient syntax for collections of {\em
-    if-then-elseif...else} expressions.  The rewrite rules for \macroref{cond}
-are given below:
-
-\savesyntax\condRewrites\vbox{%
-{\small{\tt%
+    if-then-elseif...else} expressions.
+%
+\rewriterules
+%
+\savesyntax\condRewrite\vbox{\tt%
 \begin{tabular}{lll}%
-(cond) & $\equiv$ & () \\
-
-(cond ({\em antecedent}) \ldots) & $\equiv$ & (or {\em antecedent} (cond \ldots)) \\
-
-%(cond (t {\em form}$^*$)) & $\equiv$ & (progn {\em form}$^*$) \\
-
+    (\macroref{cond}) &\rewrite& () \\
+    (\macroref{cond} ({\em antecedent}) \\
+    \tts\ldots) &\rewrite&
+    (\macroref{or} {\em antecedent} (\macroref{cond} \ldots)) \\
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-(c\=ond \\
-  \>({\em antecedent}$_1$) \\
-  \>({\em antecedent}$_2$ {\em form}$^*$) \\
-  \>\ldots)
+    00\=00\= \kill
+    (\macroref{cond} \\
+    \>({\em antecedent}$_1$) \\
+    \>({\em antecedent}$_2$ \forms) \\
+    \>\ldots)
 \end{tabbing}
 \end{minipage}
-& $\equiv$ &
+&\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-(or \={\em antecedent}$_1$ \\
-    \>(c\=ond \\
-    \>  \>({\em antecedent}$_2$ {\em form}$^*$) \\
-    \>  \>\ldots))
+    (\macroref{or} \= {\em antecedent}$_1$ \\
+    \>00\= \kill
+    \>(\macroref{cond} \\
+    \>\>({\em antecedent}$_2$ \forms) \\
+    \>\>\ldots))
 \end{tabbing}
 \end{minipage} \\
 
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-(c\=ond \\
-  \>({\em antecedent}$_1$ {\em form}$^*$) \\
-  \>({\em antecedent}$_2$ {\em form}$^*$) \\
-  \>\ldots)
+    00\=00\= \kill
+    (\macroref{cond} \\
+    \>({\em antecedent}$_1$ \forms) \\
+    \>({\em antecedent}$_2$ \forms) \\
+    \>\ldots)
 \end{tabbing}
 \end{minipage}
-& $\equiv$ &
+&\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-(if \={\em antecedent}$_1$ \\
-    \>(progn {\em form}$^*$) \\
-    \>(c\=ond \\
-    \>  \>({\em antecedent}$_2$ {\em form}$^*$) \\
-    \>  \>\ldots))
+    (\macroref{if} \={\em antecedent}$_1$ \\
+    \>(\keywordref{progn} \forms) \\
+    \>00\= \kill
+    \>(\macroref{cond} \\
+    \>\>({\em antecedent}$_2$ \forms) \\
+    \>\>\ldots))
 \end{tabbing}%
 \end{minipage}%
 \end{tabular}%
-}}}%
-\syntaxtable{cond {\normalfont rewrite rules}}{\condRewrites}
+}%
+\rewritetable{cond}{\condRewrite}
 
 \macro{and}
 %
@@ -602,28 +614,29 @@ and macro
 \syntaxtable{and}{\andSyntax}
 %
 \remarks%
-The expansion of an \macroref{and} form leads to the evaluation of the
-sequence of {\em form}s from left to right.  The first {\em form} in
-the sequence that evaluates to \nil\/ stops evaluation and none of
-the {\em form}s to its right will be evaluated---that is to say, it is
-non-strict.  The result of {\tt (\macroref{and})} is \true.  If none of the {\em
-form}s evaluate to \nil, the value of the last {\em form} is
-returned.  The rewrite rules for \macroref{and} are given below:
-
-\savesyntax\andRewrites\vbox{%
-{\small\tt%
+The expansion of an \macroref{and} form leads to the evaluation of the sequence
+of {\em form}s from left to right.  The first \form{} in the sequence that
+evaluates to \nil{}\/ stops evaluation and none of the {\em form}s to its right
+will be evaluated---that is to say, it is non-strict.  The result of {\tt
+    (\macroref{and})} is \true{}.  If none of the {\em form}s evaluate to
+\nil{}, the value of the last \form{} is returned.
+%
+\rewriterules
+%
+\savesyntax\andRewrite\vbox{\tt%
 \begin{tabular}{lll}%
-(and) & $\equiv$ & t \\
-(and {\em form}) & $\equiv$ & {\em form} \\
-(and {\em form}$_1$ {\em form}$_2$ \ldots) & $\equiv$ &
-\begin{minipage}[t]{0.45\columnwidth}\begin{tabbing}
-(if \={\em form}$_1$\\
-    \>(and {\em form}$_2$ \ldots)\\
+    (\macroref{and}) &\rewrite& \true{} \\
+    (\macroref{and} \form) &\rewrite& \form{} \\
+    (\macroref{and} \form$_1$ \form$_2$ \ldots) &\rewrite&
+\begin{minipage}[t]{0.45\columnwidth}
+\begin{tabbing}
+    (\keywordref{if} \= \form$_1$\\
+    \>(\macroref{and} \form$_2$ \ldots)\\
     \>())
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}}%
-\syntaxtable{and {\normalfont rewrite rules}}{\andRewrites}
+\end{tabular}}%
+\rewritetable{and}{\andRewrite}
 
 \macro{or}
 %
@@ -636,29 +649,31 @@ or macro
 %
 \remarks%
 The expansion of an \macroref{or} form leads to the evaluation of the sequence
-of {\em form}s from left to right.  The value of the first {\em form} that
+of {\em form}s from left to right.  The value of the first \form{} that
 evaluates to {\em true} is the result of the \macroref{or} form and none of the
 {\em form}s to its right will be evaluated---that is to say, it is non-strict.
-If none of the forms evaluate to {\em true}, the value of the last {\em form} is
-returned.  The rewrite rules for \macroref{or} are given below:
-
-\savesyntax\orRewrites\vbox{%
-{\small\tt%
+If none of the forms evaluate to {\em true}, the value of the last \form{} is
+returned.
+%
+\rewriterules
+%
+\savesyntax\orRewrite\vbox{\tt%
 \begin{tabular}{lll}%
-(or) & $\equiv$ & () \\
-(or {\em form}) & $\equiv$ & {\em form} \\
-(or {\em form}$_1$ {\em form}$_2$ \ldots) & $\equiv$ &
-\begin{minipage}[t]{0.45\columnwidth}\begin{tabbing}
-(le\=t ((x {\em form}$_1$))\\
-   \>(if \=x\\
-         \>x\\
-         \>(or {\em form}$_2$ \ldots)))
+    (\macroref{or}) &\rewrite& () \\
+    (\macroref{or} \form) &\rewrite& \form{} \\
+    (\macroref{or} \form$_1$ \form$_2$ \ldots) &\rewrite&
+\begin{minipage}[t]{0.45\columnwidth}
+\begin{tabbing}
+    (\macroref{let} (\=(x \form$_1$))\\
+    \>(\keywordref{if} \= x\\
+    \>\>x\\
+    \>\>(\macroref{or} \form$_2$ \ldots)))
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}}%
-\syntaxtable{or {\normalfont rewrite rules}}{\orRewrites}
+\end{tabular}}%
+\rewritetable{or}{\orRewrite}
 
-Note that {\tt x} does not occur free in any of {\em form}$_2$ \ldots {\em
+Note that {\tt x} does not occur free in any of \form$_2$ \ldots {\em
     form}$_n$.
 %
 \end{optDefinition}
@@ -692,7 +707,7 @@ Note that {\tt x} does not occur free in any of {\em form}$_2$ \ldots {\em
 \begin{optDefinition}
 
 \keyword{let/cc}
-\ttindex{let/cc!see also \macroref{block} and \macroref{return-from}}
+\ttsubindex{let/cc}{see also \macroref{block} and \macroref{return-from}}
 %
 \Syntax
 \savesyntax\letccSyntax\vbox{\small\syntax
@@ -709,10 +724,10 @@ let/cc form
 %
 \result%
 The result of evaluating the last form in {\em body} or the value of
-the argument given to the continuation bound to {\em identifier}.
+the argument given to the continuation bound to \identifier.
 %
 \remarks%
-The {\em identifier} is bound to a new location, which is initialized with the
+The \identifier{} is bound to a new location, which is initialized with the
 continuation of the \keywordref{let/cc} form.  This binding is immutable and has
 lexical scope and indefinite extent\index{general}{scope and extent!of
     \keywordref{let/cc} binding}.  Each form in {\em body} is evaluated in order
@@ -764,7 +779,7 @@ signalled.
 
 \macro{block}
 %
-\ttindex{block!see also \keywordref{let/cc}}
+\ttsubindex{block}{see also \keywordref{let/cc}}
 \Syntax
 \savesyntax\blockSyntax\vbox{\small\syntax
 block macro
@@ -778,28 +793,29 @@ escape function.  The block {\em variable} is bound to the
 continuation\index{general}{continuation} of the block.  The continuation can be
 invoked anywhere within the block by using \macroref{return-from}.  The {\em
     form}s are evaluated in sequence and the value of the last one is returned
-as the value of the block form.  See also \keywordref{let/cc}.  The rewrite
-rules for \macroref{block} are given below:
+as the value of the block form.  See also \keywordref{let/cc}.
+%
+\rewriterules
+%
+\savesyntax\blockRewrite\vbox{\tt%
+\begin{tabular}{lll}%
+    (\macroref{block} \identifier) &\rewrite& ()\\
+    (\macroref{block} \identifier{}  &\rewrite&
+    (\keywordref{let/cc} \identifier{} \\
+    \tts\forms)                    && \tts\forms)
+\end{tabular}}%
+\rewritetable{block}{\blockRewrite}
 
-\savesyntax\blockRewrites\vbox{%
-    {\small\tt%
-        \begin{tabular}{lll}%
-            % (block) & $\equiv$ & {\rm Is an error}\\
-            (block {\em identifier}) & $\equiv$ & ()\\
-            (block {\em identifier} {\em form}$^*$) & $\equiv$ & (let/cc {\em identifier} {\em form}$^*$) \\
-        \end{tabular}}}%
-\syntaxtable{block {\normalfont rewrite rules}}{\blockRewrites}
-
-The rewrite for \macroref{block}, does not prevent the \macroref{block} being
+The rewrite for \macroref{block} does not prevent the \macroref{block} being
 exited from anywhere in its dynamic extent, since the function bound
-to {\em identifier} is a first-class item and can be passed as an
+to \identifier{} is a first-class item and can be passed as an
 argument like other values.
 %
 \seealso%
 \macroref{return-from}.
 
 \macro{return-from}
-\ttindex{return-from!see also \keywordref{let/cc}}
+\ttsubindex{return-from}{see also \keywordref{let/cc}}
 %
 \Syntax
 \savesyntax\returnfromSyntax\vbox{\small\syntax
@@ -809,30 +825,32 @@ return from macro
 \syntaxtable{return-from}{\returnfromSyntax}
 %
 \remarks%
-In \macroref{return-from}, the {\em identifier} names the continuation of
+In \macroref{return-from}, the \identifier{} names the continuation of
 the (lexical) \macroref{block} from which to return.
 %An error is signalled
 %(condition class: {\tt
 %<invalid-return-continuation>}\indexcondition{invalid-return-continuation})
-%if the value of the variable named by {\em identifier} is not a
+%if the value of the variable named by \identifier{} is not a
 %continuation.
 \macroref{return-from} is the invocation of the continuation of the block
-named by {\em identifier}.  The {\em form} is evaluated and the value
-is returned as the value of the block named by {\em identifier}.  The
-rewrite rules for \macroref{return-from} are given below:
-
-\savesyntax\returnFromRewrites\vbox{%
-{\small\tt%
+named by \identifier.  The \form{} is evaluated and the value
+is returned as the value of the block named by \identifier.
+%
+\rewriterules
+%
+\savesyntax\returnFromRewrite\vbox{\tt%
 \begin{tabular}{lll}%
-%(return-from) & $\equiv$ & {\rm Is an error}\\
-(return-from {\em identifier}) & $\equiv$ & ({\em identifier} ())\\
-\begin{minipage}[t]{0.45\columnwidth}\begin{tabbing}
-(re\=turn-from\\
-   \>{\em identifier} {\em form})
-\end{tabbing}\end{minipage}
-& $\equiv$ & ({\em identifier} {\em form})
-\end{tabular}}}%
-\syntaxtable{return-from {\normalfont rewrite rules}}{\returnFromRewrites}
+    (\macroref{return-from} \identifier) &\rewrite& (\identifier{} ())\\
+\begin{minipage}[t]{0.45\columnwidth}
+\begin{tabbing}
+    00\= \kill
+    (\macroref{return-from} \\
+    \>\identifier{} \form)
+\end{tabbing}
+\end{minipage}
+&\rewrite& (\identifier{} \form)
+\end{tabular}}%
+\rewritetable{return-from}{\returnFromRewrite}
 %
 \seealso%
 \macroref{block}.
@@ -865,7 +883,7 @@ function definition
 %
 \result%
 The \keywordref{labels} operator provides for local mutually recursive function
-creation.  Each {\em identifier} is bound to a new inner-lexical binding
+creation.  Each \identifier{} is bound to a new inner-lexical binding
 initialized with the function constructed from {\em lambda-list} and {\em body}.
 The scope of the {\em identifier}s is the entire \keywordref{labels}
 form\index{general}{scope and extent!in \keywordref{labels} expressions}.  The
@@ -889,9 +907,9 @@ binding
 \syntaxtable{let}{\letSyntax}
 %
 \remarks%
-The optional {\em identifier}\/ denotes that the let form can be called from
+The optional \identifier\/ denotes that the let form can be called from
 within its {\em body}.  This is an abbreviation for \keywordref{labels} form in
-which {\em identifier} is bound to a function whose parameters are the
+which \identifier{} is bound to a function whose parameters are the
 identifiers of the {\em binding\/}s of the \macroref{let}, whose body is that of
 the \macroref{let} and whose initial call passes the values of the initializing
 form of the {\em binding\/}s.  A binding is specified by either an identifier or
@@ -901,49 +919,54 @@ environment and the variables named by the identifiers in the {\em binding}s are
 bound to new locations holding the results.  Each form in {\em body} is
 evaluated in order in the environment extended by the above bindings.  The
 result of evaluating the last form in {\em body} is returned as the result of
-the \macroref{let} form.  The rewrite rules for \macroref{let} are given below:
-
-\savesyntax\letRewrites\vbox{%
-{\small{\tt%
+the \macroref{let} form.
+%
+\rewriterules
+%
+\savesyntax\letRewrite\vbox{\tt%
 \begin{tabular}{lll}%
-(let () {\em form}$^*$) & $\equiv$ & (progn {\em form}$^*$) \\
+    (\macroref{let} () \forms) &\rewrite& (\keywordref{progn} \forms) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-(l\=et (\=({\em id}$_1$ {\em form}$_1$) \\
-  \>    \>({\em id}$_2$ {\em form}$_2$) \\
-  \>    \>{\em id}$_3$ \\
-  \>    \>\ldots)\\
-  \>{\em form}$^*$)
+    (\macroref{let} (\=({\em id}$_1$ \form$_1$) \\
+    \>({\em id}$_2$ \form$_2$) \\
+    \>{\em id}$_3$ \\
+    \>\ldots)\\
+    00\= \kill
+    \>\forms)
 \end{tabbing}
 \end{minipage}
-& $\equiv$ &
+&\rewrite&
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-(\=(l\=ambda ({\em id}$_1$ {\em id}$_2$ {\em id}$_3$ \ldots) \\
- \>  \>{\em form}$^*$) \\
- \>{\em form}$_1$ {\em form}$_2$ () \ldots) \\
+    00\=00\=00\= \kill
+    ((\keywordref{lambda} ({\em id}$_1$ {\em id}$_2$ {\em id}$_3$ \ldots) \\
+    \>\>\forms) \\
+    \>\form$_1$ \form$_2$ () \ldots) \\
 \end{tabbing}
 \end{minipage}\\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-(l\=et \={\em id$_0$}\\
-  \>   \>(\=({\em id}$_1$ {\em form}$_1$) \\
-  \>   \> \>{\em id}$_2$ \\
-  \>   \> \>\ldots)\\
-  \>{\em form}$^*$)
+    (\macroref{let} \={\em id$_0$}\\
+    \>(\=({\em id}$_1$ \form$_1$) \\
+    \>\>{\em id}$_2$ \\
+    \>\>\ldots)\\
+    00\= \kill
+    \>\forms)
 \end{tabbing}
 \end{minipage}
-& $\equiv$ &
+&\rewrite&
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-(l\=abels\\
-  \>(\=({\em id}$_0$ ({\em id}$_1$ {\em id}$_2$ \ldots) \\
-  \> \>{\em form}$^*$)) \\
-  \>({\em id$_0$} {\em form}$_1$ () \ldots))
+    00\= \kill
+    (\keywordref{labels}\\
+    \>(\=({\em id}$_0$ ({\em id}$_1$ {\em id}$_2$ \ldots) \\
+    \>\>\forms)) \\
+    \>({\em id$_0$} \form$_1$ () \ldots))
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}}}%
-\syntaxtable{let {\normalfont rewrite rules}}{\letRewrites}
+\end{tabular}}%
+\rewritetable{let}{\letRewrite}
 
 \macro{let*}
 %
@@ -963,33 +986,37 @@ turn, evaluating the initializing form in the environment extended by
 the previous binding.  Each form in {\em body} is evaluated in order in
 the environment extended by the above bindings.  The result of
 evaluating the last form is returned as the result of the \macroref{let*}
-form.  The rewrite rules for \macroref{let*} are given below:
-
-\savesyntax\letStarRewrites\vbox{%
-{\small\tt%
+form.
+%
+\rewriterules
+%
+\savesyntax\letStarRewrite\vbox{\tt%
 \begin{tabular}{lll}%
-(let* () {\em form}$^*$) & $\equiv$ & (progn {\em form}$^*$) \\
+    (\macroref{let*} () \forms) &\rewrite& (progn \forms) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-(l\=et* (\=({\em var}$_1$ {\em form}$_1$) \\
-  \>     \>({\em var}$_2$ {\em form}$_2$) \\
-  \>     \>{\em var}$_3$\\
-  \>     \>\ldots) \\
-  \>{\em form}$^*$)\\
+    (\macroref{let*} (\=({\em var}$_1$ \form$_1$) \\
+    \>({\em var}$_2$ \form$_2$) \\
+    \>{\em var}$_3$\\
+    \>\ldots) \\
+    00\= \kill
+    \>\forms)
 \end{tabbing}%
 \end{minipage}%
-& $\equiv$ &
+&\rewrite&
 \begin{minipage}[t]{\columnwidth}%
 \begin{tabbing}%
-(l\=et (({\em var}$_1$ {\em form}$_1$)) \\
-  \>(l\=et* (\=({\em var}$_2$ {\em form}$_2$) \\
-  \>  \>     \>{\em var}$_3$\\
-  \>  \>     \>\ldots) \\
-  \>  \>{\em form}$^*$))
+    00\= \kill
+    (\macroref{let} (({\em var}$_1$ \form$_1$)) \\
+    \>(\macroref{let*} (\=({\em var}$_2$ \form$_2$) \\
+    \>\>{\em var}$_3$\\
+    \>\>\ldots) \\
+    00\=00\= \kill
+    \>\>\forms))
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}}%
-\syntaxtable{let* {\normalfont rewrite rules}}{\letStarRewrites}
+\end{tabular}}%
+\rewritetable{let*}{\letStarRewrite}
 
 \keyword{progn}
 %
@@ -1008,7 +1035,7 @@ progn form
 \result%
 The sequence of {\em form}s is evaluated from left to right, returning the value
 of the last one as the result of the \keywordref{progn} form.  If the sequence
-of forms is empty, \keywordref{progn} returns \nil.
+of forms is empty, \keywordref{progn} returns \nil{}.
 %
 \remarks%
 If the \keywordref{progn} form occurs enclosed only by \keywordref{progn} forms
@@ -1019,16 +1046,16 @@ environments.
 
 %\keyword{multiple-value-bind}{lambda-list form body}{obj}
 %\gdef\multipleValueBind{\verb+(multiple-value-bind+ lambda-list form body\verb+)+}
-%The {\em form} is evaluated and the elements of {\em lambda-list} are
+%The \form{} is evaluated and the elements of {\em lambda-list} are
 %bound to the resulting values.  The cardinality of the resulting
 %values might not agree with the arity of the {\tt multiple-value-bind}
 %{\em lambda-list}.  If the number of values is less than the arity,
-%the excess formal parameters receive the value \nil.  It is an
+%the excess formal parameters receive the value \nil{}.  It is an
 %error if the number of values is greater than the arity.  A conforming
 %processor must support a minimum {\tt multiple-value-bind} arity of
-%15.  If {\em lambda-list} is an {\em identifier}, it is bound to a
+%15.  If {\em lambda-list} is an \identifier, it is bound to a
 %newly allocated list of the multiple values.  If {\em lambda-list}
-%is a {\em rest-list}, each {\em identifier} preceding the dot is bound
+%is a {\em rest-list}, each \identifier{} preceding the dot is bound
 %to its corresponding value in the multiple value and the {\em
 %identifier} succeeding the dot is bound to a newly allocated list of
 %the remaining elements of the multiple value.  These bindings have
@@ -1133,7 +1160,7 @@ expression is a convenient way of building a structure.  The {\em skeleton}
 describes the shape and, generally, many of the entries in the structure but
 some holes remain to be filled.  The \macroref{quasiquote} macro can be
 abbreviated by using the glyph called {\em grave accent}
-(\verb+`+)\ttindex{quasiquote!abbreviation with {\tt `}}, so that {\tt
+(\verb+`+)\ttsubindex{quasiquote}{abbreviation with {\tt `}}, so that {\tt
     (\macroref{quasiquote} {\em expression})} can be written {\tt `{\em
         expression}}.
 %A complete definition of the syntax of quasiquote
@@ -1170,7 +1197,7 @@ which there are two kinds---forms whose value is to be inserted at that location
 in the structure and forms whose value is to be spliced into the structure at
 that location.  The former is indicated by an \syntaxref{unquote} expression and
 the latter by an \syntaxref{unquote-splicing} expression.  In
-\syntaxref{unquote-splicing} the {\em form} must result in a proper list.  The
+\syntaxref{unquote-splicing} the \form{} must result in a proper list.  The
 insertion of the result of an unquote-splice expression is as if the opening and
 closing parentheses of the list are removed and all the elements of the list are
 appended in place of the unquote-splice expression.
@@ -1182,9 +1209,9 @@ appended in place of the unquote-splice expression.
 
 The syntax forms \syntaxref{unquote} and \syntaxref{unquote-splicing} can be
 abbreviated respectively by using the glyph called {\em comma}
-(\verb+,+)\ttindex{unquote!abbreviation with {\tt ,}} preceding an expression
-and by using the diphthong {\em comma} followed by the glyph called {\em
-    commercial at} (\verb+,@+)\ttindex{unquote-splicing!abbreviation to ,@}
+(\verb+,+)\ttsubindex{unquote}{abbreviation with {\tt ,}} preceding an
+expression and by using the diphthong {\em comma} followed by the glyph called
+{\em commercial at} (\verb+,@+)\ttindex{unquote-splicing!abbreviation to ,@}
 preceding a form.  Thus, {\tt (\syntaxref{unquote} a)} may be written {\tt ,a}
 and {\tt (\syntaxref{unquote-splicing} a)} can be written {\tt ,@a}.
 %

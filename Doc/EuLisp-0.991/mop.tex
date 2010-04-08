@@ -153,7 +153,7 @@ The class of all local slot descriptions.
     \item[initarg, symbol] The key to access a supplied initial value.
 \end{initoptions}
 
-The default value for all initoptions is \nil.
+The default value for all initoptions is \nil{}.
 
 \function{slot-name}
 %
@@ -302,7 +302,7 @@ The minimal information associated with a method metaobject is:
 \begin{enumerate}
     \item The domain, which is a list of classes.
     \item The function comprising the code of the method.
-    \item The generic function to which the method has been added, or \nil\/ if
+    \item The generic function to which the method has been added, or \nil{}\/ if
     it is attached to no generic function.
 \end{enumerate}
 %
@@ -349,7 +349,7 @@ This function sets the function which implements the method.
 %
 \result%
 This function returns the generic function to which {\em method} is attached; if
-{\em method} is not attached to a generic function, it returns \nil.
+{\em method} is not attached to a generic function, it returns \nil{}.
 \end{optDefinition}
 
 \sclause{Class Initialization}
@@ -544,7 +544,7 @@ function for {\em class}.
 %
 \result%
 Computes and returns a function of one argument, which returns true when applied
-to direct or indirect instances of {\em class} and \nil\/ otherwise.
+to direct or indirect instances of {\em class} and \nil{}\/ otherwise.
 
 \generic{compute-constructor}
 %
@@ -711,7 +711,7 @@ install the new method in the {\em generic-function}.
 %
 \result%
 Returns {\em t} if {\em class} is compatible with {\em
-direct-superclasses}, otherwise \nil.
+direct-superclasses}, otherwise \nil{}.
 
 \method{compatible-superclasses-p}
 %
@@ -735,7 +735,7 @@ inheritance assumption).
 %
 \result%
 Returns \true\/ if {\em subclass} is compatible with {\em superclass},
-otherwise \nil.
+otherwise \nil{}.
 
 \method{compatible-superclass-p}
 %
@@ -746,10 +746,10 @@ otherwise \nil.
 %
 \result%
 Returns \true\/ if the class of the first argument is a subclass of
-the class of the second argument, otherwise \nil.
+the class of the second argument, otherwise \nil{}.
 
 If the implementation wishes to restrict the instantiation tree (see
-introduction to B.4), this method should return \nil\/ if {\em superclass}
+introduction to B.4), this method should return \nil{}\/ if {\em superclass}
 is \theclass{metaclass}.
 
 \method{compatible-superclass-p}
@@ -770,7 +770,7 @@ Always returns \true.
 \end{specargs}
 %
 \result%
-Always returns \nil.
+Always returns \nil{}.
 
 \method{compatible-superclass-p}
 %
@@ -846,7 +846,7 @@ The default method computes two sublists:
     \item Calling \genericref{compute-specialized-slot} with the
     three arguments (i) {\em class}, (ii) each {\em inherited-slot}
     as a singleton list, (iii) the {\em slot-spec} corresponding (by having the
-    same name) to the slot description, if it exists, otherwise \nil, giving a
+    same name) to the slot description, if it exists, otherwise \nil{}, giving a
     list of the specialized slot descriptions.
 
     \item Calling \genericref{compute-defined-slot} with the three
@@ -1033,7 +1033,7 @@ This method just returns the class \classref{local-slot}.
     \item[class, \classref{class}] Class being defined.
     \item[inherited-slots, \classref{list}] List of inherited slot descriptions
     (each of the same name as the slot being defined).
-    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil{}.
 \end{genericargs}
 %
 \result%
@@ -1043,7 +1043,7 @@ Slot description.
 Computes and returns a new effective slot description. It is called by
 \genericref{compute-slots} on the class, each list of inherited
 slots with the same name and with the specialising slot specification
-list or \nil\/ if no one is specified with the same name.
+list or \nil{}\/ if no one is specified with the same name.
 %
 \seealso%
 \genericref{compute-specialized-slot-class}.
@@ -1053,7 +1053,7 @@ list or \nil\/ if no one is specified with the same name.
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
     \item[inherited-slots, \classref{list}] List of inherited slot descriptions.
-    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil{}.
 \end{specargs}
 %
 \result%
@@ -1072,7 +1072,8 @@ is determined by calling
 \begin{genericargs}
     \item[class, \classref{class}] Class being defined.
     \item[inherited-slots, \classref{list}] List of inherited slot descriptions.
-    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or
+    \nil{}.
 \end{genericargs}
 %
 \result%
@@ -1092,7 +1093,8 @@ specialized (iii) the specializing information in {\em slot-spec}.
     \item[class, \classref{class}] Class being defined.
     \item[inherited-slots, \classref{list}] List of inherited slot
     descriptions.
-    \item[slot-spec, \classref{list}] Canonicalized slot specification or \nil.
+    \item[slot-spec, \classref{list}] Canonicalized slot specification or
+    \nil{}.
 \end{specargs}
 %
 \result%

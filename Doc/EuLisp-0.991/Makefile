@@ -56,8 +56,8 @@ $(DOCUMENT).pdf: $(SOURCE_FILES)
 	$(MAKE) clean
 	$(MAKE) index
 	pdflatex $(DOCUMENT)
-	$(MAKE) index
 	pdflatex $(DOCUMENT)
+	$(MAKE) index
 	pdflatex $(DOCUMENT)
 
 .PHONY: html
@@ -65,8 +65,8 @@ html: $(HTML_DIR)/$(DOCUMENT).html
 $(HTML_DIR)/$(DOCUMENT).html: $(SOURCE_FILES) $(4HT_FILES)
 	@mkdir -p $(HTML_DIR)
 	xhlatex $(DOCUMENT) "html,1,next,noannex" "" "-d./$(HTML_DIR)/"
-	$(MAKE) tex4htindex
 	xhlatex $(DOCUMENT) "html,1,next,noannex" "" "-d./$(HTML_DIR)/"
+	$(MAKE) tex4htindex
 	xhlatex $(DOCUMENT) "html,1,next,noannex" "" "-d./$(HTML_DIR)/"
 
 .PHONY: html1
@@ -74,8 +74,8 @@ html1: $(HTML1_DIR)/$(DOCUMENT).html
 $(HTML1_DIR)/$(DOCUMENT).html: $(SOURCE_FILES) $(4HT_FILES)
 	@mkdir -p $(HTML1_DIR)
 	xhlatex $(DOCUMENT) "html" "" "-d./$(HTML1_DIR)/"
-	$(MAKE) tex4htindex
 	xhlatex $(DOCUMENT) "html" "" "-d./$(HTML1_DIR)/"
+	$(MAKE) tex4htindex
 	xhlatex $(DOCUMENT) "html" "" "-d./$(HTML1_DIR)/"
 
 .PHONY: undefined

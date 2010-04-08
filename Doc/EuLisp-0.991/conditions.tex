@@ -122,7 +122,7 @@ This defining form defines a new condition class.  The first argument is the
 name to which the new condition class will be bound.  The second is the name of
 the superclass of the new condition class and an {\em init-option\/} is an
 identifier followed by its (default) initial value.  If {\em superclass-name\/}
-is \nil, the superclass is taken to be \classref{condition}.  Otherwise {\em
+is \nil{}, the superclass is taken to be \classref{condition}.  Otherwise {\em
     superclass-name\/} must be \classref{condition}\ or the name of one of its
 subclasses.
 
@@ -147,7 +147,7 @@ The class which is the superclass of all condition classes.
 \end{arguments}
 %
 \result%
-Returns {\em object\/} if it is a condition, otherwise \nil.
+Returns {\em object\/} if it is a condition, otherwise \nil{}.
 
 \method{initialize}
 %
@@ -307,7 +307,7 @@ method.
     RPG: definition of condition is messy.  Also, example 1 is not good (too
     operational).  In general, conditions before classes is hard to follow.
 
-    What happens if the resume continuation \nil\/ is called?
+    What happens if the resume continuation \nil{}\/ is called?
 
     Expand on {\em signaler's intention}.
 \end{optPrivate}
@@ -331,7 +331,7 @@ be the most specific.  Handlers are established by the special form
     \item[condition] The condition to be signalled.
 
     \item[function] The function to be called if the condition is handled and
-    resumed, that is to say, the condition is continuable, or \nil
+    resumed, that is to say, the condition is continuable, or \nil{}
     otherwise.
 
     \item[\optional{thread}] If this argument is not supplied, the condition is
@@ -352,7 +352,7 @@ If the third argument is not supplied, \functionref{signal} calls the
 dynamically closest handler with {\em condition} and {\em continuation}.  If the
 second argument is a subclass of {\tt function}, it is the {\em resume}
 continuation to be used in the case of a handler deciding to resume from a
-continuable condition.  If the second argument is \nil, it indicates that the
+continuable condition.  If the second argument is \nil{}, it indicates that the
 condition was signalled as a non-continuable condition---in this way the handler
 is informed of the signaler's intention.
 
@@ -409,7 +409,7 @@ handler function
     accept or resume the condition.  A handler function takes two arguments: a
     condition, and a {\em resume} function/continuation.  The condition is the
     condition object that was passed to \functionref{signal} as its first
-    argument.  The {\em resume} continuation is the continuation (or \nil) that
+    argument.  The {\em resume} continuation is the continuation (or \nil{}) that
     was given to \functionref{signal} as its second argument.
 
     \item[forms] The sequence of forms whose execution is protected by the {\em
@@ -502,13 +502,13 @@ An illustration of the use of all three cases is given here:
 \end{arguments}
 %
 \result%
-The result is \nil.
+The result is \nil{}.
 %
 \remarks%
 The \functionref{error} function signals a non-continuable error.  It calls
 \functionref{signal} with an instance of a condition of {\em condition-class}
 initialized from {\em init-option}\/s, the {\em error-message} and a {\em
-    resume} continuation value of \nil, signifying that the condition was not
+    resume} continuation value of \nil{}, signifying that the condition was not
 signalled continuably.
 
 \function{cerror}
@@ -523,14 +523,14 @@ signalled continuably.
 \end{arguments}
 %
 \result%
-The result is \nil.
+The result is \nil{}.
 %
 \remarks%
 The \functionref{cerror} function signals a continuable error.  It calls
 \functionref{signal} with an instance of a condition of {\em condition-class}
 initialized from {\em init-option}\/s, the {\em error-message} and a {\em
     resume} continuation value which is the continuation of the
-\functionref{cerror} expression.  A non-\nil\/ resume continuation signifies
+\functionref{cerror} expression.  A non-\nil{}\/ resume continuation signifies
 that the condition has been signalled continuably.
 %
 \end{optDefinition}
