@@ -177,8 +177,7 @@ as the value of the \macroref{catch} form.
 %
 \rewriterules
 %
-\savesyntax\catchRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{catch}{lll}
     (\macroref{catch}) & \rewrite &
         {\rm Is an error}\\
     (\macroref{catch} {\em tag}) & \rewrite &
@@ -192,10 +191,8 @@ as the value of the \macroref{catch} form.
         \>\>\forms))
     \end{tabbing}
     \end{minipage}
-\end{tabular}
-}
-\rewritetable{catch}{\catchRewrite}
-
+\end{RewriteTable}
+%
 Exiting from a \macroref{catch}, by whatever means, causes the restoration of
 the lexical environment and dynamic environment that existed before the
 \macroref{catch} was entered.  The above rewrite for \macroref{catch}, causes
@@ -226,17 +223,14 @@ bound.
 %
 \rewriterules
 %
-\savesyntax\throwRewrite\vbox{\tt%
-\begin{tabular}{lll}
+\begin{RewriteTable}{throw}{lll}
     (\macroref{throw}) & \rewrite &
         {\rm Is an error}\\
     (\macroref{throw} {\em tag}) & \rewrite &
         ((\keywordref{dynamic} {\em tag}) ())\\
     (\macroref{throw} {\em tag} \form) & \rewrite &
         ((\keywordref{dynamic} {\em tag}) \form)
-\end{tabular}
-}
-\rewritetable{throw}{\throwRewrite}
+\end{RewriteTable}
 %
 \seealso%
 \macroref{catch}.

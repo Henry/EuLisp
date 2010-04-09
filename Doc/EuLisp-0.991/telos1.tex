@@ -6,7 +6,7 @@
 %
 \Syntax
 \label{defclass-syntax}
-\savesyntax\defclassSyntax\vbox{\small\syntax
+\savesyntax\defclassSyntax\vbox{\syntax
 defclass form
    = '(', 'defclass',
      class name, (* \[\S\ref{defclass}\] *)
@@ -171,7 +171,7 @@ The {\em class-option}\/s are interpreted as follows:
 \label{generic-lambda-1}
 %
 \Syntax
-\savesyntax\genericLambdaOneSyntax\vbox{\small\syntax
+\savesyntax\genericLambdaOneSyntax\vbox{\syntax
 generic lambda form
    = '(', 'generic-lambda', gf lambda list,
      {level 1 init option}, ')';
@@ -254,7 +254,7 @@ methods on a generic function.  These are interpreted as follows:
 \defformref{defgeneric}) is defined.  In all other respects the resulting object
 is the same as {\tt gf-1}.
 %
-{\small\syntax
+{\syntax
 (generic-lambda (arg1 (arg2 <class-a>))
 
   class <another-gf-class>
@@ -284,7 +284,7 @@ is the same as {\tt gf-1}.
 \label{defgeneric-1}
 %
 \Syntax
-\savesyntax\defgenericOneSyntax\vbox{\small\syntax
+\savesyntax\defgenericOneSyntax\vbox{\syntax
 defgeneric form
    = '(', 'defgeneric',
      gf name, (* \[\ref{defgeneric-0}\] *)
@@ -337,7 +337,7 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 \end{enumerate}
 %
 \begin{optPrivate}
-{\small\begin{verbatim}
+{\begin{verbatim}
 (defgeneric gf-1 (arg1 (arg2 <class-a>))
   class <another-gf-class>
   class-key-a class-value-a
@@ -355,7 +355,7 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 )\end{verbatim}}
 %
 \end{optPrivate}
-{\small\syntax
+{\syntax
 (defgeneric gf-1 (arg1 (arg2 <class-a>))
 
   class <another-gf-class>
@@ -382,7 +382,7 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 
 \macro{method-lambda}
 \Syntax
-\savesyntax\methodLambdaOneSyntax\vbox{\small\syntax
+\savesyntax\methodLambdaOneSyntax\vbox{\syntax
 method lambda form
    = '(', 'method-lambda',
      {method init option}, (* \[\S\ref{generic-lambda-1}\] *)
@@ -417,7 +417,7 @@ options, which are evaluated in the lexical and dynamic environment of
 
 \macro{defmethod}
 \Syntax
-\savesyntax\defmethodOneSyntax\vbox{\small\syntax
+\savesyntax\defmethodOneSyntax\vbox{\syntax
 defmethod form
    = '(', 'defmethod', gf name,
      {method init option}, (* \[\S\ref{generic-lambda-1}\] *)

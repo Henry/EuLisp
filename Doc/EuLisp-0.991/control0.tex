@@ -49,7 +49,7 @@ itself\index{general}{processing!constants}.
 \defform{defconstant}
 %
 \Syntax
-\savesyntax\defconstantSyntax\vbox{\small\syntax
+\savesyntax\defconstantSyntax\vbox{\syntax
 defconstant form
    = '(', 'defconstant', identifier, form, ')';
 \endsyntax}
@@ -91,7 +91,7 @@ constant---that is, an immutable top-lexical binding.
 \defform{deflocal}
 %
 \Syntax
-\savesyntax\deflocalSyntax\vbox{\small\syntax
+\savesyntax\deflocalSyntax\vbox{\syntax
 deflocal form
    = '(', 'deflocal', identifier, form, ')';
 \endsyntax}
@@ -116,7 +116,7 @@ The value of \form{} is stored in the top-lexical binding of {\em
 \index{general}{literal}
 %
 \Syntax
-\savesyntax\quoteSyntax\vbox{\small\syntax
+\savesyntax\quoteSyntax\vbox{\syntax
 quote form
    = '(', 'quote', object, ')';
 \endsyntax}
@@ -158,7 +158,7 @@ is an error to modify a literal expression\index{general}{literal!modification
 %
 \Syntax
 \label{lambda-syntax-table}
-\savesyntax\lambdaSyntax\vbox{\small\syntax
+\savesyntax\lambdaSyntax\vbox{\syntax
 lambda form
    = '(', 'lambda', lambda list, {form}, ')';
 lambda list
@@ -202,7 +202,7 @@ error to modify {\em rest-list}.
 \syntaxform{defmacro}
 %
 \Syntax
-\savesyntax\defmacroSyntax\vbox{\small\syntax
+\savesyntax\defmacroSyntax\vbox{\syntax
 defmacro form
    = '(', 'defmacro', macro name, lambda list,
      {form}, ')';
@@ -239,7 +239,7 @@ of the {\em lambda-list} is as defined for \keywordref{lambda} (see
 \syntaxform{defun}
 %
 \Syntax
-\savesyntax\defunSyntax\vbox{\small\syntax
+\savesyntax\defunSyntax\vbox{\syntax
 defun form
    = simple defun
    | setter defun;
@@ -275,8 +275,7 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
 %
 \rewriterules
 %
-\savesyntax\defunRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{defun}{lll}
 \begin{minipage}[t]{\columnwidth}%
     \begin{tabbing}%
         00\= \kill
@@ -314,14 +313,13 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
         \>{\em body}))
     \end{tabbing}%
 \end{minipage}%
-\end{tabular}}%
-\rewritetable{defun}{\defunRewrite}
-%
+\end{RewriteTable}
+
 \metasyntaxform{function call}
 \index{general}{function!calling}
 %
 \Syntax
-\savesyntax\functioncallSyntax\vbox{\small\syntax
+\savesyntax\functioncallSyntax\vbox{\syntax
 function call form
    = '(', operator, {operand}, ')';
 \endsyntax}
@@ -374,7 +372,7 @@ Signalled by function call if the operator is not an instance of
 \function{apply}
 %
 \Syntax
-\savesyntax\applySyntax\vbox{\small\syntax
+\savesyntax\applySyntax\vbox{\syntax
 apply form
    = '(', 'apply', function, {form}, ')';
 \endsyntax}
@@ -416,7 +414,7 @@ binding named by a identifier---that is, a variable.
 \keyword{setq}
 %
 \Syntax
-\savesyntax\setqSyntax\vbox{\small\syntax
+\savesyntax\setqSyntax\vbox{\syntax
 setq form
    = '(', 'setq', identifier, form, ')';
 \endsyntax}
@@ -512,7 +510,7 @@ the given accessor is immutable.
 \keyword{if}
 %
 \Syntax
-\savesyntax\ifSyntax\vbox{\small\syntax
+\savesyntax\ifSyntax\vbox{\syntax
 if form
    = '(', 'if', antecedent, consequent,
      alternative, ')';
@@ -541,7 +539,7 @@ of \keywordref{if} is the result of the evaluation of whichever of {\em
 \macro{cond}
 %
 \Syntax
-\savesyntax\condSyntax\vbox{\small\syntax
+\savesyntax\condSyntax\vbox{\syntax
 cond macro
    = '(', 'cond',
           {'(', antecedent, {consequent}, ')'}, ')';
@@ -554,8 +552,7 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 %
 \rewriterules
 %
-\savesyntax\condRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{cond}{lll}
     (\macroref{cond}) &\rewrite& () \\
     (\macroref{cond} ({\em antecedent}) \\
     \tts\ldots) &\rewrite&
@@ -600,14 +597,12 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
     \>\>\ldots))
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}%
-}%
-\rewritetable{cond}{\condRewrite}
+\end{RewriteTable}
 
 \macro{and}
 %
 \Syntax
-\savesyntax\andSyntax\vbox{\small\syntax
+\savesyntax\andSyntax\vbox{\syntax
 and macro
    = '(', 'and', {form}, ')';
 \endsyntax}
@@ -623,8 +618,7 @@ will be evaluated---that is to say, it is non-strict.  The result of {\tt
 %
 \rewriterules
 %
-\savesyntax\andRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{and}{lll}
     (\macroref{and}) &\rewrite& \true{} \\
     (\macroref{and} \form) &\rewrite& \form{} \\
     (\macroref{and} \form$_1$ \form$_2$ \ldots) &\rewrite&
@@ -635,13 +629,12 @@ will be evaluated---that is to say, it is non-strict.  The result of {\tt
     \>())
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}%
-\rewritetable{and}{\andRewrite}
+\end{RewriteTable}
 
 \macro{or}
 %
 \Syntax
-\savesyntax\orSyntax\vbox{\small\syntax
+\savesyntax\orSyntax\vbox{\syntax
 or macro
    = '(', 'or', {form}, ')';
 \endsyntax}
@@ -657,8 +650,7 @@ returned.
 %
 \rewriterules
 %
-\savesyntax\orRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{or}{lll}
     (\macroref{or}) &\rewrite& () \\
     (\macroref{or} \form) &\rewrite& \form{} \\
     (\macroref{or} \form$_1$ \form$_2$ \ldots) &\rewrite&
@@ -670,9 +662,8 @@ returned.
     \>\>(\macroref{or} \form$_2$ \ldots)))
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}%
-\rewritetable{or}{\orRewrite}
-
+\end{RewriteTable}
+%
 Note that {\tt x} does not occur free in any of \form$_2$ \ldots {\em
     form}$_n$.
 %
@@ -710,7 +701,7 @@ Note that {\tt x} does not occur free in any of \form$_2$ \ldots {\em
 \ttsubindex{let/cc}{see also \macroref{block} and \macroref{return-from}}
 %
 \Syntax
-\savesyntax\letccSyntax\vbox{\small\syntax
+\savesyntax\letccSyntax\vbox{\syntax
 let/cc form
    = '(', 'let/cc', identifier, {form}, ')';
 \endsyntax}
@@ -752,26 +743,26 @@ terminates and an error (condition class: \conditionref{cannot-open-path}) is
 signalled.
 %
 \begin{example}
-    \label{example:pathopen}
-    \examplecaption{using {\tt let/cc}}
-    {\small\syntax
-    (defun path-open (pathlist name . options)
-      (let/cc succeed
-        (map
-          (lambda (path)
-            (let/cc fail
-              (with-handler
-                (lambda (condition resume) (fail ()))
-                (succeed (apply open
-                           (format nil "~a/~a" path name)
-                           options)))))
-          pathlist)
-        (error
-          (format nil
-            "path-open: cannot open stream for (~a) ~a"
-            pathlist name)
-          <cannot-open-path>)))
-    \endsyntax}
+\label{example:pathopen}
+\examplecaption{using \keywordref{let/cc}}
+{\syntax
+(defun path-open (pathlist name . options)
+  (let/cc succeed
+    (map
+      (lambda (path)
+        (let/cc fail
+          (with-handler
+            (lambda (condition resume) (fail ()))
+            (succeed (apply open
+                       (format nil "~a/~a" path name)
+                       options)))))
+      pathlist)
+    (error
+      (format nil
+        "path-open: cannot open stream for (~a) ~a"
+        pathlist name)
+      <cannot-open-path>)))
+\endsyntax}
 \end{example}
 %
 \seealso%
@@ -781,7 +772,7 @@ signalled.
 %
 \ttsubindex{block}{see also \keywordref{let/cc}}
 \Syntax
-\savesyntax\blockSyntax\vbox{\small\syntax
+\savesyntax\blockSyntax\vbox{\syntax
 block macro
    = '(', 'block', identifier, {form}, ')';
 \endsyntax}
@@ -797,15 +788,13 @@ as the value of the block form.  See also \keywordref{let/cc}.
 %
 \rewriterules
 %
-\savesyntax\blockRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{block}{lll}
     (\macroref{block} \identifier) &\rewrite& ()\\
     (\macroref{block} \identifier{}  &\rewrite&
     (\keywordref{let/cc} \identifier{} \\
     \tts\forms)                    && \tts\forms)
-\end{tabular}}%
-\rewritetable{block}{\blockRewrite}
-
+\end{RewriteTable}
+%
 The rewrite for \macroref{block} does not prevent the \macroref{block} being
 exited from anywhere in its dynamic extent, since the function bound
 to \identifier{} is a first-class item and can be passed as an
@@ -818,7 +807,7 @@ argument like other values.
 \ttsubindex{return-from}{see also \keywordref{let/cc}}
 %
 \Syntax
-\savesyntax\returnfromSyntax\vbox{\small\syntax
+\savesyntax\returnfromSyntax\vbox{\syntax
 return from macro
    = '(', 'return-from', identifier, [form], ')';
 \endsyntax}
@@ -838,8 +827,7 @@ is returned as the value of the block named by \identifier.
 %
 \rewriterules
 %
-\savesyntax\returnFromRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{return-from}{lll}
     (\macroref{return-from} \identifier) &\rewrite& (\identifier{} ())\\
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
@@ -849,8 +837,7 @@ is returned as the value of the block named by \identifier.
 \end{tabbing}
 \end{minipage}
 &\rewrite& (\identifier{} \form)
-\end{tabular}}%
-\rewritetable{return-from}{\returnFromRewrite}
+\end{RewriteTable}
 %
 \seealso%
 \macroref{block}.
@@ -858,7 +845,7 @@ is returned as the value of the block named by \identifier.
 \keyword{labels}
 %
 \Syntax
-\savesyntax\labelsSyntax\vbox{\small\syntax
+\savesyntax\labelsSyntax\vbox{\syntax
 labels form
    = '(', 'labels',
           '(', {function definition}, ')',
@@ -896,7 +883,7 @@ result of the \keywordref{labels} form.
 \macro{let}
 %
 \Syntax
-\savesyntax\letSyntax\vbox{\small\syntax
+\savesyntax\letSyntax\vbox{\syntax
 let macro
    = '(', 'let', [identifier], '(', {binding}, ')',
      {form}, ')';
@@ -923,8 +910,7 @@ the \macroref{let} form.
 %
 \rewriterules
 %
-\savesyntax\letRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{let}{lll}
     (\macroref{let} () \forms) &\rewrite& (\keywordref{progn} \forms) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
@@ -965,13 +951,12 @@ the \macroref{let} form.
     \>({\em id$_0$} \form$_1$ () \ldots))
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}%
-\rewritetable{let}{\letRewrite}
+\end{RewriteTable}
 
 \macro{let*}
 %
 \Syntax
-\savesyntax\letstarSyntax\vbox{\small\syntax
+\savesyntax\letstarSyntax\vbox{\syntax
 let star macro
    = '(', 'let*', '(', {binding}, ')', {form}, ')';
 \endsyntax}
@@ -990,8 +975,7 @@ form.
 %
 \rewriterules
 %
-\savesyntax\letStarRewrite\vbox{\tt%
-\begin{tabular}{lll}%
+\begin{RewriteTable}{let*}{lll}
     (\macroref{let*} () \forms) &\rewrite& (progn \forms) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
@@ -1015,13 +999,12 @@ form.
     \>\>\forms))
 \end{tabbing}%
 \end{minipage}%
-\end{tabular}}%
-\rewritetable{let*}{\letStarRewrite}
+\end{RewriteTable}
 
 \keyword{progn}
 %
 \Syntax
-\savesyntax\prognSyntax\vbox{\small\syntax
+\savesyntax\prognSyntax\vbox{\syntax
 progn form
    = '(', 'progn', {form}, ')';
 \endsyntax}
@@ -1071,7 +1054,7 @@ environments.
 \keyword{unwind-protect}
 %
 \Syntax
-\savesyntax\unwindprotectSyntax\vbox{\small\syntax
+\savesyntax\unwindprotectSyntax\vbox{\syntax
 unwind protect form
    = '(', 'unwind-protect', protected form,
      {after form}, ')';
@@ -1107,7 +1090,7 @@ order of dynamic extent.
 \begin{example}
 \label{example:unwind-loop}
 \examplecaption{Interaction of \keywordref{unwind-protect} with non-local exits}
-{\small\syntax
+{\syntax
 (progn
   (let/cc k1
     (labels
@@ -1148,7 +1131,7 @@ called; {\tt loop} is called; etc..  This program loops indefinitely.
 \macro{quasiquote}
 %
 \Syntax
-\savesyntax\quasiquoteSyntax\vbox{\small\syntax
+\savesyntax\quasiquoteSyntax\vbox{\syntax
 quasiquote macro
    = '(', 'quasiquote', skeleton, ')';
 \endsyntax}
@@ -1170,7 +1153,7 @@ abbreviated by using the glyph called {\em grave accent}
 %
 \ttindex{unquote}
 \Syntax
-\savesyntax\unquoteSyntax\vbox{\small\syntax
+\savesyntax\unquoteSyntax\vbox{\syntax
 unquote syntax
    = '(', 'unquote', form, ')'
    | ',', form;
@@ -1184,7 +1167,7 @@ See \syntaxref{unquote-splicing}.
 \ttindex{unquote-splicing}
 %
 \Syntax
-\savesyntax\unquotespliceSyntax\vbox{\small\syntax
+\savesyntax\unquotespliceSyntax\vbox{\syntax
 unquotespliceing syntax
    = '(', 'unquote-splicing', form, ')'
    | ',@', form;
@@ -1216,9 +1199,10 @@ preceding a form.  Thus, {\tt (\syntaxref{unquote} a)} may be written {\tt ,a}
 and {\tt (\syntaxref{unquote-splicing} a)} can be written {\tt ,@a}.
 %
 \examples
-{\small\tt\begin{tabular}{lll}
-        `(a ,(list 1 2) b) & $\rightarrow$ & (a (1 2) b)\\
-        `(a ,@(list 1 2) b) & $\rightarrow$ & (a 1 2 b)
+{\tt
+\begin{tabular}{lll}
+    `(a ,(list 1 2) b) & $\rightarrow$ & (a (1 2) b)\\
+    `(a ,@(list 1 2) b) & $\rightarrow$ & (a 1 2 b)
 \end{tabular}}
 %
 \end{optDefinition}

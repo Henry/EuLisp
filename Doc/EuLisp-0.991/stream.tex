@@ -857,7 +857,7 @@ connected to the file system object identified by {\em path}.
 \macro{with-input-file}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withinputfileSyntax\vbox{\small\syntax
+\savesyntax\withinputfileSyntax\vbox{\syntax
 with-input-file macro
    = '(', 'with-input-file', path,  {form}, ')';
 \endsyntax}
@@ -867,34 +867,35 @@ with-input-file macro
 \macro{with-output-file}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withoutputfileSyntax\vbox{\small\syntax
+\savesyntax\withoutputfileSyntax\vbox{\syntax
 with-output-file macro
    = '(', 'with-output-file', path,  {form}, ')';
 \endsyntax}
 \syntaxtable{with-output-file}{\withoutputfileSyntax}
 
-
 % ------------------------------------------------------------------------------
 \macro{with-source}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withoutputfileSyntax\vbox{\small\syntax
+\savesyntax\withsourceSyntax\vbox{\syntax
 with-source macro
    = '(', 'with-source',
-          '(', identifier, expression, ')', {form}, ')';
+          '(', identifier, expression, ')',
+          {form}, ')';
 \endsyntax}
-\syntaxtable{with-output-file}{\withoutputfileSyntax}
+\syntaxtable{with-source}{\withsourceSyntax}
 
 % ------------------------------------------------------------------------------
 \macro{with-sink}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withoutputfileSyntax\vbox{\small\syntax
+\savesyntax\withsinkSyntax\vbox{\syntax
 with-sink macro
    = '(', 'with-sink',
-          '(', identifier, expression, ')', {form}, ')';
+          '(', identifier, expression, ')',
+          {form}, ')';
 \endsyntax}
-\syntaxtable{with-output-file}{\withoutputfileSyntax}
+\syntaxtable{with-sink}{\withsinkSyntax}
 
 \end{optDefinition}
 %

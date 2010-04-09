@@ -372,7 +372,8 @@ case of the above error.
 %
 \Syntax
 \label{call-next-handler-syntax}
-\savesyntax\callnexthandlerSyntax\vbox{\small\syntax
+\savesyntax\callnexthandlerSyntax\vbox{
+\syntax
 call-next-handler form
    = '(', 'call-next-handler', ')';
 \endsyntax}
@@ -391,7 +392,8 @@ generic handler function).
 %
 \Syntax
 \label{with-handler-syntax}
-\savesyntax\withhandlerSyntax\vbox{\small\syntax
+\savesyntax\withhandlerSyntax\vbox{
+\syntax
 with-handler form
    = '(', 'with-handler',
      handler function,
@@ -475,10 +477,12 @@ An illustration of the use of all three cases is given here:
 \begin{example}
 \label{example:with-handler}
 \examplecaption{handler actions}
-{\small\syntax
+{\syntax
 (defgeneric error-handler (condition)
-   method: (((c <serious-error>)) ... abort thread ...)
-   method: (((c <fixable-situation>)) ...apply fix and return ... )
+   method: (((c <serious-error>))
+            ... abort thread ...)
+   method: (((c <fixable-situation>))
+            ... apply fix and return ... )
    method: (((c <condition>) (call-next-handler))))
 
 (with-handler error-handler

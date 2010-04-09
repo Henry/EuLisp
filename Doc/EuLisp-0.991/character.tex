@@ -45,7 +45,8 @@ table~\ref{character-syntax}.
 \def\x{\string\x}
 
 % \global so it doesn't get reset to void when we leave this group...
-\global\setbox\characterSyntax\vbox{\small\syntax
+\global\setbox\characterSyntax\vbox{
+\syntax
 character token
    = literal character token
    | special character token

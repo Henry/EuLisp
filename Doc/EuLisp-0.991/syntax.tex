@@ -30,27 +30,29 @@ which permits its use as an initial or a constituent character of an identifier
 %
 \def\'{\string\'}
 %
-\global\setbox\characterSet\vbox{\small\syntax
+\global\setbox\characterSet\vbox{
+\syntax
 decimal digit
-   = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7'
-   | '8' | '9';
+   = '0' | '1' | '2' | '3' | '4' | '5' | '6'
+   | '7' | '8' | '9';
 upper letter
-   = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H'
-   | 'I' | 'J' | 'K' | 'L' | 'M' | 'N' | 'O' | 'P'
-   | 'Q' | 'R' | 'S' | 'T' | 'U' | 'V' | 'W' | 'X'
-   | 'Y' | 'Z';
+   = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'
+   | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N'
+   | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U'
+   | 'V' | 'W' | 'X' | 'Y' | 'Z';
 lower letter
-   = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g' | 'h'
-   | 'i' | 'j' | 'k' | 'l' | 'm' | 'n' | 'o' | 'p'
-   | 'q' | 'r' | 's' | 't' | 'u' | 'v' | 'w' | 'x'
-   | 'y' | 'z';
+   = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g'
+   | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n'
+   | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u'
+   | 'v' | 'w' | 'x' | 'y' | 'z';
 letter
    = upper letter | lower letter;
 other character
-   = '*' | '/' | '<' | '=' | '>' | '+' | '-' | '.';
+   = '*' | '/' | '<' | '=' | '>' | '+' | '-'
+   | '.';
 special character
-   = ';' | "'" | ',' | '\' | '"' | '#' | '(' | ')'
-   | '`' | '|' | '@';
+   = ';' | "'" | ',' | '\' | '"' | '#'
+   | '(' | ')' | '`' | '|' | '@';
 level 0 character
    = decimal digit | letter | other character
    | special character;
@@ -102,7 +104,8 @@ the section of this definition corresponding to the class as defined below:
 %
 \Syntax
 \label{object-syntax}
-\savesyntax\objectSyntax\vbox{\small\syntax
+\savesyntax\objectSyntax\vbox{
+\syntax
 object
     = character (* \[\S\ref{character}\] *)
     | float (* \[\S\ref{float}\] *)

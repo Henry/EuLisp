@@ -42,8 +42,7 @@ directed acyclic graph.
 \label{example:module}
 \examplecaption{module directives}
 \begin{center}
-\begin{minipage}[t]{\textwidth}
-{\small%
+\begin{minipage}[t]{\textwidth}{
 \syntax
 (defmodule a-module
   (import
@@ -210,13 +209,12 @@ example~\ref{example:exposes}.
 %
 \begin{example}
 \label{example:exposes}
-\examplecaption{module using {\tt expose}}
-{\small%
+\examplecaption{module using {\tt expose}}{
 \syntax
 (defmodule eulisp-level-0
   (expose
-    (character collection compare condition convert copy
-     double-float elementary-functions event
+    (character collection compare condition convert
+     copy double-float elementary-functions event
      formatted-io fixed-precision-integer function
      keyword list lock number object-0 stream string
      symbol syntax-0 table thread vector)))
@@ -270,8 +268,7 @@ forms.  This is specified more precisely in the grammar for a module given
 below.
 %
 \Syntax
-\savesyntax\defmoduleZeroSyntax\vbox
-{\small%
+\savesyntax\defmoduleZeroSyntax\vbox{
 \syntax
 module syntax
    = '(', 'defmodule', module name,
@@ -305,7 +302,7 @@ rename pair
 \endsyntax
 }
 %
-\savesyntax\defmoduleOneSyntax\vbox{\small
+\savesyntax\defmoduleOneSyntax\vbox{
 \syntax
 module
    = '(', 'defmodule', module name,

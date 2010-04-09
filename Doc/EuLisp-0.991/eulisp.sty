@@ -2,14 +2,15 @@
 \typeout{Document style `EuLisp'  - May 89, July 92, Mar 2010}
 
 \RequirePackage{ifthen}%
+\RequirePackage{framed}%
 
 % ------------------------------------------------------------------------------
 %%% Default page layout
 
-\renewcommand{\textfraction}{.1}
-\renewcommand{\topfraction}{.9}
-\renewcommand{\bottomfraction}{.1}
-\renewcommand{\floatpagefraction}{.9}
+\renewcommand*{\textfraction}{.1}
+\renewcommand*{\topfraction}{.9}
+\renewcommand*{\bottomfraction}{.1}
+\renewcommand*{\floatpagefraction}{.9}
 
 % ------------------------------------------------------------------------------
 %%% Optional sections: optRationale/optDefinition/optPrivate
@@ -22,48 +23,57 @@
 % ------------------------------------------------------------------------------
 %%% Macros for commonly used names
 
-\newcommand{\telos}{{\small T}{\scriptsize ELOS}}
-\newcommand{\lisp}{{\small L}{\scriptsize ISP}}
-\newcommand{\lelisp}{{\small L}{\scriptsize E}$\!${\small -}$\!$\lisp}
-\newcommand{\mceyx}{$\mu${\small C}{\scriptsize EYX}}
-\newcommand{\eulisp}{$\!\!${\small E}{\scriptsize U}$\!\!$\lisp}
-\newcommand{\cl}{Common Lisp}
-\newcommand{\interlisp}{{\small I}{\scriptsize nter}$\!\!$\lisp}
-\newcommand{\clos}{{\small CLOS}}
-\newcommand{\ools}{object-oriented languages}
-\newcommand{\Cpp}{C\raise.22ex\hbox{+}\raise.22ex\hbox{+}}
-\newcommand{\youtoo}{Youtoo}
+\newcommand*{\telos}{{\small T}{\scriptsize ELOS}}
+\newcommand*{\lisp}{{\small L}{\scriptsize ISP}}
+\newcommand*{\lelisp}{{\small L}{\scriptsize E}$\!${\small -}$\!$\lisp}
+\newcommand*{\mceyx}{$\mu${\small C}{\scriptsize EYX}}
+\newcommand*{\eulisp}{$\!\!${\small E}{\scriptsize U}$\!\!$\lisp}
+\newcommand*{\cl}{Common Lisp}
+\newcommand*{\interlisp}{{\small I}{\scriptsize nter}$\!\!$\lisp}
+\newcommand*{\clos}{{\small CLOS}}
+\newcommand*{\ools}{object-oriented languages}
+\newcommand*{\Cpp}{C\raise.22ex\hbox{+}\raise.22ex\hbox{+}}
+\newcommand*{\youtoo}{Youtoo}
 
 % ------------------------------------------------------------------------------
 %%% General typesetting macros
 
-\newcommand{\theclass}[1]{{\tt{}<#1>}}
-\newcommand{\nil}{\syntaxref{()}}
-\newcommand{\true}{\constantref{t}}
-\newcommand{\Ra}{$\Rightarrow$}
+\newcommand*{\theclass}[1]{{\tt{}<#1>}}
+\newcommand*{\nil}{\syntaxref{()}}
+\newcommand*{\true}{\constantref{t}}
+\newcommand*{\Ra}{$\Rightarrow$}
 
 % ------------------------------------------------------------------------------
 %%% Index typesetting
 
-%\newcommand*{\ii}[1]{{\it #1}}
-\newcommand*{\hyperii}[1]{{\bfseries\em\hyperpage{#1}}}
+% Command to set the font of a particular page number in the index to emphatic
+%\newcommand*{\hyperem}[1]{{\bfseries\em\def\@linkcolor{blue}\hyperpage{#1}}}
+
+% Command to set the colour of a particular page number in the index to blue
+\newcommand*{\hyperem}[1]{{\def\@linkcolor{blue}\hyperpage{#1}}}
+
 \newcommand*{\ttindexlabel}[1]{#1@{\tt #1}}
+
+% Add a \tt entry to the general index, e.g. and language keyword
 \newcommand*{\ttindex}[1]{\index{general}{\ttindexlabel{#1}}}
-\newcommand*{\ttiindex}[1]{\index{general}{\ttindexlabel{#1}|hyperii}}
-%\newcommand*{\ttiindex}[1]{\index{general}{\ttindexlabel{#1}}}
+
+% Add a language keyword, syntax form, function, etc. definition
+% to the general index with the page number in emphatic
+\newcommand*{\ttindexdef}[1]{\index{general}{\ttindexlabel{#1}|hyperem}}
+
 \newcommand*{\ttsubindex}[2]{\index{general}{\ttindexlabel{#1}!#2}}
 
-\newcommand{\undefmod}{undefined-module}
-\newcommand{\module}{\undefmod}
+\newcommand*{\undefmod}{undefined-module}
+\newcommand*{\module}{\undefmod}
 
-\newcommand{\indexfunc}[1]{\index{function}{#1@{\tt{}#1} (\module)}}
-\newcommand{\indexgen}[1]{\index{generic}{#1@{\tt{}#1} (\module)}}
-\newcommand{\indexmeth}[1]{\index{method}{#1@{\tt{}#1} (\module)}}
-\newcommand{\indexmac}[1]{\index{macro}{#1@{\tt{}#1} (\module)}}
-\newcommand{\indexconst}[1]{\index{constant}{#1@{\tt{}#1} (\module)}}
-\newcommand{\indexcond}[1]{\index{condition}{#1@{\tt{}#1} (\module)}}
-\newcommand{\indexcondition}[1]{\index{condition}{#1@{\tt{}#1} (\module)}}
-\newcommand{\indexmodule}[1]{\index{module}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexfunc}[1]{\index{function}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexgen}[1]{\index{generic}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexmeth}[1]{\index{method}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexmac}[1]{\index{macro}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexconst}[1]{\index{constant}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexcond}[1]{\index{condition}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexcondition}[1]{\index{condition}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexmodule}[1]{\index{module}{#1@{\tt{}#1} (\module)}}
 
 \renewcommand{\printindex}[2]
 {%
@@ -116,183 +126,183 @@
 }
 
 %%%  function
-\newcommand{\functionlabel}[1]{function:#1}
+\newcommand*{\functionlabel}[1]{function:#1}
 \newcommand{\functionlabeled}[2]
 {%
-    \ttiindex{#1}%
-    \indexfunc{#1}%
     \entryclause{#1}{function}%
     \label{\functionlabel{#2}}%
+    \ttindexdef{#1}%
+    \indexfunc{#1}%
 }
-\newcommand{\function}[1]
+\newcommand*{\function}[1]
 {%
     \functionlabeled{#1}{#1}%
 }
-\newcommand{\functionref}[1]{\hyperref[\functionlabel{#1}]{{\tt #1}}}
-\newcommand{\functionreflabel}[2]{\hyperref[\functionlabel{#2}]{{\tt #1}}}
+\newcommand*{\functionref}[1]{\hyperref[\functionlabel{#1}]{{\tt #1}}}
+\newcommand*{\functionreflabel}[2]{\hyperref[\functionlabel{#2}]{{\tt #1}}}
 
 %%%  Setter
-\newcommand{\setterlabel}[1]{setter:#1}
+\newcommand*{\setterlabel}[1]{setter:#1}
 \newcommand{\setter}[1]
 {%
-    \index{general}{setter#1@{\tt (setter #1)}}%
-    \index{function}{setter#1@{\tt (setter #1)} (\module)}%
     \entryclause{(setter #1)}{setter}%
     \label{\setterlabel{#1}}%
+    \index{general}{setter#1@{\tt (setter #1)}}%
+    \index{function}{setter#1@{\tt (setter #1)} (\module)}%
 }
-\newcommand{\setterref}[1]{\hyperref[\setterlabel{#1}]{{\tt #1}}}
+\newcommand*{\setterref}[1]{\hyperref[\setterlabel{#1}]{{\tt #1}}}
 
 %%% Converter
-\newcommand{\converterlabel}[1]{converter:#1}
+\newcommand*{\converterlabel}[1]{converter:#1}
 \newcommand{\converter}[1]
 {%
-    \index{general}{converter#1@{\tt (converter <#1>)}}%
-    \index{method}{converter#1@{\tt (converter <#1>)} (\module)}%
     \entryclause{(converter <#1>)}{converter}%
     \label{\converterlabel{#1}}%
+    \index{general}{converter#1@{\tt (converter <#1>)}}%
+    \index{method}{converter#1@{\tt (converter <#1>)} (\module)}%
 }
-\newcommand{\converterref}[1]{\hyperref[\converterlabel{#1}]{{\tt <#1>}}}
+\newcommand*{\converterref}[1]{\hyperref[\converterlabel{#1}]{{\tt <#1>}}}
 
 %%%  Generic
-\newcommand{\genericlabel}[1]{generic:#1}
+\newcommand*{\genericlabel}[1]{generic:#1}
 \newcommand{\genericlabeled}[2]
 {%
-    \ttiindex{#1}%
-    \indexgen{#1}%
     \entryclause{#1}{generic function}%
     \label{\genericlabel{#2}}%
+    \ttindexdef{#1}%
+    \indexgen{#1}%
 }
-\newcommand{\generic}[1]
+\newcommand*{\generic}[1]
 {%
     \genericlabeled{#1}{#1}%
 }
-\newcommand{\genericref}[1]{\hyperref[\genericlabel{#1}]{{\tt #1}}}
-\newcommand{\genericreflabel}[2]{\hyperref[\genericlabel{#2}]{{\tt #1}}}
+\newcommand*{\genericref}[1]{\hyperref[\genericlabel{#1}]{{\tt #1}}}
+\newcommand*{\genericreflabel}[2]{\hyperref[\genericlabel{#2}]{{\tt #1}}}
 
 %%%  Method
-\newcommand{\methodlabel}[1]{method:#1}
+\newcommand*{\methodlabel}[1]{method:#1}
 \newcommand{\method}[1]
 {%
-    \ttiindex{#1}%
-    \indexmeth{#1}%
     \entryclause{#1}{method}%
     \label{\methodlabel{#1}}%
+    \ttindexdef{#1}%
+    \indexmeth{#1}%
 }
-\newcommand{\methodref}[1]{\hyperref[\methodlabel{#1}]{{\tt #1}}}
+\newcommand*{\methodref}[1]{\hyperref[\methodlabel{#1}]{{\tt #1}}}
 
 %%%  Syntax form
-\newcommand{\syntaxlabel}[1]{syntax:#1}
+\newcommand*{\syntaxlabel}[1]{syntax:#1}
 \newcommand{\syntaxform}[1]
 {%
-    \ttiindex{#1}%
-    \index{general}{syntax!#1}%
     \entryclause{#1}{syntax}%
     \label{\syntaxlabel{#1}}%
+    \ttindexdef{#1}%
+    \index{general}{syntax!#1}%
 }
-\newcommand{\syntaxref}[1]{\hyperref[\syntaxlabel{#1}]{{\tt{}#1}}}
+\newcommand*{\syntaxref}[1]{\hyperref[\syntaxlabel{#1}]{{\tt{}#1}}}
 
 %%%  Meta-syntax form
-\newcommand{\metasyntaxlabel}[1]{metasyntax:#1}
+\newcommand*{\metasyntaxlabel}[1]{metasyntax:#1}
 \newcommand{\metasyntaxform}[1]
 {%
-    \ttiindex{#1}%
-    \index{general}{syntax!#1}%
     \entryclause{#1}{syntax}%
     \label{\metasyntaxlabel{#1}}%
+    \ttindexdef{#1}%
+    \index{general}{syntax!#1}%
 }
-\newcommand{\metasyntaxref}[1]{\hyperref[\metasyntaxlabel{#1}]{{\tt{}#1}}}
+\newcommand*{\metasyntaxref}[1]{\hyperref[\metasyntaxlabel{#1}]{{\tt{}#1}}}
 
 %%%  Keyword
-\newcommand{\keywordlabel}[1]{keyword:#1}
+\newcommand*{\keywordlabel}[1]{keyword:#1}
 \newcommand{\keyword}[1]
 {%
-    \ttiindex{#1}%
-    \index{general}{special form!#1}%
     \entryclause{#1}{special form}%
     \label{\keywordlabel{#1}}%
+    \ttindexdef{#1}%
+    \index{general}{special form!#1}%
 }
-\newcommand{\keywordref}[1]{\hyperref[\keywordlabel{#1}]{{\tt{}#1}}}
+\newcommand*{\keywordref}[1]{\hyperref[\keywordlabel{#1}]{{\tt{}#1}}}
 
 %%%  Macro
-\newcommand{\macrolabel}[1]{macro:#1}
+\newcommand*{\macrolabel}[1]{macro:#1}
 \newcommand{\macro}[1]
 {%
-    \ttiindex{#1}%
-    \indexmac{#1}%
     \entryclause{#1}{macro}%
     \label{\macrolabel{#1}}%
+    \ttindexdef{#1}%
+    \indexmac{#1}%
 }
-\newcommand{\macroref}[1]{\hyperref[\macrolabel{#1}]{{\tt{}#1}}}
+\newcommand*{\macroref}[1]{\hyperref[\macrolabel{#1}]{{\tt{}#1}}}
 
 %%%  Defform
-\newcommand{\defformlabel}[1]{defform:#1}
+\newcommand*{\defformlabel}[1]{defform:#1}
 \newcommand{\defform}[1]
 {%
-    \ttiindex{#1}\index{general}{defining form!#1}%
     \entryclause{#1}{defining form}%
     \label{\defformlabel{#1}}%
+    \ttindexdef{#1}\index{general}{defining form!#1}%
 }
-\newcommand{\defformref}[1]{\hyperref[\defformlabel{#1}]{{\tt{}#1}}}
+\newcommand*{\defformref}[1]{\hyperref[\defformlabel{#1}]{{\tt{}#1}}}
 
 %%%  Constant
-\newcommand{\constantlabel}[1]{constant:#1}
+\newcommand*{\constantlabel}[1]{constant:#1}
 \newcommand{\constant}[2]
 {%
-    \ttiindex{#1}%
-    \indexconst{#1}%
     \entryclause{#1 \classref{#2}}{constant}
     \label{\constantlabel{#1}}%
+    \ttindexdef{#1}%
+    \indexconst{#1}%
 }
-\newcommand{\constantref}[1]{\hyperref[\constantlabel{#1}]{{\tt{}#1}}}
+\newcommand*{\constantref}[1]{\hyperref[\constantlabel{#1}]{{\tt{}#1}}}
 
 %%%  Class
-\newcommand{\classlabel}[1]{class:#1}
+\newcommand*{\classlabel}[1]{class:#1}
 \newcommand{\class}[1]
 {%
-    \index{general}{#1@{\tt <#1>}}%
-    \index{class}{#1@{\tt{}<#1>} (\module)}%
     \entryclause{<#1>}{class}%
     \label{\classlabel{#1}}%
+    \index{general}{#1@{\tt <#1>}}%
+    \index{class}{#1@{\tt{}<#1>} (\module)}%
 }
-\newcommand{\classref}[1]{\hyperref[\classlabel{#1}]{{\tt{}<#1>}}}
+\newcommand*{\classref}[1]{\hyperref[\classlabel{#1}]{{\tt{}<#1>}}}
 
 %%% Derived class
 \newcommand{\derivedclass}[2]
 {%
-    \index{general}{#1@{\tt <#1>}}%
-    \index{class}{#1@{\tt{}<#1>} (\module)}%
     \entryclause{<#1> \classref{#2}}{class}%
     \label{\classlabel{#1}}%
+    \index{general}{#1@{\tt <#1>}}%
+    \index{class}{#1@{\tt{}<#1>} (\module)}%
 }
 
 %%%  Instance
-\newcommand{\instancelabel}[1]{instance:#1}
+\newcommand*{\instancelabel}[1]{instance:#1}
 \newcommand{\instance}[2]
 {
-    \ttiindex{#1}%
     \entryclause{#1 \classref{#2}}{instance}%
     \label{\instancelabel{#1}}%
+    \ttindexdef{#1}%
 }
-\newcommand{\instanceref}[1]{\hyperref[\instancelabel{#1}]{{\tt{}#1}}}
+\newcommand*{\instanceref}[1]{\hyperref[\instancelabel{#1}]{{\tt{}#1}}}
 
 %%% Condition
-\newcommand{\conditionlabel}[1]{condition:#1}
+\newcommand*{\conditionlabel}[1]{condition:#1}
 \newcommand{\condition}[2]
 {%
-    \indexcond{#1}%
     \entryclause{<#1> \conditionref{#2}}{condition}%
     \label{\conditionlabel{#1}}%
+    \indexcond{#1}%
 }
-\newcommand{\conditionref}[1]{\hyperref[\conditionlabel{#1}]{{\tt{}<#1>}}}
+\newcommand*{\conditionref}[1]{\hyperref[\conditionlabel{#1}]{{\tt{}<#1>}}}
 
 % ------------------------------------------------------------------------------
 %%% Syntax
 %%%  Syntax sub-clause
 
 \newcounter{syntaxssclause}[entryclause]
-\renewcommand{\thesyntaxssclause}{\theentryclause.\arabic{syntaxssclause}}
-\newcommand{\l@syntaxssclause}{\@gobbletwo}
-\newcommand{\syntaxssclausemark}[1]{}
+\renewcommand*{\thesyntaxssclause}{\theentryclause.\arabic{syntaxssclause}}
+\newcommand*{\l@syntaxssclause}{\@gobbletwo}
+\newcommand*{\syntaxssclausemark}[1]{}
 \newcommand{\syntaxssclause}
 {%
     \@startsection{syntaxssclause}{4}{\z@}%
@@ -301,43 +311,12 @@
     {\normalfont\normalsize\bfseries}%
 }
 
-% \newcommand{\syntaxssclausefont}{\mdseries}
-\newcommand{\syntaxssclausefont}{\normalfont\small\bfseries$\!$}
+% \newcommand*{\syntaxssclausefont}{\mdseries}
+\newcommand*{\syntaxssclausefont}{\normalfont\small\bfseries$\!$}
 
-\newcommand{\Syntax}{\syntaxssclause{\syntaxssclausefont Syntax}\vskip -8pt}
+\newcommand*{\Syntax}{\syntaxssclause{\syntaxssclausefont Syntax}\vskip -8pt}
 
 %%%  Syntax box/table (not a float)
-
-\newcommand{\syntaxname}{Syntax}
-
-% Dummy counter return function, syntax tables are not currently counted
-\newcommand{\thesyntax}{}
-
-\newcommand{\l@syntax}[2]{%
-    \vskip \z@ \@plus.2\p@
-    {%
-        \leftskip 0em
-        \rightskip \@tocrmarg
-        \parfillskip -\rightskip
-        \parindent 0em\@afterindenttrue
-        \interlinepenalty\@M
-        \leavevmode
-        \@tempdima 2.75em
-        \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-        {\let\numberline\loftnumberline \normalfont\syntaxname{} #1}\nobreak
-        \loftfillnum{#2}}
-}
-
-\newcommand{\addtotoc}[3]
-{%
-    \addcontentsline{#1}{#2}
-    {\protect\numberline{\csname the#2\endcsname}{\ignorespaces #3}}%
-}
-
-\newcommand{\@syntaxaddtolot}[1]
-{%
-    \addtotoc{lot}{syntax}{{\tt{}#1}}
-}
 
 \newcommand{\syntaxbox}[2][\linewidth]
 {%
@@ -355,8 +334,66 @@
     \syntaxbox[#1]{#3}%
 }
 
-\newcommand{\rewritename}{Rewrite}
-\newcommand{\therewrite}{}
+%%%   List-of-tables entry
+
+\newcommand*{\syntaxname}{Syntax}
+
+% Dummy counter return function, syntax tables are not currently counted
+\newcommand*{\thesyntax}{}
+
+\newcommand{\l@syntax}[2]{%
+    \vskip \z@ \@plus.2\p@
+    {%
+        \leftskip 0em
+        \rightskip \@tocrmarg
+        \parfillskip -\rightskip
+        \parindent 0em\@afterindenttrue
+        \interlinepenalty\@M
+        \leavevmode
+        \@tempdima 2.75em
+        \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
+        {\let\numberline\loftnumberline \normalfont\syntaxname{} #1}\nobreak
+        \loftfillnum{#2}}
+}
+
+\newcommand*{\addtotoc}[3]
+{%
+    \addcontentsline{#1}{#2}
+    {\protect\numberline{\csname the#2\endcsname}{\ignorespaces #3}}%
+}
+
+\newcommand*{\@syntaxaddtolot}[1]
+{%
+    \addtotoc{lot}{syntax}{{\tt{}#1}}
+}
+
+% ------------------------------------------------------------------------------
+%%% Rewrite-rules
+%%%  Rewrite-rules sub-clause
+
+\newcommand*{\rewriterules}{\syntaxssclause{\syntaxssclausefont Rewrite Rules}}
+
+%%%  Rewrite-rules box/table (not a float)
+
+\setlength{\FrameSep}{4pt}
+
+\newenvironment{RewriteTable}[2]
+{%
+    \ttsubindex{#1}{rewrite rules}%
+    \index{general}{rewrite rules!#1@{\tt #1}}%
+    \@rewriteaddtolot{#1}%
+    \begin{framed}%
+    \begin{tabular}{#2}%
+}
+{%
+    \end{tabular}%
+    \end{framed}%
+}
+
+%%%   List-of-tables entry
+
+\newcommand*{\rewritename}{Rewrite}
+\newcommand*{\therewrite}{}
 
 \newcommand{\l@rewrite}[2]{%
     \vskip \z@ \@plus.2\p@
@@ -378,14 +415,8 @@
     \addtotoc{lot}{rewrite}{{\tt{}#1}}
 }
 
-\newcommand{\rewritetable}[3][\linewidth]
-{%
-    \ttsubindex{#2}{rewrite rules}%
-    \index{general}{rewrite rules!#2@{\tt #2}}%
-    \@rewriteaddtolot{#2}%
-    \syntaxbox[#1]{#3}%
-}
-
+% ------------------------------------------------------------------------------
+%%% Syntax Description Sub-clauses
 %%%  Arguments
 
 \def\argrelax#1,{\relax}
@@ -401,15 +432,15 @@
 \def\oneofaux#1,#2,{\ifx#2\thend #1\let\next=\argrelax
     \else #1 $|$\let\next=\oneofaux\fi \next#2,}
 
-\newcommand{\oneof}[1]{\oneofaux#1,\thend,}
-\newcommand{\optional}[1]{{\tt[}#1\/{\tt]}}
-\newcommand{\group}[1]{{\tt(}#1\/{\tt)}}
+\newcommand*{\oneof}[1]{\oneofaux#1,\thend,}
+\newcommand*{\optional}[1]{{\tt[}#1\/{\tt]}}
+\newcommand*{\group}[1]{{\tt(}#1\/{\tt)}}
 
 % Wrap the quote environment macros so that it can be switched-off for TeX4ht
-\newcommand{\optionsquote}{\begin{quote}}
-\newcommand{\stopoptionsquote}{\end{quote}}
+\newcommand*{\optionsquote}{\begin{quote}}
+\newcommand*{\stopoptionsquote}{\end{quote}}
 
-\newcommand{\argumentlabel}[1]{{\it #1}\thinspace:}
+\newcommand*{\argumentlabel}[1]{{\it #1}\thinspace:}
 \newenvironment{arguments}
 {%
     \syntaxssclause*{\syntaxssclausefont Arguments}%
@@ -428,7 +459,7 @@
 %    \else\let\next=\argrelax{\tt({\it{}#1}{}#2)}\thinspace:\fi\next}
 \def\genargshelper#1,#2,{\ifx#2\thend\let\next=\relax{{\it{}#1}\thinspace:}
     \else\let\next=\argrelax{\tt{\it{}#1}{}#2}\thinspace:\fi\next}
-\newcommand{\genargslabel}[1]{\genargshelper#1,\thend,}
+\newcommand*{\genargslabel}[1]{\genargshelper#1,\thend,}
 \newenvironment{genericargs}
 {%
     \syntaxssclause*{\syntaxssclausefont Generic Arguments}%
@@ -481,17 +512,17 @@
     \stopoptionsquote%
 }
 
-%%%  Other
+% ------------------------------------------------------------------------------
+%%% Other Entry sub-clauses
 
-\newcommand{\result}{\syntaxssclause*{\syntaxssclausefont Result}\vskip -8pt}
-\newcommand{\remarks}{\syntaxssclause*{\syntaxssclausefont Remarks}\vskip -8pt}
-\newcommand{\rewriterules}{\syntaxssclause{\syntaxssclausefont Rewrite Rules}\vskip -8pt}
-\newcommand{\examples}{\syntaxssclause*{\syntaxssclausefont Examples}\vskip -8pt}
-\renewcommand{\seealso}{\syntaxssclause*{\syntaxssclausefont See~also}\vskip -8pt}
+\newcommand*{\result}{\syntaxssclause*{\syntaxssclausefont Result}\vskip -8pt}
+\newcommand*{\remarks}{\syntaxssclause*{\syntaxssclausefont Remarks}\vskip -8pt}
+\newcommand*{\examples}{\syntaxssclause*{\syntaxssclausefont Examples}\vskip -8pt}
+\renewcommand*{\seealso}{\syntaxssclause*{\syntaxssclausefont See~also}\vskip -8pt}
 
 %%%  Sub-classes
 
-\newcommand{\subclasslabel}[1]{{\tt{}<#1>}\thinspace:}
+\newcommand*{\subclasslabel}[1]{{\tt{}<#1>}\thinspace:}
 \newenvironment{subclasses}
 {%
     %\syntaxssclause*{\syntaxssclausefont Sub-classes}%
@@ -506,7 +537,7 @@
 
 %%% functions
 
-\newcommand{\functionslabel}[1]{\indexfunc{#1}\ttindex{#1}{\tt{}#1}\thinspace:}
+\newcommand*{\functionslabel}[1]{\indexfunc{#1}\ttindex{#1}{\tt{}#1}\thinspace:}
 \newenvironment{functions}
 {%
     % \syntaxssclause*{\syntaxssclausefont Sub-classes}%
@@ -519,23 +550,15 @@
     \stopoptionsquote%
 }
 
-%%%  Other typsetting macros
-\newcommand{\seq}[1]{{\em #1$^*$}}
-\newcommand{\forms}{\seq{form}}
-\newcommand{\rewrite}{{$\equiv$}}
-\newcommand{\form}{{\em form}}
-\newcommand{\identifier}{{\em identifier}}
-\newcommand{\tts}{{\tt\phantom{00}}}
-
 % ------------------------------------------------------------------------------
 %%% Sub-definition
 % Amalgam of subclause and definition to get the right level of numbering on
 % the heading but no toc entry.
 
 \newcounter{subdefinition}[entryclause]
-\renewcommand{\thesubdefinition}{\theclause .\arabic{subdefinition}}
-\newcommand{\l@subdefinition}{\@gobbletwo}
-\newcommand{\subdefinitionmark}[1]{}
+\renewcommand*{\thesubdefinition}{\theclause .\arabic{subdefinition}}
+\newcommand*{\l@subdefinition}{\@gobbletwo}
+\newcommand*{\subdefinitionmark}[1]{}
 \newcommand{\subdefinition}[1]
 {%
     \@startsection{subdefinition}{3}{\z@}%
@@ -546,7 +569,7 @@
 }
 
 % ------------------------------------------------------------------------------
-%%% EuLisp code typesetting
+%%% EuLisp syntax and code typesetting macros
 
 % Enable white-space counting?
 {\obeyspaces\gdef\enablespaces{\obeyspaces\let \@xobeysp}}
@@ -562,15 +585,15 @@
 
 \gdef\savesyntax#1{\newbox#1\global\setbox#1}
 
-\newcommand{\syntaxfont}{\small\tt}
-\newcommand{\syntaxcommentfont}{\it}
+\newcommand*{\syntaxfont}{\tt}
+\newcommand*{\syntaxcommentfont}{\it}
 
 \newdimen\syntaxindent \syntaxindent=0.5cm%
 
-\newcommand{\syntaxbeforehook}{\vskip4pt}
-\newcommand{\syntaxbegineveryline}{\relax}
-\newcommand{\syntaxendeveryline}{\relax}
-\newcommand{\syntaxafterhook}{\vskip-5pt}
+\newcommand*{\syntaxbeforehook}{\vskip4pt}
+\newcommand*{\syntaxbegineveryline}{\relax}
+\newcommand*{\syntaxendeveryline}{\relax}
+\newcommand*{\syntaxafterhook}{\vskip-5pt}
 
 \newif\iffirstsyntaxpar
 
@@ -600,7 +623,7 @@
 }
 
 %  How to recognize comments that begin with a precise character
-\newcommand{\syntaxcommentsign}{;}
+\newcommand*{\syntaxcommentsign}{;}
 
 {\catcode`\;=\active
  \gdef\enablesyntaxcomment{\catcode`\;=\active
@@ -646,12 +669,19 @@
     \let\do=\@makeother\do\\\do\ \do\{\do\}\do\$\do\&\do\#\do\%\do\~\do\_\do\^%
 }
 
-\newcommand{\disablebackslash}{\apocaerror{No disablebackslash here}}
+\newcommand*{\disablebackslash}{\apocaerror{No disablebackslash here}}
+
+\newcommand*{\seq}[1]{{\em #1$^*$}}
+\newcommand*{\forms}{\seq{form}}
+\newcommand*{\rewrite}{{$\equiv$}}
+\newcommand*{\form}{{\em form}}
+\newcommand*{\identifier}{{\em identifier}}
+\newcommand*{\tts}{{\tt\phantom{00}}}
 
 % ------------------------------------------------------------------------------
 %%% Example typesetting
 
-\renewcommand{\examplename}{Example}
+\renewcommand*{\examplename}{Example}
 
 \renewcommand{\theexample}
 {%

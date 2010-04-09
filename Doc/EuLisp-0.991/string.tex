@@ -49,7 +49,8 @@ representation of strings is defined below.
 \def\\{\string\\}
 
 % \global so it doesn't get reset to void when we leave this group...
-\global\setbox\stringSyntax\vbox{\small\syntax
+\global\setbox\stringSyntax\vbox{
+\syntax
 string token
    = '"' {string constituent} '"';
 string constituent
@@ -81,21 +82,21 @@ numeric string constituent
 \syntaxtable{string}{\stringSyntax}
 %
 \begin{example}
-    \label{example:string-literal}
-    \examplecaption{Examples of string literals}
-    \begin{center}
-        \begin{tabular}{|ll|}\hline
-            Example & Contents\\\hline
-            \verb+"a\nb"+ & \verb+#\a+, \verb+#\newline+ and \verb+#\b+\\
-            \verb+"c\\"+ & \verb+#\c+ and \verb+#\\+\\
-            \verb+"\x1 "+ & \verb+#\x1+ followed by \verb+#\space+\\
-            \verb+"\xabcde"+ & \verb+#\xabcd+ followed by \verb+#\e+\\
-            \verb+"\x1\x2"+ & \verb+#\x1+ followed by \verb+#\x2+\\
-            \verb-"\x12+"- & \verb+#\x12+ followed by \verb-#\+-\\
-            \verb+"\xabcg"+ & \verb+#\xabc+ followed by \verb+#\g+\\
-            \verb+"\x00abc"+ & \verb+#\xab+ followed by \verb+#\c+\\\hline
-        \end{tabular}
-    \end{center}
+\label{example:string-literal}
+\examplecaption{Examples of string literals}
+\begin{center}
+\begin{tabular}{|ll|}\hline
+    Example & Contents\\\hline
+    \verb+"a\nb"+ & \verb+#\a+, \verb+#\newline+ and \verb+#\b+\\
+    \verb+"c\\"+ & \verb+#\c+ and \verb+#\\+\\
+    \verb+"\x1 "+ & \verb+#\x1+ followed by \verb+#\space+\\
+    \verb+"\xabcde"+ & \verb+#\xabcd+ followed by \verb+#\e+\\
+    \verb+"\x1\x2"+ & \verb+#\x1+ followed by \verb+#\x2+\\
+    \verb-"\x12+"- & \verb+#\x12+ followed by \verb-#\+-\\
+    \verb+"\xabcg"+ & \verb+#\xabc+ followed by \verb+#\g+\\
+    \verb+"\x00abc"+ & \verb+#\xab+ followed by \verb+#\c+\\\hline
+\end{tabular}
+\end{center}
 \end{example}
 %
 \begin{note}

@@ -537,18 +537,21 @@ A {\em level 0 init-option\/} is:
 \end{options}
 %
 \rewriterules
+\label{defgeneric-rewrite-rules}
 %
-\savesyntax\defgenericRewrite\vbox{\tt
-\begin{tabular}{l}%
-\begin{minipage}[t]{9cm}
+\index{general}{generic function!rewrite rules}
+\index{general}{rewrite rules!generic function}
+%
+\begin{RewriteTable}{defgeneric}{l}
+\begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
         (\defformref{defgeneric} \identifier \\
         \>{\em gf-lambda-list} {\em level-0-init-option$^*$})
     \end{tabbing}
 \end{minipage}\\
-\hspace{1cm}$\equiv$
-\begin{minipage}[t]{9cm}
+\hspace{2cm}$\equiv$
+\begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
         (\defformref{defconstant} \identifier\\
@@ -557,7 +560,7 @@ A {\em level 0 init-option\/} is:
     \end{tabbing}
 \end{minipage}\\
 %
-\begin{minipage}[t]{9cm}
+\begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
         (\defformref{defgeneric} \\
@@ -565,8 +568,8 @@ A {\em level 0 init-option\/} is:
         \>{\em gf-lambda-list} {\em \{level-0-init-option\}})
     \end{tabbing}
 \end{minipage}\\
-\hspace{1cm}$\equiv$
-\begin{minipage}[t]{9cm}
+\hspace{2cm}$\equiv$
+\begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
         ((\functionref{setter} \functionref{setter}) \identifier\\
@@ -575,7 +578,7 @@ A {\em level 0 init-option\/} is:
     \end{tabbing}
 \end{minipage}\\
 %
-\begin{minipage}[t]{9cm}
+\begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
         (\defformref{defgeneric} \\
@@ -583,8 +586,8 @@ A {\em level 0 init-option\/} is:
         \>{\em gf-lambda-list} {\em level-0-init-option$^*$})
     \end{tabbing}
 \end{minipage}\\
-\hspace{1cm}$\equiv$
-\begin{minipage}[t]{9cm}
+\hspace{2cm}$\equiv$
+\begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
         ((\functionref{setter} \functionref{converter})\\
@@ -593,11 +596,7 @@ A {\em level 0 init-option\/} is:
         \>\>{\em gf-lambda-list} {\em level-0-init-option$^*$}))
     \end{tabbing}
 \end{minipage}
-\end{tabular}}%
-\label{defgeneric-rewrite-rules}
-\index{general}{generic function!rewrite rules}
-\index{general}{rewrite rules!generic function}
-\rewritetable{defgeneric}{\defgenericRewrite}
+\end{RewriteTable}
 %
 \examples
 In the following example of the use of \defformref{defgeneric} a generic
