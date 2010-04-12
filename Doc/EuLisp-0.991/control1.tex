@@ -21,7 +21,7 @@ dynamic form
 \end{arguments}
 %
 \result%
-The value of closest dynamic binding of \identifier{} is returned.  If no
+The value of closest dynamic binding of \sc{identifier} is returned.  If no
 visible binding exists, an error is signaled (condition:
 \conditionref{unbound-dynamic-variable}
 \indexcondition{unbound-dynamic-variable}).
@@ -39,7 +39,7 @@ dynamic setq form
     \item[identifier] A symbol naming a dynamic binding to be updated.
 
     \item[form] An expression whose value will be stored in the dynamic binding
-    of \identifier{}.
+    of \sc{identifier}.
 \end{arguments}
 %
 \result%
@@ -47,7 +47,7 @@ The value of {\em form}.
 %
 \remarks%
 The {\em form} is evaluated and the result is stored in the closest dynamic
-binding of \identifier{}.  If no visible binding exists, an error is
+binding of \sc{identifier}.  If no visible binding exists, an error is
 signalled (condition: \conditionref{unbound-dynamic-variable}
 \indexcondition{unbound-dynamic-variable}).
 
@@ -107,16 +107,16 @@ defglobal form
     of {\em form}.
 
     \item[form] The {\em form} whose value will be stored in the top dynamic
-    binding of \identifier{}.
+    binding of \sc{identifier}.
 \end{arguments}
 %
 \remarks%
 The value of {\em form} is stored as the top dynamic value of the symbol named
-by \identifier{} \index{general}{binding!top dynamic}.  The binding created by
+by \sc{identifier} \index{general}{binding!top dynamic}.  The binding created by
 \defformref{defglobal} is mutable.  An error is signaled (condition:
 \conditionref{dynamic-multiply-defined}
 \indexcondition{dynamic-multiply-defined}), on processing this form more than
-once for the same \identifier{}.
+once for the same \sc{identifier}.
 %
 \begin{note}
     The problems engendered by cross-module reference necessitated by a single
@@ -180,15 +180,15 @@ as the value of the \macroref{catch} form.
 \begin{RewriteTable}{catch}{lll}
     (\macroref{catch}) & \rewrite &
         {\rm Is an error}\\
-    (\macroref{catch} {\em tag}) & \rewrite &
-        (\keywordref{progn} {\em tag} ())\\
-    (\macroref{catch} {\em tag} \forms) & \rewrite &
+    (\macroref{catch} \sc{tag}) & \rewrite &
+        (\keywordref{progn} \sc{tag} ())\\
+    (\macroref{catch} \sc{tag} \scseq{form}) & \rewrite &
     \begin{minipage}[t]{0.3\columnwidth}
     \begin{tabbing}
         00\=00\= \kill
         (\keywordref{let/cc} tmp\\
-        \>(\keywordref{dynamic-let} (({\em tag} tmp))\\
-        \>\>\forms))
+        \>(\keywordref{dynamic-let} ((\sc{tag} tmp))\\
+        \>\>\scseq{form}))
     \end{tabbing}
     \end{minipage}
 \end{RewriteTable}
@@ -226,10 +226,10 @@ bound.
 \begin{RewriteTable}{throw}{lll}
     (\macroref{throw}) & \rewrite &
         {\rm Is an error}\\
-    (\macroref{throw} {\em tag}) & \rewrite &
-        ((\keywordref{dynamic} {\em tag}) ())\\
-    (\macroref{throw} {\em tag} \form) & \rewrite &
-        ((\keywordref{dynamic} {\em tag}) \form)
+    (\macroref{throw} \sc{tag}) & \rewrite &
+        ((\keywordref{dynamic} \sc{tag}) ())\\
+    (\macroref{throw} \sc{tag} \sc{form}) & \rewrite &
+        ((\keywordref{dynamic} \sc{tag}) \sc{form})
 \end{RewriteTable}
 %
 \seealso%

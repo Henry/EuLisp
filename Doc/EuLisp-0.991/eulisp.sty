@@ -2,7 +2,7 @@
 \typeout{Document style `EuLisp'  - May 89, July 92, Mar 2010}
 
 \RequirePackage{ifthen}%
-\RequirePackage{framed}%
+\RequirePackage{stringstrings}%
 
 % ------------------------------------------------------------------------------
 %%% Default page layout
@@ -318,101 +318,97 @@
 
 %%%  Syntax box/table (not a float)
 
-\newcommand{\syntaxbox}[2][\linewidth]
+\gdef\saveSyntax#1{\expandafter\newbox\csname #1
+    Syntax\endcsname\global\expandafter\setbox\csname #1 Syntax\endcsname\vbox}
+
+% syntaxx is a temporary name for the new syntax environment
+% until the use of the old syntax macro is replaced in the whole text
+\newenvironment{syntaxx}
 {%
-    \framebox[#1]%
+    \begin{minipage}{\linewidth}
+        \tt
+        \begin{tabbing}%
+            0000\=0000\=\kill%
+        }
+        {%
+        \end{tabbing}%
+    \end{minipage}
+}
+
+\newcommand{\syntaxBox}[1]
+{%
+    \framebox[\linewidth][l]%
     {%
-        \usebox{#2}%
+        \usebox{#1}%
     }%
 }
 
-\newcommand{\syntaxtable}[3][\linewidth]
+\newcommand{\syntaxTable}[1]
 {%
-    \ttsubindex{#2}{syntax table}%
-    \index{general}{syntax table!#2@{\tt #2}}%
-    \@syntaxaddtolot{#2}%
-    \syntaxbox[#1]{#3}%
+    \ttsubindex{#1}{syntax table}%
+    \index{general}{syntax tables!#1@{\tt #1}}%
+    \expandafter\syntaxBox{\csname #1 Syntax\endcsname}%
 }
 
-%%%   List-of-tables entry
+% Old macro
+\gdef\savesyntax#1{\newbox#1\global\setbox#1}
 
-\newcommand*{\syntaxname}{Syntax}
-
-% Dummy counter return function, syntax tables are not currently counted
-\newcommand*{\thesyntax}{}
-
-\newcommand{\l@syntax}[2]{%
-    \vskip \z@ \@plus.2\p@
-    {%
-        \leftskip 0em
-        \rightskip \@tocrmarg
-        \parfillskip -\rightskip
-        \parindent 0em\@afterindenttrue
-        \interlinepenalty\@M
-        \leavevmode
-        \@tempdima 2.75em
-        \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-        {\let\numberline\loftnumberline \normalfont\syntaxname{} #1}\nobreak
-        \loftfillnum{#2}}
+% Old macro
+\newcommand{\syntaxtable}[2]
+{%
+    \ttsubindex{#1}{syntax table}%
+    \index{general}{syntax tables!#1@{\tt #1}}%
+    \syntaxBox{#2}%
 }
 
-\newcommand*{\addtotoc}[3]
+% ------------------------------------------------------------------------------
+%%% Function Signature
+%%%  Function Signature sub-clause
+
+\newcommand*{\Signature}{\syntaxssclause{\syntaxssclausefont Signature}}
+
+\gdef\saveSignature#1{\expandafter\newbox\csname #1
+    Signature\endcsname\global\expandafter\setbox\csname #1 Signature\endcsname\vbox}
+
+\newenvironment{signature}
 {%
-    \addcontentsline{#1}{#2}
-    {\protect\numberline{\csname the#2\endcsname}{\ignorespaces #3}}%
+    \begin{minipage}{\linewidth}%
+    \tt%
+    \begin{tabbing}%
+    00\=00\=00\=00\=\kill%
+}
+{%
+    \end{tabbing}%
+    \end{minipage}%
 }
 
-\newcommand*{\@syntaxaddtolot}[1]
+\newcommand{\signatureTable}[1]
 {%
-    \addtotoc{lot}{syntax}{{\tt{}#1}}
+    \ttsubindex{#1}{function signature}%
+    \index{general}{function signatures!#1@{\tt #1}}%
+    \expandafter\syntaxBox{\csname #1 Signature\endcsname}%
 }
 
 % ------------------------------------------------------------------------------
 %%% Rewrite-rules
-%%%  Rewrite-rules sub-clause
+%%% Rewrite-rules sub-clause
 
 \newcommand*{\rewriterules}{\syntaxssclause{\syntaxssclausefont Rewrite Rules}}
 
-%%%  Rewrite-rules box/table (not a float)
+%%% Rewrite-rules box/table (not a float)
 
-\setlength{\FrameSep}{4pt}
+% \setlength{\FrameSep}{4pt}
 
 \newenvironment{RewriteTable}[2]
 {%
     \ttsubindex{#1}{rewrite rules}%
     \index{general}{rewrite rules!#1@{\tt #1}}%
-    \@rewriteaddtolot{#1}%
-    \begin{framed}%
+    % \begin{framed}%
     \begin{tabular}{#2}%
-}
-{%
-    \end{tabular}%
-    \end{framed}%
-}
-
-%%%   List-of-tables entry
-
-\newcommand*{\rewritename}{Rewrite}
-\newcommand*{\therewrite}{}
-
-\newcommand{\l@rewrite}[2]{%
-    \vskip \z@ \@plus.2\p@
+    }
     {%
-        \leftskip 0em
-        \rightskip \@tocrmarg
-        \parfillskip -\rightskip
-        \parindent 0em\@afterindenttrue
-        \interlinepenalty\@M
-        \leavevmode
-        \@tempdima 2.75em
-        \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
-        {\let\numberline\loftnumberline \normalfont\rewritename{} #1}\nobreak
-        \loftfillnum{#2}}
-}
-
-\newcommand{\@rewriteaddtolot}[1]
-{%
-    \addtotoc{lot}{rewrite}{{\tt{}#1}}
+    \end{tabular}%
+    % \end{framed}%
 }
 
 % ------------------------------------------------------------------------------
@@ -433,7 +429,7 @@
     \else #1 $|$\let\next=\oneofaux\fi \next#2,}
 
 \newcommand*{\oneof}[1]{\oneofaux#1,\thend,}
-\newcommand*{\optional}[1]{{\tt[}#1\/{\tt]}}
+\newcommand*{\optional}[1]{{#1}$_{opt}$}
 \newcommand*{\group}[1]{{\tt(}#1\/{\tt)}}
 
 % Wrap the quote environment macros so that it can be switched-off for TeX4ht
@@ -583,8 +579,6 @@
 \newcommand{\enablemacros}{\catcode`\\=0\relax}
 \newcommand{\disablemacros}{\catcode`\\=\other}
 
-\gdef\savesyntax#1{\newbox#1\global\setbox#1}
-
 \newcommand*{\syntaxfont}{\tt}
 \newcommand*{\syntaxcommentfont}{\it}
 
@@ -671,11 +665,20 @@
 
 \newcommand*{\disablebackslash}{\apocaerror{No disablebackslash here}}
 
-\newcommand*{\seq}[1]{{\em #1$^*$}}
-\newcommand*{\forms}{\seq{form}}
+\renewcommand*{\sc}[1]{{\normalfont\em{}#1}}
+\newcommand*{\scopt}[1]{\sc{#1$_{opt}$}}
+\newcommand*{\scseq}[1]{\sc{#1$^{*}$}}
+
+\newcommand*{\sclabel}[1]{sc:#1}
+\newcommand{\scdef}[1]
+{%
+    \sc{#1}%
+    \label{\sclabel{#1}}%
+    \ttindex{#1}\index{general}{syntax category!#1}%
+}
+\newcommand*{\scref}[1]{\hyperref[\sclabel{#1}]{\sc{#1}}}
+
 \newcommand*{\rewrite}{{$\equiv$}}
-\newcommand*{\form}{{\em form}}
-\newcommand*{\identifier}{{\em identifier}}
 \newcommand*{\tts}{{\tt\phantom{00}}}
 
 % ------------------------------------------------------------------------------
@@ -716,6 +719,12 @@
         \advance\leftskip \@tempdima \null\nobreak\hskip -\leftskip
         {\let\numberline\loftnumberline \normalfont\examplename{} #1}\nobreak
         \loftfillnum{#2}}
+}
+
+\newcommand*{\addtotoc}[3]
+{%
+    \addcontentsline{#1}{#2}
+    {\protect\numberline{\csname the#2\endcsname}{\ignorespaces #3}}%
 }
 
 \newcommand{\examplecaption}[1]

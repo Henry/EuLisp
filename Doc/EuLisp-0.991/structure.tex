@@ -1,6 +1,6 @@
 \clause{Language Structure}
 \label{subsec:lang-struct}
-\index{general}{languageStructure}
+\index{general}{language structure}
 %
 \begin{optPrivate}
     Restriction on level-0 generics seems wierd.
@@ -57,12 +57,13 @@ Modules comprising {\tt eulisp0}:
         {\tt convert} & \ref{convert}\\
         {\tt copy} & \ref{copy}\\
         {\tt double} & \ref{double-float}\\
-        {\tt mathlib} & \ref{elementary-functions}\\
         {\tt fpi} & \ref{fpi}\\
         {\tt formatted-io} & \ref{formatted-io}\\
         {\tt function} & \ref{function}\\
+        {\tt keyword} & \ref{keyword}\\
         {\tt list} & \ref{list}\\
         {\tt lock} & \ref{lock}\\
+        {\tt mathlib} & \ref{elementary-functions}\\
         {\tt number} & \ref{number}\\
         {\tt telos0} & \ref{obj-0}\\
         {\tt stream} & \ref{stream}\\
@@ -177,10 +178,7 @@ below.
     Guidelines for the preparation of programming language standards. Note: this
     is currently a draft technical report.
     %
-    \bibitem[ISO/IEC 9899 : 1990] {iso9899} Programming Languages --- C.
-    %
-    \bibitem[ISO/IEC 14977 : 1996] {iso14977} Information technology ---
-    Syntactic metalanguage --- Extended BNF.
+    \bibitem[ISO/IEC 9899:1999] {iso9899} Programming Languages --- C.
     %
 \end{references}
 \end{optDefinition}
@@ -434,32 +432,41 @@ the function and written as \true.
 \begin{optDefinition}
 Both layout and fonts are used to help in the description of \eulisp.  A
 language element is defined as an entry with its name as the heading of a
-clause, coupled with its classification.  The syntax descriptions are presented
-in extended Backus–Naur form (EBNF) \cite{iso14977}.  Examples of several kinds
-of entry are now given.  Some subsections of entries are optional and are only
-given where it is felt necessary.
+clause, coupled with its classification.  The syntax notation used is based on
+that described in \cite{iso9899} with modifications to support the specification
+of a return type and to improve clarity.  Syntactic categories (non-terminals)
+are indicated by {\it italic} type, and literal words and characters (terminals)
+by {\tt constant width} type.  A colon ({\it :}) following a non-terminal
+introduces its definition.  Alternative definitions are listed on separate
+lines, except when prefaced by the words ``one of''.  An optional symbol is
+indicated by the subscript ``{\it opt}'', a list of zero or more occurrences of
+a symbol are indicated by the superscript ``{\it *}'', and a list of one or more
+occurrences of a symbol are indicated by the superscript ``{\it +}''.  Examples
+of several kinds of entry are now given.  Some subsections of entries are
+optional and are only given where it is felt necessary.
 %
 \keyword{a-special-form}
 \Syntax
-\label{a-special-form-syntax}
-\savesyntax\aspecialformSyntax\vbox{\syntax
-a-special-form
-    = '(', a-special-form, {form}, ')';
-\endsyntax}
-\syntaxtable{a-special-form}{\aspecialformSyntax}
+\saveSyntax{a-special-form}{
+\begin{syntaxx}
+    \scdef{a-special-form-form}: $\rightarrow$ \sc{result-class} \\
+    \>( a-special-form \sc{form-1} ... \scopt{form-n} )
+\end{syntaxx}}
+\syntaxTable{a-special-form}
 %
 \begin{arguments}
-    \item[form$_1$] description of structure and r\^ole of {\em form$_1$}.\\
+    \item[\sc{form-1}] description of structure and r\^ole of \sc{form-1}.\\
     $\vdots$
-    \item[form$_n$] description of structure and r\^ole of {\em form$_n$}.
+    \item[\scopt{form-n}] description of structure and r\^ole of optional
+    argument \scopt{form-n}.
 \end{arguments}
 %
 \result%
-A description of the result.
+A description of the result and, possibly, its \sc{result-class}.
 %
 \remarks%
-Any additional information defining the behaviour of {\tt
-    a-special-form}.
+Any additional information defining the behaviour of {\tt a-special-form} or the
+syntax category \scref{a-special-form-form}.
 %
 \examples
 Some examples of use of the special form and the behaviour that should
@@ -470,24 +477,24 @@ Cross references to related entries.
 %
 \function{a-function}
 %
-\Syntax
-\label{a-function-syntax}
-\savesyntax\aFunctionSyntax\vbox{\syntax
-a-function form
-   = '(', a-function, argument a, ..., argument n, ')';
-\endsyntax}
-\syntaxtable{a-function}{\aFunctionSyntax}
+\Signature
+\saveSignature{a-function}{
+\begin{signature}
+    (a-function \sc{argument-1} ... \scopt{argument-n})\\
+    \>$\rightarrow$ \sc{result-class}
+\end{signature}}
+\signatureTable{a-function}
 %
 \begin{arguments}
-    \item[argument a] information about the class or classes of {\em
-        argument a}.\\
+    \item[\sc{argument-1}] information about the class or classes of
+    \sc{argument-1}.\\
     $\vdots$
-    \item[\optional{argument n}] information about the class or classes of
-    the optional argument {\em argument n}.
+    \item[\scopt{argument-n}] information about the class or classes of
+    the optional argument \sc{argument-n}.
 \end{arguments}
 %
 \result%
-A description of the result and, possibly, its class.
+A description of the result and, possibly, its \sc{result-class}.
 %
 \remarks%
 Any additional information about the actions of {\tt a-function}.
@@ -551,7 +558,7 @@ to {\tt a-generic}.
 \seealso%
 Cross references to related entries.
 %
-\condition{a-condition}{a-condition-superclass}
+\condition{a-condition}{condition}
 %
 \begin{initoptions}
     \item[initarg-a, value-a] means that an instance of {\tt <a-condition>} has

@@ -57,28 +57,27 @@ defconstant form
 %
 \begin{arguments}
     \item[identifier] A symbol naming an immutable top-lexical binding to be
-    initialized with the value of \form.
+    initialized with the value of \sc{form}.
 
-    \item[form] The \form{} whose value will be stored in the binding of {\em
-        identifier}.
+    \item[form] The \sc{form} whose value will be stored in the binding of
+    \sc{identifier}.
 \end{arguments}
 %
 \remarks%
-The value of \form{} is stored in the top-lexical binding of {\em
-    identifier}.  It is a violation to attempt to modify the binding of a
-defined constant.
+The value of \sc{form} is stored in the top-lexical binding of \sc{identifier}.
+It is a violation to attempt to modify the binding of a defined constant.
 
 \constant{nil}{null}
 %
 \remarks%
 The symbol {\tt nil} is defined to be immutably bound to the empty list, which
 is represented as \nil{}.  The empty list is used to denote the abstract boolean
-value {\em false}.
+value \sc{false}.
 
 \constant{t}{symbol}
 %
 \remarks%
-This may be used to denote the abstract boolean value {\em true}, but so may any
+This may be used to denote the abstract boolean value \sc{true}, but so may any
 other value than \nil{}.
 
 \metasyntaxform{symbol}
@@ -98,16 +97,16 @@ deflocal form
 \syntaxtable{deflocal}{\deflocalSyntax}
 %
 \begin{arguments}
-    \item[identifier] A symbol naming a binding containing the value of {\em
-        form}.
+    \item[identifier] A symbol naming a binding containing the value of
+    \sc{form}.
 
-    \item[form] The \form{} whose value will be stored in the binding of {\em
-        identifier}.
+    \item[form] The \sc{form} whose value will be stored in the binding of
+    \sc{identifier}.
 \end{arguments}
 %
 \remarks%
-The value of \form{} is stored in the top-lexical binding of {\em
-    identifier}.  The binding created by a \defformref{deflocal} form is mutable.
+The value of \sc{form} is stored in the top-lexical binding of \sc{identifier}.
+The binding created by a \defformref{deflocal} form is mutable.
 %
 \seealso%
 \keywordref{setq}.
@@ -123,15 +122,15 @@ quote form
 \syntaxtable{quote}{\quoteSyntax}
 %
 \begin{arguments}
-    \item[object] the {\em object} to be quoted.
+    \item[object] the \sc{object} to be quoted.
 \end{arguments}
 %
 \result%
-The result is {\em object}.
+The result is \sc{object}.
 %
 \remarks%
-The result of processing the expression {\tt (quote {\em object})} is {\em
-    object}.  The {\em object} can be any object having an external
+The result of processing the expression {\tt (quote \sc{object})} is
+\sc{object}.  The \sc{object} can be any object having an external
 representation\index{general}{external representation (see also
     \functionref{prin} and \functionref{write})}.  The special form
 \keywordref{quote} can be abbreviated using {\em apostrophe} --- graphic
@@ -179,24 +178,23 @@ rest list
 \end{arguments}
 %
 \result%
-A function with the specified {\em lambda-list\/} and sequence of {\em
-form\/}s.
+A function with the specified \sc{lambda-list} and sequence of \sc{form}s.
 %
 \remarks%
 The function construction operator is \keywordref{lambda}.  Access to the
-lexical environment of definition is guaranteed.  The syntax of {\em
-    lambda-list} is defined in ref{lambda-syntax-table}.
+lexical environment of definition is guaranteed.  The syntax of \sc{lambda-list}
+is defined in ref{lambda-syntax-table}.
 
-If {\em lambda-list} is an \identifier, it is bound to a newly allocated
-list of the actual parameters.  This binding\index{general}{scope and extent!of
+If \sc{lambda-list} is an \sc{identifier}, it is bound to a newly allocated
+list of the actual parameters.  This binding \index{general}{scope and extent!of
     \keywordref{lambda} bindings} has lexical scope and indefinite extent.  If
-{\em lambda-list} is a {\em simple-list}, the arguments are bound to the
-corresponding {\em identifiers}.  Otherwise, {\em lambda-list} must be a {\em
-    rest-list}.  In this case, each \identifier{} preceding the dot is bound
-to the corresponding argument and the \identifier{} succeeding the dot is
+\sc{lambda-list} is a {\em simple-list}, the arguments are bound to the
+corresponding {\em identifiers}.  Otherwise, \sc{lambda-list} must be a {\em
+    rest-list}.  In this case, each \sc{identifier} preceding the dot is bound
+to the corresponding argument and the \sc{identifier} succeeding the dot is
 bound to a newly allocated list whose elements are the remaining arguments.
 These bindings have lexical scope and indefinite extent.  It is a violation
-if the same identifier appears more than once in a {\em lambda-list}.  It is an
+if the same identifier appears more than once in a \sc{lambda-list}.  It is an
 error to modify {\em rest-list}.
 
 \syntaxform{defmacro}
@@ -211,7 +209,7 @@ defmacro form
 %
 \begin{arguments}
     \item[macro-name] A symbol naming an immutable top-lexical binding to be
-    initialized with a function having the specified {\em lambda-list} and {\em
+    initialized with a function having the specified \sc{lambda-list} and {\em
         body}.
 
     \item[lambda-list] The parameter list of the function conforming to the
@@ -225,7 +223,7 @@ The \syntaxref{defmacro} form defines a function\index{general}{macro} named by
 {\em macro-name} and stores the definition as the top-lexical binding of {\em
     macro-name}\index{general}{macro!definition by
     \syntaxref{defmacro}}\index{general}{binding!module}.  The interpretation
-of the {\em lambda-list} is as defined for \keywordref{lambda} (see
+of the \sc{lambda-list} is as defined for \keywordref{lambda} (see
 \ref{lambda-syntax-table}).
 %
 \begin{note}
@@ -255,7 +253,7 @@ setter defun
 %
 \begin{arguments}
     \item[function-name] A symbol naming an immutable top-lexical binding to be
-    initialized with a function having the specified {\em lambda-list} and {\em
+    initialized with a function having the specified \sc{lambda-list} and {\em
         body}.
 
     \item[{\tt (setter {\em function-name})}] An expression denoting the setter
@@ -271,7 +269,7 @@ setter defun
 The \syntaxref{defun} form defines a function named by {\em function-name} and
 stores the definition (i) as the top-lexical binding of {\em function-name} or
 (ii) as the setter function of {\em function-name}.  The interpretation of the
-{\em lambda-list} is as defined for \keywordref{lambda}.
+\sc{lambda-list} is as defined for \keywordref{lambda}.
 %
 \rewriterules
 %
@@ -279,18 +277,18 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
 \begin{minipage}[t]{\columnwidth}%
     \begin{tabbing}%
         00\= \kill
-        (\syntaxref{defun} \identifier\\
-        \>{\em lambda-list}\\
-        \>{\em body})
+        (\syntaxref{defun} \sc{identifier}\\
+        \>\sc{lambda-list}\\
+        \>\sc{body})
     \end{tabbing}
 \end{minipage}
 &\rewrite&
 \begin{minipage}[t]{\columnwidth}
     \begin{tabbing}
         00\= \kill
-        (\defformref{defconstant} \identifier\\
-        \>(\keywordref{lambda} {\em lambda-list} \\
-        \>{\em body}))
+        (\defformref{defconstant} \sc{identifier}\\
+        \>(\keywordref{lambda} \sc{lambda-list} \\
+        \>\sc{body}))
     \end{tabbing}
 \end{minipage}\\
 \\
@@ -298,9 +296,9 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
     \begin{tabbing}
         00\= \kill
         (\syntaxref{defun}\\
-        \>(\functionref{setter} \identifier)\\
-        \>{\em lambda-list} \\
-        \>{\em body})
+        \>(\functionref{setter} \sc{identifier})\\
+        \>\sc{lambda-list} \\
+        \>\sc{body})
     \end{tabbing}
 \end{minipage}
 &\rewrite&
@@ -308,9 +306,9 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
     \begin{tabbing}
         00\= \kill
         ((\functionref{setter} \functionref{setter}) \\
-        \>\identifier\\
-        \>(\keywordref{lambda} {\em lambda-list} \\
-        \>{\em body}))
+        \>\sc{identifier}\\
+        \>(\keywordref{lambda} \sc{lambda-list} \\
+        \>\sc{body}))
     \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
@@ -391,8 +389,8 @@ apply form
 %
 \result%
 The result is the result of calling {\em function} with the actual parameter
-list created by appending \form$_n$ to a list of the arguments {\em
-    form}$_1$ through \form$_{n-1}$.  An error is signalled (condition
+list created by appending \sc{form}$_n$ to a list of the arguments {\em
+    form}$_1$ through \sc{form}$_{n-1}$.  An error is signalled (condition
 class: \conditionref{invalid-operator}\indexcondition{invalid-operator}) if the
 first argument is not an instance of \classref{function}.
 %
@@ -428,11 +426,11 @@ setq form
 \end{arguments}
 %
 \result%
-The result is the value of \form.
+The result is the value of \sc{form}.
 %
 \remarks%
-The \form{} is evaluated and the result is stored in the closest lexical
-binding named by \identifier.  It is a violation to modify an immutable
+The \sc{form} is evaluated and the result is stored in the closest lexical
+binding named by \sc{identifier}.  It is a violation to modify an immutable
 binding.
 
 \function{setter}
@@ -526,15 +524,15 @@ if form
 \end{arguments}
 %
 \result%
-Either the value of {\em consequence\/} or {\em alternative\/} depending on the
-value of {\em antecedent}.
+Either the value of \sc{consequent} or {\em alternative\/} depending on the
+value of \sc{antecedent}.
 %
 \remarks%
-The {\em antecedent\/} is evaluated.  If the result is {\em true\/} the {\em
-    consequence\/} is evaluated, otherwise the {\em alternative\/} is evaluated.
-Both {\em consequence\/} and {\em alternative\/} must be specified.  The result
-of \keywordref{if} is the result of the evaluation of whichever of {\em
-    consequence\/} or {\em alternative\/} is chosen.
+The {\em antecedent\/} is evaluated.  If the result is \true{} the
+\sc{consequent} is evaluated, otherwise the \sc{alternative} is evaluated.  Both
+\sc{consequent} and \sc{alternative} must be specified.  The result of
+\keywordref{if} is the result of the evaluation of whichever of \sc{consequent}
+or \sc{alternative} is chosen.
 
 \macro{cond}
 %
@@ -554,25 +552,25 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 %
 \begin{RewriteTable}{cond}{lll}
     (\macroref{cond}) &\rewrite& () \\
-    (\macroref{cond} ({\em antecedent}) \\
+    (\macroref{cond} (\sc{antecedent}) \\
     \tts\ldots) &\rewrite&
-    (\macroref{or} {\em antecedent} (\macroref{cond} \ldots)) \\
+    (\macroref{or} \sc{antecedent} (\macroref{cond} \ldots)) \\
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     00\=00\= \kill
     (\macroref{cond} \\
-    \>({\em antecedent}$_1$) \\
-    \>({\em antecedent}$_2$ \forms) \\
+    \>(\sc{antecedent}$_1$) \\
+    \>(\sc{antecedent}$_2$ \scseq{form}) \\
     \>\ldots)
 \end{tabbing}
 \end{minipage}
 &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\macroref{or} \= {\em antecedent}$_1$ \\
+    (\macroref{or} \= \sc{antecedent}$_1$ \\
     \>00\= \kill
     \>(\macroref{cond} \\
-    \>\>({\em antecedent}$_2$ \forms) \\
+    \>\>(\sc{antecedent}$_2$ \scseq{form}) \\
     \>\>\ldots))
 \end{tabbing}
 \end{minipage} \\
@@ -581,19 +579,19 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 \begin{tabbing}
     00\=00\= \kill
     (\macroref{cond} \\
-    \>({\em antecedent}$_1$ \forms) \\
-    \>({\em antecedent}$_2$ \forms) \\
+    \>(\sc{antecedent}$_1$ \scseq{form}) \\
+    \>(\sc{antecedent}$_2$ \scseq{form}) \\
     \>\ldots)
 \end{tabbing}
 \end{minipage}
 &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\macroref{if} \={\em antecedent}$_1$ \\
-    \>(\keywordref{progn} \forms) \\
+    (\macroref{if} \=\sc{antecedent}$_1$ \\
+    \>(\keywordref{progn} \scseq{form}) \\
     \>00\= \kill
     \>(\macroref{cond} \\
-    \>\>({\em antecedent}$_2$ \forms) \\
+    \>\>(\sc{antecedent}$_2$ \scseq{form}) \\
     \>\>\ldots))
 \end{tabbing}%
 \end{minipage}%
@@ -610,22 +608,22 @@ and macro
 %
 \remarks%
 The expansion of an \macroref{and} form leads to the evaluation of the sequence
-of {\em form}s from left to right.  The first \form{} in the sequence that
+of {\em form}s from left to right.  The first \sc{form} in the sequence that
 evaluates to \nil{}\/ stops evaluation and none of the {\em form}s to its right
 will be evaluated---that is to say, it is non-strict.  The result of {\tt
     (\macroref{and})} is \true{}.  If none of the {\em form}s evaluate to
-\nil{}, the value of the last \form{} is returned.
+\nil{}, the value of the last \sc{form} is returned.
 %
 \rewriterules
 %
 \begin{RewriteTable}{and}{lll}
     (\macroref{and}) &\rewrite& \true{} \\
-    (\macroref{and} \form) &\rewrite& \form{} \\
-    (\macroref{and} \form$_1$ \form$_2$ \ldots) &\rewrite&
+    (\macroref{and} \sc{form}) &\rewrite& \sc{form} \\
+    (\macroref{and} \sc{form}$_1$ \sc{form}$_2$ \ldots) &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\keywordref{if} \= \form$_1$\\
-    \>(\macroref{and} \form$_2$ \ldots)\\
+    (\keywordref{if} \= \sc{form}$_1$\\
+    \>(\macroref{and} \sc{form}$_2$ \ldots)\\
     \>())
 \end{tabbing}%
 \end{minipage}%
@@ -642,29 +640,29 @@ or macro
 %
 \remarks%
 The expansion of an \macroref{or} form leads to the evaluation of the sequence
-of {\em form}s from left to right.  The value of the first \form{} that
+of {\em form}s from left to right.  The value of the first \sc{form} that
 evaluates to {\em true} is the result of the \macroref{or} form and none of the
 {\em form}s to its right will be evaluated---that is to say, it is non-strict.
-If none of the forms evaluate to {\em true}, the value of the last \form{} is
+If none of the forms evaluate to {\em true}, the value of the last \sc{form} is
 returned.
 %
 \rewriterules
 %
 \begin{RewriteTable}{or}{lll}
     (\macroref{or}) &\rewrite& () \\
-    (\macroref{or} \form) &\rewrite& \form{} \\
-    (\macroref{or} \form$_1$ \form$_2$ \ldots) &\rewrite&
+    (\macroref{or} \sc{form}) &\rewrite& \sc{form} \\
+    (\macroref{or} \sc{form}$_1$ \sc{form}$_2$ \ldots) &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\macroref{let} (\=(x \form$_1$))\\
+    (\macroref{let} (\=(x \sc{form}$_1$))\\
     \>(\keywordref{if} \= x\\
     \>\>x\\
-    \>\>(\macroref{or} \form$_2$ \ldots)))
+    \>\>(\macroref{or} \sc{form}$_2$ \ldots)))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
 %
-Note that {\tt x} does not occur free in any of \form$_2$ \ldots {\em
+Note that {\tt x} does not occur free in any of \sc{form}$_2$ \ldots {\em
     form}$_n$.
 %
 \end{optDefinition}
@@ -676,7 +674,7 @@ Note that {\tt x} does not occur free in any of \form$_2$ \ldots {\em
     The term {\em closure} is not defined.  Should expand on syntactic variants
     and precise the definition of the scope and extent of the binding.
 
-    Should make clear that {\em body} is a sequence of forms.  The term
+    Should make clear that \sc{body} is a sequence of forms.  The term
     continuation is not defined.  RPG finds ``The invocation...invalidated''
     obscure.
 
@@ -692,7 +690,7 @@ Note that {\tt x} does not occur free in any of \form$_2$ \ldots {\em
     JAP would like to weaken the requirement that let/cc ``signal an error'' to
     be ``is an error''.  Done.  Perhaps someone will notice this issue now.
 
-    Should {\em lambda-list} become {\em specialized-lambda-list}?
+    Should \sc{lambda-list} become {\em specialized-lambda-list}?
 \end{optPrivate}
 %
 \begin{optDefinition}
@@ -714,14 +712,14 @@ let/cc form
 \end{arguments}
 %
 \result%
-The result of evaluating the last form in {\em body} or the value of
-the argument given to the continuation bound to \identifier.
+The result of evaluating the last form in \sc{body} or the value of
+the argument given to the continuation bound to \sc{identifier}.
 %
 \remarks%
-The \identifier{} is bound to a new location, which is initialized with the
+The \sc{identifier} is bound to a new location, which is initialized with the
 continuation of the \keywordref{let/cc} form.  This binding is immutable and has
 lexical scope and indefinite extent\index{general}{scope and extent!of
-    \keywordref{let/cc} binding}.  Each form in {\em body} is evaluated in order
+    \keywordref{let/cc} binding}.  Each form in \sc{body} is evaluated in order
 in the environment extended by the above binding.  It is an error to call the
 continuation outside the dynamic extent of the \keywordref{let/cc} form that
 created it.  The continuation is a function of one argument.  Calling the
@@ -789,15 +787,15 @@ as the value of the block form.  See also \keywordref{let/cc}.
 \rewriterules
 %
 \begin{RewriteTable}{block}{lll}
-    (\macroref{block} \identifier) &\rewrite& ()\\
-    (\macroref{block} \identifier{}  &\rewrite&
-    (\keywordref{let/cc} \identifier{} \\
-    \tts\forms)                    && \tts\forms)
+    (\macroref{block} \sc{identifier}) &\rewrite& ()\\
+    (\macroref{block} \sc{identifier}  &\rewrite&
+    (\keywordref{let/cc} \sc{identifier} \\
+    \tts\scseq{form})                    && \tts\scseq{form})
 \end{RewriteTable}
 %
 The rewrite for \macroref{block} does not prevent the \macroref{block} being
 exited from anywhere in its dynamic extent, since the function bound
-to \identifier{} is a first-class item and can be passed as an
+to \sc{identifier} is a first-class item and can be passed as an
 argument like other values.
 %
 \seealso%
@@ -814,29 +812,29 @@ return from macro
 \syntaxtable{return-from}{\returnfromSyntax}
 %
 \remarks%
-In \macroref{return-from}, the \identifier{} names the continuation of
+In \macroref{return-from}, the \sc{identifier} names the continuation of
 the (lexical) \macroref{block} from which to return.
 %An error is signalled
 %(condition class: {\tt
 %<invalid-return-continuation>}\indexcondition{invalid-return-continuation})
-%if the value of the variable named by \identifier{} is not a
+%if the value of the variable named by \sc{identifier} is not a
 %continuation.
 \macroref{return-from} is the invocation of the continuation of the block
-named by \identifier.  The \form{} is evaluated and the value
-is returned as the value of the block named by \identifier.
+named by \sc{identifier}.  The \sc{form} is evaluated and the value
+is returned as the value of the block named by \sc{identifier}.
 %
 \rewriterules
 %
 \begin{RewriteTable}{return-from}{lll}
-    (\macroref{return-from} \identifier) &\rewrite& (\identifier{} ())\\
+    (\macroref{return-from} \sc{identifier}) &\rewrite& (\sc{identifier} ())\\
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     00\= \kill
     (\macroref{return-from} \\
-    \>\identifier{} \form)
+    \>\sc{identifier} \sc{form})
 \end{tabbing}
 \end{minipage}
-&\rewrite& (\identifier{} \form)
+&\rewrite& (\sc{identifier} \sc{form})
 \end{RewriteTable}
 %
 \seealso%
@@ -857,7 +855,7 @@ function definition
 %
 \begin{arguments}
     \item[identifier] A symbol naming a new inner-lexical binding to be
-    initialized with the function having the {\em lambda-list} and {\em body}
+    initialized with the function having the \sc{lambda-list} and \sc{body}
     specified.
 
     \item[lambda-list] The parameter list of the function conforming to the
@@ -870,11 +868,11 @@ function definition
 %
 \result%
 The \keywordref{labels} operator provides for local mutually recursive function
-creation.  Each \identifier{} is bound to a new inner-lexical binding
-initialized with the function constructed from {\em lambda-list} and {\em body}.
+creation.  Each \sc{identifier} is bound to a new inner-lexical binding
+initialized with the function constructed from \sc{lambda-list} and \sc{body}.
 The scope of the {\em identifier}s is the entire \keywordref{labels}
 form\index{general}{scope and extent!in \keywordref{labels} expressions}.  The
-{\em lambda-list} is either a single variable or a list of variables---see
+\sc{lambda-list} is either a single variable or a list of variables---see
 \keywordref{lambda}.  Each form in {\em labels-body} is evaluated in order in
 the lexical environment extended with the bindings of the {\em identifier}s.
 The result of evaluating the last form in {\em labels-body}\/ is returned as the
@@ -894,51 +892,51 @@ binding
 \syntaxtable{let}{\letSyntax}
 %
 \remarks%
-The optional \identifier\/ denotes that the let form can be called from
-within its {\em body}.  This is an abbreviation for \keywordref{labels} form in
-which \identifier{} is bound to a function whose parameters are the
+The optional \sc{identifier}\/ denotes that the let form can be called from
+within its \sc{body}.  This is an abbreviation for \keywordref{labels} form in
+which \sc{identifier} is bound to a function whose parameters are the
 identifiers of the {\em binding\/}s of the \macroref{let}, whose body is that of
 the \macroref{let} and whose initial call passes the values of the initializing
 form of the {\em binding\/}s.  A binding is specified by either an identifier or
 a two element list of an identifier and an initializing form.  All the
 initializing forms are evaluated in order from left to right in the current
 environment and the variables named by the identifiers in the {\em binding}s are
-bound to new locations holding the results.  Each form in {\em body} is
+bound to new locations holding the results.  Each form in \sc{body} is
 evaluated in order in the environment extended by the above bindings.  The
-result of evaluating the last form in {\em body} is returned as the result of
+result of evaluating the last form in \sc{body} is returned as the result of
 the \macroref{let} form.
 %
 \rewriterules
 %
 \begin{RewriteTable}{let}{lll}
-    (\macroref{let} () \forms) &\rewrite& (\keywordref{progn} \forms) \\
+    (\macroref{let} () \scseq{form}) &\rewrite& (\keywordref{progn} \scseq{form}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let} (\=({\em id}$_1$ \form$_1$) \\
-    \>({\em id}$_2$ \form$_2$) \\
-    \>{\em id}$_3$ \\
+    (\macroref{let} (\=(\sc{id}$_1$ \sc{form}$_1$) \\
+    \>(\sc{id}$_2$ \sc{form}$_2$) \\
+    \>\sc{id}$_3$ \\
     \>\ldots)\\
     00\= \kill
-    \>\forms)
+    \>\scseq{form})
 \end{tabbing}
 \end{minipage}
 &\rewrite&
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     00\=00\=00\= \kill
-    ((\keywordref{lambda} ({\em id}$_1$ {\em id}$_2$ {\em id}$_3$ \ldots) \\
-    \>\>\forms) \\
-    \>\form$_1$ \form$_2$ () \ldots) \\
+    ((\keywordref{lambda} (\sc{id}$_1$ \sc{id}$_2$ \sc{id}$_3$ \ldots) \\
+    \>\>\scseq{form}) \\
+    \>\sc{form}$_1$ \sc{form}$_2$ () \ldots) \\
 \end{tabbing}
 \end{minipage}\\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     (\macroref{let} \={\em id$_0$}\\
-    \>(\=({\em id}$_1$ \form$_1$) \\
-    \>\>{\em id}$_2$ \\
+    \>(\=(\sc{id}$_1$ \sc{form}$_1$) \\
+    \>\>\sc{id}$_2$ \\
     \>\>\ldots)\\
     00\= \kill
-    \>\forms)
+    \>\scseq{form})
 \end{tabbing}
 \end{minipage}
 &\rewrite&
@@ -946,9 +944,9 @@ the \macroref{let} form.
 \begin{tabbing}
     00\= \kill
     (\keywordref{labels}\\
-    \>(\=({\em id}$_0$ ({\em id}$_1$ {\em id}$_2$ \ldots) \\
-    \>\>\forms)) \\
-    \>({\em id$_0$} \form$_1$ () \ldots))
+    \>(\=(\sc{id}$_0$ (\sc{id}$_1$ \sc{id}$_2$ \ldots) \\
+    \>\>\scseq{form})) \\
+    \>({\em id$_0$} \sc{form}$_1$ () \ldots))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
@@ -968,7 +966,7 @@ initializing form.  The first initializing form is evaluated in the
 current environment and the corresponding variable is bound to a new
 location containing that result.  Subsequent bindings are processed in
 turn, evaluating the initializing form in the environment extended by
-the previous binding.  Each form in {\em body} is evaluated in order in
+the previous binding.  Each form in \sc{body} is evaluated in order in
 the environment extended by the above bindings.  The result of
 evaluating the last form is returned as the result of the \macroref{let*}
 form.
@@ -976,27 +974,27 @@ form.
 \rewriterules
 %
 \begin{RewriteTable}{let*}{lll}
-    (\macroref{let*} () \forms) &\rewrite& (progn \forms) \\
+    (\macroref{let*} () \scseq{form}) &\rewrite& (progn \scseq{form}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let*} (\=({\em var}$_1$ \form$_1$) \\
-    \>({\em var}$_2$ \form$_2$) \\
-    \>{\em var}$_3$\\
+    (\macroref{let*} (\=(\sc{var}$_1$ \sc{form}$_1$) \\
+    \>(\sc{var}$_2$ \sc{form}$_2$) \\
+    \>\sc{var}$_3$\\
     \>\ldots) \\
     00\= \kill
-    \>\forms)
+    \>\scseq{form})
 \end{tabbing}%
 \end{minipage}%
 &\rewrite&
 \begin{minipage}[t]{\columnwidth}%
 \begin{tabbing}%
     00\= \kill
-    (\macroref{let} (({\em var}$_1$ \form$_1$)) \\
-    \>(\macroref{let*} (\=({\em var}$_2$ \form$_2$) \\
-    \>\>{\em var}$_3$\\
+    (\macroref{let} ((\sc{var}$_1$ \sc{form}$_1$)) \\
+    \>(\macroref{let*} (\=(\sc{var}$_2$ \sc{form}$_2$) \\
+    \>\>\sc{var}$_3$\\
     \>\>\ldots) \\
     00\=00\= \kill
-    \>\>\forms))
+    \>\>\scseq{form}))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
@@ -1027,23 +1025,22 @@ and a \syntaxref{defmodule} form, then the {\em form}s within the
 environment.  It is a violation for defining forms to appear in inner-lexical
 environments.
 
-%\keyword{multiple-value-bind}{lambda-list form body}{obj}
-%\gdef\multipleValueBind{\verb+(multiple-value-bind+ lambda-list form body\verb+)+}
-%The \form{} is evaluated and the elements of {\em lambda-list} are
-%bound to the resulting values.  The cardinality of the resulting
-%values might not agree with the arity of the {\tt multiple-value-bind}
-%{\em lambda-list}.  If the number of values is less than the arity,
-%the excess formal parameters receive the value \nil{}.  It is an
-%error if the number of values is greater than the arity.  A conforming
-%processor must support a minimum {\tt multiple-value-bind} arity of
-%15.  If {\em lambda-list} is an \identifier, it is bound to a
-%newly allocated list of the multiple values.  If {\em lambda-list}
-%is a {\em rest-list}, each \identifier{} preceding the dot is bound
-%to its corresponding value in the multiple value and the {\em
-%identifier} succeeding the dot is bound to a newly allocated list of
-%the remaining elements of the multiple value.  These bindings have
-%lexical scope and extent.  Each form in {\em body} is evaluated in
-%order in the environment extended by the above bindings.
+% \keyword{multiple-value-bind}{lambda-list form body}{obj}
+% \gdef\multipleValueBind{\verb+(multiple-value-bind+ lambda-list form
+%     body\verb+)+} The \sc{form} is evaluated and the elements of {\em
+%     lambda-list} are bound to the resulting values.  The cardinality of the
+% resulting values might not agree with the arity of the {\tt
+%     multiple-value-bind} \sc{lambda-list}.  If the number of values is less
+% than the arity, the excess formal parameters receive the value \nil{}.  It is
+% an error if the number of values is greater than the arity.  A conforming
+% processor must support a minimum {\tt multiple-value-bind} arity of 15.  If
+% \sc{lambda-list} is an \sc{identifier}, it is bound to a newly allocated list
+% of the multiple values.  If \sc{lambda-list} is a {\em rest-list}, each
+% \sc{identifier} preceding the dot is bound to its corresponding value in the
+% multiple value and the {\em identifier} succeeding the dot is bound to a newly
+% allocated list of the remaining elements of the multiple value.  These
+% bindings have lexical scope and extent.  Each form in \sc{body} is evaluated
+% in order in the environment extended by the above bindings.
 %
 %\standard{values}{obj$_1$ ... obj$_n$}{multiple-value(obj)}
 %The values {\em obj$_1$} to {\em obj$_n$} are passed to the
@@ -1180,7 +1177,7 @@ which there are two kinds---forms whose value is to be inserted at that location
 in the structure and forms whose value is to be spliced into the structure at
 that location.  The former is indicated by an \syntaxref{unquote} expression and
 the latter by an \syntaxref{unquote-splicing} expression.  In
-\syntaxref{unquote-splicing} the \form{} must result in a proper list.  The
+\syntaxref{unquote-splicing} the \sc{form} must result in a proper list.  The
 insertion of the result of an unquote-splice expression is as if the opening and
 closing parentheses of the list are removed and all the elements of the list are
 appended in place of the unquote-splice expression.
