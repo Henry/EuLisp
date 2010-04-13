@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-04-12 23:20:00" /> 
+<meta name="date" content="2010-04-13 22:55:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -196,14 +196,14 @@ class="cmti-9">class-name </span>: </dt><dd
 class="arguments">
     <!--l. 29--><p class="noindent" >A symbol naming a binding to be initialised with the new
     class.
-                                                         </p></dd><dt class="arguments">
-  <span 
+    </p></dd><dt class="arguments">
+<span 
 class="cmtt-9">(</span><span 
 class="cmti-9">superclass</span><sup><span 
 class="cmsy-6">*</span></sup><span 
-class="cmtt-9">) </span>:  </dt><dd 
+class="cmtt-9">) </span>: </dt><dd 
 class="arguments">
-        <!--l. 32--><p class="noindent" >A list of symbols naming bindings of classes to be used
+                                                         <!--l. 32--><p class="noindent" >A list of symbols naming bindings of classes to be used
         as the superclasses of the new class (multiple inheritance<a 
  id="dx23-894001"></a><a 
  id="dx23-894002"></a>).
@@ -309,11 +309,11 @@ class="options">
         means to access the slot. The reader function is a function
         of one argument, which should be an instance of the new
         class. No writer function is automatically bound with this
+        option. This option can be specified more than once for
+        a slot, creating several readers. It is an error to specify
+        the same reader, writer, or accessor name for two different
                                                                                                   
                                                                                                   
-    option. This option can be specified more than once for
-    a slot, creating several readers. It is an error to specify
-    the same reader, writer, or accessor name for two different
     slots.
     </p></dd><dt class="options">
 <span 
@@ -407,8 +407,9 @@ class="options">
     <!--l. 143--><p class="noindent" >Creates  a  predicate  function  for  the  new  class.  The
     predicate  specification  gives  the  name  to  which  the
     predicate  function  will  be  bound.  This  option  may  be
-    specified any number of times for a class.                     </p></dd><dt class="options">
-  <span 
+    specified any number of times for a class.
+    </p></dd><dt class="options">
+                                                   <span 
 class="cmtt-9">class </span><span 
 class="cmti-9">class </span>:  </dt><dd 
 class="options">
@@ -591,9 +592,9 @@ class="cmti-9">gf-lambda-list </span>:  </dt><dd
 class="arguments">
         <!--l. 26--><p class="noindent" >As level-0. See section&#x00A0;<a 
 href="eulispcl11.html#x13-74009r3">11.4.3<!--tex4ht:ref: defgeneric-0 --></a>.
+        </p></dd><dt class="arguments">
                                                                                                   
                                                                                                   
-    </p></dd><dt class="arguments">
 <span 
 class="cmti-9">level-1-init-option</span><sup><span 
 class="cmsy-6">*</span></sup> : </dt><dd 
@@ -700,8 +701,8 @@ class="cmti-9">identifier  </span>and  the  value  of
 class="cmti-9">expression  </span>are  passed  to  <a 
 href="eulispcl11.html#x13-94003r1"><span 
 class="cmtt-9">make</span></a> creating  a  new  method
-                                                         as initargs. The values are evaluated in the lexical and
-        dynamic environment of the <a 
+    as initargs. The values are evaluated in the lexical and
+                                                         dynamic environment of the <a 
 href="#x23-896001r1"><span 
 class="cmtt-9">generic-lambda</span></a>. This option
         is  used  for  classes  which  need  extra  information  not
@@ -7112,55 +7113,65 @@ expressions and definitions is given in the section defining
 level-0.
 <h5 class="ssclauseHead"> 18.19.1 <a 
  id="x23-119000018.19.1"></a>Syntax of Level-1 defining forms</h5>
-   <div class="obeylines-v"><span 
-class="cmtt-9">module</span>
-   <br /><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;=</span><span 
-class="cmtt-9">&#x00A0;&#8217;(&#8217;,</span><span 
-class="cmtt-9">&#x00A0;&#8217;defmodule&#8217;,</span><span 
-class="cmtt-9">&#x00A0;module</span><span 
-class="cmtt-9">&#x00A0;name,</span>
-   <br /><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;module</span><span 
-class="cmtt-9">&#x00A0;directives,</span><span 
-class="cmtt-9">&#x00A0;{level</span><span 
-class="cmtt-9">&#x00A0;1</span><span 
-class="cmtt-9">&#x00A0;module</span><span 
-class="cmtt-9">&#x00A0;form},</span><span 
-class="cmtt-9">&#x00A0;&#8217;)&#8217;;</span>
-   <br /><span 
-class="cmtt-9">level</span><span 
-class="cmtt-9">&#x00A0;1</span><span 
-class="cmtt-9">&#x00A0;module</span><span 
-class="cmtt-9">&#x00A0;form</span>
-   <br /><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;=</span><span 
-class="cmtt-9">&#x00A0;level</span><span 
-class="cmtt-9">&#x00A0;1</span><span 
-class="cmtt-9">&#x00A0;expression</span><span 
-class="cmtt-9">&#x00A0;(*</span><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmsy-9">§</span><a 
-href="eulispcl18.html#x23-116100018.17">18.17<!--tex4ht:ref: control-1 --></a><span 
-class="cmtt-9">&#x00A0;*)</span>
-   <br /><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;</span><span 
-class="cmtt-9">&#x00A0;|</span><span 
-class="cmtt-9">&#x00A0;level</span><span 
-class="cmtt-9">&#x00A0;0</span><span 
-class="cmtt-9">&#x00A0;module</span><span 
-class="cmtt-9">&#x00A0;form;</span>
-   <br /></div>
-                                                     <div class="obeylines-v"><span 
+<div class="minipage"><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmbx-9">??</span><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 9-->                      <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
+class="tabbing"><span 
+class="cmtt-9">( defmodule </span><a 
+href="eulispcl10.html#x12-5900010.6.0.3"><span 
+class="cmti-9">module-name</span></a></td></tr></table>
+<!--l.10 9-->                            <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">         </td><td style="width:14px;" 
+class="tabbing">   </td><td  
+class="tabbing"><a 
+href="eulispcl10.html#x12-5900010.6.0.3"><span 
+class="cmti-9">module-directives</span></a></td></tr></table>
+<!--l.10 9-->                                     <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">         </td><td style="width:14px;" 
+class="tabbing">   </td><td  
+class="tabbing"><span 
+class="cmbx-9">??</span> <span 
+class="cmtt-9">)</span></td></tr></table>
+<!--l.10 9-->                                             <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmbx-9">??</span><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 9-->                                         <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
+class="tabbing"><span 
+class="cmbx-9">??</span></td></tr></table>
+<!--l.10 9-->                           <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">        </td><td  
+class="tabbing"><a 
+href="eulispcl10.html#x12-5900010.6.0.3"><span 
+class="cmti-9">level-0-module-form</span></a></td></tr></table>
+<!--l.10 9-->
+</div>
+                                                       <div class="obeylines-v"><span 
 class="cmtt-9">defclass</span><span 
 class="cmtt-9">&#x00A0;form</span>
     <br /><span 

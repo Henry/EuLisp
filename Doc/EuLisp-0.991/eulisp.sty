@@ -2,7 +2,6 @@
 \typeout{Document style `EuLisp'  - May 89, July 92, Mar 2010}
 
 \RequirePackage{ifthen}%
-\RequirePackage{stringstrings}%
 
 % ------------------------------------------------------------------------------
 %%% Default page layout
@@ -314,25 +313,28 @@
 % \newcommand*{\syntaxssclausefont}{\mdseries}
 \newcommand*{\syntaxssclausefont}{\normalfont\small\bfseries$\!$}
 
-\newcommand*{\Syntax}{\syntaxssclause{\syntaxssclausefont Syntax}\vskip -8pt}
+\newcommand*{\Syntax}
+{%
+    \syntaxssclause{\syntaxssclausefont Syntax}%
+    \vskip -8pt%
+}
 
 %%%  Syntax box/table (not a float)
 
-\gdef\saveSyntax#1{\expandafter\newbox\csname #1
-    Syntax\endcsname\global\expandafter\setbox\csname #1 Syntax\endcsname\vbox}
+\newcommand*{\defSyntax}[1]{\expandafter\def\csname #1 Syntax\endcsname}
 
 % syntaxx is a temporary name for the new syntax environment
 % until the use of the old syntax macro is replaced in the whole text
 \newenvironment{syntaxx}
 {%
-    \begin{minipage}{\linewidth}
-        \tt
-        \begin{tabbing}%
-            0000\=0000\=\kill%
-        }
-        {%
-        \end{tabbing}%
-    \end{minipage}
+    \begin{minipage}{\linewidth}%
+    \tt%
+    \begin{tabbing}%
+    000000\=00\=0000000000000000000000000000000\=\kill%
+}%
+{%
+    \end{tabbing}%
+    \end{minipage}%
 }
 
 \newcommand{\syntaxBox}[1]
@@ -343,11 +345,17 @@
     }%
 }
 
-\newcommand{\syntaxTable}[1]
+\newcommand{\showSyntaxBox}[1]
 {%
     \ttsubindex{#1}{syntax table}%
     \index{general}{syntax tables!#1@{\tt #1}}%
-    \expandafter\syntaxBox{\csname #1 Syntax\endcsname}%
+    \framebox[\linewidth][l]{\csname #1 Syntax\endcsname}%
+}
+
+\newcommand{\showSyntax}[1]
+{%
+    \let\scdef=\scref%
+    \csname #1 Syntax\endcsname%
 }
 
 % Old macro
@@ -365,10 +373,13 @@
 %%% Function Signature
 %%%  Function Signature sub-clause
 
-\newcommand*{\Signature}{\syntaxssclause{\syntaxssclausefont Signature}}
+\newcommand*{\Signature}
+{%
+    \syntaxssclause{\syntaxssclausefont Signature}%
+    \vskip -8pt%
+}
 
-\gdef\saveSignature#1{\expandafter\newbox\csname #1
-    Signature\endcsname\global\expandafter\setbox\csname #1 Signature\endcsname\vbox}
+\newcommand*{\defSignature}[1]{\expandafter\def\csname #1 Signature\endcsname}
 
 \newenvironment{signature}
 {%
@@ -376,18 +387,20 @@
     \tt%
     \begin{tabbing}%
     00\=00\=00\=00\=\kill%
-}
+}%
 {%
     \end{tabbing}%
     \end{minipage}%
 }
 
-\newcommand{\signatureTable}[1]
+\newcommand{\showSignatureBox}[1]
 {%
     \ttsubindex{#1}{function signature}%
     \index{general}{function signatures!#1@{\tt #1}}%
-    \expandafter\syntaxBox{\csname #1 Signature\endcsname}%
+    \framebox[\linewidth][l]{\csname #1 Signature\endcsname}
 }
+
+\newcommand{\showSignature}[1]{\csname #1 Signature\endcsname}
 
 % ------------------------------------------------------------------------------
 %%% Rewrite-rules
@@ -677,6 +690,8 @@
     \ttindex{#1}\index{general}{syntax category!#1}%
 }
 \newcommand*{\scref}[1]{\hyperref[\sclabel{#1}]{\sc{#1}}}
+\newcommand*{\scoptref}[1]{\hyperref[\sclabel{#1}]{\scopt{#1}}}
+\newcommand*{\scseqref}[1]{\hyperref[\sclabel{#1}]{\scseq{#1}}}
 
 \newcommand*{\rewrite}{{$\equiv$}}
 \newcommand*{\tts}{{\tt\phantom{00}}}

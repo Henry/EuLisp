@@ -25,40 +25,30 @@ which permits its use as an initial or a constituent character of an identifier
 %
 \Syntax
 \label{character-set}
-\newbox\characterSet
-\begingroup
-%
-\def\'{\string\'}
-%
-\global\setbox\characterSet\vbox{
-\syntax
-decimal digit
-   = '0' | '1' | '2' | '3' | '4' | '5' | '6'
-   | '7' | '8' | '9';
-upper letter
-   = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G'
-   | 'H' | 'I' | 'J' | 'K' | 'L' | 'M' | 'N'
-   | 'O' | 'P' | 'Q' | 'R' | 'S' | 'T' | 'U'
-   | 'V' | 'W' | 'X' | 'Y' | 'Z';
-lower letter
-   = 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g'
-   | 'h' | 'i' | 'j' | 'k' | 'l' | 'm' | 'n'
-   | 'o' | 'p' | 'q' | 'r' | 's' | 't' | 'u'
-   | 'v' | 'w' | 'x' | 'y' | 'z';
-letter
-   = upper letter | lower letter;
-other character
-   = '*' | '/' | '<' | '=' | '>' | '+' | '-'
-   | '.';
-special character
-   = ';' | "'" | ',' | '\' | '"' | '#'
-   | '(' | ')' | '`' | '|' | '@';
-level 0 character
-   = decimal digit | letter | other character
-   | special character;
-\endsyntax}
-\endgroup
-\syntaxtable{{\normalfont character set}}{\characterSet}
+\defSyntax{character-set}{
+\begin{syntaxx}
+    \scdef{decimal-digit}: one of \\
+    \>0 1 2 3 4 5 6 7 8 9 \\
+    \scdef{upper-letter}: one of \\
+    \>A B C D E F G H I J K L M \\
+    \>N O P Q R S T U V W X Y Z \\
+    \scdef{lower-letter}: one of \\
+    \>a b c d e f g h i j k l m \\
+    \>n o p q r s t u v w x y z \\
+    \scdef{letter}: \\
+    \>\scref{upper-letter} \\
+    \>\scref{lower-letter} \\
+    \scdef{other-character}: one of\\
+    \>* / < = > + - . \\
+    \scdef{special-character}: one of\\
+    \>; ' , \textbackslash{} " \# ( ) ` | @ \\
+    \scdef{level-0-character}: \\
+    \>\scref{decimal-digit} \\
+    \>\scref{letter} \\
+    \>\scref{other-character} \\
+    \>\scref{special-character}
+\end{syntaxx}}
+\showSyntaxBox{character-set}
 %
 \end{optDefinition}
 %
@@ -104,19 +94,19 @@ the section of this definition corresponding to the class as defined below:
 %
 \Syntax
 \label{object-syntax}
-\savesyntax\objectSyntax\vbox{
-\syntax
-object
-    = character (* \[\S\ref{character}\] *)
-    | float (* \[\S\ref{float}\] *)
-    | integer (* \[\S\ref{integer}\] *)
-    | list (* \[\S\ref{list}\] *)
-    | string (* \[\S\ref{string}\] *)
-    | symbol (* \[\S\ref{symbol}\] *)
-    | vector (* \[\S\ref{vector}\] *)
-\endsyntax}
-\syntaxtable{object}{\objectSyntax}
-
+\defSyntax{object}{
+\begin{syntaxx}
+    \scdef{object}: \\
+    \>\scref{character} \>\>\S\ref{character} \\
+    \>\scref{float}     \>\>\S\ref{float} \\
+    \>\scref{integer}   \>\>\S\ref{integer} \\
+    \>\scref{list}      \>\>\S\ref{list} \\
+    \>\scref{string}    \>\>\S\ref{string} \\
+    \>\scref{symbol}    \>\>\S\ref{symbol} \\
+    \>\scref{vector}    \>\>\S\ref{vector}
+\end{syntaxx}}
+\showSyntaxBox{object}
+%
 The syntax for identifiers \index{general}{identifier!syntax}
 \index{general}{syntax!identifier} corresponds to that for symbols.
 %

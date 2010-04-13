@@ -446,13 +446,14 @@ of several kinds of entry are now given.  Some subsections of entries are
 optional and are only given where it is felt necessary.
 %
 \keyword{a-special-form}
+%
 \Syntax
-\saveSyntax{a-special-form}{
+\defSyntax{a-special-form}{
 \begin{syntaxx}
     \scdef{a-special-form-form}: $\rightarrow$ \sc{result-class} \\
-    \>( a-special-form \sc{form-1} ... \scopt{form-n} )
+    \>( \keywordref{a-special-form} \sc{form-1} ... \scopt{form-n} )
 \end{syntaxx}}
-\syntaxTable{a-special-form}
+\showSyntaxBox{a-special-form}
 %
 \begin{arguments}
     \item[\sc{form-1}] description of structure and r\^ole of \sc{form-1}.\\
@@ -478,12 +479,12 @@ Cross references to related entries.
 \function{a-function}
 %
 \Signature
-\saveSignature{a-function}{
+\defSignature{a-function}{
 \begin{signature}
-    (a-function \sc{argument-1} ... \scopt{argument-n})\\
+    (\functionref{a-function} \sc{argument-1} ... \scopt{argument-n})\\
     \>$\rightarrow$ \sc{result-class}
 \end{signature}}
-\signatureTable{a-function}
+\showSignatureBox{a-function}
 %
 \begin{arguments}
     \item[\sc{argument-1}] information about the class or classes of
