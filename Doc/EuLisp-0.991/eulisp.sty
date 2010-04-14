@@ -41,6 +41,7 @@
 \newcommand*{\nil}{\syntaxref{()}}
 \newcommand*{\true}{\constantref{t}}
 \newcommand*{\Ra}{$\Rightarrow$}
+\newcommand*{\ra}{$\rightarrow$}
 
 % ------------------------------------------------------------------------------
 %%% Index typesetting
@@ -56,7 +57,7 @@
 % Add a \tt entry to the general index, e.g. and language keyword
 \newcommand*{\ttindex}[1]{\index{general}{\ttindexlabel{#1}}}
 
-% Add a language keyword, syntax form, function, etc. definition
+% Add a language operator, function, etc. definition
 % to the general index with the page number in emphatic
 \newcommand*{\ttindexdef}[1]{\index{general}{\ttindexlabel{#1}|hyperem}}
 
@@ -189,7 +190,7 @@
 }
 \newcommand*{\methodref}[1]{\hyperref[\methodlabel{#1}]{{\tt #1}}}
 
-%%%  Syntax form
+%%%  Syntax operator
 \newcommand*{\syntaxlabel}[1]{syntax:#1}
 \newcommand{\syntaxform}[1]
 {%
@@ -200,7 +201,7 @@
 }
 \newcommand*{\syntaxref}[1]{\hyperref[\syntaxlabel{#1}]{{\tt{}#1}}}
 
-%%%  Meta-syntax form
+%%%  Meta-syntax operator
 \newcommand*{\metasyntaxlabel}[1]{metasyntax:#1}
 \newcommand{\metasyntaxform}[1]
 {%
@@ -215,10 +216,10 @@
 \newcommand*{\keywordlabel}[1]{keyword:#1}
 \newcommand{\keyword}[1]
 {%
-    \entryclause{#1}{special form}%
+    \entryclause{#1}{special operator}%
     \label{\keywordlabel{#1}}%
     \ttindexdef{#1}%
-    \index{general}{special form!#1}%
+    \index{general}{special operator!#1}%
 }
 \newcommand*{\keywordref}[1]{\hyperref[\keywordlabel{#1}]{{\tt{}#1}}}
 
@@ -237,9 +238,9 @@
 \newcommand*{\defformlabel}[1]{defform:#1}
 \newcommand{\defform}[1]
 {%
-    \entryclause{#1}{defining form}%
+    \entryclause{#1}{defining operator}%
     \label{\defformlabel{#1}}%
-    \ttindexdef{#1}\index{general}{defining form!#1}%
+    \ttindexdef{#1}\index{general}{defining oporator!#1}%
 }
 \newcommand*{\defformref}[1]{\hyperref[\defformlabel{#1}]{{\tt{}#1}}}
 
@@ -330,7 +331,7 @@
     \begin{minipage}{\linewidth}%
     \tt%
     \begin{tabbing}%
-    000000\=00\=0000000000000000000000000000000\=\kill%
+    000000\=00\=00\=0000000000000000000000000000000\=\kill%
 }%
 {%
     \end{tabbing}%

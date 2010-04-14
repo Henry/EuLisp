@@ -76,8 +76,11 @@ in the language.
     project an instance of another class (the source) to an instance of the
     target.
 
-    \definition{defining form}\index{general}{defining form} Any form or any
-    {\em macro expression} expanding into a form whose operator is one of
+    \definition{defining form}\index{general}{defining form} Any form or
+    {\em macro expression} expanding into a form whose operator is a {\em
+        defining operator}.
+
+    \definition{defining operator}\index{general}{defining operator} One of
     \defformref{defclass}, \defformref{defcondition}, \defformref{defconstant},
     \defformref{defgeneric}, \defformref{deflocal}, \syntaxref{defmacro},
     \syntaxref{defun}, or \defformref{defglobal}.
@@ -240,8 +243,8 @@ in the language.
         function} which implements the behaviour of a particular {\em method}.
     Method functions have special restrictions which do not apply to all {\em
         functions}: their formal parameter bindings are immutable, and the
-    special forms {\tt call-next-method} and {\tt next-method-p} are only valid
-    within the lexical scope of a method function.
+    special operators {\tt call-next-method} and {\tt next-method-p} are only
+    valid within the lexical scope of a method function.
 
     \definition{method specificity} \index{general}{method specificity}
     \index{general}{method!specificity} A domain {\em domain$_1$} is more
@@ -307,10 +310,21 @@ in the language.
     represents a not-yet-created {\em slot} {\em description} during class
     initialization.
 
-    \definition{special form} \index{general}{special form} A special form is a
-    semantic primitive of the language.  In consequence, any processor (for
-    example, a compiler or a code-walker) need be able to process only the
-    special forms of the language and compositions of them.
+    \definition{special form} \index{general}{special form} Any form or {\em
+        macro expression} expanding into a form whose operator is a {\em special
+        operator}.  They are semantic primitives of the language and in
+    consequence, any processor (for example, a compiler or a code-walker) need
+    be able to process only the special forms of the language and compositions
+    of them.
+
+    \definition{special operator} \index{general}{special operator} One of
+    \keywordref{a-special-form}, \keywordref{call-next-handler},
+    \keywordref{call-next-method}, \keywordref{dynamic},
+    \keywordref{dynamic-let}, \keywordref{dynamic-setq}, \keywordref{if},
+    \keywordref{labels}, \keywordref{lambda}, \keywordref{let/cc},
+    \keywordref{next-method-p}, \keywordref{progn}, \keywordref{quote},
+    \keywordref{setq}, \keywordref{unwind-protect}, or
+    \keywordref{with-handler}.
 
     \definition{specialize}\index{general}{specialize} A verbal form used to
     describe the creation of a more specific version of some entity.  Normally

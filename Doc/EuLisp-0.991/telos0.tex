@@ -259,42 +259,42 @@ kept, defclass should be described here also.
 
 \begin{optDefinition}
 \defform{defclass}
-\label{defclass}
+%
 \Syntax
-\savesyntax\defclassSyntax\vbox{\syntax
-defclass form
-   = '(', 'defclass', class-name, superclass-name,
-     slot-list, {class-option}, ')';
-class-name
-   = identifier; (* \[\S\ref{symbol}\] *)
-superclass-name
-   = identifier; (* \[\S\ref{symbol}\] *)
-slot-list
-   = '(', {slot}, ')';
-slot
-   = slot-name
-   | '(', slot-name, {slot-option}, ')';
-slot-name
-   = identifier; (* \[\S\ref{symbol}\] *)
-slot-option
-   = 'keyword:' identifier (* \[\S\ref{symbol}\] *)
-   | 'default:' level-0-expression (* \[\S\ref{control-0}\] *)
-   | 'reader:' identifier (* \[\S\ref{symbol}\] *)
-   | 'writer:' identifier (* \[\S\ref{symbol}\] *)
-   | 'accessor:' identifier (* \[\S\ref{symbol}\] *)
-   | 'requiredp:' boolean;
-class-option
-   = 'keywords:', '(', {identifier}, ')'
-   | 'constructor:', constructor-specification
-   | 'predicate:' identifier (* \[\S\ref{symbol}\] *)
-   | 'abstractp:' boolean;
-constructor-specification
-   = identifier
-   | '(', identifier, {keyword name}, ')'
-\endsyntax}
-\label{defclass-syntax-table}
-\syntaxtable{defclass}{\defclassSyntax}
-
+\defSyntax{defclass}{
+\begin{syntaxx}
+    \scdef{defclass-form}: \\
+    \>  ( \defformref{defclass} \scref{class-name} \scref{superclass-name} \\
+    \>\>  \scref{slot-list} \scseqref{class-option} ) \\
+    \scdef{class-name}: \\
+    \>  \scref{identifier} \\
+    \scdef{superclass-name}: \\
+    \>  \scref{identifier} \\
+    \scdef{slot-list}: \\
+    \>  ( \scseqref{slot} ) \\
+    \scdef{slot}: \\
+    \>  \scref{slot-name} \\
+    \>  ( \scref{slot-name} \scseqref{slot-option} ) \\
+    \scdef{slot-name}: \\
+    \>  \scref{identifier} \\
+    \scdef{slot-option}: \\
+    \>  keyword: \scref{identifier} \\
+    \>  default: \scref{level-0-expression} \\
+    \>  reader: \scref{identifier} \\
+    \>  writer: \scref{identifier} \\
+    \>  accessor: \scref{identifier} \\
+    \>  requiredp: \scref{boolean} \\
+    \scdef{class-option}: \\
+    \>  keywords: ( \scseqref{identifier} ) \\
+    \>  constructor: \scref{constructor-specification} \\
+    \>  predicate: \scref{identifier} \\
+    \>  abstractp: \scref{boolean} \\
+    \scdef{constructor-specification}: \\
+    \>  \scref{identifier} \\
+    \>  ( \scref{identifier} \scseqref{keyword-name} )
+\end{syntaxx}}
+\showSyntaxBox{defclass}
+%
 \begin{arguments}
     \item[class-name] A symbol naming a binding to be initialized with the new
     structure class. The binding is immutable.
@@ -401,7 +401,7 @@ The class-options are interpreted as follows:
     a class.
     % Specifying the constructor in this way is equivalent to writing a
     % \defformref{defconstructor} form for the class.
-
+    (* \[\S\ref{symbol}\] *)
     \item[predicate, identifier]%
     Creates a function which tests whether an object is an instance of the new
     class.  The predicate specification gives the name to which the predicate

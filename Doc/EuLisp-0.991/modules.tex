@@ -62,25 +62,103 @@ different module-names.  This is called a name clash.  These environments do not
 all need to exist at the same time, but it is simpler for the purposes of
 definition to describe module processing as if they do.
 \end{optDefinition}
-
+%
+\sclause{Module Definition}
+\label{defmodule}
+\ttindex{defmodule}
+%
+\begin{optDefinition}
+%
+\syntaxform{defmodule}
+%
+\Syntax
+\label{defmodule-syntax}
+\defSyntax{defmodule-0}{
+    \begin{syntaxx}
+        \scdef{defmodule-0-form}: \\
+        \>  ( defmodule \scref{module-name} \\
+        \>\>  \scref{module-directives} \\
+        \>\>  \scref{level-0-module-form} ) \\
+        \scdef{module-name}: \\
+        \>  \scref{indentifier} \\
+        \scdef{module-directives}: \\
+        \>  ( \scseqref{module-directive} ) \\
+        \scdef{module-directive}: \\
+        \>  export ( \scseqref{indentifier} ) \\
+        \>  expose ( \scseqref{module-descriptor} ) \\
+        \>  import ( \scseqref{module-descriptor} ) \\
+        \>  syntax ( \scseqref{module-descriptor} ) \\
+        \scdef{level-0-module-form}: \\
+        \>  ( export \scseqref{indentifier} ) \\
+        \>  \scref{level-0-expression} \\
+        \>  \scref{defining-form} \\
+        \>  ( progn \scseqref{level-0-module-form} ) \\
+        \scdef{module-descriptor}: \\
+        \>  \scref{module-name} \\
+        \>  \scref{module-filter} \\
+        \scdef{module-filter}: \\
+        \>  ( except ( \scseqref{indentifier} ) \scref{module-descriptor} ) \\
+        \>  ( only ( \scseqref{indentifier} ) \scref{module-descriptor} ) \\
+        \>  ( rename ( \scseqref{rename-pair} ) \scref{module-descriptor} ) \\
+        \scdef{rename-pair}: \\
+        \>  ( \scref{indentifier} \scref{indentifier} )
+    \end{syntaxx}}
+\showSyntaxBox{defmodule-0}
+%
+\defSyntax{defmodule-1}{
+    \begin{syntaxx}
+        \scdef{defmodule-1-form}: \\
+        \>  ( defmodule \scref{module-name} \\
+        \>\>  \scref{module-directives} \\
+        \>\>  \scseqref{level-1-module-form} ) \\
+        \scdef{level-1-module-form}: \\
+        \>  \scref{level-1-expression} \\
+        \>  \scref{level-0-module-form}
+    \end{syntaxx}}
+% \showSyntaxBox{defmodule-1}
+%
+\begin{arguments}
+    \item[module name] A symbol used to name the module.
+    \item[module directives] A form specifying the exported names, exposed
+    modules, imported modules and syntax modules used by this module.
+    \item[module form] One of a defining form, an expression or an export
+    directive.
+\end{arguments}
+%
+\remarks%
+The \syntaxref{defmodule} form defines a module named by {\em module name}
+and associates the name {\em module name} with a module object in the
+module binding environment\index{general}{binding!of module
+    names}\index{general}{module!name bindings}.
+\begin{note}
+    Intentionally, nothing is defined about any relationship between modules and
+    files.
+\end{note}
+%
+\examples
+An example module definition with explanatory comments is given in
+example~\ref{example:module}.
+%
+\end{optDefinition}
+%
 \sclause{Directives}
 \index{general}{module!directives}
 \label{directives}
 %
 \begin{optDefinition}
 The list of module directives is a sequence of keywords and forms, where the
-keywords indicate the interpretation of the forms (see syntax
-table~\ref{defmodule-syntax}).  This representation allows for the addition of
-further keywords at other levels of the definition and also for
-implementation-defined keywords\index{general}{implementation-defined!module
-    directives}.  For the keywords given here, there is no defined order of
-appearance, nor is there any restriction on the number of times that a keyword
-can appear.  Multiple occurrences of any of the directives defined here are
-treated as if there is a single directive whose form is the combination of each
-of the occurrences.  This definition describes the processing of four keywords,
-which are now described in detail.  The syntax of all the directives is given in
-syntax syntax table~\ref{defmodule-syntax} and an example of their use appears
-in example~\ref{example:module}.
+keywords indicate the interpretation of the forms (see syntax table
+\ref{defmodule-syntax}). This representation allows for the addition of further
+keywords at other levels of the definition and also for implementation-defined
+keywords\index{general}{implementation-defined!module directives}.  For the
+keywords given here, there is no defined order of appearance, nor is there any
+restriction on the number of times that a keyword can appear.  Multiple
+occurrences of any of the directives defined here are treated as if there is a
+single directive whose form is the combination of each of the occurrences.  This
+definition describes the processing of four keywords, which are now described in
+detail.  The syntax of all the directives is given in syntax
+table~\ref{defmodule-syntax} and an example of their use appears in
+example~\ref{example:module}.
 %
 \begin{figure*}[t]
 \begin{example}
@@ -125,7 +203,7 @@ in example~\ref{example:module}.
 %
 \end{optDefinition}
 %
-\sclause{Export Directive}
+\ssclause{Export Directive}
 %
 \index{general}{module!export}
 \begin{optDefinition}
@@ -137,7 +215,7 @@ A name clash can arise in the external environment from interaction with exposed
 modules.
 \end{optDefinition}
 %
-\sclause{Import Directive}
+\ssclause{Import Directive}
 %
 \index{general}{module!import}
 \label{import}
@@ -191,20 +269,20 @@ Elements of an import directive are interpreted as follows:
 \end{description}
 \end{optDefinition}
 %
-\sclause{Expose Directive}
+\ssclause{Expose Directive}
 \index{general}{module!expose}
 \begin{optDefinition}
 This is denoted by the keyword {\tt expose} followed by a list of {\em module
-    directive\/}s (see syntax table~\ref{defmodule-syntax}).  The purpose of this
-directive is to allow a module to export subsets of the external environments of
-various modules without importing them itself.  Processing an expose directive
-employs the same model as for imports, namely, a pair of a module-name and a
-local-name with the same filtering operations.  When the namelist has been
-filtered, the names are added to the external environment of the module begin
-processed.  A name clash can arise in the external environment from interaction
-with exports or between different exposed modules.  As an example of the use of
-{\tt expose}, a possible implementation of the {\tt
-    eulisp0}\index{general}{level-0 modules!eulisp0} module is shown in
+    directive\/}s (see syntax table~\ref{defmodule-syntax}).  The purpose of
+this directive is to allow a module to export subsets of the external
+environments of various modules without importing them itself.  Processing an
+expose directive employs the same model as for imports, namely, a pair of a
+module-name and a local-name with the same filtering operations.  When the
+namelist has been filtered, the names are added to the external environment of
+the module begin processed.  A name clash can arise in the external environment
+from interaction with exports or between different exposed modules.  As an
+example of the use of {\tt expose}, a possible implementation of the {\tt
+    eulisp0} \index{general}{level-0 modules!eulisp0} module is shown in
 example~\ref{example:exposes}.
 %
 \begin{example}
@@ -230,7 +308,7 @@ a few bindings in a module, especially if syntax expansion creates
 additional bindings whose names are not known, but should be exported.
 \end{optDefinition}
 %
-\sclause{Syntax Directive}
+\ssclause{Syntax Directive}
 \label{syntax-directive}
 \index{general}{module!syntax}
 \begin{optDefinition}
@@ -264,54 +342,8 @@ top-lexical bindings.  The exception to this is the \keywordref{progn} form,
 which is descended and the forms within it are treated as if the
 \keywordref{progn} were not present.  Definitions may only appear either at
 top-level within a module definition or inside any number of \keywordref{progn}
-forms.  This is specified more precisely in the grammar for a module given
-below.
-%
-\Syntax
-\label{defmodule-syntax}
-\defSyntax{defmodule-0}{
-\begin{syntaxx}
-    \scdef{defmodule-0-form}: \\
-    \>( defmodule \scref{module-name} \\
-    \>\>\scref{module-directives} \\
-    \>\>\scref{level-0-module-form} ) \\
-    \scdef{module-name}: \\
-    \>\scref{indentifier} \\
-    \scdef{module-directives}: \\
-    \>( \scseqref{module-directive} ) \\
-    \scdef{module-directive}: \\
-    \>export ( \scseqref{indentifier} ) \\
-    \>expose ( \scseqref{module-descriptor} ) \\
-    \>import ( \scseqref{module-descriptor} ) \\
-    \>syntax ( \scseqref{module-descriptor} ) \\
-    \scdef{level-0-module-form}: \\
-    \>( export \scseqref{indentifier} ) \\
-    \>\scref{level-0-expression} \\
-    \>\scref{defining-form} \\
-    \>( progn \scseqref{level-0-module-form} ) \\
-    \scdef{module-descriptor}: \\
-    \>\scref{module-name} \\
-    \>\scref{module-filter} \\
-    \scdef{module-filter}: \\
-    \>( except ( \scseqref{indentifier} ) \scref{module-descriptor} ) \\
-    \>( only ( \scseqref{indentifier} ) \scref{module-descriptor} ) \\
-    \>( rename ( \scseqref{rename-pair} ) \scref{module-descriptor} ) \\
-    \scdef{rename-pair}: \\
-    \>( \scref{indentifier} \scref{indentifier} )
-\end{syntaxx}}
-\showSyntaxBox{defmodule-0}
-%
-\defSyntax{defmodule-1}{
-\begin{syntaxx}
-    \scdef{defmodule-1-form}: \\
-    \>( defmodule \scref{module-name} \\
-    \>\>\scref{module-directives} \\
-    \>\>\scseqref{level-1-module-form} ) \\
-    \scdef{level-1-module-form}: \\
-    \>\scref{level-1-expression} \\
-    \>\scref{level-0-module-form}
-\end{syntaxx}}
-%\showSyntaxBox{defmodule-1}
+forms.  This is specified more precisely in the grammar for a module
+in syntax table~\ref{defmodule-syntax}.
 %
 \end{optDefinition}
 
@@ -366,41 +398,5 @@ The following steps summarize the module definition process:
     \item[{\bf expression evaluation}] The expressions in the body of the module
     are evaluated in the order in which they appear.
 \end{description}
-%
-\end{optDefinition}
-%
-\sclause{Module Definition}
-\label{defmodule}
-\ttindex{defmodule}
-%
-\begin{optDefinition}
-%
-\syntaxform{defmodule}
-\Syntax
-\noindent
-The syntax of a module and its constituents is defined in
-syntax table~\ref{defmodule-syntax}.
-%
-\begin{arguments}
-    \item[module name] A symbol used to name the module.
-    \item[module directives] A form specifying the exported names, exposed
-    modules, imported modules and syntax modules used by this module.
-    \item[module form] One of a defining form, an expression or an export
-    directive.
-\end{arguments}
-%
-\remarks%
-The \syntaxref{defmodule} form defines a module named by {\em module name}
-and associates the name {\em module name} with a module object in the
-module binding environment\index{general}{binding!of module
-names}\index{general}{module!name bindings}.
-\begin{note}
-    Intentionally, nothing is defined about any relationship between modules and
-    files.
-\end{note}
-%
-\examples
-An example module definition with explanatory comments is given in
-example~\ref{example:module}.
 %
 \end{optDefinition}
