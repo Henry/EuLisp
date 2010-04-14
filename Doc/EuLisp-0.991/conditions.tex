@@ -42,7 +42,7 @@ These two categories are characterized as follows:
     processing.
 \end{enumerate}
 %
-A condition class is defined using \defformref{defcondition} (see
+A condition class is defined using \defopref{defcondition} (see
 \S~\ref{defcondition}).  The definition of a condition causes the
 creation of a new class of condition.  A condition is signalled using
 the function \functionref{signal}, which has two required arguments and one
@@ -92,7 +92,7 @@ hierarchy is shown in table~\ref{condition-class-hierarchy}.
 
 \begin{optDefinition}
 %
-\defform{defcondition}
+\defop{defcondition}
 \label{defcondition}
 %
 \Syntax
@@ -168,7 +168,7 @@ Returns {\em object\/} if it is a condition, otherwise \nil{}.
 A new, initialized condition.
 %
 \remarks%
-First calls \keywordref{call-next-method} to carry out initialization specified
+First calls \specopref{call-next-method} to carry out initialization specified
 by superclasses then does the \classref{condition} specific initialization.
 %
 
@@ -253,7 +253,7 @@ the arguments.
 \end{initoptions}
 %
 \remarks%
-Signalled by one of \defformref{defgeneric}, \macroref{defmethod} or
+Signalled by one of \defopref{defgeneric}, \macroref{defmethod} or
 \macroref{generic-lambda} if the domain of the method would not be a subdomain
 of the generic function's domain.
 
@@ -265,7 +265,7 @@ of the generic function's domain.
 \end{initoptions}
 %
 \remarks%
-Signalled by one of \defformref{defgeneric}, \macroref{defmethod} or
+Signalled by one of \defopref{defgeneric}, \macroref{defmethod} or
 \macroref{generic-lambda} if the lambda list of the method is not congruent to
 that of the generic function.
 
@@ -277,7 +277,7 @@ that of the generic function.
 \end{initoptions}
 %
 \remarks%
-Signalled by one of \defformref{defgeneric}, \macroref{defmethod} or
+Signalled by one of \defopref{defgeneric}, \macroref{defmethod} or
 \macroref{generic-lambda} if there would be methods with the same domain
 attached to the generic function.
 
@@ -286,14 +286,14 @@ attached to the generic function.
 \begin{initoptions}
     % \item[generic] The generic function to which the method belongs.
 
-    \item[method, method] The method which called \keywordref{call-next-method}.
+    \item[method, method] The method which called \specopref{call-next-method}.
 
     \item[operand-list, list] A list of the arguments to have been passed to the
     next method.
 \end{initoptions}
 %
 \remarks%
-Signalled by \keywordref{call-next-method} if there is no next most specific
+Signalled by \specopref{call-next-method} if there is no next most specific
 method.
 %
 \end{optDefinition}
@@ -323,7 +323,7 @@ this terminology).  If it declines, then the next dynamically closest handler is
 called, and so on, until a handler accepts or resumes the condition.  It is the
 first handler accepting the condition that is used and this may not necessarily
 be the most specific.  Handlers are established by the special form
-\keywordref{with-handler}.
+\specopref{with-handler}.
 
 \function{signal}
 %
@@ -366,9 +366,9 @@ thread has no effect on either the signalled or signalling thread except in the
 case of the above error.
 %
 \seealso%
-\functionref{thread-reschedule}, \functionref{thread-value}, \keywordref{with-handler}.
+\functionref{thread-reschedule}, \functionref{thread-value}, \specopref{with-handler}.
 
-\keyword{call-next-handler}
+\specop{call-next-handler}
 %
 \Syntax
 \label{call-next-handler-syntax}
@@ -380,15 +380,15 @@ call-next-handler form
 \syntaxtable{call-next-handler}{\callnexthandlerSyntax}
 %
 \remarks%
-The \keywordref{call-next-handler} special form calls the next enclosing
+The \specopref{call-next-handler} special form calls the next enclosing
 handler. It is an error to evaluate this form other than within an established
-handler function. The \keywordref{call-next-handler} special form is normally
+handler function. The \specopref{call-next-handler} special form is normally
 used when a handler function does not know how to deal with the class of
 condition. However, it may also be used to combine handler function behaviour in
-a similar but orthogonal way to \keywordref{call-next-method} (assuming a
+a similar but orthogonal way to \specopref{call-next-method} (assuming a
 generic handler function).
 
-\keyword{with-handler}
+\specop{with-handler}
 %
 \Syntax
 \label{with-handler-syntax}
@@ -423,14 +423,14 @@ The value of the last form in the sequence of {\em form}s.
 %
 \remarks%
 %
-A \keywordref{with-handler} form is evaluated in three steps:
+A \specopref{with-handler} form is evaluated in three steps:
 \begin{enumerate}
     \item The new {\em handler-function} is evaluated. This now identifies the
     nearest enclosing handler and shadows the previous nearest enclosing
     handler.
 
     \item The sequence of {\em form}s is evaluated in order and the value of the
-    last one is returned as the result of the \keywordref{with-handler}
+    last one is returned as the result of the \specopref{with-handler}
     expression.
 
     \item the {\em handler-function} is disestablished as the nearest enclosing
@@ -438,8 +438,8 @@ A \keywordref{with-handler} form is evaluated in three steps:
     enclosing.
 \end{enumerate}
 %
-The above is the normal behaviour of \keywordref{with-handler}.  The exceptional
-behaviour of \keywordref{with-handler} happens when there is a call to
+The above is the normal behaviour of \specopref{with-handler}.  The exceptional
+behaviour of \specopref{with-handler} happens when there is a call to
 \functionref{signal} during the evaluation of {\em protected-form}.
 \functionref{signal} calls the nearest closing {\em handler-function} passing on
 the first two arguments given to \functionref{signal}.  The {\em
@@ -469,7 +469,7 @@ actions:
 
     \item The handler function does not know how to deal with the class of
     condition signalled; control is passed explicitly to the next enclosing
-    handler via the \keywordref{call-next-handler} special form.
+    handler via the \specopref{call-next-handler} special form.
 \end{enumerate}
 %
 An illustration of the use of all three cases is given here:

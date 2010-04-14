@@ -247,7 +247,7 @@ This function returns the class which is the class of all methods of the generic
 function.  Each method attached to a generic function must be an instance of
 this class. When a method is created using \macroref{defmethod},
 \macroref{method-lambda}, or by using the {\tt method} generic function
-option in a \defformref{defgeneric} or \macroref{generic-lambda}, it will be an
+option in a \defopref{defgeneric} or \macroref{generic-lambda}, it will be an
 instance of this class by default.
 
 \function{generic-function-methods}
@@ -328,7 +328,7 @@ A list of classes defining the domain of a method.
 This function returns a function which implements the method.  The returned
 function which is called when {\em method} is called, either by calling the
 generic function with appropriate arguments, through a
-\keywordref{call-next-method}, or by using \functionref{call-method}.  A method
+\specopref{call-next-method}, or by using \functionref{call-method}.  A method
 metaobject itself cannot be applied or called as a function.
 
 \setter{method-function}

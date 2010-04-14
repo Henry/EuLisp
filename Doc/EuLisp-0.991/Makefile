@@ -34,6 +34,7 @@ SOURCE_FILES = $(TEX_FILES) $(STY_FILES) Makefile
 IND_FILES = \
     function.ind      macro.ind         generic.ind    method.ind \
     condition.ind     constant.ind      class.ind      general.ind
+# keyword.ind
 
 IND_4DX = ${IND_FILES:%.ind=%.4dx}
 

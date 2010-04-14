@@ -2,12 +2,12 @@
 \label{control-1}
 %
 \begin{optPrivate}
-    HED wants ids as well as ids and initializers for \keywordref{dynamic-let}.
+    HED wants ids as well as ids and initializers for \specopref{dynamic-let}.
 \end{optPrivate}
 %
 \begin{optDefinition}
 %
-\keyword{dynamic}
+\specop{dynamic}
 %
 \Syntax
 \savesyntax\dynamicSyntax\vbox{\syntax
@@ -26,7 +26,7 @@ visible binding exists, an error is signaled (condition:
 \conditionref{unbound-dynamic-variable}
 \indexcondition{unbound-dynamic-variable}).
 
-\keyword{dynamic-setq}
+\specop{dynamic-setq}
 %
 \Syntax
 \savesyntax\dynamicSetqSyntax\vbox{\syntax
@@ -58,10 +58,10 @@ signalled (condition: \conditionref{unbound-dynamic-variable}
 \end{initoptions}
 %
 \remarks%
-Signalled by \keywordref{dynamic} or \keywordref{dynamic-setq} if the given
+Signalled by \specopref{dynamic} or \specopref{dynamic-setq} if the given
 dynamic variable has no visible dynamic binding.
 
-\keyword{dynamic-let}
+\specop{dynamic-let}
 %
 \Syntax
 \savesyntax\dynamicLetSyntax\vbox{\syntax
@@ -80,7 +80,7 @@ dynamic let form
 %
 \result%
 The sequence of {\em form}s is evaluated in order, returning the value of the
-last one as the result of the \keywordref{dynamic-let} form.
+last one as the result of the \specopref{dynamic-let} form.
 %
 \remarks%
 A binding specifier is either an identifier or a two element list of an
@@ -88,12 +88,12 @@ identifier and an initializing form.  All the initializing forms are evaluated
 from left to right in the current environment and the new bindings for the
 symbols named by the identifiers are created in the dynamic environment to hold
 the results.  These bindings have dynamic scope and dynamic extent
-\index{general}{scope and extent!of \keywordref{dynamic-let} bindings}.  Each
+\index{general}{scope and extent!of \specopref{dynamic-let} bindings}.  Each
 form in {\em body} is evaluated in order in the environment extended by the
 above bindings.  The result of evaluating the last form in {\em body} is
-returned as the result of \keywordref{dynamic-let}.
+returned as the result of \specopref{dynamic-let}.
 
-\defform{defglobal}
+\defop{defglobal}
 %
 \Syntax
 \savesyntax\defglobalSyntax\vbox{\syntax
@@ -113,7 +113,7 @@ defglobal form
 \remarks%
 The value of {\em form} is stored as the top dynamic value of the symbol named
 by \sc{identifier} \index{general}{binding!top dynamic}.  The binding created by
-\defformref{defglobal} is mutable.  An error is signaled (condition:
+\defopref{defglobal} is mutable.  An error is signaled (condition:
 \conditionref{dynamic-multiply-defined}
 \indexcondition{dynamic-multiply-defined}), on processing this form more than
 once for the same \sc{identifier}.
@@ -137,7 +137,7 @@ once for the same \sc{identifier}.
 \end{initoptions}
 %
 \remarks%
-Signalled by \defformref{defglobal} if the named dynamic variable already
+Signalled by \defopref{defglobal} if the named dynamic variable already
 exists.
 \end{optDefinition}
 
@@ -181,13 +181,13 @@ as the value of the \macroref{catch} form.
     (\macroref{catch}) & \rewrite &
         {\rm Is an error}\\
     (\macroref{catch} \sc{tag}) & \rewrite &
-        (\keywordref{progn} \sc{tag} ())\\
+        (\specopref{progn} \sc{tag} ())\\
     (\macroref{catch} \sc{tag} \scseq{form}) & \rewrite &
     \begin{minipage}[t]{0.3\columnwidth}
     \begin{tabbing}
         00\=00\= \kill
-        (\keywordref{let/cc} tmp\\
-        \>(\keywordref{dynamic-let} ((\sc{tag} tmp))\\
+        (\specopref{let/cc} tmp\\
+        \>(\specopref{dynamic-let} ((\sc{tag} tmp))\\
         \>\>\scseq{form}))
     \end{tabbing}
     \end{minipage}
@@ -227,9 +227,9 @@ bound.
     (\macroref{throw}) & \rewrite &
         {\rm Is an error}\\
     (\macroref{throw} \sc{tag}) & \rewrite &
-        ((\keywordref{dynamic} \sc{tag}) ())\\
+        ((\specopref{dynamic} \sc{tag}) ())\\
     (\macroref{throw} \sc{tag} \sc{form}) & \rewrite &
-        ((\keywordref{dynamic} \sc{tag}) \sc{form})
+        ((\specopref{dynamic} \sc{tag}) \sc{form})
 \end{RewriteTable}
 %
 \seealso%

@@ -74,12 +74,12 @@ will be applicable to direct and indirect instances of this class.  The
 inheritance rules, the applicability of methods and the generic dispatch are
 described in detail later in this section.
 
-Classes are defined using the \defformref{defclass} (\ref{defclass}) and
-\defformref{defcondition} (\ref{defcondition}) defining forms, both of which
+Classes are defined using the \defopref{defclass} (\ref{defclass}) and
+\defopref{defcondition} (\ref{defcondition}) defining forms, both of which
 create top-lexical bindings.
 
 Generic functions are defined using the
-\defformref{defgeneric}\ttindex{defgeneric} defining form, which creates a named
+\defopref{defgeneric}\ttindex{defgeneric} defining form, which creates a named
 generic function in the top-lexical environment of the module in which it
 appears and \macroref{generic-lambda}\ttindex{generic-lambda}, which creates an
 anonymous generic function.  These forms are described in detail later in this
@@ -179,7 +179,7 @@ initialization options are specified for \classref{object}.
 \index{general}{level-0 classes!\theclass{class}}
 %
 The default super-class including for itself.  All classes defined using the
-\defformref{defclass} form are direct or indirect subclasses of
+\defopref{defclass} form are direct or indirect subclasses of
 \classref{class}.  Thus, this class is specializable by user-defined classes at
 level-0.
 %
@@ -258,37 +258,35 @@ kept, defclass should be described here also.
 \end{optPrivate}
 
 \begin{optDefinition}
-\defform{defclass}
+\defop{defclass}
 %
 \Syntax
 \defSyntax{defclass}{
 \begin{syntaxx}
     \scdef{defclass-form}: \\
-    \>  ( \defformref{defclass} \scref{class-name} \scref{superclass-name} \\
-    \>\>  \scref{slot-list} \scseqref{class-option} ) \\
+    \>  ( \defopref{defclass} \scref{class-name} \scref{superclass-name} \\
+    \>\>  ( \scseqref{slot} ) \scseqref{class-option} ) \\
     \scdef{class-name}: \\
     \>  \scref{identifier} \\
     \scdef{superclass-name}: \\
     \>  \scref{identifier} \\
-    \scdef{slot-list}: \\
-    \>  ( \scseqref{slot} ) \\
     \scdef{slot}: \\
     \>  \scref{slot-name} \\
     \>  ( \scref{slot-name} \scseqref{slot-option} ) \\
     \scdef{slot-name}: \\
     \>  \scref{identifier} \\
     \scdef{slot-option}: \\
-    \>  keyword: \scref{identifier} \\
-    \>  default: \scref{level-0-expression} \\
-    \>  reader: \scref{identifier} \\
-    \>  writer: \scref{identifier} \\
-    \>  accessor: \scref{identifier} \\
-    \>  requiredp: \scref{boolean} \\
+    \>  \keywordref{keyword}: \scref{identifier} \\
+    \>  \keywordref{default}: \scref{level-0-expression} \\
+    \>  \keywordref{reader}: \scref{identifier} \\
+    \>  \keywordref{writer}: \scref{identifier} \\
+    \>  \keywordref{accessor}: \scref{identifier} \\
+    \>  \keywordref{requiredp}: \scref{boolean} \\
     \scdef{class-option}: \\
-    \>  keywords: ( \scseqref{identifier} ) \\
-    \>  constructor: \scref{constructor-specification} \\
-    \>  predicate: \scref{identifier} \\
-    \>  abstractp: \scref{boolean} \\
+    \>  \keywordref{keywords}: ( \scseqref{identifier} ) \\
+    \>  \keywordref{constructor}: \scref{constructor-specification} \\
+    \>  \keywordref{predicate}: \scref{identifier} \\
+    \>  \keywordref{abstractp}: \scref{boolean} \\
     \scdef{constructor-specification}: \\
     \>  \scref{identifier} \\
     \>  ( \scref{identifier} \scseqref{keyword-name} )
@@ -296,22 +294,21 @@ kept, defclass should be described here also.
 \showSyntaxBox{defclass}
 %
 \begin{arguments}
-    \item[class-name] A symbol naming a binding to be initialized with the new
-    structure class. The binding is immutable.
+    \item[\scref{class-name}] A symbol naming a binding to be initialized with
+    the new structure class. The binding is immutable.
 
-    \item[superclass-name] A symbol naming a binding of a class to be used as
-    the direct superclass of the new structure class.
+    \item[\scref{superclass-name}] A symbol naming a binding of a class to be
+    used as the direct superclass of the new structure class.
 
-    \item[slot-list] A list of slots (see below), comprising either a {\em slot
-        name} or a list of a {\em slot-name} followed by some {\em slot
-        option}s.
+    \item[\scref{slot}] Either a \scref{slot-name} or a list of
+    \scref{slot-name} followed by some \scref{slot-option}s.
 
-    \item[class-option] A key and a value (see below) which, taken together,
-    apply to the class as a whole.
+    \item[\scref{class-option}] A key and a value (see below) which, taken
+    together, apply to the class as a whole.
 \end{arguments}
 %
 \remarks%
-\defformref{defclass} defines a new structure class. Structure classes support
+\defopref{defclass} defines a new structure class. Structure classes support
 single inheritance as described above. Neither class redefinition nor changing
 the class of an instance is supported by structure classes\footnote{In
     combination with the guarantee that the behaviour of generic functions
@@ -319,9 +316,9 @@ the class of an instance is supported by structure classes\footnote{In
     removal nor method combination, this imbues level-0 programs with static
     semantics.}.
 
-The {\em slot-option\/}s are interpreted as follows:
+The \scref{slot-option}s are interpreted as follows:
 \begin{options}
-    \item[keyword, identifier]%
+    \item[\keyworddef{keyword}:, \scref{identifier}]%
     The value of this option is an identifier naming a symbol, which is the name
     of an argument to be supplied in the initialization options of a call to
     \functionref{make} on the new class.  The value of this argument in the call
@@ -333,11 +330,11 @@ The {\em slot-option\/}s are interpreted as follows:
     one. That means, a subclass can not shadow or add a new initarg, if a
     superclass has already defined one.
 
-    \item[default, level-0 expression]%
+    \item[\keyworddef{default}:, \scref{level-0-expression}]%
     The value of this option is an expression, which is evaluated as the default
     value of the slot, to be used if no initarg is defined for the slot or given
     to a call to \functionref{make}.  The expression is evaluated in the lexical
-    environment of the call to \defformref{defclass} and the dynamic environment
+    environment of the call to \defopref{defclass} and the dynamic environment
     of the call to \functionref{make}.  The expression is evaluated each time
     \functionref{make} is called and the default value is called for.  The order
     of evaluation of the initforms in all the slots is determined by
@@ -345,7 +342,7 @@ The {\em slot-option\/}s are interpreted as follows:
     particular slot. Subclasses inherit the initform.  However, a more specific
     form may be specified in a subclass, which will shadow the inherited one.
 
-    \item[reader, identifier]%
+    \item[\keyworddef{reader}:, \scref{identifier}]%
     The value is the identifier of the variable to which the reader function
     will be bound.  The binding is immutable.  The reader function is a means to
     access the slot.  The reader function is a function of one argument, which
@@ -355,7 +352,7 @@ The {\em slot-option\/}s are interpreted as follows:
     violation to specify the same reader, writer, or accessor name for two
     different slots.
 
-    \item[writer, identifier]%
+    \item[\keyworddef{writer}:, \scref{identifier}]%
     The value is the identifier of the variable to which the writer function
     will be bound.  The binding is immutable.  The writer function is a means to
     change the slot value.  The creation of the writer is analogous to that of
@@ -365,15 +362,15 @@ The {\em slot-option\/}s are interpreted as follows:
     It is a violation to specify the same reader, writer, or accessor name
     for two different slots.
 
-    \item[accessor, identifier]%
+    \item[\keyworddef{accessor}:, \scref{identifier}]%
     The value is the identifier of the variable to which the reader function
-    will be bound. In addition, the use of this {\em slot-option\/} causes the
+    will be bound. In addition, the use of this \scref{slot-option} causes the
     writer function to be associated to the reader {\em via\/} the
     \functionref{setter} mechanism. This option can be specified more than once
     for a slot. It is a violation to specify the same reader, writer, or
     accessor name for two different slots.
 
-    \item[requiredp, boolean]%
+    \item[\keyworddef{requiredp}:, \scref{boolean}]%
     The value is either true or false. True indicates that an initialization
     argument must be supplied for this slot.
 \end{options}
@@ -381,17 +378,16 @@ The {\em slot-option\/}s are interpreted as follows:
 The class-options are interpreted as follows:
 %
 \begin{options}
-    \item[keywords, list]%
+    \item[\keyworddef{keywords}:, \scref{list}]%
     The value of this option is a list of identifiers naming symbols, which
-    extend the inherited names of arguments to be supplied in the {\em
-        init-option\/}s of a call to \functionref{make} on the new
-    class. Initargs are inherited by union. The values of all legal arguments in
-    the call to \functionref{make} are the initial values of corresponding slots
-    if they name a slot initarg or are ignored by the default
-    \genericref{initialize} method, otherwise. This option must only be
-    specified once for a class.
+    extend the inherited names of arguments to be supplied in the
+    \scref{init-option}s of a call to \functionref{make} on the new class. Initargs
+    are inherited by union. The values of all legal arguments in the call to
+    \functionref{make} are the initial values of corresponding slots if they
+    name a slot initarg or are ignored by the default \genericref{initialize}
+    method, otherwise. This option must only be specified once for a class.
 
-    \item[constructor, constructor-specification]%
+    \item[\keyworddef{constructor}:, \scref{constructor-specification}]%
     Creates a constructor function for the new class.  The constructor
     specification gives the name to which the constructor function will be
     bound, followed by a sequence of legal initargs for the class.  The new
@@ -400,17 +396,17 @@ The class-options are interpreted as follows:
     constructor function.  This option may be specified any number of times for
     a class.
     % Specifying the constructor in this way is equivalent to writing a
-    % \defformref{defconstructor} form for the class.
-    (* \[\S\ref{symbol}\] *)
-    \item[predicate, identifier]%
+    % \defopref{defconstructor} form for the class.
+
+    \item[\keyworddef{predicate}:, \scref{identifier}]%
     Creates a function which tests whether an object is an instance of the new
     class.  The predicate specification gives the name to which the predicate
     function will be bound.  This option may be specified any number of times
     for a class.
     % Specifying the constructor in this way is equivalent to writing a
-    % \defformref{defpredicate} form for the class.
+    % \defopref{defpredicate} form for the class.
 
-    \item[abstractp, boolean]%
+    \item[\keyworddef{abstractp}:, \scref{boolean}]%
     The value is either true or false. True indicates that the class being
     defined is abstract.
 %
@@ -420,15 +416,16 @@ The class-options are interpreted as follows:
 %
 \function{abstract-class-p}
 %
-\savesyntax\abstractClassPSyntax\vbox{\syntax
-abstract-class-p form
-   = '(', 'abstract-class-p', object, ')';
-\endsyntax}
-\syntaxtable{abstract-class-p}{\abstractClassPSyntax}
+\Signature
+\defSignature{abstract-class-p}{
+\begin{signature}
+    (\functionref{abstract-class-p} \sc{object}) \ra{} \classref{object}
+\end{signature}}
+\showSignatureBox{abstract-class-p}%
 %
 \begin{arguments}
-    \item[object] Returns {\em object\/}, if it is an abstract class, otherwise
-    \nil{}.
+    \item[\sc{object}] Returns \sc{object}, if it is an abstract class,
+    otherwise \nil{}.
 \end{arguments}
 %
 \begin{note}
@@ -448,49 +445,53 @@ The class of all functions.
 %
 The class of all generic functions.
 
-\defform{defgeneric}
+\defop{defgeneric}
 \label{defgeneric-0}
 %
 \Syntax
-\savesyntax\defgenericSyntax\vbox{\syntax
-defgeneric form
-   = '(', 'defgeneric', gf-name, gf-lambda-list,
-     {level-0-init-option}, ')';
-gf-name
-   = identifier;     (* \[\ref{symbol}\] *)
-gf-lambda-list
-   = specialized-lambda-list;
-level-0-init-option
-   = 'method', method-description;
-method-description
-   = '(', specialized-lambda-list, {form}, ')';
-specialized-lambda-list
-   = '(', specialized parameter,
-     {specialized parameter},
-     ['.', identifier], ')';     (* \[\ref{symbol}\] *)
-specialized parameter
-   = '(', identifier, class-name, ')'     (* \[\ref{symbol}\] *)
-   | identifier;     (* \[\ref{symbol}\] *)
-\endsyntax}
+\defSyntax{defgeneric}{
+\begin{syntaxx}
+    \scdef{defgeneric-form}: \\
+    \>  ( \defopref{defgeneric} \scref{gf-name} \scref{gf-lambda-list} \\
+    \>\>  \scref{level-0-init-option} ) \\
+    \scdef{gf-name}: \\
+    \>  \scref{identifier} \\
+    \scdef{gf-lambda-list}: \\
+    \>  \scref{specialized-lambda-list} \\
+    \scdef{level-0-init-option}: \\
+    \>  \keywordref{method} \scref{method-description} \\
+    \scdef{method-description}: \\
+    \>  ( \scref{specialized-lambda-list} \scseqref{form} ) \\
+    \scdef{specialized-lambda-list}: \\
+    \> ( \scSeqref{specialized-parameter} \scgopt{. \scref{identifier}} ) \\
+    \scdef{specialized-parameter}: \\
+    \> ( \scref{identifier} \scref{class-name} ) \\
+    \> \scref{identifier}
+\end{syntaxx}}
 \label{defgeneric-syntax-table}
 \index{general}{generic function!lambda-list}
 \index{general}{syntax!generic function lambda-list}
-\syntaxtable{defgeneric}{\defgenericSyntax}
+\showSyntaxBox{defgeneric}
 %
 \begin{arguments}
-    \item[gf-name] One of a symbol, or a form denoting a setter function or a
-    converter function.
+    \item[\scref{gf-name}] One of a symbol, or a form denoting a setter function
+    or a converter function.
 
-    \item[gf-lambda-list] The parameter list of the generic function, which may
-    be specialized to restrict the domain of methods to be attached to the
-    generic function.
+    \item[\scref{gf-lambda-list}] The parameter list of the generic function,
+    which may be specialized to restrict the domain of methods to be attached to
+    the generic function.
 
-    \item[level-0-init-option\/$^*$\/] Options as specified below.
+    \item[\scref{level-0-init-option}] is \keyworddef{method} \scref{method-description} \\
+    where \scref{method-description} is a list comprising the
+    \scref{specialized-lambda-list} of the method, which denotes the domain, and
+    a sequence of forms, denoting the method body.  The method body is closed in
+    the lexical environment in which the generic function definition
+    appears. This option may be specified more than once.
 \end{arguments}
 %
 \remarks%
 This defining form defines a new generic function.  The resulting
-generic function will be bound to {\em gf-name}.  The second argument
+generic function will be bound to \scref{gf-name}.  The second argument
 is the formal parameter list.  The method's specialized lamba list
 must be congruent to that of the generic function.  Two lambda lists
 are said to be {\em congruent\/} iff:
@@ -514,27 +515,17 @@ list widens the domain of the generic function.  In other words, the lambda
 lists of all methods must specialize on subclasses of the classes in the lambda
 list of the generic function.
 
-An error is signalled (condition class:
-\conditionref{method-domain-clash}\indexcondition{method-domain-clash}) if any
-methods defined on this generic function have the same domain.  These conditions
-apply both to methods defined at the same time as the generic function and to
-any methods added subsequently by \macroref{defmethod}.  An {\em init-option\/}
-is an identifier followed by a corresponding value.
+An error is signalled (condition class: \conditionref{method-domain-clash}
+\indexcondition{method-domain-clash}) if any methods defined on this generic
+function have the same domain.  These conditions apply both to methods defined
+at the same time as the generic function and to any methods added subsequently
+by \macroref{defmethod}.  An \scref{init-option} is an identifier followed by a
+corresponding value.
 
-An error is signalled (condition class:
-\conditionref{no-applicable-method}\indexcondition{no-applicable-method}) if an
-attempt is made to apply a generic function which has no applicable methods for
-the classes of the arguments supplied.
-
-A {\em level 0 init-option\/} is:
-\begin{options}
-    \item[method, method-spec] This option is followed by a method-description.
-    A method-description is a list comprising the specialized-lambda-list of the
-    method, which denotes the domain, and a sequence of forms, denoting the
-    method body.  The method body is closed in the lexical environment in which
-    the generic function definition appears. This option may be specified more
-    than once.
-\end{options}
+An error is signalled (condition class: \conditionref{no-applicable-method}
+\indexcondition{no-applicable-method}) if an attempt is made to apply a generic
+function which has no applicable methods for the classes of the arguments
+supplied.
 %
 \rewriterules
 \label{defgeneric-rewrite-rules}
@@ -546,44 +537,44 @@ A {\em level 0 init-option\/} is:
 \begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
-        (\defformref{defgeneric} \sc{identifier} \\
-        \>\sc{gf-lambda-list} \scseq{level-0-init-option})
+        (\defopref{defgeneric} \scref{identifier} \\
+        \>\scref{gf-lambda-list} \scseqref{level-0-init-option})
     \end{tabbing}
 \end{minipage}\\
 \hspace{2cm}$\equiv$
 \begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
-        (\defformref{defconstant} \sc{identifier}\\
+        (\defopref{defconstant} \scref{identifier}\\
         \>(\macroref{generic-lambda} \\
-        \>\>\sc{gf-lambda-list} \scseq{level-0-init-option}))
+        \>\>\scref{gf-lambda-list} \scseqref{level-0-init-option}))
     \end{tabbing}
 \end{minipage}\\
 %
 \begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
-        (\defformref{defgeneric} \\
-        \>(\functionref{setter} \sc{identifier}) \\
-        \>\sc{gf-lambda-list} \scseq{level-0-init-option})
+        (\defopref{defgeneric} \\
+        \>(\functionref{setter} \scref{identifier}) \\
+        \>\scref{gf-lambda-list} \scseqref{level-0-init-option})
     \end{tabbing}
 \end{minipage}\\
 \hspace{2cm}$\equiv$
 \begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
-        ((\functionref{setter} \functionref{setter}) \sc{identifier}\\
+        ((\functionref{setter} \functionref{setter}) \scref{identifier}\\
         \>(\macroref{generic-lambda} \\
-        \>\> \sc{gf-lambda-list} \scseq{level-0-init-option}))
+        \>\> \scref{gf-lambda-list} \scseqref{level-0-init-option}))
     \end{tabbing}
 \end{minipage}\\
 %
 \begin{minipage}[t]{\linewidth}
     \begin{tabbing}
         00\=00\= \kill
-        (\defformref{defgeneric} \\
-        \>(\functionref{converter} \sc{identifier}) \\
-        \>\sc{gf-lambda-list} \scseq{level-0-init-option})
+        (\defopref{defgeneric} \\
+        \>(\functionref{converter} \scref{identifier}) \\
+        \>\scref{gf-lambda-list} \scseqref{level-0-init-option})
     \end{tabbing}
 \end{minipage}\\
 \hspace{2cm}$\equiv$
@@ -591,15 +582,15 @@ A {\em level 0 init-option\/} is:
     \begin{tabbing}
         00\=00\= \kill
         ((\functionref{setter} \functionref{converter})\\
-        \>\sc{identifier}\\
+        \>\scref{identifier}\\
         \>(\macroref{generic-lambda} \\
-        \>\>\sc{gf-lambda-list} \scseq{level-0-init-option}))
+        \>\>\scref{gf-lambda-list} \scseqref{level-0-init-option}))
     \end{tabbing}
 \end{minipage}
 \end{RewriteTable}
 %
 \examples
-In the following example of the use of \defformref{defgeneric} a generic
+In the following example of the use of \defopref{defgeneric} a generic
 function named {\tt gf-0} is defined with three methods attached to
 it.  The domain of {\tt gf-0} is constrained to be \classref{object}\
 $\times$ {\tt <class-a>}.  In consequence, each method added to the
@@ -610,9 +601,12 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
 %
 {\syntax
 (defgeneric gf-0 (arg1 (arg2 <class-a>))
-  method (((m1-arg1 <class-b>) (m1-arg2 <class-c>)) ...)
-  method (((m2-arg1 <class-d>) (m2-arg2 <class-e>)) ...)
-  method (((m3-arg1 <class-f>) (m3-arg2 <class-g>)) ...))
+  method (((m1-arg1 <class-b>)
+           (m1-arg2 <class-c>)) ...)
+  method (((m2-arg1 <class-d>)
+           (m2-arg2 <class-e>)) ...)
+  method (((m3-arg1 <class-f>)
+           (m3-arg2 <class-g>)) ...))
 \endsyntax}
 %
 \seealso%
@@ -620,23 +614,24 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
 
 \macro{defmethod}
 \Syntax
-\savesyntax\defmethodSyntax\vbox{\syntax
-defmethod macro
-   = '(', 'defmethod', gf locator,
-     specialized-lambda-list,
-     {form}, ')';
-gf locator
-   = identifier
-   | '(', 'setter', identifier, ')'
-   | '(', 'converter', identifier, ')';
-\endsyntax}
-\syntaxtable{defmethod}{\defmethodSyntax}
+\defSyntax{defmethod}{
+\begin{syntaxx}
+    \scdef{defmethod-form}: \\
+    \>  ( \macroref{defmethod} \scref{gf-locator} \\
+    \>\>   \scref{specialized-lambda-list} \\
+    \>\>   \scseqref{form} ) \\
+    \scdef{gf-locator}: \\
+    \> \scref{identifier} \\
+    \> ( \functionref{setter} \scref{identifier} ) \\
+    \> ( \functionref{converter} \scref{identifier} )
+\end{syntaxx}}%
+\showSyntaxBox{defmethod}%
 %
 \remarks%
 This macro is used for defining new methods on generic functions.  A new method
 object is defined with the specified body and with the domain given by the
 specialized-lambda-list.  This method is added to the generic function bound to
-\sc{gf-name}, which is an identifier, or a form denoting a setter function or
+\scref{gf-name}, which is an identifier, or a form denoting a setter function or
 a converter function. If the specialized-lambda-list is not congruent with that
 of the generic function, an error is signalled (condition class:
 \conditionref{non-congruent-lambda-lists}
@@ -650,31 +645,36 @@ the same domain already defined on this gneric function, an error is signalled
 
 \macro{generic-lambda}
 \Syntax
-\savesyntax\genericLambdaSyntax\vbox{\syntax
-generic lambda form
-   = '(', 'generic-lambda', gf-lambda-list,
-     {level-0-init-option}, ')';
-\endsyntax}
-\syntaxtable{generic-lambda}{\genericLambdaSyntax}
+\defSyntax{generic-lambda}{
+\begin{syntaxx}
+    \scdef{generic-lambda-form}: \\
+    \>  ( \macroref{generic-lambda} \scref{gf-lambda-list} \\
+    \>\>  \scseqref{level-0-init-option} )
+\end{syntaxx}}%
+\showSyntaxBox{generic-lambda}
 %
 \remarks%
 \macroref{generic-lambda} creates and returns an anonymous generic function that
-can be applied immediately, much like the normal \keywordref{lambda}.  The {\em
-    gf-lambda-list} and the {\em level-0-init-option\/}s are interpreted exactly
-as for the level-0 definition of \defformref{defgeneric}.  \examples In the
-following example an anonymous version of {\tt gf-0} (see
-\defformref{defgeneric} above) is defined.  In all other respects the resulting
+can be applied immediately, much like the normal \specopref{lambda}.  The
+\scref{gf-lambda-list} and the \scref{level-0-init-option}s are interpreted
+exactly as for the level-0 definition of \defopref{defgeneric}.  \examples In
+the following example an anonymous version of {\tt gf-0} (see
+\defopref{defgeneric} above) is defined.  In all other respects the resulting
 object is the same as {\tt gf-0}.
 %
 {\syntax
-(generic-lambda ((arg1 <object>) (arg2 <class-a>))
-  method (((m1-arg1 <class-b>) (m1-arg2 <class-c>)) ...)
-  method (((m2-arg1 <class-d>) (m2-arg2 <class-e>)) ...)
-  method (((m3-arg1 <class-f>) (m3-arg2 <class-g>)) ...))
+(generic-lambda ((arg1 <object>)
+                 (arg2 <class-a>))
+  method (((m1-arg1 <class-b>)
+           (m1-arg2 <class-c>)) ...)
+  method (((m2-arg1 <class-d>)
+           (m2-arg2 <class-e>)) ...)
+  method (((m3-arg1 <class-f>)
+           (m3-arg2 <class-g>)) ...))
 \endsyntax}
 %
 \seealso%
-\defformref{defgeneric}.
+\defopref{defgeneric}.
 %
 \end{optDefinition}
 
@@ -699,13 +699,13 @@ inside methods are immutable\index{general}{method!bindings}.  Therefore an
 argument inside a method retains its specialized class throughout the processing
 of the method.
 
-\keyword{call-next-method}
-\Syntax
-\savesyntax\callNextMethodSyntax\vbox{\syntax
-call-next-method form
-   = '(', 'call-next-method', ')';
-\endsyntax}
-\syntaxtable{call-next-method}{\callNextMethodSyntax}
+\specop{call-next-method}
+\Signature
+\defSignature{call-next-method}{
+\begin{signature}
+    (\specopref{call-next-method}) \ra{} \classref{object}
+\end{signature}}%
+\showSignatureBox{call-next-method}%
 %
 \result%
 The result of calling the next most specific applicable method.
@@ -716,16 +716,16 @@ arguments as the current method.  An error is signalled (condition
 class: \conditionref{no-next-method}\indexcondition{no-next-method}) if there
 is no next most specific method.
 
-\keyword{next-method-p}
-\Syntax
-\savesyntax\nextMethodPSyntax\vbox{\syntax
-next-method-p form
-   = '(', 'next-method-p', ')';
-\endsyntax}
-\syntaxtable{next-method-p}{\nextMethodPSyntax}
+\specop{next-method-p}
+\Signature
+\defSignature{next-method-p}{
+\begin{signature}
+    (\specopref{next-method-p}) \ra{} \scref{boolean}
+\end{signature}}%
+\showSignatureBox{next-method-p}%
 %
 \result%
-If there is a next most specific method, \keywordref{next-method-p} returns a
+If there is a next most specific method, \specopref{next-method-p} returns a
 non-\nil{}\/ value, otherwise, it returns \nil{}.
 %
 \end{optDefinition}
@@ -817,7 +817,7 @@ a_n]${\tt )}:
         decreasing order of specificity using left to right argument
         precedence order to resolve otherwise equally specific methods.
 
-        \item  If \keywordref{call-next-method} appears in one of the method
+        \item  If \specopref{call-next-method} appears in one of the method
         bodies, make the sorted list of applicable methods available for it.
 
         \item  Apply the most specific method on $a_1 \ldots a_m [a_{m+1} \ldots
@@ -841,7 +841,7 @@ If the default method is not executed during a call of
 \genericref{initialize}, no check of initargs will be done by the system.
 
 Writers for metaobjects are not specified yet. That implies that users must use
-\keywordref{call-next-method} if they specialize metaobjects classes and define
+\specopref{call-next-method} if they specialize metaobjects classes and define
 new \genericref{initialize} methods for them.
 \end{optRationale}
 
@@ -933,8 +933,8 @@ performs the following steps:
 %
 Legal initargs which do not initialize a slot are ignored by the default
 \genericref{initialize} method.  More specific methods may handle these initargs
-and call the default method by calling \keywordref{call-next-method}.
-% The default method can be specialized by calling \keywordref{call-next-method}
+and call the default method by calling \specopref{call-next-method}.
+% The default method can be specialized by calling \specopref{call-next-method}
 % from more specific \genericref{initialize} methods.
 %
 %\seealso%

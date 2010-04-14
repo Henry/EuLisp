@@ -1,7 +1,7 @@
 \sclause{Classes and Objects}
 %
 \begin{optDefinition}
-\defform{defclass}
+\defop{defclass}
 \label{defclass-1}
 %
 \Syntax
@@ -35,7 +35,7 @@ defclass class option
     \item[\group{superclass\/$^*$}] A list of symbols naming bindings of classes
     to be used as the superclasses of the new class (multiple
     inheritance\index{general}{inheritance!multiple}\index{general}{multiple
-        inheritance}).  This is different from \defformref{defclass} at level-0,
+        inheritance}).  This is different from \defopref{defclass} at level-0,
     where only one superclass may be specified.
 
     \item[\group{slot\/$^*$}] A list of slot specifications (see
@@ -54,7 +54,7 @@ bound to {\em class-name}.  The second argument is a list of
 superclasses.  If this list is empty, the superclass is \classref{object}.
 The third argument is a list of slots.  The remaining
 arguments are class options.  All the slot options and class options
-are exactly the same way as for \defformref{defclass} (\ref{defclass}).
+are exactly the same way as for \defopref{defclass} (\ref{defclass}).
 
 \noindent
 The {\em slot-option}\/s are interpreted as follows:
@@ -72,7 +72,7 @@ The {\em slot-option}\/s are interpreted as follows:
     The value of this option is a form, which is evaluated as the default value
     of the slot, to be used if no initarg is defined for the slot or given to a
     call to \functionref{make}.  The form is evaluated in the lexical
-    environment of the call to \defformref{defclass} and the dynamic environment
+    environment of the call to \defopref{defclass} and the dynamic environment
     of the call to \functionref{make}.  The form is evaluated each time
     \functionref{make} is called and the default value is called for.  The order
     of evaluation of the initforms in all the slots is determined by
@@ -118,9 +118,9 @@ The {\em slot-option}\/s are interpreted as follows:
     The symbol named by {\em identifier} and the value of {\em expression} are
     passed to \functionref{make} of the slot description class along with other
     slot options.  The values are evaluated in the lexical and dynamic
-    environment of the \defformref{defclass}.  For the language defined slot
+    environment of the \defopref{defclass}.  For the language defined slot
     description classes, no slot initargs are defined which are not specified by
-    particular \defformref{defclass} slot options.
+    particular \defopref{defclass} slot options.
 \end{options}
 %
 The {\em class-option}\/s are interpreted as follows:
@@ -156,9 +156,9 @@ The {\em class-option}\/s are interpreted as follows:
     \item[{\em identifier}, expression]%
     The symbol named by {\em identifier} and the value of {\em expression} are
     passed to \functionref{make} on the class of the new class.  This list is
-    appended to the end of the list that \defformref{defclass} constructs.  The
+    appended to the end of the list that \defopref{defclass} constructs.  The
     values are evaluated in the lexical and dynamic environment of the
-    \defformref{defclass}.  This option is used for metaclasses which need extra
+    \defopref{defclass}.  This option is used for metaclasses which need extra
     information not provided by the standard options.
 \end{options}
 %
@@ -227,7 +227,7 @@ level-0 are interpreted as follows:
     the value of {\em expression} are passed to \functionref{make} as initargs.
     % and each new method.
     The values are evaluated in the lexical and dynamic environment of the
-    \defformref{defgeneric}.  This option is used for classes which need extra
+    \defopref{defgeneric}.  This option is used for classes which need extra
     information not provided by the standard options.
 \end{options}
 %
@@ -251,7 +251,7 @@ methods on a generic function.  These are interpreted as follows:
 %
 \examples
  In the following example an anonymous version of {\tt gf-1} (see
-\defformref{defgeneric}) is defined.  In all other respects the resulting object
+\defopref{defgeneric}) is defined.  In all other respects the resulting object
 is the same as {\tt gf-1}.
 %
 {\syntax
@@ -278,9 +278,9 @@ is the same as {\tt gf-1}.
 \endsyntax}
 %
 \seealso%
-\defformref{defgeneric}.
+\defopref{defgeneric}.
 
-\defform{defgeneric}
+\defop{defgeneric}
 \label{defgeneric-1}
 %
 \Syntax
@@ -312,13 +312,13 @@ this generic function do not have lambda lists congruent to that of the generic
 function.  This applies both to methods defined at the same time as the generic
 function and to any methods added subsequently by \macroref{defmethod} or
 \genericref{add-method}.  An {\em init-option} is a identifier followed by its
-initial value.  The syntax of \defformref{defgeneric} is an extension of the
-level-0 syntax.  The rewrite rules for the \defformref{defgeneric} form are
+initial value.  The syntax of \defopref{defgeneric} is an extension of the
+level-0 syntax.  The rewrite rules for the \defopref{defgeneric} form are
 identical to those given in section~\ref{defgeneric-rewrite-rules} except that
 {\em level 1 init option} replaces {\em level 0 init option}.
 %
 \examples
-In the following example of the use of \defformref{defgeneric} a generic
+In the following example of the use of \defopref{defgeneric} a generic
 function named {\tt gf-1} is defined.  The differences between this
 function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 \begin{enumerate}
@@ -466,7 +466,7 @@ is different from the methods which would be produced by the method
 lookup function of the generic function of {\em method}.  If {\em
 method} is not attached to a generic function, its behavior is
 unspecified.  The {\em next-methods} are used to determine the next
-method to call when \keywordref{call-next-method} is called within {\em
+method to call when \specopref{call-next-method} is called within {\em
 method-fn}.
 
 \function{apply-method}

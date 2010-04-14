@@ -69,7 +69,7 @@ in the language.
     that point; this can be viewed as a function of one argument awaiting the
     result of that point.  The {\em current continuation} is the continuation
     that would be derived from the current point in a program's execution, see
-    \keywordref{let/cc}.
+    \specopref{let/cc}.
 
     \definition{converter function}\index{general}{converter function} The
     generic function associated with a class (the target) that is used to
@@ -81,9 +81,9 @@ in the language.
         defining operator}.
 
     \definition{defining operator}\index{general}{defining operator} One of
-    \defformref{defclass}, \defformref{defcondition}, \defformref{defconstant},
-    \defformref{defgeneric}, \defformref{deflocal}, \syntaxref{defmacro},
-    \syntaxref{defun}, or \defformref{defglobal}.
+    \defopref{defclass}, \defopref{defcondition}, \defopref{defconstant},
+    \defopref{defgeneric}, \defopref{deflocal}, \syntaxref{defmacro},
+    \syntaxref{defun}, or \defopref{defglobal}.
 
     \definition{direct instance}\index{general}{direct
         instance}\index{general}{instance!direct} A direct instance of a class
@@ -188,16 +188,16 @@ in the language.
     Generally the keywords correspond to the {\em initargs} of some {\em class}.
 
     \definition{inner dynamic}\index{general}{inner dynamic} Inner dynamic
-    bindings are created by \keywordref{dynamic-let}, referenced by
-    \keywordref{dynamic} and modified by \keywordref{dynamic-setq}.  Inner
+    bindings are created by \specopref{dynamic-let}, referenced by
+    \specopref{dynamic} and modified by \specopref{dynamic-setq}.  Inner
     dynamic bindings extend---and can shadow---the dynamically enclosing {\em
         dynamic environment}.
 
     \definition{inner lexical}\index{general}{inner lexical} Inner lexical
-    bindings are created by \keywordref{lambda} and \keywordref{let/cc},
-    referenced by {\em variables} and modified by \keywordref{setq}.  Inner
+    bindings are created by \specopref{lambda} and \specopref{let/cc},
+    referenced by {\em variables} and modified by \specopref{setq}.  Inner
     lexical bindings extend---and can shadow---the lexically enclosing {\em
-        lexical environment}.  Note that \keywordref{let/cc} creates an
+        lexical environment}.  Note that \specopref{let/cc} creates an
     immutable {\em binding}.
 
     \definition{instance} \index{general}{instance} Every {\em object} is the
@@ -318,13 +318,13 @@ in the language.
     of them.
 
     \definition{special operator} \index{general}{special operator} One of
-    \keywordref{a-special-form}, \keywordref{call-next-handler},
-    \keywordref{call-next-method}, \keywordref{dynamic},
-    \keywordref{dynamic-let}, \keywordref{dynamic-setq}, \keywordref{if},
-    \keywordref{labels}, \keywordref{lambda}, \keywordref{let/cc},
-    \keywordref{next-method-p}, \keywordref{progn}, \keywordref{quote},
-    \keywordref{setq}, \keywordref{unwind-protect}, or
-    \keywordref{with-handler}.
+    \specopref{a-special-form}, \specopref{call-next-handler},
+    \specopref{call-next-method}, \specopref{dynamic},
+    \specopref{dynamic-let}, \specopref{dynamic-setq}, \specopref{if},
+    \specopref{labels}, \specopref{lambda}, \specopref{let/cc},
+    \specopref{next-method-p}, \specopref{progn}, \specopref{quote},
+    \specopref{setq}, \specopref{unwind-protect}, or
+    \specopref{with-handler}.
 
     \definition{specialize}\index{general}{specialize} A verbal form used to
     describe the creation of a more specific version of some entity.  Normally
@@ -345,19 +345,19 @@ in the language.
         indirect} or itself.
 
     \definition{top dynamic}\index{general}{top dynamic} Top dynamic bindings
-    are created by \defformref{defglobal}, referenced by \keywordref{dynamic}
-    and modified by \keywordref{dynamic-setq}.  There is only one {\em top
+    are created by \defopref{defglobal}, referenced by \specopref{dynamic}
+    and modified by \specopref{dynamic-setq}.  There is only one {\em top
         dynamic} environment.
 
     \definition{top lexical}\index{general}{top lexical} Top lexical bindings
     are created in the {\em top} {\em lexical} environment of a module by
-    \begin{flushleft} \defformref{defclass}, \defformref{defcondition},
-        \defformref{defconstant}, \defformref{defgeneric},
-        \syntaxref{defmacro}, \defformref{defclass}, \syntaxref{defun}.
+    \begin{flushleft} \defopref{defclass}, \defopref{defcondition},
+        \defopref{defconstant}, \defopref{defgeneric},
+        \syntaxref{defmacro}, \defopref{defclass}, \syntaxref{defun}.
     \end{flushleft}
-    All these bindings are immutable.  \defformref{deflocal} creates a mutable
+    All these bindings are immutable.  \defopref{deflocal} creates a mutable
     top-lexical binding.  All such bindings are referenced by {\em variables}
-    and those made by \defformref{deflocal} are modified by \keywordref{setq}.
+    and those made by \defopref{deflocal} are modified by \specopref{setq}.
     Each module defines its own distinct {\em top lexical} environment.
 
 \end{definitions}

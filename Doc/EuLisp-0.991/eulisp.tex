@@ -65,7 +65,8 @@
 \makeindex{condition}
 \makeindex{constant}
 \makeindex{class}
-% \makeindex{module}
+%\makeindex{keyword}
+%\makeindex{module}
 
 \makeindex{general}
 
@@ -104,7 +105,7 @@
 \input{structure}
 \input{terms}
 \newpage\input{syntax}
-\newpage\input{modules}
+\gdef\module{} \newpage\input{modules}
 
 \gdef\module{telos0} \newpage\input{telos0}
 \gdef\module{threads} \newpage\input{threads}
@@ -161,6 +162,7 @@
 \printindex{condition}{Condition Index}
 \printindex{constant}{Constant Index}
 \printindex{class}{Class Index}
+%\printindex{keyword}{Keyword Index}
 % \printindex{module}{Module Index}
 \printindex{general}{Index}
 

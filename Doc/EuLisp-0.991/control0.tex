@@ -28,7 +28,7 @@ conforming program cannot rely on adherence to these expansions.
 \begin{optDefinition}
 \noindent
 %
-\metasyntaxform{constant}
+\syntaxform{constant}
 \ttindex{constant}
 \noindent
 There are two kinds of constants\index{general}{constant!literal}, literal
@@ -46,7 +46,7 @@ itself\index{general}{processing!constants}.
     \verb+"abc"+ & a string
 \end{tabular}
 
-\defform{defconstant}
+\defop{defconstant}
 %
 \Syntax
 \savesyntax\defconstantSyntax\vbox{\syntax
@@ -80,14 +80,14 @@ value \sc{false}.
 This may be used to denote the abstract boolean value \sc{true}, but so may any
 other value than \nil{}.
 
-\metasyntaxform{symbol}
+\syntaxform{symbol}
 \ttindex{symbol}
 \noindent
 The current lexical binding of \syntaxref{symbol} is
 returned\index{general}{processing!symbols}.  A symbol can also name a defined
 constant---that is, an immutable top-lexical binding.
 
-\defform{deflocal}
+\defop{deflocal}
 %
 \Syntax
 \savesyntax\deflocalSyntax\vbox{\syntax
@@ -106,12 +106,12 @@ deflocal form
 %
 \remarks%
 The value of \sc{form} is stored in the top-lexical binding of \sc{identifier}.
-The binding created by a \defformref{deflocal} form is mutable.
+The binding created by a \defopref{deflocal} form is mutable.
 %
 \seealso%
-\keywordref{setq}.
+\specopref{setq}.
 
-\keyword{quote}
+\specop{quote}
 \index{general}{literal}
 %
 \Syntax
@@ -131,14 +131,14 @@ The result is \sc{object}.
 \remarks%
 The result of processing the expression {\tt (quote \sc{object})} is
 \sc{object}.  The \sc{object} can be any object having an external
-representation\index{general}{external representation (see also
+representation \index{general}{external representation (see also
     \functionref{prin} and \functionref{write})}.  The special form
-\keywordref{quote} can be abbreviated using {\em apostrophe} --- graphic
+\specopref{quote} can be abbreviated using {\em apostrophe} --- graphic
 representation~\verb+'+\ttsubindex{quote}{abbreviation with {\tt '}} --- so that
 {\tt (quote a)} can be written {\tt 'a}.  These two notations are used to
-incorporate literal constants\index{general}{literal!quotation} in programs.  It
-is an error to modify a literal expression\index{general}{literal!modification
-    of}.
+incorporate literal constants \index{general}{literal!quotation} in programs.
+It is an error to modify a literal expression
+\index{general}{literal!modification of}.
 \end{optDefinition}
 
 \sclause{Functions: creation, definition and application}
@@ -153,7 +153,7 @@ is an error to modify a literal expression\index{general}{literal!modification
 %
 \begin{optDefinition}
 %
-\keyword{lambda}
+\specop{lambda}
 %
 \Syntax
 \label{lambda-syntax-table}
@@ -181,13 +181,13 @@ rest list
 A function with the specified \sc{lambda-list} and sequence of \sc{form}s.
 %
 \remarks%
-The function construction operator is \keywordref{lambda}.  Access to the
+The function construction operator is \specopref{lambda}.  Access to the
 lexical environment of definition is guaranteed.  The syntax of \sc{lambda-list}
 is defined in ref{lambda-syntax-table}.
 
 If \sc{lambda-list} is an \sc{identifier}, it is bound to a newly allocated
 list of the actual parameters.  This binding \index{general}{scope and extent!of
-    \keywordref{lambda} bindings} has lexical scope and indefinite extent.  If
+    \specopref{lambda} bindings} has lexical scope and indefinite extent.  If
 \sc{lambda-list} is a {\em simple-list}, the arguments are bound to the
 corresponding {\em identifiers}.  Otherwise, \sc{lambda-list} must be a {\em
     rest-list}.  In this case, each \sc{identifier} preceding the dot is bound
@@ -213,7 +213,7 @@ defmacro form
         body}.
 
     \item[lambda-list] The parameter list of the function conforming to the
-    syntax specified under \keywordref{lambda}.
+    syntax specified under \specopref{lambda}.
 
     \item[body] A sequence of forms.
 \end{arguments}
@@ -223,7 +223,7 @@ The \syntaxref{defmacro} form defines a function\index{general}{macro} named by
 {\em macro-name} and stores the definition as the top-lexical binding of {\em
     macro-name}\index{general}{macro!definition by
     \syntaxref{defmacro}}\index{general}{binding!module}.  The interpretation
-of the \sc{lambda-list} is as defined for \keywordref{lambda} (see
+of the \sc{lambda-list} is as defined for \specopref{lambda} (see
 \ref{lambda-syntax-table}).
 %
 \begin{note}
@@ -232,7 +232,7 @@ of the \sc{lambda-list} is as defined for \keywordref{lambda} (see
 \end{note}
 %
 \seealso%
-\keywordref{lambda}.
+\specopref{lambda}.
 
 \syntaxform{defun}
 %
@@ -260,7 +260,7 @@ setter defun
     function to correspond to {\em function-name}.
 
     \item[lambda-list] The parameter list of the function conforming to the
-    syntax specified under \keywordref{lambda}.
+    syntax specified under \specopref{lambda}.
 
     \item[body] A sequence of forms.
 \end{arguments}
@@ -269,7 +269,7 @@ setter defun
 The \syntaxref{defun} form defines a function named by {\em function-name} and
 stores the definition (i) as the top-lexical binding of {\em function-name} or
 (ii) as the setter function of {\em function-name}.  The interpretation of the
-\sc{lambda-list} is as defined for \keywordref{lambda}.
+\sc{lambda-list} is as defined for \specopref{lambda}.
 %
 \rewriterules
 %
@@ -286,8 +286,8 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
 \begin{minipage}[t]{\columnwidth}
     \begin{tabbing}
         00\= \kill
-        (\defformref{defconstant} \sc{identifier}\\
-        \>(\keywordref{lambda} \sc{lambda-list} \\
+        (\defopref{defconstant} \sc{identifier}\\
+        \>(\specopref{lambda} \sc{lambda-list} \\
         \>\sc{body}))
     \end{tabbing}
 \end{minipage}\\
@@ -307,13 +307,13 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
         00\= \kill
         ((\functionref{setter} \functionref{setter}) \\
         \>\sc{identifier}\\
-        \>(\keywordref{lambda} \sc{lambda-list} \\
+        \>(\specopref{lambda} \sc{lambda-list} \\
         \>\sc{body}))
     \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
 
-\metasyntaxform{function call}
+\syntaxform{function call}
 \index{general}{function!calling}
 %
 \Syntax
@@ -352,7 +352,7 @@ before, during or after the evaluation of the operands.
 \end{note}
 %
 \seealso%
-\metasyntaxref{constant}, \syntaxref{symbol}, \keywordref{quote}.
+\syntaxref{constant}, \syntaxref{symbol}, \specopref{quote}.
 
 \condition{invalid-operator}{general-condition}
 %
@@ -409,7 +409,7 @@ first argument is not an instance of \classref{function}.
 An assignment operation\index{general}{assignment} modifies the contents of a
 binding named by a identifier---that is, a variable.
 
-\keyword{setq}
+\specop{setq}
 %
 \Syntax
 \savesyntax\setqSyntax\vbox{\syntax
@@ -463,7 +463,7 @@ example {\tt ((\functionref{setter} \functionref{setter}) \functionref{car}
 \conditionref{cannot-update-setter}\indexcondition{<cannot-update-setter>})
 %
 \seealso%
-\defformref{defgeneric}, \macroref{defmethod}, \defformref{defclass},
+\defopref{defgeneric}, \macroref{defmethod}, \defopref{defclass},
 \syntaxref{defun}.
 
 \condition{no-setter}{general-condition}
@@ -505,7 +505,7 @@ the given accessor is immutable.
 %
 \begin{optDefinition}
 %
-\keyword{if}
+\specop{if}
 %
 \Syntax
 \savesyntax\ifSyntax\vbox{\syntax
@@ -531,7 +531,7 @@ value of \sc{antecedent}.
 The {\em antecedent\/} is evaluated.  If the result is \true{} the
 \sc{consequent} is evaluated, otherwise the \sc{alternative} is evaluated.  Both
 \sc{consequent} and \sc{alternative} must be specified.  The result of
-\keywordref{if} is the result of the evaluation of whichever of \sc{consequent}
+\specopref{if} is the result of the evaluation of whichever of \sc{consequent}
 or \sc{alternative} is chosen.
 
 \macro{cond}
@@ -587,8 +587,8 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\keywordref{if} \=\sc{antecedent}$_1$ \\
-    \>(\keywordref{progn} \scseq{form}) \\
+    (\specopref{if} \=\sc{antecedent}$_1$ \\
+    \>(\specopref{progn} \scseq{form}) \\
     \>00\= \kill
     \>(\macroref{cond} \\
     \>\>(\sc{antecedent}$_2$ \scseq{form}) \\
@@ -622,7 +622,7 @@ will be evaluated---that is to say, it is non-strict.  The result of {\tt
     (\macroref{and} \sc{form}$_1$ \sc{form}$_2$ \ldots) &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\keywordref{if} \= \sc{form}$_1$\\
+    (\specopref{if} \= \sc{form}$_1$\\
     \>(\macroref{and} \sc{form}$_2$ \ldots)\\
     \>())
 \end{tabbing}%
@@ -655,7 +655,7 @@ returned.
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     (\macroref{let} (\=(x \sc{form}$_1$))\\
-    \>(\keywordref{if} \= x\\
+    \>(\specopref{if} \= x\\
     \>\>x\\
     \>\>(\macroref{or} \sc{form}$_2$ \ldots)))
 \end{tabbing}%
@@ -695,7 +695,7 @@ Note that {\tt x} does not occur free in any of \sc{form}$_2$ \ldots {\em
 %
 \begin{optDefinition}
 
-\keyword{let/cc}
+\specop{let/cc}
 \ttsubindex{let/cc}{see also \macroref{block} and \macroref{return-from}}
 %
 \Syntax
@@ -706,7 +706,7 @@ let/cc form
 \syntaxtable{let/cc}{\letccSyntax}
 %
 \begin{arguments}
-    \item[identifier] To be bound to the continuation of the \keywordref{let/cc}
+    \item[identifier] To be bound to the continuation of the \specopref{let/cc}
     form.
     \item[body] A sequence of forms.
 \end{arguments}
@@ -717,17 +717,17 @@ the argument given to the continuation bound to \sc{identifier}.
 %
 \remarks%
 The \sc{identifier} is bound to a new location, which is initialized with the
-continuation of the \keywordref{let/cc} form.  This binding is immutable and has
+continuation of the \specopref{let/cc} form.  This binding is immutable and has
 lexical scope and indefinite extent\index{general}{scope and extent!of
-    \keywordref{let/cc} binding}.  Each form in \sc{body} is evaluated in order
+    \specopref{let/cc} binding}.  Each form in \sc{body} is evaluated in order
 in the environment extended by the above binding.  It is an error to call the
-continuation outside the dynamic extent of the \keywordref{let/cc} form that
+continuation outside the dynamic extent of the \specopref{let/cc} form that
 created it.  The continuation is a function of one argument.  Calling the
 continuation causes the restoration of the lexical environment and dynamic
-environment that existed before entering the \keywordref{let/cc} form.
+environment that existed before entering the \specopref{let/cc} form.
 %
 \examples%
-An example of the use of \keywordref{let/cc} is given in
+An example of the use of \specopref{let/cc} is given in
 example~\ref{example:pathopen}.  The function {\tt path-open} takes a list of
 paths, the name of a file and list of options to pass to {\tt open}.  It tries
 to open the file by appending the name to each path in turn.  Each time {\tt
@@ -742,7 +742,7 @@ signalled.
 %
 \begin{example}
 \label{example:pathopen}
-\examplecaption{using \keywordref{let/cc}}
+\examplecaption{using \specopref{let/cc}}
 {\syntax
 (defun path-open (pathlist name . options)
   (let/cc succeed
@@ -768,7 +768,7 @@ signalled.
 
 \macro{block}
 %
-\ttsubindex{block}{see also \keywordref{let/cc}}
+\ttsubindex{block}{see also \specopref{let/cc}}
 \Syntax
 \savesyntax\blockSyntax\vbox{\syntax
 block macro
@@ -782,14 +782,14 @@ escape function.  The block {\em variable} is bound to the
 continuation\index{general}{continuation} of the block.  The continuation can be
 invoked anywhere within the block by using \macroref{return-from}.  The {\em
     form}s are evaluated in sequence and the value of the last one is returned
-as the value of the block form.  See also \keywordref{let/cc}.
+as the value of the block form.  See also \specopref{let/cc}.
 %
 \rewriterules
 %
 \begin{RewriteTable}{block}{lll}
     (\macroref{block} \sc{identifier}) &\rewrite& ()\\
     (\macroref{block} \sc{identifier}  &\rewrite&
-    (\keywordref{let/cc} \sc{identifier} \\
+    (\specopref{let/cc} \sc{identifier} \\
     \tts\scseq{form})                    && \tts\scseq{form})
 \end{RewriteTable}
 %
@@ -802,7 +802,7 @@ argument like other values.
 \macroref{return-from}.
 
 \macro{return-from}
-\ttsubindex{return-from}{see also \keywordref{let/cc}}
+\ttsubindex{return-from}{see also \specopref{let/cc}}
 %
 \Syntax
 \savesyntax\returnfromSyntax\vbox{\syntax
@@ -840,7 +840,7 @@ is returned as the value of the block named by \sc{identifier}.
 \seealso%
 \macroref{block}.
 
-\keyword{labels}
+\specop{labels}
 %
 \Syntax
 \savesyntax\labelsSyntax\vbox{\syntax
@@ -867,16 +867,16 @@ function definition
 \end{arguments}
 %
 \result%
-The \keywordref{labels} operator provides for local mutually recursive function
+The \specopref{labels} operator provides for local mutually recursive function
 creation.  Each \sc{identifier} is bound to a new inner-lexical binding
 initialized with the function constructed from \sc{lambda-list} and \sc{body}.
-The scope of the {\em identifier}s is the entire \keywordref{labels}
-form\index{general}{scope and extent!in \keywordref{labels} expressions}.  The
+The scope of the {\em identifier}s is the entire \specopref{labels}
+form\index{general}{scope and extent!in \specopref{labels} expressions}.  The
 \sc{lambda-list} is either a single variable or a list of variables---see
-\keywordref{lambda}.  Each form in {\em labels-body} is evaluated in order in
+\specopref{lambda}.  Each form in {\em labels-body} is evaluated in order in
 the lexical environment extended with the bindings of the {\em identifier}s.
 The result of evaluating the last form in {\em labels-body}\/ is returned as the
-result of the \keywordref{labels} form.
+result of the \specopref{labels} form.
 
 \macro{let}
 %
@@ -893,7 +893,7 @@ binding
 %
 \remarks%
 The optional \sc{identifier}\/ denotes that the let form can be called from
-within its \sc{body}.  This is an abbreviation for \keywordref{labels} form in
+within its \sc{body}.  This is an abbreviation for \specopref{labels} form in
 which \sc{identifier} is bound to a function whose parameters are the
 identifiers of the {\em binding\/}s of the \macroref{let}, whose body is that of
 the \macroref{let} and whose initial call passes the values of the initializing
@@ -909,7 +909,7 @@ the \macroref{let} form.
 \rewriterules
 %
 \begin{RewriteTable}{let}{lll}
-    (\macroref{let} () \scseq{form}) &\rewrite& (\keywordref{progn} \scseq{form}) \\
+    (\macroref{let} () \scseq{form}) &\rewrite& (\specopref{progn} \scseq{form}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     (\macroref{let} (\=(\sc{id}$_1$ \sc{form}$_1$) \\
@@ -924,7 +924,7 @@ the \macroref{let} form.
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     00\=00\=00\= \kill
-    ((\keywordref{lambda} (\sc{id}$_1$ \sc{id}$_2$ \sc{id}$_3$ \ldots) \\
+    ((\specopref{lambda} (\sc{id}$_1$ \sc{id}$_2$ \sc{id}$_3$ \ldots) \\
     \>\>\scseq{form}) \\
     \>\sc{form}$_1$ \sc{form}$_2$ () \ldots) \\
 \end{tabbing}
@@ -943,7 +943,7 @@ the \macroref{let} form.
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     00\= \kill
-    (\keywordref{labels}\\
+    (\specopref{labels}\\
     \>(\=(\sc{id}$_0$ (\sc{id}$_1$ \sc{id}$_2$ \ldots) \\
     \>\>\scseq{form})) \\
     \>({\em id$_0$} \sc{form}$_1$ () \ldots))
@@ -999,7 +999,7 @@ form.
 \end{minipage}%
 \end{RewriteTable}
 
-\keyword{progn}
+\specop{progn}
 %
 \Syntax
 \savesyntax\prognSyntax\vbox{\syntax
@@ -1015,17 +1015,17 @@ progn form
 %
 \result%
 The sequence of {\em form}s is evaluated from left to right, returning the value
-of the last one as the result of the \keywordref{progn} form.  If the sequence
-of forms is empty, \keywordref{progn} returns \nil{}.
+of the last one as the result of the \specopref{progn} form.  If the sequence
+of forms is empty, \specopref{progn} returns \nil{}.
 %
 \remarks%
-If the \keywordref{progn} form occurs enclosed only by \keywordref{progn} forms
+If the \specopref{progn} form occurs enclosed only by \specopref{progn} forms
 and a \syntaxref{defmodule} form, then the {\em form}s within the
-\keywordref{progn} can be defining forms, since they appear in the top-lexical
+\specopref{progn} can be defining forms, since they appear in the top-lexical
 environment.  It is a violation for defining forms to appear in inner-lexical
 environments.
 
-% \keyword{multiple-value-bind}{lambda-list form body}{obj}
+% \specop{multiple-value-bind}{lambda-list form body}{obj}
 % \gdef\multipleValueBind{\verb+(multiple-value-bind+ lambda-list form
 %     body\verb+)+} The \sc{form} is evaluated and the elements of {\em
 %     lambda-list} are bound to the resulting values.  The cardinality of the
@@ -1048,7 +1048,7 @@ environments.
 %If there is no such enclosing {\tt multiple-value-bind}, the
 %excess values are discarded and only {\em obj$_1$} is returned.
 
-\keyword{unwind-protect}
+\specop{unwind-protect}
 %
 \Syntax
 \savesyntax\unwindprotectSyntax\vbox{\syntax
@@ -1067,26 +1067,26 @@ unwind protect form
 The value of {\em protected-form}.
 %
 \remarks%
-The normal action of \keywordref{unwind-protect} is to process {\em
+The normal action of \specopref{unwind-protect} is to process {\em
     protected-form} and then each of {\em after-form}s in order, returning the
-value of {\em protected-form} as the result of \keywordref{unwind-protect}.  A
+value of {\em protected-form} as the result of \specopref{unwind-protect}.  A
 non-local exit from the dynamic extent of {\em protected-form}, which can be
 caused by processing a non-local exit form, will cause each of {\em after-form}s
 to be processed before control goes to the continuation specified in the
 non-local exit form.  The {\em after-form}s are not protected in any way by the
-current \keywordref{unwind-protect}.  Should any kind of non-local exit occur
+current \specopref{unwind-protect}.  Should any kind of non-local exit occur
 during the processing of the {\em after-form}s, the {\em after-form}s being
 processed are not reentered.  Instead, control is transferred to wherever
 specified by the new non-local exit but the {\em after-form}s of any intervening
-\keywordref{unwind-protect}s between the dynamic extent of the target of control
-transfer and the current \keywordref{unwind-protect} are evaluated in increasing
+\specopref{unwind-protect}s between the dynamic extent of the target of control
+transfer and the current \specopref{unwind-protect} are evaluated in increasing
 order of dynamic extent.
 %
 \examples
 %
 \begin{example}
 \label{example:unwind-loop}
-\examplecaption{Interaction of \keywordref{unwind-protect} with non-local exits}
+\examplecaption{Interaction of \specopref{unwind-protect} with non-local exits}
 {\syntax
 (progn
   (let/cc k1
@@ -1102,13 +1102,13 @@ order of dynamic extent.
 \end{example}
 %
 The code fragment in example~\ref{example:unwind-loop} illustrates both the use
-of \keywordref{unwind-protect} and of a difference between the semantics of
+of \specopref{unwind-protect} and of a difference between the semantics of
 \eulisp\ and some other Lisps.  Stepping through the evaluation of this form:
-{\tt k1} is bound to the continuation of its \keywordref{let/cc} form; a
+{\tt k1} is bound to the continuation of its \specopref{let/cc} form; a
 recursive function named {\tt loop} is constructed, {\tt loop} is called from
-the body of the \keywordref{labels} form; {\tt k2} is bound to the continuation
-of its \keywordref{let/cc} form; \keywordref{unwind-protect} calls {\tt k1}; the
-after forms of \keywordref{unwind-protect} are evaluated in order; {\tt k2} is
+the body of the \specopref{labels} form; {\tt k2} is bound to the continuation
+of its \specopref{let/cc} form; \specopref{unwind-protect} calls {\tt k1}; the
+after forms of \specopref{unwind-protect} are evaluated in order; {\tt k2} is
 called; {\tt loop} is called; etc..  This program loops indefinitely.
 %
 \end{optDefinition}
@@ -1216,8 +1216,8 @@ class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
 %
 \showSyntax{defmodule-0}
 \showSyntax{defclass}
-\usebox{\defgenericSyntax}
-\usebox{\defmethodSyntax}
+\showSyntax{defgeneric}
+\showSyntax{defmethod}
 \usebox{\defconstantSyntax}
 \usebox{\deflocalSyntax}
 \usebox{\defmacroSyntax}
@@ -1225,7 +1225,7 @@ class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
 
 \ssclause{Syntax of Level-0 expressions}
 %
-\usebox{\genericLambdaSyntax}
+\showSyntax{generic-lambda}
 \usebox{\lambdaSyntax}
 \usebox{\functioncallSyntax}
 \usebox{\quoteSyntax}

@@ -54,7 +54,7 @@
 
 \newcommand*{\ttindexlabel}[1]{#1@{\tt #1}}
 
-% Add a \tt entry to the general index, e.g. and language keyword
+% Add a \tt entry to the general index, e.g. and language operator
 \newcommand*{\ttindex}[1]{\index{general}{\ttindexlabel{#1}}}
 
 % Add a language operator, function, etc. definition
@@ -71,8 +71,8 @@
 \newcommand*{\indexmeth}[1]{\index{method}{#1@{\tt{}#1} (\module)}}
 \newcommand*{\indexmac}[1]{\index{macro}{#1@{\tt{}#1} (\module)}}
 \newcommand*{\indexconst}[1]{\index{constant}{#1@{\tt{}#1} (\module)}}
-\newcommand*{\indexcond}[1]{\index{condition}{#1@{\tt{}#1} (\module)}}
 \newcommand*{\indexcondition}[1]{\index{condition}{#1@{\tt{}#1} (\module)}}
+\newcommand*{\indexkeyword}[1]{\index{keyword}{#1@{\tt{}#1} (\module)}}
 \newcommand*{\indexmodule}[1]{\index{module}{#1@{\tt{}#1} (\module)}}
 
 \renewcommand{\printindex}[2]
@@ -141,7 +141,7 @@
 \newcommand*{\functionref}[1]{\hyperref[\functionlabel{#1}]{{\tt #1}}}
 \newcommand*{\functionreflabel}[2]{\hyperref[\functionlabel{#2}]{{\tt #1}}}
 
-%%%  Setter
+%%% Setter function
 \newcommand*{\setterlabel}[1]{setter:#1}
 \newcommand{\setter}[1]
 {%
@@ -152,7 +152,7 @@
 }
 \newcommand*{\setterref}[1]{\hyperref[\setterlabel{#1}]{{\tt #1}}}
 
-%%% Converter
+%%% Converter function
 \newcommand*{\converterlabel}[1]{converter:#1}
 \newcommand{\converter}[1]
 {%
@@ -163,7 +163,7 @@
 }
 \newcommand*{\converterref}[1]{\hyperref[\converterlabel{#1}]{{\tt <#1>}}}
 
-%%%  Generic
+%%% Generic function
 \newcommand*{\genericlabel}[1]{generic:#1}
 \newcommand{\genericlabeled}[2]
 {%
@@ -190,7 +190,7 @@
 }
 \newcommand*{\methodref}[1]{\hyperref[\methodlabel{#1}]{{\tt #1}}}
 
-%%%  Syntax operator
+%%%  Syntax
 \newcommand*{\syntaxlabel}[1]{syntax:#1}
 \newcommand{\syntaxform}[1]
 {%
@@ -201,27 +201,16 @@
 }
 \newcommand*{\syntaxref}[1]{\hyperref[\syntaxlabel{#1}]{{\tt{}#1}}}
 
-%%%  Meta-syntax operator
-\newcommand*{\metasyntaxlabel}[1]{metasyntax:#1}
-\newcommand{\metasyntaxform}[1]
-{%
-    \entryclause{#1}{syntax}%
-    \label{\metasyntaxlabel{#1}}%
-    \ttindexdef{#1}%
-    \index{general}{syntax!#1}%
-}
-\newcommand*{\metasyntaxref}[1]{\hyperref[\metasyntaxlabel{#1}]{{\tt{}#1}}}
-
-%%%  Keyword
-\newcommand*{\keywordlabel}[1]{keyword:#1}
-\newcommand{\keyword}[1]
+%%%  Special operator
+\newcommand*{\specoplabel}[1]{specop:#1}
+\newcommand{\specop}[1]
 {%
     \entryclause{#1}{special operator}%
-    \label{\keywordlabel{#1}}%
+    \label{\specoplabel{#1}}%
     \ttindexdef{#1}%
     \index{general}{special operator!#1}%
 }
-\newcommand*{\keywordref}[1]{\hyperref[\keywordlabel{#1}]{{\tt{}#1}}}
+\newcommand*{\specopref}[1]{\hyperref[\specoplabel{#1}]{{\tt{}#1}}}
 
 %%%  Macro
 \newcommand*{\macrolabel}[1]{macro:#1}
@@ -234,15 +223,15 @@
 }
 \newcommand*{\macroref}[1]{\hyperref[\macrolabel{#1}]{{\tt{}#1}}}
 
-%%%  Defform
-\newcommand*{\defformlabel}[1]{defform:#1}
-\newcommand{\defform}[1]
+%%%  Defining operator
+\newcommand*{\defoplabel}[1]{defop:#1}
+\newcommand{\defop}[1]
 {%
     \entryclause{#1}{defining operator}%
-    \label{\defformlabel{#1}}%
-    \ttindexdef{#1}\index{general}{defining oporator!#1}%
+    \label{\defoplabel{#1}}%
+    \ttindexdef{#1}\index{general}{defining operator!#1}%
 }
-\newcommand*{\defformref}[1]{\hyperref[\defformlabel{#1}]{{\tt{}#1}}}
+\newcommand*{\defopref}[1]{\hyperref[\defoplabel{#1}]{{\tt{}#1}}}
 
 %%%  Constant
 \newcommand*{\constantlabel}[1]{constant:#1}
@@ -291,9 +280,20 @@
 {%
     \entryclause{<#1> \conditionref{#2}}{condition}%
     \label{\conditionlabel{#1}}%
-    \indexcond{#1}%
+    \indexcondition{#1}%
 }
 \newcommand*{\conditionref}[1]{\hyperref[\conditionlabel{#1}]{{\tt{}<#1>}}}
+
+%%% Keyword
+\newcommand*{\keywordlabel}[1]{keyword:#1}
+\newcommand{\keyworddef}[1]
+{%
+    {\tt #1}%
+    \label{\keywordlabel{#1}}%
+    \ttindexdef{#1}%
+    %\indexkeyword{#1}%
+}
+\newcommand*{\keywordref}[1]{\hyperref[\keywordlabel{#1}]{{\tt{}#1}}}
 
 % ------------------------------------------------------------------------------
 %%% Syntax
@@ -682,6 +682,9 @@
 \renewcommand*{\sc}[1]{{\normalfont\em{}#1}}
 \newcommand*{\scopt}[1]{\sc{#1$_{opt}$}}
 \newcommand*{\scseq}[1]{\sc{#1$^{*}$}}
+\newcommand*{\scSeq}[1]{\sc{#1$^{+}$}}
+
+\newcommand*{\scgopt}[1]{\scopt{\{#1\}}}
 
 \newcommand*{\sclabel}[1]{sc:#1}
 \newcommand{\scdef}[1]
@@ -693,6 +696,7 @@
 \newcommand*{\scref}[1]{\hyperref[\sclabel{#1}]{\sc{#1}}}
 \newcommand*{\scoptref}[1]{\hyperref[\sclabel{#1}]{\scopt{#1}}}
 \newcommand*{\scseqref}[1]{\hyperref[\sclabel{#1}]{\scseq{#1}}}
+\newcommand*{\scSeqref}[1]{\hyperref[\sclabel{#1}]{\scSeq{#1}}}
 
 \newcommand*{\rewrite}{{$\equiv$}}
 \newcommand*{\tts}{{\tt\phantom{00}}}
