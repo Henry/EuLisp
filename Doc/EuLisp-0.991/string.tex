@@ -14,72 +14,65 @@ String literals\index{general}{external representation!string} are
 delimited by the glyph called {\em quotation mark\/} (\verb+"+).  For
 example, \verb+"abcd"+.
 
-Sometimes it might be desirable to include string delimiter characters
-in strings.  The aim of escaping in strings\index{general}{string!escaping
-in} is to fulfill this need.  The {\em
-string-escape\/}\index{general}{string!string-escape glyph} glyph is
-defined as {\em reverse solidus\/} (\verb+\+).  String escaping can also
-be used to include certain other characters that would otherwise be
-difficult to denote.  The set of named special characters (see
-sections~\ref{syntax} and~\ref{character}) have a particular syntax to
-allow their inclusion in strings.  To allow arbitrary characters to
-appear in strings, the hex-insertion digram is followed by an integer
-denoting the position of the character in the current character set.
-Some examples of string literals appear in
-table~\ref{example:string-literal}.  The syntax for the external
-representation of strings is defined below.
+Sometimes it might be desirable to include string delimiter characters in
+strings.  The aim of escaping in strings \index{general}{string!escaping in} is
+to fulfill this need.  The {\em string-escape\/}
+\index{general}{string!string-escape glyph} glyph is defined as {\em reverse
+    solidus\/} (\verb+\+).  String escaping can also be used to include certain
+other characters that would otherwise be difficult to denote.  The set of named
+special characters (see sections~\ref{syntax} and~\ref{character}) have a
+particular syntax to allow their inclusion in strings.  To allow arbitrary
+characters to appear in strings, the hex-insertion digram is followed by an
+integer denoting the position of the character in the current character set.
+Some examples of string literals appear in table~\ref{example:string-literal}.
+The syntax for the external representation of strings is defined below.
 %
 \Syntax
 \label{string-syntax}
-\newbox\stringSyntax
-\begingroup
+\defSyntax{string}{
+\begin{syntaxx}
+    \scdef{string}: \\
+    \>  " \scseqref{string-constituent} " \\
+    \scdef{string-constituent}: \\
+    \>  \scref{normal-string-constituent} \\
+    \>  \scref{digram-string-constituent} \\
+    \>  \scref{numeric string constituent} \\
+   \scdef{normal-string-constituent}: \\
+   \>  \scref{level-0-character} other than " or \textbackslash{} \\
+   \scdef{digram-string-constituent}: one of \\
+   \>  \textbackslash{}a \textbackslash{}b \textbackslash{}d \textbackslash{}f
+   \textbackslash{}l \textbackslash{}n \textbackslash{}r \textbackslash{}t
+   \textbackslash{}v \textbackslash{}" \textbackslash{}\textbackslash{} \\
+   \scdef{numeric-string-constituent}: \\
+   \>  \textbackslash{}x \scref{hexadecimal-digit} \\
+   \>  \textbackslash{}x \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
+   \>  \textbackslash{}x \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
+   \>\>  \scref{hexadecimal-digit} \\
+   \>  \textbackslash{}x \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
+   \>\>  \scref{hexadecimal-digit} \scref{hexadecimal-digit}
+\end{syntaxx}}%
+\showSyntaxBox{string}
 
-\def\a{\string\a}
-\def\b{\string\b}
-\def\d{\string\d}
-\def\f{\string\f}
-\def\l{\string\l}
-\def\n{\string\n}
-\def\r{\string\r}
-\def\t{\string\t}
-\def\v{\string\v}
-\def\x{\string\x}
-\def\'{\string\'}
-\def\"{\string\"}
-\def\\{\string\\}
-
-% \global so it doesn't get reset to void when we leave this group...
-\global\setbox\stringSyntax\vbox{
-\syntax
-string token
-   = '"' {string constituent} '"';
-string constituent
-   = normal string constituent
-   | digram string constituent
-   | numeric string constituent;
-normal string constituent
-   = level 0 character - ( '"' | '\' )
-digram string constituent
-   = '\a' (* \[\em alert\] *)
-   | '\b' (* \[\em backspace\] *)
-   | '\d' (* \[\em delete\] *)
-   | '\f' (* \[\em formfeed\] *)
-   | '\l' (* \[\em linefeed\] *)
-   | '\n' (* \[\em newline\] *)
-   | '\r' (* \[\em return\] *)
-   | '\t' (* \[\em tab\] *)
-   | '\v' (* \[\em vertical tab\] *)
-   | '\"' (* \[\em string delimiter\] *)
-   | '\\' ;  (* \[\em string escape\] *)
-numeric string constituent
-   = '\x' hex digit
-   | '\x' hex digit, hex digit
-   | '\x' hex digit, hex digit, hex digit
-   | '\x' hex digit, hex digit, hex digit,
-     hex digit;
-\endsyntax}
-\endgroup
-\syntaxtable{string}{\stringSyntax}
+and the digrams are described in
+%
+\begin{center}
+\begin{tabular}{|ll|}\hline
+    Operation & Digram \\
+    \hline
+    alert & \verb+\a+ \\
+    backspace & \verb+\b+ \\
+    delete & \verb+\d+ \\
+    formfeed & \verb+\f+ \\
+    linefeed & \verb+\l+ \\
+    newline & \verb+\n+ \\
+    return & \verb+\r+ \\
+    tab & \verb+\t+ \\
+    vertical tab & \verb+\v+ \\
+    string delimiter & \verb+\"+ \\
+    string escape & \verb+\\+ \\
+    \hline
+\end{tabular}
+\end{center}
 %
 \begin{example}
 \label{example:string-literal}

@@ -28,25 +28,28 @@ which permits its use as an initial or a constituent character of an identifier
 \defSyntax{character-set}{
 \begin{syntaxx}
     \scdef{decimal-digit}: one of \\
-    \>0 1 2 3 4 5 6 7 8 9 \\
+    \>  0 1 2 3 4 5 6 7 8 9 \\
     \scdef{upper-letter}: one of \\
-    \>A B C D E F G H I J K L M \\
-    \>N O P Q R S T U V W X Y Z \\
+    \>  A B C D E F G H I J K L M \\
+    \>  N O P Q R S T U V W X Y Z \\
     \scdef{lower-letter}: one of \\
-    \>a b c d e f g h i j k l m \\
-    \>n o p q r s t u v w x y z \\
+    \>  a b c d e f g h i j k l m \\
+    \>  n o p q r s t u v w x y z \\
     \scdef{letter}: \\
-    \>\scref{upper-letter} \\
-    \>\scref{lower-letter} \\
-    \scdef{other-character}: one of\\
-    \>* / < = > + - . \\
-    \scdef{special-character}: one of\\
-    \>; ' , \textbackslash{} " \# ( ) ` | @ \\
+    \>  \scref{upper-letter} \\
+    \>  \scref{lower-letter} \\
+    \scdef{normal-other-character}: one of \\
+    \>  * / < = > + . \\
+    \scdef{other-character}: \\
+    \>  \scref{normal-other-character}
+    \>  - \\
+    \scdef{special-character}: one of \\
+    \>  ; ' , \textbackslash{} " \# ( ) ` | @ \\
     \scdef{level-0-character}: \\
-    \>\scref{decimal-digit} \\
-    \>\scref{letter} \\
-    \>\scref{other-character} \\
-    \>\scref{special-character}
+    \>  \scref{decimal-digit} \\
+    \>  \scref{letter} \\
+    \>  \scref{other-character} \\
+    \>  \scref{special-character}
 \end{syntaxx}}
 \showSyntaxBox{character-set}
 %

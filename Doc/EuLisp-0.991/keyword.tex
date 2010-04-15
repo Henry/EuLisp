@@ -6,15 +6,25 @@
 %
 \begin{optDefinition}
 The defined name of this module is {\tt keyword}.
-
-\syntaxform{keyword}
 %
-The syntax of keywords is very similar to that for identifiers and for symbols,
-including all the escape
-conventions. Keywords\index{general}{keyword}\index{general}{keyword!definition
-    of} are distinguished by a colon {\tt (:)} suffix.  It is an error to use a
-keyword where an identifier is expected, such as, for example, in lambda
-parameter lists or in let binding forms.
+\syntaxform{keyword}
+\index{general}{keyword}
+\index{general}{keyword!definition of}
+%
+The syntax of keywords is very similar to that of identifiers and of symbols,
+including all the escape conventions, but are distinguished by a colon {\tt (:)}
+suffix:
+%
+\Syntax
+\defSyntax{keyword}{
+\begin{syntaxx}
+    \scdef{keyword}: \\
+    \>  \scref{identifier}:
+\end{syntaxx}}%
+\showSyntaxBox{keyword}%
+
+It is an error to use a keyword where an identifier is expected, such as, for
+example, in lambda parameter lists or in let binding forms.
 
 {\em The matter of keywords appering in lambda parameter lists, for example,
     {\tt rest:}, instead of the dot notation, is currently an open issue.}

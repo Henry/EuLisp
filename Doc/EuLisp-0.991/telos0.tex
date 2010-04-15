@@ -283,13 +283,17 @@ kept, defclass should be described here also.
     \>  \keywordref{accessor}: \scref{identifier} \\
     \>  \keywordref{requiredp}: \scref{boolean} \\
     \scdef{class-option}: \\
-    \>  \keywordref{keywords}: ( \scseqref{identifier} ) \\
+    \>  \keywordref{keywords}: ( \scseqref{keyword} ) \\
     \>  \keywordref{constructor}: \scref{constructor-specification} \\
     \>  \keywordref{predicate}: \scref{identifier} \\
     \>  \keywordref{abstractp}: \scref{boolean} \\
     \scdef{constructor-specification}: \\
     \>  \scref{identifier} \\
-    \>  ( \scref{identifier} \scseqref{keyword-name} )
+    \>  ( \scref{identifier} \scseqref{initarg} ) \\
+    \scdef{initarg}: \\
+    \>  \scref{keyword} \\
+    \scdef{initlist}: \\
+    \>  \scgseq{\scref{initarg} \scref{object}}
 \end{syntaxx}}
 \showSyntaxBox{defclass}
 %
@@ -323,21 +327,22 @@ The \scref{slot-option}s are interpreted as follows:
     of an argument to be supplied in the initialization options of a call to
     \functionref{make} on the new class.  The value of this argument in the call
     to \functionref{make} is the initial value of the slot.  This option must
-    only be specified once for a particular slot.  The same initarg name may be
-    used for several slots, in which case they will share the same initial value
-    if the initarg is given to \functionref{make}.  Subclasses inherit the
-    initarg. Each slot must have at most one initarg including the inherited
-    one. That means, a subclass can not shadow or add a new initarg, if a
-    superclass has already defined one.
+    only be specified once for a particular slot.  The same \scref{initarg} name
+    may be used for several slots, in which case they will share the same
+    initial value if the \scref{initarg} is given to \functionref{make}.
+    Subclasses inherit the \scref{initarg}. Each slot must have at most one
+    \scref{initarg} including the inherited one. That means, a subclass can not
+    shadow or add a new \scref{initarg}, if a superclass has already defined
+    one.
 
     \item[\keyworddef{default}:, \scref{level-0-expression}]%
     The value of this option is an expression, which is evaluated as the default
-    value of the slot, to be used if no initarg is defined for the slot or given
-    to a call to \functionref{make}.  The expression is evaluated in the lexical
-    environment of the call to \defopref{defclass} and the dynamic environment
-    of the call to \functionref{make}.  The expression is evaluated each time
-    \functionref{make} is called and the default value is called for.  The order
-    of evaluation of the initforms in all the slots is determined by
+    value of the slot, to be used if no \scref{initarg} is defined for the slot
+    or given to a call to \functionref{make}.  The expression is evaluated in
+    the lexical environment of the call to \defopref{defclass} and the dynamic
+    environment of the call to \functionref{make}.  The expression is evaluated
+    each time \functionref{make} is called and the default value is called for.
+    The order of evaluation of the initforms in all the slots is determined by
     \genericref{initialize}.  This option must only be specified once for a
     particular slot. Subclasses inherit the initform.  However, a more specific
     form may be specified in a subclass, which will shadow the inherited one.
@@ -380,21 +385,21 @@ The class-options are interpreted as follows:
 \begin{options}
     \item[\keyworddef{keywords}:, \scref{list}]%
     The value of this option is a list of identifiers naming symbols, which
-    extend the inherited names of arguments to be supplied in the
-    \scref{init-option}s of a call to \functionref{make} on the new class. Initargs
-    are inherited by union. The values of all legal arguments in the call to
-    \functionref{make} are the initial values of corresponding slots if they
-    name a slot initarg or are ignored by the default \genericref{initialize}
-    method, otherwise. This option must only be specified once for a class.
+    extend the inherited names of arguments to be supplied to \functionref{make}
+    on the new class.  Initargs are inherited by union. The values of all legal
+    arguments in the call to \functionref{make} are the initial values of
+    corresponding slots if they name a slot \scref{initarg} or are ignored by
+    the default \genericref{initialize} method, otherwise. This option must only
+    be specified once for a class.
 
     \item[\keyworddef{constructor}:, \scref{constructor-specification}]%
     Creates a constructor function for the new class.  The constructor
     specification gives the name to which the constructor function will be
-    bound, followed by a sequence of legal initargs for the class.  The new
-    function creates an instance of the class and fills in the slots according
-    to the match between the specified initargs and the given arguments to the
-    constructor function.  This option may be specified any number of times for
-    a class.
+    bound, followed by a sequence of legal \scref{initarg}s for the class.  The
+    new function creates an instance of the class and fills in the slots
+    according to the match between the specified \scref{initarg}s and the given
+    arguments to the constructor function.  This option may be specified any
+    number of times for a class.
     % Specifying the constructor in this way is equivalent to writing a
     % \defopref{defconstructor} form for the class.
 
@@ -481,7 +486,8 @@ The class of all generic functions.
     which may be specialized to restrict the domain of methods to be attached to
     the generic function.
 
-    \item[\scref{level-0-init-option}] is \keyworddef{method} \scref{method-description} \\
+    \item[\scref{level-0-init-option}] is \keyworddef{method}
+    \scref{method-description} \\
     where \scref{method-description} is a list comprising the
     \scref{specialized-lambda-list} of the method, which denotes the domain, and
     a sequence of forms, denoting the method body.  The method body is closed in
@@ -837,12 +843,13 @@ first four are usually called {\em generic dispatch}.
 
 \end{optPrivate}
 \begin{optRationale}
-If the default method is not executed during a call of
-\genericref{initialize}, no check of initargs will be done by the system.
+    If the default method is not executed during a call of
+    \genericref{initialize}, no check of \scref{initarg}s will be done by the
+    system.
 
-Writers for metaobjects are not specified yet. That implies that users must use
-\specopref{call-next-method} if they specialize metaobjects classes and define
-new \genericref{initialize} methods for them.
+    Writers for metaobjects are not specified yet. That implies that users must
+    use \specopref{call-next-method} if they specialize metaobjects classes and
+    define new \genericref{initialize} methods for them.
 \end{optRationale}
 
 \begin{optDefinition}
@@ -874,15 +881,15 @@ The general constructor \functionref{make} creates a new object calling
 \function{allocate}
 %
 \begin{arguments}
-    \item[class] A structure class.
-    \item[initlist] A list of initialization arguments.
+    \item[class] The class to allocate.
+    \item[\scref{initlist}] The list of initialization arguments.
 \end{arguments}
 %
 \result%
 A new uninitialized direct instance of the first argument.
 %
 \remarks%
-The {\em class\/} must be a structure class, the {\em initlist\/} is ignored.
+The {\em class\/} must be a structure class, the \scref{initlist} is ignored.
 The behaviour of \genericref{allocate} is extended at level-1 for classes not
 accessible at level-0. The level-0 behaviour is not affected by the
 level-1 extension.
@@ -890,8 +897,8 @@ level-1 extension.
 \generic{initialize}
 %
 \begin{genericargs}
-    \item[object, \classref{object}] The object to initialize.
-    \item[initlist] The list of initialization arguments.
+    \item[\scref{object}, \classref{object}] The object to initialize.
+    \item[\scref{initlist}] The list of initialization arguments.
 \end{genericargs}
 %
 \result%
@@ -908,8 +915,8 @@ newly defined classes, which are structure classes at level-0.
 \method{initialize}
 %
 \begin{specargs}
-    \item[object, \classref{object}] The object to initialize.
-    \item[initlist] The list of initialization arguments.
+    \item[\scref{object}, \classref{object}] The object to initialize.
+    \item[\scref{initlist}] The list of initialization arguments.
 \end{specargs}
 %
 \result%
@@ -920,20 +927,21 @@ This is the default method attached to \genericref{initialize}.  This method
 performs the following steps:
 
 \begin{enumerate}
-    \item Checks if the supplied initargs are legal and signals an error
-    otherwise. Legal initargs are those specified in the class definition
-    directly or inherited from a superclass.  An initarg may be specified as a
-    slot-option or as a class-option.
+    \item Checks if the supplied \scref{initarg}s are legal and signals an error
+    otherwise. Legal \scref{initarg}s are those specified in the class
+    definition directly or inherited from a superclass.  An \scref{initarg} may
+    be specified as a slot-option or as a class-option.
 
-    \item Initializes the slots of the object according to the initarg, if
-    supplied, or according to the most specific {\tt initform}, if specified.
+    \item Initializes the slots of the object according to the \scref{initarg},
+    if supplied, or according to the most specific {\tt initform}, if specified.
     % directly in the class definition or inherited from a superclass.
     Otherwise, the slot remains ``unbound''.
 \end{enumerate}
 %
-Legal initargs which do not initialize a slot are ignored by the default
-\genericref{initialize} method.  More specific methods may handle these initargs
-and call the default method by calling \specopref{call-next-method}.
+Legal \scref{initarg}s which do not initialize a slot are ignored by the default
+\genericref{initialize} method.  More specific methods may handle these
+\scref{initarg}s and call the default method by calling
+\specopref{call-next-method}.
 % The default method can be specialized by calling \specopref{call-next-method}
 % from more specific \genericref{initialize} methods.
 %

@@ -63,13 +63,16 @@ The class of all double precision floating point numbers.
 
 The syntax for the exponent of a double precision floating point is given below:
 
-\savesyntax\doubleFloatSyntax\vbox{\syntax
-double exponent
-   = ('d' | 'D'), [sign], decimal integer; (* \[\ref{integer}\] *)
-\endsyntax}
-\syntaxtable{double}{\doubleFloatSyntax}
+\defSyntax{double-float}{
+\begin{syntaxx}
+    \scdef{double-exponent}: \\
+    \>  d \scoptref{sign} \scref{decimal-integer} \\
+    \>  D \scoptref{sign} \scref{decimal-integer}
+\end{syntaxx}}%
+\showSyntaxBox{double-float}
 
-The general syntax for floating point numbers is given in section~\ref{float}.
+The general syntax for floating point numbers is given in syntax
+table~\ref{float-syntax}.
 
 \function{double-float-p}
 %

@@ -11,7 +11,7 @@
 %
 \begin{optDefinition}
 The defined name of this module is {\tt symbol}.
-
+%
 \syntaxform{symbol}
 %
 The syntax of symbols also serves as the syntax for identifiers.
@@ -75,36 +75,34 @@ re-\functionref{read} the symbol will not be included.  Thus, taking the same
 examples, \functionref{prin} outputs \verb+a(b+ and \verb+abc.def+, which
 \functionref{read} interprets as the symbol \verb+a+ followed by the start of a
 list, the symbol \verb+b+ and the symbol \verb+abc.def+.
-
-The syntax of the external representation of identifiers and symbols
-is defined below
-
+%
 \Syntax
 \label{symbol-syntax}
-\savesyntax\symbolSyntax\vbox{
-\syntax
-symbol
-   = identifier;
-identifier
-    = normal identifier | peculiar identifier;
-normal identifier
-    = normal initial, {normal constituent};
-normal initial
-    = letter (* \[\S\ref{syntax}\] *)
-    | other character - '-'; (* \[\S\ref{syntax}\] *)
-normal constituent
-    = letter (* \[\S\ref{syntax}\] *)
-    | digit (* \[\S\ref{syntax}\] *)
-    | other character; (* \[\S\ref{syntax}\] *)
-peculiar identifier
-    = ('+' | '-'), [peculiar constituent,
-    {normal constituent}]
-    | '.', peculiar constituent, {normal constituent};
-peculiar constituent
-    = letter (* \[\S\ref{syntax}\] *)
-    | other character; (* \[\S\ref{syntax}\] *)
-\endsyntax}
-\syntaxtable{symbol}{\symbolSyntax}
+\defSyntax{symbol}{
+\begin{syntaxx}
+    \scdef{symbol}: \\
+    \>  \scref{identifier} \\
+    \scdef{identifier}: \\
+    \>  \scref{normal-identifier} \\
+    \>   \scref{peculiar-identifier} \\
+    \scdef{normal-identifier}: \\
+    \>  \scref{normal-initial} \scseqref{normal-constituent} \\
+    \scdef{normal-initial}: \\
+    \>  \scref{letter} \\
+    \>  \scref{normal-other-character} \\
+    \scdef{normal-constituent}: \\
+    \>  \scref{letter} \\
+    \>  \scref{decimal-digit} \\
+    \>  \scref{other-character} \\
+    \scdef{peculiar-identifier}: \\
+    \> \{+ | -\} \\
+    \>\>  \scgopt{\scref{peculiar-constituent} \scseqref{normal-constituent}} \\
+    \> . \scref{peculiar-constituent} \scseqref{normal-constituent} \\
+    \scdef{peculiar-constituent}: \\
+    \> \scref{letter} \\
+    \> \scref{other-character}
+\end{syntaxx}}%
+\showSyntaxBox{symbol}%
 
 Computationally, the most important aspect of symbols is that each is
 unique, or, stated the other way around: the result of processing

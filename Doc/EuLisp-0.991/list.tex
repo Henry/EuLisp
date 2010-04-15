@@ -109,22 +109,24 @@ is defined in syntax table~\ref{pair-syntax}.
 
 \Syntax
 \label{pair-syntax}
-\savesyntax\listSyntax\vbox{
-\syntax
-null
-   = '(', ')';
-pair
-   = '(', object, '.', object, ')';
-list
-   = empty list | proper list | improper list;
-empty list
-   = '()';
-proper list
-   = '(', {object}, ')';
-improper list
-   = '(', {object}, '.', object, ')';
-\endsyntax}
-\syntaxtable{list}{\listSyntax}
+\defSyntax{list}{
+\begin{syntaxx}
+    \scdef{null}: \\
+    \>  () \\
+    \scdef{pair}: \\
+    \>  ( \scref{object} . \scref{object} ) \\
+    \scdef{list}: \\
+    \>  \scref{empty-list} \\
+    \>  \scref{proper-list} \\
+    \>  \scref{improper-list} \\
+    \scdef{empty-list}: \\
+    \>  () \\
+    \scdef{proper-list}: \\
+    \>  ( \scSeqref{object} ) \\
+    \scdef{improper-list}: \\
+    \>  ( \scSeqref{object} . \scref{object} )
+\end{syntaxx}}%
+\showSyntaxBox{list}
 %
 \examples
 \begin{tabular}{ll}

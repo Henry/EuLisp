@@ -24,13 +24,13 @@ representation of vectors is defined below.
 %
 \Syntax
 \label{vector-syntax}
-\savesyntax\vectorSyntax\vbox{
-\syntax
-vector
-   = '#(', {object}, ')';
-\endsyntax}
-\syntaxtable{vector}{\vectorSyntax}
-
+\defSyntax{vector}{
+\begin{syntaxx}
+    \scdef{vector}: \\
+    \>  \#( \scseqref{object} )
+\end{syntaxx}}%
+\showSyntaxBox{vector}
+%
 \derivedclass{vector}{sequence}
 \index{general}{level-0 classes!\theclass{vector}}
 %

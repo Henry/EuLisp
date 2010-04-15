@@ -26,58 +26,43 @@ table~\ref{character-syntax}.
 %
 \Syntax
 \label{character-syntax}
-% a horrible hack
-\newbox\characterSyntax
-\begingroup
-
-\def\'{\string\'}
-\def\^{\string\^}
-\def\alert{\string\alert}
-\def\backspace{\string\backspace}
-\def\delete{\string\delete}
-\def\formfeed{\string\formfeed}
-\def\linefeed{\string\linefeed}
-\def\newline{\string\newline}
-\def\return{\string\return}
-\def\tab{\string\tab}
-\def\space{\string\space}
-\def\vertical{\string\vertical}
-\def\x{\string\x}
-
-% \global so it doesn't get reset to void when we leave this group...
-\global\setbox\characterSyntax\vbox{
-\syntax
-character token
-   = literal character token
-   | special character token
-   | control character token
-   | numeric character token;
-literal character token
-   = '#\', letter
-   | '#\', decimal digit
-   | '#\', non-alphabetic;
-control character token
-   = '#\^' letter;
-special character token
-   = '#\alert'
-   | '#\backspace'
-   | '#\delete'
-   | '#\formfeed'
-   | '#\linefeed'
-   | '#\newline'
-   | '#\return'
-   | '#\tab'
-   | '#\space'
-   | '#\vertical-tab';
-numeric character token
-   = '#\x', hex digit
-   | '#\x', hex digit, hex digit
-   | '#\x', hex digit, hex digit, hex digit
-   | '#\x', hex digit, hex digit, hex digit,
-     hex digit;
-\endsyntax}
-\endgroup
-\syntaxtable{character}{\characterSyntax}
+\defSyntax{character}{
+\begin{syntaxx}
+    \scdef{character}: \\
+    \>  \scref{literal-character-token} \\
+    \>  \scref{special-character-token} \\
+    \>  \scref{control-character-token} \\
+    \>  \scref{numeric-character-token} \\
+    \scdef{literal-character-token}: \\
+    \>  \#\textbackslash{} \scref{letter} \\
+    \>  \#\textbackslash{} \scref{decimal-digit} \\
+    \>  \#\textbackslash{} \scref{other-character} \\
+    \>  \#\textbackslash{} \scref{special-character} \\
+    \scdef{control-character-token}: \\
+    \>  \#\textbackslash{}\textasciicircum \scref{letter} \\
+    \scdef{special-character-token}: \\
+    \>  \#\textbackslash{}alert \\
+    \>  \#\textbackslash{}backspace \\
+    \>  \#\textbackslash{}delete \\
+    \>  \#\textbackslash{}formfeed \\
+    \>  \#\textbackslash{}linefeed \\
+    \>  \#\textbackslash{}newline \\
+    \>  \#\textbackslash{}return \\
+    \>  \#\textbackslash{}tab \\
+    \>  \#\textbackslash{}space \\
+    \>  \#\textbackslash{}vertical-tab \\
+    \scdef{numeric-character-token}: \\
+    \>  \#\textbackslash{}x \scref{hexadecimal-digit} \\
+    \>  \#\textbackslash{}x \scref{hexadecimal-digit}
+    \scref{hexadecimal-digit} \\
+    \>  \#\textbackslash{}x
+    \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
+    \>\>  \scref{hexadecimal-digit} \\
+    \>  \#\textbackslash{}x
+    \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
+    \>\>  \scref{hexadecimal-digit} \scref{hexadecimal-digit}
+\end{syntaxx}}%
+\showSyntaxBox{character}
 
 Any character which does not have a name, and thereby an external representation
 dealt with by cases described so far is represented by \verb+#\x+ followed by up

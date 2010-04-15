@@ -25,25 +25,24 @@ is provided by some of the formatting specifications of \functionref{format}
 %
 \Syntax
 \label{float-syntax}
-\savesyntax\floatSyntax\vbox{\syntax
-float
-   = [sign] unsigned float [exponent];
-sign
-   = '+' | '-';
-unsigned float
-   = float format 1
-   | float format 2
-   | float format 3;
-float format 1
-   = decimal integer, '.'; (* \[\S\ref{integer}\] *)
-float format 2
-   = '.', decimal integer; (* \[\S\ref{integer}\] *)
-float format 3
-   = float format 1, decimal integer; (* \[\S\ref{integer}\] *)
-exponent
-   = double exponent; (* \[\S\ref{double-float}\] *)
-\endsyntax}
-\syntaxtable{float}{\floatSyntax}
+\defSyntax{float}{
+\begin{syntaxx}
+    \scdef{float}: \\
+    \>  \scoptref{sign} \scref{unsigned-float} \scoptref{exponent} \\
+   \scdef{unsigned-float}: \\
+   \>  \scref{float-format-1} \\
+   \>  \scref{float-format-2} \\
+   \>  \scref{float-format-3} \\
+   \scdef{float-format-1}: \\
+   \>  \scref{decimal-integer} . \\
+   \scdef{float-format-2}: \\
+   \>  . \scref{decimal-integer} \\
+   \scdef{float-format-3}: \\
+   \>  \scref{float-format-1} \scref{decimal-integer} \\
+   \scdef{exponent}: \\
+   \>  \scref{double-exponent}
+\end{syntaxx}}%
+\showSyntaxBox{float}
 
 A floating point number\index{general}{external representation!floating point}
 has six forms of external representation depending on whether either or both the

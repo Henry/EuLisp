@@ -355,8 +355,10 @@
 
 \newcommand{\showSyntax}[1]
 {%
+    \let\orig@scdef=\scdef%
     \let\scdef=\scref%
     \csname #1 Syntax\endcsname%
+    \let\scdef=\orig@scdef%
 }
 
 % Old macro
@@ -680,11 +682,14 @@
 \newcommand*{\disablebackslash}{\apocaerror{No disablebackslash here}}
 
 \renewcommand*{\sc}[1]{{\normalfont\em{}#1}}
+
 \newcommand*{\scopt}[1]{\sc{#1$_{opt}$}}
 \newcommand*{\scseq}[1]{\sc{#1$^{*}$}}
 \newcommand*{\scSeq}[1]{\sc{#1$^{+}$}}
 
 \newcommand*{\scgopt}[1]{\scopt{\{#1\}}}
+\newcommand*{\scgseq}[1]{\scseq{\{#1\}}}
+\newcommand*{\scgSeq}[1]{\scSeq{\{#1\}}}
 
 \newcommand*{\sclabel}[1]{sc:#1}
 \newcommand{\scdef}[1]

@@ -40,50 +40,51 @@ integer literals is defined below.
 
 \Syntax
 \label{integer-syntax}
-\savesyntax\integerSyntax\vbox{
-\syntax
-integer
-   = [sign] unsigned integer;
-sign
-   = '+' | '-';
-unsigned integer
-   = binary integer
-   | octal integer
-   | decimal integer
-   | hexadecimal integer
-   | specified base integer
-binary integer
-   = '#b', binary digit, {binary digit};
-binary digit
-   = '0' | '1';
-octal integer
-   = '#o', octal digit, {octal digit};
-octal digit
-   = '0' | '1' | '2' | '3' | '4' | '5' | '6' | '7';
-decimal integer
-   = decimal digit, {decimal digit};
-hexadecimal integer
-   = '#x', hexadecimal digit, {hexadecimal digit};
-hexadecimal digit
-   = decimal digit
-   | hex lower letter
-   | hex upper letter;
-hex lower letter
-   = 'a' | 'b' | 'c' | 'd' | 'e' | 'f';
-hex upper letter
-   = 'A' | 'B' | 'C' | 'D' | 'E' | 'F';
-specified base integer
-   = '#', base specification, 'r',
-     specified base digit,
-     {specified base digit};
-base specification
-   = decimal digit - ('0' | '1')
-   | ( '1' | '2' ), decimal digit
-   | '3', ('0' | '1' | '2' | '3' | '4' | '5' | '6');
-specified base digit
-   = decimal digit | letter;
-\endsyntax}
-\syntaxtable{integer}{\integerSyntax}
+\defSyntax{integer}{
+\begin{syntaxx}
+    \scdef{integer}: \\
+    \>  \scoptref{sign} \scref{unsigned-integer} \\
+    \scdef{sign}: one of \\
+    \>  + - \\
+    \scdef{unsigned-integer}: \\
+    \>   \scref{binary-integer} \\
+    \>   \scref{octal-integer} \\
+    \>   \scref{decimal-integer} \\
+    \>   \scref{hexadecimal-integer} \\
+    \>   \scref{specified-base-integer} \\
+    \scdef{binary-integer}: \\
+    \>  \#b \scSeqref{binary-digit} \\
+    \scdef{binary-digit}: one of\\
+    \>  0 1 \\
+    \scdef{octal-integer}: \\
+    \>  \#o \scSeqref{octal-digit} \\
+    \scdef{octal-digit}: one of \\
+    \>  0 1 2 3 4 5 6 7 \\
+    \scdef{decimal-integer}: \\
+    \>  \scSeqref{decimal-digit} \\
+    \scdef{hexadecimal-integer}: \\
+    \>  \#x \scSeqref{hexadecimal-digit} \\
+    \scdef{hexadecimal-digit}: \\
+    \>  \scref{decimal-digit} \\
+    \>  \scref{hex-lower-letter} \\
+    \>  \scref{hex-upper-letter} \\
+    \scdef{hex-lower-letter}: one of \\
+    \>  a b c d e f \\
+    \scdef{hex-upper-letter}: one of \\
+    \>  A B C D E F \\
+    \scdef{specified-base-integer}: \\
+    \>  \# \scref{base-specification} r \\
+    \>  \scref{specified-base-digit} \\
+    \>  \scseqref{specified-base-digit} \\
+    \scdef{base-specification}: \\
+    \>  \{ 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 \} \\
+    \>  \{ 1 | 2 \} \scref{decimal-digit} \\
+    \> 3 \{ 0 | 1 | 2 | 3 | 4 | 5 | 6 \} \\
+    \scdef{specified-base-digit}: \\
+    \>  \scref{decimal-digit} \\
+    \>  \scref{letter}
+\end{syntaxx}}%
+\showSyntaxBox{integer}
 
 \begin{note}
     At present this text does not define a class integer with variable
