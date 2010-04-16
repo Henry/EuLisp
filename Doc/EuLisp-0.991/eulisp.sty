@@ -357,7 +357,7 @@
 {%
     \let\orig@scdef=\scdef%
     \let\scdef=\scref%
-    \csname #1 Syntax\endcsname%
+    \makebox[\linewidth][l]{\csname #1 Syntax\endcsname}%
     \let\scdef=\orig@scdef%
 }
 

@@ -49,11 +49,14 @@ itself\index{general}{processing!constants}.
 \defop{defconstant}
 %
 \Syntax
-\savesyntax\defconstantSyntax\vbox{\syntax
-defconstant form
-   = '(', 'defconstant', identifier, form, ')';
-\endsyntax}
-\syntaxtable{defconstant}{\defconstantSyntax}
+\defSyntax{defconstant}{
+\begin{syntaxx}
+    \scdef{defconstant-form}: \ra{} \classref{object} \\
+    \>  ( \defopref{defconstant} \scref{constant-name} \scref{form} ) \\
+    \scdef{constant-name}: \\
+    \>  \scref{identifier}
+\end{syntaxx}}%
+\showSyntaxBox{defconstant}
 %
 \begin{arguments}
     \item[identifier] A symbol naming an immutable top-lexical binding to be
@@ -90,11 +93,14 @@ constant---that is, an immutable top-lexical binding.
 \defop{deflocal}
 %
 \Syntax
-\savesyntax\deflocalSyntax\vbox{\syntax
-deflocal form
-   = '(', 'deflocal', identifier, form, ')';
-\endsyntax}
-\syntaxtable{deflocal}{\deflocalSyntax}
+\defSyntax{deflocal}{
+\begin{syntaxx}
+    \scdef{deflocal-form}: \ra{} \classref{object} \\
+    \>  ( \defopref{deflocal} \scref{local-name} \scref{form} ) \\
+    \scdef{local-name}: \\
+    \>  \scref{identifier}
+\end{syntaxx}}%
+\showSyntaxBox{deflocal}
 %
 \begin{arguments}
     \item[identifier] A symbol naming a binding containing the value of
@@ -115,18 +121,20 @@ The binding created by a \defopref{deflocal} form is mutable.
 \index{general}{literal}
 %
 \Syntax
-\savesyntax\quoteSyntax\vbox{\syntax
-quote form
-   = '(', 'quote', object, ')';
-\endsyntax}
-\syntaxtable{quote}{\quoteSyntax}
+\defSyntax{quote}{
+\begin{syntaxx}
+    \scdef{quote-form}: \ra{} \scref{object} \\
+    \>  ( \specopref{quote} \scref{object} ) \\
+    \>  '\scref{object}
+\end{syntaxx}}%
+\showSyntaxBox{quote}
 %
 \begin{arguments}
     \item[object] the \sc{object} to be quoted.
 \end{arguments}
 %
 \result%
-The result is \sc{object}.
+The result is \scref{object}.
 %
 \remarks%
 The result of processing the expression {\tt (quote \sc{object})} is
@@ -157,19 +165,20 @@ It is an error to modify a literal expression
 %
 \Syntax
 \label{lambda-syntax-table}
-\savesyntax\lambdaSyntax\vbox{\syntax
-lambda form
-   = '(', 'lambda', lambda list, {form}, ')';
-lambda list
-   = identifier     (* \[\S\ref{symbol}\] *)
-   | simple list
-   | rest list;
-simple list
-   = '(', {identifier}, ')';   (* \[\S\ref{symbol}\] *)
-rest list
-   = '(', {identifier}, '.', identifier, ')';
-\endsyntax}
-\syntaxtable{lambda}{\lambdaSyntax}
+\defSyntax{lambda}{
+\begin{syntaxx}
+    \scdef{lambda-form}: \ra{} \classref{function} \\
+    \>  ( \specopref{lambda} \scref{lambda-list} \scseqref{form} ) \\
+   \scdef{lambda-list}: \\
+   \>  \scref{identifier} \\
+   \>  \scref{simple-list} \\
+   \>  \scref{rest-list} \\
+   \scdef{simple-list}: \\
+   \>  ( \scseqref{identifier} ) \\
+   \scdef{rest-list}: \\
+   \>  ( \scseqref{identifier} . \scref{identifier} )
+\end{syntaxx}}%
+\showSyntaxBox{lambda}
 %
 \begin{arguments}
     \item[lambda-list] The parameter list of the function conforming to the
@@ -200,12 +209,14 @@ error to modify {\em rest-list}.
 \syntaxform{defmacro}
 %
 \Syntax
-\savesyntax\defmacroSyntax\vbox{\syntax
-defmacro form
-   = '(', 'defmacro', macro name, lambda list,
-     {form}, ')';
-\endsyntax}
-\syntaxtable{defmacro}{\defmacroSyntax}
+\defSyntax{defmacro}{
+\begin{syntaxx}
+    \scdef{defmacro-form}: \ra{} \classref{function} \\
+   \>  ( \syntaxref{defmacro} \scref{macro-name} \scref{lambda-list} \scseqref{form} ) \\
+   \scdef{macro-name}: \\
+   \>  \scref{identifier}
+\end{syntaxx}}%
+\showSyntaxBox{defmacro}
 %
 \begin{arguments}
     \item[macro-name] A symbol naming an immutable top-lexical binding to be
@@ -219,12 +230,11 @@ defmacro form
 \end{arguments}
 %
 \remarks%
-The \syntaxref{defmacro} form defines a function\index{general}{macro} named by
+The \syntaxref{defmacro} form defines a function \index{general}{macro} named by
 {\em macro-name} and stores the definition as the top-lexical binding of {\em
-    macro-name}\index{general}{macro!definition by
-    \syntaxref{defmacro}}\index{general}{binding!module}.  The interpretation
-of the \sc{lambda-list} is as defined for \specopref{lambda} (see
-\ref{lambda-syntax-table}).
+    macro-name} \index{general}{macro!definition by \syntaxref{defmacro}}
+\index{general}{binding!module}.  The interpretation of the \sc{lambda-list} is
+as defined for \specopref{lambda} (see \ref{lambda-syntax-table}).
 %
 \begin{note}
     A macro is automatically exported from the the module which defines it.  A
@@ -237,19 +247,22 @@ of the \sc{lambda-list} is as defined for \specopref{lambda} (see
 \syntaxform{defun}
 %
 \Syntax
-\savesyntax\defunSyntax\vbox{\syntax
-defun form
-   = simple defun
-   | setter defun;
-simple defun
-   = '(', 'defun', function name, lambda list,
-     {form}, ')';
-setter defun
-   = '(', 'defun',
-          '(', 'setter', function name, ')',
-          lambda list, {form}, ')';
-\endsyntax}
-\syntaxtable{defun}{\defunSyntax}
+\defSyntax{defun}{
+\begin{syntaxx}
+    \scdef{defun-form}: \ra{} \classref{function} \\
+    \>  \scref{simple-defun} \\
+    \>  \scref{setter-defun} \\
+   \scdef{simple-defun}: \\
+   \>  ( \syntaxref{defun} \scref{function-name} \scref{lambda-list} \\
+   \>\>  \scseqref{form} ) \\
+   \scdef{setter defun}: \\
+   \>  ( \syntaxref{defun} ( \functionref{setter} \scref{function-name} )
+   \scref{lambda-list} \\
+   \>\>  \scseqref{form} ) \\
+   \scdef{function-name}: \\
+   \>  \scref{identifier}
+\end{syntaxx}}%
+\showSyntaxBox{defun}
 %
 \begin{arguments}
     \item[function-name] A symbol naming an immutable top-lexical binding to be
@@ -317,11 +330,18 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
 \index{general}{function!calling}
 %
 \Syntax
-\savesyntax\functioncallSyntax\vbox{\syntax
-function call form
-   = '(', operator, {operand}, ')';
-\endsyntax}
-\syntaxtable{{\normalfont function call}}{\functioncallSyntax}
+\defSyntax{function-call}{
+\begin{syntaxx}
+    \scdef{function-call-form}: \ra{} \classref{object} \\
+    \>  ( \scref{operator} \scseqref{operand} ) \\
+    \scdef{operator}: \\
+    \>  \scref{identifier} \\
+    \scdef{operand}: \\
+    \>  \scref{atomic-expression} \\
+    \>  \scref{literal-expression} \\
+    \>  \scref{function-call-form}
+\end{syntaxx}}%
+\showSyntaxBox{function-call}
 %
 \begin{arguments}
     \item[operator] This may be a symbol---being either the name of a special
@@ -370,11 +390,14 @@ Signalled by function call if the operator is not an instance of
 \function{apply}
 %
 \Syntax
-\savesyntax\applySyntax\vbox{\syntax
-apply form
-   = '(', 'apply', function, {form}, ')';
-\endsyntax}
-\syntaxtable{apply}{\applySyntax}
+\defSyntax{apply}{
+\begin{syntaxx}
+    \scdef{apply-form}: \ra{} \classref{object} \\
+    \>  ( \functionref{apply} \scref{function} \scseqref{form} ) \\
+    \scdef{function}: \\
+    \>  \scref{level-0-expression}
+\end{syntaxx}}%
+\showSyntaxBox{apply}
 %
 \begin{arguments}
     \item[function] An expression which must evaluate to an instance of
@@ -412,11 +435,12 @@ binding named by a identifier---that is, a variable.
 \specop{setq}
 %
 \Syntax
-\savesyntax\setqSyntax\vbox{\syntax
-setq form
-   = '(', 'setq', identifier, form, ')';
-\endsyntax}
-\syntaxtable{setq}{\setqSyntax}
+\defSyntax{setq}{
+\begin{syntaxx}
+    \scdef{setq-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{setq} \scref{identifier} \scref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{setq}
 %
 \begin{arguments}
     \item[identifier] The identifier whose lexical binding is to be updated.
@@ -508,20 +532,20 @@ the given accessor is immutable.
 \specop{if}
 %
 \Syntax
-\savesyntax\ifSyntax\vbox{\syntax
-if form
-   = '(', 'if', antecedent, consequent,
-     alternative, ')';
-\endsyntax}
-\syntaxtable{if}{\ifSyntax}
-%
-\begin{arguments}
-    \item[antecedent] A form.
-
-    \item[consequent] A form.
-
-    \item[alternative] A form.
-\end{arguments}
+\defSyntax{if}{
+\begin{syntaxx}
+    \scdef{if-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{if} \scref{antecedent} \\
+    \>\>\> \scref{consequent} \\
+    \>\>  \scref{alternative} ) \\
+    \scdef{antecedent}: \\
+    \>  \scref{form} \\
+    \scdef{consequent}: \\
+    \>  \scref{form} \\
+    \scdef{alternative}: \\
+    \>  \scref{form} \\
+\end{syntaxx}}%
+\showSyntaxBox{if}
 %
 \result%
 Either the value of \sc{consequent} or {\em alternative\/} depending on the
@@ -537,12 +561,13 @@ or \sc{alternative} is chosen.
 \macro{cond}
 %
 \Syntax
-\savesyntax\condSyntax\vbox{\syntax
-cond macro
-   = '(', 'cond',
-          {'(', antecedent, {consequent}, ')'}, ')';
-\endsyntax}
-\syntaxtable{cond}{\condSyntax}
+\defSyntax{cond}{
+    \begin{syntaxx}
+    \scdef{cond-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{cond} \\
+    \>\>  \scgseq{{\tt(} \scref{antecedent} \scseqref{consequent} {\tt)}} )
+\end{syntaxx}}%
+\showSyntaxBox{cond}
 %
 \remarks%
 The \macroref{cond} macro provides a convenient syntax for collections of {\em
@@ -600,11 +625,12 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 \macro{and}
 %
 \Syntax
-\savesyntax\andSyntax\vbox{\syntax
-and macro
-   = '(', 'and', {form}, ')';
-\endsyntax}
-\syntaxtable{and}{\andSyntax}
+\defSyntax{and}{
+\begin{syntaxx}
+    \scdef{and-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{and} \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{and}
 %
 \remarks%
 The expansion of an \macroref{and} form leads to the evaluation of the sequence
@@ -632,11 +658,12 @@ will be evaluated---that is to say, it is non-strict.  The result of {\tt
 \macro{or}
 %
 \Syntax
-\savesyntax\orSyntax\vbox{\syntax
-or macro
-   = '(', 'or', {form}, ')';
-\endsyntax}
-\syntaxtable{or}{\orSyntax}
+\defSyntax{or}{
+\begin{syntaxx}
+    \scdef{or-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{or} \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{or}
 %
 \remarks%
 The expansion of an \macroref{or} form leads to the evaluation of the sequence
@@ -699,16 +726,17 @@ Note that {\tt x} does not occur free in any of \sc{form}$_2$ \ldots {\em
 \ttsubindex{let/cc}{see also \macroref{block} and \macroref{return-from}}
 %
 \Syntax
-\savesyntax\letccSyntax\vbox{\syntax
-let/cc form
-   = '(', 'let/cc', identifier, {form}, ')';
-\endsyntax}
-\syntaxtable{let/cc}{\letccSyntax}
+\defSyntax{let/cc}{
+\begin{syntaxx}
+    \scdef{let/cc-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{let/cc} \scref{identifier} \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{let/cc}
 %
 \begin{arguments}
-    \item[identifier] To be bound to the continuation of the \specopref{let/cc}
-    form.
-    \item[body] A sequence of forms.
+    \item[\scref{identifier}] To be bound to the continuation of the
+    \specopref{let/cc} form.
+    \item[\scseqref{form}] A sequence of forms to evaluate.
 \end{arguments}
 %
 \result%
@@ -770,11 +798,12 @@ signalled.
 %
 \ttsubindex{block}{see also \specopref{let/cc}}
 \Syntax
-\savesyntax\blockSyntax\vbox{\syntax
-block macro
-   = '(', 'block', identifier, {form}, ')';
-\endsyntax}
-\syntaxtable{block}{\blockSyntax}
+\defSyntax{block}{
+\begin{syntaxx}
+    \scdef{block-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{block} \scref{identifier} \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{block}
 %
 \remarks%
 The block expression is used to establish a statically scoped binding of an
@@ -805,11 +834,12 @@ argument like other values.
 \ttsubindex{return-from}{see also \specopref{let/cc}}
 %
 \Syntax
-\savesyntax\returnfromSyntax\vbox{\syntax
-return from macro
-   = '(', 'return-from', identifier, [form], ')';
-\endsyntax}
-\syntaxtable{return-from}{\returnfromSyntax}
+\defSyntax{return-from}{
+\begin{syntaxx}
+    \scdef{return-from-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{return-from} \scref{identifier} \scoptref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{return-from}
 %
 \remarks%
 In \macroref{return-from}, the \sc{identifier} names the continuation of
@@ -843,15 +873,16 @@ is returned as the value of the block named by \sc{identifier}.
 \specop{labels}
 %
 \Syntax
-\savesyntax\labelsSyntax\vbox{\syntax
-labels form
-   = '(', 'labels',
-          '(', {function definition}, ')',
-          {form}, ')';
-function definition
-   = '(', identifier, lambda list, {form}, ')';
-\endsyntax}
-\syntaxtable{labels}{\labelsSyntax}
+\defSyntax{labels}{
+\begin{syntaxx}
+    \scdef{labels-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{labels} \\
+    \>\>  ( \scseqref{function-definition} ) \\
+    \>\>  \scseqref{form} ) \\
+    \scdef{function-definition}: \\
+    \>  ( \scref{identifier} \scref{lambda-list} \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{labels}
 %
 \begin{arguments}
     \item[identifier] A symbol naming a new inner-lexical binding to be
@@ -881,15 +912,16 @@ result of the \specopref{labels} form.
 \macro{let}
 %
 \Syntax
-\savesyntax\letSyntax\vbox{\syntax
-let macro
-   = '(', 'let', [identifier], '(', {binding}, ')',
-     {form}, ')';
-binding
-   = identifier
-   | '(' identifier, form, ')';
-\endsyntax}
-\syntaxtable{let}{\letSyntax}
+\defSyntax{let}{
+\begin{syntaxx}
+    \scdef{let-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{let} \scoptref{identifier} ( \scseqref{binding} ) \\
+    \>\>  \scseqref{form} ) \\
+    \scdef{binding}: \\
+    \>  \scref{identifier} \\
+    \> ( \scref{identifier} \scref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{let}
 %
 \remarks%
 The optional \sc{identifier}\/ denotes that the let form can be called from
@@ -954,11 +986,13 @@ the \macroref{let} form.
 \macro{let*}
 %
 \Syntax
-\savesyntax\letstarSyntax\vbox{\syntax
-let star macro
-   = '(', 'let*', '(', {binding}, ')', {form}, ')';
-\endsyntax}
-\syntaxtable{let*}{\letstarSyntax}
+\defSyntax{let*}{
+\begin{syntaxx}
+    \scdef{let-star-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{let*} ( \scseqref{binding} ) \\
+    \>\>  \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{let*}
 %
 \remarks%
 A {\em binding} is specified by a two element list of a variable and an
@@ -1002,11 +1036,12 @@ form.
 \specop{progn}
 %
 \Syntax
-\savesyntax\prognSyntax\vbox{\syntax
-progn form
-   = '(', 'progn', {form}, ')';
-\endsyntax}
-\syntaxtable{progn}{\prognSyntax}
+\defSyntax{progn}{
+\begin{syntaxx}
+    \scdef{progn-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{progn} \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{progn}
 %
 \begin{arguments}
     \item[form\/$^*$] A sequence of forms and in certain circumstances, defining
@@ -1051,12 +1086,13 @@ environments.
 \specop{unwind-protect}
 %
 \Syntax
-\savesyntax\unwindprotectSyntax\vbox{\syntax
-unwind protect form
-   = '(', 'unwind-protect', protected form,
-     {after form}, ')';
-\endsyntax}
-\syntaxtable{unwind-protect}{\unwindprotectSyntax}
+\defSyntax{unwind-protect}{
+\begin{syntaxx}
+    \scdef{unwind-protect-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{unwind-protect} \scref{protected-form} \\
+    \>\>  \scseqref{after-form} )
+ \end{syntaxx}}%
+\showSyntaxBox{unwind-protect}
 %
 \begin{arguments}
     \item[protected-form] A form.
@@ -1128,11 +1164,13 @@ called; {\tt loop} is called; etc..  This program loops indefinitely.
 \macro{quasiquote}
 %
 \Syntax
-\savesyntax\quasiquoteSyntax\vbox{\syntax
-quasiquote macro
-   = '(', 'quasiquote', skeleton, ')';
-\endsyntax}
-\syntaxtable{quasiquote}{\quasiquoteSyntax}
+\defSyntax{quasiquote}{
+\begin{syntaxx}
+    \scdef{quasiquote-form}: \ra{} \classref{object} \\
+    \> ( \macroref{quasiquote} \scref{skeleton} ) \\
+    \> `\scref{skeleton}
+\end{syntaxx}}%
+\showSyntaxBox{quasiquote}
 %
 \remarks%
 Quasiquotation is also known as backquoting.  A \macroref{quasiquote}d
@@ -1143,33 +1181,29 @@ abbreviated by using the glyph called {\em grave accent}
 (\verb+`+)\ttsubindex{quasiquote}{abbreviation with {\tt `}}, so that {\tt
     (\macroref{quasiquote} {\em expression})} can be written {\tt `{\em
         expression}}.
-%A complete definition of the syntax of quasiquote
-%expressions is given in syntax table~\ref{quasiquote-syntax}.
 
 \syntaxform{unquote}
-%
-\ttindex{unquote}
 \Syntax
-\savesyntax\unquoteSyntax\vbox{\syntax
-unquote syntax
-   = '(', 'unquote', form, ')'
-   | ',', form;
-\endsyntax}
-\syntaxtable{unquote}{\unquoteSyntax}
+\defSyntax{unquote}{
+\begin{syntaxx}
+    \scdef{unquote-form}: \ra{} \classref{object} \\
+    \>  ( \syntaxref{unquote} \scref{form} ) \\
+    \>  ,\scref{form}
+\end{syntaxx}}%
+\showSyntaxBox{unquote}
 %
 \remarks%
 See \syntaxref{unquote-splicing}.
 
 \syntaxform{unquote-splicing}
-\ttindex{unquote-splicing}
-%
 \Syntax
-\savesyntax\unquotespliceSyntax\vbox{\syntax
-unquotespliceing syntax
-   = '(', 'unquote-splicing', form, ')'
-   | ',@', form;
-\endsyntax}
-\syntaxtable{unquote-splicing}{\unquotespliceSyntax}
+\defSyntax{unquote-splicing}{
+\begin{syntaxx}
+    \scdef{unquote-splicing-form}: \ra{} \classref{object} \\
+    \>  ( \syntaxref{unquote-splicing} \scref{form} ) \\
+    \> ,@\scref{form}
+\end{syntaxx}}%
+\showSyntaxBox{unquote-splicing}
 %
 \remarks%
 The holes in a quasiquoted expression are identified by unquote expressions of
@@ -1218,37 +1252,37 @@ class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
 \showSyntax{defclass}
 \showSyntax{defgeneric}
 \showSyntax{defmethod}
-\usebox{\defconstantSyntax}
-\usebox{\deflocalSyntax}
-\usebox{\defmacroSyntax}
-\usebox{\defunSyntax}
+\showSyntax{defconstant}
+\showSyntax{deflocal}
+\showSyntax{defmacro}
+\showSyntax{defun}
 
 \ssclause{Syntax of Level-0 expressions}
 %
 \showSyntax{generic-lambda}
-\usebox{\lambdaSyntax}
-\usebox{\functioncallSyntax}
-\usebox{\quoteSyntax}
-\usebox{\setqSyntax}
-\usebox{\ifSyntax}
-\usebox{\letccSyntax}
-\usebox{\labelsSyntax}
-\usebox{\prognSyntax}
-\usebox{\unwindprotectSyntax}
-\usebox{\applySyntax}
+\showSyntax{lambda}
+\showSyntax{function-call}
+\showSyntax{quote}
+\showSyntax{setq}
+\showSyntax{if}
+\showSyntax{let/cc}
+\showSyntax{labels}
+\showSyntax{progn}
+\showSyntax{unwind-protect}
+\showSyntax{apply}
 
 \ssclause{Syntax of Level-0 macros}
 %
-\usebox{\condSyntax}
-\usebox{\andSyntax}
-\usebox{\orSyntax}
-\usebox{\blockSyntax}
-\usebox{\returnfromSyntax}
-\usebox{\letSyntax}
-\usebox{\letstarSyntax}
-\usebox{\quasiquoteSyntax}
-\usebox{\unquoteSyntax}
-\usebox{\unquotespliceSyntax}
+\showSyntax{cond}
+\showSyntax{and}
+\showSyntax{or}
+\showSyntax{block}
+\showSyntax{return-from}
+\showSyntax{let}
+\showSyntax{let*}
+\showSyntax{quasiquote}
+\showSyntax{unquote}
+\showSyntax{unquote-splicing}
 
 \flushbottom
 \end{optDefinition}
