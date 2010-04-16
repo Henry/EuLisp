@@ -255,7 +255,7 @@ as defined for \specopref{lambda} (see \ref{lambda-syntax-table}).
    \scdef{simple-defun}: \\
    \>  ( \syntaxref{defun} \scref{function-name} \scref{lambda-list} \\
    \>\>  \scseqref{form} ) \\
-   \scdef{setter defun}: \\
+   \scdef{setter-defun}: \\
    \>  ( \syntaxref{defun} ( \functionref{setter} \scref{function-name} )
    \scref{lambda-list} \\
    \>\>  \scseqref{form} ) \\
@@ -344,16 +344,16 @@ stores the definition (i) as the top-lexical binding of {\em function-name} or
 \showSyntaxBox{function-call}
 %
 \begin{arguments}
-    \item[operator] This may be a symbol---being either the name of a special
-    form, or a lexical variable---or a function call, which must result in an
-    instance of \classref{function}.
+    \item[\scref{operator}] This may be a symbol---being either the name of a
+    special form, or a lexical variable---or a function call, which must result
+    in an instance of \classref{function}.
 
-    An error is signalled (condition class:
-    \conditionref{invalid-operator}\indexcondition{invalid-operator}) if the
-    operator is not a function.
+    An error is signalled (condition class: \conditionref{invalid-operator}
+    \indexcondition{invalid-operator}) if the operator is not a function.
 
-    \item[operand\/$^*$] Each {\em operand} must be either an atomic expression,
-    a literal expression or a function call.
+    \item[\scseqref{operand}] Each {\em operand} must be either an
+    \scref{atomic-expression}, a \scref{literal-expression} or a
+    \scref{function-call-form}.
 \end{arguments}
 %
 \result%
@@ -1090,13 +1090,17 @@ environments.
 \begin{syntaxx}
     \scdef{unwind-protect-form}: \ra{} \classref{object} \\
     \>  ( \specopref{unwind-protect} \scref{protected-form} \\
-    \>\>  \scseqref{after-form} )
+    \>\>  \scseqref{after-form} ) \\
+    \scdef{protected-form}: \\
+    \> \scref{form} \\
+    \scdef{after-form}: \\
+    \> \scref{form}
  \end{syntaxx}}%
 \showSyntaxBox{unwind-protect}
 %
 \begin{arguments}
-    \item[protected-form] A form.
-    \item[after-form$^*$] A sequence of forms.
+    \item[\scdef{protected-form}] A form.
+    \item[\scseqref{after-form}] A sequence of forms.
 \end{arguments}
 %
 \result%
@@ -1168,7 +1172,9 @@ called; {\tt loop} is called; etc..  This program loops indefinitely.
 \begin{syntaxx}
     \scdef{quasiquote-form}: \ra{} \classref{object} \\
     \> ( \macroref{quasiquote} \scref{skeleton} ) \\
-    \> `\scref{skeleton}
+    \> `\scref{skeleton} \\
+    \scdef{skeleton}: \\
+    \>  \scref{form}
 \end{syntaxx}}%
 \showSyntaxBox{quasiquote}
 %

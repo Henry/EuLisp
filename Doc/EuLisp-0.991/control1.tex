@@ -10,11 +10,12 @@
 \specop{dynamic}
 %
 \Syntax
-\savesyntax\dynamicSyntax\vbox{\syntax
-dynamic form
-   = '(', 'dynamic', identifier, ')';
-\endsyntax}
-\syntaxtable{dynamic}{\dynamicSyntax}
+\defSyntax{dynamic}{
+\begin{syntaxx}
+    \scdef{dynamic-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{dynamic} \scref{identifier} )
+\end{syntaxx}}%
+\showSyntaxBox{dynamic}
 %
 \begin{arguments}
     \item[identifier] A symbol naming a dynamic binding.
@@ -29,11 +30,12 @@ visible binding exists, an error is signaled (condition:
 \specop{dynamic-setq}
 %
 \Syntax
-\savesyntax\dynamicSetqSyntax\vbox{\syntax
-dynamic setq form
-   = '(', 'dynamic-setq', identifier, form, ')';
-\endsyntax}
-\syntaxtable{dynamic-setq}{\dynamicSetqSyntax}
+\defSyntax{dynamic-setq}{
+\begin{syntaxx}
+    \scdef{dynamic-setq-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{dynamic-setq} \scref{identifier} \scref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{dynamic-setq}
 %
 \begin{arguments}
     \item[identifier] A symbol naming a dynamic binding to be updated.
@@ -64,13 +66,13 @@ dynamic variable has no visible dynamic binding.
 \specop{dynamic-let}
 %
 \Syntax
-\savesyntax\dynamicLetSyntax\vbox{\syntax
-dynamic let form
-   = '(', 'dynamic-let',
-     {binding}, (* \[\S\ref{control-0}\] *)
-     {form}, ')';
-\endsyntax}
-\syntaxtable{dynamic-let}{\dynamicLetSyntax}
+\defSyntax{dynamic-let}{
+\begin{syntaxx}
+    \scdef{dynamic-let-form}: \ra{} \classref{object} \\
+    \>  ( \specopref{dynamic-let} \scseqref{binding} \\
+    \>\>  \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{dynamic-let}
 %
 \begin{arguments}
     \item[binding\/$^*$] A list of binding specifiers.
@@ -96,11 +98,12 @@ returned as the result of \specopref{dynamic-let}.
 \defop{defglobal}
 %
 \Syntax
-\savesyntax\defglobalSyntax\vbox{\syntax
-defglobal form
-   = '(', 'defglobal', identifier, expression, ')';
-\endsyntax}
-\syntaxtable{defglobal}{\defglobalSyntax}
+\defSyntax{defglobal}{
+\begin{syntaxx}
+    \scdef{defglobal-form}: \ra{} \classref{object} \\
+    \> ( \defopref{defglobal} \scref{identifier} \scref{level-1-expression} )
+\end{syntaxx}}%
+\showSyntaxBox{defglobal}
 %
 \begin{arguments}
     \item[identifier] A symbol naming a top dynamic binding containing the value
@@ -157,13 +160,14 @@ exists.
 \macro{catch}
 %
 \Syntax
-\savesyntax\catchSyntax\vbox{\syntax
-catch macro
-   = '(', 'catch', tag, {form}, ')';
-tag
-   = symbol; (* \[\S\ref{symbol}\] *)
-\endsyntax}
-\syntaxtable{catch}{\catchSyntax}
+\defSyntax{catch}{
+\begin{syntaxx}
+    \scdef{catch-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{catch} \scref{tag} \scseqref{form} ) \\
+    \scdef{tag}: \\
+    \>  \scref{symbol}
+\end{syntaxx}}%
+\showSyntaxBox{catch}
 %
 \remarks%
 The \macroref{catch} operator is similar to \macroref{block}, except that the
@@ -206,11 +210,12 @@ could occur in the body of \macroref{catch} in this way.
 \macro{throw}
 %
 \Syntax
-\savesyntax\throwSyntax\vbox{\syntax
-throw macro
-   = '(', 'throw', tag, {form}, ')';
-\endsyntax}
-\syntaxtable{throw}{\throwSyntax}
+\defSyntax{throw}{
+\begin{syntaxx}
+    \scdef{throw-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{throw} \scref{tag} \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{throw}
 %
 \remarks%
 In \macroref{throw}, the {\em tag} names the continuation of the
@@ -249,21 +254,21 @@ section defining level-0.
 %
 \ssclause{Syntax of Level-1 defining forms}
 \showSyntax{defmodule-1}
-\usebox{\defclassSyntax}
-\usebox{\defgenericOneSyntax}
-\usebox{\defmethodOneSyntax}
-\usebox{\defglobalSyntax}
+\showSyntax{defclass-1}
+\showSyntax{defgeneric-1}
+\showSyntax{defmethod-1}
+\showSyntax{defglobal}
 %
 \ssclause{Syntax of Level-1 expressions}
-\usebox{\dynamicSyntax}
-\usebox{\dynamicSetqSyntax}
-\usebox{\dynamicLetSyntax}
-\usebox{\genericLambdaOneSyntax}
-\usebox{\methodLambdaOneSyntax}
+\showSyntax{dynamic}
+\showSyntax{dynamic-setq}
+\showSyntax{dynamic-let}
+\showSyntax{generic-1-lambda}
+\showSyntax{method-lambda}
 %
 % \ssclause{Syntax of Level-1 macros}
-\usebox{\catchSyntax}
-\usebox{\throwSyntax}
+\showSyntax{catch}
+\showSyntax{throw}
 %
 \flushbottom
 %

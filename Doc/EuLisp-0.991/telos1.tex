@@ -6,27 +6,26 @@
 %
 \Syntax
 \label{defclass-syntax}
-\savesyntax\defclassSyntax\vbox{\syntax
-defclass form
-   = '(', 'defclass',
-     class name, (* \[\S\ref{defclass}\] *)
-     superclass list,
-     defclass slot description list,
-     {defclass class option}, ')';
-superclass list
-   = '(', {superclass name}, ')'; (* \[\S\ref{defclass}\] *)
-defclass slot description list
-   = '(', {defclass slot description}, ')';
-defclass slot option
-   = 'initform', level 1 expression
-   | identifier, level 1 expression
-   | defclass slot option; (* \[\S\ref{defclass}\] *)
-defclass class option
-   = 'class', class name
-   | identifier, level 1 expression
-   | defclass class option; (* \[\S\ref{defclass}\] *)
-\endsyntax}
-\syntaxtable{defclass}{\defclassSyntax}
+\defSyntax{defclass-1}{
+\begin{syntaxx}
+    \scdef{defclass-1-form}: \\
+    \>  ( \defopref{defclass} \scref{class-name} \scref{superclass-list} \\
+    \>\>   \scref{defclass-slot-description-list} \\
+    \>\>   \scseqref{defclass-class-option} ) \\
+    \scdef{superclass-list}: \\
+    \>  ( \scseqref{superclass-name} ) \\
+    \scdef{defclass-slot-description-list}: \\
+    \>  ( \scseqref{defclass-slot-description} ) \\
+    \scdef{defclass-slot-option}: \\
+    \> initform \scref{level-1-expression} \\
+    \> \scref{identifier} \scref{level-1-expression} \\
+    \> \scref{defclass-slot-option} \\
+    \scdef{defclass-class-option} \\
+    \>  class \scref{class-name} \\
+    \>  \scref{identifier} \scref{level-1-expression} \\
+    \>  \scref{defclass-class-option}
+\end{syntaxx}}
+\showSyntaxBox{defclass-1}
 
 \begin{arguments}
     \item[class-name] A symbol naming a binding to be initialised with the new
@@ -171,25 +170,26 @@ The {\em class-option}\/s are interpreted as follows:
 \label{generic-lambda-1}
 %
 \Syntax
-\savesyntax\genericLambdaOneSyntax\vbox{\syntax
-generic lambda form
-   = '(', 'generic-lambda', gf lambda list,
-     {level 1 init option}, ')';
-level 1 init option
-   = 'class', class name
-   | 'method-class', class name
-   | 'method' level 1 method description
-   | identifier, level 1 expression;
-   | level 0 init option;
-level 1 method description
-   = '(', {method init option},
-     specialized lambda list,  (* \[\ref{defgeneric-0}\] *)
-     {form}, ')';
-method init option
-   = 'class', class name
-   | identifier level 1 expression
-\endsyntax}
-\syntaxtable{generic-lambda}{\genericLambdaOneSyntax}
+\defSyntax{generic-1-lambda}{
+\begin{syntaxx}
+    \scdef{generic-lambda-form}: \\
+    \>  ( \macroref{generic-lambda} \scref{gf-lambda-list} \\
+    \>\>  \scseqref{level-1-init-option} ) \\
+    \scdef{level-1-init-option}: \\
+    \>  class \scref{class-name} \\
+    \>  method-class \scref{class-name} \\
+    \>  method \scref{level-1-method-description} \\
+    \>  \scref{identifier} \scref{level-1-expression} \\
+    \>  \scref{level-0-init-option} \\
+    \scdef{level-1-method-description}: \\
+    \>  ( \scseqref{method-init-option} \\
+    \>\>  \scref{specialized-lambda-list} \\
+    \>\>  \scseqref{form} ) \\
+    \scdef{method-init-option}: \\
+    \>  class \scref{class-name} \\
+    \>  \scref{identifier} \scref{level-1-expression}
+\end{syntaxx}}
+\showSyntaxBox{generic-1-lambda}
 %
 \begin{arguments}
     \item[gf-lambda-list] As level-0.  See section~\ref{defgeneric-0}.
@@ -284,14 +284,13 @@ is the same as {\tt gf-1}.
 \label{defgeneric-1}
 %
 \Syntax
-\savesyntax\defgenericOneSyntax\vbox{\syntax
-defgeneric form
-   = '(', 'defgeneric',
-     gf name, (* \[\ref{defgeneric-0}\] *)
-     gf lambda list, (* \[\ref{defgeneric-0}\] *)
-     {level 1 init option}, ')';
-\endsyntax}
-\syntaxtable{defgeneric}{\defgenericOneSyntax}
+\defSyntax{defgeneric-1}{
+\begin{syntaxx}
+    \scdef{defgeneric-1-form}: \\
+    \>  ( \defopref{defgeneric} \scref{gf-name} \scref{gf-lambda-list} \\
+    \>\>  \scref{level-1-init-option} )
+\end{syntaxx}}
+\showSyntaxBox{defgeneric-1}
 %
 \begin{arguments}
     \item[gf name] As level-0.  See section~\ref{defgeneric-0}.
@@ -382,14 +381,15 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 
 \macro{method-lambda}
 \Syntax
-\savesyntax\methodLambdaOneSyntax\vbox{\syntax
-method lambda form
-   = '(', 'method-lambda',
-     {method init option}, (* \[\S\ref{generic-lambda-1}\] *)
-     specialized lambda list,
-     {form}, ')';
-\endsyntax}
-\syntaxtable{method-lambda}{\methodLambdaOneSyntax}
+\defSyntax{method-lambda}{
+\begin{syntaxx}
+    method-lambda-form: \ra{} \classref{function} \\
+    \>  ( \macroref{method-lambda} \\
+    \>\>  \scseqref{method-init-option} \\
+    \>\>  \scref{specialized-lambda-list} \\
+    \>\>  \scseqref{form} )
+\end{syntaxx}}
+\showSyntaxBox{method-lambda}
 %
 \begin{arguments}
     \item[method init option] A quoted symbol followed by an expression.
@@ -417,14 +417,15 @@ options, which are evaluated in the lexical and dynamic environment of
 
 \macro{defmethod}
 \Syntax
-\savesyntax\defmethodOneSyntax\vbox{\syntax
-defmethod form
-   = '(', 'defmethod', gf name,
-     {method init option}, (* \[\S\ref{generic-lambda-1}\] *)
-     specialized lambda list,
-     {form}, ')';
-\endsyntax}
-\syntaxtable{defmethod}{\defmethodOneSyntax}
+\defSyntax{defmethod-1}{
+\begin{syntaxx}
+    \scdef{defmethod-1-form}: \\
+    \>  ( \macroref{defmethod} \scref{gf-locator} \\
+    \>\>  \scseqref{method-init-option} \\
+    \>\>  \scref{specialized-lambda-list} \\
+    \>\>  \scseqref{form} )
+\end{syntaxx}}%
+\showSyntaxBox{defmethod-1}%
 %
 \remarks%
 The \macroref{defmethod} form of level-1 extends that of level-0 to accept
