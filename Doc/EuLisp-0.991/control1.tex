@@ -22,7 +22,7 @@
 \end{arguments}
 %
 \result%
-The value of closest dynamic binding of \sc{identifier} is returned.  If no
+The value of closest dynamic binding of \scref{identifier} is returned.  If no
 visible binding exists, an error is signaled (condition:
 \conditionref{unbound-dynamic-variable}
 \indexcondition{unbound-dynamic-variable}).
@@ -41,15 +41,15 @@ visible binding exists, an error is signaled (condition:
     \item[identifier] A symbol naming a dynamic binding to be updated.
 
     \item[form] An expression whose value will be stored in the dynamic binding
-    of \sc{identifier}.
+    of \scref{identifier}.
 \end{arguments}
 %
 \result%
-The value of {\em form}.
+The value of \scref{form}.
 %
 \remarks%
-The {\em form} is evaluated and the result is stored in the closest dynamic
-binding of \sc{identifier}.  If no visible binding exists, an error is
+The \scref{form} is evaluated and the result is stored in the closest dynamic
+binding of \scref{identifier}.  If no visible binding exists, an error is
 signalled (condition: \conditionref{unbound-dynamic-variable}
 \indexcondition{unbound-dynamic-variable}).
 
@@ -81,7 +81,7 @@ dynamic variable has no visible dynamic binding.
 \end{arguments}
 %
 \result%
-The sequence of {\em form}s is evaluated in order, returning the value of the
+The sequence of \scref{form}s is evaluated in order, returning the value of the
 last one as the result of the \specopref{dynamic-let} form.
 %
 \remarks%
@@ -91,8 +91,8 @@ from left to right in the current environment and the new bindings for the
 symbols named by the identifiers are created in the dynamic environment to hold
 the results.  These bindings have dynamic scope and dynamic extent
 \index{general}{scope and extent!of \specopref{dynamic-let} bindings}.  Each
-form in {\em body} is evaluated in order in the environment extended by the
-above bindings.  The result of evaluating the last form in {\em body} is
+form in \scref{body} is evaluated in order in the environment extended by the
+above bindings.  The result of evaluating the last form in \scref{body} is
 returned as the result of \specopref{dynamic-let}.
 
 \defop{defglobal}
@@ -107,19 +107,19 @@ returned as the result of \specopref{dynamic-let}.
 %
 \begin{arguments}
     \item[identifier] A symbol naming a top dynamic binding containing the value
-    of {\em form}.
+    of \scref{form}.
 
-    \item[form] The {\em form} whose value will be stored in the top dynamic
-    binding of \sc{identifier}.
+    \item[form] The \scref{form} whose value will be stored in the top dynamic
+    binding of \scref{identifier}.
 \end{arguments}
 %
 \remarks%
-The value of {\em form} is stored as the top dynamic value of the symbol named
-by \sc{identifier} \index{general}{binding!top dynamic}.  The binding created by
+The value of \scref{form} is stored as the top dynamic value of the symbol named
+by \scref{identifier} \index{general}{binding!top dynamic}.  The binding created by
 \defopref{defglobal} is mutable.  An error is signaled (condition:
 \conditionref{dynamic-multiply-defined}
 \indexcondition{dynamic-multiply-defined}), on processing this form more than
-once for the same \sc{identifier}.
+once for the same \scref{identifier}.
 %
 \begin{note}
     The problems engendered by cross-module reference necessitated by a single
@@ -171,28 +171,28 @@ exists.
 %
 \remarks%
 The \macroref{catch} operator is similar to \macroref{block}, except that the
-scope of the name ({\em tag}) of the exit function is dynamic.  The catch {\em
-    tag} must be a \syntaxref{symbol} because it is used as a dynamic variable
-to create a dynamically scoped binding of {\em tag} to the continuation of the
-\macroref{catch} form.  The continuation can be invoked anywhere within the
-dynamic extent of the \macroref{catch} form by using \macroref{throw}.  The {\em
-    form}s are evaluated in sequence and the value of the last one is returned
-as the value of the \macroref{catch} form.
+scope of the name (\scref{tag}) of the exit function is dynamic.  The catch
+\scref{tag} must be a \syntaxref{symbol} because it is used as a dynamic
+variable to create a dynamically scoped binding of \scref{tag} to the
+continuation of the \macroref{catch} form.  The continuation can be invoked
+anywhere within the dynamic extent of the \macroref{catch} form by using
+\macroref{throw}.  The \scref{form}s are evaluated in sequence and the value of
+the last one is returned as the value of the \macroref{catch} form.
 %
 \rewriterules
 %
 \begin{RewriteTable}{catch}{lll}
     (\macroref{catch}) & \rewrite &
         {\rm Is an error}\\
-    (\macroref{catch} \sc{tag}) & \rewrite &
-        (\specopref{progn} \sc{tag} ())\\
-    (\macroref{catch} \sc{tag} \scseq{form}) & \rewrite &
+    (\macroref{catch} \scref{tag}) & \rewrite &
+        (\specopref{progn} \scref{tag} ())\\
+    (\macroref{catch} \scref{tag} \scseqref{form}) & \rewrite &
     \begin{minipage}[t]{0.3\columnwidth}
     \begin{tabbing}
         00\=00\= \kill
         (\specopref{let/cc} tmp\\
-        \>(\specopref{dynamic-let} ((\sc{tag} tmp))\\
-        \>\>\scseq{form}))
+        \>(\specopref{dynamic-let} ((\scref{tag} tmp))\\
+        \>\>\scseqref{form}))
     \end{tabbing}
     \end{minipage}
 \end{RewriteTable}
@@ -218,23 +218,23 @@ could occur in the body of \macroref{catch} in this way.
 \showSyntaxBox{throw}
 %
 \remarks%
-In \macroref{throw}, the {\em tag} names the continuation of the
+In \macroref{throw}, the \scref{tag} names the continuation of the
 \macroref{catch} from which to return.  \macroref{throw} is the invocation of
-the continuation\index{general}{continuation} of the catch named {\em tag}.  The
-{\em form} is evaluated and the value are returned as the value of the catch
-named by {\em variable}.  The {\em tag} ia a symbol because it used to access
-the current dynamic binding of the symbol, which is where the continuation is
-bound.
+the continuation\index{general}{continuation} of the catch named \scref{tag}.
+The \scref{form} is evaluated and the value are returned as the value of the
+catch named by \scref{variable}.  The \scref{tag} ia a symbol because it used to
+access the current dynamic binding of the symbol, which is where the
+continuation is bound.
 %
 \rewriterules
 %
 \begin{RewriteTable}{throw}{lll}
     (\macroref{throw}) & \rewrite &
         {\rm Is an error}\\
-    (\macroref{throw} \sc{tag}) & \rewrite &
-        ((\specopref{dynamic} \sc{tag}) ())\\
-    (\macroref{throw} \sc{tag} \sc{form}) & \rewrite &
-        ((\specopref{dynamic} \sc{tag}) \sc{form})
+    (\macroref{throw} \scref{tag}) & \rewrite &
+        ((\specopref{dynamic} \scref{tag}) ())\\
+    (\macroref{throw} \scref{tag} \scref{form}) & \rewrite &
+        ((\specopref{dynamic} \scref{tag}) \scref{form})
 \end{RewriteTable}
 %
 \seealso%

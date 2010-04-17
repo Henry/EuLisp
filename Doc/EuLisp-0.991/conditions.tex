@@ -97,23 +97,27 @@ hierarchy is shown in table~\ref{condition-class-hierarchy}.
 %
 \Syntax
 \label{defcondition-syntax}
-\savesyntax\defconditionSyntax\vbox{\syntax
-defcondition form
-   = '(', 'defcondition',
-     condition class name,
-     condition superclass name,
-     {slot name}, ')';
-\endsyntax}
-\syntaxtable{defcondition}{\defconditionSyntax}
+\defSyntax{defcondition}{
+\begin{syntaxx}
+    \scdef{defcondition-form}: \\
+    \>  ( \defopref{defcondition} \scref{condition-class-name} \\
+    \>\>  \scref{condition-superclass-name} \\
+    \>\>  \scseqref{slot-name} ) \\
+    \scdef{condition-class-name}: \\
+    \> \scref{identifier} \\
+    \scdef{condition-superclass-name}: \\
+    \> \scref{identifier}
+\end{syntaxx}}%
+\showSyntaxBox{defcondition}
 %
 \begin{arguments}
-    \item[condition class name] A symbol naming a binding to be initialized with
-    the new condition class.
+    \item[\scref{condition-class-name}] A symbol naming a binding to be
+    initialized with the new condition class.
 
-    \item[superclass name] A symbol naming a binding of a class to be used as
-    the superclass of the new condition class.
+    \item[\scref{condition-superclass-name}] A symbol naming a binding of a
+    class to be used as the superclass of the new condition class.
 
-    \item[slot names] A sequence of keywords used to name and to
+    \item[\scseqref{slot-name}] A sequence of keywords used to name and to
     identify additional slots begin defined for this condition class.
 \end{arguments}
 %
@@ -372,12 +376,12 @@ case of the above error.
 %
 \Syntax
 \label{call-next-handler-syntax}
-\savesyntax\callnexthandlerSyntax\vbox{
-\syntax
-call-next-handler form
-   = '(', 'call-next-handler', ')';
-\endsyntax}
-\syntaxtable{call-next-handler}{\callnexthandlerSyntax}
+\defSyntax{call-next-handler}{
+\begin{syntaxx}
+    \scdef{call-next-handler-form}: \\
+    \>  ( \specopref{call-next-handler} )
+\end{syntaxx}}%
+\showSyntaxBox{call-next-handler}
 %
 \remarks%
 The \specopref{call-next-handler} special form calls the next enclosing
@@ -392,16 +396,15 @@ generic handler function).
 %
 \Syntax
 \label{with-handler-syntax}
-\savesyntax\withhandlerSyntax\vbox{
-\syntax
-with-handler form
-   = '(', 'with-handler',
-     handler function,
-     {forms}, ')';
-handler function
-   = level 0 expression;
-\endsyntax}
-\syntaxtable{with-handler}{\withhandlerSyntax}
+\defSyntax{with-handler}{
+\begin{syntaxx}
+    \scdef{with-handler-form}: \\
+    \>  ( \specopref{with-handler} \scref{handler-function} \\
+    \>\>  \scseqref{forms} ) \\
+    \scdef{handler-function}: \\
+    \>  \scref{level-0-expression}
+\end{syntaxx}}%
+\showSyntaxBox{with-handler}
 %
 \begin{arguments}
     \item[handler-function] The result of evaluating the handler function

@@ -858,45 +858,49 @@ connected to the file system object identified by {\em path}.
 \macro{with-input-file}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withinputfileSyntax\vbox{\syntax
-with-input-file macro
-   = '(', 'with-input-file', path,  {form}, ')';
-\endsyntax}
-\syntaxtable{with-input-file}{\withinputfileSyntax}
+\defSyntax{with-input-file}{
+\begin{syntaxx}
+    \scdef{with-input-file-form}: \ra{} \classref{object} \\
+   \>  ( \macroref{with-input-file} \scref{path} \\
+   \>\>  \scref{body} )
+\end{syntaxx}}%
+\showSyntaxBox{with-input-file}
 
 % ------------------------------------------------------------------------------
 \macro{with-output-file}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withoutputfileSyntax\vbox{\syntax
-with-output-file macro
-   = '(', 'with-output-file', path,  {form}, ')';
-\endsyntax}
-\syntaxtable{with-output-file}{\withoutputfileSyntax}
+\defSyntax{with-output-file}{
+\begin{syntaxx}
+    \scdef{with-output-file-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{with-output-file} \scref{path} \\
+    \>\>  \scref{body} )
+\end{syntaxx}}%
+\showSyntaxBox{with-output-file}
 
 % ------------------------------------------------------------------------------
 \macro{with-source}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withsourceSyntax\vbox{\syntax
-with-source macro
-   = '(', 'with-source',
-          '(', identifier, expression, ')',
-          {form}, ')';
-\endsyntax}
-\syntaxtable{with-source}{\withsourceSyntax}
+\defSyntax{with-source}{
+\begin{syntaxx}
+    \scdef{with-source-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{with-source} ( \scref{identifier} \scref{expression} ) \\
+    \>\>  \scref{body} )
+\end{syntaxx}}%
+\showSyntaxBox{with-source}
 
 % ------------------------------------------------------------------------------
 \macro{with-sink}
 % ------------------------------------------------------------------------------
 \Syntax
-\savesyntax\withsinkSyntax\vbox{\syntax
-with-sink macro
-   = '(', 'with-sink',
-          '(', identifier, expression, ')',
-          {form}, ')';
-\endsyntax}
-\syntaxtable{with-sink}{\withsinkSyntax}
+\defSyntax{with-sink}{
+\begin{syntaxx}
+    \scdef{with-sink-form}: \ra{} \classref{object} \\
+    \>  ( \macroref{with-sink} ( \scref{identifier} \scref{expression} ) \\
+    \>\>  \scref{body} )
+\end{syntaxx}}%
+\showSyntaxBox{with-sink}
 
 \end{optDefinition}
 %

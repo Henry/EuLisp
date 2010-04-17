@@ -361,17 +361,6 @@
     \let\scdef=\orig@scdef%
 }
 
-% Old macro
-\gdef\savesyntax#1{\newbox#1\global\setbox#1}
-
-% Old macro
-\newcommand{\syntaxtable}[2]
-{%
-    \ttsubindex{#1}{syntax table}%
-    \index{general}{syntax tables!#1@{\tt #1}}%
-    \syntaxBox{#2}%
-}
-
 % ------------------------------------------------------------------------------
 %%% Function Signature
 %%%  Function Signature sub-clause
