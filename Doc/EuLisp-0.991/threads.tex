@@ -143,9 +143,9 @@ guaranteed to have the opportunity to change the data.  If it is not
 using a lock, the fairness guarantee ensures that in the same
 scenario the following loop will exit eventually:
 %
-{\syntax
+{\codeExample
 (while (= data 0) (thread-reschedule))
-\endsyntax}
+\endCodeExample}
 %
 \end{optDefinition}
 
@@ -293,14 +293,14 @@ This code fragment copies characters from stream {\tt s} to the
 current output stream until no data is received on the stream for a
 period of at least 1 second.
 %
-{\syntax
+{\codeExample
 (labels
   ((loop ()
      (when (wait s (round ticks-per-second))
            (print (read-char s))
            (loop))))
    (loop))
-\endsyntax}
+\endCodeExample}
 %
 \seealso%
 threads (section~\ref{thread}), streams (section~\ref{stream}).

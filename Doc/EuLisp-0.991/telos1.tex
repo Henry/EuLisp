@@ -7,7 +7,7 @@
 \Syntax
 \label{defclass-syntax}
 \defSyntax{defclass-1}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defclass-1-form}: \\
     \>  ( \defopref{defclass} \scref{class-name} \scref{superclass-list} \\
     \>\>   \scref{defclass-slot-description-list} \\
@@ -24,7 +24,7 @@
     \>  class \scref{class-name} \\
     \>  \scref{identifier} \scref{level-1-expression} \\
     \>  \scref{defclass-class-option}
-\end{syntaxx}}
+\end{syntax}}
 \showSyntaxBox{defclass-1}
 
 \begin{arguments}
@@ -171,7 +171,7 @@ The {\em class-option}\/s are interpreted as follows:
 %
 \Syntax
 \defSyntax{generic-1-lambda}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{generic-lambda-form}: \\
     \>  ( \macroref{generic-lambda} \scref{gf-lambda-list} \\
     \>\>  \scseqref{level-1-init-option} ) \\
@@ -188,7 +188,7 @@ The {\em class-option}\/s are interpreted as follows:
     \scdef{method-init-option}: \\
     \>  class \scref{class-name} \\
     \>  \scref{identifier} \scref{level-1-expression}
-\end{syntaxx}}
+\end{syntax}}
 \showSyntaxBox{generic-1-lambda}
 %
 \begin{arguments}
@@ -254,7 +254,7 @@ methods on a generic function.  These are interpreted as follows:
 \defopref{defgeneric}) is defined.  In all other respects the resulting object
 is the same as {\tt gf-1}.
 %
-{\syntax
+{\codeExample
 (generic-lambda (arg1 (arg2 <class-a>))
 
   class <another-gf-class>
@@ -275,7 +275,7 @@ is the same as {\tt gf-1}.
           ((m3-arg1 <class-f>) (m3-arg2 <class-g>))
           ...)
 )
-\endsyntax}
+\endCodeExample}
 %
 \seealso%
 \defopref{defgeneric}.
@@ -285,11 +285,11 @@ is the same as {\tt gf-1}.
 %
 \Syntax
 \defSyntax{defgeneric-1}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defgeneric-1-form}: \\
     \>  ( \defopref{defgeneric} \scref{gf-name} \scref{gf-lambda-list} \\
     \>\>  \scref{level-1-init-option} )
-\end{syntaxx}}
+\end{syntax}}
 \showSyntaxBox{defgeneric-1}
 %
 \begin{arguments}
@@ -354,7 +354,7 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 )\end{verbatim}}
 %
 \end{optPrivate}
-{\syntax
+{\codeExample
 (defgeneric gf-1 (arg1 (arg2 <class-a>))
 
   class <another-gf-class>
@@ -375,20 +375,20 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
           ((m3-arg1 <class-f>) (m3-arg2 <class-g>))
           ...)
 )
-\endsyntax}
+\endCodeExample}
 
 \sclause{Methods}
 
 \macro{method-lambda}
 \Syntax
 \defSyntax{method-lambda}{
-\begin{syntaxx}
+\begin{syntax}
     method-lambda-form: \ra{} \classref{function} \\
     \>  ( \macroref{method-lambda} \\
     \>\>  \scseqref{method-init-option} \\
     \>\>  \scref{specialized-lambda-list} \\
     \>\>  \scseqref{form} )
-\end{syntaxx}}
+\end{syntax}}
 \showSyntaxBox{method-lambda}
 %
 \begin{arguments}
@@ -418,13 +418,13 @@ options, which are evaluated in the lexical and dynamic environment of
 \macro{defmethod}
 \Syntax
 \defSyntax{defmethod-1}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defmethod-1-form}: \\
     \>  ( \macroref{defmethod} \scref{gf-locator} \\
     \>\>  \scseqref{method-init-option} \\
     \>\>  \scref{specialized-lambda-list} \\
     \>\>  \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{defmethod-1}%
 %
 \remarks%

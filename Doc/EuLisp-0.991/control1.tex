@@ -11,10 +11,10 @@
 %
 \Syntax
 \defSyntax{dynamic}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{dynamic-form}: \ra{} \classref{object} \\
     \>  ( \specopref{dynamic} \scref{identifier} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{dynamic}
 %
 \begin{arguments}
@@ -31,10 +31,10 @@ visible binding exists, an error is signaled (condition:
 %
 \Syntax
 \defSyntax{dynamic-setq}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{dynamic-setq-form}: \ra{} \classref{object} \\
     \>  ( \specopref{dynamic-setq} \scref{identifier} \scref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{dynamic-setq}
 %
 \begin{arguments}
@@ -67,11 +67,11 @@ dynamic variable has no visible dynamic binding.
 %
 \Syntax
 \defSyntax{dynamic-let}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{dynamic-let-form}: \ra{} \classref{object} \\
     \>  ( \specopref{dynamic-let} \scseqref{binding} \\
     \>\>  \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{dynamic-let}
 %
 \begin{arguments}
@@ -99,10 +99,10 @@ returned as the result of \specopref{dynamic-let}.
 %
 \Syntax
 \defSyntax{defglobal}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defglobal-form}: \ra{} \classref{object} \\
     \> ( \defopref{defglobal} \scref{identifier} \scref{level-1-expression} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{defglobal}
 %
 \begin{arguments}
@@ -161,12 +161,12 @@ exists.
 %
 \Syntax
 \defSyntax{catch}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{catch-form}: \ra{} \classref{object} \\
     \>  ( \macroref{catch} \scref{tag} \scseqref{form} ) \\
     \scdef{tag}: \\
     \>  \scref{symbol}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{catch}
 %
 \remarks%
@@ -211,10 +211,10 @@ could occur in the body of \macroref{catch} in this way.
 %
 \Syntax
 \defSyntax{throw}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{throw-form}: \ra{} \classref{object} \\
     \>  ( \macroref{throw} \scref{tag} \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{throw}
 %
 \remarks%

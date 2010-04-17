@@ -1,7 +1,7 @@
 %%% ----------------------------------------------------------------------------
 \typeout{Document style `EuLisp'  - May 89, July 92, Mar 2010}
 
-\RequirePackage{ifthen}%
+\RequirePackage{ifthen}
 
 % ------------------------------------------------------------------------------
 %%% Default page layout
@@ -67,12 +67,8 @@
 \newcommand*{\module}{\undefmod}
 
 \newcommand*{\indexfunc}[1]{\index{function}{#1@{\tt{}#1} (\module)}}
-\newcommand*{\indexgen}[1]{\index{generic}{#1@{\tt{}#1} (\module)}}
 \newcommand*{\indexmeth}[1]{\index{method}{#1@{\tt{}#1} (\module)}}
-\newcommand*{\indexmac}[1]{\index{macro}{#1@{\tt{}#1} (\module)}}
-\newcommand*{\indexconst}[1]{\index{constant}{#1@{\tt{}#1} (\module)}}
 \newcommand*{\indexcondition}[1]{\index{condition}{#1@{\tt{}#1} (\module)}}
-\newcommand*{\indexkeyword}[1]{\index{keyword}{#1@{\tt{}#1} (\module)}}
 \newcommand*{\indexmodule}[1]{\index{module}{#1@{\tt{}#1} (\module)}}
 
 \renewcommand{\printindex}[2]
@@ -125,6 +121,9 @@
     \vskip -5pt%
 }
 
+% ------------------------------------------------------------------------------
+%%% Entry sub-clauses
+
 %%%  function
 \newcommand*{\functionlabel}[1]{function:#1}
 \newcommand{\functionlabeled}[2]
@@ -141,7 +140,7 @@
 \newcommand*{\functionref}[1]{\hyperref[\functionlabel{#1}]{{\tt #1}}}
 \newcommand*{\functionreflabel}[2]{\hyperref[\functionlabel{#2}]{{\tt #1}}}
 
-%%% Setter function
+%%%  Setter function
 \newcommand*{\setterlabel}[1]{setter:#1}
 \newcommand{\setter}[1]
 {%
@@ -152,7 +151,7 @@
 }
 \newcommand*{\setterref}[1]{\hyperref[\setterlabel{#1}]{{\tt #1}}}
 
-%%% Converter function
+%%%  Converter function
 \newcommand*{\converterlabel}[1]{converter:#1}
 \newcommand{\converter}[1]
 {%
@@ -163,14 +162,14 @@
 }
 \newcommand*{\converterref}[1]{\hyperref[\converterlabel{#1}]{{\tt <#1>}}}
 
-%%% Generic function
+%%%  Generic function
 \newcommand*{\genericlabel}[1]{generic:#1}
 \newcommand{\genericlabeled}[2]
 {%
     \entryclause{#1}{generic function}%
     \label{\genericlabel{#2}}%
     \ttindexdef{#1}%
-    \indexgen{#1}%
+    \index{generic}{#1@{\tt{}#1} (\module)}%
 }
 \newcommand*{\generic}[1]
 {%
@@ -185,12 +184,12 @@
 {%
     \entryclause{#1}{method}%
     \label{\methodlabel{#1}}%
-    \ttindexdef{#1}%
+    \ttindex{#1}%
     \indexmeth{#1}%
 }
 \newcommand*{\methodref}[1]{\hyperref[\methodlabel{#1}]{{\tt #1}}}
 
-%%%  Syntax
+%%%  Syntax form
 \newcommand*{\syntaxlabel}[1]{syntax:#1}
 \newcommand{\syntaxform}[1]
 {%
@@ -219,7 +218,7 @@
     \entryclause{#1}{macro}%
     \label{\macrolabel{#1}}%
     \ttindexdef{#1}%
-    \indexmac{#1}%
+    \index{macro}{#1@{\tt{}#1} (\module)}%
 }
 \newcommand*{\macroref}[1]{\hyperref[\macrolabel{#1}]{{\tt{}#1}}}
 
@@ -229,7 +228,8 @@
 {%
     \entryclause{#1}{defining operator}%
     \label{\defoplabel{#1}}%
-    \ttindexdef{#1}\index{general}{defining operator!#1}%
+    \ttindexdef{#1}%
+    \index{general}{defining operator!#1}%
 }
 \newcommand*{\defopref}[1]{\hyperref[\defoplabel{#1}]{{\tt{}#1}}}
 
@@ -240,9 +240,18 @@
     \entryclause{#1 \classref{#2}}{constant}
     \label{\constantlabel{#1}}%
     \ttindexdef{#1}%
-    \indexconst{#1}%
+    \index{constant}{#1@{\tt{}#1} (\module)}
 }
 \newcommand*{\constantref}[1]{\hyperref[\constantlabel{#1}]{{\tt{}#1}}}
+
+%%% Class alias
+\newcommand{\classalias}[2]
+{%
+    \entryclause{<#1> \classref{#2}}{constant}
+    \label{\constantlabel{#1}}%
+    \index{general}{#1@{\tt <#1>}|hyperem}%
+    \index{constant}{#1@{\tt{}<#1>} (\module)}%
+}
 
 %%%  Class
 \newcommand*{\classlabel}[1]{class:#1}
@@ -250,17 +259,17 @@
 {%
     \entryclause{<#1>}{class}%
     \label{\classlabel{#1}}%
-    \index{general}{#1@{\tt <#1>}}%
+    \index{general}{#1@{\tt <#1>}|hyperem}%
     \index{class}{#1@{\tt{}<#1>} (\module)}%
 }
 \newcommand*{\classref}[1]{\hyperref[\classlabel{#1}]{{\tt{}<#1>}}}
 
-%%% Derived class
+%%%  Derived class
 \newcommand{\derivedclass}[2]
 {%
     \entryclause{<#1> \classref{#2}}{class}%
     \label{\classlabel{#1}}%
-    \index{general}{#1@{\tt <#1>}}%
+    \index{general}{#1@{\tt <#1>}|hyperem}%
     \index{class}{#1@{\tt{}<#1>} (\module)}%
 }
 
@@ -274,7 +283,7 @@
 }
 \newcommand*{\instanceref}[1]{\hyperref[\instancelabel{#1}]{{\tt{}#1}}}
 
-%%% Condition
+%%%  Condition
 \newcommand*{\conditionlabel}[1]{condition:#1}
 \newcommand{\condition}[2]
 {%
@@ -284,20 +293,31 @@
 }
 \newcommand*{\conditionref}[1]{\hyperref[\conditionlabel{#1}]{{\tt{}<#1>}}}
 
-%%% Keyword
+%%%  Keyword
 \newcommand*{\keywordlabel}[1]{keyword:#1}
 \newcommand{\keyworddef}[1]
 {%
     {\tt #1}%
     \label{\keywordlabel{#1}}%
     \ttindexdef{#1}%
-    %\indexkeyword{#1}%
+    % \index{keyword}{#1@{\tt{}#1} (\module)}%
 }
 \newcommand*{\keywordref}[1]{\hyperref[\keywordlabel{#1}]{{\tt{}#1}}}
 
+%%%  Result
+\newcommand*{\result}{\syntaxssclause*{\syntaxssclausefont Result}\vskip -8pt}
+
+%%%  Remarks
+\newcommand*{\remarks}{\syntaxssclause*{\syntaxssclausefont Remarks}\vskip -8pt}
+
+%%%  Examples
+\newcommand*{\examples}{\syntaxssclause*{\syntaxssclausefont Examples}\vskip -8pt}
+
+%%%  See also
+\renewcommand*{\seealso}{\syntaxssclause*{\syntaxssclausefont See~also}\vskip -8pt}
+
 % ------------------------------------------------------------------------------
 %%% Syntax
-%%%  Syntax sub-clause
 
 \newcounter{syntaxssclause}[entryclause]
 \renewcommand*{\thesyntaxssclause}{\theentryclause.\arabic{syntaxssclause}}
@@ -320,21 +340,19 @@
     \vskip -8pt%
 }
 
-%%%  Syntax box/table (not a float)
+%%%  Syntax box
 
 \newcommand*{\defSyntax}[1]{\expandafter\def\csname #1 Syntax\endcsname}
 
-% syntaxx is a temporary name for the new syntax environment
-% until the use of the old syntax macro is replaced in the whole text
-\newenvironment{syntaxx}
+\newenvironment{syntax}
 {%
     \begin{minipage}{\linewidth}%
-    \tt%
-    \begin{tabbing}%
-    000000\=00\=00\=0000000000000000000000000000000\=\kill%
-}%
-{%
-    \end{tabbing}%
+        \tt%
+        \begin{tabbing}%
+            000000\=00\=00\=0000000000000000000000000000000\=\kill%
+        }%
+        {%
+        \end{tabbing}%
     \end{minipage}%
 }
 
@@ -361,9 +379,32 @@
     \let\scdef=\orig@scdef%
 }
 
+%%%  Syntax category macros with hyper-referencing
+
+\renewcommand*{\sc}[1]{{\normalfont\em{}#1}}
+
+\newcommand*{\scopt}[1]{\sc{#1$_{opt}$}}
+\newcommand*{\scseq}[1]{\sc{#1$^{*}$}}
+\newcommand*{\scSeq}[1]{\sc{#1$^{+}$}}
+
+\newcommand*{\scgopt}[1]{\scopt{\{#1\}}}
+\newcommand*{\scgseq}[1]{\scseq{\{#1\}}}
+\newcommand*{\scgSeq}[1]{\scSeq{\{#1\}}}
+
+\newcommand*{\sclabel}[1]{sc:#1}
+\newcommand{\scdef}[1]
+{%
+    \sc{#1}%
+    \label{\sclabel{#1}}%
+    \ttindex{#1}\index{general}{syntax category!#1}%
+}
+\newcommand*{\scref}[1]{\hyperref[\sclabel{#1}]{\sc{#1}}}
+\newcommand*{\scoptref}[1]{\hyperref[\sclabel{#1}]{\scopt{#1}}}
+\newcommand*{\scseqref}[1]{\hyperref[\sclabel{#1}]{\scseq{#1}}}
+\newcommand*{\scSeqref}[1]{\hyperref[\sclabel{#1}]{\scSeq{#1}}}
+
 % ------------------------------------------------------------------------------
 %%% Function Signature
-%%%  Function Signature sub-clause
 
 \newcommand*{\Signature}
 {%
@@ -396,25 +437,21 @@
 
 % ------------------------------------------------------------------------------
 %%% Rewrite-rules
-%%% Rewrite-rules sub-clause
 
 \newcommand*{\rewriterules}{\syntaxssclause{\syntaxssclausefont Rewrite Rules}}
-
-%%% Rewrite-rules box/table (not a float)
-
-% \setlength{\FrameSep}{4pt}
 
 \newenvironment{RewriteTable}[2]
 {%
     \ttsubindex{#1}{rewrite rules}%
     \index{general}{rewrite rules!#1@{\tt #1}}%
-    % \begin{framed}%
     \begin{tabular}{#2}%
-    }
-    {%
-    \end{tabular}%
-    % \end{framed}%
 }
+{%
+    \end{tabular}%
+}
+
+\newcommand*{\rewrite}{{$\equiv$}}
+\newcommand*{\tts}{{\tt\phantom{00}}}
 
 % ------------------------------------------------------------------------------
 %%% Syntax Description Sub-clauses
@@ -513,20 +550,12 @@
     \stopoptionsquote%
 }
 
-% ------------------------------------------------------------------------------
-%%% Other Entry sub-clauses
-
-\newcommand*{\result}{\syntaxssclause*{\syntaxssclausefont Result}\vskip -8pt}
-\newcommand*{\remarks}{\syntaxssclause*{\syntaxssclausefont Remarks}\vskip -8pt}
-\newcommand*{\examples}{\syntaxssclause*{\syntaxssclausefont Examples}\vskip -8pt}
-\renewcommand*{\seealso}{\syntaxssclause*{\syntaxssclausefont See~also}\vskip -8pt}
-
 %%%  Sub-classes
 
 \newcommand*{\subclasslabel}[1]{{\tt{}<#1>}\thinspace:}
 \newenvironment{subclasses}
 {%
-    %\syntaxssclause*{\syntaxssclausefont Sub-classes}%
+    % \syntaxssclause*{\syntaxssclausefont Sub-classes}%
     \optionsquote%
     \vskip -8pt%
     \list{}{\let\makelabel\subclasslabel}%
@@ -536,7 +565,7 @@
     \stopoptionsquote%
 }
 
-%%% functions
+%%%  Accessor Functions
 
 \newcommand*{\functionslabel}[1]{\indexfunc{#1}\ttindex{#1}{\tt{}#1}\thinspace:}
 \newenvironment{functions}
@@ -550,150 +579,6 @@
     \endlist%
     \stopoptionsquote%
 }
-
-% ------------------------------------------------------------------------------
-%%% Sub-definition
-% Amalgam of subclause and definition to get the right level of numbering on
-% the heading but no toc entry.
-
-\newcounter{subdefinition}[entryclause]
-\renewcommand*{\thesubdefinition}{\theclause .\arabic{subdefinition}}
-\newcommand*{\l@subdefinition}{\@gobbletwo}
-\newcommand*{\subdefinitionmark}[1]{}
-\newcommand{\subdefinition}[1]
-{%
-    \@startsection{subdefinition}{3}{\z@}%
-    {2ex plus 1ex minus .2ex}%
-    {-.5em plus -.1em minus -.1em}%
-    {\normalsize\bfseries}%
-    {\protect{\normalsize\bfseries#1:\thinspace}}%
-}
-
-% ------------------------------------------------------------------------------
-%%% EuLisp syntax and code typesetting macros
-
-% Enable white-space counting?
-{\obeyspaces\gdef\enablespaces{\obeyspaces\let \@xobeysp}}
-
-\newcommand{\enabletex}
-{%
-    \relax%
-    \def\[{\endgroup\begingroup\def\]{\endgroup\restart}}%
-}
-
-\newcommand{\enablemacros}{\catcode`\\=0\relax}
-\newcommand{\disablemacros}{\catcode`\\=\other}
-
-\newcommand*{\syntaxfont}{\tt}
-\newcommand*{\syntaxcommentfont}{\it}
-
-\newdimen\syntaxindent \syntaxindent=0.5cm%
-
-\newcommand*{\syntaxbeforehook}{\vskip4pt}
-\newcommand*{\syntaxbegineveryline}{\relax}
-\newcommand*{\syntaxendeveryline}{\relax}
-\newcommand*{\syntaxafterhook}{\vskip-5pt}
-
-\newif\iffirstsyntaxpar
-
-\newcommand{\@@syntax}
-{%
-    \begingroup%
-    \def\verbatimpar{\iffirstsyntaxpar%
-        \global\firstsyntaxparfalse\syntaxbegineveryline\else%
-        \syntaxendeveryline\@@par\leavevmode\syntaxbegineveryline\fi}\relax%
-    \def\endsyntax{\syntaxendeveryline\endgroup\endsyntax}\frenchspacing%
-    \syntaxverbatim\enablespaces\disablesyntaxcomment%
-    \enabletex\disablebackslash\enablemacros%
-    \syntaxfont%
-}
-
-\newcommand{\syntax}
-{%
-    \begingroup\syntaxbeforehook%
-    \let\restart=\@@syntax%
-    \def\verbatimpar{\relax}\global\firstsyntaxpartrue%
-    \def\par{\verbatimpar}\obeylines%
-    \def\endsyntax{\@@par\syntaxafterhook\endgroup}\relax%
-    \rightskip\z@\leftskip\@totalleftmargin%
-    \advance\leftskip by\syntaxindent%
-    \parindent\z@\parfillskip\@flushglue%
-    \parskip\z@\itemsep=\z@\parsep=\z@\@@syntax%
-}
-
-%  How to recognize comments that begin with a precise character
-\newcommand*{\syntaxcommentsign}{;}
-
-{\catcode`\;=\active
- \gdef\enablesyntaxcomment{\catcode`\;=\active
-    \def;{\syntaxcomment}}\relax
- \gdef\disablesyntaxcomment{\catcode`\;=\other
-    \def;{\syntaxcommentsign}}}
-
-\newcommand{\syntaxcomment}
-{%
-    \endgroup\begingroup%
-    \def\verbatimpar{\ifmmode$\fi\endgroup\restart\verbatimpar}\relax%
-    \def\endsyntax{\ifmmode$\fi\endgroup\endsyntax}\relax%
-    \syntaxfont\syntaxcommentsign\@syntaxcomment%
-}
-
-% This is a special macro to handle sucessions of syntaxcommentsign
-\newcommand{\@syntaxcomment}[1]
-{%
-    \relax%
-    \if\syntaxcommentsign#1\syntaxcommentsign\let\temp=\@syntaxcomment\else%
-    \ifcat\space#1\let\temp=\@syntaxcomment%
-    \else\syntaxcommentfont\let\temp=#1\fi\fi\temp%
-}
-
-\chardef\other=12\relax
-
-\newcommand{\syntaxverbatim}
-{%
-    \relax%
-    \edef\disablebackslash{\catcode`\noexpand\\=\the\catcode`\\}\relax
-    \edef\endsyntaxverbatim{\relax
-        \catcode`\noexpand\\=\the\catcode`\\\relax
-        \catcode`\noexpand\ =\the\catcode`\ \relax
-        \catcode`\noexpand\{=\the\catcode`\{\relax
-        \catcode`\noexpand\}=\the\catcode`\}\relax
-        \catcode`\noexpand\$=\the\catcode`\$\relax
-        \catcode`\noexpand\&=\the\catcode`\&\relax
-        \catcode`\noexpand\#=\the\catcode`\#\relax
-        \catcode`\noexpand\%=\the\catcode`\%\relax
-        \catcode`\noexpand\~=\the\catcode`\~\relax
-        \catcode`\noexpand\_=\the\catcode`\_\relax
-        \catcode`\noexpand\^=\the\catcode`\^\relax}\relax
-    \let\do=\@makeother\do\\\do\ \do\{\do\}\do\$\do\&\do\#\do\%\do\~\do\_\do\^%
-}
-
-\newcommand*{\disablebackslash}{\apocaerror{No disablebackslash here}}
-
-\renewcommand*{\sc}[1]{{\normalfont\em{}#1}}
-
-\newcommand*{\scopt}[1]{\sc{#1$_{opt}$}}
-\newcommand*{\scseq}[1]{\sc{#1$^{*}$}}
-\newcommand*{\scSeq}[1]{\sc{#1$^{+}$}}
-
-\newcommand*{\scgopt}[1]{\scopt{\{#1\}}}
-\newcommand*{\scgseq}[1]{\scseq{\{#1\}}}
-\newcommand*{\scgSeq}[1]{\scSeq{\{#1\}}}
-
-\newcommand*{\sclabel}[1]{sc:#1}
-\newcommand{\scdef}[1]
-{%
-    \sc{#1}%
-    \label{\sclabel{#1}}%
-    \ttindex{#1}\index{general}{syntax category!#1}%
-}
-\newcommand*{\scref}[1]{\hyperref[\sclabel{#1}]{\sc{#1}}}
-\newcommand*{\scoptref}[1]{\hyperref[\sclabel{#1}]{\scopt{#1}}}
-\newcommand*{\scseqref}[1]{\hyperref[\sclabel{#1}]{\scseq{#1}}}
-\newcommand*{\scSeqref}[1]{\hyperref[\sclabel{#1}]{\scSeq{#1}}}
-
-\newcommand*{\rewrite}{{$\equiv$}}
-\newcommand*{\tts}{{\tt\phantom{00}}}
 
 % ------------------------------------------------------------------------------
 %%% Example typesetting
@@ -747,7 +632,107 @@
     \@makecaption{\fnum@example}{#1}%
 }
 
+%%%  EuLisp code typesetting macros
 
+% Enable white-space counting?
+{\obeyspaces\gdef\enablespaces{\obeyspaces\let \@xobeysp}}
+
+\newcommand{\enabletex}
+{%
+    \relax%
+    \def\[{\endgroup\begingroup\def\]{\endgroup\restart}}%
+}
+
+\newcommand{\enablemacros}{\catcode`\\=0\relax}
+\newcommand{\disablemacros}{\catcode`\\=\other}
+
+\newcommand*{\codefont}{\tt}
+\newcommand*{\codecommentfont}{\it}
+
+\newdimen\codeindent \codeindent=0.5cm%
+
+\newcommand*{\codebeforehook}{\vskip4pt}
+\newcommand*{\codebegineveryline}{\relax}
+\newcommand*{\codeendeveryline}{\relax}
+\newcommand*{\codeafterhook}{\vskip-5pt}
+
+\newif\iffirstcodepar
+
+\newcommand{\@@code}
+{%
+    \begingroup%
+    \def\verbatimpar{\iffirstcodepar%
+        \global\firstcodeparfalse\codebegineveryline\else%
+        \codeendeveryline\@@par\leavevmode\codebegineveryline\fi}\relax%
+    \def\endCodeExample{\codeendeveryline\endgroup\endCodeExample}\frenchspacing%
+    \codeverbatim\enablespaces\disablecodecomment%
+    \enabletex\disablebackslash\enablemacros%
+    \codefont%
+}
+
+\newcommand{\codeExample}
+{%
+    \begingroup\codebeforehook%
+    \let\restart=\@@code%
+    \def\verbatimpar{\relax}\global\firstcodepartrue%
+    \def\par{\verbatimpar}\obeylines%
+    \def\endCodeExample{\@@par\codeafterhook\endgroup}\relax%
+    \rightskip\z@\leftskip\@totalleftmargin%
+    \advance\leftskip by\codeindent%
+    \parindent\z@\parfillskip\@flushglue%
+    \parskip\z@\itemsep=\z@\parsep=\z@\@@code%
+}
+
+% How to recognize comments that begin with a precise character
+\newcommand*{\codecommentsign}{;}
+
+{\catcode`\;=\active
+    \gdef\enablecodecomment{\catcode`\;=\active
+        \def;{\codecomment}}\relax
+    \gdef\disablecodecomment{\catcode`\;=\other
+        \def;{\codecommentsign}}}
+
+\newcommand{\codecomment}
+{%
+    \endgroup\begingroup%
+    \def\verbatimpar{\ifmmode$\fi\endgroup\restart\verbatimpar}\relax%
+    \def\endCodeExample{\ifmmode$\fi\endgroup\endCodeExample}\relax%
+    \codefont\codecommentsign\@codecomment%
+}
+
+% This is a special macro to handle sucessions of codecommentsign
+\newcommand{\@codecomment}[1]
+{%
+    \relax%
+    \if\codecommentsign#1\codecommentsign\let\temp=\@codecomment\else%
+    \ifcat\space#1\let\temp=\@codecomment%
+    \else\codecommentfont\let\temp=#1\fi\fi\temp%
+}
+
+\chardef\other=12\relax
+
+\newcommand{\codeverbatim}
+{%
+    \relax%
+    \edef\disablebackslash{\catcode`\noexpand\\=\the\catcode`\\}\relax
+    \edef\endcodeverbatim{\relax
+        \catcode`\noexpand\\=\the\catcode`\\\relax
+        \catcode`\noexpand\ =\the\catcode`\ \relax
+        \catcode`\noexpand\{=\the\catcode`\{\relax
+        \catcode`\noexpand\}=\the\catcode`\}\relax
+        \catcode`\noexpand\$=\the\catcode`\$\relax
+        \catcode`\noexpand\&=\the\catcode`\&\relax
+        \catcode`\noexpand\#=\the\catcode`\#\relax
+        \catcode`\noexpand\%=\the\catcode`\%\relax
+        \catcode`\noexpand\~=\the\catcode`\~\relax
+        \catcode`\noexpand\_=\the\catcode`\_\relax
+        \catcode`\noexpand\^=\the\catcode`\^\relax}\relax
+    \let\do=\@makeother\do\\\do\ \do\{\do\}\do\$\do\&\do\#\do\%\do\~\do\_\do\^%
+}
+
+\newcommand*{\disablebackslash}{\apocaerror{No disablebackslash here}}
+
+% ------------------------------------------------------------------------------
 %%% Redefine the definitions environment
 % Removed the spurious newline after the clause number
 
@@ -813,5 +798,22 @@
     \fi}%
 {}
 \renewcommand{\definition}[2]{\@defcl{#1} #2}
+
+%%%  Sub-definition
+% Amalgam of subclause and definition to get the right level of numbering on
+% the heading but no toc entry.
+
+\newcounter{subdefinition}[entryclause]
+\renewcommand*{\thesubdefinition}{\theclause .\arabic{subdefinition}}
+\newcommand*{\l@subdefinition}{\@gobbletwo}
+\newcommand*{\subdefinitionmark}[1]{}
+\newcommand{\subdefinition}[1]
+{%
+    \@startsection{subdefinition}{3}{\z@}%
+    {2ex plus 1ex minus .2ex}%
+    {-.5em plus -.1em minus -.1em}%
+    {\normalsize\bfseries}%
+    {\protect{\normalsize\bfseries#1:\thinspace}}%
+}
 
 %%% ----------------------------------------------------------------------------

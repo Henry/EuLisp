@@ -74,7 +74,7 @@ for the purposes of definition to describe module processing as if they do.
 \Syntax
 \label{defmodule-syntax}
 \defSyntax{defmodule-0}{
-    \begin{syntaxx}
+    \begin{syntax}
         \scdef{defmodule-0-form}: \\
         \>  ( \syntaxref{defmodule} \scref{module-name} \\
         \>\>  \scref{module-directives} \\
@@ -102,11 +102,11 @@ for the purposes of definition to describe module processing as if they do.
         \>  ( \keywordref{rename} ( \scseqref{rename-pair} ) \scref{module-descriptor} ) \\
         \scdef{rename-pair}: \\
         \>  ( \scref{identifier} \scref{identifier} )
-    \end{syntaxx}}
+    \end{syntax}}
 \showSyntaxBox{defmodule-0}
 %
 \defSyntax{defmodule-1}{
-    \begin{syntaxx}
+    \begin{syntax}
         \scdef{defmodule-1-form}: \\
         \>  ( \syntaxref{defmodule} \scref{module-name} \\
         \>\>  \scref{module-directives} \\
@@ -114,7 +114,7 @@ for the purposes of definition to describe module processing as if they do.
         \scdef{level-1-module-form}: \\
         \>  \scref{level-1-expression} \\
         \>  \scref{level-0-module-form}
-    \end{syntaxx}}
+    \end{syntax}}
 % \showSyntaxBox{defmodule-1}
 %
 \begin{arguments}
@@ -166,7 +166,7 @@ example~\ref{example:module}.
 \examplecaption{module directives}
 \begin{center}
 \begin{minipage}[t]{\textwidth}{
-\syntax
+\codeExample
 (defmodule a-module
   (import
     (module-1                                        ;; import everything from module-1
@@ -194,7 +194,7 @@ example~\ref{example:module}.
   ...
   (export binding-c)                                 ;; the imported binding binding-c
   ...)
-\endsyntax
+\endCodeExample
 }
 \end{minipage}
 \end{center}
@@ -292,7 +292,7 @@ example~\ref{example:exposes}.
 \begin{example}
 \label{example:exposes}
 \examplecaption{module using \keywordref{expose}}{
-\syntax
+\codeExample
 (defmodule eulisp-level-0
   (expose
     (character collection compare condition convert
@@ -300,7 +300,7 @@ example~\ref{example:exposes}.
      formatted-io fixed-precision-integer function
      keyword list lock number object-0 stream string
      symbol syntax-0 table thread vector)))
-\endsyntax
+\endCodeExample
 }
 \end{example}
 %

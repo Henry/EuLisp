@@ -262,7 +262,7 @@ kept, defclass should be described here also.
 %
 \Syntax
 \defSyntax{defclass}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defclass-form}: \\
     \>  ( \defopref{defclass} \scref{class-name} \scref{superclass-name} \\
     \>\>  ( \scseqref{slot} ) \scseqref{class-option} ) \\
@@ -294,7 +294,7 @@ kept, defclass should be described here also.
     \>  \scref{keyword} \\
     \scdef{initlist}: \\
     \>  \scgseq{\scref{initarg} \scref{object}}
-\end{syntaxx}}
+\end{syntax}}
 \showSyntaxBox{defclass}
 %
 \begin{arguments}
@@ -455,7 +455,7 @@ The class of all generic functions.
 %
 \Syntax
 \defSyntax{defgeneric}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defgeneric-form}: \\
     \>  ( \defopref{defgeneric} \scref{gf-name} \scref{gf-lambda-list} \\
     \>\>  \scref{level-0-init-option} ) \\
@@ -472,7 +472,7 @@ The class of all generic functions.
     \scdef{specialized-parameter}: \\
     \> ( \scref{identifier} \scref{class-name} ) \\
     \> \scref{identifier}
-\end{syntaxx}}
+\end{syntax}}
 \label{defgeneric-syntax-table}
 \index{general}{generic function!lambda-list}
 \index{general}{syntax!generic function lambda-list}
@@ -605,7 +605,7 @@ a domain which is a subclass of \classref{object}\ $\times$ {\tt <class-a>},
 which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
 <class-g>} must all be subclasses of {\tt <class-a>}.
 %
-{\syntax
+{\codeExample
 (defgeneric gf-0 (arg1 (arg2 <class-a>))
   method (((m1-arg1 <class-b>)
            (m1-arg2 <class-c>)) ...)
@@ -613,7 +613,7 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
            (m2-arg2 <class-e>)) ...)
   method (((m3-arg1 <class-f>)
            (m3-arg2 <class-g>)) ...))
-\endsyntax}
+\endCodeExample}
 %
 \seealso%
 \macroref{defmethod}, \macroref{generic-lambda}.
@@ -621,7 +621,7 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
 \macro{defmethod}
 \Syntax
 \defSyntax{defmethod}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defmethod-form}: \\
     \>  ( \macroref{defmethod} \scref{gf-locator} \\
     \>\>   \scref{specialized-lambda-list} \\
@@ -630,7 +630,7 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
     \> \scref{identifier} \\
     \> ( \functionref{setter} \scref{identifier} ) \\
     \> ( \functionref{converter} \scref{identifier} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{defmethod}%
 %
 \remarks%
@@ -652,11 +652,11 @@ the same domain already defined on this gneric function, an error is signalled
 \macro{generic-lambda}
 \Syntax
 \defSyntax{generic-lambda}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{generic-lambda-form}: \\
     \>  ( \macroref{generic-lambda} \scref{gf-lambda-list} \\
     \>\>  \scseqref{level-0-init-option} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{generic-lambda}
 %
 \remarks%
@@ -668,7 +668,7 @@ the following example an anonymous version of {\tt gf-0} (see
 \defopref{defgeneric} above) is defined.  In all other respects the resulting
 object is the same as {\tt gf-0}.
 %
-{\syntax
+{\codeExample
 (generic-lambda ((arg1 <object>)
                  (arg2 <class-a>))
   method (((m1-arg1 <class-b>)
@@ -677,7 +677,7 @@ object is the same as {\tt gf-0}.
            (m2-arg2 <class-e>)) ...)
   method (((m3-arg1 <class-f>)
            (m3-arg2 <class-g>)) ...))
-\endsyntax}
+\endCodeExample}
 %
 \seealso%
 \defopref{defgeneric}.

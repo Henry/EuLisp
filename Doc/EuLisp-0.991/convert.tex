@@ -18,17 +18,17 @@ on its class to select the method which implements the appropriate conversion.
 Thus, having defined a new class to which it may be desirable to convert
 instances of other classes, the programmer defines a generic function:
 
-{\syntax
+{\codeExample
 (defgeneric (converter \[{\em new-class}\]) (instance))
-\endsyntax}
+\endCodeExample}
 
 Hereafter, new converter methods may be defined for {\em new-class\/}
 using a similar extended syntax for {\tt defmethod}:
 
-{\syntax
+{\codeExample
 (defmethod (converter \[{\em new-class}\])
            ((instance \[{\em other-class}\])))
-\endsyntax}
+\endCodeExample}
 
 The conversion is implemented by defining methods on the converter for {\em
     new-class\/} which specialize on the source class.  This is also how methods

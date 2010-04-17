@@ -98,7 +98,7 @@ hierarchy is shown in table~\ref{condition-class-hierarchy}.
 \Syntax
 \label{defcondition-syntax}
 \defSyntax{defcondition}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defcondition-form}: \\
     \>  ( \defopref{defcondition} \scref{condition-class-name} \\
     \>\>  \scref{condition-superclass-name} \\
@@ -107,7 +107,7 @@ hierarchy is shown in table~\ref{condition-class-hierarchy}.
     \> \scref{identifier} \\
     \scdef{condition-superclass-name}: \\
     \> \scref{identifier}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{defcondition}
 %
 \begin{arguments}
@@ -377,10 +377,10 @@ case of the above error.
 \Syntax
 \label{call-next-handler-syntax}
 \defSyntax{call-next-handler}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{call-next-handler-form}: \\
     \>  ( \specopref{call-next-handler} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{call-next-handler}
 %
 \remarks%
@@ -397,13 +397,13 @@ generic handler function).
 \Syntax
 \label{with-handler-syntax}
 \defSyntax{with-handler}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{with-handler-form}: \\
     \>  ( \specopref{with-handler} \scref{handler-function} \\
     \>\>  \scseqref{forms} ) \\
     \scdef{handler-function}: \\
     \>  \scref{level-0-expression}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{with-handler}
 %
 \begin{arguments}
@@ -480,7 +480,7 @@ An illustration of the use of all three cases is given here:
 \begin{example}
 \label{example:with-handler}
 \examplecaption{handler actions}
-{\syntax
+{\codeExample
 (defgeneric error-handler (condition)
    method: (((c <serious-error>))
             ... abort thread ...)
@@ -491,7 +491,7 @@ An illustration of the use of all three cases is given here:
 (with-handler error-handler
       ;; the protected expression
       (something-which-might-signal-an-error))
-\endsyntax}
+\endCodeExample}
 \end{example}
 %
 \seealso%

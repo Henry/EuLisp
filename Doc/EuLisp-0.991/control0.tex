@@ -50,12 +50,12 @@ itself\index{general}{processing!constants}.
 %
 \Syntax
 \defSyntax{defconstant}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defconstant-form}: \ra{} \classref{object} \\
     \>  ( \defopref{defconstant} \scref{constant-name} \scref{form} ) \\
     \scdef{constant-name}: \\
     \>  \scref{identifier}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{defconstant}
 %
 \begin{arguments}
@@ -95,12 +95,12 @@ constant---that is, an immutable top-lexical binding.
 %
 \Syntax
 \defSyntax{deflocal}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{deflocal-form}: \ra{} \classref{object} \\
     \>  ( \defopref{deflocal} \scref{local-name} \scref{form} ) \\
     \scdef{local-name}: \\
     \>  \scref{identifier}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{deflocal}
 %
 \begin{arguments}
@@ -124,11 +124,11 @@ mutable.
 %
 \Syntax
 \defSyntax{quote}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{quote-form}: \ra{} \scref{object} \\
     \>  ( \specopref{quote} \scref{object} ) \\
     \>  '\scref{object}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{quote}
 %
 \begin{arguments}
@@ -139,16 +139,22 @@ mutable.
 The result is \scref{object}.
 %
 \remarks%
-The result of processing the expression {\tt (quote \scref{object})} is
-\scref{object}.  The \scref{object} can be any object having an external
+The result of processing the expression {\tt (\specopref{quote} \scref{object})}
+is \scref{object}.  The \scref{object} can be any object having an external
 representation \index{general}{external representation (see also
     \functionref{prin} and \functionref{write})}.  The special form
 \specopref{quote} can be abbreviated using {\em apostrophe} --- graphic
-representation~\verb+'+\ttsubindex{quote}{abbreviation with {\tt '}} --- so that
-{\tt (quote a)} can be written {\tt 'a}.  These two notations are used to
-incorporate literal constants \index{general}{literal!quotation} in programs.
-It is an error to modify a literal expression
-\index{general}{literal!modification of}.
+representation~\verb+'+\ttsubindex{quote}{abbreviation with \syntaxref{'}} ---
+so that {\tt (\specopref{quote} a)} can be written {\tt \syntaxref{'}a}.  These
+two notations are used to incorporate literal constants
+\index{general}{literal!quotation} in programs.  It is an error to modify a
+literal expression \index{general}{literal!modification of}.
+
+\syntaxform{'}
+%
+\remarks%
+See \specopref{quote}.
+
 \end{optDefinition}
 
 \sclause{Functions: creation, definition and application}
@@ -168,7 +174,7 @@ It is an error to modify a literal expression
 \Syntax
 \label{lambda-syntax-table}
 \defSyntax{lambda}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{lambda-form}: \ra{} \classref{function} \\
     \>  ( \specopref{lambda} \scref{lambda-list} \scseqref{form} ) \\
    \scdef{lambda-list}: \\
@@ -179,7 +185,7 @@ It is an error to modify a literal expression
    \>  ( \scseqref{identifier} ) \\
    \scdef{rest-list}: \\
    \>  ( \scseqref{identifier} . \scref{identifier} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{lambda}
 %
 \begin{arguments}
@@ -201,23 +207,24 @@ allocated list of the actual parameters.  This binding \index{general}{scope and
     extent!of \specopref{lambda} bindings} has lexical scope and indefinite
 extent.  If \scref{lambda-list} is a \scref{simple-list}, the arguments are
 bound to the corresponding \scref{identifier}.  Otherwise, \scref{lambda-list}
-must be a \scref{rest-list}.  In this case, each \scref{identifier} preceding the
-dot is bound to the corresponding argument and the \scref{identifier} succeeding
-the dot is bound to a newly allocated list whose elements are the remaining
-arguments.  These bindings have lexical scope and indefinite extent.  It is a
-violation if the same identifier appears more than once in a
+must be a \scref{rest-list}.  In this case, each \scref{identifier} preceding
+the dot is bound to the corresponding argument and the \scref{identifier}
+succeeding the dot is bound to a newly allocated list whose elements are the
+remaining arguments.  These bindings have lexical scope and indefinite extent.
+It is a violation if the same identifier appears more than once in a
 \scref{lambda-list}.  It is an error to modify \scref{rest-list}.
 
-\syntaxform{defmacro}
+\defop{defmacro}
 %
 \Syntax
 \defSyntax{defmacro}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defmacro-form}: \ra{} \classref{function} \\
-    \>  ( \syntaxref{defmacro} \scref{macro-name} \scref{lambda-list} \scseqref{form} ) \\
+    \>  ( \defopref{defmacro} \scref{macro-name} \scref{lambda-list}
+    \scseqref{form} ) \\
     \scdef{macro-name}: \\
     \> \scref{identifier}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{defmacro}
 %
 \begin{arguments}
@@ -232,9 +239,9 @@ violation if the same identifier appears more than once in a
 \end{arguments}
 %
 \remarks%
-The \syntaxref{defmacro} form defines a function \index{general}{macro} named by
+The \defopref{defmacro} form defines a function \index{general}{macro} named by
 \scref{macro-name} and stores the definition as the top-lexical binding of
-\scref{macro-name} \index{general}{macro!definition by \syntaxref{defmacro}}
+\scref{macro-name} \index{general}{macro!definition by \defopref{defmacro}}
 \index{general}{binding!module}.  The interpretation of the \scref{lambda-list}
 is as defined for \specopref{lambda} (see \ref{lambda-syntax-table}).
 %
@@ -246,24 +253,24 @@ is as defined for \specopref{lambda} (see \ref{lambda-syntax-table}).
 \seealso%
 \specopref{lambda}.
 
-\syntaxform{defun}
+\defop{defun}
 %
 \Syntax
 \defSyntax{defun}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{defun-form}: \ra{} \classref{function} \\
     \>  \scref{simple-defun} \\
     \>  \scref{setter-defun} \\
    \scdef{simple-defun}: \\
-   \>  ( \syntaxref{defun} \scref{function-name} \scref{lambda-list} \\
+   \>  ( \defopref{defun} \scref{function-name} \scref{lambda-list} \\
    \>\>  \scseqref{form} ) \\
    \scdef{setter-defun}: \\
-   \>  ( \syntaxref{defun} ( \functionref{setter} \scref{function-name} )
+   \>  ( \defopref{defun} ( \functionref{setter} \scref{function-name} )
    \scref{lambda-list} \\
    \>\>  \scseqref{form} ) \\
    \scdef{function-name}: \\
    \>  \scref{identifier}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{defun}
 %
 \begin{arguments}
@@ -281,7 +288,7 @@ is as defined for \specopref{lambda} (see \ref{lambda-syntax-table}).
 \end{arguments}
 %
 \remarks%
-The \syntaxref{defun} form defines a function named by \scref{function-name} and
+The \defopref{defun} form defines a function named by \scref{function-name} and
 stores the definition (i) as the top-lexical binding of \scref{function-name} or
 (ii) as the setter function of \scref{function-name}.  The interpretation of the
 \scref{lambda-list} is as defined for \specopref{lambda}.
@@ -292,7 +299,7 @@ stores the definition (i) as the top-lexical binding of \scref{function-name} or
 \begin{minipage}[t]{\columnwidth}%
     \begin{tabbing}%
         00\= \kill
-        (\syntaxref{defun} \scref{identifier}\\
+        (\defopref{defun} \scref{identifier}\\
         \>\scref{lambda-list}\\
         \>\scref{body})
     \end{tabbing}
@@ -310,7 +317,7 @@ stores the definition (i) as the top-lexical binding of \scref{function-name} or
 \begin{minipage}[t]{\columnwidth}
     \begin{tabbing}
         00\= \kill
-        (\syntaxref{defun}\\
+        (\defopref{defun}\\
         \>(\functionref{setter} \scref{identifier})\\
         \>\scref{lambda-list} \\
         \>\scref{body})
@@ -333,7 +340,7 @@ stores the definition (i) as the top-lexical binding of \scref{function-name} or
 %
 \Syntax
 \defSyntax{function-call}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{function-call-form}: \ra{} \classref{object} \\
     \>  ( \scref{operator} \scseqref{operand} ) \\
     \scdef{operator}: \\
@@ -342,7 +349,7 @@ stores the definition (i) as the top-lexical binding of \scref{function-name} or
     \>  \scref{atomic-expression} \\
     \>  \scref{literal-expression} \\
     \>  \scref{function-call-form}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{function-call}
 %
 \begin{arguments}
@@ -393,12 +400,12 @@ Signalled by function call if the operator is not an instance of
 %
 \Syntax
 \defSyntax{apply}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{apply-form}: \ra{} \classref{object} \\
     \>  ( \functionref{apply} \scref{function} \scseqref{form} ) \\
     \scdef{function}: \\
     \>  \scref{level-0-expression}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{apply}
 %
 \begin{arguments}
@@ -438,10 +445,10 @@ binding named by a identifier---that is, a variable.
 %
 \Syntax
 \defSyntax{setq}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{setq-form}: \ra{} \classref{object} \\
     \>  ( \specopref{setq} \scref{identifier} \scref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{setq}
 %
 \begin{arguments}
@@ -490,7 +497,7 @@ example {\tt ((\functionref{setter} \functionref{setter}) \functionref{car}
 %
 \seealso%
 \defopref{defgeneric}, \macroref{defmethod}, \defopref{defclass},
-\syntaxref{defun}.
+\defopref{defun}.
 
 \condition{no-setter}{general-condition}
 %
@@ -535,7 +542,7 @@ the given accessor is immutable.
 %
 \Syntax
 \defSyntax{if}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{if-form}: \ra{} \classref{object} \\
     \>  ( \specopref{if} \scref{antecedent} \\
     \>\>\> \scref{consequent} \\
@@ -546,7 +553,7 @@ the given accessor is immutable.
     \>  \scref{form} \\
     \scdef{alternative}: \\
     \>  \scref{form} \\
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{if}
 %
 \result%
@@ -564,11 +571,11 @@ of \specopref{if} is the result of the evaluation of whichever of
 %
 \Syntax
 \defSyntax{cond}{
-    \begin{syntaxx}
+    \begin{syntax}
     \scdef{cond-form}: \ra{} \classref{object} \\
     \>  ( \macroref{cond} \\
     \>\>  \scgseq{{\tt(} \scref{antecedent} \scseqref{consequent} {\tt)}} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{cond}
 %
 \remarks%
@@ -628,17 +635,17 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 %
 \Syntax
 \defSyntax{and}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{and-form}: \ra{} \classref{object} \\
     \>  ( \macroref{and} \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{and}
 %
 \remarks%
 The expansion of an \macroref{and} form leads to the evaluation of the sequence
-of \scref{form}s from left to right.  The first \scref{form} in the sequence that
-evaluates to \nil{}\/ stops evaluation and none of the \scref{form}s to its right
-will be evaluated---that is to say, it is non-strict.  The result of {\tt
+of \scref{form}s from left to right.  The first \scref{form} in the sequence
+that evaluates to \nil{}\/ stops evaluation and none of the \scref{form}s to its
+right will be evaluated---that is to say, it is non-strict.  The result of {\tt
     (\macroref{and})} is \true{}.  If none of the \scref{form}s evaluate to
 \nil{}, the value of the last \scref{form} is returned.
 %
@@ -661,19 +668,19 @@ will be evaluated---that is to say, it is non-strict.  The result of {\tt
 %
 \Syntax
 \defSyntax{or}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{or-form}: \ra{} \classref{object} \\
     \>  ( \macroref{or} \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{or}
 %
 \remarks%
 The expansion of an \macroref{or} form leads to the evaluation of the sequence
 of \scref{form}s from left to right.  The value of the first \scref{form} that
-evaluates to {\em true} is the result of the \macroref{or} form and none of the
+evaluates to \true{} is the result of the \macroref{or} form and none of the
 \scref{form}s to its right will be evaluated---that is to say, it is non-strict.
-If none of the forms evaluate to {\em true}, the value of the last \scref{form} is
-returned.
+If none of the forms evaluate to \true{}, the value of the last \scref{form}
+is returned.
 %
 \rewriterules
 %
@@ -729,10 +736,10 @@ Note that {\tt x} does not occur free in any of \scref{form}$_2$ \ldots
 %
 \Syntax
 \defSyntax{let/cc}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{let/cc-form}: \ra{} \classref{object} \\
     \>  ( \specopref{let/cc} \scref{identifier} \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{let/cc}
 %
 \begin{arguments}
@@ -773,7 +780,7 @@ signalled.
 \begin{example}
 \label{example:pathopen}
 \examplecaption{using \specopref{let/cc}}
-{\syntax
+{\codeExample
 (defun path-open (pathlist name . options)
   (let/cc succeed
     (map
@@ -790,7 +797,7 @@ signalled.
         "path-open: cannot open stream for (~a) ~a"
         pathlist name)
       <cannot-open-path>)))
-\endsyntax}
+\endCodeExample}
 \end{example}
 %
 \seealso%
@@ -801,10 +808,10 @@ signalled.
 \ttsubindex{block}{see also \specopref{let/cc}}
 \Syntax
 \defSyntax{block}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{block-form}: \ra{} \classref{object} \\
     \>  ( \macroref{block} \scref{identifier} \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{block}
 %
 \remarks%
@@ -837,10 +844,10 @@ argument like other values.
 %
 \Syntax
 \defSyntax{return-from}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{return-from-form}: \ra{} \classref{object} \\
     \>  ( \macroref{return-from} \scref{identifier} \scoptref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{return-from}
 %
 \remarks%
@@ -876,14 +883,14 @@ is returned as the value of the block named by \scref{identifier}.
 %
 \Syntax
 \defSyntax{labels}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{labels-form}: \ra{} \classref{object} \\
     \>  ( \specopref{labels} \\
     \>\>  ( \scseqref{function-definition} ) \\
     \>\>  \scseqref{form} ) \\
     \scdef{function-definition}: \\
     \>  ( \scref{identifier} \scref{lambda-list} \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{labels}
 %
 \begin{arguments}
@@ -915,14 +922,14 @@ evaluated in order in the lexical environment extended with the bindings of the
 %
 \Syntax
 \defSyntax{let}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{let-form}: \ra{} \classref{object} \\
     \>  ( \macroref{let} \scoptref{identifier} ( \scseqref{binding} ) \\
     \>\>  \scseqref{form} ) \\
     \scdef{binding}: \\
     \>  \scref{identifier} \\
     \> ( \scref{identifier} \scref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{let}
 %
 \remarks%
@@ -989,11 +996,11 @@ the \macroref{let} form.
 %
 \Syntax
 \defSyntax{let*}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{let-star-form}: \ra{} \classref{object} \\
     \>  ( \macroref{let*} ( \scseqref{binding} ) \\
     \>\>  \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{let*}
 %
 \remarks%
@@ -1038,10 +1045,10 @@ result of the \macroref{let*} form.
 %
 \Syntax
 \defSyntax{progn}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{progn-form}: \ra{} \classref{object} \\
     \>  ( \specopref{progn} \scseqref{form} )
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{progn}
 %
 \begin{arguments}
@@ -1088,7 +1095,7 @@ environments.
 %
 \Syntax
 \defSyntax{unwind-protect}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{unwind-protect-form}: \ra{} \classref{object} \\
     \>  ( \specopref{unwind-protect} \scref{protected-form} \\
     \>\>  \scseqref{after-form} ) \\
@@ -1096,7 +1103,7 @@ environments.
     \> \scref{form} \\
     \scdef{after-form}: \\
     \> \scref{form}
- \end{syntaxx}}%
+ \end{syntax}}%
 \showSyntaxBox{unwind-protect}
 %
 \begin{arguments}
@@ -1128,7 +1135,7 @@ dynamic extent of the target of control transfer and the current
 \begin{example}
 \label{example:unwind-loop}
 \examplecaption{Interaction of \specopref{unwind-protect} with non-local exits}
-{\syntax
+{\codeExample
 (progn
   (let/cc k1
     (labels
@@ -1139,7 +1146,7 @@ dynamic extent of the target of control transfer and the current
       (loop)))
   ;; continuation bound to {\tt k1}
   ...)
-\endsyntax}
+\endCodeExample}
 \end{example}
 %
 The code fragment in example~\ref{example:unwind-loop} illustrates both the use
@@ -1166,75 +1173,86 @@ called; {\tt loop} is called; etc..  This program loops indefinitely.
 %
 \begin{optDefinition}
 
-\macro{quasiquote}
+\specop{quasiquote}
 %
 \Syntax
 \defSyntax{quasiquote}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{quasiquote-form}: \ra{} \classref{object} \\
-    \> ( \macroref{quasiquote} \scref{skeleton} ) \\
+    \> ( \specopref{quasiquote} \scref{skeleton} ) \\
     \> `\scref{skeleton} \\
     \scdef{skeleton}: \\
     \>  \scref{form}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{quasiquote}
 %
 \remarks%
-Quasiquotation is also known as backquoting.  A \macroref{quasiquote}d
+Quasiquotation is also known as backquoting.  A \specopref{quasiquote}d
 expression is a convenient way of building a structure.  The \scref{skeleton}
 describes the shape and, generally, many of the entries in the structure but
-some holes remain to be filled.  The \macroref{quasiquote} macro can be
-abbreviated by using the glyph called {\em grave accent}
-(\verb+`+)\ttsubindex{quasiquote}{abbreviation with {\tt `}}, so that {\tt
-    (\macroref{quasiquote} \scref{skeleton})} can be written {\tt
-    `\scref{skeleton}}.
+some holes remain to be filled.  The \specopref{quasiquote} macro can be
+abbreviated by using the glyph called {\em grave accent} (\syntaxref{`})
+\ttsubindex{quasiquote}{abbreviation with \syntaxref{`}}, so that {\tt
+    (\specopref{quasiquote} \scref{skeleton})} can be written
+\syntaxref{`}\scref{skeleton}.
 
-\syntaxform{unquote}
+\syntaxform{`}
+%
+\remarks%
+See \specopref{quasiquote}.
+
+\specop{unquote}
 \Syntax
 \defSyntax{unquote}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{unquote-form}: \ra{} \classref{object} \\
-    \>  ( \syntaxref{unquote} \scref{form} ) \\
+    \>  ( \specopref{unquote} \scref{form} ) \\
     \>  ,\scref{form}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{unquote}
 %
 \remarks%
-See \syntaxref{unquote-splicing}.
+See \specopref{unquote-splicing}.
 
-\syntaxform{unquote-splicing}
+\syntaxform{,}
+%
+\remarks%
+See \specopref{unquote}.
+
+\specop{unquote-splicing}
 \Syntax
 \defSyntax{unquote-splicing}{
-\begin{syntaxx}
+\begin{syntax}
     \scdef{unquote-splicing-form}: \ra{} \classref{object} \\
-    \>  ( \syntaxref{unquote-splicing} \scref{form} ) \\
+    \>  ( \specopref{unquote-splicing} \scref{form} ) \\
     \> ,@\scref{form}
-\end{syntaxx}}%
+\end{syntax}}%
 \showSyntaxBox{unquote-splicing}
 %
 \remarks%
-The holes in a quasiquoted expression are identified by unquote expressions of
-which there are two kinds---forms whose value is to be inserted at that location
-in the structure and forms whose value is to be spliced into the structure at
-that location.  The former is indicated by an \syntaxref{unquote} expression and
-the latter by an \syntaxref{unquote-splicing} expression.  In
-\syntaxref{unquote-splicing} the \scref{form} must result in a proper list.  The
-insertion of the result of an unquote-splice expression is as if the opening and
-closing parentheses of the list are removed and all the elements of the list are
-appended in place of the unquote-splice expression.
+The holes in a \specopref{quasiquote}d expression are identified by unquote
+expressions of which there are two kinds---forms whose value is to be inserted
+at that location in the structure and forms whose value is to be spliced into
+the structure at that location.  The former is indicated by an
+\specopref{unquote} expression and the latter by an \specopref{unquote-splicing}
+expression.  In \specopref{unquote-splicing} the \scref{form} must result in a
+proper list.  The insertion of the result of an unquote-splice expression is as
+if the opening and closing parentheses of the list are removed and all the
+elements of the list are appended in place of the unquote-splice expression.
 %An
 %error is signalled (condition class: {\tt
 %<unquote-no-context>}\indexcondition{unquote-no-context}) if either of
-%these syntaxes occurs outside the scope of a {\tt quasiquote}
+%these syntaxes occurs outside the scope of a \specopref{quasiquote}
 %expression.
 
-The syntax forms \syntaxref{unquote} and \syntaxref{unquote-splicing} can be
-abbreviated respectively by using the glyph called {\em comma}
-(\verb+,+)\ttsubindex{unquote}{abbreviation with {\tt ,}} preceding an
-expression and by using the diphthong {\em comma} followed by the glyph called
-{\em commercial at} (\verb+,@+)\ttindex{unquote-splicing!abbreviation to ,@}
-preceding a form.  Thus, {\tt (\syntaxref{unquote} a)} may be written {\tt ,a}
-and {\tt (\syntaxref{unquote-splicing} a)} can be written {\tt ,@a}.
+The syntax forms \specopref{unquote} and \specopref{unquote-splicing} can be
+abbreviated respectively by using the glyph called {\em comma} (\syntaxref{,})
+\ttsubindex{unquote}{abbreviation with \syntaxref{,}} preceding an expression
+and by using the diphthong {\em comma} followed by the glyph called {\em
+    commercial at} (\syntaxref{,@}) \ttindex{unquote-splicing!abbreviation to
+    ,@} preceding a form.  Thus, {\tt (\specopref{unquote} a)} may be written
+{\tt \syntaxref{,}a} and {\tt (\specopref{unquote-splicing} a)} can be written
+{\tt \syntaxref{,@}a}.
 %
 \examples
 {\tt
@@ -1244,6 +1262,11 @@ and {\tt (\syntaxref{unquote-splicing} a)} can be written {\tt ,@a}.
 \end{tabular}}
 %
 \end{optDefinition}
+
+\syntaxform{,@}
+%
+\remarks%
+See \specopref{unquote-splicing}.
 
 \sclause{Summary of Level-0 Expressions and Definitions}
 %
