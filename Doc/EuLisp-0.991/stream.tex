@@ -213,7 +213,7 @@ Connects the source of {\em sink\/} to {\em source\/} and the sink of
 \begin{specargs}
     \item[source, \theclass{path}] A path name.
     \item[sink, \classref{file-stream}] The stream via which data will be
-    received from the file named by {\em path}.
+    received from the file named by \scref{path}.
     \item[options, \classref{list}] A list of implementation-defined options.
 \end{specargs}
 %
@@ -235,7 +235,7 @@ specified using the third argument.
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[source, \classref{file-stream}] The stream via which data will be sent
-    to the file named by {\em path}.
+    to the file named by \scref{path}.
     \item[sink, \theclass{path}] A path name.
     \item[options, \classref{list}] A list of implementation-defined options.
 \end{specargs}
@@ -841,7 +841,7 @@ If {\em times\/} is specified, then stream must also be specified.
 %
 \result%
 Allocates and returns a new \classref{file-stream} object whose source
-is connected to the file system object identified by {\em path}.
+is connected to the file system object identified by \scref{path}.
 
 % ------------------------------------------------------------------------------
 \function{open-output-file}
@@ -852,7 +852,7 @@ is connected to the file system object identified by {\em path}.
 %
 \result%
 Allocates and returns a new \classref{file-stream} object whose sink is
-connected to the file system object identified by {\em path}.
+connected to the file system object identified by \scref{path}.
 
 % ------------------------------------------------------------------------------
 \macro{with-input-file}
@@ -861,8 +861,10 @@ connected to the file system object identified by {\em path}.
 \defSyntax{with-input-file}{
 \begin{syntax}
     \scdef{with-input-file-form}: \ra{} \classref{object} \\
-   \>  ( \macroref{with-input-file} \scref{path} \\
-   \>\>  \scref{body} )
+    \>  ( \macroref{with-input-file} \scref{path} \\
+    \>\>  \scref{body} ) \\
+    \scdef{path}: \\
+    \>  \scref{string}
 \end{syntax}}%
 \showSyntaxBox{with-input-file}
 
@@ -885,7 +887,7 @@ connected to the file system object identified by {\em path}.
 \defSyntax{with-source}{
 \begin{syntax}
     \scdef{with-source-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{with-source} ( \scref{identifier} \scref{expression} ) \\
+    \>  ( \macroref{with-source} ( \scref{identifier} \scref{form} ) \\
     \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{with-source}
@@ -897,7 +899,7 @@ connected to the file system object identified by {\em path}.
 \defSyntax{with-sink}{
 \begin{syntax}
     \scdef{with-sink-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{with-sink} ( \scref{identifier} \scref{expression} ) \\
+    \>  ( \macroref{with-sink} ( \scref{identifier} \scref{form} ) \\
     \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{with-sink}

@@ -89,28 +89,49 @@ whitespace.
     There is no notation in \eulisp\ for block comments.
 \end{note}
 \end{optDefinition}
-%
+
 \sclause{Objects}
 \begin{optDefinition}
-The syntax of the classes of objects that can be read by \eulisp\ is defined in
-the section of this definition corresponding to the class as defined below:
+An object is either a \scref{literal}, a \scref{symbol} or a \scref{list}.  The
+syntax of the classes of objects that can be read by \eulisp\ is defined in the
+section of this definition corresponding to the class as defined below:
 %
 \Syntax
 \label{object-syntax}
 \defSyntax{object}{
 \begin{syntax}
     \scdef{object}: \\
+    \>  \scref{literal} \\
+    \>  \scref{list}      \>\>\>\S\ref{list} \\
+    \>  \scref{symbol}    \>\>\>\S\ref{symbol} \\
+    \scdef{literal}: \\
+    \>  \scref{boolean} \\
     \>  \scref{character} \>\>\>\S\ref{character} \\
     \>  \scref{float}     \>\>\>\S\ref{float} \\
     \>  \scref{integer}   \>\>\>\S\ref{integer} \\
-    \>  \scref{list}      \>\>\>\S\ref{list} \\
     \>  \scref{string}    \>\>\>\S\ref{string} \\
-    \>  \scref{symbol}    \>\>\>\S\ref{symbol} \\
-    \>  \scref{vector}    \>\>\>\S\ref{vector}
+    \>  \scref{vector}    \>\>\>\S\ref{vector} \\
+    \scdef{boolean}: \\
+    \>  \scref{true} \\
+    \>  \scref{false} \\
+    \scdef{true}: \\
+    \>  \true \\
+    \>  \scref{object} not \nil \\
+    \scdef{false}: \\
+    \>  \nil \\
+    \>  \constantref{nil}
 \end{syntax}}
 \showSyntaxBox{object}
 
-The syntax for identifiers \index{general}{identifier!syntax}
-\index{general}{syntax!identifier} corresponds to that for symbols.
-%
+A boolean value is either {\em false} \index{general}{false}, which is
+represented by the empty list---written \nil{}\/ and is also the value of
+\constantref{nil}---or {\em true} \index{general}{true}, which is represented by
+any other value than \nil{} or if specified as \true.  Although the class
+containing exactly this set of values is not defined in the language, notation
+is abused for convenience and \scref{boolean} \index{general}{boolean} is
+defined, for the purposes of this definition, to mean that set of values.
+
+The syntax for \scref{identifier}s \index{general}{identifier!syntax}
+\index{general}{syntax!identifier} corresponds to that for \scref{symbol}s.
+
 \end{optDefinition}

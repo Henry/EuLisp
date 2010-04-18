@@ -20,8 +20,8 @@ The names of modules are bound in a disjoint binding
 environment\index{general}{module!name bindings}\index{general}{binding!of
     module names} which is only accessible via the module definition form.  That
 is to say, modules are not first-class.  The body of a module definition
-comprises a list of directives followed by a sequence of definitions,
-expressions and export forms.
+comprises a list of directives followed by a sequence of level-0 and export
+forms.
 
 The module mechanism provides abstraction and security in a form complementary
 to that provided by the object system.  Indeed, although objects do support data
@@ -74,48 +74,80 @@ for the purposes of definition to describe module processing as if they do.
 \Syntax
 \label{defmodule-syntax}
 \defSyntax{defmodule-0}{
-    \begin{syntax}
-        \scdef{defmodule-0-form}: \\
-        \>  ( \syntaxref{defmodule} \scref{module-name} \\
-        \>\>  \scref{module-directives} \\
-        \>\>  \scref{level-0-module-form} ) \\
-        \scdef{module-name}: \\
-        \>  \scref{identifier} \\
-        \scdef{module-directives}: \\
-        \>  ( \scseqref{module-directive} ) \\
-        \scdef{module-directive}: \\
-        \>  \keywordref{export} ( \scseqref{identifier} ) \\
-        \>  \keywordref{expose} ( \scseqref{module-descriptor} ) \\
-        \>  \keywordref{import} ( \scseqref{module-descriptor} ) \\
-        \>  \keywordref{syntax} ( \scseqref{module-descriptor} ) \\
-        \scdef{level-0-module-form}: \\
-        \>  ( \keywordref{export} \scseqref{identifier} ) \\
-        \>  \scref{level-0-expression} \\
-        \>  \scref{defining-form} \\
-        \>  ( \specopref{progn} \scseqref{level-0-module-form} ) \\
-        \scdef{module-descriptor}: \\
-        \>  \scref{module-name} \\
-        \>  \scref{module-filter} \\
-        \scdef{module-filter}: \\
-        \>  ( \keywordref{except} ( \scseqref{identifier} ) \scref{module-descriptor} ) \\
-        \>  ( \keywordref{only} ( \scseqref{identifier} ) \scref{module-descriptor} ) \\
-        \>  ( \keywordref{rename} ( \scseqref{rename-pair} ) \scref{module-descriptor} ) \\
-        \scdef{rename-pair}: \\
-        \>  ( \scref{identifier} \scref{identifier} )
-    \end{syntax}}
+\begin{syntax}
+    \scdef{defmodule-0-form}: \\
+    \>  ( \syntaxref{defmodule} \scref{module-name} \\
+    \>\>  \scref{module-directives} \\
+    \>\>  \scseqref{level-0-module-form} ) \\
+    \scdef{module-name}: \\
+    \>  \scref{identifier} \\
+    \scdef{module-directives}: \\
+    \>  ( \scseqref{module-directive} ) \\
+    \scdef{module-directive}: \\
+    \>  \keywordref{export} ( \scseqref{identifier} ) \\
+    \>  \keywordref{expose} ( \scseqref{module-descriptor} ) \\
+    \>  \keywordref{import} ( \scseqref{module-descriptor} ) \\
+    \>  \keywordref{syntax} ( \scseqref{module-descriptor} ) \\
+    \scdef{level-0-module-form}: \\
+    \>  ( \keywordref{export} \scseqref{identifier} ) \\
+    \>  \scref{level-0-form} \\
+    \>  \scref{defining-0-form} \\
+    \>  ( \specopref{progn} \scseqref{level-0-module-form} ) \\
+    \scdef{module-descriptor}: \\
+    \>  \scref{module-name} \\
+    \>  \scref{module-filter} \\
+    \scdef{module-filter}: \\
+    \>  ( \keywordref{except} ( \scseqref{identifier} ) \scref{module-descriptor} ) \\
+    \>  ( \keywordref{only} ( \scseqref{identifier} ) \scref{module-descriptor} ) \\
+    \>  ( \keywordref{rename} ( \scseqref{rename-pair} ) \scref{module-descriptor} ) \\
+    \scdef{rename-pair}: \\
+    \>  ( \scref{identifier} \scref{identifier} ) \\
+    \scdef{level-0-form}: \\
+    \>  \scref{identifier} \\
+    \>  \scref{literal} \\
+    \>  \scref{special-0-form} \\
+    \>  \scref{function-call-form} \\
+    \scdef{form}: \\
+    \>  \scref{level-0-form} \\
+    \scdef{special-form}: \\
+    \>  \scref{special-0-form} \\
+    \scdef{defining-0-form}: \\
+    \>  \scref{defclass-form} \\
+    \>  \scref{defcondition-form} \\
+    \>  \scref{defconstant-form} \\
+    \>  \scref{deflocal-form} \\
+    \>  \scref{defgeneric-form} \\
+    \>  \scref{defmacro-form} \\
+    \>  \scref{defun-form} \\
+    \scdef{special-0-form}: \\
+    \>  \scref{defmethod-form} \\
+    \>  \scref{generic-lambda-form} \\
+    \>  \scref{quote-form} \\
+    \>  \scref{lambda-form} \\
+    \>  \scref{setq-form} \\
+    \>  \scref{if-form} \\
+    \>  \scref{let/cc-form} \\
+    \>  \scref{labels-form} \\
+    \>  \scref{progn-form} \\
+    \>  \scref{unwind-protect-form} \\
+    \>  \scref{quasiquote-form} \\
+    \>  \scref{unquote-form} \\
+    \>  \scref{unquote-splicing-form} \\
+    \>  \scref{call-next-handler-form} \\
+    \>  \scref{with-handler-form} \\
+    \>  \scref{cond-form} \\
+    \>  \scref{and-form} \\
+    \>  \scref{or-form} \\
+    \>  \scref{block-form} \\
+    \>  \scref{return-from-form} \\
+    \>  \scref{let-form} \\
+    \>  \scref{let-star-form} \\
+    \>  \scref{with-input-file-form} \\
+    \>  \scref{with-output-file-form} \\
+    \>  \scref{with-source-form} \\
+    \>  \scref{with-sink-form}
+\end{syntax}}
 \showSyntaxBox{defmodule-0}
-%
-\defSyntax{defmodule-1}{
-    \begin{syntax}
-        \scdef{defmodule-1-form}: \\
-        \>  ( \syntaxref{defmodule} \scref{module-name} \\
-        \>\>  \scref{module-directives} \\
-        \>\>  \scseqref{level-1-module-form} ) \\
-        \scdef{level-1-module-form}: \\
-        \>  \scref{level-1-expression} \\
-        \>  \scref{level-0-module-form}
-    \end{syntax}}
-% \showSyntaxBox{defmodule-1}
 %
 \begin{arguments}
     \item[module name] A symbol used to name the module.
@@ -203,7 +235,7 @@ example~\ref{example:module}.
 %
 \end{optDefinition}
 %
-\ssclause{\keyworddef{export} Directive}
+\ssclause{\protect\keyworddef{export} Directive}
 %
 \index{general}{module!export@{\tt export}}
 \begin{optDefinition}
@@ -215,7 +247,7 @@ A name clash can arise in the external environment from interaction with exposed
 modules.
 \end{optDefinition}
 %
-\ssclause{\keyworddef{import} Directive}
+\ssclause{\protect\keyworddef{import} Directive}
 %
 \index{general}{module!import@{\tt import}}
 \label{import}
@@ -273,21 +305,23 @@ are interpreted as follows:
 \end{description}
 \end{optDefinition}
 %
-\ssclause{\keyworddef{expose} Directive}
+\ssclause{\protect\keyworddef{expose} Directive}
 \index{general}{module!expose@{\tt expose}}
 \begin{optDefinition}
+oueou
+
 This is denoted by the keyword \keywordref{expose} followed by a list of
 \scref{module-directive}s (see syntax table~\ref{defmodule-syntax}).  The
 purpose of this directive is to allow a module to export subsets of the external
 environments of various modules without importing them itself.  Processing an
 expose directive employs the same model as for imports, namely, a pair of a
-\scref{module-name} and a \sc{local-name} with the same filtering operations.  When the
-namelist has been filtered, the names are added to the external environment of
-the module begin processed.  A name clash can arise in the external environment
-from interaction with exports or between different exposed modules.  As an
-example of the use of \keywordref{expose}, a possible implementation of the {\tt
-    eulisp0} \index{general}{level-0 modules!eulisp0} module is shown in
-example~\ref{example:exposes}.
+\scref{module-name} and a \sc{local-name} with the same filtering operations.
+When the namelist has been filtered, the names are added to the external
+environment of the module begin processed.  A name clash can arise in the
+external environment from interaction with exports or between different exposed
+modules.  As an example of the use of \keywordref{expose}, a possible
+implementation of the {\tt eulisp0} \index{general}{level-0 modules!eulisp0}
+module is shown in example~\ref{example:exposes}.
 %
 \begin{example}
 \label{example:exposes}
@@ -312,7 +346,7 @@ a few bindings in a module, especially if syntax expansion creates
 additional bindings whose names are not known, but should be exported.
 \end{optDefinition}
 %
-\ssclause{\keyworddef{syntax} Directive}
+\ssclause{\protect\keyworddef{syntax} Directive}
 \label{syntax-directive}
 \index{general}{module!syntax@{\tt syntax}}
 \begin{optDefinition}

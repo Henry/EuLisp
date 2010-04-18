@@ -1,4 +1,4 @@
-\clause{Expressions, Definitions and Control Forms}
+\clause{Level-0 Defining, Special and Function-call Forms}
 %
 \label{control-0}
 \index{general}{level-0}
@@ -127,7 +127,7 @@ mutable.
 \begin{syntax}
     \scdef{quote-form}: \ra{} \scref{object} \\
     \>  ( \specopref{quote} \scref{object} ) \\
-    \>  '\scref{object}
+    \>  \syntaxref{'}\scref{object}
 \end{syntax}}%
 \showSyntaxBox{quote}
 %
@@ -176,7 +176,7 @@ See \specopref{quote}.
 \defSyntax{lambda}{
 \begin{syntax}
     \scdef{lambda-form}: \ra{} \classref{function} \\
-    \>  ( \specopref{lambda} \scref{lambda-list} \scseqref{form} ) \\
+    \>  ( \specopref{lambda} \scref{lambda-list} \scref{body} ) \\
    \scdef{lambda-list}: \\
    \>  \scref{identifier} \\
    \>  \scref{simple-list} \\
@@ -184,7 +184,9 @@ See \specopref{quote}.
    \scdef{simple-list}: \\
    \>  ( \scseqref{identifier} ) \\
    \scdef{rest-list}: \\
-   \>  ( \scseqref{identifier} . \scref{identifier} )
+   \>  ( \scseqref{identifier} . \scref{identifier} ) \\
+   \scdef{body}: \\
+   \>  \scseqref{form}
 \end{syntax}}%
 \showSyntaxBox{lambda}
 %
@@ -221,7 +223,7 @@ It is a violation if the same identifier appears more than once in a
 \begin{syntax}
     \scdef{defmacro-form}: \ra{} \classref{function} \\
     \>  ( \defopref{defmacro} \scref{macro-name} \scref{lambda-list}
-    \scseqref{form} ) \\
+    \scref{body} ) \\
     \scdef{macro-name}: \\
     \> \scref{identifier}
 \end{syntax}}%
@@ -263,11 +265,11 @@ is as defined for \specopref{lambda} (see \ref{lambda-syntax-table}).
     \>  \scref{setter-defun} \\
    \scdef{simple-defun}: \\
    \>  ( \defopref{defun} \scref{function-name} \scref{lambda-list} \\
-   \>\>  \scseqref{form} ) \\
+   \>\>  \scref{body} ) \\
    \scdef{setter-defun}: \\
    \>  ( \defopref{defun} ( \functionref{setter} \scref{function-name} )
    \scref{lambda-list} \\
-   \>\>  \scseqref{form} ) \\
+   \>\>  \scref{body} ) \\
    \scdef{function-name}: \\
    \>  \scref{identifier}
 \end{syntax}}%
@@ -346,8 +348,9 @@ stores the definition (i) as the top-lexical binding of \scref{function-name} or
     \scdef{operator}: \\
     \>  \scref{identifier} \\
     \scdef{operand}: \\
-    \>  \scref{atomic-expression} \\
-    \>  \scref{literal-expression} \\
+    \>  \scref{identifier} \\
+    \>  \scref{literal} \\
+    \>  \scref{special-form} \\
     \>  \scref{function-call-form}
 \end{syntax}}%
 \showSyntaxBox{function-call}
@@ -361,7 +364,7 @@ stores the definition (i) as the top-lexical binding of \scref{function-name} or
     \indexcondition{invalid-operator}) if the operator is not a function.
 
     \item[\scseqref{operand}] Each \scref{operand} must be either an
-    \scref{atomic-expression}, a \scref{literal-expression} or a
+    \scref{identifier}, a \scref{literal}, a \scref{special-form} or a
     \scref{function-call-form}.
 \end{arguments}
 %
@@ -402,14 +405,14 @@ Signalled by function call if the operator is not an instance of
 \defSyntax{apply}{
 \begin{syntax}
     \scdef{apply-form}: \ra{} \classref{object} \\
-    \>  ( \functionref{apply} \scref{function} \scseqref{form} ) \\
+    \>  ( \functionref{apply} \scref{function} \scref{body} ) \\
     \scdef{function}: \\
-    \>  \scref{level-0-expression}
+    \>  \scref{level-0-form}
 \end{syntax}}%
 \showSyntaxBox{apply}
 %
 \begin{arguments}
-    \item[function] An expression which must evaluate to an instance of
+    \item[function] A form which must evaluate to an instance of
     \classref{function}.
 
     \item[form$_1$ ... form$_{n-1}$] A sequence of expressions, which will be
@@ -594,7 +597,7 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
     00\=00\= \kill
     (\macroref{cond} \\
     \>(\scref{antecedent}$_1$) \\
-    \>(\scref{antecedent}$_2$ \scseqref{form}) \\
+    \>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\ldots)
 \end{tabbing}
 \end{minipage}
@@ -604,7 +607,7 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
     (\macroref{or} \= \scref{antecedent}$_1$ \\
     \>00\= \kill
     \>(\macroref{cond} \\
-    \>\>(\scref{antecedent}$_2$ \scseqref{form}) \\
+    \>\>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\>\ldots))
 \end{tabbing}
 \end{minipage} \\
@@ -613,8 +616,8 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 \begin{tabbing}
     00\=00\= \kill
     (\macroref{cond} \\
-    \>(\scref{antecedent}$_1$ \scseqref{form}) \\
-    \>(\scref{antecedent}$_2$ \scseqref{form}) \\
+    \>(\scref{antecedent}$_1$ \scseqref{consequent}) \\
+    \>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\ldots)
 \end{tabbing}
 \end{minipage}
@@ -622,10 +625,10 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     (\specopref{if} \=\scref{antecedent}$_1$ \\
-    \>(\specopref{progn} \scseqref{form}) \\
+    \>(\specopref{progn} \scseqref{consequent}) \\
     \>00\= \kill
     \>(\macroref{cond} \\
-    \>\>(\scref{antecedent}$_2$ \scseqref{form}) \\
+    \>\>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\>\ldots))
 \end{tabbing}%
 \end{minipage}%
@@ -637,7 +640,7 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 \defSyntax{and}{
 \begin{syntax}
     \scdef{and-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{and} \scseqref{form} )
+    \>  ( \macroref{and} \scseqref{consequent} )
 \end{syntax}}%
 \showSyntaxBox{and}
 %
@@ -738,14 +741,14 @@ Note that {\tt x} does not occur free in any of \scref{form}$_2$ \ldots
 \defSyntax{let/cc}{
 \begin{syntax}
     \scdef{let/cc-form}: \ra{} \classref{object} \\
-    \>  ( \specopref{let/cc} \scref{identifier} \scseqref{form} )
+    \>  ( \specopref{let/cc} \scref{identifier} \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{let/cc}
 %
 \begin{arguments}
     \item[\scref{identifier}] To be bound to the continuation of the
     \specopref{let/cc} form.
-    \item[\scseqref{form}] A sequence of forms to evaluate.
+    \item[\scref{body}] A sequence of forms to evaluate.
 \end{arguments}
 %
 \result%
@@ -810,13 +813,13 @@ signalled.
 \defSyntax{block}{
 \begin{syntax}
     \scdef{block-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{block} \scref{identifier} \scseqref{form} )
+    \>  ( \macroref{block} \scref{identifier} \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{block}
 %
 \remarks%
 The block expression is used to establish a statically scoped binding of an
-escape function.  The block \scref{variable} is bound to the
+escape function.  The block \scref{identifier} is bound to the
 continuation\index{general}{continuation} of the block.  The continuation can be
 invoked anywhere within the block by using \macroref{return-from}.  The
 \scref{form}s are evaluated in sequence and the value of the last one is
@@ -828,7 +831,7 @@ returned as the value of the block form.  See also \specopref{let/cc}.
     (\macroref{block} \scref{identifier}) &\rewrite& ()\\
     (\macroref{block} \scref{identifier}  &\rewrite&
     (\specopref{let/cc} \scref{identifier} \\
-    \tts\scseqref{form})                    && \tts\scseqref{form})
+    \tts\scref{body})                    && \tts\scref{body})
 \end{RewriteTable}
 %
 The rewrite for \macroref{block} does not prevent the \macroref{block} being
@@ -887,9 +890,11 @@ is returned as the value of the block named by \scref{identifier}.
     \scdef{labels-form}: \ra{} \classref{object} \\
     \>  ( \specopref{labels} \\
     \>\>  ( \scseqref{function-definition} ) \\
-    \>\>  \scseqref{form} ) \\
+    \>\>  \scref{labels-body} ) \\
     \scdef{function-definition}: \\
-    \>  ( \scref{identifier} \scref{lambda-list} \scseqref{form} )
+    \>  ( \scref{identifier} \scref{lambda-list} \scref{body} ) \\
+    \scdef{labels-body}: \\
+    \>  \scseqref{form}
 \end{syntax}}%
 \showSyntaxBox{labels}
 %
@@ -925,10 +930,12 @@ evaluated in order in the lexical environment extended with the bindings of the
 \begin{syntax}
     \scdef{let-form}: \ra{} \classref{object} \\
     \>  ( \macroref{let} \scoptref{identifier} ( \scseqref{binding} ) \\
-    \>\>  \scseqref{form} ) \\
+    \>\>  \scref{body} ) \\
     \scdef{binding}: \\
-    \>  \scref{identifier} \\
-    \> ( \scref{identifier} \scref{form} )
+    \>  \scref{variable} \\
+    \> ( \scref{variable} \scref{form} ) \\
+    \scdef{variable}: \\
+    \> \scref{identifier}
 \end{syntax}}%
 \showSyntaxBox{let}
 %
@@ -950,34 +957,34 @@ the \macroref{let} form.
 \rewriterules
 %
 \begin{RewriteTable}{let}{lll}
-    (\macroref{let} () \scseqref{form}) &\rewrite& (\specopref{progn} \scseqref{form}) \\
+    (\macroref{let} () \scref{body}) &\rewrite& (\specopref{progn} \scref{body}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let} (\=(\scref{id}$_1$ \scref{form}$_1$) \\
-    \>(\scref{id}$_2$ \scref{form}$_2$) \\
-    \>\scref{id}$_3$ \\
+    (\macroref{let} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
+    \>(\scref{variable}$_2$ \scref{form}$_2$) \\
+    \>\scref{variable}$_3$ \\
     \>\ldots)\\
     00\= \kill
-    \>\scseqref{form})
+    \>\scref{body})
 \end{tabbing}
 \end{minipage}
 &\rewrite&
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     00\=00\=00\= \kill
-    ((\specopref{lambda} (\scref{id}$_1$ \scref{id}$_2$ \scref{id}$_3$ \ldots) \\
-    \>\>\scseqref{form}) \\
+    ((\specopref{lambda} (\scref{variable}$_1$ \scref{variable}$_2$ \scref{variable}$_3$ \ldots) \\
+    \>\>\scref{body}) \\
     \>\scref{form}$_1$ \scref{form}$_2$ () \ldots) \\
 \end{tabbing}
 \end{minipage}\\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let} \= \scref{id}$_0$ \\
-    \>(\=(\scref{id}$_1$ \scref{form}$_1$) \\
-    \>\>\scref{id}$_2$ \\
+    (\macroref{let} \= \scref{variable}$_0$ \\
+    \>(\=(\scref{variable}$_1$ \scref{form}$_1$) \\
+    \>\>\scref{variable}$_2$ \\
     \>\>\ldots)\\
     00\= \kill
-    \>\scseqref{form})
+    \>\scref{body})
 \end{tabbing}
 \end{minipage}
 &\rewrite&
@@ -985,9 +992,9 @@ the \macroref{let} form.
 \begin{tabbing}
     00\= \kill
     (\specopref{labels}\\
-    \>(\=(\scref{id}$_0$ (\scref{id}$_1$ \scref{id}$_2$ \ldots) \\
-    \>\>\scseqref{form})) \\
-    \>(\scref{id}$_0$ \scref{form}$_1$ () \ldots))
+    \>(\=(\scref{variable}$_0$ (\scref{variable}$_1$ \scref{variable}$_2$ \ldots) \\
+    \>\>\scref{body})) \\
+    \>(\scref{variable}$_0$ \scref{form}$_1$ () \ldots))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
@@ -999,7 +1006,7 @@ the \macroref{let} form.
 \begin{syntax}
     \scdef{let-star-form}: \ra{} \classref{object} \\
     \>  ( \macroref{let*} ( \scseqref{binding} ) \\
-    \>\>  \scseqref{form} )
+    \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{let*}
 %
@@ -1016,27 +1023,27 @@ result of the \macroref{let*} form.
 \rewriterules
 %
 \begin{RewriteTable}{let*}{lll}
-    (\macroref{let*} () \scseqref{form}) &\rewrite& (progn \scseqref{form}) \\
+    (\macroref{let*} () \scref{body}) &\rewrite& (progn \scref{body}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let*} (\=(\scref{var}$_1$ \scref{form}$_1$) \\
-    \>(\scref{var}$_2$ \scref{form}$_2$) \\
-    \>\scref{var}$_3$\\
+    (\macroref{let*} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
+    \>(\scref{variable}$_2$ \scref{form}$_2$) \\
+    \>\scref{variable}$_3$\\
     \>\ldots) \\
     00\= \kill
-    \>\scseqref{form})
+    \>\scref{body})
 \end{tabbing}%
 \end{minipage}%
 &\rewrite&
 \begin{minipage}[t]{\columnwidth}%
 \begin{tabbing}%
     00\= \kill
-    (\macroref{let} ((\scref{var}$_1$ \scref{form}$_1$)) \\
-    \>(\macroref{let*} (\=(\scref{var}$_2$ \scref{form}$_2$) \\
-    \>\>\scref{var}$_3$\\
+    (\macroref{let} ((\scref{variable}$_1$ \scref{form}$_1$)) \\
+    \>(\macroref{let*} (\=(\scref{variable}$_2$ \scref{form}$_2$) \\
+    \>\>\scref{variable}$_3$\\
     \>\>\ldots) \\
     00\=00\= \kill
-    \>\>\scseqref{form}))
+    \>\>\scref{body}))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
@@ -1047,7 +1054,7 @@ result of the \macroref{let*} form.
 \defSyntax{progn}{
 \begin{syntax}
     \scdef{progn-form}: \ra{} \classref{object} \\
-    \>  ( \specopref{progn} \scseqref{form} )
+    \>  ( \specopref{progn} \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{progn}
 %
@@ -1180,7 +1187,7 @@ called; {\tt loop} is called; etc..  This program loops indefinitely.
 \begin{syntax}
     \scdef{quasiquote-form}: \ra{} \classref{object} \\
     \> ( \specopref{quasiquote} \scref{skeleton} ) \\
-    \> `\scref{skeleton} \\
+    \> \syntaxref{`}\scref{skeleton} \\
     \scdef{skeleton}: \\
     \>  \scref{form}
 \end{syntax}}%
@@ -1207,7 +1214,7 @@ See \specopref{quasiquote}.
 \begin{syntax}
     \scdef{unquote-form}: \ra{} \classref{object} \\
     \>  ( \specopref{unquote} \scref{form} ) \\
-    \>  ,\scref{form}
+    \>  \syntaxref{,}\scref{form}
 \end{syntax}}%
 \showSyntaxBox{unquote}
 %
@@ -1225,7 +1232,7 @@ See \specopref{unquote}.
 \begin{syntax}
     \scdef{unquote-splicing-form}: \ra{} \classref{object} \\
     \>  ( \specopref{unquote-splicing} \scref{form} ) \\
-    \> ,@\scref{form}
+    \> \syntaxref{,@}\scref{form}
 \end{syntax}}%
 \showSyntaxBox{unquote-splicing}
 %
@@ -1268,17 +1275,22 @@ and by using the diphthong {\em comma} followed by the glyph called {\em
 \remarks%
 See \specopref{unquote-splicing}.
 
-\sclause{Summary of Level-0 Expressions and Definitions}
+\sclause{Summary of Level-0 Defining, Special and Function-call Forms}
 %
 \begin{optDefinition}
-\noindent
-This section gives the syntax of all level-0 expressions and definitions
-together.  The syntax of data objects is given in the section pertaining to the
-class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
 %
-\ssclause{Syntax of Level-0 defining forms}
+\raggedbottom
+%
+This section gives the syntax of all level-0 forms starting with modules.  The
+syntax of data objects is given in the section pertaining to the class and is
+summarized in section~\ref{object-syntax-summary}.
+
+\ssclause{Syntax of Level-0 modules}
 %
 \showSyntax{defmodule-0}
+
+\ssclause{Syntax of Level-0 defining forms}
+%
 \showSyntax{defclass}
 \showSyntax{defgeneric}
 \showSyntax{defmethod}
@@ -1288,11 +1300,10 @@ class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
 \showSyntax{defun}
 \showSyntax{defcondition}
 
-\ssclause{Syntax of Level-0 expressions}
+\ssclause{Syntax of Level-0 special forms}
 %
 \showSyntax{generic-lambda}
 \showSyntax{lambda}
-\showSyntax{function-call}
 \showSyntax{quote}
 \showSyntax{setq}
 \showSyntax{if}
@@ -1303,9 +1314,6 @@ class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
 \showSyntax{apply}
 \showSyntax{call-next-handler}
 \showSyntax{with-handler}
-
-\ssclause{Syntax of Level-0 macros}
-%
 \showSyntax{cond}
 \showSyntax{and}
 \showSyntax{or}
@@ -1321,5 +1329,10 @@ class and is summarized in section~\ref{object-syntax-summary}.  \raggedbottom
 \showSyntax{with-source}
 \showSyntax{with-sink}
 
+\ssclause{Syntax of Level-0 function calls}
+%
+\showSyntax{function-call}
+%
 \flushbottom
+%
 \end{optDefinition}

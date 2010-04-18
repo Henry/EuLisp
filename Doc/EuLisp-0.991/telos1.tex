@@ -17,12 +17,12 @@
     \scdef{defclass-slot-description-list}: \\
     \>  ( \scseqref{defclass-slot-description} ) \\
     \scdef{defclass-slot-option}: \\
-    \> initform \scref{level-1-expression} \\
-    \> \scref{identifier} \scref{level-1-expression} \\
+    \> initform \scref{level-1-form} \\
+    \> \scref{identifier} \scref{level-1-form} \\
     \> \scref{defclass-slot-option} \\
     \scdef{defclass-class-option} \\
     \>  class \scref{class-name} \\
-    \>  \scref{identifier} \scref{level-1-expression} \\
+    \>  \scref{identifier} \scref{level-1-form} \\
     \>  \scref{defclass-class-option}
 \end{syntax}}
 \showSyntaxBox{defclass-1}
@@ -179,15 +179,15 @@ The {\em class-option}\/s are interpreted as follows:
     \>  class \scref{class-name} \\
     \>  method-class \scref{class-name} \\
     \>  method \scref{level-1-method-description} \\
-    \>  \scref{identifier} \scref{level-1-expression} \\
+    \>  \scref{identifier} \scref{level-1-form} \\
     \>  \scref{level-0-init-option} \\
     \scdef{level-1-method-description}: \\
     \>  ( \scseqref{method-init-option} \\
     \>\>  \scref{specialized-lambda-list} \\
-    \>\>  \scseqref{form} ) \\
+    \>\>  \scref{body} ) \\
     \scdef{method-init-option}: \\
     \>  class \scref{class-name} \\
-    \>  \scref{identifier} \scref{level-1-expression}
+    \>  \scref{identifier} \scref{level-1-form}
 \end{syntax}}
 \showSyntaxBox{generic-1-lambda}
 %
@@ -272,7 +272,7 @@ is the same as {\tt gf-1}.
           ...)
   method (class <another-method-class-c>
           method-class-c-key-a method-class-c-value-a
-          ((m3-arg1 <class-f>) (m3-arg2 <class-g>))
+          ((m3-arg1 <class-f>) (m3-arg2 <class-g>))0
           ...)
 )
 \endCodeExample}
@@ -383,11 +383,11 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 \Syntax
 \defSyntax{method-lambda}{
 \begin{syntax}
-    method-lambda-form: \ra{} \classref{function} \\
+    \scdef{method-lambda-form}: \ra{} \classref{function} \\
     \>  ( \macroref{method-lambda} \\
     \>\>  \scseqref{method-init-option} \\
     \>\>  \scref{specialized-lambda-list} \\
-    \>\>  \scseqref{form} )
+    \>\>  \scref{body} )
 \end{syntax}}
 \showSyntaxBox{method-lambda}
 %
@@ -423,7 +423,7 @@ options, which are evaluated in the lexical and dynamic environment of
     \>  ( \macroref{defmethod} \scref{gf-locator} \\
     \>\>  \scseqref{method-init-option} \\
     \>\>  \scref{specialized-lambda-list} \\
-    \>\>  \scseqref{form} )
+    \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{defmethod-1}%
 %

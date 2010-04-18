@@ -70,7 +70,7 @@ dynamic variable has no visible dynamic binding.
 \begin{syntax}
     \scdef{dynamic-let-form}: \ra{} \classref{object} \\
     \>  ( \specopref{dynamic-let} \scseqref{binding} \\
-    \>\>  \scseqref{form} )
+    \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{dynamic-let}
 %
@@ -101,7 +101,7 @@ returned as the result of \specopref{dynamic-let}.
 \defSyntax{defglobal}{
 \begin{syntax}
     \scdef{defglobal-form}: \ra{} \classref{object} \\
-    \> ( \defopref{defglobal} \scref{identifier} \scref{level-1-expression} )
+    \> ( \defopref{defglobal} \scref{identifier} \scref{level-1-form} )
 \end{syntax}}%
 \showSyntaxBox{defglobal}
 %
@@ -115,8 +115,8 @@ returned as the result of \specopref{dynamic-let}.
 %
 \remarks%
 The value of \scref{form} is stored as the top dynamic value of the symbol named
-by \scref{identifier} \index{general}{binding!top dynamic}.  The binding created by
-\defopref{defglobal} is mutable.  An error is signaled (condition:
+by \scref{identifier} \index{general}{binding!top dynamic}.  The binding created
+by \defopref{defglobal} is mutable.  An error is signaled (condition:
 \conditionref{dynamic-multiply-defined}
 \indexcondition{dynamic-multiply-defined}), on processing this form more than
 once for the same \scref{identifier}.
@@ -163,7 +163,7 @@ exists.
 \defSyntax{catch}{
 \begin{syntax}
     \scdef{catch-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{catch} \scref{tag} \scseqref{form} ) \\
+    \>  ( \macroref{catch} \scref{tag} \scref{body} ) \\
     \scdef{tag}: \\
     \>  \scref{symbol}
 \end{syntax}}%
@@ -186,13 +186,13 @@ the last one is returned as the value of the \macroref{catch} form.
         {\rm Is an error}\\
     (\macroref{catch} \scref{tag}) & \rewrite &
         (\specopref{progn} \scref{tag} ())\\
-    (\macroref{catch} \scref{tag} \scseqref{form}) & \rewrite &
+    (\macroref{catch} \scref{tag} \scref{body}) & \rewrite &
     \begin{minipage}[t]{0.3\columnwidth}
     \begin{tabbing}
         00\=00\= \kill
         (\specopref{let/cc} tmp\\
         \>(\specopref{dynamic-let} ((\scref{tag} tmp))\\
-        \>\>\scseqref{form}))
+        \>\>\scref{body}))
     \end{tabbing}
     \end{minipage}
 \end{RewriteTable}
@@ -213,7 +213,7 @@ could occur in the body of \macroref{catch} in this way.
 \defSyntax{throw}{
 \begin{syntax}
     \scdef{throw-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{throw} \scref{tag} \scseqref{form} )
+    \>  ( \macroref{throw} \scref{tag} \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{throw}
 %
@@ -221,8 +221,8 @@ could occur in the body of \macroref{catch} in this way.
 In \macroref{throw}, the \scref{tag} names the continuation of the
 \macroref{catch} from which to return.  \macroref{throw} is the invocation of
 the continuation\index{general}{continuation} of the catch named \scref{tag}.
-The \scref{form} is evaluated and the value are returned as the value of the
-catch named by \scref{variable}.  The \scref{tag} ia a symbol because it used to
+The \scref{body} is evaluated and the value are returned as the value of the
+catch named by \scref{tag}.  The \scref{tag} is a symbol because it used to
 access the current dynamic binding of the symbol, which is where the
 continuation is bound.
 %
@@ -242,31 +242,38 @@ continuation is bound.
 %
 \end{optDefinition}
 
-\sclause{Summary of Level-1 Expressions and Definitions}
+\sclause{Summary of Level-1 Defining, Special and Function-call Forms}
 %
 \begin{optDefinition}
 %
-This section gives the syntax of all level-1 expressions and definitions
-together.  Any productions undefined here appear elsewhere in the definition,
-specifically: the syntax of most expressions and definitions is given in the
-section defining level-0.
 \raggedbottom
 %
-\ssclause{Syntax of Level-1 defining forms}
+This section gives the syntax of all level-1 forms:
+
+\showSyntax{forms}
+
+Any productions undefined here appear elsewhere in the definition, specifically:
+the syntax of most expressions and definitions is given in the section defining
+level-0.
+
+\ssclause{Syntax of Level-1 modules}
+%
 \showSyntax{defmodule-1}
+
+\ssclause{Syntax of Level-1 defining forms}
+%
 \showSyntax{defclass-1}
 \showSyntax{defgeneric-1}
 \showSyntax{defmethod-1}
 \showSyntax{defglobal}
+
+\ssclause{Syntax of Level-1 special forms}
 %
-\ssclause{Syntax of Level-1 expressions}
 \showSyntax{dynamic}
 \showSyntax{dynamic-setq}
 \showSyntax{dynamic-let}
 \showSyntax{generic-1-lambda}
 \showSyntax{method-lambda}
-%
-% \ssclause{Syntax of Level-1 macros}
 \showSyntax{catch}
 \showSyntax{throw}
 %

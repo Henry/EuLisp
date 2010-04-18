@@ -277,7 +277,7 @@ kept, defclass should be described here also.
     \>  \scref{identifier} \\
     \scdef{slot-option}: \\
     \>  \keywordref{keyword}: \scref{identifier} \\
-    \>  \keywordref{default}: \scref{level-0-expression} \\
+    \>  \keywordref{default}: \scref{level-0-form} \\
     \>  \keywordref{reader}: \scref{identifier} \\
     \>  \keywordref{writer}: \scref{identifier} \\
     \>  \keywordref{accessor}: \scref{identifier} \\
@@ -335,8 +335,8 @@ The \scref{slot-option}s are interpreted as follows:
     shadow or add a new \scref{initarg}, if a superclass has already defined
     one.
 
-    \item[\keyworddef{default}:, \scref{level-0-expression}]%
-    The value of this option is an expression, which is evaluated as the default
+    \item[\keyworddef{default}:, \scref{level-0-form}]%
+    The value of this option is a form, which is evaluated as the default
     value of the slot, to be used if no \scref{initarg} is defined for the slot
     or given to a call to \functionref{make}.  The expression is evaluated in
     the lexical environment of the call to \defopref{defclass} and the dynamic
@@ -625,7 +625,7 @@ which is to say that {\tt <class-c>}, {\tt <class-e>} and {\tt
     \scdef{defmethod-form}: \\
     \>  ( \macroref{defmethod} \scref{gf-locator} \\
     \>\>   \scref{specialized-lambda-list} \\
-    \>\>   \scseqref{form} ) \\
+    \>\>   \scref{body} ) \\
     \scdef{gf-locator}: \\
     \> \scref{identifier} \\
     \> ( \functionref{setter} \scref{identifier} ) \\

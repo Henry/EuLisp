@@ -23,7 +23,7 @@ TEX_FILES = \
     control1.tex      integer.tex       stream.tex     threads.tex \
     convert.tex       introduction.tex  string.tex     vector.tex \
     copy.tex          list.tex          structure.tex  compare.tex \
-    double.tex        mathlib.tex       symbol.tex
+    double.tex        mathlib.tex       symbol.tex     modules1.tex
 
 STY_FILES = eulisp.sty
 
