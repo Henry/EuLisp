@@ -543,6 +543,7 @@ extern LispRef i_all_bindings[];
 #define compatible_superclasses_p_fn_index 10 
 #define _linked_C_libraries__X42_X42_fn_index 15 
 #define push_error_handler_fn_index 5 
+#define _read_error__X60_X62_fn_index 9 
 #define init_class_fn_index 3 
 #define __X37_fn_index 34 
 #define binary__X43_fn_index 13 

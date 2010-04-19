@@ -36,7 +36,7 @@
 ;;; --------------------------------------------------------------------
   (defun get-top-level-macro-expander (key)
     (let ((binding (get-syntax-binding key)))
-      (and binding 
+      (and binding
            (let ((macro-fun (as-dynamic-binding binding)))
              (and macro-fun
                   (lambda (x e)
@@ -48,7 +48,7 @@
                       (let ((macro-expanded-form (apply macro-fun (cdr x))))
                         (notify0 "RESULT: ~a" macro-expanded-form)
                         (e macro-expanded-form e)))))))))
-  
+
 ;;; ---------------------------------------------------------------------
 ;;; Collect TOP-LEVEL FORMS
 ;;; ---------------------------------------------------------------------
@@ -120,7 +120,7 @@
     (lambda (x e)
       (with-ct-handler "bad deflocal syntax" x
         (make-global-var
-         (get-name x) 
+         (get-name x)
          (if (cddr x)
              (get-value x)
            (ct-warning () "variable ~a not initialized" (get-name x)))))))

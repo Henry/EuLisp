@@ -479,6 +479,7 @@
     ((name . compatible-superclasses-p) (pos . 10) (origin mop-alloc . compatible-superclasses-p))
     ((name . push-error-handler) (pos . 5) (origin dynamic . push-error-handler))
     ((name . %) (pos . 14) (origin number . %))
+    ((name . <read-error>) (pos . 9) (origin read . <read-error>) (class . constant))
     ((name . init-class) (pos . 3) (origin mop-init . init-class) (inline (G001330 (stack-ref 7) (stack-ref 7) (stack-ref 1) (static-ref0) (stack-ref 2) (set-primitive-ref) (nobble 2) (pop1) (stack-ref 7) (stack-ref 6) (stack-ref 1) (static-ref1) (stack-ref 2) (set-primitive-ref) (nobble 2) (pop1) (stack-ref 7) (stack-ref 5) (stack-ref 1) (static-ref2) (stack-ref 2) (set-primitive-ref) (nobble 2) (pop1) (stack-ref 7) (stack-ref 4) (stack-ref 1) (static-fpi-ref 3) (stack-ref 2) (set-primitive-ref) (nobble 2) (pop1) (stack-ref 7) (static-ref-nil) (stack-ref 1) (static-fpi-ref 4) (stack-ref 2) (set-primitive-ref) (nobble 2) (pop1) (stack-ref 7) (stack-ref 3) (stack-ref 1) (static-fpi-ref 5) (stack-ref 2) (set-primitive-ref) (nobble 2) (pop1) (stack-ref 7) (stack-ref 2) (cons) (stack-ref 8) (stack-ref 1) (stack-ref 1) (static-fpi-ref 6) (stack-ref 2) (set-primitive-ref) (nobble 2) (pop1) (stack-ref 8) (stack-ref 2) (stack-ref 1) (static-fpi-ref 7) (stack-ref 2) (set-primitive-ref) (nobble 2) (nobble 1) (nobble 8))))
     ((name . binary+) (pos . 13) (origin number . binary+))
     ((name . compute-inherited-keywords) (pos . 9) (origin mop-alloc . compute-inherited-keywords))
