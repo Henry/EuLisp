@@ -7,7 +7,6 @@
 .cmtt-9{font-size:90%;font-family: monospace;}
 .cmtt-9{font-family: monospace;}
 .cmtt-9{font-family: monospace;}
-.cmtt-9{font-family: monospace;}
 .cmbx-9{font-size:90%; font-weight: bold;}
 .cmbx-9{ font-weight: bold;}
 .cmr-6{font-size:60%;}
@@ -17,18 +16,14 @@
 .cmsy-6{font-size:60%;}
 .cmr-8{font-size:80%;}
 .cmti-9{font-size:90%; font-style: italic;}
+.cmbsy-9{font-size:90%;font-weight: bold;}
 .cmtt-8{font-size:80%;font-family: monospace;}
-.cmtt-8{font-family: monospace;}
 .cmtt-8{font-family: monospace;}
 .cmtt-8{font-family: monospace;}
 .cmbx-8{font-size:80%; font-weight: bold;}
 .cmbx-8{ font-weight: bold;}
-.cmsy-8{font-size:80%;}
-.cmbxti-10x-x-90{font-size:90%; font-weight: bold; font-style: italic;}
 .cmitt-10x-x-90{font-size:90%;font-family: monospace; font-style: italic;}
-.cmitt-10x-x-90{font-family: monospace; font-style: italic;}
-.cmitt-10x-x-80{font-size:80%;font-family: monospace; font-style: italic;}
-.cmitt-10x-x-80{font-family: monospace; font-style: italic;}
+.cmbxti-10x-x-90{font-size:90%; font-weight: bold; font-style: italic;}
 .cmti-8{font-size:80%; font-style: italic;}
 @media print {span.next {visibility:hidden;}}
 p.noindent { text-indent: 0em }
@@ -119,6 +114,7 @@ table.pmatrix {width:100%;}
 span.bar-css {text-decoration:overline;}
 img.cdots{vertical-align:middle;}
 a {text-decoration:none}
+.tabbing-right {text-align:right;}
 .framebox-c, .framebox-l, .framebox-r { padding-left:3.0pt; padding-right:3.0pt; text-indent:0pt; border:solid black 0.4pt; }
 .framebox-c {text-align:left;}
 .framebox-l {text-align:left;}
