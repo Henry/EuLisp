@@ -10,11 +10,11 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-04-13 22:55:00" /> 
+<meta name="date" content="2010-04-19 21:52:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
-<!--l. 376--><div class="crosslinks"><p class="noindent">[<a 
+<!--l. 374--><div class="crosslinks"><p class="noindent">[<a 
 href="eulispcl8.html" >next</a>] [<a 
 href="eulispcl6.html" >prev</a>] [<a 
 href="eulispcl6.html#taileulispcl6.html" >prev-tail</a>] [<a 
@@ -58,27 +58,20 @@ in the context of a generic function definition defines the
 intention of the definition, and is not necessarily a policed
 restriction.
 </p><!--l. 28--><p class="noindent" >The <span 
-class="cmti-9">result-class </span>of an operation, except in one case, refers to a
-primitive or a defined class described in this definition. The
-exception is for predicates. Predicates are defined to return either
-the empty list&#8212;written <a 
-href="eulispcl17.html#x21-589009r2"><span 
-class="cmtt-9">()</span></a>&#8212;representing the boolean value false<a 
- id="dx9-11004"></a>,
-or any value other than <a 
-href="eulispcl17.html#x21-589009r2"><span 
-class="cmtt-9">()</span></a>, representing true<a 
- id="dx9-11005"></a>. Although the class
-containing exactly this set of values is not defined in the
-language, notation is abused for convenience and <span 
-class="cmti-9">boolean</span><a 
- id="dx9-11006"></a> is
-defined, for the purposes of this report, to mean that set
-of values. If the true value is a useful value, it is specified
-precisely in the description of the function and written as
+class="cmti-9">result-class </span>of an operation, except in one case, refers to
+a primitive or a defined class described in this definition.
+The exception is for predicates. Predicates are defined to
+return either the empty list&#8212;written <a 
+href="eulispcl17.html#x21-599009r2"><span 
+class="cmtt-9">()</span></a>&#8212;representing the
 <a 
-href="eulispcl16.html#x20-201001r4"><span 
-class="cmtt-9">t</span></a>.
+href="eulispcl9.html#x11-550009.4.0.4"><span 
+class="cmti-9">boolean</span></a> value false<a 
+ id="dx9-11004"></a>, or any value other than <a 
+href="eulispcl17.html#x21-599009r2"><span 
+class="cmtt-9">()</span></a>, representing
+true<a 
+ id="dx9-11005"></a>.
 </p>
 <h4 class="sclauseHead"> 7.1 <a 
  id="x9-120007.1"></a>Layout and Typography</h4>
@@ -91,8 +84,6 @@ class="cmr-7">ISP</span>. A language element is defined as an entry with its nam
 the heading of a clause, coupled with its classification. The syntax
 notation used is based on that described in <span class="cite">[<a 
 href="eulispcl3.html#Xiso9899">ISO/IEC 9899:1999</a>]</span>
-                                                                                                  
-                                                                                                  
 with modifications to support the specification of a return type and
 to improve clarity. Syntactic categories (non-terminals) are
 indicated by <span 
@@ -101,6 +92,8 @@ class="cmti-9">italic </span>type, and literal words and characters
 class="cmtt-9">constant width </span>type. A colon (<span 
 class="cmti-9">:</span>) following a
 non-terminal introduces its definition. Alternative definitions are
+                                                                                                  
+                                                                                                  
 listed on separate lines, except when prefaced by the words &#8220;one
 of&#8221;. An optional symbol is indicated by the subscript &#8220;<span 
 class="cmti-9">opt</span>&#8221;, a list
@@ -119,7 +112,7 @@ class="cmtt-9">a-special-form</span>
 <a 
  id="Q1-9-13"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">special form </span></i></b></div><br /> <hr />
+class="cmti-9">special operator </span></i></b></div><br /> <hr />
 <a 
  id="dx9-12002"></a>
 <a 
@@ -140,7 +133,7 @@ class="cmti-9">a-special-form-form</span><a
  id="dx9-13003"></a><a 
  id="dx9-13004"></a><span 
 class="cmtt-9">: </span><span 
-class="cmsy-9">&#x2192; </span><span 
+class="cmsy-9">&#x2192;</span><span 
 class="cmti-9">result-class</span></td></tr></table>
 <!--l.10 24-->        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -168,8 +161,7 @@ class="arguments">
     <!--l. 27--><p class="noindent" >description of structure and rôle of <span 
 class="cmti-9">form-1</span>.<br 
 class="newline" /><img 
-src="eulisp0x.png" alt="..
-."  class="vdots"  />
+src="eulisp0x.png" alt="..."  class="vdots"  />
     </p></dd><dt class="arguments">
 <span 
 class="cmti-9">form-n</span><span 
@@ -200,12 +192,12 @@ class="cmti-9">a-special-form-form</span></a>.
  id="x9-170007.1.1.1"></a><span 
 class="cmbx-8">Examples</span></h5>
 <!--l. 41--><p class="noindent" >Some examples of use of the special form and the behaviour that
-should result.                                        </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+should result.
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x9-180007.1.1.1"></a><span 
 class="cmbx-8">See</span><span 
-class="cmbx-8">&#x00A0;also</span></h5>
-  <!--l. 45--><p class="noindent" >Cross references to related entries.
+class="cmbx-8">&#x00A0;also</span></h5>                                            <!--l. 45--><p class="noindent" >Cross references to related entries.
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x9-18001r2"></a><span 
 class="cmbx-9">7.1.2   </span><span 
@@ -258,8 +250,7 @@ class="arguments">
       <!--l. 58--><p class="noindent" >information about the class or classes of <span 
 class="cmti-9">argument-1</span>.<br 
 class="newline" /><img 
-src="eulisp1x.png" alt="..
-."  class="vdots"  />
+src="eulisp1x.png" alt="..."  class="vdots"  />
       </p></dd><dt class="arguments">
 <span 
 class="cmti-9">argument-n</span><span 
@@ -293,8 +284,6 @@ the result that should be returned.
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 76--><p class="noindent" >Cross references to related entries.
-                                                                                                  
-                                                                                                  
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x9-24001r3"></a><span 
 class="cmbx-9">7.1.3   </span><span 
@@ -303,6 +292,8 @@ class="cmtt-9">a-generic</span>
  id="Q1-9-27"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
+                                                                                                  
+                                                                                                  
 <a 
  id="dx9-24002"></a>
 <a 
@@ -331,8 +322,7 @@ class="cmtt-9">a-generic </span>may specialize only on
 class="cmtt-9">&#x003C;class-a&#x003E; </span>for <span 
 class="cmti-9">argument-a</span>.<br 
 class="newline" /><img 
-src="eulisp2x.png" alt=".
-.."  class="vdots"  />
+src="eulisp2x.png" alt="..."  class="vdots"  />
     </p></dd><dt class="genericargs">
 <span 
 class="cmti-9">argument-n </span>: </dt><dd 
@@ -388,12 +378,12 @@ arguments.)
 <h5 class="likesyntaxssclauseHead"><a 
  id="x9-290004"></a><span 
 class="cmbx-8">Specialized Arguments</span></h5>
-<!--l. 109--><p class="noindent" >                                                        </p><dl class="specargs1"><dt class="specargs">
-  <span 
+<!--l. 109--><p class="noindent" >
+    </p><dl class="specargs1"><dt class="specargs">
+<span 
 class="cmti-9">argument-a </span><span 
-class="cmtt-9">&#x003C;class-a&#x003E; </span>:  </dt><dd 
-class="specargs">
-        <!--l. 110--><p class="noindent" >means that <span 
+class="cmtt-9">&#x003C;class-a&#x003E; </span>: </dt><dd 
+class="specargs">                                     <!--l. 110--><p class="noindent" >means that <span 
 class="cmti-9">argument-a </span>of the method must be an instance
         of <span 
 class="cmtt-9">&#x003C;class-a&#x003E;</span>. Of course, this argument must be one which
@@ -402,8 +392,8 @@ class="cmtt-9">a-generic </span>as being open to specialization
         and <span 
 class="cmtt-9">&#x003C;class-a&#x003E; </span>must be a subclass of the class.<br 
 class="newline" /><img 
-src="eulisp3x.png" alt=".
-.."  class="vdots"  />
+src="eulisp3x.png" alt="..
+."  class="vdots"  />
         </p></dd><dt class="specargs">
   <span 
 class="cmti-9">argument-n </span>:   </dt><dd 
@@ -439,7 +429,7 @@ class="cmbx-8">&#x00A0;also</span></h5>
  id="x9-32001r5"></a><span 
 class="cmbx-9">7.1.5   </span><span 
 class="cmtt-9">&#x003C;a-condition&#x003E; </span><a 
-href="eulispcl14.html#x18-155001r6"><span 
+href="eulispcl14.html#x18-160001r6"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>
  <a 
  id="Q1-9-37"></a>
@@ -470,8 +460,8 @@ class="cmti-9">value-a</span>
 class="cmti-9">value-a </span>is supposed to provide about
       the exceptional situation that has arisen.<br 
 class="newline" /><img 
-src="eulisp4x.png" alt=".
-.."  class="vdots"  />
+src="eulisp4x.png" alt="..
+."  class="vdots"  />
       </p></dd><dt class="initoptions">
 <span 
 class="cmtt-9">initarg-n </span><span 
@@ -481,18 +471,18 @@ class="initoptions">
 class="cmtt-9">initarg-a</span>.</p></dd></dl>
 <!--l. 143--><p class="noindent" >
 </p>
-                                                                                                  
-                                                                                                  
 <h5 class="likesyntaxssclauseHead"><a 
  id="x9-340005"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 144--><p class="noindent" >Any additional information about the circumstances in which the
 condition will be signalled.
+                                                                                                  
+                                                                                                  
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x9-34001r6"></a><span 
 class="cmbx-9">7.1.6   </span><span 
 class="cmtt-9">&#x003C;a-class&#x003E; </span><a 
-href="eulispcl11.html#x13-67006r2"><span 
+href="eulispcl11.html#x13-71006r2"><span 
 class="cmtt-9">&#x003C;class&#x003E;</span></a>
 <a 
  id="Q1-9-40"></a>
@@ -576,12 +566,13 @@ class="cmti-9">constant </span></i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x9-380008"></a><span 
-class="cmbx-8">Remarks</span></h5>                                           <!--l. 171--><p class="noindent" >A description of the rôle of the constant binding whose value is
-  <a 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 171--><p class="noindent" >A description of the rôle of the constant binding whose value is
+<a 
 href="#x9-34001r6"><span 
 class="cmtt-9">&#x003C;a-class&#x003E;</span></a>, <span 
 class="cmti-9">i.e. </span>the class alias.
-  </p><!--l. 608--><p class="noindent" >
+                                                   </p><!--l. 601--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 7.2 <a 
  id="x9-390007.2"></a>Naming</h4>
@@ -603,10 +594,10 @@ class="cmbx-9">&#8220;</span><span
 class="cmtt-9">binary</span><span 
 class="cmbx-9">&#8221; prefix: </span></h5> The two argument version of a n-ary
   argument function. For example <a 
-href="eulispcl17.html#x21-665001r20"><span 
+href="eulispcl17.html#x21-675001r20"><span 
 class="cmtt-9">binary+</span></a> is the two argument
   (generic) function corresponding to the n-ary argument <a 
-href="eulispcl17.html#x21-637001r6"><span 
+href="eulispcl17.html#x21-647001r6"><span 
 class="cmtt-9">+</span></a>
  function.
   <h5 class="subdefinitionHead"> 7.3 <a 
@@ -618,10 +609,10 @@ class="cmbx-9">&#8221; suffix: </span></h5> The name of a metaclass of a set of
 class="cmbx-9">??</span>, which is the class of <span 
 class="cmbx-9">??</span>,
   <a 
-href="eulispcl11.html#x13-74005r2"><span 
+href="eulispcl11.html#x13-79005r2"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> and any of their subclasses. The exception is
   <a 
-href="eulispcl11.html#x13-67006r2"><span 
+href="eulispcl11.html#x13-71006r2"><span 
 class="cmtt-9">&#x003C;class&#x003E;</span></a> itself which is the default metaclass. The prefix should
   describe the general domain of the classes in question, but not
   necessarily any particular class in the set.
@@ -647,11 +638,11 @@ class="cmtt-9">p</span>&#8221; suffix if
 class="cmtt-9">&#x003C; </span>and <span 
 class="cmtt-9">&#x003E;</span>) is
   not hyphenated, for instance, <a 
-href="eulispcl17.html#x21-600006r9"><span 
+href="eulispcl17.html#x21-610006r9"><span 
 class="cmtt-9">consp</span></a>, and is named by a &#8220;<span 
 class="cmtt-9">-p</span>&#8221; suffix
   if it is, for instance <a 
-href="eulispcl17.html#x21-470066r2"><span 
+href="eulispcl17.html#x21-479068r2"><span 
 class="cmtt-9">double-float-p</span></a>.
                                                                                                   
                                                                                                   

@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-04-13 22:55:00" /> 
+<meta name="date" content="2010-04-19 21:52:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -21,28 +21,28 @@ href="eulispcl11.html#taileulispcl11.html" >prev-tail</a>] [<a
 href="#taileulispcl12.html">tail</a>] [<a 
 href="eulisp.html#eulispcl12.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 12 <a 
- id="x16-11000012"></a>Concurrency</h3>
+ id="x16-11500012"></a>Concurrency</h3>
 <a 
- id="dx16-110001"></a>
+ id="dx16-115001"></a>
 <a 
- id="dx16-110002"></a>
+ id="dx16-115002"></a>
 <a 
- id="dx16-110003"></a>
+ id="dx16-115003"></a>
 <a 
- id="dx16-110004"></a>
+ id="dx16-115004"></a>
 <!--l. 1--><p class="noindent" >The basic elements of parallel processing in <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;are processes and
 mutual exclusion, which are provided by the classes <a 
-href="#x16-111002r1"><span 
+href="#x16-116002r1"><span 
 class="cmtt-9">&#x003C;thread&#x003E;</span></a>&#x00A0;and
 <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a>&#x00A0;respectively.
 </p><!--l. 5--><p class="noindent" >A thread is allocated and initialized, by calling <a 
-href="eulispcl11.html#x13-94003r1"><span 
+href="eulispcl11.html#x13-99003r1"><span 
 class="cmtt-9">make</span></a>. The initarg of
 a thread specifies the initial function, which is where execution
 starts the first time the thread is dispatched by the scheduler. In
@@ -67,86 +67,86 @@ class="cmti-9">determined</span>.
 Although a program can find out whether a thread is determined
 or not by means of <span 
 class="cmtt-9">wait </span>with a timeout of <a 
-href="eulispcl16.html#x20-201001r4"><span 
+href="eulispcl16.html#x20-206001r4"><span 
 class="cmtt-9">t</span></a> (denoting a
 poll), the information is only useful if the thread has been
 determined.
 </p><!--l. 23--><p class="noindent" >A thread is made available for dispatch by starting it, using the
 function <a 
-href="#x16-118001r5"><span 
+href="#x16-123001r5"><span 
 class="cmtt-9">thread-start</span></a>, which changes its state from new to
 running. After running a thread becomes either finished or
 aborted. When a thread is finished, the result of the initial
 function may be accessed using <a 
-href="#x16-121001r6"><span 
+href="#x16-126001r6"><span 
 class="cmtt-9">thread-value</span></a>. If a thread is
 aborted, which can only occur as a result of a signal handled by
 the default handler (installed when the thread is created), then
 <a 
-href="#x16-121001r6"><span 
+href="#x16-126001r6"><span 
 class="cmtt-9">thread-value</span></a> will signal the condition that aborted the thread on
 the thread accessing the value. Note that <a 
-href="#x16-121001r6"><span 
+href="#x16-126001r6"><span 
 class="cmtt-9">thread-value</span></a> suspends
 the calling thread if the thread whose result is sought is not
 determined.
 </p><!--l. 34--><p class="noindent" >While a thread is running, its progress can be suspended
 by accessing a lock, by a stream operation or by calling
 <a 
-href="#x16-121001r6"><span 
+href="#x16-126001r6"><span 
 class="cmtt-9">thread-value</span></a> on an undetermined thread. In each of these cases,
 <a 
-href="#x16-114001r3"><span 
+href="#x16-119001r3"><span 
 class="cmtt-9">thread-reschedule</span></a> is called to allow another thread to execute.
 This function may also be called voluntarily. Progress can
 resume when the lock becomes unlocked, the input/output
 operation completes or the undetermined thread becomes
 determined.
 </p><!--l. 41--><p class="noindent" >The actions of a thread can be influenced externally by <a 
-href="eulispcl15.html#x19-176002r20"><span 
+href="eulispcl15.html#x19-181002r20"><span 
 class="cmtt-9">signal</span></a>.
 This function registers a condition to be signalled no later than
 when the specified thread is rescheduled for execution&#8212;when
 <a 
-href="#x16-114001r3"><span 
+href="#x16-119001r3"><span 
 class="cmtt-9">thread-reschedule</span></a> returns. The condition must be an instance of
 <a 
-href="#x16-133005r10"><span 
+href="#x16-138005r10"><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>. Conditions are delivered to the thread in order of receipt. This ordering requirement is only important in the
  case of a thread sending more than one signal to the same
  thread, but in other circumstances the delivery order cannot be
  verified. A <a 
-href="eulispcl15.html#x19-176002r20"><span 
+href="eulispcl15.html#x19-181002r20"><span 
 class="cmtt-9">signal</span></a> on a determined thread has no discernable
  effect on either the signalled or signalling thread unless the
  condition is not an instance of <a 
-href="#x16-133005r10"><span 
+href="#x16-138005r10"><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>, in which
  case an error is signalled on the signalling thread. See also
  <span 
 class="cmsy-9">§</span>&#x00A0;<a 
-href="eulispcl13.html#x17-15100013">13<!--tex4ht:ref: condition --></a>.
+href="eulispcl13.html#x17-15600013">13<!--tex4ht:ref: condition --></a>.
  </p><!--l. 54--><p class="noindent" >A lock is an abstract data type protecting a binary value which
  denotes whether the lock is locked or unlocked. The operations on
  a lock are <a 
-href="#x16-142001r3"><span 
+href="#x16-147001r3"><span 
 class="cmtt-9">lock</span></a> and <a 
-href="#x16-146001r4"><span 
+href="#x16-151001r4"><span 
 class="cmtt-9">unlock</span></a>. Executing a <a 
-href="#x16-142001r3"><span 
+href="#x16-147001r3"><span 
 class="cmtt-9">lock</span></a> operation will
  eventually give the calling thread exclusive control of a lock. The
  <a 
-href="#x16-146001r4"><span 
+href="#x16-151001r4"><span 
 class="cmtt-9">unlock</span></a> operation unlocks the lock so that either a thread
  subsequently calling <a 
-href="#x16-142001r3"><span 
+href="#x16-147001r3"><span 
 class="cmtt-9">lock</span></a> or one of the threads which has
  already called <a 
-href="#x16-142001r3"><span 
+href="#x16-147001r3"><span 
 class="cmtt-9">lock</span></a> on the lock can gain exclusive access.
  <a 
- id="x16-110005r1"></a>
+ id="x16-115005r1"></a>
  </p><div class="note">
  <span 
 class="cmr-8">NOTE</span><span 
@@ -168,34 +168,34 @@ class="cmr-8">ceded to the scheduler.</span></div>
  </p><!--l. 74--><p class="noindent" >
     </p><ol  class="enumerate1" >
     <li 
-  class="enumerate" id="x16-110007x1">A processor is free to use run-to-completion, timeslicing
+  class="enumerate" id="x16-115007x1">A processor is free to use run-to-completion, timeslicing
     and/or concurrent execution.
     </li>
     <li 
-  class="enumerate" id="x16-110009x2">A  conforming  program  must  assume  the  possibility  of
+  class="enumerate" id="x16-115009x2">A  conforming  program  must  assume  the  possibility  of
     concurrent execution of threads and will have the same
     semantics  in  all  cases&#8212;see  discussion  of  fairness  which
     follows.
     </li>
     <li 
-  class="enumerate" id="x16-110011x3">The  default  condition  handler  for  a  new  thread,  when
+  class="enumerate" id="x16-115011x3">The  default  condition  handler  for  a  new  thread,  when
     invoked, will change the state of the thread to <span 
 class="cmti-9">aborted</span>,
     save the signalled condition and reschedule the thread.
     </li>
     <li 
-  class="enumerate" id="x16-110013x4">A  continuation  must  only  be  called  from  within  its
+  class="enumerate" id="x16-115013x4">A  continuation  must  only  be  called  from  within  its
     dynamic  extent.  This  does  not  include  threads  created
     within the dynamic extent. An error is signalled (condition
     class: <a 
-href="#x16-135001r11"><span 
+href="#x16-140001r11"><span 
 class="cmtt-9">&#x003C;wrong-thread-continuation&#x003E;</span></a> <a 
- id="dx16-110014"></a>), if a continuation
+ id="dx16-115014"></a>), if a continuation
     is called on a thread other than the one on which it was
     created.
     </li>
     <li 
-  class="enumerate" id="x16-110016x5">The lexical environment (inner and top) associated with
+  class="enumerate" id="x16-115016x5">The lexical environment (inner and top) associated with
     the initial function may be shared, as is the top-dynamic
     environment, but each thread has a distinct inner-dynamic
     environment.   In   consequence,   any   modifications   of
@@ -204,7 +204,7 @@ class="cmtt-9">&#x003C;wrong-thread-continuation&#x003E;</span></a> <a
     non-deterministic behaviour.
     </li>
     <li 
-  class="enumerate" id="x16-110018x6">The creation and starting of a thread represent changes to
+  class="enumerate" id="x16-115018x6">The creation and starting of a thread represent changes to
     the state of the processor and as such are not affected by
     the processor&#8217;s handling of errors signalled subsequently
     on the creating/starting thread (c.f. streams). That is to
@@ -215,7 +215,7 @@ class="cmtt-9">&#x003C;wrong-thread-continuation&#x003E;</span></a> <a
                                                                                                   
     </li>
     <li 
-  class="enumerate" id="x16-110020x7">The  behaviour  of  i/o  on  the  same  stream  by  multiple
+  class="enumerate" id="x16-115020x7">The  behaviour  of  i/o  on  the  same  stream  by  multiple
     threads is undefined unless it is mediated by explicit locks.</li></ol>
 <!--l. 109--><p class="noindent" >The parallel semantics are preserved on a sequential
 run-to-completion implementation by requiring communication
@@ -250,33 +250,33 @@ class="cmtt-9">&#x00A0;(thread-reschedule))</span>
 <!--l. 152--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 12.1 <a 
- id="x16-11100012.1"></a>Threads</h4> <a 
- id="dx16-111001"></a>
+ id="x16-11600012.1"></a>Threads</h4> <a 
+ id="dx16-116001"></a>
 The defined name of this module is <span 
 class="cmtt-9">thread</span>. This section defines
 the operations on threads.
 <!--l. 4--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-111002r1"></a><span 
+ id="x16-116002r1"></a><span 
 class="cmbx-9">12.1.1   </span><span 
 class="cmtt-9">&#x003C;thread&#x003E; </span><a 
-href="eulispcl11.html#x13-67002r1"><span 
+href="eulispcl11.html#x13-71002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a>
 <a 
- id="Q1-16-138"></a>
+ id="Q1-16-143"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">class </span></i></b></div><br /> <hr />
 <a 
- id="dx16-111003"></a>
+ id="dx16-116003"></a>
 <a 
- id="dx16-111004"></a>
+ id="dx16-116004"></a>
 <a 
- id="dx16-111005"></a>
+ id="dx16-116005"></a>
 </p><!--l. 7--><p class="noindent" >The class of all instances of <a 
-href="#x16-111002r1"><span 
+href="#x16-116002r1"><span 
 class="cmtt-9">&#x003C;thread&#x003E;</span></a>.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1120001"></a><span 
+ id="x16-1170001"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
 <!--l. 9--><p class="noindent" >
     </p><dl class="initoptions1"><dt class="initoptions">
@@ -285,25 +285,25 @@ class="cmtt-9">init-function </span><span
 class="cmti-9">fn </span>: </dt><dd 
 class="initoptions">
     <!--l. 10--><p class="noindent" >an instance of <a 
-href="eulispcl11.html#x13-74001r1"><span 
+href="eulispcl11.html#x13-79001r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a> which will be called when the
     resulting thread is started by <a 
-href="#x16-118001r5"><span 
+href="#x16-123001r5"><span 
 class="cmtt-9">thread-start</span></a>.</p></dd></dl>
                                                    <!--l. 14--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-112001r2"></a><span 
+ id="x16-117001r2"></a><span 
 class="cmbx-9">12.1.2   </span><span 
 class="cmtt-9">threadp</span>
  <a 
- id="Q1-16-140"></a>
+ id="Q1-16-145"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
- id="dx16-112002"></a>
+ id="dx16-117002"></a>
   <a 
- id="dx16-112003"></a>
+ id="dx16-117003"></a>
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1130002"></a><span 
+ id="x16-1180002"></a><span 
 class="cmbx-8">Arguments</span></h5>
   <!--l. 16--><p class="noindent" >
        </p><dl class="arguments1"><dt class="arguments">
@@ -314,36 +314,36 @@ class="arguments">
   <!--l. 20--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1140002"></a><span 
+ id="x16-1190002"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 21--><p class="noindent" >The supplied argument if it is an instance of <a 
-href="#x16-111002r1"><span 
+href="#x16-116002r1"><span 
 class="cmtt-9">&#x003C;thread&#x003E;</span></a>, otherwise
   <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>.
   </p><!--l. 24--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-114001r3"></a><span 
+ id="x16-119001r3"></a><span 
 class="cmbx-9">12.1.3   </span><span 
 class="cmtt-9">thread-reschedule</span>
  <a 
- id="Q1-16-143"></a>
+ id="Q1-16-148"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
- id="dx16-114002"></a>
+ id="dx16-119002"></a>
   <a 
- id="dx16-114003"></a>
+ id="dx16-119003"></a>
   </p><!--l. 26--><p class="noindent" >This function takes no arguments.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1150003"></a><span 
+ id="x16-1200003"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 29--><p class="noindent" >The result is <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1160003"></a><span 
+ id="x16-1210003"></a><span 
 class="cmbx-8">Remarks</span></h5>
   <!--l. 32--><p class="noindent" >This function is called for side-effect only and may cause the
   thread which calls it to be suspended, while other threads are run.
@@ -352,57 +352,57 @@ class="cmbx-8">Remarks</span></h5>
   the thread. The resume continuation of the signal will be
   one which will eventually call the continuation of the call to
   <a 
-href="#x16-114001r3"><span 
+href="#x16-119001r3"><span 
 class="cmtt-9">thread-reschedule</span></a>.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1170003"></a><span 
+ id="x16-1220003"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
   <!--l. 40--><p class="noindent" ><a 
-href="#x16-121001r6"><span 
+href="#x16-126001r6"><span 
 class="cmtt-9">thread-value</span></a>, <a 
-href="eulispcl15.html#x19-176002r20"><span 
+href="eulispcl15.html#x19-181002r20"><span 
 class="cmtt-9">signal</span></a> and <span 
 class="cmsy-9">§</span>&#x00A0;<a 
-href="eulispcl13.html#x17-15100013">13<!--tex4ht:ref: condition --></a> for details of conditions and
+href="eulispcl13.html#x17-15600013">13<!--tex4ht:ref: condition --></a> for details of conditions and
   signalling.
   </p><!--l. 43--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-117001r4"></a><span 
+ id="x16-122001r4"></a><span 
 class="cmbx-9">12.1.4   </span><span 
 class="cmtt-9">current-thread</span>
  <a 
- id="Q1-16-147"></a>
+ id="Q1-16-152"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
- id="dx16-117002"></a>
+ id="dx16-122002"></a>
                                                                                                   
                                                                                                   
 <a 
- id="dx16-117003"></a>
+ id="dx16-122003"></a>
 </p><!--l. 45--><p class="noindent" >This function takes no arguments.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1180004"></a><span 
+ id="x16-1230004"></a><span 
 class="cmbx-8">Result</span></h5>
 <!--l. 48--><p class="noindent" >The thread on which <a 
-href="#x16-117001r4"><span 
+href="#x16-122001r4"><span 
 class="cmtt-9">current-thread</span></a> was executed.
 </p><!--l. 50--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-118001r5"></a><span 
+ id="x16-123001r5"></a><span 
 class="cmbx-9">12.1.5   </span><span 
 class="cmtt-9">thread-start</span>
 <a 
- id="Q1-16-149"></a>
+ id="Q1-16-154"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
- id="dx16-118002"></a>
+ id="dx16-123002"></a>
 <a 
- id="dx16-118003"></a>
+ id="dx16-123003"></a>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1190005"></a><span 
+ id="x16-1240005"></a><span 
 class="cmbx-8">Arguments</span></h5>
 <!--l. 51--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
@@ -413,7 +413,7 @@ class="arguments">
 class="cmti-9">thread </span>is
     not new, an error is signalled (condition class: <span 
 class="cmbx-9">??</span><a 
- id="dx16-119001"></a>).
+ id="dx16-124001"></a>).
     </p></dd><dt class="arguments">
 <span 
 class="cmti-9">obj</span><sub><span 
@@ -427,12 +427,12 @@ class="cmti-9">thread</span>.</p></dd></dl>
 <!--l. 60--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1200005"></a><span 
+ id="x16-1250005"></a><span 
 class="cmbx-8">Result</span></h5>
 <!--l. 61--><p class="noindent" >The thread which was supplied as the first argument.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1210005"></a><span 
+ id="x16-1260005"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 64--><p class="noindent" >The state of thread is changed to running. The values <span 
 class="cmti-9">obj</span><sub><span 
@@ -443,20 +443,20 @@ class="cmmi-6">n</span></sub> will be passed as arguments to the initial functio
 <span 
 class="cmti-9">thread</span>.
 </p><!--l. 68--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-121001r6"></a><span 
+ id="x16-126001r6"></a><span 
 class="cmbx-9">12.1.6   </span><span 
 class="cmtt-9">thread-value</span>
 <a 
- id="Q1-16-153"></a>
+ id="Q1-16-158"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
- id="dx16-121002"></a>
+ id="dx16-126002"></a>
 <a 
- id="dx16-121003"></a>
+ id="dx16-126003"></a>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1220006"></a><span 
+ id="x16-1270006"></a><span 
 class="cmbx-8">Arguments</span></h5>
 <!--l. 69--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">                                               <span 
@@ -466,53 +466,53 @@ class="arguments">
   <!--l. 73--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1230006"></a><span 
+ id="x16-1280006"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 74--><p class="noindent" >The result of the initial function applied to the arguments passed
   from <a 
-href="#x16-118001r5"><span 
+href="#x16-123001r5"><span 
 class="cmtt-9">thread-start</span></a>. However, if a condition is signalled on <span 
 class="cmti-9">thread</span>
   which is handled by the default handler the condition will now be
   signalled on the thread calling <a 
-href="#x16-121001r6"><span 
+href="#x16-126001r6"><span 
 class="cmtt-9">thread-value</span></a>&#8212;that is the
   condition will be propagated to the accessing thread.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1240006"></a><span 
+ id="x16-1290006"></a><span 
 class="cmbx-8">Remarks</span></h5>
   <!--l. 81--><p class="noindent" >If <span 
 class="cmti-9">thread </span>is not determined, each thread calling <a 
-href="#x16-121001r6"><span 
+href="#x16-126001r6"><span 
 class="cmtt-9">thread-value</span></a> is
   suspended until <span 
 class="cmti-9">thread </span>is determined, when each will either get the
   thread&#8217;s value or signal the condition.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1250006"></a><span 
+ id="x16-1300006"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
   <!--l. 86--><p class="noindent" ><a 
-href="#x16-114001r3"><span 
+href="#x16-119001r3"><span 
 class="cmtt-9">thread-reschedule</span></a>, <a 
-href="eulispcl15.html#x19-176002r20"><span 
+href="eulispcl15.html#x19-181002r20"><span 
 class="cmtt-9">signal</span></a>.
   </p><!--l. 88--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-125001r7"></a><span 
+ id="x16-130001r7"></a><span 
 class="cmbx-9">12.1.7   </span><span 
 class="cmtt-9">wait</span>
  <a 
- id="Q1-16-158"></a>
+ id="Q1-16-163"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
- id="dx16-125002"></a>
+ id="dx16-130002"></a>
   <a 
- id="dx16-125003"></a>
+ id="dx16-130003"></a>
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1260007"></a><span 
+ id="x16-1310007"></a><span 
 class="cmbx-8">Generic Arguments</span></h5>
   <!--l. 90--><p class="noindent" >
        </p><dl class="genericargs1"><dt class="genericargs">
@@ -523,34 +523,34 @@ class="genericargs">
         </p></dd><dt class="genericargs">
   <span 
 class="cmti-9">timeout </span><a 
-href="eulispcl11.html#x13-67002r1"><span 
+href="eulispcl11.html#x13-71002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a> :  </dt><dd 
 class="genericargs">
         <!--l. 94--><p class="noindent" >One of <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>, <a 
-href="eulispcl16.html#x20-201001r4"><span 
+href="eulispcl16.html#x20-206001r4"><span 
 class="cmtt-9">t</span></a> or a non-negative integer.</p></dd></dl>
   <!--l. 99--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1270007"></a><span 
+ id="x16-1320007"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 100--><p class="noindent" >Returns <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a> if <span 
 class="cmti-9">timeout </span>was reached, otherwise a non-<a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a> value.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1280007"></a><span 
+ id="x16-1330007"></a><span 
 class="cmbx-8">Remarks</span></h5>
   <!--l. 104--><p class="noindent" ><a 
-href="#x16-125001r7"><span 
+href="#x16-130001r7"><span 
 class="cmtt-9">wait</span></a> provides a generic interface to operations which may block.
   Execution of the current thread will continue beyond the <a 
-href="#x16-125001r7"><span 
+href="#x16-130001r7"><span 
 class="cmtt-9">wait</span></a>
  form only when one of the following happened:
                                                                                                   
@@ -558,44 +558,44 @@ class="cmtt-9">wait</span></a>
 </p><!--l. 107--><p class="noindent" >
     </p><ol  class="enumerate1" >
     <li 
-  class="enumerate" id="x16-128002x1"><a 
- id="x16-1280011"></a> A condition associated with <span 
+  class="enumerate" id="x16-133002x1"><a 
+ id="x16-1330011"></a> A condition associated with <span 
 class="cmti-9">obj </span>returns true;
     </li>
     <li 
-  class="enumerate" id="x16-128004x2"><a 
- id="x16-1280032"></a> <span 
+  class="enumerate" id="x16-133004x2"><a 
+ id="x16-1330032"></a> <span 
 class="cmti-9">timeout </span>time units elapse;
     </li>
     <li 
-  class="enumerate" id="x16-128006x3"><a 
- id="x16-1280053"></a> A condition is raised by another thread on this thread.</li></ol>
+  class="enumerate" id="x16-133006x3"><a 
+ id="x16-1330053"></a> A condition is raised by another thread on this thread.</li></ol>
 <!--l. 112--><p class="noindent" ><a 
-href="#x16-125001r7"><span 
+href="#x16-130001r7"><span 
 class="cmtt-9">wait</span></a> returns <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a> if timeout occurs, else it returns a non-nil
 value.
 </p><!--l. 115--><p class="noindent" >A <span 
 class="cmti-9">timeout </span>argument of <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a> or zero denotes a polling operation. A
 <span 
 class="cmti-9">timeout </span>argument of <a 
-href="eulispcl16.html#x20-201001r4"><span 
+href="eulispcl16.html#x20-206001r4"><span 
 class="cmtt-9">t</span></a> denotes indefinite blocking (cases <a 
-href="#x16-1280011">a<!--tex4ht:ref: case-a --></a> or <a 
-href="#x16-1280053">c<!--tex4ht:ref: case-c --></a>
+href="#x16-1330011">a<!--tex4ht:ref: case-a --></a> or <a 
+href="#x16-1330053">c<!--tex4ht:ref: case-c --></a>
 above). A <span 
 class="cmti-9">timeout </span>argument of a non-negative integer denotes the
 minimum number of time units before timeout. The number of
 time units in a second is given by the implementation-defined
 constant <a 
-href="#x16-133001r9"><span 
+href="#x16-138001r9"><span 
 class="cmtt-9">ticks-per-second</span></a>.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1290007"></a><span 
+ id="x16-1340007"></a><span 
 class="cmbx-8">Examples</span></h5>
 <!--l. 123--><p class="noindent" >This code fragment copies characters from stream <span 
 class="cmtt-9">s </span>to the current
@@ -652,33 +652,33 @@ class="cmtt-9">&#x00A0;(loop))</span>
 <!--l. 136--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1300007"></a><span 
+ id="x16-1350007"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 137--><p class="noindent" >threads (section&#x00A0;<a 
-href="#x16-11100012.1">12.1<!--tex4ht:ref: thread --></a>), streams (section&#x00A0;<a 
-href="eulispcl17.html#x21-68200017.15">17.15<!--tex4ht:ref: stream --></a>).
+href="#x16-11600012.1">12.1<!--tex4ht:ref: thread --></a>), streams (section&#x00A0;<a 
+href="eulispcl17.html#x21-69200017.15">17.15<!--tex4ht:ref: stream --></a>).
 </p><!--l. 139--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-130001r8"></a><span 
+ id="x16-135001r8"></a><span 
 class="cmbx-9">12.1.8   </span><span 
 class="cmtt-9">wait</span>
 <a 
- id="Q1-16-164"></a>
+ id="Q1-16-169"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
- id="dx16-130002"></a>
+ id="dx16-135002"></a>
 <a 
- id="dx16-130003"></a>
+ id="dx16-135003"></a>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1310008"></a><span 
+ id="x16-1360008"></a><span 
 class="cmbx-8">Specialized Arguments</span></h5>
 <!--l. 141--><p class="noindent" >
     </p><dl class="specargs1"><dt class="specargs">
 <span 
 class="cmti-9">thread </span><a 
-href="#x16-111002r1"><span 
+href="#x16-116002r1"><span 
 class="cmtt-9">&#x003C;thread&#x003E;</span></a> : </dt><dd 
 class="specargs">
     <!--l. 143--><p class="noindent" >The thread on which to wait.
@@ -688,27 +688,27 @@ class="cmti-9">timeout </span><span
 class="cmtt-9">&#x003C;object&#x003E; </span>: </dt><dd 
 class="specargs">
     <!--l. 145--><p class="noindent" >The timeout period which is specified by one of <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>, <a 
-href="eulispcl16.html#x20-201001r4"><span 
+href="eulispcl16.html#x20-206001r4"><span 
 class="cmtt-9">t</span></a>, and         non-negative integer.</p></dd></dl>
   <!--l. 150--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1320008"></a><span 
+ id="x16-1370008"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 151--><p class="noindent" >Result is either <span 
 class="cmti-9">thread </span>or <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>. If <span 
 class="cmti-9">timeout </span>is <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>, the result is <span 
 class="cmti-9">thread </span>if
   it is <span 
 class="cmti-9">determined</span>. If <span 
 class="cmti-9">timeout </span>is <a 
-href="eulispcl16.html#x20-201001r4"><span 
+href="eulispcl16.html#x20-206001r4"><span 
 class="cmtt-9">t</span></a>, <span 
 class="cmti-9">thread </span>suspends until <span 
 class="cmti-9">thread </span>is
@@ -722,56 +722,56 @@ class="cmti-9">thread </span>is
 class="cmti-9">thread</span>, or until the <span 
 class="cmti-9">timeout</span>
   period is reached, in which case the result is <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>, whichever is the
   sooner. The units for the non-negative integer timeout are the
   number of clock ticks to wait. The implementation-defined
   constant <a 
-href="#x16-133001r9"><span 
+href="#x16-138001r9"><span 
 class="cmtt-9">ticks-per-second</span></a> is used to make timeout periods
   processor independent.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1330008"></a><span 
+ id="x16-1380008"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
   <!--l. 163--><p class="noindent" ><a 
-href="#x16-125001r7"><span 
+href="#x16-130001r7"><span 
 class="cmtt-9">wait</span></a> and <a 
-href="#x16-133001r9"><span 
+href="#x16-138001r9"><span 
 class="cmtt-9">ticks-per-second</span></a> (<span 
 class="cmsy-9">§</span>&#x00A0;<a 
-href="eulispcl13.html#x17-15100013">13<!--tex4ht:ref: condition --></a>).
+href="eulispcl13.html#x17-15600013">13<!--tex4ht:ref: condition --></a>).
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-133001r9"></a><span 
+ id="x16-138001r9"></a><span 
 class="cmbx-9">12.1.9   </span><span 
 class="cmtt-9">ticks-per-second </span><a 
-href="eulispcl17.html#x21-470060r1"><span 
+href="eulispcl17.html#x21-479060r1"><span 
 class="cmtt-9">&#x003C;double-float&#x003E;</span></a>
  <a 
- id="Q1-16-168"></a>
+ id="Q1-16-173"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">constant </span></i></b></div><br /> <hr /> <a 
- id="dx16-133002"></a>
+ id="dx16-138002"></a>
   <a 
- id="dx16-133003"></a>
+ id="dx16-138003"></a>
   </p><!--l. 167--><p class="noindent" >The number of time units in a second expressed as a double precision
   floating point number. This value is implementation-defined<a 
- id="dx16-133004"></a>.
+ id="dx16-138004"></a>.
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-133005r10"></a><span 
+ id="x16-138005r10"></a><span 
 class="cmbx-9">12.1.10   </span><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E; </span><a 
-href="eulispcl14.html#x18-155001r6"><span 
+href="eulispcl14.html#x18-160001r6"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>
  <a 
- id="Q1-16-169"></a>
+ id="Q1-16-174"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">condition </span></i></b></div><br /> <hr /> <a 
- id="dx16-133006"></a>
+ id="dx16-138006"></a>
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-13400010"></a><span 
+ id="x16-13900010"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
   <!--l. 174--><p class="noindent" >
        </p><dl class="initoptions1"><dt class="initoptions">
@@ -783,26 +783,26 @@ class="initoptions">
   <!--l. 178--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-13500010"></a><span 
+ id="x16-14000010"></a><span 
 class="cmbx-8">Remarks</span></h5>
   <!--l. 179--><p class="noindent" >This is the general condition class for all conditions arising from
   thread operations.
   </p><!--l. 182--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-135001r11"></a><span 
+ id="x16-140001r11"></a><span 
 class="cmbx-9">12.1.11   </span><span 
 class="cmtt-9">&#x003C;wrong-thread-continuation&#x003E; </span><a 
-href="#x16-133005r10"><span 
+href="#x16-138005r10"><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>
  <a 
- id="Q1-16-172"></a>
+ id="Q1-16-177"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">condition </span></i></b></div><br /> <hr /> <a 
- id="dx16-135002"></a>
+ id="dx16-140002"></a>
                                                                                                   
                                                                                                   
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-13600011"></a><span 
+ id="x16-14100011"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
 <!--l. 184--><p class="noindent" >
     </p><dl class="initoptions1"><dt class="initoptions">
@@ -821,25 +821,25 @@ class="cmti-9">continuation </span>was created.</p></dd></dl>
 <!--l. 192--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-13700011"></a><span 
+ id="x16-14200011"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 193--><p class="noindent" >Signalled if the given continuation is called on a thread other than
 the one on which it was created.
 </p><!--l. 196--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-137001r12"></a><span 
+ id="x16-142001r12"></a><span 
 class="cmbx-9">12.1.12   </span><span 
 class="cmtt-9">&#x003C;thread-already-started&#x003E; </span><a 
-href="#x16-133005r10"><span 
+href="#x16-138005r10"><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>
 <a 
- id="Q1-16-175"></a>
+ id="Q1-16-180"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">condition </span></i></b></div><br /> <hr />
 <a 
- id="dx16-137002"></a>
+ id="dx16-142002"></a>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-13800012"></a><span 
+ id="x16-14300012"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
 <!--l. 198--><p class="noindent" >
     </p><dl class="initoptions1"><dt class="initoptions">
@@ -851,55 +851,55 @@ class="initoptions">
 <!--l. 202--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-13900012"></a><span 
+ id="x16-14400012"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 203--><p class="noindent" >Signalled by <a 
-href="#x16-118001r5"><span 
+href="#x16-123001r5"><span 
 class="cmtt-9">thread-start</span></a> if the given thread has been started
 already.
 </p><!--l. 206--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 12.2 <a 
- id="x16-14000012.2"></a>Locks</h4> <a 
- id="dx16-140001"></a>  The defined name of this module is <span 
+ id="x16-14500012.2"></a>Locks</h4> <a 
+ id="dx16-145001"></a>  The defined name of this module is <span 
 class="cmtt-9">lock</span>.
 <!--l. 212--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-140002r1"></a><span 
+ id="x16-145002r1"></a><span 
 class="cmbx-9">12.2.1   </span><span 
 class="cmtt-9">&#x003C;lock&#x003E; </span><a 
-href="eulispcl11.html#x13-67002r1"><span 
+href="eulispcl11.html#x13-71002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a>
 <a 
- id="Q1-16-179"></a>
+ id="Q1-16-184"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">class </span></i></b></div><br /> <hr />
 <a 
- id="dx16-140003"></a>
+ id="dx16-145003"></a>
 <a 
- id="dx16-140004"></a>
+ id="dx16-145004"></a>
 <a 
- id="dx16-140005"></a>
+ id="dx16-145005"></a>
 </p><!--l. 215--><p class="noindent" >The class of all instances of <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a>. This class has no init-options.
 The result of calling <a 
-href="eulispcl11.html#x13-94003r1"><span 
+href="eulispcl11.html#x13-99003r1"><span 
 class="cmtt-9">make</span></a> on <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a> is a new, open lock.       <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-140006r2"></a><span 
+ id="x16-145006r2"></a><span 
 class="cmbx-9">12.2.2   </span><span 
 class="cmtt-9">lockp</span>
  <a 
- id="Q1-16-180"></a>
+ id="Q1-16-185"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
- id="dx16-140007"></a>
+ id="dx16-145007"></a>
   <a 
- id="dx16-140008"></a>
+ id="dx16-145008"></a>
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1410002"></a><span 
+ id="x16-1460002"></a><span 
 class="cmbx-8">Arguments</span></h5>
   <!--l. 221--><p class="noindent" >
        </p><dl class="arguments1"><dt class="arguments">
@@ -910,28 +910,28 @@ class="arguments">
   <!--l. 225--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1420002"></a><span 
+ id="x16-1470002"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 226--><p class="noindent" >The supplied argument if it is an instance of <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a>, otherwise
   <a 
-href="eulispcl17.html#x21-589009r2"><span 
+href="eulispcl17.html#x21-599009r2"><span 
 class="cmtt-9">()</span></a>.
   </p><!--l. 229--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-142001r3"></a><span 
+ id="x16-147001r3"></a><span 
 class="cmbx-9">12.2.3   </span><span 
 class="cmtt-9">lock</span>
  <a 
- id="Q1-16-183"></a>
+ id="Q1-16-188"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
- id="dx16-142002"></a>
+ id="dx16-147002"></a>
   <a 
- id="dx16-142003"></a>
+ id="dx16-147003"></a>
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1430003"></a><span 
+ id="x16-1480003"></a><span 
 class="cmbx-8">Arguments</span></h5>
   <!--l. 231--><p class="noindent" >
        </p><dl class="arguments1"><dt class="arguments">
@@ -942,19 +942,19 @@ class="arguments">
   <!--l. 235--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1440003"></a><span 
+ id="x16-1490003"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 236--><p class="noindent" >The lock supplied as argument.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1450003"></a><span 
+ id="x16-1500003"></a><span 
 class="cmbx-8">Remarks</span></h5>
   <!--l. 239--><p class="noindent" >Executing a <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a> operation will eventually give the calling
   thread exclusive control of <span 
 class="cmti-9">lock</span>. A consequence of calling <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a> is
   that a condition from another thread may be signalled on this
   thread. Such a condition will be signalled before <span 
@@ -967,29 +967,29 @@ class="cmti-9">lock </span>has been
                                                                                                   
                                                                                                   
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1460003"></a><span 
+ id="x16-1510003"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 248--><p class="noindent" ><a 
-href="#x16-146001r4"><span 
+href="#x16-151001r4"><span 
 class="cmtt-9">unlock</span></a> and <span 
 class="cmsy-9">§</span>&#x00A0;<a 
-href="eulispcl13.html#x17-15100013">13<!--tex4ht:ref: condition --></a> for details of conditions and signalling.
+href="eulispcl13.html#x17-15600013">13<!--tex4ht:ref: condition --></a> for details of conditions and signalling.
 </p><!--l. 251--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x16-146001r4"></a><span 
+ id="x16-151001r4"></a><span 
 class="cmbx-9">12.2.4   </span><span 
 class="cmtt-9">unlock</span>
 <a 
- id="Q1-16-188"></a>
+ id="Q1-16-193"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
- id="dx16-146002"></a>
+ id="dx16-151002"></a>
 <a 
- id="dx16-146003"></a>
+ id="dx16-151003"></a>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1470004"></a><span 
+ id="x16-1520004"></a><span 
 class="cmbx-8">Arguments</span></h5>
 <!--l. 253--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
@@ -1000,30 +1000,30 @@ class="arguments">
 <!--l. 257--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1480004"></a><span 
+ id="x16-1530004"></a><span 
 class="cmbx-8">Result</span></h5>
 <!--l. 258--><p class="noindent" >The lock supplied as argument.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1490004"></a><span 
+ id="x16-1540004"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 261--><p class="noindent" >The <a 
-href="#x16-146001r4"><span 
+href="#x16-151001r4"><span 
 class="cmtt-9">unlock</span></a> operation unlocks <span 
 class="cmti-9">lock </span>so that either a thread
 subsequently calling <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a> or one of the threads which has
 already called <a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a> on the lock can gain exclusive access.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x16-1500004"></a><span 
+ id="x16-1550004"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 266--><p class="noindent" ><a 
-href="#x16-140002r1"><span 
+href="#x16-145002r1"><span 
 class="cmtt-9">&#x003C;lock&#x003E;</span></a>.
                                                  
                                                                                                   

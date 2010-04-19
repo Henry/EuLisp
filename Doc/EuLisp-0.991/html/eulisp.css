@@ -22,8 +22,8 @@
 .cmtt-8{font-family: monospace;}
 .cmbx-8{font-size:80%; font-weight: bold;}
 .cmbx-8{ font-weight: bold;}
-.cmbxti-10x-x-90{font-size:90%; font-weight: bold; font-style: italic;}
 .cmitt-10x-x-90{font-size:90%;font-family: monospace; font-style: italic;}
+.cmbxti-10x-x-90{font-size:90%; font-weight: bold; font-style: italic;}
 .cmti-8{font-size:80%; font-style: italic;}
 @media print {span.next {visibility:hidden;}}
 p.noindent { text-indent: 0em }
