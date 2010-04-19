@@ -1,30 +1,33 @@
-\clause{Syntax}
+\clause{Lexical Syntax}
 \label{syntax}
-\index{general}{syntax}
+\index{general}{lexical syntax}
+%
+\sclause{Character Set}
+\label{character-set}
+\index{general}{character set}
+%
 \begin{optDefinition}
 %
 Case\index{general}{case sensitivity} is distinguished in each of characters,
 strings and identifiers, so that {\tt variable-name} and {\tt Variable-name} are
 different, but where a character is used in a positional number representation
-({\em e.g.} \verb+#\x3Ad+) the case is ignored.  Thus, case is also significant
+(\eg \verb+#\x3Ad+) the case is ignored.  Thus, case is also significant
 in this definition and, as will be observed later, all the special form and
 standard function names are lower case.  In this section, and throughout this
-text, the names for individual character glyphs are those used in ISO/IEC DIS
-646:1990.
+text, the names for individual character glyphs are those used in \cite{iso646}.
 
-The minimal character set\index{general}{character set}
-\index{general}{character!minimal character set} to support \eulisp\ is defined
-in syntax table~\ref{character-set}.  The language as defined in this text uses
-only the characters given in this table.  Thus, left hand sides of the
-productions in this table define and name groups of characters which are used
-later in this definition: {\em decimal digit}, {\em upper letter}, {\em lower
-    letter}, {\em letter}, {\em other character} and {\em special character}.
-Any character not specified here is classified under {\em other character},
-which permits its use as an initial or a constituent character of an identifier
-(see section~\ref{symbol}).
+The minimal character set \index{general}{character!minimal character set} to
+support \eulisp\ is defined in syntax table~\ref{character-set}.  The language
+as defined in this text uses only the characters given in this table.  Thus,
+left hand sides of the productions in this table define and name groups of
+characters which are used later in this definition: \scref{decimal-digit},
+\scref{upper-letter}, \scref{lower-letter}, \scref{letter},
+\scref{other-character} and \scref{special-character}.  Any character not
+specified here is classified under \scref{other-character}, which permits its
+use as an initial or a constituent character of an identifier (see
+section~\ref{symbol}).
 %
 \Syntax
-\label{character-set}
 \defSyntax{character-set}{
 \begin{syntax}
     \scdef{decimal-digit}: one of \\
@@ -78,12 +81,23 @@ use of whitespace is to improve the legibility of programs for human readers.
 Whitespace separates tokens and is only significant in a string or when it
 occurs escaped within an identifier.
 
-A comment\index{general}{comment} is introduced by the {\em
-    comment-begin}\index{general}{comment!{\em comment-begin} glyph} glyph,
-called {\em semicolon} (\verb+;+) and continues up to, but does not include, the
-end of the line.  Hence, a comment cannot occur in the middle of a token because
-of the whitespace in the form of the newline.  Thus a comment is equivalent to
-whitespace.
+A comment\index{general}{comment} is introduced by the \scref{comment-begin}
+\index{general}{comment!\sc{comment-begin} glyph} glyph, called \sc{semicolon}
+(\verb+;+) and continues up to, but does not include, the end of the line:
+%
+\Syntax
+\defSyntax{comment}{
+\begin{syntax}
+    \scdef{comment}: \\
+    \>  \scref{comment-begin} \sc{all subsequent characters} \\
+    \>\>  \sc{up to the end of the line} \\
+    \scdef{comment-begin}: \\
+    \>  ;
+\end{syntax}}
+\showSyntaxBox{comment}
+
+Hence, a comment cannot occur in the middle of a token because of the whitespace
+in the form of the newline.  Thus a comment is equivalent to whitespace.
 %
 \begin{note}
     There is no notation in \eulisp\ for block comments.
@@ -110,7 +124,23 @@ section of this definition corresponding to the class as defined below:
     \>  \scref{float}     \>\>\>\S\ref{float} \\
     \>  \scref{integer}   \>\>\>\S\ref{integer} \\
     \>  \scref{string}    \>\>\>\S\ref{string} \\
-    \>  \scref{vector}    \>\>\>\S\ref{vector} \\
+    \>  \scref{vector}    \>\>\>\S\ref{vector}
+\end{syntax}}
+\showSyntaxBox{object}
+
+\sclause{Boolean}
+\label{boolean}
+\index{general}{boolean}
+%
+A boolean value is either \sc{false} \index{general}{false}, which is
+represented by the empty list---written \nil{} and is also the value of
+\constantref{nil}---or \sc{true} \index{general}{true}, which is represented by
+any other value than \nil{} or if specified as \true{}:
+%
+\Syntax
+\label{object-syntax}
+\defSyntax{boolean}{
+\begin{syntax}
     \scdef{boolean}: \\
     \>  \scref{true} \\
     \>  \scref{false} \\
@@ -121,15 +151,12 @@ section of this definition corresponding to the class as defined below:
     \>  \nil \\
     \>  \constantref{nil}
 \end{syntax}}
-\showSyntaxBox{object}
+\showSyntaxBox{boolean}
 
-A boolean value is either {\em false} \index{general}{false}, which is
-represented by the empty list---written \nil{}\/ and is also the value of
-\constantref{nil}---or {\em true} \index{general}{true}, which is represented by
-any other value than \nil{} or if specified as \true.  Although the class
-containing exactly this set of values is not defined in the language, notation
-is abused for convenience and \scref{boolean} \index{general}{boolean} is
-defined, for the purposes of this definition, to mean that set of values.
+Although the class containing exactly this set of values is not defined in the
+language, notation is abused for convenience and \scref{boolean}
+\index{general}{boolean} is defined, for the purposes of this definition, to
+mean that set of values.
 
 The syntax for \scref{identifier}s \index{general}{identifier!syntax}
 \index{general}{syntax!identifier} corresponds to that for \scref{symbol}s.

@@ -15,53 +15,53 @@ in the language.
     A Class that by definition has no direct instances.
 
     \definition{applicable method} \index{general}{applicable method}
-    \index{general}{method!applicable} A {\em method} is applicable for a
-    particular set of arguments if each element in its {\em domain} is a {\em
-        superclass} of the {\em class} of the corresponding argument.
+    \index{general}{method!applicable}  A \sc{method} is applicable for a
+    particular set of arguments if each element in its \sc{domain} is a
+    \sc{superclass} of the \sc{class} of the corresponding argument.
 
     \definition{binding}\index{general}{binding}
     A location containing a value.
 
-    \definition{class}\index{general}{class} A class is an {\em object} which
-    describes the structure and behaviour of a set of {\em objects} which are
-    its {\em instances}.  A {\em class} object contains {\em inheritance}
-    information and a set of {\em slot descriptions} which define the structure
-    of its {\em instances}.  A {\em class} {\em object} is an {\em instance} of
-    a {\em metaclass}.  All {\em classes} in \eulisp\ are {\em subclasses} of
-    {\classref{object}}, and all {\em instances} of {\classref{class}} are {\em
-        classes}.
+    \definition{class}\index{general}{class} A class is an \scref{object} which
+    describes the structure and behaviour of a set of \scref{object}s which are
+    its \sc{instances}.  A \sc{class} object contains \sc{inheritance}
+    information and a set of \scref{slot} \sc{description}s which define the
+    structure of its \sc{instances}.  A \sc{class} \scref{object} is an
+    \sc{instance} of a \sc{metaclass}.  All \sc{classes} in \eulisp\ are
+    \sc{subclasses} of {\classref{object}}, and all \sc{instances} of
+    {\classref{class}} are \sc{classes}.
 
     \definition{class precedence list} \index{general}{class precedence list}
-    Each {\em class} has a linearized list of all its {\em superclasses}, {\em
-        direct} and {\em indirect}, beginning with the {\em class} itself and
-    ending with the root of the {\em inheritance} {\em graph}, the {\em class}
-    {\tt object}.  This list determines the specificity of slot and method {\em
-        inheritance}.  A class's class precedence list may be accessed through
-    the {\em function} {\tt class-precedence-list}. The rules used to compute
-    this list are determined by the {\em class} of the {\em class} through {\em
-        methods} of the {\em generic} {\em function} {\tt
-        compute-class-precedence-list}.
+    Each \sc{class} has a linearised list of all its \sc{super-classes},
+    \sc{direct} and \sc{indirect}, beginning with the \sc{class} itself and
+    ending with the root of the \sc{inheritance} \sc{graph}, the \sc{class}
+    \classref{object}.  This list determines the specificity of slot and method
+    \sc{inheritance}.  A class's class precedence list may be accessed through
+    the \sc{function} \functionref{class-precedence-list}. The rules used to
+    compute this list are determined by the \sc{class} of the \sc{class} through
+    \sc{methods} of the \sc{generic function}
+    \genericref{compute-class-precedence-list}.
 
     \definition{class option}\index{general}{class option} A keyword and its
-    associated value applying to a {\em class} appearing in a class definition
+    associated value applying to a \sc{class} appearing in a class definition
     form, for example: the {\tt predicate} keyword and its value, which defines
-    a predicate {\em function} for the {\em class} being defined.
+    a predicate \sc{function} for the \sc{class} being defined.
 
     \definition{closure}\index{general}{closure} A first-class function with
-    {\em free variables} that are bound in the {\em lexical environment}. Such a
+    \sc{free variables} that are bound in the \sc{lexical environment}. Such a
     function is said to be ``closed over'' its free variables.  Example: the
     function returned by the expression {\tt (let ((x 1)) \#'(lambda () x))} is
     a closure since it closes over the free variable {\tt x}.
 
     \definition{congruent}\index{general}{congruent} A constraint on the form of
-    the {\em lambda-list} of a method, which requires it to have the same number
-    of elements as the generic function to which it is to be attached.
+    the \scref{lambda-list} of a method, which requires it to have the same
+    number of elements as the generic function to which it is to be attached.
 
     \definition{continuation}\index{general}{continuation} A continuation is a
     function of one parameter which represents the rest of the program.  For
     every point in a program there is the remainder of the program coming after
     that point; this can be viewed as a function of one argument awaiting the
-    result of that point.  The {\em current continuation} is the continuation
+    result of that point.  The \sc{current continuation} is the continuation
     that would be derived from the current point in a program's execution, see
     \specopref{let/cc}.
 
@@ -71,8 +71,8 @@ in the language.
     target.
 
     \definition{defining form}\index{general}{defining form} Any form or
-    {\em macro expression} expanding into a form whose operator is a {\em
-        defining operator}.
+    \sc{macro expression} expanding into a form whose operator is a \sc{defining
+        operator}.
 
     \definition{defining operator}\index{general}{defining operator} One of
     \defopref{defclass}, \defopref{defcondition}, \defopref{defconstant},
@@ -81,23 +81,23 @@ in the language.
 
     \definition{direct instance}\index{general}{direct
         instance}\index{general}{instance!direct} A direct instance of a class
-    {\em class$_1$} is any {\em object} whose most specific {\em class} is {\em
-        class$_1$}.
+    \sc{class$_1$} is any \scref{object} whose most specific \sc{class} is
+    \sc{class$_1$}.
 
     \definition{direct subclass}\index{general}{direct
-        subclass}\index{general}{subclass!direct} A {\em class$_1$} is a direct
-    {\em subclass} of {\em class$_2$} if {\em class$_1$} is a {\em subclass} of
-    {\em class$_2$}, {\em class$_1$} is not identical to {\em class$_2$}, and
-    there is no other {\em class$_3$} which is a {\em superclass} of {\em
-        class$_1$} and a {\em subclass} of {\em class$_2$}.
+        subclass}\index{general}{subclass!direct} A \sc{class$_1$} is a direct
+    \sc{subclass} of \sc{class$_2$} if \sc{class$_1$} is a \sc{subclass} of
+    \sc{class$_2$}, \sc{class$_1$} is not identical to \sc{class$_2$}, and there
+    is no other \sc{class$_3$} which is a \sc{superclass} of \sc{class$_1$} and
+    a \sc{subclass} of \sc{class$_2$}.
 
     \definition{direct superclass} \index{general}{direct superclass}
-    \index{general}{superclass!direct} A {\em direct superclass} of a class {\em
-        class$_1$} is any {\em class} for which {\em class$_1$} is a direct {\em
-        subclass}.
+    \index{general}{superclass!direct} A \sc{direct superclass} of a class
+    \sc{class$_1$} is any \sc{class} for which \sc{class$_1$} is a direct
+    \sc{subclass}.
 
     \definition{dynamic environment}\index{general}{dynamic environment} The
-    {\em inner} and {\em top dynamic} environment, taken together, are referred
+    \sc{inner} and \sc{top dynamic} environment, taken together, are referred
     to as the dynamic environment.
 
     \definition{dynamic extent}\index{general}{dynamic extent} A lifetime
@@ -107,28 +107,27 @@ in the language.
     expression.
 
     \definition{dynamic scope}\index{general}{dynamic scope} An access
-    constraint, such that the {\em scope} of the entity is limited to the {\em
-        dynamic extent} of the expression that created the entity.
+    constraint, such that the \sc{scope} of the entity is limited to the
+    \sc{dynamic extent} of the expression that created the entity.
 
     \definition{extent}\index{general}{extent} That lifetime for which an entity
-    exists.  Extent is constrained to be either {\em dynamic} or {\em
-        indefinite}.
+    exists.  Extent is constrained to be either \sc{dynamic} or \sc{indefinite}.
 
     \definition{first-class}\index{general}{first-class} First-class entities
     are those which can be passed as parameters, returned from functions, or
     assigned into a variables.
 
-    \definition{function}\index{general}{function} A function is either a {\em
-        continuation}, a {\em simple function} or a {\em generic function}.
+    \definition{function}\index{general}{function} A function is either a
+    \sc{continuation}, a \sc{simple function} or a \sc{generic function}.
 
     \definition{generic function} \index{general}{generic function} Generic
-    functions are {\em functions} for which the {\em method} executed depends on
-    the {\em class} of its arguments.  A generic function is defined in terms of
-    {\em methods} which describe the action of the generic function for a
-    specific set of argument classes called the method's {\em domain}.
+    functions are \sc{functions} for which the \sc{method} executed depends on
+    the \sc{class} of its arguments.  A generic function is defined in terms of
+    \sc{methods} which describe the action of the generic function for a
+    specific set of argument classes called the method's \sc{domain}.
 
     \definition{identifier}\index{general}{identifier} An identifier is the
-    syntactic representation of a {\em variable}.
+    syntactic representation of a \sc{variable}.
 
     \definition{indefinite extent}\index{general}{indefinite extent} A lifetime
     constraint, such that the entity exists for ever.  In practice, this means
@@ -136,136 +135,136 @@ in the language.
 
     \definition{indirect instance}\index{general}{indirect
         instance}\index{general}{instance!indirect} An indirect instance of a
-    class {\em class$_1$} is any {\em object} whose {\em class} is an {\em
-        indirect} {\em subclass} of {\em class$_1$}.
+    class \sc{class$_1$} is any \scref{object} whose \sc{class} is an
+    \sc{indirect} \sc{subclass} of \sc{class$_1$}.
 
     \definition{indirect subclass}\index{general}{indirect
-        subclass}\index{general}{subclass!indirect} A {\em class$_1$} is an
-    indirect subclass of {\em class$_2$} if {\em class$_1$} is a {\em subclass}
-    of {\em class$_2$}, {\em class$_1$} is not identical to {\em class$_2$}, and
-    there is at least one other {\em class$_3$} which is a {\em superclass} of
-    {\em class$_1$} and a {\em subclass} of {\em class$_2$}.
+        subclass}\index{general}{subclass!indirect} A \sc{class$_1$} is an
+    indirect subclass of \sc{class$_2$} if \sc{class$_1$} is a \sc{subclass}
+    of \sc{class$_2$}, \sc{class$_1$} is not identical to \sc{class$_2$}, and
+    there is at least one other \sc{class$_3$} which is a \sc{superclass} of
+    \sc{class$_1$} and a \sc{subclass} of \sc{class$_2$}.
 
     \definition{inheritance graph} \index{general}{inheritance graph} A directed
-    labelled acyclic graph whose nodes are {\em classes} and whose edges are
-    defined by the {\em direct subclass} relations between the nodes.  This
-    graph has a distinguished root, the {\em class} \classref{object}, which is
-    a {\em superclass} of every {\em class}.
+    labelled acyclic graph whose nodes are \sc{classes} and whose edges are
+    defined by the \sc{direct subclass} relations between the nodes.  This
+    graph has a distinguished root, the \sc{class} \classref{object}, which is
+    a \sc{superclass} of every \sc{class}.
 
     \definition{inherited slot description}\index{general}{inherited slot
-        description} A {\em slot} {\em description} is inherited for a {\em
-        class$_1$} if the {\em slot} {\em description} is defined for another
-    {\em class$_2$} which is a direct or indirect {\em superclass} of {\em
-        class$_1$}.
+        description} A \scref{slot} \sc{description} is inherited for a
+    \sc{class$_1$} if the \scref{slot} \sc{description} is defined for another
+    \sc{class$_2$} which is a direct or indirect \sc{superclass} of
+    \sc{class$_1$}.
 
-    \definition{initarg} \index{general}{initarg} A {\em keyword} used in an
-    {\em initlist} to mark the value of some {\em slot} or additional
-    information.  Used in conjunction with \functionref{make} and the other {\em
-        object} initialization functions to initialize the object.  An initarg
-    may be declared for a {\em slot} in a class definition form using the {\tt
-        initarg} {\em slot} {\em option} or the {\tt initargs} {\em class} {\tt
-        option}.
+    \definition{initarg} \index{general}{initarg} A \scref{keyword} used in an
+    \scref{initlist} to mark the value of some \scref{slot} or additional
+    information.  Used in conjunction with \functionref{make} and the other
+    \scref{object} initialization functions to initialize the object.  An
+    \scref{initarg} may be declared for a \scref{slot} in a class definition
+    form using the \keywordref{keyword} \scref{slot-option} or the
+    \keywordref{keywords} \sc{class-option}.
 
     \definition{initform} \index{general}{initform} A form which is evaluated to
-    produce a default initial {\em slot} value.  Initforms are closed in their
-    {\em lexical} environments and the resulting {\em closure} is called an {\em
-        initfunction}.  An initform may be declared for a {\em slot} in a class
-    definition form using the {\tt initform} {\em slot} {\em option}.
+    produce a default initial \scref{slot} value.  Initforms are closed in their
+    \sc{lexical} environments and the resulting \sc{closure} is called an
+    \sc{initfunction}.  An initform may be declared for a \scref{slot} in a
+    class definition form using the \keywordref{default} \scref{slot-option}.
 
-    \definition{initfunction} \index{general}{initfunction} A {\em function} of
-    no arguments whose result is used as the default value of a {\em slot}.
-    Initfunctions capture the {\em lexical} environment of an {\em initform}
+    \definition{initfunction} \index{general}{initfunction} A \sc{function} of
+    no arguments whose result is used as the default value of a \scref{slot}.
+    Initfunctions capture the \sc{lexical} environment of an \sc{initform}
     declaration in a class definition form.
 
     \definition{initlist} \index{general}{init-list} A list of alternating
     keywords and values which describes some not-yet instantiated object.
-    Generally the keywords correspond to the {\em initargs} of some {\em class}.
+    Generally the keywords correspond to the \sc{initargs} of some \sc{class}.
 
     \definition{inner dynamic}\index{general}{inner dynamic} Inner dynamic
     bindings are created by \specopref{dynamic-let}, referenced by
-    \specopref{dynamic} and modified by \specopref{dynamic-setq}.  Inner
-    dynamic bindings extend---and can shadow---the dynamically enclosing {\em
-        dynamic environment}.
+    \specopref{dynamic} and modified by \specopref{dynamic-setq}.  Inner dynamic
+    bindings extend---and can shadow---the dynamically enclosing \sc{dynamic
+        environment}.
 
     \definition{inner lexical}\index{general}{inner lexical} Inner lexical
     bindings are created by \specopref{lambda} and \specopref{let/cc},
-    referenced by {\em variables} and modified by \specopref{setq}.  Inner
-    lexical bindings extend---and can shadow---the lexically enclosing {\em
-        lexical environment}.  Note that \specopref{let/cc} creates an
-    immutable {\em binding}.
+    referenced by \sc{variables} and modified by \specopref{setq}.  Inner
+    lexical bindings extend---and can shadow---the lexically enclosing
+    \sc{lexical environment}.  Note that \specopref{let/cc} creates an immutable
+    \sc{binding}.
 
-    \definition{instance} \index{general}{instance} Every {\em object} is the
-    instance of some {\em class}.  An instance thus describes an {\em object} in
-    relation to its {\em class}.  An instance takes on the structure and
-    behaviour described by its {\em class}.  An instance can be either {\em
-        direct} or {\em indirect}.
+    \definition{instance} \index{general}{instance} Every \scref{object} is the
+    instance of some \sc{class}.  An instance thus describes an \scref{object}
+    in relation to its \sc{class}.  An instance takes on the structure and
+    behaviour described by its \sc{class}.  An instance can be either
+    \sc{direct} or \sc{indirect}.
 
     \definition{instantiation graph} \index{general}{instantiation graph} A
-    directed graph whose nodes are {\em objects} and whose edges are defined by
-    the {\em instance} relations between the {\em objects}.  This graph has only
-    one cycle, an edge from \classref{class} to itself.  The instantation graph
-    is a tree and \classref{class} is the root.
+    directed graph whose nodes are \scref{object}s and whose edges are defined
+    by the \sc{instance} relations between the \scref{object}s.  This graph has
+    only one cycle, an edge from \classref{class} to itself.  The instantiation
+    graph is a tree and \classref{class} is the root.
 
     \definition{lexical environment}\index{general}{lexical environment} The
-    {\em inner} and {\em top lexical} environment of a module are together
+    \sc{inner} and \sc{top lexical} environment of a module are together
     referred to as the lexical environment except when it is necessary to
     distinguish between them.
 
     \definition{lexical scope}\index{general}{lexical scope} An access
-    constraint, such that the {\em scope} of the entity is limited to the
-    textual region of the form creating the entity.  See also {\em lexically
-        closer} and {\em shadow}.
+    constraint, such that the \sc{scope} of the entity is limited to the
+    textual region of the form creating the entity.  See also \sc{lexically
+        closer} and \sc{shadow}.
 
     \definition{macro}\index{general}{macro} A macro is a function distinguished
     by when it is used: macro functions are only used during the syntax
     expansion of modules to transform expressions.
 
-    \definition{metaclass} \index{general}{metaclass} A metaclass is a {\em
-        class} {\em object} whose {\em instances} are themselves {\em classes}.
-    All metaclasses in \eulisp\ are {\em instances} of \classref{class}, which
-    is an {\em instance} of itself.  All metaclasses are also {\em subclasses}
-    of \classref{class}.  \classref{class} is a metaclass.
+    \definition{metaclass} \index{general}{metaclass} A metaclass is a
+    \sc{class} \scref{object} whose \sc{instances} are themselves \sc{classes}.
+    All metaclasses in \eulisp\ are \sc{instances} of \classref{class}, which is
+    an \sc{instance} of itself.  All metaclasses are also \sc{subclasses} of
+    \classref{class}.  \classref{class} is a metaclass.
 
     \definition{method} \index{general}{method} A method describes the action of
-    a {\em generic} {\em function} for a particular list of argument classes
-    called the method's {\em domain}.  A {\em method} is thus said to add to the
-    behaviour of each of the {\em classes} in its {\em domain}.  Methods are not
-    {\em functions} but {\em objects} which contain, among other information, a
-    {\em function} representing the method's behaviour.
+    a \sc{generic-function} for a particular list of argument classes
+    called the method's \sc{domain}.  A \sc{method} is thus said to add to the
+    behaviour of each of the \sc{classes} in its \sc{domain}.  Methods are not
+    \sc{functions} but \scref{object}s which contain, among other information, a
+    \sc{function} representing the method's behaviour.
 
-    \definition{method function} \index{general}{method function} A {\em
-        function} which implements the behaviour of a particular {\em method}.
-    Method functions have special restrictions which do not apply to all {\em
-        functions}: their formal parameter bindings are immutable, and the
-    special operators {\tt call-next-method} and {\tt next-method-p} are only
-    valid within the lexical scope of a method function.
+    \definition{method function} \index{general}{method function} A
+    \sc{function} which implements the behaviour of a particular \sc{method}.
+    Method functions have special restrictions which do not apply to all
+    \sc{functions}: their formal parameter bindings are immutable, and the
+    special operators \specopref{call-next-method} and \specopref{next-method-p}
+    are only valid within the lexical scope of a method function.
 
     \definition{method specificity} \index{general}{method specificity}
-    \index{general}{method!specificity} A domain {\em domain$_1$} is more
-    specific than another {\em domain$_2$} if the first {\em class} in {\em
-        domain$_1$} is a {\em subclass} of the first {\em class} in {\em
-        domain$_2$}, or, if they are the same, the rest of {\em domain$_1$} is
-    more specific than the rest of {\em domain$_2$}.
+    \index{general}{method!specificity} A domain \sc{domain$_1$} is more
+    specific than another \sc{domain$_2$} if the first \sc{class} in
+    \sc{domain$_1$} is a \sc{subclass} of the first \sc{class} in
+    \sc{domain$_2$}, or, if they are the same, the rest of \sc{domain$_1$} is
+    more specific than the rest of \sc{domain$_2$}.
 
-    \definition{multi-method} \index{general}{multi-method} A {\em method} which
+    \definition{multi-method} \index{general}{multi-method} A \sc{method} which
     specializes on more than one argument.
 
     \definition{new instance}\index{general}{new instance} A newly allocated
-    {\em instance}, which is distinct, but can be isomorphic to other {\em
-        instances}.
+    \sc{instance}, which is distinct, but can be isomorphic to other
+    \sc{instances}.
 
     \definition{reflective} \index{general}{reflective} A system which can
-    examine and modify its own state is said to be {\em reflective}.  \eulisp\
-    is reflective to the extent that it has explicit {\em class} objects and
-    {\em metaclasses}, and user-extensible operations upon them.
+    examine and modify its own state is said to be \sc{reflective}.  \eulisp\
+    is reflective to the extent that it has explicit \sc{class} objects and
+    \sc{metaclasses}, and user-extensible operations upon them.
 
     \definition{scope}\index{general}{scope} That part of the extent in which a
-    given {\em variable} is accessible.  Scope is constrained to be {\em
-        lexical}, {\em dynamic} or {\em indefinite}.
+    given \sc{variable} is accessible.  Scope is constrained to be \sc{lexical},
+    \sc{dynamic} or \sc{indefinite}.
 
     \definition{self-instantiated class} \index{general}{self-instantiated
-        class} \index{general}{class!self-instantiated} A {\em class} which is
-    an {\em instance} of itself.  In \eulisp, \classref{class} is the only
+        class} \index{general}{class!self-instantiated} A \sc{class} which is
+    an \sc{instance} of itself.  In \eulisp, \classref{class} is the only
     example of a self-instantiated class.
 
     \definition{setter function}\index{general}{setter function} The function
@@ -275,23 +274,24 @@ in the language.
     \definition{simple function}\index{general}{simple function} A function
     comprises at least: an expression, a set of identifiers, which occur in the
     expression, called the parameters and the closure of the expression with
-    respect to the {\em lexical environment} in which it occurs, less the
+    respect to the \sc{lexical environment} in which it occurs, less the
     parameter identifiers.  Note: this is not a definition of the class
     \classref{simple-function}.
 
-    \definition{slot} \index{general}{slot} A named component of an {\em object}
-    which can be accessed using the slot's {\em accessor}.  Each {\em slot} of
-    an {\em object} is described by a {\em slot description} associated with the
-    {\em class} of the {\em object}.  When we refer to the {\em structure} of an
-    {\em object}, this usually means its set of {\em slots}.
+    \definition{slot} \index{general}{slot} A named component of an
+    \scref{object} which can be accessed using the slot's \sc{accessor}.  Each
+    \scref{slot} of an \scref{object} is described by a \sc{slot description}
+    associated with the \sc{class} of the \scref{object}.  When we refer to the
+    \sc{structure} of an \scref{object}, this usually means its set of
+    \sc{slots}.
 
     \definition{slot description} \index{general}{slot description} A slot
-    description describes a {\em slot} in the {\em instances} of a {\em class}.
-    This description includes the {\em slot's} name, its logical position in
-    {\em instances}, and a way to determine its default value.  A {\em class's}
-    slot descriptions may be accessed through the {\em function}
+    description describes a \scref{slot} in the \sc{instances} of a \sc{class}.
+    This description includes the \sc{slot's} name, its logical position in
+    \sc{instances}, and a way to determine its default value.  A \sc{class's}
+    slot descriptions may be accessed through the \sc{function}
     \functionref{class-slots}.  A slot description can be either
-    {\em direct} or {\em inherited}.
+    \sc{direct} or \sc{inherited}.
 
     \definition{slot option} \index{general}{slot option} A keyword and its
     associated value applying to one of the slots appearing in a class
@@ -301,11 +301,11 @@ in the language.
 
     \definition{slot specification} \index{general}{slot specification} A list
     of alternating keywords and values (starting with a keyword) which
-    represents a not-yet-created {\em slot} {\em description} during class
+    represents a not-yet-created \scref{slot} \sc{description} during class
     initialization.
 
-    \definition{special form} \index{general}{special form} Any form or {\em
-        macro expression} expanding into a form whose operator is a {\em special
+    \definition{special form} \index{general}{special form} Any form or
+    \sc{macro expression} expanding into a form whose operator is a \sc{special
         operator}.  They are semantic primitives of the language and in
     consequence, any processor (for example, a compiler or a code-walker) need
     be able to process only the special forms of the language and compositions
@@ -329,30 +329,27 @@ in the language.
     domains.
 
     \definition{subclass} \index{general}{subclass} The behaviour and structure
-    defined by a class {\em class$_1$} are inherited by a set of {\em classes}
-    which are termed {\em subclasses} of {\em class$_1$}.  A {\em subclass} can
-    be either {\em direct} or {\em indirect} or itself.
+    defined by a class \sc{class$_1$} are inherited by a set of \sc{classes}
+    which are termed \sc{subclasses} of \sc{class$_1$}.  A \sc{subclass} can
+    be either \sc{direct} or \sc{indirect} or itself.
 
-    \definition{superclass} \index{general}{superclass} A {\em class$_1$} is a
-    superclass of {\em class$_2$} iff {\em class$_2$} is a subclass of {\em
-        class$_1$}.  A {\em superclass} can be either {\em direct} or {\em
-        indirect} or itself.
+    \definition{superclass} \index{general}{superclass} A \sc{class$_1$} is a
+    superclass of \sc{class$_2$} iff \sc{class$_2$} is a subclass of
+    \sc{class$_1$}.  A \sc{superclass} can be either \sc{direct} or
+    \sc{indirect} or itself.
 
     \definition{top dynamic}\index{general}{top dynamic} Top dynamic bindings
     are created by \defopref{defglobal}, referenced by \specopref{dynamic}
-    and modified by \specopref{dynamic-setq}.  There is only one {\em top
+    and modified by \specopref{dynamic-setq}.  There is only one \sc{top
         dynamic} environment.
 
     \definition{top lexical}\index{general}{top lexical} Top lexical bindings
-    are created in the {\em top} {\em lexical} environment of a module by
-    \begin{flushleft} \defopref{defclass}, \defopref{defcondition},
-        \defopref{defconstant}, \defopref{defgeneric},
-        \defopref{defmacro}, \defopref{defclass}, \defopref{defun}.
-    \end{flushleft}
-    All these bindings are immutable.  \defopref{deflocal} creates a mutable
-    top-lexical binding.  All such bindings are referenced by {\em variables}
-    and those made by \defopref{deflocal} are modified by \specopref{setq}.
-    Each module defines its own distinct {\em top lexical} environment.
-
+    are created in the \sc{top} \sc{lexical} environment of a module by a
+    defining form.  All these bindings are immutable except those created by
+    \defopref{deflocal} which creates a mutable top-lexical binding.  All such
+    bindings are referenced by \sc{variables} and those made by
+    \defopref{deflocal} are modified by \specopref{setq}.  Each module defines
+    its own distinct \sc{top lexical} environment.
+%
 \end{definitions}
 \end{optDefinition}

@@ -111,41 +111,6 @@ for the purposes of definition to describe module processing as if they do.
     \>  \scref{level-0-form} \\
     \scdef{special-form}: \\
     \>  \scref{special-0-form} \\
-    \scdef{defining-0-form}: \\
-    \>  \scref{defclass-form} \\
-    \>  \scref{defcondition-form} \\
-    \>  \scref{defconstant-form} \\
-    \>  \scref{deflocal-form} \\
-    \>  \scref{defgeneric-form} \\
-    \>  \scref{defmacro-form} \\
-    \>  \scref{defun-form} \\
-    \scdef{special-0-form}: \\
-    \>  \scref{defmethod-form} \\
-    \>  \scref{generic-lambda-form} \\
-    \>  \scref{quote-form} \\
-    \>  \scref{lambda-form} \\
-    \>  \scref{setq-form} \\
-    \>  \scref{if-form} \\
-    \>  \scref{let/cc-form} \\
-    \>  \scref{labels-form} \\
-    \>  \scref{progn-form} \\
-    \>  \scref{unwind-protect-form} \\
-    \>  \scref{quasiquote-form} \\
-    \>  \scref{unquote-form} \\
-    \>  \scref{unquote-splicing-form} \\
-    \>  \scref{call-next-handler-form} \\
-    \>  \scref{with-handler-form} \\
-    \>  \scref{cond-form} \\
-    \>  \scref{and-form} \\
-    \>  \scref{or-form} \\
-    \>  \scref{block-form} \\
-    \>  \scref{return-from-form} \\
-    \>  \scref{let-form} \\
-    \>  \scref{let-star-form} \\
-    \>  \scref{with-input-file-form} \\
-    \>  \scref{with-output-file-form} \\
-    \>  \scref{with-source-form} \\
-    \>  \scref{with-sink-form}
 \end{syntax}}
 \showSyntaxBox{defmodule-0}
 %
@@ -297,7 +262,7 @@ are interpreted as follows:
 
     \item[\keyworddef{rename}] \index{general}{module!rename@{\tt rename}}
     Filters the names from each \scref{module-descriptor} replacing those with
-    {\em old-name} by {\em new-name}.  Any name not mentioned in the replacement
+    \sc{old-name} by \sc{new-name}.  Any name not mentioned in the replacement
     list is passed unchanged.  Note that once a name has been replaced the
     new-name is not compared against the replacement list again.  Thus, a
     binding can only be renamed once by a single \keywordref{rename} directive.
@@ -308,8 +273,7 @@ are interpreted as follows:
 \ssclause{\protect\keyworddef{expose} Directive}
 \index{general}{module!expose@{\tt expose}}
 \begin{optDefinition}
-oueou
-
+%
 This is denoted by the keyword \keywordref{expose} followed by a list of
 \scref{module-directive}s (see syntax table~\ref{defmodule-syntax}).  The
 purpose of this directive is to allow a module to export subsets of the external
@@ -366,22 +330,76 @@ syntax and they may also be renamed.
 %
 \begin{optDefinition}
 Definitions in a module only contain unqualified names---that is,
-\sc{local-name}s, using the above terminology.  A top-lexical binding is created
-exactly once and shared with all modules that import its exported name from the
-module that created the binding.  A name clash can arise in the top-lexical
-environment from interaction between local definitions and between local
-definitions and imported modules.  Only top-lexical bindings created by
-\defopref{deflocal} are mutable---both in the defining module and in any
-importing module.  It is a violation to modify an immutable binding.
-Expressions, that is non-defining forms, are collected and evaluated in order of
-appearance at the end of the module definition process when the top-lexical
-environment is complete---that is after the creation and initialization of the
-top-lexical bindings.  The exception to this is the \specopref{progn} form,
-which is descended and the forms within it are treated as if the
-\specopref{progn} were not present.  Definitions may only appear either at
-top-level within a module definition or inside any number of \specopref{progn}
-forms.  This is specified more precisely in the grammar for a module in syntax
-table~\ref{defmodule-syntax}.
+\sc{local-name}s, using the above terminology and are created by defining forms:
+%
+\defSyntax{defining-0-forms}{
+\begin{syntax}
+    \scdef{defining-0-form}: \\
+    \>  \scref{defclass-form} \\
+    \>  \scref{defcondition-form} \\
+    \>  \scref{defconstant-form} \\
+    \>  \scref{deflocal-form} \\
+    \>  \scref{defgeneric-form} \\
+    \>  \scref{defmacro-form} \\
+    \>  \scref{defun-form}
+\end{syntax}}
+\showSyntaxBox{defining-0-forms}
+
+A top-lexical binding is created exactly once and shared with all modules that
+import its exported name from the module that created the binding.  A name clash
+can arise in the top-lexical environment from interaction between local
+definitions and between local definitions and imported modules.  Only
+top-lexical bindings created by \defopref{deflocal} are mutable---both in the
+defining module and in any importing module.  It is a violation to modify an
+immutable binding.  Expressions, that is non-defining forms, are collected and
+evaluated in order of appearance at the end of the module definition process
+when the top-lexical environment is complete---that is after the creation and
+initialization of the top-lexical bindings.  The exception to this is the
+\specopref{progn} form, which is descended and the forms within it are treated
+as if the \specopref{progn} were not present.  Definitions may only appear
+either at top-level within a module definition or inside any number of
+\specopref{progn} forms.  This is specified more precisely in the grammar for a
+module in syntax table~\ref{defmodule-syntax}.
+%
+\end{optDefinition}
+
+\sclause{Special Forms}
+%
+\begin{optDefinition}
+%
+***HGW Say something!
+
+\defSyntax{special-0-forms}{
+\begin{syntax}
+    \scdef{special-0-form}: \\
+    \>  \scref{defmethod-form} \\
+    \>  \scref{generic-lambda-form} \\
+    \>  \scref{quote-form} \\
+    \>  \scref{lambda-form} \\
+    \>  \scref{setq-form} \\
+    \>  \scref{if-form} \\
+    \>  \scref{let/cc-form} \\
+    \>  \scref{labels-form} \\
+    \>  \scref{progn-form} \\
+    \>  \scref{unwind-protect-form} \\
+    \>  \scref{quasiquote-form} \\
+    \>  \scref{unquote-form} \\
+    \>  \scref{unquote-splicing-form} \\
+    \>  \scref{call-next-handler-form} \\
+    \>  \scref{with-handler-form} \\
+    \>  \scref{cond-form} \\
+    \>  \scref{and-form} \\
+    \>  \scref{or-form} \\
+    \>  \scref{block-form} \\
+    \>  \scref{return-from-form} \\
+    \>  \scref{let-form} \\
+    \>  \scref{let-star-form} \\
+    \>  \scref{with-input-file-form} \\
+    \>  \scref{with-output-file-form} \\
+    \>  \scref{with-source-form} \\
+    \>  \scref{with-sink-form}
+\end{syntax}}
+\showSyntaxBox{special-0-forms}
 %
 \end{optDefinition}
 
