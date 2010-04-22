@@ -24,8 +24,8 @@ characters which are used later in this definition: \scref{decimal-digit},
 \scref{upper-letter}, \scref{lower-letter}, \scref{letter},
 \scref{other-character} and \scref{special-character}.  Any character not
 specified here is classified under \scref{other-character}, which permits its
-use as an initial or a constituent character of an identifier (see
-section~\ref{symbol}).
+use as an initial or a constituent character of an \scref{identifier} (see
+\S~\ref{identifier}).
 %
 \Syntax
 \defSyntax{character-set}{
@@ -59,6 +59,9 @@ section~\ref{symbol}).
 \end{optDefinition}
 %
 \sclause{Whitespace and Comments}
+\label{comments}
+\index{general}{comments}
+%
 \begin{optPrivate}
     \verb+\#tab+ is omitted from whitespace because it is not a standard
     character.
@@ -79,7 +82,7 @@ configurations providing such an input model, thus, a reference to newline in
 this definition should also be read as a reference to end of record.  The only
 use of whitespace is to improve the legibility of programs for human readers.
 Whitespace separates tokens and is only significant in a string or when it
-occurs escaped within an identifier.
+occurs escaped within an \scref{identifier}.
 
 A comment\index{general}{comment} is introduced by the \scref{comment-begin}
 \index{general}{comment!\sc{comment-begin} glyph} glyph, called \sc{semicolon}
@@ -104,7 +107,95 @@ in the form of the newline.  Thus a comment is equivalent to whitespace.
 \end{note}
 \end{optDefinition}
 
+\sclause{Identifiers}
+\label{identifiers}
+\index{general}{identifiers}
+%
+\begin{optDefinition}
+\raggedbottom
+%
+Identifiers\index{general}{identifier} in \eulisp\ are very similar lexically to
+\scref{identifier}s in other Lisps and in other programming languages.
+Informally, an \scref{identifier}\index{general}{identifier!definition of} is a
+sequence of \scdef{letter}, \scref{decimal-digit} and \scref{other-character}s
+starting with a character that is not a \scref{decimal-digit}.
+\scref{special-character}s must be escaped if they are to be used in the names
+of \scref{identifier}s.  However, because the common notations for arithmetic
+operations are the glyphs for plus (\verb-+-) and minus (\verb+-+), which are
+also used to indicate the sign of a number, these glyphs are classified as
+\scref{identifier}s\index{general}{identifier!peculiar identifiers} in their own
+right as well as being part of the syntax of a number.
+
+Sometimes, it might be desirable to incorporate characters in an
+\scref{identifier} that are normally not legal constituents.  The aim of
+escaping in \scref{identifier}s is to change the meaning of particular
+characters so that they can appear where they are not otherwise acceptable.
+Identifiers containing characters that are not ordinarily legal constituents can
+be written by delimiting the sequence of characters by \sc{multiple-escape}, the
+glyph for which is called \sc{vertical bar} (\verb+|+).  The
+\sc{multiple-escape} denotes the beginning of an escaped \sc{part} of an
+\scref{identifier} and the next \sc{multiple-escape} denotes the end of an
+escaped part of an \scref{identifier}.  A single character that would otherwise
+not be a legal constituent can be written by preceding it with
+\sc{single-escape}, the glyph for which is called \sc{reverse solidus}
+(\verb+\+).  Therefore, \sc{single-escape} can be used to incorporate the
+\sc{multiple-escape} or the \sc{single-escape} character in an
+\scref{identifier}, delimited (or not) by \sc{multiple-escape}s.  For example,
+\verb+|).(|+ is the \scref{identifier} whose name contains the three characters
+\verb+#\)+, \verb+#\.+ and \verb+#\(+, and \verb+a|b|+ is the \scref{identifier}
+whose name contains the characters \verb+#\a+ and \verb+#\b+.  The sequence
+\verb+||+ is the \scref{identifier} with no name, and so is \verb+||||+, but
+\verb+|\||+ is the \scref{identifier} whose name contains the single character
+\verb+|+, which can also be written \verb+\|+, without delimiting
+\sc{multiple-escape}s.
+
+\Syntax
+\label{identifier-syntax}
+\defSyntax{identifier}{
+\begin{syntax}
+    \scdef{identifier}: \\
+    \>  \scref{normal-identifier} \\
+    \>  \scref{peculiar-identifier} \\
+    \>  \scref{escaped-identifier} \\
+    \scdef{normal-identifier}: \\
+    \>  \scref{normal-initial} \scseqref{normal-constituent} \\
+    \scdef{normal-initial}: \\
+    \>  \scref{letter} \\
+    \>  \scref{normal-other-character} \\
+    \scdef{normal-constituent}: \\
+    \>  \scref{letter} \\
+    \>  \scref{decimal-digit} \\
+    \>  \scref{other-character} \\
+    \scdef{peculiar-identifier}: \\
+    \>  \{+ | -\} \\
+    \>\>  \scgopt{\scref{peculiar-constituent} \scseqref{normal-constituent}} \\
+    \>  . \scref{peculiar-constituent} \scseqref{normal-constituent} \\
+    \scdef{peculiar-constituent}: \\
+    \>  \scref{letter} \\
+    \>  \scref{other-character} \\
+    \scdef{escaped-identifier}: \\
+    \>  \scref{escaped-sequence} \scseqref{escaped-sequences} \\
+    \>  \scref{normal-initial} \scseqref{escaped-sequences} \\
+    \>  \textbackslash{}\scref{level-0-character} \scseqref{escaped-sequences} \\
+    \scdef{escaped-sequences}: \\
+    \>  \scref{escaped-sequence} \\
+    \>  \scseqref{escaped-or-normal-constituent} \\
+    \scdef{escaped-sequence}: \\
+    \>  |\scseqref{escaped-sequence-constituent}| \\
+    \scdef{escaped-or-normal-constituent}: \\
+    \>  \textbackslash{}\scref{level-0-character} \\
+    \>  \scref{normal-constituent} \\
+    \scdef{escaped-sequence-constituent}: \\
+    \>  \textbackslash{}\scref{level-0-character} \\
+    \>  \scref{level-0-character} other than |
+\end{syntax}}%
+\showSyntaxBox{identifier}%
+%
+\end{optDefinition}
+
 \sclause{Objects}
+\label{objects}
+\index{general}{objects}
 \begin{optDefinition}
 An object is either a \scref{literal}, a \scref{symbol} or a \scref{list}.  The
 syntax of the classes of objects that can be read by \eulisp\ is defined in the
@@ -157,8 +248,5 @@ Although the class containing exactly this set of values is not defined in the
 language, notation is abused for convenience and \scref{boolean}
 \index{general}{boolean} is defined, for the purposes of this definition, to
 mean that set of values.
-
-The syntax for \scref{identifier}s \index{general}{identifier!syntax}
-\index{general}{syntax!identifier} corresponds to that for \scref{symbol}s.
 
 \end{optDefinition}

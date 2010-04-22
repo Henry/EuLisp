@@ -15,7 +15,7 @@ DOCUMENT = eulisp
 ## ----------------------------------------------------------------------------
 
 TEX_FILES = \
-    bibliography.tex  eulisp.tex        modules.tex    syntaxa.tex \
+    bibliography.tex  eulisp.tex        modules.tex    syntaxObjects0.tex \
     float.tex         mop.tex           syntax.tex     character.tex \
     foreword.tex      table.tex         collect.tex    format.tex \
     number.tex        telos0.tex        conditions.tex fpint.tex \

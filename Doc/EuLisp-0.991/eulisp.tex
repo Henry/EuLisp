@@ -100,7 +100,7 @@
 \input{introduction}
 
 % -----------------------------------------------------------------------
-%%% level-0
+%%% level-0 Syntax
 
 \input{structure}
 \input{terms}
@@ -113,9 +113,14 @@
 \gdef\module{eulisp0} \newpage\input{control0}
 
 % -----------------------------------------------------------------------
-%%% library functions
-\normannex{Level-0 Module Library}
-\label{annex:level-0}
+%%% Level-0 Module Library
+\clause{Level-0 Module Library}
+\label{section:level-0}
+This section describes the classes required at level-0 and the operations
+defined on instances of those classes \index{general}{level-0 classes}.  The
+section is organized by module in alphabetical order.  These sub-sections
+contain information about the predefined classes in \eulisp\ that are necessary
+to make the language usable.
 
 \gdef\module{character} \input{character}
 \gdef\module{collection} \newpage\input{collect}
@@ -136,12 +141,15 @@
 \gdef\module{symbol} \newpage\input{symbol}
 \gdef\module{table} \newpage\input{table}
 \gdef\module{vector} \newpage\input{vector}
-\gdef\module{level-0}\newpage\input{syntaxa}
+\gdef\module{level-0}\newpage\input{syntaxObjects0}
 
 % -----------------------------------------------------------------------
-%%% level 1
-\normannex{Programming Language EuLisp, Level-1}
-\label{annex:level-1}
+%%% Programming Language EuLisp, Level-1
+\clause{Programming Language EuLisp, Level-1}
+\label{section:level-1}
+This section describes the additions features in \eulisp\ level-1 including the
+reflective aspects of the object system and how to program the metaobject
+protocol and some additional control forms.
 
 \gdef\module{level-1}\input{modules1}
 \gdef\module{level-1}\newpage\input{telos1}

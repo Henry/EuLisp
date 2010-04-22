@@ -18,28 +18,27 @@
 The \eulisp\ definition comprises the following items:
 \begin{description}
     \item[Level-0]\index{general}{EuLisp@\eulisp!level-0} comprises all the
-    level-0 classes, functions, macros and special forms\index{general}{special
-        form}, which is this text minus Annex \ref{annex:level-1}.  The object
-    system can be extended by user-defined structure classes, and generic
-    functions.
+    level-0 classes, functions, defining forms \index{general}{defining form}
+    and special forms \index{general}{special form}, which is this text minus
+    \S\ref{section:level-1}.  The object system can be extended by
+    user-defined structure classes, and generic functions.
 
     \item[Level-1]\index{general}{EuLisp@\eulisp!level-1} extends level-0 with
-    the classes, functions, macros and special forms defined in Annex
-    \ref{annex:level-1}.  The object system can be extended by user-defined
-    classes and metaclasses.  The implementation of level-1 is not
-    necessarily written or writable as a conforming level-0 program.
+    the classes, functions, defining forms and special forms defined in
+    \S\ref{section:level-1}.  The object system can be extended by user-defined
+    classes and metaclasses.  The implementation of level-1 is not necessarily
+    written or writable as a conforming level-0 program.
 \end{description}
 %
 A {\em level-0 function\/} is a (generic) function defined in this text to be
 part of a conforming processor for level-0.  A function defined in terms of
 level-0 operations is an example of a {\em level-0 application}.
 
-Much of the functionality of \eulisp\ is defined in terms of
-modules\index{general}{standard
-    module}\index{general}{EuLisp@\eulisp!libraries}.  These modules might be
-available (and used) at any level, but certain modules are required at a given
-level.  Whenever a module depends on the operations available at a given level,
-that dependency will be specified.
+Much of the functionality of \eulisp\ is defined in terms of modules
+\index{general}{standard module} \index{general}{EuLisp@\eulisp!libraries}.
+These modules might be available (and used) at any level, but certain modules
+are required at a given level.  Whenever a module depends on the operations
+available at a given level, that dependency will be specified.
 
 \eulisp\ level-0\index{general}{level-0 modules} is provided by the module {\tt
     eulisp0}\index{general}{level-0 modules!eulisp0}.  This module imports and
@@ -79,20 +78,21 @@ Modules comprising {\tt eulisp0}:
 This definition is organized in three parts:
 \begin{description}
     %
-    \item[\S \ref{syntax}--\ref{control-0}] describes the core of level-0
+    \item[Sections \ref{syntax}--\ref{control-0}] describes the core of level-0
     of \eulisp, covering modules, simple classes, objects and generic functions,
     threads, conditions, control forms and events.  These sections contain the
     information about \eulisp\ that characterizes the language.
     %
-    \item[Annex A] describes the additional classes required at level-0 and the
-    operations defined on instances of those classes\index{general}{level-0
-        classes}.  The annex is organized by module in alphabetical order.
-    These sections contain information about the predefined classes in \eulisp\
-    that are necessary to make the language usable, but is not central to an
-    appreciation of the language.
+    \item[Section \ref{section:level-0}] describes the classes required at
+    level-0 and the operations defined on instances of those classes
+    \index{general}{level-0 classes}.  The section is organized by module in
+    alphabetical order.  These sections contain information about the predefined
+    classes in \eulisp\ that are necessary to make the language usable, but is
+    not central to an appreciation of the language.
     %
-    \item[Annex B] describes the reflective aspects of the object system and how
-    to program the metaobject protocol and some additional control forms.
+    \item[Section \ref{section:level-1}] describes the reflective aspects of the
+    object system and how to program the metaobject protocol and some additional
+    control forms.
 \end{description}
 %
 Prior to these, sections \ref{scope}--\ref{sec:definitions} define the scope of
