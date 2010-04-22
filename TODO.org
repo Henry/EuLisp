@@ -92,6 +92,14 @@
 *** DONE =read-error=
     CLOSED: [2010-04-01 Thu 21:31]
     Replace the use of =error= with =read-error= in /read.em/
+*** DONE Change the handling of multiple-escape sequences in /eul-ntok.c/
+    CLOSED: [2010-04-22 Thu 22:52]
+    to correspond to the syntax for identifiers as described in the definition.
+    Currently the handling of multiple-escape sequences is a duplicate of the
+    handling for strings with all the special characters when the single escape
+    character should only be required to escape itself and the multiple-escape
+    character.
+
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
