@@ -28,7 +28,7 @@ extern LispRef i_all_bindings[];
 #define class_instance_length_fn_index 74 
 #define fixed_precision_integer_p_fn_index 7 
 #define semaphorep_fn_index 7 
-#define special_tokens_fn_index 29 
+#define special_tokens_fn_index 30 
 #define access_table_clear_fn_index 9 
 #define _fpi__X60_X62_fn_index 6 
 #define _string_stream__X60_X62_fn_index 46 
@@ -47,12 +47,12 @@ extern LispRef i_all_bindings[];
 #define slotp_fn_index 12 
 #define O_EXCL_fn_index 11 
 #define element_fn_index 22 
-#define read_token_fn_index 26 
+#define read_token_fn_index 27 
 #define _C_ld__X42_X42_fn_index 66 
 #define _inline_level__X42_X42_fn_index 65 
 #define doublep_fn_index 10 
 #define member1_string_fn_index 51 
-#define unquote_splicing_mark_fn_index 25 
+#define unquote_splicing_mark_fn_index 26 
 #define socket_host_fn_index 11 
 #define generic_function_domain_fn_index 61 
 #define sf_size_fn_index () 

@@ -8,31 +8,32 @@
 extern LispRef _i_aux0_bindings[];
 
 /* Module binding indices */
-#define as_foreign_function_stub_name_fn_index 11 
-#define as_C_library_link_string_fn_index 16 
-#define main_link_string_fn_index 10 
-#define destination_link_string_fn_index 25 
-#define as_C_file_name_fn_index 17 
-#define as_C_library_dir_link_string_fn_index 26 
-#define youtoo_fn_index 19 
-#define vm_link_string_fn_index 15 
-#define as_included_C_file_name_fn_index 9 
-#define full_C_library_dir_link_string_fn_index 22 
-#define as_interface_file_name_fn_index 5 
-#define as_source_file_name_fn_index 18 
-#define as_C_library_file_name_fn_index 24 
-#define as_module_init_flag_name_fn_index 23 
-#define destination_library_link_string_fn_index 3 
-#define as_module_init_function_name_fn_index 12 
-#define as_compiled_C_file_name_fn_index 4 
-#define full_C_library_link_string_fn_index 21 
-#define as_C_library_interface_file_name_fn_index 20 
-#define with_ct_handler_fn_index 8 
-#define destination_object_string_fn_index 2 
-#define as_C_hook_object_file_name_fn_index 14 
-#define as_C_hook_source_file_name_fn_index 13 
-#define gc_link_string_fn_index 6 
-#define as_C_hook_name_fn_index 7 
+#define as_foreign_function_stub_name_fn_index 12 
+#define as_C_library_link_string_fn_index 17 
+#define main_link_string_fn_index 11 
+#define destination_link_string_fn_index 26 
+#define as_C_file_name_fn_index 18 
+#define as_C_library_dir_link_string_fn_index 27 
+#define youtoo_fn_index 20 
+#define vm_link_string_fn_index 16 
+#define as_included_C_file_name_fn_index 10 
+#define full_C_library_dir_link_string_fn_index 23 
+#define as_interface_file_name_fn_index 6 
+#define as_source_file_name_fn_index 19 
+#define as_C_library_file_name_fn_index 25 
+#define as_module_init_flag_name_fn_index 24 
+#define destination_library_link_string_fn_index 4 
+#define as_module_init_function_name_fn_index 13 
+#define as_compiled_C_file_name_fn_index 5 
+#define full_C_library_link_string_fn_index 22 
+#define as_C_library_interface_file_name_fn_index 21 
+#define with_ct_handler_fn_index 9 
+#define destination_object_string_fn_index 3 
+#define as_C_hook_object_file_name_fn_index 15 
+#define as_C_hook_source_file_name_fn_index 14 
+#define gc_link_string_fn_index 7 
+#define as_C_hook_name_fn_index 8 
+#define destination_object_dir_fn_index 2 
 
 
 

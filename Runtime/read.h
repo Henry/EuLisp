@@ -8,8 +8,8 @@
 extern LispRef read_bindings[];
 
 /* Module binding indices */
-#define special_tokens_fn_index 29 
-#define unquote_splicing_mark_fn_index 25 
+#define special_tokens_fn_index 30 
+#define unquote_splicing_mark_fn_index 26 
 #define read_char_fn_index 5 
 #define set_dispatch_macro_character_fn_index 16 
 #define list_stop_fn_index 7 
@@ -25,7 +25,7 @@ extern LispRef read_bindings[];
 #define list_start_fn_index 14 
 #define quasiquote_mark_fn_index 21 
 #define sread_s_expression_fn_index 4 
-#define read_token_fn_index 26 
+#define read_token_fn_index 27 
 #define _dispatch_macro_character_table__X42_X42_fn_index 17 
 #define sread_fn_index 10 
 #define vector_start_fn_index 18 

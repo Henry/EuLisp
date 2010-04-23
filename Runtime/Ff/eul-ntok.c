@@ -44,8 +44,8 @@
 #define CONTROL_MARK '^'
 
 // Integer formats
-#define BINARY_DIGIT_P(c) check_base_digit_p(c, 2)   // ((*c=='0')||(*c=='1'))
-#define OCTAL_DIGIT_P(c) check_base_digit_p(c, 8)    // (('0'<=*c)&&(*c<='7'))
+#define BINARY_DIGIT_P(c) check_base_digit_p(c, 2)
+#define OCTAL_DIGIT_P(c) check_base_digit_p(c, 8)
 #define BINARY_START_P(c) ((*c=='b')||(*c=='B'))
 #define OCTAL_START_P(c) ((*c=='o')||(*c=='O'))
 #define HEX_START_P(c) ((*c=='x')||(*c=='X'))
@@ -85,7 +85,8 @@ EUL_DEFINTERN(fill_buffer, "fill-buffer", 1, stream2)
 #define RETURN_DOUBLE(x) UPDATE_FCB_POS(c_double_as_eul_double(x))
 #define RETURN_STRING(x, s) UPDATE_FCB_POS(c_strn_as_eul_str(x, s))
 #define RETURN_NIL() UPDATE_FCB_POS(eul_nil)
-#define RETURN_SYMBOL(x, s) UPDATE_FCB_POS(c_strn_as_eul_symbol_or_keyword(x, s))
+#define RETURN_SYMBOL(x, s) \
+    UPDATE_FCB_POS(c_strn_as_eul_symbol_or_keyword(x, s))
 #define RETURN_SPECIAL(x) UPDATE_FCB_POS(slot_ref(special_tokens, SPECIAL_##x))
 #define RETURN_REF(x) UPDATE_FCB_POS(x)
 #define SPECIAL_LIST_START    0
@@ -97,7 +98,8 @@ EUL_DEFINTERN(fill_buffer, "fill-buffer", 1, stream2)
 #define SPECIAL_COMMA         6
 #define SPECIAL_COMMA_AT_SIGN 7
 #define SPECIAL_DOT           8
-#define SPECIAL_EOF           9
+#define SPECIAL_OBJECT_COMMENT_START  9
+#define SPECIAL_EOF           10
 
 // Stuff for parsing integers in various bases
 #define BINARY 2
@@ -230,7 +232,9 @@ int read_into_buffer(int _file, char *buf, int n)
         }                                                                      \
         else if (*c == SINGLE_ESCAPE)                                          \
         {                                                                      \
-            c += 2;                                                            \
+            c++;                                                               \
+            CHK_OVERFLOW_AND_COPY("symbol escape", break);                     \
+            c++;                                                               \
         }                                                                      \
         else if (*c == MULTIPLE_ESCAPE_START)                                  \
         {                                                                      \
@@ -241,12 +245,15 @@ int read_into_buffer(int _file, char *buf, int n)
                 symsize++;                                                     \
                 if (*c == SINGLE_ESCAPE)                                       \
                 {                                                              \
-                    c += 2;                                                    \
+                    c++;                                                       \
+                    CHK_OVERFLOW_AND_COPY("symbol escape", break);             \
+                    c++;                                                       \
                 }                                                              \
                 else                                                           \
                 {                                                              \
                     c++;                                                       \
                 }                                                              \
+                CHK_OVERFLOW_AND_COPY("symbol multiple escape", break);        \
             }                                                                  \
             c++;                                                               \
         }                                                                      \
@@ -361,17 +368,14 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
             while (isdigit(*c))
             {
                 c++;
-                CHK_OVERFLOW_AND_COPY("fpi",
-                {
-                }
-                );
+                CHK_OVERFLOW_AND_COPY("fpi", {});
             }
             if (*c == DECIMAL_POINT)
             {
                 c++;
                 while (1)
                 {
-                    // this loop has the feature that a double followed by two
+                    // This loop has the feature that a double followed by two
                     // bufferfuls of e's will generate a syntax error
                     if (isdigit(*c))
                     {
@@ -466,8 +470,12 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                     {
                         token_overflow = 1;     // used for patch-up: see below
 
-                        syntax_error(tokstart, maxc,
-                        "token exceeds processor limits");
+                        syntax_error
+                        (
+                            tokstart,
+                            maxc,
+                            "token exceeds processor limits"
+                        );
                         break;
                     }
                     strcpy(buffer - (maxc - tokstart), tokstart);
@@ -578,7 +586,7 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
             *p = '\0';
             if (token_overflow)
             {
-                // come here if string is more than 2*buffer
+                // Come here if string is more than 2*buffer
                 n = FILL_BUFFER();
                 BUFFER_RESET();
                 c = c - 1;
@@ -600,15 +608,20 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                 c++;
                 RETURN_SPECIAL(VECTOR_START);
             }
+            else if (*c == COMMENT_START)
+            {
+                c++;
+                RETURN_SPECIAL(OBJECT_COMMENT_START);
+            }
             else if (*c == CHARACTER_START)
             {
                 c++;
-                CHK_OVERFLOW("character", RETURN_SPECIAL(EOF)); // questionable
+                CHK_OVERFLOW("character", RETURN_SPECIAL(EOF)); // Questionable
 
                 if (*c == STRING_ESCAPE)
                 {
                     c++;
-                    CHK_OVERFLOW("second character", RETURN_SPECIAL(EOF)); // ditto
+                    CHK_OVERFLOW("second character", RETURN_SPECIAL(EOF)); // Ditto
 
                     switch (*c++)
                     {
@@ -794,8 +807,8 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
         // --------------------------------------------------!SPECIAL_P
         else if ((ispunct(*c)) && (!SPECIAL_P(c)))
         {
-            // this case is a real mess because we have to do two character
-            // lookahead to cope with signs and decimal points preceding
+            // This case is a real mess because we have to do two character
+            // look-ahead to cope with signs and decimal points preceding
             // floating point numbers, finally we get to identifiers
             // starting with "other" characters
             tokstart = c;
@@ -836,7 +849,7 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
             {
                 while (1)
                 {
-                    // this loop has the feature that a double followed by two
+                    // This loop has the feature that a double followed by two
                     // bufferfuls of e's will generate a syntax error
                     if (isdigit(*c))
                     {
@@ -871,11 +884,10 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
         // ------------------------------------------------------------
         else
         {
-            // skip unrecognised input
+            // Skip unrecognised input
             //fprintf(stdout, "skipping character code %d\n", *c);
             c++;
 
-            // return(slot_ref(special_tokens, SPECIAL_EOF));
             SHOW_STATE("after skip");
         }
 

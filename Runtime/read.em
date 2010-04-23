@@ -59,7 +59,6 @@
                  (let ((tail (ntok s special-tokens)))
                    (cond
                     ((eq tail unquote-mark)
-                     ;(let ((tail2 (ntok s special-tokens)))
                      (let ((tail2 (parse-loop (ntok s special-tokens)
                                               in-quasiquote)))
                        (if (and in-quasiquote
@@ -72,14 +71,6 @@
                     ((null (eq (ntok s special-tokens) list-stop))
                      (read-error s "misplaced dot after ~s" (reverse-list so-far)))
                     (t (reverse-onto so-far tail)))))
-;               ((eq tok dot)
-;                (let ((tail (ntok s special-tokens)))
-;                  (if (null (eq (ntok s special-tokens) list-stop))
-;                      (progn
-;                        (read-error s "misplaced dot after ~s"
-;                                      (reverse-list so-far))
-;                        (reverse-list so-far))
-;                    (reverse-onto so-far tail))))
                 ((eq tok eos)
                  (read-error s "unexpected end of file during list ~a"
                         ;; Avoid printing very long lists
@@ -124,6 +115,9 @@
             (progn
               (read-error s "misplaced unquote-splicing")
               (parse-loop (ntok s special-tokens) in-quasiquote))))
+         ((eq tok object-comment)
+          (parse-loop (ntok s special-tokens) ())
+          (parse-loop (ntok s special-tokens) ()))
          ((eq tok eos)
           (if eos-error-p (end-of-stream s) eos-value))
          (t (read-error s "unexpected token ~a" (tag tok))
@@ -243,10 +237,11 @@
   (defconstant unquote-mark (make <special> tag: "," ))
   (defconstant unquote-splicing-mark (make <special> tag: ",@" ))
   (defconstant dot (make <special> tag: "." ))
+  (defconstant object-comment (make <special> tag: "#;" ))
   (defconstant eos (make <special> tag: "<end of stream>" ))
 
   (defconstant special-tokens
-    (make-vector 10
+    (make-vector 11
                  list-start
                  list-stop
                  vector-start
@@ -256,6 +251,7 @@
                  unquote-mark
                  unquote-splicing-mark
                  dot
+                 object-comment
                  eos))
 )  ; end of module
 

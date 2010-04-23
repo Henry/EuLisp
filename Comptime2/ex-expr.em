@@ -47,7 +47,7 @@
 ;;; --------------------------------------------------------------------
   (defun get-macro-expander (key)
     (let ((binding (get-syntax-binding key)))
-      (and binding 
+      (and binding
            (let ((macro-fun (as-dynamic-binding binding)))
              (and macro-fun
                   (lambda (x env e)
@@ -187,7 +187,7 @@
            (setq arity (- (abs arity) 1))
            (loop (gensym)))
        (loop ()))))
-  
+
   (defun rest-args-p (args)
     (or (symbolp args)
         (and (consp args)
@@ -204,7 +204,7 @@
               (t ())))))
 ;;; --------------------------------------------------------------------
 ;;; APPLICATION expander
-;;; (+ - * / % = < <= > >= can be simplified in some cases into 
+;;; (+ - * / % = < <= > >= can be simplified in some cases into
 ;;; int-binary or int-inc/inc-dec calls assuming a trap to the gf from the
 ;;; correspondin vm instruction)
 ;;; --------------------------------------------------------------------

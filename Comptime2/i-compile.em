@@ -12,6 +12,7 @@
             ex-module ex-body cg-gen cg-asm cg-dld cg-interf cg-link
             cg-exec)
     export (compile interactive-compile link check-stop))
+
 ;;; ---------------------------------------------------------------------
 ;;; Compile (read, parse, encode, assemble, write C-module and interface
 ;;; ---------------------------------------------------------------------
@@ -38,12 +39,14 @@
            (write-interface-file m)
            (notify "... module ~a compiled." module-name)
            m))))
+
    (defun interactive-compile (sexpr)
      (notify0 "Interactive compiling ...")
      (let* ((m (interactive-parse sexpr))
             (code-state (interactive-encode m))
             (asm-state (assemble m code-state)))
        (execute m asm-state)))
+
 ;;; ---------------------------------------------------------------------
 ;;; Link
 ;;; ---------------------------------------------------------------------
@@ -54,6 +57,7 @@
                  (create-C-library module-name))
                 (*stand-alone*
                  (create-stand-alone-application module-name)))))
+
    (defun create-stand-alone-application (module-name)
      (notify "Creating stand-alone application of module ~a ..." module-name)
      (compile-C-file module-name)
@@ -82,6 +86,7 @@
                (ct-error () "executable ~a can't be stipped correctly"
                          module-name)))
          (ct-error () "module ~a can't be linked correctly" module-name))))
+
    (defun create-C-library (module-name)
      (notify "Creating library of module ~a ..." module-name)
      ;; Note that the global *dest-file-name* is cached and
@@ -104,6 +109,7 @@
        (or (zerop (system sys-str2))
            (ct-error -1 "archive ~a can't be converted correctly" dest)))
      (create-library-interface-file module-name))
+
    (defun compile-C-file (module-name)
      (let* ((module (get-module module-name))
             (full-import (if module
@@ -113,6 +119,7 @@
             (import (binary- full-import lib-names)))
        (do1-list compile-C-file-aux import)
        (compile-C-file-aux module-name)))
+
    (defun compile-C-file-aux (module-name)
      (let ((file-name (as-C-file-name module-name))
            (hook-sym (concatenate *tmp-start-source-file-name* '_)))
@@ -122,16 +129,19 @@
                 (C-module-modified-p module-name))
            (let* ((abs-file-name (absolute-file-name file-name))
                   (dir (file-exist-p (as-C-file-name module-name)))
-                  (dest-file-name (as-compiled-C-file-name module-name))
                   (dest (destination-object-string module-name dir))
+                  (dest-dir (destination-object-dir dir))
                   (sys-str (string-append-with-space
                             *C-cc* *C-cc-flags* "-o" dest "-c" abs-file-name)))
              (notify "  Compiling ~a using ~a ..." file-name *C-cc*)
              (notify0 sys-str)
+             (or (zerop (system (string-append-with-space "mkdir -p" dest-dir)))
+                 (ct-error -2 "cannot make directory ~a " dest-dir))
              (or (zerop (system sys-str))
                  (ct-error -2 "file ~a can't be compiled correctly"
                            file-name)))
          (notify "  Module file ~a need not be recompiled." file-name))))
+
    (defun string-append-with-space l
      (labels
       ((loop (ll res)
@@ -141,6 +151,7 @@
                       res (string-append
                            " " (convert (car ll) <string>)))))))
       (loop (cdr l) (convert (car l) <string>))))
+
 ;;; ---------------------------------------------------------------------
 ;;; Subsequent loading and compiling
 ;;; Written as method to avoid mutual module imports.
@@ -150,6 +161,7 @@
          (load-module-interface name t)
        (dynamic-let ((*indent* (format () "  ~a" (dynamic *indent*))))
          (compile name))))
+
 ;;; ---------------------------------------------------------------------
 ;;; Stop after pass
 ;;; ---------------------------------------------------------------------
@@ -159,4 +171,5 @@
           (progn
             (setq *stop-after-pass* ())
             (ct-exit))))
+
 )  ; end of module

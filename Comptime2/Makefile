@@ -89,7 +89,7 @@ preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i $(ARCH_DI
 	       -load_path $(EUL_DIR)/Comptime2 \
 	       -load_path $(EUL_DIR)/Comptime2/$(WORD_LENGTH)bit \
 	       -l level1 -l math -l eval -recompile
-	mv libeval.i $(EUL_LIB_DIR)
+	-mv libeval.i $(EUL_LIB_DIR)
 	rm -f $(ARCH_DIR)/libeval.a $(EUL_LIB_DIR)/libeval.a $(ARCH_DIR)/youtoo.o
 	@echo "..DONE."
 
