@@ -85,7 +85,8 @@
     CLOSED: [2010-02-26 Fri 15:01]
     to remove blank line at beginning, tabs and trailing white-space.
 *** TODO Add support in the REPL to load dynamically-linked module libraries
-*** TODO Add support for #;(sexp) comments in /Runtime/Ff/eul-ntok.c/
+*** DONE Add support for #;(sexp) comments in /Runtime/Ff/eul-ntok.c/
+    CLOSED: [2010-04-23 Fri 22:44]
 *** TODO Add line-number counting to /Runtime/Ff/eul-ntok.c/
     This also requires the introduction of a line-number counting stream to hold
     the line-number and provide access to the error reporting system.
@@ -154,13 +155,30 @@
     CLOSED: [2010-04-01 Thu 12:16]
     in structure.tex.  Include details of constant instances of classes and
     constant bindings to classes (class aliases).
-*** <thread> vs <abstract-thread>
+*** TODO <thread> vs <abstract-thread>
     Sort out the difference between the EuLisp definition and the Youtoo
     implementation with respect to the name of the abstract base-class for
     threads.  In the definition it is =<thread>= whereas in Youtoo it is
     =<abstract-thread>= and =<thread>= is used for the currently used thread
     type.
-*** TODO Reformat the =defgeneric= rewrite rules to conform to the others
-*** TODO Consider reformatting all of the rewrite rules
+*** DONE Reformat the =defgeneric= rewrite rules to conform to the others
+    CLOSED: [2010-04-23 Fri 08:39]
+*** DONE Consider reformatting all of the rewrite rules
+    CLOSED: [2010-04-23 Fri 08:40]
     to be more consistent with the syntax description.
 *** TODO Add the return type to the syntax descriptions
+*** TODO Add "signatures" to all function descriptions
+*** TODO Change macro definitions to special operators
+    It doesn't seem sensible to effectively specify that certain syntax MUST be
+    implemented as macros; surely this decision should be taken by the
+    implementers and for efficiency reasons it might be preferable that more of
+    the special operators are implemented as primitives of the language.
+*** TODO Finish the "Lexical Syntax" section
+    Provide a bit more background information.
+*** TODO Introduce the "Special Forms" list is /modules.tex/
+    Or move this list to a more appropriate place, /e.g./ at the beginning of
+    the section concerning "special forms".
+*** TODO Introduce the "Level-1" library and describe "module-1"
+*** TODO Re-reference definitions in the "Level-1" library
+    so that they do not clash with those in the "Level-0" library.
+*** TODO Remove the "syntax-category" entries from the index
