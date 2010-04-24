@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>EuLisp</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-04-22 22:53:25 BST"/>
+<meta name="generated" content="2010-04-24 21:50:37 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -81,11 +81,11 @@ lang="en" xml:lang="en">
 <li><a href="#sec-1">1 Copyright </a></li>
 <li><a href="#sec-2">2 Aim </a></li>
 <li><a href="#sec-3">3 General Description </a></li>
-<li><a href="#sec-4">4 Installation </a></li>
-<li><a href="#sec-5">5 Getting Started </a></li>
-<li><a href="#sec-6">6 Features </a></li>
-<li><a href="#sec-7">7 Extras </a></li>
-<li><a href="#sec-8">8 Documentation </a></li>
+<li><a href="#sec-4">4 Documentation </a></li>
+<li><a href="#sec-5">5 Installation </a></li>
+<li><a href="#sec-6">6 Getting Started </a></li>
+<li><a href="#sec-7">7 Features </a></li>
+<li><a href="#sec-8">8 Extras </a></li>
 <li><a href="#sec-9">9 Recent Developments </a></li>
 <li><a href="#sec-10">10 To Do </a></li>
 </ul>
@@ -96,11 +96,20 @@ lang="en" xml:lang="en">
 <h2 id="sec-1"><span class="section-number-2">1</span> <a href="COPYING">Copyright</a> </h2>
 <div class="outline-text-2" id="text-1">
 
-<p>Youtoo is free software; you can redistribute it and/or modify it under the
-terms of the GNU General Public License as published by the Free Software
-Foundation; either version 2 of the License, or (at your option) any later
-version.  See the file COPYING in this directory, for a description of the GNU
-General Public License terms under which you can copy the files.
+<p>Youtoo is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+</p>
+<p>
+Youtoo is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+for more details.
+</p>
+<p>
+You should have received a copy of the GNU General Public License along with
+Youtoo in the file <a href="COPYING">COPYING</a>.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
 </p>
 </div>
 
@@ -171,13 +180,13 @@ Julian Padget:
 <h2 id="sec-3"><span class="section-number-2">3</span> General Description </h2>
 <div class="outline-text-2" id="text-3">
 
-<p>The youtoo system is a public domain implementation of the object-oriented
+<p>The Youtoo system is a public domain implementation of the object-oriented
 dynamic programming language EuLisp. EuLisp is a single-valued dialect of Lisp
 with an integrated object system, a defined meta-object protocol, modules and
 a simple light-weight process mechanism (threads).
 </p>
 <p>
-The youtoo compiler/interpreter compiles EuLisp into C-embedded virtual
+The Youtoo compiler/interpreter compiles EuLisp into C-embedded virtual
 machine code which can be statically or dynamically linked with the virtual
 machine, the conservative garbage collector, the EuLisp language library and
 arbitrary other Lisp and foreign code (C, C++ and Fortran). Resulting
@@ -198,8 +207,53 @@ Hans Boehm and Alan Demers is used.
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Installation </h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Documentation </h2>
 <div class="outline-text-2" id="text-4">
+
+<ul>
+<li id="sec-4.1">EuLisp definition <br/>
+is provided in both HTML and PDF formats:
+<ul>
+<li>
+<a href="Doc/EuLisp-0.991/html/eulisp.html">EuLisp Definition Version 0.991 (HTML)</a>
+</li>
+<li>
+<a href="Doc/EuLisp-0.991/eulisp.pdf">EuLisp Definition Version 0.991 (PDF)</a>
+</li>
+</ul>
+</li>
+<li id="sec-4.2">EuLisp-1.0 Proposals <br/>
+are in the folowing
+<a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a> and
+discussed in the minutes of the
+<a href="Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt">meeting on 19/11/93</a> and in the
+<a href="Doc/EuLisp-0.991/Proposals/nov93.txt">preceding</a> and
+<a href="Doc/EuLisp-0.991/Proposals/dec93.txt">subsequent</a> Email correspondence.
+The following reports are discussed in the above:
+<ul>
+<li>
+<a href="Doc/EuLisp-0.991/Proposals/Reports/eulisp-proposals.ps">eulisp-proposals.ps</a>
+</li>
+<li>
+<a href="Doc/EuLisp-0.991/Proposals/Reports/genarith.ps">genarith.ps</a>
+</li>
+<li>
+<a href="Doc/EuLisp-0.991/Proposals/Reports/adv-genarith.ps">adv-genarith.ps</a>
+</li>
+<li>
+<a href="Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps">eulisp-ffi.ps</a>
+
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Installation </h2>
+<div class="outline-text-2" id="text-5">
 
 <ul>
 <li>
@@ -233,9 +287,9 @@ You should now be able to run the script <br/>
 
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Getting Started </h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started </h2>
+<div class="outline-text-2" id="text-6">
 
 <ul>
 <li>
@@ -261,21 +315,21 @@ provides extra commands (type <i>help:</i>).
 
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Features </h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Features </h2>
+<div class="outline-text-2" id="text-7">
 
 <ul>
-<li id="sec-6.1">~/.eulrc.${ARCH} <br/>
+<li id="sec-7.1">~/.eulrc.${ARCH} <br/>
 For private customisation, put a copy of <i>.eulrc.${ARCH}</i> in your home
 directory.  For example, remove the optimisation flag of the C compiler.
 
 </li>
-<li id="sec-6.2">EuLisp Module Files <br/>
+<li id="sec-7.2">EuLisp Module Files <br/>
 Have the extension <i>.em</i>.
 
 <ul>
-<li id="sec-6.2.1">EuLisp Language Level1 <br/>
+<li id="sec-7.2.1">EuLisp Language Level1 <br/>
 Level1 is provided by the library <i>liblevel1.a</i>.
 Standard macros are defined in the syntax module macros. Thus, the default
 module body looks like this:
@@ -296,31 +350,31 @@ module body looks like this:
 </li>
 </ul>
 </li>
-<li id="sec-6.3">Pretty Printing <br/>
+<li id="sec-7.3">Pretty Printing <br/>
 The function pprint provides generic pretty printing.
 
 </li>
-<li id="sec-6.4">Main <br/>
+<li id="sec-7.4">Main <br/>
 There is no main entry function Top-level forms in modules are executed with
 with respect to the module hierarchy. Global variables <code>*argc*</code> and <code>*argv*</code>
 are provided.
 
 </li>
-<li id="sec-6.5">Standard Bindings <br/>
+<li id="sec-7.5">Standard Bindings <br/>
 See <i>Doc/bindings.txt</i> for a list of standard bindings.
 
 </li>
-<li id="sec-6.6">Module Compilation <br/>
+<li id="sec-7.6">Module Compilation <br/>
 The compiler checks before compiling a module which (directly and
 indirectly) imported modules really need to be (re)compiled. This feature
 can be switched off with <code>-no_recompile</code>.
 
 </li>
-<li id="sec-6.7">Standard C foreign-functions <br/>
+<li id="sec-7.7">Standard C foreign-functions <br/>
 in <i>Vm/eulisp.h</i>
 
 <ul>
-<li id="sec-6.7.1">Data conversion from EuLisp to C: <br/>
+<li id="sec-7.7.1">Data conversion from EuLisp to C: <br/>
 
 
 
@@ -336,7 +390,7 @@ in <i>Vm/eulisp.h</i>
 
 
 </li>
-<li id="sec-6.7.2">Data conversion from C to EuLisp: <br/>
+<li id="sec-7.7.2">Data conversion from C to EuLisp: <br/>
 
 
 
@@ -348,7 +402,7 @@ in <i>Vm/eulisp.h</i>
 
 
 </li>
-<li id="sec-6.7.3">Creating symbols and keywords: <br/>
+<li id="sec-7.7.3">Creating symbols and keywords: <br/>
 
 
 
@@ -359,7 +413,7 @@ eul_intern_keyword(<span style="color: #0000ff;">LispRef</span> <span style="col
 
 
 </li>
-<li id="sec-6.7.4">EuLisp data allocation: <br/>
+<li id="sec-7.7.4">EuLisp data allocation: <br/>
 
 
 
@@ -375,7 +429,7 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 
 
 </li>
-<li id="sec-6.7.5">EuLisp constants: <br/>
+<li id="sec-7.7.5">EuLisp constants: <br/>
 
 
 
@@ -386,7 +440,7 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 
 
 </li>
-<li id="sec-6.7.6">EuLisp data access: <br/>
+<li id="sec-7.7.6">EuLisp data access: <br/>
 
 
 
@@ -403,7 +457,7 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 
 
 </li>
-<li id="sec-6.7.7">EuLisp data predicates: <br/>
+<li id="sec-7.7.7">EuLisp data predicates: <br/>
 
 
 
@@ -426,7 +480,7 @@ eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="co
 </li>
 </ul>
 </li>
-<li id="sec-6.8">Using the foreign-function interface <br/>
+<li id="sec-7.8">Using the foreign-function interface <br/>
 Uses automatic converters. Here is an example how atoi can be used from
 Lisp:
 
@@ -452,7 +506,7 @@ home directory and add -lbar to the list of <code>$CLIBS</code>; the library pat
 be given with <code>-L&lt;bar-path&gt;</code> in the list of <code>$CFLAGS</code>.
 </p>
 <ul>
-<li id="sec-6.8.1">Automatic type conversion <br/>
+<li id="sec-7.8.1">Automatic type conversion <br/>
 The following automatic converters are available:
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <caption></caption>
@@ -480,10 +534,10 @@ The <code>ptr</code> converter can be used to pass arbitrary C99 structures to L
 so that they can be passed back to C at a later stage. The ptr converter
 is also useful to pass a Lisp object unconverted to C99.
 </p></li>
-<li id="sec-6.8.2"><code>defextern</code> <br/>
+<li id="sec-7.8.2"><code>defextern</code> <br/>
 <code>defextern</code> definitions can not be linked dynamically.
 </li>
-<li id="sec-6.8.3"><code>DEFINTERN</code> <br/>
+<li id="sec-7.8.3"><code>DEFINTERN</code> <br/>
 Foreign in-calls have to use the DEFINTERN() macro. Examples for
 in/out-calls to/from Lisp can be found in the directories <i>Examples/Misc</i>,
 <i>Examples/Fortran</i>, and <i>Examples/C++</i>.
@@ -491,71 +545,32 @@ in/out-calls to/from Lisp can be found in the directories <i>Examples/Misc</i>,
 </li>
 </ul>
 </li>
-<li id="sec-6.9">Macro expansion <br/>
+<li id="sec-7.9">Macro expansion <br/>
 is un-hygienic.
 
 </li>
-<li id="sec-6.10">EuLisp Scripts <br/>
+<li id="sec-7.10">EuLisp Scripts <br/>
 Use <i>#!</i>../youtoo -script/ to write EuLisp scripts (see
 <i>Examples/Misc/script.em</i>).
 
 </li>
-<li id="sec-6.11">Inter-operation with other languages <br/>
+<li id="sec-7.11">Inter-operation with other languages <br/>
 The examples in directory C++ and Fortran show how to interoperate with
 these languages.
 
 </li>
-<li id="sec-6.12">List operators <br/>
+<li id="sec-7.12">List operators <br/>
 Arithmetic functions <code>+</code>, <code>-</code> and <code>/</code> operate as set union, difference and
 intersection on lists.
 
 </li>
-<li id="sec-6.13">Examples <br/>
+<li id="sec-7.13">Examples <br/>
 Directory <i>Examples</i> contains modules for explanation and reuse.
 
 </li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Extras </h2>
-<div class="outline-text-2" id="text-7">
-
-<ul>
-<li id="sec-7.1"><a href="Extras/Bignum/README.html">GNU Bignum</a>: <i>Extras/Bignum</i> <br/>
-Danius Michaelides wrote a port to the GNU bignum library (gmp).
-</li>
-<li id="sec-7.2"><a href="Extras/MPI/README.html">MPI</a>: <i>Extras/MPI</i> <br/>
-
-</li>
-<li id="sec-7.3"><a href="Extras/TclTk/README.html">Tcl/Tk</a>: <i>Extras/TclTk</i> <br/>
-
-</li>
-<li id="sec-7.4"><a href="Extras/Fthread/README.html">Foreign thread libraries</a>: <i>Extras/Fthread</i> <br/>
-
-</li>
-<li id="sec-7.5"><a href="Extras/Scheme/README.html">Scheme</a>: <i>Extras/Scheme</i> <br/>
-Modules <i>./Extras/Scheme/scheme0.em</i> and <i>./Extras/Scheme/scheme.em</i>
-provide support for writing Scheme programs with youtoo.
-
-</li>
-<li id="sec-7.6"><a href="Extras/Matching/README.html">Matching</a>: <i>Extras/Match</i> <br/>
-Modulized version of match-slib.scm badly hacked for EuLisp.
-
-</li>
-<li id="sec-7.7"><a href="Extras/OS/README.html">Object serialisation</a>: <i>Extras/OS</i> <br/>
-includes support for closures and threads.
-
-</li>
-<li id="sec-7.8"><a href="Extras/OPS5/README.html">OPS5 rule-based system</a> : <i>Extras/OPS5</i> <br/>
-An object-oriented version of the OPS5 rule-based system.
-
-</li>
-<li id="sec-7.9"><a href="Extras/Pipe/README.html">Pipes and forked child processes</a>:  <i>Extras/Pipe</i> <br/>
-Thanks to Rob Simmons there is support for pipes to forked child
-processes.
+<li id="sec-7.14">Bindings <br/>
+The current set of supported bindings in Youtoo are in the file
+<a href="Doc/bindings.txt">bindings.txt</a>
 
 </li>
 </ul>
@@ -564,47 +579,42 @@ processes.
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Documentation </h2>
+<h2 id="sec-8"><span class="section-number-2">8</span> Extras </h2>
 <div class="outline-text-2" id="text-8">
 
 <ul>
-<li id="sec-8.1">EuLisp definition <br/>
-is provided in both HTML and PDF formats:
-<ul>
-<li>
-<a href="Doc/EuLisp-0.991/html/eulisp.html">EuLisp Definition Version 0.991 (HTML)</a>
+<li id="sec-8.1"><a href="Extras/Bignum/README.html">GNU Bignum</a>: <i>Extras/Bignum</i> <br/>
+Danius Michaelides wrote a port to the GNU bignum library (gmp).
 </li>
-<li>
-<a href="Doc/EuLisp-0.991/eulisp.pdf">EuLisp Definition Version 0.991 (PDF)</a>
+<li id="sec-8.2"><a href="Extras/MPI/README.html">MPI</a>: <i>Extras/MPI</i> <br/>
+
 </li>
-</ul>
+<li id="sec-8.3"><a href="Extras/TclTk/README.html">Tcl/Tk</a>: <i>Extras/TclTk</i> <br/>
+
 </li>
-<li id="sec-8.2">EuLisp-1.0 Proposals <br/>
-are in the folowing
-<a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a> and
-discussed in the minutes of the
-<a href="Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt">meeting on 19/11/93</a> and in the
-<a href="Doc/EuLisp-0.991/Proposals/nov93.txt">preceding</a> and
-<a href="Doc/EuLisp-0.991/Proposals/dec93.txt">subsequent</a> Email correspondence.
-The following reports are discussed in the above:
-<ul>
-<li>
-<a href="Doc/EuLisp-0.991/Proposals/Reports/eulisp-proposals.ps">eulisp-proposals.ps</a>
+<li id="sec-8.4"><a href="Extras/Fthread/README.html">Foreign thread libraries</a>: <i>Extras/Fthread</i> <br/>
+
 </li>
-<li>
-<a href="Doc/EuLisp-0.991/Proposals/Reports/genarith.ps">genarith.ps</a>
+<li id="sec-8.5"><a href="Extras/Scheme/README.html">Scheme</a>: <i>Extras/Scheme</i> <br/>
+Modules <i>./Extras/Scheme/scheme0.em</i> and <i>./Extras/Scheme/scheme.em</i>
+provide support for writing Scheme programs with Youtoo.
+
 </li>
-<li>
-<a href="Doc/EuLisp-0.991/Proposals/Reports/adv-genarith.ps">adv-genarith.ps</a>
+<li id="sec-8.6"><a href="Extras/Matching/README.html">Matching</a>: <i>Extras/Match</i> <br/>
+Modulized version of match-slib.scm badly hacked for EuLisp.
+
 </li>
-<li>
-<a href="Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps">eulisp-ffi.ps</a>
+<li id="sec-8.7"><a href="Extras/OS/README.html">Object serialisation</a>: <i>Extras/OS</i> <br/>
+includes support for closures and threads.
+
 </li>
-</ul>
+<li id="sec-8.8"><a href="Extras/OPS5/README.html">OPS5 rule-based system</a> : <i>Extras/OPS5</i> <br/>
+An object-oriented version of the OPS5 rule-based system.
+
 </li>
-<li id="sec-8.3">Bindings <br/>
-The current set of supported bindings in Youtoo are in the file
-<a href="Doc/bindings.txt">bindings.txt</a>
+<li id="sec-8.9"><a href="Extras/Pipe/README.html">Pipes and forked child processes</a>:  <i>Extras/Pipe</i> <br/>
+Thanks to Rob Simmons there is support for pipes to forked child
+processes.
 
 </li>
 </ul>
@@ -655,7 +665,7 @@ EuLisp-1.0.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-04-22 22:53:25 BST</p>
+<p class="date"> Date: 2010-04-24 21:50:37 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>
