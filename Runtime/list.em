@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;;  Description: list processing
-;;; -----------------------------------------------------------------------
+;;; Description: list processing
+;;;-----------------------------------------------------------------------------
 (defmodule list
   (syntax (_telos0)
    import (telos convert compare collect copy number fpi)
@@ -19,73 +19,97 @@
            reverse-list member-list member1-list anyp1-list find1-list
            do1-list-last-special map1-list-last-special
            proper-list-p as-proper-list append! reverse-list!))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Classes <list>, <cons> and <null> are defined in mop-class and
 ;;; superclass <sequence> wasn't defined at that stage
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (add-subclass <sequence> <list>)
+
   (let ((direct-supers (list <sequence>)))
     ((setter class-direct-superclasses) <list> direct-supers)
     ((setter class-precedence-list) <list>
      (compute-class-precedence-list <list> direct-supers)))
+
   (let ((direct-supers (list <list>)))
     ((setter class-precedence-list) <cons>
      (compute-class-precedence-list <cons> direct-supers))
     ((setter class-precedence-list) <null>
      (compute-class-precedence-list <null> direct-supers)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; List access (auf speziellen Wunsch von dder)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
   (defun caar (x) ((opencoded-lambda (y) (caar)) x))
   (declare-inline caar)
+
   (defun cadr (x) ((opencoded-lambda (y) (cadr)) x))
   (declare-inline cadr)
+
   (defun cdar (x) ((opencoded-lambda (y) (cdar)) x))
   (declare-inline cdar)
+
   (defun cddr (x) ((opencoded-lambda (y) (cddr)) x))
   (declare-inline cddr)
+
   (defun caddr (x) ((opencoded-lambda (y) (caddr)) x))
   (declare-inline caddr)
+
   (defun cdadr (x) (cdr (cadr x)))
   (declare-inline cdadr)
+
   (defun cddar (x) (cdr (cdar x)))
   (declare-inline cddar)
+
   (defun caadr (x) (car (cadr x)))
   (declare-inline caadr)
+
   (defun cdaar (x) (cdr (caar x)))
   (declare-inline cdaar)
+
   (defun cadar (x) (car (cdar x)))
   (declare-inline cadar)
+
   (defun caaar (x) (car (caar x)))
   (declare-inline caaar)
+
   (defun cdddr (x) (cdr (cddr x)))
   (declare-inline cdddr)
+
   (defun cadddr (x) ((opencoded-lambda (y) (cadddr)) x))
   (declare-inline cadddr)
+
   (defmethod element ((l <list>) (i <int>))
     (list-ref l i))
+
   (defmethod (setter element) ((l <list>) (i <int>) x)
     ((setter list-ref) l i x))
+
   (defmethod size ((l <list>))
     (list-size l))
+
   (defun list-drop (l n)
     (if (int-binary= n 0) l
       (list-drop (cdr l) (int-binary- n 1))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Mapping lists
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod do ((fun <function>) (l <list>) . ls)
     (if (null ls)
         (do1-list fun l)
       (if (null (cdr ls))
           (do2-list fun l (car ls))
         (call-next-method))))
+
   (defmethod map ((fun <function>) (l <list>) . ls)
     (if (null ls)
         (map1-list fun l)
       (if (null (cdr ls))
           (map2-list fun l (car ls))
         (call-next-method))))
+
   (defun do2-list (fun l1 l2)
     (labels
      ((loop (ll1 ll2)
@@ -95,6 +119,7 @@
                 (fun (car ll1) (car ll2))
                 (loop (cdr ll1) (cdr ll2))))))
      (loop l1 l2)))
+
   (defun map2-list (fun l1 l2)
     (labels
      ((loop (ll1 ll2 res)
@@ -103,9 +128,10 @@
               (loop (cdr ll1) (cdr ll2)
                     (cons (fun (car ll1) (car ll2)) res)))))
      (loop l1 l2 ())))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Handle the last element in a list specially
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun do1-list-last-special (fun1 fun2 l)
     (labels
      ((loop (ll)
@@ -115,6 +141,7 @@
                 (fun1 (car ll))
                 (loop (cdr ll))))))
      (and l (loop l) ())))
+
   (defun map1-list-last-special (fun1 fun2 l)
     (labels
      ((loop (ll res)
@@ -122,11 +149,13 @@
                 (reverse-list (cons (fun2 (car ll)) res))
               (loop (cdr ll) (cons (fun1 (car ll)) res)))))
      (and l (loop l ()))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Checking lists
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod member (x (l <list>) . preds)
     (apply member-list x l preds))
+
   (defmethod find (x (l <list>) . preds)
     (if (null preds)
         (find1-list x l)
@@ -137,6 +166,7 @@
                   (if (pred x (car ll)) i
                     (loop (cdr ll) (int-binary+ i 1))))))
          (loop l 0)))))
+
   (defun find1-list (x l)
     (labels
      ((loop (ll i)
@@ -144,16 +174,19 @@
               (if (eql x (car ll)) i
                 (loop (cdr ll) (int-binary+ i 1))))))
      (loop l 0)))
+
   (defmethod anyp ((fun <function>) (l <list>) . cs)
     (if (null cs)
         (anyp1-list fun l)
       (call-next-method)))
+
   (defmethod allp ((fun <function>) (l <list>) . cs)
     (if (null cs)
         (allp1-list fun l)
       (if (null (cdr cs))
           (allp2-list fun l (convert (car cs) <list>))
         (call-next-method))))
+
   (defun allp1-list (fun l)
     (labels
      ((loop (ll)
@@ -163,6 +196,7 @@
               (and (fun (car ll))
                    (loop (cdr ll))))))
      (loop l)))
+
   (defun allp2-list (fun l1 l2)
     (labels
      ((loop (ll1 ll2)
@@ -173,13 +207,16 @@
               (and (fun (car ll1) (car ll2))
                    (loop (cdr ll1) (cdr ll2))))))
      (loop l1 l2)))
-;;; -------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Select (also known as 'filter' or 'some')
-;;; -------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
   (defmethod select ((fun <function>) (c <list>) . cs)
     (if (null cs)
         (select-list fun c)
       (call-next-method)))
+
   (defun select-list (pred l . args)
     (labels
      ((loop (ll res)
@@ -190,11 +227,13 @@
                     (loop (cdr ll) (cons x res))
                   (loop (cdr ll) res))))))
      (loop l ())))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Accumulate
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod accumulate ((fun <function>) init (l <list>))
     (accumulate-list fun init l))
+
   (defun accumulate-list (fun init l)
     (labels
      ((loop (ll)
@@ -203,13 +242,16 @@
                 (setq init (fun init (car ll)))
                 (loop (cdr ll))))))
      (loop l)))
+
   (defmethod accumulate1 ((fun <function>) (l <list>))
     (accumulate1-list fun l))
+
   (defun accumulate1-list (fun l)
     (and l (accumulate-list fun (car l) (cdr l))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Concatenation, reversing, sorting, removing ...
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod concatenate ((l <list>) . cs)
     (labels
      ((loop (ll)
@@ -218,18 +260,23 @@
                 (setq l (append l (convert (car ll) <list>)))
                 (loop (cdr ll))))))
      (loop cs)))
+
   (defmethod reverse ((l <list>))
     (reverse-list l))
+
   (defmethod reverse! ((l <list>))
     ;; destructive
     (reverse-list! l))
+
   (defmethod sort ((l <list>) . comp)
     (sort-list l (if comp (car comp) binary<)))
+
   (defmethod remove ((l <list>) x . pred)
     (apply list-remove l x pred))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Predicates
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod equal ((x <list>) (y <list>))
     (labels
      ((loop (l1 l2)
@@ -240,12 +287,15 @@
                   (and l2 (equal l1 l2))
                 (null l2)))))
       (loop x y)))
-;  (defmethod equal ((x <cons>) (y <cons>))
-;    (and (equal (car x) (car y)) (equal (cdr x) (cdr y))))
-;;; --------------------------------------------------------------------
+
+  ;(defmethod equal ((x <cons>) (y <cons>))
+  ;  (and (equal (car x) (car y)) (equal (cdr x) (cdr y))))
+
+;;;-----------------------------------------------------------------------------
 ;;; Conversion and copying
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric (converter <list>) (x))
+
   (defmethod shallow-copy ((l <list>))
     (labels
      ((rev (ll res)
@@ -256,6 +306,7 @@
                 (loop (cdr ll) (cons (car ll) res))
               (rev res ll))))
       (loop l ())))
+
   (defmethod deep-copy ((l <list>))
     (labels
      ((rev (ll res)
@@ -268,11 +319,12 @@
                   (rev res (deep-copy ll))
                 (rev res ())))))
       (loop l ())))
-;  (defmethod deep-copy ((l <cons>))
-;    (cons (deep-copy (car l)) (deep-copy (cdr l))))
-;;; --------------------------------------------------------------------
+  ;(defmethod deep-copy ((l <cons>))
+  ;  (cons (deep-copy (car l)) (deep-copy (cdr l))))
+
+;;;-----------------------------------------------------------------------------
 ;;; Destructive append (also known as 'append!')
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun append! (l1 l2)
     (cond
      ((null l1) l2)
@@ -284,9 +336,10 @@
                   ((setter cdr) l l2))))
          (loop l1 (cdr l1)))
         l1)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Destructive reverse (also known as 'reverse!')
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun reverse-list! (l)
     (labels
      ((loop (ll res)
@@ -295,16 +348,18 @@
                 ((setter cdr) ll res)
                 (loop u ll)))))
      (loop l ())))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Answer whether list is a proper list
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun proper-list-p (l)
     (if (atom l)
         (null l)
       (proper-list-p (cdr l))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Converts list to a proper list
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun as-proper-list (l)
     (if (consp l)
         (let ((x (cdr l)))
@@ -315,9 +370,10 @@
     (if (or (consp l) (null l))
         l
       (list l)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; List arithmetic (naughty arity!)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod binary+ ((l1 <list>) (l2 <list>) . preds)
     ;; list union
     (let ((res ()))
@@ -331,6 +387,7 @@
                       (setq res (cons x res))))
                   l2))
       (append l1 res)))
+
   (defmethod binary- ((l1 <list>) (l2 <list>) . preds)
     ;; list difference
     (let ((res ()))
@@ -344,6 +401,7 @@
                       (setq res (cons x res))))
                   l1))
       res))
+
   (defmethod binary/ ((l1 <list>) (l2 <list>) . preds)
     ;; intersection
     (let ((res ()))
@@ -359,4 +417,7 @@
                       ()))
                   l2))
       res))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

@@ -1,26 +1,29 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;;  Description: callback initialization
-;;; -----------------------------------------------------------------------
+;;; Description: callback initialization
+;;;-----------------------------------------------------------------------------
 (defmodule callback
   (syntax (_telos0)
    import (telos condition)
    export (first-arithmetic-cb install-callback *callback-vector*
            CB-sum-overflow CB-difference-underflow
            CB-product-overflow CB-read-overflow))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Callback vector
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant *callback-vector* (get-global-register callbacks))
+
   (defun install-callback (i fun)
     ((setter vector-ref) *callback-vector* i fun))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Callback positions
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant first-arithmetic-cb 1)
   (defconstant first-cons-cb 10)
   (defconstant first-error-cb 15)
@@ -38,9 +41,10 @@
   (defconstant CB-read-overflow 34)
   (defconstant CB-bad-operator 35)
   (defconstant CB-bad-slot-access 36)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Default error thunk
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun callback-thunk (str)
     (lambda args  ; args still on the value stack
       (error str <general-condition> arguments: args)))
@@ -49,9 +53,10 @@
 ;;      (format 2 "*** ERROR [system-error]: ~a\n    ARGUMENTS: ~a\n"
 ;;             str args)
 ;;      (exit)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install the callbacks (see also modules number and compare)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-callback CB-system-error
                     (callback-thunk "unspecified system error"))
   (install-callback (int-binary+ first-cons-cb 0)
@@ -102,4 +107,7 @@
                                  "integer underflow"
                                "integer overerflow")
                              <general-condition> arguments: (list str))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

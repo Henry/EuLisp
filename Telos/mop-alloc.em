@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;;  Description: handling object allocation
-;;; -----------------------------------------------------------------------
+;;; Description: handling object allocation
+;;;-----------------------------------------------------------------------------
 (defmodule mop-alloc
   (syntax (_boot0 _mop-gf0 _mop-meth0)
    import (boot mop-prim mop-key mop-class mop-init mop-inspect mop-gf
@@ -16,16 +16,18 @@
            compute-keywords compute-inherited-keywords
            compatible-superclasses-p compatible-superclass-p
            compute-class-precedence-list))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Allocate
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod allocate ((cl <class>) inits)
     (if (class-abstract-p cl)
         (error "can't allocate an instance of abstract-class ~a" cl)
       (primitive-allocate cl (class-instance-length cl))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Initialize <object>
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod initialize ((obj <object>) keywords)
     ;; Initialize the slot values
     (labels
@@ -53,9 +55,10 @@
        (check-keywords obj cl keywords)
        (loop (class-slots cl) 0)
        obj)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Check initialization keywords
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun check-keywords (obj cl init-keys)
     (let ((class-keys (class-keywords cl)))
       (labels
@@ -68,9 +71,10 @@
                      "unexpected keyword ~a in initialization of ~a"
                      x obj))))))
        (loop init-keys))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Initialize <class>
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod initialize ((cl <class>) keywords)
     (call-next-method)
     ;; Add the class to the class hierarchy
@@ -94,43 +98,50 @@
       (do1-list (lambda (super) (add-subclass super cl)) direct-supers))
     (compute-class-codes)
     cl)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compatible superclasses
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compatible-superclasses-p ((cl <class>) superclasses))
   (defmethod compatible-superclasses-p ((cl <class>) superclasses)
     (compatible-superclass-p cl (car superclasses)))
+
   (defgeneric compatible-superclass-p ((cl <class>) (superclass <class>)))
   (defmethod compatible-superclass-p ((cl <class>) (super <class>))
     (if (class-abstract-p super) t
         (subclassp (class-of cl) (class-of super))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute class precedence list
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-class-precedence-list ((cl <class>) direct-supers))
   (defmethod compute-class-precedence-list ((cl <class>) direct-supers)
     (cons cl (class-precedence-list (car direct-supers))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute inherited keywords
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-inherited-keywords ((cl <class>) direct-supers))
   (defmethod compute-inherited-keywords ((cl <class>) direct-supers)
     (list (class-keywords (car direct-supers))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute keywords
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-keywords ((cl <class>) direct-keys inherited-inits))
   (defmethod compute-keywords ((cl <class>) direct-keys inherited-inits)
     (list-remove-duplicates (append direct-keys (car inherited-inits))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute inherited slots
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-inherited-slots ((cl <class>) direct-supers))
   (defmethod compute-inherited-slots ((cl <class>) direct-supers)
     (list (class-slots (car direct-supers))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute slots
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-slots ((cl <class>) slotd-specs inherited-slotds))
   (defmethod compute-slots ((cl <class>) slotd-specs inherited-slotds)
     (let ((old-sd-names (map1-list slot-name (car inherited-slotds)))
@@ -150,9 +161,10 @@
               ()
             (list (compute-defined-slot cl spec))))
         slotd-specs))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute specialized slot
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-specialized-slot ((cl <class>) sds spec))
   (defmethod compute-specialized-slot ((cl <class>) sds spec)
     (let* ((sd (car sds))
@@ -160,6 +172,7 @@
       (if (null spec)
           (inherited-slot cl sd sdclass)
         (redefined-slot cl sd sdclass spec))))
+
   (defun inherited-slot (cl sd sdclass)
     ;; Inherited, but not redefined.
     (if (eq sdclass (class-of sd))
@@ -170,6 +183,7 @@
             writer: (slot-writer sd)
             keyword: (slot-keyword sd)
             default: (slot-default sd))))
+
   (defun redefined-slot (cl sd sdclass spec)
     ;; Inherited and redefined
     (let* ((reader (find-key reader: spec (slot-reader sd)))
@@ -188,15 +202,17 @@
              keyword: keyword
              default: init-fun
              (filter-keywords spec '(reader: writer: keyword: default:)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute specialized slot class
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-specialized-slot-class ((cl <class>) sds spec))
   (defmethod compute-specialized-slot-class ((cl <class>) sds spec)
     <local-slot>)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute defined slot
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-defined-slot ((cl <class>) spec))
   (defmethod compute-defined-slot ((cl <class>) spec)
     (let* ((name (find-key name: spec required:))
@@ -208,10 +224,14 @@
              (compute-defined-slot-class cl spec)
              keyword: key
              (filter-keywords spec '(keyword:)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Compute defined slot class
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-defined-slot-class ((cl <class>) spec))
   (defmethod compute-defined-slot-class ((cl <class>) spec)
     <local-slot>)
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

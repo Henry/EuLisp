@@ -9,32 +9,35 @@
 ; Language:     EuLisp
 ; Status:       Public Domain
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 
+
 ;; TAKL -- The TAKeuchi function using lists as counters.
 (defmodule takl
   (syntax (macros)
    import (level1))
- 
+
   (defun listn (n)
     (if (null (= 0 n))
         (cons n (listn (- n 1)))
       ()))
- 
+
   (deflocal |18l| (listn 18))
   (deflocal |12l| (listn 12))
   (deflocal |6l| (listn 6))
- 
+
   (defun mas (x y z)
     (if (null (shorterp y x))
         z
       (mas (mas (cdr x) y z)
            (mas (cdr y) z x)
            (mas (cdr z) x y))))
- 
+
   (defun shorterp (x y)
     (and y (or (null x)
                (shorterp (cdr x)
                          (cdr y)))))
- 
+
   (time (mas |18l| |12l| |6l|))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

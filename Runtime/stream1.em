@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;;  Description: posix stream interface
-;;; -----------------------------------------------------------------------
+;;; Description: posix stream interface
+;;;-----------------------------------------------------------------------------
 (defmodule stream1
   (import (telos)
    export (O_RDONLY O_WRONLY O_RDWR O_APPEND O_NONBLOCK
@@ -15,9 +15,10 @@
            eul_sprintf eul_sprintf_string
            strerror eul_socket_strerror
            ntok read-into-buffer hostname))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Posix codes
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern get-posix-codes () ptr "eul_posix_codes")
   (defconstant *posix-codes* (get-posix-codes))
   (defconstant O_RDONLY (primitive-ref *posix-codes* 0))
@@ -35,9 +36,10 @@
           '|r+| O_RDWR
           '|w+| O_RDWR
           '|a+| (int-binary+ O_RDWR O_APPEND)))
-;;; -----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; C interface
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern eul_open (<string> <int> <int>) <int> "open")
   (defextern eul_close (<int>) <int> "close")
   (defextern eul_read (<int> <string> <int>) <int> "read")
@@ -49,15 +51,21 @@
   (defextern eul_make_connection (<string> <string> <string>) <int>)
   (defextern eul_socket_strerror (<int>) <string>)
   (defextern eul_strerror () <string>)
+
   (defun strerror () (eul_strerror))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Tokenizer
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern ntok (ptr ptr) ptr "ntok")
   (defextern read-into-buffer (<int> <string> <int>) <int> "read_into_buffer")
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Hostname
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern eul_hostname () <string>)
   (defun hostname () (eul_hostname))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

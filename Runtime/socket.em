@@ -1,26 +1,28 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;;  Description: sockets
-;;; -----------------------------------------------------------------------
+;;; Description: sockets
+;;;-----------------------------------------------------------------------------
 (defmodule socket
   (syntax (_macros)
    import (telos lock condition convert dynamic stream1 stream2 string)
    export (<socket> socket-port socket-host socket-descriptor
            socket-queue-size
            <connection> connection-host connection-port connectionp))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Sockets
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defclass <socket> ()
     ((port accessor: socket-port keyword: port: default: 4711)
      (host accessor: socket-host keyword: host: default: (hostname))
      (descriptor accessor: socket-descriptor)
      (queue-size accessor: socket-queue-size keyword: queue-size: default: 5))
     predicate: socketp)
+
   (defmethod initialize ((x <socket>) inits)
     (call-next-method)
     (let* ((port (convert (socket-port x) <string>))
@@ -36,14 +38,16 @@
                        (setq *open-file-streams*
                              (cons x *open-file-streams*)))
             x)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Socket connections
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defclass <connection> (<file-stream>)
     ((host accessor: connection-host keyword: host: default: (hostname))
      (port accessor: connection-port keyword: port: default: 4711))
     keywords: (socket:)
     predicate: connectionp)
+
   (defmethod initialize ((x <connection>) inits)
     (call-next-method)
     (let ((s (init-list-ref inits socket:))
@@ -82,4 +86,7 @@
                    (setq *open-file-streams*
                          (cons x *open-file-streams*)))
         x)))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

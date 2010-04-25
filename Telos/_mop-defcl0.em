@@ -1,37 +1,38 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russell Bradford, Andreas Kind
-;;;  Description: defining form 'defclass'
-;;; -----------------------------------------------------------------------
+;;; Description: defining form 'defclass'
+;;;-----------------------------------------------------------------------------
 (defmodule _mop-defcl0
   (syntax (boot0)
    import (level1))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Syntax: (defclass name (supers) (slots) {keywords}*), where
-;;; name is a symbol,
-;;; supers is {class}*,
-;;; slots is {symbol | (symbol {slot-keywords}*)}, and
-;;; keywords and slot-keywords are {key val}. Allowable keywords include
-;;; class:               the class of the class begin defined
-;;; keywords:            a list of the allowable keywords for this class
-;;; predicate:           a predicate function for this class
-;;; constructor:         a constructor function for this class
-;;; print-function:      a function to be added as a method to generic-prin
-;;;                          to print an instance
-;;; The predicate: and constructor: keywords can be repeated.
-;;; Allowable slot-keywords include
-;;; reader:              a symbol to name a reader for this slot
-;;; writer:              a symbol to name a writer for this slot
-;;; accessor:            a symbol to name a reader for this slot; a writer
-;;;                      for this slot will be installed as the setter of
-;;;                      the reader
-;;; keyword:             a symbol to be the keyword for the slot
-;;; default:             an initial value for the slot
-;;; The reader:, writer:, and accessor: keywords can be repeated.
-;;; --------------------------------------------------------------------
+;; name is a symbol,
+;; supers is {class}*,
+;; slots is {symbol | (symbol {slot-keywords}*)}, and
+;; keywords and slot-keywords are {key val}. Allowable keywords include
+;; class:               the class of the class begin defined
+;; keywords:            a list of the allowable keywords for this class
+;; predicate:           a predicate function for this class
+;; constructor:         a constructor function for this class
+;; print-function:      a function to be added as a method to generic-prin
+;;                          to print an instance
+;; The predicate: and constructor: keywords can be repeated.
+;; Allowable slot-keywords include
+;; reader:              a symbol to name a reader for this slot
+;; writer:              a symbol to name a writer for this slot
+;; accessor:            a symbol to name a reader for this slot; a writer
+;;                      for this slot will be installed as the setter of
+;;                      the reader
+;; keyword:             a symbol to be the keyword for the slot
+;; default:             an initial value for the slot
+;; The reader:, writer:, and accessor: keywords can be repeated.
+;;;-----------------------------------------------------------------------------
   (defmacro defclass (cl-name supers slots . keywords)
     (let ((real-name (strip-<> cl-name)))
       `(progn
@@ -52,9 +53,10 @@
          ,@(do-constructors cl-name keywords)
          ,@(do-printfn cl-name keywords)
          ,cl-name)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Define primitive class
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro defprimclass (cl-name internal-name supers slots . keywords)
     (let ((real-name (strip-<> cl-name)))
       `(progn
@@ -78,17 +80,19 @@
          ,@(do-constructors cl-name keywords)
          ,@(do-printfn cl-name keywords)
          ,cl-name)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Strip-<>
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun strip-<> (sym)
     (let ((str (symbol-name sym)))
       (if (eq (string-ref str 0) #\<)
           (make-symbol (substring str 1 (- (string-size str) 1)))
         sym)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Auxilary functions
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun do-direct-slotds (slots)
     (cond ((null slots) ())
           ((atom (car slots))
@@ -108,6 +112,7 @@
                                (cdar slots)
                                '(default: accessor: keyword: reader: writer:)))
                      (do-direct-slotds (cdr slots)))))))
+
   (defun do-accessors (name slots)
     (labels
      ((loop (ll res i)
@@ -138,13 +143,15 @@
              (append (do-writer acc name slotname i t)
                      (do-accessor name slotname (cddr inits) i))))
           (t (do-accessor name slotname (cddr inits) i))))
-;  (defun do-reader (acc name slotname i)
-;    (list (list 'defun acc '(x)
-;               (list (list 'opencoded-lambda '(o i)
-;                           (list 'binding-ref '? name)
-;                           '(primitive-relative-ref))
-;                     'x i))
-;      (list 'declare-inline acc)))
+
+  ;  (defun do-reader (acc name slotname i)
+  ;    (list (list 'defun acc '(x)
+  ;               (list (list 'opencoded-lambda '(o i)
+  ;                           (list 'binding-ref '? name)
+  ;                           '(primitive-relative-ref))
+  ;                     'x i))
+  ;      (list 'declare-inline acc)))
+
   (defun do-reader (acc name slotname i)
     `((defun ,acc (x)
         ((opencoded-lambda (o i)
@@ -152,12 +159,14 @@
                            (primitive-relative-ref))
          x ,i))
       (declare-inline ,acc)))
-;  (defun do-reader (acc name slotname i)
-;    `((defconstant ,acc '(()))  ; class ,name not yet initialized!
-;      (setq ,acc (slot-reader (find-slot ,name ',slotname)) t)
-;      (if (generic-function-p ,acc)
-;         (setq ,acc (generic-function-discriminating-function ,acc) t)
-;       ())))
+
+  ;  (defun do-reader (acc name slotname i)
+  ;    `((defconstant ,acc '(()))  ; class ,name not yet initialized!
+  ;      (setq ,acc (slot-reader (find-slot ,name ',slotname)) t)
+  ;      (if (generic-function-p ,acc)
+  ;         (setq ,acc (generic-function-discriminating-function ,acc) t)
+  ;       ())))
+
   (defun do-writer (acc name slotname i . no-accessor)
     (if (null no-accessor)
         `((defun (setter ,acc) (x v)
@@ -171,18 +180,20 @@
                              (set-primitive-relative-ref))
            x ,i v))
         (declare-inline ,acc))))
-;  (defun do-writer (acc name slotname i . no-accessor)
-;    (if (null no-accessor)
-;       `(((setter setter) ,acc (slot-writer (find-slot ,name ',slotname)))
-;         (if (generic-function-p (setter ,acc))
-;             ((setter setter) ,acc
-;              (generic-function-discriminating-function (setter ,acc)))
-;           ()))
-;      `((defconstant ,acc '(()))       ; class ,name not yet initialized!
-;       (setq ,acc (slot-writer (find-slot ,name ',slotname)) t)
-;       (if (generic-function-p ,acc)
-;           (setq ,acc (generic-function-discriminating-function ,acc) t)
-;         ()))))
+
+  ;  (defun do-writer (acc name slotname i . no-accessor)
+  ;    (if (null no-accessor)
+  ;       `(((setter setter) ,acc (slot-writer (find-slot ,name ',slotname)))
+  ;         (if (generic-function-p (setter ,acc))
+  ;             ((setter setter) ,acc
+  ;              (generic-function-discriminating-function (setter ,acc)))
+  ;           ()))
+  ;      `((defconstant ,acc '(()))       ; class ,name not yet initialized!
+  ;       (setq ,acc (slot-writer (find-slot ,name ',slotname)) t)
+  ;       (if (generic-function-p ,acc)
+  ;           (setq ,acc (generic-function-discriminating-function ,acc) t)
+  ;         ()))))
+
   (defun do-predicates (name keywords)
     (cond ((null keywords) ())
           ((eq (car keywords) predicate:)
@@ -192,6 +203,7 @@
                          method: (((x ,name)) x)))
                      (do-predicates name (cddr keywords)))))
           (t (do-predicates name (cddr keywords)))))
+
   (defun do-constructors (name keywords)
     (cond ((null keywords) ())
           ((eq (car keywords) constructor:)
@@ -214,14 +226,16 @@
                               (loop (cdr con) params ()))))))
               (do-constructors name (cddr keywords)))))
           (t (do-constructors name (cddr keywords)))))
+
   (defun do-printfn (name keywords)
     (let ((fun (find-key print-function: keywords ())))
       (if (null fun) ()
         `((defmethod generic-prin ((obj ,name) str)
             (,fun obj str))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Find slot keywords
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun find-slot-keywords (slots)
     (labels
      ((loop (ll res)
@@ -234,4 +248,7 @@
                         (loop (cdr ll) res)
                       (loop (cdr ll) (cons key res)))))))))
      (loop slots ())))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

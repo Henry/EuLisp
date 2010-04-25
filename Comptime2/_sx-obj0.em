@@ -1,17 +1,18 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: macro to define abstract syntax tree
-;;; -----------------------------------------------------------------------
+;;; Description: macro to define abstract syntax tree
+;;;-----------------------------------------------------------------------------
 (defmodule _sx-obj0
   (syntax (macros)
    import (level1))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  All syntax objects are defined with this macro
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro def-syntax-obj (cl-name super slots . options)
     (let* ((str (symbol-name cl-name))
            (pred-str (concatenate
@@ -51,9 +52,10 @@
             predicate: ,pred-name
             ,@options)
           (export ,cl-name ,pred-name ,@export-names)))))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Register a new node to the actual module
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro new-node (node kind . first?)
     (let ((reader-name (make <symbol>
                              name: (format () "module-~as?" (cadr kind))))
@@ -64,4 +66,7 @@
              (,writer-name m (cons ,node (,reader-name m))))
         `(let ((m (dynamic *actual-module*)))
            (,writer-name m (tconc (,reader-name m) ,node))))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

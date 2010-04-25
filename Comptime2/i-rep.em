@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind
-;;;  Description: read-eval-print loop
-;;; -----------------------------------------------------------------------
+;;; Description: read-eval-print loop
+;;;-----------------------------------------------------------------------------
 (defmodule i-rep
   (syntax (_macros)
    import (i-all i-args sx-obj sx-node i-compile cg-interf cg-dld ex-expr
@@ -13,17 +13,20 @@
    export (rep eval debug-eval show-module-bindings ?
            show-class-hierarchy)
    expose (cg-dld))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; To be removed!
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod binary< ((str1 <string>) (str2 <string>))
     (int-binary< (string-compare str1 str2) 0))
+
   (defmethod binary< ((sym1 <symbol>) (sym2 <symbol>))
     (int-binary< (string-compare (symbol-name sym1)
                                  (symbol-name sym2)) 0))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Interpreter initialization
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   ;; Can't use dynamic variables, because application might be multi-threaded
   (deflocal *current-module-name* ())
   (deflocal *reset-k* ())
@@ -31,6 +34,7 @@
   (deflocal *continue-k* ())
   ;; Fast prompt (see Youtoo_.c) ...
   (deflocal *fast-prompt* (= *argc* 1))
+
   (defun initialize-interpreter ()
     (if (or *fast-prompt* *script*) ()
       (format t "EuLisp System 'youtoo ~a'\n\n" *version*))
@@ -63,12 +67,15 @@
                 (*reset-k* ())))))
     ;; Enable signals
     (eul-signal-enable t))
+
   (defextern eul-signal-enable (boolean) boolean "eul_signal_enable")
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Evaluation of sexprs
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   ;; Previous result of eval
   (deflocal ? ())
+
   (defun eval (x)
     (setq
      ?
@@ -199,6 +206,7 @@
            (t x)))
     (thread-reschedule)
     ?)
+
   (defun check-module-envs (module)
     ;; Update lexical and syntax environments if necessary;
     ;; Lexical and syntax envs need not to be updated if module was compiled
@@ -209,6 +217,7 @@
           (module-lexical-env! module (module-external-env? module))
           (do1-list import-module import)
           (do1-list import-syntax-module syntax))))
+
   (defun debug-eval (x)
     (cond ((eq x reset:)
            (*reset-k* ()))
@@ -223,12 +232,14 @@
              (continue-k ())))
           (t
            (eval x))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Read/eval/print loop
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun rep ()
     (initialize-interpreter)
     (rep-aux))
+
   (defun rep-aux ()
     (labels
      ((loop (x)
@@ -258,6 +269,7 @@
              (setq *resume-k* ())
              (loop ())))
     (rep-aux))
+
   (defun debug-rep ()
     (labels
      ((loop (x)
@@ -284,9 +296,10 @@
      (setq *resume-k* (cdr *resume-k*))
      (setq *continue-k* (cdr *continue-k*))
      (loop ())))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Auxiliary functions
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun show-module-bindings (syntax all . module-names)
     (labels
      ((loop1 (x m i)
@@ -326,6 +339,7 @@
              (selected-binding-names (loop2 bindings module ()))
              (sorted-binding-names (sort selected-binding-names binary<)))
        (loop1 sorted-binding-names module 0))))
+
   (defun show-imported-modules (syntax)
     (let ((module (dynamic *actual-module*)))
       (do print
@@ -333,6 +347,7 @@
          (if syntax
              (module-used-syntax-modules? module)
            (map get-module (module-used-module-names? module)))))))
+
   (defun show-class-hierarchy classes
     (let ((root-class (if classes (car classes) <object>)))
       (labels
@@ -345,6 +360,7 @@
                     (class-name cl))
             (do (lambda (x) (loop x new-indent)) subclasses))))
         (loop root-class ""))))
+
   (defun load-file-exprs (name)
     (with-input-file-of-path (s name dir *load-path*)
       (labels
@@ -354,4 +370,7 @@
                     (cons 'progn (reverse exprs))
                   (loop (cons expr exprs))))))
        (loop ()))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

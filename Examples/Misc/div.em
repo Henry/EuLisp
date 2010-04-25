@@ -9,14 +9,14 @@
 ; Language:     EuLisp
 ; Status:       Public Domain
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
- 
+
 ;; DIV2 -- Benchmark which divides by 2 using lists of n ()'s.
 ;; This file contains a recursive as well as an iterative test.
 (defmodule div
   (syntax (macros)
    import (level1)
    export (test-1 test-2 *ll*))
- 
+
   (defun create-n (n)
     (labels
      ((loop (m res)
@@ -24,9 +24,9 @@
                 (loop (- m 1) (cons () res))
               res)))
      (loop n ())))
- 
+
   (deflocal *ll* (create-n 200))
- 
+
   (defun iterative-div2 (l)
     (labels
      ((loop (ll a)
@@ -34,11 +34,11 @@
                 a
               (loop (cddr ll) (cons (car ll) a)))))
      (loop l ())))
- 
+
   (defun recursive-div2 (l)
     (cond ((null l) ())
           (t (cons (car l) (recursive-div2 (cddr l))))))
- 
+
   (defun test-1 (l)
     (labels
      ((loop (ll i)
@@ -51,7 +51,7 @@
                   (loop ll (- i 1)))
               ())))
      (loop l 1000)))
- 
+
   (defun test-2 (l)
     (labels
      ((loop (ll i)
@@ -64,9 +64,13 @@
                   (loop ll (- i 1)))
               ())))
      (loop l 1000)))
+
   (defun run ()
     (test-1 *ll*)
     (test-2 *ll*))
+
   (run)
- 
-)  ;; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

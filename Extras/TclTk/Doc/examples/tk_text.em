@@ -1,11 +1,11 @@
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  By Julio Garcia Moreno & University of Bath.                           ;;;
 ;;; ----------------------------------------------------------------------- ;;;
-;;;                     EuLisp System 'youtoo/tk'
+;;; ---                         EuLisp System 'youtoo/tk'
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  Library: 
 ;;;  Authors: Julio Garcia Moreno
-;;;  Description: The next example shows how text widget works.
+;;; Description: The next example shows how text widget works.
 ;;;            
 ;;; ----------------------------------------------------------------------- ;;;
 ;; This exmaple show the way text widgets works, and some of

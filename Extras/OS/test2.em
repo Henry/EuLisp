@@ -1,36 +1,42 @@
-;;; EuLysses header
 (defmodule test2
   (syntax (macros)
    import (level1 serial))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Test values
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defclass <foo> ()
     ((u accessor: foo-u keyword: u: default: 34)
      (v accessor: foo-v keyword: v: default: 35)))
+
   (defclass <bar> (<foo>)
     ((r accessor: bar-r keyword: r: default: 36)))
+
   (defun baz x (print (reverse x)))
   (defun boo x x)
+
   (defgeneric boz (x y))
   (defmethod boz ((x <int>) (y <string>))
     (print "method1: ~a ~a\n" x y))
   (defmethod boz ((x <double>) (y <symbol>))
     (print "method1: ~a ~a\n" x y))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Serialization tests
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun my-deserialize ()
     (pprint (deserialize)))
-;;  (defun Deserialize ss
-;;    (let ((s (if ss (car ss) stdin))
-;;        (os (make <object-stream> mode: 'r)))
-;;      (pprint os stderr)
-;;      (connect os s)
-;;      (pprint os stderr)
-;;      (let ((res (read os)))
-;;      (disconnect os)
-;;      res)))
+
+  ;;  (defun Deserialize ss
+  ;;    (let ((s (if ss (car ss) stdin))
+  ;;        (os (make <object-stream> mode: 'r)))
+  ;;      (pprint os stderr)
+  ;;      (connect os s)
+  ;;      (pprint os stderr)
+  ;;      (let ((res (read os)))
+  ;;      (disconnect os)
+  ;;      res)))
+
   (defun my-serialize (type fs)
     (let* ((os (make <object-stream> mode: 'w)))
       (pprint os stderr)
@@ -86,4 +92,7 @@
       (my-deserialize)
     (let ((type (vector-ref *argv* 1)))
       (my-serialize type stdout)))
-)
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

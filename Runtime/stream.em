@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;;  Description: streams
-;;; -----------------------------------------------------------------------
+;;; Description: streams
+;;;-----------------------------------------------------------------------------
 (defmodule stream
   (syntax (_macros)
    import (telos stream1 stream2 socket dynamic condition lock convert
@@ -16,11 +16,13 @@
            *int-size-in-decimal-digits* *double-size-in-decimal-digits*
            output-list-contents
            prin-string prin-address make-space file-lookup))
+
 ;;;------------------------------------------------------------------------
 ;;; Stream Manipulation Functions
 ;;;------------------------------------------------------------------------
   (defun connect (source sink . options)
     (generic-connect source sink options))
+
   (defmethod generic-connect ((s1 <stream>) (s2 <stream>) options)
     (let ((mode (stream-mode s1)))
       (cond
@@ -34,16 +36,19 @@
         ((setter stream-source) s1 s2)
         ((setter stream-sink) s1 s2))))
     ())
+
   (defmethod reconnect ((s1 <stream>) (s2 <stream>))
     ((setter stream-source) s2 (stream-source s1))
     ((setter stream-source) s1 ())
     ((setter stream-sink) s2 (stream-sink s1))
     ((setter stream-sink) s1 ())
     ())
+
   (defmethod disconnect ((s <stream>))
     ((setter stream-source) s ())
     ((setter stream-sink) s ())
     ())
+
   (defmethod disconnect ((fs <file-stream>))
     (let ((sink (stream-sink fs))
           (source stream-source fs))
@@ -61,12 +66,14 @@
                  (setq *open-file-streams*
                        (list-remove fs *open-file-streams*)))
       (call-next-method)))
+
   (defmethod disconnect ((x <socket>))
     (if (int-binary= (eul_close (socket-descriptor x)) 0)
         (with-lock *open-file-streams*-lock
                    (setq *open-file-streams*
                          (list-remove x *open-file-streams*)))
       (error (strerror) <stream-condition> value: x)))
+
 ;;;------------------------------------------------------------------------
 ;;; Buffer Management
 ;;;------------------------------------------------------------------------
@@ -81,6 +88,7 @@
           ((setter control-block-buffer) sink ())
           ;; return non-zero
           1))))
+
   (defmethod fill-buffer ((fs <file-stream>))
     (let* ((fcb (stream-source fs))
            (n (control-block-buffer-size fcb))
@@ -91,6 +99,7 @@
       ((setter control-block-buffer-pos) fcb
        (int-binary- (int-binary/ n 2) 1))
       i))
+
   (defmethod fill-buffer ((ss <string-stream>))
     (let ((str-list (string-stream-string-list ss)))
       (if (null str-list)
@@ -101,6 +110,7 @@
           ((setter control-block-buffer-cnt) scb 0)
           ;; return non-zero
           1))))
+
   (defmethod flush-buffer ((s <stream>))
     (let* ((source (stream-source s))
            (sink (stream-sink s))
@@ -110,6 +120,7 @@
        (append source-buf (reverse sink-buf)))
       ((setter control-block-buffer) sink ())
       t))
+
   (defmethod flush-buffer ((fs <file-stream>))
     ;; Write buffer to sink and reset
     (let* ((fcb (stream-sink fs))
@@ -122,6 +133,7 @@
         (progn
           ((setter control-block-buffer-pos) fcb 0)
           fs))))
+
   (defmethod flush-buffer ((ss <string-stream>))
     ;; Append buffer to the list of strings and reset
     (let* ((scb (stream-sink ss))
@@ -133,16 +145,20 @@
       ((setter control-block-buffer) scb
        (make <string> size: (control-block-buffer-size scb))))
     ss)
+
   (defmethod end-of-stream ((s <stream>))
     (error "end of stream" <end-of-stream> value: s))
+
   (defmethod end-of-stream ((fs <file-stream>))
     (disconnect fs)
     (call-next-method))
+
 ;;;------------------------------------------------------------------------
 ;;; Read Operations
 ;;;------------------------------------------------------------------------
   (defmethod generic-read ((s <stream>) eos-error-p eos-value)
     ((stream-read-action s) s eos-error-p eos-value))
+
   (defmethod generic-read ((fs <file-stream>) eos-error-p eos-value)
     (let ((fcb (stream-source fs)))
       (if (and (int-binary= (control-block-buffer-cnt fcb) 0)
@@ -154,6 +170,7 @@
           ((setter control-block-buffer-cnt) fcb (int-binary- cnt 1))
           ((setter control-block-buffer-pos) fcb new-pos)
           (string-ref (control-block-buffer fcb) new-pos)))))
+
   (defmethod generic-read ((ss <string-stream>) eos-error-p eos-value)
     (let ((scb (stream-source ss)))
       (if (and (int-binary= (control-block-buffer-cnt scb)
@@ -164,6 +181,7 @@
                (c (string-ref (control-block-buffer scb) cnt)))
           ((setter control-block-buffer-cnt) scb (int-binary+ cnt 1))
           c))))
+
 ;;;------------------------------------------------------------------------
 ;;; Write and print
 ;;;------------------------------------------------------------------------
@@ -176,6 +194,7 @@
                    (prin-address x s)
                    (prin-one-char #\> s))))
     x)
+
   (defun prin (x . ss)
     (match-let ss ((s stdout))
                (if (objectp x)
@@ -185,6 +204,7 @@
                    (prin-address x s)
                    (prin-one-char #\> s))))
     x)
+
   (defun print (x . ss)
     (match-let ss ((s stdout))
                (if (objectp x)
@@ -196,12 +216,15 @@
                    (prin-address x s)
                    (prin-string ">\n" 2 s))))
     x)
+
   (defun flush ss
     (match-let ss ((s stdout))
                (flush-buffer s)))
+
   (defun newline ss
     (match-let ss ((s stdout))
                (prin-one-char #\\n s)))
+
 ;;;------------------------------------------------------------------------
 ;;; Some low level functions to get things printed on <file-stream>s
 ;;;------------------------------------------------------------------------
@@ -212,6 +235,7 @@
                (if (int-binary= times 1)
                    (prin-one-char c s)
                  (prin-char* c s times))))
+
   (defun prin-one-char (c s)
     (let* ((scb (stream-sink s))
            (pos (control-block-buffer-pos scb))
@@ -223,6 +247,7 @@
               (null (int-binary< new-pos bufsiz)))
           (flush-buffer s)
          ())))
+
   (defun prin-char* (char s times)
     (let* ((scb (stream-sink s))
            (bufsiz (control-block-buffer-size scb)))
@@ -240,7 +265,9 @@
                     (loop (int-binary+ i 1)))
                 ())))
        (loop 0))))
+
   (defun sprin (x) (format () "~s" x))
+
   (defun make-space (s n)
     ;; There must be at least one byte more available than requested
     (let* ((scb (stream-sink s))
@@ -252,22 +279,29 @@
           (flush-buffer s)
           ;; Buffer size greater than n?
           (int-binary< n bufsiz)))))
-;;; Will be 16 for 64 bit addresses
+
+  ;; Will be 16 for 64 bit addresses
   (defconstant *address-size-in-hex-digits* 8)
-;;; 2^64-1 = 18446744073709551615 (20 digits) + 1 for sign
+
+  ;; 2^64-1 = 18446744073709551615 (20 digits) + 1 for sign
   (defconstant *int-size-in-decimal-digits* 21)
-;;; No idea: write a program to print HUGE_VAL?
+
+  ;; No idea: write a program to print HUGE_VAL?
   (defconstant *double-size-in-decimal-digits* 25)
+
   (defun sprintf (c-format-str x)
     (let* ((buf (make <string> size: *double-size-in-decimal-digits*))
            (n (eul_sprintf buf 0 c-format-str x)))
       (substring buf 0 n)))
+
   (defun fprintf (s c-format-str x)
     (let* ((buf (make <string> size: *double-size-in-decimal-digits*))
            (n (eul_sprintf buf 0 c-format-str x))
            (str (substring buf 0 n)))
       (prin-string str n s)))
+
   (defun prin-address (x s) (fprintf s "0x%08X" x))
+
   (defun prin-string (str n s)
     (let* ((scb (stream-sink s))
            (bufsiz (control-block-buffer-size scb))
@@ -298,6 +332,7 @@
             (flush-buffer s)
          ())
         str)))
+
   (defun output-list-contents (l fun s)
     (labels
      ((loop (ll)
@@ -308,10 +343,14 @@
                   (t
                    (cdr ll)))))
      (loop l)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; File lookup with path
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+  (defextern eul-file-lookup (<string> ptr) ptr "eul_file_lookup")
   (defun file-lookup (name . dirs)
     (eul-file-lookup (convert name <string>) dirs))
-  (defextern eul-file-lookup (<string> ptr) ptr "eul_file_lookup")
-)  ;; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

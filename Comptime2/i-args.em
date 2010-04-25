@@ -1,18 +1,19 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: parse arguments
-;;; -----------------------------------------------------------------------
+;;; Description: parse arguments
+;;;-----------------------------------------------------------------------------
 (defmodule i-args
   (syntax (_macros _i-aux0)
    import (i-all)
    export (parse-args print-version print-params print-help))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Parse the arguments of the compiler invocation
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun parse-args (argv)
     (let ((n (vector-size argv)))
       (labels
@@ -188,9 +189,10 @@
              (setq *silent* t)
              (setq *verbose* ()))
          (loop 1)))))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Print main parameters
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun print-params ()
     (newline)
     (print "PARAMETER SETTINGS:")
@@ -213,11 +215,13 @@
     (print-param "*inline-level*" *inline-level*)
     (print-param "*recompile*" *recompile*)
     (flush))
+
   (defun print-param (name value)
     (format t "  ~a = ~a\n" name value))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Print usage
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun print-help ()
     (print "Usage: youtoo [<options>] <source-file(s)> [<options>]")
     (print "  -help                 --  show usage")
@@ -254,6 +258,7 @@
     (print "  -i                    --  force interpretation mode")
     (print "  -no_ct_handlers       --  no compile-time error handling")
     (flush))
+
   (defun print-version ()
     (print "EuLisp System 'youtoo'")
     (format t "Version ~a updated\n" *version*)
@@ -262,4 +267,7 @@
     (print "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.")
     (newline)
     (flush))
-)  ; end of module i-args
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

@@ -1,106 +1,114 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: compiler parameters
-;;; -----------------------------------------------------------------------
+;;; Description: compiler parameters
+;;;-----------------------------------------------------------------------------
 (defmodule i-param
   (syntax (_macros _i-aux0)
    import (i-level1)
    export (*version*
            *ostype*
-          *interpreter*
-          *C-cc*
-          *C-ld*
-          *C-cc-flags*
-          *C-cc-libs*
-          *strip-stand-alone*
-          *C-ar*
-          *C-ranlib*
-          *create-C-module*
-          *create-C-library*
-          *stand-alone*
-          *main-link-string*
-          *script*
-          *silent*
-          *verbose*
-          *warnings*
-          *errors*
-          *no-ct-handlers*
-          *debug*
-          *inline-level*
-          *peephole*
-          *pass*
-          *stop-after-pass* stop-after-pass
-          *number-of-warnings*
-          *number-of-errors*
-          *get-loaded-module*
-          *get-loaded-syntax-module*
-          *modified-module-names*
-          *start-module*
-          *get-load-dir*
-          *get-full-import*
-          *load-path*
-          *C-library-load-path*
-          *linked-C-libraries*
-          *linked-C-ff-files*
-          *linked-C-ff-libraries*
-          *delimiter*
-          *source-file-names*
-          *tmp-source-file-name*
-          *tmp-start-source-file-name*
-          *dest-file-name*
-          *object-dir*
-          *eulysses-dir*
-          *eulysses-arch*
-          *recompile*
-          *no-recompile*
-          *no-gc*
-          *no-else*
-          *redefine-imported-bindings*
-          *first-year-students*
-          *tmp-load-dir*
-          *get-literal*
-          ct-reset
-          get-ct-error-condition-class
-          parse-module compile-module load-syntax-module
-          get-named-encl-lambda))
-;;; ----------------------------------------------------------------------
+           *interpreter*
+           *C-cc*
+           *C-ld*
+           *C-cc-flags*
+           *C-cc-libs*
+           *strip-stand-alone*
+           *C-ar*
+           *C-ranlib*
+           *create-C-module*
+           *create-C-library*
+           *stand-alone*
+           *main-link-string*
+           *script*
+           *silent*
+           *verbose*
+           *warnings*
+           *errors*
+           *no-ct-handlers*
+           *debug*
+           *inline-level*
+           *peephole*
+           *pass*
+           *stop-after-pass* stop-after-pass
+           *number-of-warnings*
+           *number-of-errors*
+           *get-loaded-module*
+           *get-loaded-syntax-module*
+           *modified-module-names*
+           *start-module*
+           *get-load-dir*
+           *get-full-import*
+           *load-path*
+           *C-library-load-path*
+           *linked-C-libraries*
+           *linked-C-ff-files*
+           *linked-C-ff-libraries*
+           *delimiter*
+           *source-file-names*
+           *tmp-source-file-name*
+           *tmp-start-source-file-name*
+           *dest-file-name*
+           *object-dir*
+           *eulysses-dir*
+           *eulysses-arch*
+           *recompile*
+           *no-recompile*
+           *no-gc*
+           *no-else*
+           *redefine-imported-bindings*
+           *first-year-students*
+           *tmp-load-dir*
+           *get-literal*
+           ct-reset
+           get-ct-error-condition-class
+           parse-module compile-module load-syntax-module
+           get-named-encl-lambda))
+
+;;;-----------------------------------------------------------------------------
 ;;;  Global compiler parameters with default settings
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant *delimiter* "/")
   (deflocal *load-path* (listify-env-string (getenv "EUL_LOAD_PATH")))
   (deflocal *eulysses-dir* (getenv "EUL_DIR"))
   (deflocal *eulysses-arch* (getenv "EUL_ARCH"))
+
   (deflocal *C-library-load-path*
     (listify-env-string (getenv "EUL_LIBRARY_LOAD_PATH")))
+
   (deflocal *start-module* (getenv "EUL_START_MODULE"))
   (deflocal *tmp-load-dir* ())
-(defun load-config-info ()
-  (let* ((private-name (format () "~a~a.eulrc.~a" (getenv "HOME") *delimiter*  *eulysses-arch*))
-         (default-name (format () "~a~a.eulrc.~a" *eulysses-dir* *delimiter* *eulysses-arch*))
-         (default-info (with-input-file
-                        (s default-name) (read-s-expression s))))
-    (if (zerop (system (format () "test -f ~a" private-name)))
-      (let* ((private-info (with-input-file
-                           (s private-name) (read-s-expression s)))
-             (private-version (assoc-list-ref 'VERSION private-info))
-             (default-version (assoc-list-ref 'VERSION default-info)))
-        (if (equal private-version default-version)
-            private-info
-          ;; Here we could add some code to update the private resource file
-          ;; because the version apparently has changed
-          private-info))
-      default-info)))
+
+  (defun load-config-info ()
+    (let* ((private-name (format () "~a~a.eulrc.~a" (getenv "HOME") *delimiter*  *eulysses-arch*))
+           (default-name (format () "~a~a.eulrc.~a" *eulysses-dir* *delimiter* *eulysses-arch*))
+           (default-info (with-input-file
+                           (s default-name) (read-s-expression s))))
+      (if (zerop (system (format () "test -f ~a" private-name)))
+          (let* ((private-info (with-input-file
+                                 (s private-name) (read-s-expression s)))
+                 (private-version (assoc-list-ref 'VERSION private-info))
+                 (default-version (assoc-list-ref 'VERSION default-info)))
+            (if (equal private-version default-version)
+                private-info
+              ;; Here we could add some code to update the private resource file
+              ;; because the version apparently has changed
+              private-info))
+        default-info)))
+
   (defun get-config-info (name)
     (let ((entry (assoc-list-ref *config-info* name)))
       (if entry (cdr entry) "")))
+
   (defun get-cc-flags ()
     (get-config-info 'CFLAGS))
+
   (defun get-cc-libs ()
     (get-config-info 'CLIBS))
+
   (deflocal *config-info* (load-config-info))
   (deflocal *version* (get-config-info 'VERSION))
   (deflocal *ostype* (get-config-info 'OSTYPE))
@@ -149,73 +157,80 @@
   (deflocal *pass* 'start)
   (deflocal *stop-after-pass* ())
   (deflocal *get-literal* (make-access-table comparator: equal))
+
   (defglobal *actual-module* ())         ; module being in compilation
   (defglobal *encl-lambda* ())           ; used during expansion phase
   (defglobal *pprint* ())                ; pretty printing
   (defglobal *indent* "")                ; message indentation
   (defglobal *trace-indent* "")          ; trace indentation
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Reset compile state
-;;; --------------------------------------------------------------------
-(defun ct-reset ()
-  (setq *interpreter* ())
-  (setq *C-cc* (get-config-info 'CC))
-  (setq *C-ld* *C-cc*)
-  (setq *strip-stand-alone* ())
-  (setq *C-cc-flags* (get-cc-flags))
-  (setq *C-cc-libs* (get-cc-libs))
-  (setq *C-ar* (get-config-info 'AR))
-  (setq *C-ranlib* (get-config-info 'RANLIB))
-  (setq *create-C-module* ())
-  (setq *create-C-library* ())
-  (setq *load-path*
-        (listify-env-string (getenv "EUL_LOAD_PATH")))
-  (setq *C-library-load-path*
-        (listify-env-string (getenv "EUL_LIBRARY_LOAD_PATH")))
-  (setq *linked-C-libraries* ())
-  (setq *linked-C-ff-files* ())
-  (setq *linked-C-ff-libraries* ())
-  (setq *stand-alone* t)
-  (setq *script* ())
-  (setq *silent* ())
-  (setq *verbose* ())
-  (setq *warnings* t)
-  (setq *errors* t)
-  (setq *number-of-warnings* 0)
-  (setq *number-of-errors* 0)
-  (setq *source-file-names* ())
-  (setq *dest-file-name* ())
-  (setq *object-dir* ())
-;  (access-table-clear *get-loaded-module*)
-;  (access-table-clear *get-loaded-syntax-module*)
-  (setq *modified-module-names* ())
-  (setq *pass* 'start)
-  (setq *stop-after-pass* ())
-  (setq *debug* ())
-  (setq *inline-level* 1)
-  (setq *peephole* t)
-  (setq *recompile* ())
-  (setq *no-recompile* ())
-  (setq *no-gc* ())
-  (setq *tmp-load-dir* ())
-  (setq *tmp-source-file-name* ())
-  (setq *tmp-start-source-file-name* ())
-  (access-table-clear *get-literal*)
-  (access-table-clear *get-load-dir*)
-  (access-table-clear *get-full-import*))
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+  (defun ct-reset ()
+    (setq *interpreter* ())
+    (setq *C-cc* (get-config-info 'CC))
+    (setq *C-ld* *C-cc*)
+    (setq *strip-stand-alone* ())
+    (setq *C-cc-flags* (get-cc-flags))
+    (setq *C-cc-libs* (get-cc-libs))
+    (setq *C-ar* (get-config-info 'AR))
+    (setq *C-ranlib* (get-config-info 'RANLIB))
+    (setq *create-C-module* ())
+    (setq *create-C-library* ())
+    (setq *load-path*
+          (listify-env-string (getenv "EUL_LOAD_PATH")))
+    (setq *C-library-load-path*
+          (listify-env-string (getenv "EUL_LIBRARY_LOAD_PATH")))
+    (setq *linked-C-libraries* ())
+    (setq *linked-C-ff-files* ())
+    (setq *linked-C-ff-libraries* ())
+    (setq *stand-alone* t)
+    (setq *script* ())
+    (setq *silent* ())
+    (setq *verbose* ())
+    (setq *warnings* t)
+    (setq *errors* t)
+    (setq *number-of-warnings* 0)
+    (setq *number-of-errors* 0)
+    (setq *source-file-names* ())
+    (setq *dest-file-name* ())
+    (setq *object-dir* ())
+    ;  (access-table-clear *get-loaded-module*)
+    ;  (access-table-clear *get-loaded-syntax-module*)
+    (setq *modified-module-names* ())
+    (setq *pass* 'start)
+    (setq *stop-after-pass* ())
+    (setq *debug* ())
+    (setq *inline-level* 1)
+    (setq *peephole* t)
+    (setq *recompile* ())
+    (setq *no-recompile* ())
+    (setq *no-gc* ())
+    (setq *tmp-load-dir* ())
+    (setq *tmp-source-file-name* ())
+    (setq *tmp-start-source-file-name* ())
+    (access-table-clear *get-literal*)
+    (access-table-clear *get-load-dir*)
+    (access-table-clear *get-full-import*))
+
+;;;-----------------------------------------------------------------------------
 ;;; Stop the compilation after current or a particular pass
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun stop-after-pass pass-name
     (let ((pass (or (and pass-name (car pass-name)) *pass*)))
       (setq *stop-after-pass* pass)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; To avoid circular module imports the following fuctions, which are
 ;;; used in more than one module, are defined as generic functions.
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compile-module (name))
   (defgeneric load-syntax-module (name))
   (defgeneric parse-module (sexprs))
   (defgeneric get-ct-error-condition-class (x))
   (defgeneric get-named-encl-lambda (x))
-) ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

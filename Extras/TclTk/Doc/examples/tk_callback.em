@@ -1,11 +1,11 @@
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  By Julio Garcia Moreno & University of Bath.                           ;;;
 ;;; ----------------------------------------------------------------------- ;;;
-;;;                     EuLisp System 'youtoo/tk'
+;;; ---                         EuLisp System 'youtoo/tk'
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  Library: 
 ;;;  Authors: Julio Garcia Moreno
-;;;  Description:  This module show the use of callbacks in YouToo/Tcl-tk
+;;; Description:  This module show the use of callbacks in YouToo/Tcl-tk
 ;;;             
 ;;; ----------------------------------------------------------------------- ;;;
 (defmodule tk_callback

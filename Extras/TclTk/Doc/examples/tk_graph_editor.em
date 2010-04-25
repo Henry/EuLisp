@@ -135,6 +135,7 @@
   
   (tk-bind-item-canvas *canvas* "node" "<Button-2>" update-position x: y:) 
   (tk-bind-item-canvas *canvas* "node" "<B2-Motion>" moveNode x: y:)
+
 ;;;;;;;
   ;; The next two lines are not important to the program. They just show 
   ;; how binding functions can receive accessors and arguments.

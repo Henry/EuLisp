@@ -1,22 +1,26 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: pipe
 ;;;  Authors: Rob Simmons, Andreas Kind
-;;;  Description: fork child process and control i/o with file stream
-;;;  Compilation: make touch; make
-;;; -----------------------------------------------------------------------
+;;; Description: fork child process and control i/o with file stream
+;;;  Compilation
+;;    make touch
+;;    make
+;;;-----------------------------------------------------------------------------
 (defmodule pipe
   (syntax (macros)
    import (level1)
    export (<pipe> pipe-process))
+
 ;;;------------------------------------------------------------------------
 ;;; The pipe class
 ;;;------------------------------------------------------------------------
   (defclass <pipe> (<file-stream>)
     ((process accessor: pipe-process keyword: process: requiredp: t))
     predicate: pipep)
+
   (defmethod initialize ((x <pipe>) inits)
     (call-next-method)
     (let* ((name (convert (pipe-process x) <string>))
@@ -40,6 +44,7 @@
                      (setq *open-file-streams*
                            (cons x *open-file-streams*)))
           x))))
+
   (defmethod disconnect ((x <pipe>))
     (let ((child-process-id (pipe-process x)))
       (if (integerp child-process-id)
@@ -48,10 +53,14 @@
         ()))
     ;; Closing file descriptors sometimes causes problems ...
     (call-next-method))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; External functions from eul-pipe.c
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern eul-fork-child (<string>) ptr  "eul_fork_child")
   (defextern eul-pipe-strerror (<int>) <string> "eul_pipe_strerror")
   (defextern eul-kill (<int> <int>) <int> "kill")
-)  ;; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

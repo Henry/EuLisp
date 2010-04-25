@@ -1,22 +1,25 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: pre-expand defining and top-level forms
-;;; -----------------------------------------------------------------------
+;;; Description: pre-expand defining and top-level forms
+;;;-----------------------------------------------------------------------------
 (defmodule ex-module
   (syntax (_macros _i-aux0 _sx-obj0 _ex-aux0)
    import (i-all p-env sx-node sx-obj ex-import ex-syntax ex-direct ex-expr
            cg-dld)
    export (expand-module expand-export))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Top-level MODULE expander
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant get-module-expander (make-access-table))
+
   (defun expand-module (x)
     (module-expander x module-expander))
+
   (defun install-module-expander (key fun)
     (let ((x (get-module-expander key)))
       (and x
@@ -31,9 +34,10 @@
                                 (get-top-level-form-collector key)))
              (t (get-top-level-form-collector key)))))
       (expander x e)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; MACRO expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-top-level-macro-expander (key)
     (let ((binding (get-syntax-binding key)))
       (and binding
@@ -49,15 +53,16 @@
                         (notify0 "RESULT: ~a" macro-expanded-form)
                         (e macro-expanded-form e)))))))))
 
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Collect TOP-LEVEL FORMS
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-top-level-form-collector (key)
     (lambda (x e)
       (new-node x 'top-level-form)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DEFMODULE expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'defmodule
     (lambda (x e)
       (with-ct-handler (format () "bad defmodule syntax ~a ..."
@@ -76,9 +81,10 @@
                 (do1-list (lambda (form) (e form e))
                           (get-top-level-forms x))))
             m))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install EXPORT expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'export
     (lambda (x e)
       (with-ct-handler "bad export syntax" x
@@ -96,14 +102,16 @@
                ;; binding may not yet be available
                ((setter (module-external-env? module)) name name)))
            (cdr x))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install PROGN Expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'progn
     (lambda (x e) (map1-list (lambda (x) (e x e)) (cdr x))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DEFCONSTANT expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'defconstant
     (lambda (x e)
       (with-ct-handler "bad defconstant syntax" x
@@ -113,9 +121,10 @@
                                 (get-lambda-params v)
                                 (get-lambda-body v))
             (make-named-const (get-name x) v))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DEFLOCAL expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'deflocal
     (lambda (x e)
       (with-ct-handler "bad deflocal syntax" x
@@ -124,9 +133,10 @@
          (if (cddr x)
              (get-value x)
            (ct-warning () "variable ~a not initialized" (get-name x)))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DEFUN expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'defun
     (lambda (x e)
       (with-ct-handler "bad defun syntax" x
@@ -150,9 +160,10 @@
                   (e `((setter setter) ,(cadr name)
                        (named-lambda ,name ,params ,@body)) e))
               (error "bad defun syntax" <condition>)))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DEFMACRO expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'defmacro
     (lambda (x e)
       (with-ct-handler "bad defmacro syntax" x
@@ -171,17 +182,19 @@
                ;; Attention: lazy expansion of external bindings
               ((setter (module-external-env? (dynamic *actual-module*)))
                name name)))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DEFOPENCODED expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'defopencoded
     (lambda (x e)
       (with-ct-handler (format () "bad defopencoded syntax ~a" (get-name x)) x
         (make-defined-opencoded-fun
          (get-name x) (get-params x) (get-body x)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DECLARE-INLINE expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'declare-inline
     ;; Refers to earlier defun
     (lambda (x e)
@@ -200,9 +213,10 @@
                 (ct-warning
                  () "bad inline argument ~a; or tried to inline import"
                  (cadr x)))))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install DEFEXTERN expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-module-expander 'defextern
     (lambda (x e)
       (with-ct-handler (format () "bad defextern syntax ~a" x) x
@@ -212,4 +226,7 @@
                                      (get-params x)         ; arg converter
                                      (car (get-body x))     ; res converter
                                      (cdr (get-body x))))))); opt ext name
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

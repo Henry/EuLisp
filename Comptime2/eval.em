@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind
-;;;  Description: root module of the compiler
-;;; -----------------------------------------------------------------------
+;;; Description: root module of the compiler
+;;;-----------------------------------------------------------------------------
 (defmodule eval
   (syntax (_macros _i-aux0)
    import (i-all i-args i-compile i-modify cg-interf i-rep)
@@ -15,9 +15,10 @@
            module-loaded-p as-C-module-name
            dynamic-binding-ref1 dynamic-binding-set1 dynamic-load-module1
            *redefine-imported-bindings* *first-year-students*))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Main function to invoke the interpreter or compiler
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun main (argv)
     ;; Error handler
     (with-handler (generic-lambda (c k)
@@ -34,9 +35,10 @@
       (start-eulysses))
     (flush stdout)
     (flush stderr))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Check if compiler or interpreter should be invoked
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun start-eulysses ()
     (notify "")  ; newline
     (notify0 "Start EuLysses ...")
@@ -58,4 +60,7 @@
            (link module-name))
          *source-file-names*)
         (ct-exit))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

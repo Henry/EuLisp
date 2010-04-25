@@ -1,15 +1,17 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: misc
 ;;;  Authors: Andreas Kind
-;;;  Description: echod deamon
-;;;  Compilation: youtoo echod -l level1
-;;; -----------------------------------------------------------------------
+;;; Description: echod deamon
+;;;  Compilation
+;;    youtoo echod -l level1
+;;;-----------------------------------------------------------------------------
 (defmodule echod
   (syntax (macros)
    import (level1))
+
   (let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
          (s (make <socket> port: port))
          c x)
@@ -21,4 +23,7 @@
             (prin x c))
           (disconnect c))
       (disconnect s)))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

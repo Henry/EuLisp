@@ -1,5 +1,5 @@
 ;;; i2doc.em -- convert youtoo generated module interfaces to docs -*- lisp -*-
-;;; Organization of the file is 
+;;; Organization of the file is
 ;;;
 ;;; Header
 ;;; 0. Legend
@@ -7,7 +7,7 @@
 ;;; 2. Bindings in macros
 ;;; 3. Bindings in eval
 ;;;
-;;; These apparently refer to 
+;;; These apparently refer to
 ;;;    Lib{,.i386}/liblevel1.i
 ;;;    Runtime/macros.i
 ;;;    Lib{,.i386}/libeval.i
@@ -16,13 +16,16 @@
   (syntax (macros)
    import (level1)
    export (main))
+
   (defextern strftime (<string>) <string> "eul_strftime")
+
   (deflocal note-renaming nil)
   (deflocal internal-sort t)
   (deflocal print-header t)
   (deflocal saved-bindings '())
   (deflocal header-index 0)
   (deflocal line (make <string> size: 75 fill-value: #\-))
+
   (defun moduleize (filename)
     (let* ((len (size filename))
            (start (if (equal "lib" (substring filename 0 3)) 3 0))
@@ -30,7 +33,7 @@
                     (- len 2)
                   len)))
       (substring filename start end)))
-      
+
   (defun assq (key alist)
     (if (null alist)
         '()
@@ -39,6 +42,7 @@
         (if (eq key (car first))
             (cdr first)
           (assq key rest)))))
+
   (defun process-export (export)
     (let* ((name (assq 'name export))
            (pos (assq 'pos export))
@@ -54,7 +58,7 @@
             (if internal-sort
                 (setq saved-bindings (cons saved-bindings))
               (print s)))))))
-                                                           
+
   (defun process-file (filename)
     (let* ((module (with-input-file (f filename)
                     (read-s-expression f)))
@@ -71,7 +75,9 @@
         (do print (sort saved-bindings))
         (setq saved-bindings '()))
       ))
+
   (defun yesno (bool) (if bool "yes" "no"))
+
   (deflocal usage-string
     `("usage: i2doc [options] interfacefile.i ..."
       "where options are:"
@@ -79,11 +85,12 @@
       ,(format () "-r\tNote renamings? (default: ~a" (yesno note-renaming))
       ,(format () "-s\tUse internal sort? (default: ~a)" (yesno internal-sort))
       ))
-  
+
   (defun usage ()
     (do (lambda (msg) (print msg stderr)) usage-string)
     (flush stderr)
     (exit 1))
+
   (defun parse-args (args)
     (if (null args)
         '()
@@ -105,6 +112,7 @@
           (usage))
          (t                             ;Not known option, so must be filename
           args)))))
+
   (defun print-first-header ()
     (print "youtoo Functions")
     (format t "  Generated ~a\n" (strftime "%d %B %Y, %X"))
@@ -124,6 +132,7 @@
     (print "  EuLisp Definition. Please, consult the EuLisp Definition for further")
     (print "  details.")
     (setq header-index 1))
+
   (defun main (args)
     (let ((filenames (parse-args args)))
       (unless filenames                 ; must have at least one file.
@@ -131,5 +140,9 @@
       (when print-header
         (print-first-header))
       (do process-file filenames)))
+
   (main (cdr ((converter <list>) *argv*))) ;get rid of program name.
-)                                       ; end of i2doc
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

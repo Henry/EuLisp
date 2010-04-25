@@ -2,6 +2,7 @@
   (syntax (macros)
    import (level1))
   (defun f args1 (cons 'args1 args1))
+
   (defun g (a . rest) (cons 'a-rest (list a rest)))
   ;; This works.
   (format t "~s~%" (f 1 2 3 4 5))

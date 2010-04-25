@@ -1,7 +1,7 @@
-;;; EuLysses header
 (defmodule test3
   (syntax (macros)
    import (level1 serial))
+
   (defmethod generic-connect ((s1 <stream>) (s2 <stream>) options)
     (let ((mode (init-list-ref options mode: 'r)))
       (cond ((eq mode 'r)
@@ -14,6 +14,7 @@
              ((setter stream-source) s1 s2)
              ((setter stream-sink) s1 s2)))
       ()))
+
   (defun my-deserialize ()
     (let ((x (deserialize)))
       (pprint x)
@@ -25,5 +26,9 @@
              ())
             ((threadp x)
              (thread-reschedule x)))))
+
   (my-deserialize)
-)
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

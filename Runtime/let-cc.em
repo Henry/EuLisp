@@ -1,18 +1,19 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;;  Description: let/cc based on downward call/cc
-;;; -----------------------------------------------------------------------
+;;; Description: let/cc based on downward call/cc
+;;;-----------------------------------------------------------------------------
 (defmodule let-cc
   (syntax (_macros)
    import (telos thread dynamic)
    export (call/ep))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Downward call/cc (let/cc defined in _macros)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun call/ep (fun)
     ;; Vm state not copied; continuations must not escape
     (let ((st (make <state>))
@@ -43,4 +44,7 @@
                         ;; 4. restore vm state
                         (restore-simple-state st value)))))
         (if res res ()))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

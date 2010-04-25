@@ -1,12 +1,13 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;;  Description: The EuLisp Object System (TELOS)
+;;; Description: The EuLisp Object System (TELOS)
+;;;
 ;;;  Attention: Update Comptime2/cg-dld.em if telos modules change!
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (defmodule telos
   (expose ((rename ((+ int-binary+)
                     (- int-binary-)
@@ -33,4 +34,7 @@
            mop-key
            mop-meth
            mop-prim))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

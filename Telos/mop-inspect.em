@@ -1,25 +1,27 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;;  Description: inspection
-;;; -----------------------------------------------------------------------
+;;; Description: inspection
+;;;-----------------------------------------------------------------------------
 (defmodule mop-inspect
   (import (boot mop-prim mop-class mop-init)
    syntax (_boot0)
    export (subclassp functionp methodp generic-function-p cpl-subclass-p
            classp class-of slotp primitive-metaclass-p
            primitive-find-slot-position primitive-slot-value))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Class-of (identical to primitive-class-of)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun class-of (obj) ((opencoded-lambda (o) (primitive-class-of)) obj))
   (declare-inline class-of)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Subclassp
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun subclassp (cl1 cl2)
     (if (eq cl1 cl2) t
       (let ((code1 (class-code cl1))
@@ -33,6 +35,7 @@
                            cl1
                          (loop (cdr l))))))
             (loop (class-direct-superclasses cl1)))))))
+
   (defun cpl-subclass-p (cl1 cl2)
     (if (eq cl1 cl2) t
       (let ((code1 (class-code cl1))
@@ -40,40 +43,50 @@
         (if (and code1 code2)
             (subcodep code1 code2)
           (member1-list cl2 (class-precedence-list cl1))))))
+
+
   (defun subcodep (code1 code2)
     (if (< (car code1) (car code2)) ()
       (if (< (cdr code2) (cdr code1)) ()
         t)))
   ;;(declare-inline subcodep)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Class predicates (<null>, <cons> have not yet its superclasses!)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun classp (a)
     (if (subclassp (class-of a) <class>) a ()))
   ;;(declare-inline classp)
+
   (defun slotp (a)
     (if (subclassp (class-of a) <slot>) a ()))
   ;;(declare-inline slotp)
+
   (defun generic-function-p (a)
     (if (subclassp (class-of a) <generic-function>) a ()))
   ;;(declare-inline generic-function-p)
+
   (defun methodp (a)
     (if (subclassp (class-of a) <method>) a ()))
   ;;(declare-inline methodp)
+
   (defun functionp (a)
     (if (subclassp (class-of a) <function>) a ()))
   ;;(declare-inline functionp)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Primitive classes
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant primitive-metaclasses
     (list <simple-class> <class> <function-class> <class>))
+
   (defun primitive-metaclass-p (obj)
     ;; cannot be inlined with binding not exported
     (member1-list obj primitive-metaclasses))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Primitive slot value access
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun primitive-find-slot-position (cl name slots index)
     (cond ((null slots)
            (error "slot ~a not found in class ~a" name cl))
@@ -81,12 +94,17 @@
            index)
           (t
            (primitive-find-slot-position cl name (cdr slots) (+ index 1)))))
+
   (defun primitive-slot-value (obj name)
     (let* ((cl (class-of obj))
            (i (primitive-find-slot-position cl name (class-slots cl) 0)))
       (primitive-ref obj i)))
+
   (defun (setter primitive-slot-value) (obj name val)
     (let* ((cl (class-of obj))
            (i (primitive-find-slot-position cl name (class-slots cl) 0)))
       ((setter primitive-ref) obj i val)))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

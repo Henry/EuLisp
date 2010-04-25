@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: eval (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind
-;;;  Description: create nodes of the abstract syntax tree
-;;; -----------------------------------------------------------------------
+;;; Description: create nodes of the abstract syntax tree
+;;;-----------------------------------------------------------------------------
 (defmodule sx-node
   (syntax (_macros _i-aux0 _sx-obj0)
    import (i-all i-ffi sx-obj p-env)
@@ -29,9 +29,10 @@
            compute-arity
            register-delegated-vars register-binding-ref
            clone-node))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create module node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-module (name)
     (let ((module (make <module>
                         name: name
@@ -42,20 +43,23 @@
       (new-module name module)
       (module-load-dir! module *tmp-load-dir*)
       module))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Create setq node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-setq (binding node)
     (make <setq> binding: binding obj: node))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Create inlined setter node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-inlined-setter (name args body)
     (let* ((node (make-fun <lambda> name args body))
            (binding (make-immutable-binding node)))
       (lambda-inlined! node t)
       (new-node binding 'inlined-setter)
       node))
+
   (defun get-inlined-setter-binding (setter-name env)
     (let ((name (cadr setter-name)))
       (labels
@@ -66,6 +70,7 @@
                      (loop (cdr l))))))
        (or (get-imported-inlined-setter-binding setter-name env)
            (loop (module-inlined-setters? (dynamic *actual-module*)))))))
+
   (defun get-imported-inlined-setter-binding (setter-name env)
     (let* ((name (cadr setter-name))
            (host-binding (or (get-lexical-binding name)
@@ -86,9 +91,10 @@
             (module-inlined-setters!
              module (cons binding (module-inlined-setters? module)))
             binding))))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create defined constant node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-named-const (name value)
     (let* ((node (make <named-const> name: name value: value))
            (binding (make-immutable-binding node)))
@@ -103,34 +109,39 @@
           (new-node node 'named-constant t)))
       (set-lexical-binding binding)
       node))
+
   (defun foldable-constant-p (x)
     ;; what about names?
     (or (numberp x)
         (characterp x)
         (null x)))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create global static var (deflocal)
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-global-var (name value)
     (let ((node (make <global-static-var> name: name value: value used: 0)))
       (set-lexical-binding (make-mutable-binding node))
       (new-node node 'static-variable t)
       node))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create local static var (let, let*, formal parameters)
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-local-static-var (name . value)
     (let* ((v (and value (car value)))
            (node (make <local-static-var> name: name value: v used: 0)))
       (make-mutable-binding node)
       node))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create defined function node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-defined-fun (name args body)
     (let ((node (make-fun <lambda> name args body)))
       (set-lexical-binding (make-immutable-binding node))
       node))
+
   (defun make-fun (fun-class name args body . has-unknown-appls)
     (let* ((special-name-p (and (consp name) (= (list-size name) 1)))
            (node (make fun-class
@@ -145,24 +156,27 @@
                (new-node node 'anonymous-lambda)
              (new-node node 'named-lambda)))
       node))
+
   (defun compute-arity (params)
     (if (proper-list-p params)
         (list-size params)
       (if (atom params)
           -1
         (- 0 (+ (list-size params) 1)))))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Create let* node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-let* (vars body)
     (let ((n (make-fun <let*> 'anonymous vars body)))
       (do1-list (lambda (var)
                   (local-static-var-lambda! var n)) vars)
       (register-delegated-vars vars)
       n))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create opencoded function node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-defined-opencoded-fun (name args body)
     (let ((binding (make-immutable-binding () name))
           (arity (compute-arity args)))
@@ -171,9 +185,10 @@
                                (arity . ,arity)
                                (opencoding . ,body)))
       binding))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create opencoded function node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-defined-external-fun (name1 arg-convs res-conv name2)
     (let* ((arg-conv-codes (map1-list arg-converter-index arg-convs))
            (res-conv-code (res-converter-index res-conv))
@@ -188,16 +203,18 @@
                                    ,ext-name)))
       (new-node binding 'foreign-function)
       binding))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Create binding
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-immutable-binding (node . name)
     (let ((binding-name (or (and name (car name)) (slot-value node 'name))))
       (make-binding node binding-name t)))
+
   (defun make-mutable-binding (node . name)
     (let ((binding-name (or (and name (car name)) (slot-value node 'name))))
       (make-binding node binding-name ())))
-  
+
   (defun make-binding (node name . immutable)
     (let ((binding (make <binding>
                          local-name: name
@@ -207,16 +224,19 @@
       (and (syntax-obj-p node)
            (binding! node binding))
       binding))
+
   (defun make-dummy-binding names
     (make <binding>
           local-name: (or (and names (car names)) '| unbound |)
           module: (dynamic *actual-module*)))
-;;; Hack: later to be removed
-;  (defun make-macro-binding (node name)
-;    (make <binding>
-;         local-name: name
-;         module: (dynamic *actual-module*)
-;         obj: node))
+
+  ;; Hack: later to be removed
+  ;  (defun make-macro-binding (node name)
+  ;    (make <binding>
+  ;         local-name: name
+  ;         module: (dynamic *actual-module*)
+  ;         obj: node))
+
   (defun true-local-binding-p (binding)
     (if (bindingp binding)
         (let ((obj (binding-obj? binding)))
@@ -227,25 +247,32 @@
                     (get-binding-info binding 'ff)
                     (and (eq (get-binding-info binding 'class) 'constant)
                          (get-binding-info binding 'value))  ; no const folding
-                    (functionp obj))))                       ; no macro function 
+                    (functionp obj))))                       ; no macro function
       ()))
+
   (defun get-binding-info (binding key)
     (get-binding-spec-info key (binding-info? binding)))
+
   (defun get-binding-spec-info (key spec)
     (let ((res (assoc-list-ref spec key)))
       (if res (cdr res) ())))
+
   (defgeneric binding-origin-module-name (binding))
+
   (defmethod binding-origin-module-name ((binding <binding>))
     (module-name? (binding-module? binding)))
+
   (defmethod binding-origin-module-name ((binding <interface-binding>))
     (binding-module? binding))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Register delegated vars and binding-refs
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun register-delegated-vars (vars)
     (lambda-delegated-vars!
      (dynamic *encl-lambda*)
      (append (lambda-delegated-vars? (dynamic *encl-lambda*)) vars)))
+
   (defun register-binding-ref (binding)
     (let ((lambda (dynamic *encl-lambda*))
           (module (dynamic *actual-module*)))
@@ -254,15 +281,18 @@
            lambda (cons binding (lambda-binding-refs? lambda)))
         (module-lexical-binding-refs!
          module (cons binding (module-lexical-binding-refs? module))))))
+
   (defmethod get-named-encl-lambda (fun)
     (and fun
          (if (eq (fun-name? fun) 'anonymous)
              (get-named-encl-lambda (syntax-expr-encl-lambda? fun))
            fun)))
-;;; ----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Clone syntax node
-;;; ----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric clone-node ((node <syntax-obj>)))
+
   (defmethod clone-node ((node <binding>))
     (make (class-of node)
           local-name: (binding-local-name? node)
@@ -272,4 +302,7 @@
           obj: (binding-obj? node)
           local-index: (binding-local-index? node)
           info: (binding-info? node)))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

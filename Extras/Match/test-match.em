@@ -1,6 +1,7 @@
 (defmodule test-match
   (syntax (macros match test-match-macros)
    import (level1 match-support))
+
   (defun f1 (l)
     (match l
       (() 'nil)
@@ -15,10 +16,12 @@
       (#(#(c d) a b) (list 'vect-nested a b c d))
       (#(a b c ...) (list 'vect-ellip a b c))
       (_ 'anything-else)))
+
   (defconstant fact
     (match-lambda
      (1 1)
      (n (* n (fact (- n 1))))))
+
   (defconstant read
     (match-lambda*
      (()
@@ -27,6 +30,7 @@
       `(read ,port default-eof-object))
      ((port eof-object)
       `(read ,port ,eof-object))))
+
   (defun main ()
     (print-test (f1 '()))
     (print-test (f1 1))
@@ -59,5 +63,9 @@
                   (('let3 ((a b c) ...) body ...) (list (list a b c) body))
                   (_ 'no-match)))
     )
+
   (main)
-)
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

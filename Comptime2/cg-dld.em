@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: Dynamic binding access
-;;; -----------------------------------------------------------------------
+;;; Description: Dynamic binding access
+;;;-----------------------------------------------------------------------------
 (defmodule cg-dld
   (syntax (_macros _i-aux0)
    import (i-all sx-obj sx-node ex-import ex-syntax i-modify cg-interf p-env)
@@ -13,9 +13,10 @@
            dynamic-load-module as-dynamic-binding
            module-loaded-p as-C-module-name
            dynamic-binding-ref1 dynamic-binding-set1 dynamic-load-module1))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Get and set an exported top-level lexical binding dynamically
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun dynamic-binding-ref (binding-name module-name)
     (let* ((module (or (get-module module-name)
                        (load-module-interface module-name)))
@@ -24,8 +25,9 @@
                         (get-external-binding binding-name module)
                         (error "binding ~a not available in module ~a"
                                binding-name module-name))))
-;      (pprint binding) (flush)
+      ;      (pprint binding) (flush)
       (as-dynamic-binding binding)))
+
   (defun as-dynamic-binding (binding)
     (let* ((index (binding-local-index? binding))
            (module (binding-module? binding))
@@ -37,6 +39,7 @@
           (error "binding ~a not accessable in module ~a"
                  (binding-local-name? binding) origin-module-name)
         (dynamic-binding-ref1 (as-C-module-name origin-module-name) index))))
+
   (defun dynamic-binding-set (binding-name module-name x)
     (let* ((module (or (get-module module-name)
                        (load-module-interface module-name)))
@@ -52,16 +55,18 @@
           (error "binding ~a not accessable in module ~a"
                  binding-name module-name)
         (dynamic-binding-set1 (as-C-module-name origin-module-name) index x))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Dynamically load module from a .c-file
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
    (defmethod load-syntax-module (module-name)
      (dynamic-let ((*indent* (format () "  ~a" (dynamic *indent*))))
        (notify "Loading syntax module ~a ..." module-name)
        (setq *tmp-source-file-name* module-name)
        (let ((module (dynamic-load-module module-name)))
          (new-syntax-module module-name module))))
-  (defun dynamic-load-module (module-name . reload)
+
+   (defun dynamic-load-module (module-name . reload)
     (let ((tmp-silent *silent*))
       (unwind-protect
         (if (and (null reload) (module-loaded-p module-name))
@@ -110,8 +115,10 @@
         (if (eq module-name 'user) ()
           ((setter *get-loaded-module*) module-name ()))
         (setq *silent* tmp-silent))))
+
   (defun module-loaded-p (module-name)
     (dynamic-binding-ref1 (as-C-module-name module-name) 0))
+
   (defun dynamic-initialize-local-literals (module module-name)
     (let ((module-name-str (as-C-module-name module-name))
           (lliterals (module-local-literals? module)))
@@ -123,10 +130,12 @@
                                         (cdr entry) (car entry))
                   (loop (cdr l))))))
        (loop lliterals))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Use fast binding lookup with hard-coded standard bindings
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (create-default-modules)
+
   (defun create-default-modules ()
     (notify0 "Create default modules ...")
     (let* ((info (initialize-default-binding-tables))
@@ -135,7 +144,7 @@
            (default-lexical-module-names (listify-env-string (vector-ref info 2)))
            (default-lexical-module-name
             (make <symbol> name: (vector-ref info 3))) ;; default level1
-           (default-syntax-module-name 
+           (default-syntax-module-name
             (make <symbol> name: (vector-ref info 4)))  ;; default macros
            (default-lexical-module
              (make-module default-lexical-module-name))
@@ -158,7 +167,7 @@
                                      default-lexical-module-names)))
    (defun make-module-env (tab)
      (let ((fun (lambda (x) (table-ref tab x))))
-       ((setter setter) fun 
+       ((setter setter) fun
         (lambda (x v)
           (if x
               (progn
@@ -166,19 +175,28 @@
                 v)
             tab)))
        fun))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; With a little external help
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern initialize-default-binding-tables () ptr
     "eul_initialize_level1_tables")
+
   (defextern dynamic-binding-ref1 (<string> <int>) ptr
     "eul_dyn_binding_ref")
-;  (defextern dynamic-level1-binding-ref (ptr ptr) ptr
-;    "eul_dyn_level1_binding_ref")
+
+  ;  (defextern dynamic-level1-binding-ref (ptr ptr) ptr
+  ;    "eul_dyn_level1_binding_ref")
+
   (defextern dynamic-binding-set1 (<string> <int> ptr) ptr
     "eul_dyn_binding_set")
+
   (defextern dynamic-load-module1 (<string> <string>) <int>
     "eul_dyn_load_module")
+
   (defextern as-C-module-name (ptr) <string>
     "eul_module_name_as_C_module_name_string")
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: expanding expressions into syntax nodes
-;;; -----------------------------------------------------------------------
+;;; Description: expanding expressions into syntax nodes
+;;;-----------------------------------------------------------------------------
 (defmodule ex-expr
   (syntax (_macros _i-aux0 _ex-aux0)
    import (i-all p-env sx-node sx-obj ex-import ex-syntax ex-direct cg-dld)
@@ -13,12 +13,15 @@
            filter-vars filter-init-forms *nil*
            protect-tilde protect-newline protect-backslash
            protect-doublequote))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; EXPRESSION expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant get-expr-expander (make-access-table))
+
   (defun expand-expr (x . envs)
     (expr-expander x (and envs (car envs)) expr-expander))
+
   (defun expand-exprs (x . envs)
     (let ((env (and envs (car envs))))
       (map1-list (lambda (expr)
@@ -42,9 +45,10 @@
                                    (get-appl-expander (car x))))
             (t (get-appl-expander (car x))))))
       (expander x env e)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; MACRO expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-macro-expander (key)
     (let ((binding (get-syntax-binding key)))
       (and binding
@@ -61,6 +65,7 @@
                                     (apply macro-fun (cdr x)))))
                         (notify0 "RESULT: ~a" macro-expanded-form)
                         (e macro-expanded-form env e)))))))))
+
   (defun protect-tilde (str)
     (let ((i (member1-string #\~ str))
           (n (string-size str)))
@@ -76,6 +81,7 @@
                (string-append "~~"
                               (protect-tilde (substring str (+ i 1) ()))))))
         str)))
+
   (defun protect-doublequote (str)
     (let ((i (member1-string #\" str))
           (n (string-size str)))
@@ -91,6 +97,7 @@
                (string-append "\\\""
                               (protect-doublequote (substring str (+ i 1) ()))))))
         str)))
+
   (defun protect-backslash (str)
     (let ((i (member1-string #\\\ str))
           (n (string-size str)))
@@ -106,8 +113,9 @@
                (string-append "\\\\"
                               (protect-backslash (substring str (+ i 1) ()))))))
         str)))
+
   (defun protect-newline (str)
-;    (let ((i (member1-string #\\n str))
+    ;    (let ((i (member1-string #\\n str))
     (let ((i (member1-string #\\n str))
           (n (string-size str)))
       (if i
@@ -122,9 +130,10 @@
                (string-append "\\n"
                               (protect-newline (substring str (+ i 1) ()))))))
         str)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; IDENTIFIER expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-id-expander (key)
     (lambda (x env e)
       (let ((node (or (get-local-static-binding x env)
@@ -137,6 +146,7 @@
         (if (bindingp node)
             (check-id-binding node)
           node))))
+
   (defun check-id-binding (binding)
     (register-binding-ref binding)
     (let ((obj (binding-obj? binding)))
@@ -148,9 +158,10 @@
           (and (funp obj)               ; fun is used as object?
                (fun-has-unknown-appls! obj t))
           binding))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Nil and t
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant *nil* (make <literal-const> value: ()))
   (defconstant *t* (make <literal-const> value: 't))
   (defun get-nil-t-node (x)
@@ -159,21 +170,24 @@
           ;; homage a la Scheme
           ((eq x '#t) *t*)
           ((eq x '#f) *nil*)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Keywords (not supported by Feel I; but Feel II)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-keyword-node (x)
     (and (keywordp x)
          (make <literal-const> value: x)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Box opencoding and ff bindings (reverse teta-conversion)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun box-binding (binding)
     (notify0 "box binding ~a" (binding-local-name? binding))
     (let* ((arity (get-binding-info binding 'arity))
            (binding-name (binding-local-name? binding))
            (args (dummy-args arity)))
       (expand-expr `(lambda ,args (,binding-name ,@args)))))
+
   (defun dummy-args (arity)
     (labels
      ((loop (res)
@@ -192,6 +206,7 @@
     (or (symbolp args)
         (and (consp args)
              (not (proper-list-p args)))))
+
   (defun lambda-rest-args-p (op)
     (if (not (consp op))
         ()
@@ -202,12 +217,13 @@
               ((eq lambda-type 'named-lambda)
                (rest-args-p (caddr op)))
               (t ())))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; APPLICATION expander
-;;; (+ - * / % = < <= > >= can be simplified in some cases into
-;;; int-binary or int-inc/inc-dec calls assuming a trap to the gf from the
-;;; correspondin vm instruction)
-;;; --------------------------------------------------------------------
+;;  (+ - * / % = < <= > >= can be simplified in some cases into
+;;  int-binary or int-inc/inc-dec calls assuming a trap to the gf from the
+;;  correspondin vm instruction)
+;;;-----------------------------------------------------------------------------
   (defun get-appl-expander (key)
     (lambda (x env e)
       (let* ((op (car x))
@@ -322,6 +338,7 @@
                  (e `((inlined-lambda ,@(cdr op)) ,@params) env e))
                 (t
                  (default-appl-expander op params nargs env)))))))
+
   (defun default-appl-expander (op params nargs env)
     (let* ((fun (expand-fun-form op env))
            (args (expand-exprs params env))
@@ -339,6 +356,7 @@
                       (var-used! var (+ (var-used? var) 1)))
                     new-vars)
           (make-let* new-vars appl)))))
+
   (defun unfold-rest-arg-appl (op args)
     (let ((binary-op (concatenate 'int-binary op)))
       (labels
@@ -347,12 +365,14 @@
                  (car l)
                (list binary-op (loop (cdr l)) (car l)))))
         (loop (reverse-list args)))))
-;  (defun unfold-rest-arg-appl (op args)
-;    (if (null (cdr args))
-;       (car args)
-;      (list (concatenate 'int-binary op)
-;           (car args)
-;           (unfold-rest-arg-appl op (cdr args)))))
+
+  ;  (defun unfold-rest-arg-appl (op args)
+  ;    (if (null (cdr args))
+  ;       (car args)
+  ;      (list (concatenate 'int-binary op)
+  ;           (car args)
+  ;           (unfold-rest-arg-appl op (cdr args)))))
+
   (defun expand-fun-form (x env)
     ;; Like id expander, but binding is not checked
     (if (atom x)
@@ -368,9 +388,10 @@
           (or (get-inlined-setter-binding x env)
               (expand-expr x env))
         (expand-expr x env))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Lift applications
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun lift-appl (exprs new-exprs new-vars env)
     (if (null exprs)
         (list (reverse new-exprs) new-vars)
@@ -399,41 +420,50 @@
                                       new-exprs)
                               (append new-vars tmp-vars)
                               env)))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Match function and function application?
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric check-appl (appl op))
+
   (defmethod check-appl ((appl <appl>) (op <object>))
     (if (functionp op)
         (ct-serious-warning () "macro binding ~a should be in syntax import"
                          (binding-local-name? (appl-fun? appl)))
       (ct-serious-warning () "no applicable object ~a" op)))
+
   (defmethod check-appl ((appl <appl>) (op <fun>))
     (check-appl-arity appl op (local-name? op))
     (fun-appls! op (cons appl (fun-appls? op))))
+
   (defmethod check-appl ((appl <appl>) (op <interface-binding>))
     ;; e.g. could check arity, when written in interface file
     ())
+
   (defmethod check-appl ((appl <appl>) (op <binding>))
     (and (binding-obj? op)              ; no check with dummy binding
          (check-appl appl (binding-obj? op))))
+
   (defmethod check-appl ((appl <appl>) (op <var>))
     ;; is ok
     ())
+
   (defmethod check-appl ((appl <appl>) (op <named-const>))
     ;; is ok
     ())
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; CALL-NEXT-METHOD expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'call-next-method
     (lambda (x env e)
       (let ((vars (fun-args? (dynamic *encl-lambda*))))
         (do1-list (lambda (var) (var-used! var (+ (var-used? var) 1))) vars)
         (make <call-next-method>))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Check if lambda is called with right number of arguments
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun check-appl-arity (appl fun . name)
     (let* ((arity (fun-arity? fun))
            (n (list-size (appl-args? appl)))
@@ -447,9 +477,10 @@
                                      fun-name)
                (ct-serious-warning () "too few arguments calling ~a"
                                    fun-name))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install IF expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'if
     (lambda (x env e)
       (with-ct-handler (format () "bad if syntax ~a" x) x
@@ -466,19 +497,24 @@
                 ())
             (ct-warning () "missing else branch in (if ~a ...)" pred-expr))
           (lift-if pred-node then-node else-node env)))))
+
   (defgeneric lift-if (pred-obj then-e else-e env))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Simple test expressions are not lifted (with some partial evaluation)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod lift-if ((pred-e <binding>) then-e else-e env)
     (make <if> pred: pred-e then: then-e else: else-e))
+
   (defmethod lift-if ((pred-e <literal-const>) then-e else-e env)
     (if (const-value? pred-e) then-e else-e))
+
   (defmethod lift-if ((pred-e <lambda>) then-e else-e env)
     then-e)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Collect local static variables
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod lift-if ((pred-e <let*>) then-e else-e env)
     (let ((lifted-body (lift-if (fun-body? pred-e) then-e else-e env)))
       (if (let*p lifted-body)
@@ -488,16 +524,17 @@
             (fun-body! pred-e (fun-body? lifted-body)))
         (fun-body! pred-e lifted-body)))
     pred-e)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Other test expressions are lifted
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod lift-if ((pred-e <syntax-obj>) then-e else-e env)
     (let ((var-name (gensym)))
       (expand-expr `(let ((,var-name ,pred-e))
                       (if ,var-name ,then-e ,else-e)) env)))
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Install PROGN expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'progn
     (lambda (x env e)
       (cond ((null (cdr x))                     ; no empty progn?
@@ -513,25 +550,29 @@
                 (lambda (x) (setq last-expr x))
                 (cdr x))
                (expand-expr `(let* ,(reverse-list exprs) ,last-expr) env))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install RETURN expander
-;;; --------------------------------------------------------------------
-;  (install-expr-expander 'return
-;    (lambda (x env e)
-;      (make <return> form: (expand-expr (cadr x) env))))
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+  ;  (install-expr-expander 'return
+  ;    (lambda (x env e)
+  ;      (make <return> form: (expand-expr (cadr x) env))))
+
+;;;-----------------------------------------------------------------------------
 ;;; Install QUOTE expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'quote
     (lambda (x env e)
       (with-ct-handler "bad quote syntax" x
         (make <literal-const> value: (cadr x)))))
-;  (defun trailing-colon-p (sym)
-;    (let ((str (symbol-name sym)))
-;      (eq (string-ref str (- (string-size str) 1)) #\:)))
-;;; --------------------------------------------------------------------
+
+  ;  (defun trailing-colon-p (sym)
+  ;    (let ((str (symbol-name sym)))
+  ;      (eq (string-ref str (- (string-size str) 1)) #\:)))
+
+;;;-----------------------------------------------------------------------------
 ;;; Install QUASIQUOTE expander (sometimes called backquote)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'quasiquote
     (lambda (xx env e)
       (with-ct-handler "bad quasiquote syntax" xx
@@ -564,9 +605,10 @@
                               (list 'cons (list 'quasiquote x1)
                                     (loop (cdr xx)))))))))
                (e (loop x) env e))))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install SETQ expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'setq
     (lambda (x env e)
       (with-ct-handler "bad setq syntax" x
@@ -585,18 +627,24 @@
                  (ct-serious-warning
                   () "immutable binding ~a cannot be modified" name))
             (lift-setq binding (expand-expr (caddr x) env) env))))))
+
   (defgeneric lift-setq (binding value env))
+
   (defmethod lift-setq ((binding <binding>) (value <lambda>) env)
     (make-setq binding value))
+
   (defmethod lift-setq ((binding <binding>) (value <literal-const>) env)
     (make-setq binding value))
+
   (defmethod lift-setq ((binding <binding>) (value <binding>) env)
     (make-setq binding value))
+
   (defmethod lift-setq ((binding <binding>) (value <syntax-obj>) env)
     (let* ((vars (expand-local-static-vars (list (gensym)) (list value) env))
            (lifted-body (lift-setq binding (var-binding? (car vars)) env)))
       (do1-list (lambda (var) (var-used! var (+ (var-used? var) 1))) vars)
       (make-let* vars lifted-body)))
+
   (defmethod lift-setq ((binding <binding>) (value <let*>) env)
     (let ((lifted-body (lift-setq binding (fun-body? value) env))
           (args (fun-args? value)))
@@ -606,9 +654,10 @@
                       new-args)
             (make-let* (append args new-args) (fun-body? lifted-body)))
         (make-let* args lifted-body))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install LAMBDA expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'lambda
     (lambda (x env e)
       (with-ct-handler "bad lambda syntax" x
@@ -617,6 +666,7 @@
                               t)))      ; has unknown applications
           (complete-lambda-node node env)
           node))))
+
   (install-expr-expander 'named-lambda
     (lambda (x env e)
       (with-ct-handler "bad named lambda syntax" x
@@ -626,6 +676,7 @@
                                t)))     ; has unknown applications
           (complete-lambda-node node env)
           node))))
+
   (defun complete-lambda-node (fun . envs)
     (let ((env (and envs (car envs)))
           (encl-lambda
@@ -641,6 +692,7 @@
           (do1-list (lambda (var)
                 (local-static-var-lambda! var fun)) args)
           (fun-body! fun (expand-expr (fun-body? fun) new-env))))))
+
   (defun compute-range-and-domain (fun)
     ;;(let* ((arity (fun-arity? fun))
     ;;       (v (make <vector>
@@ -650,9 +702,10 @@
     ;;     ((setter vector-ref) v (abs arity) (expand-expr '<list>)))
     ;;  (fun-range-and-domain! fun v))
     )
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install INLINED-LAMBDA expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'inlined-lambda
     (lambda (x env e)
       (with-ct-handler "bad lambda syntax" x
@@ -662,9 +715,10 @@
           (lambda-inlined! node t)
           (complete-lambda-node node env)
           node))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install OPENCODED-LAMBDA expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'opencoded-lambda
     (lambda (x env e)
       (with-ct-handler "bad opencoded-lambda syntax" x
@@ -673,9 +727,10 @@
                               t)))      ; unknown applications
           (fun-body! node (cdr (fun-body? node))) ; remove default progn
           node))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install LET expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'let
     (lambda (x env e)
       (with-ct-handler "bad let syntax" x
@@ -698,9 +753,10 @@
                         (,decls ,@(map1-list (lambda (x) (car (cdr x)))
                                              named-let-clauses)))
                       env e))))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install LET* expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'let*
     (lambda (x env e)
       (with-ct-handler "bad let* syntax" x
@@ -719,6 +775,7 @@
                                 (fun-body? body))
                    (make-let* new-vars body))))
               (t (error "" <condition>))))))
+
   (defun lift-let*-vars (vars)
     (labels
      ((loop (vars new-vars)
@@ -735,9 +792,10 @@
                   (var-value! (car vars) init-form)
                   (loop (cdr vars) (cons (car vars) new-vars))))))))
      (loop vars ())))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install LABELS expander
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expr-expander 'labels
     (lambda (x env e)
       (with-ct-handler "bad labels syntax" x
@@ -746,19 +804,22 @@
           (expand-expr `(let ,(labelsvar decls)
                           ,@(labelssetq decls)
                           ,@body) env)))))
+
   (defun labelsvar (decls)
     (and decls
          (cons (list (car (car decls)) ())
                (labelsvar (cdr decls)))))
+
   (defun labelssetq (decls)
     (and decls
          (cons `(setq ,(car (car decls))
                       (lambda ,(car (cdr (car decls)))
                         ,@(cdr (cdr (car decls)))))
                (labelssetq (cdr decls)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Expand LOCAL-STATIC-VARS
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun expand-local-static-vars (var-names init-forms env)
     (let ((true-var-names (as-proper-list var-names)))
       (and (null init-forms)
@@ -766,6 +827,7 @@
       (map2-list (lambda (var init-form)
                    (make-local-static-var var (expand-expr init-form env)))
                  true-var-names init-forms)))
+
   (defun expand-local-static-vars* (var-names init-forms env)
     (labels
         ((loop (vars forms env)
@@ -780,11 +842,16 @@
              (new-env (if (null init-forms) env
                         (loop vars init-forms env))))
         (cons vars new-env))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Filter vars/init-forms out of a list like '((a u) b (c w))
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun filter-vars (l)
     (map1-list (lambda (x) (if (consp x) (car x) x)) l))
+
   (defun filter-init-forms (l)
     (map1-list (lambda (x) (if (consp x) (cadr x) ())) l))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

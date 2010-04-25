@@ -1,53 +1,47 @@
-;;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;;-----------------------------------------------------------------------------
 ;;;                 OPS5 for EuLisp System 'youtoo'
-;;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;;-----------------------------------------------------------------------------
 ;;; File   : reader-ce.em
 ;;; Date   : 19 Jul 1995
 ;;; Author : Tracy Gardner (tag@maths.bath.ac.uk)
-;;; Desc.  : Functions for creating condition elements.
-;;; +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+;;; Description: Functions for creating condition elements.
+;;;-----------------------------------------------------------------------------
 (defmodule reader-ce
-;;; Uncomment this block to run under youtoo ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; BEGIN_YOUTOO
-(syntax (macros macros-tag) 
-import (level1 basic reader-vars cond-el-1 cond-el-2 tests ops-out)) 
-;;; END_YOUTOO
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; Uncomment this block to run under euscheme ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;; BEGIN_EUSCHEME
-;;  (import (level0 reader-vars cond-el-2 tests ops-out))
-;;  (defun symbol-name (x)
-;;     (convert x <string>))
-;;  (defun make-symbol (x)
-;;    (make <symbol> string: x))
-;;; END_EUSCHEME
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+    (syntax (macros macros-tag)
+     import (level1 basic reader-vars cond-el-1 cond-el-2 tests ops-out))
+
   (print "### reader-ce")
+
+;;;-----------------------------------------------------------------------------
 ;;; read-ce
-;;; Process a condition element
-   (defun read-ce (is-neg attrib-table ce join-vars)
-     ;;(format ops-out "read-ce: ~a neg? ~a ~a~%" ce is-neg join-vars)
-     (let* ((class-name (car ce))
-            (new-ce (if is-neg
-                        (make-neg-njoin-ce class-name)
-                      (make-pos-njoin-ce class-name))))
-       (let ((res-ce (make-tests attrib-table new-ce 
-                                 (cdr ce) join-vars ())))
-         res-ce)))
+  ; Process a condition element
+;;;-----------------------------------------------------------------------------
+  (defun read-ce (is-neg attrib-table ce join-vars)
+    ;;(format ops-out "read-ce: ~a neg? ~a ~a~%" ce is-neg join-vars)
+    (let* ((class-name (car ce))
+           (new-ce (if is-neg
+                       (make-neg-njoin-ce class-name)
+                     (make-pos-njoin-ce class-name))))
+      (let ((res-ce (make-tests attrib-table new-ce
+                                (cdr ce) join-vars ())))
+        res-ce)))
+
+;;;-----------------------------------------------------------------------------
 ;;; make-tests
-;;; compiles the tests from a condition element 
-   (defun make-tests (attrib-table ce tests-in join-vars curr-attrib)
-     ;;(format ops-out "tests-in: ~a~%" tests-in)
-     (if (null tests-in) 
-         ce
-       (let* ((attrib (if curr-attrib curr-attrib (car tests-in)))
-              (tests  (if curr-attrib tests-in (cdr tests-in)))
-              (first  (car tests)))
-         ;;(format t "first: ~a attrib: ~a~%" first attrib)
-         (cond 
+  ; compiles the tests from a condition element
+;;;-----------------------------------------------------------------------------
+  (defun make-tests (attrib-table ce tests-in join-vars curr-attrib)
+    ;;(format ops-out "tests-in: ~a~%" tests-in)
+    (if (null tests-in)
+        ce
+      (let* ((attrib (if curr-attrib curr-attrib (car tests-in)))
+             (tests  (if curr-attrib tests-in (cdr tests-in)))
+             (first  (car tests)))
+        ;;(format t "first: ~a attrib: ~a~%" first attrib)
+        (cond
           ((eql first '{)
-           (make-tests attrib-table ce (cdr tests) join-vars attrib))
-          ((eql first '})
+                (make-tests attrib-table ce (cdr tests) join-vars attrib))
+           ((eql first '})
            (make-tests attrib-table ce (cdr tests) join-vars ()))
           ((is-ops5-pred first)
            ;;(format t "next: ~a~%" (cadr tests))
@@ -57,66 +51,71 @@ import (level1 basic reader-vars cond-el-1 cond-el-2 tests ops-out))
                             'NON-JOIN)))
                   (test (make-test attrib first next))
                   (ce-after (insert-test ce attrib-table type test)))
-             (make-tests attrib-table ce-after (cddr tests) 
+             (make-tests attrib-table ce-after (cddr tests)
                          join-vars curr-attrib)))
           ((eql first '<<)
-           (labels 
-            ((loop (tests-left vals)
-            ;;(format ops-out "tests-left: ~a  vals: ~a~%" tests-left vals)
-                   (cond
-                    ((eql '>> (car tests-left))
-                     (let* ((type 'CONSTANT)
-                            (pred '=)
-                            (test (make-test attrib pred vals))
-                            (ce-after (insert-test ce attrib-table type test)))
-                       (make-tests attrib-table ce-after 
-                                   (cdr tests-left) join-vars curr-attrib)))
-                    (t (loop (cdr tests-left) (cons (car tests-left) vals))))))
-            (loop (cdr tests) ())))
-          ((is-constant first) 
-           (make-tests attrib-table 
-                       (insert-test ce attrib-table 'CONSTANT 
+           (labels
+             ((loop (tests-left vals)
+                    ;;(format ops-out "tests-left: ~a  vals: ~a~%" tests-left vals)
+                    (cond
+                      ((eql '>> (car tests-left))
+                       (let* ((type 'CONSTANT)
+                              (pred '=)
+                              (test (make-test attrib pred vals))
+                              (ce-after (insert-test ce attrib-table type test)))
+                         (make-tests attrib-table ce-after
+                                     (cdr tests-left) join-vars curr-attrib)))
+                      (t (loop (cdr tests-left) (cons (car tests-left) vals))))))
+             (loop (cdr tests) ())))
+          ((is-constant first)
+           (make-tests attrib-table
+                       (insert-test ce attrib-table 'CONSTANT
                                     (make-test attrib '= first))
                        (cdr tests) join-vars curr-attrib))
           ((is-ops5-var first)
            (let ((type (if (member first join-vars) 'JOIN 'NON-JOIN)))
-             (make-tests attrib-table 
-                         (insert-test ce attrib-table type 
+             (make-tests attrib-table
+                         (insert-test ce attrib-table type
                                       (make-test attrib '= first))
                          (cdr tests) join-vars curr-attrib)))
           (t (format ops-out "make-tests: ERROR~%"))))))
-        
+
+;;;-----------------------------------------------------------------------------
 ;;; make-attrib
-;;; strip initial ^ to give attrib name
-;;;
-   (defun make-attrib (attrib)
-     ;;(format t "make-attrib: ~a~%" attrib)
-     ;; #{double-slash}x05e for youtoo reader and #\\x05e for Feel reader
-     (make-symbol (let ((str (make <string> size: 0)))
-                    (accumulate
+  ; strip initial ^ to give attrib name
+;;;-----------------------------------------------------------------------------
+  (defun make-attrib (attrib)
+    ;;(format t "make-attrib: ~a~%" attrib)
+    ;; #{double-slash}x05e for youtoo reader and #\\x05e for Feel reader
+    (make-symbol (let ((str (make <string> size: 0)))
+                   (accumulate
                      (lambda (a v)
                        ;(if (eql v #\\x05e )
                        (if (eql v #\\x05e )
-                           a 
+                           a
                          (concatenate a (convert v <string>))))
                      str
                      (symbol-name attrib)))))
- 
+
+;;;-----------------------------------------------------------------------------
 ;;; make-test
-;;; Makes a single test
-;;;
-   (defun make-test (attrib pred val)
-     (list (make-attrib attrib) pred val))
+  ; Makes a single test
+;;;-----------------------------------------------------------------------------
+  (defun make-test (attrib pred val)
+    (list (make-attrib attrib) pred val))
+
+;;;-----------------------------------------------------------------------------
 ;;; insert-test
-;;; Add a test to the list of tests of the same type held by the
-;;; condition element. Tests are ordered in increasing order of
-;;; index so that comparisons for equality can be made. If two
-;;; tests have the same attribute then they will be ordered by
-;;; predicate, then by value.
-;;; Returns the updated condition element
-   (defun insert-test (ce attrib-table test-type test)
-     ;;(format t "insert-test: ~a ~a ~a~%" ce test-type test)
-     (cond
+  ; Add a test to the list of tests of the same type held by the
+  ; condition element. Tests are ordered in increasing order of
+  ; index so that comparisons for equality can be made. If two
+  ; tests have the same attribute then they will be ordered by
+  ; predicate, then by value.
+  ; Returns the updated condition element
+;;;-----------------------------------------------------------------------------
+  (defun insert-test (ce attrib-table test-type test)
+    ;;(format t "insert-test: ~a ~a ~a~%" ce test-type test)
+    (cond
       ((eql test-type 'CONSTANT)
        (insert-test1 ce attrib-table test ce-c-tests set-ce-c-tests))
       ((eql test-type 'NON-JOIN)
@@ -135,25 +134,28 @@ import (level1 basic reader-vars cond-el-1 cond-el-2 tests ops-out))
                                                    (ce-v-tests ce))
                            attrib-table test ce-j-tests set-ce-j-tests)))))
       (t (format ops-out "insert-test: ERROR~%"))))
-   (defun insert-test1 (ce attrib-table test reader writer)
-     ;;(format t "insert-test1: ~a ~a ~a~%" test reader writer)
-     (let ((index (element attrib-table (test-attrib test))))
-       (writer ce (labels 
+
+  (defun insert-test1 (ce attrib-table test reader writer)
+    ;;(format t "insert-test1: ~a ~a ~a~%" test reader writer)
+    (let ((index (element attrib-table (test-attrib test))))
+      (writer ce (labels
                    ((loop (tests)
                           (let ((index2 (if tests
                                             (element attrib-table (caar tests))
                                           ())))
                             (cond
-                          ((null tests)
-                           (list test))
-                          ((>= index2 index)
-                           (cons test tests))
-                          (t (let ((res (cons (car tests) 
-                                              (loop (cdr tests)))))
-                               res))))))
+                              ((null tests)
+                               (list test))
+                              ((>= index2 index)
+                               (cons test tests))
+                              (t (let ((res (cons (car tests)
+                                                  (loop (cdr tests)))))
+                                   res))))))
                    (loop (reader ce))))
-       ce))
-                
-                
-   (export read-ce make-attrib)
-) ;; module: reader-ce
+      ce))
+
+  (export read-ce make-attrib)
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

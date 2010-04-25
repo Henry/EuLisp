@@ -1,18 +1,19 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: Scheme
 ;;;  Authors: Andreas Kind, Pete Broadbery, Luc Moreau
-;;;  Description: Scheme synatx (IEEE Std 1178-1990) in EuLisp
-;;; -----------------------------------------------------------------------
+;;; Description: Scheme synatx (IEEE Std 1178-1990) in EuLisp
+;;;-----------------------------------------------------------------------------
 (defmodule scm0
   (import (level1 eval))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Trace
 ;;; Actions are pre/post thunks with the traced function+parameters as
 ;;; arguments.
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro trace (function-name . actions)
     (let* ((tmp-name (concatenate '| | function-name))
            (pre-action (if actions (car actions) ()))
@@ -47,6 +48,7 @@
          (setq *redefine-imported-bindings*
                (car *redefine-imported-bindings*))
          ,function-name)))
+
   (defmacro untrace (function-name)
     (let ((tmp-name (concatenate '| | function-name)))
       `(progn
@@ -56,4 +58,7 @@
          ;; retrieve previous value
          (setq *redefine-imported-bindings*
                (car *redefine-imported-bindings*)))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

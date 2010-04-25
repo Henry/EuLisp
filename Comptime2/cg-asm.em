@@ -1,19 +1,21 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: assembling
-;;; -----------------------------------------------------------------------
+;;; Description: assembling
+;;;-----------------------------------------------------------------------------
 (defmodule cg-asm
   (syntax (_macros _i-aux0 _sx-obj0)
    import (i-all sx-obj cg-bycode1 cg-bycode2 cg-state op-peep op-peep-r)
    export (assemble))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Assemble module
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defglobal *with-long-jumps* ())
+
   (defun assemble (module code-state)
     (labels
      ((loop (states res)
@@ -32,9 +34,10 @@
           (make <asm-state>
                 init-bytevector: (car bv-states)
                 bytevectors: (reverse (cdr bv-states)))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Assemble function
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun assemble-function (code handle name)
     (let* ((table (make-access-table))
            (state (make-asm-function-state handle name)))
@@ -49,6 +52,7 @@
         (dynamic-let ((*with-long-jumps* t))
           (notify0 "  Re-assembling function ~a because of long jump" name)
           (assemble-function code handle name)))))
+
   (defun assemble-instruction (l state table)
     (notify0 "    Instruction: ~a" l)
     (let ((name (car l))
@@ -74,6 +78,7 @@
           (put-fix state `(FF ,name))))
        (t
         (assemble-instruction-default name args state table)))))
+
   (defun assemble-instruction-default (name args state table)
     (if (and (null (dynamic *with-long-jumps*))
              (branchp name))
@@ -104,8 +109,10 @@
                  (put-fix state ref)))
              (t
               (do1-list (lambda (v) (put-fix state v)) args))))))))
+
   (defun branchp (x)
     (member1-list x '(branch-true branch-nil branch)))
+
   (defun assemble-branch (name args state table)
     ;; Label ref can be modified after labels are resolved
     (let* ((loc (+ (asm-function-state-pc? state) 1))
@@ -113,10 +120,11 @@
       ;; Refs are resolved later
       (register-label-ref table (car args) ref)
       (put-branch-bytes state ref)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Resolve and register labels
-;;; Label table entry looks like this: (label-pc (ref-pc1) (ref-pc2) ...)
-;;; --------------------------------------------------------------------
+;;  Label table entry looks like this: (label-pc (ref-pc1) (ref-pc2) ...)
+;;;-----------------------------------------------------------------------------
   (defun register-label-loc (table label pc)
     (let ((x (table label)))
       (if x
@@ -125,6 +133,7 @@
             (error "label multiply defined" <condition>))
         (let ((fun (setter table)))
           (fun label (list pc))))))
+
   (defun register-label-ref (table label ref)
     (notify0 "    Register label ~a ref ~a" label ref)
     (let ((x (table label)))
@@ -133,6 +142,7 @@
         ;; label refered before it is defined
         (let ((fun (setter table)))
           (fun label (list () ref))))))
+
   (defun resolve-label-refs (table)
     (notify0 "    Resolve labels")
       (let/cc k
@@ -186,12 +196,14 @@
                 refs)))
            table))
         table))
+
   (defun get-branch-code (x str)
     (let ((name (symbol-name x)))
       (bytecode-code? (get-bytecode (make-symbol (string-append name str))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Put fixints (4 bytes) and single bytes into the bytevector
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun put-fix (state x)
     (align state)
     (if (integerp x)
@@ -199,22 +211,26 @@
       (let ((code (asm-function-state-code? state)))
         (asm-function-state-pc! state (+ (asm-function-state-pc? state) 4))
         (asm-function-state-code! state (cons x code)))))
+
   (defun put-bc (state name)
     (let ((bc (or (get-bytecode name)
                   (ct-serious-warning
                    (get-bytecode 'noop) "no bytecode ~a" name))))
       (put-byte state (bytecode-code? bc))
       bc))
+
   (defun put-branch-bytes (state ref)
     (notify0 "      PUT BRANCH BYTES: ~a" ref)
     (asm-function-state-pc! state (+ (asm-function-state-pc? state) 2))
     (asm-function-state-code! state
                               (cons ref (asm-function-state-code? state))))
+
   (defun put-byte (state x)
     (notify0 "      PUT BYTE: ~a" x)
     (let ((code (asm-function-state-code? state)))
       (asm-function-state-pc! state (+ (asm-function-state-pc? state) 1))
       (asm-function-state-code! state (cons x code))))
+
   (defun put-bytes (state l)
     (labels
      ((loop (ll i code)
@@ -226,9 +242,10 @@
      (loop l
            (asm-function-state-pc? state)
            (asm-function-state-code? state))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Alignment
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun align (state)
     (labels
      ;; Padding
@@ -242,21 +259,27 @@
          (let ((m (- 4 rem)))
            (asm-function-state-code! state (loop m code))
            (asm-function-state-pc! state (+ pc m)))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Fixnum as list of bytes
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun fix-as-4-bytes (x)
     (if (< x 0)
         (neg-fix-bytes-aux (- (- 0 x) 1) 3 ())
       (pos-fix-bytes-aux x 3 ())))
+
   (defun pos-fix-bytes-aux (x pos res)
     (if (= pos 0) (cons x res)
       (let ((rem (% x 256))
             (div (/ x 256)))
         (pos-fix-bytes-aux div (- pos 1) (cons rem res)))))
+
   (defun neg-fix-bytes-aux (x pos res)
     (if (= pos 0) (cons (- 255 x) res)
       (let ((rem (% x 256))
             (div (/ x 256)))
         (neg-fix-bytes-aux div (- pos 1) (cons (- 255 rem) res)))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

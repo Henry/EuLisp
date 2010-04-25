@@ -64,10 +64,10 @@ boot:
 
 .PHONY: test
 test:
-	@cd Test; $(U2) hello1 -recompile; ./hello1
-	@cd Test; $(U2) hello2 -l boot -recompile; ./hello2
-	@cd Test; $(U2) hello3 -l telos -recompile; ./hello3
-	@cd Test; $(U2) hello4 -l level1 -recompile; ./hello4
+	@cd Test; $(U2) test1 -recompile; ./test1
+	@cd Test; $(U2) test2 -l boot -recompile; ./test2
+	@cd Test; $(U2) test3 -l telos -recompile; ./test3
+	@cd Test; $(U2) test4 -l level1 -recompile; ./test4
 	@echo ".DONE."
 
 .PHONY: touch

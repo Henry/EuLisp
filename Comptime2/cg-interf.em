@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: reading/writing interface files
-;;; -----------------------------------------------------------------------
+;;; Description: reading/writing interface files
+;;;-----------------------------------------------------------------------------
 (defmodule cg-interf
   (syntax (_macros _i-aux0)
    import (i-all i-modify sx-obj sx-node p-env)
@@ -17,9 +17,10 @@
            get-module-load-dir
            link-string fff-link-string ffl-link-string
            directly-or-indirectly-modified-p))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Read interface file
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
    (defun load-module-interface (name . lib)
      (let* ((file-name (if lib
                           (as-C-library-interface-file-name name)
@@ -40,18 +41,19 @@
                   (full-import (get-interface-info 'full-import rest-spec))
                   (syntax (get-interface-info 'syntax rest-spec))
                   (export (get-interface-info 'export rest-spec))
-;                 (literals (get-interface-info 'literals rest-spec))
+                  ;                 (literals (get-interface-info 'literals rest-spec))
                   (lliterals (get-interface-info 'local-literals rest-spec)))
              (module-used-module-names! m import)
              (module-used-syntax-modules! m
-;             (map1-list find-imported-syntax-module
+                                          ;             (map1-list find-imported-syntax-module
                                           syntax)
              (module-all-used-module-names! m full-import)
              (module-local-literals! m lliterals)
              (do1-list make-interface-binding export)
-;            (do1-list (lambda (x)
-;                        (new-literal (car x) (car (cdr x)))) literals)
+             ;            (do1-list (lambda (x)
+             ;                        (new-literal (car x) (car (cdr x)))) literals)
              m)))))
+
    (defun load-library-interfaces ()
      (let ((tmp-load-path *load-path*))
        (setq *load-path* *C-library-load-path*)
@@ -60,15 +62,18 @@
                      (load-module-interface name t)))
            *linked-C-libraries*)
        (setq *load-path* tmp-load-path)))
+
    (defun get-interface-info (key spec)
      (init-list-ref spec key))
+
    (defun new-literal (obj entry)
      ((setter *get-literal*) obj entry))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Interface bindings can be distinguished from true bindings during code
-;;; genereation by their symbolic module name. The binding obj of an
-;;; interface bindings is it's original name.
-;;; --------------------------------------------------------------------
+;;  genereation by their symbolic module name. The binding obj of an
+;;  interface bindings is it's original name.
+;;;-----------------------------------------------------------------------------
    (defun make-interface-binding (spec)
      (let* ((name (get-binding-spec-info 'name spec))
             (origin (get-binding-spec-info 'origin spec))
@@ -85,9 +90,10 @@
                            local-index: index
                            info: info)))
        (set-external-binding binding)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Write interface file
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
    (defun write-interface-file (module)
      (let ((module-name (module-name? module)))
        module-name
@@ -95,6 +101,7 @@
                 (eq module-name *tmp-start-source-file-name*))
            ()
          (write-module-interface-file module))))
+
    (defun write-module-interface-file (module)
      (let* ((module-name (module-name? module))
             (file-name (as-interface-file-name module-name))
@@ -120,9 +127,10 @@
          (write-interface-literals stream module)
          (format stream "))\n")))
      module)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Write library interface file
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
    (defun write-library-interface-file (module)
      (let* ((module-name (module-name? module))
             (file-name (as-C-library-interface-file-name module-name))
@@ -142,18 +150,20 @@
          (format stream "   syntax ()\n")
          (format stream "   full-import ~a\n" all-used-module-names)
          (write-interface-export stream module)
-;        (write-interface-literals stream module)
+         ;        (write-interface-literals stream module)
          (format stream "   literals (\n   )\n")
          (format stream "  )\n)  ; end of interface")))
      module)
+
    (defun create-library-interface-file (module-name)
      (notify "Create library interface file ...")
      (let ((module (or (get-module module-name)
                        (load-module-interface module-name))))
        (write-library-interface-file module)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Auxillary function to write interface
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
    (defun write-library-interface-literals (stream module)
      (let ((module-names (cons (module-name? module)
                                (module-all-used-module-names? module))))
@@ -165,26 +175,29 @@
                                  (format stream "    (~a ~a)\n" obj entry))))
                         *get-literal*)
        (format stream "   )\n")))
+
    (defun write-interface-literals (stream module)
      (format stream "   literals (\n")
-;     (access-table-do
-;      (lambda (obj entry)
-;       (let* ((names (cons (module-name? module)
-;                           (module-all-used-module-names? module)))
-;              (new-entry (select-list (lambda (x y) (member1-list (car x) y))
-;                                       entry names)))
-;         (if (null new-entry) ()
-;           (if t ;(stringp obj)
-;               (format stream "    (~s ~a)\n" obj new-entry)
-;             (format stream "    (~a ~a)\n" obj new-entry)))))
-;      *get-literal*)
+     ;     (access-table-do
+     ;      (lambda (obj entry)
+     ;       (let* ((names (cons (module-name? module)
+     ;                           (module-all-used-module-names? module)))
+     ;              (new-entry (select-list (lambda (x y) (member1-list (car x) y))
+     ;                                       entry names)))
+     ;         (if (null new-entry) ()
+     ;           (if t ;(stringp obj)
+     ;               (format stream "    (~s ~a)\n" obj new-entry)
+     ;             (format stream "    (~a ~a)\n" obj new-entry)))))
+     ;      *get-literal*)
      (format stream "   )\n"))
+
    (defun write-interface-local-literals (stream module)
      (format stream "   local-literals (\n")
      (do1-list (lambda (entry)
            (format stream "    ~s\n" entry))
          (module-local-literals? module))
      (format stream "   )\n"))
+
    (defun write-interface-export (stream module)
      (format stream "   export (\n")
      (access-table-do
@@ -195,6 +208,7 @@
                                  binding))
       (module-external-env? module))
      (format stream "   )\n"))
+
    (defun write-library-interface-export (stream module)
      (format stream "   export (\n")
      (do1-list (lambda (module)
@@ -207,6 +221,7 @@
                   (module-external-env? module)))
          (map1-list find-imported-module (module-all-used-module-names? module)))
      (format stream "  )\n"))
+
    (defun write-interface-binding (stream name binding)
      (let ((origin-module-name (binding-origin-module-name binding))
            (origin-name (or (and (syntax-obj-p (binding-obj? binding))
@@ -220,9 +235,10 @@
                  (pos . ,index)
                  (origin ,origin-module-name . ,origin-name)
                  ,@binding-info))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Is module directly or indirectly modified?
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun directly-or-indirectly-modified-p (module-name)
     (if (and (eq module-name *tmp-start-source-file-name*)
              *no-recompile*)
@@ -241,9 +257,10 @@
                                         (as-interface-file-name module-name)))
                                    (file-newer-p file-name1 file-name2))))
                              full-import))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Get all used module names out of the interface
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
    (defun get-full-import-names (module-name)
      (or (*get-full-import* module-name)
          (let ((module (get-module module-name)))
@@ -263,6 +280,7 @@
                     (import (get-interface-info 'full-import rest-spec)))
                ((setter *get-full-import*) module-name import)
                import)))))
+
    (defun get-library-names ()
      (let ((modules (map1-list get-module *linked-C-libraries*))
            (names ()))
@@ -271,22 +289,26 @@
                    (append names (module-all-used-module-names? module))))
            modules)
        names))
+
    (defun get-module-load-dir (module-name)
      (let ((module (get-module module-name)))
        (if module
            (module-load-dir? module)
          (file-exist-p (as-interface-file-name module-name)))))
+
    (defun find-imported-module (name)
      (or (get-module name)
          (if (directly-or-indirectly-modified-p name)
              (compile-module name)
            (load-module-interface name))))
+
    (defun find-imported-syntax-module (name)
      (or (get-syntax-module name)
          (load-syntax-module name)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Answer string containing module name and all used module names
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun link-string (module-name)
     (let* ((dir (get-module-load-dir module-name))
            (module (get-module module-name))
@@ -312,6 +334,7 @@
                             imp-dir
                             (string-append *delimiter* imp-file-name)))))))))
         (loop import str))))
+
   (defun fff-link-string ()
     (let ((names *linked-C-ff-files*))
       (if (null names) ""
@@ -326,6 +349,7 @@
                            file-name))))
                       names)))
           (apply concatenate str-list)))))
+
   (defun ffl-link-string ()
     (let ((names *linked-C-ff-libraries*))
       (if (null names) ""
@@ -340,4 +364,7 @@
                            file-name))))
                       names)))
           (apply concatenate str-list)))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

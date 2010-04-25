@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: bignum
 ;;;  Authors: Danius Michaelides, Andreas Kind
-;;;  Description: bignums
-;;; -----------------------------------------------------------------------
+;;; Description: bignums
+;;;-----------------------------------------------------------------------------
 (defmodule mpq
   (export (mpq-init mpq-init-set mpq-init-set-z
            mpq-init-set-ui mpq-init-set-si mpq-clear mpq-get-num mpq-get-den
@@ -13,9 +13,10 @@
            mpq-add-init mpq-sub mpq-sub-init mpq-div mpq-div-init mpq-neg
            mpq-neg-init mpq-inv mpq-inv-init mpq-cmp mpq-cmp-ui mpq-sgn
            mpq-equal mpq-canonicalize))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern mpq-init () ptr "C_mpq_init")
   (defextern mpq-init-set (ptr) ptr "C_mpq_init_set")
   (defextern mpq-init-set-z (ptr) ptr "C_mpq_init_set_z")
@@ -44,4 +45,7 @@
   (defextern mpq-sgn (ptr) <int> "C_mpq_sgn")
   (defextern mpq-equal (ptr ptr) boolean "C_mpq_equal")
   (defextern mpq-canonicalize (ptr) boolean "C_mpq_canonicalize")
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

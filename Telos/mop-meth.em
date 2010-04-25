@@ -1,19 +1,20 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;;  Description: handling methods
-;;; -----------------------------------------------------------------------
+;;; Description: handling methods
+;;;-----------------------------------------------------------------------------
 (defmodule mop-meth
   (syntax (_boot0 _mop-gf0 _mop-meth0)
    import (boot mop-prim mop-key mop-class mop-inspect mop-gf)
    export (compute-method-lookup-function stable-add-method make-method
            compute-discriminating-function add-method))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Method allocation
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun make-method (method-class domain fun inits)
     (if (and (eq method-class <simple-method>)
              ;(vectorp domain)
@@ -24,10 +25,12 @@
           ((setter method-function) meth fun)
           meth)
       (apply make method-class domain: domain function: fun inits)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Adding methods
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric add-method ((gf <generic-function>) (meth <method>)))
+
   (defmethod add-method ((gf <generic-function>) (meth <method>))
     (check-method-domain meth gf)
     (if (subclassp (class-of meth)
@@ -43,6 +46,7 @@
     ((setter method-generic-function) meth gf)
     (finalize-generic gf)
     gf)
+
   (defun primitive-add-method (gf meth)
     (check-method-domain meth gf)
     (let ((old (primitive-find-method gf (method-domain meth))))
@@ -54,14 +58,16 @@
     ((setter method-generic-function) meth gf)
     (gf-reset-cache gf)
     gf)
+
   (defun stable-add-method (gf meth)
     (if (and (eq (class-of gf) <simple-generic-function>)
              (eq (class-of meth) <simple-method>))
         (primitive-add-method gf meth)
       (add-method gf meth)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Range and domain
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun check-method-domain (meth gf)
     (let* ((meth-dom (method-domain meth))
            (meth-arity (vector-size meth-dom))
@@ -87,12 +93,15 @@
          (error
           "method extends domain of generic function ~a\n    method domain: ~a\n    generic function domain: ~a"
           (function-name gf) meth-dom gf-dom)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Find method
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric find-method ((gf <generic-function>) sig))
+
   (defmethod find-method ((gf <generic-function>) sig)
     (primitive-find-method gf sig))
+
   (defun primitive-find-method (gf sig)
     (labels
      ((loop (meths)
@@ -102,9 +111,10 @@
                     meth
                   (loop (cdr meths)))))))
      (loop (generic-function-methods gf))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Remove method
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun primitive-remove-method (gf meth)
     (let ((meths (generic-function-methods gf)))
       (if (member1-list meth meths)
@@ -114,7 +124,9 @@
             (gf-reset-cache gf))
         ()))
     gf)
+
   (defgeneric remove-method ((gf <generic-function>) (meth <method>)))
+
   (defmethod remove-method ((gf <generic-function>) (meth <method>))
     (let ((meths (generic-function-methods gf)))
       (if (member1-list meth meths)
@@ -124,10 +136,12 @@
             (finalize-generic gf))
         ()))
     gf)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Finalize generic function
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric finalize-generic ((gf <generic-function>)))
+
   (defmethod finalize-generic ((gf <generic-function>))
     (let* ((domain (generic-function-domain gf))
            (methods (generic-function-methods gf))
@@ -137,38 +151,44 @@
       ((setter generic-function-discriminating-function) gf disc))
     (gf-reset-cache gf)
     gf)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Initialize generic function
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod initialize ((gf <generic-function>) keywords)
     (call-next-method)
     (do1-list (lambda (meth) (add-method gf meth))
               (find-key methods: keywords ()))
     (finalize-generic gf)
     gf)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Initialize method
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod initialize ((meth <method>) keywords)
     (call-next-method)
     (let ((gf (find-key generic-function: keywords ())))
       (if gf (add-method gf meth) ()))
     meth)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Method lookup function
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-method-lookup-function
     ((gf <generic-function>) sig methods))
+
   (defmethod compute-method-lookup-function
     ((gf <generic-function>) sig methods)
     (let ((domain (generic-function-domain gf)))
       (named-lambda method-lookup-function values
         (the-method-lookup-function gf values domain))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Discriminating function
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric compute-discriminating-function
     ((gf <generic-function>) domain lookup meths))
+
   (defmethod compute-discriminating-function
     ((gf <generic-function>) domain lookup meths)
     (named-lambda discriminating-function values
@@ -184,9 +204,13 @@
            (set-global-register next-methods (cdr meth-funs))
            ;; Apply the function of the most specific applicable method
            (apply (car meth-funs) values))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generic format (see also mop-gf.em and Runtime/format.em)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod generic-format (s str . args)
     (apply format1 s str args))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

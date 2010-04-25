@@ -1,11 +1,11 @@
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  By J Garcia & University of Bath. All rights reserved.                 ;;;
 ;;; ----------------------------------------------------------------------- ;;;
-;;;                     EuLisp System 'youtoo/tk'
+;;; ---                         EuLisp System 'youtoo/tk'
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  Library: 
 ;;;  Authors: J Garcia
-;;;  Description: YouToo/Tk module that contains the tk_browser application
+;;; Description: YouToo/Tk module that contains the tk_browser application
 ;;; ----------------------------------------------------------------------- ;;;
 (defmodule tk_browser
   (syntax (macros)
@@ -23,6 +23,7 @@
 (deflocal *info-title* 0)
 (deflocal *info-text* 0)
 (deflocal *info-hierchy* 0)
+
 ;;;;;
 ;;
 ;; The next ones will contain global information.
@@ -85,6 +86,7 @@
                   (remove-element *objects-inspected* 9)))
     (setq *objects-inspected*
           (cons *actual-object* *objects-inspected*))))
+
 ;;;;;
 ;;
 ;; This function will be called when the mouse is clicked twice
@@ -115,6 +117,7 @@
               (slot-value *actual-object* name-slot)))
   
       (generate-layout)))))
+
 ;;;;;
 ;;
 ;;  The next function deletes the element in the position 
@@ -131,6 +134,7 @@
            (setq i (+ i 1))))
         list)
     (reverse result)))
+
 ;;;;;
 ;;
 ;;  The next function goes to a previous object that has been
@@ -148,6 +152,7 @@
       (setq *actual-object* (element *objects-inspected* position))
       (setq *objects-inspected* (remove-element *objects-inspected* position))
       (generate-layout)))))
+
 ;;;;;
 ;;
 ;;  The next function will update all the widgets in the

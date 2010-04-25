@@ -1,19 +1,21 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: code generation
-;;; -----------------------------------------------------------------------
+;;; Description: code generation
+;;;-----------------------------------------------------------------------------
 (defmodule cg-gen
   (syntax (_macros _i-aux0)
    import (i-all cg-state cg-stack sx-obj sx-node p-env an-side)
    export (encode interactive-encode))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate assembler code
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric encode (node state))
+
   (defmethod encode (n (state <null>))
     (with-ct-handler "code generation error" n
       (notify "  Encoding module ~a ..."
@@ -23,6 +25,7 @@
         (encode n new-state)
         (code-state-asm! new-state (reverse (code-state-asm? new-state)))
         new-state)))
+
   (defun interactive-encode (module)
     (with-ct-handler "code generation error" module
       (notify "  Encoding module ~a ..." (module-name? module))
@@ -34,15 +37,17 @@
         (encode (module-top-level-forms? module) state)
         (code-state-asm! state (reverse (code-state-asm? state)))
         state)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for MODULE node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <module>) (state <code-state>))
     (compute-captured-vars n)
     (encode-top-lexical-bindings n state)
     (notify0 "  Code for ~a's top-level forms:" (module-name? n))
     (encode (module-top-level-forms? n) state)
     state)
+
   (defun encode-top-lexical-bindings (module state)
     (do1-list pre-encode-inlined-lambda (module-inlined-lambdas? module))
     (do1-list pre-encode-inlined-setter (module-inlined-setters? module))
@@ -52,6 +57,7 @@
        (and (true-local-binding-p binding)
             (encode-top-lexical-binding binding state)))
      (module-lexical-env? module)))
+
   (defun interactive-encode-top-lexical-bindings (module state)
     (access-table-do (lambda (name binding)
                        (and (true-local-binding-p binding)
@@ -62,6 +68,7 @@
       (notify0 "  Code for module binding ~a:" (local-name? binding))
       (encode obj state)
       (add-asm-set-binding binding state)))
+
   (defun pre-encode-inlined-setter (binding)
     (if (interface-binding-p binding) ()
       (progn
@@ -75,6 +82,7 @@
           (binding-info! host-binding (append info (list inline-spec)))
           (notify0 "new inlined setter info: ~a"
                    (binding-info? host-binding))))))
+
   (defun pre-encode-inlined-lambda (binding)
     (let* ((fun (binding-obj? binding))
            (body (fun-body? fun))
@@ -90,26 +98,33 @@
       (clear-stack pos state)
       (code-state-asm! state (reverse (code-state-asm? state)))
       (set-inline-binding-info binding state)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for BINDING node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <binding>) (state <code-state>))
     (add-asm-get-binding n state))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for LITERAL nodes
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <literal-const>) (state <code-state>))
     (encode-literal (const-value? n) state))
+
   (defgeneric encode-literal (n state))
+
   (defmethod encode-literal ((n <object>) (state <code-state>))
     (if (eq n t)
         (add-asm `(static-ref-t) 1 state)
       (add-asm `(static-ref ,n) 1 state)))
+
   (defmethod encode-literal ((n <null>) (state <code-state>))
     (add-asm `(static-ref-nil) 1 state))
+
   (defmethod encode-literal ((n <character>) (state <code-state>))
     (let ((ascii-value (character-as-int n)))
       (add-asm `(static-character-ref ,ascii-value) 1 state)))
+
   (defmethod encode-literal ((n <int>) (state <code-state>))
     (cond ((= n 0) (add-asm `(static-ref0) 1 state))
           ((= n 1) (add-asm `(static-ref1) 1 state))
@@ -118,27 +133,31 @@
           ((and (< -128 n) (< n 128))
            (add-asm `(static-fpi-byte-ref ,n) 1 state))
           (t (add-asm `(static-fpi-ref ,n) 1 state))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for NAMED CONSTANT node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <named-const>) (state <code-state>))
     (encode (const-value? n) state))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for VARIABLE node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <global-static-var>) (state <code-state>))
     (encode (var-value? n) state))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for SETQ node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <setq>) (state <code-state>))
     (let* ((binding (setq-binding? n)))
       (encode (setq-obj? n) state)
       (add-asm-set-and-get-binding binding state)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for IF node
 ;;; Thanks to A-normalization always in tail position, i.e. no end label.
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <if>) (state <code-state>))
     (let ((else-label (gensym-module))
           (out-label (gensym-module))
@@ -155,20 +174,23 @@
       (add-asm `(label ,else-label) 0 state)
       (encode (if-else? n) state)
       (add-asm `(label ,out-label) 0 state)))
+
   (defun gensym-module ()
     (make-symbol (format () "~a~a"
                          (gensym)
                          (module-name? (dynamic *actual-module*)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for RETURN node
-;;; --------------------------------------------------------------------
-;  (defmethod encode ((n <return>) (state <code-state>))
-;    (let ((arity (abs (fun-arity? (syntax-expr-encl-lambda? n)))))
-;      (encode (return-form? n) state)
-;      (add-asm `(return ,arity) 0 state)))
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+  ;  (defmethod encode ((n <return>) (state <code-state>))
+  ;    (let ((arity (abs (fun-arity? (syntax-expr-encl-lambda? n)))))
+  ;      (encode (return-form? n) state)
+  ;      (add-asm `(return ,arity) 0 state)))
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for LAMBDA node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <lambda>) (state <code-state>))
     (notify0 "  Gen code for <lambda>")
     (let* ((name (or (local-name? n) (fun-name? n)))
@@ -198,6 +220,7 @@
       (add-asm `(code-vector-ref ,(code-state-handle? lstate)) 1 state)
       ;;(add-asm `(make-lambda ,(abs arity)) -1 state)
       (add-asm `(make-lambda ,arity) -1 state)))
+
   (defun encode-check-arguments (n state)
     (cond ((= n -2) (add-asm `(check-arguments-2) 0 state))
           ((= n -1) (add-asm `(check-arguments-1) 0 state))
@@ -205,6 +228,7 @@
           ((= n 1) (add-asm `(check-arguments1) 0 state))
           ((= n 2) (add-asm `(check-arguments2) 0 state))
           (t (add-asm `(check-arguments ,n) 0 state))))
+
   (defun encode-lambda-display (n args state)
     ;; Copy captured args into display
     (let* ((local-vars (select-list local-static-var-captured? args))
@@ -222,15 +246,17 @@
             ;; move arguments
             (do1-list (lambda (var) (stack-to-display var state)) local-vars))
         ())))
+
   (defun encode-return (pos state)
     (let ((to-pop (- (code-state-stack-size? state) (+ pos 1))))
       (add-asm `(return ,to-pop) (- 0 to-pop) state)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for LET* node
-;;; Treated as nested inlined lambda application with arity=1.
-;;; Init forms are not in tail positon (see A-normalization).
-;;; Init forms are stored as var values.
-;;; --------------------------------------------------------------------
+;;  Treated as nested inlined lambda application with arity=1.
+;;  Init forms are not in tail positon (see A-normalization).
+;;  Init forms are stored as var values.
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <let*>) (state <code-state>))
     (notify0 "  Gen code for ~a" n)
     (let* ((args (fun-args? n))
@@ -258,10 +284,12 @@
                          (loop rest-args)))))
         (loop args)
         (clear-stack pos state))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for APPL node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defglobal *in-tail-pos* t)
+
   (defmethod encode ((n <appl>) (state <code-state>))
     (notify0 "  Gen code for <appl>")
     (let* ((args (appl-args? n))
@@ -343,6 +371,7 @@
                 (add-asm `(call-operator ,nargs) (- 0 nargs) state))))))
          (t
           (ct-serious-warning () "bad call to ~a" op)))))
+
   (defun encode-args (args nargs state)
     (labels
         ;; devide args into 2 sets; args of the first set can be consumed
@@ -381,6 +410,7 @@
                                     (- nargs (+ (list-size new-args) 1)))
             (do1-list (lambda (arg) (encode arg state)) new-args)
           (do1-list (lambda (arg) (encode arg state)) args)))))
+
   (defun encode-let (op args nargs state)
     (move-stack (- 0 nargs) state)
     ;; remember stack pos to check how many args need to be checked;
@@ -393,16 +423,18 @@
                 (fun-args? op))
       (encode (fun-body? op) state)
       (clear-stack pos state)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for OPENCODING node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <opencoding>) (state <code-state>))
     (notify0 "  Gen code for <opencoding>")
     ;; do nothing
     state)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Generate code for CALL-NEXT-METHOD node
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod encode ((n <call-next-method>) (state <code-state>))
     (let* ((method-lambda (syntax-expr-encl-lambda? n))
            (arity (abs (fun-arity? method-lambda)))
@@ -415,9 +447,10 @@
           (do1-list (lambda (binding) (add-asm-get-binding binding state))
               bindings)
           (add-asm `(call-next-method ,arity) (- 1 arity) state)))))
-;;;  --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Binding access; resolve instructions and parameters to be used.
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun add-asm-get-binding (binding state)
     (let ((values (and (eq (get-binding-info binding 'class) 'constant)
                        (get-binding-info binding 'value))))
@@ -425,9 +458,11 @@
           (encode (make <literal-const> value: (car values)) state)
         (add-asm `(,(binding-read-instr binding)
                    ,@(binding-access-params binding state)) 1 state))))
+
   (defun add-asm-set-binding (binding state)
     (add-asm `(,(binding-write-instr binding)
                ,@(binding-access-params binding state)) -1 state))
+
   (defun add-asm-set-and-get-binding (binding state)
     (let ((obj (binding-obj? binding))
           (name (binding-local-name? binding))
@@ -441,6 +476,7 @@
             (t
              (add-asm `(set-and-get-binding-ref ,module-name ,name)
                       0 state)))))
+
   (defun binding-read-instr (binding)
     (let ((obj (binding-obj? binding)))
       (cond ((interface-binding-p binding)
@@ -451,6 +487,7 @@
                  'display-ref
                'stack-ref))
             (t 'binding-ref))))
+
   (defun binding-write-instr (binding)
     (let ((obj (binding-obj? binding)))
       (cond ((interface-binding-p binding)
@@ -461,6 +498,7 @@
                  'set-display-ref
                'set-stack-ref))
             (t 'set-binding-ref))))
+
   (defun binding-access-params (binding state)
     (let ((obj (binding-obj? binding))
           (name (binding-local-name? binding))
@@ -476,21 +514,24 @@
                (list (stack-var-index obj state))))
             (t
              (list module-name name)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Move stack-ref to display
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun stack-to-display (var state)
     (add-asm `(stack-ref ,(stack-var-index var state)) 1 state)
     (add-asm `(set-display-ref ,@(display-var-index var state)) -1 state))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;;  Add code to code state object
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun add-asm (code move state)
     (and (null (car code))
          (ct-error () "error in code generation"))
     (move-stack move state)
     ;; Code has to be reversed later
     (code-state-asm! state (cons code (code-state-asm? state))))
+
   (defun add-asms (asms move state)
     ;; These asms must be in correct order
     (let ((prefix (symbol-name (gensym)))
@@ -522,6 +563,7 @@
           ()))
       ;; Now do the stack movement in one step
       (move-stack move state)))
+
   (defun set-inline-binding-info (binding state)
     (notify0 "  Set inlined binding info of ~a" (local-name? binding))
     (let ((new-info-entry
@@ -532,6 +574,7 @@
                                        (code-state-enclosed-code? state)))))
           (old-info (binding-info? binding)))
       (binding-info! binding (cons new-info-entry old-info))))
+
   (defun add-inline-binding-info (binding state)
     (let* ((inline-spec (get-binding-info binding 'inline))
            (lstates (map1-list (lambda (x)
@@ -543,9 +586,13 @@
        state (append lstates
                      (code-state-enclosed-code? state)))
       (add-asms (cdr (car inline-spec)) 0 state)))
+
   (defun clear-stack (pos state)
     (let ((to-pop (- (code-state-stack-size? state) (+ pos 1))))
       (if (< 0 to-pop)
           (add-asm `(nobble ,to-pop) (- 0 to-pop) state)
         ())))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

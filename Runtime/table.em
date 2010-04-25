@@ -1,33 +1,40 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;;  Description: tables; fixed comparator and hash-function; 
+;;; Description: tables; fixed comparator and hash-function;
 ;;;    assume non-relocating garbage collector!
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 (defmodule table
   (syntax (_telos0)
    import (telos convert copy collect compare list fpi string vector table1)
    expose (table1)
    export (table-ref table-empty-p
            do1-table map1-table anyp1-table allp1-table))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Table ref
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod element ((tab <table>) key)
     (table-ref tab key))
+
   (defgeneric table-ref (tab key))
+
   (defmethod table-ref ((tab <simple-hash-table>) key)
     (fast-table-ref tab (address-string key)))
+
   (defmethod table-ref ((tab <simple-hash-table>) (key <string>))
     ;; strings must have different key than symbols
     (fast-table-ref tab (string-append key "\x001")))
+
   (defmethod table-ref ((tab <simple-hash-table>) (key <name>))
     (fast-table-ref tab (name key)))
+
   (defextern fast-table-ref (ptr <string>) ptr "eul_table_ref")
   (defextern address-string (ptr) <string> "eul_addr_str")
+
   (defmethod table-ref ((tab <hash-table>) key)
     (let ((entries (table-entries tab))
           (comp-fun (table-comparator tab))
@@ -48,20 +55,27 @@
                          (table-fill-value tab)))))
             (loop i)))
         (table-fill-value tab))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Set table ref
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod (setter element) ((tab <table>) key x)
     ((setter table-ref) tab key x))
+
   (defgeneric (setter table-ref) (tab key x))
+
   (defmethod (setter table-ref) ((tab <simple-hash-table>) key x)
     (fast-table-set tab (address-string key) x))
+
   (defmethod (setter table-ref) ((tab <simple-hash-table>) (key <string>) x)
     ;; strings must have different key than symbols
     (fast-table-set tab (string-append key "\x001") x))
+
   (defmethod (setter table-ref) ((tab <simple-hash-table>) (key <name>) x)
     (fast-table-set tab (name key) x))
+
   (defextern fast-table-set (ptr <string> ptr) ptr "eul_table_set")
+
   (defmethod (setter table-ref) ((tab <hash-table>) key x)
     (let ((entries (table-entries tab))
           (comp-fun (table-comparator tab))
@@ -91,9 +105,10 @@
                            (table-rehash tab))
                          (table-fill-value tab))))))
           (loop i)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Simple table rehash
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun table-rehash (tab)
     (let ((entries (table-entries tab))
           (hash-fun (table-hash-function tab)))
@@ -127,19 +142,23 @@
                          tab)))
               (loop 0)))
           tab)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Predicates
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod emptyp ((tab <table>)) (table-empty-p tab))
+
   (defun table-empty-p (tab) (int-binary= (table-size tab) 0))
   ;;(declare-inline table-empty-p)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Do
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod do ((fun <function>) (tab <hash-table>) . cs)
     (if (null cs)
         (do1-table fun tab)
       (error "do on multiple tables not yet implemented")))
+
   (defun do1-table (fun tab)
     ;; Attention -- key (ie (car entry) might not be a Lisp object when tab
     ;; is a simple hash table
@@ -148,13 +167,15 @@
                       (fun (car entry) (cdr entry))
                     ()))
                 (table-entries tab)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Map
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod map ((fun <function>) (tab <hash-table>) . cs)
     (if (null cs)
         (map1-table fun tab)
       (error "map on multiple tables not yet implemented")))
+
   (defun map1-table (fun tab)
     ;; Attention -- key (ie (car entry) might not be a Lisp object when tab
     ;; is a simple hash table
@@ -174,35 +195,40 @@
                        (reverse-list res))))
             (loop 0 ()))
         ())))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Anyp
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod anyp ((fun <function>) (tab <hash-table>) . cs)
     (if (null cs)
         (anyp1-table fun tab)
       (error "anyp on multiple tables not yet implemented")))
+
   (defun anyp1-table (fun tab)
     (anyp1-vector (lambda (entry)
                     (if (consp entry)
                         ()
                       (fun (car entry) (cdr entry))))
                   (table-entries tab)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Allp
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod allp ((fun <function>) (tab <hash-table>) . cs)
     (if (null cs)
         (allp1-table fun tab)
       (error "allp on multiple tables not yet implemented")))
+
   (defun allp1-table (fun tab)
     (allp1-vector (lambda (entry)
                     (if (consp entry)
                         ()
                       (fun (car entry) (cdr entry))))
                   (table-entries tab)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Member
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod member (x (tab <table>) . preds)
     (if (null preds)
         (table-ref tab x)
@@ -212,19 +238,27 @@
                   (if (consp entry)
                       (fun x (car entry) (cdr entry))
                     ()))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Accumulate
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod accumulate ((fun <function>) init (tab <table>))
     (accumulate-table fun init tab))
+
   (defun accumulate-table (fun init tab)
     (accumulate-list fun init (table-values tab)))
+
   (defmethod accumulate1 ((fun <function>) (tab <table>))
     (accumulate1-table fun tab))
+
   (defun accumulate1-table (fun tab)
     (accumulate1-list fun (table-values tab)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Conversion
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defgeneric (converter <table>) (x))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

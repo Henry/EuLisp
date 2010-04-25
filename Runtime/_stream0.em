@@ -1,19 +1,19 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
-;;;  Library: level1 (EuLisp Language Level1 Implementation)
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;;  Description: stream syntax functions
-;;; -----------------------------------------------------------------------
+;;; Description: stream syntax functions
+;;;-----------------------------------------------------------------------------
 (defmodule _stream0
   (syntax (_boot0)
    import (level1))
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Clearly the following definition should be elsewhere
 ;;;
 ;;; test cases
-;;; 
+;;;-----------------------------------------------------------------------------
 ;;; (match-let 'foo '((a 1)) 'bar)
 ;;; => (let ((a (if (null foo) 1 (car foo)))) bar)
 ;;;
@@ -31,8 +31,8 @@
 ;;;                 (progn (setq a (car G00055)) (setq G00055 (cdr G00055))))
 ;;;             (if (null G00055) (setq b 2)
 ;;;                 (progn (setq b (car G00055)) (setq G00055 (cdr G00055)))))
-;;;      bar) 
-;;; -------------------------------------------------------------------- 
+;;;      bar)
+;;;-----------------------------------------------------------------------------
   (defmacro match-let (expression default-initializers . body)
     (if (= 1 (size default-initializers))
         `(let ((,(caar default-initializers)
@@ -58,19 +58,21 @@
                ,@(map (lambda (x) `(,(car x) ())) default-initializers))
            (progn ,@update-vars)
            ,@body))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; (with-lock (lock-valued-expression) form*)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro with-lock (lock . body)
     (let ((the-lock (gensym)))
       `(let ((,the-lock ,lock))
          (unwind-protect
              (progn (lock ,the-lock) ,@body)
            (unlock ,the-lock)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Temporarily reconnects source of identifier to expression
 ;;; (with-source (identifier expression) form*)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro with-source (decl . body)
     (let ((the-source (gensym)))
       `(let ((,the-source (source ,(car decl))))
@@ -78,10 +80,11 @@
          (unwind-protect
              (progn ,@body)
            (reconnect ,the-source ,(car decl))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Temporarily reconnects sink of identifier to expression
 ;;; (with-source (identifier expression) form*)
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro with-sink (decl . body)
     (let ((the-source (gensym)))
       `(let ((,the-source (source ,(car decl))))
@@ -89,35 +92,38 @@
          (unwind-protect
              (progn ,@body)
            (reconnect ,the-source ,(car decl))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Temporarily binds var with input stream
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro with-input-file (var-and-path . body)
     (let ((the-var (car var-and-path))
           (the-path (car (cdr var-and-path)))
           (res-var (gensym)))
       `(let ((,the-var (make <file-stream> file-name: ,the-path))
-;;      `(let ((,the-var (open-input-file ,the-path))
+             ;;`(let ((,the-var (open-input-file ,the-path))
              (,res-var ()))
          (unwind-protect (setq ,res-var (progn ,@body))
            (disconnect ,the-var))
          ,res-var)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Temporarily connects stdout to path
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro with-output-file (var-and-path . body)
     (let ((the-var (car var-and-path))
           (the-path (car (cdr var-and-path)))
           (res-var (gensym)))
       `(let ((,the-var (make <file-stream> file-name: ,the-path mode: 'w))
-;;      `(let ((,the-var (open-output-file ,the-path))
+             ;;`(let ((,the-var (open-output-file ,the-path))
              (,res-var ()))
          (unwind-protect (setq ,res-var (progn ,@body))
            (disconnect ,the-var))
          ,res-var)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Open input file with load path
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro with-input-file-of-path (decl . body)
     (let ((s (car decl))
           (name (car (cdr decl)))
@@ -132,4 +138,7 @@
            (let ((,file-name (car ,info))
                  (,dir (cdr ,info)))
              (with-input-file (,s ,file-name) ,@body))))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

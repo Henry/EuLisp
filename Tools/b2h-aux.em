@@ -1,7 +1,7 @@
-;;; -*- lisp -*-
 (defmodule b2h-aux
   (syntax (macros)
    import (level1))
+
   (defmacro with-input-file* (file-name . body)
     (let ((res (gensym))
           (s (gensym))
@@ -16,4 +16,7 @@
            ((setter stream-source) stdin ,orig-source)
            ((setter stream-sink) stdin ,orig-sink))
          ,res)))
-) ; end of b2h-aux.em
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

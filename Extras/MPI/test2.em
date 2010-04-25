@@ -1,19 +1,22 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: mpis
 ;;;  Authors: Andreas Kind
-;;;  Description: MPI example module
-;;;  Compilation: youtoo test2 -l level1 -l mpis -ld mpicc -static
-;;;  Run: mpirun -np 2 mpi-example
-;;; -----------------------------------------------------------------------
+;;; Description: MPI example module
+;;;  Compilation
+;;    youtoo test2 -l level1 -l mpis -ld mpicc -static
+;;;  Run
+;;    mpirun -np 2 mpi-example
+;;;-----------------------------------------------------------------------------
 (defmodule test2
   (syntax (macros)
    import (level1 mpis))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Send user input
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun test ()
     ;; Queries the user for objects to send
     (let ((s1 (make <mpi-stream>))
@@ -32,4 +35,7 @@
             (t
              (error "unhandled local mpi stream" <condition>)))))
   (test)
-)  ;; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

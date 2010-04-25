@@ -2,7 +2,7 @@
 (defmodule extras0
   (syntax (macros)
    import (level1))
-  
+
   (defmacro and-let* (vars . body)
     (labels ((expand (vars body)
                      (cond
@@ -25,4 +25,7 @@
                       (t
                        (error "not a proper list" vars)))))
       (expand vars body)))
-) ;; end of extras0
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

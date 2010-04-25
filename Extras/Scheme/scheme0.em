@@ -1,16 +1,17 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: scheme
 ;;;  Authors: Andreas Kind, Pete Broadbery, Luc Moreau
-;;;  Description: Scheme synatx (IEEE Std 1178-1990) in EuLisp
-;;; -----------------------------------------------------------------------
+;;; Description: Scheme synatx (IEEE Std 1178-1990) in EuLisp
+;;;-----------------------------------------------------------------------------
 (defmodule scheme0
   (import ((except (do) level1)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Defining forms
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro define (var-args . body)
     (let ((funp (consp var-args))
           (local-defs ()))
@@ -55,6 +56,7 @@
                         local-defs)
                  ,@body)))
         `(define1 ,var-args ,@body))))
+
   (defmacro define1 (name+args . body)
     ;; sorry, no 'and' available
     (if (symbolp name+args)
@@ -69,9 +71,10 @@
       `(defun ,(car name+args) ,(cdr name+args) ,@body)))
   (defmacro define-syntax (name+args . body)
     `(defmacro ,(car name+args) ,(cdr name+args) ,@body))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Control syntax
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro cond body
     (if body
         (if (cdr (car body))
@@ -80,6 +83,7 @@
                (cond ,@(cdr body)))
           `(or ,(car (car body)) (cond ,@(cdr body))))
       ()))
+
   (defmacro and body
     (if body
         (if (cdr body)
@@ -88,6 +92,7 @@
                ())
           (car body))
       t))
+
   (defmacro or body
     (if body
         (if (cdr body)
@@ -98,6 +103,7 @@
                    (or ,@(cdr body)))))
           (car body))
       ()))
+
   (defmacro case (exp . cases)
     `(let ((else t) (case-val ,exp))
        (cond ,@(map (lambda (x)
@@ -105,9 +111,10 @@
                           x
                         `((eq? (quote ,(caar x)) case-val) ,(cadr x))))
                     cases))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; letrec
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro letrec (binds . body)
     `(let ,(map
             (lambda (bind)
@@ -118,14 +125,16 @@
             `((setter ,(car bind)) ,@(cdr bind)))
           binds)
        ,@body))
+
   (defun filter (pred l)
     (if (null l) ()
       (if (pred (car l))
           (cons (car l) (filter pred (cdr l)))
         (filter pred (cdr l)))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; do
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro do (binds condn . body)
     ;; Be aware there is a EuLisp do with different sematics!
     (let ((constant (filter (lambda (bind) (= (size bind) 2)) binds))
@@ -140,12 +149,16 @@
                ,@body
                (do-loop
                 ,@(map (lambda (bind) (caddr bind)) stepped))))))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; begin, set!, delay, force, cons-stream
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmacro begin p `(progn . ,p))
   (defmacro set! (x y) `(setq ,x ,y))
   (defmacro delay (exp) `(lambda () ,exp))
   (defmacro force (exp) `(apply ,exp ()))
   (defmacro cons-stream (a b) `(cons ,a (delay ,b)))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

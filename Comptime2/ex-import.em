@@ -1,25 +1,28 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: expanding import dirctives into syntax nodes
-;;; -----------------------------------------------------------------------
+;;; Description: expanding import dirctives into syntax nodes
+;;;-----------------------------------------------------------------------------
 (defmodule ex-import
   (syntax (_macros _i-aux0 _sx-obj0)
    import (i-all sx-obj sx-node p-env cg-interf)
    export (expand-old-imports expand-import import-module
            register-imported-module))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Import expander
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant get-import-expander (make-access-table))
+
   (defun install-import-expander (key fun)
     (let ((x (get-import-expander key)))
       (and x
           (ct-warning () "redefinition of expander ~a"  key))
       ((setter get-import-expander) key fun)))
+
   (defun import-expander (x e)
     (let ((expander
            (cond
@@ -30,11 +33,14 @@
                (if import-expander
                    import-expander
                  (error "no import expander ~a available" x))))
-            (t 
+            (t
              (error "no import expander ~a available" x)))))
       (expander x e)))
+
   (defun expand-import (x) (import-expander x import-expander))
+
   (defun expand-old-imports (x) (map1-list expand-import x))
+
   (defun import-module (name)
     (notify0 "  Import module ~a ..." name)
     (with-ct-handler (format () "cannot import lexical module ~a" name)
@@ -54,6 +60,7 @@
         (if (modulep name) ()
           (register-imported-module module))
         module)))
+
   (defun import-binding (name module)
     (let ((binding
            (or (get-external-binding name module)
@@ -64,6 +71,7 @@
       (binding-imported! binding t)
       (register-imported-module module)
       binding))
+
   (defun register-imported-module (module)
     (let ((actual-module (dynamic *actual-module*))
           (module-name (module-name? module)))
@@ -76,9 +84,10 @@
           (new-node module-name 'used-module-name)
           (module-all-used-module-names! actual-module
                                          (binary+ names new-names))))))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install ONLY IMPORT expander
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-import-expander 'only
     (lambda (x e)
       (with-ct-handler "bad only import syntax" x
@@ -88,9 +97,9 @@
                 (set-lexical-binding (import-binding name module)))
               (cadr x))
           (new-node module-name 'used-module-name)))))
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; Install EXCEPT IMPORT expander
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-import-expander 'except
     (lambda (x e)
       (with-ct-handler "bad except import syntax" x
@@ -104,9 +113,10 @@
                  (set-lexical-binding (import-binding name module)))
                names)
            (new-node module-name 'used-module-name)))))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install RENAME IMPORT expander
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-import-expander 'rename
     (lambda (x e)
       (with-ct-handler "bad rename import syntax" x
@@ -127,8 +137,10 @@
                   (set-lexical-binding new-binding)))
               (cadr x))
           (new-node module-name 'used-module-name)))))
+
   (defun make-prefix (pfx name)
-    (convert (concatenate (symbol-name pfx) (symbol-name name)) <symbol>)) 
+    (convert (concatenate (symbol-name pfx) (symbol-name name)) <symbol>))
+
   (install-import-expander 'prefix
     (lambda (x e)
       (with-ct-handler "bad prefix import syntax" x
@@ -152,4 +164,7 @@
                         (set-lexical-binding new-binding)))
               (caddr x))
           (new-node module-name 'used-module-name)))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

@@ -1,34 +1,42 @@
-;;;                                                                -*- lisp -*-
 (defmodule b2h
   (syntax (macros vmeta b2h-aux)
    import (level1 nuseq))
+
   (deflocal old-style nil)
   (deflocal verbose nil)
   (deflocal debug nil)
   (deflocal bytecodes-found 0)
   (deflocal bytecodes-output 0) ; Doesn't include non-specified bytecodes.
+
   (defmethod binary= ((c1 <character>) (c2 <character>)) (equal c1 c2))
+
   (defun digit (c)
     (and (characterp c)
          (<= #\0 c #\9)))
+
   (defun whitespace (c)
     (and (characterp c)
          (or (= c #\    )
              (= c #\ ))))
+
   (defun letter (c)
     (and (characterp c)
          (or (<= #\a c #\z)
              (<= #\A c #\Z))))
+
   (defun identifier (c)
     (or (letter c)
         (digit c)
         (equal #\- c)))
+
   (deflocal bytecodes (make <table>))
+
   (defclass <bytecode> ()
     ((name accessor: bytecode-name keyword: name:)
      (args accessor: bytecode-args keyword: args:)
      (number accessor: bytecode-number keyword: number:))
     predicate: bytecodep)
+
   (defun arg-size (args)
     (accumulate
      (lambda (a v)
@@ -37,6 +45,7 @@
          (+ a 4)))
      0
      args))
+
   ;; Brute force :-(. ???
   ;; We assume that any instruction that has a name that starts with "branch"
   ;; is a branch.  We also assume that any branch that ends with "-neg" is
@@ -47,6 +56,7 @@
             -1
           1)
       0))
+
   (defun parse-line (line lineno filename)
     (let (name args number)
       (when
@@ -59,7 +69,7 @@
                                     (star (type identifier))))
                     (star (type whitespace))
                     "("
-                    (star (seq 
+                    (star (seq
                            (push args (star (type identifier) 1 ()))
                            (star (alt (type whitespace)))))
                     ")"
@@ -73,6 +83,7 @@
            (format "~a:~d: warning: bytecode ~d redefined" filename lineno n)
          ((setter element) bytecodes n
           (make <bytecode> name: name args: args number: n)))))))
+
   (defun process-file (filename)
     (when verbose (format stderr "Processing ~a\n" filename))
     (with-input-file* filename
@@ -83,6 +94,7 @@
                     (line (read-line)))
               (parse-line line i filename)
               (loop (+ i 1) (read-line)))))))
+
   (defun parse-args (args)
     (if (null args)
         '()
@@ -100,6 +112,7 @@
           (parse-args rest))
          (t                             ;Not known option, so must be filename
           args)))))
+
   (defun main (args)
     (let ((filenames (parse-args args)))
       (do process-file filenames)
@@ -139,5 +152,9 @@
       (print "};")
       (newline)
       (print "#endif /* eof */")))
+
   (main (cdr ((converter <list>) *argv*))) ;get rid of program name.
-) ; end of b2h.em
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

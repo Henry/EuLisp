@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: serial
 ;;;  Authors: Andreas Kind
-;;;  Description: object streams
-;;; -----------------------------------------------------------------------
+;;; Description: object streams
+;;;-----------------------------------------------------------------------------
 (defmodule serial
   (syntax (macros)
    import (level1)
@@ -16,10 +16,11 @@
            eul-serial-make-class eul-serial-make-state
            eul-serial-make-instance eul-serial-allocate-instance
            eul-serial-initialize-instance eul-serial-make-file-stream))
-;;; -----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Define standard EuLisp modules
 ;;; This should reflect full-import in Lib.sgi/liblevel1.i as default
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (deflocal *serial-standard-modules*
     #(level1 telos boot1 boot
       mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key
@@ -27,12 +28,14 @@
       let-cc callback string convert copy integer number fpi collect compare
       character float stream3 vector stream stream1 lock stream2 socket list
       format convert1 table1 table handler random symbol read))
+
   (defun serialize (x . ss)
     (let ((s (if ss (car ss) stdout))
           (os (make <object-stream> mode: 'w)))
       (connect os s)
       (write x os)
       (disconnect os)))
+
   (defun deserialize ss
     (let ((s (if ss (car ss) stdin))
           (os (make <object-stream> mode: 'r)))
@@ -40,6 +43,7 @@
       (let ((res (read os)))
         (disconnect os)
         res)))
+
 ;;;------------------------------------------------------------------------
 ;;; Object stream class
 ;;;------------------------------------------------------------------------
@@ -47,21 +51,26 @@
     ((cache accessor: object-stream-cache default: #(() ()))
      (cache-index accessor: object-stream-cache-index default: 0))
     predicate: object-stream-p)
+
   (defprimclass <bytevector> byte-vector-class (<string>)
     ())
+
   (defmethod generic-prin ((x <bytevector>) (s <stream>))
     (format s "#<bytevector: ~a>" (string-size x)))
+
   (defmethod generic-write ((x <bytevector>) (s <stream>))
     (format s "#<bytevector: ~a>" (string-size x)))
-;;; -----------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Reset
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod reset ((x <object-stream>))
     (let ((sink (stream-sink x)))
       (reset (object-stream-cache x))
       ((setter object-stream-cache-index) x 0)
       (generic-prin TC_RESET sink)
       x))
+
 ;;;------------------------------------------------------------------------
 ;;; Tags and constants
 ;;;------------------------------------------------------------------------
@@ -87,6 +96,7 @@
   (defconstant TC_SYMBOL (vector-ref *serial-constants* 18))
   (defconstant TC_CHAR (vector-ref *serial-constants* 19))
   (defconstant TC_CONS (vector-ref *serial-constants* 20))
+
 ;;;------------------------------------------------------------------------
 ;;; Reading from object streams
 ;;;------------------------------------------------------------------------
@@ -109,21 +119,27 @@
           (generic-prin version-data sink)
           ((setter object-stream-cache) os (make <table>))))
       ()))
+
   (defmethod flush-buffer ((os <object-stream>))
     (if (eq (stream-mode os) 'r) ()
       (flush-buffer (stream-sink os))))
+
   (defmethod generic-read ((os <object-stream>) eos-error-p eos-value)
     (eul-serial-read-object os eos-error-p eos-value))
+
   (defextern eul-serial-read-header (ptr ptr ptr) ptr "eul_serial_read_header")
   (defextern eul-serial-read-object (ptr ptr ptr) ptr "eul_serial_read_object")
+
   (defun eul-serial-error (s str . args)
     (apply error str args))
+
 ;;;------------------------------------------------------------------------
 ;;; Writing to object streams
 ;;;------------------------------------------------------------------------
   (defmethod generic-write ((x <null>) (os <object-stream>))
     (let ((sink (stream-sink os)))
       (generic-prin TC_NULL sink)))
+
   (defmethod generic-write ((x <string>) (os <object-stream>))
     (if (prev-object x os) os
       (let ((sink (stream-sink os))
@@ -133,6 +149,7 @@
         (generic-prin data sink)
         (generic-prin x sink)
         os)))
+
   (defmethod generic-write ((x <symbol>) (os <object-stream>))
     (let* ((sink (stream-sink os))
            (str (symbol-name x))
@@ -141,6 +158,7 @@
       (generic-prin data sink)
       (generic-prin str sink)
       os))
+
   (defmethod generic-write ((x <keyword>) (os <object-stream>))
     (let* ((sink (stream-sink os))
            (str (keyword-name x))
@@ -149,23 +167,27 @@
       (generic-prin data sink)
       (generic-prin str sink)
       os))
+
   (defmethod generic-write ((x <int>) (os <object-stream>))
     (let ((sink (stream-sink os))
           (data (eul-serial-int-data x)))
       (generic-prin TC_INT sink)
       (generic-prin data sink)
       os))
+
   (defmethod generic-write ((x <double>) (os <object-stream>))
     (let ((sink (stream-sink os))
           (data (eul-serial-double-data x)))
       (generic-prin TC_DOUBLE sink)
       (generic-prin data sink)
       os))
+
   (defmethod generic-write ((x <character>) (os <object-stream>))
     (let ((sink (stream-sink os)))
       (generic-prin TC_CHAR sink)
       (generic-prin x sink)
       os))
+
   (defmethod generic-write ((x <cons>) (os <object-stream>))
     (if (prev-object x os) os
       (let ((sink (stream-sink os)))
@@ -173,6 +195,7 @@
         (new-handle x os)
         (generic-write (car x) os)
         (generic-write (cdr x) os))))
+
   (defmethod generic-write ((x <vector>) (os <object-stream>))
     (if (prev-object x os) os
       (let ((sink (stream-sink os))
@@ -183,6 +206,7 @@
         (generic-prin data sink)
         (do (lambda (elem) (generic-write elem os)) x)
         os)))
+
   (defmethod generic-write ((x <simple-class>) (os <object-stream>))
     (if (prev-object x os) os
       (let* ((sink (stream-sink os))
@@ -192,23 +216,25 @@
                                        (requiredp (slot-required-p slot)))
                                    (if requiredp
                                        (list name: name
-;;;                                          ;; Just following the convention ...
-;;;                                          accessor:
-;;;                                          (concatenate (class-name x) '- name)
+                                             ;; Just following the convention ...
+                                             ; accessor:
+                                             ; (concatenate (class-name x) '- name)
                                              keyword:
                                              (slot-keyword slot)
-;;;                                         default:
-;;;                                         (slot-default slot)
+
+                                             ;; default:
+                                             ; (slot-default slot)
                                              requiredp:
                                              (slot-required-p slot))
                                      (list name: name
-;;;                                        ;; Just following the convention ...
-;;;                                        accessor:
-;;;                                        (concatenate (class-name x) '- name)
+                                           ;; Just following the convention ...
+                                           ; accessor:
+                                           ; (concatenate (class-name x) '- name)
                                            keyword:
                                            (slot-keyword slot)
-;;;                                       default:
-;;;                                       (slot-default slot)
+
+                                           ;; default:
+                                           ; (slot-default slot)
                                            ))))
                                (select (lambda (s)
                                          (null (anyp (lambda (super)
@@ -221,6 +247,7 @@
         (generic-write slot-descrs os)
         (new-handle x os)))
     os)
+
   (defmethod generic-write ((x <object>) (os <object-stream>))
     (if (prev-object x os) os
       (let* ((sink (stream-sink os))
@@ -235,6 +262,7 @@
             (class-slots cl))
         (generic-write (reverse inits) os)))
     os)
+
   (defmethod generic-write ((x <simple-thread>) (os <object-stream>))
     (if (prev-object x os) os
       (let* ((sink (stream-sink os))
@@ -252,6 +280,7 @@
         (debug-format stderr "!!!Thread: ~a\n" inits)
         (generic-write inits os)))
     os)
+
   (defmethod generic-write ((x <simple-function>) (os <object-stream>))
     (if (prev-object x os) os
       (let* ((sink (stream-sink os))
@@ -267,6 +296,7 @@
         (generic-prin code sink)
         (new-handle x os)
         (generic-write refs os))))
+
   (defmethod generic-write ((x <bytevector>) (os <object-stream>))
     (let ((sink (stream-sink os))
           (data1 (eul-serial-short-data (string-size x)))
@@ -277,6 +307,7 @@
       (generic-prin data2 sink)
       (debug-format stderr "!!!References: ~a\n" refs)
       (generic-write refs os)))
+
   (defmethod generic-write ((x <state>) (os <object-stream>))
     (let ((sink (stream-sink os)))
       (generic-prin TC_STATE sink)
@@ -284,6 +315,7 @@
       (generic-write (state-value-stack-size x) os)
       (serialize-context-stack (state-context-stack x) os sink 0)
       (generic-write (state-context-stack-size x) os)))
+
   (defun serialize-context-stack (vec os s i)
     (let ((n (vector-size vec)))
       (if (= i 0)
@@ -310,10 +342,12 @@
               (generic-write fun os)
               (serialize-context-stack vec os s (+ i 4)))
           ()))))
+
   (defmethod generic-write ((x <object-stream>) (os <object-stream>))
     (if (eq x os)
         (generic-prin TC_SELF (stream-sink x))
       (call-next-method)))
+
   (defmethod generic-prin ((x <file-stream>) (os <object-stream>))
     (if (prev-object x os) os
       (let* ((sink (stream-sink x))
@@ -333,6 +367,7 @@
         (generic-write file-name os)
         (new-handle x os)
         os)))
+
   (defextern eul-serial-short-data (<int>) ptr "eul_serial_short_data")
   (defextern eul-serial-int-data (<int>) ptr "eul_serial_int_data")
   (defextern eul-serial-double-data (ptr) ptr "eul_serial_double_data")
@@ -341,13 +376,16 @@
   (defextern eul-serial-bytevector-data (ptr) ptr "eul_serial_bytevector_data")
   (defextern eul-bytevector-refs (ptr ptr) ptr "eul_bytevector_refs")
   (defextern eul-serial-relative-pc (ptr ptr) <int> "eul_serial_relative_pc")
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; The impossible things ...
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defmethod generic-write ((x <handler>) (os <object-stream>))
     (error "cannot write ~a to stream ~a" x os))
+
   (defmethod generic-write ((x <abstract-thread>) (os <object-stream>))
     (error "cannot write ~a to stream ~a" x os))
+
 ;;;------------------------------------------------------------------------
 ;;; Object caching
 ;;;------------------------------------------------------------------------
@@ -359,6 +397,7 @@
       (format stderr "*** CACHE PUT (write) ~a for ~a\n" i x)
       ((setter object-stream-cache-index) os (+ i 1))
       ((setter table-ref) tab x i)))
+
   (defun prev-object (x os)
     (debug-format stderr "prev-object: ~a\n" x)
     (let* ((tab (object-stream-cache os))
@@ -371,6 +410,7 @@
             (generic-prin TC_REFERENCE sink)
             (generic-prin data sink)
             os))))
+
 ;;;------------------------------------------------------------------------
 ;;; Creating classes and instances
 ;;;------------------------------------------------------------------------
@@ -389,6 +429,7 @@
                direct-superclasses: (or super (list <object>))
                direct-slots: slot-descs
                direct-keywords: keys)))))
+
   (defun get-class (name)
     (labels
         ((loop (cl)
@@ -396,6 +437,7 @@
                    cl
                  (anyp loop (class-direct-subclasses cl)))))
       (loop <object>)))
+
   (defun eul-serial-make-state (value-stack value-stack-size
                                 context-stack context-stack-size)
     (debug-format stderr "make-state: ~a ~a ~a ~a\n"
@@ -406,6 +448,7 @@
           value-stack-size: value-stack-size
           context-stack: context-stack
           context-stack-size: context-stack-size))
+
   (defun eul-serial-make-file-stream (mode file-name)
     (debug-format stderr "make-file-stream: ~a ~a\n" mode file-name)
     (cond ((equal file-name "stdin")
@@ -416,6 +459,7 @@
            stderr)
           (t
            (make <file-stream> file-name: file-name mode: mode))))
+
   (defun eul-serial-make-instance (cl inits)
     (debug-format stderr "make-instance: ~a ~a\n" cl inits)
     (cond ((eq cl <character>)
@@ -430,6 +474,7 @@
            ())
           (t
            (apply make cl inits))))
+
   (defun eul-serial-allocate-instance (cl)
     (debug-format stderr "allocate-instance: ~a\n" cl)
     (cond ((eq cl <character>)
@@ -442,6 +487,7 @@
            ())
           (t
            (allocate cl ()))))
+
   (defun eul-serial-initialize-instance (x inits)
     (debug-format stderr "initialize-instance: ~a ~a\n" x inits)
     (if (simple-thread-p x)
@@ -462,10 +508,12 @@
           ((setter thread-return-value) x val)
           x)
       (initialize x inits)))
+
 ;;;------------------------------------------------------------------------
 ;;; Reading bytes
 ;;;------------------------------------------------------------------------
   (deflocal *position* 0)
+
   (defun eul-serial-read-bytes (os n eos-error-p eos-value)
     (let ((s (stream-source os))
           (str (make <string> size: n)))
@@ -482,37 +530,44 @@
        (loop 0)
        (setq *position* (+ *position* n))
        str)))
+
 ;;;------------------------------------------------------------------------
 ;;; For debugging only ...
 ;;;------------------------------------------------------------------------
   (deflocal *debug* ())
+
   (defun debug-format (s str . args)
     (if *debug*
         (apply format s str args)
       ()))
-;;; -------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; To be removed (see also generic-connect!)
-;;; -------------------------------------------------------------
-;;  (defgeneric select (f c . cs))
-;;  (defmethod select ((fun <function>) (c <list>) . cs)
-;;    (if (null cs)
-;;      (select-list fun c)
-;;      (call-next-method)))
-;;  (defun select-list (pred l . args)
-;;    (labels
-;;     ((loop (ll res)
-;;          (if (null ll)
-;;              (reverse-list res)
-;;            (let ((x (car ll)))
-;;              (if (apply pred x args)
-;;                  (loop (cdr ll) (cons x res))
-;;                (loop (cdr ll) res))))))
-;;     (loop l ())))
-;;  (defmethod size (c)
-;;    (vector-size c))
+;;;-----------------------------------------------------------------------------
+  ;;  (defgeneric select (f c . cs))
+  ;;  (defmethod select ((fun <function>) (c <list>) . cs)
+  ;;    (if (null cs)
+  ;;      (select-list fun c)
+  ;;      (call-next-method)))
+  ;;  (defun select-list (pred l . args)
+  ;;    (labels
+  ;;     ((loop (ll res)
+  ;;          (if (null ll)
+  ;;              (reverse-list res)
+  ;;            (let ((x (car ll)))
+  ;;              (if (apply pred x args)
+  ;;                  (loop (cdr ll) (cons x res))
+  ;;                (loop (cdr ll) res))))))
+  ;;     (loop l ())))
+  ;;  (defmethod size (c)
+  ;;    (vector-size c))
+
   (defmethod generic-prin ((c <character>) (s <buffered-stream>))
-;    (if (graphp c)
-        (prin-one-char c s)
-;      (generic-write c s))
+    ;    (if (graphp c)
+    (prin-one-char c s)
+    ;      (generic-write c s))
     c)
-)  ;; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

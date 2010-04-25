@@ -87,6 +87,7 @@
     ((setter table-ref) *objects* father-row list-tk-elements)
     (setq *open-rows* (cons (+ 1 father-row) *open-rows*))
     ))
+
 ;;;;;;
 ;;
 ;;  The next function will delete the sub-level when the clicked 

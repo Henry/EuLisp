@@ -13,10 +13,12 @@
 (defmodule puzzle
   (syntax (macros scheme0)
    import (level1))
-;; PUZZLE -- Forest Baskett's Puzzle benchmark, originally written in Pascal.
+
+  ;; PUZZLE -- Forest Baskett's Puzzle benchmark, originally written in Pascal.
   (defconstant *size* 511)
   (defconstant *classmax* 3)
   (defconstant *typemax* 12)
+
   (deflocal *iii* 0)
   (deflocal *kount* 0)
   (deflocal *d* 8)
@@ -25,6 +27,7 @@
   (deflocal *piecemax* (make <vector> size: (+ *typemax* 1) fill-value: 0))
   (deflocal *puzzle* (make <vector> size: (+ *size* 1)))
   (deflocal *p* (make <vector> size: (+ *typemax* 1)))
+
   (labels
    ((loop (i)
           (cond
@@ -32,6 +35,7 @@
             ((setter vector-ref) *p* i (make <vector> size: (+ *size* 1)))
             (loop (+ i 1))))))
    (loop 0))
+
   (defun fit (i j)
     (let ((end (vector-ref *piecemax* i)))
       (do ((k 0 (+ k 1)))
@@ -39,6 +43,7 @@
                (and (vector-ref (vector-ref *p* i) k)
                     (vector-ref *puzzle* (+ j k))))
            (if (> k end) t ())))))
+
   (defun place (i j)
     (let ((end (vector-ref *piecemax* i)))
       (do ((k 0 (+ k 1)))
@@ -52,6 +57,7 @@
       (do ((k j (+ k 1)))
           ((or (> k *size*) (null (vector-ref *puzzle* k)))
            (if (> k *size*) 0 k)))))
+
   (defun puzzle-remove (i j)
     (let ((end (vector-ref *piecemax* i)))
       (do ((k 0 (+ k 1)))
@@ -62,14 +68,15 @@
       ((setter vector-ref) *piececount*
        (vector-ref *class* i)
        (+ (vector-ref *piececount* (vector-ref *class* i)) 1))))
+
   (defun trial (j)
     (let/cc kk
             (let ((k 0))
               (do ((i 0 (+ i 1)))
                   ((> i *typemax*) (setq *kount* (+ *kount* 1)))
                 (cond
-                 ((null 
-                   (zerop 
+                 ((null
+                   (zerop
                     (vector-ref *piececount* (vector-ref *class* i))))
                   (cond
                    ((fit i j)
@@ -80,6 +87,7 @@
                       (setq *kount* (+ *kount* 1))
                       (kk t))
                      (t (puzzle-remove i j)))))))))))
+
   (defun definepiece (iclass ii jj kk)
     (let ((index 0))
       (do ((i 0 (+ i 1)))
@@ -94,6 +102,7 @@
       ((setter vector-ref) *piecemax* *iii* index)
       (cond ((null (= *iii* *typemax*))
              (setq *iii* (+ *iii* 1))))))
+
   (defun start ()
     (do ((m 0 (+ m 1)))
         ((> m *size*))
@@ -111,6 +120,7 @@
           ((> m *size*))
         ((setter vector-ref) (vector-ref *p* i) m ())))
     (setq *iii* 0)
+
     (definepiece 0 3 1 0)
     (definepiece 0 1 0 3)
     (definepiece 0 0 3 1)
@@ -124,10 +134,12 @@
     (definepiece 2 1 0 1)
     (definepiece 2 0 1 1)
     (definepiece 3 1 1 1)
+
     ((setter vector-ref) *piececount* 0 13)
     ((setter vector-ref) *piececount* 1 3)
     ((setter vector-ref) *piececount* 2 1)
     ((setter vector-ref) *piececount* 3 1)
+
     (let ((m (+ (* *d* (+ *d* 1)) 1))
           (n 0))
       (cond ((fit 0 m)
@@ -138,5 +150,9 @@
              (format t "Success in ~a trials.\n" *kount*))
             (t
              (print "Failure.\n")))))
+
   (start)
-)  ;; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

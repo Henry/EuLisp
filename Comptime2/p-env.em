@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: eval (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind
-;;;  Description: access to module bindings
-;;; -----------------------------------------------------------------------
+;;; Description: access to module bindings
+;;;-----------------------------------------------------------------------------
 (defmodule p-env
   (syntax (_macros)
    import (i-all sx-obj)
@@ -17,9 +17,10 @@
            new-module new-syntax-module
            find-module find-syntax-module
            loaded-modules loaded-syntax-modules))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Lexical environment
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-lexical-binding (name . modules)
     (let ((search-modules (or modules
                               (and (dynamic *actual-module*)
@@ -42,6 +43,7 @@
               ()))
         ())
       res))
+
   (defun set-lexical-binding (binding . name)
     (let ((module (dynamic *actual-module*)))
       (if module
@@ -78,9 +80,10 @@
               ((setter (module-interactive-lexical-env? module))
                binding-name proper-binding)))
         (error "no actual module" <ct-error>))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; External environment
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-external-binding (name . modules)
     (let ((search-modules (or modules
                               (and (dynamic *actual-module*)
@@ -97,6 +100,7 @@
                              (setq res proper-binding))
                          ()))))
       res))
+
   (defun set-external-binding (binding . name)
     (let ((module (dynamic *actual-module*)))
       (if module
@@ -119,11 +123,13 @@
             ((setter (module-external-env? module))
              binding-name proper-binding))
         (error "no actual module specified" <ct-error>))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Syntax environment
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defextern dynamic-level1-syntax-binding-info (ptr) ptr
     "eul_dyn_level1_syntax_binding_info")
+
   (defun get-syntax-binding (name . modules)
     (let ((search-modules (or modules
                               (and (dynamic *actual-module*)
@@ -142,6 +148,7 @@
                              (setq res proper-binding))
                          ()))))
       res))
+
   (defun set-syntax-binding (binding . name)
     (let ((module (dynamic *actual-module*)))
       (if module
@@ -176,9 +183,10 @@
             ((setter (module-syntax-env? module))
              binding-name proper-binding))
         (error "no actual module specified" <ct-error>))))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Expand hard-code level1 bindings
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun expand-hard-coded-level1-binding (binding name env)
     ;; Hard-coded level1 bindings may still be not expanded
     (if (consp binding)
@@ -198,59 +206,75 @@
           proper-binding)
       ;; binding not hard-coded or nil
       binding))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Expand interpreter defined syntax bindings (i.e. defmacro in interpreter)
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
   (defun expand-interpreter-defined-syntax-binding (binding module)
     (if (and *interpreter* (symbolp binding))
         ((module-lexical-env? module) binding)
       binding))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Access to modules
-;;; --------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defun get-module (name) (*get-loaded-module* name))
+
   (defun get-syntax-module (name) (*get-loaded-syntax-module* name))
+
   (defun loaded-modules ()
     (access-table-values *get-loaded-module*))
+
   (defun loaded-syntax-modules ()
     (access-table-values *get-loaded-syntax-module*))
-;  (defun loaded-non-syntax-modules ()
-;    (binary- (loaded-modules) (loaded-syntax-modules)))
-;  (defun loaded-module-names ()
-;    (do1-list module-name? (access-table-values *get-loaded-module*)))
-;  (defun loaded-syntax-module-names ()
-;    (do1-list module-name? (access-table-values *get-loaded-syntax-module*)))
-;  (defun loaded-non-syntax-module-names ()
-;    (binary- (loaded-module-names) (loaded-syntax-module-names)))
-;  (defun all-used-module-names-of-loaded-non-syntax-modules ()
-;    (let ((modules (loaded-non-syntax-modules))
-;         (res ()))
-;      (do1-list
-;       (lambda (module)
-;        (setq res (binary+ res (module-all-used-module-names? module))))
-;       modules)
-;      res))
+
+  ;  (defun loaded-non-syntax-modules ()
+  ;    (binary- (loaded-modules) (loaded-syntax-modules)))
+
+  ;  (defun loaded-module-names ()
+  ;    (do1-list module-name? (access-table-values *get-loaded-module*)))
+
+  ;  (defun loaded-syntax-module-names ()
+  ;    (do1-list module-name? (access-table-values *get-loaded-syntax-module*)))
+
+  ;  (defun loaded-non-syntax-module-names ()
+  ;    (binary- (loaded-module-names) (loaded-syntax-module-names)))
+
+  ;  (defun all-used-module-names-of-loaded-non-syntax-modules ()
+  ;    (let ((modules (loaded-non-syntax-modules))
+  ;         (res ()))
+  ;      (do1-list
+  ;       (lambda (module)
+  ;        (setq res (binary+ res (module-all-used-module-names? module))))
+  ;       modules)
+  ;      res))
+
   (defun new-module (name module)
     (if ()  ; (get-module name)
         (ct-warning () "recompilation of module ~a" name)
       ((setter *get-loaded-module*) name module)))
+
   (defun new-syntax-module (name module)
     (if (get-syntax-module name)
         (ct-warning () "reloading of syntax module ~a" name)
       ((setter *get-loaded-syntax-module*) name module)))
+
   (defun find-module (name)
     ;(notify0 "Loaded modules: ~a" (loaded-module-names))
     (or (get-module name) (compile-module name)))
+
   (defun find-syntax-module (name)
     ;(notify0 "Loaded modules: ~a" (loaded-module-names))
     (or (get-module name)
         (get-syntax-module name)
         (load-syntax-module name)))
-;;; --------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Access to local static bindings
-;;; Local variables are always linked to bindings to be conform with 
-;;; global lexical binding search.
-;;; --------------------------------------------------------------------
+;;  Local variables are always linked to bindings to be conform with
+;;  global lexical binding search.
+;;;-----------------------------------------------------------------------------
   (defun get-local-static-binding (name env)
     (let ((entry (assoc-list-ref env name)))
       (if entry
@@ -261,10 +285,14 @@
               ())
             binding)
         ())))
+
   (defun add-local-static-bindings (bindings env)
     (let ((new-entries
            (map1-list (lambda (binding)
                         (cons (binding-local-name? binding) binding))
                       bindings)))
       (append new-entries env)))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

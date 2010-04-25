@@ -1,11 +1,11 @@
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  By J Garcia & University of Bath. All rights reserved.                 ;;;
 ;;; ----------------------------------------------------------------------- ;;;
-;;;                     EuLisp System 'youtoo/tk'
+;;; ---                         EuLisp System 'youtoo/tk'
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  Library: 
 ;;;  Authors: J Garcia
-;;;  Description: YouToo/Tk module to test buttons widgets.
+;;; Description: YouToo/Tk module to test buttons widgets.
 ;;; ----------------------------------------------------------------------- ;;;
 (defmodule tk_button
   (syntax (macros)

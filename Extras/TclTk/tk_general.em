@@ -1,12 +1,11 @@
-;;; ----------------------------------------------------------------------- ;;;
 ;;;  By J Garcia & University of Bath. All rights reserved.                 ;;;
-;;; ----------------------------------------------------------------------- ;;;
-;;;                     EuLisp System 'youtoo/tk'
-;;; ----------------------------------------------------------------------- ;;;
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo/tk'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: tcl-tk
 ;;;  Authors: J Garcia
-;;;  Description: YouToo/Tk module that provides general functions.
-;;; ----------------------------------------------------------------------- ;;;
+;;; Description: YouToo/Tk module that provides general functions.
+;;;-----------------------------------------------------------------------------
 (defmodule tk_general
   (syntax (macros)
    import (level1)
@@ -19,23 +18,23 @@
            tk-item-canvas-id as-c-options as-c-accessors tk-object-p
            tk-button-p tk-canvas-p tk-entry-p tk-listbox-p tk-scrollbar-p
            tk-text-p tk-toplevel-p tk-item-canvas-p tk_allocate_registers))
-;;;--------------------------------------------------------------------------;;
-;;;                                                                          ;;
-;;;                       Foreign Functions Decalartions                     ;;
-;;;                                                                          ;;
-;;;--------------------------------------------------------------------------;;
+
+;;;-----------------------------------------------------------------------------
+;;; Foreign Functions Declarations
+;;;-----------------------------------------------------------------------------
   (defextern eul_initialize_tk () ptr)
   (defextern tk_allocate_registers (<string> ptr) ptr)
   (defextern Tk_MainLoop () boolean)
   (defextern Tcl_DoOneEvent (<int>) <int> "Tcl_DoOneEventAux")
+
   ;; These defexterns should be first-class
   (defun tk-main-loop () (Tk_MainLoop))
+
   (defun tcl-do-one-event (x) (Tcl_DoOneEvent x))
-;;;--------------------------------------------------------------------------;;
-;;;                                                                          ;;
-;;;                           Class Decalartions                             ;;
-;;;                                                                          ;;
-;;;--------------------------------------------------------------------------;;
+
+;;;-----------------------------------------------------------------------------
+;;; Class Declarations
+;;;-----------------------------------------------------------------------------
   (defclass <tk-object> ()
     ((name accessor: tk-name
            keyword: name:
@@ -44,6 +43,7 @@
              keyword: handler:))
     abstractp: t
     predicate: tk-object-p)
+
   (defclass <tk-button> (<tk-object>)() predicate: tk-button-p)
   (defclass <tk-label> (<tk-object>)())
   (defclass <tk-frame> (<tk-object>)())
@@ -62,22 +62,22 @@
   (defclass <tk-item-canvas> (<tk-object>)
     ((id accessor: tk-item-canvas-id))
     predicate: tk-item-canvas-p)
-;;;--------------------------------------------------------------------------;;
-;;;                                                                          ;;
-;;;                         General Functions                                ;;
-;;;                                                                          ;;
-;;;--------------------------------------------------------------------------;;
-;;; The next function receives a list of arguments and the clientdata argument.
-;;; If self accessor appear in the list it will be change by the clientdata
+
+;;;-----------------------------------------------------------------------------
+;;; General Functions
+  ; The next function receives a list of arguments and the clientdata argument.
+  ; If self accessor appear in the list it will be change by the clientdata
+;;;-----------------------------------------------------------------------------
   (defun change-self (list clientdata)
     (let ((list-result ()))
     (do (lambda (el)
-          (setq list-result 
+          (setq list-result
                 (if (eq el self:)
                     (cons clientdata list-result)
                   (cons el list-result))))
         (reverse list))
     list-result))
+
   (defun as-c-options (l . clientdata)
     (let (x auxlist)
       (labels
@@ -143,7 +143,7 @@
                                        (cons
                                         (string-append "-" (keyword-name key))
                                         res))))
-                         
+
                           (t
                            (loop (cddr ll)
                                  (+ i 2)
@@ -153,21 +153,24 @@
                                          res)))))))))))
        (setq x (loop l 0 ()))
        x)))
-;;; The next function takes a list of accessors. The result will be a list
-;;; of two lists. The first one of these two lists will contain the  strings 
-;;; representing the tcl-tk accessors. That is the same names without the  
-;;; colons at the end. Instead of that a % is added at the beginning.
-;;; One special accessor could be args:. This accessor has to be the last one
-;;; and has to be followed by a list of arguments. This list is going to be
-;;; the second list in the result.
-;;; 
-;;;  The next entrance:
-;;;
-;;;      ( x: y: W: args: (list 1 2 3))     
-;;;
-;;;  Will produce the next result:
-;;;
-;;;      (("%x" "%y" "%W)(1 2 3)
+
+;;;-----------------------------------------------------------------------------
+  ; The next function takes a list of accessors. The result will be a list
+  ; of two lists. The first one of these two lists will contain the  strings
+  ; representing the tcl-tk accessors. That is the same names without the
+  ; colons at the end. Instead of that a % is added at the beginning.
+  ; One special accessor could be args:. This accessor has to be the last one
+  ; and has to be followed by a list of arguments. This list is going to be
+  ; the second list in the result.
+;;;-----------------------------------------------------------------------------
+  ;  The next entrance:
+  ;
+  ;      ( x: y: W: args: (list 1 2 3))
+  ;
+  ;  Will produce the next result:
+  ;
+  ;      (("%x" "%y" "%W)(1 2 3)
+
   (defun as-c-accessors (l)
     (let (x)
       (labels
@@ -185,5 +188,7 @@
                      (flush)))))
        (setq x (loop l ())))
       x))
-)  ;; end of module
- 
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

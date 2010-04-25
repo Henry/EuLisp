@@ -27,7 +27,7 @@ core
 # Ignore intermediate build files from optional packages
 Test/*.[chi]
 Test/*[1-4]
-Examples/*/*.[chi]
+Examples/*/*.[hi]
 Tools/*.[chi]
 
 # Ignore intermeditate files from building the EuLisp definition document

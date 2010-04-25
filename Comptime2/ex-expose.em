@@ -1,24 +1,27 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;; -----------------------------------------------------------------------
-;;;                     EuLisp System 'youtoo'
-;;; -----------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;;  Description: expanding expose dirctives into syntax nodes
-;;; -----------------------------------------------------------------------
+;;; Description: expanding expose dirctives into syntax nodes
+;;;-----------------------------------------------------------------------------
 (defmodule ex-expose
   (syntax (_macros _i-aux0)
    import (i-all p-env sx-obj sx-node cg-interf ex-import)
    export (expand-expose))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Expose expander
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (defconstant get-expose-expander (make-access-table))
+
   (defun install-expose-expander (key fun)
     (let ((x (get-expose-expander key)))
       (and x
            (ct-warning () "redefinition of expander ~a"  key))
       ((setter get-expose-expander) key fun)))
+
   (defun expose-expander (x e)
     (let ((expander
            (cond
@@ -29,10 +32,12 @@
                (if expose-expander
                    expose-expander
                  (error "no expose expander ~a available" x))))
-            (t 
+            (t
              (error "no expose expander ~a available" x)))))
       (expander x e)))
+
   (defun expand-expose (x) (expose-expander x expose-expander))
+
   (defun expose-module (name)
     (notify0 "  Expose module ~a ..." name)
     (let* ((module (find-imported-module name))
@@ -45,6 +50,7 @@
          (set-external-binding value))
        env)
       (register-imported-module module)))
+
   (defun expose-binding (name module)
     (let ((binding
            (or (if (eq module (dynamic *actual-module*))
@@ -56,9 +62,10 @@
                 name module))))
       (register-imported-module module)
       binding))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install ONLY EXPOSE expanders
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expose-expander 'only
     (lambda (x e)
       (with-ct-handler "bad expose only syntax" x
@@ -66,9 +73,10 @@
           (do1-list (lambda (name)
                       (set-external-binding (expose-binding name module)))
                     (cadr x))))))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install EXCEPT EXPOSE expanders
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expose-expander 'except
     (lambda (x e)
       (with-ct-handler "bad expose except syntax" x
@@ -82,9 +90,10 @@
           (do1-list (lambda (name)
                       (set-external-binding (expose-binding name module)))
                     names)))))
-;;; ---------------------------------------------------------------------
+
+;;;-----------------------------------------------------------------------------
 ;;; Install RENAME EXPOSE expanders
-;;; ---------------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
   (install-expose-expander 'rename
     (lambda (x e)
       (with-ct-handler "bad expose rename syntax" x
@@ -105,8 +114,10 @@
                         (binding-local-name! new-binding (cadr name-pair))
                         (set-external-binding new-binding)))
               (cadr x))))))
+
   (defun make-prefix (pfx name)
-    (convert (concatenate (symbol-name pfx) (symbol-name name)) <symbol>)) 
+    (convert (concatenate (symbol-name pfx) (symbol-name name)) <symbol>))
+
   (install-expose-expander 'prefix
     (lambda (x e)
       (with-ct-handler "bad expose prefix syntax" x
@@ -130,4 +141,7 @@
                                                           internal-name))
                         (set-external-binding new-binding)))
                     (caddr x))))))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------

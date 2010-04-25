@@ -1,11 +1,11 @@
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  By Julio Garcia Moreno & University of Bath.                           ;;;
 ;;; ----------------------------------------------------------------------- ;;;
-;;;                     EuLisp System 'youtoo/tk'
+;;; ---                         EuLisp System 'youtoo/tk'
 ;;; ----------------------------------------------------------------------- ;;;
 ;;;  Library: 
 ;;;  Authors: Julio Garcia Moreno
-;;;  Description: YouToo/Tk module that provides the basic operations for the 
+;;; Description: YouToo/Tk module that provides the basic operations for the 
 ;;;               widget classes.
 ;;; ----------------------------------------------------------------------- ;;;
 (defmodule tk_class
