@@ -55,7 +55,7 @@
                    (eul_sprintf_string buf pos n j "%s" str)
                    ((setter control-block-buffer-pos) scb
                     (int-binary+ pos n)))
-                 (if (eq c #\\x000) l
+                 (if (eq c #\\x0000) l
                    (cond ((or (eq c #\a) (eq c #\d))
                           (if (null l)
                               (error "bad format string ~s" str)

@@ -100,7 +100,25 @@
     handling for strings with all the special characters when the single escape
     character should only be required to escape itself and the multiple-escape
     character.
+*** TODO Add =sub-sequence= generic function and methods
+    =sub-sequence= for string can a wrapper around substring already available
+    in Youtoo.
+*** DONE Sort out the syntax of character sequences
+    CLOSED: [2010-04-26 Mon 19:46]
+    + There is a problem with the need for double escaping: #\\x000, #\\\ etc.
+    + Hexadecimal sequences are hard-coded to 3 digits, if not where is the end?
+    + How should the character '^' be written given that it is used to define
+      control sequences e.g. #\^c ?  Perhaps #\\^ ?
 
+***** Proposed solution
+      To remove support for control sequences which are unusual,
+      system-dependent and can be created using hexadecimal characters.  Also
+      fix the number of hexadecimal digits for a character to 4 which is
+      sufficient to support unicode but also avoids parsing problems.
+*** TODO Correct the echoing of complex characters
+      [user]: (print #\\\)
+      \
+      - #\\
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
@@ -182,3 +200,4 @@
 *** TODO Re-reference definitions in the "Level-1" library
     so that they do not clash with those in the "Level-0" library.
 *** TODO Remove the "syntax-category" entries from the index
+*** TODO Add =sub-sequence= generic function and methods

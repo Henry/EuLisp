@@ -86,12 +86,10 @@
 ;;;-----------------------------------------------------------------------------
   (defun make-attrib (attrib)
     ;;(format t "make-attrib: ~a~%" attrib)
-    ;; #{double-slash}x05e for youtoo reader and #\\x05e for Feel reader
     (make-symbol (let ((str (make <string> size: 0)))
                    (accumulate
                      (lambda (a v)
-                       ;(if (eql v #\\x05e )
-                       (if (eql v #\\x05e )
+                       (if (eql v #\\x005e )
                            a
                          (concatenate a (convert v <string>))))
                      str

@@ -55,6 +55,7 @@
   (defgeneric member (v c . f))
   (defgeneric find (v c . f))
   (defgeneric select (f c . cs))
+
   (defmethod find (x (c <collection>) . preds)
     (apply member x c preds))
 

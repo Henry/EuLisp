@@ -25,6 +25,7 @@
 #define STRING_STOP '"'
 #define STRING_ESCAPE '\\'
 #define HEX_INSERTION 'x'
+#define N_HEX_DIGITS 4
 #define EXTENSION_MARK '#'
 #define LIST_START '('
 #define LIST_STOP ')'
@@ -41,7 +42,6 @@
 #define PLUS_SIGN '+'
 #define COMMENT_START ';'
 #define AT_SIGN '@'
-#define CONTROL_MARK '^'
 
 // Integer formats
 #define BINARY_DIGIT_P(c) check_base_digit_p(c, 2)
@@ -460,7 +460,7 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                 {
                     if (*c++ == HEX_INSERTION)
                     {
-                        c = c + 3;
+                        c = c + N_HEX_DIGITS;
                     }
                 }
 
@@ -511,13 +511,13 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                             *p++ = '\b';
                             break;
                         case 'd':
-                            *p++ = '\x7F';
+                            *p++ = '\x7f';
                             break;
                         case 'f':
                             *p++ = '\f';
                             break;
                         case 'l':
-                            *p++ = '\x0C';
+                            *p++ = '\x0c';
                             break;
                         case 'n':
                             *p++ = '\n';
@@ -533,6 +533,8 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                             break;
                         case 'x':
                             chartok = 0;
+                            for (int i=0; i<N_HEX_DIGITS; i++)
+                            {
                             tokstart++;
                             if (isxdigit(*tokstart))
                             {
@@ -545,37 +547,14 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                                 syntax_error(buffer, tokstart,
                                 "invalid hex insertion digit");
                             }
-                            tokstart++;
-                            if (isxdigit(*tokstart))
-                            {
-                                chartok =
-                                (chartok << 4) |
-                                (HEX_CHAR_TO_DIGIT(tokstart));
-                            }
-                            else
-                            {
-                                syntax_error(buffer, tokstart,
-                                "invalid hex insertion digit");
-                            }
-                            tokstart++;
-                            if (isxdigit(*tokstart))
-                            {
-                                chartok =
-                                (chartok << 4) |
-                                (HEX_CHAR_TO_DIGIT(tokstart));
-                            }
-                            else
-                            {
-                                syntax_error(buffer, tokstart,
-                                "invalid hex insertion digit");
                             }
                             *p++ = chartok;
                             break;
-                        case '"':
-                            *p++ = '"';
+                        case STRING_START:
+                            *p++ = STRING_START;
                             break;
-                        case '\\':
-                            *p++ = '\\';
+                        case STRING_ESCAPE:
+                            *p++ = STRING_ESCAPE;
                             break;
                         default:
                             *p++ = *tokstart;
@@ -632,13 +611,13 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                             chartok = '\b';
                             break;
                         case 'd':
-                            chartok = '\x7F';
+                            chartok = '\x7f';
                             break;
                         case 'f':
                             chartok = '\f';
                             break;
                         case 'l':
-                            chartok = '\x0C';
+                            chartok = '\x0c';
                             break;
                         case 'n':
                             chartok = '\n';
@@ -654,7 +633,7 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                             break;
                         case 'x':
                             chartok = 0;
-                            if (EOB_LOOKAHEAD(3))
+                            if (EOB_LOOKAHEAD(N_HEX_DIGITS))
                             {
                                 i = maxc - c;
                                 strcpy(buffer - (maxc - c), c);
@@ -663,63 +642,36 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
                                 c = c - i;
                                 SHOW_STATE("after first hex char panic");
                             }
-                            if (isxdigit(*c))
+                            for (int i=0; i<N_HEX_DIGITS; i++)
                             {
-                                chartok =
-                                (chartok << 4) | (HEX_CHAR_TO_DIGIT(c));
+                                if (isxdigit(*c))
+                                {
+                                    chartok =
+                                    (chartok << 4) | (HEX_CHAR_TO_DIGIT(c));
+                                }
+                                else
+                                {
+                                    syntax_error
+                                    (
+                                        buffer,
+                                        tokstart,
+                                        "invalid hex insertion digit"
+                                    );
+                                }
+                                c++;
                             }
-                            else
-                            {
-                                syntax_error(buffer, tokstart,
-                                "invalid hex insertion digit");
-                            }
-                            c++;
-                            if (isxdigit(*c))
-                            {
-                                chartok =
-                                (chartok << 4) | (HEX_CHAR_TO_DIGIT(c));
-                            }
-                            else
-                            {
-                                syntax_error(buffer, tokstart,
-                                "invalid hex insertion digit");
-                            }
-                            c++;
-                            if (isxdigit(*c))
-                            {
-                                chartok =
-                                (chartok << 4) | (HEX_CHAR_TO_DIGIT(c));
-                            }
-                            else
-                            {
-                                syntax_error(buffer, tokstart,
-                                "invalid hex insertion digit");
-                            }
-                            c++;
                             break;
-                        case '"':
-                            chartok = '"';
+                        case STRING_START:
+                            chartok = STRING_START;
                             break;
-                        case '\\':
-                            chartok = '\\';
+                        case STRING_ESCAPE:
+                            chartok = STRING_ESCAPE;
                             break;
                         default:
                             chartok = ' ';
                             syntax_error(buffer, c, "invalid character name");
                     }
                     RETURN_CHARACTER(chartok);
-                }
-                else if (*c == CONTROL_MARK)
-                {
-                    c++;
-                    CHK_OVERFLOW("control character",{});
-                    if (isalpha(*c))
-                    {
-                        chartok = (toupper(*c) - 'A') | (char)0x80;
-                        c++;
-                        RETURN_CHARACTER(chartok);
-                    }
-                    RETURN_CHARACTER(CONTROL_MARK);
                 }
                 else
                 {

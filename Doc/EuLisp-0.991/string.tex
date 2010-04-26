@@ -20,12 +20,13 @@ to fulfill this need.  The \sc{string-escape}
 \index{general}{string!string-escape glyph} glyph is defined as {\em reverse
     solidus\/} (\verb+\+).  String escaping can also be used to include certain
 other characters that would otherwise be difficult to denote.  The set of named
-special characters (see \S~\ref{character-set} and \S~\ref{character}) have a
-particular syntax to allow their inclusion in strings.  To allow arbitrary
-characters to appear in strings, the hex-insertion digram is followed by an
-integer denoting the position of the character in the current character set.
-Some examples of string literals appear in table~\ref{example:string-literal}.
-The syntax for the external representation of strings is defined below.
+special characters (see \S~\ref{character-set} and \S~\ref{character}) are
+included in strings using the character digrams defined in
+table~\ref{character-digrams}.  To allow arbitrary characters to appear in
+strings, the hex-insertion digram is followed by an integer denoting the
+position of the character in the current character set as for characters (see
+\S~\ref{character-set}).  The syntax for the external representation of strings
+is defined in syntax table~\ref{string-syntax} below:
 %
 \Syntax
 \label{string-syntax}
@@ -53,26 +54,7 @@ The syntax for the external representation of strings is defined below.
 \end{syntax}}%
 \showSyntaxBox{string}
 
-and the digrams are described in
-%
-\begin{center}
-\begin{tabular}{|ll|}\hline
-    Operation & Digram \\
-    \hline
-    alert & \verb+\a+ \\
-    backspace & \verb+\b+ \\
-    delete & \verb+\d+ \\
-    formfeed & \verb+\f+ \\
-    linefeed & \verb+\l+ \\
-    newline & \verb+\n+ \\
-    return & \verb+\r+ \\
-    tab & \verb+\t+ \\
-    vertical tab & \verb+\v+ \\
-    string delimiter & \verb+\"+ \\
-    string escape & \verb+\\+ \\
-    \hline
-\end{tabular}
-\end{center}
+Some examples of string literals appear in table~\ref{example:string-literal}.
 %
 \begin{example}
 \label{example:string-literal}

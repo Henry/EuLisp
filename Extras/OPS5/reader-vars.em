@@ -192,11 +192,9 @@
 
   (defun is-attrib (x)
     ;;(format ops-out "x: ~a~a~%" x (class-of x))
-    ;; #{double-slash}x05e for youtoo reader and #\\x05e for Feel reader
     (let ((name (symbol-name x)))
       (eql (element (symbol-name x) 0)
-           ;#\\x05e )))
-           #\\x05e )))
+           #\\x005e )))
 
   (defun is-ops5-pred (x)
     (member x '(< <= > >= <> = <=>) equal))

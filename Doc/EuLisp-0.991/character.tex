@@ -18,11 +18,43 @@ in syntax table~\ref{character-syntax}.  For most characters, their name is the
 same as the glyph associated with the character, for example: the character
 ``a'' has the name ``a'' and has the external representation \verb+#\a+.
 Certain characters in the group named {\em special\/} (see
-table~\ref{character-set} and also syntax table~\ref{character-syntax}) have
-symbolic names, for example: the newline character has the name {\em newline\/}
-and has the external representation \verb+#\newline+.  These special cases are
-the characters in the production {\em special character token} in syntax
-table~\ref{character-syntax}.
+table~\ref{character-set} and also syntax table~\ref{character-syntax}) form the
+syntax category \scref{special-character-token} and are referred to using the
+digrams defined in table~\ref{character-digrams}.
+%
+\begin{table}[h]
+\label{character-digrams}
+\caption{Character digrams}%
+\begin{center}
+\begin{tabular}{|ll|}\hline
+    Operation & Digram \\
+    \hline
+    alert & \verb+\a+ \\
+    backspace & \verb+\b+ \\
+    delete & \verb+\d+ \\
+    formfeed & \verb+\f+ \\
+    linefeed & \verb+\l+ \\
+    newline & \verb+\n+ \\
+    return & \verb+\r+ \\
+    tab & \verb+\t+ \\
+    vertical tab & \verb+\v+ \\
+    hex-insertion & \verb+\x+ \\
+    string delimiter & \verb+\"+ \\
+    string escape & \verb+\\+ \\
+    \hline
+\end{tabular}
+\end{center}
+\end{table}
+%
+Any character which does not have an external representation dealt with by cases
+described so far is represented by the digram \verb+#\x+ (see
+table~\ref{character-digrams}) followed four hexadecimal digits.  The value of
+the hexadecimal number represents the position of the character in the current
+character set.  Examples of such character literals are \verb+#\x0000+ and
+\verb+#\xabcd+, which denote, respectively, the characters at position 0 and at
+position 43981 in the character set current at the time of reading or writing.
+The syntax for the external representation of characters is defined in syntax
+table~\ref{character-syntax} below:
 %
 \Syntax
 \label{character-syntax}
@@ -31,48 +63,31 @@ table~\ref{character-syntax}.
     \scdef{character}: \\
     \>  \scref{literal-character-token} \\
     \>  \scref{special-character-token} \\
-    \>  \scref{control-character-token} \\
     \>  \scref{numeric-character-token} \\
     \scdef{literal-character-token}: \\
-    \>  \#\textbackslash{} \scref{letter} \\
-    \>  \#\textbackslash{} \scref{decimal-digit} \\
-    \>  \#\textbackslash{} \scref{other-character} \\
-    \>  \#\textbackslash{} \scref{special-character} \\
-    \scdef{control-character-token}: \\
-    \>  \#\textbackslash{}\textasciicircum \scref{letter} \\
+    \>  \#\textbackslash{}\scref{letter} \\
+    \>  \#\textbackslash{}\scref{decimal-digit} \\
+    \>  \#\textbackslash{}\scref{other-character} \\
+    \>  \#\textbackslash{}\scref{special-character} \\
     \scdef{special-character-token}: \\
-    \>  \#\textbackslash{}alert \\
-    \>  \#\textbackslash{}backspace \\
-    \>  \#\textbackslash{}delete \\
-    \>  \#\textbackslash{}formfeed \\
-    \>  \#\textbackslash{}linefeed \\
-    \>  \#\textbackslash{}newline \\
-    \>  \#\textbackslash{}return \\
-    \>  \#\textbackslash{}tab \\
-    \>  \#\textbackslash{}space \\
-    \>  \#\textbackslash{}vertical-tab \\
+    \>  \#\textbackslash{}\textbackslash{}a \\
+    \>  \#\textbackslash{}\textbackslash{}b \\
+    \>  \#\textbackslash{}\textbackslash{}d \\
+    \>  \#\textbackslash{}\textbackslash{}f \\
+    \>  \#\textbackslash{}\textbackslash{}l \\
+    \>  \#\textbackslash{}\textbackslash{}n \\
+    \>  \#\textbackslash{}\textbackslash{}r \\
+    \>  \#\textbackslash{}\textbackslash{}t \\
+    \>  \#\textbackslash{}\textbackslash{}v \\
+    \>  \#\textbackslash{}\textbackslash{}" \\
+    \>  \#\textbackslash{}\textbackslash{}\textbackslash{} \\
     \scdef{numeric-character-token}: \\
-    \>  \#\textbackslash{}x \scref{hexadecimal-digit} \\
-    \>  \#\textbackslash{}x \scref{hexadecimal-digit}
-    \scref{hexadecimal-digit} \\
-    \>  \#\textbackslash{}x
-    \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
-    \>\>  \scref{hexadecimal-digit} \\
-    \>  \#\textbackslash{}x
-    \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
+    \>  \#\textbackslash{}\textbackslash{}x
+        \scref{hexadecimal-digit} \scref{hexadecimal-digit} \\
     \>\>  \scref{hexadecimal-digit} \scref{hexadecimal-digit}
 \end{syntax}}%
 \showSyntaxBox{character}
 
-Any character which does not have a name, and thereby an external representation
-dealt with by cases described so far is represented by \verb+#\x+ followed by up
-to four hexadecimal digits.  The value of the hexadecimal number represents the
-position of the character in the current character set.  Examples of such
-character literals are \verb+#\x0+ and \verb+#\xabcd+, which denote,
-respectively, the characters at position 0 and at position 43981 in the
-character set current at the time of reading or writing.  The syntax for the
-external representation of characters is defined in
-syntax table~\ref{character-syntax}.
 %
 \begin{note}
     This text refers to the ``current character set'' but defines no means of
