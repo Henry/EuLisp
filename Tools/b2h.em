@@ -1,6 +1,6 @@
 (defmodule b2h
   (syntax (macros vmeta b2h-aux)
-   import (level1 nuseq))
+   import (level1 sequence))
 
   (deflocal old-style nil)
   (deflocal verbose nil)

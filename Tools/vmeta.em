@@ -145,7 +145,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defmodule vmeta
   (syntax (macros vmeta-aux)
-   import (level1 nuseq))
+   import (level1 sequence))
 
 ;;; Implementation
   ;; I dropped back to a fully parenthesized form so I could work with
@@ -295,13 +295,14 @@
                                        (val ,(helper (caddr x) in-seq-p))
                                        (last index))
                                   (when val
-                                    (setq ,(cadr x) (subseq sequence start last)))
+                                    (setq ,(cadr x)
+                                          (sub-sequence sequence start last)))
                                   val))
                          (push `(let* ((start index)
                                        (val ,(helper (caddr x) in-seq-p))
                                        (last index))
                                   (when val
-                                    (push (subseq sequence start last)
+                                    (push (sub-sequence sequence start last)
                                           ,(cadr x)))
                                   val))
                          (end '(= index end))

@@ -1,11 +1,11 @@
-(defmodule nuseq
+(defmodule sequence
   (syntax (macros)
    import (level1)
-   export (subseq))
+   export (sub-sequence))
 
-  (defgeneric subseq (seq start last))
+  (defgeneric sub-sequence ((seq <sequence>) (start <integer>) (last <integer>)))
 
-  (defmethod subseq ((string <string>) (start <integer>) (last <integer>))
+  (defmethod sub-sequence ((string <string>) (start <integer>) (last <integer>))
     (substring string start last))
 
 ;;;-----------------------------------------------------------------------------
