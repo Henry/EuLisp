@@ -531,6 +531,16 @@ does not have natural order, the result is equal to the argument.
     \verb+(reverse #(a b c))+ & \Ra & \verb+#(c b a)+
 \end{tabular}
 
+\generic{reverse!}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] A collection.
+\end{genericargs}
+%
+\result%
+Destructively reverses the order of the elements in {\em collection\/} (see
+\genericref{reverse}) and returns it.
+
 \generic{second}
 %
 \begin{genericargs}
@@ -587,11 +597,36 @@ the method for the class of {\em collection}.
 \end{genericargs}
 %
 \result%
- The result of sort is a new {\em sequence}. comprising the elements of
- {\em sequence\/} ordered according to {\em comparator}.
+The result of sort is a new {\em sequence} comprising the elements of {\em
+    sequence\/} ordered according to {\em comparator}.
 %
 \remarks%
 Methods on this function are only defined for \classref{list} and \classref{vector}.
+
+\generic{sort!}
+%
+\begin{genericargs}
+    \item[sequence, \classref{sequence}] A sequence.
+    \item[comparator, \classref{function}] A function.
+\end{genericargs}
+%
+\result%
+Destructively sorts the elements of {\em sequence} (see \genericref{sort}) and
+returns it.
+%
+\remarks%
+Methods on this function are only defined for \classref{list} and \classref{vector}.
+
+\generic{reverse!}
+%
+\begin{genericargs}
+    \item[collection, \classref{collection}] A collection.
+\end{genericargs}
+%
+\result%
+Destructively reverses the order of the elements in {\em collection\/} (see
+\genericref{reverse}) and returns it.
+
 
 \generic{third}
 %

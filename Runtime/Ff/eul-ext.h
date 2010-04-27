@@ -1,19 +1,18 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: boot, telos, level1, eval, youtoo
- **  Authos: Andreas Kind
- **  Description: built-in foreign functions
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: boot, telos, level1, eval, youtoo
+///  Authos: Andreas Kind
+///  Description: built-in foreign functions
+///-----------------------------------------------------------------------------
 #ifndef EUL_EXT_H
 #define EUL_EXT_H
+///-----------------------------------------------------------------------------
 
 extern LispRef eul_init_string(LispRef str, int n, char c);
 extern LispRef c_strn_as_eul_str(char *str, int n);
-/* extern LispRef c_string_as_eul_string(char * str); */
+// extern LispRef c_string_as_eul_string(char * str);
 extern LispRef eul_int_as_hex_str(int x);
 extern LispRef eul_make_vector(int n, LispRef list);
 extern LispRef eul_list_as_eul_string(LispRef x);
@@ -31,6 +30,7 @@ extern char *eul_substr(char *str, int i, int j);
 extern char *eul_tailstr(char *str, int i);
 extern LispRef eul_str_member1(char c, char *str);
 extern char *eul_reverse_str(char *str);
+extern char *eul_reverse_des_str(char *str);
 extern char *eul_str_append(char *str1, char *str2);
 extern char *eul_addr_str(void *obj);
 extern char *eul_str_copy(char *str);
@@ -72,8 +72,10 @@ extern int eul_bit_not(int x);
 extern int eul_bit_shift(int x, int n);
 extern LispRef eul_ffoo(LispRef x, int y, char *z);
 
-/* In eul-ntok.c */
+// In eul-ntok.c
 extern LispRef ntok(LispRef stream, LispRef special_tokens);
 extern int read_into_buffer(int _file, char *buf, int n);
 
+///-----------------------------------------------------------------------------
 #endif // EUL_EXT_H
+///-----------------------------------------------------------------------------
