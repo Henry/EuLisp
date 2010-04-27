@@ -1,10 +1,9 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Description: C hook file of EuLisp module scmtoo
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Description: C hook file of EuLisp module scmtoo
+///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
 
@@ -28,3 +27,5 @@ void run_application()
     initialize_module_scmtoo();
     execute_lambda(scmtoo_bindings[0]);
 }
+
+///-----------------------------------------------------------------------------

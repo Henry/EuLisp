@@ -1,19 +1,18 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: general instances
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: general instances
+///-----------------------------------------------------------------------------
 
 #ifndef OBJECT_H
 #define OBJECT_H
 
-/** ----------------------------------------------------------------- **
- ** Default object
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Default object
+///-----------------------------------------------------------------------------
 
 typedef struct eul_object_structure
 {
@@ -27,9 +26,9 @@ typedef EulObject *LispRef;
 #define HEADER_SIZE (2)
 #define HEADER_BYTE_SIZE (HEADER_SIZE*sizeof(LispRef))
 
-/** ----------------------------------------------------------------- **
- ** Object access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Object access
+///-----------------------------------------------------------------------------
 
 #define object_size(loc) ((loc)->size)
 #define object_class(loc) ((loc)->class)
@@ -40,9 +39,9 @@ typedef EulObject *LispRef;
 #define eul_slot_ref(loc, i) slot_ref(loc, i)
 #define eul_vector_size(x) eul_int_as_c_int(object_size(x))
 
-/** ----------------------------------------------------------------- **
- ** Dynamic object allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Dynamic object allocation
+///-----------------------------------------------------------------------------
 
 #define INITIALIZE_OBJECT(loc, cl, nslots)                                     \
     object_size(loc) = c_int_as_eul_int(nslots);                               \
@@ -64,5 +63,6 @@ typedef EulObject *LispRef;
             slot_ref(loc, iii) = (init);                                       \
     }
 
-
+///-----------------------------------------------------------------------------
 #endif // OBJECT_H
+///-----------------------------------------------------------------------------

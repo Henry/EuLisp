@@ -1,19 +1,17 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: foreign function converters
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: foreign function converters
+///-----------------------------------------------------------------------------
 #ifndef FF_H
 #define FF_H
 
-/** ----------------------------------------------------------------- **
- ** Foreign function argument conversion
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign function argument conversion
+///-----------------------------------------------------------------------------
 
 #define FF_ARG_CONVERT(x, conv_index) FF_ARG_CONVERT##conv_index(x)
 
@@ -30,10 +28,9 @@
 #define FF_ARG_CONVERT10(x) eul_double_ref_as_c_double_ref_checked(x)
 #define FF_ARG_CONVERT11(x) eul_string_ref_as_c_string_ref_checked(x)
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign function argument conversion error notification
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign function argument conversion error notification
+///-----------------------------------------------------------------------------
 
 #ifdef WITH_SIGNALS
 
@@ -43,7 +40,7 @@
     fprint_ref(stderr, x),                                                     \
     fprintf(stderr, "\n    expected instance of class: %s\n", #clazz),         \
     fflush(stderr),                                                            \
-    eul_signal = 1,                                                          \
+    eul_signal = 1,                                                            \
     eul_signal_cb = CB_FIRST_SIGNAL+3)
 
 #else
@@ -86,10 +83,9 @@
     (eul_is_string_ref(x) ? eul_string_ref_as_c_string_ref(x) :                \
     (ff_notify_arg_error(x, <string*>), (char **)NULL))
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign function result conversion
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign function result conversion
+///-----------------------------------------------------------------------------
 
 #define FF_RES_CONVERT(loc, x, conv_index)                                     \
     FF_RES_CONVERT##conv_index(loc, x)
@@ -106,10 +102,9 @@
 #define FF_RES_CONVERT9(loc, x) eul_allocate_string_ref(loc, x)
 #define FF_RES_CONVERT10(loc, x) { x ; loc = eul_nil; }
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign function result conversion error notification
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign function result conversion error notification
+///-----------------------------------------------------------------------------
 
 #define eul_allocate_string_checked(loc, x)                                    \
     {                                                                          \
@@ -139,10 +134,9 @@
         }                                                                      \
     }
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign in-calls
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign in-calls
+///-----------------------------------------------------------------------------
 
 #define EUL_DEFINTERN(c_fn_name, eul_fn_name, arity, eul_module_name)          \
     EUL_DEFINTERN##arity(c_fn_name, eul_fn_name, eul_module_name)
@@ -183,10 +177,9 @@
     EXTERNAL_POPVAL1(res);                                                     \
     return res;
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign in-call (arity 0)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign in-call (arity 0)
+///-----------------------------------------------------------------------------
 
 #define EUL_DEFINTERN0(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
@@ -196,10 +189,9 @@
         DEFINTERN_TAIL()                                                       \
         }
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign in-call (arity 1)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign in-call (arity 1)
+///-----------------------------------------------------------------------------
 
 #define EUL_DEFINTERN1(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
@@ -210,10 +202,9 @@
         DEFINTERN_TAIL()                                                       \
         }
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign in-call (arity 2)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign in-call (arity 2)
+///-----------------------------------------------------------------------------
 
 #define EUL_DEFINTERN2(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
@@ -225,10 +216,9 @@
         DEFINTERN_TAIL()                                                       \
         }
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign in-call (arity 3)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign in-call (arity 3)
+///-----------------------------------------------------------------------------
 
 #define EUL_DEFINTERN3(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
@@ -241,10 +231,9 @@
         DEFINTERN_TAIL()                                                       \
         }
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign in-call (arity 4)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign in-call (arity 4)
+///-----------------------------------------------------------------------------
 
 #define EUL_DEFINTERN4(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
@@ -258,10 +247,9 @@
         DEFINTERN_TAIL()                                                       \
         }
 
-
-/** ----------------------------------------------------------------- **
- ** Foreign in-call (arity 5)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Foreign in-call (arity 5)
+///-----------------------------------------------------------------------------
 
 #define EUL_DEFINTERN5(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
@@ -276,10 +264,9 @@
         DEFINTERN_TAIL()                                                       \
         }
 
-
-/** ----------------------------------------------------------------- **
- ** Initialise and run the system
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialise and run the system
+///-----------------------------------------------------------------------------
 
 extern int EUL_INITIALIZE (int, char **);
 
@@ -287,5 +274,6 @@ extern int EUL_INITIALIZE (int, char **);
     initialize_module_##module_name();                                         \
     execute_lambda(module_name##_bindings[0]);
 
-
+///-----------------------------------------------------------------------------
 #endif // FF_H
+///-----------------------------------------------------------------------------

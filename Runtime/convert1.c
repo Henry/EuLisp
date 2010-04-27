@@ -75,7 +75,7 @@ void initialize_module_convert1()
   static const void *G001522[] = {I(aa,62,45,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 5 binding: (method-(converter <int>)) */
-  static const void *G001524[] = {I(aa,41,00,00),B(string ,22),I(45,01,00,00)};
+  static const void *G001524[] = {I(aa,41,00,00),B(string ,23),I(45,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 6 binding: (method-(converter <string>)) */
   static const void *G001526[] = {I(aa,24,00,00),B(collect ,7),I(3d,01,00,00)};

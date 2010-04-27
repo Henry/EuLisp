@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: export of the bytecode interpreter for foreign-functions
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: export of the bytecode interpreter for foreign-functions
+///-----------------------------------------------------------------------------
 
 #ifndef EULISP_H
 #define EULISP_H
@@ -46,4 +45,6 @@
 
 ptrInt interpret(RegisterRef set);
 
+///-----------------------------------------------------------------------------
 #endif // EULISP_H
+///-----------------------------------------------------------------------------

@@ -1,19 +1,17 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: keywords
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: keywords
+///-----------------------------------------------------------------------------
 #ifndef KEYWORD_H
 #define KEYWORD_H
 
-/** ----------------------------------------------------------------- **
- ** Keyword access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Keyword access
+///-----------------------------------------------------------------------------
 
 #define KEYWORD_SIZE (1)
 #define KEYWORD_NAME(x) (slot_ref((x), 0))
@@ -22,9 +20,9 @@
 #define eul_is_keyword(x)                                                      \
     (computed_object_class(x) == PGLOBAL(glob_keyword_class))
 
-/** ----------------------------------------------------------------- **
- ** Keyword allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Keyword allocation
+///-----------------------------------------------------------------------------
 
 #define eul_allocate_keyword(loc, str)                                         \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_keyword_class), KEYWORD_SIZE);      \
@@ -38,5 +36,6 @@
         eul_fast_table_set(PGLOBAL(glob_keywords), str, loc);                  \
     }
 
-
+///-----------------------------------------------------------------------------
 #endif // KEYWORD_H
+///-----------------------------------------------------------------------------

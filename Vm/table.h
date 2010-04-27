@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: hash tables
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: hash tables
+///-----------------------------------------------------------------------------
 
 #ifndef TABLE_H
 #define TABLE_H
@@ -20,9 +19,9 @@ extern int eul_hash_object(LispRef key);
 extern int eul_hash_object_aux(LispRef key, int *leaves);
 
 
-/** ----------------------------------------------------------------- **
- ** Table access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Table access
+///-----------------------------------------------------------------------------
 
 #define TABLE_ENTRIES(x) (slot_ref((x), 0))
 #define TABLE_FILL_VALUE(x) (slot_ref((x), 1))
@@ -39,9 +38,9 @@ extern int eul_hash_object_aux(LispRef key, int *leaves);
 #define IS_TABLE_ENTRY(x) eul_is_cons(x)
 
 
-/** ----------------------------------------------------------------- **
- ** Table allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Table allocation
+///-----------------------------------------------------------------------------
 
 #define eul_allocate_table(loc, fill_value)                                    \
     {                                                                          \
@@ -57,5 +56,6 @@ extern int eul_hash_object_aux(LispRef key, int *leaves);
 #define eul_allocate_table_entry(loc, key, value)                              \
     eul_allocate_cons(loc, key, value)
 
-
+///-----------------------------------------------------------------------------
 #endif // TABLE_H
+///-----------------------------------------------------------------------------

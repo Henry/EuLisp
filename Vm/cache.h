@@ -1,15 +1,15 @@
-/** Copyright (c) 1996 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Andreas Kind
- **  Description: fast method caching
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1996 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Andreas Kind
+///  Description: fast method caching
+///-----------------------------------------------------------------------------
 #ifndef CACHE_H
 #define CACHE_H
+
+///-----------------------------------------------------------------------------
 
 #define GF_GET_VALUE_DOMAIN(loc, gf_dom, n)                                    \
     {                                                                          \
@@ -98,15 +98,15 @@
     }                                                                          \
 
 
-/** ----------------------------------------------------------------- **
- ** Method caching using reg_pc to hash
- **   vec: method cache
- **   n: cache size (without header, i.e. val_com, i)
- **   key: arg to hash function
- **   i: cache index
- **   k: first hash index
- **   m: gf domain arity
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Method caching using reg_pc to hash
+///   vec: method cache
+///   n: cache size (without header, i.e. val_com, i)
+///   key: arg to hash function
+///   i: cache index
+///   k: first hash index
+///   m: gf domain arity
+///-----------------------------------------------------------------------------
 
 #define GF_DEFAULT_METHOD_CACHE_SIZE 4
 #define GF_METHOD_CACHE_HEADER_SIZE 2
@@ -333,4 +333,6 @@ goon:                                                                          \
         probe_depth-1);                                                        \
     }
 
+///-----------------------------------------------------------------------------
 #endif // CACHE_H
+///-----------------------------------------------------------------------------

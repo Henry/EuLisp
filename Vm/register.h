@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: global registers
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: global registers
+///-----------------------------------------------------------------------------
 
 #ifndef REGISTER_H
 #define REGISTER_H
@@ -15,9 +14,9 @@
 
 extern void eul_initialize_register();
 
-/** ----------------------------------------------------------------- **
- ** Global registers
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Global registers
+///-----------------------------------------------------------------------------
 
 PGLOBAL_EXTERN(glob_null_class);
 PGLOBAL_EXTERN(glob_cons_class);
@@ -53,9 +52,9 @@ PGLOBAL_EXTERN(glob_keywords);
 PGLOBAL_EXTERN(glob_modules);
 PGLOBAL_EXTERN(glob_encl_lambda);
 
-/** ----------------------------------------------------------------- **
- ** Optimized register set components
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Optimized register set components
+///-----------------------------------------------------------------------------
 
 #define DECLARE_LOCAL_REGISTER_SET()                                           \
     register Instruction *reg_current_cv;     /* Code vector */                \
@@ -71,9 +70,9 @@ PGLOBAL_EXTERN(glob_encl_lambda);
 #define rel_reg_pc                                                             \
     ((uPtrInt) (reg_pc - reg_current_cv))
 
-/** ----------------------------------------------------------------- **
- ** Unoptimized register set
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Unoptimized register set
+///-----------------------------------------------------------------------------
 
 #define DECLARE_UNOPTIMISED_LOCAL_REGISTER_SET()                               \
     Instruction *reg_current_cv;     /* Code vector */                         \
@@ -86,9 +85,9 @@ PGLOBAL_EXTERN(glob_encl_lambda);
     LispRef     reg_arg_operator;    /* Current operator call */               \
     int         reg_arg_count     /* Arguments sent (transient) */
 
-/** ----------------------------------------------------------------- **
- ** Register Set
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Register Set
+///-----------------------------------------------------------------------------
 
 typedef struct register_set
 {
@@ -99,17 +98,17 @@ typedef RegisterSet *RegisterRef;
 
 extern RegisterRef tame_regs;
 
-/** ----------------------------------------------------------------- **
- ** Initialize register set
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialize register set
+///-----------------------------------------------------------------------------
 
 #define INITIALISE_REGISTER_SET(set)                                           \
     (set)->reg_value_stack = eul_allocate_stack();                             \
          (set)->reg_context_stack = eul_allocate_stack()
 
-/** ----------------------------------------------------------------- **
- ** Fill local register set
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Fill local register set
+///-----------------------------------------------------------------------------
 
 #define FILL_LOCAL_REGISTER_SET(set)                                           \
     reg_current_cv = (set)->reg_current_cv;                                    \
@@ -122,9 +121,9 @@ extern RegisterRef tame_regs;
     reg_arg_operator = (set)->reg_arg_operator;                                \
     reg_arg_count = (set)->reg_arg_count
 
-/** ----------------------------------------------------------------- **
- ** Dump local register set
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Dump local register set
+///-----------------------------------------------------------------------------
 
 #define DUMP_LOCAL_REGISTER_SET(set)                                           \
     (set)->reg_current_cv = reg_current_cv;                                    \
@@ -137,5 +136,6 @@ extern RegisterRef tame_regs;
                                        (set)->reg_arg_operator = reg_arg_operator; \
                                             (set)->reg_arg_count = reg_arg_count
 
-
+///-----------------------------------------------------------------------------
 #endif // REGISTER_H
+///-----------------------------------------------------------------------------

@@ -1,15 +1,15 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
+//  Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Andreas Kind
- **  Description: fast access to level1 bindings
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Andreas Kind
+///  Description: fast access to level1 bindings
  **
- **                !!! CHANGES ONLY TO leveli.skl.c !!!
+///                !!! CHANGES ONLY TO leveli.skl.c !!!
  **
- ** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
 
@@ -92,10 +92,10 @@ LispRef eul_initialize_level1_tables()
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Initialize level1_tab with liblevel1.i contents
- ** e.g. eul_fast_table_set(level1_tab, <key>, make_entry(<pos>, <module_name>));
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialize level1_tab with liblevel1.i contents
+/// e.g. eul_fast_table_set(level1_tab, <key>, make_entry(<pos>, <module_name>));
+///-----------------------------------------------------------------------------
 
 LispRef make_entry(int pos, char *module_str, char *origin_str)
 {

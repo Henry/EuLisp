@@ -100,9 +100,14 @@
     handling for strings with all the special characters when the single escape
     character should only be required to escape itself and the multiple-escape
     character.
-*** TODO Add =sub-sequence= generic function and methods
-    =sub-sequence= for string can a wrapper around substring already available
+*** TODO Add =slice= generic function and methods
+    =slice= for string can a wrapper around substring already available
     in Youtoo.
+*** TODO Add =split= generic function and methods
+    =split= for string could be implemented as a ff.
+*** DONE Add =reverse!= method for =<string>=
+    CLOSED: [2010-04-27 Tue 12:25]
+    Requires equivalent ff in eul-ext.c
 *** DONE Sort out the syntax of character sequences
     CLOSED: [2010-04-26 Mon 19:46]
     + There is a problem with the need for double escaping: #\\x000, #\\\ etc.
@@ -200,4 +205,8 @@
 *** TODO Re-reference definitions in the "Level-1" library
     so that they do not clash with those in the "Level-0" library.
 *** TODO Remove the "syntax-category" entries from the index
-*** TODO Add =sub-sequence= generic function and methods
+*** TODO Add =slice= generic function and methods
+*** TODO Add =split= generic function and methods
+*** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
+    CLOSED: [2010-04-27 Tue 22:48]
+    Check for other =<sequence>= methods which should destructive variants.

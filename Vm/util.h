@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: utilities (e.g. printing)
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: utilities (e.g. printing)
+///-----------------------------------------------------------------------------
 
 #ifndef UTIL_H
 #define UTIL_H
@@ -22,9 +21,9 @@ extern LispRef eul_is_object(void *o);
 extern int eul_trace;
 #endif
 
-/** ----------------------------------------------------------------- **
- ** Generic printing extention
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Generic printing extention
+///-----------------------------------------------------------------------------
 
 #define PRINTER_TABLE_SIZE (5)
 
@@ -39,9 +38,9 @@ extern void (*printer_table[]) (FILE *, LispRef);
     fpi_value(computed_object_size(o)),                                        \
     (ptrInt) o);
 
-/** ----------------------------------------------------------------- **
- ** Print function call
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Print function call
+///-----------------------------------------------------------------------------
 
 #ifdef WITH_DB
 #define PRINT_OPERATOR_CALL(entry)                                             \
@@ -80,5 +79,6 @@ extern void (*printer_table[]) (FILE *, LispRef);
 #define PRINT_OPERATOR_CALL(entry)
 #endif // WITH_DB
 
-
+///-----------------------------------------------------------------------------
 #endif // UTIL_H
+///-----------------------------------------------------------------------------

@@ -30,6 +30,9 @@ Test/*[1-4]
 Examples/*/*.[hi]
 Tools/*.[chi]
 
+# Ignore personal test area
+Examples/Test
+
 # Ignore intermeditate files from building the EuLisp definition document
 Doc/EuLisp-0.991/*.html
 Doc/EuLisp-0.991/*.4*

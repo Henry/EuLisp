@@ -1,19 +1,16 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: bytevectors (i.e. code vectors and strings)
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: bytevectors (i.e. code vectors and strings)
+///-----------------------------------------------------------------------------
 #ifndef BYTEVEC_H
 #define BYTEVEC_H
-
-/** ----------------------------------------------------------------- **
- ** Bytevector access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Bytevector access
+///-----------------------------------------------------------------------------
 
 #define BYTEVECTOR_DATA(x) (slot_ref((x), 0))
 
@@ -49,9 +46,9 @@
     (void *)&(module##_bindings[module##_##index##_index])
 
 
-/** ----------------------------------------------------------------- **
- ** Bytevector allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Bytevector allocation
+///-----------------------------------------------------------------------------
 
 #define eul_allocate_bytevector(loc, data)                                     \
     eul_allocate_bytevector1(loc, data, sizeof(data));
@@ -67,4 +64,6 @@
                          BYTEVECTOR_DATA(loc) = (LispRef) gc_malloc(size);
 
 
+///-----------------------------------------------------------------------------
 #endif // BYTEVEC_H
+///-----------------------------------------------------------------------------

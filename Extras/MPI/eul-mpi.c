@@ -1,27 +1,26 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: mpis
- **  Authos: Andreas Kind
- **  Description: Message Passing Interface (MPI)
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: mpis
+///  Authos: Andreas Kind
+///  Description: Message Passing Interface (MPI)
+///-----------------------------------------------------------------------------
 
 #include <mpi.h>
 #include <eulisp.h>
 
-/** ----------------------------------------------------------------- **
- ** MPI_CHAR is misused to denote string objects
- ** MPI_LONG_LONG_INT is misused to denote serialized objects
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// MPI_CHAR is misused to denote string objects
+/// MPI_LONG_LONG_INT is misused to denote serialized objects
+///-----------------------------------------------------------------------------
 
 #define MPI_EUL_STRING MPI_CHAR
 #define MPI_EUL_OBJECT MPI_LONG_LONG_INT
 
-/** ----------------------------------------------------------------- **
- ** MPI initialization
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// MPI initialization
+///-----------------------------------------------------------------------------
 
 LispRef eul_mpi_initialize()
 {
@@ -67,9 +66,9 @@ LispRef eul_mpi_initialize()
     return info;
 }
 
-/** ----------------------------------------------------------------- **
- ** MPI Send
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// MPI Send
+///-----------------------------------------------------------------------------
 
 LispRef eul_mpi_send(LispRef x, int dest, LispRef eul_tag)
 {
@@ -131,10 +130,10 @@ LispRef eul_mpi_send(LispRef x, int dest, LispRef eul_tag)
         return eul_nil;
 }
 
-/** ----------------------------------------------------------------- **
- ** MPI Probe
- ** Returns nil or a vector #(is_obj datatype_tag n)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// MPI Probe
+/// Returns nil or a vector #(is_obj datatype_tag n)
+///-----------------------------------------------------------------------------
 
 LispRef eul_mpi_probe(LispRef eul_source, LispRef eul_tag, LispRef eul_timeout)
 {
@@ -189,9 +188,9 @@ LispRef eul_mpi_probe(LispRef eul_source, LispRef eul_tag, LispRef eul_timeout)
     return res;
 }
 
-/** ----------------------------------------------------------------- **
- ** MPI Recieve
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// MPI Recieve
+///-----------------------------------------------------------------------------
 
 #define BUFLEN 512
 
@@ -271,5 +270,4 @@ LispRef eul_mpi_receive(LispRef eul_source, LispRef eul_tag, int n)
     return res;
 }
 
-
-/* eof */
+///-----------------------------------------------------------------------------

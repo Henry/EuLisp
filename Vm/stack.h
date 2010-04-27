@@ -1,21 +1,20 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: stacks
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: stacks
+///-----------------------------------------------------------------------------
 
 #ifndef STACK_H
 #define STACK_H
 
 #include "object.h"
 
-/** ----------------------------------------------------------------- **
- ** Stack parameter
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Stack parameter
+///-----------------------------------------------------------------------------
 
 #define STACK_BUFFER_SIZE      (512)    // light-weight stacks
 #define STACK_BUFFER_HANGOVER  (128)
@@ -23,16 +22,16 @@
 
 #define STACK_BUFFER_CONTENTS_SIZE(stk) (stk->sp-stk->base)
 
-/** ----------------------------------------------------------------- **
- ** Segment structure
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Segment structure
+///-----------------------------------------------------------------------------
 
 #define STACK_SEGMENT_HEADER_LENGTH (1)
 #define STACK_SEGMENT_LAST_SEGMENT(seg) (slot_ref(seg, 0))
 
-/** ----------------------------------------------------------------- **
- ** Stack structure
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Stack structure
+///-----------------------------------------------------------------------------
 
 typedef struct stack_structure
 {
@@ -48,9 +47,9 @@ extern StackRef eul_allocate_stack();
 extern LispRef copy_stack_segment (LispRef);
 
 
-/** ----------------------------------------------------------------- **
- ** Stack declaration
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Stack declaration
+///-----------------------------------------------------------------------------
 
 #define DECLARE_STACK_REGISTERS()                                              \
     register LispRef *sreg_value_sp;                                           \
@@ -69,9 +68,9 @@ extern LispRef copy_stack_segment (LispRef);
     reg_context_stack->sp = sreg_context_sp
 
 
-/** ----------------------------------------------------------------- **
- ** Stack manipulation (low-level)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Stack manipulation (low-level)
+///-----------------------------------------------------------------------------
 
 #define POP1(sp, v1)        (v1)=(*(--(sp)))
 #define POP2(sp, v1, v2)     POP1(sp, v1); POP1(sp, v2)
@@ -86,9 +85,9 @@ extern LispRef copy_stack_segment (LispRef);
 #define LVPEEKVAL()        (LVPEEK(sreg_value_sp))
 
 
-/** ----------------------------------------------------------------- **
- ** Stack over-/underflow
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Stack over-/underflow
+///-----------------------------------------------------------------------------
 
 #define FLUSH_STACK(stk, sptr, hangover)                                       \
     NOTIFY1("Flushing %s stack buffer: ",                                      \
@@ -126,9 +125,9 @@ extern void unflush_stack_buffer (StackRef, int);
     INITIALIZE_OBJECT(loc, PGLOBAL(glob_vector_class), n+STACK_SEGMENT_HEADER_LENGTH)
 
 
-/** ----------------------------------------------------------------- **
- ** Value stack manipulation (high-level)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Value stack manipulation (high-level)
+///-----------------------------------------------------------------------------
 
 #define POPVAL1(v1)                                                            \
     ENSURE_POPABILITY(reg_value_stack, sreg_value_sp, sreg_value_sb, 1);       \
@@ -180,9 +179,9 @@ extern void unflush_stack_buffer (StackRef, int);
     sreg_value_sb+STACK_BUFFER_SIZE-1, 1);                                     \
     PUSH1(sreg_value_sp, v1)
 
-/** ----------------------------------------------------------------- **
- ** Context stack manipulation (high-level)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Context stack manipulation (high-level)
+///-----------------------------------------------------------------------------
 
 #define REFCONTEXT(n, v1)                                                      \
     if (!((sreg_context_sb+n+1) < sreg_context_sp))                            \
@@ -234,5 +233,6 @@ extern void unflush_stack_buffer (StackRef, int);
         ++reg_pc;                                                              \
     }
 
-
+///-----------------------------------------------------------------------------
 #endif // STACK_H
+///-----------------------------------------------------------------------------

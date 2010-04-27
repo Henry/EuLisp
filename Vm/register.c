@@ -1,16 +1,16 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
+//  Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 
-/** -------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** -------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: global register declaration/initialization
- ** -------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: global register declaration/initialization
+///-----------------------------------------------------------------------------
 
-/** ----------------------------------------------------------------- **
- ** Global registers and their initialisation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Global registers and their initialisation
+///-----------------------------------------------------------------------------
 
 #include "stdc.h"
 #include "config.h"
@@ -28,17 +28,17 @@
 #include "register.h"
 #include "callback.h"
 
-/** ----------------------------------------------------------------- **
- ** Global Register set
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Global Register set
+///-----------------------------------------------------------------------------
 
 static RegisterSet tame_regs_struct;
 RegisterRef tame_regs = &tame_regs_struct;
 
 
-/** ----------------------------------------------------------------- **
- ** Define registers
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Define registers
+///-----------------------------------------------------------------------------
 
 eul_allocate_static_nil(glob_nil);
 DEFINE_PGLOBAL(glob_symbols);
@@ -71,9 +71,9 @@ eul_allocate_static_class(glob_vector_class);
 eul_allocate_static_class(glob_table_class);
 
 
-/** ----------------------------------------------------------------- **
- ** Initialize registers
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialize registers
+///-----------------------------------------------------------------------------
 
 void eul_initialize_register()
 {

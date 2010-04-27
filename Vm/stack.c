@@ -1,12 +1,12 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
+//  Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: stack handling
- ** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: stack handling
+///-----------------------------------------------------------------------------
 
 #include "stdc.h"
 #include "config.h"
@@ -20,9 +20,9 @@
 #include "stack.h"
 
 
-/** ----------------------------------------------------------------- **
- ** Allocate stack
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Allocate stack
+///-----------------------------------------------------------------------------
 
 StackRef eul_allocate_stack()
 {
@@ -36,12 +36,12 @@ StackRef eul_allocate_stack()
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Flush stack buffer
- **  Dump the stack buffer's contents to the heap leaving the given
- **  amount. Based on Oaklisp code: Copyright (C) 1987, B Pearlmutter
- **  & K Lang.
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Flush stack buffer
+///  Dump the stack buffer's contents to the heap leaving the given
+///  amount. Based on Oaklisp code: Copyright (C) 1987, B Pearlmutter
+///  & K Lang.
+///-----------------------------------------------------------------------------
 
 void flush_stack_buffer(StackRef stk, int hangover)
 {
@@ -101,10 +101,10 @@ void flush_stack_buffer(StackRef stk, int hangover)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Unflush stack buffer
- **  Based on Oaklisp code: Copyright (C) 1987, B Pearlmutter & K Lang.
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Unflush stack buffer
+///  Based on Oaklisp code: Copyright (C) 1987, B Pearlmutter & K Lang.
+///-----------------------------------------------------------------------------
 
 void unflush_stack_buffer(StackRef stk, int hangover)
 {
@@ -182,9 +182,9 @@ void unflush_stack_buffer(StackRef stk, int hangover)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Copy stack segment
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Copy stack segment
+///-----------------------------------------------------------------------------
 
 LispRef copy_stack_segment(LispRef seg)
 {

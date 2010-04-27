@@ -1,23 +1,21 @@
-
-/** Copyright (c) 1996 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                          EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: fthread
- **  Authors: Liam Wickins, Andreas Kind
- **  Description: Foreign threads based on Unix International Threads (UI)
- **    alias Solaris Threads
- **  Compilation: see fthread.em
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1996 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+///                          EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: fthread
+///  Authors: Liam Wickins, Andreas Kind
+///  Description: Foreign threads based on Unix International Threads (UI)
+///    alias Solaris Threads
+///  Compilation: see fthread.em
+///-----------------------------------------------------------------------------
 
 #include <eulisp.h>
 #include <thread.h>
 #include <gc.h>
 
-/** ----------------------------------------------------------------- **
- ** Thread access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Thread access
+///-----------------------------------------------------------------------------
 
 #define THREAD_FUNCTION(x) (slot_ref((x),2))
 #define THREAD_RETURNED(x) (slot_ref((x),3))
@@ -26,9 +24,9 @@
 #define THREAD_HANDLE(x) (slot_ref((x),6))
 #define THREAD_REGISTERS(x) (slot_ref((x),7))
 
-/** ----------------------------------------------------------------- **
- ** Initialization
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialization
+///-----------------------------------------------------------------------------
 
 thread_key_t eul_thr_key;
 
@@ -42,15 +40,14 @@ LispRef eul_initialize_foreign_threads(LispRef thr)
   return eul_nil;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_interpret()
- **
- ** Description: function actually running on a thread
- ** Args: Lisp thread
- ** Returns: void
- ** See also: eul_thr_create()
- ** ----------------------------------------------------------------- **/
-	    
+///-----------------------------------------------------------------------------
+/// eul_thr_interpret()
+/// Description: function actually running on a thread
+/// Args: Lisp thread
+/// Returns: void
+/// See also: eul_thr_create()
+///-----------------------------------------------------------------------------
+
 
 void eul_thr_interpret(LispRef thr)
 {
@@ -64,15 +61,14 @@ void eul_thr_interpret(LispRef thr)
   thr_exit(0);
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_create()
- **
- ** Description: Allocates and sets up the interpreter stack for execution
- **              of the initial function; creates the thread handle;
- **              pushes the functions arguments on the stack and counts arity
- ** Args: Lisp thread plus Lisp args
- ** Returns: thread
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_create()
+/// Description: Allocates and sets up the interpreter stack for execution
+///              of the initial function; creates the thread handle;
+///              pushes the functions arguments on the stack and counts arity
+/// Args: Lisp thread plus Lisp args
+/// Returns: thread
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_create(LispRef thr, LispRef args)
 {
@@ -134,14 +130,13 @@ LispRef eul_thr_create(LispRef thr, LispRef args)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_join()
- **
- ** Description: Awaits for the thread to complete, pops its return
- **              value from the stack and returns it.
- ** Args: Lisp thread
- ** Returns: Lisp Object
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_join()
+/// Description: Awaits for the thread to complete, pops its return
+///              value from the stack and returns it.
+/// Args: Lisp thread
+/// Returns: Lisp Object
+///-----------------------------------------------------------------------------
 
 #define THREAD_WAITING 1
 #define THREAD_JOINED  3
@@ -184,13 +179,12 @@ int eul_thr_join_all()
 }
 
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_yield()
- **
- ** Description: yield processor to a thread
- ** Args: none
- ** Returns: eul_nil
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_yield()
+/// Description: yield processor to a thread
+/// Args: none
+/// Returns: eul_nil
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_yield()
 {
@@ -199,13 +193,12 @@ LispRef eul_thr_yield()
 }
 
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_self()
- **
- ** Description: return the calling thread
- ** Args: none
- ** Returns: Lisp thread
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_self()
+/// Description: return the calling thread
+/// Args: none
+/// Returns: Lisp thread
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_self()
 {
@@ -215,14 +208,13 @@ LispRef eul_thr_self()
   return res;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_suspend()
- **
- ** Description: suspends the specified thread
- ** Args: eul_nil or Lisp list with one Lisp thread
- ** Returns: eul_true, if suspended successfully; eul_nil, otherwise
- ** See also: eul_thr_continue()
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_suspend()
+/// Description: suspends the specified thread
+/// Args: eul_nil or Lisp list with one Lisp thread
+/// Returns: eul_true, if suspended successfully; eul_nil, otherwise
+/// See also: eul_thr_continue()
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_suspend(LispRef thrs)
 {
@@ -243,14 +235,13 @@ LispRef eul_thr_suspend(LispRef thrs)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_continue()
- **
- ** Description: resumes the execution of the specified (suspended) thread
- ** Args: Lisp thread
- ** Returns: thread, if thread continued successfully; otherwise eul_nil
- ** See also: eul_thr_suspend()
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_continue()
+/// Description: resumes the execution of the specified (suspended) thread
+/// Args: Lisp thread
+/// Returns: thread, if thread continued successfully; otherwise eul_nil
+/// See also: eul_thr_suspend()
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_continue(LispRef thr)
 {
@@ -265,13 +256,12 @@ LispRef eul_thr_continue(LispRef thr)
     return eul_nil;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_get_priority()
- **
- ** Description: return the priority of the specified thread
- ** Args: thread handle
- ** Returns: priority or eul_nil
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_get_priority()
+/// Description: return the priority of the specified thread
+/// Args: thread handle
+/// Returns: priority or eul_nil
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_get_priority(thread_t *thr_handle)
 {
@@ -283,5 +273,4 @@ LispRef eul_thr_get_priority(thread_t *thr_handle)
     return eul_nil;
 }
 
-
-/* eof */
+///-----------------------------------------------------------------------------

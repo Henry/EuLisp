@@ -1,37 +1,29 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: fsocket
- **  Authos: Andreas Kind
- **  Description: foreign socket connection
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: fsocket
+///  Authos: Andreas Kind
+///  Description: foreign socket connection
+///-----------------------------------------------------------------------------
 
 #include "eul-sock.h"
 #include "eulisp.h"
 #include <arpa/inet.h>
 
-/** ----------------------------------------------------------------- **
- ** Allocate and bind a socket using TCP or UDP
- ** ----------------------------------------------------------------- **/
-
+///-----------------------------------------------------------------------------
+/// Allocate and bind a socket using TCP or UDP
+///-----------------------------------------------------------------------------
 int eul_make_socket(char *service, char *protocol, int qlen)
 {
-    struct servent *pse;
-
-    struct protoent *ppe;
-
     struct sockaddr_in sin;
-
-    int s, type;
-
     memset((char *)&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
     sin.sin_addr.s_addr = INADDR_ANY;
 
-    /* Map service name to port number */
-    if ((pse = getservbyname(service, protocol)))
+    // Map service name to port number
+    struct servent *pse = getservbyname(service, protocol);
+    if (pse)
     {
         sin.sin_port = pse->s_port;
     }
@@ -40,34 +32,48 @@ int eul_make_socket(char *service, char *protocol, int qlen)
         return EUL_SOCK_NO_SERVICE;
     }
 
-    /* Map protocol name to protocol number */
-    if ((ppe = getprotobyname(protocol)) == 0)
+    // Map protocol name to protocol number
+    struct protoent *ppe = getprotobyname(protocol);
+    if (ppe == 0)
+    {
         return EUL_SOCK_NO_PROTOCOL;
+    }
 
-    /* Use protocol to choose a socket type */
+    // Use protocol to choose a socket type
+    int type;
     if (strcmp(protocol, "udp") == 0)
+    {
         type = SOCK_DGRAM;
+    }
     else
+    {
         type = SOCK_STREAM;
+    }
 
-    /* Allocate a socket */
-    s = socket(PF_INET, type, ppe->p_proto);
+    // Allocate a socket
+    int s = socket(PF_INET, type, ppe->p_proto);
     if (s < 0)
+    {
         return EUL_SOCK_ERROR;
+    }
 
-    /* Bind the socket */
+    // Bind the socket
     if (bind(s, (struct sockaddr *)&sin, sizeof(sin)) < 0)
+    {
         return EUL_SOCK_ERROR;
+    }
     if (type == SOCK_STREAM && listen(s, qlen) < 0)
+    {
         return EUL_SOCK_ERROR;
+    }
 
     return s;
 }
 
-/** ----------------------------------------------------------------- **
- ** Accept a socket connection
- ** ----------------------------------------------------------------- **/
 
+///-----------------------------------------------------------------------------
+/// Accept a socket connection
+///-----------------------------------------------------------------------------
 int eul_socket_accept(int msock)
 {
     unsigned int alen = sizeof(struct sockaddr_in);
@@ -82,27 +88,19 @@ int eul_socket_accept(int msock)
     return ssock;
 }
 
-/** ----------------------------------------------------------------- **
- ** Allocate and connect a socket connection using TCP or UDP
- ** ----------------------------------------------------------------- **/
 
+///-----------------------------------------------------------------------------
+/// Allocate and connect a socket connection using TCP or UDP
+///-----------------------------------------------------------------------------
 int eul_make_connection(char *host, char *service, char *protocol)
 {
-    struct hostent *phe;
-
-    struct servent *pse;
-
-    struct protoent *ppe;
-
     struct sockaddr_in sin;
-
-    int s, type;
-
     memset((char *)&sin, 0, sizeof(sin));
     sin.sin_family = AF_INET;
 
-    /* Map service name to port number */
-    if ((pse = getservbyname(service, protocol)))
+    // Map service name to port number
+    struct servent *pse = getservbyname(service, protocol);
+    if (pse)
     {
         sin.sin_port = pse->s_port;
     }
@@ -111,8 +109,9 @@ int eul_make_connection(char *host, char *service, char *protocol)
         return EUL_SOCK_NO_SERVICE;
     }
 
-    /* Map host name to IP address, allowing for dotted decimal */
-    if ((phe = gethostbyname(host)))
+    // Map host name to IP address, allowing for dotted decimal
+    struct hostent *phe = gethostbyname(host);
+    if (phe)
     {
         memcpy((char *)&sin.sin_addr, phe->h_addr, phe->h_length);
     }
@@ -121,34 +120,44 @@ int eul_make_connection(char *host, char *service, char *protocol)
         return EUL_SOCK_NO_HOST;
     }
 
-    /* Map protocol name to protocol number */
-    if ((ppe = getprotobyname(protocol)) == 0)
+    // Map protocol name to protocol number
+    struct protoent *ppe = getprotobyname(protocol);
+    if (ppe == 0)
     {
         return EUL_SOCK_NO_PROTOCOL;
     }
 
-    /* Use protocol to choose a socket type */
+    // Use protocol to choose a socket type
+    int type;
     if (strcmp(protocol, "udp") == 0)
+    {
         type = SOCK_DGRAM;
+    }
     else
+    {
         type = SOCK_STREAM;
+    }
 
-    /* Allocate a socket */
-    s = socket(PF_INET, type, ppe->p_proto);
+    // Allocate a socket
+    int s = socket(PF_INET, type, ppe->p_proto);
     if (s < 0)
+    {
         return EUL_SOCK_ERROR;
+    }
 
-    /* Connect the socket */
+    // Connect the socket
     if (connect(s, (struct sockaddr *)&sin, sizeof(sin)) < 0)
+    {
         return EUL_SOCK_ERROR;
+    }
 
     return s;
 }
 
-/** ----------------------------------------------------------------- **
- ** Socket related error messages
- ** ----------------------------------------------------------------- **/
 
+///-----------------------------------------------------------------------------
+/// Socket related error messages
+///-----------------------------------------------------------------------------
 char *eul_socket_strerror(int error_code)
 {
     switch (error_code)
@@ -164,22 +173,21 @@ char *eul_socket_strerror(int error_code)
     }
 }
 
-/** ----------------------------------------------------------------- **
- ** Host name
- ** ----------------------------------------------------------------- **/
 
+///-----------------------------------------------------------------------------
+/// Host name
+///-----------------------------------------------------------------------------
 char *eul_hostname()
 {
     struct utsname name;
-
-    int n;
-
-    char *str;
-
     uname(&name);
 
-    n = strlen(name.nodename);
-    str = (char *)gc_malloc(n + 1);
+    int n = strlen(name.nodename);
+    char *str = (char *)gc_malloc(n + 1);
     strcpy(str, name.nodename);
+
     return str;
 }
+
+
+///-----------------------------------------------------------------------------

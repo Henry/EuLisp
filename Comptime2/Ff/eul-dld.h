@@ -1,15 +1,14 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eval, youtoo
- **  Authos: Andreas Kind
- **  Description: dynamic linker
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eval, youtoo
+///  Authos: Andreas Kind
+///  Description: dynamic linker
+///-----------------------------------------------------------------------------
 #ifndef EUL_DLD_H
 #define EUL_DLD_H
+///-----------------------------------------------------------------------------
 
 #define eul_as_C_module_name(x)                                                \
     (eul_is_symbol(x) ? as_C_module_name(STRING_VALUE(SYMBOL_NAME(x))) :       \
@@ -37,4 +36,6 @@ char *module_name, int local_index);
 
 extern LispRef eul_allocate_lambda2(LispRef name, LispRef arity, LispRef bv);
 
+///-----------------------------------------------------------------------------
 #endif // EUL_DLD_H
+///-----------------------------------------------------------------------------

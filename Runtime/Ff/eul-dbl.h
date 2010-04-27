@@ -1,15 +1,14 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: level1, eval, youtoo
- **  Authos: Andreas Kind
- **  Description: forein function support for double precision floats
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: level1, eval, youtoo
+///  Authos: Andreas Kind
+///  Description: forein function support for double precision floats
+///-----------------------------------------------------------------------------
 #ifndef EUL_DBL_H
 #define EUL_DBL_H
+///-----------------------------------------------------------------------------
 
 extern double eul_get_dbl_max();
 extern double eul_get_dbl_min();
@@ -32,5 +31,6 @@ extern LispRef write_next_ref(void **, int, LispRef);
 
 #define eul_fpi_as_dbl(x) ((double) x)
 
-
+///-----------------------------------------------------------------------------
 #endif // EUL_DBL_H
+///-----------------------------------------------------------------------------

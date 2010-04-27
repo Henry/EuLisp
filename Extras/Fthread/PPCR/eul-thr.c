@@ -1,23 +1,22 @@
 
-/** Copyright (c) 1996 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                          EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: fthread
- **  Authors: Andreas Kind, Liam Wickins
- **  Description: Foreign threads based on POSIX Portable Common Runtime
- **  Compilation: see fthread.em
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1996 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+///                          EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: fthread
+///  Authors: Andreas Kind, Liam Wickins
+///  Description: Foreign threads based on POSIX Portable Common Runtime
+///  Compilation: see fthread.em
+///-----------------------------------------------------------------------------
 
 #include <eulisp.h>
 #include <th/PCR_Th.h>
 #include <th/PCR_ThTypes.h>
 #include <th/PCR_ThSpecific.h>
 
-/** ----------------------------------------------------------------- **
- ** Thread access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Thread access
+///-----------------------------------------------------------------------------
 
 #define THREAD_FUNCTION(x) (slot_ref((x),2))
 #define THREAD_RETURNED(x) (slot_ref((x),3))
@@ -26,9 +25,9 @@
 #define THREAD_HANDLE(x) (slot_ref((x),6))
 #define THREAD_REGISTERS(x) (slot_ref((x),7))
 
-/** ----------------------------------------------------------------- **
- ** Initialization
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialization
+///-----------------------------------------------------------------------------
 
 PCR_ThSpecific_Key eul_thr_key;
 
@@ -42,14 +41,13 @@ LispRef eul_initialize_foreign_threads(LispRef thr)
   return eul_nil;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_interpret()
- **
- ** Description: function actually running on a thread
- ** Args: virtual machine registers
- ** Returns: void
- ** See also: eul_thr_create()
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_interpret()
+/// Description: function actually running on a thread
+/// Args: virtual machine registers
+/// Returns: void
+/// See also: eul_thr_create()
+///-----------------------------------------------------------------------------
 
 void eul_thr_interpret(LispRef thr)
 {
@@ -63,15 +61,14 @@ void eul_thr_interpret(LispRef thr)
   PCR_Th_Exit(0,(void *)0);
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_create()
- **
- ** Description: Allocates and sets up the interpreter stack for execution
- **              of the initial function; creates the thread handle;
- **              pushes the functions arguments on the stack and counts arity
- ** Args: Lisp thread plus Lisp args
- ** Returns: Lisp thread
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_create()
+/// Description: Allocates and sets up the interpreter stack for execution
+///              of the initial function; creates the thread handle;
+///              pushes the functions arguments on the stack and counts arity
+/// Args: Lisp thread plus Lisp args
+/// Returns: Lisp thread
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_create(LispRef thr, LispRef args)
 {
@@ -126,14 +123,13 @@ LispRef eul_thr_create(LispRef thr, LispRef args)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_join()
- **
- ** Description: Awaits for the thread to complete, pops its return
- **              value from the stack and returns it.
- ** Args: Lisp thread
- ** Returns: Lisp Object
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_join()
+/// Description: Awaits for the thread to complete, pops its return
+///              value from the stack and returns it.
+/// Args: Lisp thread
+/// Returns: Lisp Object
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_join(LispRef thr)
 {
@@ -169,13 +165,12 @@ LispRef eul_thr_join(LispRef thr)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_yield()
- **
- ** Description: yield processor to a thread
- ** Args: Lisp thread or eul_nil
- ** Returns: eul_nil
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_yield()
+/// Description: yield processor to a thread
+/// Args: Lisp thread or eul_nil
+/// Returns: eul_nil
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_yield(LispRef thr)
 {
@@ -192,13 +187,12 @@ LispRef eul_thr_yield(LispRef thr)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** eul_thr_self()
- **
- ** Description: return the calling thread
- ** Args: none
- ** Returns: Lisp thread
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_thr_self()
+/// Description: return the calling thread
+/// Args: none
+/// Returns: Lisp thread
+///-----------------------------------------------------------------------------
 
 LispRef eul_thr_self()
 {
@@ -209,4 +203,4 @@ LispRef eul_thr_self()
 }
 
 
-/* eof */
+///-----------------------------------------------------------------------------

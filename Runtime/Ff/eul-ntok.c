@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: level1, eval, youtoo
- **  Authors: Julian Padget, Andreas Kind
- **  Description: tokenizer
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: level1, eval, youtoo
+///  Authors: Julian Padget, Andreas Kind
+///  Description: tokenizer
+///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
 #include <limits.h>
@@ -848,3 +847,6 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
 
     return NULL; // ***HGW Should not get here
 }
+
+
+///-----------------------------------------------------------------------------

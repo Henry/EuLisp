@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eul-serial
- **  Authors: Andreas Kind
- **  Description: marshaling EuLisp objects in a serialized format
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eul-serial
+///  Authors: Andreas Kind
+///  Description: marshaling EuLisp objects in a serialized format
+///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
 #include "eul-serial.h"
@@ -14,9 +13,9 @@
 #include "serial.h"
 
 
-/** ----------------------------------------------------------------- **
- ** Primitive serialization (should use xdr soon!)
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Primitive serialization (should use xdr soon!)
+///-----------------------------------------------------------------------------
 
 LispRef eul_serial_short_data(int x)
 {
@@ -144,9 +143,9 @@ LispRef eul_serial_initialize()
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Auxiliary functions
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Auxiliary functions
+///-----------------------------------------------------------------------------
 
 LispRef eul_symbol_as_eul_keyword(LispRef sym)
 {
@@ -160,9 +159,9 @@ LispRef eul_symbol_as_eul_keyword(LispRef sym)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Interface to the Lisp world
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Interface to the Lisp world
+///-----------------------------------------------------------------------------
 
 LispRef eul_serial_read_header
 (
@@ -186,10 +185,10 @@ LispRef eul_serial_read_object
 }
 
 
-/** ----------------------------------------------------------------- **
- ** header:
- **   magic version
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// header:
+///   magic version
+///-----------------------------------------------------------------------------
 
 LispRef eul_keyword_key;
 LispRef eul_name_key;
@@ -214,10 +213,10 @@ LispRef header(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** content:
- **   object
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// content:
+///   object
+///-----------------------------------------------------------------------------
 
 LispRef content(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -279,10 +278,10 @@ LispRef content(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newClass:
- **   TC_CLASS content content content newHandle
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newClass:
+///   TC_CLASS content content content newHandle
+///-----------------------------------------------------------------------------
 
 LispRef newClass(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -298,10 +297,10 @@ LispRef newClass(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newObject:
- **   TC_OBJECT content
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newObject:
+///   TC_OBJECT content
+///-----------------------------------------------------------------------------
 
 LispRef newObject(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -317,10 +316,10 @@ LispRef newObject(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newCons:
- **   TC_CONS content content
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newCons:
+///   TC_CONS content content
+///-----------------------------------------------------------------------------
 
 LispRef newCons(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -338,10 +337,10 @@ LispRef newCons(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newFunction:
- **   TC_FUNCTION content content content content int [byte] newHandle content
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newFunction:
+///   TC_FUNCTION content content content content int [byte] newHandle content
+///-----------------------------------------------------------------------------
 
 LispRef newFunction(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -390,10 +389,10 @@ LispRef newFunction(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newBytevector:
- **   TC_BYTEVECTOR int [byte] content
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newBytevector:
+///   TC_BYTEVECTOR int [byte] content
+///-----------------------------------------------------------------------------
 
 LispRef newBytevector(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -432,9 +431,9 @@ LispRef newBytevector(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newVector int [content]
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newVector int [content]
+///-----------------------------------------------------------------------------
 
 LispRef newVector(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -456,9 +455,9 @@ LispRef newVector(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newState content int content int
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newState content int content int
+///-----------------------------------------------------------------------------
 
 LispRef newState(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -501,10 +500,10 @@ LispRef newState(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newString:
- **   TC_STRING utf newHandle
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newString:
+///   TC_STRING utf newHandle
+///-----------------------------------------------------------------------------
 
 LispRef newString(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -516,10 +515,10 @@ LispRef newString(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newSymbol:
- **   TC_Symbol utf
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newSymbol:
+///   TC_Symbol utf
+///-----------------------------------------------------------------------------
 
 LispRef newSymbol(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -532,10 +531,10 @@ LispRef newSymbol(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newKeyword:
- **   TC_KEYWORD utf
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newKeyword:
+///   TC_KEYWORD utf
+///-----------------------------------------------------------------------------
 
 LispRef newKeyword(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -548,10 +547,10 @@ LispRef newKeyword(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newInt:
- **   TC_INT word
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newInt:
+///   TC_INT word
+///-----------------------------------------------------------------------------
 
 LispRef newInt(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -563,10 +562,10 @@ LispRef newInt(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newDouble:
- **   TC_DOUBLE word
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newDouble:
+///   TC_DOUBLE word
+///-----------------------------------------------------------------------------
 
 LispRef newDouble(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -577,10 +576,10 @@ LispRef newDouble(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newChar:
- **   TC_CHAR byte
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newChar:
+///   TC_CHAR byte
+///-----------------------------------------------------------------------------
 
 LispRef newChar(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -591,10 +590,10 @@ LispRef newChar(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newStream:
- **   TC_STREAM byte
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newStream:
+///   TC_STREAM byte
+///-----------------------------------------------------------------------------
 
 LispRef newStream(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -605,10 +604,10 @@ LispRef newStream(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** prevObject:
- **   TC_REFERENCE (int)handle
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// prevObject:
+///   TC_REFERENCE (int)handle
+///-----------------------------------------------------------------------------
 
 LispRef prevObject(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -648,10 +647,10 @@ LispRef prevObject(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** nullReference:
- **   TC_NULL
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// nullReference:
+///   TC_NULL
+///-----------------------------------------------------------------------------
 
 LispRef nullReference(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -660,10 +659,10 @@ LispRef nullReference(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** reset:
- **   TC_RESET
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// reset:
+///   TC_RESET
+///-----------------------------------------------------------------------------
 
 LispRef reset(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
@@ -673,9 +672,9 @@ LispRef reset(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** newHandle:
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// newHandle:
+///-----------------------------------------------------------------------------
 
 void newHandle(LispRef stream, LispRef obj)
 {
@@ -722,4 +721,4 @@ void newHandle(LispRef stream, LispRef obj)
 }
 
 
-/** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------

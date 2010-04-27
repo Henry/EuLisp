@@ -1,12 +1,11 @@
-/**  By J Garcia & University of Bath. All rights reserved.                 **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: tcltk
- **  Authors: J Garcia
- **  Description: tk initializations and bindings
- ** ----------------------------------------------------------------------- **/
+///  By J Garcia & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: tcltk
+///  Authors: J Garcia
+///  Description: tk initializations and bindings
+///-----------------------------------------------------------------------------
 
 #include "globalvariables.h"
 #include "tk.h"
@@ -196,13 +195,13 @@ LispRef eul_initialize_tk()
 }
 
 
-/** ----------------------------------------------------------------------- **
- **  EuLisp callbacks
- **    Fist step: create tame_registers and store them in the hash table
- **    eul_callbacks.
- **    Second step: when callback envoked get tame_registers out of the
- **    hash table to feed interpret.
- ** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+///  EuLisp callbacks
+///    Fist step: create tame_registers and store them in the hash table
+///    eul_callbacks.
+///    Second step: when callback envoked get tame_registers out of the
+///    hash table to feed interpret.
+///-----------------------------------------------------------------------------
 
 LispRef tk_allocate_registers(char *nameFunction, LispRef fn)
 {
@@ -212,19 +211,19 @@ LispRef tk_allocate_registers(char *nameFunction, LispRef fn)
 }
 
 
-/** ----------------------------------------------------------------------- **
- **  StructureProc --
- **
- **      This procedure is invoked whenever a structure-related event
- **      occurs on the main window.  If the window is deleted, the
- **      procedure modifies "w" to record that fact.
- **
- **  Results:
- **      None.
- *
- **  Side effects:
- **      Variable "w" may get set to NULL.
- ** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+///  StructureProc --
+///
+///      This procedure is invoked whenever a structure-related event
+///      occurs on the main window.  If the window is deleted, the
+///      procedure modifies "w" to record that fact.
+///
+///  Results:
+///      None.
+///
+///  Side effects:
+///      Variable "w" may get set to NULL.
+///-----------------------------------------------------------------------------
 
 static void StructureProc(ClientData clientData, XEvent *eventPtr)
 {
@@ -250,3 +249,5 @@ int Tcl_DoOneEventAux(int flag)
         return TCL_ERROR;
     }
 }
+
+///-----------------------------------------------------------------------------

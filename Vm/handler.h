@@ -1,19 +1,17 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Andreas Kind
- **  Description: handlers (int*, double* and string*)
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Andreas Kind
+///  Description: handlers (int*, double* and string*)
+///-----------------------------------------------------------------------------
 #ifndef HANDLER_H
 #define HANDLER_H
 
-/** ----------------------------------------------------------------- **
- ** HANDLER access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// HANDLER access
+///-----------------------------------------------------------------------------
 
 #define HANDLER_SIZE (1)
 #define HANDLER_HANDLE(x) (slot_ref((x), 0))
@@ -39,9 +37,9 @@
 #define eul_c_vector_ref(x, i) (*((x)+(i)))
 #define eul_c_vector_set(x, i, y) ((*((x)+(i)))=(y))
 
-/** ----------------------------------------------------------------- **
- ** Handler allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Handler allocation
+///-----------------------------------------------------------------------------
 
 #define eul_allocate_int_ref(loc, x)                                           \
     eul_allocate_object(loc, PGLOBAL(glob_fpi_ref_class), HANDLER_SIZE,        \
@@ -55,5 +53,6 @@
     eul_allocate_object(loc, PGLOBAL(glob_string_ref_class), HANDLER_SIZE,     \
     (LispRef) x)
 
-
+///-----------------------------------------------------------------------------
 #endif // HANDLER_H
+///-----------------------------------------------------------------------------

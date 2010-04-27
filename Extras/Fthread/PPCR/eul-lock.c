@@ -1,26 +1,22 @@
-
-/**           Copyright (c) 1996 by L Wickins & University of Bath.
- **                            All rights reserved.                         **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: solaris-semaphore
- **  Authors: Liam Wickins, Andreas Kind
- **  Description: Foreign function support for solaris locks
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1996 by L Wickins & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: solaris-semaphore
+///  Authors: Liam Wickins, Andreas Kind
+///  Description: Foreign function support for solaris locks
+///-----------------------------------------------------------------------------
 
 #include <eulisp.h>
 #include <th/PCR_Th.h>
 #include <th/PCR_ThTypes.h>
 
-/** ----------------------------------------------------------------- **
- ** eul_lock_create()
- **
- ** Description: Creates a PPCR mutex
- ** Args: none
- ** Returns: lock handle
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_lock_create()
+/// Description: Creates a PPCR mutex
+/// Args: none
+/// Returns: lock handle
+///-----------------------------------------------------------------------------
 
 PCR_Th_ML *eul_lock_create()
 {
@@ -32,13 +28,12 @@ PCR_Th_ML *eul_lock_create()
   return lock;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_bsema_create()
- **
- ** Description: create a binary semaphore
- ** Args: none
- ** Returns: semaphore handler
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_bsema_create()
+/// Description: create a binary semaphore
+/// Args: none
+/// Returns: semaphore handler
+///-----------------------------------------------------------------------------
 
 typedef struct PCR_Th_BSema_Struct {
   PCR_Th_ML *ml;
@@ -60,13 +55,12 @@ PCR_Th_BSema *eul_bsema_create()
   return bsem_handle;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_bsema_lock()
- **
- ** Description: lock a binary semaphore
- ** Args: semaphore handler
- ** Returns: semaphore handler
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_bsema_lock()
+/// Description: lock a binary semaphore
+/// Args: semaphore handler
+/// Returns: semaphore handler
+///-----------------------------------------------------------------------------
 
 LispRef eul_bsema_lock(PCR_Th_BSema *bsem_handle)
 {
@@ -87,13 +81,12 @@ LispRef eul_bsema_lock(PCR_Th_BSema *bsem_handle)
     return eul_nil;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_bsema_unlock()
- **
- ** Description: unlock a binary semaphore
- ** Args: semaphore handler
- ** Returns: semaphore handler
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_bsema_unlock()
+/// Description: unlock a binary semaphore
+/// Args: semaphore handler
+/// Returns: semaphore handler
+///-----------------------------------------------------------------------------
 
 PCR_Th_BSema *eul_bsema_unlock(PCR_Th_BSema *bsem_handle)
 {
@@ -108,7 +101,4 @@ PCR_Th_BSema *eul_bsema_unlock(PCR_Th_BSema *bsem_handle)
   PCR_Th_ML_Release(ml);
 }
 
-
-
-
-/* eof */
+///-----------------------------------------------------------------------------

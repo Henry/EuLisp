@@ -1,19 +1,17 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: classes and short names for global registers
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: classes and short names for global registers
+///-----------------------------------------------------------------------------
 #ifndef CLASS_H
 #define CLASS_H
 
-/** ----------------------------------------------------------------- **
- ** Global register short names
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Global register short names
+///-----------------------------------------------------------------------------
 
 #define eul_true PGLOBAL(glob_true)
 #define eul_nil PGLOBAL(glob_nil)
@@ -30,9 +28,9 @@
 #define eul_static_cons_class eul_as_static(PGLOBAL(glob_cons_class))
 #define eul_static_nil eul_as_static(PGLOBAL(glob_nil))
 
-/** ----------------------------------------------------------------- **
- ** nil allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// nil allocation
+///-----------------------------------------------------------------------------
 
 #define EUL_NIL_SIZE (c_int_as_eul_int(0))
 
@@ -43,9 +41,9 @@
 #define eul_finalize_nil(loc)                                                  \
     object_class(loc) = PGLOBAL(glob_null_class)
 
-/** ----------------------------------------------------------------- **
- ** Dynamic classs allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Dynamic classs allocation
+///-----------------------------------------------------------------------------
 
 #define CLASS_SIZE (10)
 #define EUL_CLASS_SIZE (c_int_as_eul_int(CLASS_SIZE))
@@ -66,4 +64,6 @@
     LispRef loc = eul_as_static(loc)
 
 
+///-----------------------------------------------------------------------------
 #endif // CLASS_H
+///-----------------------------------------------------------------------------

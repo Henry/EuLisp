@@ -1,19 +1,17 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: list processing
- ** ----------------------------------------------------------------------- **/
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: list processing
+///-----------------------------------------------------------------------------
 #ifndef LIST_H
 #define LIST_H
 
-/** ----------------------------------------------------------------- **
- ** Initialization
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialization
+///-----------------------------------------------------------------------------
 
 extern void fprint_cons (FILE *, LispRef);
 
@@ -23,9 +21,9 @@ extern void fprint_vector (FILE *, LispRef);
 extern void eul_initialize_cons();
 #endif /* WITH_CONS_TAG */
 
-/** ----------------------------------------------------------------- **
- ** Cons access
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Cons access
+///-----------------------------------------------------------------------------
 
 #define CONS_SIZE (2)
 #define EUL_CONS_SIZE c_int_as_eul_int(CONS_SIZE)
@@ -41,9 +39,9 @@ extern void eul_initialize_cons();
 #define eul_null(x) ((x) == eul_nil)
 #define eul_is_list(x) (eul_null(x) || eul_is_cons(x))
 
-/** ----------------------------------------------------------------- **
- ** Dynamic cons allocation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Dynamic cons allocation
+///-----------------------------------------------------------------------------
 
 #ifdef WITH_CONS_TAG
 #define eul_allocate_cons(loc, the_car, the_cdr)                               \
@@ -106,5 +104,6 @@ extern void eul_initialize_cons();
 #define eul_allocate_cons_old(loc, the_car, the_cdr)                           \
     GC_CONS(loc, the_car, the_cdr)
 
-
+///-----------------------------------------------------------------------------
 #endif // LIST_H
+///-----------------------------------------------------------------------------

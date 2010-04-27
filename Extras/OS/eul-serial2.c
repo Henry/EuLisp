@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eul-serial2
- **  Authos: Andreas Kind
- **  Description: serializing closures
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eul-serial2
+///  Authos: Andreas Kind
+///  Description: serializing closures
+///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
 #include "bytecode.h"
@@ -17,9 +16,9 @@ static LispRef *eul_sorted_modules = NULL;
 static int eul_nmodules;
 
 
-/** ----------------------------------------------------------------- **
- ** Compare two module vectors
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Compare two module vectors
+///-----------------------------------------------------------------------------
 
 static int compare_module_vectors(LispRef *x, LispRef *y)
 {
@@ -45,9 +44,9 @@ static int compare_module_vectors(LispRef *x, LispRef *y)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Store linked modules in eul_sorted_modules sorted by addresses
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Store linked modules in eul_sorted_modules sorted by addresses
+///-----------------------------------------------------------------------------
 
 LispRef eul_sort_modules()
 {
@@ -104,11 +103,11 @@ LispRef eul_sort_modules()
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Get binding location using a ptr: #(obj module_name index)
- ** obj is nil if the binding is located in one of the standard modules
- ** e.g. contained in level1
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Get binding location using a ptr: #(obj module_name index)
+/// obj is nil if the binding is located in one of the standard modules
+/// e.g. contained in level1
+///-----------------------------------------------------------------------------
 
 LispRef eul_get_binding_location(LispRef *ptr, LispRef std_modules)
 {
@@ -189,12 +188,12 @@ LispRef eul_get_binding_location(LispRef *ptr, LispRef std_modules)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Reveal the binding references of bytevectors
- ** Returns a list of #(obj module_name index) for each reference
- ** obj is nil if the binding is located in one of the standard modules
- ** e.g. contained in level1
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Reveal the binding references of bytevectors
+/// Returns a list of #(obj module_name index) for each reference
+/// obj is nil if the binding is located in one of the standard modules
+/// e.g. contained in level1
+///-----------------------------------------------------------------------------
 
 #define rel_pc(cv) ((uPtrInt) (pc - (Instruction *) cv))
 #define align(cv, pc) (pc += 3 + (4 - (rel_pc(cv)%4)))
@@ -291,9 +290,9 @@ LispRef eul_bytevector_refs(LispRef bv, LispRef std_modules)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Relink the binding references of bytevectors
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Relink the binding references of bytevectors
+///-----------------------------------------------------------------------------
 
 LispRef eul_link_raw_bytevector_refs(Instruction *code, int n, LispRef refs)
 {
@@ -410,9 +409,9 @@ LispRef eul_link_bytevector_refs(LispRef bv, LispRef refs)
 }
 
 
-/** ----------------------------------------------------------------- **
- ** Test
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Test
+///-----------------------------------------------------------------------------
 
 extern LispRef compare_bindings[];
 extern LispRef stream_bindings[];
@@ -426,4 +425,4 @@ LispRef eul_test_migrate()
 }
 
 
-/** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------

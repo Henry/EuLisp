@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: ANSI C99 specific definitions
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: ANSI C99 specific definitions
+///-----------------------------------------------------------------------------
 
 #ifndef STDC_H
 #define STDC_H
@@ -26,6 +25,6 @@
 #include <sys/times.h>
 #include <sys/types.h>
 
+///-----------------------------------------------------------------------------
 #endif // STDC_H
-
-/** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------

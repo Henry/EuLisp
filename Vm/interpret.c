@@ -1,12 +1,12 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
+//  Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Andreas Kind, Keith Playford
- **  Description: interpreter function
- ** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Andreas Kind, Keith Playford
+///  Description: interpreter function
+///-----------------------------------------------------------------------------
 
 #include "stdc.h"
 #include "config.h"
@@ -36,9 +36,9 @@
 #include "util.h"
 
 
-/** ----------------------------------------------------------------- **
- ** Instrumentation
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Instrumentation
+///-----------------------------------------------------------------------------
 
 #ifdef INSTRUMENTED
 ptrInt eul_allocated_memory = 0;
@@ -54,9 +54,9 @@ long eul_profiling_table[HIGHEST_BYTE_CODE + 1];
 #endif // INSTRUMENTED
 
 
-/** ----------------------------------------------------------------- **
- ** Get inlined arguments when little endian
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Get inlined arguments when little endian
+///-----------------------------------------------------------------------------
 
 #if BYTE_ORDER == LITTLE_ENDIAN
 
@@ -86,9 +86,9 @@ ptrInt get_fixarg_fn(Instruction ** pcptr, uPtrInt rel_reg_pc_arg)
 #endif // LITTLE_ENDIAN
 
 
-/** ----------------------------------------------------------------- **
- ** Main emulation loop
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Main emulation loop
+///-----------------------------------------------------------------------------
 
 ptrInt interpret(RegisterRef set)
 {

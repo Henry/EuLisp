@@ -209,8 +209,7 @@
      (loop l1 l2)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Select (also known as 'filter' or 'some')
-
+;;; Select
 ;;;-----------------------------------------------------------------------------
   (defmethod select ((fun <function>) (c <list>) . cs)
     (if (null cs)
@@ -319,11 +318,12 @@
                   (rev res (deep-copy ll))
                 (rev res ())))))
       (loop l ())))
+
   ;(defmethod deep-copy ((l <cons>))
   ;  (cons (deep-copy (car l)) (deep-copy (cdr l))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Destructive append (also known as 'append!')
+;;; Destructive append
 ;;;-----------------------------------------------------------------------------
   (defun append! (l1 l2)
     (cond
@@ -338,7 +338,7 @@
         l1)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Destructive reverse (also known as 'reverse!')
+;;; Destructive reverse
 ;;;-----------------------------------------------------------------------------
   (defun reverse-list! (l)
     (labels

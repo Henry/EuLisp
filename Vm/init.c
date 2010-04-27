@@ -1,12 +1,12 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
+//  Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: initialization of the bytecode interpreter
- ** ----------------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: initialization of the bytecode interpreter
+///-----------------------------------------------------------------------------
 
 #include "stdc.h"
 #include "config.h"
@@ -28,9 +28,9 @@
 
 extern long eul_profiling_table[];
 
-/** ----------------------------------------------------------------- **
- ** Initialise the system
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Initialise the system
+///-----------------------------------------------------------------------------
 
 int EUL_INITIALIZE(int argc, char **argv)
 {

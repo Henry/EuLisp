@@ -1,12 +1,11 @@
-/** Copyright (c) 1997 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: eulvm (Bytecode Interpreter -- Eutopia)
- **  Authors: Keith Playford, Andreas Kind
- **  Description: stand-alone entry point
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: eulvm (Bytecode Interpreter -- Eutopia)
+///  Authors: Keith Playford, Andreas Kind
+///  Description: stand-alone entry point
+///-----------------------------------------------------------------------------
 
 #include "stdc.h"
 #include "shared-mem.h"
@@ -25,9 +24,9 @@
 
 extern void run_application();
 
-/** ----------------------------------------------------------------- **
- ** Main function
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// Main function
+///-----------------------------------------------------------------------------
 
 #ifndef WITH_PCR_THREADS
 
@@ -77,7 +76,6 @@ int PCR_youtoo_main(int argc, char **argv, void *data)
     return 0;
 }
 
-
 PCR_Base_App runList[] =
 {
     {
@@ -92,7 +90,6 @@ PCR_Base_App runList[] =
     {NIL}
 };
 
-
 int main(int argc, const char **argv)
 {
     char buffer[100];
@@ -103,4 +100,6 @@ int main(int argc, const char **argv)
     exit(-1);
 }
 
+///-----------------------------------------------------------------------------
 #endif // WITH_PCR_THREADS
+///-----------------------------------------------------------------------------

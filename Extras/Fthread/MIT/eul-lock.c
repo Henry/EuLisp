@@ -1,25 +1,22 @@
-
-/** Copyright (c) 1996 by A Kind & University of Bath. All rights reserved. **/
-
-/** ----------------------------------------------------------------------- **
- **                     EuLisp System 'youtoo'
- ** ----------------------------------------------------------------------- **
- **  Library: fthread (foreign thread interface)
- **  Authors: Andreas Kind
- **  Description: Foreign function support for locks in MIT threads
- ** ----------------------------------------------------------------------- **/
+/// Copyright (c) 1996 by A Kind & University of Bath. All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'youtoo'
+///-----------------------------------------------------------------------------
+///  Library: fthread (foreign thread interface)
+///  Authors: Andreas Kind
+///  Description: Foreign function support for locks in MIT threads
+///-----------------------------------------------------------------------------
 
 #include <eulisp.h>
 #include <pthread.h>
 #include <gc.h>
 
-/** ----------------------------------------------------------------- **
- ** eul_lock_create()
- **
- ** Description: create a UI mutex
- ** Args: none
- ** Returns: lock handler or eul_nil on failure
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_lock_create()
+/// Description: create a UI mutex
+/// Args: none
+/// Returns: lock handler or eul_nil on failure
+///-----------------------------------------------------------------------------
 
 LispRef eul_lock_create()
 {
@@ -34,13 +31,12 @@ LispRef eul_lock_create()
     return eul_nil;
 }
 
-/** ----------------------------------------------------------------- **
- ** eul_sem_create()
- **
- ** Description: create a UI semaphore
- ** Args: count
- ** Returns: semaphore handler or eul_nil on failure
- ** ----------------------------------------------------------------- **/
+///-----------------------------------------------------------------------------
+/// eul_sem_create()
+/// Description: create a UI semaphore
+/// Args: count
+/// Returns: semaphore handler or eul_nil on failure
+///-----------------------------------------------------------------------------
 
 
 /* LispRef eul_sema_create(int count) */
@@ -56,5 +52,4 @@ LispRef eul_lock_create()
 /*     return eul_nil; */
 /* } */
 
-
-/* eof */
+///-----------------------------------------------------------------------------

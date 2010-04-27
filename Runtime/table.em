@@ -27,7 +27,7 @@
 
   (defmethod table-ref ((tab <simple-hash-table>) (key <string>))
     ;; strings must have different key than symbols
-    (fast-table-ref tab (string-append key "\x001")))
+    (fast-table-ref tab (string-append key "\x0001")))
 
   (defmethod table-ref ((tab <simple-hash-table>) (key <name>))
     (fast-table-ref tab (name key)))
@@ -69,7 +69,7 @@
 
   (defmethod (setter table-ref) ((tab <simple-hash-table>) (key <string>) x)
     ;; strings must have different key than symbols
-    (fast-table-set tab (string-append key "\x001") x))
+    (fast-table-set tab (string-append key "\x0001") x))
 
   (defmethod (setter table-ref) ((tab <simple-hash-table>) (key <name>) x)
     (fast-table-set tab (name key) x))
