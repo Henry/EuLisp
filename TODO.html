@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-04-01 21:31:50 BST"/>
+<meta name="generated" content="2010-04-27 22:49:00 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -224,7 +224,8 @@ to remove blank line at beginning, tabs and trailing white-space.
 </li>
 <li id="sec-1.20"><span class="todo TODO"> TODO</span> Add support in the REPL to load dynamically-linked module libraries <br/>
 </li>
-<li id="sec-1.21"><span class="todo TODO"> TODO</span> Add support for #;(sexp) comments in <i>Runtime/Ff/eul-ntok.c</i> <br/>
+<li id="sec-1.21"><span class="done DONE"> DONE</span> Add support for #;(sexp) comments in <i>Runtime/Ff/eul-ntok.c</i> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 22:44</span></span><br/>
 </li>
 <li id="sec-1.22"><span class="todo TODO"> TODO</span> Add line-number counting to <i>Runtime/Ff/eul-ntok.c</i> <br/>
 This also requires the introduction of a line-number counting stream to hold
@@ -233,6 +234,56 @@ the line-number and provide access to the error reporting system.
 <li id="sec-1.23"><span class="done DONE"> DONE</span> <code>read-error</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-01 Thu 21:31</span></span><br/>
 Replace the use of <code>error</code> with <code>read-error</code> in <i>read.em</i>
+</li>
+<li id="sec-1.24"><span class="done DONE"> DONE</span> Change the handling of multiple-escape sequences in <i>eul-ntok.c</i> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-22 Thu 22:52</span></span><br/>
+to correspond to the syntax for identifiers as described in the definition.
+Currently the handling of multiple-escape sequences is a duplicate of the
+handling for strings with all the special characters when the single escape
+character should only be required to escape itself and the multiple-escape
+character.
+</li>
+<li id="sec-1.25"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
+<code>slice</code> for string can a wrapper around substring already available
+in Youtoo.
+</li>
+<li id="sec-1.26"><span class="todo TODO"> TODO</span> Add <code>split</code> generic function and methods <br/>
+<code>split</code> for string could be implemented as a ff.
+</li>
+<li id="sec-1.27"><span class="done DONE"> DONE</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-27 Tue 12:25</span></span><br/>
+Requires equivalent ff in eul-ext.c
+</li>
+<li id="sec-1.28"><span class="done DONE"> DONE</span> Sort out the syntax of character sequences <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-26 Mon 19:46</span></span><br/>
+<ul>
+<li>
+There is a problem with the need for double escaping: #\\x000, #\\\ etc.
+</li>
+<li>
+Hexadecimal sequences are hard-coded to 3 digits, if not where is the end?
+</li>
+<li>
+How should the character '^' be written given that it is used to define
+control sequences e.g. #^c ?  Perhaps #^ ?
+
+</li>
+<li id="sec-1.28.1">Proposed solution <br/>
+To remove support for control sequences which are unusual,
+system-dependent and can be created using hexadecimal characters.  Also
+fix the number of hexadecimal digits for a character to 4 which is
+sufficient to support unicode but also avoids parsing problems.
+</li>
+</ul>
+</li>
+<li id="sec-1.29"><span class="todo TODO"> TODO</span> Correct the echoing of complex characters <br/>
+[user]: (print #\\\)
+\
+<ul>
+<li>
+#<br/>
+</li>
+</ul>
 </li>
 </ul>
 </div>
@@ -387,18 +438,57 @@ to corresponding to the Youtoo implementation.
 in structure.tex.  Include details of constant instances of classes and
 constant bindings to classes (class aliases).
 </li>
-<li id="sec-2.7">&lt;thread&gt; vs &lt;abstract-thread&gt; <br/>
+<li id="sec-2.7"><span class="todo TODO"> TODO</span> &lt;thread&gt; vs &lt;abstract-thread&gt; <br/>
 Sort out the difference between the EuLisp definition and the Youtoo
 implementation with respect to the name of the abstract base-class for
 threads.  In the definition it is <code>&lt;thread&gt;</code> whereas in Youtoo it is
 <code>&lt;abstract-thread&gt;</code> and <code>&lt;thread&gt;</code> is used for the currently used thread
 type.
 </li>
+<li id="sec-2.8"><span class="done DONE"> DONE</span> Reformat the <code>defgeneric</code> rewrite rules to conform to the others <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 08:39</span></span><br/>
+</li>
+<li id="sec-2.9"><span class="done DONE"> DONE</span> Consider reformatting all of the rewrite rules <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 08:40</span></span><br/>
+to be more consistent with the syntax description.
+</li>
+<li id="sec-2.10"><span class="todo TODO"> TODO</span> Add the return type to the syntax descriptions <br/>
+</li>
+<li id="sec-2.11"><span class="todo TODO"> TODO</span> Add "signatures" to all function descriptions <br/>
+</li>
+<li id="sec-2.12"><span class="todo TODO"> TODO</span> Change macro definitions to special operators <br/>
+It doesn't seem sensible to effectively specify that certain syntax MUST be
+implemented as macros; surely this decision should be taken by the
+implementers and for efficiency reasons it might be preferable that more of
+the special operators are implemented as primitives of the language.
+</li>
+<li id="sec-2.13"><span class="todo TODO"> TODO</span> Finish the "Lexical Syntax" section <br/>
+Provide a bit more background information.
+</li>
+<li id="sec-2.14"><span class="todo TODO"> TODO</span> Introduce the "Special Forms" list is <i>modules.tex</i> <br/>
+Or move this list to a more appropriate place, <i>e.g.</i> at the beginning of
+the section concerning "special forms".
+</li>
+<li id="sec-2.15"><span class="todo TODO"> TODO</span> Introduce the "Level-1" library and describe "module-1" <br/>
+</li>
+<li id="sec-2.16"><span class="todo TODO"> TODO</span> Re-reference definitions in the "Level-1" library <br/>
+so that they do not clash with those in the "Level-0" library.
+</li>
+<li id="sec-2.17"><span class="todo TODO"> TODO</span> Remove the "syntax-category" entries from the index <br/>
+</li>
+<li id="sec-2.18"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
+</li>
+<li id="sec-2.19"><span class="todo TODO"> TODO</span> Add <code>split</code> generic function and methods <br/>
+</li>
+<li id="sec-2.20"><span class="done DONE"> DONE</span> Add destructive <code>&lt;sequence&gt;</code> generic functions <code>sort!</code> and <code>reverse!</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-27 Tue 22:48</span></span><br/>
+Check for other <code>&lt;sequence&gt;</code> methods which should destructive variants.
+</li>
 </ul>
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-04-01 21:31:50 BST</p>
+<p class="date"> Date: 2010-04-27 22:49:00 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>
