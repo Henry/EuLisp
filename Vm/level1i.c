@@ -1,14 +1,13 @@
-//  Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-
+/// Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 ///-----------------------------------------------------------------------------
 /// ---                 EuLisp System 'youtoo'
 ///-----------------------------------------------------------------------------
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
 ///  Description: fast access to level1 bindings
- **
+///
 ///                !!! CHANGES ONLY TO leveli.skl.c !!!
- **
+///
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
@@ -94,6 +93,9 @@ LispRef make_entry(int pos, char *module_str, char *origin_str)
 
     return res;
 }
+
+
+///-----------------------------------------------------------------------------
 void fill_level1_table() {
   eul_level1_lexical_module_name = "level1";
   eul_level1_syntax_module_name = "macros";

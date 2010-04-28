@@ -22,7 +22,7 @@
     ((name . subvector) (pos . 3) (origin vector . subvector))
     ((name . member1-vector) (pos . 2) (origin vector . member1-vector))
     ((name . <vector>) (pos . 8) (origin vector . <vector>) (class . constant))
-    ((name . vector-empty-p) (pos . 15) (origin vector . vector-empty-p) (inline (G006474 (primitive-size) (fpi-zerop))))
+    ((name . vector-empty-p) (pos . 15) (origin vector . vector-empty-p) (inline (G006460 (primitive-size) (fpi-zerop))))
     ((name . make-vector) (pos . 39) (origin boot1 . make-vector))
     ((name . vectorp) (pos . 5) (origin vector . vectorp))
    )

@@ -1,11 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo'
-;;;-----------------------------------------------------------------------------
-;;;  Library: level1
+;;; -----------------------------------------------------------------------
+;;;                     EuLisp System 'youtoo'
+;;; -----------------------------------------------------------------------
+;;;  Library: level1 (EuLisp Language Level1 Implementation)
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: string processing
-;;;-----------------------------------------------------------------------------
+;;;  Description: string processing
+;;; -----------------------------------------------------------------------
 (defmodule string
   (syntax (_telos0)
    import (telos convert copy collect compare fpi)
@@ -15,40 +15,32 @@
            string-as-int string-empty-p member1-string
            do1-string map1-string listify-string
            eul_list_as_eul_string))
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Class <string>
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defclass <character-sequence> (<sequence>) () abstractp: t)
-
   (defprimclass <string> string-class (<character-sequence>)
     ((data accessor: string-data)))
-
   (defmethod initialize ((str <string>) inits)
     (call-next-method)
     (let ((n (init-list-ref inits size: 0))
           (c (init-list-ref inits fill-value: #\ )))
       (eul_init_string str n c)))
-
   (defextern eul_init_string (ptr <int> <character>) ptr)
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; String access
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defun substring (str i j)
     (let ((ii (or i 0))
           (jj (or j (string-size str))))
       (substring1 str ii jj)))
-
   (defmethod element ((str <string>) (i <int>))
     (string-ref str i))
-
   (defmethod size ((str <string>))
     (string-size str))
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Concatenation
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod concatenate ((str <string>) . cs)
     (labels
      ((loop (ccs)
@@ -58,41 +50,31 @@
                       (eul_str_append str (convert (car ccs) <string>)))
                 (loop (cdr ccs))))))
      (loop cs)))
-
   (defun string-append strs
     (eul_list_as_eul_string strs))
-
   (defextern eul_str_append (<string> <string>) <string>)
   (defextern eul_list_as_eul_string (ptr) ptr)
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Predicates
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defun string-empty-p (str) (int-binary= (string-size str) 0))
   (declare-inline string-empty-p)
-
   (defmethod emptyp ((str <string>)) (string-empty-p str))
-
   (defmethod equal ((str1 <string>) (str2 <string>))
     (string-equal str1 str2))
-
   (defun string-equal (str1 str2)
     (int-binary= (string-compare str1 str2) 0))
   (declare-inline string-equal)
-
   (defmethod binary< ((str1 <string>) (str2 <string>))
     (int-binary< (string-compare str1 str2) 0))
-
   (defextern string-compare (<string> <string>) <int> "strcmp")
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Mapping
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod do ((fun <function>) (str <string>) . cs)
     (if (null cs)
         (do1-string fun str)
       (call-next-method)))
-
   (defun do1-string (fun str)
     (let ((n (string-size str))
           (i 0))
@@ -105,12 +87,10 @@
                     (loop))
                 ())))
        (loop))))
-
   (defmethod map ((fun <function>) (str <string>) . cs)
     (if (null cs)
         (map1-string fun str)
       (call-next-method)))
-
   (defun map1-string (fun str)
     (let* ((n (string-size str))
            (res (make <string> size: n))
@@ -124,10 +104,9 @@
                     (loop))
                 res)))
        (loop))))
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Member
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod member (x (str <string>) . preds)
     (if (null preds)
         (member1-string x str)
@@ -143,15 +122,13 @@
                          (setq i (int-binary+ i 1))
                          (loop))))))
          (loop)))))
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Anyp
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod anyp ((fun <function>) (str <string>) . cs)
     (if (null cs)
         (anyp1-string fun str)
       (call-next-method)))
-
   (defun anyp1-string (fun str)
     (let ((n (string-size str))
           (i 0))
@@ -163,15 +140,13 @@
                          (setq i (int-binary+ i 1))
                          (loop))))))
        (loop))))
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Allp
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod allp ((fun <function>) (str <string>) . cs)
     (if (null cs)
         (allp1-string fun str)
       (call-next-method)))
-
   (defun allp1-string (fun str)
     (let ((n (string-size str))
           (i 0))
@@ -184,24 +159,17 @@
                          (loop)))
                 str)))
        (loop))))
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Reverse string
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod reverse ((str <string>))
     (reverse-string str))
   (defextern reverse-string (<string>) <string> "eul_reverse_str")
-
-  (defmethod reverse! ((str <string>))
-    (reverse!-string str))
-  (defextern reverse!-string (<string>) <string> "eul_reverse_des_str")
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Accumulate
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod accumulate ((fun <function>) init (str <string>))
     (accumulate-string fun init str))
-
   (defun accumulate-string (fun init str)
     (let ((n (string-size str))
           (i 0))
@@ -214,32 +182,24 @@
                     (loop))
                 init)))
        (loop))))
-
   (defmethod accumulate1 ((fun <function>) (str <string>))
     (accumulate1-string fun str))
-
   (defun accumulate1-string (fun str)
     (if (int-binary= (string-size str) 0) ()
       (accumulate-string fun (string-ref str 0) (tailstring str 1))))
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Copy
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defmethod shallow-copy ((str <string>))
     (copy-string str))
-
   (defmethod deep-copy ((str <string>))
     (copy-string str))
-
   (defextern copy-string (<string>) <string> "eul_str_copy")
-
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
 ;;; Conversion
-;;;-----------------------------------------------------------------------------
+;;; --------------------------------------------------------------------
   (defgeneric (converter <string>) (x))
-
   (defextern string-as-int (<string>) <int> "atoi")
-
   (defun listify-string (str . separators)
     (let ((c (if separators (car separators) #\ )))
       (labels
@@ -252,7 +212,4 @@
        (if (eql c (string-ref str 0))
            (loop (substring str 1 ()) ())
          (loop str ())))))
-
-;;;-----------------------------------------------------------------------------
-  )  ;; end of module
-;;;-----------------------------------------------------------------------------
+)  ; end of module

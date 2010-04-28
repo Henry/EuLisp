@@ -33,7 +33,7 @@ extern LispRef i_all_bindings[];
 #define _fpi__X60_X62_fn_index 6 
 #define _string_stream__X60_X62_fn_index 46 
 #define _string__X60_X62_fn_index 13 
-#define string_as_int_fn_index 23 
+#define string_as_int_fn_index 22 
 #define make_space_fn_index 18 
 #define make_vector1_fn_index 54 
 #define class_direct_superclasses_fn_index 69 

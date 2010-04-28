@@ -44,7 +44,8 @@ LEVEL1_MAC_EM = stream0.em macros.em
 LEVEL1_MAC_C = $(LEVEL1_MAC_EM:%.em=%.c)
 LEVEL1_MAC_O = ${LEVEL1_MAC_C:%.c=$(ARCH_DIR)/%.o}
 
-MATH_C := double1.c double.c math.c
+MATH_EM := double1.em double.em math.em
+MATH_C := $(MATH_EM:%.em=%.c)
 MATH_O := ${MATH_C:%.c=$(ARCH_DIR)/%.o}
 
 MATH_FF_C = Ff/eul-dbl.c
@@ -84,7 +85,7 @@ $(MATH_SHARED_LIB): $(MATH_O)
 ## ----------------------------------------------------------------------------
 
 .PHONY: boot
-boot:	_stream0.i _macros.i $(LEVEL1_LIB_I) $(MATH_LIB_I) $(LEVEL1_LIB) $(MATH_LIB)
+boot:	_stream0.i _macros.i $(LEVEL1_LIB_I) $(MATH_LIB_I) $(LEVEL1_EM) $(MATH_LIB)
 	cd ../Telos; $(MAKE) boot-syntax
 	$(MAKE) boot-syntax
 
@@ -113,7 +114,8 @@ $(EUL_LIB_DIR)/lib%.i : %.em
 		-l telos
 	mv $(@F) $@
 
-%.i : %.em
+.PRECIOUS: %.i %.c %.h
+%.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
 		-load_path $(EUL_DIR)/Runtime \
 		-load_path $(EUL_DIR)/Telos \

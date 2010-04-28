@@ -76,7 +76,7 @@ $(TELOS_SHARED_LIB): $(TELOS_MAC_O) $(TELOS_O)
 ## ----------------------------------------------------------------------------
 
 .PHONY: boot
-boot:	_telos0.i $(BOOT_LIB_I) $(TELOS_LIB_I) $(BOOT_LIB) $(TELOS_LIB)
+boot:	boot0.i _telos0.i $(BOOT_LIB_I) $(TELOS_LIB_I) $(BOOT_LIB) $(TELOS_LIB)
 
 .PHONY: boot-syntax
 boot-syntax:
@@ -91,7 +91,8 @@ $(EUL_LIB_DIR)/lib%.i : %.em
 	$(U2) $(U2FLAGS) -ar $* -od $(ARCH_DIR) -load_path $(EUL_DIR)/Telos
 	mv $(@F) $@
 
-%.i : %.em
+.PRECIOUS: %.i %.c %.h
+%.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
 		-load_path $(EUL_DIR)/Telos -l level1
 

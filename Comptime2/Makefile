@@ -30,11 +30,11 @@ EVAL_EM := \
     ex-syntax.em i-all.em i-args.em i-compile.em i-error.em i-ffi.em \
     i-level1.em i-modify.em i-notify.em i-param.em i-rep.em op-peep-r.em op-peep.em \
     p-env.em p-parse.em p-read.em sx-node.em sx-obj.em sx-obj1.em sx-obj2.em \
-    sx-write.em youtoo.em Youtoo_.em i-aux0.em
+    sx-write.em youtoo.em i-aux0.em
 EVAL_C := $(EVAL_EM:%.em=%.c)
 EVAL_O := $(EVAL_C:%.c=$(ARCH_DIR)/%.o)
 
-EVAL_FF_C = $(WORD_LENGTH)bit/cg-exec-word-length.c Ff/eul-dld.c
+EVAL_FF_C = $(WORD_LENGTH)bit/cg-exec-word-length.c Ff/eul-dld.c Ff/Youtoo_.c
 
 EVAL_C += $(EVAL_FF_C)
 EVAL_O += $(EVAL_FF_C:%.c=$(ARCH_DIR)/%.o)
@@ -110,7 +110,8 @@ bytecode2:
 	$(EUL_BIN_DIR)/b2h cg-bycode1.em cg-bycode2.em > ../include/bytecode2.h
 	@echo "..DONE."
 
-%.i : %.em
+.PRECIOUS: %.i %.c %.h
+%.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) -l level1
 
 $(ARCH_DIR)/cg-exec-word-length.o: \
