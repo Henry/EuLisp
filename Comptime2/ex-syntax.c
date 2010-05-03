@@ -152,7 +152,7 @@ void initialize_module_ex_syntax()
   static const void *G004991[] = {I(aa,24,00,00),B(ex_syntax ,6),I(24,00,00,00),B(ex_syntax ,6),I(3d,02,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 60 binding: make-prefix */
-  static const void *G004993[] = {I(ab,1c,82,02),I(1c,82,02,1c),I(1c,24,00,00),B(collect ,18),I(3c,02,24,00),B(mop_class ,6),I(24,00,00,00),B(convert ,2),I(3d,02,04,45),I(04,00,00,00)};
+  static const void *G004993[] = {I(ab,1c,82,02),I(1c,82,02,1c),I(1c,24,00,00),B(collect ,19),I(3c,02,24,00),B(mop_class ,6),I(24,00,00,00),B(convert ,2),I(3d,02,04,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 61 binding: anonymous */
   static const void *G004995[] = {I(ab,1c,45,02)};

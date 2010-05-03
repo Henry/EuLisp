@@ -22,6 +22,7 @@
            float
            fpi
            format
+           read
            handler
            integer
            let-cc
@@ -33,7 +34,6 @@
            stream3
            string
            symbol
-           read
            telos
            thread
            table

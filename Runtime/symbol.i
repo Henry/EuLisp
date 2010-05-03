@@ -7,7 +7,7 @@
    full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc convert callback compare collect string copy integer number fpi character table1 vector list table)
    export (
     ((name . <keyword>) (pos . 81) (origin mop-class . <keyword>) (class . constant))
-    ((name . name) (pos . 7) (origin collect . name))
+    ((name . name) (pos . 8) (origin collect . name))
     ((name . symbol-name) (pos . 62) (origin mop-class . symbol-name) (inline (G00735 (static-ref0) (primitive-ref))))
     ((name . keywordp) (pos . 3) (origin symbol . keywordp))
     ((name . symbolp) (pos . 43) (origin boot1 . symbolp) (inline (G0045 (symbolp))))

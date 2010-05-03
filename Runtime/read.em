@@ -16,7 +16,9 @@
              sread sread-s-expression
              list-start list-stop dot vector-start vector-stop special-tokens
              quote-mark quasiquote-mark unquote-mark unquote-splicing-mark
-             eos *dispatch-macro-character-table* set-dispatch-macro-character))
+             eos *dispatch-macro-character-table* set-dispatch-macro-character
+             )
+     )
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lispin

@@ -1,19 +1,25 @@
-## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+###-----------------------------------------------------------------------------
+### ---                  EuLisp System 'youtoo'
+###-----------------------------------------------------------------------------
 
-## ----------------------------------------------------------------------------
-##                      EuLisp System 'youtoo'
-## ----------------------------------------------------------------------------
-
-## ----------------------------------------------------------------------------
-## EuLisp level-1 runtime Makefile
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### EuLisp level-1 runtime Makefile
+###-----------------------------------------------------------------------------
 
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
 
-## ----------------------------------------------------------------------------
-## Output file names
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Reset U2 to use the bootstrap youtoo
+###-----------------------------------------------------------------------------
+
+U2_DEV := $(U2)
+U2 = $(U2_BOOT)
+
+###-----------------------------------------------------------------------------
+### Output file names
+###-----------------------------------------------------------------------------
 
 LEVEL1_LIB = $(EUL_LIB_DIR)/liblevel1.a
 LEVEL1_LIB_I = $(EUL_LIB_DIR)/liblevel1.i
@@ -23,9 +29,15 @@ MATH_LIB = $(EUL_LIB_DIR)/libmath.a
 MATH_LIB_I = $(EUL_LIB_DIR)/libmath.i
 MATH_SHARED_LIB = $(EUL_LIB_DIR)/libmath.so
 
-## ----------------------------------------------------------------------------
-## Source and object files
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Library dependencies
+###-----------------------------------------------------------------------------
+
+TELOS_LIB_I = $(EUL_LIB_DIR)/libtelos.i
+
+###-----------------------------------------------------------------------------
+### Source and object files
+###-----------------------------------------------------------------------------
 
 LEVEL1_EM = bit.em callback.em character.em collect.em compare.em condition.em \
 	convert.em convert1.em copy.em double.em double1.em dynamic.em event.em \
@@ -52,9 +64,9 @@ MATH_FF_C = Ff/eul-dbl.c
 MATH_C += $(MATH_FF_C)
 MATH_O += $(ARCH_DIR)/Ff/eul-dbl.o
 
-## ----------------------------------------------------------------------------
-## Commands to build library object files
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Commands to build library object files
+###-----------------------------------------------------------------------------
 
 .PHONY: lib
 lib:	$(LEVEL1_LIB) $(MATH_LIB)
@@ -80,12 +92,13 @@ $(MATH_SHARED_LIB): $(MATH_O)
 		$(CC) $(MATH_SHARED_LIB) \
 	        $(MATH_O)
 
-## ----------------------------------------------------------------------------
-## Bootstrapping
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Bootstrapping
+###-----------------------------------------------------------------------------
 
 .PHONY: boot
-boot:	_stream0.i _macros.i $(LEVEL1_LIB_I) $(MATH_LIB_I) $(LEVEL1_EM) $(MATH_LIB)
+boot:	libtelos.i _macros.i liblevel1.i libmath.i
+	@rm -f libtelos.i
 	cd ../Telos; $(MAKE) boot-syntax
 	$(MAKE) boot-syntax
 
@@ -97,22 +110,18 @@ boot-syntax:
 		-l level1
 	$(MAKE)
 
-$(LEVEL1_LIB_I): $(LEVEL1_EM) $(LEVEL1_MAC_EM)
+$(LEVEL1_LIB_I): $(LEVEL1_MAC_EM) $(LEVEL1_EM)
 $(MATH_LIB_I): $(MATH_EM)
 
-# Note that we try to build the library interface files twice
-# because the first time building liblevel1.i fails but it is
-# successful the second time
+lib%.i : $(EUL_LIB_DIR)/lib%.i
+	@ln -s $(EUL_LIB_DIR)/$@ $@
+
 $(EUL_LIB_DIR)/lib%.i : %.em
-	-$(U2) $(U2FLAGS) -ar $* -od $(ARCH_DIR) \
-		-load_path $(EUL_DIR)/Runtime \
-		-load_path $(EUL_DIR)/Telos \
-		-l telos
 	$(U2) $(U2FLAGS) -ar $* -od $(ARCH_DIR) \
-		-load_path $(EUL_DIR)/Runtime \
 		-load_path $(EUL_DIR)/Telos \
+		-load_path $(EUL_DIR)/Runtime \
 		-l telos
-	mv $(@F) $@
+	@mv $(@F) $@
 
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
@@ -121,24 +130,21 @@ $(EUL_LIB_DIR)/lib%.i : %.em
 		-load_path $(EUL_DIR)/Telos \
 		-l level1
 
-## ----------------------------------------------------------------------------
-## Miscellaneous commands
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Miscellaneous commands
+###-----------------------------------------------------------------------------
 
-.PHONY: touch
-touch:
-	@touch $(LEVEL1_C) $(LEVEL1_MAC_C) $(MATH_C)
-
-.PHONY: boot-touch
-boot-touch:
-	@touch *.em $(LEVEL1_FF_C) $(MATH_FF_C)
+.PHONY: boot-clean
+boot-clean: clean
+	@rm -f *.[ihc]
 
 .PHONY: clean
 clean:
+	@rm -f libtelos.i
 	@rm -rf $(ARCH_DIR)
 
 .PHONY: distclean
-distclean:
+distclean: clean
 	@rm -rf platforms
 
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------

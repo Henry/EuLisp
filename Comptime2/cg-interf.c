@@ -229,7 +229,7 @@ void initialize_module_cg_interf()
 
   eul_allocate_static_string(str_4159, "", 0);
   /* Byte-vector with size: 20 is_init: 0 index: 144 binding: ffl-link-string */
-  static const void *G004157[] = {I(a9,24,00,00),B(i_param ,4),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,143),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,142),I(3b,01,1d,24),B(boot ,15),I(3c,02,24,00),B(collect ,18),I(1c,24,00,00),B(boot ,9),I(3d,02,03,22),I(01,45,02,00)};
+  static const void *G004157[] = {I(a9,24,00,00),B(i_param ,4),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,143),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,142),I(3b,01,1d,24),B(boot ,15),I(3c,02,24,00),B(collect ,19),I(1c,24,00,00),B(boot ,9),I(3d,02,03,22),I(01,45,02,00)};
 
   eul_allocate_static_string(str_4162, "    (~s ~a)\n", 12);
   /* Byte-vector with size: 12 is_init: 0 index: 146 binding: anonymous */
@@ -249,7 +249,7 @@ void initialize_module_cg_interf()
 
   eul_allocate_static_string(str_4175, "", 0);
   /* Byte-vector with size: 20 is_init: 0 index: 156 binding: fff-link-string */
-  static const void *G004173[] = {I(a9,24,00,00),B(i_param ,13),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,155),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,154),I(3b,01,1d,24),B(boot ,15),I(3c,02,24,00),B(collect ,18),I(1c,24,00,00),B(boot ,9),I(3d,02,03,22),I(01,45,02,00)};
+  static const void *G004173[] = {I(a9,24,00,00),B(i_param ,13),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,155),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,154),I(3b,01,1d,24),B(boot ,15),I(3c,02,24,00),B(collect ,19),I(1c,24,00,00),B(boot ,9),I(3d,02,03,22),I(01,45,02,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 157 binding: find-imported-module */
   static const void *G004176[] = {I(aa,1b,24,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,34),I(1c,24,00,00),B(cg_interf ,7),I(3c,01,1b,34),I(00,00,00,15),I(1d,24,00,00),B(i_param ,19),I(3d,01,03,32),I(00,00,00,10),I(1d,24,00,00),B(cg_interf ,12),I(3d,01,03,22),I(01,45,02,00)};

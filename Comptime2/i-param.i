@@ -4,7 +4,7 @@
 (definterface i-param
   (import (i-level1)
    syntax (_macros _i-aux0)
-   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream3 vector stream stream1 lock stream2 socket list format convert1 table1 table handler random symbol read boot boot1 i-level1)
+   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1)
    export (
     ((name . *get-loaded-syntax-module*) (pos . 31) (origin i-param . *get-loaded-syntax-module*))
     ((name . *ostype*) (pos . 50) (origin i-param . *ostype*))

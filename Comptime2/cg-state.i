@@ -4,7 +4,7 @@
 (definterface cg-state
   (import (i-all)
    syntax (_macros _sx-obj0)
-   full-import (i-error i-notify i-param i-level1 boot1 boot read symbol random handler table table1 convert1 format list socket stream2 lock stream1 stream vector stream3 float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level1 aux-table i-all)
+   full-import (i-error i-notify i-param i-level1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level1 aux-table i-all)
    export (
     ((name . C-state-code-vector-defs!) (pos . 6) (origin cg-state . C-state-code-vector-defs!) (inline (G002273 (stack-ref 1) (static-fpi-ref 6) (stack-ref 2) (binding-ref ? <C-state>) (set-primitive-relative-ref) (nobble 2))))
     ((name . C-state-initializations?) (pos . 44) (origin cg-state . C-state-initializations?) (inline (G002267 (static-fpi-ref 5) (binding-ref ? <C-state>) (primitive-relative-ref))))

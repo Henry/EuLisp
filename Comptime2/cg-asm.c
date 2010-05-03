@@ -114,7 +114,7 @@ void initialize_module_cg_asm()
   static const void *G006416[] = {I(aa,1b,11,47),I(00,00,1c,15),I(1b,24,00,00),B(cg_asm ,6),I(3c,01,23,00),B(cg_asm ,49),I(1f,04,1f,03),I(24,00,00,00),B(i_notify ,4),I(3c,03,2a,1b),I(10,1f,04,1c),I(8f,2a,1c,11),I(1f,05,1c,90),I(45,06,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 51 binding: anonymous */
-  static const void *G006419[] = {I(ab,46,01,1b),I(10,1c,11,1c),I(48,00,00,23),B(cg_asm ,23),I(23,00,00,00),B(cg_asm ,50),I(3b,01,1c,24),B(collect ,5),I(3d,02,04,45),I(04,00,00,00)};
+  static const void *G006419[] = {I(ab,46,01,1b),I(10,1c,11,1c),I(48,00,00,23),B(cg_asm ,23),I(23,00,00,00),B(cg_asm ,50),I(3b,01,1c,24),B(collect ,6),I(3d,02,04,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 25 is_init: 0 index: 52 binding: call/ep-lambda */
   static const void *G006421[] = {I(aa,46,01,1b),I(48,00,00,23),B(cg_asm ,24),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,34),I(00,00,00,29),I(23,00,00,00),B(cg_asm ,23),I(23,00,00,00),B(cg_asm ,51),I(3b,02,47,01),I(00,24,00,00),B(aux_table ,7),I(3c,02,32,00),I(00,00,00,24),I(23,00,00,00),B(cg_asm ,23),I(23,00,00,00),B(cg_asm ,48),I(3b,02,47,01),I(00,24,00,00),B(aux_table ,7),I(3c,02,2a,47),I(01,00,45,02)};

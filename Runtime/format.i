@@ -2,9 +2,9 @@
 ;;;   Interface file for module format
 
 (definterface format
-  (import (telos collect fpi list string stream stream3 bit)
+  (import (telos collect fpi list string stream)
    syntax (_telos0)
-   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos compare condition event thread dynamic let-cc callback collect integer number copy fpi convert list string socket stream2 lock stream1 stream float vector character stream3 bit)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos compare condition event thread dynamic let-cc callback collect integer number copy fpi convert list string socket stream2 lock stream1 stream)
    export (
     ((name . format) (pos . 17) (origin mop-gf . generic-format))
    )

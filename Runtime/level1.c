@@ -22,6 +22,7 @@ extern void initialize_module_event();
 extern void initialize_module_float();
 extern void initialize_module_fpi();
 extern void initialize_module_format();
+extern void initialize_module_read();
 extern void initialize_module_handler();
 extern void initialize_module_integer();
 extern void initialize_module_let_cc();
@@ -33,7 +34,6 @@ extern void initialize_module_stream();
 extern void initialize_module_stream3();
 extern void initialize_module_string();
 extern void initialize_module_symbol();
-extern void initialize_module_read();
 extern void initialize_module_telos();
 extern void initialize_module_thread();
 extern void initialize_module_table();
@@ -42,7 +42,6 @@ extern LispRef vector_bindings[];
 extern LispRef table_bindings[];
 extern LispRef thread_bindings[];
 extern LispRef telos_bindings[];
-extern LispRef read_bindings[];
 extern LispRef symbol_bindings[];
 extern LispRef string_bindings[];
 extern LispRef stream3_bindings[];
@@ -54,6 +53,7 @@ extern LispRef list_bindings[];
 extern LispRef let_cc_bindings[];
 extern LispRef integer_bindings[];
 extern LispRef handler_bindings[];
+extern LispRef read_bindings[];
 extern LispRef format_bindings[];
 extern LispRef fpi_bindings[];
 extern LispRef float_bindings[];
@@ -93,6 +93,7 @@ void initialize_module_level1()
   initialize_module_float();
   initialize_module_fpi();
   initialize_module_format();
+  initialize_module_read();
   initialize_module_handler();
   initialize_module_integer();
   initialize_module_let_cc();
@@ -104,7 +105,6 @@ void initialize_module_level1()
   initialize_module_stream3();
   initialize_module_string();
   initialize_module_symbol();
-  initialize_module_read();
   initialize_module_telos();
   initialize_module_thread();
   initialize_module_table();
@@ -113,19 +113,19 @@ void initialize_module_level1()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef G002779;
+  LispRef G0010202;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 148 is_init: 1 index: 0 binding: initialize-level1 */
-  static const void *G002778[] = {I(87,25,00,00),B(level1 ,1),I(24,00,00,00),B(vector ,1),I(3e,0b,24,00),B(vector ,0),I(3c,00,21,01),I(24,00,00,00),B(table ,1),I(3e,0b,24,00),B(table ,0),I(3c,00,21,01),I(24,00,00,00),B(thread ,1),I(3e,0b,24,00),B(thread ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(24,00,00,00),B(read ,1),I(3e,0b,24,00),B(read ,0),I(3c,00,21,01),I(24,00,00,00),B(symbol ,1),I(3e,0b,24,00),B(symbol ,0),I(3c,00,21,01),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(stream3 ,1),I(3e,0b,24,00),B(stream3 ,0),I(3c,00,21,01),I(24,00,00,00),B(stream ,1),I(3e,0b,24,00),B(stream ,0),I(3c,00,21,01),I(24,00,00,00),B(random ,1),I(3e,0b,24,00),B(random ,0),I(3c,00,21,01),I(24,00,00,00),B(number ,1),I(3e,0b,24,00),B(number ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(list ,1),I(3e,0b,24,00),B(list ,0),I(3c,00,21,01),I(24,00,00,00),B(let_cc ,1),I(3e,0b,24,00),B(let_cc ,0),I(3c,00,21,01),I(24,00,00,00),B(integer ,1),I(3e,0b,24,00),B(integer ,0),I(3c,00,21,01),I(24,00,00,00),B(handler ,1),I(3e,0b,24,00),B(handler ,0),I(3c,00,21,01),I(24,00,00,00),B(format ,1),I(3e,0b,24,00),B(format ,0),I(3c,00,21,01),I(24,00,00,00),B(fpi ,1),I(3e,0b,24,00),B(fpi ,0),I(3c,00,21,01),I(24,00,00,00),B(float ,1),I(3e,0b,24,00),B(float ,0),I(3c,00,21,01),I(24,00,00,00),B(event ,1),I(3e,0b,24,00),B(event ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(copy ,1),I(3e,0b,24,00),B(copy ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(compare ,1),I(3e,0b,24,00),B(compare ,0),I(3c,00,21,01),I(24,00,00,00),B(collect ,1),I(3e,0b,24,00),B(collect ,0),I(3c,00,21,01),I(24,00,00,00),B(character ,1),I(3e,0b,24,00),B(character ,0),I(3c,00,21,01),I(24,00,00,00),B(callback ,1),I(3e,0b,24,00),B(callback ,0),I(3c,00,21,01),I(24,00,00,00),B(bit ,1),I(3e,0b,24,00),B(bit ,0),I(3c,00,21,01),I(86,ac,00,00)};
+  static const void *G0010201[] = {I(87,25,00,00),B(level1 ,1),I(24,00,00,00),B(vector ,1),I(3e,0b,24,00),B(vector ,0),I(3c,00,21,01),I(24,00,00,00),B(table ,1),I(3e,0b,24,00),B(table ,0),I(3c,00,21,01),I(24,00,00,00),B(thread ,1),I(3e,0b,24,00),B(thread ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(24,00,00,00),B(symbol ,1),I(3e,0b,24,00),B(symbol ,0),I(3c,00,21,01),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(stream3 ,1),I(3e,0b,24,00),B(stream3 ,0),I(3c,00,21,01),I(24,00,00,00),B(stream ,1),I(3e,0b,24,00),B(stream ,0),I(3c,00,21,01),I(24,00,00,00),B(random ,1),I(3e,0b,24,00),B(random ,0),I(3c,00,21,01),I(24,00,00,00),B(number ,1),I(3e,0b,24,00),B(number ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(list ,1),I(3e,0b,24,00),B(list ,0),I(3c,00,21,01),I(24,00,00,00),B(let_cc ,1),I(3e,0b,24,00),B(let_cc ,0),I(3c,00,21,01),I(24,00,00,00),B(integer ,1),I(3e,0b,24,00),B(integer ,0),I(3c,00,21,01),I(24,00,00,00),B(handler ,1),I(3e,0b,24,00),B(handler ,0),I(3c,00,21,01),I(24,00,00,00),B(read ,1),I(3e,0b,24,00),B(read ,0),I(3c,00,21,01),I(24,00,00,00),B(format ,1),I(3e,0b,24,00),B(format ,0),I(3c,00,21,01),I(24,00,00,00),B(fpi ,1),I(3e,0b,24,00),B(fpi ,0),I(3c,00,21,01),I(24,00,00,00),B(float ,1),I(3e,0b,24,00),B(float ,0),I(3c,00,21,01),I(24,00,00,00),B(event ,1),I(3e,0b,24,00),B(event ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(copy ,1),I(3e,0b,24,00),B(copy ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(compare ,1),I(3e,0b,24,00),B(compare ,0),I(3c,00,21,01),I(24,00,00,00),B(collect ,1),I(3e,0b,24,00),B(collect ,0),I(3c,00,21,01),I(24,00,00,00),B(character ,1),I(3e,0b,24,00),B(character ,0),I(3c,00,21,01),I(24,00,00,00),B(callback ,1),I(3e,0b,24,00),B(callback ,0),I(3c,00,21,01),I(24,00,00,00),B(bit ,1),I(3e,0b,24,00),B(bit ,0),I(3c,00,21,01),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G002779,G002778);
+  eul_allocate_bytevector( G0010202,G0010201);
 
   /* Set local bindings */
   level1_bindings[ 1] = eul_nil;
-  eul_allocate_lambda( level1_bindings[0], "initialize-level1", 0, G002779);
+  eul_allocate_lambda( level1_bindings[0], "initialize-level1", 0, G0010202);
 
   }
 }

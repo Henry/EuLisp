@@ -4,7 +4,7 @@
 (definterface sx-obj
   (import (i-level1 sx-obj1 sx-obj2)
    syntax (_macros _sx-obj0)
-   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream3 vector stream stream1 lock stream2 socket list format convert1 table1 table handler random symbol read boot boot1 i-level1 sx-obj1 sx-obj2)
+   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1 sx-obj1 sx-obj2)
    export (
     ((name . local-static-var-captured!) (pos . 35) (origin sx-obj2 . local-static-var-captured!) (inline (G001467 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <local-static-var>) (set-primitive-relative-ref) (nobble 2))))
     ((name . binding-local-name!) (pos . 19) (origin sx-obj1 . binding-local-name!) (inline (G00598 (stack-ref 1) (static-fpi-ref 6) (stack-ref 2) (binding-ref ? <binding>) (set-primitive-relative-ref) (nobble 2))))

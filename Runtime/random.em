@@ -6,7 +6,7 @@
 ;;; Description: Pseudo-random number generator
 ;;;-----------------------------------------------------------------------------
 (defmodule random
-  (syntax (telos0)
+  (syntax (_telos0)
           import (telos)
           export (random *random-max* random-seed random-true-nil))
 

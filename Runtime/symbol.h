@@ -9,7 +9,7 @@ extern LispRef symbol_bindings[];
 
 /* Module binding indices */
 #define _keyword__X60_X62_fn_index 81 
-#define name_fn_index 7 
+#define name_fn_index 8 
 #define symbol_name_fn_index 62 
 #define keywordp_fn_index 3 
 #define symbolp_fn_index 43 

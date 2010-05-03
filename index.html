@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>EuLisp</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-04-24 21:50:37 BST"/>
+<meta name="generated" content="2010-05-03 22:53:13 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -86,8 +86,9 @@ lang="en" xml:lang="en">
 <li><a href="#sec-6">6 Getting Started </a></li>
 <li><a href="#sec-7">7 Features </a></li>
 <li><a href="#sec-8">8 Extras </a></li>
-<li><a href="#sec-9">9 Recent Developments </a></li>
-<li><a href="#sec-10">10 To Do </a></li>
+<li><a href="#sec-9">9 Bootstrapping </a></li>
+<li><a href="#sec-10">10 Recent Developments </a></li>
+<li><a href="#sec-11">11 To Do </a></li>
 </ul>
 </div>
 </div>
@@ -257,8 +258,15 @@ The following reports are discussed in the above:
 
 <ul>
 <li>
-Unpack version X with <br/>
-<i>tar -xzf youtooX.tar.gz</i>
+Unpack version xxx with <br/>
+<i>tar -xzf EuLisp-xxx.tar.gz</i>
+</li>
+<li>
+or pull the latest version from the GitHub repository:<br/>
+git clone git@github.com:Henry/EuLisp.git
+</li>
+<li>
+"cd" into the <i>EuLisp-xxx</i> or <i>EuLisp</i> directory
 </li>
 <li>
 Run <br/>
@@ -270,10 +278,10 @@ necessary and re-run<br/>
 <li>
 Run <br/>
 <i>make</i> <br/>
-If you want to use shared libraries (which we really recommend Linux,
+If you want to use shared libraries (which we really recommend on Linux,
 FreeBSD, Solaris and IRIX), run <br/>
 <i>make shared</i> <br/>
-and add the directory <i>&hellip;/youtoo/Lib.${ARCH}</i> to the environment variable
+and add the directory <i>&hellip;/EuLisp-xxx/Lib.${ARCH}</i> to the environment variable
 <code>$LD_LIBRARY_PATH</code> (see <i>./makeso.Path</i>).
 </li>
 <li>
@@ -623,11 +631,42 @@ processes.
 </div>
 
 <div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> Recent Developments </h2>
+<h2 id="sec-9"><span class="section-number-2">9</span> Bootstrapping </h2>
 <div class="outline-text-2" id="text-9">
 
+<p>Building Youtoo from the EuLisp sources is termed "bootstrapping".  This
+requires a working installation which is used to compile the EuLisp source
+modules.  The default directory path to the bootstrapping installation is
+<i>${EUL_DIR}.boot</i>, i.e. <i>.boot</i> appended to the path of the current
+directory.  Note that if the bootstrapping installation directory is renamed
+or moved the <i>configure</i> script should be executed in it after the move to
+correct the paths.  The working directory can be "cleaned" for bootstrapping
+using <i>make boot-clean</i> and then the "bootstrapping" build process started
+with <i>make boot</i>.  If all goes well a complete clean build will result.
+</p>
+<p>
+This process allows changes and developments to be made to the Youtoo
+implementation of EuLisp.
+</p>
 <ul>
-<li id="sec-9.1">Support for 64bit Operation <br/>
+<li id="sec-9.1">Limitations <br/>
+Currently the dependency analysis is not sufficient to cover all the
+possible ways in which the changes to the EuLisp modules in Youtoo interact
+and the rebuilds required to create a consistent Youtoo executable.  Thus to
+be sure of success <i>make boot-clean</i> maybe required before every <i>make     boot</i>.
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Recent Developments </h2>
+<div class="outline-text-2" id="text-10">
+
+<ul>
+<li id="sec-10.1">Support for 64bit Operation <br/>
 The main change to support 64bit pointers is that on such architectures the
 <code>Instruction</code> is a 16bit integer rather than an 8bit <code>char</code> so that 4
 <code>Instructions</code> still fit exactly in a pointer.  This allows most of the
@@ -636,18 +675,18 @@ number of small changes were also necessary.  The C-files are compatible
 between the 32bit and 64bit versions.
 
 </li>
-<li id="sec-9.2">C99 Compliance <br/>
+<li id="sec-10.2">C99 Compliance <br/>
 The code is now C99 compliant and uses C99 data types and constructs so a
 C99 compiler is required e.g. <code>gcc-4.?.?</code>.
 
 </li>
-<li id="sec-9.3">Rationalisation of the Makefiles <br/>
+<li id="sec-10.3">Rationalisation of the Makefiles <br/>
 The <code>Makefiles</code> have been rationalised and simplified by using many features
 in the GNU version of <code>make</code>, <code>gmake</code> which is now required to build
 <code>youtoo</code>.
 
 </li>
-<li id="sec-9.4">The start of the EuLisp-1.0 compliance process <br/>
+<li id="sec-10.4">The start of the EuLisp-1.0 compliance process <br/>
 Many small changes to improve consistency between the Youtoo implementation
 and the EuLisp-0.99 definition and the documents relating to the creation of
 EuLisp-1.0.
@@ -658,14 +697,14 @@ EuLisp-1.0.
 
 </div>
 
-<div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> <a href="TODO.html">To Do</a> </h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> <a href="TODO.html">To Do</a> </h2>
+<div class="outline-text-2" id="text-11">
 
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-04-24 21:50:37 BST</p>
+<p class="date"> Date: 2010-05-03 22:53:13 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

@@ -151,7 +151,7 @@ void initialize_module_ex_expose()
   static const void *G005341[] = {I(aa,23,00,00),B(ex_expose ,55),I(1c,24,00,00),B(i_notify ,4),I(3c,02,2a,1b),I(24,00,00,00),B(cg_interf ,24),I(3c,01,23,00),B(ex_expose ,18),I(24,00,00,00),B(dynamic ,3),I(3c,01,1c,1c),I(50,1b,34,00),I(00,00,00,1e),I(1d,26,00,00),I(00,00,00,10),I(24,00,00,00),B(sx_obj1 ,60),I(08,32,00,00),I(00,00,00,18),I(1d,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(ex_expose ,16),I(23,00,00,00),B(ex_expose ,54),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,1f),I(03,24,00,00),B(ex_import ,5),I(3d,01,05,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 57 binding: make-prefix */
-  static const void *G005344[] = {I(ab,1c,82,02),I(1c,82,02,1c),I(1c,24,00,00),B(collect ,18),I(3c,02,24,00),B(mop_class ,6),I(24,00,00,00),B(convert ,2),I(3d,02,04,45),I(04,00,00,00)};
+  static const void *G005344[] = {I(ab,1c,82,02),I(1c,82,02,1c),I(1c,24,00,00),B(collect ,19),I(3c,02,24,00),B(mop_class ,6),I(24,00,00,00),B(convert ,2),I(3d,02,04,45),I(04,00,00,00)};
 
   eul_allocate_static_string(str_5348, "redefinition of expander ~a", 27);
   /* Byte-vector with size: 17 is_init: 0 index: 59 binding: install-expose-expander */

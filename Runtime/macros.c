@@ -73,7 +73,7 @@ void initialize_module_macros()
   static const void *G00964[] = {I(aa,1b,10,1b),I(86,0f,23,00),B(macros ,35),I(1c,0f,1f,03),I(11,1b,10,1b),I(86,0f,1f,03),I(1c,0f,23,00),B(macros ,36),I(1c,0f,45,08)};
 
   /* Byte-vector with size: 27 is_init: 0 index: 55 binding: dynamic-let */
-  static const void *G00966[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,2a,23),B(macros ,53),I(23,00,00,00),B(macros ,52),I(3b,01,1d,24),B(collect ,2),I(3c,02,23,00),B(macros ,21),I(1d,0f,1f,03),I(24,00,00,00),B(collect ,8),I(3c,01,1b,86),I(0f,23,00,00),B(macros ,39),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,54),I(1c,0f,1b,86),I(0f,1f,08,1c),I(24,00,00,00),B(boot ,11),I(3c,02,23,00),B(macros ,21),I(1c,0f,45,0c)};
+  static const void *G00966[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,2a,23),B(macros ,53),I(23,00,00,00),B(macros ,52),I(3b,01,1d,24),B(collect ,2),I(3c,02,23,00),B(macros ,21),I(1d,0f,1f,03),I(24,00,00,00),B(collect ,9),I(3c,01,1b,86),I(0f,23,00,00),B(macros ,39),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,54),I(1c,0f,1b,86),I(0f,1f,08,1c),I(24,00,00,00),B(boot ,11),I(3c,02,23,00),B(macros ,21),I(1c,0f,45,0c)};
 
   /* Byte-vector with size: 25 is_init: 0 index: 57 binding: butlast */
   static const void *G00970[] = {I(43,fe,1b,12),I(1b,34,00,00),I(00,00,00,37),I(1d,86,0f,23),B(macros ,56),I(1c,0f,83,86),I(0f,1c,1c,0f),I(23,00,00,00),B(macros ,31),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,56),I(1c,0f,22,06),I(32,00,00,00),I(00,00,00,2c),I(1d,86,0f,23),B(macros ,56),I(1c,0f,1b,1f),I(04,0f,23,00),B(macros ,31),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,56),I(1c,0f,22,05),I(45,03,00,00)};

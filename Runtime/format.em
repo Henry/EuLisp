@@ -9,7 +9,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule format
   (syntax (_telos0)
-   import (telos collect fpi list string stream stream3 bit)
+   import (telos collect fpi list string stream)
    export (format))
 
 ;;;-----------------------------------------------------------------------------

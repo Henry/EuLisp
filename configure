@@ -1,79 +1,72 @@
 #!/bin/sh
-## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+###-----------------------------------------------------------------------------
+### ---                  EuLisp System 'youtoo'
+###-----------------------------------------------------------------------------
+### Description: system configuration
+###-----------------------------------------------------------------------------
+##  To use a pre-installed version of the Boehm memory management system
+##  set DEFAULT_EUL_GC_DIR to its directory.
+##
+##  Give an empty gabage collector directory if you don't want to use the
+##  garbage collector at all. This is not recommended as you will have
+##  performace drawbacks.
+##
+##  Set DEFAULT_CC if you prefer a particular C compiler.
+##
+##  See the relevant section in this file for information about using an
+##  external thread library (e.g. Solaris threads).
+###-----------------------------------------------------------------------------
 
-## -----------------------------------------------------------------------
-##                     EuLisp System 'youtoo'
-## -----------------------------------------------------------------------
-##  Description: system configuration
-## -----------------------------------------------------------------------
-
-## -----------------------------------------------------------------------
-## If you want to use a pre-installed version of the Boehm memory
-## management system set DEFAULT_EUL_GC_DIR to its directory.
-##
-## Give an empty gabage collector directory if you don't want to use the
-## garbage collector at all. This is not recommended as you will have
-## performace drawbacks.
-##
-## Set DEFAULT_CC if you prefer a particular C compiler.
-##
-## Makefiles in the relevant subdirectories are automatically generated.
-## If you do need to customize this file to reflect your system, please
-## let us know.
-##
-## See the relevant section in this file for information about using an
-## external thread library (e.g. Solaris threads).
-## -----------------------------------------------------------------------
-
-## --------------------------------------------------------------------
-## Guess platform
-## --------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Lookup platform
+###-----------------------------------------------------------------------------
 
 OSTYPE=`uname -s`
 ARCH=`uname -m`
 
-## --------------------------------------------------------------------
-## Working directory and GC directory
-## --------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Set default current installation, bootstrapping installation
+##  and GC installation directories
+###-----------------------------------------------------------------------------
 
 DEFAULT_EUL_DIR=`pwd`
-
-#***HGW DEFAULT_EUL_GC_DIR=${DEFAULT_EUL_DIR}/Gc
 DEFAULT_EUL_GC_DIR=/usr/local
+EUL_BOOT_DIR=${DEFAULT_EUL_DIR}.boot
 
-## --------------------------------------------------------------------
-## C compiler (leave blank if possible)
-## --------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### C compiler (leave blank if possible)
+###-----------------------------------------------------------------------------
 
 DEFAULT_CC=
 
-## --------------------------------------------------------------------
-## Emacs org-mode used to generate README.html files.
+###-----------------------------------------------------------------------------
+### Emacs org-mode used to generate README.html files.
 ##
-## Any version including org-mode will work but newer is better.
-## eemacs is the version used here which includes a more recent
-## org-mode than released with emacs.
-## --------------------------------------------------------------------
+##    Any version including org-mode will work but newer is better.
+##    eemacs is the version used here which includes a more recent
+##    org-mode than released with emacs.
+###-----------------------------------------------------------------------------
 
 EMACS=eemacs
 
-## --------------------------------------------------------------------
-## Word length of the machine architecture/OS, 32 or 64.
-## May be reset automatically for the paricular architecture.
-## --------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Word length of the machine architecture/OS, 32 or 64.
+##  May be reset automatically for the paricular architecture.
+###-----------------------------------------------------------------------------
 
 WORD_LENGTH=32
 
-## -----------------------------------------------------------------------
-## Version
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Version
+###-----------------------------------------------------------------------------
 
-EUL_VERSION=pre-0.95
+EUL_VERSION=pre-0.96
 
-## -----------------------------------------------------------------------
-## This specifies the default shell and where to find mv and rm; check also
-## the first line of this file.
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Specify the default shell and where to find mv and rm
+##    check the first line of this file.
+###-----------------------------------------------------------------------------
 
 SH=`which sh 2>/dev/null`
 # ***HGW overiding the above
@@ -90,20 +83,20 @@ fi
 
 DEFAULT_UNIX_DIR=/bin
 
-## -----------------------------------------------------------------------
-## If you want to base the EuLisp multi-threading support on a foreign
-## thread library (e.g. PPCR threads, UI alias Solaris threads or POSIX MIT
-## threads), set THRTYPE to one of:
+###-----------------------------------------------------------------------------
+### Foreign thread library
+##    If you want to base the EuLisp multi-threading support on a foreign
+##    thread library (e.g. PPCR threads, UI alias Solaris threads or POSIX MIT
+##    threads), set THRTYPE to one of:
 ##
-##   UI (UNIX International alias Solaris Threads)
-##   PPCR (POSIX Portable Common Runtime)
-##   MIT (MIT Pthread Library)
-## -----------------------------------------------------------------------
+##    UI (UNIX International alias Solaris Threads)
+##    PPCR (POSIX Portable Common Runtime)
+##    MIT (MIT Pthread Library)
+###-----------------------------------------------------------------------------
 
 THRTYPE=
 #THRTYPE=UI
 #THRTYPE=PPCR
-
 #THRTYPE=MIT
 #EUL_MIT_THR_DIR=
 
@@ -117,9 +110,11 @@ else
     EUL_GC_CFLAGS=
 fi
 
-## -----------------------------------------------------------------------
-## Parse arguments
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Parse arguments
+##    set location of the Youtoo directory tree
+##    set location of the garbage collection library installation
+###-----------------------------------------------------------------------------
 
 if (test -z "$1") then
     EUL_DIR=$DEFAULT_EUL_DIR
@@ -132,6 +127,10 @@ else
         EUL_GC_DIR=$2
     fi
 fi
+
+###-----------------------------------------------------------------------------
+### Set installation paths
+###-----------------------------------------------------------------------------
 
 if (test -z "$EUL_GC_DIR") then
     EUL_GC_INCLUDE=
@@ -147,14 +146,21 @@ fi
 EUL_BIN_DIR=$EUL_DIR/Bin.$ARCH
 EUL_LIB_DIR=$EUL_DIR/Lib.$ARCH
 
-## --------------------------------------------------------------------
-## Verify the some settings
-## --------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Set paths to the bootstrapping installation
+##    EUL_BOOT_DIR can be set to EUL_DIR which will overwrite
+###-----------------------------------------------------------------------------
+
+EUL_BOOT_BIN_DIR=$EUL_BOOT_DIR/Bin.$ARCH
+
+###-----------------------------------------------------------------------------
+### Verify the some settings
+###-----------------------------------------------------------------------------
 
 FOO=$EUL_VERSION
 touch ./$FOO
 if (test ! -f ${EUL_DIR}/${FOO}) then
-    echo "*** ERROR [configure]: bad EUL_DIR directory"
+    echo "*** ERROR [configure]: bad EUL_DIR directory: " ${EUL_DIR}
     rm ./$FOO
     exit
 fi
@@ -162,13 +168,13 @@ rm ./$FOO
 
 if (test ! -z "$EUL_GC_DIR") then
     if (test ! -d $EUL_GC_DIR) then
-        echo "*** ERROR [configure]: bad EUL_GC_DIR directory"
+        echo "*** ERROR [configure]: bad EUL_GC_DIR directory: " $EUL_GC_DIR
     fi
 fi
 
-## --------------------------------------------------------------------
-## Set CC
-## --------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Set CC
+###-----------------------------------------------------------------------------
 
 if (test -z "$DEFAULT_CC") then
     gcc_path=`which gcc 2>/dev/null`
@@ -184,16 +190,20 @@ fi
 
 DEFAULT_CLIBS="-leval -lmath -llevel1 -ltelos -lboot -leulvm -lm"
 
-## ----------------------------------------------------------------------------
-## Tcl/Tk libraries
-## ----------------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Tcl/Tk libraries
+###-----------------------------------------------------------------------------
 
 EUL_TK_VERSION=8.5
 EUL_TK_FLAGS=
 
-## -----------------------------------------------------------------------
-##  Linux
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### System-specific settings
+###-----------------------------------------------------------------------------
+
+###-----------------------------------------------------------------------------
+###  Linux
+###-----------------------------------------------------------------------------
 
 case $OSTYPE in
 Linux)
@@ -207,15 +217,57 @@ Linux)
     fi
 
     if (test $THRTYPE = PPCR) then
-        CFLAGS="$GCC_FLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_DIR}/include -I${EUL_DIR}/Vm  -I${EUL_GC_DIR}/gc"
+        CFLAGS="$GCC_FLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_DIR}/include -I${EUL_DIR}/Vm -I${EUL_GC_DIR}/gc"
     else
         CFLAGS="$GCC_FLAGS -I${EUL_DIR}/include -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
     fi
     ;;
 
-## -----------------------------------------------------------------------
-##  IRIX
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+###  FreeBSD
+###-----------------------------------------------------------------------------
+
+FreeBSD)
+    CC="gcc"
+    CLIBS=$DEFAULT_CLIBS
+    AR="ar cruv"
+    RANLIB="ranlib"
+    if (test $THRTYPE = PPCR) then
+        CFLAGS="-DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_DIR}/Vm  -I${EUL_GC_DIR}/gc"
+    else
+        CFLAGS="-I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+    fi
+    ;;
+
+###-----------------------------------------------------------------------------
+###  SunOS (Solaris)
+###-----------------------------------------------------------------------------
+
+SunOS)
+    if (test $THRTYPE = UI) then
+        CC="cc"
+        CFLAGS="-DWITH_STRERROR -DWITH_UI_THREADS -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CLIBS="-leval -lmath -llevel1 -leulvm -lm -lnls -lnsl -lsocket -ldl -lthread"
+        AR="ar crsuv"
+        RANLIB="echo No ranlib "
+    elif (test $DEFAULT_CC = gcc) then
+        CC=$DEFAULT_CC
+        CFLAGS="-fPIC -DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
+        AR="ar crsuv"
+        RANLIB="echo No ranlib "
+    else
+        CC=$DEFAULT_CC
+        CFLAGS="-DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
+        AR="ar crsuv"
+        RANLIB="echo No ranlib "
+    fi
+    ;;
+
+###-----------------------------------------------------------------------------
+###  IRIX
+###-----------------------------------------------------------------------------
 
 IRIX)
     if (test $THRTYPE = PPCR) then
@@ -245,51 +297,9 @@ IRIX)
     fi
     ;;
 
-## -----------------------------------------------------------------------
-##  SunOS (Solaris)
-## -----------------------------------------------------------------------
-
-SunOS)
-    if (test $THRTYPE = UI) then
-        CC="cc"
-        CFLAGS="-DWITH_STRERROR -DWITH_UI_THREADS -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
-        CLIBS="-leval -lmath -llevel1 -leulvm -lm -lnls -lnsl -lsocket -ldl -lthread"
-        AR="ar crsuv"
-        RANLIB="echo No ranlib "
-    elif (test $DEFAULT_CC = gcc) then
-        CC=$DEFAULT_CC
-        CFLAGS="-fPIC -DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
-        CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
-        AR="ar crsuv"
-        RANLIB="echo No ranlib "
-    else
-        CC=$DEFAULT_CC
-        CFLAGS="-DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
-        CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
-        AR="ar crsuv"
-        RANLIB="echo No ranlib "
-    fi
-    ;;
-
-## -----------------------------------------------------------------------
-##  FreeBSD
-## -----------------------------------------------------------------------
-
-FreeBSD)
-    CC="gcc"
-    CLIBS=$DEFAULT_CLIBS
-    AR="ar cruv"
-    RANLIB="ranlib"
-    if (test $THRTYPE = PPCR) then
-        CFLAGS="-DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_DIR}/Vm  -I${EUL_GC_DIR}/gc"
-    else
-        CFLAGS="-I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
-    fi
-    ;;
-
-## -----------------------------------------------------------------------
-##  Microsoft Windows NT/2k using Cygwin
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+###  Microsoft Windows NT/2k using Cygwin
+###-----------------------------------------------------------------------------
 
 CYGWIN_NT-5.0)
     CC="gcc"
@@ -300,21 +310,9 @@ CYGWIN_NT-5.0)
     RANLIB="ranlib"
     ;;
 
-## -----------------------------------------------------------------------
-##  ULTRIX
-## -----------------------------------------------------------------------
-
-ULTRIX)
-    CC=$DEFAULT_CC # for the MASPAR: "mpl_cc -Zq"
-    CFLAGS="-I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
-    CLIBS="$DEFAULT_CLIBS"
-    AR="ar cruv"
-    RANLIB="ranlib"
-    ;;
-
-## -----------------------------------------------------------------------
-##  IBM AIX
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+###  IBM AIX
+###-----------------------------------------------------------------------------
 
 AIX)
     CC=$DEFAULT_CC
@@ -324,46 +322,46 @@ AIX)
     RANLIB="ranlib"
     ;;
 
-## -----------------------------------------------------------------------
-##  Unknown
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+###  Unknown
+###-----------------------------------------------------------------------------
 
 *)    # an unsupported operating system
-    echo "*** WARNING [configure]: unknown system type $OSTYPE" >&2
-    CC=$DEFAULT_CC
-    CFLAGS="-I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
-    CLIBS="$DEFAULT_CLIBS"
-    AR="ar cruv"
-    RANLIB="ranlib"
+    echo "*** ERROR [configure]: unknown system type $OSTYPE" >&2
+    exit
     ;;
 esac
 
+###-----------------------------------------------------------------------------
+### Set word-length option
+###-----------------------------------------------------------------------------
+
 WORD_LEN_OP=-DWORD_LENGTH=$WORD_LENGTH
 
-## -----------------------------------------------------------------------
-## Make scripts executable
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Make scripts executable
+###-----------------------------------------------------------------------------
 
 chmod ug+x ${EUL_DIR}/Tools/make*.*
 
-## -----------------------------------------------------------------------
-##  Prompting configuration
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Prompting configuration
+###-----------------------------------------------------------------------------
 
-echo ".CONFIGURING youtoo ..."
-echo " Dir: $EUL_DIR"
-echo " Architecture: $ARCH"
-echo " System: $OSTYPE"
-echo " Compiler: $CC"
-echo " Compiler flags: $CFLAGS"
-echo " Libraries: $CLIBS"
-echo " Archive: $AR"
-echo " Ranlib: $RANLIB"
-echo " Threads: $THRTYPE"
+echo "CONFIGURING youtoo ..."
+echo "  Dir: $EUL_DIR"
+echo "  Architecture: $ARCH"
+echo "  System: $OSTYPE"
+echo "  Compiler: $CC"
+echo "  Compiler flags: $CFLAGS"
+echo "  Libraries: $CLIBS"
+echo "  Archive: $AR"
+echo "  Ranlib: $RANLIB"
+echo "  Threads: $THRTYPE"
 
-## -----------------------------------------------------------------------
-##  Create Lib and Bin directory
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Create Lib and Bin directory
+###-----------------------------------------------------------------------------
 
 if (test ! -d $EUL_LIB_DIR) then
     mkdir $EUL_LIB_DIR
@@ -374,12 +372,12 @@ if (test ! -d $EUL_BIN_DIR) then
     mkdir $EUL_BIN_DIR
 fi
 
-## -----------------------------------------------------------------------
-##  Create resource file
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Create resource file
+###-----------------------------------------------------------------------------
 
 name_rc=${EUL_DIR}/.eulrc.${ARCH}
-echo " Creating ${EUL_DIR}/.eulrc.${ARCH} ..."
+echo "  Creating ${EUL_DIR}/.eulrc.${ARCH} ..."
 echo ";;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved." > $name_rc
 echo >> $name_rc
 echo ";;; --------------------------------------------------------------------" >> $name_rc
@@ -397,17 +395,17 @@ echo \(OSTYPE \. \"${OSTYPE}\"\) >> $name_rc
 echo \(VERSION \. \"${EUL_VERSION}\"\) >> $name_rc
 echo \) >> $name_rc
 
-## -----------------------------------------------------------------------
-##  Create Makefile header
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Create Makefile header
+###-----------------------------------------------------------------------------
 
 name=${EUL_LIB_DIR}/Makefile
-echo " Creating ${EUL_LIB_DIR}/Makefile ..."
-echo "## Copyright (c) 1997 by A Kind & University of Bath. All rights reserved." > $name
+echo "  Creating ${EUL_LIB_DIR}/Makefile ..."
+echo "### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved." > $name
 echo >> $name
-echo "## --------------------------------------------------------------------" >> $name
-echo "##                      EuLisp System 'youtoo'" >> $name
-echo "## --------------------------------------------------------------------" >> $name
+echo "###---------------------------------------------------------------------" >> $name
+echo "###                      EuLisp System 'youtoo'" >> $name
+echo "###---------------------------------------------------------------------" >> $name
 echo >> $name
 echo CC = ${CC} >> $name
 echo "CFLAGS = ${WORD_LEN_OP} ${CFLAGS}" >> $name
@@ -428,9 +426,11 @@ echo OSTYPE = ${OSTYPE} >> $name
 echo WORD_LENGTH = ${WORD_LENGTH} >> $name
 echo EUL_VERSION = ${EUL_VERSION} >> $name
 echo EUL_DIR = ${EUL_DIR} >> $name
+echo EUL_BOOT_DIR = ${EUL_BOOT_DIR} >> $name
 echo EUL_BIN_DIR = ${EUL_BIN_DIR} >> $name
 echo EUL_LIB_DIR = ${EUL_LIB_DIR} >> $name
 echo U2 = ${EUL_BIN_DIR}/youtoo.sh >> $name
+echo U2_BOOT = ${EUL_BOOT_BIN_DIR}/youtoo.sh >> $name
 echo EUL_GC_DIR = ${EUL_GC_DIR} >> $name
 echo EUL_GC_CFLAGS = ${EUL_GC_CFLAGS} >> $name
 echo UNIX_DIR = ${DEFAULT_UNIX_DIR} >> $name
@@ -441,16 +441,16 @@ echo '.SUFFIXES: .org .html' >> $name
 echo '.org.html:' >> $name
 echo '	'${EMACS}' $< --batch --eval "(org-export-as-html t)"' >> $name
 echo >> $name
-echo "## --------------------------------------------------------------------" >> $name
-echo "## Functions" >> $name
-echo "## --------------------------------------------------------------------" >> $name
+echo "###---------------------------------------------------------------------" >> $name
+echo "### Functions" >> $name
+echo "###---------------------------------------------------------------------" >> $name
 echo >> $name
 echo 'makeAll = $(foreach dir, $(1), cd $(dir); $(MAKE) $(2) ; cd .. ;)' >> $name
 echo >> $name
 
-## -----------------------------------------------------------------------
-##  Create link to GC library (if available)
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Create link to GC library (if available)
+###-----------------------------------------------------------------------------
 
 if (test -f $EUL_LIB_DIR/libgc.a) then
     rm -f $EUL_LIB_DIR/libgc.a
@@ -470,12 +470,12 @@ if (test ! -z "${EUL_GC_DIR}") then
     fi
 else
     touch Vm/gc.h
-    echo " No GC."
+    echo "No GC."
 fi
 
-## -----------------------------------------------------------------------
-##  Create youtoo scheme and check scripts
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Create youtoo scheme and check scripts
+###-----------------------------------------------------------------------------
 
 if (test `basename $DEFAULT_SHELL` = csh) then
     DEFAULT_SHELL=${DEFAULT_UNIX_DIR}/sh
@@ -483,7 +483,7 @@ fi
 
 create_script(){
     name=${EUL_BIN_DIR}/$1.sh
-    echo " Creating $name ..."
+    echo "  Creating $name ..."
     echo "#!$DEFAULT_SHELL" > $name
     echo >> $name
     echo export EUL_DIR=${EUL_DIR} >> $name
@@ -501,17 +501,17 @@ create_script scmtoo
 create_script scm2tk
 create_script check
 
-## -----------------------------------------------------------------------
-##  Create script to set LD_LIBRARY_PATH
-## -----------------------------------------------------------------------
+###-----------------------------------------------------------------------------
+### Create script to set LD_LIBRARY_PATH
+###-----------------------------------------------------------------------------
 
 name=${EUL_BIN_DIR}/makeso.Path
-echo " Creating makeso.Path ..."
+echo "  Creating makeso.Path ..."
 echo > $name
 echo "LD_LIBRARY_PATH=$EUL_LIB_DIR:\${LD_LIBRARY_PATH}" >> $name
 echo "export LD_LIBRARY_PATH" >> $name
 chmod ug+x $name
 
-echo ".DONE"
+echo "DONE"
 
-## --------------------------------------------------------------------
+###-----------------------------------------------------------------------------

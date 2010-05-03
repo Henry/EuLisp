@@ -37,60 +37,60 @@ void initialize_module_float()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_3160, G003159, sym_3157, sym_3155, sym_3153, sym_3152, sym_3151, sym_3150, sym_3149, sym_3148, sym_3147, sym_3146, sym_3145, key_3144, key_3143, key_3142, key_3141, sym_3140, key_3139, G003138, G003136, G003134, G003132, G003130;
+  LispRef sym_3179, G003178, sym_3176, sym_3174, sym_3172, sym_3171, sym_3170, sym_3169, sym_3168, sym_3167, sym_3166, sym_3165, sym_3164, key_3163, key_3162, key_3161, key_3160, sym_3159, key_3158, G003157, G003155, G003153, G003151, G003149;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 1 is_init: 0 index: 11 binding: (method-doublep) */
-  static const void *G003129[] = {I(aa,1b,45,01)};
+  static const void *G003148[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 12 binding: (method-doublep) */
-  static const void *G003131[] = {I(aa,86,45,01)};
+  static const void *G003150[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 13 binding: (method-floatp) */
-  static const void *G003133[] = {I(aa,1b,45,01)};
+  static const void *G003152[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 14 binding: (method-floatp) */
-  static const void *G003135[] = {I(aa,86,45,01)};
+  static const void *G003154[] = {I(aa,86,45,01)};
 
-  eul_allocate_static_cons(cons_3156, NULL, NULL);
-  eul_allocate_static_cons(cons_3154, NULL, eul_as_static(cons_3156));
+  eul_allocate_static_cons(cons_3175, NULL, NULL);
+  eul_allocate_static_cons(cons_3173, NULL, eul_as_static(cons_3175));
   /* Byte-vector with size: 329 is_init: 0 index: 33 binding: top-level */
-  static const void *G003137[] = {I(a9,24,00,00),B(number ,5),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,71),I(23,00,00,00),B(float ,15),I(23,00,00,00),B(float ,16),I(23,00,00,00),B(float ,17),I(1f,05,23,00),B(float ,18),I(1f,06,23,00),B(float ,19),I(86,23,00,00),B(float ,20),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(float ,4),I(2a,28,06,1b),I(89,00,00,00),B(float ,6),I(2a,24,00,00),B(float ,6),I(89,00,00,00),B(float ,8),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,21),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,2),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,22),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,10),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,23),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,9),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,24),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,7),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,25),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,5),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,26),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,3),I(2a,24,00,00),B(float ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,27),I(23,00,00,00),B(float ,14),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,27),I(23,00,00,00),B(float ,13),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,2),I(2a,24,00,00),B(float ,4),I(2a,24,00,00),B(float ,6),I(24,00,00,00),B(mop_class ,71),I(05,2a,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,15),I(23,00,00,00),B(float ,28),I(23,00,00,00),B(float ,17),I(1f,04,23,00),B(float ,18),I(1f,05,23,00),B(float ,19),I(86,24,00,00),B(boot1 ,26),I(3c,08,24,00),B(float ,6),I(1c,24,00,00),B(mop_gf ,12),I(3c,02,2a,24),B(float ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,29),I(23,00,00,00),B(float ,12),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(float ,6),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,29),I(23,00,00,00),B(float ,11),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,10),I(2a,24,00,00),B(float ,6),I(2a,24,00,00),B(float ,9),I(2a,24,00,00),B(float ,7),I(2a,24,00,00),B(float ,5),I(2a,24,00,00),B(float ,3),I(2a,24,00,00),B(mop_class ,13),I(24,00,00,00),B(boot1 ,41),I(3c,01,83,24),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,32),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,24,00),B(float ,6),I(1c,1f,06,3c),I(02,2a,24,00),B(float ,6),I(24,00,00,00),B(mop_class ,13),I(3d,01,3c,45),I(3c,00,00,00)};
+  static const void *G003156[] = {I(a9,24,00,00),B(number ,5),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,71),I(23,00,00,00),B(float ,15),I(23,00,00,00),B(float ,16),I(23,00,00,00),B(float ,17),I(1f,05,23,00),B(float ,18),I(1f,06,23,00),B(float ,19),I(86,23,00,00),B(float ,20),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(float ,4),I(2a,28,06,1b),I(89,00,00,00),B(float ,6),I(2a,24,00,00),B(float ,6),I(89,00,00,00),B(float ,8),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,21),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,2),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,22),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,10),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,23),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,9),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,24),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,7),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,25),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,5),I(2a,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,26),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(float ,3),I(2a,24,00,00),B(float ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,27),I(23,00,00,00),B(float ,14),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,27),I(23,00,00,00),B(float ,13),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,2),I(2a,24,00,00),B(float ,4),I(2a,24,00,00),B(float ,6),I(24,00,00,00),B(mop_class ,71),I(05,2a,24,00),B(float ,4),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,15),I(23,00,00,00),B(float ,28),I(23,00,00,00),B(float ,17),I(1f,04,23,00),B(float ,18),I(1f,05,23,00),B(float ,19),I(86,24,00,00),B(boot1 ,26),I(3c,08,24,00),B(float ,6),I(1c,24,00,00),B(mop_gf ,12),I(3c,02,2a,24),B(float ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,29),I(23,00,00,00),B(float ,12),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(float ,6),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(float ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(float ,29),I(23,00,00,00),B(float ,11),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(float ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(float ,10),I(2a,24,00,00),B(float ,6),I(2a,24,00,00),B(float ,9),I(2a,24,00,00),B(float ,7),I(2a,24,00,00),B(float ,5),I(2a,24,00,00),B(float ,3),I(2a,24,00,00),B(mop_class ,13),I(24,00,00,00),B(boot1 ,41),I(3c,01,83,24),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(float ,32),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,24,00),B(float ,6),I(1c,1f,06,3c),I(02,2a,24,00),B(float ,6),I(24,00,00,00),B(mop_class ,13),I(3d,01,3c,45),I(3c,00,00,00)};
 
   /* Byte-vector with size: 36 is_init: 1 index: 0 binding: initialize-float */
-  static const void *G003158[] = {I(87,25,00,00),B(float ,1),I(24,00,00,00),B(number ,1),I(3e,0b,24,00),B(number ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(float ,10),I(86,25,00,00),B(float ,9),I(86,25,00,00),B(float ,8),I(86,25,00,00),B(float ,7),I(86,25,00,00),B(float ,6),I(86,25,00,00),B(float ,5),I(86,25,00,00),B(float ,4),I(86,25,00,00),B(float ,3),I(86,25,00,00),B(float ,2),I(23,00,00,00),B(float ,34),I(23,00,00,00),B(float ,33),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G003177[] = {I(87,25,00,00),B(float ,1),I(24,00,00,00),B(number ,1),I(3e,0b,24,00),B(number ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(float ,10),I(86,25,00,00),B(float ,9),I(86,25,00,00),B(float ,8),I(86,25,00,00),B(float ,7),I(86,25,00,00),B(float ,6),I(86,25,00,00),B(float ,5),I(86,25,00,00),B(float ,4),I(86,25,00,00),B(float ,3),I(86,25,00,00),B(float ,2),I(23,00,00,00),B(float ,34),I(23,00,00,00),B(float ,33),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G003130,G003129);
-  eul_allocate_bytevector( G003132,G003131);
-  eul_allocate_bytevector( G003134,G003133);
-  eul_allocate_bytevector( G003136,G003135);
-  eul_intern_keyword(key_3139,"name");
-  eul_intern_symbol(sym_3140,"float");
-  eul_intern_keyword(key_3141,"direct-superclasses");
-  eul_intern_keyword(key_3142,"direct-slots");
-  eul_intern_keyword(key_3143,"direct-keywords");
-  eul_intern_keyword(key_3144,"abstractp");
-  eul_intern_symbol(sym_3145,"floatp");
-  eul_intern_symbol(sym_3146,"doublep");
-  eul_intern_symbol(sym_3147,"ceiling");
-  eul_intern_symbol(sym_3148,"floor");
-  eul_intern_symbol(sym_3149,"round");
-  eul_intern_symbol(sym_3150,"truncate");
-  eul_intern_symbol(sym_3151,"(method floatp)");
-  eul_intern_symbol(sym_3152,"double");
-  eul_intern_symbol(sym_3153,"(method doublep)");
-  eul_intern_symbol(sym_3155,"converter");
-  eul_intern_symbol(sym_3157,"<double>");
-  object_class(cons_3156) = eul_static_cons_class;
-  eul_car(cons_3156) = sym_3157;
-  eul_cdr(cons_3156) = eul_nil;
-  object_class(cons_3154) = eul_static_cons_class;
-  eul_car(cons_3154) = sym_3155;
-  eul_allocate_bytevector( G003138,G003137);
-  eul_intern_symbol(sym_3160,"top-level");
-  eul_allocate_bytevector( G003159,G003158);
+  eul_allocate_bytevector( G003149,G003148);
+  eul_allocate_bytevector( G003151,G003150);
+  eul_allocate_bytevector( G003153,G003152);
+  eul_allocate_bytevector( G003155,G003154);
+  eul_intern_keyword(key_3158,"name");
+  eul_intern_symbol(sym_3159,"float");
+  eul_intern_keyword(key_3160,"direct-superclasses");
+  eul_intern_keyword(key_3161,"direct-slots");
+  eul_intern_keyword(key_3162,"direct-keywords");
+  eul_intern_keyword(key_3163,"abstractp");
+  eul_intern_symbol(sym_3164,"floatp");
+  eul_intern_symbol(sym_3165,"doublep");
+  eul_intern_symbol(sym_3166,"ceiling");
+  eul_intern_symbol(sym_3167,"floor");
+  eul_intern_symbol(sym_3168,"round");
+  eul_intern_symbol(sym_3169,"truncate");
+  eul_intern_symbol(sym_3170,"(method floatp)");
+  eul_intern_symbol(sym_3171,"double");
+  eul_intern_symbol(sym_3172,"(method doublep)");
+  eul_intern_symbol(sym_3174,"converter");
+  eul_intern_symbol(sym_3176,"<double>");
+  object_class(cons_3175) = eul_static_cons_class;
+  eul_car(cons_3175) = sym_3176;
+  eul_cdr(cons_3175) = eul_nil;
+  object_class(cons_3173) = eul_static_cons_class;
+  eul_car(cons_3173) = sym_3174;
+  eul_allocate_bytevector( G003157,G003156);
+  eul_intern_symbol(sym_3179,"top-level");
+  eul_allocate_bytevector( G003178,G003177);
 
   /* Set local bindings */
   {
@@ -99,32 +99,32 @@ void initialize_module_float()
       float_bindings[i] = eul_nil;
   }
 
-  float_bindings[ 11] = G003130;
-  float_bindings[ 12] = G003132;
-  float_bindings[ 13] = G003134;
-  float_bindings[ 14] = G003136;
-  float_bindings[ 15] = key_3139;
-  float_bindings[ 16] = sym_3140;
-  float_bindings[ 17] = key_3141;
-  float_bindings[ 18] = key_3142;
-  float_bindings[ 19] = key_3143;
-  float_bindings[ 20] = key_3144;
-  float_bindings[ 21] = sym_3145;
-  float_bindings[ 22] = sym_3146;
-  float_bindings[ 23] = sym_3147;
-  float_bindings[ 24] = sym_3148;
-  float_bindings[ 25] = sym_3149;
-  float_bindings[ 26] = sym_3150;
-  float_bindings[ 27] = sym_3151;
-  float_bindings[ 28] = sym_3152;
-  float_bindings[ 29] = sym_3153;
-  float_bindings[ 30] = sym_3155;
-  float_bindings[ 31] = sym_3157;
-  float_bindings[ 32] = cons_3154;
-  float_bindings[ 33] = G003138;
+  float_bindings[ 11] = G003149;
+  float_bindings[ 12] = G003151;
+  float_bindings[ 13] = G003153;
+  float_bindings[ 14] = G003155;
+  float_bindings[ 15] = key_3158;
+  float_bindings[ 16] = sym_3159;
+  float_bindings[ 17] = key_3160;
+  float_bindings[ 18] = key_3161;
+  float_bindings[ 19] = key_3162;
+  float_bindings[ 20] = key_3163;
+  float_bindings[ 21] = sym_3164;
+  float_bindings[ 22] = sym_3165;
+  float_bindings[ 23] = sym_3166;
+  float_bindings[ 24] = sym_3167;
+  float_bindings[ 25] = sym_3168;
+  float_bindings[ 26] = sym_3169;
+  float_bindings[ 27] = sym_3170;
+  float_bindings[ 28] = sym_3171;
+  float_bindings[ 29] = sym_3172;
+  float_bindings[ 30] = sym_3174;
+  float_bindings[ 31] = sym_3176;
+  float_bindings[ 32] = cons_3173;
+  float_bindings[ 33] = G003157;
   float_bindings[ 1] = eul_nil;
-  float_bindings[ 34] = sym_3160;
-  eul_allocate_lambda( float_bindings[0], "initialize-float", 0, G003159);
+  float_bindings[ 34] = sym_3179;
+  eul_allocate_lambda( float_bindings[0], "initialize-float", 0, G003178);
 
   }
 }
