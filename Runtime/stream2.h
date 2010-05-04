@@ -44,12 +44,12 @@ extern LispRef stream2_bindings[];
 #define stream_mode_fn_index 17 
 #define file_control_block_p_fn_index 13 
 #define _open_file_streams__lock_X42_X42_fn_index 12 
-#define generic_connect_fn_index 45 
+#define generic_connect_fn_index 44 
 #define stream_control_block_p_fn_index 31 
 #define control_block_buffer_pos_fn_index 11 
 #define flush_buffer_fn_index 25 
 #define fill_buffer_fn_index 3 
-#define generic_read_fn_index 44 
+#define generic_read_fn_index 45 
 #define stderr_fn_index 10 
 #define generic_prin_fn_index 2 
 #define buffered_stream_p_fn_index 22 

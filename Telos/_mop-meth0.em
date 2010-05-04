@@ -12,8 +12,8 @@
 
 ;;;-----------------------------------------------------------------------------
 ;;; Syntax: (defmethod gfname {key val}* (arglist) {form}*), where
-;; gfname is {symbol | (setter symbol)}, and arglist is
-;; {{symbol | (symbol class)}+ [ . symbol ]}
+;;  gfname is {symbol | (setter symbol)}, and arglist is
+;;  {{symbol | (symbol class)}+ [ . symbol ]}
 ;;;-----------------------------------------------------------------------------
   (defmacro defmethod (gfname . form)
     (let* ((*absent* '(absent))
@@ -63,6 +63,7 @@
                                   (defmethod-args (cdr sig))))
           (t (cons (caar sig)
                    (defmethod-args (cdr sig))))))
+
   (defmacro defmethod-domain (sig)
     (cond ((atom sig) ())
           ((atom (car sig))
@@ -71,7 +72,7 @@
 
 ;;;-----------------------------------------------------------------------------
 ;;; Create an anonymous method.
-;;;  Syntax: (method-lambda {key val}* (arglist) {form}*), where arglist is
+;;  Syntax: (method-lambda {key val}* (arglist) {form}*), where arglist is
 ;;  {{symbol | (symbol class)}+ [ . symbol]}
 ;;;-----------------------------------------------------------------------------
   (defmacro method-lambda form
@@ -90,7 +91,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Create a lambda that can be used as the function part of a method.
 ;;;  Syntax: (method-function-lambda (arglist) {form}*), where arglist is
-;;  { (symbol+ [ . symbol ]) }
+;;;  { (symbol+ [ . symbol ]) }
 ;;;-----------------------------------------------------------------------------
   (defmacro method-function-lambda (args . body)
     `(lambda ,args (progn ,@body)))

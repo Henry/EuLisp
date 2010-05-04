@@ -10,7 +10,7 @@
     ((name . methodp) (pos . 11) (origin mop-inspect . methodp))
     ((name . generic-function-p) (pos . 8) (origin mop-inspect . generic-function-p))
     ((name . cpl-subclass-p) (pos . 10) (origin mop-inspect . cpl-subclass-p))
-    ((name . class-of) (pos . 5) (origin mop-inspect . class-of) (inline (G001459 (primitive-class-of))))
+    ((name . class-of) (pos . 5) (origin mop-inspect . class-of) (inline (G001483 (primitive-class-of))))
     ((name . functionp) (pos . 6) (origin mop-inspect . functionp))
     ((name . slotp) (pos . 12) (origin mop-inspect . slotp))
     ((name . primitive-metaclass-p) (pos . 14) (origin mop-inspect . primitive-metaclass-p))

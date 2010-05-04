@@ -227,7 +227,7 @@ void initialize_module_sx_obj()
   static const void *G002362[] = {I(ab,84,02,50),I(45,00,00,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 170 binding: binding! */
-  static const void *G002364[] = {I(ab,1c,04,26),I(00,00,00,04),I(02,23,00,00),B(sx_obj ,89),I(1c,23,00,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,169),I(3b,02,24,00),B(boot ,19),I(3c,03,1b,34),I(00,00,00,11),I(1b,10,83,02),I(32,00,00,00),I(00,00,00,09),I(86,1f,04,1f),I(04,1d,3d,02),I(05,00,00,00)};
+  static const void *G002364[] = {I(ab,1c,04,26),I(00,00,00,04),I(02,23,00,00),B(sx_obj ,89),I(1c,23,00,00),B(sx_obj ,87),I(23,00,00,00),B(sx_obj ,169),I(3b,02,24,00),B(boot ,20),I(3c,03,1b,34),I(00,00,00,11),I(1b,10,83,02),I(32,00,00,00),I(00,00,00,09),I(86,1f,04,1f),I(04,1d,3d,02),I(05,00,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 171 binding: if-pred! */
   static const void *G002366[] = {I(ab,1c,84,1d),I(24,00,00,00),B(sx_obj ,9),I(09,45,02,00)};

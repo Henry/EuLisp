@@ -23,11 +23,9 @@
     `(with-handler
       (generic-lambda (c f)
         method: ((c f)
-                 (format stderr "compile time error condition: ")
-                 (pprint c stderr)
-                 (if *no-ct-handlers* ()
-                   (error ,str <ct-error> ct-error-value: ,error-value)))
-        method: (((c <ct-error>) f)))   ; pass signal to next handler
+                (if *no-ct-handlers* ()
+                  (error ,str <ct-error> ct-error-value: ,error-value)))
+        method: (((c <ct-error>) f))) ; pass signal to next handler
       (progn ,@forms)))
 
 ;;;-----------------------------------------------------------------------------
@@ -47,7 +45,7 @@
          (string-append *object-dir*
            (string-append *delimiter*
              (string-append (or (stringp ,name) (symbol-name ,name)) ".o")))
-       (string-append (or (stringp ,name) (symbol-name ,name)) ".o")))
+    (string-append (or (stringp ,name) (symbol-name ,name)) ".o")))
 
   (defmacro as-included-C-file-name (name)
     `(string-append (or (stringp ,name) (symbol-name ,name)) ".h"))
@@ -116,12 +114,11 @@
 
   (defmacro main-link-string ()
     '(let ((name (format () "Lib.~a/eul-appl.o" (get-config-info 'ARCH))))
-       (format () "~a~a~a"
-               *eulysses-dir* *delimiter* name)))
+       (format () "~a~a~a" *eulysses-dir* *delimiter* name)))
 
   (defmacro destination-link-string (module-name dir)
     `(format () "~a~a~a" ,dir *delimiter*
-             (or *dest-file-name* ,module-name)))
+               (or *dest-file-name* ,module-name)))
 
   (defmacro destination-library-link-string (module-name dir)
     `(or *dest-file-name*
@@ -130,13 +127,59 @@
 
   (defmacro destination-object-string (module-name dir)
     `(format () "~a~a~a" ,dir *delimiter*
-             (or *dest-file-name*
-                 (as-compiled-C-file-name ,module-name))))
+               (or *dest-file-name*
+                   (as-compiled-C-file-name ,module-name))))
 
-    (defmacro destination-object-dir (dir)
+  (defmacro destination-object-dir (dir)
     `(if *object-dir*
          (string-append ,dir (string-append *delimiter* *object-dir*))
        ,dir))
+
+;;;-----------------------------------------------------------------------------
+;;; Trace
+;;; Actions are pre/post thunks with the traced function+parameters as
+;;; arguments.
+;;;-----------------------------------------------------------------------------
+  (defmacro trace (function-name . actions)
+    (let* ((tmp-name (concatenate '| | function-name))
+           (pre-action (if actions (car actions) ()))
+           (post-action (if (and pre-action (cdr actions)) (cadr actions) ())))
+      `(progn
+         (deflocal ,tmp-name ())
+         (setq *redefine-imported-bindings*
+               (list *redefine-imported-bindings*))
+         (setq ,tmp-name ,function-name)
+         (setq ,function-name (named-lambda ,function-name args
+           ,(if pre-action
+                `(apply ,pre-action ,function-name args)
+              `(format stderr
+                       ,(format () ">>> ~~aTRACE [~a]: ~~a\n" function-name)
+                       (dynamic *trace-indent*) args))
+           (let ((res (dynamic-let ((*trace-indent*
+                                     (concatenate (dynamic *trace-indent*)
+                                                  " ")))
+                        (apply ,tmp-name args))))
+             ,(if post-action
+                  `(apply ,post-action ,function-name args)
+                `(format stderr
+                         ,(format () "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
+                                  function-name)
+                         (dynamic *trace-indent*) args res))
+             res)))
+         ;; retrieve previous value
+         (setq *redefine-imported-bindings*
+               (car *redefine-imported-bindings*))
+         ,function-name)))
+
+  (defmacro untrace (function-name)
+    (let ((tmp-name (concatenate '| | function-name)))
+      `(progn
+         (setq *redefine-imported-bindings*
+               (list *redefine-imported-bindings*))
+         (setq ,function-name ,tmp-name)
+         ;; retrieve previous value
+         (setq *redefine-imported-bindings*
+               (car *redefine-imported-bindings*)))))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

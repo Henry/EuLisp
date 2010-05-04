@@ -9,11 +9,12 @@
 (defmodule _stream0
   (syntax (_boot0)
    import (level1))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Clearly the following definition should be elsewhere
 ;;;
 ;;; test cases
-;;;-----------------------------------------------------------------------------
+;;;
 ;;; (match-let 'foo '((a 1)) 'bar)
 ;;; => (let ((a (if (null foo) 1 (car foo)))) bar)
 ;;;
@@ -96,33 +97,31 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Temporarily binds var with input stream
 ;;;-----------------------------------------------------------------------------
-  (defmacro with-input-file (var-and-path . body)
-    (let ((the-var (car var-and-path))
-          (the-path (car (cdr var-and-path)))
-          (res-var (gensym)))
-      `(let ((,the-var (make <file-stream> file-name: ,the-path))
-             ;;`(let ((,the-var (open-input-file ,the-path))
-             (,res-var ()))
-         (unwind-protect (setq ,res-var (progn ,@body))
-           (disconnect ,the-var))
-         ,res-var)))
+  (defmacro with-input-file (var-and-file-name . body)
+    (let ((s (car var-and-file-name))
+          (file-name (car (cdr var-and-file-name)))
+          (res (gensym)))
+      `(let ((,s (make <file-stream> file-name: ,file-name))
+             (,res ()))
+         (unwind-protect (setq ,res (progn ,@body))
+           (disconnect ,s))
+         ,res)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Temporarily connects stdout to path
+;;; Temporarily connects stdout to file-name
 ;;;-----------------------------------------------------------------------------
-  (defmacro with-output-file (var-and-path . body)
-    (let ((the-var (car var-and-path))
-          (the-path (car (cdr var-and-path)))
-          (res-var (gensym)))
-      `(let ((,the-var (make <file-stream> file-name: ,the-path mode: 'w))
-             ;;`(let ((,the-var (open-output-file ,the-path))
-             (,res-var ()))
-         (unwind-protect (setq ,res-var (progn ,@body))
-           (disconnect ,the-var))
-         ,res-var)))
+  (defmacro with-output-file (var-and-file-name . body)
+    (let ((s (car var-and-file-name))
+          (file-name (car (cdr var-and-file-name)))
+          (res (gensym)))
+      `(let ((,s (make <file-stream> file-name: ,file-name mode: 'w))
+             (,res ()))
+         (unwind-protect (setq ,res (progn ,@body))
+           (disconnect ,s))
+         ,res)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Open input file with load path
+;;; Open input file with path
 ;;;-----------------------------------------------------------------------------
   (defmacro with-input-file-of-path (decl . body)
     (let ((s (car decl))

@@ -50,7 +50,7 @@ void initialize_module_i_modify()
   /* Code vector and literal definitions */
   eul_allocate_static_string(str_3482, "no such file ~a", 15);
   /* Byte-vector with size: 29 is_init: 0 index: 11 binding: file-newer-p */
-  static const void *G003480[] = {I(ab,24,00,00),B(stream ,12),I(1d,24,00,00),B(i_param ,17),I(24,00,00,00),B(boot ,9),I(3c,03,24,00),B(stream ,12),I(1d,24,00,00),B(i_param ,17),I(24,00,00,00),B(boot ,9),I(3c,03,1c,34),I(00,00,00,29),I(1b,34,00,00),I(00,00,00,1b),I(1c,10,1c,10),I(41,00,00,00),B(i_modify ,9),I(22,02,32,00),I(00,00,00,08),I(1f,03,32,00),I(00,00,00,19),I(23,00,00,00),B(i_modify ,10),I(1f,04,24,00),B(boot ,21),I(3d,02,04,45),I(04,00,00,00)};
+  static const void *G003480[] = {I(ab,24,00,00),B(stream ,12),I(1d,24,00,00),B(i_param ,17),I(24,00,00,00),B(boot ,9),I(3c,03,24,00),B(stream ,12),I(1d,24,00,00),B(i_param ,17),I(24,00,00,00),B(boot ,9),I(3c,03,1c,34),I(00,00,00,29),I(1b,34,00,00),I(00,00,00,1b),I(1c,10,1c,10),I(41,00,00,00),B(i_modify ,9),I(22,02,32,00),I(00,00,00,08),I(1f,03,32,00),I(00,00,00,19),I(23,00,00,00),B(i_modify ,10),I(1f,04,24,00),B(boot ,22),I(3d,02,04,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 12 binding: library-newer-p */
   static const void *G003483[] = {I(ab,86,45,02)};

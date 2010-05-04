@@ -37,46 +37,46 @@ void initialize_module_integer()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_2138, sym_2137, sym_2136, G002135, G002133, G002131, sym_2129, sym_2128, key_2127, key_2126, key_2125, key_2124, sym_2123, key_2122, G002121, G002119, G002117;
+  LispRef sym_2214, sym_2213, sym_2212, G002211, G002209, G002207, sym_2205, sym_2204, key_2203, key_2202, key_2201, key_2200, sym_2199, key_2198, G002197, G002195, G002193;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 1 is_init: 0 index: 6 binding: (method-integerp) */
-  static const void *G002116[] = {I(aa,1b,45,01)};
+  static const void *G002192[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 7 binding: (method-integerp) */
-  static const void *G002118[] = {I(aa,86,45,01)};
+  static const void *G002194[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 104 is_init: 0 index: 16 binding: top-level */
-  static const void *G002120[] = {I(a9,24,00,00),B(number ,5),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,71),I(23,00,00,00),B(integer ,8),I(23,00,00,00),B(integer ,9),I(23,00,00,00),B(integer ,10),I(1f,05,23,00),B(integer ,11),I(1f,06,23,00),B(integer ,12),I(86,23,00,00),B(integer ,13),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(integer ,2),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(integer ,14),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(integer ,3),I(2a,24,00,00),B(integer ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(integer ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(integer ,2),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(integer ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,6),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,3),I(2a,24,00,00),B(integer ,2),I(45,13,00,00)};
+  static const void *G002196[] = {I(a9,24,00,00),B(number ,5),I(24,00,00,00),B(boot1 ,26),I(3c,01,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_class ,71),I(23,00,00,00),B(integer ,8),I(23,00,00,00),B(integer ,9),I(23,00,00,00),B(integer ,10),I(1f,05,23,00),B(integer ,11),I(1f,06,23,00),B(integer ,12),I(86,23,00,00),B(integer ,13),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(integer ,2),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(integer ,14),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(integer ,3),I(2a,24,00,00),B(integer ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(integer ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(integer ,2),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(integer ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,6),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,3),I(2a,24,00,00),B(integer ,2),I(45,13,00,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 17 binding: evenp */
-  static const void *G002130[] = {I(aa,84,24,00),B(number ,6),I(3c,02,24,00),B(number ,8),I(3d,01,00,00)};
+  static const void *G002206[] = {I(aa,84,24,00),B(number ,6),I(3c,02,24,00),B(number ,8),I(3d,01,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 18 binding: oddp */
-  static const void *G002132[] = {I(aa,84,24,00),B(number ,6),I(3c,02,1b,24),B(number ,8),I(3c,01,12,45),I(01,00,00,00)};
+  static const void *G002208[] = {I(aa,84,24,00),B(number ,6),I(3c,02,1b,24),B(number ,8),I(3c,01,12,45),I(01,00,00,00)};
 
   /* Byte-vector with size: 34 is_init: 1 index: 0 binding: initialize-integer */
-  static const void *G002134[] = {I(87,25,00,00),B(integer ,1),I(24,00,00,00),B(number ,1),I(3e,0b,24,00),B(number ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(integer ,19),I(23,00,00,00),B(integer ,18),I(3b,01,25,00),B(integer ,5),I(23,00,00,00),B(integer ,20),I(23,00,00,00),B(integer ,17),I(3b,01,25,00),B(integer ,4),I(86,25,00,00),B(integer ,3),I(86,25,00,00),B(integer ,2),I(23,00,00,00),B(integer ,21),I(23,00,00,00),B(integer ,16),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G002210[] = {I(87,25,00,00),B(integer ,1),I(24,00,00,00),B(number ,1),I(3e,0b,24,00),B(number ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(integer ,19),I(23,00,00,00),B(integer ,18),I(3b,01,25,00),B(integer ,5),I(23,00,00,00),B(integer ,20),I(23,00,00,00),B(integer ,17),I(3b,01,25,00),B(integer ,4),I(86,25,00,00),B(integer ,3),I(86,25,00,00),B(integer ,2),I(23,00,00,00),B(integer ,21),I(23,00,00,00),B(integer ,16),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G002117,G002116);
-  eul_allocate_bytevector( G002119,G002118);
-  eul_intern_keyword(key_2122,"name");
-  eul_intern_symbol(sym_2123,"integer");
-  eul_intern_keyword(key_2124,"direct-superclasses");
-  eul_intern_keyword(key_2125,"direct-slots");
-  eul_intern_keyword(key_2126,"direct-keywords");
-  eul_intern_keyword(key_2127,"abstractp");
-  eul_intern_symbol(sym_2128,"integerp");
-  eul_intern_symbol(sym_2129,"(method integerp)");
-  eul_allocate_bytevector( G002121,G002120);
-  eul_allocate_bytevector( G002131,G002130);
-  eul_allocate_bytevector( G002133,G002132);
-  eul_intern_symbol(sym_2136,"oddp");
-  eul_intern_symbol(sym_2137,"evenp");
-  eul_intern_symbol(sym_2138,"top-level");
-  eul_allocate_bytevector( G002135,G002134);
+  eul_allocate_bytevector( G002193,G002192);
+  eul_allocate_bytevector( G002195,G002194);
+  eul_intern_keyword(key_2198,"name");
+  eul_intern_symbol(sym_2199,"integer");
+  eul_intern_keyword(key_2200,"direct-superclasses");
+  eul_intern_keyword(key_2201,"direct-slots");
+  eul_intern_keyword(key_2202,"direct-keywords");
+  eul_intern_keyword(key_2203,"abstractp");
+  eul_intern_symbol(sym_2204,"integerp");
+  eul_intern_symbol(sym_2205,"(method integerp)");
+  eul_allocate_bytevector( G002197,G002196);
+  eul_allocate_bytevector( G002207,G002206);
+  eul_allocate_bytevector( G002209,G002208);
+  eul_intern_symbol(sym_2212,"oddp");
+  eul_intern_symbol(sym_2213,"evenp");
+  eul_intern_symbol(sym_2214,"top-level");
+  eul_allocate_bytevector( G002211,G002210);
 
   /* Set local bindings */
   {
@@ -85,24 +85,24 @@ void initialize_module_integer()
       integer_bindings[i] = eul_nil;
   }
 
-  integer_bindings[ 6] = G002117;
-  integer_bindings[ 7] = G002119;
-  integer_bindings[ 8] = key_2122;
-  integer_bindings[ 9] = sym_2123;
-  integer_bindings[ 10] = key_2124;
-  integer_bindings[ 11] = key_2125;
-  integer_bindings[ 12] = key_2126;
-  integer_bindings[ 13] = key_2127;
-  integer_bindings[ 14] = sym_2128;
-  integer_bindings[ 15] = sym_2129;
-  integer_bindings[ 16] = G002121;
-  integer_bindings[ 17] = G002131;
-  integer_bindings[ 18] = G002133;
+  integer_bindings[ 6] = G002193;
+  integer_bindings[ 7] = G002195;
+  integer_bindings[ 8] = key_2198;
+  integer_bindings[ 9] = sym_2199;
+  integer_bindings[ 10] = key_2200;
+  integer_bindings[ 11] = key_2201;
+  integer_bindings[ 12] = key_2202;
+  integer_bindings[ 13] = key_2203;
+  integer_bindings[ 14] = sym_2204;
+  integer_bindings[ 15] = sym_2205;
+  integer_bindings[ 16] = G002197;
+  integer_bindings[ 17] = G002207;
+  integer_bindings[ 18] = G002209;
   integer_bindings[ 1] = eul_nil;
-  integer_bindings[ 19] = sym_2136;
-  integer_bindings[ 20] = sym_2137;
-  integer_bindings[ 21] = sym_2138;
-  eul_allocate_lambda( integer_bindings[0], "initialize-integer", 0, G002135);
+  integer_bindings[ 19] = sym_2212;
+  integer_bindings[ 20] = sym_2213;
+  integer_bindings[ 21] = sym_2214;
+  eul_allocate_lambda( integer_bindings[0], "initialize-integer", 0, G002211);
 
   }
 }

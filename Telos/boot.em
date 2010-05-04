@@ -10,7 +10,7 @@
   (syntax (_boot0)
    import (boot1)
    expose (boot1)
-   export (append list-ref list-size
+   export (append append! list-ref list-size
            map1-list do1-list member-list member1-list
            anyp1-list anyp2-list mapcan init-list-ref assoc-list-ref
            reverse-list sort-list list-remove list-remove-duplicates
@@ -50,12 +50,24 @@
 
   (defun append (l1 l2)
     (labels
-     ((loop (ll1 res)
-            (if (null ll1) res
-              (loop (cdr ll1)
-                    (cons (car ll1) res)))))
-     (if (null l2) l1
-       (loop (reverse-list l1) l2))))
+      ((loop (ll1 res)
+             (if (null ll1) res
+               (loop (cdr ll1)
+                     (cons (car ll1) res)))))
+      (if (null l2) l1
+        (loop (reverse-list l1) l2))))
+
+  (defun append! (l1 l2)  ;; Destructive
+    (cond
+      ((null l1) l2)
+      ((null l2) l1)
+      (t (labels
+           ((loop (l rest)
+                  (if rest
+                      (loop rest (cdr rest))
+                    ((setter cdr) l l2))))
+           (loop l1 (cdr l1)))
+         l1)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; List mapping

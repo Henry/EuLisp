@@ -67,7 +67,7 @@ void initialize_module_i_error()
   static const void *G00402[] = {I(aa,82,24,00),B(i_error ,5),I(08,45,00,00)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 26 binding: ct-error */
-  static const void *G00404[] = {I(43,fd,24,00),B(mop_gf ,17),I(86,1f,03,1f),I(03,24,00,00),B(boot ,9),I(3c,04,1b,24),B(i_error ,5),I(23,00,00,00),B(i_error ,12),I(1f,06,24,00),B(boot ,21),I(3d,04,04,45),I(04,00,00,00)};
+  static const void *G00404[] = {I(43,fd,24,00),B(mop_gf ,17),I(86,1f,03,1f),I(03,24,00,00),B(boot ,9),I(3c,04,1b,24),B(i_error ,5),I(23,00,00,00),B(i_error ,12),I(1f,06,24,00),B(boot ,22),I(3d,04,04,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 43 is_init: 1 index: 0 binding: initialize-i-error */
   static const void *G00406[] = {I(87,25,00,00),B(i_error ,1),I(24,00,00,00),B(i_notify ,1),I(3e,0b,24,00),B(i_notify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_param ,1),I(3e,0b,24,00),B(i_param ,0),I(3c,00,21,01),I(24,00,00,00),B(i_level1 ,1),I(3e,0b,24,00),B(i_level1 ,0),I(3c,00,21,01),I(86,25,00,00),B(i_error ,5),I(23,00,00,00),B(i_error ,13),I(23,00,00,00),B(i_error ,26),I(3b,fd,25,00),B(i_error ,4),I(23,00,00,00),B(i_error ,27),I(23,00,00,00),B(i_error ,25),I(3b,01,25,00),B(i_error ,3),I(23,00,00,00),B(i_error ,28),I(23,00,00,00),B(i_error ,24),I(3b,ff,25,00),B(i_error ,2),I(23,00,00,00),B(i_error ,29),I(23,00,00,00),B(i_error ,21),I(3b,00,3d,00),I(00,ac,00,00)};

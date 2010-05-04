@@ -9,13 +9,29 @@
 (defmodule collect
   (syntax (_telos0)
    import (telos compare)
-   export (<collection> collectionp <sequence> sequencep
-           accumulate accumulate1 anyp allp do fill map member
-           element concatenate emptyp size reverse sort find select
-           delete remove reset name reverse! sort! slice))
+   export (name
+           <collection> <sequence>
+           collectionp sequencep
+           accumulate accumulate1 anyp allp do fill find map member select
+           element delete remove reset
+           emptyp size
+           reverse reverse!
+           sort sort!
+           concatenate
+           slice))
 
 ;;;-----------------------------------------------------------------------------
-;;; Classes <collection> and <sequence>
+;;; Name
+;;;-----------------------------------------------------------------------------
+  (defgeneric name (x)
+    method: (((x <symbol>)) (symbol-name x))
+    method: (((x <keyword>)) (keyword-name x))
+    method: (((x <function>)) (function-name x))
+    method: (((x <class>)) (class-name x))
+    method: (((x <slot>)) (slot-name x)))
+
+;;;-----------------------------------------------------------------------------
+;;; Classes: <collection> and <sequence>
 ;;;-----------------------------------------------------------------------------
   (defclass <collection> (<object>) ()
     abstractp: t)
@@ -25,7 +41,8 @@
     abstractp: t)
 
 ;;;-----------------------------------------------------------------------------
-;;; Predicates; should return t (not x when generated) in positive case
+;;; Predicates
+;;    Return t (not x when generated) in positive case
 ;;;-----------------------------------------------------------------------------
   (defgeneric collectionp (x)
     method: (((x <object>)) ())
@@ -35,6 +52,8 @@
     method: (((x <object>)) ())
     method: (((x <sequence>)) t))
 
+  (defgeneric emptyp (o))
+
   (defmethod equal ((c1 <collection>) (c2 <collection>))
     (and (eq (class-of c1) (class-of c2))
          (if (listp c1)
@@ -43,18 +62,44 @@
                 (allp equal c1 c2)))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Iterations
+;;; Iteration
+;;    Note that "do" and "map" methods for <collection> are in vector.em
+;;    because they depend on conversion to <vector>.
 ;;;-----------------------------------------------------------------------------
   (defgeneric accumulate (f i c))
   (defgeneric accumulate1 (f c))
   (defgeneric anyp (f c . cs))
   (defgeneric allp (f c . cs))
   (defgeneric do (f c . cs))
-  (defgeneric map (f c . cs))
   (defgeneric fill (c x . keys))
-  (defgeneric member (v c . f))
   (defgeneric find (v c . f))
+  (defgeneric map (f c . cs))
+  (defgeneric member (v c . f))
   (defgeneric select (f c . cs))
+
+  (defmethod anyp ((fun <function>) (c <collection>) . cs)
+    (let* ((ccs (cons c cs))
+           (n (apply min (map size ccs))))
+      (labels
+       ((loop (i)
+              (and (int-binary< i n)
+                   (or (apply fun (map (lambda (x) (element x i)) ccs))
+                       (loop (int-binary+ i 1))))))
+       (loop 0))))
+
+  (defmethod allp ((fun <function>) (c <collection>) . cs)
+    (let* ((ccs (cons c cs))
+           (n (apply min (map size ccs))))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (and (apply fun (map (lambda (x) (element x i)) ccs))
+                       (loop (int-binary+ i 1)))
+                t)))
+       (loop 0))))
+
+  (defmethod fill ((c <collection>) x . keys)
+    (error "fill not yet implemented"))
 
   (defmethod find (x (c <collection>) . preds)
     (apply member x c preds))
@@ -69,9 +114,8 @@
   (defgeneric reset (x)) ;; also used for streams
 
 ;;;-----------------------------------------------------------------------------
-;;; Length
+;;; Size
 ;;;-----------------------------------------------------------------------------
-  (defgeneric emptyp (o))
   (defgeneric size (c))
 
 ;;;-----------------------------------------------------------------------------
@@ -95,16 +139,6 @@
 ;;; Slice
 ;;;-----------------------------------------------------------------------------
   (defgeneric slice (c s e))
-
-;;;-----------------------------------------------------------------------------
-;;; Name
-;;;-----------------------------------------------------------------------------
-  (defgeneric name (x)
-    method: (((x <symbol>)) (symbol-name x))
-    method: (((x <keyword>)) (keyword-name x))
-    method: (((x <function>)) (function-name x))
-    method: (((x <class>)) (class-name x))
-    method: (((x <slot>)) (slot-name x)))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

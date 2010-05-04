@@ -23,12 +23,12 @@ extern LispRef cg_state_bindings[];
 #define asm_function_state_pc__X63_fn_index 52 
 #define C_state_used_module_names__X33_fn_index 43 
 #define code_state_stack_vars__X63_fn_index 17 
-#define asm_function_state_code__X63_fn_index 28 
+#define asm_function_state_code__X63_fn_index 25 
 #define asm_state_init_bytevector__X63_fn_index 29 
 #define make_C_state_fn_index 47 
 #define asm_function_state_pc__X33_fn_index 16 
 #define C_state_statements__X33_fn_index 48 
-#define code_state_enclosed_code__X63_fn_index 27 
+#define code_state_enclosed_code__X63_fn_index 28 
 #define C_state_global_index__X33_fn_index 10 
 #define _code_state__X60_X62_fn_index 11 
 #define code_state_asm__X63_fn_index 15 
@@ -38,9 +38,9 @@ extern LispRef cg_state_bindings[];
 #define C_state_globals__X63_fn_index 24 
 #define asm_state_init_bytevector__X33_fn_index 51 
 #define code_state_handle__X63_fn_index 14 
-#define make_code_state_fn_index 26 
+#define make_code_state_fn_index 27 
 #define C_state_statements__X63_fn_index 41 
-#define asm_state_bytevectors__X63_fn_index 25 
+#define asm_state_bytevectors__X63_fn_index 26 
 #define code_state_display__X63_fn_index 40 
 #define _asm_state__X60_X62_fn_index 3 
 #define C_state_code_vector_str__X63_fn_index 9 

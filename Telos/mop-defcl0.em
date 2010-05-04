@@ -9,6 +9,7 @@
 (defmodule mop-defcl0
   (syntax (boot0)
    import (level1))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Syntax: (defclass name (supers) (slots) {keywords}*), where
 ;; name is a symbol,

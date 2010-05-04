@@ -17,7 +17,7 @@
            accumulate-vector accumulate1-vector reverse-vector!))
 
 ;;;-----------------------------------------------------------------------------
-;;; Class <vector>
+;;; Classes: <vector>
 ;;;-----------------------------------------------------------------------------
   (defprimclass <vector> vector-class (<sequence>) () predicate: vectorp)
 
@@ -26,24 +26,186 @@
     (let ((n (init-list-ref inits size: 0))
           (x (init-list-ref inits fill-value:)))
       (make-vector1 n (list x))))
-  ;  (defun make-vector (n . init)
-  ;    (if init
-  ;       (make-vector1 n init)
-  ;      (primitive-allocate <vector> n)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Limit (2^29 - 1)
+;;; Predicates
 ;;;-----------------------------------------------------------------------------
-  (defconstant maximum-vector-size 536870911)
+  (defun vector-empty-p (vec) (int-binary= (vector-size vec) 0))
+  (declare-inline vector-empty-p)
+
+  (defmethod emptyp ((vec <vector>)) (vector-empty-p vec))
 
 ;;;-----------------------------------------------------------------------------
-;;; Vector access
+;;; Iteration
 ;;;-----------------------------------------------------------------------------
-  ;  (defmethod size ((vec <vector>))
-  ;    (vector-size vec))
+;;;-----------------------------------------------------------------------------
+;;;  Accumulate
+;;;-----------------------------------------------------------------------------
+  (defmethod accumulate ((fun <function>) init (vec <vector>))
+    (accumulate-vector fun init vec))
 
-  (defmethod size (x)
-    (vector-size x))
+  (defun accumulate-vector (fun init vec)
+    (let ((n (vector-size vec)))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (progn
+                    (setq init (fun init (vector-ref vec i)))
+                    (loop (int-binary+ i 1)))
+                init)))
+       (loop 0))))
+
+  (defmethod accumulate1 ((fun <function>) (vec <vector>))
+    (accumulate1-vector fun vec))
+
+  (defun accumulate1-vector (fun vec)
+    (if (int-binary= (vector-size vec) 0) ()
+      (accumulate-vector fun (vector-ref vec 0) (subvector vec 1 ()))))
+
+;;;-----------------------------------------------------------------------------
+;;;  Anyp
+;;;-----------------------------------------------------------------------------
+  (defmethod anyp ((fun <function>) (vec <vector>) . cs)
+    (if (null cs)
+        (anyp1-vector fun vec)
+      (call-next-method)))
+
+  (defun anyp1-vector (fun vec)
+    (let ((n (vector-size vec)))
+      (labels
+       ((loop (i)
+              (and (int-binary< i n)
+                   (or (fun (vector-ref vec i))
+                       (loop (int-binary+ i 1))))))
+       (loop 0))))
+
+;;;-----------------------------------------------------------------------------
+;;;  Allp
+;;;-----------------------------------------------------------------------------
+  (defmethod allp ((fun <function>) (vec <vector>) . cs)
+    (if (null cs)
+        (allp1-vector fun vec)
+      (call-next-method)))
+
+  (defun allp1-vector (fun vec)
+    (let ((n (vector-size vec)))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (and (fun (vector-ref vec i))
+                       (loop (int-binary+ i 1)))
+                t)))
+       (loop 0))))
+
+;;;-----------------------------------------------------------------------------
+;;;  Do
+;;;-----------------------------------------------------------------------------
+  (defmethod do ((fun <function>) (vec <vector>) . cs)
+    (if (null cs)
+        (do1-vector fun vec)
+      (call-next-method)))
+
+  (defun do1-vector (fun vec)
+    (let ((n (vector-size vec)))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (progn
+                    (fun (vector-ref vec i))
+                    (loop (int-binary+ i 1)))
+                ())))
+       (loop 0))))
+
+;;;-----------------------------------------------------------------------------
+;;;  Map
+;;;-----------------------------------------------------------------------------
+  (defmethod map ((fun <function>) (vec <vector>) . cs)
+    (if (null cs)
+        (map1-vector fun vec)
+      (call-next-method)))
+
+  (defun map1-vector (fun vec)
+    (let* ((n (vector-size vec))
+           (res (make-vector n)))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (progn
+                    ((setter vector-ref) res i (fun (vector-ref vec i)))
+                    (loop (int-binary+ i 1)))
+                res)))
+       (loop 0))))
+
+;;;-----------------------------------------------------------------------------
+;;;  Member
+;;;-----------------------------------------------------------------------------
+  (defmethod member (x (vec <vector>) . preds)
+    (if (null preds)
+        (member1-vector x vec)
+      (let ((pred (car preds))
+            (n (vector-size vec)))
+        (labels
+         ((loop (i)
+                (and (int-binary< i n)
+                     (if (eql x (vector-ref vec i))
+                         i
+                       (loop (int-binary+ i 1))))))
+         (loop 0)))))
+
+  (defun member1-vector (x vec)
+    (let ((n (vector-size vec)))
+      (labels
+       ((loop (i)
+              (and (int-binary< i n)
+                   (if (eql x (vector-ref vec i))
+                       i
+                     (loop (int-binary+ i 1))))))
+       (loop 0))))
+
+;;;-----------------------------------------------------------------------------
+;;; Iteration <collection> (with dependencies on <vector>
+;;;-----------------------------------------------------------------------------
+;;;  Do
+;;;-----------------------------------------------------------------------------
+  (defmethod do ((fun <function>) (c <collection>) . cs)
+    (let* ((ccs (map1-list (lambda (cc)
+                             (if (sequencep cc) cc (convert cc <vector>)))
+                           (cons c cs)))
+           (n (apply min (map1-list size ccs))))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (progn
+                    (apply fun (map1-list (lambda (cc)
+                                            (element cc i)) ccs))
+                    (loop (int-binary+ i 1)))
+                ())))
+       (loop 0))))
+
+;;;-----------------------------------------------------------------------------
+;;;  Map
+;;;-----------------------------------------------------------------------------
+  (defmethod map ((fun <function>) (c <collection>) . cs)
+    (let* ((ccs (map1-list (lambda (cc)
+                             (if (sequencep cc) cc (convert cc <vector>)))
+                           (cons c cs)))
+           (n (apply min (map1-list size ccs)))
+           (res (make-vector n)))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (progn
+                    ((setter vector-ref)
+                     res i
+                     (apply fun (map1-list (lambda (cc)
+                                             (element cc i)) ccs)))
+                    (loop (int-binary+ i 1)))
+                res)))
+       (convert (loop 0) (class-of c)))))
+
+;;;-----------------------------------------------------------------------------
+;;; Access
+;;;-----------------------------------------------------------------------------
 
   (defmethod element ((vec <vector>) (i <int>))
     (vector-ref vec i))
@@ -107,172 +269,13 @@
        (loop 0 n1 n2 vec2))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Predicates
+;;; Size
 ;;;-----------------------------------------------------------------------------
-  (defun vector-empty-p (vec) (int-binary= (vector-size vec) 0))
-  (declare-inline vector-empty-p)
+  ;  (defmethod size ((vec <vector>))
+  ;    (vector-size vec))
 
-  (defmethod emptyp ((vec <vector>)) (vector-empty-p vec))
-
-;;;-----------------------------------------------------------------------------
-;;; General collection methods
-;;;-----------------------------------------------------------------------------
-  (defmethod anyp ((fun <function>) (c <collection>) . cs)
-    (let* ((ccs (cons c cs))
-           (n (apply min (map size ccs))))
-      (labels
-       ((loop (i)
-              (and (int-binary< i n)
-                   (or (apply fun (map (lambda (x) (element x i)) ccs))
-                       (loop (int-binary+ i 1))))))
-       (loop 0))))
-
-  (defmethod allp ((fun <function>) (c <collection>) . cs)
-    (let* ((ccs (cons c cs))
-           (n (apply min (map size ccs))))
-      (labels
-       ((loop (i)
-              (if (int-binary< i n)
-                  (and (apply fun (map (lambda (x) (element x i)) ccs))
-                       (loop (int-binary+ i 1)))
-                t)))
-       (loop 0))))
-
-  (defmethod fill ((c <collection>) x . keys)
-    (error "fill not yet implemented"))
-
-;;;-----------------------------------------------------------------------------
-;;; General do with arbitrary collections
-;;;-----------------------------------------------------------------------------
-  (defmethod do ((fun <function>) (c <collection>) . cs)
-    (let* ((ccs (map1-list (lambda (cc)
-                             (if (sequencep cc) cc (convert cc <vector>)))
-                           (cons c cs)))
-           (n (apply min (map1-list size ccs))))
-      (labels
-       ((loop (i)
-              (if (int-binary< i n)
-                  (progn
-                    (apply fun (map1-list (lambda (cc)
-                                            (element cc i)) ccs))
-                    (loop (int-binary+ i 1)))
-                ())))
-       (loop 0))))
-
-  (defmethod do ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
-        (do1-vector fun vec)
-      (call-next-method)))
-
-  (defun do1-vector (fun vec)
-    (let ((n (vector-size vec)))
-      (labels
-       ((loop (i)
-              (if (int-binary< i n)
-                  (progn
-                    (fun (vector-ref vec i))
-                    (loop (int-binary+ i 1)))
-                ())))
-       (loop 0))))
-
-;;;-----------------------------------------------------------------------------
-;;; General map with arbitrary collections
-;;;-----------------------------------------------------------------------------
-  (defmethod map ((fun <function>) (c <collection>) . cs)
-    (let* ((ccs (map1-list (lambda (cc)
-                             (if (sequencep cc) cc (convert cc <vector>)))
-                           (cons c cs)))
-           (n (apply min (map1-list size ccs)))
-           (res (make-vector n)))
-      (labels
-       ((loop (i)
-              (if (int-binary< i n)
-                  (progn
-                    ((setter vector-ref)
-                     res i
-                     (apply fun (map1-list (lambda (cc)
-                                             (element cc i)) ccs)))
-                    (loop (int-binary+ i 1)))
-                res)))
-       (convert (loop 0) (class-of c)))))
-
-  (defmethod map ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
-        (map1-vector fun vec)
-      (call-next-method)))
-
-  (defun map1-vector (fun vec)
-    (let* ((n (vector-size vec))
-           (res (make-vector n)))
-      (labels
-       ((loop (i)
-              (if (int-binary< i n)
-                  (progn
-                    ((setter vector-ref) res i (fun (vector-ref vec i)))
-                    (loop (int-binary+ i 1)))
-                res)))
-       (loop 0))))
-
-;;;-----------------------------------------------------------------------------
-;;; Member
-;;;-----------------------------------------------------------------------------
-  (defmethod member (x (vec <vector>) . preds)
-    (if (null preds)
-        (member1-vector x vec)
-      (let ((pred (car preds))
-            (n (vector-size vec)))
-        (labels
-         ((loop (i)
-                (and (int-binary< i n)
-                     (if (eql x (vector-ref vec i))
-                         i
-                       (loop (int-binary+ i 1))))))
-         (loop 0)))))
-
-  (defun member1-vector (x vec)
-    (let ((n (vector-size vec)))
-      (labels
-       ((loop (i)
-              (and (int-binary< i n)
-                   (if (eql x (vector-ref vec i))
-                       i
-                     (loop (int-binary+ i 1))))))
-       (loop 0))))
-
-;;;-----------------------------------------------------------------------------
-;;; Anyp
-;;;-----------------------------------------------------------------------------
-  (defmethod anyp ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
-        (anyp1-vector fun vec)
-      (call-next-method)))
-
-  (defun anyp1-vector (fun vec)
-    (let ((n (vector-size vec)))
-      (labels
-       ((loop (i)
-              (and (int-binary< i n)
-                   (or (fun (vector-ref vec i))
-                       (loop (int-binary+ i 1))))))
-       (loop 0))))
-
-;;;-----------------------------------------------------------------------------
-;;; Allp
-;;;-----------------------------------------------------------------------------
-  (defmethod allp ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
-        (allp1-vector fun vec)
-      (call-next-method)))
-
-  (defun allp1-vector (fun vec)
-    (let ((n (vector-size vec)))
-      (labels
-       ((loop (i)
-              (if (int-binary< i n)
-                  (and (fun (vector-ref vec i))
-                       (loop (int-binary+ i 1)))
-                t)))
-       (loop 0))))
+  (defmethod size (x)
+    (vector-size x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Reverse
@@ -312,30 +315,6 @@
      (loop 0 (int-binary- (vector-size vec) 1))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Accumulate
-;;;-----------------------------------------------------------------------------
-  (defmethod accumulate ((fun <function>) init (vec <vector>))
-    (accumulate-vector fun init vec))
-
-  (defun accumulate-vector (fun init vec)
-    (let ((n (vector-size vec)))
-      (labels
-       ((loop (i)
-              (if (int-binary< i n)
-                  (progn
-                    (setq init (fun init (vector-ref vec i)))
-                    (loop (int-binary+ i 1)))
-                init)))
-       (loop 0))))
-
-  (defmethod accumulate1 ((fun <function>) (vec <vector>))
-    (accumulate1-vector fun vec))
-
-  (defun accumulate1-vector (fun vec)
-    (if (int-binary= (vector-size vec) 0) ()
-      (accumulate-vector fun (vector-ref vec 0) (subvector vec 1 ()))))
-
-;;;-----------------------------------------------------------------------------
 ;;; Permute collections
 ;;;-----------------------------------------------------------------------------
   (defun permute (fun . cs)
@@ -354,6 +333,7 @@
                (and (consp cs) (consp (car cs))))
            (reverse res)
          (convert (reverse res) (class-of (car cs)))))))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion and copying
 ;;;-----------------------------------------------------------------------------
@@ -382,6 +362,11 @@
                        (loop (int-binary+ i 1)))
                    res)))
         (loop 0))))
+
+;;;-----------------------------------------------------------------------------
+;;; Limit (2^29 - 1)
+;;;-----------------------------------------------------------------------------
+  (defconstant maximum-vector-size 536870911)
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

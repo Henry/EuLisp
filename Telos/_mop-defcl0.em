@@ -126,6 +126,7 @@
                                 res)
                         (- i 1)))))))
      (loop slots () (- (list-size slots) 1))))
+
   (defun do-accessor (name slotname inits i)
     (cond ((null inits) ())
           ((eq (car inits) accessor:)

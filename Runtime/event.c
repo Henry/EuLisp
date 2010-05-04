@@ -47,7 +47,7 @@ void initialize_module_event()
   /* Code vector and literal definitions */
   eul_allocate_static_string(str_57, "wait not yet implemented", 24);
   /* Byte-vector with size: 5 is_init: 0 index: 6 binding: (method-wait) */
-  static const void *G0055[] = {I(ab,23,00,00),B(event ,5),I(24,00,00,00),B(boot ,21),I(3d,01,02,00)};
+  static const void *G0055[] = {I(ab,23,00,00),B(event ,5),I(24,00,00,00),B(boot ,22),I(3d,01,02,00)};
 
   /* Byte-vector with size: 59 is_init: 0 index: 9 binding: top-level */
   static const void *G0058[] = {I(a9,41,00,00),B(event ,4),I(1b,89,00,00),B(event ,3),I(2a,84,24,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(event ,7),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(event ,2),I(2a,24,00,00),B(event ,2),I(2a,24,00,00),B(event ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(event ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(event ,8),I(23,00,00,00),B(event ,6),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(event ,2),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,0b,45),I(0b,00,00,00)};

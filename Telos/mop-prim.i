@@ -6,9 +6,9 @@
    syntax ()
    full-import (boot1 boot)
    export (
-    ((name . primitive-ref) (pos . 4) (origin mop-prim . primitive-ref) (inline (G00532 (primitive-ref))) (setter (G00536 (set-primitive-ref))))
-    ((name . primitive-allocate) (pos . 3) (origin mop-prim . primitive-allocate) (inline (G00528 (primitive-allocate))))
-    ((name . primitive-class-of) (pos . 2) (origin mop-prim . primitive-class-of) (inline (G00530 (primitive-class-of))) (setter (G00534 (set-primitive-class-of))))
+    ((name . primitive-ref) (pos . 4) (origin mop-prim . primitive-ref) (inline (G00556 (primitive-ref))) (setter (G00560 (set-primitive-ref))))
+    ((name . primitive-allocate) (pos . 3) (origin mop-prim . primitive-allocate) (inline (G00552 (primitive-allocate))))
+    ((name . primitive-class-of) (pos . 2) (origin mop-prim . primitive-class-of) (inline (G00554 (primitive-class-of))) (setter (G00558 (set-primitive-class-of))))
    )
    local-literals (
     (top-level . 16)

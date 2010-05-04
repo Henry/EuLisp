@@ -344,6 +344,14 @@
     be sure of success /make boot-clean/ maybe required before every /make
     boot/.
 
+*** Notes
+    The syntax files _.*0.em are used to enable the transition between old and
+    new function names during the bootstrapping process.  If functions change
+    which affect the syntax files first change the non "_" versions,
+    bootstrap-build then update the /.boot/ version with the current, update the
+    "_" versions to correspond to the non "_" versions and bootstrap-build
+    again.  This ensures a consistent final version.
+
 * Recent Developments
 *** Support for 64bit Operation
     The main change to support 64bit pointers is that on such architectures the

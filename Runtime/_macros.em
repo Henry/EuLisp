@@ -7,9 +7,9 @@
 ;;; Description: level1 macros
 ;;;-----------------------------------------------------------------------------
 (defmodule _macros
-  (import (level1)
-   expose (_telos0 _stream0)
-   syntax (_boot0))
+    (import (level1)
+     expose (_telos0 _stream0)
+     syntax (_boot0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Let/cc and unwind-protect
@@ -23,11 +23,12 @@
   (defmacro unwind-protect (form . clean-up-forms)
     (let ((res-var (gensym)))
       `(progn
-         (push-dynamic-variable '*clean-ups*
-                       (cons (lambda ()
-                               ,@clean-up-forms
-                               (pop-dynamic-variables 1))
-                             (dynamic *clean-ups*)))
+         (push-dynamic-variable
+           '*clean-ups*
+           (cons (lambda ()
+                   ,@clean-up-forms
+                   (pop-dynamic-variables 1))
+                 (dynamic *clean-ups*)))
          (let ((,res-var ,form))
            ,@clean-up-forms
            (pop-dynamic-variables 1)
@@ -48,7 +49,7 @@
   (defmacro catch (tag . body)
     (let ((k (gensym)))
       `(let/cc ,k
-         (dynamic-let ((,tag ,k)) ,@body))))
+               (dynamic-let ((,tag ,k)) ,@body))))
 
   (defmacro throw (tag . forms)
     `((dynamic ,tag) (progn ,@forms)))
@@ -60,11 +61,11 @@
     (let ((loop (gensym)))
       `(let/cc break
                (labels
-                ((,loop ()
-                        (when ,condition
-                              ,@body
-                              (,loop))))
-                (,loop)))))
+                 ((,loop ()
+                         (when ,condition
+                               ,@body
+                               (,loop))))
+                 (,loop)))))
 
   (defmacro for (init condition inc . body)
     `(progn ,init (while ,condition ,@body ,inc)))
@@ -92,9 +93,9 @@
     (let ((res (gensym)))
       `(progn
          ,@(map
-            (lambda (name-val)
-              `(push-dynamic-variable ',(car name-val) ,(car (cdr name-val))))
-            name-vals)
+             (lambda (name-val)
+               `(push-dynamic-variable ',(car name-val) ,(car (cdr name-val))))
+             name-vals)
          (unwind-protect (progn ,@body)
            (pop-dynamic-variables ,(size name-vals))))))
 
@@ -110,7 +111,7 @@
            ,res))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Auxiliary function (not necessary EuLisp)
+;;; Auxiliary function (not necessarily EuLisp)
 ;;;-----------------------------------------------------------------------------
   (defmacro not (x) `(null ,x))
 

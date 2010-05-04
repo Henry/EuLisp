@@ -41,73 +41,73 @@ void initialize_module_copy()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_1753, G001752, sym_1750, sym_1749, sym_1748, sym_1747, G001746, G001744, G001742, G001740, G001738, G001736, G001734, G001732, G001730, G001728, G001726, sym_1724, G001723, G001721;
+  LispRef sym_1829, G001828, sym_1826, sym_1825, sym_1824, sym_1823, G001822, G001820, G001818, G001816, G001814, G001812, G001810, G001808, G001806, G001804, G001802, sym_1800, G001799, G001797;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 19 is_init: 0 index: 4 binding: anonymous */
-  static const void *G001720[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(47,00,00,32),I(00,00,00,38),I(1c,10,24,00),B(mop_defcl ,10),I(24,00,00,00),B(boot1 ,41),I(3c,01,1c,47),I(00,00,24,00),B(mop_defcl ,10),I(3c,02,1b,24),B(copy ,3),I(3c,01,1f,03),I(47,00,00,1d),I(1f,05,3d,03),I(06,22,04,45),I(02,00,00,00)};
+  static const void *G001796[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(47,00,00,32),I(00,00,00,38),I(1c,10,24,00),B(mop_defcl ,10),I(24,00,00,00),B(boot1 ,41),I(3c,01,1c,47),I(00,00,24,00),B(mop_defcl ,10),I(3c,02,1b,24),B(copy ,3),I(3c,01,1f,03),I(47,00,00,1d),I(1f,05,3d,03),I(06,22,04,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 6 binding: (method-deep-copy) */
-  static const void *G001722[] = {I(aa,46,02,04),I(1b,86,24,00),B(mop_gf ,9),I(3c,02,1b,48),I(00,00,86,23),B(copy ,5),I(23,00,00,00),B(copy ,4),I(3b,01,20,01),I(1d,26,00,00),I(00,00,00,04),I(02,1c,3d,01),I(03,45,03,00)};
+  static const void *G001798[] = {I(aa,46,02,04),I(1b,86,24,00),B(mop_gf ,9),I(3c,02,1b,48),I(00,00,86,23),B(copy ,5),I(23,00,00,00),B(copy ,4),I(3b,01,20,01),I(1d,26,00,00),I(00,00,00,04),I(02,1c,3d,01),I(03,45,03,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 7 binding: (method-deep-copy) */
-  static const void *G001725[] = {I(aa,1b,45,01)};
+  static const void *G001801[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 8 binding: (method-deep-copy) */
-  static const void *G001727[] = {I(aa,1b,45,01)};
+  static const void *G001803[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 9 binding: (method-deep-copy) */
-  static const void *G001729[] = {I(aa,1b,45,01)};
+  static const void *G001805[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 10 binding: anonymous */
-  static const void *G001731[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(47,00,00,32),I(00,00,00,2f),I(1c,10,24,00),B(mop_defcl ,10),I(24,00,00,00),B(boot1 ,41),I(3c,01,1c,47),I(00,00,24,00),B(mop_defcl ,10),I(3c,02,1d,47),I(00,00,1d,1f),I(04,3d,03,05),I(22,03,45,02)};
+  static const void *G001807[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(47,00,00,32),I(00,00,00,2f),I(1c,10,24,00),B(mop_defcl ,10),I(24,00,00,00),B(boot1 ,41),I(3c,01,1c,47),I(00,00,24,00),B(mop_defcl ,10),I(3c,02,1d,47),I(00,00,1d,1f),I(04,3d,03,05),I(22,03,45,02)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 11 binding: (method-shallow-copy) */
-  static const void *G001733[] = {I(aa,46,02,04),I(1b,86,24,00),B(mop_gf ,9),I(3c,02,1b,48),I(00,00,86,23),B(copy ,5),I(23,00,00,00),B(copy ,10),I(3b,01,20,01),I(1d,26,00,00),I(00,00,00,04),I(02,1c,3d,01),I(03,45,03,00)};
+  static const void *G001809[] = {I(aa,46,02,04),I(1b,86,24,00),B(mop_gf ,9),I(3c,02,1b,48),I(00,00,86,23),B(copy ,5),I(23,00,00,00),B(copy ,10),I(3b,01,20,01),I(1d,26,00,00),I(00,00,00,04),I(02,1c,3d,01),I(03,45,03,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 12 binding: (method-deep-copy) */
-  static const void *G001735[] = {I(aa,1b,45,01)};
+  static const void *G001811[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 13 binding: (method-shallow-copy) */
-  static const void *G001737[] = {I(aa,1b,45,01)};
+  static const void *G001813[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 14 binding: (method-shallow-copy) */
-  static const void *G001739[] = {I(aa,1b,45,01)};
+  static const void *G001815[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 15 binding: (method-shallow-copy) */
-  static const void *G001741[] = {I(aa,1b,45,01)};
+  static const void *G001817[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 16 binding: (method-shallow-copy) */
-  static const void *G001743[] = {I(aa,1b,45,01)};
+  static const void *G001819[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 324 is_init: 0 index: 21 binding: top-level */
-  static const void *G001745[] = {I(a9,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(copy ,17),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(copy ,2),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(copy ,18),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(copy ,3),I(2a,24,00,00),B(copy ,2),I(2a,24,00,00),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,16),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,28),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,15),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(thread ,7),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,14),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,13),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,12),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,11),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(2a,24,00,00),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,9),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,28),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,8),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(thread ,7),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,6),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,44,45),I(44,00,00,00)};
+  static const void *G001821[] = {I(a9,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(copy ,17),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(copy ,2),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(copy ,18),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(copy ,3),I(2a,24,00,00),B(copy ,2),I(2a,24,00,00),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,16),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,28),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,15),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(thread ,7),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,14),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,13),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,12),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,19),I(23,00,00,00),B(copy ,11),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(2a,24,00,00),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,9),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,28),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,8),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(thread ,7),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(copy ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(copy ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(copy ,20),I(23,00,00,00),B(copy ,6),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(copy ,3),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,44,45),I(44,00,00,00)};
 
   /* Byte-vector with size: 27 is_init: 1 index: 0 binding: initialize-copy */
-  static const void *G001751[] = {I(87,25,00,00),B(copy ,1),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(thread ,1),I(3e,0b,24,00),B(thread ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(copy ,3),I(86,25,00,00),B(copy ,2),I(23,00,00,00),B(copy ,22),I(23,00,00,00),B(copy ,21),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G001827[] = {I(87,25,00,00),B(copy ,1),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(thread ,1),I(3e,0b,24,00),B(thread ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(copy ,3),I(86,25,00,00),B(copy ,2),I(23,00,00,00),B(copy ,22),I(23,00,00,00),B(copy ,21),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G001721,G001720);
-  eul_intern_symbol(sym_1724,"anonymous");
-  eul_allocate_bytevector( G001723,G001722);
-  eul_allocate_bytevector( G001726,G001725);
-  eul_allocate_bytevector( G001728,G001727);
-  eul_allocate_bytevector( G001730,G001729);
-  eul_allocate_bytevector( G001732,G001731);
-  eul_allocate_bytevector( G001734,G001733);
-  eul_allocate_bytevector( G001736,G001735);
-  eul_allocate_bytevector( G001738,G001737);
-  eul_allocate_bytevector( G001740,G001739);
-  eul_allocate_bytevector( G001742,G001741);
-  eul_allocate_bytevector( G001744,G001743);
-  eul_intern_symbol(sym_1747,"shallow-copy");
-  eul_intern_symbol(sym_1748,"deep-copy");
-  eul_intern_symbol(sym_1749,"(method shallow-copy)");
-  eul_intern_symbol(sym_1750,"(method deep-copy)");
-  eul_allocate_bytevector( G001746,G001745);
-  eul_intern_symbol(sym_1753,"top-level");
-  eul_allocate_bytevector( G001752,G001751);
+  eul_allocate_bytevector( G001797,G001796);
+  eul_intern_symbol(sym_1800,"anonymous");
+  eul_allocate_bytevector( G001799,G001798);
+  eul_allocate_bytevector( G001802,G001801);
+  eul_allocate_bytevector( G001804,G001803);
+  eul_allocate_bytevector( G001806,G001805);
+  eul_allocate_bytevector( G001808,G001807);
+  eul_allocate_bytevector( G001810,G001809);
+  eul_allocate_bytevector( G001812,G001811);
+  eul_allocate_bytevector( G001814,G001813);
+  eul_allocate_bytevector( G001816,G001815);
+  eul_allocate_bytevector( G001818,G001817);
+  eul_allocate_bytevector( G001820,G001819);
+  eul_intern_symbol(sym_1823,"shallow-copy");
+  eul_intern_symbol(sym_1824,"deep-copy");
+  eul_intern_symbol(sym_1825,"(method shallow-copy)");
+  eul_intern_symbol(sym_1826,"(method deep-copy)");
+  eul_allocate_bytevector( G001822,G001821);
+  eul_intern_symbol(sym_1829,"top-level");
+  eul_allocate_bytevector( G001828,G001827);
 
   /* Set local bindings */
   {
@@ -116,27 +116,27 @@ void initialize_module_copy()
       copy_bindings[i] = eul_nil;
   }
 
-  copy_bindings[ 4] = G001721;
-  copy_bindings[ 5] = sym_1724;
-  copy_bindings[ 6] = G001723;
-  copy_bindings[ 7] = G001726;
-  copy_bindings[ 8] = G001728;
-  copy_bindings[ 9] = G001730;
-  copy_bindings[ 10] = G001732;
-  copy_bindings[ 11] = G001734;
-  copy_bindings[ 12] = G001736;
-  copy_bindings[ 13] = G001738;
-  copy_bindings[ 14] = G001740;
-  copy_bindings[ 15] = G001742;
-  copy_bindings[ 16] = G001744;
-  copy_bindings[ 17] = sym_1747;
-  copy_bindings[ 18] = sym_1748;
-  copy_bindings[ 19] = sym_1749;
-  copy_bindings[ 20] = sym_1750;
-  copy_bindings[ 21] = G001746;
+  copy_bindings[ 4] = G001797;
+  copy_bindings[ 5] = sym_1800;
+  copy_bindings[ 6] = G001799;
+  copy_bindings[ 7] = G001802;
+  copy_bindings[ 8] = G001804;
+  copy_bindings[ 9] = G001806;
+  copy_bindings[ 10] = G001808;
+  copy_bindings[ 11] = G001810;
+  copy_bindings[ 12] = G001812;
+  copy_bindings[ 13] = G001814;
+  copy_bindings[ 14] = G001816;
+  copy_bindings[ 15] = G001818;
+  copy_bindings[ 16] = G001820;
+  copy_bindings[ 17] = sym_1823;
+  copy_bindings[ 18] = sym_1824;
+  copy_bindings[ 19] = sym_1825;
+  copy_bindings[ 20] = sym_1826;
+  copy_bindings[ 21] = G001822;
   copy_bindings[ 1] = eul_nil;
-  copy_bindings[ 22] = sym_1753;
-  eul_allocate_lambda( copy_bindings[0], "initialize-copy", 0, G001752);
+  copy_bindings[ 22] = sym_1829;
+  eul_allocate_lambda( copy_bindings[0], "initialize-copy", 0, G001828);
 
   }
 }

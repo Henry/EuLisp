@@ -8,7 +8,7 @@
 extern LispRef string_bindings[];
 
 /* Module binding indices */
-#define eul_list_as_eul_string_fn_index 18 
+#define eul_list_as_eul_string_fn_index 21 
 #define tailstring_fn_index 50 
 #define do1_string_fn_index 10 
 #define _string__X60_X62_fn_index 13 
@@ -22,7 +22,7 @@ extern LispRef string_bindings[];
 #define string_equal_fn_index 8 
 #define _character_sequence__X60_X62_fn_index 2 
 #define string_size_fn_index 19 
-#define string_compare_fn_index 19 
+#define string_compare_fn_index 17 
 #define substring_fn_index 7 
 #define string_data_fn_index 12 
 #define member1_string_fn_index 51 

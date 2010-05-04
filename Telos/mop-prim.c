@@ -30,45 +30,45 @@ void initialize_module_mop_prim()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_568, sym_567, sym_566, sym_565, G00564, G00562, G00560, G00558, sym_556, sym_555, G00554, G00552, G00550;
+  LispRef sym_592, sym_591, sym_590, sym_589, G00588, G00586, G00584, G00582, sym_580, sym_579, G00578, G00576, G00574;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 2 is_init: 0 index: 5 binding: (setter-primitive-ref) */
-  static const void *G00549[] = {I(43,03,03,45),I(00,00,00,00)};
+  static const void *G00573[] = {I(43,03,03,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 6 binding: (setter-primitive-class-of) */
-  static const void *G00551[] = {I(ab,05,45,00)};
+  static const void *G00575[] = {I(ab,05,45,00)};
 
   /* Byte-vector with size: 23 is_init: 0 index: 9 binding: top-level */
-  static const void *G00553[] = {I(a9,24,00,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_prim ,2),I(23,00,00,00),B(mop_prim ,7),I(23,00,00,00),B(mop_prim ,6),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_prim ,4),I(23,00,00,00),B(mop_prim ,8),I(23,00,00,00),B(mop_prim ,5),I(3b,03,1d,3d),I(02,02,45,02)};
+  static const void *G00577[] = {I(a9,24,00,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_prim ,2),I(23,00,00,00),B(mop_prim ,7),I(23,00,00,00),B(mop_prim ,6),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_prim ,4),I(23,00,00,00),B(mop_prim ,8),I(23,00,00,00),B(mop_prim ,5),I(3b,03,1d,3d),I(02,02,45,02)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 10 binding: primitive-class-of */
-  static const void *G00557[] = {I(aa,04,45,00)};
+  static const void *G00581[] = {I(aa,04,45,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 11 binding: primitive-allocate */
-  static const void *G00559[] = {I(ab,01,45,00)};
+  static const void *G00583[] = {I(ab,01,45,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 12 binding: primitive-ref */
-  static const void *G00561[] = {I(ab,02,45,00)};
+  static const void *G00585[] = {I(ab,02,45,00)};
 
   /* Byte-vector with size: 31 is_init: 1 index: 0 binding: initialize-mop-prim */
-  static const void *G00563[] = {I(87,25,00,00),B(mop_prim ,1),I(24,00,00,00),B(boot ,1),I(3e,0b,24,00),B(boot ,0),I(3c,00,21,01),I(23,00,00,00),B(mop_prim ,13),I(23,00,00,00),B(mop_prim ,12),I(3b,02,25,00),B(mop_prim ,4),I(23,00,00,00),B(mop_prim ,14),I(23,00,00,00),B(mop_prim ,11),I(3b,02,25,00),B(mop_prim ,3),I(23,00,00,00),B(mop_prim ,15),I(23,00,00,00),B(mop_prim ,10),I(3b,01,25,00),B(mop_prim ,2),I(23,00,00,00),B(mop_prim ,16),I(23,00,00,00),B(mop_prim ,9),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G00587[] = {I(87,25,00,00),B(mop_prim ,1),I(24,00,00,00),B(boot ,1),I(3e,0b,24,00),B(boot ,0),I(3c,00,21,01),I(23,00,00,00),B(mop_prim ,13),I(23,00,00,00),B(mop_prim ,12),I(3b,02,25,00),B(mop_prim ,4),I(23,00,00,00),B(mop_prim ,14),I(23,00,00,00),B(mop_prim ,11),I(3b,02,25,00),B(mop_prim ,3),I(23,00,00,00),B(mop_prim ,15),I(23,00,00,00),B(mop_prim ,10),I(3b,01,25,00),B(mop_prim ,2),I(23,00,00,00),B(mop_prim ,16),I(23,00,00,00),B(mop_prim ,9),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G00550,G00549);
-  eul_allocate_bytevector( G00552,G00551);
-  eul_intern_symbol(sym_555,"(setter primitive-class-of)");
-  eul_intern_symbol(sym_556,"(setter primitive-ref)");
-  eul_allocate_bytevector( G00554,G00553);
-  eul_allocate_bytevector( G00558,G00557);
-  eul_allocate_bytevector( G00560,G00559);
-  eul_allocate_bytevector( G00562,G00561);
-  eul_intern_symbol(sym_565,"primitive-ref");
-  eul_intern_symbol(sym_566,"primitive-allocate");
-  eul_intern_symbol(sym_567,"primitive-class-of");
-  eul_intern_symbol(sym_568,"top-level");
-  eul_allocate_bytevector( G00564,G00563);
+  eul_allocate_bytevector( G00574,G00573);
+  eul_allocate_bytevector( G00576,G00575);
+  eul_intern_symbol(sym_579,"(setter primitive-class-of)");
+  eul_intern_symbol(sym_580,"(setter primitive-ref)");
+  eul_allocate_bytevector( G00578,G00577);
+  eul_allocate_bytevector( G00582,G00581);
+  eul_allocate_bytevector( G00584,G00583);
+  eul_allocate_bytevector( G00586,G00585);
+  eul_intern_symbol(sym_589,"primitive-ref");
+  eul_intern_symbol(sym_590,"primitive-allocate");
+  eul_intern_symbol(sym_591,"primitive-class-of");
+  eul_intern_symbol(sym_592,"top-level");
+  eul_allocate_bytevector( G00588,G00587);
 
   /* Set local bindings */
   {
@@ -77,20 +77,20 @@ void initialize_module_mop_prim()
       mop_prim_bindings[i] = eul_nil;
   }
 
-  mop_prim_bindings[ 5] = G00550;
-  mop_prim_bindings[ 6] = G00552;
-  mop_prim_bindings[ 7] = sym_555;
-  mop_prim_bindings[ 8] = sym_556;
-  mop_prim_bindings[ 9] = G00554;
-  mop_prim_bindings[ 10] = G00558;
-  mop_prim_bindings[ 11] = G00560;
-  mop_prim_bindings[ 12] = G00562;
+  mop_prim_bindings[ 5] = G00574;
+  mop_prim_bindings[ 6] = G00576;
+  mop_prim_bindings[ 7] = sym_579;
+  mop_prim_bindings[ 8] = sym_580;
+  mop_prim_bindings[ 9] = G00578;
+  mop_prim_bindings[ 10] = G00582;
+  mop_prim_bindings[ 11] = G00584;
+  mop_prim_bindings[ 12] = G00586;
   mop_prim_bindings[ 1] = eul_nil;
-  mop_prim_bindings[ 13] = sym_565;
-  mop_prim_bindings[ 14] = sym_566;
-  mop_prim_bindings[ 15] = sym_567;
-  mop_prim_bindings[ 16] = sym_568;
-  eul_allocate_lambda( mop_prim_bindings[0], "initialize-mop-prim", 0, G00564);
+  mop_prim_bindings[ 13] = sym_589;
+  mop_prim_bindings[ 14] = sym_590;
+  mop_prim_bindings[ 15] = sym_591;
+  mop_prim_bindings[ 16] = sym_592;
+  eul_allocate_lambda( mop_prim_bindings[0], "initialize-mop-prim", 0, G00588);
 
   }
 }
