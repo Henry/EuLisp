@@ -43,7 +43,7 @@ LispRef c_strn_as_eul_str(char *str, int n)
 
 LispRef eul_int_as_hex_str(int x)
 {
-    /*   printf("eul_int_as_hex_str %d\n", x); fflush(stdout); */
+    // printf("eul_int_as_hex_str %d\n", x); fflush(stdout);
 
     if (x < 0)
     {
@@ -581,9 +581,13 @@ LispRef eul_file_lookup(char *name, LispRef dirs)
         dir = eul_string_as_c_string(eul_dir);
         n = strlen(dir);
         if (*(dir + n - 1) == delim_char)
+        {
             file_name = dir;
+        }
         else
+        {
             file_name = eul_str_append(dir, delim_str);
+        }
         file_name = eul_str_append(file_name, name);
 
         if (access(file_name, R_OK) == 0)

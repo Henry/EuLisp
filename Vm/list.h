@@ -101,9 +101,6 @@ extern void eul_initialize_cons();
         }                                                                      \
     }
 
-#define eul_allocate_cons_old(loc, the_car, the_cdr)                           \
-    GC_CONS(loc, the_car, the_cdr)
-
 ///-----------------------------------------------------------------------------
 #endif // LIST_H
 ///-----------------------------------------------------------------------------
