@@ -24,7 +24,9 @@ $(ARCH_DIR)/eul-string-perls.o: eul-string-perls.c | $(ARCH_DIR)/.
 	$(CC) $(CFLAGS) -c eul-string-perls.c -o $(ARCH_DIR)/eul-string-perls.o
 
 $(ARCH_DIR)/string-perls: string-perls.em $(ARCH_DIR)/eul-string-perls.o
-	${U2} ${U2FLAGS} string-perls -od $(ARCH_DIR) -l level1 -fff eul-string-perls
+	${U2} ${U2FLAGS} string-perls -od $(ARCH_DIR) -l level1 \
+		-cflags -lpcre \
+		-fff eul-string-perls
 
 ###-----------------------------------------------------------------------------
 

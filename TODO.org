@@ -36,7 +36,8 @@
     by introducing an option to allow a header file declaring the ff's to be
     included in the stubs files.
 ***** Add header-files including the ffi definitions to all the /Extras/ libraries.
-*** TODO Investigate when /Lib.${ARCH}/*.i/ should be copied to Lib
+*** DONE Investigate when /Lib.${ARCH}/*.i/ should be copied to Lib
+    CLOSED: [2010-05-06 Thu 13:47]
 *** DONE Sort out the /Extras/Bignum/Makefile/
     CLOSED: [2010-02-23 Tue 19:31]
     Currently the linking of the gmp library is hard-coded.
@@ -100,11 +101,11 @@
     handling for strings with all the special characters when the single escape
     character should only be required to escape itself and the multiple-escape
     character.
-*** TODO Add =slice= generic function and methods
+*** DONE Add =slice= generic function and methods
+    CLOSED: [2010-05-06 Thu 13:46]
     =slice= for string can a wrapper around substring already available
     in Youtoo.
-*** TODO Add =split= generic function and methods
-    =split= for string could be implemented as a ff.
+*** TODO Add =slice= method for <vector>
 *** DONE Add =reverse!= method for =<string>=
     CLOSED: [2010-04-27 Tue 12:25]
     Requires equivalent ff in eul-ext.c
@@ -206,7 +207,6 @@
     so that they do not clash with those in the "Level-0" library.
 *** TODO Remove the "syntax-category" entries from the index
 *** TODO Add =slice= generic function and methods
-*** TODO Add =split= generic function and methods
 *** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
     CLOSED: [2010-04-27 Tue 22:48]
     Check for other =<sequence>= methods which should destructive variants.

@@ -13,7 +13,7 @@ include ../Lib.$(ARCH)/Makefile
 ### Examples directories
 ###-----------------------------------------------------------------------------
 
-EXAMPLE_DIRS = Misc C++ Ffi
+EXAMPLE_DIRS = Misc C++ Ffi StringPerls
 
 ###-----------------------------------------------------------------------------
 ### Commands
