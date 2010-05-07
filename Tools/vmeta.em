@@ -1,153 +1,158 @@
-;;;; vmeta.em -- verbose META in EuLisp.  A work in progress.      -*- lisp -*-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;  You can also find this code at http://access.mountain.net/~tkb/software.html
+;;; Verbose META in EuLisp.
+;;;-----------------------------------------------------------------------------
+;;   A work in progress.
+;;;-----------------------------------------------------------------------------
+;;;  Original code: http://access.mountain.net/~tkb/software.html
 ;;;
-;;;  This code was inspired by Henry G. Baker's article "Pragmatic
-;;;  Parsing in Common Lisp", ACM LISP Pointers IV,2 (April-June
-;;;  1991),3-15.  However, any errors are mine; inefficencies too.  There
-;;;  have been some minor changes and additions from the code in that
-;;;  article. You can download the original paper from
-;;;  <URL:ftp://ftp.netcom.com/pub/hb/hbaker/home.html>.
+;;   This code was inspired by Henry G. Baker's article "Pragmatic
+;;   Parsing in Common Lisp", ACM LISP Pointers IV,2 (April-June
+;;   1991),3-15.  However, any errors are mine; inefficencies too.  There
+;;   have been some minor changes and additions from the code in that
+;;   article. You can download the original paper from
+;;   <URL:ftp://ftp.netcom.com/pub/hb/hbaker/home.html>.
 ;;;
 ;;;  Comments to tkb@access.mountain.net.
 ;;;
+;;;-----------------------------------------------------------------------------
 ;;; Description of forms:
-;;;
-;;;    match exp => generalized-boolean
-;;;
-;;;      This form applies the matching expression `exp' to the value of
-;;;      `sequence', starting at `index' and ending at `end'.  It returns
-;;;      true if the expression matched.
-;;;
-;;;      The user must lexically bind `sequence' to the sequence to parse,
-;;;      `index' to where the parse should start, and `end' to where the
-;;;      parse should end.  The implementation of the matching languag
-;;;      uses those variables for its own purposes, so the user should
-;;;      not assign to them (or even reference them if they do not know
-;;;      what they are doing.).
-;;;
-;;;      Example:
-;;;
-;;;     (deftype alphanumeric () '(satisfies alphanumericp))
-
-;;;     (deftype not-space () '(not (eql #\space)))
-;;;     (defun match-imap-status (sequence
-;;;                               &optional (index 0) (end (length sequence))
-
-;;;                               &aux id status rest)
-;;;            (and
-;;;             (match [%(id ^(@alphanumeric 1 nil))
-
-;;;                     #\space
-;;;                     %(status ^(@not-space 1 nil))
-
-;;;                     {[#\space %(rest ^(@character))] []}])
-;;;             (values t id status rest)))
-
-;;;     (match-imap-status "a001 OK Interesting response.")
-;;;     ;;=> T ; "a001" ; "OK" ; "Interesting response."
-;;;        (match-imap-status "bogusdatahere")
-
-;;;        ;;=> NIL
-;;;
-;;;    match-expr s ([start [end]]) exp => generalized-boolean
-;;;
-;;;      This form binds `sequence' to the value of s and applies the
-;;;      matching expression `exp' to `sequence'.  If `start' is
-;;;      specified `index' is bound to its value; otherwise `index' is
-;;;      bound to zero.  If `end' is specified, `end' is bound to its
-;;;      value; otherwise `end' is bound to the length of the sequence.
-;;;
-;;;      Example:
-;;;
-;;;        (let (id status rest)
-
-;;;       (and
-;;;        (match-expr "a002 BAD Another interesting response." ()
-
-;;;                    [%(id ^(@alphanumeric 1 nil))
-;;;                      #\space
-;;;                      %(status ^(@not-space 1 nil))
-
-;;;                      {[#\space %(rest ^(@character))] []}])
-;;;        (values t id status rest)))
-
-;;;         ;;=> T ; "a002" ; "BAD" ; "Another interesting response."
-;;;
-;;;
-;;;
+;;;-----------------------------------------------------------------------------
+;;    match exp => generalized-boolean
+;;
+;;      This form applies the matching expression `exp' to the value of
+;;      `sequence', starting at `index' and ending at `end'.  It returns
+;;      true if the expression matched.
+;;
+;;      The user must lexically bind `sequence' to the sequence to parse,
+;;      `index' to where the parse should start, and `end' to where the
+;;      parse should end.  The implementation of the matching languag
+;;      uses those variables for its own purposes, so the user should
+;;      not assign to them (or even reference them if they do not know
+;;      what they are doing.).
+;;
+;;      Example:
+;;
+;;     (deftype alphanumeric () '(satisfies alphanumericp))
+;;
+;;     (deftype not-space () '(not (eql #\space)))
+;;     (defun match-imap-status (sequence
+;;                               &optional (index 0) (end (length sequence))
+;;
+;;                               &aux id status rest)
+;;            (and
+;;             (match [%(id ^(@alphanumeric 1 nil))
+;;
+;;                     #\space
+;;                     %(status ^(@not-space 1 nil))
+;;
+;;                     {[#\space %(rest ^(@character))] []}])
+;;             (values t id status rest)))
+;;
+;;     (match-imap-status "a001 OK Interesting response.")
+;;     ;;=> T ; "a001" ; "OK" ; "Interesting response."
+;;        (match-imap-status "bogusdatahere")
+;;
+;;        ;;=> NIL
+;;
+;;    match-expr s ([start [end]]) exp => generalized-boolean
+;;
+;;      This form binds `sequence' to the value of s and applies the
+;;      matching expression `exp' to `sequence'.  If `start' is
+;;      specified `index' is bound to its value; otherwise `index' is
+;;      bound to zero.  If `end' is specified, `end' is bound to its
+;;      value; otherwise `end' is bound to the length of the sequence.
+;;
+;;      Example:
+;;
+;;        (let (id status rest)
+;;
+;;       (and
+;;        (match-expr "a002 BAD Another interesting response." ()
+;;
+;;                    [%(id ^(@alphanumeric 1 nil))
+;;                      #\space
+;;                      %(status ^(@not-space 1 nil))
+;;
+;;                      {[#\space %(rest ^(@character))] []}])
+;;        (values t id status rest)))
+;;
+;;         ;;=> T ; "a002" ; "BAD" ; "Another interesting response."
+;;
+;;
+;;
+;;;-----------------------------------------------------------------------------
 ;;; Description of matching expression syntax:
-;;;
-;;;    Non-terminals are in lower case.  The symbol `...' indicates zero or
-;;;    more of the preceding expression.
-;;;
-;;;    [exp ...]
-;;;    (SEQ exp ...)
-
-;;;     Matches every one of `exp ...'.
-;;;
-;;;    {exp ...]
-;;;    (ALT exp ...)
-
-;;;     Matches exactly one of `exp ...'
-;;;
-;;;    @typepred
-;;;    @(typepred var)
-
-;;;    (type typepred)
-;;;    (type typepred var)
-
-;;;     Matches if, given the current `element', (typep element typepred).
-;;;     If `var' was specified, it is assigned the value of `element'.
-;;;
-;;;    $exp
-;;;    ^(exp)
-
-;;;    ^(exp min)
-;;;    ^(exp min max)
-
-;;;    (star exp)
-;;;    (star exp min)
-
-;;;    (star exp min max)
-;;;
-;;;     Matches zero or more of `exp'.  If min is specified by itself,
-;;;     matches exactly `min' of `exp'.  If min and max are specified,
-;;;     matches at least `min' and at most `max' of `exp'.  Min and max
-;;;     can be NIL, in which case they do not limit (Thus, (star exp 3 nil)
-
-;;;     matches at least 3 of `exp', and possibly more.)
-;;;
-;;;    (not exp)
-
-;;;     Doesn't match if `exp' does.
-;;;
-;;;    %(var exp)
-
-;;;    (name var exp)
-;;;     Matches `exp' and sets `var' to the matching subsequence.
-;;;
-;;;    (push var exp)
-
-;;;        Matches `exp' and pushes the matching subsequence onto `var'.
-;;;
-;;;    (end)
-
-;;;     Matches if at the end of the sequence..
-;;;
+;;;-----------------------------------------------------------------------------
+;;    Non-terminals are in lower case.  The symbol `...' indicates zero or
+;;    more of the preceding expression.
+;;
+;;    [exp ...]
+;;    (SEQ exp ...)
+;;
+;;     Matches every one of `exp ...'.
+;;
+;;    {exp ...]
+;;    (ALT exp ...)
+;;
+;;     Matches exactly one of `exp ...'
+;;
+;;    @typepred
+;;    @(typepred var)
+;;
+;;    (type typepred)
+;;    (type typepred var)
+;;
+;;     Matches if, given the current `element', (typep element typepred).
+;;     If `var' was specified, it is assigned the value of `element'.
+;;
+;;    $exp
+;;    ^(exp)
+;;
+;;    ^(exp min)
+;;    ^(exp min max)
+;;
+;;    (star exp)
+;;    (star exp min)
+;;
+;;    (star exp min max)
+;;
+;;     Matches zero or more of `exp'.  If min is specified by itself,
+;;     matches exactly `min' of `exp'.  If min and max are specified,
+;;     matches at least `min' and at most `max' of `exp'.  Min and max
+;;     can be NIL, in which case they do not limit (Thus, (star exp 3 nil)
+;;
+;;     matches at least 3 of `exp', and possibly more.)
+;;
+;;    (not exp)
+;;
+;;     Doesn't match if `exp' does.
+;;
+;;    %(var exp)
+;;
+;;    (name var exp)
+;;     Matches `exp' and sets `var' to the matching subsequence.
+;;
+;;    (push var exp)
+;;
+;;        Matches `exp' and pushes the matching subsequence onto `var'.
+;;
+;;    (end)
+;;
+;;     Matches if at the end of the sequence..
+;;;-----------------------------------------------------------------------------
 ;;;  Note:
-;;;
-;;;    Despite the use of `sequence' as a variable name, I haven't
-;;;    actually tried using this to parse anything but lists.  At least
-;;;    the `name' ecase branch, `match-literal' and `match-type' would
-;;;    have to change for that.
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;    Despite the use of `sequence' as a variable name, I haven't
+;;    actually tried using this to parse anything but lists.  At least
+;;    the `name' ecase branch, `match-literal' and `match-type' would
+;;    have to change for that.
+;;
+;;;-----------------------------------------------------------------------------
 (defmodule vmeta
   (syntax (macros vmeta-aux)
-   import (level1 sequence))
+   import (level1))
 
+;;;-----------------------------------------------------------------------------
 ;;; Implementation
+;;;-----------------------------------------------------------------------------
   ;; I dropped back to a fully parenthesized form so I could work with
   ;; the internals and not have to worry about the read-table/syntax
   ;; issues at the same time.  When I finished with that I added the
@@ -209,19 +214,19 @@
     (cond
      ;; No min or max specified, match any number.
      ((not (or min max))
-                                        ;    (format stderr "match any number: ~s\n" x)
+      ;;    (format stderr "match any number: ~s\n" x)
       `(not (iter () ((not ,matcher)))))
      ;; Min specified, but no max specified, so
      ;; match exactly min.
      ((and min (not max-specified))
-                                        ;    (format stderr "match exactly ~s: ~s\n" min x)
+      ;;    (format stderr "match exactly ~s: ~s\n" min x)
       `(iter ((i 0 (+ i 1)))
              ((or (> i ,min) (not ,matcher))
               (and (= i ,min)))))
      ;; Min specified, but max is nil, so match
      ;; at least min.
      ((and min max-specified (not max))
-                                        ;    (format stderr "match at least ~s: ~s\n" min x)
+      ;;    (format stderr "match at least ~s: ~s\n" min x)
       `(iter ((i 0 (+ 1 i)))
              ((not ,matcher)
               (>= i ,min))))
@@ -229,7 +234,7 @@
      ;; at least min (none if min was null) and at
      ;; most most max.
      ((and min-specified max-specified max)
-                                        ;    (format stderr "match at least ~s and at most ~s: ~s\n" min max x)
+      ;;    (format stderr "match at least ~s and at most ~s: ~s\n" min max x)
       (when (not min)
         (setq min 0))
       `(iter ((i 0 (+ 1 i)))
@@ -273,16 +278,16 @@
                                  (max-specified (and (> len 3))); had  (cadddr x)
                                  (min (if min-specified (caddr x) ()))
                                  (max (if max-specified (cadddr x) ())))
-                                        ;                  (format stderr "min-s: ~s max-s: ~s min: ~s max: ~s x: ~s\n"
-                                        ;                          min-specified max-specified min max x)
-                                        ;                  (if (null max-specified)
-                                        ;                      (print "max-specified null")
-                                        ;                    (print "max-speicified not null"))
-                                        ;                  (if (symbolp max-specified)
-                                        ;                      (print "max-specified symbolp")
-                                        ;                    (print "max-specified not symbolp"))
-                                        ;                  (format stderr "class-of max-specified: ~a\n"
-                                        ;                          (class-of max-specified))
+                            ;;(format stderr "min-s: ~s max-s: ~s min: ~s max: ~s x: ~s\n"
+                            ;;        min-specified max-specified min max x)
+                            ;;(if (null max-specified)
+                            ;;    (print "max-specified null")
+                            ;;  (print "max-speicified not null"))
+                            ;;(if (symbolp max-specified)
+                            ;;    (print "max-specified symbolp")
+                            ;;  (print "max-specified not symbolp"))
+                            ;;(format stderr "class-of max-specified: ~a\n"
+                            ;;        (class-of max-specified))
                             (match-star min-specified   ; min-specified
                                         max-specified  ; max-specified
                                         min  ; min
@@ -296,13 +301,13 @@
                                        (last index))
                                   (when val
                                     (setq ,(cadr x)
-                                          (sub-sequence sequence start last)))
+                                          (slice sequence start last)))
                                   val))
                          (push `(let* ((start index)
                                        (val ,(helper (caddr x) in-seq-p))
                                        (last index))
                                   (when val
-                                    (push (sub-sequence sequence start last)
+                                    (push (slice sequence start last)
                                           ,(cadr x)))
                                   val))
                          (end '(= index end))

@@ -17,7 +17,7 @@ include ../Lib.$(ARCH)/Makefile
 ### Source files
 ###-----------------------------------------------------------------------------
 
-B2H_EM = b2h.em b2h-aux.em sequence.em vmeta-aux.em vmeta.em
+B2H_EM = b2h.em b2h-aux.em vmeta-aux.em vmeta.em
 B2H_C = $(B2H_EM:%.em=%.c) b2h_.c
 
 I2DOC_EM = i2doc.em

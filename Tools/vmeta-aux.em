@@ -1,3 +1,5 @@
+;;; Verbose META in EuLisp.
+;;;-----------------------------------------------------------------------------
 (defmodule vmeta-aux
   (syntax (macros)
    import (level1))

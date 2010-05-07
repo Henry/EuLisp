@@ -1,17 +1,15 @@
-;;; i2doc.em -- convert youtoo generated module interfaces to docs -*- lisp -*-
-;;; Organization of the file is
+;;; Generate module interfaces documentation: bindings.txt
+;;;-----------------------------------------------------------------------------
+;;; Organization of the file bindings.txt:
 ;;;
-;;; Header
-;;; 0. Legend
-;;; 1. Bindings in level1
-;;; 2. Bindings in macros
-;;; 3. Bindings in eval
+;;;  Header
+;;;  0. Legend
+;;;  1. Bindings in level1 (Lib.${ARCH}/liblevel1.i)
+;;;  2. Bindings in macros (Runtime/macros.i)
+;;;  3. Bindings in eval (Lib.${ARCH}/libeval.i)
 ;;;
-;;; These apparently refer to
-;;;    Lib{,.i386}/liblevel1.i
-;;;    Runtime/macros.i
-;;;    Lib{,.i386}/libeval.i
 ;;; Author: T. Kurt Bond
+;;;-----------------------------------------------------------------------------
 (defmodule i2doc
   (syntax (macros)
    import (level1)

@@ -1,6 +1,23 @@
+;;; Convert files with `def-bytecode' forms to a C header
+;;;-----------------------------------------------------------------------------
+;; Note: this is not the original b2h; that wasn't in the youtoo
+;;       distribution, and Andreas Kind didn't have a copy of it any more.
+;;
+;; This is my best guess at how it worked.
+;;
+;;   * If the name of the bytecode contains "branch" it's a branch and
+;;     the branch field is true; otherwise it's not a branch and
+;;     the branch field is false.
+;;   * If the name of the bytecode contains "-neg" it's a backward branch
+;;     and the branch field is true with the value -1; otherwise
+;;     the branch field is true with the value 1.
+;;   * The inlined_arg_size field defaults to zero.
+;;   * An arg that is "byte" or "reg" increases the inlined_arg_size by 1;
+;;     all other args increase the size by 4.
+;;;-----------------------------------------------------------------------------
 (defmodule b2h
   (syntax (macros vmeta b2h-aux)
-   import (level1 sequence))
+   import (level1))
 
   (deflocal old-style nil)
   (deflocal verbose nil)
@@ -153,7 +170,7 @@
       (newline)
       (print "#endif /* eof */")))
 
-  (main (cdr ((converter <list>) *argv*))) ;get rid of program name.
+  (main (cdr ((converter <list>) *argv*))) ; get rid of program name.
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

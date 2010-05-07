@@ -1,5 +1,5 @@
 #!/bin/sh
-find=${FIND:-gfind}
+find=${FIND:-find}
 
 do_c=1
 do_h=1
@@ -10,12 +10,12 @@ errors=0
 while getopts "chiu" opt
 do
   if [ "$opt" = "?" ]
-  then 
+  then
     errors=$((errors+1))
     continue
   fi
 
-  case $opt in 
+  case $opt in
   c) if [ -z "$do_c" ]; then do_c=1; else do_c=; fi;;
   h) if [ -z "$do_h" ]; then do_h=1; else do_h=; fi;;
   i) if [ -z "$do_i" ]; then do_i=1; else do_i=; fi;;

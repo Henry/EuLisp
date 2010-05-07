@@ -1,9 +1,0 @@
-#!/bin/sh
-
-set -x
-
-old=$1
-new=$2
-shift 2
-
-exec perl -pi.bak -e "s/${old}/${new}/g" $*
