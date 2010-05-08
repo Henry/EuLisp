@@ -23,9 +23,6 @@ MODULE = match
 MODULE_LIB = lib$(MODULE).a
 MODULE_LIB_I = lib$(MODULE).i
 
-EUL_MODULE_LIB = $(EUL_LIB_DIR)/$(MODULE_LIB)
-EUL_MODULE_LIB_I = $(EUL_LIB_DIR)/$(MODULE_LIB_I)
-
 ###-----------------------------------------------------------------------------
 ### Source files
 ###-----------------------------------------------------------------------------
@@ -40,9 +37,12 @@ EXTRA_EM = extras0.em extras.em
 ### Test source files
 ###-----------------------------------------------------------------------------
 
-TEST_EM = test-match.em test-match-macros.em
+TEST_EM = test-match.em
+TEST_EXE = $(TEST_EM:%.em=$(ARCH_DIR)/%)
 
-ALL_EM = $(MODULE_EM) $(OTHER_EM) $(EXTRA_EM) $(TEST_EM)
+TEST_MACROS_EM = test-match-macros.em
+
+ALL_EM = $(MODULE_EM) $(OTHER_EM) $(EXTRA_EM) $(TEST_EM) $(TEST_MACROS_EM)
 
 ###-----------------------------------------------------------------------------
 ### Build library
@@ -59,14 +59,14 @@ match.i:  match0.i match-support.i
 ### Test
 ###-----------------------------------------------------------------------------
 
-% : %.em
-	${U2} ${U2FLAGS} $< -l level1
+$(ARCH_DIR)/% : %.em | $(ARCH_DIR)/.
+	${U2} ${U2FLAGS} $< -od $(ARCH_DIR) -l level1
 
-test-match: $(EXTRA_EM:.em=.i) match.i test-match-macros.i
+$(ARCH_DIR)/test-match: $(EXTRA_EM:.em=.i) match.i test-match-macros.i
 
 .PHONY: test
-test: test-match
-	./test-match
+test: $(ARCH_DIR)/test-match
+	$(ARCH_DIR)/test-match
 
 ###-----------------------------------------------------------------------------
 
@@ -81,6 +81,5 @@ clean:
 .PHONY: distclean
 distclean: clean
 	@rm -rf platforms
-	@rm -f $(EUL_MODULE_LIB) $(EUL_MODULE_LIB_I)
 
 ###-----------------------------------------------------------------------------

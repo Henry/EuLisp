@@ -35,6 +35,7 @@ MODULE_C = $(MODULE).c
 MODULE_O = $(ARCH_DIR)/$(MODULE).o
 
 OTHER_EM = mpq.em mpz.em bigint.em bigrat.em
+OTHER_C = $(OTHER_EM:%.em=$(ARCH_DIR)/%.c)
 OTHER_O = $(OTHER_EM:%.em=$(ARCH_DIR)/%.o)
 
 FF_C = eul-mpq.c eul-mpz.c eul-gmp-gc.c
@@ -54,14 +55,13 @@ TEST_EXE = $(TEST_EM:%.em=$(ARCH_DIR)/%)
 .PHONY: lib
 lib: $(EUL_MODULE_LIB)
 
-$(MODULE_C) $(EUL_MODULE_LIB_I): $(MODULE_EM) $(OTHER_EM) | $(ARCH_DIR)/.
+$(EUL_MODULE_LIB_I) $(MODULE_C) $(OTHER_C): $(MODULE_EM) $(OTHER_EM) | $(ARCH_DIR)/.
 	$(U2) $(U2FLAGS) -ar $(MODULE_EM) -od $(ARCH_DIR) -l level1 -recompile
 	mv -f $(MODULE_LIB_I) $(EUL_MODULE_LIB_I)
 
-$(EUL_MODULE_LIB): $(EUL_MODULE_LIB_I) $(MODULE_C) $(OTHER_O) $(FF_O)
+$(EUL_MODULE_LIB): $(EUL_MODULE_LIB_I) $(MODULE_O) $(OTHER_O) $(FF_O)
 	$(AR) $(EUL_MODULE_LIB) $(MODULE_O) $(OTHER_O) $(FF_O)
 	$(RANLIB) $(EUL_MODULE_LIB)
-	rm -f $(MODULE_LIB)
 
 ###-----------------------------------------------------------------------------
 ### Test
@@ -85,8 +85,7 @@ README: README.html
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
-	@rm -f $(MODULE_C) $(MODULE).h \
-		$(OTHER_EM:%.em=%.c) $(OTHER_EM:%.em=%.h)
+	@rm -f $(MODULE_C) $(MODULE).h $(OTHER_C) $(OTHER_EM:%.em=%.h)
 	@rm -f test*.{c,h}
 	@rm -f *.i *_.{c,h}
 

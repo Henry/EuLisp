@@ -17,7 +17,7 @@ include ../Lib.$(ARCH)/Makefile
 ### Source files
 ###-----------------------------------------------------------------------------
 
-B2H_EM = b2h.em b2h-aux.em vmeta-aux.em vmeta.em
+B2H_EM = b2h.em b2h-aux.em
 B2H_C = $(B2H_EM:%.em=%.c) b2h_.c
 
 I2DOC_EM = i2doc.em
@@ -37,7 +37,8 @@ all: b2h i2doc
 b2h: $(EUL_BIN_DIR)/b2h
 
 $(EUL_BIN_DIR)/b2h: $(B2H_EM) | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} b2h -od $(ARCH_DIR) -l level1
+	${U2} ${U2FLAGS} b2h -od $(ARCH_DIR) -l level1 \
+		-load_path $(EUL_DIR)/Extras/Vmeta
 	mv $(ARCH_DIR)/b2h $(EUL_BIN_DIR)/b2h
 
 ###-----------------------------------------------------------------------------
