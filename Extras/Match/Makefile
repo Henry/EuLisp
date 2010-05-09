@@ -75,6 +75,7 @@ README: README.html
 
 .PHONY: clean
 clean:
+	@rm -rf $(ARCH_DIR)
 	@rm -f $(ALL_EM:.em=.i) $(ALL_EM:.em=.h) $(ALL_EM:.em=.c) $(ALL_EM:.em=.o)
 	@rm -f $(TEST_EM:.em=_.c) $(TEST_EM:.em=_.o) $(TEST_EM:.em=)
 

@@ -8,8 +8,8 @@
 ;;       ACM LISP Pointers IV,2
 ;;       (April-June 1991), 3-15.
 ;;
-;;   However, any errors are mine; inefficencies too.  There
-;;   have been some minor changes and additions from the code in that
+;;   However, any errors are mine; inefficencies too.
+;;   There have been some minor changes and additions from the code in that
 ;;   article.
 ;;
 ;;   You can download the original paper from http://home.pipeline.com/~hbaker1
@@ -76,7 +76,7 @@
 ;;      Matches {exp} and sets {var} to the matching sub-sequence.
 ;;
 ;;  (push {var} {exp})
-;;      Matches {exp} and pushes the matching subsequence onto {var}.
+;;      Matches {exp} and pushes the matching sub-sequence onto {var}.
 ;;
 ;;  (end)
 ;;     Matches if at the end of the sequence.
@@ -139,7 +139,6 @@
            ,(if v `(setq ,v (element sequence index)) ())
            (incf index)))
 
-  ;; Note: in Youtoo use () instead of nil! since "(eq 'nil '()) => ()".
   ;; This is only so complicated because we allow
   ;;   (star x) to match zero or more Xs,
   ;;   (star x min) to match exactly MIN Xs,

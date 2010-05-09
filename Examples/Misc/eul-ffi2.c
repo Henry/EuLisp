@@ -58,4 +58,9 @@ char **ext_foo_string2()
     return &global_string;
 }
 
+LispRef ext_nil()
+{
+    return eul_nil;
+}
+
 ///-----------------------------------------------------------------------------

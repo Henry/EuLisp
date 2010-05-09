@@ -53,7 +53,7 @@ $(ARCH_DIR)/ffi1: ffi1.em
 	$(call makeExe,ffi1)
 
 $(ARCH_DIR)/eul-ffi2.o: eul-ffi2.c
-	$(CC) -c eul-ffi2.c -o $(ARCH_DIR)/eul-ffi2.o
+	$(CC) $(CFLAGS) -c eul-ffi2.c -o $(ARCH_DIR)/eul-ffi2.o
 
 $(ARCH_DIR)/ffi2: ffi2.em $(ARCH_DIR)/eul-ffi2.o
 	${U2} ${U2FLAGS} ffi2 -od $(ARCH_DIR) -l level1 -fff eul-ffi2

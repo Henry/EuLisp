@@ -3,10 +3,10 @@
 ;;; ---                         EuLisp System 'youtoo'
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: misc
-;;;  Authors: Andreas Kind
+;;;  Author: Andreas Kind
 ;;; Description: foreign function test
 ;;;  Compilation
-;;    cc -c eul-ffi2.c
+;;    cc $(CFLAGS) -c eul-ffi2.c
 ;;    youtoo ffi2 -l level1 -fff eul-ffi2
 ;;;-----------------------------------------------------------------------------
 (defmodule ffi2
@@ -22,6 +22,7 @@
   (defextern ext_foo_int2 () <int*>)
   (defextern ext_foo_double2 () <double*>)
   (defextern ext_foo_string2 () <string*>)
+  (defextern ext_nil () ptr)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Example calls
@@ -41,6 +42,9 @@
     (print (convert x <double>)))
   (let ((x (ext_foo_string2)))
     (print (convert x <string>)))
+
+  (print (eq (ext_nil) 'nil))
+  (print (eq (ext_nil) '()))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

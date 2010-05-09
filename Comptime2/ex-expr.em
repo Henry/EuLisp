@@ -138,7 +138,7 @@
     (lambda (x env e)
       (let ((node (or (get-local-static-binding x env)
                       (get-lexical-binding x)
-                      (get-nil-t-node x)
+                      (get-t-node x)
                       (get-keyword-node x)
                       (ct-serious-warning
                        (make-dummy-binding x)
@@ -162,17 +162,21 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Nil and t
 ;;;-----------------------------------------------------------------------------
+  ;; This is an internal constant `nil' used during compilation
+  ;; (eq 'nil '*nil*) => (), (eq 'nil '()) => t
   (defconstant *nil* (make <literal-const> value: ()))
+
+  ;; This is the constant that 't refers to....
   (defconstant *t* (make <literal-const> value: 't))
-  (defun get-nil-t-node (x)
-    (cond ((eq x 't) *t*)
-          ((eq x 'nil) *nil*)
-          ;; homage a la Scheme
-          ((eq x '#t) *t*)
-          ((eq x '#f) *nil*)))
+
+  ;; ... using the mapping function:
+  (defun get-t-node (x)
+    (if (eq x 't)
+        *t*
+      ()))
 
 ;;;-----------------------------------------------------------------------------
-;;; Keywords (not supported by Feel I; but Feel II)
+;;; Keywords
 ;;;-----------------------------------------------------------------------------
   (defun get-keyword-node (x)
     (and (keywordp x)

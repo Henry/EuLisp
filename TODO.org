@@ -125,6 +125,12 @@
       [user]: (print #\\\)
       \
       - #\\
+*** TODO Add =binary= for <character> <character>
+    Needed by =vmeta=.
+*** DONE Change the parser to map ='nil= to ='()=
+    CLOSED: [2010-05-09 Sun 21:06]
+    so that (eq 'nil '()) => t
+
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
@@ -210,3 +216,7 @@
 *** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
     CLOSED: [2010-04-27 Tue 22:48]
     Check for other =<sequence>= methods which should destructive variants.
+*** TODO Add =binary= for <character> <character>
+*** DONE Clarify the wording concerning the relationship between =nil= and =()=
+    CLOSED: [2010-05-09 Sun 21:09]
+    State that (eq 'nil '()) => t.

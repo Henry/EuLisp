@@ -74,9 +74,10 @@ defined constant.
 \constant{nil}{null}
 %
 \remarks%
-The symbol {\tt nil} is defined to be immutably bound to the empty list, which
-is represented as \nil{}.  The empty list is used to denote the abstract boolean
-value \sc{false}.
+The symbol {\tt nil} is defined to be equivalent to the empty list, which is
+represented as \nil{}, \ie {\tt (\functionref{eq} 'nil '\nil{})} $\Rightarrow$
+\true{}.  The empty list is used to denote the abstract boolean value
+\sc{false}.
 
 \constant{t}{symbol}
 %

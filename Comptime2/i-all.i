@@ -575,7 +575,7 @@
     ((name . class-slots) (pos . 51) (origin mop-class . class-slots) (inline (G00711 (static-fpi-ref 4) (primitive-ref))) (setter (G00771 (stack-ref 1) (static-fpi-ref 4) (stack-ref 2) (set-primitive-ref) (nobble 2))))
     ((name . simple-thread-p) (pos . 16) (origin thread . simple-thread-p))
     ((name . list-stop) (pos . 7) (origin read . list-stop) (class . constant))
-    ((name . handle) (pos . 4) (origin handler . handle) (inline (G009384 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G009386 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . handle) (pos . 4) (origin handler . handle) (inline (G009389 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G009391 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
     ((name . generic-function-method-class) (pos . 49) (origin mop-class . generic-function-method-class) (inline (G00729 (static-fpi-ref 3) (primitive-ref))) (setter (G00789 (stack-ref 1) (static-fpi-ref 3) (stack-ref 2) (set-primitive-ref) (nobble 2))))
     ((name . reconnect) (pos . 18) (origin stream2 . reconnect))
     ((name . allocate) (pos . 9) (origin mop-gf . allocate))

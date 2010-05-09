@@ -218,7 +218,7 @@ void initialize_module_ex_module()
 
   eul_allocate_static_string(str_1535, "bad macro expansion of ~a", 25);
   /* Byte-vector with size: 22 is_init: 0 index: 107 binding: (method-G00625) */
-  static const void *G001533[] = {I(ab,24,00,00),B(i_param ,56),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,44),I(47,00,00,11),I(47,01,00,1c),I(0f,86,23,00),B(ex_module ,106),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,1b,24),B(ex_expr ,17),I(3c,01,1b,24),B(i_error ,5),I(23,00,00,00),B(ex_module ,10),I(47,01,01,24),B(boot ,22),I(3d,04,06,22),I(04,45,02,00)};
+  static const void *G001533[] = {I(ab,24,00,00),B(i_param ,56),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,44),I(47,00,00,11),I(47,01,00,1c),I(0f,86,23,00),B(ex_module ,106),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,1b,24),B(ex_expr ,16),I(3c,01,1b,24),B(i_error ,5),I(23,00,00,00),B(ex_module ,10),I(47,01,01,24),B(boot ,22),I(3d,04,06,22),I(04,45,02,00)};
 
   eul_allocate_static_string(str_1539, "APPLY MACRO: ~a", 15);
   eul_allocate_static_string(str_1540, "RESULT: ~a", 10);

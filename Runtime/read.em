@@ -132,7 +132,8 @@
           (let ((fun (table-ref *dispatch-macro-character-table* tok)))
             (if (functionp fun)
                 (fun s tok ())
-              tok))))))
+              (if (eq tok 'nil) () ; Map 'nil to '()
+                tok)))))))
 
   (defun reverse-onto (a b)
     (if (null a) b

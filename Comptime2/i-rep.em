@@ -80,9 +80,8 @@
     (setq
      ?
      (cond ((symbolp x)
-            ;; The first two cases are indeed necessary
             (cond ((eq x 't) t)
-                  ((eq x 'nil) nil)
+                  ;; ((eq x 'nil) nil) ; The parser now maps 'nil to '()
                   ((eq x '?) ?)
                   (t (dynamic-binding-ref x *current-module-name*))))
            ((consp x)

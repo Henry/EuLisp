@@ -4,7 +4,7 @@
 (definterface cg-exec
   (import (cg-exec-word-length i-all i-modify p-env sx-obj sx-node cg-state cg-asm cg-interf i-ffi ex-expr cg-dld)
    syntax (_macros _i-aux0)
-   full-import (ex-expr ex-import ex-syntax ex-expose ex-direct cg-dld cg-interf cg-asm cg-bycode cg-bycode1 cg-bycode2 op-peep op-peep-r cg-state sx-node i-ffi p-env sx-obj2 sx-obj1 sx-obj i-modify i-all aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream3 vector stream stream1 lock stream2 socket list format convert1 table1 table handler random symbol read boot boot1 i-level1 i-param i-notify i-error cg-exec-word-length)
+   full-import (ex-expr ex-import ex-syntax ex-expose ex-direct cg-dld cg-interf cg-asm cg-bycode cg-bycode1 cg-bycode2 op-peep op-peep-r cg-state sx-node i-ffi p-env sx-obj2 sx-obj1 sx-obj i-modify i-all aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1 i-param i-notify i-error cg-exec-word-length)
    export (
     ((name . execute) (pos . 4) (origin cg-exec . execute))
     ((name . reset-interactive-module) (pos . 18) (origin cg-exec . reset-interactive-module))
@@ -33,7 +33,7 @@
     ("body of inlined function contains non exported binding ~a" . 48)
     (? . 46)
     ("  compute-binding ~a ~a" . 45)
-    (|(method G007906)| . 44)
+    (|(method G007959)| . 44)
     (ct-error-value: . 42)
     ("can't compute binding ~a of module ~a" . 41)
     ("module ~a cannot have more than ~a bindings" . 38)

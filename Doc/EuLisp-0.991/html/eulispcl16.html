@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-04-28 21:43:00" /> 
+<meta name="date" content="2010-05-09 20:52:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -202,13 +202,26 @@ class="cmti-9">constant </span></i></b></div><br /> <hr /> <a
  id="x20-2080003"></a><span 
 class="cmbx-8">Remarks</span></h5>
   <!--l. 49--><p class="noindent" >The symbol <span 
-class="cmtt-9">nil </span>is defined to be immutably bound to the empty
+class="cmtt-9">nil </span>is defined to be equivalent to the empty
   list, which is represented as <a 
 href="eulispcl17.html#x21-608009r2"><span 
-class="cmtt-9">()</span></a>. The empty list is used to denote
-  the abstract boolean value <span 
+class="cmtt-9">()</span></a>, <span 
+class="cmti-9">i.e.</span><span 
+class="cmti-9">&#x00A0;</span><span 
+class="cmtt-9">(</span><a 
+href="eulispcl17.html#x21-431003r1"><span 
+class="cmtt-9">eq</span></a> <span 
+class="cmtt-9">&#8217;nil &#8217;</span><a 
+href="eulispcl17.html#x21-608009r2"><span 
+class="cmtt-9">()</span></a><span 
+class="cmtt-9">) </span><span 
+class="cmsy-9">&#x21D2;</span><a 
+href="#x20-208001r4"><span 
+class="cmtt-9">t</span></a>.
+  The empty list is used to denote the abstract boolean value
+  <span 
 class="cmti-9">false</span>.
-  </p><!--l. 53--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+  </p><!--l. 54--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-208001r4"></a><span 
 class="cmbx-9">16.1.4   </span><span 
 class="cmtt-9">t </span><a 
@@ -225,14 +238,14 @@ class="cmti-9">constant </span></i></b></div><br /> <hr /> <a
   <h5 class="likesyntaxssclauseHead"><a 
  id="x20-2090004"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 56--><p class="noindent" >This may be used to denote the abstract boolean value <span 
+  <!--l. 57--><p class="noindent" >This may be used to denote the abstract boolean value <span 
 class="cmti-9">true</span>, but so
   may any other value than <a 
 href="eulispcl17.html#x21-608009r2"><span 
 class="cmtt-9">()</span></a>.
                                                                                                   
                                                                                                   
-</p><!--l. 59--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+</p><!--l. 60--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-209001r5"></a><span 
 class="cmbx-9">16.1.5   </span><span 
 class="cmtt-9">symbol</span>
@@ -246,7 +259,7 @@ class="cmti-9">syntax </span></i></b></div><br /> <hr />
  id="dx20-209003"></a>
 <a 
  id="dx20-209004"></a>
-</p><!--l. 61--><p class="noindent" >The current lexical binding of <a 
+</p><!--l. 62--><p class="noindent" >The current lexical binding of <a 
 href="eulispcl17.html#x21-863004r1"><span 
 class="cmtt-9">symbol</span></a> is returned<a 
  id="dx20-209005"></a>. A symbol can
@@ -271,7 +284,7 @@ class="cmbx-8">Syntax</span></h5><a
  id="dx20-210001"></a>
 <a 
  id="dx20-210002"></a>
-<!--l. 76--><p class="noindent" ><div class="framebox-l" 
+<!--l. 77--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -284,7 +297,7 @@ class="cmtt-9">: </span><span
 class="cmsy-9">&#x2192; </span><a 
 href="eulispcl11.html#x13-73002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a></td></tr></table>
-<!--l.10 76-->                  <table  
+<!--l.10 77-->                  <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -298,7 +311,7 @@ class="cmti-9">local-name</span></a> <a
 href="eulispcl18.html#x23-91100018.1"><span 
 class="cmti-9">form</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 76-->                                       <table  
+<!--l.10 77-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
@@ -307,7 +320,7 @@ class="cmti-9">local-name</span><a
  id="dx20-210005"></a><a 
  id="dx20-210006"></a><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 76-->                                    <table  
+<!--l.10 77-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -315,34 +328,34 @@ class="tabbing">      </td><td
 class="tabbing"><a 
 href="eulispcl9.html#x11-530009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
-<!--l.10 76-->                                                </div></div>
+<!--l.10 77-->                                                </div></div>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x20-21100016.1.6.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
-<!--l. 78--><p class="noindent" >
+<!--l. 79--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
 <span 
 class="cmti-9">identifier </span>: </dt><dd 
 class="arguments">
-    <!--l. 79--><p class="noindent" >A symbol naming a binding containing the value of <a 
+    <!--l. 80--><p class="noindent" >A symbol naming a binding containing the value of <a 
 href="eulispcl18.html#x23-91100018.1"><span 
 class="cmti-9">form</span></a>.
     </p></dd><dt class="arguments">
 <span 
 class="cmti-9">form </span>: </dt><dd 
 class="arguments">
-    <!--l. 82--><p class="noindent" >The <a 
+    <!--l. 83--><p class="noindent" >The <a 
 href="eulispcl18.html#x23-91100018.1"><span 
 class="cmti-9">form</span></a> whose value will be stored in the binding of
     <a 
 href="eulispcl9.html#x11-530009.3.0.3"><span 
 class="cmti-9">identifier</span></a>.</p></dd></dl>
-<!--l. 86--><p class="noindent" >
+<!--l. 87--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x20-21200016.1.6.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 87--><p class="noindent" >The value of <a 
+<!--l. 88--><p class="noindent" >The value of <a 
 href="eulispcl18.html#x23-91100018.1"><span 
 class="cmti-9">form</span></a> is stored in the top-lexical binding of <a 
 href="eulispcl9.html#x11-530009.3.0.3"><span 
@@ -355,10 +368,10 @@ class="cmtt-9">deflocal</span></a> form is mutable.
  id="x20-21300016.1.6.1"></a><span 
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
-<!--l. 92--><p class="noindent" ><a 
+<!--l. 93--><p class="noindent" ><a 
 href="#x20-243002r1"><span 
 class="cmtt-9">setq</span></a>.
-</p><!--l. 94--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+</p><!--l. 95--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-213001r7"></a><span 
 class="cmbx-9">16.1.7   </span><span 
 class="cmtt-9">quote</span>
@@ -378,7 +391,7 @@ class="cmbx-8">Syntax</span></h5> <a
  id="dx20-214001"></a>
   <a 
  id="dx20-214002"></a>
-  <!--l. 104--><p class="noindent" ><div class="framebox-l" 
+  <!--l. 105--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -391,7 +404,7 @@ class="cmtt-9">: </span><span
 class="cmsy-9">&#x2192; </span><a 
 href="eulispcl9.html#x11-550009.4.0.4"><span 
 class="cmti-9">object</span></a></td></tr></table>
-<!--l.10 104-->                                              <table  
+<!--l.10 105-->                                              <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -403,7 +416,7 @@ class="cmtt-9">quote</span></a> <a
 href="eulispcl9.html#x11-550009.4.0.4"><span 
 class="cmti-9">object</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 104-->                                         <table  
+<!--l.10 105-->                                         <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -413,31 +426,31 @@ href="#x20-217005r8"><span
 class="cmtt-9">&#8217;</span></a><a 
 href="eulispcl9.html#x11-550009.4.0.4"><span 
 class="cmti-9">object</span></a></td></tr></table>
-<!--l.10 104-->                                                                            </div></div>
+<!--l.10 105-->                                                                            </div></div>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x20-21500016.1.7.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
-  <!--l. 106--><p class="noindent" >
+  <!--l. 107--><p class="noindent" >
        </p><dl class="arguments1"><dt class="arguments">
   <span 
 class="cmti-9">object </span>:  </dt><dd 
 class="arguments">
-        <!--l. 107--><p class="noindent" >the <a 
+        <!--l. 108--><p class="noindent" >the <a 
 href="eulispcl9.html#x11-550009.4.0.4"><span 
 class="cmti-9">object</span></a> to be quoted.</p></dd></dl>
-  <!--l. 110--><p class="noindent" >
+  <!--l. 111--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x20-21600016.1.7.1"></a><span 
 class="cmbx-8">Result</span></h5>
-  <!--l. 111--><p class="noindent" >The result is <a 
+  <!--l. 112--><p class="noindent" >The result is <a 
 href="eulispcl9.html#x11-550009.4.0.4"><span 
 class="cmti-9">object</span></a>.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x20-21700016.1.7.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 114--><p class="noindent" >The result of processing the expression <span 
+  <!--l. 115--><p class="noindent" >The result of processing the expression <span 
 class="cmtt-9">(</span><a 
 href="#x20-213001r7"><span 
 class="cmtt-9">quote</span></a> <a 
@@ -469,7 +482,7 @@ class="cmtt-9">a</span>.
  id="dx20-217003"></a>in programs. It is an error to modify a literal expression
   <a 
  id="dx20-217004"></a>.
-  </p><!--l. 125--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+  </p><!--l. 126--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-217005r8"></a><span 
 class="cmbx-9">16.1.8   </span><span 
 class="cmtt-9">&#8217;</span>
@@ -484,10 +497,10 @@ class="cmti-9">syntax </span></i></b></div><br /> <hr /> <a
   <h5 class="likesyntaxssclauseHead"><a 
  id="x20-2180008"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 128--><p class="noindent" >See <a 
+  <!--l. 129--><p class="noindent" >See <a 
 href="#x20-213001r7"><span 
 class="cmtt-9">quote</span></a>.
-  </p><!--l. 160--><p class="noindent" >
+  </p><!--l. 161--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 16.2 <a 
  id="x20-21900016.2"></a>Functions: creation, definition and application</h4>
@@ -1554,7 +1567,7 @@ href="#x20-23200016.2.4.1"><span
 class="cmti-9">function-call-form</span></a>, <a 
 href="#x20-236001r5"><span 
 class="cmtt-9">&#x003C;invalid-operator&#x003E;</span></a>.
-  </p><!--l. 436--><p class="noindent" >
+  </p><!--l. 437--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 16.3 <a 
  id="x20-24300016.3"></a>Destructive Operations</h4>
@@ -1840,7 +1853,7 @@ class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 86--><p class="noindent" ><a 
 href="#x20-247001r2"><span 
 class="cmtt-9">setter</span></a>.
-</p><!--l. 532--><p class="noindent" >
+</p><!--l. 533--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 16.4 <a 
  id="x20-25700016.4"></a>Conditional Expressions</h4>
@@ -2602,7 +2615,7 @@ class="cmr-6">2</span></sub> &#x2026;<a
 href="eulispcl18.html#x23-91100018.1"><span 
 class="cmti-9">form</span></a><sub><span 
 class="cmmi-6">n</span></sub>.
-                                                   <!--l. 709--><p class="noindent" >
+                                                   <!--l. 710--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 16.5 <a 
  id="x20-27000016.5"></a>Variable Binding and Sequences</h4>
@@ -4337,7 +4350,7 @@ class="cmtt-9">unwind-protect</span></a> are evaluated in order; <span
 class="cmtt-9">k2 </span>is called; <span 
 class="cmtt-9">loop </span>is called;
 etc.. This program loops indefinitely.
-</p><!--l. 1171--><p class="noindent" >
+</p><!--l. 1172--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 16.6 <a 
  id="x20-30300016.6"></a>Quasiquotation Expressions</h4>  <a 
@@ -4682,7 +4695,7 @@ class="cmsy-9">&#x2192;</span></td><td  style="white-space:nowrap; text-align:le
 class="td11"><span 
 class="cmtt-9">(a 1 2 b)  </span></td>
 </tr></table></div>
-<!--l. 1273--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+<!--l. 1274--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-312001r6"></a><span 
 class="cmbx-9">16.6.6   </span><span 
 class="cmtt-9">,@</span>
@@ -4698,10 +4711,10 @@ class="cmti-9">syntax </span></i></b></div><br /> <hr />
   <h5 class="likesyntaxssclauseHead"><a 
  id="x20-3130006"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 1276--><p class="noindent" >See <a 
+  <!--l. 1277--><p class="noindent" >See <a 
 href="#x20-309001r5"><span 
 class="cmtt-9">unquote-splicing</span></a>.
-  </p><!--l. 1278--><p class="noindent" >
+  </p><!--l. 1279--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 16.7 <a 
  id="x20-31400016.7"></a>Summary of Level-0 Defining, Special and Function-call
