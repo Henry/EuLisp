@@ -125,8 +125,10 @@
       [user]: (print #\\\)
       \
       - #\\
-*** TODO Add =binary= for <character> <character>
-    Needed by =vmeta=.
+*** DONE Do not add =binary= for <character> <character>
+    CLOSED: [2010-05-09 Sun 21:43]
+    Needed by =vmeta=.  Not necessary if =equal= is used in the definitions of
+    =binary<== and =binary>== methods.
 *** DONE Change the parser to map ='nil= to ='()=
     CLOSED: [2010-05-09 Sun 21:06]
     so that (eq 'nil '()) => t
@@ -216,7 +218,10 @@
 *** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
     CLOSED: [2010-04-27 Tue 22:48]
     Check for other =<sequence>= methods which should destructive variants.
-*** TODO Add =binary= for <character> <character>
+*** DONE Do not add =binary= for <character> <character>
+    CLOSED: [2010-05-09 Sun 21:42]
+    Not necessary if =equal= is used in the definitions of =binary<== and
+    =binary>== methods.
 *** DONE Clarify the wording concerning the relationship between =nil= and =()=
     CLOSED: [2010-05-09 Sun 21:09]
     State that (eq 'nil '()) => t.

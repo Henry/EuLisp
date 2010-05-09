@@ -50,16 +50,18 @@
                 (if (let ((arg1 (car l))
                           (arg2 (car rest)))
                       (and (null (binary< arg1 arg2))
-                           (null (binary= arg1 arg2))))
+                           (null (equal arg1 arg2))))
                     ()
                   (loop rest))))))
      (loop (cons arg args))))
 
-  (defun > args (apply < (reverse-list args)))
-
-  (defun >= args (apply <= (reverse-list args)))
-
   (defgeneric binary< (x y))
+
+;;;-----------------------------------------------------------------------------
+;;; > and >=
+;;;-----------------------------------------------------------------------------
+  (defun > args (apply < (reverse-list args)))
+  (defun >= args (apply <= (reverse-list args)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install callback traps
@@ -68,7 +70,7 @@
   (install-callback (int-binary+ first-arithmetic-cb 6) binary<)
 
 ;;;-----------------------------------------------------------------------------
-;;; Max and Moritz
+;;; Max and Min
 ;;;-----------------------------------------------------------------------------
   (defun max (arg . args)
     (labels

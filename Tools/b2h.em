@@ -25,16 +25,14 @@
   (deflocal bytecodes-found 0)
   (deflocal bytecodes-output 0) ; Doesn't include non-specified bytecodes.
 
-  (defmethod binary= ((c1 <character>) (c2 <character>)) (equal c1 c2))
-
   (defun digit (c)
     (and (characterp c)
          (<= #\0 c #\9)))
 
   (defun whitespace (c)
     (and (characterp c)
-         (or (= c #\    )
-             (= c #\ ))))
+         (or (equal c #\    )
+             (equal c #\ ))))
 
   (defun letter (c)
     (and (characterp c)
