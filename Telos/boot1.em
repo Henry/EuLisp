@@ -40,7 +40,7 @@
   (defun eq (x y) ((opencoded-lambda (u v) (eq)) x y))
   (declare-inline eq)
 
-  (defun eql (x y) ((opencoded-lambda (u v) (eq)) x y))
+  (defun eql (x y) ((opencoded-lambda (u v) (eql)) x y))
   (declare-inline eql)
 
   (defun equal (x y)

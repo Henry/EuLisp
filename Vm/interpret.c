@@ -184,7 +184,7 @@ ptrInt interpret(RegisterRef set)
         &&BCL_NOP,
         &&BCL_NOP,
         &&BCL_EQ,
-        &&BCL_NOP,
+        &&BCL_EQL,
         &&BCL_NOP,
         &&BCL_NOP,
         &&BCL_NOP,
@@ -422,6 +422,7 @@ ptrInt interpret(RegisterRef set)
             BC_CASE(STATIC_FPI_BYTE_REF)
             BC_CASE(PRIMITIVE_REF)
             BC_CASE(EQ)
+            BC_CASE(EQL)
             BC_CASE(PRIMITIVE_CLASS_OF)
             BC_CASE(CHECK_ARGUMENTS_2)
             BC_CASE(NOBBLE)

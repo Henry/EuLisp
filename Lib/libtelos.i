@@ -191,7 +191,7 @@
     ((name . sf-direct-slots) (pos . 39) (origin mop-class . sf-direct-slots) (class . constant))
     ((name . dec) (pos . 45) (origin boot1 . dec) (inline (G0078 (fpi-dec))))
     ((name . int-binary<) (pos . 42) (origin boot1 . <) (inline (G0072 (fpi-lt))))
-    ((name . eql) (pos . 44) (origin boot1 . eql) (inline (G0037 (eq))))
+    ((name . eql) (pos . 44) (origin boot1 . eql) (inline (G0037 (eql))))
     ((name . <name>) (pos . 34) (origin mop-class . <name>) (class . constant))
     ((name . primitive-stdout) (pos) (origin boot1 . stdout) (class . constant) (value 1))
     ((name . primitive-stderr) (pos) (origin boot1 . stderr) (class . constant) (value 2))

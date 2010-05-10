@@ -41,19 +41,22 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-  (defmethod equal ((x <list>) (y <list>))
+
+  (defmethod binary= ((x <list>) (y <list>))
     (labels
      ((loop (l1 l2)
             (if (and (consp l1) (consp l2))
-                (and (equal (car l1) (car l2))
+                (and (binary= (car l1) (car l2))
                      (loop (cdr l1) (cdr l2)))
               (if l1
-                  (and l2 (equal l1 l2))
+                  (and l2 (binary= l1 l2))
                 (null l2)))))
-      (loop x y)))
+     (if (loop x y) x ())))
 
-  ;(defmethod equal ((x <cons>) (y <cons>))
-  ;  (and (equal (car x) (car y)) (equal (cdr x) (cdr y))))
+  ;;(defmethod binary= ((x <cons>) (y <cons>))
+  ;;  (and (equal (car x) (car y)) (equal (cdr x) (cdr y))))
+  ;; This is covered by (defmethod binary= ((<list>) (<list>)))
+  ;; and it is not clear if a specialised implementation is beneficial.
 
 ;;;-----------------------------------------------------------------------------
 ;;;  Is a proper list?
@@ -378,7 +381,9 @@
   ;  (cons (deep-copy (car l)) (deep-copy (cdr l))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Arithmetic (Arity does not correspond to the EuLisp definition!)
+;;; Arithmetic
+;;    Arity does not correspond to the EuLisp definition!
+;;    This is used internally but unfortunately exposed at the moment.
 ;;;-----------------------------------------------------------------------------
   (defmethod binary+ ((l1 <list>) (l2 <list>) . preds)
     ;; list union

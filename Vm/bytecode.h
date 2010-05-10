@@ -543,7 +543,7 @@ int eul_trace=0;
         {                                                                      \
             eul_allocate_int(res, fpi_value(arg1)+fpi_value(arg2));            \
             CALLBACK_TRAP(!fpi_value_overflow(res), PUSHVAL1(arg2), CB_SUM_OVERFLOW, 2) \
-            }                                                                  \
+        }                                                                      \
         else if (eul_is_double(arg2))                                          \
         {                                                                      \
             eul_allocate_double(res, fpi_value(arg1)+eul_double_as_c_double(arg2)) \
@@ -558,7 +558,7 @@ int eul_trace=0;
         if (eul_is_int(arg2))                                                  \
         {                                                                      \
             eul_allocate_double(res, eul_double_as_c_double(arg1)+fpi_value(arg2)) \
-       }                                                                       \
+        }                                                                      \
         else if (eul_is_double(arg2))                                          \
         {                                                                      \
             eul_allocate_double(res, eul_double_as_c_double(arg1)+             \
@@ -1931,6 +1931,23 @@ tail_call_entry_point:                                                         \
     LVPEEKVAL() = (tmp1 == LVPEEKVAL() ? eul_true : eul_nil);                  \
     ++reg_pc;
 
+#define BC_EQL 81
+#define BCA_EQL()                                                              \
+    POPVAL1(arg2);                                                             \
+    arg1 = LVPEEKVAL();                                                        \
+    if (eul_is_double(arg1) && eul_is_double(arg2))                            \
+    {                                                                          \
+        LVPEEKVAL() =                                                          \
+        (                                                                      \
+            (eul_double_as_c_double(arg1) == eul_double_as_c_double(arg2))     \
+            ? eul_true : eul_nil                                               \
+        );                                                                     \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        LVPEEKVAL() = (arg1 == arg2 ? eul_true : eul_nil);                     \
+    }                                                                          \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 #endif // BYTECODE_H

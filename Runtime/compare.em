@@ -14,8 +14,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Equal
 ;;;-----------------------------------------------------------------------------
-  (defgeneric equal (x y))
-  (defmethod equal (x y) (eql x y))
+  (defun equal (x y)
+    (if (and (null x) (null y)) t
+      (if (binary= x y) t
+        ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; =
@@ -29,6 +31,8 @@
      (loop args)))
 
   (defgeneric binary= (x y))
+  (defmethod binary= (x y)
+    (if (eql x y) x ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; < and <=
@@ -50,7 +54,7 @@
                 (if (let ((arg1 (car l))
                           (arg2 (car rest)))
                       (and (null (binary< arg1 arg2))
-                           (null (equal arg1 arg2))))
+                           (null (binary= arg1 arg2))))
                     ()
                   (loop rest))))))
      (loop (cons arg args))))

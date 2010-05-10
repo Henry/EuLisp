@@ -125,7 +125,7 @@
   (defmacro match-literal (x)
     (cond
       ((characterp x)
-       `(when (and (< index end) (equal (element sequence index) ',x))
+       `(when (and (< index end) (binary= (element sequence index) ',x))
               (incf index)))
       ((stringp x)
        `(let ((old-index index))         ; 'old-index' is a *lexical* variable.
@@ -157,7 +157,7 @@
        ;;    (format stderr "match exactly ~s: ~s\n" min x)
        `(iter ((i 0 (+ i 1)))
               ((or (> i ,min) (not ,matcher))
-               (and (equal i ,min)))))
+               (and (binary= i ,min)))))
       ;; Min specified, but max is nil, so match
       ;; at least min.
       ((and min max-specified (not max))
@@ -173,7 +173,7 @@
        (when (not min)
              (setq min 0))
        `(iter ((i 0 (+ 1 i)))
-              ((or (equal i ,max) (not ,matcher))
+              ((or (binary= i ,max) (not ,matcher))
                (and (>= i ,min) (<= i ,max)))))
       (t
         (error "~s is not a valid star form." x))))
@@ -250,7 +250,7 @@
                                   (push (slice sequence start last)
                                         ,(cadr x)))
                             val))
-                   (end '(equal index end))
+                   (end '(binary= index end))
                    ))
            (t `(match-literal ,x)))))
       (helper x ())))

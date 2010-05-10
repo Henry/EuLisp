@@ -9,7 +9,7 @@
     ((name . <int*>) (pos . 5) (origin handler . <int*>) (class . constant))
     ((name . <handler>) (pos . 2) (origin handler . <handler>) (class . constant))
     ((name . handlerp) (pos . 10) (origin handler . handlerp))
-    ((name . handle) (pos . 4) (origin handler . handle) (inline (G009389 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G009391 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . handle) (pos . 4) (origin handler . handle) (inline (G009403 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G009405 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
     ((name . <string*>) (pos . 7) (origin handler . <string*>) (class . constant))
     ((name . <double*>) (pos . 6) (origin handler . <double*>) (class . constant))
    )

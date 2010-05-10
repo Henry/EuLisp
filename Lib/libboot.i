@@ -19,7 +19,7 @@
     ((name . anyp1-list) (pos . 27) (origin boot . anyp1-list))
     ((name . <) (pos . 42) (origin boot1 . <) (inline (G0072 (fpi-lt))))
     ((name . symbolp) (pos . 43) (origin boot1 . symbolp) (inline (G0045 (symbolp))))
-    ((name . eql) (pos . 44) (origin boot1 . eql) (inline (G0037 (eq))))
+    ((name . eql) (pos . 44) (origin boot1 . eql) (inline (G0037 (eql))))
     ((name . listify-env-string) (pos . 25) (origin boot . listify-env-string))
     ((name . setter) (pos . 41) (origin boot1 . setter))
     ((name . mod) (pos . 40) (origin boot1 . mod) (inline (G0070 (fpi-remainder))))

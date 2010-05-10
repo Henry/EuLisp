@@ -57,8 +57,7 @@
   ;; pat ::= identifier                      anything, and binds identifier
   ;;       | _                               anything
   ;;       | ()                              the empty list
-  ;;       | #t                              #t
-  ;;       | #f                              #f
+  ;;       | t                              t
   ;;       | string                          a string
   ;;       | number                          a number
   ;;       | character                       a character
@@ -91,8 +90,8 @@
   ;;         quasi-patterns:                 matches:
   ;;
   ;; qp  ::= ()                              the empty list
-  ;;       | #t                              #t
-  ;;       | #f                              #f
+  ;;       | t                              t
+  ;;       | ()                              ()
   ;;       | string                          a string
   ;;       | number                          a number
   ;;       | character                       a character
@@ -127,7 +126,7 @@
   ;;
   ;; match:error-control controls what code is generated for failed matches.
   ;; Possible values:
-  ;;  'unspecified - do nothing, ie., evaluate (cond [#f #f])
+  ;;  'unspecified - do nothing, ie., evaluate (cond [() ()])
   ;;  'fail - call match:error, or die at car or cdr
   ;;  'error - call match:error with the unmatched value
   ;;  'match - call match:error with the unmatched value _and_
@@ -150,8 +149,8 @@
   ;; generate new structures each time they are reached
   ;; (does not exist for Scheme 48 version).
   ;; Possible values:
-  ;;  #t - (default) each runtime occurrence generates a new structure
-  ;;  #f - each lexical occurrence generates a new structure
+  ;;  t - (default) each runtime occurrence generates a new structure
+  ;;  () - each lexical occurrence generates a new structure
   ;;
   ;; End of user visible/modifiable stuff.
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -190,7 +189,7 @@
                                               (lambda ,bv2
                                                 ,@body))
                                            (append bindings blist)))
-                               (list p code bv (and fail (gentemp)) #f)))
+                               (list p code bv (and fail (gentemp)) ())))
                            clauses))
                   (code (gen x '() plist (cdr eb-errf) length>= (gentemp))))
              (unreachable plist match-expr)
@@ -209,7 +208,7 @@
                   (bv (cadr x))
                   (bindings (caddr x))
                   (code (gentemp))
-                  (plist (list (list p code bv #f #f)))
+                  (plist (list (list p code bv () ())))
                   (x (gentemp))
                   (m (gen x '() plist (cdr eb-errf) length>= (gentemp)))
                   (gs (map (lambda (_) (gentemp)) bv)))
@@ -217,7 +216,7 @@
              `(letrec ((,length>= (lambda (n)
                                     (lambda (l)
                                       (>= (length l) n))))
-                       ,@(map (lambda (v) `(,v #f)) bv)
+                       ,@(map (lambda (v) `(,v ())) bv)
                        (,x ,exp)
                        (,code (lambda ,gs
                                 ,@(map (lambda (v g) `(set! ,v ,g)) bv gs)
@@ -234,12 +233,12 @@
                   (bv (cadr x))
                   (bindings (caddr x))
                   (code (gentemp))
-                  (plist (list (list p code bv #f #f)))
+                  (plist (list (list p code bv () ())))
                   (x (gentemp))
                   (m (gen x '() plist (cdr eb-errf) length>= (gentemp)))
                   (gs (map (lambda (_) (gentemp)) bv)))
              (unreachable plist match-expr)
-             `(begin ,@(map (lambda (v) `(define ,v #f)) bv)
+             `(begin ,@(map (lambda (v) `(define ,v ())) bv)
                      ,(inline-let
                         `(let ((,length>=
                                  (lambda (n) (lambda (l) (>= (length l) n))))
@@ -247,7 +246,7 @@
                                (,code
                                  (lambda ,gs
                                    ,@(map (lambda (v g) `(set! ,v ,g)) bv gs)
-                                   (cond (#f #f))))
+                                   (cond (() ()))))
                                ,@bindings
                                ,@(car eb-errf))
                            ,m))))))
@@ -275,7 +274,7 @@
          (lambda (match-expr)
            (cond
              ((eq? match:error-control 'unspecified)
-              (cons '() (lambda (x) `(cond (#f #f)))))
+              (cons '() (lambda (x) `(cond (() ())))))
              ((memq match:error-control '(error fail))
               (cons '() (lambda (x) `(match:error ,x))))
              ((eq? match:error-control 'match)
@@ -748,7 +747,7 @@
                     (fail (lambda (sf)
                             (gen x sf (cdr plist) erract length>= eta)))
                     (success (lambda (sf)
-                               (set-car! (cddddr (car plist)) #t)
+                               (set-car! (cddddr (car plist)) t)
                                (let* ((code (cadr (car plist)))
                                       (bv (caddr (car plist)))
                                       (fail-sym (cadddr (car plist))))
@@ -875,8 +874,8 @@
                                                         (next (car p)
                                                               eta
                                                               sf
-                                                              (lambda (sf) #f)
-                                                              (lambda (sf) #t)))
+                                                              (lambda (sf) ())
+                                                              (lambda (sf) t)))
                                                       (tst
                                                         (if (and
                                                               (pair? ptst)
@@ -1022,7 +1021,7 @@
                         (display
                           "FATAL ERROR IN PATTERN MATCHER")
                         (newline)
-                        (error #f "THIS NEVER HAPPENS"))))))))
+                        (error () "THIS NEVER HAPPENS"))))))))
        (emit
          (lambda (tst sf kf ks)
            (cond
@@ -1063,7 +1062,7 @@
          (lambda (tst f s)
            (cond
              ((equal? s f) s)
-             ((and (eq? s #t) (eq? f #f))
+             ((and (eq? s t) (eq? f ()))
               tst)
              ((and (eq? (car tst) 'pair?)
                    (memq match:error-control '(unspecified fail))
@@ -1118,7 +1117,7 @@
                    (lambda (,k)
                      (let ((,fail (lambda () (,k ,f))))
                        ,(assm tst `(,fail) s2))))))
-             ((and #f
+             ((and ()
                    (pair? s)
                    (equal? (car s) 'let)
                    (pair? (cdr s))
@@ -1146,15 +1145,15 @@
            (let ((a (add-a x)) (d (add-d x)))
              (let loop ((code code))
                   (cond
-                    ((not (pair? code)) #f)
-                    ((memq (car code) '(cond match:error)) #t)
-                    ((or (equal? code a) (equal? code d)) #t)
+                    ((not (pair? code)) ())
+                    ((memq (car code) '(cond match:error)) t)
+                    ((or (equal? code a) (equal? code d)) t)
                     ((eq? (car code) 'if) (or (loop (cadr code))
                                               (and (loop (caddr code))
                                                    (loop (cadddr code)))))
-                    ((eq? (car code) 'lambda) #f)
+                    ((eq? (car code) 'lambda) ())
                     ((and (eq? (car code) 'let)
-                          (symbol? (cadr code))) #f)
+                          (symbol? (cadr code))) ())
                     (else (or (loop (car code))
                               (loop (cdr code)))))))))
        (in
@@ -1170,7 +1169,7 @@
                         (const-class
                           (let mem ((l l))
                                (if (null? l)
-                                   #f
+                                   ()
                                  (let ((x (car l)))
                                    (or (and (equal?
                                               (cadr x)
@@ -1189,7 +1188,7 @@
                         ((disjoint? srch)
                          (let mem ((l l))
                               (if (null? l)
-                                  #f
+                                  ()
                                 (let ((x (car l)))
                                   (or (and (equal? (cadr x) (cadr srch))
                                            (disjoint? x)
@@ -1198,7 +1197,7 @@
                         ((eq? (car srch) 'list?)
                          (let mem ((l l))
                               (if (null? l)
-                                  #f
+                                  ()
                                 (let ((x (car l)))
                                   (or (and (equal? (cadr x) (cadr srch))
                                            (disjoint? x)
@@ -1208,7 +1207,7 @@
                         ((vec-structure? srch)
                          (let mem ((l l))
                               (if (null? l)
-                                  #f
+                                  ()
                                 (let ((x (car l)))
                                   (or (and (equal? (cadr x) (cadr srch))
                                            (or (disjoint? x)
@@ -1218,7 +1217,7 @@
                                       (equal? x
                                               `(not (vector? ,(cadr srch))))
                                       (mem (cdr l)))))))
-                        (else #f)))))))
+                        (else ())))))))
        (equal-test?
          (lambda (tst)
            (and (eq? (car tst) 'equal?)
@@ -1233,7 +1232,7 @@
                           (null? (cddr p))
                           (eq? 'quote (car p))
                           (symbol? (cadr p))) 'symbol?)
-                    (else #f))))))
+                    (else ()))))))
        (disjoint?
          (lambda (tst)
            (memq (car tst) match:disjoint-predicates)))
@@ -1385,7 +1384,7 @@
                (lambda (g126)
                  (if (and (pair? g126) (list? (cdr g126)))
                      (pair? (cdr g126))
-                   #f))
+                   ()))
                args))
         ((lambda ()
            (let ((e (gentemp))) `(lambda (,e) (match ,e ,@args)))))
@@ -1400,7 +1399,7 @@
                (lambda (g134)
                  (if (and (pair? g134) (list? (cdr g134)))
                      (pair? (cdr g134))
-                   #f))
+                   ()))
                args))
         ((lambda ()
            (let ((e (gentemp))) `(lambda ,e (match ,e ,@args)))))
@@ -1458,7 +1457,7 @@
                                  (g136 (car g167))
                                  (pair? (cdr g167)))
                             (null? (cddr g167))
-                          #f))
+                          ()))
                       (car args))
                     (if (and (list? (cdr args)) (pair? (cdr args)))
                         ((lambda () `(let ,@args)))
@@ -1685,7 +1684,7 @@
                                (g200 (car g206))
                                (pair? (cdr g206)))
                           (null? (cddr g206))
-                        #f))
+                        ()))
                     (car args))
                   (if (and (list? (cdr args)) (pair? (cdr args)))
                       ((lambda () `(letrec ,@args)))

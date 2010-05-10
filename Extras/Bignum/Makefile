@@ -35,7 +35,7 @@ MODULE_C = $(MODULE).c
 MODULE_O = $(ARCH_DIR)/$(MODULE).o
 
 OTHER_EM = mpq.em mpz.em bigint.em bigrat.em
-OTHER_C = $(OTHER_EM:%.em=$(ARCH_DIR)/%.c)
+OTHER_C = $(OTHER_EM:%.em=%.c)
 OTHER_O = $(OTHER_EM:%.em=$(ARCH_DIR)/%.o)
 
 FF_C = eul-mpq.c eul-mpz.c eul-gmp-gc.c

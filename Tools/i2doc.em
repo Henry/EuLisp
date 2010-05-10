@@ -26,8 +26,8 @@
 
   (defun moduleize (filename)
     (let* ((len (size filename))
-           (start (if (equal "lib" (substring filename 0 3)) 3 0))
-           (end (if (equal ".i" (substring filename (- len 2) len))
+           (start (if (binary= "lib" (substring filename 0 3)) 3 0))
+           (end (if (binary= ".i" (substring filename (- len 2) len))
                     (- len 2)
                   len)))
       (substring filename start end)))
@@ -95,18 +95,18 @@
       (let ((first (car args))
             (rest  (cdr args)))
         (cond
-         ((equal first "-s")            ;Sort
+         ((binary= first "-s")            ;Sort
           (setq internal-sort (not internal-sort))
           (parse-args rest))
-         ((equal first "-h")            ;Header
+         ((binary= first "-h")            ;Header
           (setq print-header (not print-header))
           (parse-args rest))
-         ((equal first "-r")            ;Note renamings
+         ((binary= first "-r")            ;Note renamings
           (setq note-renaming (not note-renaming))
           (parse-args rest))
-         ((or (equal first "-?")
-              (equal first "-help")
-              (equal first "--help"))
+         ((or (binary= first "-?")
+              (binary= first "-help")
+              (binary= first "--help"))
           (usage))
          (t                             ;Not known option, so must be filename
           args)))))

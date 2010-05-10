@@ -54,12 +54,12 @@
 
   (defgeneric emptyp (o))
 
-  (defmethod equal ((c1 <collection>) (c2 <collection>))
+  (defmethod binary= ((c1 <collection>) (c2 <collection>))
     (and (eq (class-of c1) (class-of c2))
          (if (listp c1)
-             (allp equal c1 c2)
+             (allp binary= c1 c2)
            (and (int-binary= (size c1) (size c2))
-                (allp equal c1 c2)))))
+                (allp binary= c1 c2)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Iteration

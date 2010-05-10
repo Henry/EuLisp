@@ -33,7 +33,7 @@
     ("body of inlined function contains non exported binding ~a" . 48)
     (? . 46)
     ("  compute-binding ~a ~a" . 45)
-    (|(method G007906)| . 44)
+    (|(method G007916)| . 44)
     (ct-error-value: . 42)
     ("can't compute binding ~a of module ~a" . 41)
     ("module ~a cannot have more than ~a bindings" . 38)

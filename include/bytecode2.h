@@ -88,7 +88,7 @@ struct {int inlined_arg_size, branch;} eul_instr_info[256]= {
   {0, 0}, /* instruction 78 (4e): (undefined) */
   {0, 0}, /* instruction 79 (4f): (undefined) */
   {0, 0}, /* instruction 80 (50): eq */
-  {0, 0}, /* instruction 81 (51): (undefined) */
+  {0, 0}, /* instruction 81 (51): eql */
   {0, 0}, /* instruction 82 (52): (undefined) */
   {0, 0}, /* instruction 83 (53): (undefined) */
   {0, 0}, /* instruction 84 (54): (undefined) */

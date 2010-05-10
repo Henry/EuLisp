@@ -117,7 +117,7 @@ final:
 
 .PHONY: bytecode2
 bytecode2:
-	@echo "---- CREATING Vm/bytecode2.h which contains instruction information"
+	@echo "---- CREATING include/bytecode2.h which contains instruction information"
 	$(EUL_BIN_DIR)/b2h cg-bycode1.em cg-bycode2.em > ../include/bytecode2.h
 	@echo "---- DONE."
 

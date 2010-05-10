@@ -42,7 +42,7 @@
     (|(method fill)| . 90)
     (|(method allp)| . 89)
     (|(method anyp)| . 88)
-    (|(method equal)| . 87)
+    (|(method binary=)| . 87)
     (|(method sequencep)| . 86)
     (|(method collectionp)| . 85)
     (|(method name)| . 84)

@@ -92,15 +92,6 @@
            (writer (and slot (slot-writer (car slot)))))
       (writer obj value)))
 
-  ;  (defmethod equal ((x1 <binding>) (x2 <binding>))
-  ;    (let* ((module1 (binding-module? x1))
-  ;          (module2 (binding-module? x2))
-  ;          (module-name1 (if (modulep module1) (module-name? module1) module1))
-  ;          (module-name2 (if (modulep module2) (module-name? module2) module2))
-  ;          (local-name1 (binding-local-name? x1))
-  ;          (local-name2 (binding-local-name? x2)))
-  ;      (and (eq module-name1 module2) (eq local-name1 local-name2))))
-
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module
 ;;;-----------------------------------------------------------------------------

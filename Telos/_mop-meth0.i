@@ -4,7 +4,7 @@
 (definterface _mop-meth0
   (import (level1)
    syntax (boot0)
-   full-import (read symbol random handler table table1 convert1 format list socket stream2 lock stream1 stream vector stream3 float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level1)
+   full-import (symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level1)
    export (
     ((name . defmethod-sig) (pos . 8) (origin _mop-meth0 . defmethod-sig))
     ((name . defmethod-body) (pos . 7) (origin _mop-meth0 . defmethod-body))

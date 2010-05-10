@@ -12,8 +12,8 @@
 
   (defun whitespace (c)
     (and (characterp c)
-         (or (equal c #\	)
-             (equal c #\ ))))
+         (or (eql c #\	)
+             (eql c #\ ))))
 
   (defun letter (c)
     (and (characterp c)
@@ -23,7 +23,7 @@
   (defun identifier (c)
     (or (letter c)
         (digit c)
-        (equal #\- c)))
+        (eql #\- c)))
 
   (let (name args number)
     (match-expr

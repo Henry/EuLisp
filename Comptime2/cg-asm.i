@@ -66,7 +66,7 @@
     (init-bytevector: . 36)
     (assemble . 35)
     ("  Assembling module ~a ..." . 34)
-    (|(method G005909)| . 33)
+    (|(method G005919)| . 33)
     (ct-error-value: . 30)
     ("assembler error" . 29)
     ("  Re-assembling function ~a because of long jump" . 26)

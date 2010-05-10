@@ -63,12 +63,12 @@ extern LispRef symbol_bindings[];
 LispRef cg_link_bindings[366];
 
 /* Foreign functions */
-static LispRef ff_stub_eul_int_as_hex_str7448 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_int_as_hex_str7458 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G007847, res;
+  LispRef G007857, res;
 
-  POPVAL1(G007847);
-  FF_RES_CONVERT6(res,eul_int_as_hex_str(FF_ARG_CONVERT0(G007847)));
+  POPVAL1(G007857);
+  FF_RES_CONVERT6(res,eul_int_as_hex_str(FF_ARG_CONVERT0(G007857)));
   return res;
 }
 
@@ -95,730 +95,730 @@ void initialize_module_cg_link()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_7846, sym_7845, sym_7844, sym_7843, sym_7842, sym_7841, sym_7840, sym_7839, sym_7838, sym_7837, sym_7836, sym_7835, sym_7834, sym_7833, sym_7832, sym_7831, sym_7830, sym_7829, sym_7828, sym_7827, sym_7826, sym_7825, sym_7824, sym_7823, sym_7822, sym_7821, sym_7820, sym_7819, sym_7818, sym_7817, sym_7816, sym_7815, sym_7814, sym_7813, sym_7812, sym_7811, sym_7810, sym_7809, sym_7808, sym_7807, sym_7806, sym_7805, sym_7804, sym_7803, sym_7802, sym_7801, sym_7800, sym_7799, sym_7798, sym_7797, G007796, G007791, G007789, G007787, G007784, G007781, G007779, G007776, G007770, G007768, G007764, G007761, G007746, G007743, G007740, G007738, G007736, G007721, G007719, G007717, G007715, G007713, G007707, G007705, G007703, G007700, G007696, G007693, G007689, G007687, G007683, G007677, G007675, G007673, G007670, key_7668, G007666, G007663, G007661, G007659, G007644, G007642, G007639, G007636, G007633, G007629, G007627, sym_7625, sym_7624, G007623, G007620, G007618, G007616, G007612, G007603, G007601, G007599, G007596, G007594, G007592, G007589, G007585, G007582, G007580, G007578, G007574, G007570, G007568, sym_7563, G007562, sym_7559, sym_7557, G007556, key_7554, G007552, G007550, G007547, sym_7545, sym_7544, sym_7543, sym_7542, G007540, sym_7538, G007537, G007534, G007531, sym_7524, sym_7523, sym_7522, sym_7521, key_7520, key_7519, G007516, G007514, G007512, sym_7510, sym_7509, sym_7508, sym_7507, key_7506, sym_7505, sym_7504, G007503, G007501, G007499, sym_7497, G007496, G007494, G007491, G007487, G007484, G007480, sym_7478, G007477, G007464, G007459, sym_7455, G007454, G007450;
+  LispRef sym_7856, sym_7855, sym_7854, sym_7853, sym_7852, sym_7851, sym_7850, sym_7849, sym_7848, sym_7847, sym_7846, sym_7845, sym_7844, sym_7843, sym_7842, sym_7841, sym_7840, sym_7839, sym_7838, sym_7837, sym_7836, sym_7835, sym_7834, sym_7833, sym_7832, sym_7831, sym_7830, sym_7829, sym_7828, sym_7827, sym_7826, sym_7825, sym_7824, sym_7823, sym_7822, sym_7821, sym_7820, sym_7819, sym_7818, sym_7817, sym_7816, sym_7815, sym_7814, sym_7813, sym_7812, sym_7811, sym_7810, sym_7809, sym_7808, sym_7807, G007806, G007801, G007799, G007797, G007794, G007791, G007789, G007786, G007780, G007778, G007774, G007771, G007756, G007753, G007750, G007748, G007746, G007731, G007729, G007727, G007725, G007723, G007717, G007715, G007713, G007710, G007706, G007703, G007699, G007697, G007693, G007687, G007685, G007683, G007680, key_7678, G007676, G007673, G007671, G007669, G007654, G007652, G007649, G007646, G007643, G007639, G007637, sym_7635, sym_7634, G007633, G007630, G007628, G007626, G007622, G007613, G007611, G007609, G007606, G007604, G007602, G007599, G007595, G007592, G007590, G007588, G007584, G007580, G007578, sym_7573, G007572, sym_7569, sym_7567, G007566, key_7564, G007562, G007560, G007557, sym_7555, sym_7554, sym_7553, sym_7552, G007550, sym_7548, G007547, G007544, G007541, sym_7534, sym_7533, sym_7532, sym_7531, key_7530, key_7529, G007526, G007524, G007522, sym_7520, sym_7519, sym_7518, sym_7517, key_7516, sym_7515, sym_7514, G007513, G007511, G007509, sym_7507, G007506, G007504, G007501, G007497, G007494, G007490, sym_7488, G007487, G007474, G007469, sym_7465, G007464, G007460;
 
   /* Code vector and literal definitions */
-  eul_allocate_static_string(str_7451, "key_", 4);
-  eul_allocate_static_string(str_7452, "  eul_intern_keyword(~a,~s);\n", 29);
+  eul_allocate_static_string(str_7461, "key_", 4);
+  eul_allocate_static_string(str_7462, "  eul_intern_keyword(~a,~s);\n", 29);
   /* Byte-vector with size: 13 is_init: 0 index: 63 binding: (method-convert-constant) */
-  static const void *G007449[] = {I(aa,23,00,00),B(cg_link ,61),I(24,00,00,00),B(symbol ,6),I(3c,01,1b,24),B(cg_link ,49),I(3c,01,2a,1c),I(82,02,23,00),B(cg_link ,62),I(1d,1d,24,00),B(cg_link ,5),I(3c,03,2a,1c),I(45,03,00,00)};
+  static const void *G007459[] = {I(aa,23,00,00),B(cg_link ,61),I(24,00,00,00),B(symbol ,6),I(3c,01,1b,24),B(cg_link ,49),I(3c,01,2a,1c),I(82,02,23,00),B(cg_link ,62),I(1d,1d,24,00),B(cg_link ,5),I(3c,03,2a,1c),I(45,03,00,00)};
 
-  eul_allocate_static_string(str_7456, "sym_", 4);
-  eul_allocate_static_string(str_7457, "  eul_intern_symbol(~a,~s);\n", 28);
+  eul_allocate_static_string(str_7466, "sym_", 4);
+  eul_allocate_static_string(str_7467, "  eul_intern_symbol(~a,~s);\n", 28);
   /* Byte-vector with size: 20 is_init: 0 index: 67 binding: (method-convert-constant) */
-  static const void *G007453[] = {I(aa,1b,87,50),I(1b,34,00,00),I(00,00,00,17),I(23,00,00,00),B(cg_link ,64),I(32,00,00,00),I(00,00,00,3a),I(23,00,00,00),B(cg_link ,65),I(24,00,00,00),B(symbol ,6),I(3c,01,1b,24),B(cg_link ,49),I(3c,01,2a,1d),I(82,02,23,00),B(cg_link ,66),I(1d,1d,24,00),B(cg_link ,5),I(3c,03,2a,1c),I(22,02,45,02)};
+  static const void *G007463[] = {I(aa,1b,87,50),I(1b,34,00,00),I(00,00,00,17),I(23,00,00,00),B(cg_link ,64),I(32,00,00,00),I(00,00,00,3a),I(23,00,00,00),B(cg_link ,65),I(24,00,00,00),B(symbol ,6),I(3c,01,1b,24),B(cg_link ,49),I(3c,01,2a,1d),I(82,02,23,00),B(cg_link ,66),I(1d,1d,24,00),B(cg_link ,5),I(3c,03,2a,1c),I(22,02,45,02)};
 
-  eul_allocate_static_string(str_7460, "str_", 4);
-  eul_allocate_static_string(str_7461, "  eul_allocate_static_string(~a, ~s, ~a);\n", 42);
-  eul_allocate_static_string(str_7462, "  object_class(~a) = eul_static_string_class;~%", 47);
+  eul_allocate_static_string(str_7470, "str_", 4);
+  eul_allocate_static_string(str_7471, "  eul_allocate_static_string(~a, ~s, ~a);\n", 42);
+  eul_allocate_static_string(str_7472, "  object_class(~a) = eul_static_string_class;~%", 47);
   /* Byte-vector with size: 25 is_init: 0 index: 71 binding: (method-convert-constant) */
-  static const void *G007458[] = {I(aa,23,00,00),B(cg_link ,68),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,24),B(ex_expr ,16),I(3c,01,1b,24),B(ex_expr ,3),I(3c,01,1b,24),B(ex_expr ,25),I(3c,01,1b,24),B(ex_expr ,33),I(3c,01,1f,04),I(1c,1f,07,06),I(23,00,00,00),B(cg_link ,69),I(1f,03,1f,03),I(1f,03,24,00),B(cg_link ,16),I(3c,04,2a,23),B(cg_link ,70),I(1f,03,24,00),B(cg_link ,5),I(3c,02,2a,1d),I(45,09,00,00)};
+  static const void *G007468[] = {I(aa,23,00,00),B(cg_link ,68),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,24),B(ex_expr ,16),I(3c,01,1b,24),B(ex_expr ,3),I(3c,01,1b,24),B(ex_expr ,25),I(3c,01,1b,24),B(ex_expr ,33),I(3c,01,1f,04),I(1c,1f,07,06),I(23,00,00,00),B(cg_link ,69),I(1f,03,1f,03),I(1f,03,24,00),B(cg_link ,16),I(3c,04,2a,23),B(cg_link ,70),I(1f,03,24,00),B(cg_link ,5),I(3c,02,2a,1d),I(45,09,00,00)};
 
-  eul_allocate_static_string(str_7465, "cons_", 5);
-  eul_allocate_static_string(str_7466, "  eul_allocate_static_cons(~a, ", 31);
-  eul_allocate_static_string(str_7467, "  object_class(~a) = eul_static_cons_class;~%", 45);
-  eul_allocate_static_string(str_7468, "~a, ", 4);
-  eul_allocate_static_string(str_7469, "eul_as_static(~a), ", 19);
-  eul_allocate_static_string(str_7470, "NULL, ", 6);
-  eul_allocate_static_string(str_7471, "  eul_car(~a) = ~a;\n", 20);
-  eul_allocate_static_string(str_7472, "~a);\n", 5);
-  eul_allocate_static_string(str_7473, "eul_as_static(~a));\n", 20);
-  eul_allocate_static_string(str_7474, "NULL);\n", 7);
-  eul_allocate_static_string(str_7475, "  eul_cdr(~a) = ~a;\n", 20);
+  eul_allocate_static_string(str_7475, "cons_", 5);
+  eul_allocate_static_string(str_7476, "  eul_allocate_static_cons(~a, ", 31);
+  eul_allocate_static_string(str_7477, "  object_class(~a) = eul_static_cons_class;~%", 45);
+  eul_allocate_static_string(str_7478, "~a, ", 4);
+  eul_allocate_static_string(str_7479, "eul_as_static(~a), ", 19);
+  eul_allocate_static_string(str_7480, "NULL, ", 6);
+  eul_allocate_static_string(str_7481, "  eul_car(~a) = ~a;\n", 20);
+  eul_allocate_static_string(str_7482, "~a);\n", 5);
+  eul_allocate_static_string(str_7483, "eul_as_static(~a));\n", 20);
+  eul_allocate_static_string(str_7484, "NULL);\n", 7);
+  eul_allocate_static_string(str_7485, "  eul_cdr(~a) = ~a;\n", 20);
   /* Byte-vector with size: 91 is_init: 0 index: 83 binding: (method-convert-constant) */
-  static const void *G007463[] = {I(aa,23,00,00),B(cg_link ,72),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,10),I(1d,11,1c,24),B(cg_link ,7),I(3c,01,1c,24),B(cg_link ,7),I(3c,01,23,00),B(cg_link ,73),I(1f,05,24,00),B(cg_link ,16),I(3c,02,2a,23),B(cg_link ,74),I(1f,05,24,00),B(cg_link ,5),I(3c,02,2a,1f),I(03,24,00,00),B(cg_link ,35),I(3c,01,1b,34),I(00,00,00,5d),I(1f,04,24,00),B(integer ,3),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1f,05,81,1b),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(cg_link ,75),I(1f,05,24,00),B(cg_link ,16),I(3c,02,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_link ,76),I(1f,05,24,00),B(cg_link ,16),I(3c,02,22,02),I(32,00,00,00),I(00,00,00,2e),I(23,00,00,00),B(cg_link ,77),I(24,00,00,00),B(cg_link ,16),I(3c,01,2a,23),B(cg_link ,78),I(1f,06,1f,04),I(24,00,00,00),B(cg_link ,5),I(3c,03,2a,1f),I(03,24,00,00),B(cg_link ,35),I(3c,01,1b,34),I(00,00,00,5d),I(1f,04,24,00),B(integer ,3),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1f,05,81,1b),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(cg_link ,79),I(1f,05,24,00),B(cg_link ,16),I(3c,02,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_link ,80),I(1f,05,24,00),B(cg_link ,16),I(3c,02,22,02),I(32,00,00,00),I(00,00,00,2e),I(23,00,00,00),B(cg_link ,81),I(24,00,00,00),B(cg_link ,16),I(3c,01,2a,23),B(cg_link ,82),I(1f,07,1f,04),I(24,00,00,00),B(cg_link ,5),I(3c,03,2a,1f),I(06,45,08,00)};
+  static const void *G007473[] = {I(aa,23,00,00),B(cg_link ,72),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,10),I(1d,11,1c,24),B(cg_link ,7),I(3c,01,1c,24),B(cg_link ,7),I(3c,01,23,00),B(cg_link ,73),I(1f,05,24,00),B(cg_link ,16),I(3c,02,2a,23),B(cg_link ,74),I(1f,05,24,00),B(cg_link ,5),I(3c,02,2a,1f),I(03,24,00,00),B(cg_link ,35),I(3c,01,1b,34),I(00,00,00,5d),I(1f,04,24,00),B(integer ,3),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1f,05,81,1b),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(cg_link ,75),I(1f,05,24,00),B(cg_link ,16),I(3c,02,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_link ,76),I(1f,05,24,00),B(cg_link ,16),I(3c,02,22,02),I(32,00,00,00),I(00,00,00,2e),I(23,00,00,00),B(cg_link ,77),I(24,00,00,00),B(cg_link ,16),I(3c,01,2a,23),B(cg_link ,78),I(1f,06,1f,04),I(24,00,00,00),B(cg_link ,5),I(3c,03,2a,1f),I(03,24,00,00),B(cg_link ,35),I(3c,01,1b,34),I(00,00,00,5d),I(1f,04,24,00),B(integer ,3),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1f,05,81,1b),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(cg_link ,79),I(1f,05,24,00),B(cg_link ,16),I(3c,02,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_link ,80),I(1f,05,24,00),B(cg_link ,16),I(3c,02,22,02),I(32,00,00,00),I(00,00,00,2e),I(23,00,00,00),B(cg_link ,81),I(24,00,00,00),B(cg_link ,16),I(3c,01,2a,23),B(cg_link ,82),I(1f,07,1f,04),I(24,00,00,00),B(cg_link ,5),I(3c,03,2a,1f),I(06,45,08,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 85 binding: (method-convert-constant) */
-  static const void *G007476[] = {I(aa,23,00,00),B(cg_link ,84),I(45,01,00,00)};
+  static const void *G007486[] = {I(aa,23,00,00),B(cg_link ,84),I(45,01,00,00)};
 
-  eul_allocate_static_string(str_7481, "vec_", 4);
-  eul_allocate_static_string(str_7482, "  eul_allocate_vector(~a,~a,~a);\n", 33);
+  eul_allocate_static_string(str_7491, "vec_", 4);
+  eul_allocate_static_string(str_7492, "  eul_allocate_vector(~a,~a,~a);\n", 33);
   /* Byte-vector with size: 21 is_init: 0 index: 88 binding: (method-convert-constant) */
-  static const void *G007479[] = {I(aa,23,00,00),B(cg_link ,86),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,24),B(mop_class ,64),I(24,00,00,00),B(convert ,2),I(3c,02,1b,24),B(cg_link ,29),I(3c,01,1f,03),I(06,1f,03,1d),I(1d,1d,24,00),B(cg_link ,49),I(3c,01,2a,23),B(cg_link ,87),I(1f,03,1d,1f),I(04,24,00,00),B(cg_link ,5),I(3c,04,2a,1d),I(45,08,00,00)};
+  static const void *G007489[] = {I(aa,23,00,00),B(cg_link ,86),I(24,00,00,00),B(symbol ,6),I(3c,01,1c,24),B(mop_class ,64),I(24,00,00,00),B(convert ,2),I(3c,02,1b,24),B(cg_link ,29),I(3c,01,1f,03),I(06,1f,03,1d),I(1d,1d,24,00),B(cg_link ,49),I(3c,01,2a,23),B(cg_link ,87),I(1f,03,1d,1f),I(04,24,00,00),B(cg_link ,5),I(3c,04,2a,1d),I(45,08,00,00)};
 
-  eul_allocate_static_string(str_7485, "c_char_as_eul_char('~a')", 24);
+  eul_allocate_static_string(str_7495, "c_char_as_eul_char('~a')", 24);
   /* Byte-vector with size: 7 is_init: 0 index: 90 binding: (method-convert-constant) */
-  static const void *G007483[] = {I(aa,86,23,00),B(cg_link ,89),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(45,02,00,00)};
+  static const void *G007493[] = {I(aa,86,23,00),B(cg_link ,89),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(45,02,00,00)};
 
-  eul_allocate_static_string(str_7488, "dbl_", 4);
-  eul_allocate_static_string(str_7489, "  eul_allocate_double(~a,~a);\n", 30);
+  eul_allocate_static_string(str_7498, "dbl_", 4);
+  eul_allocate_static_string(str_7499, "  eul_allocate_double(~a,~a);\n", 30);
   /* Byte-vector with size: 12 is_init: 0 index: 93 binding: (method-convert-constant) */
-  static const void *G007486[] = {I(aa,23,00,00),B(cg_link ,91),I(24,00,00,00),B(symbol ,6),I(3c,01,1b,24),B(cg_link ,49),I(3c,01,2a,23),B(cg_link ,92),I(1c,1f,03,24),B(cg_link ,5),I(3c,03,2a,1b),I(45,02,00,00)};
+  static const void *G007496[] = {I(aa,23,00,00),B(cg_link ,91),I(24,00,00,00),B(symbol ,6),I(3c,01,1b,24),B(cg_link ,49),I(3c,01,2a,23),B(cg_link ,92),I(1c,1f,03,24),B(cg_link ,5),I(3c,03,2a,1b),I(45,02,00,00)};
 
-  eul_allocate_static_string(str_7492, "c_int_as_eul_int(~a)", 20);
+  eul_allocate_static_string(str_7502, "c_int_as_eul_int(~a)", 20);
   /* Byte-vector with size: 7 is_init: 0 index: 95 binding: (method-convert-constant) */
-  static const void *G007490[] = {I(aa,86,23,00),B(cg_link ,94),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(45,02,00,00)};
+  static const void *G007500[] = {I(aa,86,23,00),B(cg_link ,94),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(45,02,00,00)};
 
   /* Byte-vector with size: 15 is_init: 0 index: 96 binding: (method-get-literal-entry) */
-  static const void *G007493[] = {I(aa,1b,24,00),B(i_param ,49),I(3c,01,1b,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,23),I(1d,37,01,24),B(i_param ,49),I(24,00,00,00),B(boot1 ,41),I(3c,01,1f,04),I(1d,1d,3c,02),I(2a,1c,22,02),I(45,03,00,00)};
+  static const void *G007503[] = {I(aa,1b,24,00),B(i_param ,49),I(3c,01,1b,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,23),I(1d,37,01,24),B(i_param ,49),I(24,00,00,00),B(boot1 ,41),I(3c,01,1f,04),I(1d,1d,3c,02),I(2a,1c,22,02),I(45,03,00,00)};
 
   /* Byte-vector with size: 29 is_init: 0 index: 98 binding: (method-get-literal-entry) */
-  static const void *G007495[] = {I(aa,1b,24,00),B(cg_link ,29),I(3c,01,1b,24),B(cg_link ,56),I(3c,01,23,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,26),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1f,04,1f),I(03,0f,1d,26),I(00,00,00,04),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,1c,0f),I(1f,04,1c,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(sx_obj1 ,60),I(09,22,02,2a),I(1f,03,1f,06),I(1f,08,24,00),B(boot1 ,26),I(3d,03,08,45),I(08,00,00,00)};
+  static const void *G007505[] = {I(aa,1b,24,00),B(cg_link ,29),I(3c,01,1b,24),B(cg_link ,56),I(3c,01,23,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,26),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1f,04,1f),I(03,0f,1d,26),I(00,00,00,04),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,1c,0f),I(1f,04,1c,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(sx_obj1 ,60),I(09,22,02,2a),I(1f,03,1f,06),I(1f,08,24,00),B(boot1 ,26),I(3d,03,08,45),I(08,00,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 99 binding: (method-get-constant-loc) */
-  static const void *G007498[] = {I(aa,24,00,00),B(cg_link ,43),I(3c,01,76,45),I(00,00,00,00)};
+  static const void *G007508[] = {I(aa,24,00,00),B(cg_link ,43),I(3c,01,76,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 100 binding: (method-get-constant-loc) */
-  static const void *G007500[] = {I(aa,24,00,00),B(cg_link ,29),I(3d,01,00,00)};
+  static const void *G007510[] = {I(aa,24,00,00),B(cg_link ,29),I(3d,01,00,00)};
 
   /* Byte-vector with size: 447 is_init: 0 index: 108 binding: top-level */
-  static const void *G007502[] = {I(a9,24,00,00),B(table1 ,4),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,89),B(cg_link ,48),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,101),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_link ,7),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,102),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_link ,43),I(2a,86,89,00),B(cg_link ,14),I(2a,24,00,00),B(vector ,8),I(23,00,00,00),B(cg_link ,103),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_gf ,2),I(3c,03,1b,89),B(cg_link ,13),I(2a,82,89,00),B(cg_link ,42),I(2a,82,89,00),B(cg_link ,40),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,104),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_link ,29),I(2a,24,00,00),B(cg_link ,7),I(2a,24,00,00),B(cg_link ,7),I(26,00,00,00),I(00,00,00,03),I(02,83,86,24),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,7),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,105),I(23,00,00,00),B(cg_link ,100),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,7),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,7),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,7),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,105),I(23,00,00,00),B(cg_link ,99),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,7),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,43),I(2a,24,00,00),B(cg_link ,43),I(26,00,00,00),I(00,00,00,03),I(02,83,86,24),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,106),I(23,00,00,00),B(cg_link ,98),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,43),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,106),I(23,00,00,00),B(cg_link ,96),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(2a,24,00,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(fpi ,5),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,95),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(float ,6),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,93),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(character ,7),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,90),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(vector ,8),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,88),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,26),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,85),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,72),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,83),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(string ,13),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,71),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,6),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,67),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,81),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,63),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,5c,45),I(5c,00,00,00)};
+  static const void *G007512[] = {I(a9,24,00,00),B(table1 ,4),I(24,00,00,00),B(mop_gf ,2),I(3c,01,1b,89),B(cg_link ,48),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,101),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_link ,7),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,102),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_link ,43),I(2a,86,89,00),B(cg_link ,14),I(2a,24,00,00),B(vector ,8),I(23,00,00,00),B(cg_link ,103),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_gf ,2),I(3c,03,1b,89),B(cg_link ,13),I(2a,82,89,00),B(cg_link ,42),I(2a,82,89,00),B(cg_link ,40),I(2a,83,24,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,104),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_link ,29),I(2a,24,00,00),B(cg_link ,7),I(2a,24,00,00),B(cg_link ,7),I(26,00,00,00),I(00,00,00,03),I(02,83,86,24),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,7),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,105),I(23,00,00,00),B(cg_link ,100),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,7),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,7),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,7),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,105),I(23,00,00,00),B(cg_link ,99),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,7),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,43),I(2a,24,00,00),B(cg_link ,43),I(26,00,00,00),I(00,00,00,03),I(02,83,86,24),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,106),I(23,00,00,00),B(cg_link ,98),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,43),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,34),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,106),I(23,00,00,00),B(cg_link ,96),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(2a,24,00,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(fpi ,5),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,95),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(float ,6),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,93),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(character ,7),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,90),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(vector ,8),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,88),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,26),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,85),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,72),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,83),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(string ,13),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,71),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,6),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,67),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_link ,29),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,81),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(cg_link ,29),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,107),I(23,00,00,00),B(cg_link ,63),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_link ,29),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,5c,45),I(5c,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 109 binding: anonymous */
-  static const void *G007511[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G007521[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 110 binding: anonymous */
-  static const void *G007513[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G007523[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_7517, ".c", 2);
-  eul_allocate_static_string(str_7518, "~a~a~a", 6);
-  eul_allocate_static_string(str_7525, "Writing link state of module ~a", 31);
-  eul_allocate_static_string(str_7526, "  /* Declarations */\n", 21);
-  eul_allocate_static_string(str_7527, "\n  /* Code vector and literal definitions */\n", 45);
-  eul_allocate_static_string(str_7528, "\n  /* Initializations */\n", 25);
-  eul_allocate_static_string(str_7529, "\n  /* Set local bindings */\n", 28);
+  eul_allocate_static_string(str_7527, ".c", 2);
+  eul_allocate_static_string(str_7528, "~a~a~a", 6);
+  eul_allocate_static_string(str_7535, "Writing link state of module ~a", 31);
+  eul_allocate_static_string(str_7536, "  /* Declarations */\n", 21);
+  eul_allocate_static_string(str_7537, "\n  /* Code vector and literal definitions */\n", 45);
+  eul_allocate_static_string(str_7538, "\n  /* Initializations */\n", 25);
+  eul_allocate_static_string(str_7539, "\n  /* Set local bindings */\n", 28);
   /* Byte-vector with size: 153 is_init: 0 index: 124 binding: write-C-state */
-  static const void *G007515[] = {I(ab,46,01,1c),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_link ,111),I(24,00,00,00),B(string ,11),I(3c,02,1f,04),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,60),I(08,86,23,00),B(cg_link ,112),I(1d,24,00,00),B(i_param ,23),I(1f,05,24,00),B(mop_gf ,17),I(3c,05,24,00),B(stream2 ,5),I(23,00,00,00),B(cg_link ,113),I(1d,23,00,00),B(cg_link ,114),I(23,00,00,00),B(cg_link ,115),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,110),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,118),I(47,00,00,24),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,109),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,119),I(1f,0b,24,00),B(i_notify ,4),I(3c,02,2a,1f),I(0c,1f,0c,24),B(cg_link ,50),I(3c,02,2a,23),B(cg_link ,120),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0b,24,00,00),B(cg_link ,51),I(3c,01,2a,23),B(cg_link ,121),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0b,26,00,00),I(00,00,00,06),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,122),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0d,26,00,00),I(00,00,00,05),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,123),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0f,26,00,00),I(00,00,00,04),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,1f),I(11,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,1f),I(14,1f,14,24),B(cg_link ,12),I(3c,02,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(20,0e,1f,0d),I(47,00,00,24),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(0e,45,17,00)};
+  static const void *G007525[] = {I(ab,46,01,1c),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_link ,111),I(24,00,00,00),B(string ,11),I(3c,02,1f,04),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,60),I(08,86,23,00),B(cg_link ,112),I(1d,24,00,00),B(i_param ,23),I(1f,05,24,00),B(mop_gf ,17),I(3c,05,24,00),B(stream2 ,5),I(23,00,00,00),B(cg_link ,113),I(1d,23,00,00),B(cg_link ,114),I(23,00,00,00),B(cg_link ,115),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,110),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,118),I(47,00,00,24),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,109),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,119),I(1f,0b,24,00),B(i_notify ,4),I(3c,02,2a,1f),I(0c,1f,0c,24),B(cg_link ,50),I(3c,02,2a,23),B(cg_link ,120),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0b,24,00,00),B(cg_link ,51),I(3c,01,2a,23),B(cg_link ,121),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0b,26,00,00),I(00,00,00,06),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,122),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0d,26,00,00),I(00,00,00,05),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,123),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0f,26,00,00),I(00,00,00,04),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,1f),I(11,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,19),I(08,1b,24,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,27),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,1f),I(14,1f,14,24),B(cg_link ,12),I(3c,02,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(20,0e,1f,0d),I(47,00,00,24),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(0e,45,17,00)};
 
-  eul_allocate_static_string(str_7532, "  Set up bytevector: ~a", 23);
+  eul_allocate_static_string(str_7542, "  Set up bytevector: ~a", 23);
   /* Byte-vector with size: 13 is_init: 0 index: 126 binding: set-bytevector-pos */
-  static const void *G007530[] = {I(ab,23,00,00),B(cg_link ,125),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,24),B(table ,3),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(cg_link ,48),I(1f,03,1f,03),I(1f,03,3d,03),I(03,45,03,00)};
+  static const void *G007540[] = {I(ab,23,00,00),B(cg_link ,125),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,24),B(table ,3),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(cg_link ,48),I(1f,03,1f,03),I(1f,03,3d,03),I(03,45,03,00)};
 
-  eul_allocate_static_string(str_7535, "  Creating ~a.c ...", 19);
+  eul_allocate_static_string(str_7545, "  Creating ~a.c ...", 19);
   /* Byte-vector with size: 54 is_init: 0 index: 128 binding: write-C-module-file */
-  static const void *G007533[] = {I(ab,24,00,00),B(i_param ,64),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,29),I(24,00,00,00),B(i_param ,29),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0f),I(24,00,00,00),B(i_param ,7),I(22,01,1b,34),I(00,00,00,99),I(1f,03,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,127),I(1c,24,00,00),B(i_notify ,3),I(3c,02,2a,1f),I(04,1f,04,24),B(cg_link ,2),I(3c,02,2a,1f),I(04,24,00,00),B(cg_link ,21),I(3c,01,2a,1b),I(24,00,00,00),B(i_param ,24),I(50,1b,34,00),I(00,00,00,46),I(24,00,00,00),B(i_param ,29),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0f),I(24,00,00,00),B(i_param ,7),I(1b,34,00,00),I(00,00,00,17),I(1f,07,24,00),B(cg_link ,47),I(3d,01,08,32),I(00,00,00,06),I(86,22,02,32),I(00,00,00,06),I(86,22,02,32),I(00,00,00,06),I(86,45,04,00)};
+  static const void *G007543[] = {I(ab,24,00,00),B(i_param ,64),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,29),I(24,00,00,00),B(i_param ,29),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0f),I(24,00,00,00),B(i_param ,7),I(22,01,1b,34),I(00,00,00,99),I(1f,03,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,127),I(1c,24,00,00),B(i_notify ,3),I(3c,02,2a,1f),I(04,1f,04,24),B(cg_link ,2),I(3c,02,2a,1f),I(04,24,00,00),B(cg_link ,21),I(3c,01,2a,1b),I(24,00,00,00),B(i_param ,24),I(50,1b,34,00),I(00,00,00,46),I(24,00,00,00),B(i_param ,29),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0f),I(24,00,00,00),B(i_param ,7),I(1b,34,00,00),I(00,00,00,17),I(1f,07,24,00),B(cg_link ,47),I(3d,01,08,32),I(00,00,00,06),I(86,22,02,32),I(00,00,00,06),I(86,22,02,32),I(00,00,00,06),I(86,45,04,00)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 130 binding: add-initialization */
-  static const void *G007536[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,05),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,05),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
+  static const void *G007546[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,05),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,05),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
 
-  eul_allocate_static_string(str_7541, "~a", 2);
+  eul_allocate_static_string(str_7551, "~a", 2);
   /* Byte-vector with size: 92 is_init: 0 index: 136 binding: compute-bytevector-aux */
-  static const void *G007539[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,01,60),I(1c,10,1b,24),B(number ,23),I(3c,01,1b,34),I(00,00,00,15),I(1c,24,00,00),B(cg_link ,34),I(3c,01,32,00),I(00,00,01,2f),I(1c,7c,1b,34),I(00,00,00,35),I(24,00,00,00),B(cg_link ,8),I(3c,00,2a,23),B(cg_link ,131),I(1f,03,24,00),B(cg_link ,44),I(3c,02,2a,24),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(22,01,32,00),I(00,00,00,f5),I(1d,7a,1b,34),I(00,00,00,e9),I(1f,03,10,1f),I(04,11,1f,05),I(11,1b,10,1f),I(03,1f,03,1d),I(1d,23,00,00),B(cg_link ,132),I(50,1b,34,00),I(00,00,00,16),I(1c,24,00,00),B(cg_link ,20),I(3c,01,32,00),I(00,00,00,b0),I(1f,03,23,00),B(cg_link ,133),I(50,1b,34,00),I(00,00,00,16),I(1d,24,00,00),B(cg_link ,58),I(3c,01,32,00),I(00,00,00,8e),I(1f,04,23,00),B(cg_link ,134),I(50,1b,34,00),I(00,00,00,22),I(1f,04,11,1b),I(10,1f,05,1c),I(24,00,00,00),B(cg_link ,9),I(3c,02,22,02),I(32,00,00,00),I(00,00,00,62),I(1f,05,24,00),B(integer ,3),I(3c,01,1b,34),I(00,00,00,15),I(1f,0e,24,00),B(cg_link ,6),I(3c,01,32,00),I(00,00,00,3e),I(1f,06,23,00),B(cg_link ,135),I(50,1b,34,00),I(00,00,00,16),I(1f,05,24,00),B(cg_link ,18),I(3c,01,32,00),I(00,00,00,1c),I(1f,07,24,00),B(cg_link ,34),I(3c,01,2a,1f),I(05,24,00,00),B(cg_link ,34),I(3c,01,22,01),I(22,01,22,01),I(22,01,22,08),I(32,00,00,00),I(00,00,00,09),I(86,22,01,22),I(01,2a,1f,03),I(11,24,00,00),B(cg_link ,6),I(3d,01,04,22),I(02,45,02,00)};
+  static const void *G007549[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,01,60),I(1c,10,1b,24),B(number ,23),I(3c,01,1b,34),I(00,00,00,15),I(1c,24,00,00),B(cg_link ,34),I(3c,01,32,00),I(00,00,01,2f),I(1c,7c,1b,34),I(00,00,00,35),I(24,00,00,00),B(cg_link ,8),I(3c,00,2a,23),B(cg_link ,131),I(1f,03,24,00),B(cg_link ,44),I(3c,02,2a,24),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(22,01,32,00),I(00,00,00,f5),I(1d,7a,1b,34),I(00,00,00,e9),I(1f,03,10,1f),I(04,11,1f,05),I(11,1b,10,1f),I(03,1f,03,1d),I(1d,23,00,00),B(cg_link ,132),I(50,1b,34,00),I(00,00,00,16),I(1c,24,00,00),B(cg_link ,20),I(3c,01,32,00),I(00,00,00,b0),I(1f,03,23,00),B(cg_link ,133),I(50,1b,34,00),I(00,00,00,16),I(1d,24,00,00),B(cg_link ,58),I(3c,01,32,00),I(00,00,00,8e),I(1f,04,23,00),B(cg_link ,134),I(50,1b,34,00),I(00,00,00,22),I(1f,04,11,1b),I(10,1f,05,1c),I(24,00,00,00),B(cg_link ,9),I(3c,02,22,02),I(32,00,00,00),I(00,00,00,62),I(1f,05,24,00),B(integer ,3),I(3c,01,1b,34),I(00,00,00,15),I(1f,0e,24,00),B(cg_link ,6),I(3c,01,32,00),I(00,00,00,3e),I(1f,06,23,00),B(cg_link ,135),I(50,1b,34,00),I(00,00,00,16),I(1f,05,24,00),B(cg_link ,18),I(3c,01,32,00),I(00,00,00,1c),I(1f,07,24,00),B(cg_link ,34),I(3c,01,2a,1f),I(05,24,00,00),B(cg_link ,34),I(3c,01,22,01),I(22,01,22,01),I(22,01,22,08),I(32,00,00,00),I(00,00,00,09),I(86,22,01,22),I(01,2a,1f,03),I(11,24,00,00),B(cg_link ,6),I(3d,01,04,22),I(02,45,02,00)};
 
-  eul_allocate_static_string(str_7548, ",", 1);
+  eul_allocate_static_string(str_7558, ",", 1);
   /* Byte-vector with size: 13 is_init: 0 index: 138 binding: check-bv-delimiter */
-  static const void *G007546[] = {I(a9,24,00,00),B(cg_link ,14),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(cg_link ,137),I(24,00,00,00),B(cg_link ,44),I(3d,01,00,32),I(00,00,00,0d),I(87,89,00,00),B(cg_link ,14),I(45,00,00,00)};
+  static const void *G007556[] = {I(a9,24,00,00),B(cg_link ,14),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(cg_link ,137),I(24,00,00,00),B(cg_link ,44),I(3d,01,00,32),I(00,00,00,0d),I(87,89,00,00),B(cg_link ,14),I(45,00,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 139 binding: (method-G006656) */
-  static const void *G007549[] = {I(ab,86,45,02)};
+  /* Byte-vector with size: 1 is_init: 0 index: 139 binding: (method-G006666) */
+  static const void *G007559[] = {I(ab,86,45,02)};
 
-  eul_allocate_static_string(str_7553, "can't compute binding ~a of module ~a", 37);
-  /* Byte-vector with size: 19 is_init: 0 index: 142 binding: (method-G006656) */
-  static const void *G007551[] = {I(ab,24,00,00),B(i_param ,56),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,38),I(86,23,00,00),B(cg_link ,140),I(47,00,01,47),I(00,00,24,00),B(mop_gf ,17),I(3c,04,1b,24),B(i_error ,5),I(23,00,00,00),B(cg_link ,141),I(47,00,01,24),B(boot ,22),I(3d,04,03,22),I(01,45,02,00)};
+  eul_allocate_static_string(str_7563, "can't compute binding ~a of module ~a", 37);
+  /* Byte-vector with size: 19 is_init: 0 index: 142 binding: (method-G006666) */
+  static const void *G007561[] = {I(ab,24,00,00),B(i_param ,56),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,38),I(86,23,00,00),B(cg_link ,140),I(47,00,01,47),I(00,00,24,00),B(mop_gf ,17),I(3c,04,1b,24),B(i_error ,5),I(23,00,00,00),B(cg_link ,141),I(47,00,01,24),B(boot ,22),I(3d,04,03,22),I(01,45,02,00)};
 
-  eul_allocate_static_string(str_7558, "compute-binding ~a ~a", 21);
-  eul_allocate_static_string(str_7560, "set-fixed-byes ~a ~a ~a", 23);
+  eul_allocate_static_string(str_7568, "compute-binding ~a ~a", 21);
+  eul_allocate_static_string(str_7570, "set-fixed-byes ~a ~a ~a", 23);
   /* Byte-vector with size: 105 is_init: 0 index: 147 binding: compute-binding */
-  static const void *G007555[] = {I(ab,46,02,1c),I(48,00,00,1b),I(48,00,01,84),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,117),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,143),I(23,00,00,00),B(cg_link ,142),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,143),I(23,00,00,00),B(cg_link ,139),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,23),B(cg_link ,144),I(47,00,00,47),I(00,01,24,00),B(i_notify ,4),I(3c,03,2a,47),I(00,01,24,00),B(p_env ,7),I(3c,01,47,00),I(00,23,00,00),B(cg_link ,145),I(50,1b,34,00),I(00,00,00,16),I(1c,24,00,00),B(sx_obj ,16),I(3c,01,32,00),I(00,00,00,09),I(47,00,00,1d),I(83,24,00,00),B(sx_obj1 ,44),I(08,23,00,00),B(cg_link ,146),I(47,00,01,1f),I(03,1f,03,24),B(i_notify ,4),I(3c,04,2a,1c),I(1c,24,00,00),B(cg_link ,37),I(3c,02,83,24),B(dynamic ,6),I(3c,01,2a,1b),I(45,19,00,00)};
+  static const void *G007565[] = {I(ab,46,02,1c),I(48,00,00,1b),I(48,00,01,84),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,117),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,143),I(23,00,00,00),B(cg_link ,142),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,143),I(23,00,00,00),B(cg_link ,139),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,23),B(cg_link ,144),I(47,00,00,47),I(00,01,24,00),B(i_notify ,4),I(3c,03,2a,47),I(00,01,24,00),B(p_env ,7),I(3c,01,47,00),I(00,23,00,00),B(cg_link ,145),I(50,1b,34,00),I(00,00,00,16),I(1c,24,00,00),B(sx_obj ,16),I(3c,01,32,00),I(00,00,00,09),I(47,00,00,1d),I(83,24,00,00),B(sx_obj1 ,44),I(08,23,00,00),B(cg_link ,146),I(47,00,01,1f),I(03,1f,03,24),B(i_notify ,4),I(3c,04,2a,1c),I(1c,24,00,00),B(cg_link ,37),I(3c,02,83,24),B(dynamic ,6),I(3c,01,2a,1b),I(45,19,00,00)};
 
-  eul_allocate_static_string(str_7564, "ff_stub_", 8);
-  eul_allocate_static_string(str_7565, "ff binding ~a: index ~a", 23);
-  eul_allocate_static_string(str_7566, "(LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ", 56);
+  eul_allocate_static_string(str_7574, "ff_stub_", 8);
+  eul_allocate_static_string(str_7575, "ff binding ~a: index ~a", 23);
+  eul_allocate_static_string(str_7576, "(LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ", 56);
   /* Byte-vector with size: 38 is_init: 0 index: 152 binding: anonymous */
-  static const void *G007561[] = {I(aa,1b,23,00),B(cg_link ,148),I(24,00,00,00),B(sx_node ,19),I(3c,02,1b,76),I(1b,24,00,00),B(symbol ,6),I(3c,01,1b,82),I(02,23,00,00),B(cg_link ,149),I(1c,24,00,00),B(string ,11),I(3c,02,1f,04),I(75,1f,04,1d),I(0f,8f,2a,24),B(cg_link ,19),I(3c,00,1f,06),I(1c,1c,83,1d),I(24,00,00,00),B(sx_obj1 ,44),I(09,22,02,2a),I(24,00,00,00),B(cg_link ,19),I(3c,00,23,00),B(cg_link ,150),I(1f,06,1d,24),B(i_notify ,4),I(3c,03,2a,1d),I(24,00,00,00),B(cg_link ,17),I(3c,01,23,00),B(cg_link ,151),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(cg_link ,56),I(3d,01,09,45),I(09,00,00,00)};
+  static const void *G007571[] = {I(aa,1b,23,00),B(cg_link ,148),I(24,00,00,00),B(sx_node ,19),I(3c,02,1b,76),I(1b,24,00,00),B(symbol ,6),I(3c,01,1b,82),I(02,23,00,00),B(cg_link ,149),I(1c,24,00,00),B(string ,11),I(3c,02,1f,04),I(75,1f,04,1d),I(0f,8f,2a,24),B(cg_link ,19),I(3c,00,1f,06),I(1c,1c,83,1d),I(24,00,00,00),B(sx_obj1 ,44),I(09,22,02,2a),I(24,00,00,00),B(cg_link ,19),I(3c,00,23,00),B(cg_link ,150),I(1f,06,1d,24),B(i_notify ,4),I(3c,03,2a,1d),I(24,00,00,00),B(cg_link ,17),I(3c,01,23,00),B(cg_link ,151),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(cg_link ,56),I(3d,01,09,45),I(09,00,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 153 binding: set-up-foreign-functions */
-  static const void *G007567[] = {I(aa,26,00,00),I(00,00,00,07),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,152),I(3b,01,1c,24),B(boot ,4),I(3d,02,01,00)};
+  static const void *G007577[] = {I(aa,26,00,00),I(00,00,00,07),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,152),I(3b,01,1c,24),B(boot ,4),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_7572, "", 0);
-  eul_allocate_static_cons(cons_7571, eul_as_static(str_7572), NULL);
+  eul_allocate_static_string(str_7582, "", 0);
+  eul_allocate_static_cons(cons_7581, eul_as_static(str_7582), NULL);
   /* Byte-vector with size: 9 is_init: 0 index: 155 binding: reset-code-vector-str */
-  static const void *G007569[] = {I(a9,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,154),I(1c,83,1d,24),B(cg_state ,19),I(09,45,02,00)};
+  static const void *G007579[] = {I(a9,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,154),I(1c,83,1d,24),B(cg_state ,19),I(09,45,02,00)};
 
-  eul_allocate_static_string(str_7575, "\n  }\n}", 6);
-  eul_allocate_static_string(str_7576, "\n\n\n/* eof */\n", 13);
+  eul_allocate_static_string(str_7585, "\n  }\n}", 6);
+  eul_allocate_static_string(str_7586, "\n\n\n/* eof */\n", 13);
   /* Byte-vector with size: 13 is_init: 0 index: 158 binding: write-C-file-end */
-  static const void *G007573[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,2a,23,00),B(cg_link ,156),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,157),I(24,00,00,00),B(cg_link ,27),I(3d,01,02,00)};
+  static const void *G007583[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,2a,23,00),B(cg_link ,156),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,157),I(24,00,00,00),B(cg_link ,27),I(3d,01,02,00)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 159 binding: add-statement */
-  static const void *G007577[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,03),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
+  static const void *G007587[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,03),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 160 binding: add-code-vector-def */
-  static const void *G007579[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,06),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,06),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
+  static const void *G007589[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,06),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,06),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
 
-  eul_allocate_static_string(str_7583, "~a_X~a", 6);
+  eul_allocate_static_string(str_7593, "~a_X~a", 6);
   /* Byte-vector with size: 55 is_init: 0 index: 162 binding: anonymous */
-  static const void *G007581[] = {I(ab,1c,47,00),I(02,19,1b,34),I(00,00,00,0d),I(1c,32,00,00),I(00,00,00,cd),I(47,00,01,1f),I(03,0b,1b,27),I(2d,50,1b,34),I(00,00,00,25),I(47,00,03,1f),I(05,27,5f,0c),I(2a,1f,04,83),I(14,1b,1f,05),I(47,00,00,3d),I(02,06,22,01),I(32,00,00,00),I(00,00,00,9c),I(1c,27,5f,50),I(1b,34,00,00),I(00,00,00,27),I(47,00,03,1f),I(06,27,5f,0c),I(2a,1f,05,83),I(14,1b,1f,06),I(47,00,00,3d),I(02,07,22,01),I(32,00,00,00),I(00,00,00,6e),I(1d,24,00,00),B(character ,10),I(3c,01,12,1b),I(34,00,00,00),I(00,00,00,40),I(47,00,03,1f),I(07,27,5f,0c),I(2a,1f,06,83),I(14,1f,04,62),I(86,23,00,00),B(cg_link ,161),I(1f,09,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3c,04,1d,1c),I(47,00,00,3d),I(02,0a,22,03),I(32,00,00,00),I(00,00,00,20),I(47,00,03,1f),I(07,1f,05,0c),I(2a,1f,06,83),I(14,1b,1f,07),I(47,00,00,3d),I(02,08,22,01),I(22,01,22,01),I(22,02,45,03)};
+  static const void *G007591[] = {I(ab,1c,47,00),I(02,19,1b,34),I(00,00,00,0d),I(1c,32,00,00),I(00,00,00,cd),I(47,00,01,1f),I(03,0b,1b,27),I(2d,50,1b,34),I(00,00,00,25),I(47,00,03,1f),I(05,27,5f,0c),I(2a,1f,04,83),I(14,1b,1f,05),I(47,00,00,3d),I(02,06,22,01),I(32,00,00,00),I(00,00,00,9c),I(1c,27,5f,50),I(1b,34,00,00),I(00,00,00,27),I(47,00,03,1f),I(06,27,5f,0c),I(2a,1f,05,83),I(14,1b,1f,06),I(47,00,00,3d),I(02,07,22,01),I(32,00,00,00),I(00,00,00,6e),I(1d,24,00,00),B(character ,10),I(3c,01,12,1b),I(34,00,00,00),I(00,00,00,40),I(47,00,03,1f),I(07,27,5f,0c),I(2a,1f,06,83),I(14,1f,04,62),I(86,23,00,00),B(cg_link ,161),I(1f,09,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3c,04,1d,1c),I(47,00,00,3d),I(02,0a,22,03),I(32,00,00,00),I(00,00,00,20),I(47,00,03,1f),I(07,1f,05,0c),I(2a,1f,06,83),I(14,1b,1f,07),I(47,00,00,3d),I(02,08,22,01),I(22,01,22,01),I(22,02,45,03)};
 
-  eul_allocate_static_string(str_7586, "~a", 2);
-  eul_allocate_static_string(str_7587, "", 0);
+  eul_allocate_static_string(str_7596, "~a", 2);
+  eul_allocate_static_string(str_7597, "", 0);
   /* Byte-vector with size: 29 is_init: 0 index: 165 binding: as-C-string */
-  static const void *G007584[] = {I(aa,46,05,86),I(23,00,00,00),B(cg_link ,163),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,1b,48),I(00,01,47,00),I(01,06,1b,48),I(00,02,24,00),B(string ,13),I(23,00,00,00),B(cg_link ,103),I(47,00,02,24),B(mop_gf ,2),I(3c,03,1b,48),I(00,03,86,1b),I(48,00,00,23),B(cg_link ,117),I(23,00,00,00),B(cg_link ,162),I(3b,02,48,00),I(00,82,23,00),B(cg_link ,164),I(47,00,00,3c),I(02,47,00,03),I(1c,24,00,00),B(string ,11),I(3d,02,06,45),I(06,00,00,00)};
+  static const void *G007594[] = {I(aa,46,05,86),I(23,00,00,00),B(cg_link ,163),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,1b,48),I(00,01,47,00),I(01,06,1b,48),I(00,02,24,00),B(string ,13),I(23,00,00,00),B(cg_link ,103),I(47,00,02,24),B(mop_gf ,2),I(3c,03,1b,48),I(00,03,86,1b),I(48,00,00,23),B(cg_link ,117),I(23,00,00,00),B(cg_link ,162),I(3b,02,48,00),I(00,82,23,00),B(cg_link ,164),I(47,00,00,3c),I(02,47,00,03),I(1c,24,00,00),B(string ,11),I(3d,02,06,45),I(06,00,00,00)};
 
-  eul_allocate_static_string(str_7590, "body of inlined function contains non exported binding ~a", 57);
+  eul_allocate_static_string(str_7600, "body of inlined function contains non exported binding ~a", 57);
   /* Byte-vector with size: 18 is_init: 0 index: 167 binding: compute-foreign-function-binding */
-  static const void *G007588[] = {I(aa,1b,24,00),B(p_env ,7),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,19),I(85,23,00,00),B(cg_link ,166),I(1f,03,24,00),B(i_error ,4),I(3c,03,1b,24),B(sx_node ,27),I(3c,01,1c,83),I(24,00,00,00),B(sx_obj1 ,44),I(08,24,00,00),B(cg_link ,37),I(3d,02,03,00)};
+  static const void *G007598[] = {I(aa,1b,24,00),B(p_env ,7),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,19),I(85,23,00,00),B(cg_link ,166),I(1f,03,24,00),B(i_error ,4),I(3c,03,1b,24),B(sx_node ,27),I(3c,01,1c,83),I(24,00,00,00),B(sx_obj1 ,44),I(08,24,00,00),B(cg_link ,37),I(3d,02,03,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 168 binding: global-index */
-  static const void *G007591[] = {I(a9,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,82,24),B(cg_state ,19),I(08,45,00,00)};
+  static const void *G007601[] = {I(a9,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,82,24),B(cg_state ,19),I(08,45,00,00)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 169 binding: compute-code-vector */
-  static const void *G007593[] = {I(aa,23,00,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,24,00),B(cg_link ,57),I(3c,01,24,00),B(cg_link ,37),I(3d,02,01,00)};
+  static const void *G007603[] = {I(aa,23,00,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,24,00),B(cg_link ,57),I(3c,01,24,00),B(cg_link ,37),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_7597, "#define ~a_fn_index ~a \n", 24);
+  eul_allocate_static_string(str_7607, "#define ~a_fn_index ~a \n", 24);
   /* Byte-vector with size: 15 is_init: 0 index: 171 binding: anonymous */
-  static const void *G007595[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1b,24,00),B(cg_link ,17),I(3c,01,1d,83),I(24,00,00,00),B(sx_obj1 ,44),I(08,23,00,00),B(cg_link ,170),I(1d,1d,24,00),B(cg_link ,27),I(3d,03,05,45),I(05,00,00,00)};
+  static const void *G007605[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1b,24,00),B(cg_link ,17),I(3c,01,1d,83),I(24,00,00,00),B(sx_obj1 ,44),I(08,23,00,00),B(cg_link ,170),I(1d,1d,24,00),B(cg_link ,27),I(3d,03,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 172 binding: anonymous */
-  static const void *G007598[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G007608[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 173 binding: anonymous */
-  static const void *G007600[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G007610[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_7604, ".h", 2);
-  eul_allocate_static_string(str_7605, "~a~a~a", 6);
-  eul_allocate_static_string(str_7606, "  Creating ~a ...", 17);
-  eul_allocate_static_string(str_7607, "C include file", 14);
-  eul_allocate_static_string(str_7608, "extern LispRef ~a_bindings[];\n\n", 31);
-  eul_allocate_static_string(str_7609, "/* Module binding indices */\n", 29);
-  eul_allocate_static_string(str_7610, "\n\n\n/* eof */\n", 13);
+  eul_allocate_static_string(str_7614, ".h", 2);
+  eul_allocate_static_string(str_7615, "~a~a~a", 6);
+  eul_allocate_static_string(str_7616, "  Creating ~a ...", 17);
+  eul_allocate_static_string(str_7617, "C include file", 14);
+  eul_allocate_static_string(str_7618, "extern LispRef ~a_bindings[];\n\n", 31);
+  eul_allocate_static_string(str_7619, "/* Module binding indices */\n", 29);
+  eul_allocate_static_string(str_7620, "\n\n\n/* eof */\n", 13);
   /* Byte-vector with size: 114 is_init: 0 index: 181 binding: write-C-include-file */
-  static const void *G007602[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,41,00),B(cg_dld ,14),I(22,01,1c,7d),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,23),B(cg_link ,174),I(24,00,00,00),B(string ,11),I(3c,02,1f,04),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,60),I(08,86,23,00),B(cg_link ,175),I(1d,24,00,00),B(i_param ,23),I(1f,05,24,00),B(mop_gf ,17),I(3c,05,24,00),B(stream2 ,5),I(23,00,00,00),B(cg_link ,113),I(1d,23,00,00),B(cg_link ,114),I(23,00,00,00),B(cg_link ,115),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,173),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,118),I(47,00,00,24),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,172),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,176),I(1f,09,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(0b,23,00,00),B(cg_link ,177),I(24,00,00,00),B(cg_link ,59),I(3c,02,2a,23),B(cg_link ,178),I(1f,0b,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,179),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0c,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,171),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,23),B(cg_link ,180),I(24,00,00,00),B(cg_link ,27),I(3c,01,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(20,07,1f,06),I(47,00,00,24),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(07,45,10,00)};
+  static const void *G007612[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,41,00),B(cg_dld ,14),I(22,01,1c,7d),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,23),B(cg_link ,174),I(24,00,00,00),B(string ,11),I(3c,02,1f,04),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,60),I(08,86,23,00),B(cg_link ,175),I(1d,24,00,00),B(i_param ,23),I(1f,05,24,00),B(mop_gf ,17),I(3c,05,24,00),B(stream2 ,5),I(23,00,00,00),B(cg_link ,113),I(1d,23,00,00),B(cg_link ,114),I(23,00,00,00),B(cg_link ,115),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,173),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,118),I(47,00,00,24),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,172),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,176),I(1f,09,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(0b,23,00,00),B(cg_link ,177),I(24,00,00,00),B(cg_link ,59),I(3c,02,2a,23),B(cg_link ,178),I(1f,0b,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,179),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(0c,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,171),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,23),B(cg_link ,180),I(24,00,00,00),B(cg_link ,27),I(3c,01,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(20,07,1f,06),I(47,00,00,24),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(07,45,10,00)};
 
-  eul_allocate_static_string(str_7613, "B(~a ,0)", 8);
-  eul_allocate_static_string(str_7614, "B(~a ,1)", 8);
+  eul_allocate_static_string(str_7623, "B(~a ,0)", 8);
+  eul_allocate_static_string(str_7624, "B(~a ,1)", 8);
   /* Byte-vector with size: 45 is_init: 0 index: 184 binding: wrap-init-code-aux */
-  static const void *G007611[] = {I(ab,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(1d,32,00,00),I(00,00,00,a4),I(1c,10,41,00),B(cg_dld ,14),I(22,01,86,23),B(cg_link ,182),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,86,23),B(cg_link ,183),I(1f,03,24,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,1d,24),B(cg_link ,30),I(3c,01,2a,83),I(1f,06,0f,26),I(00,00,00,21),I(1c,0f,82,1c),I(0f,26,00,00),I(00,00,00,3c),I(1c,0f,1f,05),I(1c,0f,82,1c),I(0f,26,00,00),I(00,00,00,24),I(1c,0f,26,00),I(00,00,00,0b),I(1c,0f,26,00),I(00,00,00,3e),I(1c,0f,1f,09),I(1c,0f,82,1c),I(0f,82,1c,0f),I(82,1c,0f,26),I(00,00,00,24),I(1c,0f,1f,12),I(11,24,00,00),B(cg_link ,22),I(3d,02,13,22),I(10,45,03,00)};
+  static const void *G007621[] = {I(ab,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(1d,32,00,00),I(00,00,00,a4),I(1c,10,41,00),B(cg_dld ,14),I(22,01,86,23),B(cg_link ,182),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,86,23),B(cg_link ,183),I(1f,03,24,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,1d,24),B(cg_link ,30),I(3c,01,2a,83),I(1f,06,0f,26),I(00,00,00,21),I(1c,0f,82,1c),I(0f,26,00,00),I(00,00,00,3c),I(1c,0f,1f,05),I(1c,0f,82,1c),I(0f,26,00,00),I(00,00,00,24),I(1c,0f,26,00),I(00,00,00,0b),I(1c,0f,26,00),I(00,00,00,3e),I(1c,0f,1f,09),I(1c,0f,82,1c),I(0f,82,1c,0f),I(82,1c,0f,26),I(00,00,00,24),I(1c,0f,1f,12),I(11,24,00,00),B(cg_link ,22),I(3d,02,13,22),I(10,45,03,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 185 binding: anonymous */
-  static const void *G007615[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G007625[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 186 binding: (method-G006487) */
-  static const void *G007617[] = {I(ab,86,45,02)};
+  /* Byte-vector with size: 1 is_init: 0 index: 186 binding: (method-G006497) */
+  static const void *G007627[] = {I(ab,86,45,02)};
 
-  eul_allocate_static_string(str_7621, "decoder error", 13);
-  /* Byte-vector with size: 16 is_init: 0 index: 188 binding: (method-G006487) */
-  static const void *G007619[] = {I(ab,24,00,00),B(i_param ,56),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_link ,187),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_link ,141),I(47,00,00,24),B(boot ,22),I(3d,04,02,45),I(02,00,00,00)};
+  eul_allocate_static_string(str_7631, "decoder error", 13);
+  /* Byte-vector with size: 16 is_init: 0 index: 188 binding: (method-G006497) */
+  static const void *G007629[] = {I(ab,24,00,00),B(i_param ,56),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_link ,187),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_link ,141),I(47,00,00,24),B(boot ,22),I(3d,04,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 128 is_init: 0 index: 191 binding: decode */
-  static const void *G007622[] = {I(ab,46,01,1c),I(48,00,00,84),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,117),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,189),I(23,00,00,00),B(cg_link ,188),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,189),I(23,00,00,00),B(cg_link ,186),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,23),B(cg_link ,190),I(89,00,00,00),B(i_param ,60),I(2a,47,00,00),I(24,00,00,00),B(cg_link ,31),I(3c,01,2a,1f),I(12,82,24,00),B(cg_state ,3),I(08,1f,13,83),I(24,00,00,00),B(cg_state ,3),I(08,24,00,00),B(cg_state ,47),I(3c,00,23,00),B(cg_link ,129),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,185),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(cg_link ,33),I(3c,01,2a,47),I(00,00,24,00),B(cg_link ,10),I(3c,01,2a,1f),I(04,24,00,00),B(cg_link ,54),I(3c,01,2a,1f),I(03,47,00,00),I(24,00,00,00),B(cg_link ,38),I(3c,02,2a,1d),I(83,24,00,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(83,24,00,00),B(dynamic ,6),I(3c,01,2a,1b),I(45,1b,00,00)};
+  static const void *G007632[] = {I(ab,46,01,1c),I(48,00,00,84),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(cg_link ,117),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,189),I(23,00,00,00),B(cg_link ,188),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_link ,189),I(23,00,00,00),B(cg_link ,186),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,23),B(cg_link ,190),I(89,00,00,00),B(i_param ,60),I(2a,47,00,00),I(24,00,00,00),B(cg_link ,31),I(3c,01,2a,1f),I(12,82,24,00),B(cg_state ,3),I(08,1f,13,83),I(24,00,00,00),B(cg_state ,3),I(08,24,00,00),B(cg_state ,47),I(3c,00,23,00),B(cg_link ,129),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,185),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(cg_link ,33),I(3c,01,2a,47),I(00,00,24,00),B(cg_link ,10),I(3c,01,2a,1f),I(04,24,00,00),B(cg_link ,54),I(3c,01,2a,1f),I(03,47,00,00),I(24,00,00,00),B(cg_link ,38),I(3c,02,2a,1d),I(83,24,00,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(83,24,00,00),B(dynamic ,6),I(3c,01,2a,1b),I(45,1b,00,00)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 192 binding: add-global */
-  static const void *G007626[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,04),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
+  static const void *G007636[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(86,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3c,04,1c,26),I(00,00,00,04),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(cg_state ,19),I(09,45,08,00)};
 
-  eul_allocate_static_string(str_7630, "00", 2);
-  eul_allocate_static_string(str_7631, "too many top-level forms after macro expansion", 46);
+  eul_allocate_static_string(str_7640, "00", 2);
+  eul_allocate_static_string(str_7641, "too many top-level forms after macro expansion", 46);
   /* Byte-vector with size: 14 is_init: 0 index: 195 binding: as-hex */
-  static const void *G007628[] = {I(aa,41,00,00),B(cg_link ,60),I(22,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,22),I(23,00,00,00),B(cg_link ,193),I(23,00,00,00),B(cg_link ,194),I(24,00,00,00),B(i_error ,4),I(3d,02,01,45),I(01,00,00,00)};
+  static const void *G007638[] = {I(aa,41,00,00),B(cg_link ,60),I(22,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,22),I(23,00,00,00),B(cg_link ,193),I(23,00,00,00),B(cg_link ,194),I(24,00,00,00),B(i_error ,4),I(3d,02,01,45),I(01,00,00,00)};
 
-  eul_allocate_static_string(str_7634, ", FF_ARG_CONVERT~a(~a)", 22);
+  eul_allocate_static_string(str_7644, ", FF_ARG_CONVERT~a(~a)", 22);
   /* Byte-vector with size: 15 is_init: 0 index: 197 binding: anonymous */
-  static const void *G007632[] = {I(ab,1c,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2c),I(1d,10,1d,10),I(23,00,00,00),B(cg_link ,196),I(1c,1f,03,24),B(cg_link ,27),I(3c,03,2a,1f),I(04,11,1f,04),I(11,47,00,00),I(3d,02,05,22),I(02,45,03,00)};
+  static const void *G007642[] = {I(ab,1c,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2c),I(1d,10,1d,10),I(23,00,00,00),B(cg_link ,196),I(1c,1f,03,24),B(cg_link ,27),I(3c,03,2a,1f),I(04,11,1f,04),I(11,47,00,00),I(3d,02,05,22),I(02,45,03,00)};
 
-  eul_allocate_static_string(str_7637, "  POPVAL1(~a);\n", 15);
+  eul_allocate_static_string(str_7647, "  POPVAL1(~a);\n", 15);
   /* Byte-vector with size: 5 is_init: 0 index: 199 binding: anonymous */
-  static const void *G007635[] = {I(aa,23,00,00),B(cg_link ,198),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
+  static const void *G007645[] = {I(aa,23,00,00),B(cg_link ,198),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_7640, "~a, ", 4);
+  eul_allocate_static_string(str_7650, "~a, ", 4);
   /* Byte-vector with size: 5 is_init: 0 index: 201 binding: anonymous */
-  static const void *G007638[] = {I(aa,86,23,00),B(cg_link ,200),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,01,00)};
+  static const void *G007648[] = {I(aa,86,23,00),B(cg_link ,200),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,01,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 202 binding: anonymous */
-  static const void *G007641[] = {I(aa,24,00,00),B(symbol ,6),I(3d,00,01,00)};
+  static const void *G007651[] = {I(aa,24,00,00),B(symbol ,6),I(3d,00,01,00)};
 
-  eul_allocate_static_string(str_7645, "", 0);
-  eul_allocate_static_string(str_7646, "static LispRef ~a (", 19);
-  eul_allocate_static_string(str_7647, "Stack *reg_value_stack, ", 24);
-  eul_allocate_static_string(str_7648, "LispRef *sreg_value_sp, ", 24);
-  eul_allocate_static_string(str_7649, "LispRef *sreg_value_sb)\n{\n", 26);
-  eul_allocate_static_string(str_7650, "  LispRef ~ares;\n\n", 18);
-  eul_allocate_static_string(str_7651, "", 0);
-  eul_allocate_static_string(str_7652, "FF_ARG_CONVERT~a(~a)", 20);
-  eul_allocate_static_string(str_7653, "  FF_RES_CONVERT~a(res,~a(~a", 28);
-  eul_allocate_static_string(str_7654, "", 0);
-  eul_allocate_static_string(str_7655, "));\n", 4);
-  eul_allocate_static_string(str_7656, "  return res;\n", 14);
-  eul_allocate_static_string(str_7657, "}\n\n", 3);
+  eul_allocate_static_string(str_7655, "", 0);
+  eul_allocate_static_string(str_7656, "static LispRef ~a (", 19);
+  eul_allocate_static_string(str_7657, "Stack *reg_value_stack, ", 24);
+  eul_allocate_static_string(str_7658, "LispRef *sreg_value_sp, ", 24);
+  eul_allocate_static_string(str_7659, "LispRef *sreg_value_sb)\n{\n", 26);
+  eul_allocate_static_string(str_7660, "  LispRef ~ares;\n\n", 18);
+  eul_allocate_static_string(str_7661, "", 0);
+  eul_allocate_static_string(str_7662, "FF_ARG_CONVERT~a(~a)", 20);
+  eul_allocate_static_string(str_7663, "  FF_RES_CONVERT~a(res,~a(~a", 28);
+  eul_allocate_static_string(str_7664, "", 0);
+  eul_allocate_static_string(str_7665, "));\n", 4);
+  eul_allocate_static_string(str_7666, "  return res;\n", 14);
+  eul_allocate_static_string(str_7667, "}\n\n", 3);
   /* Byte-vector with size: 109 is_init: 0 index: 216 binding: write-ff-stub-to-C-file */
-  static const void *G007643[] = {I(aa,46,03,23),B(cg_link ,148),I(24,00,00,00),B(sx_node ,19),I(3c,02,1b,10),I(1c,73,1d,76),I(1b,10,1c,11),I(23,00,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,202),I(3b,01,1f,05),I(24,00,00,00),B(boot ,15),I(3c,02,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,201),I(3b,01,1c,24),B(boot ,15),I(3c,02,1b,12),I(1b,34,00,00),I(00,00,00,17),I(23,00,00,00),B(cg_link ,203),I(32,00,00,00),I(00,00,00,1a),I(24,00,00,00),B(collect ,19),I(1d,24,00,00),B(boot ,9),I(3c,02,23,00),B(cg_link ,204),I(1f,05,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,205),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,206),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,207),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,208),I(1c,24,00,00),B(cg_link ,27),I(3c,02,2a,1f),I(03,24,00,00),B(boot ,24),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,199),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,1f),I(04,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_link ,209),I(32,00,00,00),I(00,00,00,24),I(1f,0a,10,1f),I(06,10,86,23),B(cg_link ,210),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3c,04,22,02),I(23,00,00,00),B(cg_link ,211),I(1f,0b,1f,0a),I(1f,03,24,00),B(cg_link ,27),I(3c,04,2a,86),I(1b,48,00,00),I(23,00,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,197),I(3b,02,48,00),I(00,1f,07,12),I(1b,34,00,00),I(00,00,00,17),I(23,00,00,00),B(cg_link ,212),I(32,00,00,00),I(00,00,00,13),I(1f,08,11,1f),I(0e,11,47,00),I(00,3c,02,2a),I(23,00,00,00),B(cg_link ,213),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,214),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,215),I(24,00,00,00),B(cg_link ,27),I(3d,01,0f,00)};
+  static const void *G007653[] = {I(aa,46,03,23),B(cg_link ,148),I(24,00,00,00),B(sx_node ,19),I(3c,02,1b,10),I(1c,73,1d,76),I(1b,10,1c,11),I(23,00,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,202),I(3b,01,1f,05),I(24,00,00,00),B(boot ,15),I(3c,02,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,201),I(3b,01,1c,24),B(boot ,15),I(3c,02,1b,12),I(1b,34,00,00),I(00,00,00,17),I(23,00,00,00),B(cg_link ,203),I(32,00,00,00),I(00,00,00,1a),I(24,00,00,00),B(collect ,19),I(1d,24,00,00),B(boot ,9),I(3c,02,23,00),B(cg_link ,204),I(1f,05,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,205),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,206),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,207),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,208),I(1c,24,00,00),B(cg_link ,27),I(3c,02,2a,1f),I(03,24,00,00),B(boot ,24),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,199),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,1f),I(04,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_link ,209),I(32,00,00,00),I(00,00,00,24),I(1f,0a,10,1f),I(06,10,86,23),B(cg_link ,210),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3c,04,22,02),I(23,00,00,00),B(cg_link ,211),I(1f,0b,1f,0a),I(1f,03,24,00),B(cg_link ,27),I(3c,04,2a,86),I(1b,48,00,00),I(23,00,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,197),I(3b,02,48,00),I(00,1f,07,12),I(1b,34,00,00),I(00,00,00,17),I(23,00,00,00),B(cg_link ,212),I(32,00,00,00),I(00,00,00,13),I(1f,08,11,1f),I(0e,11,47,00),I(00,3c,02,2a),I(23,00,00,00),B(cg_link ,213),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,214),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,215),I(24,00,00,00),B(cg_link ,27),I(3d,01,0f,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 217 binding: write-to-C-file */
-  static const void *G007658[] = {I(43,fe,23,00),B(cg_link ,118),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(1c,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3d,04,03,45),I(03,00,00,00)};
+  static const void *G007668[] = {I(43,fe,23,00),B(cg_link ,118),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(mop_gf ,17),I(1c,1f,04,1f),I(04,24,00,00),B(boot ,9),I(3d,04,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 218 binding: open-bytevector */
-  static const void *G007660[] = {I(a9,24,00,00),B(cg_link ,11),I(3c,00,2a,82),I(89,00,00,00),B(cg_link ,40),I(45,00,00,00)};
+  static const void *G007670[] = {I(a9,24,00,00),B(cg_link ,11),I(3c,00,2a,82),I(89,00,00,00),B(cg_link ,40),I(45,00,00,00)};
 
-  eul_allocate_static_string(str_7664, "~a", 2);
+  eul_allocate_static_string(str_7674, "~a", 2);
   /* Byte-vector with size: 41 is_init: 0 index: 220 binding: add-used-module-name */
-  static const void *G007662[] = {I(aa,23,00,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,86,23),B(cg_link ,219),I(1f,04,24,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,1c,84),I(24,00,00,00),B(cg_state ,19),I(08,1f,03,41),B(cg_dld ,14),I(22,01,1b,41),B(boot1 ,52),I(22,01,1b,1f),I(04,50,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0d),I(1f,04,1f,04),I(86,6c,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,1a),I(1f,05,1f,05),I(0f,1f,07,1c),I(1c,84,1d,24),B(cg_state ,19),I(09,22,03,45),I(09,00,00,00)};
+  static const void *G007672[] = {I(aa,23,00,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,86,23),B(cg_link ,219),I(1f,04,24,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,1c,84),I(24,00,00,00),B(cg_state ,19),I(08,1f,03,41),B(cg_dld ,14),I(22,01,1b,41),B(boot1 ,52),I(22,01,1b,1f),I(04,50,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0d),I(1f,04,1f,04),I(86,6c,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,1a),I(1f,05,1f,05),I(0f,1f,07,1c),I(1c,84,1d,24),B(cg_state ,19),I(09,22,03,45),I(09,00,00,00)};
 
-  eul_allocate_static_string(str_7667, "  Reset decoder ...", 19);
+  eul_allocate_static_string(str_7677, "  Reset decoder ...", 19);
   /* Byte-vector with size: 24 is_init: 0 index: 223 binding: reset-decoder */
-  static const void *G007665[] = {I(aa,26,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,2a,23,00),B(cg_link ,221),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,86),I(89,00,00,00),B(cg_link ,14),I(2a,23,00,00),B(cg_link ,222),I(24,00,00,00),B(compare ,7),I(24,00,00,00),B(aux_table ,3),I(3c,02,1b,89),B(i_param ,49),I(2a,24,00,00),B(cg_link ,48),I(24,00,00,00),B(table1 ,9),I(3d,01,01,00)};
+  static const void *G007675[] = {I(aa,26,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,2a,23,00),B(cg_link ,221),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,86),I(89,00,00,00),B(cg_link ,14),I(2a,23,00,00),B(cg_link ,222),I(24,00,00,00),B(compare ,7),I(24,00,00,00),B(aux_table ,3),I(3c,02,1b,89),B(i_param ,49),I(2a,24,00,00),B(cg_link ,48),I(24,00,00,00),B(table1 ,9),I(3d,01,01,00)};
 
-  eul_allocate_static_string(str_7671, "  initialize_module_~a();\n", 26);
+  eul_allocate_static_string(str_7681, "  initialize_module_~a();\n", 26);
   /* Byte-vector with size: 7 is_init: 0 index: 225 binding: anonymous */
-  static const void *G007669[] = {I(aa,41,00,00),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,224),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
+  static const void *G007679[] = {I(aa,41,00,00),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,224),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 226 binding: initialize-imported-modules */
-  static const void *G007672[] = {I(a9,23,00,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,225),I(3b,01,1c,24),B(boot ,4),I(3d,02,01,45),I(01,00,00,00)};
+  static const void *G007682[] = {I(a9,23,00,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,225),I(3b,01,1c,24),B(boot ,4),I(3d,02,01,45),I(01,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 227 binding: anonymous */
-  static const void *G007674[] = {I(aa,24,00,00),B(cg_link ,19),I(3c,00,1c,1c),I(1c,83,1d,24),B(sx_obj1 ,44),I(09,22,02,2a),I(1b,83,14,24),B(cg_link ,52),I(3d,01,02,45),I(02,00,00,00)};
+  static const void *G007684[] = {I(aa,24,00,00),B(cg_link ,19),I(3c,00,1c,1c),I(1c,83,1d,24),B(sx_obj1 ,44),I(09,22,02,2a),I(1b,83,14,24),B(cg_link ,52),I(3d,01,02,45),I(02,00,00,00)};
 
-  eul_allocate_static_string(str_7678, "  {\n    int i;\n", 15);
-  eul_allocate_static_string(str_7679, "    for (i = ~a; i < ~a; i++)\n", 30);
-  eul_allocate_static_string(str_7680, "      ~a_bindings[i] = eul_nil;\n", 32);
-  eul_allocate_static_string(str_7681, "  }\n\n", 5);
+  eul_allocate_static_string(str_7688, "  {\n    int i;\n", 15);
+  eul_allocate_static_string(str_7689, "    for (i = ~a; i < ~a; i++)\n", 30);
+  eul_allocate_static_string(str_7690, "      ~a_bindings[i] = eul_nil;\n", 32);
+  eul_allocate_static_string(str_7691, "  }\n\n", 5);
   /* Byte-vector with size: 52 is_init: 0 index: 232 binding: set-up-bindings */
-  static const void *G007676[] = {I(aa,1b,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,41,00,00),B(cg_dld ,14),I(22,01,1c,26),I(00,00,00,10),I(24,00,00,00),B(sx_obj1 ,60),I(08,24,00,00),B(aux_table ,8),I(3c,01,24,00),B(sx_node ,21),I(1c,24,00,00),B(list ,26),I(3c,02,1b,24),B(boot ,8),I(3c,01,82,1c),I(1a,1b,34,00),I(00,00,00,7e),I(24,00,00,00),B(cg_link ,19),I(3c,00,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,227),I(3b,01,1f,04),I(24,00,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,228),I(24,00,00,00),B(cg_link ,24),I(3c,01,2a,24),B(cg_link ,19),I(3c,00,23,00),B(cg_link ,229),I(1d,1d,24,00),B(cg_link ,24),I(3c,03,2a,23),B(cg_link ,230),I(1f,07,24,00),B(cg_link ,24),I(3c,02,2a,23),B(cg_link ,231),I(24,00,00,00),B(cg_link ,24),I(3d,01,08,22),I(02,32,00,00),I(00,00,00,08),I(86,45,06,00)};
+  static const void *G007686[] = {I(aa,1b,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,41,00,00),B(cg_dld ,14),I(22,01,1c,26),I(00,00,00,10),I(24,00,00,00),B(sx_obj1 ,60),I(08,24,00,00),B(aux_table ,8),I(3c,01,24,00),B(sx_node ,21),I(1c,24,00,00),B(list ,26),I(3c,02,1b,24),B(boot ,8),I(3c,01,82,1c),I(1a,1b,34,00),I(00,00,00,7e),I(24,00,00,00),B(cg_link ,19),I(3c,00,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,227),I(3b,01,1f,04),I(24,00,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,228),I(24,00,00,00),B(cg_link ,24),I(3c,01,2a,24),B(cg_link ,19),I(3c,00,23,00),B(cg_link ,229),I(1d,1d,24,00),B(cg_link ,24),I(3c,03,2a,23),B(cg_link ,230),I(1f,07,24,00),B(cg_link ,24),I(3c,02,2a,23),B(cg_link ,231),I(24,00,00,00),B(cg_link ,24),I(3d,01,08,22),I(02,32,00,00),I(00,00,00,08),I(86,45,06,00)};
 
-  eul_allocate_static_string(str_7684, "I(~a,~a,~a,~a)", 14);
-  eul_allocate_static_string(str_7685, "~a", 2);
+  eul_allocate_static_string(str_7694, "I(~a,~a,~a,~a)", 14);
+  eul_allocate_static_string(str_7695, "~a", 2);
   /* Byte-vector with size: 59 is_init: 0 index: 235 binding: write-next-bv-byte */
-  static const void *G007682[] = {I(aa,1b,24,00),B(number ,23),I(3c,01,1b,34),I(00,00,00,b9),I(24,00,00,00),B(cg_link ,42),I(26,00,00,00),I(00,00,00,03),I(19,1b,34,00),I(00,00,00,6e),I(24,00,00,00),B(cg_link ,8),I(3c,00,2a,24),B(cg_link ,13),I(82,02,24,00),B(cg_link ,13),I(83,02,24,00),B(cg_link ,13),I(84,02,1f,05),I(24,00,00,00),B(cg_link ,25),I(3c,01,23,00),B(cg_link ,233),I(1f,04,1f,04),I(1f,04,1f,04),I(24,00,00,00),B(cg_link ,44),I(3c,05,2a,82),I(89,00,00,00),B(cg_link ,42),I(2a,24,00,00),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(22,05,32,00),I(00,00,00,30),I(1d,24,00,00),B(cg_link ,25),I(3c,01,24,00),B(cg_link ,13),I(24,00,00,00),B(cg_link ,42),I(1d,03,2a,24),B(cg_link ,42),I(83,14,1b,89),B(cg_link ,42),I(22,02,22,01),I(32,00,00,00),I(00,00,00,2b),I(24,00,00,00),B(cg_link ,45),I(3c,00,2a,24),B(cg_link ,8),I(3c,00,2a,23),B(cg_link ,234),I(1d,24,00,00),B(cg_link ,44),I(3d,02,02,45),I(02,00,00,00)};
+  static const void *G007692[] = {I(aa,1b,24,00),B(number ,23),I(3c,01,1b,34),I(00,00,00,b9),I(24,00,00,00),B(cg_link ,42),I(26,00,00,00),I(00,00,00,03),I(19,1b,34,00),I(00,00,00,6e),I(24,00,00,00),B(cg_link ,8),I(3c,00,2a,24),B(cg_link ,13),I(82,02,24,00),B(cg_link ,13),I(83,02,24,00),B(cg_link ,13),I(84,02,1f,05),I(24,00,00,00),B(cg_link ,25),I(3c,01,23,00),B(cg_link ,233),I(1f,04,1f,04),I(1f,04,1f,04),I(24,00,00,00),B(cg_link ,44),I(3c,05,2a,82),I(89,00,00,00),B(cg_link ,42),I(2a,24,00,00),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(22,05,32,00),I(00,00,00,30),I(1d,24,00,00),B(cg_link ,25),I(3c,01,24,00),B(cg_link ,13),I(24,00,00,00),B(cg_link ,42),I(1d,03,2a,24),B(cg_link ,42),I(83,14,1b,89),B(cg_link ,42),I(22,02,22,01),I(32,00,00,00),I(00,00,00,2b),I(24,00,00,00),B(cg_link ,45),I(3c,00,2a,24),B(cg_link ,8),I(3c,00,2a,23),B(cg_link ,234),I(1d,24,00,00),B(cg_link ,44),I(3d,02,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 26 is_init: 0 index: 236 binding: static-allocatable-p */
-  static const void *G007686[] = {I(aa,1b,7c,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,57),I(1c,24,00,00),B(symbol ,3),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,3d),I(1d,12,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,2b),I(1f,03,24,00),B(vector ,5),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,11),I(1f,04,24,00),B(float ,2),I(3c,01,22,01),I(22,01,22,01),I(12,45,02,00)};
+  static const void *G007696[] = {I(aa,1b,7c,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,57),I(1c,24,00,00),B(symbol ,3),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,3d),I(1d,12,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,2b),I(1f,03,24,00),B(vector ,5),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,11),I(1f,04,24,00),B(float ,2),I(3c,01,22,01),I(22,01,22,01),I(12,45,02,00)};
 
-  eul_allocate_static_string(str_7690, "  Wrap bv: ~a", 13);
-  eul_allocate_static_string(str_7691, "B(~a ,1)", 8);
+  eul_allocate_static_string(str_7700, "  Wrap bv: ~a", 13);
+  eul_allocate_static_string(str_7701, "B(~a ,1)", 8);
   /* Byte-vector with size: 38 is_init: 0 index: 239 binding: wrap-init-code */
-  static const void *G007688[] = {I(ab,23,00,00),B(cg_link ,237),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,1b),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,41,00,00),B(cg_dld ,14),I(22,01,86,1d),I(24,00,00,00),B(cg_link ,22),I(3c,02,86,23),B(cg_link ,238),I(1f,03,24,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,26,00),I(00,00,00,ac),I(86,0f,1f,06),I(1c,24,00,00),B(boot ,11),I(3c,02,1f,03),I(1c,0f,1f,03),I(1c,0f,82,1c),I(0f,82,1c,0f),I(26,00,00,00),I(00,00,00,25),I(1c,0f,26,00),I(00,00,00,87),I(1c,0f,45,0d)};
+  static const void *G007698[] = {I(ab,23,00,00),B(cg_link ,237),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,1b),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,41,00,00),B(cg_dld ,14),I(22,01,86,1d),I(24,00,00,00),B(cg_link ,22),I(3c,02,86,23),B(cg_link ,238),I(1f,03,24,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,26,00),I(00,00,00,ac),I(86,0f,1f,06),I(1c,24,00,00),B(boot ,11),I(3c,02,1f,03),I(1c,0f,1f,03),I(1c,0f,82,1c),I(0f,82,1c,0f),I(26,00,00,00),I(00,00,00,25),I(1c,0f,26,00),I(00,00,00,87),I(1c,0f,45,0d)};
 
-  eul_allocate_static_string(str_7694, "B(~a ,~a)", 9);
+  eul_allocate_static_string(str_7704, "B(~a ,~a)", 9);
   /* Byte-vector with size: 16 is_init: 0 index: 241 binding: set-fixed-bytes */
-  static const void *G007692[] = {I(ab,1c,41,00),B(cg_dld ,14),I(22,01,24,00),B(cg_link ,8),I(3c,00,2a,23),B(cg_link ,240),I(1c,1f,03,24),B(cg_link ,44),I(3c,03,2a,1b),I(24,00,00,00),B(cg_link ,30),I(3c,01,2a,24),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(45,04,00,00)};
+  static const void *G007702[] = {I(ab,1c,41,00),B(cg_dld ,14),I(22,01,24,00),B(cg_link ,8),I(3c,00,2a,23),B(cg_link ,240),I(1c,1f,03,24),B(cg_link ,44),I(3c,03,2a,1b),I(24,00,00,00),B(cg_link ,30),I(3c,01,2a,24),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(45,04,00,00)};
 
-  eul_allocate_static_string(str_7697, "~a_bindings[0]", 14);
-  eul_allocate_static_string(str_7698, "initialize-", 11);
+  eul_allocate_static_string(str_7707, "~a_bindings[0]", 14);
+  eul_allocate_static_string(str_7708, "initialize-", 11);
   /* Byte-vector with size: 32 is_init: 0 index: 244 binding: set-up-init-bytevector */
-  static const void *G007695[] = {I(ab,24,00,00),B(cg_link ,55),I(3c,00,2a,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1d,83,24),B(cg_state ,38),I(08,1b,1f,03),I(24,00,00,00),B(cg_link ,36),I(3c,02,1d,41),B(cg_dld ,14),I(22,01,86,23),B(cg_link ,242),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,1f,04),I(82,02,23,00),B(cg_link ,243),I(1c,24,00,00),B(string ,11),I(3c,02,41,00),B(boot1 ,52),I(22,01,1f,04),I(1c,1f,04,24),B(cg_link ,39),I(3d,03,09,45),I(09,00,00,00)};
+  static const void *G007705[] = {I(ab,24,00,00),B(cg_link ,55),I(3c,00,2a,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1d,83,24),B(cg_state ,38),I(08,1b,1f,03),I(24,00,00,00),B(cg_link ,36),I(3c,02,1d,41),B(cg_dld ,14),I(22,01,86,23),B(cg_link ,242),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,41,00),B(boot1 ,52),I(22,01,1f,04),I(82,02,23,00),B(cg_link ,243),I(1c,24,00,00),B(string ,11),I(3c,02,41,00),B(boot1 ,52),I(22,01,1f,04),I(1c,1f,04,24),B(cg_link ,39),I(3d,03,09,45),I(09,00,00,00)};
 
-  eul_allocate_static_string(str_7701, "  eul_allocate_lambda( ~a, \"~a\", 0, ~a);\n", 41);
+  eul_allocate_static_string(str_7711, "  eul_allocate_lambda( ~a, \"~a\", 0, ~a);\n", 41);
   /* Byte-vector with size: 28 is_init: 0 index: 246 binding: compute-bytevector */
-  static const void *G007699[] = {I(43,fd,24,00),B(symbol ,6),I(3c,00,24,00),B(symbol ,6),I(3c,00,1b,24),B(cg_link ,49),I(3c,01,2a,24),B(cg_link ,28),I(3c,00,2a,1f),I(04,24,00,00),B(cg_link ,6),I(3c,01,2a,1c),I(1c,1f,05,1f),I(05,24,00,00),B(cg_link ,53),I(3c,04,2a,1d),I(34,00,00,00),I(00,00,00,28),I(1d,10,23,00),B(cg_link ,245),I(1c,1f,06,1f),I(04,24,00,00),B(cg_link ,15),I(3c,04,22,01),I(32,00,00,00),I(00,00,00,09),I(86,2a,1b,45),I(05,00,00,00)};
+  static const void *G007709[] = {I(43,fd,24,00),B(symbol ,6),I(3c,00,24,00),B(symbol ,6),I(3c,00,1b,24),B(cg_link ,49),I(3c,01,2a,24),B(cg_link ,28),I(3c,00,2a,1f),I(04,24,00,00),B(cg_link ,6),I(3c,01,2a,1c),I(1c,1f,05,1f),I(05,24,00,00),B(cg_link ,53),I(3c,04,2a,1d),I(34,00,00,00),I(00,00,00,28),I(1d,10,23,00),B(cg_link ,245),I(1c,1f,06,1f),I(04,24,00,00),B(cg_link ,15),I(3c,04,22,01),I(32,00,00,00),I(00,00,00,09),I(86,2a,1b,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 12 is_init: 0 index: 247 binding: check-method-name */
-  static const void *G007702[] = {I(aa,82,02,1b),I(82,0b,27,28),I(50,1b,34,00),I(00,00,00,22),I(1c,24,00,00),B(copy ,2),I(3c,01,1b,26),I(00,00,00,07),I(27,2d,0c,2a),I(1b,22,01,32),I(00,00,00,06),I(1c,45,02,00)};
+  static const void *G007712[] = {I(aa,82,02,1b),I(82,0b,27,28),I(50,1b,34,00),I(00,00,00,22),I(1c,24,00,00),B(copy ,2),I(3c,01,1b,26),I(00,00,00,07),I(27,2d,0c,2a),I(1b,22,01,32),I(00,00,00,06),I(1c,45,02,00)};
 
   /* Byte-vector with size: 39 is_init: 0 index: 248 binding: write-to-bv-str */
-  static const void *G007704[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,83),I(24,00,00,00),B(cg_state ,19),I(08,1b,10,1b),I(06,26,00,00),I(00,00,00,64),I(1c,1a,1b,34),I(00,00,00,35),I(24,00,00,00),B(mop_gf ,17),I(86,1f,08,1f),I(08,24,00,00),B(boot ,9),I(3c,04,1b,1f),I(05,0f,1f,06),I(1c,1c,83,1d),I(24,00,00,00),B(cg_state ,19),I(09,22,04,32),I(00,00,00,3c),I(24,00,00,00),B(mop_gf ,17),I(86,1f,08,1f),I(08,24,00,00),B(boot ,9),I(3c,04,1f,03),I(1c,24,00,00),B(string ,11),I(3c,02,1f,05),I(11,1c,1c,0f),I(1f,08,1c,1c),I(83,1d,24,00),B(cg_state ,19),I(09,22,06,45),I(07,00,00,00)};
+  static const void *G007714[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,83),I(24,00,00,00),B(cg_state ,19),I(08,1b,10,1b),I(06,26,00,00),I(00,00,00,64),I(1c,1a,1b,34),I(00,00,00,35),I(24,00,00,00),B(mop_gf ,17),I(86,1f,08,1f),I(08,24,00,00),B(boot ,9),I(3c,04,1b,1f),I(05,0f,1f,06),I(1c,1c,83,1d),I(24,00,00,00),B(cg_state ,19),I(09,22,04,32),I(00,00,00,3c),I(24,00,00,00),B(mop_gf ,17),I(86,1f,08,1f),I(08,24,00,00),B(boot ,9),I(3c,04,1f,03),I(1c,24,00,00),B(string ,11),I(3c,02,1f,05),I(11,1c,1c,0f),I(1f,08,1c,1c),I(83,1d,24,00),B(cg_state ,19),I(09,22,06,45),I(07,00,00,00)};
 
-  eul_allocate_static_string(str_7708, "00", 2);
-  eul_allocate_static_string(str_7709, "00", 2);
-  eul_allocate_static_string(str_7710, "I(~a,~a,~a,~a)", 14);
-  eul_allocate_static_string(str_7711, "00", 2);
+  eul_allocate_static_string(str_7718, "00", 2);
+  eul_allocate_static_string(str_7719, "00", 2);
+  eul_allocate_static_string(str_7720, "I(~a,~a,~a,~a)", 14);
+  eul_allocate_static_string(str_7721, "00", 2);
   /* Byte-vector with size: 45 is_init: 0 index: 253 binding: flush-bytevector-cache */
-  static const void *G007706[] = {I(a9,24,00,00),B(cg_link ,42),I(82,19,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,a1),I(24,00,00,00),B(cg_link ,8),I(3c,00,2a,24),B(cg_link ,13),I(82,02,83,24),B(cg_link ,42),I(1a,1b,34,00),I(00,00,00,16),I(24,00,00,00),B(cg_link ,13),I(83,02,32,00),I(00,00,00,0e),I(23,00,00,00),B(cg_link ,249),I(84,24,00,00),B(cg_link ,42),I(1a,1b,34,00),I(00,00,00,16),I(24,00,00,00),B(cg_link ,13),I(84,02,32,00),I(00,00,00,0e),I(23,00,00,00),B(cg_link ,250),I(23,00,00,00),B(cg_link ,251),I(1f,05,1f,04),I(1f,03,23,00),B(cg_link ,252),I(24,00,00,00),B(cg_link ,44),I(3c,05,2a,82),I(89,00,00,00),B(cg_link ,42),I(2a,24,00,00),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(22,06,45,01)};
+  static const void *G007716[] = {I(a9,24,00,00),B(cg_link ,42),I(82,19,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,a1),I(24,00,00,00),B(cg_link ,8),I(3c,00,2a,24),B(cg_link ,13),I(82,02,83,24),B(cg_link ,42),I(1a,1b,34,00),I(00,00,00,16),I(24,00,00,00),B(cg_link ,13),I(83,02,32,00),I(00,00,00,0e),I(23,00,00,00),B(cg_link ,249),I(84,24,00,00),B(cg_link ,42),I(1a,1b,34,00),I(00,00,00,16),I(24,00,00,00),B(cg_link ,13),I(84,02,32,00),I(00,00,00,0e),I(23,00,00,00),B(cg_link ,250),I(23,00,00,00),B(cg_link ,251),I(1f,05,1f,04),I(1f,03,23,00),B(cg_link ,252),I(24,00,00,00),B(cg_link ,44),I(3c,05,2a,82),I(89,00,00,00),B(cg_link ,42),I(2a,24,00,00),B(cg_link ,40),I(83,14,1b,89),B(cg_link ,40),I(22,06,45,01)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 254 binding: anonymous */
-  static const void *G007712[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,3e),I(1c,10,24,00),B(p_env ,14),I(3c,01,1b,83),I(24,00,00,00),B(sx_obj1 ,60),I(08,47,00,00),I(1c,86,6c,1b),I(34,00,00,00),I(00,00,00,10),I(1d,32,00,00),I(00,00,00,10),I(1f,04,11,47),I(00,01,3d,01),I(05,22,03,45),I(02,00,00,00)};
+  static const void *G007722[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,3e),I(1c,10,24,00),B(p_env ,14),I(3c,01,1b,83),I(24,00,00,00),B(sx_obj1 ,60),I(08,47,00,00),I(1c,86,6c,1b),I(34,00,00,00),I(00,00,00,10),I(1d,32,00,00),I(00,00,00,10),I(1f,04,11,47),I(00,01,3d,01),I(05,22,03,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 19 is_init: 0 index: 255 binding: get-imported-module-or-library */
-  static const void *G007714[] = {I(aa,46,02,1b),I(48,00,00,47),I(00,00,24,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,2f),I(86,1b,48,00),I(01,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,254),I(3b,01,48,00),I(01,24,00,00),B(i_param ,15),I(47,00,01,3d),I(01,03,22,01),I(45,02,00,00)};
+  static const void *G007724[] = {I(aa,46,02,1b),I(48,00,00,47),I(00,00,24,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,2f),I(86,1b,48,00),I(01,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,254),I(3b,01,48,00),I(01,24,00,00),B(i_param ,15),I(47,00,01,3d),I(01,03,22,01),I(45,02,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 256 binding: anonymous */
-  static const void *G007716[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G007726[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 257 binding: anonymous */
-  static const void *G007718[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G007728[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_7722, "_.c", 3);
-  eul_allocate_static_string(str_7723, "~a~a~a", 6);
-  eul_allocate_static_string(str_7724, "  Creating hook ~a ...", 22);
-  eul_allocate_static_string(str_7725, "C hook file", 11);
-  eul_allocate_static_string(str_7726, "#include \"eulisp.h\"\n\n", 21);
-  eul_allocate_static_string(str_7727, "\n/* Initialize module ~a ... */\n", 32);
-  eul_allocate_static_string(str_7728, "extern void initialize_module_~a();\n", 36);
-  eul_allocate_static_string(str_7729, "extern LispRef ~a_bindings[];\n", 30);
-  eul_allocate_static_string(str_7730, "\n/* Run application ~a ... */\n", 30);
-  eul_allocate_static_string(str_7731, "void run_application()\n{\n", 25);
-  eul_allocate_static_string(str_7732, "  initialize_module_~a();\n", 26);
-  eul_allocate_static_string(str_7733, "  execute_lambda(~a_bindings[0]);\n}", 35);
-  eul_allocate_static_string(str_7734, "\n\n\n/* eof */\n", 13);
+  eul_allocate_static_string(str_7732, "_.c", 3);
+  eul_allocate_static_string(str_7733, "~a~a~a", 6);
+  eul_allocate_static_string(str_7734, "  Creating hook ~a ...", 22);
+  eul_allocate_static_string(str_7735, "C hook file", 11);
+  eul_allocate_static_string(str_7736, "#include \"eulisp.h\"\n\n", 21);
+  eul_allocate_static_string(str_7737, "\n/* Initialize module ~a ... */\n", 32);
+  eul_allocate_static_string(str_7738, "extern void initialize_module_~a();\n", 36);
+  eul_allocate_static_string(str_7739, "extern LispRef ~a_bindings[];\n", 30);
+  eul_allocate_static_string(str_7740, "\n/* Run application ~a ... */\n", 30);
+  eul_allocate_static_string(str_7741, "void run_application()\n{\n", 25);
+  eul_allocate_static_string(str_7742, "  initialize_module_~a();\n", 26);
+  eul_allocate_static_string(str_7743, "  execute_lambda(~a_bindings[0]);\n}", 35);
+  eul_allocate_static_string(str_7744, "\n\n\n/* eof */\n", 13);
   /* Byte-vector with size: 133 is_init: 0 index: 271 binding: write-C-hook-file */
-  static const void *G007720[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,41,00),B(cg_dld ,14),I(22,01,1c,7d),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,23),B(cg_link ,258),I(24,00,00,00),B(string ,11),I(3c,02,1f,04),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,60),I(08,86,23,00),B(cg_link ,259),I(1d,24,00,00),B(i_param ,23),I(1f,05,24,00),B(mop_gf ,17),I(3c,05,1f,06),I(83,24,00,00),B(sx_obj1 ,60),I(08,1b,24,00),B(boot ,8),I(3c,01,83,14),I(2a,24,00,00),B(stream2 ,5),I(23,00,00,00),B(cg_link ,113),I(1f,03,23,00),B(cg_link ,114),I(23,00,00,00),B(cg_link ,115),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,257),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,118),I(47,00,00,24),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,256),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,260),I(1f,0a,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(0c,23,00,00),B(cg_link ,261),I(24,00,00,00),B(cg_link ,59),I(3c,02,2a,23),B(cg_link ,262),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,263),I(1f,0d,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,264),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,265),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,266),I(1f,0d,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,267),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,268),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,269),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,270),I(24,00,00,00),B(cg_link ,27),I(3c,01,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(20,06,1f,05),I(47,00,00,24),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(06,45,10,00)};
+  static const void *G007730[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,41,00),B(cg_dld ,14),I(22,01,1c,7d),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,23),B(cg_link ,258),I(24,00,00,00),B(string ,11),I(3c,02,1f,04),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,60),I(08,86,23,00),B(cg_link ,259),I(1d,24,00,00),B(i_param ,23),I(1f,05,24,00),B(mop_gf ,17),I(3c,05,1f,06),I(83,24,00,00),B(sx_obj1 ,60),I(08,1b,24,00),B(boot ,8),I(3c,01,83,14),I(2a,24,00,00),B(stream2 ,5),I(23,00,00,00),B(cg_link ,113),I(1f,03,23,00),B(cg_link ,114),I(23,00,00,00),B(cg_link ,115),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,257),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,118),I(47,00,00,24),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,116),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,256),I(3b,00,1c,0f),I(23,00,00,00),B(cg_link ,116),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_link ,260),I(1f,0a,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(0c,23,00,00),B(cg_link ,261),I(24,00,00,00),B(cg_link ,59),I(3c,02,2a,23),B(cg_link ,262),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,263),I(1f,0d,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,264),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,265),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,266),I(1f,0d,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,267),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,268),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,269),I(1f,0c,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,270),I(24,00,00,00),B(cg_link ,27),I(3c,01,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(20,06,1f,05),I(47,00,00,24),B(stream2 ,41),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(06,45,10,00)};
 
   /* Byte-vector with size: 26 is_init: 0 index: 272 binding: add-decl */
-  static const void *G007735[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,1d,7c),I(1b,34,00,00),I(00,00,00,0f),I(1f,03,32,00),I(00,00,00,1c),I(24,00,00,00),B(mop_gf ,17),I(86,1f,05,1f),I(05,24,00,00),B(boot ,9),I(3c,04,1d,1c),I(1c,26,00,00),I(00,00,00,07),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,07),I(1d,24,00,00),B(cg_state ,19),I(09,45,0b,00)};
+  static const void *G007745[] = {I(43,fe,23,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,1d,7c),I(1b,34,00,00),I(00,00,00,0f),I(1f,03,32,00),I(00,00,00,1c),I(24,00,00,00),B(mop_gf ,17),I(86,1f,05,1f),I(05,24,00,00),B(boot ,9),I(3c,04,1d,1c),I(1c,26,00,00),I(00,00,00,07),I(24,00,00,00),B(cg_state ,19),I(08,1c,1c,0f),I(1f,03,1c,1c),I(26,00,00,00),I(00,00,00,07),I(1d,24,00,00),B(cg_state ,19),I(09,45,0b,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 273 binding: anonymous */
-  static const void *G007737[] = {I(aa,24,00,00),B(cg_link ,26),I(3d,01,00,00)};
+  static const void *G007747[] = {I(aa,24,00,00),B(cg_link ,26),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_7741, "extern LispRef ~a_bindings[];\n", 30);
+  eul_allocate_static_string(str_7751, "extern LispRef ~a_bindings[];\n", 30);
   /* Byte-vector with size: 5 is_init: 0 index: 275 binding: anonymous */
-  static const void *G007739[] = {I(aa,23,00,00),B(cg_link ,274),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
+  static const void *G007749[] = {I(aa,23,00,00),B(cg_link ,274),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_7744, "extern void initialize_module_~a();\n", 36);
+  eul_allocate_static_string(str_7754, "extern void initialize_module_~a();\n", 36);
   /* Byte-vector with size: 7 is_init: 0 index: 277 binding: anonymous */
-  static const void *G007742[] = {I(aa,41,00,00),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,276),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
+  static const void *G007752[] = {I(aa,41,00,00),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,276),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_7747, "C source file", 13);
-  eul_allocate_static_string(str_7748, "#include \"eulisp.h\"\n\n", 21);
-  eul_allocate_static_string(str_7749, "\n/* Imported modules */\n", 24);
-  eul_allocate_static_string(str_7750, "\n/* Module bindings with size ~a */\n", 36);
-  eul_allocate_static_string(str_7751, "LispRef ~a_bindings[~a];\n", 25);
-  eul_allocate_static_string(str_7752, "\n/* Foreign functions */\n", 25);
-  eul_allocate_static_string(str_7753, "\n/* Initialize module only once */\n", 35);
-  eul_allocate_static_string(str_7754, "static int is_initialized = 0;\n", 31);
-  eul_allocate_static_string(str_7755, "\n/* Initialize module ~a */\n", 28);
-  eul_allocate_static_string(str_7756, "void initialize_module_~a()\n{\n", 30);
-  eul_allocate_static_string(str_7757, "  if (is_initialized) return;\n", 30);
-  eul_allocate_static_string(str_7758, "  eul_fast_table_set(eul_modules,\"~a\",(LispRef) ~a_bindings);\n", 62);
-  eul_allocate_static_string(str_7759, "  is_initialized = 1;\n  {\n", 26);
+  eul_allocate_static_string(str_7757, "C source file", 13);
+  eul_allocate_static_string(str_7758, "#include \"eulisp.h\"\n\n", 21);
+  eul_allocate_static_string(str_7759, "\n/* Imported modules */\n", 24);
+  eul_allocate_static_string(str_7760, "\n/* Module bindings with size ~a */\n", 36);
+  eul_allocate_static_string(str_7761, "LispRef ~a_bindings[~a];\n", 25);
+  eul_allocate_static_string(str_7762, "\n/* Foreign functions */\n", 25);
+  eul_allocate_static_string(str_7763, "\n/* Initialize module only once */\n", 35);
+  eul_allocate_static_string(str_7764, "static int is_initialized = 0;\n", 31);
+  eul_allocate_static_string(str_7765, "\n/* Initialize module ~a */\n", 28);
+  eul_allocate_static_string(str_7766, "void initialize_module_~a()\n{\n", 30);
+  eul_allocate_static_string(str_7767, "  if (is_initialized) return;\n", 30);
+  eul_allocate_static_string(str_7768, "  eul_fast_table_set(eul_modules,\"~a\",(LispRef) ~a_bindings);\n", 62);
+  eul_allocate_static_string(str_7769, "  is_initialized = 1;\n  {\n", 26);
   /* Byte-vector with size: 98 is_init: 0 index: 291 binding: write-C-file-header */
-  static const void *G007745[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,41,00),B(cg_dld ,14),I(22,01,1f,03),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,60),I(08,1f,03,82),I(24,00,00,00),B(cg_state ,19),I(08,1f,03,23),B(cg_link ,278),I(24,00,00,00),B(cg_link ,59),I(3c,02,2a,23),B(cg_link ,279),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,280),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,117),I(23,00,00,00),B(cg_link ,277),I(3b,01,1d,24),B(boot ,4),I(3c,02,2a,1f),I(04,84,24,00),B(cg_state ,19),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,275),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,23),B(cg_link ,281),I(1d,24,00,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,282),I(1f,04,1f,03),I(24,00,00,00),B(cg_link ,27),I(3c,03,2a,23),B(cg_link ,283),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(06,26,00,00),I(00,00,00,07),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,273),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,23),B(cg_link ,284),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,285),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,286),I(1f,06,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,287),I(1f,05,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,288),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,24),B(cg_link ,32),I(3c,00,2a,23),B(cg_link ,289),I(1f,05,1f,06),I(24,00,00,00),B(cg_link ,27),I(3c,03,2a,23),B(cg_link ,290),I(24,00,00,00),B(cg_link ,27),I(3d,01,08,45),I(08,00,00,00)};
+  static const void *G007755[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1b,41,00),B(cg_dld ,14),I(22,01,1f,03),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,60),I(08,1f,03,82),I(24,00,00,00),B(cg_state ,19),I(08,1f,03,23),B(cg_link ,278),I(24,00,00,00),B(cg_link ,59),I(3c,02,2a,23),B(cg_link ,279),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,280),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,117),I(23,00,00,00),B(cg_link ,277),I(3b,01,1d,24),B(boot ,4),I(3c,02,2a,1f),I(04,84,24,00),B(cg_state ,19),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,275),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,23),B(cg_link ,281),I(1d,24,00,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,282),I(1f,04,1f,03),I(24,00,00,00),B(cg_link ,27),I(3c,03,2a,23),B(cg_link ,283),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,1f),I(06,26,00,00),I(00,00,00,07),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,273),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,23),B(cg_link ,284),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,285),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,286),I(1f,06,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,287),I(1f,05,24,00),B(cg_link ,27),I(3c,02,2a,23),B(cg_link ,288),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,24),B(cg_link ,32),I(3c,00,2a,23),B(cg_link ,289),I(1f,05,1f,06),I(24,00,00,00),B(cg_link ,27),I(3c,03,2a,23),B(cg_link ,290),I(24,00,00,00),B(cg_link ,27),I(3d,01,08,45),I(08,00,00,00)};
 
-  eul_allocate_static_string(str_7762, ", ~a", 4);
+  eul_allocate_static_string(str_7772, ", ~a", 4);
   /* Byte-vector with size: 5 is_init: 0 index: 293 binding: anonymous */
-  static const void *G007760[] = {I(aa,23,00,00),B(cg_link ,292),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
+  static const void *G007770[] = {I(aa,23,00,00),B(cg_link ,292),I(1c,24,00,00),B(cg_link ,27),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_7765, "  LispRef ~a", 12);
-  eul_allocate_static_string(str_7766, ";\n", 2);
+  eul_allocate_static_string(str_7775, "  LispRef ~a", 12);
+  eul_allocate_static_string(str_7776, ";\n", 2);
   /* Byte-vector with size: 25 is_init: 0 index: 296 binding: write-decls-to-C-file */
-  static const void *G007763[] = {I(aa,26,00,00),I(00,00,00,07),I(24,00,00,00),B(cg_state ,19),I(08,1b,34,00),I(00,00,00,4e),I(1b,10,23,00),B(cg_link ,294),I(1c,24,00,00),B(cg_link ,27),I(3c,02,2a,1c),I(11,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,293),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,23),B(cg_link ,295),I(24,00,00,00),B(cg_link ,27),I(3d,01,03,22),I(02,32,00,00),I(00,00,00,08),I(86,45,01,00)};
+  static const void *G007773[] = {I(aa,26,00,00),I(00,00,00,07),I(24,00,00,00),B(cg_state ,19),I(08,1b,34,00),I(00,00,00,4e),I(1b,10,23,00),B(cg_link ,294),I(1c,24,00,00),B(cg_link ,27),I(3c,02,2a,1c),I(11,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,293),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,23),B(cg_link ,295),I(24,00,00,00),B(cg_link ,27),I(3d,01,03,22),I(02,32,00,00),I(00,00,00,08),I(86,45,01,00)};
 
   /* Byte-vector with size: 8 is_init: 0 index: 297 binding: set-global-index */
-  static const void *G007767[] = {I(aa,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,1d),I(1c,82,1d,24),B(cg_state ,19),I(09,45,04,00)};
+  static const void *G007777[] = {I(aa,23,00,00),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,1d),I(1c,82,1d,24),B(cg_state ,19),I(09,45,04,00)};
 
-  eul_allocate_static_string(str_7771, "  /* Byte-vector with size: ~a is_init: ~a index: ~a binding: ~a */\n", 68);
-  eul_allocate_static_string(str_7772, "  static const void *~a[] = {", 29);
-  eul_allocate_static_string(str_7773, "};\n\n", 4);
-  eul_allocate_static_string(str_7774, "  eul_allocate_bytevector( ~a,~a);\n", 35);
+  eul_allocate_static_string(str_7781, "  /* Byte-vector with size: ~a is_init: ~a index: ~a binding: ~a */\n", 68);
+  eul_allocate_static_string(str_7782, "  static const void *~a[] = {", 29);
+  eul_allocate_static_string(str_7783, "};\n\n", 4);
+  eul_allocate_static_string(str_7784, "  eul_allocate_bytevector( ~a,~a);\n", 35);
   /* Byte-vector with size: 52 is_init: 0 index: 302 binding: close-bytevector */
-  static const void *G007769[] = {I(43,04,24,00),B(cg_link ,45),I(3c,00,2a,23),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,83,24),B(cg_state ,19),I(08,1c,34,00),I(00,00,00,0e),I(83,32,00,00),I(00,00,00,08),I(82,1d,34,00),I(00,00,00,0e),I(82,32,00,00),I(00,00,00,11),I(24,00,00,00),B(cg_link ,19),I(3c,00,1f,04),I(24,00,00,00),B(cg_link ,41),I(3c,01,23,00),B(cg_link ,298),I(24,00,00,00),B(cg_link ,40),I(1f,04,1f,04),I(1f,04,24,00),B(cg_link ,16),I(3c,05,2a,23),B(cg_link ,299),I(1f,08,24,00),B(cg_link ,16),I(3c,02,2a,1f),I(03,24,00,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,16),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,300),I(24,00,00,00),B(cg_link ,16),I(3c,01,2a,23),B(cg_link ,301),I(1f,08,1f,0a),I(24,00,00,00),B(cg_link ,5),I(3c,03,2a,86),I(89,00,00,00),B(cg_link ,14),I(45,09,00,00)};
+  static const void *G007779[] = {I(43,04,24,00),B(cg_link ,45),I(3c,00,2a,23),B(cg_link ,129),I(24,00,00,00),B(dynamic ,3),I(3c,01,83,24),B(cg_state ,19),I(08,1c,34,00),I(00,00,00,0e),I(83,32,00,00),I(00,00,00,08),I(82,1d,34,00),I(00,00,00,0e),I(82,32,00,00),I(00,00,00,11),I(24,00,00,00),B(cg_link ,19),I(3c,00,1f,04),I(24,00,00,00),B(cg_link ,41),I(3c,01,23,00),B(cg_link ,298),I(24,00,00,00),B(cg_link ,40),I(1f,04,1f,04),I(1f,04,24,00),B(cg_link ,16),I(3c,05,2a,23),B(cg_link ,299),I(1f,08,24,00),B(cg_link ,16),I(3c,02,2a,1f),I(03,24,00,00),B(boot ,24),I(3c,01,24,00),B(cg_link ,16),I(1c,24,00,00),B(boot ,4),I(3c,02,2a,23),B(cg_link ,300),I(24,00,00,00),B(cg_link ,16),I(3c,01,2a,23),B(cg_link ,301),I(1f,08,1f,0a),I(24,00,00,00),B(cg_link ,5),I(3c,03,2a,86),I(89,00,00,00),B(cg_link ,14),I(45,09,00,00)};
 
-  eul_allocate_static_string(str_7777, "  Processing bv: ~s binding-name: ~a code: ~a", 45);
+  eul_allocate_static_string(str_7787, "  Processing bv: ~s binding-name: ~a code: ~a", 45);
   /* Byte-vector with size: 23 is_init: 0 index: 304 binding: anonymous */
-  static const void *G007775[] = {I(aa,1b,83,24),B(cg_state ,38),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,38),I(08,1d,84,24),B(cg_state ,38),I(08,23,00,00),B(cg_link ,303),I(1d,1d,1f,05),I(24,00,00,00),B(i_notify ,4),I(3c,04,2a,1d),I(1c,24,00,00),B(cg_link ,39),I(3c,02,1b,24),B(cg_link ,56),I(3c,01,1f,03),I(1c,24,00,00),B(cg_link ,3),I(3d,02,06,45),I(06,00,00,00)};
+  static const void *G007785[] = {I(aa,1b,83,24),B(cg_state ,38),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,38),I(08,1d,84,24),B(cg_state ,38),I(08,23,00,00),B(cg_link ,303),I(1d,1d,1f,05),I(24,00,00,00),B(i_notify ,4),I(3c,04,2a,1d),I(1c,24,00,00),B(cg_link ,39),I(3c,02,1b,24),B(cg_link ,56),I(3c,01,1f,03),I(1c,24,00,00),B(cg_link ,3),I(3d,02,06,45),I(06,00,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 305 binding: set-up-bytevectors */
-  static const void *G007778[] = {I(aa,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,304),I(3b,01,1c,24),B(boot ,4),I(3d,02,01,00)};
+  static const void *G007788[] = {I(aa,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,304),I(3b,01,1c,24),B(boot ,4),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_7782, "eul_nil", 7);
+  eul_allocate_static_string(str_7792, "eul_nil", 7);
   /* Byte-vector with size: 5 is_init: 0 index: 307 binding: set-up-init-flag */
-  static const void *G007780[] = {I(a9,23,00,00),B(cg_link ,306),I(83,24,00,00),B(cg_link ,56),I(3d,02,00,00)};
+  static const void *G007790[] = {I(a9,23,00,00),B(cg_link ,306),I(83,24,00,00),B(cg_link ,56),I(3d,02,00,00)};
 
-  eul_allocate_static_string(str_7785, "  ~a_bindings[ ~a] = ~a;\n", 25);
+  eul_allocate_static_string(str_7795, "  ~a_bindings[ ~a] = ~a;\n", 25);
   /* Byte-vector with size: 34 is_init: 0 index: 309 binding: register-new-global */
-  static const void *G007783[] = {I(43,fe,23,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,34,00),I(00,00,00,0e),I(1c,10,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,11),I(24,00,00,00),B(cg_link ,19),I(3c,00,1d,41),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,308),I(1c,1f,03,1f),I(08,24,00,00),B(cg_link ,24),I(3c,04,2a,1f),I(04,12,1b,34),I(00,00,00,15),I(1d,83,14,24),B(cg_link ,52),I(3c,01,32,00),I(00,00,00,07),I(86,2a,1d,45),I(07,00,00,00)};
+  static const void *G007793[] = {I(43,fe,23,00),B(cg_link ,97),I(24,00,00,00),B(dynamic ,3),I(3c,01,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,34,00),I(00,00,00,0e),I(1c,10,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,11),I(24,00,00,00),B(cg_link ,19),I(3c,00,1d,41),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,308),I(1c,1f,03,1f),I(08,24,00,00),B(cg_link ,24),I(3c,04,2a,1f),I(04,12,1b,34),I(00,00,00,15),I(1d,83,14,24),B(cg_link ,52),I(3c,01,32,00),I(00,00,00,07),I(86,2a,1d,45),I(07,00,00,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 310 binding: get-bytevector-pos */
-  static const void *G007786[] = {I(aa,24,00,00),B(cg_link ,48),I(1c,24,00,00),B(table ,3),I(3d,02,01,00)};
+  static const void *G007796[] = {I(aa,24,00,00),B(cg_link ,48),I(1c,24,00,00),B(table ,3),I(3d,02,01,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 311 binding: compute-static */
-  static const void *G007788[] = {I(aa,24,00,00),B(cg_link ,43),I(3c,01,1b,10),I(1b,24,00,00),B(p_env ,14),I(3c,01,2a,1c),I(73,1c,1c,24),B(cg_link ,37),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G007798[] = {I(aa,24,00,00),B(cg_link ,43),I(3c,01,1b,10),I(1b,24,00,00),B(p_env ,14),I(3c,01,2a,1c),I(73,1c,1c,24),B(cg_link ,37),I(3d,02,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_7792, "/** ----------------------------------------------------------------------- **\n", 79);
-  eul_allocate_static_string(str_7793, " **                 Generated by EuLisp System 'youtoo'\n ** ----------------------------------------------------------------------- **\n", 135);
-  eul_allocate_static_string(str_7794, " **  Description: ~a of EuLisp module ~a\n **  Copyright: See file ~a.em\n ** ----------------------------------------------------------------------- **/\n\n", 153);
+  eul_allocate_static_string(str_7802, "/** ----------------------------------------------------------------------- **\n", 79);
+  eul_allocate_static_string(str_7803, " **                 Generated by EuLisp System 'youtoo'\n ** ----------------------------------------------------------------------- **\n", 135);
+  eul_allocate_static_string(str_7804, " **  Description: ~a of EuLisp module ~a\n **  Copyright: See file ~a.em\n ** ----------------------------------------------------------------------- **/\n\n", 153);
   /* Byte-vector with size: 14 is_init: 0 index: 315 binding: write-copyright-to-C-file */
-  static const void *G007790[] = {I(ab,23,00,00),B(cg_link ,312),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,313),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,314),I(1c,1f,03,1f),I(04,24,00,00),B(cg_link ,27),I(3d,04,02,00)};
+  static const void *G007800[] = {I(ab,23,00,00),B(cg_link ,312),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,313),I(24,00,00,00),B(cg_link ,27),I(3c,01,2a,23),B(cg_link ,314),I(1c,1f,03,1f),I(04,24,00,00),B(cg_link ,27),I(3d,04,02,00)};
 
   /* Byte-vector with size: 379 is_init: 1 index: 0 binding: initialize-cg-link */
-  static const void *G007795[] = {I(87,25,00,00),B(cg_link ,1),I(24,00,00,00),B(cg_dld ,1),I(3e,0b,24,00),B(cg_dld ,0),I(3c,00,21,01),I(24,00,00,00),B(ex_expr ,1),I(3e,0b,24,00),B(ex_expr ,0),I(3c,00,21,01),I(24,00,00,00),B(i_ffi ,1),I(3e,0b,24,00),B(i_ffi ,0),I(3c,00,21,01),I(24,00,00,00),B(cg_interf ,1),I(3e,0b,24,00),B(cg_interf ,0),I(3c,00,21,01),I(24,00,00,00),B(cg_asm ,1),I(3e,0b,24,00),B(cg_asm ,0),I(3c,00,21,01),I(24,00,00,00),B(cg_state ,1),I(3e,0b,24,00),B(cg_state ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_node ,1),I(3e,0b,24,00),B(sx_node ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(p_env ,1),I(3e,0b,24,00),B(p_env ,0),I(3c,00,21,01),I(24,00,00,00),B(i_modify ,1),I(3e,0b,24,00),B(i_modify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_link ,316),I(23,00,00,00),B(cg_link ,315),I(3b,02,25,00),B(cg_link ,59),I(23,00,00,00),B(cg_link ,317),I(23,00,00,00),B(cg_link ,311),I(3b,01,25,00),B(cg_link ,58),I(23,00,00,00),B(cg_link ,318),I(23,00,00,00),B(cg_link ,310),I(3b,01,25,00),B(cg_link ,57),I(23,00,00,00),B(cg_link ,319),I(23,00,00,00),B(cg_link ,309),I(3b,fe,25,00),B(cg_link ,56),I(23,00,00,00),B(cg_link ,320),I(23,00,00,00),B(cg_link ,307),I(3b,00,25,00),B(cg_link ,55),I(23,00,00,00),B(cg_link ,321),I(23,00,00,00),B(cg_link ,305),I(3b,01,25,00),B(cg_link ,54),I(23,00,00,00),B(cg_link ,322),I(23,00,00,00),B(cg_link ,302),I(3b,04,25,00),B(cg_link ,53),I(23,00,00,00),B(cg_link ,323),I(23,00,00,00),B(cg_link ,297),I(3b,01,25,00),B(cg_link ,52),I(23,00,00,00),B(cg_link ,324),I(23,00,00,00),B(cg_link ,296),I(3b,01,25,00),B(cg_link ,51),I(23,00,00,00),B(cg_link ,325),I(23,00,00,00),B(cg_link ,291),I(3b,02,25,00),B(cg_link ,50),I(23,00,00,00),B(cg_link ,326),I(23,00,00,00),B(cg_link ,272),I(3b,fe,25,00),B(cg_link ,49),I(86,25,00,00),B(cg_link ,48),I(23,00,00,00),B(cg_link ,327),I(23,00,00,00),B(cg_link ,271),I(3b,01,25,00),B(cg_link ,47),I(23,00,00,00),B(cg_link ,328),I(23,00,00,00),B(cg_link ,255),I(3b,01,25,00),B(cg_link ,46),I(23,00,00,00),B(cg_link ,329),I(23,00,00,00),B(cg_link ,253),I(3b,00,25,00),B(cg_link ,45),I(23,00,00,00),B(cg_link ,330),I(23,00,00,00),B(cg_link ,248),I(3b,fe,25,00),B(cg_link ,44),I(86,25,00,00),B(cg_link ,43),I(86,25,00,00),B(cg_link ,42),I(23,00,00,00),B(cg_link ,331),I(23,00,00,00),B(cg_link ,247),I(3b,01,25,00),B(cg_link ,41),I(86,25,00,00),B(cg_link ,40),I(23,00,00,00),B(cg_link ,332),I(23,00,00,00),B(cg_link ,246),I(3b,fd,25,00),B(cg_link ,39),I(23,00,00,00),B(cg_link ,333),I(23,00,00,00),B(cg_link ,244),I(3b,02,25,00),B(cg_link ,38),I(23,00,00,00),B(cg_link ,334),I(23,00,00,00),B(cg_link ,241),I(3b,02,25,00),B(cg_link ,37),I(23,00,00,00),B(cg_link ,335),I(23,00,00,00),B(cg_link ,239),I(3b,02,25,00),B(cg_link ,36),I(23,00,00,00),B(cg_link ,336),I(23,00,00,00),B(cg_link ,236),I(3b,01,25,00),B(cg_link ,35),I(23,00,00,00),B(cg_link ,337),I(23,00,00,00),B(cg_link ,235),I(3b,01,25,00),B(cg_link ,34),I(23,00,00,00),B(cg_link ,338),I(23,00,00,00),B(cg_link ,232),I(3b,01,25,00),B(cg_link ,33),I(23,00,00,00),B(cg_link ,339),I(23,00,00,00),B(cg_link ,226),I(3b,00,25,00),B(cg_link ,32),I(23,00,00,00),B(cg_link ,340),I(23,00,00,00),B(cg_link ,223),I(3b,01,25,00),B(cg_link ,31),I(23,00,00,00),B(cg_link ,341),I(23,00,00,00),B(cg_link ,220),I(3b,01,25,00),B(cg_link ,30),I(86,25,00,00),B(cg_link ,29),I(23,00,00,00),B(cg_link ,342),I(23,00,00,00),B(cg_link ,218),I(3b,00,25,00),B(cg_link ,28),I(23,00,00,00),B(cg_link ,343),I(23,00,00,00),B(cg_link ,217),I(3b,fe,25,00),B(cg_link ,27),I(23,00,00,00),B(cg_link ,344),I(23,00,00,00),B(cg_link ,216),I(3b,01,25,00),B(cg_link ,26),I(23,00,00,00),B(cg_link ,345),I(23,00,00,00),B(cg_link ,195),I(3b,01,25,00),B(cg_link ,25),I(23,00,00,00),B(cg_link ,346),I(23,00,00,00),B(cg_link ,192),I(3b,fe,25,00),B(cg_link ,24),I(23,00,00,00),B(cg_link ,190),I(23,00,00,00),B(cg_link ,191),I(3b,02,25,00),B(cg_link ,23),I(23,00,00,00),B(cg_link ,347),I(23,00,00,00),B(cg_link ,184),I(3b,02,25,00),B(cg_link ,22),I(23,00,00,00),B(cg_link ,348),I(23,00,00,00),B(cg_link ,181),I(3b,01,25,00),B(cg_link ,21),I(23,00,00,00),B(cg_link ,349),I(23,00,00,00),B(cg_link ,169),I(3b,01,25,00),B(cg_link ,20),I(23,00,00,00),B(cg_link ,350),I(23,00,00,00),B(cg_link ,168),I(3b,00,25,00),B(cg_link ,19),I(23,00,00,00),B(cg_link ,351),I(23,00,00,00),B(cg_link ,167),I(3b,01,25,00),B(cg_link ,18),I(23,00,00,00),B(cg_link ,352),I(23,00,00,00),B(cg_link ,165),I(3b,01,25,00),B(cg_link ,17),I(23,00,00,00),B(cg_link ,353),I(23,00,00,00),B(cg_link ,160),I(3b,fe,25,00),B(cg_link ,16),I(23,00,00,00),B(cg_link ,354),I(23,00,00,00),B(cg_link ,159),I(3b,fe,25,00),B(cg_link ,15),I(86,25,00,00),B(cg_link ,14),I(86,25,00,00),B(cg_link ,13),I(23,00,00,00),B(cg_link ,355),I(23,00,00,00),B(cg_link ,158),I(3b,02,25,00),B(cg_link ,12),I(23,00,00,00),B(cg_link ,356),I(23,00,00,00),B(cg_link ,155),I(3b,00,25,00),B(cg_link ,11),I(23,00,00,00),B(cg_link ,357),I(23,00,00,00),B(cg_link ,153),I(3b,01,25,00),B(cg_link ,10),I(23,00,00,00),B(cg_link ,358),I(23,00,00,00),B(cg_link ,147),I(3b,02,25,00),B(cg_link ,9),I(23,00,00,00),B(cg_link ,359),I(23,00,00,00),B(cg_link ,138),I(3b,00,25,00),B(cg_link ,8),I(86,25,00,00),B(cg_link ,7),I(23,00,00,00),B(cg_link ,360),I(23,00,00,00),B(cg_link ,136),I(3b,01,25,00),B(cg_link ,6),I(23,00,00,00),B(cg_link ,361),I(23,00,00,00),B(cg_link ,130),I(3b,fe,25,00),B(cg_link ,5),I(23,00,00,00),B(cg_link ,362),I(23,00,00,00),B(cg_link ,128),I(3b,02,25,00),B(cg_link ,4),I(23,00,00,00),B(cg_link ,363),I(23,00,00,00),B(cg_link ,126),I(3b,02,25,00),B(cg_link ,3),I(23,00,00,00),B(cg_link ,364),I(23,00,00,00),B(cg_link ,124),I(3b,02,25,00),B(cg_link ,2),I(23,00,00,00),B(cg_link ,365),I(23,00,00,00),B(cg_link ,108),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G007805[] = {I(87,25,00,00),B(cg_link ,1),I(24,00,00,00),B(cg_dld ,1),I(3e,0b,24,00),B(cg_dld ,0),I(3c,00,21,01),I(24,00,00,00),B(ex_expr ,1),I(3e,0b,24,00),B(ex_expr ,0),I(3c,00,21,01),I(24,00,00,00),B(i_ffi ,1),I(3e,0b,24,00),B(i_ffi ,0),I(3c,00,21,01),I(24,00,00,00),B(cg_interf ,1),I(3e,0b,24,00),B(cg_interf ,0),I(3c,00,21,01),I(24,00,00,00),B(cg_asm ,1),I(3e,0b,24,00),B(cg_asm ,0),I(3c,00,21,01),I(24,00,00,00),B(cg_state ,1),I(3e,0b,24,00),B(cg_state ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_node ,1),I(3e,0b,24,00),B(sx_node ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(p_env ,1),I(3e,0b,24,00),B(p_env ,0),I(3c,00,21,01),I(24,00,00,00),B(i_modify ,1),I(3e,0b,24,00),B(i_modify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_link ,316),I(23,00,00,00),B(cg_link ,315),I(3b,02,25,00),B(cg_link ,59),I(23,00,00,00),B(cg_link ,317),I(23,00,00,00),B(cg_link ,311),I(3b,01,25,00),B(cg_link ,58),I(23,00,00,00),B(cg_link ,318),I(23,00,00,00),B(cg_link ,310),I(3b,01,25,00),B(cg_link ,57),I(23,00,00,00),B(cg_link ,319),I(23,00,00,00),B(cg_link ,309),I(3b,fe,25,00),B(cg_link ,56),I(23,00,00,00),B(cg_link ,320),I(23,00,00,00),B(cg_link ,307),I(3b,00,25,00),B(cg_link ,55),I(23,00,00,00),B(cg_link ,321),I(23,00,00,00),B(cg_link ,305),I(3b,01,25,00),B(cg_link ,54),I(23,00,00,00),B(cg_link ,322),I(23,00,00,00),B(cg_link ,302),I(3b,04,25,00),B(cg_link ,53),I(23,00,00,00),B(cg_link ,323),I(23,00,00,00),B(cg_link ,297),I(3b,01,25,00),B(cg_link ,52),I(23,00,00,00),B(cg_link ,324),I(23,00,00,00),B(cg_link ,296),I(3b,01,25,00),B(cg_link ,51),I(23,00,00,00),B(cg_link ,325),I(23,00,00,00),B(cg_link ,291),I(3b,02,25,00),B(cg_link ,50),I(23,00,00,00),B(cg_link ,326),I(23,00,00,00),B(cg_link ,272),I(3b,fe,25,00),B(cg_link ,49),I(86,25,00,00),B(cg_link ,48),I(23,00,00,00),B(cg_link ,327),I(23,00,00,00),B(cg_link ,271),I(3b,01,25,00),B(cg_link ,47),I(23,00,00,00),B(cg_link ,328),I(23,00,00,00),B(cg_link ,255),I(3b,01,25,00),B(cg_link ,46),I(23,00,00,00),B(cg_link ,329),I(23,00,00,00),B(cg_link ,253),I(3b,00,25,00),B(cg_link ,45),I(23,00,00,00),B(cg_link ,330),I(23,00,00,00),B(cg_link ,248),I(3b,fe,25,00),B(cg_link ,44),I(86,25,00,00),B(cg_link ,43),I(86,25,00,00),B(cg_link ,42),I(23,00,00,00),B(cg_link ,331),I(23,00,00,00),B(cg_link ,247),I(3b,01,25,00),B(cg_link ,41),I(86,25,00,00),B(cg_link ,40),I(23,00,00,00),B(cg_link ,332),I(23,00,00,00),B(cg_link ,246),I(3b,fd,25,00),B(cg_link ,39),I(23,00,00,00),B(cg_link ,333),I(23,00,00,00),B(cg_link ,244),I(3b,02,25,00),B(cg_link ,38),I(23,00,00,00),B(cg_link ,334),I(23,00,00,00),B(cg_link ,241),I(3b,02,25,00),B(cg_link ,37),I(23,00,00,00),B(cg_link ,335),I(23,00,00,00),B(cg_link ,239),I(3b,02,25,00),B(cg_link ,36),I(23,00,00,00),B(cg_link ,336),I(23,00,00,00),B(cg_link ,236),I(3b,01,25,00),B(cg_link ,35),I(23,00,00,00),B(cg_link ,337),I(23,00,00,00),B(cg_link ,235),I(3b,01,25,00),B(cg_link ,34),I(23,00,00,00),B(cg_link ,338),I(23,00,00,00),B(cg_link ,232),I(3b,01,25,00),B(cg_link ,33),I(23,00,00,00),B(cg_link ,339),I(23,00,00,00),B(cg_link ,226),I(3b,00,25,00),B(cg_link ,32),I(23,00,00,00),B(cg_link ,340),I(23,00,00,00),B(cg_link ,223),I(3b,01,25,00),B(cg_link ,31),I(23,00,00,00),B(cg_link ,341),I(23,00,00,00),B(cg_link ,220),I(3b,01,25,00),B(cg_link ,30),I(86,25,00,00),B(cg_link ,29),I(23,00,00,00),B(cg_link ,342),I(23,00,00,00),B(cg_link ,218),I(3b,00,25,00),B(cg_link ,28),I(23,00,00,00),B(cg_link ,343),I(23,00,00,00),B(cg_link ,217),I(3b,fe,25,00),B(cg_link ,27),I(23,00,00,00),B(cg_link ,344),I(23,00,00,00),B(cg_link ,216),I(3b,01,25,00),B(cg_link ,26),I(23,00,00,00),B(cg_link ,345),I(23,00,00,00),B(cg_link ,195),I(3b,01,25,00),B(cg_link ,25),I(23,00,00,00),B(cg_link ,346),I(23,00,00,00),B(cg_link ,192),I(3b,fe,25,00),B(cg_link ,24),I(23,00,00,00),B(cg_link ,190),I(23,00,00,00),B(cg_link ,191),I(3b,02,25,00),B(cg_link ,23),I(23,00,00,00),B(cg_link ,347),I(23,00,00,00),B(cg_link ,184),I(3b,02,25,00),B(cg_link ,22),I(23,00,00,00),B(cg_link ,348),I(23,00,00,00),B(cg_link ,181),I(3b,01,25,00),B(cg_link ,21),I(23,00,00,00),B(cg_link ,349),I(23,00,00,00),B(cg_link ,169),I(3b,01,25,00),B(cg_link ,20),I(23,00,00,00),B(cg_link ,350),I(23,00,00,00),B(cg_link ,168),I(3b,00,25,00),B(cg_link ,19),I(23,00,00,00),B(cg_link ,351),I(23,00,00,00),B(cg_link ,167),I(3b,01,25,00),B(cg_link ,18),I(23,00,00,00),B(cg_link ,352),I(23,00,00,00),B(cg_link ,165),I(3b,01,25,00),B(cg_link ,17),I(23,00,00,00),B(cg_link ,353),I(23,00,00,00),B(cg_link ,160),I(3b,fe,25,00),B(cg_link ,16),I(23,00,00,00),B(cg_link ,354),I(23,00,00,00),B(cg_link ,159),I(3b,fe,25,00),B(cg_link ,15),I(86,25,00,00),B(cg_link ,14),I(86,25,00,00),B(cg_link ,13),I(23,00,00,00),B(cg_link ,355),I(23,00,00,00),B(cg_link ,158),I(3b,02,25,00),B(cg_link ,12),I(23,00,00,00),B(cg_link ,356),I(23,00,00,00),B(cg_link ,155),I(3b,00,25,00),B(cg_link ,11),I(23,00,00,00),B(cg_link ,357),I(23,00,00,00),B(cg_link ,153),I(3b,01,25,00),B(cg_link ,10),I(23,00,00,00),B(cg_link ,358),I(23,00,00,00),B(cg_link ,147),I(3b,02,25,00),B(cg_link ,9),I(23,00,00,00),B(cg_link ,359),I(23,00,00,00),B(cg_link ,138),I(3b,00,25,00),B(cg_link ,8),I(86,25,00,00),B(cg_link ,7),I(23,00,00,00),B(cg_link ,360),I(23,00,00,00),B(cg_link ,136),I(3b,01,25,00),B(cg_link ,6),I(23,00,00,00),B(cg_link ,361),I(23,00,00,00),B(cg_link ,130),I(3b,fe,25,00),B(cg_link ,5),I(23,00,00,00),B(cg_link ,362),I(23,00,00,00),B(cg_link ,128),I(3b,02,25,00),B(cg_link ,4),I(23,00,00,00),B(cg_link ,363),I(23,00,00,00),B(cg_link ,126),I(3b,02,25,00),B(cg_link ,3),I(23,00,00,00),B(cg_link ,364),I(23,00,00,00),B(cg_link ,124),I(3b,02,25,00),B(cg_link ,2),I(23,00,00,00),B(cg_link ,365),I(23,00,00,00),B(cg_link ,108),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  object_class(str_7451) = eul_static_string_class;
-  object_class(str_7452) = eul_static_string_class;
-  eul_allocate_bytevector( G007450,G007449);
-  eul_intern_symbol(sym_7455,"eul_true");
-  object_class(str_7456) = eul_static_string_class;
-  object_class(str_7457) = eul_static_string_class;
-  eul_allocate_bytevector( G007454,G007453);
-  object_class(str_7460) = eul_static_string_class;
   object_class(str_7461) = eul_static_string_class;
   object_class(str_7462) = eul_static_string_class;
-  eul_allocate_bytevector( G007459,G007458);
-  object_class(str_7465) = eul_static_string_class;
+  eul_allocate_bytevector( G007460,G007459);
+  eul_intern_symbol(sym_7465,"eul_true");
   object_class(str_7466) = eul_static_string_class;
   object_class(str_7467) = eul_static_string_class;
-  object_class(str_7468) = eul_static_string_class;
-  object_class(str_7469) = eul_static_string_class;
+  eul_allocate_bytevector( G007464,G007463);
   object_class(str_7470) = eul_static_string_class;
   object_class(str_7471) = eul_static_string_class;
   object_class(str_7472) = eul_static_string_class;
-  object_class(str_7473) = eul_static_string_class;
-  object_class(str_7474) = eul_static_string_class;
+  eul_allocate_bytevector( G007469,G007468);
   object_class(str_7475) = eul_static_string_class;
-  eul_allocate_bytevector( G007464,G007463);
-  eul_intern_symbol(sym_7478,"eul_nil");
-  eul_allocate_bytevector( G007477,G007476);
+  object_class(str_7476) = eul_static_string_class;
+  object_class(str_7477) = eul_static_string_class;
+  object_class(str_7478) = eul_static_string_class;
+  object_class(str_7479) = eul_static_string_class;
+  object_class(str_7480) = eul_static_string_class;
   object_class(str_7481) = eul_static_string_class;
   object_class(str_7482) = eul_static_string_class;
-  eul_allocate_bytevector( G007480,G007479);
+  object_class(str_7483) = eul_static_string_class;
+  object_class(str_7484) = eul_static_string_class;
   object_class(str_7485) = eul_static_string_class;
-  eul_allocate_bytevector( G007484,G007483);
-  object_class(str_7488) = eul_static_string_class;
-  object_class(str_7489) = eul_static_string_class;
+  eul_allocate_bytevector( G007474,G007473);
+  eul_intern_symbol(sym_7488,"eul_nil");
   eul_allocate_bytevector( G007487,G007486);
+  object_class(str_7491) = eul_static_string_class;
   object_class(str_7492) = eul_static_string_class;
-  eul_allocate_bytevector( G007491,G007490);
+  eul_allocate_bytevector( G007490,G007489);
+  object_class(str_7495) = eul_static_string_class;
   eul_allocate_bytevector( G007494,G007493);
-  eul_intern_symbol(sym_7497,"*actual-module*");
-  eul_allocate_bytevector( G007496,G007495);
-  eul_allocate_bytevector( G007499,G007498);
+  object_class(str_7498) = eul_static_string_class;
+  object_class(str_7499) = eul_static_string_class;
+  eul_allocate_bytevector( G007497,G007496);
+  object_class(str_7502) = eul_static_string_class;
   eul_allocate_bytevector( G007501,G007500);
-  eul_intern_symbol(sym_7504,"get-constant-loc");
-  eul_intern_symbol(sym_7505,"get-literal-entry");
-  eul_intern_keyword(key_7506,"size");
-  eul_intern_symbol(sym_7507,"convert-constant");
-  eul_intern_symbol(sym_7508,"(method get-constant-loc)");
-  eul_intern_symbol(sym_7509,"(method get-literal-entry)");
-  eul_intern_symbol(sym_7510,"(method convert-constant)");
-  eul_allocate_bytevector( G007503,G007502);
-  eul_allocate_bytevector( G007512,G007511);
-  eul_allocate_bytevector( G007514,G007513);
-  object_class(str_7517) = eul_static_string_class;
-  object_class(str_7518) = eul_static_string_class;
-  eul_intern_keyword(key_7519,"file-name");
-  eul_intern_keyword(key_7520,"mode");
-  eul_intern_symbol(sym_7521,"w");
-  eul_intern_symbol(sym_7522,"*clean-ups*");
-  eul_intern_symbol(sym_7523,"anonymous");
-  eul_intern_symbol(sym_7524,"*c-stream*");
-  object_class(str_7525) = eul_static_string_class;
-  object_class(str_7526) = eul_static_string_class;
+  eul_allocate_bytevector( G007504,G007503);
+  eul_intern_symbol(sym_7507,"*actual-module*");
+  eul_allocate_bytevector( G007506,G007505);
+  eul_allocate_bytevector( G007509,G007508);
+  eul_allocate_bytevector( G007511,G007510);
+  eul_intern_symbol(sym_7514,"get-constant-loc");
+  eul_intern_symbol(sym_7515,"get-literal-entry");
+  eul_intern_keyword(key_7516,"size");
+  eul_intern_symbol(sym_7517,"convert-constant");
+  eul_intern_symbol(sym_7518,"(method get-constant-loc)");
+  eul_intern_symbol(sym_7519,"(method get-literal-entry)");
+  eul_intern_symbol(sym_7520,"(method convert-constant)");
+  eul_allocate_bytevector( G007513,G007512);
+  eul_allocate_bytevector( G007522,G007521);
+  eul_allocate_bytevector( G007524,G007523);
   object_class(str_7527) = eul_static_string_class;
   object_class(str_7528) = eul_static_string_class;
-  object_class(str_7529) = eul_static_string_class;
-  eul_allocate_bytevector( G007516,G007515);
-  object_class(str_7532) = eul_static_string_class;
-  eul_allocate_bytevector( G007531,G007530);
+  eul_intern_keyword(key_7529,"file-name");
+  eul_intern_keyword(key_7530,"mode");
+  eul_intern_symbol(sym_7531,"w");
+  eul_intern_symbol(sym_7532,"*clean-ups*");
+  eul_intern_symbol(sym_7533,"anonymous");
+  eul_intern_symbol(sym_7534,"*c-stream*");
   object_class(str_7535) = eul_static_string_class;
-  eul_allocate_bytevector( G007534,G007533);
-  eul_intern_symbol(sym_7538,"*C-state*");
-  eul_allocate_bytevector( G007537,G007536);
-  object_class(str_7541) = eul_static_string_class;
-  eul_intern_symbol(sym_7542,"CODE-VECTOR");
-  eul_intern_symbol(sym_7543,"STATIC");
-  eul_intern_symbol(sym_7544,"BINDING");
-  eul_intern_symbol(sym_7545,"FF");
-  eul_allocate_bytevector( G007540,G007539);
-  object_class(str_7548) = eul_static_string_class;
+  object_class(str_7536) = eul_static_string_class;
+  object_class(str_7537) = eul_static_string_class;
+  object_class(str_7538) = eul_static_string_class;
+  object_class(str_7539) = eul_static_string_class;
+  eul_allocate_bytevector( G007526,G007525);
+  object_class(str_7542) = eul_static_string_class;
+  eul_allocate_bytevector( G007541,G007540);
+  object_class(str_7545) = eul_static_string_class;
+  eul_allocate_bytevector( G007544,G007543);
+  eul_intern_symbol(sym_7548,"*C-state*");
   eul_allocate_bytevector( G007547,G007546);
+  object_class(str_7551) = eul_static_string_class;
+  eul_intern_symbol(sym_7552,"CODE-VECTOR");
+  eul_intern_symbol(sym_7553,"STATIC");
+  eul_intern_symbol(sym_7554,"BINDING");
+  eul_intern_symbol(sym_7555,"FF");
   eul_allocate_bytevector( G007550,G007549);
-  object_class(str_7553) = eul_static_string_class;
-  eul_intern_keyword(key_7554,"ct-error-value");
-  eul_allocate_bytevector( G007552,G007551);
-  eul_intern_symbol(sym_7557,"(method G006656)");
   object_class(str_7558) = eul_static_string_class;
-  eul_intern_symbol(sym_7559,"?");
-  object_class(str_7560) = eul_static_string_class;
-  eul_allocate_bytevector( G007556,G007555);
-  eul_intern_symbol(sym_7563,"ff");
-  object_class(str_7564) = eul_static_string_class;
-  object_class(str_7565) = eul_static_string_class;
-  object_class(str_7566) = eul_static_string_class;
+  eul_allocate_bytevector( G007557,G007556);
+  eul_allocate_bytevector( G007560,G007559);
+  object_class(str_7563) = eul_static_string_class;
+  eul_intern_keyword(key_7564,"ct-error-value");
   eul_allocate_bytevector( G007562,G007561);
-  eul_allocate_bytevector( G007568,G007567);
-  object_class(str_7572) = eul_static_string_class;
-  object_class(cons_7571) = eul_static_cons_class;
-  eul_cdr(cons_7571) = eul_nil;
-  eul_allocate_bytevector( G007570,G007569);
+  eul_intern_symbol(sym_7567,"(method G006666)");
+  object_class(str_7568) = eul_static_string_class;
+  eul_intern_symbol(sym_7569,"?");
+  object_class(str_7570) = eul_static_string_class;
+  eul_allocate_bytevector( G007566,G007565);
+  eul_intern_symbol(sym_7573,"ff");
+  object_class(str_7574) = eul_static_string_class;
   object_class(str_7575) = eul_static_string_class;
   object_class(str_7576) = eul_static_string_class;
-  eul_allocate_bytevector( G007574,G007573);
+  eul_allocate_bytevector( G007572,G007571);
   eul_allocate_bytevector( G007578,G007577);
+  object_class(str_7582) = eul_static_string_class;
+  object_class(cons_7581) = eul_static_cons_class;
+  eul_cdr(cons_7581) = eul_nil;
   eul_allocate_bytevector( G007580,G007579);
-  object_class(str_7583) = eul_static_string_class;
-  eul_allocate_bytevector( G007582,G007581);
+  object_class(str_7585) = eul_static_string_class;
   object_class(str_7586) = eul_static_string_class;
-  object_class(str_7587) = eul_static_string_class;
-  eul_allocate_bytevector( G007585,G007584);
-  object_class(str_7590) = eul_static_string_class;
-  eul_allocate_bytevector( G007589,G007588);
+  eul_allocate_bytevector( G007584,G007583);
+  eul_allocate_bytevector( G007588,G007587);
+  eul_allocate_bytevector( G007590,G007589);
+  object_class(str_7593) = eul_static_string_class;
   eul_allocate_bytevector( G007592,G007591);
-  eul_allocate_bytevector( G007594,G007593);
+  object_class(str_7596) = eul_static_string_class;
   object_class(str_7597) = eul_static_string_class;
-  eul_allocate_bytevector( G007596,G007595);
+  eul_allocate_bytevector( G007595,G007594);
+  object_class(str_7600) = eul_static_string_class;
   eul_allocate_bytevector( G007599,G007598);
-  eul_allocate_bytevector( G007601,G007600);
-  object_class(str_7604) = eul_static_string_class;
-  object_class(str_7605) = eul_static_string_class;
-  object_class(str_7606) = eul_static_string_class;
+  eul_allocate_bytevector( G007602,G007601);
+  eul_allocate_bytevector( G007604,G007603);
   object_class(str_7607) = eul_static_string_class;
-  object_class(str_7608) = eul_static_string_class;
-  object_class(str_7609) = eul_static_string_class;
-  object_class(str_7610) = eul_static_string_class;
-  eul_allocate_bytevector( G007603,G007602);
-  object_class(str_7613) = eul_static_string_class;
+  eul_allocate_bytevector( G007606,G007605);
+  eul_allocate_bytevector( G007609,G007608);
+  eul_allocate_bytevector( G007611,G007610);
   object_class(str_7614) = eul_static_string_class;
-  eul_allocate_bytevector( G007612,G007611);
-  eul_allocate_bytevector( G007616,G007615);
-  eul_allocate_bytevector( G007618,G007617);
-  object_class(str_7621) = eul_static_string_class;
-  eul_allocate_bytevector( G007620,G007619);
-  eul_intern_symbol(sym_7624,"(method G006487)");
-  eul_intern_symbol(sym_7625,"decode");
-  eul_allocate_bytevector( G007623,G007622);
-  eul_allocate_bytevector( G007627,G007626);
-  object_class(str_7630) = eul_static_string_class;
+  object_class(str_7615) = eul_static_string_class;
+  object_class(str_7616) = eul_static_string_class;
+  object_class(str_7617) = eul_static_string_class;
+  object_class(str_7618) = eul_static_string_class;
+  object_class(str_7619) = eul_static_string_class;
+  object_class(str_7620) = eul_static_string_class;
+  eul_allocate_bytevector( G007613,G007612);
+  object_class(str_7623) = eul_static_string_class;
+  object_class(str_7624) = eul_static_string_class;
+  eul_allocate_bytevector( G007622,G007621);
+  eul_allocate_bytevector( G007626,G007625);
+  eul_allocate_bytevector( G007628,G007627);
   object_class(str_7631) = eul_static_string_class;
-  eul_allocate_bytevector( G007629,G007628);
-  object_class(str_7634) = eul_static_string_class;
+  eul_allocate_bytevector( G007630,G007629);
+  eul_intern_symbol(sym_7634,"(method G006497)");
+  eul_intern_symbol(sym_7635,"decode");
   eul_allocate_bytevector( G007633,G007632);
-  object_class(str_7637) = eul_static_string_class;
-  eul_allocate_bytevector( G007636,G007635);
+  eul_allocate_bytevector( G007637,G007636);
   object_class(str_7640) = eul_static_string_class;
+  object_class(str_7641) = eul_static_string_class;
   eul_allocate_bytevector( G007639,G007638);
-  eul_allocate_bytevector( G007642,G007641);
-  object_class(str_7645) = eul_static_string_class;
-  object_class(str_7646) = eul_static_string_class;
+  object_class(str_7644) = eul_static_string_class;
+  eul_allocate_bytevector( G007643,G007642);
   object_class(str_7647) = eul_static_string_class;
-  object_class(str_7648) = eul_static_string_class;
-  object_class(str_7649) = eul_static_string_class;
+  eul_allocate_bytevector( G007646,G007645);
   object_class(str_7650) = eul_static_string_class;
-  object_class(str_7651) = eul_static_string_class;
-  object_class(str_7652) = eul_static_string_class;
-  object_class(str_7653) = eul_static_string_class;
-  object_class(str_7654) = eul_static_string_class;
+  eul_allocate_bytevector( G007649,G007648);
+  eul_allocate_bytevector( G007652,G007651);
   object_class(str_7655) = eul_static_string_class;
   object_class(str_7656) = eul_static_string_class;
   object_class(str_7657) = eul_static_string_class;
-  eul_allocate_bytevector( G007644,G007643);
-  eul_allocate_bytevector( G007659,G007658);
-  eul_allocate_bytevector( G007661,G007660);
+  object_class(str_7658) = eul_static_string_class;
+  object_class(str_7659) = eul_static_string_class;
+  object_class(str_7660) = eul_static_string_class;
+  object_class(str_7661) = eul_static_string_class;
+  object_class(str_7662) = eul_static_string_class;
+  object_class(str_7663) = eul_static_string_class;
   object_class(str_7664) = eul_static_string_class;
-  eul_allocate_bytevector( G007663,G007662);
+  object_class(str_7665) = eul_static_string_class;
+  object_class(str_7666) = eul_static_string_class;
   object_class(str_7667) = eul_static_string_class;
-  eul_intern_keyword(key_7668,"comparator");
-  eul_allocate_bytevector( G007666,G007665);
-  object_class(str_7671) = eul_static_string_class;
-  eul_allocate_bytevector( G007670,G007669);
+  eul_allocate_bytevector( G007654,G007653);
+  eul_allocate_bytevector( G007669,G007668);
+  eul_allocate_bytevector( G007671,G007670);
+  object_class(str_7674) = eul_static_string_class;
   eul_allocate_bytevector( G007673,G007672);
-  eul_allocate_bytevector( G007675,G007674);
-  object_class(str_7678) = eul_static_string_class;
-  object_class(str_7679) = eul_static_string_class;
-  object_class(str_7680) = eul_static_string_class;
+  object_class(str_7677) = eul_static_string_class;
+  eul_intern_keyword(key_7678,"comparator");
+  eul_allocate_bytevector( G007676,G007675);
   object_class(str_7681) = eul_static_string_class;
-  eul_allocate_bytevector( G007677,G007676);
-  object_class(str_7684) = eul_static_string_class;
-  object_class(str_7685) = eul_static_string_class;
+  eul_allocate_bytevector( G007680,G007679);
   eul_allocate_bytevector( G007683,G007682);
-  eul_allocate_bytevector( G007687,G007686);
+  eul_allocate_bytevector( G007685,G007684);
+  object_class(str_7688) = eul_static_string_class;
+  object_class(str_7689) = eul_static_string_class;
   object_class(str_7690) = eul_static_string_class;
   object_class(str_7691) = eul_static_string_class;
-  eul_allocate_bytevector( G007689,G007688);
+  eul_allocate_bytevector( G007687,G007686);
   object_class(str_7694) = eul_static_string_class;
+  object_class(str_7695) = eul_static_string_class;
   eul_allocate_bytevector( G007693,G007692);
-  object_class(str_7697) = eul_static_string_class;
-  object_class(str_7698) = eul_static_string_class;
-  eul_allocate_bytevector( G007696,G007695);
+  eul_allocate_bytevector( G007697,G007696);
+  object_class(str_7700) = eul_static_string_class;
   object_class(str_7701) = eul_static_string_class;
-  eul_allocate_bytevector( G007700,G007699);
+  eul_allocate_bytevector( G007699,G007698);
+  object_class(str_7704) = eul_static_string_class;
   eul_allocate_bytevector( G007703,G007702);
-  eul_allocate_bytevector( G007705,G007704);
+  object_class(str_7707) = eul_static_string_class;
   object_class(str_7708) = eul_static_string_class;
-  object_class(str_7709) = eul_static_string_class;
-  object_class(str_7710) = eul_static_string_class;
+  eul_allocate_bytevector( G007706,G007705);
   object_class(str_7711) = eul_static_string_class;
-  eul_allocate_bytevector( G007707,G007706);
+  eul_allocate_bytevector( G007710,G007709);
   eul_allocate_bytevector( G007713,G007712);
   eul_allocate_bytevector( G007715,G007714);
+  object_class(str_7718) = eul_static_string_class;
+  object_class(str_7719) = eul_static_string_class;
+  object_class(str_7720) = eul_static_string_class;
+  object_class(str_7721) = eul_static_string_class;
   eul_allocate_bytevector( G007717,G007716);
-  eul_allocate_bytevector( G007719,G007718);
-  object_class(str_7722) = eul_static_string_class;
-  object_class(str_7723) = eul_static_string_class;
-  object_class(str_7724) = eul_static_string_class;
-  object_class(str_7725) = eul_static_string_class;
-  object_class(str_7726) = eul_static_string_class;
-  object_class(str_7727) = eul_static_string_class;
-  object_class(str_7728) = eul_static_string_class;
-  object_class(str_7729) = eul_static_string_class;
-  object_class(str_7730) = eul_static_string_class;
-  object_class(str_7731) = eul_static_string_class;
+  eul_allocate_bytevector( G007723,G007722);
+  eul_allocate_bytevector( G007725,G007724);
+  eul_allocate_bytevector( G007727,G007726);
+  eul_allocate_bytevector( G007729,G007728);
   object_class(str_7732) = eul_static_string_class;
   object_class(str_7733) = eul_static_string_class;
   object_class(str_7734) = eul_static_string_class;
-  eul_allocate_bytevector( G007721,G007720);
-  eul_allocate_bytevector( G007736,G007735);
-  eul_allocate_bytevector( G007738,G007737);
+  object_class(str_7735) = eul_static_string_class;
+  object_class(str_7736) = eul_static_string_class;
+  object_class(str_7737) = eul_static_string_class;
+  object_class(str_7738) = eul_static_string_class;
+  object_class(str_7739) = eul_static_string_class;
+  object_class(str_7740) = eul_static_string_class;
   object_class(str_7741) = eul_static_string_class;
-  eul_allocate_bytevector( G007740,G007739);
+  object_class(str_7742) = eul_static_string_class;
+  object_class(str_7743) = eul_static_string_class;
   object_class(str_7744) = eul_static_string_class;
-  eul_allocate_bytevector( G007743,G007742);
-  object_class(str_7747) = eul_static_string_class;
-  object_class(str_7748) = eul_static_string_class;
-  object_class(str_7749) = eul_static_string_class;
-  object_class(str_7750) = eul_static_string_class;
+  eul_allocate_bytevector( G007731,G007730);
+  eul_allocate_bytevector( G007746,G007745);
+  eul_allocate_bytevector( G007748,G007747);
   object_class(str_7751) = eul_static_string_class;
-  object_class(str_7752) = eul_static_string_class;
-  object_class(str_7753) = eul_static_string_class;
+  eul_allocate_bytevector( G007750,G007749);
   object_class(str_7754) = eul_static_string_class;
-  object_class(str_7755) = eul_static_string_class;
-  object_class(str_7756) = eul_static_string_class;
+  eul_allocate_bytevector( G007753,G007752);
   object_class(str_7757) = eul_static_string_class;
   object_class(str_7758) = eul_static_string_class;
   object_class(str_7759) = eul_static_string_class;
-  eul_allocate_bytevector( G007746,G007745);
+  object_class(str_7760) = eul_static_string_class;
+  object_class(str_7761) = eul_static_string_class;
   object_class(str_7762) = eul_static_string_class;
-  eul_allocate_bytevector( G007761,G007760);
+  object_class(str_7763) = eul_static_string_class;
+  object_class(str_7764) = eul_static_string_class;
   object_class(str_7765) = eul_static_string_class;
   object_class(str_7766) = eul_static_string_class;
-  eul_allocate_bytevector( G007764,G007763);
-  eul_allocate_bytevector( G007768,G007767);
-  object_class(str_7771) = eul_static_string_class;
+  object_class(str_7767) = eul_static_string_class;
+  object_class(str_7768) = eul_static_string_class;
+  object_class(str_7769) = eul_static_string_class;
+  eul_allocate_bytevector( G007756,G007755);
   object_class(str_7772) = eul_static_string_class;
-  object_class(str_7773) = eul_static_string_class;
-  object_class(str_7774) = eul_static_string_class;
-  eul_allocate_bytevector( G007770,G007769);
-  object_class(str_7777) = eul_static_string_class;
-  eul_allocate_bytevector( G007776,G007775);
-  eul_allocate_bytevector( G007779,G007778);
+  eul_allocate_bytevector( G007771,G007770);
+  object_class(str_7775) = eul_static_string_class;
+  object_class(str_7776) = eul_static_string_class;
+  eul_allocate_bytevector( G007774,G007773);
+  eul_allocate_bytevector( G007778,G007777);
+  object_class(str_7781) = eul_static_string_class;
   object_class(str_7782) = eul_static_string_class;
-  eul_allocate_bytevector( G007781,G007780);
-  object_class(str_7785) = eul_static_string_class;
-  eul_allocate_bytevector( G007784,G007783);
-  eul_allocate_bytevector( G007787,G007786);
+  object_class(str_7783) = eul_static_string_class;
+  object_class(str_7784) = eul_static_string_class;
+  eul_allocate_bytevector( G007780,G007779);
+  object_class(str_7787) = eul_static_string_class;
+  eul_allocate_bytevector( G007786,G007785);
   eul_allocate_bytevector( G007789,G007788);
   object_class(str_7792) = eul_static_string_class;
-  object_class(str_7793) = eul_static_string_class;
-  object_class(str_7794) = eul_static_string_class;
   eul_allocate_bytevector( G007791,G007790);
-  eul_intern_symbol(sym_7797,"write-copyright-to-C-file");
-  eul_intern_symbol(sym_7798,"compute-static");
-  eul_intern_symbol(sym_7799,"get-bytevector-pos");
-  eul_intern_symbol(sym_7800,"register-new-global");
-  eul_intern_symbol(sym_7801,"set-up-init-flag");
-  eul_intern_symbol(sym_7802,"set-up-bytevectors");
-  eul_intern_symbol(sym_7803,"close-bytevector");
-  eul_intern_symbol(sym_7804,"set-global-index");
-  eul_intern_symbol(sym_7805,"write-decls-to-C-file");
-  eul_intern_symbol(sym_7806,"write-C-file-header");
-  eul_intern_symbol(sym_7807,"add-decl");
-  eul_intern_symbol(sym_7808,"write-C-hook-file");
-  eul_intern_symbol(sym_7809,"get-imported-module-or-library");
-  eul_intern_symbol(sym_7810,"flush-bytevector-cache");
-  eul_intern_symbol(sym_7811,"write-to-bv-str");
-  eul_intern_symbol(sym_7812,"check-method-name");
-  eul_intern_symbol(sym_7813,"compute-bytevector");
-  eul_intern_symbol(sym_7814,"set-up-init-bytevector");
-  eul_intern_symbol(sym_7815,"set-fixed-bytes");
-  eul_intern_symbol(sym_7816,"wrap-init-code");
-  eul_intern_symbol(sym_7817,"static-allocatable-p");
-  eul_intern_symbol(sym_7818,"write-next-bv-byte");
-  eul_intern_symbol(sym_7819,"set-up-bindings");
-  eul_intern_symbol(sym_7820,"initialize-imported-modules");
-  eul_intern_symbol(sym_7821,"reset-decoder");
-  eul_intern_symbol(sym_7822,"add-used-module-name");
-  eul_intern_symbol(sym_7823,"open-bytevector");
-  eul_intern_symbol(sym_7824,"write-to-C-file");
-  eul_intern_symbol(sym_7825,"write-ff-stub-to-C-file");
-  eul_intern_symbol(sym_7826,"as-hex");
-  eul_intern_symbol(sym_7827,"add-global");
-  eul_intern_symbol(sym_7828,"wrap-init-code-aux");
-  eul_intern_symbol(sym_7829,"write-C-include-file");
-  eul_intern_symbol(sym_7830,"compute-code-vector");
-  eul_intern_symbol(sym_7831,"global-index");
-  eul_intern_symbol(sym_7832,"compute-foreign-function-binding");
-  eul_intern_symbol(sym_7833,"as-C-string");
-  eul_intern_symbol(sym_7834,"add-code-vector-def");
-  eul_intern_symbol(sym_7835,"add-statement");
-  eul_intern_symbol(sym_7836,"write-C-file-end");
-  eul_intern_symbol(sym_7837,"reset-code-vector-str");
-  eul_intern_symbol(sym_7838,"set-up-foreign-functions");
-  eul_intern_symbol(sym_7839,"compute-binding");
-  eul_intern_symbol(sym_7840,"check-bv-delimiter");
-  eul_intern_symbol(sym_7841,"compute-bytevector-aux");
-  eul_intern_symbol(sym_7842,"add-initialization");
-  eul_intern_symbol(sym_7843,"write-C-module-file");
-  eul_intern_symbol(sym_7844,"set-bytevector-pos");
-  eul_intern_symbol(sym_7845,"write-C-state");
-  eul_intern_symbol(sym_7846,"top-level");
-  eul_allocate_bytevector( G007796,G007795);
+  object_class(str_7795) = eul_static_string_class;
+  eul_allocate_bytevector( G007794,G007793);
+  eul_allocate_bytevector( G007797,G007796);
+  eul_allocate_bytevector( G007799,G007798);
+  object_class(str_7802) = eul_static_string_class;
+  object_class(str_7803) = eul_static_string_class;
+  object_class(str_7804) = eul_static_string_class;
+  eul_allocate_bytevector( G007801,G007800);
+  eul_intern_symbol(sym_7807,"write-copyright-to-C-file");
+  eul_intern_symbol(sym_7808,"compute-static");
+  eul_intern_symbol(sym_7809,"get-bytevector-pos");
+  eul_intern_symbol(sym_7810,"register-new-global");
+  eul_intern_symbol(sym_7811,"set-up-init-flag");
+  eul_intern_symbol(sym_7812,"set-up-bytevectors");
+  eul_intern_symbol(sym_7813,"close-bytevector");
+  eul_intern_symbol(sym_7814,"set-global-index");
+  eul_intern_symbol(sym_7815,"write-decls-to-C-file");
+  eul_intern_symbol(sym_7816,"write-C-file-header");
+  eul_intern_symbol(sym_7817,"add-decl");
+  eul_intern_symbol(sym_7818,"write-C-hook-file");
+  eul_intern_symbol(sym_7819,"get-imported-module-or-library");
+  eul_intern_symbol(sym_7820,"flush-bytevector-cache");
+  eul_intern_symbol(sym_7821,"write-to-bv-str");
+  eul_intern_symbol(sym_7822,"check-method-name");
+  eul_intern_symbol(sym_7823,"compute-bytevector");
+  eul_intern_symbol(sym_7824,"set-up-init-bytevector");
+  eul_intern_symbol(sym_7825,"set-fixed-bytes");
+  eul_intern_symbol(sym_7826,"wrap-init-code");
+  eul_intern_symbol(sym_7827,"static-allocatable-p");
+  eul_intern_symbol(sym_7828,"write-next-bv-byte");
+  eul_intern_symbol(sym_7829,"set-up-bindings");
+  eul_intern_symbol(sym_7830,"initialize-imported-modules");
+  eul_intern_symbol(sym_7831,"reset-decoder");
+  eul_intern_symbol(sym_7832,"add-used-module-name");
+  eul_intern_symbol(sym_7833,"open-bytevector");
+  eul_intern_symbol(sym_7834,"write-to-C-file");
+  eul_intern_symbol(sym_7835,"write-ff-stub-to-C-file");
+  eul_intern_symbol(sym_7836,"as-hex");
+  eul_intern_symbol(sym_7837,"add-global");
+  eul_intern_symbol(sym_7838,"wrap-init-code-aux");
+  eul_intern_symbol(sym_7839,"write-C-include-file");
+  eul_intern_symbol(sym_7840,"compute-code-vector");
+  eul_intern_symbol(sym_7841,"global-index");
+  eul_intern_symbol(sym_7842,"compute-foreign-function-binding");
+  eul_intern_symbol(sym_7843,"as-C-string");
+  eul_intern_symbol(sym_7844,"add-code-vector-def");
+  eul_intern_symbol(sym_7845,"add-statement");
+  eul_intern_symbol(sym_7846,"write-C-file-end");
+  eul_intern_symbol(sym_7847,"reset-code-vector-str");
+  eul_intern_symbol(sym_7848,"set-up-foreign-functions");
+  eul_intern_symbol(sym_7849,"compute-binding");
+  eul_intern_symbol(sym_7850,"check-bv-delimiter");
+  eul_intern_symbol(sym_7851,"compute-bytevector-aux");
+  eul_intern_symbol(sym_7852,"add-initialization");
+  eul_intern_symbol(sym_7853,"write-C-module-file");
+  eul_intern_symbol(sym_7854,"set-bytevector-pos");
+  eul_intern_symbol(sym_7855,"write-C-state");
+  eul_intern_symbol(sym_7856,"top-level");
+  eul_allocate_bytevector( G007806,G007805);
 
   /* Set local bindings */
   {
@@ -827,314 +827,314 @@ void initialize_module_cg_link()
       cg_link_bindings[i] = eul_nil;
   }
 
-  cg_link_bindings[ 60] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_int_as_hex_str7448;
-  cg_link_bindings[ 61] = str_7451;
-  cg_link_bindings[ 62] = str_7452;
-  cg_link_bindings[ 63] = G007450;
-  cg_link_bindings[ 64] = sym_7455;
-  cg_link_bindings[ 65] = str_7456;
-  cg_link_bindings[ 66] = str_7457;
-  cg_link_bindings[ 67] = G007454;
-  cg_link_bindings[ 68] = str_7460;
-  cg_link_bindings[ 69] = str_7461;
-  cg_link_bindings[ 70] = str_7462;
-  cg_link_bindings[ 71] = G007459;
-  cg_link_bindings[ 72] = str_7465;
-  cg_link_bindings[ 73] = str_7466;
-  cg_link_bindings[ 74] = str_7467;
-  cg_link_bindings[ 75] = str_7468;
-  cg_link_bindings[ 76] = str_7469;
-  cg_link_bindings[ 77] = str_7470;
-  cg_link_bindings[ 78] = str_7471;
-  cg_link_bindings[ 79] = str_7472;
-  cg_link_bindings[ 80] = str_7473;
-  cg_link_bindings[ 81] = str_7474;
-  cg_link_bindings[ 82] = str_7475;
-  cg_link_bindings[ 83] = G007464;
-  cg_link_bindings[ 84] = sym_7478;
-  cg_link_bindings[ 85] = G007477;
-  cg_link_bindings[ 86] = str_7481;
-  cg_link_bindings[ 87] = str_7482;
-  cg_link_bindings[ 88] = G007480;
-  cg_link_bindings[ 89] = str_7485;
-  cg_link_bindings[ 90] = G007484;
-  cg_link_bindings[ 91] = str_7488;
-  cg_link_bindings[ 92] = str_7489;
-  cg_link_bindings[ 93] = G007487;
-  cg_link_bindings[ 94] = str_7492;
-  cg_link_bindings[ 95] = G007491;
-  cg_link_bindings[ 96] = G007494;
-  cg_link_bindings[ 97] = sym_7497;
-  cg_link_bindings[ 98] = G007496;
-  cg_link_bindings[ 99] = G007499;
-  cg_link_bindings[ 100] = G007501;
-  cg_link_bindings[ 101] = sym_7504;
-  cg_link_bindings[ 102] = sym_7505;
-  cg_link_bindings[ 103] = key_7506;
-  cg_link_bindings[ 104] = sym_7507;
-  cg_link_bindings[ 105] = sym_7508;
-  cg_link_bindings[ 106] = sym_7509;
-  cg_link_bindings[ 107] = sym_7510;
-  cg_link_bindings[ 108] = G007503;
-  cg_link_bindings[ 109] = G007512;
-  cg_link_bindings[ 110] = G007514;
-  cg_link_bindings[ 111] = str_7517;
-  cg_link_bindings[ 112] = str_7518;
-  cg_link_bindings[ 113] = key_7519;
-  cg_link_bindings[ 114] = key_7520;
-  cg_link_bindings[ 115] = sym_7521;
-  cg_link_bindings[ 116] = sym_7522;
-  cg_link_bindings[ 117] = sym_7523;
-  cg_link_bindings[ 118] = sym_7524;
-  cg_link_bindings[ 119] = str_7525;
-  cg_link_bindings[ 120] = str_7526;
-  cg_link_bindings[ 121] = str_7527;
-  cg_link_bindings[ 122] = str_7528;
-  cg_link_bindings[ 123] = str_7529;
-  cg_link_bindings[ 124] = G007516;
-  cg_link_bindings[ 125] = str_7532;
-  cg_link_bindings[ 126] = G007531;
-  cg_link_bindings[ 127] = str_7535;
-  cg_link_bindings[ 128] = G007534;
-  cg_link_bindings[ 129] = sym_7538;
-  cg_link_bindings[ 130] = G007537;
-  cg_link_bindings[ 131] = str_7541;
-  cg_link_bindings[ 132] = sym_7542;
-  cg_link_bindings[ 133] = sym_7543;
-  cg_link_bindings[ 134] = sym_7544;
-  cg_link_bindings[ 135] = sym_7545;
-  cg_link_bindings[ 136] = G007540;
-  cg_link_bindings[ 137] = str_7548;
-  cg_link_bindings[ 138] = G007547;
-  cg_link_bindings[ 139] = G007550;
-  cg_link_bindings[ 140] = str_7553;
-  cg_link_bindings[ 141] = key_7554;
-  cg_link_bindings[ 142] = G007552;
-  cg_link_bindings[ 143] = sym_7557;
-  cg_link_bindings[ 144] = str_7558;
-  cg_link_bindings[ 145] = sym_7559;
-  cg_link_bindings[ 146] = str_7560;
-  cg_link_bindings[ 147] = G007556;
-  cg_link_bindings[ 148] = sym_7563;
-  cg_link_bindings[ 149] = str_7564;
-  cg_link_bindings[ 150] = str_7565;
-  cg_link_bindings[ 151] = str_7566;
-  cg_link_bindings[ 152] = G007562;
-  cg_link_bindings[ 153] = G007568;
-  cg_link_bindings[ 154] = cons_7571;
-  cg_link_bindings[ 155] = G007570;
-  cg_link_bindings[ 156] = str_7575;
-  cg_link_bindings[ 157] = str_7576;
-  cg_link_bindings[ 158] = G007574;
-  cg_link_bindings[ 159] = G007578;
-  cg_link_bindings[ 160] = G007580;
-  cg_link_bindings[ 161] = str_7583;
-  cg_link_bindings[ 162] = G007582;
-  cg_link_bindings[ 163] = str_7586;
-  cg_link_bindings[ 164] = str_7587;
-  cg_link_bindings[ 165] = G007585;
-  cg_link_bindings[ 166] = str_7590;
-  cg_link_bindings[ 167] = G007589;
-  cg_link_bindings[ 168] = G007592;
-  cg_link_bindings[ 169] = G007594;
-  cg_link_bindings[ 170] = str_7597;
-  cg_link_bindings[ 171] = G007596;
-  cg_link_bindings[ 172] = G007599;
-  cg_link_bindings[ 173] = G007601;
-  cg_link_bindings[ 174] = str_7604;
-  cg_link_bindings[ 175] = str_7605;
-  cg_link_bindings[ 176] = str_7606;
-  cg_link_bindings[ 177] = str_7607;
-  cg_link_bindings[ 178] = str_7608;
-  cg_link_bindings[ 179] = str_7609;
-  cg_link_bindings[ 180] = str_7610;
-  cg_link_bindings[ 181] = G007603;
-  cg_link_bindings[ 182] = str_7613;
-  cg_link_bindings[ 183] = str_7614;
-  cg_link_bindings[ 184] = G007612;
-  cg_link_bindings[ 185] = G007616;
-  cg_link_bindings[ 186] = G007618;
-  cg_link_bindings[ 187] = str_7621;
-  cg_link_bindings[ 188] = G007620;
-  cg_link_bindings[ 189] = sym_7624;
-  cg_link_bindings[ 190] = sym_7625;
-  cg_link_bindings[ 191] = G007623;
-  cg_link_bindings[ 192] = G007627;
-  cg_link_bindings[ 193] = str_7630;
-  cg_link_bindings[ 194] = str_7631;
-  cg_link_bindings[ 195] = G007629;
-  cg_link_bindings[ 196] = str_7634;
-  cg_link_bindings[ 197] = G007633;
-  cg_link_bindings[ 198] = str_7637;
-  cg_link_bindings[ 199] = G007636;
-  cg_link_bindings[ 200] = str_7640;
-  cg_link_bindings[ 201] = G007639;
-  cg_link_bindings[ 202] = G007642;
-  cg_link_bindings[ 203] = str_7645;
-  cg_link_bindings[ 204] = str_7646;
-  cg_link_bindings[ 205] = str_7647;
-  cg_link_bindings[ 206] = str_7648;
-  cg_link_bindings[ 207] = str_7649;
-  cg_link_bindings[ 208] = str_7650;
-  cg_link_bindings[ 209] = str_7651;
-  cg_link_bindings[ 210] = str_7652;
-  cg_link_bindings[ 211] = str_7653;
-  cg_link_bindings[ 212] = str_7654;
-  cg_link_bindings[ 213] = str_7655;
-  cg_link_bindings[ 214] = str_7656;
-  cg_link_bindings[ 215] = str_7657;
-  cg_link_bindings[ 216] = G007644;
-  cg_link_bindings[ 217] = G007659;
-  cg_link_bindings[ 218] = G007661;
-  cg_link_bindings[ 219] = str_7664;
-  cg_link_bindings[ 220] = G007663;
-  cg_link_bindings[ 221] = str_7667;
-  cg_link_bindings[ 222] = key_7668;
-  cg_link_bindings[ 223] = G007666;
-  cg_link_bindings[ 224] = str_7671;
-  cg_link_bindings[ 225] = G007670;
-  cg_link_bindings[ 226] = G007673;
-  cg_link_bindings[ 227] = G007675;
-  cg_link_bindings[ 228] = str_7678;
-  cg_link_bindings[ 229] = str_7679;
-  cg_link_bindings[ 230] = str_7680;
-  cg_link_bindings[ 231] = str_7681;
-  cg_link_bindings[ 232] = G007677;
-  cg_link_bindings[ 233] = str_7684;
-  cg_link_bindings[ 234] = str_7685;
-  cg_link_bindings[ 235] = G007683;
-  cg_link_bindings[ 236] = G007687;
-  cg_link_bindings[ 237] = str_7690;
-  cg_link_bindings[ 238] = str_7691;
-  cg_link_bindings[ 239] = G007689;
-  cg_link_bindings[ 240] = str_7694;
-  cg_link_bindings[ 241] = G007693;
-  cg_link_bindings[ 242] = str_7697;
-  cg_link_bindings[ 243] = str_7698;
-  cg_link_bindings[ 244] = G007696;
-  cg_link_bindings[ 245] = str_7701;
-  cg_link_bindings[ 246] = G007700;
-  cg_link_bindings[ 247] = G007703;
-  cg_link_bindings[ 248] = G007705;
-  cg_link_bindings[ 249] = str_7708;
-  cg_link_bindings[ 250] = str_7709;
-  cg_link_bindings[ 251] = str_7710;
-  cg_link_bindings[ 252] = str_7711;
-  cg_link_bindings[ 253] = G007707;
-  cg_link_bindings[ 254] = G007713;
-  cg_link_bindings[ 255] = G007715;
-  cg_link_bindings[ 256] = G007717;
-  cg_link_bindings[ 257] = G007719;
-  cg_link_bindings[ 258] = str_7722;
-  cg_link_bindings[ 259] = str_7723;
-  cg_link_bindings[ 260] = str_7724;
-  cg_link_bindings[ 261] = str_7725;
-  cg_link_bindings[ 262] = str_7726;
-  cg_link_bindings[ 263] = str_7727;
-  cg_link_bindings[ 264] = str_7728;
-  cg_link_bindings[ 265] = str_7729;
-  cg_link_bindings[ 266] = str_7730;
-  cg_link_bindings[ 267] = str_7731;
-  cg_link_bindings[ 268] = str_7732;
-  cg_link_bindings[ 269] = str_7733;
-  cg_link_bindings[ 270] = str_7734;
-  cg_link_bindings[ 271] = G007721;
-  cg_link_bindings[ 272] = G007736;
-  cg_link_bindings[ 273] = G007738;
-  cg_link_bindings[ 274] = str_7741;
-  cg_link_bindings[ 275] = G007740;
-  cg_link_bindings[ 276] = str_7744;
-  cg_link_bindings[ 277] = G007743;
-  cg_link_bindings[ 278] = str_7747;
-  cg_link_bindings[ 279] = str_7748;
-  cg_link_bindings[ 280] = str_7749;
-  cg_link_bindings[ 281] = str_7750;
-  cg_link_bindings[ 282] = str_7751;
-  cg_link_bindings[ 283] = str_7752;
-  cg_link_bindings[ 284] = str_7753;
-  cg_link_bindings[ 285] = str_7754;
-  cg_link_bindings[ 286] = str_7755;
-  cg_link_bindings[ 287] = str_7756;
-  cg_link_bindings[ 288] = str_7757;
-  cg_link_bindings[ 289] = str_7758;
-  cg_link_bindings[ 290] = str_7759;
-  cg_link_bindings[ 291] = G007746;
-  cg_link_bindings[ 292] = str_7762;
-  cg_link_bindings[ 293] = G007761;
-  cg_link_bindings[ 294] = str_7765;
-  cg_link_bindings[ 295] = str_7766;
-  cg_link_bindings[ 296] = G007764;
-  cg_link_bindings[ 297] = G007768;
-  cg_link_bindings[ 298] = str_7771;
-  cg_link_bindings[ 299] = str_7772;
-  cg_link_bindings[ 300] = str_7773;
-  cg_link_bindings[ 301] = str_7774;
-  cg_link_bindings[ 302] = G007770;
-  cg_link_bindings[ 303] = str_7777;
-  cg_link_bindings[ 304] = G007776;
-  cg_link_bindings[ 305] = G007779;
-  cg_link_bindings[ 306] = str_7782;
-  cg_link_bindings[ 307] = G007781;
-  cg_link_bindings[ 308] = str_7785;
-  cg_link_bindings[ 309] = G007784;
-  cg_link_bindings[ 310] = G007787;
-  cg_link_bindings[ 311] = G007789;
-  cg_link_bindings[ 312] = str_7792;
-  cg_link_bindings[ 313] = str_7793;
-  cg_link_bindings[ 314] = str_7794;
-  cg_link_bindings[ 315] = G007791;
+  cg_link_bindings[ 60] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_int_as_hex_str7458;
+  cg_link_bindings[ 61] = str_7461;
+  cg_link_bindings[ 62] = str_7462;
+  cg_link_bindings[ 63] = G007460;
+  cg_link_bindings[ 64] = sym_7465;
+  cg_link_bindings[ 65] = str_7466;
+  cg_link_bindings[ 66] = str_7467;
+  cg_link_bindings[ 67] = G007464;
+  cg_link_bindings[ 68] = str_7470;
+  cg_link_bindings[ 69] = str_7471;
+  cg_link_bindings[ 70] = str_7472;
+  cg_link_bindings[ 71] = G007469;
+  cg_link_bindings[ 72] = str_7475;
+  cg_link_bindings[ 73] = str_7476;
+  cg_link_bindings[ 74] = str_7477;
+  cg_link_bindings[ 75] = str_7478;
+  cg_link_bindings[ 76] = str_7479;
+  cg_link_bindings[ 77] = str_7480;
+  cg_link_bindings[ 78] = str_7481;
+  cg_link_bindings[ 79] = str_7482;
+  cg_link_bindings[ 80] = str_7483;
+  cg_link_bindings[ 81] = str_7484;
+  cg_link_bindings[ 82] = str_7485;
+  cg_link_bindings[ 83] = G007474;
+  cg_link_bindings[ 84] = sym_7488;
+  cg_link_bindings[ 85] = G007487;
+  cg_link_bindings[ 86] = str_7491;
+  cg_link_bindings[ 87] = str_7492;
+  cg_link_bindings[ 88] = G007490;
+  cg_link_bindings[ 89] = str_7495;
+  cg_link_bindings[ 90] = G007494;
+  cg_link_bindings[ 91] = str_7498;
+  cg_link_bindings[ 92] = str_7499;
+  cg_link_bindings[ 93] = G007497;
+  cg_link_bindings[ 94] = str_7502;
+  cg_link_bindings[ 95] = G007501;
+  cg_link_bindings[ 96] = G007504;
+  cg_link_bindings[ 97] = sym_7507;
+  cg_link_bindings[ 98] = G007506;
+  cg_link_bindings[ 99] = G007509;
+  cg_link_bindings[ 100] = G007511;
+  cg_link_bindings[ 101] = sym_7514;
+  cg_link_bindings[ 102] = sym_7515;
+  cg_link_bindings[ 103] = key_7516;
+  cg_link_bindings[ 104] = sym_7517;
+  cg_link_bindings[ 105] = sym_7518;
+  cg_link_bindings[ 106] = sym_7519;
+  cg_link_bindings[ 107] = sym_7520;
+  cg_link_bindings[ 108] = G007513;
+  cg_link_bindings[ 109] = G007522;
+  cg_link_bindings[ 110] = G007524;
+  cg_link_bindings[ 111] = str_7527;
+  cg_link_bindings[ 112] = str_7528;
+  cg_link_bindings[ 113] = key_7529;
+  cg_link_bindings[ 114] = key_7530;
+  cg_link_bindings[ 115] = sym_7531;
+  cg_link_bindings[ 116] = sym_7532;
+  cg_link_bindings[ 117] = sym_7533;
+  cg_link_bindings[ 118] = sym_7534;
+  cg_link_bindings[ 119] = str_7535;
+  cg_link_bindings[ 120] = str_7536;
+  cg_link_bindings[ 121] = str_7537;
+  cg_link_bindings[ 122] = str_7538;
+  cg_link_bindings[ 123] = str_7539;
+  cg_link_bindings[ 124] = G007526;
+  cg_link_bindings[ 125] = str_7542;
+  cg_link_bindings[ 126] = G007541;
+  cg_link_bindings[ 127] = str_7545;
+  cg_link_bindings[ 128] = G007544;
+  cg_link_bindings[ 129] = sym_7548;
+  cg_link_bindings[ 130] = G007547;
+  cg_link_bindings[ 131] = str_7551;
+  cg_link_bindings[ 132] = sym_7552;
+  cg_link_bindings[ 133] = sym_7553;
+  cg_link_bindings[ 134] = sym_7554;
+  cg_link_bindings[ 135] = sym_7555;
+  cg_link_bindings[ 136] = G007550;
+  cg_link_bindings[ 137] = str_7558;
+  cg_link_bindings[ 138] = G007557;
+  cg_link_bindings[ 139] = G007560;
+  cg_link_bindings[ 140] = str_7563;
+  cg_link_bindings[ 141] = key_7564;
+  cg_link_bindings[ 142] = G007562;
+  cg_link_bindings[ 143] = sym_7567;
+  cg_link_bindings[ 144] = str_7568;
+  cg_link_bindings[ 145] = sym_7569;
+  cg_link_bindings[ 146] = str_7570;
+  cg_link_bindings[ 147] = G007566;
+  cg_link_bindings[ 148] = sym_7573;
+  cg_link_bindings[ 149] = str_7574;
+  cg_link_bindings[ 150] = str_7575;
+  cg_link_bindings[ 151] = str_7576;
+  cg_link_bindings[ 152] = G007572;
+  cg_link_bindings[ 153] = G007578;
+  cg_link_bindings[ 154] = cons_7581;
+  cg_link_bindings[ 155] = G007580;
+  cg_link_bindings[ 156] = str_7585;
+  cg_link_bindings[ 157] = str_7586;
+  cg_link_bindings[ 158] = G007584;
+  cg_link_bindings[ 159] = G007588;
+  cg_link_bindings[ 160] = G007590;
+  cg_link_bindings[ 161] = str_7593;
+  cg_link_bindings[ 162] = G007592;
+  cg_link_bindings[ 163] = str_7596;
+  cg_link_bindings[ 164] = str_7597;
+  cg_link_bindings[ 165] = G007595;
+  cg_link_bindings[ 166] = str_7600;
+  cg_link_bindings[ 167] = G007599;
+  cg_link_bindings[ 168] = G007602;
+  cg_link_bindings[ 169] = G007604;
+  cg_link_bindings[ 170] = str_7607;
+  cg_link_bindings[ 171] = G007606;
+  cg_link_bindings[ 172] = G007609;
+  cg_link_bindings[ 173] = G007611;
+  cg_link_bindings[ 174] = str_7614;
+  cg_link_bindings[ 175] = str_7615;
+  cg_link_bindings[ 176] = str_7616;
+  cg_link_bindings[ 177] = str_7617;
+  cg_link_bindings[ 178] = str_7618;
+  cg_link_bindings[ 179] = str_7619;
+  cg_link_bindings[ 180] = str_7620;
+  cg_link_bindings[ 181] = G007613;
+  cg_link_bindings[ 182] = str_7623;
+  cg_link_bindings[ 183] = str_7624;
+  cg_link_bindings[ 184] = G007622;
+  cg_link_bindings[ 185] = G007626;
+  cg_link_bindings[ 186] = G007628;
+  cg_link_bindings[ 187] = str_7631;
+  cg_link_bindings[ 188] = G007630;
+  cg_link_bindings[ 189] = sym_7634;
+  cg_link_bindings[ 190] = sym_7635;
+  cg_link_bindings[ 191] = G007633;
+  cg_link_bindings[ 192] = G007637;
+  cg_link_bindings[ 193] = str_7640;
+  cg_link_bindings[ 194] = str_7641;
+  cg_link_bindings[ 195] = G007639;
+  cg_link_bindings[ 196] = str_7644;
+  cg_link_bindings[ 197] = G007643;
+  cg_link_bindings[ 198] = str_7647;
+  cg_link_bindings[ 199] = G007646;
+  cg_link_bindings[ 200] = str_7650;
+  cg_link_bindings[ 201] = G007649;
+  cg_link_bindings[ 202] = G007652;
+  cg_link_bindings[ 203] = str_7655;
+  cg_link_bindings[ 204] = str_7656;
+  cg_link_bindings[ 205] = str_7657;
+  cg_link_bindings[ 206] = str_7658;
+  cg_link_bindings[ 207] = str_7659;
+  cg_link_bindings[ 208] = str_7660;
+  cg_link_bindings[ 209] = str_7661;
+  cg_link_bindings[ 210] = str_7662;
+  cg_link_bindings[ 211] = str_7663;
+  cg_link_bindings[ 212] = str_7664;
+  cg_link_bindings[ 213] = str_7665;
+  cg_link_bindings[ 214] = str_7666;
+  cg_link_bindings[ 215] = str_7667;
+  cg_link_bindings[ 216] = G007654;
+  cg_link_bindings[ 217] = G007669;
+  cg_link_bindings[ 218] = G007671;
+  cg_link_bindings[ 219] = str_7674;
+  cg_link_bindings[ 220] = G007673;
+  cg_link_bindings[ 221] = str_7677;
+  cg_link_bindings[ 222] = key_7678;
+  cg_link_bindings[ 223] = G007676;
+  cg_link_bindings[ 224] = str_7681;
+  cg_link_bindings[ 225] = G007680;
+  cg_link_bindings[ 226] = G007683;
+  cg_link_bindings[ 227] = G007685;
+  cg_link_bindings[ 228] = str_7688;
+  cg_link_bindings[ 229] = str_7689;
+  cg_link_bindings[ 230] = str_7690;
+  cg_link_bindings[ 231] = str_7691;
+  cg_link_bindings[ 232] = G007687;
+  cg_link_bindings[ 233] = str_7694;
+  cg_link_bindings[ 234] = str_7695;
+  cg_link_bindings[ 235] = G007693;
+  cg_link_bindings[ 236] = G007697;
+  cg_link_bindings[ 237] = str_7700;
+  cg_link_bindings[ 238] = str_7701;
+  cg_link_bindings[ 239] = G007699;
+  cg_link_bindings[ 240] = str_7704;
+  cg_link_bindings[ 241] = G007703;
+  cg_link_bindings[ 242] = str_7707;
+  cg_link_bindings[ 243] = str_7708;
+  cg_link_bindings[ 244] = G007706;
+  cg_link_bindings[ 245] = str_7711;
+  cg_link_bindings[ 246] = G007710;
+  cg_link_bindings[ 247] = G007713;
+  cg_link_bindings[ 248] = G007715;
+  cg_link_bindings[ 249] = str_7718;
+  cg_link_bindings[ 250] = str_7719;
+  cg_link_bindings[ 251] = str_7720;
+  cg_link_bindings[ 252] = str_7721;
+  cg_link_bindings[ 253] = G007717;
+  cg_link_bindings[ 254] = G007723;
+  cg_link_bindings[ 255] = G007725;
+  cg_link_bindings[ 256] = G007727;
+  cg_link_bindings[ 257] = G007729;
+  cg_link_bindings[ 258] = str_7732;
+  cg_link_bindings[ 259] = str_7733;
+  cg_link_bindings[ 260] = str_7734;
+  cg_link_bindings[ 261] = str_7735;
+  cg_link_bindings[ 262] = str_7736;
+  cg_link_bindings[ 263] = str_7737;
+  cg_link_bindings[ 264] = str_7738;
+  cg_link_bindings[ 265] = str_7739;
+  cg_link_bindings[ 266] = str_7740;
+  cg_link_bindings[ 267] = str_7741;
+  cg_link_bindings[ 268] = str_7742;
+  cg_link_bindings[ 269] = str_7743;
+  cg_link_bindings[ 270] = str_7744;
+  cg_link_bindings[ 271] = G007731;
+  cg_link_bindings[ 272] = G007746;
+  cg_link_bindings[ 273] = G007748;
+  cg_link_bindings[ 274] = str_7751;
+  cg_link_bindings[ 275] = G007750;
+  cg_link_bindings[ 276] = str_7754;
+  cg_link_bindings[ 277] = G007753;
+  cg_link_bindings[ 278] = str_7757;
+  cg_link_bindings[ 279] = str_7758;
+  cg_link_bindings[ 280] = str_7759;
+  cg_link_bindings[ 281] = str_7760;
+  cg_link_bindings[ 282] = str_7761;
+  cg_link_bindings[ 283] = str_7762;
+  cg_link_bindings[ 284] = str_7763;
+  cg_link_bindings[ 285] = str_7764;
+  cg_link_bindings[ 286] = str_7765;
+  cg_link_bindings[ 287] = str_7766;
+  cg_link_bindings[ 288] = str_7767;
+  cg_link_bindings[ 289] = str_7768;
+  cg_link_bindings[ 290] = str_7769;
+  cg_link_bindings[ 291] = G007756;
+  cg_link_bindings[ 292] = str_7772;
+  cg_link_bindings[ 293] = G007771;
+  cg_link_bindings[ 294] = str_7775;
+  cg_link_bindings[ 295] = str_7776;
+  cg_link_bindings[ 296] = G007774;
+  cg_link_bindings[ 297] = G007778;
+  cg_link_bindings[ 298] = str_7781;
+  cg_link_bindings[ 299] = str_7782;
+  cg_link_bindings[ 300] = str_7783;
+  cg_link_bindings[ 301] = str_7784;
+  cg_link_bindings[ 302] = G007780;
+  cg_link_bindings[ 303] = str_7787;
+  cg_link_bindings[ 304] = G007786;
+  cg_link_bindings[ 305] = G007789;
+  cg_link_bindings[ 306] = str_7792;
+  cg_link_bindings[ 307] = G007791;
+  cg_link_bindings[ 308] = str_7795;
+  cg_link_bindings[ 309] = G007794;
+  cg_link_bindings[ 310] = G007797;
+  cg_link_bindings[ 311] = G007799;
+  cg_link_bindings[ 312] = str_7802;
+  cg_link_bindings[ 313] = str_7803;
+  cg_link_bindings[ 314] = str_7804;
+  cg_link_bindings[ 315] = G007801;
   cg_link_bindings[ 1] = eul_nil;
-  cg_link_bindings[ 316] = sym_7797;
-  cg_link_bindings[ 317] = sym_7798;
-  cg_link_bindings[ 318] = sym_7799;
-  cg_link_bindings[ 319] = sym_7800;
-  cg_link_bindings[ 320] = sym_7801;
-  cg_link_bindings[ 321] = sym_7802;
-  cg_link_bindings[ 322] = sym_7803;
-  cg_link_bindings[ 323] = sym_7804;
-  cg_link_bindings[ 324] = sym_7805;
-  cg_link_bindings[ 325] = sym_7806;
-  cg_link_bindings[ 326] = sym_7807;
-  cg_link_bindings[ 327] = sym_7808;
-  cg_link_bindings[ 328] = sym_7809;
-  cg_link_bindings[ 329] = sym_7810;
-  cg_link_bindings[ 330] = sym_7811;
-  cg_link_bindings[ 331] = sym_7812;
-  cg_link_bindings[ 332] = sym_7813;
-  cg_link_bindings[ 333] = sym_7814;
-  cg_link_bindings[ 334] = sym_7815;
-  cg_link_bindings[ 335] = sym_7816;
-  cg_link_bindings[ 336] = sym_7817;
-  cg_link_bindings[ 337] = sym_7818;
-  cg_link_bindings[ 338] = sym_7819;
-  cg_link_bindings[ 339] = sym_7820;
-  cg_link_bindings[ 340] = sym_7821;
-  cg_link_bindings[ 341] = sym_7822;
-  cg_link_bindings[ 342] = sym_7823;
-  cg_link_bindings[ 343] = sym_7824;
-  cg_link_bindings[ 344] = sym_7825;
-  cg_link_bindings[ 345] = sym_7826;
-  cg_link_bindings[ 346] = sym_7827;
-  cg_link_bindings[ 347] = sym_7828;
-  cg_link_bindings[ 348] = sym_7829;
-  cg_link_bindings[ 349] = sym_7830;
-  cg_link_bindings[ 350] = sym_7831;
-  cg_link_bindings[ 351] = sym_7832;
-  cg_link_bindings[ 352] = sym_7833;
-  cg_link_bindings[ 353] = sym_7834;
-  cg_link_bindings[ 354] = sym_7835;
-  cg_link_bindings[ 355] = sym_7836;
-  cg_link_bindings[ 356] = sym_7837;
-  cg_link_bindings[ 357] = sym_7838;
-  cg_link_bindings[ 358] = sym_7839;
-  cg_link_bindings[ 359] = sym_7840;
-  cg_link_bindings[ 360] = sym_7841;
-  cg_link_bindings[ 361] = sym_7842;
-  cg_link_bindings[ 362] = sym_7843;
-  cg_link_bindings[ 363] = sym_7844;
-  cg_link_bindings[ 364] = sym_7845;
-  cg_link_bindings[ 365] = sym_7846;
-  eul_allocate_lambda( cg_link_bindings[0], "initialize-cg-link", 0, G007796);
+  cg_link_bindings[ 316] = sym_7807;
+  cg_link_bindings[ 317] = sym_7808;
+  cg_link_bindings[ 318] = sym_7809;
+  cg_link_bindings[ 319] = sym_7810;
+  cg_link_bindings[ 320] = sym_7811;
+  cg_link_bindings[ 321] = sym_7812;
+  cg_link_bindings[ 322] = sym_7813;
+  cg_link_bindings[ 323] = sym_7814;
+  cg_link_bindings[ 324] = sym_7815;
+  cg_link_bindings[ 325] = sym_7816;
+  cg_link_bindings[ 326] = sym_7817;
+  cg_link_bindings[ 327] = sym_7818;
+  cg_link_bindings[ 328] = sym_7819;
+  cg_link_bindings[ 329] = sym_7820;
+  cg_link_bindings[ 330] = sym_7821;
+  cg_link_bindings[ 331] = sym_7822;
+  cg_link_bindings[ 332] = sym_7823;
+  cg_link_bindings[ 333] = sym_7824;
+  cg_link_bindings[ 334] = sym_7825;
+  cg_link_bindings[ 335] = sym_7826;
+  cg_link_bindings[ 336] = sym_7827;
+  cg_link_bindings[ 337] = sym_7828;
+  cg_link_bindings[ 338] = sym_7829;
+  cg_link_bindings[ 339] = sym_7830;
+  cg_link_bindings[ 340] = sym_7831;
+  cg_link_bindings[ 341] = sym_7832;
+  cg_link_bindings[ 342] = sym_7833;
+  cg_link_bindings[ 343] = sym_7834;
+  cg_link_bindings[ 344] = sym_7835;
+  cg_link_bindings[ 345] = sym_7836;
+  cg_link_bindings[ 346] = sym_7837;
+  cg_link_bindings[ 347] = sym_7838;
+  cg_link_bindings[ 348] = sym_7839;
+  cg_link_bindings[ 349] = sym_7840;
+  cg_link_bindings[ 350] = sym_7841;
+  cg_link_bindings[ 351] = sym_7842;
+  cg_link_bindings[ 352] = sym_7843;
+  cg_link_bindings[ 353] = sym_7844;
+  cg_link_bindings[ 354] = sym_7845;
+  cg_link_bindings[ 355] = sym_7846;
+  cg_link_bindings[ 356] = sym_7847;
+  cg_link_bindings[ 357] = sym_7848;
+  cg_link_bindings[ 358] = sym_7849;
+  cg_link_bindings[ 359] = sym_7850;
+  cg_link_bindings[ 360] = sym_7851;
+  cg_link_bindings[ 361] = sym_7852;
+  cg_link_bindings[ 362] = sym_7853;
+  cg_link_bindings[ 363] = sym_7854;
+  cg_link_bindings[ 364] = sym_7855;
+  cg_link_bindings[ 365] = sym_7856;
+  eul_allocate_lambda( cg_link_bindings[0], "initialize-cg-link", 0, G007806);
 
   }
 }

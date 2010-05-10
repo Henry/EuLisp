@@ -31,8 +31,8 @@
 
   (defun whitespace (c)
     (and (characterp c)
-         (or (equal c #\    )
-             (equal c #\ ))))
+         (or (eql c #\    )
+             (eql c #\ ))))
 
   (defun letter (c)
     (and (characterp c)
@@ -42,7 +42,7 @@
   (defun identifier (c)
     (or (letter c)
         (digit c)
-        (equal #\- c)))
+        (eql #\- c)))
 
   (deflocal bytecodes (make <table>))
 
@@ -55,7 +55,7 @@
   (defun arg-size (args)
     (accumulate
      (lambda (a v)
-       (if (member v '("reg" "byte") equal)
+       (if (member v '("reg" "byte") binary=)
            (+ a 1)
          (+ a 4)))
      0
@@ -116,13 +116,13 @@
       (let ((first (car args))
             (rest  (cdr args)))
         (cond
-         ((equal first "-O")            ;Sort
+         ((binary= first "-O")            ;Sort
           (setq old-style (not old-style))
           (parse-args rest))
-         ((equal first "-v")
+         ((binary= first "-v")
           (setq verbose (not verbose))
           (parse-args rest))
-         ((equal first "-d")
+         ((binary= first "-d")
           (setq debug (not debug))
           (parse-args rest))
          (t                             ;Not known option, so must be filename
