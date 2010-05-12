@@ -57,7 +57,7 @@
   (defgeneric assoc  (item obj . test))
 
   (defmethod assoc (item (l <list>) . test)
-    (let ((test (if (null test) equal (car test))))
+    (let ((test (if (null test) binary= (car test))))
       (let loop ((l l))
            (if (null l)
                '()
@@ -73,7 +73,7 @@
   (defconstant gentemp gensym)
 
   ;; Equality and Equvialence
-  (defconstant equal? equal)
+  (defconstant equal? binary=)
   (defconstant eq? eq)
 
   ;; Type predicates

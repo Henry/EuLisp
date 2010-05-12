@@ -55,7 +55,7 @@
                               (cond-els ce-manager)))
         (set-cond-els ce-manager
                       (map (lambda (x)
-                             (if (equal (car x) class)
+                             (if (binary= (car x) class)
                                  (cons (car x)
                                        (list (cons new-ce
                                                    (cadr x))))
@@ -84,11 +84,11 @@
                      (t
                        (let ((curr (car rest)))
                          (if (and (eql (class-of ce) (class-of curr))
-                                  (equal (ce-c-tests ce) (ce-c-tests curr))
-                                  (equal (ce-v-tests ce) (ce-v-tests curr))
+                                  (binary= (ce-c-tests ce) (ce-c-tests curr))
+                                  (binary= (ce-v-tests ce) (ce-v-tests curr))
                                   (if (or (eql (class-of ce) <pos-join-ce>)
                                           (eql (class-of ce) <neg-join-ce>))
-                                      (equal (ce-j-tests ce) (ce-j-tests curr))
+                                      (binary= (ce-j-tests ce) (ce-j-tests curr))
                                     t))
                              curr
                            (loop (cdr rest))))))))
@@ -166,7 +166,7 @@
     (accumulate
       (lambda (a test)
         (let* ((val (assoc (test-attrib test) (wme-attrib-vals wme)))
-               (a-val (if (null val) 'nil (cdr val))))
+               (a-val (if (null val) 'NIL (cdr val))))
           ;;(print (test-attrib test))
           ;;(print (wme-attrib-vals wme))
           ;;(print a-val)
@@ -183,7 +183,7 @@
               (cons (test-value test)
                     (let ((val (assoc (test-attrib test)
                                       (wme-attrib-vals wme))))
-                      (if (null val) 'nil (cdr val))))
+                      (if (null val) 'NIL (cdr val))))
               a)
           a))
       ()
@@ -195,8 +195,8 @@
                       (lambda (a test)
                         (let* ((val (assoc (test-attrib test)
                                            (wme-attrib-vals wme)))
-                               (a-val (if (null val) 'nil (cdr val))))
-                          (if (equal (test-pred test) '=)
+                               (a-val (if (null val) 'NIL (cdr val))))
+                          (if (binary= (test-pred test) '=)
                               (cons (cons (test-value test) a-val) a)
                             a)))
                       ()
@@ -207,7 +207,7 @@
           (let* ((join-var (test-value test))
                  (attrib (test-attrib test))
                  (val (assoc attrib (wme-attrib-vals wme)))
-                 (jv-value (if (null val) 'nil (cdr val))))
+                 (jv-value (if (null val) 'NIL (cdr val))))
 
             (if (null (assoc join-var (ce-jv-vals ce)))
                 (set-ce-jv-vals
@@ -254,7 +254,7 @@
     ;;(format t "passes-test: ~a~%" test)
     (let* ((attrib (test-attrib test))
            (val (assoc attrib (wme-attrib-vals wme)))
-           (wme-val (if (null val) 'nil (cdr val)))
+           (wme-val (if (null val) 'NIL (cdr val)))
            (pred (test-pred test))
            (tst-val (test-value test)))
       ;;(format ops-out "~a ~a ~a ~%" wme-val pred tst-val)
@@ -269,7 +269,7 @@
                                                      ((eql val (car val-list)) t) ; only pred allowed
                                                      (t (find-success val (cdr val-list))))))
                                     (find-success x y)))
-                 ((eql pred '<=>) (equal (class-of x) (class-of y)))
+                 ((eql pred '<=>) (binary= (class-of x) (class-of y)))
                  ((not (eql (class-of x) (class-of y))) ())
                  ((eql pred '=)   (eql x y))
                  ((eql pred '<>)  (not (eql x y)))
@@ -315,7 +315,7 @@
       (labels ((rem-wme (ts match-list res)
                         (cond
                           ((null match-list) res)
-                          ((equal (caar match-list) ts)
+                          ((binary= (caar match-list) ts)
                            (set-ce-num-matched ce (- (ce-num-matched ce) 1))
                            (rem-wme ts (cdr match-list) res))
                           (t

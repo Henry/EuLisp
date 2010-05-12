@@ -86,7 +86,7 @@
                     (x2 (car ll)))
                 (if (symbolp x1)
                     (loop (cdr rr) (cdr ll))
-                  (if (equal x1 x2)
+                  (if (binary= x1 x2)
                       (loop (cdr rr) (cdr ll))
                     ()))))))
      (and (eq (car r) (car l))

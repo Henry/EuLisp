@@ -1,6 +1,3 @@
-
-
-
 (literalize goal
     want
     object
@@ -315,10 +312,10 @@
     (write (crlf) (tabto 20) right face 3 |:| green)
     (write (crlf) (tabto 20) posterior face 4 |:| white)
     (write (crlf) (tabto 20) left face 5 |:| yellow)
-    (make goal ^want scramble ^object cube ^id 1 ^number nil ^status active))
+    (make goal ^want scramble ^object cube ^id 1 ^number NIL ^status active))
 
 (p scramble*initiate
-    (goal ^want scramble ^object cube ^id <id> ^number nil ^status active)
+    (goal ^want scramble ^object cube ^id <id> ^number NIL ^status active)
 -->
     (write (crlf) how many scrambling operations  >0  shall i perform |?_|)
     (modify 1 ^number (accept)))
@@ -1505,7 +1502,7 @@
     (cubie-order ^face-num <nf> ^direction dn ^adj-face-num 6
                  ^block 7 ^adj-blk-num <abn>)
     (face ^number 6 ^block <abn> ^color <cb>)
-    (face-relation ^front <nf> ^right <nr> ^posterior <np> 
+    (face-relation ^front <nf> ^right <nr> ^posterior <np>
                    ^top 1 ^bottom 6)
 -->
     (make vodor ^right <nr> ^bottom 6 ^id <id> ^status active))
@@ -1519,7 +1516,7 @@
     (cubie-order ^face-num <nl> ^direction dn ^adj-face-num 6
                  ^block 9 ^adj-blk-num <abn>)
     (face ^number 6 ^block <abn> ^color <cb>)
-    (face-relation ^front <nf> ^right <nr> ^left <nl> ^posterior <np> 
+    (face-relation ^front <nf> ^right <nr> ^left <nl> ^posterior <np>
                    ^top 1 ^bottom 6)
 -->
     (make goal ^want rotate ^object face ^number 6 ^direction pos
@@ -1546,7 +1543,7 @@
     (face ^number <np> ^block 7 ^color <cb>)
     (face ^number <np> ^block 9 ^color <cb>)
     (face ^number <nl> ^block 9 ^color <cb>)
-    (face-relation ^front <nf> ^right <nr> ^left <nl> ^posterior <np> 
+    (face-relation ^front <nf> ^right <nr> ^left <nl> ^posterior <np>
                    ^top 1 ^bottom 6)
 -->
     (make vodor ^right <nr> ^bottom 6 ^id <id> ^status active))
@@ -1556,7 +1553,7 @@
     (face ^number 6 ^block 5 ^color <cb>)
     (face ^number <nf> ^block 7 ^color <cb>)
     (face ^number <np> ^block 9 ^color <cb>)
-    (face-relation ^front <nf> ^right <nr> ^posterior <np> 
+    (face-relation ^front <nf> ^right <nr> ^posterior <np>
                    ^top 1 ^bottom 6)
     (cubie-order ^face-num <nf> ^direction dn ^adj-face-num 6
                  ^block 9 ^adj-blk-num <abn1>)
@@ -1572,7 +1569,7 @@
     (face ^number 6 ^block 5 ^color <cb>)
     (face ^number <nf> ^block 7 ^color <cb>)
     (face ^number <nf> ^block 9 ^color <cb>)
-    (face-relation ^front <nf> ^right <nr> ^posterior <np> 
+    (face-relation ^front <nf> ^right <nr> ^posterior <np>
                    ^top 1 ^bottom 6)
     (cubie-order ^face-num <np> ^direction dn ^adj-face-num 6
                  ^block 7 ^adj-blk-num <abn1>)
@@ -1588,7 +1585,7 @@
     (face ^number 6 ^block 5 ^color <cb>)
     (face ^number <nf> ^block 7 ^color <cb>)
     (face ^number <nr> ^block 9 ^color <cb>)
-    (face-relation ^front <nf> ^right <nr> ^posterior <np> 
+    (face-relation ^front <nf> ^right <nr> ^posterior <np>
                    ^top 1 ^bottom 6)
     (cubie-order ^face-num <nf> ^direction dn ^adj-face-num 6
                  ^block 9 ^adj-blk-num <abn1>)
@@ -1606,7 +1603,7 @@
     (face ^number <nr> ^block 9 ^color <cb>)
     (face ^number <nl> ^block 7 ^color <cb>)
     (face ^number <nl> ^block 9 ^color <cb>)
-    (face-relation ^front <nf> ^right <nr> ^left <nl> ^posterior <np> 
+    (face-relation ^front <nf> ^right <nr> ^left <nl> ^posterior <np>
                    ^top 1 ^bottom 6)
 -->
     (make vodor ^right <nr> ^bottom 6 ^id <id> ^status active))

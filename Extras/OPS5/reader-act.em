@@ -31,7 +31,7 @@
     reader)
 
   (defun read-make-action (action)
-    ;;(format ops-out "make: ~a~%" action)
+    (format ops-out "make: ~a~%" action)
     (make-make-action (car action) (cdr action)))
 
   (defun read-remove-action (action)

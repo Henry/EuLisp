@@ -235,7 +235,7 @@ Given a pair, such as the result of {\tt (cons {\em object$_1$} {\em
 Note that if {\em object\/} is not a proper list, then the use of {\tt
 (setter cdr)} might change {\em pair\/} into an improper list.
 
-\method{equal}
+\method{binary=}
 %
 \begin{specargs}
     \item[pair$_1$] A pair.
@@ -243,9 +243,10 @@ Note that if {\em object\/} is not a proper list, then the use of {\tt
 \end{specargs}
 %
 \result%
-The result is the conjunction of the pairwise application of \genericref{equal}
-to the \functionref{car} fields and the \functionref{cdr} fields of the
-arguments.
+If the result of the conjunction of the pairwise application of
+\genericref{binary=} to the \functionref{car} fields and the \functionref{cdr}
+fields of the arguments is \true{} the result is {\em pair$_1$} otherwise the
+result is \nil{}.
 
 \method{deep-copy}
 %

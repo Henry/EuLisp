@@ -135,7 +135,7 @@ character is \verb|#\x0|.
     %
 \end{arguments}
 %
-\result
+\result%
 Returns {\em object\/} if it is a string, otherwise \nil{}.
 %
 \converter{symbol}
@@ -143,24 +143,24 @@ Returns {\em object\/} if it is a string, otherwise \nil{}.
     \item[string, \classref{string}] A string to be converted to a symbol.
 \end{specargs}
 %
-\result
+\result%
 If the result of \functionref{symbol-exists-p} when applied to {\em string\/}
 is a symbol, that symbol is returned.  If the result is \nil{}, then
 a new symbol is constructed whose name is {\em string}.  This new
 symbol is returned.
 %
-\method{equal}
+\method{binary=}
 %
 \begin{specargs}
     \item[string$_1$, \classref{string}] A string.
     \item[string$_2$, \classref{string}] A string.
 \end{specargs}
 %
-\result
-If the size of {\em string$_1$} is the same (under {\tt =}) as that of
-{\em string$_2$}, then the result is the conjunction of the pairwise
-application of \genericref{equal} to the elements of the arguments.  If not
-the result is \nil{}.
+\result%
+If the size of {\em string$_1$} is the same (under {\tt =}) as that of {\em
+    string$_2$}, and the result of the conjunction of the pairwise application
+of \genericref{binary=} to the elements of the arguments is \true{} the result
+is {\em string$_1$}.  If not the result is \nil{}.
 %
 \method{deep-copy}
 %
@@ -168,7 +168,7 @@ the result is \nil{}.
     \item[string, \classref{string}] A string.
 \end{specargs}
 %
-\result
+\result%
 Constructs and returns a copy of {\em string\/} in which each element
 is \functionref{eql} to the corresponding element in {\em string}.
 %
@@ -178,7 +178,7 @@ is \functionref{eql} to the corresponding element in {\em string}.
     \item[string, \classref{string}] A string.
 \end{specargs}
 %
-\result
+\result%
 Constructs and returns a copy of {\em string\/} in which each element
 is \functionref{eql} to the corresponding element in {\em string}.
 %
@@ -221,7 +221,7 @@ Method on \genericref{binary<} (\ref{compare}) for characters (\ref{character}).
     \item[string, \classref{string}] A string.
 \end{specargs}
 %
-\result
+\result%
 Returns a copy of {\em string\/} in which each character denoting an
 upper case character, is replaced by a character denoting its lower
 case counterpart.  The result must not be \functionref{eq} to {\em string}.
@@ -232,7 +232,7 @@ case counterpart.  The result must not be \functionref{eq} to {\em string}.
     \item[string, \classref{string}] A string.
 \end{specargs}
 %
-\result
+\result%
 Returns a copy of {\em string\/} in which each character denoting an
 lower case character, is replaced by a character denoting its upper
 case counterpart.  The result must not be \functionref{eq} to {\em string}.
@@ -243,7 +243,7 @@ case counterpart.  The result must not be \functionref{eq} to {\em string}.
     \item[stream, \classref{stream}] Stream on which {\em string} is to be ouptut.
 \end{specargs}
 %
-\result
+\result%
 The string {\em string}.
 %
 Output external representation of {\em string\/} on {\em stream\/} as
@@ -257,7 +257,7 @@ are not output.
     \item[stream, \classref{stream}] Stream on which {\em string\/} is to be ouptut.
 \end{specargs}
 %
-\result
+\result%
 The string {\em string}.
 %
 Output external representation of {\em string\/} on {\em stream\/} as

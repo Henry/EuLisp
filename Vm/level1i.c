@@ -227,7 +227,6 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"lock", make_entry(3, "lock", "lock"));
   eul_fast_table_set(level1_tab,"system", make_entry(4, "boot1", "system"));
   eul_fast_table_set(level1_tab,"do2-list", make_entry(13, "list", "do2-list"));
-  eul_fast_table_set(level1_tab,"equal", make_entry(7, "compare", "equal"));
   eul_fast_table_set(level1_tab,"*backtrace-nframes*", make_entry(31, "boot", "*backtrace-nframes*"));
   eul_fast_table_set(level1_tab,"thread-dynamic-variables", make_entry(27, "thread", "thread-dynamic-variables"));
   eul_fast_table_set(level1_tab,"accumulate-vector", make_entry(11, "vector", "accumulate-vector"));
@@ -505,6 +504,7 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"initialize", make_entry(12, "mop-gf", "initialize"));
   eul_fast_table_set(level1_tab,"ensure-slot-writer", make_entry(6, "mop-access", "ensure-slot-writer"));
   eul_fast_table_set(level1_tab,"signal", make_entry(2, "condition", "signal"));
+  eul_fast_table_set(level1_tab,"!=", make_entry(7, "compare", "!="));
   eul_fast_table_set(level1_tab,"thread-returned-p", make_entry(30, "thread", "thread-returned-p"));
   eul_fast_table_set(level1_tab,"<abstract-thread>", make_entry(29, "thread", "<abstract-thread>"));
   eul_fast_table_set(level1_tab,"sread", make_entry(10, "read", "sread"));

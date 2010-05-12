@@ -36,7 +36,7 @@
 ;;; Arithmetic
 ;;;-----------------------------------------------------------------------------
   (defmethod binary+ ((x <int>) (y <int>)) (int-binary+ x y))
-  (defmethod binary= ((x <int>) (y <int>)) (int-binary= x y))
+  (defmethod binary= ((x <int>) (y <int>)) (if (int-binary= x y) t ()))
   (defmethod binary< ((x <int>) (y <int>)) (int-binary< x y))
   (defmethod binary- ((x <int>) (y <int>)) (int-binary- x y))
   (defmethod binary* ((x <int>) (y <int>)) (int-binary* x y))

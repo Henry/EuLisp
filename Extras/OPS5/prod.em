@@ -456,23 +456,23 @@
                                           (when (test-succeeds val1 pred1 val0)
                                                 (consis
                                                   (cdr join0)
-                                                  (list-remove test1 join1 equal)
+                                                  (list-remove test1 join1 binary=)
                                                   (cons test0 new-join))))
                                          ((eql pred1 '=)
                                           (when (test-succeeds val0 pred0 val1)
                                                 (consis
                                                   (cdr join0)
-                                                  (list-remove test1 join1 equal)
+                                                  (list-remove test1 join1 binary=)
                                                   (cons test1 new-join))))
                                          (t
                                            (consis
                                              (cdr join0)
-                                             (list-remove test1 join1 equal)
+                                             (list-remove test1 join1 binary=)
                                              (cons test1 (cons test0 new-join))))))))))))
                   (find-test (jv tests)
                              (cond
                                ((null tests) ())
-                               ((equal jv (cadadr (car tests)))
+                               ((binary= jv (cadadr (car tests)))
                                 (car tests))
                                (t (find-test jv (cdr tests))))))
                  (consis j-tests0 j-tests1 ()))))
@@ -482,7 +482,7 @@
   (defun set-union (l1 l2)
     (accumulate
       (lambda (a x)
-        (if (member x a equal)
+        (if (member x a binary=)
             a
           (cons x a)))
       l1
@@ -578,7 +578,7 @@
 
   (defmethod remove-prod-insts ((prod <production>) ts (ce <neg-njoin-ce>)
                                 cr-manager)
-    (when (equal (ce-num-matched ce) 1)
+    (when (binary= (ce-num-matched ce) 1)
           (remove-by-prod cr-manager prod)))
 
   (defmethod fire ((prod-inst <prod-instantiation>)

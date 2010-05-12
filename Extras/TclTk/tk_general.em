@@ -1,4 +1,4 @@
-;;;  By J Garcia & University of Bath. All rights reserved.                 ;;;
+;;;  By J Garcia & University of Bath. All rights reserved.
 ;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'youtoo/tk'
 ;;;-----------------------------------------------------------------------------

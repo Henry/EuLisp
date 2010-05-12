@@ -47,183 +47,183 @@ void initialize_module_sx_write()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_2011, sym_2010, sym_2009, G002008, sym_2002, G002001, G001999, G001996, G001993, G001990, G001986, sym_1984, sym_1983, sym_1982, G001981, G001978, G001974, G001972, G001969, sym_1965, G001964, G001961, G001958, G001955, G001952, G001949, G001946, sym_1940, G001939, G001936, sym_1933, G001931, G001928, G001925, G001922;
+  LispRef sym_2033, sym_2032, sym_2031, G002030, sym_2024, G002023, G002021, G002018, G002015, G002012, G002008, sym_2006, sym_2005, sym_2004, G002003, G002000, G001996, G001994, G001991, sym_1987, G001986, G001983, G001980, G001977, G001974, G001971, G001968, sym_1962, G001961, G001958, sym_1955, G001953, G001950, G001947, G001944;
 
   /* Code vector and literal definitions */
-  eul_allocate_static_string(str_1923, "(if ~a ~a ~a)", 13);
+  eul_allocate_static_string(str_1945, "(if ~a ~a ~a)", 13);
   /* Byte-vector with size: 14 is_init: 0 index: 6 binding: (method-new-generic-prin) */
-  static const void *G001921[] = {I(ab,1c,84,24),B(sx_obj ,9),I(08,1d,83,24),B(sx_obj ,9),I(08,1f,03,82),I(24,00,00,00),B(sx_obj ,9),I(08,1f,03,23),B(sx_write ,5),I(1f,04,1f,04),I(1f,04,24,00),B(mop_gf ,17),I(3d,05,05,45),I(05,00,00,00)};
+  static const void *G001943[] = {I(ab,1c,84,24),B(sx_obj ,9),I(08,1d,83,24),B(sx_obj ,9),I(08,1f,03,82),I(24,00,00,00),B(sx_obj ,9),I(08,1f,03,23),B(sx_write ,5),I(1f,04,1f,04),I(1f,04,24,00),B(mop_gf ,17),I(3d,05,05,45),I(05,00,00,00)};
 
-  eul_allocate_static_string(str_1926, "~a", 2);
+  eul_allocate_static_string(str_1948, "~a", 2);
   /* Byte-vector with size: 11 is_init: 0 index: 8 binding: (method-new-generic-prin) */
-  static const void *G001924[] = {I(ab,1c,83,24),B(sx_obj ,42),I(08,1d,82,24),B(sx_obj ,42),I(08,1c,1c,0f),I(1f,03,23,00),B(sx_write ,7),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,05,45),I(05,00,00,00)};
+  static const void *G001946[] = {I(ab,1c,83,24),B(sx_obj ,42),I(08,1d,82,24),B(sx_obj ,42),I(08,1c,1c,0f),I(1f,03,23,00),B(sx_write ,7),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,05,45),I(05,00,00,00)};
 
-  eul_allocate_static_string(str_1929, "(~a ~a)", 7);
+  eul_allocate_static_string(str_1951, "(~a ~a)", 7);
   /* Byte-vector with size: 15 is_init: 0 index: 10 binding: anonymous */
-  static const void *G001927[] = {I(aa,1b,24,00),B(sx_obj2 ,10),I(3c,01,1b,34),I(00,00,00,15),I(1c,83,24,00),B(sx_obj2 ,11),I(08,32,00,00),I(00,00,00,08),I(86,47,00,00),I(23,00,00,00),B(sx_write ,9),I(1f,04,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,03,00)};
+  static const void *G001949[] = {I(aa,1b,24,00),B(sx_obj2 ,10),I(3c,01,1b,34),I(00,00,00,15),I(1c,83,24,00),B(sx_obj2 ,11),I(08,32,00,00),I(00,00,00,08),I(86,47,00,00),I(23,00,00,00),B(sx_write ,9),I(1f,04,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,03,00)};
 
-  eul_allocate_static_string(str_1932, "(let* (", 7);
-  eul_allocate_static_string(str_1934, ") ~a)", 5);
+  eul_allocate_static_string(str_1954, "(let* (", 7);
+  eul_allocate_static_string(str_1956, ") ~a)", 5);
   /* Byte-vector with size: 27 is_init: 0 index: 14 binding: (method-new-generic-prin) */
-  static const void *G001930[] = {I(ab,46,01,1b),I(48,00,00,47),I(00,00,23,00),B(sx_write ,11),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1c),I(26,00,00,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,18),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,10),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,1d),I(84,24,00,00),B(sx_obj ,18),I(08,47,00,00),I(23,00,00,00),B(sx_write ,13),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,04,45),I(04,00,00,00)};
+  static const void *G001952[] = {I(ab,46,01,1b),I(48,00,00,47),I(00,00,23,00),B(sx_write ,11),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1c),I(26,00,00,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,18),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,10),I(3b,01,1c,24),B(boot ,4),I(3c,02,2a,1d),I(84,24,00,00),B(sx_obj ,18),I(08,47,00,00),I(23,00,00,00),B(sx_write ,13),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,04,45),I(04,00,00,00)};
 
-  eul_allocate_static_string(str_1937, "(opencoded-lambda ~a ~a)", 24);
+  eul_allocate_static_string(str_1959, "(opencoded-lambda ~a ~a)", 24);
   /* Byte-vector with size: 13 is_init: 0 index: 16 binding: (method-new-generic-prin) */
-  static const void *G001935[] = {I(ab,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,18),I(08,1d,84,24),B(sx_obj ,18),I(08,1d,23,00),B(sx_write ,15),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
+  static const void *G001957[] = {I(ab,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,18),I(08,1d,84,24),B(sx_obj ,18),I(08,1d,23,00),B(sx_write ,15),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
 
-  eul_allocate_static_string(str_1941, "~a", 2);
-  eul_allocate_static_string(str_1942, "inlined-lambda", 14);
-  eul_allocate_static_string(str_1943, "lambda", 6);
-  eul_allocate_static_string(str_1944, "(~a ~a ~a)", 10);
+  eul_allocate_static_string(str_1963, "~a", 2);
+  eul_allocate_static_string(str_1964, "inlined-lambda", 14);
+  eul_allocate_static_string(str_1965, "lambda", 6);
+  eul_allocate_static_string(str_1966, "(~a ~a ~a)", 10);
   /* Byte-vector with size: 52 is_init: 0 index: 22 binding: (method-new-generic-prin) */
-  static const void *G001938[] = {I(ab,23,00,00),B(sx_write ,17),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(number ,23),I(3c,01,1b,34),I(00,00,00,21),I(23,00,00,00),B(sx_write ,17),I(24,00,00,00),B(dynamic ,3),I(3c,01,84,1a),I(32,00,00,00),I(00,00,00,09),I(86,1b,34,00),I(00,00,00,32),I(1f,03,26,00),I(00,00,00,07),I(24,00,00,00),B(sx_obj ,18),I(08,1f,03,23),B(sx_write ,18),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,05,22),I(01,32,00,00),I(00,00,00,64),I(1f,03,84,24),B(sx_obj ,13),I(08,1b,34,00),I(00,00,00,16),I(23,00,00,00),B(sx_write ,19),I(32,00,00,00),I(00,00,00,10),I(23,00,00,00),B(sx_write ,20),I(1f,05,26,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,18),I(08,1f,06,84),I(24,00,00,00),B(sx_obj ,18),I(08,1f,06,23),B(sx_write ,21),I(1f,04,1f,04),I(1f,04,24,00),B(mop_gf ,17),I(3d,05,08,22),I(04,45,04,00)};
+  static const void *G001960[] = {I(ab,23,00,00),B(sx_write ,17),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(number ,23),I(3c,01,1b,34),I(00,00,00,21),I(23,00,00,00),B(sx_write ,17),I(24,00,00,00),B(dynamic ,3),I(3c,01,84,1a),I(32,00,00,00),I(00,00,00,09),I(86,1b,34,00),I(00,00,00,32),I(1f,03,26,00),I(00,00,00,07),I(24,00,00,00),B(sx_obj ,18),I(08,1f,03,23),B(sx_write ,18),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,05,22),I(01,32,00,00),I(00,00,00,64),I(1f,03,84,24),B(sx_obj ,13),I(08,1b,34,00),I(00,00,00,16),I(23,00,00,00),B(sx_write ,19),I(32,00,00,00),I(00,00,00,10),I(23,00,00,00),B(sx_write ,20),I(1f,05,26,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,18),I(08,1f,06,84),I(24,00,00,00),B(sx_obj ,18),I(08,1f,06,23),B(sx_write ,21),I(1f,04,1f,04),I(1f,04,24,00),B(mop_gf ,17),I(3d,05,08,22),I(04,45,04,00)};
 
-  eul_allocate_static_string(str_1947, "~a", 2);
+  eul_allocate_static_string(str_1969, "~a", 2);
   /* Byte-vector with size: 8 is_init: 0 index: 24 binding: (method-new-generic-prin) */
-  static const void *G001945[] = {I(ab,1c,82,24),B(sx_obj2 ,29),I(08,1c,23,00),B(sx_write ,23),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001967[] = {I(ab,1c,82,24),B(sx_obj2 ,29),I(08,1c,23,00),B(sx_write ,23),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_1950, "~a", 2);
+  eul_allocate_static_string(str_1972, "~a", 2);
   /* Byte-vector with size: 8 is_init: 0 index: 26 binding: (method-new-generic-prin) */
-  static const void *G001948[] = {I(ab,1c,83,24),B(sx_obj2 ,21),I(08,1c,23,00),B(sx_write ,25),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001970[] = {I(ab,1c,83,24),B(sx_obj2 ,21),I(08,1c,23,00),B(sx_write ,25),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_1953, "(setq ~a ~a)", 12);
+  eul_allocate_static_string(str_1975, "(setq ~a ~a)", 12);
   /* Byte-vector with size: 11 is_init: 0 index: 28 binding: (method-new-generic-prin) */
-  static const void *G001951[] = {I(ab,1c,83,24),B(sx_obj2 ,25),I(08,1d,82,24),B(sx_obj2 ,25),I(08,1d,23,00),B(sx_write ,27),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
+  static const void *G001973[] = {I(ab,1c,83,24),B(sx_obj2 ,25),I(08,1d,82,24),B(sx_obj2 ,25),I(08,1d,23,00),B(sx_write ,27),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
 
-  eul_allocate_static_string(str_1956, "~a", 2);
+  eul_allocate_static_string(str_1978, "~a", 2);
   /* Byte-vector with size: 10 is_init: 0 index: 30 binding: (method-new-generic-prin) */
-  static const void *G001954[] = {I(ab,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj2 ,11),I(08,1c,23,00),B(sx_write ,29),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001976[] = {I(ab,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj2 ,11),I(08,1c,23,00),B(sx_write ,29),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_1959, "~a", 2);
+  eul_allocate_static_string(str_1981, "~a", 2);
   /* Byte-vector with size: 10 is_init: 0 index: 32 binding: (method-new-generic-prin) */
-  static const void *G001957[] = {I(ab,1c,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,23,00),B(sx_write ,31),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001979[] = {I(ab,1c,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,23,00),B(sx_write ,31),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_1962, "~a", 2);
+  eul_allocate_static_string(str_1984, "~a", 2);
   /* Byte-vector with size: 10 is_init: 0 index: 34 binding: (method-new-generic-prin) */
-  static const void *G001960[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,23,00),B(sx_write ,33),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001982[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,23,00),B(sx_write ,33),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_1966, "~a", 2);
-  eul_allocate_static_string(str_1967, "<unprintable syntax object>", 27);
+  eul_allocate_static_string(str_1988, "~a", 2);
+  eul_allocate_static_string(str_1989, "<unprintable syntax object>", 27);
   /* Byte-vector with size: 25 is_init: 0 index: 38 binding: (method-new-generic-prin) */
-  static const void *G001963[] = {I(ab,1c,24,00),B(mop_access ,5),I(3c,01,23,00),B(sx_write ,35),I(1c,86,6c,1b),I(34,00,00,00),I(00,00,00,38),I(1f,03,23,00),B(sx_write ,35),I(24,00,00,00),B(mop_defcl ,7),I(3c,02,1f,03),I(23,00,00,00),B(sx_write ,36),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,05,22),I(01,32,00,00),I(00,00,00,1a),I(1d,23,00,00),B(sx_write ,37),I(24,00,00,00),B(mop_gf ,17),I(3d,02,04,45),I(04,00,00,00)};
+  static const void *G001985[] = {I(ab,1c,24,00),B(mop_access ,5),I(3c,01,23,00),B(sx_write ,35),I(1c,86,6c,1b),I(34,00,00,00),I(00,00,00,38),I(1f,03,23,00),B(sx_write ,35),I(24,00,00,00),B(mop_defcl ,7),I(3c,02,1f,03),I(23,00,00,00),B(sx_write ,36),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,05,22),I(01,32,00,00),I(00,00,00,1a),I(1d,23,00,00),B(sx_write ,37),I(24,00,00,00),B(mop_gf ,17),I(3d,02,04,45),I(04,00,00,00)};
 
-  eul_allocate_static_string(str_1970, "#<macro-function>", 17);
+  eul_allocate_static_string(str_1992, "#<macro-function>", 17);
   /* Byte-vector with size: 5 is_init: 0 index: 40 binding: (method-new-generic-prin) */
-  static const void *G001968[] = {I(ab,23,00,00),B(sx_write ,39),I(24,00,00,00),B(mop_gf ,17),I(3d,02,01,00)};
+  static const void *G001990[] = {I(ab,23,00,00),B(sx_write ,39),I(24,00,00,00),B(mop_gf ,17),I(3d,02,01,00)};
 
   /* Byte-vector with size: 12 is_init: 0 index: 41 binding: (method-generic-prin) */
-  static const void *G001971[] = {I(ab,23,00,00),B(sx_write ,17),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,34),I(00,00,00,15),I(1d,1d,24,00),B(sx_write ,2),I(3d,02,03,32),I(00,00,00,08),I(38,02,01,45),I(03,00,00,00)};
+  static const void *G001993[] = {I(ab,23,00,00),B(sx_write ,17),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,34),I(00,00,00,15),I(1d,1d,24,00),B(sx_write ,2),I(3d,02,03,32),I(00,00,00,08),I(38,02,01,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_1975, "#<binding: ~a:~a:~a>", 20);
-  eul_allocate_static_string(str_1976, "#<binding: ~a:~a>", 17);
+  eul_allocate_static_string(str_1997, "#<binding: ~a:~a:~a>", 20);
+  eul_allocate_static_string(str_1998, "#<binding: ~a:~a>", 17);
   /* Byte-vector with size: 38 is_init: 0 index: 44 binding: (method-generic-prin) */
-  static const void *G001973[] = {I(ab,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj1 ,44),I(08,1d,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1f,03,83),I(24,00,00,00),B(sx_obj1 ,44),I(08,1d,24,00),B(sx_obj1 ,7),I(3c,01,1b,34),I(00,00,00,1d),I(1f,03,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,32,00,00),I(00,00,00,09),I(1f,03,1d,7e),I(1b,34,00,00),I(00,00,00,23),I(1f,06,23,00),B(sx_write ,42),I(1f,03,1f,07),I(1f,07,24,00),B(mop_gf ,17),I(3d,05,08,32),I(00,00,00,1c),I(1f,06,23,00),B(sx_write ,43),I(1f,03,1f,07),I(24,00,00,00),B(mop_gf ,17),I(3d,04,08,45),I(08,00,00,00)};
+  static const void *G001995[] = {I(ab,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj1 ,44),I(08,1d,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1f,03,83),I(24,00,00,00),B(sx_obj1 ,44),I(08,1d,24,00),B(sx_obj1 ,7),I(3c,01,1b,34),I(00,00,00,1d),I(1f,03,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,32,00,00),I(00,00,00,09),I(1f,03,1d,7e),I(1b,34,00,00),I(00,00,00,23),I(1f,06,23,00),B(sx_write ,42),I(1f,03,1f,07),I(1f,07,24,00),B(mop_gf ,17),I(3d,05,08,32),I(00,00,00,1c),I(1f,06,23,00),B(sx_write ,43),I(1f,03,1f,07),I(24,00,00,00),B(mop_gf ,17),I(3d,04,08,45),I(08,00,00,00)};
 
-  eul_allocate_static_string(str_1979, "#<module: ~a>", 13);
+  eul_allocate_static_string(str_2001, "#<module: ~a>", 13);
   /* Byte-vector with size: 10 is_init: 0 index: 46 binding: (method-generic-prin) */
-  static const void *G001977[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,23,00),B(sx_write ,45),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001999[] = {I(ab,1c,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,1c,23,00),B(sx_write ,45),I(1d,24,00,00),B(mop_gf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 479 is_init: 0 index: 50 binding: top-level */
-  static const void *G001980[] = {I(a9,84,24,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_write ,47),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_write ,2),I(2a,24,00,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,60),I(24,00,00,00),B(stream2 ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,48),I(23,00,00,00),B(sx_write ,46),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,44),I(24,00,00,00),B(stream2 ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,48),I(23,00,00,00),B(sx_write ,44),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,27),I(24,00,00,00),B(stream2 ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,48),I(23,00,00,00),B(sx_write ,41),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(2a,24,00,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(mop_class ,28),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,40),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,27),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,38),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,60),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,34),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,44),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,32),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,11),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,30),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,25),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,28),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,21),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,26),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,32),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,24),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,13),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,22),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,10),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,16),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,2),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,14),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,42),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,8),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,9),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,6),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,64,45),I(64,00,00,00)};
+  static const void *G002002[] = {I(a9,84,24,00),B(mop_class ,21),I(24,00,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(sx_write ,47),I(1f,03,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(sx_write ,2),I(2a,24,00,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,60),I(24,00,00,00),B(stream2 ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,48),I(23,00,00,00),B(sx_write ,46),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,44),I(24,00,00,00),B(stream2 ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,48),I(23,00,00,00),B(sx_write ,44),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,27),I(24,00,00,00),B(stream2 ,21),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,48),I(23,00,00,00),B(sx_write ,41),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(2a,24,00,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(mop_class ,28),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,40),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,27),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,38),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,60),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,34),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj1 ,44),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,32),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,11),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,30),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,25),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,28),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,21),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,26),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj2 ,32),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,24),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,13),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,22),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,10),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,16),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,2),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,14),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,42),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,8),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(sx_write ,2),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(sx_obj ,9),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(sx_write ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(sx_write ,49),I(23,00,00,00),B(sx_write ,6),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(sx_write ,2),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,64,45),I(64,00,00,00)};
 
-  eul_allocate_static_string(str_1987, "#<macro-function>", 17);
-  eul_allocate_static_string(str_1988, "~a", 2);
+  eul_allocate_static_string(str_2009, "#<macro-function>", 17);
+  eul_allocate_static_string(str_2010, "~a", 2);
   /* Byte-vector with size: 16 is_init: 0 index: 53 binding: binding-prin-string */
-  static const void *G001985[] = {I(aa,84,24,00),B(sx_obj1 ,44),I(08,1b,24,00),B(mop_inspect ,6),I(3c,01,1b,34),I(00,00,00,15),I(23,00,00,00),B(sx_write ,51),I(32,00,00,00),I(00,00,00,1b),I(86,23,00,00),B(sx_write ,52),I(1f,03,24,00),B(mop_gf ,17),I(3d,03,02,45),I(02,00,00,00)};
+  static const void *G002007[] = {I(aa,84,24,00),B(sx_obj1 ,44),I(08,1b,24,00),B(mop_inspect ,6),I(3c,01,1b,34),I(00,00,00,15),I(23,00,00,00),B(sx_write ,51),I(32,00,00,00),I(00,00,00,1b),I(86,23,00,00),B(sx_write ,52),I(1f,03,24,00),B(mop_gf ,17),I(3d,03,02,45),I(02,00,00,00)};
 
-  eul_allocate_static_string(str_1991, "\n   (~a . ~a)", 13);
+  eul_allocate_static_string(str_2013, "\n   (~a . ~a)", 13);
   /* Byte-vector with size: 14 is_init: 0 index: 55 binding: anonymous */
-  static const void *G001989[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,24,00),B(sx_write ,3),I(3c,01,47,00),I(00,23,00,00),B(sx_write ,54),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
+  static const void *G002011[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,24,00),B(sx_write ,3),I(3c,01,47,00),I(00,23,00,00),B(sx_write ,54),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
 
-  eul_allocate_static_string(str_1994, "\n   (~a . ~a)", 13);
+  eul_allocate_static_string(str_2016, "\n   (~a . ~a)", 13);
   /* Byte-vector with size: 14 is_init: 0 index: 57 binding: anonymous */
-  static const void *G001992[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,24,00),B(sx_write ,3),I(3c,01,47,00),I(00,23,00,00),B(sx_write ,56),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
+  static const void *G002014[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,24,00),B(sx_write ,3),I(3c,01,47,00),I(00,23,00,00),B(sx_write ,56),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
 
-  eul_allocate_static_string(str_1997, "\n   (~a . ~a)", 13);
+  eul_allocate_static_string(str_2019, "\n   (~a . ~a)", 13);
   /* Byte-vector with size: 14 is_init: 0 index: 59 binding: anonymous */
-  static const void *G001995[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,24,00),B(sx_write ,3),I(3c,01,47,00),I(00,23,00,00),B(sx_write ,58),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
+  static const void *G002017[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,44),I(08,1c,24,00),B(sx_write ,3),I(3c,01,47,00),I(00,23,00,00),B(sx_write ,58),I(1f,03,1f,03),I(24,00,00,00),B(mop_gf ,17),I(3d,04,04,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 60 binding: anonymous */
-  static const void *G001998[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G002020[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_2003, "\nPretty printed environment of module ~a:", 41);
-  eul_allocate_static_string(str_2004, "\n  lexical-env:", 15);
-  eul_allocate_static_string(str_2005, "\n  external-env:", 16);
-  eul_allocate_static_string(str_2006, "\n  syntax-env:", 14);
+  eul_allocate_static_string(str_2025, "\nPretty printed environment of module ~a:", 41);
+  eul_allocate_static_string(str_2026, "\n  lexical-env:", 15);
+  eul_allocate_static_string(str_2027, "\n  external-env:", 16);
+  eul_allocate_static_string(str_2028, "\n  syntax-env:", 14);
   /* Byte-vector with size: 99 is_init: 0 index: 66 binding: pprint-module */
-  static const void *G002000[] = {I(43,fe,46,01),I(1b,34,00,00),I(00,00,00,0f),I(1b,10,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,08),I(87,1b,48,00),I(00,23,00,00),B(sx_write ,17),I(87,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(sx_write ,61),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,60),I(3b,00,1c,0f),I(23,00,00,00),B(sx_write ,61),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,1f),I(05,47,00,00),I(24,00,00,00),B(mop_access ,3),I(3c,02,2a,1f),I(05,26,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,47,00,00),I(23,00,00,00),B(sx_write ,62),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,2a,47),I(00,00,23,00),B(sx_write ,63),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1f),I(06,26,00,00),I(00,00,00,10),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,59),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(sx_write ,64),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1f),I(07,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,57),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(sx_write ,65),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1f),I(08,26,00,00),I(00,00,00,0e),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,55),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,24,00),B(stream ,7),I(3c,01,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(0a,45,0b,00)};
+  static const void *G002022[] = {I(43,fe,46,01),I(1b,34,00,00),I(00,00,00,0f),I(1b,10,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,08),I(87,1b,48,00),I(00,23,00,00),B(sx_write ,17),I(87,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(sx_write ,61),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,60),I(3b,00,1c,0f),I(23,00,00,00),B(sx_write ,61),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,1f),I(05,47,00,00),I(24,00,00,00),B(mop_access ,3),I(3c,02,2a,1f),I(05,26,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,60),I(08,47,00,00),I(23,00,00,00),B(sx_write ,62),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,2a,47),I(00,00,23,00),B(sx_write ,63),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1f),I(06,26,00,00),I(00,00,00,10),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,59),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(sx_write ,64),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1f),I(07,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,57),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(sx_write ,65),I(24,00,00,00),B(mop_gf ,17),I(3c,02,2a,1f),I(08,26,00,00),I(00,00,00,0e),I(24,00,00,00),B(sx_obj1 ,60),I(08,23,00,00),B(sx_write ,12),I(23,00,00,00),B(sx_write ,55),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,24,00),B(stream ,7),I(3c,01,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(0a,45,0b,00)};
 
   /* Byte-vector with size: 32 is_init: 1 index: 0 binding: initialize-sx-write */
-  static const void *G002007[] = {I(87,25,00,00),B(sx_write ,1),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(sx_write ,67),I(23,00,00,00),B(sx_write ,66),I(3b,fe,25,00),B(sx_write ,4),I(23,00,00,00),B(sx_write ,68),I(23,00,00,00),B(sx_write ,53),I(3b,01,25,00),B(sx_write ,3),I(86,25,00,00),B(sx_write ,2),I(23,00,00,00),B(sx_write ,69),I(23,00,00,00),B(sx_write ,50),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G002029[] = {I(87,25,00,00),B(sx_write ,1),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(sx_write ,67),I(23,00,00,00),B(sx_write ,66),I(3b,fe,25,00),B(sx_write ,4),I(23,00,00,00),B(sx_write ,68),I(23,00,00,00),B(sx_write ,53),I(3b,01,25,00),B(sx_write ,3),I(86,25,00,00),B(sx_write ,2),I(23,00,00,00),B(sx_write ,69),I(23,00,00,00),B(sx_write ,50),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  object_class(str_1923) = eul_static_string_class;
-  eul_allocate_bytevector( G001922,G001921);
-  object_class(str_1926) = eul_static_string_class;
-  eul_allocate_bytevector( G001925,G001924);
-  object_class(str_1929) = eul_static_string_class;
-  eul_allocate_bytevector( G001928,G001927);
-  object_class(str_1932) = eul_static_string_class;
-  eul_intern_symbol(sym_1933,"anonymous");
-  object_class(str_1934) = eul_static_string_class;
-  eul_allocate_bytevector( G001931,G001930);
-  object_class(str_1937) = eul_static_string_class;
-  eul_allocate_bytevector( G001936,G001935);
-  eul_intern_symbol(sym_1940,"*pprint*");
-  object_class(str_1941) = eul_static_string_class;
-  object_class(str_1942) = eul_static_string_class;
-  object_class(str_1943) = eul_static_string_class;
-  object_class(str_1944) = eul_static_string_class;
-  eul_allocate_bytevector( G001939,G001938);
-  object_class(str_1947) = eul_static_string_class;
-  eul_allocate_bytevector( G001946,G001945);
-  object_class(str_1950) = eul_static_string_class;
-  eul_allocate_bytevector( G001949,G001948);
-  object_class(str_1953) = eul_static_string_class;
-  eul_allocate_bytevector( G001952,G001951);
+  object_class(str_1945) = eul_static_string_class;
+  eul_allocate_bytevector( G001944,G001943);
+  object_class(str_1948) = eul_static_string_class;
+  eul_allocate_bytevector( G001947,G001946);
+  object_class(str_1951) = eul_static_string_class;
+  eul_allocate_bytevector( G001950,G001949);
+  object_class(str_1954) = eul_static_string_class;
+  eul_intern_symbol(sym_1955,"anonymous");
   object_class(str_1956) = eul_static_string_class;
-  eul_allocate_bytevector( G001955,G001954);
+  eul_allocate_bytevector( G001953,G001952);
   object_class(str_1959) = eul_static_string_class;
   eul_allocate_bytevector( G001958,G001957);
-  object_class(str_1962) = eul_static_string_class;
-  eul_allocate_bytevector( G001961,G001960);
-  eul_intern_symbol(sym_1965,"binding");
+  eul_intern_symbol(sym_1962,"*pprint*");
+  object_class(str_1963) = eul_static_string_class;
+  object_class(str_1964) = eul_static_string_class;
+  object_class(str_1965) = eul_static_string_class;
   object_class(str_1966) = eul_static_string_class;
-  object_class(str_1967) = eul_static_string_class;
-  eul_allocate_bytevector( G001964,G001963);
-  object_class(str_1970) = eul_static_string_class;
-  eul_allocate_bytevector( G001969,G001968);
-  eul_allocate_bytevector( G001972,G001971);
+  eul_allocate_bytevector( G001961,G001960);
+  object_class(str_1969) = eul_static_string_class;
+  eul_allocate_bytevector( G001968,G001967);
+  object_class(str_1972) = eul_static_string_class;
+  eul_allocate_bytevector( G001971,G001970);
   object_class(str_1975) = eul_static_string_class;
-  object_class(str_1976) = eul_static_string_class;
   eul_allocate_bytevector( G001974,G001973);
-  object_class(str_1979) = eul_static_string_class;
-  eul_allocate_bytevector( G001978,G001977);
-  eul_intern_symbol(sym_1982,"new-generic-prin");
-  eul_intern_symbol(sym_1983,"(method generic-prin)");
-  eul_intern_symbol(sym_1984,"(method new-generic-prin)");
-  eul_allocate_bytevector( G001981,G001980);
-  object_class(str_1987) = eul_static_string_class;
+  object_class(str_1978) = eul_static_string_class;
+  eul_allocate_bytevector( G001977,G001976);
+  object_class(str_1981) = eul_static_string_class;
+  eul_allocate_bytevector( G001980,G001979);
+  object_class(str_1984) = eul_static_string_class;
+  eul_allocate_bytevector( G001983,G001982);
+  eul_intern_symbol(sym_1987,"binding");
   object_class(str_1988) = eul_static_string_class;
+  object_class(str_1989) = eul_static_string_class;
   eul_allocate_bytevector( G001986,G001985);
-  object_class(str_1991) = eul_static_string_class;
-  eul_allocate_bytevector( G001990,G001989);
-  object_class(str_1994) = eul_static_string_class;
-  eul_allocate_bytevector( G001993,G001992);
+  object_class(str_1992) = eul_static_string_class;
+  eul_allocate_bytevector( G001991,G001990);
+  eul_allocate_bytevector( G001994,G001993);
   object_class(str_1997) = eul_static_string_class;
+  object_class(str_1998) = eul_static_string_class;
   eul_allocate_bytevector( G001996,G001995);
-  eul_allocate_bytevector( G001999,G001998);
-  eul_intern_symbol(sym_2002,"*clean-ups*");
-  object_class(str_2003) = eul_static_string_class;
-  object_class(str_2004) = eul_static_string_class;
-  object_class(str_2005) = eul_static_string_class;
-  object_class(str_2006) = eul_static_string_class;
-  eul_allocate_bytevector( G002001,G002000);
-  eul_intern_symbol(sym_2009,"pprint-module");
-  eul_intern_symbol(sym_2010,"binding-prin-string");
-  eul_intern_symbol(sym_2011,"top-level");
+  object_class(str_2001) = eul_static_string_class;
+  eul_allocate_bytevector( G002000,G001999);
+  eul_intern_symbol(sym_2004,"new-generic-prin");
+  eul_intern_symbol(sym_2005,"(method generic-prin)");
+  eul_intern_symbol(sym_2006,"(method new-generic-prin)");
+  eul_allocate_bytevector( G002003,G002002);
+  object_class(str_2009) = eul_static_string_class;
+  object_class(str_2010) = eul_static_string_class;
   eul_allocate_bytevector( G002008,G002007);
+  object_class(str_2013) = eul_static_string_class;
+  eul_allocate_bytevector( G002012,G002011);
+  object_class(str_2016) = eul_static_string_class;
+  eul_allocate_bytevector( G002015,G002014);
+  object_class(str_2019) = eul_static_string_class;
+  eul_allocate_bytevector( G002018,G002017);
+  eul_allocate_bytevector( G002021,G002020);
+  eul_intern_symbol(sym_2024,"*clean-ups*");
+  object_class(str_2025) = eul_static_string_class;
+  object_class(str_2026) = eul_static_string_class;
+  object_class(str_2027) = eul_static_string_class;
+  object_class(str_2028) = eul_static_string_class;
+  eul_allocate_bytevector( G002023,G002022);
+  eul_intern_symbol(sym_2031,"pprint-module");
+  eul_intern_symbol(sym_2032,"binding-prin-string");
+  eul_intern_symbol(sym_2033,"top-level");
+  eul_allocate_bytevector( G002030,G002029);
 
   /* Set local bindings */
   {
@@ -232,73 +232,73 @@ void initialize_module_sx_write()
       sx_write_bindings[i] = eul_nil;
   }
 
-  sx_write_bindings[ 5] = str_1923;
-  sx_write_bindings[ 6] = G001922;
-  sx_write_bindings[ 7] = str_1926;
-  sx_write_bindings[ 8] = G001925;
-  sx_write_bindings[ 9] = str_1929;
-  sx_write_bindings[ 10] = G001928;
-  sx_write_bindings[ 11] = str_1932;
-  sx_write_bindings[ 12] = sym_1933;
-  sx_write_bindings[ 13] = str_1934;
-  sx_write_bindings[ 14] = G001931;
-  sx_write_bindings[ 15] = str_1937;
-  sx_write_bindings[ 16] = G001936;
-  sx_write_bindings[ 17] = sym_1940;
-  sx_write_bindings[ 18] = str_1941;
-  sx_write_bindings[ 19] = str_1942;
-  sx_write_bindings[ 20] = str_1943;
-  sx_write_bindings[ 21] = str_1944;
-  sx_write_bindings[ 22] = G001939;
-  sx_write_bindings[ 23] = str_1947;
-  sx_write_bindings[ 24] = G001946;
-  sx_write_bindings[ 25] = str_1950;
-  sx_write_bindings[ 26] = G001949;
-  sx_write_bindings[ 27] = str_1953;
-  sx_write_bindings[ 28] = G001952;
-  sx_write_bindings[ 29] = str_1956;
-  sx_write_bindings[ 30] = G001955;
-  sx_write_bindings[ 31] = str_1959;
-  sx_write_bindings[ 32] = G001958;
-  sx_write_bindings[ 33] = str_1962;
-  sx_write_bindings[ 34] = G001961;
-  sx_write_bindings[ 35] = sym_1965;
-  sx_write_bindings[ 36] = str_1966;
-  sx_write_bindings[ 37] = str_1967;
-  sx_write_bindings[ 38] = G001964;
-  sx_write_bindings[ 39] = str_1970;
-  sx_write_bindings[ 40] = G001969;
-  sx_write_bindings[ 41] = G001972;
-  sx_write_bindings[ 42] = str_1975;
-  sx_write_bindings[ 43] = str_1976;
-  sx_write_bindings[ 44] = G001974;
-  sx_write_bindings[ 45] = str_1979;
-  sx_write_bindings[ 46] = G001978;
-  sx_write_bindings[ 47] = sym_1982;
-  sx_write_bindings[ 48] = sym_1983;
-  sx_write_bindings[ 49] = sym_1984;
-  sx_write_bindings[ 50] = G001981;
-  sx_write_bindings[ 51] = str_1987;
-  sx_write_bindings[ 52] = str_1988;
-  sx_write_bindings[ 53] = G001986;
-  sx_write_bindings[ 54] = str_1991;
-  sx_write_bindings[ 55] = G001990;
-  sx_write_bindings[ 56] = str_1994;
-  sx_write_bindings[ 57] = G001993;
-  sx_write_bindings[ 58] = str_1997;
-  sx_write_bindings[ 59] = G001996;
-  sx_write_bindings[ 60] = G001999;
-  sx_write_bindings[ 61] = sym_2002;
-  sx_write_bindings[ 62] = str_2003;
-  sx_write_bindings[ 63] = str_2004;
-  sx_write_bindings[ 64] = str_2005;
-  sx_write_bindings[ 65] = str_2006;
-  sx_write_bindings[ 66] = G002001;
+  sx_write_bindings[ 5] = str_1945;
+  sx_write_bindings[ 6] = G001944;
+  sx_write_bindings[ 7] = str_1948;
+  sx_write_bindings[ 8] = G001947;
+  sx_write_bindings[ 9] = str_1951;
+  sx_write_bindings[ 10] = G001950;
+  sx_write_bindings[ 11] = str_1954;
+  sx_write_bindings[ 12] = sym_1955;
+  sx_write_bindings[ 13] = str_1956;
+  sx_write_bindings[ 14] = G001953;
+  sx_write_bindings[ 15] = str_1959;
+  sx_write_bindings[ 16] = G001958;
+  sx_write_bindings[ 17] = sym_1962;
+  sx_write_bindings[ 18] = str_1963;
+  sx_write_bindings[ 19] = str_1964;
+  sx_write_bindings[ 20] = str_1965;
+  sx_write_bindings[ 21] = str_1966;
+  sx_write_bindings[ 22] = G001961;
+  sx_write_bindings[ 23] = str_1969;
+  sx_write_bindings[ 24] = G001968;
+  sx_write_bindings[ 25] = str_1972;
+  sx_write_bindings[ 26] = G001971;
+  sx_write_bindings[ 27] = str_1975;
+  sx_write_bindings[ 28] = G001974;
+  sx_write_bindings[ 29] = str_1978;
+  sx_write_bindings[ 30] = G001977;
+  sx_write_bindings[ 31] = str_1981;
+  sx_write_bindings[ 32] = G001980;
+  sx_write_bindings[ 33] = str_1984;
+  sx_write_bindings[ 34] = G001983;
+  sx_write_bindings[ 35] = sym_1987;
+  sx_write_bindings[ 36] = str_1988;
+  sx_write_bindings[ 37] = str_1989;
+  sx_write_bindings[ 38] = G001986;
+  sx_write_bindings[ 39] = str_1992;
+  sx_write_bindings[ 40] = G001991;
+  sx_write_bindings[ 41] = G001994;
+  sx_write_bindings[ 42] = str_1997;
+  sx_write_bindings[ 43] = str_1998;
+  sx_write_bindings[ 44] = G001996;
+  sx_write_bindings[ 45] = str_2001;
+  sx_write_bindings[ 46] = G002000;
+  sx_write_bindings[ 47] = sym_2004;
+  sx_write_bindings[ 48] = sym_2005;
+  sx_write_bindings[ 49] = sym_2006;
+  sx_write_bindings[ 50] = G002003;
+  sx_write_bindings[ 51] = str_2009;
+  sx_write_bindings[ 52] = str_2010;
+  sx_write_bindings[ 53] = G002008;
+  sx_write_bindings[ 54] = str_2013;
+  sx_write_bindings[ 55] = G002012;
+  sx_write_bindings[ 56] = str_2016;
+  sx_write_bindings[ 57] = G002015;
+  sx_write_bindings[ 58] = str_2019;
+  sx_write_bindings[ 59] = G002018;
+  sx_write_bindings[ 60] = G002021;
+  sx_write_bindings[ 61] = sym_2024;
+  sx_write_bindings[ 62] = str_2025;
+  sx_write_bindings[ 63] = str_2026;
+  sx_write_bindings[ 64] = str_2027;
+  sx_write_bindings[ 65] = str_2028;
+  sx_write_bindings[ 66] = G002023;
   sx_write_bindings[ 1] = eul_nil;
-  sx_write_bindings[ 67] = sym_2009;
-  sx_write_bindings[ 68] = sym_2010;
-  sx_write_bindings[ 69] = sym_2011;
-  eul_allocate_lambda( sx_write_bindings[0], "initialize-sx-write", 0, G002008);
+  sx_write_bindings[ 67] = sym_2031;
+  sx_write_bindings[ 68] = sym_2032;
+  sx_write_bindings[ 69] = sym_2033;
+  eul_allocate_lambda( sx_write_bindings[0], "initialize-sx-write", 0, G002030);
 
   }
 }

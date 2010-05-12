@@ -40,17 +40,17 @@
 
   (defmethod emptyp ((str <string>)) (string-empty-p str))
 
-  (defmethod binary= ((str1 <string>) (str2 <string>))
-    (if (string-equal str1 str2) str1 ()))
-
   (defun string-equal (str1 str2)
     (int-binary= (string-compare str1 str2) 0))
   (declare-inline string-equal)
 
+  (defextern string-compare (<string> <string>) <int> "strcmp")
+
+  (defmethod binary= ((str1 <string>) (str2 <string>))
+    (if (string-equal str1 str2) t ()))
+
   (defmethod binary< ((str1 <string>) (str2 <string>))
     (int-binary< (string-compare str1 str2) 0))
-
-  (defextern string-compare (<string> <string>) <int> "strcmp")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Iteration

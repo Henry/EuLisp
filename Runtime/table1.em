@@ -57,7 +57,7 @@
               (hash-fun (init-list-ref inits hash-function:)))
           (if (functionp hash-fun)
               (apply make <hash-table> inits)
-            (if (eq comp equal)
+            (if (eq comp binary=)
                 (apply make <hash-table> inits)
               (if (member1-list comp (list () eq eql))
                   (apply make <simple-hash-table>

@@ -220,7 +220,7 @@
   (declare-inline eq?)
 
   (defun equal? (x y)
-    (equal x y))
+    (binary= x y))
   (declare-inline equal?)
 
   (defun eqv? (x y)
@@ -338,7 +338,7 @@
   (export make-vector map max)
 
   (defun member (x y)
-    (Member x y equal))
+    (Member x y binary=))
 
   (defun memq (x y)
     (Member x y eq))

@@ -1,7 +1,7 @@
 (literalize Jigsawedge      ;element class representing an piece edge
      pieceid                ;1 to 9 pieces for a 9 piece puzzle
      edgeno                 ;1 to 24 for a 9 piece puzzle
-     piecetype              ;boundary or nil
+     piecetype              ;boundary or NIL
      piececolor             ;blue,red,or grey
 )
 
@@ -61,7 +61,7 @@ boundary) }
 
 (p fitjigsawpuzzle--
  { <r51> (Jigsawedge ^pieceid <x2> ^edgeno <y2>) }
- { <r52> (Jigsawedge ^pieceid { <w2> <> <x2> } ^edgeno <y2>) } 
+ { <r52> (Jigsawedge ^pieceid { <w2> <> <x2> } ^edgeno <y2>) }
 -->
 (write (crlf) 5 put pieces <x2> and <w2> on random criterion together on
  edge <y2> (crlf))

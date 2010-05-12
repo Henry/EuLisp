@@ -151,10 +151,10 @@ int eul_trace=0;
 #define BC_PRIMITIVE_REF 2
 #define BCA_PRIMITIVE_REF()                                                    \
     POPVAL1(arg2);                                                             \
-    CALLBACK_TRAP\
+    CALLBACK_TRAP                                                              \
     (                                                                          \
         ((!is_immediate(LVPEEKVAL()))                                          \
-     && (fpi_value(object_size(LVPEEKVAL())) > fpi_value(arg2))),              \
+        && (fpi_value(object_size(LVPEEKVAL())) > fpi_value(arg2))),           \
         PUSHVAL1(arg2); ,                                                      \
         CB_BAD_SLOT_ACCESS,                                                    \
         2                                                                      \
@@ -181,7 +181,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-primitive-ref) (obj1, fpi, ob2)->() **/
+///  (set-primitive-ref) (obj1, fpi, ob2)->()
 
 #define BC_SET_PRIMITIVE_REF 3
 #define BCA_SET_PRIMITIVE_REF()                                                \
@@ -195,7 +195,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-primitive-relative-ref) (obj1, fpi, ob2, class)->(obj2) **/
+///  (set-primitive-relative-ref) (obj1, fpi, ob2, class)->(obj2)
 
 #define BC_SET_PRIMITIVE_RELATIVE_REF 9
 #define BCA_SET_PRIMITIVE_RELATIVE_REF()                                       \
@@ -210,7 +210,7 @@ int eul_trace=0;
                       ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (object-class) (obj)->(class) **/
+///  (object-class) (obj)->(class)
 
 #define BC_PRIMITIVE_CLASS_OF 4
 #define BCA_PRIMITIVE_CLASS_OF()                                               \
@@ -218,7 +218,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-object-class) (obj, class)->() **/
+///  (set-object-class) (obj, class)->()
 
 #define BC_SET_PRIMITIVE_CLASS_OF 5
 #define BCA_SET_PRIMITIVE_CLASS_OF()                                           \
@@ -230,7 +230,7 @@ int eul_trace=0;
                        ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (object-size) (obj)->(fpi) **/
+///  (object-size) (obj)->(fpi)
 
 #define BC_PRIMITIVE_SIZE 6
 #define BCA_PRIMITIVE_SIZE()                                                   \
@@ -243,7 +243,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (string-ref) (str, fpi)->(char) **/
+///  (string-ref) (str, fpi)->(char)
 
 #define BC_STRING_REF 11
 #define BCA_STRING_REF()                                                       \
@@ -257,7 +257,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-string-ref) (str, fpi, char)->(char) **/
+///  (set-string-ref) (str, fpi, char)->(char)
 
 #define BC_SET_STRING_REF 12
 #define BCA_SET_STRING_REF()                                                   \
@@ -278,7 +278,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (cons) (obj1, obj2)->(cons) **/
+///  (cons) (obj1, obj2)->(cons)
 
 #define BC_THE_CONS 15
 #define BCA_THE_CONS()                                                         \
@@ -289,7 +289,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (car) (cons)->(obj) **/
+///  (car) (cons)->(obj)
 
 #define BC_THE_CAR 16
 #define BCA_THE_CAR()                                                          \
@@ -311,7 +311,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (cdr) (cons)->(obj) **/
+///  (cdr) (cons)->(obj)
 
 #define BC_THE_CDR 17
 #define BCA_THE_CDR()                                                          \
@@ -333,7 +333,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (c*r) (cons)->(obj) **/
+///  (c*r) (cons)->(obj)
 
 #define BC_THE_CAAR 114
 #define BCA_THE_CAAR()                                                         \
@@ -396,7 +396,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (setter car) (cons, obj)->(obj) **/
+///  (setter car) (cons, obj)->(obj)
 
 #define BC_SET_CAR 143
 #define BCA_SET_CAR()                                                          \
@@ -408,7 +408,7 @@ int eul_trace=0;
                   ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (setter cdr) (cons, obj)->(obj) **/
+///  (setter cdr) (cons, obj)->(obj)
 
 #define BC_SET_CDR 144
 #define BCA_SET_CDR()                                                          \
@@ -425,7 +425,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (null) (obj)->(obj) **/
+///  (null) (obj)->(obj)
 
 #define BC_NULLP 18
 #define BCA_NULLP()                                                            \
@@ -433,7 +433,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (consp) (obj)->(obj) **/
+///  (consp) (obj)->(obj)
 
 #define BC_CONSP 122
 #define BCA_CONSP()                                                            \
@@ -441,7 +441,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (listp) (obj)->(obj) **/
+///  (listp) (obj)->(obj)
 
 #define BC_LISTP 123
 #define BCA_LISTP()                                                            \
@@ -449,7 +449,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (symbolp) (obj)->(obj) **/
+///  (symbolp) (obj)->(obj)
 
 #define BC_SYMBOLP 124
 #define BCA_SYMBOLP()                                                          \
@@ -457,7 +457,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (stringp) (obj)->(obj) **/
+///  (stringp) (obj)->(obj)
 
 #define BC_STRINGP 125
 #define BCA_STRINGP()                                                          \
@@ -465,7 +465,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpip) (obj)->(obj) **/
+///  (fpip) (obj)->(obj)
 
 #define BC_FPIP 126
 #define BCA_FPIP()                                                             \
@@ -473,7 +473,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (lambdap) (obj)->(obj) **/
+///  (lambdap) (obj)->(obj)
 
 #define BC_LAMBDAP 127
 #define BCA_LAMBDAP()                                                          \
@@ -481,7 +481,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (gfp) (obj)->(obj) **/
+///  (gfp) (obj)->(obj)
 
 #define BC_GFP 128
 #define BCA_GFP()                                                              \
@@ -489,7 +489,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (characterp) (obj)->(obj) **/
+///  (characterp) (obj)->(obj)
 
 #define BC_CHARACTERP 129
 #define BCA_CHARACTERP()                                                       \
@@ -502,7 +502,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (setter) (obj)->(obj) **/
+///  (setter) (obj)->(obj)
 
 #define BC_SETTER 145
 #define BCA_SETTER()                                                           \
@@ -512,7 +512,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (setter setter) (obj, obj)->(obj) **/
+///  (setter setter) (obj, obj)->(obj)
 
 #define BC_SET_SETTER 146
 #define BCA_SET_SETTER()                                                       \
@@ -530,7 +530,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (fpi-sum) (fpi, fpi)->(fpi) **/
+///  (fpi-sum) (fpi, fpi)->(fpi)
 
 #define BC_FPI_SUM 20
 #define BCA_FPI_SUM()                                                          \
@@ -577,7 +577,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-difference) (fpi, fpi)->(fpi) **/
+///  (fpi-difference) (fpi, fpi)->(fpi)
 
 #define BC_FPI_DIFFERENCE 21
 #define BCA_FPI_DIFFERENCE()                                                   \
@@ -607,7 +607,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-product) (fpi, fpi)->(fpi) **/
+///  (fpi-product) (fpi, fpi)->(fpi)
 
 #define BC_FPI_PRODUCT 22
 #define BCA_FPI_PRODUCT()                                                      \
@@ -640,7 +640,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-quotient) (fpi, fpi)->(fpi) **/
+///  (fpi-quotient) (fpi, fpi)->(fpi)
 
 #define BC_FPI_QUOTIENT 23
 #define BCA_FPI_QUOTIENT()                                                     \
@@ -670,7 +670,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-remainder) (fpi, fpi)->(fpi) **/
+///  (fpi-remainder) (fpi, fpi)->(fpi)
 
 #define BC_FPI_REMAINDER 24
 #define BCA_FPI_REMAINDER()                                                    \
@@ -700,40 +700,78 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-equal) (fpi, fpi)->(bool) **/
+///  (fpi-equal) (fpi, fpi)->(bool)
 
 #define BC_FPI_EQUAL 25
 #define BCA_FPI_EQUAL()                                                        \
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
     if (eul_is_int(arg1))                                                      \
-        if (eul_is_int(arg2)) {                                                \
-            /*       if (fpi_value(arg1) != fpi_value(arg2)) LVPEEKVAL() = eul_nil; */ \
-            if (arg1 != arg2) LVPEEKVAL() = eul_nil;                           \
-        }                                                                      \
-        else if (eul_is_double(arg2)) {                                        \
-            if (fpi_value(arg1) != eul_double_as_c_double(arg2))               \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            if (arg1 != arg2)                                                  \
+            {                                                                  \
                 LVPEEKVAL() = eul_nil;                                         \
+            }                                                                  \
+            else                                                               \
+            {                                                                  \
+                LVPEEKVAL() = eul_true;                                        \
+            }                                                                  \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            if (fpi_value(arg1) != eul_double_as_c_double(arg2))               \
+            {                                                                  \
+                LVPEEKVAL() = eul_nil;                                         \
+            }                                                                  \
+            else                                                               \
+            {                                                                  \
+                LVPEEKVAL() = eul_true;                                        \
+            }                                                                  \
         }                                                                      \
         else                                                                   \
-            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2)              \
-            else if (eul_is_double(arg1))                                      \
-                if (eul_is_int(arg2)) {                                        \
-                    if (eul_double_as_c_double(arg1) != fpi_value(arg2))       \
-                        LVPEEKVAL() = eul_nil;                                 \
-                }                                                              \
-                else if (eul_is_double(arg2)) {                                \
-                    if (eul_double_as_c_double(arg1) != eul_double_as_c_double(arg2)) \
-                        LVPEEKVAL() = eul_nil;                                 \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2);             \
+        }                                                                      \
+    }                                                                          \
+    else if (eul_is_double(arg1))                                              \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            if (eul_double_as_c_double(arg1) != fpi_value(arg2))               \
+            {                                                                  \
+                LVPEEKVAL() = eul_nil;                                         \
+            }                                                                  \
+            else if (eul_is_double(arg2))                                      \
+            {                                                                  \
+                if                                                             \
+                (                                                              \
+                    eul_double_as_c_double(arg1)                               \
+                    != eul_double_as_c_double(arg2)                            \
+                )                                                              \
+                {                                                              \
+                    LVPEEKVAL() = eul_nil;                                     \
                 }                                                              \
                 else                                                           \
-                    CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2)      \
-                    else                                                       \
-                        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2)  \
-                        ++reg_pc;
+                {                                                              \
+                    LVPEEKVAL() = eul_true;                                    \
+                }                                                              \
+            }                                                                  \
+            else                                                               \
+            {                                                                  \
+                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2);         \
+            }                                                                  \
+        }                                                                      \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2);                 \
+    }                                                                          \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-inc) (fpi)->(bool) **/
+///  (fpi-inc) (fpi)->(bool)
 
 #define BC_FPI_LT 26
 #define BCA_FPI_LT()                                                           \
@@ -765,7 +803,7 @@ int eul_trace=0;
                         ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-inc) (fpi)->(fpi) **/
+///  (fpi-inc) (fpi)->(fpi)
 
 #define BC_FPI_INC 43
 #define BCA_FPI_INC()                                                          \
@@ -783,7 +821,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-dec) (fpi)->(fpi) **/
+///  (fpi-dec) (fpi)->(fpi)
 
 #define BC_FPI_DEC 44
 #define BCA_FPI_DEC()                                                          \
@@ -801,7 +839,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-zerop) (fpi)->(bool) **/
+///  (fpi-zerop) (fpi)->(bool)
 
 #define BC_FPI_ZEROP 45
 #define BCA_FPI_ZEROP()                                                        \
@@ -823,7 +861,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (stack-ref0) ()->(obj) **/
+///  (stack-ref0) ()->(obj)
 
 #define BC_STACK_REF0 27
 #define BCA_STACK_REF0()                                                       \
@@ -832,7 +870,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (stack-ref1) ()->(obj) **/
+///  (stack-ref1) ()->(obj)
 
 #define BC_STACK_REF1 28
 #define BCA_STACK_REF1()                                                       \
@@ -841,19 +879,19 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (stack-ref2) ()->(obj) **/
+///  (stack-ref2) ()->(obj)
 
 #define BC_STACK_REF2 29
 #define BCA_STACK_REF2()                                                       \
-    PRINT_REG_PC("STACK_REF2");                                            \
+    PRINT_REG_PC("STACK_REF2");                                                \
     REFVAL(2, tmp1);                                                           \
-    PRINT_REG_PC("STACK_REF2");                                            \
+    PRINT_REG_PC("STACK_REF2");                                                \
     PUSHVAL1(tmp1);                                                            \
-    PRINT_REG_PC("STACK_REF2");                                            \
+    PRINT_REG_PC("STACK_REF2");                                                \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (stack-ref fpi) ()->(obj) **/
+///  (stack-ref fpi) ()->(obj)
 
 #define BC_STACK_REF 31
 #define BCA_STACK_REF()                                                        \
@@ -863,7 +901,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (swap) (o1, o2)->(o1, o2) **/
+///  (swap) (o1, o2)->(o1, o2)
 
 #define BC_SWAP 30
 #define BCA_SWAP()                                                             \
@@ -873,7 +911,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (value_stack_ref) (obj)->(obj) **/
+///  (value_stack_ref) (obj)->(obj)
 
 #define BC_VALUE_STACK_REF 141
 #define BCA_VALUE_STACK_REF()                                                  \
@@ -882,7 +920,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-stack-ref fix) (obj)->() **/
+///  (set-stack-ref fix) (obj)->()
 
 #define BC_SET_STACK_REF 32
 #define BCA_SET_STACK_REF()                                                    \
@@ -892,7 +930,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (pop n) (obj*n)->() **/
+///  (pop n) (obj*n)->()
 
 #define BC_POP 33
 #define BCA_POP()                                                              \
@@ -901,7 +939,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (pop*) (obj*)->() **/
+///  (pop*) (obj*)->()
 
 #define BC_POP1 42
 #define BCA_POP1()                                                             \
@@ -909,7 +947,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (nobble n) (obj*n, obj1)->(obj1) **/
+///  (nobble n) (obj*n, obj1)->(obj1)
 
 #define BC_NOBBLE 34
 #define BCA_NOBBLE()                                                           \
@@ -925,7 +963,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (context_stack_ref) (obj)->(obj) **/
+///  (context_stack_ref) (obj)->(obj)
 
 #define BC_CONTEXT_STACK_REF 140
 #define BCA_CONTEXT_STACK_REF()                                                \
@@ -943,40 +981,40 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (binding-ref fix) ()->(obj) **/
+///  (binding-ref fix) ()->(obj)
 
 #define BC_BINDING_REF 36
 #define BCA_BINDING_REF()                                                      \
-    PRINT_REG_PC("BINDING_REF");                                           \
+    PRINT_REG_PC("BINDING_REF");                                               \
     tmp1 = get_binding();                                                      \
-    PRINT_REG_PC("BINDING_REF");                                           \
+    PRINT_REG_PC("BINDING_REF");                                               \
     /* fprint_ref(stdout, tmp1); fflush(stdout); */                            \
     PUSHVAL1(tmp1);                                                            \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-binding-ref fix) (obj)->() **/
+///  (set-binding-ref fix) (obj)->()
 
 #define BC_SET_BINDING_REF 37
 #define BCA_SET_BINDING_REF()                                                  \
     POPVAL1(tmp1);                                                             \
-    PRINT_REG_PC("SET_BINDING_REF");                                       \
+    PRINT_REG_PC("SET_BINDING_REF");                                           \
     set_binding(tmp1);                                                         \
-    PRINT_REG_PC("SET_BINDING_REF");                                       \
+    PRINT_REG_PC("SET_BINDING_REF");                                           \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-and-get-binding-ref fix) (obj)->(obj) **/
+///  (set-and-get-binding-ref fix) (obj)->(obj)
 
 #define BC_SET_AND_GET_BINDING_REF 137
 #define BCA_SET_AND_GET_BINDING_REF()                                          \
-    PRINT_REG_PC("SET_AND_GET_BINDING_REF");                               \
+    PRINT_REG_PC("SET_AND_GET_BINDING_REF");                                   \
     set_binding(LVPEEKVAL());                                                  \
-    PRINT_REG_PC("SET_AND_GET_BINDING_REF");                               \
+    PRINT_REG_PC("SET_AND_GET_BINDING_REF");                                   \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (static-ref*) ()->(obj) **/
+///  (static-ref*) ()->(obj)
 
 #define BC_STATIC_REF0 130
 #define BCA_STATIC_REF0()                                                      \
@@ -1009,13 +1047,13 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (static-ref fix) ()->(obj) **/
+///  (static-ref fix) ()->(obj)
 
 #define BC_STATIC_REF 35
 #define BCA_STATIC_REF() BCA_BINDING_REF()
 
 ///-----------------------------------------------------------------------------
-///  (static-fpi-ref fix) ()->(obj) **/
+///  (static-fpi-ref fix) ()->(obj)
 
 #define BC_STATIC_FPI_REF 38
 #define BCA_STATIC_FPI_REF()                                                   \
@@ -1025,7 +1063,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (static-fpi-byte-ref byte) ()->(obj) **/
+///  (static-fpi-byte-ref byte) ()->(obj)
 
 #define BC_STATIC_FPI_BYTE_REF 138
 #define BCA_STATIC_FPI_BYTE_REF()                                              \
@@ -1035,7 +1073,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (static-character-ref byte) ()->(obj) **/
+///  (static-character-ref byte) ()->(obj)
 
 #define BC_STATIC_CHARACTER_REF 39
 #define BCA_STATIC_CHARACTER_REF()                                             \
@@ -1109,7 +1147,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (register-ref byte) ()->(obj) **/
+///  (register-ref byte) ()->(obj)
 
 #define BC_REGISTER_REF 40
 #define BCA_REGISTER_REF()                                                     \
@@ -1168,7 +1206,7 @@ int eul_trace=0;
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-register byte) (obj)->() **/
+///  (set-register byte) (obj)->()
 
 #define BC_SET_REGISTER_REF 41
 #define BCA_SET_REGISTER_REF()                                                 \
@@ -1185,7 +1223,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (branch fix) ()->() **/
+///  (branch fix) ()->()
 
 #define BC_BRANCH 50
 #define BCA_BRANCH()                                                           \
@@ -1198,7 +1236,7 @@ int eul_trace=0;
     WHEN_DB(printf("reg_pc 3: %" ptrIntPM "x \n", (ptrInt)reg_pc); )
 
 ///-----------------------------------------------------------------------------
-///  (branch-long-neg byte) ()->() **/
+///  (branch-long-neg byte) ()->()
 
 #define BC_BRANCH_LONG_NEG 75
 #define BCA_BRANCH_LONG_NEG()                                                  \
@@ -1207,7 +1245,7 @@ int eul_trace=0;
     reg_pc -= fix1 + 256;
 
 ///-----------------------------------------------------------------------------
-///  (branch-neg byte) ()->() **/
+///  (branch-neg byte) ()->()
 
 #define BC_BRANCH_NEG 53
 #define BCA_BRANCH_NEG()                                                       \
@@ -1216,7 +1254,7 @@ int eul_trace=0;
     reg_pc -= fix1;
 
 ///-----------------------------------------------------------------------------
-///  (branch-pos byte) ()->() **/
+///  (branch-pos byte) ()->()
 
 #define BC_BRANCH_POS 54
 #define BCA_BRANCH_POS()                                                       \
@@ -1225,7 +1263,7 @@ int eul_trace=0;
     reg_pc += fix1;
 
 ///-----------------------------------------------------------------------------
-///  (branch-long-pos byte) ()->() **/
+///  (branch-long-pos byte) ()->()
 
 #define BC_BRANCH_LONG_POS 57
 #define BCA_BRANCH_LONG_POS()                                                  \
@@ -1234,7 +1272,7 @@ int eul_trace=0;
     reg_pc += fix1 + 256;
 
 ///-----------------------------------------------------------------------------
-///  (branch-true fix) (bool)->() **/
+///  (branch-true fix) (bool)->()
 
 #define BC_BRANCH_TRUE 51
 #define BCA_BRANCH_TRUE()                                                      \
@@ -1248,7 +1286,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-true-long-neg byte) (bool)->() **/
+///  (branch-true-long-neg byte) (bool)->()
 
 #define BC_BRANCH_TRUE_LONG_NEG 76
 #define BCA_BRANCH_TRUE_LONG_NEG()                                             \
@@ -1261,7 +1299,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-true-neg byte) (bool)->() **/
+///  (branch-true-neg byte) (bool)->()
 
 #define BC_BRANCH_TRUE_NEG 58
 #define BCA_BRANCH_TRUE_NEG()                                                  \
@@ -1274,7 +1312,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-true-pos byte) (bool)->() **/
+///  (branch-true-pos byte) (bool)->()
 
 #define BC_BRANCH_TRUE_POS 62
 #define BCA_BRANCH_TRUE_POS()                                                  \
@@ -1287,7 +1325,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-true-long-pos byte) (bool)->() **/
+///  (branch-true-long-pos byte) (bool)->()
 
 #define BC_BRANCH_TRUE_LONG_POS 63
 #define BCA_BRANCH_TRUE_LONG_POS()                                             \
@@ -1300,7 +1338,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-nil fix) (bool)->() **/
+///  (branch-nil fix) (bool)->()
 
 #define BC_BRANCH_NIL 52
 #define BCA_BRANCH_NIL()                                                       \
@@ -1315,7 +1353,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-nil-long-neg byte) (bool)->() **/
+///  (branch-nil-long-neg byte) (bool)->()
 
 #define BC_BRANCH_NIL_LONG_NEG 77
 #define BCA_BRANCH_NIL_LONG_NEG()                                              \
@@ -1328,7 +1366,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-nil-neg byte) (bool)->() **/
+///  (branch-nil-neg byte) (bool)->()
 
 #define BC_BRANCH_NIL_NEG 64
 #define BCA_BRANCH_NIL_NEG()                                                   \
@@ -1341,7 +1379,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-nil-pos byte) (bool)->() **/
+///  (branch-nil-pos byte) (bool)->()
 
 #define BC_BRANCH_NIL_POS 68
 #define BCA_BRANCH_NIL_POS()                                                   \
@@ -1354,7 +1392,7 @@ int eul_trace=0;
     }
 
 ///-----------------------------------------------------------------------------
-///  (branch-nil-long-pos byte) (bool)->() **/
+///  (branch-nil-long-pos byte) (bool)->()
 
 #define BC_BRANCH_NIL_LONG_POS 74
 #define BCA_BRANCH_NIL_LONG_POS()                                              \
@@ -1372,7 +1410,7 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (call-next-method byte) **/
+///  (call-next-method byte)
 
 #define BC_CALL_NEXT_METHOD 55
 #define BCA_CALL_NEXT_METHOD()                                                 \
@@ -1387,7 +1425,7 @@ reg_next_methods = eul_cdr(reg_next_methods);                                  \
 SET_LAMBDA_CONTEXT();
 
 ///-----------------------------------------------------------------------------
-///  (tail-call-next-method byte byte) **/
+///  (tail-call-next-method byte byte)
 
 #define BC_TAIL_CALL_NEXT_METHOD 56
 #define BCA_TAIL_CALL_NEXT_METHOD()                                            \
@@ -1400,23 +1438,23 @@ SET_LAMBDA_CONTEXT();
 
 #define BC_MAKE_LAMBDA 59
 #define BCA_MAKE_LAMBDA()                                                      \
-    PRINT_REG_PC("MAKE_LAMBDA");                                           \
+    PRINT_REG_PC("MAKE_LAMBDA");                                               \
     POPVAL1(arg2);  /* bv */                                                   \
-    PRINT_REG_PC("MAKE_LAMBDA");                                           \
+    PRINT_REG_PC("MAKE_LAMBDA");                                               \
     arg1 = LVPEEKVAL(); /* name */                                             \
-    PRINT_REG_PC("MAKE_LAMBDA");                                           \
+    PRINT_REG_PC("MAKE_LAMBDA");                                               \
     fix1 = get_signed_bytearg();  /* arity */                                  \
-    PRINT_REG_PC("MAKE_LAMBDA");                                           \
+    PRINT_REG_PC("MAKE_LAMBDA");                                               \
     eul_allocate_lambda1(res, arg1, c_int_as_eul_int(fix1), arg2);             \
-    PRINT_REG_PC("MAKE_LAMBDA");                                           \
+    PRINT_REG_PC("MAKE_LAMBDA");                                               \
     LAMBDA_ENV(res) = reg_env;                                                 \
-                    PRINT_REG_PC("MAKE_LAMBDA");                           \
-                    LVPEEKVAL() = res;                                         \
-                    PRINT_REG_PC("MAKE_LAMBDA");                           \
-                    ++reg_pc;
+    PRINT_REG_PC("MAKE_LAMBDA");                                               \
+    LVPEEKVAL() = res;                                                         \
+    PRINT_REG_PC("MAKE_LAMBDA");                                               \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (call-operator byte) (arg* op)->(result) **/
+///  (call-operator byte) (arg* op)->(result)
 
 #define BC_CALL_OPERATOR 60
 #define BCA_CALL_OPERATOR()                                                    \
@@ -1479,7 +1517,7 @@ tail_call_entry_point:                                                         \
 
 
 ///-----------------------------------------------------------------------------
-///  (tail-call-operator byte byte) (arg* op)->(result) **/
+///  (tail-call-operator byte byte) (arg* op)->(result)
 
 #define BC_TAIL_CALL_OPERATOR 61
 #define BCA_TAIL_CALL_OPERATOR()                                               \
@@ -1495,7 +1533,7 @@ tail_call_entry_point:                                                         \
     goto tail_call_entry_point;
 
 ///-----------------------------------------------------------------------------
-///  (apply) (list args rest)->(result) **/
+///  (apply) (list args rest)->(result)
 
 #define BC_APPLY 142
 #define BCA_APPLY()                                                            \
@@ -1526,7 +1564,7 @@ tail_call_entry_point:                                                         \
     goto callback_entry_point;
 
 ///-----------------------------------------------------------------------------
-///  (check-arguments nargs) ()->() **/
+///  (check-arguments nargs) ()->()
 
 #define ABS(x) (x < 0 ? -x : x)
 
@@ -1620,7 +1658,7 @@ tail_call_entry_point:                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (return n) (arg*n ret)->(ret) **/
+///  (return n) (arg*n ret)->(ret)
 
 #define BC_RETURN 69
 #define BCA_RETURN()                                                           \
@@ -1654,7 +1692,7 @@ tail_call_entry_point:                                                         \
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (alloc byte) ()->() **/
+///  (alloc byte) ()->()
 
 #define BC_ALLOC 70
 #define BCA_ALLOC()                                                            \
@@ -1665,7 +1703,7 @@ tail_call_entry_point:                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (dealloc) ()->() **/
+///  (dealloc) ()->()
 
 #define BC_DEALLOC 73
 #define BCA_DEALLOC()                                                          \
@@ -1673,7 +1711,7 @@ tail_call_entry_point:                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (display-ref byte byte) ()->(obj) **/
+///  (display-ref byte byte) ()->(obj)
 
 #define BC_DISPLAY_REF 71
 #define BCA_DISPLAY_REF()                                                      \
@@ -1689,7 +1727,7 @@ tail_call_entry_point:                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (set-display-ref byte byte) (obj)->() **/
+///  (set-display-ref byte byte) (obj)->()
 
 #define BC_SET_DISPLAY_REF 72
 #define BCA_SET_DISPLAY_REF()                                                  \
@@ -1710,7 +1748,7 @@ tail_call_entry_point:                                                         \
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (test-and-set-lock) (lock)->(obj) **/
+///  (test-and-set-lock) (lock)->(obj)
 
 #define BC_TEST_AND_SET_LOCK 7
 #define BCA_TEST_AND_SET_LOCK()                                                \
@@ -1734,7 +1772,7 @@ tail_call_entry_point:                                                         \
    is still rather shaky... */
 
 ///-----------------------------------------------------------------------------
-///  (fill-state) (state)->(state) **/
+///  (fill-state) (state)->(state)
 
 #define BC_FILL_STATE 92
 #define BCA_FILL_STATE()                                                       \
@@ -1750,7 +1788,7 @@ tail_call_entry_point:                                                         \
                                                         ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (restore-state) (state, obj)->(obj) **/
+///  (restore-state) (state, obj)->(obj)
 
 #define BC_RESTORE_STATE 93
 #define BCA_RESTORE_STATE()                                                    \
@@ -1771,7 +1809,7 @@ tail_call_entry_point:                                                         \
     POPCONTEXT();
 
 ///-----------------------------------------------------------------------------
-///  (fill-thread-state) (state)->(state) **/
+///  (fill-thread-state) (state)->(state)
 
 #define BC_FILL_THREAD_STATE 90
 #define BCA_FILL_THREAD_STATE()                                                \
@@ -1788,7 +1826,7 @@ tail_call_entry_point:                                                         \
 
 
 ///-----------------------------------------------------------------------------
-///  (restore-thread-state) (value, state)->(obj) **/
+///  (restore-thread-state) (value, state)->(obj)
 
 #define BC_RESTORE_THREAD_STATE 91
 #define BCA_RESTORE_THREAD_STATE()                                             \
@@ -1814,7 +1852,7 @@ tail_call_entry_point:                                                         \
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (unflush-stacks) ()->(obj) **/
+///  (unflush-stacks) ()->(obj)
 
 #define BC_UNFLUSH_STACKS 88
 #define BCA_UNFLUSH_STACKS()                                                   \
@@ -1829,7 +1867,7 @@ tail_call_entry_point:                                                         \
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (character->fpi) (char)->(fpi) **/
+///  (character->fpi) (char)->(fpi)
 
 #define BC_CHARACTER_TO_FPI 98
 #define BCA_CHARACTER_TO_FPI()                                                 \
@@ -1838,7 +1876,7 @@ tail_call_entry_point:                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi->character) (fpi)->(char) **/
+///  (fpi->character) (fpi)->(char)
 
 #define BC_FPI_TO_CHARACTER 99
 #define BCA_FPI_TO_CHARACTER()                                                 \
@@ -1852,7 +1890,7 @@ tail_call_entry_point:                                                         \
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
-///  (exit) ()->() **/
+///  (exit) ()->()
 
 #define BC_EXIT 102
 #define BCA_EXIT()                                                             \

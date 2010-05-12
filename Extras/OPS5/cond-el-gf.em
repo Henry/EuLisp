@@ -41,7 +41,7 @@
       reader: next-id
       writer: set-next-id)
      (cond-els
-      default: nil
+      default: NIL
       reader:  cond-els
       writer:  set-cond-els))
     constructor: (make-ce-manager))

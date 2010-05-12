@@ -23,9 +23,11 @@
     `(with-handler
       (generic-lambda (c f)
         method: ((c f)
-                (if *no-ct-handlers* ()
-                  (error ,str <ct-error> ct-error-value: ,error-value)))
-        method: (((c <ct-error>) f))) ; pass signal to next handler
+                 (format stderr "compile time error condition: ")
+                 (pprint c stderr)
+                 (if *no-ct-handlers* ()
+                   (error ,str <ct-error> ct-error-value: ,error-value)))
+        method: (((c <ct-error>) f)))   ; pass signal to next handler
       (progn ,@forms)))
 
 ;;;-----------------------------------------------------------------------------

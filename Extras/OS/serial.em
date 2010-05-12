@@ -451,11 +451,11 @@
 
   (defun eul-serial-make-file-stream (mode file-name)
     (debug-format stderr "make-file-stream: ~a ~a\n" mode file-name)
-    (cond ((equal file-name "stdin")
+    (cond ((binary= file-name "stdin")
            stdin)
-          ((equal file-name "stdout")
+          ((binary= file-name "stdout")
            stdout)
-          ((equal file-name "stderr")
+          ((binary= file-name "stderr")
            stderr)
           (t
            (make <file-stream> file-name: file-name mode: mode))))

@@ -169,7 +169,6 @@ extern LispRef i_all_bindings[];
 #define _peephole__X42_X42_fn_index 51 
 #define maximum_vector_size_fn_index () 
 #define _ostype__X42_X42_fn_index 50 
-#define equal_fn_index 7 
 #define _backtrace_nframes__X42_X42_fn_index 31 
 #define _min_table_entries__X42_X42_fn_index () 
 #define thread_dynamic_variables_fn_index 27 
@@ -513,6 +512,7 @@ extern LispRef i_all_bindings[];
 #define initialize_fn_index 12 
 #define ensure_slot_writer_fn_index 6 
 #define signal_fn_index 2 
+#define ___X33_X61_fn_index 7 
 #define getchar_fn_index 32 
 #define thread_returned_p_fn_index 30 
 #define _abstract_thread__X60_X62_fn_index 29 

@@ -9,9 +9,11 @@
 (defmodule basic
   (syntax (macros)
    import (level1)
-   export (cddddr cadadr assoc))
+   export (cddddr cadadr assoc NIL))
 
   (print "### basic")
+
+  (defconstant NIL nil)
 
 ;;;-----------------------------------------------------------------------------
 ;;; List operations

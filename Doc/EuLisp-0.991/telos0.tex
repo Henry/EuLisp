@@ -89,21 +89,11 @@ Methods can either be defined at the same time as the generic function, or else
 defined separately using the \macroref{defmethod} macro, which adds a new method
 to an existing generic function.  This macro is described in detail later in
 this section.
-% hb: do we need that? i think no.
-%It may be possible in an implementation to acquire a pointer that does
-%not correspond to any \eulisp\ object.  It is an error to pass such a
-%pointer to a function.  The default domain for arguments of functions
-%is \classref{object}.
-%
 \end{optDefinition}
 
 \sclause{System Defined Classes}
 \label{subsec:telos}
 \label{subsec:objects}
-%
-\begin{optPrivate}
-    hb: <simple-function> added, <method> removed, ...
-\end{optPrivate}
 %
 \begin{optDefinition}
 \noindent
@@ -760,17 +750,16 @@ runtime function \functionref{compute-applicable-methods}.
 
 \begin{optDefinition}
 The system defined  method lookup and generic function dispatch is purely
-class based. \genericref{equal} methods known from \clos\ are excluded.
+class based.
 
-The application behaviour of a generic function can be described in terms
-of {\em method lookup\/} and {\em generic dispatch}. The method lookup
-determines
+The application behaviour of a generic function can be described in terms of
+{\em method lookup\/} and {\em generic dispatch}. The method lookup determines
 \begin{enumerate}
-        \item  which methods attached to the generic function are applicable
-    to the supplied arguments, and
+    \item which methods attached to the generic function are applicable to the
+    supplied arguments, and
 
-        \item  the linear order of the applicable methods with respect to
-        classes of the  arguments and the argument precedence order.
+    \item the linear order of the applicable methods with respect to classes of
+    the arguments and the argument precedence order.
 \end{enumerate}
 
 A class $C_1$ is called {\em more specific\/} than class $C_2$ {\em with respect
@@ -790,47 +779,44 @@ A class $C_1$ is called {\em more specific\/} than class $C_2$ {\em with respect
     and the argument classes involved.%
 }.
 
-Two additional concepts are needed to explain the processes of method
-lookup and generic dispatch: (i) whether a method is {\em applicable},
-(ii) how {\em specific} it is in relation to the other applicable
-methods.  The definitions of each of these terms is now given.
+Two additional concepts are needed to explain the processes of method lookup and
+generic dispatch: (i) whether a method is {\em applicable}, (ii) how {\em
+    specific} it is in relation to the other applicable methods.  The
+definitions of each of these terms is now given.
 
-A method with the domain $D_1 \times \ldots \times D_m [\times$
-\verb|<list>|$]$ is {\em applicable\/} to the arguments $a_1 \ldots a_m
-[a_{m+1} \ldots a_n]$ if the class of each argument, $C_i$, is a
-subclass of $D_i$, which is to say, $D_i$ is a member of $C_i$'s class
-precedence list.
+A method with the domain $D_1 \times \ldots \times D_m [\times$ \verb|<list>|$]$
+is {\em applicable\/} to the arguments $a_1 \ldots a_m [a_{m+1} \ldots a_n]$ if
+the class of each argument, $C_i$, is a subclass of $D_i$, which is to say,
+$D_i$ is a member of $C_i$'s class precedence list.
 
-A method {\tt M$_{1}$} with the domain $D_{11} \times \ldots \times
-D_{1m} [\times$ \verb|<list>|$]$ is {\em more specific\/} than a method
-{\tt M$_{2}$} with the domain $D_{21} \times \ldots \times D_{2m}
-[\times$ \verb|<list>|$]$ {\em with respect to} the arguments $a_1
-\ldots a_m [a_{m+1} \ldots a_n]$ iff there exists an $i\in (1 \ldots
-m)$ so that $D_{1i}$ is more specific than $D_{2i}$ with respect to
-$C_i$, the class of $a_i$, and for all $j=1 \ldots i-1$, $D_{2j}$ is
-{\em not} more specific than $D_{1j}$ with respect to $C_j$, the class
-of $a_j$.
+A method {\tt M$_{1}$} with the domain $D_{11} \times \ldots \times D_{1m}
+[\times$ \verb|<list>|$]$ is {\em more specific\/} than a method {\tt M$_{2}$}
+with the domain $D_{21} \times \ldots \times D_{2m} [\times$ \verb|<list>|$]$
+{\em with respect to} the arguments $a_1 \ldots a_m [a_{m+1} \ldots a_n]$ iff
+there exists an $i\in (1 \ldots m)$ so that $D_{1i}$ is more specific than
+$D_{2i}$ with respect to $C_i$, the class of $a_i$, and for all $j=1 \ldots
+i-1$, $D_{2j}$ is {\em not} more specific than $D_{1j}$ with respect to $C_j$,
+the class of $a_j$.
 
 Now, with the above definitions, we can describe the application
 behaviour of a generic function {\tt (f} $a_1 \ldots a_m [a_{m+1} \ldots
 a_n]${\tt )}:
 
 \begin{enumerate}
-        \item  Select the methods applicable to $a_1 \ldots a_m [a_{m+1} \ldots
-        a_n]$ from all methods attached to {\tt f}.
+    \item Select the methods applicable to $a_1 \ldots a_m [a_{m+1} \ldots a_n]$
+    from all methods attached to {\tt f}.
 
-        \item  Sort the applicable methods {\tt M$_{1}$} \ldots
-            {\tt M$_{k}$} into
-        decreasing order of specificity using left to right argument
-        precedence order to resolve otherwise equally specific methods.
+    \item Sort the applicable methods {\tt M$_{1}$} \ldots {\tt M$_{k}$} into
+    decreasing order of specificity using left to right argument precedence
+    order to resolve otherwise equally specific methods.
 
-        \item  If \specopref{call-next-method} appears in one of the method
-        bodies, make the sorted list of applicable methods available for it.
+    \item If \specopref{call-next-method} appears in one of the method bodies,
+    make the sorted list of applicable methods available for it.
 
-        \item  Apply the most specific method on $a_1 \ldots a_m [a_{m+1} \ldots
-        a_n]$.
+    \item Apply the most specific method on $a_1 \ldots a_m [a_{m+1} \ldots
+    a_n]$.
 
-        \item  Return the result of the previous step.
+    \item Return the result of the previous step.
 \end{enumerate}
 
 The first two steps are usually called {\em method lookup} and the
@@ -892,8 +878,8 @@ A new uninitialized direct instance of the first argument.
 \remarks%
 The {\em class\/} must be a structure class, the \scref{initlist} is ignored.
 The behaviour of \genericref{allocate} is extended at level-1 for classes not
-accessible at level-0. The level-0 behaviour is not affected by the
-level-1 extension.
+accessible at level-0. The level-0 behaviour is not affected by the level-1
+extension.
 
 \generic{initialize}
 %

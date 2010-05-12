@@ -87,6 +87,7 @@ void eul_initialize_register()
     eul_allocate_table(PGLOBAL(glob_modules), eul_nil);
     eul_allocate_object(PGLOBAL(glob_callbacks),
         PGLOBAL(glob_vector_class), HIGHEST_CB, eul_nil);
+    eul_allocate_string(slot_ref(glob_nil, 0), "nil");
     eul_intern_symbol(eul_true, "t");
     PGLOBAL(glob_encl_lambda) = eul_nil;
 }

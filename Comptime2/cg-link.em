@@ -20,7 +20,7 @@
       (notify0 "  Reset decoder ...")
       (setq *open-bv* ())
       ;; Reuse only local symbols/keys
-      (setq *get-literal* (make-access-table comparator: equal))
+      (setq *get-literal* (make-access-table comparator: binary=))
       (clear-table *local-bytevectors*)))
 
 ;;;-----------------------------------------------------------------------------

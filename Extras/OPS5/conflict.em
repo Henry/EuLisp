@@ -118,7 +118,7 @@
                                        ;;(print (cadadr test))
                                        (let* ((var (cadadr test))
                                               (tmp (assoc var (pi-bindings p)))
-                                              (val (if tmp (cdr tmp) 'nil)))
+                                              (val (if tmp (cdr tmp) 'NIL)))
                                          ;;(format t "Test: ~a ~a ~a~%"
                                                 ;; (car test) (caadr test) val)
                                          (if (test-succeeds (car test)
@@ -147,7 +147,7 @@
             (if (null cset)
                 (progn (print "OPS5: conflict set empty: goodbye")
                        ())
-              (if (equal (strategy cr-manager) 'mea)
+              (if (binary= (strategy cr-manager) 'mea)
                   (select-mea cset)
                 (select-lex cset)))))
       (set-prod-insts (cs cr-manager)
@@ -231,7 +231,7 @@
                              ((eql val (car val-list)) t) ; only pred allowed
                              (t (find-success val (cdr val-list))))))
                         (find-success x y)))
-     ((eql pred '<=>) (equal (class-of x) (class-of y)))
+     ((eql pred '<=>) (binary= (class-of x) (class-of y)))
      ((not (eql (class-of x) (class-of y))) ())
      ((eql pred '=)   (eql x y))
      ((eql pred '<>)  (not (eql x y)))

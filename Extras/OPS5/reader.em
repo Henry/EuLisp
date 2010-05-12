@@ -44,7 +44,7 @@
 
   (defun ops-read (s)
     (let ((next (read-next s)))
-      ;;(format ops-out "Next: ~a~%" next)
+      (format ops-out "Next: ~a~%" next)
       next))
 
 ;;;-----------------------------------------------------------------------------
@@ -56,7 +56,7 @@
        keyword: input:
        accessor:  ops-in)
      (in-prods
-       default:  nil
+       default:  NIL
        accessor: in-prods)
      (current-prod
        default: ()

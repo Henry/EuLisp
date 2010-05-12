@@ -77,21 +77,6 @@ $-32768$\index{general}{implementation-defined!most positive fixed
 precision integer}\index{general}{conformity-clause!most positive fixed
 precision integer}.
 
-\method{equal}
-\begin{specargs}
-\item[integer$_1$, \classref{fixed-precision-integer}] A fixed precision integer.
-\item[integer$_2$, \classref{fixed-precision-integer}] A fixed precision integer.
-\end{specargs}
-
-\result%
-The result of calling \genericref{binary=} on {\em integer$_1$} and {\em
-integer$_2$}.
-
-\remarks%
-The difference between \genericref{equal} and \functionref{=} is that the former
-only compares numbers of the same class, whereas the latter coerces the numbers
-to be of the same class before comparison.
-
 \converter{string}
 %
 \begin{specargs}

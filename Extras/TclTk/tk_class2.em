@@ -135,11 +135,11 @@
     (let ((size (list-size args))
           tag below)
       (cond
-        ((equal size 1)
+        ((binary= size 1)
          (setq tag (car args))
          (and (stringp tag)
               (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) tag () "lower"))
-         ((equal size 2)
+         ((binary= size 2)
           (setq tag (car args))
           (setq below (cadr args))
           (and (stringp tag)
@@ -153,10 +153,10 @@
     (let ((size (list-size args))
           tag_id)
       (cond
-        ((equal size 0)
+        ((binary= size 0)
          (eul_tk_cmd_item_canvas (tk-name item) (tk-handler item)
                                  (tk-item-canvas-id item) () "lower"))
-        ((equal size 1)
+        ((binary= size 1)
          (setq tag_id (car args))
          (and (or (stringp tag_id) (tk-item-canvas-p tag_id))
               (setq tag_id (if (stringp tag_id) tag_id
@@ -171,7 +171,7 @@
   (defmethod tk-move-item-canvas ((canvas <tk-canvas>) . args)
     (let ((size (list-size args))
           tag x-incr y-incr)
-      (if (equal size 3)
+      (if (binary= size 3)
           (progn
             (setq tag (car args))
             (setq x-incr (cadr args))
@@ -187,7 +187,7 @@
   (defmethod tk-move-item-canvas ((item <tk-item-canvas>) . args)
     (let ((size (list-size args))
           x-incr y-incr)
-      (if (equal size 2)
+      (if (binary= size 2)
           (progn
             (setq x-incr (car args))
             (setq y-incr (cadr args))
@@ -211,7 +211,7 @@
            (do (lambda (el) (setq coords (cons (convert el <string>) coords)))
                args))
       (cond
-        ((equal size 1)
+        ((binary= size 1)
          (setq tag (car args))
          (and (stringp tag)
               (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas)
@@ -230,7 +230,7 @@
                (reverse args)))
 
       (cond
-        ((equal size 0)
+        ((binary= size 0)
          (eul_tk_cmd_item_canvas (tk-name item) (tk-handler item)
                                  (tk-item-canvas-id item) () "coords"))
         ((>= size 2)
@@ -352,11 +352,11 @@
 
   (defmethod tk-text-mark ((text <tk-text>) (command <symbol>) (mark <string>) . index)
     (cond
-      ((and (equal command 'set)
-            (equal (list-size index) 1))
+      ((and (binary= command 'set)
+            (binary= (list-size index) 1))
        (eul_tk_cmd_text (tk-name text) (tk-handler text) "mark"
                         (list '3 "set" mark (car index))))
-      ((and (equal command 'unset)
+      ((and (binary= command 'unset)
             (null index))
        (eul_tk_cmd_text (tk-name text) (tk-handler text) "mark" (list  '2 "unset" mark)))
       (t
@@ -367,7 +367,7 @@
     (and (tk-text-p text)
          (stringp tagName)
          (stringp index1)
-         (equal (% (list-size index2) 2) 1)
+         (binary= (% (list-size index2) 2) 1)
          (eul_tk_cmd_text (tk-name text) (tk-handler text) "tag"
                           (list (+ 3 (list-size index2)) "add" tagName index1 (car index2)))))
 

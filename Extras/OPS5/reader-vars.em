@@ -145,14 +145,14 @@
     (cond
       ((null cond-el)
        (cons vars join-vars))
-      ((equal (car cond-el) '})
+      ((binary= (car cond-el) '})
       (get-vars (cdr cond-el) vars join-vars))
-    ((equal (cadr cond-el) '{)
+    ((binary= (cadr cond-el) '{)
             (get-vars (cddr cond-el) vars join-vars))
      ((eql (cadr cond-el) '<<)
       (get-vars (cdr (member '>> cond-el))
                 vars join-vars))
-     ;; ((equal (car cond-el) '{)
+     ;; ((binary= (car cond-el) '{)
      ;;  (get-vars (cddr cond-el) vars join-vars))
      ((eql (car cond-el) '<<)
       (get-vars (cdr (member '>> cond-el)) vars join-vars))
@@ -197,7 +197,7 @@
            #\\x005e )))
 
   (defun is-ops5-pred (x)
-    (member x '(< <= > >= <> = <=>) equal))
+    (member x '(< <= > >= <> = <=>) binary=))
 
   (defun is-ops5-var (x)
     (if (or (listp x) (numberp x)) ()

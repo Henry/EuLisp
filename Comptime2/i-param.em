@@ -92,7 +92,7 @@
                                  (s private-name) (read-s-expression s)))
                  (private-version (assoc-list-ref 'VERSION private-info))
                  (default-version (assoc-list-ref 'VERSION default-info)))
-            (if (equal private-version default-version)
+            (if (binary= private-version default-version)
                 private-info
               ;; Here we could add some code to update the private resource file
               ;; because the version apparently has changed
@@ -151,12 +151,12 @@
   (deflocal *object-dir* ())
   (deflocal *get-loaded-module* (make-access-table))
   (deflocal *get-loaded-syntax-module* (make-access-table))
-  (deflocal *get-load-dir* (make-access-table comparator: equal))
+  (deflocal *get-load-dir* (make-access-table comparator: binary=))
   (deflocal *get-full-import* (make-access-table))
   (deflocal *modified-module-names* ())
   (deflocal *pass* 'start)
   (deflocal *stop-after-pass* ())
-  (deflocal *get-literal* (make-access-table comparator: equal))
+  (deflocal *get-literal* (make-access-table comparator: binary=))
 
   (defglobal *actual-module* ())         ; module being in compilation
   (defglobal *encl-lambda* ())           ; used during expansion phase

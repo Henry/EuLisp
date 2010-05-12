@@ -44,17 +44,17 @@
 
   (defmethod binary= ((x <list>) (y <list>))
     (labels
-     ((loop (l1 l2)
-            (if (and (consp l1) (consp l2))
-                (and (binary= (car l1) (car l2))
-                     (loop (cdr l1) (cdr l2)))
-              (if l1
-                  (and l2 (binary= l1 l2))
-                (null l2)))))
-     (if (loop x y) x ())))
+      ((loop (l1 l2)
+             (if (and (consp l1) (consp l2))
+                 (and (binary= (car l1) (car l2))
+                      (loop (cdr l1) (cdr l2)))
+               (if l1
+                   (and l2 (binary= l1 l2))
+                 (null l2)))))
+      (loop x y)))
 
   ;;(defmethod binary= ((x <cons>) (y <cons>))
-  ;;  (and (equal (car x) (car y)) (equal (cdr x) (cdr y))))
+  ;;  (and (binary= (car x) (car y)) (binary= (cdr x) (cdr y))))
   ;; This is covered by (defmethod binary= ((<list>) (<list>)))
   ;; and it is not clear if a specialised implementation is beneficial.
 

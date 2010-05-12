@@ -1,13 +1,13 @@
                                                 ;and the RHS actions that
                                                 ;are user defined
- 
- 
+
+
 ;Our WM elements.  Lines have the lable line followed by the 2 points
 ;defining the line.  Edges are like lines accept that they can be labeled,
 ;permanently labelled and plotted.  Junctions are defined by 4 points.  The
 ;basepoint is where the 3 (2) lines intersect.  The points p1, p2, p3 are the
 ;other endpoints of the lines at this junction
- 
+
 (literalize stage value)
 (literalize line p1 p2)
 (literalize edge p1 p2 joined label plotted)
@@ -17,10 +17,10 @@
 	(start)
 	-->
 	(make stage ^value start))
- 
+
 ;The Waltz Algorithm using OPS5 Production System Interpreter
 ;This is our production memory
- 
+
 ;Our starting production.  It checks to see if the start flag is in WM,
 ;and if it is, it deletes it, and clears the screen
 (p begin
@@ -46,7 +46,7 @@
 	(make line ^p1 5222 ^p2 7416)
 	(make line ^p1 5222 ^p2 5216)
 	(modify 1 ^value duplicate))
- 
+
 ;If the duplicate flag is set, and there is still a line in WM, delete the line
 ;and add two edges. One edge runs from p1 to p2 and the other runs from p2 to
 ;p1.  We then plot the edge.
@@ -58,7 +58,7 @@
 	(make edge ^p1 <p1> ^p2 <p2> ^joined false)
         (make edge ^p1 <p2> ^p2 <p1> ^joined false)
 	(remove 2))
- 
+
 ;If the duplicating flag is set, and there are no more lines, then remove the
 ;duplicating flag and set the make junctions flag.
 (p done_reversing
@@ -66,8 +66,8 @@
 	- (line)
 	-->
 	(modify 1 ^value detect_junctions))
- 
- 
+
+
 ;If three edges meet at a point and none of them have already been joined in
 ;a junction, then make the corresponding type of junction and label the
 ;edges joined.  This production calls make-3_junction to determine
@@ -85,7 +85,7 @@
 	(modify 2 ^joined true)
 	(modify 3 ^joined true)
 	(modify 4 ^joined true))
- 
+
 ;If two, and only two, edges meet that have not already been joined, then
 ;the junction is an "L"
 (p make_L
@@ -101,8 +101,8 @@
 		^p2 <p3>)
 	(modify 2 ^joined true)
 	(modify 3 ^joined true))
- 
- 
+
+
 ;If the detect junctions flag is set, and there are no more un_joined edges,
 ;set the find_initial_boundary flag
 (p done_detecting
@@ -110,7 +110,7 @@
 	- (edge ^joined false)
 	-->
 	(modify 1 ^value find_initial_boundary))
- 
+
 ;If the initial boundary junction is an L, then we know it's labelling
 (p initial_boundary_junction_L
 	(stage ^value find_initial_boundary)
@@ -122,7 +122,7 @@
         (modify 3 ^label B)
 	(modify 4 ^label B)
 	(modify 1 ^value find_second_boundary))
- 
+
 ;Ditto for an arrow
 (p initial_boundary_junction_arrow
 	(stage ^value find_initial_boundary)
@@ -136,10 +136,10 @@
 	(modify 4 ^label +)
 	(modify 5 ^label B)
 	(modify 1 ^value find_second_boundary))
- 
+
 ;If we have already found the first boundary point, then find the second
 ;boundary point, and label it.
- 
+
 (p second_boundary_junction_L
 	(stage ^value find_second_boundary)
         (junction ^type L ^base_point <base_point> ^p1 <p1> ^p2 <p2>)
@@ -150,7 +150,7 @@
         (modify 3 ^label B)
 	(modify 4 ^label B)
 	(modify 1 ^value labeling))
- 
+
 (p second_boundary_junction_arrow
 	(stage ^value find_second_boundary)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
@@ -163,19 +163,19 @@
 	(modify 4 ^label +)
 	(modify 5 ^label B)
 	(modify 1 ^value labeling))
- 
- 
+
+
 ;If we have an edge whose label we already know definitely, then
 ;label the corresponding edge in the other direction
 (p match_edge
 	(stage ^value labeling)
 	(edge ^p1 <p1> ^p2 <p2> ^label {<label> << + - B >>})
-	(edge ^p1 <p2> ^p2 <p1> ^label nil)
+	(edge ^p1 <p2> ^p2 <p1> ^label NIL)
 	-->
 	(modify 2 ^plotted t)
 	(modify 3 ^label <label> ^plotted t)
 	(write plot <label> <p1> <p2> (crlf))
-	) 
+	)
 ;The following productions propogate the possible labellings of the edges
 ;based on the labellings of edges incident on adjacent junctions.  Since
 ;from the initial boundary productions, we have determined the labellings of
@@ -183,186 +183,186 @@
 ;with the possible labellings.  The search space is pruned due to filtering,
 ;i.e. - only label a junction in the ways physically possible based on the
 ;labellings of adjacent junctions.
- 
- 
+
+
 (p label_L
 	(stage ^value labeling)
 	(junction ^type L ^base_point <p1>)
 	(edge ^p1 <p1> ^p2 <p2> ^label << + - >>)
-	(edge ^p1 <p1> ^p2 <> <p2> ^label nil)
+	(edge ^p1 <p1> ^p2 <> <p2> ^label NIL)
 	-->
 	(modify 4 ^label B))
- 
- 
+
+
 (p label_tee_A
 	(stage ^value labeling)
 	(junction ^type tee ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
-	(edge ^p1 <bp> ^p2 <p1> ^label nil)
+	(edge ^p1 <bp> ^p2 <p1> ^label NIL)
 	(edge ^p1 <bp> ^p2 <p3>)
 	-->
 	(modify 3 ^label B)
 	(modify 4 ^label B))
- 
- 
+
+
 (p label_tee_B
 	(stage ^value labeling)
 	(junction ^type tee ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p1>)
-	(edge ^p1 <bp> ^p2 <p3> ^label nil)
+	(edge ^p1 <bp> ^p2 <p3> ^label NIL)
 	-->
 	(modify 3 ^label B)
 	(modify 4 ^label B))
- 
- 
+
+
 (p label_fork-1
 	(stage ^value labeling)
 	(junction ^type fork ^base_point <bp>)
 	(edge ^p1 <bp> ^p2 <p1> ^label +)
-	(edge ^p1 <bp> ^p2 {<p2> <> <p1>} ^label nil)
+	(edge ^p1 <bp> ^p2 {<p2> <> <p1>} ^label NIL)
 	(edge ^p1 <bp> ^p2 {<> <p2> <> <p1>})
 	-->
 	(modify 4 ^label +)
 	(modify 5 ^label +))
- 
- 
+
+
 (p label_fork-2
 	(stage ^value labeling)
 	(junction ^type fork ^base_point <bp>)
 	(edge ^p1 <bp> ^p2 <p1> ^label B)
 	(edge ^p1 <bp> ^p2 {<p2> <> <p1>} ^label -)
-	(edge ^p1 <bp> ^p2 {<> <p2> <> <p1>} ^label nil)
+	(edge ^p1 <bp> ^p2 {<> <p2> <> <p1>} ^label NIL)
 	-->
 	(modify 5 ^label B))
- 
- 
+
+
 (p label_fork-3
 	(stage ^value labeling)
 	(junction ^type fork ^base_point <bp>)
 	(edge ^p1 <bp> ^p2 <p1> ^label B)
 	(edge ^p1 <bp> ^p2 {<p2> <> <p1>} ^label B)
-	(edge ^p1 <bp> ^p2 {<> <p2> <> <p1>} ^label nil)
+	(edge ^p1 <bp> ^p2 {<> <p2> <> <p1>} ^label NIL)
 	-->
 	(modify 5 ^label -))
- 
- 
+
+
 (p label_fork-4
 	(stage ^value labeling)
 	(junction ^type fork ^base_point <bp>)
 	(edge ^p1 <bp> ^p2 <p1> ^label -)
 	(edge ^p1 <bp> ^p2 {<p2> <> <p1>} ^label -)
-	(edge ^p1 <bp> ^p2 {<> <p2> <> <p1>} ^label nil)
+	(edge ^p1 <bp> ^p2 {<> <p2> <> <p1>} ^label NIL)
 	-->
 	(modify 5 ^label -))
- 
- 
- 
+
+
+
 (p label_arrow-1A
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p1> ^label {<label> << B - >>})
-	(edge ^p1 <bp> ^p2 <p2> ^label nil)
+	(edge ^p1 <bp> ^p2 <p2> ^label NIL)
 	(edge ^p1 <bp> ^p2 <p3>)
 	-->
 	(modify 4 ^label +)
 	(modify 5 ^label <label>))
- 
- 
+
+
 (p label_arrow-1B
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p1> ^label {<label> << B - >>})
 	(edge ^p1 <bp> ^p2 <p2>)
-	(edge ^p1 <bp> ^p2 <p3> ^label nil)
+	(edge ^p1 <bp> ^p2 <p3> ^label NIL)
 	-->
 	(modify 4 ^label +)
 	(modify 5 ^label <label>))
- 
- 
+
+
 (p label_arrow-2A
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p3> ^label {<label> << B - >>})
-	(edge ^p1 <bp> ^p2 <p2> ^label nil)
+	(edge ^p1 <bp> ^p2 <p2> ^label NIL)
 	(edge ^p1 <bp> ^p2 <p1>)
 	-->
 	(modify 4 ^label +)
 	(modify 5 ^label <label>))
- 
+
 (p label_arrow-2B
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p3> ^label {<label> << B - >>})
 	(edge ^p1 <bp> ^p2 <p2>)
-	(edge ^p1 <bp> ^p2 <p1> ^label nil)
+	(edge ^p1 <bp> ^p2 <p1> ^label NIL)
 	-->
 	(modify 4 ^label +)
 	(modify 5 ^label <label>))
- 
- 
+
+
 (p label_arrow-3A
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p1> ^label +)
-	(edge ^p1 <bp> ^p2 <p2> ^label nil)
+	(edge ^p1 <bp> ^p2 <p2> ^label NIL)
 	(edge ^p1 <bp> ^p2 <p3>)
 	-->
 	(modify 4 ^label -)
 	(modify 5 ^label +))
- 
+
 (p label_arrow-3B
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p1> ^label +)
 	(edge ^p1 <bp> ^p2 <p2>)
-	(edge ^p1 <bp> ^p2 <p3> ^label nil)
+	(edge ^p1 <bp> ^p2 <p3> ^label NIL)
 	-->
 	(modify 4 ^label -)
 	(modify 5 ^label +))
- 
- 
+
+
 (p label_arrow-4A
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p3> ^label +)
-	(edge ^p1 <bp> ^p2 <p2> ^label nil)
+	(edge ^p1 <bp> ^p2 <p2> ^label NIL)
 	(edge ^p1 <bp> ^p2 <p1>)
 	-->
 	(modify 4 ^label -)
 	(modify 5 ^label +))
- 
+
 (p label_arrow-4B
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p3> ^label +)
 	(edge ^p1 <bp> ^p2 <p2>)
-	(edge ^p1 <bp> ^p2 <p1> ^label nil)
+	(edge ^p1 <bp> ^p2 <p1> ^label NIL)
 	-->
 	(modify 4 ^label -)
 	(modify 5 ^label +))
- 
- 
+
+
 (p label_arrow-5A
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p2> ^label -)
 	(edge ^p1 <bp> ^p2 <p1>)
-	(edge ^p1 <bp> ^p2 <p3> ^label nil)
+	(edge ^p1 <bp> ^p2 <p3> ^label NIL)
 	-->
 	(modify 4 ^label +)
 	(modify 5 ^label +))
- 
- 
+
+
 (p label_arrow-5B
 	(stage ^value labeling)
 	(junction ^type arrow ^base_point <bp> ^p1 <p1> ^p2 <p2> ^p3 <p3>)
 	(edge ^p1 <bp> ^p2 <p2> ^label -)
-	(edge ^p1 <bp> ^p2 <p1> ^label nil)
+	(edge ^p1 <bp> ^p2 <p1> ^label NIL)
 	(edge ^p1 <bp> ^p2 <p3>)
 	-->
 	(modify 4 ^label +)
 	(modify 5 ^label +))
- 
- 
+
+
 ;The conflict resolution mechanism will onle execute a production if no
 ;productions that are more complicated are satisfied.  This production is
 ;simple, so all of the above dictionary productions will fire before this
@@ -371,33 +371,33 @@
 	(stage ^value labeling)
 	-->
 	(modify 1 ^value plot_remaining_edges))
- 
+
 ;At this point, some labellings may have not been plotted, so plot them
 (p plot_remaining
 	(stage ^value plot_remaining_edges)
-	(edge ^plotted nil ^label {<label> <> nil} ^p1 <p1> ^p2 <p2>)
+	(edge ^plotted NIL ^label {<label> <> NIL} ^p1 <p1> ^p2 <p2>)
 	-->
 ;	(write plot <label> <p1> <p2> (crlf))
 	(modify 2 ^plotted t))
- 
- 
+
+
 ;If we have been un able to label an edge, assume that it is a boundary.
 ;This is a total Kludge, but what the hell. (if we assume only valid drawings
 ;will be given for labeling, this assumption generally is true!)
 (p plot_boundaries
 	(stage ^value plot_remaining_edges)
-	(edge ^plotted nil ^label nil ^p1 <p1> ^p2 <p2>)
+	(edge ^plotted NIL ^label NIL ^p1 <p1> ^p2 <p2>)
 	-->
 	(write plot B <p1> <p2> (crlf))
 	(modify 2 ^plotted t))
- 
+
 ;If there is no more work to do, then we are done and flag it.
 (p done_plotting
 	(stage ^value plot_remaining_edges)
-	- (edge ^plotted nil)
+	- (edge ^plotted NIL)
 	-->
 	(modify 1 ^value done))
- 
+
 ;Prompt the user as to where he can see a trace of the OPS5
 ;execution
 (p done

@@ -19,24 +19,26 @@
 %
 \begin{optDefinition}
 %
-The defined name of this module is {\tt compare}.  There are four functions for
-comparing objects for equality, of which \functionref{=} is specifically for
-comparing numeric values and \functionref{eq}, \functionref{eql} and
-\genericref{equal} are for all objects.  The latter three are related in the
-following way:
+The defined name of this module is {\tt compare}.  There are three binary
+functions for comparing objects for equality, \functionref{eq},
+\functionref{eql}, \genericref{binary=} and the n-ary \functionref{=} which uses
+\genericref{binary=}.  The three binary functions are related in the following
+way:
 %
 \begin{center}
 \begin{tabular}{rcccl}
     {\tt (eq {\em a} {\em b})} & $\Rightarrow$ & {\tt (eql {\em a} {\em
-            b})} & $\Rightarrow$ & {\tt (equal {\em a} {\em b})}\\
+            b})} & $\Rightarrow$ & {\tt (binary= {\em a} {\em b})}\\
     {\tt (eq {\em a} {\em b})} & $\not\Leftarrow$ & {\tt (eql {\em a} {\em
-            b})} & $\not\Leftarrow$ & {\tt (equal {\em a} {\em b})}\\
+            b})} & $\not\Leftarrow$ & {\tt (binary= {\em a} {\em b})}\\
 \end{tabular}
 \end{center}
 %
-There is one function for comparing objects by order, which is called
-\functionref{<}, and which is implemented by the generic function
-\genericref{binary<}.  A summary of the comparison functions and the classes for
+There are four n-ary function for comparing objects by order, \functionref{<}
+and \functionref{>} which are implemented by the generic function
+\genericref{binary<}, \functionref{<=} and \functionref{>=} which are
+implemented by the generic functions \genericref{binary<} and
+\genericref{binary=}.  A summary of the comparison functions and the classes for
 which they have defined behaviour is given below:
 
 \framebox[\linewidth]
@@ -76,6 +78,9 @@ which they have defined behaviour is given below:
     & \classref{string}$\times$\classref{string}\\
 \end{tabular*}
 }
+
+There is also one binary function for comparing objects for inequality,
+\functionref{!=}.
 
 \function{eq}
 %

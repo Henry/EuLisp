@@ -70,7 +70,7 @@ a maximum vector index of at least
 32767\index{general}{implementation-defined!maximum vector
     index}\index{general}{conformity-clause!maximum vector index}.
 
-\method{equal}
+\method{binary=}
 %
 \begin{specargs}
     \item[vector$_1$, \classref{vector}] A vector.
@@ -79,9 +79,9 @@ a maximum vector index of at least
 %
 \result%
 If the size of {\em vector$_1$} is the same (under {\tt =}) as that of {\em
-    vector$_2$}, then the result is the conjunction of the pairwise application
-of \genericref{equal} to the elements of the arguments.  If not the result is
-\nil{}.
+    vector$_2$}, and the result of the conjunction of the pairwise application
+of \genericref{binary=} to the elements of the arguments \true{} the result is
+{\em vector$_1$}.  If not the result is \nil{}.
 
 \method{deep-copy}
 %

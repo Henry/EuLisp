@@ -16,7 +16,7 @@
   (deflocal *class-name-label* ())
   (deflocal MARGIN-OVAL 20)
   (deflocal *no-value* (gensym "no value "))
-  (deflocal *objects* (make <table> fill-value: *no-value* comparator: equal))
+  (deflocal *objects* (make <table> fill-value: *no-value* comparator: binary=))
 
   ;; *open-rows* is a list. The car will always contain the number of
   ;; the last open row.

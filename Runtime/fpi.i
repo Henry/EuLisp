@@ -13,7 +13,7 @@
     ((name . most-negative-fixed-precision-integer) (pos) (origin fpi . most-negative-fixed-precision-integer) (class . constant) (value -536870911))
     ((name . int-binary-) (pos . 18) (origin boot1 . -) (inline (G0062 (fpi-difference))))
     ((name . int-binary-mod) (pos . 40) (origin boot1 . mod) (inline (G0070 (fpi-remainder))))
-    ((name . int-as-string) (pos . 8) (origin fpi . int-as-string) (class . ff) (arity . 1) (ff (0) 3 (eul_int_as_str . ff_stub_eul_int_as_str2390)))
+    ((name . int-as-string) (pos . 8) (origin fpi . int-as-string) (class . ff) (arity . 1) (ff (0) 3 (eul_int_as_str . ff_stub_eul_int_as_str2381)))
     ((name . int-binary/) (pos . 14) (origin boot1 . /) (inline (G0066 (fpi-quotient))))
     ((name . int-binary*) (pos . 35) (origin boot1 . *) (inline (G0064 (fpi-product))))
     ((name . most-positive-fixed-precision-integer) (pos) (origin fpi . most-positive-fixed-precision-integer) (class . constant) (value 536870911))
