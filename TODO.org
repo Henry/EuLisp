@@ -132,10 +132,15 @@
     CLOSED: [2010-05-10 Mon 21:50]
 *** DONE Change =equal= methods to =binary==
     CLOSED: [2010-05-10 Mon 22:05]
-*** DONE Change =equal= generic function to a function which calls =binary==
-    CLOSED: [2010-05-10 Mon 22:05]
-    Note that the special case of (equal () ()) must be handled so that it
-    returns =t=.
+*** DONE Replace =equal= with =binary==
+    CLOSED: [2010-05-12 Wed 22:57]
+    Remove the =equal= generic function and methods and introduce a complete set
+    of =binary== methods.  The only difference between the definition of =equal=
+    and =binary== is the latter applies type coercion whereas =equal= was
+    defined not two.  If this property is an important feature =equal= could be
+    reinstated as a function wrapper around =binary== which does a
+    type-consistency check.
+
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
@@ -223,9 +228,7 @@
     Check for other =<sequence>= methods which should destructive variants.
 *** DONE Clarify the wording concerning the relationship between =nil= and =()=
     CLOSED: [2010-05-09 Sun 21:09]
-    State that (eq 'nil '()) => t.
-*** TODO Change =equal= methods to =binary==
-*** TODO Change =equal= generic function to a function which calls =binary==
-    Note that the special case of (equal () ()) must be handled so that it
-    returns =t=.
-
+    State that (eq 'nil '()) ==> t.
+*** TODO Replace =equal= with =binary==
+    Remove the =equal= generic function and methods and introduce a complete set
+    of =binary== methods.
