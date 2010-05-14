@@ -90,8 +90,11 @@
     + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps][eulisp-ffi.ps]]
 
 * Installation
-  + Unpack version X with \\
-    /tar -xzf youtooX.tar.gz/
+  + Unpack version xxx with \\
+    /tar -xzf EuLisp-xxx.tar.gz/
+  + or pull the latest version from the GitHub repository:\\
+    git clone git@github.com:Henry/EuLisp.git
+  + "cd" into the /EuLisp-xxx/ or /EuLisp/ directory
   + Run \\
     /./configure/ \\
     and check the settings.  Edit the configure file to reflect your system if
@@ -99,10 +102,10 @@
     /./configure/.
   + Run \\
     /make/ \\
-    If you want to use shared libraries (which we really recommend Linux,
+    If you want to use shared libraries (which we really recommend on Linux,
     FreeBSD, Solaris and IRIX), run \\
     /make shared/ \\
-    and add the directory /.../youtoo/Lib.${ARCH}/ to the environment variable
+    and add the directory /.../EuLisp-xxx/Lib.${ARCH}/ to the environment variable
     ~$LD_LIBRARY_PATH~ (see /./makeso.Path/).
   + You should now be able to run the script \\
     /Bin.${ARCH}/youtoo.sh/ \\
@@ -319,6 +322,35 @@
 ***  [[http://henry.github.com/EuLisp/Extras/Pipe/README.org][Pipes and forked child processes]]:  /Extras/Pipe/
     Thanks to Rob Simmons there is support for pipes to forked child
     processes.
+
+* Bootstrapping
+  Building Youtoo from the EuLisp sources is termed "bootstrapping".  This
+  requires a working installation which is used to compile the EuLisp source
+  modules.  The default directory path to the bootstrapping installation is
+  /${EUL_DIR}.boot/, i.e. /.boot/ appended to the path of the current
+  directory.  Note that if the bootstrapping installation directory is renamed
+  or moved the /configure/ script should be executed in it after the move to
+  correct the paths.  The working directory can be "cleaned" for bootstrapping
+  using /make boot-clean/ and then the "bootstrapping" build process started
+  with /make boot/.  If all goes well a complete clean build will result.
+
+  This process allows changes and developments to be made to the Youtoo
+  implementation of EuLisp.
+
+*** Limitations
+    Currently the dependency analysis is not sufficient to cover all the
+    possible ways in which the changes to the EuLisp modules in Youtoo interact
+    and the rebuilds required to create a consistent Youtoo executable.  Thus to
+    be sure of success /make boot-clean/ maybe required before every /make
+    boot/.
+
+*** Notes
+    The syntax files _.*0.em are used to enable the transition between old and
+    new function names during the bootstrapping process.  If functions change
+    which affect the syntax files first change the non "_" versions,
+    bootstrap-build then update the /.boot/ version with the current, update the
+    "_" versions to correspond to the non "_" versions and bootstrap-build
+    again.  This ensures a consistent final version.
 
 * Recent Developments
 *** Support for 64bit Operation

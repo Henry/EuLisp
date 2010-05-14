@@ -47,8 +47,8 @@
 
   To modify 13.2
 
-* REJECTED 6. Changes to formatted output
-  CLOSED: [2010-03-20 Sat 21:32]
+* DONE 6. Changes to formatted output
+  CLOSED: [2010-05-11 Tue 11:22]
 *** REJECTED Replace format with printf etc.
   CLOSED: [2010-03-20 Sat 19:33]
   Title is unlreated to proposal.  To replace format with a collection of printf
@@ -174,7 +174,7 @@
   CLOSED: [2010-03-21 Sun 21:47]
   To add definition of openp to A.14.
 
-* DEF+YOUTOO 19. Use 'd' or 'e' exponent marker?
+* ACCEPTED 19. Use 'd' or 'e' exponent marker?
   Present syntax defines the exponent marker character as 'd' or 'D'
   because level-0 only supports double precision floats.
 
@@ -262,7 +262,8 @@
   Partially clarified by 2.  Functional versions also to be defined with the
   same names as the macros (13.4).
 
-* DEF+YOUTOO 26. Character naming conventions
+* DONE 26. Character naming conventions
+  CLOSED: [2010-05-14 Fri 22:51]
   To replace the extended names for special characters (eg. #\newline) by their
   string digram equivalents (see table A.7), eg. #\\n.
 
@@ -306,9 +307,12 @@
   remove all defined slots in subclasses of <condition>.  To remove
   defcondition.
 
-* DEF+YOUTOO 31. Add: n-ary comparators
-  To expand A.3 with >, >=, <= as n-ary functions and != as a binary function.
-
+* DONE 31. Add: n-ary comparators
+  CLOSED: [2010-05-11 Tue 11:21]
+  To expand A.3 with >, >=, <= as n-ary functions and
+*** =!== as an n-ary function  (original proposal: binary function)
+    What is the advantage of restricting =!== to be binary given that === is
+    n-ary?  Implemented =!== as an n-ary function.
 * DEF+YOUTOO 32. Collection and sequence functions
   To add definitions of first, second, last and sort as <sequence> functions.
   To add definitions of delete (destructive) and remove (constructive) as
