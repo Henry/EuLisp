@@ -229,6 +229,7 @@
 *** DONE Clarify the wording concerning the relationship between =nil= and =()=
     CLOSED: [2010-05-09 Sun 21:09]
     State that (eq 'nil '()) ==> t.
-*** TODO Replace =equal= with =binary==
+*** DONE Replace =equal= with =binary==
+    CLOSED: [2010-05-14 Fri 14:30]
     Remove the =equal= generic function and methods and introduce a complete set
     of =binary== methods.
