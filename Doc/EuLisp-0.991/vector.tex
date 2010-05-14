@@ -70,7 +70,7 @@ a maximum vector index of at least
 32767\index{general}{implementation-defined!maximum vector
     index}\index{general}{conformity-clause!maximum vector index}.
 
-\method{binary=}
+\method{binary=}{vector}
 %
 \begin{specargs}
     \item[vector$_1$, \classref{vector}] A vector.
@@ -83,7 +83,7 @@ If the size of {\em vector$_1$} is the same (under {\tt =}) as that of {\em
 of \genericref{binary=} to the elements of the arguments \true{} the result is
 {\em vector$_1$}.  If not the result is \nil{}.
 
-\method{deep-copy}
+\method{deep-copy}{vector}
 %
 \begin{specargs}
     \item[vector, \classref{vector}] A vector.
@@ -94,7 +94,7 @@ Constructs and returns a copy of {\em vector}, in which each element is the
 result of calling {\em deep-copy\/} on the corresponding element of {\em
     vector}.
 
-\method{shallow-copy}
+\method{shallow-copy}{vector}
 %
 \begin{specargs}
     \item[vector, \classref{vector}] A vector.
@@ -104,7 +104,7 @@ result of calling {\em deep-copy\/} on the corresponding element of {\em
 Constructs and returns a copy of {\em vector\/} in which each element is
 \functionref{eql} to the corresponding element in {\em vector}.
 
-\method{generic-prin}
+\method{generic-prin}{vector}
 %
 \begin{specargs}
     \item[vector, \classref{vector}]
@@ -121,7 +121,7 @@ Output the external representation of {\em vector\/} on {\em stream\/} as
 described in the introduction to this section.  Calls the generic function again
 to produce the external representation of the elements stored in the vector.
 
-\method{generic-write}
+\method{generic-write}{vector}
 %
 \begin{specargs}
     \item[vector, \classref{vector}] A vector to be ouptut on stream.

@@ -107,16 +107,6 @@ Signalled by any of \genericref{binary/},
 \genericreflabel{binary\protect\%}{binarypercent} and \genericref{binary-mod} if
 their second argument is zero.
 
-\function{=}
-%
-\begin{arguments}
-    \item[{\optional{number$_1$ number$_2$ ...}}] A sequence of numbers.
-\end{arguments}
-%
-\result%
-Compares the arguments for equality using the generic function
-\genericref{binary=}.  Zero arguments is an error.  One argument returns \true.
-
 \function{+}
 %
 \begin{arguments}
@@ -253,9 +243,9 @@ Computes the additive inverse of {\em number}.
 \end{arguments}
 %
 \result%
-Returns {\em number\/} if \genericref{zerop} applied to {\em number\/} is true.
-Otherwise returns the result of converting $\pm$1 to the class of {\em number\/}
-with the sign of {\em number}.
+Returns {\em number\/} if \genericref{zerop} applied to {\em number\/} is
+\true{}.  Otherwise returns the result of converting $\pm$1 to the class of {\em
+    number\/} with the sign of {\em number}.
 
 \function{positivep}
 %
@@ -276,6 +266,17 @@ using the generic function \genericref{binary<}.
 \result%
 Compares {\em number\/} against the zero element of the class of {\em number\/}
 using the generic function \genericref{binary<}.
+
+\method{binary=}{number}
+%
+\begin{genericargs}
+    \item[number$_1$, \classref{number}] A number.
+    \item[number$_2$, \classref{number}] A number.
+\end{genericargs}
+%
+\result%
+Returns \true{} if {\em number$_1$} and {\em number$_2$} are numerically equal
+otherwise \nil{};
 
 \generic{binary+}
 %

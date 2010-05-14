@@ -36,12 +36,12 @@ stream class.
 %
 \begin{initoptions}
     \item[read-action, \classref{function}] A function which is called by the
-    \classref{stream} \genericref{generic-read} method. The accessor for this
-    slot is called {\tt stream-read-action}.
+    \classref{stream} \methodref{generic-read}{stream} method. The accessor for
+    this slot is called {\tt stream-read-action}.
     %
     \item[write-action, \classref{function}] A function which is called by the
-    \classref{stream} \genericref{generic-write} method. The accessor for this
-    slot is called {\tt stream-write-action}.
+    \classref{stream} \methodref{generic-write}{stream} method. The accessor for
+    this slot is called {\tt stream-write-action}.
 \end{initoptions}
 %
 The following accessor functions are defined for \classref{stream}
@@ -190,7 +190,7 @@ behaviours of \genericref{generic-connect}.
 Generic form of \functionref{connect}.
 
 % ------------------------------------------------------------------------------
-\method{generic-connect}
+\method{generic-connect}{stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[source, \classref{stream}] The stream which is to be the source of
@@ -208,7 +208,7 @@ Connects the source of {\em sink\/} to {\em source\/} and the sink of
 {\em source\/} to {\em sink}.
 
 % ------------------------------------------------------------------------------
-\method{generic-connect}
+\method{generic-connect}{path}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[source, \theclass{path}] A path name.
@@ -231,7 +231,7 @@ specified using the third argument.
 \functionref{open-input-file}.
 
 % ------------------------------------------------------------------------------
-\method{generic-connect}
+\method{generic-connect}{file-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[source, \classref{file-stream}] The stream via which data will be sent
@@ -269,7 +269,7 @@ Transfers the source and sink connections of {\em s1\/} to {\em s2},
 leaving {\em s1\/} disconnected.
 
 % ------------------------------------------------------------------------------
-\method{reconnect}
+\method{reconnect}{stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[s1, \classref{stream}] A stream.
@@ -297,7 +297,7 @@ The return value is \nil{}.
 Disconnects the stream {\em s\/} from its source and/or its sink.
 
 % ------------------------------------------------------------------------------
-\method{disconnect}
+\method{disconnect}{stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[s, \classref{stream}] A stream.
@@ -310,7 +310,7 @@ The return value is \nil{}.
 Implements the diconnect operation for objects of class \classref{stream}.
 
 % ------------------------------------------------------------------------------
-\method{disconnect}
+\method{disconnect}{file-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[s, \classref{file-stream}] A file stream.
@@ -393,14 +393,14 @@ buffered stream whose buffer is either empty, or from which all the items have
 been read.
 
 % ------------------------------------------------------------------------------
-\method{fill-buffer}
+\method{fill-buffer}{buffered-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{buffered-stream}] A stream.
 \end{specargs}
 
 % ------------------------------------------------------------------------------
-\method{fill-buffer}
+\method{fill-buffer}{file-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{file-stream}] A stream.
@@ -415,7 +415,7 @@ been read.
 %
 \result%
 The contents of the buffer associated with {\em stream} is flushed to
-its sink. If this operation succeeds, a true value is returned, otherwise the
+its sink. If this operation succeeds, a \true{} value is returned, otherwise the
 result is \nil{}.
 %
 \remarks%
@@ -423,7 +423,7 @@ This function is guaranteed to be called when an attempt is made to
 write to a buffered stream whose buffer is full.
 
 % ------------------------------------------------------------------------------
-\method{flush-buffer}
+\method{flush-buffer}{buffered-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{buffered-stream}] A stream.
@@ -431,7 +431,7 @@ write to a buffered stream whose buffer is full.
 %
 \result%
 The contents of the buffer associated with {\em stream} is flushed to
-its sink. If this operation succeeds, a true value is returned, otherwise the
+its sink. If this operation succeeds, a \true{} value is returned, otherwise the
 result is \nil{}.
 %
 \remarks%
@@ -439,7 +439,7 @@ Implements the \genericref{flush-buffer} operation for objects of class
 \classref{buffered-stream}.
 
 % ------------------------------------------------------------------------------
-\method{flush-buffer}
+\method{flush-buffer}{file-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{file-stream}] A stream.
@@ -447,7 +447,7 @@ Implements the \genericref{flush-buffer} operation for objects of class
 %
 \result%
 The contents of the buffer associated with {\em stream} is flushed to
-its sink. If this operation succeeds, a true value is returned, otherwise the
+its sink. If this operation succeeds, a \true{} value is returned, otherwise the
 result is \nil{}.
 %
 \remarks%
@@ -482,7 +482,7 @@ encounters the end of {\em stream\/} and the {\tt eos-error-p} argument to read
 has a non-\nil{}\/ value.
 
 % ------------------------------------------------------------------------------
-\method{end-of-stream}
+\method{end-of-stream}{buffered-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{buffered-stream}] A stream.
@@ -492,7 +492,7 @@ has a non-\nil{}\/ value.
 Signals the end of stream condition.
 
 % ------------------------------------------------------------------------------
-\method{end-of-stream}
+\method{end-of-stream}{file-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{file-stream}] A stream.
@@ -552,10 +552,10 @@ The next transaction unit from {\em stream}.
 If the end of {\em stream\/} is encountered and the value of {\em eos-error-p}
 is \nil{}, the result is {\em eos-value\/}. If the end of {\em stream} is
 encountered and the value of {\tt eos-error-p} is non-\nil{}, the function
-\genericref{end-of-stream} is called with the argument {\em stream}.
+\methodref{end-of-stream}{stream} is called with the argument {\em stream}.
 
 % ------------------------------------------------------------------------------
-\method{generic-read}
+\method{generic-read}{stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{stream}] A stream.
@@ -573,7 +573,7 @@ Implements the \genericref{generic-read} operation for objects of class
 \classref{stream}.
 
 % ------------------------------------------------------------------------------
-\method{generic-read}
+\method{generic-read}{buffered-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{buffered-stream}] A buffered stream.
@@ -593,7 +593,7 @@ Implements the \genericref{generic-read} operation for objects of class
 \classref{buffered-stream}.
 
 % ------------------------------------------------------------------------------
-\method{generic-read}
+\method{generic-read}{file-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{file-stream}] A file stream.
@@ -658,7 +658,7 @@ Methods on \genericref{generic-write} are defined for \classref{character},
 \classref{string}, \classref{symbol} and \classref{vector}.
 
 % ------------------------------------------------------------------------------
-\method{generic-write}
+\method{generic-write}{stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[object, \classref{object}] An object to be written to {\em stream}.
@@ -667,7 +667,7 @@ Methods on \genericref{generic-write} are defined for \classref{character},
 \end{specargs}
 
 % ------------------------------------------------------------------------------
-\method{generic-write}
+\method{generic-write}{buffered-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[object, \classref{object}] An object to be written to {\em stream}.
@@ -676,7 +676,7 @@ Methods on \genericref{generic-write} are defined for \classref{character},
 \end{specargs}
 
 % ------------------------------------------------------------------------------
-\method{generic-write}
+\method{generic-write}{file-stream}
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[object, \classref{object}] An object to be written to {\em stream}.

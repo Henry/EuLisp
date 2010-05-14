@@ -9,15 +9,21 @@
 
 The defined name of this module is {\tt double}.  Arithmetic operations for
 \classref{double-float}\ are defined by methods on the generic functions defined
-in the number module (\ref{number}):
+in the compare module (\ref{compare}):
+%
+\begin{flushleft}
+    \genericref{binary=},\ttindex{binary=}\indexmeth{binary=}
+    \genericref{binary<},\ttindex{binary<}\indexmeth{binary<}
+\end{flushleft}
+%
+\noindent
+the number module (\ref{number}):
 %
 \begin{flushleft}
     \genericref{binary+},\ttindex{binary+}\indexmeth{binary+}
     \genericref{binary-},\ttindex{binary-}\indexmeth{binary-}
     \genericref{binary*},\ttindex{binary*}\indexmeth{binary*}
     \genericref{binary/},\ttindex{binary/}\indexmeth{binary/}
-    \genericref{binary<},\ttindex{binary<}\indexmeth{binary<}
-    \genericref{binary=},\ttindex{binary=}\indexmeth{binary=}
     \genericref{binary-mod},\ttindex{binary-mod}\indexmeth{binary-mod}
     \genericref{negate},\ttindex{negate}\indexmeth{negate}
     \genericref{zerop}\ttindex{zerop}\indexmeth{zerop}
@@ -144,10 +150,10 @@ that specified in the syntax as {\em {\tt[}sign{\tt]}float format 3}.
 A fixed precision integer.
 
 \remarks%
-This function is the same as \genericref{round}.  It is defined for the
-sake of symmetry.
+This function is the same as the \classref{double-float} method of
+\genericref{round}.  It is defined for the sake of symmetry.
 
-\method{generic-prin}
+\method{generic-prin}{double-float}
 %
 \begin{specargs}
     \item[double, \classref{double-float}]%
@@ -166,7 +172,7 @@ control over the format of the output of floating point numbers is provided by
 some of the formatting specifications of {\tt format} (see
 section~\ref{formatted-io}).
 
-\method{generic-write}
+\method{generic-write}{double-float}
 %
 \begin{specargs}
     \item[double, \classref{double-float}]%

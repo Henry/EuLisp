@@ -4,10 +4,17 @@
 \index{general}{fixed precision integer!module}
 \index{general}{level-0 modules!fpi}
 \begin{optDefinition}
-
-    The defined name of this module is {\tt fpi}.  Arithmetic operations for
-    \classref{fixed-precision-integer} are defined by methods on the generic
-    functions defined in the number module:
+The defined name of this module is {\tt fpi}.  Arithmetic operations for
+\classref{fixed-precision-integer} are defined by methods on the generic
+functions defined in the compare module (\ref{compare}):
+%
+\begin{flushleft}
+    \genericref{binary=},\ttindex{binary=}\indexmeth{binary=}
+    \genericref{binary<},\ttindex{binary<}\indexmeth{binary<}
+\end{flushleft}
+%
+\noindent
+the number module:
 %
 \begin{flushleft}
     \genericref{binary+},\ttindex{binary+}\indexmeth{binary+}
@@ -15,8 +22,6 @@
     \genericref{binary*},\ttindex{binary*}\indexmeth{binary*}
     \genericref{binary/},\ttindex{binary/}\indexmeth{binary/}
     \genericreflabel{binary\protect\%}{binarypercent},\ttindex{binary\protect\%}\indexmeth{binary\protect\%}
-    \genericref{binary<},\ttindex{binary<}\indexmeth{binary<}
-    \genericref{binary=},\ttindex{binary=}\indexmeth{binary=}
     \genericref{binary-gcd},\ttindex{binary-gcd}\indexmeth{binary-gcd}
     \genericref{binary-lcm},\ttindex{binary-lcm}\indexmeth{binary-lcm}
     \genericref{binary-mod},\ttindex{binary-mod}\indexmeth{binary-mod}
@@ -95,7 +100,7 @@ the external representation of {\em integer\/} in decimal notation.
 Returns a double float whose value is the floating point approximation
 to {\em integer}.
 
-\method{generic-prin}
+\method{generic-prin}{fixed-precision-integer}
 \begin{specargs}
 \item[integer, \classref{fixed-precision-integer}] An integer to be output on {\em stream}.
 \item[stream, \classref{stream}] The stream on which the representation is
@@ -110,7 +115,7 @@ Outputs external representation of {\em integer\/} on {\em stream\/}
 in decimal as defined by {\em decimal integer} at the beginning of
 this section.
 
-\method{generic-write}
+\method{generic-write}{fixed-precision-integer}
 \begin{specargs}
 \item[integer, \classref{fixed-precision-integer}] An integer to be output on {\em stream}.
 \item[stream, \classref{stream}] The stream on which the representation is

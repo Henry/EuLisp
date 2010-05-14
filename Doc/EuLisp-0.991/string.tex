@@ -149,7 +149,7 @@ is a symbol, that symbol is returned.  If the result is \nil{}, then
 a new symbol is constructed whose name is {\em string}.  This new
 symbol is returned.
 %
-\method{binary=}
+\method{binary=}{string}
 %
 \begin{specargs}
     \item[string$_1$, \classref{string}] A string.
@@ -159,20 +159,10 @@ symbol is returned.
 \result%
 If the size of {\em string$_1$} is the same (under {\tt =}) as that of {\em
     string$_2$}, and the result of the conjunction of the pairwise application
-of \genericref{binary=} to the elements of the arguments is \true{} the result
-is {\em string$_1$}.  If not the result is \nil{}.
+of \methodref{binary=}{character} to the elements of the arguments is \true{}
+the result is {\em string$_1$}.  If not the result is \nil{}.
 %
-\method{deep-copy}
-%
-\begin{specargs}
-    \item[string, \classref{string}] A string.
-\end{specargs}
-%
-\result%
-Constructs and returns a copy of {\em string\/} in which each element
-is \functionref{eql} to the corresponding element in {\em string}.
-%
-\method{shallow-copy}
+\method{deep-copy}{string}
 %
 \begin{specargs}
     \item[string, \classref{string}] A string.
@@ -182,7 +172,17 @@ is \functionref{eql} to the corresponding element in {\em string}.
 Constructs and returns a copy of {\em string\/} in which each element
 is \functionref{eql} to the corresponding element in {\em string}.
 %
-\method{binary<}
+\method{shallow-copy}{string}
+%
+\begin{specargs}
+    \item[string, \classref{string}] A string.
+\end{specargs}
+%
+\result%
+Constructs and returns a copy of {\em string\/} in which each element
+is \functionref{eql} to the corresponding element in {\em string}.
+%
+\method{binary<}{string}
 %
 \begin{specargs}
     \item[string$_1$, \classref{string}] A string.
@@ -192,11 +192,11 @@ is \functionref{eql} to the corresponding element in {\em string}.
 \result%
 If the second argument is longer than the first, the result is \nil{}.
 Otherwise, if the sequence of characters in {\em string$_1$} is pairwise less
-than that in {\em string$_2$} according to \genericref{binary<} the result is
-\true.  Otherwise the result is \nil{}.  Since it is an error to compare lower
-case, upper case and digit characters with any other kind than themselves, so it
-is an error to compare two strings which require such comparisons and the
-results are undefined.
+than that in {\em string$_2$} according to \methodref{binary<}{character} the
+result is \true.  Otherwise the result is \nil{}.  Since it is an error to
+compare lower case, upper case and digit characters with any other kind than
+themselves, so it is an error to compare two strings which require such
+comparisons and the results are undefined.
 %
 \examples
 \begin{tabular}{lcl}
@@ -213,9 +213,9 @@ results are undefined.
 \end{tabular}
 %
 \seealso
-Method on \genericref{binary<} (\ref{compare}) for characters (\ref{character}).
+Method \methodref{binary<}{character} (\ref{compare}) for characters (\ref{character}).
 %
-\method{as-lowercase}
+\method{as-lowercase}{string}
 %
 \begin{specargs}
     \item[string, \classref{string}] A string.
@@ -226,7 +226,7 @@ Returns a copy of {\em string\/} in which each character denoting an
 upper case character, is replaced by a character denoting its lower
 case counterpart.  The result must not be \functionref{eq} to {\em string}.
 %
-\method{as-uppercase}
+\method{as-uppercase}{string}
 %
 \begin{specargs}
     \item[string, \classref{string}] A string.
@@ -237,7 +237,7 @@ Returns a copy of {\em string\/} in which each character denoting an
 lower case character, is replaced by a character denoting its upper
 case counterpart.  The result must not be \functionref{eq} to {\em string}.
 %
-\method{generic-prin}
+\method{generic-prin}{string}
 \begin{specargs}
     \item[string, \classref{string}] String to be ouptut on {\em stream}.
     \item[stream, \classref{stream}] Stream on which {\em string} is to be ouptut.
@@ -251,7 +251,7 @@ described in the introduction to this section, interpreting each of
 the characters in the string.  The opening and closing quotation marks
 are not output.
 %
-\method{generic-write}
+\method{generic-write}{string}
 \begin{specargs}
     \item[string, \classref{string}] String to be ouptut on {\em stream}.
     \item[stream, \classref{stream}] Stream on which {\em string\/} is to be ouptut.

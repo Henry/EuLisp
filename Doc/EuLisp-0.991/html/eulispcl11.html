@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-05-14 15:46:00" /> 
+<meta name="date" content="2010-05-14 22:47:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -1081,8 +1081,14 @@ class="cmtt-9">: </span><a
 href="eulispcl9.html#x11-570009.5.0.5"><span 
 class="cmti-9">boolean</span></a> :  </dt><dd 
 class="options">
-        <!--l. 119--><p class="noindent" >The value is either true or false. True indicates that an
-        initialization argument must be supplied for this slot.</p></dd></dl>
+        <!--l. 119--><p class="noindent" >The value is either <a 
+href="eulispcl16.html#x20-208001r4"><span 
+class="cmtt-9">t</span></a> or <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>. <a 
+href="eulispcl16.html#x20-208001r4"><span 
+class="cmtt-9">t</span></a> indicates that an initialization
+        argument must be supplied for this slot.</p></dd></dl>
   <!--l. 124--><p class="noindent" >The class-options are interpreted as follows:
         </p><dl class="options1"><dt class="options">
   <span 
@@ -1105,7 +1111,7 @@ class="cmtt-9">make</span></a> are the initial values of corresponding slots
 href="#x13-7600011.3.1.1"><span 
 class="cmti-9">initarg</span></a> or are ignored by the default
         <a 
-href="#x13-107001r3"><span 
+href="#x13-110001r4"><span 
 class="cmtt-9">initialize</span></a> method, otherwise. This option must only be
         specified once for a class.
         </p></dd><dt class="options">
@@ -1151,8 +1157,14 @@ class="cmtt-9">: </span><a
 href="eulispcl9.html#x11-570009.5.0.5"><span 
 class="cmti-9">boolean</span></a> : </dt><dd 
 class="options">
-    <!--l. 155--><p class="noindent" >The value is either true or false. True indicates that the
-    class being defined is abstract.</p></dd></dl>
+    <!--l. 155--><p class="noindent" >The value is either <a 
+href="eulispcl16.html#x20-208001r4"><span 
+class="cmtt-9">t</span></a> or <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>. <a 
+href="eulispcl16.html#x20-208001r4"><span 
+class="cmtt-9">t</span></a> indicates that the class being
+    defined is abstract.</p></dd></dl>
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x13-78012r2"></a><span 
 class="cmbx-9">11.3.2   </span><span 
@@ -2730,7 +2742,7 @@ class="cmtt-9">initform</span>, if
 href="#x13-7600011.3.1.1"><span 
 class="cmti-9">initarg</span></a>s which do not initialize a slot are ignored by the
 default <a 
-href="#x13-107001r3"><span 
+href="#x13-110001r4"><span 
 class="cmtt-9">initialize</span></a> method. More specific methods may
 handle these <a 
 href="#x13-7600011.3.1.1"><span 
@@ -2738,7 +2750,7 @@ class="cmti-9">initarg</span></a>s and call the default method by calling
 <a 
 href="#x13-94002r1"><span 
 class="cmtt-9">call-next-method</span></a>.
-</p><!--l. 941--><p class="noindent" >
+</p><!--l. 935--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 11.8 <a 
  id="x13-11400011.8"></a>Accessing Slots</h4>

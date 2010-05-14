@@ -100,9 +100,9 @@ guaranteed that the resulting symbol did not exist before the call to
 \end{arguments}
 %
 \result%
-Returns a {\em string\/} which is \methodref{binary=} to that given as the
-argument to the call to \functionref{make} which created {\em symbol}.  It is an
-error to modify this string.
+Returns a {\em string\/} which is \methodref{binary=}{string} to that given as
+the argument to the call to \functionref{make} which created {\em symbol}.  It
+is an error to modify this string.
 
 \function{symbol-exists-p}
 %
@@ -115,7 +115,7 @@ error to modify this string.
 Returns the symbol whose name is {\em string\/} if that symbol has
 already been constructed by \functionref{make}.  Otherwise, returns \nil{}.
 
-\method{generic-prin}
+\method{generic-prin}{symbol}
 %
 \begin{specargs}
     \item[symbol, \classref{symbol}] The symbol to be output on {\em stream}.
@@ -132,7 +132,7 @@ Outputs the external representation of {\em symbol\/} on {\em stream\/}
 as described in the introduction to this section, interpreting each of the
 characters in the name.
 
-\method{generic-write}
+\method{generic-write}{symbol}
 %
 \begin{specargs}
     \item[symbol, \classref{symbol}] The symbol to be output on {\em stream}.

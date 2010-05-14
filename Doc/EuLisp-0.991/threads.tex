@@ -274,7 +274,7 @@ non-\nil{}\/ value.
 Execution of the current thread will continue beyond the \genericref{wait} form
 only when one of the following happened:
 \begin{enumerate}
-    \item\label{case-a} A condition associated with {\em obj} returns true;
+    \item\label{case-a} A condition associated with {\em obj} returns \true{};
     \item\label{case-b} {\em timeout} time units elapse;
     \item\label{case-c} A condition is raised by another thread on this thread.
 \end{enumerate}
@@ -305,15 +305,12 @@ period of at least 1 second.
 \seealso%
 threads (section~\ref{thread}), streams (section~\ref{stream}).
 
-\method{wait}
+\method{wait}{thread}
 %
 \begin{specargs}
-%
     \item[thread, \classref{thread}] The thread on which to wait.
-%
     \item[timeout, <object>] The timeout period which is specified by one of
     \nil{}, \true, and non-negative integer.
-%
 \end{specargs}
 %
 \result%

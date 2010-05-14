@@ -52,7 +52,7 @@ The class whose only instance is the empty list, denoted \nil{}.
 \result%
 Returns \true\/ if {\em object} is the empty list, otherwise \nil{}.
 
-\method{generic-prin}
+\method{generic-prin}{null}
 %
 \begin{specargs}
     \item[null] The empty list.
@@ -66,7 +66,7 @@ The empty list.
 Output the external representation of the empty list on {\em stream\/}
 as described above.
 
-\method{generic-write}
+\method{generic-write}{null}
 %
 \begin{specargs}
     \item[null] The empty list.
@@ -235,11 +235,11 @@ Given a pair, such as the result of {\tt (cons {\em object$_1$} {\em
 Note that if {\em object\/} is not a proper list, then the use of {\tt
 (setter cdr)} might change {\em pair\/} into an improper list.
 
-\method{binary=}
+\method{binary=}{cons}
 %
 \begin{specargs}
-    \item[pair$_1$] A pair.
-    \item[pair$_2$] A pair.
+    \item[pair$_1$, \classref{cons}] A pair.
+    \item[pair$_2$, \classref{cons}] A pair.
 \end{specargs}
 %
 \result%
@@ -248,7 +248,7 @@ If the result of the conjunction of the pairwise application of
 fields of the arguments is \true{} the result is {\em pair$_1$} otherwise the
 result is \nil{}.
 
-\method{deep-copy}
+\method{deep-copy}{cons}
 %
 \begin{specargs}
     \item[pair, \classref{cons}] A pair.
@@ -262,7 +262,7 @@ slot (and the \functionref{cdr} slot in the case of the final pair of an
 improper list) is determined by the \genericref{deep-copy} method for the class
 of the object.
 
-\method{shallow-copy}
+\method{shallow-copy}{cons}
 %
 \begin{specargs}
     \item[pair, \classref{cons}] A pair.
@@ -292,7 +292,7 @@ whose \functionref{car} field contains {\em object$_1$}.
     \verb|(list 1 2 3)| &\Ra& \verb|(1 2 3)|
 \end{tabular}
 
-\method{generic-prin}
+\method{generic-prin}{cons}
 %
 \begin{specargs}
     \item[pair, \classref{cons}] The pair to be output on {\em stream}.
@@ -309,7 +309,7 @@ described at the beginning of this section.  Uses \genericref{generic-prin} to
 produce the external representation of the contents of the \functionref{car} and
 \functionref{cdr} slots of {\em pair}.
 
-\method{generic-write}
+\method{generic-write}{cons}
 %
 \begin{specargs}
     \item[pair, \classref{cons}] The pair to be output on {\em stream}.

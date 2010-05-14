@@ -367,8 +367,8 @@ The \scref{slot-option}s are interpreted as follows:
     accessor name for two different slots.
 
     \item[\keyworddef{requiredp}:, \scref{boolean}]%
-    The value is either true or false. True indicates that an initialization
-    argument must be supplied for this slot.
+    The value is either \true{} or \nil{}. \true{} indicates that an
+    initialization argument must be supplied for this slot.
 \end{options}
 %
 The class-options are interpreted as follows:
@@ -380,8 +380,8 @@ The class-options are interpreted as follows:
     on the new class.  Initargs are inherited by union. The values of all legal
     arguments in the call to \functionref{make} are the initial values of
     corresponding slots if they name a slot \scref{initarg} or are ignored by
-    the default \genericref{initialize} method, otherwise. This option must only
-    be specified once for a class.
+    the default \methodref{initialize}{object} method, otherwise. This option
+    must only be specified once for a class.
 
     \item[\keyworddef{constructor}:, \scref{constructor-specification}]%
     Creates a constructor function for the new class.  The constructor
@@ -403,8 +403,8 @@ The class-options are interpreted as follows:
     % \defopref{defpredicate} form for the class.
 
     \item[\keyworddef{abstractp}:, \scref{boolean}]%
-    The value is either true or false. True indicates that the class being
-    defined is abstract.
+    The value is either \true{} or \nil{}. \true{} indicates that the class
+    being defined is abstract.
 %
 \end{options}
 %
@@ -899,7 +899,7 @@ called by \functionref{make} on a new uninitialized object created by calling
 Users may extend \genericref{initialize} by defining methods specializing on
 newly defined classes, which are structure classes at level-0.
 
-\method{initialize}
+\method{initialize}{object}
 %
 \begin{specargs}
     \item[\scref{object}, \classref{object}] The object to initialize.
@@ -926,15 +926,9 @@ performs the following steps:
 \end{enumerate}
 %
 Legal \scref{initarg}s which do not initialize a slot are ignored by the default
-\genericref{initialize} method.  More specific methods may handle these
+\methodref{initialize}{object} method.  More specific methods may handle these
 \scref{initarg}s and call the default method by calling
 \specopref{call-next-method}.
-% The default method can be specialized by calling \specopref{call-next-method}
-% from more specific \genericref{initialize} methods.
-%
-%\seealso%
-%\genericref{initialize} methods for classes, slot descriptors, generic functions
-%and methods, \functionref{make}, \genericref{allocate}.
 %
 \end{optDefinition}
 

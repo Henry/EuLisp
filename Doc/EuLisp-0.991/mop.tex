@@ -355,7 +355,7 @@ This function returns the generic function to which {\em method} is attached; if
 \sclause{Class Initialization}
 %
 \begin{optDefinition}
-\method{initialize}
+\method{initialize}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] A class.
@@ -536,14 +536,14 @@ those specified as slot option and those specified as class option.
 Computes and returns a function of one argument, which is a predicate
 function for {\em class}.
 
-\method{compute-predicate}
+\method{compute-predicate}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] A class.
 \end{specargs}
 %
 \result%
-Computes and returns a function of one argument, which returns true when applied
+Computes and returns a function of one argument, which returns \true{} when applied
 to direct or indirect instances of {\em class} and \nil{}\/ otherwise.
 
 \generic{compute-constructor}
@@ -557,7 +557,7 @@ to direct or indirect instances of {\em class} and \nil{}\/ otherwise.
 \result%
 Computes and returns a constructor function for {\em class}.
 
-\method{compute-constructor}
+\method{compute-constructor}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] A class.
@@ -583,7 +583,7 @@ An instance of the first argument.
 Creates an instance of the first argument.  Users may define new
 methods for new metaclasses.
 
-\method{allocate}
+\method{allocate}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] A class.
@@ -603,7 +603,7 @@ argument.  The initlist is not used by this \genericref{allocate} method.
 %
 \begin{optDefinition}
 %
-\method{initialize}
+\method{initialize}{slot}
 %
 \begin{specargs}
     \item[slot, \classref{slot}] A slot description.
@@ -628,7 +628,7 @@ The initialized slot description.
 %
 \begin{optDefinition}
 
-\method{initialize}
+\method{initialize}{generic-function}
 %
 \begin{specargs}
     \item[gf, \classref{generic-function}] A generic function.
@@ -674,7 +674,7 @@ The basic call structure is:
 %
 \begin{optDefinition}
 %
-\method{initialize}
+\method{initialize}{method}
 %
 \begin{specargs}
     \item[method, \classref{method}] A method.
@@ -713,7 +713,7 @@ install the new method in the {\em generic-function}.
 Returns {\em t} if {\em class} is compatible with {\em
 direct-superclasses}, otherwise \nil{}.
 
-\method{compatible-superclasses-p}
+\method{compatible-superclasses-p}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] A class.
@@ -737,7 +737,7 @@ inheritance assumption).
 Returns \true\/ if {\em subclass} is compatible with {\em superclass},
 otherwise \nil{}.
 
-\method{compatible-superclass-p}
+\method{compatible-superclass-p}{class}
 %
 \begin{specargs}
     \item[subclass, \classref{class}] A class.
@@ -752,7 +752,7 @@ If the implementation wishes to restrict the instantiation tree (see
 introduction to B.4), this method should return \nil{}\/ if {\em superclass}
 is \theclass{metaclass}.
 
-\method{compatible-superclass-p}
+\method{compatible-superclass-p}{class}
 %
 \begin{specargs}
     \item[subclass, \classref{class}] A class.
@@ -762,7 +762,7 @@ is \theclass{metaclass}.
 \result%
 Always returns \true.
 
-\method{compatible-superclass-p}
+\method{compatible-superclass-p}{abstract-class}
 %
 \begin{specargs}
     \item[subclass, \theclass{abstract-class}] A class.
@@ -772,7 +772,7 @@ Always returns \true.
 \result%
 Always returns \nil{}.
 
-\method{compatible-superclass-p}
+\method{compatible-superclass-p}{abstract-class}
 %
 \begin{specargs}
     \item[subclass, \theclass{abstract-class}] A class.
@@ -794,7 +794,7 @@ Computes and returns a list of classes which represents the linearized
 inheritance hierarchy of {\em class} and the given list of direct superclasses,
 beginning with {\em class} and ending with \classref{object}.
 
-\method{compute-class-precedence-list}
+\method{compute-class-precedence-list}{list}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -827,7 +827,7 @@ Computes and returns the list of effective slot descriptions of {\em class}.
 \seealso%
 \genericref{compute-inherited-slots}.
 
-\method{compute-slots}
+\method{compute-slots}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -885,7 +885,7 @@ Computes and returns all legal initargs for {\em class}.
 \seealso%
 \genericref{compute-inherited-initargs}.
 
-\method{compute-initargs}
+\method{compute-initargs}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -920,7 +920,7 @@ Computes and returns a list of lists of effective slot descriptions.
 \seealso%
 \genericref{compute-slots}.
 
-\method{compute-inherited-slots}
+\method{compute-inherited-slots}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -952,7 +952,7 @@ Computes and returns a list of lists of initargs. Its result is used by
 \seealso%
 \genericref{compute-initargs}.
 
-\method{compute-inherited-initargs}
+\method{compute-inherited-initargs}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -983,7 +983,7 @@ Computes and returns a new effective slot description.  It is called by
 corresponding inherited slot descriptions.  \seealso%
 \genericref{compute-defined-slot-class}.
 
-\method{compute-defined-slot}
+\method{compute-defined-slot}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -1014,7 +1014,7 @@ Slot description class.
 Determines and returns the slot description class corresponding to {\em class}
 and {\em slot-spec} .  \seealso \genericref{compute-defined-slot}.
 
-\method{compute-defined-slot-class}
+\method{compute-defined-slot-class}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -1049,7 +1049,7 @@ list or \nil{}\/ if no one is specified with the same name.
 \seealso%
 \genericref{compute-specialized-slot-class}.
 
-\method{compute-specialized-slot}
+\method{compute-specialized-slot}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -1089,7 +1089,7 @@ specialized (iii) the specializing information in {\em slot-spec}.
 \seealso%
 \genericref{compute-specialized-slot}.
 
-\method{compute-specialized-slot-class}
+\method{compute-specialized-slot-class}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -1149,7 +1149,7 @@ List of effective slot descriptions.
 Computes new accessors or ensures that inherited accessors work
 correctly for each effective slot description.
 
-\method{compute-and-ensure-slot-accessors}
+\method{compute-and-ensure-slot-accessors}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -1199,7 +1199,7 @@ Computes and returns a new slot reader applicable to instances of {\em class}
 returning the slot value corresponding to {\em slot}. The third
 argument can be used in order to compute the logical slot position.
 
-\method{compute-slot-reader}
+\method{compute-slot-reader}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class.
@@ -1233,7 +1233,7 @@ class} and any value to be stored as the new slot value corresponding
 to {\em slot}. The third argument can be used in order to
 compute the logical slot position.
 
-\method{compute-slot-writer}
+\method{compute-slot-writer}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class.
@@ -1266,7 +1266,7 @@ Function.
 Ensures {\em function} correctly fetches the value of the slot from
 instances of {\em class}.
 
-\method{ensure-slot-reader}
+\method{ensure-slot-reader}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class.
@@ -1311,7 +1311,7 @@ Function.
 Ensures {\em function} correctly updates the value of the slot in
 instances of {\em class}.
 
-\method{ensure-slot-writer}
+\method{ensure-slot-writer}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class.
@@ -1360,7 +1360,7 @@ Function.
 Computes and returns a function which returns a slot value when
 applied to an instance of {\em class}.
 
-\method{compute-primitive-reader-using-slot}
+\method{compute-primitive-reader-using-slot}{slot}
 %
 \begin{specargs}
     \item[slot, \classref{slot}] Slot description.
@@ -1392,7 +1392,7 @@ Function.
 Computes and returns a function which returns the slot value when
 applied to an instance of {\em class}.
 
-\method{compute-primitive-reader-using-class}
+\method{compute-primitive-reader-using-class}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class.
@@ -1423,7 +1423,7 @@ Function.
 Computes and returns a function which stores a new slot value when
 applied on an instance of {\em class} and a new value.
 
-\method{compute-primitive-writer-using-slot}
+\method{compute-primitive-writer-using-slot}{slot}
 %
 \begin{specargs}
     \item[slot, \classref{slot}] Slot description.
@@ -1455,7 +1455,7 @@ Function.
 Computes and returns a function which stores the new slot value when
 applied on an instance of {\em class} and new value.
 
-\method{compute-primitive-reader-using-class}
+\method{compute-primitive-reader-using-class}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class.
@@ -1495,7 +1495,7 @@ lookup function generating method is provided by the system, each
 generic function has its own specific lookup function which may vary
 from generic function to generic function.
 
-\method{compute-method-lookup-function}
+\method{compute-method-lookup-function}{generic-function}
 %
 \begin{specargs}
     \item[gf, \classref{generic-function}] A generic function.
@@ -1531,7 +1531,7 @@ controls the generic dispatch.  Users may define methods on this
 function for new generic function classes to implement non-default
 dispatch strategies.
 
-\method{compute-discriminating-function}
+\method{compute-discriminating-function}{generic-function}
 %
 \begin{specargs}
     \item[gf, \classref{generic-function}] A generic function.
@@ -1573,7 +1573,7 @@ In contrast to CLOS, \genericref{add-method} does not remove a method with
 the same domain as the method being added. Instead, a noncontinuable
 error is signalled.
 
-\method{add-method}
+\method{add-method}{generic-function}
 %
 \begin{specargs}
     \item[gf, \classref{generic-function}] A generic function.

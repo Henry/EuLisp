@@ -124,7 +124,8 @@ numbers which are \functionref{=} and similarly for characters which are
 \result%
 If the class of {\em object$_1$} and of {\em object$_2$} is the same and is a
 subclass of \classref{character} or \classref{number}, the result is that of
-comparing them under \methodref{binary=}.  Otherwise the result is that of
+comparing them under \methodref{binary=}{character} or
+\methodref{binary=}{number} respectively.  Otherwise the result is that of
 comparing them under \functionref{eq}.
 %
 \examples%
@@ -156,7 +157,7 @@ for \classref{fixed-precision-integer} and \classref{double-float}),
 \classref{string}, \classref{vectors}.  All other cases are handled by the
 default method defined for \classref{object}:
 
-\method{binary=}
+\method{binary=}{object}
 %
 \begin{specargs}
     \item[object$_1$, \classref{object}] An object.
@@ -201,9 +202,9 @@ arguments are the same, otherwise \nil{}.
 \end{arguments}
 %
 \result%
-Given one argument the result is \nil{}.  Given more than one argument the result
-is determined by \genericref{binary=}, returning \nil{} if all the arguments are
-the same, otherwise \true{}.
+Given one argument the result is \nil{}.  Given more than one argument the
+result is determined by \genericref{binary=}, returning \nil{} if all the
+arguments are the same, otherwise \true{}.
 
 \function{<}
 %

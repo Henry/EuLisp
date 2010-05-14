@@ -110,7 +110,7 @@ The class of all characters.
 \result%
 Returns {\em object\/} if it is a character, otherwise \nil{}.
 
-\method{binary=}
+\method{binary=}{character}
 %
 \begin{specargs}
     \item[character$_1$, \classref{character}] A character.
@@ -121,7 +121,7 @@ Returns {\em object\/} if it is a character, otherwise \nil{}.
 If {\em character$_1$\/} is the same character as {\em character$_2$\/} the
 result is {\em character$_1$}, otherwise the result is \nil{}.
 
-\method{binary<}
+\method{binary<}{character}
 %
 \begin{specargs}
     \item[character$_1$, \classref{character}] A character.
@@ -132,7 +132,7 @@ result is {\em character$_1$}, otherwise the result is \nil{}.
 If both characters denote uppercase alphabetic or both denote lowercase
 alphabetic, the result is defined by alphabetical order.  If both characters
 denote a digit, the result is defined by numerical order.  In these three cases,
-if the comparison is true, the result is {\em character$_1$}, otherwise it is
+if the comparison is \true{}, the result is {\em character$_1$}, otherwise it is
 \nil{}.  Any other comparison is an error and the result of such comparisons is
 undefined.
 %
@@ -147,18 +147,7 @@ undefined.
 \end{tabular}
 %
 \seealso%
-Method on \genericref{binary<} for \hyperref[string]{strings}.
-
-%\method{binary=}
-%
-%\begin{specargs}
-%\item[c$_1$, \classref{character}] A character.
-%\item[c$_2$, \classref{character}] A character.
-%\end{specargs}
-%
-%\result%
-%If {\em c$_1$} and {\em c$_2$} denote the same character, the result
-%is {\em c$_1$}, otherwise it is \nil{}.
+Method \methodref{binary<}{string} for \class{string}.
 
 \generic{as-lowercase}
 %
@@ -172,10 +161,9 @@ according to the actions of the appropriate method for the class of {\em
     object}.
 %
 \seealso%
-Another method is defined on \genericref{as-lowercase} for
-\hyperref[string]{strings}.
+Another method \methodref{as-lowercase}{string} for \classref{string}.
 
-\method{as-lowercase}
+\method{as-lowercase}{character}
 %
 \begin{specargs}
     \item[character, \classref{character}] A character.
@@ -197,10 +185,10 @@ according to the actions of the appropriate method for the class of {\em
     object}.
 %
 \seealso%
-Another method is defined on \genericref{as-uppercase} for
-\hyperref[string]{strings}.
+Another method is defined on \methodref{as-uppercase}{string} for
+\classref{string}.
 
-\method{as-uppercase}
+\method{as-uppercase}{character}
 %
 \begin{specargs}
     \item[character, \classref{character}] A character.
@@ -210,7 +198,7 @@ Another method is defined on \genericref{as-uppercase} for
 If {\em character\/} denotes an lower case character, a character denoting its
 upper case counterpart is returned.  Otherwise the result is the argument.
 
-\method{generic-prin}
+\method{generic-prin}{character}
 %
 \begin{specargs}
     \item[character, \classref{character}] Character to be ouptut on {\em
@@ -225,7 +213,7 @@ The character {\em character}.
 \remarks%
 Output the interpretation of {\em character\/} on {\em stream}.
 
-\method{generic-write}
+\method{generic-write}{character}
 %
 \begin{specargs}
     \item[character, \classref{character}] Character to be ouptut on {\em

@@ -154,14 +154,14 @@ result is \nil{}.
 \result%
 The {\em function\/} is applied to argument lists constructed from corresponding
 successive elements of {\em collection\/} and {\em more-collections}.  If the
-result is true, the result of \genericref{anyp} is true and there are no further
+result is \true{}, the result of \genericref{anyp} is \true{} and there are no further
 applications of {\em function\/} to elements of {\em collection\/} and {\em
     more-collections}.  If any of the collections is exhausted, the result of
 \genericref{anyp} is \nil{}.
 %
 \examples
 \begin{tabular}{lcl}
-\verb+(anyp even #(1 2 3 4))+ & \Ra & {\em true}\\
+\verb+(anyp even #(1 2 3 4))+ & \Ra & \true{}\\
 \begin{minipage}[t]{\columnwidth}
 {\tt
     \begin{tabbing}
@@ -178,7 +178,7 @@ applications of {\em function\/} to elements of {\em collection\/} and {\em
         \>\verb|#(3 2) '(1 0))|
     \end{tabbing}}
 \end{minipage}
-& \Ra & {\em true}
+& \Ra & \true{}
 \end{tabular}
 
 \generic{collectionp}
@@ -188,7 +188,7 @@ applications of {\em function\/} to elements of {\em collection\/} and {\em
 \end{genericargs}
 %
 \result%
-Returns true if {\em object\/} is a collection, otherwise \nil{}.
+Returns \true{} if {\em object\/} is a collection, otherwise \nil{}.
 %
 \remarks%
 This predicate does not return {\em object\/} because \nil{}\/ is a
@@ -259,7 +259,7 @@ has natural order or not:
 \end{genericargs}
 %
 \result%
-If there is an element of {\em collection\/} such that test returns true
+If there is an element of {\em collection\/} such that test returns \true{}
 when applied to {\em object|/} and that element, then the result is the modified
 {\em collection\/}, less that element. Otherwise, the result is {\em
     collection\/}.
@@ -341,15 +341,15 @@ of {\em key\/} in {\em collection\/} to refer to {\em value}.
 \end{genericargs}
 %
 \result%
-Returns true if {\em collection\/} is the object identified with the
+Returns \true{} if {\em collection\/} is the object identified with the
 empty object for that class of collection.
 %
 \examples
 \begin{tabular}{lcl}
-    \verb+(emptyp "")+ & \Ra & {\em true}\\
-    \verb+(emptyp ())+ & \Ra & {\em true}\\
-    \verb+(emptyp #())+ & \Ra & {\em true}\\
-    \verb+(emptyp (make <table>))+ & \Ra & {\em true}\\
+    \verb+(emptyp "")+ & \Ra & \true{}\\
+    \verb+(emptyp ())+ & \Ra & \true{}\\
+    \verb+(emptyp #())+ & \Ra & \true{}\\
+    \verb+(emptyp (make <table>))+ & \Ra & \true{}\\
 \end{tabular}
 
 \generic{fill}
@@ -400,8 +400,8 @@ no {\em keys\/} are specified, the whole collection is filled with
 %
 \result%
 The function {\em test\/} is applied to successive elements of {\em
-    collection}. If {\em test\/} returns true when applied to an element, then the
-result of \genericref{find-key} is the key associated with that element.
+    collection}. If {\em test\/} returns \true{} when applied to an element, then
+the result of \genericref{find-key} is the key associated with that element.
 %
 \remarks%
 The value {\em skip\/}, which defaults to zero, indicates how many
@@ -470,18 +470,18 @@ collections is exhausted.
 \end{genericargs}
 %
 \result%
-Returns true if there is an element of {\em collection\/} such that the result
-of the application of {\em test\/} to {\em object\/} and that element is true.
+Returns \true{} if there is an element of {\em collection\/} such that the result
+of the application of {\em test\/} to {\em object\/} and that element is \true{}.
 If {\em test\/} is not supplied, \functionref{eql} is used by default.  Note
-that true denotes any value that is not \nil{}\/ and that the class of the result
+that \true{} denotes any value that is not \nil{}\/ and that the class of the result
 depends on the class of {\em collection}.  In particular, if {\em collection\/}
 is a list, the result of \genericref{member} is a list.
 %
 \examples
 \begin{tabular}{lcl}
-    \verb+(member #\b "abc")+ & \Ra & {\em true}\\
+    \verb+(member #\b "abc")+ & \Ra & \true{}\\
     \verb+(member 'b '(a b c))+ & \Ra & \verb+(b c)+\\
-    \verb+(member 'b #(a b c))+ & \Ra & {\em true}\\
+    \verb+(member 'b #(a b c))+ & \Ra & \true{}\\
     \begin{minipage}[t]{\columnwidth}
         {\tt\begin{tabbing}
                 (m\=ember\\
@@ -490,7 +490,7 @@ is a list, the result of \genericref{member} is a list.
                 \>  \>'entries\\
                 \>  \>'((1 . b) (0 . a) (2 . c))))
             \end{tabbing}}\end{minipage}
-    & \Ra & {\em true}\\
+    & \Ra & \true{}\\
 \end{tabular}
 
 \generic{remove}
@@ -505,7 +505,7 @@ is a list, the result of \genericref{member} is a list.
 \end{genericargs}
 %
 \result%
-If there is an element of {\em collection\/} such that test returns true when
+If there is an element of {\em collection\/} such that test returns \true{} when
 applied to {\em object\/} and that element, then the result is a shallow copy of
 {\em collection\/} less that element. Otherwise, the result is {\em collection}.
 %
@@ -557,7 +557,7 @@ The result is contents of index position 1 of {\em sequence}.
 \end{genericargs}
 %
 \result%
-Returns true if {\em object\/} is a sequence (has natural order),
+Returns \true{} if {\em object\/} is a sequence (has natural order),
 otherwise \nil{}.
 %
 \remarks%
