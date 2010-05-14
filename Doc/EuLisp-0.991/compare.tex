@@ -145,7 +145,7 @@ obtained except in the following cases:
 \end{arguments}
 %
 \result%
-Returns true or false according to the method for the class(es) of {\em
+Returns \true{} or \nil{} according to the method for the class(es) of {\em
     object$_1$} and {\em object$_2$}. It is an error if either or both of the
 arguments is self-referential.
 %
@@ -190,9 +190,20 @@ Class specific methods on \genericref{binary<} are defined for
 \end{arguments}
 %
 \result%
-Given one argument the result is true.  Given more than one argument the result
-is determined by \genericref{binary=}, returning true if all the arguments are
-the same, otherwise \nil{}.
+Given one argument the result is \true{}.  Given more than one argument the
+result is determined by \genericref{binary=}, returning \true{} if all the
+arguments are the same, otherwise \nil{}.
+
+\function{!=}
+%
+\begin{arguments}
+    \item[{number$_1$ \ldots}] A non-empty sequence of numbers.
+\end{arguments}
+%
+\result%
+Given one argument the result is \nil{}.  Given more than one argument the result
+is determined by \genericref{binary=}, returning \nil{} if all the arguments are
+the same, otherwise \true{}.
 
 \function{<}
 %
@@ -201,10 +212,48 @@ the same, otherwise \nil{}.
 \end{arguments}
 %
 \result%
-Given one argument the result is true.  Given more than one argument the result
-is true if the sequence of objects {\em object$_1$} up to {\em object$_n$} is
-strictly increasing according to the generic function \genericref{binary<}.
-Otherwise, the result is \nil{}.
+Given one argument the result is \true{}.  Given more than one argument the
+result is \true{} if the sequence of objects {\em object$_1$} up to {\em
+    object$_n$} is strictly increasing according to the generic function
+\genericref{binary<}.  Otherwise, the result is \nil{}.
+
+\function{>}
+%
+\begin{arguments}
+    \item[object$_1$ \ldots] A non-empty sequence of objects.
+\end{arguments}
+%
+\result%
+Given one argument the result is \true{}.  Given more than one argument the
+result is \true{} if the sequence of objects {\em object$_1$} up to {\em
+    object$_n$} is strictly decreasing according to the generic function
+\genericref{binary<} applied to the arguments in reverse order.  Otherwise, the
+result is \nil{}.
+
+\function{<=}
+%
+\begin{arguments}
+    \item[object$_1$ \ldots] A non-empty sequence of objects.
+\end{arguments}
+%
+\result%
+Given one argument the result is \true{}.  Given more than one argument the
+result is \true{} if the sequence of objects {\em object$_1$} up to {\em
+    object$_n$} is strictly increasing according to the generic function
+\genericref{binary<} and \genericref{binary=}.  Otherwise, the result is \nil{}.
+
+\function{>=}
+%
+\begin{arguments}
+    \item[object$_1$ \ldots] A non-empty sequence of objects.
+\end{arguments}
+%
+\result%
+Given one argument the result is \true{}.  Given more than one argument the
+result is \true{} if the sequence of objects {\em object$_1$} up to {\em
+    object$_n$} is strictly decreasing according to the generic function
+\genericref{binary<} and \genericref{binary=} applied to the arguments in
+reverse order.  Otherwise, the result is \nil{}.
 
 \function{max}
 %
