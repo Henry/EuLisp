@@ -76,8 +76,8 @@ This is the condition class for all collection processing conditions.
     \item[obj, \classref{object}] The object which is the initial value for the
     accumulation operation.
 %
-    \item[collection, \classref{collection}] The collection which is the subject of
-    the accumulation operation.
+    \item[collection, \classref{collection}] The collection which is the subject
+    of the accumulation operation.
 \end{genericargs}
 %
 \result%
@@ -111,8 +111,8 @@ that any particular implementation must give.
 \begin{genericargs}
     \item[function, \classref{function}] A function of two arguments.
 %
-    \item[collection, \classref{collection}] The collection which is the subject of the
-    accumulation operation.
+    \item[collection, \classref{collection}] The collection which is the subject
+    of the accumulation operation.
 \end{genericargs}
 %
 \result%
@@ -143,8 +143,8 @@ result is \nil{}.
 \generic{anyp}
 %
 \begin{genericargs}
-    \item[function, \classref{function}] A function to be used as a predicate on the
-    elements of the collection(s).
+    \item[function, \classref{function}] A function to be used as a predicate on
+    the elements of the collection(s).
 %
     \item[collection, \classref{collection}] A collection.
 %
@@ -154,9 +154,9 @@ result is \nil{}.
 \result%
 The {\em function\/} is applied to argument lists constructed from corresponding
 successive elements of {\em collection\/} and {\em more-collections}.  If the
-result is \true{}, the result of \genericref{anyp} is \true{} and there are no further
-applications of {\em function\/} to elements of {\em collection\/} and {\em
-    more-collections}.  If any of the collections is exhausted, the result of
+result is \true{}, the result of \genericref{anyp} is \true{} and there are no
+further applications of {\em function\/} to elements of {\em collection\/} and
+{\em more-collections}.  If any of the collections is exhausted, the result of
 \genericref{anyp} is \nil{}.
 %
 \examples
@@ -293,10 +293,11 @@ result is discarded.  Application stops if any of the collections is exhausted.
 \generic{element}
 %
 \begin{genericargs}
-    \item[collection, \classref{collection}] The object to be accessed or updated.
+    \item[collection, \classref{collection}] The object to be accessed or
+    updated.
     %
-    \item[key, \classref{object}] The object identifying the key of the element in
-    {\em collection}.
+    \item[key, \classref{object}] The object identifying the key of the element
+    in {\em collection}.
 \end{genericargs}
 %
 \result%
@@ -319,13 +320,14 @@ The value associated with {\em key\/} in {\em collection}.
 \setter{element}
 %
 \begin{genericargs}
-    \item[collection, \classref{collection}] The object to be accessed or updated.
+    \item[collection, \classref{collection}] The object to be accessed or
+    updated.
     %
-    \item[key, \classref{object}] The object identifying the key of the element in
-    {\em collection}.
+    \item[key, \classref{object}] The object identifying the key of the element
+    in {\em collection}.
     %
-    \item[value, \classref{object}] The object to replace the value associated with
-    {\em key\/} in {\em collection\/} (for setter).
+    \item[value, \classref{object}] The object to replace the value associated
+    with {\em key\/} in {\em collection\/} (for setter).
 \end{genericargs}
 %
 \result%
@@ -355,9 +357,11 @@ empty object for that class of collection.
 \generic{fill}
 %
 \begin{genericargs}
-    \item[collection, \classref{collection}] A collection to be (partially) filled.
+    \item[collection, \classref{collection}] A collection to be (partially)
+    filled.
     %
-    \item[object, \classref{object}] The object with which to fill {\em collection}.
+    \item[object, \classref{object}] The object with which to fill {\em
+        collection}.
     %
     \item[\optional{keys}] The keys with which {\em object\/} is to be
     associated.
@@ -400,15 +404,16 @@ no {\em keys\/} are specified, the whole collection is filled with
 %
 \result%
 The function {\em test\/} is applied to successive elements of {\em
-    collection}. If {\em test\/} returns \true{} when applied to an element, then
-the result of \genericref{find-key} is the key associated with that element.
+    collection}. If {\em test\/} returns \true{} when applied to an element,
+then the result of \genericref{find-key} is the key associated with that
+element.
 %
 \remarks%
-The value {\em skip\/}, which defaults to zero, indicates how many
-successful tests are to be made before returning a result. The value {\em
-    failure}, which defaults to \nil{}, is returned if no key satisfying the
-test was found. Note that {\em skip\/} and {\em failure\/} are positional arguments
-and that {\em skip\/} must be specified if {\em failure\/} is specified.
+The value {\em skip\/}, which defaults to zero, indicates how many successful
+tests are to be made before returning a result. The value {\em failure}, which
+defaults to \nil{}, is returned if no key satisfying the test was found. Note
+that {\em skip\/} and {\em failure\/} are positional arguments and that {\em
+    skip\/} must be specified if {\em failure\/} is specified.
 
 \generic{first}
 %
@@ -470,12 +475,12 @@ collections is exhausted.
 \end{genericargs}
 %
 \result%
-Returns \true{} if there is an element of {\em collection\/} such that the result
-of the application of {\em test\/} to {\em object\/} and that element is \true{}.
-If {\em test\/} is not supplied, \functionref{eql} is used by default.  Note
-that \true{} denotes any value that is not \nil{}\/ and that the class of the result
-depends on the class of {\em collection}.  In particular, if {\em collection\/}
-is a list, the result of \genericref{member} is a list.
+Returns \true{} if there is an element of {\em collection\/} such that the
+result of the application of {\em test\/} to {\em object\/} and that element is
+\true{}.  If {\em test\/} is not supplied, \functionref{eql} is used by default.
+Note that \true{} denotes any value that is not \nil{}\/ and that the class of
+the result depends on the class of {\em collection}.  In particular, if {\em
+    collection\/} is a list, the result of \genericref{member} is a list.
 %
 \examples
 \begin{tabular}{lcl}
@@ -601,7 +606,8 @@ The result of sort is a new {\em sequence} comprising the elements of {\em
     sequence\/} ordered according to {\em comparator}.
 %
 \remarks%
-Methods on this function are only defined for \classref{list} and \classref{vector}.
+Methods on this function are only defined for \classref{list} and
+\classref{vector}.
 
 \generic{sort!}
 %
@@ -615,18 +621,8 @@ Destructively sorts the elements of {\em sequence} (see \genericref{sort}) and
 returns it.
 %
 \remarks%
-Methods on this function are only defined for \classref{list} and \classref{vector}.
-
-\generic{reverse!}
-%
-\begin{genericargs}
-    \item[collection, \classref{collection}] A collection.
-\end{genericargs}
-%
-\result%
-Destructively reverses the order of the elements in {\em collection\/} (see
-\genericref{reverse}) and returns it.
-
+Methods on this function are only defined for \classref{list} and
+\classref{vector}.
 
 \generic{third}
 %
