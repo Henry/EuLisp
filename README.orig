@@ -28,7 +28,7 @@ Virtual Multicomputer Architecture (see Denton and VIM Projects). Object
 serialization and inter-process communication (Sockets, MPI, Harvest Object
 Cache) support the migration of arbitray data and code.
 
-The system reuses ideas from the Oaklisp system written by Barak Perlmutter
+The system reuses ideas from the Oaklisp system written by Barak Pearlmutter
 and Kevin Lang. The meta-object protocol (Telos) was originally implemented
 in Common Lisp by Russell Bradford. By default, a garbage collector written
 by Hans Boehm and Alan Demers is used.
