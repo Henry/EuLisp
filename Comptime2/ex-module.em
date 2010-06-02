@@ -25,6 +25,7 @@
       (and x
            (ct-warning () "redefinition of expander ~a"  key))
       ((setter get-module-expander) key fun)))
+
   (defun module-expander (x e)
     (let* ((key (and (consp x) (car x)))
            (expander
