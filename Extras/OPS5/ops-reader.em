@@ -47,14 +47,14 @@
          (object ^name ladder ^at <p>)
          (monkey ^on ladder)
          -->
-         (make goal ^status active ^type holds ^object nil))
+         (make goal ^status active ^type holds ^object ()))
 
 
       (p mb4
          (goal ^status active ^type holds ^object <w>)
          (object ^name <w> ^at <p> ^on ceiling)
          (object ^name ladder ^at <p>)
-         (monkey ^on ladder ^holds nil)
+         (monkey ^on ladder ^holds ())
          -->
          (write (crlf) grab <w>)
          (modify 4 ^holds <w>)
@@ -72,13 +72,13 @@
          (object ^name <w> ^at <p> ^on floor)
          (monkey ^at <p>)
          -->
-         (make goal ^status active ^type holds ^object nil))
+         (make goal ^status active ^type holds ^object ()))
 
 
       (p mb7
          (goal ^status active ^type holds ^object <w>)
          (object ^name <w> ^at <p> ^on floor)
-         (monkey ^at <p> ^holds nil)
+         (monkey ^at <p> ^holds ())
          -->
          (write (crlf) grab <w>)
          (modify 3 ^holds <w>)
@@ -113,7 +113,7 @@
 
       (p mb12
          (goal ^status active ^type walk-to ^object <p>)
-         (monkey ^on floor ^at {<c> <> <p>} ^holds nil)
+         (monkey ^on floor ^at {<c> <> <p>} ^holds ())
          -->
          (write (crlf) walk to <p>)
          (modify 2 ^at <p>)
@@ -122,7 +122,7 @@
 
       (p mb13
          (goal ^status active ^type walk-to ^object <p>)
-         (monkey ^on floor ^at {<c> <> <p>} ^holds {<w> <> nil})
+         (monkey ^on floor ^at {<c> <> <p>} ^holds {<w> <> ()})
          (object ^name <w>)
          -->
          (write (crlf) walk to <p>)
@@ -149,24 +149,24 @@
          (object ^name <o> ^at <p>)
          (monkey ^at <p>)
          -->
-         (make goal ^status active ^type holds ^object nil))
+         (make goal ^status active ^type holds ^object ()))
 
 
       (p mb17
          (goal ^status active ^type on ^object <o>)
          (object ^name <o> ^at <p>)
-         (monkey ^at <p> ^holds nil)
+         (monkey ^at <p> ^holds ())
          -->
          (write (crlf) climb onto <o>)
          (modify 3 ^on <o>)
          (modify 1 ^status satisfied))
 
       (p mb18
-         (goal ^status active ^type holds ^object nil)
-         (monkey ^holds {<x> <> nil})
+         (goal ^status active ^type holds ^object ())
+         (monkey ^holds {<x> <> ()})
          -->
          (write (crlf) drop <x>)
-         (modify 2 ^holds nil)
+         (modify 2 ^holds ())
          (modify 1 ^status satisfied))
 
       (p mb19

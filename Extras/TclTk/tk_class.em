@@ -55,7 +55,7 @@
         (progn
           (format t "Can't create ~s. Parent incorrect.\n" type)
           (flush)
-          nil)
+          ())
       (let (x)
         (cond
           ((eq type 'button)

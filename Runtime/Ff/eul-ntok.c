@@ -296,16 +296,8 @@ int read_into_buffer(int _file, char *buf, int n)
     }                                                                          \
     *p = '\0';                                                                 \
                                                                                \
-    /* If the symbol is `nil' return eul_nil which is maps to () */            \
-    /* Thus (eq 'nil '()) => t */                                              \
-    if (strcmp(symtok, "nil") == 0)                                            \
-    {                                                                          \
-        RETURN_NIL();                                                          \
-    }                                                                          \
-    else                                                                       \
-    {                                                                          \
-        RETURN_SYMBOL(symtok, symsize);                                        \
-    }                                                                          \
+    RETURN_SYMBOL(symtok, symsize);                                            \
+                                                                               \
     SHOW_STATE("after symbol");
 
 

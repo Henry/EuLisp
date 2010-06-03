@@ -127,7 +127,7 @@
        ,@body))
 
   (defun filter (pred l)
-    (if (null l) ()
+    (if (null? l) ()
       (if (pred (car l))
           (cons (car l) (filter pred (cdr l)))
         (filter pred (cdr l)))))

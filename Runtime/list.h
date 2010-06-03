@@ -9,13 +9,13 @@ extern LispRef list_bindings[];
 
 /* Module binding indices */
 #define proper_list_p_fn_index 25 
-#define car_fn_index 31 
+#define car_fn_index 32 
 #define cadddr_fn_index 11 
 #define caar_fn_index 27 
 #define cdadr_fn_index 21 
 #define as_proper_list_fn_index 9 
 #define accumulate_list_fn_index 17 
-#define list_fn_index 26 
+#define list_fn_index 27 
 #define caaar_fn_index 24 
 #define cadar_fn_index 19 
 #define cdaar_fn_index 23 
@@ -32,16 +32,16 @@ extern LispRef list_bindings[];
 #define reverse_list_fn_index 24 
 #define map1_list_last_special_fn_index 18 
 #define _cons__X60_X62_fn_index 72 
-#define cdr_fn_index 37 
-#define listp_fn_index 16 
-#define consp_fn_index 15 
+#define cdr_fn_index 38 
+#define listp_fn_index 17 
+#define consp_fn_index 16 
 #define list_ref_fn_index 21 
 #define cdar_fn_index 3 
 #define select_list_fn_index 26 
 #define list_drop_fn_index 2 
 #define member_list_fn_index 20 
 #define accumulate1_list_fn_index 15 
-#define atom_fn_index 13 
+#define atom_fn_index 14 
 #define slice_list_fn_index 28 
 #define null_fn_index 7 
 #define map2_list_fn_index 10 

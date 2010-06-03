@@ -29,13 +29,13 @@
 #define eul_static_nil eul_as_static(PGLOBAL(glob_nil))
 
 ///-----------------------------------------------------------------------------
-/// nil allocation (include a slot for the symbol name `nil')
+/// nil allocation
 ///-----------------------------------------------------------------------------
 
-#define EUL_NIL_SIZE (c_int_as_eul_int(1))
+#define EUL_NIL_SIZE (c_int_as_eul_int(0))
 
 #define eul_allocate_static_nil(loc)                                           \
-    LispRef loc##_static[] = {EUL_NIL_SIZE, NULL, NULL};                       \
+    LispRef loc##_static[] = {EUL_NIL_SIZE, NULL};                             \
     LispRef loc = eul_static_nil
 
 #define eul_finalize_nil(loc)                                                  \
@@ -53,7 +53,7 @@
     eul_allocate_object(loc, eul_nil, CLASS_SIZE, eul_nil)
 
 #define eul_allocate_static_class(loc)                                         \
-    LispRef loc##_static[] =                                                  \
+    LispRef loc##_static[] =                                                   \
     {                                                                          \
         EUL_CLASS_SIZE, eul_static_nil,                                        \
         eul_static_nil, eul_static_nil, eul_static_nil,                        \

@@ -148,7 +148,7 @@
               (if *interpreter*
                   ;; This returns the function
                   (e `(deflocal ,name (named-lambda ,name ,params ,@body)) e)
-                ;; This returns nil
+                ;; This returns ()
                 (make-defined-fun name params body))
             (if (eq (car name) 'setter)
                 (let ((binding (get-lexical-binding (cadr name))))

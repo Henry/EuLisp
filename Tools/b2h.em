@@ -19,9 +19,9 @@
   (syntax (macros vmeta b2h-aux)
    import (level1))
 
-  (deflocal old-style nil)
-  (deflocal verbose nil)
-  (deflocal debug nil)
+  (deflocal old-style ())
+  (deflocal verbose ())
+  (deflocal debug ())
   (deflocal bytecodes-found 0)
   (deflocal bytecodes-output 0) ; Doesn't include non-specified bytecodes.
 

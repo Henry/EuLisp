@@ -358,12 +358,8 @@
   (export newline)
 
   (defun not (x)
-    (null x))
+    (null? x))
   (declare-inline not)
-
-  (defun null? (x)
-    (null x))
-  (declare-inline null?)
 
   (defun number? (x)
     (numberp x))
@@ -448,10 +444,10 @@
 
   ;  (defun remq! (x y)
   ;    (cond
-  ;     ((null y) y)
+  ;     ((null? y) y)
   ;     ((eq x (car y)) (remq! x (cdr y)))
   ;     (t (let loop ((prev y))
-  ;            (cond ((null (cdr prev))
+  ;            (cond ((null? (cdr prev))
   ;                   y)
   ;                  ((eq (cadr prev) x)
   ;                   ((setter cdr) prev (cddr prev))

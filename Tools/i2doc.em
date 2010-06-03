@@ -17,7 +17,7 @@
 
   (defextern strftime (<string>) <string> "eul_strftime")
 
-  (deflocal note-renaming nil)
+  (deflocal note-renaming ())
   (deflocal internal-sort t)
   (deflocal print-header t)
   (deflocal saved-bindings '())
@@ -51,7 +51,7 @@
       (let* ((renamed (if (and note-renaming (not (eq name oname)))
                           " !!!" "")))
         (when (and pos (not (eq class 'ff)))
-          (let ((s (format nil "  ~a ~a ~a ~a~a"
+          (let ((s (format () "  ~a ~a ~a ~a~a"
                            name pos omodule oname renamed)))
             (if internal-sort
                 (setq saved-bindings (cons saved-bindings))

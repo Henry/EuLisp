@@ -204,7 +204,7 @@
                                      local-index: pos)))
           ((setter env) binding-name proper-binding)
           proper-binding)
-      ;; binding not hard-coded or nil
+      ;; binding not hard-coded or ()
       binding))
 
 ;;;-----------------------------------------------------------------------------

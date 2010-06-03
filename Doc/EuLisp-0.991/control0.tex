@@ -20,8 +20,6 @@ conforming program cannot rely on adherence to these expansions.
     What happens with vectors, instances etc.  They can be printed out, so why
     can't they be constants too.
 
-    Describe relationship of empty list to nil here.
-
     HED wants ids as well as ids and initializers for \macroref{let}.
 \end{optPrivate}
 %
@@ -70,14 +68,6 @@ itself\index{general}{processing!constants}.
 The value of \scref{form} is stored in the top-lexical binding of
 \scref{identifier}.  It is a violation to attempt to modify the binding of a
 defined constant.
-
-\constant{nil}{null}
-%
-\remarks%
-The symbol {\tt nil} is defined to be equivalent to the empty list, which is
-represented as \nil{}, \ie {\tt (\functionref{eq} 'nil '\nil{})} $\Rightarrow$
-\true{}.  The empty list is used to denote the abstract boolean value
-\sc{false}.
 
 \constant{t}{symbol}
 %
@@ -793,11 +783,11 @@ signalled.
           (with-handler
             (lambda (condition resume) (fail ()))
             (succeed (apply open
-                       (format nil "~a/~a" path name)
+                       (format () "~a/~a" path name)
                        options)))))
       pathlist)
     (error
-      (format nil
+      (format ()
         "path-open: cannot open stream for (~a) ~a"
         pathlist name)
       <cannot-open-path>)))

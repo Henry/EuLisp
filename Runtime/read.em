@@ -49,7 +49,7 @@
   (defun parse (s eos-error-p eos-value)
     (let parse-loop
       ((tok (ntok s special-tokens))
-       (in-quasiquote nil))
+       (in-quasiquote ()))
       (cond
         ((specialp tok)
          (cond
@@ -274,7 +274,7 @@
          (with-handler
            (lambda (c k)
              (output-condition-contents c)
-             (restart nil))
+             (restart ()))
            (setq x (read lispin () (eos-default-value)))
            (if (eq x (eos-default-value))
                (progn (print "Exiting") (exit 0))

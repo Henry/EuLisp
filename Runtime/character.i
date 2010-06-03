@@ -13,7 +13,7 @@
     ((name . character-as-string) (pos . 11) (origin character . character-as-string))
     ((name . <character>) (pos . 7) (origin character . <character>) (class . constant))
     ((name . alphap) (pos . 6) (origin character . alphap))
-    ((name . characterp) (pos . 27) (origin boot1 . characterp) (inline (G0041 (characterp))))
+    ((name . characterp) (pos . 28) (origin boot1 . characterp) (inline (G0043 (characterp))))
     ((name . graphp) (pos . 8) (origin character . graphp))
     ((name . as-lowercase) (pos . 4) (origin character . as-lowercase))
     ((name . as-uppercase) (pos . 9) (origin character . as-uppercase))

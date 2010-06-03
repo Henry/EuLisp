@@ -103,7 +103,7 @@ int eul_hash_object_aux(LispRef key, int *leaves)
             return (ptrInt)key;
     }
 
-    // nil is not a proper leave
+    // () is not a proper leave
     if (eul_null(key))
     {
         (*leaves)--;

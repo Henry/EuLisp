@@ -13,7 +13,7 @@
 
   (print "### basic")
 
-  (defconstant NIL nil)
+  (defconstant NIL ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; List operations

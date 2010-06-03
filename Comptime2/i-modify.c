@@ -56,7 +56,7 @@ void initialize_module_i_modify()
   static const void *G003483[] = {I(ab,86,45,02)};
 
   /* Byte-vector with size: 25 is_init: 0 index: 13 binding: file-exist-p */
-  static const void *G003485[] = {I(aa,1b,24,00),B(i_param ,11),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,4e),I(24,00,00,00),B(stream ,12),I(1d,24,00,00),B(i_param ,17),I(24,00,00,00),B(boot ,9),I(3c,03,1b,34),I(00,00,00,29),I(1b,11,24,00),B(i_param ,11),I(24,00,00,00),B(boot1 ,41),I(3c,01,1f,04),I(1d,1d,3c,02),I(2a,1c,22,02),I(32,00,00,00),I(00,00,00,09),I(86,22,01,45),I(02,00,00,00)};
+  static const void *G003485[] = {I(aa,1b,24,00),B(i_param ,11),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,4e),I(24,00,00,00),B(stream ,12),I(1d,24,00,00),B(i_param ,17),I(24,00,00,00),B(boot ,9),I(3c,03,1b,34),I(00,00,00,29),I(1b,11,24,00),B(i_param ,11),I(24,00,00,00),B(boot1 ,42),I(3c,01,1f,04),I(1d,1d,3c,02),I(2a,1c,22,02),I(32,00,00,00),I(00,00,00,09),I(86,22,01,45),I(02,00,00,00)};
 
   eul_allocate_static_string(str_3489, "", 0);
   eul_allocate_static_string(str_3490, "file ~a does not exist", 22);

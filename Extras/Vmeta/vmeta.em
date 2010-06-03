@@ -65,8 +65,8 @@
 ;;      If {min} is specified by itself, matches exactly {min} of {exp}.
 ;;      If {min} and {max} are specified, matches at least {min} and at most
 ;;      {max} of {exp}.
-;;      {min} and {max} can be NIL, in which case they do not limit
-;;      (Thus, (star {exp} 3 nil) matches at least 3 of {exp}, and possibly
+;;      {min} and {max} can be (), in which case they do not limit
+;;      (Thus, (star {exp} 3 ()) matches at least 3 of {exp}, and possibly
 ;;      more.)
 ;;
 ;;  (not {exp})
@@ -106,7 +106,7 @@
                           inits))
             (cond (,(car test)
                    ,@(if (null (cdr test))
-                         '(nil)
+                         '(())
                        (cdr test)))
                   (t
                     ,@body
@@ -130,7 +130,7 @@
       ((stringp x)
        `(let ((old-index index))         ; 'old-index' is a *lexical* variable.
           (or (and ,@(map (lambda (c) `(match-literal ,c)) (convert x <list>)))
-              (progn (setq index old-index) nil))))))
+              (progn (setq index old-index) ()))))))
 
   ;; Doesn't work in EuLisp!!!  ???
   ;; Baker's match-type, for strings.
@@ -142,8 +142,8 @@
   ;; This is only so complicated because we allow
   ;;   (star x) to match zero or more Xs,
   ;;   (star x min) to match exactly MIN Xs,
-  ;;   (star x min nil) to match at least MIN Xs,
-  ;;   (star x nil max) to match at most MAX Xs, and
+  ;;   (star x min ()) to match at least MIN Xs,
+  ;;   (star x () max) to match at most MAX Xs, and
   ;;   (star x min max) to match at least MIN and at most MAX Xs.
   (defun match-star (min-specified max-specified min max matcher x)
     (cond
@@ -158,7 +158,7 @@
        `(iter ((i 0 (+ i 1)))
               ((or (> i ,min) (not ,matcher))
                (and (binary= i ,min)))))
-      ;; Min specified, but max is nil, so match
+      ;; Min specified, but max is (), so match
       ;; at least min.
       ((and min max-specified (not max))
        ;;    (format stderr "match at least ~s: ~s\n" min x)
@@ -199,14 +199,14 @@
                    (pred (cadr x))
                    (seq `(and ,@(map (lambda (x) (helper x t))
                                      (cdr x))))
-                   (alt `(or ,@(map (lambda (x) (helper x nil))
+                   (alt `(or ,@(map (lambda (x) (helper x ()))
                                     (cdr x))))
                    ;; This is complicated by the fact that @typepred results in
                    ;; (type . typepred)
                    (type
                      ;                (format stderr "~s" x)
                      (if (symbolp (cdr x))
-                         `(match-type ,(cdr x) nil)
+                         `(match-type ,(cdr x) ())
                        `(match-type ,(cadr x) ,(if (> 2 (size x))
                                                    (caddr x)
                                                  ()))))

@@ -19,7 +19,7 @@
   ;(with-handler
   ;(lambda (c k)
   ;(output-condition-contents c)
-  ;(restart nil))
+  ;(restart ()))
   ;(setq x (read lispin () (eos-default-value)))
   ;(if (eq x (eos-default-value))
   ;(progn (print "Exiting") (exit 0))

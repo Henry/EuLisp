@@ -81,7 +81,6 @@
      ?
      (cond ((symbolp x)
             (cond ((eq x 't) t)
-                  ;; ((eq x 'nil) nil) ; The parser now maps 'nil to '()
                   ((eq x '?) ?)
                   (t (dynamic-binding-ref x *current-module-name*))))
            ((consp x)

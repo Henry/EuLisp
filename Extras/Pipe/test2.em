@@ -12,7 +12,7 @@
   (let ((x (make <pipe> process: "ls -l"))
         (str ""))
     (while
-        (setq str (read-line x nil nil))
+        (setq str (read-line x () ()))
       (prin str)))
 
 ;;;-----------------------------------------------------------------------------

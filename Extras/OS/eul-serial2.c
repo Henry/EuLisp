@@ -105,7 +105,7 @@ LispRef eul_sort_modules()
 
 ///-----------------------------------------------------------------------------
 /// Get binding location using a ptr: #(obj module_name index)
-/// obj is nil if the binding is located in one of the standard modules
+/// obj is () if the binding is located in one of the standard modules
 /// e.g. contained in level1
 ///-----------------------------------------------------------------------------
 
@@ -191,7 +191,7 @@ LispRef eul_get_binding_location(LispRef *ptr, LispRef std_modules)
 ///-----------------------------------------------------------------------------
 /// Reveal the binding references of bytevectors
 /// Returns a list of #(obj module_name index) for each reference
-/// obj is nil if the binding is located in one of the standard modules
+/// obj is () if the binding is located in one of the standard modules
 /// e.g. contained in level1
 ///-----------------------------------------------------------------------------
 

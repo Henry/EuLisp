@@ -10,7 +10,7 @@
     ((name . name) (pos . 8) (origin collect . name))
     ((name . symbol-name) (pos . 62) (origin mop-class . symbol-name) (inline (G00759 (static-ref0) (primitive-ref))))
     ((name . keywordp) (pos . 3) (origin symbol . keywordp))
-    ((name . symbolp) (pos . 43) (origin boot1 . symbolp) (inline (G0045 (symbolp))))
+    ((name . symbolp) (pos . 44) (origin boot1 . symbolp) (inline (G0047 (symbolp))))
     ((name . <name>) (pos . 34) (origin mop-class . <name>) (class . constant))
     ((name . gensym) (pos . 6) (origin symbol . gensym))
     ((name . keyword-name) (pos . 7) (origin mop-class . keyword-name) (inline (G00761 (static-ref0) (primitive-ref))))
