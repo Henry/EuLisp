@@ -26,7 +26,7 @@
     (let ((expander
            (cond
             ((symbolp x) (lambda (x e) (expose-module x)))
-            ((null (consp x)) (lambda (x e) x))
+            ((null? (consp x)) (lambda (x e) x))
             ((symbolp (car x))
              (let ((expose-expander (get-expose-expander (car x))))
                (if expose-expander

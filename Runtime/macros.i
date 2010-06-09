@@ -87,7 +87,7 @@ system: ~a
     (break . 50)
     (labels . 49)
     (when . 48)
-    (null . 46)
+    (null? . 46)
     (while . 44)
     (cons . 42)
     (dynamic . 41)

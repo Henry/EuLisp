@@ -19,7 +19,7 @@
     (if (and (eq method-class <simple-method>)
              ;(vectorp domain)
              (functionp fun)
-             (null inits))
+             (null? inits))
         (let ((meth (primitive-allocate <simple-method> method-size)))
           ((setter method-domain) meth domain)
           ((setter method-function) meth fun)
@@ -105,7 +105,7 @@
   (defun primitive-find-method (gf sig)
     (labels
      ((loop (meths)
-            (if (null meths) ()
+            (if (null? meths) ()
               (let ((meth (car meths)))
                 (if (sig= (method-domain meth) sig)
                     meth
@@ -197,7 +197,7 @@
             (method-cache-index (vector-ref method-cache 1))
             (appl-meths (apply lookup values))
             (meth-funs (map1-list method-function appl-meths)))
-       (if (null meth-funs)
+       (if (null? meth-funs)
            (error-no-applicable-methods gf values)
          (let ((entry (cons value-dom meth-funs)))
            ((setter vector-ref) method-cache method-cache-index entry)

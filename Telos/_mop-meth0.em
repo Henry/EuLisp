@@ -39,34 +39,34 @@
 ;;; Defmethod auxilary functions
 ;;;-----------------------------------------------------------------------------
   (defmacro defmethod-keywords (form)
-    (if (atom (car form))
+    (if (atom? (car form))
         (cons (car form)
               (cons (car (cdr form))
                     (defmethod-keywords (cdr (cdr form)))))
       ()))
 
   (defmacro defmethod-sig (form)
-    (if (atom (car form))
+    (if (atom? (car form))
         (defmethod-sig (cdr (cdr form)))
       (car form)))
 
   (defmacro defmethod-body (form)
-    (if (atom (car form))
+    (if (atom? (car form))
         (defmethod-body (cdr (cdr form)))
       (cdr form)))
 
   (defmacro defmethod-args (sig)
     ;; allows { symbol | (symbol+ [ . symbol ]) }
-    (cond ((null sig) ())
-          ((atom sig) sig)
-          ((atom (car sig)) (cons (car sig)
+    (cond ((null? sig) ())
+          ((atom? sig) sig)
+          ((atom? (car sig)) (cons (car sig)
                                   (defmethod-args (cdr sig))))
           (t (cons (caar sig)
                    (defmethod-args (cdr sig))))))
 
   (defmacro defmethod-domain (sig)
-    (cond ((atom sig) ())
-          ((atom (car sig))
+    (cond ((atom? sig) ())
+          ((atom? (car sig))
            (cons () (defmethod-domain (cdr sig))))
           (t (cons (cadr (car sig)) (defmethod-domain (cdr sig))))))
 

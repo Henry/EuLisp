@@ -69,7 +69,7 @@ void initialize_module__stream0()
 
   /* Initializations */
   eul_allocate_bytevector( G00467,G00466);
-  eul_intern_symbol(sym_470,"null");
+  eul_intern_symbol(sym_470,"null?");
   eul_intern_symbol(sym_471,"setq");
   eul_intern_symbol(sym_472,"car");
   eul_intern_symbol(sym_473,"cdr");

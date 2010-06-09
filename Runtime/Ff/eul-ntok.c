@@ -26,6 +26,7 @@
 #define HEX_INSERTION 'x'
 #define N_HEX_DIGITS 4
 #define EXTENSION_MARK '#'
+#define SHEBANG '!'
 #define LIST_START '('
 #define LIST_STOP ')'
 #define CHARACTER_START '\\'
@@ -592,6 +593,20 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
             {
                 c++;
                 RETURN_SPECIAL(OBJECT_COMMENT_START);
+            }
+            else if (*c == SHEBANG)
+            {
+                c++;
+                CHK_OVERFLOW("shebang", RETURN_SPECIAL(EOF));
+                while (*c != '\n')
+                {
+                    c++;
+                    if (EOB)
+                    {
+                        n = FILL_BUFFER();
+                        BUFFER_RESET();
+                    }
+                }
             }
             else if (*c == CHARACTER_START)
             {

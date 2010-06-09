@@ -194,7 +194,7 @@
 
   (defun default-read-action (s eos-error? eos-value)
     (let ((source (stream-source s)))
-      (if (and (null (control-block-buffer source))
+      (if (and (null? (control-block-buffer source))
                (int-binary= (fill-buffer s) 0))
           (if eos-error? (end-of-stream s) eos-value)
         (let* ((buf (control-block-buffer source))

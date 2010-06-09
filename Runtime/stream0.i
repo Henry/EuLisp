@@ -45,7 +45,7 @@
     (cdr . 13)
     (car . 12)
     (setq . 11)
-    (null . 10)
+    (null? . 10)
    )
    literals (
    )

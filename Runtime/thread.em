@@ -181,12 +181,12 @@
   (deflocal current-thread-queue (lambda () *thread-queue*))
 
   (defun thread-queue-append (thrd)
-    (if (null *thread-queue*)
+    (if (null? *thread-queue*)
         (setq *thread-queue* (cons thrd ()))
       (tconc *thread-queue* thrd)))
 
   (defun thread-queue-remove ()
-    (if (null *thread-queue*)
+    (if (null? *thread-queue*)
         (error "empty thread queue")
       (let ((thrd (car *thread-queue*)))
         (setq *thread-queue* (cdr *thread-queue*))
@@ -194,7 +194,7 @@
 
   (defun thread-queue-remove-last ()
     (let ((ll (reverse-list *thread-queue*)))
-      (if (null ll)
+      (if (null? ll)
           (error "empty thread queue")
         (let ((thrd (car ll)))
           (setq *thread-queue* (reverse-list (cdr ll)))
@@ -203,10 +203,10 @@
   (defun tconc (l x)
     (labels
      ((loop (ll)
-            (if (null (cdr ll))
+            (if (null? (cdr ll))
                 ((setter cdr) ll (cons x ()))
               (loop (cdr ll)))))
-     (if (null l)
+     (if (null? l)
          (setq l (cons x ()))  ; no side effect!
        (loop l))
      l))

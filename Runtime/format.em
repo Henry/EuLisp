@@ -21,7 +21,7 @@
       (apply format ss str args)
       (labels
        ((loop (ll res)
-              (if (null ll) res
+              (if (null? ll) res
                 (loop (cdr ll) (string-append res (car ll))))))
        ;; should be optimized by allocating one big string and then
        ;; filling it
@@ -43,7 +43,7 @@
     (let ((scb (stream-sink s)))
       (labels
         ((loop (info l)
-               ;(if (null info)
+               ;(if (null? info)
                ;(error "bad format string ~s" str)
                (let* ((j (car info))
                       (n (progn (setq info (cdr info)) (car info)))
@@ -57,7 +57,7 @@
                     (int-binary+ pos n)))
                  (if (eq c #\\x0000) l
                    (cond ((or (eq c #\a) (eq c #\d))
-                          (if (null l)
+                          (if (null? l)
                               (error "bad format string ~s" str)
                             (let ((x (car l)))
                               (if (objectp x)
@@ -65,7 +65,7 @@
                                 (prin x s))
                               (loop (cdr info) (cdr l)))))
                          ((eq c #\s)
-                          (if (null l)
+                          (if (null? l)
                               (error "bad format string ~s" str)
                             (let ((x (car l)))
                               (if (objectp x)
@@ -76,13 +76,13 @@
                           (prin-one-char #\\n s)
                           (loop (cdr info) l))
                          ((eq c #\x)
-                          (if (null l)
+                          (if (null? l)
                               (error "bad format string ~s" str)
                             (progn
                               (fprintf s "%x" (car l))
                               (loop (cdr info) (cdr l)))))
                          ((eq c #\o)
-                          (if (null l)
+                          (if (null? l)
                               (error "bad format string ~s" str)
                             (progn
                               (fprintf s "%o" (car l))

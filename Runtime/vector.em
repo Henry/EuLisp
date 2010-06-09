@@ -66,7 +66,7 @@
 ;;;  Anyp
 ;;;-----------------------------------------------------------------------------
   (defmethod anyp ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (anyp1-vector fun vec)
       (call-next-method)))
 
@@ -83,7 +83,7 @@
 ;;;  Allp
 ;;;-----------------------------------------------------------------------------
   (defmethod allp ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (allp1-vector fun vec)
       (call-next-method)))
 
@@ -101,7 +101,7 @@
 ;;;  Do
 ;;;-----------------------------------------------------------------------------
   (defmethod do ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (do1-vector fun vec)
       (call-next-method)))
 
@@ -120,7 +120,7 @@
 ;;;  Map
 ;;;-----------------------------------------------------------------------------
   (defmethod map ((fun <function>) (vec <vector>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (map1-vector fun vec)
       (call-next-method)))
 
@@ -140,7 +140,7 @@
 ;;;  Member
 ;;;-----------------------------------------------------------------------------
   (defmethod member (x (vec <vector>) . preds)
-    (if (null preds)
+    (if (null? preds)
         (member1-vector x vec)
       (let ((pred (car preds))
             (n (vector-size vec)))
@@ -246,7 +246,7 @@
   (defmethod concatenate ((vec1 <vector>) . cs)
     (labels
      ((loop (ccs)
-            (if (null ccs) vec1
+            (if (null? ccs) vec1
               (progn
                 (setq vec1
                       (vector-append vec1 (convert (car ccs) <vector>)))
@@ -329,7 +329,7 @@
                    (car l))
                 (setq res (cons (apply fun (reverse args)) res)))))
        (loop cs ())
-       (if (or (null cs)
+       (if (or (null? cs)
                (and (consp cs) (consp (car cs))))
            (reverse res)
          (convert (reverse res) (class-of (car cs)))))))

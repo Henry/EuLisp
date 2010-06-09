@@ -81,7 +81,7 @@
                       fff lib-dirs ffl vm libs gc *C-cc-libs*)))
        (notify0 sys-str)
        (if (= (system sys-str) 0)
-           (if (null *strip-stand-alone*) ()
+           (if (null? *strip-stand-alone*) ()
              (if (= (system (string-append "strip " dest)) 0) ()
                (ct-error () "executable ~a can't be stipped correctly"
                          module-name)))
@@ -125,7 +125,7 @@
            (hook-sym (concatenate *tmp-start-source-file-name* '_)))
        (if (and (or (eq module-name *tmp-start-source-file-name*)
                     (eq module-name hook-sym)
-                    (null *no-recompile*))
+                    (null? *no-recompile*))
                 (C-module-modified? module-name))
            (let* ((abs-file-name (absolute-file-name file-name))
                   (dir (file-exist? (as-C-file-name module-name)))
@@ -145,7 +145,7 @@
    (defun string-append-with-space l
      (labels
       ((loop (ll res)
-             (if (null ll) res
+             (if (null? ll) res
                (loop (cdr ll)
                      (string-append
                       res (string-append

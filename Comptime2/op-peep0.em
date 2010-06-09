@@ -16,11 +16,11 @@
   (defmacro guarded-rule (lhs guard rhs)
     (labels
      ((rule-parameters (lhs)
-                       (if (null lhs) ()
+                       (if (null? lhs) ()
                          (append!
                           (map
                            (lambda (param)
-                             (if (or (null (symbolp param)) (eq param '*))
+                             (if (or (null? (symbolp param)) (eq param '*))
                                  '*no-variable*
                                param))
                            (cdr (car lhs)))

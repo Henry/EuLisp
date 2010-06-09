@@ -103,7 +103,7 @@
             (map1-list
              (lambda (name) (as-C-library-link-string name))
              *linked-C-libraries*)))
-      (if (null str-list) ""
+      (if (null? str-list) ""
         (apply concatenate str-list))))
 
   (defmacro full-C-library-dir-link-string ()
@@ -111,7 +111,7 @@
             (map1-list
              (lambda (name) (as-C-library-dir-link-string name))
              *C-library-load-path*)))
-      (if (null str-list) ""
+      (if (null? str-list) ""
         (apply concatenate str-list))))
 
   (defmacro main-link-string ()

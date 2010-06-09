@@ -97,7 +97,7 @@
       (if (vectorp entries)
           (progn
             (do1-vector
-             (lambda (x) (if (null x) () (setq res (cons (cdr x) res))))
+             (lambda (x) (if (null? x) () (setq res (cons (cdr x) res))))
              entries)
             res)
         ())))
@@ -111,7 +111,7 @@
       (if (vectorp entries)
           (progn
             (do1-vector
-             (lambda (x) (if (null x) () (setq res (cons (car x) res))))
+             (lambda (x) (if (null? x) () (setq res (cons (car x) res))))
              entries)
             res)
         ())))

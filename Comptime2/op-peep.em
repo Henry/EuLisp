@@ -14,13 +14,13 @@
   (defun peep-hole-optimize (l)
     (labels
      ((loop (ll)
-            (cond ((null (cdr ll))
+            (cond ((null? (cdr ll))
                    l)
                   ((apply-rule (cdr ll) ll)
                    (loop ll))
                   (t
                    (loop (cdr ll))))))
-     (if (null *peephole*) l
+     (if (null? *peephole*) l
        (loop (cons () l)))))
 
 ;;;-----------------------------------------------------------------------------
@@ -41,7 +41,7 @@
   (defun apply-rule (code update)
     (labels
      ((loop (l)
-            (if (null l) ()
+            (if (null? l) ()
               (let* ((rule-entry (car l))
                      (rule (car rule-entry))
                      (guard (car (cdr rule-entry)))
@@ -66,9 +66,9 @@
   (defun match-rule (rule code)
     (labels
      ((loop (r l res)
-            (if (null r)
+            (if (null? r)
                 (list res)
-              (if (null l) ()
+              (if (null? l) ()
                 (let ((x (match-pattern (car r) (car l))))
                   (and x
                        (loop (cdr r) (cdr l)
@@ -79,7 +79,7 @@
     ;; Assume equal length
     (labels
      ((loop (rr ll)
-            (if (null rr)
+            (if (null? rr)
                 ;; Return actual params if match; could be ()!
                 (list (cdr l))
               (let ((x1 (car rr))

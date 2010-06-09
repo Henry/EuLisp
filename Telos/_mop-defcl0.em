@@ -94,8 +94,8 @@
 ;;; Auxilary functions
 ;;;-----------------------------------------------------------------------------
   (defun do-direct-slotds (slots)
-    (cond ((null slots) ())
-          ((atom (car slots))
+    (cond ((null? slots) ())
+          ((atom? (car slots))
            (cons `(list name: ',(car slots))
                  (do-direct-slotds (cdr slots))))
           (t (let* ((*absent* '(absent))
@@ -116,9 +116,9 @@
   (defun do-accessors (name slots)
     (labels
      ((loop (ll res i)
-            (if (null ll) res
+            (if (null? ll) res
               (let ((slot (car ll)))
-                (if (atom slot)
+                (if (atom? slot)
                     (loop (cdr ll) res (- i 1))
                   (loop (cdr ll)
                         (append (do-accessor name
@@ -128,7 +128,7 @@
      (loop slots () (- (list-size slots) 1))))
 
   (defun do-accessor (name slotname inits i)
-    (cond ((null inits) ())
+    (cond ((null? inits) ())
           ((eq (car inits) accessor:)
            (let ((acc (cadr inits)))
              (concatenate
@@ -169,7 +169,7 @@
   ;       ())))
 
   (defun do-writer (acc name slotname i . no-accessor)
-    (if (null no-accessor)
+    (if (null? no-accessor)
         `((defun (setter ,acc) (x v)
             ((opencoded-lambda (x i v)
                                (binding-ref ? ,name)
@@ -183,7 +183,7 @@
         (declare-inline ,acc))))
 
   ;  (defun do-writer (acc name slotname i . no-accessor)
-  ;    (if (null no-accessor)
+  ;    (if (null? no-accessor)
   ;       `(((setter setter) ,acc (slot-writer (find-slot ,name ',slotname)))
   ;         (if (generic-function? (setter ,acc))
   ;             ((setter setter) ,acc
@@ -196,7 +196,7 @@
   ;         ()))))
 
   (defun do-predicates (name keywords)
-    (cond ((null keywords) ())
+    (cond ((null? keywords) ())
           ((eq (car keywords) predicate:)
            (let ((pred (cadr keywords)))
              (append `((defgeneric ,pred ((x <object>))
@@ -206,11 +206,11 @@
           (t (do-predicates name (cddr keywords)))))
 
   (defun do-constructors (name keywords)
-    (cond ((null keywords) ())
+    (cond ((null? keywords) ())
           ((eq (car keywords) constructor:)
            (let ((con (car (cdr keywords))))
              (cons
-              (if (atom con)
+              (if (atom? con)
                   `(defun ,con inits
                      (apply make ,name inits))
                 (let ((params (map (lambda (x) (gensym)) (cdr con))))
@@ -218,7 +218,7 @@
                      (make ,name
                            ,@(labels
                               ((loop (l1 l2 res)
-                                     (if (null l1) res
+                                     (if (null? l1) res
                                        (loop
                                         (cdr l1)
                                         (cdr l2)
@@ -230,7 +230,7 @@
 
   (defun do-printfn (name keywords)
     (let ((fun (find-key print-function: keywords ())))
-      (if (null fun) ()
+      (if (null? fun) ()
         `((defmethod generic-prin ((obj ,name) str)
             (,fun obj str))))))
 
@@ -240,12 +240,12 @@
   (defun find-slot-keywords (slots)
     (labels
      ((loop (ll res)
-            (if (null ll) res
+            (if (null? ll) res
               (let ((s (car ll)))
-                (if (atom s)
+                (if (atom? s)
                     (loop (cdr ll) res)
                   (let ((key (find-key keyword: (cdr s) ())))
-                    (if (null key)
+                    (if (null? key)
                         (loop (cdr ll) res)
                       (loop (cdr ll) (cons key res)))))))))
      (loop slots ())))

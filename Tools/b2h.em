@@ -111,7 +111,7 @@
               (loop (+ i 1) (read-line)))))))
 
   (defun parse-args (args)
-    (if (null args)
+    (if (null? args)
         '()
       (let ((first (car args))
             (rest  (cdr args)))

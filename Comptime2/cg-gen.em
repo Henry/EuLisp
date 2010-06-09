@@ -277,7 +277,7 @@
                            (push-stack-var first-arg state)
                            (and (local-static-var-captured? first-arg)
                                 (stack-to-display first-arg state))))
-                       (if (null rest-args)
+                       (if (null? rest-args)
                            (progn
                              (notify0 "  Gen code for let body ~a" n)
                              (encode body state))
@@ -342,7 +342,7 @@
              ;; ... opencoding (defopencoding)
              ;;--------------------------
              ((eq binding-class 'opencoding)
-              (and (null (= nargs (get-binding-info op 'arity)))
+              (and (null? (= nargs (get-binding-info op 'arity)))
                    (ct-serious-warning t "argument mismatch at opencoding ~a"
                                     binding-name))
               (add-asms (get-binding-info op 'opencoding) (- 1 nargs) state))
@@ -350,7 +350,7 @@
              ;; ... ff
              ;;--------------------------
              ((eq binding-class 'ff)
-              (and (null (= nargs (get-binding-info op 'arity)))
+              (and (null? (= nargs (get-binding-info op 'arity)))
                    (ct-serious-warning
                     t "argument mismatch at foreign function ~a" binding-name))
               (add-asm `(call-foreign-function ,binding-name) 1 state)
@@ -377,12 +377,12 @@
         ;; devide args into 2 sets; args of the first set can be consumed
         ;; from the stack; args of second set are put onto the stack
         ((devide-args (l rest)
-            (if (null l) (cons () rest)
+            (if (null? l) (cons () rest)
               (let* ((arg (car l))
                      (obj (if (bindingp arg) (binding-obj? arg) ())))
                 (cond ((constp arg)
                        (devide-args (cdr l) (cons arg rest)))
-                      ((null (bindingp arg))
+                      ((null? (bindingp arg))
                        (cons (reverse l) rest))
                       ((local-static-var? obj)
                        (cons (reverse l) rest))
@@ -391,16 +391,16 @@
          ;; check if the args which can be consumed from the stack are in
          ;; correct position for the function application
          (stack-args-in-position (l i)
-            (if (null l) t
+            (if (null? l) t
               (let* ((arg (car l))
                      (obj (if (bindingp arg) (binding-obj? arg) ())))
                 (cond ((constp arg)
                        ())
-                      ((null (bindingp arg))
+                      ((null? (bindingp arg))
                        ())
                       ((and (local-static-var? obj)
                             (< (var-used? obj) 2)
-                            (null (local-static-var-captured? obj))
+                            (null? (local-static-var-captured? obj))
                             (= (stack-var-index obj state) i))
                        (stack-args-in-position (cdr l) (- i 1))))))))
       (let* ((devided-args (devide-args (reverse args) ()))
@@ -470,7 +470,7 @@
       (cond ((interface-binding? binding)
              (add-asm `(set-and-get-binding-ref ,module-name ,name)
                       0 state))
-            ((or (null obj) (local-static-var? obj))
+            ((or (null? obj) (local-static-var? obj))
              (add-asm-set-binding binding state)
              (add-asm-get-binding binding state))
             (t
@@ -481,7 +481,7 @@
     (let ((obj (binding-obj? binding)))
       (cond ((interface-binding? binding)
              'binding-ref)
-            ((null obj) 'noop)
+            ((null? obj) 'noop)
             ((local-static-var? obj)
              (if (local-static-var-captured? obj)
                  'display-ref
@@ -492,7 +492,7 @@
     (let ((obj (binding-obj? binding)))
       (cond ((interface-binding? binding)
              'set-binding-ref)
-            ((null obj) 'noop)
+            ((null? obj) 'noop)
             ((local-static-var? obj)
              (if (local-static-var-captured? obj)
                  'set-display-ref
@@ -505,7 +505,7 @@
           (module-name (save-binding-module-name? binding)))
       (cond ((interface-binding? binding)
              (list module-name name))
-            ((null obj)
+            ((null? obj)
              (notify0 "binding-access-params: unknown obj type ~a" obj)
              (ct-error () "can't generate code for dummy binding"))
             ((local-static-var? obj)
@@ -526,7 +526,7 @@
 ;;;  Add code to code state object
 ;;;-----------------------------------------------------------------------------
   (defun add-asm (code move state)
-    (and (null (car code))
+    (and (null? (car code))
          (ct-error () "error in code generation"))
     (move-stack move state)
     ;; Code has to be reversed later

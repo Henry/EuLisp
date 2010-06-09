@@ -68,7 +68,7 @@
  (defun access-table-print (x . ss)
    (let* ((fun (setter x))
           (tab (fun () ())))
-     (if (null ss)
+     (if (null? ss)
          (do1-vector print (table-entries tab))
        (do1-vector (lambda (entry) (print entry (car ss)))))))
 ;;;-----------------------------------------------------------------------------

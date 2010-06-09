@@ -27,7 +27,7 @@
   (defun display-var-index (var state)
     (labels
      ((loop (display depth)
-            (if (null display)
+            (if (null? display)
                 (ct-serious-warning () "no display-index for ~a"
                                     (var-name? var))
               (let ((pos (find1-list var (car display))))
@@ -71,7 +71,7 @@
   (defun update-stack-vars (n state)
     (labels
      ((loop (l)
-            (if (or (null l) (< (car l) n))
+            (if (or (null? l) (< (car l) n))
                 l
               (loop (cddr l)))))
      (code-state-stack-vars! state (loop (code-state-stack-vars? state)))))

@@ -74,7 +74,7 @@
 ;;; Define condition classes
 ;;;-----------------------------------------------------------------------------
   (defmacro defcondition (name super . init-options)
-    (if (null super)
+    (if (null? super)
         `(defclass ,name (<condition>) () ,@init-options)
       `(defclass ,name (,super) () ,@init-options)))
 
@@ -113,15 +113,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Auxiliary function (not necessarily EuLisp)
 ;;;-----------------------------------------------------------------------------
-  (defmacro not (x) `(null ,x))
+  (defmacro not (x) `(null? ,x))
 
   (defmacro butlast (list . number)
-    (if (null number)
+    (if (null? number)
         `(reverse-list (list-drop (reverse-list ,list) 1))
       `(reverse-list (list-drop (reverse-list ,list) ,@number))))
 
   (defmacro last (l . number)
-    (if (null number)
+    (if (null? number)
         `(list-drop ,l (- (list-size ,l) 1))
       `(list-drop ,l (- (list-size ,l) ,@number))))
 

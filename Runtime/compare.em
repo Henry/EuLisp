@@ -17,8 +17,8 @@
   (defun = (arg . args)
     (labels
      ((loop (l)
-            (if (null l) t
-              (if (null (binary= arg (car l))) ()
+            (if (null? l) t
+              (if (null? (binary= arg (car l))) ()
                 (loop (cdr l))))))
      (loop args)))
 
@@ -30,7 +30,7 @@
 ;;; !=
 ;;;-----------------------------------------------------------------------------
   (defun != (arg . args)
-    (null (apply = arg args)))
+    (null? (apply = arg args)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; < binary< and <=
@@ -39,8 +39,8 @@
     (labels
      ((loop (l)
             (let ((rest (cdr l)))
-              (if (null rest) t
-                (if (null (binary< (car l) (car rest))) ()
+              (if (null? rest) t
+                (if (null? (binary< (car l) (car rest))) ()
                   (loop rest))))))
      (loop (cons arg args))))
 
@@ -48,11 +48,11 @@
     (labels
      ((loop (l)
             (let ((rest (cdr l)))
-              (if (null rest) t
+              (if (null? rest) t
                 (if (let ((arg1 (car l))
                           (arg2 (car rest)))
-                      (and (null (binary< arg1 arg2))
-                           (null (binary= arg1 arg2))))
+                      (and (null? (binary< arg1 arg2))
+                           (null? (binary= arg1 arg2))))
                     ()
                   (loop rest))))))
      (loop (cons arg args))))
@@ -77,7 +77,7 @@
   (defun max (arg . args)
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (let ((x (car l))
                     (ll (cdr l)))
                 (if (binary< res x)
@@ -88,7 +88,7 @@
   (defun min (arg . args)
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (let ((x (car l))
                     (ll (cdr l)))
                 (if (binary< res x)

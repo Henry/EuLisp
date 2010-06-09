@@ -15,7 +15,7 @@
 ;;;  Notification ...
 ;;;-----------------------------------------------------------------------------
    (defun basic-notify (s var str . args)
-     (if (null var) ()
+     (if (null? var) ()
        (progn
          (apply format s str args)
          (newline s)
@@ -25,7 +25,7 @@
      (apply basic-notify stderr *verbose* str args))
 
    (defun notify (str . args)
-     (apply basic-notify stderr (null *silent*)
+     (apply basic-notify stderr (null? *silent*)
             (string-append (dynamic *indent*) str) args))
 
    (defun basic-warning (var prompt str . args)
@@ -35,7 +35,7 @@
                            (format () "[~a]" (primitive-ref m 0))
                          ""))
               (fun (get-named-encl-lambda (dynamic *encl-lambda*))))
-         (if (null fun) ()
+         (if (null? fun) ()
              (setq pre-str (format () "~a[~a]" pre-str fun)))
          (apply basic-notify stderr var
                 (format () "*** ~a ~a: ~a" prompt pre-str str) args))))
@@ -55,7 +55,7 @@
    (defun ct-serious-warning (value str . args)
      (setq *number-of-errors* (+ *number-of-errors* 1))
      (stop-after-pass)
-     (if (null *interpreter*)
+     (if (null? *interpreter*)
          (progn
            (apply basic-warning *errors* "ERROR" str args)
            value)

@@ -64,7 +64,7 @@
   (defmethod concatenate ((x <name>) . cs)
     (labels
      ((loop (ccs str)
-            (if (null ccs)
+            (if (null? ccs)
                 (make (class-of x) name: str)
               (loop (cdr ccs)
                     (string-append str (convert (car ccs) <string>))))))

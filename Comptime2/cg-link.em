@@ -62,7 +62,7 @@
                      (global-index)))
            (str (as-C-module-name module-name)))
       (add-global "  ~a_bindings[ ~a] = ~a\;\n" str index obj)
-      (and (null default-index)
+      (and (null? default-index)
            (set-global-index (+ index 1)))
       index))
 
@@ -132,7 +132,7 @@
       ))
 
   (defun wrap-init-code-aux (code imports)
-    (if (null imports)
+    (if (null? imports)
         code
       (let* ((C-module-name (as-C-module-name (car imports)))
              (lambda-name (make-symbol (format () "B(~a ,0)" C-module-name)))
@@ -330,7 +330,7 @@
     'eul_nil)
 
   (defun static-allocatable? (x)
-    (null (or (symbolp x) (keywordp x) (null x) (vectorp x) (floatp x))))
+    (null? (or (symbolp x) (keywordp x) (null? x) (vectorp x) (floatp x))))
 
   (defmethod convert-constant ((value <cons>))
     (let* ((loc (gensym "cons_"))
@@ -404,7 +404,7 @@
       bv-name))
 
   (defun compute-bytevector-aux (code)
-    (if (null code) ()
+    (if (null? code) ()
       (let ((x (car code)))
         (cond
          ((numberp x)
@@ -466,7 +466,7 @@
     (or (get-module module-name)
         (labels
          ((loop (ll)
-                (if (null ll) ()
+                (if (null? ll) ()
                   (let ((lib (get-module (car ll))))
                     (if (member1-list module-name
                                 (module-all-used-module-names? lib))
@@ -630,7 +630,7 @@
 ;;                      (res-converter-as-C-type res-conv)
 ;;                      ext-name)))
 ;;      (labels ((loop (l)
-;;                   (if (null l) (string-append str ")")
+;;                   (if (null? l) (string-append str ")")
 ;;                     (let ((first (car l))
 ;;                           (rest (cdr l)))
 ;;                       (setq str
@@ -729,7 +729,7 @@
            (arg-names-str-aux (map1-list (lambda (x)
                                            (format () "~a, " x))
                                          arg-names))
-           (arg-names-str (if (null arg-names-str-aux) ""
+           (arg-names-str (if (null? arg-names-str-aux) ""
                             (apply concatenate arg-names-str-aux))))
       (write-to-C-file "static LispRef ~a (" stub-name)
       (write-to-C-file "Stack *reg_value_stack, ")
@@ -739,23 +739,23 @@
       (do1-list (lambda (arg) (write-to-C-file "  POPVAL1(~a)\;\n" arg))
           (reverse arg-names))
       (write-to-C-file "  FF_RES_CONVERT~a(res,~a(~a" res-conv ext-name
-                       (if (null arg-names) ""
+                       (if (null? arg-names) ""
                            (format () "FF_ARG_CONVERT~a(~a)"
                                    (car arg-convs)
                                    (car arg-names))))
-      ;      (if (null arg-names) ()
+      ;      (if (null? arg-names) ()
       ;       (do2-list (lambda (arg conv)
       ;             (write-to-C-file ", FF_ARG_CONVERT~a(~a)" conv arg))
       ;           (cdr arg-names)
       ;           (cdr arg-convs)))
       (labels
        ((loop (names convs)
-              (if (null names) ()
+              (if (null? names) ()
                 (let ((arg (car names))
                       (conv (car convs)))
                   (write-to-C-file ", FF_ARG_CONVERT~a(~a)" conv arg)
                   (loop (cdr names) (cdr convs))))))
-       (if (null arg-names) ""
+       (if (null? arg-names) ""
          (loop (cdr arg-names) (cdr arg-convs))))
       (write-to-C-file "))\;\n")
       (write-to-C-file "  return res;\n")
@@ -796,7 +796,7 @@
                         ((eq c #\_)
                          ((setter string-ref) new-str i #\_)
                          (loop (+ i 1) post-str))
-                        ((null (alnump c))
+                        ((null? (alnump c))
                          ((setter string-ref) new-str i #\_)
                          (loop (+ i 1)
                                (format () "~a_X~a" post-str

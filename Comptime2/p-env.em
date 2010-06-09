@@ -69,14 +69,14 @@
                    () "new lexical binding ~a shadows lexical binding ~a"
                    proper-binding old-lexical-binding))))
              ((and (bindingp old-syntax-binding)
-                   (null (eq old-lexical-binding old-syntax-binding))
-                   (null *interpreter*))
+                   (null? (eq old-lexical-binding old-syntax-binding))
+                   (null? *interpreter*))
               (ct-warning
                () "new lexical binding ~a is shadowed by syntax binding ~a"
                proper-binding old-syntax-binding)))
             ((setter (module-lexical-env? module))
              binding-name proper-binding)
-            (if (null *interpreter*) ()
+            (if (null? *interpreter*) ()
               ((setter (module-interactive-lexical-env? module))
                binding-name proper-binding)))
         (error "no actual module" <ct-error>))))
@@ -113,7 +113,7 @@
             (if (bindingp old-binding)
                 (let ((old-module-name (save-binding-module-name? old-binding))
                       (old-index (binding-local-index? old-binding)))
-                  (if (or (null (eq old-module-name proper-module-name))
+                  (if (or (null? (eq old-module-name proper-module-name))
                           (eq old-module-name (module-name? module)))
                       (ct-warning
                        () "conflicting exported bindings ~a and ~a"
@@ -176,7 +176,7 @@
                    () "new syntax binding ~a shadows syntax binding ~a"
                    proper-binding old-syntax-binding))))
              ((and (bindingp old-lexical-binding)
-                   (null (eq old-lexical-binding binding)))
+                   (null? (eq old-lexical-binding binding)))
               (ct-warning
                () "new syntax binding ~a shadows lexical binding ~a"
                proper-binding old-lexical-binding)))

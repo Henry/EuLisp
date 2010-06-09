@@ -24,7 +24,7 @@
   (defun evenp (x) (zerop (binary-mod x 2)))
   ;;(declare-inline evenp)
 
-  (defun oddp (x) (null (zerop (binary-mod x 2))))
+  (defun oddp (x) (null? (zerop (binary-mod x 2))))
   ;;(declare-inline oddp)
 
 ;;;-----------------------------------------------------------------------------

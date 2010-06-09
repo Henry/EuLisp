@@ -33,8 +33,8 @@
     (name domain gf-class method-class method-inits keywords)
     (if (and (eq gf-class <simple-generic-function>)
              (eq method-class <simple-method>)
-             (null method-inits)
-             (null keywords))
+             (null? method-inits)
+             (null? keywords))
         (primitive-make-generic-function name domain)
       (apply make
              gf-class
@@ -68,7 +68,7 @@
             (lookup (generic-function-method-lookup-function gf))
             (appl-meths (apply lookup values))
             (meth-funs (map1-list method-function appl-meths)))
-     (if (null meth-funs)
+     (if (null? meth-funs)
          (error-no-applicable-methods gf values)
        (let ((entry (cons value-dom meth-funs)))
          ((setter vector-ref) method-cache method-cache-index entry)
@@ -95,7 +95,7 @@
   (defun discriminating-domain (values domain)
     (labels
         ((loop (l1 l2 res)
-               (if (null l2)
+               (if (null? l2)
                    (reverse-list res)
                  (if (car l2)
                      (loop (cdr l1) (cdr l2) (cons (class-of (car l1)) res))
@@ -106,7 +106,7 @@
   (defun select-methods (value-dom meths)
     (labels
         ((loop (l res)
-               (if (null l)
+               (if (null? l)
                    res
                  (let ((meth (car l)))
                    (if (sig-applicable? value-dom (method-domain meth))

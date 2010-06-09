@@ -109,7 +109,7 @@
   (defmethod generic-write ((l <cons>) (s <buffered-stream>))
     (prin-one-char #\( s)
     (let ((tail (output-list-contents l generic-write s)))
-      (if (null tail) ()
+      (if (null? tail) ()
         (progn
           (prin-string " . " 3 s)
           (write tail s))))
@@ -190,7 +190,7 @@
   (defmethod generic-prin ((l <cons>) (s <buffered-stream>))
     (prin-one-char #\( s)
     (let ((tail (output-list-contents l generic-prin s)))
-      (if (null tail) ()
+      (if (null? tail) ()
         (progn
           (prin-string " . " 3 s)
           (prin tail s))))

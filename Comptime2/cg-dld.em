@@ -69,12 +69,12 @@
    (defun dynamic-load-module (module-name . reload)
     (let ((tmp-silent *silent*))
       (unwind-protect
-        (if (and (null reload) (module-loaded? module-name))
+        (if (and (null? reload) (module-loaded? module-name))
             (let ((module (or (get-module module-name)
                               (load-module-interface module-name))))
               module)
           (let* ((foo (setq *silent* ()))
-                 (module (if (null reload)
+                 (module (if (null? reload)
                              (or (get-module module-name)
                                  (if (file-exist?
                                       (as-interface-file-name module-name))
@@ -124,7 +124,7 @@
           (lliterals (module-local-literals? module)))
       (labels
        ((loop (l)
-              (if (null l) ()
+              (if (null? l) ()
                 (let ((entry (car l)))
                   (dynamic-binding-set1 module-name-str
                                         (cdr entry) (car entry))

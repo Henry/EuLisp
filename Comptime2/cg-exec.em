@@ -139,7 +139,7 @@
     (compute-bytevector-aux code))
 
   (defun compute-bytevector-aux (code)
-    (if (null code) (bytevector)
+    (if (null? code) (bytevector)
       (let ((x (car code)))
         (cond
          ((numberp x)
@@ -188,7 +188,7 @@
       (or (get-module module-name)
           (labels
            ((loop (ll)
-                  (if (null ll) ()
+                  (if (null? ll) ()
                   (let ((lib (get-module (car ll))))
                     (if (member1-list module-name
                                       (module-all-used-module-names? lib))

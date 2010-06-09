@@ -75,7 +75,7 @@
                (m (make-module (get-name x))))
             (dynamic-let ((*actual-module* m))
               (let ((d (get-directives x)))
-                (and (null (eq module-name *tmp-source-file-name*))
+                (and (null? (eq module-name *tmp-source-file-name*))
                      (ct-serious-warning () "bad module name ~a in file ~a.em"
                                          module-name *tmp-source-file-name*))
                 (expand-directive d)

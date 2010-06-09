@@ -400,7 +400,7 @@ void initialize_module_i_aux0()
   eul_car(cons_1083) = sym_1084;
   object_class(cons_1082) = eul_static_cons_class;
   eul_cdr(cons_1082) = eul_nil;
-  eul_intern_symbol(sym_1103,"null");
+  eul_intern_symbol(sym_1103,"null?");
   object_class(cons_1104) = eul_static_cons_class;
   eul_car(cons_1104) = sym_1084;
   eul_cdr(cons_1104) = eul_nil;

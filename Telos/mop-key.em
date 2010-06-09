@@ -31,7 +31,7 @@
   (defun filter-keywords (keywords ignore)
     (labels
         ((loop (keys res)
-               (if (null keys)
+               (if (null? keys)
                    (reverse-list res)
                  (let* ((key (car keys))
                         (tmp (cdr keys))

@@ -28,7 +28,7 @@
            (method-inits (find-key method-keywords: keywords ()))
            (reqd (required-args args))
            (domain (map1-list
-                    (lambda (a) (if (atom a) '<object> (car (cdr a))))
+                    (lambda (a) (if (atom? a) '<object> (car (cdr a))))
                     reqd))
            (name gfname)
            (target
@@ -67,7 +67,7 @@
            (name (find-key name: keywords 'anonymous))
            (reqd (required-args args))
            (domain (map (lambda (a)
-                          (if (atom a) '<object> (car (cdr a))))
+                          (if (atom? a) '<object> (car (cdr a))))
                         reqd))
            (gfname (gensym)))  ; "GENERIC-LAMBDA"
       `(let ((,gfname
@@ -88,7 +88,7 @@
 ;;; Methods
 ;;;-----------------------------------------------------------------------------
   (defun do-defgeneric-methods (name keywords)
-    (cond ((null keywords) ())
+    (cond ((null? keywords) ())
           ((eq (car keywords) method:)
            (cons `(defmethod ,name ,@(cadr keywords))
                  (do-defgeneric-methods name (cddr keywords))))
@@ -98,7 +98,7 @@
 ;;; Required arguments
 ;;;-----------------------------------------------------------------------------
   (defun required-args (args)
-    (if (atom args) ()
+    (if (atom? args) ()
       (cons (car args)
             (required-args (cdr args)))))
 

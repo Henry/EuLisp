@@ -33,7 +33,7 @@
       (substring filename start end)))
 
   (defun assq (key alist)
-    (if (null alist)
+    (if (null? alist)
         '()
       (let ((first (car alist))
             (rest (cdr alist)))
@@ -90,7 +90,7 @@
     (exit 1))
 
   (defun parse-args (args)
-    (if (null args)
+    (if (null? args)
         '()
       (let ((first (car args))
             (rest  (cdr args)))

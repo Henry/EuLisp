@@ -28,7 +28,7 @@
     (cdr . 32)
     ("body ~a not a list" . 30)
     (or . 29)
-    (null . 28)
+    (null? . 28)
     (cddr . 27)
     (let . 24)
     (if . 23)

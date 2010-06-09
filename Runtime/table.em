@@ -155,7 +155,7 @@
 ;;; Do
 ;;;-----------------------------------------------------------------------------
   (defmethod do ((fun <function>) (tab <hash-table>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (do1-table fun tab)
       (error "do on multiple tables not yet implemented")))
 
@@ -172,7 +172,7 @@
 ;;; Map
 ;;;-----------------------------------------------------------------------------
   (defmethod map ((fun <function>) (tab <hash-table>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (map1-table fun tab)
       (error "map on multiple tables not yet implemented")))
 
@@ -200,7 +200,7 @@
 ;;; Anyp
 ;;;-----------------------------------------------------------------------------
   (defmethod anyp ((fun <function>) (tab <hash-table>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (anyp1-table fun tab)
       (error "anyp on multiple tables not yet implemented")))
 
@@ -215,7 +215,7 @@
 ;;; Allp
 ;;;-----------------------------------------------------------------------------
   (defmethod allp ((fun <function>) (tab <hash-table>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (allp1-table fun tab)
       (error "allp on multiple tables not yet implemented")))
 
@@ -230,7 +230,7 @@
 ;;; Member
 ;;;-----------------------------------------------------------------------------
   (defmethod member (x (tab <table>) . preds)
-    (if (null preds)
+    (if (null? preds)
         (table-ref tab x)
       (let ((fun (car preds)))
         (member x (table-entries tab)

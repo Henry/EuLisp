@@ -49,7 +49,7 @@
            (hdls (thread-error-handlers thrd)))
       (labels
        ((loop (ll)
-              (if (null ll)
+              (if (null? ll)
                   (*default-error-handler* cndt k)
                 (progn
                   (let/cc handler-error
@@ -69,7 +69,7 @@
   (deflocal *default-error-handler*
     (named-lambda default-error-handler (cndt k)
       (output-condition-contents cndt)
-      (if (null k) ()
+      (if (null? k) ()
         (progn
           (format 2 "***    Do you want to continue? (y/n) ")
           (if (eq (getchar) #\y) (k cndt) ())))

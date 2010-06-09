@@ -27,44 +27,44 @@
   (defun + args
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (loop (cdr l) (binary+ (car l) res)))))
      (loop args 0)))
 
   (defun - (arg . args)
-    (if (null args)
+    (if (null? args)
         (binary- 0 arg)
       (labels
        ((loop (l res)
-              (if (null l) res
+              (if (null? l) res
                 (loop (cdr l) (binary- res (car l))))))
        (loop args arg))))
 
   (defun * args
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (loop (cdr l) (binary* (car l) res)))))
      (loop args 1)))
 
   (defun / (arg . args)
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (loop (cdr l) (binary/ res (car l))))))
      (loop args arg)))
 
   (defun % (arg . args)
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (loop (cdr l) (binary% res (car l))))))
      (loop args arg)))
 
   (defun mod (arg . args)
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (loop (cdr l) (binary-mod res (car l))))))
      (loop args arg)))
 
@@ -74,14 +74,14 @@
   (defun gcd (arg . args)
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (loop (cdr l) (binary-gcd res (car l))))))
      (loop args arg)))
 
   (defun lcm (arg . args)
     (labels
      ((loop (l res)
-            (if (null l) res
+            (if (null? l) res
               (loop (cdr l) (binary-lcm res (car l))))))
      (loop args arg)))
 

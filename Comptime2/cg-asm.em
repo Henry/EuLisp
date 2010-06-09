@@ -19,7 +19,7 @@
   (defun assemble (module code-state)
     (labels
      ((loop (states res)
-            (if (null states) res
+            (if (null? states) res
               (let* ((state (car states))
                      (handle (code-state-handle? state))
                      (name (code-state-binding-name? state))
@@ -80,12 +80,12 @@
         (assemble-instruction-default name args state table)))))
 
   (defun assemble-instruction-default (name args state table)
-    (if (and (null (dynamic *with-long-jumps*))
+    (if (and (null? (dynamic *with-long-jumps*))
              (branchp name))
         (assemble-branch name args state table)
       (let* ((code (put-bc state name))
              (formals (bytecode-args? code)))
-        (if (null formals) ()
+        (if (null? formals) ()
           (let ((formal1 (car formals)))
             (cond
              ((eq formal1 'label)
@@ -128,7 +128,7 @@
   (defun register-label-loc (table label pc)
     (let ((x (table label)))
       (if x
-          (if (null (car x))
+          (if (null? (car x))
               ((setter car) x pc)
             (error "label multiply defined" <condition>))
         (let ((fun (setter table)))
@@ -234,7 +234,7 @@
   (defun put-bytes (state l)
     (labels
      ((loop (ll i code)
-            (if (null ll)
+            (if (null? ll)
                 (progn
                   (asm-function-state-pc! state i)
                   (asm-function-state-code! state code))

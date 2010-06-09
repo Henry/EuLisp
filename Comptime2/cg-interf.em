@@ -184,7 +184,7 @@
      ;                           (module-all-used-module-names? module)))
      ;              (new-entry (select-list (lambda (x y) (member1-list (car x) y))
      ;                                       entry names)))
-     ;         (if (null new-entry) ()
+     ;         (if (null? new-entry) ()
      ;           (if t ;(stringp obj)
      ;               (format stream "    (~s ~a)\n" obj new-entry)
      ;             (format stream "    (~a ~a)\n" obj new-entry)))))
@@ -244,9 +244,9 @@
              *no-recompile*)
         t
       (and (or (eq module-name *tmp-start-source-file-name*)
-               (if *interpreter* t (null *no-recompile*)))
+               (if *interpreter* t (null? *no-recompile*)))
            (or (module-modified? module-name)
-               (null (file-exist? (as-C-file-name module-name)))
+               (null? (file-exist? (as-C-file-name module-name)))
                (let ((full-import (get-full-import-names module-name)))
                  (anyp1-list (lambda (name)
                                (if (member1-list name (get-library-names))
@@ -321,7 +321,7 @@
            (str (string-append dir (string-append *delimiter* file-name))))
       (labels
           ((loop (ll res)
-                 (if (null ll) res
+                 (if (null? ll) res
                    (let* ((name (car ll))
                           (imp-file-name (as-compiled-C-file-name name))
                           (imp-dir (file-exist? file-name)))
@@ -337,7 +337,7 @@
 
   (defun fff-link-string ()
     (let ((names *linked-C-ff-files*))
-      (if (null names) ""
+      (if (null? names) ""
         (let ((str-list
                (map1-list (lambda (name)
                       (let* ((file-name (as-compiled-C-file-name name))
@@ -352,7 +352,7 @@
 
   (defun ffl-link-string ()
     (let ((names *linked-C-ff-libraries*))
-      (if (null names) ""
+      (if (null? names) ""
         (let ((str-list
                (map1-list (lambda (name)
                       (let* ((file-name (as-C-library-file-name name))

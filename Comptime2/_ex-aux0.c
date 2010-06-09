@@ -82,7 +82,7 @@ void initialize_module__ex_aux0()
   eul_allocate_bytevector( G00187,G00186);
   eul_allocate_bytevector( G00202,G00201);
   eul_intern_symbol(sym_205,"cddr");
-  eul_intern_symbol(sym_206,"null");
+  eul_intern_symbol(sym_206,"null?");
   eul_intern_symbol(sym_207,"or");
   object_class(str_208) = eul_static_string_class;
   eul_allocate_bytevector( G00204,G00203);

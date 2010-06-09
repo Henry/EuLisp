@@ -23,9 +23,10 @@ extern LispRef read_bindings[];
 #define lispin_fn_index 12 
 #define _read_error__X60_X62_fn_index 9 
 #define list_start_fn_index 14 
-#define quasiquote_mark_fn_index 21 
+#define parse_fn_index 28 
 #define sread_s_expression_fn_index 4 
 #define read_token_fn_index 27 
+#define quasiquote_mark_fn_index 21 
 #define _dispatch_macro_character_table__X42_X42_fn_index 17 
 #define sread_fn_index 10 
 #define vector_start_fn_index 18 

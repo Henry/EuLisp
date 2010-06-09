@@ -27,7 +27,7 @@
     (let ((expander
            (cond
             ((symbolp x) (lambda (x e) (import-module x)))
-            ((null (consp x)) (lambda (x e) x))
+            ((null? (consp x)) (lambda (x e) x))
             ((symbolp (car x))
              (let ((import-expander (get-import-expander (car x))))
                (if import-expander

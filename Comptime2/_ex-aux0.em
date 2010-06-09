@@ -24,13 +24,13 @@
 
   (defmacro get-body (form)
     `(let ((x (cdr (cddr ,form))))
-       (if (or (null x) (consp x))
+       (if (or (null? x) (consp x))
            x
          (error "body ~a not a list" x))))
 
   (defmacro get-lambda-body (form)
     `(let ((x (cddr ,form)))
-       (if (or (null x) (consp x))
+       (if (or (null? x) (consp x))
            x
          (error "body ~a not a list" x))))
 

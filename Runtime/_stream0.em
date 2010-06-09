@@ -16,28 +16,28 @@
 ;;; test cases
 ;;;
 ;;; (match-let 'foo '((a 1)) 'bar)
-;;; => (let ((a (if (null foo) 1 (car foo)))) bar)
+;;; => (let ((a (if (null? foo) 1 (car foo)))) bar)
 ;;;
 ;;; (match-let 'foo '((a 1) (b 2)) 'bar)
 ;;; => (let ((a ()) (b ()))
-;;;      (progn (if (null foo) (setq a 1)
+;;;      (progn (if (null? foo) (setq a 1)
 ;;;                 (progn (setq a (car foo)) (setq foo (cdr foo))))
-;;;             (if (null foo) (setq b 2)
+;;;             (if (null? foo) (setq b 2)
 ;;;                 (progn (setq b (car foo)) (setq foo (cdr foo)))))
 ;;;      bar)
 ;;;
 ;;; (match-let '(foo bar) '((a 1) (b 2)) 'baz)
 ;;; => (let ((G00055 (foo bar)) (a ()) (b ()))
-;;;      (progn (if (null G00055) (setq a 1)
+;;;      (progn (if (null? G00055) (setq a 1)
 ;;;                 (progn (setq a (car G00055)) (setq G00055 (cdr G00055))))
-;;;             (if (null G00055) (setq b 2)
+;;;             (if (null? G00055) (setq b 2)
 ;;;                 (progn (setq b (car G00055)) (setq G00055 (cdr G00055)))))
 ;;;      bar)
 ;;;-----------------------------------------------------------------------------
   (defmacro match-let (expression default-initializers . body)
     (if (= 1 (size default-initializers))
         `(let ((,(caar default-initializers)
-                (if (null ,expression)
+                (if (null? ,expression)
                     ,(cadr (car default-initializers))
                   (car ,expression))))
            ,@body)
@@ -45,10 +45,10 @@
              (update-vars
               (labels
                ((loop (l)
-                  (if (null l)
+                  (if (null? l)
                       ()
                     (cons
-                     `(if (null ,var)
+                     `(if (null? ,var)
                            (setq ,(caar l) ,(cadr (car l)))
                          (progn
                            (setq ,(caar l) (car ,var))
@@ -132,7 +132,7 @@
           (file-name (gensym))
           (res (gensym)))
       `(let ((,info (apply file-lookup ,name ,path)))
-         (if (null ,info)
+         (if (null? ,info)
              (error "No such file or directory ~a in ~a" ,name ,path)
            (let ((,file-name (car ,info))
                  (,dir (cdr ,info)))

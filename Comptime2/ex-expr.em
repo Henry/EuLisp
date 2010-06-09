@@ -38,7 +38,7 @@
            (cond
             ((symbolp x) (get-id-expander x)) ; simple identifier
             ((syntax-obj? x) (lambda (x env e) x)) ; already expanded
-            ((null (consp x)) (lambda (x env e) ; literal constant
+            ((null? (consp x)) (lambda (x env e) ; literal constant
                                 (make <literal-const> value: x)))
             ((symbolp (car x)) (or (get-macro-expander (car x))
                                    (get-expr-expander (car x))
@@ -353,7 +353,7 @@
            (new-vars (car (cdr lifted-appl)))
            (appl (make <appl> fun: new-fun args: new-args)))
       (check-appl appl new-fun)
-      (if (null new-vars)
+      (if (null? new-vars)
           appl
         (progn
           (do1-list (lambda (var)
@@ -365,13 +365,13 @@
     (let ((binary-op (concatenate 'int-binary op)))
       (labels
           ((loop (l)
-             (if (null (cdr l))
+             (if (null? (cdr l))
                  (car l)
                (list binary-op (loop (cdr l)) (car l)))))
         (loop (reverse-list args)))))
 
   ;  (defun unfold-rest-arg-appl (op args)
-  ;    (if (null (cdr args))
+  ;    (if (null? (cdr args))
   ;       (car args)
   ;      (list (concatenate 'int-binary op)
   ;           (car args)
@@ -379,7 +379,7 @@
 
   (defun expand-fun-form (x env)
     ;; Like id expander, but binding is not checked
-    (if (atom x)
+    (if (atom? x)
         (let ((binding (or (get-local-static-binding x env)
                            (get-lexical-binding x)
                            (ct-serious-warning
@@ -388,7 +388,7 @@
           (register-binding-ref binding)
           binding)
       (if (and (eq (car x) 'setter) (symbolp (cadr x))
-               (null *interpreter*))
+               (null? *interpreter*))
           (or (get-inlined-setter-binding x env)
               (expand-expr x env))
         (expand-expr x env))))
@@ -397,7 +397,7 @@
 ;;; Lift applications
 ;;;-----------------------------------------------------------------------------
   (defun lift-appl (exprs new-exprs new-vars env)
-    (if (null exprs)
+    (if (null? exprs)
         (list (reverse new-exprs) new-vars)
       (let ((expr (car exprs))
             (rest (cdr exprs)))
@@ -473,9 +473,9 @@
            (n (list-size (appl-args? appl)))
            (fun-name (or (and name (car name)) fun)))
       (if (< arity 0)                   ; rest args?
-          (or (null (< (+ n 1) arity))
+          (or (null? (< (+ n 1) arity))
               (ct-serious-warning () "too few arguments calling ~a" fun-name))
-        (and (null (= arity n))
+        (and (null? (= arity n))
              (if (< arity n)
                  (ct-serious-warning () "too many arguments calling ~a"
                                      fun-name)
@@ -541,9 +541,9 @@
 ;;;-----------------------------------------------------------------------------
   (install-expr-expander 'progn
     (lambda (x env e)
-      (cond ((null (cdr x))                     ; no empty progn?
+      (cond ((null? (cdr x))                     ; no empty progn?
              *nil*)
-            ((null (cdr (cdr x)))               ; no one-form progn?
+            ((null? (cdr (cdr x)))               ; no one-form progn?
              (expand-expr (car (cdr x)) env))
             (t
              (let ((exprs ())
@@ -582,13 +582,13 @@
       (with-ct-handler "bad quasiquote syntax" xx
         ;; not tail recursive (is it possible?)
         (let ((x (car (cdr xx))))
-          (if (atom x)
+          (if (atom? x)
               (e (list 'quote x) env e)
             (if (eq (car x) 'unquote)
                 (e (car (cdr x)) env e)
               (labels
                ((loop (xx)
-                      (if (atom xx)
+                      (if (atom? xx)
                           (list 'quasiquote xx)
                         (if (eq (car xx) 'unquote)
                             (list 'quasiquote xx)
@@ -602,7 +602,7 @@
                                         (let* ((l1 (car (cdr x1)))
                                                (l2 (cdr xx))
                                                (l3 (loop l2)))
-                                          (if (null l2) l1
+                                          (if (null? l2) l1
                                             (list 'append l1 l3)))
                                       (list 'cons (list 'quasiquote x1)
                                             (loop (cdr xx))))))
@@ -627,7 +627,7 @@
                  (set-immutable (cdr (cdr (cdr x)))))
             (register-binding-ref binding)
             (and (binding-immutable? binding)
-                 (null set-immutable)
+                 (null? set-immutable)
                  (ct-serious-warning
                   () "immutable binding ~a cannot be modified" name))
             (lift-setq binding (expand-expr (caddr x) env) env))))))
@@ -740,7 +740,7 @@
       (with-ct-handler "bad let syntax" x
         (let ((decls (car (cdr x)))
               (body (cdr (cdr x))))
-          (cond ((null decls)                 ; empty let
+          (cond ((null? decls)                 ; empty let
                  (e `(progn ,@body) env e))
                 ((consp decls)                ; simple let
                  (if (= (list-size decls) 1)  ; let -> let*
@@ -764,7 +764,7 @@
   (install-expr-expander 'let*
     (lambda (x env e)
       (with-ct-handler "bad let* syntax" x
-        (cond ((null (cadr x))
+        (cond ((null? (cadr x))
                (expand-expr (list 'progn (caddr x)) env))
               ((consp (cadr x))
                (let* ((inits (filter-init-forms (cadr x)))
@@ -783,7 +783,7 @@
   (defun lift-let*-vars (vars)
     (labels
      ((loop (vars new-vars)
-            (if (null vars)
+            (if (null? vars)
                 (reverse new-vars)
               (let ((init-form (var-value? (car vars))))
                 (cond
@@ -826,8 +826,8 @@
 ;;;-----------------------------------------------------------------------------
   (defun expand-local-static-vars (var-names init-forms env)
     (let ((true-var-names (as-proper-list var-names)))
-      (and (null init-forms)
-           (setq init-forms (map1-list null true-var-names)))
+      (and (null? init-forms)
+           (setq init-forms (map1-list null? true-var-names)))
       (map2-list (lambda (var init-form)
                    (make-local-static-var var (expand-expr init-form env)))
                  true-var-names init-forms)))
@@ -835,7 +835,7 @@
   (defun expand-local-static-vars* (var-names init-forms env)
     (labels
         ((loop (vars forms env)
-               (if (null vars) env
+               (if (null? vars) env
                  (let* ((var (car vars))
                         (init-form (car forms))
                         (new-env (add-local-static-bindings
@@ -843,7 +843,7 @@
                    (var-value! var (expand-expr init-form env))
                    (loop (cdr vars) (cdr forms) new-env)))))
       (let* ((vars (map1-list make-local-static-var (as-proper-list var-names)))
-             (new-env (if (null init-forms) env
+             (new-env (if (null? init-forms) env
                         (loop vars init-forms env))))
         (cons vars new-env))))
 

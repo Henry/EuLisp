@@ -81,7 +81,7 @@
     (let* ((source (stream-source s))
            (sink (stream-sink s))
            (sink-buf (control-block-buffer sink)))
-      (if (null sink-buf)
+      (if (null? sink-buf)
           0
         (progn
           ((setter control-block-buffer) source (reverse-list sink-buf))
@@ -102,7 +102,7 @@
 
   (defmethod fill-buffer ((ss <string-stream>))
     (let ((str-list (string-stream-string-list ss)))
-      (if (null str-list)
+      (if (null? str-list)
           0
         (let ((scb (stream-source ss)))
           ((setter string-stream-string-list) ss (cdr str-list))
@@ -268,7 +268,7 @@
       ((setter string-ref) (control-block-buffer scb) pos c)
       ((setter control-block-buffer-pos) scb new-pos)
       (if (or (eql c #\\n)
-              (null (int-binary< new-pos bufsiz)))
+              (null? (int-binary< new-pos bufsiz)))
           (flush-buffer s)
          ())))
 
@@ -283,7 +283,7 @@
                     ((setter string-ref) (control-block-buffer scb) pos char)
                     ((setter control-block-buffer-pos) scb new-pos)
                     (if (or (eql char #\\n)
-                            (null (int-binary< new-pos bufsiz)))
+                            (null? (int-binary< new-pos bufsiz)))
                         (flush-buffer s)
                       ())
                     (loop (int-binary+ i 1)))

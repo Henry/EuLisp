@@ -26,7 +26,7 @@
            (objs (map1-list binding-obj? bindings))
            (vars (select-list local-static-var? objs)))
       (do1-list (lambda (var)
-            (and (null (member1-list var args))
+            (and (null? (member1-list var args))
                  (progn
                    (notify0 "var ~a captured" (var-name? var))
                    (local-static-var-captured! var t))))

@@ -27,7 +27,7 @@
     (let ((expander
            (cond
             ((symbolp x) (lambda (x e) (import-syntax-module x)))
-            ((null (consp x)) (lambda (x e) x))
+            ((null? (consp x)) (lambda (x e) x))
             ((symbolp (car x))
              (let ((sx-import-expander (get-syntax-import-expander (car x))))
                (or sx-import-expander
@@ -75,7 +75,7 @@
     (let ((name (if (modulep module) (module-name? module) module)))
       (labels
           ((loop (l)
-                 (if (null l)
+                 (if (null? l)
                      (new-node module 'used-syntax-module)
                    (let ((m (car l)))
                      (if (modulep m)

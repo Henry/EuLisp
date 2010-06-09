@@ -85,7 +85,7 @@
 ;;;  Anyp
 ;;;-----------------------------------------------------------------------------
   (defmethod anyp ((fun <function>) (str <string>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (anyp1-string fun str)
       (call-next-method)))
 
@@ -105,7 +105,7 @@
 ;;;  Allp
 ;;;-----------------------------------------------------------------------------
   (defmethod allp ((fun <function>) (str <string>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (allp1-string fun str)
       (call-next-method)))
 
@@ -126,7 +126,7 @@
 ;;;  Do
 ;;;-----------------------------------------------------------------------------
   (defmethod do ((fun <function>) (str <string>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (do1-string fun str)
       (call-next-method)))
 
@@ -147,7 +147,7 @@
 ;;;  Map
 ;;;-----------------------------------------------------------------------------
   (defmethod map ((fun <function>) (str <string>) . cs)
-    (if (null cs)
+    (if (null? cs)
         (map1-string fun str)
       (call-next-method)))
 
@@ -169,7 +169,7 @@
 ;;;  Member
 ;;;-----------------------------------------------------------------------------
   (defmethod member (x (str <string>) . preds)
-    (if (null preds)
+    (if (null? preds)
         (member1-string x str)
       (let ((pred (car preds))
             (n (string-size str))
@@ -213,7 +213,7 @@
   (defmethod concatenate ((str <string>) . cs)
     (labels
      ((loop (ccs)
-            (if (null ccs) str
+            (if (null? ccs) str
               (progn
                 (setq str
                       (eul_str_append str (convert (car ccs) <string>)))

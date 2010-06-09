@@ -21,7 +21,7 @@
   (defun dynamic-variable-ref (name)
     (labels
      ((loop (ll)
-            (if (null ll)
+            (if (null? ll)
                 (error "dynamic variable ~a not available" name)
               (if (eq name (car ll))
                   (car (cdr ll))
@@ -31,7 +31,7 @@
   (defun (setter dynamic-variable-ref) (name val)
     (labels
      ((loop (ll)
-            (if (null ll)
+            (if (null? ll)
                 (error "dynamic variable ~a not available" name)
               (if (eq name (car ll))
                   ((setter car) (cdr ll) val)

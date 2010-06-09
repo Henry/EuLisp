@@ -9,7 +9,7 @@
 (defmodule boot1
   (syntax (_boot0)
    export (car cdr cons list
-           stringp characterp symbolp consp intp listp atom atom? null null?
+           stringp characterp symbolp consp intp listp atom? null?
            simple-function? simple-generic-function?
            + - * / % mod < = inc dec int-zerop
            eq eql equal
@@ -51,15 +51,12 @@
                      (loop (cdr l1) (cdr l2)))
               (if l1
                   (and l2 (eql l1 l2))
-                (null l2)))))
+                (null? l2)))))
       (loop x y)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class membership
 ;;;-----------------------------------------------------------------------------
-  (defun null (x) ((opencoded-lambda (u) (null)) x))
-  (declare-inline null)
-
   (defun null? (x) ((opencoded-lambda (u) (null)) x))
   (declare-inline null?)
 
@@ -87,11 +84,8 @@
   (defun listp (x) ((opencoded-lambda (u) (listp)) x))
   (declare-inline listp)
 
-  (defun atom (x) (null (consp x)))
-  (declare-inline atom)
-
-  (defun atom? (x) (null (consp x)))
-  (declare-inline atom)
+  (defun atom? (x) (null? (consp x)))
+  (declare-inline atom?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Arithmetic

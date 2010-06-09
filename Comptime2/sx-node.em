@@ -98,7 +98,7 @@
   (defun make-named-const (name value)
     (let* ((node (make <named-const> name: name value: value))
            (binding (make-immutable-binding node)))
-      (if (and (null *interpreter*) (foldable-constant? value))
+      (if (and (null? *interpreter*) (foldable-constant? value))
           ;; Suppress constant folding with interpreter
           (let ((info-entries `((class . constant) (value ,value))))
             (binding-info! binding (append info-entries
@@ -114,7 +114,7 @@
     ;; what about names?
     (or (numberp x)
         (characterp x)
-        (null x)))
+        (null? x)))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  Create global static var (deflocal)
@@ -160,7 +160,7 @@
   (defun compute-arity (params)
     (if (proper-list? params)
         (list-size params)
-      (if (atom params)
+      (if (atom? params)
           -1
         (- 0 (+ (list-size params) 1)))))
 
@@ -240,7 +240,7 @@
   (defun true-local-binding? (binding)
     (if (bindingp binding)
         (let ((obj (binding-obj? binding)))
-          (null (or (interface-binding? binding)  ; from interface file
+          (null? (or (interface-binding? binding)  ; from interface file
                     (binding-imported? binding)    ; from just compiled module
                     (opencodingp obj)
                     (get-binding-info binding 'opencoding)

@@ -114,7 +114,7 @@
           (i 0))
       (labels
        ((loop (ll)
-              (if (null ll) res
+              (if (null? ll) res
                   (let ((x (car ll)))
                     ((setter table-ref) res i x)
                     (setq i (int-binary+ i 1))

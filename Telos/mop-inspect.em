@@ -30,7 +30,7 @@
             (subcodep code1 code2)
           (labels
               ((loop (l)
-                     (if (null l) ()
+                     (if (null? l) ()
                        (if (subclassp (car l) cl2)
                            cl1
                          (loop (cdr l))))))
@@ -88,7 +88,7 @@
 ;;; Primitive slot value access
 ;;;-----------------------------------------------------------------------------
   (defun primitive-find-slot-position (cl name slots index)
-    (cond ((null slots)
+    (cond ((null? slots)
            (error "slot ~a not found in class ~a" name cl))
           ((eq name (slot-name (car slots)))
            index)

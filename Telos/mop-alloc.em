@@ -32,12 +32,12 @@
     ;; Initialize the slot values
     (labels
      ((loop (slots i)
-        (if (null slots) ()
+        (if (null? slots) ()
           (let* ((sd (car slots))
                  (key (slot-keyword sd))
                  (init (slot-default sd)))
             ((setter primitive-ref) obj i
-             (if (null key)
+             (if (null? key)
                  (if (functionp init)
                      (init)
                    init)
@@ -63,7 +63,7 @@
     (let ((class-keys (class-keywords cl)))
       (labels
        ((loop (l)
-              (if (null l) t
+              (if (null? l) t
                 (let ((x (car l)))
                   (if (member1-list x class-keys)
                       (loop (cdr (cdr l)))
@@ -169,7 +169,7 @@
   (defmethod compute-specialized-slot ((cl <class>) sds spec)
     (let* ((sd (car sds))
            (sdclass (compute-specialized-slot-class cl sds spec)))
-      (if (null spec)
+      (if (null? spec)
           (inherited-slot cl sd sdclass)
         (redefined-slot cl sd sdclass spec))))
 

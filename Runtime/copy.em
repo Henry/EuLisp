@@ -27,7 +27,7 @@
       (let ((x (allocate cl ())))
         (labels
          ((loop (sds)
-                (if (null sds) x
+                (if (null? sds) x
                   (let ((sd (car sds)))
                     ((setter slot-value-using-slot) sd x
                      (slot-value-using-slot sd x))))))
@@ -48,7 +48,7 @@
       (let ((x (allocate cl ())))
         (labels
          ((loop (sds)
-                (if (null sds) x
+                (if (null? sds) x
                   (let ((sd (car sds)))
                     ((setter slot-value-using-slot) sd x
                      (deep-copy (slot-value-using-slot sd x)))))))

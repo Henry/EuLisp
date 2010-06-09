@@ -49,7 +49,7 @@
   (defun find-slot (cl name)
     (labels
         ((loop (l)
-               (if (null l)
+               (if (null? l)
                    (error "slot ~a not found in class ~a" name cl)
                  (let* ((slot (car l))
                         (x (slot-name slot)))
@@ -176,7 +176,7 @@
   (defun make-slotds (names defaults . offset)
     (labels
      ((loop (ns ds i res)
-            (if (null ns) (reverse-list res)
+            (if (null? ns) (reverse-list res)
               (let ((sd (primitive-make-slot (car ns) i (car ds))))
                 (loop (cdr ns) (cdr ds) (+ i 1) (cons sd res))))))
      (loop names defaults (if offset (car offset) 0) ())))
