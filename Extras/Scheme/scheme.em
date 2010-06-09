@@ -68,10 +68,6 @@
 
   (export atan)
 
-  (defun atom? (x)
-    (atom x))
-  (declare-inline atom?)
-
   (defun boolean? (x)
     (if x (eq x '#t) t))
   (declare-inline boolean?)

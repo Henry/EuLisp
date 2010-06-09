@@ -32,7 +32,7 @@
     (assoc-loop obj list (if (null? comp) eql (car comp))))
 
   (defun assoc-loop (obj list comp)
-    (cond ((atom list) ())
+    (cond ((atom? list) ())
           ((comp obj (caar list)) (car list))
           (t (assoc-loop obj (cdr list) comp))))
 

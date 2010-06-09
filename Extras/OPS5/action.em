@@ -79,7 +79,7 @@
   ;; Process rhs values (such a variables, compute, etc)
   (defun rhs-val (val pi)
     ;;(print "rhs-val")
-    (if (atom val)
+    (if (atom? val)
         (if (is-ops5-var val)
             (apply-binding (pi-bindings pi) val)
           val)

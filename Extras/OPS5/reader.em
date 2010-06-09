@@ -153,7 +153,7 @@
                            ((eql (car ce-rest) '-)
                             (get-ce (cdr ce-rest) t))
                            ((eql (car ce-rest) '{)
-                                 (if (atom (cadr ce-rest))
+                                 (if (atom? (cadr ce-rest))
                                      (progn
                                        ;;(format t "Found: ~a~%" (cadr ce-rest))
                                        (let* ((cl (car (caddr ce-rest)))
@@ -226,7 +226,7 @@
 ;;;-----------------------------------------------------------------------------
     (defun check-for-ce-var (prod)
       (unless (eql (car prod) '{) ())
-              (if (atom (cadr prod))
+              (if (atom? (cadr prod))
                   'before
                 'after))
 
