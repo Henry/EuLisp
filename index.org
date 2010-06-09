@@ -279,7 +279,7 @@
     is un-hygienic.
 
 *** EuLisp Scripts
-    Use /#!/../youtoo -script/ to write EuLisp scripts (see
+    Use /#!/../youtoo --script/ to write EuLisp scripts (see
     /Examples/Misc/script.em/).
 
 *** Inter-operation with other languages

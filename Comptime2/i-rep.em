@@ -9,7 +9,7 @@
 (defmodule i-rep
   (syntax (_macros)
    import (i-all i-args sx-obj sx-node i-compile cg-interf cg-dld ex-expr
-           ex-import ex-syntax p-env sx-obj cg-exec)
+           ex-import ex-syntax p-env sx-obj cg-exec read)
    export (rep eval debug-eval show-module-bindings ?
            show-class-hierarchy)
    expose (cg-dld))
@@ -36,10 +36,13 @@
   (deflocal *fast-prompt* (= *argc* 1))
 
   (defun initialize-interpreter ()
+
     (if (or *fast-prompt* *script*) ()
       (format t "EuLisp System 'youtoo ~a'\n\n" *version*))
+
     (setq *current-module-name* 'user)
     (dynamic-setq *actual-module* (get-module *current-module-name*))
+
     ;; Make all errors continuable
     ;;(setq *error* cerror)
     (setq *error*
@@ -52,6 +55,7 @@
               k (signal
                  (make <condition> message: (apply format () str class rest))
                  k)))))
+
     ;; Reset the default error handler to catch errors on all threads
     (setq *default-error-handler*
           (named-lambda default-error-handler (cndt continue-k)
@@ -65,8 +69,24 @@
                     (setq *resume-k* (cons 'dummy *resume-k*))
                     (resume-k ()))
                 (*reset-k* ())))))
+
     ;; Enable signals
-    (eul-signal-enable t))
+    (eul-signal-enable t)
+
+    ;; If interpreting a script open the script file
+    ;; and set lispin to read and parse that stream
+    (if *script*
+        (setq lispin
+              (make <stream>
+                    source: (make <file-stream>
+                                  file-name: *script-file*
+                                  mode: 'r)
+                    read-action: (lambda (s eos-error? eos-value)
+                                   (parse (stream-source s)
+                                          eos-error?
+                                          eos-value))))
+      ())
+    )
 
   (defextern eul-signal-enable (boolean) boolean "eul_signal_enable")
 
@@ -167,9 +187,9 @@
               (show-class-hierarchy)))
            ((eq x redefine:)
             (setq *redefine-imported-bindings*
-                  (null *redefine-imported-bindings*)))
+                  (null? *redefine-imported-bindings*)))
            ((eq x first-year-students:)
-            (setq *first-year-students* (null *first-year-students*)))
+            (setq *first-year-students* (null? *first-year-students*)))
            ((eq x -:)
             (system
              (convert
@@ -211,7 +231,7 @@
   (defun check-module-envs (module)
     ;; Update lexical and syntax environments if necessary;
     ;; Lexical and syntax envs need not to be updated if module was compiled
-    (if (or (null module)
+    (if (or (null? module)
             (access-table-values (module-lexical-env? module))) ()
         (let ((import (module-used-module-names? module))
               (syntax (module-used-syntax-modules? module)))
@@ -304,7 +324,7 @@
   (defun show-module-bindings (syntax all . module-names)
     (labels
      ((loop1 (x m i)
-            (cond ((null x)
+            (cond ((null? x)
                    ())
                   ((< i 256)
                    (if syntax
@@ -318,7 +338,7 @@
                        (loop1 x m 0)
                      ()))))
       (loop2 (x m res)
-             (if (null x)
+             (if (null? x)
                  res
                (let* ((binding (car x))
                       (binding-name (save-binding-local-name? binding))
@@ -326,7 +346,7 @@
                        (if syntax
                            (get-syntax-binding binding-name m)
                          (get-lexical-binding binding-name m))))
-                 (if (or all (null (binding-imported? proper-binding)))
+                 (if (or all (null? (binding-imported? proper-binding)))
                      (loop2 (cdr x) m (cons binding-name res))
                    (loop2 (cdr x) m res))))))
      (let* ((module

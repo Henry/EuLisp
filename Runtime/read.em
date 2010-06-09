@@ -13,7 +13,7 @@
              table stream)
      export (<read-error> lispin
              read read-line read-char read-s-expression read-token
-             sread sread-s-expression
+             sread sread-s-expression parse
              list-start list-stop dot vector-start vector-stop special-tokens
              quote-mark quasiquote-mark unquote-mark unquote-splicing-mark
              eos *dispatch-macro-character-table* set-dispatch-macro-character
@@ -73,7 +73,7 @@
                                        (list (parse-loop tail2 ()))))
                              (read-error s "misplaced dot/unquote after ~s"
                                          (reverse-list so-far)))))
-                        ((null (eq (ntok s special-tokens) list-stop))
+                        ((null? (eq (ntok s special-tokens) list-stop))
                          (read-error s "misplaced dot after ~s"
                                      (reverse-list so-far)))
                         (t (reverse-onto so-far tail)))))
@@ -135,7 +135,7 @@
               tok))))))
 
   (defun reverse-onto (a b)
-    (if (null a) b
+    (if (null? a) b
       (reverse-onto (cdr a) (cons (car a) b))))
 
 ;;;-----------------------------------------------------------------------------
@@ -174,7 +174,7 @@
              ((eql c #\\n)
               (convert (reverse-list (cons c result)) <string>))
              ((eq c eos-value)
-              (if (null result)
+              (if (null? result)
                   eos-value
                 (convert (reverse-list result) <string>)))
              (t

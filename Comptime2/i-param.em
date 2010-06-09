@@ -53,6 +53,7 @@
            *tmp-start-source-file-name*
            *dest-file-name*
            *object-dir*
+           *script-file*
            *eulysses-dir*
            *eulysses-arch*
            *recompile*
@@ -149,6 +150,7 @@
   (deflocal *tmp-start-source-file-name* ())
   (deflocal *dest-file-name* ())
   (deflocal *object-dir* ())
+  (deflocal *script-file* ())
   (deflocal *get-loaded-module* (make-access-table))
   (deflocal *get-loaded-syntax-module* (make-access-table))
   (deflocal *get-load-dir* (make-access-table comparator: binary=))
