@@ -9,8 +9,8 @@
 (defmodule mop-inspect
   (import (boot mop-prim mop-class mop-init)
    syntax (_boot0)
-   export (subclassp functionp methodp generic-function-p cpl-subclass-p
-           classp class-of slotp primitive-metaclass-p
+   export (subclassp functionp methodp generic-function? cpl-subclass?
+           classp class-of slotp primitive-metaclass?
            primitive-find-slot-position primitive-slot-value))
 
 ;;;-----------------------------------------------------------------------------
@@ -36,7 +36,7 @@
                          (loop (cdr l))))))
             (loop (class-direct-superclasses cl1)))))))
 
-  (defun cpl-subclass-p (cl1 cl2)
+  (defun cpl-subclass? (cl1 cl2)
     (if (eq cl1 cl2) t
       (let ((code1 (class-code cl1))
             (code2 (class-code cl2)))
@@ -62,9 +62,9 @@
     (if (subclassp (class-of a) <slot>) a ()))
   ;;(declare-inline slotp)
 
-  (defun generic-function-p (a)
+  (defun generic-function? (a)
     (if (subclassp (class-of a) <generic-function>) a ()))
-  ;;(declare-inline generic-function-p)
+  ;;(declare-inline generic-function?)
 
   (defun methodp (a)
     (if (subclassp (class-of a) <method>) a ()))
@@ -80,7 +80,7 @@
   (defconstant primitive-metaclasses
     (list <simple-class> <class> <function-class> <class>))
 
-  (defun primitive-metaclass-p (obj)
+  (defun primitive-metaclass? (obj)
     ;; cannot be inlined with binding not exported
     (member1-list obj primitive-metaclasses))
 

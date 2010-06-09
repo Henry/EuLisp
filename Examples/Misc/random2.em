@@ -69,7 +69,7 @@
    (defun Floor (x) (if (integerp x) x (floor x)))
 
    (defun trunc (a . b)
-     (cond ((null b) (Floor a))
+     (cond ((null? b) (Floor a))
            (t (Floor (/ a (car b))))))
 
    (defun minusp (x) (< x 0))

@@ -15,9 +15,9 @@
            <tk-object> <tk-item-canvas>
            eul_initialize_tk tk-name tk-handler
            Tk_MainLoop tk-main-loop Tcl_DoOneEvent tcl-do-one-event
-           tk-item-canvas-id as-c-options as-c-accessors tk-object-p
-           tk-button-p tk-canvas-p tk-entry-p tk-listbox-p tk-scrollbar-p
-           tk-text-p tk-toplevel-p tk-item-canvas-p tk_allocate_registers))
+           tk-item-canvas-id as-c-options as-c-accessors tk-object?
+           tk-button? tk-canvas? tk-entry? tk-listbox? tk-scrollbar?
+           tk-text? tk-toplevel? tk-item-canvas? tk_allocate_registers))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Foreign Functions Declarations
@@ -42,26 +42,26 @@
     (handler accessor: tk-handler
              keyword: handler:))
     abstractp: t
-    predicate: tk-object-p)
+    predicate: tk-object?)
 
-  (defclass <tk-button> (<tk-object>)() predicate: tk-button-p)
+  (defclass <tk-button> (<tk-object>)() predicate: tk-button?)
   (defclass <tk-label> (<tk-object>)())
   (defclass <tk-frame> (<tk-object>)())
-  (defclass <tk-canvas> (<tk-object>)() predicate: tk-canvas-p)
+  (defclass <tk-canvas> (<tk-object>)() predicate: tk-canvas?)
   (defclass <tk-checkbutton> (<tk-object>)())
-  (defclass <tk-entry> (<tk-object>)() predicate: tk-entry-p)
-  (defclass <tk-listbox> (<tk-object>)() predicate: tk-listbox-p)
+  (defclass <tk-entry> (<tk-object>)() predicate: tk-entry?)
+  (defclass <tk-listbox> (<tk-object>)() predicate: tk-listbox?)
   (defclass <tk-menu> (<tk-object>)())
   (defclass <tk-menubutton> (<tk-object>)())
   (defclass <tk-message> (<tk-object>)())
   (defclass <tk-radiobutton> (<tk-object>)())
   (defclass <tk-scale> (<tk-object>)() )
-  (defclass <tk-scrollbar> (<tk-object>)() predicate: tk-scrollbar-p)
-  (defclass <tk-text> (<tk-object>)() predicate: tk-text-p)
-  (defclass <tk-toplevel> (<tk-object>)() predicate: tk-toplevel-p)
+  (defclass <tk-scrollbar> (<tk-object>)() predicate: tk-scrollbar?)
+  (defclass <tk-text> (<tk-object>)() predicate: tk-text?)
+  (defclass <tk-toplevel> (<tk-object>)() predicate: tk-toplevel?)
   (defclass <tk-item-canvas> (<tk-object>)
     ((id accessor: tk-item-canvas-id))
-    predicate: tk-item-canvas-p)
+    predicate: tk-item-canvas?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; General Functions
@@ -82,11 +82,11 @@
     (let (x auxlist)
       (labels
        ((loop (ll i res)
-              (if (null ll)
+              (if (null? ll)
                   (cons i (reverse res))
                 (let ((key (car ll))
                       value)
-                  (cond ((tk-object-p key)
+                  (cond ((tk-object? key)
                          (loop (cdr ll)
                                (+ i 1)
                           (cons (tk-name key) res)))
@@ -136,7 +136,7 @@
                                       (cons
                                        (string-append "-" (keyword-name key))
                                        res))))))
-                          ((tk-object-p value)
+                          ((tk-object? value)
                            (loop (cddr ll)
                                  (+ i 2)
                                  (cons (tk-name value)
@@ -175,7 +175,7 @@
     (let (x)
       (labels
        ((loop (ll res)
-              (cond ((null ll)
+              (cond ((null? ll)
                      (list (reverse res) ()))
                     ((eq (car ll) args:)
                      (list (reverse res) (cadr ll)))

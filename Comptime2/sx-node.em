@@ -25,7 +25,7 @@
            make-mutable-binding
            make-dummy-binding
            binding-origin-module-name
-           get-binding-info get-binding-spec-info true-local-binding-p
+           get-binding-info get-binding-spec-info true-local-binding?
            compute-arity
            register-delegated-vars register-binding-ref
            clone-node))
@@ -98,7 +98,7 @@
   (defun make-named-const (name value)
     (let* ((node (make <named-const> name: name value: value))
            (binding (make-immutable-binding node)))
-      (if (and (null *interpreter*) (foldable-constant-p value))
+      (if (and (null *interpreter*) (foldable-constant? value))
           ;; Suppress constant folding with interpreter
           (let ((info-entries `((class . constant) (value ,value))))
             (binding-info! binding (append info-entries
@@ -110,7 +110,7 @@
       (set-lexical-binding binding)
       node))
 
-  (defun foldable-constant-p (x)
+  (defun foldable-constant? (x)
     ;; what about names?
     (or (numberp x)
         (characterp x)
@@ -143,22 +143,22 @@
       node))
 
   (defun make-fun (fun-class name args body . has-unknown-appls)
-    (let* ((special-name-p (and (consp name) (= (list-size name) 1)))
+    (let* ((special-name? (and (consp name) (= (list-size name) 1)))
            (node (make fun-class
-                      name: (if special-name-p (car name) name)
+                      name: (if special-name? (car name) name)
                       args: (if (symbolp args) (list args) args)
                       arity: (compute-arity args)
-                      body: (or (syntax-obj-p body) `(progn ,@body))
+                      body: (or (syntax-obj? body) `(progn ,@body))
                       has-unknown-appls: (and has-unknown-appls
                                               (car has-unknown-appls)))))
       (and (lambdap node)
-           (if (or (eq name 'anonymous) special-name-p)
+           (if (or (eq name 'anonymous) special-name?)
                (new-node node 'anonymous-lambda)
              (new-node node 'named-lambda)))
       node))
 
   (defun compute-arity (params)
-    (if (proper-list-p params)
+    (if (proper-list? params)
         (list-size params)
       (if (atom params)
           -1
@@ -221,7 +221,7 @@
                          module: (dynamic *actual-module*)
                          immutable: (and immutable (car immutable))
                          obj: node)))
-      (and (syntax-obj-p node)
+      (and (syntax-obj? node)
            (binding! node binding))
       binding))
 
@@ -237,10 +237,10 @@
   ;         module: (dynamic *actual-module*)
   ;         obj: node))
 
-  (defun true-local-binding-p (binding)
+  (defun true-local-binding? (binding)
     (if (bindingp binding)
         (let ((obj (binding-obj? binding)))
-          (null (or (interface-binding-p binding)  ; from interface file
+          (null (or (interface-binding? binding)  ; from interface file
                     (binding-imported? binding)    ; from just compiled module
                     (opencodingp obj)
                     (get-binding-info binding 'opencoding)

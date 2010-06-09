@@ -96,7 +96,7 @@
     method: (((wm <working-memory>) timestamp)
              ;;(format t "Removing timestamp: ~a~%:" timestamp)
              (let ((rem (assoc timestamp (wm-elements wm))))
-               (when (null rem) (format ops-out
+               (when (null? rem) (format ops-out
                                         "Remove FAILED: ~a~%" timestamp))
                (set-wm-elements wm (list-remove rem (wm-elements wm)))
                (cdr rem))))

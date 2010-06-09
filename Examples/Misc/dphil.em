@@ -99,7 +99,7 @@
                          (- n 1)
                          (cons (make <thread> function: philosopher) l))))
       (start-threads (i l)
-                     (if (null l) ()
+                     (if (null? l) ()
                        (progn
                          (thread-start (car l) i)
                          (start-threads (+ i 1) (cdr l))))))

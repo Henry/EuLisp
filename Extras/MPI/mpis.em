@@ -11,8 +11,8 @@
 (defmodule mpis
   (syntax (macros)
    import (level1 serial)
-   export (<mpi-stream> mpi-stream-p mpi-stream-host mpi-stream-rank
-           local-mpi-stream-p))
+   export (<mpi-stream> mpi-stream? mpi-stream-host mpi-stream-rank
+           local-mpi-stream?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; MPI stream class
@@ -22,7 +22,7 @@
      (rank accessor: mpi-stream-rank)
      (object-stream accessor: mpi-stream-object-stream)
      (tag accessor: mpi-stream-tag))
-    predicate: mpi-stream-p)
+    predicate: mpi-stream?)
 
   (defmethod initialize ((x <mpi-stream>) inits)
     (call-next-method)
@@ -63,7 +63,7 @@
     (let* ((rank (mpi-stream-rank s))
            (tag (mpi-stream-tag s))
            (res (eul-mpi-send x rank tag)))
-      (if (null res)
+      (if (null? res)
           (error "mpi write error with ~a" x)
         s)))
 
@@ -71,7 +71,7 @@
     (let* ((rank (mpi-stream-rank s))
            (tag (mpi-stream-tag s))
            (res (eul-mpi-send x rank tag)))
-      (if (null res)
+      (if (null? res)
           (error "mpi write error with ~a" x)
         s)))
 
@@ -79,7 +79,7 @@
     (let* ((rank (mpi-stream-rank s))
            (tag (mpi-stream-tag s))
            (res (eul-mpi-send x rank tag)))
-      (if (null res)
+      (if (null? res)
           (error "mpi write error with ~a" x)
         s)))
 
@@ -87,7 +87,7 @@
     (let* ((rank (mpi-stream-rank s))
            (tag (mpi-stream-tag s))
            (res (eul-mpi-send x rank tag)))
-      (if (null res)
+      (if (null? res)
           (error "mpi write error with ~a" x)
         s)))
 
@@ -101,31 +101,31 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Reading
 ;;;-----------------------------------------------------------------------------
-  (defmethod generic-read ((s <mpi-stream>) eos-error-p eos-value)
+  (defmethod generic-read ((s <mpi-stream>) eos-error? eos-value)
     (let* ((rank (mpi-stream-rank s))
            (tag (mpi-stream-tag s))
-           (info (eul-mpi-probe rank () eos-error-p))
+           (info (eul-mpi-probe rank () eos-error?))
       (format stderr "generic-read msg-tag: ~a\n" info)
-      (if (null info)
-          (if (eq eos-error-p t)
+      (if (null? info)
+          (if (eq eos-error? t)
               (end-of-stream s)
             eos-value)
         (let ((objp (vector-ref info 0))
               (msg-tag (vector-ref info 1))
               (n (vector-ref info 2)))
-          (if (null tag)
-              (if (null objp)
+          (if (null? tag)
+              (if (null? objp)
                   (let ((res (eul-mpi-receive rank msg-tag n)))
-                    (if (null res)
+                    (if (null? res)
                         (error "mpi read error" <condition>)
                       res))
                 (let ((os (mpi-stream-object-stream s)))
                   ((setter mpi-stream-tag) s t)
-                  (let ((res (generic-read os eos-error-p eos-value)))
+                  (let ((res (generic-read os eos-error? eos-value)))
                     ((setter mpi-stream-tag) s ())
                     res)))
             (let ((res (eul-mpi-receive rank msg-tag n)))
-              (if (null res)
+              (if (null? res)
                   (error "mpi read error" <condition>)
                 res))))))))
 
@@ -149,7 +149,7 @@
 
   (deflocal *mpi-rank-counter* 0)
 
-  (defun local-mpi-stream-p (x)
+  (defun local-mpi-stream? (x)
     (= (mpi-stream-rank x) *mpi-local-rank*))
 
 ;;;-----------------------------------------------------------------------------

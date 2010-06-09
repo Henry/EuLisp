@@ -81,7 +81,7 @@ in particular \genericref{binary/},
 %
 The abstract class which is the superclass of all number classes.
 
-\function{numberp}
+\function{number?}
 %
 \begin{arguments}
     \item[object] Object to examine.
@@ -217,7 +217,7 @@ argument returns {\em number$_1$}.
 \result%
 Computes the absolute value of {\em number}.
 
-\generic{zerop}
+\generic{zero?}
 %
 \begin{genericargs}
     \item[number] A number.
@@ -243,11 +243,11 @@ Computes the additive inverse of {\em number}.
 \end{arguments}
 %
 \result%
-Returns {\em number\/} if \genericref{zerop} applied to {\em number\/} is
+Returns {\em number\/} if \genericref{zero?} applied to {\em number\/} is
 \true{}.  Otherwise returns the result of converting $\pm$1 to the class of {\em
     number\/} with the sign of {\em number}.
 
-\function{positivep}
+\function{positive?}
 %
 \begin{arguments}
     \item[number] A number.
@@ -257,7 +257,7 @@ Returns {\em number\/} if \genericref{zerop} applied to {\em number\/} is
 Compares {\em number\/} against the zero element of the class of {\em number\/}
 using the generic function \genericref{binary<}.
 
-\function{negativep}
+\function{negative?}
 %
 \begin{arguments}
     \item[number] A number.

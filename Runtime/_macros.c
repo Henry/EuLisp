@@ -79,7 +79,7 @@ void initialize_module__macros()
   static const void *G00970[] = {I(43,fe,1b,12),I(1b,34,00,00),I(00,00,00,37),I(1d,86,0f,23),B(_macros ,56),I(1c,0f,83,86),I(0f,1c,1c,0f),I(23,00,00,00),B(_macros ,31),I(1c,0f,1b,86),I(0f,23,00,00),B(_macros ,56),I(1c,0f,22,06),I(32,00,00,00),I(00,00,00,2c),I(1d,86,0f,23),B(_macros ,56),I(1c,0f,1b,1f),I(04,0f,23,00),B(_macros ,31),I(1c,0f,1b,86),I(0f,23,00,00),B(_macros ,56),I(1c,0f,22,05),I(45,03,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 58 binding: return-from */
-  static const void *G00973[] = {I(43,fe,23,00),B(_macros ,21),I(1c,0f,1d,1c),I(24,00,00,00),B(boot1 ,26),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G00973[] = {I(43,fe,23,00),B(_macros ,21),I(1c,0f,1d,1c),I(24,00,00,00),B(boot1 ,25),I(3d,02,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 61 binding: dynamic-setq */
   static const void *G00975[] = {I(ab,23,00,00),B(_macros ,59),I(86,0f,23,00),B(_macros ,60),I(1c,0f,1f,03),I(86,0f,23,00),B(_macros ,35),I(1c,0f,1f,04),I(86,0f,1c,1c),I(0f,1f,04,1c),I(0f,45,08,00)};

@@ -12,7 +12,7 @@
    export (<character-sequence>
            <string> stringp string-data string-size string-ref
            substring tailstring string-compare string-equal string-append
-           string-as-int string-empty-p member1-string
+           string-as-int string-empty? member1-string
            do1-string map1-string listify-string
            eul_list_as_eul_string))
 
@@ -35,10 +35,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-  (defun string-empty-p (str) (int-binary= (string-size str) 0))
-  (declare-inline string-empty-p)
+  (defun string-empty? (str) (int-binary= (string-size str) 0))
+  (declare-inline string-empty?)
 
-  (defmethod emptyp ((str <string>)) (string-empty-p str))
+  (defmethod emptyp ((str <string>)) (string-empty? str))
 
   (defun string-equal (str1 str2)
     (int-binary= (string-compare str1 str2) 0))

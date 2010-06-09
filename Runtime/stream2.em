@@ -12,15 +12,15 @@
    export (<stream> stream-lock stream-read-action stream-write-action
                     stream-source stream-sink stream-mode
                     streamp from-stream to-stream
-           <buffered-stream> buffered-stream-p
-           <string-stream> string-stream-p string-stream-string-list
-           <file-stream> file-stream-p
+           <buffered-stream> buffered-stream?
+           <string-stream> string-stream? string-stream-string-list
+           <file-stream> file-stream?
            <stream-control-block> control-block-buffer
            control-block-buffer-size control-block-buffer-pos
            control-block-buffer-cnt
            <file-control-block> control-block-file-name control-block-mode
-           control-block-descriptor stream-control-block-p
-           file-control-block-p
+           control-block-descriptor stream-control-block?
+           file-control-block?
            stdin stdout stderr
            generic-prin generic-write generic-read flush-buffer fill-buffer
            reconnect disconnect generic-connect
@@ -37,14 +37,14 @@
                   default: 1024)
      (buffer-pos accessor: control-block-buffer-pos default: 0)
      (buffer-cnt accessor: control-block-buffer-cnt default: 0))
-    predicate: stream-control-block-p)
+    predicate: stream-control-block?)
 
   (defclass <file-control-block> (<stream-control-block>)
     ((file-name accessor: control-block-file-name keyword: file-name:
                 default: "")
      (mode accessor: control-block-mode keyword: mode: default: 'r)
      (descriptor accessor: control-block-descriptor keyword: descriptor:))
-    predicate: file-control-block-p)
+    predicate: file-control-block?)
 
   (defmethod initialize ((fcb <file-control-block>) inits)
     (call-next-method)
@@ -76,24 +76,24 @@
 
   (defclass <buffered-stream> (<stream>)
     ()
-    predicate: buffered-stream-p)
+    predicate: buffered-stream?)
 
   (defclass <string-stream> (<buffered-stream>)
     ((string-list accessor: string-stream-string-list))
     keywords: (string:)
-    predicate: string-stream-p)
+    predicate: string-stream?)
 
   (defclass <file-stream> (<buffered-stream>)
     ()
     keywords: (file-name:)
-    predicate: file-stream-p)
+    predicate: file-stream?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Stream initialization
 ;;;-----------------------------------------------------------------------------
   (defmethod initialize ((s <stream>) inits)
     (call-next-method)
-    (if (buffered-stream-p s) ()
+    (if (buffered-stream? s) ()
       (progn
         (if (stream-source s) ()
           ((setter stream-source) s (make <stream-control-block>)))
@@ -179,7 +179,7 @@
 ;;;-----------------------------------------------------------------------------
   (defgeneric generic-prin (x s))
   (defgeneric generic-write (x s))
-  (defgeneric generic-read (stream eos-error-p eos-value))
+  (defgeneric generic-read (stream eos-error? eos-value))
   (defgeneric end-of-stream (s))
   (defgeneric fill-buffer (s))
   (defgeneric flush-buffer (s))
@@ -192,11 +192,11 @@
 ;;;-----------------------------------------------------------------------------
   (defun eos-default-value () '(*end-of-stream*))
 
-  (defun default-read-action (s eos-error-p eos-value)
+  (defun default-read-action (s eos-error? eos-value)
     (let ((source (stream-source s)))
       (if (and (null (control-block-buffer source))
                (int-binary= (fill-buffer s) 0))
-          (if eos-error-p (end-of-stream s) eos-value)
+          (if eos-error? (end-of-stream s) eos-value)
         (let* ((buf (control-block-buffer source))
                (r (car buf)))
           ((setter control-block-buffer) source (cdr buf))

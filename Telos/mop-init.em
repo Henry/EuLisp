@@ -22,7 +22,7 @@
      ((setter class-slots) cl ())
      ((setter class-keywords) cl keys)
      ((setter class-precedence-list) cl (cons cl cpl))
-     ((setter class-abstract-p) cl absp))
+     ((setter class-abstract?) cl absp))
    (declare-inline init-class)
 
    (init-class <object> 'object object-size

@@ -68,7 +68,7 @@
     (set-prod-ordered-ces prod
                           (labels ((loop (res)
                                          (cond
-                                           ((null res) (list ce))
+                                           ((null? res) (list ce))
                                            ((or (eql (class-of (car res)) <neg-join-ce>)
                                                 (eql (class-of (car res)) <pos-njoin-ce>))
                                             (cons ce res))
@@ -86,7 +86,7 @@
           (set-prod-ordered-ces prod
                                 (labels ((loop (res)
                                                (cond
-                                                 ((null res) (list ce))
+                                                 ((null? res) (list ce))
                                                  ((eql (class-of (car res)) <pos-njoin-ce>)
                                                   (cons ce res))
                                                  (t (cons (car res)
@@ -162,8 +162,8 @@
                ;;(format ops-out "ces to join: ~a~%"  ces)
                ;;(format ops-out "Bindings: ~a ~a~%" bindings (ce-matches ce))
                (join ce prod
-                     (if (null ces) () (car ces))
-                     (if (null ces) () (cdr ces))
+                     (if (null? ces) () (car ces))
+                     (if (null? ces) () (cdr ces))
                      (list ts) (list (cons ce ts)) join-tests bindings
                      cr-manager)))
     method: (((prod <production>) ts (ce <neg-join-ce>) join-tests cr-manager)
@@ -177,8 +177,8 @@
                ;;(print all-ces)
                ;;(format ops-out "Bindings: ~a~%" bindings)
                (join ce prod
-                     (if (null ces) () (car ces))
-                     (if (null ces) () (cdr ces))
+                     (if (null? ces) () (car ces))
+                     (if (null? ces) () (cdr ces))
                      (list ts) () join-tests bindings
                      cr-manager)))
 
@@ -192,8 +192,8 @@
                ;;(print all-ces)
                ;;(format ops-out "Bindings: ~a ~a~%" bindings ts)
                (join ce prod
-                     (if (null ces) () (car ces))
-                     (if (null ces) () (cdr ces))
+                     (if (null? ces) () (car ces))
+                     (if (null? ces) () (cdr ces))
                      (list ts) (list (cons ce ts)) () bindings
                      cr-manager)))
 
@@ -206,8 +206,8 @@
                ;;      (p-name prod))
                ;;        (format ops-out "Bindings: ~a~%" bindings)
                (join ce prod
-                     (if (null ces) () (car ces))
-                     (if (null ces) () (cdr ces))
+                     (if (null? ces) () (car ces))
+                     (if (null? ces) () (cdr ces))
                      () () () bindings
                      cr-manager))))
 
@@ -224,7 +224,7 @@
              ;;(format ops-out "Prod: ~a Ces to go: ~a~%"
              ;;  (prod-name prod) (size ce-list))
              (cond
-               ((null next-ce) ;create prod inst
+               ((null? next-ce) ;create prod inst
                 ;;(print ce-list)
                 ;;(format ops-out  "Inserting Prod Inst: ~a~%" (p-name prod))
                 ;;(format t "Bindings: ~a~%" bindings)
@@ -282,11 +282,11 @@
                          ce-ts join-tests bindings cr-manager)
     (format t "-") (flush stdout)
     ;;(print "dummy-join")
-    (let* ((next-ce (if (null ce-list) () (car ce-list)))
-           (rest-of-ces (if (null next-ce) () (cdr ce-list)))
+    (let* ((next-ce (if (null? ce-list) () (car ce-list)))
+           (rest-of-ces (if (null? next-ce) () (cdr ce-list)))
            (matching-wmes (ce-matches curr-ce)))
       ;; (print matching-wmes)
-      (if (null matching-wmes)
+      (if (null? matching-wmes)
           (join ce0 prod next-ce rest-of-ces timestamps ce-ts join-tests
                 bindings cr-manager)
         (do
@@ -306,13 +306,13 @@
     ;;(format ops-out "join-join: ~a~%" join-tests)
     ;;(format t "Remaining ces: ~a~%" (size ce-list))
     ;;(print bindings)
-    (let* ((next-ce (if (null ce-list) () (car ce-list)))
-           (rest-of-ces (if (null next-ce) () (cdr ce-list)))
+    (let* ((next-ce (if (null? ce-list) () (car ce-list)))
+           (rest-of-ces (if (null? next-ce) () (cdr ce-list)))
            (all-ces (cons curr-ce ce-list))
            (res
              (if (eql (class-of curr-ce) <neg-join-ce>)
                  (labels ((loop (ces)
-                                (when (null ces)
+                                (when (null? ces)
                                       (print "Error: Unable to continue join"))
                                 (let ((jtest (find-shared-jv join-tests
                                                              (car ces))))
@@ -321,7 +321,7 @@
                          (loop all-ces))
                (labels ((loop (ces)
                               (cond
-                                ((null ces) ())
+                                ((null? ces) ())
                                 ((eql (class-of (car ces)) <neg-join-ce>) ())
                                 (t
                                   (let ((jtest (find-shared-jv join-tests
@@ -331,9 +331,9 @@
                        (loop all-ces))))
            (test      (if res (car res) ()))
            (jv-ce     (if res (cdr res) ())))
-      (if (null res)
+      (if (null? res)
           (if (and (eql (class-of curr-ce) <neg-join-ce>)
-                   (null (ce-matches curr-ce)))
+                   (null? (ce-matches curr-ce)))
               (join ce0 prod next-ce rest-of-ces timestamps
                     ce-ts join-tests bindings cr-manager)
             (do
@@ -346,10 +346,10 @@
                       cr-manager))
               (ce-matches curr-ce)))
         (let* ((rest (list-remove jv-ce all-ces))
-               (rest-of-ces (if (null rest) () (cdr rest)))
-               (next-ce (if (null rest) () (car rest)))
+               (rest-of-ces (if (null? rest) () (cdr rest)))
+               (next-ce (if (null? rest) () (car rest)))
                (vals (assoc (cadadr test) (ce-jv-vals jv-ce) eql))
-               (jv-values (if (null vals) () (cdr vals)))
+               (jv-values (if (null? vals) () (cdr vals)))
                (matching-tstamps (query-pos jv-values test)))
           (solve-join jv-ce matching-tstamps
                       ce0 prod next-ce rest-of-ces timestamps ce-ts
@@ -408,7 +408,7 @@
     (let ((res (labels
                  ((find-consis (tstamps jtests ce)
                                (cond
-                                 ((null tstamps) ())
+                                 ((null? tstamps) ())
                                  ((compute-consistent jtests
                                                       (join-list ce (car tstamps)))
                                   t)
@@ -433,14 +433,14 @@
                           ;;(format t "join0: ~a join1: ~a new-join: ~a~%"
                           ;;      join0 join1 new-join)
                           (cond
-                            ((null join0)
+                            ((null? join0)
                              (append new-join join1))
                             (t (let* ((test0 (car join0))
                                       (jv (cadadr test0))
                                       (test1 (find-test jv join1)))
                                  ;;(print test1)
                                  (cond
-                                   ((null test1) ; no occurence of jv
+                                   ((null? test1) ; no occurence of jv
                                     (consis (cdr join0)
                                             join1
                                             (cons test0 new-join)))
@@ -471,7 +471,7 @@
                                              (cons test1 (cons test0 new-join))))))))))))
                   (find-test (jv tests)
                              (cond
-                               ((null tests) ())
+                               ((null? tests) ())
                                ((binary= jv (cadadr (car tests)))
                                 (car tests))
                                (t (find-test jv (cdr tests))))))
@@ -501,7 +501,7 @@
                          ;;(when jlist (print (car jlist))
                          ;;    (print (cadadr (car jlist))))
                          (cond
-                           ((null jlist) (print "ERROR"))
+                           ((null? jlist) (print "ERROR"))
                            ((eql (cadadr (car jlist)) var)
                             ;;(format t "j-test: ~a~%" (car jlist))
                             (car jlist))
@@ -514,12 +514,12 @@
         ;;(format t "restricts: ~a~%" restricts)
         (labels ((loop1 (jlist)
                         (cond
-                          ((null jlist) ())
+                          ((null? jlist) ())
                           (t
                             (let ((jtest
                                     (labels ((loop2 (test jlist2)
                                                     (cond
-                                                      ((null jlist2) ())
+                                                      ((null? jlist2) ())
                                                       (t
                                                         ;;(format t "p1: ~a p2: ~a v1: ~a v2: ~a~%"
                                                         ;;      (caadr test) (cadr (car jlist2))
@@ -560,7 +560,7 @@
                         (- ce-num 1)))
            ;;(convert (- ce-num 1) <integer>)))
            (val (assoc ce ce-ts)))
-      (if (null val)
+      (if (null? val)
           (format ops-out "Error: No timestamp for ~a~%" (ce-id ce))
         (cdr (assoc ce ce-ts)))))
 
@@ -587,7 +587,7 @@
       (format ops-out "Firing production: ~a~%" (p-name prod))
       (labels ((loop (actions)
                      (cond
-                       ((null actions)
+                       ((null? actions)
                         (fire-prod-inst cr-manager wm-manager ce-manager))
                        ((eql (class-of (car actions)) <halt-action>)
                         (format ops-out "Execution terminated by halt action~%"))

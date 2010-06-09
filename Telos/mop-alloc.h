@@ -8,13 +8,13 @@
 extern LispRef mop_alloc_bindings[];
 
 /* Module binding indices */
-#define compute_slots_fn_index 8 
-#define compatible_superclasses_p_fn_index 10 
+#define compute_slots_fn_index 9 
+#define compatible_superclasses__X63_fn_index 14 
 #define compute_specialized_slot_class_fn_index 2 
 #define compute_keywords_fn_index 6 
-#define compatible_superclass_p_fn_index 14 
+#define compatible_superclass__X63_fn_index 8 
 #define compute_defined_slot_fn_index 7 
-#define compute_inherited_keywords_fn_index 9 
+#define compute_inherited_keywords_fn_index 10 
 #define compute_class_precedence_list_fn_index 13 
 #define compute_defined_slot_class_fn_index 12 
 #define compute_inherited_slots_fn_index 3 

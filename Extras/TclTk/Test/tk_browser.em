@@ -110,7 +110,7 @@
           (result ()))
       (do (lambda (el)
             (progn
-              (and (null (eq i pos))
+              (and (null? (eq i pos))
                    (setq result (cons el result)))
               (setq i (+ i 1))))
           list)

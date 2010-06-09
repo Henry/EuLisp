@@ -601,8 +601,8 @@ A description of the r\^ole of the constant binding whose value is
 \sclause{Naming}
 %
 \begin{optPrivate}
-    Consider adopting Scheme conventions for destructive and predicate
-    functions.
+    Consider adopting Scheme/T conventions for destructive and predicate
+    functions.  Considered and adopted (HGW).
 \end{optPrivate}
 %
 \begin{optDefinition}
@@ -617,11 +617,6 @@ which begin with ``{\tt <}'' and end with ``{\tt >}''.
 argument function.  For example \genericref{binary+} is the two argument
 (generic) function corresponding to the n-ary argument \functionref{+} function.
 %
-% \subdefinition{``{\tt c}'' suffix}
-% The version of the function named {\tt foo} that is
-% guaranteed to terminate on self-referential structures is usually
-% named {\tt fooc}.
-%
 \subdefinition{``{\tt -class}'' suffix} The name of a metaclass of a set of
 related classes.  For example, \classref{function-class}, which is the class of
 \classref{simple-function}, \classref{generic-function} and any of their
@@ -631,55 +626,27 @@ question, but not necessarily any particular class in the set.
 %
 \subdefinition{``{\tt generic-}'' prefix} The generic version of the function
 named by the stem.
-% ---usually
-% required to allow for optional or variable numbers of arguments to
-% {\tt abc}.
 %
 \subdefinition{hyphenation} Function and class names made up of more than one
 word are hyphenated, for example: {\tt
     compute-specialized-slot-class}.
 %
-% \subdefinition{``{\tt make-}'' prefix}
-% For most primitive or defined classes there is constructor function,
-% which is usually named {\tt make-}{\em class-name}---except where
-% historical precedent is strong, for example, {\tt cons} is used in
-% preference to {\tt make-pair}.
+\subdefinition{``{\tt make-}'' prefix} For most primitive or defined classes
+there is constructor function, which is usually named {\tt make-}{\em
+    class-name}.
 %
-% \subdefinition{``{\tt n}'' prefix}
-% The destructive version of the function named {\tt foo} is usually
-% named {\tt nfoo}, for example the destructive version of {\tt reverse}
-% is named {\tt nreverse}.
+\subdefinition{``{\tt !}'' suffix} A destructive function is named by a ``{\tt
+    !}'' suffix, for example the destructive version of \genericref{reverse} is
+named \genericref{reverse!}.
 %
-\subdefinition{``{\tt p}'' suffix} A predicate function is named by a ``{\tt
-    p}'' suffix if the function or class name (after removing the enclosing {\tt
-    <} and {\tt >}) is not hyphenated, for instance, \functionref{consp}, and is
-named by a ``{\tt -p}'' suffix if it is, for instance
-\functionref{double-float-p}.
+\subdefinition{``{\tt ?}'' suffix} A predicate function is named by a ``{\tt
+    ?}'' suffix, for example \functionref{cons?}.
 %
-% \subdefinition{``{\tt q}'' suffix}
-% The version of the function named {\tt foo} that uses {\tt eq} for
-% comparison is usually named {\tt fooq}.
-%
-% \subdefinition{``{\tt -ref}'' suffix}
-% A slot reader is named {\em class-name}{\tt{}-ref}---where
-% appropriate---and as is the corresponding slot writer {\tt (setter
-%     {\em class-name}-ref)}---also where appropriate, for example {\tt
-%     table-ref}.  This convention is broken by historical precedent for the
-% accessors to slots of pairs, which are called {\tt car} and {\tt cdr}.
-%
-% \subdefinition{``{\tt -using-}'' infix}
-% This function name convention is used when calls are cascaded using
-% objects derived from the original object so that users can write
-% methods on the relevant classes.  For example, in the case of {\tt
-%     slot-value}, the class and slot description corresponding to the
-% original object and slot name are retrieved, and the new generic
-% functions are called ({\tt slot-value-using-class} and {\tt
-%     slot-value-using-slot}).
-%
-% When an operation depends on a global value, such as the current input
-% stream, the value might also be made accessible via a function, for
-% example {\tt (a-global-value)} and can be updated using the
-% corresponding setter function, for example {\tt ((setter
-%     a-global-value) another-value)}.
-%
+\subdefinition{``{\tt -ref}'' suffix} A slot reader is named {\em
+    class-name}{\tt{}-ref}---where appropriate---and as is the corresponding
+slot writer {\tt (setter {\em class-name}-ref)}---also where appropriate, for
+example {\tt table-ref}.  This convention is broken by historical precedent for
+the accessors to slots of pairs, which are called \functionref{car} and
+\functionref{cdr}.
+
 \end{optDefinition}

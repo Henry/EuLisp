@@ -37,7 +37,7 @@
     (let ((expander
            (cond
             ((symbolp x) (get-id-expander x)) ; simple identifier
-            ((syntax-obj-p x) (lambda (x env e) x)) ; already expanded
+            ((syntax-obj? x) (lambda (x env e) x)) ; already expanded
             ((null (consp x)) (lambda (x env e) ; literal constant
                                 (make <literal-const> value: x)))
             ((symbolp (car x)) (or (get-macro-expander (car x))
@@ -206,20 +206,20 @@
            (loop (gensym)))
        (loop ()))))
 
-  (defun rest-args-p (args)
+  (defun rest-args? (args)
     (or (symbolp args)
         (and (consp args)
-             (not (proper-list-p args)))))
+             (not (proper-list? args)))))
 
-  (defun lambda-rest-args-p (op)
+  (defun lambda-rest-args? (op)
     (if (not (consp op))
         ()
       (let ((lambda-type (car op)))
         (cond ((or (eq lambda-type 'lambda)
                    (eq lambda-type 'inlined-lambda))
-               (rest-args-p (cadr op)))
+               (rest-args? (cadr op)))
               ((eq lambda-type 'named-lambda)
-               (rest-args-p (caddr op)))
+               (rest-args? (caddr op)))
               (t ())))))
 
 ;;;-----------------------------------------------------------------------------
@@ -246,7 +246,7 @@
               ;; So, we wrap a (lambda () ...) around the original lambda
               ;; expression, so that it isn't in the operator position
               ;; any more.
-              (cond ((lambda-rest-args-p op)
+              (cond ((lambda-rest-args? op)
                      (notify0 "  wrapping lambda in operator position: ~s" op)
                      `((lambda () ,op)))
                     (t op))))
@@ -412,7 +412,7 @@
               ;; -------------------------------------------------
               ;; simple values stay where they are
               ;; -------------------------------------------------
-              ((or (literal-const-p expr) (bindingp expr) (funp expr))
+              ((or (literal-const? expr) (bindingp expr) (funp expr))
                (lift-appl rest (cons expr new-exprs) new-vars env))
               ;; -------------------------------------------------
               ;; other argument expressions are lifted
@@ -570,7 +570,7 @@
       (with-ct-handler "bad quote syntax" x
         (make <literal-const> value: (cadr x)))))
 
-  ;  (defun trailing-colon-p (sym)
+  ;  (defun trailing-colon? (sym)
   ;    (let ((str (symbol-name sym)))
   ;      (eq (string-ref str (- (string-size str) 1)) #\:)))
 

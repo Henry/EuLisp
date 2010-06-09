@@ -109,12 +109,12 @@
                (if (null l)
                    res
                  (let ((meth (car l)))
-                   (if (sig-applicable-p value-dom (method-domain meth))
+                   (if (sig-applicable? value-dom (method-domain meth))
                        (loop (cdr l) (cons meth res))
                      (loop (cdr l) res))))))
       (loop meths ())))
 
-  (defun sig-applicable-p (val-dom meth-dom)
+  (defun sig-applicable? (val-dom meth-dom)
     ;; Assume equal length
     (let ((arity (vector-size meth-dom)))
       (labels
@@ -123,7 +123,7 @@
                   (let ((meth-cl (vector-ref meth-dom i)))
                     (if meth-cl
                         (let ((val-cl (vector-ref val-dom i)))
-                          (if (cpl-subclass-p val-cl meth-cl)
+                          (if (cpl-subclass? val-cl meth-cl)
                               (loop (+ i 1))
                             ()))
                       (loop (+ i 1))))

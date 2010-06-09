@@ -40,7 +40,7 @@
 
   (defmethod push ((x <tower>) (y <int>))
     (let ((blocks (tower-blocks x)))
-      (if (or (null blocks) (< y (car blocks)))
+      (if (or (null? blocks) (< y (car blocks)))
           ((setter tower-blocks) x (cons y blocks))
         (error "cannot push block of size ~a on tower ~a" y x))))
 

@@ -103,7 +103,7 @@
     (let ((class-name (car stment)))
       (labels ((loop (attribs index)
                      (cond
-                       ((null attribs) reader)
+                       ((null? attribs) reader)
                        (t
                          (add-attrib reader class-name
                                      (car attribs) index)
@@ -190,7 +190,7 @@
                                                      res-ce)
                                                (prod-ce-vars curr-prod))))))
                                  (get-ce (cddddr ce-rest) ()))
-                            ((null (cdr ce-rest)) ;; no tests
+                            ((null? (cdr ce-rest)) ;; no tests
                              (let ((res (insert-new-ce
                                           (ce-man reader)
                                           (make-pos-njoin-ce (car ce-rest))
@@ -210,7 +210,7 @@
                                 (get-ce (cdr ce-rest) ()))))))
                        (get-action (prod)
                                    (cond
-                                     ((null prod))
+                                     ((null? prod))
                                      (t
                                        (read-action reader (car prod) curr-prod)
                                        (get-action (cdr prod))))))

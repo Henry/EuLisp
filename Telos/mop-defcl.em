@@ -58,14 +58,14 @@
       (loop (class-slots cl))))
 
   (defun slot-value (obj name)
-    (if (primitive-metaclass-p (class-of (class-of obj)))
+    (if (primitive-metaclass? (class-of (class-of obj)))
         (primitive-slot-value obj name)
       (slot-value-using-slot
        (find-slot (class-of obj) name)
        obj)))
 
   (defun (setter slot-value) (obj name val)
-    (if (primitive-metaclass-p (class-of (class-of obj)))
+    (if (primitive-metaclass? (class-of (class-of obj)))
         ((setter primitive-slot-value) obj name val)
       ((setter slot-value-using-slot)
        (find-slot (class-of obj) name) obj val)))
@@ -167,7 +167,7 @@
     (let ((sd (primitive-allocate <local-slot> lsd-size)))
       ((setter slot-name) sd name)
       ((setter slot-keyword) sd (make-keyword (symbol-name name)))
-      ((setter slot-required-p) sd (eq default required:))
+      ((setter slot-required?) sd (eq default required:))
       ((setter slot-default) sd default)
       ((setter slot-reader) sd (predefined-reader i))
       ((setter slot-writer) sd (predefined-writer i))

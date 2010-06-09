@@ -54,13 +54,13 @@
     (access-table-do
      (lambda (name binding)
        ;; Attention -- name is ptr to C string!
-       (and (true-local-binding-p binding)
+       (and (true-local-binding? binding)
             (encode-top-lexical-binding binding state)))
      (module-lexical-env? module)))
 
   (defun interactive-encode-top-lexical-bindings (module state)
     (access-table-do (lambda (name binding)
-                       (and (true-local-binding-p binding)
+                       (and (true-local-binding? binding)
                             (encode-top-lexical-binding binding state)))
                      (module-interactive-lexical-env? module)))
   (defun encode-top-lexical-binding (binding state)
@@ -70,7 +70,7 @@
       (add-asm-set-binding binding state)))
 
   (defun pre-encode-inlined-setter (binding)
-    (if (interface-binding-p binding) ()
+    (if (interface-binding? binding) ()
       (progn
         (notify0 "  Pre-encode inlined setter ~a" (local-name? binding))
         (pre-encode-inlined-lambda binding)
@@ -384,7 +384,7 @@
                        (devide-args (cdr l) (cons arg rest)))
                       ((null (bindingp arg))
                        (cons (reverse l) rest))
-                      ((local-static-var-p obj)
+                      ((local-static-var? obj)
                        (cons (reverse l) rest))
                       (t
                        (devide-args (cdr l) (cons arg rest)))))))
@@ -398,7 +398,7 @@
                        ())
                       ((null (bindingp arg))
                        ())
-                      ((and (local-static-var-p obj)
+                      ((and (local-static-var? obj)
                             (< (var-used? obj) 2)
                             (null (local-static-var-captured? obj))
                             (= (stack-var-index obj state) i))
@@ -467,10 +467,10 @@
     (let ((obj (binding-obj? binding))
           (name (binding-local-name? binding))
           (module-name (save-binding-module-name? binding)))
-      (cond ((interface-binding-p binding)
+      (cond ((interface-binding? binding)
              (add-asm `(set-and-get-binding-ref ,module-name ,name)
                       0 state))
-            ((or (null obj) (local-static-var-p obj))
+            ((or (null obj) (local-static-var? obj))
              (add-asm-set-binding binding state)
              (add-asm-get-binding binding state))
             (t
@@ -479,10 +479,10 @@
 
   (defun binding-read-instr (binding)
     (let ((obj (binding-obj? binding)))
-      (cond ((interface-binding-p binding)
+      (cond ((interface-binding? binding)
              'binding-ref)
             ((null obj) 'noop)
-            ((local-static-var-p obj)
+            ((local-static-var? obj)
              (if (local-static-var-captured? obj)
                  'display-ref
                'stack-ref))
@@ -490,10 +490,10 @@
 
   (defun binding-write-instr (binding)
     (let ((obj (binding-obj? binding)))
-      (cond ((interface-binding-p binding)
+      (cond ((interface-binding? binding)
              'set-binding-ref)
             ((null obj) 'noop)
-            ((local-static-var-p obj)
+            ((local-static-var? obj)
              (if (local-static-var-captured? obj)
                  'set-display-ref
                'set-stack-ref))
@@ -503,12 +503,12 @@
     (let ((obj (binding-obj? binding))
           (name (binding-local-name? binding))
           (module-name (save-binding-module-name? binding)))
-      (cond ((interface-binding-p binding)
+      (cond ((interface-binding? binding)
              (list module-name name))
             ((null obj)
              (notify0 "binding-access-params: unknown obj type ~a" obj)
              (ct-error () "can't generate code for dummy binding"))
-            ((local-static-var-p obj)
+            ((local-static-var? obj)
              (if (local-static-var-captured? obj)
                  (display-var-index obj state)
                (list (stack-var-index obj state))))

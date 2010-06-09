@@ -15,7 +15,7 @@
   (let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
          (c (make <connection> port: port))
          x)
-    (while (null (eq (setq x (read-line stdin () (eos-default-value)))
+    (while (null? (eq (setq x (read-line stdin () (eos-default-value)))
                      (eos-default-value)))
       (prin x c)
       (print (read-line c)))

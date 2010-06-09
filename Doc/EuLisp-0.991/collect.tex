@@ -32,8 +32,8 @@ processed together, starting with the elements at position $0$ and finishing
 with those at position $n-1$ where $n$ is the size of the smallest collection in
 the combination.  The subset of collections which have natural order is called
 {\em sequence\/} and members of this set can be identified by the predicate {\tt
-    sequencep}, while collections in general can be identified by {\tt
-    collectionp}.
+    sequence?}, while collections in general can be identified by {\tt
+    collection?}.
 
 Collection alignment is more complicated when tables are involved since they use
 explicit keys rather than natural order to identify their elements.  In any
@@ -140,7 +140,7 @@ result is \nil{}.
 \verb+(4 2)+\\
 \end{tabular}
 
-\generic{anyp}
+\generic{any?}
 %
 \begin{genericargs}
     \item[function, \classref{function}] A function to be used as a predicate on
@@ -154,10 +154,10 @@ result is \nil{}.
 \result%
 The {\em function\/} is applied to argument lists constructed from corresponding
 successive elements of {\em collection\/} and {\em more-collections}.  If the
-result is \true{}, the result of \genericref{anyp} is \true{} and there are no
+result is \true{}, the result of \genericref{any?} is \true{} and there are no
 further applications of {\em function\/} to elements of {\em collection\/} and
 {\em more-collections}.  If any of the collections is exhausted, the result of
-\genericref{anyp} is \nil{}.
+\genericref{any?} is \nil{}.
 %
 \examples
 \begin{tabular}{lcl}
@@ -181,7 +181,7 @@ further applications of {\em function\/} to elements of {\em collection\/} and
 & \Ra & \true{}
 \end{tabular}
 
-\generic{collectionp}
+\generic{collection?}
 %
 \begin{genericargs}
     \item[object, \classref{object}] An object to examine.
@@ -336,7 +336,7 @@ of {\em key\/} in {\em collection\/} to refer to {\em value}.
 % Note: can't say ``is an error'' to reference a key outside range of
 % collection because that conflicts with tables.
 
-\generic{emptyp}
+\generic{empty?}
 %
 \begin{genericargs}
     \item[collection, \classref{collection}] The object to be examined.
@@ -555,7 +555,7 @@ Destructively reverses the order of the elements in {\em collection\/} (see
 \result%
 The result is contents of index position 1 of {\em sequence}.
 
-\generic{sequencep}
+\generic{sequence?}
 %
 \begin{genericargs}
     \item[object, \classref{object}] An object to examine.

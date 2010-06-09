@@ -69,7 +69,7 @@
   (defun set-up-bindings (module)
     (let* ((C-module-name (as-C-module-name (module-name? module)))
            (env (module-lexical-env? module))
-           (bindings (select-list true-local-binding-p
+           (bindings (select-list true-local-binding?
                                   (access-table-values env)))
            (n (list-size bindings)))
       (and (< 0 n)
@@ -329,7 +329,7 @@
   (defmethod convert-constant ((value <null>))
     'eul_nil)
 
-  (defun static-allocatable-p (x)
+  (defun static-allocatable? (x)
     (null (or (symbolp x) (keywordp x) (null x) (vectorp x) (floatp x))))
 
   (defmethod convert-constant ((value <cons>))
@@ -341,14 +341,14 @@
       (add-code-vector-def "  eul_allocate_static_cons(~a, " loc)
       (add-initialization "  object_class(~a) = eul_static_cons_class\;~%"
                           loc)
-      (if (static-allocatable-p the-car)
+      (if (static-allocatable? the-car)
           (if (or (integerp the-car) (characterp the-car))
               (add-code-vector-def "~a, " car-loc)
             (add-code-vector-def "eul_as_static(~a), " car-loc))
         (progn
           (add-code-vector-def "NULL, ")
           (add-initialization "  eul_car(~a) = ~a\;\n" loc car-loc)))
-      (if (static-allocatable-p the-cdr)
+      (if (static-allocatable? the-cdr)
           (if (or (integerp the-cdr) (characterp the-cdr))
               (add-code-vector-def "~a)\;\n" cdr-loc)
             (add-code-vector-def "eul_as_static(~a))\;\n" cdr-loc))

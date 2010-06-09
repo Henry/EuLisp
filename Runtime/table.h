@@ -8,28 +8,28 @@
 extern LispRef table_bindings[];
 
 /* Module binding indices */
+#define hash_table__X63_fn_index 13 
 #define _min_table_entries__X42_X42_fn_index () 
 #define table_keys_fn_index 2 
 #define table_size_fn_index 5 
-#define simple_hash_table_p_fn_index 6 
 #define _hash_table__X60_X62_fn_index 8 
-#define anyp1_table_fn_index 6 
+#define anyp1_table_fn_index 7 
 #define table_threshold_fn_index 11 
 #define table_entries_fn_index 15 
 #define table_comparator_fn_index 7 
-#define table_ref_fn_index 3 
+#define table_ref_fn_index 4 
 #define _table_fill_factor__X42_X42_fn_index () 
 #define table_hash_function_fn_index 10 
 #define table_fill_value_fn_index 17 
 #define table_values_fn_index 16 
-#define table_empty_p_fn_index 10 
-#define allp1_table_fn_index 9 
+#define simple_hash_table__X63_fn_index 6 
+#define allp1_table_fn_index 10 
 #define _table__X60_X62_fn_index 4 
 #define _simple_hash_table__X60_X62_fn_index 14 
 #define clear_table_fn_index 9 
-#define do1_table_fn_index 7 
-#define map1_table_fn_index 4 
-#define hash_table_p_fn_index 13 
+#define table_empty__X63_fn_index 3 
+#define do1_table_fn_index 8 
+#define map1_table_fn_index 5 
 #define tablep_fn_index 12 
 
 

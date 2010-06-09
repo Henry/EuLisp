@@ -124,8 +124,8 @@
     (if (eq (stream-mode os) 'r) ()
       (flush-buffer (stream-sink os))))
 
-  (defmethod generic-read ((os <object-stream>) eos-error-p eos-value)
-    (eul-serial-read-object os eos-error-p eos-value))
+  (defmethod generic-read ((os <object-stream>) eos-error? eos-value)
+    (eul-serial-read-object os eos-error? eos-value))
 
   (defextern eul-serial-read-header (ptr ptr ptr) ptr "eul_serial_read_header")
   (defextern eul-serial-read-object (ptr ptr ptr) ptr "eul_serial_read_object")
@@ -213,7 +213,7 @@
              (supers (class-direct-superclasses x))
              (slot-descrs (map (lambda (slot)
                                  (let ((name (slot-name slot))
-                                       (requiredp (slot-required-p slot)))
+                                       (requiredp (slot-required? slot)))
                                    (if requiredp
                                        (list name: name
                                              ;; Just following the convention ...
@@ -225,7 +225,7 @@
                                              ;; default:
                                              ; (slot-default slot)
                                              requiredp:
-                                             (slot-required-p slot))
+                                             (slot-required? slot))
                                      (list name: name
                                            ;; Just following the convention ...
                                            ; accessor:
@@ -237,7 +237,7 @@
                                            ; (slot-default slot)
                                            ))))
                                (select (lambda (s)
-                                         (null (anyp (lambda (super)
+                                         (null? (anyp (lambda (super)
                                                        (member s (class-slots super)))
                                                      supers)))
                                        (class-slots x)))))
@@ -275,7 +275,7 @@
         ((setter vector-ref) inits 1 (thread-dynamic-variables x))
         ((setter vector-ref) inits 2 (thread-continuation x))
         ((setter vector-ref) inits 3 (thread-state x))
-        ((setter vector-ref) inits 4 (thread-returned-p x))
+        ((setter vector-ref) inits 4 (thread-returned? x))
         ((setter vector-ref) inits 5 (thread-return-value x))
         (debug-format stderr "!!!Thread: ~a\n" inits)
         (generic-write inits os)))
@@ -323,7 +323,7 @@
                 (x (vector-ref vec 0)))
             (generic-prin TC_VECTOR s)
             (generic-prin data s)
-            (if (null x)
+            (if (null? x)
                 (generic-write () os)
               (serialize-context-stack x os s 0))
             (serialize-context-stack vec os s (+ i 1)))
@@ -354,10 +354,10 @@
              (source (stream-source x))
              (mode (stream-mode x))
              (file-name (if (eq mode 'r)
-                            (if (file-control-block-p source)
+                            (if (file-control-block? source)
                                 (control-block-file-name source)
                               ())
-                          (if (file-control-block-p sink)
+                          (if (file-control-block? sink)
                               (control-block-file-name sink)
                             ()))))
         (debug-format stderr "write file stream with mode: ~a file-name: ~a"
@@ -402,7 +402,7 @@
     (debug-format stderr "prev-object: ~a\n" x)
     (let* ((tab (object-stream-cache os))
            (i (table-ref tab x)))
-      (if (null i) ()
+      (if (null? i) ()
           (let ((sink (stream-sink os))
                 (data (eul-serial-int-data i)))
             (debug-format stderr "<<< old handle: ~a\n" i)
@@ -490,7 +490,7 @@
 
   (defun eul-serial-initialize-instance (x inits)
     (debug-format stderr "initialize-instance: ~a ~a\n" x inits)
-    (if (simple-thread-p x)
+    (if (simple-thread? x)
         (let ((handlers (vector-ref inits 0))
               (dyn-vars (vector-ref inits 1))
               (k (vector-ref inits 2))
@@ -504,7 +504,7 @@
           ((setter thread-dynamic-variables) x dyn-vars)
           ((setter thread-continuation) x k)
           ((setter thread-state) x state)
-          ((setter thread-returned-p) x flag)
+          ((setter thread-returned?) x flag)
           ((setter thread-return-value) x val)
           x)
       (initialize x inits)))
@@ -514,13 +514,13 @@
 ;;;------------------------------------------------------------------------
   (deflocal *position* 0)
 
-  (defun eul-serial-read-bytes (os n eos-error-p eos-value)
+  (defun eul-serial-read-bytes (os n eos-error? eos-value)
     (let ((s (stream-source os))
           (str (make <string> size: n)))
       (labels
        ((loop (i)
               (if (< i n)
-                  (let ((c (generic-read s eos-error-p eos-value)))
+                  (let ((c (generic-read s eos-error? eos-value)))
                     (if (eq c eos-value)
                         (end-of-stream s)
                       (progn
@@ -546,13 +546,13 @@
 ;;;-----------------------------------------------------------------------------
   ;;  (defgeneric select (f c . cs))
   ;;  (defmethod select ((fun <function>) (c <list>) . cs)
-  ;;    (if (null cs)
+  ;;    (if (null? cs)
   ;;      (select-list fun c)
   ;;      (call-next-method)))
   ;;  (defun select-list (pred l . args)
   ;;    (labels
   ;;     ((loop (ll res)
-  ;;          (if (null ll)
+  ;;          (if (null? ll)
   ;;              (reverse-list res)
   ;;            (let ((x (car ll)))
   ;;              (if (apply pred x args)

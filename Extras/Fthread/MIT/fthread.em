@@ -22,7 +22,7 @@
 ;;;-----------------------------------------------------------------------------
   (defclass <ui-thread> (<abstract-thread>)
     ((function accessor: thread-function)
-     (returned accessor: thread-returned-p)
+     (returned accessor: thread-returned?)
      (return-value accessor: thread-return-value)
      ;; Next slots mainly accessed from C
      return-mutex

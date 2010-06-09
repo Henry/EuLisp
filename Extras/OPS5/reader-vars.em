@@ -60,7 +60,7 @@
     (labels
       ((loop (rest)
              (cond
-               ((null rest)
+               ((null? rest)
                 ())
                (t
                  (append (if (numberp (car rest)) (list (car rest))
@@ -143,7 +143,7 @@
   (defun get-vars (cond-el vars join-vars)
     ;;(format ops-out "get-vars: ~a ~a ~a ~%" cond-el vars join-vars)
     (cond
-      ((null cond-el)
+      ((null? cond-el)
        (cons vars join-vars))
       ((binary= (car cond-el) '})
       (get-vars (cdr cond-el) vars join-vars))
@@ -167,7 +167,7 @@
 
   (defun sort-vars (new-var rest vars join-vars)
     ;;(format ops-out "sort-vars: ~a ~a ~a ~a~%" new-var rest vars join-vars)
-    ;;(format ops-out "not member: ~a~%" (null (member new-var vars)))
+    ;;(format ops-out "not member: ~a~%" (null? (member new-var vars)))
     (cond
       ((is-constant new-var)
        ;;(print "constant")
@@ -188,7 +188,7 @@
       (let* ((name (symbol-name x))
              (first (element name 0))
              (same  (eql first #\<)))
-        (null same))))
+        (null? same))))
 
   (defun is-attrib (x)
     ;;(format ops-out "x: ~a~a~%" x (class-of x))

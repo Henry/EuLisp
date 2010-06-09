@@ -14,14 +14,14 @@
            compute-defined-slot compute-defined-slot-class
            compute-specialized-slot compute-specialized-slot-class
            compute-keywords compute-inherited-keywords
-           compatible-superclasses-p compatible-superclass-p
+           compatible-superclasses? compatible-superclass?
            compute-class-precedence-list))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Allocate
 ;;;-----------------------------------------------------------------------------
   (defmethod allocate ((cl <class>) inits)
-    (if (class-abstract-p cl)
+    (if (class-abstract? cl)
         (error "can't allocate an instance of abstract-class ~a" cl)
       (primitive-allocate cl (class-instance-length cl))))
 
@@ -43,7 +43,7 @@
                    init)
                (let ((x (find-key key keywords *absent*)))
                  (if (eq x *absent*)
-                     (if (slot-required-p sd)
+                     (if (slot-required? sd)
                          (warning "missing keyword ~a to make ~a"
                           key (class-name (class-of obj)))
                        (if (functionp init)
@@ -81,7 +81,7 @@
     (let ((direct-supers (class-direct-superclasses cl))
           (direct-slotds (find-key direct-slots: keywords ()))
           (direct-keys (find-key direct-keywords: keywords ())))
-      (if (compatible-superclasses-p cl direct-supers) ()
+      (if (compatible-superclasses? cl direct-supers) ()
           (error "~a can not be a subclass of ~a" cl direct-supers))
       ((setter class-precedence-list) cl
        (compute-class-precedence-list cl direct-supers))
@@ -102,13 +102,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Compatible superclasses
 ;;;-----------------------------------------------------------------------------
-  (defgeneric compatible-superclasses-p ((cl <class>) superclasses))
-  (defmethod compatible-superclasses-p ((cl <class>) superclasses)
-    (compatible-superclass-p cl (car superclasses)))
+  (defgeneric compatible-superclasses? ((cl <class>) superclasses))
+  (defmethod compatible-superclasses? ((cl <class>) superclasses)
+    (compatible-superclass? cl (car superclasses)))
 
-  (defgeneric compatible-superclass-p ((cl <class>) (superclass <class>)))
-  (defmethod compatible-superclass-p ((cl <class>) (super <class>))
-    (if (class-abstract-p super) t
+  (defgeneric compatible-superclass? ((cl <class>) (superclass <class>)))
+  (defmethod compatible-superclass? ((cl <class>) (super <class>))
+    (if (class-abstract? super) t
         (subclassp (class-of cl) (class-of super))))
 
 ;;;-----------------------------------------------------------------------------

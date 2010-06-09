@@ -66,7 +66,7 @@ The following accessor functions are defined for \classref{stream}
 The transaction unit of \classref{stream} is \classref{object}.
 
 % ------------------------------------------------------------------------------
-\function{streamp}
+\function{stream?}
 % ------------------------------------------------------------------------------
 \begin{arguments}
   \item[object, \classref{object}] The object to be examined.
@@ -127,7 +127,7 @@ accessor functions are defined for \classref{file-stream}:
 \end{functions}
 
 % ------------------------------------------------------------------------------
-\function{file-stream-p}
+\function{file-stream?}
 % ------------------------------------------------------------------------------
 \begin{arguments}
   \item[object, \classref{object}] The object to be examined.
@@ -144,7 +144,7 @@ Returns {\em object\/} if it is a \classref{file-stream} otherwise \nil{}.
 The class of the default string stream.
 
 % ------------------------------------------------------------------------------
-\function{string-stream-p}
+\function{string-stream?}
 % ------------------------------------------------------------------------------
 \begin{arguments}
     \item[object, \classref{object}] The object to be examined.
@@ -478,7 +478,7 @@ read operation on {\em stream\/}, when it is at end of stream.
 %
 \remarks%
 This function is guaranteed to be called when a read operation
-encounters the end of {\em stream\/} and the {\tt eos-error-p} argument to read
+encounters the end of {\em stream\/} and the {\tt eos-error?} argument to read
 has a non-\nil{}\/ value.
 
 % ------------------------------------------------------------------------------
@@ -522,7 +522,7 @@ than when it is at end of stream.
 % ------------------------------------------------------------------------------
 \begin{arguments}
     \item[\optional{stream}] A stream.
-    \item[\optional{eos-error-p}] A boolean.
+    \item[\optional{eos-error?}] A boolean.
     \item[\optional{eos-value}] Value to be returned to indicate end of stream.
 \end{arguments}
 %
@@ -532,7 +532,7 @@ defaulted as described.
 %
 \remarks%
 The {\em stream\/} defaults to \instanceref{lispin}, {\em
-    eos-error-p\/} defaults to \nil{}\/ and {\em eos-value\/} defaults to {\tt
+    eos-error?\/} defaults to \nil{}\/ and {\em eos-value\/} defaults to {\tt
     eos-default-value}.
 
 % ------------------------------------------------------------------------------
@@ -540,7 +540,7 @@ The {\em stream\/} defaults to \instanceref{lispin}, {\em
 % ------------------------------------------------------------------------------
 \begin{genericargs}
     \item[stream, \classref{stream}] A stream.
-    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-error?, \classref{object}] A boolean.
     \item[eos-value, \classref{object}] Value to be returned to indicate end of
     stream.
 \end{genericargs}
@@ -549,9 +549,9 @@ The {\em stream\/} defaults to \instanceref{lispin}, {\em
 The next transaction unit from {\em stream}.
 %
 \remarks%
-If the end of {\em stream\/} is encountered and the value of {\em eos-error-p}
+If the end of {\em stream\/} is encountered and the value of {\em eos-error?}
 is \nil{}, the result is {\em eos-value\/}. If the end of {\em stream} is
-encountered and the value of {\tt eos-error-p} is non-\nil{}, the function
+encountered and the value of {\tt eos-error?} is non-\nil{}, the function
 \methodref{end-of-stream}{stream} is called with the argument {\em stream}.
 
 % ------------------------------------------------------------------------------
@@ -559,14 +559,14 @@ encountered and the value of {\tt eos-error-p} is non-\nil{}, the function
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{stream}] A stream.
-    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-error?, \classref{object}] A boolean.
     \item[eos-value, \classref{object}] Value to be returned to indicate end of
     stream.
 \end{specargs}
 %
 \result%
 That of calling the {\em read-action\/} of stream with the arguments {\em
-    stream\/}, {\em eos-error-p\/} and {\em eos-value}.  Returns \true.
+    stream\/}, {\em eos-error?\/} and {\em eos-value}.  Returns \true.
 %
 \remarks%
 Implements the \genericref{generic-read} operation for objects of class
@@ -577,7 +577,7 @@ Implements the \genericref{generic-read} operation for objects of class
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{buffered-stream}] A buffered stream.
-    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-error?, \classref{object}] A boolean.
     \item[eos-value, \classref{object}] Value to be returned to indicate end of
     stream.
 \end{specargs}
@@ -597,7 +597,7 @@ Implements the \genericref{generic-read} operation for objects of class
 % ------------------------------------------------------------------------------
 \begin{specargs}
     \item[stream, \classref{file-stream}] A file stream.
-    \item[eos-error-p, \classref{object}] A boolean.
+    \item[eos-error?, \classref{object}] A boolean.
     \item[eos-value, \classref{object}] Value to be returned to indicate end of
     stream.
 \end{specargs}
@@ -617,26 +617,6 @@ Implements the \genericref{generic-read} operation for objects of class
 \ssclause{Writing to streams}
 
 % ------------------------------------------------------------------------------
-\function{write}
-% ------------------------------------------------------------------------------
-\begin{arguments}
-    \item[object] An object to be written to {\em stream}.
-    \item[\optional{stream}] Stream to which {\em object\/} is
-    to be written.
-\end{arguments}
-%
-\result%
-Returns {\em object}.
-%
-\remarks%
-Outputs the external representation of {\em object\/} on the output
-stream {\em stream\/} using \genericref{generic-write}.  If {\em stream\/} is
-not specified the standard output stream is used.
-%
-\seealso%
-\instanceref{stdout}, \genericref{generic-write}.
-
-% ------------------------------------------------------------------------------
 \generic{generic-write}
 % ------------------------------------------------------------------------------
 \begin{genericargs}
@@ -653,9 +633,15 @@ Outputs the external representation of {\em object\/} on the output stream
 {\em stream}.
 %
 \seealso%
-Methods on \genericref{generic-write} are defined for \classref{character},
-\classref{double-float}, \classref{fixed-precision-integer}, \classref{list},
-\classref{string}, \classref{symbol} and \classref{vector}.
+The following \genericref{generic-write} methods are defined:
+\methodref{generic-write}{character}, \methodref{generic-write}{symbol},
+\methodref{generic-write}{keyword},
+\methodref{generic-write}{fixed-precision-integer},
+\methodref{generic-write}{double-float}, \methodref{generic-write}{null},
+\methodref{generic-write}{cons}, \methodref{generic-write}{list},
+\methodref{generic-write}{string}, \methodref{generic-write}{vector},
+\methodref{generic-write}{stream}, \methodref{generic-write}{buffered-stream}
+and \methodref{generic-write}{file-stream}.
 
 % ------------------------------------------------------------------------------
 \method{generic-write}{stream}
@@ -684,6 +670,26 @@ Methods on \genericref{generic-write} are defined for \classref{character},
     to be written.
 \end{specargs}
 
+% ------------------------------------------------------------------------------
+\function{write}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[object] An object to be written to {\em stream}.
+    \item[\optional{stream}] Stream to which {\em object\/} is
+    to be written.
+\end{arguments}
+%
+\result%
+Returns {\em object}.
+%
+\remarks%
+Outputs the external representation of {\em object\/} on the output
+stream {\em stream\/} using \genericref{generic-write}.  If {\em stream\/} is
+not specified the standard output stream is used.
+%
+\seealso%
+\instanceref{stdout}, \genericref{generic-write}.
+
 %%%  ---------------------------------------------------------------------------
 %%%  Additional functions
 \ssclause{Additional functions}
@@ -693,7 +699,7 @@ Methods on \genericref{generic-write} are defined for \classref{character},
 % ------------------------------------------------------------------------------
 \begin{arguments}
     \item[stream] A stream.
-    \item[\optional{eos-error-p}] A boolean.
+    \item[\optional{eos-error?}] A boolean.
     \item[\optional{eos-value}] Value to be returned to indicate end of stream.
 \end{arguments}
 %
@@ -709,31 +715,11 @@ called: the default stream action is to signal an error: (condition
 class: \conditionref{end-of-stream}\indexcondition{end-of-stream}).
 
 % ------------------------------------------------------------------------------
-\function{prin}
-% ------------------------------------------------------------------------------
-\begin{arguments}
-    \item[object] An object to be output on {\em stream}.
-    \item[\optional{stream}] A character stream on which {\em object\/} is to
-    be output.
-\end{arguments}
-%
-\result%
-Returns {\em object}.
-%
-\remarks%
-Outputs the external representation of {\em object\/} on the output
-stream {\em stream\/} using \genericref{generic-prin}.  If {\em stream\/} is
-not specified \instanceref{stdout} is used.
-%
-\seealso%
-\instanceref{stdout}, \genericref{generic-prin}.
-
-% ------------------------------------------------------------------------------
 \generic{generic-prin}
 % ------------------------------------------------------------------------------
 \begin{genericargs}
     \item[object, \classref{object}] An object to be output on {\em stream}.
-    \item[\optional{stream}, \classref{stream}] A character stream on which {\em
+    \item[stream, \classref{stream}] A character stream on which {\em
         object\/} is to be output.
 \end{genericargs}
 %
@@ -741,27 +727,95 @@ not specified \instanceref{stdout} is used.
 Returns {\em object}.
 %
 \remarks%
-Generic form of \functionref{prin}.
+Outputs the external representation of {\em object\/} on the output stream {\em
+    stream\/}.
+%
+\seealso%
+\functionref{prin}.  The following \genericref{generic-write} methods are
+defined: \methodref{generic-write}{character},
+\methodref{generic-write}{symbol}, \methodref{generic-write}{keyword},
+\methodref{generic-write}{fixed-precision-integer},
+\methodref{generic-write}{double-float}, \methodref{generic-write}{null},
+\methodref{generic-write}{cons}, \methodref{generic-write}{list},
+\methodref{generic-write}{string} and \methodref{generic-write}{vector}.
+
+% ------------------------------------------------------------------------------
+\function{sprin}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[stream] A character stream on which {\em object\/} is to
+    be output.
+    \item[{\optional{object$_1$ object$_2$ ...}}] A sequence of objects to be
+    output on {\em stream}.
+\end{arguments}
+%
+\result%
+Returns {\em stream}.
+%
+\remarks%
+Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
+output stream {\em stream\/} using \genericref{generic-prin} for each object.
+%
+\seealso%
+\genericref{generic-prin}.
+
+% ------------------------------------------------------------------------------
+\function{prin}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[{\optional{object$_1$ object$_2$ ...}}] A sequence of objects to be
+    output on \instanceref{stdout}.
+\end{arguments}
+%
+\result%
+Returns \instanceref{stdout}.
+%
+\remarks%
+Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
+output stream \instanceref{stdout} using \genericref{sprin} for each object.
+%
+\seealso%
+\instanceref{stdout}, \genericref{sprin}.
+
+% ------------------------------------------------------------------------------
+\function{sprint}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[stream] A character stream on which {\em object\/} is
+    to be output.
+    \item[{\optional{object$_1$ object$_2$ ...}}] A sequence of objects to be
+    output on {\em stream}.
+\end{arguments}
+%
+\result%
+Returns {\em stream}.
+%
+\remarks%
+Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
+output stream {\em stream\/} using \genericref{generic-prin} for each object,
+followed by a newline character.
+%
+\seealso%
+\genericref{generic-prin}.
 
 % ------------------------------------------------------------------------------
 \function{print}
 % ------------------------------------------------------------------------------
 \begin{arguments}
-    \item[object] An object to be output on {\em stream}.
-    \item[\optional{stream}] A character stream on which {\em object\/} is
-    to be output.
+    \item[{\optional{object$_1$ object$_2$ ...}}] A sequence of objects to be
+    output on \instanceref{stdout}.
 \end{arguments}
 %
 \result%
-Returns {\em object}.
+Returns \instanceref{stdout}.
 %
 \remarks%
-Outputs the external representation of {\em object\/} on the output
-stream {\em stream\/} using \genericref{generic-prin}, followed by a newline
-character.  If {\em stream\/} is not specified \instanceref{stdout} is used.
+Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
+output stream \instanceref{stdout} using \genericref{sprint} for each object,
+followed by a newline character.
 %
 \seealso%
-\instanceref{stdout}, \genericref{generic-prin}.
+\instanceref{stdout}, \genericref{sprint}.
 
 % ------------------------------------------------------------------------------
 \generic{flush}
@@ -786,7 +840,7 @@ the stream. The stream remains open.
 \end{arguments}
 %
 \result%
-Returns \verb|#\newline|.
+Returns \verb|#\n|.
 %
 \remarks%
 Outputs a newline character to {\em stream}.  If {\em stream\/} is not
@@ -816,16 +870,8 @@ If {\em times\/} is specified, then stream must also be specified.
 % ------------------------------------------------------------------------------
 \begin{arguments}
     \item[stream] A stream.
-    \item[\optional{eos-error-p}] A boolean.
+    \item[\optional{eos-error?}] A boolean.
     \item[\optional{eos-value}] Value to be returned to indicate end of stream.
-\end{arguments}
-
-% ------------------------------------------------------------------------------
-\function{sprin}
-% ------------------------------------------------------------------------------
-\begin{arguments}
-    \item[object] Object to be written.
-    \item[\optional{stream}] Stream for writing.
 \end{arguments}
 
 %%% ---------------------------------------------------------------------------

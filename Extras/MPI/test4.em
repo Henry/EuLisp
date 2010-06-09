@@ -20,8 +20,8 @@
 ;;;-----------------------------------------------------------------------------
   (let* ((s1 (make <mpi-stream>))
          (s2 (make <mpi-stream>))
-         (remote-s (if (local-mpi-stream-p s1) s2 s1))
-         (local-s (if (local-mpi-stream-p s1) s1 s2))
+         (remote-s (if (local-mpi-stream? s1) s2 s1))
+         (local-s (if (local-mpi-stream? s1) s1 s2))
          (x (generic-read remote-s () ())))
     (format t "Received ~a at ~a from ~a\n" x local-s remote-s)
     (disconnect local-s))

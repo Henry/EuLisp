@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>Contents</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- html,1,next,noannex,xhtml --> 
+<meta name="src" content="eulisp.tex" /> 
+<meta name="date" content="2010-06-09 10:52:00" /> 
+<link rel="stylesheet" type="text/css" href="eulisp.css" /> 
+</head><body 
+>
+                                                   <!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl1.html" >next</a>] [<a 
+href="eulisp.html" >prev</a>] [<a 
+href="eulisp.html#taileulisp" >prev-tail</a>] [<a 
+href="#taileulispli1.html">tail</a>] [<a 
+href="eulisp.html#eulispli1.html" >up</a>] </p></div>
+  <h3 class="likeclauseHead"><a 
+ id="x2-1000"></a>Contents</h3>
+  <div class="tableofcontents">
+  <span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-2000">Foreword</a></span>
+  <br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-4000">Introduction</a></span>
+  <br /><span class="clauseToc">1 <a 
+href="eulispcl1.html#x3-50001">Language Structure</a></span>
+  <br /><span class="clauseToc">2 <a 
+href="eulispcl2.html#x4-60002">Scope</a></span>
+  <br /><span class="clauseToc">3 <a 
+href="eulispcl3.html#x5-70003">Normative References</a></span>
+  <br /><span class="clauseToc">4 <a 
+href="eulispcl4.html#x6-80004">Conformance Definitions</a></span>
+  <br /><span class="clauseToc">5 <a 
+href="eulispcl5.html#x7-90005">Error Definitions</a></span>
+  <br /><span class="clauseToc">6 <a 
+href="eulispcl6.html#x8-100006">Compliance</a></span>
+  <br /><span class="clauseToc">7 <a 
+href="eulispcl7.html#x9-110007">Conventions</a></span>
+  <br />&#x00A0;<span class="sclauseToc">7.1 <a 
+href="eulispcl7.html#x9-120007.1" id="QQ2-9-12">Layout and Typography</a></span>
+  <br />&#x00A0;<span class="sclauseToc">7.2 <a 
+href="eulispcl7.html#x9-390007.2" id="QQ2-9-47">Naming</a></span>
+  <br /><span class="clauseToc">8 <a 
+href="eulispcl8.html#x10-490008">Definitions</a></span>
+  <br /><span class="clauseToc">9 <a 
+href="eulispcl9.html#x11-500009">Lexical Syntax</a></span>
+  <br />&#x00A0;<span class="sclauseToc">9.1 <a 
+href="eulispcl9.html#x11-510009.1" id="QQ2-11-59">Character Set</a></span>
+  <br />&#x00A0;<span class="sclauseToc">9.2 <a 
+href="eulispcl9.html#x11-530009.2" id="QQ2-11-61">Whitespace and Comments</a></span>
+  <br />&#x00A0;<span class="sclauseToc">9.3 <a 
+href="eulispcl9.html#x11-550009.3" id="QQ2-11-63">Identifiers</a></span>
+  <br />&#x00A0;<span class="sclauseToc">9.4 <a 
+href="eulispcl9.html#x11-570009.4" id="QQ2-11-65">Objects</a></span>
+  <br />&#x00A0;<span class="sclauseToc">9.5 <a 
+href="eulispcl9.html#x11-590009.5" id="QQ2-11-67">Boolean</a></span>
+  <br /><span class="clauseToc">10 <a 
+href="eulispcl10.html#x12-6100010">Modules</a></span>
+  <br />&#x00A0;<span class="sclauseToc">10.1 <a 
+href="eulispcl10.html#x12-6200010.1" id="QQ2-12-70">Module Definition</a></span>
+  <br />&#x00A0;<span class="sclauseToc">10.2 <a 
+href="eulispcl10.html#x12-6700010.2" id="QQ2-12-76">Directives</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">10.2.1 <a 
+href="eulispcl10.html#x12-6800010.2.1" id="QQ2-12-77"><span 
+class="cmtt-9">export</span> Directive</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">10.2.2 <a 
+href="eulispcl10.html#x12-6900010.2.2" id="QQ2-12-78"><span 
+class="cmtt-9">import </span>Directive</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">10.2.3 <a 
+href="eulispcl10.html#x12-7000010.2.3" id="QQ2-12-79"><span 
+class="cmtt-9">expose </span>Directive</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">10.2.4 <a 
+href="eulispcl10.html#x12-7100010.2.4" id="QQ2-12-80"><span 
+class="cmtt-9">syntax </span>Directive</a></span>
+  <br />&#x00A0;<span class="sclauseToc">10.3 <a 
+href="eulispcl10.html#x12-7200010.3" id="QQ2-12-81">Definitions and Expressions</a></span>
+  <br />&#x00A0;<span class="sclauseToc">10.4 <a 
+href="eulispcl10.html#x12-7300010.4" id="QQ2-12-82">Special Forms</a></span>
+  <br />&#x00A0;<span class="sclauseToc">10.5 <a 
+href="eulispcl10.html#x12-7400010.5" id="QQ2-12-83">Module Processing</a></span>
+  <br /><span class="clauseToc">11 <a 
+href="eulispcl11.html#x13-7500011">Objects</a></span>
+  <br />&#x00A0;<span class="sclauseToc">11.1 <a 
+href="eulispcl11.html#x13-7600011.1" id="QQ2-13-85">System Defined Classes</a></span>
+  <br />&#x00A0;<span class="sclauseToc">11.2 <a 
+href="eulispcl11.html#x13-7700011.2" id="QQ2-13-89">Single Inheritance</a></span>
+  <br />&#x00A0;<span class="sclauseToc">11.3 <a 
+href="eulispcl11.html#x13-7800011.3" id="QQ2-13-90">Defining Classes</a></span>
+  <br />&#x00A0;<span class="sclauseToc">11.4 <a 
+href="eulispcl11.html#x13-8400011.4" id="QQ2-13-98">Defining Generic Functions and Methods</a></span>
+                                                                                                  
+                                                                                                  
+<br />&#x00A0;<span class="sclauseToc">11.5 <a 
+href="eulispcl11.html#x13-9700011.5" id="QQ2-13-116">Specializing Methods</a></span>
+<br />&#x00A0;<span class="sclauseToc">11.6 <a 
+href="eulispcl11.html#x13-10300011.6" id="QQ2-13-124">Method Lookup and Generic Dispatch</a></span>
+<br />&#x00A0;<span class="sclauseToc">11.7 <a 
+href="eulispcl11.html#x13-10400011.7" id="QQ2-13-125">Creating and Initializing Objects</a></span>
+<br />&#x00A0;<span class="sclauseToc">11.8 <a 
+href="eulispcl11.html#x13-11700011.8" id="QQ2-13-142">Accessing Slots</a></span>
+<br />&#x00A0;<span class="sclauseToc">11.9 <a 
+href="eulispcl11.html#x13-11800011.9" id="QQ2-13-143">Other Abstract Classes</a></span>
+<br /><span class="clauseToc">12 <a 
+href="eulispcl12.html#x16-12000012">Concurrency</a></span>
+<br />&#x00A0;<span class="sclauseToc">12.1 <a 
+href="eulispcl12.html#x16-12100012.1" id="QQ2-16-147">Threads</a></span>
+<br />&#x00A0;<span class="sclauseToc">12.2 <a 
+href="eulispcl12.html#x16-15000012.2" id="QQ2-16-188">Locks</a></span>
+<br /><span class="clauseToc">13 <a 
+href="eulispcl13.html#x17-16100013">Conditions</a></span>
+<br /><span class="clauseToc">14 <a 
+href="eulispcl14.html#x18-16200014">Condition Classes</a></span>
+<br /><span class="clauseToc">15 <a 
+href="eulispcl15.html#x19-18600015">Condition Signalling and Handling</a></span>
+<br /><span class="clauseToc">16 <a 
+href="eulispcl16.html#x20-20500016">Level-0 Defining, Special and Function-call Forms</a></span>
+<br />&#x00A0;<span class="sclauseToc">16.1 <a 
+href="eulispcl16.html#x20-20600016.1" id="QQ2-20-269">Simple Expressions</a></span>
+<br />&#x00A0;<span class="sclauseToc">16.2 <a 
+href="eulispcl16.html#x20-22100016.2" id="QQ2-20-291">Functions: creation, definition and application</a></span>
+<br />&#x00A0;<span class="sclauseToc">16.3 <a 
+href="eulispcl16.html#x20-24500016.3" id="QQ2-20-321">Destructive Operations</a></span>
+<br />&#x00A0;<span class="sclauseToc">16.4 <a 
+href="eulispcl16.html#x20-25900016.4" id="QQ2-20-339">Conditional Expressions</a></span>
+<br />&#x00A0;<span class="sclauseToc">16.5 <a 
+href="eulispcl16.html#x20-27200016.5" id="QQ2-20-356">Variable Binding and Sequences</a></span>
+<br />&#x00A0;<span class="sclauseToc">16.6 <a 
+href="eulispcl16.html#x20-30500016.6" id="QQ2-20-397">Quasiquotation Expressions</a></span>
+<br />&#x00A0;<span class="sclauseToc">16.7 <a 
+href="eulispcl16.html#x20-31600016.7" id="QQ2-20-414">Summary of Level-0 Defining, Special and Function-call Forms</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">16.7.1 <a 
+href="eulispcl16.html#x20-31700016.7.1" id="QQ2-20-415">Syntax of Level-0 modules</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">16.7.2 <a 
+href="eulispcl16.html#x20-31800016.7.2" id="QQ2-20-416">Syntax of Level-0 defining forms</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">16.7.3 <a 
+href="eulispcl16.html#x20-31900016.7.3" id="QQ2-20-417">Syntax of Level-0 special forms</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">16.7.4 <a 
+href="eulispcl16.html#x20-32000016.7.4" id="QQ2-20-418">Syntax of Level-0 function calls</a></span>
+<br /><span class="clauseToc">17 <a 
+href="eulispcl17.html#x21-32100017">Level-0 Module Library</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.1 <a 
+href="eulispcl17.html#x21-32200017.1" id="QQ2-21-420">Characters</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.2 <a 
+href="eulispcl17.html#x21-34800017.2" id="QQ2-21-459">Collections</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.3 <a 
+href="eulispcl17.html#x21-43100017.3" id="QQ2-21-575">Comparison</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.4 <a 
+href="eulispcl17.html#x21-46300017.4" id="QQ2-21-620">Conversion</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.5 <a 
+href="eulispcl17.html#x21-47600017.5" id="QQ2-21-638">Copying</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.6 <a 
+href="eulispcl17.html#x21-49100017.6" id="QQ2-21-659">Double Precision Floats</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.7 <a 
+href="eulispcl17.html#x21-51000017.7" id="QQ2-21-688">Elementary Functions</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.8 <a 
+href="eulispcl17.html#x21-54200017.8" id="QQ2-21-736">Floating Point Numbers</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.9 <a 
+href="eulispcl17.html#x21-55400017.9" id="QQ2-21-755">Fixed Precision Integers</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.10 <a 
+href="eulispcl17.html#x21-57000017.10" id="QQ2-21-780">Formatted-IO</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.11 <a 
+href="eulispcl17.html#x21-57900017.11" id="QQ2-21-792">Integers</a></span>
+<br />&#x00A0;<span class="sclauseToc">17.12 <a 
+href="eulispcl17.html#x21-58700017.12" id="QQ2-21-805">Keywords</a></span>
+                                                   <br />&#x00A0;<span class="sclauseToc">17.13 <a 
+href="eulispcl17.html#x21-60600017.13" id="QQ2-21-832">Lists</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.14 <a 
+href="eulispcl17.html#x21-64800017.14" id="QQ2-21-895">Numbers</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.15 <a 
+href="eulispcl17.html#x21-69900017.15" id="QQ2-21-974">Streams</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.1 <a 
+href="eulispcl17.html#x21-70000017.15.1" id="QQ2-21-975">Stream classes</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.2 <a 
+href="eulispcl17.html#x21-70800017.15.2" id="QQ2-21-993">Stream operators</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.3 <a 
+href="eulispcl17.html#x21-74000017.15.3" id="QQ2-21-1035">Stream objects</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.4 <a 
+href="eulispcl17.html#x21-74500017.15.4" id="QQ2-21-1044">Buffer management</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.5 <a 
+href="eulispcl17.html#x21-76900017.15.5" id="QQ2-21-1078">Reading from streams</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.6 <a 
+href="eulispcl17.html#x21-78700017.15.6" id="QQ2-21-1102">Writing to streams</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.7 <a 
+href="eulispcl17.html#x21-79900017.15.7" id="QQ2-21-1119">Additional functions</a></span>
+  <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.15.8 <a 
+href="eulispcl17.html#x21-83400017.15.8" id="QQ2-21-1164">Convenience forms</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.16 <a 
+href="eulispcl17.html#x21-84300017.16" id="QQ2-21-1179">Strings</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.17 <a 
+href="eulispcl17.html#x21-86900017.17" id="QQ2-21-1217">Symbols</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.18 <a 
+href="eulispcl17.html#x21-89000017.18" id="QQ2-21-1247">Tables</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.19 <a 
+href="eulispcl17.html#x21-89700017.19" id="QQ2-21-1257">Vectors</a></span>
+  <br />&#x00A0;<span class="sclauseToc">17.20 <a 
+href="eulispcl17.html#x21-91500017.20" id="QQ2-21-1284">Syntax of Level-0 objects</a></span>
+  <br /><span class="clauseToc">18 <a 
+href="eulispcl18.html#x23-91600018">Programming Language EuLisp, Level-1</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.1 <a 
+href="eulispcl18.html#x23-91700018.1" id="QQ2-23-1286">Modules</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.2 <a 
+href="eulispcl18.html#x23-91800018.2" id="QQ2-23-1287">Classes and Objects</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.3 <a 
+href="eulispcl18.html#x23-92200018.3" id="QQ2-23-1292">Generic Functions</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.4 <a 
+href="eulispcl18.html#x23-93300018.4" id="QQ2-23-1305">Methods</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.5 <a 
+href="eulispcl18.html#x23-94300018.5" id="QQ2-23-1320">Object Introspection</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.6 <a 
+href="eulispcl18.html#x23-94700018.6" id="QQ2-23-1325">Class Introspection</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.7 <a 
+href="eulispcl18.html#x23-95700018.7" id="QQ2-23-1339">Slot Introspection</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.8 <a 
+href="eulispcl18.html#x23-96800018.8" id="QQ2-23-1356">Generic Function Introspection</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.9 <a 
+href="eulispcl18.html#x23-98200018.9" id="QQ2-23-1375">Method Introspection</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.10 <a 
+href="eulispcl18.html#x23-99100018.10" id="QQ2-23-1388">Class Initialization</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.11 <a 
+href="eulispcl18.html#x23-100900018.11" id="QQ2-23-1414">Slot Description Initialization</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.12 <a 
+href="eulispcl18.html#x23-101200018.12" id="QQ2-23-1418">Generic Function Initialization</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.13 <a 
+href="eulispcl18.html#x23-101600018.13" id="QQ2-23-1423">Method Initialization</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.14 <a 
+href="eulispcl18.html#x23-101900018.14" id="QQ2-23-1427">Inheritance Protocol</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.15 <a 
+href="eulispcl18.html#x23-109700018.15" id="QQ2-23-1530">Slot Access Protocol</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.16 <a 
+href="eulispcl18.html#x23-115200018.16" id="QQ2-23-1603">Method Lookup and Generic Dispatch</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.17 <a 
+href="eulispcl18.html#x23-117100018.17" id="QQ2-23-1628">Low Level Allocation Primitives</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.18 <a 
+href="eulispcl18.html#x23-118700018.18" id="QQ2-23-1649">Dynamic Binding</a></span>
+  <br />&#x00A0;<span class="sclauseToc">18.19 <a 
+href="eulispcl18.html#x23-120600018.19" id="QQ2-23-1674">Exit Extensions</a></span>
+                                                                                                  
+                                                                                                  
+<br />&#x00A0;<span class="sclauseToc">18.20 <a 
+href="eulispcl18.html#x23-121500018.20" id="QQ2-23-1685">Summary of Level-1 Defining, Special and Function-call Forms</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">18.20.1 <a 
+href="eulispcl18.html#x23-121600018.20.1" id="QQ2-23-1686">Syntax of Level-1 modules</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">18.20.2 <a 
+href="eulispcl18.html#x23-121700018.20.2" id="QQ2-23-1687">Syntax of Level-1 defining forms</a></span>
+<br />&#x00A0;&#x00A0;<span class="ssclauseToc">18.20.3 <a 
+href="eulispcl18.html#x23-121800018.20.3" id="QQ2-23-1688">Syntax of Level-1 special forms</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-121900018.20.3">Bibliography</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122000018.20.3">Function Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122100018.20.3">Macro Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122200018.20.3">Generic Function Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122300018.20.3">Method Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122400018.20.3">Condition Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122500018.20.3">Constant Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122600018.20.3">Class Index</a></span>
+<br /><span class="likefibicl@useToc"><a 
+href="eulisp.html#x1-122700018.20.3">Index</a></span>
+</div> <span 
+class="cmbx-9">Figures</span>
+<div class="tableofcontents"><span class="lofToc">&#x00A0;<a 
+href="eulispcl10.html#x12-67004">Example1 module directives</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl10.html#x12-70005">Example1 module using <span 
+class="cmtt-9">expose</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl15.html#x19-197008">Example1 handler
+actions</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-277002">Example1 using <span 
+class="cmtt-9">let/cc</span></a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl16.html#x20-304002">Example2 Interaction of <span 
+class="cmtt-9">unwind-protect </span>with non-local
+exits</a></span><br /><span class="lofToc">&#x00A0;<a 
+href="eulispcl17.html#x21-844014">Example1 Examples of string literals</a></span><br />
+</div> <span 
+class="cmbx-9">Tables</span>
+<div class="tableofcontents"><span class="lotToc">1&#x00A0;<a 
+href="eulispcl11.html#x13-760011">Level-0 class hierarchy</a></span><br /><span class="lotToc">2&#x00A0;<a 
+href="eulispcl13.html#x17-1610122">Condition class hierarchy</a></span><br /><span class="lotToc">3&#x00A0;<a 
+href="eulispcl17.html#x21-3220093">Character digrams</a></span><br /><span class="lotToc">4&#x00A0;<a 
+href="eulispcl17.html#x21-6480084">Level-0
+number class hierarchy</a></span><br /><span class="lotToc">5&#x00A0;<a 
+href="eulispcl18.html#x23-9470175">Level-1 class hierarchy</a></span><br /><span class="lotToc">6&#x00A0;<a 
+href="eulispcl18.html#x23-9940156">Initialization Call Structure</a></span><br />
+</div>
+                                                 
+                                                                                                  
+                                                                                                  
+                                                 
+                                                                                                  
+                                                                                                  
+                                                                                                  
+                                                                                                  
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl1.html" >next</a>] [<a 
+href="eulisp.html" >prev</a>] [<a 
+href="eulisp.html#taileulisp" >prev-tail</a>] [<a 
+href="eulispli1.html" >front</a>] [<a 
+href="eulisp.html#eulispli1.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
+ id="taileulispli1.html"></a> </p> 
+</body></html> 

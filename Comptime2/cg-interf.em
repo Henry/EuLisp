@@ -16,7 +16,7 @@
            get-full-import-names get-library-names
            get-module-load-dir
            link-string fff-link-string ffl-link-string
-           directly-or-indirectly-modified-p))
+           directly-or-indirectly-modified?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read interface file
@@ -224,7 +224,7 @@
 
    (defun write-interface-binding (stream name binding)
      (let ((origin-module-name (binding-origin-module-name binding))
-           (origin-name (or (and (syntax-obj-p (binding-obj? binding))
+           (origin-name (or (and (syntax-obj? (binding-obj? binding))
                                  (origin-name? (binding-obj? binding)))
                             (binding-obj? binding)
                             name))
@@ -239,23 +239,23 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Is module directly or indirectly modified?
 ;;;-----------------------------------------------------------------------------
-  (defun directly-or-indirectly-modified-p (module-name)
+  (defun directly-or-indirectly-modified? (module-name)
     (if (and (eq module-name *tmp-start-source-file-name*)
              *no-recompile*)
         t
       (and (or (eq module-name *tmp-start-source-file-name*)
                (if *interpreter* t (null *no-recompile*)))
-           (or (module-modified-p module-name)
-               (null (file-exist-p (as-C-file-name module-name)))
+           (or (module-modified? module-name)
+               (null (file-exist? (as-C-file-name module-name)))
                (let ((full-import (get-full-import-names module-name)))
                  (anyp1-list (lambda (name)
                                (if (member1-list name (get-library-names))
-                                   (library-newer-p name module-name)
+                                   (library-newer? name module-name)
                                  (let ((file-name1
                                         (as-source-file-name name))
                                        (file-name2
                                         (as-interface-file-name module-name)))
-                                   (file-newer-p file-name1 file-name2))))
+                                   (file-newer? file-name1 file-name2))))
                              full-import))))))
 
 ;;;-----------------------------------------------------------------------------
@@ -294,11 +294,11 @@
      (let ((module (get-module module-name)))
        (if module
            (module-load-dir? module)
-         (file-exist-p (as-interface-file-name module-name)))))
+         (file-exist? (as-interface-file-name module-name)))))
 
    (defun find-imported-module (name)
      (or (get-module name)
-         (if (directly-or-indirectly-modified-p name)
+         (if (directly-or-indirectly-modified? name)
              (compile-module name)
            (load-module-interface name))))
 
@@ -324,7 +324,7 @@
                  (if (null ll) res
                    (let* ((name (car ll))
                           (imp-file-name (as-compiled-C-file-name name))
-                          (imp-dir (file-exist-p file-name)))
+                          (imp-dir (file-exist? file-name)))
                    (loop (cdr ll)
                          (string-append
                           res
@@ -341,7 +341,7 @@
         (let ((str-list
                (map1-list (lambda (name)
                       (let* ((file-name (as-compiled-C-file-name name))
-                             (dir (external-file-exist-p file-name)))
+                             (dir (external-file-exist? file-name)))
                         (if dir
                             (format () "~a~a~a " dir *delimiter* file-name)
                           (ct-error
@@ -356,7 +356,7 @@
         (let ((str-list
                (map1-list (lambda (name)
                       (let* ((file-name (as-C-library-file-name name))
-                             (dir (external-file-exist-p file-name)))
+                             (dir (external-file-exist? file-name)))
                         (if dir
                             (format () "~a~a~a " dir *delimiter* file-name)
                           (ct-error

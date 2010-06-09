@@ -55,7 +55,7 @@ void initialize_module_mop_class()
   LispRef sym_1295, sym_1294, sym_1293, sym_1292, sym_1291, sym_1290, sym_1289, sym_1288, sym_1287, sym_1286, sym_1285, sym_1284, sym_1283, sym_1282, sym_1281, sym_1280, sym_1279, sym_1278, sym_1277, sym_1276, sym_1275, sym_1274, sym_1273, sym_1272, sym_1271, sym_1270, sym_1269, sym_1268, sym_1267, sym_1266, sym_1265, sym_1264, G001263, G001261, G001259, G001257, G001255, G001253, G001251, G001249, G001247, G001245, G001243, G001241, G001239, G001237, G001235, G001233, G001231, G001229, G001227, G001225, G001223, G001221, G001219, G001217, G001215, G001213, G001211, G001209, G001206, G001204, G001202, G001200, G001198, G001196, sym_1194, sym_1193, sym_1192, sym_1191, sym_1190, sym_1189, sym_1188, sym_1187, sym_1186, sym_1185, sym_1184, sym_1183, sym_1182, sym_1181, sym_1180, sym_1179, sym_1178, sym_1177, sym_1176, sym_1175, sym_1174, sym_1173, sym_1172, sym_1171, sym_1170, sym_1169, sym_1168, sym_1167, sym_1166, sym_1165, key_1164, key_1162, sym_1160, sym_1158, key_1153, key_1151, key_1149, sym_1146, sym_1144, sym_1142, key_1139, key_1137, sym_1135, sym_1133, key_1131, key_1129, sym_1126, sym_1123, key_1121, key_1119, key_1117, key_1115, key_1113, key_1111, key_1109, sym_1106, sym_1104, sym_1102, sym_1100, sym_1098, sym_1096, key_1094, sym_1092, sym_1090, sym_1088, key_1085, key_1083, key_1081, key_1079, key_1077, sym_1075, sym_1073, sym_1071, sym_1069, sym_1067, sym_1065, sym_1063, sym_1061, sym_1059, sym_1057, G001055, G001053, G001051, G001049, sym_1047, G001046, G001044, G001042, G001040, G001038, G001036, G001034, G001032, G001030, G001028, G001026, G001024, G001022, G001020, G001018, G001016, G001014, G001012, G001010, G001008, G001006, G001004, G001002, G001000, G00998, G00996, G00994, G00992, G00990, G00988, G00986, G00984;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 3 is_init: 0 index: 84 binding: (setter-slot-required-p) */
+  /* Byte-vector with size: 3 is_init: 0 index: 84 binding: (setter-slot-required?) */
   static const void *G00983[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,03,45,02)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 85 binding: (setter-slot-default) */
@@ -121,7 +121,7 @@ void initialize_module_mop_class()
   /* Byte-vector with size: 3 is_init: 0 index: 105 binding: (setter-converter) */
   static const void *G001025[] = {I(ab,1c,26,00),I(00,00,00,08),I(1d,03,45,02)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 106 binding: (setter-class-abstract-p) */
+  /* Byte-vector with size: 3 is_init: 0 index: 106 binding: (setter-class-abstract?) */
   static const void *G001027[] = {I(ab,1c,26,00),I(00,00,00,07),I(1d,03,45,02)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 107 binding: (setter-class-precedence-list) */
@@ -146,7 +146,7 @@ void initialize_module_mop_class()
   static const void *G001041[] = {I(ab,1c,82,1d),I(03,45,02,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 114 binding: anonymous */
-  static const void *G001043[] = {I(a9,24,00,00),B(mop_class ,55),I(24,00,00,00),B(boot1 ,27),I(3d,01,00,00)};
+  static const void *G001043[] = {I(a9,24,00,00),B(mop_class ,54),I(24,00,00,00),B(boot1 ,25),I(3d,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 116 binding: anonymous */
   static const void *G001045[] = {I(a9,23,00,00),B(mop_class ,115),I(45,00,00,00)};
@@ -155,7 +155,7 @@ void initialize_module_mop_class()
   static const void *G001048[] = {I(a9,23,00,00),B(mop_class ,115),I(45,00,00,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 118 binding: anonymous */
-  static const void *G001050[] = {I(a9,24,00,00),B(mop_class ,21),I(24,00,00,00),B(boot1 ,27),I(3d,01,00,00)};
+  static const void *G001050[] = {I(a9,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3d,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 119 binding: anonymous */
   static const void *G001052[] = {I(a9,23,00,00),B(mop_class ,115),I(45,00,00,00)};
@@ -220,16 +220,16 @@ void initialize_module_mop_class()
   eul_allocate_static_cons(cons_1163, NULL, NULL);
   eul_allocate_static_cons(cons_1161, NULL, eul_as_static(cons_1163));
   /* Byte-vector with size: 664 is_init: 0 index: 217 binding: top-level */
-  static const void *G001054[] = {I(a9,86,26,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,71),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,75),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,25),I(2a,23,00,00),B(mop_class ,130),I(89,00,00,00),B(mop_class ,65),I(2a,23,00,00),B(mop_class ,136),I(89,00,00,00),B(mop_class ,24),I(2a,23,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,119),I(3b,00,24,00),B(mop_class ,40),I(23,00,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,118),I(3b,00,24,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(boot1 ,27),I(3c,0a,1b,89),B(mop_class ,68),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,21),I(2a,86,89,00),B(mop_class ,12),I(2a,86,89,00),B(mop_class ,18),I(2a,24,00,00),B(mop_class ,25),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,28),I(2a,23,00,00),B(mop_class ,139),I(89,00,00,00),B(mop_class ,37),I(2a,23,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,117),I(3b,00,24,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(boot1 ,27),I(3c,03,1b,89),B(mop_class ,67),I(2a,28,12,1b),I(89,00,00,00),B(mop_class ,3),I(2a,23,00,00),B(mop_class ,141),I(89,00,00,00),B(mop_class ,39),I(2a,24,00,00),B(mop_class ,37),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(boot ,11),I(3c,02,1b,89),B(mop_class ,42),I(2a,24,00,00),B(mop_class ,40),I(23,00,00,00),B(mop_class ,142),I(24,00,00,00),B(boot1 ,27),I(3c,02,1b,89),B(mop_class ,44),I(2a,24,00,00),B(mop_class ,67),I(24,00,00,00),B(mop_class ,44),I(24,00,00,00),B(boot ,11),I(3c,02,1b,89),B(mop_class ,30),I(2a,24,00,00),B(mop_class ,25),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,45),I(2a,28,13,1b),I(89,00,00,00),B(mop_class ,16),I(2a,24,00,00),B(mop_class ,37),I(23,00,00,00),B(mop_class ,149),I(24,00,00,00),B(boot ,11),I(3c,02,1b,89),B(mop_class ,79),I(2a,23,00,00),B(mop_class ,157),I(89,00,00,00),B(mop_class ,56),I(2a,23,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,116),I(3b,00,23,00),B(mop_class ,142),I(24,00,00,00),B(mop_class ,40),I(23,00,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,114),I(3b,00,24,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(boot1 ,27),I(3c,09,1b,89),B(mop_class ,38),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,23),I(2a,28,0d,1b),I(89,00,00,00),B(mop_class ,55),I(2a,23,00,00),B(mop_class ,160),I(89,00,00,00),B(mop_class ,27),I(2a,23,00,00),B(mop_class ,163),I(89,00,00,00),B(mop_class ,46),I(2a,24,00,00),B(mop_class ,40),I(23,00,00,00),B(mop_class ,142),I(23,00,00,00),B(mop_class ,142),I(24,00,00,00),B(boot1 ,27),I(3c,03,1b,89),B(mop_class ,35),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,50),I(2a,23,00,00),B(mop_class ,166),I(89,00,00,00),B(mop_class ,31),I(2a,23,00,00),B(mop_class ,169),I(89,00,00,00),B(mop_class ,19),I(2a,24,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(boot1 ,27),I(3c,02,1b,89),B(mop_class ,52),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,57),I(2a,24,00,00),B(mop_class ,31),I(23,00,00,00),B(mop_class ,173),I(24,00,00,00),B(boot ,11),I(3c,02,1b,89),B(mop_class ,29),I(2a,24,00,00),B(mop_class ,19),I(23,00,00,00),B(mop_class ,177),I(24,00,00,00),B(boot ,11),I(3c,02,1b,89),B(mop_class ,22),I(2a,23,00,00),B(mop_class ,142),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(boot1 ,27),I(3c,04,24,00),B(mop_class ,52),I(1c,24,00,00),B(boot ,11),I(3c,02,1b,89),B(mop_class ,5),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,34),I(2a,28,10,1b),I(89,00,00,00),B(mop_class ,6),I(2a,28,14,1b),I(89,00,00,00),B(mop_class ,81),I(2a,23,00,00),B(mop_class ,178),I(89,00,00,00),B(mop_class ,4),I(2a,23,00,00),B(mop_class ,179),I(89,00,00,00),B(mop_class ,78),I(2a,23,00,00),B(mop_class ,180),I(89,00,00,00),B(mop_class ,9),I(2a,23,00,00),B(mop_class ,183),I(89,00,00,00),B(mop_class ,47),I(2a,24,00,00),B(mop_class ,40),I(24,00,00,00),B(mop_class ,40),I(24,00,00,00),B(boot1 ,27),I(3c,02,1b,89),B(mop_class ,41),I(2a,23,00,00),B(mop_class ,186),I(89,00,00,00),B(mop_class ,77),I(2a,24,00,00),B(mop_class ,71),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,64),I(2a,28,04,1b),I(89,00,00,00),B(mop_class ,72),I(2a,28,19,1b),I(89,00,00,00),B(mop_class ,26),I(2a,24,00,00),B(mop_class ,71),I(24,00,00,00),B(mop_class ,71),I(05,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,15),I(23,00,00,00),B(mop_class ,187),I(23,00,00,00),B(mop_class ,113),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,74),I(23,00,00,00),B(mop_class ,188),I(23,00,00,00),B(mop_class ,112),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,69),I(23,00,00,00),B(mop_class ,189),I(23,00,00,00),B(mop_class ,111),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,63),I(23,00,00,00),B(mop_class ,190),I(23,00,00,00),B(mop_class ,110),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,51),I(23,00,00,00),B(mop_class ,191),I(23,00,00,00),B(mop_class ,109),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,70),I(23,00,00,00),B(mop_class ,192),I(23,00,00,00),B(mop_class ,108),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,8),I(23,00,00,00),B(mop_class ,193),I(23,00,00,00),B(mop_class ,107),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,14),I(23,00,00,00),B(mop_class ,194),I(23,00,00,00),B(mop_class ,106),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,13),I(23,00,00,00),B(mop_class ,195),I(23,00,00,00),B(mop_class ,105),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,20),I(23,00,00,00),B(mop_class ,196),I(23,00,00,00),B(mop_class ,104),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,73),I(23,00,00,00),B(mop_class ,197),I(23,00,00,00),B(mop_class ,103),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,17),I(23,00,00,00),B(mop_class ,198),I(23,00,00,00),B(mop_class ,102),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,3),I(24,00,00,00),B(mop_class ,25),I(05,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,48),I(23,00,00,00),B(mop_class ,199),I(23,00,00,00),B(mop_class ,101),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,66),I(23,00,00,00),B(mop_class ,200),I(23,00,00,00),B(mop_class ,100),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,16),I(24,00,00,00),B(mop_class ,25),I(05,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,61),I(23,00,00,00),B(mop_class ,201),I(23,00,00,00),B(mop_class ,99),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,49),I(23,00,00,00),B(mop_class ,202),I(23,00,00,00),B(mop_class ,98),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,11),I(23,00,00,00),B(mop_class ,203),I(23,00,00,00),B(mop_class ,97),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,43),I(23,00,00,00),B(mop_class ,204),I(23,00,00,00),B(mop_class ,96),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,32),I(23,00,00,00),B(mop_class ,205),I(23,00,00,00),B(mop_class ,95),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,36),I(23,00,00,00),B(mop_class ,206),I(23,00,00,00),B(mop_class ,94),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,58),I(23,00,00,00),B(mop_class ,207),I(23,00,00,00),B(mop_class ,93),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,55),I(24,00,00,00),B(mop_class ,71),I(05,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,54),I(23,00,00,00),B(mop_class ,208),I(23,00,00,00),B(mop_class ,92),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,59),I(23,00,00,00),B(mop_class ,209),I(23,00,00,00),B(mop_class ,91),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,76),I(23,00,00,00),B(mop_class ,210),I(23,00,00,00),B(mop_class ,90),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,33),I(23,00,00,00),B(mop_class ,211),I(23,00,00,00),B(mop_class ,89),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,53),I(23,00,00,00),B(mop_class ,212),I(23,00,00,00),B(mop_class ,88),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,80),I(23,00,00,00),B(mop_class ,213),I(23,00,00,00),B(mop_class ,87),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,60),I(23,00,00,00),B(mop_class ,214),I(23,00,00,00),B(mop_class ,86),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,10),I(23,00,00,00),B(mop_class ,215),I(23,00,00,00),B(mop_class ,85),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_class ,2),I(23,00,00,00),B(mop_class ,216),I(23,00,00,00),B(mop_class ,84),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,6),I(24,00,00,00),B(mop_class ,71),I(05,2a,24,00),B(mop_class ,81),I(24,00,00,00),B(mop_class ,71),I(05,2a,24,00),B(mop_class ,72),I(24,00,00,00),B(mop_class ,71),I(05,2a,24,00),B(mop_class ,26),I(24,00,00,00),B(mop_class ,71),I(05,45,3e,00)};
+  static const void *G001054[] = {I(a9,86,26,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,70),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,75),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,24),I(2a,23,00,00),B(mop_class ,130),I(89,00,00,00),B(mop_class ,64),I(2a,23,00,00),B(mop_class ,136),I(89,00,00,00),B(mop_class ,23),I(2a,23,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,119),I(3b,00,24,00),B(mop_class ,39),I(23,00,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,118),I(3b,00,24,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(boot1 ,25),I(3c,0a,1b,89),B(mop_class ,67),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,20),I(2a,86,89,00),B(mop_class ,12),I(2a,86,89,00),B(mop_class ,17),I(2a,24,00,00),B(mop_class ,24),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,27),I(2a,23,00,00),B(mop_class ,139),I(89,00,00,00),B(mop_class ,36),I(2a,23,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,117),I(3b,00,24,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(boot1 ,25),I(3c,03,1b,89),B(mop_class ,66),I(2a,28,12,1b),I(89,00,00,00),B(mop_class ,2),I(2a,23,00,00),B(mop_class ,141),I(89,00,00,00),B(mop_class ,38),I(2a,24,00,00),B(mop_class ,36),I(24,00,00,00),B(mop_class ,38),I(24,00,00,00),B(boot ,7),I(3c,02,1b,89),B(mop_class ,41),I(2a,24,00,00),B(mop_class ,39),I(23,00,00,00),B(mop_class ,142),I(24,00,00,00),B(boot1 ,25),I(3c,02,1b,89),B(mop_class ,43),I(2a,24,00,00),B(mop_class ,66),I(24,00,00,00),B(mop_class ,43),I(24,00,00,00),B(boot ,7),I(3c,02,1b,89),B(mop_class ,29),I(2a,24,00,00),B(mop_class ,24),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,44),I(2a,28,13,1b),I(89,00,00,00),B(mop_class ,15),I(2a,24,00,00),B(mop_class ,36),I(23,00,00,00),B(mop_class ,149),I(24,00,00,00),B(boot ,7),I(3c,02,1b,89),B(mop_class ,79),I(2a,23,00,00),B(mop_class ,157),I(89,00,00,00),B(mop_class ,55),I(2a,23,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,116),I(3b,00,23,00),B(mop_class ,142),I(24,00,00,00),B(mop_class ,39),I(23,00,00,00),B(mop_class ,115),I(23,00,00,00),B(mop_class ,114),I(3b,00,24,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(boot1 ,25),I(3c,09,1b,89),B(mop_class ,37),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,22),I(2a,28,0d,1b),I(89,00,00,00),B(mop_class ,54),I(2a,23,00,00),B(mop_class ,160),I(89,00,00,00),B(mop_class ,26),I(2a,23,00,00),B(mop_class ,163),I(89,00,00,00),B(mop_class ,45),I(2a,24,00,00),B(mop_class ,39),I(23,00,00,00),B(mop_class ,142),I(23,00,00,00),B(mop_class ,142),I(24,00,00,00),B(boot1 ,25),I(3c,03,1b,89),B(mop_class ,34),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,49),I(2a,23,00,00),B(mop_class ,166),I(89,00,00,00),B(mop_class ,30),I(2a,23,00,00),B(mop_class ,169),I(89,00,00,00),B(mop_class ,18),I(2a,24,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(boot1 ,25),I(3c,02,1b,89),B(mop_class ,51),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,56),I(2a,24,00,00),B(mop_class ,30),I(23,00,00,00),B(mop_class ,173),I(24,00,00,00),B(boot ,7),I(3c,02,1b,89),B(mop_class ,28),I(2a,24,00,00),B(mop_class ,18),I(23,00,00,00),B(mop_class ,177),I(24,00,00,00),B(boot ,7),I(3c,02,1b,89),B(mop_class ,21),I(2a,23,00,00),B(mop_class ,142),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(boot1 ,25),I(3c,04,24,00),B(mop_class ,51),I(1c,24,00,00),B(boot ,7),I(3c,02,1b,89),B(mop_class ,4),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,33),I(2a,28,10,1b),I(89,00,00,00),B(mop_class ,5),I(2a,28,14,1b),I(89,00,00,00),B(mop_class ,81),I(2a,23,00,00),B(mop_class ,178),I(89,00,00,00),B(mop_class ,3),I(2a,23,00,00),B(mop_class ,179),I(89,00,00,00),B(mop_class ,78),I(2a,23,00,00),B(mop_class ,180),I(89,00,00,00),B(mop_class ,8),I(2a,23,00,00),B(mop_class ,183),I(89,00,00,00),B(mop_class ,46),I(2a,24,00,00),B(mop_class ,39),I(24,00,00,00),B(mop_class ,39),I(24,00,00,00),B(boot1 ,25),I(3c,02,1b,89),B(mop_class ,40),I(2a,23,00,00),B(mop_class ,186),I(89,00,00,00),B(mop_class ,77),I(2a,24,00,00),B(mop_class ,70),I(26,00,00,00),I(00,00,00,0a),I(01,1b,89,00),B(mop_class ,63),I(2a,28,04,1b),I(89,00,00,00),B(mop_class ,71),I(2a,28,19,1b),I(89,00,00,00),B(mop_class ,25),I(2a,24,00,00),B(mop_class ,70),I(24,00,00,00),B(mop_class ,70),I(05,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,14),I(23,00,00,00),B(mop_class ,187),I(23,00,00,00),B(mop_class ,113),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,73),I(23,00,00,00),B(mop_class ,188),I(23,00,00,00),B(mop_class ,112),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,68),I(23,00,00,00),B(mop_class ,189),I(23,00,00,00),B(mop_class ,111),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,62),I(23,00,00,00),B(mop_class ,190),I(23,00,00,00),B(mop_class ,110),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,50),I(23,00,00,00),B(mop_class ,191),I(23,00,00,00),B(mop_class ,109),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,69),I(23,00,00,00),B(mop_class ,192),I(23,00,00,00),B(mop_class ,108),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,7),I(23,00,00,00),B(mop_class ,193),I(23,00,00,00),B(mop_class ,107),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,74),I(23,00,00,00),B(mop_class ,194),I(23,00,00,00),B(mop_class ,106),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,13),I(23,00,00,00),B(mop_class ,195),I(23,00,00,00),B(mop_class ,105),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,19),I(23,00,00,00),B(mop_class ,196),I(23,00,00,00),B(mop_class ,104),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,72),I(23,00,00,00),B(mop_class ,197),I(23,00,00,00),B(mop_class ,103),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,16),I(23,00,00,00),B(mop_class ,198),I(23,00,00,00),B(mop_class ,102),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,2),I(24,00,00,00),B(mop_class ,24),I(05,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,47),I(23,00,00,00),B(mop_class ,199),I(23,00,00,00),B(mop_class ,101),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,65),I(23,00,00,00),B(mop_class ,200),I(23,00,00,00),B(mop_class ,100),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,24),I(05,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,60),I(23,00,00,00),B(mop_class ,201),I(23,00,00,00),B(mop_class ,99),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,48),I(23,00,00,00),B(mop_class ,202),I(23,00,00,00),B(mop_class ,98),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,11),I(23,00,00,00),B(mop_class ,203),I(23,00,00,00),B(mop_class ,97),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,42),I(23,00,00,00),B(mop_class ,204),I(23,00,00,00),B(mop_class ,96),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,31),I(23,00,00,00),B(mop_class ,205),I(23,00,00,00),B(mop_class ,95),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,35),I(23,00,00,00),B(mop_class ,206),I(23,00,00,00),B(mop_class ,94),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,57),I(23,00,00,00),B(mop_class ,207),I(23,00,00,00),B(mop_class ,93),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,54),I(24,00,00,00),B(mop_class ,70),I(05,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,53),I(23,00,00,00),B(mop_class ,208),I(23,00,00,00),B(mop_class ,92),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,58),I(23,00,00,00),B(mop_class ,209),I(23,00,00,00),B(mop_class ,91),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,76),I(23,00,00,00),B(mop_class ,210),I(23,00,00,00),B(mop_class ,90),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,32),I(23,00,00,00),B(mop_class ,211),I(23,00,00,00),B(mop_class ,89),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,52),I(23,00,00,00),B(mop_class ,212),I(23,00,00,00),B(mop_class ,88),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,80),I(23,00,00,00),B(mop_class ,213),I(23,00,00,00),B(mop_class ,87),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,59),I(23,00,00,00),B(mop_class ,214),I(23,00,00,00),B(mop_class ,86),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,10),I(23,00,00,00),B(mop_class ,215),I(23,00,00,00),B(mop_class ,85),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_class ,9),I(23,00,00,00),B(mop_class ,216),I(23,00,00,00),B(mop_class ,84),I(3b,02,1d,3c),I(02,2a,24,00),B(mop_class ,5),I(24,00,00,00),B(mop_class ,70),I(05,2a,24,00),B(mop_class ,81),I(24,00,00,00),B(mop_class ,70),I(05,2a,24,00),B(mop_class ,71),I(24,00,00,00),B(mop_class ,70),I(05,2a,24,00),B(mop_class ,25),I(24,00,00,00),B(mop_class ,70),I(05,45,3e,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 218 binding: slot-required-p */
-  static const void *G001195[] = {I(aa,26,00,00),I(00,00,00,05),I(02,45,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 218 binding: keyword-name */
+  static const void *G001195[] = {I(aa,82,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 219 binding: keyword-name */
-  static const void *G001197[] = {I(aa,82,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 219 binding: class-precedence-list */
+  static const void *G001197[] = {I(aa,26,00,00),I(00,00,00,06),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 220 binding: class-precedence-list */
-  static const void *G001199[] = {I(aa,26,00,00),I(00,00,00,06),I(02,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 220 binding: slot-required? */
+  static const void *G001199[] = {I(aa,26,00,00),I(00,00,00,05),I(02,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 221 binding: slot-default */
   static const void *G001201[] = {I(aa,26,00,00),I(00,00,00,04),I(02,45,00,00)};
@@ -239,82 +239,82 @@ void initialize_module_mop_class()
 
   eul_allocate_static_string(str_1207, "non-functional converter ~a at class <~a>", 41);
   /* Byte-vector with size: 19 is_init: 0 index: 224 binding: converter */
-  static const void *G001205[] = {I(aa,1b,26,00),I(00,00,00,08),I(02,1b,7f,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,32),I(1c,80,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,20),I(1f,03,82,02),I(23,00,00,00),B(mop_class ,223),I(1f,04,1d,24),B(boot ,22),I(3d,03,05,22),I(01,22,01,45),I(03,00,00,00)};
+  static const void *G001205[] = {I(aa,1b,26,00),I(00,00,00,08),I(02,1b,7f,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,32),I(1c,80,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,20),I(1f,03,82,02),I(23,00,00,00),B(mop_class ,223),I(1f,04,1d,24),B(boot ,12),I(3d,03,05,22),I(01,22,01,45),I(03,00,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 225 binding: class-abstract-p */
-  static const void *G001208[] = {I(aa,26,00,00),I(00,00,00,07),I(02,45,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 225 binding: class-name */
+  static const void *G001208[] = {I(aa,82,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 226 binding: class-name */
-  static const void *G001210[] = {I(aa,82,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 226 binding: function-domain */
+  static const void *G001210[] = {I(aa,83,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 227 binding: function-domain */
-  static const void *G001212[] = {I(aa,83,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 227 binding: class-code */
+  static const void *G001212[] = {I(aa,26,00,00),I(00,00,00,09),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 228 binding: class-code */
-  static const void *G001214[] = {I(aa,26,00,00),I(00,00,00,09),I(02,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 228 binding: generic-function-method-lookup-function */
+  static const void *G001214[] = {I(aa,26,00,00),I(00,00,00,06),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 229 binding: generic-function-method-lookup-function */
-  static const void *G001216[] = {I(aa,26,00,00),I(00,00,00,06),I(02,45,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 229 binding: slot-reader */
+  static const void *G001216[] = {I(aa,82,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 230 binding: slot-reader */
-  static const void *G001218[] = {I(aa,82,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 230 binding: generic-function-discriminating-function */
+  static const void *G001218[] = {I(aa,26,00,00),I(00,00,00,07),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 231 binding: generic-function-discriminating-function */
-  static const void *G001220[] = {I(aa,26,00,00),I(00,00,00,07),I(02,45,00,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 231 binding: *default-slot-value* */
+  static const void *G001220[] = {I(a9,86,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 232 binding: *default-slot-value* */
-  static const void *G001222[] = {I(a9,86,45,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 232 binding: generic-function-methods */
+  static const void *G001222[] = {I(aa,26,00,00),I(00,00,00,05),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 233 binding: generic-function-methods */
-  static const void *G001224[] = {I(aa,26,00,00),I(00,00,00,05),I(02,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 233 binding: simple-function-environment */
+  static const void *G001224[] = {I(aa,26,00,00),I(00,00,00,03),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 234 binding: simple-function-environment */
+  /* Byte-vector with size: 3 is_init: 0 index: 234 binding: generic-function-method-class */
   static const void *G001226[] = {I(aa,26,00,00),I(00,00,00,03),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 235 binding: generic-function-method-class */
-  static const void *G001228[] = {I(aa,26,00,00),I(00,00,00,03),I(02,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 235 binding: class-slots */
+  static const void *G001228[] = {I(aa,26,00,00),I(00,00,00,04),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 236 binding: class-slots */
-  static const void *G001230[] = {I(aa,26,00,00),I(00,00,00,04),I(02,45,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 236 binding: slot-writer */
+  static const void *G001230[] = {I(aa,83,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 237 binding: slot-writer */
-  static const void *G001232[] = {I(aa,83,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 237 binding: method-generic-function */
+  static const void *G001232[] = {I(aa,82,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 238 binding: method-generic-function */
-  static const void *G001234[] = {I(aa,82,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 238 binding: generic-function-method-cache */
+  static const void *G001234[] = {I(aa,26,00,00),I(00,00,00,08),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 239 binding: generic-function-method-cache */
-  static const void *G001236[] = {I(aa,26,00,00),I(00,00,00,08),I(02,45,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 239 binding: method-domain */
+  static const void *G001236[] = {I(aa,83,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 240 binding: method-domain */
-  static const void *G001238[] = {I(aa,83,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 240 binding: slot-keyword */
+  static const void *G001238[] = {I(aa,26,00,00),I(00,00,00,03),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 241 binding: slot-keyword */
-  static const void *G001240[] = {I(aa,26,00,00),I(00,00,00,03),I(02,45,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 241 binding: generic-function-domain */
+  static const void *G001240[] = {I(aa,83,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 242 binding: generic-function-domain */
-  static const void *G001242[] = {I(aa,83,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 242 binding: symbol-name */
+  static const void *G001242[] = {I(aa,82,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 243 binding: symbol-name */
-  static const void *G001244[] = {I(aa,82,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 243 binding: class-direct-subclasses */
+  static const void *G001244[] = {I(aa,26,00,00),I(00,00,00,03),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 244 binding: class-direct-subclasses */
-  static const void *G001246[] = {I(aa,26,00,00),I(00,00,00,03),I(02,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 244 binding: simple-function-code */
+  static const void *G001246[] = {I(aa,41,00,00),B(mop_class ,82),I(45,01,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 245 binding: simple-function-code */
-  static const void *G001248[] = {I(aa,41,00,00),B(mop_class ,82),I(45,01,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 245 binding: class-direct-superclasses */
+  static const void *G001248[] = {I(aa,84,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 246 binding: class-direct-superclasses */
-  static const void *G001250[] = {I(aa,84,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 246 binding: class-keywords */
+  static const void *G001250[] = {I(aa,26,00,00),I(00,00,00,05),I(02,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 247 binding: class-keywords */
-  static const void *G001252[] = {I(aa,26,00,00),I(00,00,00,05),I(02,45,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 247 binding: function-name */
+  static const void *G001252[] = {I(aa,82,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 248 binding: function-name */
-  static const void *G001254[] = {I(aa,82,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 248 binding: class-instance-length */
+  static const void *G001254[] = {I(aa,83,02,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 249 binding: class-instance-length */
-  static const void *G001256[] = {I(aa,83,02,45),I(00,00,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 249 binding: class-abstract? */
+  static const void *G001256[] = {I(aa,26,00,00),I(00,00,00,07),I(02,45,00,00)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 250 binding: method-function */
   static const void *G001258[] = {I(aa,84,02,45),I(00,00,00,00)};
@@ -323,7 +323,7 @@ void initialize_module_mop_class()
   static const void *G001260[] = {I(aa,84,02,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 310 is_init: 1 index: 0 binding: initialize-mop-class */
-  static const void *G001262[] = {I(87,25,00,00),B(mop_class ,1),I(24,00,00,00),B(mop_prim ,1),I(3e,0b,24,00),B(mop_prim ,0),I(3c,00,21,01),I(24,00,00,00),B(boot ,1),I(3e,0b,24,00),B(boot ,0),I(3c,00,21,01),I(86,25,00,00),B(mop_class ,81),I(23,00,00,00),B(mop_class ,252),I(23,00,00,00),B(mop_class ,251),I(3b,01,25,00),B(mop_class ,80),I(86,25,00,00),B(mop_class ,79),I(86,25,00,00),B(mop_class ,78),I(86,25,00,00),B(mop_class ,77),I(23,00,00,00),B(mop_class ,253),I(23,00,00,00),B(mop_class ,250),I(3b,01,25,00),B(mop_class ,76),I(86,25,00,00),B(mop_class ,75),I(23,00,00,00),B(mop_class ,254),I(23,00,00,00),B(mop_class ,249),I(3b,01,25,00),B(mop_class ,74),I(23,00,00,00),B(mop_class ,255),I(23,00,00,00),B(mop_class ,248),I(3b,01,25,00),B(mop_class ,73),I(86,25,00,00),B(mop_class ,72),I(86,25,00,00),B(mop_class ,71),I(23,00,00,00),B(mop_class ,256),I(23,00,00,00),B(mop_class ,247),I(3b,01,25,00),B(mop_class ,70),I(23,00,00,00),B(mop_class ,257),I(23,00,00,00),B(mop_class ,246),I(3b,01,25,00),B(mop_class ,69),I(86,25,00,00),B(mop_class ,68),I(86,25,00,00),B(mop_class ,67),I(23,00,00,00),B(mop_class ,258),I(23,00,00,00),B(mop_class ,245),I(3b,01,25,00),B(mop_class ,66),I(86,25,00,00),B(mop_class ,65),I(86,25,00,00),B(mop_class ,64),I(23,00,00,00),B(mop_class ,259),I(23,00,00,00),B(mop_class ,244),I(3b,01,25,00),B(mop_class ,63),I(23,00,00,00),B(mop_class ,260),I(23,00,00,00),B(mop_class ,243),I(3b,01,25,00),B(mop_class ,62),I(23,00,00,00),B(mop_class ,261),I(23,00,00,00),B(mop_class ,242),I(3b,01,25,00),B(mop_class ,61),I(23,00,00,00),B(mop_class ,262),I(23,00,00,00),B(mop_class ,241),I(3b,01,25,00),B(mop_class ,60),I(23,00,00,00),B(mop_class ,263),I(23,00,00,00),B(mop_class ,240),I(3b,01,25,00),B(mop_class ,59),I(23,00,00,00),B(mop_class ,264),I(23,00,00,00),B(mop_class ,239),I(3b,01,25,00),B(mop_class ,58),I(86,25,00,00),B(mop_class ,57),I(86,25,00,00),B(mop_class ,56),I(86,25,00,00),B(mop_class ,55),I(23,00,00,00),B(mop_class ,265),I(23,00,00,00),B(mop_class ,238),I(3b,01,25,00),B(mop_class ,54),I(23,00,00,00),B(mop_class ,266),I(23,00,00,00),B(mop_class ,237),I(3b,01,25,00),B(mop_class ,53),I(86,25,00,00),B(mop_class ,52),I(23,00,00,00),B(mop_class ,267),I(23,00,00,00),B(mop_class ,236),I(3b,01,25,00),B(mop_class ,51),I(86,25,00,00),B(mop_class ,50),I(23,00,00,00),B(mop_class ,268),I(23,00,00,00),B(mop_class ,235),I(3b,01,25,00),B(mop_class ,49),I(23,00,00,00),B(mop_class ,269),I(23,00,00,00),B(mop_class ,234),I(3b,01,25,00),B(mop_class ,48),I(86,25,00,00),B(mop_class ,47),I(86,25,00,00),B(mop_class ,46),I(86,25,00,00),B(mop_class ,45),I(86,25,00,00),B(mop_class ,44),I(23,00,00,00),B(mop_class ,270),I(23,00,00,00),B(mop_class ,233),I(3b,01,25,00),B(mop_class ,43),I(86,25,00,00),B(mop_class ,42),I(86,25,00,00),B(mop_class ,41),I(23,00,00,00),B(mop_class ,271),I(23,00,00,00),B(mop_class ,232),I(3b,00,25,00),B(mop_class ,40),I(86,25,00,00),B(mop_class ,39),I(86,25,00,00),B(mop_class ,38),I(86,25,00,00),B(mop_class ,37),I(23,00,00,00),B(mop_class ,272),I(23,00,00,00),B(mop_class ,231),I(3b,01,25,00),B(mop_class ,36),I(86,25,00,00),B(mop_class ,35),I(86,25,00,00),B(mop_class ,34),I(23,00,00,00),B(mop_class ,273),I(23,00,00,00),B(mop_class ,230),I(3b,01,25,00),B(mop_class ,33),I(23,00,00,00),B(mop_class ,274),I(23,00,00,00),B(mop_class ,229),I(3b,01,25,00),B(mop_class ,32),I(86,25,00,00),B(mop_class ,31),I(86,25,00,00),B(mop_class ,30),I(86,25,00,00),B(mop_class ,29),I(86,25,00,00),B(mop_class ,28),I(86,25,00,00),B(mop_class ,27),I(86,25,00,00),B(mop_class ,26),I(86,25,00,00),B(mop_class ,25),I(86,25,00,00),B(mop_class ,24),I(86,25,00,00),B(mop_class ,23),I(86,25,00,00),B(mop_class ,22),I(86,25,00,00),B(mop_class ,21),I(23,00,00,00),B(mop_class ,275),I(23,00,00,00),B(mop_class ,228),I(3b,01,25,00),B(mop_class ,20),I(86,25,00,00),B(mop_class ,19),I(86,25,00,00),B(mop_class ,18),I(23,00,00,00),B(mop_class ,276),I(23,00,00,00),B(mop_class ,227),I(3b,01,25,00),B(mop_class ,17),I(86,25,00,00),B(mop_class ,16),I(23,00,00,00),B(mop_class ,277),I(23,00,00,00),B(mop_class ,226),I(3b,01,25,00),B(mop_class ,15),I(23,00,00,00),B(mop_class ,278),I(23,00,00,00),B(mop_class ,225),I(3b,01,25,00),B(mop_class ,14),I(23,00,00,00),B(mop_class ,128),I(23,00,00,00),B(mop_class ,224),I(3b,01,25,00),B(mop_class ,13),I(86,25,00,00),B(mop_class ,12),I(23,00,00,00),B(mop_class ,279),I(23,00,00,00),B(mop_class ,222),I(3b,01,25,00),B(mop_class ,11),I(23,00,00,00),B(mop_class ,280),I(23,00,00,00),B(mop_class ,221),I(3b,01,25,00),B(mop_class ,10),I(86,25,00,00),B(mop_class ,9),I(23,00,00,00),B(mop_class ,126),I(23,00,00,00),B(mop_class ,220),I(3b,01,25,00),B(mop_class ,8),I(23,00,00,00),B(mop_class ,281),I(23,00,00,00),B(mop_class ,219),I(3b,01,25,00),B(mop_class ,7),I(86,25,00,00),B(mop_class ,6),I(86,25,00,00),B(mop_class ,5),I(86,25,00,00),B(mop_class ,4),I(86,25,00,00),B(mop_class ,3),I(23,00,00,00),B(mop_class ,282),I(23,00,00,00),B(mop_class ,218),I(3b,01,25,00),B(mop_class ,2),I(23,00,00,00),B(mop_class ,283),I(23,00,00,00),B(mop_class ,217),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G001262[] = {I(87,25,00,00),B(mop_class ,1),I(24,00,00,00),B(mop_prim ,1),I(3e,0b,24,00),B(mop_prim ,0),I(3c,00,21,01),I(24,00,00,00),B(boot ,1),I(3e,0b,24,00),B(boot ,0),I(3c,00,21,01),I(86,25,00,00),B(mop_class ,81),I(23,00,00,00),B(mop_class ,252),I(23,00,00,00),B(mop_class ,251),I(3b,01,25,00),B(mop_class ,80),I(86,25,00,00),B(mop_class ,79),I(86,25,00,00),B(mop_class ,78),I(86,25,00,00),B(mop_class ,77),I(23,00,00,00),B(mop_class ,253),I(23,00,00,00),B(mop_class ,250),I(3b,01,25,00),B(mop_class ,76),I(86,25,00,00),B(mop_class ,75),I(23,00,00,00),B(mop_class ,254),I(23,00,00,00),B(mop_class ,249),I(3b,01,25,00),B(mop_class ,74),I(23,00,00,00),B(mop_class ,255),I(23,00,00,00),B(mop_class ,248),I(3b,01,25,00),B(mop_class ,73),I(23,00,00,00),B(mop_class ,256),I(23,00,00,00),B(mop_class ,247),I(3b,01,25,00),B(mop_class ,72),I(86,25,00,00),B(mop_class ,71),I(86,25,00,00),B(mop_class ,70),I(23,00,00,00),B(mop_class ,257),I(23,00,00,00),B(mop_class ,246),I(3b,01,25,00),B(mop_class ,69),I(23,00,00,00),B(mop_class ,258),I(23,00,00,00),B(mop_class ,245),I(3b,01,25,00),B(mop_class ,68),I(86,25,00,00),B(mop_class ,67),I(86,25,00,00),B(mop_class ,66),I(23,00,00,00),B(mop_class ,259),I(23,00,00,00),B(mop_class ,244),I(3b,01,25,00),B(mop_class ,65),I(86,25,00,00),B(mop_class ,64),I(86,25,00,00),B(mop_class ,63),I(23,00,00,00),B(mop_class ,260),I(23,00,00,00),B(mop_class ,243),I(3b,01,25,00),B(mop_class ,62),I(23,00,00,00),B(mop_class ,261),I(23,00,00,00),B(mop_class ,242),I(3b,01,25,00),B(mop_class ,61),I(23,00,00,00),B(mop_class ,262),I(23,00,00,00),B(mop_class ,241),I(3b,01,25,00),B(mop_class ,60),I(23,00,00,00),B(mop_class ,263),I(23,00,00,00),B(mop_class ,240),I(3b,01,25,00),B(mop_class ,59),I(23,00,00,00),B(mop_class ,264),I(23,00,00,00),B(mop_class ,239),I(3b,01,25,00),B(mop_class ,58),I(23,00,00,00),B(mop_class ,265),I(23,00,00,00),B(mop_class ,238),I(3b,01,25,00),B(mop_class ,57),I(86,25,00,00),B(mop_class ,56),I(86,25,00,00),B(mop_class ,55),I(86,25,00,00),B(mop_class ,54),I(23,00,00,00),B(mop_class ,266),I(23,00,00,00),B(mop_class ,237),I(3b,01,25,00),B(mop_class ,53),I(23,00,00,00),B(mop_class ,267),I(23,00,00,00),B(mop_class ,236),I(3b,01,25,00),B(mop_class ,52),I(86,25,00,00),B(mop_class ,51),I(23,00,00,00),B(mop_class ,268),I(23,00,00,00),B(mop_class ,235),I(3b,01,25,00),B(mop_class ,50),I(86,25,00,00),B(mop_class ,49),I(23,00,00,00),B(mop_class ,269),I(23,00,00,00),B(mop_class ,234),I(3b,01,25,00),B(mop_class ,48),I(23,00,00,00),B(mop_class ,270),I(23,00,00,00),B(mop_class ,233),I(3b,01,25,00),B(mop_class ,47),I(86,25,00,00),B(mop_class ,46),I(86,25,00,00),B(mop_class ,45),I(86,25,00,00),B(mop_class ,44),I(86,25,00,00),B(mop_class ,43),I(23,00,00,00),B(mop_class ,271),I(23,00,00,00),B(mop_class ,232),I(3b,01,25,00),B(mop_class ,42),I(86,25,00,00),B(mop_class ,41),I(86,25,00,00),B(mop_class ,40),I(23,00,00,00),B(mop_class ,272),I(23,00,00,00),B(mop_class ,231),I(3b,00,25,00),B(mop_class ,39),I(86,25,00,00),B(mop_class ,38),I(86,25,00,00),B(mop_class ,37),I(86,25,00,00),B(mop_class ,36),I(23,00,00,00),B(mop_class ,273),I(23,00,00,00),B(mop_class ,230),I(3b,01,25,00),B(mop_class ,35),I(86,25,00,00),B(mop_class ,34),I(86,25,00,00),B(mop_class ,33),I(23,00,00,00),B(mop_class ,274),I(23,00,00,00),B(mop_class ,229),I(3b,01,25,00),B(mop_class ,32),I(23,00,00,00),B(mop_class ,275),I(23,00,00,00),B(mop_class ,228),I(3b,01,25,00),B(mop_class ,31),I(86,25,00,00),B(mop_class ,30),I(86,25,00,00),B(mop_class ,29),I(86,25,00,00),B(mop_class ,28),I(86,25,00,00),B(mop_class ,27),I(86,25,00,00),B(mop_class ,26),I(86,25,00,00),B(mop_class ,25),I(86,25,00,00),B(mop_class ,24),I(86,25,00,00),B(mop_class ,23),I(86,25,00,00),B(mop_class ,22),I(86,25,00,00),B(mop_class ,21),I(86,25,00,00),B(mop_class ,20),I(23,00,00,00),B(mop_class ,276),I(23,00,00,00),B(mop_class ,227),I(3b,01,25,00),B(mop_class ,19),I(86,25,00,00),B(mop_class ,18),I(86,25,00,00),B(mop_class ,17),I(23,00,00,00),B(mop_class ,277),I(23,00,00,00),B(mop_class ,226),I(3b,01,25,00),B(mop_class ,16),I(86,25,00,00),B(mop_class ,15),I(23,00,00,00),B(mop_class ,278),I(23,00,00,00),B(mop_class ,225),I(3b,01,25,00),B(mop_class ,14),I(23,00,00,00),B(mop_class ,128),I(23,00,00,00),B(mop_class ,224),I(3b,01,25,00),B(mop_class ,13),I(86,25,00,00),B(mop_class ,12),I(23,00,00,00),B(mop_class ,279),I(23,00,00,00),B(mop_class ,222),I(3b,01,25,00),B(mop_class ,11),I(23,00,00,00),B(mop_class ,280),I(23,00,00,00),B(mop_class ,221),I(3b,01,25,00),B(mop_class ,10),I(23,00,00,00),B(mop_class ,281),I(23,00,00,00),B(mop_class ,220),I(3b,01,25,00),B(mop_class ,9),I(86,25,00,00),B(mop_class ,8),I(23,00,00,00),B(mop_class ,126),I(23,00,00,00),B(mop_class ,219),I(3b,01,25,00),B(mop_class ,7),I(23,00,00,00),B(mop_class ,282),I(23,00,00,00),B(mop_class ,218),I(3b,01,25,00),B(mop_class ,6),I(86,25,00,00),B(mop_class ,5),I(86,25,00,00),B(mop_class ,4),I(86,25,00,00),B(mop_class ,3),I(86,25,00,00),B(mop_class ,2),I(23,00,00,00),B(mop_class ,283),I(23,00,00,00),B(mop_class ,217),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
@@ -555,7 +555,7 @@ void initialize_module_mop_class()
   eul_intern_symbol(sym_1169,"(setter class-slots)");
   eul_intern_symbol(sym_1170,"(setter class-keywords)");
   eul_intern_symbol(sym_1171,"(setter class-precedence-list)");
-  eul_intern_symbol(sym_1172,"(setter class-abstract-p)");
+  eul_intern_symbol(sym_1172,"(setter class-abstract?)");
   eul_intern_symbol(sym_1173,"(setter converter)");
   eul_intern_symbol(sym_1174,"(setter class-code)");
   eul_intern_symbol(sym_1175,"(setter function-name)");
@@ -577,7 +577,7 @@ void initialize_module_mop_class()
   eul_intern_symbol(sym_1191,"(setter slot-name)");
   eul_intern_symbol(sym_1192,"(setter slot-keyword)");
   eul_intern_symbol(sym_1193,"(setter slot-default)");
-  eul_intern_symbol(sym_1194,"(setter slot-required-p)");
+  eul_intern_symbol(sym_1194,"(setter slot-required?)");
   eul_allocate_bytevector( G001055,G001054);
   eul_allocate_bytevector( G001196,G001195);
   eul_allocate_bytevector( G001198,G001197);
@@ -615,35 +615,35 @@ void initialize_module_mop_class()
   eul_allocate_bytevector( G001261,G001260);
   eul_intern_symbol(sym_1264,"slot-name");
   eul_intern_symbol(sym_1265,"method-function");
-  eul_intern_symbol(sym_1266,"class-instance-length");
-  eul_intern_symbol(sym_1267,"function-name");
-  eul_intern_symbol(sym_1268,"class-keywords");
-  eul_intern_symbol(sym_1269,"class-direct-superclasses");
-  eul_intern_symbol(sym_1270,"simple-function-code");
-  eul_intern_symbol(sym_1271,"class-direct-subclasses");
-  eul_intern_symbol(sym_1272,"symbol-name");
-  eul_intern_symbol(sym_1273,"generic-function-domain");
-  eul_intern_symbol(sym_1274,"slot-keyword");
-  eul_intern_symbol(sym_1275,"method-domain");
-  eul_intern_symbol(sym_1276,"generic-function-method-cache");
-  eul_intern_symbol(sym_1277,"method-generic-function");
-  eul_intern_symbol(sym_1278,"slot-writer");
-  eul_intern_symbol(sym_1279,"class-slots");
-  eul_intern_symbol(sym_1280,"generic-function-method-class");
-  eul_intern_symbol(sym_1281,"simple-function-environment");
-  eul_intern_symbol(sym_1282,"generic-function-methods");
-  eul_intern_symbol(sym_1283,"*default-slot-value*");
-  eul_intern_symbol(sym_1284,"generic-function-discriminating-function");
-  eul_intern_symbol(sym_1285,"slot-reader");
-  eul_intern_symbol(sym_1286,"generic-function-method-lookup-function");
-  eul_intern_symbol(sym_1287,"class-code");
-  eul_intern_symbol(sym_1288,"function-domain");
-  eul_intern_symbol(sym_1289,"class-name");
-  eul_intern_symbol(sym_1290,"class-abstract-p");
+  eul_intern_symbol(sym_1266,"class-abstract?");
+  eul_intern_symbol(sym_1267,"class-instance-length");
+  eul_intern_symbol(sym_1268,"function-name");
+  eul_intern_symbol(sym_1269,"class-keywords");
+  eul_intern_symbol(sym_1270,"class-direct-superclasses");
+  eul_intern_symbol(sym_1271,"simple-function-code");
+  eul_intern_symbol(sym_1272,"class-direct-subclasses");
+  eul_intern_symbol(sym_1273,"symbol-name");
+  eul_intern_symbol(sym_1274,"generic-function-domain");
+  eul_intern_symbol(sym_1275,"slot-keyword");
+  eul_intern_symbol(sym_1276,"method-domain");
+  eul_intern_symbol(sym_1277,"generic-function-method-cache");
+  eul_intern_symbol(sym_1278,"method-generic-function");
+  eul_intern_symbol(sym_1279,"slot-writer");
+  eul_intern_symbol(sym_1280,"class-slots");
+  eul_intern_symbol(sym_1281,"generic-function-method-class");
+  eul_intern_symbol(sym_1282,"simple-function-environment");
+  eul_intern_symbol(sym_1283,"generic-function-methods");
+  eul_intern_symbol(sym_1284,"*default-slot-value*");
+  eul_intern_symbol(sym_1285,"generic-function-discriminating-function");
+  eul_intern_symbol(sym_1286,"slot-reader");
+  eul_intern_symbol(sym_1287,"generic-function-method-lookup-function");
+  eul_intern_symbol(sym_1288,"class-code");
+  eul_intern_symbol(sym_1289,"function-domain");
+  eul_intern_symbol(sym_1290,"class-name");
   eul_intern_symbol(sym_1291,"generic-function-method-keywords");
   eul_intern_symbol(sym_1292,"slot-default");
-  eul_intern_symbol(sym_1293,"keyword-name");
-  eul_intern_symbol(sym_1294,"slot-required-p");
+  eul_intern_symbol(sym_1293,"slot-required?");
+  eul_intern_symbol(sym_1294,"keyword-name");
   eul_intern_symbol(sym_1295,"top-level");
   eul_allocate_bytevector( G001263,G001262);
 

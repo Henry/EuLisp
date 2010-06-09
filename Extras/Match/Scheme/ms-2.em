@@ -1,4 +1,4 @@
-;;;; ms-2.em -- version of match-slib.scm badly hacked for eulisp. 
+;;;; ms-2.em -- version of match-slib.scm badly hacked for eulisp.
 ;; Vectors probably don't work right.
 ;; Structures certainly don't.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -177,7 +177,7 @@
 (define match:set-error-control
   (lambda (v) (set! match:error-control v)))
 (define match:disjoint-predicates
-  (cons 'null
+  (cons 'null?
         '(pair?
            symbol?
            boolean?
@@ -564,7 +564,7 @@
                                     (lambda (p a) (k `(and ,@p) a))))
                            ((and (pair? p)
                                  (eq? 'or (car p)))
-                            (bound 
+                            (bound
                              (cadr p)
                              a
                              (lambda (first-p first-a)
@@ -1387,9 +1387,9 @@
 (defun set-cdr! (place item) ((setter cdr) place item))
 (defgeneric assoc  (item obj . test))
 (defmethod assoc (item (l <list>) . test)
-  (let ((test (if (null test) equal (car test))))
+  (let ((test (if (null? test) equal (car test))))
     (let loop ((l l))
-         (if (null l)
+         (if (null? l)
              '()
            (if (test (caar l) item)
                (car l)
@@ -1409,7 +1409,7 @@
 (defun boolean? (obj) (or (eq obj t) (eq obj '())))
 (defconstant string? stringp)
 (defconstant display prin)
-(defmacro begin body 
+(defmacro begin body
   `(progn ,@body))
 (defun cddddr (l)
   (cdr (cdr (cdr (cdr l)))))

@@ -356,7 +356,7 @@
           (let ((subclasses (class-direct-subclasses cl))
                 (new-indent (concatenate indent "  ")))
             (format t "~a~a<~a>\n"
-                    (if (class-abstract-p cl) "A" " ")
+                    (if (class-abstract? cl) "A" " ")
                     new-indent
                     (class-name cl))
             (do (lambda (x) (loop x new-indent)) subclasses))))

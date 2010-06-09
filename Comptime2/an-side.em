@@ -24,7 +24,7 @@
     (let* ((args (append (fun-args? node) (lambda-delegated-vars? node)))
            (bindings (lambda-binding-refs? node))
            (objs (map1-list binding-obj? bindings))
-           (vars (select-list local-static-var-p objs)))
+           (vars (select-list local-static-var? objs)))
       (do1-list (lambda (var)
             (and (null (member1-list var args))
                  (progn

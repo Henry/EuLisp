@@ -9,7 +9,7 @@
 (defmodule flock
   (syntax (macros)
    import (level1)
-   export (<ppcr-lock> ppcr-lock-p <thread-lock> thread-lock-p))
+   export (<ppcr-lock> ppcr-lock? <thread-lock> thread-lock?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lock classes
@@ -22,7 +22,7 @@
 ;;;-----------------------------------------------------------------------------
   (defclass <ppcr-lock> ()
     ((handle accessor: lock-handle))
-    predicate: ppcr-lock-p)
+    predicate: ppcr-lock?)
 
   ;; PPCR locks are now default
   (setq <lock> <ppcr-lock>)
@@ -34,7 +34,7 @@
 
   (defclass <thread-lock> ()
     (handle)
-    predicate: thread-lock-p)
+    predicate: thread-lock?)
 
   (defmethod initialize ((lk <thread-lock>) keywords)
     (call-next-method)

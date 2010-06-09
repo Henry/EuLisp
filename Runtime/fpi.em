@@ -10,7 +10,7 @@
   (syntax (_telos0)
    import (telos compare number integer)
    export (<fixed-precision-integer> <fpi> <int>
-           fixed-precision-integer-p intp
+           fixed-precision-integer? intp
            int-binary- int-binary* int-binary/ int-binary% int-binary-mod
            int-as-string
            most-positive-fixed-precision-integer
@@ -23,8 +23,8 @@
   (defconstant <fpi> <int>)
   (defconstant <fixed-precision-integer> <fpi>)
 
-  (defun fixed-precision-integer-p (x) (intp x))
-  ;;(declare-inline fixed-precision-integer-p)
+  (defun fixed-precision-integer? (x) (intp x))
+  ;;(declare-inline fixed-precision-integer?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Limits (-2^29 - 1  ... 2^29 - 1)

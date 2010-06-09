@@ -144,7 +144,7 @@
    ;; (print-cr cr-manager)
     (let* ((cset (prod-insts (cs cr-manager)))
            (prod-inst
-            (if (null cset)
+            (if (null? cset)
                 (progn (print "OPS5: conflict set empty: goodbye")
                        ())
               (if (binary= (strategy cr-manager) 'mea)
@@ -202,7 +202,7 @@
              ;;      best next elt)
               (cond
                ((<= (size (timestamps next)) elt) best)
-               ((null best) (list next))
+               ((null? best) (list next))
                (t
                 (let ((best-ts (element (timestamps (car best)) elt))
                       (next-ts (element (timestamps next) elt)))
@@ -215,7 +215,7 @@
             c-set)))
       (cond
        ;;(print new-c-set)
-       ((null new-c-set) c-set) ; members of c-set all equal so far
+       ((null? new-c-set) c-set) ; members of c-set all equal so far
        ((= (size new-c-set) 1) new-c-set) ; one dominating prod-inst
        (t (find-best-lex (+ elt 1) new-c-set)))))
 
@@ -227,7 +227,7 @@
     (let ((res (cond
      ((listp y) (labels ((find-success (val val-list)
                             (cond
-                             ((null val-list) ())
+                             ((null? val-list) ())
                              ((eql val (car val-list)) t) ; only pred allowed
                              (t (find-success val (cdr val-list))))))
                         (find-success x y)))

@@ -11,7 +11,7 @@
    import (i-all sx-obj sx-node ex-import ex-syntax i-modify cg-interf p-env)
    export (dynamic-binding-ref dynamic-binding-set
            dynamic-load-module as-dynamic-binding
-           module-loaded-p as-C-module-name
+           module-loaded? as-C-module-name
            dynamic-binding-ref1 dynamic-binding-set1 dynamic-load-module1))
 
 ;;;-----------------------------------------------------------------------------
@@ -69,14 +69,14 @@
    (defun dynamic-load-module (module-name . reload)
     (let ((tmp-silent *silent*))
       (unwind-protect
-        (if (and (null reload) (module-loaded-p module-name))
+        (if (and (null reload) (module-loaded? module-name))
             (let ((module (or (get-module module-name)
                               (load-module-interface module-name))))
               module)
           (let* ((foo (setq *silent* ()))
                  (module (if (null reload)
                              (or (get-module module-name)
-                                 (if (file-exist-p
+                                 (if (file-exist?
                                       (as-interface-file-name module-name))
                                      (load-module-interface module-name)
                                    (compile-module module-name)))
@@ -93,7 +93,7 @@
             ;; loaded its interface file need to be loaded as well
             ;; because the literals have to be initalized
             (do1-list (lambda (name)
-                        (if (module-loaded-p name) ()
+                        (if (module-loaded? name) ()
                           (dynamic-load-module name)))
                       import)
             (notify "Dynamically linking module ~a ..." module-name)
@@ -116,7 +116,7 @@
           ((setter *get-loaded-module*) module-name ()))
         (setq *silent* tmp-silent))))
 
-  (defun module-loaded-p (module-name)
+  (defun module-loaded? (module-name)
     (dynamic-binding-ref1 (as-C-module-name module-name) 0))
 
   (defun dynamic-initialize-local-literals (module module-name)

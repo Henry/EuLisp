@@ -164,7 +164,7 @@
   ;  (defun do-reader (acc name slotname i)
   ;    `((defconstant ,acc '(()))  ; class ,name not yet initialized!
   ;      (setq ,acc (slot-reader (find-slot ,name ',slotname)) t)
-  ;      (if (generic-function-p ,acc)
+  ;      (if (generic-function? ,acc)
   ;         (setq ,acc (generic-function-discriminating-function ,acc) t)
   ;       ())))
 
@@ -185,13 +185,13 @@
   ;  (defun do-writer (acc name slotname i . no-accessor)
   ;    (if (null no-accessor)
   ;       `(((setter setter) ,acc (slot-writer (find-slot ,name ',slotname)))
-  ;         (if (generic-function-p (setter ,acc))
+  ;         (if (generic-function? (setter ,acc))
   ;             ((setter setter) ,acc
   ;              (generic-function-discriminating-function (setter ,acc)))
   ;           ()))
   ;      `((defconstant ,acc '(()))       ; class ,name not yet initialized!
   ;       (setq ,acc (slot-writer (find-slot ,name ',slotname)) t)
-  ;       (if (generic-function-p ,acc)
+  ;       (if (generic-function? ,acc)
   ;           (setq ,acc (generic-function-discriminating-function ,acc) t)
   ;         ()))))
 

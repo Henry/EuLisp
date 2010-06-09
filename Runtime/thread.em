@@ -13,9 +13,9 @@
 (defmodule thread
   (syntax (_macros)
    import (telos event)
-   export (<thread> <abstract-thread> threadp <simple-thread> simple-thread-p
+   export (<thread> <abstract-thread> threadp <simple-thread> simple-thread?
            threadp current-thread current-thread-queue thread-state
-           thread-continuation thread-returned-p thread-return-value
+           thread-continuation thread-returned? thread-return-value
            thread-reschedule thread-suspend
            thread-block thread-unblock
            thread-start thread-value tconc
@@ -47,9 +47,9 @@
   (defclass <simple-thread> (<abstract-thread>)
     ((continuation accessor: thread-continuation)
      (state accessor: thread-state)
-     (returned accessor: thread-returned-p)
+     (returned accessor: thread-returned?)
      (return-value accessor: thread-return-value))
-    predicate: simple-thread-p)
+    predicate: simple-thread?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Initialization
@@ -125,7 +125,7 @@
   (defgeneric thread-value (thrd))
 
   (defmethod thread-value ((thrd <simple-thread>))
-    (if (thread-returned-p thrd)
+    (if (thread-returned? thrd)
         (thread-return-value thrd)
       (progn
         (thread-reschedule)
@@ -133,7 +133,7 @@
 
   (defun thread-return (thrd x)
     ((setter thread-return-value) thrd x)
-    ((setter thread-returned-p) thrd t)
+    ((setter thread-returned?) thrd t)
     ((setter thread-state) thrd 'returned)
     (thread-queue-remove))
 

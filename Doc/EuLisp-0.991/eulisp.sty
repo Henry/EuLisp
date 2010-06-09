@@ -184,12 +184,12 @@
 \newcommand*{\methodlabel}[1]{method:#1}
 \newcommand{\method}[2]
 {%
-    \entryclause{#1}{method}%
+    \entryclause{#1 <#2>}{method}%
     \label{\methodlabel{#1#2}}%
     \ttindex{#1}%
     \indexmeth{#1}%
 }
-\newcommand*{\methodref}[2]{\hyperref[\methodlabel{#1#2}]{{\tt #1}}}
+\newcommand*{\methodref}[2]{\hyperref[\methodlabel{#1#2}]{{\tt #1 <#2>}}}
 
 %%%  Syntax form
 \newcommand*{\syntaxlabel}[1]{syntax:#1}

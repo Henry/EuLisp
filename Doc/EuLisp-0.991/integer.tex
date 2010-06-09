@@ -99,7 +99,7 @@ integer literals is defined below.
 %
 The abstract class which is the superclass of all integer numbers.
 
-\function{integerp}
+\function{integer?}
 %
 \begin{arguments}
     \item[object] Object to examine.
@@ -108,7 +108,7 @@ The abstract class which is the superclass of all integer numbers.
 \result
 Returns {\em object} if it is an integer, otherwise \nil{}.
 
-\generic{evenp}
+\generic{even?}
 %
 \begin{arguments}
     \item[integer, \classref{integer}] An integer.
@@ -117,14 +117,14 @@ Returns {\em object} if it is an integer, otherwise \nil{}.
 \result
 Returns \true\/ if two divides {\em integer}, otherwise \nil{}.
 
-\function{oddp}
+\function{odd?}
 %
 \begin{arguments}
     \item[integer] An integer.
 \end{arguments}
 %
 \result
-Returns the equivalent of the logical negation of \genericref{evenp} applied to
+Returns the equivalent of the logical negation of \genericref{even?} applied to
 {\em integer}.
 %
 \end{optDefinition}

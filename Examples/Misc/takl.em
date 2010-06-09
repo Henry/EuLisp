@@ -16,7 +16,7 @@
    import (level1))
 
   (defun listn (n)
-    (if (null (= 0 n))
+    (if (null? (= 0 n))
         (cons n (listn (- n 1)))
       ()))
 
@@ -25,14 +25,14 @@
   (deflocal |6l| (listn 6))
 
   (defun mas (x y z)
-    (if (null (shorterp y x))
+    (if (null? (shorterp y x))
         z
       (mas (mas (cdr x) y z)
            (mas (cdr y) z x)
            (mas (cdr z) x y))))
 
   (defun shorterp (x y)
-    (and y (or (null x)
+    (and y (or (null? x)
                (shorterp (cdr x)
                          (cdr y)))))
 

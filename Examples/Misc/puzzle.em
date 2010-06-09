@@ -31,7 +31,7 @@
   (labels
    ((loop (i)
           (cond
-           ((null (> i *typemax*))
+           ((null? (> i *typemax*))
             ((setter vector-ref) *p* i (make <vector> size: (+ *size* 1)))
             (loop (+ i 1))))))
    (loop 0))
@@ -55,7 +55,7 @@
        (vector-ref *class* i)
        (- (vector-ref *piececount* (vector-ref *class* i)) 1))
       (do ((k j (+ k 1)))
-          ((or (> k *size*) (null (vector-ref *puzzle* k)))
+          ((or (> k *size*) (null? (vector-ref *puzzle* k)))
            (if (> k *size*) 0 k)))))
 
   (defun puzzle-remove (i j)
@@ -75,7 +75,7 @@
               (do ((i 0 (+ i 1)))
                   ((> i *typemax*) (setq *kount* (+ *kount* 1)))
                 (cond
-                 ((null
+                 ((null?
                    (zerop
                     (vector-ref *piececount* (vector-ref *class* i))))
                   (cond
@@ -100,7 +100,7 @@
             ((setter vector-ref) (vector-ref *p* *iii*) index  t))))
       ((setter vector-ref) *class* *iii* iclass)
       ((setter vector-ref) *piecemax* *iii* index)
-      (cond ((null (= *iii* *typemax*))
+      (cond ((null? (= *iii* *typemax*))
              (setq *iii* (+ *iii* 1))))))
 
   (defun start ()

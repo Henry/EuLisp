@@ -17,7 +17,7 @@
     (let* ((str (symbol-name cl-name))
            (pred-str (concatenate
                       (substring str 1 (- (string-size str) 1))
-                      (if (member #\- str) "-p" "p")))
+                      (if (member #\- str) "?" "p")))
            (pred-name (make <symbol> name: pred-str))
            (export-names ()))
       (labels

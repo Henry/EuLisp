@@ -8,13 +8,13 @@
 extern LispRef i_modify_bindings[];
 
 /* Module binding indices */
-#define external_file_exist_p_fn_index 7 
-#define library_newer_p_fn_index 3 
-#define absolute_file_name_fn_index 5 
-#define file_newer_p_fn_index 2 
-#define module_modified_p_fn_index 8 
-#define C_module_modified_p_fn_index 6 
-#define file_exist_p_fn_index 4 
+#define external_file_exist__X63_fn_index 5 
+#define absolute_file_name_fn_index 3 
+#define module_modified__X63_fn_index 4 
+#define library_newer__X63_fn_index 2 
+#define file_exist__X63_fn_index 7 
+#define C_module_modified__X63_fn_index 6 
+#define file_newer__X63_fn_index 8 
 
 
 

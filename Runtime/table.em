@@ -11,7 +11,7 @@
   (syntax (_telos0)
    import (telos convert copy collect compare list fpi string vector table1)
    expose (table1)
-   export (table-ref table-empty-p
+   export (table-ref table-empty?
            do1-table map1-table anyp1-table allp1-table))
 
 ;;;-----------------------------------------------------------------------------
@@ -146,10 +146,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-  (defmethod emptyp ((tab <table>)) (table-empty-p tab))
+  (defmethod emptyp ((tab <table>)) (table-empty? tab))
 
-  (defun table-empty-p (tab) (int-binary= (table-size tab) 0))
-  ;;(declare-inline table-empty-p)
+  (defun table-empty? (tab) (int-binary= (table-size tab) 0))
+  ;;(declare-inline table-empty?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Do

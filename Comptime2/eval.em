@@ -12,7 +12,7 @@
    export (main eval rep ?
            dynamic-binding-ref dynamic-binding-set
            dynamic-load-module as-dynamic-binding
-           module-loaded-p as-C-module-name
+           module-loaded? as-C-module-name
            dynamic-binding-ref1 dynamic-binding-set1 dynamic-load-module1
            *redefine-imported-bindings* *first-year-students*))
 
@@ -54,7 +54,7 @@
          (lambda (module-name)
            (setq *tmp-start-source-file-name* module-name)
            ;; Check if recompilation is necessary
-           (if (directly-or-indirectly-modified-p module-name)
+           (if (directly-or-indirectly-modified? module-name)
                (compile module-name)
              (notify "Module ~a need not be recompiled." module-name))
            (link module-name))

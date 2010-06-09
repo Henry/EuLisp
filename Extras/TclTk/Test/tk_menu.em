@@ -22,7 +22,7 @@
 ;;; Commands called by the menu
 ;;;-----------------------------------------------------------------------------
   (defun createSquare ()
-    (and (null *auxiliar*)
+    (and (null? *auxiliar*)
          (setq *auxiliar*
                (tk-make-frame ()
                               height: "15m" width: "15m"

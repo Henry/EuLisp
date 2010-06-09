@@ -77,7 +77,7 @@
   (defun set-up-bindings ()
     (let* ((env (module-interactive-lexical-env? *module*))
            (bindings
-            (select-list true-local-binding-p (access-table-values env))))
+            (select-list true-local-binding? (access-table-values env))))
       (do1-list (lambda (binding)
                   (if (binding-local-index? binding)
                       ()  ; redefined binding

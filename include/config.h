@@ -103,7 +103,7 @@
 
 #  define GC_PTHREADS 1
 #  include <pthread.h>
-#  include <gc.h>
+#  include <gc/gc.h>
 
 #  define gc_malloc(n) GC_malloc(n)
 #  define gc_expand_hp(x) GC_expand_hp(x)

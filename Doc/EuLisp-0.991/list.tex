@@ -43,7 +43,7 @@ parenthesis.  The empty list is also used to denote the boolean value
 
 The class whose only instance is the empty list, denoted \nil{}.
 
-\function{null}
+\function{null?}
 %
 \begin{arguments}
     \item[object] Object to examine.
@@ -99,7 +99,6 @@ The representations of {\em object$_1$} and {\em object$_2$} are determined by
 the external representations defined in other sections of this definition (see
 \classref{character}\ (\ref{character}), \classref{double-float}\
 (\ref{double-float}),
-% \classref{null}\ (\ref{null}),
 \classref{fixed-precision-integer}\ (\ref{fpi}),
 \classref{string}\ (\ref{string}),
 \classref{symbol}\ (\ref{symbol}) and
@@ -156,7 +155,7 @@ It is an error to apply \functionref{car} or \functionref{cdr} or their
 \functionref{setter} functions to anything other than a pair.  The empty list is
 not a pair and {\tt (car ())} or {\tt (cdr ())} is an error.
 
-\function{consp}
+\function{cons?}
 %
 \begin{arguments}
     \item[object] Object to examine.
@@ -165,7 +164,7 @@ not a pair and {\tt (car ())} or {\tt (cdr ())} is an error.
 \result%
 Returns {\em object\/} if it is a pair, otherwise \nil{}.
 
-\function{atom}
+\function{atom?}
 %
 \begin{arguments}
     \item[object] Object to examine.

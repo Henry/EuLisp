@@ -137,10 +137,10 @@
       (format s "#<~a: ~a>"
               (class-name (class-of x))
               (if (eq mode 'r)
-                  (if (file-control-block-p source)
+                  (if (file-control-block? source)
                       (control-block-file-name source)
                     "*unconnected*")
-                (if (file-control-block-p sink)
+                (if (file-control-block? sink)
                     (control-block-file-name sink)
                   "*unconnected*")))
       x))

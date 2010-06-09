@@ -79,7 +79,7 @@
                   (let ((meth-dom-class (or (vector-ref meth-dom i) <object>))
                         (gf-dom-class (vector-ref gf-dom i)))
                     (if gf-dom-class
-                        (if (cpl-subclass-p meth-dom-class gf-dom-class)
+                        (if (cpl-subclass? meth-dom-class gf-dom-class)
                             (loop (+ i 1))
                           ())
                       ;; Remember non-discriminating arg in method domain

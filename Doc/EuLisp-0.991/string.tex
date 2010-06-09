@@ -62,7 +62,7 @@ Some examples of string literals appear in table~\ref{example:string-literal}.
 \begin{center}
 \begin{tabular}{|ll|}\hline
     Example & Contents\\\hline
-    \verb+"a\nb"+ & \verb+#\a+, \verb+#\newline+ and \verb+#\b+\\
+    \verb+"a\nb"+ & \verb+#\a+, \verb+#\n+ and \verb+#\b+\\
     \verb+"c\\"+ & \verb+#\c+ and \verb+#\\+\\
     \verb+"\x1 "+ & \verb+#\x1+ followed by \verb+#\space+\\
     \verb+"\xabcde"+ & \verb+#\xabcd+ followed by \verb+#\e+\\
@@ -83,7 +83,7 @@ Some examples of string literals appear in table~\ref{example:string-literal}.
 %
 The function \functionref{write} outputs a re-readable form of any escaped
 characters in the string.  For example, \verb+"a\n\\b"+ (input
-notation) is the string containing the characters \verb+#\newline+,
+notation) is the string containing the characters \verb+#\n+,
 \verb+#\a+, \verb+#\\+ and \verb+#\b+.  The function \functionref{write}
 produces \verb+"a\n\\b"+, whilst \functionref{prin} produces
 %
@@ -127,7 +127,7 @@ character is \verb|#\x0|.
 \verb|  'fill-value #\a)|&&\\
 \end{tabular}
 %
-\function{stringp}
+\function{string?}
 %
 \begin{arguments}
     %
@@ -144,7 +144,7 @@ Returns {\em object\/} if it is a string, otherwise \nil{}.
 \end{specargs}
 %
 \result%
-If the result of \functionref{symbol-exists-p} when applied to {\em string\/}
+If the result of \functionref{symbol-exists?} when applied to {\em string\/}
 is a symbol, that symbol is returned.  If the result is \nil{}, then
 a new symbol is constructed whose name is {\em string}.  This new
 symbol is returned.

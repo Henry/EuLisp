@@ -11,7 +11,7 @@
    import (telos stream1 stream2 socket dynamic condition lock convert
            collect list string fpi)
    expose (stream1 stream2 socket)
-   export (connect flush newline sprin sprintf fprintf
+   export (connect flush newline sprintf fprintf
            write prin print prin-one-char prin-char
            *int-size-in-decimal-digits* *double-size-in-decimal-digits*
            output-list-contents
@@ -52,13 +52,13 @@
   (defmethod disconnect ((fs <file-stream>))
     (let ((sink (stream-sink fs))
           (source stream-source fs))
-      (if (file-control-block-p sink)
+      (if (file-control-block? sink)
           (progn
             (flush-buffer fs)
             (if (int-binary= (eul_close (control-block-descriptor sink)) 0) ()
               (error (strerror) <stream-condition> value: fs)))
         ())
-      (if (file-control-block-p source)
+      (if (file-control-block? source)
           (if (int-binary= (eul_close (control-block-descriptor source)) 0) ()
             (error (strerror) <stream-condition> value: fs))
         ())
@@ -156,14 +156,14 @@
 ;;;------------------------------------------------------------------------
 ;;; Read Operations
 ;;;------------------------------------------------------------------------
-  (defmethod generic-read ((s <stream>) eos-error-p eos-value)
-    ((stream-read-action s) s eos-error-p eos-value))
+  (defmethod generic-read ((s <stream>) eos-error? eos-value)
+    ((stream-read-action s) s eos-error? eos-value))
 
-  (defmethod generic-read ((fs <file-stream>) eos-error-p eos-value)
+  (defmethod generic-read ((fs <file-stream>) eos-error? eos-value)
     (let ((fcb (stream-source fs)))
       (if (and (int-binary= (control-block-buffer-cnt fcb) 0)
                (int-binary= (fill-buffer fs) 0))
-          (if eos-error-p (end-of-stream fs) eos-value)
+          (if eos-error? (end-of-stream fs) eos-value)
         (let* ((cnt (control-block-buffer-cnt fcb))
                (pos (control-block-buffer-pos fcb))
                (new-pos (int-binary+ pos 1)))
@@ -171,12 +171,12 @@
           ((setter control-block-buffer-pos) fcb new-pos)
           (string-ref (control-block-buffer fcb) new-pos)))))
 
-  (defmethod generic-read ((ss <string-stream>) eos-error-p eos-value)
+  (defmethod generic-read ((ss <string-stream>) eos-error? eos-value)
     (let ((scb (stream-source ss)))
       (if (and (int-binary= (control-block-buffer-cnt scb)
                             (string-size (control-block-buffer scb)))
                (int-binary= (fill-buffer ss) 0))
-          (if eos-error-p (end-of-stream ss) eos-value)
+          (if eos-error? (end-of-stream ss) eos-value)
         (let* ((cnt (control-block-buffer-cnt scb))
                (c (string-ref (control-block-buffer scb) cnt)))
           ((setter control-block-buffer-cnt) scb (int-binary+ cnt 1))
@@ -225,6 +225,30 @@
     (match-let ss ((s stdout))
                (prin-one-char #\\n s)))
 
+  (defun sprin-all (s . args)
+    (if args
+        (do1-list
+          (lambda (x)
+            (if (objectp x)
+                (generic-prin x s)
+              (progn
+                (prin-string "#<C: " 5 s)
+                (prin-address x s)
+                (prin-one-char #\> s))))
+          (car args))
+      ())
+    s)
+
+  (defun sprint-all (s . args)
+    (apply sprin-all s args)
+    (prin-one-char #\\n s))
+
+  (defun prin-all args
+    (sprin-all stdout args))
+
+  (defun print-all args
+    (sprint-all stdout args))
+
 ;;;------------------------------------------------------------------------
 ;;; Some low level functions to get things printed on <file-stream>s
 ;;;------------------------------------------------------------------------
@@ -265,8 +289,6 @@
                     (loop (int-binary+ i 1)))
                 ())))
        (loop 0))))
-
-  (defun sprin (x) (format () "~s" x))
 
   (defun make-space (s n)
     ;; There must be at least one byte more available than requested

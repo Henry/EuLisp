@@ -68,7 +68,7 @@
             (labels
              ((set-attribs (alist newlist)
                  (cond
-                  ((null alist) newlist)
+                  ((null? alist) newlist)
                   (t (set-attribs (cddr alist)
                                   (cons (cons (make-attrib (car alist))
                                               (rhs-val (cadr alist) pi))
@@ -123,7 +123,7 @@
           (ce-nums (rm-elt-desigs action)))
       (labels ((loop (elt-desigs)
                      (cond
-                      ((null elt-desigs))
+                      ((null? elt-desigs))
                       (t (let ((ce-des (car elt-desigs)))
                            (remove-wme wm-manager ce-manager cr-manager
                                        (if (is-ops5-var ce-des)
@@ -139,7 +139,7 @@
            (tstamp (if (is-ops5-var ce-des)
                        (rhs-val ce-des pi)
                      (get-ts ce-des (pi-prod pi) ce-ts)))
-           (wme (unless (null tstamp)
+           (wme (unless (null? tstamp)
                         (remove-wme wm-manager ce-manager cr-manager tstamp)))
            (class (wme-class-name wme))
            (prev-attrib-vals (wme-attrib-vals wme))
@@ -148,7 +148,7 @@
              ((set-attribs (alist newlist)
                  ;;(print alist)
                  (cond
-                  ((null alist) newlist)
+                  ((null? alist) newlist)
                   (t (set-attribs (cddr alist)
                                   (cons (cons (make-attrib (car alist))
                                                (rhs-val (cadr alist) pi))
@@ -156,7 +156,7 @@
              (set-attribs (md-attribs action) ())))
            (a-vals (accumulate
                     (lambda (a x)
-                      (if (null (assoc (car x) a))
+                      (if (null? (assoc (car x) a))
                           (cons x a)
                         a))
                     new-attrib-vals

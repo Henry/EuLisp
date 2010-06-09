@@ -18,7 +18,7 @@
   (defun my-deserialize ()
     (let ((x (deserialize)))
       (pprint x)
-      (cond ((generic-function-p x)
+      (cond ((generic-function? x)
              (x 42 "abc")
              (x 1.23 'foo))
             ((functionp x)

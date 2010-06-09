@@ -26,7 +26,7 @@ the number module (\ref{number}):
     \genericref{binary/},\ttindex{binary/}\indexmeth{binary/}
     \genericref{binary-mod},\ttindex{binary-mod}\indexmeth{binary-mod}
     \genericref{negate},\ttindex{negate}\indexmeth{negate}
-    \genericref{zerop}\ttindex{zerop}\indexmeth{zerop}
+    \genericref{zero?}\ttindex{zero?}\indexmeth{zero?}
 \end{flushleft}
 %
 \noindent
@@ -80,7 +80,7 @@ The syntax for the exponent of a double precision floating point is given below:
 The general syntax for floating point numbers is given in syntax
 table~\ref{float-syntax}.
 
-\function{double-float-p}
+\function{double-float?}
 %
 \begin{arguments}
     \item[object] Object to examine.
@@ -90,7 +90,7 @@ table~\ref{float-syntax}.
 Returns {\em object\/} if it is a double float, otherwise \nil{}.
 %
 \seealso%
-\functionref{floatp} (\ref{number}).
+\functionref{float?} (\ref{number}).
 
 \constant{most-positive-double-float}{double-float}
 \index{general}{implementation-defined!most positive double precision float}

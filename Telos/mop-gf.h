@@ -11,9 +11,9 @@ extern LispRef mop_gf_bindings[];
 #define error_no_applicable_methods_fn_index 15 
 #define initialize_fn_index 12 
 #define discriminating_domain_fn_index 6 
-#define sig__X61_fn_index 11 
+#define sig__X61_fn_index 10 
 #define generic_format_fn_index 17 
-#define allocate_fn_index 9 
+#define allocate_fn_index 8 
 #define gf_reset_cache_fn_index 3 
 #define finalize_fn_index 14 
 #define make_generic_function_fn_index 16 

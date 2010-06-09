@@ -165,7 +165,7 @@ void initialize_module_mpis()
   /* Byte-vector with size: 3 is_init: 0 index: 69 binding: mpi-stream-tag */
   static const void *G00304[] = {I(aa,82,24,00),B(mpis ,9),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 70 binding: local-mpi-stream-p */
+  /* Byte-vector with size: 5 is_init: 0 index: 70 binding: local-mpi-stream? */
   static const void *G00306[] = {I(aa,84,24,00),B(mpis ,9),I(08,24,00,00),B(mpis ,8),I(19,45,00,00)};
 
   /* Byte-vector with size: 62 is_init: 1 index: 0 binding: initialize-mpis */
@@ -225,7 +225,7 @@ void initialize_module_mpis()
   eul_allocate_bytevector( G00303,G00302);
   eul_allocate_bytevector( G00305,G00304);
   eul_allocate_bytevector( G00307,G00306);
-  eul_intern_symbol(sym_310,"local-mpi-stream-p");
+  eul_intern_symbol(sym_310,"local-mpi-stream?");
   eul_intern_symbol(sym_311,"mpi-stream-tag");
   eul_intern_symbol(sym_312,"mpi-stream-object-stream");
   eul_intern_symbol(sym_313,"mpi-stream-rank");

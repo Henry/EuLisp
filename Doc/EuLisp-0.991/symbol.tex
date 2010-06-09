@@ -4,11 +4,6 @@
 \label{symbol}
 \index{general}{level-0 modules!symbol}
 %
-\begin{optPrivate}
-    Fixed definition of {\tt special-form-p} after RJB's observation and (later)
-    KMP's CL fix to be called {\tt special-operator-p}.
-\end{optPrivate}
-%
 \begin{optDefinition}
 The defined name of this module is {\tt symbol}.
 %
@@ -68,7 +63,7 @@ The class of all instances of \classref{symbol}.
     resulting in the symbol with no name, written \verb+||+.
 \end{initoptions}
 
-\function{symbolp}
+\function{symbol?}
 %
 \begin{arguments}
     \item[object] Object to examine.
@@ -104,7 +99,7 @@ Returns a {\em string\/} which is \methodref{binary=}{string} to that given as
 the argument to the call to \functionref{make} which created {\em symbol}.  It
 is an error to modify this string.
 
-\function{symbol-exists-p}
+\function{symbol-exists?}
 %
 \begin{arguments}
     \item[string] A string containing the characters to be used to determine the

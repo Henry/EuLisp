@@ -8,9 +8,9 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule fthread
   (syntax (macros)
-   import ((except (thread-return-value thread-returned-p) level1))
+   import ((except (thread-return-value thread-returned?) level1))
    expose (flock fcsem)
-   export (<ui-thread> ui-thread-p thread-continue
+   export (<ui-thread> ui-thread? thread-continue
            thread-concurrency thread-priority thread-join-all))
 
 ;;;-----------------------------------------------------------------------------
@@ -18,13 +18,13 @@
 ;;;-----------------------------------------------------------------------------
   (defclass <ui-thread> (<abstract-thread>)
     ((function accessor: thread-function)
-     (returned accessor: thread-returned-p)
+     (returned accessor: thread-returned?)
      (return-value accessor: thread-return-value)
      ;; Next slots mainly accessed from C
      return-mutex
      (handle reader: thread-handle)
      registers)
-    predicate: ui-thread-p)
+    predicate: ui-thread?)
 
   (defmethod initialize ((thrd <ui-thread>) inits)
     (call-next-method)

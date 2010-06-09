@@ -11,7 +11,7 @@
 (defmodule flock
   (syntax (macros)
    import (level1 fcsem)
-   export (<thread-lock> thread-lock-p lock-handle))
+   export (<thread-lock> thread-lock? lock-handle))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lock classes
@@ -27,7 +27,7 @@
 
   (defclass <thread-lock> ()
     ((handle accessor: lock-handle))
-    predicate: thread-lock-p)
+    predicate: thread-lock?)
 
   (defmethod initialize ((lk <thread-lock>) keywords)
     (call-next-method)

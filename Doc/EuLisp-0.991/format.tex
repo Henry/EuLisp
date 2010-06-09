@@ -39,8 +39,8 @@ returns a list of the objects read in.
     \item[{\tt\textasciitilde }\optional{{\em n}}{\tt e}] a exponential-format
     floating-point number.
 
-    \item[{\tt\textasciitilde }\optional{{\em n}}{\tt f}] a fixed-format floating-point
-    number.
+    \item[{\tt\textasciitilde }\optional{{\em n}}{\tt f}] a fixed-format
+    floating-point number.
 
     \item[{\tt\textasciitilde o} octal] an integer in octal format.
 
@@ -48,7 +48,7 @@ returns a list of the objects read in.
 
     \item[{\tt\textasciitilde x} hexadecimal] an integer in hexadecimal format.
 
-    \item[{\tt\textasciitilde \%} newline] matches a \verb+\#newline+ character in the
+    \item[{\tt\textasciitilde \%} newline] matches a newline character in the
     input.
 \end{description}
 
@@ -89,7 +89,7 @@ function with the exception of those prefixed by {\em tilde\/}---graphic
 representation {\tt\textasciitilde}---which are treated specially as detailed in
 the following list.  These formatting directives are intentionally compatible
 with the facilities defined for the function {\tt fprintf} in ISO/IEC
-9899~:~1990.
+9899~:~1990 except for the prefix {\tt\textasciitilde} rather than {\tt\%}.
 %
 \begin{description}
     \item[{\tt\textasciitilde a} any]%
@@ -153,11 +153,11 @@ with the facilities defined for the function {\tt fprintf} in ISO/IEC
     (syntax table~\ref{integer-syntax}).
 
     \item[{\tt\textasciitilde \%} newline]%
-    output a \verb+\#newline+ character using {\tt newline}.
+    output a newline character.
 
     \item[{\tt\textasciitilde \&} conditional newline]%
-    output a \verb+\#newline+ character using {\tt newline}, if it cannot be
-    determined that the output stream is at the beginning of a fresh line.
+    output a newline character using, if it cannot be determined that the output
+    stream is at the beginning of a fresh line.
 
     \item[{\tt\textasciitilde \textasciitilde} tilde]%
     output a tilde character using \functionref{prin}.

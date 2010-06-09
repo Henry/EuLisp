@@ -21,7 +21,7 @@
   (defmethod initialize ((x <bigint>) inits)
     (call-next-method)
     (let ((val (bigint-value x)))
-      (cond ((null (objectp val))) ;;This gives sometimes as SIGV!
+      (cond ((null? (objectp val))) ;;This gives sometimes as SIGV!
             ((bigintp val)
              ((setter bigint-value) x (mpz-init-set (bigint-value val))))
             ((intp val)

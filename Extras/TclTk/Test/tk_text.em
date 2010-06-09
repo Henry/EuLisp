@@ -26,7 +26,7 @@
       (with-input-file
         (s name)
         (setq x (read s t (eos-default-value)))
-        (while (null (eq x (eos-default-value)))
+        (while (null? (eq x (eos-default-value)))
           (tk-insert text "end" (format () "~a" x))
           (setq x (read s () (eos-default-value)))))))
 

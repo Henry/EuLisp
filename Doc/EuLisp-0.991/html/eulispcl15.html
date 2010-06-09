@@ -1,0 +1,645 @@
+<?xml version="1.0" encoding="iso-8859-1" ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">  
+<!--http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd-->  
+<html xmlns="http://www.w3.org/1999/xhtml"  
+> 
+<head><title>15 Condition Signalling and Handling</title> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<meta name="generator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
+<!-- html,1,next,noannex,xhtml --> 
+<meta name="src" content="eulisp.tex" /> 
+<meta name="date" content="2010-06-09 10:52:00" /> 
+<link rel="stylesheet" type="text/css" href="eulisp.css" /> 
+</head><body 
+>
+<!--l. 305--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl16.html" >next</a>] [<a 
+href="eulispcl14.html" >prev</a>] [<a 
+href="eulispcl14.html#taileulispcl14.html" >prev-tail</a>] [<a 
+href="#taileulispcl15.html">tail</a>] [<a 
+href="eulisp.html#eulispcl15.html" >up</a>] </p></div>
+<h3 class="clauseHead"> 15 <a 
+ id="x19-18600015"></a>Condition Signalling and Handling</h3>
+<!--l. 2--><p class="noindent" >Conditions are handled with a function called a <span 
+class="cmti-9">handler</span> <a 
+ id="dx19-186001"></a>. Handlers
+are established dynamically and have dynamic scope and extent.
+Thus, when a condition is signalled, the processor will call the
+dynamically closest handler. This can accept, resume or decline the
+condition (see <span 
+class="cmtt-9">with-handler </span>for a full discussion and definition of
+this terminology). If it declines, then the next dynamically
+closest handler is called, and so on, until a handler accepts or
+resumes the condition. It is the first handler accepting the
+condition that is used and this may not necessarily be the
+most specific. Handlers are established by the special form
+<a 
+href="#x19-192001r22"><span 
+class="cmtt-9">with-handler</span></a>.
+</p><!--l. 13--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x19-186002r20"></a><span 
+class="cmbx-9">15.0.20   </span><span 
+class="cmtt-9">signal</span>
+<a 
+ id="Q1-19-245"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<a 
+ id="dx19-186003"></a>
+<a 
+ id="dx19-186004"></a>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-18700020"></a><span 
+class="cmbx-8">Arguments</span></h5>
+<!--l. 15--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">condition </span>: </dt><dd 
+class="arguments">
+    <!--l. 16--><p class="noindent" >The condition to be signalled.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">function </span>: </dt><dd 
+class="arguments">
+    <!--l. 18--><p class="noindent" >The function to be called if the condition is handled and
+    resumed, that is to say, the condition is continuable, or <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>
+    otherwise.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">thread</span><span 
+class="cmmi-6">opt</span> : </dt><dd 
+class="arguments">
+    <!--l. 22--><p class="noindent" >If this argument is not supplied, the condition is signalled
+    on  the  thread  which  called  <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>,  otherwise,  <span 
+class="cmti-9">thread</span>
+    indicates the thread on which <span 
+class="cmti-9">condition </span>is to be signalled.</p></dd></dl>
+<!--l. 28--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-18800020"></a><span 
+class="cmbx-8">Result</span></h5>
+<!--l. 29--><p class="noindent" ><a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> should never return. It is an error to call <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>&#8217;s
+continuation.
+                                                   </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x19-18900020"></a><span 
+class="cmbx-8">Remarks</span></h5>
+  <!--l. 33--><p class="noindent" >Called to indicate that a specified condition has arisen during the
+  execution of a program. If the third argument is not supplied,
+  <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> calls the dynamically closest handler with <span 
+class="cmti-9">condition </span>and
+  <span 
+class="cmti-9">continuation</span>. If the second argument is a subclass of <span 
+class="cmtt-9">function</span>, it
+  is the <span 
+class="cmti-9">resume </span>continuation to be used in the case of a handler
+  deciding to resume from a continuable condition. If the second
+  argument is <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>, it indicates that the condition was signalled as a
+  non-continuable condition&#8212;in this way the handler is informed of
+  the signaler&#8217;s intention.
+  </p><!--l. 44--><p class="noindent" >If the third argument is supplied, <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> registers the specified
+  condition to be signalled on <span 
+class="cmti-9">thread</span>. The condition must be an
+  instance of the condition class <a 
+href="eulispcl12.html#x16-143005r10"><span 
+class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>, otherwise an
+  error is signalled (condition class: <a 
+href="eulispcl14.html#x18-174003r13"><span 
+class="cmtt-9">&#x003C;wrong-condition-class&#x003E;</span></a><a 
+ id="dx19-189001"></a>) on
+  the thread calling <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>. A <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> on a determined thread has no
+  effect on either the signalled or signalling thread except in the case
+  of the above error.
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19000020"></a><span 
+class="cmbx-8">See</span><span 
+class="cmbx-8">&#x00A0;also</span></h5>
+  <!--l. 54--><p class="noindent" ><a 
+href="eulispcl12.html#x16-124001r3"><span 
+class="cmtt-9">thread-reschedule</span></a>, <a 
+href="eulispcl12.html#x16-131001r6"><span 
+class="cmtt-9">thread-value</span></a>, <a 
+href="#x19-192001r22"><span 
+class="cmtt-9">with-handler</span></a>.
+  </p><!--l. 56--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x19-190001r21"></a><span 
+class="cmbx-9">15.0.21   </span><span 
+class="cmtt-9">call-next-handler</span>
+ <a 
+ id="Q1-19-250"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
+ id="dx19-190002"></a>
+  <a 
+ id="dx19-190003"></a>
+  </p>
+  <h5 class="syntaxssclauseHead"> 15.0.21.1 <a 
+ id="x19-19100015.0.21.1"></a><span 
+class="cmbx-8">Syntax</span></h5> <a 
+ id="dx19-191001"></a>
+  <a 
+ id="dx19-191002"></a>
+  <!--l. 65--><p class="noindent" ><div class="framebox-l" 
+style="width:27.14em;"> </p><div class="minipage"><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmti-9">call-next-handler-form</span><a 
+ id="dx19-191003"></a><a 
+ id="dx19-191004"></a><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 65-->                          <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
+class="tabbing"><span 
+class="cmtt-9">( </span><a 
+href="#x19-190001r21"><span 
+class="cmtt-9">call-next-handler</span></a> <span 
+class="cmtt-9">)</span></td></tr></table>
+<!--l.10 65-->                                                     </div></div>
+ <h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19200015.0.21.1"></a><span 
+class="cmbx-8">Remarks</span></h5>
+  <!--l. 68--><p class="noindent" >The <a 
+href="#x19-190001r21"><span 
+class="cmtt-9">call-next-handler</span></a> special form calls the next enclosing
+  handler. It is an error to evaluate this form other than within an
+  established handler function. The <a 
+href="#x19-190001r21"><span 
+class="cmtt-9">call-next-handler</span></a> special form
+  is normally used when a handler function does not know how to
+  deal with the class of condition. However, it may also be
+  used to combine handler function behaviour in a similar but
+  orthogonal way to <a 
+href="eulispcl11.html#x13-97002r1"><span 
+class="cmtt-9">call-next-method</span></a> (assuming a generic handler
+  function).
+  </p><!--l. 76--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x19-192001r22"></a><span 
+class="cmbx-9">15.0.22   </span><span 
+class="cmtt-9">with-handler</span>
+ <a 
+ id="Q1-19-253"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
+ id="dx19-192002"></a>
+  <a 
+ id="dx19-192003"></a>
+                                                                                                  
+                                                                                                  
+</p>
+<h5 class="syntaxssclauseHead"> 15.0.22.1 <a 
+ id="x19-19300015.0.22.1"></a><span 
+class="cmbx-8">Syntax</span></h5><a 
+ id="dx19-193001"></a>
+<a 
+ id="dx19-193002"></a>
+<!--l. 88--><p class="noindent" ><div class="framebox-l" 
+style="width:27.14em;"> </p><div class="minipage"><table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmti-9">with-handler-form</span><a 
+ id="dx19-193003"></a><a 
+ id="dx19-193004"></a><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 88-->                <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
+class="tabbing"><span 
+class="cmtt-9">( </span><a 
+href="#x19-192001r22"><span 
+class="cmtt-9">with-handler</span></a> <a 
+href="#x19-19300015.0.22.1"><span 
+class="cmti-9">handler-function</span></a></td></tr></table>
+<!--l.10 88-->                                  <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">         </td><td style="width:14px;" 
+class="tabbing">   </td><td  
+class="tabbing"><a 
+href="eulispcl18.html#x23-91700018.1"><span 
+class="cmti-9">form</span><span 
+class="cmsy-6">*</span></a> <span 
+class="cmtt-9">)</span></td></tr></table>
+<!--l.10 88-->                                  <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td  
+class="tabbing"><span 
+class="cmti-9">handler-function</span><a 
+ id="dx19-193005"></a><a 
+ id="dx19-193006"></a><span 
+class="cmtt-9">:</span></td></tr></table>
+<!--l.10 88-->                                 <table  
+cellpadding="0" border="0" cellspacing="0" 
+class="tabbing"><tr  
+style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
+class="tabbing">      </td><td  
+class="tabbing"><a 
+href="eulispcl10.html#x12-6300010.1.1.1"><span 
+class="cmti-9">level-0-form</span></a></td></tr></table>
+<!--l.10 88-->                                                </div></div>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19400015.0.22.1"></a><span 
+class="cmbx-8">Arguments</span></h5>
+<!--l. 90--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">handler-function </span>: </dt><dd 
+class="arguments">
+    <!--l. 91--><p class="noindent" >The result of evaluating the handler function expression
+    must  be  either  a  function  or  a  generic  function.  This
+    function will be called if a condition is signalled during
+    the dynamic extent of <span 
+class="cmti-9">protected-form</span>s and there are no
+    intervening  handler  functions  which  accept  or  resume
+    the condition. A handler function takes two arguments:
+    a  condition,  and  a  <span 
+class="cmti-9">resume  </span>function/continuation.  The
+    condition is the condition object that was passed to <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>
+    as  its  first  argument.  The  <span 
+class="cmti-9">resume  </span>continuation  is  the
+    continuation (or <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>) that was given to <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> as its second
+    argument.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">forms </span>: </dt><dd 
+class="arguments">
+    <!--l. 101--><p class="noindent" >The sequence of forms whose execution is protected by the
+    <span 
+class="cmti-9">handler function </span>specified above.</p></dd></dl>
+<!--l. 105--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19500015.0.22.1"></a><span 
+class="cmbx-8">Result</span></h5>
+<!--l. 106--><p class="noindent" >The value of the last form in the sequence of <span 
+class="cmti-9">form</span>s.
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19600015.0.22.1"></a><span 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 110--><p class="noindent" >A <a 
+href="#x19-192001r22"><span 
+class="cmtt-9">with-handler</span></a> form is evaluated in three steps:
+</p><!--l. 111--><p class="noindent" >
+    </p><ol  class="enumerate1" >
+    <li 
+  class="enumerate" id="x19-196002x1">The new <span 
+class="cmti-9">handler-function </span>is evaluated. This now identifies
+    the nearest enclosing handler and shadows the previous
+    nearest enclosing handler.
+    </li>
+    <li 
+  class="enumerate" id="x19-196004x2">The  sequence  of  <span 
+class="cmti-9">form</span>s  is  evaluated  in  order  and  the
+    value  of  the  last  one  is  returned  as  the  result  of  the
+    <a 
+href="#x19-192001r22"><span 
+class="cmtt-9">with-handler</span></a> expression.
+    </li>
+    <li 
+  class="enumerate" id="x19-196006x3">the  <span 
+class="cmti-9">handler-function  </span>is  disestablished  as  the  nearest
+    enclosing handler, and the previous handler function is
+    restored as the nearest enclosing.</li></ol>
+<!--l. 125--><p class="noindent" >The above is the normal behaviour of <a 
+href="#x19-192001r22"><span 
+class="cmtt-9">with-handler</span></a>. The      exceptional behaviour of <a 
+href="#x19-192001r22"><span 
+class="cmtt-9">with-handler</span></a> happens when there is a
+  call to <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> during the evaluation of <span 
+class="cmti-9">protected-form</span>. <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> calls
+  the nearest closing <span 
+class="cmti-9">handler-function </span>passing on the first two
+  arguments given to <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>. The <span 
+class="cmti-9">handler-function </span>is executed in
+  the dynamic extent of the call to <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>. However, any <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>s
+  occurring during the execution of <span 
+class="cmti-9">handler-function </span>are dealt with
+  by the nearest enclosing handler outside the extent of the form
+  which established <span 
+class="cmti-9">handler-function</span>. It is an error if there
+  is no enclosing handler. In this circumstance the identified
+  error is delivered to the configuration to be dealt with in an
+  implementation-defined way. Errors arising in the dynamic extent
+  of the handler function are signalled in the dynamic extent of the
+  original <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> but are handled in the enclosing dynamic extent of
+  the handler.
+  </p><!--l. 141--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19700015.0.22.1"></a><span 
+class="cmbx-8">Examples</span></h5>
+  <!--l. 143--><p class="noindent" >There are three ways in which a <span 
+class="cmti-9">handler-function </span>can respond:
+  actions:
+  </p><!--l. 145--><p class="noindent" >
+        </p><ol  class="enumerate1" >
+        <li 
+  class="enumerate" id="x19-197002x1">The error is very serious and the computation must be
+        abandoned; this is likely to be characterised by a non-local
+        exit from the handler function.
+        </li>
+        <li 
+  class="enumerate" id="x19-197004x2">The situation can be corrected by the handler, so it does
+        and then returns. Thus the call to <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a> returns with the
+        result passed back from the handler function.
+        </li>
+        <li 
+  class="enumerate" id="x19-197006x3">The  handler  function  does  not  know  how  to  deal  with
+        the class of condition signalled; control is passed explicitly
+        to the next enclosing handler via the <a 
+href="#x19-190001r21"><span 
+class="cmtt-9">call-next-handler</span></a>
+     special form.</li></ol>
+  <!--l. 159--><p class="noindent" >An illustration of the use of all three cases is given here:         <a 
+ id="x19-197008"></a><br />
+  </p><div align="center" class="caption"><table class="caption" 
+><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;1: </td><td  
+class="content">handler actions</td></tr></table></div>
+      <div class="obeylines-v"><span 
+class="cmtt-9">(defgeneric</span><span 
+class="cmtt-9">&#x00A0;error-handler</span><span 
+class="cmtt-9">&#x00A0;(condition)</span>
+    <br /><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;method:</span><span 
+class="cmtt-9">&#x00A0;(((c</span><span 
+class="cmtt-9">&#x00A0;&#x003C;serious-error&#x003E;))</span>
+    <br /><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;...</span><span 
+class="cmtt-9">&#x00A0;abort</span><span 
+class="cmtt-9">&#x00A0;thread</span><span 
+class="cmtt-9">&#x00A0;...)</span>
+    <br /><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;method:</span><span 
+class="cmtt-9">&#x00A0;(((c</span><span 
+class="cmtt-9">&#x00A0;&#x003C;fixable-situation&#x003E;))</span>
+    <br /><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;...</span><span 
+class="cmtt-9">&#x00A0;apply</span><span 
+class="cmtt-9">&#x00A0;fix</span><span 
+class="cmtt-9">&#x00A0;and</span><span 
+class="cmtt-9">&#x00A0;return</span><span 
+class="cmtt-9">&#x00A0;...</span><span 
+class="cmtt-9">&#x00A0;)</span>
+    <br /><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;method:</span><span 
+class="cmtt-9">&#x00A0;(((c</span><span 
+class="cmtt-9">&#x00A0;&#x003C;condition&#x003E;)</span><span 
+class="cmtt-9">&#x00A0;(call-next-handler))))</span>
+    <br />
+    <br /><span 
+class="cmtt-9">(with-handler</span><span 
+class="cmtt-9">&#x00A0;error-handler</span>
+    <br /><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;;;</span><span 
+class="cmtt-9">&#x00A0;the</span><span 
+class="cmtt-9">&#x00A0;protected</span><span 
+class="cmtt-9">&#x00A0;expression</span>
+    <br /><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;</span><span 
+class="cmtt-9">&#x00A0;(something-which-might-signal-an-error))</span>
+    <br /> </div>
+<!--l. 178--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19800015.0.22.1"></a><span 
+class="cmbx-8">See</span><span 
+class="cmbx-8">&#x00A0;also</span></h5>
+<!--l. 179--><p class="noindent" ><a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>.
+</p><!--l. 181--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x19-198001r23"></a><span 
+class="cmbx-9">15.0.23   </span><span 
+class="cmtt-9">error</span>
+<a 
+ id="Q1-19-260"></a>
+                                                                                                  
+                                                                                                  
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<a 
+ id="dx19-198002"></a>
+<a 
+ id="dx19-198003"></a>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-19900023"></a><span 
+class="cmbx-8">Arguments</span></h5>
+<!--l. 183--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">error-message </span>: </dt><dd 
+class="arguments">
+    <!--l. 184--><p class="noindent" >a string containing relevant information.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">condition-class </span>: </dt><dd 
+class="arguments">
+    <!--l. 186--><p class="noindent" >the class of condition to be signalled.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">init-option</span><sup><span 
+class="cmsy-6">*</span></sup> : </dt><dd 
+class="arguments">
+    <!--l. 188--><p class="noindent" >a
+    sequence of options to be passed to <span 
+class="cmtt-9">initialize-instance</span>
+    when making the instance of condition.</p></dd></dl>
+<!--l. 192--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-20000023"></a><span 
+class="cmbx-8">Result</span></h5>
+<!--l. 193--><p class="noindent" >The result is <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>.
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-20100023"></a><span 
+class="cmbx-8">Remarks</span></h5>
+<!--l. 196--><p class="noindent" >The <a 
+href="#x19-198001r23"><span 
+class="cmtt-9">error</span></a> function signals a non-continuable error. It calls <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>
+with an instance of a condition of <span 
+class="cmti-9">condition-class </span>initialized from
+<span 
+class="cmti-9">init-option</span>s, the <span 
+class="cmti-9">error-message </span>and a <span 
+class="cmti-9">resume </span>continuation
+value of <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>, signifying that the condition was not signalled
+continuably.
+</p><!--l. 202--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x19-201001r24"></a><span 
+class="cmbx-9">15.0.24   </span><span 
+class="cmtt-9">cerror</span>
+<a 
+ id="Q1-19-264"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<a 
+ id="dx19-201002"></a>
+<a 
+ id="dx19-201003"></a>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x19-20200024"></a><span 
+class="cmbx-8">Arguments</span></h5>
+<!--l. 204--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">error-message </span>: </dt><dd 
+class="arguments">
+    <!--l. 205--><p class="noindent" >a string containing relevant information.
+    </p></dd><dt class="arguments">
+<span 
+class="cmti-9">condition-class </span>: </dt><dd 
+class="arguments">
+    <!--l. 207--><p class="noindent" >the class of condition to be signalled.
+    </p></dd><dt class="arguments">                                               <span 
+class="cmti-9">init-option</span><sup><span 
+class="cmsy-6">*</span></sup> :  </dt><dd 
+class="arguments">
+        <!--l. 209--><p class="noindent" >a
+        sequence of options to be passed to <span 
+class="cmtt-9">initialize-instance</span>
+     when making the instance of condition.</p></dd></dl>
+  <!--l. 213--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x19-20300024"></a><span 
+class="cmbx-8">Result</span></h5>
+  <!--l. 214--><p class="noindent" >The result is <a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>.
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x19-20400024"></a><span 
+class="cmbx-8">Remarks</span></h5>
+  <!--l. 217--><p class="noindent" >The <a 
+href="#x19-201001r24"><span 
+class="cmtt-9">cerror</span></a> function signals a continuable error. It calls <a 
+href="#x19-186002r20"><span 
+class="cmtt-9">signal</span></a>
+ with an instance of a condition of <span 
+class="cmti-9">condition-class </span>initialized from
+  <span 
+class="cmti-9">init-option</span>s, the <span 
+class="cmti-9">error-message </span>and a <span 
+class="cmti-9">resume </span>continuation value
+  which is the continuation of the <a 
+href="#x19-201001r24"><span 
+class="cmtt-9">cerror</span></a> expression. A non-<a 
+href="eulispcl17.html#x21-606009r2"><span 
+class="cmtt-9">()</span></a>
+ resume continuation signifies that the condition has been signalled
+  continuably.
+                                                                                                  
+                                                                                                  
+                                                 
+                                                                                                  
+                                                                                                  
+</p>
+<!--l. 1--><div class="crosslinks"><p class="noindent">[<a 
+href="eulispcl16.html" >next</a>] [<a 
+href="eulispcl14.html" >prev</a>] [<a 
+href="eulispcl14.html#taileulispcl14.html" >prev-tail</a>] [<a 
+href="eulispcl15.html" >front</a>] [<a 
+href="eulisp.html#eulispcl15.html" >up</a>] </p></div>
+<!--l. 1--><p class="noindent" ><a 
+ id="taileulispcl15.html"></a> </p> 
+</body></html> 

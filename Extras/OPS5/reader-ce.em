@@ -32,7 +32,7 @@
 ;;;-----------------------------------------------------------------------------
   (defun make-tests (attrib-table ce tests-in join-vars curr-attrib)
     ;;(format ops-out "tests-in: ~a~%" tests-in)
-    (if (null tests-in)
+    (if (null? tests-in)
         ce
       (let* ((attrib (if curr-attrib curr-attrib (car tests-in)))
              (tests  (if curr-attrib tests-in (cdr tests-in)))
@@ -142,7 +142,7 @@
                                             (element attrib-table (caar tests))
                                           ())))
                             (cond
-                              ((null tests)
+                              ((null? tests)
                                (list test))
                               ((>= index2 index)
                                (cons test tests))

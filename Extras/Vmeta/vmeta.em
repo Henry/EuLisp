@@ -105,7 +105,7 @@
                               (list var init)))
                           inits))
             (cond (,(car test)
-                   ,@(if (null (cdr test))
+                   ,@(if (null? (cdr test))
                          '(())
                        (cdr test)))
                   (t
@@ -220,7 +220,7 @@
                             (max (if max-specified (cadddr x) ())))
                        ;;(format stderr "min-s: ~s max-s: ~s min: ~s max: ~s x: ~s\n"
                        ;;        min-specified max-specified min max x)
-                       ;;(if (null max-specified)
+                       ;;(if (null? max-specified)
                        ;;    (print "max-specified null")
                        ;;  (print "max-speicified not null"))
                        ;;(if (symbolp max-specified)

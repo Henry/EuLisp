@@ -29,7 +29,7 @@
 ;;;-----------------------------------------------------------------------------
 
   (defun assoc (obj list . comp)
-    (assoc-loop obj list (if (null comp) eql (car comp))))
+    (assoc-loop obj list (if (null? comp) eql (car comp))))
 
   (defun assoc-loop (obj list comp)
     (cond ((atom list) ())

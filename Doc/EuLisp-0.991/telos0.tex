@@ -272,12 +272,12 @@ kept, defclass should be described here also.
     \>  \keywordref{reader}: \scref{identifier} \\
     \>  \keywordref{writer}: \scref{identifier} \\
     \>  \keywordref{accessor}: \scref{identifier} \\
-    \>  \keywordref{requiredp}: \scref{boolean} \\
+    \>  \keywordref{required?}: \scref{boolean} \\
     \scdef{class-option}: \\
     \>  \keywordref{keywords}: ( \scseqref{keyword} ) \\
     \>  \keywordref{constructor}: \scref{constructor-specification} \\
     \>  \keywordref{predicate}: \scref{identifier} \\
-    \>  \keywordref{abstractp}: \scref{boolean} \\
+    \>  \keywordref{abstract?}: \scref{boolean} \\
     \scdef{constructor-specification}: \\
     \>  \scref{identifier} \\
     \>  ( \scref{identifier} \scseqref{initarg} ) \\
@@ -366,7 +366,7 @@ The \scref{slot-option}s are interpreted as follows:
     for a slot. It is a violation to specify the same reader, writer, or
     accessor name for two different slots.
 
-    \item[\keyworddef{requiredp}:, \scref{boolean}]%
+    \item[\keyworddef{required?}:, \scref{boolean}]%
     The value is either \true{} or \nil{}. \true{} indicates that an
     initialization argument must be supplied for this slot.
 \end{options}
@@ -402,7 +402,7 @@ The class-options are interpreted as follows:
     % Specifying the constructor in this way is equivalent to writing a
     % \defopref{defpredicate} form for the class.
 
-    \item[\keyworddef{abstractp}:, \scref{boolean}]%
+    \item[\keyworddef{abstract?}:, \scref{boolean}]%
     The value is either \true{} or \nil{}. \true{} indicates that the class
     being defined is abstract.
 %
@@ -410,14 +410,14 @@ The class-options are interpreted as follows:
 %
 \end{optDefinition}
 %
-\function{abstract-class-p}
+\function{abstract-class?}
 %
 \Signature
-\defSignature{abstract-class-p}{
+\defSignature{abstract-class?}{
 \begin{signature}
-    (\functionref{abstract-class-p} \scref{object}) \ra{} \classref{object}
+    (\functionref{abstract-class?} \scref{object}) \ra{} \classref{object}
 \end{signature}}
-\showSignatureBox{abstract-class-p}%
+\showSignatureBox{abstract-class?}%
 %
 \begin{arguments}
     \item[\scref{object}] Returns \scref{object}, if it is an abstract class,
@@ -425,7 +425,7 @@ The class-options are interpreted as follows:
 \end{arguments}
 %
 \begin{note}
-    \functionref{abstract-class-p} is not currently implemented in \youtoo.
+    \functionref{abstract-class?} is not currently implemented in \youtoo.
 \end{note}
 %
 \sclause{Defining Generic Functions and Methods}
@@ -713,16 +713,16 @@ arguments as the current method.  An error is signalled (condition
 class: \conditionref{no-next-method}\indexcondition{no-next-method}) if there
 is no next most specific method.
 
-\specop{next-method-p}
+\specop{next-method?}
 \Signature
-\defSignature{next-method-p}{
+\defSignature{next-method?}{
 \begin{signature}
-    (\specopref{next-method-p}) \ra{} \scref{boolean}
+    (\specopref{next-method?}) \ra{} \scref{boolean}
 \end{signature}}%
-\showSignatureBox{next-method-p}%
+\showSignatureBox{next-method?}%
 %
 \result%
-If there is a next most specific method, \specopref{next-method-p} returns a
+If there is a next most specific method, \specopref{next-method?} returns a
 non-\nil{}\/ value, otherwise, it returns \nil{}.
 %
 \end{optDefinition}

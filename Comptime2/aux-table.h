@@ -8,10 +8,10 @@
 extern LispRef aux_table_bindings[];
 
 /* Module binding indices */
-#define access_table_keys_fn_index 4 
+#define access_table_keys_fn_index 3 
 #define access_table_values_fn_index 8 
 #define access_table_clear_fn_index 9 
-#define make_access_table_fn_index 3 
+#define make_access_table_fn_index 4 
 #define access_table_do_fn_index 7 
 #define access_table_print_fn_index 2 
 #define access_table_size_fn_index 5 

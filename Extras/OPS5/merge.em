@@ -11,9 +11,9 @@
 
   (defun merge! (list1 list2 previous less?)
      ; Merges list1 and list2 into cdr of previous
-    (if (null list1)
+    (if (null? list1)
         ((setter cdr) previous list2)
-      (if (null list2)
+      (if (null? list2)
           ((setter cdr) previous list1)
         (if (less? (car list2) (car list1))
             (progn
@@ -26,8 +26,8 @@
   (defun merge-pass! (list-of-lists previous less?)
     ; Two way merges lists in list-of-lists into cdr of previous
     ; merge-pass!
-    (when (not (null list-of-lists))
-       (if (null (cdr list-of-lists))
+    (when (not (null? list-of-lists))
+       (if (null? (cdr list-of-lists))
            ((setter cdr) previous list-of-lists)
          (let ((sorted-list (list '*header-node*)))
            (merge! (car list-of-lists) (cadr list-of-lists) sorted-list less?)
@@ -40,7 +40,7 @@
     (let ((merged-lists (list '*header-node* '())))
       (let loop ((list-of-lists (map list value-list)))
            (merge-pass! list-of-lists merged-lists less?)
-           (if (null (cddr merged-lists))
+           (if (null? (cddr merged-lists))
                (cadr merged-lists)
              (loop (cdr merged-lists))))))
 

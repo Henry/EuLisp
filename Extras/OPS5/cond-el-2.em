@@ -20,7 +20,7 @@
     (format ops-out  "~a Condition Elements: ~%" (size (cond-els ce-man)))
     (labels ((loop (ces)
                    (cond
-                     ((null ces))
+                     ((null? ces))
                      (t
                        (format ops-out "Class: ~a ~a~%" (class-of (caar ces))
                                (size (cadar ces)))
@@ -48,7 +48,7 @@
     ;;(format ops-out "Existing ces: ~a~%" (cond-els ce-manager))
     (let* ((old-ces (cond-els ce-manager))
            (class (ce-class-name new-ce))
-           (new-class (null (assoc class old-ces))))
+           (new-class (null? (assoc class old-ces))))
       (if new-class
           (set-cond-els ce-manager
                         (cons (list class (list new-ce))
@@ -80,7 +80,7 @@
     ;;(print "exists")
     (labels ((loop (rest)
                    (cond
-                     ((null rest) ())
+                     ((null? rest) ())
                      (t
                        (let ((curr (car rest)))
                          (if (and (eql (class-of ce) (class-of curr))
@@ -166,7 +166,7 @@
     (accumulate
       (lambda (a test)
         (let* ((val (assoc (test-attrib test) (wme-attrib-vals wme)))
-               (a-val (if (null val) 'NIL (cdr val))))
+               (a-val (if (null? val) 'NIL (cdr val))))
           ;;(print (test-attrib test))
           ;;(print (wme-attrib-vals wme))
           ;;(print a-val)
@@ -183,7 +183,7 @@
               (cons (test-value test)
                     (let ((val (assoc (test-attrib test)
                                       (wme-attrib-vals wme))))
-                      (if (null val) 'NIL (cdr val))))
+                      (if (null? val) 'NIL (cdr val))))
               a)
           a))
       ()
@@ -195,7 +195,7 @@
                       (lambda (a test)
                         (let* ((val (assoc (test-attrib test)
                                            (wme-attrib-vals wme)))
-                               (a-val (if (null val) 'NIL (cdr val))))
+                               (a-val (if (null? val) 'NIL (cdr val))))
                           (if (binary= (test-pred test) '=)
                               (cons (cons (test-value test) a-val) a)
                             a)))
@@ -207,9 +207,9 @@
           (let* ((join-var (test-value test))
                  (attrib (test-attrib test))
                  (val (assoc attrib (wme-attrib-vals wme)))
-                 (jv-value (if (null val) 'NIL (cdr val))))
+                 (jv-value (if (null? val) 'NIL (cdr val))))
 
-            (if (null (assoc join-var (ce-jv-vals ce)))
+            (if (null? (assoc join-var (ce-jv-vals ce)))
                 (set-ce-jv-vals
                   ce
                   (cons (cons join-var
@@ -238,10 +238,10 @@
     (let ((const-tests (ce-c-tests ce)))
       (labels ((test (tests)
                      (cond
-                       ((null tests) t)
+                       ((null? tests) t)
                        (t
                          (let ((passes (passes-test wme (car tests))))
-                           ;;(when (null passes)
+                           ;;(when (null? passes)
                            ;;(format t "Failed test: ~a~a~%"
                            ;;       wme (car tests)))
                            (if passes (test (cdr tests)) ()))))))
@@ -254,7 +254,7 @@
     ;;(format t "passes-test: ~a~%" test)
     (let* ((attrib (test-attrib test))
            (val (assoc attrib (wme-attrib-vals wme)))
-           (wme-val (if (null val) 'NIL (cdr val)))
+           (wme-val (if (null? val) 'NIL (cdr val)))
            (pred (test-pred test))
            (tst-val (test-value test)))
       ;;(format ops-out "~a ~a ~a ~%" wme-val pred tst-val)
@@ -265,7 +265,7 @@
     (let ((res (cond
                  ((listp y) (labels ((find-success (val val-list)
                                                    (cond
-                                                     ((null val-list) ())
+                                                     ((null? val-list) ())
                                                      ((eql val (car val-list)) t) ; only pred allowed
                                                      (t (find-success val (cdr val-list))))))
                                     (find-success x y)))
@@ -314,7 +314,7 @@
     (let ((num-matches (ce-num-matched ce)))
       (labels ((rem-wme (ts match-list res)
                         (cond
-                          ((null match-list) res)
+                          ((null? match-list) res)
                           ((binary= (caar match-list) ts)
                            (set-ce-num-matched ce (- (ce-num-matched ce) 1))
                            (rem-wme ts (cdr match-list) res))
@@ -329,7 +329,7 @@
     (set-ce-jv-vals ce
                     (map
                       (lambda (x)
-                        (if (not (null (cdr x)))
+                        (if (not (null? (cdr x)))
                             (cons (car x)
                                   (accumulate
                                     (lambda (a y)
@@ -383,7 +383,7 @@
   ;;  Get requested join list
   (defun join-list (ce ts)
     (let* ((vals (assoc ts (ce-matches ce)))
-           (match (if (null vals) () (caddr vals))))
+           (match (if (null? vals) () (caddr vals))))
       ;;(format ops-out "join-list: ~a~%" match)
       match))
 
@@ -391,7 +391,7 @@
   ;;  Get requested variable bindings
   (defun var-bindings (ce ts)
     (let* ((vals (assoc ts (ce-matches ce)))
-           (match (if (or (null vals) (null (cdr vals)))
+           (match (if (or (null? vals) (null? (cdr vals)))
                       () (cadr vals))))
       ;(format ops-out "~a ~a ~a ~%" ce ts match)
       match))

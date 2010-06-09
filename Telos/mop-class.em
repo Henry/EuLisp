@@ -34,7 +34,7 @@
            object-keywords name-keywords cons-keywords
            class-name class-instance-length class-direct-superclasses
            class-direct-subclasses class-slots class-keywords
-           class-precedence-list class-abstract-p converter class-code
+           class-precedence-list class-abstract? converter class-code
            function-name function-domain generic-function-method-class
            simple-function-environment simple-function-code
            generic-function-domain
@@ -44,7 +44,7 @@
            generic-function-method-cache
            method-generic-function method-domain
            method-function slot-reader slot-writer slot-keyword slot-name
-           slot-default slot-required-p symbol-name keyword-name
+           slot-default slot-required? symbol-name keyword-name
            ))
 
 ;;;-----------------------------------------------------------------------------
@@ -124,16 +124,16 @@
   (defun (setter class-precedence-list) (cl val)
     ((setter primitive-ref) cl 6 val))
 
-  (defun class-abstract-p (cl) (primitive-ref cl 7))
-  (declare-inline class-abstract-p)
+  (defun class-abstract? (cl) (primitive-ref cl 7))
+  (declare-inline class-abstract?)
 
-  (defun (setter class-abstract-p) (cl val)
+  (defun (setter class-abstract?) (cl val)
     ((setter primitive-ref) cl 7 val))
 
   (defun converter (cl)
     (let ((fun (primitive-ref cl 8)))
-      (or (simple-function-p fun)
-          (simple-generic-function-p fun)
+      (or (simple-function? fun)
+          (simple-generic-function? fun)
           (error "non-functional converter ~a at class <~a>"
                   fun (class-name cl)))))
 
@@ -384,10 +384,10 @@
   (defun (setter slot-default) (sd val)
     ((setter primitive-ref) sd 4 val))
 
-  (defun slot-required-p (sd) (primitive-ref sd 5))
-  (declare-inline slot-required-p)
+  (defun slot-required? (sd) (primitive-ref sd 5))
+  (declare-inline slot-required?)
 
-  (defun (setter slot-required-p) (sd val)
+  (defun (setter slot-required?) (sd val)
     ((setter primitive-ref) sd 5 val))
 
 ;;;-----------------------------------------------------------------------------

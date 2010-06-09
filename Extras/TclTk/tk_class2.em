@@ -35,39 +35,39 @@
   ;; canvas widgets. The coordinates always have to be numbers. String types
   ;; are not allowed for the coordinates.
   (defun tk-add-arc-canvas (canvas x1 y1 x2 y2 . options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'arc  canvas (list x1 y1 x2 y2) options)))
 
   (defun tk-add-bitmap-canvas (canvas x1 y1 . options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'bitmap  canvas (list x1 y1) options)))
 
   (defun tk-add-image-canvas (canvas x1 y1 . options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'image  canvas (list x1 y1) options)))
 
   (defun tk-add-line-canvas (canvas x1 y1 x2 y2 . coords-and-options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'line  canvas (list x1 y1 x2 y2) coords-and-options)))
 
   (defun tk-add-oval-canvas (canvas x1 y1 x2 y2 . coords-and-options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'oval  canvas (list x1 y1 x2 y2) coords-and-options)))
 
   (defun tk-add-polygon-canvas (canvas x1 y1 x2 y2 x3 y3 . coords-and-options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'polygon  canvas (list x1 y1 x2 y2 x3 y3) coords-and-options)))
 
   (defun tk-add-rectangle-canvas (canvas x1 y1 x2 y2 . options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'rectangle canvas (list x1 y1 x2 y2) options)))
 
   (defun tk-add-text-canvas (canvas x y . options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'text canvas (list x y) options)))
 
   (defun tk-add-window-canvas (canvas x y . options)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (tk-add-item-canvas 'window' canvas (list x y) options)))
 
   ;; The next function receives the type of the new item, the canvas, the coordinates of
@@ -143,7 +143,7 @@
           (setq tag (car args))
           (setq below (cadr args))
           (and (stringp tag)
-               (or (stringp below) (tk-item-canvas-p below))
+               (or (stringp below) (tk-item-canvas? below))
                (setq below (if (stringp below) below
                              (tk-item-canvas-id below)))
                (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) tag
@@ -158,7 +158,7 @@
                                  (tk-item-canvas-id item) () "lower"))
         ((binary= size 1)
          (setq tag_id (car args))
-         (and (or (stringp tag_id) (tk-item-canvas-p tag_id))
+         (and (or (stringp tag_id) (tk-item-canvas? tag_id))
               (setq tag_id (if (stringp tag_id) tag_id
                              (tk-item-canvas-id item)))
               (eul_tk_cmd_item_canvas (tk-name item) (tk-handler item) (tk-item-canvas-id item)
@@ -250,7 +250,7 @@
                (cond
                  ((stringp el)
                   (setq list-item-tags (cons el list-item-tags)))
-                 ((tk-item-canvas-p el)
+                 ((tk-item-canvas? el)
                   (setq list-item-tags (cons (tk-item-canvas-id el)
                                              list-item-tags)))))
              more-item-or-tags)
@@ -267,18 +267,18 @@
 
   (defmethod tk-find-canvas-above ((canvas <tk-canvas>) . args)
     (and (stringp (car args))
-         (null (cdr args))
+         (null? (cdr args))
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) "above"
                                  (cons 1 (car args)) "find")))
 
   (defmethod tk-find-canvas-above ((item <tk-item-canvas>) . args)
-    (and (null args)
+    (and (null? args)
          (eul_tk_cmd_item_canvas (tk-name item) (tk-handler item) "above"
                                  (cons 1 (tk-item-canvas-id item)) "find")))
 
   ;; -----------------------------------------------------------------
   (defun tk-find-canvas-all (canvas)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) "all" () "find")))
 
   ;; -----------------------------------------------------------------
@@ -287,19 +287,19 @@
 
   (defmethod tk-find-canvas-below ((canvas <tk-canvas>) . args)
     (and (stringp (car args))
-         (null (cdr args))
+         (null? (cdr args))
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) "below"
                                  (cons 1 (car args)) "find")))
   ()
 
   (defmethod tk-find-canvas-below ((item <tk-item-canvas>) . args)
-    (and (null args)
+    (and (null? args)
          (eul_tk_cmd_item_canvas (tk-name item) (tk-handler item) "below"
                                  (cons 1 (tk-item-canvas-id item)) "find")))
 
   ;; -----------------------------------------------------------------
   (defun tk-find-canvas-enclosed (canvas x1 y1 x2 y2)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (numberp x1)
          (numberp y1)
          (numberp x2)
@@ -312,7 +312,7 @@
 
   ;; -----------------------------------------------------------------
   (defun tk-find-canvas-overlapping (canvas x1 y1 x2 y2)
-    (and (tk-canvas-p canvas)
+    (and (tk-canvas? canvas)
          (numberp x1)
          (numberp y1)
          (numberp x2)
@@ -328,12 +328,12 @@
 
   (defmethod tk-find-canvas-withtag ((canvas <tk-canvas>) . args)
     (and (stringp (car args))
-         (null (cdr args))
+         (null? (cdr args))
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) "withtag"
                                  (cons 1 args) "find")))
 
   (defmethod tk-find-canvas-withtag ((item <tk-item-canvas>) . args)
-    (and (null args)
+    (and (null? args)
          (eul_tk_cmd_item_canvas (tk-name item) (tk-handler item) "withtag"
                                  (cons 1 (tk-item-canvas-id item)) "find")))
 
@@ -357,14 +357,14 @@
        (eul_tk_cmd_text (tk-name text) (tk-handler text) "mark"
                         (list '3 "set" mark (car index))))
       ((and (binary= command 'unset)
-            (null index))
+            (null? index))
        (eul_tk_cmd_text (tk-name text) (tk-handler text) "mark" (list  '2 "unset" mark)))
       (t
         (format t "Incorrect arguments in tk-text-mark function\n"))))
   ()
 
   (defun tk-text-tag-add (text tagName index1 . index2)
-    (and (tk-text-p text)
+    (and (tk-text? text)
          (stringp tagName)
          (stringp index1)
          (binary= (% (list-size index2) 2) 1)
@@ -374,7 +374,7 @@
   (defun tk-bind-tag-text (text tagName event function . args)
     (let ((args2 (as-c-accessors args))
           function-key)
-      (and (tk-text-p text)
+      (and (tk-text? text)
            (stringp tagName)
            (stringp event)
            (functionp function)
@@ -385,7 +385,7 @@
 
   (defun tk-conf-tag-text (text tagName . args)
     (let ((options (as-c-options args)))
-      (and (tk-text-p text)
+      (and (tk-text? text)
            (stringp tagName)
            (>= (list-size args) 2)
            (eul_tk_cmd_text (tk-name text) (tk-handler text) "tag"

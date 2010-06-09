@@ -20,14 +20,14 @@
     (add-aux (spawn add-simple args)))
 
   (defun spawn (fun args)
-    (if (null args)
+    (if (null? args)
         ()
       (let ((thrd (make <thread> function: fun)))
         (thread-start thrd (car args) (cadr args))
         (cons thrd (spawn fun (cddr args))))))
 
   (defun add-aux (thrds)
-    (if (null (cdr thrds))
+    (if (null? (cdr thrds))
         (thread-value (car thrds))
       (add-aux (spawn add-wait thrds))))
 
@@ -55,7 +55,7 @@
       (while (progn
                (format t "Add (power of 2): ") (flush)
                (setq x (read lispin () (eos-default-value)))
-               (null (eq x (eos-default-value))))
+               (null? (eq x (eos-default-value))))
         ;;((setter thread-concurrency) x)
         (print (apply p-add (make-list x))))))
   (test2)

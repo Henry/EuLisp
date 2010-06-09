@@ -30,13 +30,13 @@
   (defun iterative-div2 (l)
     (labels
      ((loop (ll a)
-            (if (null ll)
+            (if (null? ll)
                 a
               (loop (cddr ll) (cons (car ll) a)))))
      (loop l ())))
 
   (defun recursive-div2 (l)
-    (cond ((null l) ())
+    (cond ((null? l) ())
           (t (cons (car l) (recursive-div2 (cddr l))))))
 
   (defun test-1 (l)

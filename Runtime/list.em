@@ -18,7 +18,7 @@
            do1-list map1-list do2-list map2-list select-list
            reverse-list member-list member1-list anyp1-list find1-list
            do1-list-last-special map1-list-last-special
-           proper-list-p as-proper-list reverse-list! slice-list))
+           proper-list? as-proper-list reverse-list! slice-list))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes: <list>, <cons> and <null>
@@ -61,10 +61,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Is a proper list?
 ;;;-----------------------------------------------------------------------------
-  (defun proper-list-p (l)
+  (defun proper-list? (l)
     (if (atom l)
         (null l)
-      (proper-list-p (cdr l))))
+      (proper-list? (cdr l))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Iteration

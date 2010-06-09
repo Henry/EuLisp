@@ -40,7 +40,7 @@
 ;;;-----------------------------------------------------------------------------
   ;; This functions allows the user to call the Tcl Function pack.
   (defun tk-pack (x . options)
-    (and (tk-object-p x)
+    (and (tk-object? x)
          (eul_tk_pack (tk-name x) (as-c-options options))))
 
 ;;;-----------------------------------------------------------------------------
@@ -123,7 +123,7 @@
 ;;; tk-selection-get Function
 ;;;-----------------------------------------------------------------------------
   (defun tk-selection-get option
-    (if (null option)
+    (if (null? option)
         (eul_tk_selection_get '())
       (eul_tk_selection_get option)))
 
@@ -132,15 +132,15 @@
 ;;;-----------------------------------------------------------------------------
   (defun tk-focus args
     (cond
-      ((null args)
+      ((null? args)
        (eul_tk_focus "nameWindow" ""))
-      ((and (car args) (null (cdr args)))
+      ((and (car args) (null? (cdr args)))
        (cond
-         ((null (car args))
+         ((null? (car args))
           (eul_tk_focus "." ""))
-         ((tk-item-canvas-p (car args))
+         ((tk-item-canvas? (car args))
           (eul_tk_focus (tk-name (car args)) (tk-item-canvas-id (car args))))
-         ((tk-object-p (car args))
+         ((tk-object? (car args))
           (eul_tk_focus (tk-name (car args)) ""))
          (t
            ())))))
@@ -149,9 +149,9 @@
 ;;; tk-map-widget Function
 ;;;-----------------------------------------------------------------------------
   (defun tk-map-widget (widget)
-    (cond ((null widget)
+    (cond ((null? widget)
            (eul_tk_map_widget "."))
-          ((tk-object-p widget)
+          ((tk-object? widget)
            (eul_tk_map_widget (tk-name widget)))
           (t
             ())))
@@ -160,9 +160,9 @@
 ;;; tk-unmap-widge  Function
 ;;;-----------------------------------------------------------------------------
   (defun tk-unmap-widget (widget)
-    (cond ((null widget)
+    (cond ((null? widget)
            (eul_tk_unmap_widget "."))
-          ((tk-object-p widget)
+          ((tk-object? widget)
            (eul_tk_unmap_widget (tk-name widget)))
           (t
             ())))
@@ -173,7 +173,7 @@
   ;; This function is only permitted if the received widget is a top-level widget.
   ;; Only local grab will be set. No global grabs are possible.
   (defun tk-grab-set (toplevel)
-    (cond ((null (tk-toplevel-p toplevel))
+    (cond ((null? (tk-toplevel? toplevel))
            ())
           (t
             (eul_tk_grab_set (tk-name toplevel)))))

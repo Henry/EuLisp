@@ -11,7 +11,7 @@
    import (telos convert copy collect compare fpi list callback)
    export (<vector> vectorp make-vector vector-size
            maximum-vector-size
-           vector-ref subvector vector-append vector-empty-p
+           vector-ref subvector vector-append vector-empty?
            do1-vector map1-vector anyp1-vector allp1-vector
            reverse-vector member1-vector permute
            accumulate-vector accumulate1-vector reverse-vector!))
@@ -30,10 +30,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-  (defun vector-empty-p (vec) (int-binary= (vector-size vec) 0))
-  (declare-inline vector-empty-p)
+  (defun vector-empty? (vec) (int-binary= (vector-size vec) 0))
+  (declare-inline vector-empty?)
 
-  (defmethod emptyp ((vec <vector>)) (vector-empty-p vec))
+  (defmethod emptyp ((vec <vector>)) (vector-empty? vec))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Iteration

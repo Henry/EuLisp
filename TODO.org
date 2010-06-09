@@ -141,6 +141,10 @@
     reinstated as a function wrapper around =binary== which does a
     type-consistency check.
 
+*** TODO Complete the renaming of predicates? and destructive! functions
+    All predicates ending in "-p" have been transformed and the functions
+    "null?" and "atom?" added but the predicates ending in "p" have yet to be
+    updated.
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
@@ -233,3 +237,10 @@
     CLOSED: [2010-05-14 Fri 14:30]
     Remove the =equal= generic function and methods and introduce a complete set
     of =binary== methods.
+*** DONE Change naming convention for predicates? and destructive! functions
+    CLOSED: [2010-06-09 Wed 10:46]
+    There is a suggestion in the definition documents suggesting that the
+    Scheme/T naming convention for predicates (end in ?) and destructive
+    functions (end in !) should be considered for EuLisp.  I agree with this
+    suggestion to improve consistency and readability and made the corresponding
+    changes including "null" -> "null?" and "atom" -> "atom?".

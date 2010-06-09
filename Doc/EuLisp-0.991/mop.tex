@@ -447,10 +447,10 @@ cl <effective-slotds> <inherited-slotds> -> list(slotd)
 \tt%
 \begin{tabbing}%
     00\=00\=00\=00\=00\=00\=00\=00\= \kill
-    {\tt compatible-superclasses-p}\\
+    {\tt compatible-superclasses?}\\
     \>\>\>\>{\em cl direct-superclasses\/}
     $\rightarrow$ {\em boolean}\\
-    \>{\tt compatible-superclass-p}\\
+    \>{\tt compatible-superclass?}\\
     \>\>\>\>\> {\em cl superclass\/}
     $\rightarrow$ {\em boolean}\\
     %\hline
@@ -701,7 +701,7 @@ install the new method in the {\em generic-function}.
 %
 \begin{optDefinition}
 %
-\generic{compatible-superclasses-p}
+\generic{compatible-superclasses?}
 %
 \begin{genericargs}
     \item[class, \classref{class}] A class.
@@ -713,7 +713,7 @@ install the new method in the {\em generic-function}.
 Returns {\em t} if {\em class} is compatible with {\em
 direct-superclasses}, otherwise \nil{}.
 
-\method{compatible-superclasses-p}{class}
+\method{compatible-superclasses?}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] A class.
@@ -722,11 +722,11 @@ direct-superclasses}, otherwise \nil{}.
 \end{specargs}
 %
 \result%
-Returns the result of calling \genericref{compatible-superclass-p} on {\em
+Returns the result of calling \genericref{compatible-superclass?} on {\em
     class} and the first element of the {\em direct-superclasses} (single
 inheritance assumption).
 
-\generic{compatible-superclass-p}
+\generic{compatible-superclass?}
 %
 \begin{genericargs}
     \item[subclass, \classref{class}] A class.
@@ -737,7 +737,7 @@ inheritance assumption).
 Returns \true\/ if {\em subclass} is compatible with {\em superclass},
 otherwise \nil{}.
 
-\method{compatible-superclass-p}{class}
+\method{compatible-superclass?}{class}
 %
 \begin{specargs}
     \item[subclass, \classref{class}] A class.
@@ -752,7 +752,7 @@ If the implementation wishes to restrict the instantiation tree (see
 introduction to B.4), this method should return \nil{}\/ if {\em superclass}
 is \theclass{metaclass}.
 
-\method{compatible-superclass-p}{class}
+\method{compatible-superclass?}{class}
 %
 \begin{specargs}
     \item[subclass, \classref{class}] A class.
@@ -762,7 +762,7 @@ is \theclass{metaclass}.
 \result%
 Always returns \true.
 
-\method{compatible-superclass-p}{abstract-class}
+\method{compatible-superclass?}{abstract-class}
 %
 \begin{specargs}
     \item[subclass, \theclass{abstract-class}] A class.
@@ -772,7 +772,7 @@ Always returns \true.
 \result%
 Always returns \nil{}.
 
-\method{compatible-superclass-p}{abstract-class}
+\method{compatible-superclass?}{abstract-class}
 %
 \begin{specargs}
     \item[subclass, \theclass{abstract-class}] A class.

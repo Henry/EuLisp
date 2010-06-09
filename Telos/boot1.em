@@ -9,8 +9,8 @@
 (defmodule boot1
   (syntax (_boot0)
    export (car cdr cons list
-           stringp characterp symbolp consp intp listp atom null null?
-           simple-function-p simple-generic-function-p
+           stringp characterp symbolp consp intp listp atom atom? null null?
+           simple-function? simple-generic-function?
            + - * / % mod < = inc dec int-zerop
            eq eql equal
            format1 write-object prin print
@@ -78,16 +78,19 @@
   (defun intp (x) ((opencoded-lambda (u) (fpip)) x))
   (declare-inline intp)
 
-  (defun simple-function-p (x) ((opencoded-lambda (u) (lambdap)) x))
-  (declare-inline simple-function-p)
+  (defun simple-function? (x) ((opencoded-lambda (u) (lambdap)) x))
+  (declare-inline simple-function?)
 
-  (defun simple-generic-function-p (x) ((opencoded-lambda (u) (gfp)) x))
-  (declare-inline simple-generic-function-p)
+  (defun simple-generic-function? (x) ((opencoded-lambda (u) (gfp)) x))
+  (declare-inline simple-generic-function?)
 
   (defun listp (x) ((opencoded-lambda (u) (listp)) x))
   (declare-inline listp)
 
   (defun atom (x) (null (consp x)))
+  (declare-inline atom)
+
+  (defun atom? (x) (null (consp x)))
   (declare-inline atom)
 
 ;;;-----------------------------------------------------------------------------

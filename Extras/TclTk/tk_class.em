@@ -51,7 +51,7 @@
 ;;; tk-create-widget
 ;;;-----------------------------------------------------------------------------
   (defun tk-create-widget (type parent options)
-    (if (and parent (null (tk-object-p parent)))
+    (if (and parent (null? (tk-object? parent)))
         (progn
           (format t "Can't create ~s. Parent incorrect.\n" type)
           (flush)
@@ -88,7 +88,7 @@
            (setq x (make <tk-text>)))
           ((eq type 'toplevel)
            (setq x (make <tk-toplevel>))))
-        (and (tk-object-p parent)
+        (and (tk-object? parent)
              (put-on x parent))
         ((setter tk-handler) x
          (eul_tk_create_widget
@@ -103,7 +103,7 @@
     (tk-create-widget 'button parent options))
 
   (defun tk-button-flash (but)
-    (and (tk-button-p but)
+    (and (tk-button? but)
          (eul_tk_button_flash (tk-name but) (tk-handler but))))
 
 ;;;-----------------------------------------------------------------------------
@@ -142,7 +142,7 @@
   (defmethod tk-delete ((entry <tk-entry>) (first <string>) . last)
     (and (or (and (binary= (list-size last) 1)
                   (stringp (car last)))
-             (null last))
+             (null? last))
          (eul_delete_command (tk-name entry) (tk-handler entry) first last)))
 
   (defmethod tk-xview ((entryWidget <tk-entry>)
@@ -154,7 +154,7 @@
                   type entry units "xview"))
 
   (defmethod tk-get-value-widget ((entry <tk-entry>) . indexs)
-    (and (null indexs)
+    (and (null? indexs)
          (eul_tk_get_value_widget (tk-name entry) (tk-handler entry) indexs)))
 
 ;;;-----------------------------------------------------------------------------
@@ -173,7 +173,7 @@
   (defmethod tk-delete ((listbox <tk-listbox>) (first <string>) . last)
     (and (or (and (binary= (list-size last) 1)
                   (stringp (car last)))
-             (null last))
+             (null? last))
          (eul_delete_command
            (tk-name listbox) (tk-handler listbox) first last)))
 
@@ -188,7 +188,7 @@
                   "yview"))
 
   (defun tk-listbox-curselection (listbox)
-    (and (tk-listbox-p listbox)
+    (and (tk-listbox? listbox)
          (eul_tk_listbox_cmd (tk-name listbox) (tk-handler listbox)
                              "curselection")))
 
@@ -263,7 +263,7 @@
   (defmethod tk-delete ((text <tk-text>) (first <string>) . last)
     (and (or (and (binary= (list-size last) 1)
                   (stringp (car last)))
-             (null last))
+             (null? last))
          (eul_delete_command (tk-name text) (tk-handler text) first last)))
 
   (defmethod tk-xview ((text <tk-text>) (type <string>) (entry <string>) units)
@@ -310,11 +310,11 @@
   ;; listbox and text are allow to have scrollbars. The user also have to give
   ;; the orientation of the scrollbar.
   (defun eul-associate (widget scroll type)
-    (if (and (or (tk-canvas-p widget)
-                 (tk-entry-p widget)
-                 (tk-listbox-p widget)
-                 (tk-text-p widget))
-             (tk-scrollbar-p scroll)
+    (if (and (or (tk-canvas? widget)
+                 (tk-entry? widget)
+                 (tk-listbox? widget)
+                 (tk-text? widget))
+             (tk-scrollbar? scroll)
              (or (eq type 'horizontal)
                  (eq type 'vertical)))
         (let (str1
@@ -327,7 +327,7 @@
           (cond ((eq type 'horizontal)
                  (tk-conf-widget widget xscrollcommand: str2))
                 ((and (eq type 'vertical)
-                      (null (tk-entry-p widget)))
+                      (null? (tk-entry? widget)))
                  (tk-conf-widget widget yscrollcommand: str2))
                 (t
                   (format t "entry widget does not allow vertical scrollbar\n")

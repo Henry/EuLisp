@@ -20,7 +20,7 @@
 ;;;-----------------------------------------------------------------------------
   (defclass <ppcr-thread> (<abstract-thread>)
     ((function accessor: thread-function)
-     (returned accessor: thread-returned-p)
+     (returned accessor: thread-returned?)
      (return-value accessor: thread-return-value)
      ;; Next slots only accessed from C
      return-mutex

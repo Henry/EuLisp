@@ -26,8 +26,8 @@
   (defconstant lispin
     (make <stream>
           source: stdin
-          read-action: (lambda (s eos-error-p eos-value)
-                         (parse (stream-source s) eos-error-p eos-value))))
+          read-action: (lambda (s eos-error? eos-value)
+                         (parse (stream-source s) eos-error? eos-value))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read syntax expression
@@ -35,18 +35,18 @@
   (defun read options
     (match-let options
       ((stream lispin)
-       (eos-error-p t)
+       (eos-error? t)
        (eos-value (eos-default-value)))
-      (generic-read stream eos-error-p eos-value)))
+      (generic-read stream eos-error? eos-value)))
 
   (defun read-s-expression options
     (match-let options
       ((stream stdin)
-       (eos-error-p t)
+       (eos-error? t)
        (eos-value (eos-default-value)))
-      (parse stream eos-error-p eos-value)))
+      (parse stream eos-error? eos-value)))
 
-  (defun parse (s eos-error-p eos-value)
+  (defun parse (s eos-error? eos-value)
     (let parse-loop
       ((tok (ntok s special-tokens))
        (in-quasiquote ()))
@@ -125,7 +125,7 @@
             (parse-loop (ntok s special-tokens) ()) ; ignore object
             (parse-loop (ntok s special-tokens) ())) ; return next object
            ((eq tok eos)
-            (if eos-error-p (end-of-stream s) eos-value))
+            (if eos-error? (end-of-stream s) eos-value))
            (t (read-error s "unexpected token ~a" (tag tok))
               ())))
         (t
@@ -155,9 +155,9 @@
   (defun read-char options
     (match-let options
       ((stream stdin)
-       (eos-error-p t)
+       (eos-error? t)
        (eos-value (eos-default-value)))
-      (generic-read stream eos-error-p eos-value)))
+      (generic-read stream eos-error? eos-value)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read next line string
@@ -166,9 +166,9 @@
     ;; cheap and cheerful version
     (match-let options
       ((stream stdin)
-       (eos-error-p t)
+       (eos-error? t)
        (eos-value (eos-default-value)))
-      (let loop ((c (generic-read stream eos-error-p eos-value))
+      (let loop ((c (generic-read stream eos-error? eos-value))
                  (result ()))
            (cond
              ((eql c #\\n)
@@ -178,7 +178,7 @@
                   eos-value
                 (convert (reverse-list result) <string>)))
              (t
-               (loop (generic-read stream eos-error-p eos-value)
+               (loop (generic-read stream eos-error? eos-value)
                      (cons c result)))))))
 
 ;;;-----------------------------------------------------------------------------
@@ -187,11 +187,11 @@
   (defun read-token options
     (match-let options
       ((stream stdin)
-       (eos-error-p t)
+       (eos-error? t)
        (eos-value (eos-default-value)))
       (let ((tok (ntok stream special-tokens)))
         (if (eq tok eos)
-            (if eos-error-p (end-of-stream stream) eos-value)
+            (if eos-error? (end-of-stream stream) eos-value)
           tok))))
 
 ;;;-----------------------------------------------------------------------------
@@ -201,23 +201,23 @@
 
   (defun sread (string . options)
     (match-let options
-      ((eos-error-p t)
+      ((eos-error? t)
        (eos-value ()))
       (with-lock (stream-lock *sread-string-stream*)
                  (initialize (stream-source *sread-string-stream*)
                              (list buffer: string))
                  (read *sread-string-stream*
-                       eos-error-p eos-value))))
+                       eos-error? eos-value))))
 
   (defun sread-s-expression (string . options)
     (match-let options
-      ((eos-error-p t)
+      ((eos-error? t)
        (eos-value ()))
       (with-lock (stream-lock *sread-string-stream*)
                  (initialize (stream-source *sread-string-stream*)
                              (list buffer: string))
                  (parse *sread-string-stream*
-                        eos-error-p eos-value))))
+                        eos-error? eos-value))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read error

@@ -10,7 +10,7 @@
   (syntax (_telos0)
    import (telos convert compare collect character string table fpi)
    export (<symbol> <keyword> <name> symbolp keywordp name
-           gensym symbol-name keyword-name symbol-exists-p))
+           gensym symbol-name keyword-name symbol-exists?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Symbol and keyword initialization
@@ -44,7 +44,7 @@
   (defun keywordp (x)
     (eq (class-of x) <keyword>))
 
-  (defun symbol-exists-p (str)
+  (defun symbol-exists? (str)
     (table-ref (get-global-register symbols) str))
 
   (defgeneric namep (x)

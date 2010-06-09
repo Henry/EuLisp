@@ -6,14 +6,14 @@
   (defmacro and-let* (vars . body)
     (labels ((expand (vars body)
                      (cond
-                      ((null vars)
+                      ((null? vars)
                        `(progn ,@body))
                       ((consp vars)
                        (let ((exp (car vars)))
                          (cond
                           ((consp exp)
                            (cond
-                            ((null (cdr exp))
+                            ((null? (cdr exp))
                              `(and ,(car exp) ,(expand (cdr vars) body)))
                             (t
                              (let ((var (car exp))

@@ -10,7 +10,7 @@
            assoc assq memq
            vector gentemp
            equal? eq?
-           boolean? char? list? null? number? pair? string? symbol? vector?
+           boolean? char? list? number? pair? string? symbol? vector?
            list->vector number->string string->list string->number
            string->symbol symbol->string vector->list
            char-numeric?
@@ -57,9 +57,9 @@
   (defgeneric assoc  (item obj . test))
 
   (defmethod assoc (item (l <list>) . test)
-    (let ((test (if (null test) binary= (car test))))
+    (let ((test (if (null? test) binary= (car test))))
       (let loop ((l l))
-           (if (null l)
+           (if (null? l)
                '()
              (if (test (caar l) item)
                  (car l)
@@ -80,7 +80,6 @@
   (defun boolean? (obj) (or (eq obj t) (eq obj '())))
   (defconstant char? characterp)
   (defconstant list? listp)
-  (defconstant null? null)
   (defconstant number? numberp)
   (defconstant pair? consp)
   (defconstant string? stringp)
