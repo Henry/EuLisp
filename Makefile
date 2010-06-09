@@ -105,7 +105,7 @@ distclean: clean
 	@echo "DONE"
 
 README.org: index.org
-	@sed 's%file:%http://henry.github.com/EuLisp/%' $< > $@
+	@sed 's%file:%http://henry.github.com/EuLisp/blob/master/%' $< > $@
 
 .PHONY: README
 README: index.html TODO.html README.org
