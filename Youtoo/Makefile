@@ -66,6 +66,9 @@ boot: $(U2_BOOT) $(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 
+.PHONY: README
+README: README.html
+
 .PHONY: test
 test:
 	@echo "TESTING youtoo installation ..."

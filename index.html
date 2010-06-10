@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>EuLisp</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-10 22:36:11 BST"/>
+<meta name="generated" content="2010-06-10 23:10:09 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,12 +83,9 @@ lang="en" xml:lang="en">
 <li><a href="#sec-3">3 General Description </a></li>
 <li><a href="#sec-4">4 Documentation </a></li>
 <li><a href="#sec-5">5 Installation </a></li>
-<li><a href="#sec-6">6 Getting Started </a></li>
-<li><a href="#sec-7">7 Features </a></li>
-<li><a href="#sec-8">8 Modules </a></li>
-<li><a href="#sec-9">9 Bootstrapping </a></li>
-<li><a href="#sec-10">10 Recent Developments </a></li>
-<li><a href="#sec-11">11 To Do </a></li>
+<li><a href="#sec-6">6 Getting Started with  Youtoo </a></li>
+<li><a href="#sec-7">7 Getting Started with  EuXLisp </a></li>
+<li><a href="#sec-8">8 To Do </a></li>
 </ul>
 </div>
 </div>
@@ -97,11 +94,13 @@ lang="en" xml:lang="en">
 <h2 id="sec-1"><span class="section-number-2">1</span> <a href="COPYING">Copyright</a> </h2>
 <div class="outline-text-2" id="text-1">
 
-<p>Youtoo is free software: you can redistribute it and/or modify it
+<ul>
+<li id="sec-1.1">Youtoo <br/>
+Youtoo is free software: you can redistribute it and/or modify it
 under the terms of the GNU General Public License as published by
 the Free Software Foundation, either version 3 of the License, or
 (at your option) any later version.
-</p>
+
 <p>
 Youtoo is distributed in the hope that it will be useful, but WITHOUT
 ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -110,8 +109,31 @@ for more details.
 </p>
 <p>
 You should have received a copy of the GNU General Public License along with
-Youtoo in the file <a href="COPYING">COPYING</a>.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
-</p>
+Youtoo in the file <a href="Youtoo/COPYING">COPYING</a>.  If not, see
+<a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
+</p></li>
+<li id="sec-1.2"><a href="EuXLisp/LICENCE">EuXLisp</a> <br/>
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions
+are met:
+<ol>
+<li>
+Redistributions of source code must retain the above copyright
+notice, this list of conditions and the following disclaimer.
+</li>
+<li>
+Redistributions in binary form must reproduce the above copyright
+notice, this list of conditions and the following disclaimer in the
+documentation and/or other materials provided with the distribution.
+</li>
+<li>
+The name of the authors may not be used to endorse or promote products
+derived from this software without specific prior written permission.
+
+</li>
+</ol>
+</li>
+</ul>
 </div>
 
 </div>
@@ -120,11 +142,11 @@ Youtoo in the file <a href="COPYING">COPYING</a>.  If not, see <a href="http://w
 <h2 id="sec-2"><span class="section-number-2">2</span> Aim </h2>
 <div class="outline-text-2" id="text-2">
 
-<p>This version of the EuLisp definition and Youtoo implementation are being
-developed in an attempt to reconcile the differences with the ultimate aim to
-create a consistent definition and implementation which is as close to
-EuLisp-1.0 as is possible to ascertain from the remaining documents related to
-the standardisation process:
+<p>This version of the EuLisp definition and Youtoo and EuXLisp implementations
+are being developed in an attempt to reconcile the differences with the
+ultimate aim to create a consistent definition and implementations which are
+as close to EuLisp-1.0 as is possible to ascertain from the remaining
+documents related to the standardisation process:
 </p><ul>
 <li id="sec-2.1">Youtoo original sources <br/>
 This release of Youtoo started life as
@@ -136,7 +158,14 @@ available from the original <a href="README.orig">README</a> file and
 and provided by
 <a href="http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition">T. Kurt Bond</a>.
 </li>
-<li id="sec-2.2">EuLisp definition original sources <br/>
+<li id="sec-2.2">EuXLisp original sources <br/>
+EuXLisp started life as
+<a href="http://www.bath.ac.uk/~masrjb/Sources/euscheme.html">Euscheme</a> based on
+xscheme written by David Michael Betz.  This is a mostly EuLisp level 0
+compliant interpreter (working from version 0.99 of the definition, and some
+extras).
+</li>
+<li id="sec-2.3">EuLisp definition original sources <br/>
 The version of the EuLisp definition supplied is this release of Youtoo
 started life as EuLisp-0.99 from the pack released by Julian Padget:
 <a href="ftp://ftp.bath.ac.uk/pub/eulisp/definition/931202.tar.gz">931202.tar.gz</a> updated following proposals and discussions also released by
@@ -181,11 +210,13 @@ Julian Padget:
 <h2 id="sec-3"><span class="section-number-2">3</span> General Description </h2>
 <div class="outline-text-2" id="text-3">
 
-<p>The Youtoo system is a public domain implementation of the object-oriented
-dynamic programming language EuLisp. EuLisp is a single-valued dialect of Lisp
-with an integrated object system, a defined meta-object protocol, modules and
-a simple light-weight process mechanism (threads).
-</p>
+<ul>
+<li id="sec-3.1">Youtoo <br/>
+The Youtoo system is a public domain implementation of the object-oriented
+dynamic programming language EuLisp. EuLisp is a single-valued dialect of
+Lisp with an integrated object system, a defined meta-object protocol,
+modules and a simple light-weight process mechanism (threads).
+
 <p>
 The Youtoo compiler/interpreter compiles EuLisp into C-embedded virtual
 machine code which can be statically or dynamically linked with the virtual
@@ -199,10 +230,21 @@ arbitray data and code.
 </p>
 <p>
 The system reuses ideas from the Oaklisp system written by Barak Pearlmutter
-and Kevin Lang. The meta-object protocol (<code>Telos</code>) was originally implemented
-in Common Lisp by Russell Bradford. By default, a garbage collector written by
-Hans Boehm and Alan Demers is used.
-</p>
+and Kevin Lang. The meta-object protocol (<code>Telos</code>) was originally
+implemented in Common Lisp by Russell Bradford. By default, a garbage
+collector written by Hans Boehm and Alan Demers is used.
+</p></li>
+<li id="sec-3.2">EuXLisp <br/>
+EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small
+and compact Lisp, but nevertheless has many interesting features, such as
+modules, an object system, and multithreading.  EuLisp Level 1 has extra
+features, the most notable being a full metaobject system which is
+implemented in Youtoo not in EuXLisp.  These are a few notes on the use of
+EuLisp in general and EuXLisp in particular and concentrate on those things
+unique to EuLisp.
+
+</li>
+</ul>
 </div>
 
 </div>
@@ -276,8 +318,8 @@ Run <br/>
 <i>make</i>
 </li>
 <li>
-If you want to use shared libraries (which we really recommend on Linux,
-FreeBSD, Solaris and IRIX), run <br/>
+If you want to use shared libraries for Youtoo (which we really recommend on
+Linux, FreeBSD, Solaris and IRIX), run <br/>
 <i>make shared</i> <br/>
 and add the directory <i>&hellip;/EuLisp/Lib.${ARCH}</i> to the environment variable
 <code>$LD_LIBRARY_PATH</code>.
@@ -294,7 +336,7 @@ You should now be able to run the script <br/>
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started </h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started with  <a href="Youtoo/README.html">Youtoo</a> </h2>
 <div class="outline-text-2" id="text-6">
 
 <ul>
@@ -317,401 +359,30 @@ provides extra commands (type <i>help:</i>).
 
 </li>
 </ul>
+
+<p>Further information about running <a href="Youtoo/README.html">Youtoo</a>.
+</p>
 </div>
 
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Features </h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> Getting Started with  <a href="Doc/EuXLispNotes.html">EuXLisp</a> </h2>
 <div class="outline-text-2" id="text-7">
 
-<ul>
-<li id="sec-7.1">~/.eulrc.${ARCH} <br/>
-For private customisation, put a copy of <i>.eulrc.${ARCH}</i> in your home
-directory.  For example, remove the optimisation flag of the C compiler.
 
-</li>
-<li id="sec-7.2">EuLisp Module Files <br/>
-Have the extension <i>.em</i>.
-
-<ul>
-<li id="sec-7.2.1">EuLisp Language Level1 <br/>
-Level1 is provided by the library <i>liblevel1.a</i>.
-Standard macros are defined in the syntax module macros. Thus, the default
-module body looks like this:
-
-
-
-<pre class="src src-lisp">(defmodule foo
-  (syntax (macros)
-          import (level1))
-
-  ...
-
-  )  <span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">end of module
-</span></pre>
-
-
-
-</li>
-</ul>
-</li>
-<li id="sec-7.3">Pretty Printing <br/>
-The function pprint provides generic pretty printing.
-
-</li>
-<li id="sec-7.4">Main <br/>
-There is no main entry function Top-level forms in modules are executed with
-with respect to the module hierarchy. Global variables <code>*argc*</code> and <code>*argv*</code>
-are provided.
-
-</li>
-<li id="sec-7.5">Standard Bindings <br/>
-See <i>Doc/bindings.txt</i> for a list of standard bindings.
-
-</li>
-<li id="sec-7.6">Module Compilation <br/>
-The compiler checks before compiling a module which (directly and
-indirectly) imported modules really need to be (re)compiled. This feature
-can be switched off with <code>-no_recompile</code>.
-
-</li>
-<li id="sec-7.7">Standard C foreign-functions <br/>
-in <i>Youtoo/include/eulisp.h</i>
-
-<ul>
-<li id="sec-7.7.1">Data conversion from EuLisp to C: <br/>
-
-
-
-<pre class="src src-c"><span style="color: #0000ff;">int</span>     <span style="color: #0000ff; font-weight: bold;">eul_int_as_c_int</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span>     <span style="color: #0000ff; font-weight: bold;">eul_bool_as_c_bool</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">double</span>  <span style="color: #0000ff; font-weight: bold;">eul_double_as_c_double</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_int_as_dbl</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">char</span>    <span style="color: #0000ff; font-weight: bold;">eul_char_as_c_char</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">char</span>    *<span style="color: #0000ff; font-weight: bold;">eul_string_as_c_string</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">char</span>    *<span style="color: #0000ff; font-weight: bold;">eul_symbol_as_c_string</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-</pre>
-
-
-
-</li>
-<li id="sec-7.7.2">Data conversion from C to EuLisp: <br/>
-
-
-
-<pre class="src src-c"><span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">c_int_as_eul_int</span>(<span style="color: #0000ff;">int</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">c_bool_as_eul_bool</span>(<span style="color: #0000ff;">bool</span> <span style="color: #000000;">x</span>)
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">c_char_as_eul_char</span>(<span style="color: #0000ff;">char</span> <span style="color: #000000;">x</span>);
-</pre>
-
-
-
-</li>
-<li id="sec-7.7.3">Creating symbols and keywords: <br/>
-
-
-
-<pre class="src src-c">eul_intern_symbol(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">char</span> *<span style="color: #000000;">str</span>);
-eul_intern_keyword(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">char</span> *<span style="color: #000000;">str</span>);
-</pre>
-
-
-
-</li>
-<li id="sec-7.7.4">EuLisp data allocation: <br/>
-
-
-
-<pre class="src src-c">eul_allocate_int(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">int</span> <span style="color: #000000;">x</span>);
-eul_allocate_double(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">double</span> <span style="color: #000000;">x</span>);
-eul_allocate_char(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">char</span> <span style="color: #000000;">x</span>);
-eul_allocate_string(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">char</span> *<span style="color: #000000;">str</span>);
-eul_allocate_cons(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>, <span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">y</span>);
-eul_allocate_vector(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>,<span style="color: #0000ff;">int</span> <span style="color: #000000;">n</span>, <span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">init</span>);
-eul_allocate_object(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">loc</span>, <span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">class</span>, <span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">n</span>, <span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">init</span>);
-</pre>
-
-
-
-</li>
-<li id="sec-7.7.5">EuLisp constants: <br/>
-
-
-
-<pre class="src src-c"><span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">eul_nil</span>;
-<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">eul_t</span>;
-</pre>
-
-
-
-</li>
-<li id="sec-7.7.6">EuLisp data access: <br/>
-
-
-
-<pre class="src src-c"><span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_car</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_cdr</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_slot_ref</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>, <span style="color: #0000ff;">int</span> <span style="color: #000000;">i</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_symbol_name</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_keyword_name</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_class_of</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_size_of</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">LispRef</span> <span style="color: #0000ff; font-weight: bold;">eul_string_size</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-</pre>
-
-
-
-</li>
-<li id="sec-7.7.7">EuLisp data predicates: <br/>
-
-
-
-<pre class="src src-c"><span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_null</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_symbol</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_keyword</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_int</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_double</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_char</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_string</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_cons</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_list</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_gf</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_lambda</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-<span style="color: #0000ff;">int</span> <span style="color: #0000ff; font-weight: bold;">eul_is_operator</span>(<span style="color: #0000ff;">LispRef</span> <span style="color: #000000;">x</span>);
-</pre>
-
-
-
-</li>
-</ul>
-</li>
-<li id="sec-7.8">Using the foreign-function interface <br/>
-Uses automatic converters. Here is an example how atoi can be used from
-Lisp:
-
-
-
-<pre class="src src-lisp">(defextern atoi () )
-</pre>
-
-
-<p>
-If the desired external function foo is in library libbar.a and should be
-called baz in Lisp the following defining form is necessary:
-</p>
-
-
-<pre class="src src-lisp">(defextern baz (...) ... <span style="color: #00ff00;">"foo"</span>)
-</pre>
-
-
-<p>
-To link the library <i>libbar.a</i>, put a copy of <i>.eulrc.${ARCH}</i> in your
-home directory and add -lbar to the list of <code>$CLIBS</code>; the library path must
-be given with <code>-L&lt;bar-path&gt;</code> in the list of <code>$CFLAGS</code>.
-</p>
-<ul>
-<li id="sec-7.8.1">Automatic type conversion <br/>
-The following automatic converters are available:
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-<caption></caption>
-<colgroup><col align="left" /><col align="left" />
-</colgroup>
-<thead>
-<tr><th scope="col">Lisp</th><th scope="col">C (C99)</th></tr>
-</thead>
-<tbody>
-<tr><td><code>&lt;int&gt;</code></td><td><code>int</code></td></tr>
-<tr><td><code>&lt;character&gt;</code></td><td><code>char</code></td></tr>
-<tr><td><code>&lt;double&gt;</code></td><td><code>double</code></td></tr>
-<tr><td><code>&lt;string&gt;</code></td><td><code>char*</code></td></tr>
-<tr><td><code>boolean</code></td><td><code>bool</code></td></tr>
-<tr><td><code>ptr</code></td><td><code>void*</code></td></tr>
-<tr><td><code>&lt;int*&gt;</code></td><td><code>int*</code></td></tr>
-<tr><td><code>&lt;double*&gt;</code></td><td><code>double*</code></td></tr>
-<tr><td><code>&lt;string*&gt;</code></td><td><code>char**</code></td></tr>
-</tbody>
-</table>
-
-
-<p>
-The <code>ptr</code> converter can be used to pass arbitrary C99 structures to Lisp,
-so that they can be passed back to C at a later stage. The ptr converter
-is also useful to pass a Lisp object unconverted to C99.
-</p></li>
-<li id="sec-7.8.2"><code>defextern</code> <br/>
-<code>defextern</code> definitions can not be linked dynamically.
-</li>
-<li id="sec-7.8.3"><code>DEFINTERN</code> <br/>
-Foreign in-calls have to use the DEFINTERN() macro. Examples for
-in/out-calls to/from Lisp can be found in the directories <i>Examples/Misc</i>,
-<i>Examples/Fortran</i>, and <i>Examples/C++</i>.
-
-</li>
-</ul>
-</li>
-<li id="sec-7.9">Macro expansion <br/>
-is un-hygienic.
-
-</li>
-<li id="sec-7.10">EuLisp Scripts <br/>
-Use <i>#!</i>../youtoo &ndash;script/ to write EuLisp scripts (see
-<i>Examples/Misc/script.em</i>).
-
-</li>
-<li id="sec-7.11">Inter-operation with other languages <br/>
-The examples in directory C++ and Fortran show how to interoperate with
-these languages.
-
-</li>
-<li id="sec-7.12">List operators <br/>
-Arithmetic functions <code>+</code>, <code>-</code> and <code>/</code> operate as set union, difference and
-intersection on lists.
-
-</li>
-<li id="sec-7.13">Examples <br/>
-Directory <i>Examples</i> contains modules for explanation and reuse.
-
-</li>
-<li id="sec-7.14">Bindings <br/>
-The current set of supported bindings in Youtoo are in the file
-<a href="Doc/bindings.txt">bindings.txt</a>
-
-</li>
-</ul>
 </div>
 
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Modules </h2>
+<h2 id="sec-8"><span class="section-number-2">8</span> <a href="TODO.html">To Do</a> </h2>
 <div class="outline-text-2" id="text-8">
-
-<ul>
-<li id="sec-8.1"><a href="Modules/Bignum/README.html">GNU Bignum</a>: <i>Modules/Bignum</i> <br/>
-Danius Michaelides wrote a port to the GNU bignum library (gmp).
-</li>
-<li id="sec-8.2"><a href="Modules/MPI/README.html">MPI</a>: <i>Modules/MPI</i> <br/>
-
-</li>
-<li id="sec-8.3"><a href="Modules/TclTk/README.html">Tcl/Tk</a>: <i>Modules/TclTk</i> <br/>
-
-</li>
-<li id="sec-8.4"><a href="Modules/Fthread/README.html">Foreign thread libraries</a>: <i>Modules/Fthread</i> <br/>
-
-</li>
-<li id="sec-8.5"><a href="Modules/Scheme/README.html">Scheme</a>: <i>Modules/Scheme</i> <br/>
-Modules <i>./Modules/Scheme/scheme0.em</i> and <i>./Modules/Scheme/scheme.em</i>
-provide support for writing Scheme programs with Youtoo.
-
-</li>
-<li id="sec-8.6"><a href="Modules/Matching/README.html">Matching</a>: <i>Modules/Match</i> <br/>
-Modulized version of match-slib.scm badly hacked for EuLisp.
-
-</li>
-<li id="sec-8.7"><a href="Modules/OS/README.html">Object serialisation</a>: <i>Modules/OS</i> <br/>
-includes support for closures and threads.
-
-</li>
-<li id="sec-8.8"><a href="Modules/OPS5/README.html">OPS5 rule-based system</a> : <i>Modules/OPS5</i> <br/>
-An object-oriented version of the OPS5 rule-based system.
-
-</li>
-<li id="sec-8.9"><a href="Modules/Pipe/README.html">Pipes and forked child processes</a>:  <i>Modules/Pipe</i> <br/>
-Thanks to Rob Simmons there is support for pipes to forked child
-processes.
-
-</li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> Bootstrapping </h2>
-<div class="outline-text-2" id="text-9">
-
-<p>Building Youtoo from the EuLisp sources is termed "bootstrapping".  This
-requires a working installation which is used to compile the EuLisp source
-modules.  The default directory path to the bootstrapping installation is
-<i>${EUL_DIR}.boot</i>, i.e. <i>.boot</i> appended to the path of the current
-directory.  Note that if the bootstrapping installation directory is renamed
-or moved the <i>configure</i> script should be executed in it after the move to
-correct the paths.  The working directory can be "cleaned" for bootstrapping
-using <i>make boot-clean</i> and then the "bootstrapping" build process started
-with <i>make boot</i>.  If all goes well a complete clean build will result.
-</p>
-<p>
-This process allows changes and developments to be made to the Youtoo
-implementation of EuLisp.
-</p>
-<ul>
-<li id="sec-9.1">Limitations <br/>
-Currently the dependency analysis is not sufficient to cover all the
-possible ways in which the changes to the EuLisp modules in Youtoo interact
-and the rebuilds required to create a consistent Youtoo executable.  Thus to
-be sure of success <i>make boot-clean</i> maybe required before every <i>make     boot</i>.
-
-</li>
-<li id="sec-9.2">Notes <br/>
-The syntax files _.*0.em are used to enable the transition between old and
-new function names during the bootstrapping process.  If functions change
-which affect the syntax files first change the non "_" versions,
-bootstrap-build then update the <i>.boot</i> version with the current, update the
-"_" versions to correspond to the non "_" versions and bootstrap-build
-again.  This ensures a consistent final version.
-
-</li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> Recent Developments </h2>
-<div class="outline-text-2" id="text-10">
-
-<ul>
-<li id="sec-10.1">Support for 64bit Operation <br/>
-The main change to support 64bit pointers is that on such architectures the
-<code>Instruction</code> is a 16bit integer rather than an 8bit <code>char</code> so that 4
-<code>Instructions</code> still fit exactly in a pointer.  This allows most of the
-stack pointer incrementing to remain unchanged.  However, a very large
-number of small changes were also necessary.  The C-files are compatible
-between the 32bit and 64bit versions.
-
-</li>
-<li id="sec-10.2">C99 Compliance <br/>
-The code is now C99 compliant and uses C99 data types and constructs so a
-C99 compiler is required e.g. <code>gcc-4.?.?</code>.
-
-</li>
-<li id="sec-10.3">Rationalisation of the Makefiles <br/>
-The <code>Makefiles</code> have been rationalised and simplified by using many features
-in the GNU version of <code>make</code>, <code>gmake</code> which is now required to build
-<code>youtoo</code>.
-
-</li>
-<li id="sec-10.4">The start of the EuLisp-1.0 compliance process <br/>
-Many small changes to improve consistency between the Youtoo implementation
-and the EuLisp-0.99 definition and the documents relating to the creation of
-EuLisp-1.0.
-
-</li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-11" class="outline-2">
-<h2 id="sec-11"><span class="section-number-2">11</span> <a href="TODO.html">To Do</a> </h2>
-<div class="outline-text-2" id="text-11">
 
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-06-10 22:36:11 BST</p>
+<p class="date"> Date: 2010-06-10 23:10:09 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>
