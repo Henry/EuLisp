@@ -367,7 +367,7 @@ echo "  Threads: $THRTYPE"
 
 if (test ! -d $EUL_LIB_DIR) then
     mkdir $EUL_LIB_DIR
-    cp Lib/lib*.i $EUL_LIB_DIR
+    cp Youtoo/Lib/lib*.i $EUL_LIB_DIR
 fi
 
 if (test ! -d $EUL_BIN_DIR) then
