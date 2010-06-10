@@ -15,7 +15,13 @@ include Lib.$(ARCH)/Makefile
 ###-----------------------------------------------------------------------------
 
 .PHONY: all
-all: youtoo doc
+all: euxlisp youtoo doc
+
+.PHONY: euxlisp
+euxlisp:
+	@echo "BUILDING EuXLisp ..."
+	@$(MAKE) -C EuXLisp
+	@echo "DONE"
 
 .PHONY: youtoo
 youtoo:

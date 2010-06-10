@@ -20,10 +20,16 @@ DOC_DIRS = EuLisp-0.991
 ###-----------------------------------------------------------------------------
 
 .PHONY: all
-all: bindings
+all: euxlisp.1 euxlisp.html bindings
 	@echo "COMPILING DOCSs ..."
 	@$(call makeAll,$(DOC_DIRS),)
 	@echo "DONE"
+
+euxlisp.1: euxlisp.man
+	nroff -man euxlisp.man > euxlisp.1
+
+euxlisp.html: euxlisp.man
+	rman -f HTML euxlisp.man > euxlisp.html
 
 .PHONY: bindings
 bindings: bindings.txt
@@ -48,6 +54,7 @@ clean:
 distclean:
 	@echo "CLEANING DOCs ..."
 	@$(call makeAll,$(DOC_DIRS),$@)
+	@rm -f euxlisp.1
 	@echo "DONE"
 
 ###-----------------------------------------------------------------------------
