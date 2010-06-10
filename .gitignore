@@ -13,7 +13,7 @@
 /.eulrc.*
 
 # Ignore platform object directories
-platforms/*
+platforms
 
 # Ignore all object files
 *.o
