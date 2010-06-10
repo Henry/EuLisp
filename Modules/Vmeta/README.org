@@ -1,9 +1,9 @@
 #                            -*- mode: org; -*-
 #
-#+TITLE:               Match module for Youtoo 0.93
-#+AUTHOR:
-#+DATE:                        February 2010
-#+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
+#+TITLE:                Vmeta module for Youtoo 0.93
+#+AUTHOR:                      T. Kurt Bond
+#+DATE:                    Updated February 2010
+#+LINK:           http://unwind-protect.org/~tkb/software.html
 #+EMAIL: no-reply
 #+OPTIONS: ^:{} email:nil
 
@@ -24,14 +24,22 @@
 * [[file:../../index.org][EuLisp index]]
 
 * General Description
-  Modulized version of match-slib.scm badly hacked for eulisp.
+  This code was inspired by Henry G. Baker's article:
+       "Pragmatic Parsing in Common Lisp",
+       ACM LISP Pointers IV,2
+       (April-June 1991), 3-15.
 
-* Notes:
-  + Vectors probably don't work right.
-  + Why doesn't #(a b c ...) match what PLT Scheme gives for the same thing?
-  + Structures certainly don't.
-  + Use of modified vector-ref -- should original be changed?
+  However, any errors are mine; inefficencies too.  There have been some minor
+  changes and additions from the code in that article.
+
+  [[http://home.pipeline.com/~hbaker1][Original paper]]
 
 * Installation
-  + Run 'make' in directory /Extras/Match/.
-  + Run 'make test' in directory /Extras/Match/.
+  + Run 'make' in directory /Extras/Vmeta/.
+  + Run 'make test' in directory /Extras/Vmeta/.
+
+* Files
+  The pipe library consists of single EuLisp module:
+  - /vmeta.em/ -- root module
+
+  which uses the macros in /vmeta-aux.em/

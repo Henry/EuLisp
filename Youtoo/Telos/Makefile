@@ -8,7 +8,7 @@
 ###-----------------------------------------------------------------------------
 
 ARCH := $(shell uname -m)
-include ../Lib.$(ARCH)/Makefile
+include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
 ### Reset U2 to use the bootstrap youtoo
@@ -76,11 +76,11 @@ $(TELOS_LIB): $(TELOS_MAC_O) $(TELOS_O)
 shared:	$(BOOT_SHARED_LIB) $(TELOS_SHARED_LIB)
 
 $(BOOT_SHARED_LIB): $(BOOT_O)
-	$(EUL_DIR)/Tools/makeso.$(OSTYPE) \
+	$(U2_DIR)/Tools/makeso.$(OSTYPE) \
 		$(CC) $(BOOT_SHARED_LIB) $(BOOT_O)
 
 $(TELOS_SHARED_LIB): $(TELOS_MAC_O) $(TELOS_O)
-	$(EUL_DIR)/Tools/makeso.$(OSTYPE) \
+	$(U2_DIR)/Tools/makeso.$(OSTYPE) \
 		$(CC) $(TELOS_SHARED_LIB) $(TELOS_MAC_O) $(TELOS_O)
 
 ###-----------------------------------------------------------------------------
@@ -95,7 +95,7 @@ boot:	boot0.i _telos0.i libboot.i libtelos.i
 .PHONY: boot-syntax
 boot-syntax: liblevel1.i
 	$(U2) $(U2FLAGS) -c telos0 -od $(ARCH_DIR) \
-		-load_path $(EUL_DIR)/Telos -l level1
+		-load_path $(U2_DIR)/Telos -l level1
 	@rm -f liblevel1.i
 	$(MAKE)
 
@@ -104,7 +104,7 @@ $(TELOS_LIB_I): $(BOOT_EM) $(BOOT_MAC_EM) $(TELOS_EM) $(TELOS_MAC_EM)
 
 $(EUL_LIB_DIR)/lib%.i : %.em
 	$(U2) $(U2FLAGS) -ar $* -od $(ARCH_DIR) \
-		-load_path $(EUL_DIR)/Telos
+		-load_path $(U2_DIR)/Telos
 	@mv $(@F) $@
 
 lib%.i : $(EUL_LIB_DIR)/lib%.i
@@ -113,7 +113,7 @@ lib%.i : $(EUL_LIB_DIR)/lib%.i
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
-		-load_path $(EUL_DIR)/Telos -l level1
+		-load_path $(U2_DIR)/Telos -l level1
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands

@@ -1,8 +1,8 @@
 #                            -*- mode: org; -*-
 #
-#+TITLE:                Pipe module for Youtoo 0.93
-#+AUTHOR:               Rob Simmons and Andreas Kind
-#+DATE:               July 1997; Updated February 2010
+#+TITLE:               Match module for Youtoo 0.93
+#+AUTHOR:
+#+DATE:                        February 2010
 #+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
 #+EMAIL: no-reply
 #+OPTIONS: ^:{} email:nil
@@ -24,17 +24,14 @@
 * [[file:../../index.org][EuLisp index]]
 
 * General Description
-  Library for pipes, forked child processes and control i/o with a stream
-  object.
+  Modulized version of match-slib.scm badly hacked for eulisp.
+
+* Notes:
+  + Vectors probably don't work right.
+  + Why doesn't #(a b c ...) match what PLT Scheme gives for the same thing?
+  + Structures certainly don't.
+  + Use of modified vector-ref -- should original be changed?
 
 * Installation
-  + Run 'make' in directory /Extras/Pipe/.
-  + Run 'make test' in directory /Extras/Pipe/.
-  + Add -lpipe to CLIBS in /youtoo/\.eulrc.${ARCH}/.
-
-* Files
-  The pipe library consists of single EuLisp module:
-  - /pipe.em/ -- root module
-
-  And a foreign-function interface file:
-  - /eul-pipe.c/ -- C interface for pipe functions
+  + Run 'make' in directory /Modules/Match/.
+  + Run 'make test' in directory /Modules/Match/.

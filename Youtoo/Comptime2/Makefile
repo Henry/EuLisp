@@ -8,7 +8,7 @@
 ###-----------------------------------------------------------------------------
 
 ARCH = $(shell uname -m)
-include ../Lib.$(ARCH)/Makefile
+include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
 ### Reset U2 to use the bootstrap executable
@@ -60,7 +60,7 @@ $(EVAL_LIB): $(EVAL_O)
 shared:	$(EVAL_SHARED_LIB)
 
 $(EVAL_SHARED_LIB): $(EVAL_O)
-	$(EUL_DIR)/Tools/makeso.$(OSTYPE) \
+	$(U2_DIR)/Tools/makeso.$(OSTYPE) \
 		$(CC) $(EVAL_SHARED_LIB) $(EVAL_O)
 
 ###-----------------------------------------------------------------------------
@@ -72,20 +72,20 @@ preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
 		libboot.i liblevel1.i libmath.i \
 		$(ARCH_DIR)/cg-exec-word-length.o
 	$(U2) $(U2FLAGS) -od $(ARCH_DIR) -c ex-aux0 op-peep0 cg-bycode0 i-aux0 sx-obj0 \
-	       -load_path $(EUL_DIR)/Comptime2 \
-	       -load_path $(EUL_DIR)/Comptime2/$(WORD_LENGTH)bit \
+	       -load_path $(U2_DIR)/Comptime2 \
+	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
 	       -l level1
 	$(U2) $(U2FLAGS) -c ex-expr -od $(ARCH_DIR) \
-	       -load_path $(EUL_DIR)/Comptime2 \
-	       -load_path $(EUL_DIR)/Comptime2/$(WORD_LENGTH)bit \
-	       -load_path $(EUL_DIR)/Runtime \
-	       -load_path $(EUL_DIR)/Telos \
+	       -load_path $(U2_DIR)/Comptime2 \
+	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
+	       -load_path $(U2_DIR)/Runtime \
+	       -load_path $(U2_DIR)/Telos \
 	       -l boot -l level1 -l math
 	$(U2) $(U2FLAGS) -ar eval -od $(ARCH_DIR) \
-	       -load_path $(EUL_DIR)/Comptime2 \
-	       -load_path $(EUL_DIR)/Comptime2/$(WORD_LENGTH)bit \
-	       -load_path $(EUL_DIR)/Runtime \
-	       -load_path $(EUL_DIR)/Telos \
+	       -load_path $(U2_DIR)/Comptime2 \
+	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
+	       -load_path $(U2_DIR)/Runtime \
+	       -load_path $(U2_DIR)/Telos \
 	       -l boot -l level1 -l math
 	@echo "---- CREATING youtoo.em module for preliminary youtoo executable"
 	@sed 	-e 's@#modules#@level1 math eval@' \
@@ -93,8 +93,8 @@ preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
 		<youtoo.em.in >youtoo.em
 	@echo "---- CREATING preliminary youtoo executable files"
 	$(U2) $(U2FLAGS) -c youtoo -od $(ARCH_DIR) \
-	       -load_path $(EUL_DIR)/Comptime2 \
-	       -load_path $(EUL_DIR)/Comptime2/$(WORD_LENGTH)bit \
+	       -load_path $(U2_DIR)/Comptime2 \
+	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
 	       -l level1 -l math -l eval -recompile
 	@rm -f libboot.i liblevel1.i libmath.i
 	@mv libeval.i $(EUL_LIB_DIR)
@@ -118,7 +118,7 @@ final:
 .PHONY: bytecode2
 bytecode2:
 	@echo "---- CREATING include/bytecode2.h which contains instruction information"
-	$(EUL_BIN_DIR)/b2h cg-bycode1.em cg-bycode2.em > ../include/bytecode2.h
+	$(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h cg-bycode1.em cg-bycode2.em > ../include/bytecode2.h
 	@echo "---- DONE."
 
 .PRECIOUS: %.i %.c %.h

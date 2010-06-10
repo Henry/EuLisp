@@ -3,14 +3,14 @@
 ###-----------------------------------------------------------------------------
 
 ###-----------------------------------------------------------------------------
-### Extras Makefile
+### Modules Makefile
 ###-----------------------------------------------------------------------------
 
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
-### Extras directories
+### Modules directories
 ###-----------------------------------------------------------------------------
 
 EXTRAS_DIRS = Bignum OS OPS5 Pipe Match Vmeta Scheme TclTk
@@ -22,31 +22,31 @@ EXTRAS_DOC_DIRS = $(EXTRAS_DIRS) MPI
 
 .PHONY: all
 all:
-	@echo "COMPILING EXTRASs ..."
+	@echo "COMPILING Modules ..."
 	@$(call makeAll,$(EXTRAS_DIRS),)
 	@echo "DONE"
 
 .PHONY: test
 test:
-	@echo "COMPILING EXTRASs ..."
+	@echo "COMPILING Modules ..."
 	@$(call makeAll,$(EXTRAS_DIRS),$@)
 	@echo "DONE"
 
 .PHONY: README
 README:
-	@echo "BUILDING README.html in EXTRASs ..."
+	@echo "UPDATING README.html files in Modules ..."
 	@$(call makeAll,$(EXTRAS_DOC_DIRS),$@)
 	@echo "DONE"
 
 .PHONY: clean
 clean:
-	@echo "CLEANING EXTRASs ..."
+	@echo "CLEANING Modules ..."
 	@$(call makeAll,$(EXTRAS_DIRS),$@)
 	@echo "DONE"
 
 .PHONY: distclean
 distclean:
-	@echo "CLEANING EXTRASs ..."
+	@echo "CLEANING Modules ..."
 	@$(call makeAll,$(EXTRAS_DIRS),$@)
 	@echo "DONE."
 

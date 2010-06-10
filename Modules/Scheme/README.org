@@ -27,16 +27,16 @@
   This is IEEE Scheme implemented in youtoo.
 
 * Installation
-  + Install the bignums module in directory /Extras/Bignum/.
-  + Run 'make' in directory /Extras/Scheme/; this creates /libscheme.{i,a}/.
-  + Run 'make test' in directory /Extras/Scheme/; this tests libscheme.{i,a}.
+  + Install the bignums module in directory /Modules/Bignum/.
+  + Run 'make' in directory /Modules/Scheme/; this creates /libscheme.{i,a}/.
+  + Run 'make test' in directory /Modules/Scheme/; this tests libscheme.{i,a}.
 
 *** Installation of the scmtoo Scheme interpreter
-    + Run 'make scmtoo' in directory /Extras/Scheme/; this creates Scheme image.
+    + Run 'make scmtoo' in directory /Modules/Scheme/; this creates Scheme image.
     + Run 'Bin.${ARCH}/scmtoo.sh'.
 
 *** Installation of the scm2tk Scheme-Tk Interpreter
-    + Edit the /Extras/Scheme/Makefile/ (if necessary).
+    + Edit the /Modules/Scheme/Makefile/ (if necessary).
     + Run 'make scm2tk'.
     + Make sure your ~LD_LIBRARY_PATH~ environment variable is set correctly
       (you could edit Bin.${ARCH}/scm2tk.sh to add ~EUL_TCL_LIB_PATH~

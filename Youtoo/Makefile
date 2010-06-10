@@ -4,80 +4,93 @@
 ###-----------------------------------------------------------------------------
 
 ###-----------------------------------------------------------------------------
-### EuLisp youtoo executable Makefile
+### Top-level Makefile
 ###-----------------------------------------------------------------------------
 
-ARCH = $(shell uname -m)
+ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
-### Output file names
+### Source directories
 ###-----------------------------------------------------------------------------
 
-YOUTOO = $(EUL_BIN_DIR)/youtoo
-YOUTOO_NOGC = $(EUL_BIN_DIR)/youtoo_nogc
+SYS_DIRS = Vm Telos Runtime Comptime2 Youtoo
 
 ###-----------------------------------------------------------------------------
-### Source and object files
+### Compiling youtoo with static or shared libraries
 ###-----------------------------------------------------------------------------
 
-EUL_APPL_C = eul-appl.c
-EUL_APPL_O = $(EUL_APPL_C:%.c=$(EUL_LIB_DIR)/%.o)
-
-GC_FAKE_C = gc-fake.c
-FAKE_GC_O = $(GC_FAKE_C:%.c=$(EUL_LIB_DIR)/%.o)
-
-ALL_C = $(EUL_APPL_C) $(GC_FAKE_C)
-
-LIBS = libeulvm libboot libtelos liblevel1 libmath libeval
-YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.a)
-
-ifeq ($(MAKECMDGOALS),shared)
-    YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.so)
-else
-    YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.a)
-endif
-
-###-----------------------------------------------------------------------------
-### Compiler + Interpreter
-###-----------------------------------------------------------------------------
-
-.PHONY: youtoo
-youtoo:	$(YOUTOO)
+.PHONY: static
+static:
+	@echo "COMPILING youtoo ..."
+	@$(call makeAll,$(SYS_DIRS),)
+	@echo "DONE"
 
 .PHONY: shared
-shared:	$(YOUTOO)
+shared:
+	@echo "COMPILING youtoo with shared libraries ..."
+	@$(call makeAll,$(SYS_DIRS),$@)
+	@echo "DONE"
 
-$(YOUTOO): $(EUL_APPL_O) $(YOUTOO_LIBS)
-	$(CC) $(CFLAGS) -o $(YOUTOO) \
-		$(EUL_APPL_O) -L$(EUL_LIB_DIR) \
-		$(CLIBS) -lgc -lpthread
+###-----------------------------------------------------------------------------
+### Bootstrapping youtoo
+###-----------------------------------------------------------------------------
 
-.PHONY: nogc
-nogc: $(YOUTOO_NOGC)
-
-$(YOUTOO_NOGC): $(EUL_APPL_O) $(FAKE_GC_O)
-	$(CC) $(CFLAGS) -o $(YOUTOO_NOGC) \
-		$(EUL_APPL_O) $(FAKE_GC_O) -L$(EUL_LIB_DIR) \
-	 	$(CLIBS) -lpthread
-
-$(EUL_LIB_DIR)/%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+.PHONY: boot
+boot: $(U2_BOOT) $(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h
+	@echo "COMPILING youtoo modules ..."
+	cd Vm; $(MAKE)
+	cd Telos; $(MAKE) $@
+	cd Runtime; $(MAKE) $@
+	@echo "-- CREATING preliminary youtoo executable source"
+	cd Comptime2; $(MAKE) preliminary
+	@echo "-- CREATING statically linked level1 library interface file"
+	$(U2_DIR)/Tools/i2c $(ARCH)
+	cd Vm; ${MAKE}
+	@echo "-- LINKING preliminary youtoo executable"
+	@rm -f $(EUL_BIN_DIR)/youtoo
+	cd Comptime2; $(MAKE)
+	cd Youtoo; $(MAKE)
+	cd Comptime2; $(MAKE) final
+	@echo "-- CREATING final youtoo executable"
+	@rm -f $(EUL_BIN_DIR)/youtoo
+	cd Comptime2; $(MAKE)
+	cd Youtoo; $(MAKE)
+	cd Comptime2; $(MAKE) bytecode2
+	cd $(EUL_BOOT_DIR)/Youtoo/Tools; $(MAKE)
+	mkdir -p Lib; cp $(EUL_LIB_DIR)/*.i Lib
+	rm -f {Telos,Runtime,Comptime2}/lib*.i
+	@echo "DONE"
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 
+.PHONY: test
+test:
+	@echo "TESTING youtoo installation ..."
+	@cd Test; $(MAKE) test
+	@echo "DONE"
+
 .PHONY: boot-clean
 boot-clean:
-	@rm -rf $(ARCH_DIR)
+	@echo "BOOT-CLEANING youtoo modules ..."
+	@$(call makeAll,$(SYS_DIRS),$@)
+	@rm -f $(EUL_LIB_DIR)/*.[aio]
+	@echo "DONE"
 
 .PHONY: clean
 clean:
+	@echo "CLEANING youtoo ..."
+	@$(call makeAll,$(SYS_DIRS),$@)
+	@cd Test; $(MAKE) $@
+	@echo "DONE"
 
 .PHONY: distclean
 distclean: clean
-	@rm -rf platforms
-	@rm -f $(EUL_APPL_O) $(FAKE_GC_O)
+	@echo "DIST-CLEANING youtoo ..."
+	@$(call makeAll,$(SYS_DIRS),$@)
+	@cd Test; $(MAKE) $@
+	@echo "DONE"
 
 ###-----------------------------------------------------------------------------

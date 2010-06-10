@@ -1,0 +1,49 @@
+#                            -*- mode: org; -*-
+#
+#+TITLE:               Bignum module for Youtoo 0.93
+#+AUTHOR:           Danius Michaelides and Andreas Kind
+#+DATE:               July 1997; Updated February 2010
+#+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
+#+EMAIL: no-reply
+#+OPTIONS: ^:{} email:nil
+
+* [[file:COPYING][Copyright]]
+    Youtoo is free software: you can redistribute it and/or modify it
+    under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Youtoo is distributed in the hope that it will be useful, but WITHOUT
+    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+    for more details.
+
+    You should have received a copy of the GNU General Public License along with
+    Youtoo in the file [[file:../../COPYING][COPYING]].  If not, see <http://www.gnu.org/licenses/>.
+
+* [[file:../../index.org][EuLisp index]]
+
+* General Description
+  This is an interface module to the GNU Bignum package.
+
+* Installation
+  + Run 'make' in directory /Modules/Bignum/.
+  + Run 'make test' in directory /Modules/Bignum/.
+  + Add -lbignum to CLIBS in /youtoo/\.eulrc.${ARCH}/.
+
+* Files
+  The bignum library consists of a number of EuLisp modules:
+  - /bignum.em/ -- root module
+  - /bigint.em/ -- big integer module and class
+  - /bigrat.em/ -- rational number module and class
+  - /mpz.em/    -- module containing bindings to c functions
+  - /mpq.em/    -- module containing bindings to c functions
+
+  And three C files:
+  - /eul-mpz.c/ -- C interface for integer functions
+  - /eul-mpq.c/ -- C interface for rational functions
+  - /eul-gmp-gc.c/ -- C interface to GC
+
+* To Do
+  + rationals are not integrated into EuLisp
+  + check everything is being GC-ed properly

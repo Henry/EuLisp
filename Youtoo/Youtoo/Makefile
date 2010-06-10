@@ -4,69 +4,80 @@
 ###-----------------------------------------------------------------------------
 
 ###-----------------------------------------------------------------------------
-### EuLisp virtual-machine Makefile
+### EuLisp youtoo executable Makefile
 ###-----------------------------------------------------------------------------
 
-ARCH := $(shell uname -m)
-include ../Lib.$(ARCH)/Makefile
+ARCH = $(shell uname -m)
+include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
-### Output library files
+### Output file names
 ###-----------------------------------------------------------------------------
 
-VM_LIB = $(EUL_LIB_DIR)/libeulvm.a
-VM_SHARED_LIB = $(EUL_LIB_DIR)/libeulvm.so
+YOUTOO = $(EUL_BIN_DIR)/youtoo
+YOUTOO_NOGC = $(EUL_BIN_DIR)/youtoo_nogc
 
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
 
-VM_C = character.c fpi.c init.c interpret.c level1i.c list.c \
-          register.c stack.c signals.c table.c util.c
-VM_O = $(VM_C:%.c=$(ARCH_DIR)/%.o)
+EUL_APPL_C = eul-appl.c
+EUL_APPL_O = $(EUL_APPL_C:%.c=$(EUL_LIB_DIR)/%.o)
+
+GC_FAKE_C = gc-fake.c
+FAKE_GC_O = $(GC_FAKE_C:%.c=$(EUL_LIB_DIR)/%.o)
+
+ALL_C = $(EUL_APPL_C) $(GC_FAKE_C)
+
+LIBS = libeulvm libboot libtelos liblevel1 libmath libeval
+YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.a)
+
+ifeq ($(MAKECMDGOALS),shared)
+    YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.so)
+else
+    YOUTOO_LIBS := $(LIBS:%=$(EUL_LIB_DIR)/%.a)
+endif
 
 ###-----------------------------------------------------------------------------
-### Commands to build library object files
+### Compiler + Interpreter
 ###-----------------------------------------------------------------------------
 
-.PHONY: lib
-lib: $(VM_LIB)
-
-$(VM_LIB): $(VM_O)
-	$(AR) $(VM_LIB) $(VM_O)
-	@$(RANLIB) $(VM_LIB)
+.PHONY: youtoo
+youtoo:	$(YOUTOO)
 
 .PHONY: shared
-shared:	$(VM_SHARED_LIB)
+shared:	$(YOUTOO)
 
-$(VM_SHARED_LIB): $(VM_O)
-	$(EUL_DIR)/Tools/makeso.$(OSTYPE) $(CC) $(VM_SHARED_LIB) $(VM_O)
+$(YOUTOO): $(EUL_APPL_O) $(YOUTOO_LIBS)
+	$(CC) $(CFLAGS) -o $(YOUTOO) \
+		$(EUL_APPL_O) -L$(EUL_LIB_DIR) \
+		$(CLIBS) -lgc -lpthread
 
-###-----------------------------------------------------------------------------
-### Dependency checking
-###-----------------------------------------------------------------------------
+.PHONY: nogc
+nogc: $(YOUTOO_NOGC)
 
-.PHONY: depend
-depend: | $(ARCH_DIR)/.
-	@touch $(ARCH_DIR)/Makefile.dep
-	makedepend -- $(CFLAGS) -- $(VM_C) \
-		-p$(ARCH_DIR)/ -f $(ARCH_DIR)/Makefile.dep
+$(YOUTOO_NOGC): $(EUL_APPL_O) $(FAKE_GC_O)
+	$(CC) $(CFLAGS) -o $(YOUTOO_NOGC) \
+		$(EUL_APPL_O) $(FAKE_GC_O) -L$(EUL_LIB_DIR) \
+	 	$(CLIBS) -lpthread
 
--include $(ARCH_DIR)/Makefile.dep
+$(EUL_LIB_DIR)/%.o : %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 
 .PHONY: boot-clean
-boot-clean: clean
+boot-clean:
+	@rm -rf $(ARCH_DIR)
 
 .PHONY: clean
 clean:
-	@rm -rf $(ARCH_DIR)
 
 .PHONY: distclean
-distclean:
+distclean: clean
 	@rm -rf platforms
+	@rm -f $(EUL_APPL_O) $(FAKE_GC_O)
 
 ###-----------------------------------------------------------------------------

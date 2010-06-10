@@ -5,7 +5,7 @@
 ## -----------------------------------------------------------------------
 ##                     EuLisp System 'youtoo'
 ## -----------------------------------------------------------------------
-##  Description: Script to convert Lib.${ARCH}/liblevel1.i to Vm/level1i.c
+##  Description: Script to convert ../Lib.${ARCH}/liblevel1.i to Vm/level1i.c
 ##  (should be a perl file in the future)
 ## -----------------------------------------------------------------------
 
@@ -17,8 +17,8 @@ fi
 
 FILE=Vm/level1i.c
 FILE_SKL=Vm/level1i.skl.c
-SOURCE=Lib.${ARCH}/liblevel1.i
-SOURCE_MATH=Lib.${ARCH}/libmath.i
+SOURCE=../Lib.${ARCH}/liblevel1.i
+SOURCE_MATH=../Lib.${ARCH}/libmath.i
 SOURCE_EULYSSES_1=Comptime2/i-param.i
 SOURCE_EULYSSES_2=Comptime2/p-env.i
 SOURCE_EULYSSES_3=Comptime2/i-compile.i

@@ -28,10 +28,14 @@ all: bindings
 .PHONY: bindings
 bindings: bindings.txt
 
-bindings.txt: $(EUL_LIB_DIR)/liblevel1.i $(EUL_DIR)/Runtime/macros.i $(EUL_LIB_DIR)/libeval.i
-	@cd $(EUL_DIR)/Tools; $(MAKE)
-	$(EUL_BIN_DIR)/i2doc \
-	$(EUL_LIB_DIR)/liblevel1.i $(EUL_DIR)/Runtime/macros.i $(EUL_LIB_DIR)/libeval.i \
+bindings.txt: $(EUL_LIB_DIR)/liblevel1.i \
+            $(EUL_DIR)/Youtoo/Runtime/macros.i \
+            $(EUL_LIB_DIR)/libeval.i
+	@cd $(EUL_DIR)/Tools; \
+	$(MAKE) $(EUL_BIN_DIR)/i2doc \
+		$(EUL_LIB_DIR)/liblevel1.i \
+		$(EUL_DIR)/Youtoo/Runtime/macros.i \
+		$(EUL_LIB_DIR)/libeval.i \
 	> bindings.txt
 
 .PHONY: clean

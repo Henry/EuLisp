@@ -210,7 +210,7 @@ Scheme programs with youtoo.
 * Use #!/../youtoo -script to write EuLisp scripts (see ./Misc/script.em).
 
 * Danius Michaelides wrote a port to the GNU bignum library (gmp). See
-Extras/Bignum/README.
+Modules/Bignum/README.
 
 * Multi-threading based on MIT or DEC Pthreads requires a version of the
 Boehm garbage collector which is hacked by Ian Piumarta from INRIA

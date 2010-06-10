@@ -23,7 +23,7 @@
 *** DONE Remove /compat.h/
     CLOSED: [2010-02-08 Mon 22:54]
     when backward compatibility is no longer needed.
-*** DONE Change all the /Makefiles/ of all the /Extras/ and /Examples/
+*** DONE Change all the /Makefiles/ of all the /Modules/ and /Examples/
     CLOSED: [2010-02-23 Tue 19:31]
     so that the libraries and executables are located in /platform/$(ARCH)/
     or //Lib.$(ARCH)/ and //Bin.$(ARCH)/ directories.
@@ -35,15 +35,15 @@
 *** TODO Resolve warning messages from ffi applications
     by introducing an option to allow a header file declaring the ff's to be
     included in the stubs files.
-***** Add header-files including the ffi definitions to all the /Extras/ libraries.
+***** Add header-files including the ffi definitions to all the /Modules/ libraries.
 *** DONE Investigate when /Lib.${ARCH}/*.i/ should be copied to Lib
     CLOSED: [2010-05-06 Thu 13:47]
-*** DONE Sort out the /Extras/Bignum/Makefile/
+*** DONE Sort out the /Modules/Bignum/Makefile/
     CLOSED: [2010-02-23 Tue 19:31]
     Currently the linking of the gmp library is hard-coded.
 *** DONE Upgrade the TclTk library to 8.5
     CLOSED: [2010-02-14 Sun 23:27]
-*** DONE Investigate problems with the /Extras/OS/ (object serialisation) lib
+*** DONE Investigate problems with the /Modules/OS/ (object serialisation) lib
     CLOSED: [2010-02-23 Tue 19:30]
 *** TODO Change the MPI interface to work with OpenMPI
 *** TODO /Comptime2/youtoo.em/ sometimes ends-up in the wrong state
@@ -79,7 +79,7 @@
     CLOSED: [2010-02-16 Tue 15:06]
     into the two parts to make the preliminary and final executables.
     Also move the "driver" part into the top-level Makefile.
-*** TODO Change the /Extras/Pipe/test1.em app/
+*** TODO Change the /Modules/Pipe/test1.em app/
     to obtain the path of the youtoo script from the global settings obtained
     from the /.eulrc.${ARCH}/ file.
 *** DONE Clean all .em files

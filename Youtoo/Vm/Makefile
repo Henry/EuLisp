@@ -1,56 +1,58 @@
+### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 ###-----------------------------------------------------------------------------
 ### ---                   EuLisp System 'youtoo'
 ###-----------------------------------------------------------------------------
 
 ###-----------------------------------------------------------------------------
-### EuLisp Tools Makefile
-##
-##  Building these with a version of Youtoo without dynamic linking makes
-##  bootstrapping simpler.
-##
+### EuLisp virtual-machine Makefile
 ###-----------------------------------------------------------------------------
 
 ARCH := $(shell uname -m)
-include ../Lib.$(ARCH)/Makefile
+include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
-### Source files
+### Output library files
 ###-----------------------------------------------------------------------------
 
-B2H_EM = b2h.em b2h-aux.em
-B2H_C = $(B2H_EM:%.em=%.c) b2h_.c
-
-I2DOC_EM = i2doc.em
-I2DOC_C = $(I2DOC_EM:%.em=%.c) i2doc_.c
+VM_LIB = $(EUL_LIB_DIR)/libeulvm.a
+VM_SHARED_LIB = $(EUL_LIB_DIR)/libeulvm.so
 
 ###-----------------------------------------------------------------------------
-### Targets
+### Source and object files
 ###-----------------------------------------------------------------------------
 
-all: b2h i2doc
+VM_C = character.c fpi.c init.c interpret.c level1i.c list.c \
+       register.c stack.c signals.c table.c util.c
+VM_O = $(VM_C:%.c=$(ARCH_DIR)/%.o)
 
 ###-----------------------------------------------------------------------------
-### Compile b2h directly from the EuLisp source.
+### Commands to build library object files
 ###-----------------------------------------------------------------------------
 
-.PHONY: b2h
-b2h: $(EUL_BIN_DIR)/b2h
+.PHONY: lib
+lib: $(VM_LIB)
 
-$(EUL_BIN_DIR)/b2h: $(B2H_EM) | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} b2h -od $(ARCH_DIR) -l level1 \
-		-load_path $(EUL_DIR)/Extras/Vmeta
-	mv $(ARCH_DIR)/b2h $(EUL_BIN_DIR)/b2h
+$(VM_LIB): $(VM_O)
+	$(AR) $(VM_LIB) $(VM_O)
+	@$(RANLIB) $(VM_LIB)
+
+.PHONY: shared
+shared:	$(VM_SHARED_LIB)
+
+$(VM_SHARED_LIB): $(VM_O)
+	$(U2_DIR)/Tools/makeso.$(OSTYPE) $(CC) $(VM_SHARED_LIB) $(VM_O)
 
 ###-----------------------------------------------------------------------------
-### Compile i2doc directly from the EuLisp source.
+### Dependency checking
 ###-----------------------------------------------------------------------------
 
-.PHONY: i2doc
-i2doc: $(EUL_BIN_DIR)/i2doc
+.PHONY: depend
+depend: | $(ARCH_DIR)/.
+	@touch $(ARCH_DIR)/Makefile.dep
+	makedepend -- $(CFLAGS) -- $(VM_C) \
+		-p$(ARCH_DIR)/ -f $(ARCH_DIR)/Makefile.dep
 
-$(EUL_BIN_DIR)/i2doc: $(I2DOC_EM) $(ARCH_DIR)/i2doc-ext.o | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} i2doc -od $(ARCH_DIR) -l level1 -fff i2doc-ext
-	mv $(ARCH_DIR)/i2doc $(EUL_BIN_DIR)/i2doc
+-include $(ARCH_DIR)/Makefile.dep
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
@@ -59,13 +61,12 @@ $(EUL_BIN_DIR)/i2doc: $(I2DOC_EM) $(ARCH_DIR)/i2doc-ext.o | $(ARCH_DIR)/.
 .PHONY: boot-clean
 boot-clean: clean
 
+.PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
-	@rm -f *.{h,i} *_.{c,h}
-	@rm -f $(B2H_C) $(I2DOC_C)
 
-distclean: clean
+.PHONY: distclean
+distclean:
 	@rm -rf platforms
-	@rm -f $(EUL_BIN_DIR)/b2h $(EUL_BIN_DIR)/i2doc
 
 ###-----------------------------------------------------------------------------

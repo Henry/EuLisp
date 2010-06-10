@@ -128,6 +128,8 @@ else
     fi
 fi
 
+U2_DIR=$EUL_DIR/Youtoo
+
 ###-----------------------------------------------------------------------------
 ### Set installation paths
 ###-----------------------------------------------------------------------------
@@ -217,9 +219,9 @@ Linux)
     fi
 
     if (test $THRTYPE = PPCR) then
-        CFLAGS="$GCC_FLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_DIR}/include -I${EUL_DIR}/Vm -I${EUL_GC_DIR}/gc"
+        CFLAGS="$GCC_FLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${U2_DIR}/include -I${U2_DIR}/Vm -I${EUL_GC_DIR}/gc"
     else
-        CFLAGS="$GCC_FLAGS -I${EUL_DIR}/include -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="$GCC_FLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
     fi
     ;;
 
@@ -233,9 +235,9 @@ FreeBSD)
     AR="ar cruv"
     RANLIB="ranlib"
     if (test $THRTYPE = PPCR) then
-        CFLAGS="-DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_DIR}/Vm  -I${EUL_GC_DIR}/gc"
+        CFLAGS="-DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${U2_DIR}/Vm  -I${EUL_GC_DIR}/gc"
     else
-        CFLAGS="-I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="-I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
     fi
     ;;
 
@@ -246,19 +248,19 @@ FreeBSD)
 SunOS)
     if (test $THRTYPE = UI) then
         CC="cc"
-        CFLAGS="-DWITH_STRERROR -DWITH_UI_THREADS -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="-DWITH_STRERROR -DWITH_UI_THREADS -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
         CLIBS="-leval -lmath -llevel1 -leulvm -lm -lnls -lnsl -lsocket -ldl -lthread"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif (test $DEFAULT_CC = gcc) then
         CC=$DEFAULT_CC
-        CFLAGS="-fPIC -DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="-fPIC -DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
         CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     else
         CC=$DEFAULT_CC
-        CFLAGS="-DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="-DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
         CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
@@ -272,25 +274,25 @@ SunOS)
 IRIX)
     if (test $THRTYPE = PPCR) then
         CC="cc"
-        CFLAGS="-Olimit 4000 -common -DWITH_PCR_THREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_DIR}/Vm -I${EUL_GC_DIR}/gc"
+        CFLAGS="-Olimit 4000 -common -DWITH_PCR_THREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${U2_DIR}/Vm -I${EUL_GC_DIR}/gc"
         CLIBS=$DEFAULT_CLIBS
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif (test $THRTYPE = MIT) then
         CC="gcc"
-        CFLAGS="-DMIT_PTHREADS -I${EUL_DIR}/Vm -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_MIT_THR_DIR}/include -L${EUL_MIT_THR_DIR}/obj"
+        CFLAGS="-DMIT_PTHREADS -I${U2_DIR}/Vm -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_MIT_THR_DIR}/include -L${EUL_MIT_THR_DIR}/obj"
         CLIBS="-lpthread $DEFAULT_CLIBS -lgcc -lpthread"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif (test $DEFAULT_CC = gcc) then
         CC=$DEFAULT_CC
-        CFLAGS="-I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="-I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
         CLIBS=$DEFAULT_CLIBS
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     else
         CC=$DEFAULT_CC
-        CFLAGS="-Olimit 4000 -common -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="-Olimit 4000 -common -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
         CLIBS=$DEFAULT_CLIBS
         AR="ar crsuv"
         RANLIB="echo No ranlib "
@@ -303,8 +305,8 @@ IRIX)
 
 CYGWIN_NT-5.0)
     CC="gcc"
-    CFLAGS="-DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
-    #CFLAGS="-DWITH_STRERROR -I${EUL_DIR}/Vm ${EUL_GC_INCLUDE}"
+    CFLAGS="-DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
+    #CFLAGS="-DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
     CLIBS=$DEFAULT_CLIBS
     AR="ar cruv"
     RANLIB="ranlib"
@@ -316,7 +318,7 @@ CYGWIN_NT-5.0)
 
 AIX)
     CC=$DEFAULT_CC
-    CFLAGS="-I${EUL_DIR}/Vm ${EUL_GC_INCLUDE} -DWITH_STRERROR"
+    CFLAGS="-I${U2_DIR}/Vm ${EUL_GC_INCLUDE} -DWITH_STRERROR"
     CLIBS=$DEFAULT_CLIBS
     AR="ar cruv"
     RANLIB="ranlib"
@@ -342,7 +344,7 @@ WORD_LEN_OP=-DWORD_LENGTH=$WORD_LENGTH
 ### Make scripts executable
 ###-----------------------------------------------------------------------------
 
-chmod ug+x ${EUL_DIR}/Tools/make*.*
+chmod ug+x ${U2_DIR}/Tools/make*.*
 
 ###-----------------------------------------------------------------------------
 ### Prompting configuration
@@ -429,6 +431,7 @@ echo EUL_DIR = ${EUL_DIR} >> $name
 echo EUL_BOOT_DIR = ${EUL_BOOT_DIR} >> $name
 echo EUL_BIN_DIR = ${EUL_BIN_DIR} >> $name
 echo EUL_LIB_DIR = ${EUL_LIB_DIR} >> $name
+echo U2_DIR = ${EUL_DIR}/Youtoo >> $name
 echo U2 = ${EUL_BIN_DIR}/youtoo.sh >> $name
 echo U2_BOOT = ${EUL_BOOT_BIN_DIR}/youtoo.sh >> $name
 echo EUL_GC_DIR = ${EUL_GC_DIR} >> $name
@@ -491,7 +494,7 @@ create_script(){
     echo export EUL_BIN_DIR=${EUL_BIN_DIR} >> $name
     echo export EUL_GC_DIR=${EUL_GC_DIR} >> $name
     echo export EUL_VERSION=${EUL_VERSION} >> $name
-    cat ${EUL_DIR}/Tools/$1.skl >> $name
+    cat ${U2_DIR}/Tools/$1.skl >> $name
     chmod ug+x $name
 }
 

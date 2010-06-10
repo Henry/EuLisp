@@ -297,29 +297,29 @@
     The current set of supported bindings in Youtoo are in the file
     [[file:Doc/bindings.txt][bindings.txt]]
 
-* Extras
-*** [[file:Extras/Bignum/README.org][GNU Bignum]]: /Extras/Bignum/
+* Modules
+*** [[file:Modules/Bignum/README.org][GNU Bignum]]: /Modules/Bignum/
     Danius Michaelides wrote a port to the GNU bignum library (gmp).
-*** [[file:Extras/MPI/README.org][MPI]]: /Extras/MPI/
+*** [[file:Modules/MPI/README.org][MPI]]: /Modules/MPI/
 
-*** [[file:Extras/TclTk/README.org][Tcl/Tk]]: /Extras/TclTk/
+*** [[file:Modules/TclTk/README.org][Tcl/Tk]]: /Modules/TclTk/
 
-*** [[file:Extras/Fthread/README.org][Foreign thread libraries]]: /Extras/Fthread/
+*** [[file:Modules/Fthread/README.org][Foreign thread libraries]]: /Modules/Fthread/
 
-*** [[file:Extras/Scheme/README.org][Scheme]]: /Extras/Scheme/
-    Modules /./Extras/Scheme/scheme0.em/ and /./Extras/Scheme/scheme.em/
+*** [[file:Modules/Scheme/README.org][Scheme]]: /Modules/Scheme/
+    Modules /./Modules/Scheme/scheme0.em/ and /./Modules/Scheme/scheme.em/
     provide support for writing Scheme programs with Youtoo.
 
-*** [[file:Extras/Matching/README.org][Matching]]: /Extras/Match/
+*** [[file:Modules/Matching/README.org][Matching]]: /Modules/Match/
     Modulized version of match-slib.scm badly hacked for EuLisp.
 
-*** [[file:Extras/OS/README.org][Object serialisation]]: /Extras/OS/
+*** [[file:Modules/OS/README.org][Object serialisation]]: /Modules/OS/
     includes support for closures and threads.
 
-*** [[file:Extras/OPS5/README.org][OPS5 rule-based system]] : /Extras/OPS5/
+*** [[file:Modules/OPS5/README.org][OPS5 rule-based system]] : /Modules/OPS5/
     An object-oriented version of the OPS5 rule-based system.
 
-***  [[file:Extras/Pipe/README.org][Pipes and forked child processes]]:  /Extras/Pipe/
+***  [[file:Modules/Pipe/README.org][Pipes and forked child processes]]:  /Modules/Pipe/
     Thanks to Rob Simmons there is support for pipes to forked child
     processes.
 

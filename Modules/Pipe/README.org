@@ -1,7 +1,7 @@
 #                            -*- mode: org; -*-
 #
-#+TITLE:               Bignum module for Youtoo 0.93
-#+AUTHOR:           Danius Michaelides and Andreas Kind
+#+TITLE:                Pipe module for Youtoo 0.93
+#+AUTHOR:               Rob Simmons and Andreas Kind
 #+DATE:               July 1997; Updated February 2010
 #+LINK:           http://www.cs.bath.ac.uk/~jap/ak1/youtoo
 #+EMAIL: no-reply
@@ -24,26 +24,17 @@
 * [[file:../../index.org][EuLisp index]]
 
 * General Description
-  This is an interface module to the GNU Bignum package.
+  Library for pipes, forked child processes and control i/o with a stream
+  object.
 
 * Installation
-  + Run 'make' in directory /Extras/Bignum/.
-  + Run 'make test' in directory /Extras/Bignum/.
-  + Add -lbignum to CLIBS in /youtoo/\.eulrc.${ARCH}/.
+  + Run 'make' in directory /Modules/Pipe/.
+  + Run 'make test' in directory /Modules/Pipe/.
+  + Add -lpipe to CLIBS in /youtoo/\.eulrc.${ARCH}/.
 
 * Files
-  The bignum library consists of a number of EuLisp modules:
-  - /bignum.em/ -- root module
-  - /bigint.em/ -- big integer module and class
-  - /bigrat.em/ -- rational number module and class
-  - /mpz.em/    -- module containing bindings to c functions
-  - /mpq.em/    -- module containing bindings to c functions
+  The pipe library consists of single EuLisp module:
+  - /pipe.em/ -- root module
 
-  And three C files:
-  - /eul-mpz.c/ -- C interface for integer functions
-  - /eul-mpq.c/ -- C interface for rational functions
-  - /eul-gmp-gc.c/ -- C interface to GC
-
-* To Do
-  + rationals are not integrated into EuLisp
-  + check everything is being GC-ed properly
+  And a foreign-function interface file:
+  - /eul-pipe.c/ -- C interface for pipe functions
