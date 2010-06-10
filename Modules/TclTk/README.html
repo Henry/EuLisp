@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>Tcl/Tk connection for Youtoo 0.93</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="July 1997; Updated February 2010"/>
+<meta name="author" content="Juli Garcia Moreno, Julian Padget and Andreas Kind"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+
+<h1 class="title">Tcl/Tk connection for Youtoo 0.93</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Copyright </a></li>
+<li><a href="#sec-2">2 EuLisp index </a></li>
+<li><a href="#sec-3">3 General Description </a></li>
+<li><a href="#sec-4">4 Documentation </a></li>
+<li><a href="#sec-5">5 Installation </a></li>
+<li><a href="#sec-6">6 WARNING </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> <a href="COPYING">Copyright</a> </h2>
+<div class="outline-text-2" id="text-1">
+
+<p>Youtoo is free software: you can redistribute it and/or modify it
+under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+</p>
+<p>
+Youtoo is distributed in the hope that it will be useful, but WITHOUT
+ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+for more details.
+</p>
+<p>
+You should have received a copy of the GNU General Public License along with
+Youtoo in the file <a href="../../COPYING">COPYING</a>.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> <a href="../../index.html">EuLisp index</a> </h2>
+<div class="outline-text-2" id="text-2">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> General Description </h2>
+<div class="outline-text-2" id="text-3">
+
+<p>This directory contains the Tcl/Tk connection for youtoo. This file tells you
+how to install it.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> <a href="Doc/index.html">Documentation</a> </h2>
+<div class="outline-text-2" id="text-4">
+
+<p>The HTML documentation for this module is available
+<a href="http://www.cs.bath.ac.uk/~jap/ma5jg/youtoo-Tk-docs/">online</a> and in the
+<a href="Doc/index.html">Doc</a> sub-directory.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Installation </h2>
+<div class="outline-text-2" id="text-5">
+
+<ul>
+<li>
+Edit the <i>Makefile</i> (if necessary).
+</li>
+<li>
+Run 'make' in directory <i>TclTk</i>
+</li>
+<li>
+Add '-ltcltk -lX11 -ltk83 -ltcl83' to CLIBS in <i>youtoo/\.eulrc.${ARCH}</i>;
+perhaps also -ldl (eg for Linux) is necessary
+</li>
+<li>
+Add '-L&lt;EUL_X_LIB_DIR&gt; -L&lt;EUL_TCL_LIB_DIR&gt; -L&lt;EUL_TK_LIB_DIR&gt;'
+to CLIBS in EuLysses/.eulrc if necessary.
+</li>
+<li>
+Add '-I&lt;EUL_X_INCLUDE_DIR&gt; -I&lt;EUL_TCL_INCLUDE_DIR&gt; -I&lt;EUL_TK_INCLUDE_DIR&gt;"
+to CFLAGS in EuLysses.eulrc if necessary.
+</li>
+<li>
+Test with 'cd <i>Test</i>; <i>Bin.${ARCH}/youtoo.sh</i> tk_graph_editor -l level1 -l
+tcltk'
+
+</li>
+<li id="sec-5.1">Installation of the you2tk' youtoo/Tk Interpreter <br/>
+<ul>
+<li>
+Run 'make you2tk'
+</li>
+<li>
+make sure your <code>LD_LIBRARY_PATH</code> environment variable is set correctly
+(you could edit EuLysses/you2tk to add &lt;EUL_TCL_LIB_DIR&gt; &lt;EUL_TK_LIB_DIR&gt;
+&lt;EUL_X_LIB_DIR&gt;)
+
+</li>
+<li id="sec-5.1.1">Example test for you2tk <br/>
+Run 'Bin.${ARCH}/you2tk.sh' and type
+
+
+
+<pre class="src src-lisp">(<span style="color: #0000ff; font-weight: bold;">defun</span> <span style="color: #0000ff; font-weight: bold;">foo</span> (b x)
+  (print b)
+  (tk-button-flash b))
+
+  (<span style="color: #0000ff; font-weight: bold;">let</span> ((b1 (tk-make-button () text: <span style="color: #00ff00;">"foo"</span> command: foo args: '(self: 42)))
+    (b2 (tk-make-button () text: <span style="color: #00ff00;">"exit"</span> fg: <span style="color: #00ff00;">"red"</span> command: tk-exit)))
+    (tk-pack b1 b2 padx: <span style="color: #00ff00;">"10"</span> pady: <span style="color: #00ff00;">"3"</span>))
+
+  (tk-main-loop)
+
+</pre>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> WARNING </h2>
+<div class="outline-text-2" id="text-6">
+
+<p>The original version of the Tcl/Tk code used various Tk internals that changed
+completely between the 7.6/4.2 and 8.3.4/8.3.4 releases.  The code has since
+been crudely beaten into a semblance of submission, but it is surely full of
+resentment and bugs.
+</p></div>
+</div>
+<div id="postamble">
+<p class="author"> Author: Juli Garcia Moreno, Julian Padget and Andreas Kind
+<a href="mailto:no-reply">&lt;no-reply&gt;</a>
+</p>
+<p class="date"> Date: July 1997; Updated February 2010</p>
+<p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
+</div>
+</div>
+</body>
+</html>

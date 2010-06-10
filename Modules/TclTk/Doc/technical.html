@@ -1,0 +1,179 @@
+<HTML>
+<HEAD>
+  <TITLE>Technical report.</TITLE>
+</HEAD>
+<BODY BGCOLOR="#FFFFF0" TEXT="#000000">
+<h1>Technical Information</h1>
+
+<a name="introduction">
+<hr>
+<a href="#modules"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<h1>Introduction</h1>
+<p>
+This section pretends to explain some implementation aspects. Nevertheless, it is not going 
+to explain lines of code. The source code is full commented.
+<p>
+<b>youtoo/Tk</b> interpreter is written in C and for some parts in EuLisp. 
+The object oriented layer is written in EuLisp. General information about the EuLisp and 
+C modules will be given to make easier the comprehension of the code.
+
+<a name="modules">
+<hr>
+<a href="#install"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#introduction"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<h1>Modules</h1>
+<p>
+In order to execute your youtoo code, adding tk interfaces, the following EuLisp and C files are needed:
+
+<h3>
+EuLisp modules</h3>
+
+<dl>
+<dl>
+<dt><b>tk_general.em</b>
+<dd> Basic functions and widget classes. This module provides the widget classes and general 
+functions that are needed in higher level functions. Some of the functions here will not be 
+used by the user.
+<p>
+<dt><b>tk_class.em</b>
+<dd>This module contains some of  the constructors and configuration functions for some Tk class.
+<p>
+<dt><b>tk_class2.em</b> 
+<dd>This module contains the rest  the constructors and configuration functions for some Tk class.
+<p>
+<dt><b>tk_commands.em</b>
+<dd>The general commands are included in this module. These commands could be applied to any 
+kind of Tk class. The are not specific for a particular Tk class.
+<p>
+<dt><b>tk_utils.em</b>
+<dd>Basic utilities are implemented here.
+<p>
+<dt><b>tk_images</b>
+<dd>This modules contains the necessary functions to manage images in Tk.
+<p>
+<dt><b>tcl-tk.em</b>
+<dd>This module produce the initialisation and exposes the previous one. This is the module to include in your import list.
+</dl>
+</dl>
+<h3>
+C files</h3>
+<dl><dl>
+<dt><b>Makefile</b>
+<p>
+<dt><b>globalvariables.c</b>
+<p>
+<dt><b>tk_init.c</b>
+<p>
+<dt><b>StrOperations.c</b>
+<p>
+<dt><b>FnCwidgets.c</b> 
+<p>
+<dt><b>FnCcommands.c</b> 
+<p>
+<dt><b>StrOperations.h</b> 
+<p>
+<dt><b>globalvariables.h</b>
+
+</dl></dl>
+
+<a name="install">
+<hr>
+<a href="#ff"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#modules"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<H1>Installation.</h1>
+<p>
+Follow the next steps to create the appropriate library:
+<ol>
+<li>Modify the Makefile file according to your system. Do not forget to indicate the correct 
+path for Tcl and Tk library. Actually the TCL7.5 and TK4.1 versions are required.
+<p>
+<li>Execute make in your youtoo-tk directory.<br>
+If everything works without problems, the library file:  <em>libeultkWidgets.a</em> should have been created.<br>
+This is the necessary library to link youtoo with. It contains all the necessary foreign functions.
+<p>
+<li>Be sure that the path for Tcl/Tk libraries is correct in your <i>.eulrc</i> file. <br>
+Path for the X library also need to be specified. That is:
+<pre>
+   (CFLAGS . "-L<em>necessary-paths</em>")
+
+   (CLIBS . " -lX11 
+              -ltk4.1 
+              -ltcl7.5")
+  
+</pre>
+
+<li>Compile module <i>tcl-tk</i> with the following command:
+<pre>
+youtoo tcl-tk -l level1 -l math -load_path <em>path</em> -ffl eultkWidgets
+</pre>
+where path is the location of <em>libeultkWidgets.a</em> library.
+<p>
+If everything works properly (it should) then <em>libtcl-tk.{i,a}</em> are created.
+<p>
+<li>Add the objects files in <em>libeultkWidgets.a</em> to <em>libtcl-tk.a</em> in order to allow the compilation of your modules as it says the <a href="general.html#get-started">getting started</a> section.<br>
+This could be done with the next shell command:
+<pre>
+ar q libtcl-tk.a tk_init.o FnCwidgets.o FnCcommands.o FnCimages.o 
+     StrOperations.o globalvariables.o
+</pre>
+</ol>
+
+
+<a name="ff">
+<hr>
+<a href="#callbacks"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#modules"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+
+<h1>Foreign function interface</h1>
+<p>
+The implementation of <b>youtoo/Tk</b> libraries has been using the foreign function mechanism provided
+by youtoo. So that, C functions that implement tk commands has been bound to EuLisp functions
+implementing the same command.
+<p>
+Implementation process has been the codification of the correct function call sequence 
+for each new feature that has been added.<br> 
+The general sequence for each new <b>youtoo/Tk</b> function could be:
+<p>
+<img src="graphics/technical1.jpg" align="center">
+<p> 
+<p>
+The previous diagram is a schematic one. That function call sequence is very similar to stubs used in RPC protocols. The next section outlines where is implemented the binding.
+<p>
+<a name = "callbacks">
+<hr>
+<a href="index.html"><img align=right border=off src="graphics/next.gif" height=44 width=112></a>
+<a href="index.html"><img align=right border=off src="graphics/contents.gif" height=44 width=112></a>
+<a href="#ff"><img align=right border=off src="graphics/previous.gif" height=44 width=112></a>
+<h1>Implementation of callbacks</h1>
+<p>
+youtoo also provides the possibility of calling EuLisp closures (functions) from C code. This features 
+has allowed to provide callback functions easily.
+<p>
+Having a look to the code does not give so much idea about what is going on. However, everything is
+understandable with a few hints.
+<p>
+<dl>
+<dt>
+<b><em>How and where are the callbacks stored?</em></b> 
+<dd>Every time a callback is being declared 
+(via <b><em>command:</em></b> option or via any of the bind function) the 
+<code>tk_allocate_registers</code> function is call.<br>
+This is a foreign function. What it does is storing, in a C hash table, the name of the function, 
+the <b><em>LispRef</em></b> pointer to the function, and the <b><em>LispRef</em></b> to the possible arguments.
+<p>
+<dt>
+<b><em>How the callback is invoked?</em></b> 
+<dd>Every time a callback has to be invoked, the <b><em>eul_interpret</em></b> command is invoked. <b><em>eul_interpret</em></b> is the Tk command bound to the event. Tk libraries do not know anything about EuLisp closures. This command is bound when the callback is initilized. It receives the name of the EuLisp function, looks it up in the C hash table, and executes the callback.
+</dl>
+
+</BODY></HTML>
+
+

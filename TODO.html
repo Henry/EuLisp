@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-05-12 22:59:03 BST"/>
+<meta name="generated" content="2010-06-10 18:50:17 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -132,7 +132,7 @@ Split files
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span></span><br/>
 when backward compatibility is no longer needed.
 </li>
-<li id="sec-1.5"><span class="done DONE"> DONE</span> Change all the <i>Makefiles</i> of all the <i>Extras</i> and <i>Examples</i> <br/>
+<li id="sec-1.5"><span class="done DONE"> DONE</span> Change all the <i>Makefiles</i> of all the <i>Modules</i> and <i>Examples</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 so that the libraries and executables are located in <i>platform/$(ARCH)</i>
 or //Lib.$(ARCH)/ and //Bin.$(ARCH)/ directories.
@@ -147,21 +147,21 @@ Compiling <i>ffi2.c</i> using gcc &hellip;
 by introducing an option to allow a header file declaring the ff's to be
 included in the stubs files.
 <ul>
-<li id="sec-1.7.1">Add header-files including the ffi definitions to all the <i>Extras</i> libraries. <br/>
+<li id="sec-1.7.1">Add header-files including the ffi definitions to all the <i>Modules</i> libraries. <br/>
 </li>
 </ul>
 </li>
 <li id="sec-1.8"><span class="done DONE"> DONE</span> Investigate when <i>Lib.${ARCH}/*.i</i> should be copied to Lib <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-06 Thu 13:47</span></span><br/>
 </li>
-<li id="sec-1.9"><span class="done DONE"> DONE</span> Sort out the <i>Extras/Bignum/Makefile</i> <br/>
+<li id="sec-1.9"><span class="done DONE"> DONE</span> Sort out the <i>Modules/Bignum/Makefile</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 Currently the linking of the gmp library is hard-coded.
 </li>
 <li id="sec-1.10"><span class="done DONE"> DONE</span> Upgrade the TclTk library to 8.5 <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-14 Sun 23:27</span></span><br/>
 </li>
-<li id="sec-1.11"><span class="done DONE"> DONE</span> Investigate problems with the <i>Extras/OS</i> (object serialisation) lib <br/>
+<li id="sec-1.11"><span class="done DONE"> DONE</span> Investigate problems with the <i>Modules/OS</i> (object serialisation) lib <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:30</span></span><br/>
 </li>
 <li id="sec-1.12"><span class="todo TODO"> TODO</span> Change the MPI interface to work with OpenMPI <br/>
@@ -215,7 +215,7 @@ is unable to compile module files correctly issuing errors like
 into the two parts to make the preliminary and final executables.
 Also move the "driver" part into the top-level Makefile.
 </li>
-<li id="sec-1.18"><span class="todo TODO"> TODO</span> Change the <i>Extras/Pipe/test1.em app</i> <br/>
+<li id="sec-1.18"><span class="todo TODO"> TODO</span> Change the <i>Modules/Pipe/test1.em app</i> <br/>
 to obtain the path of the youtoo script from the global settings obtained
 from the <i>.eulrc.${ARCH}</i> file.
 </li>
@@ -305,6 +305,11 @@ defined not two.  If this property is an important feature <code>equal</code> co
 reinstated as a function wrapper around <code>binary=</code> which does a
 type-consistency check.
 
+</li>
+<li id="sec-1.34"><span class="todo TODO"> TODO</span> Complete the renaming of predicates? and destructive! functions <br/>
+All predicates ending in "-p" have been transformed and the functions
+"null?" and "atom?" added but the predicates ending in "p" have yet to be
+updated.
 </li>
 </ul>
 </div>
@@ -506,15 +511,24 @@ Check for other <code>&lt;sequence&gt;</code> methods which should destructive v
 <li id="sec-2.20"><span class="done DONE"> DONE</span> Clarify the wording concerning the relationship between <code>nil</code> and <code>()</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-09 Sun 21:09</span></span><br/>
 State that (eq 'nil '()) ==&gt; t.
-*** TODO Replace =equal= with =binary==
+*** DONE Replace =equal= with =binary==
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-14 Fri 14:30</span></span><br/>
 Remove the <code>equal</code> generic function and methods and introduce a complete set
 of <code>binary=</code> methods.
+</li>
+<li id="sec-2.22"><span class="done DONE"> DONE</span> Change naming convention for predicates? and destructive! functions <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-09 Wed 10:46</span></span><br/>
+There is a suggestion in the definition documents suggesting that the
+Scheme/T naming convention for predicates (end in ?) and destructive
+functions (end in !) should be considered for EuLisp.  I agree with this
+suggestion to improve consistency and readability and made the corresponding
+changes including "null" -&gt; "null?" and "atom" -&gt; "atom?".
 </li>
 </ul>
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-05-12 22:59:03 BST</p>
+<p class="date"> Date: 2010-06-10 18:50:17 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

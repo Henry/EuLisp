@@ -65,7 +65,7 @@
   communication (Sockets, MPI, Harvest Object Cache) support the migration of
   arbitray data and code.
 
-  The system reuses ideas from the Oaklisp system written by Barak Perlmutter
+  The system reuses ideas from the Oaklisp system written by Barak Pearlmutter
   and Kevin Lang. The meta-object protocol (=Telos=) was originally implemented
   in Common Lisp by Russell Bradford. By default, a garbage collector written by
   Hans Boehm and Alan Demers is used.
@@ -90,23 +90,21 @@
     + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps][eulisp-ffi.ps]]
 
 * Installation
-  + Unpack version xxx with \\
-    /tar -xzf EuLisp-xxx.tar.gz/
-  + or pull the latest version from the GitHub repository:\\
-    git clone git@github.com:Henry/EuLisp.git
-  + "cd" into the /EuLisp-xxx/ or /EuLisp/ directory
+  + Pull the latest version from the GitHub repository:\\
+    git clone git://github.com/Henry/EuLisp.git
+  + "cd" into the /EuLisp/ directory
   + Run \\
     /./configure/ \\
     and check the settings.  Edit the configure file to reflect your system if
     necessary and re-run\\
     /./configure/.
   + Run \\
-    /make/ \\
-    If you want to use shared libraries (which we really recommend on Linux,
+    /make/
+  + If you want to use shared libraries (which we really recommend on Linux,
     FreeBSD, Solaris and IRIX), run \\
     /make shared/ \\
-    and add the directory /.../EuLisp-xxx/Lib.${ARCH}/ to the environment variable
-    ~$LD_LIBRARY_PATH~ (see /./makeso.Path/).
+    and add the directory /.../EuLisp/Lib.${ARCH}/ to the environment variable
+    ~$LD_LIBRARY_PATH~.
   + You should now be able to run the script \\
     /Bin.${ARCH}/youtoo.sh/ \\
     (see next section).
@@ -115,9 +113,9 @@
   + Run \\
     /Bin.${ARCH}/youtoo.sh/ -help \\
     to see the compiler options.
-  + Run \\
+  + In directory /Examples/Misc/ run \\
     /Bin.${ARCH}/youtoo.sh fact -l level1/ \\
-    to compile module fact in (built-in) load directory Misc into a stand-alone
+    to compile module fact into a stand-alone
     executable. With shared libraries the executable should be less the 40K.
   + Run \\
     /Bin.${ARCH}/youtoo.sh/ \\
@@ -163,7 +161,7 @@
     can be switched off with =-no_recompile=.
 
 *** Standard C foreign-functions
-    in /Vm/eulisp.h/
+    in /Youtoo/include/eulisp.h/
 
 ***** Data conversion from EuLisp to C:
       #+BEGIN_SRC c
@@ -279,7 +277,7 @@
     is un-hygienic.
 
 *** EuLisp Scripts
-    Use /#!/../youtoo -script/ to write EuLisp scripts (see
+    Use /#!/../youtoo --script/ to write EuLisp scripts (see
     /Examples/Misc/script.em/).
 
 *** Inter-operation with other languages
@@ -297,29 +295,29 @@
     The current set of supported bindings in Youtoo are in the file
     [[http://henry.github.com/EuLisp/Doc/bindings.txt][bindings.txt]]
 
-* Extras
-*** [[http://henry.github.com/EuLisp/Extras/Bignum/README.org][GNU Bignum]]: /Extras/Bignum/
+* Modules
+*** [[http://henry.github.com/EuLisp/Modules/Bignum/README.org][GNU Bignum]]: /Modules/Bignum/
     Danius Michaelides wrote a port to the GNU bignum library (gmp).
-*** [[http://henry.github.com/EuLisp/Extras/MPI/README.org][MPI]]: /Extras/MPI/
+*** [[http://henry.github.com/EuLisp/Modules/MPI/README.org][MPI]]: /Modules/MPI/
 
-*** [[http://henry.github.com/EuLisp/Extras/TclTk/README.org][Tcl/Tk]]: /Extras/TclTk/
+*** [[http://henry.github.com/EuLisp/Modules/TclTk/README.org][Tcl/Tk]]: /Modules/TclTk/
 
-*** [[http://henry.github.com/EuLisp/Extras/Fthread/README.org][Foreign thread libraries]]: /Extras/Fthread/
+*** [[http://henry.github.com/EuLisp/Modules/Fthread/README.org][Foreign thread libraries]]: /Modules/Fthread/
 
-*** [[http://henry.github.com/EuLisp/Extras/Scheme/README.org][Scheme]]: /Extras/Scheme/
-    Modules /./Extras/Scheme/scheme0.em/ and /./Extras/Scheme/scheme.em/
+*** [[http://henry.github.com/EuLisp/Modules/Scheme/README.org][Scheme]]: /Modules/Scheme/
+    Modules /./Modules/Scheme/scheme0.em/ and /./Modules/Scheme/scheme.em/
     provide support for writing Scheme programs with Youtoo.
 
-*** [[http://henry.github.com/EuLisp/Extras/Matching/README.org][Matching]]: /Extras/Match/
+*** [[http://henry.github.com/EuLisp/Modules/Matching/README.org][Matching]]: /Modules/Match/
     Modulized version of match-slib.scm badly hacked for EuLisp.
 
-*** [[http://henry.github.com/EuLisp/Extras/OS/README.org][Object serialisation]]: /Extras/OS/
+*** [[http://henry.github.com/EuLisp/Modules/OS/README.org][Object serialisation]]: /Modules/OS/
     includes support for closures and threads.
 
-*** [[http://henry.github.com/EuLisp/Extras/OPS5/README.org][OPS5 rule-based system]] : /Extras/OPS5/
+*** [[http://henry.github.com/EuLisp/Modules/OPS5/README.org][OPS5 rule-based system]] : /Modules/OPS5/
     An object-oriented version of the OPS5 rule-based system.
 
-***  [[http://henry.github.com/EuLisp/Extras/Pipe/README.org][Pipes and forked child processes]]:  /Extras/Pipe/
+***  [[http://henry.github.com/EuLisp/Modules/Pipe/README.org][Pipes and forked child processes]]:  /Modules/Pipe/
     Thanks to Rob Simmons there is support for pipes to forked child
     processes.
 

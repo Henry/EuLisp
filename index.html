@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>EuLisp</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-05-04 12:08:36 BST"/>
+<meta name="generated" content="2010-06-10 22:12:50 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -85,7 +85,7 @@ lang="en" xml:lang="en">
 <li><a href="#sec-5">5 Installation </a></li>
 <li><a href="#sec-6">6 Getting Started </a></li>
 <li><a href="#sec-7">7 Features </a></li>
-<li><a href="#sec-8">8 Extras </a></li>
+<li><a href="#sec-8">8 Modules </a></li>
 <li><a href="#sec-9">9 Bootstrapping </a></li>
 <li><a href="#sec-10">10 Recent Developments </a></li>
 <li><a href="#sec-11">11 To Do </a></li>
@@ -198,7 +198,7 @@ communication (Sockets, MPI, Harvest Object Cache) support the migration of
 arbitray data and code.
 </p>
 <p>
-The system reuses ideas from the Oaklisp system written by Barak Perlmutter
+The system reuses ideas from the Oaklisp system written by Barak Pearlmutter
 and Kevin Lang. The meta-object protocol (<code>Telos</code>) was originally implemented
 in Common Lisp by Russell Bradford. By default, a garbage collector written by
 Hans Boehm and Alan Demers is used.
@@ -258,15 +258,11 @@ The following reports are discussed in the above:
 
 <ul>
 <li>
-Unpack version xxx with <br/>
-<i>tar -xzf EuLisp-xxx.tar.gz</i>
+Pull the latest version from the GitHub repository:<br/>
+git clone git://github.com/Henry/EuLisp.git
 </li>
 <li>
-or pull the latest version from the GitHub repository:<br/>
-git clone git@github.com:Henry/EuLisp.git
-</li>
-<li>
-"cd" into the <i>EuLisp-xxx</i> or <i>EuLisp</i> directory
+"cd" into the <i>EuLisp</i> directory
 </li>
 <li>
 Run <br/>
@@ -277,12 +273,14 @@ necessary and re-run<br/>
 </li>
 <li>
 Run <br/>
-<i>make</i> <br/>
+<i>make</i>
+</li>
+<li>
 If you want to use shared libraries (which we really recommend on Linux,
 FreeBSD, Solaris and IRIX), run <br/>
 <i>make shared</i> <br/>
-and add the directory <i>&hellip;/EuLisp-xxx/Lib.${ARCH}</i> to the environment variable
-<code>$LD_LIBRARY_PATH</code> (see <i>./makeso.Path</i>).
+and add the directory <i>&hellip;/EuLisp/Lib.${ARCH}</i> to the environment variable
+<code>$LD_LIBRARY_PATH</code>.
 </li>
 <li>
 You should now be able to run the script <br/>
@@ -306,9 +304,9 @@ Run <br/>
 to see the compiler options.
 </li>
 <li>
-Run <br/>
+In directory <i>Examples/Misc</i> run <br/>
 <i>Bin.${ARCH}/youtoo.sh fact -l level1</i> <br/>
-to compile module fact in (built-in) load directory Misc into a stand-alone
+to compile module fact into a stand-alone
 executable. With shared libraries the executable should be less the 40K.
 </li>
 <li>
@@ -379,7 +377,7 @@ can be switched off with <code>-no_recompile</code>.
 
 </li>
 <li id="sec-7.7">Standard C foreign-functions <br/>
-in <i>Vm/eulisp.h</i>
+in <i>Youtoo/include/eulisp.h</i>
 
 <ul>
 <li id="sec-7.7.1">Data conversion from EuLisp to C: <br/>
@@ -558,7 +556,7 @@ is un-hygienic.
 
 </li>
 <li id="sec-7.10">EuLisp Scripts <br/>
-Use <i>#!</i>../youtoo -script/ to write EuLisp scripts (see
+Use <i>#!</i>../youtoo &ndash;script/ to write EuLisp scripts (see
 <i>Examples/Misc/script.em</i>).
 
 </li>
@@ -587,40 +585,40 @@ The current set of supported bindings in Youtoo are in the file
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Extras </h2>
+<h2 id="sec-8"><span class="section-number-2">8</span> Modules </h2>
 <div class="outline-text-2" id="text-8">
 
 <ul>
-<li id="sec-8.1"><a href="Extras/Bignum/README.html">GNU Bignum</a>: <i>Extras/Bignum</i> <br/>
+<li id="sec-8.1"><a href="Modules/Bignum/README.html">GNU Bignum</a>: <i>Modules/Bignum</i> <br/>
 Danius Michaelides wrote a port to the GNU bignum library (gmp).
 </li>
-<li id="sec-8.2"><a href="Extras/MPI/README.html">MPI</a>: <i>Extras/MPI</i> <br/>
+<li id="sec-8.2"><a href="Modules/MPI/README.html">MPI</a>: <i>Modules/MPI</i> <br/>
 
 </li>
-<li id="sec-8.3"><a href="Extras/TclTk/README.html">Tcl/Tk</a>: <i>Extras/TclTk</i> <br/>
+<li id="sec-8.3"><a href="Modules/TclTk/README.html">Tcl/Tk</a>: <i>Modules/TclTk</i> <br/>
 
 </li>
-<li id="sec-8.4"><a href="Extras/Fthread/README.html">Foreign thread libraries</a>: <i>Extras/Fthread</i> <br/>
+<li id="sec-8.4"><a href="Modules/Fthread/README.html">Foreign thread libraries</a>: <i>Modules/Fthread</i> <br/>
 
 </li>
-<li id="sec-8.5"><a href="Extras/Scheme/README.html">Scheme</a>: <i>Extras/Scheme</i> <br/>
-Modules <i>./Extras/Scheme/scheme0.em</i> and <i>./Extras/Scheme/scheme.em</i>
+<li id="sec-8.5"><a href="Modules/Scheme/README.html">Scheme</a>: <i>Modules/Scheme</i> <br/>
+Modules <i>./Modules/Scheme/scheme0.em</i> and <i>./Modules/Scheme/scheme.em</i>
 provide support for writing Scheme programs with Youtoo.
 
 </li>
-<li id="sec-8.6"><a href="Extras/Matching/README.html">Matching</a>: <i>Extras/Match</i> <br/>
+<li id="sec-8.6"><a href="Modules/Matching/README.html">Matching</a>: <i>Modules/Match</i> <br/>
 Modulized version of match-slib.scm badly hacked for EuLisp.
 
 </li>
-<li id="sec-8.7"><a href="Extras/OS/README.html">Object serialisation</a>: <i>Extras/OS</i> <br/>
+<li id="sec-8.7"><a href="Modules/OS/README.html">Object serialisation</a>: <i>Modules/OS</i> <br/>
 includes support for closures and threads.
 
 </li>
-<li id="sec-8.8"><a href="Extras/OPS5/README.html">OPS5 rule-based system</a> : <i>Extras/OPS5</i> <br/>
+<li id="sec-8.8"><a href="Modules/OPS5/README.html">OPS5 rule-based system</a> : <i>Modules/OPS5</i> <br/>
 An object-oriented version of the OPS5 rule-based system.
 
 </li>
-<li id="sec-8.9"><a href="Extras/Pipe/README.html">Pipes and forked child processes</a>:  <i>Extras/Pipe</i> <br/>
+<li id="sec-8.9"><a href="Modules/Pipe/README.html">Pipes and forked child processes</a>:  <i>Modules/Pipe</i> <br/>
 Thanks to Rob Simmons there is support for pipes to forked child
 processes.
 
@@ -713,7 +711,7 @@ EuLisp-1.0.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-05-04 12:08:36 BST</p>
+<p class="date"> Date: 2010-06-10 22:12:50 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>
