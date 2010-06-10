@@ -1,0 +1,2387 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title><b>Using EuXLisp</b> (Formally Euscheme)</title>
+<meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2010-06-10 10:11:51 BST"/>
+<meta name="author" content="of original Euscheme notes Russell Bradford"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+
+<h1 class="title"><b>Using EuXLisp</b> (Formally Euscheme)</h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 EuXLisp index </a></li>
+<li><a href="#sec-2">2 Introduction </a></li>
+<li><a href="#sec-3">3 Running EuXLisp </a></li>
+<li><a href="#sec-4">4 Constants </a></li>
+<li><a href="#sec-5">5 Lists and Vectors </a></li>
+<li><a href="#sec-6">6 Expressions </a></li>
+<li><a href="#sec-7">7 Conditionals </a></li>
+<li><a href="#sec-8">8 Assignment </a></li>
+<li><a href="#sec-9">9 Defining Functions </a></li>
+<li><a href="#sec-10">10 Arithmetic </a></li>
+<li><a href="#sec-11">11 Modules </a></li>
+<li><a href="#sec-12">12 Errors and the Debug Loop </a></li>
+<li><a href="#sec-13">13 Classes and Generic Functions </a></li>
+<li><a href="#sec-14">14 Threads </a></li>
+<li><a href="#sec-15">15 Input and Output </a></li>
+<li><a href="#sec-16">16 Macros </a></li>
+<li><a href="#sec-17">17 Miscellany </a></li>
+<li><a href="#sec-18">18 Example Modules </a></li>
+<li><a href="#sec-19">19 EuXLisp functions </a></li>
+<li><a href="#sec-20">20 Command Line Arguments </a></li>
+<li><a href="#sec-21">21 Original Euscheme notes </a></li>
+<li><a href="#sec-22">22 The latest version of the original Euscheme notes. </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> <a href="../index.html">EuXLisp index</a> </h2>
+<div class="outline-text-2" id="text-1">
+
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Introduction </h2>
+<div class="outline-text-2" id="text-2">
+
+<p>These notes are based on the Euscheme HTML notes by Russell Bradford.  Most of
+the text remains more or less unchanged but reformatted in Org-mode and
+exported as HTML and PDF.  Also some changes have been made and continue to be
+made to keep this document consistent with the evolving EuLisp definition and
+EuXLisp implementation.
+</p>
+<p>
+EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small and
+compact Lisp, but nevertheless has many interesting features, such as modules,
+an object system, and multithreading.  EuLisp Level 1 has extra features, the
+most notable being a full metaobject system which is implemented in Youtoo not
+in EuXLisp.  These are a few notes on the use of EuLisp in general and EuXLisp
+in particular and concentrate on those things unique to EuLisp.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Running EuXLisp </h2>
+<div class="outline-text-2" id="text-3">
+
+<p>Type <i>euxlisp</i> which will print the banner and prompt:
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #000000;">EuXLisp</span> (<span style="color: #0000ff; font-weight: bold;">formally</span> <span style="color: #000000;">EuScheme</span>) - <span style="color: #000000;">Version</span> 0.36.2
+
+user&gt;
+</pre>
+
+
+<p>
+where the final line is the prompt.  EuXLisp uses the usual read-eval-print
+cycle of interactive Lisps: type something, it will be evaluated, and the
+result printed.  To exit, use
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(exit</span>)
+</pre>
+
+
+
+<p>
+and (usually) ^D will work, too.
+</p>
+<ul>
+<li id="sec-3.1"><a href="./euxlisp.html">EuXLisp man page (HTML)</a> <br/>
+</li>
+<li id="sec-3.2"><a href="./euxlisp.1">EuXLisp man page (ASCII)</a> <br/>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Constants </h2>
+<div class="outline-text-2" id="text-4">
+
+<p>There are the usual self-evaluating bits and pieces:
+</p><ul>
+<li>
+strings: in double quotes "hello"
+</li>
+<li>
+numbers: integers and floating point <code>1234</code> and <code>3.1415</code>
+</li>
+<li>
+characters: preceded by <code>#\</code> as in <code>#\c</code> for the character 'c'
+</li>
+<li>
+vectors: delimited by <code>#(</code> and <code>)</code> as in <code>#(1 a (3))</code> which is a vector of
+length 3, containing an integer, a symbol, and a list.
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Lists and Vectors </h2>
+<div class="outline-text-2" id="text-5">
+
+<p>Lists are created with the usual <code>cons</code>, <code>list</code> and quoted forms '(1 2 3).
+Use <code>car</code> and <code>cdr</code> to access the elements.
+</p>
+<p>
+A vector is created by the function <code>make-vector</code> as in
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(make-vector</span> 4)
+</pre>
+
+
+<p>
+which creates a vector of length 4, indexed from 0 to 3, all elements
+initialised to be ()s.  In fact, make-vector can take a second argument
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(make-vector</span> 4 0)
+</pre>
+
+
+<p>
+which creates a vector as before, with all elements initialised to 0.
+</p>
+<p>
+To access a vector element use <code>(vector-ref vec index)</code>; to update use
+<code>((setter vector-ref) vec index newval)</code>.  See below for details about the
+setter function.
+</p>
+<p>
+Take care with the creation of vectors: <code>(make-vector 3 #(0 0 0))</code> will create
+a vector of three slots, all initialised to the same <code>eq</code> value.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Expressions </h2>
+<div class="outline-text-2" id="text-6">
+
+<p>As is usual, anything that is not a constant is an expression to be evaluated,
+and those things marked by a quote are deemed to be constant.  Thus
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(+</span> 1 2)
+</pre>
+
+
+<p>
+is an expression to be evaluated, while
+</p>
+
+
+<pre class="src src-eulisp">'<span style="color: #0000ff; font-weight: bold;">(+</span> 1 2)
+</pre>
+
+
+
+<p>
+is a constant list of 3 elements (modifying constant lists has an undefined
+effect, so it's best not to do so).  EuLisp has both progn to collect together
+several expressions into a single expression, and let for the declaration of
+local variables.
+</p>
+
+
+<pre class="src src-eulisp">(progn
+  expr
+  expr
+  ...
+)
+</pre>
+
+
+<p>
+and
+</p>
+
+
+<pre class="src src-eulisp">(let ((<span style="color: #0000ff; font-weight: bold;">var</span> val)
+      (<span style="color: #0000ff; font-weight: bold;">var</span> val)
+      ...)
+  expr
+  expr
+  ...
+)
+</pre>
+
+
+<p>
+(Semantics: evaluate all the vals first, then make the bindings to the
+corresponding vals.  Thus the vals cannot refer to the vars.  Use let*
+</p>
+
+
+<pre class="src src-eulisp">(let* ((<span style="color: #0000ff; font-weight: bold;">var1</span> val1)
+       (<span style="color: #0000ff; font-weight: bold;">var2</span> val2)
+       ...)
+  ...)
+</pre>
+
+
+<p>
+with semantics of evaluate <code>val1</code>, bind to <code>var1</code>, evaluate <code>val2</code>, bind to
+<code>var2</code>, etc., if you need to refer back to previous values.)
+</p>
+<p>
+The values of these expressions are the values of their last exprs.  Named
+<code>let</code> and <code>let*</code> are also supported.
+</p>
+<p>
+Numbers have the usual syntax: <code>123</code>, <code>1.23</code> and <code>1.2e4</code>.  Additionally, you
+can enter integers in base 2: <code>#b101010</code>, base 8: <code>#o7654</code>, base 16: <code>#x12ab</code>,
+and any other base up to 36: <code>#23r12gd</code> for a base 23 integer.
+</p>
+<p>
+The full syntax of symbols is somewhat tricky, but "alphanumerics, starting
+with a letter" is certainly OK.  Dodgy characters, such as space, or a leading
+digit can be escaped with a <code>\</code>.  A multiple character escape is introduced
+and ended by <code>|</code>.  Within the confines of these delimiters any character is
+fine, except that <code>\|</code> is interpreted as a literal <code>|</code>, and <code>\\</code> as a literal
+<code>\</code>.
+</p>
+<p>
+All the following are the same symbol:
+</p>
+
+
+<pre class="src src-eulisp">\1\ 23
+|1 |23
+|1 23|
+|1 |2|3|
+|1 |2\3
+\1| |2||3
+</pre>
+
+
+<p>
+Their canonical form is <code>|1 23|</code>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Conditionals </h2>
+<div class="outline-text-2" id="text-7">
+
+<p>EuLisp has the usual <code>(if boolexpr trueexpr falseexpr)</code> (always with both
+trueexpr and falseexpr), and the <code>cond</code> form.  The single false value in
+EuLisp is (): anything else is deemed to be true.  <code>t</code> is bound to the
+symbol <code>t</code>, providing a convenient canonical true value.  Additional
+conditional forms include
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(when</span> boolexpr
+   expr
+   expr
+   ...
+)
+</pre>
+
+
+<p>
+where the exprs are evaluated when the condition is true; and
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(unless</span> boolexpr
+   expr
+   expr
+   ...
+)
+</pre>
+
+
+<p>
+where the exprs are evaluated when the condition is false.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Assignment </h2>
+<div class="outline-text-2" id="text-8">
+
+<p><code>setq</code> as usual:
+</p>
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">setq</span> foo 2)
+</pre>
+
+
+
+<p>
+It's also good to define module-local variables:
+</p>
+
+
+<pre class="src src-eulisp">(deflocal <span style="color: #0000ff;">foo</span> 2)
+</pre>
+
+
+<p>
+You can omit the initial value if you want.  The <code>deflocal</code> form should only
+be used at the top level (i.e., never inside a function definition or a <code>let</code>).
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Defining Functions </h2>
+<div class="outline-text-2" id="text-9">
+
+<p>Here we use defun.
+</p>
+
+
+<pre class="src src-eulisp">(defun <span style="color: #0000ff; font-weight: bold;">len</span> (<span style="color: #0000ff; font-weight: bold;">l</span>)
+  (if <span style="color: #0000ff; font-weight: bold;">(null</span> l)
+      0
+      <span style="color: #0000ff; font-weight: bold;">(+</span> 1 (<span style="color: #0000ff; font-weight: bold;">len</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> l)))))
+</pre>
+
+
+<p>
+EuLisp is fully tail-recursive, so a function written in a tail-recursive way
+uses no stack:
+</p>
+
+
+<pre class="src src-eulisp">(defun <span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">n</span>)
+  <span style="color: #0000ff; font-weight: bold;">(print</span> n)
+  (<span style="color: #0000ff; font-weight: bold;">foo</span> <span style="color: #0000ff; font-weight: bold;">(+</span> n 1)))
+</pre>
+
+
+<p>
+will run forever.
+</p>
+<p>
+Variable arity functions are available, too:
+</p>
+
+
+<pre class="src src-eulisp">(defun <span style="color: #0000ff; font-weight: bold;">bar</span> (<span style="color: #0000ff; font-weight: bold;">a</span> b .  c)
+  <span style="color: #0000ff; font-weight: bold;">(list</span> a b c))
+</pre>
+
+
+
+<p>
+can take 2 or more arguments.  The first two arguments are bounds to a and b
+as usual, the rest are made into a list which is bound to c.  Thus <code>(bar 1 2 3   4 5)</code> prints <code>(1 2 (3 4 5))</code>, and <code>(bar 99 100)</code> prints <code>(99 100 ())</code>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Arithmetic </h2>
+<div class="outline-text-2" id="text-10">
+
+<p>All the usual stuff here.  Functions <code>+</code>, <code>-</code>, <code>*</code> and <code>/</code>, <code>abs</code>, <code>sin</code>,
+<code>exp</code> and so on.  Use <code>(pow a b)</code> to raise <code>a</code> to power <code>b</code>.  Additionally,
+the basic arithmetic ops have variable arity:
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(+</span>)         -&gt; 0
+<span style="color: #0000ff; font-weight: bold;">(+</span> 1)       -&gt; 1
+<span style="color: #0000ff; font-weight: bold;">(+</span> 1 2)     -&gt; 3
+<span style="color: #0000ff; font-weight: bold;">(+</span> 1 2 3)   -&gt; 6
+<span style="color: #0000ff; font-weight: bold;">(-</span> 1)       -&gt; -1
+<span style="color: #0000ff; font-weight: bold;">(*</span> 1 2 3 4) -&gt; 24
+</pre>
+
+
+
+<p>
+and so on.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Modules </h2>
+<div class="outline-text-2" id="text-11">
+
+<p>Now for something a little different.  The basic unit of a program in EuLisp
+is the module.  Modules provide a way of fixing the global namespace pollution
+problem: each module has its very own namespace.  A module can import names
+from other modules, and can export names too.
+</p>
+<p>
+Here is a simple module:
+</p>
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">one</span>
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+
+  (defun <span style="color: #0000ff; font-weight: bold;">foo</span> ...)
+  (defun <span style="color: #0000ff; font-weight: bold;">bar</span> ...)
+  (deflocal <span style="color: #0000ff;">baz</span> ...)
+  ...
+
+  (<span style="color: #0000ff; font-weight: bold;">export</span> foo baz)
+)
+</pre>
+
+
+<p>
+The module one imports from the system module named <code>level0</code>.  This module
+contains all the useful stuff like <code>cons</code>, <code>car</code>, <code>defun</code>, <code>+</code> and so on.  In
+fact, it's generally a good idea to import the <code>level0</code> module, otherwise you
+can't actually do anything.
+</p>
+<p>
+In module one we define a few name, like <code>foo</code>, <code>bar</code> and <code>baz</code>, and export
+<code>foo</code> and <code>baz</code>.  Now any module that imports one can access <code>foo</code> and <code>baz</code>,
+but bar is completely hidden from everyone.
+</p>
+<p>
+If now, we have
+</p>
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">two</span>
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span> one))
+
+  ...
+)
+</pre>
+
+
+<p>
+the module two imports one (and <code>level0</code>), so two can refer to <code>foo</code> and <code>baz</code>
+from one.  If two uses a name <code>bar</code>, it is its own <code>bar</code>, and has nothing to
+do with the <code>bar</code> in one.
+</p>
+<ul>
+<li id="sec-11.1">Modules in EuXLisp <br/>
+EuXLisp requires each module to be in a file of its own: thus one should be
+in a file named one.em (for EuLisp module), and two in <i>two.em</i>.  To enter a
+module, use
+
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">!&gt;</span> one)
+</pre>
+
+
+<p>
+which will load one if it is not already loaded, and will set the current
+module to be one.  This is indicated by the prompt
+</p>
+
+
+<pre class="src src-eulisp">user&gt; (<span style="color: #0000ff; font-weight: bold;">!&gt;</span> one)
+&lt;reading one.em&gt;
+&lt;read one.em&gt;
+<span style="color: #0000ff;">&lt;one...done&gt;</span>
+#t
+one&gt;
+</pre>
+
+
+<p>
+Now the read-eval-print loop acts on bindings in the one module.  Use <code>(!&gt;     user)</code> to switch back to the original module.
+</p>
+<p>
+To re-load a module (after, say, changing the file) use <code>(!&gt;&gt; one)</code>.
+</p>
+<p>
+Modules can rename and filter on <code>import</code> (not yet on <code>export</code>).  Use
+level0.em for all the basic stuff, e.g.,
+</p>
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">mymod</span>
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+  ...
+  )
+</pre>
+
+
+<p>
+If you <code>import</code> no modules, you get nothing&mdash;not even special forms!  See
+<i>Modules/rename.em</i>.
+</p>
+<p>
+Look at directory <i>Modules</i> for a few examples (the basic EuLisp functionality
+in the modules in <i>EuXLisp/Boot</i> are written the scheme-like syntax of
+xscheme).
+</p>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Errors and the Debug Loop </h2>
+<div class="outline-text-2" id="text-12">
+
+<p>When you make an error, EuLisp will call an error handler.  The full use of
+error handlers is too tricky for an introductory set of notes, so we shall
+rely on the default (built-in) handler.  In EuXLisp an error puts the system
+into a simple debugging loop:
+</p>
+
+
+<pre class="src src-eulisp">user&gt; qwerty
+<span style="color: #000000;">Continuable</span> error---calling default handler:
+<span style="color: #000000;">Condition</span> class is #&lt;class unbound-error&gt;
+message:        <span style="color: #00ff00;">"variable unbound in module 'user'"</span>
+value:          qwerty
+
+<span style="color: #000000;">Debug</span> loop.  <span style="color: #000000;">Type</span> help: for help
+<span style="color: #000000;">Broken</span> at #&lt;Code #1008a768&gt;
+
+<span style="color: #000000;">DEBUG&gt;</span>
+</pre>
+
+
+<p>
+There is a lot of information here, and you should look carefully at what
+EuXLisp is telling you.
+</p>
+<p>
+In this case, the call of error is an 'unbound-error', i.e., reference to an
+undefined variable.  The message gives an English description of the error,
+while the value fills in some details, so it is the variable named qwerty that
+is at fault.
+</p>
+<p>
+Another error:
+</p>
+
+
+<pre class="src src-eulisp">user&gt; <span style="color: #0000ff; font-weight: bold;">(car</span> 5)
+<span style="color: #000000;">Continuable</span> error---calling default handler:
+<span style="color: #000000;">Condition</span> class is #&lt;class bad-type&gt;
+message:        <span style="color: #00ff00;">"incorrect type in car"</span>
+value:          5
+expected-type:  #&lt;class cons&gt;
+
+<span style="color: #000000;">Debug</span> loop.  <span style="color: #000000;">Type</span> help: for help
+<span style="color: #000000;">Broken</span> at #&lt;Code #100820a8&gt;
+
+<span style="color: #000000;">DEBUG&gt;</span>
+</pre>
+
+
+<p>
+This is a 'bad-type' error, where the function car was expecting a different
+type of argument; it got a 5, where it was expecting something of class cons,
+i.e., some sort of list.
+</p>
+<p>
+The prompt becomes <code>DEBUG&gt;</code> to indicate we are in the debug loop.  In this
+loop things act as normal, except we have some additional functions to play
+with.  Type help: to get
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #000000;">Debug</span> loop.
+top:                                return to top level
+resume:  or  (<span style="color: #0000ff; font-weight: bold;">resume:</span> val)          resume from <span style="font-weight: bold;">error</span>
+bt:                                 backtrace
+locals:                             local variables
+cond:                               current condition
+up:  or  (<span style="color: #0000ff; font-weight: bold;">up:</span> n)                    up one or n frames
+down:  or  (<span style="color: #0000ff; font-weight: bold;">down:</span> n)                down one or n frames
+where:                              current function
+</pre>
+
+
+<p>
+The most useful of these is top:, which clears up the error and returns us to
+the top-level read-eval-print loop; and bt: which gives us a backtrace, i.e.,
+a list of the function calls and their arguments that took us to where we are
+now.  (Note that, as EuLisp is tail recursive, EuXLisp does not save all the
+return addresses of the functions that it travels through, so the backtrace
+may omit certain intermediate function calls.)
+</p>
+<p>
+In a debug loop ^D will act as resume:, which is to try to carry on from the
+point of error.  Debug loops can be nested.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Classes and Generic Functions </h2>
+<div class="outline-text-2" id="text-13">
+
+<p>EuLisp has a full object system.  At Level 0, it is a simple, non-reflective
+system, comparable to C++'s class system.  Every object in EuLisp has a class,
+which is itself a first-class object: this means that classes are supported at
+the same level as any other object in the system, and can be created, passed
+to functions, returned from functions, and so on.  For example, the integer <code>1</code>
+has class <code>&lt;integer&gt;</code> (or rather, has a class with name <code>&lt;integer&gt;</code>).
+</p>
+<p>
+In fact, EuXLisp has (class-of 1) to be <code>&lt;fpi&gt;</code> (for fixed point integer),
+which is a subclass of <code>&lt;integer&gt;</code>.
+</p>
+<p>
+Classes are fully-fledged objects, so they have a class, too
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(class-of</span> <span style="color: #0000ff;">&lt;integer&gt;</span>) -&gt; #&lt;class class&gt;
+</pre>
+
+
+<p>
+the print representation of the class <code>&lt;class&gt;</code>.  Finally, (class-of
+<code>&lt;class&gt;</code>) is <code>&lt;class&gt;</code> itself, or else we would need an infinite tower of
+classes.
+</p>
+<p>
+To make an instance of a class, use make
+</p>
+
+
+<pre class="src src-eulisp">(make <span style="color: #0000ff;">&lt;cons&gt;</span> car: 1 cdr: 2) -&gt; (<span style="color: #0000ff; font-weight: bold;">1</span> .  2)
+</pre>
+
+
+<p>
+The keywords (symbols whose names end with colons) indicate how to fill in the
+various slots of the instance of the class.  The keywords can be in any order,
+and can be omitted if not necessary: though some classes have slots with
+required keywords.  This means that instances of such classes must have
+certain information passed to make in order to succeed.  Some classes are
+abstract, and you cannot make instances of them.  They are there purely for
+other classes to inherit from.  The class <code>&lt;list&gt;</code> is abstract, while its
+subclass <code>&lt;cons&gt;</code> is concrete.
+</p>
+<p>
+It is simple to create new classes by the use of defclass.
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(defclass</span> <span style="color: #0000ff;">&lt;rat&gt;</span> ()
+   ((<span style="color: #0000ff; font-weight: bold;">num</span> keyword: num:
+         default: 0
+         accessor: num)
+    (<span style="color: #0000ff; font-weight: bold;">den</span> keyword: den:
+         default: 1
+         accessor: den))
+    predicate: rat?
+    constructor: (<span style="color: #0000ff; font-weight: bold;">rat</span> num: den:))
+</pre>
+
+
+<p>
+There are many parts to explain.
+</p>
+<p>
+This form defines a new class named <code>&lt;rat&gt;</code>.  Classes in EuLisp are
+conventionally noted by the use of angle brackets <code>&lt;&gt;</code>, but they are just
+normal names.  The () next is the list of classes for <code>&lt;rat&gt;</code> to inherit
+from.  In EuLisp Level 0, there is only single inheritance, so this should be
+a list of at most one class.  Any empty list indicates some suitable default
+super-class.
+</p>
+<p>
+Next is a list of slot descriptions.  Each has a slot name first, then a list
+of slot options.  The slot options are identified by keywords which can come
+in any order, and can be omitted it you don't want them.
+</p>
+<p>
+The slot options are:
+</p><ul>
+<li>
+<code>keyword:</code> a keyword to use in a make of the class instance.
+</li>
+<li>
+<code>default:</code> a default value to put in the slot if a value is not passed via
+the keyword.
+</li>
+<li>
+<code>accessor:</code> a name that will be bound to functions to read and write the
+slot.  In the above example, num will name a function to read the num slot
+in an instance of <code>&lt;rat&gt;</code>.  Similarly, <code>(setter num)</code> will be a function to
+write to such a slot.  See setters.
+</li>
+<li>
+<code>reader:</code> a name for a slot reader.
+</li>
+<li>
+<code>writer:</code> a name for a slot writer.
+</li>
+<li>
+<code>requiredp:</code> use <code>requiredp: t</code> to indicate a required slot.  This slot must
+have a =keyword: keyword=!
+
+</li>
+</ul>
+
+<p>The <code>accessor:</code>, <code>reader:</code> and <code>writer:</code> options can be repeated as many times
+as you wish with different names.
+</p>
+<p>
+Next come the class options.  Again, in any order or omitted.
+</p>
+<ul>
+<li>
+<code>predicate:</code> a symbol to name a function that will return true on an
+instance of the class, and false on all other objects.
+</li>
+<li>
+<code>constructor:</code> a way to name a function to make an instance of the class.
+In this case, rat will name a function of two arguments that makes an
+instance of <code>&lt;rat&gt;</code>.  The first argument will be given to the <code>num:</code> keyword,
+the second to the <code>den:</code>.  This is equivalent to defining
+
+
+
+<pre class="src src-eulisp">(defun <span style="color: #0000ff; font-weight: bold;">rat</span> (<span style="color: #0000ff; font-weight: bold;">n</span> d)
+  (make <span style="color: #0000ff;">&lt;rat&gt;</span> num: n den: d))
+</pre>
+
+
+<p>
+As usual, you can reorder or leave out bits as you feel.
+</p></li>
+<li>
+<code>abstractp: t</code> to indicate that this class is abstract, and no direct
+instances can be made.
+
+</li>
+</ul>
+
+<p>The class options <code>predicate:</code> and <code>constructor:</code> can be repeated.
+</p>
+<p>
+To see all the currently defined classes in EuXLisp use <code>(class-hierarchy)</code>.
+Other useful functions include class-superclasses, class-subclasses and
+class-slots.
+</p>
+<ul>
+<li id="sec-13.1">Generic Functions <br/>
+Generic functions are (again) first-class objects in EuLisp, constructed by
+<code>defgeneric</code>.  Methods are added to them by defmethod (unlike some other
+systems, a generic function must be created by defgeneric before <code>defmethod</code>
+will work.)
+
+
+
+<pre class="src src-eulisp">(defgeneric <span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">a</span> b))
+
+(defmethod <span style="color: #0000ff; font-weight: bold;">foo</span> ((<span style="color: #0000ff; font-weight: bold;">a</span> <span style="color: #0000ff;">&lt;integer&gt;</span>) (<span style="color: #0000ff; font-weight: bold;">b</span> <span style="color: #0000ff;">&lt;integer&gt;</span>))
+  <span style="color: #0000ff; font-weight: bold;">(list</span> 'int 'int))
+
+(defmethod <span style="color: #0000ff; font-weight: bold;">foo</span> ((<span style="color: #0000ff; font-weight: bold;">x</span> <span style="color: #0000ff;">&lt;float&gt;</span>) (<span style="color: #0000ff; font-weight: bold;">y</span> <span style="color: #0000ff;">&lt;float&gt;</span>))
+  <span style="color: #0000ff; font-weight: bold;">(list</span> 'float 'float))
+</pre>
+
+
+<p>
+This defines a generic of two arguments, and two methods.  So
+</p>
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">foo</span> 4 5)     -&gt; (<span style="color: #0000ff; font-weight: bold;">int</span> int)
+(<span style="color: #0000ff; font-weight: bold;">foo</span> 1.0 2.0) -&gt; (<span style="color: #0000ff; font-weight: bold;">float</span> float)
+(<span style="color: #0000ff; font-weight: bold;">foo</span> 2 2.0)   -&gt; <span style="font-weight: bold;">error</span>, <span style="color: #00ff00;">"no applicable methods"</span>
+</pre>
+
+
+<p>
+The methods discriminate off all the arguments, working left to right.
+Adding another method
+</p>
+
+
+<pre class="src src-eulisp">(defmethod <span style="color: #0000ff; font-weight: bold;">foo</span> ((<span style="color: #0000ff; font-weight: bold;">n</span> <span style="color: #0000ff;">&lt;number&gt;</span>) (<span style="color: #0000ff; font-weight: bold;">m</span> <span style="color: #0000ff;">&lt;number&gt;</span>))
+  <span style="color: #0000ff; font-weight: bold;">(list</span> 'num 'num))
+</pre>
+
+
+<p>
+we get <code>(foo 2 2.0) -&gt; (num num)</code>.  Generally the most specific method for a
+given set of arguments is the method that is executed in a generic call.
+The next most specific method can be invoked by using <code>(call-next-method)</code>
+in the body of the current method.
+</p>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Threads </h2>
+<div class="outline-text-2" id="text-14">
+
+<p>EuLisp supports multiple threaded programming by supplying some basic thread
+primitives.
+</p>
+<p>
+To make a thread use
+</p>
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">make-thread</span> fn)
+</pre>
+
+
+<p>
+which returns a thread object (another first-class object).  The fn is the
+function that the thread will start executing when it and when starts running.
+</p>
+<p>
+A thread will not run until it is started
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(thread-start</span> thr arg arg ...)
+</pre>
+
+
+<p>
+This function takes a thread thr and starts executing the function <code>fn</code> (from
+<code>make-thread</code>) on the arguments <code>arg</code>.  That is, it starts executing <code>(fn arg   arg ...)</code>.
+</p>
+<p>
+Or it would start executing the thread if there were enough processors to do
+so.  As is most likely, the thread is simply marked as ready to run whenever
+the resource is available.  The EuLisp model requires the programmer to write
+in such a manner that does not presume any particular number of processors are
+available.  Even if there is just one processor, the program should be written
+to work.  To aid this, there is the function
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(thread-reschedule</span>)
+</pre>
+
+
+<p>
+which will suspend the current thread, and allow another to run in its place.
+If there are enough processors so that all threads are running, then
+thread-reschedule could have no effect at all.
+</p>
+<p>
+An single-threaded implementation such as EuXLisp requires a sprinkling of
+thread-reschedules for a parallel program to work.
+</p>
+<p>
+Threads are often used for their effect, but they can also return a value.
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(thread-value</span> thr)
+</pre>
+
+
+<p>
+will suspend the calling thread (and allow another to run in its place) until
+the thread thr returns a value (and returns what the thr returned).  A thread
+can return a value simply by returning from its initial function (<code>fn</code>,
+above).
+</p>
+<ul>
+<li id="sec-14.1">Semaphores <br/>
+EuLisp provides simple binary semaphores, named locks, with functions
+<code>make-lock</code> to make one, lock to gain a semaphore, and unlock to release.
+
+<p>
+Locking a locked lock will suspend the calling thread (and allow another to
+run) until some other thread releases the lock.
+</p>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> Input and Output </h2>
+<div class="outline-text-2" id="text-15">
+
+<p>EuLisp is still a little undecided as to how i/o is going to turn out, so for
+the meantime EuXLisp uses Scheme's functions.
+</p><ul>
+<li>
+<code>read</code> to read a Lisp expression.
+</li>
+<li>
+<code>write</code> output in a way that can be re-read if possible.  Thus, for example,
+strings are quoted.
+</li>
+<li>
+<code>prin</code> output in a human-friendly manner.  Strings and such are not quoted.
+Compare
+
+</li>
+</ul>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(print</span> <span style="color: #00ff00;">"asd"</span>)   prints: asd
+<span style="color: #0000ff; font-weight: bold;">(write</span> <span style="color: #00ff00;">"asd"</span>)   prints: <span style="color: #00ff00;">"asd"</span>
+</pre>
+
+
+<ul>
+<li>
+<code>print</code> as <code>prin</code>, with a newline.
+</li>
+<li>
+<code>newline</code> output a newline.
+
+</li>
+</ul>
+
+<p>All of the above take an optional extra argument, which is a stream to print
+on.  This defaults to the standard output.
+</p>
+<p>
+For stream manipulation:
+</p><ul>
+<li>
+open-input-file takes a string, and opens and returns a corresponding
+stream for input.  Returns () if not such file exists.
+</li>
+<li>
+open-output-file creates a file if it didn't already exist.
+</li>
+<li>
+open-update-file opens for append.
+</li>
+<li>
+get-file-position and <code>(setter get-file-position)</code> move the file pointer in
+a file opened for update.
+</li>
+<li>
+close-port closes an open stream.
+
+</li>
+<li id="sec-15.1">Format <br/>
+A more complicated printing function is <code>format</code>, which is somewhat akin to
+C's <code>printf</code>.
+
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(format</span> stream format-string arg arg ...)
+</pre>
+
+
+<p>
+If stream is <code>t</code>, <code>format</code> prints to the standard output.  If stream is
+(), <code>format</code> returns the formatted output as a string.  Otherwise stream
+is a file stream.
+</p>
+<p>
+The format string is copied to the output, except that <code>~</code> marks an escape
+(like C's <code>%</code>):
+</p><ul>
+<li>
+<code>~a</code> output the next arg using <code>prin</code>
+</li>
+<li>
+<code>~s</code> output the next arg using <code>write</code>
+</li>
+<li>
+<code>~%</code> output a newline
+</li>
+<li>
+<code>~~</code> output a <code>~</code>
+</li>
+<li>
+<code>~c</code> output a character
+</li>
+<li>
+<code>~d</code> output an integer
+</li>
+<li>
+<code>~e</code> <code>~f</code>, <code>~g</code> floating point formats
+</li>
+<li>
+<code>~t</code> output a tab
+
+</li>
+</ul>
+
+<p>There are other escapes to write integers in other bases, output new pages,
+and so on.
+</p>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> Macros </h2>
+<div class="outline-text-2" id="text-16">
+
+<p>EuLisp employs the usual backquoted template style of macros.
+</p>
+
+
+<pre class="src src-eulisp">(defmacro <span style="color: #0000ff; font-weight: bold;">first</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+  `<span style="color: #0000ff; font-weight: bold;">(car</span> ,x))
+</pre>
+
+
+<p>
+Note that a macro cannot be used in the module where it is defined: a module
+must be fully macroexpanded before it can be compiled.  If you don't know what
+is and what isn't a macro beforehand, it is very difficult to do this.  Thus a
+module containing
+</p>
+
+
+<pre class="src src-eulisp">(defmacro <span style="color: #0000ff; font-weight: bold;">second</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+   `<span style="color: #0000ff; font-weight: bold;">(cadr</span> ,x))
+
+(defun <span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">x</span>) <span style="color: #0000ff; font-weight: bold;">(+</span> 1 (<span style="color: #0000ff; font-weight: bold;">second</span> x)))
+</pre>
+
+
+<p>
+is doomed to failure by this restriction.
+</p>
+<p>
+There is a wrinkle in the way that macros interact with modules: suppose a
+macro expands into something that refers to bindings that are not imported
+into the current module?
+</p>
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">one</span>
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+
+  (defmacro <span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+     `<span style="color: #0000ff; font-weight: bold;">(car</span> (<span style="color: #0000ff; font-weight: bold;">bar</span> ,x)))
+
+  (defun <span style="color: #0000ff; font-weight: bold;">bar</span> (<span style="color: #0000ff; font-weight: bold;">a</span>) ...)
+
+  (<span style="color: #0000ff; font-weight: bold;">export</span> foo)
+)
+</pre>
+
+
+<p>
+Here the module <code>one</code> exports foo only, but <code>foo</code> expands into a reference to
+<code>bar</code>.
+</p>
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">two</span>
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+
+  ...
+  (<span style="color: #0000ff; font-weight: bold;">foo</span> 4)
+  ...
+)
+</pre>
+
+
+<p>
+In the macroexpansion of module <code>two</code>, a reference to bar would appear, but
+bar is not defined in <code>two</code>.  Worse, maybe <code>bar</code> was defined in <code>two</code>: which
+<code>bar</code> does the macroexpanded form refer to? The <code>bar</code> from <code>one</code> or the <code>bar</code>
+from <code>two</code>?
+</p>
+<p>
+The answer is "the right <code>bar</code>", that is that <code>bar</code> in the module of macro
+definition, not the <code>bar</code> in the module of macro use.  EuXLisp takes care of
+all of this transparently for you: essentially every symbol remembers which
+module it was defined in, and always refers back to that module for its value.
+</p>
+<p>
+This provides a simple solution to the "macro hygene" problem that has always
+plagued Lisp macros.
+</p>
+<p>
+Sometimes you do want a symbol to be captured in the module of use: EuXLisp
+provides a facility to allow you to do this.
+</p>
+
+
+<pre class="src src-eulisp">(defmacro <span style="color: #0000ff; font-weight: bold;">while</span> (<span style="color: #0000ff; font-weight: bold;">test</span> .  body)
+  `(let/cc {break}
+     (labels
+       ((<span style="color: #0000ff; font-weight: bold;">loop</span> ()
+          <span style="color: #0000ff; font-weight: bold;">(when</span> ,test
+                ,@body
+                (<span style="color: #0000ff; font-weight: bold;">loop</span>))))
+       (<span style="color: #0000ff; font-weight: bold;">loop</span>))))
+</pre>
+
+
+<p>
+The symbol loop cannot be captured by the code in body, while the symbol break
+is intended to be captured.  The curly braces about the symbol indicates that
+it is to be interpreted as coming from the module of use, not the module of
+definition.  Thus, a reference to break in the body will refer to the binding
+in the <code>let/cc</code>.
+</p>
+<p>
+Notice that <code>(eq 'break '{break}) -&gt; t</code>.  As symbols they are <code>eq</code>, but as
+identifiers they are quite different.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> Miscellany </h2>
+<div class="outline-text-2" id="text-17">
+
+<ul>
+<li id="sec-17.1">Keywords <br/>
+There are keywords (unbindable, unassignable, self-evaluating symbols),
+<i>e.g.</i>,
+
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(defclass</span> foo ()
+  ((<span style="color: #0000ff; font-weight: bold;">a</span> default: 99
+      keyword: a:
+      accessor: foo-a))
+  constructor: (<span style="color: #0000ff; font-weight: bold;">make-foo</span> a:))
+</pre>
+
+
+
+</li>
+<li id="sec-17.2">Comparisons <br/>
+EuLisp has the usual tests for equality:
+<ul>
+<li>
+<code>eq</code> for identity
+</li>
+<li>
+<code>eql</code> for identity integers and characters
+</li>
+<li>
+<code>binary=</code> generic function with methods for most types
+</li>
+<li>
+=== n-ary equality which calls <code>binary=</code> for each pair
+
+</li>
+</ul>
+
+<p>Note that
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(eql</span> 1 1.0)  -&gt; ()
+<span style="color: #0000ff; font-weight: bold;">(=</span> 1 1.0)      -&gt; <span style="font-weight: bold; text-decoration: underline;">t</span>
+</pre>
+
+
+<p>
+There is also the usual <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code>, which are n-ary:
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(&lt;</span> a b c ...)
+</pre>
+
+
+<p>
+returns <code>t</code> when <code>a</code>, <code>b</code>, <code>c</code>, etc., form a strictly increasing sequence.
+Similarly <code>&lt;=</code> for a non-decreasing sequence, and so on.
+</p>
+</li>
+<li id="sec-17.3">Generic Arithmetic <br/>
+The arithmetic operators <code>+</code> and so on are all n-ary, i.e., take a variable
+number of arguments.  Each operator is defined in terms of a binary generic
+function: <code>binary+</code> for <code>+</code>, <code>binary*</code> for <code>*</code>, etc.  The n-ary form is just
+a repeated application of the binary form
+
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(+</span> a b c ...) = ((<span style="color: #0000ff; font-weight: bold;">..</span><span style="color: #0000ff; font-weight: bold;">(binary+</span> <span style="color: #0000ff; font-weight: bold;">(binary+</span> a b) c) ...))
+</pre>
+
+
+<p>
+Methods can be added to the binary operators
+</p>
+
+
+<pre class="src src-eulisp">(defmethod <span style="color: #0000ff; font-weight: bold;">binary+</span> ((<span style="color: #0000ff; font-weight: bold;">a</span> <span style="color: #0000ff;">&lt;symbol&gt;</span>) (<span style="color: #0000ff; font-weight: bold;">b</span> <span style="color: #0000ff;">&lt;symbol&gt;</span>))
+  ...)
+</pre>
+
+
+<p>
+and then you can use <code>+</code> to add symbols: <code>(+ 'a 'b 'c)</code>.
+</p>
+<p>
+There are also generic functions <code>unary-</code> and <code>unary/</code> for the unary <code>(- x)</code>
+and <code>(/ x)</code> (reciprocal).
+</p>
+<p>
+Similarly, the comparators <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code> etc., are all defined in terms of
+the two generic functions <code>binary&lt;</code> and <code>binary=</code>.
+</p>
+</li>
+<li id="sec-17.4">Local Functions <br/>
+Just like <code>let</code> introduces local variables, the <code>labels</code> form can introduce
+local functions.
+
+
+
+<pre class="src src-eulisp">(labels
+  ((<span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">a</span> b)
+     ...  (<span style="color: #0000ff; font-weight: bold;">bar</span> a) ...  )
+   (<span style="color: #0000ff; font-weight: bold;">bar</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+     ...  (<span style="color: #0000ff; font-weight: bold;">foo</span> x (<span style="color: #0000ff; font-weight: bold;">bar</span> x)) ...  ))
+  ...
+  (<span style="color: #0000ff; font-weight: bold;">foo</span> 3 4)
+  ...
+)
+</pre>
+
+
+<p>
+The <code>labels</code> takes a list of function definitions.  They may be self and
+mutually recursive.  These functions may be used within the body of the
+<code>labels</code> just like global functions.  Iterating functions are often most
+conveniently written in terms of <code>labels</code> as the bodies of the function
+definitions can refer to local variables:
+</p>
+
+
+<pre class="src src-eulisp">(let ((<span style="color: #0000ff; font-weight: bold;">a</span> 1))
+  (labels
+    ((<span style="color: #0000ff; font-weight: bold;">addit</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
+       (if <span style="color: #0000ff; font-weight: bold;">(null</span> x)
+           ()
+           <span style="color: #0000ff; font-weight: bold;">(cons</span> <span style="color: #0000ff; font-weight: bold;">(+</span> a <span style="color: #0000ff; font-weight: bold;">(car</span> x)) (<span style="color: #0000ff; font-weight: bold;">addit</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> x))))))
+    (<span style="color: #0000ff; font-weight: bold;">addit</span> '(<span style="color: #0000ff; font-weight: bold;">1</span> 2 3))))
+-&gt;
+(<span style="color: #0000ff; font-weight: bold;">2</span> 3 4)
+</pre>
+
+
+
+</li>
+<li id="sec-17.5">Mapping and Collections <br/>
+There are several functions supplied to iterate along collections.
+Collections include <code>lists</code>, <code>vectors</code>, <code>strings</code>, and <code>tables</code>.
+
+<p>
+The generic function <code>map</code> takes a function and a collection
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(map</span> list '(<span style="color: #0000ff; font-weight: bold;">1</span> 2 3))   -&gt; ((<span style="color: #0000ff; font-weight: bold;">1</span>) (<span style="color: #0000ff; font-weight: bold;">2</span>) (<span style="color: #0000ff; font-weight: bold;">3</span>))
+<span style="color: #0000ff; font-weight: bold;">(map</span> - #(<span style="color: #0000ff; font-weight: bold;">4</span> 5 6))      -&gt; #(<span style="color: #0000ff; font-weight: bold;">-4</span> -5 -6)
+</pre>
+
+
+<p>
+or more than one collection
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(map</span> cons '(<span style="color: #0000ff; font-weight: bold;">a</span> b c) '(<span style="color: #000000;">A</span> <span style="color: #000000;">B</span> <span style="color: #000000;">C</span>))     -&gt; ((<span style="color: #0000ff; font-weight: bold;">a</span> .  <span style="color: #000000;">A</span>) (<span style="color: #0000ff; font-weight: bold;">b</span> .  <span style="color: #000000;">B</span>) (<span style="color: #0000ff; font-weight: bold;">c</span> .  <span style="color: #000000;">C</span>))
+<span style="color: #0000ff; font-weight: bold;">(map</span> + #(<span style="color: #0000ff; font-weight: bold;">1</span> 2 3) #(<span style="color: #0000ff; font-weight: bold;">10</span> 10 10 10))  -&gt; #(<span style="color: #0000ff; font-weight: bold;">11</span> 12 13)
+</pre>
+
+
+<p>
+The mapping stops when any collection runs out.  Even a mixture will work
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(map</span> * '(<span style="color: #0000ff; font-weight: bold;">2</span> 4 6) #(<span style="color: #0000ff; font-weight: bold;">1</span> -1 1))  -&gt; (<span style="color: #0000ff; font-weight: bold;">2</span> -4 6)
+<span style="color: #0000ff; font-weight: bold;">(map</span> * #(<span style="color: #0000ff; font-weight: bold;">2</span> 4 6) '(<span style="color: #0000ff; font-weight: bold;">1</span> -1 1))  -&gt; #(<span style="color: #0000ff; font-weight: bold;">2</span> -4 6)
+</pre>
+
+
+<p>
+The type of collection returned is the same as the first collection
+argument.
+</p>
+<p>
+If you don't need a return value, but are iterating purely for effect, use
+do
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(do</span> print '(<span style="color: #0000ff; font-weight: bold;">1</span> 2 3))
+</pre>
+
+
+<p>
+Other iterators include <code>accumulate</code>
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(accumulate</span> list () #(<span style="color: #0000ff; font-weight: bold;">a</span> b c))      -&gt; (((() a) b) c)
+<span style="color: #0000ff; font-weight: bold;">(accumulate</span> * 1 '(<span style="color: #0000ff; font-weight: bold;">1</span> 2 3 4 5 6 7))  -&gt; 5040
+</pre>
+
+
+
+<p>
+which takes a function, an initial value, an a collection to iterate over.
+</p>
+<p>
+You can find the size of any collection using the function size.  This
+returns the length of a list of string, number of elements of a vector, and
+so on.  It can be reversed by reverse; an element removed by remove
+(non-destructive) or by delete (destructive); find an element by (member elt
+collection).  The last three (remove, delete and member) take an optional
+last argument that is a test for equality: it is this test that is used when
+looking for an element in the collection.  It defaults to eql.
+</p>
+<p>
+The function concatenate can be used to join collections:
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(concatenate</span> '(<span style="color: #0000ff; font-weight: bold;">1</span> 2 3) '(<span style="color: #0000ff; font-weight: bold;">4</span> 5 6))  -&gt; (<span style="color: #0000ff; font-weight: bold;">1</span> 2 3 4 5 6)
+<span style="color: #0000ff; font-weight: bold;">(concatenate</span> <span style="color: #00ff00;">"abc"</span> <span style="color: #00ff00;">"def"</span>)        -&gt; <span style="color: #00ff00;">"abcdef"</span>
+<span style="color: #0000ff; font-weight: bold;">(concatenate</span> '(<span style="color: #0000ff; font-weight: bold;">1</span> 2 3) #(<span style="color: #0000ff; font-weight: bold;">4</span> 5 6))  -&gt; (<span style="color: #0000ff; font-weight: bold;">1</span> 2 3 4 5 6)
+</pre>
+
+
+
+</li>
+<li id="sec-17.6">Loops <br/>
+EuLisp doesn't really need loops, as everything can be written easily in
+terms of tail recursive functions.  However, EuXLisp sneaks in a while loop:
+
+
+
+<pre class="src src-eulisp">(while bool
+   expr
+   expr
+   ...
+)
+</pre>
+
+
+<p>
+which loops while the bool returns <code>true</code>.
+</p>
+</li>
+<li id="sec-17.7">Tables <br/>
+EuLisp uses tables for a general association mechanism.  EuXLisp implements
+tables as hash tables, but in general they could be implemented differently.
+<ul>
+<li>
+<code>make-table</code> returns a table.
+</li>
+<li>
+<code>(table-ref table key)</code> to retrieve a value, <code>((setter table-ref) table       key value)</code> to update.
+</li>
+<li>
+<code>(table-delete key)</code> to remove a value.
+</li>
+<li>
+<code>table-keys</code> to get a list of current keys.
+</li>
+<li>
+<code>table-values</code> to get a list of current values.
+</li>
+<li>
+<code>table-clear</code> to completely empty a table.
+
+</li>
+</ul>
+
+<p>When looking for a match to a key in a table, the system defaults to <code>eql</code>.
+You can change this by using <code>(make-table comparator)</code>, where <code>comparator</code>
+is <code>eq</code> or <code>eql</code> or <code>binary=</code> or ===.
+</p>
+<p>
+If a value is not found for a particular key in the table () is returned.
+This can be changed by <code>(make-table comparator fill-value)</code>.  Now
+<code>fill-value</code> will be returned on failure.
+</p>
+<p>
+The mapping functions above work on tables, too.
+</p>
+</li>
+<li id="sec-17.8">Non-local exits <br/>
+EuLisp supports a limited form of continuation capture via <code>let/cc</code>.  This
+form captures its continuation, and allows its use as a non-local exit.
+
+
+
+<pre class="src src-eulisp">(let/cc out
+   ...
+   (<span style="color: #0000ff; font-weight: bold;">out</span>)
+   ...
+)
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">after
+</span></pre>
+
+
+<p>
+This stores the continuation (i.e., from 'after') in the variable <code>out</code>.
+This can be called as a function, whereupon control passes immediately to
+that continuation.  The value of out can only be used in this way in the
+dynamic scope of the <code>let/cc</code> form: outside the value is 'dead' and no
+longer usable.
+</p>
+<p>
+The continuation function can take a single optional argument which is a
+value to pass to the continuation: the default is ().
+</p>
+<p>
+The forms <code>block</code> and <code>return-from</code> are simply =let/c=c and a call to a
+continuation:
+</p>
+
+
+<pre class="src src-eulisp">(block foo
+  ...
+  (return-from foo)
+  ...
+)
+</pre>
+
+
+<p>
+The unwind-protect form ensures things are executed even if there is a
+non-local exit
+</p>
+
+
+<pre class="src src-eulisp">(unwind-protect
+  protected-form
+  after-form
+  after-form
+  ...)
+</pre>
+
+
+
+<p>
+This starts by executing the <code>protected-form</code>.  If there is no unusual exit
+from the <code>protected-form</code>, this will then execute the <code>after-forms</code> and will
+return whatever value the <code>protected-form</code> returned.  If there is a
+non-local exit from the <code>protected-form</code> to a continuation outside the
+<code>unwind-protect</code>, the <code>after-forms</code> will still be executed before the
+control passes to the continuation.
+</p>
+</li>
+<li id="sec-17.9">Setters <br/>
+Structures, like <code>lists</code>, <code>vectors</code> and <code>class</code> instances have elements that
+can be accessed.  The elements of a <code>vector</code> can be read by <code>vector-ref</code>.
+To write to an element use the function <code>(setter vector-ref)</code>,
+
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">(setter</span> vector-ref) vec index val)
+</pre>
+
+
+<p>
+Similarly, the accessor <code>car</code> has an updater <code>(setter car)</code> (often called <code>rplaca</code>
+in other Lisps), and so on.  In general a reader function <code>r</code> will have an
+associated updater <code>(setter r)</code>.
+</p>
+<p>
+The function <code>setter</code> is a simple association mechanism: <code>setter</code> is a
+function that takes a reader and returns the associated writer.  To make
+such an association between functions <code>r</code> and <code>w</code> just use <code>setter</code> again
+</p>
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">(setter</span> setter) r w)
+</pre>
+
+
+<p>
+In fact, no particular properties of <code>r</code> and <code>w</code>, are used, so this can be used
+as a general facility.  Further, setter functions, generic functions and
+methods can be defined directly:
+</p>
+
+
+<pre class="src src-eulisp">(defun <span style="color: #0000ff; font-weight: bold;">(setter</span> foo) (<span style="color: #0000ff; font-weight: bold;">a</span> b)
+  ...)
+</pre>
+
+
+
+</li>
+<li id="sec-17.10">Convert <br/>
+The function <code>convert</code> is used to change an object of one type into an
+object of another type.  Thus to convert an <code>integer</code> to a <code>float</code>
+
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(convert</span> 1 <span style="color: #0000ff;">&lt;float&gt;</span>) -&gt; 1.0
+</pre>
+
+
+<p>
+or the other way
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(convert</span> 2.6 <span style="color: #0000ff;">&lt;integer&gt;</span>) -&gt; 2
+</pre>
+
+
+
+<p>
+Many other conversions are available: <code>integer</code> to <code>string</code>; <code>character</code> to
+<code>string</code>; <code>string</code> to <code>number</code>; <code>symbol</code> to <code>string</code>; <code>list</code> to <code>vector</code>;
+and so on.
+</p>
+</li>
+<li id="sec-17.11">Copying <br/>
+There are two functions that copy structures: <code>deep-copy</code> and
+<code>shallow-copy</code>.  The second recursively descends a structure making copies
+of all the elements in the structure; the first makes a single copy of the
+top-level structure, and fills its slots will the existing elements:
+
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">setq</span> a '((<span style="color: #0000ff; font-weight: bold;">1</span> 2) (<span style="color: #0000ff; font-weight: bold;">3</span> 4)))
+(<span style="color: #0000ff; font-weight: bold;">setq</span> d <span style="color: #0000ff; font-weight: bold;">(deep-copy</span> a))
+<span style="color: #0000ff; font-weight: bold;">(eq</span> a d)                  -&gt; ()
+<span style="color: #0000ff; font-weight: bold;">(binary=</span> a d)             -&gt; <span style="font-weight: bold; text-decoration: underline;">t</span>
+<span style="color: #0000ff; font-weight: bold;">(eq</span> <span style="color: #0000ff; font-weight: bold;">(car</span> a) <span style="color: #0000ff; font-weight: bold;">(car</span> d))      -&gt; ()
+
+(<span style="color: #0000ff; font-weight: bold;">setq</span> s <span style="color: #0000ff; font-weight: bold;">(shallow-copy</span> a))
+<span style="color: #0000ff; font-weight: bold;">(eq</span> a s)                  -&gt; ()
+<span style="color: #0000ff; font-weight: bold;">(binary=</span> a s)             -&gt; <span style="font-weight: bold; text-decoration: underline;">t</span>
+<span style="color: #0000ff; font-weight: bold;">(eq</span> <span style="color: #0000ff; font-weight: bold;">(car</span> a) <span style="color: #0000ff; font-weight: bold;">(car</span> s))      -&gt; <span style="font-weight: bold; text-decoration: underline;">t</span>
+</pre>
+
+
+
+</li>
+<li id="sec-17.12">Other Tools <br/>
+Other tools that EuXLisp provides:
+<ul>
+<li>
+<code>describe</code> gives a little information about an object, e.g., <code>(describe       &lt;integer&gt;)</code> or <code>(describe 4)</code>
+</li>
+<li>
+<code>trace</code> can be used to print a message every time a function is entered or
+exited.  Thus
+
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">trace</span> foo)
+</pre>
+
+
+<p>
+will describe the ins and outs of the function <code>foo</code>.  To untrace, use
+<code>(untrace foo)</code>.  Use <code>(import "trace")</code> to load trace.
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> Example Modules </h2>
+<div class="outline-text-2" id="text-18">
+
+<p>EuXLisp provides a few sample modules.
+</p><ul>
+<li id="sec-18.1">Trace <br/>
+The trace module has been mentioned above.
+
+</li>
+<li id="sec-18.2">Linda <br/>
+The eulinda module implements the Linda pool mechanism.
+<ul>
+<li>
+<code>make-linda-pool</code> returns a new pool
+</li>
+<li>
+<code>(linda-out pool tag val val ...)</code> writes the tuple <code>(val val ...)</code> under
+the tag to the pool
+</li>
+<li>
+<code>(linda-in pool tag pat pat ...)</code> attempts to read a tuple matching the
+pattern <code>(pat pat ...)</code> from the pool.  If no matching tuple exists in the
+pool, the call will block until such a tuple appears.  When found, the
+tuple is removed from the pool.  A pattern is a literal value, to be
+matched exactly <code>(? var)</code> to match any value, and assign the matched value
+to the variable <code>?</code> to match any value, and to discard the result.
+</li>
+<li>
+<code>linda-read</code> as <code>linda-in</code> but does not remove the tuple from the pool
+</li>
+<li>
+<code>(linda-eval fun arg arg ...)</code> starts a new thread, running the function
+with the arguments.
+
+</li>
+</ul>
+
+<p>Debugging tools are <code>print-linda-pool</code> to print the curent values in a pool,
+and <code>(tril t)</code> to print some trace information as the system is running.
+</p>
+<p>
+The <code>tag</code> must be a <code>symbol</code> or <code>number</code>.
+</p>
+</li>
+<li id="sec-18.3">Modular Numbers <br/>
+The module <code>modular</code> is a simple implementation of modular integers.  The
+function mod constructs a modular number
+
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">setq</span> a <span style="color: #0000ff; font-weight: bold;">(mod</span> 3 5))  -&gt; #&lt;3 mod 5&gt;
+(<span style="color: #0000ff; font-weight: bold;">setq</span> b <span style="color: #0000ff; font-weight: bold;">(+</span> a a))    -&gt; #&lt;1 mod 5&gt;
+<span style="color: #0000ff; font-weight: bold;">(/</span> a)               -&gt; #&lt;2 mod 5&gt;
+</pre>
+
+
+
+</li>
+<li id="sec-18.4">Scheme <br/>
+This module provides a mostly-conformant Scheme environment.  It is probably
+not wise to mix Scheme constructs, such as call/cc, with EuLisp constructs,
+such as threads.
+
+</li>
+<li id="sec-18.5">Paralation Lisp <br/>
+This emulates a paralation system.  The module <code>tpl</code> (for tiny paralation
+lisp) exports
+<ul>
+<li>
+<code>(make-paralation n)</code> to make a new paralation of size <code>n</code>.  This returns a
+index field of the new paralation.
+</li>
+<li>
+elwise is the element-wise operator:
+
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">elwise</span> (<span style="color: #0000ff; font-weight: bold;">a</span> b) <span style="color: #0000ff; font-weight: bold;">(+</span> a b))
+</pre>
+
+
+<p>
+where <code>a</code> and <code>b</code> are fields on the same paralation.
+</p></li>
+<li>
+<code>(match field field)</code> to create a map between fields, and
+</li>
+<li>
+<code>(move field map combine default)</code> to move a field down a map, using
+combine, (a function taking an appropriate number of arguments) to combine
+elements that end up at the same element of the target field, and default
+as the default value for a field element that is not in the image of the
+map.
+
+</li>
+</ul>
+</li>
+<li id="sec-18.6">Values <br/>
+This is an emulation of Scheme and Common Lisp's multiple values.  The
+module values exports
+<ul>
+<li>
+<code>(values val val ...)</code> as the basic multiple value return
+</li>
+<li>
+<code>call-with-values</code> for the Scheme-like values:
+
+
+
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">call-with-values</span>
+  (<span style="color: #0000ff; font-weight: bold;">lambda</span> () ...)             <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">a thunk returning values
+</span>  (<span style="color: #0000ff; font-weight: bold;">lambda</span> (<span style="color: #0000ff; font-weight: bold;">a</span> b c ...) ...))   <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">that are passed here, bound
+</span>                              <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">to a, b, etc.
+</span></pre>
+
+
+</li>
+<li>
+<code>multiple-value-setq</code>; <code>multiple-value-list</code>; <code>multiple-value-call</code>;
+<code>values-list</code>; <code>multiple-value-bind</code> are all as in Common Lisp.
+
+</li>
+</ul>
+
+<p>If you pass multiple values to a continuation that only expects a single
+value you will probably get strange results.
+</p>
+</li>
+<li id="sec-18.7">Sort <br/>
+A fast stable merge sort.  The module sort exports <code>sort</code> (non-destructive)
+and <code>sort!</code> (destructive).  They are called as <code>(sort l)</code>, where <code>l</code> is a
+list of values to be sorted.  The comparison operator used is <code>&lt;</code>.
+Alternatively, you can use <code>(sort l comp)</code>, where comp is a comparator
+function.
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> EuXLisp functions </h2>
+<div class="outline-text-2" id="text-19">
+
+<p>Here is a summary of the functions available in EuXLisp.  Not all of these
+correspond to EuLisp.
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">specials
+</span>deflocal
+defconstant
+quote
+lambda
+delay
+let
+let*
+setq
+if
+cond
+progn
+and
+or
+while
+<span style="color: #0000ff; font-weight: bold;">export</span>
+<span style="color: #0000ff; font-weight: bold;">expose</span>
+enter-module
+!&gt;
+reenter-module
+!&gt;&gt;
+call-next-method
+next-method?
+defclass
+apply
+map-list
+load
+load-noisily
+force
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">list functions
+</span>cons
+car
+cdr
+caar
+cadr
+cdar
+cddr
+caaar
+caadr
+cadar
+caddr
+cdaar
+cdadr
+cddar
+cdddr
+caaaar
+caaadr
+caadar
+caaddr
+cadaar
+cadadr
+caddar
+cadddr
+cdaaar
+cdaadr
+cdadar
+cdaddr
+cddaar
+cddadr
+cdddar
+cddddr
+list
+list*
+append
+last-pair
+length
+memv
+memq
+assv
+assq
+list-ref
+list-tail
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">symbol functions
+</span>bound?
+symbol-value
+symbol-plist
+gensym
+get
+put
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">vector functions
+</span>vector
+make-vector
+vector-length
+vector-ref
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">array functions
+</span>make-array
+array-ref
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">predicates
+</span>null?
+atom
+list?
+number?
+boolean?
+cons?
+symbol?
+keyword?
+complex?
+float?
+double-float?
+rational?
+integer?
+char?
+string?
+vector?
+function?
+port?
+input-port?
+output-port?
+object?
+eof-object?
+default-object?
+eq
+eql
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">arithmetic functions
+</span>zero?
+positive?
+negative?
+odd?
+even?
+exact?
+inexact?
+truncate
+floor
+ceiling
+round
+abs
+gcd
+lcm
+random
++
+-
+*
+/
+quotient
+remainder
+min
+max
+sin
+cos
+tan
+asin
+acos
+atan
+exp
+sqrt
+pow
+log
+binary+
+binary-
+unary-
+binary*
+binary/
+unary/
+binary%
+binary-gcd
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">bitwise logical functions
+</span>logand
+logior
+logxor
+lognot
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">numeric comparison functions
+</span>&lt;
+&lt;=
+=
+&gt;=
+&gt;
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">string functions
+</span>make-string
+string-length
+string-null?
+string-append
+string-ref
+substring
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">i/o functions
+</span>read
+read-char
+read-byte
+read-short
+read-long
+
+swrite
+write
+write-char
+write-byte
+write-short
+write-long
+
+sprin
+sprint
+prin
+print
+
+newline
+char-ready?
+peek-char
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">print control functions
+</span>print-breadth
+print-depth
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">file i/o functions
+</span>open-input-file
+open-output-file
+open-append-file
+open-update-file
+close-port
+close-input-port
+close-output-port
+get-file-position
+unlink
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">Standard streams
+</span>stdin
+stdout
+stderr
+
+<span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">utility functions
+</span>transcript-on
+transcript-off
+getarg
+prompt?
+exit
+compile
+decompile
+gc
+save
+restore
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">debugging functions
+</span>trace-on
+trace-off
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">module functions
+</span>module-symbols
+module-exports
+symbol-module
+current-module
+module-list
+unintern
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">telos
+</span>allocate
+describe
+class?
+subclass?
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">tables
+</span>make-table
+table-ref
+table-comparator
+table-delete
+table-length
+table-keys
+table-values
+table-fill
+table-clear
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">plus some others
+</span>binary
+text
+not
+prin1
+princ
+<span style="font-weight: bold; text-decoration: underline;">t</span>
+eval                                 <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">no guarantees this one will work
+</span>system
+getenv
+putenv
+tmpfile
+current-time
+ticks-per-second
+backtrace
+backtrace?
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">thread
+</span><span style="color: #0000ff;">&lt;thread&gt;</span>
+<span style="color: #0000ff;">&lt;simple-thread&gt;</span>
+make-thread
+thread?
+thread-reschedule
+current-thread
+thread-kill
+thread-queue
+current-thread
+thread-start
+thread-value
+thread-state
+<span style="color: #0000ff;">&lt;thread-condition&gt;</span>
+<span style="color: #0000ff;">&lt;thread-error&gt;</span>
+<span style="color: #0000ff;">&lt;thread-already-started&gt;</span>
+
+<span style="color: #0000ff;">&lt;lock&gt;</span>
+<span style="color: #0000ff;">&lt;simple-lock&gt;</span>
+make-lock
+lock?
+lock
+unlock
+<span style="color: #0000ff;">&lt;lock-condition&gt;</span>
+<span style="color: #0000ff;">&lt;lock-error&gt;</span>
+
+wait
+<span style="color: #0000ff;">&lt;wait-condition&gt;</span>
+<span style="color: #0000ff;">&lt;wait-error&gt;</span>
+
+let/cc
+with-handler
+unwind-protect
+<span style="color: #0000ff;">&lt;wrong-condition-class&gt;</span>
+signal
+<span style="font-weight: bold;">error</span>
+cerror
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">telos
+</span><span style="color: #0000ff;">&lt;object&gt;</span>
+<span style="color: #0000ff;">&lt;class&gt;</span>
+<span style="color: #0000ff;">&lt;simple-class&gt;</span>
+<span style="color: #0000ff;">&lt;list&gt;</span>
+<span style="color: #0000ff;">&lt;cons&gt;</span>
+<span style="color: #0000ff;">&lt;null&gt;</span>
+<span style="color: #0000ff;">&lt;number&gt;</span>
+<span style="color: #0000ff;">&lt;integer&gt;</span>
+<span style="color: #0000ff;">&lt;fpi&gt;</span>
+<span style="color: #0000ff;">&lt;float&gt;</span>
+<span style="color: #0000ff;">&lt;double-float&gt;</span>
+<span style="color: #0000ff;">&lt;symbol&gt;</span>
+<span style="color: #0000ff;">&lt;keyword&gt;</span>
+<span style="color: #0000ff;">&lt;string&gt;</span>
+<span style="color: #0000ff;">&lt;simple-string&gt;</span>
+<span style="color: #0000ff;">&lt;port&gt;</span>
+<span style="color: #0000ff;">&lt;input-port&gt;</span>
+<span style="color: #0000ff;">&lt;output-port&gt;</span>
+<span style="color: #0000ff;">&lt;i/o-port&gt;</span>
+<span style="color: #0000ff;">&lt;vector&gt;</span>
+<span style="color: #0000ff;">&lt;simple-vector&gt;</span>
+<span style="color: #0000ff;">&lt;char&gt;</span>
+<span style="color: #0000ff;">&lt;simple-char&gt;</span>
+<span style="color: #0000ff;">&lt;promise&gt;</span>
+<span style="color: #0000ff;">&lt;table&gt;</span>
+<span style="color: #0000ff;">&lt;hash-table&gt;</span>
+<span style="color: #0000ff;">&lt;function&gt;</span>
+<span style="color: #0000ff;">&lt;simple-function&gt;</span>
+<span style="color: #0000ff;">&lt;subr&gt;</span>
+<span style="color: #0000ff;">&lt;continuation&gt;</span>
+<span style="color: #0000ff;">&lt;generic&gt;</span>
+<span style="color: #0000ff;">&lt;simple-generic&gt;</span>
+<span style="color: #0000ff;">&lt;method&gt;</span>
+<span style="color: #0000ff;">&lt;simple-method&gt;</span>
+<span style="color: #0000ff;">&lt;slot&gt;</span>
+<span style="color: #0000ff;">&lt;local-slot&gt;</span>
+<span style="color: #0000ff;">&lt;structure&gt;</span>
+
+generic-prin
+generic-write
+wait
+
+make
+initialize
+class-hierarchy
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">setter
+</span>setter
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">converter
+</span>converter
+
+convert
+<span style="color: #0000ff;">&lt;conversion-condition&gt;</span>
+<span style="color: #0000ff;">&lt;no-converter&gt;</span>
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">condcl
+</span>defcondition
+condition?
+condition-message
+condition-value
+<span style="color: #0000ff;">&lt;condition&gt;</span>
+<span style="color: #0000ff;">&lt;telos-condition&gt;</span>
+<span style="color: #0000ff;">&lt;telos-error&gt;</span>
+<span style="color: #0000ff;">&lt;telos-general-error&gt;</span>
+<span style="color: #0000ff;">&lt;telos-bad-ref&gt;</span>
+<span style="color: #0000ff;">&lt;no-applicable-method&gt;</span>
+<span style="color: #0000ff;">&lt;no-next-method&gt;</span>
+<span style="color: #0000ff;">&lt;incompatible-method-domain&gt;</span>
+<span style="color: #0000ff;">&lt;arithmetic-condition&gt;</span>
+<span style="color: #0000ff;">&lt;arithmetic-error&gt;</span>
+<span style="color: #0000ff;">&lt;error&gt;</span>
+<span style="color: #0000ff;">&lt;general-error&gt;</span>
+<span style="color: #0000ff;">&lt;bad-type&gt;</span>
+<span style="color: #0000ff;">&lt;unbound-error&gt;</span>
+<span style="color: #0000ff;">&lt;compilation-error&gt;</span>
+<span style="color: #0000ff;">&lt;macro-error&gt;</span>
+<span style="color: #0000ff;">&lt;syntax-error&gt;</span>
+<span style="color: #0000ff;">&lt;user-interrupt&gt;</span>
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">compare
+</span>binary&lt;
+binary=
+&lt;
+=
+&gt;
+&lt;=
+&gt;=
+max
+min
+assoc
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">macros
+</span>defmacro
+quasiquote
+unquote
+unquote-splicing
+symbol-macro
+macroexpand
+macroexpand1
+<span style="color: #ff00ff; font-weight: bold;">;   </span><span style="color: #ff00ff;">syntax
+</span><span style="color: #ff00ff; font-weight: bold;">;   </span><span style="color: #ff00ff;">dprint
+</span>
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">collect
+</span><span style="color: #0000ff;">&lt;collection-condition&gt;</span>
+<span style="color: #0000ff;">&lt;collection-error&gt;</span>
+collection?
+sequence?
+accumulate
+accumulate1
+all?
+any?
+concatenate
+delete
+do
+element
+empty?
+fill
+map
+member
+remove
+reverse
+size
+slice
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">copy
+</span>deep-copy
+shallow-copy
+
+<span style="color: #ff00ff; font-weight: bold;">;; </span><span style="color: #ff00ff;">format
+</span>format
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> Command Line Arguments </h2>
+<div class="outline-text-2" id="text-20">
+
+<p>The EuXLisp interpreter accepts a few arguments:
+</p><ul>
+<li>
+<code>-t</code> enable trace debugging
+</li>
+<li>
+<code>-n</code> do not load an image
+</li>
+<li>
+<code>-q</code> do not print results in the read-eval-print loop
+</li>
+<li>
+<code>-s</code> disable the system function
+</li>
+<li>
+<code>--script</code> see below
+
+</li>
+</ul>
+
+<p>Other arguments are passed to the intepreter and are available as <code>(getarg 0)</code>
+(the name of the program), <code>(getarg 1)</code> (first argument), <code>(getarg 2)</code> (second
+argument), and so on.  The function <code>getarg</code> returns () for a non-existent
+argument.
+</p>
+<ul>
+<li id="sec-20.1">Shell Scripts <br/>
+EuXLisp can be used in a shell script by means of the <code>--script</code> flag:
+
+
+
+<pre class="src src-eulisp">#!/usr/local/bin/euxlisp --script
+
+<span style="color: #0000ff; font-weight: bold;">(print</span> <span style="color: #00ff00;">"hello world"</span>)
+</pre>
+
+
+<p>
+It is usual to use the <code>-q</code> flag to prevent the echo from the
+read-eval-print loop, and the <code>-s</code> flag to prevent the use of the system
+function.
+</p>
+
+
+<pre class="src src-eulisp">#!/usr/local/bin/euxlisp -qs --script
+
+<span style="color: #0000ff; font-weight: bold;">(print</span> <span style="color: #00ff00;">"hello world"</span>)
+</pre>
+
+
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> <a href="./eunotes.html">Original Euscheme notes</a> </h2>
+<div class="outline-text-2" id="text-21">
+
+
+</div>
+
+</div>
+
+<div id="outline-container-22" class="outline-2">
+<h2 id="sec-22"><span class="section-number-2">22</span> <a href="http://people.bath.ac.uk/masrjb/Sources/eunotes.html">The latest version of the original Euscheme notes</a>. </h2>
+<div class="outline-text-2" id="text-22">
+
+</div>
+</div>
+<div id="postamble">
+<p class="author"> Author: of original Euscheme notes Russell Bradford
+<a href="mailto:no-reply">&lt;no-reply&gt;</a>
+</p>
+<p class="date"> Date: 2010-06-10 10:11:51 BST</p>
+<p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
+</div>
+</div>
+</body>
+</html>
