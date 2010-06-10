@@ -1,5 +1,5 @@
 #                            -*- mode: org; -*-
-#+TITLE:                         *EuLisp*
+#+TITLE:                         *Youtoo*
 #+AUTHOR: nil
 #+EMAIL: no-reply
 #+OPTIONS: author:nil email:nil ^:{}
@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License along with
     Youtoo in the file [[file:COPYING][COPYING]].  If not, see <http://www.gnu.org/licenses/>.
 
-* Introduction
+* General
   See [[file:../README.org][EuLisp]].
 
 * Features

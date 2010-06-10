@@ -137,7 +137,7 @@
     /Bin.${ARCH}/youtoo.sh/ \\
     (see next section).
 
-* Getting Started with  [[file:Youtoo/README.org][Youtoo]]
+* Getting Started with Youtoo
   + Run \\
     /Bin.${ARCH}/youtoo.sh/ -help \\
     to see the compiler options.
@@ -152,6 +152,7 @@
 
   Further information about running [[file:Youtoo/README.org][Youtoo]].
 
-* Getting Started with  [[file:Doc/EuXLispNotes.org][EuXLisp]]
+* Getting Started with EuXLisp
+  See [[file:Doc/EuXLispNotes.org][EuXLisp]] notes.
 
 * [[file:TODO.org][To Do]]
