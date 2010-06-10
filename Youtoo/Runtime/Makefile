@@ -99,7 +99,7 @@ $(MATH_SHARED_LIB): $(MATH_O)
 .PHONY: boot
 boot:	libtelos.i _macros.i liblevel1.i libmath.i
 	@rm -f libtelos.i
-	cd ../Telos; $(MAKE) boot-syntax
+	$(MAKE) -C ../Telos boot-syntax
 	$(MAKE) boot-syntax
 
 .PHONY: boot-syntax

@@ -20,7 +20,7 @@ all: youtoo doc
 .PHONY: youtoo
 youtoo:
 	@echo "BUILDING Youtoo ..."
-	@cd Youtoo; $(MAKE)
+	@$(MAKE) -C Youtoo
 	@echo "DONE"
 
 README.org: index.org
@@ -29,29 +29,29 @@ README.org: index.org
 .PHONY: README
 README: index.html TODO.html README.org
 	@echo "UPDATING all README.html files ..."
-	@cd Modules; $(MAKE) $@
+	@$(MAKE) -C Modules $@
 	@echo "DONE"
 
 .PHONY: doc
 doc: README
-	@cd Doc; $(MAKE)
+	@$(MAKE) -C Doc
 
 .PHONY: clean
 clean:
 	@echo "CLEANING ..."
-	@cd Youtoo; $(MAKE) $@
-	@cd Modules; $(MAKE) $@
-	@cd Examples; $(MAKE) $@
-	@cd Doc; $(MAKE) $@
+	@$(MAKE) -C Youtoo $@
+	@$(MAKE) -C Modules $@
+	@$(MAKE) -C Examples $@
+	@$(MAKE) -C Doc $@
 	@echo "DONE"
 
 .PHONY: distclean
 distclean: clean
 	@echo "DIST-CLEANING ..."
-	@cd Youtoo; $(MAKE) $@
-	@cd Modules; $(MAKE) $@
-	@cd Examples; $(MAKE) $@
-	@cd Doc; $(MAKE) $@
+	@$(MAKE) -C Youtoo $@
+	@$(MAKE) -C Modules $@
+	@$(MAKE) -C Examples $@
+	@$(MAKE) -C Doc $@
 	@rm -rf */platforms Bin.* Lib.*
 	@rm -f .eulrc.*
 	@echo "DONE"

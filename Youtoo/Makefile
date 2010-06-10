@@ -39,25 +39,25 @@ shared:
 .PHONY: boot
 boot: $(U2_BOOT) $(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h
 	@echo "COMPILING youtoo modules ..."
-	cd Vm; $(MAKE)
-	cd Telos; $(MAKE) $@
-	cd Runtime; $(MAKE) $@
+	$(MAKE) -C Vm
+	$(MAKE) -C Telos $@
+	$(MAKE) -C Runtime $@
 	@echo "-- CREATING preliminary youtoo executable source"
-	cd Comptime2; $(MAKE) preliminary
+	$(MAKE) -C Comptime2 preliminary
 	@echo "-- CREATING statically linked level1 library interface file"
 	$(U2_DIR)/Tools/i2c $(ARCH)
-	cd Vm; ${MAKE}
+	${MAKE} -C Vm
 	@echo "-- LINKING preliminary youtoo executable"
 	@rm -f $(EUL_BIN_DIR)/youtoo
-	cd Comptime2; $(MAKE)
-	cd Youtoo; $(MAKE)
-	cd Comptime2; $(MAKE) final
+	$(MAKE) -C Comptime2
+	$(MAKE) -C Youtoo
+	$(MAKE) -C Comptime2 final
 	@echo "-- CREATING final youtoo executable"
 	@rm -f $(EUL_BIN_DIR)/youtoo
-	cd Comptime2; $(MAKE)
-	cd Youtoo; $(MAKE)
-	cd Comptime2; $(MAKE) bytecode2
-	cd $(EUL_BOOT_DIR)/Youtoo/Tools; $(MAKE)
+	$(MAKE) -C Comptime2
+	$(MAKE) -C Youtoo
+	$(MAKE) -C Comptime2 bytecode2
+	$(MAKE) -C $(EUL_BOOT_DIR)/Youtoo/Tools;
 	mkdir -p Lib; cp $(EUL_LIB_DIR)/*.i Lib
 	rm -f {Telos,Runtime,Comptime2}/lib*.i
 	@echo "DONE"
@@ -69,7 +69,7 @@ boot: $(U2_BOOT) $(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h
 .PHONY: test
 test:
 	@echo "TESTING youtoo installation ..."
-	@cd Test; $(MAKE) test
+	$(MAKE) -C Test test
 	@echo "DONE"
 
 .PHONY: boot-clean
@@ -83,14 +83,14 @@ boot-clean:
 clean:
 	@echo "CLEANING youtoo ..."
 	@$(call makeAll,$(SYS_DIRS),$@)
-	@cd Test; $(MAKE) $@
+	$(MAKE) -C Test $@
 	@echo "DONE"
 
 .PHONY: distclean
 distclean: clean
 	@echo "DIST-CLEANING youtoo ..."
 	@$(call makeAll,$(SYS_DIRS),$@)
-	@cd Test; $(MAKE) $@
+	$(MAKE) -C Test $@
 	@echo "DONE"
 
 ###-----------------------------------------------------------------------------

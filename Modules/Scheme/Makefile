@@ -75,7 +75,7 @@ $(EUL_MODULE_LIB): $(EUL_MODULE_LIB_I) $(MODULE_O) $(OTHER_O)
 	rm -f $(MODULE_LIB)
 
 $(EUL_BIGNUM_LIB) $(EUL_BIGNUM_LIB_I):
-	cd ../Bignum ; $(MAKE)
+	(MAKE) -C ../Bignum
 
 ###-----------------------------------------------------------------------------
 ### Build interpreters

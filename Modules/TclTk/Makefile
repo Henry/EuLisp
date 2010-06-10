@@ -90,7 +90,7 @@ $(EUL_BIN_DIR)/you2tk: $(EUL_MODULE_LIB) you2tk.em You2tk_.c | $(ARCH_DIR)/.
 .PHONY: test
 test:
 	@echo "COMPILING EXTRASs ..."
-	@cd Test; $(MAKE) all
+	$(MAKE) -C Test all
 	@echo "DONE"
 
 ###-----------------------------------------------------------------------------
@@ -107,12 +107,12 @@ clean:
 		$(OTHER_EM:%.em=%.c) $(OTHER_EM:%.em=%.h)
 	@rm -f tcltk_.c you2tki.c you2tk.h you2tk.c
 	@rm -f *.i
-	cd Test; $(MAKE) clean
+	$(MAKE) -C Test clean
 
 .PHONY: distclean
 distclean: clean
 	@rm -rf platforms
 	@rm -f $(EUL_MODULE_LIB) $(EUL_MODULE_LIB_I)
-	cd Test; $(MAKE) distclean
+	$(MAKE) -C Test distclean
 
 ###-----------------------------------------------------------------------------
