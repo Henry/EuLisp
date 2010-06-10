@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-10 18:50:17 BST"/>
+<meta name="generated" content="2010-06-10 23:10:10 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -79,7 +79,8 @@ lang="en" xml:lang="en">
 <div id="text-table-of-contents">
 <ul>
 <li><a href="#sec-1">1 Youtoo </a></li>
-<li><a href="#sec-2">2 EuLisp Definition </a></li>
+<li><a href="#sec-2">2 EuXLisp </a></li>
+<li><a href="#sec-3">3 EuLisp Definition </a></li>
 </ul>
 </div>
 </div>
@@ -317,15 +318,23 @@ updated.
 </div>
 
 <div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> EuLisp Definition </h2>
+<h2 id="sec-2"><span class="section-number-2">2</span> EuXLisp </h2>
 <div class="outline-text-2" id="text-2">
 
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> EuLisp Definition </h2>
+<div class="outline-text-2" id="text-3">
+
 <ul>
-<li id="sec-2.1"><span class="todo TODO"> TODO</span> Update EuLisp definition and Youtoo implementation <br/>
+<li id="sec-3.1"><span class="todo TODO"> TODO</span> Update EuLisp definition and Youtoo implementation <br/>
 to correspond to the EuLisp-1.0 proposals.
 See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 </li>
-<li id="sec-2.2"><span class="todo TODO"> TODO</span> Undefined references [34/41] <br/>
+<li id="sec-3.2"><span class="todo TODO"> TODO</span> Undefined references [34/41] <br/>
 <ul>
 <li>
 <b>[X]</b> class:abstract-class
@@ -452,63 +461,63 @@ See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 </li>
 </ul>
 </li>
-<li id="sec-2.3"><span class="todo TODO"> TODO</span> Add entry for the <code>&lt;method&gt;</code> class in Level-1 <br/>
+<li id="sec-3.3"><span class="todo TODO"> TODO</span> Add entry for the <code>&lt;method&gt;</code> class in Level-1 <br/>
 </li>
-<li id="sec-2.4"><span class="todo TODO"> TODO</span> Add details of the <code>&lt;hash-table&gt;</code> class and functions <br/>
+<li id="sec-3.4"><span class="todo TODO"> TODO</span> Add details of the <code>&lt;hash-table&gt;</code> class and functions <br/>
 </li>
-<li id="sec-2.5"><span class="todo TODO"> TODO</span> Update stream module <br/>
+<li id="sec-3.5"><span class="todo TODO"> TODO</span> Update stream module <br/>
 to corresponding to the Youtoo implementation.
 </li>
-<li id="sec-2.6"><span class="done DONE"> DONE</span> Add descriptions of constants to "Layout and Typography" <br/>
+<li id="sec-3.6"><span class="done DONE"> DONE</span> Add descriptions of constants to "Layout and Typography" <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-01 Thu 12:16</span></span><br/>
 in structure.tex.  Include details of constant instances of classes and
 constant bindings to classes (class aliases).
 </li>
-<li id="sec-2.7"><span class="todo TODO"> TODO</span> &lt;thread&gt; vs &lt;abstract-thread&gt; <br/>
+<li id="sec-3.7"><span class="todo TODO"> TODO</span> &lt;thread&gt; vs &lt;abstract-thread&gt; <br/>
 Sort out the difference between the EuLisp definition and the Youtoo
 implementation with respect to the name of the abstract base-class for
 threads.  In the definition it is <code>&lt;thread&gt;</code> whereas in Youtoo it is
 <code>&lt;abstract-thread&gt;</code> and <code>&lt;thread&gt;</code> is used for the currently used thread
 type.
 </li>
-<li id="sec-2.8"><span class="done DONE"> DONE</span> Reformat the <code>defgeneric</code> rewrite rules to conform to the others <br/>
+<li id="sec-3.8"><span class="done DONE"> DONE</span> Reformat the <code>defgeneric</code> rewrite rules to conform to the others <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 08:39</span></span><br/>
 </li>
-<li id="sec-2.9"><span class="done DONE"> DONE</span> Consider reformatting all of the rewrite rules <br/>
+<li id="sec-3.9"><span class="done DONE"> DONE</span> Consider reformatting all of the rewrite rules <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 08:40</span></span><br/>
 to be more consistent with the syntax description.
 </li>
-<li id="sec-2.10"><span class="todo TODO"> TODO</span> Add the return type to the syntax descriptions <br/>
+<li id="sec-3.10"><span class="todo TODO"> TODO</span> Add the return type to the syntax descriptions <br/>
 </li>
-<li id="sec-2.11"><span class="todo TODO"> TODO</span> Add "signatures" to all function descriptions <br/>
+<li id="sec-3.11"><span class="todo TODO"> TODO</span> Add "signatures" to all function descriptions <br/>
 </li>
-<li id="sec-2.12"><span class="todo TODO"> TODO</span> Change macro definitions to special operators <br/>
+<li id="sec-3.12"><span class="todo TODO"> TODO</span> Change macro definitions to special operators <br/>
 It doesn't seem sensible to effectively specify that certain syntax MUST be
 implemented as macros; surely this decision should be taken by the
 implementers and for efficiency reasons it might be preferable that more of
 the special operators are implemented as primitives of the language.
 </li>
-<li id="sec-2.13"><span class="todo TODO"> TODO</span> Finish the "Lexical Syntax" section <br/>
+<li id="sec-3.13"><span class="todo TODO"> TODO</span> Finish the "Lexical Syntax" section <br/>
 Provide a bit more background information.
 </li>
-<li id="sec-2.14"><span class="todo TODO"> TODO</span> Introduce the "Special Forms" list is <i>modules.tex</i> <br/>
+<li id="sec-3.14"><span class="todo TODO"> TODO</span> Introduce the "Special Forms" list is <i>modules.tex</i> <br/>
 Or move this list to a more appropriate place, <i>e.g.</i> at the beginning of
 the section concerning "special forms".
 </li>
-<li id="sec-2.15"><span class="todo TODO"> TODO</span> Introduce the "Level-1" library and describe "module-1" <br/>
+<li id="sec-3.15"><span class="todo TODO"> TODO</span> Introduce the "Level-1" library and describe "module-1" <br/>
 </li>
-<li id="sec-2.16"><span class="todo TODO"> TODO</span> Re-reference definitions in the "Level-1" library <br/>
+<li id="sec-3.16"><span class="todo TODO"> TODO</span> Re-reference definitions in the "Level-1" library <br/>
 so that they do not clash with those in the "Level-0" library.
 </li>
-<li id="sec-2.17"><span class="todo TODO"> TODO</span> Remove the "syntax-category" entries from the index <br/>
+<li id="sec-3.17"><span class="todo TODO"> TODO</span> Remove the "syntax-category" entries from the index <br/>
 </li>
-<li id="sec-2.18"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
+<li id="sec-3.18"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
 </li>
-<li id="sec-2.19"><span class="done DONE"> DONE</span> Add destructive <code>&lt;sequence&gt;</code> generic functions <code>sort!</code> and <code>reverse!</code> <br/>
+<li id="sec-3.19"><span class="done DONE"> DONE</span> Add destructive <code>&lt;sequence&gt;</code> generic functions <code>sort!</code> and <code>reverse!</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-27 Tue 22:48</span></span><br/>
 Check for other <code>&lt;sequence&gt;</code> methods which should destructive variants.
 </li>
-<li id="sec-2.20"><span class="done DONE"> DONE</span> Clarify the wording concerning the relationship between <code>nil</code> and <code>()</code> <br/>
+<li id="sec-3.20"><span class="done DONE"> DONE</span> Clarify the wording concerning the relationship between <code>nil</code> and <code>()</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-09 Sun 21:09</span></span><br/>
 State that (eq 'nil '()) ==&gt; t.
 *** DONE Replace =equal= with =binary==
@@ -516,7 +525,7 @@ State that (eq 'nil '()) ==&gt; t.
 Remove the <code>equal</code> generic function and methods and introduce a complete set
 of <code>binary=</code> methods.
 </li>
-<li id="sec-2.22"><span class="done DONE"> DONE</span> Change naming convention for predicates? and destructive! functions <br/>
+<li id="sec-3.22"><span class="done DONE"> DONE</span> Change naming convention for predicates? and destructive! functions <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-09 Wed 10:46</span></span><br/>
 There is a suggestion in the definition documents suggesting that the
 Scheme/T naming convention for predicates (end in ?) and destructive
@@ -528,7 +537,7 @@ changes including "null" -&gt; "null?" and "atom" -&gt; "atom?".
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-06-10 18:50:17 BST</p>
+<p class="date"> Date: 2010-06-10 23:10:10 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>
