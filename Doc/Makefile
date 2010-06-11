@@ -50,6 +50,11 @@ clean:
 	@$(call makeAll,$(DOC_DIRS),$@)
 	@echo "DONE"
 
+.PHONY: gitclean
+gitclean:
+	@echo "GIT-CLEANING DOCs ..."
+	@echo "DONE"
+
 .PHONY: distclean
 distclean:
 	@echo "CLEANING DOCs ..."

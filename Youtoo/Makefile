@@ -72,7 +72,7 @@ README: README.html
 .PHONY: test
 test:
 	@echo "TESTING youtoo installation ..."
-	$(MAKE) -C Test test
+	@$(MAKE) -C Test test
 	@echo "DONE"
 
 .PHONY: boot-clean
@@ -86,14 +86,21 @@ boot-clean:
 clean:
 	@echo "CLEANING youtoo ..."
 	@$(call makeAll,$(SYS_DIRS),$@)
-	$(MAKE) -C Test $@
+	@$(MAKE) -C Test $@
+	@echo "DONE"
+
+.PHONY: gitclean
+gitclean:
+	@echo "GIT-CLEANING youtoo ..."
+	@$(MAKE) -C Tools clean
+	@$(MAKE) -C Test clean
 	@echo "DONE"
 
 .PHONY: distclean
 distclean: clean
 	@echo "DIST-CLEANING youtoo ..."
 	@$(call makeAll,$(SYS_DIRS),$@)
-	$(MAKE) -C Test $@
+	@$(MAKE) -C Test $@
 	@echo "DONE"
 
 ###-----------------------------------------------------------------------------

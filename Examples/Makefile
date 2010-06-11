@@ -31,6 +31,12 @@ clean:
 	@$(call makeAll,$(EXAMPLE_DIRS),$@)
 	@echo "DONE"
 
+.PHONY: gitclean
+gitclean:
+	@echo "GIT-CLEANING Examples ..."
+	@$(call makeAll,$(EXAMPLE_DIRS),distclean)
+	@echo "DONE"
+
 .PHONY: distclean
 distclean:
 	@echo "DISTCLEANING Examples ..."

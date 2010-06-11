@@ -44,6 +44,12 @@ clean:
 	@$(call makeAll,$(EXTRAS_DIRS),$@)
 	@echo "DONE"
 
+.PHONY: gitclean
+gitclean:
+	@echo "Git-CLEANING Modules ..."
+	@$(call makeAll,$(EXTRAS_DIRS),distclean)
+	@echo "DONE"
+
 .PHONY: distclean
 distclean:
 	@echo "CLEANING Modules ..."

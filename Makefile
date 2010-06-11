@@ -29,6 +29,12 @@ youtoo:
 	@$(MAKE) -C Youtoo
 	@echo "DONE"
 
+.PHONY: test
+test:
+	@echo "TESTING installation ..."
+	@$(MAKE) -C Youtoo test
+	@echo "DONE"
+
 README.org: index.org
 	@sed 's%file:%http://henry.github.com/EuLisp/%' $< > $@
 
@@ -46,6 +52,15 @@ doc: README
 .PHONY: clean
 clean:
 	@echo "CLEANING ..."
+	@$(MAKE) -C Youtoo $@
+	@$(MAKE) -C Modules $@
+	@$(MAKE) -C Examples $@
+	@$(MAKE) -C Doc $@
+	@echo "DONE"
+
+.PHONY: gitclean
+gitclean:
+	@echo "GIT-CLEANING ..."
 	@$(MAKE) -C Youtoo $@
 	@$(MAKE) -C Modules $@
 	@$(MAKE) -C Examples $@

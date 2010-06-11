@@ -153,6 +153,17 @@
   Further information about running [[http://henry.github.com/EuLisp/Youtoo/README.org][Youtoo]].
 
 * Getting Started with EuXLisp
+  EuXLisp need two paths: where to look for the compiled image, and where to
+  look for modules to load:
+*** Image
+    First euxlisp checks the environment variable ~EU_IMAGE_PATH~ (a colon
+    separated list of directory names), then a builtin path, set from
+    ~IMAGE_SEARCH_PATH~ in the Makefile.
+*** Modules
+    ditto for environment variable ~EU_MODULE_PATH~, then builtin
+    ~MODULE_SEARCH_PATH~ (e.g., you might want to provide a set of system
+    supplied modules).
+
   See [[http://henry.github.com/EuLisp/Doc/EuXLispNotes.org][EuXLisp]] notes.
 
 * [[http://henry.github.com/EuLisp/TODO.org][To Do]]
