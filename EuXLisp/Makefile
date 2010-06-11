@@ -7,17 +7,15 @@
 ###  Tested on sunos, aix, solaris, linux, ultrix, stardent, irix.
 ###-----------------------------------------------------------------------------
 
+ARCH := $(shell uname -m)
+include ../Lib.$(ARCH)/Makefile
+
 ###-----------------------------------------------------------------------------
 ### Options:
 ###  -DSIGNAL when you don't have sigset
 ###  -DRESTORE_SIGNAL when signals are not automatically reset
 ###  -DSOCK to include socket code, but beware: it is possibly buggy
 ###-----------------------------------------------------------------------------
-
-SHELL = /bin/sh
-
-ARCH := $(shell uname -m)
-ARCH_DIR = platforms/$(ARCH)
 
 ###-----------------------------------------------------------------------------
 ### Recall this Makefile for the particular achitecture
@@ -66,18 +64,20 @@ MODULE_SEARCH_PATH = ".", "Modules", "$(PWD)/../Modules"
 ###  Search path for the EuXLisp image
 # look first in environment variable EU_IMAGE_PATH
 # then the builtin equivalent
-IMAGE_SEARCH_PATH = "$(PWD)/$(ARCH_DIR)"
+IMAGE_SEARCH_PATH = "$(EUL_LIB_DIR)"
 
 ###  Name and location of the EuXLisp image
 IMAGE = euxlisp.wks
-IMAGE_PLATFORM = $(ARCH_DIR)/$(IMAGE)
+IMAGE_PLATFORM = $(EUL_LIB_DIR)/$(IMAGE)
 
 ###  Installation location
 DESTBIN = /usr/local/bin
 DESTLIB = /usr/local/share/Euxlisp
 
 ###  Transfer paths to the compiler
-DFLAGS = -DIMAGE='"$(IMAGE)"' \
+# Note: CPPFLAGS is used here because it is already on the used in the
+# $(ARCH_DIR)/%.o : %.c rule
+CPPFLAGS = -DIMAGE='"$(IMAGE)"' \
          -DMODULE_SEARCH_PATH='$(MODULE_SEARCH_PATH)' \
          -DIMAGE_SEARCH_PATH='$(IMAGE_SEARCH_PATH)'
 
@@ -106,21 +106,13 @@ DISTFILES = $(EUXL_C) $(EUXL_H) $(LISP) $(OTHERS)
 ### Commands to build EuXLisp
 ###-----------------------------------------------------------------------------
 
-all: $(IMAGE_PLATFORM)
+all: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM)
 
-.PRECIOUS: %/.
-%/.:
-	mkdir -p $(@)
-
-$(ARCH_DIR)/%.o : %.c $(EUXL_H) Makefile | $(ARCH_DIR)/.
-	mkdir -p $(@D)
-	$(CC) -c $(CFLAGS) $(DFLAGS) $< -o $@
-
-$(ARCH_DIR)/euxlisp: $(EULX_O)
+$(EUL_BIN_DIR)/euxlisp: $(EULX_O)
 	$(CC) $(LDFLAGS) $(EULX_O) $(LIBS) -o $@
 
-$(IMAGE_PLATFORM): $(ARCH_DIR)/euxlisp $(LISP) saveimage
-	EU_MODULE_PATH=Boot $(ARCH_DIR)/euxlisp -n < saveimage
+$(IMAGE_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) saveimage
+	EU_MODULE_PATH=Boot $(EUL_BIN_DIR)/euxlisp -n < saveimage
 	mv euxlisp.wks $(IMAGE_PLATFORM)
 
 ###-----------------------------------------------------------------------------
