@@ -1,8 +1,10 @@
 ;; some non-EuLisp stuff to stop Feel users whinging
 
 (defmodule standard
+    (import (level0)
+     export (subst nconc make-symbol symbol-name while for ++ -- defstruct))
 
-    (import (level0))
+  (expose level0)
 
   ;; subst a for b in c
   (defun subst (a b c)
@@ -59,10 +61,5 @@
                       ((eq sym 'predicate) predicate:)
                       (t sym)))
               class-options)))
-
-  (export subst nconc make-symbol symbol-name while for ++ --
-   defstruct)
-
-  (expose level0)
 
   )

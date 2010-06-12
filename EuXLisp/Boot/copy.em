@@ -2,8 +2,8 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule copy
-
-    (import (root))
+    (import (root)
+     export (deep-copy shallow-copy))
 
   (define (identity x) x)
 
@@ -16,8 +16,6 @@
 
   (define-method (shallow-copy (obj <object>))
                  obj)
-
-  (export deep-copy shallow-copy)
 
   ;; structure classes
   (define-method (deep-copy (s <structure>))

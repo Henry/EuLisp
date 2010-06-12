@@ -15,8 +15,10 @@
 ;;;
 
 (defmodule values
-
-    (import (level0))
+    (import (level0)
+     export (values call-with-values
+             multiple-value-setq multiple-value-list multiple-value-call
+             values-list multiple-value-bind))
 
   (defclass <values> ()
     ((values reader: get-values
@@ -59,8 +61,6 @@
 
   (defmethod mv-call (product consumer)
     (consumer product))
-
-  (export values call-with-values)
 
   ;; sets vars to be values
   (defmacro multiple-value-setq (varlist values-form)
@@ -109,10 +109,6 @@
     `(call-with-values
        (lambda () ,values-form)
        (lambda ,varlist ,@body)))
-
-  (export multiple-value-setq multiple-value-list multiple-value-call
-   values-list multiple-value-bind)
-
   )
 
 (defun split (ls)

@@ -30,7 +30,13 @@
 
 (defmodule collect
 
-    (import (root thread telos condcl setter convert macros copy))
+    (import (root thread telos condcl setter convert macros copy)
+     export ( <collection-condition> <collection-error>
+              collection? sequence?
+              accumulate accumulate1
+              all? any?
+              concatenate delete do element empty?
+              fill map member remove reverse size slice))
 
   ;;  (defcondition <collection-condition> <condition>)
   (defclass <collection-condition> (<condition>)
@@ -619,9 +625,5 @@
 
   (define-method (slice (str <string>) (s <fpi>) (e <fpi>))
     (substring str s e))
-
-  (export <collection-condition> <collection-error>
-   collection? sequence? accumulate accumulate1 all? any? concatenate
-   delete do element empty? fill map member remove reverse size slice)
 
   )

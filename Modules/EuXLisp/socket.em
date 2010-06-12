@@ -4,14 +4,14 @@
 ;;; to use this the interpreter must have been compiled with -DSOCK
 
 (defmodule socket
-    (import (root setter convert))
-  (export <socket> socket-fd socketp make-socket connect bind
-   listen accept set-block set-nonblock reuse noreuse close-socket
-   shutdown peeraddr peerport sockaddr sockport host->ip
-   ip->host fd-zero-read fd-set-read fd-isset-read select-read
-   fd-zero-write fd-set-write fd-isset-write select-write
-   send-int recv-int send-float recv-float send-string recv-string
-   port-fd port-unbuffered port-block-buffered port-line-buffered)
+    (import (root setter convert)
+     export (<socket> socket-fd socketp make-socket connect bind
+             listen accept set-block set-nonblock reuse noreuse close-socket
+             shutdown peeraddr peerport sockaddr sockport host->ip
+             ip->host fd-zero-read fd-set-read fd-isset-read select-read
+             fd-zero-write fd-set-write fd-isset-write select-write
+             send-int recv-int send-float recv-float send-string recv-string
+             port-fd port-unbuffered port-block-buffered port-line-buffered))
 
   (defclass <socket> ()
     ((fd keyword: fd:

@@ -1,10 +1,8 @@
 ;;; modular arithmetic
 
 (defmodule modular
-
-    (import (level0))
-
-  (export mod <modular-error> <modular-number> <no-modular-inverse>)
+    (import (level0)
+     export (mod <modular-error> <modular-number> <no-modular-inverse>))
 
   (defclass <modular-number> ()
     ((value keyword: value:

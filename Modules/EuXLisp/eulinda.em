@@ -27,8 +27,13 @@
 ;; (linda-read pp 'foo 1 2 3)        suspends
 
 (defmodule eulinda
-
-    (import (level0))
+    (import (level0)
+     export (<linda-pool> make-linda-pool linda-in linda-read
+             linda-out linda-evallinda-in? linda-read?
+             linda-in-tuple linda-read-tuple
+             linda-in?-tuple linda-read?-tuple
+             linda-tuple-value ?
+             print-linda-pool tril))
 
   (deflocal trace-linda? ())
 
@@ -301,14 +306,5 @@
 
   ; a convenient fiddle
   (defconstant ? '?)
-
-  (export <linda-pool> make-linda-pool linda-in linda-read
-   linda-out linda-eval)
-  (export linda-in? linda-read?)
-  (export linda-in-tuple linda-read-tuple)
-  (export linda-in?-tuple linda-read?-tuple)
-  (export linda-tuple-value ?)
-
-  (export print-linda-pool tril)
 
   )

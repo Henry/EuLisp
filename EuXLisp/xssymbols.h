@@ -13,6 +13,7 @@ extern LVAL s_reader, s_writer, s_accessor, s_class, s_defclass;
 extern LVAL s_find_slot_index, s_getivar, s_setivar, s_list, s_lambda, s_defun;
 extern LVAL s_object, s_value, s_backtracep, s_eq, s_eqv, s_equal, s_equals;
 extern LVAL s_import, s_only, s_except, s_rename, s_rename_flag;
+extern LVAL s_syntax, s_export;
 extern LVAL s_callcc, s_make, s_apply, s_setter, s_signal, s_unwind_protect;
 extern LVAL s_general_error, s_no_applic_error, s_no_next_md_error;
 extern LVAL s_bad_type_error, s_telos_error, s_telos_bad_ref, s_incompatible_md;

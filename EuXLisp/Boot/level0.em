@@ -2,7 +2,6 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule level0
-
     (import
      ((rename
         ((begin progn)
@@ -12,7 +11,6 @@
          (procedure? function?)
          (eq? eq)
          (eqv? eql))
-
         (except
           (defmodule)
           root
@@ -27,492 +25,504 @@
           macros
           collect
           copy
-          format))))
+          format)))
+     export
+     (;; specials
+      deflocal
+      defconstant
+      quote
+      lambda
+      delay
+      let
+      let*
+      setq
+      if
+      cond
+      progn
+      and
+      or
+      while
+      export
+      expose
+      enter-module
+      !>
+      reenter-module
+      !>>
+      call-next-method
+      next-method?
+      defclass
+      apply
+      map-list
+      load
+      load-noisily
+      force
 
-  (export
-   ;; specials
-   deflocal
-   defconstant
-   quote
-   lambda
-   delay
-   let
-   let*
-   setq
-   if
-   cond
-   progn
-   and
-   or
-   while
-   export
-   expose
-   enter-module
-   !>
-   reenter-module
-   !>>
-   call-next-method
-   next-method?
-   defclass
-   apply
-   map-list
-   load
-   load-noisily
-   force
+      ;; list functions
+      cons
+      car
+      cdr
+      caar
+      cadr
+      cdar
+      cddr
+      caaar
+      caadr
+      cadar
+      caddr
+      cdaar
+      cdadr
+      cddar
+      cdddr
+      caaaar
+      caaadr
+      caadar
+      caaddr
+      cadaar
+      cadadr
+      caddar
+      cadddr
+      cdaaar
+      cdaadr
+      cdadar
+      cdaddr
+      cddaar
+      cddadr
+      cdddar
+      cddddr
+      list
+      list*
+      append
+      last-pair
+      length
+      memv
+      memq
+      assv
+      assq
+      list-ref
+      list-tail
 
-   ;; list functions
-   cons
-   car
-   cdr
-   caar
-   cadr
-   cdar
-   cddr
-   caaar
-   caadr
-   cadar
-   caddr
-   cdaar
-   cdadr
-   cddar
-   cdddr
-   caaaar
-   caaadr
-   caadar
-   caaddr
-   cadaar
-   cadadr
-   caddar
-   cadddr
-   cdaaar
-   cdaadr
-   cdadar
-   cdaddr
-   cddaar
-   cddadr
-   cdddar
-   cddddr
-   list
-   list*
-   append
-   last-pair
-   length
-   memv
-   memq
-   assv
-   assq
-   list-ref
-   list-tail
+      ;; symbol functions
+      bound?
+      symbol-value
+      symbol-plist
+      gensym
+      get
+      put
 
-   ;; symbol functions
-   bound?
-   symbol-value
-   symbol-plist
-   gensym
-   get
-   put
+      ;; vector functions
+      vector
+      make-vector
+      vector-length
+      vector-ref
 
-   ;; vector functions
-   vector
-   make-vector
-   vector-length
-   vector-ref
+      ;; array functions
+      make-array
+      array-ref
 
-   ;; array functions
-   make-array
-   array-ref
+      ;; predicates
+      null?
+      atom
+      list?
+      number?
+      boolean?
+      cons?
+      symbol?
+      keyword?
+      complex?
+      float?
+      double-float?
+      rational?
+      integer?
+      char?
+      string?
+      vector?
+      function?
+      port?
+      input-port?
+      output-port?
+      object?
+      eof-object?
+      default-object?
+      eq
+      eql
 
-   ;; predicates
-   null?
-   atom
-   list?
-   number?
-   boolean?
-   cons?
-   symbol?
-   keyword?
-   complex?
-   float?
-   double-float?
-   rational?
-   integer?
-   char?
-   string?
-   vector?
-   function?
-   port?
-   input-port?
-   output-port?
-   object?
-   eof-object?
-   default-object?
-   eq
-   eql
+      ;; arithmetic functions
+      zero?
+      positive?
+      negative?
+      odd?
+      even?
+      exact?
+      inexact?
+      truncate
+      floor
+      ceiling
+      round
+      abs
+      gcd
+      lcm
+      random
+      +
+      -
+      *
+      /
+      quotient
+      remainder
+      min
+      max
+      sin
+      cos
+      tan
+      asin
+      acos
+      atan
+      exp
+      sqrt
+      pow
+      log
+      binary+
+      binary-
+      unary-
+      binary*
+      binary/
+      unary/
+      binary%
+      binary-gcd
 
-   ;; arithmetic functions
-   zero?
-   positive?
-   negative?
-   odd?
-   even?
-   exact?
-   inexact?
-   truncate
-   floor
-   ceiling
-   round
-   abs
-   gcd
-   lcm
-   random
-   +
-   -
-   *
-   /
-   quotient
-   remainder
-   min
-   max
-   sin
-   cos
-   tan
-   asin
-   acos
-   atan
-   exp
-   sqrt
-   pow
-   log
-   binary+
-   binary-
-   unary-
-   binary*
-   binary/
-   unary/
-   binary%
-   binary-gcd
+      ;; bitwise logical functions
+      logand
+      logior
+      logxor
+      lognot
 
-   ;; bitwise logical functions
-   logand
-   logior
-   logxor
-   lognot
+      ;; numeric comparison functions
+      <
+      <=
+      =
+      >=
+      >
 
-   ;; numeric comparison functions
-   <
-   <=
-   =
-   >=
-   >
+      ;; string functions
+      make-string
+      string-length
+      string-null?
+      string-append
+      string-ref
+      substring
 
-   ;; string functions
-   make-string
-   string-length
-   string-null?
-   string-append
-   string-ref
-   substring
+      ;; i/o functions
+      read
+      read-char
+      read-byte
+      read-short
+      read-long
 
-   ;; i/o functions
-   read
-   read-char
-   read-byte
-   read-short
-   read-long
+      swrite
+      write
+      write-char
+      write-byte
+      write-short
+      write-long
 
-   swrite
-   write
-   write-char
-   write-byte
-   write-short
-   write-long
+      sprin
+      sprint
+      prin
+      print
 
-   sprin
-   sprint
-   prin
-   print
+      newline
+      char-ready?
+      peek-char
 
-   newline
-   char-ready?
-   peek-char
+      ;; print control functions
+      print-breadth
+      print-depth
 
-   ;; print control functions
-   print-breadth
-   print-depth
+      ;; file i/o functions
+      open-input-file
+      open-output-file
+      open-append-file
+      open-update-file
+      close-port
+      close-input-port
+      close-output-port
+      get-file-position
+      unlink
 
-   ;; file i/o functions
-   open-input-file
-   open-output-file
-   open-append-file
-   open-update-file
-   close-port
-   close-input-port
-   close-output-port
-   get-file-position
-   unlink
+      ;; Standard streams
+      stdin
+      stdout
+      stderr
 
-   ;; Standard streams
-   stdin
-   stdout
-   stderr
+      ; utility functions
+      transcript-on
+      transcript-off
+      getarg
+      prompt?
+      exit
+      compile
+      decompile
+      gc
+      save
+      restore
 
-   ; utility functions
-   transcript-on
-   transcript-off
-   getarg
-   prompt?
-   exit
-   compile
-   decompile
-   gc
-   save
-   restore
+      ;; debugging functions
+      trace-on
+      trace-off
 
-   ;; debugging functions
-   trace-on
-   trace-off
+      ;; module functions
+      module-symbols
+      module-exports
+      symbol-module
+      current-module
+      module-list
+      unintern
 
-   ;; module functions
-   module-symbols
-   module-exports
-   symbol-module
-   current-module
-   module-list
-   unintern
+      ;; telos
+      allocate
+      describe
+      class?
+      subclass?
 
-   ;; telos
-   allocate
-   describe
-   class?
-   subclass?
+      ;; tables
+      make-table
+      table-ref
+      table-comparator
+      table-delete
+      table-length
+      table-keys
+      table-values
+      table-fill
+      table-clear
 
-   ;; tables
-   make-table
-   table-ref
-   table-comparator
-   table-delete
-   table-length
-   table-keys
-   table-values
-   table-fill
-   table-clear
+      ;; plus some others
+      binary
+      text
+      not
+      prin1
+      princ
+      t
+      eval                             ; no guarantees this one will work
+      system
+      getenv
+      putenv
+      tmpfile
+      current-time
+      ticks-per-second
+      backtrace
+      backtrace?
 
-   ;; plus some others
-   binary
-   text
-   not
-   prin1
-   princ
-   t
-   eval                                 ; no guarantees this one will work
-   system
-   getenv
-   putenv
-   tmpfile
-   current-time
-   ticks-per-second
-   backtrace
-   backtrace?
+      ;; thread
+      <thread>
+      <simple-thread>
+      make-thread
+      thread?
+      thread-reschedule
+      current-thread
+      thread-kill
+      thread-queue
+      current-thread
+      thread-start
+      thread-value
+      thread-state
+      <thread-condition>
+      <thread-error>
+      <thread-already-started>
 
-   ;; thread
-   <thread>
-   <simple-thread>
-   make-thread
-   thread?
-   thread-reschedule
-   current-thread
-   thread-kill
-   thread-queue
-   current-thread
-   thread-start
-   thread-value
-   thread-state
-   <thread-condition>
-   <thread-error>
-   <thread-already-started>
+      <lock>
+      <simple-lock>
+      make-lock
+      lock?
+      lock
+      unlock
+      <lock-condition>
+      <lock-error>
 
-   <lock>
-   <simple-lock>
-   make-lock
-   lock?
-   lock
-   unlock
-   <lock-condition>
-   <lock-error>
+      wait
+      <wait-condition>
+      <wait-error>
 
-   wait
-   <wait-condition>
-   <wait-error>
+      let/cc
+      with-handler
+      unwind-protect
+      <wrong-condition-class>
+      signal
+      error
+      cerror
 
-   let/cc
-   with-handler
-   unwind-protect
-   <wrong-condition-class>
-   signal
-   error
-   cerror
+      ;; telos
+      <object>
+      <class>
+      <simple-class>
+      <list>
+      <cons>
+      <null>
+      <number>
+      <integer>
+      <fpi>
+      <float>
+      <double-float>
+      <symbol>
+      <keyword>
+      <string>
+      <simple-string>
+      <port>
+      <input-port>
+      <output-port>
+      <i/o-port>
+      <vector>
+      <simple-vector>
+      <char>
+      <simple-char>
+      <promise>
+      <table>
+      <hash-table>
+      <function>
+      <simple-function>
+      <subr>
+      <continuation>
+      <generic>
+      <simple-generic>
+      <method>
+      <simple-method>
+      <slot>
+      <local-slot>
+      <structure>
 
-   ;; telos
-   <object>
-   <class>
-   <simple-class>
-   <list>
-   <cons>
-   <null>
-   <number>
-   <integer>
-   <fpi>
-   <float>
-   <double-float>
-   <symbol>
-   <keyword>
-   <string>
-   <simple-string>
-   <port>
-   <input-port>
-   <output-port>
-   <i/o-port>
-   <vector>
-   <simple-vector>
-   <char>
-   <simple-char>
-   <promise>
-   <table>
-   <hash-table>
-   <function>
-   <simple-function>
-   <subr>
-   <continuation>
-   <generic>
-   <simple-generic>
-   <method>
-   <simple-method>
-   <slot>
-   <local-slot>
-   <structure>
+      generic-prin
+      generic-write
+      wait
 
-   generic-prin
-   generic-write
-   wait
+      make
+      initialize
+      class-hierarchy
 
-   make
-   initialize
-   class-hierarchy
+      ;; setter
+      setter
 
-   ;; setter
-   setter
+      ;; converter
+      converter
 
-   ;; converter
-   converter
+      convert
+      <conversion-condition>
+      <no-converter>
 
-   convert
-   <conversion-condition>
-   <no-converter>
+      ;; condcl
+      defcondition
+      condition?
+      condition-message
+      condition-value
+      <condition>
+      <telos-condition>
+      <telos-error>
+      <telos-general-error>
+      <telos-bad-ref>
+      <no-applicable-method>
+      <no-next-method>
+      <incompatible-method-domain>
+      <arithmetic-condition>
+      <arithmetic-error>
+      <error>
+      <general-error>
+      <bad-type>
+      <unbound-error>
+      <compilation-error>
+      <macro-error>
+      <syntax-error>
+      <user-interrupt>
 
-   ;; condcl
-   defcondition
-   condition?
-   condition-message
-   condition-value
-   <condition>
-   <telos-condition>
-   <telos-error>
-   <telos-general-error>
-   <telos-bad-ref>
-   <no-applicable-method>
-   <no-next-method>
-   <incompatible-method-domain>
-   <arithmetic-condition>
-   <arithmetic-error>
-   <error>
-   <general-error>
-   <bad-type>
-   <unbound-error>
-   <compilation-error>
-   <macro-error>
-   <syntax-error>
-   <user-interrupt>
+      ;; compare
+      binary<
+      binary=
+      <
+      =
+      >
+      <=
+      >=
+      max
+      min
+      assoc
 
-   ;; compare
-   binary<
-   binary=
-   <
-   =
-   >
-   <=
-   >=
-   max
-   min
-   assoc
+      ;; macros
+      defmacro
+      quasiquote
+      unquote
+      unquote-splicing
+      symbol-macro
+      macroexpand
+      macroexpand1
+      ;   syntax
+      ;   dprint
 
-   ;; macros
-   defmacro
-   quasiquote
-   unquote
-   unquote-splicing
-   symbol-macro
-   macroexpand
-   macroexpand1
-   ;   syntax
-   ;   dprint
+      ;; collect
+      <collection-condition>
+      <collection-error>
+      collection?
+      sequence?
+      accumulate
+      accumulate1
+      all?
+      any?
+      concatenate
+      delete
+      do
+      element
+      empty?
+      fill
+      map
+      member
+      remove
+      reverse
+      size
+      slice
 
-   ;; collect
-   <collection-condition>
-   <collection-error>
-   collection?
-   sequence?
-   accumulate
-   accumulate1
-   all?
-   any?
-   concatenate
-   delete
-   do
-   element
-   empty?
-   fill
-   map
-   member
-   remove
-   reverse
-   size
-   slice
+      ;; copy
+      deep-copy
+      shallow-copy
 
-   ;; copy
-   deep-copy
-   shallow-copy
-
-   ;; format
-   format
-
-   )
-
-  ;; from telosint, export them all while developing
-  (export
-   class-of
-   class-name
-   class-superclasses
-   class-precedence-list
-   class-slots
-   class-keywords
-   class-subclasses
-   class-instance-size
-   class-abstract?
-   generic-name
-   generic-args
-   generic-optargs?
-   generic-methods
-   generic-cache1
-   generic-cache2
-   method-generic
-   method-function
-   method-domain
-   add-method
-   slot-name
-   slot-keyword
-   slot-default
-   slot-required?
-   )
+      ;; format
+      format
+      )
+     export
+     (;; from telosint, export them all while developing
+      class-of
+      class-name
+      class-superclasses
+      class-precedence-list
+      class-slots
+      class-keywords
+      class-subclasses
+      class-instance-size
+      class-abstract?
+      generic-name
+      generic-args
+      generic-optargs?
+      generic-methods
+      generic-cache1
+      generic-cache2
+      method-generic
+      method-function
+      method-domain
+      add-method
+      slot-name
+      slot-keyword
+      slot-default
+      slot-required?
+      )
+     export
+     (block
+      return-from
+      labels
+      when
+      unless
+      while
+      defun
+      defgeneric
+      defmethod
+      generic-lambda
+      method-lambda
+      import
+      syntax
+      defmodule))
 
   (defmacro block (tag . body)
     (if (symbol? tag)
@@ -637,9 +647,6 @@
     `(lambda (next-methods arg-list ,@args)
        ,@body))
 
-  (export block return-from labels when unless while defun defgeneric
-   defmethod generic-lambda method-lambda)
-
   (defmacro import (mod)
     (if (not (or (string? mod)
                  (symbol? mod)))
@@ -649,8 +656,6 @@
       `(progn
          (setq curmod (find-module (current-module)))
          (%IMPORT curmod ,mod))))
-
-  (export import)
 
   (defmacro syntax (mod)
     (if (not (or (string? mod)
@@ -662,13 +667,8 @@
          (setq curmod (find-module (current-module)))
          (%IMPORT curmod ,mod))))
 
-  (export syntax)
-
   (defmacro defmodule (name . body)
     (error "only use defmodule in root module"
            <compilation-general-error>
            value: name))
-
-  (export defmodule)
-
   )

@@ -1546,12 +1546,19 @@ LVAL findsym(LVAL symbol, LVAL list)
     module = getmodule(symbol);
 
     for (sym = list; sym; sym = cdr(sym))
+    {
         if (strcmp(name, getstring(getpname(car(sym)))) == 0)
         {
             if (getmodule(car(sym)) == module)
+            {
                 return car(sym);
-            xlerror("symbol name clash in defmodule or import", car(sym));
+            }
+            else
+            {
+                xlerror("symbol name clash in defmodule or import", car(sym));
+            }
         }
+    }
 
     return NIL;
 }
@@ -1693,7 +1700,6 @@ static void add_imported_symbols(LVAL array, LVAL syms)
             setelement(array, hval, symlist);
         }
     }
-
 }
 
 static void check_symlist(LVAL symlist)
@@ -1913,10 +1919,42 @@ static void process_import_directive(LVAL array, LVAL implist)
     drop(1);
 }
 
+static void process_export_directive(LVAL export_syms)
+{
+    LVAL exports = getmexports(current_module);
+
+    for (LVAL syms=export_syms; syms; syms = cdr(syms))
+    {
+        LVAL sym = car(syms);
+
+        if (!symbolp(sym))
+        {
+            xlerror("non-symbol in export", sym);
+        }
+        else
+        {
+            // Intern the exported symbol into the current_module
+            LVAL mod_sym = xlenter(getstring(getpname(sym)));
+            exports = cons(mod_sym, exports);
+
+            #ifdef DEBUG
+            printf
+            (
+                "exporting symbol name %s in module %s as ",
+                getstring(getpname(sym)),
+                getstring(getmname(getmodule(mod_sym)))
+            );
+            errprint(mod_sym);
+            #endif
+        }
+    }
+
+    setmexports(current_module, exports);
+}
+
 static void process_module_directives(LVAL array, LVAL directives)
 {
     LVAL directive, value;
-
     check(2);
     push(array);
     push(directives);
@@ -1925,17 +1963,29 @@ static void process_module_directives(LVAL array, LVAL directives)
     {
         directive = car(directives);
         if (!symbolp(directive))
+        {
             xlerror("malformed directive in defmodule", directive);
+        }
 
         directives = cdr(directives);
+
         if (!consp(directives))
+        {
             xlerror("missing value for directive", directive);
+        }
 
         value = car(directives);
 
-        if (directive == s_import)
+        // For the moment treat "import" and "syntax" equivalently
+        // This supports but does not require the code to correspond to the
+        // current EuLisp definition
+        if (directive == s_import || directive == s_syntax)
         {
             process_import_directive(array, value);
+        }
+        else if (directive == s_export)
+        {
+            process_export_directive(value);
         }
         else
         {
@@ -2262,9 +2312,13 @@ static void do_export(LVAL form, int cont)
     {
         sym = car(syms);
         if (!symbolp(sym))
+        {
             xlerror("non-symbol in export", sym);
+        }
         else
+        {
             exports = cons(sym, exports);
+        }
     }
 
     setmexports(current_module, exports);

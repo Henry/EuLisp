@@ -3,8 +3,16 @@
 ;;; those tricky macros
 
 (defmodule macros
-
-    (import (root))
+    (import (root)
+     export
+     (defmacro
+      quasiquote
+      unquote
+      unquote-splicing
+      symbol-macro
+      ;syntax
+      macroexpand
+      debugging dprint))
 
   (define (getprop s v)
           (if (symbol? s)
@@ -247,18 +255,12 @@
   (put-syntax 'unquote '%syntax unq-expander)
   (put-syntax 'unquote-splicing '%syntax unq-spl-expander)
 
-  (export defmacro quasiquote unquote unquote-splicing)
-
   (define (symbol-macro x)
           (get-syntax x '%macro))
-
-  (export symbol-macro)
 
   ;  (put-syntax 'syntax '%syntax
   ;       (lambda (form)
   ;        (reintern-syntax (cadr form))))
-  ;
-  ;  (export syntax)
 
   (define (macroexpand1 expr)
           (cond ((pair? expr)
@@ -279,16 +281,12 @@
 
   (deflocal macroexpand %expand-macros)
 
-  (export macroexpand macroexpand1)
-
   (deflocal debugging ())
   (put-syntax 'dprint '%macro
               (lambda (form)
                 (if debugging
                     (cons 'print (cdr form))
                   ())))
-
-  (export debugging dprint)
 
   ;; just in case we get read twice somehow
   (if (not (bound? '%compile))

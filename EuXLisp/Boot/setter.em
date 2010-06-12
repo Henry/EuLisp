@@ -2,8 +2,8 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule setter
-
-    (import (root))
+    (import (root)
+     export (setter))
 
   (deflocal setter-table (make-table))
 
@@ -30,7 +30,4 @@
   (setter-setter symbol-plist set-symbol-plist!)
   (setter-setter table-ref table-set!)
   (setter-setter table-fill set-table-fill!)
-
-  (export setter)
-
   )

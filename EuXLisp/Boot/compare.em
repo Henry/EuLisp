@@ -2,8 +2,8 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule compare
-
-    (import (root))
+    (import (root)
+     export (binary= = binary< < > <= >= max min assoc))
 
   (deflocal %equal? equal?)
 
@@ -93,8 +93,6 @@
                    (car args)))
                 (t (apply min (min arg (car args)) (cdr args)))))
 
-  (export binary= = binary< < > <= >= max min)
-
   (deflocal %assoc assoc)
 
   (define (assoc obj list . comp)
@@ -104,7 +102,5 @@
           (cond ((atom? list) ())
                 ((comp obj (caar list)) (car list))
                 (t (assoc-loop obj (cdr list) comp))))
-
-  (export assoc)
 
   )

@@ -6,7 +6,6 @@
 ;;; interactive scheme module
 
 (defmodule scheme
-
     (import (schemer
               (rename
                 ((error ERROR))
@@ -18,7 +17,8 @@
                     error
                     defcondition
                     <error>)
-                  level0))))
+                  level0)))
+     export (!> exit error))
 
   (expose schemer)
 
@@ -29,7 +29,5 @@
             a
             <scheme-error>
             value: b))
-
-  (export !> exit error)
 
   )

@@ -5,10 +5,9 @@
 
 (defmodule arith
 
-    (import (root))
-
-  (export binary+ binary- unary- binary* binary/ unary/ binary%
-   binary-gcd gcd abs + - * / % pow zero? quotient remainder)
+    (import (root)
+     export ( binary+ binary- unary- binary* binary/ unary/ binary%
+              binary-gcd gcd abs + - * / % pow zero? quotient remainder))
 
   (deflocal %+ +)
 

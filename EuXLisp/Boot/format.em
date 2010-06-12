@@ -2,8 +2,8 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule format
-
-    (import (root condcl thread setter convert))
+    (import (root condcl thread setter convert)
+     export (format))
 
   (deflocal escape-char #\~)
 
@@ -262,8 +262,6 @@
   ((setter table-ref) escape-table #\8 escape-arg)
   ((setter table-ref) escape-table #\9 escape-arg)
   ((setter table-ref) escape-table #\. escape-arg)
-
-  (export format)
 
   (define (radix n base)
           (cond ((or (not (integer? base)) (< base 1) (> base 36))

@@ -5,8 +5,48 @@
 ;;; mainly introspective stuff
 
 (defmodule telosint
-
-    (import (root))
+    (import (root)
+     export
+     (
+       next-methods
+       arg-list
+       class-of
+       class-name
+       class-superclasses
+       class-precedence-list
+       class-slots
+       class-keywords
+       set-class-keywords!
+       class-subclasses
+       class-instance-size
+       class-abstract?
+       class?
+       subclass?
+       generic-name
+       generic-args
+       set-generic-args!
+       generic-optargs?
+       generic-methods
+       generic-cache1
+       generic-cache2
+       make-generic
+       make-method
+       method-generic
+       method-function
+       method-domain
+       add-method
+       slot-name
+       slot-keyword
+       slot-default
+       set-slot-default!
+       slot-required?
+       set-slot-required?!
+       find-slot-index
+       initialize-object
+       initialize-class
+       builtin-make-table
+       display-class-name)
+     )
 
   ; install <class> slot defaults
   (deflocal slots (class-slots <class>))
@@ -204,8 +244,6 @@
   (set-class-keywords! <simple-method> (class-keywords <method>))
   (table-set! builtin-make-table <simple-method> mkmethod)
 
-  (export next-methods arg-list)
-
   (define (strip<> name)
           (if (not (symbol? name))
               (raise-telos-error "class name not a symbol" name))
@@ -219,47 +257,4 @@
 
   (define (display-class-name obj port)
           (%display (strip<> (class-name (class-of obj))) port))
-
-  (export
-
-   class-of
-   class-name
-   class-superclasses
-   class-precedence-list
-   class-slots
-   class-keywords
-   set-class-keywords!
-   class-subclasses
-   class-instance-size
-   class-abstract?
-   class?
-   subclass?
-   generic-name
-   generic-args
-   set-generic-args!
-   generic-optargs?
-   generic-methods
-   generic-cache1
-   generic-cache2
-   make-generic
-   make-method
-   method-generic
-   method-function
-   method-domain
-   add-method
-   slot-name
-   slot-keyword
-   slot-default
-   set-slot-default!
-   slot-required?
-   set-slot-required?!
-   find-slot-index
-
-   initialize-object
-   initialize-class
-   builtin-make-table
-   display-class-name
-
-   )
-
   )

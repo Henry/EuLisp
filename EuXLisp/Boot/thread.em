@@ -2,8 +2,17 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule thread
-
-    (import (root telos telosint condcl macros))
+    (import (root telos telosint condcl macros)
+     export
+     (
+       <thread> <simple-thread>
+       make-thread thread? thread-reschedule current-thread thread-kill
+       thread-queue current-thread thread-start thread-value thread-state
+       <thread-condition> <thread-error> <thread-general-error>
+       <thread-already-started> <lock> <simple-lock> make-lock lock? lock unlock
+       <lock-condition> <lock-error> wait <wait-condition> <wait-error>
+       let/cc with-handler unwind-protect <wrong-condition-class>
+       signal error cerror))
 
   (define (no-thread op . args)
           no-state:)
@@ -372,13 +381,6 @@
                    <thread-general-error>
                    value: thread)))
 
-  (export <thread> <simple-thread> make-thread thread?
-   thread-reschedule current-thread thread-kill
-   thread-queue current-thread
-   thread-start thread-value thread-state
-   <thread-condition> <thread-error> <thread-general-error>
-   <thread-already-started>)
-
   ;; locks
 
   (defclass <lock> ()
@@ -484,9 +486,6 @@
                    value: l))
           l)
 
-  (export <lock> <simple-lock> make-lock lock? lock unlock
-   <lock-condition> <lock-error>)
-
   ;; waiting
 
   ;;  (defcondition <wait-condition> <condition>)
@@ -557,8 +556,6 @@
             (begin
               (thread-reschedule)
               (stream-suspend str))))
-
-  (export wait <wait-condition> <wait-error>)
 
   ;; error handlers
 
@@ -717,8 +714,6 @@
        (establish-uwp cleanups)
        (disestablish-uwp ,protected cleanups)))
 
-  (export let/cc with-handler unwind-protect <wrong-condition-class>)
-
   (define (error message condclass . opts)
           (signal (apply make condclass message: message opts) ()))
 
@@ -733,8 +728,6 @@
                        (signal
                          (apply make condclass message: message opts)
                          (unwrap-cc cc))))))
-
-  (export signal error cerror)
 
   ;; debugging support
 

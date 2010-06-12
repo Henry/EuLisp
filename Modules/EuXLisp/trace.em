@@ -1,6 +1,6 @@
 (defmodule trace
-
-    (import (level0))
+    (import (level0)
+     export (trace untrace))
 
   (defconstant trace-table (make-table eq))
 
@@ -23,7 +23,5 @@
              ((setter table-ref) trace-table ,name ())
              ',name)
          #f)))
-
-  (export trace untrace)
 
   )

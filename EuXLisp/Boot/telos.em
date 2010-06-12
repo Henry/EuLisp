@@ -2,8 +2,117 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule telos
+    (import (root telosint)
+     export ;; classes
+     (
+       <object>
+       <class>
+       <simple-class>
+       <list>
+       <cons>
+       <null>
+       <number>
+       <integer>
+       <fpi>
+       <float>
+       <double-float>
+       <symbol>
+       <keyword>
+       <string>
+       <simple-string>
+       <port>
+       <input-port>
+       <output-port>
+       <i/o-port>
+       <vector>
+       <simple-vector>
+       <char>
+       <simple-char>
+       <promise>
+       <env>
+       <code>
+       <module>
+       <table>
+       <hash-table>
+       <function>
+       <simple-function>
+       <closure>
+       <subr>
+       <continuation>
+       <generic>
+       <simple-generic>
+       <xsubr>
+       <csubr>
+       <method>
+       <simple-method>
+       <slot>
+       <local-slot>
+       <structure>
 
-    (import (root telosint))
+       generic-prin
+       sprin
+       sprint
+       prin
+       print
+
+       generic-write
+       swrite
+       write
+
+       wait
+
+       ; specials
+       defclass
+       generic-lambda
+       call-next-method
+       next-method?
+
+       ; functions
+       make
+       allocate
+       initialize
+
+       ; debugging
+       describe
+       class-hierarchy
+
+       current-print-depth
+       )
+     export ;; from telosint, while developing
+     (
+       class-of
+       class-name
+       class-superclasses
+       class-precedence-list
+       class-slots
+       class-keywords
+       ;   set-class-keywords!
+       class-subclasses
+       class-instance-size
+       class-abstract?
+       class?
+       subclass?
+       generic-name
+       generic-args
+       generic-methods
+       generic-cache1
+       generic-cache2
+       make-generic
+       make-method
+       method-generic
+       method-function
+       method-domain
+       add-method
+       slot-name
+       slot-keyword
+       slot-default
+       ;   set-slot-default!
+       slot-required?
+       ;   set-slot-required?!
+       ;   find-slot-index
+       ;   initialize-object
+       ;   initialize-class
+       ))
 
   (define (make cl . inits)
           (let ((maker (table-ref builtin-make-table cl)))
@@ -168,120 +277,4 @@
               (write-vector1 obj s (+ index 1) length gfun))))
 
   (define-generic (wait thread timeout))
-
-  (export
-
-   ; classes
-   <object>
-   <class>
-   <simple-class>
-   <list>
-   <cons>
-   <null>
-   <number>
-   <integer>
-   <fpi>
-   <float>
-   <double-float>
-   <symbol>
-   <keyword>
-   <string>
-   <simple-string>
-   <port>
-   <input-port>
-   <output-port>
-   <i/o-port>
-   <vector>
-   <simple-vector>
-   <char>
-   <simple-char>
-   <promise>
-   <env>
-   <code>
-   <module>
-   <table>
-   <hash-table>
-   <function>
-   <simple-function>
-   <closure>
-   <subr>
-   <continuation>
-   <generic>
-   <simple-generic>
-   <xsubr>
-   <csubr>
-   <method>
-   <simple-method>
-   <slot>
-   <local-slot>
-   <structure>
-
-   generic-prin
-   sprin
-   sprint
-   prin
-   print
-
-   generic-write
-   swrite
-   write
-
-   wait
-
-   ; specials
-   defclass
-   generic-lambda
-   call-next-method
-   next-method?
-
-   ; functions
-   make
-   allocate
-   initialize
-
-   ; debugging
-   describe
-   class-hierarchy
-
-   current-print-depth
-   )
-
-  ;; from telosint, while developing
-  (export
-
-   class-of
-   class-name
-   class-superclasses
-   class-precedence-list
-   class-slots
-   class-keywords
-   ;   set-class-keywords!
-   class-subclasses
-   class-instance-size
-   class-abstract?
-   class?
-   subclass?
-   generic-name
-   generic-args
-   generic-methods
-   generic-cache1
-   generic-cache2
-   make-generic
-   make-method
-   method-generic
-   method-function
-   method-domain
-   add-method
-   slot-name
-   slot-keyword
-   slot-default
-   ;   set-slot-default!
-   slot-required?
-   ;   set-slot-required?!
-   ;   find-slot-index
-   ;   initialize-object
-   ;   initialize-class
-
-   )
-
   )

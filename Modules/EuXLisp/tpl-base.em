@@ -5,8 +5,10 @@
 ;;; Basic classes and macros.
 
 (defmodule tpl-base
-
-    (import (level0))
+    (import (level0)
+     export (<paralation-internal> p-size index-internal shape-internal
+             attr make-paralation-internal <field> value paralation make-field
+             copy-field <mapping> from-key to-key make-mapping elwise))
 
   ;; structures
   (defclass <paralation-internal> ()
@@ -92,9 +94,5 @@
                              *elt-result*))
                          (value (index-internal (paralation ,(car fields))))
                          ,@(map (lambda (name) `(value ,name)) fields))))))
-
-  (export <paralation-internal> p-size index-internal shape-internal
-   attr make-paralation-internal <field> value paralation make-field
-   copy-field <mapping> from-key to-key make-mapping elwise)
 
   )

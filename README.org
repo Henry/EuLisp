@@ -163,13 +163,17 @@
     ditto for environment variable ~EU_MODULE_PATH~, then builtin
     ~MODULE_SEARCH_PATH~ (e.g., you might want to provide a set of system
     supplied modules).
-
-  The default built-in settings should work for a default build with the files
-  in their default locations.
-
-*** Running the interpreter
+*** Default settings
+    The default built-in settings should work for a default build with the files
+    in their default locations.
+*** Running the interpreter interactively
     Run /Bin.${ARCH}/euxlisp/ \\
     without options to start the EuXLisp interpreter. The read-eval-print loop
     provides extra commands see [[http://henry.github.com/EuLisp/Doc/EuXLispNotes.org][EuXLisp]] notes.
+*** Executing a module
+    To execute the module =fact= in file /fact.em/ run \\
+    /echo "(!> fact)"  | ../../Bin.x86_64/euxlisp -q/ \\
+    The /echo/ pipes the load module /!>/ command to the interpreter.  In the
+    future there will be a command-line option to execute a module directly.
 
 * [[http://henry.github.com/EuLisp/TODO.org][To Do]]

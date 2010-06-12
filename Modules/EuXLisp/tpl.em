@@ -3,8 +3,11 @@
 ;;; EuSchemed by RJB, Sept 95.
 
 (defmodule tpl
-
-    (import (level0 tpl-base))
+    (import (level0 tpl-base)
+     export (<field> paralation index <mapping> elwise
+             make-paralation match move inverse
+             field-ref field-length vref shape shape-class
+             attributes field-get field-put fieldp))
 
   (defun make-paralation (size)
     (let ((new-paralation (make-paralation-internal
@@ -98,11 +101,6 @@
 
   (defun fieldp (object)
     (subclass? (class-of object) field))
-
-  (export <field> paralation index <mapping> elwise
-   make-paralation match move inverse
-   field-ref field-length vref shape shape-class
-   attributes field-get field-put fieldp)
 
   )
 

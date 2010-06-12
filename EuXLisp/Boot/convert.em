@@ -2,8 +2,8 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule convert
-
-    (import (root setter condcl thread))
+    (import (root setter condcl thread)
+     export (converter convert <conversion-condition> <no-converter>))
 
   (deflocal converter-table (make-table))
 
@@ -35,8 +35,6 @@
                  <no-converter>
                  source: obj
                  class: class))
-
-  (export converter convert <conversion-condition> <no-converter>)
 
   (define-generic (converter->string obj))
   (define-method (converter->string (obj <symbol>))
