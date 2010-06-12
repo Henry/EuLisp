@@ -267,8 +267,8 @@ extern LispRef i_all_bindings[];
 #define compute_keywords_fn_index 6 
 #define connection_port_fn_index 6 
 #define _number_of_warnings__X42_X42_fn_index 42 
-#define buffered_stream__X63_fn_index 16 
 #define write_fn_index 12 
+#define buffered_stream__X63_fn_index 16 
 #define sf_direct_slots_fn_index 38 
 #define table_ref_fn_index 4 
 #define digitp_fn_index 3 
@@ -339,8 +339,8 @@ extern LispRef i_all_bindings[];
 #define int_binary__X47_fn_index 11 
 #define fill_buffer_fn_index 3 
 #define _redefine_imported_bindings__X42_X42_fn_index 33 
-#define stdin_fn_index 50 
 #define eul_list_as_eul_string_fn_index 21 
+#define map_fn_index 2 
 #define deep_copy_fn_index 3 
 #define oddp_fn_index 5 
 #define _keyword__X60_X62_fn_index 81 
@@ -351,7 +351,7 @@ extern LispRef i_all_bindings[];
 #define access_table_values_fn_index 8 
 #define read_line_fn_index 15 
 #define access_table_do_fn_index 7 
-#define map_fn_index 2 
+#define stdin_fn_index 50 
 #define _get_loaded_syntax_module__X42_X42_fn_index 31 
 #define name_slot_defaults_fn_index 78 
 #define _first_year_students__X42_X42_fn_index 32 

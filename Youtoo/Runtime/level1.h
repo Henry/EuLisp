@@ -234,8 +234,8 @@ extern LispRef level1_bindings[];
 #define listify_string_fn_index 5 
 #define compute_keywords_fn_index 6 
 #define connection_port_fn_index 6 
-#define buffered_stream__X63_fn_index 16 
 #define write_fn_index 12 
+#define buffered_stream__X63_fn_index 16 
 #define sf_direct_slots_fn_index 38 
 #define table_ref_fn_index 4 
 #define digitp_fn_index 3 
@@ -298,15 +298,15 @@ extern LispRef level1_bindings[];
 #define _handler__X60_X62_fn_index 2 
 #define int_binary__X47_fn_index 11 
 #define fill_buffer_fn_index 3 
-#define stdin_fn_index 50 
 #define eul_list_as_eul_string_fn_index 21 
+#define map_fn_index 2 
 #define deep_copy_fn_index 3 
 #define oddp_fn_index 5 
 #define _keyword__X60_X62_fn_index 81 
 #define _condition__X60_X62_fn_index 9 
 #define handlerp_fn_index 10 
 #define slot_name_fn_index 80 
-#define map_fn_index 2 
+#define stdin_fn_index 50 
 #define vector_empty__X63_fn_index 16 
 #define read_line_fn_index 15 
 #define name_slot_defaults_fn_index 78 

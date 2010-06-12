@@ -306,8 +306,8 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"listify-string", make_entry(5, "string", "listify-string"));
   eul_fast_table_set(level1_tab,"compute-keywords", make_entry(6, "mop-alloc", "compute-keywords"));
   eul_fast_table_set(level1_tab,"connection-port", make_entry(6, "socket", "connection-port"));
-  eul_fast_table_set(level1_tab,"buffered-stream?", make_entry(16, "stream2", "buffered-stream?"));
   eul_fast_table_set(level1_tab,"write", make_entry(12, "stream", "write"));
+  eul_fast_table_set(level1_tab,"buffered-stream?", make_entry(16, "stream2", "buffered-stream?"));
   eul_fast_table_set(level1_tab,"sf-direct-slots", make_entry(38, "mop-class", "sf-direct-slots"));
   eul_fast_table_set(level1_tab,"table-ref", make_entry(4, "table", "table-ref"));
   eul_fast_table_set(level1_tab,"digitp", make_entry(3, "character", "digitp"));
@@ -363,14 +363,14 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"<handler>", make_entry(2, "handler", "<handler>"));
   eul_fast_table_set(level1_tab,"int-binary/", make_entry(11, "boot1", "/"));
   eul_fast_table_set(level1_tab,"fill-buffer", make_entry(3, "stream2", "fill-buffer"));
-  eul_fast_table_set(level1_tab,"stdin", make_entry(50, "stream2", "stdin"));
+  eul_fast_table_set(level1_tab,"map", make_entry(2, "collect", "map"));
   eul_fast_table_set(level1_tab,"deep-copy", make_entry(3, "copy", "deep-copy"));
   eul_fast_table_set(level1_tab,"oddp", make_entry(5, "integer", "oddp"));
   eul_fast_table_set(level1_tab,"<keyword>", make_entry(81, "mop-class", "<keyword>"));
   eul_fast_table_set(level1_tab,"<condition>", make_entry(9, "condition", "<condition>"));
   eul_fast_table_set(level1_tab,"handlerp", make_entry(10, "handler", "handlerp"));
   eul_fast_table_set(level1_tab,"slot-name", make_entry(80, "mop-class", "slot-name"));
-  eul_fast_table_set(level1_tab,"map", make_entry(2, "collect", "map"));
+  eul_fast_table_set(level1_tab,"stdin", make_entry(50, "stream2", "stdin"));
   eul_fast_table_set(level1_tab,"vector-empty?", make_entry(16, "vector", "vector-empty?"));
   eul_fast_table_set(level1_tab,"read-line", make_entry(15, "read", "read-line"));
   eul_fast_table_set(level1_tab,"name-slot-defaults", make_entry(78, "mop-class", "name-slot-defaults"));
