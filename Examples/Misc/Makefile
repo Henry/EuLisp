@@ -21,7 +21,8 @@ OTHERS_EM = csem
 
 SCHEME_EXAMPLES = puzzle
 
-makeExe = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1
+makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level0
+makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1
 
 ###-----------------------------------------------------------------------------
 
@@ -29,28 +30,28 @@ all: $(EXAMPLES_EXE)
 
 # A stress test
 $(ARCH_DIR)/append: append.em | $(ARCH_DIR)/.
-	$(call makeExe,append)
+	$(call makeExe1,append)
 
 $(ARCH_DIR)/div: div.em
-	$(call makeExe,div)
+	$(call makeExe1,div)
 
 $(ARCH_DIR)/dphil: dphil.em
-	$(call makeExe,dphil)
+	$(call makeExe1,dphil)
 
 $(ARCH_DIR)/echo: echo.em
-	$(call makeExe,echo)
+	$(call makeExe1,echo)
 
 $(ARCH_DIR)/echod: echod.em
-	$(call makeExe,echod)
+	$(call makeExe1,echod)
 
 $(ARCH_DIR)/empty: empty.em
-	$(call makeExe,empty)
+	$(call makeExe1,empty)
 
 $(ARCH_DIR)/fact: fact.em
-	$(call makeExe,fact)
+	$(call makeExe0,fact)
 
 $(ARCH_DIR)/ffi1: ffi1.em
-	$(call makeExe,ffi1)
+	$(call makeExe1,ffi1)
 
 $(ARCH_DIR)/eul-ffi2.o: eul-ffi2.c
 	$(CC) $(CFLAGS) -c eul-ffi2.c -o $(ARCH_DIR)/eul-ffi2.o
@@ -59,50 +60,50 @@ $(ARCH_DIR)/ffi2: ffi2.em $(ARCH_DIR)/eul-ffi2.o
 	${U2} ${U2FLAGS} ffi2 -od $(ARCH_DIR) -l level1 -fff eul-ffi2
 
 $(ARCH_DIR)/hanoi: hanoi.em
-	$(call makeExe,hanoi)
+	$(call makeExe1,hanoi)
 
 $(ARCH_DIR)/macro-dispatch-char: macro-dispatch-char.em macro-dispatch-char.dat
-	$(call makeExe,macro-dispatch-char)
+	$(call makeExe1,macro-dispatch-char)
 
 $(ARCH_DIR)/nfib: nfib.em
-	$(call makeExe,nfib)
+	$(call makeExe1,nfib)
 
 $(ARCH_DIR)/null: null.em
-	$(call makeExe,null)
+	$(call makeExe1,null)
 
 $(ARCH_DIR)/padd: padd.em
-	$(call makeExe,padd)
+	$(call makeExe1,padd)
 
 # Needs ../Scheme in EUL_LOAD_PATH
 $(ARCH_DIR)/puzzle: puzzle.em
-	$(call makeExe,puzzle)
+	$(call makeExe1,puzzle)
 
 $(ARCH_DIR)/random2.c: random2.em
 	${U2} ${U2FLAGS} -c random2 -od $(ARCH_DIR) -l level1 -l math
 
 $(ARCH_DIR)/sieve: sieve.em
-	$(call makeExe,sieve)
+	$(call makeExe1,sieve)
 
 $(ARCH_DIR)/sumTo: sumTo.em
 	${U2} ${U2FLAGS} sumTo -od $(ARCH_DIR) -l boot
 
 $(ARCH_DIR)/tak: tak.em
-	$(call makeExe,tak)
+	$(call makeExe1,tak)
 
 $(ARCH_DIR)/takl: takl.em
-	$(call makeExe,takl)
+	$(call makeExe1,takl)
 
 $(ARCH_DIR)/triang: triang.em
-	$(call makeExe,triang)
+	$(call makeExe1,triang)
 
 $(ARCH_DIR)/url: url.em
-	$(call makeExe,url)
+	$(call makeExe1,url)
 
 $(ARCH_DIR)/url2: url2.em
-	$(call makeExe,url2)
+	$(call makeExe1,url2)
 
 $(ARCH_DIR)/url3: url3.em
-	$(call makeExe,url3)
+	$(call makeExe1,url3)
 
 ###-----------------------------------------------------------------------------
 
