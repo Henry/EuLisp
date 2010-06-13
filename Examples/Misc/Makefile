@@ -1,6 +1,6 @@
 ### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 ###-----------------------------------------------------------------------------
-### ---                   EuLisp System 'youtoo'
+### ---                             EuLisp Examples
 ###-----------------------------------------------------------------------------
 
 ###-----------------------------------------------------------------------------
@@ -11,21 +11,35 @@ ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
+### EuLisp Level-0 examples
+###-----------------------------------------------------------------------------
+EXAMPLES_0 = fact
+EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
-EXAMPLES = append div dphil echo echod empty fact ffi1 ffi2 hanoi \
+###-----------------------------------------------------------------------------
+### EuLisp Level-1 examples
+###-----------------------------------------------------------------------------
+EXAMPLES_1 = append div dphil echo echod empty hanoi \
 	macro-dispatch-char nfib null padd sieve sumTo tak takl triang \
 	url url2 url3
-EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
 OTHERS_EM = csem
 
-SCHEME_EXAMPLES = puzzle
+###-----------------------------------------------------------------------------
+### All examples
+###-----------------------------------------------------------------------------
+EXAMPLES = $(EXAMPLES_0) $(EXAMPLES_1)
+EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
+###-----------------------------------------------------------------------------
+### Youtoo default compile rules for Level-0 and Level-1
+###-----------------------------------------------------------------------------
 makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level0
 makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1
 
 ###-----------------------------------------------------------------------------
-
+### Youtoo compile rules for all examples
+###-----------------------------------------------------------------------------
 all: $(EXAMPLES_EXE)
 
 # A stress test
@@ -50,15 +64,6 @@ $(ARCH_DIR)/empty: empty.em
 $(ARCH_DIR)/fact: fact.em
 	$(call makeExe0,fact)
 
-$(ARCH_DIR)/ffi1: ffi1.em
-	$(call makeExe1,ffi1)
-
-$(ARCH_DIR)/eul-ffi2.o: eul-ffi2.c
-	$(CC) $(CFLAGS) -c eul-ffi2.c -o $(ARCH_DIR)/eul-ffi2.o
-
-$(ARCH_DIR)/ffi2: ffi2.em $(ARCH_DIR)/eul-ffi2.o
-	${U2} ${U2FLAGS} ffi2 -od $(ARCH_DIR) -l level1 -fff eul-ffi2
-
 $(ARCH_DIR)/hanoi: hanoi.em
 	$(call makeExe1,hanoi)
 
@@ -73,10 +78,6 @@ $(ARCH_DIR)/null: null.em
 
 $(ARCH_DIR)/padd: padd.em
 	$(call makeExe1,padd)
-
-# Needs ../Scheme in EUL_LOAD_PATH
-$(ARCH_DIR)/puzzle: puzzle.em
-	$(call makeExe1,puzzle)
 
 $(ARCH_DIR)/random2.c: random2.em
 	${U2} ${U2FLAGS} -c random2 -od $(ARCH_DIR) -l level1 -l math
@@ -106,22 +107,29 @@ $(ARCH_DIR)/url3: url3.em
 	$(call makeExe1,url3)
 
 ###-----------------------------------------------------------------------------
+###  Run the examples
+###-----------------------------------------------------------------------------
+.PHONY: runeuxlisp
+runeuxlisp: $(EXAMPLES_0_EM)
+	@$(foreach example, $(EXAMPLES_0_EM), \
+		$(EUL_BIN_DIR)/euxlisp -m $(example);)
 
 # Currently echo, echod and padd are not run because they are interactive
-RUN = append div dphil empty fact ffi2 hanoi macro-dispatch-char nfib null \
+RUN = fact append div dphil empty hanoi macro-dispatch-char nfib null \
 	sieve sumTo tak takl triang url2
-RUN_EXE = $(RUN:%=$(ARCH_DIR)/%)
 
-run: $(RUN_EXE)
-	@$(foreach example, $(RUN_EXE), \
+.PHONY: runyoutoo
+runyoutoo: $(EXAMPLES_EXE)
+	@$(foreach example, $(RUN), \
 		export LD_LIBRARY_PATH=$(EUL_LIB_DIR):$(LD_LIBRARY_PATH);\
-		./$(example);)
-	$(ARCH_DIR)/ffi1 "20"
+		$(ARCH_DIR)/$(example);)
 	$(ARCH_DIR)/url www.cs.bath.ac.uk /~jap/ak1/youtoo/home.html
 	$(ARCH_DIR)/url3 http://www.cs.bath.ac.uk/~jap/ak1/youtoo/home.html
 
-###-----------------------------------------------------------------------------
+.PHONY: run
+run: runeuxlisp runyoutoo
 
+###-----------------------------------------------------------------------------
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
