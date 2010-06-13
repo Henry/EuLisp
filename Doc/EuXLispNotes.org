@@ -1489,13 +1489,15 @@
 
 * Command Line Arguments
   The EuXLisp interpreter accepts a few arguments:
-  + =-h=, =--help=             Display this usage information.
-  + =-q=, =--quiet=            Print no messages, prompts or values.
-  + =-n=, =--no-image=         Do not read in the initial Lisp image.
-  + =-N=, =--no-sys-calls=     Disable system calls.
+  + =-h=, =--help= Display this usage information.
+  + =-q=, =--quiet= Print no messages, prompts or values.
+  + =-n=, =--no-image= Do not read in the initial Lisp image.
+  + =-N=, =--no-sys-calls= Disable system calls.
   + =-s= /file/, =--script= /file/ Read and execute script from /file/, see
     below.
-  + =-m= /file/,  =--module= /file/      Read and execute module from /file/.
+  + =-m= /file/,  =--module= /file/ Read and execute module from /file/.
+  + =-i= /file/, =--image= /file/ Read the given image /file/ rather than the
+    default.
   + =-t=, =--trace=            Switch on byte-code level tracing.
 
   Other arguments are passed to the intepreter and are available as =(getarg 0)=

@@ -37,6 +37,9 @@ EuXLisp(1)                                                          EuXLisp(1)
               [1m-m [4m[22mfile[24m, [1m--module [4m[22mfile[0m
                      read and execute module from [4mfile[24m.
 
+              [1m-i [4m[22mfile[24m, [1m--image [4m[22mfile[0m
+                     read the given image [4mfile[24m rather than the default.
+
               [1m-t[22m, [1m--trace[0m
                      switch on byte-code level tracing.
 
@@ -85,7 +88,7 @@ EuXLisp(1)                                                          EuXLisp(1)
 [1mENVIRONMENT[0m
        [1mEU_IMAGE_PATH[0m
               a colon-separated list of directory names: where to look for the
-              initial  EuLisp  image  (generally  named  [1mimage.wks[22m).   [1meuxlisp[0m
+              initial  EuLisp  image  (generally  named \uxlisp.wks[1m).  euxlisp[0m
               searches these first, then a system-installed path.
 
        [1mEU_MODULE_PATH[0m
@@ -96,7 +99,7 @@ EuXLisp(1)                                                          EuXLisp(1)
 
 [1mBUGS[0m
        If  [1meuxlisp  [22mstarts  up  in  module  [1mroot [22mthen it is a good bet that it
-       couldn't find the image file [1mimage.wks[0m
+       couldn't find the image file [1meuxlisp.wks[0m
 
        There are a few differences between [1meuxlisp [22mand the EuLisp Level 0 def-
        inition, but as both are still changing it's futile to list them.
@@ -123,4 +126,4 @@ EuXLisp(1)                                                          EuXLisp(1)
 
 
 
-                                  8 June 2010                       EuXLisp(1)
+                                 13 June 2010                       EuXLisp(1)

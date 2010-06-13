@@ -1,4 +1,4 @@
-.TH EuXLisp 1 "8 June 2010"
+.TH EuXLisp 1 "13 June 2010"
 .SH NAME
 euxlisp \- EuLisp Level 0 interpreter
 .SH SYNOPSIS
@@ -39,6 +39,9 @@ and the like in shell scripts.
 .TP
 .BI \-m " \fIfile\fR,\fP " \--module " \fIfile"
 read and execute module from \fIfile\fP.
+.TP
+.BI \-i " \fIfile\fR,\fP " \--image " \fIfile"
+read the given image \fIfile\fP rather than the default.
 .TP
 .BI \-t "\fR,\fP " \-\-trace
 switch on byte-code level tracing.
@@ -109,7 +112,7 @@ for extra information.
 .B EU_IMAGE_PATH
 a colon-separated list of directory names: where to look for the initial EuLisp
 image (generally named
-\fBimage.wks\fP).
+\euxlisp.wks\fP).
 .B euxlisp
 searches these first, then a system-installed path.
 .br
@@ -127,7 +130,7 @@ If
 starts up in module
 .B root
 then it is a good bet that it couldn't find the image file
-.B image.wks
+.B euxlisp.wks
 
 There are a few differences between
 .B euxlisp

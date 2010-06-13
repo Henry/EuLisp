@@ -131,7 +131,7 @@ void xlmain(int argc, char **argv)
     clargc = argc;
 
     // A string listing valid short options letters.
-    const char* const short_options = "hqnNs:m:t";
+    const char* const short_options = "hqnNs:m:i:t";
 
     // An array describing valid long options.
     const struct option long_options[] =
@@ -142,6 +142,7 @@ void xlmain(int argc, char **argv)
         { "no-sys-calls", 0, NULL, 'N' },
         { "script",       1, NULL, 's' },
         { "module",       1, NULL, 'm' },
+        { "image",        1, NULL, 'i' },
         { "trace",        0, NULL, 't' },
         { NULL,           0, NULL, 0   }   // Required at end of array.
     };
@@ -179,8 +180,7 @@ void xlmain(int argc, char **argv)
                 no_system = TRUE;       // don't allow a system call
                 break;
 
-            case 's':   // -s or --script
-                // This option takes an argument, the name of the script file.
+            case 's':   // -s file or --script file
                 filein = osaopen(optarg, "r");
                 if (filein == NULL)
                 {
@@ -204,10 +204,13 @@ void xlmain(int argc, char **argv)
                 quiet = TRUE;   // no mesages
                 break;
 
-            case 'm':   // -m or --module
-                image_name = IMAGE_MOD;
-
-                // This option takes an argument, the name of the module file.
+            case 'm':   // -m file or --module file
+                // Reset the image_name
+                // if it hasn't already reset by the --image option
+                if (strcmp(image_name, IMAGE) == 0)
+                {
+                    image_name = IMAGE_MOD;
+                }
                 filein = osaopen(optarg, "r");
                 if (filein == NULL)
                 {
@@ -222,6 +225,11 @@ void xlmain(int argc, char **argv)
                 }
 
                 quiet = TRUE;   // no messages
+                break;
+
+            case 'i':   // -i file or --image file
+                // Set the name of the image file to the argument
+                image_name = optarg;
                 break;
 
             case 't':   // -t or --trace
@@ -260,13 +268,12 @@ void xlmain(int argc, char **argv)
             fprintf
             (
                 stderr,
-                "\nWarning: Could not find image file "
-                IMAGE
-                " in path "
+                "\nError: Could not find image file %s in path "
                 IMAGE_SEARCH_PATH
-                "\n"
-                "Loading root module.\n"
+                "\n",
+                image_name
             );
+            exit(3);
         }
 
         xlinitws(5000);
@@ -317,6 +324,7 @@ static void print_usage(FILE* stream, int exit_code)
         "  -N  --no-sys-calls     Disable system calls.\n"
         "  -s  --script file      Read and execute script from file.\n"
         "  -m  --module file      Read and execute module from file.\n"
+        "  -i  --image file       Read the given image file rather than the default.\n"
         "  -t  --trace            Switch on byte-code level tracing.\n"
     );
     exit(exit_code);

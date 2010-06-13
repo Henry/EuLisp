@@ -46,19 +46,23 @@ or other agent. </dd>
 <dd>read and execute
 module from <i>file</i>. </dd>
 
+<dt><b>-i</b><i> <i>file</i>, </i><b>--image</b><i> <i>file</i> </i></dt>
+<dd>read the given image <i>file</i> rather than
+the default. </dd>
+
 <dt><b>-t</b><i>, </i><b>--trace</b> </dt>
 <dd>switch on byte-code level tracing. </dd>
 </dl>
 <p>
-Other args are
-not interpreted, but are available though <b>getarg</b> (see below) 
+Other args are not
+interpreted, but are available though <b>getarg</b> (see below) 
 <p> </blockquote>
 
 <h2><a name='sect4' href='#toc4'>Features</a></h2>
-The
-module that contains all the useful stuff (e.g., <b>cons</b> and friends) is called
-<b>level0</b>: if you import no modules, you get nothing at all, not even special
-forms. So a typical module looks like <b> <br>
+The module
+that contains all the useful stuff (e.g., <b>cons</b> and friends) is called <b>level0</b>:
+if you import no modules, you get nothing at all, not even special forms.
+So a typical module looks like <b> <br>
 <pre>(defmodule foo
    (import (level0 ...))
    ...
@@ -100,8 +104,8 @@ in the loop type <b>help:</b> for extra information.
 <dt><b>EU_IMAGE_PATH</b>
 </dt>
 <dd>a colon-separated list of directory names: where to look for the initial
-EuLisp image (generally named <b>image.wks</b>). <b>euxlisp</b> searches these first, then
-a system-installed path. <br>
+EuLisp image (generally named \uxlisp.wks). <b>euxlisp</b> searches these first,
+then a system-installed path. <br>
 </dd>
 
 <dt><b>EU_MODULE_PATH</b> </dt>
@@ -116,7 +120,7 @@ If <b>euxlisp</b> starts
 
 <p>up in module <b>root</b> then it is a good bet that it couldn&rsquo;t find the image
 
-<p>file <b>image.wks</b> 
+<p>file <b>euxlisp.wks</b> 
 <p> There are a few differences between <b>euxlisp</b> and the EuLisp
 Level 0 definition, but as both are still changing it&rsquo;s futile to list them.
 
