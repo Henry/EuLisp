@@ -206,12 +206,7 @@ FILE *path_open
     )
     {
         #ifdef PATH_OPEN
-        #ifdef RISCOS
-        fprintf(stderr, "searching env " _path_open_string_format "\n", path,
-        fname);
-        #else
         fprintf(stderr, "searching env %s/%s\n", path, fname);
-        #endif
         #endif
         sprintf(buf, _path_open_string_format, path, fname);
         fp = osbopen(buf, "r");
@@ -231,12 +226,7 @@ FILE *path_open
     {
         path = *ppath;
         #ifdef PATH_OPEN
-        #ifdef RISCOS
-        fprintf(stderr, "searching builtin " _path_open_string_format "\n",
-        path, fname);
-        #else
         fprintf(stderr, "searching builtin %s/%s\n", path, fname);
-        #endif
         #endif
         sprintf(buf, "%s/%s", path, fname);
         fp = osbopen(buf, "r");

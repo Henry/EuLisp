@@ -1586,24 +1586,18 @@ static int load_module(LVAL sym)
     int readit;
 
     if (symbolp(sym))
+    {
         strcpy(name, getstring(getpname(sym)));
+    }
     else
+    {
         strcpy(name, getstring(sym));
-    #ifndef RISCOS
+    }
     strcat(name, ".em");
-    #endif
 
     cpush(sym);
 
     fp = path_open(name, "EU_MODULE_PATH", module_search_path, path);
-
-    #ifdef RISCOS
-    if (fp == NULL)
-    {
-        strcat(name, ".em");
-        fp = path_open(name, "EU_MODULE_PATH", module_search_path, path);
-    }
-    #endif
 
     if (fp == NULL)
     {

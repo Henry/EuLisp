@@ -6,16 +6,9 @@
 #ifdef NOTDEF
 #include <dos.h>
 #endif
-#ifdef RISCOS
-#define __sys_types_h
-#endif
 #include <sys/types.h>
 #include <time.h>
-#ifdef RISCOS
-#include "netlib:sys.h.time"
-#else
 #include <sys/time.h>
-#endif
 #include "xscheme.h"
 
 #define LBSIZE 200
@@ -28,7 +21,7 @@ extern FILE *tfp;
 
 // old errnos were everywhere
 #if 0
-#if defined(CODEBLDR) || defined(RISCOS)
+#if defined(CODEBLDR)
 #include <errno.h>
 #else
 extern int errno;
@@ -89,13 +82,7 @@ void check_if_disabled();
 // main - the main routine
 int main(int argc, char *argv[])
 {
-    #ifdef RISCOS
-    extern int __uname_control;
-    __uname_control = 8;
-    setbuf(stdout, NULL);
-    #endif
     xlmain(argc, argv);
-
     return 0;
 }
 
@@ -406,7 +393,7 @@ int ostgetc()
 
 int osselect(FILE *fp)
 {
-    #if defined(UNIX) && !defined(RISCOS)
+    #if defined(UNIX)
     int ch, fd;
     fd_set readfds;
     struct timeval poll;
@@ -455,14 +442,9 @@ int ospeekchar(FILE *fp)
     if (fp->_r > 0)
         return (int)*fp->_p;
     #else
-    #ifdef RISCOS
-    if (fp->i_cnt > 0)
-        return (int)*fp->i_ptr;
-    #else
     // otherwise it generally looks like this
     if (fp->_cnt > 0)
         return (int)*fp->_ptr;
-    #endif // 386BSD
     #endif // linux
     #endif
 

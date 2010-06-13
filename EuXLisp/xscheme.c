@@ -127,6 +127,8 @@ void xlmain(int argc, char **argv)
     no_system = FALSE;
     char* image_name = IMAGE;
 
+    // Remember the name of the program, to incorporate in messages.
+    program_name = argv[0];
     clargv = argv;
     clargc = argc;
 
@@ -146,13 +148,6 @@ void xlmain(int argc, char **argv)
         { "trace",        0, NULL, 't' },
         { NULL,           0, NULL, 0   }   // Required at end of array.
     };
-
-    // The name of the file to receive program output
-    // or NULL for standard output.  */
-    const char* output_filename = NULL;
-
-    // Remember the name of the program, to incorporate in messages.
-    program_name = argv[0];
 
     int next_option;
 

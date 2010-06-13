@@ -172,7 +172,7 @@
     provides extra commands see [[http://henry.github.com/EuLisp/Doc/EuXLispNotes.org][EuXLisp]] notes.
 *** Executing a module
     To execute the module =fact= in file /fact.em/ run \\
-    /echo "(!> fact)"  | ../../Bin.x86_64/euxlisp -q/ \\
+    /echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q/ \\
     The /echo/ pipes the load module /!>/ command to the interpreter.  In the
     future there will be a command-line option to execute a module directly.
 
