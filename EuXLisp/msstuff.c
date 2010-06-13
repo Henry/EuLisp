@@ -128,16 +128,18 @@ void oserror(char *msg)
 #ifdef DOBBS
 int osrand(int n)
 {
-    long k1;
-
     // make sure we don't get stuck at zero
     if (rseed == 0L)
+    {
         rseed = 1L;
+    }
 
     // algorithm taken from Dr. Dobbs Journal, November 1985, page 91
-    k1 = rseed / 127773L;
+    long k1 = rseed / 127773L;
     if ((rseed = 16807L * (rseed - k1 * 127773L) - k1 * 2836L) < 0L)
+    {
         rseed += 2147483647L;
+    }
 
     // return a random number between 0 and n-1
     return ((int)(rseed % (long)n));
@@ -147,13 +149,12 @@ int osrand(int n)
 int osrand(int n)
 {
     static int x = 50, y = 100, z = 150;
-    double val;
 
     x = (171 * x) % 30269;
     y = (172 * y) % 30307;
     z = (170 * z) % 30323;
 
-    val = (x / 30269.0) + (y / 30307.0) + (z / 30323.0);
+    double val = (x / 30269.0) + (y / 30307.0) + (z / 30323.0);
     val -= (int)val;
 
     return (int)(n * val);
@@ -184,24 +185,25 @@ FILE *osbopen(char *name, char *mode)
 int osclose(FILE *fp)
 {
     #ifdef NOTDEF
-    int ret;
-    LVAL list1, list2;
-
     if (tmpfilelist == NIL)
+    {
         return fclose(fp);
+    }
 
     if (getfile(car(car(tmpfilelist))) == fp)
     {
-        ret = fclose(fp);
+        int ret = fclose(fp);
         osunlink(getstring(cdr(car(tmpfilelist))));
         tmpfilelist = cdr(tmpfilelist);
         return ret;
     }
+
+    LVAL list1, list2;
     for (list1 = tmpfilelist, list2 = cdr(list1); list2;
          list1 = cdr(list1), list2 = cdr(list2))
         if (getfile(car(car(list2))) == fp)
         {
-            ret = fclose(fp);
+            int ret = fclose(fp);
             osunlink(getstring(cdr(car(list2))));
             cdr(list1) = cdr(list2);
             return ret;
@@ -233,15 +235,14 @@ int osseek(FILE *fp, long offset, int whence)
 // osagetc - get a character from an ascii file
 int osagetc(FILE *fp)
 {
-    int ch;
-
     #ifdef UNIX
     reading = 1;
-    ch = getc(fp);
+    int ch = getc(fp);
     reading = 0;
     #else
-    ch = getc(fp);
+    int ch = getc(fp);
     #endif
+
     return ch;
 }
 
@@ -254,14 +255,12 @@ int osaputc(int ch, FILE *fp)
 // osbgetc - get a character from a binary file
 int osbgetc(FILE *fp)
 {
-    int ch;
-
     #ifdef UNIX
     reading = 1;
-    ch = getc(fp);
+    int ch = getc(fp);
     reading = 0;
     #else
-    ch = getc(fp);
+    int ch = getc(fp);
     #endif
     return ch;
 }
@@ -277,14 +276,14 @@ int ostgetc()
 {
     #ifdef UNIX
     extern int ctrl_c;
-    #else
-    int ch;
     #endif
     extern int quiet;
 
     // check for a buffered character
     if (lcount--)
+    {
         return (lbuf[lindex++]);
+    }
 
     #ifdef UNIX
     reading = 1;
@@ -304,7 +303,9 @@ int ostgetc()
     if (feof(stdin))
     {
         if (!quiet)
+        {
             ostputc('\n');
+        }
         clearerr(stdin);
         lcount = 0;
         return EOF;
@@ -312,8 +313,12 @@ int ostgetc()
 
     // write it to the transcript file
     if (tfp)
+    {
         for (lindex = 0; lindex < lcount; ++lindex)
+        {
             osaputc(lbuf[lindex], tfp);
+        }
+    }
 
     lindex = 0;
     lcount--;
@@ -321,6 +326,8 @@ int ostgetc()
     #else
     // get an input line
     for (lcount = 0;;)
+    {
+        int ch;
         switch (ch = xgetc())
         {
             case '\r':
@@ -388,6 +395,7 @@ int ostgetc()
                     }
                 }
         }
+    }
     #endif
 }
 
@@ -405,7 +413,9 @@ int osselect(FILE *fp)
     poll.tv_usec = 0;
 
     if (select(MAXFDS, &readfds, NULL, NULL, &poll) < 0)
+    {
         return NOCHAR;
+    }
 
     if (FD_ISSET(fd, &readfds))
     {
@@ -413,7 +423,9 @@ int osselect(FILE *fp)
         ungetc(ch, fp);
     }
     else
+    {
         ch = NOCHAR;
+    }
 
     return ch;
     #else
@@ -431,20 +443,28 @@ int ospeekchar(FILE *fp)
     #ifdef OLD_LINUX
     // earlier versions of Linux require this
     if (fp->_gptr < fp->_egptr)
+    {
         return (int)(*(unsigned char *)fp->_gptr);
+    }
     #else
     if (fp->_IO_read_ptr < fp->_IO_save_end)
+    {
         return (int)(*(unsigned char *)fp->_IO_read_ptr);
+    }
     #endif
     #else
     #ifdef __BSD_NET2
     // for 386BSD and the like (Torek's stdio)
     if (fp->_r > 0)
+    {
         return (int)*fp->_p;
+    }
     #else
     // otherwise it generally looks like this
     if (fp->_cnt > 0)
+    {
         return (int)*fp->_ptr;
+    }
     #endif // linux
     #endif
 
@@ -484,14 +504,18 @@ void ostputc(int ch)
 
     // output the character to the transcript file
     if (tfp)
+    {
         osaputc(ch, tfp);
+    }
 }
 
 // ostputs - output a string to the terminal
 void ostputs(char *str)
 {
     while (*str != '\0')
+    {
         ostputc(*str++);
+    }
 }
 
 // osflush - flush the terminal input buffer
@@ -656,9 +680,14 @@ LVAL xint86()
 
     // check the vector lengths
     if (getsize(inv) != 9)
+    {
         xlerror("incorrect vector length", inv);
+    }
+
     if (getsize(outv) != 9)
+    {
         xlerror("incorrect vector length", outv);
+    }
 
     // load each register from the input vector
     val = getelement(inv, 0);
@@ -701,13 +730,14 @@ LVAL xint86()
 // getnext - get the next fixnum from a list
 static int getnext(LVAL *plist)
 {
-    LVAL val;
     if (consp(*plist))
     {
-        val = car(*plist);
+        LVAL val = car(*plist);
         *plist = cdr(*plist);
         if (!fixp(val))
+        {
             xlerror("expecting an integer", val);
+        }
         return ((int)getfixnum(val));
     }
     return (0);
@@ -761,28 +791,14 @@ LVAL xtime()
 }
 #endif // GTOD
 
-#ifdef MSDOS
-// xdifftime - get the difference between two time values
-LVAL xdifftime()
-{
-    static char *cfn_name = "difftime";
-    time_t t1, t2;
-    LVAL val;
-    val = xlgafixnum();
-    t1 = (time_t) getfixnum(val);
-    val = xlgafixnum();
-    t2 = (time_t) getfixnum(val);
-    xllastarg();
-    return (cvflonum((FLOTYPE) difftime(t1, t2)));
-}
-#endif
-
 void check_if_disabled(char *name)
 {
     extern int no_system;
 
     if (no_system)
+    {
         xlcerror("function disabled", cvstring(name), NIL);
+    }
 }
 
 // xsystem - execute a system command
@@ -804,7 +820,7 @@ LVAL xsystem()
 LVAL xtmpfile()
 {
     static char *cfn_name = "tmpfile";
-    FILE *fp;
+
     #ifdef NOTDEF
     char *getenv(), *str;
     #endif
@@ -820,9 +836,11 @@ LVAL xtmpfile()
     }
     #endif
 
-    fp = tmpfile();
+    FILE *fp = tmpfile();
     if (fp == NULL)
+    {
         xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
+    }
 
     return cvport(fp, PF_INPUT | PF_OUTPUT);
 }
@@ -832,25 +850,26 @@ LVAL xtmpfile()
 LVAL xtmpfile()
 {
     static char *cfn_name = "tmpfile";
-    FILE *fp;
-    LVAL port;
+
     #ifdef NOTDEF
-    char *name, *tempnam();
+    char *tempnam();
     #endif
 
     xllastarg();
 
     // tmpfile doesn't seem to work on dos gcc
     #ifdef NOTDEF
-    name = tempnam(".", "eutmp");
-    fp = fopen(name, "w+b");
+    char *name = tempnam(".", "eutmp");
+    FILE *fp = fopen(name, "w+b");
     #else
-    fp = tmpfile();
+    FILE *fp = tmpfile();
     #endif
     if (fp == NULL)
+    {
         xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
+    }
 
-    port = cvport(fp, PF_INPUT | PF_OUTPUT);
+    LVAL port = cvport(fp, PF_INPUT | PF_OUTPUT);
 
     #ifdef NOTDEF
     cpush(port);
@@ -867,13 +886,11 @@ LVAL xgetenv()
 {
     static char *cfn_name = "getenv";
     extern char *getenv();
-    LVAL arg;
-    char *str;
 
-    arg = xlgastring();
+    LVAL arg = xlgastring();
     xllastarg();
 
-    str = getenv(getstring(arg));
+    char *str = getenv(getstring(arg));
     if (str == NULL)
         return NIL;
     return cvstring(str);
@@ -885,33 +902,35 @@ LVAL xputenv()
 {
     static char *cfn_name = "putenv";
     extern int putenv();
-    LVAL name, val, env, new, old;
     extern LVAL s_supplied_env, xassoc();
-    char buf[1024];
-    int retval;
 
-    name = xlgastring();
-    val = xlgastring();
+    LVAL name = xlgastring();
+    LVAL val = xlgastring();
     xllastarg();
 
+    char buf[1024];
     sprintf(buf, "%s=%s", getstring(name), getstring(val));
-    new = cvstring(buf);
+    LVAL new = cvstring(buf);
 
-    retval = putenv(getstring(new));
+    int retval = putenv(getstring(new));
     if (retval > 0)
+    {
         return NIL;
+    }
 
     check(3);
     push(new);
 
-    env = getvalue(s_supplied_env);
+    LVAL env = getvalue(s_supplied_env);
     push(env);
     push(name);
     xlargc = 2;
-    old = xassoc();
+    LVAL old = xassoc();
 
     if (old)
+    {
         rplacd(old, new);
+    }
     else
     {
         env = cons(cons(name, new), env);
@@ -921,16 +940,6 @@ LVAL xputenv()
     drop(1);
     return new;
 }
-
-#ifdef MSDOS
-// xgetkey - get a key from the keyboard
-LVAL xgetkey()
-{
-    static char *cfn_name = "getkey";
-    xllastarg();
-    return (cvfixnum((FIXTYPE) xgetc()));
-}
-#endif
 
 // ossymbols - enter os specific symbols
 void ossymbols()
