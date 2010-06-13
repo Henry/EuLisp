@@ -6,8 +6,8 @@
    syntax (_telos0)
    full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos callback let-cc dynamic thread event condition compare copy number integer)
    export (
-    ((name . int-binary%) (pos . 31) (origin boot1 . %) (inline (G0068 (fpi-remainder))))
-    ((name . intp) (pos . 29) (origin boot1 . intp) (inline (G0049 (fpip))))
+    ((name . int-binary%) (pos . 30) (origin boot1 . %) (inline (G0068 (fpi-remainder))))
+    ((name . intp) (pos . 28) (origin boot1 . intp) (inline (G0049 (fpip))))
     ((name . fixed-precision-integer?) (pos . 4) (origin fpi . fixed-precision-integer?))
     ((name . <fpi>) (pos . 7) (origin fpi . <fpi>) (class . constant))
     ((name . most-negative-fixed-precision-integer) (pos) (origin fpi . most-negative-fixed-precision-integer) (class . constant) (value -536870911))

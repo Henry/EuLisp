@@ -22,7 +22,7 @@
   ;(defmethod initialize ((csem <csemaphore>) inits)
   ;  (call-next-method)
   ;  (let ((n (init-list-ref inits counter:)))
-  ;    (if (integerp n)
+  ;    (if (integer? n)
   ;       ((setter csemaphore-handle) csem (eul_sema_create n))
   ;     ;; Basically a lock
   ;     ((setter csemaphore-handle) csem (eul_sema_create 1)))

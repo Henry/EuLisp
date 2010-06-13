@@ -52,7 +52,7 @@
 ;;       ((loop (ll)
 ;;            (if (int-binary< i n)
 ;;                (let ((x (car ll)))
-;;                  (if (characterp x) ()
+;;                  (if (character? x) ()
 ;;                    (error "conversion to string with non character element"
 ;;                           <condition>))
 ;;                  ((setter string-ref) res i x)
@@ -71,7 +71,7 @@
        ((loop ()
               (if (int-binary< n 0) res
                 (let ((x (vector-ref vec n)))
-                  (if (characterp x) ()
+                  (if (character? x) ()
                       (error "conversion to string with non character element "
                              <condition>))
                     ((setter string-ref) res n x)

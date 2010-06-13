@@ -78,7 +78,7 @@
 
   ;; Type predicates
   (defun boolean? (obj) (or (eq obj t) (eq obj '())))
-  (defconstant char? characterp)
+  (defconstant char? character?)
   (defconstant list? listp)
   (defconstant number? numberp)
   (defconstant pair? consp)

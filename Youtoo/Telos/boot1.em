@@ -9,7 +9,7 @@
 (defmodule boot1
   (syntax (_boot0)
    export (car cdr cons list
-           stringp characterp symbolp consp intp listp atom? null?
+           stringp character? symbolp consp intp listp atom? null?
            simple-function? simple-generic-function?
            + - * / % mod < = inc dec int-zerop
            eq eql equal
@@ -60,8 +60,8 @@
   (defun null? (x) ((opencoded-lambda (u) (null)) x))
   (declare-inline null?)
 
-  (defun characterp (x) ((opencoded-lambda (u) (characterp)) x))
-  (declare-inline characterp)
+  (defun character? (x) ((opencoded-lambda (u) (characterp)) x))
+  (declare-inline character?)
 
   (defun stringp (x) ((opencoded-lambda (u) (stringp)) x))
   (declare-inline stringp)

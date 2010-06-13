@@ -8,8 +8,8 @@
 extern LispRef fpi_bindings[];
 
 /* Module binding indices */
-#define int_binary__X37_fn_index 31 
-#define intp_fn_index 29 
+#define int_binary__X37_fn_index 30 
+#define intp_fn_index 28 
 #define fixed_precision_integer__X63_fn_index 4 
 #define _fpi__X60_X62_fn_index 7 
 #define most_negative_fixed_precision_integer_fn_index () 

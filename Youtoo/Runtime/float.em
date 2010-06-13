@@ -9,14 +9,14 @@
 (defmodule float
   (syntax (_telos0)
    import (telos number)
-   export (<float> floatp <double-float> <double> doublep
+   export (<float> float? <double-float> <double> doublep
            ceiling floor round truncate))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <float> and <double-float>
 ;;;-----------------------------------------------------------------------------
   (defclass <float> (<number>)
-    () abstractp: t predicate: floatp)
+    () abstractp: t predicate: float?)
 
   (defprimclass <double> double-class (<float>) ()
     predicate: doublep)

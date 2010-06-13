@@ -1405,7 +1405,7 @@
 (defconstant equal? equal)
 (defconstant eq? eq)
 (defconstant number? numberp)
-(defconstant char? characterp)
+(defconstant char? character?)
 (defun boolean? (obj) (or (eq obj t) (eq obj '())))
 (defconstant string? stringp)
 (defconstant display prin)

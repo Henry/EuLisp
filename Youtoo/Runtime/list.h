@@ -8,7 +8,7 @@
 extern LispRef list_bindings[];
 
 /* Module binding indices */
-#define car_fn_index 28 
+#define car_fn_index 27 
 #define cadddr_fn_index 11 
 #define caar_fn_index 27 
 #define cdadr_fn_index 22 

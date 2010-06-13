@@ -26,16 +26,16 @@
   (deflocal bytecodes-output 0) ; Doesn't include non-specified bytecodes.
 
   (defun digit (c)
-    (and (characterp c)
+    (and (character? c)
          (<= #\0 c #\9)))
 
   (defun whitespace (c)
-    (and (characterp c)
+    (and (character? c)
          (or (eql c #\    )
              (eql c #\ ))))
 
   (defun letter (c)
-    (and (characterp c)
+    (and (character? c)
          (or (<= #\a c #\z)
              (<= #\A c #\Z))))
 

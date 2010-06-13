@@ -330,7 +330,7 @@
     'eul_nil)
 
   (defun static-allocatable? (x)
-    (null? (or (symbolp x) (keywordp x) (null? x) (vectorp x) (floatp x))))
+    (null? (or (symbolp x) (keywordp x) (null? x) (vectorp x) (float? x))))
 
   (defmethod convert-constant ((value <cons>))
     (let* ((loc (gensym "cons_"))
@@ -342,14 +342,14 @@
       (add-initialization "  object_class(~a) = eul_static_cons_class\;~%"
                           loc)
       (if (static-allocatable? the-car)
-          (if (or (integerp the-car) (characterp the-car))
+          (if (or (integer? the-car) (character? the-car))
               (add-code-vector-def "~a, " car-loc)
             (add-code-vector-def "eul_as_static(~a), " car-loc))
         (progn
           (add-code-vector-def "NULL, ")
           (add-initialization "  eul_car(~a) = ~a\;\n" loc car-loc)))
       (if (static-allocatable? the-cdr)
-          (if (or (integerp the-cdr) (characterp the-cdr))
+          (if (or (integer? the-cdr) (character? the-cdr))
               (add-code-vector-def "~a)\;\n" cdr-loc)
             (add-code-vector-def "eul_as_static(~a))\;\n" cdr-loc))
         (progn
@@ -424,7 +424,7 @@
               (compute-static arg1))
              ((eq key 'BINDING)
               (compute-binding arg1 (car (cdr args))))
-             ((integerp key)
+             ((integer? key)
               (compute-bytevector-aux x))
              ((eq key 'FF)
               (compute-foreign-function-binding arg1))

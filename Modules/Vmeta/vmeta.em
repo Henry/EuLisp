@@ -124,7 +124,7 @@
   ;; Baker's match, for strings.
   (defmacro match-literal (x)
     (cond
-      ((characterp x)
+      ((character? x)
        `(when (and (< index end) (binary= (element sequence index) ',x))
               (incf index)))
       ((stringp x)

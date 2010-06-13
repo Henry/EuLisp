@@ -66,7 +66,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Aux
 ;;;-----------------------------------------------------------------------------
-   (defun Floor (x) (if (integerp x) x (floor x)))
+   (defun Floor (x) (if (integer? x) x (floor x)))
 
    (defun trunc (a . b)
      (cond ((null? b) (Floor a))
@@ -162,7 +162,7 @@
    (defun random-integer (n state) (trunc (* n (random-one state))))
 
    (defun random-number (n state)
-     (if (floatp n)
+     (if (float? n)
          (random-float n state)
        (random-integer n state)))
 
@@ -172,7 +172,7 @@
 ;;;-----------------------------------------------------------------------------
    (defun random-range (min max state)
      (let ((number (+ min (* (- max min) (random-one state)))))
-       (if (floatp min)
+       (if (float? min)
            number
          (trunc number))))
 

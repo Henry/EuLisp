@@ -25,7 +25,7 @@
     (call-next-method)
     (let* ((name (convert (pipe-process x) <string>))
            (fds (eul-fork-child name)))
-      (if (integerp fds)
+      (if (integer? fds)
           (error (eul-pipe-strerror fds) <stream-condition> value: x)
         (let* ((fcb1 (make <file-control-block>
                            file-name: name
@@ -47,7 +47,7 @@
 
   (defmethod disconnect ((x <pipe>))
     (let ((child-process-id (pipe-process x)))
-      (if (integerp child-process-id)
+      (if (integer? child-process-id)
           ;; Quit the child
           (eul-kill child-process-id 3)
         ()))

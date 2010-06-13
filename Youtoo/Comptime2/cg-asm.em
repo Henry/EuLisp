@@ -206,7 +206,7 @@
 ;;;-----------------------------------------------------------------------------
   (defun put-fix (state x)
     (align state)
-    (if (integerp x)
+    (if (integer? x)
         (put-bytes state (fix-as-4-bytes x))
       (let ((code (asm-function-state-code? state)))
         (asm-function-state-pc! state (+ (asm-function-state-pc? state) 4))

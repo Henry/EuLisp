@@ -9,7 +9,7 @@
 (defmodule character
   (syntax (_telos0)
    import (telos compare collect string)
-   export (<character> characterp uppercasep lowercasep
+   export (<character> character? uppercasep lowercasep
            alphap alnump digitp graphp
            as-lowercase as-uppercase
            character-as-string))

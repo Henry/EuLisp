@@ -6,7 +6,7 @@
    syntax (_telos0)
    full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc convert callback compare collect copy number integer fpi)
    export (
-    ((name . car) (pos . 28) (origin boot1 . car) (inline (G0082 (car))) (setter (G0096 (set-car))))
+    ((name . car) (pos . 27) (origin boot1 . car) (inline (G0082 (car))) (setter (G0096 (set-car))))
     ((name . cadddr) (pos . 11) (origin list . cadddr) (inline (G003650 (cadddr))))
     ((name . caar) (pos . 27) (origin list . caar) (inline (G003619 (caar))))
     ((name . cdadr) (pos . 22) (origin list . cdadr) (inline (G003629 (cadr) (cdr))))

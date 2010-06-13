@@ -173,7 +173,7 @@
   (declare-inline char>?)
 
   (defun char? (x)
-    (characterp x))
+    (character? x))
   (declare-inline char?)
 
   (defun close-input-port (x)
@@ -287,10 +287,6 @@
   (defun integer->char (x)
     (int-as-character x))
   (declare-inline integer->char)
-
-  (defun integer? (x)
-    (integerp x))
-  (declare-inline integer?)
 
   (defun last-pair (x)
     (last x))
@@ -425,7 +421,7 @@
     (nyi 'real-part))
 
   (defun real? (x)
-    (floatp x))
+    (float? x))
   (declare-inline real?)
 
   (defun remainder (x y)

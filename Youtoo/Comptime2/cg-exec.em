@@ -155,7 +155,7 @@
               (compute-static arg1))
              ((eq key 'BINDING)
               (compute-binding (car (cdr args)) arg1))
-             ((integerp key)
+             ((integer? key)
               (compute-bytevector-aux x))
              ((eq key 'FF)
               (compute-foreign-function-binding arg1))

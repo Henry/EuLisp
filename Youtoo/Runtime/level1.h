@@ -56,9 +56,8 @@ extern LispRef level1_bindings[];
 #define generic_function_domain_fn_index 60 
 #define sf_size_fn_index () 
 #define eul_make_socket_fn_index 21 
-#define time_start_fn_index 26 
+#define time_start_fn_index 25 
 #define lockp_fn_index 6 
-#define characterp_fn_index 24 
 #define connectionp_fn_index 10 
 #define random_seed_fn_index 5 
 #define int_binary__fn_index 15 
@@ -141,7 +140,7 @@ extern LispRef level1_bindings[];
 #define connect_fn_index 17 
 #define eul_read_fn_index 17 
 #define socket_port_fn_index 8 
-#define evenp_fn_index 4 
+#define evenp_fn_index 3 
 #define O_APPEND_fn_index 7 
 #define flush_buffer_fn_index 24 
 #define lock_fn_index 3 
@@ -163,7 +162,7 @@ extern LispRef level1_bindings[];
 #define current_thread_queue_fn_index 23 
 #define binary__X47_fn_index 16 
 #define prin_fn_index 16 
-#define int_binary__X37_fn_index 31 
+#define int_binary__X37_fn_index 30 
 #define add_subclass_fn_index 9 
 #define sig__X61_fn_index 10 
 #define positivep_fn_index 15 
@@ -184,7 +183,7 @@ extern LispRef level1_bindings[];
 #define find_slot_names_fn_index 5 
 #define allp1_vector_fn_index 9 
 #define sort__X33_fn_index 10 
-#define _argc__X42_X42_fn_index 27 
+#define _argc__X42_X42_fn_index 26 
 #define max_fn_index 5 
 #define thread_return_value_fn_index 19 
 #define int_binary__X61_fn_index 10 
@@ -257,18 +256,20 @@ extern LispRef level1_bindings[];
 #define restore_simple_state_fn_index () 
 #define anyp1_vector_fn_index 4 
 #define anyp2_list_fn_index 18 
+#define character__X63_fn_index 31 
 #define predefined_reader_fn_index 6 
 #define _function__X60_X62_fn_index 27 
 #define sd_size_fn_index () 
-#define subvector_fn_index 3 
+#define float__X63_fn_index 3 
 #define _float__X60_X62_fn_index 4 
+#define subvector_fn_index 3 
 #define slice_fn_index 4 
 #define stderr_fn_index 10 
 #define _thread__X60_X62_fn_index 7 
 #define thread_reschedule_fn_index 6 
 #define control_block_buffer_size_fn_index 9 
 #define backtrace_fn_index 13 
-#define car_fn_index 28 
+#define car_fn_index 27 
 #define CB_difference_underflow_fn_index () 
 #define stream_read_action_fn_index 8 
 #define map1_string_fn_index 4 
@@ -283,7 +284,6 @@ extern LispRef level1_bindings[];
 #define class_name_fn_index 14 
 #define compute_specialized_slot_class_fn_index 2 
 #define cddar_fn_index 5 
-#define floatp_fn_index 2 
 #define find1_list_fn_index 4 
 #define set_dispatch_macro_character_fn_index 16 
 #define listp_fn_index 13 
@@ -332,7 +332,7 @@ extern LispRef level1_bindings[];
 #define O_TRUNC_fn_index 13 
 #define append__X33_fn_index 17 
 #define table_values_fn_index 16 
-#define int_zerop_fn_index 30 
+#define int_zerop_fn_index 29 
 #define class_slotz_fn_index 64 
 #define CB_product_overflow_fn_index () 
 #define condition_message_fn_index 8 
@@ -348,7 +348,7 @@ extern LispRef level1_bindings[];
 #define control_block_descriptor_fn_index 41 
 #define symbol_name_fn_index 61 
 #define first_arithmetic_cb_fn_index () 
-#define intp_fn_index 29 
+#define intp_fn_index 28 
 #define methodp_fn_index 12 
 #define caar_fn_index 27 
 #define int_binary__X43_fn_index 14 
@@ -364,6 +364,7 @@ extern LispRef level1_bindings[];
 #define disconnect_fn_index 40 
 #define most_positive_fixed_precision_integer_fn_index () 
 #define streamp_fn_index 39 
+#define integer__X63_fn_index 4 
 #define min_fn_index 10 
 #define read_s_expression_fn_index 11 
 #define select_list_fn_index 26 
@@ -422,7 +423,7 @@ extern LispRef level1_bindings[];
 #define class_code_fn_index 19 
 #define cdadr_fn_index 22 
 #define accumulate_list_fn_index 18 
-#define _argv__X42_X42_fn_index 25 
+#define _argv__X42_X42_fn_index 24 
 #define _simple_generic_function__X60_X62_fn_index 15 
 #define compute_defined_slot_class_fn_index 12 
 #define name_keywords_fn_index 8 
@@ -488,7 +489,6 @@ extern LispRef level1_bindings[];
 #define binary__X43_fn_index 13 
 #define compute_inherited_keywords_fn_index 10 
 #define graphp_fn_index 8 
-#define integerp_fn_index 3 
 #define make_symbol_fn_index 52 
 #define negate_fn_index 12 
 #define int_as_character_fn_index () 
@@ -572,7 +572,7 @@ extern LispRef level1_bindings[];
 #define _stack_nvalues__X42_X42_fn_index 14 
 #define _lock__X60_X62_fn_index 2 
 #define _object__X60_X62_fn_index 20 
-#define truncate_fn_index 3 
+#define truncate_fn_index 2 
 #define gf_reset_cache_fn_index 3 
 #define list_fn_index 23 
 #define character_as_int_fn_index () 

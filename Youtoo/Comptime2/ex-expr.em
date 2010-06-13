@@ -287,13 +287,13 @@
                                (numberp arg2))
                           ;; partial evaluation
                           (e (+ arg1 arg2) env e))
-                         ((and (integerp arg1)
+                         ((and (integer? arg1)
                                (= arg1 1))
                           (e `(inc ,arg2) env e))
-                         ((and (integerp arg2)
+                         ((and (integer? arg2)
                                (= arg2 1))
                           (e `(inc ,arg1) env e))
-                         ((and (integerp arg2)
+                         ((and (integer? arg2)
                                (= arg2 -1))
                           (e `(dec ,arg1) env e))
                          (t
@@ -309,11 +309,11 @@
                           ;; partial evaluation
                           (e (- arg1 arg2) env e))
                          ;; x - 1
-                         ((and (integerp arg2)
+                         ((and (integer? arg2)
                                (= arg2 1))
                           (e `(dec ,arg1) env e))
                          ;; x - -1
-                         ((and (integerp arg2)
+                         ((and (integer? arg2)
                                (= arg2 -1))
                           (e `(inc ,arg1) env e))
                          (t
@@ -329,11 +329,11 @@
                           ;; partial evaluation
                           (e (= arg1 arg2) env e))
                          ;; x = 0
-                         ((and (integerp arg2)
+                         ((and (integer? arg2)
                                (= arg2 0))
                           (e `(int-zerop ,arg1) env e))
                          ;; 0 = x
-                         ((and (integerp arg1)
+                         ((and (integer? arg1)
                                (= arg1 0))
                           (e `(int-zerop ,arg2) env e))
                          (t

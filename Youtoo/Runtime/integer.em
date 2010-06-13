@@ -9,14 +9,14 @@
 (defmodule integer
   (syntax (_telos0)
    import (telos number)
-   export (<integer> integerp evenp oddp))
+   export (<integer> integer? evenp oddp))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <integer>
 ;;;-----------------------------------------------------------------------------
   (defclass <integer> (<number>) ()
     abstractp: t
-    predicate: integerp)
+    predicate: integer?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Even and odd
