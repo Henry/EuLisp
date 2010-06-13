@@ -3,17 +3,12 @@
         All Rights Reserved */
 // Euscheme code Copyright (c) 1994 Russell Bradford
 
-#ifdef RISCOS
-#define _path_open_path_sep ","
-#define _path_open_string_format "%s%s"
-#else
-#define _path_open_path_sep ":"
-#define _path_open_string_format "%s/%s"
-#endif
-
 #include "xscheme.h"
 #include "xsobj.h"
 #include "xsbanner.h"
+
+#define _path_open_path_sep ":"
+#define _path_open_string_format "%s/%s"
 
 // virtual machine registers
 extern LVAL xlfun;              // current function
@@ -67,7 +62,9 @@ int xlisave(char *fname)
 
     // open the output file
     if ((fp = osbopen(fname, "w")) == NULL)
+    {
         return (FALSE);
+    }
 
     // first call the garbage collector to clean up memory
     gc(GC_SAVE);
@@ -75,7 +72,9 @@ int xlisave(char *fname)
     // write out version identification
     size = strlen(BANNER);
     for (cp = (unsigned char *)BANNER; size-- >= 0;)
+    {
         osbputc(*cp++, fp);
+    }
 
     // write out the stack size
     writeptr((OFFTYPE) (xlstktop - xlstkbase));

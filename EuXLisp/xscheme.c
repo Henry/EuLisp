@@ -1,19 +1,30 @@
-// xscheme.c - xscheme main routine
-/*     Copyright (c) 1990, by David Michael Betz
-       All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+//  Copyright (c) 1990, 1994, by David Michael Betz and Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xscheme.c
+///  Authors: David Michael Betz and Russell Bradford
+///  Description: EuXLisp main routine
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 #include "xsobj.h"
 #include "xsbanner.h"
+#include <getopt.h>
 
 #define is_cont(sp)                                                            \
     (envp(sp[0]) && (codep(sp[1]) || csubrp(sp[1])) && !ispointer(sp[2]))
 
-// global variables
-JMP_BUF top_level;
+///-----------------------------------------------------------------------------
+/// Global variable
+///-----------------------------------------------------------------------------
+
+const char* program_name;       // The name of this program (euxlisp).
 int clargc;                     // command line argument count
 char **clargv;                  // array of command line arguments
+
+JMP_BUF top_level;
 void do_backtrace();
 
 // trace file pointer
@@ -26,10 +37,11 @@ extern LVAL xlfun, xlenv, xlval;
 #include "xsproto.h"
 
 extern int trace;
-int quiet, load_module, no_system;
+int quiet, no_system;
 FILE *filein;
 
-static void usage();
+static void print_usage(FILE* stream, int exit_code);
+
 void xltoplevel();
 void xlerror(char *msg, LVAL arg);
 void callerrorhandler();
@@ -45,7 +57,11 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc);
 #define CAST (void (*)(int))
 
 int ctrl_c = 0;
-extern int reading, quiet, load_module;
+extern int reading, quiet;
+
+///-----------------------------------------------------------------------------
+/// Signal handling
+///-----------------------------------------------------------------------------
 
 void sig_int()
 {
@@ -56,6 +72,7 @@ void sig_int()
     // one-shot signal
     sigset(SIGINT, (void (*)(int))sig_int);
     #endif
+
     #ifdef SIGNAL
     // restarting syscalls
     if (reading)
@@ -81,6 +98,7 @@ void sig_pipe()
     // one-shot signal
     sigset(SIGPIPE, (void (*)(int))sig_pipe);
     #endif
+
     #ifdef SIGNAL
     // restarting syscalls
     if (reading)
@@ -97,95 +115,132 @@ void sig_pipe()
 
 #endif
 
-// xlmain - the main routine
+///-----------------------------------------------------------------------------
+/// xlmain - the main routine
+///-----------------------------------------------------------------------------
+
 void xlmain(int argc, char **argv)
 {
-    int src, dst, ch;
-    char *p;
     int image = TRUE;
-
     quiet = FALSE;
-    load_module = FALSE;
     filein = stdin;
     no_system = FALSE;
+    char* image_name = IMAGE;
 
-    // process the arguments
-    for (src = dst = 1, clargv = argv, clargc = 1; src < argc; ++src)
+    clargv = argv;
+    clargc = argc;
+
+    // A string listing valid short options letters.
+    const char* const short_options = "hqnNs:m:t";
+
+    // An array describing valid long options.
+    const struct option long_options[] =
     {
-        // handle options
-        if (argv[src][0] == '-' && strlen(argv[src]) > 1)
-        {
-            // handle options with long names
-            if (argv[src][1] == '-')
-            {
-                if (strcmp(argv[src], "--script") == 0)
-                {
-                    src++;
-                    if (src >= argc)
-                    {
-                        fprintf
-                        (
-                            stderr,
-                            "euxlisp: missing input file\n"
-                        );
-                        exit(5);
-                    }
-                    filein = osaopen(argv[src], "r");
-                    if (filein == NULL)
-                    {
-                        fprintf
-                        (
-                            stderr,
-                            "euxlisp: can't open input '%s'\n",
-                            argv[src]
-                        );
-                        exit(6);
-                    }
-                    do
-                    {
-                        // skip #! line
-                        ch = osagetc(filein);
-                    } while (ch != '\n' && ch != EOF);
-                    argv[0] = argv[src];
-                    quiet = TRUE;   // no mesages
-                }
-            }
-            else // handle options with single character names
-            {
-                for (p = &argv[src][1]; *p != '\0';)
-                {
-                    switch (*p++)
-                    {
-                        case 't':  // root directory
-                            trace = TRUE;
-                            break;
-                        case 'n':
-                            image = FALSE;  // no image
-                            break;
-                        case 'q':
-                            quiet = TRUE;   // no mesages
-                            break;
-                        case 'm':
-                            load_module = TRUE;
-                            //quiet = TRUE;   // no mesages
-                            break;
-                        case 's':
-                            no_system = TRUE;       // don't allow a system call
-                            break;
-                        default:
-                            usage();
-                    }
-                }
-            }
-        }
+        { "help",         0, NULL, 'h' },
+        { "quiet",        0, NULL, 'q' },
+        { "no-image",     0, NULL, 'n' },
+        { "no-sys-calls", 0, NULL, 'N' },
+        { "script",       1, NULL, 's' },
+        { "module",       1, NULL, 'm' },
+        { "trace",        0, NULL, 't' },
+        { NULL,           0, NULL, 0   }   // Required at end of array.
+    };
 
-        // handle a filename
-        else
+    // The name of the file to receive program output
+    // or NULL for standard output.  */
+    const char* output_filename = NULL;
+
+    // Remember the name of the program, to incorporate in messages.
+    program_name = argv[0];
+
+    int next_option;
+
+    do
+    {
+        next_option = getopt_long (argc, argv, short_options,
+        long_options, NULL);
+
+        switch (next_option)
         {
-            argv[dst++] = argv[src];
-            ++clargc;
+            case 'h':   // -h or --help
+                // User has requested usage information.  Print it to standard
+                // output, and exit with exit code zero (normal termination).
+                print_usage(stdout, 0);
+
+            case 'q':   // -q or --quiet
+                quiet = TRUE;   // no messages
+                break;
+
+            case 'n':   // -n or --no-image
+                image = FALSE; // no image
+                break;
+
+            case 'N':   // -N or --no-sys-calls
+                no_system = TRUE;       // don't allow a system call
+                break;
+
+            case 's':   // -s or --script
+                // This option takes an argument, the name of the script file.
+                filein = osaopen(optarg, "r");
+                if (filein == NULL)
+                {
+                    fprintf
+                    (
+                        stderr,
+                        "%s: can't open script file '%s'\n",
+                        program_name,
+                        optarg
+                    );
+                    print_usage(stderr, 6);
+                }
+
+                int ch;
+                do
+                {
+                    // skip #! line
+                    ch = osagetc(filein);
+                } while (ch != '\n' && ch != EOF);
+
+                quiet = TRUE;   // no mesages
+                break;
+
+            case 'm':   // -m or --module
+                image_name = IMAGE_MOD;
+
+                // This option takes an argument, the name of the module file.
+                filein = osaopen(optarg, "r");
+                if (filein == NULL)
+                {
+                    fprintf
+                    (
+                        stderr,
+                        "%s: can't open module file '%s'\n",
+                        program_name,
+                        optarg
+                    );
+                    print_usage(stderr, 6);
+                }
+
+                quiet = TRUE;   // no messages
+                break;
+
+            case 't':   // -t or --trace
+                trace = TRUE;
+                break;
+
+            case '?':   // The user specified an invalid option.
+                // Print usage information to standard error, and exit with exit
+                // code one (indicating abnormal termination).
+                print_usage(stderr, 1);
+
+            case -1:    // Done with options.
+                break;
+
+            default:    // Something else: unexpected.
+                abort();
         }
-    }
+    } while(next_option != -1);
+
 
     // setup an initialization error handler
     if (SETJMP(top_level))
@@ -198,11 +253,7 @@ void xlmain(int argc, char **argv)
     osinit(BANNER);
 
     // restore the default workspace, otherwise create a new one
-    if
-    (
-        !image
-     || !((load_module && xlirestore(IMAGE_MOD)) || xlirestore(IMAGE))
-    )
+    if (!image || !xlirestore(image_name))
     {
         if (image)
         {
@@ -250,10 +301,25 @@ void xlmain(int argc, char **argv)
     xlwrapup(1);
 }
 
-static void usage()
+///-----------------------------------------------------------------------------
+/// print_usage helper function
+///-----------------------------------------------------------------------------
+
+static void print_usage(FILE* stream, int exit_code)
 {
-    fprintf(stderr, "usage: euscheme [-tqns] [--script] [file] [arg ...]\n");
-    exit(1);
+    fprintf(stream, "Usage: %s options [ files ... ]\n", program_name);
+    fprintf
+    (
+        stream,
+        "  -h  --help             Display this usage information.\n"
+        "  -q  --quiet            Print no messages, prompts or values.\n"
+        "  -n  --no-image         Do not read in the initial Lisp image.\n"
+        "  -N  --no-sys-calls     Disable system calls.\n"
+        "  -s  --script file      Read and execute script from file.\n"
+        "  -m  --module file      Read and execute module from file.\n"
+        "  -t  --trace            Switch on byte-code level tracing.\n"
+    );
+    exit(exit_code);
 }
 
 void xlload()
@@ -321,10 +387,9 @@ void xlerror(char *msg, LVAL arg)
 
 void set_xlframe(int n)
 {
-    LVAL *ptr;
     extern LVAL s_xlframe;
 
-    ptr = xlsp + n;
+    LVAL *ptr = xlsp + n;
     while(!is_cont(ptr) && ptr < xlstktop)
     {
         ptr++;
@@ -341,7 +406,6 @@ void set_xlframe(int n)
 // cc is TRUE if return address is needed, e.g., in interpreter
 void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc)
 {
-    LVAL cond, condcl, cont;
     extern LVAL current_continuation();
     extern JMP_BUF bc_dispatch;
 
@@ -349,6 +413,7 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc)
     xlerror(msg, arg);
     #endif
 
+    LVAL cond;
     if (errname == NIL)
     {
         cond = getvalue(s_general_error);
@@ -361,7 +426,8 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc)
     xlval = getvalue(s_signal);
 
     if (cond == s_unbound || xlval == s_unbound)
-    {   // no conditions yet
+    {
+        // no conditions yet
         errputstr("Run-Time ");
         xlerror(msg, arg);
     }
@@ -369,11 +435,13 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc)
     {
         set_xlframe(1);
         setivar(cond, 1, cvstring(msg));
-        condcl = getclass(cond);
+        LVAL condcl = getclass(cond);
         if (getsfixnum(getivar(condcl, INSTSIZE)) > 1)
+        {
             setivar(cond, 2, arg);
+        }
         oscheck();
-        cont = current_continuation(cc);
+        LVAL cont = current_continuation(cc);
         check(2);
         push(cont);     // resume continuation
         push(cond);     // condition
@@ -442,7 +510,9 @@ void xlfatal(char *msg)
 void xlwrapup(int n)
 {
     if (tfp)
+    {
         osclose(tfp);
+    }
     osfinish();
     exit(n);
 }
@@ -462,8 +532,6 @@ static void indent(int n)
 static void trace_function(LVAL fun, LVAL env)
 {
     extern FUNDEF funtab[];
-    LVAL frame, vars;
-    int i;
 
     errout = getvalue(s_stderr);
 
@@ -496,11 +564,11 @@ static void trace_function(LVAL fun, LVAL env)
     {
         if (envp(env))
         {
-            frame = car(env);
+            LVAL frame = car(env);
             if (vectorp(frame))
             {
-                vars = getelement(frame, 0);
-                for (i = 1; vars; vars = cdr(vars), i++)
+                LVAL vars = getelement(frame, 0);
+                for (int i = 1; vars; vars = cdr(vars), i++)
                 {
                     errprin(car(vars));
                     errstr(": ");
@@ -531,13 +599,11 @@ static void trace_function(LVAL fun, LVAL env)
 // print a backtrace
 void do_backtrace(LVAL * from)
 {
-    LVAL *sp;
-
     errout = getvalue(s_stderr);
 
     errstr("\nStack backtrace:\n\n");
 
-    for (sp = from; sp < xlstktop; sp++)
+    for (LVAL *sp = from; sp < xlstktop; sp++)
     {
         if (is_cont(sp))
         {
@@ -552,12 +618,11 @@ LVAL xbacktrace()
 {
     static char *cfn_name = "backtrace";
     extern LVAL true;
-    LVAL frameptr;
-    LVAL *ptr;
 
+    LVAL *ptr;
     if (moreargs())
     {
-        frameptr = xlgafixnum();
+        LVAL frameptr = xlgafixnum();
         ptr = xlstktop - getfixnum(frameptr);
         xllastarg();
     }
@@ -567,6 +632,7 @@ LVAL xbacktrace()
     }
 
     do_backtrace(ptr);
+
     return true;
 }
 
@@ -574,13 +640,11 @@ LVAL xbacktrace()
 LVAL xframe_up()
 {
     static char *cfn_name = "frame-up";
-    LVAL frameptr, arg;
-    LVAL *ptr, *old;
-    int n;
 
-    frameptr = xlgafixnum();
-    arg = xlgetarg();   // cc
-    arg = xlgetarg();   // condition
+    LVAL frameptr = xlgafixnum();
+    LVAL arg = xlgetarg();   // cc
+    arg = xlgetarg();        // condition
+    int n;
     if (moreargs())
     {
         arg = xlgafixnum();
@@ -592,11 +656,11 @@ LVAL xframe_up()
         n = 1;
     }
 
-    ptr = xlstktop - getfixnum(frameptr);
+    LVAL *ptr = xlstktop - getfixnum(frameptr);
 
     for (; n > 0; n--)
     {
-        old = ptr;
+        LVAL *old = ptr;
         for (ptr++; ptr < xlstktop; ptr++)
         {
             if (is_cont(ptr))
@@ -621,13 +685,11 @@ LVAL xframe_up()
 LVAL xframe_down()
 {
     static char *cfn_name = "frame-down";
-    LVAL frameptr, arg;
-    LVAL *ptr, *old;
-    int n;
 
-    frameptr = xlgafixnum();
-    arg = xlgetarg();   // cc
+    LVAL frameptr = xlgafixnum();
+    LVAL arg = xlgetarg();   // cc
     arg = xlgetarg();   // condition
+    int n;
     if (moreargs())
     {
         arg = xlgafixnum();
@@ -639,11 +701,11 @@ LVAL xframe_down()
         n = 1;
     }
 
-    ptr = xlstktop - getfixnum(frameptr);
+    LVAL *ptr = xlstktop - getfixnum(frameptr);
 
     for (; n > 0; n--)
     {
-        old = ptr;
+        LVAL *old = ptr;
         for (ptr--; ptr >= xlsp; ptr--)
         {
             if (is_cont(ptr))
@@ -668,12 +730,10 @@ LVAL xframe_down()
 LVAL xframe_env()
 {
     static char *cfn_name = "frame-env";
-    LVAL frameptr;
-    LVAL *ptr;
 
-    frameptr = xlgafixnum();
+    LVAL frameptr = xlgafixnum();
     xllastarg();
-    ptr = xlstktop - getfixnum(frameptr);
+    LVAL *ptr = xlstktop - getfixnum(frameptr);
 
     return *ptr;
 }
@@ -682,12 +742,13 @@ LVAL xframe_env()
 LVAL xframe_fun()
 {
     static char *cfn_name = "frame-fun";
-    LVAL frameptr;
-    LVAL *ptr;
 
-    frameptr = xlgafixnum();
+    LVAL frameptr = xlgafixnum();
     xllastarg();
-    ptr = xlstktop - getfixnum(frameptr);
+    LVAL *ptr = xlstktop - getfixnum(frameptr);
 
     return ptr[1];
 }
+
+
+/** ------------------------------------------------------------------------ **/

@@ -1,41 +1,51 @@
-euxlisp(1)                                                          euxlisp(1)
+EuXLisp(1)                                                          EuXLisp(1)
 
 
 
 [1mNAME[0m
        euxlisp - EuLisp Level 0 interpreter
 
-
 [1mSYNOPSIS[0m
-       [1meuxlisp [22m[ [1m-qnts [22m] [ [1m--script [22m] [ file ] [ arg ... ]
-
+       [1meuxlisp [22m[ [4mcommand-line[24m [4mswitches[24m ] [ [4mfiles[24m [4m...[24m ]
 
 [1mDESCRIPTION[0m
-       [1meuxlisp  [22mis  a  small EuLisp Level 0 interpeter, based on David Michael
+       [4meuxlisp[24m  is  a  small EuLisp Level 0 interpeter, based on David Michael
        Betz' xscheme.  Mostly compliant with the EuLisp definition 0.99,  with
        a few Schemeisms still present.
 
+   [1mOPTIONS[0m
+       The following options are of general interest:
 
-[1mOPTIONS[0m
-       [1m-q     [22mquiet  mode:  print  no messages, prompts or values. Useful when
-              using [1meuxlisp [22mas a filter or other agent.
+              [1m-h[22m, [1m--help[0m
+                     display usage information.
 
-       [1m-n     [22mdo not read in the initial Lisp image.
+              [1m-q[22m, [1m--quiet[0m
+                     quiet  mode: print no messages, prompts or values. Useful
+                     when using [4meuxlisp[24m as a filter or other agent.
 
-       [1m-t     [22mswitch on byte-code level tracing.
+              [1m-n[22m, [1m--no-lisp-image[0m
+                     do not read in the initial Lisp image.
 
-       [1m-s     [22mdisables [1msystem [22mand various other function calls.
+              [1m-N[22m, [1m--no-sys-calls[0m
+                     disables [1msystem [22mand various other function calls.
 
-       [1m--script [4m[22mfile[0m
-              take input from [4mfile[24m,  skipping  its  first  line.   Useful  for
-              [1m#!/bin/euxlisp --script [22mand the like in shell scripts.
+              [1m-s [4m[22mfile[24m, [1m--script [4m[22mfile[0m
+                     read and execute script [4mfile[24m, skipping  its  first  line.
+                     Useful  for [1m#!/bin/euxlisp --script [22mand the like in shell
+                     scripts.
 
-       Other  args  are  not interpreted, but are available though [1mgetarg [22m(see
-       below)
+              [1m-m [4m[22mfile[24m, [1m--module [4m[22mfile[0m
+                     read and execute module from [4mfile[24m.
+
+              [1m-t[22m, [1m--trace[0m
+                     switch on byte-code level tracing.
+
+              Other args are not interpreted, but are available though  [1mgetarg[0m
+              (see below)
 
 
 [1mFEATURES[0m
-       The module that contains all the useful stuff (e.g., [1mcons [22mand  friends)
+       The  module that contains all the useful stuff (e.g., [1mcons [22mand friends)
        is called [1mlevel0[22m: if you import no modules, you get nothing at all, not
        even special forms. So a typical module looks like
 
@@ -57,7 +67,7 @@ euxlisp(1)                                                          euxlisp(1)
          [1mconstructor: (make-foo a:))[0m
 
 
-       Try  [1m(describe  xx) [22mfor information on object [1mxx[22m, and [1m(class-hierarchy)[0m
+       Try [1m(describe xx) [22mfor information on object [1mxx[22m,  and  [1m(class-hierarchy)[0m
        to see all the classes.
 
        Some useful other tools include:
@@ -68,7 +78,7 @@ euxlisp(1)                                                          euxlisp(1)
 
        [1mexit   [22mto leave [1meuxlisp[0m
 
-       In case of error, there is a simple error loop. When in the  loop  type
+       In  case  of error, there is a simple error loop. When in the loop type
        [1mhelp: [22mfor extra information.
 
 
@@ -79,13 +89,13 @@ euxlisp(1)                                                          euxlisp(1)
               searches these first, then a system-installed path.
 
        [1mEU_MODULE_PATH[0m
-              a  colon-separated  list  of  directory names: where to look for
-              EuLisp modules.  [1meuxlisp [22msearches these first,  then  a  system-
+              a colon-separated list of directory names:  where  to  look  for
+              EuLisp  modules.   [1meuxlisp  [22msearches these first, then a system-
               installed path (which generally contains the current directory).
 
 
 [1mBUGS[0m
-       If [1meuxlisp [22mstarts up in module [1mroot [22mthen it  is  a  good  bet  that  it
+       If  [1meuxlisp  [22mstarts  up  in  module  [1mroot [22mthen it is a good bet that it
        couldn't find the image file [1mimage.wks[0m
 
        There are a few differences between [1meuxlisp [22mand the EuLisp Level 0 def-
@@ -113,4 +123,4 @@ euxlisp(1)                                                          euxlisp(1)
 
 
 
-                                  8 June 2010                       euxlisp(1)
+                                  8 June 2010                       EuXLisp(1)

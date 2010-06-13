@@ -1,47 +1,47 @@
-.nr X
-.TH euxlisp 1 "8 June 2010"
+.TH EuXLisp 1 "8 June 2010"
 .SH NAME
 euxlisp \- EuLisp Level 0 interpreter
-
 .SH SYNOPSIS
 .B euxlisp
 [
-.B \-qnts
+.I command-line switches
+] [
+.I files ...\&
 ]
-[
-.B \--script
-]
-[ file ] [ arg .\|.\|. ]
-
 .SH DESCRIPTION
-.B euxlisp
+.I euxlisp
 is a small EuLisp Level 0 interpeter, based on David Michael Betz'
 xscheme.  Mostly compliant with the EuLisp definition 0.99, with a few
 Schemeisms still present.
-
-.SH OPTIONS
+.SS OPTIONS
+The following options are of general interest:
+.RS
 .TP
-.B \-q
-quiet
-mode: print no messages, prompts or values. Useful when
-using
-.B euxlisp
+.BI \-h "\fR,\fP " \-\-help
+display usage information.
+.TP
+.BI \-q "\fR,\fP " \-\-quiet
+quiet mode: print no messages, prompts or values. Useful when using
+.I euxlisp
 as a filter or other agent.
 .TP
-.B \-n
+.BI \-n "\fR,\fP " \-\-no\-lisp\-image
 do not read in the initial Lisp image.
 .TP
-.B \-t
-switch on byte-code level tracing.
-.TP
-.B \-s
+.BI \-N "\fR,\fP " \-\-no\-sys\-calls
 disables \fBsystem\fP and various other function calls.
 .TP
-\fB\--script\fP \fIfile\fP
-take input from \fIfile\fP, skipping its first line.
+.BI \-s " \fIfile\fR,\fP " \--script " \fIfile"
+read and execute script \fIfile\fP, skipping its first line.
 Useful for
 .B #!/bin/euxlisp --script
 and the like in shell scripts.
+.TP
+.BI \-m " \fIfile\fR,\fP " \--module " \fIfile"
+read and execute module from \fIfile\fP.
+.TP
+.BI \-t "\fR,\fP " \-\-trace
+switch on byte-code level tracing.
 .PP
 Other args are not interpreted, but are available though
 .B getarg

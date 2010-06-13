@@ -13,7 +13,7 @@
   made to keep this document consistent with the evolving EuLisp definition and
   EuXLisp implementation.
 
-  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small and
+  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small and
   compact Lisp, but nevertheless has many interesting features, such as modules,
   an object system, and multithreading.  EuLisp Level 1 has extra features, the
   most notable being a full metaobject system which is implemented in Youtoo not
@@ -1489,11 +1489,14 @@
 
 * Command Line Arguments
   The EuXLisp interpreter accepts a few arguments:
-  + =-t= enable trace debugging
-  + =-n= do not load an image
-  + =-q= do not print results in the read-eval-print loop
-  + =-s= disable the system function
-  + =--script= see below
+  + =-h=, =--help=             Display this usage information.
+  + =-q=, =--quiet=            Print no messages, prompts or values.
+  + =-n=, =--no-image=         Do not read in the initial Lisp image.
+  + =-N=, =--no-sys-calls=     Disable system calls.
+  + =-s= /file/, =--script= /file/ Read and execute script from /file/, see
+    below.
+  + =-m= /file/,  =--module= /file/      Read and execute module from /file/.
+  + =-t=, =--trace=            Switch on byte-code level tracing.
 
   Other arguments are passed to the intepreter and are available as =(getarg 0)=
   (the name of the program), =(getarg 1)= (first argument), =(getarg 2)= (second
@@ -1507,11 +1510,11 @@
 
     (print "hello world")
     #+END_SRC
-    It is usual to use the =-q= flag to prevent the echo from the
-    read-eval-print loop, and the =-s= flag to prevent the use of the system
-    function.
+    It is usual to use the =-q= or =--quiet= flag to prevent the echo from the
+    read-eval-print loop (the default), and the =-N= or =--no-sys-calls= flag to
+    prevent the use of the system function.
     #+BEGIN_SRC eulisp
-    #!/usr/local/bin/euxlisp -qs --script
+    #!/usr/local/bin/euxlisp -qN --script
 
     (print "hello world")
     #+END_SRC
