@@ -254,16 +254,25 @@ static void do_expr(LVAL expr, int cont)
     if (consp(expr))
     {
         sym = car(expr);
-        if (!symbolp(sym) ||    // ((foo 1) 2)
-        findvariable(sym, &lev, &off) ||    // (let ((car cdr)) (car x))
-        getmodule(sym) != root_module ||
-        (!in_ntab(expr, cont) && !in_ftab(expr, cont)))
+        if
+        (
+            !symbolp(sym) ||                    // ((foo 1) 2)
+            findvariable(sym, &lev, &off) ||    // (let ((car cdr)) (car x))
+            getmodule(sym) != root_module ||
+            (!in_ntab(expr, cont) && !in_ftab(expr, cont))
+        )
+        {
             do_call(expr, cont);
+        }
     }
     else if (symbolp(expr))
+    {
         do_identifier(expr, cont);
+    }
     else
+    {
         do_literal(expr, cont);
+    }
 
     drop(1);
 }
@@ -1573,7 +1582,6 @@ static int load_module(LVAL sym)
     extern int quiet, osclose();
     static int indent = 0;
     static char *spacy = "                    ";
-    extern FILE *path_open();
     char buf[256], path[256];
     int readit;
 
@@ -2213,22 +2221,34 @@ static void do_defmodule(LVAL form, int cont)
     #endif
 
     if (current_module != root_module)
+    {
         xlerror("only use defmodule in root module", form);
+    }
 
     if (atom(form))
+    {
         xlerror("expecting module name in defmodule", form);
+    }
 
     if (!symbolp(car(form)) && !stringp(car(form)))
+    {
         xlerror("expecting module name in defmodule", form);
+    }
 
     // copy as strings can move in GC
     if (symbolp(car(form)))
+    {
         strcpy(modname, getstring(getpname(car(form))));
+    }
     else
+    {
         strcpy(modname, getstring(car(form)));
+    }
 
     if (atom(cdr(form)) || !listp(car(cdr(form))))
+    {
         xlerror("expecting module import list in defmodule", form);
+    }
 
     check(3);
     push(form);
@@ -3395,6 +3415,7 @@ static void do_class_class(LVAL classopts)
     cls = NIL;
 
     for (; classopts; classopts = cdr(cdr(classopts)))
+    {
         if (car(classopts) == s_class)
         {
             if (!symbolp(car(cdr(classopts))))
@@ -3402,9 +3423,13 @@ static void do_class_class(LVAL classopts)
             cls = car(cdr(classopts));
             break;
         }
+    }
 
     if (cls == NIL)
+    {
         cls = xlenter_module("<simple-class>", root_module);
+    }
+
     cpush(cls);
     cd_variable(OP_GREF, cls);
     putcbyte(OP_PUSH);

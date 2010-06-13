@@ -26,7 +26,7 @@ extern LVAL xlfun, xlenv, xlval;
 #include "xsproto.h"
 
 extern int trace;
-int quiet, no_system;
+int quiet, load_module, no_system;
 FILE *filein;
 
 static void usage();
@@ -45,7 +45,7 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc);
 #define CAST (void (*)(int))
 
 int ctrl_c = 0;
-extern int reading, quiet;
+extern int reading, quiet, load_module;
 
 void sig_int()
 {
@@ -101,11 +101,11 @@ void sig_pipe()
 void xlmain(int argc, char **argv)
 {
     int src, dst, ch;
-    LVAL code;
     char *p;
     int image = TRUE;
 
     quiet = FALSE;
+    load_module = FALSE;
     filein = stdin;
     no_system = FALSE;
 
@@ -165,6 +165,10 @@ void xlmain(int argc, char **argv)
                         case 'q':
                             quiet = TRUE;   // no mesages
                             break;
+                        case 'm':
+                            load_module = TRUE;
+                            //quiet = TRUE;   // no mesages
+                            break;
                         case 's':
                             no_system = TRUE;       // don't allow a system call
                             break;
@@ -194,13 +198,31 @@ void xlmain(int argc, char **argv)
     osinit(BANNER);
 
     // restore the default workspace, otherwise create a new one
-    if (!image || !xlirestore(IMAGE))   // image.wks
+    if
+    (
+        !image
+     || !((load_module && xlirestore(IMAGE_MOD)) || xlirestore(IMAGE))
+    )
     {
+        if (image)
+        {
+            fprintf
+            (
+                stderr,
+                "\nWarning: Could not find image file "
+                IMAGE
+                " in path "
+                IMAGE_SEARCH_PATH
+                "\n"
+                "Loading root module.\n"
+            );
+        }
+
         xlinitws(5000);
     }
 
     // do the initialization code first
-    code = xlenter_module("*INITIALIZE*", root_module);
+    LVAL code = xlenter_module("*INITIALIZE*", root_module);
     code = (boundp(code) ? getvalue(code) : NIL);
 
     // trap errors
@@ -224,6 +246,7 @@ void xlmain(int argc, char **argv)
     {
         xlexecute(code);
     }
+
     xlwrapup(1);
 }
 

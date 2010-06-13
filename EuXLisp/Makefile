@@ -70,6 +70,10 @@ IMAGE_SEARCH_PATH = "$(EUL_LIB_DIR)"
 IMAGE = euxlisp.wks
 IMAGE_PLATFORM = $(EUL_LIB_DIR)/$(IMAGE)
 
+###  Name and location of the EuXLisp image for executing modules
+IMAGE_MOD = euxlisp_mod.wks
+IMAGE_MOD_PLATFORM = $(EUL_LIB_DIR)/$(IMAGE_MOD)
+
 ###  Installation location
 DESTBIN = /usr/local/bin
 DESTLIB = /usr/local/share/Euxlisp
@@ -77,7 +81,7 @@ DESTLIB = /usr/local/share/Euxlisp
 ###  Transfer paths to the compiler
 # Note: CPPFLAGS is used here because it is already on the used in the
 # $(ARCH_DIR)/%.o : %.c rule
-CPPFLAGS = -DIMAGE='"$(IMAGE)"' \
+CPPFLAGS = -DIMAGE='"$(IMAGE)"' -DIMAGE_MOD='"$(IMAGE_MOD)"' \
          -DMODULE_SEARCH_PATH='$(MODULE_SEARCH_PATH)' \
          -DIMAGE_SEARCH_PATH='$(IMAGE_SEARCH_PATH)'
 
@@ -106,7 +110,7 @@ DISTFILES = $(EUXL_C) $(EUXL_H) $(LISP) $(OTHERS)
 ### Commands to build EuXLisp
 ###-----------------------------------------------------------------------------
 
-all: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM)
+all: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
 
 $(EUL_BIN_DIR)/euxlisp: $(EULX_O)
 	$(CC) $(LDFLAGS) $(EULX_O) $(LIBS) -o $@
@@ -114,6 +118,10 @@ $(EUL_BIN_DIR)/euxlisp: $(EULX_O)
 $(IMAGE_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) saveimage
 	EU_MODULE_PATH=Boot $(EUL_BIN_DIR)/euxlisp -n < saveimage
 	mv euxlisp.wks $(IMAGE_PLATFORM)
+
+$(IMAGE_MOD_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) savemodimage
+	EU_MODULE_PATH=Boot $(EUL_BIN_DIR)/euxlisp -n < savemodimage
+	mv euxlisp_mod.wks $(IMAGE_MOD_PLATFORM)
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands

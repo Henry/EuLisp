@@ -168,11 +168,13 @@ int xlisave(char *fname)
 /* search for a file: first looking at an env variable,
  * then a built-in path
  * NULL if not found */
-FILE *path_open(fname, env_var_name, builtin_path, found)
-    char *fname;
-    char *env_var_name;
-    char **builtin_path;
-    char *found;
+FILE *path_open
+(
+    char *fname,
+    char *env_var_name,
+    char **builtin_path,
+    char *found
+)
 {
     char **ppath, buf[256];
     extern FILE *osbopen();
@@ -181,9 +183,13 @@ FILE *path_open(fname, env_var_name, builtin_path, found)
 
     path = getenv(env_var_name);
     if (path)
+    {
         strcpy(env_search_path, path);
+    }
     else
+    {
         *env_search_path = 0;
+    }
 
     #ifdef PATH_OPEN
     fprintf(stderr, "path_open %s\n", fname);
@@ -193,8 +199,12 @@ FILE *path_open(fname, env_var_name, builtin_path, found)
     fp = NULL;
 
     // env variable path
-    for (path = strtok(env_search_path, _path_open_path_sep);
-         path; path = strtok(NULL, _path_open_path_sep))
+    for
+    (
+        path = strtok(env_search_path, _path_open_path_sep);
+        path;
+        path = strtok(NULL, _path_open_path_sep)
+    )
     {
         #ifdef PATH_OPEN
         #ifdef RISCOS
@@ -251,7 +261,9 @@ int xlirestore(char *fname)
     fp = path_open(fname, "EU_IMAGE_PATH", image_search_path, NULL);
 
     if (fp == NULL)
+    {
         return (FALSE);
+    }
 
     // read the version identification
     cp = (unsigned char *)bannerbuf;

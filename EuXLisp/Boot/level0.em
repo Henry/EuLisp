@@ -14,6 +14,7 @@
         (except
           (defmodule)
           root
+          system
           thread
           telos
           telosint
@@ -258,6 +259,7 @@
       transcript-off
       getarg
       prompt?
+      load-module?
       exit
       compile
       decompile
