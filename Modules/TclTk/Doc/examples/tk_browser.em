@@ -61,7 +61,7 @@
            (setq auxtext (format () "~a" (class-of *actual-object*)))
            (tk-conf-widget *info-title* text: "Class"))
 
-          ((and (stringp *actual-object*) (eq name-slot 'data))
+          ((and (string? *actual-object*) (eq name-slot 'data))
            (setq auxtext (format () "~a" *actual-object*))
            (tk-conf-widget *info-title* text: "Slot Information"))
 
@@ -101,7 +101,7 @@
          auxtext)
     ()
     (cond
-     ((and (stringp *actual-object*) (eq name-slot 'data))
+     ((and (string? *actual-object*) (eq name-slot 'data))
       (tk-conf-widget *info-title* text: (format () "Information Message"))
       (tk-delete *info-text* "1.0" "end")
       (tk-insert *info-text* "end" "C representation"))

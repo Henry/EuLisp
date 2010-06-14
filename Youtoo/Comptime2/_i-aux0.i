@@ -115,7 +115,7 @@
     (".o" . 68)
     (".o" . 67)
     (symbol-name . 66)
-    (stringp . 65)
+    (string? . 65)
     ("~a~a~a" . 63)
     (as-C-library-file-name . 62)
     (progn . 60)

@@ -34,36 +34,36 @@
 ;;; File name extensions
 ;;;-----------------------------------------------------------------------------
   (defmacro as-source-file-name (name)
-    `(string-append (or (stringp ,name) (symbol-name ,name)) ".em"))
+    `(string-append (or (string? ,name) (symbol-name ,name)) ".em"))
 
   (defmacro as-interface-file-name (name)
-    `(string-append (or (stringp ,name) (symbol-name ,name)) ".i"))
+    `(string-append (or (string? ,name) (symbol-name ,name)) ".i"))
 
   (defmacro as-C-file-name (name)
-    `(string-append (or (stringp ,name) (symbol-name ,name)) ".c"))
+    `(string-append (or (string? ,name) (symbol-name ,name)) ".c"))
 
   (defmacro as-compiled-C-file-name (name)
     `(if *object-dir*
          (string-append *object-dir*
            (string-append *delimiter*
-             (string-append (or (stringp ,name) (symbol-name ,name)) ".o")))
-    (string-append (or (stringp ,name) (symbol-name ,name)) ".o")))
+             (string-append (or (string? ,name) (symbol-name ,name)) ".o")))
+    (string-append (or (string? ,name) (symbol-name ,name)) ".o")))
 
   (defmacro as-included-C-file-name (name)
-    `(string-append (or (stringp ,name) (symbol-name ,name)) ".h"))
+    `(string-append (or (string? ,name) (symbol-name ,name)) ".h"))
 
   (defmacro as-C-hook-name (name)
-    `(string-append (or (stringp ,name) (symbol-name ,name)) "_"))
+    `(string-append (or (string? ,name) (symbol-name ,name)) "_"))
 
   (defmacro as-C-hook-source-file-name (name)
-    `(string-append (or (stringp ,name) (symbol-name ,name)) "_.c"))
+    `(string-append (or (string? ,name) (symbol-name ,name)) "_.c"))
 
   (defmacro as-C-hook-object-file-name (name)
     `(if *object-dir*
          (string-append *object-dir*
            (string-append *delimiter*
-             (string-append (or (stringp ,name) (symbol-name ,name)) "_.o")))
-       (string-append (or (stringp ,name) (symbol-name ,name)) "_.o")))
+             (string-append (or (string? ,name) (symbol-name ,name)) "_.o")))
+       (string-append (or (string? ,name) (symbol-name ,name)) "_.o")))
 
   (defmacro as-C-library-file-name (name)
     `(if *object-dir*
@@ -71,10 +71,10 @@
        (format () "lib~a.a" ,name)))
 
   (defmacro as-C-library-link-string (name)
-    `(string-append " -l" (or (stringp ,name) (symbol-name ,name))))
+    `(string-append " -l" (or (string? ,name) (symbol-name ,name))))
 
   (defmacro as-C-library-dir-link-string (name)
-    `(string-append " -L" (or (stringp ,name) (symbol-name ,name))))
+    `(string-append " -L" (or (string? ,name) (symbol-name ,name))))
 
   (defmacro vm-link-string () " -leulvm")
 
@@ -89,13 +89,13 @@
   (defmacro as-module-init-function-name (name)
     `(if *debug*
         (make-symbol
-         (string-append (or (stringp ,name) (symbol-name ,name))
+         (string-append (or (string? ,name) (symbol-name ,name))
                         "-init-fun"))
       ()))  ; no lambda naming
 
   (defmacro as-module-init-flag-name (name)
     `(make-symbol
-      (string-append (or (stringp ,name) (symbol-name ,name))
+      (string-append (or (string? ,name) (symbol-name ,name))
                      "-init-flag")))
 
   (defmacro full-C-library-link-string ()

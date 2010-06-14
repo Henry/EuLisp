@@ -10,7 +10,7 @@
   (syntax (_telos0)
    import (telos convert copy collect compare fpi)
    export (<character-sequence>
-           <string> stringp string-data string-size string-ref
+           <string> string? string-data string-size string-ref
            substring tailstring string-compare string-equal string-append
            string-as-int string-empty? member1-string
            do1-string map1-string listify-string

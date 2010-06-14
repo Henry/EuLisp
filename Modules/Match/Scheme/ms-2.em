@@ -1406,7 +1406,7 @@
 (defconstant eq? eq)
 (defconstant char? character?)
 (defun boolean? (obj) (or (eq obj t) (eq obj '())))
-(defconstant string? stringp)
+(defconstant string? string?)
 (defconstant display prin)
 (defmacro begin body
   `(progn ,@body))

@@ -262,7 +262,7 @@ void initialize_module__i_aux0()
   eul_intern_symbol(sym_803,"as-C-library-file-name");
   object_class(str_804) = eul_static_string_class;
   eul_allocate_bytevector( G00802,G00801);
-  eul_intern_symbol(sym_807,"stringp");
+  eul_intern_symbol(sym_807,"string?");
   eul_intern_symbol(sym_808,"symbol-name");
   object_class(str_809) = eul_static_string_class;
   object_class(str_810) = eul_static_string_class;

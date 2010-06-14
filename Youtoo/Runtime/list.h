@@ -30,9 +30,9 @@ extern LispRef list_bindings[];
 #define list_size_fn_index 18 
 #define reverse_list_fn_index 25 
 #define map1_list_last_special_fn_index 18 
-#define atom__X63_fn_index 40 
+#define atom__X63_fn_index 38 
 #define _cons__X60_X62_fn_index 71 
-#define cdr_fn_index 39 
+#define cdr_fn_index 37 
 #define listp_fn_index 14 
 #define consp_fn_index 13 
 #define list_ref_fn_index 23 

@@ -463,7 +463,7 @@
     (convert x <string>))
 
   (defun string? (x)
-    (stringp x))
+    (string? x))
 
   (declare-inline string?)
 
@@ -511,7 +511,7 @@
   (declare-inline string>)
 
   (defun string? (x)
-    (stringp x))
+    (string? x))
   (declare-inline string?)
 
   (export substring) ;; indexing may be different!

@@ -46,7 +46,7 @@ void initialize_module_mop_inspect()
   static const void *G001571[] = {I(43,03,1d,04),I(1b,26,00,00),I(00,00,00,04),I(02,1c,1f,04),I(1d,82,24,00),B(mop_inspect ,7),I(3c,04,1f,05),I(1c,1f,05,03),I(45,06,00,00)};
 
   /* Byte-vector with size: 24 is_init: 0 index: 17 binding: top-level */
-  static const void *G001573[] = {I(a9,24,00,00),B(mop_class ,70),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(mop_class ,24),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,26),I(3c,04,1b,89),B(mop_inspect ,14),I(2a,24,00,00),B(boot1 ,45),I(24,00,00,00),B(boot1 ,45),I(3c,01,24,00),B(mop_inspect ,10),I(23,00,00,00),B(mop_inspect ,16),I(23,00,00,00),B(mop_inspect ,15),I(3b,03,1d,3d),I(02,02,45,02)};
+  static const void *G001573[] = {I(a9,24,00,00),B(mop_class ,70),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(mop_class ,24),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,26),I(3c,04,1b,89),B(mop_inspect ,14),I(2a,24,00,00),B(boot1 ,43),I(24,00,00,00),B(boot1 ,43),I(3c,01,24,00),B(mop_inspect ,10),I(23,00,00,00),B(mop_inspect ,16),I(23,00,00,00),B(mop_inspect ,15),I(3b,03,1d,3d),I(02,02,45,02)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 18 binding: anonymous */
   static const void *G001576[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2e),I(1c,10,1b,47),I(00,01,24,00),B(mop_inspect ,2),I(3c,02,1b,34),I(00,00,00,0d),I(47,00,00,32),I(00,00,00,0e),I(1f,03,11,47),I(00,02,3d,01),I(04,22,02,45),I(02,00,00,00)};

@@ -9,10 +9,10 @@
 (defmodule boot1
   (syntax (_boot0)
    export (car cdr cons list
-           stringp string? character? symbolp symbol? consp cons? intp int?
+           string? character? symbolp symbol? consp cons? intp int?
            listp list? atom? null?
            simple-function? simple-generic-function?
-           + - * / % mod < = inc dec int-zerop int-zero?
+           + - * / % mod < = inc dec int-zerop int-zerop
            eq eql equal
            format1 write-object prin print
            make-symbol make-keyword
@@ -64,8 +64,6 @@
   (defun character? (x) ((opencoded-lambda (u) (characterp)) x))
   (declare-inline character?)
 
-  (defun stringp (x) ((opencoded-lambda (u) (stringp)) x))
-  (declare-inline stringp)
   (defun string? (x) ((opencoded-lambda (u) (stringp)) x))
   (declare-inline string?)
 
@@ -133,8 +131,8 @@
 
   (defun int-zerop (x) ((opencoded-lambda (x) (fpi-zerop)) x))
   (declare-inline int-zerop)
-  (defun int-zero? (x) ((opencoded-lambda (x) (fpi-zerop)) x))
-  (declare-inline int-zero?)
+  (defun int-zerop (x) ((opencoded-lambda (x) (fpi-zerop)) x))
+  (declare-inline int-zerop)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lists

@@ -258,7 +258,7 @@
                     (loop (tailstring str 1) res)
                   (loop (tailstring str (+ i 1))
                         (cons (substring str 0 i) res)))))))
-     (if (stringp str)
+     (if (string? str)
          (loop str ())
        ())))
 

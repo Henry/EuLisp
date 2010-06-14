@@ -28,7 +28,7 @@
              ((setter bigint-value) x (mpz-init-set-si val)))
             ((doublep val)
              ((setter bigint-value) x (mpz-init-set-d val)))
-            ((stringp val)
+            ((string? val)
              ((setter bigint-value) x (mpz-init-set-str val 10)))
             (t
              (error "cannot allocate bigint for ~a" val)))

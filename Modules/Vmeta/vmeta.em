@@ -127,7 +127,7 @@
       ((character? x)
        `(when (and (< index end) (binary= (element sequence index) ',x))
               (incf index)))
-      ((stringp x)
+      ((string? x)
        `(let ((old-index index))         ; 'old-index' is a *lexical* variable.
           (or (and ,@(map (lambda (c) `(match-literal ,c)) (convert x <list>)))
               (progn (setq index old-index) ()))))))

@@ -90,7 +90,7 @@
                          (loop (cdr ll)
                                (+ i 1)
                           (cons (tk-name key) res)))
-                   ((stringp key)
+                   ((string? key)
                     (loop (cdr ll)
                           (+ i 1)
                           (cons key res)))
@@ -104,7 +104,7 @@
                                (eq key yscrollcommand:)
                                (eq key xscrollcommand:))
                            ;; We have a command.
-                           (if (stringp value)
+                           (if (string? value)
                                ;; Value is the string naming a Tcl command???
                                (loop (cddr ll)
                                      (+ i 2)

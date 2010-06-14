@@ -88,7 +88,7 @@
 
   (defmethod tk-conf-item-canvas ((canvas <tk-canvas>) . args)
     (and (car args)
-         (stringp (car args))
+         (string? (car args))
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas)
                                  (car args) (as-c-options (cdr args)) "itemconfigure")))
 
@@ -106,8 +106,8 @@
                 (function (caddr args))
                 (args2 (as-c-accessors (cdr (cddr args))))
                 function-key)
-           (and (stringp tag)
-                (stringp event)
+           (and (string? tag)
+                (string? event)
                 (function? function)
                 (setq function-key (symbol-name (gensym (symbol-name (function-name function)))))
                 (tk_allocate_registers function-key (cons function (cadr args2)))
@@ -121,7 +121,7 @@
                (function (cadr args))
                (args2 (as-c-accessors (cddr args)))
                function-key)
-           (and (stringp event)
+           (and (string? event)
                 (function? function)
                 (setq function-key (symbol-name (gensym (symbol-name (function-name function)))))
                 (tk_allocate_registers function-key (cons function (cadr args2)))
@@ -137,14 +137,14 @@
       (cond
         ((binary= size 1)
          (setq tag (car args))
-         (and (stringp tag)
+         (and (string? tag)
               (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) tag () "lower"))
          ((binary= size 2)
           (setq tag (car args))
           (setq below (cadr args))
-          (and (stringp tag)
-               (or (stringp below) (tk-item-canvas? below))
-               (setq below (if (stringp below) below
+          (and (string? tag)
+               (or (string? below) (tk-item-canvas? below))
+               (setq below (if (string? below) below
                              (tk-item-canvas-id below)))
                (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) tag
                                        (cons 1 below) "lower")))))))
@@ -158,8 +158,8 @@
                                  (tk-item-canvas-id item) () "lower"))
         ((binary= size 1)
          (setq tag_id (car args))
-         (and (or (stringp tag_id) (tk-item-canvas? tag_id))
-              (setq tag_id (if (stringp tag_id) tag_id
+         (and (or (string? tag_id) (tk-item-canvas? tag_id))
+              (setq tag_id (if (string? tag_id) tag_id
                              (tk-item-canvas-id item)))
               (eul_tk_cmd_item_canvas (tk-name item) (tk-handler item) (tk-item-canvas-id item)
                                       (cons 1 tag_id) "lower"))))))
@@ -176,7 +176,7 @@
             (setq tag (car args))
             (setq x-incr (cadr args))
             (setq y-incr (caddr args))
-            (and (stringp tag)
+            (and (string? tag)
                  (number? x-incr)
                  (number? y-incr)
                  (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas)
@@ -213,12 +213,12 @@
       (cond
         ((binary= size 1)
          (setq tag (car args))
-         (and (stringp tag)
+         (and (string? tag)
               (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas)
                                       tag () "coords")))
         ((>= size 3)
          (setq tag (car args))
-         (and (stringp tag)
+         (and (string? tag)
               (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas)
                                       tag (cons (- size 1) (cdr coords)) "coords"))))))
 
@@ -248,7 +248,7 @@
         ((>= size 1)
          (do (lambda (el)
                (cond
-                 ((stringp el)
+                 ((string? el)
                   (setq list-item-tags (cons el list-item-tags)))
                  ((tk-item-canvas? el)
                   (setq list-item-tags (cons (tk-item-canvas-id el)
@@ -266,7 +266,7 @@
   (defgeneric tk-find-canvas-above ((item-or-canvas <tk-object>) . args))
 
   (defmethod tk-find-canvas-above ((canvas <tk-canvas>) . args)
-    (and (stringp (car args))
+    (and (string? (car args))
          (null? (cdr args))
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) "above"
                                  (cons 1 (car args)) "find")))
@@ -286,7 +286,7 @@
   ()
 
   (defmethod tk-find-canvas-below ((canvas <tk-canvas>) . args)
-    (and (stringp (car args))
+    (and (string? (car args))
          (null? (cdr args))
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) "below"
                                  (cons 1 (car args)) "find")))
@@ -327,7 +327,7 @@
   (defgeneric tk-find-canvas-withtag ((item-or-canvas <tk-object>) . args))
 
   (defmethod tk-find-canvas-withtag ((canvas <tk-canvas>) . args)
-    (and (stringp (car args))
+    (and (string? (car args))
          (null? (cdr args))
          (eul_tk_cmd_item_canvas (tk-name canvas) (tk-handler canvas) "withtag"
                                  (cons 1 args) "find")))
@@ -365,8 +365,8 @@
 
   (defun tk-text-tag-add (text tagName index1 . index2)
     (and (tk-text? text)
-         (stringp tagName)
-         (stringp index1)
+         (string? tagName)
+         (string? index1)
          (binary= (% (list-size index2) 2) 1)
          (eul_tk_cmd_text (tk-name text) (tk-handler text) "tag"
                           (list (+ 3 (list-size index2)) "add" tagName index1 (car index2)))))
@@ -375,8 +375,8 @@
     (let ((args2 (as-c-accessors args))
           function-key)
       (and (tk-text? text)
-           (stringp tagName)
-           (stringp event)
+           (string? tagName)
+           (string? event)
            (function? function)
            (setq function-key (symbol-name (gensym (symbol-name (function-name function)))))
            (tk_allocate_registers function-key (cons function (cadr args2)))
@@ -386,7 +386,7 @@
   (defun tk-conf-tag-text (text tagName . args)
     (let ((options (as-c-options args)))
       (and (tk-text? text)
-           (stringp tagName)
+           (string? tagName)
            (>= (list-size args) 2)
            (eul_tk_cmd_text (tk-name text) (tk-handler text) "tag"
                             (cons (+ (car options) 2)

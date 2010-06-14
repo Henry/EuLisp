@@ -141,7 +141,7 @@
 
   (defmethod tk-delete ((entry <tk-entry>) (first <string>) . last)
     (and (or (and (binary= (list-size last) 1)
-                  (stringp (car last)))
+                  (string? (car last)))
              (null? last))
          (eul_delete_command (tk-name entry) (tk-handler entry) first last)))
 
@@ -172,7 +172,7 @@
 
   (defmethod tk-delete ((listbox <tk-listbox>) (first <string>) . last)
     (and (or (and (binary= (list-size last) 1)
-                  (stringp (car last)))
+                  (string? (car last)))
              (null? last))
          (eul_delete_command
            (tk-name listbox) (tk-handler listbox) first last)))
@@ -262,7 +262,7 @@
 
   (defmethod tk-delete ((text <tk-text>) (first <string>) . last)
     (and (or (and (binary= (list-size last) 1)
-                  (stringp (car last)))
+                  (string? (car last)))
              (null? last))
          (eul_delete_command (tk-name text) (tk-handler text) first last)))
 

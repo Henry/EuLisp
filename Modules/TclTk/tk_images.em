@@ -29,27 +29,27 @@
                                          (cdr args)))))))
 
   (defun tk-delete-image (image1 . images)
-    (and (stringp image1)
+    (and (string? image1)
          (eul_tk_image_cmd "image" "delete" (cons (+ (list-size images) 1)
                                                   (cons image1
                                                         images)))))
 
   (defun tk-height-image (image)
-    (and (stringp image)
+    (and (string? image)
          (eul_tk_image_cmd "image" "height" (list 1 image))))
 
   (defun tk-names-image ()
     (eul_tk_image_cmd "image" "names" ()))
 
   (defun tk-type-image (image)
-    (and (stringp image)
+    (and (string? image)
          (eul_tk_image_cmd "image" "type" (list 1 image))))
 
   (defun tk-types-image ()
     (eul_tk_image_cmd "image" "types" ()))
 
   (defun tk-width-image (image)
-    (and (stringp image)
+    (and (string? image)
          (eul_tk_image_cmd "image" "width" (list 1 image))))
 
 ;;;-----------------------------------------------------------------------------

@@ -81,7 +81,7 @@
   (defconstant char? character?)
   (defconstant list? listp)
   (defconstant pair? consp)
-  (defconstant string? stringp)
+  (defconstant string? string?)
   (defconstant symbol? symbolp)
   (defconstant vector? vector?)
 
