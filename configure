@@ -335,6 +335,11 @@ AIX)
 esac
 
 ###-----------------------------------------------------------------------------
+### Youtoo version CFLAG
+###-----------------------------------------------------------------------------
+EUL_VERSION_OP=-DEUL_VERSION='\"'$EUL_VERSION'\"'
+
+###-----------------------------------------------------------------------------
 ### Set word-length option
 ###-----------------------------------------------------------------------------
 
@@ -380,7 +385,7 @@ fi
 
 name_rc=${EUL_DIR}/.eulrc.${ARCH}
 echo "  Creating ${EUL_DIR}/.eulrc.${ARCH} ..."
-echo ";;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved." > $name_rc
+echo ";;; Copyright (c) by A Kind & University of Bath. All rights reserved." > $name_rc
 echo >> $name_rc
 echo ";;; --------------------------------------------------------------------" >> $name_rc
 echo ";;;                      EuLisp System 'youtoo'" >> $name_rc
@@ -388,7 +393,7 @@ echo ";;; --------------------------------------------------------------------" 
 echo >> $name_rc
 echo \( >> $name_rc
 echo \(CC \. \"${CC}\"\) >> $name_rc
-echo \(CFLAGS \. \"${WORD_LEN_OP} ${CFLAGS} \"\) >> $name_rc
+echo \(CFLAGS \. \"${WORD_LEN_OP} ${EUL_VERSION_OP} ${CFLAGS} \"\) >> $name_rc
 echo \(CLIBS \. \"${CLIBS}\"\) >> $name_rc
 echo \(AR \. \"${AR}\"\) >> $name_rc
 echo \(RANLIB \. \"${RANLIB}\"\) >> $name_rc
@@ -403,14 +408,14 @@ echo \) >> $name_rc
 
 name=${EUL_LIB_DIR}/Makefile
 echo "  Creating ${EUL_LIB_DIR}/Makefile ..."
-echo "### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved." > $name
+echo "### Copyright (c) by A Kind & University of Bath. All rights reserved." > $name
 echo >> $name
 echo "###---------------------------------------------------------------------" >> $name
 echo "###                      EuLisp System 'youtoo'" >> $name
 echo "###---------------------------------------------------------------------" >> $name
 echo >> $name
 echo CC = ${CC} >> $name
-echo "CFLAGS = ${WORD_LEN_OP} ${CFLAGS}" >> $name
+echo "CFLAGS = ${WORD_LEN_OP} ${EUL_VERSION_OP} ${CFLAGS}" >> $name
 echo 'ARCH_DIR = platforms/$(ARCH)' >> $name
 echo '.PRECIOUS: %/.' >> $name
 echo '%/.:' >> $name
@@ -488,12 +493,15 @@ create_script(){
     name=${EUL_BIN_DIR}/$1.sh
     echo "  Creating $name ..."
     echo "#!$DEFAULT_SHELL" > $name
+    echo "###---------------------------------------------------------------------" >> $name
+    echo "###                      EuLisp System 'youtoo'" >> $name
+    echo "###---------------------------------------------------------------------" >> $name
+    echo "###  Description: shell script to run the system" >> $name
+    echo "###---------------------------------------------------------------------" >> $name
     echo >> $name
     echo export EUL_DIR=${EUL_DIR} >> $name
     echo export EUL_ARCH=${ARCH} >> $name
-    echo export EUL_BIN_DIR=${EUL_BIN_DIR} >> $name
-    echo export EUL_GC_DIR=${EUL_GC_DIR} >> $name
-    echo export EUL_VERSION=${EUL_VERSION} >> $name
+    echo >> $name
     cat ${U2_DIR}/Tools/$1.skl >> $name
     chmod ug+x $name
 }

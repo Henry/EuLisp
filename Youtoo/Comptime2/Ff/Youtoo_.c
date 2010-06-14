@@ -20,7 +20,7 @@ void run_application()
     // Fast prompt (for psychological reasons) ...
     if (eul_int_as_c_int(eul_argc)==1)
     {
-        printf("EuLisp System 'youtoo %s'\n\n[user]: ", getenv("EUL_VERSION"));
+        printf("EuLisp System 'youtoo %s'\n\n[user]: ", EUL_VERSION);
         fflush(stdout);
     }
 

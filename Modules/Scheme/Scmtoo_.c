@@ -21,7 +21,7 @@ void run_application()
     // Fast prompt (for psychological reasons) ...
     if (eul_int_as_c_int(eul_argc) == 1)
     {
-        printf("EuLisp/Scheme System 'youtoo %s'\n\n", getenv("EUL_VERSION"));
+        printf("EuLisp/Scheme System 'youtoo %s'\n\n", EUL_VERSION);
         fflush(stdout);
     }
     initialize_module_scmtoo();

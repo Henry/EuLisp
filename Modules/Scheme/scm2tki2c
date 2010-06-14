@@ -12,7 +12,7 @@
 ARCH=$1
 
 FILE=scm2tki.c
-FILE_SKL=../../Vm/level1i.skl.c
+FILE_SKL=../../Youtoo/Vm/level1i.skl.c
 SOURCE_1=../../Lib.${ARCH}/libscheme.i
 SOURCE_2=scm2tk.i
 SOURCE_TCL_TK=../../Lib.${ARCH}/libtcltk.i
