@@ -19,7 +19,7 @@
            member1-string string-ref string-size substring tailstring
            character-as-int int-as-character
            stdout stderr setter
-           *argc* *argv* getenv system exit time-start time-stop objectp
+           *argc* *argv* getenv system exit time-start time-stop object?
            *absent*))
 
 ;;;-----------------------------------------------------------------------------
@@ -230,7 +230,7 @@
   (defconstant *argv* (getargv))
 
 ;;;-----------------------------------------------------------------------------
-;;; Getenv, system, time and objectp
+;;; Getenv, system, time and object?
 ;;;-----------------------------------------------------------------------------
   (defextern eul_getenv (<string>) <string> "getenv")
 
@@ -246,7 +246,7 @@
   (defun time-stop (x) (eul_time_stop x))
   (defextern eul_is_object (ptr) ptr)
 
-  (defun objectp (x) (eul_is_object x))
+  (defun object? (x) (eul_is_object x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Exit

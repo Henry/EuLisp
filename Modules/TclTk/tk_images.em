@@ -62,7 +62,7 @@
      ((loop (l str)
             (if l
                 (let* ((x (car l))
-                       (y (if (keywordp x)
+                       (y (if (keyword? x)
                               (concatenate "-" x)
                             (convert x <string>))))
                   (loop (cdr l) (concatenate str " " y)))

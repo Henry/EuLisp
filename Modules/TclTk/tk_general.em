@@ -94,7 +94,7 @@
                     (loop (cdr ll)
                           (+ i 1)
                           (cons key res)))
-                   ((numberp key)
+                   ((number? key)
                     (loop (cdr ll)
                           (+ i 1)
                           (cons (convert key <string>) res)))
@@ -179,7 +179,7 @@
                      (list (reverse res) ()))
                     ((eq (car ll) args:)
                      (list (reverse res) (cadr ll)))
-                    ((keywordp (car ll))
+                    ((keyword? (car ll))
                      (loop (cdr ll)
                            (cons
                             (concatenate "%" (keyword-name (car ll))) res)))

@@ -109,7 +109,7 @@
   ;    (format s "~a" (const-value? x)))
 
   (defmethod new-generic-prin ((x <lambda>) s)
-    (if (and (numberp (dynamic *pprint*)) (< (dynamic *pprint*) 2))
+    (if (and (number? (dynamic *pprint*)) (< (dynamic *pprint*) 2))
         (format s "~a" (fun-name? x))
       (format s "(~a ~a ~a)"
               (if (lambda-inlined? x)

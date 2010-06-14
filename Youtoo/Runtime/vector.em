@@ -169,7 +169,7 @@
 ;;;-----------------------------------------------------------------------------
   (defmethod do ((fun <function>) (c <collection>) . cs)
     (let* ((ccs (map1-list (lambda (cc)
-                             (if (sequencep cc) cc (convert cc <vector>)))
+                             (if (sequence? cc) cc (convert cc <vector>)))
                            (cons c cs)))
            (n (apply min (map1-list size ccs))))
       (labels
@@ -187,7 +187,7 @@
 ;;;-----------------------------------------------------------------------------
   (defmethod map ((fun <function>) (c <collection>) . cs)
     (let* ((ccs (map1-list (lambda (cc)
-                             (if (sequencep cc) cc (convert cc <vector>)))
+                             (if (sequence? cc) cc (convert cc <vector>)))
                            (cons c cs)))
            (n (apply min (map1-list size ccs)))
            (res (make-vector n)))

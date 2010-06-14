@@ -63,7 +63,7 @@
                ((null? rest)
                 ())
                (t
-                 (append (if (numberp (car rest)) (list (car rest))
+                 (append (if (number? (car rest)) (list (car rest))
                            (split-symbol (car rest)))
                          (loop (cdr rest)))))))
       (list (loop ce))))
@@ -184,7 +184,7 @@
 
   (defun is-constant (x)
     ;;(format t "is-constant: ~a~%" x)
-    (if (numberp x) t
+    (if (number? x) t
       (let* ((name (symbol-name x))
              (first (element name 0))
              (same  (eql first #\<)))
@@ -200,7 +200,7 @@
     (member x '(< <= > >= <> = <=>) binary=))
 
   (defun is-ops5-var (x)
-    (if (or (listp x) (numberp x)) ()
+    (if (or (listp x) (number? x)) ()
       (and (eql (element (symbol-name x) 0) #\<)
            (eql (element (symbol-name x) (- (size (symbol-name x)) 1)) #\>))))
 

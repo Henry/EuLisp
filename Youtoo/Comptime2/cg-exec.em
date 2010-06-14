@@ -142,7 +142,7 @@
     (if (null? code) (bytevector)
       (let ((x (car code)))
         (cond
-         ((numberp x)
+         ((number? x)
           (write-next-bv-byte x))
          ((consp x)
           (let ((key (car x))

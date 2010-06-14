@@ -187,7 +187,7 @@
 ;;;------------------------------------------------------------------------
   (defun write (x . ss)
     (match-let ss ((s stdout))
-               (if (objectp x)
+               (if (object? x)
                    (generic-write x s)
                  (progn
                    (prin-string "#<C: " 5 s)
@@ -197,7 +197,7 @@
 
   (defun prin (x . ss)
     (match-let ss ((s stdout))
-               (if (objectp x)
+               (if (object? x)
                    (generic-prin x s)
                  (progn
                    (prin-string "#<C: " 5 s)
@@ -207,7 +207,7 @@
 
   (defun print (x . ss)
     (match-let ss ((s stdout))
-               (if (objectp x)
+               (if (object? x)
                    (progn
                      (generic-prin x s)
                      (prin-one-char #\\n s))
@@ -229,7 +229,7 @@
     (if args
         (do1-list
           (lambda (x)
-            (if (objectp x)
+            (if (object? x)
                 (generic-prin x s)
               (progn
                 (prin-string "#<C: " 5 s)

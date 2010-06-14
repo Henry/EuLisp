@@ -10,7 +10,7 @@
            assoc assq memq
            vector gentemp
            equal? eq?
-           boolean? char? list? number? pair? string? symbol? vector?
+           boolean? char? list? pair? string? symbol? vector?
            list->vector number->string string->list string->number
            string->symbol symbol->string vector->list
            char-numeric?
@@ -80,7 +80,6 @@
   (defun boolean? (obj) (or (eq obj t) (eq obj '())))
   (defconstant char? character?)
   (defconstant list? listp)
-  (defconstant number? numberp)
   (defconstant pair? consp)
   (defconstant string? stringp)
   (defconstant symbol? symbolp)

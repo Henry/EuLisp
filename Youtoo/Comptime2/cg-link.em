@@ -223,7 +223,7 @@
     (setq *bytevector-size* 0))
 
   (defun write-next-bv-byte (x)
-    (if (numberp x)
+    (if (number? x)
         (if (= *bytevector-cache-index* 3)
             (progn
               (check-bv-delimiter)
@@ -330,7 +330,7 @@
     'eul_nil)
 
   (defun static-allocatable? (x)
-    (null? (or (symbolp x) (keywordp x) (null? x) (vectorp x) (float? x))))
+    (null? (or (symbolp x) (keyword? x) (null? x) (vectorp x) (float? x))))
 
   (defmethod convert-constant ((value <cons>))
     (let* ((loc (gensym "cons_"))
@@ -407,7 +407,7 @@
     (if (null? code) ()
       (let ((x (car code)))
         (cond
-         ((numberp x)
+         ((number? x)
           (write-next-bv-byte x))
          ((symbolp x)
           (check-bv-delimiter)

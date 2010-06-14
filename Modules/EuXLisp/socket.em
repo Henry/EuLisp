@@ -5,7 +5,7 @@
 
 (defmodule socket
     (import (root setter convert)
-     export (<socket> socket-fd socketp make-socket connect bind
+     export (<socket> socket-fd socket? make-socket connect bind
              listen accept set-block set-nonblock reuse noreuse close-socket
              shutdown peeraddr peerport sockaddr sockport host->ip
              ip->host fd-zero-read fd-set-read fd-isset-read select-read
@@ -18,7 +18,7 @@
          accessor: socket-fd
          default: nil))
     constructor: (socket-constructor fd:)
-    predicate: socketp)
+    predicate: socket?)
 
   (define (make-socket)
           (socket-constructor (socket-socket)))

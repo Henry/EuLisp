@@ -34,7 +34,7 @@
     (top-level . 46)
     (double-binary-gcd . 45)
     (double-binary-lcm . 44)
-    (|(method zerop)| . 40)
+    (|(method zero?)| . 40)
     (|(method binary-lcm)| . 39)
     (|(method binary-gcd)| . 38)
     (|(method truncate)| . 37)

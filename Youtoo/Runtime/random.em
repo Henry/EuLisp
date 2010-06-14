@@ -40,7 +40,7 @@
 ;;;-----------------------------------------------------------------------------
   ;; The result of (random 2) should always be a fixnum (<int> class),
   ;; so use int-zerop, which is available during bootstrapping, instead of
-  ;; zerop, the generic function.
+  ;; zero?, the generic function.
   (defun random-true-nil ()
     (int-zerop (random 2)))
 

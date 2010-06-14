@@ -27,7 +27,7 @@
       (let ((code1 (class-code cl1))
             (code2 (class-code cl2)))
         (if (and code1 code2)
-            (subcodep code1 code2)
+            (subcode? code1 code2)
           (labels
               ((loop (l)
                      (if (null? l) ()
@@ -41,15 +41,15 @@
       (let ((code1 (class-code cl1))
             (code2 (class-code cl2)))
         (if (and code1 code2)
-            (subcodep code1 code2)
+            (subcode? code1 code2)
           (member1-list cl2 (class-precedence-list cl1))))))
 
 
-  (defun subcodep (code1 code2)
+  (defun subcode? (code1 code2)
     (if (< (car code1) (car code2)) ()
       (if (< (cdr code2) (cdr code1)) ()
         t)))
-  ;;(declare-inline subcodep)
+  ;;(declare-inline subcode?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class predicates (<null>, <cons> have not yet its superclasses!)

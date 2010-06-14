@@ -22,7 +22,7 @@
     ((name . subvector) (pos . 3) (origin vector . subvector))
     ((name . member1-vector) (pos . 2) (origin vector . member1-vector))
     ((name . <vector>) (pos . 8) (origin vector . <vector>) (class . constant))
-    ((name . make-vector) (pos . 37) (origin boot1 . make-vector))
+    ((name . make-vector) (pos . 38) (origin boot1 . make-vector))
     ((name . vectorp) (pos . 5) (origin vector . vectorp))
     ((name . all?1-vector) (pos . 12) (origin vector . all?1-vector))
    )

@@ -146,7 +146,7 @@ void initialize_module_boot1()
 
   eul_allocate_static_cons(cons_267, NULL, NULL);
   /* Byte-vector with size: 61 is_init: 0 index: 70 binding: top-level */
-  static const void *G00265[] = {I(a9,23,00,00),B(boot1 ,65),I(89,00,00,00),B(boot1 ,44),I(2a,28,16,1b),I(89,00,00,00),B(boot1 ,26),I(2a,28,17,1b),I(89,00,00,00),B(boot1 ,24),I(2a,24,00,00),B(boot1 ,39),I(24,00,00,00),B(boot1 ,5),I(24,00,00,00),B(boot1 ,5),I(3c,02,2a,24),B(boot1 ,39),I(24,00,00,00),B(boot1 ,39),I(3c,01,24,00),B(boot1 ,27),I(23,00,00,00),B(boot1 ,66),I(23,00,00,00),B(boot1 ,63),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,39),I(24,00,00,00),B(boot1 ,39),I(3c,01,24,00),B(boot1 ,34),I(23,00,00,00),B(boot1 ,67),I(23,00,00,00),B(boot1 ,62),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,39),I(24,00,00,00),B(boot1 ,39),I(3c,01,24,00),B(boot1 ,8),I(23,00,00,00),B(boot1 ,68),I(23,00,00,00),B(boot1 ,61),I(3b,03,1d,3c),I(02,2a,24,00),B(boot1 ,39),I(24,00,00,00),B(boot1 ,39),I(3c,01,24,00),B(boot1 ,6),I(23,00,00,00),B(boot1 ,69),I(23,00,00,00),B(boot1 ,60),I(3b,03,1d,3d),I(02,06,45,06)};
+  static const void *G00265[] = {I(a9,23,00,00),B(boot1 ,65),I(89,00,00,00),B(boot1 ,45),I(2a,28,16,1b),I(89,00,00,00),B(boot1 ,26),I(2a,28,17,1b),I(89,00,00,00),B(boot1 ,24),I(2a,24,00,00),B(boot1 ,40),I(24,00,00,00),B(boot1 ,5),I(24,00,00,00),B(boot1 ,5),I(3c,02,2a,24),B(boot1 ,40),I(24,00,00,00),B(boot1 ,40),I(3c,01,24,00),B(boot1 ,27),I(23,00,00,00),B(boot1 ,66),I(23,00,00,00),B(boot1 ,63),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,40),I(24,00,00,00),B(boot1 ,40),I(3c,01,24,00),B(boot1 ,34),I(23,00,00,00),B(boot1 ,67),I(23,00,00,00),B(boot1 ,62),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,40),I(24,00,00,00),B(boot1 ,40),I(3c,01,24,00),B(boot1 ,8),I(23,00,00,00),B(boot1 ,68),I(23,00,00,00),B(boot1 ,61),I(3b,03,1d,3c),I(02,2a,24,00),B(boot1 ,40),I(24,00,00,00),B(boot1 ,40),I(3c,01,24,00),B(boot1 ,6),I(23,00,00,00),B(boot1 ,69),I(23,00,00,00),B(boot1 ,60),I(3b,03,1d,3d),I(02,06,45,06)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 71 binding: cons */
   static const void *G00273[] = {I(ab,0f,45,00)};
@@ -251,44 +251,44 @@ void initialize_module_boot1()
   /* Byte-vector with size: 6 is_init: 0 index: 106 binding: prin */
   static const void *G00341[] = {I(43,fe,1b,34),I(00,00,00,0d),I(1b,10,32,00),I(00,00,00,07),I(83,1d,1c,42),I(45,03,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 107 binding: make-vector */
-  static const void *G00343[] = {I(43,fe,41,00),B(boot1 ,54),I(45,02,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 107 binding: object? */
+  static const void *G00343[] = {I(aa,41,00,00),B(boot1 ,59),I(45,01,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 108 binding: mod */
-  static const void *G00345[] = {I(ab,18,45,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 108 binding: make-vector */
+  static const void *G00345[] = {I(43,fe,41,00),B(boot1 ,54),I(45,02,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 109 binding: setter */
-  static const void *G00347[] = {I(aa,91,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 109 binding: mod */
+  static const void *G00347[] = {I(ab,18,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 110 binding: < */
-  static const void *G00349[] = {I(ab,1a,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 110 binding: setter */
+  static const void *G00349[] = {I(aa,91,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 111 binding: symbolp */
-  static const void *G00351[] = {I(aa,7c,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 111 binding: < */
+  static const void *G00351[] = {I(ab,1a,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 112 binding: eql */
-  static const void *G00353[] = {I(ab,51,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 112 binding: symbolp */
+  static const void *G00353[] = {I(aa,7c,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 113 binding: dec */
-  static const void *G00355[] = {I(aa,2c,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 113 binding: eql */
+  static const void *G00355[] = {I(ab,51,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 114 binding: simple-generic-function? */
-  static const void *G00357[] = {I(aa,80,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 114 binding: dec */
+  static const void *G00357[] = {I(aa,2c,45,00)};
 
-  /* Byte-vector with size: 29 is_init: 0 index: 115 binding: anonymous */
-  static const void *G00359[] = {I(ab,1c,7a,1b),I(34,00,00,00),I(00,00,00,10),I(1c,7a,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,36),I(1f,03,10,1f),I(03,10,24,00),B(boot1 ,46),I(3c,02,1b,34),I(00,00,00,19),I(1f,04,11,1f),I(04,11,47,00),I(00,3d,02,05),I(32,00,00,00),I(00,00,00,09),I(86,22,01,32),I(00,00,00,2b),I(1f,03,34,00),I(00,00,00,22),I(1d,34,00,00),I(00,00,00,13),I(1f,03,1f,03),I(51,32,00,00),I(00,00,00,08),I(86,32,00,00),I(00,00,00,09),I(1d,12,45,04)};
+  /* Byte-vector with size: 1 is_init: 0 index: 115 binding: simple-generic-function? */
+  static const void *G00359[] = {I(aa,80,45,00)};
 
-  /* Byte-vector with size: 10 is_init: 0 index: 116 binding: equal */
-  static const void *G00361[] = {I(ab,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(boot1 ,88),I(23,00,00,00),B(boot1 ,115),I(3b,02,48,00),I(00,1d,1d,47),I(00,00,3d,02),I(03,45,03,00)};
+  /* Byte-vector with size: 29 is_init: 0 index: 116 binding: anonymous */
+  static const void *G00361[] = {I(ab,1c,7a,1b),I(34,00,00,00),I(00,00,00,10),I(1c,7a,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,36),I(1f,03,10,1f),I(03,10,24,00),B(boot1 ,47),I(3c,02,1b,34),I(00,00,00,19),I(1f,04,11,1f),I(04,11,47,00),I(00,3d,02,05),I(32,00,00,00),I(00,00,00,09),I(86,22,01,32),I(00,00,00,2b),I(1f,03,34,00),I(00,00,00,22),I(1d,34,00,00),I(00,00,00,13),I(1f,03,1f,03),I(51,32,00,00),I(00,00,00,08),I(86,32,00,00),I(00,00,00,09),I(1d,12,45,04)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 117 binding: objectp */
-  static const void *G00363[] = {I(aa,41,00,00),B(boot1 ,59),I(45,01,00,00)};
+  /* Byte-vector with size: 10 is_init: 0 index: 117 binding: equal */
+  static const void *G00363[] = {I(ab,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(boot1 ,88),I(23,00,00,00),B(boot1 ,116),I(3b,02,48,00),I(00,1d,1d,47),I(00,00,3d,02),I(03,45,03,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 118 binding: system */
   static const void *G00365[] = {I(aa,41,00,00),B(boot1 ,56),I(45,01,00,00)};
 
   /* Byte-vector with size: 278 is_init: 1 index: 0 binding: initialize-boot1 */
-  static const void *G00367[] = {I(87,25,00,00),B(boot1 ,1),I(23,00,00,00),B(boot1 ,119),I(23,00,00,00),B(boot1 ,118),I(3b,01,25,00),B(boot1 ,48),I(23,00,00,00),B(boot1 ,120),I(23,00,00,00),B(boot1 ,117),I(3b,01,25,00),B(boot1 ,47),I(23,00,00,00),B(boot1 ,121),I(23,00,00,00),B(boot1 ,116),I(3b,02,25,00),B(boot1 ,46),I(23,00,00,00),B(boot1 ,122),I(23,00,00,00),B(boot1 ,114),I(3b,01,25,00),B(boot1 ,45),I(86,25,00,00),B(boot1 ,44),I(23,00,00,00),B(boot1 ,123),I(23,00,00,00),B(boot1 ,113),I(3b,01,25,00),B(boot1 ,43),I(23,00,00,00),B(boot1 ,124),I(23,00,00,00),B(boot1 ,112),I(3b,02,25,00),B(boot1 ,42),I(23,00,00,00),B(boot1 ,125),I(23,00,00,00),B(boot1 ,111),I(3b,01,25,00),B(boot1 ,41),I(23,00,00,00),B(boot1 ,126),I(23,00,00,00),B(boot1 ,110),I(3b,02,25,00),B(boot1 ,40),I(23,00,00,00),B(boot1 ,127),I(23,00,00,00),B(boot1 ,109),I(3b,01,25,00),B(boot1 ,39),I(23,00,00,00),B(boot1 ,128),I(23,00,00,00),B(boot1 ,108),I(3b,02,25,00),B(boot1 ,38),I(23,00,00,00),B(boot1 ,129),I(23,00,00,00),B(boot1 ,107),I(3b,fe,25,00),B(boot1 ,37),I(23,00,00,00),B(boot1 ,130),I(23,00,00,00),B(boot1 ,106),I(3b,fe,25,00),B(boot1 ,36),I(23,00,00,00),B(boot1 ,131),I(23,00,00,00),B(boot1 ,105),I(3b,01,25,00),B(boot1 ,35),I(23,00,00,00),B(boot1 ,132),I(23,00,00,00),B(boot1 ,104),I(3b,01,25,00),B(boot1 ,34),I(23,00,00,00),B(boot1 ,133),I(23,00,00,00),B(boot1 ,103),I(3b,01,25,00),B(boot1 ,33),I(23,00,00,00),B(boot1 ,134),I(23,00,00,00),B(boot1 ,102),I(3b,02,25,00),B(boot1 ,32),I(23,00,00,00),B(boot1 ,135),I(23,00,00,00),B(boot1 ,101),I(3b,01,25,00),B(boot1 ,31),I(23,00,00,00),B(boot1 ,136),I(23,00,00,00),B(boot1 ,100),I(3b,02,25,00),B(boot1 ,30),I(23,00,00,00),B(boot1 ,137),I(23,00,00,00),B(boot1 ,99),I(3b,01,25,00),B(boot1 ,29),I(23,00,00,00),B(boot1 ,138),I(23,00,00,00),B(boot1 ,98),I(3b,01,25,00),B(boot1 ,28),I(23,00,00,00),B(boot1 ,139),I(23,00,00,00),B(boot1 ,97),I(3b,01,25,00),B(boot1 ,27),I(86,25,00,00),B(boot1 ,26),I(23,00,00,00),B(boot1 ,140),I(23,00,00,00),B(boot1 ,96),I(3b,00,25,00),B(boot1 ,25),I(86,25,00,00),B(boot1 ,24),I(23,00,00,00),B(boot1 ,141),I(23,00,00,00),B(boot1 ,95),I(3b,ff,25,00),B(boot1 ,23),I(23,00,00,00),B(boot1 ,142),I(23,00,00,00),B(boot1 ,94),I(3b,01,25,00),B(boot1 ,22),I(23,00,00,00),B(boot1 ,143),I(23,00,00,00),B(boot1 ,93),I(3b,02,25,00),B(boot1 ,21),I(23,00,00,00),B(boot1 ,144),I(23,00,00,00),B(boot1 ,92),I(3b,01,25,00),B(boot1 ,20),I(23,00,00,00),B(boot1 ,145),I(23,00,00,00),B(boot1 ,91),I(3b,ff,25,00),B(boot1 ,19),I(23,00,00,00),B(boot1 ,146),I(23,00,00,00),B(boot1 ,90),I(3b,01,25,00),B(boot1 ,18),I(23,00,00,00),B(boot1 ,147),I(23,00,00,00),B(boot1 ,89),I(3b,fd,25,00),B(boot1 ,17),I(23,00,00,00),B(boot1 ,148),I(23,00,00,00),B(boot1 ,86),I(3b,01,25,00),B(boot1 ,16),I(23,00,00,00),B(boot1 ,149),I(23,00,00,00),B(boot1 ,85),I(3b,02,25,00),B(boot1 ,15),I(23,00,00,00),B(boot1 ,150),I(23,00,00,00),B(boot1 ,84),I(3b,02,25,00),B(boot1 ,14),I(23,00,00,00),B(boot1 ,151),I(23,00,00,00),B(boot1 ,83),I(3b,01,25,00),B(boot1 ,13),I(23,00,00,00),B(boot1 ,152),I(23,00,00,00),B(boot1 ,82),I(3b,01,25,00),B(boot1 ,12),I(23,00,00,00),B(boot1 ,153),I(23,00,00,00),B(boot1 ,81),I(3b,02,25,00),B(boot1 ,11),I(23,00,00,00),B(boot1 ,154),I(23,00,00,00),B(boot1 ,80),I(3b,02,25,00),B(boot1 ,10),I(23,00,00,00),B(boot1 ,155),I(23,00,00,00),B(boot1 ,79),I(3b,01,25,00),B(boot1 ,9),I(23,00,00,00),B(boot1 ,156),I(23,00,00,00),B(boot1 ,78),I(3b,02,25,00),B(boot1 ,8),I(23,00,00,00),B(boot1 ,157),I(23,00,00,00),B(boot1 ,77),I(3b,01,25,00),B(boot1 ,7),I(23,00,00,00),B(boot1 ,158),I(23,00,00,00),B(boot1 ,76),I(3b,02,25,00),B(boot1 ,6),I(23,00,00,00),B(boot1 ,159),I(23,00,00,00),B(boot1 ,75),I(3b,02,25,00),B(boot1 ,5),I(23,00,00,00),B(boot1 ,160),I(23,00,00,00),B(boot1 ,74),I(3b,01,25,00),B(boot1 ,4),I(23,00,00,00),B(boot1 ,161),I(23,00,00,00),B(boot1 ,73),I(3b,fe,25,00),B(boot1 ,3),I(23,00,00,00),B(boot1 ,162),I(23,00,00,00),B(boot1 ,71),I(3b,02,25,00),B(boot1 ,2),I(23,00,00,00),B(boot1 ,163),I(23,00,00,00),B(boot1 ,70),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G00367[] = {I(87,25,00,00),B(boot1 ,1),I(23,00,00,00),B(boot1 ,119),I(23,00,00,00),B(boot1 ,118),I(3b,01,25,00),B(boot1 ,48),I(23,00,00,00),B(boot1 ,120),I(23,00,00,00),B(boot1 ,117),I(3b,02,25,00),B(boot1 ,47),I(23,00,00,00),B(boot1 ,121),I(23,00,00,00),B(boot1 ,115),I(3b,01,25,00),B(boot1 ,46),I(86,25,00,00),B(boot1 ,45),I(23,00,00,00),B(boot1 ,122),I(23,00,00,00),B(boot1 ,114),I(3b,01,25,00),B(boot1 ,44),I(23,00,00,00),B(boot1 ,123),I(23,00,00,00),B(boot1 ,113),I(3b,02,25,00),B(boot1 ,43),I(23,00,00,00),B(boot1 ,124),I(23,00,00,00),B(boot1 ,112),I(3b,01,25,00),B(boot1 ,42),I(23,00,00,00),B(boot1 ,125),I(23,00,00,00),B(boot1 ,111),I(3b,02,25,00),B(boot1 ,41),I(23,00,00,00),B(boot1 ,126),I(23,00,00,00),B(boot1 ,110),I(3b,01,25,00),B(boot1 ,40),I(23,00,00,00),B(boot1 ,127),I(23,00,00,00),B(boot1 ,109),I(3b,02,25,00),B(boot1 ,39),I(23,00,00,00),B(boot1 ,128),I(23,00,00,00),B(boot1 ,108),I(3b,fe,25,00),B(boot1 ,38),I(23,00,00,00),B(boot1 ,129),I(23,00,00,00),B(boot1 ,107),I(3b,01,25,00),B(boot1 ,37),I(23,00,00,00),B(boot1 ,130),I(23,00,00,00),B(boot1 ,106),I(3b,fe,25,00),B(boot1 ,36),I(23,00,00,00),B(boot1 ,131),I(23,00,00,00),B(boot1 ,105),I(3b,01,25,00),B(boot1 ,35),I(23,00,00,00),B(boot1 ,132),I(23,00,00,00),B(boot1 ,104),I(3b,01,25,00),B(boot1 ,34),I(23,00,00,00),B(boot1 ,133),I(23,00,00,00),B(boot1 ,103),I(3b,01,25,00),B(boot1 ,33),I(23,00,00,00),B(boot1 ,134),I(23,00,00,00),B(boot1 ,102),I(3b,02,25,00),B(boot1 ,32),I(23,00,00,00),B(boot1 ,135),I(23,00,00,00),B(boot1 ,101),I(3b,01,25,00),B(boot1 ,31),I(23,00,00,00),B(boot1 ,136),I(23,00,00,00),B(boot1 ,100),I(3b,02,25,00),B(boot1 ,30),I(23,00,00,00),B(boot1 ,137),I(23,00,00,00),B(boot1 ,99),I(3b,01,25,00),B(boot1 ,29),I(23,00,00,00),B(boot1 ,138),I(23,00,00,00),B(boot1 ,98),I(3b,01,25,00),B(boot1 ,28),I(23,00,00,00),B(boot1 ,139),I(23,00,00,00),B(boot1 ,97),I(3b,01,25,00),B(boot1 ,27),I(86,25,00,00),B(boot1 ,26),I(23,00,00,00),B(boot1 ,140),I(23,00,00,00),B(boot1 ,96),I(3b,00,25,00),B(boot1 ,25),I(86,25,00,00),B(boot1 ,24),I(23,00,00,00),B(boot1 ,141),I(23,00,00,00),B(boot1 ,95),I(3b,ff,25,00),B(boot1 ,23),I(23,00,00,00),B(boot1 ,142),I(23,00,00,00),B(boot1 ,94),I(3b,01,25,00),B(boot1 ,22),I(23,00,00,00),B(boot1 ,143),I(23,00,00,00),B(boot1 ,93),I(3b,02,25,00),B(boot1 ,21),I(23,00,00,00),B(boot1 ,144),I(23,00,00,00),B(boot1 ,92),I(3b,01,25,00),B(boot1 ,20),I(23,00,00,00),B(boot1 ,145),I(23,00,00,00),B(boot1 ,91),I(3b,ff,25,00),B(boot1 ,19),I(23,00,00,00),B(boot1 ,146),I(23,00,00,00),B(boot1 ,90),I(3b,01,25,00),B(boot1 ,18),I(23,00,00,00),B(boot1 ,147),I(23,00,00,00),B(boot1 ,89),I(3b,fd,25,00),B(boot1 ,17),I(23,00,00,00),B(boot1 ,148),I(23,00,00,00),B(boot1 ,86),I(3b,01,25,00),B(boot1 ,16),I(23,00,00,00),B(boot1 ,149),I(23,00,00,00),B(boot1 ,85),I(3b,02,25,00),B(boot1 ,15),I(23,00,00,00),B(boot1 ,150),I(23,00,00,00),B(boot1 ,84),I(3b,02,25,00),B(boot1 ,14),I(23,00,00,00),B(boot1 ,151),I(23,00,00,00),B(boot1 ,83),I(3b,01,25,00),B(boot1 ,13),I(23,00,00,00),B(boot1 ,152),I(23,00,00,00),B(boot1 ,82),I(3b,01,25,00),B(boot1 ,12),I(23,00,00,00),B(boot1 ,153),I(23,00,00,00),B(boot1 ,81),I(3b,02,25,00),B(boot1 ,11),I(23,00,00,00),B(boot1 ,154),I(23,00,00,00),B(boot1 ,80),I(3b,02,25,00),B(boot1 ,10),I(23,00,00,00),B(boot1 ,155),I(23,00,00,00),B(boot1 ,79),I(3b,01,25,00),B(boot1 ,9),I(23,00,00,00),B(boot1 ,156),I(23,00,00,00),B(boot1 ,78),I(3b,02,25,00),B(boot1 ,8),I(23,00,00,00),B(boot1 ,157),I(23,00,00,00),B(boot1 ,77),I(3b,01,25,00),B(boot1 ,7),I(23,00,00,00),B(boot1 ,158),I(23,00,00,00),B(boot1 ,76),I(3b,02,25,00),B(boot1 ,6),I(23,00,00,00),B(boot1 ,159),I(23,00,00,00),B(boot1 ,75),I(3b,02,25,00),B(boot1 ,5),I(23,00,00,00),B(boot1 ,160),I(23,00,00,00),B(boot1 ,74),I(3b,01,25,00),B(boot1 ,4),I(23,00,00,00),B(boot1 ,161),I(23,00,00,00),B(boot1 ,73),I(3b,fe,25,00),B(boot1 ,3),I(23,00,00,00),B(boot1 ,162),I(23,00,00,00),B(boot1 ,71),I(3b,02,25,00),B(boot1 ,2),I(23,00,00,00),B(boot1 ,163),I(23,00,00,00),B(boot1 ,70),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
@@ -354,16 +354,16 @@ void initialize_module_boot1()
   eul_allocate_bytevector( G00364,G00363);
   eul_allocate_bytevector( G00366,G00365);
   eul_intern_symbol(sym_369,"system");
-  eul_intern_symbol(sym_370,"objectp");
-  eul_intern_symbol(sym_371,"equal");
-  eul_intern_symbol(sym_372,"simple-generic-function?");
-  eul_intern_symbol(sym_373,"dec");
-  eul_intern_symbol(sym_374,"eql");
-  eul_intern_symbol(sym_375,"symbolp");
-  eul_intern_symbol(sym_376,"<");
-  eul_intern_symbol(sym_377,"setter");
-  eul_intern_symbol(sym_378,"mod");
-  eul_intern_symbol(sym_379,"make-vector");
+  eul_intern_symbol(sym_370,"equal");
+  eul_intern_symbol(sym_371,"simple-generic-function?");
+  eul_intern_symbol(sym_372,"dec");
+  eul_intern_symbol(sym_373,"eql");
+  eul_intern_symbol(sym_374,"symbolp");
+  eul_intern_symbol(sym_375,"<");
+  eul_intern_symbol(sym_376,"setter");
+  eul_intern_symbol(sym_377,"mod");
+  eul_intern_symbol(sym_378,"make-vector");
+  eul_intern_symbol(sym_379,"object?");
   eul_intern_symbol(sym_380,"prin");
   eul_intern_symbol(sym_381,"atom?");
   eul_intern_symbol(sym_382,"cdr");

@@ -21,7 +21,7 @@
      (host accessor: socket-host keyword: host: default: (hostname))
      (descriptor accessor: socket-descriptor)
      (queue-size accessor: socket-queue-size keyword: queue-size: default: 5))
-    predicate: socketp)
+    predicate: socket?)
 
   (defmethod initialize ((x <socket>) inits)
     (call-next-method)
@@ -52,7 +52,7 @@
     (call-next-method)
     (let ((s (init-list-ref inits socket:))
           host port fd)
-      (if (socketp s)
+      (if (socket? s)
           (progn
             ;; leads to accept
             (setq host (socket-host s))

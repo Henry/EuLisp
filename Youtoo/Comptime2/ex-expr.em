@@ -179,7 +179,7 @@
 ;;; Keywords
 ;;;-----------------------------------------------------------------------------
   (defun get-keyword-node (x)
-    (and (keywordp x)
+    (and (keyword? x)
          (make <literal-const> value: x)))
 
 ;;;-----------------------------------------------------------------------------
@@ -200,7 +200,7 @@
                   (setq arity (- arity 1))
                   (loop (cons (gensym) res)))
               res)))
-     (if (negativep arity)  ; rest args?
+     (if (negative? arity)  ; rest args?
          (progn
            (setq arity (- (abs arity) 1))
            (loop (gensym)))
@@ -283,8 +283,8 @@
                           (eq (binding-module? (get-lexical-binding op)) 'number)))
                  (let ((arg1 (car params))
                        (arg2 (cadr params)))
-                   (cond ((and (numberp arg1)
-                               (numberp arg2))
+                   (cond ((and (number? arg1)
+                               (number? arg2))
                           ;; partial evaluation
                           (e (+ arg1 arg2) env e))
                          ((and (integer? arg1)
@@ -304,8 +304,8 @@
                           (eq (binding-module? (get-lexical-binding op)) 'number)))
                  (let ((arg1 (car params))
                        (arg2 (cadr params)))
-                   (cond ((and (numberp arg1)
-                               (numberp arg2))
+                   (cond ((and (number? arg1)
+                               (number? arg2))
                           ;; partial evaluation
                           (e (- arg1 arg2) env e))
                          ;; x - 1
@@ -324,8 +324,8 @@
                           (eq (binding-module? (get-lexical-binding op)) 'compare)))
                  (let ((arg1 (car params))
                        (arg2 (cadr params)))
-                   (cond ((and (numberp arg1)
-                               (numberp arg2))
+                   (cond ((and (number? arg1)
+                               (number? arg2))
                           ;; partial evaluation
                           (e (= arg1 arg2) env e))
                          ;; x = 0

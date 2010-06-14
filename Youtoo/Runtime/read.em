@@ -51,7 +51,7 @@
       ((tok (ntok s special-tokens))
        (in-quasiquote ()))
       (cond
-        ((specialp tok)
+        ((special? tok)
          (cond
            ((eq tok list-start)
             (let list-loop ((so-far ()))
@@ -232,7 +232,7 @@
 ;;;-----------------------------------------------------------------------------
   (defclass <special> ()
     ((tag keyword: tag: accessor: tag))
-    predicate: specialp)
+    predicate: special?)
 
   (defconstant list-start (make <special> tag: "(" ))
   (defconstant list-stop  (make <special> tag: ")" ))

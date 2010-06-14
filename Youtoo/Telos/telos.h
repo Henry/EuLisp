@@ -10,7 +10,7 @@ extern LispRef telos_bindings[];
 /* Module binding indices */
 #define _keyword__X60_X62_fn_index 81 
 #define slot_name_fn_index 80 
-#define simple_generic_function__X63_fn_index 45 
+#define simple_generic_function__X63_fn_index 46 
 #define member1_list_fn_index 29 
 #define compute_primitive_writer_using_class_fn_index 12 
 #define name_slot_defaults_fn_index 78 
@@ -18,7 +18,7 @@ extern LispRef telos_bindings[];
 #define init_list_ref_fn_index 28 
 #define method_function_fn_index 76 
 #define listify_env_string_fn_index 25 
-#define setter_fn_index 39 
+#define setter_fn_index 40 
 #define compute_slot_reader_fn_index 11 
 #define reverse_list_fn_index 24 
 #define class_instance_length_fn_index 73 
@@ -53,7 +53,7 @@ extern LispRef telos_bindings[];
 #define inc_fn_index 20 
 #define find_key_fn_index 2 
 #define _simple_method__X60_X62_fn_index 54 
-#define list_equal_fn_index 46 
+#define list_equal_fn_index 47 
 #define _slot__X60_X62_fn_index 49 
 #define lsd_size_fn_index () 
 #define list_remove_fn_index 5 
@@ -61,7 +61,7 @@ extern LispRef telos_bindings[];
 #define compute_slot_writer_fn_index 10 
 #define cons_slots_fn_index 46 
 #define error_no_applicable_methods_fn_index 15 
-#define int_binary_mod_fn_index 38 
+#define int_binary_mod_fn_index 39 
 #define method_keywords_fn_index 45 
 #define sort_list_fn_index 3 
 #define finalize_fn_index 14 
@@ -74,10 +74,10 @@ extern LispRef telos_bindings[];
 #define compatible_superclasses__X63_fn_index 14 
 #define generic_function_discriminating_function_fn_index 35 
 #define method_slot_defaults_fn_index 34 
-#define symbolp_fn_index 41 
+#define symbolp_fn_index 42 
 #define slot_reader_fn_index 32 
 #define filter_keywords_fn_index 3 
-#define make_vector_fn_index 37 
+#define make_vector_fn_index 38 
 #define primitive_prin_fn_index 36 
 #define atom__X63_fn_index 35 
 #define cdr_fn_index 34 
@@ -95,11 +95,11 @@ extern LispRef telos_bindings[];
 #define _method__X60_X62_fn_index 22 
 #define lsd_keywords_fn_index 21 
 #define tailstring_fn_index 50 
-#define cpl_subclass__X63_fn_index 6 
+#define cpl_subclass__X63_fn_index 7 
 #define primitive_print_fn_index 3 
 #define class_code_fn_index 19 
 #define compute_primitive_writer_using_slot_fn_index 7 
-#define primitive_slot_value_fn_index 5 
+#define primitive_slot_value_fn_index 6 
 #define _argv__X42_X42_fn_index 24 
 #define _simple_generic_function__X60_X62_fn_index 15 
 #define compute_defined_slot_class_fn_index 12 
@@ -126,15 +126,15 @@ extern LispRef telos_bindings[];
 #define getchar_fn_index 32 
 #define system_fn_index 48 
 #define stable_add_method_fn_index 5 
-#define objectp_fn_index 47 
 #define _backtrace_nframes__X42_X42_fn_index 31 
 #define gf_slots_fn_index 79 
 #define cons_keywords_fn_index 77 
-#define _absent__X42_X42_fn_index 44 
+#define _absent__X42_X42_fn_index 45 
 #define anyp1_list_fn_index 27 
 #define class_abstract__X63_fn_index 74 
 #define _class__X60_X62_fn_index 75 
 #define primitive_ref_fn_index 4 
+#define object__X63_fn_index 37 
 #define add_subclass_fn_index 9 
 #define int_binary__X37_fn_index 30 
 #define _cons__X60_X62_fn_index 71 
@@ -189,9 +189,9 @@ extern LispRef telos_bindings[];
 #define ensure_slot_reader_fn_index 2 
 #define compute_keywords_fn_index 6 
 #define sf_direct_slots_fn_index 38 
-#define dec_fn_index 43 
-#define int_binary__X60_fn_index 40 
-#define eql_fn_index 42 
+#define dec_fn_index 44 
+#define int_binary__X60_fn_index 41 
+#define eql_fn_index 43 
 #define _name__X60_X62_fn_index 33 
 #define primitive_stdout_fn_index () 
 #define primitive_stderr_fn_index () 

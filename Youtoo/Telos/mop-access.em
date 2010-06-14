@@ -192,7 +192,7 @@
 ;;; Size of simple functions is not nslots but bytevector size in bytes!
 ;;;-----------------------------------------------------------------------------
   (defun pprint (x . ss)
-    (if (objectp x)
+    (if (object? x)
         (let* ((s (if ss (car ss) t))
                (cl (class-of x)))
           (generic-format s "\nInstance ~a of class #<~a>" x (class-name cl))

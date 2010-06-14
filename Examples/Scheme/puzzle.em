@@ -76,13 +76,13 @@
                   ((> i *typemax*) (setq *kount* (+ *kount* 1)))
                 (cond
                  ((null?
-                   (zerop
+                   (zero?
                     (vector-ref *piececount* (vector-ref *class* i))))
                   (cond
                    ((fit i j)
                     (setq k (place i j))
                     (cond
-                     ((or (trial k) (zerop k))
+                     ((or (trial k) (zero? k))
                       (format t "Piece ~a at ~a.\n" (+ i 1) (+ k 1))
                       (setq *kount* (+ *kount* 1))
                       (kk t))

@@ -46,13 +46,13 @@ void initialize_module_mop_inspect()
   static const void *G001571[] = {I(43,03,1d,04),I(1b,26,00,00),I(00,00,00,04),I(02,1c,1f,04),I(1d,82,24,00),B(mop_inspect ,10),I(3c,04,1f,05),I(1c,1f,05,03),I(45,06,00,00)};
 
   /* Byte-vector with size: 24 is_init: 0 index: 17 binding: top-level */
-  static const void *G001573[] = {I(a9,24,00,00),B(mop_class ,70),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(mop_class ,24),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,23),I(3c,04,1b,89),B(mop_inspect ,14),I(2a,24,00,00),B(boot1 ,39),I(24,00,00,00),B(boot1 ,39),I(3c,01,24,00),B(mop_inspect ,5),I(23,00,00,00),B(mop_inspect ,16),I(23,00,00,00),B(mop_inspect ,15),I(3b,03,1d,3d),I(02,02,45,02)};
+  static const void *G001573[] = {I(a9,24,00,00),B(mop_class ,70),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(mop_class ,24),I(24,00,00,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,23),I(3c,04,1b,89),B(mop_inspect ,14),I(2a,24,00,00),B(boot1 ,40),I(24,00,00,00),B(boot1 ,40),I(3c,01,24,00),B(mop_inspect ,6),I(23,00,00,00),B(mop_inspect ,16),I(23,00,00,00),B(mop_inspect ,15),I(3b,03,1d,3d),I(02,02,45,02)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 18 binding: anonymous */
   static const void *G001576[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2e),I(1c,10,1b,47),I(00,01,24,00),B(mop_inspect ,2),I(3c,02,1b,34),I(00,00,00,0d),I(47,00,00,32),I(00,00,00,0e),I(1f,03,11,47),I(00,02,3d,01),I(04,22,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 34 is_init: 0 index: 20 binding: subclass? */
-  static const void *G001578[] = {I(ab,46,03,1c),I(48,00,00,1b),I(48,00,01,47),I(00,00,47,00),I(01,50,1b,34),I(00,00,00,0d),I(87,32,00,00),I(00,00,00,6b),I(47,00,00,26),I(00,00,00,09),I(02,47,00,01),I(26,00,00,00),I(00,00,00,09),I(02,1c,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,16),I(1d,1d,24,00),B(mop_inspect ,7),I(3d,02,06,32),I(00,00,00,2b),I(86,1b,48,00),I(02,23,00,00),B(mop_inspect ,19),I(23,00,00,00),B(mop_inspect ,18),I(3b,01,48,00),I(02,47,00,00),I(84,02,47,00),I(02,3d,01,07),I(22,01,22,03),I(45,03,00,00)};
+  static const void *G001578[] = {I(ab,46,03,1c),I(48,00,00,1b),I(48,00,01,47),I(00,00,47,00),I(01,50,1b,34),I(00,00,00,0d),I(87,32,00,00),I(00,00,00,6b),I(47,00,00,26),I(00,00,00,09),I(02,47,00,01),I(26,00,00,00),I(00,00,00,09),I(02,1c,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,16),I(1d,1d,24,00),B(mop_inspect ,5),I(3d,02,06,32),I(00,00,00,2b),I(86,1b,48,00),I(02,23,00,00),B(mop_inspect ,19),I(23,00,00,00),B(mop_inspect ,18),I(3b,01,48,00),I(02,47,00,00),I(84,02,47,00),I(02,3d,01,07),I(22,01,22,03),I(45,03,00,00)};
 
   /* Byte-vector with size: 9 is_init: 0 index: 21 binding: generic-function? */
   static const void *G001581[] = {I(aa,1b,04,24),B(mop_class ,44),I(24,00,00,00),B(mop_inspect ,2),I(3c,02,1b,34),I(00,00,00,0d),I(1c,32,00,00),I(00,00,00,08),I(86,45,02,00)};
@@ -60,14 +60,14 @@ void initialize_module_mop_inspect()
   /* Byte-vector with size: 9 is_init: 0 index: 22 binding: class? */
   static const void *G001583[] = {I(aa,1b,04,24),B(mop_class ,75),I(24,00,00,00),B(mop_inspect ,2),I(3c,02,1b,34),I(00,00,00,0d),I(1c,32,00,00),I(00,00,00,08),I(86,45,02,00)};
 
-  /* Byte-vector with size: 8 is_init: 0 index: 23 binding: primitive-slot-value */
-  static const void *G001585[] = {I(ab,1c,04,1b),I(26,00,00,00),I(00,00,00,04),I(02,1c,1f,03),I(1d,82,24,00),B(mop_inspect ,10),I(3c,04,1f,04),I(1c,02,45,05)};
+  /* Byte-vector with size: 12 is_init: 0 index: 23 binding: subcode? */
+  static const void *G001585[] = {I(ab,1c,10,1c),I(10,1a,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,1e),I(1c,11,1f,03),I(11,1a,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,08),I(87,22,01,45),I(03,00,00,00)};
 
-  /* Byte-vector with size: 24 is_init: 0 index: 24 binding: cpl-subclass? */
-  static const void *G001587[] = {I(ab,1c,1c,50),I(1b,34,00,00),I(00,00,00,0f),I(87,32,00,00),I(00,00,00,51),I(1d,26,00,00),I(00,00,00,09),I(02,1d,26,00),I(00,00,00,09),I(02,1c,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,16),I(1d,1d,24,00),B(mop_inspect ,7),I(3d,02,06,32),I(00,00,00,15),I(1f,05,26,00),I(00,00,00,06),I(02,1f,05,1c),I(86,6c,22,01),I(22,03,45,03)};
+  /* Byte-vector with size: 8 is_init: 0 index: 24 binding: primitive-slot-value */
+  static const void *G001587[] = {I(ab,1c,04,1b),I(26,00,00,00),I(00,00,00,04),I(02,1c,1f,03),I(1d,82,24,00),B(mop_inspect ,10),I(3c,04,1f,04),I(1c,02,45,05)};
 
-  /* Byte-vector with size: 12 is_init: 0 index: 25 binding: subcodep */
-  static const void *G001589[] = {I(ab,1c,10,1c),I(10,1a,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,1e),I(1c,11,1f,03),I(11,1a,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,08),I(87,22,01,45),I(03,00,00,00)};
+  /* Byte-vector with size: 24 is_init: 0 index: 25 binding: cpl-subclass? */
+  static const void *G001589[] = {I(ab,1c,1c,50),I(1b,34,00,00),I(00,00,00,0f),I(87,32,00,00),I(00,00,00,51),I(1d,26,00,00),I(00,00,00,09),I(02,1d,26,00),I(00,00,00,09),I(02,1c,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,16),I(1d,1d,24,00),B(mop_inspect ,5),I(3d,02,06,32),I(00,00,00,15),I(1f,05,26,00),I(00,00,00,06),I(02,1f,05,1c),I(86,6c,22,01),I(22,03,45,03)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 26 binding: class-of */
   static const void *G001591[] = {I(aa,04,45,00)};
@@ -117,9 +117,9 @@ void initialize_module_mop_inspect()
   eul_intern_symbol(sym_1609,"primitive-find-slot-position");
   eul_intern_symbol(sym_1610,"primitive-metaclass?");
   eul_intern_symbol(sym_1611,"class-of");
-  eul_intern_symbol(sym_1612,"subcodep");
-  eul_intern_symbol(sym_1613,"cpl-subclass?");
-  eul_intern_symbol(sym_1614,"primitive-slot-value");
+  eul_intern_symbol(sym_1612,"cpl-subclass?");
+  eul_intern_symbol(sym_1613,"primitive-slot-value");
+  eul_intern_symbol(sym_1614,"subcode?");
   eul_intern_symbol(sym_1615,"class?");
   eul_intern_symbol(sym_1616,"generic-function?");
   eul_intern_symbol(sym_1617,"subclass?");

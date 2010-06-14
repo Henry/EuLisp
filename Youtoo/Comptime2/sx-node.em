@@ -112,7 +112,7 @@
 
   (defun foldable-constant? (x)
     ;; what about names?
-    (or (numberp x)
+    (or (number? x)
         (character? x)
         (null? x)))
 

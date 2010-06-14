@@ -345,7 +345,7 @@
   (declare-inline modulo)
 
   (defun negative? (x)
-    (negativep x))
+    (negative? x))
   (declare-inline negative?)
   (export newline)
 
@@ -354,7 +354,7 @@
   (declare-inline not)
 
   (defun number? (x)
-    (numberp x))
+    (number? x))
   (declare-inline number?)
 
   (defun number->string (x . r)
@@ -394,7 +394,7 @@
     (nyi 'peek-char))
 
   (defun positive? (x)
-    (positivep x))
+    (positive? x))
   (declare-inline positive?)
 
   (defun procedure? (x)
@@ -557,7 +557,7 @@
   (declare-inline write-char)
 
   (defun zero? (x)
-    (zerop x))
+    (zero? x))
   (declare-inline zero?)
 
 ;;;-----------------------------------------------------------------------------

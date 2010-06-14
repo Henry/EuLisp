@@ -46,7 +46,7 @@
     (print (p-add 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16)))
 
   (defun make-list (x)
-    (if (zerop x)
+    (if (zero? x)
         ()
       (cons x (make-list (- x 1)))))
 

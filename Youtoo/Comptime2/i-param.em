@@ -88,7 +88,7 @@
            (default-name (format () "~a~a.eulrc.~a" *eulysses-dir* *delimiter* *eulysses-arch*))
            (default-info (with-input-file
                            (s default-name) (read-s-expression s))))
-      (if (zerop (system (format () "test -f ~a" private-name)))
+      (if (zero? (system (format () "test -f ~a" private-name)))
           (let* ((private-info (with-input-file
                                  (s private-name) (read-s-expression s)))
                  (private-version (assoc-list-ref 'VERSION private-info))

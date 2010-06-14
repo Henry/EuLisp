@@ -9,8 +9,8 @@
 (defmodule number
   (syntax (_telos0)
    import (telos callback compare copy)
-   export (<number> numberp + - * / % gcd lcm mod
-           abs zerop negate signum positivep negativep
+   export (<number> number? + - * / % gcd lcm mod
+           abs zero? negate signum positive? negative?
            binary+ binary- binary* binary/ binary%
            binary-mod binary-gcd binary-lcm))
 
@@ -19,7 +19,7 @@
 ;;;-----------------------------------------------------------------------------
   (defclass <number> (<object>) ()
     abstractp: t
-    predicate: numberp)
+    predicate: number?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Rest argument arithmetic
@@ -95,13 +95,13 @@
   (defun signum (x) (or (int-binary= x 0) (int-binary/ x (abs x))))
   (declare-inline signum)
 
-  (defun positivep (x) (int-binary< 0 x))
-  (declare-inline positivep)
+  (defun positive? (x) (int-binary< 0 x))
+  (declare-inline positive?)
 
-  (defun negativep (x) (int-binary< x 0))
-  (declare-inline negativep)
+  (defun negative? (x) (int-binary< x 0))
+  (declare-inline negative?)
 
-  (defgeneric zerop ((x <object>)))
+  (defgeneric zero? ((x <object>)))
 
   (defgeneric negate ((x <object>)))
   (defmethod negate ((x <number>)) (int-binary- 0 x))

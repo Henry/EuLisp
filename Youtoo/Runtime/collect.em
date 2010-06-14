@@ -11,7 +11,7 @@
    import (telos compare)
    export (name
            <collection> <sequence>
-           collectionp sequencep
+           collectionp sequence?
            accumulate accumulate1 anyp all? do fill find map member select
            element delete remove reset
            emptyp size
@@ -48,7 +48,7 @@
     method: (((x <object>)) ())
     method: (((x <collection>)) t))
 
-  (defgeneric sequencep (x)
+  (defgeneric sequence? (x)
     method: (((x <object>)) ())
     method: (((x <sequence>)) t))
 
