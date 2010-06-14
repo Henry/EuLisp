@@ -48,11 +48,8 @@
     [[http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition][T. Kurt
     Bond]].
 *** EuXLisp original sources
-    EuXLisp started life as
-    [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on
-    xscheme written by David Michael Betz.  This is a mostly EuLisp level 0
-    compliant interpreter (working from version 0.99 of the definition, and some
-    extras).
+    EuXLisp started life as [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on xscheme written by David Michael
+    Betz.
 *** EuLisp definition original sources
     The version of the EuLisp definition supplied is this release of Youtoo
     started life as EuLisp-0.99 from the pack released by Julian Padget:
@@ -94,9 +91,7 @@
     and compact Lisp, but nevertheless has many interesting features, such as
     modules, an object system, and multithreading.  EuLisp Level 1 has extra
     features, the most notable being a full metaobject system which is
-    implemented in Youtoo not in EuXLisp.  These are a few notes on the use of
-    EuLisp in general and EuXLisp in particular and concentrate on those things
-    unique to EuLisp.
+    implemented in Youtoo not in EuXLisp.
 
 * Documentation
 *** EuLisp definition
@@ -149,8 +144,7 @@
     /Bin.${ARCH}/youtoo.sh/ \\
     without options to start the Youtoo interpreter. The read-eval-print loop
     provides extra commands (type /help:/).
-
-  Further information about running [[file:Youtoo/README.org][Youtoo]].
+  + Further information about running [[file:Youtoo/README.org][Youtoo]].
 
 * Getting Started with EuXLisp
   EuXLisp need two paths: where to look for the compiled image, and where to
@@ -175,5 +169,6 @@
     /echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q/ \\
     The /echo/ pipes the load module /!>/ command to the interpreter.  In the
     future there will be a command-line option to execute a module directly.
+*** Further information about running [[file:Doc/EuXLispNotes.org][EuXLisp]].
 
 * [[file:TODO.org][To Do]]
