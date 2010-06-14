@@ -30,7 +30,7 @@
     (let* ((key (and (consp x) (car x)))
            (expander
             (cond
-             ((symbolp key) (or (get-module-expander key)
+             ((symbol? key) (or (get-module-expander key)
                                 (get-top-level-macro-expander key)
                                 (get-top-level-form-collector key)))
              (t (get-top-level-form-collector key)))))
@@ -144,7 +144,7 @@
         (let ((name (get-name x))
               (params (get-params x))
               (body (get-body x)))
-          (if (symbolp name)
+          (if (symbol? name)
               (if *interpreter*
                   ;; This returns the function
                   (e `(deflocal ,name (named-lambda ,name ,params ,@body)) e)

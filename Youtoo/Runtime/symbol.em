@@ -9,7 +9,7 @@
 (defmodule symbol
   (syntax (_telos0)
    import (telos convert compare collect character string table fpi)
-   export (<symbol> <keyword> <name> symbolp keyword? name
+   export (<symbol> <keyword> <name> symbol? keyword? name
            gensym symbol-name keyword-name symbol-exists?))
 
 ;;;-----------------------------------------------------------------------------

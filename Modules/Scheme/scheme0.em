@@ -59,7 +59,7 @@
 
   (defmacro define1 (name+args . body)
     ;; sorry, no 'and' available
-    (if (symbolp name+args)
+    (if (symbol? name+args)
         (if body
             (if (consp (car body))
                 (if (eq (car (car body)) 'lambda)
@@ -107,7 +107,7 @@
   (defmacro case (exp . cases)
     `(let ((else t) (case-val ,exp))
        (cond ,@(map (lambda (x)
-                      (if (and (symbolp (car x)) (eq (car x) 'else))
+                      (if (and (symbol? (car x)) (eq (car x) 'else))
                           x
                         `((eq? (quote ,(caar x)) case-val) ,(cadr x))))
                     cases))))

@@ -10,7 +10,7 @@
   (syntax (_boot0)
    export (car cdr cons list
            string? character? symbolp symbol? consp cons? int? int?
-           listp list? atom? null?
+           list? atom? null?
            simple-function? simple-generic-function?
            + - * / % mod < = inc dec int-zerop int-zerop
            eq eql equal
@@ -88,8 +88,6 @@
   (defun simple-generic-function? (x) ((opencoded-lambda (u) (gfp)) x))
   (declare-inline simple-generic-function?)
 
-  (defun listp (x) ((opencoded-lambda (u) (listp)) x))
-  (declare-inline listp)
   (defun list? (x) ((opencoded-lambda (u) (listp)) x))
   (declare-inline list?)
 

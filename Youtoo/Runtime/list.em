@@ -11,7 +11,7 @@
    import (telos convert compare collect copy number fpi)
    export (<null> <cons> <list>
            accumulate-list accumulate1-list
-           null? car cdr consp listp atom? cons list list-size
+           null? car cdr consp list? atom? cons list list-size
            list-ref init-list-ref assoc-list-ref list-drop
            caar cadr cdar cddr
            caddr cdadr cddar caadr cdaar cadar caaar cdddr cadddr

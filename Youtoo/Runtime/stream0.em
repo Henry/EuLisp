@@ -41,7 +41,7 @@
                     ,(cadr (car default-initializers))
                   (car ,expression))))
            ,@body)
-      (let* ((var (if (symbolp expression) expression (gensym)))
+      (let* ((var (if (symbol? expression) expression (gensym)))
              (update-vars
               (labels
                ((loop (l)
@@ -55,7 +55,7 @@
                            (setq ,var (cdr ,var))))
                      (loop (cdr l))))))
                (loop default-initializers))))
-        `(let (,@(if (symbolp expression) () `((,var ,expression)))
+        `(let (,@(if (symbol? expression) () `((,var ,expression)))
                ,@(map (lambda (x) `(,(car x) ())) default-initializers))
            (progn ,@update-vars)
            ,@body))))

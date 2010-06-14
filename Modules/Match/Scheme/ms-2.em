@@ -1379,7 +1379,7 @@
   (let ((case-val (gensym)))
     `(let ((else t) (,case-val ,exp))
        (cond ,@(map (lambda (x)
-                      (if (and (symbolp (car x)) (eq (car x) 'else))
+                      (if (and (symbol? (car x)) (eq (car x) 'else))
                           x
                         `((eq (quote ,(caar x)) ,case-val) ,(cadr x))))
                     cases)))))
@@ -1401,7 +1401,7 @@
 (defun vector l
   (convert l <vector>))
 (defconstant vector? vector?)
-(defconstant list? listp)
+(defconstant list? list?)
 (defconstant equal? equal)
 (defconstant eq? eq)
 (defconstant char? character?)
@@ -1430,7 +1430,7 @@
 (defconstant gentemp gensym)
 (defconstant pair? consp)
 (defconstant eq? eq)
-(defconstant symbol? symbolp)
+(defconstant symbol? symbol?)
 (defconstant null? null)
 (defmacro set! args
   `(setq ,@args))

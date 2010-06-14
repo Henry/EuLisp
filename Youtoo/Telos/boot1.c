@@ -10,88 +10,88 @@
 
 /* Imported modules */
 
-/* Module bindings with size 173 */
-LispRef boot1_bindings[173];
+/* Module bindings with size 170 */
+LispRef boot1_bindings[170];
 
 /* Foreign functions */
-static LispRef ff_stub_eul_substr262 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_substr258 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G00439, G00440, G00441, res;
+  LispRef G00432, G00433, G00434, res;
 
-  POPVAL1(G00441);
-  POPVAL1(G00440);
-  POPVAL1(G00439);
-  FF_RES_CONVERT3(res,eul_substr(FF_ARG_CONVERT3(G00439), FF_ARG_CONVERT0(G00440), FF_ARG_CONVERT0(G00441)));
+  POPVAL1(G00434);
+  POPVAL1(G00433);
+  POPVAL1(G00432);
+  FF_RES_CONVERT3(res,eul_substr(FF_ARG_CONVERT3(G00432), FF_ARG_CONVERT0(G00433), FF_ARG_CONVERT0(G00434)));
   return res;
 }
 
-static LispRef ff_stub_eul_tailstr263 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_tailstr259 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G00442, G00443, res;
+  LispRef G00435, G00436, res;
+
+  POPVAL1(G00436);
+  POPVAL1(G00435);
+  FF_RES_CONVERT3(res,eul_tailstr(FF_ARG_CONVERT3(G00435), FF_ARG_CONVERT0(G00436)));
+  return res;
+}
+
+static LispRef ff_stub_eul_str_member1260 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+{
+  LispRef G00437, G00438, res;
+
+  POPVAL1(G00438);
+  POPVAL1(G00437);
+  FF_RES_CONVERT6(res,eul_str_member1(FF_ARG_CONVERT1(G00437), FF_ARG_CONVERT3(G00438)));
+  return res;
+}
+
+static LispRef ff_stub_eul_make_symbol261 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+{
+  LispRef G00439, res;
+
+  POPVAL1(G00439);
+  FF_RES_CONVERT6(res,eul_make_symbol(FF_ARG_CONVERT3(G00439)));
+  return res;
+}
+
+static LispRef ff_stub_eul_make_keyword262 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+{
+  LispRef G00440, res;
+
+  POPVAL1(G00440);
+  FF_RES_CONVERT6(res,eul_make_keyword(FF_ARG_CONVERT3(G00440)));
+  return res;
+}
+
+static LispRef ff_stub_eul_make_vector263 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+{
+  LispRef G00441, G00442, res;
+
+  POPVAL1(G00442);
+  POPVAL1(G00441);
+  FF_RES_CONVERT6(res,eul_make_vector(FF_ARG_CONVERT0(G00441), FF_ARG_CONVERT8(G00442)));
+  return res;
+}
+
+static LispRef ff_stub_getenv264 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+{
+  LispRef G00443, res;
 
   POPVAL1(G00443);
-  POPVAL1(G00442);
-  FF_RES_CONVERT3(res,eul_tailstr(FF_ARG_CONVERT3(G00442), FF_ARG_CONVERT0(G00443)));
+  FF_RES_CONVERT3(res,getenv(FF_ARG_CONVERT3(G00443)));
   return res;
 }
 
-static LispRef ff_stub_eul_str_member1264 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_system265 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G00444, G00445, res;
+  LispRef G00444, res;
 
-  POPVAL1(G00445);
   POPVAL1(G00444);
-  FF_RES_CONVERT6(res,eul_str_member1(FF_ARG_CONVERT1(G00444), FF_ARG_CONVERT3(G00445)));
+  FF_RES_CONVERT0(res,system(FF_ARG_CONVERT3(G00444)));
   return res;
 }
 
-static LispRef ff_stub_eul_make_symbol265 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
-{
-  LispRef G00446, res;
-
-  POPVAL1(G00446);
-  FF_RES_CONVERT6(res,eul_make_symbol(FF_ARG_CONVERT3(G00446)));
-  return res;
-}
-
-static LispRef ff_stub_eul_make_keyword266 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
-{
-  LispRef G00447, res;
-
-  POPVAL1(G00447);
-  FF_RES_CONVERT6(res,eul_make_keyword(FF_ARG_CONVERT3(G00447)));
-  return res;
-}
-
-static LispRef ff_stub_eul_make_vector267 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
-{
-  LispRef G00448, G00449, res;
-
-  POPVAL1(G00449);
-  POPVAL1(G00448);
-  FF_RES_CONVERT6(res,eul_make_vector(FF_ARG_CONVERT0(G00448), FF_ARG_CONVERT8(G00449)));
-  return res;
-}
-
-static LispRef ff_stub_getenv268 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
-{
-  LispRef G00450, res;
-
-  POPVAL1(G00450);
-  FF_RES_CONVERT3(res,getenv(FF_ARG_CONVERT3(G00450)));
-  return res;
-}
-
-static LispRef ff_stub_system269 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
-{
-  LispRef G00451, res;
-
-  POPVAL1(G00451);
-  FF_RES_CONVERT0(res,system(FF_ARG_CONVERT3(G00451)));
-  return res;
-}
-
-static LispRef ff_stub_eul_time_start270 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_time_start266 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
   LispRef res;
 
@@ -99,21 +99,21 @@ static LispRef ff_stub_eul_time_start270 (Stack *reg_value_stack, LispRef *sreg_
   return res;
 }
 
-static LispRef ff_stub_eul_time_stop271 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_time_stop267 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G00452, res;
+  LispRef G00445, res;
 
-  POPVAL1(G00452);
-  FF_RES_CONVERT6(res,eul_time_stop(FF_ARG_CONVERT8(G00452)));
+  POPVAL1(G00445);
+  FF_RES_CONVERT6(res,eul_time_stop(FF_ARG_CONVERT8(G00445)));
   return res;
 }
 
-static LispRef ff_stub_eul_is_object272 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_is_object268 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G00453, res;
+  LispRef G00446, res;
 
-  POPVAL1(G00453);
-  FF_RES_CONVERT6(res,eul_is_object(FF_ARG_CONVERT8(G00453)));
+  POPVAL1(G00446);
+  FF_RES_CONVERT6(res,eul_is_object(FF_ARG_CONVERT8(G00446)));
   return res;
 }
 
@@ -129,194 +129,193 @@ void initialize_module_boot1()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_438, sym_437, sym_436, sym_435, sym_434, sym_433, sym_432, sym_431, sym_430, sym_429, sym_428, sym_427, sym_426, sym_425, sym_424, sym_423, sym_422, sym_421, sym_420, sym_419, sym_418, sym_417, sym_416, sym_415, sym_414, sym_413, sym_412, sym_411, sym_410, sym_409, sym_408, sym_407, sym_406, sym_405, sym_404, sym_403, sym_402, sym_401, sym_400, sym_399, sym_398, sym_397, sym_396, sym_395, sym_394, sym_393, sym_392, sym_391, G00390, G00388, G00386, G00384, G00382, G00380, G00378, G00376, G00374, G00372, G00370, G00368, G00366, G00364, G00362, G00360, G00358, G00356, G00354, G00352, G00350, G00348, G00346, G00344, G00342, G00340, G00338, G00336, G00334, G00332, G00330, sym_328, G00327, G00325, G00323, G00321, G00319, G00317, G00315, G00313, G00311, G00309, G00307, G00305, G00303, G00301, G00299, G00297, G00295, G00292, G00290, sym_288, sym_287, sym_286, sym_285, sym_284, G00282, G00280, G00278, G00276, G00274;
+  LispRef sym_431, sym_430, sym_429, sym_428, sym_427, sym_426, sym_425, sym_424, sym_423, sym_422, sym_421, sym_420, sym_419, sym_418, sym_417, sym_416, sym_415, sym_414, sym_413, sym_412, sym_411, sym_410, sym_409, sym_408, sym_407, sym_406, sym_405, sym_404, sym_403, sym_402, sym_401, sym_400, sym_399, sym_398, sym_397, sym_396, sym_395, sym_394, sym_393, sym_392, sym_391, sym_390, sym_389, sym_388, sym_387, sym_386, sym_385, G00384, G00382, G00380, G00378, G00376, G00374, G00372, G00370, G00368, G00366, G00364, G00362, G00360, G00358, G00356, G00354, G00352, G00350, G00348, G00346, G00344, G00342, G00340, G00338, G00336, G00334, G00332, G00330, G00328, G00326, G00324, sym_322, G00321, G00319, G00317, G00315, G00313, G00311, G00309, G00307, G00305, G00303, G00301, G00299, G00297, G00295, G00293, G00291, G00288, G00286, sym_284, sym_283, sym_282, sym_281, sym_280, G00278, G00276, G00274, G00272, G00270;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 2 is_init: 0 index: 63 binding: (setter-vector-ref) */
-  static const void *G00273[] = {I(43,03,03,45),I(00,00,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 62 binding: (setter-vector-ref) */
+  static const void *G00269[] = {I(43,03,03,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 64 binding: (setter-string-ref) */
-  static const void *G00275[] = {I(43,03,0c,45),I(00,00,00,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 63 binding: (setter-string-ref) */
+  static const void *G00271[] = {I(43,03,0c,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 65 binding: (setter-cdr) */
-  static const void *G00277[] = {I(ab,90,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 64 binding: (setter-cdr) */
+  static const void *G00273[] = {I(ab,90,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 66 binding: (setter-car) */
-  static const void *G00279[] = {I(ab,8f,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 65 binding: (setter-car) */
+  static const void *G00275[] = {I(ab,8f,45,00)};
 
-  eul_allocate_static_cons(cons_283, NULL, NULL);
-  /* Byte-vector with size: 61 is_init: 0 index: 73 binding: top-level */
-  static const void *G00281[] = {I(a9,23,00,00),B(boot1 ,68),I(89,00,00,00),B(boot1 ,48),I(2a,28,16,1b),I(89,00,00,00),B(boot1 ,29),I(2a,28,17,1b),I(89,00,00,00),B(boot1 ,27),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,6),I(24,00,00,00),B(boot1 ,6),I(3c,02,2a,24),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(boot1 ,30),I(23,00,00,00),B(boot1 ,69),I(23,00,00,00),B(boot1 ,66),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(boot1 ,36),I(23,00,00,00),B(boot1 ,70),I(23,00,00,00),B(boot1 ,65),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(boot1 ,9),I(23,00,00,00),B(boot1 ,71),I(23,00,00,00),B(boot1 ,64),I(3b,03,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(boot1 ,7),I(23,00,00,00),B(boot1 ,72),I(23,00,00,00),B(boot1 ,63),I(3b,03,1d,3d),I(02,06,45,06)};
+  eul_allocate_static_cons(cons_279, NULL, NULL);
+  /* Byte-vector with size: 61 is_init: 0 index: 72 binding: top-level */
+  static const void *G00277[] = {I(a9,23,00,00),B(boot1 ,67),I(89,00,00,00),B(boot1 ,47),I(2a,28,16,1b),I(89,00,00,00),B(boot1 ,28),I(2a,28,17,1b),I(89,00,00,00),B(boot1 ,26),I(2a,24,00,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,6),I(24,00,00,00),B(boot1 ,6),I(3c,02,2a,24),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(boot1 ,29),I(23,00,00,00),B(boot1 ,68),I(23,00,00,00),B(boot1 ,65),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(boot1 ,35),I(23,00,00,00),B(boot1 ,69),I(23,00,00,00),B(boot1 ,64),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(boot1 ,9),I(23,00,00,00),B(boot1 ,70),I(23,00,00,00),B(boot1 ,63),I(3b,03,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(boot1 ,7),I(23,00,00,00),B(boot1 ,71),I(23,00,00,00),B(boot1 ,62),I(3b,03,1d,3d),I(02,06,45,06)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 74 binding: cons */
-  static const void *G00289[] = {I(ab,0f,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 73 binding: cons */
+  static const void *G00285[] = {I(ab,0f,45,00)};
 
-  eul_allocate_static_string(str_293, "\n", 1);
-  /* Byte-vector with size: 8 is_init: 0 index: 76 binding: print */
-  static const void *G00291[] = {I(43,fe,1b,34),I(00,00,00,0d),I(1b,10,32,00),I(00,00,00,07),I(83,1d,1c,42),I(2a,23,00,00),B(boot1 ,75),I(1c,42,45,03)};
+  eul_allocate_static_string(str_289, "\n", 1);
+  /* Byte-vector with size: 8 is_init: 0 index: 75 binding: print */
+  static const void *G00287[] = {I(43,fe,1b,34),I(00,00,00,0d),I(1b,10,32,00),I(00,00,00,07),I(83,1d,1c,42),I(2a,23,00,00),B(boot1 ,74),I(1c,42,45,03)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 77 binding: simple-function? */
-  static const void *G00294[] = {I(aa,7f,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 76 binding: simple-function? */
+  static const void *G00290[] = {I(aa,7f,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 78 binding: list? */
-  static const void *G00296[] = {I(aa,7b,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 77 binding: list? */
+  static const void *G00292[] = {I(aa,7b,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 79 binding: set-setter */
-  static const void *G00298[] = {I(ab,92,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 78 binding: set-setter */
+  static const void *G00294[] = {I(ab,92,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 80 binding: vector-ref */
-  static const void *G00300[] = {I(ab,02,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 79 binding: vector-ref */
+  static const void *G00296[] = {I(ab,02,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 81 binding: vector-size */
-  static const void *G00302[] = {I(aa,06,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 80 binding: vector-size */
+  static const void *G00298[] = {I(aa,06,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 82 binding: string-ref */
-  static const void *G00304[] = {I(ab,0b,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 81 binding: string-ref */
+  static const void *G00300[] = {I(ab,0b,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 83 binding: null? */
-  static const void *G00306[] = {I(aa,12,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 82 binding: null? */
+  static const void *G00302[] = {I(aa,12,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 84 binding: = */
-  static const void *G00308[] = {I(ab,19,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 83 binding: = */
+  static const void *G00304[] = {I(ab,19,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 85 binding: / */
-  static const void *G00310[] = {I(ab,17,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 84 binding: / */
+  static const void *G00306[] = {I(ab,17,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 86 binding: consp */
-  static const void *G00312[] = {I(aa,7a,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 85 binding: consp */
+  static const void *G00308[] = {I(aa,7a,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 87 binding: listp */
-  static const void *G00314[] = {I(aa,7b,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 86 binding: + */
+  static const void *G00310[] = {I(ab,14,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 88 binding: + */
-  static const void *G00316[] = {I(ab,14,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 87 binding: - */
+  static const void *G00312[] = {I(ab,15,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 89 binding: - */
-  static const void *G00318[] = {I(ab,15,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 88 binding: string? */
+  static const void *G00314[] = {I(aa,7d,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 90 binding: string? */
-  static const void *G00320[] = {I(aa,7d,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 89 binding: string-size */
+  static const void *G00316[] = {I(aa,06,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 91 binding: string-size */
-  static const void *G00322[] = {I(aa,06,45,00)};
+  /* Byte-vector with size: 48 is_init: 0 index: 90 binding: anonymous */
+  static const void *G00318[] = {I(aa,47,00,03),I(47,00,02,1a),I(1b,34,00,00),I(00,00,00,b3),I(47,00,01,47),I(00,03,0b,1b),I(27,7e,51,1b),I(34,00,00,00),I(00,00,00,80),I(47,00,03,83),I(14,47,00,01),I(1c,0b,1b,20),I(04,47,00,03),I(84,14,1b,48),I(00,03,1f,04),I(27,61,50,1b),I(34,00,00,00),I(00,00,00,24),I(1f,07,10,1b),I(47,00,00,42),I(2a,1f,08,11),I(47,00,04,3d),I(01,09,22,01),I(32,00,00,00),I(00,00,00,39),I(1f,05,27,7e),I(50,1b,34,00),I(00,00,00,1a),I(27,7e,47,00),I(00,42,2a,1f),I(08,47,00,04),I(3d,01,09,32),I(00,00,00,14),I(1f,06,47,00),I(00,42,2a,1f),I(08,47,00,04),I(3d,01,09,22),I(01,22,04,32),I(00,00,00,1e),I(1c,47,00,00),I(42,2a,47,00),I(03,83,14,1b),I(48,00,03,1f),I(04,47,00,04),I(3d,01,05,22),I(01,22,02,32),I(00,00,00,06),I(1c,45,02,00)};
 
-  /* Byte-vector with size: 48 is_init: 0 index: 92 binding: anonymous */
-  static const void *G00324[] = {I(aa,47,00,03),I(47,00,02,1a),I(1b,34,00,00),I(00,00,00,b3),I(47,00,01,47),I(00,03,0b,1b),I(27,7e,51,1b),I(34,00,00,00),I(00,00,00,80),I(47,00,03,83),I(14,47,00,01),I(1c,0b,1b,20),I(04,47,00,03),I(84,14,1b,48),I(00,03,1f,04),I(27,61,50,1b),I(34,00,00,00),I(00,00,00,24),I(1f,07,10,1b),I(47,00,00,42),I(2a,1f,08,11),I(47,00,04,3d),I(01,09,22,01),I(32,00,00,00),I(00,00,00,39),I(1f,05,27,7e),I(50,1b,34,00),I(00,00,00,1a),I(27,7e,47,00),I(00,42,2a,1f),I(08,47,00,04),I(3d,01,09,32),I(00,00,00,14),I(1f,06,47,00),I(00,42,2a,1f),I(08,47,00,04),I(3d,01,09,22),I(01,22,04,32),I(00,00,00,1e),I(1c,47,00,00),I(42,2a,47,00),I(03,83,14,1b),I(48,00,03,1f),I(04,47,00,04),I(3d,01,05,22),I(01,22,02,32),I(00,00,00,06),I(1c,45,02,00)};
+  /* Byte-vector with size: 15 is_init: 0 index: 92 binding: format1 */
+  static const void *G00320[] = {I(43,fd,46,05),I(1d,48,00,00),I(1c,48,00,01),I(47,00,01,06),I(82,1c,48,00),I(02,1b,48,00),I(03,86,1b,48),I(00,04,23,00),B(boot1 ,91),I(23,00,00,00),B(boot1 ,90),I(3b,01,48,00),I(04,1f,03,47),I(00,04,3d,01),I(06,45,06,00)};
 
-  /* Byte-vector with size: 15 is_init: 0 index: 94 binding: format1 */
-  static const void *G00326[] = {I(43,fd,46,05),I(1d,48,00,00),I(1c,48,00,01),I(47,00,01,06),I(82,1c,48,00),I(02,1b,48,00),I(03,86,1b,48),I(00,04,23,00),B(boot1 ,93),I(23,00,00,00),B(boot1 ,92),I(3b,01,48,00),I(04,1f,03,47),I(00,04,3d,01),I(06,45,06,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 93 binding: getenv */
+  static const void *G00323[] = {I(aa,41,00,00),B(boot1 ,57),I(45,01,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 95 binding: getenv */
-  static const void *G00329[] = {I(aa,41,00,00),B(boot1 ,58),I(45,01,00,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 94 binding: exit */
+  static const void *G00325[] = {I(a8,66,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 96 binding: exit */
-  static const void *G00331[] = {I(a8,66,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 95 binding: inc */
+  static const void *G00327[] = {I(aa,2b,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 97 binding: inc */
-  static const void *G00333[] = {I(aa,2b,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 96 binding: eq */
+  static const void *G00329[] = {I(ab,50,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 98 binding: eq */
-  static const void *G00335[] = {I(ab,50,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 97 binding: symbol? */
+  static const void *G00331[] = {I(aa,7c,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 99 binding: symbol? */
-  static const void *G00337[] = {I(aa,7c,45,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 98 binding: time-stop */
+  static const void *G00333[] = {I(aa,41,00,00),B(boot1 ,60),I(45,01,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 100 binding: time-stop */
-  static const void *G00339[] = {I(aa,41,00,00),B(boot1 ,61),I(45,01,00,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 99 binding: list */
+  static const void *G00335[] = {I(a8,1b,45,01)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 101 binding: list */
-  static const void *G00341[] = {I(a8,1b,45,01)};
+  /* Byte-vector with size: 3 is_init: 0 index: 100 binding: time-start */
+  static const void *G00337[] = {I(a9,41,00,00),B(boot1 ,59),I(45,00,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 102 binding: time-start */
-  static const void *G00343[] = {I(a9,41,00,00),B(boot1 ,60),I(45,00,00,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 101 binding: car */
+  static const void *G00339[] = {I(aa,10,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 103 binding: car */
-  static const void *G00345[] = {I(aa,10,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 102 binding: int? */
+  static const void *G00341[] = {I(aa,7e,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 104 binding: int? */
-  static const void *G00347[] = {I(aa,7e,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 103 binding: int-zerop */
+  static const void *G00343[] = {I(aa,2d,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 105 binding: int-zerop */
-  static const void *G00349[] = {I(aa,2d,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 104 binding: % */
+  static const void *G00345[] = {I(ab,18,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 106 binding: % */
-  static const void *G00351[] = {I(ab,18,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 105 binding: character? */
+  static const void *G00347[] = {I(aa,81,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 107 binding: character? */
-  static const void *G00353[] = {I(aa,81,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 106 binding: * */
+  static const void *G00349[] = {I(ab,16,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 108 binding: * */
-  static const void *G00355[] = {I(ab,16,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 107 binding: cdr */
+  static const void *G00351[] = {I(aa,11,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 109 binding: cdr */
-  static const void *G00357[] = {I(aa,11,45,00)};
+  /* Byte-vector with size: 2 is_init: 0 index: 108 binding: atom? */
+  static const void *G00353[] = {I(aa,7a,12,45),I(00,00,00,00)};
 
-  /* Byte-vector with size: 2 is_init: 0 index: 110 binding: atom? */
-  static const void *G00359[] = {I(aa,7a,12,45),I(00,00,00,00)};
+  /* Byte-vector with size: 6 is_init: 0 index: 109 binding: prin */
+  static const void *G00355[] = {I(43,fe,1b,34),I(00,00,00,0d),I(1b,10,32,00),I(00,00,00,07),I(83,1d,1c,42),I(45,03,00,00)};
 
-  /* Byte-vector with size: 6 is_init: 0 index: 111 binding: prin */
-  static const void *G00361[] = {I(43,fe,1b,34),I(00,00,00,0d),I(1b,10,32,00),I(00,00,00,07),I(83,1d,1c,42),I(45,03,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 110 binding: object? */
+  static const void *G00357[] = {I(aa,41,00,00),B(boot1 ,61),I(45,01,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 112 binding: object? */
-  static const void *G00363[] = {I(aa,41,00,00),B(boot1 ,62),I(45,01,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 111 binding: make-vector */
+  static const void *G00359[] = {I(43,fe,41,00),B(boot1 ,56),I(45,02,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 113 binding: make-vector */
-  static const void *G00365[] = {I(43,fe,41,00),B(boot1 ,57),I(45,02,00,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 112 binding: mod */
+  static const void *G00361[] = {I(ab,18,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 114 binding: mod */
-  static const void *G00367[] = {I(ab,18,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 113 binding: setter */
+  static const void *G00363[] = {I(aa,91,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 115 binding: setter */
-  static const void *G00369[] = {I(aa,91,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 114 binding: < */
+  static const void *G00365[] = {I(ab,1a,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 116 binding: < */
-  static const void *G00371[] = {I(ab,1a,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 115 binding: cons? */
+  static const void *G00367[] = {I(aa,7a,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 117 binding: cons? */
-  static const void *G00373[] = {I(aa,7a,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 116 binding: symbolp */
+  static const void *G00369[] = {I(aa,7c,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 118 binding: symbolp */
-  static const void *G00375[] = {I(aa,7c,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 117 binding: eql */
+  static const void *G00371[] = {I(ab,51,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 119 binding: eql */
-  static const void *G00377[] = {I(ab,51,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 118 binding: dec */
+  static const void *G00373[] = {I(aa,2c,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 120 binding: dec */
-  static const void *G00379[] = {I(aa,2c,45,00)};
+  /* Byte-vector with size: 1 is_init: 0 index: 119 binding: simple-generic-function? */
+  static const void *G00375[] = {I(aa,80,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 121 binding: simple-generic-function? */
-  static const void *G00381[] = {I(aa,80,45,00)};
+  /* Byte-vector with size: 29 is_init: 0 index: 120 binding: anonymous */
+  static const void *G00377[] = {I(ab,1c,7a,1b),I(34,00,00,00),I(00,00,00,10),I(1c,7a,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,36),I(1f,03,10,1f),I(03,10,24,00),B(boot1 ,49),I(3c,02,1b,34),I(00,00,00,19),I(1f,04,11,1f),I(04,11,47,00),I(00,3d,02,05),I(32,00,00,00),I(00,00,00,09),I(86,22,01,32),I(00,00,00,2b),I(1f,03,34,00),I(00,00,00,22),I(1d,34,00,00),I(00,00,00,13),I(1f,03,1f,03),I(51,32,00,00),I(00,00,00,08),I(86,32,00,00),I(00,00,00,09),I(1d,12,45,04)};
 
-  /* Byte-vector with size: 29 is_init: 0 index: 122 binding: anonymous */
-  static const void *G00383[] = {I(ab,1c,7a,1b),I(34,00,00,00),I(00,00,00,10),I(1c,7a,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,36),I(1f,03,10,1f),I(03,10,24,00),B(boot1 ,50),I(3c,02,1b,34),I(00,00,00,19),I(1f,04,11,1f),I(04,11,47,00),I(00,3d,02,05),I(32,00,00,00),I(00,00,00,09),I(86,22,01,32),I(00,00,00,2b),I(1f,03,34,00),I(00,00,00,22),I(1d,34,00,00),I(00,00,00,13),I(1f,03,1f,03),I(51,32,00,00),I(00,00,00,08),I(86,32,00,00),I(00,00,00,09),I(1d,12,45,04)};
+  /* Byte-vector with size: 10 is_init: 0 index: 121 binding: equal */
+  static const void *G00379[] = {I(ab,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(boot1 ,91),I(23,00,00,00),B(boot1 ,120),I(3b,02,48,00),I(00,1d,1d,47),I(00,00,3d,02),I(03,45,03,00)};
 
-  /* Byte-vector with size: 10 is_init: 0 index: 123 binding: equal */
-  static const void *G00385[] = {I(ab,46,01,86),I(1b,48,00,00),I(23,00,00,00),B(boot1 ,93),I(23,00,00,00),B(boot1 ,122),I(3b,02,48,00),I(00,1d,1d,47),I(00,00,3d,02),I(03,45,03,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 122 binding: system */
+  static const void *G00381[] = {I(aa,41,00,00),B(boot1 ,58),I(45,01,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 124 binding: system */
-  static const void *G00387[] = {I(aa,41,00,00),B(boot1 ,59),I(45,01,00,00)};
-
-  /* Byte-vector with size: 296 is_init: 1 index: 0 binding: initialize-boot1 */
-  static const void *G00389[] = {I(87,25,00,00),B(boot1 ,1),I(23,00,00,00),B(boot1 ,125),I(23,00,00,00),B(boot1 ,124),I(3b,01,25,00),B(boot1 ,51),I(23,00,00,00),B(boot1 ,126),I(23,00,00,00),B(boot1 ,123),I(3b,02,25,00),B(boot1 ,50),I(23,00,00,00),B(boot1 ,127),I(23,00,00,00),B(boot1 ,121),I(3b,01,25,00),B(boot1 ,49),I(86,25,00,00),B(boot1 ,48),I(23,00,00,00),B(boot1 ,128),I(23,00,00,00),B(boot1 ,120),I(3b,01,25,00),B(boot1 ,47),I(23,00,00,00),B(boot1 ,129),I(23,00,00,00),B(boot1 ,119),I(3b,02,25,00),B(boot1 ,46),I(23,00,00,00),B(boot1 ,130),I(23,00,00,00),B(boot1 ,118),I(3b,01,25,00),B(boot1 ,45),I(23,00,00,00),B(boot1 ,131),I(23,00,00,00),B(boot1 ,117),I(3b,01,25,00),B(boot1 ,44),I(23,00,00,00),B(boot1 ,132),I(23,00,00,00),B(boot1 ,116),I(3b,02,25,00),B(boot1 ,43),I(23,00,00,00),B(boot1 ,133),I(23,00,00,00),B(boot1 ,115),I(3b,01,25,00),B(boot1 ,42),I(23,00,00,00),B(boot1 ,134),I(23,00,00,00),B(boot1 ,114),I(3b,02,25,00),B(boot1 ,41),I(23,00,00,00),B(boot1 ,135),I(23,00,00,00),B(boot1 ,113),I(3b,fe,25,00),B(boot1 ,40),I(23,00,00,00),B(boot1 ,136),I(23,00,00,00),B(boot1 ,112),I(3b,01,25,00),B(boot1 ,39),I(23,00,00,00),B(boot1 ,137),I(23,00,00,00),B(boot1 ,111),I(3b,fe,25,00),B(boot1 ,38),I(23,00,00,00),B(boot1 ,138),I(23,00,00,00),B(boot1 ,110),I(3b,01,25,00),B(boot1 ,37),I(23,00,00,00),B(boot1 ,139),I(23,00,00,00),B(boot1 ,109),I(3b,01,25,00),B(boot1 ,36),I(23,00,00,00),B(boot1 ,140),I(23,00,00,00),B(boot1 ,108),I(3b,02,25,00),B(boot1 ,35),I(23,00,00,00),B(boot1 ,141),I(23,00,00,00),B(boot1 ,107),I(3b,01,25,00),B(boot1 ,34),I(23,00,00,00),B(boot1 ,142),I(23,00,00,00),B(boot1 ,106),I(3b,02,25,00),B(boot1 ,33),I(23,00,00,00),B(boot1 ,143),I(23,00,00,00),B(boot1 ,105),I(3b,01,25,00),B(boot1 ,32),I(23,00,00,00),B(boot1 ,144),I(23,00,00,00),B(boot1 ,104),I(3b,01,25,00),B(boot1 ,31),I(23,00,00,00),B(boot1 ,145),I(23,00,00,00),B(boot1 ,103),I(3b,01,25,00),B(boot1 ,30),I(86,25,00,00),B(boot1 ,29),I(23,00,00,00),B(boot1 ,146),I(23,00,00,00),B(boot1 ,102),I(3b,00,25,00),B(boot1 ,28),I(86,25,00,00),B(boot1 ,27),I(23,00,00,00),B(boot1 ,147),I(23,00,00,00),B(boot1 ,101),I(3b,ff,25,00),B(boot1 ,26),I(23,00,00,00),B(boot1 ,148),I(23,00,00,00),B(boot1 ,100),I(3b,01,25,00),B(boot1 ,25),I(23,00,00,00),B(boot1 ,149),I(23,00,00,00),B(boot1 ,99),I(3b,01,25,00),B(boot1 ,24),I(23,00,00,00),B(boot1 ,150),I(23,00,00,00),B(boot1 ,98),I(3b,02,25,00),B(boot1 ,23),I(23,00,00,00),B(boot1 ,151),I(23,00,00,00),B(boot1 ,97),I(3b,01,25,00),B(boot1 ,22),I(23,00,00,00),B(boot1 ,152),I(23,00,00,00),B(boot1 ,96),I(3b,ff,25,00),B(boot1 ,21),I(23,00,00,00),B(boot1 ,153),I(23,00,00,00),B(boot1 ,95),I(3b,01,25,00),B(boot1 ,20),I(23,00,00,00),B(boot1 ,154),I(23,00,00,00),B(boot1 ,94),I(3b,fd,25,00),B(boot1 ,19),I(23,00,00,00),B(boot1 ,155),I(23,00,00,00),B(boot1 ,91),I(3b,01,25,00),B(boot1 ,18),I(23,00,00,00),B(boot1 ,156),I(23,00,00,00),B(boot1 ,90),I(3b,01,25,00),B(boot1 ,17),I(23,00,00,00),B(boot1 ,157),I(23,00,00,00),B(boot1 ,89),I(3b,02,25,00),B(boot1 ,16),I(23,00,00,00),B(boot1 ,158),I(23,00,00,00),B(boot1 ,88),I(3b,02,25,00),B(boot1 ,15),I(23,00,00,00),B(boot1 ,159),I(23,00,00,00),B(boot1 ,87),I(3b,01,25,00),B(boot1 ,14),I(23,00,00,00),B(boot1 ,160),I(23,00,00,00),B(boot1 ,86),I(3b,01,25,00),B(boot1 ,13),I(23,00,00,00),B(boot1 ,161),I(23,00,00,00),B(boot1 ,85),I(3b,02,25,00),B(boot1 ,12),I(23,00,00,00),B(boot1 ,162),I(23,00,00,00),B(boot1 ,84),I(3b,02,25,00),B(boot1 ,11),I(23,00,00,00),B(boot1 ,163),I(23,00,00,00),B(boot1 ,83),I(3b,01,25,00),B(boot1 ,10),I(23,00,00,00),B(boot1 ,164),I(23,00,00,00),B(boot1 ,82),I(3b,02,25,00),B(boot1 ,9),I(23,00,00,00),B(boot1 ,165),I(23,00,00,00),B(boot1 ,81),I(3b,01,25,00),B(boot1 ,8),I(23,00,00,00),B(boot1 ,166),I(23,00,00,00),B(boot1 ,80),I(3b,02,25,00),B(boot1 ,7),I(23,00,00,00),B(boot1 ,167),I(23,00,00,00),B(boot1 ,79),I(3b,02,25,00),B(boot1 ,6),I(23,00,00,00),B(boot1 ,168),I(23,00,00,00),B(boot1 ,78),I(3b,01,25,00),B(boot1 ,5),I(23,00,00,00),B(boot1 ,169),I(23,00,00,00),B(boot1 ,77),I(3b,01,25,00),B(boot1 ,4),I(23,00,00,00),B(boot1 ,170),I(23,00,00,00),B(boot1 ,76),I(3b,fe,25,00),B(boot1 ,3),I(23,00,00,00),B(boot1 ,171),I(23,00,00,00),B(boot1 ,74),I(3b,02,25,00),B(boot1 ,2),I(23,00,00,00),B(boot1 ,172),I(23,00,00,00),B(boot1 ,73),I(3b,00,3d,00),I(00,ac,00,00)};
+  /* Byte-vector with size: 290 is_init: 1 index: 0 binding: initialize-boot1 */
+  static const void *G00383[] = {I(87,25,00,00),B(boot1 ,1),I(23,00,00,00),B(boot1 ,123),I(23,00,00,00),B(boot1 ,122),I(3b,01,25,00),B(boot1 ,50),I(23,00,00,00),B(boot1 ,124),I(23,00,00,00),B(boot1 ,121),I(3b,02,25,00),B(boot1 ,49),I(23,00,00,00),B(boot1 ,125),I(23,00,00,00),B(boot1 ,119),I(3b,01,25,00),B(boot1 ,48),I(86,25,00,00),B(boot1 ,47),I(23,00,00,00),B(boot1 ,126),I(23,00,00,00),B(boot1 ,118),I(3b,01,25,00),B(boot1 ,46),I(23,00,00,00),B(boot1 ,127),I(23,00,00,00),B(boot1 ,117),I(3b,02,25,00),B(boot1 ,45),I(23,00,00,00),B(boot1 ,128),I(23,00,00,00),B(boot1 ,116),I(3b,01,25,00),B(boot1 ,44),I(23,00,00,00),B(boot1 ,129),I(23,00,00,00),B(boot1 ,115),I(3b,01,25,00),B(boot1 ,43),I(23,00,00,00),B(boot1 ,130),I(23,00,00,00),B(boot1 ,114),I(3b,02,25,00),B(boot1 ,42),I(23,00,00,00),B(boot1 ,131),I(23,00,00,00),B(boot1 ,113),I(3b,01,25,00),B(boot1 ,41),I(23,00,00,00),B(boot1 ,132),I(23,00,00,00),B(boot1 ,112),I(3b,02,25,00),B(boot1 ,40),I(23,00,00,00),B(boot1 ,133),I(23,00,00,00),B(boot1 ,111),I(3b,fe,25,00),B(boot1 ,39),I(23,00,00,00),B(boot1 ,134),I(23,00,00,00),B(boot1 ,110),I(3b,01,25,00),B(boot1 ,38),I(23,00,00,00),B(boot1 ,135),I(23,00,00,00),B(boot1 ,109),I(3b,fe,25,00),B(boot1 ,37),I(23,00,00,00),B(boot1 ,136),I(23,00,00,00),B(boot1 ,108),I(3b,01,25,00),B(boot1 ,36),I(23,00,00,00),B(boot1 ,137),I(23,00,00,00),B(boot1 ,107),I(3b,01,25,00),B(boot1 ,35),I(23,00,00,00),B(boot1 ,138),I(23,00,00,00),B(boot1 ,106),I(3b,02,25,00),B(boot1 ,34),I(23,00,00,00),B(boot1 ,139),I(23,00,00,00),B(boot1 ,105),I(3b,01,25,00),B(boot1 ,33),I(23,00,00,00),B(boot1 ,140),I(23,00,00,00),B(boot1 ,104),I(3b,02,25,00),B(boot1 ,32),I(23,00,00,00),B(boot1 ,141),I(23,00,00,00),B(boot1 ,103),I(3b,01,25,00),B(boot1 ,31),I(23,00,00,00),B(boot1 ,142),I(23,00,00,00),B(boot1 ,102),I(3b,01,25,00),B(boot1 ,30),I(23,00,00,00),B(boot1 ,143),I(23,00,00,00),B(boot1 ,101),I(3b,01,25,00),B(boot1 ,29),I(86,25,00,00),B(boot1 ,28),I(23,00,00,00),B(boot1 ,144),I(23,00,00,00),B(boot1 ,100),I(3b,00,25,00),B(boot1 ,27),I(86,25,00,00),B(boot1 ,26),I(23,00,00,00),B(boot1 ,145),I(23,00,00,00),B(boot1 ,99),I(3b,ff,25,00),B(boot1 ,25),I(23,00,00,00),B(boot1 ,146),I(23,00,00,00),B(boot1 ,98),I(3b,01,25,00),B(boot1 ,24),I(23,00,00,00),B(boot1 ,147),I(23,00,00,00),B(boot1 ,97),I(3b,01,25,00),B(boot1 ,23),I(23,00,00,00),B(boot1 ,148),I(23,00,00,00),B(boot1 ,96),I(3b,02,25,00),B(boot1 ,22),I(23,00,00,00),B(boot1 ,149),I(23,00,00,00),B(boot1 ,95),I(3b,01,25,00),B(boot1 ,21),I(23,00,00,00),B(boot1 ,150),I(23,00,00,00),B(boot1 ,94),I(3b,ff,25,00),B(boot1 ,20),I(23,00,00,00),B(boot1 ,151),I(23,00,00,00),B(boot1 ,93),I(3b,01,25,00),B(boot1 ,19),I(23,00,00,00),B(boot1 ,152),I(23,00,00,00),B(boot1 ,92),I(3b,fd,25,00),B(boot1 ,18),I(23,00,00,00),B(boot1 ,153),I(23,00,00,00),B(boot1 ,89),I(3b,01,25,00),B(boot1 ,17),I(23,00,00,00),B(boot1 ,154),I(23,00,00,00),B(boot1 ,88),I(3b,01,25,00),B(boot1 ,16),I(23,00,00,00),B(boot1 ,155),I(23,00,00,00),B(boot1 ,87),I(3b,02,25,00),B(boot1 ,15),I(23,00,00,00),B(boot1 ,156),I(23,00,00,00),B(boot1 ,86),I(3b,02,25,00),B(boot1 ,14),I(23,00,00,00),B(boot1 ,157),I(23,00,00,00),B(boot1 ,85),I(3b,01,25,00),B(boot1 ,13),I(23,00,00,00),B(boot1 ,158),I(23,00,00,00),B(boot1 ,84),I(3b,02,25,00),B(boot1 ,12),I(23,00,00,00),B(boot1 ,159),I(23,00,00,00),B(boot1 ,83),I(3b,02,25,00),B(boot1 ,11),I(23,00,00,00),B(boot1 ,160),I(23,00,00,00),B(boot1 ,82),I(3b,01,25,00),B(boot1 ,10),I(23,00,00,00),B(boot1 ,161),I(23,00,00,00),B(boot1 ,81),I(3b,02,25,00),B(boot1 ,9),I(23,00,00,00),B(boot1 ,162),I(23,00,00,00),B(boot1 ,80),I(3b,01,25,00),B(boot1 ,8),I(23,00,00,00),B(boot1 ,163),I(23,00,00,00),B(boot1 ,79),I(3b,02,25,00),B(boot1 ,7),I(23,00,00,00),B(boot1 ,164),I(23,00,00,00),B(boot1 ,78),I(3b,02,25,00),B(boot1 ,6),I(23,00,00,00),B(boot1 ,165),I(23,00,00,00),B(boot1 ,77),I(3b,01,25,00),B(boot1 ,5),I(23,00,00,00),B(boot1 ,166),I(23,00,00,00),B(boot1 ,76),I(3b,01,25,00),B(boot1 ,4),I(23,00,00,00),B(boot1 ,167),I(23,00,00,00),B(boot1 ,75),I(3b,fe,25,00),B(boot1 ,3),I(23,00,00,00),B(boot1 ,168),I(23,00,00,00),B(boot1 ,73),I(3b,02,25,00),B(boot1 ,2),I(23,00,00,00),B(boot1 ,169),I(23,00,00,00),B(boot1 ,72),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
+  eul_allocate_bytevector( G00270,G00269);
+  eul_allocate_bytevector( G00272,G00271);
   eul_allocate_bytevector( G00274,G00273);
   eul_allocate_bytevector( G00276,G00275);
+  eul_intern_symbol(sym_280,"*absent*");
+  object_class(cons_279) = eul_static_cons_class;
+  eul_car(cons_279) = sym_280;
+  eul_cdr(cons_279) = eul_nil;
+  eul_intern_symbol(sym_281,"(setter car)");
+  eul_intern_symbol(sym_282,"(setter cdr)");
+  eul_intern_symbol(sym_283,"(setter string-ref)");
+  eul_intern_symbol(sym_284,"(setter vector-ref)");
   eul_allocate_bytevector( G00278,G00277);
-  eul_allocate_bytevector( G00280,G00279);
-  eul_intern_symbol(sym_284,"*absent*");
-  object_class(cons_283) = eul_static_cons_class;
-  eul_car(cons_283) = sym_284;
-  eul_cdr(cons_283) = eul_nil;
-  eul_intern_symbol(sym_285,"(setter car)");
-  eul_intern_symbol(sym_286,"(setter cdr)");
-  eul_intern_symbol(sym_287,"(setter string-ref)");
-  eul_intern_symbol(sym_288,"(setter vector-ref)");
-  eul_allocate_bytevector( G00282,G00281);
-  eul_allocate_bytevector( G00290,G00289);
-  object_class(str_293) = eul_static_string_class;
-  eul_allocate_bytevector( G00292,G00291);
+  eul_allocate_bytevector( G00286,G00285);
+  object_class(str_289) = eul_static_string_class;
+  eul_allocate_bytevector( G00288,G00287);
+  eul_allocate_bytevector( G00291,G00290);
+  eul_allocate_bytevector( G00293,G00292);
   eul_allocate_bytevector( G00295,G00294);
   eul_allocate_bytevector( G00297,G00296);
   eul_allocate_bytevector( G00299,G00298);
@@ -330,11 +329,11 @@ void initialize_module_boot1()
   eul_allocate_bytevector( G00315,G00314);
   eul_allocate_bytevector( G00317,G00316);
   eul_allocate_bytevector( G00319,G00318);
+  eul_intern_symbol(sym_322,"anonymous");
   eul_allocate_bytevector( G00321,G00320);
-  eul_allocate_bytevector( G00323,G00322);
-  eul_allocate_bytevector( G00325,G00324);
-  eul_intern_symbol(sym_328,"anonymous");
-  eul_allocate_bytevector( G00327,G00326);
+  eul_allocate_bytevector( G00324,G00323);
+  eul_allocate_bytevector( G00326,G00325);
+  eul_allocate_bytevector( G00328,G00327);
   eul_allocate_bytevector( G00330,G00329);
   eul_allocate_bytevector( G00332,G00331);
   eul_allocate_bytevector( G00334,G00333);
@@ -362,189 +361,183 @@ void initialize_module_boot1()
   eul_allocate_bytevector( G00378,G00377);
   eul_allocate_bytevector( G00380,G00379);
   eul_allocate_bytevector( G00382,G00381);
+  eul_intern_symbol(sym_385,"system");
+  eul_intern_symbol(sym_386,"equal");
+  eul_intern_symbol(sym_387,"simple-generic-function?");
+  eul_intern_symbol(sym_388,"dec");
+  eul_intern_symbol(sym_389,"eql");
+  eul_intern_symbol(sym_390,"symbolp");
+  eul_intern_symbol(sym_391,"cons?");
+  eul_intern_symbol(sym_392,"<");
+  eul_intern_symbol(sym_393,"setter");
+  eul_intern_symbol(sym_394,"mod");
+  eul_intern_symbol(sym_395,"make-vector");
+  eul_intern_symbol(sym_396,"object?");
+  eul_intern_symbol(sym_397,"prin");
+  eul_intern_symbol(sym_398,"atom?");
+  eul_intern_symbol(sym_399,"cdr");
+  eul_intern_symbol(sym_400,"*");
+  eul_intern_symbol(sym_401,"character?");
+  eul_intern_symbol(sym_402,"%");
+  eul_intern_symbol(sym_403,"int-zerop");
+  eul_intern_symbol(sym_404,"int?");
+  eul_intern_symbol(sym_405,"car");
+  eul_intern_symbol(sym_406,"time-start");
+  eul_intern_symbol(sym_407,"list");
+  eul_intern_symbol(sym_408,"time-stop");
+  eul_intern_symbol(sym_409,"symbol?");
+  eul_intern_symbol(sym_410,"eq");
+  eul_intern_symbol(sym_411,"inc");
+  eul_intern_symbol(sym_412,"exit");
+  eul_intern_symbol(sym_413,"getenv");
+  eul_intern_symbol(sym_414,"format1");
+  eul_intern_symbol(sym_415,"string-size");
+  eul_intern_symbol(sym_416,"string?");
+  eul_intern_symbol(sym_417,"-");
+  eul_intern_symbol(sym_418,"+");
+  eul_intern_symbol(sym_419,"consp");
+  eul_intern_symbol(sym_420,"/");
+  eul_intern_symbol(sym_421,"=");
+  eul_intern_symbol(sym_422,"null?");
+  eul_intern_symbol(sym_423,"string-ref");
+  eul_intern_symbol(sym_424,"vector-size");
+  eul_intern_symbol(sym_425,"vector-ref");
+  eul_intern_symbol(sym_426,"set-setter");
+  eul_intern_symbol(sym_427,"list?");
+  eul_intern_symbol(sym_428,"simple-function?");
+  eul_intern_symbol(sym_429,"print");
+  eul_intern_symbol(sym_430,"cons");
+  eul_intern_symbol(sym_431,"top-level");
   eul_allocate_bytevector( G00384,G00383);
-  eul_allocate_bytevector( G00386,G00385);
-  eul_allocate_bytevector( G00388,G00387);
-  eul_intern_symbol(sym_391,"system");
-  eul_intern_symbol(sym_392,"equal");
-  eul_intern_symbol(sym_393,"simple-generic-function?");
-  eul_intern_symbol(sym_394,"dec");
-  eul_intern_symbol(sym_395,"eql");
-  eul_intern_symbol(sym_396,"symbolp");
-  eul_intern_symbol(sym_397,"cons?");
-  eul_intern_symbol(sym_398,"<");
-  eul_intern_symbol(sym_399,"setter");
-  eul_intern_symbol(sym_400,"mod");
-  eul_intern_symbol(sym_401,"make-vector");
-  eul_intern_symbol(sym_402,"object?");
-  eul_intern_symbol(sym_403,"prin");
-  eul_intern_symbol(sym_404,"atom?");
-  eul_intern_symbol(sym_405,"cdr");
-  eul_intern_symbol(sym_406,"*");
-  eul_intern_symbol(sym_407,"character?");
-  eul_intern_symbol(sym_408,"%");
-  eul_intern_symbol(sym_409,"int-zerop");
-  eul_intern_symbol(sym_410,"int?");
-  eul_intern_symbol(sym_411,"car");
-  eul_intern_symbol(sym_412,"time-start");
-  eul_intern_symbol(sym_413,"list");
-  eul_intern_symbol(sym_414,"time-stop");
-  eul_intern_symbol(sym_415,"symbol?");
-  eul_intern_symbol(sym_416,"eq");
-  eul_intern_symbol(sym_417,"inc");
-  eul_intern_symbol(sym_418,"exit");
-  eul_intern_symbol(sym_419,"getenv");
-  eul_intern_symbol(sym_420,"format1");
-  eul_intern_symbol(sym_421,"string-size");
-  eul_intern_symbol(sym_422,"string?");
-  eul_intern_symbol(sym_423,"-");
-  eul_intern_symbol(sym_424,"+");
-  eul_intern_symbol(sym_425,"listp");
-  eul_intern_symbol(sym_426,"consp");
-  eul_intern_symbol(sym_427,"/");
-  eul_intern_symbol(sym_428,"=");
-  eul_intern_symbol(sym_429,"null?");
-  eul_intern_symbol(sym_430,"string-ref");
-  eul_intern_symbol(sym_431,"vector-size");
-  eul_intern_symbol(sym_432,"vector-ref");
-  eul_intern_symbol(sym_433,"set-setter");
-  eul_intern_symbol(sym_434,"list?");
-  eul_intern_symbol(sym_435,"simple-function?");
-  eul_intern_symbol(sym_436,"print");
-  eul_intern_symbol(sym_437,"cons");
-  eul_intern_symbol(sym_438,"top-level");
-  eul_allocate_bytevector( G00390,G00389);
 
   /* Set local bindings */
   {
     int i;
-    for (i = 2; i < 52; i++)
+    for (i = 2; i < 51; i++)
       boot1_bindings[i] = eul_nil;
   }
 
-  boot1_bindings[ 52] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_substr262;
-  boot1_bindings[ 53] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_tailstr263;
-  boot1_bindings[ 54] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_str_member1264;
-  boot1_bindings[ 55] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_symbol265;
-  boot1_bindings[ 56] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_keyword266;
-  boot1_bindings[ 57] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_vector267;
-  boot1_bindings[ 58] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_getenv268;
-  boot1_bindings[ 59] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_system269;
-  boot1_bindings[ 60] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_time_start270;
-  boot1_bindings[ 61] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_time_stop271;
-  boot1_bindings[ 62] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_is_object272;
-  boot1_bindings[ 63] = G00274;
-  boot1_bindings[ 64] = G00276;
-  boot1_bindings[ 65] = G00278;
-  boot1_bindings[ 66] = G00280;
-  boot1_bindings[ 67] = sym_284;
-  boot1_bindings[ 68] = cons_283;
-  boot1_bindings[ 69] = sym_285;
-  boot1_bindings[ 70] = sym_286;
-  boot1_bindings[ 71] = sym_287;
-  boot1_bindings[ 72] = sym_288;
-  boot1_bindings[ 73] = G00282;
-  boot1_bindings[ 74] = G00290;
-  boot1_bindings[ 75] = str_293;
-  boot1_bindings[ 76] = G00292;
-  boot1_bindings[ 77] = G00295;
-  boot1_bindings[ 78] = G00297;
-  boot1_bindings[ 79] = G00299;
-  boot1_bindings[ 80] = G00301;
-  boot1_bindings[ 81] = G00303;
-  boot1_bindings[ 82] = G00305;
-  boot1_bindings[ 83] = G00307;
-  boot1_bindings[ 84] = G00309;
-  boot1_bindings[ 85] = G00311;
-  boot1_bindings[ 86] = G00313;
-  boot1_bindings[ 87] = G00315;
-  boot1_bindings[ 88] = G00317;
-  boot1_bindings[ 89] = G00319;
-  boot1_bindings[ 90] = G00321;
-  boot1_bindings[ 91] = G00323;
-  boot1_bindings[ 92] = G00325;
-  boot1_bindings[ 93] = sym_328;
-  boot1_bindings[ 94] = G00327;
-  boot1_bindings[ 95] = G00330;
-  boot1_bindings[ 96] = G00332;
-  boot1_bindings[ 97] = G00334;
-  boot1_bindings[ 98] = G00336;
-  boot1_bindings[ 99] = G00338;
-  boot1_bindings[ 100] = G00340;
-  boot1_bindings[ 101] = G00342;
-  boot1_bindings[ 102] = G00344;
-  boot1_bindings[ 103] = G00346;
-  boot1_bindings[ 104] = G00348;
-  boot1_bindings[ 105] = G00350;
-  boot1_bindings[ 106] = G00352;
-  boot1_bindings[ 107] = G00354;
-  boot1_bindings[ 108] = G00356;
-  boot1_bindings[ 109] = G00358;
-  boot1_bindings[ 110] = G00360;
-  boot1_bindings[ 111] = G00362;
-  boot1_bindings[ 112] = G00364;
-  boot1_bindings[ 113] = G00366;
-  boot1_bindings[ 114] = G00368;
-  boot1_bindings[ 115] = G00370;
-  boot1_bindings[ 116] = G00372;
-  boot1_bindings[ 117] = G00374;
-  boot1_bindings[ 118] = G00376;
-  boot1_bindings[ 119] = G00378;
-  boot1_bindings[ 120] = G00380;
-  boot1_bindings[ 121] = G00382;
-  boot1_bindings[ 122] = G00384;
-  boot1_bindings[ 123] = G00386;
-  boot1_bindings[ 124] = G00388;
+  boot1_bindings[ 51] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_substr258;
+  boot1_bindings[ 52] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_tailstr259;
+  boot1_bindings[ 53] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_str_member1260;
+  boot1_bindings[ 54] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_symbol261;
+  boot1_bindings[ 55] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_keyword262;
+  boot1_bindings[ 56] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_vector263;
+  boot1_bindings[ 57] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_getenv264;
+  boot1_bindings[ 58] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_system265;
+  boot1_bindings[ 59] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_time_start266;
+  boot1_bindings[ 60] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_time_stop267;
+  boot1_bindings[ 61] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_is_object268;
+  boot1_bindings[ 62] = G00270;
+  boot1_bindings[ 63] = G00272;
+  boot1_bindings[ 64] = G00274;
+  boot1_bindings[ 65] = G00276;
+  boot1_bindings[ 66] = sym_280;
+  boot1_bindings[ 67] = cons_279;
+  boot1_bindings[ 68] = sym_281;
+  boot1_bindings[ 69] = sym_282;
+  boot1_bindings[ 70] = sym_283;
+  boot1_bindings[ 71] = sym_284;
+  boot1_bindings[ 72] = G00278;
+  boot1_bindings[ 73] = G00286;
+  boot1_bindings[ 74] = str_289;
+  boot1_bindings[ 75] = G00288;
+  boot1_bindings[ 76] = G00291;
+  boot1_bindings[ 77] = G00293;
+  boot1_bindings[ 78] = G00295;
+  boot1_bindings[ 79] = G00297;
+  boot1_bindings[ 80] = G00299;
+  boot1_bindings[ 81] = G00301;
+  boot1_bindings[ 82] = G00303;
+  boot1_bindings[ 83] = G00305;
+  boot1_bindings[ 84] = G00307;
+  boot1_bindings[ 85] = G00309;
+  boot1_bindings[ 86] = G00311;
+  boot1_bindings[ 87] = G00313;
+  boot1_bindings[ 88] = G00315;
+  boot1_bindings[ 89] = G00317;
+  boot1_bindings[ 90] = G00319;
+  boot1_bindings[ 91] = sym_322;
+  boot1_bindings[ 92] = G00321;
+  boot1_bindings[ 93] = G00324;
+  boot1_bindings[ 94] = G00326;
+  boot1_bindings[ 95] = G00328;
+  boot1_bindings[ 96] = G00330;
+  boot1_bindings[ 97] = G00332;
+  boot1_bindings[ 98] = G00334;
+  boot1_bindings[ 99] = G00336;
+  boot1_bindings[ 100] = G00338;
+  boot1_bindings[ 101] = G00340;
+  boot1_bindings[ 102] = G00342;
+  boot1_bindings[ 103] = G00344;
+  boot1_bindings[ 104] = G00346;
+  boot1_bindings[ 105] = G00348;
+  boot1_bindings[ 106] = G00350;
+  boot1_bindings[ 107] = G00352;
+  boot1_bindings[ 108] = G00354;
+  boot1_bindings[ 109] = G00356;
+  boot1_bindings[ 110] = G00358;
+  boot1_bindings[ 111] = G00360;
+  boot1_bindings[ 112] = G00362;
+  boot1_bindings[ 113] = G00364;
+  boot1_bindings[ 114] = G00366;
+  boot1_bindings[ 115] = G00368;
+  boot1_bindings[ 116] = G00370;
+  boot1_bindings[ 117] = G00372;
+  boot1_bindings[ 118] = G00374;
+  boot1_bindings[ 119] = G00376;
+  boot1_bindings[ 120] = G00378;
+  boot1_bindings[ 121] = G00380;
+  boot1_bindings[ 122] = G00382;
   boot1_bindings[ 1] = eul_nil;
-  boot1_bindings[ 125] = sym_391;
-  boot1_bindings[ 126] = sym_392;
-  boot1_bindings[ 127] = sym_393;
-  boot1_bindings[ 128] = sym_394;
-  boot1_bindings[ 129] = sym_395;
-  boot1_bindings[ 130] = sym_396;
-  boot1_bindings[ 131] = sym_397;
-  boot1_bindings[ 132] = sym_398;
-  boot1_bindings[ 133] = sym_399;
-  boot1_bindings[ 134] = sym_400;
-  boot1_bindings[ 135] = sym_401;
-  boot1_bindings[ 136] = sym_402;
-  boot1_bindings[ 137] = sym_403;
-  boot1_bindings[ 138] = sym_404;
-  boot1_bindings[ 139] = sym_405;
-  boot1_bindings[ 140] = sym_406;
-  boot1_bindings[ 141] = sym_407;
-  boot1_bindings[ 142] = sym_408;
-  boot1_bindings[ 143] = sym_409;
-  boot1_bindings[ 144] = sym_410;
-  boot1_bindings[ 145] = sym_411;
-  boot1_bindings[ 146] = sym_412;
-  boot1_bindings[ 147] = sym_413;
-  boot1_bindings[ 148] = sym_414;
-  boot1_bindings[ 149] = sym_415;
-  boot1_bindings[ 150] = sym_416;
-  boot1_bindings[ 151] = sym_417;
-  boot1_bindings[ 152] = sym_418;
-  boot1_bindings[ 153] = sym_419;
-  boot1_bindings[ 154] = sym_420;
-  boot1_bindings[ 155] = sym_421;
-  boot1_bindings[ 156] = sym_422;
-  boot1_bindings[ 157] = sym_423;
-  boot1_bindings[ 158] = sym_424;
-  boot1_bindings[ 159] = sym_425;
-  boot1_bindings[ 160] = sym_426;
-  boot1_bindings[ 161] = sym_427;
-  boot1_bindings[ 162] = sym_428;
-  boot1_bindings[ 163] = sym_429;
-  boot1_bindings[ 164] = sym_430;
-  boot1_bindings[ 165] = sym_431;
-  boot1_bindings[ 166] = sym_432;
-  boot1_bindings[ 167] = sym_433;
-  boot1_bindings[ 168] = sym_434;
-  boot1_bindings[ 169] = sym_435;
-  boot1_bindings[ 170] = sym_436;
-  boot1_bindings[ 171] = sym_437;
-  boot1_bindings[ 172] = sym_438;
-  eul_allocate_lambda( boot1_bindings[0], "initialize-boot1", 0, G00390);
+  boot1_bindings[ 123] = sym_385;
+  boot1_bindings[ 124] = sym_386;
+  boot1_bindings[ 125] = sym_387;
+  boot1_bindings[ 126] = sym_388;
+  boot1_bindings[ 127] = sym_389;
+  boot1_bindings[ 128] = sym_390;
+  boot1_bindings[ 129] = sym_391;
+  boot1_bindings[ 130] = sym_392;
+  boot1_bindings[ 131] = sym_393;
+  boot1_bindings[ 132] = sym_394;
+  boot1_bindings[ 133] = sym_395;
+  boot1_bindings[ 134] = sym_396;
+  boot1_bindings[ 135] = sym_397;
+  boot1_bindings[ 136] = sym_398;
+  boot1_bindings[ 137] = sym_399;
+  boot1_bindings[ 138] = sym_400;
+  boot1_bindings[ 139] = sym_401;
+  boot1_bindings[ 140] = sym_402;
+  boot1_bindings[ 141] = sym_403;
+  boot1_bindings[ 142] = sym_404;
+  boot1_bindings[ 143] = sym_405;
+  boot1_bindings[ 144] = sym_406;
+  boot1_bindings[ 145] = sym_407;
+  boot1_bindings[ 146] = sym_408;
+  boot1_bindings[ 147] = sym_409;
+  boot1_bindings[ 148] = sym_410;
+  boot1_bindings[ 149] = sym_411;
+  boot1_bindings[ 150] = sym_412;
+  boot1_bindings[ 151] = sym_413;
+  boot1_bindings[ 152] = sym_414;
+  boot1_bindings[ 153] = sym_415;
+  boot1_bindings[ 154] = sym_416;
+  boot1_bindings[ 155] = sym_417;
+  boot1_bindings[ 156] = sym_418;
+  boot1_bindings[ 157] = sym_419;
+  boot1_bindings[ 158] = sym_420;
+  boot1_bindings[ 159] = sym_421;
+  boot1_bindings[ 160] = sym_422;
+  boot1_bindings[ 161] = sym_423;
+  boot1_bindings[ 162] = sym_424;
+  boot1_bindings[ 163] = sym_425;
+  boot1_bindings[ 164] = sym_426;
+  boot1_bindings[ 165] = sym_427;
+  boot1_bindings[ 166] = sym_428;
+  boot1_bindings[ 167] = sym_429;
+  boot1_bindings[ 168] = sym_430;
+  boot1_bindings[ 169] = sym_431;
+  eul_allocate_lambda( boot1_bindings[0], "initialize-boot1", 0, G00384);
 
   }
 }

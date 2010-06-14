@@ -330,7 +330,7 @@
     'eul_nil)
 
   (defun static-allocatable? (x)
-    (null? (or (symbolp x) (keyword? x) (null? x) (vector? x) (float? x))))
+    (null? (or (symbol? x) (keyword? x) (null? x) (vector? x) (float? x))))
 
   (defmethod convert-constant ((value <cons>))
     (let* ((loc (gensym "cons_"))
@@ -409,7 +409,7 @@
         (cond
          ((number? x)
           (write-next-bv-byte x))
-         ((symbolp x)
+         ((symbol? x)
           (check-bv-delimiter)
           (write-to-bv-str "~a" x)
           (setq *bytevector-size* (+ *bytevector-size* 1)))
@@ -509,7 +509,7 @@
 ;;;-----------------------------------------------------------------------------
   (defun add-decl (x . args)
     (let ((state (dynamic *C-state*))
-          (entry (if (symbolp x) x
+          (entry (if (symbol? x) x
                    (apply format () x args))))
       (C-state-decls! state (cons entry (C-state-decls? state)))))
 

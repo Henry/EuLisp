@@ -40,7 +40,7 @@ void initialize_module_callback()
   eul_allocate_static_string(str_1073, "integer underflow", 17);
   eul_allocate_static_string(str_1074, "integer overerflow", 18);
   /* Byte-vector with size: 17 is_init: 0 index: 8 binding: anonymous */
-  static const void *G001071[] = {I(ab,1b,34,00),I(00,00,00,16),I(23,00,00,00),B(callback ,5),I(32,00,00,00),I(00,00,00,10),I(23,00,00,00),B(callback ,6),I(1d,24,00,00),B(boot1 ,26),I(3c,01,1c,24),B(condition ,5),I(23,00,00,00),B(callback ,7),I(1f,03,24,00),B(boot ,12),I(3d,04,04,00)};
+  static const void *G001071[] = {I(ab,1b,34,00),I(00,00,00,16),I(23,00,00,00),B(callback ,5),I(32,00,00,00),I(00,00,00,10),I(23,00,00,00),B(callback ,6),I(1d,24,00,00),B(boot1 ,25),I(3c,01,1c,24),B(condition ,5),I(23,00,00,00),B(callback ,7),I(1f,03,24,00),B(boot ,12),I(3d,04,04,00)};
 
   eul_allocate_static_string(str_1078, "unspecified system error", 24);
   eul_allocate_static_string(str_1079, "bad car domain", 14);

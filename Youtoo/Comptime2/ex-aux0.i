@@ -40,7 +40,7 @@
     (setter . 17)
     (car . 16)
     (consp . 15)
-    (symbolp . 14)
+    (symbol? . 14)
     (x . 13)
     (cadr . 12)
     (caddr . 10)

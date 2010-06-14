@@ -36,11 +36,11 @@
     (notify0 "    Expanding ~a" x)
     (let ((expander
            (cond
-            ((symbolp x) (get-id-expander x)) ; simple identifier
+            ((symbol? x) (get-id-expander x)) ; simple identifier
             ((syntax-obj? x) (lambda (x env e) x)) ; already expanded
             ((null? (consp x)) (lambda (x env e) ; literal constant
                                 (make <literal-const> value: x)))
-            ((symbolp (car x)) (or (get-macro-expander (car x))
+            ((symbol? (car x)) (or (get-macro-expander (car x))
                                    (get-expr-expander (car x))
                                    (get-appl-expander (car x))))
             (t (get-appl-expander (car x))))))
@@ -207,7 +207,7 @@
        (loop ()))))
 
   (defun rest-args? (args)
-    (or (symbolp args)
+    (or (symbol? args)
         (and (consp args)
              (not (proper-list? args)))))
 
@@ -387,7 +387,7 @@
                             "no lexical binding ~a available" x))))
           (register-binding-ref binding)
           binding)
-      (if (and (eq (car x) 'setter) (symbolp (cadr x))
+      (if (and (eq (car x) 'setter) (symbol? (cadr x))
                (null? *interpreter*))
           (or (get-inlined-setter-binding x env)
               (expand-expr x env))
@@ -748,7 +748,7 @@
                    (let* ((args (filter-vars decls))
                           (init-forms (filter-init-forms decls)))
                      (e `((inlined-lambda ,args ,@body) ,@init-forms) env e))))
-                ((symbolp decls)              ; named let
+                ((symbol? decls)              ; named let
                  (let ((named-let-clauses (car body))
                        (named-let-body (cdr body)))
                    (e `(labels

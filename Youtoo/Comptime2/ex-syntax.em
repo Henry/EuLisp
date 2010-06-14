@@ -26,9 +26,9 @@
   (defun syntax-import-expander (x e)
     (let ((expander
            (cond
-            ((symbolp x) (lambda (x e) (import-syntax-module x)))
+            ((symbol? x) (lambda (x e) (import-syntax-module x)))
             ((null? (consp x)) (lambda (x e) x))
-            ((symbolp (car x))
+            ((symbol? (car x))
              (let ((sx-import-expander (get-syntax-import-expander (car x))))
                (or sx-import-expander
                    (error "no syntax-import expander ~a available" x))))

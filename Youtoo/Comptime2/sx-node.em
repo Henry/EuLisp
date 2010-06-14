@@ -146,7 +146,7 @@
     (let* ((special-name? (and (consp name) (= (list-size name) 1)))
            (node (make fun-class
                       name: (if special-name? (car name) name)
-                      args: (if (symbolp args) (list args) args)
+                      args: (if (symbol? args) (list args) args)
                       arity: (compute-arity args)
                       body: (or (syntax-obj? body) `(progn ,@body))
                       has-unknown-appls: (and has-unknown-appls

@@ -9,22 +9,22 @@
 (defmodule bigint
   (syntax (macros)
    import (level1 mpz)
-   export (<bigint> bigintp bigint-value make-bigint-fast))
+   export (<bigint> bigint? bigint-value make-bigint-fast))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class definition
 ;;;-----------------------------------------------------------------------------
   (defclass <bigint> (<integer>)
     ((value accessor: bigint-value keyword: value: requiredp: t))
-    predicate: bigintp)
+    predicate: bigint?)
 
   (defmethod initialize ((x <bigint>) inits)
     (call-next-method)
     (let ((val (bigint-value x)))
       (cond ((null? (object? val))) ;;This gives sometimes as SIGV!
-            ((bigintp val)
+            ((bigint? val)
              ((setter bigint-value) x (mpz-init-set (bigint-value val))))
-            ((intp val)
+            ((int? val)
              ((setter bigint-value) x (mpz-init-set-si val)))
             ((doublep val)
              ((setter bigint-value) x (mpz-init-set-d val)))

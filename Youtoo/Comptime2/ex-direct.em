@@ -26,7 +26,7 @@
     (let ((expander
            (cond
             ((null? (consp x)) (lambda (x e) x))
-            ((symbolp (car x))
+            ((symbol? (car x))
              (let ((directive-expander (get-directive-expander (car x))))
                (if directive-expander
                    directive-expander

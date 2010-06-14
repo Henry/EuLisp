@@ -56,7 +56,7 @@
 
   (defmethod binary= ((c1 <collection>) (c2 <collection>))
     (and (eq (class-of c1) (class-of c2))
-         (if (listp c1)
+         (if (list? c1)
              (all? binary= c1 c2)
            (and (int-binary= (size c1) (size c2))
                 (all? binary= c1 c2)))))

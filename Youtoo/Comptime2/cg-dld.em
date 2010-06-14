@@ -31,7 +31,7 @@
   (defun as-dynamic-binding (binding)
     (let* ((index (binding-local-index? binding))
            (module (binding-module? binding))
-           (origin-module-name (if (symbolp module)
+           (origin-module-name (if (symbol? module)
                                    module
                                  (module-name? module))))
       (if (or (get-binding-info binding 'opencoding)

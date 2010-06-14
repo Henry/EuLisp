@@ -193,7 +193,7 @@
       ((helper
          (x in-seq-p)
          (cond
-           ((and (listp x) (symbolp (car x)))
+           ((and (list? x) (symbol? (car x)))
             (ecase (car x)
                    (esc `(progn ,@(cdr x) ,in-seq-p))
                    (pred (cadr x))
@@ -205,7 +205,7 @@
                    ;; (type . typepred)
                    (type
                      ;                (format stderr "~s" x)
-                     (if (symbolp (cdr x))
+                     (if (symbol? (cdr x))
                          `(match-type ,(cdr x) ())
                        `(match-type ,(cadr x) ,(if (> 2 (size x))
                                                    (caddr x)
@@ -223,9 +223,9 @@
                        ;;(if (null? max-specified)
                        ;;    (print "max-specified null")
                        ;;  (print "max-speicified not null"))
-                       ;;(if (symbolp max-specified)
-                       ;;    (print "max-specified symbolp")
-                       ;;  (print "max-specified not symbolp"))
+                       ;;(if (symbol? max-specified)
+                       ;;    (print "max-specified symbol?")
+                       ;;  (print "max-specified not symbol?"))
                        ;;(format stderr "class-of max-specified: ~a\n"
                        ;;        (class-of max-specified))
                        (match-star min-specified   ; min-specified

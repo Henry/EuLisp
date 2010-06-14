@@ -58,7 +58,7 @@ void initialize_module_ex_body()
   static const void *G001644[] = {I(aa,23,00,00),B(ex_body ,7),I(24,00,00,00),B(dynamic ,3),I(3c,01,1c,83),I(24,00,00,00),B(sx_obj2 ,23),I(08,1d,82,24),B(sx_obj2 ,30),I(08,87,86,0f),I(1c,1c,0f,1f),I(03,1c,0f,23),B(ex_body ,8),I(1c,0f,1f,06),I(26,00,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,1c,1c,0f),I(1f,08,1c,1c),I(26,00,00,00),I(00,00,00,06),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,09,24,00),B(ex_expr ,2),I(1c,82,1d,24),B(sx_obj2 ,30),I(09,45,0c,00)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 13 binding: set-up-top-level-lambda */
-  static const void *G001646[] = {I(a9,24,00,00),B(sx_obj ,14),I(23,00,00,00),B(ex_body ,11),I(86,86,24,00),B(sx_node ,8),I(3c,04,24,00),B(dynamic ,3),I(24,00,00,00),B(boot1 ,42),I(3c,01,23,00),B(ex_body ,12),I(1d,1d,3c,02),I(2a,1c,45,02)};
+  static const void *G001646[] = {I(a9,24,00,00),B(sx_obj ,14),I(23,00,00,00),B(ex_body ,11),I(86,86,24,00),B(sx_node ,8),I(3c,04,24,00),B(dynamic ,3),I(24,00,00,00),B(boot1 ,41),I(3c,01,23,00),B(ex_body ,12),I(1d,1d,3c,02),I(2a,1c,45,02)};
 
   eul_allocate_static_string(str_1654, "    Top-level forms: ~a", 23);
   /* Byte-vector with size: 31 is_init: 0 index: 18 binding: complete-top-level-forms */

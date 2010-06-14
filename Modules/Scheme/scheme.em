@@ -234,7 +234,7 @@
     (convert x <double-float>))
 
   (defun exact? (x)
-    (intp x))
+    (int? x))
   (declare-inline exact?)
 
   (export exp)
@@ -267,7 +267,7 @@
   ;    x)
 
   ;  (defun identifier? (x)
-  ;    (symbolp x))
+  ;    (symbol? x))
   ;  (declare-inline identifier?)
 
   (defun imag-part args
@@ -312,7 +312,7 @@
   ;    (nyi 'list-tail))
 
   (defun list? (x)
-    (listp x))
+    (list? x))
   (declare-inline list?)
   (export log)
 
@@ -521,7 +521,7 @@
   (declare-inline symbol->string)
 
   (defun symbol? (x)
-    (symbolp x))
+    (symbol? x))
   (declare-inline symbol?)
 
   (export tan truncate)

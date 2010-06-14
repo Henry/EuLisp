@@ -9,7 +9,7 @@
     (let ((case-val (gensym)))
       `(let ((else t) (,case-val ,exp))
          (cond ,@(map (lambda (x)
-                        (if (and (symbolp (car x)) (eq (car x) 'else))
+                        (if (and (symbol? (car x)) (eq (car x) 'else))
                             x
                           `((eq (quote ,(caar x)) ,case-val) ,(cadr x))))
                       cases)))))

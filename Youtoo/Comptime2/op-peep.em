@@ -84,7 +84,7 @@
                 (list (cdr l))
               (let ((x1 (car rr))
                     (x2 (car ll)))
-                (if (symbolp x1)
+                (if (symbol? x1)
                     (loop (cdr rr) (cdr ll))
                   (if (binary= x1 x2)
                       (loop (cdr rr) (cdr ll))

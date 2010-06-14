@@ -200,7 +200,7 @@
     (member x '(< <= > >= <> = <=>) binary=))
 
   (defun is-ops5-var (x)
-    (if (or (listp x) (number? x)) ()
+    (if (or (list? x) (number? x)) ()
       (and (eql (element (symbol-name x) 0) #\<)
            (eql (element (symbol-name x) (- (size (symbol-name x)) 1)) #\>))))
 

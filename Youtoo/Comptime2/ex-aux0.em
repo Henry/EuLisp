@@ -12,7 +12,7 @@
 
   (defmacro get-name (form)
     `(let ((x (cadr ,form)))
-       (if (symbolp x)
+       (if (symbol? x)
            x
          (if (and (consp x) (eq (car x) 'setter))
              x

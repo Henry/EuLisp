@@ -99,7 +99,7 @@
   (defun eval (x)
     (setq
      ?
-     (cond ((symbolp x)
+     (cond ((symbol? x)
             (cond ((eq x 't) t)
                   ((eq x '?) ?)
                   (t (dynamic-binding-ref x *current-module-name*))))

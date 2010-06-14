@@ -45,7 +45,7 @@ void initialize_module_dynamic()
   static const void *G00737[] = {I(ab,46,03,1c),I(48,00,00,1b),I(48,00,01,86),I(1b,48,00,02),I(23,00,00,00),B(dynamic ,11),I(23,00,00,00),B(dynamic ,10),I(3b,01,48,00),I(02,24,00,00),B(thread ,21),I(3c,00,1b,84),I(24,00,00,00),B(thread ,28),I(08,47,00,02),I(3d,01,04,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 14 binding: top-level */
-  static const void *G00740[] = {I(a9,82,89,00),B(dynamic ,7),I(2a,82,89,00),B(dynamic ,4),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(dynamic ,3),I(23,00,00,00),B(dynamic ,13),I(23,00,00,00),B(dynamic ,12),I(3b,02,1d,3d),I(02,01,45,01)};
+  static const void *G00740[] = {I(a9,82,89,00),B(dynamic ,7),I(2a,82,89,00),B(dynamic ,4),I(2a,24,00,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(dynamic ,3),I(23,00,00,00),B(dynamic ,13),I(23,00,00,00),B(dynamic ,12),I(3b,02,1d,3d),I(02,01,45,01)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 15 binding: push-dynamic-variable */
   static const void *G00743[] = {I(ab,24,00,00),B(thread ,21),I(3c,00,24,00),B(dynamic ,7),I(2b,1b,89,00),B(dynamic ,7),I(2a,1c,84,24),B(thread ,28),I(08,1f,03,1c),I(0f,1f,05,1c),I(0f,1f,04,1c),I(1c,84,1d,24),B(thread ,28),I(09,45,09,00)};

@@ -212,7 +212,7 @@
 
 ;;;-----------------------------------------------------------------------------
   (defun expand-interpreter-defined-syntax-binding (binding module)
-    (if (and *interpreter* (symbolp binding))
+    (if (and *interpreter* (symbol? binding))
         ((module-lexical-env? module) binding)
       binding))
 

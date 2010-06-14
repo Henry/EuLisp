@@ -75,7 +75,7 @@ void initialize_module_mop_defcl0()
   static const void *G001153[] = {I(ab,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,c2),I(1c,10,23,00),B(mop_defcl0 ,46),I(50,1b,34,00),I(00,00,00,9e),I(1d,73,23,00),B(mop_defcl0 ,43),I(86,0f,23,00),B(mop_defcl0 ,28),I(1c,0f,1b,86),I(0f,23,00,00),B(mop_defcl0 ,43),I(86,0f,23,00),B(mop_defcl0 ,28),I(1c,0f,1b,86),I(0f,86,86,0f),I(1c,1c,0f,1f),I(0c,86,0f,23),B(mop_defcl0 ,28),I(1c,0f,1b,86),I(0f,23,00,00),B(mop_defcl0 ,28),I(86,0f,1c,1c),I(0f,1b,86,0f),I(23,00,00,00),B(mop_defcl0 ,63),I(1c,0f,1f,07),I(1c,0f,23,00),B(mop_defcl0 ,63),I(1c,0f,1f,0e),I(1c,0f,1f,12),I(1c,0f,23,00),B(mop_defcl0 ,64),I(1c,0f,1b,86),I(0f,1f,18,75),I(1f,1a,1c,24),B(mop_defcl0 ,8),I(3c,02,1d,1c),I(24,00,00,00),B(boot ,7),I(3d,02,1c,22),I(18,32,00,00),I(00,00,00,18),I(1d,75,1f,04),I(1c,24,00,00),B(mop_defcl0 ,8),I(3d,02,05,22),I(01,22,01,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 66 binding: anonymous */
-  static const void *G001157[] = {I(43,03,1d,12),I(1b,34,00,00),I(00,00,00,0f),I(1c,32,00,00),I(00,00,00,36),I(1f,03,11,1f),I(03,11,1f,05),I(10,1f,05,10),I(1c,1c,24,00),B(boot1 ,26),I(3c,02,1f,06),I(1c,24,00,00),B(boot ,7),I(3c,02,1f,05),I(1f,05,1d,47),I(00,00,3d,03),I(0a,22,06,45),I(04,00,00,00)};
+  static const void *G001157[] = {I(43,03,1d,12),I(1b,34,00,00),I(00,00,00,0f),I(1c,32,00,00),I(00,00,00,36),I(1f,03,11,1f),I(03,11,1f,05),I(10,1f,05,10),I(1c,1c,24,00),B(boot1 ,25),I(3c,02,1f,06),I(1c,24,00,00),B(boot ,7),I(3c,02,1f,05),I(1f,05,1d,47),I(00,00,3d,03),I(0a,22,06,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 67 binding: anonymous */
   static const void *G001159[] = {I(aa,24,00,00),B(symbol ,6),I(3d,00,01,00)};
@@ -84,7 +84,7 @@ void initialize_module_mop_defcl0()
   static const void *G001161[] = {I(ab,46,08,1b),I(12,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,f6),I(1c,10,23,00),B(mop_defcl0 ,48),I(50,1b,34,00),I(00,00,00,d2),I(1d,73,1b,7a),I(12,1b,34,00),I(00,00,00,46),I(23,00,00,00),B(mop_defcl0 ,68),I(86,0f,1f,06),I(1c,0f,23,00),B(mop_defcl0 ,69),I(1c,0f,23,00),B(mop_defcl0 ,70),I(1c,0f,1b,86),I(0f,23,00,00),B(mop_defcl0 ,68),I(1c,0f,1f,07),I(1c,0f,23,00),B(mop_defcl0 ,35),I(1c,0f,22,07),I(32,00,00,00),I(00,00,00,70),I(1c,11,23,00),B(mop_defcl0 ,58),I(23,00,00,00),B(mop_defcl0 ,67),I(3b,01,1c,24),B(collect ,2),I(3c,02,1f,03),I(10,86,1b,48),I(00,00,23,00),B(mop_defcl0 ,58),I(23,00,00,00),B(mop_defcl0 ,66),I(3b,03,48,00),I(00,47,00,00),I(1f,06,11,1b),I(1f,05,86,47),I(00,00,3c,03),I(1f,0c,1c,0f),I(23,00,00,00),B(mop_defcl0 ,69),I(1c,0f,1b,86),I(0f,1f,08,1c),I(0f,1f,08,1c),I(0f,23,00,00),B(mop_defcl0 ,35),I(1c,0f,22,0c),I(1f,05,75,1f),I(07,1c,24,00),B(mop_defcl0 ,9),I(3c,02,1d,1c),I(0f,22,05,32),I(00,00,00,16),I(1d,75,1f,04),I(1c,24,00,00),B(mop_defcl0 ,9),I(3d,02,05,22),I(01,22,01,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 72 binding: strip-<> */
-  static const void *G001166[] = {I(aa,1b,82,02),I(1b,82,0b,27),I(3c,50,1b,34),I(00,00,00,25),I(1c,06,1b,2c),I(1f,03,83,1d),I(24,00,00,00),B(string ,6),I(3c,03,41,00),B(boot1 ,55),I(22,03,32,00),I(00,00,00,07),I(1d,45,03,00)};
+  static const void *G001166[] = {I(aa,1b,82,02),I(1b,82,0b,27),I(3c,50,1b,34),I(00,00,00,25),I(1c,06,1b,2c),I(1f,03,83,1d),I(24,00,00,00),B(string ,6),I(3c,03,41,00),B(boot1 ,54),I(22,03,32,00),I(00,00,00,07),I(1d,45,03,00)};
 
   eul_allocate_static_cons(cons_1170, NULL, NULL);
   eul_allocate_static_cons(cons_1175, NULL, NULL);

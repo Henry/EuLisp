@@ -32,7 +32,7 @@
                     reqd))
            (name gfname)
            (target
-            (cond ((symbolp gfname)
+            (cond ((symbol? gfname)
                    'deflocal)
                   ((and (consp gfname) (eq (car gfname) 'setter))
                    (setq name (car (cdr gfname)))
