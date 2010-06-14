@@ -127,7 +127,7 @@ void initialize_module_mop_defcl()
   static const void *G002618[] = {I(aa,82,02,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 26 is_init: 0 index: 37 binding: (setter-slot-value) */
-  static const void *G002620[] = {I(43,03,1d,04),I(1b,04,24,00),B(mop_inspect ,9),I(3c,01,1b,34),I(00,00,00,29),I(24,00,00,00),B(mop_inspect ,4),I(24,00,00,00),B(boot1 ,39),I(3c,01,1f,05),I(1f,05,1f,05),I(1f,03,3d,03),I(06,22,01,32),I(00,00,00,33),I(24,00,00,00),B(mop_defcl ,10),I(24,00,00,00),B(boot1 ,39),I(3c,01,1f,05),I(04,1b,1f,06),I(24,00,00,00),B(mop_defcl ,8),I(3c,02,1b,1f),I(08,1f,07,1f),I(05,3d,03,08),I(22,03,45,05)};
+  static const void *G002620[] = {I(43,03,1d,04),I(1b,04,24,00),B(mop_inspect ,9),I(3c,01,1b,34),I(00,00,00,29),I(24,00,00,00),B(mop_inspect ,5),I(24,00,00,00),B(boot1 ,39),I(3c,01,1f,05),I(1f,05,1f,05),I(1f,03,3d,03),I(06,22,01,32),I(00,00,00,33),I(24,00,00,00),B(mop_defcl ,10),I(24,00,00,00),B(boot1 ,39),I(3c,01,1f,05),I(04,1b,1f,06),I(24,00,00,00),B(mop_defcl ,8),I(3c,02,1b,1f),I(08,1f,07,1f),I(05,3d,03,08),I(22,03,45,05)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 38 binding: (method-(setter slot-value-using-slot)) */
   static const void *G002622[] = {I(43,03,1d,82),I(02,1b,24,00),B(boot1 ,39),I(3c,01,1f,03),I(1f,03,1d,3d),I(02,05,45,05)};
@@ -159,7 +159,7 @@ void initialize_module_mop_defcl()
   static const void *G002651[] = {I(aa,46,01,1b),I(48,00,00,47),I(00,00,26,00),I(00,00,00,0c),I(1a,1b,34,00),I(00,00,00,1a),I(24,00,00,00),B(mop_defcl ,2),I(47,00,00,02),I(32,00,00,00),I(00,00,00,1a),I(23,00,00,00),B(mop_defcl ,52),I(23,00,00,00),B(mop_defcl ,57),I(3b,01,45,02)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 59 binding: slot-value */
-  static const void *G002653[] = {I(ab,1c,04,1b),I(04,24,00,00),B(mop_inspect ,9),I(3c,01,1b,34),I(00,00,00,19),I(1f,03,1f,03),I(24,00,00,00),B(mop_inspect ,4),I(3d,02,04,32),I(00,00,00,22),I(1f,03,04,1b),I(1f,04,24,00),B(mop_defcl ,8),I(3c,02,1b,1f),I(06,24,00,00),B(mop_defcl ,10),I(3d,02,06,22),I(02,45,04,00)};
+  static const void *G002653[] = {I(ab,1c,04,1b),I(04,24,00,00),B(mop_inspect ,9),I(3c,01,1b,34),I(00,00,00,19),I(1f,03,1f,03),I(24,00,00,00),B(mop_inspect ,5),I(3d,02,04,32),I(00,00,00,22),I(1f,03,04,1b),I(1f,04,24,00),B(mop_defcl ,8),I(3c,02,1b,1f),I(06,24,00,00),B(mop_defcl ,10),I(3d,02,06,22),I(02,45,04,00)};
 
   eul_allocate_static_string(str_2657, "slot ~a not found in class ~a", 29);
   /* Byte-vector with size: 20 is_init: 0 index: 61 binding: anonymous */

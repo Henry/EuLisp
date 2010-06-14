@@ -332,7 +332,7 @@
                   (pc (vector-ref vec (+ i 1)))
                   (env (vector-ref vec (+ i 2)))
                   (fun (vector-ref vec (+ i 3))))
-              (if (functionp fun)
+              (if (function? fun)
                   (setq pc (eul-serial-relative-pc fun pc))
                 ())
               ;; Write the frame with relative program counter
@@ -563,7 +563,7 @@
   ;;    (vector-size c))
 
   (defmethod generic-prin ((c <character>) (s <buffered-stream>))
-    ;    (if (graphp c)
+    ;    (if (graph? c)
     (prin-one-char c s)
     ;      (generic-write c s))
     c)

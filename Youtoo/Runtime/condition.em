@@ -29,7 +29,7 @@
   ;; error already defined in module boot
   (setq *error*
         (named-lambda error (str class . rest)
-          (if (and (classp class) (subclassp class <condition>))
+          (if (and (class? class) (subclass? class <condition>))
               (signal (apply make class message: str rest) ())
             ;; Not EuLisp but very comfortable
             (signal
@@ -37,7 +37,7 @@
              ()))))
 
   (defun cerror (str class . rest)
-    (if (and (classp class) (subclassp class <condition>))
+    (if (and (class? class) (subclass? class <condition>))
         (let/cc k (signal (apply make class message: str rest) k))
       ;; Not EuLisp but very comfortable
       (let/cc k (signal

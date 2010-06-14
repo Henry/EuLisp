@@ -55,7 +55,7 @@
     (if (eq (class-of tab) <table>)
         (let ((comp (init-list-ref inits comparator:))
               (hash-fun (init-list-ref inits hash-function:)))
-          (if (functionp hash-fun)
+          (if (function? hash-fun)
               (apply make <hash-table> inits)
             (if (eq comp binary=)
                 (apply make <hash-table> inits)

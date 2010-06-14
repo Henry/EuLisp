@@ -130,7 +130,7 @@
               ())))
         (t
           (let ((fun (table-ref *dispatch-macro-character-table* tok)))
-            (if (functionp fun)
+            (if (function? fun)
                 (fun s tok ())
               tok))))))
 

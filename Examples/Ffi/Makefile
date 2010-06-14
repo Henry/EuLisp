@@ -47,7 +47,7 @@ run: $(EXAMPLES_EXE)
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
-	@rm -f ffi*.c ffi*.h *.i *_.c
+	@rm -f ffi[0-9]*.c ffi[0-9]*.h *.i *_.c
 
 .PHONY: distclean
 distclean: clean

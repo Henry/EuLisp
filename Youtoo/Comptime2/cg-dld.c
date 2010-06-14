@@ -119,16 +119,16 @@ void initialize_module_cg_dld()
   eul_allocate_static_string(str_5726, "  ~a", 4);
   eul_allocate_static_string(str_5729, "Loading syntax module ~a ...", 28);
   /* Byte-vector with size: 44 is_init: 0 index: 21 binding: (method-load-syntax-module) */
-  static const void *G005723[] = {I(aa,23,00,00),B(cg_dld ,16),I(24,00,00,00),B(dynamic ,3),I(3c,01,86,23),B(cg_dld ,17),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,23,00),B(cg_dld ,16),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_dld ,18),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_dld ,19),I(23,00,00,00),B(cg_dld ,15),I(3b,00,1c,0f),I(23,00,00,00),B(cg_dld ,18),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_dld ,20),I(1f,05,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(04,89,00,00),B(i_param ,63),I(2a,1f,04,24),B(cg_dld ,3),I(3c,01,1f,05),I(1c,24,00,00),B(p_env ,9),I(3c,02,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(45,07,00,00)};
+  static const void *G005723[] = {I(aa,23,00,00),B(cg_dld ,16),I(24,00,00,00),B(dynamic ,3),I(3c,01,86,23),B(cg_dld ,17),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,23,00),B(cg_dld ,16),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_dld ,18),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_dld ,19),I(23,00,00,00),B(cg_dld ,15),I(3b,00,1c,0f),I(23,00,00,00),B(cg_dld ,18),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_dld ,20),I(1f,05,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(04,89,00,00),B(i_param ,64),I(2a,1f,04,24),B(cg_dld ,3),I(3c,01,1f,05),I(1c,24,00,00),B(p_env ,9),I(3c,02,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(45,07,00,00)};
 
   /* Byte-vector with size: 30 is_init: 0 index: 23 binding: top-level */
   static const void *G005730[] = {I(a9,24,00,00),B(i_param ,5),I(26,00,00,00),I(00,00,00,03),I(02,83,86,24),B(boot1 ,37),I(3c,02,24,00),B(boot1 ,23),I(3c,00,24,00),B(i_param ,5),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(cg_dld ,22),I(23,00,00,00),B(cg_dld ,21),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(i_param ,5),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_dld ,5),I(3d,00,06,45),I(06,00,00,00)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 24 binding: anonymous */
-  static const void *G005733[] = {I(ab,1c,34,00),I(00,00,00,2e),I(24,00,00,00),B(table ,4),I(24,00,00,00),B(boot1 ,39),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,32,00,00),I(00,00,00,0a),I(47,00,00,45),I(02,00,00,00)};
+  static const void *G005733[] = {I(ab,1c,34,00),I(00,00,00,2e),I(24,00,00,00),B(table ,5),I(24,00,00,00),B(boot1 ,39),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,32,00,00),I(00,00,00,0a),I(47,00,00,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 25 binding: anonymous */
-  static const void *G005735[] = {I(aa,47,00,00),I(1c,24,00,00),B(table ,4),I(3d,02,01,00)};
+  static const void *G005735[] = {I(aa,47,00,00),I(1c,24,00,00),B(table ,5),I(3d,02,01,00)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 26 binding: make-module-env */
   static const void *G005737[] = {I(aa,46,01,1b),I(48,00,00,23),B(cg_dld ,19),I(23,00,00,00),B(cg_dld ,25),I(3b,01,24,00),B(boot1 ,39),I(24,00,00,00),B(boot1 ,39),I(3c,01,1c,23),B(cg_dld ,19),I(23,00,00,00),B(cg_dld ,24),I(3b,02,1d,3c),I(02,2a,1c,45),I(03,00,00,00)};

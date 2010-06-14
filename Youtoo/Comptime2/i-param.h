@@ -15,8 +15,8 @@ extern LispRef i_param_bindings[];
 #define _number_of_warnings__X42_X42_fn_index 42 
 #define _recompile__X42_X42_fn_index 59 
 #define _get_literal__X42_X42_fn_index 49 
-#define get_named_encl_lambda_fn_index 40 
-#define stop_after_pass_fn_index 41 
+#define get_named_encl_lambda_fn_index 41 
+#define stop_after_pass_fn_index 40 
 #define _load_path__X42_X42_fn_index 17 
 #define _number_of_errors__X42_X42_fn_index 48 
 #define _C_ar__X42_X42_fn_index 39 
@@ -45,8 +45,8 @@ extern LispRef i_param_bindings[];
 #define get_ct_error_condition_class_fn_index 3 
 #define _linked_C_ff_libraries__X42_X42_fn_index 4 
 #define _C_cc__X42_X42_fn_index 46 
-#define _tmp_source_file_name__X42_X42_fn_index 63 
-#define _no_gc__X42_X42_fn_index 64 
+#define _tmp_source_file_name__X42_X42_fn_index 64 
+#define _no_gc__X42_X42_fn_index 63 
 #define parse_module_fn_index 18 
 #define _C_cc_libs__X42_X42_fn_index 22 
 #define _silent__X42_X42_fn_index 21 

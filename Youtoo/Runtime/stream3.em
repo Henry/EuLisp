@@ -43,7 +43,7 @@
   (defmethod generic-write ((x <symbol>) (s <buffered-stream>))
     (let ((str (symbol-name x)))
       ;; should also check for start comment!
-      (if (allp graphp str)
+      (if (all? graph? str)
           (generic-prin str s)
         (progn
           (prin-one-char #\| s)
@@ -198,7 +198,7 @@
     l)
 
   (defmethod generic-prin ((c <character>) (s <buffered-stream>))
-    ;    (if (graphp c)
+    ;    (if (graph? c)
     (prin-one-char c s)
     ;      (generic-write c s))
     c)

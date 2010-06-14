@@ -104,12 +104,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Allp
 ;;;-----------------------------------------------------------------------------
-  (defmethod allp ((fun <function>) (str <string>) . cs)
+  (defmethod all? ((fun <function>) (str <string>) . cs)
     (if (null? cs)
-        (allp1-string fun str)
+        (all?1-string fun str)
       (call-next-method)))
 
-  (defun allp1-string (fun str)
+  (defun all?1-string (fun str)
     (let ((n (string-size str))
           (i 0))
       (labels

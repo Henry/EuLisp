@@ -211,14 +211,14 @@
         (anyp1-list fun l)
       (call-next-method)))
 
-  (defmethod allp ((fun <function>) (l <list>) . cs)
+  (defmethod all? ((fun <function>) (l <list>) . cs)
     (if (null? cs)
-        (allp1-list fun l)
+        (all?1-list fun l)
       (if (null? (cdr cs))
-          (allp2-list fun l (convert (car cs) <list>))
+          (all?2-list fun l (convert (car cs) <list>))
         (call-next-method))))
 
-  (defun allp1-list (fun l)
+  (defun all?1-list (fun l)
     (labels
      ((loop (ll)
             (if (atom? ll)
@@ -228,7 +228,7 @@
                    (loop (cdr ll))))))
      (loop l)))
 
-  (defun allp2-list (fun l1 l2)
+  (defun all?2-list (fun l1 l2)
     (labels
      ((loop (ll1 ll2)
             (if (or (atom? ll1) (atom? ll2))

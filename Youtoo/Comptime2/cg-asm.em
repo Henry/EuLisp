@@ -81,7 +81,7 @@
 
   (defun assemble-instruction-default (name args state table)
     (if (and (null? (dynamic *with-long-jumps*))
-             (branchp name))
+             (branch? name))
         (assemble-branch name args state table)
       (let* ((code (put-bc state name))
              (formals (bytecode-args? code)))
@@ -110,7 +110,7 @@
              (t
               (do1-list (lambda (v) (put-fix state v)) args))))))))
 
-  (defun branchp (x)
+  (defun branch? (x)
     (member1-list x '(branch-true branch-nil branch)))
 
   (defun assemble-branch (name args state table)

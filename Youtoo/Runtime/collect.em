@@ -12,7 +12,7 @@
    export (name
            <collection> <sequence>
            collectionp sequencep
-           accumulate accumulate1 anyp allp do fill find map member select
+           accumulate accumulate1 anyp all? do fill find map member select
            element delete remove reset
            emptyp size
            reverse reverse!
@@ -57,9 +57,9 @@
   (defmethod binary= ((c1 <collection>) (c2 <collection>))
     (and (eq (class-of c1) (class-of c2))
          (if (listp c1)
-             (allp binary= c1 c2)
+             (all? binary= c1 c2)
            (and (int-binary= (size c1) (size c2))
-                (allp binary= c1 c2)))))
+                (all? binary= c1 c2)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Iteration
@@ -69,7 +69,7 @@
   (defgeneric accumulate (f i c))
   (defgeneric accumulate1 (f c))
   (defgeneric anyp (f c . cs))
-  (defgeneric allp (f c . cs))
+  (defgeneric all? (f c . cs))
   (defgeneric do (f c . cs))
   (defgeneric fill (c x . keys))
   (defgeneric find (v c . f))
@@ -87,7 +87,7 @@
                        (loop (int-binary+ i 1))))))
        (loop 0))))
 
-  (defmethod allp ((fun <function>) (c <collection>) . cs)
+  (defmethod all? ((fun <function>) (c <collection>) . cs)
     (let* ((ccs (cons c cs))
            (n (apply min (map size ccs))))
       (labels

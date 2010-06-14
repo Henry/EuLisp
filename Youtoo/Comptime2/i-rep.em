@@ -48,7 +48,7 @@
     (setq *error*
           (named-lambda
            cerror (str class . rest)
-           (if (and (classp class) (subclassp class <condition>))
+           (if (and (class? class) (subclass? class <condition>))
                (let/cc k (signal (apply make class message: str rest) k))
              ;; Not EuLisp but very comfortable
              (let/cc
@@ -182,7 +182,7 @@
             (setq *silent* t)
             (setq *verbose* ()))
            ((eq x hierarchy:)
-            (if (classp ?)
+            (if (class? ?)
                 (show-class-hierarchy ?)
               (show-class-hierarchy)))
            ((eq x redefine:)

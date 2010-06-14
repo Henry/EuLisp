@@ -109,7 +109,7 @@ void initialize_module_symbol()
   static const void *G0010238[] = {I(aa,04,24,00),B(mop_class ,81),I(50,45,00,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 30 binding: symbol-exists? */
-  static const void *G0010240[] = {I(aa,28,11,1b),I(1d,24,00,00),B(table ,4),I(3d,02,02,45),I(02,00,00,00)};
+  static const void *G0010240[] = {I(aa,28,11,1b),I(1d,24,00,00),B(table ,5),I(3d,02,02,45),I(02,00,00,00)};
 
   eul_allocate_static_string(str_10244, "G00", 3);
   /* Byte-vector with size: 20 is_init: 0 index: 32 binding: gensym */

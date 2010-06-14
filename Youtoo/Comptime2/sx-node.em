@@ -247,7 +247,7 @@
                     (get-binding-info binding 'ff)
                     (and (eq (get-binding-info binding 'class) 'constant)
                          (get-binding-info binding 'value))  ; no const folding
-                    (functionp obj))))                       ; no macro function
+                    (function? obj))))                       ; no macro function
       ()))
 
   (defun get-binding-info (binding key)

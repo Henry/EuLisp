@@ -9,8 +9,8 @@
 (defmodule mop-inspect
   (import (boot mop-prim mop-class mop-init)
    syntax (_boot0)
-   export (subclassp functionp methodp generic-function? cpl-subclass?
-           classp class-of slotp primitive-metaclass?
+   export (subclass? function? methodp generic-function? cpl-subclass?
+           class? class-of slotp primitive-metaclass?
            primitive-find-slot-position primitive-slot-value))
 
 ;;;-----------------------------------------------------------------------------
@@ -20,9 +20,9 @@
   (declare-inline class-of)
 
 ;;;-----------------------------------------------------------------------------
-;;; Subclassp
+;;; Subclass?
 ;;;-----------------------------------------------------------------------------
-  (defun subclassp (cl1 cl2)
+  (defun subclass? (cl1 cl2)
     (if (eq cl1 cl2) t
       (let ((code1 (class-code cl1))
             (code2 (class-code cl2)))
@@ -31,7 +31,7 @@
           (labels
               ((loop (l)
                      (if (null? l) ()
-                       (if (subclassp (car l) cl2)
+                       (if (subclass? (car l) cl2)
                            cl1
                          (loop (cdr l))))))
             (loop (class-direct-superclasses cl1)))))))
@@ -54,25 +54,25 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class predicates (<null>, <cons> have not yet its superclasses!)
 ;;;-----------------------------------------------------------------------------
-  (defun classp (a)
-    (if (subclassp (class-of a) <class>) a ()))
-  ;;(declare-inline classp)
+  (defun class? (a)
+    (if (subclass? (class-of a) <class>) a ()))
+  ;;(declare-inline class?)
 
   (defun slotp (a)
-    (if (subclassp (class-of a) <slot>) a ()))
+    (if (subclass? (class-of a) <slot>) a ()))
   ;;(declare-inline slotp)
 
   (defun generic-function? (a)
-    (if (subclassp (class-of a) <generic-function>) a ()))
+    (if (subclass? (class-of a) <generic-function>) a ()))
   ;;(declare-inline generic-function?)
 
   (defun methodp (a)
-    (if (subclassp (class-of a) <method>) a ()))
+    (if (subclass? (class-of a) <method>) a ()))
   ;;(declare-inline methodp)
 
-  (defun functionp (a)
-    (if (subclassp (class-of a) <function>) a ()))
-  ;;(declare-inline functionp)
+  (defun function? (a)
+    (if (subclass? (class-of a) <function>) a ()))
+  ;;(declare-inline function?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Primitive classes

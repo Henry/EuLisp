@@ -31,7 +31,7 @@
   (defmethod initialize ((thrd <ppcr-thread>) inits)
     (call-next-method)
     (let ((fun (init-list-ref inits function:)))
-      (if (functionp fun)
+      (if (function? fun)
           ((setter thread-function) thrd fun)
         (error "missing required keyword ~a" function:))
       thrd))

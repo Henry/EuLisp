@@ -38,7 +38,7 @@
                  (init (slot-default sd)))
             ((setter primitive-ref) obj i
              (if (null? key)
-                 (if (functionp init)
+                 (if (function? init)
                      (init)
                    init)
                (let ((x (find-key key keywords *absent*)))
@@ -46,7 +46,7 @@
                      (if (slot-required? sd)
                          (warning "missing keyword ~a to make ~a"
                           key (class-name (class-of obj)))
-                       (if (functionp init)
+                       (if (function? init)
                            (init)
                          init))
                    x))))
@@ -109,7 +109,7 @@
   (defgeneric compatible-superclass? ((cl <class>) (superclass <class>)))
   (defmethod compatible-superclass? ((cl <class>) (super <class>))
     (if (class-abstract? super) t
-        (subclassp (class-of cl) (class-of super))))
+        (subclass? (class-of cl) (class-of super))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Compute class precedence list

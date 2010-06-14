@@ -49,7 +49,7 @@
 
   (defun binding-prin-string (binding)
     (let ((obj (binding-obj? binding)))
-      (if (functionp obj)
+      (if (function? obj)
           "#<macro-function>"
         (format () "~a" obj))))
 

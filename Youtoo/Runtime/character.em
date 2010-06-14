@@ -9,8 +9,8 @@
 (defmodule character
   (syntax (_telos0)
    import (telos compare collect string)
-   export (<character> character? uppercasep lowercasep
-           alphap alnump digitp graphp
+   export (<character> character? uppercase? lowercase?
+           alphap alnump digit? graph?
            as-lowercase as-uppercase
            character-as-string))
 
@@ -24,11 +24,11 @@
 ;;;-----------------------------------------------------------------------------
   (defmethod binary< ((c1 <character>) (c2 <character>))
     (cond
-     ((and (uppercasep c1) (uppercasep c2))
+     ((and (uppercase? c1) (uppercase? c2))
       (int-binary< (character-as-int c1) (character-as-int c2)))
-     ((and (lowercasep c1) (lowercasep c2))
+     ((and (lowercase? c1) (lowercase? c2))
       (int-binary< (character-as-int c1) (character-as-int c2)))
-     ((and (digitp c1) (digitp c2))
+     ((and (digit? c1) (digit? c2))
       (int-binary< (character-as-int c1) (character-as-int c2)))
      (t ())))
 
@@ -40,12 +40,12 @@
   (defmethod as-lowercase ((c <character>)) (character-as-lowercase c))
   (defmethod as-uppercase ((c <character>)) (character-as-uppercase c))
 
-  (defun uppercasep (c) (and (isupper c) c))
-  (defun lowercasep (c) (and (islower c) c))
+  (defun uppercase? (c) (and (isupper c) c))
+  (defun lowercase? (c) (and (islower c) c))
   (defun alnump     (c) (and (isalnum c) c))
   (defun alphap     (c) (and (isalpha c) c))
-  (defun digitp     (c) (and (isdigit c) c))
-  (defun graphp     (c) (and (isgraph c) c))
+  (defun digit?     (c) (and (isdigit c) c))
+  (defun graph?     (c) (and (isgraph c) c))
 
   (defextern character-as-lowercase (<character>) <character> "tolower")
   (defextern character-as-uppercase (<character>) <character> "toupper")

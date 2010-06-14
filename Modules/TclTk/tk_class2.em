@@ -108,7 +108,7 @@
                 function-key)
            (and (stringp tag)
                 (stringp event)
-                (functionp function)
+                (function? function)
                 (setq function-key (symbol-name (gensym (symbol-name (function-name function)))))
                 (tk_allocate_registers function-key (cons function (cadr args2)))
                 (eul_tk_bind_element (tk-name canvas) (tk-handler canvas) "canvas"
@@ -122,7 +122,7 @@
                (args2 (as-c-accessors (cddr args)))
                function-key)
            (and (stringp event)
-                (functionp function)
+                (function? function)
                 (setq function-key (symbol-name (gensym (symbol-name (function-name function)))))
                 (tk_allocate_registers function-key (cons function (cadr args2)))
                 (eul_tk_bind_element (tk-name item) (tk-handler item) "canvas"
@@ -377,7 +377,7 @@
       (and (tk-text? text)
            (stringp tagName)
            (stringp event)
-           (functionp function)
+           (function? function)
            (setq function-key (symbol-name (gensym (symbol-name (function-name function)))))
            (tk_allocate_registers function-key (cons function (cadr args2)))
            (eul_tk_bind_element (tk-name text) (tk-handler text) "tag" tagName

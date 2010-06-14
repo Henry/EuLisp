@@ -51,7 +51,6 @@ extern LispRef telos_bindings[];
 #define int_binary__fn_index 15 
 #define _local_slot__X60_X62_fn_index 56 
 #define inc_fn_index 20 
-#define subclassp_fn_index 11 
 #define find_key_fn_index 2 
 #define _simple_method__X60_X62_fn_index 54 
 #define list_equal_fn_index 46 
@@ -96,11 +95,11 @@ extern LispRef telos_bindings[];
 #define _method__X60_X62_fn_index 22 
 #define lsd_keywords_fn_index 21 
 #define tailstring_fn_index 50 
-#define cpl_subclass__X63_fn_index 5 
+#define cpl_subclass__X63_fn_index 6 
 #define primitive_print_fn_index 3 
 #define class_code_fn_index 19 
 #define compute_primitive_writer_using_slot_fn_index 7 
-#define primitive_slot_value_fn_index 4 
+#define primitive_slot_value_fn_index 5 
 #define _argv__X42_X42_fn_index 24 
 #define _simple_generic_function__X60_X62_fn_index 15 
 #define compute_defined_slot_class_fn_index 12 
@@ -161,6 +160,7 @@ extern LispRef telos_bindings[];
 #define slot_writer_fn_index 52 
 #define list_size_fn_index 8 
 #define primitive_find_slot_position_fn_index 10 
+#define function__X63_fn_index 11 
 #define make_keyword_fn_index 53 
 #define class_slots_fn_index 50 
 #define generic_function_method_class_fn_index 48 
@@ -188,7 +188,6 @@ extern LispRef telos_bindings[];
 #define list_remove_duplicates_fn_index 30 
 #define ensure_slot_reader_fn_index 2 
 #define compute_keywords_fn_index 6 
-#define functionp_fn_index 8 
 #define sf_direct_slots_fn_index 38 
 #define dec_fn_index 43 
 #define int_binary__X60_fn_index 40 
@@ -205,7 +204,7 @@ extern LispRef telos_bindings[];
 #define predefined_reader_fn_index 6 
 #define _function__X60_X62_fn_index 27 
 #define sd_size_fn_index () 
-#define class_of_fn_index 7 
+#define class_of_fn_index 8 
 #define class_size_fn_index () 
 #define cons_size_fn_index () 
 #define class_keywordz_fn_index 23 
@@ -227,16 +226,17 @@ extern LispRef telos_bindings[];
 #define compute_specialized_slot_class_fn_index 2 
 #define format1_fn_index 17 
 #define compute_class_codes_fn_index 2 
+#define class__X63_fn_index 4 
 #define remove_class_fn_index 4 
 #define stack_values_fn_index 7 
 #define class_precedence_list_fn_index 7 
 #define predefined_writer_fn_index 3 
 #define listp_fn_index 13 
 #define generic_function__X63_fn_index 3 
-#define classp_fn_index 2 
 #define null__X63_fn_index 9 
 #define _symbol__X60_X62_fn_index 5 
 #define make_fn_index 2 
+#define subclass__X63_fn_index 2 
 #define vector_size_fn_index 7 
 #define lsd_slot_defaults_fn_index 4 
 #define int_binary__X47_fn_index 11 

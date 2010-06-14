@@ -83,7 +83,7 @@ extern LispRef sx_obj_bindings[];
 #define appl_args__X33_fn_index 48 
 #define var_used__X33_fn_index 27 
 #define local_static_var__X63_fn_index 18 
-#define _if__X60_X62_fn_index 9 
+#define _if__X60_X62_fn_index 13 
 #define module_named_constants__X33_fn_index 65 
 #define module_lexical_env__X33_fn_index 9 
 #define local_var__X63_fn_index 40 
@@ -94,7 +94,7 @@ extern LispRef sx_obj_bindings[];
 #define fun_arity__X33_fn_index 40 
 #define module_load_dir__X33_fn_index 44 
 #define setq_obj__X63_fn_index 4 
-#define call_next_method__X63_fn_index 13 
+#define call_next_method__X63_fn_index 12 
 #define syntax_expr_encl_lambda__X63_fn_index 64 
 #define module_max_binding_vector_size__X63_fn_index 8 
 #define named_const_name__X33_fn_index 17 
@@ -105,9 +105,9 @@ extern LispRef sx_obj_bindings[];
 #define module_local_literals__X63_fn_index 63 
 #define var_value__X33_fn_index 5 
 #define constp_fn_index 16 
-#define origin_name__X63_fn_index 37 
+#define origin_name__X63_fn_index 39 
 #define bindingp_fn_index 30 
-#define fun_range_and_domain__X63_fn_index 12 
+#define fun_range_and_domain__X63_fn_index 10 
 #define lambdap_fn_index 11 
 #define modulep_fn_index 6 
 #define module_name__X63_fn_index 29 
@@ -117,9 +117,9 @@ extern LispRef sx_obj_bindings[];
 #define fun_appls__X33_fn_index 36 
 #define binding_imported__X33_fn_index 61 
 #define fun_body__X33_fn_index 35 
-#define lambda_inlined__X33_fn_index 39 
-#define _opencoding__X60_X62_fn_index 10 
-#define if_pred__X33_fn_index 38 
+#define lambda_inlined__X33_fn_index 38 
+#define _opencoding__X60_X62_fn_index 9 
+#define if_pred__X33_fn_index 37 
 #define module_local_literals__X33_fn_index 60 
 #define _setq__X60_X62_fn_index 26 
 #define if_then__X33_fn_index 32 

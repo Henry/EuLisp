@@ -79,7 +79,7 @@ void initialize_module_thread()
 
   eul_allocate_static_string(str_456, "missing required keyword ~a", 27);
   /* Byte-vector with size: 28 is_init: 0 index: 57 binding: (method-initialize) */
-  static const void *G00453[] = {I(ab,46,03,1c),I(48,00,00,47),I(00,00,1c,37),I(02,2a,1b,23),B(thread ,55),I(24,00,00,00),B(boot ,28),I(3c,02,1b,48),I(00,01,47,00),I(01,24,00,00),B(mop_inspect ,8),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,21),I(23,00,00,00),B(thread ,56),I(23,00,00,00),B(thread ,55),I(24,00,00,00),B(boot ,22),I(3c,02,2a,23),B(thread ,53),I(23,00,00,00),B(thread ,54),I(3b,01,24,00),B(thread ,17),I(3d,01,04,00)};
+  static const void *G00453[] = {I(ab,46,03,1c),I(48,00,00,47),I(00,00,1c,37),I(02,2a,1b,23),B(thread ,55),I(24,00,00,00),B(boot ,28),I(3c,02,1b,48),I(00,01,47,00),I(01,24,00,00),B(mop_inspect ,11),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,21),I(23,00,00,00),B(thread ,56),I(23,00,00,00),B(thread ,55),I(24,00,00,00),B(boot ,22),I(3c,02,2a,23),B(thread ,53),I(23,00,00,00),B(thread ,54),I(3b,01,24,00),B(thread ,17),I(3d,01,04,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 58 binding: (method-simple-thread?) */
   static const void *G00457[] = {I(aa,1b,45,01)};

@@ -1415,7 +1415,7 @@
   (cdr (cdr (cdr (cdr l)))))
 (defun string->list (str) (convert str <list>))
 (defconstant else t)
-(defconstant char-numeric? digitp)
+(defconstant char-numeric? digit?)
 (defconstant string-length string-size)
 (defun string->number (str) (convert str <int>))
 (defun symbol->string (sym)

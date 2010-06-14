@@ -128,11 +128,11 @@
   (declare-inline char-downcase)
 
   (defun char-lower-case? (x)
-    (lowercasep x))
+    (lowercase? x))
   (declare-inline char-lower-case?)
 
   (defun char-numeric? (x)
-    (digitp x))
+    (digit? x))
   (declare-inline char-numeric?)
 
   (defun char-ready args
@@ -146,7 +146,7 @@
   (declare-inline char-upcase)
 
   (defun char-upper-case? (x)
-    (uppercasep x))
+    (uppercase? x))
   (declare-inline char-upper-case?)
 
   (defun char-whitespace? args
@@ -398,7 +398,7 @@
   (declare-inline positive?)
 
   (defun procedure? (x)
-    (functionp x))
+    (function? x))
   (declare-inline procedure?)
 
   ;; quasiquote, quote

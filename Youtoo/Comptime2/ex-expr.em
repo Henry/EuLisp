@@ -431,7 +431,7 @@
   (defgeneric check-appl (appl op))
 
   (defmethod check-appl ((appl <appl>) (op <object>))
-    (if (functionp op)
+    (if (function? op)
         (ct-serious-warning () "macro binding ~a should be in syntax import"
                          (binding-local-name? (appl-fun? appl)))
       (ct-serious-warning () "no applicable object ~a" op)))

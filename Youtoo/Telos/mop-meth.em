@@ -18,7 +18,7 @@
   (defun make-method (method-class domain fun inits)
     (if (and (eq method-class <simple-method>)
              ;(vectorp domain)
-             (functionp fun)
+             (function? fun)
              (null? inits))
         (let ((meth (primitive-allocate <simple-method> method-size)))
           ((setter method-domain) meth domain)
@@ -33,7 +33,7 @@
 
   (defmethod add-method ((gf <generic-function>) (meth <method>))
     (check-method-domain meth gf)
-    (if (subclassp (class-of meth)
+    (if (subclass? (class-of meth)
                          (generic-function-method-class gf)) ()
         (error
          "mismatch between class of generic function ~a and method class ~a"

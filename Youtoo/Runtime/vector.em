@@ -12,7 +12,7 @@
    export (<vector> vectorp make-vector vector-size
            maximum-vector-size
            vector-ref subvector vector-append vector-empty?
-           do1-vector map1-vector anyp1-vector allp1-vector
+           do1-vector map1-vector anyp1-vector all?1-vector
            reverse-vector member1-vector permute
            accumulate-vector accumulate1-vector reverse-vector!))
 
@@ -82,12 +82,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Allp
 ;;;-----------------------------------------------------------------------------
-  (defmethod allp ((fun <function>) (vec <vector>) . cs)
+  (defmethod all? ((fun <function>) (vec <vector>) . cs)
     (if (null? cs)
-        (allp1-vector fun vec)
+        (all?1-vector fun vec)
       (call-next-method)))
 
-  (defun allp1-vector (fun vec)
+  (defun all?1-vector (fun vec)
     (let ((n (vector-size vec)))
       (labels
        ((loop (i)

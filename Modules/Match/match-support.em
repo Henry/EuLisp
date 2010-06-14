@@ -99,7 +99,7 @@
   (defun vector->list (v) (convert v <list>))
 
   ;; Character predicates
-  (defconstant char-numeric? digitp)
+  (defconstant char-numeric? digit?)
 
   ;; Control structure
   (defconstant for-each do)

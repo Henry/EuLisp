@@ -49,7 +49,7 @@ void initialize_module_condition()
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 38 is_init: 0 index: 11 binding: error */
-  static const void *G00936[] = {I(43,fd,1c,24),B(mop_inspect ,2),I(3c,01,1b,34),I(00,00,00,1d),I(1d,24,00,00),B(condition ,9),I(24,00,00,00),B(mop_inspect ,11),I(3c,02,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,32),I(24,00,00,00),B(mop_gf ,2),I(1f,04,23,00),B(condition ,10),I(1f,07,1f,06),I(24,00,00,00),B(boot ,9),I(3c,05,86,24),B(condition ,2),I(3d,02,05,32),I(00,00,00,3e),I(24,00,00,00),B(mop_gf ,17),I(86,1f,06,1f),I(06,1f,06,24),B(boot ,9),I(3c,05,24,00),B(condition ,9),I(23,00,00,00),B(condition ,10),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,86,24),B(condition ,2),I(3d,02,06,22),I(01,45,05,00)};
+  static const void *G00936[] = {I(43,fd,1c,24),B(mop_inspect ,4),I(3c,01,1b,34),I(00,00,00,1d),I(1d,24,00,00),B(condition ,9),I(24,00,00,00),B(mop_inspect ,2),I(3c,02,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,32),I(24,00,00,00),B(mop_gf ,2),I(1f,04,23,00),B(condition ,10),I(1f,07,1f,06),I(24,00,00,00),B(boot ,9),I(3c,05,86,24),B(condition ,2),I(3d,02,05,32),I(00,00,00,3e),I(24,00,00,00),B(mop_gf ,17),I(86,1f,06,1f),I(06,1f,06,24),B(boot ,9),I(3c,05,24,00),B(condition ,9),I(23,00,00,00),B(condition ,10),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,86,24),B(condition ,2),I(3d,02,06,22),I(01,45,05,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 12 binding: (method-conditionp) */
   static const void *G00939[] = {I(aa,1b,45,01)};
@@ -97,7 +97,7 @@ void initialize_module_condition()
   static const void *G00986[] = {I(aa,24,00,00),B(mop_gf ,2),I(47,00,01,23),B(condition ,10),I(47,00,00,47),I(00,02,24,00),B(boot ,9),I(3c,05,1b,1d),I(24,00,00,00),B(condition ,2),I(3d,02,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 33 is_init: 0 index: 48 binding: cerror */
-  static const void *G00988[] = {I(43,fd,46,03),I(1d,48,00,00),I(1c,48,00,01),I(1b,48,00,02),I(47,00,01,24),B(mop_inspect ,2),I(3c,01,1b,34),I(00,00,00,1d),I(47,00,01,24),B(condition ,9),I(24,00,00,00),B(mop_inspect ,11),I(3c,02,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,2a),I(23,00,00,00),B(condition ,39),I(23,00,00,00),B(condition ,47),I(3b,01,24,00),B(let_cc ,2),I(3c,01,1b,22),I(01,32,00,00),I(00,00,00,24),I(23,00,00,00),B(condition ,39),I(23,00,00,00),B(condition ,46),I(3b,01,24,00),B(let_cc ,2),I(3c,01,1b,22),I(01,45,05,00)};
+  static const void *G00988[] = {I(43,fd,46,03),I(1d,48,00,00),I(1c,48,00,01),I(1b,48,00,02),I(47,00,01,24),B(mop_inspect ,4),I(3c,01,1b,34),I(00,00,00,1d),I(47,00,01,24),B(condition ,9),I(24,00,00,00),B(mop_inspect ,2),I(3c,02,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,2a),I(23,00,00,00),B(condition ,39),I(23,00,00,00),B(condition ,47),I(3b,01,24,00),B(let_cc ,2),I(3c,01,1b,22),I(01,32,00,00),I(00,00,00,24),I(23,00,00,00),B(condition ,39),I(23,00,00,00),B(condition ,46),I(3b,01,24,00),B(let_cc ,2),I(3c,01,1b,22),I(01,45,05,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 49 binding: condition-message */
   static const void *G00990[] = {I(aa,82,24,00),B(condition ,9),I(08,45,00,00)};
