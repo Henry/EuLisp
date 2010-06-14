@@ -20,7 +20,7 @@
     (notify "  Parsing module ~a ..." *tmp-source-file-name*)
     (setq *pass* 'parse)
     (notify0 " .ME/SE")
-    (if (and (consp sexprs)
+    (if (and (cons? sexprs)
              (eq (car sexprs) 'defmodule))
         (let ((module (expand-module sexprs)))
           (dynamic-let  ((*actual-module* module))

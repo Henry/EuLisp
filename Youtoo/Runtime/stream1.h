@@ -21,9 +21,9 @@ extern LispRef stream1_bindings[];
 #define O_NONBLOCK_fn_index 10 
 #define read_into_buffer_fn_index 27 
 #define ntok_fn_index 26 
-#define O_EXCL_fn_index 11 
+#define O_EXCL_fn_index 12 
 #define eul_make_connection_fn_index 23 
-#define O_WRONLY_fn_index 12 
+#define O_WRONLY_fn_index 11 
 #define O_APPEND_fn_index 7 
 #define strerror_fn_index 6 
 #define O_RDWR_fn_index 2 

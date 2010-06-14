@@ -50,7 +50,7 @@
   (defclass <object-stream> (<stream>)
     ((cache accessor: object-stream-cache default: #(() ()))
      (cache-index accessor: object-stream-cache-index default: 0))
-    predicate: object-stream-p)
+    predicate: object-stream?)
 
   (defprimclass <bytevector> byte-vector-class (<string>)
     ())

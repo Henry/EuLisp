@@ -26,7 +26,7 @@
              ((setter bigint-value) x (mpz-init-set (bigint-value val))))
             ((int? val)
              ((setter bigint-value) x (mpz-init-set-si val)))
-            ((doublep val)
+            ((double? val)
              ((setter bigint-value) x (mpz-init-set-d val)))
             ((string? val)
              ((setter bigint-value) x (mpz-init-set-str val 10)))
@@ -157,10 +157,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Misc
 ;;;-----------------------------------------------------------------------------
-  ;(defun evenp (x)
+  ;(defun even? (x)
   ;  (mpz-cmp-si (mpz-mod x 2) 0))
 
-  ;(defun oddp (x) (not (evenp x)))
+  ;(defun odd? (x) (not (even? x)))
 
   (defmethod zero? ((x <bigint>))
     (= (mpz-cmp-si (bigint-value x) 0) 0))

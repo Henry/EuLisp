@@ -144,7 +144,7 @@
         (cond
          ((number? x)
           (write-next-bv-byte x))
-         ((consp x)
+         ((cons? x)
           (let ((key (car x))
                 (args (cdr x))
                 (arg1 (car (cdr x))))

@@ -10,7 +10,7 @@
 (defmodule double
   (syntax (_telos0)
    import (telos compare number integer fpi string float double1)
-   export (<double-float> <double> doublep
+   export (<double-float> <double> double?
            most-positive-double-float
            least-positive-double-float
            most-negative-double-float

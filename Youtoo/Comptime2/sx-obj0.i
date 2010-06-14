@@ -18,7 +18,7 @@
     (predicate: . 25)
     (anonymous . 24)
     ("p" . 23)
-    ("-p" . 22)
+    ("?" . 22)
     (writer: . 20)
     (reader: . 19)
     (default: . 18)

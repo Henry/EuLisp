@@ -223,10 +223,6 @@
     (eql x y))
   (declare-inline eqv?)
 
-  (defun even? (x)
-    (evenp x))
-  (declare-inline even?)
-
   (defun error (str x)
     (Error "~a: ~a" str x))
 
@@ -277,7 +273,7 @@
     (convert x <int>))
 
   (defun inexact? (x)
-    (doublep x))
+    (double? x))
   (declare-inline inexact?)
 
   (defun input-port? (x)
@@ -311,9 +307,6 @@
   ;  (defun list-tail args
   ;    (nyi 'list-tail))
 
-  (defun list? (x)
-    (list? x))
-  (declare-inline list?)
   (export log)
 
   (defun magnitude args
@@ -344,18 +337,11 @@
     (binary% x y))
   (declare-inline modulo)
 
-  (defun negative? (x)
-    (negative? x))
-  (declare-inline negative?)
   (export newline)
 
   (defun not (x)
     (null? x))
   (declare-inline not)
-
-  (defun number? (x)
-    (number? x))
-  (declare-inline number?)
 
   (defun number->string (x . r)
     (let ((radix (if r (car r) 10)))
@@ -372,10 +358,6 @@
 
   (export numerator)
 
-  (defun odd? (x)
-    (oddp x))
-  (declare-inline odd?)
-
   (defun open-input-file (x)
     (make <file-stream> mode: 'r file-name: x))
 
@@ -387,15 +369,11 @@
          (Member (stream-mode x) '(w rw a))))
 
   (defun pair? (x)
-    (consp x))
+    (cons? x))
   (declare-inline pair?)
 
   (defun peek-char args
     (nyi 'peek-char))
-
-  (defun positive? (x)
-    (positive? x))
-  (declare-inline positive?)
 
   (defun procedure? (x)
     (function? x))
@@ -407,7 +385,7 @@
     (Random x))
 
   (defun rational? (x)
-    (bigratp x))
+    (bigrat? x))
   (declare-inline rational?)
 
   (defun rationalize (x)
@@ -462,11 +440,6 @@
   (defun string x
     (convert x <string>))
 
-  (defun string? (x)
-    (string? x))
-
-  (declare-inline string?)
-
   (defun string->number (x)
     ;; floats not addressed!
     (convert x <int>))
@@ -510,19 +483,11 @@
     (< y x))
   (declare-inline string>)
 
-  (defun string? (x)
-    (string? x))
-  (declare-inline string?)
-
   (export substring) ;; indexing may be different!
 
   (defun symbol->string (x)
     (symbol-name x))
   (declare-inline symbol->string)
-
-  (defun symbol? (x)
-    (symbol? x))
-  (declare-inline symbol?)
 
   (export tan truncate)
 
@@ -530,10 +495,6 @@
 
   (defun vector x
     (list->vector x))
-
-  (defun vector? (x)
-     (vector? x))
-  (declare-inline vector?)
 
   (defun vector-length (x)
     (vector-size x))
@@ -545,20 +506,12 @@
     ((setter vector-ref) x y z))
   (declare-inline vector-set!)
 
-  (defun vector? (x)
-    (vector? x))
-  (declare-inline vector?)
-
   (export write)
 
   (defun write-char (x . y)
     ;; not optimal!
     (apply write x y))
   (declare-inline write-char)
-
-  (defun zero? (x)
-    (zero? x))
-  (declare-inline zero?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Some youtoo bindings the compiler expects
@@ -572,7 +525,6 @@
   (export int-binary=)
   (export inc)
   (export dec)
-  (export int-zerop)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Export everything

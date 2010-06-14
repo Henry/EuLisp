@@ -143,7 +143,7 @@
       node))
 
   (defun make-fun (fun-class name args body . has-unknown-appls)
-    (let* ((special-name? (and (consp name) (= (list-size name) 1)))
+    (let* ((special-name? (and (cons? name) (= (list-size name) 1)))
            (node (make fun-class
                       name: (if special-name? (car name) name)
                       args: (if (symbol? args) (list args) args)

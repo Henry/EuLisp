@@ -39,7 +39,7 @@
     (quote . 18)
     (setter . 17)
     (car . 16)
-    (consp . 15)
+    (cons? . 15)
     (symbol? . 14)
     (x . 13)
     (cadr . 12)

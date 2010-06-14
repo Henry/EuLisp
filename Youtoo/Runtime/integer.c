@@ -47,13 +47,13 @@ void initialize_module_integer()
   static const void *G002195[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 104 is_init: 0 index: 16 binding: top-level */
-  static const void *G002197[] = {I(a9,24,00,00),B(number ,7),I(24,00,00,00),B(boot1 ,25),I(3c,01,24,00),B(boot1 ,25),I(3c,00,24,00),B(mop_class ,70),I(23,00,00,00),B(integer ,8),I(23,00,00,00),B(integer ,9),I(23,00,00,00),B(integer ,10),I(1f,05,23,00),B(integer ,11),I(1f,06,23,00),B(integer ,12),I(86,23,00,00),B(integer ,13),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(integer ,2),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(integer ,14),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(integer ,4),I(2a,24,00,00),B(integer ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(integer ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(integer ,2),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(integer ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,6),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,4),I(2a,24,00,00),B(integer ,2),I(45,13,00,00)};
+  static const void *G002197[] = {I(a9,24,00,00),B(number ,7),I(24,00,00,00),B(boot1 ,24),I(3c,01,24,00),B(boot1 ,24),I(3c,00,24,00),B(mop_class ,70),I(23,00,00,00),B(integer ,8),I(23,00,00,00),B(integer ,9),I(23,00,00,00),B(integer ,10),I(1f,05,23,00),B(integer ,11),I(1f,06,23,00),B(integer ,12),I(86,23,00,00),B(integer ,13),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(integer ,2),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(integer ,14),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(integer ,4),I(2a,24,00,00),B(integer ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(integer ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,7),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(integer ,2),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(integer ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(integer ,15),I(23,00,00,00),B(integer ,6),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(integer ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(integer ,4),I(2a,24,00,00),B(integer ,2),I(45,13,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 17 binding: evenp */
-  static const void *G002207[] = {I(aa,84,24,00),B(number ,8),I(3c,02,24,00),B(number ,16),I(3d,01,00,00)};
+  /* Byte-vector with size: 6 is_init: 0 index: 17 binding: odd? */
+  static const void *G002207[] = {I(aa,84,24,00),B(number ,8),I(3c,02,1b,24),B(number ,16),I(3c,01,12,45),I(01,00,00,00)};
 
-  /* Byte-vector with size: 6 is_init: 0 index: 18 binding: oddp */
-  static const void *G002209[] = {I(aa,84,24,00),B(number ,8),I(3c,02,1b,24),B(number ,16),I(3c,01,12,45),I(01,00,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 18 binding: even? */
+  static const void *G002209[] = {I(aa,84,24,00),B(number ,8),I(3c,02,24,00),B(number ,16),I(3d,01,00,00)};
 
   /* Byte-vector with size: 34 is_init: 1 index: 0 binding: initialize-integer */
   static const void *G002211[] = {I(87,25,00,00),B(integer ,1),I(24,00,00,00),B(number ,1),I(3e,0b,24,00),B(number ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(integer ,19),I(23,00,00,00),B(integer ,18),I(3b,01,25,00),B(integer ,5),I(86,25,00,00),B(integer ,4),I(23,00,00,00),B(integer ,20),I(23,00,00,00),B(integer ,17),I(3b,01,25,00),B(integer ,3),I(86,25,00,00),B(integer ,2),I(23,00,00,00),B(integer ,21),I(23,00,00,00),B(integer ,16),I(3b,00,3d,00),I(00,ac,00,00)};
@@ -73,8 +73,8 @@ void initialize_module_integer()
   eul_allocate_bytevector( G002198,G002197);
   eul_allocate_bytevector( G002208,G002207);
   eul_allocate_bytevector( G002210,G002209);
-  eul_intern_symbol(sym_2213,"oddp");
-  eul_intern_symbol(sym_2214,"evenp");
+  eul_intern_symbol(sym_2213,"even?");
+  eul_intern_symbol(sym_2214,"odd?");
   eul_intern_symbol(sym_2215,"top-level");
   eul_allocate_bytevector( G002212,G002211);
 

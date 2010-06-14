@@ -59,8 +59,8 @@
   (format t "26: -10 == ~a\n" (* one (- 0 10)))
   (format t "27: -9 == ~a\n" (+ one (- 0 10)))
   (format t "28: 11 == ~a\n" (- one (- 0 10)))
-  (format t "29: () == ~a\n" (evenp one))
-  (format t "30: t == ~a\n" (oddp one))
+  (format t "29: () == ~a\n" (even? one))
+  (format t "30: t == ~a\n" (odd? one))
   (format t "31: 1 == ~a\n" (% one 3))
 ;;;-----------------------------------------------------------------------------
 ;;; Bigrats

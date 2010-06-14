@@ -9,7 +9,7 @@
 (defmodule integer
   (syntax (_telos0)
    import (telos number)
-   export (<integer> integer? evenp oddp))
+   export (<integer> integer? even? odd?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <integer>
@@ -21,11 +21,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Even and odd
 ;;;-----------------------------------------------------------------------------
-  (defun evenp (x) (zero? (binary-mod x 2)))
-  ;;(declare-inline evenp)
+  (defun even? (x) (zero? (binary-mod x 2)))
+  ;;(declare-inline even?)
 
-  (defun oddp (x) (null? (zero? (binary-mod x 2))))
-  ;;(declare-inline oddp)
+  (defun odd? (x) (null? (zero? (binary-mod x 2))))
+  ;;(declare-inline odd?)
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

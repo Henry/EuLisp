@@ -8,10 +8,10 @@
 extern LispRef integer_bindings[];
 
 /* Module binding indices */
-#define oddp_fn_index 5 
+#define even__X63_fn_index 5 
 #define _integer__X60_X62_fn_index 2 
 #define integer__X63_fn_index 4 
-#define evenp_fn_index 3 
+#define odd__X63_fn_index 3 
 
 
 

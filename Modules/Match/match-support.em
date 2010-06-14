@@ -79,11 +79,7 @@
   ;; Type predicates
   (defun boolean? (obj) (or (eq obj t) (eq obj '())))
   (defconstant char? character?)
-  (defconstant list? list?)
-  (defconstant pair? consp)
-  (defconstant string? string?)
-  (defconstant symbol? symbol?)
-  (defconstant vector? vector?)
+  (defconstant pair? cons?)
 
   ;; Conversions
   (defun list->vector (l) (convert l <vector>))

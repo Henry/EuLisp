@@ -19,7 +19,7 @@
 ;;;------------------------------------------------------------------------
   (defclass <pipe> (<file-stream>)
     ((process accessor: pipe-process keyword: process: requiredp: t))
-    predicate: pipep)
+    predicate: pipe?)
 
   (defmethod initialize ((x <pipe>) inits)
     (call-next-method)

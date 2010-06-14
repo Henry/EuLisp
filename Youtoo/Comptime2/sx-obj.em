@@ -66,7 +66,7 @@
 
   (defun save-binding-local-name? (x)
     ;; Sometimes x is a hard-code level1 binding (i.e. a list)
-    (if (consp x)
+    (if (cons? x)
         (cdr (cdr x))
       (if (bindingp x)
           (binding-local-name? x)
@@ -74,7 +74,7 @@
 
   (defun save-binding-module-name? (x)
     ;; Sometimes x is a hard-code level1 binding (i.e. a list)
-    (if (consp x)
+    (if (cons? x)
         (car (cdr x))
       (if (bindingp x)
           (let ((m (binding-module? x)))

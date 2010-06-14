@@ -68,8 +68,8 @@ void initialize_module__ex_aux0()
   eul_allocate_bytevector( G00184,G00183);
   eul_intern_symbol(sym_188,"cadr");
   eul_intern_symbol(sym_189,"x");
-  eul_intern_symbol(sym_190,"symbolp");
-  eul_intern_symbol(sym_191,"consp");
+  eul_intern_symbol(sym_190,"symbol?");
+  eul_intern_symbol(sym_191,"cons?");
   eul_intern_symbol(sym_192,"car");
   eul_intern_symbol(sym_193,"setter");
   eul_intern_symbol(sym_194,"quote");

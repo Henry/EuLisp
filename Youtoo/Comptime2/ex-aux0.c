@@ -69,7 +69,7 @@ void initialize_module_ex_aux0()
   eul_intern_symbol(sym_1546,"cadr");
   eul_intern_symbol(sym_1547,"x");
   eul_intern_symbol(sym_1548,"symbol?");
-  eul_intern_symbol(sym_1549,"consp");
+  eul_intern_symbol(sym_1549,"cons?");
   eul_intern_symbol(sym_1550,"car");
   eul_intern_symbol(sym_1551,"setter");
   eul_intern_symbol(sym_1552,"quote");

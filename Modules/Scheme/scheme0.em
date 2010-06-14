@@ -13,18 +13,18 @@
 ;;; Defining forms
 ;;;-----------------------------------------------------------------------------
   (defmacro define (var-args . body)
-    (let ((funp (consp var-args))
+    (let ((funp (cons? var-args))
           (local-defs ()))
-      (if (consp body)
+      (if (cons? body)
           (labels
            ((loop (l res)
                   (if l
                       (let ((x (car l)))
-                        (if (consp x)
+                        (if (cons? x)
                             (if (eq (car x) 'define)
                                 (let* ((var-args1 (cadr x))
                                        (body1 (cddr x))
-                                       (funp1 (consp var-args1)))
+                                       (funp1 (cons? var-args1)))
                                   (if funp1
                                       (loop (cdr l)
                                             (cons `(,(car var-args1)
@@ -61,7 +61,7 @@
     ;; sorry, no 'and' available
     (if (symbol? name+args)
         (if body
-            (if (consp (car body))
+            (if (cons? (car body))
                 (if (eq (car (car body)) 'lambda)
                     `(deflocal ,name+args
                        (named-lambda ,name+args ,@(cdr (car body))))

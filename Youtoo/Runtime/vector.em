@@ -321,7 +321,7 @@
     (let (res)
       (labels
        ((loop (l args)
-              (if (consp l)
+              (if (cons? l)
                   (do
                    (lambda (x)
                      (loop (cdr l)
@@ -330,7 +330,7 @@
                 (setq res (cons (apply fun (reverse args)) res)))))
        (loop cs ())
        (if (or (null? cs)
-               (and (consp cs) (consp (car cs))))
+               (and (cons? cs) (cons? (car cs))))
            (reverse res)
          (convert (reverse res) (class-of (car cs)))))))
 

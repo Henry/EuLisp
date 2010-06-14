@@ -24,7 +24,7 @@
   (defmacro set! args `(setq ,@args))
 
   (defmacro define (name . body)
-    (if (consp name)
+    (if (cons? name)
         `(deflocal ,(car name) (lambda ,(cdr name) ,@body))
       `(deflocal ,name ,@body)))
 

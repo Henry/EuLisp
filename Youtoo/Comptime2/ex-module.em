@@ -27,7 +27,7 @@
       ((setter get-module-expander) key fun)))
 
   (defun module-expander (x e)
-    (let* ((key (and (consp x) (car x)))
+    (let* ((key (and (cons? x) (car x)))
            (expander
             (cond
              ((symbol? key) (or (get-module-expander key)
@@ -117,7 +117,7 @@
     (lambda (x e)
       (with-ct-handler "bad defconstant syntax" x
         (let ((v (get-value x)))
-          (if (and (consp v) (eq (car v) 'lambda))
+          (if (and (cons? v) (eq (car v) 'lambda))
               (make-defined-fun (get-name x)
                                 (get-lambda-params v)
                                 (get-lambda-body v))

@@ -189,11 +189,11 @@
 ;;;-----------------------------------------------------------------------------
   (defun expand-hard-coded-level1-binding (binding name env)
     ;; Hard-coded level1 bindings may still be not expanded
-    (if (consp binding)
+    (if (cons? binding)
         (let* ((pos (car binding))
                (origin-module-name (car (cdr binding)))
                (origin-name (cdr (cdr binding)))
-               (binding-name (if (consp name)
+               (binding-name (if (cons? name)
                                  (car name)
                                (or name origin-name)))
                (proper-binding (make <interface-binding>

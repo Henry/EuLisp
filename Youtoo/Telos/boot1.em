@@ -9,10 +9,9 @@
 (defmodule boot1
   (syntax (_boot0)
    export (car cdr cons list
-           string? character? symbolp symbol? consp cons? int? int?
-           list? atom? null?
-           simple-function? simple-generic-function?
-           + - * / % mod < = inc dec int-zerop int-zerop
+           string? character? symbol? cons? int? int? list? atom? null?
+           simple-function? simple-generic-function? int-zero? object?
+           + - * / % mod < = inc dec
            eq eql equal
            format1 write-object prin print
            make-symbol make-keyword
@@ -20,7 +19,7 @@
            member1-string string-ref string-size substring tailstring
            character-as-int int-as-character
            stdout stderr setter
-           *argc* *argv* getenv system exit time-start time-stop object?
+           *argc* *argv* getenv system exit time-start time-stop
            *absent*))
 
 ;;;-----------------------------------------------------------------------------
@@ -28,7 +27,6 @@
 ;;;-----------------------------------------------------------------------------
   (defun setter (fun)
     ((opencoded-lambda (f) (setter)) fun))
-
 
   (defun set-setter (fun1 fun2)
     ((opencoded-lambda (f1 f2) (set-setter)) fun1 fun2))
@@ -47,7 +45,7 @@
   (defun equal (x y)
     (labels
      ((loop (l1 l2)
-            (if (and (consp l1) (consp l2))
+            (if (and (cons? l1) (cons? l2))
                 (and (equal (car l1) (car l2))
                      (loop (cdr l1) (cdr l2)))
               (if l1
@@ -67,18 +65,12 @@
   (defun string? (x) ((opencoded-lambda (u) (stringp)) x))
   (declare-inline string?)
 
-  (defun symbolp (x) ((opencoded-lambda (u) (symbolp)) x))
-  (declare-inline symbolp)
   (defun symbol? (x) ((opencoded-lambda (u) (symbolp)) x))
   (declare-inline symbol?)
 
-  (defun consp (x) ((opencoded-lambda (u) (consp)) x))
-  (declare-inline consp)
   (defun cons? (x) ((opencoded-lambda (u) (consp)) x))
   (declare-inline cons?)
 
-  (defun int? (x) ((opencoded-lambda (u) (fpip)) x))
-  (declare-inline int?)
   (defun int? (x) ((opencoded-lambda (u) (fpip)) x))
   (declare-inline int?)
 
@@ -91,7 +83,7 @@
   (defun list? (x) ((opencoded-lambda (u) (listp)) x))
   (declare-inline list?)
 
-  (defun atom? (x) (null? (consp x)))
+  (defun atom? (x) (null? (cons? x)))
   (declare-inline atom?)
 
 ;;;-----------------------------------------------------------------------------
@@ -127,10 +119,8 @@
   (defun dec (x) ((opencoded-lambda (x) (fpi-dec)) x))
   (declare-inline dec)
 
-  (defun int-zerop (x) ((opencoded-lambda (x) (fpi-zerop)) x))
-  (declare-inline int-zerop)
-  (defun int-zerop (x) ((opencoded-lambda (x) (fpi-zerop)) x))
-  (declare-inline int-zerop)
+  (defun int-zero? (x) ((opencoded-lambda (x) (fpi-zerop)) x))
+  (declare-inline int-zero?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lists
@@ -226,6 +216,11 @@
     ((opencoded-lambda (x i v) (set-primitive-ref)) vec index value))
 
 ;;;-----------------------------------------------------------------------------
+;;; Object?
+;;;-----------------------------------------------------------------------------
+  (defun object? (x) (eul_is_object x))
+
+;;;-----------------------------------------------------------------------------
 ;;; The absent value
 ;;;-----------------------------------------------------------------------------
   (defconstant *absent* '(*absent*))
@@ -239,7 +234,7 @@
   (defconstant *argv* (getargv))
 
 ;;;-----------------------------------------------------------------------------
-;;; Getenv, system, time and object?
+;;; Getenv, system and time
 ;;;-----------------------------------------------------------------------------
   (defextern eul_getenv (<string>) <string> "getenv")
 
@@ -254,8 +249,6 @@
 
   (defun time-stop (x) (eul_time_stop x))
   (defextern eul_is_object (ptr) ptr)
-
-  (defun object? (x) (eul_is_object x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Exit

@@ -27,7 +27,7 @@
     (let ((expander
            (cond
             ((symbol? x) (lambda (x e) (import-syntax-module x)))
-            ((null? (consp x)) (lambda (x e) x))
+            ((null? (cons? x)) (lambda (x e) x))
             ((symbol? (car x))
              (let ((sx-import-expander (get-syntax-import-expander (car x))))
                (or sx-import-expander
@@ -50,7 +50,7 @@
         (access-table-do
          (lambda (key binding)
            ;; Attention -- key is ptr to C string!
-           (if (consp binding)
+           (if (cons? binding)
                ;; Binding yet unexpanded
                (let ((binding-name (c-string-as-eul-symbol key)))
                  (set-syntax-binding binding binding-name))

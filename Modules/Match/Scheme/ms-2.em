@@ -1428,7 +1428,7 @@
 (defconstant slib:error (lambda (msg val) (error "~a ~s~%" msg val)))
 (defun memq (item collection) (member item collection eq))
 (defconstant gentemp gensym)
-(defconstant pair? consp)
+(defconstant pair? cons?)
 (defconstant eq? eq)
 (defconstant symbol? symbol?)
 (defconstant null? null)

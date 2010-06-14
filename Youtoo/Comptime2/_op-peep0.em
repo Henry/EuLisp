@@ -20,7 +20,7 @@
                          (append!
                           (map
                            (lambda (param)
-                             (if (or (null? (symbolp param)) (eq param '*))
+                             (if (or (null? (symbol? param)) (eq param '*))
                                  '*no-variable*
                                param))
                            (cdr (car lhs)))

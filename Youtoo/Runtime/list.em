@@ -11,7 +11,7 @@
    import (telos convert compare collect copy number fpi)
    export (<null> <cons> <list>
            accumulate-list accumulate1-list
-           null? car cdr consp list? atom? cons list list-size
+           null? car cdr cons? list? atom? cons list list-size
            list-ref init-list-ref assoc-list-ref list-drop
            caar cadr cdar cddr
            caddr cdadr cddar caadr cdaar cadar caaar cdddr cadddr
@@ -45,7 +45,7 @@
   (defmethod binary= ((x <list>) (y <list>))
     (labels
       ((loop (l1 l2)
-             (if (and (consp l1) (consp l2))
+             (if (and (cons? l1) (cons? l2))
                  (and (binary= (car l1) (car l2))
                       (loop (cdr l1) (cdr l2)))
                (if l1
@@ -338,13 +338,13 @@
 ;;;  Convert to a proper list
 ;;;-----------------------------------------------------------------------------
   (defun as-proper-list (l)
-    (if (consp l)
+    (if (cons? l)
         (let ((x (cdr l)))
           (if (and x (atom? x))
               ((setter cdr) l (cons (cdr l) ())) ; destructive!
             (as-proper-list (cdr l))))
       ())
-    (if (or (consp l) (null? l))
+    (if (or (cons? l) (null? l))
         l
       (list l)))
 
@@ -359,7 +359,7 @@
            (if (null? ll) res
              (rev (cdr ll) (cons (car ll) res))))
       (loop (ll res)
-            (if (consp ll)
+            (if (cons? ll)
                 (loop (cdr ll) (cons (car ll) res))
               (rev res ll))))
       (loop l ())))
@@ -370,7 +370,7 @@
            (if (null? ll) res
              (rev (cdr ll) (cons (car ll) res))))
       (loop (ll res)
-            (if (consp ll)
+            (if (cons? ll)
                 (loop (cdr ll) (cons (deep-copy (car ll)) res))
               (if ll
                   (rev res (deep-copy ll))

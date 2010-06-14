@@ -38,7 +38,7 @@
            (cond
             ((symbol? x) (get-id-expander x)) ; simple identifier
             ((syntax-obj? x) (lambda (x env e) x)) ; already expanded
-            ((null? (consp x)) (lambda (x env e) ; literal constant
+            ((null? (cons? x)) (lambda (x env e) ; literal constant
                                 (make <literal-const> value: x)))
             ((symbol? (car x)) (or (get-macro-expander (car x))
                                    (get-expr-expander (car x))
@@ -208,11 +208,11 @@
 
   (defun rest-args? (args)
     (or (symbol? args)
-        (and (consp args)
+        (and (cons? args)
              (not (proper-list? args)))))
 
   (defun lambda-rest-args? (op)
-    (if (not (consp op))
+    (if (not (cons? op))
         ()
       (let ((lambda-type (car op)))
         (cond ((or (eq lambda-type 'lambda)
@@ -331,14 +331,14 @@
                          ;; x = 0
                          ((and (integer? arg2)
                                (= arg2 0))
-                          (e `(int-zerop ,arg1) env e))
+                          (e `(int-zero? ,arg1) env e))
                          ;; 0 = x
                          ((and (integer? arg1)
                                (= arg1 0))
-                          (e `(int-zerop ,arg2) env e))
+                          (e `(int-zero? ,arg2) env e))
                          (t
                           (default-appl-expander op params nargs env)))))
-                ((and (consp op) (eq (car op) 'lambda))
+                ((and (cons? op) (eq (car op) 'lambda))
                  (e `((inlined-lambda ,@(cdr op)) ,@params) env e))
                 (t
                  (default-appl-expander op params nargs env)))))))
@@ -593,7 +593,7 @@
                         (if (eq (car xx) 'unquote)
                             (list 'quasiquote xx)
                           (let ((x1 (car xx)))
-                            (if (consp x1)
+                            (if (cons? x1)
                                 (let ((x11 (car x1)))
                                   (if (eq x11 'unquote)
                                       (list 'cons (car (cdr x1))
@@ -742,7 +742,7 @@
               (body (cdr (cdr x))))
           (cond ((null? decls)                 ; empty let
                  (e `(progn ,@body) env e))
-                ((consp decls)                ; simple let
+                ((cons? decls)                ; simple let
                  (if (= (list-size decls) 1)  ; let -> let*
                      (e `(let* ,decls ,@body) env e)
                    (let* ((args (filter-vars decls))
@@ -766,7 +766,7 @@
       (with-ct-handler "bad let* syntax" x
         (cond ((null? (cadr x))
                (expand-expr (list 'progn (caddr x)) env))
-              ((consp (cadr x))
+              ((cons? (cadr x))
                (let* ((inits (filter-init-forms (cadr x)))
                       (vars-and-env (expand-local-static-vars*
                                      (filter-vars (cadr x)) inits env))
@@ -851,10 +851,10 @@
 ;;; Filter vars/init-forms out of a list like '((a u) b (c w))
 ;;;-----------------------------------------------------------------------------
   (defun filter-vars (l)
-    (map1-list (lambda (x) (if (consp x) (car x) x)) l))
+    (map1-list (lambda (x) (if (cons? x) (car x) x)) l))
 
   (defun filter-init-forms (l)
-    (map1-list (lambda (x) (if (consp x) (cadr x) ())) l))
+    (map1-list (lambda (x) (if (cons? x) (cadr x) ())) l))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

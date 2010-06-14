@@ -80,7 +80,7 @@
     (args: . 229)
     (fun: . 228)
     ("no lexical binding ~a available" . 224)
-    (int-zerop . 216)
+    (int-zero? . 216)
     (binary= . 215)
     (binary- . 214)
     (int-binary- . 213)

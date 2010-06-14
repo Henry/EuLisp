@@ -45,7 +45,7 @@
           (labels
               ((loop (j)
                      (let ((entry (vector-ref entries j)))
-                       (if (consp entry)
+                       (if (cons? entry)
                            (if (comp-fun (car entry) key)
                                (cdr entry)
                              (let ((k (int-binary+ j 1)))
@@ -88,7 +88,7 @@
         (labels
             ((loop (j)
                    (let ((entry (vector-ref entries j)))
-                     (if (consp entry)
+                     (if (cons? entry)
                          (if (comp-fun (car entry) key)
                              (let ((old-value (cdr entry)))
                                ((setter cdr) entry x)
@@ -132,7 +132,7 @@
                  (loop (j)
                        (if (int-binary< j old-n)
                            (let ((entry (vector-ref entries j)))
-                             (if (consp entry)
+                             (if (cons? entry)
                                  (let* ((key (car entry))
                                         (i (int-binary-mod
                                             (hash-fun key) new-n)))
@@ -163,7 +163,7 @@
     ;; Attention -- key (ie (car entry) might not be a Lisp object when tab
     ;; is a simple hash table
     (do1-vector (lambda (entry)
-                  (if (consp entry)
+                  (if (cons? entry)
                       (fun (car entry) (cdr entry))
                     ()))
                 (table-entries tab)))
@@ -187,7 +187,7 @@
                      (if (int-binary< i n)
                          (let ((entry (vector-ref entries i))
                                (new-i (int-binary+ i 1)))
-                           (if (consp entry)
+                           (if (cons? entry)
                                (loop new-i
                                      (cons (fun (car entry) (cdr entry))
                                            res))
@@ -206,7 +206,7 @@
 
   (defun anyp1-table (fun tab)
     (anyp1-vector (lambda (entry)
-                    (if (consp entry)
+                    (if (cons? entry)
                         ()
                       (fun (car entry) (cdr entry))))
                   (table-entries tab)))
@@ -221,7 +221,7 @@
 
   (defun all?1-table (fun tab)
     (all?1-vector (lambda (entry)
-                    (if (consp entry)
+                    (if (cons? entry)
                         ()
                       (fun (car entry) (cdr entry))))
                   (table-entries tab)))
@@ -235,7 +235,7 @@
       (let ((fun (car preds)))
         (member x (table-entries tab)
                 (lambda (entry)
-                  (if (consp entry)
+                  (if (cons? entry)
                       (fun x (car entry) (cdr entry))
                     ()))))))
 

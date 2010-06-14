@@ -11,37 +11,37 @@
    import (level1))
 
 ;;;-----------------------------------------------------------------------------
-;;; Clearly the following definition should be elsewhere
-;;;
-;;; test cases
-;;;
-;;; (match-let 'foo '((a 1)) 'bar)
-;;; => (let ((a (if (null? foo) 1 (car foo)))) bar)
-;;;
-;;; (match-let 'foo '((a 1) (b 2)) 'bar)
-;;; => (let ((a ()) (b ()))
-;;;      (progn (if (null? foo) (setq a 1)
-;;;                 (progn (setq a (car foo)) (setq foo (cdr foo))))
-;;;             (if (null? foo) (setq b 2)
-;;;                 (progn (setq b (car foo)) (setq foo (cdr foo)))))
-;;;      bar)
-;;;
-;;; (match-let '(foo bar) '((a 1) (b 2)) 'baz)
-;;; => (let ((G00055 (foo bar)) (a ()) (b ()))
-;;;      (progn (if (null? G00055) (setq a 1)
-;;;                 (progn (setq a (car G00055)) (setq G00055 (cdr G00055))))
-;;;             (if (null? G00055) (setq b 2)
-;;;                 (progn (setq b (car G00055)) (setq G00055 (cdr G00055)))))
-;;;      bar)
+;;; (match-let (expression default-initializers) form*)
+;;;-----------------------------------------------------------------------------
+;;;  Examples of use
+;;
+;;;   (match-let foo ((a 1)) bar)
+;;    => (let ((a (if (null? foo) 1 (car foo)))) bar)
+;;
+;;;   (match-let foo ((a 1) (b 2)) bar)
+;;    => (let ((a ()) (b ()))
+;;        (progn (if (null? foo) (setq a 1)
+;;                   (progn (setq a (car foo)) (setq foo (cdr foo))))
+;;               (if (null? foo) (setq b 2)
+;;                   (progn (setq b (car foo)) (setq foo (cdr foo)))))
+;;        bar)
+;;
+;;;   (match-let '(foo bar) ((a 1) (b 2)) baz)
+;;    => (let ((G00055 (foo bar)) (a ()) (b ()))
+;;        (progn (if (null? G00055) (setq a 1)
+;;                   (progn (setq a (car G00055)) (setq G00055 (cdr G00055))))
+;;               (if (null? G00055) (setq b 2)
+;;                   (progn (setq b (car G00055)) (setq G00055 (cdr G00055)))))
+;;        bar)
 ;;;-----------------------------------------------------------------------------
   (defmacro match-let (expression default-initializers . body)
-    (if (= 1 (size default-initializers))
+    (if (eql 1 (size default-initializers))
         `(let ((,(caar default-initializers)
                 (if (null? ,expression)
                     ,(cadr (car default-initializers))
                   (car ,expression))))
            ,@body)
-      (let* ((var (if (symbolp expression) expression (gensym)))
+      (let* ((var (if (symbol? expression) expression (gensym)))
              (update-vars
               (labels
                ((loop (l)
@@ -55,7 +55,7 @@
                            (setq ,var (cdr ,var))))
                      (loop (cdr l))))))
                (loop default-initializers))))
-        `(let (,@(if (symbolp expression) () `((,var ,expression)))
+        `(let (,@(if (symbol? expression) () `((,var ,expression)))
                ,@(map (lambda (x) `(,(car x) ())) default-initializers))
            (progn ,@update-vars)
            ,@body))))
@@ -71,8 +71,8 @@
            (unlock ,the-lock)))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Temporarily reconnects source of identifier to expression
 ;;; (with-source (identifier expression) form*)
+;;;  Temporarily reconnects source of identifier to expression
 ;;;-----------------------------------------------------------------------------
   (defmacro with-source (decl . body)
     (let ((the-source (gensym)))
@@ -83,8 +83,8 @@
            (reconnect ,the-source ,(car decl))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Temporarily reconnects sink of identifier to expression
 ;;; (with-source (identifier expression) form*)
+;;;  Temporarily reconnects sink of identifier to expression
 ;;;-----------------------------------------------------------------------------
   (defmacro with-sink (decl . body)
     (let ((the-source (gensym)))
@@ -95,7 +95,8 @@
            (reconnect ,the-source ,(car decl))))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Temporarily binds var with input stream
+;;;  (with-input-file (var-and-file-name)  form*)
+;;;  Temporarily binds var with input stream
 ;;;-----------------------------------------------------------------------------
   (defmacro with-input-file (var-and-file-name . body)
     (let ((s (car var-and-file-name))
@@ -108,7 +109,8 @@
          ,res)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Temporarily connects stdout to file-name
+;;;  (with-output-file (var-and-file-name)  form*)
+;;;  Temporarily connects stdout to file-name
 ;;;-----------------------------------------------------------------------------
   (defmacro with-output-file (var-and-file-name . body)
     (let ((s (car var-and-file-name))
@@ -121,7 +123,8 @@
          ,res)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Open input file with path
+;;; (with-input-file-of-path (decl) form*)
+;;;  Open input file with path
 ;;;-----------------------------------------------------------------------------
   (defmacro with-input-file-of-path (decl . body)
     (let ((s (car decl))

@@ -15,7 +15,8 @@
            write prin print prin-one-char prin-char
            *int-size-in-decimal-digits* *double-size-in-decimal-digits*
            output-list-contents
-           prin-string prin-address make-space file-lookup))
+           prin-string prin-address make-space file-lookup
+           print-all sprint-all))
 
 ;;;------------------------------------------------------------------------
 ;;; Stream Manipulation Functions
@@ -359,7 +360,7 @@
     (labels
      ((loop (ll)
             (fun (car ll) s)
-            (cond ((consp (cdr ll))
+            (cond ((cons? (cdr ll))
                    (prin-one-char #\  s)
                    (loop (cdr ll)))
                   (t

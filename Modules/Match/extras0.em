@@ -8,10 +8,10 @@
                      (cond
                       ((null? vars)
                        `(progn ,@body))
-                      ((consp vars)
+                      ((cons? vars)
                        (let ((exp (car vars)))
                          (cond
-                          ((consp exp)
+                          ((cons? exp)
                            (cond
                             ((null? (cdr exp))
                              `(and ,(car exp) ,(expand (cdr vars) body)))

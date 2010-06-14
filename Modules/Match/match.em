@@ -298,7 +298,8 @@
                             (display (car x))
                             (display " in ")
                             (display match-expr)
-                            (newline)))))
+                            (newline))
+                   ())))
              plist)))
        (validate-pattern
          (lambda (pattern)
@@ -500,7 +501,8 @@
                      (if (memq p a)
                          (match:syntax-err
                            pattern
-                           "duplicate variable in pattern"))
+                           "duplicate variable in pattern")
+                       ())
                      (k p (cons p a)))
                     ((and (pair? p)
                           (eq? 'quote (car p)))
@@ -555,7 +557,8 @@
                                     (if (not (permutation car-a first-a))
                                         (match:syntax-err
                                           pattern
-                                          "variables of or-pattern differ in"))
+                                          "variables of or-pattern differ in")
+                                      ())
                                     (or* (cdr plist)
                                          (lambda (cdr-p)
                                            (k (cons car-p cdr-p)))))))))))
@@ -571,7 +574,8 @@
                                   (if (not (permutation a a2))
                                       (match:syntax-err
                                         p
-                                        "no variables allowed in"))
+                                        "no variables allowed in")
+                                    ())
                                   (k `(not ,p2) a))))))
                     ((and (pair? p)
                           (pair? (cdr p))

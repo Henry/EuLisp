@@ -9,19 +9,19 @@
 (defmodule bigrat
   (syntax (macros)
    import (level1 bigint mpz mpq)
-   export (<bigrat> bigratp make-bigrat-fast numerator denumerator))
+   export (<bigrat> bigrat? make-bigrat-fast numerator denumerator))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class definition
 ;;;-----------------------------------------------------------------------------
   (defclass <bigrat> (<number>)
     ((bigrat-value accessor: bigrat-value keyword: value: requiredp: t))
-    predicate: bigratp)
+    predicate: bigrat?)
 
   (defmethod initialize ((x <bigrat>) inits)
     (call-next-method)
     (let ((val (bigrat-value x)))
-      (if (consp val)
+      (if (cons? val)
           (let ((a (car val))
                 (b (cdr val)))
             (cond ((and (int? a) (int? b))
@@ -188,10 +188,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Misc
 ;;;-----------------------------------------------------------------------------
-  ;(defun evenp (x)
+  ;(defun even? (x)
   ; (mpz-cmp-si (mpz-mod x 2) 0))
 
-  ;(defun oddp (x) (not (evenp x)))
+  ;(defun odd? (x) (not (even? x)))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

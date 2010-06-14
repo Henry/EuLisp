@@ -413,7 +413,7 @@
           (check-bv-delimiter)
           (write-to-bv-str "~a" x)
           (setq *bytevector-size* (+ *bytevector-size* 1)))
-         ((consp x)
+         ((cons? x)
           (let ((key (car x))
                 (args (cdr x))
                 (arg1 (car (cdr x))))

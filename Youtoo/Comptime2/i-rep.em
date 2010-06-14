@@ -103,7 +103,7 @@
             (cond ((eq x 't) t)
                   ((eq x '?) ?)
                   (t (dynamic-binding-ref x *current-module-name*))))
-           ((consp x)
+           ((cons? x)
             (let ((key (car x))
                   (rest (cdr x)))
               (cond ((eq key 'quote)
