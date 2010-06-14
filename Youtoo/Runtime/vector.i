@@ -23,7 +23,7 @@
     ((name . member1-vector) (pos . 2) (origin vector . member1-vector))
     ((name . <vector>) (pos . 8) (origin vector . <vector>) (class . constant))
     ((name . vector?) (pos . 5) (origin vector . vector?))
-    ((name . make-vector) (pos . 41) (origin boot1 . make-vector))
+    ((name . make-vector) (pos . 40) (origin boot1 . make-vector))
     ((name . all?1-vector) (pos . 12) (origin vector . all?1-vector))
    )
    local-literals (

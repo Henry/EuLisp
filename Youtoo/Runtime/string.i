@@ -6,9 +6,9 @@
    syntax (_telos0)
    full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc convert copy compare callback collect integer number fpi)
    export (
-    ((name . member1-string) (pos . 55) (origin boot1 . member1-string) (class . ff) (arity . 2) (ff (1 3) 6 (eul_str_member1 . ff_stub_eul_str_member1266)))
+    ((name . member1-string) (pos . 54) (origin boot1 . member1-string) (class . ff) (arity . 2) (ff (1 3) 6 (eul_str_member1 . ff_stub_eul_str_member1264)))
     ((name . eul_list_as_eul_string) (pos . 21) (origin string . eul_list_as_eul_string) (class . ff) (arity . 1) (ff (8) 6 (eul_list_as_eul_string . ff_stub_eul_list_as_eul_string2848)))
-    ((name . tailstring) (pos . 54) (origin boot1 . tailstring) (class . ff) (arity . 2) (ff (3 0) 3 (eul_tailstr . ff_stub_eul_tailstr265)))
+    ((name . tailstring) (pos . 53) (origin boot1 . tailstring) (class . ff) (arity . 2) (ff (3 0) 3 (eul_tailstr . ff_stub_eul_tailstr263)))
     ((name . do1-string) (pos . 10) (origin string . do1-string))
     ((name . <string>) (pos . 13) (origin string . <string>) (class . constant))
     ((name . string-append) (pos . 11) (origin string . string-append))

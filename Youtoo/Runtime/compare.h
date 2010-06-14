@@ -15,7 +15,7 @@ extern LispRef compare_bindings[];
 #define max_fn_index 5 
 #define __X61_fn_index 2 
 #define eq_fn_index 23 
-#define eql_fn_index 47 
+#define eql_fn_index 46 
 #define ___X33_X61_fn_index 7 
 #define __X60_fn_index 3 
 #define binary__X61_fn_index 9 

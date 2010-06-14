@@ -13,7 +13,7 @@ extern LispRef symbol_bindings[];
 #define symbol_name_fn_index 61 
 #define symbol_exists__X63_fn_index 4 
 #define keyword__X63_fn_index 2 
-#define symbolp_fn_index 46 
+#define symbolp_fn_index 45 
 #define _name__X60_X62_fn_index 33 
 #define gensym_fn_index 6 
 #define keyword_name_fn_index 6 

@@ -61,7 +61,7 @@
            (local-name (binding-local-name? x))
            (local-index (binding-local-index? x))
            (module-name (if (modulep module) (module-name? module) module)))
-      (if (intp local-index)
+      (if (int? local-index)
           (format s "#<binding: ~a:~a:~a>" module-name local-name local-index)
         (format s "#<binding: ~a:~a>" module-name local-name))))
 

@@ -53,8 +53,8 @@ extern LispRef mop_class_bindings[];
 #define class_direct_subclasses_fn_index 62 
 #define _object__X60_X62_fn_index 20 
 #define symbol_name_fn_index 61 
-#define slot_keyword_fn_index 59 
-#define generic_function_domain_fn_index 60 
+#define slot_keyword_fn_index 60 
+#define generic_function_domain_fn_index 59 
 #define sf_size_fn_index () 
 #define class_code_fn_index 19 
 #define function_size_fn_index () 
