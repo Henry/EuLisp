@@ -237,7 +237,7 @@
                                            ; (slot-default slot)
                                            ))))
                                (select (lambda (s)
-                                         (null? (anyp (lambda (super)
+                                         (null? (any? (lambda (super)
                                                        (member s (class-slots super)))
                                                      supers)))
                                        (class-slots x)))))
@@ -435,7 +435,7 @@
         ((loop (cl)
                (if (eq (class-name cl) name)
                    cl
-                 (anyp loop (class-direct-subclasses cl)))))
+                 (any? loop (class-direct-subclasses cl)))))
       (loop <object>)))
 
   (defun eul-serial-make-state (value-stack value-stack-size

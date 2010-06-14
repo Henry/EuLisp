@@ -330,7 +330,7 @@
     'eul_nil)
 
   (defun static-allocatable? (x)
-    (null? (or (symbolp x) (keyword? x) (null? x) (vectorp x) (float? x))))
+    (null? (or (symbolp x) (keyword? x) (null? x) (vector? x) (float? x))))
 
   (defmethod convert-constant ((value <cons>))
     (let* ((loc (gensym "cons_"))

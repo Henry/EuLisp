@@ -9,9 +9,10 @@
 (defmodule boot1
   (syntax (_boot0)
    export (car cdr cons list
-           stringp character? symbolp consp intp listp atom? null?
+           stringp string? character? symbolp symbol? consp cons? intp int?
+           listp list? atom? null?
            simple-function? simple-generic-function?
-           + - * / % mod < = inc dec int-zerop
+           + - * / % mod < = inc dec int-zerop int-zero?
            eq eql equal
            format1 write-object prin print
            make-symbol make-keyword
@@ -65,15 +66,23 @@
 
   (defun stringp (x) ((opencoded-lambda (u) (stringp)) x))
   (declare-inline stringp)
+  (defun string? (x) ((opencoded-lambda (u) (stringp)) x))
+  (declare-inline string?)
 
   (defun symbolp (x) ((opencoded-lambda (u) (symbolp)) x))
   (declare-inline symbolp)
+  (defun symbol? (x) ((opencoded-lambda (u) (symbolp)) x))
+  (declare-inline symbol?)
 
   (defun consp (x) ((opencoded-lambda (u) (consp)) x))
   (declare-inline consp)
+  (defun cons? (x) ((opencoded-lambda (u) (consp)) x))
+  (declare-inline cons?)
 
   (defun intp (x) ((opencoded-lambda (u) (fpip)) x))
   (declare-inline intp)
+  (defun int? (x) ((opencoded-lambda (u) (fpip)) x))
+  (declare-inline int?)
 
   (defun simple-function? (x) ((opencoded-lambda (u) (lambdap)) x))
   (declare-inline simple-function?)
@@ -83,6 +92,8 @@
 
   (defun listp (x) ((opencoded-lambda (u) (listp)) x))
   (declare-inline listp)
+  (defun list? (x) ((opencoded-lambda (u) (listp)) x))
+  (declare-inline list?)
 
   (defun atom? (x) (null? (consp x)))
   (declare-inline atom?)
@@ -122,6 +133,8 @@
 
   (defun int-zerop (x) ((opencoded-lambda (x) (fpi-zerop)) x))
   (declare-inline int-zerop)
+  (defun int-zero? (x) ((opencoded-lambda (x) (fpi-zerop)) x))
+  (declare-inline int-zero?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lists

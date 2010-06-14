@@ -84,7 +84,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Anyp
 ;;;-----------------------------------------------------------------------------
-  (defmethod anyp ((fun <function>) (str <string>) . cs)
+  (defmethod any? ((fun <function>) (str <string>) . cs)
     (if (null? cs)
         (anyp1-string fun str)
       (call-next-method)))

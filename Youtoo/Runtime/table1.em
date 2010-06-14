@@ -94,7 +94,7 @@
     ;; assume table entries as cons cells: (key . value)!
     (let ((entries (table-entries tab))
           (res ()))
-      (if (vectorp entries)
+      (if (vector? entries)
           (progn
             (do1-vector
              (lambda (x) (if (null? x) () (setq res (cons (cdr x) res))))
@@ -108,7 +108,7 @@
     ;; assume table entries as cons cells: (key . value)!
     (let ((entries (table-entries tab))
           (res ()))
-      (if (vectorp entries)
+      (if (vector? entries)
           (progn
             (do1-vector
              (lambda (x) (if (null? x) () (setq res (cons (car x) res))))

@@ -83,7 +83,7 @@
   (defconstant pair? consp)
   (defconstant string? stringp)
   (defconstant symbol? symbolp)
-  (defconstant vector? vectorp)
+  (defconstant vector? vector?)
 
   ;; Conversions
   (defun list->vector (l) (convert l <vector>))

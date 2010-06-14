@@ -1400,7 +1400,7 @@
 (defun list->vector (l) (convert l <vector>))
 (defun vector l
   (convert l <vector>))
-(defconstant vector? vectorp)
+(defconstant vector? vector?)
 (defconstant list? listp)
 (defconstant equal? equal)
 (defconstant eq? eq)

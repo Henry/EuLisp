@@ -17,7 +17,7 @@
 ;;;-----------------------------------------------------------------------------
   (defun make-method (method-class domain fun inits)
     (if (and (eq method-class <simple-method>)
-             ;(vectorp domain)
+             ;(vector? domain)
              (function? fun)
              (null? inits))
         (let ((meth (primitive-allocate <simple-method> method-size)))

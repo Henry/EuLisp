@@ -110,14 +110,14 @@ void initialize_module_i_ffi()
 
   eul_allocate_static_string(str_2859, "bad defextern result converter ~a", 33);
   /* Byte-vector with size: 14 is_init: 0 index: 30 binding: res-converter-index */
-  static const void *G002857[] = {I(aa,1b,24,00),B(i_ffi ,5),I(24,00,00,00),B(collect ,17),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,1a),I(82,23,00,00),B(i_ffi ,29),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
+  static const void *G002857[] = {I(aa,1b,24,00),B(i_ffi ,5),I(24,00,00,00),B(collect ,16),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,1a),I(82,23,00,00),B(i_ffi ,29),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 31 binding: res-converter-as-C-type */
   static const void *G002860[] = {I(aa,24,00,00),B(i_ffi ,4),I(1c,02,45,01)};
 
   eul_allocate_static_string(str_2864, "bad defextern argument converter ~a", 35);
   /* Byte-vector with size: 14 is_init: 0 index: 33 binding: arg-converter-index */
-  static const void *G002862[] = {I(aa,1b,24,00),B(i_ffi ,9),I(24,00,00,00),B(collect ,17),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,1a),I(82,23,00,00),B(i_ffi ,32),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
+  static const void *G002862[] = {I(aa,1b,24,00),B(i_ffi ,9),I(24,00,00,00),B(collect ,16),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,1a),I(82,23,00,00),B(i_ffi ,32),I(1f,03,24,00),B(i_notify ,6),I(3d,03,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 34 binding: arg-converter-as-C-type */
   static const void *G002865[] = {I(aa,24,00,00),B(i_ffi ,2),I(1c,02,45,01)};

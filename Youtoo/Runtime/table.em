@@ -39,7 +39,7 @@
     (let ((entries (table-entries tab))
           (comp-fun (table-comparator tab))
           (hash-fun (table-hash-function tab)))
-      (if (vectorp entries)
+      (if (vector? entries)
         (let* ((n (vector-size entries))
                (i (int-binary-mod (hash-fun key) n)))
           (labels
@@ -80,7 +80,7 @@
     (let ((entries (table-entries tab))
           (comp-fun (table-comparator tab))
           (hash-fun (table-hash-function tab)))
-      (if (vectorp entries) ()
+      (if (vector? entries) ()
         ((setter table-entries) tab
          (setq entries (make-vector *min-table-entries*))))
       (let* ((n (vector-size entries))
@@ -112,7 +112,7 @@
   (defun table-rehash (tab)
     (let ((entries (table-entries tab))
           (hash-fun (table-hash-function tab)))
-      (if (vectorp entries)
+      (if (vector? entries)
           (let* ((old-n (vector-size entries))
                  (new-n (int-binary* old-n *table-fill-factor*))
                  (new-entries (make-vector new-n))
@@ -181,7 +181,7 @@
     ;; is a simple hash table
     (let* ((entries (table-entries tab))
            (n (vector-size entries)))
-      (if (vectorp entries)
+      (if (vector? entries)
           (labels
               ((loop (i res)
                      (if (int-binary< i n)
@@ -199,10 +199,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Anyp
 ;;;-----------------------------------------------------------------------------
-  (defmethod anyp ((fun <function>) (tab <hash-table>) . cs)
+  (defmethod any? ((fun <function>) (tab <hash-table>) . cs)
     (if (null? cs)
         (anyp1-table fun tab)
-      (error "anyp on multiple tables not yet implemented")))
+      (error "any? on multiple tables not yet implemented")))
 
   (defun anyp1-table (fun tab)
     (anyp1-vector (lambda (entry)

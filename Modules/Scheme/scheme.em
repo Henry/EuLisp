@@ -532,7 +532,7 @@
     (list->vector x))
 
   (defun vector? (x)
-     (vectorp x))
+     (vector? x))
   (declare-inline vector?)
 
   (defun vector-length (x)
@@ -546,7 +546,7 @@
   (declare-inline vector-set!)
 
   (defun vector? (x)
-    (vectorp x))
+    (vector? x))
   (declare-inline vector?)
 
   (export write)

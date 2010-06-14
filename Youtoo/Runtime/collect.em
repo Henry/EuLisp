@@ -12,7 +12,7 @@
    export (name
            <collection> <sequence>
            collectionp sequence?
-           accumulate accumulate1 anyp all? do fill find map member select
+           accumulate accumulate1 any? all? do fill find map member select
            element delete remove reset
            emptyp size
            reverse reverse!
@@ -68,7 +68,7 @@
 ;;;-----------------------------------------------------------------------------
   (defgeneric accumulate (f i c))
   (defgeneric accumulate1 (f c))
-  (defgeneric anyp (f c . cs))
+  (defgeneric any? (f c . cs))
   (defgeneric all? (f c . cs))
   (defgeneric do (f c . cs))
   (defgeneric fill (c x . keys))
@@ -77,7 +77,7 @@
   (defgeneric member (v c . f))
   (defgeneric select (f c . cs))
 
-  (defmethod anyp ((fun <function>) (c <collection>) . cs)
+  (defmethod any? ((fun <function>) (c <collection>) . cs)
     (let* ((ccs (cons c cs))
            (n (apply min (map size ccs))))
       (labels

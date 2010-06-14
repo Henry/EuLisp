@@ -206,7 +206,7 @@
                 (loop (cdr ll) (int-binary+ i 1))))))
      (loop l 0)))
 
-  (defmethod anyp ((fun <function>) (l <list>) . cs)
+  (defmethod any? ((fun <function>) (l <list>) . cs)
     (if (null? cs)
         (anyp1-list fun l)
       (call-next-method)))

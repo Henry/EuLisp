@@ -9,7 +9,7 @@
 (defmodule vector
   (syntax (_telos0)
    import (telos convert copy collect compare fpi list callback)
-   export (<vector> vectorp make-vector vector-size
+   export (<vector> vector? make-vector vector-size
            maximum-vector-size
            vector-ref subvector vector-append vector-empty?
            do1-vector map1-vector anyp1-vector all?1-vector
@@ -19,7 +19,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Classes: <vector>
 ;;;-----------------------------------------------------------------------------
-  (defprimclass <vector> vector-class (<sequence>) () predicate: vectorp)
+  (defprimclass <vector> vector-class (<sequence>) () predicate: vector?)
 
   (defmethod initialize ((vec <vector>) inits)
     (call-next-method)
@@ -65,7 +65,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Anyp
 ;;;-----------------------------------------------------------------------------
-  (defmethod anyp ((fun <function>) (vec <vector>) . cs)
+  (defmethod any? ((fun <function>) (vec <vector>) . cs)
     (if (null? cs)
         (anyp1-vector fun vec)
       (call-next-method)))

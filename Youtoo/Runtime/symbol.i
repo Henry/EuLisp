@@ -11,7 +11,7 @@
     ((name . symbol-name) (pos . 61) (origin mop-class . symbol-name) (inline (G00759 (static-ref0) (primitive-ref))))
     ((name . symbol-exists?) (pos . 4) (origin symbol . symbol-exists?))
     ((name . keyword?) (pos . 2) (origin symbol . keyword?))
-    ((name . symbolp) (pos . 42) (origin boot1 . symbolp) (inline (G0045 (symbolp))))
+    ((name . symbolp) (pos . 48) (origin boot1 . symbolp) (inline (G0047 (symbolp))))
     ((name . <name>) (pos . 33) (origin mop-class . <name>) (class . constant))
     ((name . gensym) (pos . 6) (origin symbol . gensym))
     ((name . keyword-name) (pos . 6) (origin mop-class . keyword-name) (inline (G00761 (static-ref0) (primitive-ref))))
