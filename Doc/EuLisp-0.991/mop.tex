@@ -245,9 +245,9 @@ list.
 \result%
 This function returns the class which is the class of all methods of the generic
 function.  Each method attached to a generic function must be an instance of
-this class. When a method is created using \macroref{defmethod},
-\macroref{method-lambda}, or by using the {\tt method} generic function
-option in a \defopref{defgeneric} or \macroref{generic-lambda}, it will be an
+this class. When a method is created using \defopref{defmethod},
+\specopref{method-lambda}, or by using the {\tt method} generic function
+option in a \defopref{defgeneric} or \specopref{generic-lambda}, it will be an
 instance of this class by default.
 
 \function{generic-function-methods}
@@ -685,7 +685,7 @@ The basic call structure is:
         \item[domain, list] The list of argument classes.
         % \item[range, class] The class of the result.
         \item[function, fn] A function, created with
-        \macroref{method-function-lambda}.
+        \specopref{method-function-lambda}.
         \item[generic-function, gf] A generic function.
     \end{options}
 \end{specargs}

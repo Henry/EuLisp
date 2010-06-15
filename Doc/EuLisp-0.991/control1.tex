@@ -149,44 +149,44 @@ exists.
 \label{subsubsec:exitext}
 \begin{optPrivate}
     There is no prevention mechanism in CL either---can capture
-    \macroref{return-from} in a function and pass it down (RPG).
+    \specopref{return-from} in a function and pass it down (RPG).
 
-    GN would like arbitrary tags for \macroref{catch} and \macroref{throw}---not
+    GN would like arbitrary tags for \specopref{catch} and \specopref{throw}---not
     just symbols.
 \end{optPrivate}
 %
 \begin{optDefinition}
 
-\macro{catch}
+\specop{catch}
 %
 \Syntax
 \defSyntax{catch}{
 \begin{syntax}
     \scdef{catch-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{catch} \scref{tag} \scref{body} ) \\
+    \>  ( \specopref{catch} \scref{tag} \scref{body} ) \\
     \scdef{tag}: \\
     \>  \scref{symbol}
 \end{syntax}}%
 \showSyntaxBox{catch}
 %
 \remarks%
-The \macroref{catch} operator is similar to \macroref{block}, except that the
+The \specopref{catch} operator is similar to \specopref{block}, except that the
 scope of the name (\scref{tag}) of the exit function is dynamic.  The catch
 \scref{tag} must be a \syntaxref{symbol} because it is used as a dynamic
 variable to create a dynamically scoped binding of \scref{tag} to the
-continuation of the \macroref{catch} form.  The continuation can be invoked
-anywhere within the dynamic extent of the \macroref{catch} form by using
-\macroref{throw}.  The \scref{form}s are evaluated in sequence and the value of
-the last one is returned as the value of the \macroref{catch} form.
+continuation of the \specopref{catch} form.  The continuation can be invoked
+anywhere within the dynamic extent of the \specopref{catch} form by using
+\specopref{throw}.  The \scref{form}s are evaluated in sequence and the value of
+the last one is returned as the value of the \specopref{catch} form.
 %
 \rewriterules
 %
 \begin{RewriteTable}{catch}{lll}
-    (\macroref{catch}) & \rewrite &
+    (\specopref{catch}) & \rewrite &
         {\rm Is an error}\\
-    (\macroref{catch} \scref{tag}) & \rewrite &
+    (\specopref{catch} \scref{tag}) & \rewrite &
         (\specopref{progn} \scref{tag} ())\\
-    (\macroref{catch} \scref{tag} \scref{body}) & \rewrite &
+    (\specopref{catch} \scref{tag} \scref{body}) & \rewrite &
     \begin{minipage}[t]{0.3\columnwidth}
     \begin{tabbing}
         00\=00\= \kill
@@ -197,29 +197,29 @@ the last one is returned as the value of the \macroref{catch} form.
     \end{minipage}
 \end{RewriteTable}
 %
-Exiting from a \macroref{catch}, by whatever means, causes the restoration of
+Exiting from a \specopref{catch}, by whatever means, causes the restoration of
 the lexical environment and dynamic environment that existed before the
-\macroref{catch} was entered.  The above rewrite for \macroref{catch}, causes
+\specopref{catch} was entered.  The above rewrite for \specopref{catch}, causes
 the variable {\tt tmp} to be shadowed.  This is an artifact of the above
 presentation only and a conforming processor must not shadow any variables that
-could occur in the body of \macroref{catch} in this way.
+could occur in the body of \specopref{catch} in this way.
 %
 \seealso%
-\macroref{throw}.
+\specopref{throw}.
 
-\macro{throw}
+\specop{throw}
 %
 \Syntax
 \defSyntax{throw}{
 \begin{syntax}
     \scdef{throw-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{throw} \scref{tag} \scref{body} )
+    \>  ( \specopref{throw} \scref{tag} \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{throw}
 %
 \remarks%
-In \macroref{throw}, the \scref{tag} names the continuation of the
-\macroref{catch} from which to return.  \macroref{throw} is the invocation of
+In \specopref{throw}, the \scref{tag} names the continuation of the
+\specopref{catch} from which to return.  \specopref{throw} is the invocation of
 the continuation\index{general}{continuation} of the catch named \scref{tag}.
 The \scref{body} is evaluated and the value are returned as the value of the
 catch named by \scref{tag}.  The \scref{tag} is a symbol because it used to
@@ -229,16 +229,16 @@ continuation is bound.
 \rewriterules
 %
 \begin{RewriteTable}{throw}{lll}
-    (\macroref{throw}) & \rewrite &
+    (\specopref{throw}) & \rewrite &
         {\rm Is an error}\\
-    (\macroref{throw} \scref{tag}) & \rewrite &
+    (\specopref{throw} \scref{tag}) & \rewrite &
         ((\specopref{dynamic} \scref{tag}) ())\\
-    (\macroref{throw} \scref{tag} \scref{form}) & \rewrite &
+    (\specopref{throw} \scref{tag} \scref{form}) & \rewrite &
         ((\specopref{dynamic} \scref{tag}) \scref{form})
 \end{RewriteTable}
 %
 \seealso%
-\macroref{catch}.
+\specopref{catch}.
 %
 \end{optDefinition}
 

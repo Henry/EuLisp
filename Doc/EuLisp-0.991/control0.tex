@@ -20,7 +20,7 @@ conforming program cannot rely on adherence to these expansions.
     What happens with vectors, instances etc.  They can be printed out, so why
     can't they be constants too.
 
-    HED wants ids as well as ids and initializers for \macroref{let}.
+    HED wants ids as well as ids and initializers for \specopref{let}.
 \end{optPrivate}
 %
 \begin{optDefinition}
@@ -490,7 +490,7 @@ example {\tt ((\functionref{setter} \functionref{setter}) \functionref{car}
 \conditionref{cannot-update-setter}\indexcondition{<cannot-update-setter>})
 %
 \seealso%
-\defopref{defgeneric}, \macroref{defmethod}, \defopref{defclass},
+\defopref{defgeneric}, \defopref{defmethod}, \defopref{defclass},
 \defopref{defun}.
 
 \condition{no-setter}{general-condition}
@@ -523,9 +523,9 @@ the given accessor is immutable.
 \sclause{Conditional Expressions}
 %
 \begin{optPrivate}
-    \macroref{cond} rules are strange (RPG).
+    \specopref{cond} rules are strange (RPG).
 
-    Added \macroref{when} and \macroref{unless}.
+    Added \specopref{when} and \specopref{unless}.
 
     Moved these here after October '90 meeting.
 \end{optPrivate}
@@ -561,32 +561,32 @@ Both \scref{consequent} and \scref{alternative} must be specified.  The result
 of \specopref{if} is the result of the evaluation of whichever of
 \scref{consequent} or \scref{alternative} is chosen.
 
-\macro{cond}
+\specop{cond}
 %
 \Syntax
 \defSyntax{cond}{
     \begin{syntax}
     \scdef{cond-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{cond} \\
+    \>  ( \specopref{cond} \\
     \>\>  \scgseq{{\tt(} \scref{antecedent} \scseqref{consequent} {\tt)}} )
 \end{syntax}}%
 \showSyntaxBox{cond}
 %
 \remarks%
-The \macroref{cond} macro provides a convenient syntax for collections of {\em
+The \specopref{cond} macro provides a convenient syntax for collections of {\em
     if-then-elseif...else} expressions.
 %
 \rewriterules
 %
 \begin{RewriteTable}{cond}{lll}
-    (\macroref{cond}) &\rewrite& () \\
-    (\macroref{cond} (\scref{antecedent}) \\
+    (\specopref{cond}) &\rewrite& () \\
+    (\specopref{cond} (\scref{antecedent}) \\
     \tts\ldots) &\rewrite&
-    (\macroref{or} \scref{antecedent} (\macroref{cond} \ldots)) \\
+    (\specopref{or} \scref{antecedent} (\specopref{cond} \ldots)) \\
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     00\=00\= \kill
-    (\macroref{cond} \\
+    (\specopref{cond} \\
     \>(\scref{antecedent}$_1$) \\
     \>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\ldots)
@@ -595,9 +595,9 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\macroref{or} \= \scref{antecedent}$_1$ \\
+    (\specopref{or} \= \scref{antecedent}$_1$ \\
     \>00\= \kill
-    \>(\macroref{cond} \\
+    \>(\specopref{cond} \\
     \>\>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\>\ldots))
 \end{tabbing}
@@ -606,7 +606,7 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     00\=00\= \kill
-    (\macroref{cond} \\
+    (\specopref{cond} \\
     \>(\scref{antecedent}$_1$ \scseqref{consequent}) \\
     \>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\ldots)
@@ -618,60 +618,60 @@ The \macroref{cond} macro provides a convenient syntax for collections of {\em
     (\specopref{if} \=\scref{antecedent}$_1$ \\
     \>(\specopref{progn} \scseqref{consequent}) \\
     \>00\= \kill
-    \>(\macroref{cond} \\
+    \>(\specopref{cond} \\
     \>\>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
     \>\>\ldots))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
 
-\macro{and}
+\specop{and}
 %
 \Syntax
 \defSyntax{and}{
 \begin{syntax}
     \scdef{and-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{and} \scseqref{consequent} )
+    \>  ( \specopref{and} \scseqref{consequent} )
 \end{syntax}}%
 \showSyntaxBox{and}
 %
 \remarks%
-The expansion of an \macroref{and} form leads to the evaluation of the sequence
+The expansion of an \specopref{and} form leads to the evaluation of the sequence
 of \scref{form}s from left to right.  The first \scref{form} in the sequence
 that evaluates to \nil{}\/ stops evaluation and none of the \scref{form}s to its
 right will be evaluated---that is to say, it is non-strict.  The result of {\tt
-    (\macroref{and})} is \true{}.  If none of the \scref{form}s evaluate to
+    (\specopref{and})} is \true{}.  If none of the \scref{form}s evaluate to
 \nil{}, the value of the last \scref{form} is returned.
 %
 \rewriterules
 %
 \begin{RewriteTable}{and}{lll}
-    (\macroref{and}) &\rewrite& \true{} \\
-    (\macroref{and} \scref{form}) &\rewrite& \scref{form} \\
-    (\macroref{and} \scref{form}$_1$ \scref{form}$_2$ \ldots) &\rewrite&
+    (\specopref{and}) &\rewrite& \true{} \\
+    (\specopref{and} \scref{form}) &\rewrite& \scref{form} \\
+    (\specopref{and} \scref{form}$_1$ \scref{form}$_2$ \ldots) &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     (\specopref{if} \= \scref{form}$_1$\\
-    \>(\macroref{and} \scref{form}$_2$ \ldots)\\
+    \>(\specopref{and} \scref{form}$_2$ \ldots)\\
     \>())
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
 
-\macro{or}
+\specop{or}
 %
 \Syntax
 \defSyntax{or}{
 \begin{syntax}
     \scdef{or-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{or} \scseqref{form} )
+    \>  ( \specopref{or} \scseqref{form} )
 \end{syntax}}%
 \showSyntaxBox{or}
 %
 \remarks%
-The expansion of an \macroref{or} form leads to the evaluation of the sequence
+The expansion of an \specopref{or} form leads to the evaluation of the sequence
 of \scref{form}s from left to right.  The value of the first \scref{form} that
-evaluates to \true{} is the result of the \macroref{or} form and none of the
+evaluates to \true{} is the result of the \specopref{or} form and none of the
 \scref{form}s to its right will be evaluated---that is to say, it is non-strict.
 If none of the forms evaluate to \true{}, the value of the last \scref{form}
 is returned.
@@ -679,15 +679,15 @@ is returned.
 \rewriterules
 %
 \begin{RewriteTable}{or}{lll}
-    (\macroref{or}) &\rewrite& () \\
-    (\macroref{or} \scref{form}) &\rewrite& \scref{form} \\
-    (\macroref{or} \scref{form}$_1$ \scref{form}$_2$ \ldots) &\rewrite&
+    (\specopref{or}) &\rewrite& () \\
+    (\specopref{or} \scref{form}) &\rewrite& \scref{form} \\
+    (\specopref{or} \scref{form}$_1$ \scref{form}$_2$ \ldots) &\rewrite&
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
-    (\macroref{let} (\=(x \scref{form}$_1$))\\
+    (\specopref{let} (\=(x \scref{form}$_1$))\\
     \>(\specopref{if} \= x\\
     \>\>x\\
-    \>\>(\macroref{or} \scref{form}$_2$ \ldots)))
+    \>\>(\specopref{or} \scref{form}$_2$ \ldots)))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
@@ -726,7 +726,7 @@ Note that {\tt x} does not occur free in any of \scref{form}$_2$ \ldots
 \begin{optDefinition}
 
 \specop{let/cc}
-\ttsubindex{let/cc}{see also \macroref{block} and \macroref{return-from}}
+\ttsubindex{let/cc}{see also \specopref{block} and \specopref{return-from}}
 %
 \Syntax
 \defSyntax{let/cc}{
@@ -795,16 +795,16 @@ signalled.
 \end{example}
 %
 \seealso%
-\macroref{block}, \macroref{return-from}.
+\specopref{block}, \specopref{return-from}.
 
-\macro{block}
+\specop{block}
 %
 \ttsubindex{block}{see also \specopref{let/cc}}
 \Syntax
 \defSyntax{block}{
 \begin{syntax}
     \scdef{block-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{block} \scref{identifier} \scref{body} )
+    \>  ( \specopref{block} \scref{identifier} \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{block}
 %
@@ -812,58 +812,58 @@ signalled.
 The block expression is used to establish a statically scoped binding of an
 escape function.  The block \scref{identifier} is bound to the
 continuation\index{general}{continuation} of the block.  The continuation can be
-invoked anywhere within the block by using \macroref{return-from}.  The
+invoked anywhere within the block by using \specopref{return-from}.  The
 \scref{form}s are evaluated in sequence and the value of the last one is
 returned as the value of the block form.  See also \specopref{let/cc}.
 %
 \rewriterules
 %
 \begin{RewriteTable}{block}{lll}
-    (\macroref{block} \scref{identifier}) &\rewrite& ()\\
-    (\macroref{block} \scref{identifier}  &\rewrite&
+    (\specopref{block} \scref{identifier}) &\rewrite& ()\\
+    (\specopref{block} \scref{identifier}  &\rewrite&
     (\specopref{let/cc} \scref{identifier} \\
     \tts\scref{body})                    && \tts\scref{body})
 \end{RewriteTable}
 %
-The rewrite for \macroref{block} does not prevent the \macroref{block} being
+The rewrite for \specopref{block} does not prevent the \specopref{block} being
 exited from anywhere in its dynamic extent, since the function bound
 to \scref{identifier} is a first-class item and can be passed as an
 argument like other values.
 %
 \seealso%
-\macroref{return-from}.
+\specopref{return-from}.
 
-\macro{return-from}
+\specop{return-from}
 \ttsubindex{return-from}{see also \specopref{let/cc}}
 %
 \Syntax
 \defSyntax{return-from}{
 \begin{syntax}
     \scdef{return-from-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{return-from} \scref{identifier} \scoptref{form} )
+    \>  ( \specopref{return-from} \scref{identifier} \scoptref{form} )
 \end{syntax}}%
 \showSyntaxBox{return-from}
 %
 \remarks%
-In \macroref{return-from}, the \scref{identifier} names the continuation of
-the (lexical) \macroref{block} from which to return.
+In \specopref{return-from}, the \scref{identifier} names the continuation of
+the (lexical) \specopref{block} from which to return.
 %An error is signalled
 %(condition class: {\tt
 %<invalid-return-continuation>}\indexcondition{invalid-return-continuation})
 %if the value of the variable named by \scref{identifier} is not a
 %continuation.
-\macroref{return-from} is the invocation of the continuation of the block
+\specopref{return-from} is the invocation of the continuation of the block
 named by \scref{identifier}.  The \scref{form} is evaluated and the value
 is returned as the value of the block named by \scref{identifier}.
 %
 \rewriterules
 %
 \begin{RewriteTable}{return-from}{lll}
-    (\macroref{return-from} \scref{identifier}) &\rewrite& (\scref{identifier} ())\\
+    (\specopref{return-from} \scref{identifier}) &\rewrite& (\scref{identifier} ())\\
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     00\= \kill
-    (\macroref{return-from} \\
+    (\specopref{return-from} \\
     \>\scref{identifier} \scref{form})
 \end{tabbing}
 \end{minipage}
@@ -871,7 +871,7 @@ is returned as the value of the block named by \scref{identifier}.
 \end{RewriteTable}
 %
 \seealso%
-\macroref{block}.
+\specopref{block}.
 
 \specop{labels}
 %
@@ -914,13 +914,13 @@ evaluated in order in the lexical environment extended with the bindings of the
 \scref{identifier}s.  The result of evaluating the last form in
 \scref{labels-body} is returned as the result of the \specopref{labels} form.
 
-\macro{let}
+\specop{let}
 %
 \Syntax
 \defSyntax{let}{
 \begin{syntax}
     \scdef{let-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{let} \scoptref{identifier} ( \scseqref{binding} ) \\
+    \>  ( \specopref{let} \scoptref{identifier} ( \scseqref{binding} ) \\
     \>\>  \scref{body} ) \\
     \scdef{binding}: \\
     \>  \scref{variable} \\
@@ -934,8 +934,8 @@ evaluated in order in the lexical environment extended with the bindings of the
 The optional \scref{identifier}\/ denotes that the let form can be called from
 within its \scref{body}.  This is an abbreviation for \specopref{labels} form in
 which \scref{identifier} is bound to a function whose parameters are the
-identifiers of the \scref{binding}s of the \macroref{let}, whose body is that of
-the \macroref{let} and whose initial call passes the values of the initializing
+identifiers of the \scref{binding}s of the \specopref{let}, whose body is that of
+the \specopref{let} and whose initial call passes the values of the initializing
 form of the \scref{binding}s.  A binding is specified by either an identifier or
 a two element list of an identifier and an initializing form.  All the
 initializing forms are evaluated in order from left to right in the current
@@ -943,15 +943,15 @@ environment and the variables named by the identifiers in the \scref{binding}s
 are bound to new locations holding the results.  Each form in \scref{body} is
 evaluated in order in the environment extended by the above bindings.  The
 result of evaluating the last form in \scref{body} is returned as the result of
-the \macroref{let} form.
+the \specopref{let} form.
 %
 \rewriterules
 %
 \begin{RewriteTable}{let}{lll}
-    (\macroref{let} () \scref{body}) &\rewrite& (\specopref{progn} \scref{body}) \\
+    (\specopref{let} () \scref{body}) &\rewrite& (\specopref{progn} \scref{body}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
+    (\specopref{let} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
     \>(\scref{variable}$_2$ \scref{form}$_2$) \\
     \>\scref{variable}$_3$ \\
     \>\ldots)\\
@@ -970,7 +970,7 @@ the \macroref{let} form.
 \end{minipage}\\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let} \= \scref{variable}$_0$ \\
+    (\specopref{let} \= \scref{variable}$_0$ \\
     \>(\=(\scref{variable}$_1$ \scref{form}$_1$) \\
     \>\>\scref{variable}$_2$ \\
     \>\>\ldots)\\
@@ -990,13 +990,13 @@ the \macroref{let} form.
 \end{minipage}%
 \end{RewriteTable}
 
-\macro{let*}
+\specop{let*}
 %
 \Syntax
 \defSyntax{let*}{
 \begin{syntax}
     \scdef{let-star-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{let*} ( \scseqref{binding} ) \\
+    \>  ( \specopref{let*} ( \scseqref{binding} ) \\
     \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{let*}
@@ -1009,15 +1009,15 @@ that result.  Subsequent bindings are processed in turn, evaluating the
 initializing form in the environment extended by the previous binding.  Each
 form in \scref{body} is evaluated in order in the environment extended by the
 above bindings.  The result of evaluating the last form is returned as the
-result of the \macroref{let*} form.
+result of the \specopref{let*} form.
 %
 \rewriterules
 %
 \begin{RewriteTable}{let*}{lll}
-    (\macroref{let*} () \scref{body}) &\rewrite& (progn \scref{body}) \\
+    (\specopref{let*} () \scref{body}) &\rewrite& (progn \scref{body}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\macroref{let*} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
+    (\specopref{let*} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
     \>(\scref{variable}$_2$ \scref{form}$_2$) \\
     \>\scref{variable}$_3$\\
     \>\ldots) \\
@@ -1029,8 +1029,8 @@ result of the \macroref{let*} form.
 \begin{minipage}[t]{\columnwidth}%
 \begin{tabbing}%
     00\= \kill
-    (\macroref{let} ((\scref{variable}$_1$ \scref{form}$_1$)) \\
-    \>(\macroref{let*} (\=(\scref{variable}$_2$ \scref{form}$_2$) \\
+    (\specopref{let} ((\scref{variable}$_1$ \scref{form}$_1$)) \\
+    \>(\specopref{let*} (\=(\scref{variable}$_2$ \scref{form}$_2$) \\
     \>\>\scref{variable}$_3$\\
     \>\>\ldots) \\
     00\=00\= \kill

@@ -85,14 +85,14 @@ The \scref{class-option-1}\/s are interpreted as follows:
 \sclause{Generic Functions}
 
 \begin{optDefinition}
-\macro{generic-lambda}
+\specop{generic-lambda}
 \label{generic-lambda-1}
 %
 \Syntax
 \defSyntax{generic-1-lambda}{
 \begin{syntax}
     \scdef{generic-lambda-form}: \\
-    \>  ( \macroref{generic-lambda} \scref{gf-lambda-list} \\
+    \>  ( \specopref{generic-lambda} \scref{gf-lambda-list} \\
     \>\>  \scseqref{level-1-init-option} ) \\
     \scdef{level-1-init-option}: \\
     \>  class \scref{class-name} \\
@@ -121,12 +121,12 @@ The \scref{class-option-1}\/s are interpreted as follows:
 A generic function.
 %
 \remarks%
-The syntax of \macroref{generic-lambda} is an extension of the level-0
+The syntax of \specopref{generic-lambda} is an extension of the level-0
 syntax allowing additional init-options.  These allow the
 specification of the class of the new generic function, which defaults
 to \classref{generic-function}, the class of all methods, which defaults
 to \classref{method}, and non-standard options. The latter are evaluated
-in the lexical and dynamic environment of \macroref{generic-lambda} and
+in the lexical and dynamic environment of \specopref{generic-lambda} and
 passed to \functionref{make} of the generic function as additional
 initialization arguments.  The additional {\em init-option\/}s over
 level-0 are interpreted as follows:
@@ -164,7 +164,7 @@ methods on a generic function.  These are interpreted as follows:
     The symbol named by {\em identifier} and the value of {\em expression} are
     passed to \functionref{make} creating a new method as initargs.  The values
     are evaluated in the lexical and dynamic environment of the
-    \macroref{generic-lambda}.  This option is used for classes which need extra
+    \specopref{generic-lambda}.  This option is used for classes which need extra
     information not provided by the standard options.
 \end{options}
 %
@@ -216,7 +216,7 @@ is the same as {\tt gf-1}.
 
     \item[gf lambda list] As level-0.  See section~\ref{defgeneric-0}.
 
-    \item[init option\/$^*$] As for \macroref{generic-lambda}, defined above.
+    \item[init option\/$^*$] As for \specopref{generic-lambda}, defined above.
     below.
 \end{arguments}
 %
@@ -228,7 +228,7 @@ parameter list.  An error is signalled (condition:
 \indexcondition{non-congruent-lambda-lists}) if any of the methods defined on
 this generic function do not have lambda lists congruent to that of the generic
 function.  This applies both to methods defined at the same time as the generic
-function and to any methods added subsequently by \macroref{defmethod} or
+function and to any methods added subsequently by \defopref{defmethod} or
 \genericref{add-method}.  An {\em init-option} is a identifier followed by its
 initial value.  The syntax of \defopref{defgeneric} is an extension of the
 level-0 syntax.  The rewrite rules for the \defopref{defgeneric} form are
@@ -298,12 +298,12 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 
 \sclause{Methods}
 
-\macro{method-lambda}
+\specop{method-lambda}
 \Syntax
 \defSyntax{method-lambda}{
 \begin{syntax}
     \scdef{method-lambda-form}: \ra{} \classref{function} \\
-    \>  ( \macroref{method-lambda} \\
+    \>  ( \specopref{method-lambda} \\
     \>\>  \scseqref{method-init-option} \\
     \>\>  \scref{specialized-lambda-list} \\
     \>\>  \scref{body} )
@@ -313,7 +313,7 @@ function and {\tt gf-0} (see~\ref{defgeneric-0}) are
 \begin{arguments}
     \item[method init option] A quoted symbol followed by an expression.
 
-    \item[specialized lambda list] As defined under \macroref{generic-lambda}.
+    \item[specialized lambda list] As defined under \specopref{generic-lambda}.
 
     \item[form] An expression.
 \end{arguments}
@@ -332,14 +332,14 @@ determines the class to instantiate; the rest of the initlist is passed to
 The additional {\em method-init-option\/}s includes \classref{class}, for
 specifying the class of the method to be defined, and non-standard
 options, which are evaluated in the lexical and dynamic environment of
-\macroref{method-lambda} and passed to \genericref{initialize} of that method.
+\specopref{method-lambda} and passed to \genericref{initialize} of that method.
 
-\macro{defmethod}
+\defop{defmethod}
 \Syntax
 \defSyntax{defmethod-1}{
 \begin{syntax}
     \scdef{defmethod-1-form}: \\
-    \>  ( \macroref{defmethod} \scref{gf-locator} \\
+    \>  ( \defopref{defmethod} \scref{gf-locator} \\
     \>\>  \scseqref{method-init-option} \\
     \>\>  \scref{specialized-lambda-list} \\
     \>\>  \scref{body} )
@@ -347,14 +347,14 @@ options, which are evaluated in the lexical and dynamic environment of
 \showSyntaxBox{defmethod-1}%
 %
 \remarks%
-The \macroref{defmethod} form of level-1 extends that of level-0 to accept
+The \defopref{defmethod} form of level-1 extends that of level-0 to accept
 {\em method-init-option\/}s.  This allows for the specification of the
 method class by means of the \classref{class} init option.  This class must
 be a subclass of the method class of the host generic function. The
 method class otherwise defaults to that of the host generic function.
 In all other respects, the behaviour is as that defined in level-0.
 
-\macro{method-function-lambda}
+\specop{method-function-lambda}
 %
 \begin{arguments}
     \item[lambda-list] A lambda list

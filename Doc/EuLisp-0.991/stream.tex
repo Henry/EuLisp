@@ -901,13 +901,13 @@ Allocates and returns a new \classref{file-stream} object whose sink is
 connected to the file system object identified by \scref{path}.
 
 % ------------------------------------------------------------------------------
-\macro{with-input-file}
+\specop{with-input-file}
 % ------------------------------------------------------------------------------
 \Syntax
 \defSyntax{with-input-file}{
 \begin{syntax}
     \scdef{with-input-file-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{with-input-file} \scref{path} \\
+    \>  ( \specopref{with-input-file} \scref{path} \\
     \>\>  \scref{body} ) \\
     \scdef{path}: \\
     \>  \scref{string}
@@ -915,37 +915,37 @@ connected to the file system object identified by \scref{path}.
 \showSyntaxBox{with-input-file}
 
 % ------------------------------------------------------------------------------
-\macro{with-output-file}
+\specop{with-output-file}
 % ------------------------------------------------------------------------------
 \Syntax
 \defSyntax{with-output-file}{
 \begin{syntax}
     \scdef{with-output-file-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{with-output-file} \scref{path} \\
+    \>  ( \specopref{with-output-file} \scref{path} \\
     \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{with-output-file}
 
 % ------------------------------------------------------------------------------
-\macro{with-source}
+\specop{with-source}
 % ------------------------------------------------------------------------------
 \Syntax
 \defSyntax{with-source}{
 \begin{syntax}
     \scdef{with-source-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{with-source} ( \scref{identifier} \scref{form} ) \\
+    \>  ( \specopref{with-source} ( \scref{identifier} \scref{form} ) \\
     \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{with-source}
 
 % ------------------------------------------------------------------------------
-\macro{with-sink}
+\specop{with-sink}
 % ------------------------------------------------------------------------------
 \Syntax
 \defSyntax{with-sink}{
 \begin{syntax}
     \scdef{with-sink-form}: \ra{} \classref{object} \\
-    \>  ( \macroref{with-sink} ( \scref{identifier} \scref{form} ) \\
+    \>  ( \specopref{with-sink} ( \scref{identifier} \scref{form} ) \\
     \>\>  \scref{body} )
 \end{syntax}}%
 \showSyntaxBox{with-sink}
