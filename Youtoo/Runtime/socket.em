@@ -11,7 +11,7 @@
    import (telos lock condition convert dynamic stream1 stream2 string)
    export (<socket> socket-port socket-host socket-descriptor
            socket-queue-size
-           <connection> connection-host connection-port connectionp))
+           <connection> connection-host connection-port connection?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Sockets
@@ -46,7 +46,7 @@
     ((host accessor: connection-host keyword: host: default: (hostname))
      (port accessor: connection-port keyword: port: default: 4711))
     keywords: (socket:)
-    predicate: connectionp)
+    predicate: connection?)
 
   (defmethod initialize ((x <connection>) inits)
     (call-next-method)

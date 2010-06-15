@@ -277,7 +277,7 @@
   (declare-inline inexact?)
 
   (defun input-port? (x)
-    (and (streamp x)
+    (and (stream? x)
          (Member (stream-mode x) '(r rw))))
 
   (defun integer->char (x)
@@ -365,7 +365,7 @@
     (make <file-stream> mode: 'w file-name: x))
 
   (defun output-port? (x)
-    (and (streamp x)
+    (and (stream? x)
          (Member (stream-mode x) '(w rw a))))
 
   (defun pair? (x)

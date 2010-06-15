@@ -50,7 +50,7 @@
     ((name accessor: bytecode-name keyword: name:)
      (args accessor: bytecode-args keyword: args:)
      (number accessor: bytecode-number keyword: number:))
-    predicate: bytecodep)
+    predicate: bytecode?)
 
   (defun arg-size (args)
     (accumulate

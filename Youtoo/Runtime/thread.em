@@ -13,8 +13,8 @@
 (defmodule thread
   (syntax (_macros)
    import (telos event)
-   export (<thread> <abstract-thread> threadp <simple-thread> simple-thread?
-           threadp current-thread current-thread-queue thread-state
+   export (<thread> <abstract-thread> thread? <simple-thread> simple-thread?
+           thread? current-thread current-thread-queue thread-state
            thread-continuation thread-returned? thread-return-value
            thread-reschedule thread-suspend
            thread-block thread-unblock
@@ -42,7 +42,7 @@
       keyword: dynamic-variables:)
     abstractp: t
     keywords: (function:)
-    predicate: threadp)
+    predicate: thread?)
 
   (defclass <simple-thread> (<abstract-thread>)
     ((continuation accessor: thread-continuation)
@@ -223,7 +223,7 @@
                     keyword: context-stack:)
      (context-stack-size accessor: state-context-stack-size
                          keyword: context-stack-size:))
-    predicate: statep)
+    predicate: state?)
 
   (defopencoded fill-simple-state (st) (fill-state))
   (defopencoded restore-simple-state (st x) (restore-state))

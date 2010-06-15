@@ -10,7 +10,7 @@
 (defmodule table1
   (syntax (_telos0)
    import (telos convert copy collect compare list fpi string vector)
-   export (<table> tablep <simple-hash-table> simple-hash-table?
+   export (<table> table? <simple-hash-table> simple-hash-table?
            <hash-table> hash-table?
            *min-table-entries* *table-fill-factor*
            table-entries table-fill-value table-size table-threshold
@@ -35,7 +35,7 @@
      (threshold default: (int-binary- *min-table-entries* *table-unused*)
                 accessor: table-threshold))
     ;; not abstract, so that instance creation is always (make <table> ...)
-    predicate: tablep)
+    predicate: table?)
 
   (defprimclass <simple-hash-table> table-class (<table>) ()
     ;; Has to have same memory layout as <table>

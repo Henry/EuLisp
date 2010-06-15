@@ -79,7 +79,7 @@ void initialize_module_aux_table()
   static const void *G0047[] = {I(aa,24,00,00),B(boot1 ,40),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,16),I(3d,01,01,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 22 binding: access-table-clear */
-  static const void *G0049[] = {I(aa,24,00,00),B(boot1 ,40),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,9),I(3d,01,01,00)};
+  static const void *G0049[] = {I(aa,24,00,00),B(boot1 ,40),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,10),I(3d,01,01,00)};
 
   /* Byte-vector with size: 56 is_init: 1 index: 0 binding: initialize-aux-table */
   static const void *G0051[] = {I(87,25,00,00),B(aux_table ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(aux_table ,23),I(23,00,00,00),B(aux_table ,22),I(3b,01,25,00),B(aux_table ,9),I(23,00,00,00),B(aux_table ,24),I(23,00,00,00),B(aux_table ,21),I(3b,01,25,00),B(aux_table ,8),I(23,00,00,00),B(aux_table ,25),I(23,00,00,00),B(aux_table ,20),I(3b,02,25,00),B(aux_table ,7),I(23,00,00,00),B(aux_table ,26),I(23,00,00,00),B(aux_table ,19),I(3b,02,25,00),B(aux_table ,6),I(23,00,00,00),B(aux_table ,27),I(23,00,00,00),B(aux_table ,18),I(3b,01,25,00),B(aux_table ,5),I(23,00,00,00),B(aux_table ,28),I(23,00,00,00),B(aux_table ,17),I(3b,ff,25,00),B(aux_table ,4),I(23,00,00,00),B(aux_table ,29),I(23,00,00,00),B(aux_table ,14),I(3b,01,25,00),B(aux_table ,3),I(23,00,00,00),B(aux_table ,30),I(23,00,00,00),B(aux_table ,13),I(3b,fe,25,00),B(aux_table ,2),I(86,ac,00,00)};

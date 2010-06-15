@@ -16,20 +16,20 @@
            float
            string
            collect)
-   export (<handler> handle handlerp <int*> <double*> <string*>))
+   export (<handler> handle handler? <int*> <double*> <string*>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Handle foreign C pointers
 ;;;-----------------------------------------------------------------------------
   (defclass <handler> (<object>)
     ((handle accessor: handle keyword: handle:))
-    predicate: handlerp)
+    predicate: handler?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <int*>
 ;;;-----------------------------------------------------------------------------
   (defprimclass <int*> fpi-ref-class (<handler>) ()
-    predicate: int*p)
+    predicate: int*?)
 
   (defgeneric (converter <int*>) (x))
 
@@ -54,7 +54,7 @@
 ;;; Class <double*>
 ;;;-----------------------------------------------------------------------------
   (defprimclass <double*> double-ref-class (<handler>) ()
-    predicate: double*p)
+    predicate: double*?)
 
   (defgeneric (converter <double*>) (x))
 
@@ -80,7 +80,7 @@
 ;;; Class <string*>
 ;;;-----------------------------------------------------------------------------
   (defprimclass <string*> string-ref-class (<handler>) ()
-    predicate: string*p)
+    predicate: string*?)
 
   (defgeneric (converter <string*>) (x))
 

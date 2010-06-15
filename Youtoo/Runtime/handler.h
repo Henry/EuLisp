@@ -8,12 +8,12 @@
 extern LispRef handler_bindings[];
 
 /* Module binding indices */
-#define _int___X60_X42_X62_fn_index 5 
+#define _int___X60_X42_X62_fn_index 4 
 #define _handler__X60_X62_fn_index 2 
-#define handlerp_fn_index 10 
-#define handle_fn_index 4 
-#define _string___X60_X42_X62_fn_index 7 
-#define _double___X60_X42_X62_fn_index 6 
+#define handle_fn_index 3 
+#define _string___X60_X42_X62_fn_index 6 
+#define _double___X60_X42_X62_fn_index 5 
+#define handler__X63_fn_index 8 
 
 
 

@@ -10,11 +10,11 @@ extern LispRef lock_bindings[];
 /* Module binding indices */
 #define _lock__X60_X62_fn_index 2 
 #define _semaphore__X60_X62_fn_index 8 
-#define semaphorep_fn_index 7 
-#define lockp_fn_index 6 
-#define semaphore_counter_fn_index 5 
+#define semaphore__X63_fn_index 7 
+#define semaphore_counter_fn_index 6 
 #define lock_fn_index 3 
 #define unlock_fn_index 4 
+#define lock__X63_fn_index 5 
 
 
 

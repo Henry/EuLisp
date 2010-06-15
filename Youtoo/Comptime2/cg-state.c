@@ -215,11 +215,11 @@ void initialize_module_cg_state()
   /* Byte-vector with size: 3 is_init: 0 index: 167 binding: asm-function-state-code? */
   static const void *G002599[] = {I(aa,83,24,00),B(cg_state ,38),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 168 binding: code-state-enclosed-code? */
-  static const void *G002601[] = {I(aa,82,24,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 168 binding: asm-state-init-bytevector? */
+  static const void *G002601[] = {I(aa,83,24,00),B(cg_state ,2),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 169 binding: asm-state-init-bytevector? */
-  static const void *G002603[] = {I(aa,83,24,00),B(cg_state ,2),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 169 binding: code-state-enclosed-code? */
+  static const void *G002603[] = {I(aa,82,24,00),B(cg_state ,12),I(08,45,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 170 binding: asm-function-state-code! */
   static const void *G002605[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,38),I(09,45,02,00)};
@@ -493,8 +493,8 @@ void initialize_module_cg_state()
   eul_intern_symbol(sym_2669,"C-state-initializations!");
   eul_intern_symbol(sym_2670,"code-state-binding-name!");
   eul_intern_symbol(sym_2671,"asm-function-state-code!");
-  eul_intern_symbol(sym_2672,"asm-state-init-bytevector?");
-  eul_intern_symbol(sym_2673,"code-state-enclosed-code?");
+  eul_intern_symbol(sym_2672,"code-state-enclosed-code?");
+  eul_intern_symbol(sym_2673,"asm-state-init-bytevector?");
   eul_intern_symbol(sym_2674,"asm-function-state-code?");
   eul_intern_symbol(sym_2675,"C-state-globals?");
   eul_intern_symbol(sym_2676,"make-code-state");

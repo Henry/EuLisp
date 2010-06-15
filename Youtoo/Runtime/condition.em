@@ -9,7 +9,7 @@
 (defmodule condition
   (syntax (_macros)
    import (telos thread dynamic let-cc)
-   export (<condition> conditionp condition-message
+   export (<condition> condition? condition-message
            <general-condition> signal error cerror *default-error-handler*
            output-condition-contents push-error-handler pop-error-handlers))
 
@@ -18,7 +18,7 @@
 ;;;-----------------------------------------------------------------------------
   (defclass <condition> (<object>)
     ((message keyword: message: accessor: condition-message))
-    predicate: conditionp)
+    predicate: condition?)
 
   (defclass <general-condition> (<condition>)
     ((arguments keyword: arguments:)))

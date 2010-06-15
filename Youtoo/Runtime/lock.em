@@ -9,16 +9,16 @@
 (defmodule lock
   (syntax (_telos0)
    import (telos thread)
-   export (<semaphore> semaphore-counter semaphorep
-           <lock> lockp lock unlock))
+   export (<semaphore> semaphore-counter semaphore?
+           <lock> lock? lock unlock))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <lock>
 ;;;-----------------------------------------------------------------------------
   (defclass <semaphore> ()
     ((counter default: 0 accessor: semaphore-counter keyword: counter:))
-    predicate: semaphorep
-    predicate: lockp)
+    predicate: semaphore?
+    predicate: lock?)
 
   (deflocal <lock> <semaphore>)
 
