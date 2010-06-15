@@ -9,7 +9,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule format
   (syntax (_telos0)
-   import (telos collect fpi list string stream)
+   import (telos collect fpi list string character stream)
    export (format fmt))
 
 ;;;-----------------------------------------------------------------------------
@@ -75,17 +75,15 @@
                          ((eq c #\%)
                           (prin-one-char #\\n s)
                           (loop (cdr info) l))
-                         ((eq c #\x)
+                         ((or (eq c #\x) (eq c #\o)
+                              (eq c #\f) (eq c #\e) (eq c #\g))
                           (if (null? l)
                               (error "bad format string ~s" str)
                             (progn
-                              (fprintf s "%x" (car l))
-                              (loop (cdr info) (cdr l)))))
-                         ((eq c #\o)
-                          (if (null? l)
-                              (error "bad format string ~s" str)
-                            (progn
-                              (fprintf s "%o" (car l))
+                              (fprintf
+                                s
+                                (concatenate "%" (character-as-string c))
+                                (car l))
                               (loop (cdr info) (cdr l)))))
                          ((eq c #\~)
                           (sprin s #\~)
