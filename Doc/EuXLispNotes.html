@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>Using EuXLisp</b> (Formally Euscheme)</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-13 18:01:03 BST"/>
+<meta name="generated" content="2010-06-15 21:08:53 BST"/>
 <meta name="author" content="of original Euscheme notes Russell Bradford"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -123,12 +123,13 @@ made to keep this document consistent with the evolving EuLisp definition and
 EuXLisp implementation.
 </p>
 <p>
-EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small and
-compact Lisp, but nevertheless has many interesting features, such as modules,
-an object system, and multithreading.  EuLisp Level 1 has extra features, the
-most notable being a full metaobject system which is implemented in Youtoo not
-in EuXLisp.  These are a few notes on the use of EuLisp in general and EuXLisp
-in particular and concentrate on those things unique to EuLisp.
+EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small
+and compact Lisp, but nevertheless has many interesting features, such as
+modules, an object system, and multithreading.  EuLisp Level 1 has extra
+features, the most notable being a full metaobject system which is implemented
+in Youtoo not in EuXLisp.  These are a few notes on the use of EuLisp in
+general and EuXLisp in particular and concentrate on those things unique to
+EuLisp.
 </p>
 </div>
 
@@ -414,7 +415,8 @@ It's also good to define module-local variables:
 
 <p>
 You can omit the initial value if you want.  The <code>deflocal</code> form should only
-be used at the top level (i.e., never inside a function definition or a <code>let</code>).
+be used at the top level (i.e., never inside a function definition or a
+<code>let</code>).
 </p>
 </div>
 
@@ -714,8 +716,8 @@ point of error.  Debug loops can be nested.
 system, comparable to C++'s class system.  Every object in EuLisp has a class,
 which is itself a first-class object: this means that classes are supported at
 the same level as any other object in the system, and can be created, passed
-to functions, returned from functions, and so on.  For example, the integer <code>1</code>
-has class <code>&lt;integer&gt;</code> (or rather, has a class with name <code>&lt;integer&gt;</code>).
+to functions, returned from functions, and so on.  For example, the integer
+<code>1</code> has class <code>&lt;integer&gt;</code> (or rather, has a class with name <code>&lt;integer&gt;</code>).
 </p>
 <p>
 In fact, EuXLisp has (class-of 1) to be <code>&lt;fpi&gt;</code> (for fixed point integer),
@@ -830,8 +832,8 @@ instance of the class, and false on all other objects.
 <li>
 <code>constructor:</code> a way to name a function to make an instance of the class.
 In this case, rat will name a function of two arguments that makes an
-instance of <code>&lt;rat&gt;</code>.  The first argument will be given to the <code>num:</code> keyword,
-the second to the <code>den:</code>.  This is equivalent to defining
+instance of <code>&lt;rat&gt;</code>.  The first argument will be given to the <code>num:</code>
+keyword, the second to the <code>den:</code>.  This is equivalent to defining
 
 
 
@@ -1054,7 +1056,7 @@ get-file-position and <code>(setter get-file-position)</code> move the file poin
 a file opened for update.
 </li>
 <li>
-close-port closes an open stream.
+close-stream closes an open stream.
 
 </li>
 <li id="sec-15.1">Format <br/>
@@ -1580,9 +1582,9 @@ To write to an element use the function <code>(setter vector-ref)</code>,
 
 
 <p>
-Similarly, the accessor <code>car</code> has an updater <code>(setter car)</code> (often called <code>rplaca</code>
-in other Lisps), and so on.  In general a reader function <code>r</code> will have an
-associated updater <code>(setter r)</code>.
+Similarly, the accessor <code>car</code> has an updater <code>(setter car)</code> (often called
+<code>rplaca</code> in other Lisps), and so on.  In general a reader function <code>r</code> will
+have an associated updater <code>(setter r)</code>.
 </p>
 <p>
 The function <code>setter</code> is a simple association mechanism: <code>setter</code> is a
@@ -1596,9 +1598,9 @@ such an association between functions <code>r</code> and <code>w</code> just use
 
 
 <p>
-In fact, no particular properties of <code>r</code> and <code>w</code>, are used, so this can be used
-as a general facility.  Further, setter functions, generic functions and
-methods can be defined directly:
+In fact, no particular properties of <code>r</code> and <code>w</code>, are used, so this can be
+used as a general facility.  Further, setter functions, generic functions
+and methods can be defined directly:
 </p>
 
 
@@ -1756,8 +1758,8 @@ This emulates a paralation system.  The module <code>tpl</code> (for tiny parala
 lisp) exports
 <ul>
 <li>
-<code>(make-paralation n)</code> to make a new paralation of size <code>n</code>.  This returns a
-index field of the new paralation.
+<code>(make-paralation n)</code> to make a new paralation of size <code>n</code>.  This returns
+a index field of the new paralation.
 </li>
 <li>
 elwise is the element-wise operator:
@@ -1947,9 +1949,9 @@ char?
 string?
 vector?
 function?
-port?
-input-port?
-output-port?
+stream?
+input-stream?
+output-stream?
 object?
 eof-object?
 default-object?
@@ -2052,9 +2054,9 @@ print-depth
 open-output-file
 open-append-file
 open-update-file
-close-port
-close-input-port
-close-output-port
+close-stream
+close-input-stream
+close-output-stream
 get-file-position
 unlink
 
@@ -2175,10 +2177,10 @@ cerror
 <span style="color: #0000ff;">&lt;keyword&gt;</span>
 <span style="color: #0000ff;">&lt;string&gt;</span>
 <span style="color: #0000ff;">&lt;simple-string&gt;</span>
-<span style="color: #0000ff;">&lt;port&gt;</span>
-<span style="color: #0000ff;">&lt;input-port&gt;</span>
-<span style="color: #0000ff;">&lt;output-port&gt;</span>
-<span style="color: #0000ff;">&lt;i/o-port&gt;</span>
+<span style="color: #0000ff;">&lt;stream&gt;</span>
+<span style="color: #0000ff;">&lt;input-stream&gt;</span>
+<span style="color: #0000ff;">&lt;output-stream&gt;</span>
+<span style="color: #0000ff;">&lt;i/o-stream&gt;</span>
 <span style="color: #0000ff;">&lt;vector&gt;</span>
 <span style="color: #0000ff;">&lt;simple-vector&gt;</span>
 <span style="color: #0000ff;">&lt;char&gt;</span>
@@ -2390,7 +2392,7 @@ prevent the use of the system function.
 <p class="author"> Author: of original Euscheme notes Russell Bradford
 <a href="mailto:no-reply">&lt;no-reply&gt;</a>
 </p>
-<p class="date"> Date: 2010-06-13 18:01:03 BST</p>
+<p class="date"> Date: 2010-06-15 21:08:53 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 15 June 2010, 20:45:50
+  Generated 15 June 2010, 21:08:56
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -52,7 +52,7 @@ youtoo Functions
   <condition> 9 condition <condition>
   <connection> 2 socket <connection>
   <cons> 71 mop-class <cons>
-  <double*> 6 handler <double*>
+  <double*> 5 handler <double*>
   <double-float> 9 float <double-float>
   <double> 7 float <double>
   <end-of-stream> 7 stream2 <end-of-stream>
@@ -66,8 +66,8 @@ youtoo Functions
   <general-condition> 5 condition <general-condition>
   <generic-function> 44 mop-class <generic-function>
   <handler> 2 handler <handler>
-  <hash-table> 8 table1 <hash-table>
-  <int*> 5 handler <int*>
+  <hash-table> 9 table1 <hash-table>
+  <int*> 4 handler <int*>
   <int> 6 fpi <int>
   <integer> 2 integer <integer>
   <keyword> 81 mop-class <keyword>
@@ -89,17 +89,17 @@ youtoo Functions
   <simple-method> 55 mop-class <simple-method>
   <simple-thread> 34 thread <simple-thread>
   <slot> 49 mop-class <slot>
-  <socket> 7 socket <socket>
+  <socket> 8 socket <socket>
   <state> 24 thread <state>
   <stream-condition> 38 stream2 <stream-condition>
   <stream-control-block> 23 stream2 <stream-control-block>
   <stream> 21 stream2 <stream>
-  <string*> 7 handler <string*>
+  <string*> 6 handler <string*>
   <string-stream> 45 stream2 <string-stream>
   <string> 13 string <string>
   <symbol> 5 mop-class <symbol>
   <table> 4 table1 <table>
-  <thread> 7 thread <thread>
+  <thread> 8 thread <thread>
   <vector> 8 vector <vector>
   = 2 compare =
   > 4 compare >
@@ -175,7 +175,7 @@ youtoo Functions
   cddr 12 list cddr
   cdr 34 boot1 cdr
   ceiling 10 float ceiling
-  cerror 7 condition cerror
+  cerror 6 condition cerror
   character-as-string 11 character character-as-string
   character? 32 boot1 character?
   class-abstract? 74 mop-class class-abstract?
@@ -192,7 +192,7 @@ youtoo Functions
   class-slots 50 mop-class class-slots
   class-slotz 64 mop-class class-slotz
   class? 4 mop-inspect class?
-  clear-table 9 table1 clear-table
+  clear-table 10 table1 clear-table
   collectionp 23 collect collectionp
   compatible-superclass? 8 mop-alloc compatible-superclass?
   compatible-superclasses? 14 mop-alloc compatible-superclasses?
@@ -216,12 +216,12 @@ youtoo Functions
   compute-specialized-slot 15 mop-alloc compute-specialized-slot
   compute-specialized-slot-class 2 mop-alloc compute-specialized-slot-class
   concatenate 19 collect concatenate
-  condition-message 8 condition condition-message
-  conditionp 6 condition conditionp
+  condition-message 7 condition condition-message
+  condition? 8 condition condition?
   connect 18 stream connect
-  connection-host 4 socket connection-host
-  connection-port 6 socket connection-port
-  connectionp 10 socket connectionp
+  connection-host 5 socket connection-host
+  connection-port 7 socket connection-port
+  connection? 4 socket connection?
   cons 2 boot1 cons
   cons-keywords 77 mop-class cons-keywords
   cons-slot-defaults 40 mop-class cons-slot-defaults
@@ -314,8 +314,8 @@ youtoo Functions
   gf-slot-defaults 37 mop-class gf-slot-defaults
   gf-slots 79 mop-class gf-slots
   graph? 10 character graph?
-  handle 4 handler handle
-  handlerp 10 handler handlerp
+  handle 3 handler handle
+  handler? 8 handler handler?
   hash-table? 13 table1 hash-table?
   hostname 3 stream1 hostname
   inc 20 boot1 inc
@@ -351,7 +351,7 @@ youtoo Functions
   listify-env-string 25 boot listify-env-string
   listify-string 5 string listify-string
   lock 3 lock lock
-  lockp 6 lock lockp
+  lock? 5 lock lock?
   lowercase? 9 character lowercase?
   lsd-keywords 21 mop-class lsd-keywords
   lsd-slot-defaults 4 mop-class lsd-slot-defaults
@@ -450,8 +450,8 @@ youtoo Functions
   sd-slots 30 mop-class sd-slots
   select 5 collect select
   select-list 25 list select-list
-  semaphore-counter 5 lock semaphore-counter
-  semaphorep 7 lock semaphorep
+  semaphore-counter 6 lock semaphore-counter
+  semaphore? 7 lock semaphore?
   sequence? 11 collect sequence?
   set-dispatch-macro-character 16 read set-dispatch-macro-character
   setter 40 boot1 setter
@@ -483,8 +483,8 @@ youtoo Functions
   slotp 13 mop-inspect slotp
   socket-descriptor 3 socket socket-descriptor
   socket-host 11 socket socket-host
-  socket-port 8 socket socket-port
-  socket-queue-size 5 socket socket-queue-size
+  socket-port 9 socket socket-port
+  socket-queue-size 6 socket socket-queue-size
   sort 17 collect sort
   sort! 10 collect sort!
   sort-list 3 boot sort-list
@@ -529,32 +529,32 @@ youtoo Functions
   symbol-name 61 mop-class symbol-name
   symbol? 22 boot1 symbol?
   system 48 boot1 system
-  table-comparator 7 table1 table-comparator
+  table-comparator 8 table1 table-comparator
   table-empty? 4 table table-empty?
   table-entries 15 table1 table-entries
   table-fill-value 17 table1 table-fill-value
-  table-hash-function 10 table1 table-hash-function
+  table-hash-function 11 table1 table-hash-function
   table-keys 2 table1 table-keys
   table-ref 5 table table-ref
   table-size 5 table1 table-size
-  table-threshold 11 table1 table-threshold
+  table-threshold 12 table1 table-threshold
   table-values 16 table1 table-values
-  tablep 12 table1 tablep
+  table? 7 table1 table?
   tconc 27 thread tconc
   the-method-lookup-function 7 mop-gf the-method-lookup-function
   thread-block 2 thread thread-block
-  thread-continuation 30 thread thread-continuation
+  thread-continuation 29 thread thread-continuation
   thread-dynamic-variables 26 thread thread-dynamic-variables
   thread-error-handlers 15 thread thread-error-handlers
-  thread-reschedule 6 thread thread-reschedule
+  thread-reschedule 7 thread thread-reschedule
   thread-return-value 19 thread thread-return-value
   thread-returned? 38 thread thread-returned?
   thread-start 25 thread thread-start
   thread-state 22 thread thread-state
-  thread-suspend 3 thread thread-suspend
-  thread-unblock 5 thread thread-unblock
-  thread-value 4 thread thread-value
-  threadp 29 thread threadp
+  thread-suspend 4 thread thread-suspend
+  thread-unblock 6 thread thread-unblock
+  thread-value 5 thread thread-value
+  thread? 30 thread thread?
   ticks-per-second 3 event ticks-per-second
   time-start 26 boot1 time-start
   time-stop 23 boot1 time-stop

@@ -13,12 +13,13 @@
   made to keep this document consistent with the evolving EuLisp definition and
   EuXLisp implementation.
 
-  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small and
-  compact Lisp, but nevertheless has many interesting features, such as modules,
-  an object system, and multithreading.  EuLisp Level 1 has extra features, the
-  most notable being a full metaobject system which is implemented in Youtoo not
-  in EuXLisp.  These are a few notes on the use of EuLisp in general and EuXLisp
-  in particular and concentrate on those things unique to EuLisp.
+  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small
+  and compact Lisp, but nevertheless has many interesting features, such as
+  modules, an object system, and multithreading.  EuLisp Level 1 has extra
+  features, the most notable being a full metaobject system which is implemented
+  in Youtoo not in EuXLisp.  These are a few notes on the use of EuLisp in
+  general and EuXLisp in particular and concentrate on those things unique to
+  EuLisp.
 
 * Running EuXLisp
   Type /euxlisp/ which will print the banner and prompt:
@@ -171,7 +172,8 @@
   (deflocal foo 2)
   #+END_SRC
   You can omit the initial value if you want.  The =deflocal= form should only
-  be used at the top level (i.e., never inside a function definition or a =let=).
+  be used at the top level (i.e., never inside a function definition or a
+  =let=).
 
 * Defining Functions
   Here we use defun.
@@ -364,8 +366,8 @@
   system, comparable to C++'s class system.  Every object in EuLisp has a class,
   which is itself a first-class object: this means that classes are supported at
   the same level as any other object in the system, and can be created, passed
-  to functions, returned from functions, and so on.  For example, the integer =1=
-  has class =<integer>= (or rather, has a class with name =<integer>=).
+  to functions, returned from functions, and so on.  For example, the integer
+  =1= has class =<integer>= (or rather, has a class with name =<integer>=).
 
   In fact, EuXLisp has (class-of 1) to be =<fpi>= (for fixed point integer),
   which is a subclass of =<integer>=.
@@ -437,16 +439,16 @@
   + =predicate:= a symbol to name a function that will return true on an
     instance of the class, and false on all other objects.
   + =constructor:= a way to name a function to make an instance of the class.
-      In this case, rat will name a function of two arguments that makes an
-      instance of =<rat>=.  The first argument will be given to the =num:= keyword,
-      the second to the =den:=.  This is equivalent to defining
-      #+BEGIN_SRC eulisp
-      (defun rat (n d)
-        (make <rat> num: n den: d))
-      #+END_SRC
-      As usual, you can reorder or leave out bits as you feel.
+    In this case, rat will name a function of two arguments that makes an
+    instance of =<rat>=.  The first argument will be given to the =num:=
+    keyword, the second to the =den:=.  This is equivalent to defining
+    #+BEGIN_SRC eulisp
+    (defun rat (n d)
+      (make <rat> num: n den: d))
+    #+END_SRC
+    As usual, you can reorder or leave out bits as you feel.
   + =abstractp: t= to indicate that this class is abstract, and no direct
-      instances can be made.
+    instances can be made.
 
   The class options =predicate:= and =constructor:= can be repeated.
 
@@ -561,7 +563,7 @@
   + open-update-file opens for append.
   + get-file-position and =(setter get-file-position)= move the file pointer in
     a file opened for update.
-  + close-port closes an open stream.
+  + close-stream closes an open stream.
 
 *** Format
     A more complicated printing function is =format=, which is somewhat akin to
@@ -884,9 +886,9 @@
     #+BEGIN_SRC eulisp
     ((setter vector-ref) vec index val)
     #+END_SRC
-    Similarly, the accessor =car= has an updater =(setter car)= (often called =rplaca=
-    in other Lisps), and so on.  In general a reader function =r= will have an
-    associated updater =(setter r)=.
+    Similarly, the accessor =car= has an updater =(setter car)= (often called
+    =rplaca= in other Lisps), and so on.  In general a reader function =r= will
+    have an associated updater =(setter r)=.
 
     The function =setter= is a simple association mechanism: =setter= is a
     function that takes a reader and returns the associated writer.  To make
@@ -894,9 +896,9 @@
     #+BEGIN_SRC eulisp
     ((setter setter) r w)
     #+END_SRC
-    In fact, no particular properties of =r= and =w=, are used, so this can be used
-    as a general facility.  Further, setter functions, generic functions and
-    methods can be defined directly:
+    In fact, no particular properties of =r= and =w=, are used, so this can be
+    used as a general facility.  Further, setter functions, generic functions
+    and methods can be defined directly:
     #+BEGIN_SRC eulisp
     (defun (setter foo) (a b)
       ...)
@@ -989,8 +991,8 @@
 *** Paralation Lisp
     This emulates a paralation system.  The module =tpl= (for tiny paralation
     lisp) exports
-    + =(make-paralation n)= to make a new paralation of size =n=.  This returns a
-      index field of the new paralation.
+    + =(make-paralation n)= to make a new paralation of size =n=.  This returns
+      a index field of the new paralation.
     + elwise is the element-wise operator:
       #+BEGIN_SRC eulisp
       (elwise (a b) (+ a b))
@@ -1141,9 +1143,9 @@
    string?
    vector?
    function?
-   port?
-   input-port?
-   output-port?
+   stream?
+   input-stream?
+   output-stream?
    object?
    eof-object?
    default-object?
@@ -1246,9 +1248,9 @@
    open-output-file
    open-append-file
    open-update-file
-   close-port
-   close-input-port
-   close-output-port
+   close-stream
+   close-input-stream
+   close-output-stream
    get-file-position
    unlink
 
@@ -1369,10 +1371,10 @@
    <keyword>
    <string>
    <simple-string>
-   <port>
-   <input-port>
-   <output-port>
-   <i/o-port>
+   <stream>
+   <input-stream>
+   <output-stream>
+   <i/o-stream>
    <vector>
    <simple-vector>
    <char>
