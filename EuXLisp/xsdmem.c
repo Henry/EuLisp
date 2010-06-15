@@ -252,13 +252,13 @@ LVAL cvsubr(int type, LVAL(*fcn) (), int offset)
     return (val);
 }
 
-// cvport - convert a file pointer to an port
-LVAL cvport(fp, flags)
+// cvstream - convert a file pointer to an stream
+LVAL cvstream(fp, flags)
     FILE *fp;
     int flags;
 {
     LVAL val;
-    val = allocnode(PORT);
+    val = allocnode(STREAM);
     setfile(val, fp);
     setsavech(val, '\0');
     setpflags(val, flags);
@@ -696,7 +696,7 @@ static void mark(LVAL ptr)
                 case FIXNUM:   // mark objects that don't contain pointers
                 case FLONUM:
                 case STRING:
-                case PORT:
+                case STREAM:
                 case SUBR:
                 case XSUBR:
                 case CSUBR:
@@ -834,7 +834,7 @@ static void sweep_segment(NSEGMENT * nseg)
         {
             switch (p->n_type)
             {
-                case PORT:
+                case STREAM:
                     if (getfile(p))
                         osclose(getfile(p));
                     break;

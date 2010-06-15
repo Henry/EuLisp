@@ -30,7 +30,7 @@ int xlgetc(LVAL fptr)
     {
         fp = getfile(fptr);
         if (fp == NULL)
-            xlcerror("attempt to read from a closed port", fptr, NIL);
+            xlcerror("attempt to read from a closed stream", fptr, NIL);
         if (fp == stdin || fp == stderr)
             ch = ostgetc();
         else if ((getpflags(fptr) & PF_BINARY) != 0)
@@ -67,7 +67,7 @@ int xlpeekchar(LVAL fptr)
     {
         fp = getfile(fptr);
         if (fp == NULL)
-            xlcerror("attempt to read from a closed port", fptr, NIL);
+            xlcerror("attempt to read from a closed stream", fptr, NIL);
         ch = ospeekchar(fp);
     }
 
@@ -91,7 +91,7 @@ void xlputc(LVAL fptr, int ch)
     {
         fp = getfile(fptr);
         if (fp == NULL)
-            xlcerror("attempt to write to closed port", fptr, NIL);
+            xlcerror("attempt to write to closed stream", fptr, NIL);
         if (fp == stdout || fp == stderr)
             ostputc(ch);
         else if ((getpflags(fptr) & PF_BINARY) != 0)

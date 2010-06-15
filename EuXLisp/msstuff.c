@@ -635,30 +635,30 @@ static int xcheck()
 #endif
 
 #ifdef NOTDEF
-// xinbyte - read a byte from an input port
+// xinbyte - read a byte from an input stream
 LVAL xinbyte()
 {
-    int portno;
+    int streamno;
     LVAL val;
     static char *cfn_name = "inbyte";
     val = xlgafixnum();
-    portno = (int)getfixnum(val);
+    streamno = (int)getfixnum(val);
     xllastarg();
-    return (cvfixnum((FIXTYPE) inportb(portno)));
+    return (cvfixnum((FIXTYPE) instreamb(streamno)));
 }
 
-// xoutbyte - write a byte to an output port
+// xoutbyte - write a byte to an output stream
 LVAL xoutbyte()
 {
-    int portno, byte;
+    int streamno, byte;
     LVAL val;
     static char *cfn_name = "outbyte";
     val = xlgafixnum();
-    portno = (int)getfixnum(val);
+    streamno = (int)getfixnum(val);
     val = xlgafixnum();
     byte = (int)getfixnum(val);
     xllastarg();
-    outportb(portno, byte);
+    outstreamb(streamno, byte);
     return (NIL);
 }
 
@@ -842,7 +842,7 @@ LVAL xtmpfile()
         xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
     }
 
-    return cvport(fp, PF_INPUT | PF_OUTPUT);
+    return cvstream(fp, PF_INPUT | PF_OUTPUT);
 }
 
 #else
@@ -869,15 +869,15 @@ LVAL xtmpfile()
         xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
     }
 
-    LVAL port = cvport(fp, PF_INPUT | PF_OUTPUT);
+    LVAL stream = cvstream(fp, PF_INPUT | PF_OUTPUT);
 
     #ifdef NOTDEF
-    cpush(port);
-    tmpfilelist = cons(cons(port, cvstring(name)), tmpfilelist);
+    cpush(stream);
+    tmpfilelist = cons(cons(stream, cvstring(name)), tmpfilelist);
     drop(1);
     #endif
 
-    return port;
+    return stream;
 }
 #endif
 

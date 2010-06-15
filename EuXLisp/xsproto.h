@@ -86,7 +86,7 @@ extern LVAL cvchar(int ch);
 extern LVAL cvclosure(LVAL code, LVAL env);
 extern LVAL cvpromise(LVAL code, LVAL env);
 extern LVAL cvsubr(int type, LVAL (*fcn)(), int offset);
-extern LVAL cvport(FILE *fp, int flags);
+extern LVAL cvstream(FILE *fp, int flags);
 extern LVAL cvtable(LVAL comp, LVAL fill);
 extern LVAL newvector(int size);
 extern LVAL newstring(int size);
@@ -271,9 +271,9 @@ extern LVAL xcloseo();
 extern LVAL xgetfposition();
 extern LVAL xsetfposition();
 extern LVAL xunlink();
-extern LVAL xportp();
-extern LVAL xinputportp();
-extern LVAL xoutputportp();
+extern LVAL xstreamp();
+extern LVAL xinputstreamp();
+extern LVAL xoutputstreamp();
 extern LVAL xtranson();
 extern LVAL xtransoff();
 extern LVAL xmakestring();
@@ -463,8 +463,6 @@ extern LVAL xmake_generic();
 extern void telos_bad_ref_error(LVAL object, LVAL wanted, int interp);
 extern LVAL xcheck_ref();
 
-// xsocket.c
-
 // xsprint.c
 extern void xlprin1(LVAL expr, LVAL file);
 extern void xlprinc(LVAL expr, LVAL file);
@@ -496,5 +494,52 @@ extern LVAL xtable_values();
 extern LVAL xtable_fill();
 extern LVAL xtable_setfill();
 extern LVAL xtable_clear();
+
+// xsocket.c
+#ifdef SOCK
+extern void xlsockerror(char *msg, LVAL val);
+extern LVAL socket_socket();
+extern LVAL socket_connect();
+extern LVAL socket_bind();
+extern LVAL socket_listen();
+extern LVAL socket_accept();
+extern LVAL socket_block();
+extern LVAL socket_nonblock();
+extern LVAL socket_reuse();
+extern LVAL socket_noreuse();
+extern LVAL socket_close();
+extern LVAL socket_shutdown();
+extern LVAL socket_peeraddr();
+extern LVAL socket_peerstream();
+extern LVAL socket_sockaddr();
+extern LVAL socket_sockstream();
+extern LVAL socket_host_to_ip();
+extern LVAL socket_ip_to_host();
+extern LVAL socket_convert_to_stream();
+extern LVAL stream_fd();
+extern LVAL stream_unbuffered();
+extern LVAL stream_block_buffered();
+extern LVAL stream_line_buffered();
+extern LVAL socket_fd_zero_read();
+extern LVAL socket_fd_set_read();
+extern LVAL socket_fd_isset_read();
+extern LVAL socket_select_read();
+extern LVAL socket_fd_zero_write();
+extern LVAL socket_fd_set_write();
+extern LVAL socket_fd_isset_write();
+extern LVAL socket_select_write();
+extern int xdr_send_int(FILE *handle, int i);
+extern int xdr_recv_int(FILE *handle, int *ip);
+extern int xdr_send_double(FILE *handle, double i);
+extern int xdr_recv_double(FILE *handle, double *ip);
+extern int xdr_send_string(FILE *handle, char *i, int len);
+extern int xdr_recv_string(FILE *handle, char **ip, int len);
+extern LVAL stream_xdr_send_int();
+extern LVAL stream_xdr_recv_int();
+extern LVAL stream_xdr_send_float();
+extern LVAL stream_xdr_recv_float();
+extern LVAL stream_xdr_send_string();
+extern LVAL stream_xdr_recv_string();
+#endif
 
 #endif

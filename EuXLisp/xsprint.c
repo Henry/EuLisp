@@ -169,7 +169,7 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
             else
                 xlputstr(fptr, getstring(vptr));
             break;
-        case PORT:
+        case STREAM:
             putatm(fptr, "file-stream:", vptr);
             break;
         case CODE:

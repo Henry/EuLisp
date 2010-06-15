@@ -42,18 +42,18 @@ LVAL class_of(LVAL obj)
     if (keywordp(obj))
         return getelement(class_vector, KEYWORD);
 
-    if (portp(obj))
+    if (streamp(obj))
     {
         if ((getpflags(obj) & PF_INPUT) != 0)
         {
             if ((getpflags(obj) & PF_OUTPUT) != 0)
-                return getelement(class_vector, IOPORT);        /* input/output
-                                                                 * port */
+                return getelement(class_vector, IOSTREAM);        /* input/output
+                                                                 * stream */
             else
-                return getelement(class_vector, IPORT); // input port
+                return getelement(class_vector, ISTREAM); // input stream
         }
         else
-            return getelement(class_vector, OPORT);     // output port
+            return getelement(class_vector, OSTREAM);     // output stream
     }
 
     if (obj->n_type < NTYPES)
@@ -1018,10 +1018,10 @@ static LVAL init_class(int type, char *name, LVAL super, LVAL absp)
 static void init_builtin_classes()
 {
     LVAL list_cl, integer_cl, float_cl, function_cl, simplefun_cl;
-    LVAL number_cl, symbol_cl, port_cl, vector_cl, char_cl;
+    LVAL number_cl, symbol_cl, stream_cl, vector_cl, char_cl;
     LVAL generic_cl, method_cl, slot_cl, table_cl, string_cl;
 
-    // incl. NULLTYPE, KEYWORD, IPORT, OPORT, IOPORT
+    // incl. NULLTYPE, KEYWORD, ISTREAM, OSTREAM, IOSTREAM
     class_vector = newvector(NTYPES + EXTRA_TYPES);
 
     list_cl = init_class(-1, "<list>", object, true);
@@ -1038,10 +1038,10 @@ static void init_builtin_classes()
     init_class(KEYWORD, "<keyword>", symbol_cl, NIL);
     string_cl = init_class(-1, "<string>", object, true);
     init_class(STRING, "<simple-string>", string_cl, NIL);
-    port_cl = init_class(PORT, "<stream>", object, true);
-    init_class(IPORT, "<input-stream>", port_cl, NIL);
-    init_class(OPORT, "<output-stream>", port_cl, NIL);
-    init_class(IOPORT, "<i/o-stream>", port_cl, NIL);
+    stream_cl = init_class(STREAM, "<stream>", object, true);
+    init_class(ISTREAM, "<input-stream>", stream_cl, NIL);
+    init_class(OSTREAM, "<output-stream>", stream_cl, NIL);
+    init_class(IOSTREAM, "<i/o-stream>", stream_cl, NIL);
     vector_cl = init_class(-1, "<vector>", object, true);
     init_class(VECTOR, "<simple-vector>", vector_cl, NIL);
     char_cl = init_class(-1, "<char>", object, true);

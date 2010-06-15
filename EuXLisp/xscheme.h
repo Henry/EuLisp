@@ -133,9 +133,9 @@ extern FILE *filein;
 #define xlganumber()    (testarg(typearg(numberp,"<number>")))
 #define xlgachar()      (testarg(typearg(charp,"<char>")))
 #define xlgavector()    (testarg(typearg(vectorp,"<vector>")))
-#define xlgaport()      (testarg(typearg(portp,"<port>")))
-#define xlgaiport()     (testarg(typearg(iportp,"<input-port>")))
-#define xlgaoport()     (testarg(typearg(oportp,"<output-port>")))
+#define xlgastream()    (testarg(typearg(streamp,"<stream>")))
+#define xlgaistream()   (testarg(typearg(istreamp,"<input-stream>")))
+#define xlgaostream()   (testarg(typearg(ostreamp,"<output-stream>")))
 #define xlgaclosure()   (testarg(typearg(closurep,"<closure>")))
 #define xlgaenv()       (testarg(typearg(envp,"<env>")))
 #define xlgamodule()    (testarg(typearg(modulep,"<module>")))
@@ -152,7 +152,7 @@ extern FILE *filein;
 #define FLONUM          4
 #define STRING          5
 #define OBJECT          6
-#define PORT            7
+#define STREAM          7
 #define VECTOR          8
 #define CLOSURE         9
 #define CODE            11
@@ -173,16 +173,16 @@ extern FILE *filein;
 #define NTYPES          24
 #define NULLTYPE        NTYPES
 #define KEYWORD         (NTYPES+1)
-#define IPORT           (NTYPES+2)
-#define OPORT           (NTYPES+3)
-#define IOPORT          (NTYPES+4)
+#define ISTREAM         (NTYPES+2)
+#define OSTREAM         (NTYPES+3)
+#define IOSTREAM        (NTYPES+4)
 #define EXTRA_TYPES     5
 
 // node flags
 #define MARK            1
 #define LEFT            2
 
-// port flags
+// stream flags
 #define PF_INPUT        1
 #define PF_OUTPUT       2
 #define PF_BINARY       4
@@ -199,14 +199,14 @@ extern FILE *filein;
 #define listp(x)        ((x) == NIL || ntype(x) == CONS)
 #define numberp(x)      ((x) && (ntype(x) == FIXNUM || ntype(x) == FLONUM))
 #define boundp(x)       (getvalue(x) != s_unbound)
-#define iportp(x)       (portp(x) && (getpflags(x) & PF_INPUT) != 0)
-#define oportp(x)       (portp(x) && (getpflags(x) & PF_OUTPUT) != 0)
+#define istreamp(x)     (streamp(x) && (getpflags(x) & PF_INPUT) != 0)
+#define ostreamp(x)     (streamp(x) && (getpflags(x) & PF_OUTPUT) != 0)
 
 // basic type predicates
 #define consp(x)        ((x) && ntype(x) == CONS)
 #define stringp(x)      ((x) && ntype(x) == STRING)
 #define symbolp(x)      ((x) && ntype(x) == SYMBOL)
-#define portp(x)        ((x) && ntype(x) == PORT)
+#define streamp(x)      ((x) && ntype(x) == STREAM)
 #define objectp(x)      ((x) && ntype(x) == OBJECT)
 #define fixp(x)         ((x) && ntype(x) == FIXNUM)
 #define floatp(x)       ((x) && ntype(x) == FLONUM)
@@ -307,7 +307,7 @@ extern FILE *filein;
 #define getstring(x)    ((char *)(x)->n_vdata)
 #define getslength(x)   ((x)->n_vsize)
 
-// iport/oport access macros
+// istream/ostream access macros
 #define getfile(x)      ((x)->n_fp)
 #define setfile(x,v)    ((x)->n_fp = (v))
 #define getsavech(x)    ((x)->n_savech)
@@ -431,7 +431,7 @@ typedef struct node
         {                       // file pointer node
             FILE *xf_fp;        // the file pointer
             short xf_savech;    // lookahead character for input files
-            short xf_pflags;    // port flags
+            short xf_pflags;    // stream flags
         } n_xfptr;
         struct xvect
         {                       // vector node

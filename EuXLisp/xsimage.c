@@ -344,7 +344,7 @@ int xlirestore(char *fname)
                     *cp++ = osbgetc(fp);
                 off += sizeof(NODE);
                 break;
-            case PORT:
+            case STREAM:
                 p = cviptr(off);
                 readnode(type, p);
                 setfile(p, NULL);
@@ -393,7 +393,7 @@ static void freeimage()
     LVAL p;
     int n;
 
-    // close all open ports and free each node segment
+    // close all open streams and free each node segment
     while (nsegments != NULL)
     {
         nextnseg = nsegments->ns_next;
@@ -402,7 +402,7 @@ static void freeimage()
         for (; --n >= 0; ++p)
             switch (ntype(p))
             {
-                case PORT:
+                case STREAM:
                     if ((fp = getfile(p)) != NULL
                     && (fp != stdin && fp != stdout && fp != stderr))
                         osclose(getfile(p));

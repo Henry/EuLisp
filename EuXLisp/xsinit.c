@@ -441,10 +441,10 @@ void xlsymbols()
     set_ticks();
 
     // setup stdin/stdout/stderr
-    setvalue(s_stdin, cvport(stdin, PF_INPUT));
-    setvalue(s_stdout, cvport(stdout, PF_OUTPUT));
-    setvalue(s_stderr, cvport(stderr, PF_OUTPUT));
-    setvalue(s_filein, cvport(filein, PF_INPUT));
+    setvalue(s_stdin, cvstream(stdin, PF_INPUT));
+    setvalue(s_stdout, cvstream(stdout, PF_OUTPUT));
+    setvalue(s_stderr, cvstream(stderr, PF_OUTPUT));
+    setvalue(s_filein, cvstream(filein, PF_INPUT));
 
     // get the built-in continuation subrs
     cs_map1 = getvalue(xlenter("%MAP1"));

@@ -1782,7 +1782,7 @@ static int load_module(LVAL sym)
         return FALSE;   // fail
     }
 
-    LVAL file = cvport(fp, PF_INPUT);
+    LVAL file = cvstream(fp, PF_INPUT);
     cpush(file);
 
     if (!quiet)

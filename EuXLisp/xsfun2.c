@@ -265,7 +265,7 @@ static void do_withfile(int flags, char *mode)
     xllastarg();
 
     // create a file object
-    file = cvport(NULL, flags);
+    file = cvstream(NULL, flags);
     if ((fp = osaopen(getstring(name), mode)) == NULL)
         xlcerror("can't open file", name, NIL);
     setfile(file, fp);
@@ -317,7 +317,7 @@ static void do_load(LVAL print)
     xllastarg();
 
     // create a file object
-    file = cvport(NULL, PF_INPUT);
+    file = cvstream(NULL, PF_INPUT);
     if ((fp = osaopen(getstring(xlval), "r")) == NULL)
     {
         xlval = NIL;
@@ -457,7 +457,7 @@ LVAL xread()
     LVAL fptr, val;
 
     // get file pointer and eof value
-    fptr = (moreargs()? xlgaiport() : xstdin());
+    fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
 
     // read an expression
@@ -474,7 +474,7 @@ LVAL xrdchar()
     static char *cfn_name = "read-char";
     LVAL fptr;
     int ch;
-    fptr = (moreargs()? xlgaiport() : xstdin());
+    fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
     return ((ch = xlgetc(fptr)) == EOF ? eof_object : cvchar(ch));
 }
@@ -485,7 +485,7 @@ LVAL xrdbyte()
     static char *cfn_name = "read-byte";
     LVAL fptr;
     int ch;
-    fptr = (moreargs()? xlgaiport() : xstdin());
+    fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
     return ((ch = xlgetc(fptr)) == EOF ? eof_object : cvfixnum((FIXTYPE) ch));
 }
@@ -498,7 +498,7 @@ LVAL xrdshort()
     short int val = 0;
     LVAL fptr;
     int ch, n;
-    fptr = (moreargs()? xlgaiport() : xstdin());
+    fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
     for (n = sizeof(short int), p = (unsigned char *)&val; --n >= 0;)
     {
@@ -517,7 +517,7 @@ LVAL xrdlong()
     long int val = 0;
     LVAL fptr;
     int ch, n;
-    fptr = (moreargs()? xlgaiport() : xstdin());
+    fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
     for (n = sizeof(long int), p = (unsigned char *)&val; --n >= 0;)
     {
@@ -535,7 +535,7 @@ LVAL xpeek_char()
     LVAL fptr;
     int ch;
 
-    fptr = (moreargs()? xlgaiport() : xstdin());
+    fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
 
     ch = xlpeekchar(fptr);
@@ -553,7 +553,7 @@ LVAL xchar_readyp()
     static char *cfn_name = "char-ready?";
     LVAL fptr;
 
-    fptr = (moreargs()? xlgaiport() : xstdin());
+    fptr = (moreargs()? xlgaistream() : xstdin());
     xllastarg();
 
     if (xlpeekchar(fptr) == NOCHAR)
@@ -580,7 +580,7 @@ LVAL xwrite()
 
     // get expression to print and file pointer
     val = xlgetarg();
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // print the value
@@ -596,7 +596,7 @@ LVAL xprint()
 
     // get expression to print and file pointer
     val = xlgetarg();
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // print the value
@@ -611,7 +611,7 @@ LVAL xwrchar()
     static char *cfn_name = "write-char";
     LVAL fptr, ch;
     ch = xlgachar();
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     xlputc(fptr, (int)getchcode(ch));
     return (true);
@@ -623,7 +623,7 @@ LVAL xwrbyte()
     static char *cfn_name = "write-byte";
     LVAL fptr, ch;
     ch = xlgafixnum();
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     xlputc(fptr, (int)getfixnum(ch));
     return (true);
@@ -639,7 +639,7 @@ LVAL xwrshort()
     int n;
     v = xlgafixnum();
     val = (short int)getfixnum(v);
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     for (n = sizeof(short int), p = (unsigned char *)&val; --n >= 0;)
         xlputc(fptr, *p++);
@@ -656,7 +656,7 @@ LVAL xwrlong()
     int n;
     v = xlgafixnum();
     val = (long int)getfixnum(v);
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
     for (n = sizeof(long int), p = (unsigned char *)&val; --n >= 0;)
         xlputc(fptr, *p++);
@@ -671,7 +671,7 @@ LVAL xdisplay()
 
     // get expression to print and file pointer
     val = xlgetarg();
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // print the value
@@ -686,7 +686,7 @@ LVAL xnewline()
     LVAL fptr;
 
     // get file pointer
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // terminate the print line and return nil
@@ -773,7 +773,7 @@ static LVAL openfile(int flags, char *mode)
     }
 
     // try to open the file
-    file = cvport(NULL, flags);
+    file = cvstream(NULL, flags);
     fp = ((flags & PF_BINARY) == 0 ? osaopen(name, mode) : osbopen(name, mode));
     if (fp == NULL)
         return (NIL);
@@ -786,7 +786,7 @@ LVAL xclose()
 {
     static char *cfn_name = "close-stream";
     LVAL fptr;
-    fptr = xlgaport();
+    fptr = xlgastream();
     xllastarg();
     if (getfile(fptr))
         osclose(getfile(fptr));
@@ -799,7 +799,7 @@ LVAL xclosei()
 {
     static char *cfn_name = "close-input-stream";
     LVAL fptr;
-    fptr = xlgaiport();
+    fptr = xlgaistream();
     xllastarg();
     if (getfile(fptr))
         osclose(getfile(fptr));
@@ -812,7 +812,7 @@ LVAL xcloseo()
 {
     static char *cfn_name = "close-output-stream";
     LVAL fptr;
-    fptr = xlgaoport();
+    fptr = xlgaostream();
     xllastarg();
     if (getfile(fptr))
         osclose(getfile(fptr));
@@ -826,7 +826,7 @@ LVAL xgetfposition()
     static char *cfn_name = "get-file-position";
     extern long ostell();
     LVAL fptr;
-    fptr = xlgaport();
+    fptr = xlgastream();
     xllastarg();
     return (cvfixnum(ostell(getfile(fptr))));
 }
@@ -838,7 +838,7 @@ LVAL xsetfposition()
     LVAL fptr, val;
     long position;
     int whence;
-    fptr = xlgaport();
+    fptr = xlgastream();
     val = xlgafixnum();
     position = getfixnum(val);
     val = xlgafixnum();
@@ -862,34 +862,34 @@ LVAL xunlink()
     return (osunlink(getstring(path)) == 0 ? true : NIL);
 }
 
-// xportp - built-in function 'stream?'
-LVAL xportp()
+// xstreamp - built-in function 'stream?'
+LVAL xstreamp()
 {
     static char *cfn_name = "stream?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
-    return (portp(arg) ? true : NIL);
+    return (streamp(arg) ? true : NIL);
 }
 
-// xinputportp - built-in function 'input-stream?'
-LVAL xinputportp()
+// xinputstreamp - built-in function 'input-stream?'
+LVAL xinputstreamp()
 {
     static char *cfn_name = "input-stream?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
-    return (iportp(arg) ? true : NIL);
+    return (istreamp(arg) ? true : NIL);
 }
 
-// xoutputportp - built-in function 'output-stream?'
-LVAL xoutputportp()
+// xoutputstreamp - built-in function 'output-stream?'
+LVAL xoutputstreamp()
 {
     static char *cfn_name = "output-stream?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
-    return (oportp(arg) ? true : NIL);
+    return (ostreamp(arg) ? true : NIL);
 }
 
 // xtranson - built-in function 'transcript-on'
@@ -1530,7 +1530,7 @@ LVAL xdecompile()
 
     // get the closure (or code) and file pointer
     fun = xlgetarg();
-    fptr = (moreargs()? xlgaoport() : xstdout());
+    fptr = (moreargs()? xlgaostream() : xstdout());
     xllastarg();
 
     // make sure we got either a closure or a code object
