@@ -303,7 +303,7 @@
          ;; occur; only exception is the init lambda which is not normalized
          ;; (see ex-body).
          ;;--------------------------
-         ((and (lambdap op) (lambda-delegated-vars? op))
+         ((and (lambda? op) (lambda-delegated-vars? op))
           (notify0 "call init lambda ~a" op)
           (encode op state)
           (if (dynamic *in-tail-pos*)
@@ -313,19 +313,19 @@
          ;;--------------------------
          ;; Call inlined lambda (let) or init lambda without delegated vars.
          ;;--------------------------
-         ((lambdap op)
+         ((lambda? op)
           (notify0 "call let lambda ~a" op)
           (encode-let op args nargs state))
          ;;--------------------------
          ;; Call opencoding (opencoded-lambda)
          ;;--------------------------
-         ((opencodingp op)
+         ((opencoding? op)
           (notify0 "call opencoded-lambda ~a" op)
           (add-asms (fun-body? op) (- 1 nargs) state))
          ;;--------------------------
          ;; Call binding to ...
          ;;--------------------------
-         ((bindingp op)
+         ((binding? op)
           (notify0 "call binding ~a" (binding-local-name? op))
           (let ((obj (binding-obj? op))
                 (binding-name (binding-local-name? op))
@@ -379,10 +379,10 @@
         ((devide-args (l rest)
             (if (null? l) (cons () rest)
               (let* ((arg (car l))
-                     (obj (if (bindingp arg) (binding-obj? arg) ())))
-                (cond ((constp arg)
+                     (obj (if (binding? arg) (binding-obj? arg) ())))
+                (cond ((const? arg)
                        (devide-args (cdr l) (cons arg rest)))
-                      ((null? (bindingp arg))
+                      ((null? (binding? arg))
                        (cons (reverse l) rest))
                       ((local-static-var? obj)
                        (cons (reverse l) rest))
@@ -393,10 +393,10 @@
          (stack-args-in-position (l i)
             (if (null? l) t
               (let* ((arg (car l))
-                     (obj (if (bindingp arg) (binding-obj? arg) ())))
-                (cond ((constp arg)
+                     (obj (if (binding? arg) (binding-obj? arg) ())))
+                (cond ((const? arg)
                        ())
-                      ((null? (bindingp arg))
+                      ((null? (binding? arg))
                        ())
                       ((and (local-static-var? obj)
                             (< (var-used? obj) 2)

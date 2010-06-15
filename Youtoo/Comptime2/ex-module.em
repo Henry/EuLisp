@@ -154,7 +154,7 @@
                 (let ((binding (get-lexical-binding (cadr name))))
                   (if (and binding
                            (let ((obj (binding-obj? binding)))
-                             (and (funp obj)
+                             (and (fun? obj)
                                   (lambda-inlined? obj))))
                       (make-inlined-setter name params body)
                     ())
@@ -206,7 +206,7 @@
                                (make-dummy-binding (cadr x))
                                "no lexical binding ~a available" (cadr x))))
                  (obj (binding-obj? binding)))
-            (if (lambdap obj)
+            (if (lambda? obj)
                 (progn
                   (lambda-inlined! obj t)
                   (new-node binding 'inlined-lambda))

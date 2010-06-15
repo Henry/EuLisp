@@ -46,7 +46,7 @@
     (notify0 "  Import syntax module ~a ..." name)
     (with-ct-handler (format () "cannot import syntax module ~a" name)
                      (dynamic *actual-module*)
-      (let ((module (or (modulep name) (find-syntax-module name))))
+      (let ((module (or (module? name) (find-syntax-module name))))
         (access-table-do
          (lambda (key binding)
            ;; Attention -- key is ptr to C string!
@@ -72,13 +72,13 @@
       binding))
 
   (defun register-imported-syntax-module (module)
-    (let ((name (if (modulep module) (module-name? module) module)))
+    (let ((name (if (module? module) (module-name? module) module)))
       (labels
           ((loop (l)
                  (if (null? l)
                      (new-node module 'used-syntax-module)
                    (let ((m (car l)))
-                     (if (modulep m)
+                     (if (module? m)
                          (if (eq m module)
                              m
                            (loop (cdr l)))

@@ -151,7 +151,7 @@
                       body: (or (syntax-obj? body) `(progn ,@body))
                       has-unknown-appls: (and has-unknown-appls
                                               (car has-unknown-appls)))))
-      (and (lambdap node)
+      (and (lambda? node)
            (if (or (eq name 'anonymous) special-name?)
                (new-node node 'anonymous-lambda)
              (new-node node 'named-lambda)))
@@ -238,11 +238,11 @@
   ;         obj: node))
 
   (defun true-local-binding? (binding)
-    (if (bindingp binding)
+    (if (binding? binding)
         (let ((obj (binding-obj? binding)))
           (null? (or (interface-binding? binding)  ; from interface file
                     (binding-imported? binding)    ; from just compiled module
-                    (opencodingp obj)
+                    (opencoding? obj)
                     (get-binding-info binding 'opencoding)
                     (get-binding-info binding 'ff)
                     (and (eq (get-binding-info binding 'class) 'constant)

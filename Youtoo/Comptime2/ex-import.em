@@ -45,7 +45,7 @@
     (notify0 "  Import module ~a ..." name)
     (with-ct-handler (format () "cannot import lexical module ~a" name)
                      (dynamic *actual-module*)
-      (let ((module (or (modulep name) (find-imported-module name))))
+      (let ((module (or (module? name) (find-imported-module name))))
         (access-table-do
          (lambda (key binding)
            ;; Attention -- key is ptr to C string!
@@ -57,7 +57,7 @@
                (set-lexical-binding binding)
                (binding-imported! binding t))))
          (module-external-env? module))
-        (if (modulep name) ()
+        (if (module? name) ()
           (register-imported-module module))
         module)))
 

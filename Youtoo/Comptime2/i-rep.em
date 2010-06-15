@@ -123,7 +123,7 @@
            ((eq x :)
             (let* ((new-module-name (read lispin () (eos-default-value)))
                    (module (get-module new-module-name)))
-              (if (modulep module)
+              (if (module? module)
                   (dynamic-setq *actual-module* module)
                 (progn
                   (setq module (dynamic-load-module new-module-name))
@@ -137,7 +137,7 @@
               (if (eq new-module-name 'user) ()
                 ;; user module is hard-coded and cannot be loaded
                 (progn
-                  (if (modulep module)
+                  (if (module? module)
                       ((setter *get-loaded-module*) new-module-name ())
                     ())
                   (setq module (dynamic-load-module new-module-name t))

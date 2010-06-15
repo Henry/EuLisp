@@ -38,7 +38,7 @@
                          ()))))
       (if res
           (let ((obj (binding-obj? res)))
-            (if (varp obj)
+            (if (var? obj)
                 (var-used! obj (+ (var-used? obj) 1))
               ()))
         ())
@@ -55,7 +55,7 @@
                  (old-lexical-binding (get-lexical-binding binding-name))
                  (old-syntax-binding (get-syntax-binding binding-name)))
             (cond
-             ((bindingp old-lexical-binding)
+             ((binding? old-lexical-binding)
               (let ((old-module-name
                      (save-binding-module-name? old-lexical-binding))
                     (old-index (binding-local-index? old-lexical-binding)))
@@ -68,7 +68,7 @@
                   (ct-warning
                    () "new lexical binding ~a shadows lexical binding ~a"
                    proper-binding old-lexical-binding))))
-             ((and (bindingp old-syntax-binding)
+             ((and (binding? old-syntax-binding)
                    (null? (eq old-lexical-binding old-syntax-binding))
                    (null? *interpreter*))
               (ct-warning
@@ -110,7 +110,7 @@
                  (binding-name (binding-local-name? proper-binding))
                  (proper-module-name (save-binding-module-name? proper-binding))
                  (old-binding (get-external-binding binding-name)))
-            (if (bindingp old-binding)
+            (if (binding? old-binding)
                 (let ((old-module-name (save-binding-module-name? old-binding))
                       (old-index (binding-local-index? old-binding)))
                   (if (or (null? (eq old-module-name proper-module-name))
@@ -162,7 +162,7 @@
                  (old-lexical-binding (get-lexical-binding binding-name))
                  (old-syntax-binding (get-syntax-binding binding-name)))
             (cond
-             ((bindingp old-syntax-binding)
+             ((binding? old-syntax-binding)
               (let ((old-module-name
                      (save-binding-module-name? old-syntax-binding))
                     (old-index (binding-local-index? old-syntax-binding)))
@@ -175,7 +175,7 @@
                   (ct-warning
                    () "new syntax binding ~a shadows syntax binding ~a"
                    proper-binding old-syntax-binding))))
-             ((and (bindingp old-lexical-binding)
+             ((and (binding? old-lexical-binding)
                    (null? (eq old-lexical-binding binding)))
               (ct-warning
                () "new syntax binding ~a shadows lexical binding ~a"
@@ -280,7 +280,7 @@
       (if entry
           (let* ((binding (cdr entry))
                  (obj (binding-obj? binding)))
-            (if (varp obj)
+            (if (var? obj)
                 (var-used! obj (+ (var-used? obj) 1))
               ())
             binding)

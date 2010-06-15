@@ -9,22 +9,22 @@ extern LispRef cg_bycode2_bindings[];
 
 /* Module binding indices */
 #define bytecode_args__X33_fn_index 2 
-#define bytecode_size__X33_fn_index 4 
+#define bytecode_size__X33_fn_index 3 
 #define bytecode_name__X33_fn_index 17 
-#define bytecode_code__X63_fn_index 14 
-#define bytecode_modus__X33_fn_index 10 
-#define bytecode_args__X63_fn_index 8 
-#define bytecodep_fn_index 3 
-#define bytecode_code__X33_fn_index 15 
-#define bytecode_properties__X33_fn_index 11 
-#define bytecode_name__X63_fn_index 12 
+#define bytecode_code__X63_fn_index 13 
+#define bytecode_modus__X33_fn_index 9 
+#define bytecode_args__X63_fn_index 7 
+#define bytecode_code__X33_fn_index 14 
+#define bytecode_properties__X33_fn_index 10 
+#define bytecode_name__X63_fn_index 11 
 #define get_bytecode_fn_index 18 
-#define get_stream_primitive_fn_index 9 
-#define bytecode_size__X63_fn_index 13 
-#define _bytecode__X60_X62_fn_index 6 
-#define bytecode_modus__X63_fn_index 16 
-#define bytecode_properties__X63_fn_index 5 
-#define get_register_fn_index 7 
+#define get_stream_primitive_fn_index 8 
+#define bytecode_size__X63_fn_index 12 
+#define _bytecode__X60_X62_fn_index 5 
+#define bytecode__X63_fn_index 16 
+#define bytecode_modus__X63_fn_index 15 
+#define bytecode_properties__X63_fn_index 4 
+#define get_register_fn_index 6 
 
 
 

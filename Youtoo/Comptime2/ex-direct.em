@@ -66,13 +66,13 @@
     (access-table-do
      (lambda (name binding)
        ;; Attention -- name is ptr to C string!
-       (if (bindingp binding)
+       (if (binding? binding)
            ()  ; exposed binding -- nothing to do
          (let ((new-binding (get-lexical-binding binding)))
            (if new-binding
                (let ((obj (binding-obj? new-binding)))
                  (set-external-binding new-binding)
-                 (if (funp obj)
+                 (if (fun? obj)
                      (fun-has-unknown-appls! obj t)
                    ()))
              (ct-serious-warning () "exported lexical binding ~a not available"

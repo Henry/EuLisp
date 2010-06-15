@@ -16,8 +16,8 @@
   (defmacro def-syntax-obj (cl-name super slots . options)
     (let* ((str (symbol-name cl-name))
            (pred-str (concatenate
-                      (substring str 1 (- (string-size str) 1))
-                      (if (member #\- str) "?" "p")))
+                       (substring str 1 (- (string-size str) 1))
+                       "?"))
            (pred-name (make <symbol> name: pred-str))
            (export-names ()))
       (labels

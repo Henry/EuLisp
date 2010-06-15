@@ -11,7 +11,9 @@
    import (i-level1 sx-obj1)
    expose (sx-obj1 sx-obj2)
   ;; generated accessors and predicates are automatiacally exported
-   export (local-name? origin-name? binding? binding!
+   export (local-name? origin-name?
+           ;binding?
+           binding!
            save-binding-local-name? save-binding-module-name?))
 
 ;;;-----------------------------------------------------------------------------
@@ -59,7 +61,7 @@
   ;(declare-inline origin-name?)
 
   (defun local-name? (obj)
-    (if (bindingp obj)
+    (if (binding? obj)
         (binding-local-name? obj)
       (let ((x (slot-value obj 'binding)))
         (and x (binding-local-name? x)))))
@@ -68,7 +70,7 @@
     ;; Sometimes x is a hard-code level1 binding (i.e. a list)
     (if (cons? x)
         (cdr (cdr x))
-      (if (bindingp x)
+      (if (binding? x)
           (binding-local-name? x)
         x)))
 
@@ -76,13 +78,13 @@
     ;; Sometimes x is a hard-code level1 binding (i.e. a list)
     (if (cons? x)
         (car (cdr x))
-      (if (bindingp x)
+      (if (binding? x)
           (let ((m (binding-module? x)))
-            (if (modulep m) (module-name? m) m))
+            (if (module? m) (module-name? m) m))
         (module-name? (dynamic *actual-module*)))))
 
-  (defun binding? (obj) (slot-value obj 'binding))
-  ;(declare-inline binding?)
+  ;(defun binding? (obj) (slot-value obj 'binding))
+  ;;(declare-inline binding?)
 
   (defun binding! (obj value)
     (let* ((slots (class-slots (class-of obj)))

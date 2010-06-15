@@ -143,19 +143,19 @@
                       (ct-serious-warning
                        (make-dummy-binding x)
                        "no lexical binding ~a available" x))))
-        (if (bindingp node)
+        (if (binding? node)
             (check-id-binding node)
           node))))
 
   (defun check-id-binding (binding)
     (register-binding-ref binding)
     (let ((obj (binding-obj? binding)))
-      (if (or (opencodingp obj)  ; opencoding and ff have to be "boxed"
+      (if (or (opencoding? obj)  ; opencoding and ff have to be "boxed"
               (get-binding-info binding 'opencoding)
               (get-binding-info binding 'ff))
           (box-binding binding)
         (progn
-          (and (funp obj)               ; fun is used as object?
+          (and (fun? obj)               ; fun is used as object?
                (fun-has-unknown-appls! obj t))
           binding))))
 
@@ -401,7 +401,7 @@
         (list (reverse new-exprs) new-vars)
       (let ((expr (car exprs))
             (rest (cdr exprs)))
-        (cond ((let*p expr)
+        (cond ((let*? expr)
                ;; -------------------------------------------------
                ;; local static variables are collected
                ;; -------------------------------------------------
@@ -412,7 +412,7 @@
               ;; -------------------------------------------------
               ;; simple values stay where they are
               ;; -------------------------------------------------
-              ((or (literal-const? expr) (bindingp expr) (funp expr))
+              ((or (literal-const? expr) (binding? expr) (fun? expr))
                (lift-appl rest (cons expr new-exprs) new-vars env))
               ;; -------------------------------------------------
               ;; other argument expressions are lifted
@@ -521,7 +521,7 @@
 ;;;-----------------------------------------------------------------------------
   (defmethod lift-if ((pred-e <let*>) then-e else-e env)
     (let ((lifted-body (lift-if (fun-body? pred-e) then-e else-e env)))
-      (if (let*p lifted-body)
+      (if (let*? lifted-body)
           (let ((new-vars (append (fun-args? pred-e)
                                   (fun-args? lifted-body))))
             (fun-args! pred-e new-vars)
@@ -652,7 +652,7 @@
   (defmethod lift-setq ((binding <binding>) (value <let*>) env)
     (let ((lifted-body (lift-setq binding (fun-body? value) env))
           (args (fun-args? value)))
-      (if (let*p lifted-body)
+      (if (let*? lifted-body)
           (let ((new-args (fun-args? lifted-body)))
             (do1-list (lambda (var) (var-used! var (+ (var-used? var) 1)))
                       new-args)
@@ -774,7 +774,7 @@
                       (new-env (cdr vars-and-env))
                       (body (expand-expr `(progn ,@(cdr (cdr x))) new-env))
                       (new-vars (lift-let*-vars vars)))
-                 (if (let*p body)
+                 (if (let*? body)
                      (make-let* (append new-vars (fun-args? body))
                                 (fun-body? body))
                    (make-let* new-vars body))))
@@ -787,7 +787,7 @@
                 (reverse new-vars)
               (let ((init-form (var-value? (car vars))))
                 (cond
-                 ((let*p init-form)
+                 ((let*? init-form)
                   (var-value! (car vars) (fun-body? init-form))
                   (loop (cdr vars) (cons (car vars)
                                          (append (reverse (fun-args? init-form))

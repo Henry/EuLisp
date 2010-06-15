@@ -60,7 +60,7 @@
     (let* ((module (binding-module? x))
            (local-name (binding-local-name? x))
            (local-index (binding-local-index? x))
-           (module-name (if (modulep module) (module-name? module) module)))
+           (module-name (if (module? module) (module-name? module) module)))
       (if (int? local-index)
           (format s "#<binding: ~a:~a:~a>" module-name local-name local-index)
         (format s "#<binding: ~a:~a>" module-name local-name))))
@@ -123,7 +123,7 @@
   (defmethod new-generic-prin ((x <let*>) s)
     (format s "(let* (")
     (do1-list (lambda (var)
-                (format s "(~a ~a)" var (and (varp var) (var-value? var))))
+                (format s "(~a ~a)" var (and (var? var) (var-value? var))))
               (fun-args? x))
     (format s ") ~a)" (fun-body? x)))
 
