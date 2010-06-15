@@ -33,13 +33,13 @@ extern LispRef stream_bindings[];
 #define eul_socket_accept_fn_index 22 
 #define connectionp_fn_index 10 
 #define output_list_contents_fn_index 14 
+#define stream__X63_fn_index 40 
 #define sprin_fn_index 21 
 #define _stream__X60_X62_fn_index 21 
 #define _buffered_stream__X60_X62_fn_index 20 
-#define disconnect_fn_index 40 
+#define disconnect_fn_index 39 
 #define end_of_stream_fn_index 19 
 #define _socket__X60_X62_fn_index 7 
-#define streamp_fn_index 39 
 #define _stream_condition__X60_X62_fn_index 38 
 #define _open_file_streams__X42_X42_fn_index 37 
 #define stream_sink_fn_index 36 

@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 15 June 2010, 15:17:09
+  Generated 15 June 2010, 20:45:50
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -243,7 +243,7 @@ youtoo Functions
   deep-copy 3 copy deep-copy
   delete 28 collect delete
   digit? 7 character digit?
-  disconnect 40 stream2 disconnect
+  disconnect 39 stream2 disconnect
   discriminating-domain 6 mop-gf discriminating-domain
   do 6 collect do
   do1-list 4 boot do1-list
@@ -285,6 +285,7 @@ youtoo Functions
   floor 8 float floor
   flush 2 stream flush
   flush-buffer 24 stream2 flush-buffer
+  fmt 2 format fmt
   format 17 mop-gf generic-format
   format1 17 boot1 format1
   fprintf 20 stream fprintf
@@ -509,7 +510,7 @@ youtoo Functions
   stream-sink 36 stream2 stream-sink
   stream-source 22 stream2 stream-source
   stream-write-action 13 stream2 stream-write-action
-  streamp 39 stream2 streamp
+  stream? 40 stream2 stream?
   strerror 6 stream1 strerror
   string-append 11 string string-append
   string-data 12 string string-data

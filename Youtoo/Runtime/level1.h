@@ -61,6 +61,7 @@ extern LispRef level1_bindings[];
 #define connectionp_fn_index 10 
 #define random_seed_fn_index 5 
 #define int_binary__fn_index 14 
+#define stream__X63_fn_index 40 
 #define sprin_fn_index 21 
 #define find_key_fn_index 2 
 #define table_entries_fn_index 15 
@@ -363,9 +364,8 @@ extern LispRef level1_bindings[];
 #define inc_fn_index 20 
 #define lispin_fn_index 13 
 #define list_equal_fn_index 47 
-#define disconnect_fn_index 40 
+#define disconnect_fn_index 39 
 #define most_positive_fixed_precision_integer_fn_index () 
-#define streamp_fn_index 39 
 #define integer__X63_fn_index 4 
 #define min_fn_index 10 
 #define read_s_expression_fn_index 12 

@@ -11,7 +11,7 @@
    import (telos lock condition convert dynamic stream1 string)
    export (<stream> stream-lock stream-read-action stream-write-action
                     stream-source stream-sink stream-mode
-                    streamp from-stream to-stream
+                    stream? from-stream to-stream
            <buffered-stream> buffered-stream?
            <string-stream> string-stream? string-stream-string-list
            <file-stream> file-stream?
@@ -70,7 +70,7 @@
                     default: default-write-action)
       (lock default: (make <lock>) reader: stream-lock)
       (mode reader: stream-mode keyword: mode: default: 'r))
-    predicate: streamp
+    predicate: stream?
     constructor: (from-stream read-action:)
     constructor: (to-stream write-action:))
 

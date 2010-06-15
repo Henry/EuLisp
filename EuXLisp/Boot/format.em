@@ -7,7 +7,7 @@
 
   (deflocal escape-char #\~)
 
-  ;;  (defcondition <stream-error> <error>)
+  ;; (defcondition <stream-error> <error>) but abstract
   (defclass <stream-error> (<error>)
     ()
     abstractp: t)
@@ -18,7 +18,7 @@
           (error msg <format-error> value: val))
 
   (define (format stream string . args)
-          (if (not (or (port? stream)
+          (if (not (or (stream? stream)
                        (eq? stream t)
                        (eq? stream ())))
               (format-error "not a valid stream for format" stream)
@@ -65,7 +65,6 @@
                        (append (prin-to-string (car args)) result)))
 
   ((setter table-ref) escape-table #\a escape-a)
-  ((setter table-ref) escape-table #\A escape-a)
 
   ; b binary integer
   (define (binary-int char string args n len result)
@@ -74,7 +73,6 @@
                        (append (radix (car args) 2) result)))
 
   ((setter table-ref) escape-table #\b binary-int)
-  ((setter table-ref) escape-table #\B binary-int)
 
   ; c character
   (define (escape-c char string args n len result)
@@ -84,7 +82,6 @@
               (escape-s char string args n len result))))
 
   ((setter table-ref) escape-table #\c escape-c)
-  ((setter table-ref) escape-table #\C escape-c)
 
   ; d decimal integer
   (define (decimal-int char string args n len result)
@@ -93,7 +90,6 @@
                        (append (radix (car args) 10) result)))
 
   ((setter table-ref) escape-table #\d decimal-int)
-  ((setter table-ref) escape-table #\D decimal-int)
 
   ; e fixed floating point
   ; f exponential floating point
@@ -102,11 +98,8 @@
           (escape-arg-float char "" string args n len result))
 
   ((setter table-ref) escape-table #\e escape-float)
-  ((setter table-ref) escape-table #\E escape-float)
   ((setter table-ref) escape-table #\f escape-float)
-  ((setter table-ref) escape-table #\F escape-float)
   ((setter table-ref) escape-table #\g escape-float)
-  ((setter table-ref) escape-table #\G escape-float)
 
   (define (escape-arg-float char arg string args n len result)
           (check-args args string)
@@ -116,11 +109,8 @@
                                result)))
 
   ((setter table-ref) escape-arg-table #\e escape-arg-float)
-  ((setter table-ref) escape-arg-table #\E escape-arg-float)
   ((setter table-ref) escape-arg-table #\f escape-arg-float)
-  ((setter table-ref) escape-arg-table #\F escape-arg-float)
   ((setter table-ref) escape-arg-table #\g escape-arg-float)
-  ((setter table-ref) escape-arg-table #\G escape-arg-float)
 
   ; o octal
   (define (octal-int char string args n len result)
@@ -129,7 +119,6 @@
                        (append (radix (car args) 8) result)))
 
   ((setter table-ref) escape-table #\o octal-int)
-  ((setter table-ref) escape-table #\O octal-int)
 
   ; r radix
   (define (escape-r char string args n len result)
@@ -149,7 +138,6 @@
                                      result))))))
 
   ((setter table-ref) escape-arg-table #\r escape-int-r)
-  ((setter table-ref) escape-arg-table #\R escape-int-r)
 
   ; s write arg
   (define (escape-s char string args n len result)
@@ -158,14 +146,12 @@
                        (append (write-to-string (car args)) result)))
 
   ((setter table-ref) escape-table #\s escape-s)
-  ((setter table-ref) escape-table #\S escape-s)
 
   ; t tab
   (define (escape-tab char string args n len result)
           (escape-int-tab char "1" string args n len result))
 
   ((setter table-ref) escape-table #\t escape-tab)
-  ((setter table-ref) escape-table #\T escape-tab)
 
   (define (escape-int-tab char arg string args n len result)
           (let ((count (string->number arg)))
@@ -180,7 +166,6 @@
             result))
 
   ((setter table-ref) escape-arg-table #\t escape-int-tab)
-  ((setter table-ref) escape-arg-table #\T escape-int-tab)
 
   ; x hexadecimal integer
   (define (hex-int char string args n len result)
@@ -189,7 +174,6 @@
                        (append (radix (car args) 16) result)))
 
   ((setter table-ref) escape-table #\x hex-int)
-  ((setter table-ref) escape-table #\X hex-int)
 
   ; % newline
   (define (escape-% char string args n len result)
@@ -289,17 +273,17 @@
 
   ; cheating
   (define (output-to-string fn obj)
-          (let ((port (tmpfile)))
-            (fn obj port)
-            (set-file-position! port 0 0)     ; seek-set
-            (let ((s (read-string port '())))
-              (close-port port)
+          (let ((stream (tmpfile)))
+            (fn obj stream)
+            (set-file-position! stream 0 0)     ; seek-set
+            (let ((s (read-string stream '())))
+              (close-stream stream)
               s)))
 
-  (define (read-string port sofar)
-          (let ((ch (read-char port)))
+  (define (read-string stream sofar)
+          (let ((ch (read-char stream)))
             (if (eof-object? ch)
                 sofar
-              (read-string port (cons ch sofar)))))
+              (read-string stream (cons ch sofar)))))
 
   )

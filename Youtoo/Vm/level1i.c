@@ -147,6 +147,7 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"connectionp", make_entry(10, "socket", "connectionp"));
   eul_fast_table_set(level1_tab,"random-seed", make_entry(5, "random", "random-seed"));
   eul_fast_table_set(level1_tab,"int-binary-", make_entry(14, "boot1", "-"));
+  eul_fast_table_set(level1_tab,"stream?", make_entry(40, "stream2", "stream?"));
   eul_fast_table_set(level1_tab,"sprin", make_entry(21, "stream", "sprin"));
   eul_fast_table_set(level1_tab,"find-key", make_entry(2, "mop-key", "find-key"));
   eul_fast_table_set(level1_tab,"table-entries", make_entry(15, "table1", "table-entries"));
@@ -422,8 +423,7 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"inc", make_entry(20, "boot1", "inc"));
   eul_fast_table_set(level1_tab,"lispin", make_entry(13, "read", "lispin"));
   eul_fast_table_set(level1_tab,"list-equal", make_entry(47, "boot1", "equal"));
-  eul_fast_table_set(level1_tab,"disconnect", make_entry(40, "stream2", "disconnect"));
-  eul_fast_table_set(level1_tab,"streamp", make_entry(39, "stream2", "streamp"));
+  eul_fast_table_set(level1_tab,"disconnect", make_entry(39, "stream2", "disconnect"));
   eul_fast_table_set(level1_tab,"integer?", make_entry(4, "integer", "integer?"));
   eul_fast_table_set(level1_tab,"min", make_entry(10, "compare", "min"));
   eul_fast_table_set(level1_tab,"read-s-expression", make_entry(12, "read", "read-s-expression"));
