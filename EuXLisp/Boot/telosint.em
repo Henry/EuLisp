@@ -140,23 +140,23 @@
   (set-class-keywords! <simple-string> (class-keywords <string>))
   (table-set! builtin-make-table <simple-string> mkstring)
 
-  ;; input-port
-  (define (mkiport inits)
+  ;; input-stream
+  (define (mkistream inits)
           (let ((filename (find-key filename: inits ())))
             (open-input-file filename)))
 
-  (set-class-keywords! <input-port> '(filename:))
-  (table-set! builtin-make-table <input-port> mkiport)
+  (set-class-keywords! <input-stream> '(filename:))
+  (table-set! builtin-make-table <input-stream> mkistream)
 
-  ;; output-port
-  (define (mkoport inits)
+  ;; output-stream
+  (define (mkostream inits)
           (let ((filename (find-key filename: inits ())))
             (open-output-file filename)))
 
-  (set-class-keywords! <output-port> '(filename:))
-  (table-set! builtin-make-table <output-port> mkoport)
+  (set-class-keywords! <output-stream> '(filename:))
+  (table-set! builtin-make-table <output-stream> mkostream)
 
-  ;; i/o port ?
+  ;; i/o stream ?
 
   ;; vector
   (define (mkvector inits)
@@ -255,6 +255,6 @@
                 (substring str 1 (- len 1))
               str)))
 
-  (define (display-class-name obj port)
-          (%display (strip<> (class-name (class-of obj))) port))
+  (define (display-class-name obj stream)
+          (%display (strip<> (class-name (class-of obj))) stream))
   )

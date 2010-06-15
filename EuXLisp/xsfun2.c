@@ -781,10 +781,10 @@ static LVAL openfile(int flags, char *mode)
     return (file);
 }
 
-// xclose - built-in function 'close-port'
+// xclose - built-in function 'close-stream'
 LVAL xclose()
 {
-    static char *cfn_name = "close-port";
+    static char *cfn_name = "close-stream";
     LVAL fptr;
     fptr = xlgaport();
     xllastarg();
@@ -794,10 +794,10 @@ LVAL xclose()
     return (NIL);
 }
 
-// xclosei - built-in function 'close-input-port'
+// xclosei - built-in function 'close-input-stream'
 LVAL xclosei()
 {
-    static char *cfn_name = "close-input-port";
+    static char *cfn_name = "close-input-stream";
     LVAL fptr;
     fptr = xlgaiport();
     xllastarg();
@@ -807,10 +807,10 @@ LVAL xclosei()
     return (NIL);
 }
 
-// xcloseo - built-in function 'close-output-port'
+// xcloseo - built-in function 'close-output-stream'
 LVAL xcloseo()
 {
-    static char *cfn_name = "close-output-port";
+    static char *cfn_name = "close-output-stream";
     LVAL fptr;
     fptr = xlgaoport();
     xllastarg();
@@ -862,30 +862,30 @@ LVAL xunlink()
     return (osunlink(getstring(path)) == 0 ? true : NIL);
 }
 
-// xportp - built-in function 'port?'
+// xportp - built-in function 'stream?'
 LVAL xportp()
 {
-    static char *cfn_name = "port?";
+    static char *cfn_name = "stream?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
     return (portp(arg) ? true : NIL);
 }
 
-// xinputportp - built-in function 'input-port?'
+// xinputportp - built-in function 'input-stream?'
 LVAL xinputportp()
 {
-    static char *cfn_name = "input-port?";
+    static char *cfn_name = "input-stream?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
     return (iportp(arg) ? true : NIL);
 }
 
-// xoutputportp - built-in function 'output-port?'
+// xoutputportp - built-in function 'output-stream?'
 LVAL xoutputportp()
 {
-    static char *cfn_name = "output-port?";
+    static char *cfn_name = "output-stream?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();

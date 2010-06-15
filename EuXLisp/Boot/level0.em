@@ -138,9 +138,9 @@
       string?
       vector?
       function?
-      port?
-      input-port?
-      output-port?
+      stream?
+      input-stream?
+      output-stream?
       object?
       eof-object?
       default-object?
@@ -243,9 +243,9 @@
       open-output-file
       open-append-file
       open-update-file
-      close-port
-      close-input-port
-      close-output-port
+      close-stream
+      close-input-stream
+      close-output-stream
       get-file-position
       unlink
 
@@ -367,10 +367,10 @@
       <keyword>
       <string>
       <simple-string>
-      <port>
-      <input-port>
-      <output-port>
-      <i/o-port>
+      <stream>
+      <input-stream>
+      <output-stream>
+      <i/o-stream>
       <vector>
       <simple-vector>
       <char>

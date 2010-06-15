@@ -12,12 +12,12 @@
     constructor: (make-modular-number value: modulus:)
     predicate: modular-number?)
 
-  (defmethod generic-write ((a <modular-number>) port)
-    (generic-prin "#<" port)
-    (generic-prin (modular-number-value a) port)
-    (generic-prin " mod " port)
-    (generic-prin (modular-number-modulus a) port)
-    (generic-prin ">" port)
+  (defmethod generic-write ((a <modular-number>) stream)
+    (generic-prin "#<" stream)
+    (generic-prin (modular-number-value a) stream)
+    (generic-prin " mod " stream)
+    (generic-prin (modular-number-modulus a) stream)
+    (generic-prin ">" stream)
     a)
 
   (defun mod (a n)

@@ -20,10 +20,10 @@
        <keyword>
        <string>
        <simple-string>
-       <port>
-       <input-port>
-       <output-port>
-       <i/o-port>
+       <stream>
+       <input-stream>
+       <output-stream>
+       <i/o-stream>
        <vector>
        <simple-vector>
        <char>

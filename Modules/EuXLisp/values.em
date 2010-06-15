@@ -26,23 +26,23 @@
     constructor: (mv-values values:)
     predicate: values?)
 
-  (defmethod generic-write ((vals <values>) port)
+  (defmethod generic-write ((vals <values>) stream)
     (let ((vs (get-values vals)))
       (unless (null? vs)
-              (write-values vs port generic-write)))
+              (write-values vs stream generic-write)))
     vals)
 
-  (defmethod generic-prin ((vals <values>) port)
+  (defmethod generic-prin ((vals <values>) stream)
     (let ((vs (get-values vals)))
       (unless (null? vs)
-              (write-values vs port generic-prin)))
+              (write-values vs stream generic-prin)))
     vals)
 
-  (defun write-values (vs port gfn)
-    (gfn (car vs) port)
+  (defun write-values (vs stream gfn)
+    (gfn (car vs) stream)
     (when (cdr vs)
-          (newline port)
-          (write-values (cdr vs) port gfn)))
+          (newline stream)
+          (write-values (cdr vs) stream gfn)))
 
   (defconstant no-values (mv-values ()))
 

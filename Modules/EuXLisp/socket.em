@@ -7,11 +7,11 @@
     (import (root setter convert)
      export (<socket> socket-fd socket? make-socket connect bind
              listen accept set-block set-nonblock reuse noreuse close-socket
-             shutdown peeraddr peerport sockaddr sockport host->ip
+             shutdown peeraddr peerstream sockaddr sockstream host->ip
              ip->host fd-zero-read fd-set-read fd-isset-read select-read
              fd-zero-write fd-set-write fd-isset-write select-write
              send-int recv-int send-float recv-float send-string recv-string
-             port-fd port-unbuffered port-block-buffered port-line-buffered))
+             stream-fd stream-unbuffered stream-block-buffered stream-line-buffered))
 
   (defclass <socket> ()
     ((fd keyword: fd:
@@ -23,15 +23,15 @@
   (define (make-socket)
           (socket-constructor (socket-socket)))
 
-  (define-generic (connect s name port))
+  (define-generic (connect s name stream))
 
-  (define-method (connect (s <socket>) (name <string>) (port <integer>))
-                 (socket-connect (socket-fd s) name port))
+  (define-method (connect (s <socket>) (name <string>) (stream <integer>))
+                 (socket-connect (socket-fd s) name stream))
 
-  (define-generic (bind s port))
+  (define-generic (bind s stream))
 
-  (define-method (bind (s <socket>) (port <integer>))
-                 (socket-bind (socket-fd s) port))
+  (define-method (bind (s <socket>) (stream <integer>))
+                 (socket-bind (socket-fd s) stream))
 
   (define-generic (listen s backlog))
 
@@ -78,20 +78,20 @@
   (define-method (peeraddr (s <socket>))
                  (socket-peeraddr (socket-fd s)))
 
-  (define-generic (peerport s))
+  (define-generic (peerstream s))
 
-  (define-method (peerport (s <socket>))
-                 (socket-peerport (socket-fd s)))
+  (define-method (peerstream (s <socket>))
+                 (socket-peerstream (socket-fd s)))
 
   (define-generic (sockaddr s))
 
   (define-method (sockaddr (s <socket>))
                  (socket-sockaddr (socket-fd s)))
 
-  (define-generic (sockport s))
+  (define-generic (sockstream s))
 
-  (define-method (sockport (s <socket>))
-                 (socket-sockport (socket-fd s)))
+  (define-method (sockstream (s <socket>))
+                 (socket-sockstream (socket-fd s)))
 
   (define-generic (host->ip name))
 
@@ -103,20 +103,20 @@
   (define-method (ip->host (ip <string>))
                  (socket-ip-to-host ip))
 
-  (define-generic (converter->port obj))
+  (define-generic (converter->stream obj))
 
-  (define-method (converter->port (obj <socket>))
-                 (socket-convert-to-port (socket-fd obj)))
+  (define-method (converter->stream (obj <socket>))
+                 (socket-convert-to-stream (socket-fd obj)))
 
-  ((setter converter) <port> converter->port)
+  ((setter converter) <stream> converter->stream)
 
   (define (fd-zero-read)
           (socket-fd-zero-read))
 
   (define-generic (fd-set-read obj))
 
-  (define-method (fd-set-read (port <port>))
-                 (socket-fd-set-read (port-fd port)))
+  (define-method (fd-set-read (stream <stream>))
+                 (socket-fd-set-read (stream-fd stream)))
 
   (define-method (fd-set-read (s <socket>))
                  (socket-fd-set-read (socket-fd s)))
@@ -126,8 +126,8 @@
 
   (define-generic (fd-isset-read obj))
 
-  (define-method (fd-isset-read (port <port>))
-                 (socket-fd-isset-read (port-fd port)))
+  (define-method (fd-isset-read (stream <stream>))
+                 (socket-fd-isset-read (stream-fd stream)))
 
   (define-method (fd-isset-read (s <socket>))
                  (socket-fd-isset-read (socket-fd s)))
@@ -156,8 +156,8 @@
 
   (define-generic (fd-set-write obj))
 
-  (define-method (fd-set-write (port <port>))
-                 (socket-fd-set-write (port-fd port)))
+  (define-method (fd-set-write (stream <stream>))
+                 (socket-fd-set-write (stream-fd stream)))
 
   (define-method (fd-set-write (s <socket>))
                  (socket-fd-set-write (socket-fd s)))
@@ -167,8 +167,8 @@
 
   (define-generic (fd-isset-write obj))
 
-  (define-method (fd-isset-write (port <port>))
-                 (socket-fd-isset-write (port-fd port)))
+  (define-method (fd-isset-write (stream <stream>))
+                 (socket-fd-isset-write (stream-fd stream)))
 
   (define-method (fd-isset-write (s <socket>))
                  (socket-fd-isset-write (socket-fd s)))
@@ -192,41 +192,41 @@
                        (loop descriptors))
                    nil))
 
-  (define-generic (send-int port i))
+  (define-generic (send-int stream i))
 
-  (define-method (send-int (port <port>) (i <integer>))
-                 (port-xdr-send-int port i))
+  (define-method (send-int (stream <stream>) (i <integer>))
+                 (stream-xdr-send-int stream i))
 
-  (define-generic (recv-int port))
+  (define-generic (recv-int stream))
 
-  (define-method (recv-int (port <port>))
-                 (port-xdr-recv-int port))
+  (define-method (recv-int (stream <stream>))
+                 (stream-xdr-recv-int stream))
 
-  (define-generic (send-float port f))
+  (define-generic (send-float stream f))
 
-  (define-method (send-float (port <port>) (f <float>))
-                 (port-xdr-send-float port f))
+  (define-method (send-float (stream <stream>) (f <float>))
+                 (stream-xdr-send-float stream f))
 
-  (define-generic (recv-float port))
+  (define-generic (recv-float stream))
 
-  (define-method (recv-float (port <port>))
-                 (port-xdr-recv-float port))
+  (define-method (recv-float (stream <stream>))
+                 (stream-xdr-recv-float stream))
 
-  (define-generic (send-string port s))
+  (define-generic (send-string stream s))
 
-  (define-method (send-string (port <port>) (s <string>))
-                 (port-xdr-send-string port s))
+  (define-method (send-string (stream <stream>) (s <string>))
+                 (stream-xdr-send-string stream s))
 
-  (define-generic (recv-string port))
+  (define-generic (recv-string stream))
 
-  (define-method (recv-string (port <port>))
-                 (port-xdr-recv-string port))
+  (define-method (recv-string (stream <stream>))
+                 (stream-xdr-recv-string stream))
 
-  (define-method (binary= (port <port>) (fd <integer>))
-                 (= (port-fd port) fd))
+  (define-method (binary= (stream <stream>) (fd <integer>))
+                 (= (stream-fd stream) fd))
 
-  (define-method (binary= (fd <integer>) (port <port>))
-                 (= fd (port-fd port)))
+  (define-method (binary= (fd <integer>) (stream <stream>))
+                 (= fd (stream-fd stream)))
 
   (define-method (binary= (s <socket>) (fd <integer>))
                  (= (socket-fd s) fd))
@@ -234,10 +234,10 @@
   (define-method (binary= (fd <integer>) (s <socket>))
                  (= fd (socket-fd s)))
 
-  (define-method (binary= (port <port>) (s <socket>))
-                 (= (port-fd port) (socket-fd s)))
+  (define-method (binary= (stream <stream>) (s <socket>))
+                 (= (stream-fd stream) (socket-fd s)))
 
-  (define-method (binary= (s <socket>) (port <port>))
-                 (= (socket-fd s) (port-fd port)))
+  (define-method (binary= (s <socket>) (stream <stream>))
+                 (= (socket-fd s) (stream-fd stream)))
 
   )

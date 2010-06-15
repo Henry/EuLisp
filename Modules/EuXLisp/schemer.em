@@ -205,16 +205,16 @@
               call/cc
               call-with-input-file
               call-with-output-file
-              input-port?
-              output-port?
-              current-input-port
-              current-output-port
+              input-stream?
+              output-stream?
+              current-input-stream
+              current-output-stream
               ;;   with-input-from-file
               ;;   with-output-to-file
               open-input-file
               open-output-file
-              close-input-port
-              close-output-port
+              close-input-stream
+              close-output-stream
               read
               read-char
               peek-char

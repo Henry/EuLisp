@@ -488,10 +488,10 @@ LVAL socket_ip_to_host()
 
 // convert to port to get I/O routines for free
 
-// (socket-convert-to-port fd)
+// (socket-convert-to-stream fd)
 LVAL socket_convert_to_port()
 {
-    static char *cfn_name = "socket-convert-to-port";
+    static char *cfn_name = "socket-convert-to-stream";
     int s;
     FILE *handle;
 
@@ -511,10 +511,10 @@ LVAL socket_convert_to_port()
     return cvport(handle, PF_INPUT | PF_OUTPUT);
 }
 
-// (port-fd port)
+// (stream-fd port)
 LVAL port_fd()
 {
-    static char *cfn_name = "port-fd";
+    static char *cfn_name = "stream-fd";
     FILE *handle;
 
     LVAL arg_handle;
@@ -529,10 +529,10 @@ LVAL port_fd()
 
 // buffering stuff loses data on most OSes
 #ifdef __linux
-// (port-unbuffered port)
+// (stream-unbuffered port)
 LVAL port_unbuffered()
 {
-    static char *cfn_name = "port-unbuffered";
+    static char *cfn_name = "stream-unbuffered";
     FILE *handle;
 
     LVAL arg_handle;
@@ -549,10 +549,10 @@ LVAL port_unbuffered()
     return TRUEVALUE;
 }
 
-// (port-block-buffered port . bufsize)
+// (stream-block-buffered port . bufsize)
 LVAL port_block_buffered()
 {
-    static char *cfn_name = "port-block-buffered";
+    static char *cfn_name = "stream-block-buffered";
     FILE *handle;
     int size;
 
@@ -577,10 +577,10 @@ LVAL port_block_buffered()
     return TRUEVALUE;
 }
 
-// (port-line-buffered port)
+// (stream-line-buffered port)
 LVAL port_line_buffered()
 {
-    static char *cfn_name = "port-line-buffered";
+    static char *cfn_name = "stream-line-buffered";
     FILE *handle;
 
     LVAL arg_handle;
@@ -597,10 +597,10 @@ LVAL port_line_buffered()
     return TRUEVALUE;
 }
 #else
-// (port-unbuffered port)
+// (stream-unbuffered port)
 LVAL port_unbuffered()
 {
-    static char *cfn_name = "port-unbuffered";
+    static char *cfn_name = "stream-unbuffered";
     FILE *handle;
 
     LVAL arg_handle;
@@ -615,10 +615,10 @@ LVAL port_unbuffered()
     return TRUEVALUE;
 }
 
-// (port-block-buffered port . bufsize)
+// (stream-block-buffered port . bufsize)
 LVAL port_block_buffered()
 {
-    static char *cfn_name = "port-block-buffered";
+    static char *cfn_name = "stream-block-buffered";
     FILE *handle;
     int size;
 
@@ -641,10 +641,10 @@ LVAL port_block_buffered()
     return TRUEVALUE;
 }
 
-// (port-line-buffered port)
+// (stream-line-buffered port)
 LVAL port_line_buffered()
 {
-    static char *cfn_name = "port-line-buffered";
+    static char *cfn_name = "stream-line-buffered";
     FILE *handle;
 
     LVAL arg_handle;
@@ -924,10 +924,10 @@ bool_t xdr_recv_string(handle, ip, len)
 
 // entry routines for XDR I/O to and from ports
 
-// (port-xdr-send-int port val)
+// (stream-xdr-send-int port val)
 LVAL port_xdr_send_int()
 {
-    static char *cfn_name = "port-xdr-send-int";
+    static char *cfn_name = "stream-xdr-send-int";
     FILE *handle;
     int i;
 
@@ -947,10 +947,10 @@ LVAL port_xdr_send_int()
     return TRUEVALUE;
 }
 
-// (port-xdr-recv-int port)
+// (stream-xdr-recv-int port)
 LVAL port_xdr_recv_int()
 {
-    static char *cfn_name = "port-xdr-recv-int";
+    static char *cfn_name = "stream-xdr-recv-int";
     FILE *handle;
     int i;
 
@@ -967,10 +967,10 @@ LVAL port_xdr_recv_int()
     return (cvfixnum((FIXTYPE) i));
 }
 
-// (port-xdr-send-float port val)
+// (stream-xdr-send-float port val)
 LVAL port_xdr_send_float()
 {
-    static char *cfn_name = "port-xdr-send-float";
+    static char *cfn_name = "stream-xdr-send-float";
     FILE *handle;
     double i;
 
@@ -994,10 +994,10 @@ LVAL port_xdr_send_float()
     return TRUEVALUE;
 }
 
-// (port-xdr-recv-float port)
+// (stream-xdr-recv-float port)
 LVAL port_xdr_recv_float()
 {
-    static char *cfn_name = "port-xdr-recv-float";
+    static char *cfn_name = "stream-xdr-recv-float";
     FILE *handle;
     double i;
 
@@ -1014,10 +1014,10 @@ LVAL port_xdr_recv_float()
     return (cvflonum((FLOTYPE) i));
 }
 
-// (port-xdr-send-string port val)
+// (stream-xdr-send-string port val)
 LVAL port_xdr_send_string()
 {
-    static char *cfn_name = "port-xdr-send-string";
+    static char *cfn_name = "stream-xdr-send-string";
     FILE *handle;
     char *string;
     int i;
@@ -1043,10 +1043,10 @@ LVAL port_xdr_send_string()
     return TRUEVALUE;
 }
 
-// (port-xdr-recv-string port)
+// (stream-xdr-recv-string port)
 LVAL port_xdr_recv_string()
 {
-    static char *cfn_name = "port-xdr-recv-string";
+    static char *cfn_name = "stream-xdr-recv-string";
     FILE *handle;
     int i;
     char *buffer;
@@ -1063,7 +1063,7 @@ LVAL port_xdr_recv_string()
         xlsockerror(cfn_name, arg_handle);
 
     if ((buffer = (char *)malloc(i * sizeof(char))) == NULL)
-        xlcerror("port-xdr-recv-string: failed to allocate memory", arg_handle,
+        xlcerror("stream-xdr-recv-string: failed to allocate memory", arg_handle,
         s_socket_error);
 
     if (xdr_recv_string(handle, &buffer, i) == FALSE)

@@ -1038,10 +1038,10 @@ static void init_builtin_classes()
     init_class(KEYWORD, "<keyword>", symbol_cl, NIL);
     string_cl = init_class(-1, "<string>", object, true);
     init_class(STRING, "<simple-string>", string_cl, NIL);
-    port_cl = init_class(PORT, "<port>", object, true);
-    init_class(IPORT, "<input-port>", port_cl, NIL);
-    init_class(OPORT, "<output-port>", port_cl, NIL);
-    init_class(IOPORT, "<i/o-port>", port_cl, NIL);
+    port_cl = init_class(PORT, "<stream>", object, true);
+    init_class(IPORT, "<input-stream>", port_cl, NIL);
+    init_class(OPORT, "<output-stream>", port_cl, NIL);
+    init_class(IOPORT, "<i/o-stream>", port_cl, NIL);
     vector_cl = init_class(-1, "<vector>", object, true);
     init_class(VECTOR, "<simple-vector>", vector_cl, NIL);
     char_cl = init_class(-1, "<char>", object, true);
