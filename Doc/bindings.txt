@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 14 June 2010, 21:38:15
+  Generated 15 June 2010, 15:17:09
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -218,7 +218,7 @@ youtoo Functions
   concatenate 19 collect concatenate
   condition-message 8 condition condition-message
   conditionp 6 condition conditionp
-  connect 17 stream connect
+  connect 18 stream connect
   connection-host 4 socket connection-host
   connection-port 6 socket connection-port
   connectionp 10 socket connectionp
@@ -269,7 +269,7 @@ youtoo Functions
   even? 5 integer even?
   exit 19 boot1 exit
   file-control-block? 25 stream2 file-control-block?
-  file-lookup 14 stream file-lookup
+  file-lookup 15 stream file-lookup
   file-stream? 49 stream2 file-stream?
   fill 21 collect fill
   fill-buffer 3 stream2 fill-buffer
@@ -287,7 +287,7 @@ youtoo Functions
   flush-buffer 24 stream2 flush-buffer
   format 17 mop-gf generic-format
   format1 17 boot1 format1
-  fprintf 19 stream fprintf
+  fprintf 20 stream fprintf
   from-stream 46 stream2 from-stream
   function-domain 16 mop-class function-domain
   function-name 72 mop-class function-name
@@ -358,7 +358,7 @@ youtoo Functions
   make 2 mop-gf make
   make-generic-function 16 mop-gf make-generic-function
   make-method 3 mop-meth make-method
-  make-space 21 stream make-space
+  make-space 22 stream make-space
   make-vector 38 boot1 make-vector
   map 2 collect map
   map1-list 15 boot map1-list
@@ -389,7 +389,7 @@ youtoo Functions
   name-slots 3 mop-class name-slots
   negate 13 number negate
   negative? 2 number negative?
-  newline 9 stream newline
+  newline 10 stream newline
   null? 10 boot1 null?
   number? 24 number number?
   object-keywords 17 mop-class object-keywords
@@ -398,7 +398,7 @@ youtoo Functions
   odd? 3 integer odd?
   open-file-streams 14 stream2 open-file-streams
   output-condition-contents 4 condition output-condition-contents
-  output-list-contents 13 stream output-list-contents
+  output-list-contents 14 stream output-list-contents
   parse 28 read parse
   permute 15 vector permute
   pop-dynamic-variables 8 dynamic pop-dynamic-variables
@@ -415,13 +415,12 @@ youtoo Functions
   primitive-print 3 boot1 print
   primitive-ref 4 mop-prim primitive-ref
   primitive-slot-value 6 mop-inspect primitive-slot-value
-  prin 16 stream prin
-  prin-address 11 stream prin-address
-  prin-char 8 stream prin-char
+  prin 17 stream prin
+  prin-address 12 stream prin-address
+  prin-char 9 stream prin-char
   prin-one-char 3 stream prin-one-char
   prin-string 5 stream prin-string
-  print 10 stream print
-  print-all 20 stream print-all
+  print 11 stream print
   proper-list? 16 list proper-list?
   push-dynamic-variable 2 dynamic push-dynamic-variable
   push-error-handler 5 dynamic push-error-handler
@@ -489,7 +488,8 @@ youtoo Functions
   sort! 10 collect sort!
   sort-list 3 boot sort-list
   special-tokens 30 read special-tokens
-  sprint-all 7 stream sprint-all
+  sprin 21 stream sprin
+  sprint 7 stream sprint
   sprintf 6 stream sprintf
   sread 10 read sread
   sread-s-expression 4 read sread-s-expression
@@ -523,6 +523,7 @@ youtoo Functions
   subclass? 2 mop-inspect subclass?
   substring 6 string substring
   subvector 3 vector subvector
+  swrite 4 stream swrite
   symbol-exists? 4 symbol symbol-exists?
   symbol-name 61 mop-class symbol-name
   symbol? 22 boot1 symbol?
@@ -571,7 +572,7 @@ youtoo Functions
   vector? 5 vector vector?
   wait 2 event wait
   warning 19 boot warning
-  write 12 stream write
+  write 13 stream write
   zero? 16 number zero?
 
 ---------------------------------------------------------------------------

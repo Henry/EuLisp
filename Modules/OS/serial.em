@@ -33,7 +33,7 @@
     (let ((s (if ss (car ss) stdout))
           (os (make <object-stream> mode: 'w)))
       (connect os s)
-      (write x os)
+      (swrite os x)
       (disconnect os)))
 
   (defun deserialize ss

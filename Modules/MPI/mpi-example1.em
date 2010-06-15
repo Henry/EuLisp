@@ -23,7 +23,7 @@
          (x 'hello))
     (format t "~a sending ~a\n" *mpi-this-process* x)
     (flush)
-    (write x the-other-p)
+    (swrite the-other-p x)
     (disconnect *mpi-this-process*))
 
 ;;;-----------------------------------------------------------------------------

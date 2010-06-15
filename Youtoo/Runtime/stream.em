@@ -12,11 +12,10 @@
            collect list string fpi)
    expose (stream1 stream2 socket)
    export (connect flush newline sprintf fprintf
-           write prin print prin-one-char prin-char
+           swrite write sprin sprint prin print prin-one-char prin-char
            *int-size-in-decimal-digits* *double-size-in-decimal-digits*
            output-list-contents
-           prin-string prin-address make-space file-lookup
-           print-all sprint-all))
+           prin-string prin-address make-space file-lookup))
 
 ;;;------------------------------------------------------------------------
 ;;; Stream Manipulation Functions
@@ -186,47 +185,27 @@
 ;;;------------------------------------------------------------------------
 ;;; Write and print
 ;;;------------------------------------------------------------------------
-  (defun write (x . ss)
-    (match-let ss ((s stdout))
-               (if (object? x)
-                   (generic-write x s)
-                 (progn
-                   (prin-string "#<C: " 5 s)
-                   (prin-address x s)
-                   (prin-one-char #\> s))))
-    x)
+  (defun swrite-all (s args)
+    (if args
+        (do1-list
+          (lambda (x)
+            (if (object? x)
+                (generic-write x s)
+              (progn
+                (prin-string "#<C: " 5 s)
+                (prin-address x s)
+                (prin-one-char #\> s))))
+          args)
+      ())
+    s)
 
-  (defun prin (x . ss)
-    (match-let ss ((s stdout))
-               (if (object? x)
-                   (generic-prin x s)
-                 (progn
-                   (prin-string "#<C: " 5 s)
-                   (prin-address x s)
-                   (prin-one-char #\> s))))
-    x)
+  (defun swrite (s . args)
+    (swrite-all s args))
 
-  (defun print (x . ss)
-    (match-let ss ((s stdout))
-               (if (object? x)
-                   (progn
-                     (generic-prin x s)
-                     (prin-one-char #\\n s))
-                 (progn
-                   (prin-string "#<C: " 5 s)
-                   (prin-address x s)
-                   (prin-string ">\n" 2 s))))
-    x)
+  (defun write args
+    (swrite-all stdout args))
 
-  (defun flush ss
-    (match-let ss ((s stdout))
-               (flush-buffer s)))
-
-  (defun newline ss
-    (match-let ss ((s stdout))
-               (prin-one-char #\\n s)))
-
-  (defun sprin-all (s . args)
+  (defun sprin-all (s args)
     (if args
         (do1-list
           (lambda (x)
@@ -236,19 +215,31 @@
                 (prin-string "#<C: " 5 s)
                 (prin-address x s)
                 (prin-one-char #\> s))))
-          (car args))
+          args)
       ())
     s)
 
-  (defun sprint-all (s . args)
-    (apply sprin-all s args)
+  (defun sprin (s . args)
+    (sprin-all s args))
+
+  (defun sprint (s . args)
+    (sprin-all s args)
     (prin-one-char #\\n s))
 
-  (defun prin-all args
+  (defun prin args
     (sprin-all stdout args))
 
-  (defun print-all args
-    (sprint-all stdout args))
+  (defun print args
+    (sprin-all stdout args)
+    (prin-one-char #\\n stdout))
+
+  (defun flush ss
+    (match-let ss ((s stdout))
+               (flush-buffer s)))
+
+  (defun newline ss
+    (match-let ss ((s stdout))
+               (prin-one-char #\\n s)))
 
 ;;;------------------------------------------------------------------------
 ;;; Some low level functions to get things printed on <file-stream>s
@@ -304,7 +295,7 @@
           (int-binary< n bufsiz)))))
 
   ;; Will be 16 for 64 bit addresses
-  (defconstant *address-size-in-hex-digits* 8)
+  ;(defconstant *address-size-in-hex-digits* 8)
 
   ;; 2^64-1 = 18446744073709551615 (20 digits) + 1 for sign
   (defconstant *int-size-in-decimal-digits* 21)

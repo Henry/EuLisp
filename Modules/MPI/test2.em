@@ -25,7 +25,7 @@
       (cond ((local-mpi-stream? s1)
              (while (setq x (read lispin () ()))
                (format t "~a sending ~a\n" s1 x)
-               (write x s2))
+               (swrite s2 x))
              (disconnect s1))
             ((local-mpi-stream? s2)
              (while (setq x (read s1))

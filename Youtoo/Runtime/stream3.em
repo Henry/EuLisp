@@ -87,7 +87,7 @@
              (prin-string "#()" 3 s))
             ((int-binary= n 1)
              (prin-string "#(" 2 s)
-             (write (vector-ref vec 0) s)
+             (swrite s (vector-ref vec 0))
              (prin-one-char #\) s))
             (t
              (let ((m (int-binary- n 1))
@@ -97,12 +97,12 @@
                 ((loop ()
                        (and (int-binary< i m)
                             (progn
-                              (write (vector-ref vec i) s)
+                              (swrite s (vector-ref vec i))
                               (prin-one-char #\  s)
                               (setq i (int-binary+ i 1))
                               (loop)))))
                 (loop)
-                (write (vector-ref vec m) s)
+                (swrite s (vector-ref vec m))
                 (prin-one-char #\) s))))))
     vec)
 
@@ -112,7 +112,7 @@
       (if (null? tail) ()
         (progn
           (prin-string " . " 3 s)
-          (write tail s))))
+          (swrite s tail))))
     (prin-one-char #\) s)
     l)
 
@@ -168,7 +168,7 @@
              (prin-string "#()" 3 s))
             ((int-binary= n 1)
              (prin-string "#(" 2 s)
-             (prin (vector-ref vec 0) s)
+             (sprin s (vector-ref vec 0))
              (prin-one-char #\) s))
             (t
              (let ((m (int-binary- n 1))
@@ -178,12 +178,12 @@
                 ((loop ()
                        (and (int-binary< i m)
                             (progn
-                              (prin (vector-ref vec i) s)
+                              (sprin s (vector-ref vec i))
                               (prin-one-char #\  s)
                               (setq i (int-binary+ i 1))
                               (loop)))))
                 (loop)
-                (prin (vector-ref vec m) s)
+                (sprin s (vector-ref vec m))
                 (prin-one-char #\) s))))))
     vec)
 
@@ -193,7 +193,7 @@
       (if (null? tail) ()
         (progn
           (prin-string " . " 3 s)
-          (prin tail s))))
+          (sprin s tail))))
     (prin-one-char #\) s)
     l)
 

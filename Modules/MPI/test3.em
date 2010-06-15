@@ -25,7 +25,7 @@
          ;(x "Hello world!")
          (x 12.34))
     (format stderr "Sending ~a from ~a to ~a\n" x local-s remote-s)
-    (write x remote-s)
+    (swrite remote-s x)
     (disconnect local-s))
 
 ;;;-----------------------------------------------------------------------------

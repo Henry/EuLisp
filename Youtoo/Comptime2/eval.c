@@ -68,7 +68,7 @@ void initialize_module_eval()
   static const void *G009318[] = {I(a9,23,00,00),B(eval ,6),I(24,00,00,00),B(i_notify ,3),I(3c,01,2a,23),B(eval ,7),I(24,00,00,00),B(i_notify ,4),I(3c,01,2a,24),B(i_param ,10),I(34,00,00,00),I(00,00,00,24),I(24,00,00,00),B(i_rep ,6),I(3c,00,2a,82),I(24,00,00,00),B(boot1 ,19),I(3d,01,00,32),I(00,00,00,38),I(24,00,00,00),B(cg_interf ,4),I(3c,00,2a,23),B(eval ,8),I(23,00,00,00),B(eval ,5),I(3b,01,24,00),B(i_param ,35),I(24,00,00,00),B(boot ,4),I(3c,02,2a,24),B(i_error ,2),I(3d,00,00,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 8 is_init: 0 index: 10 binding: (method-G009274) */
-  static const void *G009323[] = {I(ab,1c,24,00),B(stream2 ,10),I(24,00,00,00),B(stream ,10),I(3c,02,2a,85),I(24,00,00,00),B(i_error ,2),I(3d,01,02,00)};
+  static const void *G009323[] = {I(ab,1c,24,00),B(stream2 ,10),I(24,00,00,00),B(stream ,11),I(3c,02,2a,85),I(24,00,00,00),B(i_error ,2),I(3d,01,02,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 11 binding: (method-G009274) */
   static const void *G009325[] = {I(ab,86,45,02)};

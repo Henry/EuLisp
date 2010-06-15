@@ -16,7 +16,7 @@
 
   (let ((c (make <connection> host: "www.cs.bath.ac.uk" port: 80))
         x)
-    (print "GET /~jap/ak1/youtoo/home.html" c)
+    (sprint c "GET /~jap/ak1/youtoo/home.html")
     (while (setq x (read-line c () ()))
       (prin x))
     (disconnect c))

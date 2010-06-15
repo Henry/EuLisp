@@ -20,7 +20,7 @@
           (while (null? (eq (setq x (read-line c () (eos-default-value)))
                            (eos-default-value)))
             (format t "echoing ~a" x)
-            (prin x c))
+            (sprin c x))
           (disconnect c))
       (disconnect s)))
 

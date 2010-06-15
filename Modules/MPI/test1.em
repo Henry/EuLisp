@@ -22,11 +22,11 @@
           (s2 (make <mpi-stream>)))
       (cond ((local-mpi-stream? s1)
              (write "Your input: \n")
-             (write (read-line) s2)
+             (swrite s2 (read-line))
              (write (read s2))
              (disconnect s1))
             ((local-mpi-stream? s2)
-             (write (read s1) s1)
+             (swrite s1 (read s1))
              (disconnect s1))
             (t
              (error "unhandled local mpi stream" <condition>)))))

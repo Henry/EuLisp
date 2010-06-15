@@ -17,7 +17,7 @@
          x)
     (while (null? (eq (setq x (read-line stdin () (eos-default-value)))
                      (eos-default-value)))
-      (prin x c)
+      (sprin c x)
       (print (read-line c)))
     (disconnect c))
 
