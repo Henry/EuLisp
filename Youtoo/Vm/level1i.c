@@ -461,6 +461,7 @@ void fill_level1_table() {
   eul_fast_table_set(level1_tab,"find", make_entry(16, "collect", "find"));
   eul_fast_table_set(level1_tab,"gensym", make_entry(6, "symbol", "gensym"));
   eul_fast_table_set(level1_tab,"shallow-copy", make_entry(2, "copy", "shallow-copy"));
+  eul_fast_table_set(level1_tab,"fmt", make_entry(2, "format", "fmt"));
   eul_fast_table_set(level1_tab,"sf-slot-defaults", make_entry(29, "mop-class", "sf-slot-defaults"));
   eul_fast_table_set(level1_tab,"primitive-allocate", make_entry(3, "mop-prim", "primitive-allocate"));
   eul_fast_table_set(level1_tab,"lsd-slots", make_entry(28, "mop-class", "lsd-slots"));

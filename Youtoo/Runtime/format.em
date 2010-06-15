@@ -10,7 +10,7 @@
 (defmodule format
   (syntax (_telos0)
    import (telos collect fpi list string stream)
-   export (format))
+   export (format fmt))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Formatted output
@@ -95,6 +95,12 @@
         (let ((res (loop (reverse-list (format-info str)) args)))
           (flush s)
           res))))
+
+  ;; Simple wrapper function to format the arguments as a string
+  ;; for use with the n-ary print function for example:
+  ;; (print "test n = " (fmt "~d" n) " only")
+  (defun fmt (str . args)
+    (apply format () str args))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

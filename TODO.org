@@ -115,7 +115,6 @@
     + Hexadecimal sequences are hard-coded to 3 digits, if not where is the end?
     + How should the character '^' be written given that it is used to define
       control sequences e.g. #\^c ?  Perhaps #\\^ ?
-
 ***** Proposed solution
       To remove support for control sequences which are unusual,
       system-dependent and can be created using hexadecimal characters.  Also
@@ -130,8 +129,6 @@
     so that (eq 'nil '()) => t
 *** DONE (eql 3.0 3.0) should return t but it returns ()
     CLOSED: [2010-05-10 Mon 21:50]
-*** DONE Change =equal= methods to =binary==
-    CLOSED: [2010-05-10 Mon 22:05]
 *** DONE Replace =equal= with =binary==
     CLOSED: [2010-05-12 Wed 22:57]
     Remove the =equal= generic function and methods and introduce a complete set
@@ -140,12 +137,40 @@
     defined not two.  If this property is an important feature =equal= could be
     reinstated as a function wrapper around =binary== which does a
     type-consistency check.
-
-*** TODO Complete the renaming of predicates? and destructive! functions
+*** DONE Complete the renaming of predicates? and destructive! functions
+    CLOSED: [2010-06-15 Tue 14:31]
     All predicates ending in "-p" have been transformed and the functions
     "null?" and "atom?" added but the predicates ending in "p" have yet to be
     updated.
+*** DONE Change =prin=, =print= and =write= to be n-ary
+    CLOSED: [2010-06-15 Tue 15:30]
+    Add =sprin=, =sprint= and =swrite= to take the stream as the first argument.
+*** TODO Change =newline= and =flush= to operate on =stdout=
+    Add =snewline= and =sflush= to take the stream as an argument.
+*** TODO Finish =format=
+    Currently =format= only handles a subset of the functionality in the
+    definition, in particular =e= and =g= formatting of floating-point numbers
+    is missing.  =format= is complete in EuXLisp and it may be possible to reuse
+    some of this functionality.
 * EuXLisp
+*** DONE Replace =equal= with =binary==
+    CLOSED: [2010-05-12 Wed 22:57]
+    Remove the =equal= generic function and methods and introduce a complete set
+    of =binary== methods.  The only difference between the definition of =equal=
+    and =binary== is the latter applies type coercion whereas =equal= was
+    defined not two.  If this property is an important feature =equal= could be
+    reinstated as a function wrapper around =binary== which does a
+    type-consistency check.
+*** DONE Complete the renaming of predicates? and destructive! functions
+    CLOSED: [2010-06-15 Tue 14:31]
+    All predicates ending in "-p" have been transformed and the functions
+    "null?" and "atom?" added but the predicates ending in "p" have yet to be
+    updated.
+*** DONE Change =prin=, =print= and =write= to be n-ary
+    CLOSED: [2010-06-15 Tue 15:30]
+    Add =sprin=, =sprint= and =swrite= to take the stream as the first argument.
+*** TODO Change =newline= and =flush= to operate on =stdout=
+    Add =snewline= and =sflush= to take the stream as an argument.
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo implementation
     to correspond to the EuLisp-1.0 proposals.
@@ -220,7 +245,7 @@
     the special operators are implemented as primitives of the language.
 *** TODO Finish the "Lexical Syntax" section
     Provide a bit more background information.
-*** TODO Introduce the "Special Forms" list is /modules.tex/
+*** TODO Introduce the "Special Forms" list in /modules.tex/
     Or move this list to a more appropriate place, /e.g./ at the beginning of
     the section concerning "special forms".
 *** TODO Introduce the "Level-1" library and describe "module-1"

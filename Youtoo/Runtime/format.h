@@ -8,6 +8,7 @@
 extern LispRef format_bindings[];
 
 /* Module binding indices */
+#define fmt_fn_index 2 
 #define format_fn_index 17 
 
 

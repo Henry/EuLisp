@@ -411,6 +411,7 @@ extern LispRef i_level1_bindings[];
 #define find_fn_index 16 
 #define gensym_fn_index 6 
 #define shallow_copy_fn_index 2 
+#define fmt_fn_index 2 
 #define sf_slot_defaults_fn_index 29 
 #define primitive_allocate_fn_index 3 
 #define lsd_slots_fn_index 28 
