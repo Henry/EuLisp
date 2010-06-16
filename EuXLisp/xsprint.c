@@ -149,7 +149,7 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
                 putatm(fptr, "Forced-promise", vptr);
             break;
         case CLOSURE:
-            putclosure(fptr, "Procedure", vptr);
+            putclosure(fptr, "simple-function", vptr);
             break;
         case FIXNUM:
             putnumber(fptr, getfixnum(vptr));
