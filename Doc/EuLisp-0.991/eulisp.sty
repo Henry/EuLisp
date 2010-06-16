@@ -123,6 +123,20 @@
     \vskip -5pt%
 }
 
+\newcommand{\derivedentryclause}[3]
+{%
+    \let\orig@sect=\@sect%
+    \let\@sect=\@entrysect%
+    \@startsection{entryclause}{3}%
+    {\z@}%
+    {2ex plus 1ex minus .2ex}%
+    {.1ex plus .1ex}%
+    {\normalsize\bf}%
+    {{\tt #1}}{{\tt #2}\ \ {\em #3}}%
+    \let\@sect=\orig@sect%
+    \vskip -5pt%
+}
+
 % ------------------------------------------------------------------------------
 %%% Entry sub-clauses
 
@@ -269,7 +283,7 @@
 %%%  Derived class
 \newcommand{\derivedclass}[2]
 {%
-    \entryclause{<#1> \classref{#2}}{class}%
+    \derivedentryclause{<#1>}{\classref{#2}}{class}%
     \label{\classlabel{#1}}%
     \index{general}{#1@{\tt <#1>}|hyperem}%
     \index{class}{#1@{\tt{}<#1>} (\module)}%
@@ -289,7 +303,7 @@
 \newcommand*{\conditionlabel}[1]{condition:#1}
 \newcommand{\condition}[2]
 {%
-    \entryclause{<#1> \conditionref{#2}}{condition}%
+    \derivedentryclause{<#1>}{\conditionref{#2}}{condition}%
     \label{\conditionlabel{#1}}%
     \indexcondition{#1}%
 }

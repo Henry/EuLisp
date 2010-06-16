@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-06-15 22:58:00" /> 
+<meta name="date" content="2010-06-16 22:40:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -231,7 +231,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-9100011.4.4.1"><span 
+href="eulispcl11.html#x13-9100011.4.6.1"><span 
 class="cmti-9">defmethod-form</span></a></td></tr></table>
 <!--l.10 32-->                                                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -264,7 +264,7 @@ class="cmti-9">throw-form</span></a></td></tr></table>
 class="cmbx-9">18.2.1   </span><span 
 class="cmtt-9">defclass</span>
  <a 
- id="Q1-23-1288"></a>
+ id="Q1-23-1292"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">defining operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-918002"></a>
@@ -564,7 +564,7 @@ class="cmtt-9">defclass</span></a>. This option is used
 class="cmbx-9">18.3.1   </span><span 
 class="cmtt-9">generic-lambda</span>
 <a 
- id="Q1-23-1293"></a>
+ id="Q1-23-1297"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr />
 <a 
@@ -597,7 +597,7 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x23-922001r1"><span 
 class="cmtt-9">generic-lambda</span></a> <a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a></td></tr></table>
 <!--l.10 24-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -662,7 +662,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a></td></tr></table>
 <!--l.10 24-->                                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -690,7 +690,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">     </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
 <!--l.10 24-->                                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -740,7 +740,7 @@ class="cmbx-8">Arguments</span></h5>
 class="cmti-9">gf-lambda-list </span>:  </dt><dd 
 class="arguments">
         <!--l. 27--><p class="noindent" >As level-0. See section&#x00A0;<a 
-href="eulispcl11.html#x13-84009r3">11.4.3<!--tex4ht:ref: defgeneric-0 --></a>.
+href="eulispcl11.html#x13-84017r5">11.4.5<!--tex4ht:ref: defgeneric-0 --></a>.
         </p></dd><dt class="arguments">
   <span 
 class="cmti-9">level-1-init-option</span><sup><span 
@@ -764,19 +764,20 @@ class="cmtt-9">generic-lambda</span></a> is an extension of the level-0 syntax
   allowing additional init-options. These allow the specification
   of the class of the new generic function, which defaults to
   <a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a>, the class of all methods, which defaults to
-  <span 
-class="cmbx-9">??</span>, and non-standard options. The latter are evaluated in the
-  lexical and dynamic environment of <a 
-href="#x23-922001r1"><span 
-class="cmtt-9">generic-lambda</span></a> and passed to
   <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>, and non-standard options. The latter are evaluated in
+  the lexical and dynamic environment of <a 
+href="#x23-922001r1"><span 
+class="cmtt-9">generic-lambda</span></a> and
+  passed to <a 
 href="eulispcl11.html#x13-104003r1"><span 
-class="cmtt-9">make</span></a> of the generic function as additional initialization arguments.
-  The additional <span 
-class="cmti-9">init-option</span>s over level-0 are interpreted as
-  follows:
+class="cmtt-9">make</span></a> of the generic function as additional initialization
+  arguments. The additional <span 
+class="cmti-9">init-option</span>s over level-0 are interpreted
+  as follows:
   </p><!--l. 47--><p class="noindent" >
         </p><dl class="options1"><dt class="options">
   <span 
@@ -785,10 +786,10 @@ class="cmti-9">gf-class </span>:  </dt><dd
 class="options">
         <!--l. 49--><p class="noindent" >The  class  of  the  new  generic  function.  This  must
         be  a  subclass  of  <a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a>.  The  default  is
         <a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a>.
         </p></dd><dt class="options">
   <span 
@@ -799,9 +800,11 @@ class="options">
         function.  All  methods  of  a  generic  function  must  be
         instances of this class. The <span 
 class="cmti-9">method-class </span>must be a subclass
-        of <span 
-class="cmbx-9">??</span> and defaults to <span 
-class="cmbx-9">??</span>.
+        of <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a> and defaults to <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>.
                                                                                                   
                                                                                                   
     </p></dd><dt class="options">
@@ -829,14 +832,17 @@ follows:
 class="cmtt-9">class </span><span 
 class="cmti-9">method-class </span>: </dt><dd 
 class="options">
-    <!--l. 70--><p class="noindent" >The class of the method to be defined. The method class
-    must be a subclass of <span 
-class="cmbx-9">??</span> and is, by default, <span 
-class="cmbx-9">??</span>. The value
-    is passed to <a 
+    <!--l. 70--><p class="noindent" >The  class  of  the  method  to  be  defined.  The  method
+    class must be a subclass of <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a> and is, by default,
+    <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>.  The  value  is  passed  to  <a 
 href="eulispcl11.html#x13-104003r1"><span 
-class="cmtt-9">make</span></a> as the first argument. The symbol and
-    the value are not passed as initargs to <a 
+class="cmtt-9">make</span></a> as  the  first
+    argument. The symbol and the value are not passed as
+    initargs to <a 
 href="eulispcl11.html#x13-104003r1"><span 
 class="cmtt-9">make</span></a>.
     </p></dd><dt class="options">
@@ -1015,15 +1021,15 @@ class="cmtt-9">)</span>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-92800018.3.1.1"></a><span 
 class="cmbx-8">See</span><span 
-class="cmbx-8">&#x00A0;also</span></h5>
-<!--l. 113--><p class="noindent" ><a 
+class="cmbx-8">&#x00A0;also</span></h5>                                            <!--l. 113--><p class="noindent" ><a 
 href="#x23-928001r2"><span 
-class="cmtt-9">defgeneric</span></a>.                                         </p><!--l. 115--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+class="cmtt-9">defgeneric</span></a>.
+  </p><!--l. 115--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-928001r2"></a><span 
 class="cmbx-9">18.3.2   </span><span 
 class="cmtt-9">defgeneric</span>
  <a 
- id="Q1-23-1300"></a>
+ id="Q1-23-1304"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">defining operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-928002"></a>
@@ -1055,9 +1061,9 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x23-928001r2"><span 
 class="cmtt-9">defgeneric</span></a> <a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">gf-name</span></a> <a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a></td></tr></table>
 <!--l.10 125-->                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1079,13 +1085,13 @@ class="cmbx-8">Arguments</span></h5>
 class="cmti-9">gf name </span>:  </dt><dd 
 class="arguments">
         <!--l. 128--><p class="noindent" >As level-0. See section&#x00A0;<a 
-href="eulispcl11.html#x13-84009r3">11.4.3<!--tex4ht:ref: defgeneric-0 --></a>.
+href="eulispcl11.html#x13-84017r5">11.4.5<!--tex4ht:ref: defgeneric-0 --></a>.
         </p></dd><dt class="arguments">
   <span 
 class="cmti-9">gf lambda list </span>:  </dt><dd 
 class="arguments">
         <!--l. 130--><p class="noindent" >As level-0. See section&#x00A0;<a 
-href="eulispcl11.html#x13-84009r3">11.4.3<!--tex4ht:ref: defgeneric-0 --></a>.
+href="eulispcl11.html#x13-84017r5">11.4.5<!--tex4ht:ref: defgeneric-0 --></a>.
         </p></dd><dt class="arguments">
   <span 
 class="cmti-9">init option</span><sup><span 
@@ -1104,7 +1110,7 @@ class="cmbx-8">Remarks</span></h5>
 class="cmti-9">gf-name</span>. The second argument is
   the formal parameter list. An error is signalled (condition:
   <a 
-href="eulispcl14.html#x18-179001r17"><span 
+href="eulispcl14.html#x18-179001r18"><span 
 class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a> <a 
  id="dx23-931001"></a>) if any of the methods defined on
   this generic function do not have lambda lists congruent to
@@ -1124,7 +1130,7 @@ class="cmtt-9">defgeneric</span></a> is an extension of the level-0 syntax. The 
 href="#x23-928001r2"><span 
 class="cmtt-9">defgeneric</span></a> form are identical to those given in
   section&#x00A0;<a 
-href="eulispcl11.html#x13-8800011.4.3.2">11.4.3.2<!--tex4ht:ref: defgeneric-rewrite-rules --></a> except that <span 
+href="eulispcl11.html#x13-8800011.4.5.2">11.4.5.2<!--tex4ht:ref: defgeneric-rewrite-rules --></a> except that <span 
 class="cmti-9">level 1 init option </span>replaces <span 
 class="cmti-9">level 0 init</span>
   <span 
@@ -1140,10 +1146,10 @@ class="cmtt-9">defgeneric</span></a> a generic
 class="cmtt-9">gf-1 </span>is defined. The differences between this
   function and <span 
 class="cmtt-9">gf-0 </span>(see&#x00A0;<a 
-href="eulispcl11.html#x13-84009r3">11.4.3<!--tex4ht:ref: defgeneric-0 --></a>) are
-  </p><!--l. 155--><p class="noindent" >
+href="eulispcl11.html#x13-84017r5">11.4.5<!--tex4ht:ref: defgeneric-0 --></a>) are
                                                                                                   
                                                                                                   
+</p><!--l. 155--><p class="noindent" >
     </p><ol  class="enumerate1" >
     <li 
   class="enumerate" id="x23-932002x1">The                                                                class
@@ -1319,7 +1325,7 @@ class="cmtt-9">)</span>
 class="cmbx-9">18.4.1   </span><span 
 class="cmtt-9">method-lambda</span>
 <a 
- id="Q1-23-1306"></a>
+ id="Q1-23-1310"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr />
 <a 
@@ -1333,7 +1339,7 @@ class="cmbx-8">Syntax</span></h5><a
  id="dx23-934001"></a>
 <a 
  id="dx23-934002"></a>
-<!--l. 224--><p class="noindent" ><div class="framebox-l" 
+                                                   <!--l. 224--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -1346,7 +1352,7 @@ class="cmtt-9">: </span><span
 class="cmsy-9">&#x2192; </span><a 
 href="eulispcl11.html#x13-84001r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a></td></tr></table>
-<!--l.10 224-->                             <table  
+<!--l.10 224-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1355,7 +1361,7 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x23-933001r1"><span 
 class="cmtt-9">method-lambda</span></a></td></tr></table>
-<!--l.10 224-->                          <table  
+<!--l.10 224-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1365,16 +1371,16 @@ class="tabbing"><a
 href="#x23-92300018.3.1.1"><span 
 class="cmti-9">method-init-option</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
-<!--l.10 224-->                        <table  
+<!--l.10 224-->                      <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">     </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
-<!--l.10 224-->                                    <table  
+<!--l.10 224-->                                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1384,8 +1390,8 @@ class="tabbing"><a
 href="eulispcl16.html#x20-22200016.2.1.1"><span 
 class="cmti-9">body</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 224-->                                                </div></div>
-                                                  <h5 class="likesyntaxssclauseHead"><a 
+<!--l.10 224-->                                                     </div></div>
+ <h5 class="likesyntaxssclauseHead"><a 
  id="x23-93500018.4.1.1"></a><span 
 class="cmbx-8">Arguments</span></h5>
   <!--l. 226--><p class="noindent" >
@@ -1424,8 +1430,9 @@ class="cmtt-9">&#x003C;class&#x003E;</span></a> determines the class to instanti
   of the initlist is passed to <a 
 href="eulispcl11.html#x13-104003r1"><span 
 class="cmtt-9">make</span></a> called with this class. The default
-  method class is <span 
-class="cmbx-9">??</span>.
+  method class is <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x23-93700018.4.1.1"></a><span 
@@ -1446,7 +1453,7 @@ class="cmtt-9">initialize</span></a> of that method.
 class="cmbx-9">18.4.2   </span><span 
 class="cmtt-9">defmethod</span>
  <a 
- id="Q1-23-1311"></a>
+ id="Q1-23-1315"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">defining operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-937002"></a>
@@ -1459,7 +1466,9 @@ class="cmbx-8">Syntax</span></h5> <a
  id="dx23-938001"></a>
   <a 
  id="dx23-938002"></a>
-  <!--l. 260--><p class="noindent" ><div class="framebox-l" 
+                                                                                                  
+                                                                                                  
+<!--l. 260--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -1469,7 +1478,7 @@ class="cmti-9">defmethod-1-form</span><a
  id="dx23-938003"></a><a 
  id="dx23-938004"></a><span 
 class="cmtt-9">:</span></td></tr></table>
-<!--l.10 260-->                           <table  
+<!--l.10 260-->                         <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1478,9 +1487,9 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x23-937001r2"><span 
 class="cmtt-9">defmethod</span></a> <a 
-href="eulispcl11.html#x13-9100011.4.4.1"><span 
+href="eulispcl11.html#x13-9100011.4.6.1"><span 
 class="cmti-9">gf-locator</span></a></td></tr></table>
-<!--l.10 260-->                                         <table  
+<!--l.10 260-->                          <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1490,16 +1499,16 @@ class="tabbing"><a
 href="#x23-92300018.3.1.1"><span 
 class="cmti-9">method-init-option</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
-<!--l.10 260-->                      <table  
+<!--l.10 260-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">     </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
-<!--l.10 260-->                                                        <table  
+<!--l.10 260-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
@@ -1509,15 +1518,13 @@ class="tabbing"><a
 href="eulispcl16.html#x20-22200016.2.1.1"><span 
 class="cmti-9">body</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
-<!--l.10 260-->                                                     </div></div>
- <h5 class="likesyntaxssclauseHead"><a 
+<!--l.10 260-->                                                </div></div>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x23-93900018.4.2.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 263--><p class="noindent" >The <a 
+<!--l. 263--><p class="noindent" >The <a 
 href="#x23-937001r2"><span 
 class="cmtt-9">defmethod</span></a> form of level-1 extends that of level-0 to accept
-                                                                                                  
-                                                                                                  
 <span 
 class="cmti-9">method-init-option</span>s. This allows for the specification of the method
 class by means of the <a 
@@ -1532,7 +1539,7 @@ level-0.
 class="cmbx-9">18.4.3   </span><span 
 class="cmtt-9">method-function-lambda</span>
 <a 
- id="Q1-23-1314"></a>
+ id="Q1-23-1318"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr />
 <a 
@@ -1558,26 +1565,27 @@ class="arguments">
 <!--l. 277--><p class="noindent" >This macro creates and returns an anonymous method function
 with the given lambda list and body. This anonymous method
 function can later be added to a method using <a 
-href="#x23-986001r3"><span 
+href="#x23-986001r5"><span 
 class="cmtt-9">method-function</span></a>,
 or as the <span 
 class="cmtt-9">function </span>initialization value in a call of <a 
 href="eulispcl11.html#x13-104003r1"><span 
 class="cmtt-9">make</span></a> on an
-instance of <span 
-class="cmbx-9">??</span>. A function of this type is also returned by the
-method accessor <a 
-href="#x23-984001r2"><span 
-class="cmtt-9">method-function</span></a>. Only functions created using
-this macro can be used as method functions. Note that the lambda
-list must not be specialized; a method&#8217;s domain is stored in the
-method itself.
+instance of <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>. A function of this type is also returned by
+the method accessor <a 
+href="#x23-984001r4"><span 
+class="cmtt-9">method-function</span></a>. Only functions created
+using this macro can be used as method functions. Note that the
+lambda list must not be specialized; a method&#8217;s domain is stored in
+the method itself.
 </p><!--l. 287--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-940001r4"></a><span 
 class="cmbx-9">18.4.4   </span><span 
 class="cmtt-9">call-method</span>
 <a 
- id="Q1-23-1316"></a>
+ id="Q1-23-1320"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
@@ -1589,22 +1597,21 @@ class="cmti-9">function </span></i></b></div><br /> <hr />
  id="x23-9410004"></a><span 
 class="cmbx-8">Arguments</span></h5>
 <!--l. 289--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
-<span 
-class="cmti-9">method </span>: </dt><dd 
+    </p><dl class="arguments1"><dt class="arguments">                                               <span 
+class="cmti-9">method </span>:  </dt><dd 
 class="arguments">
-    <!--l. 290--><p class="noindent" >A method.
-    </p></dd><dt class="arguments">
-<span 
-class="cmti-9">next-methods </span>: </dt><dd 
+        <!--l. 290--><p class="noindent" >A method.
+        </p></dd><dt class="arguments">
+  <span 
+class="cmti-9">next-methods </span>:  </dt><dd 
 class="arguments">
-    <!--l. 291--><p class="noindent" >A list of methods.
-    </p></dd><dt class="arguments">
-<span 
+        <!--l. 291--><p class="noindent" >A list of methods.
+        </p></dd><dt class="arguments">
+  <span 
 class="cmti-9">arg</span><sup><span 
-class="cmsy-6">*</span></sup> : </dt><dd 
+class="cmsy-6">*</span></sup> :  </dt><dd 
 class="arguments">
-                                                         <!--l. 292--><p class="noindent" >A sequence of expressions.</p></dd></dl>
+        <!--l. 292--><p class="noindent" >A sequence of expressions.</p></dd></dl>
   <!--l. 295--><p class="noindent" >This function calls the method <span 
 class="cmti-9">method </span>with arguments <span 
 class="cmti-9">args</span>. The
@@ -1629,7 +1636,7 @@ class="cmti-9">method-fn</span>.
 class="cmbx-9">18.4.5   </span><span 
 class="cmtt-9">apply-method</span>
  <a 
- id="Q1-23-1318"></a>
+ id="Q1-23-1322"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-941002"></a>
@@ -1687,7 +1694,7 @@ ability to find its class.
 class="cmbx-9">18.5.1   </span><span 
 class="cmtt-9">class-of</span>
 <a 
- id="Q1-23-1321"></a>
+ id="Q1-23-1325"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
@@ -1798,76 +1805,101 @@ class="content">Level-1 class hierarchy</td></tr></table></div>
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
-class="tabbing"><a 
+class="tabbing"><span 
+class="cmsy-9"><img 
+src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
 href="eulispcl11.html#x13-76006r2"><span 
 class="cmtt-9">&#x003C;class&#x003E;</span></a>
 </td></tr></table>
-<!--l.10 50-->                                            <table  
+<!--l.10 50-->                               <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><span 
-class="cmbx-9">??</span></td></tr></table>
-<!--l.10 52-->                                            <table  
+class="cmsy-9"><img 
+src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
+href="#x23-950001r2"><span 
+class="cmtt-9">&#x003C;simple-class&#x003E;</span></a></td></tr></table>
+<!--l.10 51-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">   </td><td  
+class="tabbing">  </td><td  
 class="tabbing"><span 
-class="cmbx-9">??</span></td></tr></table>
-<!--l.10 53-->                                          <table  
+class="cmsy-9"><img 
+src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
+href="#x23-950004r3"><span 
+class="cmtt-9">&#x003C;function-class&#x003E;</span></a></td></tr></table>
+<!--l.10 52-->                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
-class="tabbing"><a 
+class="tabbing"><span 
+class="cmsy-9"><img 
+src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
 href="#x23-957001r1"><span 
 class="cmtt-9">&#x003C;slot&#x003E;</span></a></td></tr></table>
-<!--l.10 54-->                                   <table  
+<!--l.10 53-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
 class="tabbing">  </td><td  
-class="tabbing"><a 
+class="tabbing"><span 
+class="cmsy-9"><img 
+src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
 href="#x23-957004r2"><span 
 class="cmtt-9">&#x003C;local-slot&#x003E;</span></a></td></tr></table>
-<!--l.10 55-->                                       <table  
+<!--l.10 54-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
-class="tabbing"><a 
+class="tabbing"><span 
+class="cmsy-9"><img 
+src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
 href="eulispcl11.html#x13-84001r1"><span 
 class="cmtt-9">&#x003C;function&#x003E;</span></a></td></tr></table>
-<!--l.10 56-->                              <table  
+<!--l.10 55-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
 class="tabbing">  </td><td  
-class="tabbing"><a 
-href="eulispcl11.html#x13-84005r2"><span 
+class="tabbing"><span 
+class="cmsy-9"><img 
+src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a></td></tr></table>
-<!--l.10 57-->                                          <table  
+<!--l.10 56-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><span 
-class="cmbx-9">??</span></td></tr></table>
-<!--l.10 58-->                                              <table  
+class="cmsy-9"><img 
+src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
+href="eulispcl11.html#x13-84013r4"><span 
+class="cmtt-9">&#x003C;simple-generic-function&#x003E;</span></a></td></tr></table>
+<!--l.10 57-->                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmbx-9">??</span></td></tr></table>
-<!--l.10 59-->                                            <table  
+class="cmsy-9"><img 
+src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a></td></tr></table>
+<!--l.10 58-->                               <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
-class="tabbing">   </td><td  
+class="tabbing">  </td><td  
 class="tabbing"><span 
-class="cmbx-9">??</span></td></tr></table>
-<!--l.10 61-->
+class="cmsy-9"><img 
+src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
+href="#x23-982010r2"><span 
+class="cmtt-9">&#x003C;simple-method&#x003E;</span></a></td></tr></table>
+<!--l.10 60-->
                                                  
                                                                                                   
                                                                                                   
@@ -1877,7 +1909,7 @@ class="cmbx-9">??</span></td></tr></table>
 class="cmbx-9">18.6.1   </span><span 
 class="cmtt-9">class-precedence-list</span>
 <a 
- id="Q1-23-1327"></a>
+ id="Q1-23-1331"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
@@ -1887,18 +1919,18 @@ class="cmti-9">function </span></i></b></div><br /> <hr />
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9480001"></a><span 
 class="cmbx-8">Arguments</span></h5>
-<!--l. 67--><p class="noindent" >
+<!--l. 66--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
 <span 
 class="cmti-9">class </span>: </dt><dd 
 class="arguments">
-    <!--l. 68--><p class="noindent" >A class.</p></dd></dl>
-<!--l. 71--><p class="noindent" >
+    <!--l. 67--><p class="noindent" >A class.</p></dd></dl>
+<!--l. 70--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9490001"></a><span 
 class="cmbx-8">Result</span></h5>
-<!--l. 72--><p class="noindent" >A list of classes, starting with <span 
+<!--l. 71--><p class="noindent" >A list of classes, starting with <span 
 class="cmti-9">class </span>itself, succeeded by the
 superclasses of <span 
 class="cmti-9">class </span>and ending with <a 
@@ -1910,117 +1942,155 @@ class="cmbx-9">??</span>.
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9500001"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 77--><p class="noindent" >The class precedence list is used to control the inheritance of slots
+<!--l. 76--><p class="noindent" >The class precedence list is used to control the inheritance of slots
 and methods.
-</p><!--l. 80--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+</p><!--l. 79--><p class="noindent" >
+</p><!--l. 79--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-950001r2"></a><span 
 class="cmbx-9">18.6.2   </span><span 
-class="cmtt-9">class-slots</span>
+class="cmtt-9">&#x003C;simple-class&#x003E;</span>
 <a 
- id="Q1-23-1331"></a>
-</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr />
+ id="Q1-23-1335"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="eulispcl11.html#x13-76006r2"><span 
+class="cmtt-9">&#x003C;class&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">class </span></i></b></div><br /> <hr />
 <a 
  id="dx23-950002"></a>
 <a 
  id="dx23-950003"></a>
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
- id="x23-9510002"></a><span 
-class="cmbx-8">Arguments</span></h5>
-<!--l. 82--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
-<span 
-class="cmti-9">class </span>: </dt><dd 
-class="arguments">
-    <!--l. 83--><p class="noindent" >A class.</p></dd></dl>
-<!--l. 86--><p class="noindent" >
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
- id="x23-9520002"></a><span 
-class="cmbx-8">Result</span></h5>
-<!--l. 87--><p class="noindent" >A list of slots, one for each of the slots of an instance of
-<span 
-class="cmti-9">class</span>.
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
- id="x23-9530002"></a><span 
-class="cmbx-8">Remarks</span></h5>
-<!--l. 91--><p class="noindent" >The slots determine the instance size (number of slots) and the slotaccess.
- </p><!--l. 94--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x23-953001r3"></a><span 
+</p><!--l. 81--><p class="noindent" >Place holder for <a 
+href="#x23-950001r2"><span 
+class="cmtt-9">&#x003C;simple-class&#x003E;</span></a>.
+</p><!--l. 83--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-950004r3"></a><span 
 class="cmbx-9">18.6.3   </span><span 
+class="cmtt-9">&#x003C;function-class&#x003E;</span>
+<a 
+ id="Q1-23-1336"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="eulispcl11.html#x13-76006r2"><span 
+class="cmtt-9">&#x003C;class&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">class </span></i></b></div><br /> <hr />
+<a 
+ id="dx23-950005"></a>
+<a 
+ id="dx23-950006"></a>
+</p><!--l. 85--><p class="noindent" >Place holder for <a 
+href="#x23-950004r3"><span 
+class="cmtt-9">&#x003C;function-class&#x003E;</span></a>.
+<hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-950007r4"></a><span 
+class="cmbx-9">18.6.4   </span><span 
+class="cmtt-9">class-slots</span>
+<a 
+ id="Q1-23-1337"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<a 
+ id="dx23-950008"></a>
+<a 
+ id="dx23-950009"></a>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9510004"></a><span 
+class="cmbx-8">Arguments</span></h5>
+<!--l. 89--><p class="noindent" >
+                                                        </p><dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">class </span>:  </dt><dd 
+class="arguments">
+        <!--l. 90--><p class="noindent" >A class.</p></dd></dl>
+  <!--l. 93--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9520004"></a><span 
+class="cmbx-8">Result</span></h5>
+  <!--l. 94--><p class="noindent" >A list of slots, one for each of the slots of an instance of
+  <span 
+class="cmti-9">class</span>.
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9530004"></a><span 
+class="cmbx-8">Remarks</span></h5>
+  <!--l. 98--><p class="noindent" >The slots determine the instance size (number of slots) and the slot
+  access.
+  </p><!--l. 101--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-953001r5"></a><span 
+class="cmbx-9">18.6.5   </span><span 
 class="cmtt-9">class-initargs</span>
  <a 
- id="Q1-23-1335"></a>
+ id="Q1-23-1341"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr /><a 
+class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-953002"></a>
- <a 
+  <a 
  id="dx23-953003"></a>
- </p>
- <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9540003"></a><span 
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9540005"></a><span 
 class="cmbx-8">Arguments</span></h5>
- <!--l. 96--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
- <span 
-class="cmti-9">class </span>: </dt><dd 
+  <!--l. 103--><p class="noindent" >
+       </p><dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">class </span>:  </dt><dd 
 class="arguments">
-    <!--l. 97--><p class="noindent" >A class.</p></dd></dl>
- <!--l. 100--><p class="noindent" >
- </p>
- <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9550003"></a><span 
+        <!--l. 104--><p class="noindent" >A class.</p></dd></dl>
+  <!--l. 107--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9550005"></a><span 
 class="cmbx-8">Result</span></h5>
- <!--l. 101--><p class="noindent" >A list of symbols, which can be used as legal keywords to initialize
- instances of the class.
- </p>
- <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9560003"></a><span 
+  <!--l. 108--><p class="noindent" >A list of symbols, which can be used as legal keywords to initialize
+  instances of the class.
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9560005"></a><span 
 class="cmbx-8">Remarks</span></h5>
- <!--l. 105--><p class="noindent" >The initargs correspond to the keywords specified in the <span 
+  <!--l. 112--><p class="noindent" >The initargs correspond to the keywords specified in the <span 
 class="cmtt-9">initarg</span>
  slot-option or the <span 
 class="cmtt-9">initargs </span>class-option when the class and its
- superclasses were defined.
- </p><!--l. 136--><p class="noindent" >
- </p>
- <h4 class="sclauseHead"> 18.7 <a 
+  superclasses were defined.
+  </p><!--l. 143--><p class="noindent" >
+  </p>
+  <h4 class="sclauseHead"> 18.7 <a 
  id="x23-95700018.7"></a>Slot Introspection</h4>
- <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+  <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-957001r1"></a><span 
 class="cmbx-9">18.7.1   </span><span 
 class="cmtt-9">&#x003C;slot&#x003E;</span>
  <a 
- id="Q1-23-1340"></a>
+ id="Q1-23-1346"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">class </span></i></b></div><br /> <hr /><a 
+class="cmti-9">class </span></i></b></div><br /> <hr />
+                                                                                                  
+                                                                                                  
+<a 
  id="dx23-957002"></a>
- <a 
+<a 
  id="dx23-957003"></a>
- <!--l. 3--><p class="noindent" >The abstract class of all slot descriptions.
- <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+<!--l. 3--><p class="noindent" >The abstract class of all slot descriptions.
+</p><!--l. 5--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-957004r2"></a><span 
 class="cmbx-9">18.7.2   </span><span 
-class="cmtt-9">&#x003C;local-slot&#x003E; </span><a 
+class="cmtt-9">&#x003C;local-slot&#x003E;</span>
+<a 
+ id="Q1-23-1347"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x23-957001r1"><span 
-class="cmtt-9">&#x003C;slot&#x003E;</span></a>
- <a 
- id="Q1-23-1341"></a>
- </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">class </span></i></b></div><br /> <hr /><a 
+class="cmtt-9">&#x003C;slot&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">class </span></i></b></div><br /> <hr />
+<a 
  id="dx23-957005"></a>
- <a 
+<a 
  id="dx23-957006"></a>
- </p><!--l. 7--><p class="noindent" >The class of all local slot descriptions.
- </p>
- <h5 class="likesyntaxssclauseHead"><a 
+</p><!--l. 7--><p class="noindent" >The class of all local slot descriptions.
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x23-9580002"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
- <!--l. 9--><p class="noindent" >
-                                                                                                  
-                                                                                                  
+<!--l. 9--><p class="noindent" >
     </p><dl class="initoptions1"><dt class="initoptions">
 <span 
 class="cmtt-9">name </span><span 
@@ -2060,7 +2130,7 @@ class="cmtt-9">()</span></a>.
 class="cmbx-9">18.7.3   </span><span 
 class="cmtt-9">slot-name</span>
 <a 
- id="Q1-23-1343"></a>
+ id="Q1-23-1349"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
@@ -2077,27 +2147,26 @@ class="cmbx-8">Arguments</span></h5>
 class="cmti-9">slot </span>: </dt><dd 
 class="arguments">
     <!--l. 23--><p class="noindent" >A slot description.</p></dd></dl>
-<!--l. 26--><p class="noindent" >
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
+<!--l. 26--><p class="noindent" >                                                   </p>
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9600003"></a><span 
 class="cmbx-8">Result</span></h5>
-<!--l. 27--><p class="noindent" >The symbol which was used to name the slot when the class, of
-which the slot is part, was defined.
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
+  <!--l. 27--><p class="noindent" >The symbol which was used to name the slot when the class, of
+  which the slot is part, was defined.
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9610003"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 31--><p class="noindent" >The slot description name is used to identify a slot description in a
-class. It has no effect on bindings.
-</p><!--l. 34--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+  <!--l. 31--><p class="noindent" >The slot description name is used to identify a slot description in a
+  class. It has no effect on bindings.
+  </p><!--l. 34--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-961001r4"></a><span 
 class="cmbx-9">18.7.4   </span><span 
 class="cmtt-9">slot-initfunction</span>
-<a 
- id="Q1-23-1347"></a>
-</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr />                                           <a 
+ <a 
+ id="Q1-23-1353"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-961002"></a>
   <a 
  id="dx23-961003"></a>
@@ -2123,7 +2192,7 @@ class="cmbx-8">Result</span></h5>
 class="cmbx-9">18.7.5   </span><span 
 class="cmtt-9">slot-slot-reader</span>
  <a 
- id="Q1-23-1350"></a>
+ id="Q1-23-1356"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-963002"></a>
@@ -2146,29 +2215,30 @@ class="arguments">
 class="cmbx-8">Result</span></h5>
   <!--l. 51--><p class="noindent" >A function of one argument that returns the value of the slot in
   that argument.
-  </p><!--l. 54--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+                                                                                                  
+                                                                                                  
+</p><!--l. 54--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-965001r6"></a><span 
 class="cmbx-9">18.7.6   </span><span 
 class="cmtt-9">slot-slot-writer</span>
- <a 
- id="Q1-23-1353"></a>
- </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
+<a 
+ id="Q1-23-1359"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<a 
  id="dx23-965002"></a>
-  <a 
+<a 
  id="dx23-965003"></a>
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x23-9660006"></a><span 
 class="cmbx-8">Arguments</span></h5>
-  <!--l. 56--><p class="noindent" >
-       </p><dl class="arguments1"><dt class="arguments">
-  <span 
-class="cmti-9">slot </span>:  </dt><dd 
+<!--l. 56--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">slot </span>: </dt><dd 
 class="arguments">
-        <!--l. 57--><p class="noindent" >A slot description.</p></dd></dl>
-                                                                                                  
-                                                                                                  
+    <!--l. 57--><p class="noindent" >A slot description.</p></dd></dl>
 <!--l. 60--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
@@ -2176,7 +2246,7 @@ class="arguments">
 class="cmbx-8">Result</span></h5>
 <!--l. 61--><p class="noindent" >A function of two arguments that installs the second argument as
 the value of the slot in the first argument.
-</p><!--l. 203--><p class="noindent" >
+</p><!--l. 210--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 18.8 <a 
  id="x23-96800018.8"></a>Generic Function Introspection</h4>
@@ -2210,30 +2280,30 @@ metaobject is:
 class="cmbx-9">18.8.1   </span><span 
 class="cmtt-9">generic-function-domain</span>
 <a 
- id="Q1-23-1357"></a>
+ id="Q1-23-1363"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
  id="dx23-968012"></a>
 <a 
- id="dx23-968013"></a>
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
+ id="dx23-968013"></a>                                                   </p>
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9690001"></a><span 
 class="cmbx-8">Arguments</span></h5>
-<!--l. 20--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
-<span 
-class="cmti-9">generic-function </span>: </dt><dd 
+  <!--l. 20--><p class="noindent" >
+       </p><dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">generic-function </span>:  </dt><dd 
 class="arguments">
-    <!--l. 21--><p class="noindent" >A generic function.</p></dd></dl>
-<!--l. 24--><p class="noindent" >
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
+        <!--l. 21--><p class="noindent" >A generic function.</p></dd></dl>
+  <!--l. 24--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9700001"></a><span 
 class="cmbx-8">Result</span></h5>
-<!--l. 25--><p class="noindent" >A list of classes.
-</p>                                                   <h5 class="likesyntaxssclauseHead"><a 
+  <!--l. 25--><p class="noindent" >A list of classes.
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9710001"></a><span 
 class="cmbx-8">Remarks</span></h5>
   <!--l. 28--><p class="noindent" >This function returns the domain of a generic function. The
@@ -2247,7 +2317,7 @@ class="cmbx-8">Remarks</span></h5>
 class="cmbx-9">18.8.2   </span><span 
 class="cmtt-9">generic-function-method-class</span>
  <a 
- id="Q1-23-1361"></a>
+ id="Q1-23-1367"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-971002"></a>
@@ -2288,38 +2358,38 @@ class="cmtt-9">generic-lambda</span></a>, it will be an
 class="cmbx-9">18.8.3   </span><span 
 class="cmtt-9">generic-function-methods</span>
  <a 
- id="Q1-23-1364"></a>
+ id="Q1-23-1370"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-973002"></a>
   <a 
  id="dx23-973003"></a>
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+                                                                                                  
+                                                                                                  
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x23-9740003"></a><span 
 class="cmbx-8">Arguments</span></h5>
-  <!--l. 50--><p class="noindent" >
-       </p><dl class="arguments1"><dt class="arguments">
-  <span 
-class="cmti-9">generic-function </span>:  </dt><dd 
+<!--l. 50--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">generic-function </span>: </dt><dd 
 class="arguments">
-        <!--l. 51--><p class="noindent" >A generic function.</p></dd></dl>
-  <!--l. 54--><p class="noindent" >
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+    <!--l. 51--><p class="noindent" >A generic function.</p></dd></dl>
+<!--l. 54--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x23-9750003"></a><span 
 class="cmbx-8">Result</span></h5>
-  <!--l. 55--><p class="noindent" >This function returns a list of the methods attached to the generic
-  function. The order of the methods in this list is undefined. It is an
-  error to modify this list.
-                                                                                                  
-                                                                                                  
+<!--l. 55--><p class="noindent" >This function returns a list of the methods attached to the generic
+function. The order of the methods in this list is undefined. It is an
+error to modify this list.
 </p><!--l. 59--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-975001r4"></a><span 
 class="cmbx-9">18.8.4   </span><span 
 class="cmtt-9">generic-function-method-lookup-function</span>
 <a 
- id="Q1-23-1367"></a>
+ id="Q1-23-1373"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
@@ -2357,7 +2427,7 @@ class="cmtt-9">compute-method-lookup-function</span></a>.
 class="cmbx-9">18.8.5   </span><span 
 class="cmtt-9">generic-function-discriminating-function</span>
 <a 
- id="Q1-23-1371"></a>
+ id="Q1-23-1377"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr />
 <a 
@@ -2367,108 +2437,139 @@ class="cmti-9">function </span></i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9790005"></a><span 
-class="cmbx-8">Arguments</span></h5>
-<!--l. 77--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
-<span 
-class="cmti-9">generic-function </span>: </dt><dd 
+class="cmbx-8">Arguments</span></h5>                                          <!--l. 77--><p class="noindent" >
+       </p><dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">generic-function </span>:  </dt><dd 
 class="arguments">
-    <!--l. 78--><p class="noindent" >A generic function.</p></dd></dl>
-<!--l. 81--><p class="noindent" >
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
+        <!--l. 78--><p class="noindent" >A generic function.</p></dd></dl>
+  <!--l. 81--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9800005"></a><span 
 class="cmbx-8">Result</span></h5>
-<!--l. 82--><p class="noindent" >A function.
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
+  <!--l. 82--><p class="noindent" >A function.
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9810005"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 85--><p class="noindent" >This function returns a function which may be applied to the samearguments as the generic function. This function is called to
- perform the generic dispatch operation to determine the applicable
- methods whenever the generic function is called, and call the most
- specific applicable method function. This function is created by
- <a 
+  <!--l. 85--><p class="noindent" >This function returns a function which may be applied to the same
+  arguments as the generic function. This function is called to
+  perform the generic dispatch operation to determine the applicable
+  methods whenever the generic function is called, and call the most
+  specific applicable method function. This function is created by
+  <a 
 href="#x23-1158001r3"><span 
 class="cmtt-9">compute-discriminating-function</span></a>.
- </p><!--l. 298--><p class="noindent" >
- </p>
- <h4 class="sclauseHead"> 18.9 <a 
+  </p><!--l. 305--><p class="noindent" >
+  </p>
+  <h4 class="sclauseHead"> 18.9 <a 
  id="x23-98200018.9"></a>Method Introspection</h4>
- The minimal information associated with a method metaobject
- is:
- <!--l. 3--><p class="noindent" >
-    </p><ol  class="enumerate1" >
-    <li 
+  The minimal information associated with a method metaobject
+  is:
+  <!--l. 3--><p class="noindent" >
+        </p><ol  class="enumerate1" >
+        <li 
   class="enumerate" id="x23-982002x1">The domain, which is a list of classes.
-    </li>
-    <li 
+        </li>
+        <li 
   class="enumerate" id="x23-982004x2">The function comprising the code of the method.
-    </li>
-    <li 
+        </li>
+        <li 
   class="enumerate" id="x23-982006x3">The generic function to which the method has been added,
-    or <a 
+        or <a 
 href="eulispcl17.html#x21-606009r2"><span 
 class="cmtt-9">()</span></a> if it is attached to no generic function.</li></ol>
- <!--l. 10--><p class="noindent" >The metaobject classes for generic functions defined at level-1 are
- shown in table&#x00A0;<a 
+  <!--l. 10--><p class="noindent" >The metaobject classes for generic functions defined at level-1 are
+  shown in table&#x00A0;<a 
 href="#x23-9470175">5<!--tex4ht:ref: level-1-class-hierarchy --></a>.
- </p><!--l. 13--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+  </p><!--l. 13--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-982007r1"></a><span 
 class="cmbx-9">18.9.1   </span><span 
-class="cmtt-9">method-domain</span>
+class="cmtt-9">&#x003C;method&#x003E;</span>
  <a 
- id="Q1-23-1376"></a>
+ id="Q1-23-1382"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr /><a 
+class="cmti-9">class </span></i></b></div><br /> <hr /> <a 
  id="dx23-982008"></a>
- <a 
+  <a 
  id="dx23-982009"></a>
- </p>
- <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9830001"></a><span 
-class="cmbx-8">Arguments</span></h5>
- <!--l. 15--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
- <span 
-class="cmti-9">method </span>: </dt><dd 
-class="arguments">
-    <!--l. 16--><p class="noindent" >A method.</p></dd></dl>
- <!--l. 19--><p class="noindent" >
- </p>
- <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9840001"></a><span 
-class="cmbx-8">Result</span></h5>
- <!--l. 20--><p class="noindent" >A list of classes defining the domain of a method.
- </p><!--l. 22--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x23-984001r2"></a><span 
+  </p><!--l. 15--><p class="noindent" >Place holder for <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>.
+  </p><!--l. 17--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-982010r2"></a><span 
 class="cmbx-9">18.9.2   </span><span 
-class="cmtt-9">method-function</span>
+class="cmtt-9">&#x003C;simple-method&#x003E;</span>
  <a 
- id="Q1-23-1379"></a>
- </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr /><a 
- id="dx23-984002"></a>
- <a 
- id="dx23-984003"></a>
- </p>
- <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9850002"></a><span 
+ id="Q1-23-1383"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a>&#x00A0;&#x00A0;<span 
+class="cmti-9">class </span></i></b></div><br /> <hr /> <a 
+ id="dx23-982011"></a>
+  <a 
+ id="dx23-982012"></a>
+  </p><!--l. 19--><p class="noindent" >Place holder for <span 
+class="cmbx-9">??</span>.
+                                                                                                  
+                                                                                                  
+<hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-982013r3"></a><span 
+class="cmbx-9">18.9.3   </span><span 
+class="cmtt-9">method-domain</span>
+<a 
+ id="Q1-23-1384"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<a 
+ id="dx23-982014"></a>
+<a 
+ id="dx23-982015"></a>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9830003"></a><span 
 class="cmbx-8">Arguments</span></h5>
-                                                                                                  
-                                                                                                  
-<!--l. 24--><p class="noindent" >
+<!--l. 23--><p class="noindent" >
     </p><dl class="arguments1"><dt class="arguments">
 <span 
 class="cmti-9">method </span>: </dt><dd 
 class="arguments">
-    <!--l. 25--><p class="noindent" >A method.</p></dd></dl>
-<!--l. 28--><p class="noindent" >
+    <!--l. 24--><p class="noindent" >A method.</p></dd></dl>
+<!--l. 27--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9860002"></a><span 
+ id="x23-9840003"></a><span 
 class="cmbx-8">Result</span></h5>
-<!--l. 29--><p class="noindent" >This function returns a function which implements the method.
+<!--l. 28--><p class="noindent" >A list of classes defining the domain of a method.
+</p><!--l. 30--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-984001r4"></a><span 
+class="cmbx-9">18.9.4   </span><span 
+class="cmtt-9">method-function</span>
+<a 
+ id="Q1-23-1387"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr />
+<a 
+ id="dx23-984002"></a>
+<a 
+ id="dx23-984003"></a>
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9850004"></a><span 
+class="cmbx-8">Arguments</span></h5>
+<!--l. 32--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+<span 
+class="cmti-9">method </span>: </dt><dd 
+class="arguments">
+    <!--l. 33--><p class="noindent" >A method.</p></dd></dl>
+<!--l. 36--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9860004"></a><span 
+class="cmbx-8">Result</span></h5>
+<!--l. 37--><p class="noindent" >This function returns a function which implements the method.
 The returned function which is called when <span 
 class="cmti-9">method </span>is called, either
 by calling the generic function with appropriate arguments,
@@ -2479,12 +2580,12 @@ href="#x23-940001r4"><span
 class="cmtt-9">call-method</span></a>. A
 method metaobject itself cannot be applied or called as a
 function.
-</p><!--l. 35--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x23-986001r3"></a><span 
-class="cmbx-9">18.9.3   </span><span 
+</p><!--l. 43--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-986001r5"></a><span 
+class="cmbx-9">18.9.5   </span><span 
 class="cmtt-9">(setter method-function)</span>
 <a 
- id="Q1-23-1382"></a>
+ id="Q1-23-1390"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">setter </span></i></b></div><br /> <hr />
 <a 
@@ -2493,59 +2594,58 @@ class="cmti-9">setter </span></i></b></div><br /> <hr />
  id="dx23-986003"></a>
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9870003"></a><span 
-class="cmbx-8">Arguments</span></h5>
-<!--l. 37--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
-<span 
-class="cmti-9">method </span>: </dt><dd 
+ id="x23-9870005"></a><span 
+class="cmbx-8">Arguments</span></h5>                                          <!--l. 45--><p class="noindent" >
+       </p><dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">method </span>:  </dt><dd 
 class="arguments">
-    <!--l. 38--><p class="noindent" >A method.
-    </p></dd><dt class="arguments">
-<span 
-class="cmti-9">function </span>: </dt><dd 
+        <!--l. 46--><p class="noindent" >A method.
+        </p></dd><dt class="arguments">
+  <span 
+class="cmti-9">function </span>:  </dt><dd 
 class="arguments">
-    <!--l. 39--><p class="noindent" >A function.</p></dd></dl>
-<!--l. 42--><p class="noindent" >
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
- id="x23-9880003"></a><span 
-class="cmbx-8">Result</span></h5>
-<!--l. 43--><p class="noindent" >This function sets the function which implements the method.
-</p><!--l. 45--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
- id="x23-988001r4"></a><span 
-class="cmbx-9">18.9.4   </span><span 
-class="cmtt-9">method-generic-function</span>
-<a 
- id="Q1-23-1385"></a>
-</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr />
-<a 
- id="dx23-988002"></a>
-<a 
- id="dx23-988003"></a>
-</p>
-<h5 class="likesyntaxssclauseHead"><a 
- id="x23-9890004"></a><span 
-class="cmbx-8">Arguments</span></h5>
-<!--l. 47--><p class="noindent" >
-    </p><dl class="arguments1"><dt class="arguments">
-<span 
-class="cmti-9">method </span>: </dt><dd 
-class="arguments">
-    <!--l. 48--><p class="noindent" >A method.</p></dd></dl>                                       <!--l. 51--><p class="noindent" >
+        <!--l. 47--><p class="noindent" >A function.</p></dd></dl>
+  <!--l. 50--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
- id="x23-9900004"></a><span 
+ id="x23-9880005"></a><span 
 class="cmbx-8">Result</span></h5>
-  <!--l. 52--><p class="noindent" >This function returns the generic function to which <span 
+  <!--l. 51--><p class="noindent" >This function sets the function which implements the method.
+  </p><!--l. 53--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ id="x23-988001r6"></a><span 
+class="cmbx-9">18.9.6   </span><span 
+class="cmtt-9">method-generic-function</span>
+ <a 
+ id="Q1-23-1393"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
+ id="dx23-988002"></a>
+  <a 
+ id="dx23-988003"></a>
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9890006"></a><span 
+class="cmbx-8">Arguments</span></h5>
+  <!--l. 55--><p class="noindent" >
+       </p><dl class="arguments1"><dt class="arguments">
+  <span 
+class="cmti-9">method </span>:  </dt><dd 
+class="arguments">
+        <!--l. 56--><p class="noindent" >A method.</p></dd></dl>
+  <!--l. 59--><p class="noindent" >
+  </p>
+  <h5 class="likesyntaxssclauseHead"><a 
+ id="x23-9900006"></a><span 
+class="cmbx-8">Result</span></h5>
+  <!--l. 60--><p class="noindent" >This function returns the generic function to which <span 
 class="cmti-9">method </span>is
   attached; if <span 
 class="cmti-9">method </span>is not attached to a generic function, it returns
   <a 
 href="eulispcl17.html#x21-606009r2"><span 
 class="cmtt-9">()</span></a>.
-  </p><!--l. 355--><p class="noindent" >
+  </p><!--l. 370--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 18.10 <a 
  id="x23-99100018.10"></a>Class Initialization</h4>
@@ -2554,7 +2654,7 @@ class="cmtt-9">()</span></a>.
 class="cmbx-9">18.10.1   </span><span 
 class="cmtt-9">initialize &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1389"></a>
+ id="Q1-23-1397"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-991002"></a>
@@ -2565,53 +2665,53 @@ class="cmti-9">method </span></i></b></div><br /> <hr /> <a
 class="cmbx-8">Specialized Arguments</span></h5>
   <!--l. 3--><p class="noindent" >
        </p><dl class="specargs1"><dt class="specargs">
-  <span 
+                                                                                                  
+                                                                                                  
+<span 
 class="cmti-9">class </span><a 
 href="eulispcl11.html#x13-76006r2"><span 
-class="cmtt-9">&#x003C;class&#x003E;</span></a> :  </dt><dd 
+class="cmtt-9">&#x003C;class&#x003E;</span></a> : </dt><dd 
 class="specargs">
-        <!--l. 4--><p class="noindent" >A class.
-        </p></dd><dt class="specargs">
-  <span 
+    <!--l. 4--><p class="noindent" >A class.
+    </p></dd><dt class="specargs">
+<span 
 class="cmti-9">initlist </span><a 
 href="eulispcl17.html#x21-606005r1"><span 
-class="cmtt-9">&#x003C;list&#x003E;</span></a> :  </dt><dd 
+class="cmtt-9">&#x003C;list&#x003E;</span></a> : </dt><dd 
 class="specargs">
-        <!--l. 5--><p class="noindent" >A list of initialization options as follows:
-        </p><!--l. 8--><p class="noindent" >
-              </p><dl class="options2"><dt class="options">
-        <span 
+    <!--l. 5--><p class="noindent" >A list of initialization options as follows:
+    </p><!--l. 8--><p class="noindent" >
+       </p><dl class="options2"><dt class="options">
+    <span 
 class="cmtt-9">name </span><span 
-class="cmti-9">symbol </span>:  </dt><dd 
+class="cmti-9">symbol </span>: </dt><dd 
 class="options">
-              <!--l. 9--><p class="noindent" >Name of the class being initialized.
-              </p></dd><dt class="options">
-        <span 
+       <!--l. 9--><p class="noindent" >Name of the class being initialized.
+       </p></dd><dt class="options">
+    <span 
 class="cmtt-9">direct-superclasses </span><span 
-class="cmti-9">list </span>:  </dt><dd 
+class="cmti-9">list </span>: </dt><dd 
 class="options">
-              <!--l. 10--><p class="noindent" >List of direct superclasses.
-              </p></dd><dt class="options">
-        <span 
+       <!--l. 10--><p class="noindent" >List of direct superclasses.
+       </p></dd><dt class="options">
+    <span 
 class="cmtt-9">direct-slots </span><span 
-class="cmti-9">list </span>:  </dt><dd 
+class="cmti-9">list </span>: </dt><dd 
 class="options">
-              <!--l. 11--><p class="noindent" >List of direct slot specifications.
-              </p></dd><dt class="options">
-        <span 
+       <!--l. 11--><p class="noindent" >List of direct slot specifications.
+       </p></dd><dt class="options">
+    <span 
 class="cmtt-9">direct-initargs </span><span 
-class="cmti-9">list </span>:  </dt><dd 
+class="cmti-9">list </span>: </dt><dd 
 class="options">
-              <!--l. 12--><p class="noindent" >List of direct initargs.</p></dd></dl>
-        </dd></dl>
-  <!--l. 16--><p class="noindent" >
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+       <!--l. 12--><p class="noindent" >List of direct initargs.</p></dd></dl>
+    </dd></dl>
+<!--l. 16--><p class="noindent" >
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x23-9930001"></a><span 
 class="cmbx-8">Result</span></h5>
-  <!--l. 17--><p class="noindent" >The initialized class.
-                                                                                                  
-                                                                                                  
+<!--l. 17--><p class="noindent" >The initialized class.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9940001"></a><span 
@@ -2641,13 +2741,11 @@ class="cmbx-8">Remarks</span></h5>
     class.
     </li>
     <li 
-  class="enumerate" id="x23-994014x4">Make the results accessible by class readers.</li></ol>
-<!--l. 42--><p class="noindent" >The basic call structure is laid out in figure&#x00A0;<a 
+  class="enumerate" id="x23-994014x4">Make the results accessible by class readers.</li></ol>             <!--l. 42--><p class="noindent" >The basic call structure is laid out in figure&#x00A0;<a 
 href="#x23-9940156">6<!--tex4ht:ref: call-structure --></a>
-</p><!--l. 88--><p class="noindent" ><a 
+  </p><!--l. 88--><p class="noindent" ><a 
  id="x23-9940156"></a></p><hr class="float" /><div class="float" 
 >
-                                                 
                                                                                                   
                                                                                                   
  <div align="center" class="caption"><table class="caption" 
@@ -3156,7 +3254,7 @@ specified as slot option and those specified as class option.
 class="cmbx-9">18.10.2   </span><span 
 class="cmtt-9">compute-predicate</span>
 <a 
- id="Q1-23-1394"></a>
+ id="Q1-23-1402"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -3188,7 +3286,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.10.3   </span><span 
 class="cmtt-9">compute-predicate &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1397"></a>
+ id="Q1-23-1405"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -3225,7 +3323,7 @@ otherwise.
 class="cmbx-9">18.10.4   </span><span 
 class="cmtt-9">compute-constructor</span>
 <a 
- id="Q1-23-1400"></a>
+ id="Q1-23-1408"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -3262,7 +3360,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.10.5   </span><span 
 class="cmtt-9">compute-constructor &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1403"></a>
+ id="Q1-23-1411"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1000002"></a>
@@ -3300,7 +3398,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.10.6   </span><span 
 class="cmtt-9">allocate</span>
  <a 
- id="Q1-23-1406"></a>
+ id="Q1-23-1414"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1002002"></a>
@@ -3344,7 +3442,7 @@ methods for new metaclasses.
 class="cmbx-9">18.10.7   </span><span 
 class="cmtt-9">allocate &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1410"></a>
+ id="Q1-23-1418"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -3385,7 +3483,7 @@ the first argument. The initlist is not used by this <a
 href="#x23-1002001r6"><span 
 class="cmtt-9">allocate</span></a>
 method.
-</p><!--l. 602--><p class="noindent" >                                                   </p>
+</p><!--l. 617--><p class="noindent" >                                                   </p>
   <h4 class="sclauseHead"> 18.11 <a 
  id="x23-100900018.11"></a>Slot Description Initialization</h4>
   <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
@@ -3393,7 +3491,7 @@ method.
 class="cmbx-9">18.11.1   </span><span 
 class="cmtt-9">initialize &#x003C;slot&#x003E;</span>
  <a 
- id="Q1-23-1415"></a>
+ id="Q1-23-1423"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1009002"></a>
@@ -3455,7 +3553,7 @@ class="options">
  id="x23-10110001"></a><span 
 class="cmbx-8">Result</span></h5>
   <!--l. 19--><p class="noindent" >The initialized slot description.
-  </p><!--l. 627--><p class="noindent" >
+  </p><!--l. 642--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 18.12 <a 
  id="x23-101200018.12"></a>Generic Function Initialization</h4>
@@ -3466,7 +3564,7 @@ class="cmbx-8">Result</span></h5>
 class="cmbx-9">18.12.1   </span><span 
 class="cmtt-9">initialize &#x003C;generic-function&#x003E;</span>
 <a 
- id="Q1-23-1419"></a>
+ id="Q1-23-1427"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -3481,7 +3579,7 @@ class="cmbx-8">Specialized Arguments</span></h5>
     </p><dl class="specargs1"><dt class="specargs">
 <span 
 class="cmti-9">gf </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> : </dt><dd 
 class="specargs">
     <!--l. 5--><p class="noindent" >A generic function.
@@ -3563,7 +3661,7 @@ class="cmitt-10x-x-90">gf domain lookup-fn</span>    <span
 class="cmitt-10x-x-90">methods </span><span 
 class="cmtt-9">-&#x003E; </span><span 
 class="cmitt-10x-x-90">function</span>
- </p><!--l. 673--><p class="noindent" >
+ </p><!--l. 688--><p class="noindent" >
  </p>
  <h4 class="sclauseHead"> 18.13 <a 
  id="x23-101600018.13"></a>Method Initialization</h4>
@@ -3572,7 +3670,7 @@ class="cmitt-10x-x-90">function</span>
 class="cmbx-9">18.13.1   </span><span 
 class="cmtt-9">initialize &#x003C;method&#x003E;</span>
  <a 
- id="Q1-23-1424"></a>
+ id="Q1-23-1432"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1016002"></a>
@@ -3584,8 +3682,9 @@ class="cmbx-8">Specialized Arguments</span></h5>
   <!--l. 4--><p class="noindent" >
        </p><dl class="specargs1"><dt class="specargs">
   <span 
-class="cmti-9">method</span> <span 
-class="cmbx-9">??</span> :  </dt><dd 
+class="cmti-9">method </span><a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a> :  </dt><dd 
 class="specargs">
         <!--l. 5--><p class="noindent" >A method.
         </p></dd><dt class="specargs">
@@ -3630,7 +3729,7 @@ href="#x23-1164001r5"><span
 class="cmtt-9">add-method</span></a> is called to
   install the new method in the <span 
 class="cmti-9">generic-function</span>.
-  </p><!--l. 700--><p class="noindent" >
+  </p><!--l. 715--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 18.14 <a 
  id="x23-101900018.14"></a>Inheritance Protocol</h4>
@@ -3639,7 +3738,7 @@ class="cmti-9">generic-function</span>.
 class="cmbx-9">18.14.1   </span><span 
 class="cmtt-9">compatible-superclasses?</span>
  <a 
- id="Q1-23-1428"></a>
+ id="Q1-23-1436"></a>
                                                                                                   
                                                                                                   
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -3684,7 +3783,7 @@ class="cmtt-9">()</span></a>.
 class="cmbx-9">18.14.2   </span><span 
 class="cmtt-9">compatible-superclasses? &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1431"></a>
+ id="Q1-23-1439"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -3727,7 +3826,7 @@ assumption).
 class="cmbx-9">18.14.3   </span><span 
 class="cmtt-9">compatible-superclass?</span>
 <a 
- id="Q1-23-1434"></a>
+ id="Q1-23-1442"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -3771,7 +3870,7 @@ class="cmtt-9">()</span></a>.
 class="cmbx-9">18.14.4   </span><span 
 class="cmtt-9">compatible-superclass? &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1437"></a>
+ id="Q1-23-1445"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1025002"></a>
@@ -3819,7 +3918,7 @@ class="cmtt-9">&#x003C;metaclass&#x003E;</span>.
 class="cmbx-9">18.14.5   </span><span 
 class="cmtt-9">compatible-superclass? &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1440"></a>
+ id="Q1-23-1448"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1027002"></a>
@@ -3858,7 +3957,7 @@ class="cmtt-9">t</span></a>.
 class="cmbx-9">18.14.6   </span><span 
 class="cmtt-9">compatible-superclass? &#x003C;abstract-class&#x003E;</span>
 <a 
- id="Q1-23-1443"></a>
+ id="Q1-23-1451"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -3896,7 +3995,7 @@ class="cmtt-9">()</span></a>.
 class="cmbx-9">18.14.7   </span><span 
 class="cmtt-9">compatible-superclass? &#x003C;abstract-class&#x003E;</span>
 <a 
- id="Q1-23-1446"></a>
+ id="Q1-23-1454"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -3932,7 +4031,7 @@ class="cmtt-9">t</span></a>.
 class="cmbx-9">18.14.8   </span><span 
 class="cmtt-9">compute-class-precedence-list</span>
  <a 
- id="Q1-23-1449"></a>
+ id="Q1-23-1457"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1033002"></a>
@@ -3975,7 +4074,7 @@ class="cmtt-9">&#x003C;object&#x003E;</span></a>.
 class="cmbx-9">18.14.9   </span><span 
 class="cmtt-9">compute-class-precedence-list &#x003C;list&#x003E;</span>
  <a 
- id="Q1-23-1452"></a>
+ id="Q1-23-1460"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1035002"></a>
@@ -4028,7 +4127,7 @@ class="cmtt-9">&#x003C;object&#x003E;</span></a>.
 class="cmbx-9">18.14.10   </span><span 
 class="cmtt-9">compute-slots</span>
 <a 
- id="Q1-23-1456"></a>
+ id="Q1-23-1464"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -4082,7 +4181,7 @@ class="cmtt-9">compute-inherited-slots</span></a>.
 class="cmbx-9">18.14.11   </span><span 
 class="cmtt-9">compute-slots &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1460"></a>
+ id="Q1-23-1468"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1041002"></a>
@@ -4179,7 +4278,7 @@ class="cmtt-9">compute-and-ensure-slot-accessors</span></a>.
 class="cmbx-9">18.14.12   </span><span 
 class="cmtt-9">compute-initargs</span>
 <a 
- id="Q1-23-1465"></a>
+ id="Q1-23-1473"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -4237,7 +4336,7 @@ class="cmtt-9">compute-inherited-initargs</span></a>.
 class="cmbx-9">18.14.13   </span><span 
 class="cmtt-9">compute-initargs &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1470"></a>
+ id="Q1-23-1478"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -4295,7 +4394,7 @@ class="cmtt-9">initialize</span></a> method with all direct initargs as
 class="cmbx-9">18.14.14   </span><span 
 class="cmtt-9">compute-inherited-slots</span>
  <a 
- id="Q1-23-1474"></a>
+ id="Q1-23-1482"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1052002"></a>
@@ -4346,7 +4445,7 @@ class="cmtt-9">compute-slots</span></a>.
 class="cmbx-9">18.14.15   </span><span 
 class="cmtt-9">compute-inherited-slots &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1479"></a>
+ id="Q1-23-1487"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -4393,7 +4492,7 @@ class="cmtt-9">compute-slots</span></a> as an argument.
 class="cmbx-9">18.14.16   </span><span 
 class="cmtt-9">compute-inherited-initargs</span>
 <a 
- id="Q1-23-1483"></a>
+ id="Q1-23-1491"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -4446,7 +4545,7 @@ class="cmtt-9">compute-initargs</span></a>.
 class="cmbx-9">18.14.17   </span><span 
 class="cmtt-9">compute-inherited-initargs &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1488"></a>
+ id="Q1-23-1496"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1063002"></a>
@@ -4489,7 +4588,7 @@ class="cmbx-8">Remarks</span></h5>
 class="cmbx-9">18.14.18   </span><span 
 class="cmtt-9">compute-defined-slot</span>
  <a 
- id="Q1-23-1492"></a>
+ id="Q1-23-1500"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
                                                                                                   
@@ -4545,7 +4644,7 @@ class="cmtt-9">compute-defined-slot-class</span></a>.
 class="cmbx-9">18.14.19   </span><span 
 class="cmtt-9">compute-defined-slot &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1497"></a>
+ id="Q1-23-1505"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -4598,7 +4697,7 @@ class="cmtt-9">compute-defined-slot-class</span></a>.
 class="cmbx-9">18.14.20   </span><span 
 class="cmtt-9">compute-defined-slot-class</span>
  <a 
- id="Q1-23-1502"></a>
+ id="Q1-23-1510"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1074002"></a>
@@ -4650,7 +4749,7 @@ class="cmtt-9">compute-defined-slot</span></a>.
 class="cmbx-9">18.14.21   </span><span 
 class="cmtt-9">compute-defined-slot-class &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1507"></a>
+ id="Q1-23-1515"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
                                                                                                   
@@ -4698,7 +4797,7 @@ class="cmtt-9">&#x003C;local-slot&#x003E;</span></a>.
 class="cmbx-9">18.14.22   </span><span 
 class="cmtt-9">compute-specialized-slot</span>
 <a 
- id="Q1-23-1511"></a>
+ id="Q1-23-1519"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -4764,7 +4863,7 @@ class="cmtt-9">compute-specialized-slot-class</span></a>.
 class="cmbx-9">18.14.23   </span><span 
 class="cmtt-9">compute-specialized-slot &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1516"></a>
+ id="Q1-23-1524"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1085002"></a>
@@ -4827,7 +4926,7 @@ class="cmtt-9">compute-specialized-slot-class</span>
                                                                                                   
                                                                                                   
 <a 
- id="Q1-23-1521"></a>
+ id="Q1-23-1529"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -4889,7 +4988,7 @@ class="cmtt-9">compute-specialized-slot</span></a>.
 class="cmbx-9">18.14.25   </span><span 
 class="cmtt-9">compute-specialized-slot-class &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1526"></a>
+ id="Q1-23-1534"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -4938,7 +5037,7 @@ class="cmbx-8">Remarks</span></h5>
   <!--l. 404--><p class="noindent" >This method just returns the class <a 
 href="#x23-957004r2"><span 
 class="cmtt-9">&#x003C;local-slot&#x003E;</span></a>.
-  </p><!--l. 1110--><p class="noindent" >
+  </p><!--l. 1125--><p class="noindent" >
   </p>
   <h4 class="sclauseHead"> 18.15 <a 
  id="x23-109700018.15"></a>Slot Access Protocol</h4>
@@ -4972,7 +5071,7 @@ class="cmtt-9">slot-value</span>. The
 class="cmbx-9">18.15.1   </span><span 
 class="cmtt-9">compute-and-ensure-slot-accessors</span>
  <a 
- id="Q1-23-1531"></a>
+ id="Q1-23-1539"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1097002"></a>
@@ -5023,7 +5122,7 @@ correctly for each effective slot description.
 class="cmbx-9">18.15.2   </span><span 
 class="cmtt-9">compute-and-ensure-slot-accessors &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1535"></a>
+ id="Q1-23-1543"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -5097,7 +5196,7 @@ class="cmtt-9">ensure-slot-writer</span></a>.
 class="cmbx-9">18.15.3   </span><span 
 class="cmtt-9">compute-slot-reader</span>
  <a 
- id="Q1-23-1539"></a>
+ id="Q1-23-1547"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1103006"></a>
@@ -5152,7 +5251,7 @@ class="cmtt-9">compute-slot-reader &#x003C;class&#x003E;</span>
                                                                                                   
                                                                                                   
 <a 
- id="Q1-23-1543"></a>
+ id="Q1-23-1551"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -5203,7 +5302,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.15.5   </span><span 
 class="cmtt-9">compute-slot-writer</span>
 <a 
- id="Q1-23-1547"></a>
+ id="Q1-23-1555"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -5256,7 +5355,7 @@ class="cmti-9">slot</span>. The third argument can be used in order to
 class="cmbx-9">18.15.6   </span><span 
 class="cmtt-9">compute-slot-writer &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1551"></a>
+ id="Q1-23-1559"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1112002"></a>
@@ -5309,7 +5408,7 @@ class="cmtt-9">&#x003C;object&#x003E;</span></a>.
 class="cmbx-9">18.15.7   </span><span 
 class="cmtt-9">ensure-slot-reader</span>
  <a 
- id="Q1-23-1555"></a>
+ id="Q1-23-1563"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1115002"></a>
@@ -5369,7 +5468,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.15.8   </span><span 
 class="cmtt-9">ensure-slot-reader &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1559"></a>
+ id="Q1-23-1567"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -5405,7 +5504,7 @@ class="specargs">
                                                          </p></dd><dt class="specargs">
   <span 
 class="cmti-9">reader </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> :  </dt><dd 
 class="specargs">
         <!--l. 163--><p class="noindent" >The slot reader.</p></dd></dl>
@@ -5453,7 +5552,7 @@ in the function of the new created reader method.
 class="cmbx-9">18.15.9   </span><span 
 class="cmtt-9">ensure-slot-writer</span>
 <a 
- id="Q1-23-1563"></a>
+ id="Q1-23-1571"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /><a 
  id="dx23-1121002"></a>
@@ -5513,7 +5612,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.15.10   </span><span 
 class="cmtt-9">ensure-slot-writer &#x003C;class&#x003E;</span>
 <a 
- id="Q1-23-1567"></a>
+ id="Q1-23-1575"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -5549,7 +5648,7 @@ class="specargs">
     </p></dd><dt class="specargs">
 <span 
 class="cmti-9">writer </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> : </dt><dd 
 class="specargs">
     <!--l. 209--><p class="noindent" >The slot writer.</p></dd></dl>
@@ -5612,7 +5711,7 @@ class="cmtt-9">ensure-slot-writer</span></a> method to compute the primitive wri
 class="cmbx-9">18.15.11   </span><span 
 class="cmtt-9">compute-primitive-reader-using-slot</span>
  <a 
- id="Q1-23-1571"></a>
+ id="Q1-23-1579"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1127002"></a>
@@ -5662,7 +5761,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.15.12   </span><span 
 class="cmtt-9">compute-primitive-reader-using-slot &#x003C;slot&#x003E;</span>
  <a 
- id="Q1-23-1575"></a>
+ id="Q1-23-1583"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1130002"></a>
@@ -5715,7 +5814,7 @@ method.
 class="cmbx-9">18.15.13   </span><span 
 class="cmtt-9">compute-primitive-reader-using-class</span>
 <a 
- id="Q1-23-1579"></a>
+ id="Q1-23-1587"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -5765,7 +5864,7 @@ class="cmti-9">class</span>.
 class="cmbx-9">18.15.14   </span><span 
 class="cmtt-9">compute-primitive-reader-using-class &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1583"></a>
+ id="Q1-23-1591"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1136002"></a>
@@ -5813,7 +5912,7 @@ class="cmbx-8">Remarks</span></h5>
 class="cmbx-9">18.15.15   </span><span 
 class="cmtt-9">compute-primitive-writer-using-slot</span>
  <a 
- id="Q1-23-1587"></a>
+ id="Q1-23-1595"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1139002"></a>
@@ -5865,7 +5964,7 @@ class="cmti-9">class </span>and a new value.
 class="cmbx-9">18.15.16   </span><span 
 class="cmtt-9">compute-primitive-writer-using-slot &#x003C;slot&#x003E;</span>
 <a 
- id="Q1-23-1591"></a>
+ id="Q1-23-1599"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -5917,7 +6016,7 @@ method.
 class="cmbx-9">18.15.17   </span><span 
 class="cmtt-9">compute-primitive-writer-using-class</span>
                                                   <a 
- id="Q1-23-1595"></a>
+ id="Q1-23-1603"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1145002"></a>
@@ -5967,7 +6066,7 @@ class="cmti-9">class </span>and new value.
 class="cmbx-9">18.15.18   </span><span 
 class="cmtt-9">compute-primitive-reader-using-class &#x003C;class&#x003E;</span>
  <a 
- id="Q1-23-1599"></a>
+ id="Q1-23-1607"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1148002"></a>
@@ -6012,7 +6111,7 @@ class="cmbx-8">Result</span></h5>
  id="x23-115100018"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 359--><p class="noindent" >The default method returns a function of two arguments.
-</p><!--l. 1475--><p class="noindent" >
+</p><!--l. 1490--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 18.16 <a 
  id="x23-115200018.16"></a>Method Lookup and Generic Dispatch</h4>
@@ -6021,7 +6120,7 @@ class="cmbx-8">Remarks</span></h5>
 class="cmbx-9">18.16.1   </span><span 
 class="cmtt-9">compute-method-lookup-function</span>
 <a 
- id="Q1-23-1604"></a>
+ id="Q1-23-1612"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr />
 <a 
@@ -6035,7 +6134,7 @@ class="cmbx-8">Generic Arguments</span></h5>
     </p><dl class="genericargs1"><dt class="genericargs">
 <span 
 class="cmti-9">gf </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> : </dt><dd 
 class="genericargs">
     <!--l. 5--><p class="noindent" >A generic function.
@@ -6069,7 +6168,7 @@ function.
 class="cmbx-9">18.16.2   </span><span 
 class="cmtt-9">compute-method-lookup-function &#x003C;generic-function&#x003E;</span>
 <a 
- id="Q1-23-1608"></a>
+ id="Q1-23-1616"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />                                            <a 
  id="dx23-1155002"></a>
@@ -6083,7 +6182,7 @@ class="cmbx-8">Specialized Arguments</span></h5>
        </p><dl class="specargs1"><dt class="specargs">
   <span 
 class="cmti-9">gf </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> :  </dt><dd 
 class="specargs">
         <!--l. 24--><p class="noindent" >A generic function.
@@ -6113,7 +6212,7 @@ class="cmbx-8">Remarks</span></h5>
 class="cmbx-9">18.16.3   </span><span 
 class="cmtt-9">compute-discriminating-function</span>
  <a 
- id="Q1-23-1612"></a>
+ id="Q1-23-1620"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1158002"></a>
@@ -6127,7 +6226,7 @@ class="cmbx-8">Generic Arguments</span></h5>
        </p><dl class="genericargs1"><dt class="genericargs">
   <span 
 class="cmti-9">gf </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> :  </dt><dd 
 class="genericargs">
         <!--l. 40--><p class="noindent" >A generic function.
@@ -6175,7 +6274,7 @@ non-default dispatch strategies.
 class="cmbx-9">18.16.4   </span><span 
 class="cmtt-9">compute-discriminating-function &#x003C;generic-function&#x003E;</span>
 <a 
- id="Q1-23-1616"></a>
+ id="Q1-23-1624"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr />
 <a 
@@ -6190,7 +6289,7 @@ class="cmbx-8">Specialized Arguments</span></h5>
     </p><dl class="specargs1"><dt class="specargs">
 <span 
 class="cmti-9">gf </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> : </dt><dd 
 class="specargs">
     <!--l. 60--><p class="noindent" >A generic function.
@@ -6244,7 +6343,7 @@ class="cmtt-9">call-method</span></a> need not be directly     called.
 class="cmbx-9">18.16.5   </span><span 
 class="cmtt-9">add-method</span>
  <a 
- id="Q1-23-1620"></a>
+ id="Q1-23-1628"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">generic function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1164002"></a>
@@ -6258,14 +6357,15 @@ class="cmbx-8">Generic Arguments</span></h5>
        </p><dl class="genericargs1"><dt class="genericargs">
   <span 
 class="cmti-9">gf </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> :  </dt><dd 
 class="genericargs">
         <!--l. 82--><p class="noindent" >A generic function.
         </p></dd><dt class="genericargs">
   <span 
-class="cmti-9">method</span> <span 
-class="cmbx-9">??</span> :  </dt><dd 
+class="cmti-9">method </span><a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a> :  </dt><dd 
 class="genericargs">
         <!--l. 83--><p class="noindent" >A method to be attached to the generic function.</p></dd></dl>
   <!--l. 87--><p class="noindent" >
@@ -6296,7 +6396,7 @@ class="cmtt-9">add-method</span></a> does not remove a method with
 class="cmbx-9">18.16.6   </span><span 
 class="cmtt-9">add-method &#x003C;generic-function&#x003E;</span>
  <a 
- id="Q1-23-1624"></a>
+ id="Q1-23-1632"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">method </span></i></b></div><br /> <hr /> <a 
  id="dx23-1167002"></a>
@@ -6310,14 +6410,15 @@ class="cmbx-8">Specialized Arguments</span></h5>
        </p><dl class="specargs1"><dt class="specargs">
   <span 
 class="cmti-9">gf </span><a 
-href="eulispcl11.html#x13-84005r2"><span 
+href="eulispcl11.html#x13-84009r3"><span 
 class="cmtt-9">&#x003C;generic-function&#x003E;</span></a> :  </dt><dd 
 class="specargs">
         <!--l. 102--><p class="noindent" >A generic function.
         </p></dd><dt class="specargs">
   <span 
-class="cmti-9">method</span> <span 
-class="cmbx-9">??</span> :  </dt><dd 
+class="cmti-9">method </span><a 
+href="#x23-982007r1"><span 
+class="cmtt-9">&#x003C;method&#x003E;</span></a> :  </dt><dd 
 class="specargs">
                                                                                                   
                                                                                                   
@@ -6341,7 +6442,7 @@ class="cmbx-9">??</span> <a
 method with the same domain already attached to the generic
 function. If so, a noncontinuable error is signaled (condition:
 <a 
-href="eulispcl14.html#x18-181001r18"><span 
+href="eulispcl14.html#x18-181001r19"><span 
 class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a> <a 
  id="dx23-1170002"></a>). If no error occurs, the method is added
 to the generic function. Depending on particular optimizations of
@@ -6369,7 +6470,7 @@ class="cmtt-9">primitive-allocate</span></a>.
 class="cmbx-9">18.17.1   </span><span 
 class="cmtt-9">primitive-allocate</span>
  <a 
- id="Q1-23-1629"></a>
+ id="Q1-23-1637"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1171002"></a>
@@ -6417,7 +6518,7 @@ class="cmtt-9">allocate</span></a>
 class="cmbx-9">18.17.2   </span><span 
 class="cmtt-9">primitive-class-of</span>
  <a 
- id="Q1-23-1633"></a>
+ id="Q1-23-1641"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1174002"></a>
@@ -6462,7 +6563,7 @@ class="cmtt-9">primitive-allocate</span></a>.
 class="cmbx-9">18.17.3   </span><span 
 class="cmtt-9">(setter primitive-class-of)</span>
 <a 
- id="Q1-23-1637"></a>
+ id="Q1-23-1645"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">setter </span></i></b></div><br /> <hr />
 <a 
@@ -6510,7 +6611,7 @@ class="cmtt-9">change-class </span>in CLOS.
  id="x23-1180005r4"></a><span 
 class="cmbx-9">18.17.4   </span><span 
 class="cmtt-9">primitive-ref</span>                             <a 
- id="Q1-23-1641"></a>
+ id="Q1-23-1649"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
  id="dx23-1180006"></a>
@@ -6554,7 +6655,7 @@ class="cmti-9">object</span>. This function is intended to be used when defining
 class="cmbx-9">18.17.5   </span><span 
 class="cmtt-9">(setter primitive-ref)</span>
  <a 
- id="Q1-23-1645"></a>
+ id="Q1-23-1653"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">setter </span></i></b></div><br /> <hr /> <a 
  id="dx23-1183002"></a>
@@ -6610,7 +6711,7 @@ metaclasses.
 class="cmbx-9">18.18.1   </span><span 
 class="cmtt-9">dynamic</span>
  <a 
- id="Q1-23-1650"></a>
+ id="Q1-23-1658"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-1187002"></a>
@@ -6675,7 +6776,7 @@ class="cmtt-9">&#x003C;unbound-dynamic-variable&#x003E;</span></a> <a
 class="cmbx-9">18.18.2   </span><span 
 class="cmtt-9">dynamic-setq</span>
  <a 
- id="Q1-23-1654"></a>
+ id="Q1-23-1662"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-1190003"></a>
@@ -6758,15 +6859,16 @@ href="#x23-1194002r3"><span
 class="cmtt-9">&#x003C;unbound-dynamic-variable&#x003E;</span></a>
 <a 
  id="dx23-1194001"></a>).
+</p><!--l. 48--><p class="noindent" >
 </p><!--l. 48--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1194002r3"></a><span 
 class="cmbx-9">18.18.3   </span><span 
-class="cmtt-9">&#x003C;unbound-dynamic-variable&#x003E; </span><a 
-href="eulispcl14.html#x18-172001r9"><span 
-class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>
+class="cmtt-9">&#x003C;unbound-dynamic-variable&#x003E;</span>
 <a 
- id="Q1-23-1659"></a>
-</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+ id="Q1-23-1667"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="eulispcl14.html#x18-172001r10"><span 
+class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
 class="cmti-9">condition </span></i></b></div><br /> <hr />
 <a 
  id="dx23-1194003"></a>
@@ -6797,7 +6899,7 @@ variable has no visible dynamic binding.
 class="cmbx-9">18.18.4   </span><span 
 class="cmtt-9">dynamic-let</span>
 <a 
- id="Q1-23-1662"></a>
+ id="Q1-23-1670"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr />
 <a 
@@ -6898,7 +7000,7 @@ class="cmtt-9">dynamic-let</span></a>.
 class="cmbx-9">18.18.5   </span><span 
 class="cmtt-9">defglobal</span>
  <a 
- id="Q1-23-1667"></a>
+ id="Q1-23-1675"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">defining operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-1200003"></a>
@@ -7007,15 +7109,16 @@ class="cmr-8">model, in which a separate top-dynamic environment is associated</
 class="cmr-8">with each module is under consideration for a later version of the</span>
 <span 
 class="cmr-8">definition.</span></div>
-<!--l. 127--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+<!--l. 127--><p class="noindent" >
+</p><!--l. 127--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1203004r6"></a><span 
 class="cmbx-9">18.18.6   </span><span 
-class="cmtt-9">&#x003C;dynamic-multiply-defined&#x003E; </span><a 
-href="eulispcl14.html#x18-172001r9"><span 
-class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>
+class="cmtt-9">&#x003C;dynamic-multiply-defined&#x003E;</span>
 <a 
- id="Q1-23-1671"></a>
-</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+ id="Q1-23-1679"></a>
+</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+href="eulispcl14.html#x18-172001r10"><span 
+class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
 class="cmti-9">condition </span></i></b></div><br /> <hr />
 <a 
  id="dx23-1203005"></a>
@@ -7049,7 +7152,7 @@ exists.
 class="cmbx-9">18.19.1   </span><span 
 class="cmtt-9">catch</span>
  <a 
- id="Q1-23-1675"></a>
+ id="Q1-23-1683"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-1206002"></a>
@@ -7241,7 +7344,7 @@ class="cmtt-9">throw</span></a>.
 class="cmbx-9">18.19.2   </span><span 
 class="cmtt-9">throw</span>
  <a 
- id="Q1-23-1680"></a>
+ id="Q1-23-1688"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
 class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
  id="dx23-1210002"></a>
@@ -7572,7 +7675,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-9100011.4.4.1"><span 
+href="eulispcl11.html#x13-9100011.4.6.1"><span 
 class="cmti-9">defmethod-form</span></a></td></tr></table>
 <!--l.10 14-->                                                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -7769,9 +7872,9 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x23-928001r2"><span 
 class="cmtt-9">defgeneric</span></a> <a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">gf-name</span></a> <a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a></td></tr></table>
 <!--l.10 19-->                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -7801,7 +7904,7 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x23-937001r2"><span 
 class="cmtt-9">defmethod</span></a> <a 
-href="eulispcl11.html#x13-9100011.4.4.1"><span 
+href="eulispcl11.html#x13-9100011.4.6.1"><span 
 class="cmti-9">gf-locator</span></a></td></tr></table>
 <!--l.10 20-->                                         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -7820,7 +7923,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">     </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
 <!--l.10 20-->                                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -7966,7 +8069,7 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x23-922001r1"><span 
 class="cmtt-9">generic-lambda</span></a> <a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a></td></tr></table>
 <!--l.10 28-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -8030,7 +8133,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a></td></tr></table>
 <!--l.10 28-->                                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -8057,7 +8160,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">     </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
 <!--l.10 28-->                                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -8134,7 +8237,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">     </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl11.html#x13-8500011.4.3.1"><span 
+href="eulispcl11.html#x13-8500011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a></td></tr></table>
 <!--l.10 29-->                                                        <table  
 cellpadding="0" border="0" cellspacing="0" 

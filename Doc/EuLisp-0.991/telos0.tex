@@ -106,40 +106,41 @@ which is shown in table~\ref{level-0-class-hierarchy}.
 {\tt%
 \begin{tabbing}%
     00\=00\=00\=00\= \kill%
-    \classref{object} \\
-    \>\classref{character} \\
-    \>\classref{condition} \\
-    \>\>{\normalfont See table~\ref{condition-class-hierarchy}}\\
-    \>\classref{function} \\
-    % NotYoutoo \>\>\classref{continuation} \\
-    \>\>\classref{simple-function} \\
-    \>\>\classref{generic-function} \\
-    \>\classref{collection} \\
-    \>\>\classref{sequence} \\
-    \>\>\>\classref{list} \\
-    \>\>\>\>\classref{cons} \\
-    \>\>\>\>\classref{null}\\
-    \>\>\>\classref{character-sequence} \\
-    \>\>\>\>\classref{string} \\
-    \>\>\>\classref{vector} \\
-    \>\>\classref{table} \\
-    \>\>\>\classref{hash-table} \\
-    \>\classref{lock} \\
-    \>\classref{number} \\
-    \>\>\classref{integer}\\
-    \>\>\>\classref{fixed-precision-integer}\\
-    % NotYoutoo \>\>\>\classref{variable-precision-integer}\\
-    \>\>\classref{float}\\
-    \>\>\>\classref{double-float}\\
-    \>\classref{stream} \\
-    \>\>\classref{buffered-stream}\\
-    \>\>\>\classref{string-stream}\\
-    \>\>\>\classref{file-stream}\\
-    \>\classref{name} \\
-    \>\>\classref{symbol}\\
-    \>\>\classref{keyword}\\
-    \>\classref{thread} \\
-    \>\>\classref{simple-thread}%
+    $\cal A$ \classref{object} \\
+    \>$\cal C$ \classref{character} \\
+    \>$\cal A$ \classref{condition}
+    {\normalfont See table~\ref{condition-class-hierarchy}}\\
+    \>$\cal A$ \classref{function} \\
+    \>\>$\cal C$ \classref{continuation} \\
+    \>\>$\cal C$ \classref{simple-function} \\
+    \>\>$\cal P$ \classref{generic-function} \\
+    \>\>\>$\cal C$ \classref{simple-generic-function} \\
+    \>$\cal A$ \classref{collection} \\
+    \>\>$\cal A$ \classref{sequence} \\
+    \>\>\>$\cal P$ \classref{list} \\
+    \>\>\>\>$\cal C$ \classref{cons} \\
+    \>\>\>\>$\cal C$ \classref{null}\\
+    \>\>\>$\cal A$ \classref{character-sequence} \\
+    \>\>\>\>$\cal C$ \classref{string} \\
+    \>\>\>$\cal C$ \classref{vector} \\
+    \>\>$\cal A$ \classref{table} \\
+    \>\>\>$\cal C$ \classref{hash-table} \\
+    \>$\cal C$ \classref{lock} \\
+    \>$\cal A$ \classref{number} \\
+    \>\>$\cal A$ \classref{integer}\\
+    \>\>\>$\cal C$ \classref{fixed-precision-integer}\\
+    % NotYoutoo \>\>\>$\cal C$ \classref{variable-precision-integer}\\
+    \>\>$\cal A$ \classref{float}\\
+    \>\>\>$\cal C$ \classref{double-float}\\
+    \>$\cal A$ \classref{stream} \\
+    \>\>$\cal A$ \classref{buffered-stream}\\
+    \>\>\>$\cal C$ \classref{string-stream}\\
+    \>\>\>$\cal C$ \classref{file-stream}\\
+    \>$\cal A$ \classref{name} \\
+    \>\>$\cal C$ \classref{symbol}\\
+    \>\>$\cal C$ \classref{keyword}\\
+    \>$\cal A$ \classref{thread} \\
+    \>\>$\cal C$ \classref{simple-thread}%
 \end{tabbing}%
 }%
 \end{table}%
@@ -436,10 +437,20 @@ The class-options are interpreted as follows:
 %
 The class of all functions.
 
+\derivedclass{simple-function}{function}
+\index{general}{level-0 classes!\theclass{simple-function}}
+%
+Place holder for \classref{simple-function} class.
+
 \derivedclass{generic-function}{function}
 \index{general}{level-0 classes!\theclass{generic-function}}
 %
 The class of all generic functions.
+
+\derivedclass{simple-generic-function}{generic-function}
+\index{general}{level-0 classes!\theclass{simple-generic-function}}
+%
+Place holder for \classref{simple-generic-function} class..
 
 \defop{defgeneric}
 \label{defgeneric-0}

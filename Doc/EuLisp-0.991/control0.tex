@@ -596,9 +596,10 @@ The \specopref{cond} macro provides a convenient syntax for collections of {\em
 \begin{minipage}[t]{0.45\columnwidth}
 \begin{tabbing}
     (\specopref{or} \= \scref{antecedent}$_1$ \\
-    \>00\= \kill
+    \>00\=00\= \kill
     \>(\specopref{cond} \\
-    \>\>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
+    \>\>(\scref{antecedent}$_2$ \\
+    \>\>\>\scseqref{consequent}) \\
     \>\>\ldots))
 \end{tabbing}
 \end{minipage} \\
@@ -617,9 +618,10 @@ The \specopref{cond} macro provides a convenient syntax for collections of {\em
 \begin{tabbing}
     (\specopref{if} \=\scref{antecedent}$_1$ \\
     \>(\specopref{progn} \scseqref{consequent}) \\
-    \>00\= \kill
+    \>00\=00\= \kill
     \>(\specopref{cond} \\
-    \>\>(\scref{antecedent}$_2$ \scseqref{consequent}) \\
+    \>\>(\scref{antecedent}$_2$ \\
+    \>\>\>\scseqref{consequent}) \\
     \>\>\ldots))
 \end{tabbing}%
 \end{minipage}%
@@ -691,7 +693,7 @@ is returned.
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
-%
+
 Note that {\tt x} does not occur free in any of \scref{form}$_2$ \ldots
 \scref{form}$_n$.
 %
@@ -782,13 +784,14 @@ signalled.
         (let/cc fail
           (with-handler
             (lambda (condition resume) (fail ()))
-            (succeed (apply open
-                       (format () "~a/~a" path name)
-                       options)))))
+            (succeed
+              (apply open
+                (format () "~a/~a" path name)
+                options)))))
       pathlist)
     (error
       (format ()
-        "path-open: cannot open stream for (~a) ~a"
+        "Cannot open stream for (~a) ~a"
         pathlist name)
       <cannot-open-path>)))
 \endCodeExample}
@@ -824,7 +827,7 @@ returned as the value of the block form.  See also \specopref{let/cc}.
     (\specopref{let/cc} \scref{identifier} \\
     \tts\scref{body})                    && \tts\scref{body})
 \end{RewriteTable}
-%
+
 The rewrite for \specopref{block} does not prevent the \specopref{block} being
 exited from anywhere in its dynamic extent, since the function bound
 to \scref{identifier} is a first-class item and can be passed as an
@@ -951,9 +954,9 @@ the \specopref{let} form.
     (\specopref{let} () \scref{body}) &\rewrite& (\specopref{progn} \scref{body}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\specopref{let} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
-    \>(\scref{variable}$_2$ \scref{form}$_2$) \\
-    \>\scref{variable}$_3$ \\
+    (\specopref{let} (\=(\scref{var}$_1$ \scref{form}$_1$) \\
+    \>(\scref{var}$_2$ \scref{form}$_2$) \\
+    \>\scref{var}$_3$ \\
     \>\ldots)\\
     00\= \kill
     \>\scref{body})
@@ -963,16 +966,16 @@ the \specopref{let} form.
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
     00\=00\=00\= \kill
-    ((\specopref{lambda} (\scref{variable}$_1$ \scref{variable}$_2$ \scref{variable}$_3$ \ldots) \\
+    ((\specopref{lambda} (\scref{var}$_1$ \scref{var}$_2$ \scref{var}$_3$ \ldots) \\
     \>\>\scref{body}) \\
     \>\scref{form}$_1$ \scref{form}$_2$ () \ldots) \\
 \end{tabbing}
 \end{minipage}\\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\specopref{let} \= \scref{variable}$_0$ \\
-    \>(\=(\scref{variable}$_1$ \scref{form}$_1$) \\
-    \>\>\scref{variable}$_2$ \\
+    (\specopref{let} \= \scref{var}$_0$ \\
+    \>(\=(\scref{var}$_1$ \scref{form}$_1$) \\
+    \>\>\scref{var}$_2$ \\
     \>\>\ldots)\\
     00\= \kill
     \>\scref{body})
@@ -983,9 +986,9 @@ the \specopref{let} form.
 \begin{tabbing}
     00\= \kill
     (\specopref{labels}\\
-    \>(\=(\scref{variable}$_0$ (\scref{variable}$_1$ \scref{variable}$_2$ \ldots) \\
+    \>(\=(\scref{var}$_0$ (\scref{var}$_1$ \scref{var}$_2$ \ldots) \\
     \>\>\scref{body})) \\
-    \>(\scref{variable}$_0$ \scref{form}$_1$ () \ldots))
+    \>(\scref{var}$_0$ \scref{form}$_1$ () \ldots))
 \end{tabbing}%
 \end{minipage}%
 \end{RewriteTable}
@@ -1017,9 +1020,9 @@ result of the \specopref{let*} form.
     (\specopref{let*} () \scref{body}) &\rewrite& (progn \scref{body}) \\
 \begin{minipage}[t]{\columnwidth}
 \begin{tabbing}
-    (\specopref{let*} (\=(\scref{variable}$_1$ \scref{form}$_1$) \\
-    \>(\scref{variable}$_2$ \scref{form}$_2$) \\
-    \>\scref{variable}$_3$\\
+    (\specopref{let*} (\=(\scref{var}$_1$ \scref{form}$_1$) \\
+    \>(\scref{var}$_2$ \scref{form}$_2$) \\
+    \>\scref{var}$_3$\\
     \>\ldots) \\
     00\= \kill
     \>\scref{body})
@@ -1029,9 +1032,9 @@ result of the \specopref{let*} form.
 \begin{minipage}[t]{\columnwidth}%
 \begin{tabbing}%
     00\= \kill
-    (\specopref{let} ((\scref{variable}$_1$ \scref{form}$_1$)) \\
-    \>(\specopref{let*} (\=(\scref{variable}$_2$ \scref{form}$_2$) \\
-    \>\>\scref{variable}$_3$\\
+    (\specopref{let} ((\scref{var}$_1$ \scref{form}$_1$)) \\
+    \>(\specopref{let*} (\=(\scref{var}$_2$ \scref{form}$_2$) \\
+    \>\>\scref{var}$_3$\\
     \>\>\ldots) \\
     00\=00\= \kill
     \>\>\scref{body}))
@@ -1095,7 +1098,7 @@ environments.
 \defSyntax{unwind-protect}{
 \begin{syntax}
     \scdef{unwind-protect-form}: \ra{} \classref{object} \\
-    \>  ( \specopref{unwind-protect} \scref{protected-form} \\
+    \>  (\specopref{unwind-protect} \scref{protected-form} \\
     \>\>  \scseqref{after-form} ) \\
     \scdef{protected-form}: \\
     \> \scref{form} \\
@@ -1138,11 +1141,12 @@ dynamic extent of the target of control transfer and the current
   (let/cc k1
     (labels
       ((loop
-         (let/cc k2 (unwind-protect (k1 10) (k2 99))
-         ;; continuation bound to {\tt k2}
+         (let/cc k2
+           (unwind-protect (k1 10) (k2 99))
+         ;; continuation bound to k2
          (loop))))
       (loop)))
-  ;; continuation bound to {\tt k1}
+  ;; continuation bound to k1
   ...)
 \endCodeExample}
 \end{example}

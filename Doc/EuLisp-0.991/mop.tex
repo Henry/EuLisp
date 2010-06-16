@@ -72,17 +72,16 @@ table~\ref{level-1-class-hierarchy}.
 {\tt
 \begin{tabbing}
     00\=00\=00\=00\= \kill
-    \classref{class} \\
-    % not in youtoo \>\classref{built-in-class} \\
-    \>\classref{simple-class} \\
-    \>\classref{function-class}  \\
-    \classref{slot} \\
-    \>\classref{local-slot} \\
-    \classref{function} \\
-    \>\classref{generic-function} \\
-    \>\>\classref{simple-generic-function} \\
-    \classref{method} \\
-    \>\classref{simple-method}
+    $\cal A$ \classref{class} \\
+    \>$\cal C$ \classref{simple-class} \\
+    \>$\cal C$ \classref{function-class} \\
+    $\cal A$ \classref{slot} \\
+    \>$\cal C$ \classref{local-slot} \\
+    $\cal A$ \classref{function} \\
+    \>$\cal A$ \classref{generic-function} \\
+    \>\>$\cal C$ \classref{simple-generic-function} \\
+    $\cal A$ \classref{method} \\
+    \>$\cal C$ \classref{simple-method}
 \end{tabbing}
 }
 \end{table}
@@ -101,6 +100,14 @@ equivalent to the result of calling \functionref{compute-class-precedence-list}.
 \remarks%
 The class precedence list is used to control the inheritance of slots and
 methods.
+
+\derivedclass{simple-class}{class}
+%
+Place holder for \classref{simple-class}.
+
+\derivedclass{function-class}{class}
+%
+Place holder for \classref{function-class}.
 
 \function{class-slots}
 %
@@ -308,6 +315,14 @@ The minimal information associated with a method metaobject is:
 %
 The metaobject classes for generic functions defined at level-1 are
 shown in table~\ref{level-1-class-hierarchy}.
+
+\class{method}
+%
+Place holder for \classref{method}.
+
+\derivedclass{simple-method}{method}
+%
+Place holder for \classref{method-class}.
 
 \function{method-domain}
 %
