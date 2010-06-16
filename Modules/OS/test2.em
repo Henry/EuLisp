@@ -76,7 +76,7 @@
        ((binary= type "function6")
         (swrite os boz))
        ((binary= type "thread")
-        (let ((thr (make <thread> function: (lambda (thr)
+        (let ((thr (make <current-thread> function: (lambda (thr)
                                               (pprint thr stderr)
                                               (sprint stderr 42)
                                               (swrite os thr)

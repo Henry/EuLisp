@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 15 June 2010, 21:08:56
+  Generated 16 June 2010, 09:18:20
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -43,7 +43,6 @@ youtoo Functions
   / 10 number /
   < 3 compare <
   <= 8 compare <=
-  <abstract-thread> 28 thread <abstract-thread>
   <buffered-stream> 20 stream2 <buffered-stream>
   <character-sequence> 2 string <character-sequence>
   <character> 5 character <character>
@@ -52,6 +51,7 @@ youtoo Functions
   <condition> 9 condition <condition>
   <connection> 2 socket <connection>
   <cons> 71 mop-class <cons>
+  <current-thread> 15 thread <current-thread>
   <double*> 5 handler <double*>
   <double-float> 9 float <double-float>
   <double> 7 float <double>
@@ -90,7 +90,7 @@ youtoo Functions
   <simple-thread> 34 thread <simple-thread>
   <slot> 49 mop-class <slot>
   <socket> 8 socket <socket>
-  <state> 24 thread <state>
+  <state> 25 thread <state>
   <stream-condition> 38 stream2 <stream-condition>
   <stream-control-block> 23 stream2 <stream-control-block>
   <stream> 21 stream2 <stream>
@@ -165,7 +165,7 @@ youtoo Functions
   caddr 22 list caddr
   cadr 20 list cadr
   call/ep 2 let-cc call/ep
-  call1/cc 17 thread call1/cc
+  call1/cc 18 thread call1/cc
   car 28 boot1 car
   cdaar 23 list cdaar
   cdadr 21 list cdadr
@@ -237,8 +237,8 @@ youtoo Functions
   convert 2 convert convert
   converter 13 mop-class converter
   cpl-subclass? 7 mop-inspect cpl-subclass?
-  current-thread 21 thread current-thread
-  current-thread-queue 23 thread current-thread-queue
+  current-thread 22 thread current-thread
+  current-thread-queue 24 thread current-thread-queue
   dec 44 boot1 dec
   deep-copy 3 copy deep-copy
   delete 28 collect delete
@@ -540,17 +540,17 @@ youtoo Functions
   table-threshold 12 table1 table-threshold
   table-values 16 table1 table-values
   table? 7 table1 table?
-  tconc 27 thread tconc
+  tconc 28 thread tconc
   the-method-lookup-function 7 mop-gf the-method-lookup-function
   thread-block 2 thread thread-block
   thread-continuation 29 thread thread-continuation
-  thread-dynamic-variables 26 thread thread-dynamic-variables
-  thread-error-handlers 15 thread thread-error-handlers
+  thread-dynamic-variables 27 thread thread-dynamic-variables
+  thread-error-handlers 16 thread thread-error-handlers
   thread-reschedule 7 thread thread-reschedule
-  thread-return-value 19 thread thread-return-value
+  thread-return-value 20 thread thread-return-value
   thread-returned? 38 thread thread-returned?
-  thread-start 25 thread thread-start
-  thread-state 22 thread thread-state
+  thread-start 26 thread thread-start
+  thread-state 23 thread thread-state
   thread-suspend 4 thread thread-suspend
   thread-unblock 6 thread thread-unblock
   thread-value 5 thread thread-value

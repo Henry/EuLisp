@@ -18,7 +18,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <ppcr-thread>
 ;;;-----------------------------------------------------------------------------
-  (defclass <ppcr-thread> (<abstract-thread>)
+  (defclass <ppcr-thread> (<thread>)
     ((function accessor: thread-function)
      (returned accessor: thread-returned?)
      (return-value accessor: thread-return-value)
@@ -41,7 +41,7 @@
 ;; <ppcr-thread> or <simple-thread>)
 ;;;-----------------------------------------------------------------------------
   ;; The default thread class
-  (setq <thread> <ppcr-thread>)
+  (setq <current-thread> <ppcr-thread>)
 
   (deflocal *initial-thread* (make <ppcr-thread> function: (lambda ())))
 

@@ -383,7 +383,7 @@
   (defmethod generic-write ((x <handler>) (os <object-stream>))
     (error "cannot write ~a to stream ~a" x os))
 
-  (defmethod generic-write ((x <abstract-thread>) (os <object-stream>))
+  (defmethod generic-write ((x <thread>) (os <object-stream>))
     (error "cannot write ~a to stream ~a" x os))
 
 ;;;------------------------------------------------------------------------

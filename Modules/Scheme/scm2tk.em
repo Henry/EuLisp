@@ -17,7 +17,7 @@
                   make
                   thread-reschedule
                   thread-start
-                  <thread>) level1))
+                  <current-thread>) level1))
    export (*redefine-imported-bindings*
            push-dynamic-variable
            dynamic-variable-ref
@@ -33,7 +33,7 @@
       ())
     (tcl-do-events))
 
-  (thread-start (make <thread> function: tcl-do-events))
+  (thread-start (make <current-thread> function: tcl-do-events))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Start-up the interpreter

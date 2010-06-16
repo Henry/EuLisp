@@ -93,11 +93,12 @@
 
   (defun start-dining-philosophers ()
     (labels
-     ((create-threads (n l)
-                      (if (= n 0) l
-                        (create-threads
-                         (- n 1)
-                         (cons (make <thread> function: philosopher) l))))
+     ((create-threads
+        (n l)
+        (if (= n 0) l
+          (create-threads
+            (- n 1)
+            (cons (make <current-thread> function: philosopher) l))))
       (start-threads (i l)
                      (if (null? l) ()
                        (progn

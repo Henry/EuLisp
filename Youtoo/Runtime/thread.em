@@ -6,14 +6,14 @@
 ;;;  Authors: Keith Playford, Andreas Kind
 ;;; Description: non-preemptive threads
 ;;;    Foreign thread modules need to set the default thread class variable
-;;;    <thread> (e.g. to <posix-thread>) and reset the following functions:
-;;;
-;;;    current-thread current-thread-queue thread-suspend thread-reschedule
+;;;    <current-thread> (e.g. to <posix-thread>) and reset the following
+;;;    functions:
+;;;        current-thread current-thread-queue thread-suspend thread-reschedule
 ;;;-----------------------------------------------------------------------------
 (defmodule thread
   (syntax (_macros)
    import (telos event)
-   export (<thread> <abstract-thread> thread? <simple-thread> simple-thread?
+   export (<current-thread> <thread> thread? <simple-thread> simple-thread?
            thread? current-thread current-thread-queue thread-state
            thread-continuation thread-returned? thread-return-value
            thread-reschedule thread-suspend
@@ -26,9 +26,9 @@
            fill-simple-state restore-simple-state call1/cc))
 
 ;;;-----------------------------------------------------------------------------
-;;; Classes <abstract-thread> and <simple-thread>
+;;; Classes <thread> and <simple-thread>
 ;;;-----------------------------------------------------------------------------
-  (defclass <abstract-thread> ()
+  (defclass <thread> ()
     ((error-handlers
       accessor: thread-error-handlers
       keyword: handlers:)
@@ -44,7 +44,7 @@
     keywords: (function:)
     predicate: thread?)
 
-  (defclass <simple-thread> (<abstract-thread>)
+  (defclass <simple-thread> (<thread>)
     ((continuation accessor: thread-continuation)
      (state accessor: thread-state)
      (returned accessor: thread-returned?)
@@ -55,7 +55,7 @@
 ;;; Initialization
 ;;;-----------------------------------------------------------------------------
   ;; The default thread class
-  (deflocal <thread> <simple-thread>)
+  (deflocal <current-thread> <simple-thread>)
   (deflocal *current-thread* ())
   (deflocal current-thread (lambda () *current-thread*))
 

@@ -172,7 +172,7 @@
 *** TODO Change =newline= and =flush= to operate on =stdout=
     Add =snewline= and =sflush= to take the stream as an argument.
 * EuLisp Definition
-*** TODO Update EuLisp definition and Youtoo implementation
+*** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
     to correspond to the EuLisp-1.0 proposals.
     See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].
 *** TODO Undefined references [34/41]
@@ -225,7 +225,8 @@
     CLOSED: [2010-04-01 Thu 12:16]
     in structure.tex.  Include details of constant instances of classes and
     constant bindings to classes (class aliases).
-*** TODO <thread> vs <abstract-thread>
+*** DONE <thread> vs <abstract-thread>
+    CLOSED: [2010-06-16 Wed 09:18]
     Sort out the difference between the EuLisp definition and the Youtoo
     implementation with respect to the name of the abstract base-class for
     threads.  In the definition it is =<thread>= whereas in Youtoo it is
@@ -238,7 +239,8 @@
     to be more consistent with the syntax description.
 *** TODO Add the return type to the syntax descriptions
 *** TODO Add "signatures" to all function descriptions
-*** TODO Change macro definitions to special operators
+*** DONE Change macro definitions to special operators
+    CLOSED: [2010-06-15 Tue 23:04]
     It doesn't seem sensible to effectively specify that certain syntax MUST be
     implemented as macros; surely this decision should be taken by the
     implementers and for efficiency reasons it might be preferable that more of

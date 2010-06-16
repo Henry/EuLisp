@@ -25,7 +25,7 @@
 
 *  General Description
    The subdirectories MIT, PPCR and UI (Solaris) should each provide the main
-   thread interface (i.e. <thread>, thread-start, thread-value,
+   thread interface (i.e. <current-thread>, thread-start, thread-value,
    thread-reschedule, current-thread) in a library called libfthread.a.
 
 * Installation and test

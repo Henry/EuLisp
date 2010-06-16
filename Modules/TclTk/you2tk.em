@@ -20,7 +20,7 @@
       ())
     (tcl-do-events))
 
-  (thread-start (make <thread> function: tcl-do-events))
+  (thread-start (make <current-thread> function: tcl-do-events))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Start-up the interpreter

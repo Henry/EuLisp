@@ -22,7 +22,7 @@
   (defun spawn (fun args)
     (if (null? args)
         ()
-      (let ((thrd (make <thread> function: fun)))
+      (let ((thrd (make <current-thread> function: fun)))
         (thread-start thrd (car args) (cadr args))
         (cons thrd (spawn fun (cddr args))))))
 

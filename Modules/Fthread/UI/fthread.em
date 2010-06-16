@@ -16,7 +16,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <ui-thread>
 ;;;-----------------------------------------------------------------------------
-  (defclass <ui-thread> (<abstract-thread>)
+  (defclass <ui-thread> (<thread>)
     ((function accessor: thread-function)
      (returned accessor: thread-returned?)
      (return-value accessor: thread-return-value)
@@ -39,7 +39,7 @@
 ;; <ui-thread> or <simple-thread>)
 ;;;-----------------------------------------------------------------------------
   ;; The default thread class
-  (setq <thread> <ui-thread>)
+  (setq <current-thread> <ui-thread>)
 
   (deflocal *initial-thread* (make <ui-thread> function: (lambda ())))
 
