@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-06-10 22:34:00" /> 
+<meta name="date" content="2010-06-16 22:40:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -74,13 +74,13 @@ continued.
     A  condition  should  be  signalled  non-continuably  when
     there is no reasonable way to resume processing.</li></ol>
 <!--l. 38--><p class="noindent" >A condition class is defined using <a 
-href="eulispcl14.html#x18-162001r5"><span 
+href="eulispcl14.html#x18-162001r6"><span 
 class="cmtt-9">defcondition</span></a> (see <span 
 class="cmsy-9">§</span>&#x00A0;<a 
-href="eulispcl14.html#x18-162001r5">14.0.5<!--tex4ht:ref: defcondition --></a>). The
+href="eulispcl14.html#x18-162001r6">14.0.6<!--tex4ht:ref: defcondition --></a>). The
 definition of a condition causes the creation of a new class of
 condition. A condition is signalled using the function <a 
-href="eulispcl15.html#x19-186002r20"><span 
+href="eulispcl15.html#x19-186002r21"><span 
 class="cmtt-9">signal</span></a>,
 which has two required arguments and one optional argument: an
 instance of a condition, a resume continuation or the empty
@@ -106,7 +106,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-165001r6"><span 
+href="eulispcl14.html#x18-165001r7"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>
 </td></tr></table>
 <!--l.10 55-->                             <table  
@@ -115,7 +115,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-172001r9"><span 
+href="eulispcl14.html#x18-172001r10"><span 
 class="cmtt-9">&#x003C;general-condition&#x003E;</span></a></td></tr></table>
 <!--l.10 56-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -150,7 +150,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-174001r12"><span 
+href="eulispcl14.html#x18-174001r13"><span 
 class="cmtt-9">&#x003C;environment-condition&#x003E;</span></a></td></tr></table>
 <!--l.10 60-->                          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -243,7 +243,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:14px;"
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-174003r13"><span 
+href="eulispcl14.html#x18-174003r14"><span 
 class="cmtt-9">&#x003C;wrong-condition-class&#x003E;</span></a></td></tr></table>
 <!--l.10 71-->                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -251,7 +251,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-175001r14"><span 
+href="eulispcl14.html#x18-175001r15"><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a></td></tr></table>
 <!--l.10 72-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -260,7 +260,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:14px;"
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-183001r19"><span 
+href="eulispcl14.html#x18-183001r20"><span 
 class="cmtt-9">&#x003C;no-next-method&#x003E;</span></a></td></tr></table>
 <!--l.10 73-->                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -269,7 +269,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:14px;"
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-179001r17"><span 
+href="eulispcl14.html#x18-179001r18"><span 
 class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span></a></td></tr></table>
 <!--l.10 74-->                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -278,7 +278,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:14px;"
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-177001r16"><span 
+href="eulispcl14.html#x18-177001r17"><span 
 class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span></a></td></tr></table>
 <!--l.10 75-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -287,7 +287,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:14px;"
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-175003r15"><span 
+href="eulispcl14.html#x18-175003r16"><span 
 class="cmtt-9">&#x003C;no-applicable-method&#x003E;</span></a></td></tr></table>
 <!--l.10 76-->                         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -296,7 +296,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:14px;"
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><a 
-href="eulispcl14.html#x18-181001r18"><span 
+href="eulispcl14.html#x18-181001r19"><span 
 class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span></a></td></tr></table>
 <!--l.10 78-->
                                                  

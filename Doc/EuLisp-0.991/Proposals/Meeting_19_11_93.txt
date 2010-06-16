@@ -238,6 +238,8 @@
 
     A = abstract,  C = concrete,  S = subclassable,  S1 = subclassable at L1
 
+    Level 0
+
         object A S
                 character C
                 condition A S
@@ -272,7 +274,7 @@
                 thread A S
                         simple-thread C
 
-Level 1
+    Level 1
                 class A S
                         built-in-class A
                         simple-class C

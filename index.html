@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>EuLisp</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-10 23:15:44 BST"/>
+<meta name="generated" content="2010-06-14 21:51:51 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,8 +83,8 @@ lang="en" xml:lang="en">
 <li><a href="#sec-3">3 General Description </a></li>
 <li><a href="#sec-4">4 Documentation </a></li>
 <li><a href="#sec-5">5 Installation </a></li>
-<li><a href="#sec-6">6 Getting Started with  Youtoo </a></li>
-<li><a href="#sec-7">7 Getting Started with  EuXLisp </a></li>
+<li><a href="#sec-6">6 Getting Started with Youtoo </a></li>
+<li><a href="#sec-7">7 Getting Started with EuXLisp </a></li>
 <li><a href="#sec-8">8 To Do </a></li>
 </ul>
 </div>
@@ -159,11 +159,8 @@ and provided by
 <a href="http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition">T. Kurt Bond</a>.
 </li>
 <li id="sec-2.2">EuXLisp original sources <br/>
-EuXLisp started life as
-<a href="http://www.bath.ac.uk/~masrjb/Sources/euscheme.html">Euscheme</a> based on
-xscheme written by David Michael Betz.  This is a mostly EuLisp level 0
-compliant interpreter (working from version 0.99 of the definition, and some
-extras).
+EuXLisp started life as <a href="http://www.bath.ac.uk/~masrjb/Sources/euscheme.html">Euscheme</a> based on xscheme written by David Michael
+Betz.
 </li>
 <li id="sec-2.3">EuLisp definition original sources <br/>
 The version of the EuLisp definition supplied is this release of Youtoo
@@ -239,9 +236,7 @@ EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small
 and compact Lisp, but nevertheless has many interesting features, such as
 modules, an object system, and multithreading.  EuLisp Level 1 has extra
 features, the most notable being a full metaobject system which is
-implemented in Youtoo not in EuXLisp.  These are a few notes on the use of
-EuLisp in general and EuXLisp in particular and concentrate on those things
-unique to EuLisp.
+implemented in Youtoo not in EuXLisp.
 
 </li>
 </ul>
@@ -336,7 +331,7 @@ You should now be able to run the script <br/>
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started with  <a href="Youtoo/README.html">Youtoo</a> </h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started with Youtoo </h2>
 <div class="outline-text-2" id="text-6">
 
 <ul>
@@ -354,23 +349,54 @@ executable. With shared libraries the executable should be less the 40K.
 <li>
 Run <br/>
 <i>Bin.${ARCH}/youtoo.sh</i> <br/>
-without options to start the EuLisp interpreter. The read-eval-print loop
+without options to start the Youtoo interpreter. The read-eval-print loop
 provides extra commands (type <i>help:</i>).
+</li>
+<li>
+Further information about running <a href="Youtoo/README.html">Youtoo</a>.
 
 </li>
 </ul>
-
-<p>Further information about running <a href="Youtoo/README.html">Youtoo</a>.
-</p>
 </div>
 
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Getting Started with  <a href="Doc/EuXLispNotes.html">EuXLisp</a> </h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> Getting Started with EuXLisp </h2>
 <div class="outline-text-2" id="text-7">
 
+<p>EuXLisp need two paths: where to look for the compiled image, and where to
+look for modules to load:
+</p><ul>
+<li id="sec-7.1">Image <br/>
+First euxlisp checks the environment variable <code>EU_IMAGE_PATH</code> (a colon
+separated list of directory names), then a builtin path, set from
+<code>IMAGE_SEARCH_PATH</code> in the Makefile.
+</li>
+<li id="sec-7.2">Modules <br/>
+ditto for environment variable <code>EU_MODULE_PATH</code>, then builtin
+<code>MODULE_SEARCH_PATH</code> (e.g., you might want to provide a set of system
+supplied modules).
+</li>
+<li id="sec-7.3">Default settings <br/>
+The default built-in settings should work for a default build with the files
+in their default locations.
+</li>
+<li id="sec-7.4">Running the interpreter interactively <br/>
+Run <i>Bin.${ARCH}/euxlisp</i> <br/>
+without options to start the EuXLisp interpreter. The read-eval-print loop
+provides extra commands see <a href="Doc/EuXLispNotes.html">EuXLisp</a> notes.
+</li>
+<li id="sec-7.5">Executing a module <br/>
+To execute the module <code>fact</code> in file <i>fact.em</i> run <br/>
+<i>echo "(!&gt; fact)"  | ..</i>../Bin.${ARCH}/euxlisp -q/ <br/>
+The <i>echo</i> pipes the load module <i>!&gt;</i> command to the interpreter.  In the
+future there will be a command-line option to execute a module directly.
+</li>
+<li id="sec-7.6">Further information about running <a href="Doc/EuXLispNotes.html">EuXLisp</a>. <br/>
 
+</li>
+</ul>
 </div>
 
 </div>
@@ -382,7 +408,7 @@ provides extra commands (type <i>help:</i>).
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-06-10 23:15:44 BST</p>
+<p class="date"> Date: 2010-06-14 21:51:51 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

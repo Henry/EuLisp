@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-10 23:10:10 BST"/>
+<meta name="generated" content="2010-06-15 16:53:06 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -268,7 +268,6 @@ Hexadecimal sequences are hard-coded to 3 digits, if not where is the end?
 <li>
 How should the character '^' be written given that it is used to define
 control sequences e.g. #^c ?  Perhaps #^ ?
-
 </li>
 <li id="sec-1.28.1">Proposed solution <br/>
 To remove support for control sequences which are unusual,
@@ -294,10 +293,7 @@ so that (eq 'nil '()) =&gt; t
 <li id="sec-1.31"><span class="done DONE"> DONE</span> (eql 3.0 3.0) should return t but it returns () <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-10 Mon 21:50</span></span><br/>
 </li>
-<li id="sec-1.32"><span class="done DONE"> DONE</span> Change <code>equal</code> methods to <code>binary=</code> <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-10 Mon 22:05</span></span><br/>
-</li>
-<li id="sec-1.33"><span class="done DONE"> DONE</span> Replace <code>equal</code> with <code>binary=</code> <br/>
+<li id="sec-1.32"><span class="done DONE"> DONE</span> Replace <code>equal</code> with <code>binary=</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-12 Wed 22:57</span></span><br/>
 Remove the <code>equal</code> generic function and methods and introduce a complete set
 of <code>binary=</code> methods.  The only difference between the definition of <code>equal</code>
@@ -305,12 +301,25 @@ and <code>binary=</code> is the latter applies type coercion whereas <code>equal
 defined not two.  If this property is an important feature <code>equal</code> could be
 reinstated as a function wrapper around <code>binary=</code> which does a
 type-consistency check.
-
 </li>
-<li id="sec-1.34"><span class="todo TODO"> TODO</span> Complete the renaming of predicates? and destructive! functions <br/>
+<li id="sec-1.33"><span class="done DONE"> DONE</span> Complete the renaming of predicates? and destructive! functions <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 14:31</span></span><br/>
 All predicates ending in "-p" have been transformed and the functions
 "null?" and "atom?" added but the predicates ending in "p" have yet to be
 updated.
+</li>
+<li id="sec-1.34"><span class="done DONE"> DONE</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 15:30</span></span><br/>
+Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the stream as the first argument.
+</li>
+<li id="sec-1.35"><span class="todo TODO"> TODO</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
+Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
+</li>
+<li id="sec-1.36"><span class="todo TODO"> TODO</span> Finish <code>format</code> <br/>
+Currently <code>format</code> only handles a subset of the functionality in the
+definition, in particular <code>e</code> and <code>g</code> formatting of floating-point numbers
+is missing.  <code>format</code> is complete in EuXLisp and it may be possible to reuse
+some of this functionality.
 </li>
 </ul>
 </div>
@@ -321,6 +330,30 @@ updated.
 <h2 id="sec-2"><span class="section-number-2">2</span> EuXLisp </h2>
 <div class="outline-text-2" id="text-2">
 
+<ul>
+<li id="sec-2.1"><span class="done DONE"> DONE</span> Replace <code>equal</code> with <code>binary=</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-12 Wed 22:57</span></span><br/>
+Remove the <code>equal</code> generic function and methods and introduce a complete set
+of <code>binary=</code> methods.  The only difference between the definition of <code>equal</code>
+and <code>binary=</code> is the latter applies type coercion whereas <code>equal</code> was
+defined not two.  If this property is an important feature <code>equal</code> could be
+reinstated as a function wrapper around <code>binary=</code> which does a
+type-consistency check.
+</li>
+<li id="sec-2.2"><span class="done DONE"> DONE</span> Complete the renaming of predicates? and destructive! functions <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 14:31</span></span><br/>
+All predicates ending in "-p" have been transformed and the functions
+"null?" and "atom?" added but the predicates ending in "p" have yet to be
+updated.
+</li>
+<li id="sec-2.3"><span class="done DONE"> DONE</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 15:30</span></span><br/>
+Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the stream as the first argument.
+</li>
+<li id="sec-2.4"><span class="todo TODO"> TODO</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
+Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
+</li>
+</ul>
 </div>
 
 </div>
@@ -500,7 +533,7 @@ the special operators are implemented as primitives of the language.
 <li id="sec-3.13"><span class="todo TODO"> TODO</span> Finish the "Lexical Syntax" section <br/>
 Provide a bit more background information.
 </li>
-<li id="sec-3.14"><span class="todo TODO"> TODO</span> Introduce the "Special Forms" list is <i>modules.tex</i> <br/>
+<li id="sec-3.14"><span class="todo TODO"> TODO</span> Introduce the "Special Forms" list in <i>modules.tex</i> <br/>
 Or move this list to a more appropriate place, <i>e.g.</i> at the beginning of
 the section concerning "special forms".
 </li>
@@ -537,7 +570,7 @@ changes including "null" -&gt; "null?" and "atom" -&gt; "atom?".
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-06-10 23:10:10 BST</p>
+<p class="date"> Date: 2010-06-15 16:53:06 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

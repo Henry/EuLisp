@@ -3,56 +3,66 @@
 
 <html>
 <head>
-<title>euxlisp(1) manual page</title>
+<title>EuXLisp(1) manual page</title>
 </head>
 <body bgcolor='white'>
 <a href='#toc'>Table of Contents</a><p>
 
 <h2><a name='sect0' href='#toc0'>Name</a></h2>
 euxlisp - EuLisp Level 0 interpreter 
-<p> 
 <h2><a name='sect1' href='#toc1'>Synopsis</a></h2>
-<b>euxlisp</b> [ <b>-qnts</b> ] [ <b>--script</b>
-] [ file ] [ arg ... ] 
-<p> 
+<b>euxlisp</b> [ <i>command-line</i> switches
+] [ <i>files</i> ... ] 
 <h2><a name='sect2' href='#toc2'>Description</a></h2>
-<b>euxlisp</b> is a small EuLisp Level 0 interpeter,
-based on David Michael Betz&rsquo; xscheme.  Mostly compliant with the EuLisp definition
+<i>euxlisp</i> is a small EuLisp Level 0 interpeter, based
+on David Michael Betz&rsquo; xscheme.  Mostly compliant with the EuLisp definition
 0.99, with a few Schemeisms still present. 
-<p> 
-<h2><a name='sect3' href='#toc3'>Options</a></h2>
-
+<h3><a name='sect3' href='#toc3'>Options</a></h3>
+The following options are
+of general interest: <blockquote>
 <dl>
 
-<dt><b>-q</b> </dt>
-<dd>quiet mode: print no
-messages, prompts or values. Useful when using <b>euxlisp</b> as a filter or other
-agent. </dd>
+<dt><b>-h</b><i>, </i><b>--help</b> </dt>
+<dd>display usage information. </dd>
 
-<dt><b>-n</b> </dt>
+<dt><b>-q</b><i>, </i><b>--quiet</b> </dt>
+<dd>quiet mode:
+print no messages, prompts or values. Useful when using <i>euxlisp</i> as a filter
+or other agent. </dd>
+
+<dt><b>-n</b><i>, </i><b>--no-lisp-image</b> </dt>
 <dd>do not read in the initial Lisp image. </dd>
 
-<dt><b>-t</b> </dt>
-<dd>switch on byte-code level
-tracing. </dd>
-
-<dt><b>-s</b> </dt>
+<dt><b>-N</b><i>,
+</i><b>--no-sys-calls</b> </dt>
 <dd>disables <b>system</b> and various other function calls. </dd>
 
-<dt><b>--script</b> <i>file</i>
-</dt>
-<dd>take input from <i>file</i>, skipping its first line. Useful for <b>#!/bin/euxlisp
+<dt><b>-s</b><i> <i>file</i>, </i><b>--script</b><i>
+<i>file</i> </i></dt>
+<dd>read and execute script <i>file</i>, skipping its first line. Useful for <b>#!/bin/euxlisp
 --script</b> and the like in shell scripts. </dd>
+
+<dt><b>-m</b><i> <i>file</i>, </i><b>--module</b><i> <i>file</i> </i></dt>
+<dd>read and execute
+module from <i>file</i>. </dd>
+
+<dt><b>-i</b><i> <i>file</i>, </i><b>--image</b><i> <i>file</i> </i></dt>
+<dd>read the given image <i>file</i> rather than
+the default. </dd>
+
+<dt><b>-t</b><i>, </i><b>--trace</b> </dt>
+<dd>switch on byte-code level tracing. </dd>
 </dl>
 <p>
-Other args are not interpreted, but
-are available though <b>getarg</b> (see below) 
-<p> 
+Other args are not
+interpreted, but are available though <b>getarg</b> (see below) 
+<p> </blockquote>
+
 <h2><a name='sect4' href='#toc4'>Features</a></h2>
-The module that contains
-all the useful stuff (e.g., <b>cons</b> and friends) is called <b>level0</b>: if you import
-no modules, you get nothing at all, not even special forms. So a typical
-module looks like <b> <br>
+The module
+that contains all the useful stuff (e.g., <b>cons</b> and friends) is called <b>level0</b>:
+if you import no modules, you get nothing at all, not even special forms.
+So a typical module looks like <b> <br>
 <pre>(defmodule foo
    (import (level0 ...))
    ...
@@ -94,8 +104,8 @@ in the loop type <b>help:</b> for extra information.
 <dt><b>EU_IMAGE_PATH</b>
 </dt>
 <dd>a colon-separated list of directory names: where to look for the initial
-EuLisp image (generally named <b>image.wks</b>). <b>euxlisp</b> searches these first, then
-a system-installed path. <br>
+EuLisp image (generally named \uxlisp.wks). <b>euxlisp</b> searches these first,
+then a system-installed path. <br>
 </dd>
 
 <dt><b>EU_MODULE_PATH</b> </dt>
@@ -110,7 +120,7 @@ If <b>euxlisp</b> starts
 
 <p>up in module <b>root</b> then it is a good bet that it couldn&rsquo;t find the image
 
-<p>file <b>image.wks</b> 
+<p>file <b>euxlisp.wks</b> 
 <p> There are a few differences between <b>euxlisp</b> and the EuLisp
 Level 0 definition, but as both are still changing it&rsquo;s futile to list them.
 
@@ -154,7 +164,9 @@ August 1993, R Kessler, ed. </dd>
 <li><a name='toc0' href='#sect0'>Name</a></li>
 <li><a name='toc1' href='#sect1'>Synopsis</a></li>
 <li><a name='toc2' href='#sect2'>Description</a></li>
+<ul>
 <li><a name='toc3' href='#sect3'>Options</a></li>
+</ul>
 <li><a name='toc4' href='#sect4'>Features</a></li>
 <li><a name='toc5' href='#sect5'>Environment</a></li>
 <li><a name='toc6' href='#sect6'>Bugs</a></li>

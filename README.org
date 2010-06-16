@@ -48,11 +48,8 @@
     [[http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition][T. Kurt
     Bond]].
 *** EuXLisp original sources
-    EuXLisp started life as
-    [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on
-    xscheme written by David Michael Betz.  This is a mostly EuLisp level 0
-    compliant interpreter (working from version 0.99 of the definition, and some
-    extras).
+    EuXLisp started life as [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on xscheme written by David Michael
+    Betz.
 *** EuLisp definition original sources
     The version of the EuLisp definition supplied is this release of Youtoo
     started life as EuLisp-0.99 from the pack released by Julian Padget:
@@ -94,9 +91,7 @@
     and compact Lisp, but nevertheless has many interesting features, such as
     modules, an object system, and multithreading.  EuLisp Level 1 has extra
     features, the most notable being a full metaobject system which is
-    implemented in Youtoo not in EuXLisp.  These are a few notes on the use of
-    EuLisp in general and EuXLisp in particular and concentrate on those things
-    unique to EuLisp.
+    implemented in Youtoo not in EuXLisp.
 
 * Documentation
 *** EuLisp definition
@@ -137,7 +132,7 @@
     /Bin.${ARCH}/youtoo.sh/ \\
     (see next section).
 
-* Getting Started with  [[http://henry.github.com/EuLisp/Youtoo/README.org][Youtoo]]
+* Getting Started with Youtoo
   + Run \\
     /Bin.${ARCH}/youtoo.sh/ -help \\
     to see the compiler options.
@@ -147,11 +142,33 @@
     executable. With shared libraries the executable should be less the 40K.
   + Run \\
     /Bin.${ARCH}/youtoo.sh/ \\
-    without options to start the EuLisp interpreter. The read-eval-print loop
+    without options to start the Youtoo interpreter. The read-eval-print loop
     provides extra commands (type /help:/).
+  + Further information about running [[http://henry.github.com/EuLisp/Youtoo/README.org][Youtoo]].
 
-  Further information about running [[http://henry.github.com/EuLisp/Youtoo/README.org][Youtoo]].
-
-* Getting Started with  [[http://henry.github.com/EuLisp/Doc/EuXLispNotes.org][EuXLisp]]
+* Getting Started with EuXLisp
+  EuXLisp need two paths: where to look for the compiled image, and where to
+  look for modules to load:
+*** Image
+    First euxlisp checks the environment variable ~EU_IMAGE_PATH~ (a colon
+    separated list of directory names), then a builtin path, set from
+    ~IMAGE_SEARCH_PATH~ in the Makefile.
+*** Modules
+    ditto for environment variable ~EU_MODULE_PATH~, then builtin
+    ~MODULE_SEARCH_PATH~ (e.g., you might want to provide a set of system
+    supplied modules).
+*** Default settings
+    The default built-in settings should work for a default build with the files
+    in their default locations.
+*** Running the interpreter interactively
+    Run /Bin.${ARCH}/euxlisp/ \\
+    without options to start the EuXLisp interpreter. The read-eval-print loop
+    provides extra commands see [[http://henry.github.com/EuLisp/Doc/EuXLispNotes.org][EuXLisp]] notes.
+*** Executing a module
+    To execute the module =fact= in file /fact.em/ run \\
+    /echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q/ \\
+    The /echo/ pipes the load module /!>/ command to the interpreter.  In the
+    future there will be a command-line option to execute a module directly.
+*** Further information about running [[http://henry.github.com/EuLisp/Doc/EuXLispNotes.org][EuXLisp]].
 
 * [[http://henry.github.com/EuLisp/TODO.org][To Do]]
