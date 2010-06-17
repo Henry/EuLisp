@@ -37,9 +37,6 @@ LVAL *vtop = NULL;              // top of vector space
 
 // external variables
 #include "xssymbols.h"
-#ifdef NOTDEF
-extern LVAL tmpfilelist;
-#endif
 
 // forward declarations
 static LVAL allocnode(int type);
@@ -611,10 +608,6 @@ void gc(int reason)
         mark(class_vector);
     if (keyword_array && ispointer(keyword_array))
         mark(keyword_array);
-    #ifdef NOTDEF
-    if (tmpfilelist && ispointer(tmpfilelist))
-        mark(tmpfilelist);
-    #endif
     #ifndef OLDSYM
     if (obarray && ispointer(obarray))
         mark(obarray);

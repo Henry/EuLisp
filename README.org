@@ -5,31 +5,17 @@
 #+OPTIONS: author:nil email:nil ^:{}
 
 * [[http://henry.github.com/EuLisp/COPYING][Copyright]]
-*** [[http://henry.github.com/EuLisp/Youtoo/COPYING][Youtoo]]
-    Youtoo is free software: you can redistribute it and/or modify it
-    under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+  EuLisp is free software: you can redistribute it and/or modify it under the
+  terms of the GNU General Public License as published by the Free Software
+  Foundation, either version 3 of the License, or (at your option) any later
+  version.
 
-    Youtoo is distributed in the hope that it will be useful, but WITHOUT
-    ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-    FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-    for more details.
+  EuLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License along with
-    Youtoo in the file [[http://henry.github.com/EuLisp/Youtoo/COPYING][COPYING]].  If not, see
-    <http://www.gnu.org/licenses/>.
-*** [[http://henry.github.com/EuLisp/EuXLisp/LICENCE][EuXLisp]]
-    Redistribution and use in source and binary forms, with or without
-    modification, are permitted provided that the following conditions
-    are met:
-    1. Redistributions of source code must retain the above copyright
-       notice, this list of conditions and the following disclaimer.
-    2. Redistributions in binary form must reproduce the above copyright
-       notice, this list of conditions and the following disclaimer in the
-       documentation and/or other materials provided with the distribution.
-    3. The name of the authors may not be used to endorse or promote products
-       derived from this software without specific prior written permission.
+  You should have received a copy of the GNU General Public License along with
+  EuLisp in the file [[http://henry.github.com/EuLisp/COPYING][COPYING]].  If not, see <http://www.gnu.org/licenses/>.
 
 * Aim
   This version of the EuLisp definition and Youtoo and EuXLisp implementations
@@ -48,8 +34,14 @@
     [[http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition][T. Kurt
     Bond]].
 *** EuXLisp original sources
-    EuXLisp started life as [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on xscheme written by David Michael
-    Betz.
+    EuXLisp started life as
+    [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on
+    xscheme written by David Michael Betz and released under the 3-clause BSD
+    licence, see [[http://henry.github.com/EuLisp/EuXLisp/ORIGINAL_LICENCE]].  However with the inclusion
+    of the GNU getopt and readline libraries this software inherits the GPL with
+    which the 3-clause BSD licence is compatible and all further developments
+    will be made under the terms of the GPL version 3, see
+    [[http://henry.github.com/EuLisp/COPYING][COPYING]].
 *** EuLisp definition original sources
     The version of the EuLisp definition supplied is this release of Youtoo
     started life as EuLisp-0.99 from the pack released by Julian Padget:

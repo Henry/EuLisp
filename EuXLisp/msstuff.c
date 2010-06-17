@@ -3,15 +3,17 @@
         All Rights Reserved */
 // Euscheme code Copyright (c) 1994 Russell Bradford
 
-#ifdef NOTDEF
-#include <dos.h>
-#endif
 #include <sys/types.h>
 #include <time.h>
 #include <sys/time.h>
 #include "xscheme.h"
 
-#define LBSIZE 200
+#define READLINE
+
+#ifdef READLINE
+#include <readline/readline.h>
+#include <readline/history.h>
+#endif
 
 unsigned _stklen = 16384;
 
@@ -31,23 +33,21 @@ extern int errno;
 // new place for errno
 #include <errno.h>
 
-#ifdef UNIX
 int reading;
-#endif
 
 // local variables
+#ifdef READLINE
+static char* lbuf;
+static const char* rlhistfile = ".eulisp";
+#else
+#define LBSIZE 200
 static char lbuf[LBSIZE];
-#ifndef UNIX
-static int lpos[LBSIZE];
 #endif
+
 static int lindex;
 static int lcount;
 static int lposition;
-#if DOBBS
-static long rseed = 1L;
-#endif
 
-#ifdef UNIX
 #define xputc putchar
 #define MAXFDS                  32
 #ifndef FD_SET
@@ -61,20 +61,7 @@ typedef struct fd_set
 } fd_set;
 #endif
 
-#endif
-
-#ifdef NOTDEF
-LVAL tmpfilelist = NIL;
-#endif
-
 static void xflush();
-#ifndef UNIX
-static void xinfo();
-static int xgetc();
-static void xputc(int ch);
-static int xcheck();
-#endif
-
 void ostputc(), ostputs(), oscheck(), osflush();
 static void xflush();
 void check_if_disabled();
@@ -102,19 +89,18 @@ void osinit(char *banner)
     lposition = 0;
     lindex = 0;
     lcount = 0;
+
+    if (!read_history(rlhistfile))
+    {
+        ostputs("Read readline history from ");
+        ostputs(rlhistfile);
+        ostputc('\n');
+    }
 }
 
 // osfinish - clean up before returning to the operating system
 void osfinish()
-{
-    #ifdef NOTDEF
-    for (; tmpfilelist; tmpfilelist = cdr(tmpfilelist))
-    {
-        fclose(getfile(car(car(tmpfilelist))));
-        osunlink(getstring(cdr(car(tmpfilelist))));
-    }
-    #endif
-}
+{}
 
 // oserror - print an error message
 void oserror(char *msg)
@@ -170,48 +156,13 @@ FILE *osaopen(char *name, char *mode)
 // osbopen - open a binary file
 FILE *osbopen(char *name, char *mode)
 {
-    #ifdef UNIX
     return (fopen(name, mode));
-    #else
-    char bmode[10];
-
-    strcpy(bmode, mode);
-    strcat(bmode, "b");
-    return (fopen(name, bmode));
-    #endif
 }
 
 // osclose - close a file
 int osclose(FILE *fp)
 {
-    #ifdef NOTDEF
-    if (tmpfilelist == NIL)
-    {
-        return fclose(fp);
-    }
-
-    if (getfile(car(car(tmpfilelist))) == fp)
-    {
-        int ret = fclose(fp);
-        osunlink(getstring(cdr(car(tmpfilelist))));
-        tmpfilelist = cdr(tmpfilelist);
-        return ret;
-    }
-
-    LVAL list1, list2;
-    for (list1 = tmpfilelist, list2 = cdr(list1); list2;
-         list1 = cdr(list1), list2 = cdr(list2))
-        if (getfile(car(car(list2))) == fp)
-        {
-            int ret = fclose(fp);
-            osunlink(getstring(cdr(car(list2))));
-            cdr(list1) = cdr(list2);
-            return ret;
-        }
-    return fclose(fp);
-    #else
     return (fclose(fp));
-    #endif
 }
 
 // ostell - get the current file position
@@ -235,13 +186,9 @@ int osseek(FILE *fp, long offset, int whence)
 // osagetc - get a character from an ascii file
 int osagetc(FILE *fp)
 {
-    #ifdef UNIX
     reading = 1;
     int ch = getc(fp);
     reading = 0;
-    #else
-    int ch = getc(fp);
-    #endif
 
     return ch;
 }
@@ -255,13 +202,9 @@ int osaputc(int ch, FILE *fp)
 // osbgetc - get a character from a binary file
 int osbgetc(FILE *fp)
 {
-    #ifdef UNIX
     reading = 1;
     int ch = getc(fp);
     reading = 0;
-    #else
-    int ch = getc(fp);
-    #endif
     return ch;
 }
 
@@ -271,23 +214,62 @@ int osbputc(int ch, FILE *fp)
     return (putc(ch, fp));
 }
 
+// Read a string, and return a pointer to it.
+// Returns NULL on EOF.
+#ifdef READLINE
+void rlgets()
+{
+    // If the buffer has already been allocated,
+    // return the memory to the free pool.
+    if (lbuf)
+    {
+        free(lbuf);
+        lbuf = (char *)NULL;
+    }
+
+    // Get a line from the user.
+    lbuf = readline("");
+
+    // If the line has any text in it,
+    // save it on the history.
+    if (lbuf && *lbuf)
+    {
+        add_history(lbuf);
+        write_history(rlhistfile);
+    }
+}
+#endif
+
 // ostgetc - get a character from the terminal
 int ostgetc()
 {
-    #ifdef UNIX
     extern int ctrl_c;
-    #endif
     extern int quiet;
 
-    // check for a buffered character
+    // Check for a buffered character
     if (lcount--)
     {
-        return (lbuf[lindex++]);
+        #ifdef READLINE
+        // If it is the last character return \n
+        if (lcount == 0)
+        {
+            return '\n';
+        }
+        else
+        #endif
+        {
+            return (lbuf[lindex++]);
+        }
     }
 
-    #ifdef UNIX
     reading = 1;
+
+    #ifdef READLINE
+    rlgets();
+    #else
     fgets(lbuf, LBSIZE, stdin);
+    #endif
+
     reading = 0;
 
     if (ctrl_c)
@@ -298,9 +280,14 @@ int ostgetc()
         ostputc('\n');
         xltoplevel();
     }
-    lcount = strlen(lbuf);
 
+    // If the line buffer is not allocated or the stdin is at eof
+    // return EOF
+    #ifdef READLINE
+    if (!lbuf || feof(stdin))
+    #else
     if (feof(stdin))
+    #endif
     {
         if (!quiet)
         {
@@ -310,6 +297,14 @@ int ostgetc()
         lcount = 0;
         return EOF;
     }
+
+    lcount = strlen(lbuf);
+
+    // For readline pretend the buffer is one longer than it really is
+    // for the \n which readline strips
+    #ifdef READLINE
+    lcount++;
+    #endif
 
     // write it to the transcript file
     if (tfp)
@@ -322,86 +317,22 @@ int ostgetc()
 
     lindex = 0;
     lcount--;
-    return (lbuf[lindex++]);
-    #else
-    // get an input line
-    for (lcount = 0;;)
+
+    #ifdef READLINE
+    // If it is the last character return \n
+    if (lcount == 0)
     {
-        int ch;
-        switch (ch = xgetc())
-        {
-            case '\r':
-                lbuf[lcount++] = '\n';
-                xputc('\r');
-                xputc('\n');
-                lposition = 0;
-                if (tfp)
-                    for (lindex = 0; lindex < lcount; ++lindex)
-                        osaputc(lbuf[lindex], tfp);
-                lindex = 0;
-                lcount--;
-                return (lbuf[lindex++]);
-            case '\010':
-            case '\177':
-            if (lcount)
-            {
-                lcount--;
-                while (lposition > lpos[lcount])
-                {
-                    xputc('\010');
-                    xputc(' ');
-                    xputc('\010');
-                    lposition--;
-                }
-            }
-            break;
-            case '\032':
-                xflush();
-                return (EOF);
-            default:
-                if (ch == '\t' || (ch >= 0x20 && ch < 0x7F))
-                {
-                    lbuf[lcount] = ch;
-                    lpos[lcount] = lposition;
-                    if (ch == '\t')
-                        do
-                        {
-                            xputc(' ');
-                        } while (++lposition & 7);
-                    else
-                    {
-                        xputc(ch);
-                        lposition++;
-                    }
-                    lcount++;
-                }
-                else
-                {
-                    xflush();
-                    switch (ch)
-                    {
-                        case '\003':
-                            xltoplevel();       // control-c
-                        case '\007':
-                            xlcleanup();        // control-g
-                        case '\020':
-                            xlcontinue();       // control-p
-                        case '\032':
-                            return (EOF);       // control-z
-                        case '\034':
-                            xlwrapup(0);        /* control-\ */
-                        default:
-                            return (ch);
-                    }
-                }
-        }
+        return '\n';
     }
+    else
     #endif
+    {
+        return (lbuf[lindex++]);
+    }
 }
 
 int osselect(FILE *fp)
 {
-    #if defined(UNIX)
     int ch, fd;
     fd_set readfds;
     struct timeval poll;
@@ -428,30 +359,18 @@ int osselect(FILE *fp)
     }
 
     return ch;
-    #else
-    return NOCHAR;
-    #endif
 }
 
 
 // ospeekchar
 int ospeekchar(FILE *fp)
 {
-    #ifdef UNIX
     // grub around in the internals of stdio.h
     #ifdef __linux
-    #ifdef OLD_LINUX
-    // earlier versions of Linux require this
-    if (fp->_gptr < fp->_egptr)
-    {
-        return (int)(*(unsigned char *)fp->_gptr);
-    }
-    #else
     if (fp->_IO_read_ptr < fp->_IO_save_end)
     {
         return (int)(*(unsigned char *)fp->_IO_read_ptr);
     }
-    #endif
     #else
     #ifdef __BSD_NET2
     // for 386BSD and the like (Torek's stdio)
@@ -469,16 +388,6 @@ int ospeekchar(FILE *fp)
     #endif
 
     return osselect(fp);
-    #else
-    int ch;
-
-    if (fp == stdin)
-    {
-        ch = xcheck();
-        return ch == (int)NULL ? NOCHAR : ch;
-    }
-    return osselect(fp);
-    #endif
 }
 
 // ostputc - put a character to the terminal
@@ -490,9 +399,6 @@ void ostputc(int ch)
     // output the character
     if (ch == '\n')
     {
-        #ifndef UNIX
-        xputc('\r');
-        #endif
         xputc('\n');
         lposition = 0;
     }
@@ -527,7 +433,6 @@ void osflush()
 // oscheck - check for control characters during execution
 void oscheck()
 {
-    #ifdef UNIX
     extern int ctrl_c;
 
     if (ctrl_c)
@@ -536,32 +441,11 @@ void oscheck()
         xflush();
         xltoplevel();
     }
-    #else
-    switch (xcheck())
-    {
-        case '\002':   // control-b
-        case '\003':   // control-c
-        xflush();
-        xltoplevel();
-        break;
-        case '\024':   // control-t
-            xinfo();
-            break;
-        case '\023':   // control-s
-            while (xcheck() != '\021')
-                ;
-            break;
-        case '\034':   /* control-\ */
-            xlwrapup(0);
-            break;
-    }
-    #endif
 }
 
 // oscheck_int - check for control characters during interpreting
 void oscheck_int()
 {
-    #ifdef UNIX
     extern int ctrl_c;
 
     if (ctrl_c)
@@ -570,42 +454,7 @@ void oscheck_int()
         xflush();
         xltoplevel_int();
     }
-    #else
-    switch (xcheck())
-    {
-        case '\002':   // control-b
-        case '\003':   // control-c
-        xflush();
-        xltoplevel();
-        break;
-        case '\024':   // control-t
-            xinfo();
-            break;
-        case '\023':   // control-s
-            while (xcheck() != '\021')
-                ;
-            break;
-        case '\034':   /* control-\ */
-            xlwrapup(0);
-            break;
-    }
-    #endif
 }
-
-#ifndef UNIX
-// xinfo - show information on control-t
-static void xinfo()
-{
-    /*
-      extern int nfree,gccalls;
-      extern long total;
-      char buf[80];
-      sprintf(buf,"\n[ Free: %d, GC calls: %d, Total: %ld ]",
-      nfree,gccalls,total);
-      errputstr(buf);
-    */
-}
-#endif
 
 // xflush - flush the input line buffer and start a new line
 static void xflush()
@@ -613,136 +462,6 @@ static void xflush()
     osflush();
     ostputc('\n');
 }
-
-#ifndef UNIX
-// xgetc - get a character from the terminal without echo
-static int xgetc()
-{
-    return (bdos(7, 0, 0) & 0xFF);
-}
-
-// xputc - put a character to the terminal
-static void xputc(int ch)
-{
-    bdos(6, ch, 0);
-}
-
-// xcheck - check for a character
-static int xcheck()
-{
-    return (bdos(6, 0xFF, 0) & 0xFF);
-}
-#endif
-
-#ifdef NOTDEF
-// xinbyte - read a byte from an input stream
-LVAL xinbyte()
-{
-    int streamno;
-    LVAL val;
-    static char *cfn_name = "inbyte";
-    val = xlgafixnum();
-    streamno = (int)getfixnum(val);
-    xllastarg();
-    return (cvfixnum((FIXTYPE) instreamb(streamno)));
-}
-
-// xoutbyte - write a byte to an output stream
-LVAL xoutbyte()
-{
-    int streamno, byte;
-    LVAL val;
-    static char *cfn_name = "outbyte";
-    val = xlgafixnum();
-    streamno = (int)getfixnum(val);
-    val = xlgafixnum();
-    byte = (int)getfixnum(val);
-    xllastarg();
-    outstreamb(streamno, byte);
-    return (NIL);
-}
-
-// xint86 - invoke a system interrupt
-LVAL xint86()
-{
-    union REGS inregs, outregs;
-    struct SREGS sregs;
-    LVAL inv, outv, val;
-    int intno;
-    static char *cfn_name = "int86";
-
-    // get the interrupt number and the list of register values
-    val = xlgafixnum();
-    intno = (int)getfixnum(val);
-    inv = xlgavector();
-    outv = xlgavector();
-    xllastarg();
-
-    // check the vector lengths
-    if (getsize(inv) != 9)
-    {
-        xlerror("incorrect vector length", inv);
-    }
-
-    if (getsize(outv) != 9)
-    {
-        xlerror("incorrect vector length", outv);
-    }
-
-    // load each register from the input vector
-    val = getelement(inv, 0);
-    inregs.x.ax = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 1);
-    inregs.x.bx = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 2);
-    inregs.x.cx = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 3);
-    inregs.x.dx = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 4);
-    inregs.x.si = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 5);
-    inregs.x.di = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 6);
-    sregs.es = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 7);
-    sregs.ds = (fixp(val) ? (int)getfixnum(val) : 0);
-    val = getelement(inv, 8);
-    inregs.x.cflag = (fixp(val) ? (int)getfixnum(val) : 0);
-
-    // do the system interrupt
-    int86x(intno, &inregs, &outregs, &sregs);
-
-    // store the results in the output vector
-    setelement(outv, 0, cvfixnum((FIXTYPE) outregs.x.ax));
-    setelement(outv, 1, cvfixnum((FIXTYPE) outregs.x.bx));
-    setelement(outv, 2, cvfixnum((FIXTYPE) outregs.x.cx));
-    setelement(outv, 3, cvfixnum((FIXTYPE) outregs.x.dx));
-    setelement(outv, 4, cvfixnum((FIXTYPE) outregs.x.si));
-    setelement(outv, 5, cvfixnum((FIXTYPE) outregs.x.di));
-    setelement(outv, 6, cvfixnum((FIXTYPE) sregs.es));
-    setelement(outv, 7, cvfixnum((FIXTYPE) sregs.ds));
-    setelement(outv, 8, cvfixnum((FIXTYPE) outregs.x.cflag));
-
-    // return the result list
-    return (outv);
-}
-
-// getnext - get the next fixnum from a list
-static int getnext(LVAL *plist)
-{
-    if (consp(*plist))
-    {
-        LVAL val = car(*plist);
-        *plist = cdr(*plist);
-        if (!fixp(val))
-        {
-            xlerror("expecting an integer", val);
-        }
-        return ((int)getfixnum(val));
-    }
-    return (0);
-}
-#endif
 
 // time initialisation
 #ifndef NO_GTOD
@@ -821,20 +540,7 @@ LVAL xtmpfile()
 {
     static char *cfn_name = "tmpfile";
 
-    #ifdef NOTDEF
-    char *getenv(), *str;
-    #endif
-
     xllastarg();
-
-    #ifdef NOTDEF
-    // not everyone has a /tmp
-    str = getenv("TMPDIR");
-    if (str == NULL)
-    {
-        putenv("TMPDIR=.");
-    }
-    #endif
 
     FILE *fp = tmpfile();
     if (fp == NULL)
@@ -851,31 +557,16 @@ LVAL xtmpfile()
 {
     static char *cfn_name = "tmpfile";
 
-    #ifdef NOTDEF
-    char *tempnam();
-    #endif
-
     xllastarg();
 
     // tmpfile doesn't seem to work on dos gcc
-    #ifdef NOTDEF
-    char *name = tempnam(".", "eutmp");
-    FILE *fp = fopen(name, "w+b");
-    #else
     FILE *fp = tmpfile();
-    #endif
     if (fp == NULL)
     {
         xlcerror("failed to create temporary file", cvstring(cfn_name), NIL);
     }
 
     LVAL stream = cvstream(fp, PF_INPUT | PF_OUTPUT);
-
-    #ifdef NOTDEF
-    cpush(stream);
-    tmpfilelist = cons(cons(stream, cvstring(name)), tmpfilelist);
-    drop(1);
-    #endif
 
     return stream;
 }

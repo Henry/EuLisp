@@ -31,12 +31,12 @@ Linux:
 # Linux 32bit
 Linux-i686:
 	$(MAKE) all "CFLAGS = -std=gnu99 -DUNIX -DSIGNAL -DSTRINGH -DWORD_LENGTH=32 -Wall" \
-                "LIBS = -lm" "CC = gcc"
+                "LIBS = -lm -lreadline" "CC = gcc"
 
 # Linux 64bit
 Linux-x86_64:
-	$(MAKE) all "CFLAGS = -std=gnu99 -DUNIX -DSIGNAL -DSTRINGH -DWORD_LENGTH=64 -Wall" \
-                "LIBS = -lm" "CC = gcc"
+	$(MAKE) all "CFLAGS = -ggdb3 -std=gnu99 -DUNIX -DSIGNAL -DSTRINGH -DWORD_LENGTH=64 -Wall" \
+                "LIBS = -lm -lreadline" "CC = gcc"
 
 # Generic SunOS
 SunOS:

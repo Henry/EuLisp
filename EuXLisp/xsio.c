@@ -23,20 +23,31 @@ int xlgetc(LVAL fptr)
 
     // otherwise, check for a buffered character
     else if ((ch = getsavech(fptr)) != '\0')
+    {
         setsavech(fptr, '\0');
+    }
 
     // otherwise, check for terminal input or file input
     else
     {
         fp = getfile(fptr);
         if (fp == NULL)
+        {
             xlcerror("attempt to read from a closed stream", fptr, NIL);
+        }
+
         if (fp == stdin || fp == stderr)
+        {
             ch = ostgetc();
+        }
         else if ((getpflags(fptr) & PF_BINARY) != 0)
+        {
             ch = osbgetc(fp);
+        }
         else
+        {
             ch = osagetc(fp);
+        }
     }
 
     // return the character
