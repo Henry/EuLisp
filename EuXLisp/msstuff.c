@@ -8,8 +8,6 @@
 #include <sys/time.h>
 #include "xscheme.h"
 
-#define READLINE
-
 #ifdef READLINE
 #include <readline/readline.h>
 #include <readline/history.h>
@@ -38,7 +36,7 @@ int reading;
 // local variables
 #ifdef READLINE
 static char* lbuf;
-static const char* rlhistfile = ".eulisp";
+static char rlhistfile[255];
 #else
 #define LBSIZE 200
 static char lbuf[LBSIZE];
@@ -90,12 +88,28 @@ void osinit(char *banner)
     lindex = 0;
     lcount = 0;
 
-    if (!read_history(rlhistfile))
+    #ifdef READLINE
+    char* home = getenv("HOME");
+    if (home == NULL)
     {
-        ostputs("Read readline history from ");
-        ostputs(rlhistfile);
-        ostputc('\n');
+        oserror
+        (
+            "Cannot find environment variable HOME for reading ~/.eulisp_history"
+        );
     }
+    else
+    {
+        strcpy(rlhistfile, home);
+        strcat(rlhistfile, "/.eulisp_history");
+
+        if (!read_history(rlhistfile))
+        {
+            ostputs("Read readline history from ");
+            ostputs(rlhistfile);
+            ostputc('\n');
+        }
+    }
+    #endif
 }
 
 // osfinish - clean up before returning to the operating system
@@ -583,7 +597,10 @@ LVAL xgetenv()
 
     char *str = getenv(getstring(arg));
     if (str == NULL)
+    {
         return NIL;
+    }
+
     return cvstring(str);
 }
 
