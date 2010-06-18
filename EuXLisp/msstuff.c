@@ -36,7 +36,7 @@ int reading;
 // local variables
 #ifdef READLINE
 static char* lbuf;
-static char rlhistfile[255];
+static char rl_histfile[255];
 #else
 #define LBSIZE 200
 static char lbuf[LBSIZE];
@@ -89,23 +89,22 @@ void osinit(char *banner)
     lcount = 0;
 
     #ifdef READLINE
+    const char* eulisp_history = "/.eulisp_history";
     char* home = getenv("HOME");
     if (home == NULL)
     {
-        oserror
-        (
-            "Cannot find environment variable HOME for reading ~/.eulisp_history"
-        );
+        ostputs("Cannot find environment variable HOME for reading ~/");
+        oserror(eulisp_history);
     }
     else
     {
-        strcpy(rlhistfile, home);
-        strcat(rlhistfile, "/.eulisp_history");
+        strcpy(rl_histfile, home);
+        strcat(rl_histfile, eulisp_history);
 
-        if (!read_history(rlhistfile))
+        if (!read_history(rl_histfile))
         {
-            ostputs("Read readline history from ");
-            ostputs(rlhistfile);
+            ostputs("Reading readline history from ");
+            ostputs(rl_histfile);
             ostputc('\n');
         }
     }
@@ -249,7 +248,7 @@ void rlgets()
     if (lbuf && *lbuf)
     {
         add_history(lbuf);
-        write_history(rlhistfile);
+        write_history(rl_histfile);
     }
 }
 #endif
