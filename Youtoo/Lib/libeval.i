@@ -9,7 +9,7 @@
     ((name . dynamic-binding-set1) (pos . 12) (origin cg-dld . dynamic-binding-set1) (class . ff) (arity . 3) (ff (3 0 8) 6 (eul_dyn_binding_set . ff_stub_eul_dyn_binding_set5714)))
     ((name . *first-year-students*) (pos . 32) (origin i-param . *first-year-students*))
     ((name . module-loaded?) (pos . 6) (origin cg-dld . module-loaded?))
-    ((name . ?) (pos . 13) (origin i-rep . ?))
+    ((name . ?) (pos . 12) (origin i-rep . ?))
     ((name . dynamic-binding-ref1) (pos . 11) (origin cg-dld . dynamic-binding-ref1) (class . ff) (arity . 2) (ff (3 0) 6 (eul_dyn_binding_ref . ff_stub_eul_dyn_binding_ref5713)))
     ((name . dynamic-load-module) (pos . 3) (origin cg-dld . dynamic-load-module))
     ((name . rep) (pos . 6) (origin i-rep . rep))
@@ -19,7 +19,7 @@
     ((name . dynamic-load-module1) (pos . 13) (origin cg-dld . dynamic-load-module1) (class . ff) (arity . 2) (ff (3 3) 0 (eul_dyn_load_module . ff_stub_eul_dyn_load_module5715)))
     ((name . *redefine-imported-bindings*) (pos . 33) (origin i-param . *redefine-imported-bindings*))
     ((name . dynamic-binding-ref) (pos . 7) (origin cg-dld . dynamic-binding-ref))
-    ((name . eval) (pos . 9) (origin i-rep . eval))
+    ((name . eval) (pos . 8) (origin i-rep . eval))
     ((name . dynamic-binding-set) (pos . 9) (origin cg-dld . dynamic-binding-set))
    )
    literals (

@@ -32,14 +32,13 @@ extern void run_application();
 
 int main(int argc, char **argv)
 {
-    LispRef res;
-
     EUL_INITIALIZE(argc, argv);
 
     // module initialization
     run_application();
 
     // Handle return code
+    LispRef res;
     EXTERNAL_POPVAL1(res);
     if (eul_is_int(res))
     {
@@ -58,14 +57,13 @@ int main(int argc, char **argv)
 
 int PCR_youtoo_main(int argc, char **argv, void *data)
 {
-    LispRef res;
-
     EUL_INITIALIZE(argc, argv);
 
     // Module initialization
     run_application();
 
     // Handle return code
+    LispRef res;
     EXTERNAL_POPVAL1(res);
 
     if (eul_is_int(res))

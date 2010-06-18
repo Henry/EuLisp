@@ -11,6 +11,7 @@
 #define INIT_H
 
 extern int eul_initialize_runtime_system();
+extern int eul_rl_initialize();
 
 ///-----------------------------------------------------------------------------
 #endif // INIT_H

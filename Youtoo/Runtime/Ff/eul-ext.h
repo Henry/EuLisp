@@ -8,6 +8,9 @@
 ///-----------------------------------------------------------------------------
 #ifndef EUL_EXT_H
 #define EUL_EXT_H
+
+#include "eulisp.h"
+
 ///-----------------------------------------------------------------------------
 
 extern LispRef eul_init_string(LispRef str, int n, char c);
@@ -74,6 +77,8 @@ extern LispRef eul_ffoo(LispRef x, int y, char *z);
 
 // In eul-ntok.c
 extern LispRef ntok(LispRef stream, LispRef special_tokens);
+
+// In eul-read.c
 extern int read_into_buffer(int _file, char *buf, int n);
 
 ///-----------------------------------------------------------------------------

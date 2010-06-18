@@ -32,13 +32,16 @@
   (deflocal *reset-k* ())
   (deflocal *resume-k* ())
   (deflocal *continue-k* ())
-  ;; Fast prompt (see Youtoo_.c) ...
-  (deflocal *fast-prompt* (= *argc* 1))
+
+  ;; Readline history initializer
+  (defextern initialize-rl () <int> "eul_rl_initialize")
 
   (defun initialize-interpreter ()
 
-    (if (or *fast-prompt* *script*) ()
-      (format t "EuLisp System 'youtoo ~a'\n\n" *version*))
+    (if *script* ()
+      (format t "EuLisp System 'youtoo ~a'\n" *version*))
+
+    (initialize-rl)
 
     (setq *current-module-name* 'user)
     (dynamic-setq *actual-module* (get-module *current-module-name*))
@@ -264,10 +267,8 @@
   (defun rep-aux ()
     (labels
      ((loop (x)
-            (if (or *script* *fast-prompt*)
-                (setq *fast-prompt* ())
-              (if *first-year-students* ()
-                (format t "[~a]: " *current-module-name*)))
+            (if (or *script* *first-year-students*) ()
+              (format t "[~a]: " *current-module-name*))
             (flush)
             (reset-interactive-module (dynamic *actual-module*))
             (setq *number-of-warnings* 0)

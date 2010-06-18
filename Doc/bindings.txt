@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 16 June 2010, 09:18:20
+  Generated 18 June 2010, 22:58:11
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -632,12 +632,12 @@ youtoo Functions
 
   *first-year-students* 32 i-param *first-year-students*
   *redefine-imported-bindings* 33 i-param *redefine-imported-bindings*
-  ? 13 i-rep ?
+  ? 12 i-rep ?
   as-dynamic-binding 4 cg-dld as-dynamic-binding
   dynamic-binding-ref 7 cg-dld dynamic-binding-ref
   dynamic-binding-set 9 cg-dld dynamic-binding-set
   dynamic-load-module 3 cg-dld dynamic-load-module
-  eval 9 i-rep eval
+  eval 8 i-rep eval
   main 3 eval main
   module-loaded? 6 cg-dld module-loaded?
   rep 6 i-rep rep

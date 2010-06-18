@@ -17,13 +17,6 @@ void run_application()
     // Ignore signals until system is up (see also i-rep.em)
     eul_signal_enabled = 0;
 
-    // Fast prompt (for psychological reasons) ...
-    if (eul_int_as_c_int(eul_argc)==1)
-    {
-        printf("EuLisp System 'youtoo %s'\n\n[user]: ", EUL_VERSION);
-        fflush(stdout);
-    }
-
     initialize_module_youtoo();
     execute_lambda(youtoo_bindings[0]);
 }

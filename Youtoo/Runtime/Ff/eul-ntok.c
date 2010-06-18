@@ -186,21 +186,6 @@ void syntax_error(char *buffer, char *c, char *msg)
 }
 
 
-int read_into_buffer(int _file, char *buf, int n)
-{
-    //fprintf(stdout, "About to read with %d, %x, %d", _file, buf+(n>>1), n>>1);
-    static int status;
-    status = read(_file, buf + (n >> 1), n >> 1);
-
-    if (status == -1)
-    {
-        perror("\n*** WARNING [read]");
-        fflush(stderr);
-    }
-
-    return status;
-}
-
 // Stream and control block layout
 #define CONTROL_BLOCK_BUFFER(x) (slot_ref(x, 0))
 #define CONTROL_BLOCK_BUFFER_SIZE(x) (slot_ref(x, 1))

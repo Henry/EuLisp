@@ -54,7 +54,7 @@ LEVEL0_EM = $(LEVELN_EM) level0.em
 LEVEL0_C := $(LEVEL0_EM:%.em=%.c)
 LEVEL0_O := ${LEVEL0_C:%.c=$(ARCH_DIR)/%.o}
 
-LEVEL0_FF_C = Ff/eul-ext.c Ff/eul-ntok.c Ff/eul-sock.c
+LEVEL0_FF_C = Ff/eul-ext.c Ff/eul-ntok.c Ff/eul-read.c Ff/eul-sock.c
 LEVEL0_C += $(LEVEL0_FF_C)
 LEVEL0_O += ${LEVEL0_FF_C:%.c=$(ARCH_DIR)/%.o}
 
