@@ -6,13 +6,13 @@
 ### Description: system configuration
 ###-----------------------------------------------------------------------------
 ##  To use a pre-installed version of the Boehm memory management system
-##  set DEFAULT_EUL_GC_DIR to its directory.
+##  set EUL_GC_DIR to its directory.
 ##
 ##  Give an empty gabage collector directory if you don't want to use the
 ##  garbage collector at all. This is not recommended as you will have
 ##  performace drawbacks.
 ##
-##  Set DEFAULT_CC if you prefer a particular C compiler.
+##  Set CC if you prefer a particular C compiler.
 ##
 ##  See the relevant section in this file for information about using an
 ##  external thread library (e.g. Solaris threads).
@@ -26,19 +26,23 @@ OSTYPE=`uname -s`
 ARCH=`uname -m`
 
 ###-----------------------------------------------------------------------------
-### Set default current installation, bootstrapping installation
+### Set version, default current installation, bootstrapping installation
 ##  and GC installation directories
 ###-----------------------------------------------------------------------------
 
-DEFAULT_EUL_DIR=`pwd`
-DEFAULT_EUL_GC_DIR=/usr/local
-EUL_BOOT_DIR=${DEFAULT_EUL_DIR}.boot
+EUL_VERSION=pre-0.96
+
+EUL_DIR=`pwd`
+EUL_GC_DIR=/usr/local
+
+EUL_BOOT_DIR=${EUL_DIR}.boot
 
 ###-----------------------------------------------------------------------------
-### C compiler (leave blank if possible)
+### C compiler
+##  leave blank to selected automatically
 ###-----------------------------------------------------------------------------
 
-DEFAULT_CC=
+CC=
 
 ###-----------------------------------------------------------------------------
 ### Emacs org-mode used to generate README.html files.
@@ -51,37 +55,11 @@ DEFAULT_CC=
 EMACS=eemacs
 
 ###-----------------------------------------------------------------------------
-### Word length of the machine architecture/OS, 32 or 64.
-##  May be reset automatically for the paricular architecture.
-###-----------------------------------------------------------------------------
-
-WORD_LENGTH=32
-
-###-----------------------------------------------------------------------------
-### Version
-###-----------------------------------------------------------------------------
-
-EUL_VERSION=pre-0.96
-
-###-----------------------------------------------------------------------------
 ### Specify the default shell and where to find mv and rm
-##    check the first line of this file.
 ###-----------------------------------------------------------------------------
 
-SH=`which sh 2>/dev/null`
-# ***HGW overiding the above
-SH=/bin/sh
-
-MAKE_SHELL=`which csh 2>/dev/null`
-tmp=`basename "${SH}"`
-
-if (test "$tmp" = sh) then
-    DEFAULT_SHELL=$SH
-else
-    DEFAULT_SHELL=$SHELL
-fi
-
-DEFAULT_UNIX_DIR=/bin
+EUL_SHELL=/bin/sh
+UNIX_DIR=/bin
 
 ###-----------------------------------------------------------------------------
 ### Foreign thread library
@@ -94,63 +72,24 @@ DEFAULT_UNIX_DIR=/bin
 ##    MIT (MIT Pthread Library)
 ###-----------------------------------------------------------------------------
 
-THRTYPE=
+THRTYPE=DEFAULT
 #THRTYPE=UI
 #THRTYPE=PPCR
 #THRTYPE=MIT
 #EUL_MIT_THR_DIR=
 
-if (test -z "$THRTYPE") then
-    EUL_GC_CFLAGS=
-elif (test ${THRTYPE} = UI) then
-    EUL_GC_CFLAGS="-DSOLARIS_THREADS "
-elif (test ${THRTYPE} = MIT) then
-    EUL_GC_CFLAGS="-DMIT_THREADS "
-else
-    EUL_GC_CFLAGS=
-fi
-
 ###-----------------------------------------------------------------------------
-### Parse arguments
-##    set location of the Youtoo directory tree
-##    set location of the garbage collection library installation
+### Set paths for Youtoo, binaries, scripts and libraries
 ###-----------------------------------------------------------------------------
-
-if (test -z "$1") then
-    EUL_DIR=$DEFAULT_EUL_DIR
-    EUL_GC_DIR=$DEFAULT_EUL_GC_DIR
-else
-    EUL_DIR=$1
-    if (test -z "$2") then
-        EUL_GC_DIR=$DEFAULT_EUL_GC_DIR
-    else
-        EUL_GC_DIR=$2
-    fi
-fi
 
 U2_DIR=$EUL_DIR/Youtoo
-
-###-----------------------------------------------------------------------------
-### Set installation paths
-###-----------------------------------------------------------------------------
-
-if (test -z "$EUL_GC_DIR") then
-    EUL_GC_INCLUDE=
-    THRTYPE=
-else
-    EUL_GC_INCLUDE="-I${EUL_GC_DIR} -I${EUL_GC_DIR}/include"
-fi
-
-if (test -z "$THRTYPE") then
-    THRTYPE=DEFAULT
-fi
-
 EUL_BIN_DIR=$EUL_DIR/Bin.$ARCH
 EUL_LIB_DIR=$EUL_DIR/Lib.$ARCH
 
 ###-----------------------------------------------------------------------------
 ### Set paths to the bootstrapping installation
-##    EUL_BOOT_DIR can be set to EUL_DIR which will overwrite
+##    EUL_BOOT_DIR can be set to EUL_DIR which will use the current local build
+##    and over-write it during the build
 ###-----------------------------------------------------------------------------
 
 EUL_BOOT_BIN_DIR=$EUL_BOOT_DIR/Bin.$ARCH
@@ -174,23 +113,38 @@ if (test ! -z "$EUL_GC_DIR") then
     fi
 fi
 
+EUL_GC_INCLUDE="-I${EUL_GC_DIR} -I${EUL_GC_DIR}/include"
+
 ###-----------------------------------------------------------------------------
-### Set CC
+### Set CC if currently unset
 ###-----------------------------------------------------------------------------
 
-if (test -z "$DEFAULT_CC") then
+if (test -z "$CC") then
     gcc_path=`which gcc 2>/dev/null`
     gcc=`basename "${gcc_path}"`
 
     if (test "$gcc" = gcc) then
-        DEFAULT_CC=gcc
-        GCC_FLAGS="-std=gnu99 -Wall -Wno-sequence-point -fPIC -O0 -ggdb3"
+        CC=gcc
+        CFLAGS="-std=gnu99 -Wall -Wno-sequence-point -fPIC -O0 -ggdb3"
     else
-        DEFAULT_CC=cc
+        CC=cc
+        CFLAGS=
     fi
 fi
 
-DEFAULT_CLIBS="-leval -lmath -llevel1 -ltelos -lboot -leulvm -lm"
+###-----------------------------------------------------------------------------
+### Set basic flags and libraries
+###-----------------------------------------------------------------------------
+
+CLIBS="-leval -lmath -llevel1 -ltelos -lboot -leulvm -lm"
+CFLAGS="$CFLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm"
+
+###-----------------------------------------------------------------------------
+### Readline library (optional)
+###-----------------------------------------------------------------------------
+
+CFLAGS="$CFLAGS -DREADLINE"
+CLIBS="$CLIBS -lreadline"
 
 ###-----------------------------------------------------------------------------
 ### Tcl/Tk libraries
@@ -209,19 +163,20 @@ EUL_TK_FLAGS=
 
 case $OSTYPE in
 Linux)
+    if (test $ARCH = x86_64) then
+        WORD_LENGTH=64
+    else
+        WORD_LENGTH=32
+    fi
+
     CC="gcc"
-    CLIBS=$DEFAULT_CLIBS
     AR="ar cruv"
     RANLIB="ranlib"
 
-    if (test $ARCH = x86_64) then
-        WORD_LENGTH=64
-    fi
-
     if (test $THRTYPE = PPCR) then
-        CFLAGS="$GCC_FLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${U2_DIR}/include -I${U2_DIR}/Vm -I${EUL_GC_DIR}/gc"
+        CFLAGS="$CFLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_GC_DIR}/gc"
     else
-        CFLAGS="$GCC_FLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="$CFLAGS ${EUL_GC_INCLUDE}"
     fi
     ;;
 
@@ -230,14 +185,20 @@ Linux)
 ###-----------------------------------------------------------------------------
 
 FreeBSD)
+    if (test $ARCH = x86_64) then
+        WORD_LENGTH=64
+    else
+        WORD_LENGTH=32
+    fi
+
     CC="gcc"
-    CLIBS=$DEFAULT_CLIBS
     AR="ar cruv"
     RANLIB="ranlib"
+
     if (test $THRTYPE = PPCR) then
-        CFLAGS="-DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${U2_DIR}/Vm  -I${EUL_GC_DIR}/gc"
+        CFLAGS="$CFLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR}  -I${EUL_GC_DIR}/gc"
     else
-        CFLAGS="-I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="$CFLAGS ${EUL_GC_INCLUDE}"
     fi
     ;;
 
@@ -246,22 +207,21 @@ FreeBSD)
 ###-----------------------------------------------------------------------------
 
 SunOS)
+    WORD_LENGTH=64
     if (test $THRTYPE = UI) then
         CC="cc"
-        CFLAGS="-DWITH_STRERROR -DWITH_UI_THREADS -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
+        CFLAGS="$CFLAGS -DWITH_STRERROR -DWITH_UI_THREADS ${EUL_GC_INCLUDE}"
         CLIBS="-leval -lmath -llevel1 -leulvm -lm -lnls -lnsl -lsocket -ldl -lthread"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
-    elif (test $DEFAULT_CC = gcc) then
-        CC=$DEFAULT_CC
-        CFLAGS="-fPIC -DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
-        CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
+    elif (test $CC = gcc) then
+        CFLAGS="$CFLAGS -fPIC -DWITH_STRERROR ${EUL_GC_INCLUDE}"
+        CLIBS="$CLIBS -lnls -lnsl -lsocket"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     else
-        CC=$DEFAULT_CC
-        CFLAGS="-DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
-        CLIBS="$DEFAULT_CLIBS -lnls -lnsl -lsocket"
+        CFLAGS="$CFLAGS -DWITH_STRERROR ${EUL_GC_INCLUDE}"
+        CLIBS="$CLIBS -lnls -lnsl -lsocket"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     fi
@@ -272,28 +232,24 @@ SunOS)
 ###-----------------------------------------------------------------------------
 
 IRIX)
+    WORD_LENGTH=64
     if (test $THRTYPE = PPCR) then
         CC="cc"
-        CFLAGS="-Olimit 4000 -common -DWITH_PCR_THREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${U2_DIR}/Vm -I${EUL_GC_DIR}/gc"
-        CLIBS=$DEFAULT_CLIBS
+        CFLAGS="$CFLAGS -Olimit 4000 -common -DWITH_PCR_THREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR}/gc"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif (test $THRTYPE = MIT) then
         CC="gcc"
-        CFLAGS="-DMIT_PTHREADS -I${U2_DIR}/Vm -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_MIT_THR_DIR}/include -L${EUL_MIT_THR_DIR}/obj"
-        CLIBS="-lpthread $DEFAULT_CLIBS -lgcc -lpthread"
+        CFLAGS="$CFLAGS -DMIT_PTHREADS -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_MIT_THR_DIR}/include -L${EUL_MIT_THR_DIR}/obj"
+        CLIBS="-lpthread $CLIBS -lgcc -lpthread"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
-    elif (test $DEFAULT_CC = gcc) then
-        CC=$DEFAULT_CC
-        CFLAGS="-I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
-        CLIBS=$DEFAULT_CLIBS
+    elif (test $CC = gcc) then
+        CFLAGS="$CFLAGS ${EUL_GC_INCLUDE}"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     else
-        CC=$DEFAULT_CC
-        CFLAGS="-Olimit 4000 -common -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
-        CLIBS=$DEFAULT_CLIBS
+        CFLAGS="$CFLAGS -Olimit 4000 -common ${EUL_GC_INCLUDE}"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     fi
@@ -304,10 +260,13 @@ IRIX)
 ###-----------------------------------------------------------------------------
 
 CYGWIN_NT-5.0)
+    if (test $ARCH = x86_64) then
+        WORD_LENGTH=64
+    else
+        WORD_LENGTH=32
+    fi
     CC="gcc"
-    CFLAGS="-DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
-    #CFLAGS="-DWITH_STRERROR -I${U2_DIR}/Vm ${EUL_GC_INCLUDE}"
-    CLIBS=$DEFAULT_CLIBS
+    CFLAGS="$CFLAGS -DWITH_STRERROR ${EUL_GC_INCLUDE}"
     AR="ar cruv"
     RANLIB="ranlib"
     ;;
@@ -317,9 +276,8 @@ CYGWIN_NT-5.0)
 ###-----------------------------------------------------------------------------
 
 AIX)
-    CC=$DEFAULT_CC
-    CFLAGS="-I${U2_DIR}/Vm ${EUL_GC_INCLUDE} -DWITH_STRERROR"
-    CLIBS=$DEFAULT_CLIBS
+    WORD_LENGTH=64
+    CFLAGS="$CFLAGS ${EUL_GC_INCLUDE} -DWITH_STRERROR"
     AR="ar cruv"
     RANLIB="ranlib"
     ;;
@@ -441,7 +399,7 @@ echo U2 = ${EUL_BIN_DIR}/youtoo.sh >> $name
 echo U2_BOOT = ${EUL_BOOT_BIN_DIR}/youtoo.sh >> $name
 echo EUL_GC_DIR = ${EUL_GC_DIR} >> $name
 echo EUL_GC_CFLAGS = ${EUL_GC_CFLAGS} >> $name
-echo UNIX_DIR = ${DEFAULT_UNIX_DIR} >> $name
+echo UNIX_DIR = ${UNIX_DIR} >> $name
 echo EUL_TK_VERSION = ${EUL_TK_VERSION} >> $name
 echo EUL_TK_FLAGS = ${EUL_TK_FLAGS} >> $name
 echo >> $name
@@ -485,14 +443,10 @@ fi
 ### Create youtoo scheme and check scripts
 ###-----------------------------------------------------------------------------
 
-if (test `basename $DEFAULT_SHELL` = csh) then
-    DEFAULT_SHELL=${DEFAULT_UNIX_DIR}/sh
-fi
-
 create_script(){
     name=${EUL_BIN_DIR}/$1.sh
     echo "  Creating $name ..."
-    echo "#!$DEFAULT_SHELL" > $name
+    echo "#!$EUL_SHELL" > $name
     echo "###---------------------------------------------------------------------" >> $name
     echo "###                      EuLisp System 'youtoo'" >> $name
     echo "###---------------------------------------------------------------------" >> $name
