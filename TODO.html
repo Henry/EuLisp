@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-17 22:54:45 BST"/>
+<meta name="generated" content="2010-06-19 18:26:07 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -78,19 +78,52 @@ lang="en" xml:lang="en">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 Youtoo </a></li>
-<li><a href="#sec-2">2 EuXLisp </a></li>
-<li><a href="#sec-3">3 EuLisp Definition </a></li>
+<li><a href="#sec-1">1 Youtoo and EuXLisp </a></li>
+<li><a href="#sec-2">2 Youtoo </a></li>
+<li><a href="#sec-3">3 EuXLisp </a></li>
+<li><a href="#sec-4">4 EuLisp Definition </a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> Youtoo </h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> Youtoo and EuXLisp </h2>
 <div class="outline-text-2" id="text-1">
 
 <ul>
-<li id="sec-1.1"><span class="done DONE"> DONE</span> Split of word-length dependent functionality into separate modules <br/>
+<li id="sec-1.1"><span class="done DONE"> DONE</span> Replace <code>equal</code> with <code>binary=</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-12 Wed 22:57</span></span><br/>
+Remove the <code>equal</code> generic function and methods and introduce a complete set
+of <code>binary=</code> methods.  The only difference between the definition of <code>equal</code>
+and <code>binary=</code> is the latter applies type coercion whereas <code>equal</code> was
+defined not two.  If this property is an important feature <code>equal</code> could be
+reinstated as a function wrapper around <code>binary=</code> which does a
+type-consistency check.
+</li>
+<li id="sec-1.2"><span class="done DONE"> DONE</span> Complete the renaming of predicates? and destructive! functions <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 14:31</span></span><br/>
+All predicates ending in "-p" have been transformed and the functions
+"null?" and "atom?" added but the predicates ending in "p" have yet to be
+updated.
+</li>
+<li id="sec-1.3"><span class="done DONE"> DONE</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 15:30</span></span><br/>
+Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the stream as the first argument.
+</li>
+<li id="sec-1.4"><span class="todo TODO"> TODO</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
+Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Youtoo </h2>
+<div class="outline-text-2" id="text-2">
+
+<ul>
+<li id="sec-2.1"><span class="done DONE"> DONE</span> Split of word-length dependent functionality into separate modules <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 Split files
 <ul>
@@ -115,7 +148,7 @@ Split files
 </li>
 </ul>
 </li>
-<li id="sec-1.2"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to remove <br/>
+<li id="sec-2.2"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to remove <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 10:14</span></span><br/>
 <ul>
 <li>
@@ -126,48 +159,48 @@ Split files
 </li>
 </ul>
 </li>
-<li id="sec-1.3"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to remove <code>eul_const</code> <br/>
+<li id="sec-2.3"><span class="done DONE"> DONE</span> Regenerate all the .c files from the .em files to remove <code>eul_const</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 14:37</span></span><br/>
 </li>
-<li id="sec-1.4"><span class="done DONE"> DONE</span> Remove <i>compat.h</i> <br/>
+<li id="sec-2.4"><span class="done DONE"> DONE</span> Remove <i>compat.h</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span></span><br/>
 when backward compatibility is no longer needed.
 </li>
-<li id="sec-1.5"><span class="done DONE"> DONE</span> Change all the <i>Makefiles</i> of all the <i>Modules</i> and <i>Examples</i> <br/>
+<li id="sec-2.5"><span class="done DONE"> DONE</span> Change all the <i>Makefiles</i> of all the <i>Modules</i> and <i>Examples</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 so that the libraries and executables are located in <i>platform/$(ARCH)</i>
 or //Lib.$(ARCH)/ and //Bin.$(ARCH)/ directories.
 </li>
-<li id="sec-1.6"><span class="done DONE"> DONE</span> Investigate warning messages from <i>Examples/Misc/ffi2.c</i> <br/>
+<li id="sec-2.6"><span class="done DONE"> DONE</span> Investigate warning messages from <i>Examples/Misc/ffi2.c</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-08 Mon 22:54</span></span><br/>
 Creating stand-alone application of module ffi2 &hellip;
 Compiling <i>ffi2.c</i> using gcc &hellip;
 //home/dm2/henry/EuLisp/youtoo/Examples/Misc/ffi2.c/: In function ‘ff_stub_ext_foo_in
 </li>
-<li id="sec-1.7"><span class="todo TODO"> TODO</span> Resolve warning messages from ffi applications <br/>
+<li id="sec-2.7"><span class="todo TODO"> TODO</span> Resolve warning messages from ffi applications <br/>
 by introducing an option to allow a header file declaring the ff's to be
 included in the stubs files.
 <ul>
-<li id="sec-1.7.1">Add header-files including the ffi definitions to all the <i>Modules</i> libraries. <br/>
+<li id="sec-2.7.1">Add header-files including the ffi definitions to all the <i>Modules</i> libraries. <br/>
 </li>
 </ul>
 </li>
-<li id="sec-1.8"><span class="done DONE"> DONE</span> Investigate when <i>Lib.${ARCH}/*.i</i> should be copied to Lib <br/>
+<li id="sec-2.8"><span class="done DONE"> DONE</span> Investigate when <i>Lib.${ARCH}/*.i</i> should be copied to Lib <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-06 Thu 13:47</span></span><br/>
 </li>
-<li id="sec-1.9"><span class="done DONE"> DONE</span> Sort out the <i>Modules/Bignum/Makefile</i> <br/>
+<li id="sec-2.9"><span class="done DONE"> DONE</span> Sort out the <i>Modules/Bignum/Makefile</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:31</span></span><br/>
 Currently the linking of the gmp library is hard-coded.
 </li>
-<li id="sec-1.10"><span class="done DONE"> DONE</span> Upgrade the TclTk library to 8.5 <br/>
+<li id="sec-2.10"><span class="done DONE"> DONE</span> Upgrade the TclTk library to 8.5 <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-14 Sun 23:27</span></span><br/>
 </li>
-<li id="sec-1.11"><span class="done DONE"> DONE</span> Investigate problems with the <i>Modules/OS</i> (object serialisation) lib <br/>
+<li id="sec-2.11"><span class="done DONE"> DONE</span> Investigate problems with the <i>Modules/OS</i> (object serialisation) lib <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-23 Tue 19:30</span></span><br/>
 </li>
-<li id="sec-1.12"><span class="todo TODO"> TODO</span> Change the MPI interface to work with OpenMPI <br/>
+<li id="sec-2.12"><span class="todo TODO"> TODO</span> Change the MPI interface to work with OpenMPI <br/>
 </li>
-<li id="sec-1.13"><span class="todo TODO"> TODO</span> <i>Comptime2/youtoo.em</i> sometimes ends-up in the wrong state <br/>
+<li id="sec-2.13"><span class="todo TODO"> TODO</span> <i>Comptime2/youtoo.em</i> sometimes ends-up in the wrong state <br/>
 should be
 
 
@@ -211,33 +244,33 @@ is unable to compile module files correctly issuing errors like
 
 
 </li>
-<li id="sec-1.17"><span class="done DONE"> DONE</span> Split the "boot" section of <i>Comptime2/Makefile</i> <br/>
+<li id="sec-2.17"><span class="done DONE"> DONE</span> Split the "boot" section of <i>Comptime2/Makefile</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-16 Tue 15:06</span></span><br/>
 into the two parts to make the preliminary and final executables.
 Also move the "driver" part into the top-level Makefile.
 </li>
-<li id="sec-1.18"><span class="todo TODO"> TODO</span> Change the <i>Modules/Pipe/test1.em app</i> <br/>
+<li id="sec-2.18"><span class="todo TODO"> TODO</span> Change the <i>Modules/Pipe/test1.em app</i> <br/>
 to obtain the path of the youtoo script from the global settings obtained
 from the <i>.eulrc.${ARCH}</i> file.
 </li>
-<li id="sec-1.19"><span class="done DONE"> DONE</span> Clean all .em files <br/>
+<li id="sec-2.19"><span class="done DONE"> DONE</span> Clean all .em files <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-02-26 Fri 15:01</span></span><br/>
 to remove blank line at beginning, tabs and trailing white-space.
 </li>
-<li id="sec-1.20"><span class="todo TODO"> TODO</span> Add support in the REPL to load dynamically-linked module libraries <br/>
+<li id="sec-2.20"><span class="todo TODO"> TODO</span> Add support in the REPL to load dynamically-linked module libraries <br/>
 </li>
-<li id="sec-1.21"><span class="done DONE"> DONE</span> Add support for #;(sexp) comments in <i>Runtime/Ff/eul-ntok.c</i> <br/>
+<li id="sec-2.21"><span class="done DONE"> DONE</span> Add support for #;(sexp) comments in <i>Runtime/Ff/eul-ntok.c</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 22:44</span></span><br/>
 </li>
-<li id="sec-1.22"><span class="todo TODO"> TODO</span> Add line-number counting to <i>Runtime/Ff/eul-ntok.c</i> <br/>
+<li id="sec-2.22"><span class="todo TODO"> TODO</span> Add line-number counting to <i>Runtime/Ff/eul-ntok.c</i> <br/>
 This also requires the introduction of a line-number counting stream to hold
 the line-number and provide access to the error reporting system.
 </li>
-<li id="sec-1.23"><span class="done DONE"> DONE</span> <code>read-error</code> <br/>
+<li id="sec-2.23"><span class="done DONE"> DONE</span> <code>read-error</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-01 Thu 21:31</span></span><br/>
 Replace the use of <code>error</code> with <code>read-error</code> in <i>read.em</i>
 </li>
-<li id="sec-1.24"><span class="done DONE"> DONE</span> Change the handling of multiple-escape sequences in <i>eul-ntok.c</i> <br/>
+<li id="sec-2.24"><span class="done DONE"> DONE</span> Change the handling of multiple-escape sequences in <i>eul-ntok.c</i> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-22 Thu 22:52</span></span><br/>
 to correspond to the syntax for identifiers as described in the definition.
 Currently the handling of multiple-escape sequences is a duplicate of the
@@ -245,18 +278,18 @@ handling for strings with all the special characters when the single escape
 character should only be required to escape itself and the multiple-escape
 character.
 </li>
-<li id="sec-1.25"><span class="done DONE"> DONE</span> Add <code>slice</code> generic function and methods <br/>
+<li id="sec-2.25"><span class="done DONE"> DONE</span> Add <code>slice</code> generic function and methods <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-06 Thu 13:46</span></span><br/>
 <code>slice</code> for string can a wrapper around substring already available
 in Youtoo.
 </li>
-<li id="sec-1.26"><span class="todo TODO"> TODO</span> Add <code>slice</code> method for &lt;vector&gt; <br/>
+<li id="sec-2.26"><span class="todo TODO"> TODO</span> Add <code>slice</code> method for &lt;vector&gt; <br/>
 </li>
-<li id="sec-1.27"><span class="done DONE"> DONE</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
+<li id="sec-2.27"><span class="done DONE"> DONE</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-27 Tue 12:25</span></span><br/>
 Requires equivalent ff in eul-ext.c
 </li>
-<li id="sec-1.28"><span class="done DONE"> DONE</span> Sort out the syntax of character sequences <br/>
+<li id="sec-2.28"><span class="done DONE"> DONE</span> Sort out the syntax of character sequences <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-26 Mon 19:46</span></span><br/>
 <ul>
 <li>
@@ -269,7 +302,7 @@ Hexadecimal sequences are hard-coded to 3 digits, if not where is the end?
 How should the character '^' be written given that it is used to define
 control sequences e.g. #^c ?  Perhaps #^ ?
 </li>
-<li id="sec-1.28.1">Proposed solution <br/>
+<li id="sec-2.28.1">Proposed solution <br/>
 To remove support for control sequences which are unusual,
 system-dependent and can be created using hexadecimal characters.  Also
 fix the number of hexadecimal digits for a character to 4 which is
@@ -277,7 +310,7 @@ sufficient to support unicode but also avoids parsing problems.
 </li>
 </ul>
 </li>
-<li id="sec-1.29"><span class="todo TODO"> TODO</span> Correct the echoing of complex characters <br/>
+<li id="sec-2.29"><span class="todo TODO"> TODO</span> Correct the echoing of complex characters <br/>
 [user]: (print #\\\)
 \
 <ul>
@@ -286,36 +319,14 @@ sufficient to support unicode but also avoids parsing problems.
 </li>
 </ul>
 </li>
-<li id="sec-1.30"><span class="done DONE"> DONE</span> Change the parser to map ='nil= to ='()= <br/>
+<li id="sec-2.30"><span class="done DONE"> DONE</span> Change the parser to map ='nil= to ='()= <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-09 Sun 21:06</span></span><br/>
 so that (eq 'nil '()) =&gt; t
 </li>
-<li id="sec-1.31"><span class="done DONE"> DONE</span> (eql 3.0 3.0) should return t but it returns () <br/>
+<li id="sec-2.31"><span class="done DONE"> DONE</span> (eql 3.0 3.0) should return t but it returns () <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-10 Mon 21:50</span></span><br/>
 </li>
-<li id="sec-1.32"><span class="done DONE"> DONE</span> Replace <code>equal</code> with <code>binary=</code> <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-12 Wed 22:57</span></span><br/>
-Remove the <code>equal</code> generic function and methods and introduce a complete set
-of <code>binary=</code> methods.  The only difference between the definition of <code>equal</code>
-and <code>binary=</code> is the latter applies type coercion whereas <code>equal</code> was
-defined not two.  If this property is an important feature <code>equal</code> could be
-reinstated as a function wrapper around <code>binary=</code> which does a
-type-consistency check.
-</li>
-<li id="sec-1.33"><span class="done DONE"> DONE</span> Complete the renaming of predicates? and destructive! functions <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 14:31</span></span><br/>
-All predicates ending in "-p" have been transformed and the functions
-"null?" and "atom?" added but the predicates ending in "p" have yet to be
-updated.
-</li>
-<li id="sec-1.34"><span class="done DONE"> DONE</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 15:30</span></span><br/>
-Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the stream as the first argument.
-</li>
-<li id="sec-1.35"><span class="todo TODO"> TODO</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
-Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
-</li>
-<li id="sec-1.36"><span class="todo TODO"> TODO</span> Finish <code>format</code> <br/>
+<li id="sec-2.32"><span class="todo TODO"> TODO</span> Finish <code>format</code> <br/>
 Currently <code>format</code> only handles a subset of the functionality in the
 definition, in particular <code>e</code> and <code>g</code> formatting of floating-point numbers
 is missing.  <code>format</code> is complete in EuXLisp and it may be possible to reuse
@@ -326,48 +337,32 @@ some of this functionality.
 
 </div>
 
-<div id="outline-container-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> EuXLisp </h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> EuXLisp </h2>
+<div class="outline-text-2" id="text-3">
 
 <ul>
-<li id="sec-2.1"><span class="done DONE"> DONE</span> Replace <code>equal</code> with <code>binary=</code> <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-12 Wed 22:57</span></span><br/>
-Remove the <code>equal</code> generic function and methods and introduce a complete set
-of <code>binary=</code> methods.  The only difference between the definition of <code>equal</code>
-and <code>binary=</code> is the latter applies type coercion whereas <code>equal</code> was
-defined not two.  If this property is an important feature <code>equal</code> could be
-reinstated as a function wrapper around <code>binary=</code> which does a
-type-consistency check.
+<li id="sec-3.1"><span class="todo TODO"> TODO</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
 </li>
-<li id="sec-2.2"><span class="done DONE"> DONE</span> Complete the renaming of predicates? and destructive! functions <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 14:31</span></span><br/>
-All predicates ending in "-p" have been transformed and the functions
-"null?" and "atom?" added but the predicates ending in "p" have yet to be
-updated.
+<li id="sec-3.2"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
 </li>
-<li id="sec-2.3"><span class="done DONE"> DONE</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 15:30</span></span><br/>
-Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the stream as the first argument.
-</li>
-<li id="sec-2.4"><span class="todo TODO"> TODO</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
-Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
+<li id="sec-3.3"><span class="todo TODO"> TODO</span> Add <code>slice</code> method for &lt;vector&gt; <br/>
 </li>
 </ul>
 </div>
 
 </div>
 
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> EuLisp Definition </h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> EuLisp Definition </h2>
+<div class="outline-text-2" id="text-4">
 
 <ul>
-<li id="sec-3.1"><span class="todo TODO"> TODO</span> Update EuLisp definition and Youtoo and EuXLisp implementations <br/>
+<li id="sec-4.1"><span class="todo TODO"> TODO</span> Update EuLisp definition and Youtoo and EuXLisp implementations <br/>
 to correspond to the EuLisp-1.0 proposals.
 See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 </li>
-<li id="sec-3.2"><span class="todo TODO"> TODO</span> Undefined references [34/41] <br/>
+<li id="sec-4.2"><span class="todo TODO"> TODO</span> Undefined references [34/41] <br/>
 <ul>
 <li>
 <b>[X]</b> class:abstract-class
@@ -494,19 +489,19 @@ See <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a>.
 </li>
 </ul>
 </li>
-<li id="sec-3.3"><span class="todo TODO"> TODO</span> Add entry for the <code>&lt;method&gt;</code> class in Level-1 <br/>
+<li id="sec-4.3"><span class="todo TODO"> TODO</span> Add entry for the <code>&lt;method&gt;</code> class in Level-1 <br/>
 </li>
-<li id="sec-3.4"><span class="todo TODO"> TODO</span> Add details of the <code>&lt;hash-table&gt;</code> class and functions <br/>
+<li id="sec-4.4"><span class="todo TODO"> TODO</span> Add details of the <code>&lt;hash-table&gt;</code> class and functions <br/>
 </li>
-<li id="sec-3.5"><span class="todo TODO"> TODO</span> Update stream module <br/>
+<li id="sec-4.5"><span class="todo TODO"> TODO</span> Update stream module <br/>
 to corresponding to the Youtoo implementation.
 </li>
-<li id="sec-3.6"><span class="done DONE"> DONE</span> Add descriptions of constants to "Layout and Typography" <br/>
+<li id="sec-4.6"><span class="done DONE"> DONE</span> Add descriptions of constants to "Layout and Typography" <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-01 Thu 12:16</span></span><br/>
 in structure.tex.  Include details of constant instances of classes and
 constant bindings to classes (class aliases).
 </li>
-<li id="sec-3.7"><span class="done DONE"> DONE</span> &lt;thread&gt; vs &lt;abstract-thread&gt; <br/>
+<li id="sec-4.7"><span class="done DONE"> DONE</span> &lt;thread&gt; vs &lt;abstract-thread&gt; <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-16 Wed 09:18</span></span><br/>
 Sort out the difference between the EuLisp definition and the Youtoo
 implementation with respect to the name of the abstract base-class for
@@ -514,45 +509,45 @@ threads.  In the definition it is <code>&lt;thread&gt;</code> whereas in Youtoo 
 <code>&lt;abstract-thread&gt;</code> and <code>&lt;thread&gt;</code> is used for the currently used thread
 type.
 </li>
-<li id="sec-3.8"><span class="done DONE"> DONE</span> Reformat the <code>defgeneric</code> rewrite rules to conform to the others <br/>
+<li id="sec-4.8"><span class="done DONE"> DONE</span> Reformat the <code>defgeneric</code> rewrite rules to conform to the others <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 08:39</span></span><br/>
 </li>
-<li id="sec-3.9"><span class="done DONE"> DONE</span> Consider reformatting all of the rewrite rules <br/>
+<li id="sec-4.9"><span class="done DONE"> DONE</span> Consider reformatting all of the rewrite rules <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-23 Fri 08:40</span></span><br/>
 to be more consistent with the syntax description.
 </li>
-<li id="sec-3.10"><span class="todo TODO"> TODO</span> Add the return type to the syntax descriptions <br/>
+<li id="sec-4.10"><span class="todo TODO"> TODO</span> Add the return type to the syntax descriptions <br/>
 </li>
-<li id="sec-3.11"><span class="todo TODO"> TODO</span> Add "signatures" to all function descriptions <br/>
+<li id="sec-4.11"><span class="todo TODO"> TODO</span> Add "signatures" to all function descriptions <br/>
 </li>
-<li id="sec-3.12"><span class="done DONE"> DONE</span> Change macro definitions to special operators <br/>
+<li id="sec-4.12"><span class="done DONE"> DONE</span> Change macro definitions to special operators <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-15 Tue 23:04</span></span><br/>
 It doesn't seem sensible to effectively specify that certain syntax MUST be
 implemented as macros; surely this decision should be taken by the
 implementers and for efficiency reasons it might be preferable that more of
 the special operators are implemented as primitives of the language.
 </li>
-<li id="sec-3.13"><span class="todo TODO"> TODO</span> Finish the "Lexical Syntax" section <br/>
+<li id="sec-4.13"><span class="todo TODO"> TODO</span> Finish the "Lexical Syntax" section <br/>
 Provide a bit more background information.
 </li>
-<li id="sec-3.14"><span class="todo TODO"> TODO</span> Introduce the "Special Forms" list in <i>modules.tex</i> <br/>
+<li id="sec-4.14"><span class="todo TODO"> TODO</span> Introduce the "Special Forms" list in <i>modules.tex</i> <br/>
 Or move this list to a more appropriate place, <i>e.g.</i> at the beginning of
 the section concerning "special forms".
 </li>
-<li id="sec-3.15"><span class="todo TODO"> TODO</span> Introduce the "Level-1" library and describe "module-1" <br/>
+<li id="sec-4.15"><span class="todo TODO"> TODO</span> Introduce the "Level-1" library and describe "module-1" <br/>
 </li>
-<li id="sec-3.16"><span class="todo TODO"> TODO</span> Re-reference definitions in the "Level-1" library <br/>
+<li id="sec-4.16"><span class="todo TODO"> TODO</span> Re-reference definitions in the "Level-1" library <br/>
 so that they do not clash with those in the "Level-0" library.
 </li>
-<li id="sec-3.17"><span class="todo TODO"> TODO</span> Remove the "syntax-category" entries from the index <br/>
+<li id="sec-4.17"><span class="todo TODO"> TODO</span> Remove the "syntax-category" entries from the index <br/>
 </li>
-<li id="sec-3.18"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
+<li id="sec-4.18"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
 </li>
-<li id="sec-3.19"><span class="done DONE"> DONE</span> Add destructive <code>&lt;sequence&gt;</code> generic functions <code>sort!</code> and <code>reverse!</code> <br/>
+<li id="sec-4.19"><span class="done DONE"> DONE</span> Add destructive <code>&lt;sequence&gt;</code> generic functions <code>sort!</code> and <code>reverse!</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-27 Tue 22:48</span></span><br/>
 Check for other <code>&lt;sequence&gt;</code> methods which should destructive variants.
 </li>
-<li id="sec-3.20"><span class="done DONE"> DONE</span> Clarify the wording concerning the relationship between <code>nil</code> and <code>()</code> <br/>
+<li id="sec-4.20"><span class="done DONE"> DONE</span> Clarify the wording concerning the relationship between <code>nil</code> and <code>()</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-09 Sun 21:09</span></span><br/>
 State that (eq 'nil '()) ==&gt; t.
 *** DONE Replace =equal= with =binary==
@@ -560,7 +555,7 @@ State that (eq 'nil '()) ==&gt; t.
 Remove the <code>equal</code> generic function and methods and introduce a complete set
 of <code>binary=</code> methods.
 </li>
-<li id="sec-3.22"><span class="done DONE"> DONE</span> Change naming convention for predicates? and destructive! functions <br/>
+<li id="sec-4.22"><span class="done DONE"> DONE</span> Change naming convention for predicates? and destructive! functions <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-09 Wed 10:46</span></span><br/>
 There is a suggestion in the definition documents suggesting that the
 Scheme/T naming convention for predicates (end in ?) and destructive
@@ -572,7 +567,7 @@ changes including "null" -&gt; "null?" and "atom" -&gt; "atom?".
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-06-17 22:54:45 BST</p>
+<p class="date"> Date: 2010-06-19 18:26:07 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>
