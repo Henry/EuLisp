@@ -30,7 +30,7 @@ extern LispRef table_bindings[];
 #define table_empty__X63_fn_index 4 
 #define do1_table_fn_index 9 
 #define map1_table_fn_index 6 
-#define all_1_table_X63_fn_index 3 
+#define all1_table__X63_fn_index 3 
 
 
 

@@ -161,7 +161,6 @@ extern LispRef i_all_bindings[];
 #define lock_fn_index 3 
 #define system_fn_index 48 
 #define do2_list_fn_index 13 
-#define all_1_vector_X63_fn_index 12 
 #define _peephole__X42_X42_fn_index 52 
 #define maximum_vector_size_fn_index () 
 #define _ostype__X42_X42_fn_index 51 
@@ -169,7 +168,7 @@ extern LispRef i_all_bindings[];
 #define _backtrace_nframes__X42_X42_fn_index 31 
 #define _min_table_entries__X42_X42_fn_index () 
 #define thread_dynamic_variables_fn_index 27 
-#define accumulate_vector_fn_index 10 
+#define accumulate_vector_fn_index 11 
 #define binary_lcm_fn_index 19 
 #define thread_start_fn_index 26 
 #define quote_mark_fn_index 20 
@@ -281,7 +280,7 @@ extern LispRef i_all_bindings[];
 #define primitive_stdout_fn_index () 
 #define table_empty__X63_fn_index 4 
 #define _C_ar__X42_X42_fn_index 39 
-#define all_1_table_X63_fn_index 3 
+#define all1_table__X63_fn_index 3 
 #define _error__X42_X42_fn_index 23 
 #define sd_slots_fn_index 30 
 #define stream_write_action_fn_index 13 
@@ -521,7 +520,7 @@ extern LispRef i_all_bindings[];
 #define handler__X63_fn_index 8 
 #define stable_add_method_fn_index 5 
 #define tconc_fn_index 28 
-#define map1_vector_fn_index 11 
+#define map1_vector_fn_index 12 
 #define gf_slots_fn_index 79 
 #define _string___X60_X42_X62_fn_index 6 
 #define cons_keywords_fn_index 77 
@@ -537,7 +536,7 @@ extern LispRef i_all_bindings[];
 #define symbol_exists__X63_fn_index 4 
 #define member_list_fn_index 20 
 #define current_thread_fn_index 22 
-#define reverse_vector__X33_fn_index 9 
+#define reverse_vector__X33_fn_index 10 
 #define zero__X63_fn_index 16 
 #define access_table_keys_fn_index 3 
 #define make_access_table_fn_index 4 
@@ -551,6 +550,7 @@ extern LispRef i_all_bindings[];
 #define __X37_fn_index 31 
 #define binary__X43_fn_index 14 
 #define compute_inherited_keywords_fn_index 10 
+#define all1_vector__X63_fn_index 9 
 #define make_symbol_fn_index 52 
 #define negate_fn_index 13 
 #define int_as_character_fn_index () 

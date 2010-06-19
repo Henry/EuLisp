@@ -176,8 +176,8 @@ void initialize_module_table()
   /* Byte-vector with size: 8 is_init: 0 index: 62 binding: anonymous */
   static const void *G008125[] = {I(aa,1b,7a,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,11),I(1c,10,1d,11),I(47,00,00,3d),I(02,02,45,02)};
 
-  /* Byte-vector with size: 12 is_init: 0 index: 63 binding: all?1-table */
-  static const void *G008127[] = {I(ab,46,01,1c),I(48,00,00,26),I(00,00,00,03),I(24,00,00,00),B(table1 ,4),I(08,23,00,00),B(table ,17),I(23,00,00,00),B(table ,62),I(3b,01,1c,24),B(vector ,12),I(3d,02,02,00)};
+  /* Byte-vector with size: 12 is_init: 0 index: 63 binding: all1-table? */
+  static const void *G008127[] = {I(ab,46,01,1c),I(48,00,00,26),I(00,00,00,03),I(24,00,00,00),B(table1 ,4),I(08,23,00,00),B(table ,17),I(23,00,00,00),B(table ,62),I(3b,01,1c,24),B(vector ,9),I(3d,02,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 64 binding: table-empty? */
   static const void *G008129[] = {I(aa,83,24,00),B(table1 ,4),I(08,2d,45,00)};
@@ -292,7 +292,7 @@ void initialize_module_table()
   eul_intern_symbol(sym_8156,"table-rehash");
   eul_intern_symbol(sym_8157,"map1-table");
   eul_intern_symbol(sym_8158,"table-empty?");
-  eul_intern_symbol(sym_8159,"all?1-table");
+  eul_intern_symbol(sym_8159,"all1-table?");
   eul_intern_symbol(sym_8160,"accumulate-table");
   eul_intern_symbol(sym_8161,"top-level");
   eul_allocate_bytevector( G008152,G008151);

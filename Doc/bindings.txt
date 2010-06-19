@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 18 June 2010, 22:58:11
+  Generated 19 June 2010, 15:33:07
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -115,15 +115,15 @@ youtoo Functions
   abs 20 number abs
   accumulate 25 collect accumulate
   accumulate-list 17 list accumulate-list
-  accumulate-vector 10 vector accumulate-vector
+  accumulate-vector 11 vector accumulate-vector
   accumulate1 14 collect accumulate1
   accumulate1-list 15 list accumulate1-list
   accumulate1-vector 6 vector accumulate1-vector
   add-method 8 mop-meth add-method
   add-subclass 9 mop-defcl add-subclass
+  all1-table? 3 table all1-table?
+  all1-vector? 9 vector all1-vector?
   all? 18 collect all?
-  all?1-table 3 table all?1-table
-  all?1-vector 12 vector all?1-vector
   allocate 8 mop-gf allocate
   alnump 8 character alnump
   alphap 4 character alphap
@@ -366,7 +366,7 @@ youtoo Functions
   map1-list-last-special 18 list map1-list-last-special
   map1-string 4 string map1-string
   map1-table 6 table map1-table
-  map1-vector 11 vector map1-vector
+  map1-vector 12 vector map1-vector
   map2-list 10 list map2-list
   mapcan 10 boot mapcan
   max 5 compare max
@@ -444,7 +444,7 @@ youtoo Functions
   reverse-list 24 boot reverse-list
   reverse-list! 7 list reverse-list!
   reverse-vector 14 vector reverse-vector
-  reverse-vector! 9 vector reverse-vector!
+  reverse-vector! 10 vector reverse-vector!
   round 5 float round
   sd-keywords 18 mop-class sd-keywords
   sd-slots 30 mop-class sd-slots

@@ -12,7 +12,7 @@
    import (telos convert copy collect compare list fpi string vector table1)
    expose (table1)
    export (table-ref table-empty?
-           do1-table map1-table anyp1-table all?1-table))
+           do1-table map1-table anyp1-table all1-table?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Table ref
@@ -197,7 +197,7 @@
         ())))
 
 ;;;-----------------------------------------------------------------------------
-;;; Anyp
+;;; Any?
 ;;;-----------------------------------------------------------------------------
   (defmethod any? ((fun <function>) (tab <hash-table>) . cs)
     (if (null? cs)
@@ -212,15 +212,15 @@
                   (table-entries tab)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Allp
+;;; All?
 ;;;-----------------------------------------------------------------------------
   (defmethod all? ((fun <function>) (tab <hash-table>) . cs)
     (if (null? cs)
-        (all?1-table fun tab)
+        (all1-table? fun tab)
       (error "all? on multiple tables not yet implemented")))
 
-  (defun all?1-table (fun tab)
-    (all?1-vector (lambda (entry)
+  (defun all1-table? (fun tab)
+    (all1-vector? (lambda (entry)
                     (if (cons? entry)
                         ()
                       (fun (car entry) (cdr entry))))
