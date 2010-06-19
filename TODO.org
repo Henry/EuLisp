@@ -260,5 +260,6 @@
     changes including "null" -> "null?" and "atom" -> "atom?".
 * Other
 *** TODO Complete emacs mode eulisp-mode.el for EuLisp
-*** TODO Include emacs eulisp-mode.el in the git repository
+*** DONE Include emacs eulisp-mode.el in the git repository
+    CLOSED: [2010-06-19 Sat 22:46]
 *** TODO Complete emacs inferior-mode inf-eulisp.el
