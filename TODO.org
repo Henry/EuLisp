@@ -259,5 +259,6 @@
     suggestion to improve consistency and readability and made the corresponding
     changes including "null" -> "null?" and "atom" -> "atom?".
 * Other
-*** TODO Complete emacs mode for EuLisp
+*** TODO Complete emacs mode eulisp-mode.el for EuLisp
 *** TODO Include emacs eulisp-mode.el in the git repository
+*** TODO Complete emacs inferior-mode inf-eulisp.el
