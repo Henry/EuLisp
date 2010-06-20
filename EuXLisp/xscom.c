@@ -2339,7 +2339,9 @@ LVAL xreintern_syntax()
     cpush(form);
 
     if (symbolp(form) || consp(form) || vectorp(form))
+    {
         form = reintern_syntax_form(form);
+    }
 
     drop(1);
     return form;
@@ -2436,14 +2438,6 @@ static void load_dependent_modules(LVAL directives)
 */
 static void do_defmodule(LVAL form, int cont)
 {
-    char modname[STRMAX];
-    LVAL newmod, array, body, expr;
-    #ifdef NOISY_LOAD
-    char buf[128];
-    LVAL s_display;
-    extern int quiet;
-    #endif
-
     if (current_module != root_module)
     {
         xlerror("only use defmodule in root module", form);
@@ -2460,6 +2454,7 @@ static void do_defmodule(LVAL form, int cont)
     }
 
     // copy as strings can move in GC
+    char modname[STRMAX];
     if (symbolp(car(form)))
     {
         strcpy(modname, getstring(getpname(car(form))));
@@ -2476,14 +2471,14 @@ static void do_defmodule(LVAL form, int cont)
 
     check(3);
     push(form);
-    newmod = cvmodule(modname);
+    LVAL newmod = cvmodule(modname);
     push(newmod);
 
-    array = getmsymbols(newmod);
+    LVAL array = getmsymbols(newmod);
 
     load_dependent_modules(car(cdr(form)));
 
-    expr = cons(s_setmodule, cons(newmod, NIL));
+    LVAL expr = cons(s_setmodule, cons(newmod, NIL));
     do_expr(expr, C_NEXT);
 
     array = getmsymbols(newmod);
@@ -2491,7 +2486,7 @@ static void do_defmodule(LVAL form, int cont)
     cons(array, cons(cons(s_quote, cons(car(cdr(form)), NIL)), NIL)));
     do_expr(expr, C_NEXT);
 
-    body = cdr(cdr(form));
+    LVAL body = cdr(cdr(form));
     body = cons(s_begin, body);
     body = cons(s_quote, cons(body, NIL));
     body = cons(body, NIL);
@@ -2501,6 +2496,10 @@ static void do_defmodule(LVAL form, int cont)
     drop(1);
 
     #ifdef NOISY_LOAD
+    char buf[128];
+    LVAL s_display;
+    extern int quiet;
+
     if (!quiet)
     {
         push(body);
@@ -2547,14 +2546,12 @@ static void do_defmodule(LVAL form, int cont)
 
 static void do_export(LVAL form, int cont)
 {
-    LVAL sym, syms, exports;
-
-    exports = getmexports(current_module);
+    LVAL exports = getmexports(current_module);
     cpush(form);
 
-    for (syms = form; syms; syms = cdr(syms))
+    for (LVAL syms = form; syms; syms = cdr(syms))
     {
-        sym = car(syms);
+        LVAL sym = car(syms);
         if (!symbolp(sym))
         {
             xlerror("non-symbol in export", sym);
@@ -2576,27 +2573,33 @@ static void do_export(LVAL form, int cont)
 LVAL append(LVAL a, LVAL b)
 {
     if (a == NIL)
+    {
         return b;
+    }
+
     return cons(car(a), append(cdr(a), b));
 }
 
 static void do_expose(LVAL form, int cont)
 {
-    LVAL sym, syms, exports, mod;
-
-    exports = getmexports(current_module);
+    LVAL exports = getmexports(current_module);
     cpush(form);
 
-    for (syms = form; syms; syms = cdr(syms))
+    for (LVAL syms = form; syms; syms = cdr(syms))
     {
-        sym = car(syms);
+        LVAL sym = car(syms);
+
         if (!symbolp(sym) && !stringp(sym))
+        {
             xlerror("bad module name in expose", sym);
+        }
         else
         {
-            mod = find_or_load_module(sym);
+            LVAL mod = find_or_load_module(sym);
             if (mod == NIL)
+            {
                 xlerror("no such module in expose", sym);
+            }
             cpush(exports);
             exports = append(getmexports(mod), exports);
             drop(1);
@@ -2613,20 +2616,24 @@ static void do_expose(LVAL form, int cont)
 
 static void do_enter_module(LVAL form, int cont)
 {
-    LVAL sym, mod;
-
     if (atom(form))
+    {
         xlfail("module name expected in enter-module", s_syntax_error);
+    }
 
-    sym = car(form);
+    LVAL sym = car(form);
     if (!symbolp(sym) && !stringp(sym))
+    {
         xlerror("bad module name in enter-module", sym);
+    }
 
     cpush(form);
 
-    mod = find_or_load_module(sym);
+    LVAL mod = find_or_load_module(sym);
     if (mod == NIL)
+    {
         xlerror("unknown module in enter-module", sym);
+    }
 
     do_expr(cons(s_setmodule, cons(mod, NIL)), C_NEXT);
 
@@ -2639,26 +2646,29 @@ static void do_enter_module(LVAL form, int cont)
 
 static void do_reenter_module(LVAL form, int cont)
 {
-    LVAL sym, mod;
-    int loaded;
-
     if (atom(form))
+    {
         xlfail("module name expected in reenter-module", s_syntax_error);
+    }
 
-    sym = car(form);
+    LVAL sym = car(form);
     if (!symbolp(sym) && !stringp(sym))
         xlerror("bad module name in reenter-module", sym);
 
     cpush(form);
 
-    loaded = load_module(sym);
+    int loaded = load_module(sym);
 
-    mod = find_module(sym);
+    LVAL mod = find_module(sym);
     if (mod == NIL)
+    {
         xlerror("unknown module in reenter-module", sym);
+    }
 
     if (!loaded)
+    {
         xlerror("can't find module in reenter-module", sym);
+    }
 
     do_expr(cons(s_setmodule, cons(mod, NIL)), C_NEXT);
 
@@ -2672,19 +2682,18 @@ static void do_reenter_module(LVAL form, int cont)
 // an extra for those who can't wait
 static void do_import(LVAL form, int cont)
 {
-    LVAL mod, array;
-    int nxt;
-
     cpush(form);
 
-    mod = find_or_load_module(car(cdr(form)));
+    LVAL mod = find_or_load_module(car(cdr(form)));
     if (mod == NIL)
+    {
         xlerror("unknown module in import", car(cdr(form)));
+    }
 
-    array = getmsymbols(current_module);
+    LVAL array = getmsymbols(current_module);
 
     putcbyte(OP_SAVE);
-    nxt = putcword(0);
+    int nxt = putcword(0);
     do_expr(car(form), C_NEXT);
     putcbyte(OP_PUSH);
     cd_variable(OP_GREF, xlenter_module("set-module", root_module));
@@ -2694,7 +2703,9 @@ static void do_import(LVAL form, int cont)
 
     form = cdr(form);
     if (stringp(car(form)))
+    {
         rplaca(form, xlenter_module(getstring(car(form)), root_module));
+    }
     form = cons(form, NIL);
     form = cons(s_import, form);
     drop(1);
@@ -2719,8 +2730,6 @@ static void do_import(LVAL form, int cont)
 static void genargs(LVAL gf, LVAL args)
 {
     extern LVAL object;
-    LVAL sym;
-    int lev, off;
 
     if (!consp(args))
     {
@@ -2734,18 +2743,32 @@ static void genargs(LVAL gf, LVAL args)
     putcbyte(OP_PUSH);
 
     if (symbolp(car(args)))
-        do_literal(object, C_NEXT);
-    else if (consp(car(args)) && symbolp(car(car(args))) &&
-    consp(cdr(car(args))) && symbolp(car(cdr(car(args)))))
     {
-        sym = car(cdr(car(args)));
+        do_literal(object, C_NEXT);
+    }
+    else if
+    (
+        consp(car(args))
+     && symbolp(car(car(args)))
+     && consp(cdr(car(args)))
+     && symbolp(car(cdr(car(args))))
+    )
+    {
+        LVAL sym = car(cdr(car(args)));
+        int lev, off;
         if (findvariable(sym, &lev, &off))
+        {
             cd_evariable(OP_EREF, lev, off);
+        }
         else
+        {
             cd_variable(OP_GREF, sym);
+        }
     }
     else
+    {
         xlerror("bad argument for defgeneric", car(args));
+    }
 
     putcbyte(OP_CONS);
 }
@@ -2754,10 +2777,8 @@ static void genargs(LVAL gf, LVAL args)
 static void do_set_genargs(LVAL gf, LVAL args)
 {
     extern LVAL s_set_generic_args;
-    int nxt;
-
     putcbyte(OP_SAVE);
-    nxt = putcword(0);
+    int nxt = putcword(0);
     putcbyte(OP_NIL);
     genargs(gf, args);
     putcbyte(OP_PUSH);
@@ -2771,26 +2792,33 @@ static void do_set_genargs(LVAL gf, LVAL args)
 
 static void do_define_generic(LVAL form, int cont)
 {
-    LVAL name, args, gf;
-    int off;
-
     if (atom(form))
+    {
         xlfail("missing body in defgeneric", s_syntax_error);
+    }
 
     if (!consp(car(form)))
+    {
         xlerror("bad name/args in defgeneric", car(form));
+    }
 
-    name = car(car(form));
+    LVAL name = car(car(form));
     if (!symbolp(name))
+    {
         xlerror("bad name in defgeneric", name);
+    }
 
-    args = cdr(car(form));
+    LVAL args = cdr(car(form));
     if (!listp(args))
+    {
         xlerror("bad arglist in defgeneric", car(form));
+    }
     if (!consp(args))
+    {
         xlerror("must have at least one required arg in defgeneric", car(form));
+    }
 
-    gf = newgeneric();
+    LVAL gf = newgeneric();
     cpush(gf);
 
     setgname(gf, name);
@@ -2801,10 +2829,15 @@ static void do_define_generic(LVAL form, int cont)
     setgcache2(gf, NIL);
 
     do_literal(gf, C_NEXT);
+    int off;
     if (findcvariable(name, &off))
+    {
         cd_evariable(OP_ESET, 0, off);
+    }
     else
+    {
         cd_variable(OP_GSET, name);
+    }
 
     do_set_genargs(gf, args);
 
@@ -2814,23 +2847,27 @@ static void do_define_generic(LVAL form, int cont)
 
 static LVAL define_method_args(LVAL arglist)
 {
-    LVAL arg, args, tail;
-
     if (!consp(arglist))
+    {
         return arglist;
+    }
 
-    args = NIL;
-    tail = NIL;
+    LVAL args = NIL;
+    LVAL tail = NIL;
 
     check(1);
 
     for (; consp(arglist); arglist = cdr(arglist))
     {
-        arg = car(arglist);
+        LVAL arg = car(arglist);
         if (consp(arg))
+        {
             arg = car(arg);
+        }
         if (!symbolp(arg))
+        {
             xlerror("argument must be a symbol in defmethod", car(arglist));
+        }
         if (args)
         {
             rplacd(tail, cons(arg, NIL));
@@ -2844,9 +2881,13 @@ static LVAL define_method_args(LVAL arglist)
     }
 
     if (symbolp(arglist))       // optional args
+    {
         rplacd(tail, arglist);
+    }
     else if (arglist != NIL)
+    {
         xlerror("rest argument must be a symbol in defmethod", arglist);
+    }
 
     drop(1);
 
@@ -2856,33 +2897,41 @@ static LVAL define_method_args(LVAL arglist)
 // the required args classes
 static LVAL define_method_classes(LVAL arglist)
 {
-    LVAL arg, classes, tail, s_object_class;
-
     if (!consp(arglist))
+    {
         return NIL;
+    }
 
-    s_object_class = xlenter_module("<object>", root_module);
-    classes = NIL;
-    tail = NIL;
+    LVAL s_object_class = xlenter_module("<object>", root_module);
+    LVAL classes = NIL;
+    LVAL tail = NIL;
 
     check(1);
 
     for (; consp(arglist); arglist = cdr(arglist))
     {
-        arg = car(arglist);
+        LVAL arg = car(arglist);
         if (consp(arg))
         {
             arg = cdr(arg);
             if (!consp(arg))
+            {
                 xlerror("malformed argument in defmethod", car(arglist));
+            }
             arg = car(arg);
             if (!symbolp(arg))
+            {
                 xlerror("expecting a class name in defmethod", car(arglist));
+            }
         }
         else if (!symbolp(arg))
+        {
             xlerror("malformed argument in defmethod", car(arglist));
+        }
         else
+        {
             arg = s_object_class;
+        }
 
         if (classes)
         {
@@ -2904,17 +2953,22 @@ static LVAL define_method_classes(LVAL arglist)
 // cons up the method domain
 static int push_method_domain(LVAL classes)
 {
-    int len, lev, off;
-
     if (classes == NIL)
+    {
         return 0;
+    }
 
-    len = push_method_domain(cdr(classes));
-
+    int len = push_method_domain(cdr(classes));
+    int lev, off;
     if (findvariable(car(classes), &lev, &off))
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         cd_variable(OP_GREF, car(classes));
+    }
+
     putcbyte(OP_PUSH);
 
     return len + 1;
@@ -2922,31 +2976,38 @@ static int push_method_domain(LVAL classes)
 
 static void do_define_method(LVAL form, int cont)
 {
-    LVAL name, arglist, args, classes;
-    LVAL body, sym, opts;
-    int nxt1, nxt2, len;
     extern LVAL s_arg_list, s_next_methods;
 
     if (atom(form))
+    {
         xlfail("missing body in defmethod", s_syntax_error);
+    }
 
     if (!consp(car(form)))
+    {
         xlerror("bad name/args in defmethod", car(form));
+    }
 
-    name = car(car(form));
+    LVAL name = car(car(form));
     if (!(symbolp(name) || (consp(name) && symbolp(car(name)))))
+    {
         xlerror("bad name in defmethod", name);
+    }
 
-    arglist = cdr(car(form));
+    LVAL arglist = cdr(car(form));
     if (!listp(arglist))
+    {
         xlerror("bad arglist in defmethod", car(form));
+    }
     if (!consp(arglist))
+    {
         xlerror("must have at least one required arg in defmethod", car(form));
+    }
 
     cpush(form);
-    classes = define_method_classes(arglist);
+    LVAL classes = define_method_classes(arglist);
     cpush(classes);
-    args = define_method_args(arglist);
+    LVAL args = define_method_args(arglist);
     cpush(args);
 
     drop(1);
@@ -2955,20 +3016,25 @@ static void do_define_method(LVAL form, int cont)
     cpush(args);
 
     putcbyte(OP_SAVE);  // add-method
-    nxt1 = putcword(0);
+    int nxt1 = putcword(0);
 
     // optional args?
+    LVAL opts;
     for (opts = args; consp(opts); opts = cdr(opts));
     if (opts == NIL)
+    {
         putcbyte(OP_NIL);
+    }
     else
+    {
         putcbyte(OP_T);
+    }
     putcbyte(OP_PUSH);
 
     putcbyte(OP_SAVE);  // list
-    nxt2 = putcword(0);
+    int nxt2 = putcword(0);
 
-    len = push_method_domain(classes);
+    int len = push_method_domain(classes);
 
     cd_variable(OP_GREF, s_list);
     putcbyte(OP_CALL);
@@ -2976,7 +3042,7 @@ static void do_define_method(LVAL form, int cont)
     fixup(nxt2);
     putcbyte(OP_PUSH);
 
-    body = cdr(form);
+    LVAL body = cdr(form);
     cd_fundefinition(name, args, body); // the method function
     putcbyte(OP_PUSH);
 
@@ -2984,7 +3050,7 @@ static void do_define_method(LVAL form, int cont)
 
     putcbyte(OP_PUSH);
 
-    sym = xlenter_module("make-and-add-method", root_module);
+    LVAL sym = xlenter_module("make-and-add-method", root_module);
     cd_variable(OP_GREF, sym);
 
     putcbyte(OP_CALL);
@@ -3001,33 +3067,46 @@ static void do_define_method(LVAL form, int cont)
 static void do_cnm(LVAL form, int cont)
 {
     extern LVAL s_next_methods, s_arg_list;
-    int nxt, lev, off;
 
     if (form != NIL)
+    {
         xlerror("extra forms in call-next-method", form);
+    }
 
+    int nxt;
     if (cont != C_RETURN)
     {
         putcbyte(OP_SAVE);
         nxt = putcword(0);
     }
 
+    int lev, off;
     if (findvariable(s_arg_list, &lev, &off))   // arg list
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         xlfail("call-next-method outside of a method", s_syntax_error);
+    }
 
     putcbyte(OP_PUSH);
 
     if (findvariable(s_next_methods, &lev, &off))       // method list
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         xlfail("call-next-method outside of a method", s_syntax_error);
+    }
 
     putcbyte(OP_CNM);
 
     if (cont != C_RETURN)
+    {
         fixup(nxt);
+    }
 
     do_continuation(cont);
 
