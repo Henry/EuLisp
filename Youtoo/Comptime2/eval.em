@@ -14,7 +14,7 @@
            dynamic-load-module as-dynamic-binding
            module-loaded? as-C-module-name
            dynamic-binding-ref1 dynamic-binding-set1 dynamic-load-module1
-           *redefine-imported-bindings* *first-year-students*))
+           *redefine-imported-bindings*))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Main function to invoke the interpreter or compiler

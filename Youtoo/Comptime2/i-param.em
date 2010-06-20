@@ -61,7 +61,6 @@
            *no-gc*
            *no-else*
            *redefine-imported-bindings*
-           *first-year-students*
            *tmp-load-dir*
            *get-literal*
            ct-reset
@@ -144,7 +143,6 @@
   (deflocal *no-gc* ())             ; don't link gc library
   (deflocal *no-else* ())           ; don't expect else branch
   (deflocal *redefine-imported-bindings* ()) ; don't redefine imported bindings
-  (deflocal *first-year-students* ()) ; limit some functionality
   (deflocal *source-file-names* ())
   (deflocal *tmp-source-file-name* ())
   (deflocal *tmp-start-source-file-name* ())

@@ -15,7 +15,7 @@
     (expand-export . 37)
     (directive-expander . 36)
     (expand-directive . 35)
-    (|(method G005365)| . 33)
+    (|(method G003283)| . 33)
     (ct-error-value: . 31)
     ("bad directive syntax" . 30)
     ("compile time error condition: " . 29)

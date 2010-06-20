@@ -10,8 +10,8 @@
   (syntax (_macros)
    import (i-all i-args sx-obj sx-node i-compile cg-interf cg-dld ex-expr
            ex-import ex-syntax p-env sx-obj cg-exec read)
-   export (rep eval debug-eval show-module-bindings ?
-           show-class-hierarchy)
+   export (rep eval debug-eval
+           show-module-bindings ? show-help show-class-hierarchy)
    expose (cg-dld))
 
 ;;;-----------------------------------------------------------------------------
@@ -191,45 +191,34 @@
            ((eq x redefine:)
             (setq *redefine-imported-bindings*
                   (null? *redefine-imported-bindings*)))
-           ((eq x first-year-students:)
-            (setq *first-year-students* (null? *first-year-students*)))
            ((eq x -:)
             (system
              (convert
               (format () "~a" (read lispin () (eos-default-value))) <string>)))
            ((eq x help:)
-            (if *first-year-students* ()
-              (progn
-                (print ": <module-name>            step into module (link if necessary)")
-                (print ":: <module-name>           link module and step into it")
-                (print "defined-lexical-bindings:  show defined lexical bindings")
-                (print "lexical-import:            show lexical import")
-                (print "defined-syntax-bindings:   show defined syntax bindings")
-                (print "syntax-bindings:           show syntax environment")
-                (print "syntax-import:             show syntax import")
-                (print "hierarchy:                 show class hierarchy")
-                (print "redefine:                  redefine/shadow imported bindings")
-                (print "first-year-students:       toggle first-year-student mode")))
-            (print "load: <file-name>          evaluate file expressions")
-            (print "?                          previous value")
-            (print "lexical-bindings:          show lexical environment")
-            (print "verbose:                   run verbose")
-            (print "silent:                    run silent")
-            (print "trace: <function-name>     trace function invocation")
-            (print "untrace: <functon-name>    stop tracing function invocation")
-            (print "backtrace:                 show backtrace")
-            (print "values:                    show stack values")
-            (print "continue:                  continue computation")
-            (print "reset:                     resume from all errors")
-            (print "resume:                    resume from previous error")
-            (print "[Ctrl-d]                   exit interpreter or resume from previous error")
-            (print "[Ctrl-c]                   interrupt computation")
-            (print "[Ctrl-z]                   suspend interpreter")
-            (print "exit:                      exit interpreter")
-            ())
+            (show-help))
            (t x)))
     (thread-reschedule)
     ?)
+
+  (defun show-help ()
+    (print "load: <file-name>          evaluate file expressions")
+    (print "?                          previous value")
+    (print "lexical-bindings:          show lexical environment")
+    (print "verbose:                   run verbose")
+    (print "silent:                    run silent")
+    (print "trace: <function-name>     trace function invocation")
+    (print "untrace: <functon-name>    stop tracing function invocation")
+    (print "backtrace:                 show backtrace")
+    (print "values:                    show stack values")
+    (print "continue:                  continue computation")
+    (print "reset:                     resume from all errors")
+    (print "resume:                    resume from previous error")
+    (print "[Ctrl-d]                   exit interpreter or resume from previous error")
+    (print "[Ctrl-c]                   interrupt computation")
+    (print "[Ctrl-z]                   suspend interpreter")
+    (print "exit:                      exit interpreter")
+    )
 
   (defun check-module-envs (module)
     ;; Update lexical and syntax environments if necessary;
@@ -267,8 +256,7 @@
   (defun rep-aux ()
     (labels
      ((loop (x)
-            (if (or *script* *first-year-students*) ()
-              (format t "[~a]: " *current-module-name*))
+            (format t "~a> " *current-module-name*)
             (flush)
             (reset-interactive-module (dynamic *actual-module*))
             (setq *number-of-warnings* 0)
@@ -282,9 +270,7 @@
               ;; Ok, we're really going to eval something now!
               (if *script*
                   (eval x)
-                (if *first-year-students*
-                    (format t ";: ~s\n" (eval x))
-                  (format t "- ~s\n" (eval x)))))
+                (format t "-> ~s\n" (eval x))))
             (loop ())))
      (let/cc reset-k
              (setq *reset-k* reset-k)
@@ -295,12 +281,9 @@
   (defun debug-rep ()
     (labels
      ((loop (x)
-            (if *first-year-students*
-                (format t "[error~a] "
-                        (list-size *resume-k*))
-              (format t "[error~a][~a]: "
-                      (list-size *resume-k*)
-                      *current-module-name*))
+            (format t "[error~a]~a> "
+                    (list-size *resume-k*)
+                    *current-module-name*)
             (flush)
             (reset-interactive-module (dynamic *actual-module*))
             (setq x (read lispin () (eos-default-value)))
@@ -308,9 +291,7 @@
                 (progn
                   (newline)
                   (debug-eval resume:))
-              (if *first-year-students*
-                  (format t ";: ~s\n" (debug-eval x))
-                (format t "- ~s\n" (debug-eval x))))
+              (format t "-> ~s\n" (debug-eval x)))
             (loop ())))
      (let/cc resume-k
              (setq *resume-k* (cons resume-k *resume-k*))

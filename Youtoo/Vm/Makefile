@@ -21,7 +21,7 @@ VM_SHARED_LIB = $(EUL_LIB_DIR)/libeulvm.so
 ### Source and object files
 ###-----------------------------------------------------------------------------
 
-VM_C = character.c fpi.c init.c interpret.c level1i.c list.c \
+VM_C = character.c fpi.c init.c rl_init.c interpret.c level1i.c list.c \
        register.c stack.c signals.c table.c util.c
 VM_O = $(VM_C:%.c=$(ARCH_DIR)/%.o)
 

@@ -50,8 +50,14 @@ int read_into_buffer(int _file, char *buf, int n)
             }
 
             // Transfer the readline buffer to buf
-            status = strlen(lbuf) + 1;
+            status = strlen(lbuf);
             strcpy(buf + (n >> 1), lbuf);
+
+            // Add the \n that readline removes from the input
+            *(buf + (n >> 1) + status++) = '\n';
+
+            // Re-terminate the string
+            *(buf + (n >> 1) + status) = NULL;
 
             // Free the readline buffer allocated with malloc
             free(lbuf);
