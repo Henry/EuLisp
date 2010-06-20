@@ -1,5 +1,9 @@
-// Automatically generated from the c-files using cproto
-
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: Automatically generated function prototypes by cproto
+///  Description: EuXLisp main routine
+///-----------------------------------------------------------------------------
 #ifndef XSPROTO_H
 #define XSPROTO_H
 
@@ -542,4 +546,6 @@ extern LVAL stream_xdr_send_string();
 extern LVAL stream_xdr_recv_string();
 #endif
 
-#endif
+///-----------------------------------------------------------------------------
+#endif // XSPROTO_H
+///-----------------------------------------------------------------------------

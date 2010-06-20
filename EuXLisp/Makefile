@@ -114,6 +114,8 @@ DISTFILES = $(EUXL_C) $(EUXL_H) $(LISP) $(OTHERS)
 
 all: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
 
+$(EULX_O) : $(EUXL_H)
+
 $(EUL_BIN_DIR)/euxlisp: $(EULX_O)
 	$(CC) $(LDFLAGS) $(EULX_O) $(LIBS) -o $@
 

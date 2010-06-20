@@ -1,8 +1,12 @@
-// xscheme.h - xscheme definitions
-/*      Copyright (c) 1988, by David Michael Betz
-        All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
-
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xscheme.h
+///  Description: xscheme definitions
+///-----------------------------------------------------------------------------
 #ifndef XSCHEME_H
 #define XSCHEME_H
 
@@ -498,4 +502,6 @@ extern LVAL obarray;            // prototype symbols
 // external routine declarations
 #include "xsproto.h"
 
-#endif
+///-----------------------------------------------------------------------------
+#endif // XSCHEME_H
+///-----------------------------------------------------------------------------

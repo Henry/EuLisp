@@ -1,3 +1,12 @@
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xssymbols.h
+///  Description: EuXLisp symbol declarations
+///-----------------------------------------------------------------------------
 #ifndef XSSYMBOLS_H
 #define XSSYMBOLS_H
 
@@ -33,4 +42,6 @@ extern LVAL s_check_ref;
 extern LVAL s_socket_error;
 #endif
 
-#endif
+///-----------------------------------------------------------------------------
+#endif // XSSYMBOLS_H
+///-----------------------------------------------------------------------------

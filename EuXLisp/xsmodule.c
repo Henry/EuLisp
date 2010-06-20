@@ -1,5 +1,11 @@
-// Euscheme code Copyright (c) 1994 Russell Bradford
-// xsmodule.c -- module definitions
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xsmodule.c
+///  Description: module definitions
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 
@@ -32,19 +38,18 @@ void init_root_module()
 // export everthing from root module
 void init_root_exports()
 {
-    int i;
-    LVAL exports, array;
-    FTDEF *fptr;
     extern LVAL append();
 
     // ensure all specials are entered
-    for (fptr = ftab; fptr->ft_name; fptr++)
+    for (FTDEF *fptr = ftab; fptr->ft_name; fptr++)
+    {
         xlenter(fptr->ft_name);
+    }
 
-    array = getmsymbols(root_module);
-    exports = getmexports(root_module);
+    LVAL array = getmsymbols(root_module);
+    LVAL exports = getmexports(root_module);
 
-    for (i = 0; i < HSIZE; i++)
+    for (int i = 0; i < HSIZE; i++)
     {
         exports = append(getelement(array, i), exports);
     }
@@ -55,24 +60,37 @@ void init_root_exports()
 static LVAL get_a_module()
 {
     static char *cfn_name = "get_a_module";
-    LVAL name, mod;
+
+    LVAL mod;
 
     if (moreargs())
     {
-        name = xlgetarg();
+        LVAL name = xlgetarg();
         if (!symbolp(name) && !stringp(name))
-            xlcerror("symbol or string wanted as module name", name,
-            s_syntax_error);
+        {
+            xlcerror
+            (
+                "symbol or string wanted as module name",
+                name,
+                s_syntax_error
+            );
+        }
 
         if (symbolp(name))
+        {
             name = getpname(name);
+        }
         mod = find_module(name);
 
         if (mod == NIL)
+        {
             xlcerror("no such module", name, s_general_error);
+        }
     }
     else
+    {
         mod = current_module;
+    }
 
     xllastarg();
 
@@ -95,10 +113,10 @@ LVAL module_exports()
 LVAL symbol_module()
 {
     static char *cfn_name = "symbol-module";
-    LVAL sym, mod;
-    sym = xlgasymbol();
+
+    LVAL sym = xlgasymbol();
     xllastarg();
-    mod = getmodule(sym);
+    LVAL mod = getmodule(sym);
     return mod == NIL ? NIL : getmname(mod);
 }
 
@@ -122,21 +140,20 @@ LVAL mod_list()
 LVAL unintern()
 {
     static char *cfn_name = "unintern";
-    LVAL array, sym, syms1, syms2;
-    int i;
-    char *name;
 
     while (moreargs())
     {
-        sym = xlgasymbol();
+        LVAL sym = xlgasymbol();
 
-        name = getstring(getpname(sym));
-        array = getmsymbols(current_module);
-        i = hash(name, HSIZE);
+        char *name = getstring(getpname(sym));
+        LVAL array = getmsymbols(current_module);
+        int i = hash(name, HSIZE);
 
-        syms1 = getelement(array, i);
+        LVAL syms1 = getelement(array, i);
         if (syms1 == NIL)
+        {
             continue;
+        }
 
         if (sym == car(syms1))
         {
@@ -144,12 +161,19 @@ LVAL unintern()
             continue;
         }
 
-        for (syms2 = cdr(syms1); syms2; syms1 = cdr(syms1), syms2 = cdr(syms2))
+        for
+        (
+            LVAL syms2 = cdr(syms1);
+            syms2;
+            syms1 = cdr(syms1), syms2 = cdr(syms2)
+        )
+        {
             if (sym == car(syms2))
             {
                 rplacd(syms1, cdr(syms2));
                 break;
             }
+        }
     }
 
     return true;
@@ -167,9 +191,8 @@ LVAL xkeyword_array()
 LVAL xset_module()
 {
     static char *cfn_name = "set-module";
-    LVAL mod;
 
-    mod = xlgamodule();
+    LVAL mod = xlgamodule();
     xllastarg();
 
     current_module = mod;
@@ -184,17 +207,24 @@ LVAL xset_module()
 // sym a symbol or a string that might name a module
 LVAL find_module(LVAL sym)
 {
-    LVAL mods;
     char *name;
 
     if (symbolp(sym))
+    {
         name = getstring(getpname(sym));
+    }
     else
+    {
         name = getstring(sym);
+    }
 
-    for (mods = module_list; mods; mods = cdr(mods))
+    for (LVAL mods = module_list; mods; mods = cdr(mods))
+    {
         if (strcmp(name, getstring(getmname(car(mods)))) == 0)
+        {
             return car(mods);
+        }
+    }
 
     return NIL;
 }
@@ -202,13 +232,14 @@ LVAL find_module(LVAL sym)
 LVAL xfind_module()
 {
     static char *cfn_name = "find-module";
-    LVAL mod;
 
-    mod = xlgetarg();
+    LVAL mod = xlgetarg();
     xllastarg();
 
     if (stringp(mod) || symbolp(mod))
+    {
         return find_module(mod);
+    }
 
     xlbadtype(mod, "string or symbol", cfn_name);
 
@@ -219,3 +250,6 @@ LVAL get_module(char *name)
 {
     return find_module(xlenter_module(name, root_module));
 }
+
+
+///-----------------------------------------------------------------------------

@@ -1,9 +1,13 @@
-// xsobj.h: definitions for classes and objects 
-
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xsobj.h
+///  Description: definitions for classes and objects
+///-----------------------------------------------------------------------------
 #ifndef XSOBJ_H
 #define XSOBJ_H
 
-// c.f. xloinit in csobj.c 
+// c.f. xloinit in csobj.c
 #define CNAME      1
 #define SUPERCLASS 2
 #define CPL        3
@@ -17,4 +21,6 @@
 
 extern LVAL object, class, simple_class, class_vector;
 
-#endif
+///-----------------------------------------------------------------------------
+#endif // XSOBJ_H
+///-----------------------------------------------------------------------------

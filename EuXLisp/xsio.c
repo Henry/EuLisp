@@ -1,7 +1,12 @@
-// xsio - xscheme i/o routines
-/*      Copyright (c) 1988, by David Michael Betz
-        All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xsio.c
+///  Description: i/o routines
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 
@@ -19,15 +24,13 @@ int xlgetc(LVAL fptr)
 
     // check for input from nil
     if (fptr == NIL)
+    {
         ch = EOF;
-
-    // otherwise, check for a buffered character
+    }   // otherwise, check for a buffered character
     else if ((ch = getsavech(fptr)) != '\0')
     {
         setsavech(fptr, '\0');
-    }
-
-    // otherwise, check for terminal input or file input
+    }   // otherwise, check for terminal input or file input
     else
     {
         fp = getfile(fptr);
@@ -59,11 +62,11 @@ void xlungetc(LVAL fptr, int ch)
 {
     // check for ungetc from nil
     if (fptr == NIL)
-        ;
-
-    // otherwise, it must be a file
+    {}  // otherwise, it must be a file
     else
+    {
         setsavech(fptr, ch);
+    }
 }
 
 // xlpeekchar
@@ -73,12 +76,16 @@ int xlpeekchar(LVAL fptr)
     int ch;
 
     if (fptr == NIL)
+    {
         ch = EOF;
+    }
     else if ((ch = getsavech(fptr)) == '\0')
     {
         fp = getfile(fptr);
         if (fp == NULL)
+        {
             xlcerror("attempt to read from a closed stream", fptr, NIL);
+        }
         ch = ospeekchar(fp);
     }
 
@@ -95,20 +102,26 @@ void xlputc(LVAL fptr, int ch)
 
     // check for output to nil
     if (fptr == NIL)
-        ;
-
-    // otherwise, check for terminal output or file output
+    {}  // otherwise, check for terminal output or file output
     else
     {
         fp = getfile(fptr);
         if (fp == NULL)
+        {
             xlcerror("attempt to write to closed stream", fptr, NIL);
+        }
         if (fp == stdout || fp == stderr)
+        {
             ostputc(ch);
+        }
         else if ((getpflags(fptr) & PF_BINARY) != 0)
+        {
             osbputc(ch, fp);
+        }
         else
+        {
             osaputc(ch, fp);
+        }
     }
 }
 
@@ -142,3 +155,6 @@ void errputstr(char *str)
 {
     xlputstr(getvalue(s_stderr), str);
 }
+
+
+///-----------------------------------------------------------------------------

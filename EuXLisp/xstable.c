@@ -1,5 +1,11 @@
-// Euscheme code Copyright (c) 1994 Russell Bradford
-// xstable.c -- stuff for tables
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xstable.c
+///  Description: stuff for tables
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 #include "xssymbols.h"
@@ -15,16 +21,14 @@ static int thash_equals(LVAL key);
 LVAL xmake_table()
 {
     static char *cfn_name = "make-table";
-    LVAL comp, fill, table;
-    LVAL eqp, eqvp, equalp, equals;
 
-    eqp = getvalue(s_eq);
-    eqvp = getvalue(s_eqv);
-    equalp = getvalue(s_equal);
-    equals = getvalue(s_equals);
+    LVAL eqp = getvalue(s_eq);
+    LVAL eqvp = getvalue(s_eqv);
+    LVAL equalp = getvalue(s_equal);
+    LVAL equals = getvalue(s_equals);
 
-    comp = eqvp;
-    fill = NIL;
+    LVAL comp = eqvp;
+    LVAL fill = NIL;
 
     if (moreargs())
     {
@@ -37,31 +41,35 @@ LVAL xmake_table()
     }
 
     if (comp != eqp && comp != eqvp && comp != equalp && comp != equals)
-        xlcerror("only eq, eqv, = and equal allowed as table comparators",
-        comp, NIL);
+    {
+        xlcerror
+        (
+            "only eq, eqv, = and equal allowed as table comparators",
+            comp,
+            NIL
+        );
+    }
 
-    table = cvtable(comp, fill);
-
-    return table;
+    return cvtable(comp, fill);
 }
 
 // xtable_ref - get an elt from a table
 LVAL xtable_ref()
 {
     static char *cfn_name = "table-ref";
-    LVAL table, key, comp, vec, val;
-    int index;
+
     int (*equality) ();
 
-    table = xlgatable();
-    key = xlgetarg();
+    LVAL table = xlgatable();
+    LVAL key = xlgetarg();
     xllastarg();
 
-    comp = gettablecomp(table);
-    vec = gettabletable(table);
+    LVAL comp = gettablecomp(table);
+    LVAL vec = gettabletable(table);
 
     check(2);
 
+    int index;
     if (comp == getvalue(s_eq))
     {
         index = thash_eq(key);
@@ -86,12 +94,16 @@ LVAL xtable_ref()
     push(getelement(vec, index));
     push(key);
     xlargc = 2;
-    val = assoc(equality);
+    LVAL val = assoc(equality);
 
     if (val == NIL)
+    {
         return gettablefill(table);
+    }
     else
+    {
         return cdr(val);
+    }
 
 }
 
@@ -99,20 +111,20 @@ LVAL xtable_ref()
 LVAL xtable_set()
 {
     static char *cfn_name = "table-set!";
-    LVAL table, key, value, comp, vec, val;
-    int index;
+
     int (*equality) ();
 
-    table = xlgatable();
-    key = xlgetarg();
-    value = xlgetarg();
+    LVAL table = xlgatable();
+    LVAL key = xlgetarg();
+    LVAL value = xlgetarg();
     xllastarg();
 
-    comp = gettablecomp(table);
-    vec = gettabletable(table);
+    LVAL comp = gettablecomp(table);
+    LVAL vec = gettabletable(table);
 
     check(3);
 
+    int index;
     if (comp == getvalue(s_eq))
     {
         index = thash_eq(key);
@@ -137,7 +149,7 @@ LVAL xtable_set()
     push(getelement(vec, index));
     push(key);
     xlargc = 2;
-    val = assoc(equality);
+    LVAL val = assoc(equality);
 
     if (val == NIL)
     {   // new key
@@ -150,7 +162,9 @@ LVAL xtable_set()
         drop(3);
     }
     else        // replace old
+    {
         rplacd(val, value);
+    }
 
     return value;
 }
@@ -159,9 +173,8 @@ LVAL xtable_set()
 LVAL xtable_comparator()
 {
     static char *cfn_name = "table-comparator";
-    LVAL table;
 
-    table = xlgatable();
+    LVAL table = xlgatable();
     xllastarg();
 
     return gettablecomp(table);
@@ -170,21 +183,30 @@ LVAL xtable_comparator()
 // nasty destructive delete
 static LVAL delq(LVAL list, LVAL obj)
 {
-    LVAL before, after;
-
     if (list == NIL)
+    {
         return NIL;
+    }
 
     if (car(list) == obj)
+    {
         return cdr(list);
+    }
 
-    for (before = list, after = cdr(list);
-         after; before = cdr(before), after = cdr(after))
+    LVAL before, after;
+    for
+    (
+        before = list, after = cdr(list);
+        after;
+        before = cdr(before), after = cdr(after)
+    )
+    {
         if (car(after) == obj)
         {
             rplacd(before, cdr(after));
             return list;
         }
+    }
 
     return list;
 }
@@ -193,19 +215,19 @@ static LVAL delq(LVAL list, LVAL obj)
 LVAL xtable_delete()
 {
     static char *cfn_name = "table-delete";
-    LVAL table, key, comp, vec, val;
-    int index;
+
     int (*equality) ();
 
-    table = xlgatable();
-    key = xlgetarg();
+    LVAL table = xlgatable();
+    LVAL key = xlgetarg();
     xllastarg();
 
-    comp = gettablecomp(table);
-    vec = gettabletable(table);
+    LVAL comp = gettablecomp(table);
+    LVAL vec = gettabletable(table);
 
     check(2);
 
+    int index;
     if (comp == getvalue(s_eq))
     {
         index = thash_eq(key);
@@ -230,10 +252,12 @@ LVAL xtable_delete()
     push(getelement(vec, index));
     push(key);
     xlargc = 2;
-    val = assoc(equality);
+    LVAL val = assoc(equality);
 
     if (val == NIL)
+    {
         return NIL;
+    }
 
     setelement(vec, index, delq(getelement(vec, index), val));
 
@@ -244,20 +268,20 @@ LVAL xtable_delete()
 LVAL xtable_length()
 {
     static char *cfn_name = "table-length";
-    LVAL table, vec, entry;
-    int i, count;
 
-    table = xlgatable();
+    LVAL table = xlgatable();
     xllastarg();
 
-    vec = gettabletable(table);
+    LVAL vec = gettabletable(table);
 
-    count = 0;
-    for (i = 0; i < HTABLESIZE; i++)
+    int count = 0;
+    for (int i = 0; i < HTABLESIZE; i++)
     {
-        entry = getelement(vec, i);
+        LVAL entry = getelement(vec, i);
         for (; entry; entry = cdr(entry))
+        {
             count++;
+        }
     }
 
     return cvfixnum(count);
@@ -267,21 +291,22 @@ LVAL xtable_length()
 LVAL xtable_keys()
 {
     static char *cfn_name = "table-keys";
-    LVAL table, vec, entry, keylist;
-    int i;
 
-    table = xlgatable();
+    LVAL table = xlgatable();
     xllastarg();
 
-    vec = gettabletable(table);
+    LVAL vec = gettabletable(table);
 
     cpush(table);
-    keylist = NIL;
-    for (i = 0; i < HTABLESIZE; i++)
+
+    LVAL keylist = NIL;
+    for (int i = 0; i < HTABLESIZE; i++)
     {
-        entry = getelement(vec, i);
+        LVAL entry = getelement(vec, i);
         for (; entry; entry = cdr(entry))
+        {
             keylist = cons(car(car(entry)), keylist);
+        }
     }
     drop(1);
 
@@ -292,21 +317,22 @@ LVAL xtable_keys()
 LVAL xtable_values()
 {
     static char *cfn_name = "table-values";
-    LVAL table, vec, entry, vallist;
-    int i;
 
-    table = xlgatable();
+    LVAL table = xlgatable();
     xllastarg();
 
-    vec = gettabletable(table);
+    LVAL vec = gettabletable(table);
 
     cpush(table);
-    vallist = NIL;
-    for (i = 0; i < HTABLESIZE; i++)
+
+    LVAL vallist = NIL;
+    for (int i = 0; i < HTABLESIZE; i++)
     {
-        entry = getelement(vec, i);
+        LVAL entry = getelement(vec, i);
         for (; entry; entry = cdr(entry))
+        {
             vallist = cons(cdr(car(entry)), vallist);
+        }
     }
     drop(1);
 
@@ -317,9 +343,8 @@ LVAL xtable_values()
 LVAL xtable_fill()
 {
     static char *cfn_name = "table-fill";
-    LVAL table;
 
-    table = xlgatable();
+    LVAL table = xlgatable();
     xllastarg();
 
     return gettablefill(table);
@@ -329,10 +354,9 @@ LVAL xtable_fill()
 LVAL xtable_setfill()
 {
     static char *cfn_name = "set-table-fill!";
-    LVAL table, val;
 
-    table = xlgatable();
-    val = xlgetarg();
+    LVAL table = xlgatable();
+    LVAL val = xlgetarg();
     xllastarg();
 
     settablefill(table, val);
@@ -343,16 +367,16 @@ LVAL xtable_setfill()
 LVAL xtable_clear()
 {
     static char *cfn_name = "table-clear";
-    LVAL table, vec;
-    int i;
 
-    table = xlgatable();
+    LVAL table = xlgatable();
     xllastarg();
 
-    vec = gettabletable(table);
+    LVAL vec = gettabletable(table);
 
-    for (i = 0; i < HTABLESIZE; i++)
+    for (int i = 0; i < HTABLESIZE; i++)
+    {
         setelement(vec, i, NIL);
+    }
 
     return table;
 }
@@ -364,12 +388,12 @@ LVAL xtable_clear()
 static int thash_eq(LVAL key)
 {
     extern OFFTYPE cvoptr();
-    int hash;
 
     #ifdef OLDSYM
-    hash = cvoptr(key) % HTABLESIZE;
+    int hash = cvoptr(key) % HTABLESIZE;
     #else
-    hash = cvoptr(symbolp(key) ? getpname(key) : key) % HTABLESIZE;
+    int hash = cvoptr(symbolp(key) ? getpname(key) : key)
+    % HTABLESIZE;
     #endif
 
     #if 0
@@ -385,11 +409,12 @@ static int thash_eq(LVAL key)
 // c.f. code for eqv in xsftab.c
 static int thash_eqv(LVAL key)
 {
-    int val;
-
     if (key == NIL)
+    {
         return 0;
+    }
 
+    int val;
     switch (ntype(key))
     {
         case FIXNUM:
@@ -407,7 +432,6 @@ static int thash_eqv(LVAL key)
         default:
             val = thash_eq(key);
             break;
-
     }
 
     return val < 0 ? -val : val;
@@ -416,7 +440,6 @@ static int thash_eqv(LVAL key)
 static int thash_equals(LVAL key)
 {
     int val;
-
     switch (ntype(key))
     {
         case FIXNUM:
@@ -438,7 +461,6 @@ static int thash_equals(LVAL key)
         default:
             xlcerror("table ref on key incompatible with comparator =", key,
             NIL);
-
     }
 
     return val < 0 ? -val : val;
@@ -452,11 +474,12 @@ static int thash_equals(LVAL key)
  */
 static int thash_equal(LVAL key)
 {
-    int val, i, len;
-
     if (key == NIL)
+    {
         return 0;
+    }
 
+    int val, len;
     switch (ntype(key))
     {
         case FIXNUM:
@@ -478,7 +501,7 @@ static int thash_equal(LVAL key)
         case VECTOR:
             len = getsize(key);
             val = 0;
-            for (i = 0; i < len; i++)
+            for (int i = 0; i < len; i++)
                 val = (val + thash_equal(getelement(key, i))) % HTABLESIZE;
             break;
 
@@ -494,3 +517,6 @@ static int thash_equal(LVAL key)
 
     return val < 0 ? -val : val;
 }
+
+
+///-----------------------------------------------------------------------------

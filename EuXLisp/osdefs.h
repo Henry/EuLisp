@@ -1,8 +1,12 @@
-// osdefs.h - extern declarations for machine specific functions
-/*      Copyright (c) 1988, by David Michael Betz
-        All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
-
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: osdefs.h
+///  Description: extern declarations for machine specific functions
+///-----------------------------------------------------------------------------
 #ifndef OSDEFS_H
 #define OSDEFS_H
 
@@ -10,4 +14,6 @@
 extern LVAL xsystem();
 #endif
 
-#endif
+///-----------------------------------------------------------------------------
+#endif // OSDEFS_H
+///-----------------------------------------------------------------------------
