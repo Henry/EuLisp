@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 19 June 2010, 15:33:07
+  Generated 20 June 2010, 11:42:29
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -630,9 +630,8 @@ youtoo Functions
 3. Bindings in /home/dm2/henry/EuLisp/EuLisp/Lib.x86_64/libeval
 ---------------------------------------------------------------------------
 
-  *first-year-students* 32 i-param *first-year-students*
-  *redefine-imported-bindings* 33 i-param *redefine-imported-bindings*
-  ? 12 i-rep ?
+  *redefine-imported-bindings* 32 i-param *redefine-imported-bindings*
+  ? 13 i-rep ?
   as-dynamic-binding 4 cg-dld as-dynamic-binding
   dynamic-binding-ref 7 cg-dld dynamic-binding-ref
   dynamic-binding-set 9 cg-dld dynamic-binding-set
