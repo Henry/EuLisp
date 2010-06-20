@@ -1,10 +1,10 @@
-//  Copyright (c) 1990, 1994, by David Michael Betz and Russell Bradford.
+//  Copyright (c) 1990, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
 //  All rights reserved.
 ///-----------------------------------------------------------------------------
 /// ---                 EuLisp System 'EuXLisp'
 ///-----------------------------------------------------------------------------
 ///  File: xscheme.c
-///  Authors: David Michael Betz and Russell Bradford
 ///  Description: EuXLisp main routine
 ///-----------------------------------------------------------------------------
 

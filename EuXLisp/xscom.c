@@ -1,7 +1,12 @@
-// xscom.c - a simple scheme bytecode compiler
-/*     Copyright (c) 1988, by David Michael Betz
-       All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xscom.c
+///  Description: A simple scheme bytecode compiler
+///-----------------------------------------------------------------------------
 
 #define NOISY_LOAD
 
@@ -3114,16 +3119,21 @@ static void do_cnm(LVAL form, int cont)
 
 static void do_next_method_p(LVAL form, int cont)
 {
+    if (form != NIL)
+    {
+        xlerror("extra forms in next-method?", form);
+    }
+
     extern LVAL s_next_methods;
     int lev, off;
-
-    if (form != NIL)
-        xlerror("extra forms in next-method?", form);
-
     if (findvariable(s_next_methods, &lev, &off))       // arg list
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         xlfail("next-method? called outside of a method", s_syntax_error);
+    }
 
     putcbyte(OP_NULL);
     putcbyte(OP_NULL);
@@ -3134,18 +3144,23 @@ static void do_next_method_p(LVAL form, int cont)
 
 static int do_superclass(LVAL super)
 {
-    int lev, off;
-
     if (super == NIL)
+    {
         return 0;
+    }
 
     putcbyte(OP_NIL);
     putcbyte(OP_PUSH);
 
+    int lev, off;
     if (findvariable(car(super), &lev, &off))
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         cd_variable(OP_GREF, car(super));
+    }
 
     putcbyte(OP_CONS);
     putcbyte(OP_PUSH);
@@ -3160,6 +3175,7 @@ static int do_superclass(LVAL super)
 static int do_abstractp(LVAL classopts)
 {
     for (; classopts; classopts = cdr(cdr(classopts)))
+    {
         if (car(classopts) == s_abstractp)
         {
             do_literal(car(cdr(classopts)), C_NEXT);
@@ -3168,34 +3184,37 @@ static int do_abstractp(LVAL classopts)
             putcbyte(OP_PUSH);
             return 2;
         }
+    }
 
     return 0;
 }
 
 static int do_slots(LVAL slots)
 {
-    int nargs1, nargs2, nxt1, nxt2;
-    LVAL slot, slotname, key, defn, reqd;
-
     if (slots == NIL)
+    {
         return 0;
+    }
 
     putcbyte(OP_SAVE);
-    nxt1 = putcword(0);
+    int nxt1 = putcword(0);
 
     slots = xlreverse(slots);
     cpush(slots);
 
+    int nargs1;
     for (nargs1 = 0; slots; slots = cdr(slots), nargs1++)
     {
-        slot = car(slots);
+        LVAL slot = car(slots);
 
         if (slot == NIL)
+        {
             xlfail("missing slot name in defclass", s_syntax_error);
+        }
 
-        nargs2 = 0;
+        int nargs2 = 0;
         putcbyte(OP_SAVE);
-        nxt2 = putcword(0);
+        int nxt2 = putcword(0);
 
         if (symbolp(slot))
         {
@@ -3209,7 +3228,7 @@ static int do_slots(LVAL slots)
         else
         {
             // slot name
-            slotname = car(slot);
+            LVAL slotname = car(slot);
             do_literal(slotname, C_NEXT);
             putcbyte(OP_PUSH);
             nargs2++;
@@ -3220,7 +3239,7 @@ static int do_slots(LVAL slots)
             slot = cdr(slot);
 
             // slot keyword
-            key = find_key(s_keyword, slot, s_unbound);
+            LVAL key = find_key(s_keyword, slot, s_unbound);
             if (key != s_unbound)
             {
                 do_literal(key, C_NEXT);
@@ -3232,7 +3251,7 @@ static int do_slots(LVAL slots)
             }
 
             // slot default
-            defn = find_key(s_default, slot, s_unbound);
+            LVAL defn = find_key(s_default, slot, s_unbound);
             if (defn != s_unbound)
             {
                 defn = cons(defn, NIL);
@@ -3245,7 +3264,7 @@ static int do_slots(LVAL slots)
             }
 
             // slot requiredp
-            reqd = find_key(s_requiredp, slot, s_unbound);
+            LVAL reqd = find_key(s_requiredp, slot, s_unbound);
             if (reqd != s_unbound)
             {
                 do_literal(reqd, C_NEXT);
@@ -3279,41 +3298,47 @@ static int do_slots(LVAL slots)
 
 static int do_keywords(LVAL slots, LVAL classopts)
 {
-    LVAL keys, slot, val, kwd;
-    int nargs;
-
-    nargs = 0;
+    int nargs = 0;
 
     check(1);
 
-    keys = NIL;
+    LVAL keys = NIL;
 
     // slot keywords
     for (; slots; slots = cdr(slots))
     {
-        slot = car(slots);
+        LVAL slot = car(slots);
         if (consp(slot))
         {
-            val = find_key(s_keyword, cdr(slot), s_unbound);
+            LVAL val = find_key(s_keyword, cdr(slot), s_unbound);
             if (val != s_unbound)
+            {
                 keys = cons(val, keys);
+            }
         }
     }
 
     // class keywords
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
-        kwd = car(classopts);
+        LVAL kwd = car(classopts);
         if (kwd == s_keywords)
         {
             if (!listp(car(cdr(classopts))))
+            {
                 xlerror("bad keyword list in defclass", car(cdr(classopts)));
+            }
             push(keys);
             keys = append(car(cdr(classopts)), keys);
             drop(1);
         }
-        else if (kwd != s_constructor &&
-        kwd != s_predicate && kwd != s_class && kwd != s_abstractp)
+        else if
+        (
+            kwd != s_constructor
+         && kwd != s_predicate
+         && kwd != s_class
+         && kwd != s_abstractp
+        )
         {
             do_expr(car(cdr(classopts)), C_NEXT);
             putcbyte(OP_PUSH);
@@ -3333,7 +3358,6 @@ static int do_keywords(LVAL slots, LVAL classopts)
     }
 
     return nargs;
-
 }
 
 static LVAL mkarg(int n)
@@ -3346,14 +3370,13 @@ static LVAL mkarg(int n)
 
 static void do_general_constructor(LVAL classname, LVAL name)
 {
-    LVAL args, body;
-    int lev, off;
-
     if (!symbolp(name))
+    {
         xlerror("bad name for constructor in defclass", name);
+    }
 
-    args = mkarg(0);
-    body = cons(args, NIL);
+    LVAL args = mkarg(0);
+    LVAL body = cons(args, NIL);
     body = cons(classname, body);
     body = cons(s_make, body);
     body = cons(s_apply, body); // (apply make foo args)
@@ -3361,24 +3384,26 @@ static void do_general_constructor(LVAL classname, LVAL name)
     cpush(body);
     cd_fundefinition(name, args, body);
     drop(1);
+
+    int lev, off;
     if (findvariable(name, &lev, &off))
+    {
         cd_evariable(OP_ESET, lev, off);
+    }
     else
+    {
         cd_variable(OP_GSET, name);
+    }
 }
 
 static void do_constructor(LVAL classname, LVAL classopts)
 {
-    LVAL name, keys, args, body, arg;
-    int count, lev, off;
-
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
-
         if (car(classopts) == s_constructor)
         {
-
-            name = car(cdr(classopts));
+            LVAL name = car(cdr(classopts));
+            LVAL keys;
             if (consp(name))
             {
                 keys = cdr(name);
@@ -3393,17 +3418,17 @@ static void do_constructor(LVAL classname, LVAL classopts)
             if (!symbolp(name))
                 xlerror("bad name for constructor in defclass", name);
 
-            args = NIL;
-            body = NIL;
+            LVAL args = NIL;
+            LVAL body = NIL;
             check(3);
             keys = xlreverse(keys);
             push(keys);
 
-            for (count = 0; keys; keys = cdr(keys), count++)
+            for (int count = 0; keys; keys = cdr(keys), count++)
             {
                 push(args);
                 push(body);
-                arg = mkarg(count);
+                LVAL arg = mkarg(count);
                 drop(2);
                 args = cons(arg, args);
                 push(args);
@@ -3411,6 +3436,7 @@ static void do_constructor(LVAL classname, LVAL classopts)
                 body = cons(car(keys), body);
                 drop(1);
             }
+
             drop(1);
             push(args);
             body = cons(classname, body);
@@ -3419,26 +3445,28 @@ static void do_constructor(LVAL classname, LVAL classopts)
             push(body);
             cd_fundefinition(name, args, body);
             drop(2);
+
+            int lev, off;
             if (findvariable(name, &lev, &off))
+            {
                 cd_evariable(OP_ESET, lev, off);
+            }
             else
+            {
                 cd_variable(OP_GSET, name);
+            }
         }
     }
 }
 
 static void do_predicate(LVAL classname, LVAL classopts)
 {
-    LVAL s_class_of, s_subclassp;
-    LVAL name, args, body;
-    int lev, off, previous;
-
-    s_class_of = xlenter_module("class-of", root_module);
-    s_subclassp = xlenter_module("subclass?", root_module);
+    LVAL s_class_of = xlenter_module("class-of", root_module);
+    LVAL s_subclassp = xlenter_module("subclass?", root_module);
 
     check(2);
 
-    previous = FALSE;
+    int previous = FALSE;
 
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
@@ -3446,16 +3474,16 @@ static void do_predicate(LVAL classname, LVAL classopts)
         if (car(classopts) == s_predicate)
         {
 
-            name = car(cdr(classopts));
+            LVAL name = car(cdr(classopts));
             if (!symbolp(name))
                 xlerror("bad name for predicate in defclass", name);
 
             if (!previous)
             {   // make predicate function
-                args = cons(s_object, NIL);
+                LVAL args = cons(s_object, NIL);
                 push(args);
 
-                body = cons(classname, NIL);
+                LVAL body = cons(classname, NIL);
                 push(body);
                 body = cons(s_object, NIL);
                 body = cons(s_class_of, body);
@@ -3471,30 +3499,39 @@ static void do_predicate(LVAL classname, LVAL classopts)
                 previous = TRUE;
             }
 
+            int lev, off;
             if (findvariable(name, &lev, &off))
+            {
                 cd_evariable(OP_ESET, lev, off);
+            }
             else
+            {
                 cd_variable(OP_GSET, name);
+            }
         }
     }
 }
 
 static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
 {
-    int lev, off, nxt1, nxt2, nxt3, nxt4;
+    putcbyte(OP_SAVE);
+    int nxt1 = putcword(0);
+    putcbyte(OP_SAVE);
+    int nxt2 = putcword(0);
+    putcbyte(OP_SAVE);
+    int nxt3 = putcword(0);
+    putcbyte(OP_SAVE);
+    int nxt4 = putcword(0);
 
-    putcbyte(OP_SAVE);
-    nxt1 = putcword(0);
-    putcbyte(OP_SAVE);
-    nxt2 = putcword(0);
-    putcbyte(OP_SAVE);
-    nxt3 = putcword(0);
-    putcbyte(OP_SAVE);
-    nxt4 = putcword(0);
+    int lev, off;
     if (findvariable(classname, &lev, &off))
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         cd_variable(OP_GREF, classname);
+    }
     putcbyte(OP_PUSH);
     do_literal(slotname, C_NEXT);
     putcbyte(OP_PUSH);
@@ -3519,9 +3556,13 @@ static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
     do_literal(s_object, C_NEXT);
     putcbyte(OP_PUSH);
     if (findvariable(classname, &lev, &off))
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         cd_variable(OP_GREF, classname);
+    }
     putcbyte(OP_PUSH);
     do_literal(s_check_ref, C_NEXT);
     putcbyte(OP_PUSH);
@@ -3553,30 +3594,44 @@ static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
     putcbyte(1);
     fixup(nxt1);
     if (findvariable(readername, &lev, &off))
+    {
         cd_evariable(OP_ESET, lev, off);
+    }
     else
+    {
         cd_variable(OP_GSET, readername);
+    }
 }
 
-static void
-do_named_writer(LVAL writername, LVAL slotname, LVAL classname, int setterp)
+static void do_named_writer
+(
+    LVAL writername,
+    LVAL slotname,
+    LVAL classname,
+    int setterp
+)
 {
-    int lev, off, nxt1, nxt2, nxt3, nxt4;
-
     putcbyte(OP_SAVE);
-    nxt1 = putcword(0);
+    int nxt1 = putcword(0);
     putcbyte(OP_SAVE);
-    nxt2 = putcword(0);
+    int nxt2 = putcword(0);
     putcbyte(OP_SAVE);
-    nxt3 = putcword(0);
+    int nxt3 = putcword(0);
     do_literal(s_value, C_NEXT);
     putcbyte(OP_PUSH);
     putcbyte(OP_SAVE);
-    nxt4 = putcword(0);
+    int nxt4 = putcword(0);
+
+    int lev, off;
     if (findvariable(classname, &lev, &off))
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         cd_variable(OP_GREF, classname);
+    }
+
     putcbyte(OP_PUSH);
     do_literal(slotname, C_NEXT);
     putcbyte(OP_PUSH);
@@ -3600,10 +3655,16 @@ do_named_writer(LVAL writername, LVAL slotname, LVAL classname, int setterp)
     nxt3 = putcword(0);
     do_literal(s_object, C_NEXT);
     putcbyte(OP_PUSH);
+
     if (findvariable(classname, &lev, &off))
+    {
         cd_evariable(OP_EREF, lev, off);
+    }
     else
+    {
         cd_variable(OP_GREF, classname);
+    }
+
     putcbyte(OP_PUSH);
     do_literal(s_check_ref, C_NEXT);
     putcbyte(OP_PUSH);
@@ -3643,10 +3704,16 @@ do_named_writer(LVAL writername, LVAL slotname, LVAL classname, int setterp)
         putcbyte(OP_SAVE);
         nxt1 = putcword(0);
         putcbyte(OP_PUSH);
+
         if (findvariable(writername, &lev, &off))
+        {
             cd_evariable(OP_EREF, lev, off);
+        }
         else
+        {
             cd_variable(OP_GREF, writername);
+        }
+
         putcbyte(OP_PUSH);
         putcbyte(OP_SAVE);
         nxt2 = putcword(0);
@@ -3663,28 +3730,34 @@ do_named_writer(LVAL writername, LVAL slotname, LVAL classname, int setterp)
     else
     {
         if (findvariable(writername, &lev, &off))
+        {
             cd_evariable(OP_ESET, lev, off);
+        }
         else
+        {
             cd_variable(OP_GSET, writername);
+        }
     }
 
 }
 
 static void do_readers(LVAL classname, LVAL slots)
 {
-    LVAL slot, slotl;
-
     for (; slots; slots = cdr(slots))
     {
-        slot = car(slots);
+        LVAL slot = car(slots);
         if (consp(slot))
         {
-            for (slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
+            for (LVAL slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
             {
                 if (cdr(slotl) == NIL)
+                {
                     xlcerror("odd-length slot init list", slot, s_telos_error);
+                }
                 if (car(slotl) == s_reader)
+                {
                     do_named_reader(car(cdr(slotl)), car(slot), classname);
+                }
             }
         }
     }
@@ -3692,20 +3765,27 @@ static void do_readers(LVAL classname, LVAL slots)
 
 static void do_writers(LVAL classname, LVAL slots)
 {
-    LVAL slot, slotl;
-
     for (; slots; slots = cdr(slots))
     {
-        slot = car(slots);
+        LVAL slot = car(slots);
         if (consp(slot))
         {
-            for (slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
+            for (LVAL slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
             {
                 if (cdr(slotl) == NIL)
+                {
                     xlcerror("odd-length slot init list", slot, s_telos_error);
+                }
                 if (car(slotl) == s_writer)
-                    do_named_writer(car(cdr(slotl)), car(slot), classname,
-                    FALSE);
+                {
+                    do_named_writer
+                    (
+                        car(cdr(slotl)),
+                        car(slot),
+                        classname,
+                        FALSE
+                    );
+                }
             }
         }
     }
@@ -3713,9 +3793,7 @@ static void do_writers(LVAL classname, LVAL slots)
 
 static void do_class_class(LVAL classopts)
 {
-    LVAL cls;
-
-    cls = NIL;
+    LVAL cls = NIL;
 
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
@@ -3741,17 +3819,17 @@ static void do_class_class(LVAL classopts)
 
 static void do_accessors(LVAL classname, LVAL slots)
 {
-    LVAL slot, slotl;
-
     for (; slots; slots = cdr(slots))
     {
-        slot = car(slots);
+        LVAL slot = car(slots);
         if (consp(slot))
         {
-            for (slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
+            for (LVAL slotl = cdr(slot); slotl; slotl = cdr(cdr(slotl)))
             {
                 if (cdr(slotl) == NIL)
+                {
                     xlcerror("odd-length slot init list", slot, s_telos_error);
+                }
                 if (car(slotl) == s_accessor)
                 {
                     do_named_reader(car(cdr(slotl)), car(slot), classname);
@@ -3765,32 +3843,45 @@ static void do_accessors(LVAL classname, LVAL slots)
 
 static void check_slot_options(LVAL slots)
 {
-    LVAL slot, kwd;
-
     for (; slots; slots = cdr(slots))
     {
-        slot = car(slots);
+        LVAL slot = car(slots);
 
         if (symbolp(slot))
+        {
             continue;
+        }
 
         if (!consp(slot))
+        {
             xlerror("bad slot description in defclass", slot);
+        }
 
         if ((length(slot) & 1) == 0)
+        {
             xlerror("odd-length slot description in defclass", slot);
+        }
 
         for (slot = cdr(slot); slot; slot = cdr(cdr(slot)))
         {
             if (!consp(slot))
+            {
                 xlerror("excess form in slot description", slot);
+            }
 
-            kwd = car(slot);
-            if (kwd != s_keyword &&
-            kwd != s_default &&
-            kwd != s_reader &&
-            kwd != s_writer && kwd != s_accessor && kwd != s_requiredp)
+            LVAL kwd = car(slot);
+            if
+            (
+                kwd != s_keyword
+             && kwd != s_default
+             && kwd != s_reader
+             && kwd != s_writer
+             && kwd != s_accessor
+             && kwd != s_requiredp
+            )
+            {
                 xlerror("unknown keyword in slot description", kwd);
+            }
         }
     }
 }
@@ -3798,12 +3889,16 @@ static void check_slot_options(LVAL slots)
 static void check_class_options(LVAL classopts)
 {
     if ((length(classopts) & 1) == 1)
+    {
         xlerror("odd-length class option list in defclass", classopts);
+    }
 
     for (; classopts; classopts = cdr(cdr(classopts)))
     {
         if (!consp(classopts))
+        {
             xlerror("excess form in defclass", classopts);
+        }
 
         #if 0
         kwd = car(classopts);
@@ -3817,42 +3912,50 @@ static void check_class_options(LVAL classopts)
 
 static void do_defclass(LVAL form, int cont)
 {
-    LVAL name, super, slots, classopts;
-    int lev, off, nxt, nargs;
-
     cpush(form);
 
     if (atom(form))
+    {
         xlfail("missing body in defclass", s_syntax_error);
+    }
 
-    name = car(form);
+    LVAL name = car(form);
     if (!symbolp(name))
+    {
         xlerror("bad class name in defclass", form);
+    }
 
     if (atom(cdr(form)))
+    {
         xlerror("missing superclass in defclass", form);
+    }
 
-    super = car(cdr(form));
+    LVAL super = car(cdr(form));
     if (!listp(super) || (super != NIL && !symbolp(car(super))))
+    {
         xlerror("bad superclass in defclass", form);
+    }
 
     if (atom(cdr(cdr(form))))
+    {
         xlerror("missing slot descriptions in defclass", form);
+    }
 
-    slots = car(cdr(cdr(form)));
+    LVAL slots = car(cdr(cdr(form)));
     if (!listp(slots))
+    {
         xlerror("bad slot descriptions in defclass", form);
+    }
 
-    classopts = cdr(cdr(cdr(form)));
+    LVAL classopts = cdr(cdr(cdr(form)));
 
     check_slot_options(slots);
     check_class_options(classopts);
 
     putcbyte(OP_SAVE);
-    nxt = putcword(0);
+    int nxt = putcword(0);
 
-    nargs = 0;
-
+    int nargs = 0;
     nargs += do_keywords(slots, classopts);
     nargs += do_slots(slots);
     nargs += do_superclass(super);
@@ -3874,10 +3977,15 @@ static void do_defclass(LVAL form, int cont)
     putcbyte(nargs);
     fixup(nxt);
 
+    int lev, off;
     if (findvariable(name, &lev, &off))
+    {
         cd_evariable(OP_ESET, lev, off);
+    }
     else
+    {
         cd_variable(OP_GSET, name);
+    }
 
     do_constructor(name, classopts);
     do_predicate(name, classopts);
@@ -3892,53 +4000,62 @@ static void do_defclass(LVAL form, int cont)
 
 static LVAL defcondition_slot(LVAL name, LVAL value)
 {
-    LVAL slot, key;
-    char keyname[STRMAX + 1];
-    int len;
-
     if (!symbolp(name))
+    {
         xlerror("condition slot not a symbol", name);
+    }
 
+    char keyname[STRMAX + 1];
     strcpy(keyname, getstring(getpname(name)));
-    len = strlen(keyname);
+
+    int len = strlen(keyname);
     if (keyname[len - 1] != ':')
     {
         keyname[len] = ':';
         keyname[len + 1] = 0;
     }
-    key = xlenter_keyword(keyname);
+    LVAL key = xlenter_keyword(keyname);
 
-    slot = cons(name,
+    LVAL slot = cons(name,
     cons(s_keyword, cons(key, cons(s_default, cons(value, NIL)))));
+
     return slot;
 }
 
 static void do_defcondition(LVAL form, int cont)
 {
-    LVAL s_condition, name, super, def;
-
-    s_condition = xlenter_module("<condition>", get_module("condcl"));
+    LVAL s_condition = xlenter_module("<condition>", get_module("condcl"));
     if (atom(form))
+    {
         xlfail("missing body in defcondition", s_syntax_error);
-    name = car(form);
+    }
+    LVAL name = car(form);
 
     if (atom(cdr(form)))
+    {
         xlerror("missing supercondition in defcondition", name);
-    super = car(cdr(form));
+    }
+    LVAL super = car(cdr(form));
     if (!symbolp(super) && (super != NIL))
+    {
         xlerror("bad supercondition in defcondition", super);
+    }
 
     cpush(form);
 
-    def = cons(s_defclass, NIL);
+    LVAL def = cons(s_defclass, NIL);
     cpush(def);
 
     rplacd(def, cons(name, NIL));
     def = cdr(def);
     if (super == NIL)
+    {
         rplacd(def, cons(cons(s_condition, NIL), NIL));
+    }
     else
+    {
         rplacd(def, cons(cons(super, NIL), NIL));
+    }
     def = cdr(def);
 
     rplacd(def, cons(NIL, NIL));
@@ -3948,7 +4065,10 @@ static void do_defcondition(LVAL form, int cont)
     while (form)
     {
         if (atom(cdr(form)))
+        {
             xlerror("malformed defclass option", car(form));
+        }
+
         if (car(def) == NIL)
         {
             rplaca(def, cons(defcondition_slot(car(form), car(cdr(form))),
@@ -3972,13 +4092,12 @@ static void do_defcondition(LVAL form, int cont)
 LVAL xmacro_error()
 {
     static char *cfn_name = "raise-macro-error";
-    LVAL msg, value;
 
-    msg = xlgastring();
-    value = xlgetarg();
+    LVAL msg = xlgastring();
+    LVAL value = xlgetarg();
     xllastarg();
-
     xlcerror(getstring(msg), value, s_macro_error);
+
     return NIL; // not reached
 }
 
@@ -3996,7 +4115,8 @@ typedef struct
     char *ot_name;
     int ot_fmt;
 } OTDEF;
-OTDEF otab[] = {
+OTDEF otab[] =
+{
     {OP_BRT, "BRT", FMT_WORD},
     {OP_BRF, "BRF", FMT_WORD},
     {OP_BR, "BR", FMT_WORD},
@@ -4036,31 +4156,28 @@ OTDEF otab[] = {
 // decode_procedure - decode the instructions in a code object
 void decode_procedure(LVAL fptr, LVAL fun)
 {
-    int len, lc;
-    LVAL code, env;
-    code = getcode(fun);
-    env = getcenv(fun);
-    len = getslength(getbcode(code));
-    for (lc = 0; lc < len;)
+    LVAL code = getcode(fun);
+    LVAL env = getcenv(fun);
+    int len = getslength(getbcode(code));
+    for (int lc = 0; lc < len;)
+    {
         lc += decode_instruction(fptr, code, lc, env);
+    }
 }
 
 // decode_instruction - decode a single bytecode instruction
 int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
 {
-    unsigned char *cp;
-    char buf[100];
-    OTDEF *op;
-    NTDEF *np;
-    int i, n = 1;
-    LVAL tmp;
-
     // get a pointer to the bytecodes for this instruction
-    cp = (unsigned char *)getstring(getbcode(code)) + lc;
+    unsigned char *cp = (unsigned char *)getstring(getbcode(code)) + lc;
 
     // show the address and opcode
+    char buf[100];
+    LVAL tmp;
     if ((tmp = getcname(code)) != NIL)
+    {
         sprintf(buf, "%s:%04x %02x ", getstring(getpname(tmp)), lc, *cp);
+    }
     else
     {
         sprintf(buf, AFMT, (OFFTYPE)code);
@@ -4072,7 +4189,9 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
     fflush(getfile(fptr));
 
     // display the operands
-    for (op = otab; op->ot_name; ++op)
+    int i, n = 1;
+    for (OTDEF *op = otab; op->ot_name; ++op)
+    {
         if (*cp == op->ot_code)
         {
             switch (op->ot_fmt)
@@ -4123,7 +4242,9 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
                     break;
                 case FMT_EOFF:
                     if ((i = cp[1]) == 0)
+                    {
                         tmp = getvnames(code);
+                    }
                     else
                     {
                         for (tmp = env; i > 1; --i)
@@ -4131,7 +4252,9 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
                         tmp = getelement(car(tmp), 0);
                     }
                     for (i = cp[2]; i > 1 && tmp; --i)
+                    {
                         tmp = cdr(tmp);
+                    }
                     sprintf(buf, "%02x %02x %s %02x %02x ; ", cp[1], cp[2],
                     op->ot_name, cp[1], cp[2]);
                     xlputstr(fptr, buf);
@@ -4143,7 +4266,9 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
                         fflush(getfile(fptr));
                     }
                     else
+                    {
                         xlprin1(car(tmp), fptr);
+                    }
                     fflush(getfile(fptr));
                     xlterpri(fptr);
                     n += 2;
@@ -4176,9 +4301,11 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
             }
             return (n);
         }
+    }
 
     // check for an integrable function
-    for (np = ntab; np->nt_name; ++np)
+    for (NTDEF *np = ntab; np->nt_name; ++np)
+    {
         if (*cp == np->nt_code)
         {
             sprintf(buf, "      %s\n", np->nt_name);
@@ -4186,6 +4313,7 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
             fflush(getfile(fptr));
             return (n);
         }
+    }
 
     // unknown opcode
     sprintf(buf, "      <UNKNOWN>\n");
@@ -4193,3 +4321,6 @@ int decode_instruction(LVAL fptr, LVAL code, int lc, LVAL env)
     fflush(getfile(fptr));
     return (n);
 }
+
+
+/** ------------------------------------------------------------------------ **/
