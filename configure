@@ -125,7 +125,7 @@ if (test -z "$CC") then
 
     if (test "$gcc" = gcc) then
         CC=gcc
-        CFLAGS="-std=gnu99 -Wall -Wno-sequence-point -fPIC -O0 -ggdb3"
+        CFLAGS="-std=gnu99 -Wall -Wno-sequence-point -fPIC"
     else
         CC=cc
         CFLAGS=
