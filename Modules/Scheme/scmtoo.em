@@ -8,8 +8,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule scmtoo
   (import (scheme scheme0 scmtoo0
-           (only (main *redefine-imported-bindings*
-                  *first-year-students*) eval)
+           (only (main *redefine-imported-bindings*) eval)
            (only (*argv*
                   push-dynamic-variable
                   dynamic-variable-ref
@@ -19,7 +18,6 @@
            dynamic-variable-ref
            pop-dynamic-variables))
 
-  (setq *first-year-students* t)
   (main *argv*)
 
 ;;;-----------------------------------------------------------------------------

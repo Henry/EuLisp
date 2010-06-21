@@ -33,17 +33,15 @@
 
 *** Installation of the scmtoo Scheme interpreter
     + Run 'make scmtoo' in directory /Modules/Scheme/; this creates Scheme image.
-    + Run 'Bin.${ARCH}/scmtoo.sh'.
+    + Run 'Bin.${ARCH}/scmtoo'.
 
 *** Installation of the scm2tk Scheme-Tk Interpreter
     + Edit the /Modules/Scheme/Makefile/ (if necessary).
     + Run 'make scm2tk'.
-    + Make sure your ~LD_LIBRARY_PATH~ environment variable is set correctly
-      (you could edit Bin.${ARCH}/scm2tk.sh to add ~EUL_TCL_LIB_PATH~
-      ~EUL_TK_LIB_PATH~ and ~EUL_X_LIB_PATH~).
+    + Make sure your ~LD_LIBRARY_PATH~ environment variable is set correctly.
 
 ***** Example test for scm2tk
-      Run 'Bin.${ARCH}/scm2tk.sh' and type
+      Run 'Bin.${ARCH}/scm2tk' and type
       #+BEGIN_SRC scheme
         (define (foo b x)
           (display b)
@@ -65,11 +63,7 @@
     "Structure and Interpretation of Computer Programs" \\
     The MIT Press, 1996. \\
 
-    This book is based on IEEE (which is not R4RS or R5RS).  For better
-    debugging and simpler interaction there is a flag called
-    =*first-year-students*= that triggers inlining the rep and other
-    things. This flag can be toggled in scmtoo or scm2tk with
-    =first-year-students:=.
+    This book is based on IEEE (which is not R4RS or R5RS).
 
 *** EuLisp-Tk Documentation
     See http://www.cs.bath.ac.uk/~jap/ma5jg/youtoo-Tk-docs/ for documentation

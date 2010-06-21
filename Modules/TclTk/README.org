@@ -41,7 +41,7 @@
     to CLIBS in EuLysses/.eulrc if necessary.
   + Add '-I<EUL_X_INCLUDE_DIR> -I<EUL_TCL_INCLUDE_DIR> -I<EUL_TK_INCLUDE_DIR>"
     to CFLAGS in EuLysses.eulrc if necessary.
-  + Test with 'cd /Test/; /Bin.${ARCH}/youtoo.sh/ tk_graph_editor -l level1 -l
+  + Test with 'cd /Test/; /Bin.${ARCH}/youtoo/ tk_graph_editor -l level1 -l
     tcltk'
 
 *** Installation of the you2tk' youtoo/Tk Interpreter
@@ -51,7 +51,7 @@
       <EUL_X_LIB_DIR>)
 
 ***** Example test for you2tk
-      Run 'Bin.${ARCH}/you2tk.sh' and type
+      Run 'Bin.${ARCH}/you2tk' and type
       #+BEGIN_SRC lisp
       (defun foo (b x)
         (print b)

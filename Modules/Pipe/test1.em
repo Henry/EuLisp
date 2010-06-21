@@ -14,7 +14,7 @@
     (syntax (macros)
      import (level1 pipe))
 
-  (let ((x (make <pipe> process: "../../Bin.x86_64/youtoo.sh"))
+  (let ((x (make <pipe> process: "../../Bin.x86_64/youtoo"))
         (str ""))
     (pprint x)
     (system "ps -a")

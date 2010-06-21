@@ -150,7 +150,7 @@ Run 'make test' in directory <i>Modules/Scheme</i>; this tests libscheme.{i,a}.
 Run 'make scmtoo' in directory <i>Modules/Scheme</i>; this creates Scheme image.
 </li>
 <li>
-Run 'Bin.${ARCH}/scmtoo.sh'.
+Run 'Bin.${ARCH}/scmtoo'.
 
 </li>
 </ul>
@@ -164,13 +164,11 @@ Edit the <i>Modules/Scheme/Makefile</i> (if necessary).
 Run 'make scm2tk'.
 </li>
 <li>
-Make sure your <code>LD_LIBRARY_PATH</code> environment variable is set correctly
-(you could edit Bin.${ARCH}/scm2tk.sh to add <code>EUL_TCL_LIB_PATH</code>
-<code>EUL_TK_LIB_PATH</code> and <code>EUL_X_LIB_PATH</code>).
+Make sure your <code>LD_LIBRARY_PATH</code> environment variable is set correctly.
 
 </li>
 <li id="sec-4.2.1">Example test for scm2tk <br/>
-Run 'Bin.${ARCH}/scm2tk.sh' and type
+Run 'Bin.${ARCH}/scm2tk' and type
 
 
 
@@ -210,11 +208,7 @@ Harold Abelson and Gerald Jay Sussman and Julie Sussman <br/>
 The MIT Press, 1996. <br/>
 </p>
 <p>
-This book is based on IEEE (which is not R4RS or R5RS).  For better
-debugging and simpler interaction there is a flag called
-<code>*first-year-students*</code> that triggers inlining the rep and other
-things. This flag can be toggled in scmtoo or scm2tk with
-<code>first-year-students:</code>.
+This book is based on IEEE (which is not R4RS or R5RS).
 </p>
 </li>
 <li id="sec-5.2">EuLisp-Tk Documentation <br/>

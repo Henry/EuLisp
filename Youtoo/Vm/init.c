@@ -39,6 +39,51 @@ int EUL_INITIALIZE(int argc, char **argv)
         return 0;
     }
 
+    // Set default environment variables if not already set
+    char* default_eul_dir = EUL_DIR;
+    char* default_eul_arch = EUL_ARCH;
+
+    if (!getenv("EUL_DIR"))
+    {
+        setenv("EUL_DIR", default_eul_dir, 1);
+    }
+    else
+    {
+        default_eul_dir = getenv("EUL_DIR");
+    }
+
+    if (!getenv("EUL_ARCH"))
+    {
+        setenv("EUL_ARCH", default_eul_arch, 1);
+    }
+    else
+    {
+        default_eul_arch = getenv("EUL_ARCH");
+    }
+
+    char *default_load_path = malloc
+    (
+        strlen(default_eul_dir)
+      + strlen(default_eul_arch)
+      + 10
+    );
+    strcpy(default_load_path, ".:");
+    strcat(default_load_path, default_eul_dir);
+    strcat(default_load_path, "/Lib.");
+    strcat(default_load_path, default_eul_arch);
+
+    if (!getenv("EUL_LOAD_PATH"))
+    {
+        setenv("EUL_LOAD_PATH", default_load_path, 1);
+    }
+
+    if (!getenv("EUL_LIBRARY_LOAD_PATH"))
+    {
+        setenv("EUL_LIBRARY_LOAD_PATH", default_load_path, 1);
+    }
+
+    free(default_load_path);
+
     eul_allocate_int(eul_argc, argc);
     eul_allocate_string_vector(eul_argv, argc, argv);
 

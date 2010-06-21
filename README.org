@@ -120,20 +120,20 @@
     /make shared/ \\
     and add the directory /.../EuLisp/Lib.${ARCH}/ to the environment variable
     ~$LD_LIBRARY_PATH~.
-  + You should now be able to run the script \\
-    /Bin.${ARCH}/youtoo.sh/ \\
+  + You should now be able to run the =youtoo= executable \\
+    /Bin.${ARCH}/youtoo/ \\
     (see next section).
 
 * Getting Started with Youtoo
   + Run \\
-    /Bin.${ARCH}/youtoo.sh/ -help \\
+    /Bin.${ARCH}/youtoo/ -help \\
     to see the compiler options.
   + In directory /Examples/Misc/ run \\
-    /Bin.${ARCH}/youtoo.sh fact -l level1/ \\
+    /Bin.${ARCH}/youtoo fact -l level1/ \\
     to compile module fact into a stand-alone
     executable. With shared libraries the executable should be less the 40K.
   + Run \\
-    /Bin.${ARCH}/youtoo.sh/ \\
+    /Bin.${ARCH}/youtoo/ \\
     without options to start the Youtoo interpreter. The read-eval-print loop
     provides extra commands (type /help:/).
   + Further information about running [[http://henry.github.com/EuLisp/Youtoo/README.org][Youtoo]].

@@ -153,11 +153,15 @@
     definition, in particular =e= and =g= formatting of floating-point numbers
     is missing.  =format= is complete in EuXLisp and it may be possible to reuse
     some of this functionality.
-*** TODO Import level0 into level1 to avoid additional library
-*** TODO Include default environment variables directly into =youtoo=
+*** DONE Enable level0 modules to be loaded interactively
+    CLOSED: [2010-06-21 Mon 14:32]
+    into a level1 environment by creating a dummy level0 which is a copy of the
+    default env
+*** DONE Include default environment variables directly into =youtoo=
+    CLOSED: [2010-06-21 Mon 17:12]
     to avoid the need for the start-up script to set them.
 *** TODO Add the =-m= load module option
-    compatible with the equivalent option added to EuXLisp.
+    compatible with the equivalent option added to EuXLisp.|
 * EuXLisp
 *** TODO Add =reverse!= method for =<string>=
 *** TODO Add =slice= generic function and methods

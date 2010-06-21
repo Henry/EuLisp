@@ -293,9 +293,10 @@ AIX)
 esac
 
 ###-----------------------------------------------------------------------------
-### Youtoo version CFLAG
+### Youtoo directory and architecture CFLAGS
 ###-----------------------------------------------------------------------------
-EUL_VERSION_OP=-DEUL_VERSION='\"'$EUL_VERSION'\"'
+EUL_DIR_OP=-DEUL_DIR='\"'$EUL_DIR'\"'
+EUL_ARCH_OP=-DEUL_ARCH='\"'$ARCH'\"'
 
 ###-----------------------------------------------------------------------------
 ### Set word-length option
@@ -351,7 +352,7 @@ echo ";;; --------------------------------------------------------------------" 
 echo >> $name_rc
 echo \( >> $name_rc
 echo \(CC \. \"${CC}\"\) >> $name_rc
-echo \(CFLAGS \. \"${WORD_LEN_OP} ${EUL_VERSION_OP} ${CFLAGS} \"\) >> $name_rc
+echo \(CFLAGS \. \"${WORD_LEN_OP} ${CFLAGS} \"\) >> $name_rc
 echo \(CLIBS \. \"${CLIBS}\"\) >> $name_rc
 echo \(AR \. \"${AR}\"\) >> $name_rc
 echo \(RANLIB \. \"${RANLIB}\"\) >> $name_rc
@@ -373,7 +374,7 @@ echo "###                      EuLisp System 'youtoo'" >> $name
 echo "###---------------------------------------------------------------------" >> $name
 echo >> $name
 echo CC = ${CC} >> $name
-echo "CFLAGS = ${WORD_LEN_OP} ${EUL_VERSION_OP} ${CFLAGS}" >> $name
+echo "CFLAGS = ${WORD_LEN_OP} ${EUL_DIR_OP} ${EUL_ARCH_OP} ${CFLAGS}" >> $name
 echo 'ARCH_DIR = platforms/$(ARCH)' >> $name
 echo '.PRECIOUS: %/.' >> $name
 echo '%/.:' >> $name
@@ -395,7 +396,7 @@ echo EUL_BOOT_DIR = ${EUL_BOOT_DIR} >> $name
 echo EUL_BIN_DIR = ${EUL_BIN_DIR} >> $name
 echo EUL_LIB_DIR = ${EUL_LIB_DIR} >> $name
 echo U2_DIR = ${EUL_DIR}/Youtoo >> $name
-echo U2 = ${EUL_BIN_DIR}/youtoo.sh >> $name
+echo U2 = ${EUL_BIN_DIR}/youtoo >> $name
 echo U2_BOOT = ${EUL_BOOT_BIN_DIR}/youtoo.sh >> $name
 echo EUL_GC_DIR = ${EUL_GC_DIR} >> $name
 echo EUL_GC_CFLAGS = ${EUL_GC_CFLAGS} >> $name

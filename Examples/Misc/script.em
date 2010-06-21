@@ -1,4 +1,4 @@
-#!../../Bin.x86_64/youtoo.sh --script
+#!../../Bin.x86_64/youtoo --script
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 ;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'youtoo'
