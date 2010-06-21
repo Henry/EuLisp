@@ -9,6 +9,7 @@
 
 
 /* Imported modules */
+extern void initialize_module_level0();
 extern void initialize_module_level1();
 extern void initialize_module_math();
 extern void initialize_module_eval();
@@ -20,6 +21,7 @@ extern LispRef i_aux0_bindings[];
 extern LispRef eval_bindings[];
 extern LispRef math_bindings[];
 extern LispRef level1_bindings[];
+extern LispRef level0_bindings[];
 
 /* Module bindings with size 2 */
 LispRef youtoo_bindings[2];
@@ -33,6 +35,7 @@ static int is_initialized = 0;
 void initialize_module_youtoo()
 {
   if (is_initialized) return;
+  initialize_module_level0();
   initialize_module_level1();
   initialize_module_math();
   initialize_module_eval();
@@ -45,8 +48,8 @@ void initialize_module_youtoo()
   LispRef G002;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 32 is_init: 1 index: 0 binding: initialize-youtoo */
-  static const void *G001[] = {I(87,25,00,00),B(youtoo ,1),I(24,00,00,00),B(macros ,1),I(3e,0b,24,00),B(macros ,0),I(3c,00,21,01),I(24,00,00,00),B(i_aux0 ,1),I(3e,0b,24,00),B(i_aux0 ,0),I(3c,00,21,01),I(24,00,00,00),B(eval ,1),I(3e,0b,24,00),B(eval ,0),I(3c,00,21,01),I(24,00,00,00),B(math ,1),I(3e,0b,24,00),B(math ,0),I(3c,00,21,01),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(24,00,00,00),B(boot1 ,25),I(24,00,00,00),B(eval ,3),I(3d,01,00,ac)};
+  /* Byte-vector with size: 37 is_init: 1 index: 0 binding: initialize-youtoo */
+  static const void *G001[] = {I(87,25,00,00),B(youtoo ,1),I(24,00,00,00),B(macros ,1),I(3e,0b,24,00),B(macros ,0),I(3c,00,21,01),I(24,00,00,00),B(i_aux0 ,1),I(3e,0b,24,00),B(i_aux0 ,0),I(3c,00,21,01),I(24,00,00,00),B(eval ,1),I(3e,0b,24,00),B(eval ,0),I(3c,00,21,01),I(24,00,00,00),B(math ,1),I(3e,0b,24,00),B(math ,0),I(3c,00,21,01),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(24,00,00,00),B(level0 ,1),I(3e,0b,24,00),B(level0 ,0),I(3c,00,21,01),I(24,00,00,00),B(boot1 ,25),I(24,00,00,00),B(eval ,3),I(3d,01,00,ac)};
 
 
   /* Initializations */

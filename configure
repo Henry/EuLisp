@@ -136,7 +136,7 @@ fi
 ### Set basic flags and libraries
 ###-----------------------------------------------------------------------------
 
-CLIBS="-leval -lmath -llevel1 -ltelos -lboot -leulvm -lm"
+CLIBS="-leval -lmath -llevel1 -llevel0 -ltelos -lboot -leulvm -lm"
 CFLAGS="$CFLAGS -I${U2_DIR}/include -I${U2_DIR}/Vm"
 
 ###-----------------------------------------------------------------------------
@@ -211,7 +211,7 @@ SunOS)
     if (test $THRTYPE = UI) then
         CC="cc"
         CFLAGS="$CFLAGS -DWITH_STRERROR -DWITH_UI_THREADS ${EUL_GC_INCLUDE}"
-        CLIBS="-leval -lmath -llevel1 -leulvm -lm -lnls -lnsl -lsocket -ldl -lthread"
+        CLIBS="$CLIBS -lnls -lnsl -lsocket -ldl -lthread"
         AR="ar crsuv"
         RANLIB="echo No ranlib "
     elif (test $CC = gcc) then

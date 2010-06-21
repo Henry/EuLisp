@@ -151,15 +151,21 @@
            (default-syntax-module (make-module default-syntax-module-name))
            (user-module (make-module 'user))
            (math-module (make-module 'math)) ;; is empty, bindings are in default
+           (level0-module (make-module 'level0))
            (default-lexical-env (make-module-env default-lexical-table))
            (default-syntax-env (make-module-env default-syntax-table)))
       (module-binding-vector-size! default-lexical-module ())
       (module-binding-vector-size! default-syntax-module ())
-      (module-binding-vector-size! user-module 2)
-      (module-max-binding-vector-size! user-module 1024)
       (module-external-env! default-lexical-module default-lexical-env)
       (module-external-env! default-syntax-module default-syntax-env)
+      ;; Set level0 environments to be the same as level1, i.e. the default
+      ;; This is to allow modules which import level0 to run in level1
+      (module-lexical-env! level0-module default-lexical-env)
+      (module-external-env! level0-module default-lexical-env)
+      (module-syntax-env! level0-module default-syntax-env)
       ;; Set user environments
+      (module-binding-vector-size! user-module 2)
+      (module-max-binding-vector-size! user-module 1024)
       (module-lexical-env! user-module default-lexical-env)
       (module-external-env! user-module default-lexical-env)
       (module-syntax-env! user-module default-syntax-env)
