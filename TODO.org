@@ -65,7 +65,8 @@
 *** DONE Investigate problems with the /Modules/OS/ (object serialisation) lib
     CLOSED: [2010-02-23 Tue 19:30]
 *** TODO Change the MPI interface to work with OpenMPI
-*** TODO /Comptime2/youtoo.em/ sometimes ends-up in the wrong state
+*** DONE /Comptime2/youtoo.em/ sometimes ends-up in the wrong state
+    CLOSED: [2010-06-21 Mon 22:55]
     should be
     #+BEGIN_SRC lisp
       (defmodule youtoo
@@ -94,6 +95,7 @@
       *** ERROR [nuseq][top-level]: no lexical binding subseq available
       *** ERROR [nuseq][top-level]: no lexical binding seq available
     #+END_SRC
+    This is resolved by using an external previous build of youtoo to bootstrap.
 *** DONE Split the "boot" section of /Comptime2/Makefile/
     CLOSED: [2010-02-16 Tue 15:06]
     into the two parts to make the preliminary and final executables.
