@@ -81,8 +81,10 @@ lang="en" xml:lang="en">
 <li><a href="#sec-1">1 Copyright </a></li>
 <li><a href="#sec-2">2 EuLisp index </a></li>
 <li><a href="#sec-3">3 General Description </a></li>
-<li><a href="#sec-4">4 Notes: </a></li>
-<li><a href="#sec-5">5 Installation </a></li>
+<li><a href="#sec-4">4 Original: Pattern Matching Syntactic Extensions for Scheme </a></li>
+<li><a href="#sec-5">5 Pattern Matching Syntactic Extensions for EuLisp </a></li>
+<li><a href="#sec-6">6 Notes: </a></li>
+<li><a href="#sec-7">7 Installation </a></li>
 </ul>
 </div>
 </div>
@@ -91,16 +93,15 @@ lang="en" xml:lang="en">
 <h2 id="sec-1"><span class="section-number-2">1</span> <a href="COPYING">Copyright</a> </h2>
 <div class="outline-text-2" id="text-1">
 
-<p>Youtoo is free software: you can redistribute it and/or modify it
-under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
+<p>Youtoo is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 3 of the License, or (at your option) any later
+version.
 </p>
 <p>
-Youtoo is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-for more details.
+Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 </p>
 <p>
 You should have received a copy of the GNU General Public License along with
@@ -130,8 +131,209 @@ Youtoo in the file <a href="../../COPYING">COPYING</a>.  If not, see <a href="ht
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Notes: </h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Original: Pattern Matching Syntactic Extensions for Scheme </h2>
 <div class="outline-text-2" id="text-4">
+
+<p>Version 1.18, July 17, 1995"
+</p>
+<p>
+Report bugs to wright@research.nj.nec.com.  The most recent version of
+this software can be obtained by anonymous FTP from ftp.nj.nec.com
+in file pub/wright/match.tar.Z.  Be sure to set "type binary" when
+transferring this file.
+</p>
+<p>
+Written by Andrew K. Wright, 1993 (wright@research.nj.nec.com).
+Adapted from code originally written by Bruce F. Duba, 1991.
+This package also includes a modified version of Kent Dybvig's
+define-structure (see Dybvig, R.K., The Scheme Programming Language,
+Prentice-Hall, NJ, 1987).
+</p>
+<p>
+This software is in the public domain.  Feel free to copy,
+distribute, and modify this software as desired.  No warranties
+nor guarantees of any kind apply.  Please return any improvements
+or bug fixes to wright@research.nj.nec.com so that they may be included
+in future releases.
+</p>
+<p>
+This macro package extends Scheme with several new expression forms.
+Following is a brief summary of the new forms.  See the associated
+LaTeX documentation for a full description of their functionality.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Pattern Matching Syntactic Extensions for EuLisp </h2>
+<div class="outline-text-2" id="text-5">
+
+<p>This macro package extends EuLisp with several new expression forms.
+Following is a brief summary of the new forms.
+</p>
+
+
+
+<pre class="src src-lisp">match expressions:
+exp ::= ...
+      | (match exp clause ...)
+      | (match-lambda clause ...)
+      | (match-lambda* clause ...)
+      | (match-let ((pat exp) ...) body)
+      | (match-let* ((pat exp) ...) body)
+      | (match-letrec ((pat exp) ...) body)
+      | (match-define pat exp)
+
+clause ::= (pat body) | (pat =&gt; exp)
+</pre>
+
+
+
+
+<pre class="src src-lisp">patterns:                               matches:
+
+pat ::= identifier                      anything, and binds identifier
+      | _                               anything
+      | ()                              the empty list
+      | t                               t
+      | string                          a string
+      | number                          a number
+      | character                       a character
+      | 'sexp                           an s-expression
+      | 'symbol                         a symbol (special case of s-expr)
+      | (pat_1 ... pat_n)               list of n elements
+      | (pat_1 ... pat_n . pat_{n+1})   list of n or more
+      | (pat_1 ... pat_n pat_n+1 ooo)   list of n or more, each element
+                                        of remainder must match pat_n+1
+      | #(pat_1 ... pat_n)              vector of n elements
+      | #(pat_1 ... pat_n pat_n+1 ooo)  vector of n or more, each element
+                                        of remainder must match pat_n+1
+      | #<span style="color: #0000ff;">&amp;pat</span>                           box
+      | ($ struct-name pat_1 ... pat_n) a structure
+      | (= field pat)                   a field of a structure
+      | (and pat_1 ... pat_n)           if all of pat_1 thru pat_n match
+      | (or pat_1 ... pat_n)            if any of pat_1 thru pat_n match
+      | (not pat_1 ... pat_n)           if all pat_1 thru pat_n don't match
+      | (? predicate pat_1 ... pat_n)   if predicate true and all of
+                                        pat_1 thru pat_n match
+      | (set! identifier)               anything, and binds setter
+      | (get! identifier)               anything, and binds getter
+      | `qp                             a quasi-pattern
+
+ooo ::= ...                             zero or more
+      | ___                             zero or more
+      | ..k                             k or more
+      | __k                             k or more
+
+quasi-patterns:                         matches:
+qp  ::= ()                              the empty list
+      | t                               t
+      | ()                              ()
+      | string                          a string
+      | number                          a number
+      | character                       a character
+      | identifier                      a symbol
+      | (qp_1 ... qp_n)                 list of n elements
+      | (qp_1 ... qp_n . qp_{n+1})      list of n or more
+      | (qp_1 ... qp_n qp_n+1 ooo)      list of n or more, each element
+                                        of remainder must match qp_n+1
+      | #(qp_1 ... qp_n)                vector of n elements
+      | #(qp_1 ... qp_n qp_n+1 ooo)     vector of n or more, each element
+                                        of remainder must match qp_n+1
+      | #<span style="color: #0000ff;">&amp;qp</span>                            box
+      | ,pat                            a pattern
+      | ,@pat                           a pattern
+</pre>
+
+
+
+<p>
+The names <code>(quote, quasiquote, unquote, unquote-splicing, ?, _, $, and, or,   not, set!, get!, ..., ___)</code> cannot be used as pattern variables.
+</p>
+
+
+
+<pre class="src src-lisp">structure expressions:
+exp ::= ...
+      | (define-structure (id_0 id_1 ... id_n))
+      | (define-structure (id_0 id_1 ... id_n)
+                          ((id_{n+1} exp_1) ... (id_{n+m} exp_m)))
+      | (define-const-structure (id_0 arg_1 ... arg_n))
+      | (define-const-structure (id_0 arg_1 ... arg_n)
+                                ((arg_{n+1} exp_1) ... (arg_{n+m} exp_m)))
+
+arg ::= id | (! id) | (@ id)
+</pre>
+
+
+
+<p>
+<code>match:error-control</code> controls what code is generated for failed matches.<br/>
+Possible values:
+</p><ul>
+<li>
+'<code>unspecified</code> - do nothing, ie., evaluate <code>(cond [() ()])</code>
+</li>
+<li>
+'<code>fail</code> - call match:error, or die at <code>car</code> or <code>cdr</code>
+</li>
+<li>
+'<code>error</code> - call match:error with the unmatched value
+</li>
+<li>
+'<code>match</code> - call match:error with the unmatched value <span style="text-decoration:underline;">and</span>
+the quoted match expression
+
+</li>
+</ul>
+
+<p><code>match:error-control</code> is set by calling <code>match:set-error-control</code> with
+the new value.
+</p>
+<p>
+<code>match:error</code> is called for a failed match.
+<code>match:error</code> is set by calling <code>match:set-error</code> with the new value.
+</p>
+<p>
+<code>match:structure-control</code> controls the uniqueness of structures.<br/>
+Possible values:
+</p><ul>
+<li>
+'<code>vector</code> - (default) structures are vectors with a symbol in position 0
+</li>
+<li>
+'<code>disjoint</code> - structures are fully disjoint from all other values
+
+</li>
+</ul>
+
+<p><code>match:structure-control</code> is set by calling <code>match:set-structure-control</code>
+with the new value.
+</p>
+<p>
+<code>match:runtime-structures</code> controls whether local structure declarations
+generate new structures each time they are reached.<br/>
+Possible values:
+</p><ul>
+<li>
+<code>t</code> - (default) each runtime occurrence generates a new structure
+</li>
+<li>
+<code>()</code> - each lexical occurrence generates a new structure
+
+</li>
+</ul>
+
+<p>End of user visible/modifiable stuff.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Notes: </h2>
+<div class="outline-text-2" id="text-6">
 
 <ul>
 <li>
@@ -152,9 +354,9 @@ Use of modified vector-ref &ndash; should original be changed?
 
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Installation </h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Installation </h2>
+<div class="outline-text-2" id="text-7">
 
 <ul>
 <li>

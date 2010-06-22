@@ -165,6 +165,7 @@
 *** TODO Add the =-m= load module option
     compatible with the equivalent option added to EuXLisp.|
 * EuXLisp
+*** TODO Finish reformatting the C source files
 *** TODO Add =reverse!= method for =<string>=
 *** TODO Add =slice= generic function and methods
 *** TODO Add =slice= method for <vector>

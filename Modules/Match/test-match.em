@@ -1,6 +1,6 @@
 (defmodule test-match
-  (syntax (macros match test-match-macros)
-   import (level1 match-support))
+    (syntax ((except (match-let) macros) match test-match-macros)
+     import (level1 match-support))
 
   (defun f1 (l)
     (match l
@@ -22,14 +22,14 @@
      (1 1)
      (n (* n (fact (- n 1))))))
 
-  (defconstant read
+  (defconstant match-read
     (match-lambda*
      (()
-      '(read default-port default-eof-object))
+      '(match-read default-port default-eof-object))
      ((port)
-      `(read ,port default-eof-object))
+      `(match-read ,port default-eof-object))
      ((port eof-object)
-      `(read ,port ,eof-object))))
+      `(match-read ,port ,eof-object))))
 
   (defun main ()
     (print-test (f1 '()))
@@ -46,9 +46,9 @@
     (print-test (f1 #(1 2 3 4 5)))
     (print-test (f1 #(#(3 4) 1 2)))
     (print-test (f1  (fact 6)))
-    (print-test (f1  (read)))
-    (print-test (f1  (read 'port)))
-    (print-test (f1  (read 'port 'eof-object)))
+    (print-test (f1  (match-read)))
+    (print-test (f1  (match-read 'port)))
+    (print-test (f1  (match-read 'port 'eof-object)))
     (print-test (f1 (match '(let ((a 1)
                                   (b 2)
                                   (c 3))
