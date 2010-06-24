@@ -37,152 +37,152 @@ void initialize_module_collect()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_1662, G001661, sym_1658, sym_1656, sym_1655, sym_1654, sym_1653, sym_1652, sym_1651, sym_1650, sym_1649, sym_1648, sym_1647, sym_1646, sym_1645, sym_1644, sym_1643, sym_1642, sym_1641, sym_1640, sym_1639, sym_1638, sym_1637, sym_1636, sym_1635, sym_1634, sym_1633, sym_1632, sym_1631, sym_1630, sym_1629, sym_1628, sym_1627, sym_1626, sym_1625, sym_1624, key_1623, key_1621, sym_1619, key_1618, key_1617, key_1616, key_1615, sym_1614, key_1613, G001612, G001610, G001608, G001606, G001604, G001602, G001600, G001598, G001596, G001594, G001592, G001590, G001588, G001586, G001584, sym_1582, G001581, G001579, G001576, G001574;
+  LispRef sym_382, G00381, sym_378, sym_376, sym_375, sym_374, sym_373, sym_372, sym_371, sym_370, sym_369, sym_368, sym_367, sym_366, sym_365, sym_364, sym_363, sym_362, sym_361, sym_360, sym_359, sym_358, sym_357, sym_356, sym_355, sym_354, sym_353, sym_352, sym_351, sym_350, sym_349, sym_348, sym_347, sym_346, sym_345, sym_344, key_343, key_341, sym_339, key_338, key_337, key_336, key_335, sym_334, key_333, G00332, G00330, G00328, G00326, G00324, G00322, G00320, G00318, G00316, G00314, G00312, G00310, G00308, G00306, G00304, sym_302, G00301, G00299, G00296, G00294;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 6 is_init: 0 index: 29 binding: (method-find) */
-  static const void *G001573[] = {I(43,fd,24,00),B(collect ,13),I(1f,03,1f,03),I(1f,03,24,00),B(boot ,9),I(3d,04,03,00)};
+  static const void *G00293[] = {I(43,fd,24,00),B(collect ,13),I(1f,03,1f,03),I(1f,03,24,00),B(boot ,9),I(3d,04,03,00)};
 
-  eul_allocate_static_string(str_1577, "fill not yet implemented", 24);
+  eul_allocate_static_string(str_297, "fill not yet implemented", 24);
   /* Byte-vector with size: 5 is_init: 0 index: 31 binding: (method-fill) */
-  static const void *G001575[] = {I(43,fd,23,00),B(collect ,30),I(24,00,00,00),B(boot ,22),I(3d,01,03,00)};
+  static const void *G00295[] = {I(43,fd,23,00),B(collect ,30),I(24,00,00,00),B(boot ,22),I(3d,01,03,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 32 binding: anonymous */
-  static const void *G001578[] = {I(aa,1b,47,00),I(00,24,00,00),B(collect ,22),I(3d,02,01,00)};
+  static const void *G00298[] = {I(aa,1b,47,00),I(00,24,00,00),B(collect ,22),I(3d,02,01,00)};
 
   /* Byte-vector with size: 24 is_init: 0 index: 34 binding: anonymous */
-  static const void *G001580[] = {I(aa,46,01,1b),I(48,00,00,47),I(00,00,47,01),I(03,1a,1b,34),I(00,00,00,4d),I(23,00,00,00),B(collect ,33),I(23,00,00,00),B(collect ,32),I(3b,01,47,01),I(02,24,00,00),B(collect ,2),I(3c,02,47,01),I(00,1c,24,00),B(boot ,9),I(3c,02,1b,34),I(00,00,00,15),I(47,00,00,2b),I(47,01,01,3d),I(01,04,32,00),I(00,00,00,07),I(86,22,02,32),I(00,00,00,06),I(87,45,02,00)};
+  static const void *G00300[] = {I(aa,46,01,1b),I(48,00,00,47),I(00,00,47,01),I(03,1a,1b,34),I(00,00,00,4d),I(23,00,00,00),B(collect ,33),I(23,00,00,00),B(collect ,32),I(3b,01,47,01),I(02,24,00,00),B(collect ,2),I(3c,02,47,01),I(00,1c,24,00),B(boot ,9),I(3c,02,1b,34),I(00,00,00,15),I(47,00,00,2b),I(47,01,01,3d),I(01,04,32,00),I(00,00,00,07),I(86,22,02,32),I(00,00,00,06),I(87,45,02,00)};
 
   /* Byte-vector with size: 21 is_init: 0 index: 35 binding: (method-all?) */
-  static const void *G001583[] = {I(43,fd,46,05),I(1d,48,00,00),I(0f,1b,48,00),I(02,24,00,00),B(collect ,9),I(47,00,02,24),B(collect ,2),I(3c,02,24,00),B(compare ,10),I(1c,24,00,00),B(boot ,9),I(3c,02,1b,48),I(00,03,86,1b),I(48,00,01,23),B(collect ,33),I(23,00,00,00),B(collect ,34),I(3b,01,48,00),I(01,82,47,00),I(01,3d,01,05),I(45,05,00,00)};
+  static const void *G00303[] = {I(43,fd,46,05),I(1d,48,00,00),I(0f,1b,48,00),I(02,24,00,00),B(collect ,9),I(47,00,02,24),B(collect ,2),I(3c,02,24,00),B(compare ,10),I(1c,24,00,00),B(boot ,9),I(3c,02,1b,48),I(00,03,86,1b),I(48,00,01,23),B(collect ,33),I(23,00,00,00),B(collect ,34),I(3b,01,48,00),I(01,82,47,00),I(01,3d,01,05),I(45,05,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 36 binding: anonymous */
-  static const void *G001585[] = {I(aa,1b,47,00),I(00,24,00,00),B(collect ,22),I(3d,02,01,00)};
+  static const void *G00305[] = {I(aa,1b,47,00),I(00,24,00,00),B(collect ,22),I(3d,02,01,00)};
 
   /* Byte-vector with size: 25 is_init: 0 index: 37 binding: anonymous */
-  static const void *G001587[] = {I(aa,46,01,1b),I(48,00,00,47),I(00,00,47,01),I(03,1a,1b,34),I(00,00,00,51),I(23,00,00,00),B(collect ,33),I(23,00,00,00),B(collect ,36),I(3b,01,47,01),I(02,24,00,00),B(collect ,2),I(3c,02,47,01),I(00,1c,24,00),B(boot ,9),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,11),I(47,00,00,2b),I(47,01,01,3d),I(01,04,22,02),I(32,00,00,00),I(00,00,00,09),I(86,45,02,00)};
+  static const void *G00307[] = {I(aa,46,01,1b),I(48,00,00,47),I(00,00,47,01),I(03,1a,1b,34),I(00,00,00,51),I(23,00,00,00),B(collect ,33),I(23,00,00,00),B(collect ,36),I(3b,01,47,01),I(02,24,00,00),B(collect ,2),I(3c,02,47,01),I(00,1c,24,00),B(boot ,9),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,11),I(47,00,00,2b),I(47,01,01,3d),I(01,04,22,02),I(32,00,00,00),I(00,00,00,09),I(86,45,02,00)};
 
   /* Byte-vector with size: 21 is_init: 0 index: 38 binding: (method-any?) */
-  static const void *G001589[] = {I(43,fd,46,05),I(1d,48,00,00),I(0f,1b,48,00),I(02,24,00,00),B(collect ,9),I(47,00,02,24),B(collect ,2),I(3c,02,24,00),B(compare ,10),I(1c,24,00,00),B(boot ,9),I(3c,02,1b,48),I(00,03,86,1b),I(48,00,01,23),B(collect ,33),I(23,00,00,00),B(collect ,37),I(3b,01,48,00),I(01,82,47,00),I(01,3d,01,05),I(45,05,00,00)};
+  static const void *G00309[] = {I(43,fd,46,05),I(1d,48,00,00),I(0f,1b,48,00),I(02,24,00,00),B(collect ,9),I(47,00,02,24),B(collect ,2),I(3c,02,24,00),B(compare ,10),I(1c,24,00,00),B(boot ,9),I(3c,02,1b,48),I(00,03,86,1b),I(48,00,01,23),B(collect ,33),I(23,00,00,00),B(collect ,37),I(3b,01,48,00),I(01,82,47,00),I(01,3d,01,05),I(45,05,00,00)};
 
   /* Byte-vector with size: 31 is_init: 0 index: 39 binding: (method-binary=) */
-  static const void *G001591[] = {I(ab,1c,04,1c),I(04,50,1b,34),I(00,00,00,71),I(1d,7b,1b,34),I(00,00,00,21),I(24,00,00,00),B(compare ,9),I(1f,04,1f,04),I(24,00,00,00),B(collect ,18),I(3d,03,04,32),I(00,00,00,44),I(1f,03,24,00),B(collect ,9),I(3c,01,1f,03),I(24,00,00,00),B(collect ,9),I(3c,01,19,1b),I(34,00,00,00),I(00,00,00,24),I(24,00,00,00),B(compare ,9),I(1f,05,1f,05),I(24,00,00,00),B(collect ,18),I(3d,03,05,32),I(00,00,00,06),I(86,22,01,22),I(01,32,00,00),I(00,00,00,08),I(86,45,03,00)};
+  static const void *G00311[] = {I(ab,1c,04,1c),I(04,50,1b,34),I(00,00,00,71),I(1d,7b,1b,34),I(00,00,00,21),I(24,00,00,00),B(compare ,9),I(1f,04,1f,04),I(24,00,00,00),B(collect ,18),I(3d,03,04,32),I(00,00,00,44),I(1f,03,24,00),B(collect ,9),I(3c,01,1f,03),I(24,00,00,00),B(collect ,9),I(3c,01,19,1b),I(34,00,00,00),I(00,00,00,24),I(24,00,00,00),B(compare ,9),I(1f,05,1f,05),I(24,00,00,00),B(collect ,18),I(3d,03,05,32),I(00,00,00,06),I(86,22,01,22),I(01,32,00,00),I(00,00,00,08),I(86,45,03,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 40 binding: (method-sequence?) */
-  static const void *G001593[] = {I(aa,87,45,01)};
+  static const void *G00313[] = {I(aa,87,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 41 binding: (method-sequence?) */
-  static const void *G001595[] = {I(aa,86,45,01)};
+  static const void *G00315[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 42 binding: (method-collectionp) */
-  static const void *G001597[] = {I(aa,87,45,01)};
+  static const void *G00317[] = {I(aa,87,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 43 binding: (method-collectionp) */
-  static const void *G001599[] = {I(aa,86,45,01)};
+  static const void *G00319[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 44 binding: (method-name) */
-  static const void *G001601[] = {I(aa,84,02,45),I(00,00,00,00)};
+  static const void *G00321[] = {I(aa,84,02,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 45 binding: (method-name) */
-  static const void *G001603[] = {I(aa,82,02,45),I(00,00,00,00)};
+  static const void *G00323[] = {I(aa,82,02,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 46 binding: (method-name) */
-  static const void *G001605[] = {I(aa,82,02,45),I(00,00,00,00)};
+  static const void *G00325[] = {I(aa,82,02,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 47 binding: (method-name) */
-  static const void *G001607[] = {I(aa,82,02,45),I(00,00,00,00)};
+  static const void *G00327[] = {I(aa,82,02,45),I(00,00,00,00)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 48 binding: (method-name) */
-  static const void *G001609[] = {I(aa,82,02,45),I(00,00,00,00)};
+  static const void *G00329[] = {I(aa,82,02,45),I(00,00,00,00)};
 
-  eul_allocate_static_cons(cons_1622, NULL, NULL);
-  eul_allocate_static_cons(cons_1620, NULL, eul_as_static(cons_1622));
-  eul_allocate_static_cons(cons_1659, NULL, NULL);
-  eul_allocate_static_cons(cons_1657, NULL, eul_as_static(cons_1659));
+  eul_allocate_static_cons(cons_342, NULL, NULL);
+  eul_allocate_static_cons(cons_340, NULL, eul_as_static(cons_342));
+  eul_allocate_static_cons(cons_379, NULL, NULL);
+  eul_allocate_static_cons(cons_377, NULL, eul_as_static(cons_379));
   /* Byte-vector with size: 1048 is_init: 0 index: 94 binding: top-level */
-  static const void *G001611[] = {I(a9,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,24),I(3c,01,24,00),B(boot1 ,24),I(3c,00,24,00),B(mop_class ,70),I(23,00,00,00),B(collect ,49),I(23,00,00,00),B(collect ,50),I(23,00,00,00),B(collect ,51),I(1f,05,23,00),B(collect ,52),I(1f,06,23,00),B(collect ,53),I(86,23,00,00),B(collect ,54),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(collect ,24),I(2a,24,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,24),I(3c,01,24,00),B(boot1 ,24),I(3c,00,24,00),B(mop_class ,70),I(23,00,00,00),B(collect ,49),I(23,00,00,00),B(collect ,55),I(23,00,00,00),B(collect ,51),I(1f,05,23,00),B(collect ,52),I(1f,06,23,00),B(collect ,53),I(23,00,00,00),B(collect ,58),I(23,00,00,00),B(collect ,54),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(collect ,7),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,59),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,8),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,60),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,23),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,61),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,11),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,62),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,3),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,04,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,63),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,25),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,64),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,14),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,65),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,26),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,66),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,18),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,67),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,6),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,68),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,21),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,69),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,16),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,70),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,2),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,71),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,13),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,72),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,5),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,73),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,22),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,74),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,28),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,75),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,15),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,76),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,20),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,77),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,9),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,78),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,27),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,79),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,12),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,80),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,17),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,81),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,10),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,82),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,19),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,04,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,83),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,4),I(2a,24,00,00),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,5),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,48),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,81),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,47),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,27),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,46),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,45),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,49),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,44),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(2a,24,00,00),B(collect ,24),I(2a,24,00,00),B(collect ,7),I(2a,24,00,00),B(collect ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,85),I(23,00,00,00),B(collect ,43),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(collect ,24),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,85),I(23,00,00,00),B(collect ,42),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,23),I(2a,24,00,00),B(collect ,11),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,11),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,86),I(23,00,00,00),B(collect ,41),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,11),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,11),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(collect ,7),I(24,00,00,00),B(boot1 ,38),I(3c,02,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,11),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,86),I(23,00,00,00),B(collect ,40),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,11),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,11),I(2a,24,00,00),B(collect ,3),I(2a,24,00,00),B(compare ,9),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(collect ,24),I(24,00,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(compare ,9),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,87),I(23,00,00,00),B(collect ,39),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(compare ,9),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,25),I(2a,24,00,00),B(collect ,14),I(2a,24,00,00),B(collect ,26),I(2a,24,00,00),B(collect ,18),I(2a,24,00,00),B(collect ,6),I(2a,24,00,00),B(collect ,21),I(2a,24,00,00),B(collect ,16),I(2a,24,00,00),B(collect ,2),I(2a,24,00,00),B(collect ,13),I(2a,24,00,00),B(collect ,5),I(2a,24,00,00),B(collect ,26),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(mop_class ,27),I(24,00,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,26),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,88),I(23,00,00,00),B(collect ,38),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,26),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,18),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(mop_class ,27),I(24,00,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,18),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,89),I(23,00,00,00),B(collect ,35),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,18),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,21),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(collect ,24),I(86,24,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,21),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,90),I(23,00,00,00),B(collect ,31),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,21),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,16),I(26,00,00,00),I(00,00,00,03),I(02,84,86,24),B(collect ,24),I(24,00,00,00),B(boot1 ,38),I(3c,03,24,00),B(boot1 ,24),I(3c,00,24,00),B(collect ,16),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,91),I(23,00,00,00),B(collect ,29),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,16),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,22),I(2a,24,00,00),B(boot1 ,40),I(24,00,00,00),B(boot1 ,40),I(3c,01,26,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,38),I(3c,04,24,00),B(boot1 ,24),I(3c,00,24,00),B(boot1 ,24),I(3c,00,23,00),B(collect ,93),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,24,00),B(collect ,22),I(1c,1f,06,3c),I(02,2a,24,00),B(collect ,22),I(24,00,00,00),B(boot1 ,40),I(3c,01,2a,24),B(collect ,28),I(2a,24,00,00),B(collect ,15),I(2a,24,00,00),B(collect ,20),I(2a,24,00,00),B(collect ,9),I(2a,24,00,00),B(collect ,27),I(2a,24,00,00),B(collect ,12),I(2a,24,00,00),B(collect ,17),I(2a,24,00,00),B(collect ,10),I(2a,24,00,00),B(collect ,19),I(2a,24,00,00),B(collect ,4),I(45,c3,00,00)};
+  static const void *G00331[] = {I(a9,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,24,00),B(boot1 ,25),I(3c,00,24,00),B(mop_class ,70),I(23,00,00,00),B(collect ,49),I(23,00,00,00),B(collect ,50),I(23,00,00,00),B(collect ,51),I(1f,05,23,00),B(collect ,52),I(1f,06,23,00),B(collect ,53),I(86,23,00,00),B(collect ,54),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(collect ,24),I(2a,24,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,25),I(3c,01,24,00),B(boot1 ,25),I(3c,00,24,00),B(mop_class ,70),I(23,00,00,00),B(collect ,49),I(23,00,00,00),B(collect ,55),I(23,00,00,00),B(collect ,51),I(1f,05,23,00),B(collect ,52),I(1f,06,23,00),B(collect ,53),I(23,00,00,00),B(collect ,58),I(23,00,00,00),B(collect ,54),I(87,24,00,00),B(mop_gf ,2),I(3c,0b,1b,89),B(collect ,7),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,59),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,8),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,60),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,23),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,61),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,11),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,62),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,3),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,63),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,25),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,64),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,14),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,65),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,26),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,66),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,18),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,67),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,6),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,68),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,21),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,69),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,16),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,70),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,2),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,71),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,13),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,72),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,5),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,73),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,22),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,74),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,28),I(2a,84,24,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,75),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,15),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,76),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,20),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,77),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,9),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,78),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,27),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,79),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,12),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,80),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,17),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,81),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,10),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,82),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,19),I(2a,26,00,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,83),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(collect ,4),I(2a,24,00,00),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,5),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,48),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,81),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,47),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,27),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,46),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,75),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,45),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,49),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,8),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,84),I(23,00,00,00),B(collect ,44),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,8),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,8),I(2a,24,00,00),B(collect ,24),I(2a,24,00,00),B(collect ,7),I(2a,24,00,00),B(collect ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,85),I(23,00,00,00),B(collect ,43),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(collect ,24),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,85),I(23,00,00,00),B(collect ,42),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,23),I(2a,24,00,00),B(collect ,11),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,11),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,86),I(23,00,00,00),B(collect ,41),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,11),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,11),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(collect ,7),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,11),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,86),I(23,00,00,00),B(collect ,40),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,11),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,11),I(2a,24,00,00),B(collect ,3),I(2a,24,00,00),B(compare ,9),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(collect ,24),I(24,00,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(compare ,9),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,87),I(23,00,00,00),B(collect ,39),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(compare ,9),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,25),I(2a,24,00,00),B(collect ,14),I(2a,24,00,00),B(collect ,26),I(2a,24,00,00),B(collect ,18),I(2a,24,00,00),B(collect ,6),I(2a,24,00,00),B(collect ,21),I(2a,24,00,00),B(collect ,16),I(2a,24,00,00),B(collect ,2),I(2a,24,00,00),B(collect ,13),I(2a,24,00,00),B(collect ,5),I(2a,24,00,00),B(collect ,26),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(mop_class ,27),I(24,00,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,26),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,88),I(23,00,00,00),B(collect ,38),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,26),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,18),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(mop_class ,27),I(24,00,00,00),B(collect ,24),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,18),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,89),I(23,00,00,00),B(collect ,35),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,18),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,21),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(collect ,24),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,21),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,90),I(23,00,00,00),B(collect ,31),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,21),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,16),I(26,00,00,00),I(00,00,00,03),I(02,84,86,24),B(collect ,24),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(collect ,16),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1f,04,23,00),B(collect ,91),I(23,00,00,00),B(collect ,29),I(3b,fd,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(collect ,16),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(collect ,22),I(2a,24,00,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,26,00),I(00,00,00,03),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(collect ,93),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,24,00),B(collect ,22),I(1c,1f,06,3c),I(02,2a,24,00),B(collect ,22),I(24,00,00,00),B(boot1 ,41),I(3c,01,2a,24),B(collect ,28),I(2a,24,00,00),B(collect ,15),I(2a,24,00,00),B(collect ,20),I(2a,24,00,00),B(collect ,9),I(2a,24,00,00),B(collect ,27),I(2a,24,00,00),B(collect ,12),I(2a,24,00,00),B(collect ,17),I(2a,24,00,00),B(collect ,10),I(2a,24,00,00),B(collect ,19),I(2a,24,00,00),B(collect ,4),I(45,c3,00,00)};
 
   /* Byte-vector with size: 72 is_init: 1 index: 0 binding: initialize-collect */
-  static const void *G001660[] = {I(87,25,00,00),B(collect ,1),I(24,00,00,00),B(compare ,1),I(3e,0b,24,00),B(compare ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(collect ,28),I(86,25,00,00),B(collect ,27),I(86,25,00,00),B(collect ,26),I(86,25,00,00),B(collect ,25),I(86,25,00,00),B(collect ,24),I(86,25,00,00),B(collect ,23),I(86,25,00,00),B(collect ,22),I(86,25,00,00),B(collect ,21),I(86,25,00,00),B(collect ,20),I(86,25,00,00),B(collect ,19),I(86,25,00,00),B(collect ,18),I(86,25,00,00),B(collect ,17),I(86,25,00,00),B(collect ,16),I(86,25,00,00),B(collect ,15),I(86,25,00,00),B(collect ,14),I(86,25,00,00),B(collect ,13),I(86,25,00,00),B(collect ,12),I(86,25,00,00),B(collect ,11),I(86,25,00,00),B(collect ,10),I(86,25,00,00),B(collect ,9),I(86,25,00,00),B(collect ,8),I(86,25,00,00),B(collect ,7),I(86,25,00,00),B(collect ,6),I(86,25,00,00),B(collect ,5),I(86,25,00,00),B(collect ,4),I(86,25,00,00),B(collect ,3),I(86,25,00,00),B(collect ,2),I(23,00,00,00),B(collect ,95),I(23,00,00,00),B(collect ,94),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G00380[] = {I(87,25,00,00),B(collect ,1),I(24,00,00,00),B(compare ,1),I(3e,0b,24,00),B(compare ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(collect ,28),I(86,25,00,00),B(collect ,27),I(86,25,00,00),B(collect ,26),I(86,25,00,00),B(collect ,25),I(86,25,00,00),B(collect ,24),I(86,25,00,00),B(collect ,23),I(86,25,00,00),B(collect ,22),I(86,25,00,00),B(collect ,21),I(86,25,00,00),B(collect ,20),I(86,25,00,00),B(collect ,19),I(86,25,00,00),B(collect ,18),I(86,25,00,00),B(collect ,17),I(86,25,00,00),B(collect ,16),I(86,25,00,00),B(collect ,15),I(86,25,00,00),B(collect ,14),I(86,25,00,00),B(collect ,13),I(86,25,00,00),B(collect ,12),I(86,25,00,00),B(collect ,11),I(86,25,00,00),B(collect ,10),I(86,25,00,00),B(collect ,9),I(86,25,00,00),B(collect ,8),I(86,25,00,00),B(collect ,7),I(86,25,00,00),B(collect ,6),I(86,25,00,00),B(collect ,5),I(86,25,00,00),B(collect ,4),I(86,25,00,00),B(collect ,3),I(86,25,00,00),B(collect ,2),I(23,00,00,00),B(collect ,95),I(23,00,00,00),B(collect ,94),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G001574,G001573);
-  object_class(str_1577) = eul_static_string_class;
-  eul_allocate_bytevector( G001576,G001575);
-  eul_allocate_bytevector( G001579,G001578);
-  eul_intern_symbol(sym_1582,"anonymous");
-  eul_allocate_bytevector( G001581,G001580);
-  eul_allocate_bytevector( G001584,G001583);
-  eul_allocate_bytevector( G001586,G001585);
-  eul_allocate_bytevector( G001588,G001587);
-  eul_allocate_bytevector( G001590,G001589);
-  eul_allocate_bytevector( G001592,G001591);
-  eul_allocate_bytevector( G001594,G001593);
-  eul_allocate_bytevector( G001596,G001595);
-  eul_allocate_bytevector( G001598,G001597);
-  eul_allocate_bytevector( G001600,G001599);
-  eul_allocate_bytevector( G001602,G001601);
-  eul_allocate_bytevector( G001604,G001603);
-  eul_allocate_bytevector( G001606,G001605);
-  eul_allocate_bytevector( G001608,G001607);
-  eul_allocate_bytevector( G001610,G001609);
-  eul_intern_keyword(key_1613,"name");
-  eul_intern_symbol(sym_1614,"collection");
-  eul_intern_keyword(key_1615,"direct-superclasses");
-  eul_intern_keyword(key_1616,"direct-slots");
-  eul_intern_keyword(key_1617,"direct-keywords");
-  eul_intern_keyword(key_1618,"abstractp");
-  eul_intern_symbol(sym_1619,"sequence");
-  eul_intern_keyword(key_1621,"size");
-  eul_intern_keyword(key_1623,"fill-value");
-  object_class(cons_1622) = eul_static_cons_class;
-  eul_car(cons_1622) = key_1623;
-  eul_cdr(cons_1622) = eul_nil;
-  object_class(cons_1620) = eul_static_cons_class;
-  eul_car(cons_1620) = key_1621;
-  eul_intern_symbol(sym_1624,"name");
-  eul_intern_symbol(sym_1625,"collectionp");
-  eul_intern_symbol(sym_1626,"sequence?");
-  eul_intern_symbol(sym_1627,"emptyp");
-  eul_intern_symbol(sym_1628,"accumulate");
-  eul_intern_symbol(sym_1629,"accumulate1");
-  eul_intern_symbol(sym_1630,"any?");
-  eul_intern_symbol(sym_1631,"all?");
-  eul_intern_symbol(sym_1632,"do");
-  eul_intern_symbol(sym_1633,"fill");
-  eul_intern_symbol(sym_1634,"find");
-  eul_intern_symbol(sym_1635,"map");
-  eul_intern_symbol(sym_1636,"member");
-  eul_intern_symbol(sym_1637,"select");
-  eul_intern_symbol(sym_1638,"element");
-  eul_intern_symbol(sym_1639,"delete");
-  eul_intern_symbol(sym_1640,"remove");
-  eul_intern_symbol(sym_1641,"reset");
-  eul_intern_symbol(sym_1642,"size");
-  eul_intern_symbol(sym_1643,"reverse");
-  eul_intern_symbol(sym_1644,"reverse!");
-  eul_intern_symbol(sym_1645,"sort");
-  eul_intern_symbol(sym_1646,"sort!");
-  eul_intern_symbol(sym_1647,"concatenate");
-  eul_intern_symbol(sym_1648,"slice");
-  eul_intern_symbol(sym_1649,"(method name)");
-  eul_intern_symbol(sym_1650,"(method collectionp)");
-  eul_intern_symbol(sym_1651,"(method sequence?)");
-  eul_intern_symbol(sym_1652,"(method binary=)");
-  eul_intern_symbol(sym_1653,"(method any?)");
-  eul_intern_symbol(sym_1654,"(method all?)");
-  eul_intern_symbol(sym_1655,"(method fill)");
-  eul_intern_symbol(sym_1656,"(method find)");
-  eul_intern_symbol(sym_1658,"setter");
-  object_class(cons_1659) = eul_static_cons_class;
-  eul_car(cons_1659) = sym_1638;
-  eul_cdr(cons_1659) = eul_nil;
-  object_class(cons_1657) = eul_static_cons_class;
-  eul_car(cons_1657) = sym_1658;
-  eul_allocate_bytevector( G001612,G001611);
-  eul_intern_symbol(sym_1662,"top-level");
-  eul_allocate_bytevector( G001661,G001660);
+  eul_allocate_bytevector( G00294,G00293);
+  object_class(str_297) = eul_static_string_class;
+  eul_allocate_bytevector( G00296,G00295);
+  eul_allocate_bytevector( G00299,G00298);
+  eul_intern_symbol(sym_302,"anonymous");
+  eul_allocate_bytevector( G00301,G00300);
+  eul_allocate_bytevector( G00304,G00303);
+  eul_allocate_bytevector( G00306,G00305);
+  eul_allocate_bytevector( G00308,G00307);
+  eul_allocate_bytevector( G00310,G00309);
+  eul_allocate_bytevector( G00312,G00311);
+  eul_allocate_bytevector( G00314,G00313);
+  eul_allocate_bytevector( G00316,G00315);
+  eul_allocate_bytevector( G00318,G00317);
+  eul_allocate_bytevector( G00320,G00319);
+  eul_allocate_bytevector( G00322,G00321);
+  eul_allocate_bytevector( G00324,G00323);
+  eul_allocate_bytevector( G00326,G00325);
+  eul_allocate_bytevector( G00328,G00327);
+  eul_allocate_bytevector( G00330,G00329);
+  eul_intern_keyword(key_333,"name");
+  eul_intern_symbol(sym_334,"collection");
+  eul_intern_keyword(key_335,"direct-superclasses");
+  eul_intern_keyword(key_336,"direct-slots");
+  eul_intern_keyword(key_337,"direct-keywords");
+  eul_intern_keyword(key_338,"abstractp");
+  eul_intern_symbol(sym_339,"sequence");
+  eul_intern_keyword(key_341,"size");
+  eul_intern_keyword(key_343,"fill-value");
+  object_class(cons_342) = eul_static_cons_class;
+  eul_car(cons_342) = key_343;
+  eul_cdr(cons_342) = eul_nil;
+  object_class(cons_340) = eul_static_cons_class;
+  eul_car(cons_340) = key_341;
+  eul_intern_symbol(sym_344,"name");
+  eul_intern_symbol(sym_345,"collectionp");
+  eul_intern_symbol(sym_346,"sequence?");
+  eul_intern_symbol(sym_347,"emptyp");
+  eul_intern_symbol(sym_348,"accumulate");
+  eul_intern_symbol(sym_349,"accumulate1");
+  eul_intern_symbol(sym_350,"any?");
+  eul_intern_symbol(sym_351,"all?");
+  eul_intern_symbol(sym_352,"do");
+  eul_intern_symbol(sym_353,"fill");
+  eul_intern_symbol(sym_354,"find");
+  eul_intern_symbol(sym_355,"map");
+  eul_intern_symbol(sym_356,"member");
+  eul_intern_symbol(sym_357,"select");
+  eul_intern_symbol(sym_358,"element");
+  eul_intern_symbol(sym_359,"delete");
+  eul_intern_symbol(sym_360,"remove");
+  eul_intern_symbol(sym_361,"reset");
+  eul_intern_symbol(sym_362,"size");
+  eul_intern_symbol(sym_363,"reverse");
+  eul_intern_symbol(sym_364,"reverse!");
+  eul_intern_symbol(sym_365,"sort");
+  eul_intern_symbol(sym_366,"sort!");
+  eul_intern_symbol(sym_367,"concatenate");
+  eul_intern_symbol(sym_368,"slice");
+  eul_intern_symbol(sym_369,"(method name)");
+  eul_intern_symbol(sym_370,"(method collectionp)");
+  eul_intern_symbol(sym_371,"(method sequence?)");
+  eul_intern_symbol(sym_372,"(method binary=)");
+  eul_intern_symbol(sym_373,"(method any?)");
+  eul_intern_symbol(sym_374,"(method all?)");
+  eul_intern_symbol(sym_375,"(method fill)");
+  eul_intern_symbol(sym_376,"(method find)");
+  eul_intern_symbol(sym_378,"setter");
+  object_class(cons_379) = eul_static_cons_class;
+  eul_car(cons_379) = sym_358;
+  eul_cdr(cons_379) = eul_nil;
+  object_class(cons_377) = eul_static_cons_class;
+  eul_car(cons_377) = sym_378;
+  eul_allocate_bytevector( G00332,G00331);
+  eul_intern_symbol(sym_382,"top-level");
+  eul_allocate_bytevector( G00381,G00380);
 
   /* Set local bindings */
   {
@@ -191,75 +191,75 @@ void initialize_module_collect()
       collect_bindings[i] = eul_nil;
   }
 
-  collect_bindings[ 29] = G001574;
-  collect_bindings[ 30] = str_1577;
-  collect_bindings[ 31] = G001576;
-  collect_bindings[ 32] = G001579;
-  collect_bindings[ 33] = sym_1582;
-  collect_bindings[ 34] = G001581;
-  collect_bindings[ 35] = G001584;
-  collect_bindings[ 36] = G001586;
-  collect_bindings[ 37] = G001588;
-  collect_bindings[ 38] = G001590;
-  collect_bindings[ 39] = G001592;
-  collect_bindings[ 40] = G001594;
-  collect_bindings[ 41] = G001596;
-  collect_bindings[ 42] = G001598;
-  collect_bindings[ 43] = G001600;
-  collect_bindings[ 44] = G001602;
-  collect_bindings[ 45] = G001604;
-  collect_bindings[ 46] = G001606;
-  collect_bindings[ 47] = G001608;
-  collect_bindings[ 48] = G001610;
-  collect_bindings[ 49] = key_1613;
-  collect_bindings[ 50] = sym_1614;
-  collect_bindings[ 51] = key_1615;
-  collect_bindings[ 52] = key_1616;
-  collect_bindings[ 53] = key_1617;
-  collect_bindings[ 54] = key_1618;
-  collect_bindings[ 55] = sym_1619;
-  collect_bindings[ 56] = key_1621;
-  collect_bindings[ 57] = key_1623;
-  collect_bindings[ 58] = cons_1620;
-  collect_bindings[ 59] = sym_1624;
-  collect_bindings[ 60] = sym_1625;
-  collect_bindings[ 61] = sym_1626;
-  collect_bindings[ 62] = sym_1627;
-  collect_bindings[ 63] = sym_1628;
-  collect_bindings[ 64] = sym_1629;
-  collect_bindings[ 65] = sym_1630;
-  collect_bindings[ 66] = sym_1631;
-  collect_bindings[ 67] = sym_1632;
-  collect_bindings[ 68] = sym_1633;
-  collect_bindings[ 69] = sym_1634;
-  collect_bindings[ 70] = sym_1635;
-  collect_bindings[ 71] = sym_1636;
-  collect_bindings[ 72] = sym_1637;
-  collect_bindings[ 73] = sym_1638;
-  collect_bindings[ 74] = sym_1639;
-  collect_bindings[ 75] = sym_1640;
-  collect_bindings[ 76] = sym_1641;
-  collect_bindings[ 77] = sym_1642;
-  collect_bindings[ 78] = sym_1643;
-  collect_bindings[ 79] = sym_1644;
-  collect_bindings[ 80] = sym_1645;
-  collect_bindings[ 81] = sym_1646;
-  collect_bindings[ 82] = sym_1647;
-  collect_bindings[ 83] = sym_1648;
-  collect_bindings[ 84] = sym_1649;
-  collect_bindings[ 85] = sym_1650;
-  collect_bindings[ 86] = sym_1651;
-  collect_bindings[ 87] = sym_1652;
-  collect_bindings[ 88] = sym_1653;
-  collect_bindings[ 89] = sym_1654;
-  collect_bindings[ 90] = sym_1655;
-  collect_bindings[ 91] = sym_1656;
-  collect_bindings[ 92] = sym_1658;
-  collect_bindings[ 93] = cons_1657;
-  collect_bindings[ 94] = G001612;
+  collect_bindings[ 29] = G00294;
+  collect_bindings[ 30] = str_297;
+  collect_bindings[ 31] = G00296;
+  collect_bindings[ 32] = G00299;
+  collect_bindings[ 33] = sym_302;
+  collect_bindings[ 34] = G00301;
+  collect_bindings[ 35] = G00304;
+  collect_bindings[ 36] = G00306;
+  collect_bindings[ 37] = G00308;
+  collect_bindings[ 38] = G00310;
+  collect_bindings[ 39] = G00312;
+  collect_bindings[ 40] = G00314;
+  collect_bindings[ 41] = G00316;
+  collect_bindings[ 42] = G00318;
+  collect_bindings[ 43] = G00320;
+  collect_bindings[ 44] = G00322;
+  collect_bindings[ 45] = G00324;
+  collect_bindings[ 46] = G00326;
+  collect_bindings[ 47] = G00328;
+  collect_bindings[ 48] = G00330;
+  collect_bindings[ 49] = key_333;
+  collect_bindings[ 50] = sym_334;
+  collect_bindings[ 51] = key_335;
+  collect_bindings[ 52] = key_336;
+  collect_bindings[ 53] = key_337;
+  collect_bindings[ 54] = key_338;
+  collect_bindings[ 55] = sym_339;
+  collect_bindings[ 56] = key_341;
+  collect_bindings[ 57] = key_343;
+  collect_bindings[ 58] = cons_340;
+  collect_bindings[ 59] = sym_344;
+  collect_bindings[ 60] = sym_345;
+  collect_bindings[ 61] = sym_346;
+  collect_bindings[ 62] = sym_347;
+  collect_bindings[ 63] = sym_348;
+  collect_bindings[ 64] = sym_349;
+  collect_bindings[ 65] = sym_350;
+  collect_bindings[ 66] = sym_351;
+  collect_bindings[ 67] = sym_352;
+  collect_bindings[ 68] = sym_353;
+  collect_bindings[ 69] = sym_354;
+  collect_bindings[ 70] = sym_355;
+  collect_bindings[ 71] = sym_356;
+  collect_bindings[ 72] = sym_357;
+  collect_bindings[ 73] = sym_358;
+  collect_bindings[ 74] = sym_359;
+  collect_bindings[ 75] = sym_360;
+  collect_bindings[ 76] = sym_361;
+  collect_bindings[ 77] = sym_362;
+  collect_bindings[ 78] = sym_363;
+  collect_bindings[ 79] = sym_364;
+  collect_bindings[ 80] = sym_365;
+  collect_bindings[ 81] = sym_366;
+  collect_bindings[ 82] = sym_367;
+  collect_bindings[ 83] = sym_368;
+  collect_bindings[ 84] = sym_369;
+  collect_bindings[ 85] = sym_370;
+  collect_bindings[ 86] = sym_371;
+  collect_bindings[ 87] = sym_372;
+  collect_bindings[ 88] = sym_373;
+  collect_bindings[ 89] = sym_374;
+  collect_bindings[ 90] = sym_375;
+  collect_bindings[ 91] = sym_376;
+  collect_bindings[ 92] = sym_378;
+  collect_bindings[ 93] = cons_377;
+  collect_bindings[ 94] = G00332;
   collect_bindings[ 1] = eul_nil;
-  collect_bindings[ 95] = sym_1662;
-  eul_allocate_lambda( collect_bindings[0], "initialize-collect", 0, G001661);
+  collect_bindings[ 95] = sym_382;
+  eul_allocate_lambda( collect_bindings[0], "initialize-collect", 0, G00381);
 
   }
 }

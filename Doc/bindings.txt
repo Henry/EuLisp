@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 21 June 2010, 18:22:22
+  Generated 24 June 2010, 17:01:53
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -23,9 +23,9 @@ youtoo Functions
   != 7 compare !=
   % 15 number %
   * 23 number *
-  *absent* 45 boot1 *absent*
-  *argc* 27 boot1 *argc*
-  *argv* 25 boot1 *argv*
+  *absent* 46 boot1 *absent*
+  *argc* 28 boot1 *argc*
+  *argv* 26 boot1 *argv*
   *backtrace-nframes* 31 boot *backtrace-nframes*
   *callback-vector* 3 callback *callback-vector*
   *current-no-dynamic-variables* 7 dynamic *current-no-dynamic-variables*
@@ -139,7 +139,7 @@ youtoo Functions
   as-proper-list 9 list as-proper-list
   as-uppercase 6 character as-uppercase
   assoc-list-ref 16 boot assoc-list-ref
-  atom? 35 boot1 atom?
+  atom? 36 boot1 atom?
   backtrace 13 boot backtrace
   binary% 6 number binary%
   binary* 12 number binary*
@@ -166,18 +166,18 @@ youtoo Functions
   cadr 20 list cadr
   call/ep 2 let-cc call/ep
   call1/cc 18 thread call1/cc
-  car 28 boot1 car
+  car 29 boot1 car
   cdaar 23 list cdaar
   cdadr 21 list cdadr
   cdar 3 list cdar
   cddar 5 list cddar
   cdddr 29 list cdddr
   cddr 12 list cddr
-  cdr 34 boot1 cdr
+  cdr 35 boot1 cdr
   ceiling 10 float ceiling
   cerror 6 condition cerror
   character-as-string 11 character character-as-string
-  character? 32 boot1 character?
+  character? 33 boot1 character?
   class-abstract? 74 mop-class class-abstract?
   class-code 19 mop-class class-code
   class-direct-subclasses 62 mop-class class-direct-subclasses
@@ -226,7 +226,7 @@ youtoo Functions
   cons-keywords 77 mop-class cons-keywords
   cons-slot-defaults 40 mop-class cons-slot-defaults
   cons-slots 46 mop-class cons-slots
-  cons? 42 boot1 cons?
+  cons? 43 boot1 cons?
   control-block-buffer 32 stream2 control-block-buffer
   control-block-buffer-cnt 47 stream2 control-block-buffer-cnt
   control-block-buffer-pos 11 stream2 control-block-buffer-pos
@@ -239,7 +239,7 @@ youtoo Functions
   cpl-subclass? 7 mop-inspect cpl-subclass?
   current-thread 22 thread current-thread
   current-thread-queue 24 thread current-thread-queue
-  dec 44 boot1 dec
+  dec 45 boot1 dec
   deep-copy 3 copy deep-copy
   delete 28 collect delete
   digit? 7 character digit?
@@ -256,18 +256,19 @@ youtoo Functions
   double? 6 float double?
   dynamic-variable-ref 3 dynamic dynamic-variable-ref
   element 22 collect element
+  else 13 boot1 else
   emptyp 3 collect emptyp
   end-of-stream 19 stream2 end-of-stream
   ensure-slot-reader 2 mop-access ensure-slot-reader
   ensure-slot-writer 6 mop-access ensure-slot-writer
   eos 6 read eos
   eos-default-value 6 stream2 eos-default-value
-  eq 21 boot1 eq
-  eql 43 boot1 eql
+  eq 22 boot1 eq
+  eql 44 boot1 eql
   error 22 boot error
   error-no-applicable-methods 15 mop-gf error-no-applicable-methods
   even? 5 integer even?
-  exit 19 boot1 exit
+  exit 20 boot1 exit
   file-control-block? 25 stream2 file-control-block?
   file-lookup 15 stream file-lookup
   file-stream? 49 stream2 file-stream?
@@ -287,7 +288,7 @@ youtoo Functions
   flush-buffer 24 stream2 flush-buffer
   fmt 2 format fmt
   format 17 mop-gf generic-format
-  format1 17 boot1 format1
+  format1 18 boot1 format1
   fprintf 20 stream fprintf
   from-stream 46 stream2 from-stream
   function-domain 16 mop-class function-domain
@@ -308,7 +309,7 @@ youtoo Functions
   generic-read 43 stream2 generic-read
   generic-write 28 stream2 generic-write
   gensym 6 symbol gensym
-  getenv 18 boot1 getenv
+  getenv 19 boot1 getenv
   gf-keywords 56 mop-class gf-keywords
   gf-reset-cache 3 mop-gf gf-reset-cache
   gf-slot-defaults 37 mop-class gf-slot-defaults
@@ -318,29 +319,29 @@ youtoo Functions
   handler? 8 handler handler?
   hash-table? 13 table1 hash-table?
   hostname 3 stream1 hostname
-  inc 20 boot1 inc
+  inc 21 boot1 inc
   init-class 3 mop-init init-class
   init-list-ref 28 boot init-list-ref
   initialize 12 mop-gf initialize
   install-callback 4 callback install-callback
-  int-binary% 31 boot1 %
-  int-binary* 33 boot1 *
-  int-binary+ 13 boot1 +
-  int-binary- 14 boot1 -
-  int-binary-mod 39 boot1 mod
+  int-binary% 32 boot1 %
+  int-binary* 34 boot1 *
+  int-binary+ 14 boot1 +
+  int-binary- 15 boot1 -
+  int-binary-mod 40 boot1 mod
   int-binary/ 12 boot1 /
-  int-binary< 41 boot1 <
+  int-binary< 42 boot1 <
   int-binary= 11 boot1 =
-  int-zero? 30 boot1 int-zero?
-  int? 29 boot1 int?
+  int-zero? 31 boot1 int-zero?
+  int? 30 boot1 int?
   integer? 4 integer integer?
   keyword-name 6 mop-class keyword-name
   keyword? 2 symbol keyword?
   lcm 22 number lcm
   lispin 13 read lispin
-  list 24 boot1 list
+  list 25 boot1 list
   list-drop 2 list list-drop
-  list-equal 47 boot1 equal
+  list-equal 48 boot1 equal
   list-ref 21 boot list-ref
   list-remove 5 boot list-remove
   list-remove-duplicates 30 boot list-remove-duplicates
@@ -360,7 +361,7 @@ youtoo Functions
   make-generic-function 16 mop-gf make-generic-function
   make-method 3 mop-meth make-method
   make-space 22 stream make-space
-  make-vector 38 boot1 make-vector
+  make-vector 39 boot1 make-vector
   map 2 collect map
   map1-list 15 boot map1-list
   map1-list-last-special 18 list map1-list-last-special
@@ -395,7 +396,7 @@ youtoo Functions
   number? 24 number number?
   object-keywords 17 mop-class object-keywords
   object-slots 12 mop-class object-slots
-  object? 37 boot1 object?
+  object? 38 boot1 object?
   odd? 3 integer odd?
   open-file-streams 14 stream2 open-file-streams
   output-condition-contents 4 condition output-condition-contents
@@ -412,7 +413,7 @@ youtoo Functions
   primitive-class-of 2 mop-prim primitive-class-of
   primitive-find-slot-position 10 mop-inspect primitive-find-slot-position
   primitive-metaclass? 9 mop-inspect primitive-metaclass?
-  primitive-prin 36 boot1 prin
+  primitive-prin 37 boot1 prin
   primitive-print 3 boot1 print
   primitive-ref 4 mop-prim primitive-ref
   primitive-slot-value 6 mop-inspect primitive-slot-value
@@ -454,7 +455,7 @@ youtoo Functions
   semaphore? 7 lock semaphore?
   sequence? 11 collect sequence?
   set-dispatch-macro-character 16 read set-dispatch-macro-character
-  setter 40 boot1 setter
+  setter 41 boot1 setter
   sf-direct-slot-defaults 43 mop-class sf-direct-slot-defaults
   sf-direct-slots 38 mop-class sf-direct-slots
   sf-slot-defaults 29 mop-class sf-slot-defaults
@@ -466,7 +467,7 @@ youtoo Functions
   simple-function-code 65 mop-class simple-function-code
   simple-function-environment 47 mop-class simple-function-environment
   simple-function? 4 boot1 simple-function?
-  simple-generic-function? 46 boot1 simple-generic-function?
+  simple-generic-function? 47 boot1 simple-generic-function?
   simple-hash-table? 6 table1 simple-hash-table?
   simple-thread? 39 thread simple-thread?
   size 9 collect size
@@ -517,18 +518,18 @@ youtoo Functions
   string-empty? 7 string string-empty?
   string-equal 8 string string-equal
   string-ref 9 boot1 string-ref
-  string-size 16 boot1 string-size
+  string-size 17 boot1 string-size
   string-stream-string-list 48 stream2 string-stream-string-list
   string-stream? 15 stream2 string-stream?
-  string? 15 boot1 string?
+  string? 16 boot1 string?
   subclass? 2 mop-inspect subclass?
   substring 6 string substring
   subvector 3 vector subvector
   swrite 4 stream swrite
   symbol-exists? 4 symbol symbol-exists?
   symbol-name 61 mop-class symbol-name
-  symbol? 22 boot1 symbol?
-  system 48 boot1 system
+  symbol? 23 boot1 symbol?
+  system 49 boot1 system
   table-comparator 8 table1 table-comparator
   table-empty? 4 table table-empty?
   table-entries 15 table1 table-entries
@@ -556,8 +557,8 @@ youtoo Functions
   thread-value 5 thread thread-value
   thread? 30 thread thread?
   ticks-per-second 3 event ticks-per-second
-  time-start 26 boot1 time-start
-  time-stop 23 boot1 time-stop
+  time-start 27 boot1 time-start
+  time-stop 24 boot1 time-stop
   to-stream 27 stream2 to-stream
   truncate 2 float truncate
   unlock 4 lock unlock

@@ -18,6 +18,7 @@
            make-vector make-vector1 vector-size vector-ref
            member1-string string-ref string-size substring tailstring
            character-as-int int-as-character
+           else
            stdout stderr setter
            *argc* *argv* getenv system exit time-start time-stop
            *absent*))
@@ -219,6 +220,11 @@
 ;;; Object?
 ;;;-----------------------------------------------------------------------------
   (defun object? (x) (eul_is_object x))
+
+;;;-----------------------------------------------------------------------------
+;;; An alias for `t' for the default `cond' clause
+;;;-----------------------------------------------------------------------------
+  (defconstant else t)
 
 ;;;-----------------------------------------------------------------------------
 ;;; The absent value

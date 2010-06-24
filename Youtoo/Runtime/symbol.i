@@ -15,7 +15,7 @@
     ((name . gensym) (pos . 6) (origin symbol . gensym))
     ((name . keyword-name) (pos . 6) (origin mop-class . keyword-name) (inline (G00761 (static-ref0) (primitive-ref))))
     ((name . <symbol>) (pos . 5) (origin mop-class . <symbol>) (class . constant))
-    ((name . symbol?) (pos . 22) (origin boot1 . symbol?) (inline (G0045 (symbolp))))
+    ((name . symbol?) (pos . 23) (origin boot1 . symbol?) (inline (G0045 (symbolp))))
    )
    local-literals (
     (top-level . 36)

@@ -5,7 +5,7 @@
    export (caaadr caadar cadaar cadadr caddar cdaadr cdadar cddaar cddadr
            cdddar cddddr
            assoc assq memq
-           boolean? else
+           boolean?
            ;; How much of this is actually necessary?
            match:error match:andmap match:syntax-err match:set-error
            match:error-control match:disjoint-predicates
@@ -49,9 +49,6 @@
 
   ;; IO
   (defconstant print-error (lambda (msg val) (error "~a ~s~%" msg val)))
-
-  ;; Constants
-  (defconstant else t)
 
   ;; Match support routines
   (deflocal match:error
