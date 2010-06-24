@@ -1,7 +1,12 @@
-// xsftab.c - built-in function table
-/*     Copyright (c) 1988, by David Michael Betz
-       All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xsftab.c
+///  Description: built-in function table
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 #include "xssymbols.h"
@@ -16,8 +21,8 @@ int csubrcnt = 17;              // number of CSUBR functions + xsubrcnt
 typedef LVAL(*FP) ();
 
 // built-in functions
-FUNDEF funtab[] = {
-
+FUNDEF funtab[] =
+{
     // functions that call eval or apply (# must match xsubrcnt)
     {"apply", (FP) xapply},
     {"call-with-current-continuation", (FP) xcallcc},
@@ -89,7 +94,6 @@ FUNDEF funtab[] = {
     // destructive list functions
     {"set-car!", xsetcar},
     {"set-cdr!", xsetcdr},
-
 
     // symbol functions
     {"bound?", xboundp},
@@ -436,13 +440,10 @@ FUNDEF funtab[] = {
     #include "osptrs.h"
 
     {0, 0}      // end of table marker
-
 };
 
 /* Notes:
-
-   (1)	This version only supports integers and reals.
-
+   (1) This version only supports integers and reals.
 */
 
 // xstdin - get the stdin stream
@@ -457,22 +458,26 @@ LVAL xstdout()
     return (getvalue(s_stdout));
 }
 
-// eq - internal 'eq?' function
+// eq - internal 'eq' function
 int eq(LVAL arg1, LVAL arg2)
 {
     #ifndef OLDSYM
     if (symbolp(arg1) && symbolp(arg2))
+    {
         return symboleq(arg1, arg2);
+    }
     #endif
     return (arg1 == arg2);
 }
 
-// eqv - internal 'eqv?' function
+// eqv - internal 'eql' function
 int eqv(LVAL arg1, LVAL arg2)
 {
     // try the eq test first
     if (arg1 == arg2)
+    {
         return (TRUE);
+    }
 
     // compare fixnums, flonums and characters
     if (!null(arg1))
@@ -494,12 +499,14 @@ int eqv(LVAL arg1, LVAL arg2)
     return (FALSE);
 }
 
-// equal - internal 'equal?' function
+// equal - internal 'equal' function
 int equal(LVAL arg1, LVAL arg2)
 {
     // try the eq test first
     if (arg1 == arg2)
+    {
         return (TRUE);
+    }
 
     // compare fixnums, flonums, characters, strings, vectors and conses
     if (!null(arg1))
@@ -536,17 +543,25 @@ int equals(LVAL arg1, LVAL arg2)
     if (fixp(arg1))
     {
         if (fixp(arg2))
+        {
             return (getfixnum(arg1) == getfixnum(arg2));
+        }
         else if (floatp(arg2))
+        {
             return (getfixnum(arg1) == getflonum(arg2));
+        }
         xlcerror("equals called with non-numeric arg", arg2, NIL);
     }
     else if (floatp(arg1))
     {
         if (fixp(arg2))
+        {
             return (getflonum(arg1) == getfixnum(arg2));
+        }
         else if (floatp(arg2))
+        {
             return (getflonum(arg1) == getflonum(arg2));
+        }
         xlcerror("equals called with non-numeric arg", arg2, NIL);
     }
     xlcerror("equals called with non-numeric arg", arg1, NIL);
@@ -556,26 +571,29 @@ int equals(LVAL arg1, LVAL arg2)
 // vectorequal - compare two vectors
 int vectorequal(LVAL v1, LVAL v2)
 {
-    int len, i;
-
     // compare the vector lengths
+    int len;
     if ((len = getsize(v1)) != getsize(v2))
+    {
         return (FALSE);
+    }
 
     // compare the vector elements
-    for (i = 0; i < len; ++i)
+    for (int i = 0; i < len; ++i)
+    {
         if (!equal(getelement(v1, i), getelement(v2, i)))
+        {
             return (FALSE);
+        }
+    }
+
     return (TRUE);
 }
 
 // xltoofew - too few arguments to this function
 LVAL xltoofew(char *cfn_name)
 {
-    LVAL name;
-
-    name = cvstring(cfn_name);
-
+    LVAL name = cvstring(cfn_name);
     xlcerror("too few arguments", name, NIL);
     return NIL; // notreached
 }
@@ -584,17 +602,13 @@ LVAL xltoofew(char *cfn_name)
 void xltoofew_int()
 {
     extern LVAL xlfun;
-
     xlinterror("too few arguments", xlfun, NIL);
 }
 
 // xltoomany - too many arguments to this function
 void xltoomany(char *cfn_name)
 {
-    LVAL name;
-
-    name = cvstring(cfn_name);
-
+    LVAL name = cvstring(cfn_name);
     xlcerror("too many arguments", name, NIL);
 }
 
@@ -602,7 +616,6 @@ void xltoomany(char *cfn_name)
 void xltoomany_int()
 {
     extern LVAL xlfun;
-
     xlinterror("too many arguments", xlfun, NIL);
 }
 
@@ -610,16 +623,15 @@ void xltoomany_int()
 // cf badargtype in xsint.c
 LVAL xlbadtype(LVAL val, char *name, char *fn)
 {
-    char buf[256];
-    LVAL cond, class;
     extern LVAL s_bad_type_error, s_unbound;
 
+    char buf[256];
     sprintf(buf, "incorrect type in %s", fn);
 
-    cond = getvalue(s_bad_type_error);
+    LVAL cond = getvalue(s_bad_type_error);
     if (cond != s_unbound)
     {
-        class = name[0] == '<' ?
+        LVAL class = name[0] == '<' ?
         getvalue(xlenter_module(name, root_module)) : cvstring(name);
         setivar(cond, 3, class);        // cf condcl.em
     }
@@ -627,3 +639,6 @@ LVAL xlbadtype(LVAL val, char *name, char *fn)
     xlcerror(buf, val, s_bad_type_error);
     return (NIL);       // never reached
 }
+
+
+///-----------------------------------------------------------------------------
