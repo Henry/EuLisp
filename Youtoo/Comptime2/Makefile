@@ -121,9 +121,11 @@ bytecode2:
 	$(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h cg-bycode1.em cg-bycode2.em > ../include/bytecode2.h
 	@echo "---- DONE."
 
+ifeq ($(MAKECMDGOALS),boot)
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) -l level1
+endif
 
 $(ARCH_DIR)/cg-exec-word-length.o: \
 		$(ARCH_DIR)/$(WORD_LENGTH)bit/cg-exec-word-length.o
