@@ -164,6 +164,9 @@
     to avoid the need for the start-up script to set them.
 *** TODO Add the =-m= load module option
     compatible with the equivalent option added to EuXLisp.|
+*** DONE Add a Scheme-style =else=
+    CLOSED: [2010-06-22 Tue 22:34]
+    for the default clause of =cond= forms.  =else= is simply an alias for =t=.
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** TODO Add =reverse!= method for =<string>=
@@ -270,6 +273,8 @@
     functions (end in !) should be considered for EuLisp.  I agree with this
     suggestion to improve consistency and readability and made the corresponding
     changes including "null" -> "null?" and "atom" -> "atom?".
+*** TODO Add a Scheme-style =else=
+    for the default clause of =cond= forms.  =else= is simply an alias for =t=.
 * Other
 *** TODO Complete emacs mode eulisp-mode.el for EuLisp
 *** DONE Include emacs eulisp-mode.el in the git repository
