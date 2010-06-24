@@ -151,7 +151,7 @@ $(EUL_LIB_DIR)/lib%.i : %.em
 		-l telos
 	@mv $(@F) $@
 
-ifeq ($(MAKECMDGOALS),boot)
+ifeq ($(findstring $(MAKECMDGOALS),boot),boot)
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \

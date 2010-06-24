@@ -14,8 +14,11 @@ include Lib.$(ARCH)/Makefile
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 
+.PHONY: default
+default: euxlisp youtoo doc
+
 .PHONY: all
-all: euxlisp youtoo doc
+all: default doc
 
 .PHONY: euxlisp
 euxlisp:
