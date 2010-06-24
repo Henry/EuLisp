@@ -67,8 +67,11 @@ $(EVAL_SHARED_LIB): $(EVAL_O)
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
 
-.PHONY: preliminary
-preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
+.PHONY: boot
+boot: static
+
+.PHONY: boot-preliminary
+boot-preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
 		libboot.i liblevel1.i libmath.i \
 		$(ARCH_DIR)/cg-exec-word-length.o
 	$(U2) $(U2FLAGS) -od $(ARCH_DIR) -c ex-aux0 op-peep0 cg-bycode0 i-aux0 sx-obj0 \
@@ -104,8 +107,8 @@ preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
 lib%.i : $(EUL_LIB_DIR)/lib%.i
 	@ln -s $(EUL_LIB_DIR)/$@ $@
 
-.PHONY: final
-final:
+.PHONY: boot-final
+boot-final:
 	@echo "---- CREATING youtoo.em module for final, proper youtoo executable"
 	@sed 	-e 's@#modules#@level0 level1 math eval i-aux0 macros@' \
 		-e 's@#which#@Final, proper executable!@' \
@@ -121,7 +124,7 @@ bytecode2:
 	$(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h cg-bycode1.em cg-bycode2.em > ../include/bytecode2.h
 	@echo "---- DONE."
 
-ifeq ($(MAKECMDGOALS),boot)
+ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) -l level1

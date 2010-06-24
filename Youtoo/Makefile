@@ -43,18 +43,18 @@ boot: $(U2_BOOT) $(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h
 	$(MAKE) -C Telos $@
 	$(MAKE) -C Runtime $@
 	@echo "-- CREATING preliminary youtoo executable source"
-	$(MAKE) -C Comptime2 preliminary
+	$(MAKE) -C Comptime2 boot-preliminary
 	@echo "-- CREATING statically linked level1 library interface file"
 	$(U2_DIR)/Tools/i2c $(ARCH)
 	${MAKE} -C Vm
 	@echo "-- LINKING preliminary youtoo executable"
 	@rm -f $(EUL_BIN_DIR)/youtoo
-	$(MAKE) -C Comptime2
+	$(MAKE) -C Comptime2 boot
 	$(MAKE) -C Youtoo
-	$(MAKE) -C Comptime2 final
+	$(MAKE) -C Comptime2 boot-final
 	@echo "-- CREATING final youtoo executable"
 	@rm -f $(EUL_BIN_DIR)/youtoo
-	$(MAKE) -C Comptime2
+	$(MAKE) -C Comptime2 boot
 	$(MAKE) -C Youtoo
 	$(MAKE) -C Comptime2 bytecode2
 	$(MAKE) -C $(EUL_BOOT_DIR)/Youtoo/Tools;

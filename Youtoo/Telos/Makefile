@@ -110,7 +110,7 @@ $(EUL_LIB_DIR)/lib%.i : %.em
 lib%.i : $(EUL_LIB_DIR)/lib%.i
 	@ln -s $(EUL_LIB_DIR)/$@ $@
 
-ifeq ($(findstring $(MAKECMDGOALS),boot),boot)
+ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
 	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
