@@ -71,6 +71,35 @@
     `(progn ,init (while ,condition ,@body ,inc)))
 
 ;;;-----------------------------------------------------------------------------
+;;; Case
+;;;-----------------------------------------------------------------------------
+  (defmacro case (keyform . clauses)
+    (let ((key (gensym))
+          (last (car (last clauses))))
+      (if (null? (eq (car last) 'else))
+          ;(ct-warning () "missing else branch in (case ... ~a)" last)
+          (format t "*** WARNING: missing else branch in (case ... ~a)" last)
+        ())
+      `(let ((,key ,keyform))
+         (cond
+           ,@(map
+               (lambda (clause)
+                 (let ((keylist (car clause))
+                       (forms (cdr clause)))
+                   (cond
+                     ((and (eq clause last) (eq keylist 'else))
+                      `(else ,@forms))
+                     ((not (list? keylist))
+                      `((eql ,key ',keylist) ,@forms))
+                     ((null? keylist)
+                      `((null? ,key) ,@forms))
+                  ((cdr keylist)
+                      `((member ,key ',keylist eql) ,@forms))
+                     (else
+                       `((eql ,key ',(car keylist)) ,@forms)))))
+               clauses)))))
+
+;;;-----------------------------------------------------------------------------
 ;;; Define condition classes
 ;;;-----------------------------------------------------------------------------
   (defmacro defcondition (name super . init-options)
@@ -111,7 +140,15 @@
            ,res))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Auxiliary function (not necessarily EuLisp)
+;;; Auxiliary functions
+;;;-----------------------------------------------------------------------------
+  (defmacro last (l . number)
+    (if (null? number)
+        `(list-drop ,l (- (list-size ,l) 1))
+      `(list-drop ,l (- (list-size ,l) ,@number))))
+
+;;;-----------------------------------------------------------------------------
+;;; Auxiliary functions (not EuLisp)
 ;;;-----------------------------------------------------------------------------
   (defmacro not (x) `(null? ,x))
 
@@ -119,11 +156,6 @@
     (if (null? number)
         `(reverse-list (list-drop (reverse-list ,list) 1))
       `(reverse-list (list-drop (reverse-list ,list) ,@number))))
-
-  (defmacro last (l . number)
-    (if (null? number)
-        `(list-drop ,l (- (list-size ,l) 1))
-      `(list-drop ,l (- (list-size ,l) ,@number))))
 
   (defmacro time (expr . stream)
     (let ((x (gensym "time"))
