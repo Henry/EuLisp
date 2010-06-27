@@ -424,6 +424,15 @@ that {\em skip\/} and {\em failure\/} are positional arguments and that {\em
 \result%
 The result is contents of index position 0 of {\em sequence}.
 
+\generic{last}
+%
+\begin{genericargs}
+    \item[sequence, \classref{sequence}] A sequence.
+\end{genericargs}
+%
+\result%
+The result is last element of {\em sequence}.
+
 \generic{key-sequence}
 %
 \begin{genericargs}
@@ -545,15 +554,6 @@ does not have natural order, the result is equal to the argument.
 \result%
 Destructively reverses the order of the elements in {\em collection\/} (see
 \genericref{reverse}) and returns it.
-
-\generic{second}
-%
-\begin{genericargs}
-    \item[sequence, \classref{sequence}] A sequence.
-\end{genericargs}
-%
-\result%
-The result is contents of index position 1 of {\em sequence}.
 
 \generic{sequence?}
 %
