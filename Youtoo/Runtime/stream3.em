@@ -33,7 +33,7 @@
       (prin-string name (string-size name) s))
     (prin-string ": " 2 s)
     (prin-address x s)
-    (prin-one-char #\> s)
+    (sprin-one-char s #\>)
     x)
 
   (defmethod generic-write ((x <null>) (s <buffered-stream>))
@@ -46,15 +46,15 @@
       (if (all? graph? str)
           (generic-prin str s)
         (progn
-          (prin-one-char #\| s)
+          (sprin-one-char s #\|)
           (generic-prin str s)
-          (prin-one-char #\| s))))
+          (sprin-one-char s #\|))))
     x)
 
   (defmethod generic-write ((x <keyword>) (s <buffered-stream>))
     (let ((name (symbol-name x)))
       (prin-string name (string-size name) s))
-    (prin-one-char #\: s)
+    (sprin-one-char s #\:)
     x)
 
   (defmethod generic-write ((x <integer>) (s <buffered-stream>))
@@ -88,7 +88,7 @@
             ((int-binary= n 1)
              (prin-string "#(" 2 s)
              (swrite s (vector-ref vec 0))
-             (prin-one-char #\) s))
+             (sprin-one-char s #\) ))
             (t
              (let ((m (int-binary- n 1))
                    (i 0))
@@ -98,36 +98,36 @@
                        (and (int-binary< i m)
                             (progn
                               (swrite s (vector-ref vec i))
-                              (prin-one-char #\  s)
+                              (sprin-one-char s #\  )
                               (setq i (int-binary+ i 1))
                               (loop)))))
                 (loop)
                 (swrite s (vector-ref vec m))
-                (prin-one-char #\) s))))))
+                (sprin-one-char s #\) ))))))
     vec)
 
   (defmethod generic-write ((l <cons>) (s <buffered-stream>))
-    (prin-one-char #\( s)
+    (sprin-one-char s #\( )
     (let ((tail (output-list-contents l generic-write s)))
       (if (null? tail) ()
         (progn
           (prin-string " . " 3 s)
           (swrite s tail))))
-    (prin-one-char #\) s)
+    (sprin-one-char s #\) )
     l)
 
   (defmethod generic-write ((c <character>) (s <buffered-stream>))
     ;; Certain characters should be interpreted
-    (prin-one-char #\# s)
-    (prin-one-char #\\\ s)
-    (prin-one-char c s)
+    (sprin-one-char s #\# )
+    (sprin-one-char s #\\\ )
+    (sprin-one-char s c)
     c)
 
   (defmethod generic-write ((x <string>) (s <buffered-stream>))
     ;; Certain characters should be interpreted
-    (prin-one-char #\" s)
+    (sprin-one-char s #\")
     (prin-string x (string-size x) s)
-    (prin-one-char #\" s)
+    (sprin-one-char s #\")
     x)
 
   (defmethod generic-write ((x <file-stream>) (s <buffered-stream>))
@@ -169,7 +169,7 @@
             ((int-binary= n 1)
              (prin-string "#(" 2 s)
              (sprin s (vector-ref vec 0))
-             (prin-one-char #\) s))
+             (sprin-one-char s #\) ))
             (t
              (let ((m (int-binary- n 1))
                    (i 0))
@@ -179,27 +179,27 @@
                        (and (int-binary< i m)
                             (progn
                               (sprin s (vector-ref vec i))
-                              (prin-one-char #\  s)
+                              (sprin-one-char s #\  )
                               (setq i (int-binary+ i 1))
                               (loop)))))
                 (loop)
                 (sprin s (vector-ref vec m))
-                (prin-one-char #\) s))))))
+                (sprin-one-char s #\) ))))))
     vec)
 
   (defmethod generic-prin ((l <cons>) (s <buffered-stream>))
-    (prin-one-char #\( s)
+    (sprin-one-char s #\( )
     (let ((tail (output-list-contents l generic-prin s)))
       (if (null? tail) ()
         (progn
           (prin-string " . " 3 s)
           (sprin s tail))))
-    (prin-one-char #\) s)
+    (sprin-one-char s #\) )
     l)
 
   (defmethod generic-prin ((c <character>) (s <buffered-stream>))
     ;    (if (graph? c)
-    (prin-one-char c s)
+    (sprin-one-char s c)
     ;      (generic-write c s))
     c)
 
@@ -219,13 +219,13 @@
   (defmethod generic-prin ((x <class>) (s <buffered-stream>))
     (let ((class-name (symbol-name (or (class-name x) 'anonymous))))
       ;         (meta-class-name (symbol-name (class-name (class-of x)))))
-      ;      (prin-one-char #\# s)
-      (prin-one-char #\< s)
+      ;      (sprin-one-char s #\#)
+      (sprin-one-char s #\<)
       ;      (prin-string meta-class-name (string-size meta-class-name) s)
-      ;      (prin-one-char #\: s)
-      ;      (prin-one-char #\  s)
+      ;      (sprin-one-char s #\:)
+      ;      (sprin-one-char s #\  )
       (prin-string class-name (string-size class-name) s)
-      (prin-one-char #\> s))
+      (sprin-one-char s #\>))
     x)
 
 ;;;-----------------------------------------------------------------------------

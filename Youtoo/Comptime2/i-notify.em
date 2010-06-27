@@ -18,8 +18,8 @@
      (if (null? var) ()
        (progn
          (apply format s str args)
-         (newline s)
-         (flush s))))
+         (snewline s)
+         (sflush s))))
 
    (defun notify0 (str . args)
      (apply basic-notify stderr *verbose* str args))

@@ -44,7 +44,7 @@
                    (binding-local-name? binding)
                    (binding-prin-string binding)))
          (module-syntax-env? module))
-        (newline stream))
+        (snewline stream))
       module))
 
   (defun binding-prin-string (binding)

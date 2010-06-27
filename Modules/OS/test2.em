@@ -86,7 +86,7 @@
        (t
         (format stderr "*** ERROR: unknown type ~a\n" type)
         (swrite os ())))
-      (flush os)
+      (sflush os)
       (disconnect os)))
   (if (< *argc* 2)
       (my-deserialize)

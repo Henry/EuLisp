@@ -33,8 +33,8 @@
         ;; Don't want interleaving messages
         (setq stderr stdout))
       (start-eulysses))
-    (flush stdout)
-    (flush stderr))
+    (sflush stdout)
+    (sflush stderr))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Check if compiler or interpreter should be invoked

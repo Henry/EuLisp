@@ -73,7 +73,7 @@
                                 (swrite s x))
                               (loop (cdr info) (cdr l)))))
                          ((eq c #\%)
-                          (prin-one-char #\\n s)
+                          (sprin-one-char s #\\n)
                           (loop (cdr info) l))
                          ((or (eq c #\x) (eq c #\o)
                               (eq c #\f) (eq c #\e) (eq c #\g))
@@ -91,7 +91,7 @@
                          (t
                            (loop (cdr info) l)))))))
         (let ((res (loop (reverse-list (format-info str)) args)))
-          (flush s)
+          (sflush s)
           res))))
 
   ;; Simple wrapper function to format the arguments as a string

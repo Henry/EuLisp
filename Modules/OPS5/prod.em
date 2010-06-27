@@ -134,7 +134,7 @@
     (when (all-satisfied prod)
           ;;(print "")
           ;;(print "attempting join")
-          ;;(prin (p-name prod)) (format t "(~a)" ts) (flush stdout)
+          ;;(prin (p-name prod)) (format t "(~a)" ts) (sflush stdout)
           (begin-join prod ts ce join-tests cr-manager)))
 
 ;;;-----------------------------------------------------------------------------
@@ -280,7 +280,7 @@
 ;;;-----------------------------------------------------------------------------
   (defun dummy-join (ce0 prod curr-ce ce-list timestamps
                          ce-ts join-tests bindings cr-manager)
-    (format t "-") (flush stdout)
+    (format t "-") (sflush stdout)
     ;;(print "dummy-join")
     (let* ((next-ce (if (null? ce-list) () (car ce-list)))
            (rest-of-ces (if (null? next-ce) () (cdr ce-list)))
@@ -302,7 +302,7 @@
 
   (defun join-join (ce0 prod curr-ce ce-list timestamps
                         ce-ts join-tests bindings cr-manager)
-    ;;(format t ".") (flush stdout)
+    ;;(format t ".") (sflush stdout)
     ;;(format ops-out "join-join: ~a~%" join-tests)
     ;;(format t "Remaining ces: ~a~%" (size ce-list))
     ;;(print bindings)
@@ -378,13 +378,13 @@
   (defun solve-join-pos (jv-ce matching-tstamps
                                ce0 prod next-ce rest-of-ces timestamps ce-ts
                                join-tests bindings cr-manager)
-    ;;(prin "P ") (flush stdout)
+    ;;(prin "P ") (sflush stdout)
     ;;(print "solve-join-pos")
     ;;(format ops-out "bindings: ~a~%" bindings)
     ;;(format ops-out "join-tests: ~a~%" join-tests)
     ;;(format t       "tstamps: ~a~%" matching-tstamps)
     ;;(print rest-of-ces)
-    ;;(prin (size matching-tstamps)) (flush stdout)
+    ;;(prin (size matching-tstamps)) (sflush stdout)
     (do
       (lambda (x)
         ;;(format t "current tstamp: ~a~%" x)
@@ -404,7 +404,7 @@
                                join-tests bindings cr-manager)
     ;;(print "solve-join-neg")
     ;;(prin "N ")   (print matching-tstamps)
-    ;;(flush stdout)
+    ;;(sflush stdout)
     (let ((res (labels
                  ((find-consis (tstamps jtests ce)
                                (cond
@@ -496,7 +496,7 @@
     (if (eql (class-of curr-ce) <neg-join-ce>)
         ;; All jvs must be in list by now
         (let ((var (caddr (car (ce-j-tests curr-ce)))))
-          ;; (format t "Var: ~a~%" var) (flush stdout)
+          ;; (format t "Var: ~a~%" var) (sflush stdout)
           (labels ((loop (jlist)
                          ;;(when jlist (print (car jlist))
                          ;;    (print (cadadr (car jlist))))

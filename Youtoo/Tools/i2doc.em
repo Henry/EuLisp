@@ -86,7 +86,7 @@
 
   (defun usage ()
     (do (lambda (msg) (print msg stderr)) usage-string)
-    (flush stderr)
+    (sflush stderr)
     (exit 1))
 
   (defun parse-args (args)
