@@ -232,6 +232,8 @@
 
       snewline
       newline
+      sflush
+      flush
 
       char-ready?
       peek-char

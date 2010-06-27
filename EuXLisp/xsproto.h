@@ -264,6 +264,8 @@ extern LVAL xwrlong();
 extern LVAL xdisplay();
 extern LVAL xsnewline();
 extern LVAL xnewline();
+extern LVAL xsflush();
+extern LVAL xflush();
 extern LVAL xprbreadth();
 extern LVAL xprdepth();
 extern LVAL xopeni();

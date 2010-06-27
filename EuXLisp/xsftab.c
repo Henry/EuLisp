@@ -263,6 +263,8 @@ FUNDEF funtab[] =
     {"print", xprint},
     {"snewline", xsnewline},
     {"newline", xnewline},
+    {"sflush", xsflush},
+    {"flush", xflush},
 
     // print control functions
     {"print-breadth", xprbreadth},

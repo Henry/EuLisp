@@ -709,6 +709,37 @@ LVAL xnewline()
     return (fptr);
 }
 
+// xsflush - flush stream
+LVAL xsflush()
+{
+    static char *cfn_name = "sflush";
+    LVAL fptr;
+
+    // get file pointer
+    fptr = xlgaostream();
+    xllastarg();
+
+    // flush and return the stream
+    fflush(getfile(fptr));
+
+    return (fptr);
+}
+
+// xflush - flush stdout
+LVAL xflush()
+{
+    static char *cfn_name = "flush";
+    LVAL fptr;
+
+    // get file pointer
+    fptr = xstdout();
+
+    // flush and return the stream
+    fflush(getfile(fptr));
+
+    return (fptr);
+}
+
 // xprbreadth - set the maximum number of elements to be printed
 LVAL xprbreadth()
 {

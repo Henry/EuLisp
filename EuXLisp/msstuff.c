@@ -59,9 +59,8 @@ typedef struct fd_set
 } fd_set;
 #endif
 
-static void xflush();
+static void osflushn();
 void ostputc(), ostputs(), oscheck(), osflush();
-static void xflush();
 void check_if_disabled();
 
 // main - the main routine
@@ -451,7 +450,7 @@ void oscheck()
     if (ctrl_c)
     {
         ctrl_c = 0;
-        xflush();
+        osflushn();
         xltoplevel();
     }
 }
@@ -464,13 +463,13 @@ void oscheck_int()
     if (ctrl_c)
     {
         ctrl_c = 0;
-        xflush();
+        osflushn();
         xltoplevel_int();
     }
 }
 
-// xflush - flush the input line buffer and start a new line
-static void xflush()
+// osflushn - flush the input line buffer and start a new line
+static void osflushn()
 {
     osflush();
     ostputc('\n');
