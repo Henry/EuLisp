@@ -177,7 +177,7 @@
 
   (define (sprint s . objs)
           (sprin-all s objs)
-          (newline s))
+          (snewline s))
 
   (define (prin . objs)
           (sprin-all stdout objs))

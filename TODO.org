@@ -172,6 +172,7 @@
 *** TODO Add =reverse!= method for =<string>=
 *** TODO Add =slice= generic function and methods
 *** TODO Add =slice= method for <vector>
+*** TODO Add =flush= and =sflush=
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
     to correspond to the EuLisp-1.0 proposals.

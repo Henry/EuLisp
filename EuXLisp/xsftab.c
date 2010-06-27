@@ -261,6 +261,7 @@ FUNDEF funtab[] =
     {"display", xdisplay},
     {"%display", xdisplay},
     {"print", xprint},
+    {"snewline", xsnewline},
     {"newline", xnewline},
 
     // print control functions

@@ -679,17 +679,31 @@ LVAL xdisplay()
     return (true);
 }
 
-// xnewline - terminate the current print line
+// xsnewline - terminate the current print line
+LVAL xsnewline()
+{
+    static char *cfn_name = "snewline";
+    LVAL fptr;
+
+    // get file pointer
+    fptr = xlgaostream();
+    xllastarg();
+
+    // terminate the print line and return the stream
+    xlterpri(fptr);
+
+    return (fptr);
+}
+
+// xnewline - terminate the current print line to stdout
 LVAL xnewline()
 {
     static char *cfn_name = "newline";
     LVAL fptr;
 
-    // get file pointer
-    fptr = (moreargs()? xlgaostream() : xstdout());
-    xllastarg();
+    fptr = xstdout();
 
-    // terminate the print line and return nil
+    // terminate the print line to stdout and return the stream
     xlterpri(fptr);
 
     return (fptr);

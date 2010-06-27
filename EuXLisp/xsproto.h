@@ -262,6 +262,7 @@ extern LVAL xwrbyte();
 extern LVAL xwrshort();
 extern LVAL xwrlong();
 extern LVAL xdisplay();
+extern LVAL xsnewline();
 extern LVAL xnewline();
 extern LVAL xprbreadth();
 extern LVAL xprdepth();

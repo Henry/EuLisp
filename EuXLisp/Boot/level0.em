@@ -230,7 +230,9 @@
       prin
       print
 
+      snewline
       newline
+
       char-ready?
       peek-char
 

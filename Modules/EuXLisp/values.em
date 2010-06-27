@@ -41,7 +41,7 @@
   (defun write-values (vs stream gfn)
     (gfn (car vs) stream)
     (when (cdr vs)
-          (newline stream)
+          (snewline stream)
           (write-values (cdr vs) stream gfn)))
 
   (defconstant no-values (mv-values ()))
