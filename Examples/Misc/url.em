@@ -18,7 +18,7 @@
          (file-name (vector-ref *argv* 2))
          (c (make <connection> host: host port: 80))
          x)
-    (format c "GET ~a\n" file-name)
+    (sformat c "GET ~a\n" file-name)
     (while (null? (eq (setq x (read-line c () (eos-default-value)))
                      (eos-default-value)))
       (prin x))

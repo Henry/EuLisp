@@ -21,7 +21,7 @@
          (p2 (make <mpi-process>))
          (the-other-p (if (eq p1 *mpi-this-process*) p2 p1))
          (x 'hello))
-    (format t "~a sending ~a\n" *mpi-this-process* x)
+    (format "~a sending ~a\n" *mpi-this-process* x)
     (flush)
     (swrite the-other-p x)
     (disconnect *mpi-this-process*))

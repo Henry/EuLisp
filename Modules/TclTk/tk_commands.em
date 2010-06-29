@@ -109,7 +109,7 @@
   (defmethod tk-wm ((operation <string>) (widget <null>) . options)
     (let* ((auxlist (as-c-options options))
            (elements (car auxlist)))
-      (eul_tk_wm operation (cons (+ elements 1) (cons (format () ".") (cdr auxlist))))))
+      (eul_tk_wm operation (cons (+ elements 1) (cons (fmt ".") (cdr auxlist))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; tk-get-result Function

@@ -14,7 +14,7 @@
 
   ;(let/cc exit
   ;(let loop ((x ()))
-  ;(format t "Enter name of OPS5 file: ")
+  ;(format "Enter name of OPS5 file: ")
   ;(let/cc restart
   ;(with-handler
   ;(lambda (c k)

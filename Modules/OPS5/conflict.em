@@ -45,9 +45,9 @@
 
   (defmethod generic-prin ((pi <prod-instantiation>) (s <stream>))
     (print "Production Instantiation:")
-    (format ops-out "First-ts: ~a Rating: ~a~% Ts: ~a~%"
+    (sformat ops-out "First-ts: ~a Rating: ~a~% Ts: ~a~%"
             (first-ts pi) (rating pi) (timestamps pi))
-    (format ops-out "Prod: ~a~% Bindings: ~a~%" (p-name (pi-prod pi))
+    (sformat ops-out "Prod: ~a~% Bindings: ~a~%" (p-name (pi-prod pi))
             (pi-bindings pi)))
 
   (defclass <cr-manager> ()
@@ -80,7 +80,7 @@
                              (cons prod-inst (prod-insts (cs cr-man))))))
 
   (defun remove-by-timestamp (cr-man ts)
-    ;;(format ops-out "remove-by-timestamp: ~a~%" ts)
+    ;;(sformat ops-out "remove-by-timestamp: ~a~%" ts)
     (let ((c-set (cs cr-man)))
       (set-prod-insts c-set
                       (accumulate
@@ -103,14 +103,14 @@
                        (prod-insts c-set)))))
 
   (defun remove-by-bindings (cr-man tests prod0)
-    ;;(format t "remove-by-bindings: ~a" tests)
+    ;;(format "remove-by-bindings: ~a" tests)
     (let ((c-set (cs cr-man)))
       ;;(print c-set)
       (set-prod-insts c-set
                       (accumulate
                        (lambda (a p)
                          (if (eql prod0 (pi-prod p))
-                             (progn ;;(format t "Trying to remove: ~a~%" p)
+                             (progn ;;(format "Trying to remove: ~a~%" p)
                                     ;;(print (size tests))
                                 (if
                                     (accumulate
@@ -119,7 +119,7 @@
                                        (let* ((var (cadadr test))
                                               (tmp (assoc var (pi-bindings p)))
                                               (val (if tmp (cdr tmp) 'NIL)))
-                                         ;;(format t "Test: ~a ~a ~a~%"
+                                         ;;(format "Test: ~a ~a ~a~%"
                                                 ;; (car test) (caadr test) val)
                                          (if (test-succeeds (car test)
                                                             (caadr test)
@@ -156,7 +156,7 @@
 
   (defun select-mea (cs)
     (let ((best-mea (find-best-mea cs)))
-     ;; (format ops-out "Best: ~a"  best-mea)
+     ;; (sformat ops-out "Best: ~a"  best-mea)
       (cond
        ((= (size best-mea) 1) (car best-mea))
        (t (select-lex best-mea)))))
@@ -166,7 +166,7 @@
      (lambda (best next)
        (let ((best-ts (first-ts (car best)))
              (next-ts (first-ts next)))
-         ;;(format ops-out "best: ~a next: ~a~%" best-ts next-ts)
+         ;;(sformat ops-out "best: ~a next: ~a~%" best-ts next-ts)
          (cond
           ((< next-ts best-ts) best)
           ((= next-ts best-ts) (cons next best))
@@ -177,7 +177,7 @@
   (defun select-lex (cs)
    ;;(print "select-lex")
    (let ((best-lex (find-best-lex 0 cs)))
-     ;;(format ops-out "Best lex: ~a~%" best-lex)
+     ;;(sformat ops-out "Best lex: ~a~%" best-lex)
      (car
       (cond
        ((= (size best-lex) 1) best-lex)
@@ -198,7 +198,7 @@
     (let ((new-c-set
            (accumulate
             (lambda (best next)
-             ;; (format t "Best: ~a Next: ~a Elt: ~a~%"
+             ;; (format "Best: ~a Next: ~a Elt: ~a~%"
              ;;      best next elt)
               (cond
                ((<= (size (timestamps next)) elt) best)
@@ -206,7 +206,7 @@
                (t
                 (let ((best-ts (element (timestamps (car best)) elt))
                       (next-ts (element (timestamps next) elt)))
-                  ;;(format t "best-ts: ~a next-ts: ~a~%" best-ts next-ts)
+                  ;;(format "best-ts: ~a next-ts: ~a~%" best-ts next-ts)
                   (cond
                    ((< next-ts best-ts) best)
                    ((= next-ts best-ts) (cons next best))
@@ -223,7 +223,7 @@
 ;;; test-succeeds
 ;;;-----------------------------------------------------------------------------
   (defun test-succeeds (x pred y)
-    ;;(format t "test-succeeds: ~a ~a ~a~%" x pred y)
+    ;;(format "test-succeeds: ~a ~a ~a~%" x pred y)
     (let ((res (cond
      ((list? y) (labels ((find-success (val val-list)
                             (cond
@@ -239,8 +239,8 @@
      ((eql pred '>)   (> x y))
      ((eql pred '<=)  (<= x y))
      ((eql pred '>=)  (>= x y))
-     (t (format t "Error: Unknown predicate: ~a~%" pred)))))
-      ;;(format t "res: ~a~%" res)
+     (t (format "Error: Unknown predicate: ~a~%" pred)))))
+      ;;(format "res: ~a~%" res)
       res))
 
   (export make-prod-instantiation make-cr-manager set-cr-strategy

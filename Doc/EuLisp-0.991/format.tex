@@ -66,25 +66,19 @@ returns a list of the objects read in.
 This condition is signalled by \functionref{scan} if the format string does not
 match the data input from {\em stream}.
 
-\function{format}
+\function{sformat}
 %
 \begin{arguments}
-    \item[stream] One of \nil, \true\/ or a stream.
+    \item[stream] A stream.
     \item[format-string] A string containing format directives.
     \item[\optional{object$_1$ \ldots}] A sequence of objects to be output
     on {\em stream}.
 \end{arguments}
 %
 \result%
-Returns a list comprising those objects left in the sequence after the
-last format directive was processed.
-%
-\remarks%
-Has side-effect of outputting {\em object\/}s according the formats specified in
-{\em format-string}.  If {\em stream\/} is \true\/ the output is to the current
-output stream.  If {\em stream\/} is \nil, a formatted string is returned as the
-result of the call.  Otherwise {\em stream\/} must be a valid output stream.
-Characters are output as if the string were output by the \functionref{prin}
+Returns {\em stream} and has the side-effect of outputting {\em object\/}s
+according the formats specified in {\em format-string} to {\em stream}.
+Characters are output as if the string were output by the \functionref{sprin}
 function with the exception of those prefixed by {\em tilde\/}---graphic
 representation {\tt\textasciitilde}---which are treated specially as detailed in
 the following list.  These formatting directives are intentionally compatible
@@ -93,7 +87,7 @@ with the facilities defined for the function {\tt fprintf} in ISO/IEC
 %
 \begin{description}
     \item[{\tt\textasciitilde a} any]%
-    uses \functionref{prin} to output the argument.
+    uses \functionref{sprin} to output the argument.
 
     \item[{\tt\textasciitilde b} binary]%
     the argument must be an integer and is output in binary notation
@@ -160,7 +154,31 @@ with the facilities defined for the function {\tt fprintf} in ISO/IEC
     stream is at the beginning of a fresh line.
 
     \item[{\tt\textasciitilde \textasciitilde} tilde]%
-    output a tilde character using \functionref{prin}.
+    output a tilde character using \functionref{sprin}.
 \end{description}
+
+\function{format}
 %
+\begin{arguments}
+    \item[format-string] A string containing format directives.
+    \item[\optional{object$_1$ \ldots}] A sequence of objects to be output
+    on \instanceref{stdout}.
+\end{arguments}
+\result%
+Returns \instanceref{stdout} and has the side-effect of outputting {\em
+    object\/}s according the formats specified in {\em format-string} (see
+\functionref{format}) to \instanceref{stdout}.
+
+\function{fmt}
+%
+\begin{arguments}
+    \item[format-string] A string containing format directives.
+    \item[\optional{object$_1$ \ldots}] A sequence of objects to be formatted
+    into a string.
+\end{arguments}
+%
+\remarks%
+Return the string created by formatting the {\em object\/}s according the
+formats specified in {\em format-string} (see \functionref{format}).
+
 \end{optDefinition}

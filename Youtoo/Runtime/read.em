@@ -10,7 +10,7 @@
 (defmodule read
     (syntax (_macros)
      import (telos condition convert convert1 vector string lock dynamic
-             table stream)
+             table stream format)
      export (<read-error> lispin
              read read-line read-char read-s-expression read-token
              sread sread-s-expression parse
@@ -225,7 +225,7 @@
   (defclass <read-error> (<condition>) ())
 
   (defun read-error (s msg . args)
-    (error (apply format () msg args) <read-error> value: s))
+    (error (apply fmt msg args) <read-error> value: s))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Special tags
@@ -278,5 +278,5 @@
            (setq x (read lispin () (eos-default-value)))
            (if (eq x (eos-default-value))
                (progn (print "Exiting") (exit 0))
-             (format t "- ~s\n" x))))
+             (format "- ~s\n" x))))
        (loop x)))

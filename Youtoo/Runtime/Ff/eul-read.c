@@ -32,7 +32,7 @@ int read_into_buffer(int _file, char *buf, int n)
     static int status;
 
     #ifdef READLINE
-    if (_file == 0)
+    if (rl_histfile && _file == 0)
     {
         // Get a line from the user.
         char* lbuf = readline("");

@@ -46,19 +46,19 @@
     (let* ((name-slot (tk-selection-get))
            auxtext)
       (cond ((eq name-slot 'Self)
-             (setq auxtext (format () "~a" *actual-object*))
+             (setq auxtext (fmt "~a" *actual-object*))
              (tk-conf-widget *info-title* text: "Object Itself"))
 
             ((eq name-slot 'Class)
-             (setq auxtext (format () "~a" (class-of *actual-object*)))
+             (setq auxtext (fmt "~a" (class-of *actual-object*)))
              (tk-conf-widget *info-title* text: "Class"))
 
             ((and (string? *actual-object*) (eq name-slot 'data))
-             (setq auxtext (format () "~a" *actual-object*))
+             (setq auxtext (fmt "~a" *actual-object*))
              (tk-conf-widget *info-title* text: "Slot Information"))
 
             (t
-              (setq auxtext (format () "~a" (slot-value *actual-object* name-slot)))
+              (setq auxtext (fmt "~a" (slot-value *actual-object* name-slot)))
               (tk-conf-widget *info-title* text: "Slot Information")))
       (tk-delete *info-text* "1.0" "end")
       (tk-insert *info-text* "end" auxtext)))
@@ -87,7 +87,7 @@
       ()
       (cond
         ((and (string? *actual-object*) (eq name-slot 'data))
-         (tk-conf-widget *info-title* text: (format () "Information Message"))
+         (tk-conf-widget *info-title* text: (fmt "Information Message"))
          (tk-delete *info-text* "1.0" "end")
          (tk-insert *info-text* "end" "C representation"))
 
@@ -157,13 +157,13 @@
 
       (tk-conf-widget *info-title* text: "Object Itself")
       (tk-delete *info-text* "1.0" "end")
-      (tk-insert *info-text* "end" (format () "~a" *actual-object*))
+      (tk-insert *info-text* "end" (fmt "~a" *actual-object*))
 
       ;; Finally the listbox with the list of the previous
       ;; objects inspected will be updated.
 
       (do (lambda (o)
-            (tk-insert *lb-previous* "end" (format () "~a" o)))
+            (tk-insert *lb-previous* "end" (fmt "~a" o)))
           *objects-inspected*)
       ))
 

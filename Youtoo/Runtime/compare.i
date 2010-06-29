@@ -13,7 +13,7 @@
     ((name . max) (pos . 5) (origin compare . max))
     ((name . =) (pos . 2) (origin compare . =))
     ((name . eq) (pos . 22) (origin boot1 . eq) (inline (G0035 (eq))))
-    ((name . eql) (pos . 44) (origin boot1 . eql) (inline (G0037 (eql))))
+    ((name . eql) (pos . 46) (origin boot1 . eql) (inline (G0037 (eql))))
     ((name . !=) (pos . 7) (origin compare . !=))
     ((name . <) (pos . 3) (origin compare . <))
     ((name . binary=) (pos . 9) (origin compare . binary=))

@@ -46,8 +46,7 @@
              (and macro-fun
                   (lambda (x e)
                     (with-ct-handler (protect-tilde
-                                      (format
-                                       () "bad macro expansion of ~a"
+                                      (fmt "bad macro expansion of ~a"
                                        (cons key (cdr x)))) macro-fun
                       (notify0 "APPLY MACRO: ~a" (cons key (cdr x)))
                       (let ((macro-expanded-form (apply macro-fun (cdr x))))
@@ -66,7 +65,7 @@
 ;;;-----------------------------------------------------------------------------
   (install-module-expander 'defmodule
     (lambda (x e)
-      (with-ct-handler (format () "bad defmodule syntax ~a ..."
+      (with-ct-handler (fmt "bad defmodule syntax ~a ..."
                                (list (car x) (cadr x) (caddr x))) x
           ;;-----------------------------------------------------------------
           ;; create empty module
@@ -189,7 +188,7 @@
 ;;;-----------------------------------------------------------------------------
   (install-module-expander 'defopencoded
     (lambda (x e)
-      (with-ct-handler (format () "bad defopencoded syntax ~a" (get-name x)) x
+      (with-ct-handler (fmt "bad defopencoded syntax ~a" (get-name x)) x
         (make-defined-opencoded-fun
          (get-name x) (get-params x) (get-body x)))))
 
@@ -200,7 +199,7 @@
     ;; Refers to earlier defun
     (lambda (x e)
       (if (= *inline-level* 0) ()
-        (with-ct-handler (format () "bad inline declaration ~a" x) x
+        (with-ct-handler (fmt "bad inline declaration ~a" x) x
           (let* ((binding (or (get-lexical-binding (cadr x))
                               (ct-serious-warning
                                (make-dummy-binding (cadr x))
@@ -220,7 +219,7 @@
 ;;;-----------------------------------------------------------------------------
   (install-module-expander 'defextern
     (lambda (x e)
-      (with-ct-handler (format () "bad defextern syntax ~a" x) x
+      (with-ct-handler (fmt "bad defextern syntax ~a" x) x
         (if *interpreter*
             (ct-warning () "interpreter does not support defextern")
           (make-defined-external-fun (get-name x)

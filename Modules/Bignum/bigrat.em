@@ -15,7 +15,7 @@
 ;;; Class definition
 ;;;-----------------------------------------------------------------------------
   (defclass <bigrat> (<number>)
-    ((bigrat-value accessor: bigrat-value keyword: value: requiredp: t))
+    ((bigrat-value accessor: bigrat-value keyword: value: required?: t))
     predicate: bigrat?)
 
   (defmethod initialize ((x <bigrat>) inits)
@@ -55,7 +55,7 @@
     (let* ((ptr (bigrat-value r))
            (num (mpq-get-num ptr))
            (den (mpq-get-den ptr)))
-      (format s "~a/~a" (mpz-get-str 10 num) (mpz-get-str 10 den))))
+      (sformat s "~a/~a" (mpz-get-str 10 num) (mpz-get-str 10 den))))
 
   (defun denumerator (x)
     (mpq-get-den (bigrat-value x)))

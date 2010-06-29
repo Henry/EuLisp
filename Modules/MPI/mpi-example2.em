@@ -23,7 +23,7 @@
          (remote-s (if (local-mpi-stream s1) s2 s1))
          (local-s (if (local-mpi-stream s1) s1 s2))
          (x (read remote-s)))
-    (format t "Received ~a at ~a from ~a\n" x local-s remote-s)
+    (format "Received ~a at ~a from ~a\n" x local-s remote-s)
     (disconnect local-s))
 
 ;;;-----------------------------------------------------------------------------

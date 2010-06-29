@@ -83,7 +83,7 @@
                     (setq k (place i j))
                     (cond
                      ((or (trial k) (zero? k))
-                      (format t "Piece ~a at ~a.\n" (+ i 1) (+ k 1))
+                      (format "Piece ~a at ~a.\n" (+ i 1) (+ k 1))
                       (setq *kount* (+ *kount* 1))
                       (kk t))
                      (t (puzzle-remove i j)))))))))))
@@ -147,7 +147,7 @@
             (t
              (print "Error.")))
       (cond ((trial n)
-             (format t "Success in ~a trials.\n" *kount*))
+             (format "Success in ~a trials.\n" *kount*))
             (t
              (print "Failure.\n")))))
 

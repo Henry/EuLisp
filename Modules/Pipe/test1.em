@@ -6,7 +6,7 @@
 ;;;  Authors: Andreas Kind
 ;;; Description: example pipe
 ;;;  Compilation
-;;    make touch
+;;    make distclean
 ;;    make
 ;;    make test
 ;;;-----------------------------------------------------------------------------
@@ -14,7 +14,7 @@
     (syntax (macros)
      import (level1 pipe))
 
-  (let ((x (make <pipe> process: "../../Bin.x86_64/youtoo"))
+  (let ((x (make <pipe> process: "../../Bin.x86_64/youtoo.sh"))
         (str ""))
     (pprint x)
     (system "ps -a")

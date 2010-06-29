@@ -53,7 +53,7 @@
   (defun tk-create-widget (type parent options)
     (if (and parent (null? (tk-object? parent)))
         (progn
-          (format t "Can't create ~s. Parent incorrect.\n" type)
+          (format "Can't create ~s. Parent incorrect.\n" type)
           (flush)
           ())
       (let (x)
@@ -301,7 +301,7 @@
     (eul_tk_conf_widget (tk-name x) (tk-handler x) (as-c-options options x)))
 
   (defmethod generic-write ((x <tk-object>) (s <stream>))
-    (format s "<~a: ~a>" (class-name (class-of x)) (tk-name x)))
+    (sformat s "<~a: ~a>" (class-name (class-of x)) (tk-name x)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; eul-associate Function
@@ -318,11 +318,11 @@
              (or (eq type 'horizontal)
                  (eq type 'vertical)))
         (let (str1
-               (str2 (format () "~a set" (tk-name scroll))))
+               (str2 (fmt "~a set" (tk-name scroll))))
           (setq str1
                 (if (eq type 'horizontal)
-                    (format () "~a xview" (tk-name widget))
-                  (format () "~a yview" (tk-name widget))))
+                    (fmt "~a xview" (tk-name widget))
+                  (fmt "~a yview" (tk-name widget))))
           (tk-conf-widget scroll command: str1)
           (cond ((eq type 'horizontal)
                  (tk-conf-widget widget xscrollcommand: str2))
@@ -330,10 +330,10 @@
                       (null? (tk-entry? widget)))
                  (tk-conf-widget widget yscrollcommand: str2))
                 (t
-                  (format t "entry widget does not allow vertical scrollbar\n")
+                  (format "entry widget does not allow vertical scrollbar\n")
                   (flush))))
       (progn
-        (format t "eul-associate has received invalid parameters\n")
+        (format "eul-associate has received invalid parameters\n")
         (flush))))
 
 ;;;-----------------------------------------------------------------------------

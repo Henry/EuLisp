@@ -184,7 +184,7 @@
                            (cons
                             (concatenate "%" (keyword-name (car ll))) res)))
                     (t
-                     (format t "Error: Some arguments are not keywords\n")
+                     (format "Error: Some arguments are not keywords\n")
                      (flush)))))
        (setq x (loop l ())))
       x))

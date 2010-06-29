@@ -159,7 +159,7 @@
    (defmethod compile-module (name)
      (if (member1-list name '(telos level1 math))
          (load-module-interface name t)
-       (dynamic-let ((*indent* (format () "  ~a" (dynamic *indent*))))
+       (dynamic-let ((*indent* (fmt "  ~a" (dynamic *indent*))))
          (compile name))))
 
 ;;;-----------------------------------------------------------------------------

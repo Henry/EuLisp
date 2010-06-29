@@ -17,12 +17,12 @@
 ;;; Condition Element Manager Stuff
 ;;;-----------------------------------------------------------------------------
   (defmethod print-ces ((ce-man <ce-manager>))
-    (format ops-out  "~a Condition Elements: ~%" (size (cond-els ce-man)))
+    (sformat ops-out  "~a Condition Elements: ~%" (size (cond-els ce-man)))
     (labels ((loop (ces)
                    (cond
                      ((null? ces))
                      (t
-                       (format ops-out "Class: ~a ~a~%" (class-of (caar ces))
+                       (sformat ops-out "Class: ~a ~a~%" (class-of (caar ces))
                                (size (cadar ces)))
                        (do
                          print
@@ -44,8 +44,8 @@
       ce))
 
   (defun add-new-ce (ce-manager new-ce)
-    ;;(format ops-out "Adding new ce~%")
-    ;;(format ops-out "Existing ces: ~a~%" (cond-els ce-manager))
+    ;;(sformat ops-out "Adding new ce~%")
+    ;;(sformat ops-out "Existing ces: ~a~%" (cond-els ce-manager))
     (let* ((old-ces (cond-els ce-manager))
            (class (ce-class-name new-ce))
            (new-class (null? (assoc class old-ces))))
@@ -104,10 +104,10 @@
   ;   use this condition element are informed of the change.
 ;;;-----------------------------------------------------------------------------
   (defmethod match-insert ((ce-manager <ce-manager>) wme cr-manager)
-    ;;(format t "match-insert: ~a" (wme-attrib-vals wme))
+    ;;(format "match-insert: ~a" (wme-attrib-vals wme))
     (let* ((class (wme-class-name wme))
            (ces (cadr (assoc class (cond-els ce-manager)))))
-      ;;(format t "Ces to inform: ~a~%" ces)
+      ;;(format "Ces to inform: ~a~%" ces)
       (do
         (lambda (x)
           ;;(print x)
@@ -146,7 +146,7 @@
 
 
   (defun match-insert-join (wme ce)
-    ;;(format t "match-insert-join")
+    ;;(format "match-insert-join")
     ;;(print ce)
     ;;(print wme)
     (let ((ret (const-match wme ce)))
@@ -201,7 +201,7 @@
                             a)))
                       ()
                       (append (ce-v-tests ce) (ce-j-tests ce)))))
-      ;;(format t "So far: ~a~%" bindings)
+      ;;(format "So far: ~a~%" bindings)
       (accumulate
         (lambda (a test)
           (let* ((join-var (test-value test))
@@ -242,7 +242,7 @@
                        (t
                          (let ((passes (passes-test wme (car tests))))
                            ;;(when (null? passes)
-                           ;;(format t "Failed test: ~a~a~%"
+                           ;;(format "Failed test: ~a~a~%"
                            ;;       wme (car tests)))
                            (if passes (test (cdr tests)) ()))))))
               (test const-tests))))
@@ -251,17 +251,17 @@
   ;; Checks whether working memory element, wme, passes the constant test, test.
   ;;
   (defun passes-test (wme test)
-    ;;(format t "passes-test: ~a~%" test)
+    ;;(format "passes-test: ~a~%" test)
     (let* ((attrib (test-attrib test))
            (val (assoc attrib (wme-attrib-vals wme)))
            (wme-val (if (null? val) 'NIL (cdr val)))
            (pred (test-pred test))
            (tst-val (test-value test)))
-      ;;(format ops-out "~a ~a ~a ~%" wme-val pred tst-val)
+      ;;(sformat ops-out "~a ~a ~a ~%" wme-val pred tst-val)
       (test-succeeds wme-val pred tst-val)))
 
   (defun test-succeeds (x pred y)
-    ;;(format t "test-succeeds: ~a ~a ~a~%" x pred y)
+    ;;(format "test-succeeds: ~a ~a ~a~%" x pred y)
     (let ((res (cond
                  ((list? y) (labels ((find-success (val val-list)
                                                    (cond
@@ -277,8 +277,8 @@
                  ((eql pred '>)   (> x y))
                  ((eql pred '<=)  (<= x y))
                  ((eql pred '>=)  (>= x y))
-                 (t (format t "Error: Unknown predicate: ~a~%" pred)))))
-      ;;(format t "res: ~a~%" res)
+                 (t (format "Error: Unknown predicate: ~a~%" pred)))))
+      ;;(format "res: ~a~%" res)
       res))
 
   (defmethod match-remove ((ce-manager <ce-manager>) wme cr-manager)
@@ -310,7 +310,7 @@
           (inform-create-prod-insts ts ce () cr-manager)))
 
   (defun match-remove-njoin (ts ce)
-    ;;(format ops-out "match-remove-njoin: ~a~%" ts)
+    ;;(sformat ops-out "match-remove-njoin: ~a~%" ts)
     (let ((num-matches (ce-num-matched ce)))
       (labels ((rem-wme (ts match-list res)
                         (cond
@@ -384,7 +384,7 @@
   (defun join-list (ce ts)
     (let* ((vals (assoc ts (ce-matches ce)))
            (match (if (null? vals) () (caddr vals))))
-      ;;(format ops-out "join-list: ~a~%" match)
+      ;;(sformat ops-out "join-list: ~a~%" match)
       match))
 
 ;;; var-bindings
@@ -393,7 +393,7 @@
     (let* ((vals (assoc ts (ce-matches ce)))
            (match (if (or (null? vals) (null? (cdr vals)))
                       () (cadr vals))))
-      ;(format ops-out "~a ~a ~a ~%" ce ts match)
+      ;(sformat ops-out "~a ~a ~a ~%" ce ts match)
       match))
 
   (export make-pos-join-ce make-pos-njoin-ce

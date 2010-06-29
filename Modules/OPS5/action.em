@@ -61,7 +61,7 @@
 
   (defmethod execute ((action <make-action>) pi
                       wm-manager ce-manager cr-manager)
-    ;;(format ops-out "*** make-action: ~a~%" (mk-wme-name action))
+    ;;(sformat ops-out "*** make-action: ~a~%" (mk-wme-name action))
     (let* ((class (mk-wme-name action))
            (a-vals (mk-attribs action))
            (new-attrib-vals
@@ -92,7 +92,7 @@
         (compute (cdr val) pi))
        ((eql (car val) 'tabto)
         (make <string> size: (cadr val)))
-       (t (format ops-out "Function ~a not yet supported~%" (car val))))))
+       (t (sformat ops-out "Function ~a not yet supported~%" (car val))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Compute
@@ -110,10 +110,10 @@
        ((eql op '*) (* arg1 arg2))
        ((eql op '/) (/ arg1 arg2))
        ((eql op '%) (binary-mod arg1 arg2))
-       (t (format ops-out "Unknown operator in compute: ~a~%" op)))))
+       (t (sformat ops-out "Unknown operator in compute: ~a~%" op)))))
 
   (defun apply-binding (bindings apply-to)
-   ;; (format t "apply-to: ~a bindings: ~a~%" apply-to bindings)
+   ;; (format "apply-to: ~a bindings: ~a~%" apply-to bindings)
     (cdr (assoc apply-to bindings)))
 
   (defmethod execute ((action <remove-action>) pi
@@ -133,7 +133,7 @@
 
   (defmethod execute ((action <modify-action>) pi
                       wm-manager ce-manager cr-manager)
-    ;;(format ops-out  "*** modify-action ~a~%" action)
+    ;;(sformat ops-out  "*** modify-action ~a~%" action)
     (let* ((ce-des (md-elt-desig action))
            (ce-ts  (ce-ts-list pi))
            (tstamp (if (is-ops5-var ce-des)
@@ -161,17 +161,17 @@
                         a))
                     new-attrib-vals
                     prev-attrib-vals)))
-      ;;(format ops-out  "inserting new wme: ~a ~a ~a~%" class
+      ;;(sformat ops-out  "inserting new wme: ~a ~a ~a~%" class
         ;;    prev-attrib-vals a-vals)
       (insert-wme wm-manager ce-manager cr-manager class a-vals)))
 
   (defmethod execute ((action <write-action>) pi
                       wm-manager ce-manager cr-manager)
-    ;;(format ops-out "*** write-action: ")
+    ;;(sformat ops-out "*** write-action: ")
     (do
      (lambda (x)
        (let ((val (rhs-val x pi)))
-         (when val (format ops-out "~a " val))))
+         (when val (sformat ops-out "~a " val))))
      (wr-data action)))
 
   (defmethod execute ((action <bind-action>) pi

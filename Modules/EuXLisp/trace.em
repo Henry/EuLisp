@@ -8,9 +8,9 @@
     `(progn
        (setq old ,name)
        (defun ,name args
-         (format t "-> ~s    ~s~%" ',name args)
+         (format "-> ~s    ~s~%" ',name args)
          (let ((result (apply old args)))
-           (format t "~s ->    ~s~%" ',name result)
+           (format "~s ->    ~s~%" ',name result)
            result))
        ((setter table-ref) trace-table ,name old)
        ',name))

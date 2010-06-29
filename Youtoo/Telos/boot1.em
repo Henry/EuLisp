@@ -13,7 +13,7 @@
            simple-function? simple-generic-function? int-zero? object?
            + - * / % mod < = inc dec
            eq eql equal
-           format1 write-object prin print
+           format1 write-object sprin prin sprint print
            make-symbol make-keyword
            make-vector make-vector1 vector-size vector-ref
            member1-string string-ref string-size substring tailstring
@@ -150,14 +150,18 @@
   (defconstant stderr 2)
   (defopencoded write-object (x fd) (write-object))
 
-  (defun prin (x . fds)
-    (let ((fd (if fds (car fds) stdout)))
-      (write-object x fd)))
+  (defun sprin (s x)
+    (write-object x s))
 
-  (defun print (x . fds)
-    (let ((fd (if fds (car fds) stdout)))
-      (write-object x fd)
-      (write-object "\n" fd)))
+  (defun prin (x)
+    (sprin stdout x))
+
+  (defun sprint (s x)
+    (write-object x s)
+    (write-object "\n" s))
+
+  (defun print (x)
+    (sprint stdout x))
 
   (defun format1 (fd str . l)
     (let ((n (string-size str))

@@ -149,19 +149,19 @@
     (cond
       ;; No min or max specified, match any number.
       ((not (or min max))
-       ;;    (format stderr "match any number: ~s\n" x)
+       ;;    (sformat stderr "match any number: ~s\n" x)
        `(not (iter () ((not ,matcher)))))
       ;; Min specified, but no max specified, so
       ;; match exactly min.
       ((and min (not max-specified))
-       ;;    (format stderr "match exactly ~s: ~s\n" min x)
+       ;;    (sformat stderr "match exactly ~s: ~s\n" min x)
        `(iter ((i 0 (+ i 1)))
               ((or (> i ,min) (not ,matcher))
                (and (binary= i ,min)))))
       ;; Min specified, but max is (), so match
       ;; at least min.
       ((and min max-specified (not max))
-       ;;    (format stderr "match at least ~s: ~s\n" min x)
+       ;;    (sformat stderr "match at least ~s: ~s\n" min x)
        `(iter ((i 0 (+ 1 i)))
               ((not ,matcher)
                (>= i ,min))))
@@ -169,7 +169,7 @@
       ;; at least min (none if min was null) and at
       ;; most most max.
       ((and min-specified max-specified max)
-       ;;    (format stderr "match at least ~s and at most ~s: ~s\n" min max x)
+       ;;    (sformat stderr "match at least ~s and at most ~s: ~s\n" min max x)
        (when (not min)
              (setq min 0))
        `(iter ((i 0 (+ 1 i)))
@@ -204,7 +204,7 @@
                    ;; This is complicated by the fact that @typepred results in
                    ;; (type . typepred)
                    (type
-                     ;                (format stderr "~s" x)
+                     ;                (sformat stderr "~s" x)
                      (if (symbol? (cdr x))
                          `(match-type ,(cdr x) ())
                        `(match-type ,(cadr x) ,(if (> 2 (size x))
@@ -218,7 +218,7 @@
                             (max-specified (and (> len 3))); had  (cadddr x)
                             (min (if min-specified (caddr x) ()))
                             (max (if max-specified (cadddr x) ())))
-                       ;;(format stderr "min-s: ~s max-s: ~s min: ~s max: ~s x: ~s\n"
+                       ;;(sformat stderr "min-s: ~s max-s: ~s min: ~s max: ~s x: ~s\n"
                        ;;        min-specified max-specified min max x)
                        ;;(if (null? max-specified)
                        ;;    (print "max-specified null")
@@ -226,7 +226,7 @@
                        ;;(if (symbol? max-specified)
                        ;;    (print "max-specified symbol?")
                        ;;  (print "max-specified not symbol?"))
-                       ;;(format stderr "class-of max-specified: ~a\n"
+                       ;;(sformat stderr "class-of max-specified: ~a\n"
                        ;;        (class-of max-specified))
                        (match-star min-specified   ; min-specified
                                    max-specified  ; max-specified
@@ -289,7 +289,7 @@
   (defmacro testit (expr expected)
     (let ((res (gensym)))
       `(let ((,res ,expr))
-         (format t "expression: ~s\n    result: ~s\n  expected: ~s\n"
+         (format "expression: ~s\n    result: ~s\n  expected: ~s\n"
                  ',expr ,res ,expected))))
 
 ;;;-----------------------------------------------------------------------------

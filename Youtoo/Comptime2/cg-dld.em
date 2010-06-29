@@ -60,7 +60,7 @@
 ;;; Dynamically load module from a .c-file
 ;;;-----------------------------------------------------------------------------
    (defmethod load-syntax-module (module-name)
-     (dynamic-let ((*indent* (format () "  ~a" (dynamic *indent*))))
+     (dynamic-let ((*indent* (fmt "  ~a" (dynamic *indent*))))
        (notify "Loading syntax module ~a ..." module-name)
        (setq *tmp-source-file-name* module-name)
        (let ((module (dynamic-load-module module-name)))

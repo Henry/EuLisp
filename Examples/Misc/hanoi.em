@@ -31,7 +31,7 @@
       x))
 
   (defmethod generic-prin ((x <tower>) (s <stream>))
-    (format s "#<tower ~a: ~a>" (tower-id x) (tower-blocks x)))
+    (sformat s "#<tower ~a: ~a>" (tower-id x) (tower-blocks x)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Access to tower blocks

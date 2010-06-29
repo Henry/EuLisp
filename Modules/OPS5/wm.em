@@ -79,7 +79,7 @@
   (defgeneric wm-insert (wm wm-element)
     method: (((wm <working-memory>) (wm-element <wm-element>))
              ;;(print "Inserting new WME:")
-             ;;(format t "~a: ~a ~a~%" (c-name wm-element)
+             ;;(format "~a: ~a ~a~%" (c-name wm-element)
              ;;     (attrib-vals wm-element)
              ;;   (timestamp wm-element))
              (set-wm-elements wm
@@ -94,9 +94,9 @@
 ;;;-----------------------------------------------------------------------------
   (defgeneric wm-remove (wm timestamp)
     method: (((wm <working-memory>) timestamp)
-             ;;(format t "Removing timestamp: ~a~%:" timestamp)
+             ;;(format "Removing timestamp: ~a~%:" timestamp)
              (let ((rem (assoc timestamp (wm-elements wm))))
-               (when (null? rem) (format ops-out
+               (when (null? rem) (sformat ops-out
                                         "Remove FAILED: ~a~%" timestamp))
                (set-wm-elements wm (list-remove rem (wm-elements wm)))
                (cdr rem))))

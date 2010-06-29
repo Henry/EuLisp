@@ -17,8 +17,11 @@
                     (mod int-binary-mod)
                     (= int-binary=)
                     (< int-binary<)
+                    (sprin primitive-sprin)
                     (prin primitive-prin)
+                    (sprint primitive-sprint)
                     (print primitive-print)
+                    (format1 primitive-format)
                     (stdout primitive-stdout)
                     (stderr primitive-stderr)
                     (substring substring1)
@@ -28,7 +31,7 @@
            mop-alloc
            mop-class
            mop-defcl
-           (rename ((generic-format format)) mop-gf)
+           mop-gf
            mop-init
            mop-inspect
            mop-key

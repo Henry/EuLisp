@@ -9,7 +9,7 @@
     ((name . <lock>) (pos . 2) (origin lock . <lock>))
     ((name . <semaphore>) (pos . 8) (origin lock . <semaphore>) (class . constant))
     ((name . semaphore?) (pos . 7) (origin lock . semaphore?))
-    ((name . semaphore-counter) (pos . 6) (origin lock . semaphore-counter) (inline (G004440 (static-ref0) (binding-ref ? <semaphore>) (primitive-relative-ref))) (setter (G004442 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <semaphore>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . semaphore-counter) (pos . 6) (origin lock . semaphore-counter) (inline (G004406 (static-ref0) (binding-ref ? <semaphore>) (primitive-relative-ref))) (setter (G004408 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <semaphore>) (set-primitive-relative-ref) (nobble 2))))
     ((name . lock) (pos . 3) (origin lock . lock))
     ((name . unlock) (pos . 4) (origin lock . unlock))
     ((name . lock?) (pos . 5) (origin lock . lock?))

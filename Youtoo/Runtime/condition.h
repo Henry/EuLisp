@@ -10,15 +10,14 @@ extern LispRef condition_bindings[];
 /* Module binding indices */
 #define pop_error_handlers_fn_index 6 
 #define _general_condition__X60_X62_fn_index 5 
-#define error_fn_index 22 
-#define _condition__X60_X62_fn_index 9 
+#define error_fn_index 12 
+#define _condition__X60_X62_fn_index 8 
 #define signal_fn_index 2 
 #define _default_error_handler__X42_X42_fn_index 3 
-#define condition_message_fn_index 7 
+#define condition_message_fn_index 6 
 #define output_condition_contents_fn_index 4 
 #define push_error_handler_fn_index 5 
-#define cerror_fn_index 6 
-#define condition__X63_fn_index 8 
+#define condition__X63_fn_index 7 
 
 
 

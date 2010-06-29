@@ -43,7 +43,7 @@
     x)
 
   (defmethod generic-prin ((x <mpi-stream>) (s <stream>))
-    (format s "#<~a: ~a ~a>"
+    (sformat s "#<~a: ~a ~a>"
             (class-name (class-of x))
             (mpi-stream-host x)
             (mpi-stream-rank x)))
@@ -105,7 +105,7 @@
     (let* ((rank (mpi-stream-rank s))
            (tag (mpi-stream-tag s))
            (info (eul-mpi-probe rank () eos-error?))
-      (format stderr "generic-read msg-tag: ~a\n" info)
+      (sformat stderr "generic-read msg-tag: ~a\n" info)
       (if (null? info)
           (if (eq eos-error? t)
               (end-of-stream s)

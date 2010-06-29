@@ -14,8 +14,9 @@ extern LispRef level1_bindings[];
 extern LispRef boot1_bindings[];
 extern LispRef collect_bindings[];
 extern LispRef string_bindings[];
-extern LispRef mop_class_bindings[];
 extern LispRef mop_gf_bindings[];
+extern LispRef mop_class_bindings[];
+extern LispRef format_bindings[];
 
 /* Module bindings with size 31 */
 LispRef _sx_obj0_bindings[31];
@@ -40,7 +41,7 @@ void initialize_module__sx_obj0()
   eul_allocate_static_string(str_134, "module-~as?", 11);
   eul_allocate_static_string(str_136, "module-~as!", 11);
   /* Byte-vector with size: 76 is_init: 0 index: 13 binding: new-node */
-  static const void *G00132[] = {I(43,fd,1c,73),I(86,23,00,00),B(_sx_obj0 ,4),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,24,00),B(mop_class ,5),I(23,00,00,00),B(_sx_obj0 ,5),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,04),I(73,86,23,00),B(_sx_obj0 ,6),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,24,00),B(mop_class ,5),I(23,00,00,00),B(_sx_obj0 ,5),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,03),I(1c,1f,08,34),I(00,00,00,6d),I(23,00,00,00),B(_sx_obj0 ,7),I(86,0f,23,00),B(_sx_obj0 ,8),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(86,0f,1f,07),I(1c,0f,1b,86),I(0f,1f,12,1c),I(0f,23,00,00),B(_sx_obj0 ,10),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1f,0c),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,23,00,00),B(_sx_obj0 ,11),I(1c,0f,22,0f),I(32,00,00,00),I(00,00,00,68),I(23,00,00,00),B(_sx_obj0 ,7),I(86,0f,23,00),B(_sx_obj0 ,8),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(86,0f,1f,07),I(1c,0f,1f,11),I(86,0f,1c,1c),I(0f,23,00,00),B(_sx_obj0 ,12),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1f,0c),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,23,00,00),B(_sx_obj0 ,11),I(1c,0f,22,0f),I(45,0b,00,00)};
+  static const void *G00132[] = {I(43,fd,1c,73),I(23,00,00,00),B(_sx_obj0 ,4),I(1c,24,00,00),B(format ,2),I(3c,02,24,00),B(mop_class ,5),I(23,00,00,00),B(_sx_obj0 ,5),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,04),I(73,23,00,00),B(_sx_obj0 ,6),I(1c,24,00,00),B(format ,2),I(3c,02,24,00),B(mop_class ,5),I(23,00,00,00),B(_sx_obj0 ,5),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,03),I(1c,1f,08,34),I(00,00,00,6d),I(23,00,00,00),B(_sx_obj0 ,7),I(86,0f,23,00),B(_sx_obj0 ,8),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(86,0f,1f,07),I(1c,0f,1b,86),I(0f,1f,12,1c),I(0f,23,00,00),B(_sx_obj0 ,10),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1f,0c),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,23,00,00),B(_sx_obj0 ,11),I(1c,0f,22,0f),I(32,00,00,00),I(00,00,00,68),I(23,00,00,00),B(_sx_obj0 ,7),I(86,0f,23,00),B(_sx_obj0 ,8),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(86,0f,1f,07),I(1c,0f,1f,11),I(86,0f,1c,1c),I(0f,23,00,00),B(_sx_obj0 ,12),I(1c,0f,1b,86),I(0f,23,00,00),B(_sx_obj0 ,9),I(1c,0f,1f,0c),I(1c,0f,1b,86),I(0f,1f,09,1c),I(0f,23,00,00),B(_sx_obj0 ,11),I(1c,0f,22,0f),I(45,0b,00,00)};
 
   eul_allocate_static_string(str_145, "-", 1);
   eul_allocate_static_string(str_146, "?", 1);

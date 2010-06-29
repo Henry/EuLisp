@@ -17,7 +17,7 @@
    (defun basic-notify (s var str . args)
      (if (null? var) ()
        (progn
-         (apply format s str args)
+         (apply sformat s str args)
          (snewline s)
          (sflush s))))
 
@@ -32,13 +32,13 @@
      (dynamic-let ((*pprint* 1))
        (let* ((m (dynamic *actual-module*))
               (pre-str (if m
-                           (format () "[~a]" (primitive-ref m 0))
+                           (fmt "[~a]" (primitive-ref m 0))
                          ""))
               (fun (get-named-encl-lambda (dynamic *encl-lambda*))))
          (if (null? fun) ()
-             (setq pre-str (format () "~a[~a]" pre-str fun)))
+             (setq pre-str (fmt "~a[~a]" pre-str fun)))
          (apply basic-notify stderr var
-                (format () "*** ~a ~a: ~a" prompt pre-str str) args))))
+                (fmt "*** ~a ~a: ~a" prompt pre-str str) args))))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  Warning (compilation can be continued)
@@ -60,7 +60,7 @@
            (apply basic-warning *errors* "ERROR" str args)
            value)
        ;; Force error to be catched by interpreter loop
-       (error (apply format () str args) (get-ct-error-condition-class ())
+       (error (apply fmt str args) (get-ct-error-condition-class ())
               ct-error-value: (dynamic *actual-module*))))
 
 ;;;-----------------------------------------------------------------------------

@@ -17,14 +17,14 @@
 
   (defun my-deserialize ()
     (let ((x (deserialize)))
-      (pprint x)
+      (spprint x stderr)
       (cond ((generic-function? x)
              (x 42 "abc")
              (x 1.23 'foo))
             ((function? x)
              (print (x 1 2 3 4))
              ())
-            ((threadp x)
+            ((thread? x)
              (thread-reschedule x)))))
 
   (my-deserialize)

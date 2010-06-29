@@ -61,7 +61,7 @@
       (j97 default: 32 accessor: state-j97)))
 
    (defmethod generic-prin ((st <random-state>) (s <stream>))
-     (format s "#<random-state ~a ~a>" (state-ij st) (state-kl st)))
+     (sformat s "#<random-state ~a ~a>" (state-ij st) (state-kl st)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Aux
@@ -189,13 +189,13 @@
            (x 0)
            (y 0))
        (while (< x 20)  ;20000)
-         (format t "~a: ~a~%" x (random-one state))
+         (format "~a: ~a~%" x (random-one state))
          (setq x (+ 1 x)))
        (while (< y 6)
          (let ((value (round (* 4096 4096 (random-one state))))
                (should-be (vector-ref #(6533892 14220222 7275067
                                         6172232 8354498 10633180) y)))
-           (format t "~a = ~a\n" value should-be)
+           (format "~a = ~a\n" value should-be)
            (setq y (+ 1 y))))))
 
    (test)

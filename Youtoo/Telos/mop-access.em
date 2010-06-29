@@ -17,7 +17,7 @@
            compute-and-ensure-slot-accessors
            compute-slot-reader compute-slot-writer
            ensure-slot-reader ensure-slot-writer
-           find-slot-names pprint))
+           find-slot-names spprint pprint))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Compute-and-ensure-slot-accessors
@@ -191,18 +191,20 @@
 ;;; Pretty print function
 ;;; Size of simple functions is not nslots but bytevector size in bytes!
 ;;;-----------------------------------------------------------------------------
-  (defun pprint (x . ss)
+  (defun spprint (s x)
     (if (object? x)
-        (let* ((s (if ss (car ss) t))
-               (cl (class-of x)))
-          (generic-format s "\nInstance ~a of class #<~a>" x (class-name cl))
+        (let* ((cl (class-of x)))
+          (format1 s "\nInstance ~a of class #<~a>" x (class-name cl))
           (do1-list (lambda (slot)
                       (let ((name (slot-name slot))
                             (value ((slot-reader slot) x)))
-                        (generic-format s "\n  ~a = ~a" name value)))
+                        (format1 s "\n  ~a = ~a" name value)))
                     (class-slots cl))
-          (generic-format s "\n"))
-      (apply print x ss)))
+          (format1 s "\n"))
+      (sprint s x)))
+
+  (defun pprint (x)
+    (spprint stdout x))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

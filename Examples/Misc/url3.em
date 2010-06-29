@@ -15,7 +15,7 @@
    import (level1))
 
   (defun open-url (url)
-    (system (format () "firefox ~a" url)))
+    (system (fmt "firefox ~a" url)))
 
   (open-url (vector-ref *argv* 1))
 

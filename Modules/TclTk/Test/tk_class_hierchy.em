@@ -139,7 +139,7 @@
       (setq *listbox* (tk-make-listbox frame3 width: "30" bg: "SteelBlue"))
       (setq *canvas1* (tk-make-canvas frame2 width: DEV-WIDTH
                                       height: DEV-HEIGHT
-                                      scrollregion: (format () "0 0 ~a ~a" INFO-WIDTH INFO-HEIGHT)))
+                                      scrollregion: (fmt "0 0 ~a ~a" INFO-WIDTH INFO-HEIGHT)))
       (setq *class-name-label* (tk-make-label frame3 fg: "black"))
       (eul-associate *canvas1* scroll 'vertical)
       (eul-associate *canvas1* scroll1 'horizontal)

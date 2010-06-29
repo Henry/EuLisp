@@ -17,7 +17,7 @@ extern LispRef string_bindings[];
 extern LispRef boot_bindings[];
 extern LispRef stream2_bindings[];
 extern LispRef i_param_bindings[];
-extern LispRef mop_gf_bindings[];
+extern LispRef format_bindings[];
 extern LispRef dynamic_bindings[];
 
 /* Module bindings with size 34 */
@@ -38,68 +38,68 @@ void initialize_module_i_notify()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_321, sym_320, sym_319, sym_318, sym_317, sym_316, G00315, G00313, key_311, G00309, G00306, G00304, sym_302, G00301, sym_297, sym_294, sym_293, sym_292, sym_291, G00290, G00288;
+  LispRef sym_319, sym_318, sym_317, sym_316, sym_315, sym_314, G00313, G00311, key_309, G00307, G00304, G00302, sym_300, G00299, sym_295, sym_292, sym_291, sym_290, sym_289, G00288, G00286;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 6 is_init: 0 index: 8 binding: anonymous */
-  static const void *G00287[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G00285[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_295, "[~a]", 4);
-  eul_allocate_static_string(str_296, "", 0);
-  eul_allocate_static_string(str_298, "~a[~a]", 6);
-  eul_allocate_static_string(str_299, "*** ~a ~a: ~a", 13);
-  /* Byte-vector with size: 70 is_init: 0 index: 18 binding: basic-warning */
-  static const void *G00289[] = {I(43,fc,23,00),B(i_notify ,9),I(83,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(i_notify ,10),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(i_notify ,11),I(23,00,00,00),B(i_notify ,8),I(3b,00,1c,0f),I(23,00,00,00),B(i_notify ,10),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(i_notify ,12),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,34),I(00,00,00,25),I(1b,82,02,86),I(23,00,00,00),B(i_notify ,13),I(1d,24,00,00),B(mop_gf ,17),I(3c,03,22,01),I(32,00,00,00),I(00,00,00,10),I(23,00,00,00),B(i_notify ,14),I(23,00,00,00),B(i_notify ,15),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(i_param ,40),I(3c,01,1b,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,24),I(86,23,00,00),B(i_notify ,16),I(1f,04,1f,04),I(24,00,00,00),B(mop_gf ,17),I(3c,04,1b,20),I(04,1f,03,22),I(01,2a,86,23),B(i_notify ,17),I(1f,0a,1f,05),I(1f,0b,24,00),B(mop_gf ,17),I(3c,05,24,00),B(i_notify ,7),I(24,00,00,00),B(stream2 ,10),I(1f,0c,1f,03),I(1f,0b,24,00),B(boot ,9),I(3c,05,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(45,0c,00,00)};
+  eul_allocate_static_string(str_293, "[~a]", 4);
+  eul_allocate_static_string(str_294, "", 0);
+  eul_allocate_static_string(str_296, "~a[~a]", 6);
+  eul_allocate_static_string(str_297, "*** ~a ~a: ~a", 13);
+  /* Byte-vector with size: 69 is_init: 0 index: 18 binding: basic-warning */
+  static const void *G00287[] = {I(43,fc,23,00),B(i_notify ,9),I(83,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(i_notify ,10),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(i_notify ,11),I(23,00,00,00),B(i_notify ,8),I(3b,00,1c,0f),I(23,00,00,00),B(i_notify ,10),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(i_notify ,12),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,34),I(00,00,00,21),I(1b,82,02,23),B(i_notify ,13),I(1c,24,00,00),B(format ,2),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,10),I(23,00,00,00),B(i_notify ,14),I(23,00,00,00),B(i_notify ,15),I(24,00,00,00),B(dynamic ,3),I(3c,01,24,00),B(i_param ,39),I(3c,01,1b,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,24),I(23,00,00,00),B(i_notify ,16),I(1f,03,1f,03),I(24,00,00,00),B(format ,2),I(3c,03,1b,20),I(04,1f,03,22),I(01,2a,23,00),B(i_notify ,17),I(1f,09,1f,04),I(1f,0a,24,00),B(format ,2),I(3c,04,24,00),B(i_notify ,7),I(24,00,00,00),B(stream2 ,10),I(1f,0c,1f,03),I(1f,0b,24,00),B(boot ,5),I(3c,05,83,24),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(45,0c,00,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 20 binding: notify */
-  static const void *G00300[] = {I(43,fe,24,00),B(i_param ,21),I(12,23,00,00),B(i_notify ,19),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,1f),I(04,24,00,00),B(string ,11),I(3c,02,24,00),B(i_notify ,7),I(24,00,00,00),B(stream2 ,10),I(1f,04,1f,03),I(1f,07,24,00),B(boot ,9),I(3d,05,05,45),I(05,00,00,00)};
+  static const void *G00298[] = {I(43,fe,24,00),B(i_param ,20),I(12,23,00,00),B(i_notify ,19),I(24,00,00,00),B(dynamic ,3),I(3c,01,1b,1f),I(04,24,00,00),B(string ,11),I(3c,02,24,00),B(i_notify ,7),I(24,00,00,00),B(stream2 ,10),I(1f,04,1f,03),I(1f,07,24,00),B(boot ,5),I(3d,05,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 21 binding: notify0 */
-  static const void *G00303[] = {I(43,fe,24,00),B(i_notify ,7),I(24,00,00,00),B(stream2 ,10),I(24,00,00,00),B(i_param ,52),I(1f,04,1f,04),I(24,00,00,00),B(boot ,9),I(3d,05,02,00)};
+  static const void *G00301[] = {I(43,fe,24,00),B(i_notify ,7),I(24,00,00,00),B(stream2 ,10),I(24,00,00,00),B(i_param ,51),I(1f,04,1f,04),I(24,00,00,00),B(boot ,5),I(3d,05,02,00)};
 
-  eul_allocate_static_string(str_307, "WARNING", 7);
+  eul_allocate_static_string(str_305, "WARNING", 7);
   /* Byte-vector with size: 15 is_init: 0 index: 23 binding: ct-warning */
-  static const void *G00305[] = {I(43,fd,24,00),B(i_param ,41),I(83,14,1b,89),B(i_param ,41),I(2a,24,00,00),B(i_notify ,2),I(24,00,00,00),B(i_param ,59),I(23,00,00,00),B(i_notify ,22),I(1f,05,1f,05),I(24,00,00,00),B(boot ,9),I(3c,05,2a,1f),I(03,45,04,00)};
+  static const void *G00303[] = {I(43,fd,24,00),B(i_param ,40),I(83,14,1b,89),B(i_param ,40),I(2a,24,00,00),B(i_notify ,2),I(24,00,00,00),B(i_param ,58),I(23,00,00,00),B(i_notify ,22),I(1f,05,1f,05),I(24,00,00,00),B(boot ,5),I(3c,05,2a,1f),I(03,45,04,00)};
 
-  eul_allocate_static_string(str_310, "ERROR", 5);
+  eul_allocate_static_string(str_308, "ERROR", 5);
   /* Byte-vector with size: 40 is_init: 0 index: 26 binding: ct-serious-warning */
-  static const void *G00308[] = {I(43,fd,24,00),B(i_param ,47),I(83,14,1b,89),B(i_param ,47),I(2a,24,00,00),B(i_param ,39),I(3c,00,2a,24),B(i_param ,10),I(12,1b,34,00),I(00,00,00,36),I(24,00,00,00),B(i_notify ,2),I(24,00,00,00),B(i_param ,26),I(23,00,00,00),B(i_notify ,24),I(1f,06,1f,06),I(24,00,00,00),B(boot ,9),I(3c,05,2a,1f),I(04,32,00,00),I(00,00,00,4c),I(24,00,00,00),B(mop_gf ,17),I(86,1f,05,1f),I(05,24,00,00),B(boot ,9),I(3c,04,86,24),B(i_param ,3),I(3c,01,23,00),B(i_notify ,12),I(24,00,00,00),B(dynamic ,3),I(3c,01,1d,1d),I(23,00,00,00),B(i_notify ,25),I(1f,03,24,00),B(boot ,22),I(3d,04,08,22),I(03,45,05,00)};
+  static const void *G00306[] = {I(43,fd,24,00),B(i_param ,46),I(83,14,1b,89),B(i_param ,46),I(2a,24,00,00),B(i_param ,38),I(3c,00,2a,24),B(i_param ,10),I(12,1b,34,00),I(00,00,00,36),I(24,00,00,00),B(i_notify ,2),I(24,00,00,00),B(i_param ,25),I(23,00,00,00),B(i_notify ,24),I(1f,06,1f,06),I(24,00,00,00),B(boot ,5),I(3c,05,2a,1f),I(04,32,00,00),I(00,00,00,4c),I(24,00,00,00),B(format ,2),I(1f,04,1f,04),I(24,00,00,00),B(boot ,5),I(3c,03,86,24),B(i_param ,3),I(3c,01,23,00),B(i_notify ,12),I(24,00,00,00),B(dynamic ,3),I(3c,01,1d,1d),I(23,00,00,00),B(i_notify ,25),I(1f,03,24,00),B(boot ,12),I(3d,04,08,22),I(03,45,05,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 27 binding: basic-notify */
-  static const void *G00312[] = {I(43,fc,1d,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,36),I(24,00,00,00),B(mop_gf ,17),I(1f,05,1f,04),I(1f,04,24,00),B(boot ,9),I(3c,04,2a,1f),I(04,24,00,00),B(stream ,6),I(3c,01,2a,1f),I(04,24,00,00),B(stream ,13),I(3d,01,05,45),I(05,00,00,00)};
+  static const void *G00310[] = {I(43,fc,1d,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,36),I(24,00,00,00),B(format ,4),I(1f,05,1f,04),I(1f,04,24,00),B(boot ,5),I(3c,04,2a,1f),I(04,24,00,00),B(stream ,6),I(3c,01,2a,1f),I(04,24,00,00),B(stream ,13),I(3d,01,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 49 is_init: 1 index: 0 binding: initialize-i-notify */
-  static const void *G00314[] = {I(87,25,00,00),B(i_notify ,1),I(24,00,00,00),B(i_param ,1),I(3e,0b,24,00),B(i_param ,0),I(3c,00,21,01),I(24,00,00,00),B(i_level1 ,1),I(3e,0b,24,00),B(i_level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(i_notify ,28),I(23,00,00,00),B(i_notify ,27),I(3b,fc,25,00),B(i_notify ,7),I(23,00,00,00),B(i_notify ,29),I(23,00,00,00),B(i_notify ,26),I(3b,fd,25,00),B(i_notify ,6),I(23,00,00,00),B(i_notify ,30),I(23,00,00,00),B(i_notify ,23),I(3b,fd,25,00),B(i_notify ,5),I(23,00,00,00),B(i_notify ,31),I(23,00,00,00),B(i_notify ,21),I(3b,fe,25,00),B(i_notify ,4),I(23,00,00,00),B(i_notify ,32),I(23,00,00,00),B(i_notify ,20),I(3b,fe,25,00),B(i_notify ,3),I(23,00,00,00),B(i_notify ,33),I(23,00,00,00),B(i_notify ,18),I(3b,fc,25,00),B(i_notify ,2),I(86,ac,00,00)};
+  static const void *G00312[] = {I(87,25,00,00),B(i_notify ,1),I(24,00,00,00),B(i_param ,1),I(3e,0b,24,00),B(i_param ,0),I(3c,00,21,01),I(24,00,00,00),B(i_level1 ,1),I(3e,0b,24,00),B(i_level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(i_notify ,28),I(23,00,00,00),B(i_notify ,27),I(3b,fc,25,00),B(i_notify ,7),I(23,00,00,00),B(i_notify ,29),I(23,00,00,00),B(i_notify ,26),I(3b,fd,25,00),B(i_notify ,6),I(23,00,00,00),B(i_notify ,30),I(23,00,00,00),B(i_notify ,23),I(3b,fd,25,00),B(i_notify ,5),I(23,00,00,00),B(i_notify ,31),I(23,00,00,00),B(i_notify ,21),I(3b,fe,25,00),B(i_notify ,4),I(23,00,00,00),B(i_notify ,32),I(23,00,00,00),B(i_notify ,20),I(3b,fe,25,00),B(i_notify ,3),I(23,00,00,00),B(i_notify ,33),I(23,00,00,00),B(i_notify ,18),I(3b,fc,25,00),B(i_notify ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G00288,G00287);
-  eul_intern_symbol(sym_291,"*pprint*");
-  eul_intern_symbol(sym_292,"*clean-ups*");
-  eul_intern_symbol(sym_293,"anonymous");
-  eul_intern_symbol(sym_294,"*actual-module*");
-  object_class(str_295) = eul_static_string_class;
+  eul_allocate_bytevector( G00286,G00285);
+  eul_intern_symbol(sym_289,"*pprint*");
+  eul_intern_symbol(sym_290,"*clean-ups*");
+  eul_intern_symbol(sym_291,"anonymous");
+  eul_intern_symbol(sym_292,"*actual-module*");
+  object_class(str_293) = eul_static_string_class;
+  object_class(str_294) = eul_static_string_class;
+  eul_intern_symbol(sym_295,"*encl-lambda*");
   object_class(str_296) = eul_static_string_class;
-  eul_intern_symbol(sym_297,"*encl-lambda*");
-  object_class(str_298) = eul_static_string_class;
-  object_class(str_299) = eul_static_string_class;
-  eul_allocate_bytevector( G00290,G00289);
-  eul_intern_symbol(sym_302,"*indent*");
-  eul_allocate_bytevector( G00301,G00300);
+  object_class(str_297) = eul_static_string_class;
+  eul_allocate_bytevector( G00288,G00287);
+  eul_intern_symbol(sym_300,"*indent*");
+  eul_allocate_bytevector( G00299,G00298);
+  eul_allocate_bytevector( G00302,G00301);
+  object_class(str_305) = eul_static_string_class;
   eul_allocate_bytevector( G00304,G00303);
-  object_class(str_307) = eul_static_string_class;
-  eul_allocate_bytevector( G00306,G00305);
-  object_class(str_310) = eul_static_string_class;
-  eul_intern_keyword(key_311,"ct-error-value");
-  eul_allocate_bytevector( G00309,G00308);
+  object_class(str_308) = eul_static_string_class;
+  eul_intern_keyword(key_309,"ct-error-value");
+  eul_allocate_bytevector( G00307,G00306);
+  eul_allocate_bytevector( G00311,G00310);
+  eul_intern_symbol(sym_314,"basic-notify");
+  eul_intern_symbol(sym_315,"ct-serious-warning");
+  eul_intern_symbol(sym_316,"ct-warning");
+  eul_intern_symbol(sym_317,"notify0");
+  eul_intern_symbol(sym_318,"notify");
+  eul_intern_symbol(sym_319,"basic-warning");
   eul_allocate_bytevector( G00313,G00312);
-  eul_intern_symbol(sym_316,"basic-notify");
-  eul_intern_symbol(sym_317,"ct-serious-warning");
-  eul_intern_symbol(sym_318,"ct-warning");
-  eul_intern_symbol(sym_319,"notify0");
-  eul_intern_symbol(sym_320,"notify");
-  eul_intern_symbol(sym_321,"basic-warning");
-  eul_allocate_bytevector( G00315,G00314);
 
   /* Set local bindings */
   {
@@ -108,34 +108,34 @@ void initialize_module_i_notify()
       i_notify_bindings[i] = eul_nil;
   }
 
-  i_notify_bindings[ 8] = G00288;
-  i_notify_bindings[ 9] = sym_291;
-  i_notify_bindings[ 10] = sym_292;
-  i_notify_bindings[ 11] = sym_293;
-  i_notify_bindings[ 12] = sym_294;
-  i_notify_bindings[ 13] = str_295;
-  i_notify_bindings[ 14] = str_296;
-  i_notify_bindings[ 15] = sym_297;
-  i_notify_bindings[ 16] = str_298;
-  i_notify_bindings[ 17] = str_299;
-  i_notify_bindings[ 18] = G00290;
-  i_notify_bindings[ 19] = sym_302;
-  i_notify_bindings[ 20] = G00301;
-  i_notify_bindings[ 21] = G00304;
-  i_notify_bindings[ 22] = str_307;
-  i_notify_bindings[ 23] = G00306;
-  i_notify_bindings[ 24] = str_310;
-  i_notify_bindings[ 25] = key_311;
-  i_notify_bindings[ 26] = G00309;
-  i_notify_bindings[ 27] = G00313;
+  i_notify_bindings[ 8] = G00286;
+  i_notify_bindings[ 9] = sym_289;
+  i_notify_bindings[ 10] = sym_290;
+  i_notify_bindings[ 11] = sym_291;
+  i_notify_bindings[ 12] = sym_292;
+  i_notify_bindings[ 13] = str_293;
+  i_notify_bindings[ 14] = str_294;
+  i_notify_bindings[ 15] = sym_295;
+  i_notify_bindings[ 16] = str_296;
+  i_notify_bindings[ 17] = str_297;
+  i_notify_bindings[ 18] = G00288;
+  i_notify_bindings[ 19] = sym_300;
+  i_notify_bindings[ 20] = G00299;
+  i_notify_bindings[ 21] = G00302;
+  i_notify_bindings[ 22] = str_305;
+  i_notify_bindings[ 23] = G00304;
+  i_notify_bindings[ 24] = str_308;
+  i_notify_bindings[ 25] = key_309;
+  i_notify_bindings[ 26] = G00307;
+  i_notify_bindings[ 27] = G00311;
   i_notify_bindings[ 1] = eul_nil;
-  i_notify_bindings[ 28] = sym_316;
-  i_notify_bindings[ 29] = sym_317;
-  i_notify_bindings[ 30] = sym_318;
-  i_notify_bindings[ 31] = sym_319;
-  i_notify_bindings[ 32] = sym_320;
-  i_notify_bindings[ 33] = sym_321;
-  eul_allocate_lambda( i_notify_bindings[0], "initialize-i-notify", 0, G00315);
+  i_notify_bindings[ 28] = sym_314;
+  i_notify_bindings[ 29] = sym_315;
+  i_notify_bindings[ 30] = sym_316;
+  i_notify_bindings[ 31] = sym_317;
+  i_notify_bindings[ 32] = sym_318;
+  i_notify_bindings[ 33] = sym_319;
+  eul_allocate_lambda( i_notify_bindings[0], "initialize-i-notify", 0, G00313);
 
   }
 }

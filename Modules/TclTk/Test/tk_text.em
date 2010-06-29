@@ -21,13 +21,13 @@
     (let (x
            (name (tk-get-value-widget entry)))
       (tk-delete text "1.0" "end")
-      (tk-insert text "end" (format () "File: ~s\n" name))
+      (tk-insert text "end" (fmt "File: ~s\n" name))
       (tk-text-tag-add text "big" "1.6" "1.0 lineend")
       (with-input-file
         (s name)
         (setq x (read s t (eos-default-value)))
         (while (null? (eq x (eos-default-value)))
-          (tk-insert text "end" (format () "~a" x))
+          (tk-insert text "end" (fmt "~a" x))
           (setq x (read s () (eos-default-value)))))))
 
   (defun change-configuration (text)

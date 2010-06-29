@@ -58,9 +58,9 @@
 ;;;-----------------------------------------------------------------------------
   (defmacro new-node (node kind . first?)
     (let ((reader-name (make <symbol>
-                             name: (format () "module-~as?" (cadr kind))))
+                             name: (fmt "module-~as?" (cadr kind))))
           (writer-name (make <symbol>
-                             name: (format () "module-~as!" (cadr kind)))))
+                             name: (fmt "module-~as!" (cadr kind)))))
       (if first?
           `(let ((m (dynamic *actual-module*)))
              (,writer-name m (cons ,node (,reader-name m))))

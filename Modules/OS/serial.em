@@ -56,10 +56,10 @@
     ())
 
   (defmethod generic-prin ((x <bytevector>) (s <stream>))
-    (format s "#<bytevector: ~a>" (string-size x)))
+    (sformat s "#<bytevector: ~a>" (string-size x)))
 
   (defmethod generic-write ((x <bytevector>) (s <stream>))
-    (format s "#<bytevector: ~a>" (string-size x)))
+    (sformat s "#<bytevector: ~a>" (string-size x)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Reset
@@ -110,7 +110,7 @@
             (if (and (= magic STREAM_MAGIC)
                      (= version STREAM_VERSION))
                 ()
-              (format stderr "*** WARNING: bad header ~a\n" header))
+              (sformat stderr "*** WARNING: bad header ~a\n" header))
             (debug-format stderr "magic: ~x version: ~x\n" magic version))
         (let ((sink (stream-sink os))
               (magic-data (eul-serial-short-data STREAM_MAGIC))
@@ -213,8 +213,8 @@
              (supers (class-direct-superclasses x))
              (slot-descrs (map (lambda (slot)
                                  (let ((name (slot-name slot))
-                                       (requiredp (slot-required? slot)))
-                                   (if requiredp
+                                       (required? (slot-required? slot)))
+                                   (if required?
                                        (list name: name
                                              ;; Just following the convention ...
                                              ; accessor:
@@ -224,7 +224,7 @@
 
                                              ;; default:
                                              ; (slot-default slot)
-                                             requiredp:
+                                             required?:
                                              (slot-required? slot))
                                      (list name: name
                                            ;; Just following the convention ...
@@ -394,7 +394,7 @@
     (let ((tab (object-stream-cache os))
           (i (object-stream-cache-index os)))
       (debug-format stderr ">>> new handle: ~a\n" i)
-      (format stderr "*** CACHE PUT (write) ~a for ~a\n" i x)
+      (sformat stderr "*** CACHE PUT (write) ~a for ~a\n" i x)
       ((setter object-stream-cache-index) os (+ i 1))
       ((setter table-ref) tab x i)))
 
@@ -406,7 +406,7 @@
           (let ((sink (stream-sink os))
                 (data (eul-serial-int-data i)))
             (debug-format stderr "<<< old handle: ~a\n" i)
-            (format stderr "*** CACHE GET (write) ~a for ~a\n" i x)
+            (sformat stderr "*** CACHE GET (write) ~a for ~a\n" i x)
             (generic-prin TC_REFERENCE sink)
             (generic-prin data sink)
             os))))
@@ -538,7 +538,7 @@
 
   (defun debug-format (s str . args)
     (if *debug*
-        (apply format s str args)
+        (apply sformat s str args)
       ()))
 
 ;;;-----------------------------------------------------------------------------
@@ -564,7 +564,7 @@
 
   (defmethod generic-prin ((c <character>) (s <buffered-stream>))
     ;    (if (graph? c)
-    (prin-one-char c s)
+    (sprin-one-char s c)
     ;      (generic-write c s))
     c)
 

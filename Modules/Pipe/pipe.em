@@ -18,7 +18,7 @@
 ;;; The pipe class
 ;;;------------------------------------------------------------------------
   (defclass <pipe> (<file-stream>)
-    ((process accessor: pipe-process keyword: process: requiredp: t))
+    ((process accessor: pipe-process keyword: process: required?: t))
     predicate: pipe?)
 
   (defmethod initialize ((x <pipe>) inits)

@@ -30,8 +30,8 @@
          (setq ,function-name (named-lambda ,function-name args
            ,(if pre-action
                 `(apply ,pre-action ,function-name args)
-              `(format stderr
-                       ,(format () ">>> ~~aTRACE [~a]: ~~a\n" function-name)
+              `(sformat stderr
+                       ,(fmt ">>> ~~aTRACE [~a]: ~~a\n" function-name)
                        (dynamic *trace-indent*) args))
            (let ((res (dynamic-let ((*trace-indent*
                                      (concatenate (dynamic *trace-indent*)
@@ -39,8 +39,8 @@
                         (apply ,tmp-name args))))
              ,(if post-action
                   `(apply ,post-action ,function-name args)
-                `(format stderr
-                         ,(format () "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
+                `(sformat stderr
+                         ,(fmt "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
                                   function-name)
                          (dynamic *trace-indent*) args res))
              res)))

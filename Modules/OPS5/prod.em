@@ -45,24 +45,24 @@
     constructor: (make-production p-name:))
 
   (defmethod generic-prin ((prod <production>) (s <stream>))
-    (format ops-out "Production: ~a~% Cond-Els: " (p-name prod))
+    (sformat ops-out "Production: ~a~% Cond-Els: " (p-name prod))
     (map
       (lambda (x)
-        (format ops-out "~a " (ce-id x)))
+        (sformat ops-out "~a " (ce-id x)))
       (prod-ces prod))
     (print "Pos: ")
     (map
       (lambda (x)
-        (format ops-out "~a " (ce-id x)))
+        (sformat ops-out "~a " (ce-id x)))
       (prod-pos-ces prod))
-    (format ops-out "~%"))
+    (sformat ops-out "~%"))
 
   (defmethod p-name ((prod <production>))
     (prod-name prod))
 
   (defmethod add-cond-el ((prod <production>) (ce <pos-join-ce>))
-    ;;   (format ops-out "Rating: ~a~%" (prod-rating prod))
-    ;;   (format ops-out "Prod-ordered ces: ~a~%" (prod-ordered-ces prod))
+    ;;   (sformat ops-out "Rating: ~a~%" (prod-rating prod))
+    ;;   (sformat ops-out "Prod-ordered ces: ~a~%" (prod-ordered-ces prod))
     (set-prod-pos-ces prod (append (prod-pos-ces prod) (list ce)))
     ;;   (set-prod-ordered-ces prod (cons ce (prod-ordered-ces prod)))
     (set-prod-ordered-ces prod
@@ -75,14 +75,14 @@
                                            (t (cons (car res)
                                                     (loop (cdr res)))))))
                                   (loop (prod-ordered-ces prod))))
-    ;;(format t "(pj) ~a~%" (prod-ordered-ces prod))
+    ;;(format "(pj) ~a~%" (prod-ordered-ces prod))
     (set-prod-rating prod (+ (prod-rating prod) (ce-rating ce)))
     (set-prod-ces prod (cons ce (prod-ces prod))))
 
   (defmethod add-cond-el ((prod <production>) (ce <condition-element>))
-    ;;   (format ops-out "Rating: ~a~%" (prod-rating prod))
+    ;;   (sformat ops-out "Rating: ~a~%" (prod-rating prod))
     (when (eql (class-of ce) <neg-join-ce>)
-          ;;(format t "(nj) ~a " ce)
+          ;;(format "(nj) ~a " ce)
           (set-prod-ordered-ces prod
                                 (labels ((loop (res)
                                                (cond
@@ -93,12 +93,12 @@
                                                           (loop (cdr res)))))))
                                         (loop (prod-ordered-ces prod)))))
     (when (eql (class-of ce) <pos-njoin-ce>)
-          ;;(format t "(pnj) ")
+          ;;(format "(pnj) ")
           (set-prod-pos-ces prod (append (prod-pos-ces prod) (list ce)))
           (set-prod-ordered-ces prod
                                 (append (prod-ordered-ces prod) (list ce))))
     (set-prod-rating prod (+ (prod-rating prod) (ce-rating ce)))
-    ;;(format t "Ordered: ~a~%" (prod-ordered-ces prod))
+    ;;(format "Ordered: ~a~%" (prod-ordered-ces prod))
     (set-prod-ces prod (append (prod-ces prod) (list ce))))
   ;; all-satisfied
   ;; Returns t if all condition elements of prod are satisfied.
@@ -129,12 +129,12 @@
                                 (ce <condition-element>)
                                 join-tests
                                 cr-manager)
-    ;;(format ops-out "Create prod insts ~a~%" ts)
-    ;;(format ops-out "Prod: ~a~%" (p-name prod))
+    ;;(sformat ops-out "Create prod insts ~a~%" ts)
+    ;;(sformat ops-out "Prod: ~a~%" (p-name prod))
     (when (all-satisfied prod)
           ;;(print "")
           ;;(print "attempting join")
-          ;;(prin (p-name prod)) (format t "(~a)" ts) (sflush stdout)
+          ;;(prin (p-name prod)) (format "(~a)" ts) (sflush stdout)
           (begin-join prod ts ce join-tests cr-manager)))
 
 ;;;-----------------------------------------------------------------------------
@@ -148,19 +148,19 @@
                           cr-manager)
     method: (((prod <production>) ts (ce <pos-join-ce>) join-tests cr-manager)
              ;;(print "begin-join (pj)")
-             ;;(format ops-out "join-list: ~a~%" join-tests)
-             ;;(format ops-out "ts: ~a~%" ts)
-             ;;(format ops-out "ce: ~a~%" ce)
+             ;;(sformat ops-out "join-list: ~a~%" join-tests)
+             ;;(sformat ops-out "ts: ~a~%" ts)
+             ;;(sformat ops-out "ce: ~a~%" ce)
              ;;(print  (prod-ordered-ces prod))
              ;;(print  (list-remove ce (prod-ordered-ces prod)))
              (let* ((all-ces (prod-ordered-ces prod))
                     (ces (list-remove ce all-ces))
                     (bindings (var-bindings ce ts)))
-               ;;(format ops-out "Trying to instantiate (pj): ~a~%"
+               ;;(sformat ops-out "Trying to instantiate (pj): ~a~%"
                ;;      (p-name prod))
                ;;    (size all-ces) (size ces))
-               ;;(format ops-out "ces to join: ~a~%"  ces)
-               ;;(format ops-out "Bindings: ~a ~a~%" bindings (ce-matches ce))
+               ;;(sformat ops-out "ces to join: ~a~%"  ces)
+               ;;(sformat ops-out "Bindings: ~a ~a~%" bindings (ce-matches ce))
                (join ce prod
                      (if (null? ces) () (car ces))
                      (if (null? ces) () (cdr ces))
@@ -171,11 +171,11 @@
              (let* ((all-ces (prod-ordered-ces prod))
                     (ces (list-remove ce all-ces))
                     (bindings (var-bindings ce ts)))
-               ;;(format ops-out "join-list: ~a~%" join-tests)
-               ;;(format ops-out "Trying to instantiate (nj): ~a~%"
+               ;;(sformat ops-out "join-list: ~a~%" join-tests)
+               ;;(sformat ops-out "Trying to instantiate (nj): ~a~%"
                ;;      (p-name prod))
                ;;(print all-ces)
-               ;;(format ops-out "Bindings: ~a~%" bindings)
+               ;;(sformat ops-out "Bindings: ~a~%" bindings)
                (join ce prod
                      (if (null? ces) () (car ces))
                      (if (null? ces) () (cdr ces))
@@ -187,10 +187,10 @@
              (let* ((all-ces (prod-ordered-ces prod))
                     (ces (list-remove ce all-ces))
                     (bindings (var-bindings ce ts)))
-               ;;(format ops-out "Trying to instantiate (pnj): ~a~%"
+               ;;(sformat ops-out "Trying to instantiate (pnj): ~a~%"
                ;;      (p-name prod))
                ;;(print all-ces)
-               ;;(format ops-out "Bindings: ~a ~a~%" bindings ts)
+               ;;(sformat ops-out "Bindings: ~a ~a~%" bindings ts)
                (join ce prod
                      (if (null? ces) () (car ces))
                      (if (null? ces) () (cdr ces))
@@ -202,9 +202,9 @@
              (let* ((all-ces (prod-ordered-ces prod))
                     (ces (list-remove ce all-ces))
                     (bindings (var-bindings ce ts)))
-               ;;(format ops-out "Trying to instantiate (nnj): ~a~%"
+               ;;(sformat ops-out "Trying to instantiate (nnj): ~a~%"
                ;;      (p-name prod))
-               ;;        (format ops-out "Bindings: ~a~%" bindings)
+               ;;        (sformat ops-out "Bindings: ~a~%" bindings)
                (join ce prod
                      (if (null? ces) () (car ces))
                      (if (null? ces) () (cdr ces))
@@ -219,19 +219,19 @@
     method: (((ce0 <condition-element>) prod next-ce ce-list
               timestamps ce-ts join-tests bindings cr-manager)
              ;;(print "join")
-             ;;(format ops-out "tests: ~a~%" join-tests)
-             ;;(format ops-out "bindings: ~a~%" bindings)
-             ;;(format ops-out "Prod: ~a Ces to go: ~a~%"
+             ;;(sformat ops-out "tests: ~a~%" join-tests)
+             ;;(sformat ops-out "bindings: ~a~%" bindings)
+             ;;(sformat ops-out "Prod: ~a Ces to go: ~a~%"
              ;;  (prod-name prod) (size ce-list))
              (cond
                ((null? next-ce) ;create prod inst
                 ;;(print ce-list)
-                ;;(format ops-out  "Inserting Prod Inst: ~a~%" (p-name prod))
-                ;;(format t "Bindings: ~a~%" bindings)
+                ;;(sformat ops-out  "Inserting Prod Inst: ~a~%" (p-name prod))
+                ;;(format "Bindings: ~a~%" bindings)
                 ;;(print join-tests)
                 ;;(print timestamps)
-                ;;(format t "Ce-ts: ~a~%" ce-ts)
-                ;;(format t "Ce-vars: ~a~%" (prod-ce-vars prod))
+                ;;(format "Ce-ts: ~a~%" ce-ts)
+                ;;(format "Ce-vars: ~a~%" (prod-ce-vars prod))
                 ;; Add bindings for ce-vars
                 (let ((new-bindings
                         (accumulate
@@ -280,7 +280,7 @@
 ;;;-----------------------------------------------------------------------------
   (defun dummy-join (ce0 prod curr-ce ce-list timestamps
                          ce-ts join-tests bindings cr-manager)
-    (format t "-") (sflush stdout)
+    (format "-") (sflush stdout)
     ;;(print "dummy-join")
     (let* ((next-ce (if (null? ce-list) () (car ce-list)))
            (rest-of-ces (if (null? next-ce) () (cdr ce-list)))
@@ -291,7 +291,7 @@
                 bindings cr-manager)
         (do
           (lambda (match)
-            ;;(format t "dummy-join join 2: ~a ~a~%" (car match) timestamps)
+            ;;(format "dummy-join join 2: ~a ~a~%" (car match) timestamps)
             (join ce0 prod next-ce rest-of-ces
                   (cons (car match) timestamps)
                   (cons (cons curr-ce (car match)) ce-ts)
@@ -302,9 +302,9 @@
 
   (defun join-join (ce0 prod curr-ce ce-list timestamps
                         ce-ts join-tests bindings cr-manager)
-    ;;(format t ".") (sflush stdout)
-    ;;(format ops-out "join-join: ~a~%" join-tests)
-    ;;(format t "Remaining ces: ~a~%" (size ce-list))
+    ;;(format ".") (sflush stdout)
+    ;;(sformat ops-out "join-join: ~a~%" join-tests)
+    ;;(format "Remaining ces: ~a~%" (size ce-list))
     ;;(print bindings)
     (let* ((next-ce (if (null? ce-list) () (car ce-list)))
            (rest-of-ces (if (null? next-ce) () (cdr ce-list)))
@@ -380,14 +380,14 @@
                                join-tests bindings cr-manager)
     ;;(prin "P ") (sflush stdout)
     ;;(print "solve-join-pos")
-    ;;(format ops-out "bindings: ~a~%" bindings)
-    ;;(format ops-out "join-tests: ~a~%" join-tests)
-    ;;(format t       "tstamps: ~a~%" matching-tstamps)
+    ;;(sformat ops-out "bindings: ~a~%" bindings)
+    ;;(sformat ops-out "join-tests: ~a~%" join-tests)
+    ;;(format       "tstamps: ~a~%" matching-tstamps)
     ;;(print rest-of-ces)
     ;;(prin (size matching-tstamps)) (sflush stdout)
     (do
       (lambda (x)
-        ;;(format t "current tstamp: ~a~%" x)
+        ;;(format "current tstamp: ~a~%" x)
         (let ((consis-b (compute-consistent join-tests (join-list jv-ce x))))
           ;;(print consis-b)
           (when consis-b
@@ -415,22 +415,22 @@
                                  (t
                                    (find-consis (cdr tstamps) jtests ce)))))
                  (find-consis matching-tstamps join-tests jv-ce))))
-      ;;(if res (format t "No join: ~a~%" res)
+      ;;(if res (format "No join: ~a~%" res)
       ;;(print "No match -- join continuing"))
       (unless ;; if there are no consistent variable
         ;; bindings for jv-ce (-ve) then continue the join
         res
-        ;;(format t "Match found: ~a~%" res)
+        ;;(format "Match found: ~a~%" res)
         (join ce0 prod next-ce rest-of-ces timestamps
               ce-ts join-tests bindings cr-manager))))
 
   (defun compute-consistent (j-tests0 j-tests1)
-    ;;(format ops-out "j-tests0: ~a~%j-tests1 ~a~%" j-tests0 j-tests1)
+    ;;(sformat ops-out "j-tests0: ~a~%j-tests1 ~a~%" j-tests0 j-tests1)
     ; At present this will only work if there is only one test
     ; per join variable in a condition element
     (let ((res (labels
                  ((consis (join0 join1 new-join)
-                          ;;(format t "join0: ~a join1: ~a new-join: ~a~%"
+                          ;;(format "join0: ~a join1: ~a new-join: ~a~%"
                           ;;      join0 join1 new-join)
                           (cond
                             ((null? join0)
@@ -449,7 +449,7 @@
                                            (pred0 (caadr test0))
                                            (val1 (car test1))
                                            (pred1 (caadr test1)))
-                                       ;;(format t "val0: ~a pred0: ~a val1: ~a pred1: ~a~%"
+                                       ;;(format "val0: ~a pred0: ~a val1: ~a pred1: ~a~%"
                                        ;;      val0 pred0 val1 pred1)
                                        (cond
                                          ((eql pred0 '=)
@@ -496,22 +496,22 @@
     (if (eql (class-of curr-ce) <neg-join-ce>)
         ;; All jvs must be in list by now
         (let ((var (caddr (car (ce-j-tests curr-ce)))))
-          ;; (format t "Var: ~a~%" var) (sflush stdout)
+          ;; (format "Var: ~a~%" var) (sflush stdout)
           (labels ((loop (jlist)
                          ;;(when jlist (print (car jlist))
                          ;;    (print (cadadr (car jlist))))
                          (cond
                            ((null? jlist) (print "ERROR"))
                            ((eql (cadadr (car jlist)) var)
-                            ;;(format t "j-test: ~a~%" (car jlist))
+                            ;;(format "j-test: ~a~%" (car jlist))
                             (car jlist))
                            (t (loop (cdr jlist))))))
                   (loop join0)))
       (let ((restricts (ce-j-tests curr-ce)))
-        ;;(format t "jv: ~a~%" (ce-jv-vals curr-ce))
-        ;;(format t "m: ~a~%"  (ce-matches curr-ce))
-        ;;(format t "join0: ~a~%" join0)
-        ;;(format t "restricts: ~a~%" restricts)
+        ;;(format "jv: ~a~%" (ce-jv-vals curr-ce))
+        ;;(format "m: ~a~%"  (ce-matches curr-ce))
+        ;;(format "join0: ~a~%" join0)
+        ;;(format "restricts: ~a~%" restricts)
         (labels ((loop1 (jlist)
                         (cond
                           ((null? jlist) ())
@@ -521,7 +521,7 @@
                                                     (cond
                                                       ((null? jlist2) ())
                                                       (t
-                                                        ;;(format t "p1: ~a p2: ~a v1: ~a v2: ~a~%"
+                                                        ;;(format "p1: ~a p2: ~a v1: ~a v2: ~a~%"
                                                         ;;      (caadr test) (cadr (car jlist2))
                                                         ;;      (cadadr test) (caddr (car jlist2)))
                                                         (if (and
@@ -532,7 +532,7 @@
                                                             test
                                                           (loop2 test (cdr jlist2)))))))
                                             (loop2 (car jlist) restricts))))
-                              ;;(format t "jtest: ~a~%" jtest)
+                              ;;(format "jtest: ~a~%" jtest)
                               (if jtest jtest
                                 (loop1 (cdr jlist))))))))
                 (loop1 join0)))))
@@ -542,7 +542,7 @@
           (var (cadadr test))
           (pred (caadr test)))
       ;;(print "query")
-      ;;(format ops-out "val: ~a pred: ~a var: ~a jv-values: ~a~%" val pred
+      ;;(sformat ops-out "val: ~a pred: ~a var: ~a jv-values: ~a~%" val pred
       ;;    var jv-values)
       (let ((res (accumulate
                    (lambda (a x)
@@ -561,7 +561,7 @@
            ;;(convert (- ce-num 1) <integer>)))
            (val (assoc ce ce-ts)))
       (if (null? val)
-          (format ops-out "Error: No timestamp for ~a~%" (ce-id ce))
+          (sformat ops-out "Error: No timestamp for ~a~%" (ce-id ce))
         (cdr (assoc ce ce-ts)))))
 
 ;;;-----------------------------------------------------------------------------
@@ -584,13 +584,13 @@
   (defmethod fire ((prod-inst <prod-instantiation>)
                    wm-manager ce-manager cr-manager)
     (let ((prod (pi-prod prod-inst)))
-      (format ops-out "Firing production: ~a~%" (p-name prod))
+      (sformat ops-out "Firing production: ~a~%" (p-name prod))
       (labels ((loop (actions)
                      (cond
                        ((null? actions)
                         (fire-prod-inst cr-manager wm-manager ce-manager))
                        ((eql (class-of (car actions)) <halt-action>)
-                        (format ops-out "Execution terminated by halt action~%"))
+                        (sformat ops-out "Execution terminated by halt action~%"))
                        (t
                          (execute (car actions) prod-inst wm-manager
                                   ce-manager cr-manager)

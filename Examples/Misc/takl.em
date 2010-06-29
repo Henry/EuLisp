@@ -25,18 +25,18 @@
   (deflocal |6l| (listn 6))
 
   (defun mas (x y z)
-    (if (null? (shorterp y x))
+    (if (null? (shorter? y x))
         z
       (mas (mas (cdr x) y z)
            (mas (cdr y) z x)
            (mas (cdr z) x y))))
 
-  (defun shorterp (x y)
+  (defun shorter? (x y)
     (and y (or (null? x)
-               (shorterp (cdr x)
+               (shorter? (cdr x)
                          (cdr y)))))
 
-  (time (mas |18l| |12l| |6l|))
+  (time (mas |18l| |12l| |6l|) stdout)
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

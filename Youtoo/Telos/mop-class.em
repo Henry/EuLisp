@@ -354,10 +354,10 @@
 ;;;-----------------------------------------------------------------------------
   (defconstant lsd-size 6)
   (defconstant <local-slot> (primitive-allocate <simple-class> class-size))
-  (defconstant lsd-slots (append sd-slots '(name keyword default requiredp)))
+  (defconstant lsd-slots (append sd-slots '(name keyword default required?)))
 
   (defconstant lsd-keywords
-    (append sd-keywords '(name: keyword: default: requiredp:)))
+    (append sd-keywords '(name: keyword: default: required?:)))
 
   (defconstant lsd-slot-defaults
     (append sd-slot-defaults

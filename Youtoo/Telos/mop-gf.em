@@ -12,8 +12,7 @@
    export (gf-reset-cache the-method-lookup-function
            initialize finalize allocate make
            error-no-applicable-methods sig=
-           discriminating-domain make-generic-function
-           generic-format))
+           discriminating-domain make-generic-function))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Initialize, allocate and make
@@ -190,27 +189,22 @@
         ())))
 
 ;;;-----------------------------------------------------------------------------
-;;; Generic format (see also mop-meth.em and Runtime/format.em)
-;;;-----------------------------------------------------------------------------
-  (defgeneric generic-format (s str . args))
-
-;;;-----------------------------------------------------------------------------
-;;; Error and warning (using simple generic-format)
+;;; Error and warning (using simple format1)
 ;;;-----------------------------------------------------------------------------
   (setq *error*
         (named-lambda error (str . args)
-          (generic-format 2 "*** ERROR [level1]: ")
-          (apply generic-format 2 str args)
-          (generic-format 2 "\n")
-          (generic-format 2 "***    See Backtrace? (y/n) ")
+          (format1 2 "*** ERROR [level1]: ")
+          (apply format1 2 str args)
+          (format1 2 "\n")
+          (format1 2 "***    See Backtrace? (y/n) ")
           (if (eq (getchar) #\y) (backtrace) ())
           (exit)))
 
   (setq *warning*
         (named-lambda warning (str . args)
-          (generic-format 2 "*** WARNING [level1]: ")
-          (apply generic-format 2 str args)
-          (generic-format 2 "\n")))
+          (format1 2 "*** WARNING [level1]: ")
+          (apply format1 2 str args)
+          (format1 2 "\n")))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

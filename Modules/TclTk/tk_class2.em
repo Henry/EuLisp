@@ -360,7 +360,7 @@
             (null? index))
        (eul_tk_cmd_text (tk-name text) (tk-handler text) "mark" (list  '2 "unset" mark)))
       (t
-        (format t "Incorrect arguments in tk-text-mark function\n"))))
+        (format "Incorrect arguments in tk-text-mark function\n"))))
   ()
 
   (defun tk-text-tag-add (text tagName index1 . index2)

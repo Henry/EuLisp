@@ -15,7 +15,7 @@
 ;;; Class definition
 ;;;-----------------------------------------------------------------------------
   (defclass <bigint> (<integer>)
-    ((value accessor: bigint-value keyword: value: requiredp: t))
+    ((value accessor: bigint-value keyword: value: required?: t))
     predicate: bigint?)
 
   (defmethod initialize ((x <bigint>) inits)

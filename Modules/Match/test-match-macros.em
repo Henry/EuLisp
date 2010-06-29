@@ -3,7 +3,7 @@
    import (level1))
 
   (defmacro print-test (body)
-    `(format t "~s~%    ;;=> ~s~%" ',body ,body))
+    `(format "~s~%    ;;=> ~s~%" ',body ,body))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

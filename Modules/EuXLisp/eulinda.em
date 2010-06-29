@@ -48,21 +48,21 @@
     predicate: pool?)
 
   (defmethod generic-write ((p <linda-pool>) s)
-    (format s "#<linda-pool: ~s>"
+    (sformat s "#<linda-pool: ~s>"
             (linda-pool-tuple-table p))
     p)
 
   (defmethod generic-prin ((p <linda-pool>) s)
-    (format s "#<linda-pool: ~s>"
+    (sformat s "#<linda-pool: ~s>"
             (linda-pool-tuple-table p))
     p)
 
   (defun print-linda-pool (pool)
-    (format t "Linda pool:~%")
+    (format "Linda pool:~%")
     (map
-      (lambda (v) (format t "~a " v))
+      (lambda (v) (format "~a " v))
       (linda-pool-tuple-table pool))
-    (format t "~%"))
+    (format "~%"))
 
   (defun tidy-pattern (pat)
     (cond ((null? pat) ())
@@ -93,10 +93,10 @@
        *tuple*))
 
   (defun linda-in-tuple (pool tag . pattern)
-    (when trace-linda? (format t ";; in-ing ~a ~a~%" tag pattern))
+    (when trace-linda? (format ";; in-ing ~a ~a~%" tag pattern))
     (let ((val (linda-in/read pool tag (tuple tag pattern) in-match)))
       (when trace-linda?
-            (format t ";; in'd ~a~%" val))
+            (format ";; in'd ~a~%" val))
       val))
 
   (defmacro linda-in? (pool tag . pattern)
@@ -109,10 +109,10 @@
            t))))
 
   (defun linda-in?-tuple (pool tag . pattern)
-    (when trace-linda? (format t ";; in?-ing ~a ~a~%" tag pattern))
+    (when trace-linda? (format ";; in?-ing ~a ~a~%" tag pattern))
     (let ((val (linda-in/read? pool tag (tuple tag pattern) in-match)))
       (when trace-linda?
-            (format t ";; in?'d ~a~%" val))
+            (format ";; in?'d ~a~%" val))
       val))
 
   (defmacro linda-read (pool tag . pattern)
@@ -124,10 +124,10 @@
        *tuple*))
 
   (defun linda-read-tuple (pool tag . pattern)
-    (when trace-linda? (format t ";; reading ~a ~a~%" tag pattern))
+    (when trace-linda? (format ";; reading ~a ~a~%" tag pattern))
     (let ((val (linda-in/read pool tag (tuple tag pattern) read-match)))
       (when trace-linda?
-            (format t ";; read ~a~%" val))
+            (format ";; read ~a~%" val))
       val))
 
   (defmacro linda-read? (pool tag . pattern)
@@ -140,10 +140,10 @@
            t))))
 
   (defun linda-read?-tuple (pool tag . pattern)
-    (when trace-linda? (format t ";; read?-ing ~a ~a~%" tag pattern))
+    (when trace-linda? (format ";; read?-ing ~a ~a~%" tag pattern))
     (let ((val (linda-in/read? pool tag (tuple tag pattern) read-match)))
       (when trace-linda?
-            (format t ";; read?'d ~a~%" val))
+            (format ";; read?'d ~a~%" val))
       val))
 
   (defun linda-in/read (pool tag pattern matchfn)
@@ -158,10 +158,10 @@
       (if (null? match)
           (progn
             (when trace-linda?
-                  (format t ";; suspending~%"))
+                  (format ";; suspending~%"))
             (thread-reschedule)
             (when trace-linda?
-                  (format t ";; retrying ~a ~a~%" tag
+                  (format ";; retrying ~a ~a~%" tag
                           (linda-tuple-value pattern)))
             (linda-in/read pool tag pattern matchfn))
         match)))
@@ -180,7 +180,7 @@
         match)))
 
   (defun linda-out (pool tag . rest)
-    (when trace-linda? (format t ";; out ~a ~a~%" tag rest))
+    (when trace-linda? (format ";; out ~a ~a~%" tag rest))
     (check-pool pool)
     (check-tag tag)
     (let ((llock (linda-pool-lock pool))
@@ -218,13 +218,13 @@
     constructor: (tuple tag: value:))
 
   (defmethod generic-write ((lt linda-tuple) s)
-    (format s "#<linda-tuple: ~a ~a>"
+    (sformat s "#<linda-tuple: ~a ~a>"
             (linda-tuple-tag lt)
             (linda-tuple-value lt))
     lt)
 
   (defmethod generic-prin ((lt linda-tuple) s)
-    (format s "#<linda-tuple: ~a ~a>"
+    (sformat s "#<linda-tuple: ~a ~a>"
             (linda-tuple-tag lt)
             (linda-tuple-value lt))
     lt)
@@ -301,7 +301,7 @@
 
   (defun linda-eval (fun . args)
     (when trace-linda?
-          (format t ";; eval ~a~%" fun))
+          (format ";; eval ~a~%" fun))
     (apply thread-start (make-thread fun) args))
 
   ; a convenient fiddle

@@ -23,7 +23,7 @@
     (ct-serious-warning (ct-error-value c) (condition-message c)))
 
   (defun ct-error (value str . args)
-    (error (apply format () str args) <ct-error> ct-error-value: value))
+    (error (apply fmt str args) <ct-error> ct-error-value: value))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Exit from compilation
@@ -31,11 +31,11 @@
   (defun ct-exit values
     (let ((value (if values (car values) ())))
       (if (= *number-of-warnings* 0) ()
-          (format stderr "*** TOTAL NUMBER OF WARNINGS: ~a\n"
+          (sformat stderr "*** TOTAL NUMBER OF WARNINGS: ~a\n"
                   *number-of-warnings*))
       (if (= *number-of-errors* 0) ()
         (progn
-          (format stderr "*** TOTAL NUMBER OF ERRORS: ~a\n"
+          (sformat stderr "*** TOTAL NUMBER OF ERRORS: ~a\n"
                   *number-of-errors*)
           (if values ()
             (setq values -1))))

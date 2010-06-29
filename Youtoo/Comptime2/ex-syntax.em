@@ -44,7 +44,7 @@
 
   (defun import-syntax-module (name)
     (notify0 "  Import syntax module ~a ..." name)
-    (with-ct-handler (format () "cannot import syntax module ~a" name)
+    (with-ct-handler (fmt "cannot import syntax module ~a" name)
                      (dynamic *actual-module*)
       (let ((module (or (module? name) (find-syntax-module name))))
         (access-table-do

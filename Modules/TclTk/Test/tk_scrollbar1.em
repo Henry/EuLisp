@@ -45,7 +45,7 @@
 
 
     (tk-bind numbers-lb "<Button-1>" take-value)
-    (tk-insert text "end" (format () "Line 1.\n2\n3\n4\n5\n...\n"))
+    (tk-insert text "end" (fmt "Line 1.\n2\n3\n4\n5\n...\n"))
 
 
     (tk-pack frame-left side: "left")

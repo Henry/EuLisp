@@ -39,7 +39,6 @@
            *get-loaded-module*
            *get-loaded-syntax-module*
            *modified-module-names*
-           *start-module*
            *get-load-dir*
            *get-full-import*
            *load-path*
@@ -79,15 +78,14 @@
   (deflocal *C-library-load-path*
     (listify-env-string (getenv "EUL_LIBRARY_LOAD_PATH")))
 
-  (deflocal *start-module* (getenv "EUL_START_MODULE"))
   (deflocal *tmp-load-dir* ())
 
   (defun load-config-info ()
-    (let* ((private-name (format () "~a~a.eulrc.~a" (getenv "HOME") *delimiter*  *eulysses-arch*))
-           (default-name (format () "~a~a.eulrc.~a" *eulysses-dir* *delimiter* *eulysses-arch*))
+    (let* ((private-name (fmt "~a~a.eulrc.~a" (getenv "HOME") *delimiter*  *eulysses-arch*))
+           (default-name (fmt "~a~a.eulrc.~a" *eulysses-dir* *delimiter* *eulysses-arch*))
            (default-info (with-input-file
                            (s default-name) (read-s-expression s))))
-      (if (zero? (system (format () "test -f ~a" private-name)))
+      (if (zero? (system (fmt "test -f ~a" private-name)))
           (let* ((private-info (with-input-file
                                  (s private-name) (read-s-expression s)))
                  (private-version (assoc-list-ref 'VERSION private-info))

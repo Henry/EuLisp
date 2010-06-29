@@ -40,7 +40,7 @@
              (unless (member lp *final*)
                      (setq *final* (cons lp *final*))))
            (setq *answer* (cons (cdr (convert *sequence* <list>)) *answer*))
-           ;;(format t "Answer: ~a~%" (car *answer*))
+           ;;(format "Answer: ~a~%" (car *answer*))
            t)
           ((and (= 1 (vector-ref *board* (vector-ref *a i)))
                 (= 1 (vector-ref *board* (vector-ref *b i)))
@@ -61,7 +61,7 @@
            ())
           (t ())))
 
-  (time (try 22 1))
+  (time (try 22 1) stdout)
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

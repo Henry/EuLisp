@@ -1,9 +1,15 @@
-;;; format.em
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
-
+;;; Copyright (c) 1994 Russell Bradford
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;;  File: format.em
+;;;  Library: level0
+;;;  Author: Russell Bradford
+;;;  Description: formatted output
+;;;-----------------------------------------------------------------------------
 (defmodule format
     (import (root condcl thread setter convert)
-     export (format))
+     export (sformat format fmt))
 
   (deflocal escape-char #\~)
 
@@ -17,19 +23,19 @@
   (define (format-error msg val)
           (error msg <format-error> value: val))
 
-  (define (format stream string . args)
-          (if (not (or (stream? stream)
-                       (eq? stream t)
-                       (eq? stream ())))
-              (format-error "not a valid stream for format" stream)
-            (let ((result (format-loop string args
-                                       0 (string-length string) ())))
-              (cond ((eq? stream t)
-                     (%display result))
-                    ((eq? stream ())
-                     result)
-                    (t
-                      (%display result stream))))))
+  (define (sformat stream string . args)
+          (%display (format-loop
+                      string args 0 (string-length string) ()) stream)
+          stream)
+
+  (define (format string . args)
+          (%display (format-loop
+                      string args 0 (string-length string) ()))
+          stdout)
+
+  (define (fmt string . args)
+          (format-loop
+            string args 0 (string-length string) ()))
 
   (define (format-loop string args n len result)
           (if (< n len)

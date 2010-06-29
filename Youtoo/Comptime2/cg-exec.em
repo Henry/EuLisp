@@ -170,7 +170,7 @@
       (write-next-bv-binding-ref *C-module-name* local-index)))
 
   (defun compute-binding (binding-name module-name)
-    (with-ct-handler (format () "can't compute binding ~a of module ~a"
+    (with-ct-handler (fmt "can't compute binding ~a of module ~a"
                              binding-name (module-name? *module*))
                      binding-name
       (notify0 "  compute-binding ~a ~a" module-name binding-name)

@@ -36,10 +36,10 @@
            new-colour)
       (do (lambda (c)
             (setq aux
-                  (cons (if (< c 16) (format () "~x000" c)
-                          (format () "~x00" c)) aux)))
+                  (cons (if (< c 16) (fmt "~x000" c)
+                          (fmt "~x00" c)) aux)))
           (list blue-value green-value red-value))
-      (setq new-colour (format () "#~a~a~a" (car aux) (cadr aux) (caddr aux)))
+      (setq new-colour (fmt "#~a~a~a" (car aux) (cadr aux) (caddr aux)))
       (tk-conf-widget *sample* background: new-colour)))
 
 ;;;-----------------------------------------------------------------------------

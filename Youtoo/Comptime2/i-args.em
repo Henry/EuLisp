@@ -18,7 +18,7 @@
     (let ((n (vector-size argv)))
       (labels
        ((loop (i)
-              (with-ct-handler (format () "bad parameter ~a" argv) argv
+              (with-ct-handler (fmt "bad parameter ~a" argv) argv
                 (if (= i n) t
                   (let ((arg (vector-ref argv i)))
                     (cond
@@ -218,7 +218,7 @@
     (flush))
 
   (defun print-param (name value)
-    (format t "  ~a = ~a\n" name value))
+    (format "  ~a = ~a\n" name value))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Print usage
@@ -262,7 +262,7 @@
 
   (defun print-version ()
     (print "EuLisp System 'youtoo'")
-    (format t "Version ~a updated\n" *version*)
+    (format "Version ~a updated\n" *version*)
     (print "Copyright (c) 1996, 1997 by A Kind & University of Bath")
     (print "This is free software; see the source and the file COPYING for copying conditions.")
     (print "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.")

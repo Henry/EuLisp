@@ -17,9 +17,9 @@
 
   (defgeneric boz (x y))
   (defmethod boz ((x <int>) (y <string>))
-    (format t "method1: ~a ~a\n" x y))
+    (format "method1: ~a ~a\n" x y))
   (defmethod boz ((x <double>) (y <symbol>))
-    (format t "method1: ~a ~a\n" x y))
+    (format "method1: ~a ~a\n" x y))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Serialization tests
@@ -30,18 +30,18 @@
   ;;  (defun Deserialize ss
   ;;    (let ((s (if ss (car ss) stdin))
   ;;        (os (make <object-stream> mode: 'r)))
-  ;;      (pprint os stderr)
+  ;;      (spprint stderr os)
   ;;      (connect os s)
-  ;;      (pprint os stderr)
+  ;;      (spprint stderr os)
   ;;      (let ((res (read os)))
   ;;      (disconnect os)
   ;;      res)))
 
   (defun my-serialize (type fs)
     (let* ((os (make <object-stream> mode: 'w)))
-      (pprint os stderr)
+      (spprint stderr os)
       (connect os fs)
-      (pprint os stderr)
+      (spprint stderr os)
       (cond
        ((binary= type "null")
         (swrite os ()))
@@ -77,14 +77,14 @@
         (swrite os boz))
        ((binary= type "thread")
         (let ((thr (make <current-thread> function: (lambda (thr)
-                                              (pprint thr stderr)
+                                              (spprint stderr thr)
                                               (sprint stderr 42)
                                               (swrite os thr)
                                               (sprint stderr 43)))))
           (thread-start thr thr)
           (thread-value thr)))
        (t
-        (format stderr "*** ERROR: unknown type ~a\n" type)
+        (sformat stderr "*** ERROR: unknown type ~a\n" type)
         (swrite os ())))
       (sflush os)
       (disconnect os)))

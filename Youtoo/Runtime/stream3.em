@@ -9,7 +9,7 @@
 (defmodule stream3
   (syntax (_telos0)
    import (telos integer collect list character string vector
-           float stream1 stream))
+           float stream1 stream format))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Default generic write/prin method
@@ -79,7 +79,7 @@
   ;    x)
 
   (defmethod generic-write ((x <function>) (s <buffered-stream>))
-    (format s "#<~a: ~a>" (class-name (class-of x)) (function-name x)))
+    (sformat s "#<~a: ~a>" (class-name (class-of x)) (function-name x)))
 
   (defmethod generic-write ((vec <vector>) (s <buffered-stream>))
     (let ((n (vector-size vec)))
@@ -134,7 +134,7 @@
     (let ((sink (stream-sink x))
           (source (stream-source x))
           (mode (stream-mode x)))
-      (format s "#<~a: ~a>"
+      (sformat s "#<~a: ~a>"
               (class-name (class-of x))
               (if (eq mode 'r)
                   (if (file-control-block? source)
@@ -146,14 +146,14 @@
       x))
 
   (defmethod generic-write ((x <connection>) (s <buffered-stream>))
-    (format s "#<~a: ~a:~a>"
+    (sformat s "#<~a: ~a:~a>"
             (class-name (class-of x))
             (connection-host x)
             (connection-port x))
     x)
 
   (defmethod generic-write ((x <socket>) (s <buffered-stream>))
-    (format s "#<~a: ~a:~a>"
+    (sformat s "#<~a: ~a:~a>"
             (class-name (class-of x))
             (socket-host x)
             (socket-port x))

@@ -486,7 +486,9 @@
       shallow-copy
 
       ;; format
+      sformat
       format
+      fmt
       )
      export
      (;; from telosint, export them all while developing

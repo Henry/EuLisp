@@ -11,7 +11,7 @@
      import (level1 basic))
 
   ;;  (deflocal ops-out (make <output-port> filename: "gcd.out"))
-  (deflocal ops-out t)
+  (deflocal ops-out stdout)
   (export ops-out)
 
 ;;;-----------------------------------------------------------------------------

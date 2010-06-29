@@ -48,11 +48,6 @@
   (defun callback-thunk (str)
     (lambda args  ; args still on the value stack
       (error str <general-condition> arguments: args)))
-;;  (defun callback-thunk (str)
-;;    (lambda args  ; args still on the value stack
-;;      (format 2 "*** ERROR [system-error]: ~a\n    ARGUMENTS: ~a\n"
-;;             str args)
-;;      (exit)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install the callbacks (see also modules number and compare)

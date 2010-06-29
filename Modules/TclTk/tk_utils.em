@@ -28,7 +28,7 @@
               ((setter bd-pos) aux i)
               ((setter bd-button) aux
                (tk-make-button bot text: str command: (lambda ()
-                                                        (format t "buto: ~a\n" (bd-pos aux)))))
+                                                        (format "buto: ~a\n" (bd-pos aux)))))
               (setq but-vect (cons aux but-vect))
               (setq i (+ i 1))))
           list-strings)

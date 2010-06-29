@@ -27,7 +27,7 @@
     constructor: make-paralation-internal)
 
   (defmethod generic-prin ((p <paralation-internal>) str)
-    (format str "#<paralation-internal size ~a shape ~s attributes ~s>"
+    (sformat str "#<paralation-internal size ~a shape ~s attributes ~s>"
             (p-size p) (shape-internal p) (attr p))
     p)
 
@@ -44,11 +44,11 @@
     constructor: make-field)
 
   (defmethod generic-prin ((o <field>) str)
-    (format str "#F~a" (convert (value o) <cons>))
+    (sformat str "#F~a" (convert (value o) <cons>))
     o)
 
   (defmethod generic-write ((o <field>) str)
-    (format str "#F~s" (convert (value o) <cons>))
+    (sformat str "#F~s" (convert (value o) <cons>))
     o)
 
   (defun copy-field (field)
@@ -66,11 +66,11 @@
     constructor: make-mapping)
 
   (defmethod generic-prin ((m <mapping>) str)
-    (format str "#<mapping from ~a to ~a>"
+    (sformat str "#<mapping from ~a to ~a>"
             (from-key m) (to-key m)))
 
   (defmethod generic-write ((m <mapping>) str)
-    (format str "#<mapping ~s -> ~s>"
+    (sformat str "#<mapping ~s -> ~s>"
             (from-key m) (to-key m)))
 
   ;; macros

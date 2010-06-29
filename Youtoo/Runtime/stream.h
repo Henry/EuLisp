@@ -65,6 +65,7 @@ extern LispRef stream_bindings[];
 #define string_stream__X63_fn_index 15 
 #define open_file_streams_fn_index 14 
 #define control_block_buffer_fn_index 32 
+#define socket__X63_fn_index 10 
 #define stream_lock_fn_index 31 
 #define stream_write_action_fn_index 13 
 #define connection_host_fn_index 5 

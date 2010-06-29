@@ -26,7 +26,7 @@ extern LispRef vector_bindings[];
 #define _vector__X60_X62_fn_index 8 
 #define all1_vector__X63_fn_index 9 
 #define vector__X63_fn_index 5 
-#define make_vector_fn_index 39 
+#define make_vector_fn_index 41 
 
 
 

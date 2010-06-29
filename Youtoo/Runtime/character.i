@@ -15,7 +15,7 @@
     ((name . alphap) (pos . 4) (origin character . alphap))
     ((name . digit?) (pos . 7) (origin character . digit?))
     ((name . as-lowercase) (pos . 3) (origin character . as-lowercase))
-    ((name . character?) (pos . 33) (origin boot1 . character?) (inline (G0041 (characterp))))
+    ((name . character?) (pos . 35) (origin boot1 . character?) (inline (G0041 (characterp))))
     ((name . as-uppercase) (pos . 6) (origin character . as-uppercase))
    )
    local-literals (

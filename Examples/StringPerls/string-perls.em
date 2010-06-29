@@ -19,7 +19,7 @@
 
   (deflocal str "Split this string into words,honestly:no really")
   (deflocal delim " ,;:")
-  (format t "Splitting \"~a\" at delimiters \"~a\"~%" str delim)
+  (format "Splitting \"~a\" at delimiters \"~a\"~%" str delim)
   (print (split-string str delim))
 
 ;;;-----------------------------------------------------------------------------

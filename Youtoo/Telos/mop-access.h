@@ -8,17 +8,18 @@
 extern LispRef mop_access_bindings[];
 
 /* Module binding indices */
-#define compute_primitive_reader_using_slot_fn_index 4 
 #define find_slot_names_fn_index 5 
-#define ensure_slot_writer_fn_index 6 
 #define pprint_fn_index 3 
 #define ensure_slot_reader_fn_index 2 
 #define compute_primitive_writer_using_slot_fn_index 7 
-#define compute_primitive_reader_using_class_fn_index 8 
-#define compute_primitive_writer_using_class_fn_index 12 
-#define compute_and_ensure_slot_accessors_fn_index 9 
-#define compute_slot_reader_fn_index 11 
-#define compute_slot_writer_fn_index 10 
+#define spprint_fn_index 8 
+#define compute_primitive_reader_using_class_fn_index 9 
+#define compute_primitive_writer_using_class_fn_index 13 
+#define compute_slot_writer_fn_index 11 
+#define compute_primitive_reader_using_slot_fn_index 4 
+#define ensure_slot_writer_fn_index 6 
+#define compute_slot_reader_fn_index 12 
+#define compute_and_ensure_slot_accessors_fn_index 10 
 
 
 

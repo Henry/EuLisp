@@ -24,12 +24,12 @@
           x)
       (cond ((local-mpi-stream? s1)
              (while (setq x (read lispin () ()))
-               (format t "~a sending ~a\n" s1 x)
+               (format "~a sending ~a\n" s1 x)
                (swrite s2 x))
              (disconnect s1))
             ((local-mpi-stream? s2)
              (while (setq x (read s1))
-               (format t "~a received instance of ~a: ~a\n"
+               (format "~a received instance of ~a: ~a\n"
                        s2 (class-of x) x))
              (disconnect s2))
             (t

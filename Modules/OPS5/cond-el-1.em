@@ -59,23 +59,23 @@
   ;  Print out a <condition-element> is a useful format.
 ;;;-----------------------------------------------------------------------------
   (defmethod generic-prin ((ce <condition-element>) (s <stream>))
-    (format ops-out "Condition Element: ~a ~a ~a~% Prods: "
+    (sformat ops-out "Condition Element: ~a ~a ~a~% Prods: "
             (class-of ce) (ce-id ce) (ce-class-name ce))
     (do
       (lambda (x)
-        (format ops-out " ~a" (p-name x)))
+        (sformat ops-out " ~a" (p-name x)))
       (ce-prods ce))
-    (format ops-out " ~%")
-    ;;    (format ops-out "Constant Tests: ~a~%" (ce-c-tests ce))
-    ;;    (format ops-out "Variable Tests: ~a~%" (ce-v-tests ce))
+    (sformat ops-out " ~%")
+    ;;    (sformat ops-out "Constant Tests: ~a~%" (ce-c-tests ce))
+    ;;    (sformat ops-out "Variable Tests: ~a~%" (ce-v-tests ce))
     ;;    (when (or (eql (class-of ce) <pos-join-ce>)
     ;;            (eql (class-of ce) <neg-join-ce>))
-    ;;        (format ops-out "Join-Var Tests: ~a~%" (ce-j-tests ce))
-    ;;        (format ops-out "Join Var Vals: ~a~%" (ce-jv-vals ce)))
-    ;    (format ops-out "~% Matching Timestamps: ")
+    ;;        (sformat ops-out "Join-Var Tests: ~a~%" (ce-j-tests ce))
+    ;;        (sformat ops-out "Join Var Vals: ~a~%" (ce-jv-vals ce)))
+    ;    (sformat ops-out "~% Matching Timestamps: ")
     ;    (do
     ;     (lambda (x)
-    ;       (format ops-out " ~a" (car x)))
+    ;       (sformat ops-out " ~a" (car x)))
     ;     (ce-matches ce))
     )
 

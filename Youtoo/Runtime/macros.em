@@ -78,7 +78,7 @@
           (last (car (last clauses))))
       (if (null? (eq (car last) 'else))
           ;(ct-warning () "missing else branch in (case ... ~a)" last)
-          (format t "*** WARNING: missing else branch in (case ... ~a)" last)
+          (format "*** WARNING: missing else branch in (case ... ~a)" last)
         ())
       `(let ((,key ,keyform))
          (cond
@@ -157,15 +157,15 @@
         `(reverse-list (list-drop (reverse-list ,list) 1))
       `(reverse-list (list-drop (reverse-list ,list) ,@number))))
 
-  (defmacro time (expr . stream)
+  (defmacro time (expr stream)
     (let ((x (gensym "time"))
           (res (gensym "time")))
       `(let ((,x (time-start))
              (,res ,expr))
          (time-stop ,x)
-         (format ,(if stream (car stream) t)
-                 "real: ~a\nuser: ~a\nsystem: ~a\n"
-                 (vector-ref ,x 0) (vector-ref ,x 1) (vector-ref ,x 2))
+         (sformat ,stream
+                  "real: ~a\nuser: ~a\nsystem: ~a\n"
+                  (vector-ref ,x 0) (vector-ref ,x 1) (vector-ref ,x 2))
          ,res)))
 
 ;;;-----------------------------------------------------------------------------

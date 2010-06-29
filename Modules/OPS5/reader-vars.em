@@ -19,10 +19,10 @@
   ; *** Needs updating to handle condition element variables
 ;;;-----------------------------------------------------------------------------
   (defun get-join-vars (prod-rest)
-    ;;(format ops-out "get-join-vars: ~a~%" prod-rest)
+    ;;(sformat ops-out "get-join-vars: ~a~%" prod-rest)
     ;; loop to determine join variables
     (let ((res (labels ((loop (rest vars join-vars new-prod)
-                              ;;(format t "next elt: ~a~%" (car rest))
+                              ;;(format "next elt: ~a~%" (car rest))
                               (cond
                                 ((eql '--> (car rest))
                                  (cons join-vars (append new-prod rest)))
@@ -56,7 +56,7 @@
       res))
 
   (defun split-symbols (ce)
-    ;;(format ops-out "split-symbols: ~a~%" ce)
+    ;;(sformat ops-out "split-symbols: ~a~%" ce)
     (labels
       ((loop (rest)
              (cond
@@ -74,7 +74,7 @@
   ; (in which case the token must be split up, eg {<w> -> { <w> )
 ;;;-----------------------------------------------------------------------------
   (defun split-symbol (x)
-    ;;(format ops-out "split-symbol: ~a~%" x)
+    ;;(sformat ops-out "split-symbol: ~a~%" x)
     (let ((ssres (let* ((x-as-string (symbol-name x))
                         (len (size x-as-string))
                         (first (element x-as-string 0)))
@@ -84,24 +84,24 @@
                        ((eql first #\{)
                         (let ((sym1 (make-symbol (convert first <string>)))
                               (sym2 (make-symbol (make-new-string x-as-string 1))))
-                          ;;(format ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
+                          ;;(sformat ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
                           (list sym1 sym2)))
                        ((and (eql first #\<) (eql (element x-as-string 1) #\<))
                         (if (eql len 2)
                             (list x)
                           (let ((sym1 (make-symbol (make-new-string x-as-string 0 1)))
                                 (sym2 (make-symbol (make-new-string x-as-string 2))))
-                            ;;(format ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
+                            ;;(sformat ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
                             (list sym1 sym2))))
                        (t
                          (let ((last (element x-as-string (- len 1))))
-                           ;;(format ops-out "last: ~a~%" last)
+                           ;;(sformat ops-out "last: ~a~%" last)
                            (cond
                              ((eql last #\})
                               (let ((sym1 (make-symbol (make-new-string
                                                          x-as-string 0 (- len 2))))
                                     (sym2 (make-symbol (convert last <string>))))
-                                ;;(format ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
+                                ;;(sformat ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
                                 (list sym1 sym2)))
                              ((and (eql last #\>) (eql (element x-as-string (- len 2)) #\>))
                               (if (eql len 2)
@@ -110,10 +110,10 @@
                                                                           0 (- len 3))))
                                       (sym2 (make-symbol (make-new-string x-as-string
                                                                           (- len 2)))))
-                                  ;;(format ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
+                                  ;;(sformat ops-out "s1: ~a  s2: ~a~%" sym1 sym2)
                                   (list sym1 sym2))))
                              (t (list x))))))))))
-      ;;(format ops-out "ssres: ~a~%" ssres)
+      ;;(sformat ops-out "ssres: ~a~%" ssres)
       ssres))
 
 ;;;-----------------------------------------------------------------------------
@@ -124,7 +124,7 @@
   ; omitted include rest of string)
 ;;;-----------------------------------------------------------------------------
   (defun make-new-string (old-str first . last)
-    ;;(format ops-out "old: ~a first: ~a last: ~a~%" old-str first last)
+    ;;(sformat ops-out "old: ~a first: ~a last: ~a~%" old-str first last)
     (let ((end (if last (+ (car last) 1) (size old-str)))
           (init-str (make <string> size: 0)))
       (labels
@@ -141,7 +141,7 @@
 ;;; get-vars
 ;;;-----------------------------------------------------------------------------
   (defun get-vars (cond-el vars join-vars)
-    ;;(format ops-out "get-vars: ~a ~a ~a ~%" cond-el vars join-vars)
+    ;;(sformat ops-out "get-vars: ~a ~a ~a ~%" cond-el vars join-vars)
     (cond
       ((null? cond-el)
        (cons vars join-vars))
@@ -166,8 +166,8 @@
          (sort-vars (car cond-el) (cdr cond-el) vars join-vars)))))
 
   (defun sort-vars (new-var rest vars join-vars)
-    ;;(format ops-out "sort-vars: ~a ~a ~a ~a~%" new-var rest vars join-vars)
-    ;;(format ops-out "not member: ~a~%" (null? (member new-var vars)))
+    ;;(sformat ops-out "sort-vars: ~a ~a ~a ~a~%" new-var rest vars join-vars)
+    ;;(sformat ops-out "not member: ~a~%" (null? (member new-var vars)))
     (cond
       ((is-constant new-var)
        ;;(print "constant")
@@ -183,7 +183,7 @@
         (get-vars rest (cons new-var vars) join-vars))))
 
   (defun is-constant (x)
-    ;;(format t "is-constant: ~a~%" x)
+    ;;(format "is-constant: ~a~%" x)
     (if (number? x) t
       (let* ((name (symbol-name x))
              (first (element name 0))
@@ -191,7 +191,7 @@
         (null? same))))
 
   (defun is-attrib (x)
-    ;;(format ops-out "x: ~a~a~%" x (class-of x))
+    ;;(sformat ops-out "x: ~a~a~%" x (class-of x))
     (let ((name (symbol-name x)))
       (eql (element (symbol-name x) 0)
            #\\x005e )))

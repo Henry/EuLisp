@@ -51,7 +51,7 @@
       (let* ((renamed (if (and note-renaming (not (eq name oname)))
                           " !!!" "")))
         (when (and pos (not (eq class 'ff)))
-          (let ((s (format () "  ~a ~a ~a ~a~a"
+          (let ((s (fmt "  ~a ~a ~a ~a~a"
                            name pos omodule oname renamed)))
             (if internal-sort
                 (setq saved-bindings (cons saved-bindings))
@@ -65,7 +65,7 @@
            (exports (if export-clause (cadr export-clause) ()))
            )
       (when print-header
-        (format t "\n~a\n~d. Bindings in ~a\n~a\n\n"
+        (format "\n~a\n~d. Bindings in ~a\n~a\n\n"
                 line header-index (moduleize filename) line))
       (setq header-index (+ header-index 1))
       (do process-export exports)
@@ -79,9 +79,9 @@
   (deflocal usage-string
     `("usage: i2doc [options] interfacefile.i ..."
       "where options are:"
-      ,(format () "-h\tPrint header? (default: ~a)" (yesno print-header))
-      ,(format () "-r\tNote renamings? (default: ~a" (yesno note-renaming))
-      ,(format () "-s\tUse internal sort? (default: ~a)" (yesno internal-sort))
+      ,(fmt "-h\tPrint header? (default: ~a)" (yesno print-header))
+      ,(fmt "-r\tNote renamings? (default: ~a" (yesno note-renaming))
+      ,(fmt "-s\tUse internal sort? (default: ~a)" (yesno internal-sort))
       ))
 
   (defun usage ()
@@ -113,7 +113,7 @@
 
   (defun print-first-header ()
     (print "youtoo Functions")
-    (format t "  Generated ~a\n" (strftime "%d %B %Y, %X"))
+    (format "  Generated ~a\n" (strftime "%d %B %Y, %X"))
     (print "")
     (print line)
     (print "0. Legend")

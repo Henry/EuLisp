@@ -17,7 +17,7 @@
   ; Process an action
 ;;;-----------------------------------------------------------------------------
   (defun read-action (reader action prod)
-    ;;(format ops-out "action: ~a~%" action)
+    ;;(sformat ops-out "action: ~a~%" action)
     (let* ((type (car action))
            (act (cond
                   ((eql type 'make) (read-make-action (cdr action)))
@@ -26,32 +26,32 @@
                   ((eql type 'write) (read-write-action (cdr action)))
                   ((eql type 'bind) (read-bind-action (cdr action)))
                   ((eql type 'halt) (read-halt-action (cdr action)))
-                  (t (ops-warn t "Action ~a not supported~%" type)))))
+                  (t (ops-warn "Action ~a not supported~%" type)))))
       (set-prod-actions prod (append (prod-actions prod) (list act))))
     reader)
 
   (defun read-make-action (action)
-    (format ops-out "make: ~a~%" action)
+    (sformat ops-out "make: ~a~%" action)
     (make-make-action (car action) (cdr action)))
 
   (defun read-remove-action (action)
-    ;;(format ops-out "remove: ~a~%" action)
+    ;;(sformat ops-out "remove: ~a~%" action)
     (make-remove-action action))
 
   (defun read-modify-action (action)
-    ;;(format ops-out "modify: ~a~%" action)
+    ;;(sformat ops-out "modify: ~a~%" action)
     (make-modify-action (car action) (cdr action)))
 
   (defun read-write-action (action)
-    ;;(format ops-out "write: ~a~%" action)
+    ;;(sformat ops-out "write: ~a~%" action)
     (make-write-action action))
 
   (defun read-bind-action (action)
-    ;;(format ops-out "bind: ~a~%" action)
+    ;;(sformat ops-out "bind: ~a~%" action)
     (make-bind-action (car action) (cadr action)))
 
   (defun read-halt-action (action)
-    ;;(format ops-out "halt: ~a~%" action)
+    ;;(sformat ops-out "halt: ~a~%" action)
     (make-halt-action))
   (export read-action)
 

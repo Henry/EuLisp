@@ -35,7 +35,7 @@
     (add-simple (thread-value thr1) (thread-value thr2)))
 
   (defun add-simple (x1 x2)
-    (format t "computing ~a + ~a ...\n" x1 x2)
+    (format "computing ~a + ~a ...\n" x1 x2)
     (binary+ x1 x2))
 
 ;;;-----------------------------------------------------------------------------
@@ -53,7 +53,7 @@
   (defun test2 ()
     (let (x)
       (while (progn
-               (format t "Add (power of 2): ") (flush)
+               (format "Add (power of 2): ") (flush)
                (setq x (read lispin () (eos-default-value)))
                (null? (eq x (eos-default-value))))
         ;;((setter thread-concurrency) x)

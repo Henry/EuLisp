@@ -11,7 +11,7 @@
    import (level1 ops5))
 
   (if (< *argc* 2)
-      (format stderr "*** USAGE: ~a <ops5-file>\n" (vector-ref *argv* 0))
+      (sformat stderr "*** USAGE: ~a <ops5-file>\n" (vector-ref *argv* 0))
     (ops-load (make <symbol> name: (vector-ref *argv* 1))))
 
 ;;;-----------------------------------------------------------------------------

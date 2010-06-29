@@ -24,7 +24,7 @@
          (local-s (if (local-mpi-stream? s1) s1 s2))
          ;(x "Hello world!")
          (x 12.34))
-    (format stderr "Sending ~a from ~a to ~a\n" x local-s remote-s)
+    (sformat stderr "Sending ~a from ~a to ~a\n" x local-s remote-s)
     (swrite remote-s x)
     (disconnect local-s))
 

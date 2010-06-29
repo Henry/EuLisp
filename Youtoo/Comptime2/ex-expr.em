@@ -56,8 +56,7 @@
              (and macro-fun
                   (lambda (x env e)
                     (with-ct-handler (protect-tilde
-                                      (format
-                                       () "bad macro expansion of ~a"
+                                      (fmt "bad macro expansion of ~a"
                                        (cons key (cdr x)))) macro-fun
                       (notify0 "APPLY MACRO: ~a" (cons key (cdr x)))
                       (let ((macro-expanded-form
@@ -485,7 +484,7 @@
 ;;;-----------------------------------------------------------------------------
   (install-expr-expander 'if
     (lambda (x env e)
-      (with-ct-handler (format () "bad if syntax ~a" x) x
+      (with-ct-handler (fmt "bad if syntax ~a" x) x
         (let* ((pred-expr (cadr x))
                (then-expr (caddr x))
                (else-expr1 (cdddr x))
@@ -672,7 +671,7 @@
   (install-expr-expander 'named-lambda
     (lambda (x env e)
       (with-ct-handler "bad named lambda syntax" x
-        (let* ((name (make-symbol (format () "~a" (car (cdr x)))))
+        (let* ((name (make-symbol (fmt "~a" (car (cdr x)))))
                (node (make-fun <lambda> (list name)
                                (get-params x) (get-body x)
                                t)))     ; has unknown applications

@@ -109,7 +109,7 @@
            (init-code (asm-function-state-code? function-state))
            (new-init-code (wrap-init-code init-code module))
            (bv-loc (make-symbol
-                    (format () "~a_bindings[0]" (as-C-module-name module-name))))
+                    (fmt "~a_bindings[0]" (as-C-module-name module-name))))
            (lambda-name (make-symbol (string-append
                                       "initialize-"
                                       (symbol-name module-name)))))
@@ -123,7 +123,7 @@
     (let* ((imports (module-used-module-names? module))
            (C-module-name (as-C-module-name (module-name? module)))
            (import-code (wrap-init-code-aux () imports))
-           (flag-name (make-symbol (format () "B(~a ,1)" C-module-name))))
+           (flag-name (make-symbol (fmt "B(~a ,1)" C-module-name))))
       `(135 37 0 0   ; (static-ref-t) (set-binding-ref
         ,flag-name   ;  <initialized-flag>)
         ,import-code ; <import-wrap>
@@ -135,8 +135,8 @@
     (if (null? imports)
         code
       (let* ((C-module-name (as-C-module-name (car imports)))
-             (lambda-name (make-symbol (format () "B(~a ,0)" C-module-name)))
-             (flag-name (make-symbol (format () "B(~a ,1)" C-module-name))))
+             (lambda-name (make-symbol (fmt "B(~a ,0)" C-module-name)))
+             (flag-name (make-symbol (fmt "B(~a ,1)" C-module-name))))
         (add-used-module-name C-module-name)
         (wrap-init-code-aux `(36  0  0 0    ; (binding-ref
                               ,flag-name    ;  <initialized-flag>
@@ -294,10 +294,10 @@
       (if (< 100 size)  ; avoid to have large strings
           (C-state-code-vector-str!
            state
-           (cons (apply format () str args) bv-str-list))
+           (cons (apply fmt str args) bv-str-list))
         (C-state-code-vector-str!
            state
-           (cons (string-append bv-str (apply format () str args))
+           (cons (string-append bv-str (apply fmt str args))
                  (cdr bv-str-list))))))
 
 ;;;-----------------------------------------------------------------------------
@@ -306,7 +306,7 @@
   (defgeneric convert-constant (value))
 
   (defmethod convert-constant ((value <int>))
-    (make-symbol (format () "c_int_as_eul_int(~a)" value)))
+    (make-symbol (fmt "c_int_as_eul_int(~a)" value)))
 
   (defmethod convert-constant ((value <double>))
     (let ((loc (gensym "dbl_")))
@@ -315,7 +315,7 @@
       loc))
 
   (defmethod convert-constant ((value <character>))
-    (make-symbol (format () "c_char_as_eul_char('~a')" value)))
+    (make-symbol (fmt "c_char_as_eul_char('~a')" value)))
 
   (defmethod convert-constant ((value <vector>))
     (let ((loc (gensym "vec_"))
@@ -441,7 +441,7 @@
       (set-fixed-bytes module-name local-index)))
 
   (defun compute-binding (module-name binding-name)
-    (with-ct-handler (format () "can't compute binding ~a of module ~a"
+    (with-ct-handler (fmt "can't compute binding ~a of module ~a"
                              binding-name module-name) binding-name
       (notify0 "compute-binding ~a ~a" module-name binding-name)
       (let* ((binding (get-lexical-binding binding-name))
@@ -510,35 +510,35 @@
   (defun add-decl (x . args)
     (let ((state (dynamic *C-state*))
           (entry (if (symbol? x) x
-                   (apply format () x args))))
+                   (apply fmt x args))))
       (C-state-decls! state (cons entry (C-state-decls? state)))))
 
   (defun add-initialization (str . args)
     (let ((state (dynamic *C-state*)))
       (C-state-initializations!
        state
-       (cons (apply format () str args) (C-state-initializations? state)))))
+       (cons (apply fmt str args) (C-state-initializations? state)))))
 
   (defun add-code-vector-def (str . args)
     (let ((state (dynamic *C-state*)))
       (C-state-code-vector-defs!
        state
-       (cons (apply format () str args) (C-state-code-vector-defs? state)))))
+       (cons (apply fmt str args) (C-state-code-vector-defs? state)))))
 
   (defun add-global (str . args)
     (let ((state (dynamic *C-state*)))
-      (C-state-globals! state(cons (apply format () str args)
+      (C-state-globals! state(cons (apply fmt str args)
                                    (C-state-globals? state)))))
 
   (defun add-statement (str . args)
     (let ((state (dynamic *C-state*)))
-      (C-state-statements! state (cons (apply format () str args)
+      (C-state-statements! state (cons (apply fmt str args)
                                        (C-state-statements? state)))))
 
   (defun add-used-module-name (x)
     (let* ((module-name (module-name? (dynamic *actual-module*)))
            (state (dynamic *C-state*))
-           (new-name (make-symbol (format () "~a" x)))
+           (new-name (make-symbol (fmt "~a" x)))
            (names (C-state-used-module-names? state)))
       (if (or (eq (make-symbol (as-C-module-name module-name)) new-name)
               (member1-list new-name names)) ()
@@ -559,7 +559,7 @@
   (defun write-C-state (module state)
     (let* ((module-name (module-name? module))
            (file-name (as-C-file-name module-name))
-           (absolute-file-name (format () "~a~a~a"
+           (absolute-file-name (fmt "~a~a~a"
                                        (module-load-dir? module)
                                        *delimiter*
                                        file-name)))
@@ -597,7 +597,7 @@
     (let* ((module-name (module-name? module))
            (C-module-name (as-C-module-name module-name))
            (file-name (as-included-C-file-name module-name))
-           (absolute-file-name (format () "~a~a~a"
+           (absolute-file-name (fmt "~a~a~a"
                                        (module-load-dir? module)
                                        *delimiter*
                                        file-name)))
@@ -626,7 +626,7 @@
 ;;         (arg-convs (car ff-spec))
 ;;         (res-conv (cadr ff-spec))
 ;;         (ext-name (caddr ff-spec))
-;;         (str (format () "~a (~a) ("
+;;         (str (fmt "~a (~a) ("
 ;;                      (res-converter-as-C-type res-conv)
 ;;                      ext-name)))
 ;;      (labels ((loop (l)
@@ -648,7 +648,7 @@
     (let* ((module-name (module-name? module))
            (C-module-name (as-C-module-name module-name))
            (file-name (as-C-hook-source-file-name module-name))
-           (absolute-file-name (format () "~a~a~a"
+           (absolute-file-name (fmt "~a~a~a"
                                        (module-load-dir? module)
                                        *delimiter*
                                        file-name))
@@ -672,7 +672,7 @@
 ;;; Formatted write to C file
 ;;;-----------------------------------------------------------------------------
   (defun write-to-C-file (str . args)
-    (apply format (dynamic *c-stream*) str args))
+    (apply sformat (dynamic *c-stream*) str args))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Write C file header
@@ -727,7 +727,7 @@
            (stub-name (cdr name-pair))
            (arg-names (map1-list (lambda (x) (gensym)) arg-convs))
            (arg-names-str-aux (map1-list (lambda (x)
-                                           (format () "~a, " x))
+                                           (fmt "~a, " x))
                                          arg-names))
            (arg-names-str (if (null? arg-names-str-aux) ""
                             (apply concatenate arg-names-str-aux))))
@@ -740,7 +740,7 @@
           (reverse arg-names))
       (write-to-C-file "  FF_RES_CONVERT~a(res,~a(~a" res-conv ext-name
                        (if (null? arg-names) ""
-                           (format () "FF_ARG_CONVERT~a(~a)"
+                           (fmt "FF_ARG_CONVERT~a(~a)"
                                    (car arg-convs)
                                    (car arg-names))))
       ;      (if (null? arg-names) ()
@@ -782,7 +782,7 @@
 ;;; Convert Lisp identifiers to C identifiers (not very safe!)
 ;;;-----------------------------------------------------------------------------
   (defun as-C-string (value)
-    (let* ((str (format () "~a" value))
+    (let* ((str (fmt "~a" value))
            (n (string-size str))
            (new-str (make <string> size: n)))
       (labels
@@ -799,7 +799,7 @@
                         ((null? (alnump c))
                          ((setter string-ref) new-str i #\_)
                          (loop (+ i 1)
-                               (format () "~a_X~a" post-str
+                               (fmt "~a_X~a" post-str
                                        (character-as-int c))))
                          (t
                           ((setter string-ref) new-str i c)

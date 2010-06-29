@@ -39,7 +39,7 @@
   (defun initialize-interpreter ()
 
     (if *script* ()
-      (format t "EuLisp System 'youtoo ~a'\n" *version*))
+      (format "EuLisp System 'youtoo ~a'\n" *version*))
 
     (initialize-rl)
 
@@ -56,7 +56,7 @@
              ;; Not EuLisp but very comfortable
              (let/cc
               k (signal
-                 (make <condition> message: (apply format () str class rest))
+                 (make <condition> message: (apply fmt str class rest))
                  k)))))
 
     ;; Reset the default error handler to catch errors on all threads
@@ -150,7 +150,7 @@
            ((eq x load:)
             (let ((file-name (read lispin () (eos-default-value))))
               (eval (load-file-exprs
-                     (convert (format () "~a" file-name) <string>)))))
+                     (convert (fmt "~a" file-name) <string>)))))
            ((eq x exit:)
             (exit 0))
            ((eq x trace:)
@@ -194,7 +194,7 @@
            ((eq x -:)
             (system
              (convert
-              (format () "~a" (read lispin () (eos-default-value))) <string>)))
+              (fmt "~a" (read lispin () (eos-default-value))) <string>)))
            ((eq x help:)
             (show-help))
            (t x)))
@@ -256,7 +256,7 @@
   (defun rep-aux ()
     (labels
      ((loop (x)
-            (format t "~a> " *current-module-name*)
+            (format "~a> " *current-module-name*)
             (flush)
             (reset-interactive-module (dynamic *actual-module*))
             (setq *number-of-warnings* 0)
@@ -270,7 +270,7 @@
               ;; Ok, we're really going to eval something now!
               (if *script*
                   (eval x)
-                (format t "-> ~s\n" (eval x))))
+                (format "-> ~s\n" (eval x))))
             (loop ())))
      (let/cc reset-k
              (setq *reset-k* reset-k)
@@ -281,7 +281,7 @@
   (defun debug-rep ()
     (labels
      ((loop (x)
-            (format t "[error~a]~a> "
+            (format "[error~a]~a> "
                     (list-size *resume-k*)
                     *current-module-name*)
             (flush)
@@ -291,7 +291,7 @@
                 (progn
                   (newline)
                   (debug-eval resume:))
-              (format t "-> ~s\n" (debug-eval x)))
+              (format "-> ~s\n" (debug-eval x)))
             (loop ())))
      (let/cc resume-k
              (setq *resume-k* (cons resume-k *resume-k*))
@@ -357,7 +357,7 @@
         ((loop (cl indent)
           (let ((subclasses (class-direct-subclasses cl))
                 (new-indent (concatenate indent "  ")))
-            (format t "~a~a<~a>\n"
+            (format "~a~a<~a>\n"
                     (if (class-abstract? cl) "A" " ")
                     new-indent
                     (class-name cl))

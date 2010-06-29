@@ -176,7 +176,7 @@
       (add-asm `(label ,out-label) 0 state)))
 
   (defun gensym-module ()
-    (make-symbol (format () "~a~a"
+    (make-symbol (fmt "~a~a"
                          (gensym)
                          (module-name? (dynamic *actual-module*)))))
 

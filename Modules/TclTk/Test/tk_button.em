@@ -22,7 +22,7 @@
 ;;; Callback Functions
 ;;;-----------------------------------------------------------------------------
   (defun Value-frame1 ()
-    (let ((auxtext (format () "Value: ~a" (tk-get-variable "pts"))))
+    (let ((auxtext (fmt "Value: ~a" (tk-get-variable "pts"))))
       (prin "pts: ") (print auxtext)
       (tk-conf-widget *result1* text: auxtext)))
 
@@ -30,7 +30,7 @@
     (let* ((bold (tk-get-variable "bold"))
            (italic (tk-get-variable "italic"))
            (underline (tk-get-variable "underline"))
-           (auxtext (format () "Values: ~a ~a ~a" bold italic underline)))
+           (auxtext (fmt "Values: ~a ~a ~a" bold italic underline)))
       (tk-conf-widget *result2* text: auxtext)))
 
 ;;;-----------------------------------------------------------------------------

@@ -8,11 +8,11 @@
   (defun foo2 (x) (print x) (print x))
 
   (defun foo3 (x) (print x) (prin x))
-  (format t "$$$ foo ~a\n" (eul_lambda_refs foo))
-  (format t "$$$ foo1 ~a\n" (eul_lambda_refs foo1))
-  (format t "$$$ foo2 ~a\n" (eul_lambda_refs foo2))
-  (format t "$$$ foo3 ~a\n" (eul_lambda_refs foo3))
-  (format t "$$$ + ~a\n" (eul_lambda_refs +))
+  (format "$$$ foo ~a\n" (eul_lambda_refs foo))
+  (format "$$$ foo1 ~a\n" (eul_lambda_refs foo1))
+  (format "$$$ foo2 ~a\n" (eul_lambda_refs foo2))
+  (format "$$$ foo3 ~a\n" (eul_lambda_refs foo3))
+  (format "$$$ + ~a\n" (eul_lambda_refs +))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

@@ -2,9 +2,9 @@
 ;;;   Interface file for module read
 
 (definterface read
-  (import (telos condition convert convert1 vector string lock dynamic table stream)
+  (import (telos condition convert convert1 vector string lock dynamic table stream format)
    syntax (_macros)
-   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos let-cc dynamic thread event condition convert table table1 vector list character string fpi copy number integer collect callback compare convert1 lock socket stream2 stream1 stream)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos let-cc dynamic thread event condition convert table table1 vector list character string fpi copy number integer collect callback compare convert1 lock socket stream2 stream1 stream format)
    export (
     ((name . special-tokens) (pos . 30) (origin read . special-tokens) (class . constant))
     ((name . unquote-splicing-mark) (pos . 26) (origin read . unquote-splicing-mark) (class . constant))

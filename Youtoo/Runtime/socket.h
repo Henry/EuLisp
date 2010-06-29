@@ -8,6 +8,7 @@
 extern LispRef socket_bindings[];
 
 /* Module binding indices */
+#define connection__X63_fn_index 4 
 #define socket_host_fn_index 11 
 #define socket_port_fn_index 9 
 #define socket_queue_size_fn_index 6 
@@ -15,7 +16,7 @@ extern LispRef socket_bindings[];
 #define _connection__X60_X62_fn_index 2 
 #define connection_port_fn_index 7 
 #define _socket__X60_X62_fn_index 8 
-#define connection__X63_fn_index 4 
+#define socket__X63_fn_index 10 
 #define socket_descriptor_fn_index 3 
 
 

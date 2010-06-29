@@ -43,7 +43,7 @@
 
   (defun import-module (name)
     (notify0 "  Import module ~a ..." name)
-    (with-ct-handler (format () "cannot import lexical module ~a" name)
+    (with-ct-handler (fmt "cannot import lexical module ~a" name)
                      (dynamic *actual-module*)
       (let ((module (or (module? name) (find-imported-module name))))
         (access-table-do

@@ -42,7 +42,7 @@
         ")"
         (star (alt (type whitespace)))
         (name number (seq (star (type digit) 1 ())))))
-    (format t "~a ~a ~a ~%" name args number))
+    (format "~a ~a ~a ~%" name args number))
 
   (defun match-test (sequence)
     (let ((index 0)
@@ -63,7 +63,7 @@
             ")"
             (star (alt (type whitespace)))
             (name number (seq (star (type digit) 1 ())))))
-        (format t "~a ~a ~a ~%" name args number))
+        (format "~a ~a ~a ~%" name args number))
       ))
 
   (match-test "(def-bytecode write-object (x)	66 (in obj1 obj2) (out obj))")

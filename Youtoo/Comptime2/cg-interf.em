@@ -33,7 +33,7 @@
                (setq *tmp-load-dir* dir)
                (read-s-expression stream))))
        (dynamic-let ((*actual-module* (make-module name)))
-         (with-ct-handler (format () "bad interface syntax ~a" spec) spec
+         (with-ct-handler (fmt "bad interface syntax ~a" spec) spec
            (let* ((module-name (car (cdr spec)))
                   (m (dynamic *actual-module*))
                   (rest-spec (car (cdr (cdr spec))))
@@ -105,7 +105,7 @@
    (defun write-module-interface-file (module)
      (let* ((module-name (module-name? module))
             (file-name (as-interface-file-name module-name))
-            (absolute-file-name (format () "~a~a~a"
+            (absolute-file-name (fmt "~a~a~a"
                                         (module-load-dir? module)
                                         *delimiter*
                                         file-name))
@@ -116,16 +116,16 @@
              (module-all-used-module-names? module)))
        (notify "  Creating ~a ..." file-name)
        (with-output-file (stream absolute-file-name)
-         (format stream ";;; EuLisp system 'youtoo'\n")
-         (format stream ";;;   Interface file for module ~a\n\n" module-name)
-         (format stream "(definterface ~a\n" module-name)
-         (format stream "  (import ~a\n" used-module-names)
-         (format stream "   syntax ~a\n" used-syntax-module-names)
-         (format stream "   full-import ~a\n" all-used-module-names)
+         (sformat stream ";;; EuLisp system 'youtoo'\n")
+         (sformat stream ";;;   Interface file for module ~a\n\n" module-name)
+         (sformat stream "(definterface ~a\n" module-name)
+         (sformat stream "  (import ~a\n" used-module-names)
+         (sformat stream "   syntax ~a\n" used-syntax-module-names)
+         (sformat stream "   full-import ~a\n" all-used-module-names)
          (write-interface-export stream module)
          (write-interface-local-literals stream module)
          (write-interface-literals stream module)
-         (format stream "))\n")))
+         (sformat stream "))\n")))
      module)
 
 ;;;-----------------------------------------------------------------------------
@@ -134,7 +134,7 @@
    (defun write-library-interface-file (module)
      (let* ((module-name (module-name? module))
             (file-name (as-C-library-interface-file-name module-name))
-            (absolute-file-name (format () "~a~a~a"
+            (absolute-file-name (fmt "~a~a~a"
                                         (module-load-dir? module)
                                         *delimiter*
                                         file-name))
@@ -142,17 +142,17 @@
              (cons module-name (module-all-used-module-names? module))))
        (notify "  Writing library interface file ~a" file-name)
        (with-output-file (stream absolute-file-name)
-         (format stream ";;; EuLisp system 'youtoo'\n")
-         (format stream ";;;   Library interface file for module ~a\n\n"
+         (sformat stream ";;; EuLisp system 'youtoo'\n")
+         (sformat stream ";;;   Library interface file for module ~a\n\n"
                  module-name)
-         (format stream "(definterface ~a\n" module-name)
-         (format stream "  (import ()\n")
-         (format stream "   syntax ()\n")
-         (format stream "   full-import ~a\n" all-used-module-names)
+         (sformat stream "(definterface ~a\n" module-name)
+         (sformat stream "  (import ()\n")
+         (sformat stream "   syntax ()\n")
+         (sformat stream "   full-import ~a\n" all-used-module-names)
          (write-interface-export stream module)
          ;        (write-interface-literals stream module)
-         (format stream "   literals (\n   )\n")
-         (format stream "  )\n)  ; end of interface")))
+         (sformat stream "   literals (\n   )\n")
+         (sformat stream "  )\n)  ; end of interface")))
      module)
 
    (defun create-library-interface-file (module-name)
@@ -167,17 +167,17 @@
    (defun write-library-interface-literals (stream module)
      (let ((module-names (cons (module-name? module)
                                (module-all-used-module-names? module))))
-       (format stream "   literals (\n")
+       (sformat stream "   literals (\n")
        (access-table-do (lambda (obj entry)
                           (and (member1-list (car entry) module-names)
                                (if t ;(string? obj)
-                                   (format stream "    (~s ~a)\n" obj entry)
-                                 (format stream "    (~a ~a)\n" obj entry))))
+                                   (sformat stream "    (~s ~a)\n" obj entry)
+                                 (sformat stream "    (~a ~a)\n" obj entry))))
                         *get-literal*)
-       (format stream "   )\n")))
+       (sformat stream "   )\n")))
 
    (defun write-interface-literals (stream module)
-     (format stream "   literals (\n")
+     (sformat stream "   literals (\n")
      ;     (access-table-do
      ;      (lambda (obj entry)
      ;       (let* ((names (cons (module-name? module)
@@ -186,20 +186,20 @@
      ;                                       entry names)))
      ;         (if (null? new-entry) ()
      ;           (if t ;(string? obj)
-     ;               (format stream "    (~s ~a)\n" obj new-entry)
-     ;             (format stream "    (~a ~a)\n" obj new-entry)))))
+     ;               (sformat stream "    (~s ~a)\n" obj new-entry)
+     ;             (sformat stream "    (~a ~a)\n" obj new-entry)))))
      ;      *get-literal*)
-     (format stream "   )\n"))
+     (sformat stream "   )\n"))
 
    (defun write-interface-local-literals (stream module)
-     (format stream "   local-literals (\n")
+     (sformat stream "   local-literals (\n")
      (do1-list (lambda (entry)
-           (format stream "    ~s\n" entry))
+           (sformat stream "    ~s\n" entry))
          (module-local-literals? module))
-     (format stream "   )\n"))
+     (sformat stream "   )\n"))
 
    (defun write-interface-export (stream module)
-     (format stream "   export (\n")
+     (sformat stream "   export (\n")
      (access-table-do
       (lambda (name binding)
         ;; Attention -- name is ptr to C string!
@@ -207,10 +207,10 @@
                                  (binding-local-name? binding)
                                  binding))
       (module-external-env? module))
-     (format stream "   )\n"))
+     (sformat stream "   )\n"))
 
    (defun write-library-interface-export (stream module)
-     (format stream "   export (\n")
+     (sformat stream "   export (\n")
      (do1-list (lambda (module)
                  (access-table-do
                   (lambda (name binding)
@@ -220,7 +220,7 @@
                                              binding))
                   (module-external-env? module)))
          (map1-list find-imported-module (module-all-used-module-names? module)))
-     (format stream "  )\n"))
+     (sformat stream "  )\n"))
 
    (defun write-interface-binding (stream name binding)
      (let ((origin-module-name (binding-origin-module-name binding))
@@ -230,7 +230,7 @@
                             name))
            (binding-info (binding-info? binding))
            (index (binding-local-index? binding)))
-       (format stream "    ~a\n"
+       (sformat stream "    ~a\n"
                `((name . ,name)
                  (pos . ,index)
                  (origin ,origin-module-name . ,origin-name)
@@ -275,7 +275,7 @@
                    (notify0 "  dir ~a ..." dir)
                    (read-s-expression stream))))
            (notify0 "  Get-full-import-names spec: ~a" spec)
-           (with-ct-handler (format () "bad interface syntax ~a" spec) spec
+           (with-ct-handler (fmt "bad interface syntax ~a" spec) spec
              (let* ((rest-spec (car (cdr (cdr spec))))
                     (import (get-interface-info 'full-import rest-spec)))
                ((setter *get-full-import*) module-name import)
@@ -343,7 +343,7 @@
                       (let* ((file-name (as-compiled-C-file-name name))
                              (dir (external-file-exist? file-name)))
                         (if dir
-                            (format () "~a~a~a " dir *delimiter* file-name)
+                            (fmt "~a~a~a " dir *delimiter* file-name)
                           (ct-error
                            -1 "foreign function file ~a does not exist"
                            file-name))))
@@ -358,7 +358,7 @@
                       (let* ((file-name (as-C-library-file-name name))
                              (dir (external-file-exist? file-name)))
                         (if dir
-                            (format () "~a~a~a " dir *delimiter* file-name)
+                            (fmt "~a~a~a " dir *delimiter* file-name)
                           (ct-error
                            -1 "foreign function library ~a does not exist"
                            file-name))))

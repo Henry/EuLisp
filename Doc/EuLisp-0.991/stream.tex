@@ -383,12 +383,11 @@ different files by the \genericref{reconnect} operation.
 \end{genericargs}
 %
 \result%
-The buffer associated with {\em stream\/} is refilled from its {\em
-    source\/}.  Returns a count of the number of items read.
+The buffer associated with {\em stream\/} is refilled from its {\em source\/}.
+Returns a count of the number of items read.
 %
 \remarks%
-This
-function is guaranteed to be called when an attempt is made to read from a
+This function is guaranteed to be called when an attempt is made to read from a
 buffered stream whose buffer is either empty, or from which all the items have
 been read.
 
@@ -671,24 +670,39 @@ and \methodref{generic-write}{file-stream}.
 \end{specargs}
 
 % ------------------------------------------------------------------------------
+\function{swrite}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[stream] Stream to which {\em object\/} is to be written.
+    \item[object] An object to be written to {\em stream}.
+\end{arguments}
+%
+\result%
+Returns {\em stream}.
+%
+\remarks%
+Outputs the external representation of {\em object\/} on the output
+stream {\em stream\/} using \genericref{generic-write}.
+%
+\seealso%
+\genericref{generic-write}.
+
+% ------------------------------------------------------------------------------
 \function{write}
 % ------------------------------------------------------------------------------
 \begin{arguments}
     \item[object] An object to be written to {\em stream}.
-    \item[\optional{stream}] Stream to which {\em object\/} is
-    to be written.
 \end{arguments}
 %
 \result%
-Returns {\em object}.
+Returns \instanceref{stdout}.
 %
 \remarks%
-Outputs the external representation of {\em object\/} on the output
-stream {\em stream\/} using \genericref{generic-write}.  If {\em stream\/} is
-not specified the standard output stream is used.
+Outputs the external representation of {\em object\/} on \instanceref{stdout}
+using \genericref{generic-write}.
 %
 \seealso%
-\instanceref{stdout}, \genericref{generic-write}.
+\functionref{swrite}, \genericref{generic-write}.
 
 %%%  ---------------------------------------------------------------------------
 %%%  Additional functions
@@ -775,7 +789,7 @@ Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
 output stream \instanceref{stdout} using \genericref{sprin} for each object.
 %
 \seealso%
-\instanceref{stdout}, \genericref{sprin}.
+\functionref{sprin}, \genericref{sprin}.
 
 % ------------------------------------------------------------------------------
 \function{sprint}
@@ -815,55 +829,89 @@ output stream \instanceref{stdout} using \genericref{sprint} for each object,
 followed by a newline character.
 %
 \seealso%
-\instanceref{stdout}, \genericref{sprint}.
+\functionref{sprint}, \genericref{sprint}.
 
 % ------------------------------------------------------------------------------
-\generic{flush}
+\function{snewline}
 % ------------------------------------------------------------------------------
-\begin{genericargs}
-    \item[stream, \classref{stream}] A stream.
-\end{genericargs}
+\begin{arguments}
+    \item[stream] A stream on which the newline is to be output.
+\end{arguments}
 %
 \result%
-Returns \true\/ if the flush operation was successful, otherwise {\tt
-    ()}.
+Returns {\em stream}.
 %
 \remarks%
-{\tt flush} causes any buffered data for the stream to be written to
-the stream. The stream remains open.
+Outputs a newline character to {\em stream}.
 
 % ------------------------------------------------------------------------------
 \function{newline}
 % ------------------------------------------------------------------------------
+%
+\result%
+Returns \instanceref{stdout}.
+%
+\remarks%
+Outputs a newline character to \instanceref{stdout}.
+%
+\seealso%
+\functionref{snewline}.
+
+% ------------------------------------------------------------------------------
+\function{sflush}
+% ------------------------------------------------------------------------------
 \begin{arguments}
-    \item[\optional{stream}] A stream on which the newline is to be output.
+    \item[stream] A stream to flush.
 \end{arguments}
 %
 \result%
-Returns \verb|#\n|.
+Returns {\em stream}.
 %
 \remarks%
-Outputs a newline character to {\em stream}.  If {\em stream\/} is not
-specified \instanceref{stdout} is used.
+{\tt sflush} causes any buffered data for the stream to be written to
+the stream. The stream remains open.
+
+% ------------------------------------------------------------------------------
+\function{flush}
+% ------------------------------------------------------------------------------
+%
+\result%
+Returns \instanceref{stdout}.
+%
+\remarks%
+{\tt flush} causes any buffered data for \instanceref{stdout} to be written to
+\instanceref{stdout}.
 %
 \seealso%
-\instanceref{stdout}.
+\functionref{sflush}.
+
+% ------------------------------------------------------------------------------
+\function{sprin-char}
+% ------------------------------------------------------------------------------
+\begin{arguments}
+    \item[stream] A stream.
+    \item[char] Character to be written to {\em stream}.
+    \item[\optional{times}] Integer count.
+\end{arguments}
+%
+\result%
+Outputs {\em char} on {\em stream}.  The optional count {\em times\/} defaults
+to 1.
 
 % ------------------------------------------------------------------------------
 \function{prin-char}
 % ------------------------------------------------------------------------------
 \begin{arguments}
-    \item[char] Character to be written.
-    \item[\optional{stream}] A stream on which the newline is to be output.
+    \item[char] Character to be written to \instanceref{stdout}.
     \item[\optional{times}] Integer count.
 \end{arguments}
 %
 \result%
-Outputs char on stream. The stream defaults to
-\instanceref{stdout}. The count {\em times\/} defaults to 1.
+Outputs {\em char} on \instanceref{stdout}. The optional count {\em times\/}
+defaults to 1.
 %
-\remarks%
-If {\em times\/} is specified, then stream must also be specified.
+\seealso%
+\functionref{sprin-char}.
 
 % ------------------------------------------------------------------------------
 \function{sread}

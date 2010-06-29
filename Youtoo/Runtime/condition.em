@@ -10,7 +10,7 @@
   (syntax (_macros)
    import (telos thread dynamic let-cc)
    export (<condition> condition? condition-message
-           <general-condition> signal error cerror *default-error-handler*
+           <general-condition> signal error *default-error-handler*
            output-condition-contents push-error-handler pop-error-handlers))
 
 ;;;-----------------------------------------------------------------------------
@@ -26,24 +26,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Errors and signals
 ;;;-----------------------------------------------------------------------------
-  ;; error already defined in module boot
-  (setq *error*
-        (named-lambda error (str class . rest)
-          (if (and (class? class) (subclass? class <condition>))
-              (signal (apply make class message: str rest) ())
-            ;; Not EuLisp but very comfortable
-            (signal
-             (make <condition> message: (apply format () str class rest))
-             ()))))
-
-  (defun cerror (str class . rest)
-    (if (and (class? class) (subclass? class <condition>))
-        (let/cc k (signal (apply make class message: str rest) k))
-      ;; Not EuLisp but very comfortable
-      (let/cc k (signal
-                 (make <condition> message: (apply format () str class rest))
-                 k))))
-
   (defun signal (cndt k . thrds)
     (let* ((thrd (or (and thrds (car thrds)) (current-thread)))
            (hdls (thread-error-handlers thrd)))
@@ -71,9 +53,9 @@
       (output-condition-contents cndt)
       (if (null? k) ()
         (progn
-          (format 2 "***    Do you want to continue? (y/n) ")
+          (primitive-format 2 "***    Do you want to continue? (y/n) ")
           (if (eq (getchar) #\y) (k cndt) ())))
-      (format 2 "***    See Backtrace? (y/n) ")
+      (primitive-format 2 "***    See Backtrace? (y/n) ")
       (if (eq (getchar) #\y) (backtrace) ())
       (exit -1)))
 
@@ -87,9 +69,9 @@
                    (let* ((sd (car sds))
                           (name (slot-name sd))
                           (value (slot-value-using-slot sd cndt)))
-                     (format 2 "    ~a: ~a\n" name value)
+                     (primitive-format 2 "    ~a: ~a\n" name value)
                      (loop (cdr sds))))))
-       (format 2 "\n*** ERROR [~a]: ~a\n" name str)
+       (primitive-format 2 "\n*** ERROR [~a]: ~a\n" name str)
        (loop (cdr (class-slots cl))))))
 
 ;;;-----------------------------------------------------------------------------

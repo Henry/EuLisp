@@ -34,17 +34,17 @@
   ; Reads in an OPS5 program from file.
 ;;;-----------------------------------------------------------------------------
   (defun read-ops-prog (filename)
-    (format t "Trying to open file: ~a~%" filename)
+    (format "Trying to open file: ~a~%" filename)
     (let ((reader (make <reader>)))
       ((setter ops-in) reader (open-ops-file filename))
-      (format ops-out "Loading file ~a ...~%" filename)
+      (sformat ops-out "Loading file ~a ...~%" filename)
       (read-prog reader)
       (disconnect (ops-in reader))
       reader))
 
   (defun ops-read (s)
     (let ((next (read-next s)))
-      (format ops-out "Next: ~a~%" next)
+      (sformat ops-out "Next: ~a~%" next)
       next))
 
 ;;;-----------------------------------------------------------------------------
@@ -78,7 +78,7 @@
        writer:  set-lits)))
 
   (defun read-prog (reader)
-    ;;     (format ops-out "read-prog:...~a ~%" reader)
+    ;;     (sformat ops-out "read-prog:...~a ~%" reader)
     (let ((next (ops-read (ops-in reader))))
       (cond
         ((end-of-input next) t)
@@ -86,19 +86,18 @@
          (read-prog (read-lit reader (cdr next))))
         ((eql (car next) 'p) ; found a production
          (read-prog (read-prod reader (cdr next))))
-        (t (ops-err t "Unknown OPS5 structure: ~a~%: " next)))))
+        (t (ops-err "Unknown OPS5 structure: ~a~%: " next)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; read-lit
   ; Process a literalize declaration
 ;;;-----------------------------------------------------------------------------
   (defun read-lit (reader stment)
-    ;;     (format ops-out "read-lit: ~%")
+    ;;     (sformat ops-out "read-lit: ~%")
     ;; OPS5 does not allow literalize statements after the first
     ;; production.
     (when (in-prods reader)
-          (ops-warn t
-                    "Literalize statement after start of productions"))
+          (ops-warn "Literalize statement after start of productions"))
     (add-class reader (car stment))
     (let ((class-name (car stment)))
       (labels ((loop (attribs index)
@@ -124,7 +123,7 @@
   ; Adds an entry to the class-name table from attrib to index
 ;;;-----------------------------------------------------------------------------
   (defun add-attrib (reader class-name attrib index)
-    ;;     (format ops-out "add-attrib: ~a~%" (make-attrib attrib))
+    ;;     (sformat ops-out "add-attrib: ~a~%" (make-attrib attrib))
     ((setter element) (element (lits reader) class-name)
      (make-attrib attrib) index)
     reader)
@@ -134,7 +133,7 @@
   ; Process a production
 ;;;-----------------------------------------------------------------------------
   (defun read-prod (reader new-prod-in)
-    ;;(format ops-out "New production: ~a~%" (car new-prod-in))
+    ;;(sformat ops-out "New production: ~a~%" (car new-prod-in))
     ;; pass over production sending items to read-ce and
     ;; read-action as appropriate.
     (let* ((prod-name (car new-prod-in))
@@ -143,7 +142,7 @@
            (join-vars (car res))
            (new-prod  (cdr res))
            (curr-prod (make-production prod-name)))
-      ;;(format t "Prod: ~a~%" new-prod)
+      ;;(format "Prod: ~a~%" new-prod)
       (set-prods reader (cons curr-prod (prods reader)))
       (labels ((get-ce (ce-rest is-neg)
                        (let ((attrib-table (lits reader)))
@@ -155,7 +154,7 @@
                            ((eql (car ce-rest) '{)
                                  (if (atom? (cadr ce-rest))
                                      (progn
-                                       ;;(format t "Found: ~a~%" (cadr ce-rest))
+                                       ;;(format "Found: ~a~%" (cadr ce-rest))
                                        (let* ((cl (car (caddr ce-rest)))
                                               (res-ce
                                                 (insert-new-ce (ce-man reader)
@@ -182,7 +181,7 @@
                                                                (cadr ce-rest)
                                                                join-vars)
                                                       curr-prod)))
-                                       ;;(format t "Found: ~a~%" (caddr ce-rest))
+                                       ;;(format "Found: ~a~%" (caddr ce-rest))
                                        (add-cond-el curr-prod res-ce)
                                        (set-prod-ce-vars
                                          curr-prod
@@ -195,7 +194,7 @@
                                           (ce-man reader)
                                           (make-pos-njoin-ce (car ce-rest))
                                           curr-prod)))
-                               ;;(format t "curr-prod: ~a res: ~a~%" curr-prod res)
+                               ;;(format "curr-prod: ~a res: ~a~%" curr-prod res)
                                (add-cond-el curr-prod res)))
                             (t
                               (let ((cl (make-attrib (caar ce-rest))))
@@ -205,7 +204,7 @@
                                                       (element attrib-table cl)
                                                       (car ce-rest) join-vars)
                                              curr-prod)))
-                                  ;;(format t "curr-prod: ~a res: ~a~%" curr-prod res)
+                                  ;;(format "curr-prod: ~a res: ~a~%" curr-prod res)
                                   (add-cond-el curr-prod res))
                                 (get-ce (cdr ce-rest) ()))))))
                        (get-action (prod)

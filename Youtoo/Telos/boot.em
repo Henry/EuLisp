@@ -283,7 +283,7 @@
           ()))))
 
   (defun backtrace ()
-    (print "*** BACKTRACE:" stderr)
+    (sprint stderr "*** BACKTRACE:")
     ((opencoded-lambda () (unflush-stacks)))
     (show-frames *skip-nframes*))
 
@@ -297,7 +297,7 @@
         (show-stack-values (+ i 1)))))
 
   (defun stack-values ()
-    (print "*** STACK VALUES:" stderr)
+    (sprint stderr "*** STACK VALUES:")
     ((opencoded-lambda () (unflush-stacks)))
     (show-stack-values *skip-nvalues*))
 

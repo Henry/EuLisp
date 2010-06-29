@@ -9,7 +9,7 @@
 (defmodule socket
   (syntax (_macros)
    import (telos lock condition convert dynamic stream1 stream2 string)
-   export (<socket> socket-port socket-host socket-descriptor
+   export (<socket> socket? socket-port socket-host socket-descriptor
            socket-queue-size
            <connection> connection-host connection-port connection?))
 
@@ -47,45 +47,6 @@
      (port accessor: connection-port keyword: port: default: 4711))
     keywords: (socket:)
     predicate: connection?)
-
-  (defmethod initialize ((x <connection>) inits)
-    (call-next-method)
-    (let ((s (init-list-ref inits socket:))
-          host port fd)
-      (if (socket? s)
-          (progn
-            ;; leads to accept
-            (setq host (socket-host s))
-            (setq port (socket-port s))
-            ((setter connection-host) x host)
-            ((setter connection-port) x port)
-            (setq fd (eul_socket_accept (socket-descriptor s))))
-        (progn
-          ;; leads to connect
-          (setq host (connection-host x))
-          (setq port (connection-port x))
-          (setq fd (eul_make_connection host (convert port <string>) "tcp"))))
-      ;; error handling
-      (if (int-binary= fd -1)
-          (error (strerror) <stream-condition> value: x)
-        (if (int-binary< fd -1)
-            (error (eul_socket_strerror fd) <stream-condition> value: x)
-          ()))
-      (let* ((file-name (format () "~a:~a" host port))
-             (fcb1 (make <file-control-block>
-                         file-name: file-name
-                         mode: 'r
-                         descriptor: fd))
-             (fcb2 (make <file-control-block>
-                         file-name: file-name
-                         mode: 'w
-                         descriptor: fd)))
-        ((setter stream-source) x fcb1)
-        ((setter stream-sink) x fcb2)
-        (with-lock *open-file-streams*-lock
-                   (setq *open-file-streams*
-                         (cons x *open-file-streams*)))
-        x)))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

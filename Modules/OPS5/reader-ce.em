@@ -17,7 +17,7 @@
   ; Process a condition element
 ;;;-----------------------------------------------------------------------------
   (defun read-ce (is-neg attrib-table ce join-vars)
-    ;;(format ops-out "read-ce: ~a neg? ~a ~a~%" ce is-neg join-vars)
+    ;;(sformat ops-out "read-ce: ~a neg? ~a ~a~%" ce is-neg join-vars)
     (let* ((class-name (car ce))
            (new-ce (if is-neg
                        (make-neg-njoin-ce class-name)
@@ -31,20 +31,20 @@
   ; compiles the tests from a condition element
 ;;;-----------------------------------------------------------------------------
   (defun make-tests (attrib-table ce tests-in join-vars curr-attrib)
-    ;;(format ops-out "tests-in: ~a~%" tests-in)
+    ;;(sformat ops-out "tests-in: ~a~%" tests-in)
     (if (null? tests-in)
         ce
       (let* ((attrib (if curr-attrib curr-attrib (car tests-in)))
              (tests  (if curr-attrib tests-in (cdr tests-in)))
              (first  (car tests)))
-        ;;(format t "first: ~a attrib: ~a~%" first attrib)
+        ;;(format "first: ~a attrib: ~a~%" first attrib)
         (cond
           ((eql first '{)
                 (make-tests attrib-table ce (cdr tests) join-vars attrib))
            ((eql first '})
            (make-tests attrib-table ce (cdr tests) join-vars ()))
           ((is-ops5-pred first)
-           ;;(format t "next: ~a~%" (cadr tests))
+           ;;(format "next: ~a~%" (cadr tests))
            (let* ((next (cadr tests))
                   (type (if (is-constant next) 'CONSTANT
                           (if (member next join-vars) 'JOIN
@@ -56,7 +56,7 @@
           ((eql first '<<)
            (labels
              ((loop (tests-left vals)
-                    ;;(format ops-out "tests-left: ~a  vals: ~a~%" tests-left vals)
+                    ;;(sformat ops-out "tests-left: ~a  vals: ~a~%" tests-left vals)
                     (cond
                       ((eql '>> (car tests-left))
                        (let* ((type 'CONSTANT)
@@ -78,14 +78,14 @@
                          (insert-test ce attrib-table type
                                       (make-test attrib '= first))
                          (cdr tests) join-vars curr-attrib)))
-          (t (format ops-out "make-tests: ERROR~%"))))))
+          (t (sformat ops-out "make-tests: ERROR~%"))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; make-attrib
   ; strip initial ^ to give attrib name
 ;;;-----------------------------------------------------------------------------
   (defun make-attrib (attrib)
-    ;;(format t "make-attrib: ~a~%" attrib)
+    ;;(format "make-attrib: ~a~%" attrib)
     (make-symbol (let ((str (make <string> size: 0)))
                    (accumulate
                      (lambda (a v)
@@ -112,7 +112,7 @@
   ; Returns the updated condition element
 ;;;-----------------------------------------------------------------------------
   (defun insert-test (ce attrib-table test-type test)
-    ;;(format t "insert-test: ~a ~a ~a~%" ce test-type test)
+    ;;(format "insert-test: ~a ~a ~a~%" ce test-type test)
     (cond
       ((eql test-type 'CONSTANT)
        (insert-test1 ce attrib-table test ce-c-tests set-ce-c-tests))
@@ -131,10 +131,10 @@
                                                    (ce-c-tests ce)
                                                    (ce-v-tests ce))
                            attrib-table test ce-j-tests set-ce-j-tests)))))
-      (t (format ops-out "insert-test: ERROR~%"))))
+      (t (sformat ops-out "insert-test: ERROR~%"))))
 
   (defun insert-test1 (ce attrib-table test reader writer)
-    ;;(format t "insert-test1: ~a ~a ~a~%" test reader writer)
+    ;;(format "insert-test1: ~a ~a ~a~%" test reader writer)
     (let ((index (element attrib-table (test-attrib test))))
       (writer ce (labels
                    ((loop (tests)

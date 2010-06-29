@@ -23,8 +23,8 @@
     `(with-handler
       (generic-lambda (c f)
         method: ((c f)
-                 (format stderr "compile time error condition: ")
-                 (pprint c stderr)
+                 (sformat stderr "compile time error condition: ")
+                 (spprint stderr c)
                  (if *no-ct-handlers* ()
                    (error ,str <ct-error> ct-error-value: ,error-value)))
         method: (((c <ct-error>) f)))   ; pass signal to next handler
@@ -67,8 +67,8 @@
 
   (defmacro as-C-library-file-name (name)
     `(if *object-dir*
-         (format () "~a~alib~a.a" *object-dir* *delimiter* ,name)
-       (format () "lib~a.a" ,name)))
+         (fmt "~a~alib~a.a" *object-dir* *delimiter* ,name)
+       (fmt "lib~a.a" ,name)))
 
   (defmacro as-C-library-link-string (name)
     `(string-append " -l" (or (string? ,name) (symbol-name ,name))))
@@ -81,7 +81,7 @@
   (defmacro gc-link-string () '(if *no-gc* "" "-lgc"))
 
   (defmacro as-C-library-interface-file-name (name)
-    `(format () "lib~a.i" ,name))
+    `(fmt "lib~a.i" ,name))
 
   (defmacro as-foreign-function-stub-name (name)
     `(string-append "ff_stub_" (symbol-name (gensym ,name))))
@@ -115,20 +115,20 @@
         (apply concatenate str-list))))
 
   (defmacro main-link-string ()
-    '(let ((name (format () "Lib.~a/eul-appl.o" (get-config-info 'ARCH))))
-       (format () "~a~a~a" *eulysses-dir* *delimiter* name)))
+    '(let ((name (fmt "Lib.~a/eul-appl.o" (get-config-info 'ARCH))))
+       (fmt "~a~a~a" *eulysses-dir* *delimiter* name)))
 
   (defmacro destination-link-string (module-name dir)
-    `(format () "~a~a~a" ,dir *delimiter*
+    `(fmt "~a~a~a" ,dir *delimiter*
                (or *dest-file-name* ,module-name)))
 
   (defmacro destination-library-link-string (module-name dir)
     `(or *dest-file-name*
-         (format () "~a~a~a" ,dir *delimiter*
+         (fmt "~a~a~a" ,dir *delimiter*
                  (as-C-library-file-name ,module-name))))
 
   (defmacro destination-object-string (module-name dir)
-    `(format () "~a~a~a" ,dir *delimiter*
+    `(fmt "~a~a~a" ,dir *delimiter*
                (or *dest-file-name*
                    (as-compiled-C-file-name ,module-name))))
 
@@ -154,8 +154,8 @@
          (setq ,function-name (named-lambda ,function-name args
            ,(if pre-action
                 `(apply ,pre-action ,function-name args)
-              `(format stderr
-                       ,(format () ">>> ~~aTRACE [~a]: ~~a\n" function-name)
+              `(sformat stderr
+                       ,(fmt ">>> ~~aTRACE [~a]: ~~a\n" function-name)
                        (dynamic *trace-indent*) args))
            (let ((res (dynamic-let ((*trace-indent*
                                      (concatenate (dynamic *trace-indent*)
@@ -163,8 +163,8 @@
                         (apply ,tmp-name args))))
              ,(if post-action
                   `(apply ,post-action ,function-name args)
-                `(format stderr
-                         ,(format () "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
+                `(sformat stderr
+                         ,(fmt "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
                                   function-name)
                          (dynamic *trace-indent*) args res))
              res)))

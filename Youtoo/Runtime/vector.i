@@ -10,7 +10,7 @@
     ((name . maximum-vector-size) (pos) (origin vector . maximum-vector-size) (class . constant) (value 536870911))
     ((name . do1-vector) (pos . 13) (origin vector . do1-vector))
     ((name . vector-append) (pos . 7) (origin vector . vector-append))
-    ((name . vector-empty?) (pos . 16) (origin vector . vector-empty?) (inline (G006750 (primitive-size) (fpi-zerop))))
+    ((name . vector-empty?) (pos . 16) (origin vector . vector-empty?) (inline (G006715 (primitive-size) (fpi-zerop))))
     ((name . accumulate1-vector) (pos . 6) (origin vector . accumulate1-vector))
     ((name . anyp1-vector) (pos . 4) (origin vector . anyp1-vector))
     ((name . reverse-vector!) (pos . 10) (origin vector . reverse-vector!))
@@ -24,7 +24,7 @@
     ((name . <vector>) (pos . 8) (origin vector . <vector>) (class . constant))
     ((name . all1-vector?) (pos . 9) (origin vector . all1-vector?))
     ((name . vector?) (pos . 5) (origin vector . vector?))
-    ((name . make-vector) (pos . 39) (origin boot1 . make-vector))
+    ((name . make-vector) (pos . 41) (origin boot1 . make-vector))
    )
    local-literals (
     (top-level . 120)

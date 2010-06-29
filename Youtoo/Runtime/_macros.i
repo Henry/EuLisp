@@ -69,7 +69,7 @@
     (throw . 86)
     (catch . 85)
     (dynamic-let . 83)
-    (format . 79)
+    (sformat . 79)
     ("real: ~a
 user: ~a
 system: ~a

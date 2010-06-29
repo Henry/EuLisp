@@ -21,8 +21,13 @@
 *** DONE Change =prin=, =print= and =write= to be n-ary
     CLOSED: [2010-06-15 Tue 15:30]
     Add =sprin=, =sprint= and =swrite= to take the stream as the first argument.
-*** TODO Change =newline= and =flush= to operate on =stdout=
+*** DONE Change =newline= and =flush= to operate on =stdout=
+    CLOSED: [2010-06-29 Tue 15:31]
     Add =snewline= and =sflush= to take the stream as an argument.
+*** DONE Add =spprint= and change =pprint= to use stdout
+    CLOSED: [2010-06-29 Tue 16:58]
+*** DONE Rename require predicate keyword =requiredp:= -> =required?:=
+    CLOSED: [2010-06-29 Tue 15:38]
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
@@ -171,7 +176,6 @@
 *** TODO Finish reformatting the C source files
 *** TODO Add =reverse!= method for =<string>=
 *** TODO Add =slice= generic function and methods
-*** TODO Add =slice= method for <vector>
 *** DONE Add =flush= and =sflush=
     CLOSED: [2010-06-27 Sun 22:59]
 * EuLisp Definition
