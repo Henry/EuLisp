@@ -1113,8 +1113,8 @@ void xloinit()
     setivar(simple_class, INSTSIZE, cvfixnum((FIXTYPE) CLASSSIZE));
     setivar(simple_class, ABSTRACTP, NIL);
 
-    sds = cons(newslot(xlenter("abstractp")), NIL);
-    setslotkey(car(sds), xlenter_keyword("abstractp:"));
+    sds = cons(newslot(xlenter("abstract?")), NIL);
+    setslotkey(car(sds), xlenter_keyword("abstract?:"));
     sds = cons(newslot(xlenter("instance-size")), sds);
     sds = cons(newslot(xlenter("subclasses")), sds);
     sds = cons(newslot(xlenter("keywords")), sds);
@@ -1127,7 +1127,7 @@ void xloinit()
     setivar(class, SLOTS, sds);
     setivar(simple_class, SLOTS, sds);
 
-    sds = cons(xlenter_keyword("abstractp:"), NIL);
+    sds = cons(xlenter_keyword("abstract?:"), NIL);
     sds = cons(xlenter_keyword("direct-keywords:"), sds);
     sds = cons(xlenter_keyword("direct-slots:"), sds);
     sds = cons(xlenter_keyword("superclasses:"), sds);

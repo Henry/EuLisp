@@ -40,7 +40,7 @@
 
     ;    constructor: (%make-thread self: cont:)
     predicate: thread?
-    abstractp: t)
+    abstract?: t)
 
   (defclass <simple-thread> (<thread>) ())
 
@@ -107,13 +107,13 @@
   ;;  (defcondition <thread-condition> <condition>)
   (defclass <thread-condition> (<condition>)
     ()
-    abstractp: t)
+    abstract?: t)
   ;;  (defcondition <thread-error> <thread-condition>
   ;;    value "no-value")
   (defclass <thread-error> (<thread-condition>)
     ((value reader: thread-error-value
             keyword: value:))
-    abstractp: t)
+    abstract?: t)
   (defcondition <thread-general-error> <thread-error>)
   (defcondition <thread-already-started> <thread-error>)
 
@@ -396,7 +396,7 @@
             default: 1))
 
     predicate: lock?
-    abstractp: t)
+    abstract?: t)
 
   (defclass <simple-lock> (<lock>)
     ()
@@ -419,7 +419,7 @@
   ;;  (defcondition <lock-condition> <condition>)
   (defclass <lock-condition> (<condition>)
     ()
-    abstractp: t)
+    abstract?: t)
   (defcondition <lock-error> <lock-condition>
                 value "no-value")
 
@@ -491,7 +491,7 @@
   ;;  (defcondition <wait-condition> <condition>)
   (defclass <wait-condition> (<condition>)
     ()
-    abstractp: t)
+    abstract?: t)
   (defcondition <wait-error> <wait-condition>
                 value "no-value")
 

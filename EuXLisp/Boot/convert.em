@@ -17,7 +17,7 @@
   ;;  (defcondition <conversion-condition> ())
   (defclass <conversion-condition> (<condition>)
     ()
-    abstractp: t)
+    abstract?: t)
   (defcondition <no-converter> <conversion-condition>
                 source ()
                 class ())

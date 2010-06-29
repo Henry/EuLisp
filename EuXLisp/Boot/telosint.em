@@ -196,7 +196,7 @@
   (table-set! builtin-make-table <continuation> (cant-make <continuation>))
 
   ;; slot
-  (set-class-keywords! <slot> '(keyword: default: requiredp:))
+  (set-class-keywords! <slot> '(keyword: default: required?:))
   (set-class-keywords! <local-slot> (class-keywords <slot>))
   (table-set! builtin-make-table <local-slot> (cant-make <slot>))
 

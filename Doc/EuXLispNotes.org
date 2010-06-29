@@ -428,7 +428,7 @@
     write to such a slot.  See setters.
   + =reader:= a name for a slot reader.
   + =writer:= a name for a slot writer.
-  + =requiredp:= use =requiredp: t= to indicate a required slot.  This slot must
+  + =required?:= use =required?: t= to indicate a required slot.  This slot must
     have a =keyword: keyword=!
 
   The =accessor:=, =reader:= and =writer:= options can be repeated as many times
@@ -447,7 +447,7 @@
       (make <rat> num: n den: d))
     #+END_SRC
     As usual, you can reorder or leave out bits as you feel.
-  + =abstractp: t= to indicate that this class is abstract, and no direct
+  + =abstract?: t= to indicate that this class is abstract, and no direct
     instances can be made.
 
   The class options =predicate:= and =constructor:= can be repeated.

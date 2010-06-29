@@ -33,26 +33,26 @@
               ;;            default: "no message"
               keyword: message:))
     predicate: condition?
-    abstractp: t)
+    abstract?: t)
 
   (defclass <error> (<condition>)
     ((value reader: error-value
             keyword: value:))
-    abstractp: t)
+    abstract?: t)
 
   (defcondition <general-error> <error>)
 
   ;;  (defcondition <telos-condition> <condition>)
   (defclass <telos-condition> (<condition>)
     ()
-    abstractp: t)
+    abstract?: t)
 
   ;;  (defcondition <telos-error> <telos-condition>
   ;;    value "no value")
   (defclass <telos-error> (<telos-condition>)
     ((value reader: telos-error-value
             keyword: value:))
-    abstractp: t)
+    abstract?: t)
 
   (defcondition <telos-general-error> <telos-error>)
   (defcondition <no-applicable-method> <telos-error>)
@@ -64,7 +64,7 @@
   ;;  (defcondition <arithmetic-condition> <condition>)
   (defclass <arithmetic-condition> (<condition>)
     ()
-    abstractp: t)
+    abstract?: t)
   (defcondition <arithmetic-error> <arithmetic-condition>
                 value "no value")
 
@@ -74,7 +74,7 @@
   ;;  (defcondition <compilation-error> <error>)
   (defclass <compilation-error> (<error>)
     ()
-    abstractp: t)
+    abstract?: t)
   (defcondition <compilation-general-error> <compilation-error>)
   (defcondition <macro-error> <compilation-error>)
 

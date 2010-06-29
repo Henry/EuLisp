@@ -28,6 +28,8 @@
     CLOSED: [2010-06-29 Tue 16:58]
 *** DONE Rename require predicate keyword =requiredp:= -> =required?:=
     CLOSED: [2010-06-29 Tue 15:38]
+*** DONE Rename =abstractp:= -> =abstract?:=
+    CLOSED: [2010-06-29 Tue 21:47]
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]

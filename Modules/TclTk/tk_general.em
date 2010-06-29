@@ -41,7 +41,7 @@
            default: (string-append ".tk" (symbol-name (gensym))))
     (handler accessor: tk-handler
              keyword: handler:))
-    abstractp: t
+    abstract?: t
     predicate: tk-object?)
 
   (defclass <tk-button> (<tk-object>)() predicate: tk-button?)

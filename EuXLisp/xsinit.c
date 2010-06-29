@@ -458,9 +458,9 @@ void xlsymbols()
     s_direct_keywords = xlenter_keyword("direct-keywords:");
     s_name = xlenter_keyword("name:");
     s_default = xlenter_keyword("default:");
-    s_requiredp = xlenter_keyword("requiredp:");
+    s_requiredp = xlenter_keyword("required?:");
     s_keyword = xlenter_keyword("keyword:");
-    s_abstractp = xlenter_keyword("abstractp:");
+    s_abstractp = xlenter_keyword("abstract?:");
     s_predicate = xlenter_keyword("predicate:");
     s_constructor = xlenter_keyword("constructor:");
     s_keywords = xlenter_keyword("keywords:");

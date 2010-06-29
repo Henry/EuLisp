@@ -41,7 +41,7 @@
   ;;  (defcondition <collection-condition> <condition>)
   (defclass <collection-condition> (<condition>)
     ()
-    abstractp: t)
+    abstract?: t)
   (defcondition <collection-error> <collection-condition>
                 value "no value")
 

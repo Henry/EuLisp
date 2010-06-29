@@ -16,7 +16,7 @@
   ;; (defcondition <stream-error> <error>) but abstract
   (defclass <stream-error> (<error>)
     ()
-    abstractp: t)
+    abstract?: t)
 
   (defcondition <format-error> <stream-error>)
 
