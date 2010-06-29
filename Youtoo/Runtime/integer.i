@@ -17,7 +17,7 @@
     (even? . 19)
     (|(method integer?)| . 15)
     (integer? . 14)
-    (abstractp: . 13)
+    (abstract?: . 13)
     (direct-keywords: . 12)
     (direct-slots: . 11)
     (direct-superclasses: . 10)

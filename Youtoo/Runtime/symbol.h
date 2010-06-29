@@ -15,9 +15,9 @@ extern LispRef symbol_bindings[];
 #define keyword__X63_fn_index 2 
 #define _name__X60_X62_fn_index 33 
 #define gensym_fn_index 6 
-#define keyword_name_fn_index 6 
+#define keyword_name_fn_index 7 
 #define _symbol__X60_X62_fn_index 5 
-#define symbol__X63_fn_index 23 
+#define symbol__X63_fn_index 22 
 
 
 

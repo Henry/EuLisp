@@ -34,11 +34,11 @@
 ;;; Classes: <collection> and <sequence>
 ;;;-----------------------------------------------------------------------------
   (defclass <collection> (<object>) ()
-    abstractp: t)
+    abstract?: t)
 
   (defclass <sequence> (<collection>) ()
     keywords: (size: fill-value:)
-    abstractp: t)
+    abstract?: t)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates

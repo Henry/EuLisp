@@ -30,7 +30,7 @@
     (ceiling . 23)
     (double? . 22)
     (float? . 21)
-    (abstractp: . 20)
+    (abstract?: . 20)
     (direct-keywords: . 19)
     (direct-slots: . 18)
     (direct-superclasses: . 17)

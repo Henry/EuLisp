@@ -16,7 +16,7 @@
 ;;; Class <float> and <double-float>
 ;;;-----------------------------------------------------------------------------
   (defclass <float> (<number>)
-    () abstractp: t predicate: float?)
+    () abstract?: t predicate: float?)
 
   (defprimclass <double> double-class (<float>) ()
     predicate: double?)

@@ -17,7 +17,7 @@ extern LispRef character_bindings[];
 #define alphap_fn_index 4 
 #define digit__X63_fn_index 7 
 #define as_lowercase_fn_index 3 
-#define character__X63_fn_index 35 
+#define character__X63_fn_index 34 
 #define as_uppercase_fn_index 6 
 
 

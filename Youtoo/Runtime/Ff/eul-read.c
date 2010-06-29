@@ -2,7 +2,7 @@
 ///-----------------------------------------------------------------------------
 /// ---                 EuLisp System 'youtoo'
 ///-----------------------------------------------------------------------------
-///  Library: level1, eval, youtoo
+///  Library: level1
 ///  Authors: Julian Padget, Andreas Kind
 ///  Description: Low-level read
 ///-----------------------------------------------------------------------------
@@ -32,6 +32,8 @@ int read_into_buffer(int _file, char *buf, int n)
     static int status;
 
     #ifdef READLINE
+    // Check if the rl_histfile is set to determine if readline is active
+    // i.e. the REPL is being used
     if (rl_histfile && _file == 0)
     {
         // Get a line from the user.

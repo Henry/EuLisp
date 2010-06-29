@@ -75,7 +75,7 @@
     (fill-value: . 57)
     (size: . 56)
     (sequence . 55)
-    (abstractp: . 54)
+    (abstract?: . 54)
     (direct-keywords: . 53)
     (direct-slots: . 52)
     (direct-superclasses: . 51)

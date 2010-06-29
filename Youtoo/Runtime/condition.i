@@ -12,7 +12,7 @@
     ((name . <condition>) (pos . 8) (origin condition . <condition>) (class . constant))
     ((name . signal) (pos . 2) (origin condition . signal))
     ((name . *default-error-handler*) (pos . 3) (origin condition . *default-error-handler*))
-    ((name . condition-message) (pos . 6) (origin condition . condition-message) (inline (G00860 (static-ref0) (binding-ref ? <condition>) (primitive-relative-ref))) (setter (G00862 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <condition>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . condition-message) (pos . 6) (origin condition . condition-message) (inline (G00795 (static-ref0) (binding-ref ? <condition>) (primitive-relative-ref))) (setter (G00797 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <condition>) (set-primitive-relative-ref) (nobble 2))))
     ((name . output-condition-contents) (pos . 4) (origin condition . output-condition-contents))
     ((name . push-error-handler) (pos . 5) (origin dynamic . push-error-handler))
     ((name . condition?) (pos . 7) (origin condition . condition?))

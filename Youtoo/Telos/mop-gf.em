@@ -189,22 +189,22 @@
         ())))
 
 ;;;-----------------------------------------------------------------------------
-;;; Error and warning (using simple format1)
+;;; Error and warning (using simple format)
 ;;;-----------------------------------------------------------------------------
   (setq *error*
         (named-lambda error (str . args)
-          (format1 2 "*** ERROR [level1]: ")
-          (apply format1 2 str args)
-          (format1 2 "\n")
-          (format1 2 "***    See Backtrace? (y/n) ")
+          (format 2 "*** ERROR [level1]: ")
+          (apply format 2 str args)
+          (format 2 "\n")
+          (format 2 "***    See Backtrace? (y/n) ")
           (if (eq (getchar) #\y) (backtrace) ())
           (exit)))
 
   (setq *warning*
         (named-lambda warning (str . args)
-          (format1 2 "*** WARNING [level1]: ")
-          (apply format1 2 str args)
-          (format1 2 "\n")))
+          (format 2 "*** WARNING [level1]: ")
+          (apply format 2 str args)
+          (format 2 "\n")))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

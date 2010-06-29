@@ -17,7 +17,7 @@ extern LispRef _telos0_bindings[];
 extern LispRef level1_bindings[];
 extern LispRef boot_bindings[];
 extern LispRef collect_bindings[];
-extern LispRef mop_gf_bindings[];
+extern LispRef format_bindings[];
 extern LispRef symbol_bindings[];
 extern LispRef boot1_bindings[];
 
@@ -48,7 +48,7 @@ void initialize_module__macros()
 
   eul_allocate_static_string(str_1027, "*** WARNING: missing else branch in (case ... ~a)", 49);
   /* Byte-vector with size: 36 is_init: 0 index: 31 binding: case */
-  static const void *G001025[] = {I(43,fe,46,02),I(24,00,00,00),B(symbol ,6),I(3c,00,1c,24),B(_macros ,5),I(3c,01,1b,10),I(1d,1c,1c,48),I(00,00,1b,48),I(00,01,47,00),I(01,10,1b,23),B(_macros ,21),I(50,12,1b,34),I(00,00,00,1d),I(23,00,00,00),B(_macros ,27),I(47,00,01,24),B(mop_gf ,17),I(3c,02,32,00),I(00,00,00,07),I(86,2a,1f,08),I(86,0f,47,00),I(00,1c,0f,1b),I(86,0f,23,00),B(_macros ,28),I(23,00,00,00),B(_macros ,26),I(3b,01,1f,0b),I(24,00,00,00),B(collect ,2),I(3c,02,23,00),B(_macros ,29),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_macros ,30),I(1c,0f,45,10)};
+  static const void *G001025[] = {I(43,fe,46,02),I(24,00,00,00),B(symbol ,6),I(3c,00,1c,24),B(_macros ,5),I(3c,01,1b,10),I(1d,1c,1c,48),I(00,00,1b,48),I(00,01,47,00),I(01,10,1b,23),B(_macros ,21),I(50,12,1b,34),I(00,00,00,1d),I(23,00,00,00),B(_macros ,27),I(47,00,01,24),B(format ,5),I(3c,02,32,00),I(00,00,00,07),I(86,2a,1f,08),I(86,0f,47,00),I(00,1c,0f,1b),I(86,0f,23,00),B(_macros ,28),I(23,00,00,00),B(_macros ,26),I(3b,01,1f,0b),I(24,00,00,00),B(collect ,2),I(3c,02,23,00),B(_macros ,29),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_macros ,30),I(1c,0f,45,10)};
 
   /* Byte-vector with size: 23 is_init: 0 index: 35 binding: with-handler */
   static const void *G001031[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1d,86),I(0f,23,00,00),B(_macros ,32),I(1c,0f,23,00),B(_macros ,33),I(1f,04,0f,1b),I(86,0f,1f,04),I(1c,0f,1b,86),I(0f,83,86,0f),I(23,00,00,00),B(_macros ,34),I(1c,0f,1f,08),I(86,0f,1c,1c),I(0f,1f,04,1c),I(0f,23,00,00),B(_macros ,30),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,23,00,00),B(_macros ,33),I(1c,0f,45,11)};
@@ -66,28 +66,28 @@ void initialize_module__macros()
   static const void *G001049[] = {I(ab,1c,86,0f),I(23,00,00,00),B(_macros ,22),I(1c,0f,1d,86),I(0f,1c,1c,0f),I(23,00,00,00),B(_macros ,46),I(1c,0f,45,06)};
 
   /* Byte-vector with size: 47 is_init: 0 index: 53 binding: unwind-protect */
-  static const void *G001052[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,23,00),B(_macros ,48),I(86,0f,23,00),B(_macros ,22),I(1c,0f,83,86),I(0f,23,00,00),B(_macros ,49),I(1c,0f,1b,86),I(0f,1f,06,1c),I(24,00,00,00),B(boot ,11),I(3c,02,86,1c),I(0f,23,00,00),B(_macros ,50),I(1c,0f,23,00),B(_macros ,48),I(86,0f,23,00),B(_macros ,51),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_macros ,52),I(1c,0f,1b,86),I(0f,1f,0c,1c),I(0f,23,00,00),B(_macros ,46),I(1c,0f,1f,12),I(86,0f,1f,11),I(1c,0f,1b,86),I(0f,83,86,0f),I(23,00,00,00),B(_macros ,49),I(1c,0f,1f,15),I(86,0f,1c,1c),I(0f,1f,18,1c),I(24,00,00,00),B(boot ,11),I(3c,02,1f,05),I(1c,0f,23,00),B(_macros ,30),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,23,00,00),B(_macros ,33),I(1c,0f,45,1f)};
+  static const void *G001052[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,23,00),B(_macros ,48),I(86,0f,23,00),B(_macros ,22),I(1c,0f,83,86),I(0f,23,00,00),B(_macros ,49),I(1c,0f,1b,86),I(0f,1f,06,1c),I(24,00,00,00),B(boot ,7),I(3c,02,86,1c),I(0f,23,00,00),B(_macros ,50),I(1c,0f,23,00),B(_macros ,48),I(86,0f,23,00),B(_macros ,51),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(_macros ,52),I(1c,0f,1b,86),I(0f,1f,0c,1c),I(0f,23,00,00),B(_macros ,46),I(1c,0f,1f,12),I(86,0f,1f,11),I(1c,0f,1b,86),I(0f,83,86,0f),I(23,00,00,00),B(_macros ,49),I(1c,0f,1f,15),I(86,0f,1c,1c),I(0f,1f,18,1c),I(24,00,00,00),B(boot ,7),I(3c,02,1f,05),I(1c,0f,23,00),B(_macros ,30),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,23,00,00),B(_macros ,33),I(1c,0f,45,1f)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 55 binding: for */
-  static const void *G001059[] = {I(43,fc,1c,86),I(0f,1c,1c,24),B(boot ,11),I(3c,02,1f,04),I(1c,0f,23,00),B(_macros ,54),I(1c,0f,1b,86),I(0f,1f,08,1c),I(0f,23,00,00),B(_macros ,33),I(1c,0f,45,0a)};
+  static const void *G001059[] = {I(43,fc,1c,86),I(0f,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1c,0f,23,00),B(_macros ,54),I(1c,0f,1b,86),I(0f,1f,08,1c),I(0f,23,00,00),B(_macros ,33),I(1c,0f,45,0a)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 56 binding: not */
   static const void *G001062[] = {I(aa,86,0f,23),B(_macros ,24),I(1c,0f,45,01)};
 
   /* Byte-vector with size: 23 is_init: 0 index: 60 binding: while */
-  static const void *G001064[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1b,86),I(0f,1b,86,0f),I(1f,03,1c,24),B(boot ,11),I(3c,02,1f,05),I(1c,0f,23,00),B(_macros ,57),I(1c,0f,1b,86),I(0f,86,1c,0f),I(1f,07,1c,0f),I(1b,86,0f,1f),I(09,86,0f,1b),I(86,0f,1d,1c),I(0f,23,00,00),B(_macros ,58),I(1c,0f,1b,86),I(0f,23,00,00),B(_macros ,59),I(1c,0f,23,00),B(_macros ,44),I(1c,0f,45,12)};
+  static const void *G001064[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1b,86),I(0f,1b,86,0f),I(1f,03,1c,24),B(boot ,7),I(3c,02,1f,05),I(1c,0f,23,00),B(_macros ,57),I(1c,0f,1b,86),I(0f,86,1c,0f),I(1f,07,1c,0f),I(1b,86,0f,1f),I(09,86,0f,1b),I(86,0f,1d,1c),I(0f,23,00,00),B(_macros ,58),I(1c,0f,1b,86),I(0f,23,00,00),B(_macros ,59),I(1c,0f,23,00),B(_macros ,44),I(1c,0f,45,12)};
 
   /* Byte-vector with size: 9 is_init: 0 index: 61 binding: anonymous */
   static const void *G001069[] = {I(aa,1b,10,1b),I(86,0f,23,00),B(_macros ,22),I(1c,0f,1f,03),I(11,1b,10,1b),I(86,0f,1f,03),I(1c,0f,23,00),B(_macros ,46),I(1c,0f,45,08)};
 
   /* Byte-vector with size: 27 is_init: 0 index: 63 binding: dynamic-let */
-  static const void *G001071[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,2a,23),B(_macros ,28),I(23,00,00,00),B(_macros ,61),I(3b,01,1d,24),B(collect ,2),I(3c,02,23,00),B(_macros ,33),I(1d,0f,1f,03),I(24,00,00,00),B(collect ,9),I(3c,01,1b,86),I(0f,23,00,00),B(_macros ,49),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(_macros ,62),I(1c,0f,1b,86),I(0f,1f,08,1c),I(24,00,00,00),B(boot ,11),I(3c,02,23,00),B(_macros ,33),I(1c,0f,45,0c)};
+  static const void *G001071[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,2a,23),B(_macros ,28),I(23,00,00,00),B(_macros ,61),I(3b,01,1d,24),B(collect ,2),I(3c,02,23,00),B(_macros ,33),I(1d,0f,1f,03),I(24,00,00,00),B(collect ,9),I(3c,01,1b,86),I(0f,23,00,00),B(_macros ,49),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(_macros ,62),I(1c,0f,1b,86),I(0f,1f,08,1c),I(24,00,00,00),B(boot ,7),I(3c,02,23,00),B(_macros ,33),I(1c,0f,45,0c)};
 
   /* Byte-vector with size: 25 is_init: 0 index: 65 binding: butlast */
   static const void *G001074[] = {I(43,fe,1b,12),I(1b,34,00,00),I(00,00,00,37),I(1d,86,0f,23),B(_macros ,64),I(1c,0f,83,86),I(0f,1c,1c,0f),I(23,00,00,00),B(_macros ,42),I(1c,0f,1b,86),I(0f,23,00,00),B(_macros ,64),I(1c,0f,22,06),I(32,00,00,00),I(00,00,00,2c),I(1d,86,0f,23),B(_macros ,64),I(1c,0f,1b,1f),I(04,0f,23,00),B(_macros ,42),I(1c,0f,1b,86),I(0f,23,00,00),B(_macros ,64),I(1c,0f,22,05),I(45,03,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 66 binding: return-from */
-  static const void *G001077[] = {I(43,fe,23,00),B(_macros ,33),I(1c,0f,1d,1c),I(24,00,00,00),B(boot1 ,25),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G001077[] = {I(43,fe,23,00),B(_macros ,33),I(1c,0f,1d,1c),I(24,00,00,00),B(boot1 ,26),I(3d,02,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 69 binding: dynamic-setq */
   static const void *G001079[] = {I(ab,23,00,00),B(_macros ,67),I(86,0f,23,00),B(_macros ,68),I(1c,0f,1f,03),I(86,0f,23,00),B(_macros ,22),I(1c,0f,1f,04),I(86,0f,1c,1c),I(0f,1f,04,1c),I(0f,45,08,00)};

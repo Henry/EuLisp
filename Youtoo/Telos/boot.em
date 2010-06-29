@@ -227,7 +227,7 @@
         (apply *error* str args)
       (progn
        (write-object "*** ERROR [level1]: " stderr)
-       (apply format1 stderr str args)
+       (apply format stderr str args)
        (write-object "\n" stderr)  ; #\\n stderr)
        (write-object "***    See Backtrace? (y/n) " stderr)
        (if (eq (getchar) #\y) (backtrace) ())
@@ -242,7 +242,7 @@
         (apply *warning* str args)
       (progn
         (write-object "*** WARNING [level1]: " stderr)
-        (apply format1 stderr str args)
+        (apply format stderr str args)
         (write-object "\n" stderr)))) ;#\\n stderr))))
 
 ;;;-----------------------------------------------------------------------------
@@ -278,7 +278,7 @@
       (let ((fun (context-stack-ref (* i *frame-size*))))
         (if fun
             (let ((name (lambda-name fun)))
-              (format1 stderr "       ~a: ~a\n" (- i *skip-nframes*) name)
+              (format stderr "       ~a: ~a\n" (- i *skip-nframes*) name)
               (show-frames (+ i 1)))
           ()))))
 
@@ -293,7 +293,7 @@
   (defun show-stack-values (i)
     (if (= i *stack-nvalues*) t
       (let ((val (value-stack-ref i)))
-        (format1 stderr "       ~a: ~a\n" (- i *skip-nvalues*) val)
+        (format stderr "       ~a: ~a\n" (- i *skip-nvalues*) val)
         (show-stack-values (+ i 1)))))
 
   (defun stack-values ()

@@ -13,7 +13,7 @@
            simple-function? simple-generic-function? int-zero? object?
            + - * / % mod < = inc dec
            eq eql equal
-           format1 write-object sprin prin sprint print
+           format write-object sprin prin sprint print
            make-symbol make-keyword
            make-vector make-vector1 vector-size vector-ref
            member1-string string-ref string-size substring tailstring
@@ -163,7 +163,7 @@
   (defun print (x)
     (sprint stdout x))
 
-  (defun format1 (fd str . l)
+  (defun format (fd str . l)
     (let ((n (string-size str))
           (i 0))
       (labels

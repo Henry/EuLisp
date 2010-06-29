@@ -40,7 +40,7 @@
       ;; doesn't change the dynamic variables of *every* thread.
       default: (list '*clean-ups* ()))
       keyword: dynamic-variables:)
-    abstractp: t
+    abstract?: t
     keywords: (function:)
     predicate: thread?)
 

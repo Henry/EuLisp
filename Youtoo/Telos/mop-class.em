@@ -65,10 +65,10 @@
 
    (defconstant class-slotz
      '(name instance-length direct-superclasses direct-subclasses slots
-       keywords class-precedence-list abstractp converter code))
+       keywords class-precedence-list abstract? converter code))
 
    (defconstant class-keywordz
-     '(name: direct-superclasses: direct-slots: direct-keywords: abstractp:))
+     '(name: direct-superclasses: direct-slots: direct-keywords: abstract?:))
 
    (defconstant class-slot-defaults
      (list (lambda () 'anonymous)

@@ -55,170 +55,170 @@ void initialize_module_socket()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_5478, sym_5477, sym_5476, sym_5475, sym_5474, sym_5473, sym_5472, G005471, G005469, G005467, G005465, G005463, G005461, G005459, sym_5457, sym_5456, sym_5455, sym_5454, sym_5453, sym_5452, sym_5451, sym_5450, sym_5449, sym_5448, sym_5447, key_5444, sym_5442, key_5438, key_5437, key_5436, sym_5435, key_5434, sym_5433, sym_5432, key_5431, sym_5430, key_5429, key_5428, key_5427, sym_5426, key_5425, G005424, G005422, G005420, G005418, G005416, G005414, G005412, G005410, G005408, G005406, G005404, G005402, sym_5400, sym_5399, key_5398, G005396, G005394, G005392, G005390, G005388, G005386;
+  LispRef sym_5317, sym_5316, sym_5315, sym_5314, sym_5313, sym_5312, sym_5311, G005310, G005308, G005306, G005304, G005302, G005300, G005298, sym_5296, sym_5295, sym_5294, sym_5293, sym_5292, sym_5291, sym_5290, sym_5289, sym_5288, sym_5287, sym_5286, key_5283, sym_5281, key_5277, key_5276, key_5275, sym_5274, key_5273, sym_5272, sym_5271, key_5270, sym_5269, key_5268, key_5267, key_5266, sym_5265, key_5264, G005263, G005261, G005259, G005257, G005255, G005253, G005251, G005249, G005247, G005245, G005243, G005241, sym_5239, sym_5238, key_5237, G005235, G005233, G005231, G005229, G005227, G005225;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 1 is_init: 0 index: 12 binding: (method-connection?) */
-  static const void *G005385[] = {I(aa,1b,45,01)};
+  static const void *G005224[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 13 binding: (method-connection?) */
-  static const void *G005387[] = {I(aa,86,45,01)};
+  static const void *G005226[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 14 binding: (setter-connection-host) */
-  static const void *G005389[] = {I(ab,1c,83,1d),I(24,00,00,00),B(socket ,2),I(09,45,02,00)};
+  static const void *G005228[] = {I(ab,1c,83,1d),I(24,00,00,00),B(socket ,2),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 15 binding: (setter-connection-port) */
-  static const void *G005391[] = {I(ab,1c,82,1d),I(24,00,00,00),B(socket ,2),I(09,45,02,00)};
+  static const void *G005230[] = {I(ab,1c,82,1d),I(24,00,00,00),B(socket ,2),I(09,45,02,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 16 binding: anonymous */
-  static const void *G005393[] = {I(a9,47,00,00),I(24,00,00,00),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G005232[] = {I(a9,47,00,00),I(24,00,00,00),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_5397, "tcp", 3);
+  eul_allocate_static_string(str_5236, "tcp", 3);
   /* Byte-vector with size: 81 is_init: 0 index: 21 binding: (method-initialize) */
-  static const void *G005395[] = {I(ab,46,02,1c),I(1c,37,02,2a),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(socket ,8),I(08,24,00,00),B(string ,13),I(24,00,00,00),B(convert ,2),I(3c,02,1d,82),I(24,00,00,00),B(socket ,8),I(08,1c,23,00),B(socket ,17),I(1d,41,00,00),B(stream1 ,21),I(22,03,1b,85),I(19,1b,34,00),I(00,00,00,32),I(24,00,00,00),B(stream1 ,6),I(3c,00,1b,24),B(stream2 ,38),I(23,00,00,00),B(socket ,18),I(1f,09,24,00),B(boot ,12),I(3d,04,07,22),I(01,32,00,00),I(00,00,00,cc),I(1c,85,1a,1b),I(34,00,00,00),I(00,00,00,34),I(1d,41,00,00),B(stream1 ,24),I(22,01,1b,24),B(stream2 ,38),I(23,00,00,00),B(socket ,18),I(1f,0a,24,00),B(boot ,12),I(3d,04,08,22),I(01,32,00,00),I(00,00,00,92),I(1f,06,1f,03),I(1c,83,1d,24),B(socket ,8),I(09,22,02,2a),I(24,00,00,00),B(stream2 ,12),I(1b,48,00,00),I(23,00,00,00),B(socket ,19),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(socket ,20),I(23,00,00,00),B(socket ,16),I(3b,00,1c,0f),I(23,00,00,00),B(socket ,19),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(09,24,00,00),B(stream2 ,37),I(0f,1b,89,00),B(stream2 ,37),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(0b,22,05,22),I(01,45,06,00)};
+  static const void *G005234[] = {I(ab,46,02,1c),I(1c,37,02,2a),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(socket ,8),I(08,24,00,00),B(string ,13),I(24,00,00,00),B(convert ,2),I(3c,02,1d,82),I(24,00,00,00),B(socket ,8),I(08,1c,23,00),B(socket ,17),I(1d,41,00,00),B(stream1 ,21),I(22,03,1b,85),I(19,1b,34,00),I(00,00,00,32),I(24,00,00,00),B(stream1 ,6),I(3c,00,1b,24),B(stream2 ,38),I(23,00,00,00),B(socket ,18),I(1f,09,24,00),B(boot ,12),I(3d,04,07,22),I(01,32,00,00),I(00,00,00,cc),I(1c,85,1a,1b),I(34,00,00,00),I(00,00,00,34),I(1d,41,00,00),B(stream1 ,24),I(22,01,1b,24),B(stream2 ,38),I(23,00,00,00),B(socket ,18),I(1f,0a,24,00),B(boot ,12),I(3d,04,08,22),I(01,32,00,00),I(00,00,00,92),I(1f,06,1f,03),I(1c,83,1d,24),B(socket ,8),I(09,22,02,2a),I(24,00,00,00),B(stream2 ,12),I(1b,48,00,00),I(23,00,00,00),B(socket ,19),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(socket ,20),I(23,00,00,00),B(socket ,16),I(3b,00,1c,0f),I(23,00,00,00),B(socket ,19),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(09,24,00,00),B(stream2 ,37),I(0f,1b,89,00),B(stream2 ,37),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(0b,22,05,22),I(01,45,06,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 22 binding: (method-socket?) */
-  static const void *G005401[] = {I(aa,1b,45,01)};
+  static const void *G005240[] = {I(aa,1b,45,01)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 23 binding: (method-socket?) */
-  static const void *G005403[] = {I(aa,86,45,01)};
+  static const void *G005242[] = {I(aa,86,45,01)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 24 binding: (setter-socket-port) */
-  static const void *G005405[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(socket ,8),I(09,45,02,00)};
+  static const void *G005244[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(socket ,8),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 25 binding: (setter-socket-host) */
-  static const void *G005407[] = {I(ab,1c,84,1d),I(24,00,00,00),B(socket ,8),I(09,45,02,00)};
+  static const void *G005246[] = {I(ab,1c,84,1d),I(24,00,00,00),B(socket ,8),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 26 binding: (setter-socket-descriptor) */
-  static const void *G005409[] = {I(ab,1c,83,1d),I(24,00,00,00),B(socket ,8),I(09,45,02,00)};
+  static const void *G005248[] = {I(ab,1c,83,1d),I(24,00,00,00),B(socket ,8),I(09,45,02,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 27 binding: (setter-socket-queue-size) */
-  static const void *G005411[] = {I(ab,1c,82,1d),I(24,00,00,00),B(socket ,8),I(09,45,02,00)};
+  static const void *G005250[] = {I(ab,1c,82,1d),I(24,00,00,00),B(socket ,8),I(09,45,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 28 binding: anonymous */
-  static const void *G005413[] = {I(a9,26,00,00),I(00,00,12,67),I(45,00,00,00)};
+  static const void *G005252[] = {I(a9,26,00,00),I(00,00,12,67),I(45,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 29 binding: anonymous */
-  static const void *G005415[] = {I(a9,24,00,00),B(stream1 ,3),I(3d,00,00,00)};
+  static const void *G005254[] = {I(a9,24,00,00),B(stream1 ,3),I(3d,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 30 binding: anonymous */
-  static const void *G005417[] = {I(a9,26,00,00),I(00,00,00,05),I(45,00,00,00)};
+  static const void *G005256[] = {I(a9,26,00,00),I(00,00,00,05),I(45,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 31 binding: anonymous */
-  static const void *G005419[] = {I(a9,24,00,00),B(stream1 ,3),I(3d,00,00,00)};
+  static const void *G005258[] = {I(a9,24,00,00),B(stream1 ,3),I(3d,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 32 binding: anonymous */
-  static const void *G005421[] = {I(a9,26,00,00),I(00,00,12,67),I(45,00,00,00)};
+  static const void *G005260[] = {I(a9,26,00,00),I(00,00,12,67),I(45,00,00,00)};
 
-  eul_allocate_static_cons(cons_5441, NULL, NULL);
-  eul_allocate_static_cons(cons_5440, NULL, eul_as_static(cons_5441));
-  eul_allocate_static_cons(cons_5439, NULL, eul_as_static(cons_5440));
-  eul_allocate_static_cons(cons_5446, NULL, NULL);
-  eul_allocate_static_cons(cons_5445, NULL, eul_as_static(cons_5446));
-  eul_allocate_static_cons(cons_5443, NULL, eul_as_static(cons_5445));
+  eul_allocate_static_cons(cons_5280, NULL, NULL);
+  eul_allocate_static_cons(cons_5279, NULL, eul_as_static(cons_5280));
+  eul_allocate_static_cons(cons_5278, NULL, eul_as_static(cons_5279));
+  eul_allocate_static_cons(cons_5285, NULL, NULL);
+  eul_allocate_static_cons(cons_5284, NULL, eul_as_static(cons_5285));
+  eul_allocate_static_cons(cons_5282, NULL, eul_as_static(cons_5284));
   /* Byte-vector with size: 390 is_init: 0 index: 62 binding: top-level */
-  static const void *G005423[] = {I(a9,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(socket ,33),I(23,00,00,00),B(socket ,34),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,32),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,37),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(socket ,33),I(23,00,00,00),B(socket ,38),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,31),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,39),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(socket ,33),I(23,00,00,00),B(socket ,40),I(24,00,00,00),B(boot1 ,26),I(3c,02,23,00),B(socket ,33),I(23,00,00,00),B(socket ,41),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,30),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,42),I(24,00,00,00),B(boot1 ,26),I(3c,06,1f,03),I(1f,03,1f,03),I(1f,03,24,00),B(boot1 ,26),I(3c,04,24,00),B(mop_class ,70),I(23,00,00,00),B(socket ,33),I(23,00,00,00),B(socket ,43),I(23,00,00,00),B(socket ,44),I(1f,09,23,00),B(socket ,45),I(1f,06,23,00),B(socket ,46),I(23,00,00,00),B(socket ,47),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(socket ,8),I(2a,24,00,00),B(stream2 ,5),I(24,00,00,00),B(boot1 ,26),I(3c,01,23,00),B(socket ,33),I(23,00,00,00),B(socket ,38),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,29),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,39),I(24,00,00,00),B(boot1 ,26),I(3c,06,23,00),B(socket ,33),I(23,00,00,00),B(socket ,34),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,28),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,37),I(24,00,00,00),B(boot1 ,26),I(3c,06,1c,1c),I(24,00,00,00),B(boot1 ,26),I(3c,02,24,00),B(mop_class ,70),I(23,00,00,00),B(socket ,33),I(23,00,00,00),B(socket ,48),I(23,00,00,00),B(socket ,44),I(1f,07,23,00),B(socket ,45),I(1f,06,23,00),B(socket ,46),I(23,00,00,00),B(socket ,50),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(socket ,2),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,41),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(socket ,51),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(socket ,10),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,41),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(boot1 ,26),I(3c,00,23,00),B(socket ,52),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(socket ,4),I(2a,24,00,00),B(boot1 ,43),I(24,00,00,00),B(boot1 ,43),I(3c,01,24,00),B(socket ,6),I(23,00,00,00),B(socket ,53),I(23,00,00,00),B(socket ,27),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,43),I(24,00,00,00),B(boot1 ,43),I(3c,01,24,00),B(socket ,3),I(23,00,00,00),B(socket ,54),I(23,00,00,00),B(socket ,26),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,43),I(24,00,00,00),B(boot1 ,43),I(3c,01,24,00),B(socket ,11),I(23,00,00,00),B(socket ,55),I(23,00,00,00),B(socket ,25),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,43),I(24,00,00,00),B(boot1 ,43),I(3c,01,24,00),B(socket ,9),I(23,00,00,00),B(socket ,56),I(23,00,00,00),B(socket ,24),I(3b,02,1d,3c),I(02,2a,24,00),B(socket ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,41),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(socket ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,57),I(23,00,00,00),B(socket ,23),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(socket ,8),I(24,00,00,00),B(boot1 ,41),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(socket ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,57),I(23,00,00,00),B(socket ,22),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,10),I(2a,24,00,00),B(socket ,8),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(socket ,8),I(86,24,00,00),B(boot1 ,41),I(3c,03,24,00),B(boot1 ,26),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,58),I(23,00,00,00),B(socket ,21),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(boot1 ,43),I(24,00,00,00),B(boot1 ,43),I(3c,01,24,00),B(socket ,7),I(23,00,00,00),B(socket ,59),I(23,00,00,00),B(socket ,15),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,43),I(24,00,00,00),B(boot1 ,43),I(3c,01,24,00),B(socket ,5),I(23,00,00,00),B(socket ,60),I(23,00,00,00),B(socket ,14),I(3b,02,1d,3c),I(02,2a,24,00),B(socket ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,41),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(socket ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,61),I(23,00,00,00),B(socket ,13),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(socket ,2),I(24,00,00,00),B(boot1 ,41),I(3c,02,24,00),B(boot1 ,26),I(3c,00,24,00),B(socket ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,61),I(23,00,00,00),B(socket ,12),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,4),I(2a,24,00,00),B(socket ,2),I(45,38,00,00)};
+  static const void *G005262[] = {I(a9,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(socket ,33),I(23,00,00,00),B(socket ,34),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,32),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,37),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(socket ,33),I(23,00,00,00),B(socket ,38),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,31),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,39),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(socket ,33),I(23,00,00,00),B(socket ,40),I(24,00,00,00),B(boot1 ,25),I(3c,02,23,00),B(socket ,33),I(23,00,00,00),B(socket ,41),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,30),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,42),I(24,00,00,00),B(boot1 ,25),I(3c,06,1f,03),I(1f,03,1f,03),I(1f,03,24,00),B(boot1 ,25),I(3c,04,24,00),B(mop_class ,70),I(23,00,00,00),B(socket ,33),I(23,00,00,00),B(socket ,43),I(23,00,00,00),B(socket ,44),I(1f,09,23,00),B(socket ,45),I(1f,06,23,00),B(socket ,46),I(23,00,00,00),B(socket ,47),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(socket ,8),I(2a,24,00,00),B(stream2 ,5),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(socket ,33),I(23,00,00,00),B(socket ,38),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,29),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,39),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(socket ,33),I(23,00,00,00),B(socket ,34),I(23,00,00,00),B(socket ,35),I(23,00,00,00),B(socket ,20),I(23,00,00,00),B(socket ,28),I(3b,00,23,00),B(socket ,36),I(23,00,00,00),B(socket ,37),I(24,00,00,00),B(boot1 ,25),I(3c,06,1c,1c),I(24,00,00,00),B(boot1 ,25),I(3c,02,24,00),B(mop_class ,70),I(23,00,00,00),B(socket ,33),I(23,00,00,00),B(socket ,48),I(23,00,00,00),B(socket ,44),I(1f,07,23,00),B(socket ,45),I(1f,06,23,00),B(socket ,46),I(23,00,00,00),B(socket ,50),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(socket ,2),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(socket ,51),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(socket ,10),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(socket ,52),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(socket ,4),I(2a,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(socket ,6),I(23,00,00,00),B(socket ,53),I(23,00,00,00),B(socket ,27),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(socket ,3),I(23,00,00,00),B(socket ,54),I(23,00,00,00),B(socket ,26),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(socket ,11),I(23,00,00,00),B(socket ,55),I(23,00,00,00),B(socket ,25),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(socket ,9),I(23,00,00,00),B(socket ,56),I(23,00,00,00),B(socket ,24),I(3b,02,1d,3c),I(02,2a,24,00),B(socket ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(socket ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,57),I(23,00,00,00),B(socket ,23),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,10),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(socket ,8),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(socket ,10),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,57),I(23,00,00,00),B(socket ,22),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,10),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,10),I(2a,24,00,00),B(socket ,8),I(2a,24,00,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(socket ,8),I(86,24,00,00),B(boot1 ,40),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(mop_gf ,12),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,58),I(23,00,00,00),B(socket ,21),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(mop_gf ,12),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(socket ,7),I(23,00,00,00),B(socket ,59),I(23,00,00,00),B(socket ,15),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(socket ,5),I(23,00,00,00),B(socket ,60),I(23,00,00,00),B(socket ,14),I(3b,02,1d,3c),I(02,2a,24,00),B(socket ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(socket ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,61),I(23,00,00,00),B(socket ,13),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,4),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(socket ,2),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(socket ,4),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(socket ,61),I(23,00,00,00),B(socket ,12),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(socket ,4),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(socket ,4),I(2a,24,00,00),B(socket ,2),I(45,38,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 63 binding: socket-descriptor */
-  static const void *G005458[] = {I(aa,83,24,00),B(socket ,8),I(08,45,00,00)};
+  static const void *G005297[] = {I(aa,83,24,00),B(socket ,8),I(08,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 64 binding: connection-host */
-  static const void *G005460[] = {I(aa,83,24,00),B(socket ,2),I(08,45,00,00)};
+  static const void *G005299[] = {I(aa,83,24,00),B(socket ,2),I(08,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 65 binding: socket-queue-size */
-  static const void *G005462[] = {I(aa,82,24,00),B(socket ,8),I(08,45,00,00)};
+  static const void *G005301[] = {I(aa,82,24,00),B(socket ,8),I(08,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 66 binding: connection-port */
-  static const void *G005464[] = {I(aa,82,24,00),B(socket ,2),I(08,45,00,00)};
+  static const void *G005303[] = {I(aa,82,24,00),B(socket ,2),I(08,45,00,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 67 binding: socket-port */
-  static const void *G005466[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(socket ,8),I(08,45,00,00)};
+  static const void *G005305[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(socket ,8),I(08,45,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 68 binding: socket-host */
-  static const void *G005468[] = {I(aa,84,24,00),B(socket ,8),I(08,45,00,00)};
+  static const void *G005307[] = {I(aa,84,24,00),B(socket ,8),I(08,45,00,00)};
 
   /* Byte-vector with size: 92 is_init: 1 index: 0 binding: initialize-socket */
-  static const void *G005470[] = {I(87,25,00,00),B(socket ,1),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(stream2 ,1),I(3e,0b,24,00),B(stream2 ,0),I(3c,00,21,01),I(24,00,00,00),B(stream1 ,1),I(3e,0b,24,00),B(stream1 ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(socket ,69),I(23,00,00,00),B(socket ,68),I(3b,01,25,00),B(socket ,11),I(86,25,00,00),B(socket ,10),I(23,00,00,00),B(socket ,70),I(23,00,00,00),B(socket ,67),I(3b,01,25,00),B(socket ,9),I(86,25,00,00),B(socket ,8),I(23,00,00,00),B(socket ,71),I(23,00,00,00),B(socket ,66),I(3b,01,25,00),B(socket ,7),I(23,00,00,00),B(socket ,72),I(23,00,00,00),B(socket ,65),I(3b,01,25,00),B(socket ,6),I(23,00,00,00),B(socket ,73),I(23,00,00,00),B(socket ,64),I(3b,01,25,00),B(socket ,5),I(86,25,00,00),B(socket ,4),I(23,00,00,00),B(socket ,74),I(23,00,00,00),B(socket ,63),I(3b,01,25,00),B(socket ,3),I(86,25,00,00),B(socket ,2),I(23,00,00,00),B(socket ,75),I(23,00,00,00),B(socket ,62),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G005309[] = {I(87,25,00,00),B(socket ,1),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(stream2 ,1),I(3e,0b,24,00),B(stream2 ,0),I(3c,00,21,01),I(24,00,00,00),B(stream1 ,1),I(3e,0b,24,00),B(stream1 ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(socket ,69),I(23,00,00,00),B(socket ,68),I(3b,01,25,00),B(socket ,11),I(86,25,00,00),B(socket ,10),I(23,00,00,00),B(socket ,70),I(23,00,00,00),B(socket ,67),I(3b,01,25,00),B(socket ,9),I(86,25,00,00),B(socket ,8),I(23,00,00,00),B(socket ,71),I(23,00,00,00),B(socket ,66),I(3b,01,25,00),B(socket ,7),I(23,00,00,00),B(socket ,72),I(23,00,00,00),B(socket ,65),I(3b,01,25,00),B(socket ,6),I(23,00,00,00),B(socket ,73),I(23,00,00,00),B(socket ,64),I(3b,01,25,00),B(socket ,5),I(86,25,00,00),B(socket ,4),I(23,00,00,00),B(socket ,74),I(23,00,00,00),B(socket ,63),I(3b,01,25,00),B(socket ,3),I(86,25,00,00),B(socket ,2),I(23,00,00,00),B(socket ,75),I(23,00,00,00),B(socket ,62),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G005386,G005385);
-  eul_allocate_bytevector( G005388,G005387);
-  eul_allocate_bytevector( G005390,G005389);
-  eul_allocate_bytevector( G005392,G005391);
-  eul_allocate_bytevector( G005394,G005393);
-  object_class(str_5397) = eul_static_string_class;
-  eul_intern_keyword(key_5398,"value");
-  eul_intern_symbol(sym_5399,"*clean-ups*");
-  eul_intern_symbol(sym_5400,"anonymous");
-  eul_allocate_bytevector( G005396,G005395);
-  eul_allocate_bytevector( G005402,G005401);
-  eul_allocate_bytevector( G005404,G005403);
-  eul_allocate_bytevector( G005406,G005405);
-  eul_allocate_bytevector( G005408,G005407);
-  eul_allocate_bytevector( G005410,G005409);
-  eul_allocate_bytevector( G005412,G005411);
-  eul_allocate_bytevector( G005414,G005413);
-  eul_allocate_bytevector( G005416,G005415);
-  eul_allocate_bytevector( G005418,G005417);
-  eul_allocate_bytevector( G005420,G005419);
-  eul_allocate_bytevector( G005422,G005421);
-  eul_intern_keyword(key_5425,"name");
-  eul_intern_symbol(sym_5426,"port");
-  eul_intern_keyword(key_5427,"default");
-  eul_intern_keyword(key_5428,"keyword");
-  eul_intern_keyword(key_5429,"port");
-  eul_intern_symbol(sym_5430,"host");
-  eul_intern_keyword(key_5431,"host");
-  eul_intern_symbol(sym_5432,"descriptor");
-  eul_intern_symbol(sym_5433,"queue-size");
-  eul_intern_keyword(key_5434,"queue-size");
-  eul_intern_symbol(sym_5435,"socket");
-  eul_intern_keyword(key_5436,"direct-superclasses");
-  eul_intern_keyword(key_5437,"direct-slots");
-  eul_intern_keyword(key_5438,"direct-keywords");
-  object_class(cons_5441) = eul_static_cons_class;
-  eul_car(cons_5441) = key_5429;
-  eul_cdr(cons_5441) = eul_nil;
-  object_class(cons_5440) = eul_static_cons_class;
-  eul_car(cons_5440) = key_5431;
-  object_class(cons_5439) = eul_static_cons_class;
-  eul_car(cons_5439) = key_5434;
-  eul_intern_symbol(sym_5442,"connection");
-  eul_intern_keyword(key_5444,"socket");
-  object_class(cons_5446) = eul_static_cons_class;
-  eul_car(cons_5446) = key_5431;
-  eul_cdr(cons_5446) = eul_nil;
-  object_class(cons_5445) = eul_static_cons_class;
-  eul_car(cons_5445) = key_5429;
-  object_class(cons_5443) = eul_static_cons_class;
-  eul_car(cons_5443) = key_5444;
-  eul_intern_symbol(sym_5447,"socket?");
-  eul_intern_symbol(sym_5448,"connection?");
-  eul_intern_symbol(sym_5449,"(setter socket-queue-size)");
-  eul_intern_symbol(sym_5450,"(setter socket-descriptor)");
-  eul_intern_symbol(sym_5451,"(setter socket-host)");
-  eul_intern_symbol(sym_5452,"(setter socket-port)");
-  eul_intern_symbol(sym_5453,"(method socket?)");
-  eul_intern_symbol(sym_5454,"(method initialize)");
-  eul_intern_symbol(sym_5455,"(setter connection-port)");
-  eul_intern_symbol(sym_5456,"(setter connection-host)");
-  eul_intern_symbol(sym_5457,"(method connection?)");
-  eul_allocate_bytevector( G005424,G005423);
-  eul_allocate_bytevector( G005459,G005458);
-  eul_allocate_bytevector( G005461,G005460);
-  eul_allocate_bytevector( G005463,G005462);
-  eul_allocate_bytevector( G005465,G005464);
-  eul_allocate_bytevector( G005467,G005466);
-  eul_allocate_bytevector( G005469,G005468);
-  eul_intern_symbol(sym_5472,"socket-host");
-  eul_intern_symbol(sym_5473,"socket-port");
-  eul_intern_symbol(sym_5474,"connection-port");
-  eul_intern_symbol(sym_5475,"socket-queue-size");
-  eul_intern_symbol(sym_5476,"connection-host");
-  eul_intern_symbol(sym_5477,"socket-descriptor");
-  eul_intern_symbol(sym_5478,"top-level");
-  eul_allocate_bytevector( G005471,G005470);
+  eul_allocate_bytevector( G005225,G005224);
+  eul_allocate_bytevector( G005227,G005226);
+  eul_allocate_bytevector( G005229,G005228);
+  eul_allocate_bytevector( G005231,G005230);
+  eul_allocate_bytevector( G005233,G005232);
+  object_class(str_5236) = eul_static_string_class;
+  eul_intern_keyword(key_5237,"value");
+  eul_intern_symbol(sym_5238,"*clean-ups*");
+  eul_intern_symbol(sym_5239,"anonymous");
+  eul_allocate_bytevector( G005235,G005234);
+  eul_allocate_bytevector( G005241,G005240);
+  eul_allocate_bytevector( G005243,G005242);
+  eul_allocate_bytevector( G005245,G005244);
+  eul_allocate_bytevector( G005247,G005246);
+  eul_allocate_bytevector( G005249,G005248);
+  eul_allocate_bytevector( G005251,G005250);
+  eul_allocate_bytevector( G005253,G005252);
+  eul_allocate_bytevector( G005255,G005254);
+  eul_allocate_bytevector( G005257,G005256);
+  eul_allocate_bytevector( G005259,G005258);
+  eul_allocate_bytevector( G005261,G005260);
+  eul_intern_keyword(key_5264,"name");
+  eul_intern_symbol(sym_5265,"port");
+  eul_intern_keyword(key_5266,"default");
+  eul_intern_keyword(key_5267,"keyword");
+  eul_intern_keyword(key_5268,"port");
+  eul_intern_symbol(sym_5269,"host");
+  eul_intern_keyword(key_5270,"host");
+  eul_intern_symbol(sym_5271,"descriptor");
+  eul_intern_symbol(sym_5272,"queue-size");
+  eul_intern_keyword(key_5273,"queue-size");
+  eul_intern_symbol(sym_5274,"socket");
+  eul_intern_keyword(key_5275,"direct-superclasses");
+  eul_intern_keyword(key_5276,"direct-slots");
+  eul_intern_keyword(key_5277,"direct-keywords");
+  object_class(cons_5280) = eul_static_cons_class;
+  eul_car(cons_5280) = key_5268;
+  eul_cdr(cons_5280) = eul_nil;
+  object_class(cons_5279) = eul_static_cons_class;
+  eul_car(cons_5279) = key_5270;
+  object_class(cons_5278) = eul_static_cons_class;
+  eul_car(cons_5278) = key_5273;
+  eul_intern_symbol(sym_5281,"connection");
+  eul_intern_keyword(key_5283,"socket");
+  object_class(cons_5285) = eul_static_cons_class;
+  eul_car(cons_5285) = key_5270;
+  eul_cdr(cons_5285) = eul_nil;
+  object_class(cons_5284) = eul_static_cons_class;
+  eul_car(cons_5284) = key_5268;
+  object_class(cons_5282) = eul_static_cons_class;
+  eul_car(cons_5282) = key_5283;
+  eul_intern_symbol(sym_5286,"socket?");
+  eul_intern_symbol(sym_5287,"connection?");
+  eul_intern_symbol(sym_5288,"(setter socket-queue-size)");
+  eul_intern_symbol(sym_5289,"(setter socket-descriptor)");
+  eul_intern_symbol(sym_5290,"(setter socket-host)");
+  eul_intern_symbol(sym_5291,"(setter socket-port)");
+  eul_intern_symbol(sym_5292,"(method socket?)");
+  eul_intern_symbol(sym_5293,"(method initialize)");
+  eul_intern_symbol(sym_5294,"(setter connection-port)");
+  eul_intern_symbol(sym_5295,"(setter connection-host)");
+  eul_intern_symbol(sym_5296,"(method connection?)");
+  eul_allocate_bytevector( G005263,G005262);
+  eul_allocate_bytevector( G005298,G005297);
+  eul_allocate_bytevector( G005300,G005299);
+  eul_allocate_bytevector( G005302,G005301);
+  eul_allocate_bytevector( G005304,G005303);
+  eul_allocate_bytevector( G005306,G005305);
+  eul_allocate_bytevector( G005308,G005307);
+  eul_intern_symbol(sym_5311,"socket-host");
+  eul_intern_symbol(sym_5312,"socket-port");
+  eul_intern_symbol(sym_5313,"connection-port");
+  eul_intern_symbol(sym_5314,"socket-queue-size");
+  eul_intern_symbol(sym_5315,"connection-host");
+  eul_intern_symbol(sym_5316,"socket-descriptor");
+  eul_intern_symbol(sym_5317,"top-level");
+  eul_allocate_bytevector( G005310,G005309);
 
   /* Set local bindings */
   {
@@ -227,72 +227,72 @@ void initialize_module_socket()
       socket_bindings[i] = eul_nil;
   }
 
-  socket_bindings[ 12] = G005386;
-  socket_bindings[ 13] = G005388;
-  socket_bindings[ 14] = G005390;
-  socket_bindings[ 15] = G005392;
-  socket_bindings[ 16] = G005394;
-  socket_bindings[ 17] = str_5397;
-  socket_bindings[ 18] = key_5398;
-  socket_bindings[ 19] = sym_5399;
-  socket_bindings[ 20] = sym_5400;
-  socket_bindings[ 21] = G005396;
-  socket_bindings[ 22] = G005402;
-  socket_bindings[ 23] = G005404;
-  socket_bindings[ 24] = G005406;
-  socket_bindings[ 25] = G005408;
-  socket_bindings[ 26] = G005410;
-  socket_bindings[ 27] = G005412;
-  socket_bindings[ 28] = G005414;
-  socket_bindings[ 29] = G005416;
-  socket_bindings[ 30] = G005418;
-  socket_bindings[ 31] = G005420;
-  socket_bindings[ 32] = G005422;
-  socket_bindings[ 33] = key_5425;
-  socket_bindings[ 34] = sym_5426;
-  socket_bindings[ 35] = key_5427;
-  socket_bindings[ 36] = key_5428;
-  socket_bindings[ 37] = key_5429;
-  socket_bindings[ 38] = sym_5430;
-  socket_bindings[ 39] = key_5431;
-  socket_bindings[ 40] = sym_5432;
-  socket_bindings[ 41] = sym_5433;
-  socket_bindings[ 42] = key_5434;
-  socket_bindings[ 43] = sym_5435;
-  socket_bindings[ 44] = key_5436;
-  socket_bindings[ 45] = key_5437;
-  socket_bindings[ 46] = key_5438;
-  socket_bindings[ 47] = cons_5439;
-  socket_bindings[ 48] = sym_5442;
-  socket_bindings[ 49] = key_5444;
-  socket_bindings[ 50] = cons_5443;
-  socket_bindings[ 51] = sym_5447;
-  socket_bindings[ 52] = sym_5448;
-  socket_bindings[ 53] = sym_5449;
-  socket_bindings[ 54] = sym_5450;
-  socket_bindings[ 55] = sym_5451;
-  socket_bindings[ 56] = sym_5452;
-  socket_bindings[ 57] = sym_5453;
-  socket_bindings[ 58] = sym_5454;
-  socket_bindings[ 59] = sym_5455;
-  socket_bindings[ 60] = sym_5456;
-  socket_bindings[ 61] = sym_5457;
-  socket_bindings[ 62] = G005424;
-  socket_bindings[ 63] = G005459;
-  socket_bindings[ 64] = G005461;
-  socket_bindings[ 65] = G005463;
-  socket_bindings[ 66] = G005465;
-  socket_bindings[ 67] = G005467;
-  socket_bindings[ 68] = G005469;
+  socket_bindings[ 12] = G005225;
+  socket_bindings[ 13] = G005227;
+  socket_bindings[ 14] = G005229;
+  socket_bindings[ 15] = G005231;
+  socket_bindings[ 16] = G005233;
+  socket_bindings[ 17] = str_5236;
+  socket_bindings[ 18] = key_5237;
+  socket_bindings[ 19] = sym_5238;
+  socket_bindings[ 20] = sym_5239;
+  socket_bindings[ 21] = G005235;
+  socket_bindings[ 22] = G005241;
+  socket_bindings[ 23] = G005243;
+  socket_bindings[ 24] = G005245;
+  socket_bindings[ 25] = G005247;
+  socket_bindings[ 26] = G005249;
+  socket_bindings[ 27] = G005251;
+  socket_bindings[ 28] = G005253;
+  socket_bindings[ 29] = G005255;
+  socket_bindings[ 30] = G005257;
+  socket_bindings[ 31] = G005259;
+  socket_bindings[ 32] = G005261;
+  socket_bindings[ 33] = key_5264;
+  socket_bindings[ 34] = sym_5265;
+  socket_bindings[ 35] = key_5266;
+  socket_bindings[ 36] = key_5267;
+  socket_bindings[ 37] = key_5268;
+  socket_bindings[ 38] = sym_5269;
+  socket_bindings[ 39] = key_5270;
+  socket_bindings[ 40] = sym_5271;
+  socket_bindings[ 41] = sym_5272;
+  socket_bindings[ 42] = key_5273;
+  socket_bindings[ 43] = sym_5274;
+  socket_bindings[ 44] = key_5275;
+  socket_bindings[ 45] = key_5276;
+  socket_bindings[ 46] = key_5277;
+  socket_bindings[ 47] = cons_5278;
+  socket_bindings[ 48] = sym_5281;
+  socket_bindings[ 49] = key_5283;
+  socket_bindings[ 50] = cons_5282;
+  socket_bindings[ 51] = sym_5286;
+  socket_bindings[ 52] = sym_5287;
+  socket_bindings[ 53] = sym_5288;
+  socket_bindings[ 54] = sym_5289;
+  socket_bindings[ 55] = sym_5290;
+  socket_bindings[ 56] = sym_5291;
+  socket_bindings[ 57] = sym_5292;
+  socket_bindings[ 58] = sym_5293;
+  socket_bindings[ 59] = sym_5294;
+  socket_bindings[ 60] = sym_5295;
+  socket_bindings[ 61] = sym_5296;
+  socket_bindings[ 62] = G005263;
+  socket_bindings[ 63] = G005298;
+  socket_bindings[ 64] = G005300;
+  socket_bindings[ 65] = G005302;
+  socket_bindings[ 66] = G005304;
+  socket_bindings[ 67] = G005306;
+  socket_bindings[ 68] = G005308;
   socket_bindings[ 1] = eul_nil;
-  socket_bindings[ 69] = sym_5472;
-  socket_bindings[ 70] = sym_5473;
-  socket_bindings[ 71] = sym_5474;
-  socket_bindings[ 72] = sym_5475;
-  socket_bindings[ 73] = sym_5476;
-  socket_bindings[ 74] = sym_5477;
-  socket_bindings[ 75] = sym_5478;
-  eul_allocate_lambda( socket_bindings[0], "initialize-socket", 0, G005471);
+  socket_bindings[ 69] = sym_5311;
+  socket_bindings[ 70] = sym_5312;
+  socket_bindings[ 71] = sym_5313;
+  socket_bindings[ 72] = sym_5314;
+  socket_bindings[ 73] = sym_5315;
+  socket_bindings[ 74] = sym_5316;
+  socket_bindings[ 75] = sym_5317;
+  eul_allocate_lambda( socket_bindings[0], "initialize-socket", 0, G005310);
 
   }
 }

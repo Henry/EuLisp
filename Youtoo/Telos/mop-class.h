@@ -68,7 +68,7 @@ extern LispRef mop_class_bindings[];
 #define generic_function_method_cache_fn_index 56 
 #define method_generic_function_fn_index 54 
 #define gf_keywords_fn_index 57 
-#define keyword_name_fn_index 6 
+#define keyword_name_fn_index 7 
 #define _simple_method__X60_X62_fn_index 55 
 #define object_slots_fn_index 12 
 #define object_size_fn_index () 
@@ -78,7 +78,7 @@ extern LispRef mop_class_bindings[];
 #define slot_writer_fn_index 52 
 #define slot_default_fn_index 10 
 #define slot_required__X63_fn_index 9 
-#define class_precedence_list_fn_index 7 
+#define class_precedence_list_fn_index 6 
 #define _slot__X60_X62_fn_index 49 
 #define lsd_size_fn_index () 
 #define class_slots_fn_index 50 
