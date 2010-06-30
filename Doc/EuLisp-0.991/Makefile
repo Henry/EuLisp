@@ -31,9 +31,11 @@ STY_FILES = eulisp.sty
 
 SOURCE_FILES = $(TEX_FILES) $(STY_FILES) Makefile
 
-IND_FILES = \
+SECTION_IND_FILES = \
     function.ind      macro.ind         generic.ind    method.ind \
-    condition.ind     constant.ind      class.ind      general.ind
+    condition.ind     constant.ind      class.ind
+
+IND_FILES = $(SECTION_IND_FILES) general.ind
 # keyword.ind
 
 IND_4DX = ${IND_FILES:%.ind=%.4dx}
@@ -111,6 +113,11 @@ else
 	makeindex -o $@ $<
 
 endif
+
+hypersed: general.ind
+	@grep yhbLNK general.ind | \
+	sed 's% *\\item {\\tt \([^}]*\)}.* \\yhbLNK{hyperem}{\([^}]*\)}{\([^}]*\)}{}{[^}]*}.*%s\%=\1=\%\[\[file:EuLisp-0.991/html/\2#\3\]\[=\1=\]\]\%%' |\
+sed -e 's/\*/\\\*/g' > hypersed
 
 ###-----------------------------------------------------------------------------
 

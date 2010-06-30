@@ -20,7 +20,7 @@ DOC_DIRS = EuLisp-0.991
 ###-----------------------------------------------------------------------------
 
 .PHONY: all
-all: euxlisp.1 euxlisp.html EuLispIntro.html bindings
+all: euxlisp.1 euxlisp.html EuLispIntro.html EuLispIntroRef.html bindings
 	@echo "COMPILING DOCSs ..."
 	@$(call makeAll,$(DOC_DIRS),)
 	@echo "DONE"
@@ -30,6 +30,9 @@ euxlisp.1: euxlisp.man
 
 euxlisp.html: euxlisp.man
 	rman -f HTML euxlisp.man > euxlisp.html
+
+EuLispIntroRef.org: EuLispIntro.org
+	@sed -f EuLisp-0.991/hypersed $< > $@
 
 .PHONY: bindings
 bindings: bindings.txt

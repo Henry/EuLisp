@@ -137,6 +137,7 @@
     without options to start the Youtoo interpreter. The read-eval-print loop
     provides extra commands (type /help:/).
   + Further information about running [[file:Youtoo/README.org][Youtoo]].
+*** See also [[file:Doc/EuLispIntroRef.org][EuLisp introduction]].
 
 * Getting Started with EuXLisp
   EuXLisp need two paths: where to look for the compiled image, and where to
@@ -155,12 +156,12 @@
 *** Running the interpreter interactively
     Run /Bin.${ARCH}/euxlisp/ \\ without options to start the EuXLisp
     interpreter. The read-eval-print loop provides extra commands see
-    [[file:Doc/EuLispIntro.org][EuLisp and EuXLisp introduction]].
+    [[file:Doc/EuLispIntroRef.org][EuLisp and EuXLisp introduction]].
 *** Executing a module
     To execute the module =fact= in file /fact.em/ run \\
     /echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q/ \\
     The /echo/ pipes the load module /!>/ command to the interpreter.  In the
     future there will be a command-line option to execute a module directly.
-*** See also [[file:Doc/EuLispIntro.org][EuLisp and EuXLisp introduction]].
+*** See also [[file:Doc/EuLispIntroRef.org][EuLisp and EuXLisp introduction]].
 
 * [[file:TODO.org][To Do]]
