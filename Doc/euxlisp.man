@@ -145,8 +145,8 @@ but as both are still changing it's futile to list them.
 Online HTML version available from:
 .B "http://henry.github.com/EuLisp/Doc/EuLisp-0.991/html/eulisp.html"
 .TP
-EuXLisp Starter Notes:
-.B "file://EuXLispNotes.html"
+EuLisp and EuXLisp Introduction:
+.B "file://EuLispIntro.html"
 .TP
 Original Euscheme Starter Notes:
 .B "http://www.bath.ac.uk/~masrjb/Sources/eunotes.html"

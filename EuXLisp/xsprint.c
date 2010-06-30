@@ -1,7 +1,12 @@
-// xsprint.c - xscheme print routine
-/*      Copyright (c) 1988, by David Michael Betz
-        All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xsprint.c
+///  Description: print routine
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 #include "xsobj.h"
@@ -23,7 +28,6 @@ static void putsubr(LVAL fptr, char *tag, LVAL val);
 static void putclosure(LVAL fptr, char *tag, LVAL val);
 static void putcode(LVAL fptr, char *tag, LVAL val);
 static void putnumber(LVAL fptr, FIXTYPE n);
-//static void putoct(LVAL fptr,int n);
 static void putflonum(LVAL fptr, FLOTYPE n);
 static void putcharacter(LVAL fptr, int ch);
 static void putgeneric(LVAL fptr, LVAL vptr);
@@ -54,21 +58,23 @@ void xlterpri(LVAL fptr)
 void xlputstr(LVAL fptr, char *str)
 {
     while (*str)
+    {
         xlputc(fptr, *str++);
+    }
 }
 
 // print - internal print routine
 static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
 {
-    int breadth, size, i;
-    LVAL nptr, next;
-
     // print nil
     if (vptr == NIL)
     {
         xlputstr(fptr, "()");
         return;
     }
+
+    int breadth;
+    LVAL next;
 
     // check value type
     switch (ntype(vptr))
@@ -88,7 +94,7 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
             }
             xlputc(fptr, '(');
             breadth = 0;
-            for (nptr = vptr; nptr != NIL;)
+            for (LVAL nptr = vptr; nptr != NIL;)
             {
                 if (prbreadth >= 0 && breadth++ >= prbreadth)
                 {
@@ -120,10 +126,12 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
                 break;
             }
             xlputstr(fptr, "#(");
-            for (i = 0, size = getsize(vptr); i < size; ++i)
+            for (int i = 0, size = getsize(vptr); i < size; ++i)
             {
                 if (i != 0)
+                {
                     xlputc(fptr, ' ');
+                }
                 print(fptr, getelement(vptr, i), escflag, depth + 1);
             }
             xlputc(fptr, ')');
@@ -137,16 +145,24 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
             {
                 xlputc(fptr, '@');
                 if (getmodule(vptr) == NIL)
+                {
                     xlputstr(fptr, "keyword");
+                }
                 else
+                {
                     xlputstr(fptr, getstring(getmname(getmodule(vptr))));
+                }
             }
             break;
         case PROMISE:
             if (getpproc(vptr) != NIL)
+            {
                 putatm(fptr, "Promise", vptr);
+            }
             else
+            {
                 putatm(fptr, "Forced-promise", vptr);
+            }
             break;
         case CLOSURE:
             putclosure(fptr, "simple-function", vptr);
@@ -159,15 +175,23 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
             break;
         case CHAR:
             if (escflag)
+            {
                 putcharacter(fptr, getchcode(vptr));
+            }
             else
+            {
                 xlputc(fptr, getchcode(vptr));
+            }
             break;
         case STRING:
             if (escflag)
+            {
                 putstring(fptr, getstring(vptr), getslength(vptr) - 1);
+            }
             else
+            {
                 xlputstr(fptr, getstring(vptr));
+            }
             break;
         case STREAM:
             putatm(fptr, "file-stream:", vptr);
@@ -219,15 +243,13 @@ static void putatm(LVAL fptr, char *tag, LVAL val)
 // putstring - output a string
 static void putstring(LVAL fptr, char *str, int len)
 {
-    int ch, i;
-
     // output the initial quote
     xlputc(fptr, '"');
 
     // output each character in the string
-    for (i = 0; i < len; i++)
+    for (int i = 0; i < len; i++)
     {
-        ch = *str++;
+        int ch = *str++;
         switch (ch)
         {
             case '\\':
@@ -265,7 +287,9 @@ static void putstring(LVAL fptr, char *str, int len)
                 break;
             default:
                 if (isascii(ch) && isprint(ch))
+                {
                     xlputc(fptr, ch);
+                }
                 else
                 {
                     sprintf(buf, "\\x%04x", ch & 0xff);
@@ -288,33 +312,37 @@ static void putstring(LVAL fptr, char *str, int len)
  */
 static int escaped_id(char *id, int keyword)
 {
-    int i;
-
-    for (i = 0; id[i]; i++)
+    for (int i = 0; id[i]; i++)
+    {
         if (!isgraph(id[i]) || id[i] == '|' || id[i] == '\\')
+        {
             return 1;
+        }
+    }
 
-    //***HGW #t and #f are special cases
-    //***HGW if (id[0] == '#' && (id[1] == 't' || id[1] == 'f') && id[2] == 0)
-    //***HGW    return 0;
-
-    if (strpbrk(id, "|\\#()\"',;` ") || id[0] == 0 ||   // zero length id
-    (!keyword && id[strlen(id) - 1] == ':') || isdigit(id[0]) ||    // 123
-    (id[0] == '.' && !id[1]) ||     // |.|
-    (id[0] == '.' && id[1] && isdigit(id[1])) ||    // .123
-    ((id[0] == '+' || id[0] == '-') && id[1] && (isdigit(id[1]) ||  /* +123
-                                                                     */
-    (id[1] == '.' && id[2] && isdigit(id[2])))))    // +.123
+    if
+    (
+        strpbrk(id, "|\\#()\"',;` ")
+     || id[0] == 0                                            // zero length id
+     || (!keyword && id[strlen(id) - 1] == ':')
+     || isdigit(id[0])                                               // 123
+     || (id[0] == '.' && !id[1])                                     // |.|
+     || (id[0] == '.' && id[1] && isdigit(id[1]))                    // .123
+     || ((id[0] == '+' || id[0] == '-') && id[1] && (isdigit(id[1])  // +123
+     || (id[1] == '.' && id[2] && isdigit(id[2]))))                  // +.123
+    )
+    {
         return 1;
+    }
     else
+    {
         return 0;
+    }
 }
 
 // putsym - output a symbol
 static void putsym(LVAL fptr, char *str, int escflag, int keyword)
 {
-    int ch;
-
     // check for printing without escapes
     if (!escflag)
     {
@@ -326,10 +354,13 @@ static void putsym(LVAL fptr, char *str, int escflag, int keyword)
     if (escaped_id(str, keyword))
     {
         xlputc(fptr, '|');
+        int ch;
         while ((ch = *str++) != '\0')
         {
             if (ch == '|' || ch == '\\')
+            {
                 xlputc(fptr, '\\');
+            }
             if (keyword && ch == ':' && *str == 0)
             {
                 xlputc(fptr, '|');
@@ -341,16 +372,18 @@ static void putsym(LVAL fptr, char *str, int escflag, int keyword)
         xlputc(fptr, '|');
     }
     else
+    {
+        int ch;
         while ((ch = *str++) != '\0')
+        {
             xlputc(fptr, ch);
-
+        }
+    }
 }
 
 static void strip_angles(char *name, LVAL fptr)
 {
-    int len;
-
-    len = strlen(name);
+    int len = strlen(name);
     if (name[0] == '<' && name[len - 1] == '>')
     {
         strncpy(buf, name + 1, len - 2);
@@ -358,18 +391,19 @@ static void strip_angles(char *name, LVAL fptr)
         putsym(fptr, buf, TRUE, FALSE);
     }
     else
+    {
         putsym(fptr, name, TRUE, FALSE);
+    }
 }
 
 // take care on thread <-> lock references
 static void putthread(LVAL fptr, LVAL val, LVAL cls)
 {
-    LVAL slots;
-    int i, len;
-
     xlputstr(fptr, "#<");
     putclassname(fptr, cls);
 
+    LVAL slots;
+    int i, len;
     for (slots = getivar(cls, SLOTS), i = 1; slots; slots = cdr(slots), i++)
     {
         xlputstr(fptr, " ");
@@ -381,7 +415,9 @@ static void putthread(LVAL fptr, LVAL val, LVAL cls)
             xlprin1(cvsfixnum(len), fptr);
         }
         else
+        {
             xlprin1(getivar(val, i), fptr);
+        }
     }
 
     sprintf(buf, ">");
@@ -391,12 +427,9 @@ static void putthread(LVAL fptr, LVAL val, LVAL cls)
 // putobject - output a telos object
 static void putobject(LVAL fptr, LVAL val, int escflag, int depth)
 {
-    char *name;
-    LVAL cls, slots;
-    int i;
     extern LVAL s_thread_class;
 
-    cls = getclass(val);
+    LVAL cls = getclass(val);
     if (cls == getvalue(s_thread_class))
     {
         putthread(fptr, val, cls);
@@ -412,25 +445,43 @@ static void putobject(LVAL fptr, LVAL val, int escflag, int depth)
         #else
         xlputstr(fptr, "class ");
         #endif
+        char *name;
         if (symbolp(getivar(val, CNAME)))
+        {
             name = getstring(getpname(getivar(val, CNAME)));
+        }
         else
+        {
             name = "(anon)";
+        }
         strip_angles(name, fptr);
     }
     else
     {
+        char *name;
         if (symbolp(getivar(cls, CNAME)))
+        {
             name = getstring(getpname(getivar(cls, CNAME)));
-        else
-            name = "(anon)";
-        strip_angles(name, fptr);
-        if (prdepth >= 0 && depth >= prdepth)
-            xlputstr(fptr, " ...");
+        }
         else
         {
-            for (slots = getivar(cls, SLOTS), i = 1; slots;
-                 slots = cdr(slots), i++)
+            name = "(anon)";
+        }
+        strip_angles(name, fptr);
+        if (prdepth >= 0 && depth >= prdepth)
+        {
+            xlputstr(fptr, " ...");
+        }
+        else
+        {
+            int i;
+            LVAL slots;
+            for
+            (
+                slots = getivar(cls, SLOTS), i = 1;
+                slots;
+                slots = cdr(slots), i++
+            )
             {
                 xlputstr(fptr, " ");
                 xlprin1(getslotname(car(slots)), fptr);
@@ -462,7 +513,9 @@ static void putcode(LVAL fptr, char *tag, LVAL val)
 {
     LVAL name;
     if ((name = getelement(val, 1)) == NIL)
+    {
         putatm(fptr, tag, val);
+    }
     else
     {
         sprintf(buf, "#<%s %s>", tag, getstring(getpname(name)));
@@ -523,16 +576,26 @@ static void putcharacter(LVAL fptr, int ch)
             break;
         default:
             if (ch == 0)
+            {
                 sprintf(buf, "#\\^@");
+            }
             else if (iscntrl(ch))
+            {
                 sprintf(buf, "#\\^%c",
                 (isupper(ch + '@') ? ch + '`' : ch + '@'));
+            }
             else if (ch > '\177')
+            {
                 sprintf(buf, "#\\x%02X", ch);
+            }
             else if (ch < 0)
+            {
                 sprintf(buf, "#\\x%04X", (unsigned int)ch & 0xFFFF);
+            }
             else
+            {
                 sprintf(buf, "#\\%c", ch);
+            }
             xlputstr(fptr, buf);
             break;
     }
@@ -551,15 +614,12 @@ static void putgeneric(LVAL fptr, LVAL vptr)
 
 static void putmethod(LVAL fptr, LVAL vptr)
 {
-    LVAL gf, domain;
-    char *name;
-
     xlputstr(fptr, "#<");
     putclassname(fptr, class_of(vptr));
 
     if (genericp(getmdgf(vptr)))
     {
-        gf = getmdgf(vptr);
+        LVAL gf = getmdgf(vptr);
         sprintf(buf, " %s",
         symbolp(getgname(gf)) ?
         getstring(getpname(getgname(gf))) : "(anon gf)");
@@ -570,16 +630,18 @@ static void putmethod(LVAL fptr, LVAL vptr)
         xlputstr(fptr, " (unattached)");
     }
 
-    domain = getmddomain(vptr);
+    LVAL domain = getmddomain(vptr);
     for (; domain; domain = cdr(domain))
     {
         xlputstr(fptr, " ");
-        name = getstring(getpname(getivar(car(domain), CNAME)));
+        char *name = getstring(getpname(getivar(car(domain), CNAME)));
         strip_angles(name, fptr);
     }
 
     if (getmdopt(vptr))
+    {
         xlputstr(fptr, " . rest");
+    }
 
     xlputstr(fptr, ">");
 }
@@ -595,38 +657,52 @@ static void putslot(LVAL fptr, LVAL vptr)
 
 static void puttable(LVAL fptr, LVAL vptr)
 {
-    LVAL comp;
     extern LVAL s_eq, s_eqv, s_equal, s_equals;
-    LVAL eqp, eqvp, equalp, equals;
 
-    eqp = getvalue(s_eq);
-    eqvp = getvalue(s_eqv);
-    equalp = getvalue(s_equal);
-    equals = getvalue(s_equals);
+    LVAL eqp = getvalue(s_eq);
+    LVAL eqvp = getvalue(s_eqv);
+    LVAL equalp = getvalue(s_equal);
+    LVAL equals = getvalue(s_equals);
 
     xlputstr(fptr, "#<");
     putclassname(fptr, class_of(vptr));
 
-    comp = gettablecomp(vptr);
+    LVAL comp = gettablecomp(vptr);
     if (comp == eqp)
+    {
         xlputstr(fptr, " eq>");
+    }
     else if (comp == eqvp)
+    {
         xlputstr(fptr, " eql>");
+    }
     else if (comp == equalp)
+    {
         xlputstr(fptr, " equal>");
+    }
     else if (comp == equals)
+    {
         xlputstr(fptr, " =>");
+    }
     else
+    {
         xlputstr(fptr, " \?\?\?>");
+    }
 }
 
 static void putclassname(LVAL fptr, LVAL cls)
 {
     char *name;
-
     if (symbolp(getivar(cls, CNAME)))
+    {
         name = getstring(getpname(getivar(cls, CNAME)));
+    }
     else
+    {
         name = "(anon)";
+    }
     strip_angles(name, fptr);
 }
+
+
+///-----------------------------------------------------------------------------

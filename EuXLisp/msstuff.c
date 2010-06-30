@@ -88,7 +88,7 @@ void osinit(char *banner)
     lcount = 0;
 
     #ifdef READLINE
-    const char* eulisp_history = "/.eulisp_history";
+    char* eulisp_history = "/.eulisp_history";
     char* home = getenv("HOME");
     if (home == NULL)
     {

@@ -57,7 +57,7 @@
   (make-vector 4)
   #+END_SRC
   which creates a vector of length 4, indexed from 0 to 3, all elements
-  initialised to be ()s.  In fact, make-vector can take a second argument
+  initialised to be =()=s.  In fact, make-vector can take a second argument
   #+BEGIN_SRC eulisp
   (make-vector 4 0)
   #+END_SRC
@@ -141,7 +141,7 @@
 * Conditionals
   EuLisp has the usual =(if boolexpr trueexpr falseexpr)= (always with both
   trueexpr and falseexpr), and the =cond= form.  The single false value in
-  EuLisp is (): anything else is deemed to be true.  =t= is bound to the
+  EuLisp is =()=: anything else is deemed to be true.  =t= is bound to the
   symbol =t=, providing a convenient canonical true value.  Additional
   conditional forms include
   #+BEGIN_SRC eulisp
@@ -409,7 +409,7 @@
 
   This form defines a new class named =<rat>=.  Classes in EuLisp are
   conventionally noted by the use of angle brackets =<>=, but they are just
-  normal names.  The () next is the list of classes for =<rat>= to inherit
+  normal names.  The =()= next is the list of classes for =<rat>= to inherit
   from.  In EuLisp Level 0, there is only single inheritance, so this should be
   a list of at most one class.  Any empty list indicates some suitable default
   super-class.
@@ -539,26 +539,29 @@
     run) until some other thread releases the lock.
 
 * Input and Output
-  EuLisp is still a little undecided as to how i/o is going to turn out, so for
-  the meantime EuXLisp uses Scheme's functions.
   + =read= to read a Lisp expression.
-  + =write= output in a way that can be re-read if possible.  Thus, for example,
-    strings are quoted.
-  + =prin= output in a human-friendly manner.  Strings and such are not quoted.
-    Compare
-  #+BEGIN_SRC eulisp
-      (print "asd")   prints: asd
-      (write "asd")   prints: "asd"
-  #+END_SRC
+  + =write= write to standard output in a way that can be re-read if possible.
+    Thus, for example, strings are quoted.
+  + =prin= print to standard output in a human-friendly manner.  Strings and
+    such are not quoted.  Compare
+    #+BEGIN_SRC eulisp
+        (prin "asd")    prints: asd
+        (write "asd")   prints: "asd"
+    #+END_SRC
   + =print= as =prin=, with a newline.
+  + Print and write functions are n-ary:
+    #+BEGIN_SRC eulisp
+        (prin "one = " 1 ", two = " 2)    prints: one = 1, two = 2
+        (write "one = " 1 ", two = " 2)   prints: "one = "1", two = "2
+    #+END_SRC
   + =newline= output a newline.
 
-  All of the above take an optional extra argument, which is a stream to print
-  on.  This defaults to the standard output.
+  All of the above have variants beginning with an 's' which take a stream to
+  print on as the first argument.
 
   For stream manipulation:
   + open-input-file takes a string, and opens and returns a corresponding
-    stream for input.  Returns () if not such file exists.
+    stream for input.  Returns =()= if not such file exists.
   + open-output-file creates a file if it didn't already exist.
   + open-update-file opens for append.
   + get-file-position and =(setter get-file-position)= move the file pointer in
@@ -566,14 +569,17 @@
   + close-stream closes an open stream.
 
 *** Format
-    A more complicated printing function is =format=, which is somewhat akin to
-    C's =printf=.
+    A more complicated printing function is
+    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-575002][=sformat=]],
+    which is somewhat akin to C's =printf=.
     #+BEGIN_SRC eulisp
-    (format stream format-string arg arg ...)
+    (sformat stream format-string arg arg ...)
     #+END_SRC
-    If stream is =t=, =format= prints to the standard output.  If stream is
-    (), =format= returns the formatted output as a string.  Otherwise stream
-    is a file stream.
+    The variants
+    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-577002][=format=]] and
+    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-579002][=fmt=]]
+    do not take a stream argument and the former prints to standard output and
+    the latter returns the formatted output as a string.
 
     The format string is copied to the output, except that =~= marks an escape
     (like C's =%=):
@@ -588,6 +594,13 @@
 
     There are other escapes to write integers in other bases, output new pages,
     and so on.
+
+    =fmt= can be used with the n-ary print and write functions to write complex
+    formatted output statements in a more readable form that using =format=
+    \e.g.\
+    #+BEGIN_SRC eulisp
+        (print "one = " 1 ", x = " (fmt "~e" 0.000002)) prints: one = 1, x = 2.000000e-06
+    #+END_SRC
 
 * Macros
   EuLisp employs the usual backquoted template style of macros.
@@ -665,8 +678,7 @@
   in the =let/cc=.
 
   Notice that =(eq 'break '{break}) -> t=.  As symbols they are =eq=, but as
-  identifiers they are quite different.
-
+  identifiers they are q
 * Miscellany
 *** Keywords
     There are keywords (unbindable, unassignable, self-evaluating symbols),
@@ -827,7 +839,7 @@
     You can change this by using =(make-table comparator)=, where =comparator=
     is =eq= or =eql= or =binary== or ===.
 
-    If a value is not found for a particular key in the table () is returned.
+    If a value is not found for a particular key in the table =()= is returned.
     This can be changed by =(make-table comparator fill-value)=.  Now
     =fill-value= will be returned on failure.
 
@@ -851,7 +863,7 @@
     longer usable.
 
     The continuation function can take a single optional argument which is a
-    value to pass to the continuation: the default is ().
+    value to pass to the continuation: the default is =()=.
 
     The forms =block= and =return-from= are simply =let/c=c and a call to a
     continuation:
@@ -1504,7 +1516,7 @@
 
   Other arguments are passed to the intepreter and are available as =(getarg 0)=
   (the name of the program), =(getarg 1)= (first argument), =(getarg 2)= (second
-  argument), and so on.  The function =getarg= returns () for a non-existent
+  argument), and so on.  The function =getarg= returns =()= for a non-existent
   argument.
 
 *** Shell Scripts
@@ -1523,6 +1535,4 @@
     (print "hello world")
     #+END_SRC
 
-* [[file:./eunotes.html][Original Euscheme notes]]
-
-* [[http://people.bath.ac.uk/masrjb/Sources/eunotes.html][The latest version of the original Euscheme notes]].
+* [[http://people.bath.ac.uk/masrjb/Sources/eunotes.html][The original Euscheme notes]].

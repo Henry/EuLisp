@@ -136,24 +136,23 @@ static LVAL read_list(LVAL fptr)
 // read_cdr - read the cdr of a dotted pair
 static void read_cdr(LVAL fptr, LVAL last)
 {
-    LVAL val;
-    int ch;
-
     // read the cdr expression
+    LVAL val;
     if (!xlread(fptr, &val))
+    {
         xlfail("unexpected EOF", s_syntax_error);
+    }
     rplacd(last, val);
 
     // check for the close paren
-    #ifdef OLD
-    while ((ch = scan(fptr)) == ';')
-        read_comment(fptr);
-    #else
+    int ch;
     while (1)
     {
         ch = scan(fptr);
         if (ch == ';')
+        {
             read_comment(fptr);
+        }
         else if (ch == '#')
         {
             ch = checkeof(fptr);
@@ -162,21 +161,26 @@ static void read_cdr(LVAL fptr, LVAL last)
             break;
         }
         else
+        {
             break;
+        }
     }
-    #endif
+
     if (ch != ')')
+    {
         xlfail("missing right paren", s_syntax_error);
+    }
 }
 
 // read_comment - read a comment (to end of line)
 static void read_comment(LVAL fptr)
 {
     int ch;
-    while ((ch = xlgetc(fptr)) != EOF && ch != '\n')
-        ;
+    while ((ch = xlgetc(fptr)) != EOF && ch != '\n');
     if (ch != EOF)
+    {
         xlungetc(fptr, ch);
+    }
 }
 
 // read_vector - read a vector

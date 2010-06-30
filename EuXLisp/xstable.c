@@ -389,12 +389,8 @@ static int thash_eq(LVAL key)
 {
     extern OFFTYPE cvoptr();
 
-    #ifdef OLDSYM
-    int hash = cvoptr(key) % HTABLESIZE;
-    #else
     int hash = cvoptr(symbolp(key) ? getpname(key) : key)
     % HTABLESIZE;
-    #endif
 
     #if 0
     xlprin1(key, xstdout());

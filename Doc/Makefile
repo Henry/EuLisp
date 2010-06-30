@@ -20,7 +20,7 @@ DOC_DIRS = EuLisp-0.991
 ###-----------------------------------------------------------------------------
 
 .PHONY: all
-all: euxlisp.1 euxlisp.html EuXLispNotes.html bindings
+all: euxlisp.1 euxlisp.html EuLispIntro.html bindings
 	@echo "COMPILING DOCSs ..."
 	@$(call makeAll,$(DOC_DIRS),)
 	@echo "DONE"

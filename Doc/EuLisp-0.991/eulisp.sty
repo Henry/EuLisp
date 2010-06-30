@@ -109,7 +109,7 @@
     }%
 }
 
-\newcommand{\entryclause}[2]
+\newcommand{\entryclause}[3]
 {%
     \let\orig@sect=\@sect%
     \let\@sect=\@entrysect%
@@ -118,12 +118,12 @@
     {2ex plus 1ex minus .2ex}%
     {.1ex plus .1ex}%
     {\normalsize\bf}%
-    {{\tt #1}}{{\em #2}}%
+    {{\tt #1}}{{\em #2}{#3}}%
     \let\@sect=\orig@sect%
     \vskip -5pt%
 }
 
-\newcommand{\derivedentryclause}[3]
+\newcommand{\derivedentryclause}[4]
 {%
     \let\orig@sect=\@sect%
     \let\@sect=\@entrysect%
@@ -132,7 +132,7 @@
     {2ex plus 1ex minus .2ex}%
     {.1ex plus .1ex}%
     {\normalsize\bf}%
-    {{\tt #1}}{{\tt #2}\ \ {\em #3}}%
+    {{\tt #1}}{{\tt #2}\ \ {\em #3}{#4}}%
     \let\@sect=\orig@sect%
     \vskip -5pt%
 }
@@ -145,9 +145,11 @@
 \newcommand{\functionlabeled}[2]
 {%
     \entryclause{#1}{function}%
-    \label{\functionlabel{#2}}%
-    \ttindexdef{#1}%
-    \indexfunc{#1}%
+    {%
+        \label{\functionlabel{#2}}%
+        \ttindexdef{#1}%
+        \indexfunc{#1}%
+    }%
 }
 \newcommand*{\function}[1]
 {%
@@ -160,10 +162,12 @@
 \newcommand*{\setterlabel}[1]{setter:#1}
 \newcommand{\setter}[1]
 {%
-    \entryclause{(setter #1)}{setter}%
-    \label{\setterlabel{#1}}%
-    \index{general}{setter#1@{\tt (setter #1)}}%
-    \index{function}{setter#1@{\tt (setter #1)} (\module)}%
+    \entryclause{(setter #1)}{setter}
+    {%
+        \label{\setterlabel{#1}}%
+        \index{general}{setter#1@{\tt (setter #1)}}%
+        \index{function}{setter#1@{\tt (setter #1)} (\module)}%
+    }%
 }
 \newcommand*{\setterref}[1]{\hyperref[\setterlabel{#1}]{{\tt #1}}}
 
@@ -171,10 +175,12 @@
 \newcommand*{\converterlabel}[1]{converter:#1}
 \newcommand{\converter}[1]
 {%
-    \entryclause{(converter <#1>)}{converter}%
-    \label{\converterlabel{#1}}%
-    \index{general}{converter#1@{\tt (converter <#1>)}}%
-    \index{method}{converter#1@{\tt (converter <#1>)} (\module)}%
+    \entryclause{(converter <#1>)}{converter}
+    {%
+        \label{\converterlabel{#1}}%
+        \index{general}{converter#1@{\tt (converter <#1>)}}%
+        \index{method}{converter#1@{\tt (converter <#1>)} (\module)}
+    }%
 }
 \newcommand*{\converterref}[1]{\hyperref[\converterlabel{#1}]{{\tt <#1>}}}
 
@@ -182,10 +188,12 @@
 \newcommand*{\genericlabel}[1]{generic:#1}
 \newcommand{\genericlabeled}[2]
 {%
-    \entryclause{#1}{generic function}%
-    \label{\genericlabel{#2}}%
-    \ttindexdef{#1}%
-    \index{generic}{#1@{\tt{}#1} (\module)}%
+    \entryclause{#1}{generic function}
+    {%
+        \label{\genericlabel{#2}}%
+        \ttindexdef{#1}%
+        \index{generic}{#1@{\tt{}#1} (\module)}%
+    }%
 }
 \newcommand*{\generic}[1]
 {%
@@ -198,10 +206,12 @@
 \newcommand*{\methodlabel}[1]{method:#1}
 \newcommand{\method}[2]
 {%
-    \entryclause{#1 <#2>}{method}%
-    \label{\methodlabel{#1#2}}%
-    \ttindex{#1}%
-    \indexmeth{#1}%
+    \entryclause{#1 <#2>}{method}
+    {%
+        \label{\methodlabel{#1#2}}%
+        \ttindex{#1}%
+        \indexmeth{#1}%
+    }%
 }
 \newcommand*{\methodref}[2]{\hyperref[\methodlabel{#1#2}]{{\tt #1 <#2>}}}
 
@@ -209,10 +219,12 @@
 \newcommand*{\syntaxlabel}[1]{syntax:#1}
 \newcommand{\syntaxform}[1]
 {%
-    \entryclause{#1}{syntax}%
-    \label{\syntaxlabel{#1}}%
-    \ttindexdef{#1}%
-    \index{general}{syntax!#1}%
+    \entryclause{#1}{syntax}
+    {%
+        \label{\syntaxlabel{#1}}%
+        \ttindexdef{#1}%
+        \index{general}{syntax!#1}%
+    }%
 }
 \newcommand*{\syntaxref}[1]{\hyperref[\syntaxlabel{#1}]{{\tt{}#1}}}
 
@@ -220,10 +232,12 @@
 \newcommand*{\specoplabel}[1]{specop:#1}
 \newcommand{\specop}[1]
 {%
-    \entryclause{#1}{special operator}%
-    \label{\specoplabel{#1}}%
-    \ttindexdef{#1}%
-    \index{general}{special operator!#1}%
+    \entryclause{#1}{special operator}
+    {%
+        \label{\specoplabel{#1}}%
+        \ttindexdef{#1}%
+        \index{general}{special operator!#1}%
+    }%
 }
 \newcommand*{\specopref}[1]{\hyperref[\specoplabel{#1}]{{\tt{}#1}}}
 
@@ -231,10 +245,12 @@
 \newcommand*{\macrolabel}[1]{macro:#1}
 \newcommand{\macro}[1]
 {%
-    \entryclause{#1}{macro}%
-    \label{\macrolabel{#1}}%
-    \ttindexdef{#1}%
-    \index{macro}{#1@{\tt{}#1} (\module)}%
+    \entryclause{#1}{macro}
+    {%
+        \label{\macrolabel{#1}}%
+        \ttindexdef{#1}%
+        \index{macro}{#1@{\tt{}#1} (\module)}%
+    }%
 }
 \newcommand*{\macroref}[1]{\hyperref[\macrolabel{#1}]{{\tt{}#1}}}
 
@@ -242,10 +258,12 @@
 \newcommand*{\defoplabel}[1]{defop:#1}
 \newcommand{\defop}[1]
 {%
-    \entryclause{#1}{defining operator}%
-    \label{\defoplabel{#1}}%
-    \ttindexdef{#1}%
-    \index{general}{defining operator!#1}%
+    \entryclause{#1}{defining operator}
+    {%
+        \label{\defoplabel{#1}}%
+        \ttindexdef{#1}%
+        \index{general}{defining operator!#1}%
+    }%
 }
 \newcommand*{\defopref}[1]{\hyperref[\defoplabel{#1}]{{\tt{}#1}}}
 
@@ -254,9 +272,11 @@
 \newcommand{\constant}[2]
 {%
     \entryclause{#1 \classref{#2}}{constant}
-    \label{\constantlabel{#1}}%
-    \ttindexdef{#1}%
-    \index{constant}{#1@{\tt{}#1} (\module)}
+    {%
+        \label{\constantlabel{#1}}%
+        \ttindexdef{#1}%
+        \index{constant}{#1@{\tt{}#1} (\module)}%
+    }%
 }
 \newcommand*{\constantref}[1]{\hyperref[\constantlabel{#1}]{{\tt{}#1}}}
 
@@ -264,38 +284,46 @@
 \newcommand{\classalias}[2]
 {%
     \entryclause{<#1> \classref{#2}}{constant}
-    \label{\constantlabel{#1}}%
-    \index{general}{#1@{\tt <#1>}|hyperem}%
-    \index{constant}{#1@{\tt{}<#1>} (\module)}%
+    {%
+        \label{\constantlabel{#1}}%
+        \index{general}{#1@{\tt <#1>}|hyperem}%
+        \index{constant}{#1@{\tt{}<#1>} (\module)}%
+    }%
 }
 
 %%%  Class
 \newcommand*{\classlabel}[1]{class:#1}
 \newcommand{\class}[1]
 {%
-    \entryclause{<#1>}{class}%
-    \label{\classlabel{#1}}%
-    \index{general}{#1@{\tt <#1>}|hyperem}%
-    \index{class}{#1@{\tt{}<#1>} (\module)}%
+    \entryclause{<#1>}{class}
+    {%
+        \label{\classlabel{#1}}%
+        \index{general}{#1@{\tt <#1>}|hyperem}%
+        \index{class}{#1@{\tt{}<#1>} (\module)}%
+    }%
 }
 \newcommand*{\classref}[1]{\hyperref[\classlabel{#1}]{{\tt{}<#1>}}}
 
 %%%  Derived class
 \newcommand{\derivedclass}[2]
 {%
-    \derivedentryclause{<#1>}{\classref{#2}}{class}%
-    \label{\classlabel{#1}}%
-    \index{general}{#1@{\tt <#1>}|hyperem}%
-    \index{class}{#1@{\tt{}<#1>} (\module)}%
+    \derivedentryclause{<#1>}{\classref{#2}}{class}
+    {%
+        \label{\classlabel{#1}}%
+        \index{general}{#1@{\tt <#1>}|hyperem}%
+        \index{class}{#1@{\tt{}<#1>} (\module)}%
+    }
 }
 
 %%%  Instance
 \newcommand*{\instancelabel}[1]{instance:#1}
 \newcommand{\instance}[2]
 {
-    \entryclause{#1 \classref{#2}}{instance}%
-    \label{\instancelabel{#1}}%
-    \ttindexdef{#1}%
+    \entryclause{#1 \classref{#2}}{instance}
+    {%
+        \label{\instancelabel{#1}}%
+        \ttindexdef{#1}%
+    }%
 }
 \newcommand*{\instanceref}[1]{\hyperref[\instancelabel{#1}]{{\tt{}#1}}}
 
@@ -303,9 +331,11 @@
 \newcommand*{\conditionlabel}[1]{condition:#1}
 \newcommand{\condition}[2]
 {%
-    \derivedentryclause{<#1>}{\conditionref{#2}}{condition}%
-    \label{\conditionlabel{#1}}%
-    \indexcondition{#1}%
+    \derivedentryclause{<#1>}{\conditionref{#2}}{condition}
+    {%
+        \label{\conditionlabel{#1}}%
+        \indexcondition{#1}%
+    }%
 }
 \newcommand*{\conditionref}[1]{\hyperref[\conditionlabel{#1}]{{\tt{}<#1>}}}
 

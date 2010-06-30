@@ -116,7 +116,6 @@ LVAL cvstring2(char *str, int len)
     return (val);
 }
 
-#ifndef OLDSYM
 // ensure unique names for symbols
 static void set_symbol_name(LVAL new, char *pname)
 {
@@ -140,7 +139,6 @@ static void set_symbol_name(LVAL new, char *pname)
     sym = cons(new, getelement(obarray, i));
     setelement(obarray, i, sym);
 }
-#endif
 
 // cvsymbol - convert a string to a symbol
 LVAL cvsymbol(char *pname)
@@ -608,10 +606,8 @@ void gc(int reason)
         mark(class_vector);
     if (keyword_array && ispointer(keyword_array))
         mark(keyword_array);
-    #ifndef OLDSYM
     if (obarray && ispointer(obarray))
         mark(obarray);
-    #endif
 
     // mark the stack
     for (p = xlsp; p < xlstktop; ++p)

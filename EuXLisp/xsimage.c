@@ -91,9 +91,7 @@ int xlisave(char *fname)
     writeptr(cvoptr(object));
     writeptr(cvoptr(class_vector));
     writeptr(cvoptr(keyword_array));
-    #ifndef OLDSYM
     writeptr(cvoptr(obarray));
-    #endif
 
     // setup the initial file offsets
     off = foff = (OFFTYPE) 2;
@@ -309,9 +307,7 @@ int xlirestore(char *fname)
     object = cviptr(readptr());
     class_vector = cviptr(readptr());
     keyword_array = cviptr(readptr());
-    #ifndef OLDSYM
     obarray = cviptr(readptr());
-    #endif
 
     // read each node
     int type;

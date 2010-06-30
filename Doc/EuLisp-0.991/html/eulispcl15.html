@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-06-29 17:32:00" /> 
+<meta name="date" content="2010-06-30 13:45:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -45,11 +45,9 @@ class="cmtt-9">signal</span>
 <a 
  id="Q1-19-248"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr />
-<a 
- id="dx19-186003"></a>
-<a 
- id="dx19-186004"></a>
+class="cmti-9">function</span><a 
+ id="dx19-186003"></a><a 
+ id="dx19-186004"></a> </i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x19-18700021"></a><span 
@@ -151,10 +149,9 @@ class="cmtt-9">call-next-handler</span>
  <a 
  id="Q1-19-253"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
- id="dx19-190002"></a>
-  <a 
- id="dx19-190003"></a>
+class="cmti-9">special operator</span><a 
+ id="dx19-190002"></a><a 
+ id="dx19-190003"></a> </i></b></div><br /> <hr />
   </p>
   <h5 class="syntaxssclauseHead"> 15.0.22.1 <a 
  id="x19-19100015.0.22.1"></a><span 
@@ -207,17 +204,16 @@ class="cmtt-9">with-handler</span>
  <a 
  id="Q1-19-256"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">special operator </span></i></b></div><br /> <hr /> <a 
- id="dx19-192002"></a>
-  <a 
- id="dx19-192003"></a>
-                                                                                                  
-                                                                                                  
-</p>
-<h5 class="syntaxssclauseHead"> 15.0.23.1 <a 
+class="cmti-9">special operator</span><a 
+ id="dx19-192002"></a><a 
+ id="dx19-192003"></a> </i></b></div><br /> <hr />
+  </p>
+  <h5 class="syntaxssclauseHead"> 15.0.23.1 <a 
  id="x19-19300015.0.23.1"></a><span 
-class="cmbx-8">Syntax</span></h5><a 
+class="cmbx-8">Syntax</span></h5> <a 
  id="dx19-193001"></a>
+                                                                                                  
+                                                                                                  
 <a 
  id="dx19-193002"></a>
 <!--l. 88--><p class="noindent" ><div class="framebox-l" 
@@ -342,74 +338,74 @@ class="cmti-9">handler-function  </span>is  disestablished  as  the  nearest
     restored as the nearest enclosing.</li></ol>
 <!--l. 125--><p class="noindent" >The above is the normal behaviour of <a 
 href="#x19-192001r23"><span 
-class="cmtt-9">with-handler</span></a>. The      exceptional behaviour of <a 
+class="cmtt-9">with-handler</span></a>. The
+exceptional behaviour of <a 
 href="#x19-192001r23"><span 
 class="cmtt-9">with-handler</span></a> happens when there is a
-  call to <a 
+call to <a 
 href="#x19-186002r21"><span 
 class="cmtt-9">signal</span></a> during the evaluation of <span 
 class="cmti-9">protected-form</span>. <a 
 href="#x19-186002r21"><span 
 class="cmtt-9">signal</span></a> calls
-  the nearest closing <span 
+the nearest closing <span 
 class="cmti-9">handler-function </span>passing on the first two
-  arguments given to <a 
+arguments given to <a 
 href="#x19-186002r21"><span 
 class="cmtt-9">signal</span></a>. The <span 
-class="cmti-9">handler-function </span>is executed in
-  the dynamic extent of the call to <a 
+class="cmti-9">handler-function </span>is executed in the dynamic extent of the call to <a 
 href="#x19-186002r21"><span 
 class="cmtt-9">signal</span></a>. However, any <a 
 href="#x19-186002r21"><span 
 class="cmtt-9">signal</span></a>s
-  occurring during the execution of <span 
+ occurring during the execution of <span 
 class="cmti-9">handler-function </span>are dealt with
-  by the nearest enclosing handler outside the extent of the form
-  which established <span 
+ by the nearest enclosing handler outside the extent of the form
+ which established <span 
 class="cmti-9">handler-function</span>. It is an error if there
-  is no enclosing handler. In this circumstance the identified
-  error is delivered to the configuration to be dealt with in an
-  implementation-defined way. Errors arising in the dynamic extent
-  of the handler function are signalled in the dynamic extent of the
-  original <a 
+ is no enclosing handler. In this circumstance the identified
+ error is delivered to the configuration to be dealt with in an
+ implementation-defined way. Errors arising in the dynamic extent
+ of the handler function are signalled in the dynamic extent of the
+ original <a 
 href="#x19-186002r21"><span 
 class="cmtt-9">signal</span></a> but are handled in the enclosing dynamic extent of
-  the handler.
-  </p><!--l. 141--><p class="noindent" >
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+ the handler.
+ </p><!--l. 141--><p class="noindent" >
+ </p>
+ <h5 class="likesyntaxssclauseHead"><a 
  id="x19-19700015.0.23.1"></a><span 
 class="cmbx-8">Examples</span></h5>
-  <!--l. 143--><p class="noindent" >There are three ways in which a <span 
+ <!--l. 143--><p class="noindent" >There are three ways in which a <span 
 class="cmti-9">handler-function </span>can respond:
-  actions:
-  </p><!--l. 145--><p class="noindent" >
-        </p><ol  class="enumerate1" >
-        <li 
+ actions:
+ </p><!--l. 145--><p class="noindent" >
+    </p><ol  class="enumerate1" >
+    <li 
   class="enumerate" id="x19-197002x1">The error is very serious and the computation must be
-        abandoned; this is likely to be characterised by a non-local
-        exit from the handler function.
-        </li>
-        <li 
+    abandoned; this is likely to be characterised by a non-local
+    exit from the handler function.
+    </li>
+    <li 
   class="enumerate" id="x19-197004x2">The situation can be corrected by the handler, so it does
-        and then returns. Thus the call to <a 
+    and then returns. Thus the call to <a 
 href="#x19-186002r21"><span 
 class="cmtt-9">signal</span></a> returns with the
-        result passed back from the handler function.
-        </li>
-        <li 
+    result passed back from the handler function.
+    </li>
+    <li 
   class="enumerate" id="x19-197006x3">The  handler  function  does  not  know  how  to  deal  with
-        the class of condition signalled; control is passed explicitly
-        to the next enclosing handler via the <a 
+    the class of condition signalled; control is passed explicitly
+    to the next enclosing handler via the <a 
 href="#x19-190001r22"><span 
 class="cmtt-9">call-next-handler</span></a>
-     special form.</li></ol>
-  <!--l. 159--><p class="noindent" >An illustration of the use of all three cases is given here:         <a 
+    special form.</li></ol>
+ <!--l. 159--><p class="noindent" >An illustration of the use of all three cases is given here:         <a 
  id="x19-197008"></a><br />
-  </p><div align="center" class="caption"><table class="caption" 
+ </p><div align="center" class="caption"><table class="caption" 
 ><tr valign="baseline" class="caption"><td class="id">Example&#x00A0;1: </td><td  
 class="content">handler actions</td></tr></table></div>
-      <div class="obeylines-v"><span 
+    <div class="obeylines-v"><span 
 class="cmtt-9">(defgeneric</span><span 
 class="cmtt-9">&#x00A0;error-handler</span><span 
 class="cmtt-9">&#x00A0;(condition)</span>
@@ -488,7 +484,7 @@ class="cmtt-9">&#x00A0;</span><span
 class="cmtt-9">&#x00A0;</span><span 
 class="cmtt-9">&#x00A0;</span><span 
 class="cmtt-9">&#x00A0;(something-which-might-signal-an-error))</span>
-    <br /> </div>
+    <br /></div>
 <!--l. 178--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
@@ -504,14 +500,12 @@ class="cmbx-9">15.0.24   </span><span
 class="cmtt-9">error</span>
 <a 
  id="Q1-19-263"></a>
-                                                                                                  
-                                                                                                  
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr />
-<a 
- id="dx19-198002"></a>
-<a 
- id="dx19-198003"></a>
+class="cmti-9">function</span><a 
+ id="dx19-198002"></a><a 
+ id="dx19-198003"></a> </i></b></div><br /> <hr />
+                                                                                                  
+                                                                                                  
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x19-19900024"></a><span 
@@ -570,11 +564,9 @@ class="cmtt-9">cerror</span>
 <a 
  id="Q1-19-267"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr />
-<a 
- id="dx19-201002"></a>
-<a 
- id="dx19-201003"></a>
+class="cmti-9">function</span><a 
+ id="dx19-201002"></a><a 
+ id="dx19-201003"></a> </i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x19-20200025"></a><span 
@@ -590,15 +582,16 @@ class="arguments">
 class="cmti-9">condition-class </span>: </dt><dd 
 class="arguments">
     <!--l. 207--><p class="noindent" >the class of condition to be signalled.
-    </p></dd><dt class="arguments">                                               <span 
+    </p></dd><dt class="arguments">
+<span 
 class="cmti-9">init-option</span><sup><span 
-class="cmsy-6">*</span></sup> :  </dt><dd 
+class="cmsy-6">*</span></sup> : </dt><dd 
 class="arguments">
-        <!--l. 209--><p class="noindent" >a
-        sequence of options to be passed to <span 
+    <!--l. 209--><p class="noindent" >a
+    sequence of options to be passed to <span 
 class="cmtt-9">initialize-instance</span>
-     when making the instance of condition.</p></dd></dl>
-  <!--l. 213--><p class="noindent" >
+    when making the instance of condition.</p></dd></dl>
+                                                   <!--l. 213--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x19-20300025"></a><span 

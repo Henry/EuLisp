@@ -71,9 +71,8 @@ void xlinitws(unsigned int ssize)
 
     s_gcmsgs = NIL;
 
-    #ifndef OLDSYM
     obarray = newvector(HSIZE);
-    #endif
+
     init_root_module();
 
     s_unbound = NIL;    // to make cvsymbol work

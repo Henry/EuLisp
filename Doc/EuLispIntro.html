@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>Using EuXLisp</b> (Formally Euscheme)</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-29 21:46:19 BST"/>
+<meta name="generated" content="2010-06-30 13:56:02 BST"/>
 <meta name="author" content="of original Euscheme notes Russell Bradford"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -98,8 +98,7 @@ lang="en" xml:lang="en">
 <li><a href="#sec-18">18 Example Modules </a></li>
 <li><a href="#sec-19">19 EuXLisp functions </a></li>
 <li><a href="#sec-20">20 Command Line Arguments </a></li>
-<li><a href="#sec-21">21 Original Euscheme notes </a></li>
-<li><a href="#sec-22">22 The latest version of the original Euscheme notes. </a></li>
+<li><a href="#sec-21">21 The original Euscheme notes. </a></li>
 </ul>
 </div>
 </div>
@@ -218,7 +217,7 @@ A vector is created by the function <code>make-vector</code> as in
 
 <p>
 which creates a vector of length 4, indexed from 0 to 3, all elements
-initialised to be ()s.  In fact, make-vector can take a second argument
+initialised to be =()=s.  In fact, make-vector can take a second argument
 </p>
 
 
@@ -357,7 +356,7 @@ Their canonical form is <code>|1 23|</code>.
 
 <p>EuLisp has the usual <code>(if boolexpr trueexpr falseexpr)</code> (always with both
 trueexpr and falseexpr), and the <code>cond</code> form.  The single false value in
-EuLisp is (): anything else is deemed to be true.  <code>t</code> is bound to the
+EuLisp is <code>()</code>: anything else is deemed to be true.  <code>t</code> is bound to the
 symbol <code>t</code>, providing a convenient canonical true value.  Additional
 conditional forms include
 </p>
@@ -779,7 +778,7 @@ There are many parts to explain.
 <p>
 This form defines a new class named <code>&lt;rat&gt;</code>.  Classes in EuLisp are
 conventionally noted by the use of angle brackets <code>&lt;&gt;</code>, but they are just
-normal names.  The () next is the list of classes for <code>&lt;rat&gt;</code> to inherit
+normal names.  The <code>()</code> next is the list of classes for <code>&lt;rat&gt;</code> to inherit
 from.  In EuLisp Level 0, there is only single inheritance, so this should be
 a list of at most one class.  Any empty list indicates some suitable default
 super-class.
@@ -1002,32 +1001,39 @@ run) until some other thread releases the lock.
 <h2 id="sec-15"><span class="section-number-2">15</span> Input and Output </h2>
 <div class="outline-text-2" id="text-15">
 
-<p>EuLisp is still a little undecided as to how i/o is going to turn out, so for
-the meantime EuXLisp uses Scheme's functions.
-</p><ul>
+<ul>
 <li>
 <code>read</code> to read a Lisp expression.
 </li>
 <li>
-<code>write</code> output in a way that can be re-read if possible.  Thus, for example,
-strings are quoted.
+<code>write</code> write to standard output in a way that can be re-read if possible.
+Thus, for example, strings are quoted.
 </li>
 <li>
-<code>prin</code> output in a human-friendly manner.  Strings and such are not quoted.
-Compare
-
-</li>
-</ul>
+<code>prin</code> print to standard output in a human-friendly manner.  Strings and
+such are not quoted.  Compare
 
 
-<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(print</span> <span style="color: #00ff00;">"asd"</span>)   prints: asd
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(prin</span> <span style="color: #00ff00;">"asd"</span>)    prints: asd
 <span style="color: #0000ff; font-weight: bold;">(write</span> <span style="color: #00ff00;">"asd"</span>)   prints: <span style="color: #00ff00;">"asd"</span>
 </pre>
 
 
-<ul>
+</li>
 <li>
 <code>print</code> as <code>prin</code>, with a newline.
+</li>
+<li>
+Print and write functions are n-ary:
+
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(prin</span> <span style="color: #00ff00;">"one = "</span> 1 <span style="color: #00ff00;">", two = "</span> 2)    prints: one = 1, two = 2
+<span style="color: #0000ff; font-weight: bold;">(write</span> <span style="color: #00ff00;">"one = "</span> 1 <span style="color: #00ff00;">", two = "</span> 2)   prints: <span style="color: #00ff00;">"one = "</span>1<span style="color: #00ff00;">", two = "</span>2
+</pre>
+
+
 </li>
 <li>
 <code>newline</code> output a newline.
@@ -1035,15 +1041,15 @@ Compare
 </li>
 </ul>
 
-<p>All of the above take an optional extra argument, which is a stream to print
-on.  This defaults to the standard output.
+<p>All of the above have variants beginning with an 's' which take a stream to
+print on as the first argument.
 </p>
 <p>
 For stream manipulation:
 </p><ul>
 <li>
 open-input-file takes a string, and opens and returns a corresponding
-stream for input.  Returns () if not such file exists.
+stream for input.  Returns <code>()</code> if not such file exists.
 </li>
 <li>
 open-output-file creates a file if it didn't already exist.
@@ -1060,19 +1066,22 @@ close-stream closes an open stream.
 
 </li>
 <li id="sec-15.1">Format <br/>
-A more complicated printing function is <code>format</code>, which is somewhat akin to
-C's <code>printf</code>.
+A more complicated printing function is
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-575002"><code>sformat</code></a>,
+which is somewhat akin to C's <code>printf</code>.
 
 
 
-<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(format</span> stream format-string arg arg ...)
+<pre class="src src-eulisp">(<span style="color: #0000ff; font-weight: bold;">sformat</span> stream format-string arg arg ...)
 </pre>
 
 
 <p>
-If stream is <code>t</code>, <code>format</code> prints to the standard output.  If stream is
-(), <code>format</code> returns the formatted output as a string.  Otherwise stream
-is a file stream.
+The variants
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-577002"><code>format</code></a> and
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-579002"><code>fmt</code></a>
+do not take a stream argument and the former prints to standard output and
+the latter returns the formatted output as a string.
 </p>
 <p>
 The format string is copied to the output, except that <code>~</code> marks an escape
@@ -1108,6 +1117,18 @@ The format string is copied to the output, except that <code>~</code> marks an e
 <p>There are other escapes to write integers in other bases, output new pages,
 and so on.
 </p>
+<p>
+<code>fmt</code> can be used with the n-ary print and write functions to write complex
+formatted output statements in a more readable form that using <code>format</code>
+\e.g.\
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(print</span> <span style="color: #00ff00;">"one = "</span> 1 <span style="color: #00ff00;">", x = "</span> (<span style="color: #0000ff; font-weight: bold;">fmt</span> <span style="color: #00ff00;">"~e"</span> 0.000002)) prints: one = 1, x = 2.000000e-06
+</pre>
+
+
+
 </li>
 </ul>
 </div>
@@ -1223,9 +1244,8 @@ in the <code>let/cc</code>.
 </p>
 <p>
 Notice that <code>(eq 'break '{break}) -&gt; t</code>.  As symbols they are <code>eq</code>, but as
-identifiers they are quite different.
-</p>
-</div>
+identifiers they are q
+</p></div>
 
 </div>
 
@@ -1498,7 +1518,7 @@ You can change this by using <code>(make-table comparator)</code>, where <code>c
 is <code>eq</code> or <code>eql</code> or <code>binary=</code> or ===.
 </p>
 <p>
-If a value is not found for a particular key in the table () is returned.
+If a value is not found for a particular key in the table <code>()</code> is returned.
 This can be changed by <code>(make-table comparator fill-value)</code>.  Now
 <code>fill-value</code> will be returned on failure.
 </p>
@@ -1530,7 +1550,7 @@ longer usable.
 </p>
 <p>
 The continuation function can take a single optional argument which is a
-value to pass to the continuation: the default is ().
+value to pass to the continuation: the default is <code>()</code>.
 </p>
 <p>
 The forms <code>block</code> and <code>return-from</code> are simply =let/c=c and a call to a
@@ -2338,7 +2358,7 @@ default.
 
 <p>Other arguments are passed to the intepreter and are available as <code>(getarg 0)</code>
 (the name of the program), <code>(getarg 1)</code> (first argument), <code>(getarg 2)</code> (second
-argument), and so on.  The function <code>getarg</code> returns () for a non-existent
+argument), and so on.  The function <code>getarg</code> returns <code>()</code> for a non-existent
 argument.
 </p>
 <ul>
@@ -2374,17 +2394,8 @@ prevent the use of the system function.
 </div>
 
 <div id="outline-container-21" class="outline-2">
-<h2 id="sec-21"><span class="section-number-2">21</span> <a href="./eunotes.html">Original Euscheme notes</a> </h2>
+<h2 id="sec-21"><span class="section-number-2">21</span> <a href="http://people.bath.ac.uk/masrjb/Sources/eunotes.html">The original Euscheme notes</a>. </h2>
 <div class="outline-text-2" id="text-21">
-
-
-</div>
-
-</div>
-
-<div id="outline-container-22" class="outline-2">
-<h2 id="sec-22"><span class="section-number-2">22</span> <a href="http://people.bath.ac.uk/masrjb/Sources/eunotes.html">The latest version of the original Euscheme notes</a>. </h2>
-<div class="outline-text-2" id="text-22">
 
 </div>
 </div>
@@ -2392,7 +2403,7 @@ prevent the use of the system function.
 <p class="author"> Author: of original Euscheme notes Russell Bradford
 <a href="mailto:no-reply">&lt;no-reply&gt;</a>
 </p>
-<p class="date"> Date: 2010-06-29 21:46:19 BST</p>
+<p class="date"> Date: 2010-06-30 13:56:02 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

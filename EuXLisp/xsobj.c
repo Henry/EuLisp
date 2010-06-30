@@ -524,10 +524,10 @@ static void merge_slots(LVAL obj, LVAL super, LVAL inits)
 
 static int slotequal(LVAL name, LVAL slot)
 {
-    #ifndef OLDSYM
     if (symbolp(name) && symbolp(getslotname(slot)))
+    {
         return symboleq(name, getslotname(slot));
-    #endif
+    }
 
     return name == getslotname(slot);
 }

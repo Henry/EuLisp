@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-06-29 17:32:00" /> 
+<meta name="date" content="2010-06-30 13:45:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -29,11 +29,9 @@ class="cmtt-9">defcondition</span>
 <a 
  id="Q1-18-209"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">defining operator </span></i></b></div><br /> <hr />
-<a 
- id="dx18-162002"></a>
-<a 
- id="dx18-162003"></a>
+class="cmti-9">defining operator</span><a 
+ id="dx18-162002"></a><a 
+ id="dx18-162003"></a> </i></b></div><br /> <hr />
 </p>
 <h5 class="syntaxssclauseHead"> 14.0.6.1 <a 
  id="x18-16300014.0.6.1"></a><span 
@@ -149,22 +147,22 @@ class="arguments">
  id="x18-16500014.0.6.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 32--><p class="noindent" >This defining form defines a new condition class. The first
-argument is the name to which the new condition class will be   bound. The second is the name of the superclass of the new
-  condition class and an <span 
-class="cmti-9">init-option </span>is an identifier followed by its
-  (default) initial value. If <span 
+argument is the name to which the new condition class will be
+bound. The second is the name of the superclass of the new
+condition class and an <span 
+class="cmti-9">init-option </span>is an identifier followed by its (default) initial value. If <span 
 class="cmti-9">superclass-name </span>is <a 
 href="eulispcl17.html#x21-609009r2"><span 
 class="cmtt-9">()</span></a>, the superclass is
-  taken to be <a 
+ taken to be <a 
 href="#x18-165001r7"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>. Otherwise <span 
 class="cmti-9">superclass-name </span>must be
-  <a 
+ <a 
 href="#x18-165001r7"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;or the name of one of its subclasses.
-  </p><!--l. 40--><p class="noindent" >
-  </p><!--l. 40--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ </p><!--l. 40--><p class="noindent" >
+ </p><!--l. 40--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x18-165001r7"></a><span 
 class="cmbx-9">14.0.7   </span><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span>
@@ -173,81 +171,77 @@ class="cmtt-9">&#x003C;condition&#x003E;</span>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="eulispcl11.html#x13-76002r1"><span 
 class="cmtt-9">&#x003C;object&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">class </span></i></b></div><br /> <hr /> <a 
- id="dx18-165002"></a>
-  <a 
- id="dx18-165003"></a>
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+class="cmti-9">class</span><a 
+ id="dx18-165002"></a><a 
+ id="dx18-165003"></a> </i></b></div><br /> <hr />
+ </p>
+ <h5 class="likesyntaxssclauseHead"><a 
  id="x18-1660007"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
-  <!--l. 43--><p class="noindent" >
-       </p><dl class="initoptions1"><dt class="initoptions">
-  <span 
+ <!--l. 43--><p class="noindent" >
+    </p><dl class="initoptions1"><dt class="initoptions">
+ <span 
 class="cmtt-9">message </span><a 
 href="eulispcl17.html#x21-858016r2"><span 
-class="cmtt-9">&#x003C;string&#x003E;</span></a> :  </dt><dd 
+class="cmtt-9">&#x003C;string&#x003E;</span></a> : </dt><dd 
 class="initoptions">
-        <!--l. 44--><p class="noindent" >A string, containing information which should pertain to
-        the situation which caused the condition to be signalled.
-        </p></dd><dt class="initoptions">
-  <span 
+    <!--l. 44--><p class="noindent" >A string, containing information which should pertain to
+    the situation which caused the condition to be signalled.
+    </p></dd><dt class="initoptions">
+ <span 
 class="cmtt-9">message-arguments </span><a 
 href="eulispcl17.html#x21-609005r1"><span 
-class="cmtt-9">&#x003C;list&#x003E;</span></a> :  </dt><dd 
+class="cmtt-9">&#x003C;list&#x003E;</span></a> : </dt><dd 
 class="initoptions">
-        <!--l. 47--><p class="noindent" >A  list  of  objects  to  be  used  in  processing  the  message
-        format string.</p></dd></dl>
-  <!--l. 51--><p class="noindent" >
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+    <!--l. 47--><p class="noindent" >A  list  of  objects  to  be  used  in  processing  the  message
+    format string.</p></dd></dl>
+ <!--l. 51--><p class="noindent" >
+ </p>
+ <h5 class="likesyntaxssclauseHead"><a 
  id="x18-1670007"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 52--><p class="noindent" >The class which is the superclass of all condition classes.
-  </p><!--l. 54--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ <!--l. 52--><p class="noindent" >The class which is the superclass of all condition classes.
+ </p><!--l. 54--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x18-167001r8"></a><span 
 class="cmbx-9">14.0.8   </span><span 
 class="cmtt-9">condition?</span>
  <a 
  id="Q1-18-216"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">function </span></i></b></div><br /> <hr /> <a 
- id="dx18-167002"></a>
-  <a 
- id="dx18-167003"></a>
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+class="cmti-9">function</span><a 
+ id="dx18-167002"></a><a 
+ id="dx18-167003"></a> </i></b></div><br /> <hr />
+ </p>
+ <h5 class="likesyntaxssclauseHead"><a 
  id="x18-1680008"></a><span 
 class="cmbx-8">Arguments</span></h5>
-  <!--l. 56--><p class="noindent" >
-       </p><dl class="arguments1"><dt class="arguments">
-  <span 
-class="cmti-9">object </span>:  </dt><dd 
+ <!--l. 56--><p class="noindent" >
+    </p><dl class="arguments1"><dt class="arguments">
+ <span 
+class="cmti-9">object </span>: </dt><dd 
 class="arguments">
-        <!--l. 57--><p class="noindent" >An object to examine.</p></dd></dl>
-  <!--l. 60--><p class="noindent" >
-  </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+    <!--l. 57--><p class="noindent" >An object to examine.</p></dd></dl>
+ <!--l. 60--><p class="noindent" >
+ </p>
+ <h5 class="likesyntaxssclauseHead"><a 
  id="x18-1690008"></a><span 
 class="cmbx-8">Result</span></h5>
-  <!--l. 61--><p class="noindent" >Returns <span 
+ <!--l. 61--><p class="noindent" >Returns <span 
 class="cmti-9">object </span>if it is a condition, otherwise <a 
 href="eulispcl17.html#x21-609009r2"><span 
 class="cmtt-9">()</span></a>.
-                                                                                                  
-                                                                                                  
-</p><!--l. 63--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
+ </p><!--l. 63--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x18-169001r9"></a><span 
 class="cmbx-9">14.0.9   </span><span 
 class="cmtt-9">initialize &#x003C;condition&#x003E;</span>
-<a 
+ <a 
  id="Q1-18-219"></a>
-</div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
-class="cmti-9">method </span></i></b></div><br /> <hr />
-<a 
- id="dx18-169002"></a>
-<a 
- id="dx18-169003"></a>
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
+class="cmti-9">method</span><a 
+ id="dx18-169002"></a><a 
+ id="dx18-169003"></a> </i></b></div><br /> <hr />
+                                                                                                  
+                                                                                                  
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x18-1700009"></a><span 
@@ -309,9 +303,8 @@ class="cmtt-9">&#x003C;general-condition&#x003E;</span>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-165001r7"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr />
-<a 
- id="dx18-172002"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-172002"></a> </i></b></div><br /> <hr />
 </p><!--l. 88--><p class="noindent" >This is the general condition class for conditions arising from the
 execution of programs by the processor.
 </p><!--l. 91--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
@@ -323,21 +316,19 @@ class="cmtt-9">&#x003C;domain-condition&#x003E;</span>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-172001r10"><span 
 class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr />
-<a 
- id="dx18-172004"></a>
-                                                   </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+class="cmti-9">condition</span><a 
+ id="dx18-172004"></a> </i></b></div><br /> <hr />
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x18-17300011"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
-  <!--l. 93--><p class="noindent" >
-       </p><dl class="initoptions1"><dt class="initoptions">
-  <span 
+<!--l. 93--><p class="noindent" >
+    </p><dl class="initoptions1"><dt class="initoptions">
+<span 
 class="cmtt-9">argument </span><a 
 href="eulispcl11.html#x13-76002r1"><span 
-class="cmtt-9">&#x003C;object&#x003E;</span></a> :  </dt><dd 
-class="initoptions">
-        <!--l. 94--><p class="noindent" >An  argument,  which  was  not  of  the  expected  class,  or
+class="cmtt-9">&#x003C;object&#x003E;</span></a> : </dt><dd 
+class="initoptions">                                        <!--l. 94--><p class="noindent" >An  argument,  which  was  not  of  the  expected  class,  or
         outside a defined range and therefore lead to the signalling
         of this condition.</p></dd></dl>
   <!--l. 99--><p class="noindent" >
@@ -350,8 +341,8 @@ class="cmtt-9">&#x003C;range-condition&#x003E;</span>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-172001r10"><span 
 class="cmtt-9">&#x003C;general-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr /> <a 
- id="dx18-173002"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-173002"></a> </i></b></div><br /> <hr />
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x18-17400012"></a><span 
@@ -376,8 +367,8 @@ class="cmtt-9">&#x003C;environment-condition&#x003E;</span>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-165001r7"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr /> <a 
- id="dx18-174002"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-174002"></a> </i></b></div><br /> <hr />
   </p><!--l. 109--><p class="noindent" >This is the general condition class for conditions arising from the
   environment of the processor.
   </p><!--l. 112--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
@@ -389,8 +380,8 @@ class="cmtt-9">&#x003C;wrong-condition-class&#x003E;</span>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="eulispcl12.html#x16-143005r10"><span 
 class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr /> <a 
- id="dx18-174004"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-174004"></a> </i></b></div><br /> <hr />
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x18-17500014"></a><span 
@@ -413,24 +404,23 @@ class="cmtt-9">&#x003C;thread-condition&#x003E;</span></a>.
  id="x18-175001r15"></a><span 
 class="cmbx-9">14.0.15   </span><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span>
-                                                                                                  
-                                                                                                  
-<a 
+ <a 
  id="Q1-18-231"></a>
-</div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
+ </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-165001r7"><span 
 class="cmtt-9">&#x003C;condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr />
-<a 
- id="dx18-175002"></a>
-</p><!--l. 123--><p class="noindent" >This is the general condition class for conditions arising from
-operations in the object system at level 0. The following direct
-subclasses of ¡generic-function-condition¿ are defined at level
-0:
-<span 
-class="cmtt-9">&#x003C;no-applicable-method&#x003E; </span>: signalled  by  a  generic  function
-    when  there  is  no  method  which  is  applicable  to  the
-    arguments.
+class="cmti-9">condition</span><a 
+ id="dx18-175002"></a> </i></b></div><br /> <hr />
+  </p><!--l. 123--><p class="noindent" >This is the general condition class for conditions arising from
+  operations in the object system at level 0. The following direct
+  subclasses of ¡generic-function-condition¿ are defined at level
+  0:
+  <span 
+class="cmtt-9">&#x003C;no-applicable-method&#x003E; </span>:  signalled  by  a  generic  function
+        when  there  is  no  method  which  is  applicable  to  the
+        arguments.
+                                                                                                  
+                                                                                                  
 <span 
 class="cmtt-9">&#x003C;incompatible-method-domain&#x003E; </span>: signalled by if the domain
     of the method being added to a generic function is not a
@@ -455,9 +445,8 @@ class="cmtt-9">&#x003C;no-applicable-method&#x003E;</span>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-175001r15"><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr />
-<a 
- id="dx18-175004"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-175004"></a> </i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x18-17600016"></a><span 
@@ -492,25 +481,25 @@ class="cmtt-9">&#x003C;incompatible-method-domain&#x003E;</span>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-175001r15"><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr />
-<a 
- id="dx18-177002"></a>                                                   </p>
-  <h5 class="likesyntaxssclauseHead"><a 
+class="cmti-9">condition</span><a 
+ id="dx18-177002"></a> </i></b></div><br /> <hr />
+</p>
+<h5 class="likesyntaxssclauseHead"><a 
  id="x18-17800017"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
-  <!--l. 161--><p class="noindent" >
-       </p><dl class="initoptions1"><dt class="initoptions">
-  <span 
+<!--l. 161--><p class="noindent" >
+    </p><dl class="initoptions1"><dt class="initoptions">
+<span 
 class="cmtt-9">generic </span><span 
-class="cmti-9">function </span>:  </dt><dd 
+class="cmti-9">function </span>: </dt><dd 
 class="initoptions">
-        <!--l. 162--><p class="noindent" >The generic function to be extended.
-        </p></dd><dt class="initoptions">
-  <span 
+    <!--l. 162--><p class="noindent" >The generic function to be extended.
+    </p></dd><dt class="initoptions">
+<span 
 class="cmtt-9">method </span><span 
-class="cmti-9">method </span>:  </dt><dd 
+class="cmti-9">method </span>: </dt><dd 
 class="initoptions">
-        <!--l. 163--><p class="noindent" >The method to be added.</p></dd></dl>
+                                                         <!--l. 163--><p class="noindent" >The method to be added.</p></dd></dl>
   <!--l. 166--><p class="noindent" >
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
@@ -535,8 +524,8 @@ class="cmtt-9">&#x003C;non-congruent-lambda-lists&#x003E;</span>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-175001r15"><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr /> <a 
- id="dx18-179002"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-179002"></a> </i></b></div><br /> <hr />
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x18-18000018"></a><span 
@@ -578,28 +567,28 @@ class="cmtt-9">&#x003C;method-domain-clash&#x003E;</span>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-175001r15"><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr /> <a 
- id="dx18-181002"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-181002"></a> </i></b></div><br /> <hr />
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x18-18200019"></a><span 
 class="cmbx-8">Initialization Options</span></h5>
-                                                                                                  
-                                                                                                  
-<!--l. 185--><p class="noindent" >
-    </p><dl class="initoptions1"><dt class="initoptions">
-<span 
+  <!--l. 185--><p class="noindent" >
+       </p><dl class="initoptions1"><dt class="initoptions">
+  <span 
 class="cmtt-9">generic </span><span 
-class="cmti-9">function </span>: </dt><dd 
+class="cmti-9">function </span>:  </dt><dd 
 class="initoptions">
-    <!--l. 186--><p class="noindent" >The generic function to be extended.
-    </p></dd><dt class="initoptions">
-<span 
+        <!--l. 186--><p class="noindent" >The generic function to be extended.
+        </p></dd><dt class="initoptions">
+  <span 
 class="cmtt-9">methods </span><span 
-class="cmti-9">list </span>: </dt><dd 
+class="cmti-9">list </span>:  </dt><dd 
 class="initoptions">
-    <!--l. 187--><p class="noindent" >The methods with the same domain.</p></dd></dl>
-<!--l. 190--><p class="noindent" >
+        <!--l. 187--><p class="noindent" >The methods with the same domain.</p></dd></dl>
+  <!--l. 190--><p class="noindent" >
+                                                                                                  
+                                                                                                  
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x18-18300019"></a><span 
@@ -623,9 +612,8 @@ class="cmtt-9">&#x003C;no-next-method&#x003E;</span>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <a 
 href="#x18-175001r15"><span 
 class="cmtt-9">&#x003C;generic-function-condition&#x003E;</span></a>&#x00A0;&#x00A0;<span 
-class="cmti-9">condition </span></i></b></div><br /> <hr />
-<a 
- id="dx18-183002"></a>
+class="cmti-9">condition</span><a 
+ id="dx18-183002"></a> </i></b></div><br /> <hr />
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x18-18400020"></a><span 

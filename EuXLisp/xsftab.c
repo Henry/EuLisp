@@ -464,12 +464,10 @@ LVAL xstdout()
 // eq - internal 'eq' function
 int eq(LVAL arg1, LVAL arg2)
 {
-    #ifndef OLDSYM
     if (symbolp(arg1) && symbolp(arg2))
     {
         return symboleq(arg1, arg2);
     }
-    #endif
     return (arg1 == arg2);
 }
 
@@ -487,10 +485,8 @@ int eqv(LVAL arg1, LVAL arg2)
     {
         switch (ntype(arg1))
         {
-            #ifndef OLDSYM
             case SYMBOL:
                 return (symbolp(arg2) && symboleq(arg1, arg2));
-                #endif
             case FIXNUM:
                 return (fixp(arg2) && getfixnum(arg1) == getfixnum(arg2));
             case FLONUM:
@@ -516,10 +512,8 @@ int equal(LVAL arg1, LVAL arg2)
     {
         switch (ntype(arg1))
         {
-            #ifndef OLDSYM
             case SYMBOL:
                 return (symbolp(arg2) && symboleq(arg1, arg2));
-                #endif
             case FIXNUM:
                 return (fixp(arg2) && getfixnum(arg1) == getfixnum(arg2));
             case FLONUM:

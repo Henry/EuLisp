@@ -16,10 +16,6 @@
 #include <sys/time.h>
 #include <string.h>
 #include <rpc/types.h>
-#if defined(sgi) && defined(SVR3)
-// infelicity in xdr.h on SGI 4.0.5
-#include <stdio.h>
-#endif
 #include <rpc/xdr.h>
 #include <errno.h>
 #ifdef _ALL_SOURCE
@@ -27,24 +23,6 @@
 #endif
 
 #include "xscheme.h"
-
-#ifdef sgi
-#define HAVE_STRERROR
-#endif
-
-#ifdef sun
-#ifdef __SVR4
-#define HAVE_STRERROR
-#else
-#define HAVE_ERRLIST
-extern char *sys_errlist[];
-#endif
-#endif
-
-// AIX
-#ifdef _ALL_SOURCE
-#define HAVE_STRERROR
-#endif
 
 #ifndef SEEK_CUR
 #define SEEK_CUR 1

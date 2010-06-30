@@ -238,15 +238,11 @@ void xlexecute(LVAL fun)
                 xlval = (atom(xlval) ? true : NIL);
                 break;
             case OP_EQ:
-                #ifdef OLDSYM
-                xlval = (xlval == pop()? true : NIL);
-                #else
                 tmp = pop();
                 if (symbolp(xlval) && symbolp(tmp))
                     xlval = (symboleq(xlval, tmp) ? true : NIL);
                 else
                     xlval = (xlval == tmp ? true : NIL);
-                #endif
                 break;
             case OP_NULL:
                 xlval = (xlval ? NIL : true);
@@ -369,13 +365,6 @@ void xlexecute(LVAL fun)
                         xlinterror("division by zero", xlval, s_arith_error);
                     xlval = cvfixnum(getfixnum(xlval) / fixtmp);
                 }
-                #ifdef OLD
-                else if (fixp(xlval))
-                    badargtype(tmp, "<integer>", "quotient");
-                else
-                    badargtype(xlval, "<integer>", "quotient");
-                break;
-                #else
                 else if (!generic_call(s_quotient, tmp, xlval))
                 {
                     push(tmp);
@@ -384,7 +373,6 @@ void xlexecute(LVAL fun)
                     xlval = xquo();
                 }
                 break;
-                #endif
             case OP_LSS:
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))

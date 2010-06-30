@@ -683,10 +683,9 @@ LVAL xdisplay()
 LVAL xsnewline()
 {
     static char *cfn_name = "snewline";
-    LVAL fptr;
 
     // get file pointer
-    fptr = xlgaostream();
+    LVAL fptr = xlgaostream();
     xllastarg();
 
     // terminate the print line and return the stream
@@ -698,10 +697,7 @@ LVAL xsnewline()
 // xnewline - terminate the current print line to stdout
 LVAL xnewline()
 {
-    static char *cfn_name = "newline";
-    LVAL fptr;
-
-    fptr = xstdout();
+    LVAL fptr = xstdout();
 
     // terminate the print line to stdout and return the stream
     xlterpri(fptr);
@@ -713,10 +709,9 @@ LVAL xnewline()
 LVAL xsflush()
 {
     static char *cfn_name = "sflush";
-    LVAL fptr;
 
     // get file pointer
-    fptr = xlgaostream();
+    LVAL fptr = xlgaostream();
     xllastarg();
 
     // flush and return the stream
@@ -728,11 +723,8 @@ LVAL xsflush()
 // xflush - flush stdout
 LVAL xflush()
 {
-    static char *cfn_name = "flush";
-    LVAL fptr;
-
     // get file pointer
-    fptr = xstdout();
+    LVAL fptr = xstdout();
 
     // flush and return the stream
     fflush(getfile(fptr));

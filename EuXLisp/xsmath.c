@@ -271,15 +271,7 @@ static LVAL binary(int fcn)
                 {
                     case 'I':
                         checkizero(ival, (FIXTYPE) 1);
-                        #ifdef OLDARITH
-                        if (ival != 1)
-                        {
-                            fval = 1.0 / (FLOTYPE) ival;
-                            mode = 'F';
-                        }
-                        #else
                         ival = 1 / ival;
-                        #endif
                         break;
                     case 'F':
                         checkfzero(fval, (FLOTYPE) 1.0);
@@ -343,19 +335,7 @@ static LVAL binary(int fcn)
                         break;
                     case '/':
                         checkizero(iarg, ival);
-                        #ifdef OLDARITH
-                        if ((ival % iarg) == 0)
-                            ival /= iarg;
-                        else
-                        {
-                            fval = (FLOTYPE) ival;
-                            farg = (FLOTYPE) iarg;
-                            fval /= farg;
-                            mode = 'F';
-                        }
-                        #else
                         ival /= iarg;
-                        #endif
                         break;
                     case 'Q':
                         checkizero(iarg, ival);

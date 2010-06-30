@@ -493,9 +493,7 @@ extern LVAL root_module;        // the root module
 extern LVAL reintern_module;    // module for reinterning symbols
 extern LVAL module_list;        // all the modules
 extern LVAL keyword_array;      // all the keywords
-#ifndef OLDSYM
 extern LVAL obarray;            // prototype symbols
-#endif
 
 #define xlenter(name)           xlenter_module(name,current_module)
 
