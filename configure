@@ -30,7 +30,7 @@ ARCH=`uname -m`
 ##  and GC installation directories
 ###-----------------------------------------------------------------------------
 
-EUL_VERSION=pre-0.96
+EUL_VERSION=pre-0.991
 
 EUL_DIR=`pwd`
 EUL_GC_DIR=/usr/local

@@ -54,7 +54,7 @@
     (file-name: . 107)
     (default-error-handler . 106)
     (cerror . 105)
-    ("EuLisp System 'youtoo ~a'
+    ("EuLisp System Youtoo - Version ~a
 " . 104)
     (message: . 100)
     (dummy . 98)

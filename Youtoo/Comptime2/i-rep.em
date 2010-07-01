@@ -39,9 +39,10 @@
   (defun initialize-interpreter ()
 
     (if *script* ()
-      (format "EuLisp System 'youtoo ~a'\n" *version*))
+      (format "EuLisp System Youtoo - Version ~a\n" *version*))
 
     (initialize-rl)
+    (newline)
 
     (setq *current-module-name* 'user)
     (dynamic-setq *actual-module* (get-module *current-module-name*))

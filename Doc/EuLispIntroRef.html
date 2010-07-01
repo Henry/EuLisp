@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 lang="en" xml:lang="en">
 <head>
-<title><b>Using EuXLisp</b> (Formally Euscheme)</title>
+<title><b>An Introduction to EuLisp, EuXLisp and Youtoo</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-30 23:04:28 BST"/>
+<meta name="generated" content="2010-07-01 22:08:47 BST"/>
 <meta name="author" content="of original Euscheme notes Russell Bradford"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -71,40 +71,42 @@ lang="en" xml:lang="en">
 <body>
 <div id="content">
 
-<h1 class="title"><b>Using EuXLisp</b> (Formally Euscheme)</h1>
+<h1 class="title"><b>An Introduction to EuLisp, EuXLisp and Youtoo</b></h1>
 
 
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#sec-1">1 EuXLisp index </a></li>
+<li><a href="#sec-1">1 EuLisp index </a></li>
 <li><a href="#sec-2">2 Introduction </a></li>
 <li><a href="#sec-3">3 Running EuXLisp </a></li>
-<li><a href="#sec-4">4 Constants </a></li>
-<li><a href="#sec-5">5 Lists and Vectors </a></li>
-<li><a href="#sec-6">6 Expressions </a></li>
-<li><a href="#sec-7">7 Conditionals </a></li>
-<li><a href="#sec-8">8 Assignment </a></li>
-<li><a href="#sec-9">9 Defining Functions </a></li>
-<li><a href="#sec-10">10 Arithmetic </a></li>
-<li><a href="#sec-11">11 Modules </a></li>
-<li><a href="#sec-12">12 Errors and the Debug Loop </a></li>
-<li><a href="#sec-13">13 Classes and Generic Functions </a></li>
-<li><a href="#sec-14">14 Threads </a></li>
-<li><a href="#sec-15">15 Input and Output </a></li>
-<li><a href="#sec-16">16 Macros </a></li>
-<li><a href="#sec-17">17 Miscellany </a></li>
-<li><a href="#sec-18">18 Example Modules </a></li>
-<li><a href="#sec-19">19 EuXLisp functions </a></li>
-<li><a href="#sec-20">20 Command Line Arguments </a></li>
-<li><a href="#sec-21">21 The original Euscheme notes. </a></li>
+<li><a href="#sec-4">4 Running Youtoo </a></li>
+<li><a href="#sec-5">5 Constants </a></li>
+<li><a href="#sec-6">6 Lists and Vectors </a></li>
+<li><a href="#sec-7">7 Expressions </a></li>
+<li><a href="#sec-8">8 Conditionals </a></li>
+<li><a href="#sec-9">9 Assignment </a></li>
+<li><a href="#sec-10">10 Defining Functions </a></li>
+<li><a href="#sec-11">11 Arithmetic </a></li>
+<li><a href="#sec-12">12 Modules </a></li>
+<li><a href="#sec-13">13 Errors and the Debug Loop </a></li>
+<li><a href="#sec-14">14 Classes and Generic Functions </a></li>
+<li><a href="#sec-15">15 Threads </a></li>
+<li><a href="#sec-16">16 Input and Output </a></li>
+<li><a href="#sec-17">17 Macros </a></li>
+<li><a href="#sec-18">18 Miscellany </a></li>
+<li><a href="#sec-19">19 Example Modules </a></li>
+<li><a href="#sec-20">20 EuLisp functions </a></li>
+<li><a href="#sec-21">21 EuXLisp functions </a></li>
+<li><a href="#sec-22">22 Command Line Arguments </a></li>
+<li><a href="#sec-23">23 Shell Scripts </a></li>
 </ul>
 </div>
 </div>
 
 <div id="outline-container-1" class="outline-2">
-<h2 id="sec-1"><span class="section-number-2">1</span> <a href="../index.html">EuXLisp index</a> </h2>
+<h2 id="sec-1"><span class="section-number-2">1</span> <a href="../index.html">EuLisp index</a> </h2>
 <div class="outline-text-2" id="text-1">
 
 </div>
@@ -115,20 +117,21 @@ lang="en" xml:lang="en">
 <h2 id="sec-2"><span class="section-number-2">2</span> Introduction </h2>
 <div class="outline-text-2" id="text-2">
 
-<p>These notes are based on the Euscheme HTML notes by Russell Bradford.  Most of
-the text remains more or less unchanged but reformatted in Org-mode and
-exported as HTML and PDF.  Also some changes have been made and continue to be
-made to keep this document consistent with the evolving EuLisp definition and
-EuXLisp implementation.
+<p>This introduction to EuLisp is based on the
+<a href="http://people.bath.ac.uk/masrjb/Sources/eunotes.html">Euscheme notes</a>
+written by Russell Bradford.  Much of the text remains more or less unchanged
+but reformatted in Org-mode and exported as HTML.  Also some changes
+have been made and continue to be made to keep this document consistent with
+the evolving EuLisp definition and EuXLisp and Youtoo implementations.
 </p>
 <p>
-EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small
-and compact Lisp, but nevertheless has many interesting features, such as
-modules, an object system, and multithreading.  EuLisp Level 1 has extra
-features, the most notable being a full metaobject system which is implemented
-in Youtoo not in EuXLisp.  These are a few notes on the use of EuLisp in
-general and EuXLisp in particular and concentrate on those things unique to
-EuLisp.
+EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small and
+compact Lisp, but nevertheless has many interesting features, such as modules,
+an object system, and multithreading.  EuLisp Level 1 has extra features, the
+most notable being a full metaobject system which are implemented in Youtoo.
+This introduction to EuLisp using EuXLisp and Youtoo concentrates on those
+things unique to EuLisp rather than covering basic Lisp concepts which are
+already covered well in many texts.
 </p>
 </div>
 
@@ -138,11 +141,52 @@ EuLisp.
 <h2 id="sec-3"><span class="section-number-2">3</span> Running EuXLisp </h2>
 <div class="outline-text-2" id="text-3">
 
-<p>Type <i>euxlisp</i> which will print the banner and prompt:
+<ul>
+<li id="sec-3.1"><a href="./euxlisp.html">Man page</a> <br/>
+<ul>
+<li>
+<a href="./euxlisp.html">EuXLisp man page (HTML)</a>
+</li>
+<li>
+<a href="./euxlisp.1">EuXLisp man page (ASCII)</a>
+</li>
+</ul>
+</li>
+<li id="sec-3.2">Setting environment variables <br/>
+EuXLisp need two paths: where to look for the compiled image, and where to
+look for modules to load:
+<ul>
+<li id="sec-3.2.1">Image <br/>
+First euxlisp checks the environment variable <code>EU_IMAGE_PATH</code> (a colon
+separated list of directory names), then a builtin path, set from
+<code>IMAGE_SEARCH_PATH</code> in the Makefile.
+</li>
+<li id="sec-3.2.2">Modules <br/>
+ditto for environment variable <code>EU_MODULE_PATH</code>, then builtin
+<code>MODULE_SEARCH_PATH</code> (e.g., you might want to provide a set of system
+supplied modules).
+</li>
+<li id="sec-3.2.3">Default settings <br/>
+The default built-in settings should work for a default build with the
+files in their default locations.
+</li>
+</ul>
+</li>
+<li id="sec-3.3">Running Interactively <br/>
+type
+<ul>
+<li>
+<code>Bin.${ARCH}/euxlisp</code>
+</li>
+</ul>
+
+<p>without options to start the EuXLisp interpreter which will print the banner
+and prompt:
 </p>
 
 
-<pre class="src src-eulisp"><span style="color: #000000;">EuXLisp</span> (<span style="color: #0000ff; font-weight: bold;">formally</span> <span style="color: #000000;">EuScheme</span>) - <span style="color: #000000;">Version</span> 0.36.2
+<pre class="src src-eulisp"><span style="color: #000000;">EuXLisp</span> (<span style="color: #0000ff; font-weight: bold;">formally</span> <span style="color: #000000;">EuScheme</span>) - <span style="color: #000000;">Version</span> 0.991
+<span style="color: #000000;">Reading</span> readline history from ${<span style="color: #000000;">HOME</span>}/.eulisp_history
 
 user&gt;
 </pre>
@@ -159,15 +203,20 @@ result printed.  To exit, use
 </pre>
 
 
-
 <p>
 and (usually) ^D will work, too.
-</p>
+</p></li>
+<li id="sec-3.4">Executing a module <br/>
+To execute the module <code>fact</code> in file <code>fact.em</code> run
 <ul>
-<li id="sec-3.1"><a href="./euxlisp.html">EuXLisp man page (HTML)</a> <br/>
+<li>
+<code>echo "(!&gt; fact)"  | ../../Bin.${ARCH}/euxlisp -q</code>
 </li>
-<li id="sec-3.2"><a href="./euxlisp.1">EuXLisp man page (ASCII)</a> <br/>
+</ul>
 
+<p>The <code>echo</code> pipes the load module <code>!&gt;</code> command to the interpreter.  In the
+future there will be a command-line option to execute a module directly.
+</p>
 </li>
 </ul>
 </div>
@@ -175,8 +224,135 @@ and (usually) ^D will work, too.
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Constants </h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> Running Youtoo </h2>
 <div class="outline-text-2" id="text-4">
+
+<ul>
+<li id="sec-4.1">Options <br/>
+to see the command-line options type
+
+
+
+<pre class="src src-eulisp"><span style="color: #000000;">Bin.x86_64/youtoo</span> -help
+<span style="color: #000000;">Usage:</span> youtoo [<span style="color: #0000ff;">&lt;options&gt;</span>] &lt;source-file(<span style="color: #0000ff; font-weight: bold;">s</span>)&gt; [<span style="color: #0000ff;">&lt;options&gt;</span>]
+-help                 --  show usage
+-version              --  show current release
+-params               --  show current parameter setting
+-load_path <span style="color: #0000ff;">&lt;dir&gt;</span>      --  add <span style="color: #0000ff;">&lt;dir&gt;</span> to load path
+-c                    --  create <span style="color: #000000;">C</span> linkable module file only
+-ar                   --  create <span style="color: #000000;">C</span> linkable library file
+-l <span style="color: #0000ff;">&lt;lib&gt;</span>              --  specify <span style="color: #000000;">C</span> linkable library
+-L <span style="color: #0000ff;">&lt;dir&gt;</span>              --  extent <span style="color: #000000;">C</span> linkable library load path
+-fff <span style="color: #0000ff;">&lt;file&gt;</span>           --  specify <span style="color: #000000;">C</span> foreign function file
+-ffl <span style="color: #0000ff;">&lt;lib&gt;</span>            --  specify <span style="color: #000000;">C</span> foreign function library
+-o <span style="color: #0000ff;">&lt;file&gt;</span>             --  destination file
+-od <span style="color: #0000ff;">&lt;dir&gt;</span>             --  destination directory for object files
+--script <span style="color: #0000ff;">&lt;file&gt;</span>       --  script mode
+-silent               --  silent mode
+-verbose              --  verbose mode
+-no_warnings          --  no warning messages
+-no_errors            --  no <span style="font-weight: bold;">error messages</span>
+-no_else              --  omit warning for if without else
+-redefine             --  redefine imported bindings
+-no_inline            --  ignore inline declarations
+-stop_after <span style="color: #0000ff;">&lt;phase&gt;</span>   --  stop after compilation phase (<span style="color: #0000ff; font-weight: bold;">e.g.</span> read)
+-recompile            --  recompile imported modules
+-no_recompile         --  no automatic recompilation of imports
+-no_gc                --  garbage collection library not linked
+-cc                   --  used <span style="color: #000000;">C</span> compiler
+-ld                   --  used <span style="color: #000000;">C</span> linker
+-ar_cmd               --  used <span style="color: #000000;">C</span> ar command
+-ranlib_cmd           --  used <span style="color: #000000;">C</span> ranlib command
+-cflags               --  additional <span style="color: #000000;">C</span> flag
+-static               --  no shared libraries used
+-g                    --  <span style="color: #000000;">C</span> debug info
+-i                    --  force interpretation mode
+-no_ct_handlers       --  no compile-time <span style="font-weight: bold;">error handling</span>
+</pre>
+
+
+</li>
+<li id="sec-4.2">Running Interactively <br/>
+type
+<ul>
+<li>
+<code>Bin.${ARCH}/youtoo</code>
+</li>
+</ul>
+
+<p>which will print the banner and prompt:
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #000000;">EuLisp</span> <span style="color: #000000;">System</span> <span style="color: #000000;">Youtoo</span> - <span style="color: #000000;">Version</span> 0.991'
+<span style="color: #000000;">Reading</span> readline history from ${<span style="color: #000000;">HOME</span>}/.eulisp_history
+
+user&gt;
+</pre>
+
+
+<p>
+where the final line is the prompt.  Youtoo uses the usual read-eval-print
+cycle of interactive Lisps: type something, it will be evaluated, and the
+result printed.  For help type
+</p>
+
+
+<pre class="src src-eulisp">user&gt; help:
+load: <span style="color: #0000ff;">&lt;file-name&gt;</span>          evaluate file expressions
+?                          previous value
+lexical-bindings:          show lexical environment
+verbose:                   run verbose
+silent:                    run silent
+trace: <span style="color: #0000ff;">&lt;function-name&gt;</span>     trace function invocation
+untrace: <span style="color: #0000ff;">&lt;functon-name&gt;</span>    stop tracing function invocation
+backtrace:                 show backtrace
+values:                    show stack values
+continue:                  continue computation
+reset:                     resume from all errors
+resume:                    resume from previous <span style="font-weight: bold;">error</span>
+[<span style="color: #000000;">Ctrl-d</span>]                   exit interpreter or resume from previous <span style="font-weight: bold;">error</span>
+[<span style="color: #000000;">Ctrl-c</span>]                   interrupt computation
+[<span style="color: #000000;">Ctrl-z</span>]                   suspend interpreter
+exit:                      exit interpreter
+-&gt; #&lt;file-stream: stdout&gt;
+user&gt;
+</pre>
+
+
+<p>
+to exit type
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #0000ff; font-weight: bold;">(exit</span>)
+</pre>
+
+
+</li>
+<li id="sec-4.3">Compiling <br/>
+In directory <code>Examples/Misc</code> run
+<ul>
+<li>
+<code>Bin.${ARCH}/youtoo fact -l level1</code>
+</li>
+</ul>
+
+<p>to compile module fact into a stand-alone executable. With shared libraries
+the executable should be less the 40K.
+</p></li>
+<li id="sec-4.4"><a href="../Youtoo/README.html">See also</a> <br/>
+<a href="../Youtoo/README.html">Youtoo README</a>
+
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Constants </h2>
+<div class="outline-text-2" id="text-5">
 
 <p>There are the usual self-evaluating bits and pieces:
 </p><ul>
@@ -199,12 +375,12 @@ length 3, containing an integer, a symbol, and a list.
 
 </div>
 
-<div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Lists and Vectors </h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Lists and Vectors </h2>
+<div class="outline-text-2" id="text-6">
 
-<p>Lists are created with the usual <a href="EuLisp-0.991/html/eulispcl17.html#dx21-624002"><code>cons</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-641002"><code>list</code></a> and quoted forms '(1 2 3).
-Use <a href="EuLisp-0.991/html/eulispcl17.html#dx21-626002"><code>car</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-628002"><code>cdr</code></a> to access the elements.
+<p>Lists are created with the usual <a href="EuLisp-0.991/html/eulispcl17.html#dx21-630002"><code>cons</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-647002"><code>list</code></a> and quoted forms '(1 2 3).
+Use <a href="EuLisp-0.991/html/eulispcl17.html#dx21-632002"><code>car</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-634002"><code>cdr</code></a> to access the elements.
 </p>
 <p>
 A vector is created by the function <code>make-vector</code> as in
@@ -217,7 +393,7 @@ A vector is created by the function <code>make-vector</code> as in
 
 <p>
 which creates a vector of length 4, indexed from 0 to 3, all elements
-initialised to be <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609010"><code>()</code></a>s.  In fact, make-vector can take a second argument
+initialised to be <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615010"><code>()</code></a>s.  In fact, make-vector can take a second argument
 </p>
 
 
@@ -235,15 +411,15 @@ setter function.
 </p>
 <p>
 Take care with the creation of vectors: <code>(make-vector 3 #(0 0 0))</code> will create
-a vector of three slots, all initialised to the same <a href="EuLisp-0.991/html/eulispcl17.html#dx21-431004"><code>eq</code></a> value.
+a vector of three slots, all initialised to the same <a href="EuLisp-0.991/html/eulispcl17.html#dx21-437004"><code>eq</code></a> value.
 </p>
 </div>
 
 </div>
 
-<div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Expressions </h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Expressions </h2>
+<div class="outline-text-2" id="text-7">
 
 <p>As is usual, anything that is not a constant is an expression to be evaluated,
 and those things marked by a quote are deemed to be constant.  Thus
@@ -350,13 +526,13 @@ Their canonical form is <code>|1 23|</code>.
 
 </div>
 
-<div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Conditionals </h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Conditionals </h2>
+<div class="outline-text-2" id="text-8">
 
 <p>EuLisp has the usual <code>(if boolexpr trueexpr falseexpr)</code> (always with both
 trueexpr and falseexpr), and the <a href="EuLisp-0.991/html/eulispcl16.html#dx20-262002"><code>cond</code></a> form.  The single false value in
-EuLisp is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609010"><code>()</code></a>: anything else is deemed to be true.  <a href="EuLisp-0.991/html/eulispcl16.html#dx20-210002"><code>t</code></a> is bound to the
+EuLisp is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615010"><code>()</code></a>: anything else is deemed to be true.  <a href="EuLisp-0.991/html/eulispcl16.html#dx20-210002"><code>t</code></a> is bound to the
 symbol <a href="EuLisp-0.991/html/eulispcl16.html#dx20-210002"><code>t</code></a>, providing a convenient canonical true value.  Additional
 conditional forms include
 </p>
@@ -390,9 +566,9 @@ where the exprs are evaluated when the condition is false.
 
 </div>
 
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Assignment </h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Assignment </h2>
+<div class="outline-text-2" id="text-9">
 
 <p><a href="EuLisp-0.991/html/eulispcl16.html#dx20-245003"><code>setq</code></a> as usual:
 </p>
@@ -421,9 +597,9 @@ be used at the top level (i.e., never inside a function definition or a
 
 </div>
 
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> Defining Functions </h2>
-<div class="outline-text-2" id="text-9">
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> Defining Functions </h2>
+<div class="outline-text-2" id="text-10">
 
 <p>Here we use defun.
 </p>
@@ -470,12 +646,12 @@ as usual, the rest are made into a list which is bound to c.  Thus <code>(bar 1 
 
 </div>
 
-<div id="outline-container-10" class="outline-2">
-<h2 id="sec-10"><span class="section-number-2">10</span> Arithmetic </h2>
-<div class="outline-text-2" id="text-10">
+<div id="outline-container-11" class="outline-2">
+<h2 id="sec-11"><span class="section-number-2">11</span> Arithmetic </h2>
+<div class="outline-text-2" id="text-11">
 
-<p>All the usual stuff here.  Functions <a href="EuLisp-0.991/html/eulispcl17.html#dx21-655004"><code>+</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-657002"><code>-</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-659002"><code>*</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-661002"><code>/</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-671002"><code>abs</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-521002"><code>sin</code></a>,
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-531002"><code>exp</code></a> and so on.  Use <code>(pow a b)</code> to raise <code>a</code> to power <code>b</code>.  Additionally,
+<p>All the usual stuff here.  Functions <a href="EuLisp-0.991/html/eulispcl17.html#dx21-661004"><code>+</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-663002"><code>-</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-665002"><code>*</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-667002"><code>/</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-677002"><code>abs</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-527002"><code>sin</code></a>,
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-537002"><code>exp</code></a> and so on.  Use <code>(pow a b)</code> to raise <code>a</code> to power <code>b</code>.  Additionally,
 the basic arithmetic ops have variable arity:
 </p>
 
@@ -497,9 +673,9 @@ and so on.
 
 </div>
 
-<div id="outline-container-11" class="outline-2">
-<h2 id="sec-11"><span class="section-number-2">11</span> Modules </h2>
-<div class="outline-text-2" id="text-11">
+<div id="outline-container-12" class="outline-2">
+<h2 id="sec-12"><span class="section-number-2">12</span> Modules </h2>
+<div class="outline-text-2" id="text-12">
 
 <p>Now for something a little different.  The basic unit of a program in EuLisp
 is the module.  Modules provide a way of fixing the global namespace pollution
@@ -526,7 +702,7 @@ Here is a simple module:
 
 <p>
 The module one imports from the system module named <code>level0</code>.  This module
-contains all the useful stuff like <a href="EuLisp-0.991/html/eulispcl17.html#dx21-624002"><code>cons</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-626002"><code>car</code></a>, <a href="EuLisp-0.991/html/eulispcl16.html#dx20-229002"><code>defun</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-655004"><code>+</code></a> and so on.  In
+contains all the useful stuff like <a href="EuLisp-0.991/html/eulispcl17.html#dx21-630002"><code>cons</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-632002"><code>car</code></a>, <a href="EuLisp-0.991/html/eulispcl16.html#dx20-229002"><code>defun</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-661004"><code>+</code></a> and so on.  In
 fact, it's generally a good idea to import the <code>level0</code> module, otherwise you
 can't actually do anything.
 </p>
@@ -554,10 +730,10 @@ from one.  If two uses a name <code>bar</code>, it is its own <code>bar</code>, 
 do with the <code>bar</code> in one.
 </p>
 <ul>
-<li id="sec-11.1">Modules in EuXLisp <br/>
-EuXLisp requires each module to be in a file of its own: thus one should be
-in a file named one.em (for EuLisp module), and two in <i>two.em</i>.  To enter a
-module, use
+<li id="sec-12.1">Modules in EuLisp <br/>
+EuXLisp and Youtoo require each module to be in a file of its own: thus one
+should be in a file named one.em (for EuLisp module), and two in <i>two.em</i>.
+To enter a module, use
 
 
 
@@ -614,9 +790,9 @@ xscheme).
 
 </div>
 
-<div id="outline-container-12" class="outline-2">
-<h2 id="sec-12"><span class="section-number-2">12</span> Errors and the Debug Loop </h2>
-<div class="outline-text-2" id="text-12">
+<div id="outline-container-13" class="outline-2">
+<h2 id="sec-13"><span class="section-number-2">13</span> Errors and the Debug Loop </h2>
+<div class="outline-text-2" id="text-13">
 
 <p>When you make an error, EuLisp will call an error handler.  The full use of
 error handlers is too tricky for an introductory set of notes, so we shall
@@ -707,20 +883,20 @@ point of error.  Debug loops can be nested.
 
 </div>
 
-<div id="outline-container-13" class="outline-2">
-<h2 id="sec-13"><span class="section-number-2">13</span> Classes and Generic Functions </h2>
-<div class="outline-text-2" id="text-13">
+<div id="outline-container-14" class="outline-2">
+<h2 id="sec-14"><span class="section-number-2">14</span> Classes and Generic Functions </h2>
+<div class="outline-text-2" id="text-14">
 
 <p>EuLisp has a full object system.  At Level 0, it is a simple, non-reflective
 system, comparable to C++'s class system.  Every object in EuLisp has a class,
 which is itself a first-class object: this means that classes are supported at
 the same level as any other object in the system, and can be created, passed
 to functions, returned from functions, and so on.  For example, the integer
-<code>1</code> has class <a href="EuLisp-0.991/html/eulispcl17.html#dx21-583035"><code>&lt;integer&gt;</code></a> (or rather, has a class with name <code>&lt;integer&gt;</code>).
+<code>1</code> has class <a href="EuLisp-0.991/html/eulispcl17.html#dx21-589035"><code>&lt;integer&gt;</code></a> (or rather, has a class with name <code>&lt;integer&gt;</code>).
 </p>
 <p>
-In fact, EuXLisp has (class-of 1) to be <a href="EuLisp-0.991/html/eulispcl17.html#dx21-554035"><code>&lt;fpi&gt;</code></a> (for fixed point integer),
-which is a subclass of <a href="EuLisp-0.991/html/eulispcl17.html#dx21-583035"><code>&lt;integer&gt;</code></a>.
+In fact, EuXLisp has (class-of 1) to be <a href="EuLisp-0.991/html/eulispcl17.html#dx21-560035"><code>&lt;fpi&gt;</code></a> (for fixed point integer),
+which is a subclass of <a href="EuLisp-0.991/html/eulispcl17.html#dx21-589035"><code>&lt;integer&gt;</code></a>.
 </p>
 <p>
 Classes are fully-fledged objects, so they have a class, too
@@ -752,8 +928,8 @@ and can be omitted if not necessary: though some classes have slots with
 required keywords.  This means that instances of such classes must have
 certain information passed to make in order to succeed.  Some classes are
 abstract, and you cannot make instances of them.  They are there purely for
-other classes to inherit from.  The class <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609006"><code>&lt;list&gt;</code></a> is abstract, while its
-subclass <a href="EuLisp-0.991/html/eulispcl17.html#dx21-620002"><code>&lt;cons&gt;</code></a> is concrete.
+other classes to inherit from.  The class <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615006"><code>&lt;list&gt;</code></a> is abstract, while its
+subclass <a href="EuLisp-0.991/html/eulispcl17.html#dx21-626002"><code>&lt;cons&gt;</code></a> is concrete.
 </p>
 <p>
 It is simple to create new classes by the use of defclass.
@@ -778,7 +954,7 @@ There are many parts to explain.
 <p>
 This form defines a new class named <code>&lt;rat&gt;</code>.  Classes in EuLisp are
 conventionally noted by the use of angle brackets <code>&lt;&gt;</code>, but they are just
-normal names.  The <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609010"><code>()</code></a> next is the list of classes for <code>&lt;rat&gt;</code> to inherit
+normal names.  The <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615010"><code>()</code></a> next is the list of classes for <code>&lt;rat&gt;</code> to inherit
 from.  In EuLisp Level 0, there is only single inheritance, so this should be
 a list of at most one class.  Any empty list indicates some suitable default
 super-class.
@@ -859,10 +1035,10 @@ Other useful functions include class-superclasses, class-subclasses and
 class-slots.
 </p>
 <ul>
-<li id="sec-13.1">Generic Functions <br/>
+<li id="sec-14.1">Generic Functions <br/>
 Generic functions are (again) first-class objects in EuLisp, constructed by
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-942002"><code>defgeneric</code></a>.  Methods are added to them by defmethod (unlike some other
-systems, a generic function must be created by defgeneric before <a href="EuLisp-0.991/html/eulispcl18.html#dx23-951002"><code>defmethod</code></a>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-948002"><code>defgeneric</code></a>.  Methods are added to them by defmethod (unlike some other
+systems, a generic function must be created by defgeneric before <a href="EuLisp-0.991/html/eulispcl18.html#dx23-957002"><code>defmethod</code></a>
 will work.)
 
 
@@ -911,9 +1087,9 @@ in the body of the current method.
 
 </div>
 
-<div id="outline-container-14" class="outline-2">
-<h2 id="sec-14"><span class="section-number-2">14</span> Threads </h2>
-<div class="outline-text-2" id="text-14">
+<div id="outline-container-15" class="outline-2">
+<h2 id="sec-15"><span class="section-number-2">15</span> Threads </h2>
+<div class="outline-text-2" id="text-15">
 
 <p>EuLisp supports multiple threaded programming by supplying some basic thread
 primitives.
@@ -983,7 +1159,7 @@ can return a value simply by returning from its initial function (<code>fn</code
 above).
 </p>
 <ul>
-<li id="sec-14.1">Semaphores <br/>
+<li id="sec-15.1">Semaphores <br/>
 EuLisp provides simple binary semaphores, named locks, with functions
 <code>make-lock</code> to make one, lock to gain a semaphore, and unlock to release.
 
@@ -997,20 +1173,20 @@ run) until some other thread releases the lock.
 
 </div>
 
-<div id="outline-container-15" class="outline-2">
-<h2 id="sec-15"><span class="section-number-2">15</span> Input and Output </h2>
-<div class="outline-text-2" id="text-15">
+<div id="outline-container-16" class="outline-2">
+<h2 id="sec-16"><span class="section-number-2">16</span> Input and Output </h2>
+<div class="outline-text-2" id="text-16">
 
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-774002"><code>read</code></a> to read a Lisp expression.
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-780002"><code>read</code></a> to read a Lisp expression.
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-801002"><code>write</code></a> write to standard output in a way that can be re-read if possible.
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-807002"><code>write</code></a> write to standard output in a way that can be re-read if possible.
 Thus, for example, strings are quoted.
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-817002"><code>prin</code></a> print to standard output in a human-friendly manner.  Strings and
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-823002"><code>prin</code></a> print to standard output in a human-friendly manner.  Strings and
 such are not quoted.  Compare
 
 
@@ -1022,7 +1198,7 @@ such are not quoted.  Compare
 
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-825002"><code>print</code></a> as <a href="EuLisp-0.991/html/eulispcl17.html#dx21-817002"><code>prin</code></a>, with a newline.
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-831002"><code>print</code></a> as <a href="EuLisp-0.991/html/eulispcl17.html#dx21-823002"><code>prin</code></a>, with a newline.
 </li>
 <li>
 Print and write functions are n-ary:
@@ -1036,7 +1212,7 @@ Print and write functions are n-ary:
 
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-832002"><code>newline</code></a> output a newline.
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-838002"><code>newline</code></a> output a newline.
 
 </li>
 </ul>
@@ -1049,7 +1225,7 @@ For stream manipulation:
 </p><ul>
 <li>
 open-input-file takes a string, and opens and returns a corresponding
-stream for input.  Returns <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609010"><code>()</code></a> if not such file exists.
+stream for input.  Returns <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615010"><code>()</code></a> if not such file exists.
 </li>
 <li>
 open-output-file creates a file if it didn't already exist.
@@ -1065,8 +1241,8 @@ a file opened for update.
 close-stream closes an open stream.
 
 </li>
-<li id="sec-15.1">Format <br/>
-A more complicated printing function is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-575002"><code>sformat</code></a>, which is somewhat akin to
+<li id="sec-16.1">Format <br/>
+A more complicated printing function is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-581002"><code>sformat</code></a>, which is somewhat akin to
 C's <code>printf</code>.
 
 
@@ -1076,7 +1252,7 @@ C's <code>printf</code>.
 
 
 <p>
-The variants <a href="EuLisp-0.991/html/eulispcl17.html#dx21-577002"><code>format</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-579002"><code>fmt</code></a> do not take a stream argument and the former
+The variants <a href="EuLisp-0.991/html/eulispcl17.html#dx21-583002"><code>format</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-585002"><code>fmt</code></a> do not take a stream argument and the former
 prints to standard output and the latter returns the formatted output as a
 string.
 </p>
@@ -1085,10 +1261,10 @@ The format string is copied to the output, except that <code>~</code> marks an e
 (like C's <code>%</code>):
 </p><ul>
 <li>
-<code>~a</code> output the next arg using <a href="EuLisp-0.991/html/eulispcl17.html#dx21-817002"><code>prin</code></a>
+<code>~a</code> output the next arg using <a href="EuLisp-0.991/html/eulispcl17.html#dx21-823002"><code>prin</code></a>
 </li>
 <li>
-<code>~s</code> output the next arg using <a href="EuLisp-0.991/html/eulispcl17.html#dx21-801002"><code>write</code></a>
+<code>~s</code> output the next arg using <a href="EuLisp-0.991/html/eulispcl17.html#dx21-807002"><code>write</code></a>
 </li>
 <li>
 <code>~%</code> output a newline
@@ -1115,8 +1291,8 @@ The format string is copied to the output, except that <code>~</code> marks an e
 and so on.
 </p>
 <p>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-579002"><code>fmt</code></a> can be used with the n-ary print and write functions to write complex
-formatted output statements in a more readable form that using <a href="EuLisp-0.991/html/eulispcl17.html#dx21-577002"><code>format</code></a>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-585002"><code>fmt</code></a> can be used with the n-ary print and write functions to write complex
+formatted output statements in a more readable form that using <a href="EuLisp-0.991/html/eulispcl17.html#dx21-583002"><code>format</code></a>
 \e.g.\
 </p>
 
@@ -1132,9 +1308,9 @@ formatted output statements in a more readable form that using <a href="EuLisp-0
 
 </div>
 
-<div id="outline-container-16" class="outline-2">
-<h2 id="sec-16"><span class="section-number-2">16</span> Macros </h2>
-<div class="outline-text-2" id="text-16">
+<div id="outline-container-17" class="outline-2">
+<h2 id="sec-17"><span class="section-number-2">17</span> Macros </h2>
+<div class="outline-text-2" id="text-17">
 
 <p>EuLisp employs the usual backquoted template style of macros.
 </p>
@@ -1207,7 +1383,7 @@ from <code>two</code>?
 </p>
 <p>
 The answer is "the right <code>bar</code>", that is that <code>bar</code> in the module of macro
-definition, not the <code>bar</code> in the module of macro use.  EuXLisp takes care of
+definition, not the <code>bar</code> in the module of macro use.  EuLisp takes care of
 all of this transparently for you: essentially every symbol remembers which
 module it was defined in, and always refers back to that module for its value.
 </p>
@@ -1240,18 +1416,18 @@ definition.  Thus, a reference to break in the body will refer to the binding
 in the <a href="EuLisp-0.991/html/eulispcl16.html#dx20-272002"><code>let/cc</code></a>.
 </p>
 <p>
-Notice that <code>(eq 'break '{break}) -&gt; t</code>.  As symbols they are <a href="EuLisp-0.991/html/eulispcl17.html#dx21-431004"><code>eq</code></a>, but as
-identifiers they are q
+Notice that <code>(eq 'break '{break}) -&gt; t</code>.  As symbols they are <a href="EuLisp-0.991/html/eulispcl17.html#dx21-437004"><code>eq</code></a>, but as
+identifiers they are quite different.
 </p></div>
 
 </div>
 
-<div id="outline-container-17" class="outline-2">
-<h2 id="sec-17"><span class="section-number-2">17</span> Miscellany </h2>
-<div class="outline-text-2" id="text-17">
+<div id="outline-container-18" class="outline-2">
+<h2 id="sec-18"><span class="section-number-2">18</span> Miscellany </h2>
+<div class="outline-text-2" id="text-18">
 
 <ul>
-<li id="sec-17.1">Keywords <br/>
+<li id="sec-18.1">Keywords <br/>
 There are keywords (unbindable, unassignable, self-evaluating symbols),
 <i>e.g.</i>,
 
@@ -1267,20 +1443,20 @@ There are keywords (unbindable, unassignable, self-evaluating symbols),
 
 
 </li>
-<li id="sec-17.2">Comparisons <br/>
+<li id="sec-18.2">Comparisons <br/>
 EuLisp has the usual tests for equality:
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-431004"><code>eq</code></a> for identity
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-437004"><code>eq</code></a> for identity
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-435002"><code>eql</code></a> for identity integers and characters
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-441002"><code>eql</code></a> for identity integers and characters
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-438002"><code>binary=</code></a> generic function with methods for most types
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-444002"><code>binary=</code></a> generic function with methods for most types
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-446002">===</a> n-ary equality which calls <a href="EuLisp-0.991/html/eulispcl17.html#dx21-438002"><code>binary=</code></a> for each pair
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002">===</a> n-ary equality which calls <a href="EuLisp-0.991/html/eulispcl17.html#dx21-444002"><code>binary=</code></a> for each pair
 
 </li>
 </ul>
@@ -1295,7 +1471,7 @@ EuLisp has the usual tests for equality:
 
 
 <p>
-There is also the usual <a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-454002"><code>&lt;=</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002"><code>&gt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&gt;=</code></a>, which are n-ary:
+There is also the usual <a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-460002"><code>&lt;=</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>&gt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-462002"><code>&gt;=</code></a>, which are n-ary:
 </p>
 
 
@@ -1305,13 +1481,13 @@ There is also the usual <a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002">
 
 <p>
 returns <a href="EuLisp-0.991/html/eulispcl16.html#dx20-210002"><code>t</code></a> when <code>a</code>, <code>b</code>, <code>c</code>, etc., form a strictly increasing sequence.
-Similarly <a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>= for a non-decreasing sequence, and so on.
+Similarly <a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>= for a non-decreasing sequence, and so on.
 </p>
 </li>
-<li id="sec-17.3">Generic Arithmetic <br/>
-The arithmetic operators <a href="EuLisp-0.991/html/eulispcl17.html#dx21-655004"><code>+</code></a> and so on are all n-ary, i.e., take a variable
+<li id="sec-18.3">Generic Arithmetic <br/>
+The arithmetic operators <a href="EuLisp-0.991/html/eulispcl17.html#dx21-661004"><code>+</code></a> and so on are all n-ary, i.e., take a variable
 number of arguments.  Each operator is defined in terms of a binary generic
-function: <a href="EuLisp-0.991/html/eulispcl17.html#dx21-685002"><code>binary+</code></a> for <a href="EuLisp-0.991/html/eulispcl17.html#dx21-655004"><code>+</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-689002"><code>binary*</code></a> for <a href="EuLisp-0.991/html/eulispcl17.html#dx21-659002"><code>*</code></a>, etc.  The n-ary form is just
+function: <a href="EuLisp-0.991/html/eulispcl17.html#dx21-691002"><code>binary+</code></a> for <a href="EuLisp-0.991/html/eulispcl17.html#dx21-661004"><code>+</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-695002"><code>binary*</code></a> for <a href="EuLisp-0.991/html/eulispcl17.html#dx21-665002"><code>*</code></a>, etc.  The n-ary form is just
 a repeated application of the binary form
 
 
@@ -1331,18 +1507,18 @@ Methods can be added to the binary operators
 
 
 <p>
-and then you can use <a href="EuLisp-0.991/html/eulispcl17.html#dx21-655004"><code>+</code></a> to add symbols: <code>(+ 'a 'b 'c)</code>.
+and then you can use <a href="EuLisp-0.991/html/eulispcl17.html#dx21-661004"><code>+</code></a> to add symbols: <code>(+ 'a 'b 'c)</code>.
 </p>
 <p>
 There are also generic functions <code>unary-</code> and <code>unary/</code> for the unary <code>(- x)</code>
 and <code>(/ x)</code> (reciprocal).
 </p>
 <p>
-Similarly, the comparators <a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002"><code>&gt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-454002"><code>&lt;=</code></a> etc., are all defined in terms of
-the two generic functions <a href="EuLisp-0.991/html/eulispcl17.html#dx21-443002"><code>binary&lt;</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-438002"><code>binary=</code></a>.
+Similarly, the comparators <a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>&gt;</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-460002"><code>&lt;=</code></a> etc., are all defined in terms of
+the two generic functions <a href="EuLisp-0.991/html/eulispcl17.html#dx21-449002"><code>binary&lt;</code></a> and <a href="EuLisp-0.991/html/eulispcl17.html#dx21-444002"><code>binary=</code></a>.
 </p>
 </li>
-<li id="sec-17.4">Local Functions <br/>
+<li id="sec-18.4">Local Functions <br/>
 Just like <a href="EuLisp-0.991/html/eulispcl16.html#dx20-289003"><code>let</code></a> introduces local variables, the <a href="EuLisp-0.991/html/eulispcl16.html#dx20-286002"><code>labels</code></a> form can introduce
 local functions.
 
@@ -1383,12 +1559,12 @@ definitions can refer to local variables:
 
 
 </li>
-<li id="sec-17.5">Mapping and Collections <br/>
+<li id="sec-18.5">Mapping and Collections <br/>
 There are several functions supplied to iterate along collections.
 Collections include <code>lists</code>, <code>vectors</code>, <code>strings</code>, and <code>tables</code>.
 
 <p>
-The generic function <a href="EuLisp-0.991/html/eulispcl17.html#dx21-390002"><code>map</code></a> takes a function and a collection
+The generic function <a href="EuLisp-0.991/html/eulispcl17.html#dx21-395002"><code>map</code></a> takes a function and a collection
 </p>
 
 
@@ -1467,9 +1643,10 @@ The function concatenate can be used to join collections:
 
 
 </li>
-<li id="sec-17.6">Loops <br/>
-EuLisp doesn't really need loops, as everything can be written easily in
-terms of tail recursive functions.  However, EuXLisp sneaks in a while loop:
+<li id="sec-18.6">Loops <br/>
+EuLisp doesn't really need loops, as everything can be written in terms of
+tail recursive functions.  However sometimes a simple loop form is more
+convenient and readable and for this a <code>while</code> loop is provided:
 
 
 
@@ -1485,9 +1662,10 @@ terms of tail recursive functions.  However, EuXLisp sneaks in a while loop:
 which loops while the bool returns <code>true</code>.
 </p>
 </li>
-<li id="sec-17.7">Tables <br/>
-EuLisp uses tables for a general association mechanism.  EuXLisp implements
-tables as hash tables, but in general they could be implemented differently.
+<li id="sec-18.7">Tables <br/>
+EuLisp uses tables for a general association mechanism.  EuXLisp and Youtoo
+implement tables as hash tables, but in general they could be implemented
+differently.
 <ul>
 <li>
 <code>make-table</code> returns a table.
@@ -1510,12 +1688,12 @@ tables as hash tables, but in general they could be implemented differently.
 </li>
 </ul>
 
-<p>When looking for a match to a key in a table, the system defaults to <a href="EuLisp-0.991/html/eulispcl17.html#dx21-435002"><code>eql</code></a>.
+<p>When looking for a match to a key in a table, the system defaults to <a href="EuLisp-0.991/html/eulispcl17.html#dx21-441002"><code>eql</code></a>.
 You can change this by using <code>(make-table comparator)</code>, where <code>comparator</code>
-is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-431004"><code>eq</code></a> or <a href="EuLisp-0.991/html/eulispcl17.html#dx21-435002"><code>eql</code></a> or <a href="EuLisp-0.991/html/eulispcl17.html#dx21-438002"><code>binary=</code></a> or <a href="EuLisp-0.991/html/eulispcl17.html#dx21-446002">===</a>.
+is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-437004"><code>eq</code></a> or <a href="EuLisp-0.991/html/eulispcl17.html#dx21-441002"><code>eql</code></a> or <a href="EuLisp-0.991/html/eulispcl17.html#dx21-444002"><code>binary=</code></a> or <a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002">===</a>.
 </p>
 <p>
-If a value is not found for a particular key in the table <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609010"><code>()</code></a> is returned.
+If a value is not found for a particular key in the table <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615010"><code>()</code></a> is returned.
 This can be changed by <code>(make-table comparator fill-value)</code>.  Now
 <code>fill-value</code> will be returned on failure.
 </p>
@@ -1523,7 +1701,7 @@ This can be changed by <code>(make-table comparator fill-value)</code>.  Now
 The mapping functions above work on tables, too.
 </p>
 </li>
-<li id="sec-17.8">Non-local exits <br/>
+<li id="sec-18.8">Non-local exits <br/>
 EuLisp supports a limited form of continuation capture via <a href="EuLisp-0.991/html/eulispcl16.html#dx20-272002"><code>let/cc</code></a>.  This
 form captures its continuation, and allows its use as a non-local exit.
 
@@ -1547,7 +1725,7 @@ longer usable.
 </p>
 <p>
 The continuation function can take a single optional argument which is a
-value to pass to the continuation: the default is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609010"><code>()</code></a>.
+value to pass to the continuation: the default is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615010"><code>()</code></a>.
 </p>
 <p>
 The forms <a href="EuLisp-0.991/html/eulispcl16.html#dx20-278002"><code>block</code></a> and <a href="EuLisp-0.991/html/eulispcl16.html#dx20-282002"><code>return-from</code></a> are simply =let/c=c and a call to a
@@ -1587,9 +1765,9 @@ non-local exit from the <code>protected-form</code> to a continuation outside th
 control passes to the continuation.
 </p>
 </li>
-<li id="sec-17.9">Setters <br/>
-Structures, like <code>lists</code>, <code>vectors</code> and <a href="EuLisp-0.991/html/eulispcl18.html#dx23-935001"><code>class</code></a> instances have elements that
-can be accessed.  The elements of a <a href="EuLisp-0.991/html/eulispcl17.html#dx21-911005"><code>vector</code></a> can be read by <code>vector-ref</code>.
+<li id="sec-18.9">Setters <br/>
+Structures, like <code>lists</code>, <code>vectors</code> and <a href="EuLisp-0.991/html/eulispcl18.html#dx23-941001"><code>class</code></a> instances have elements that
+can be accessed.  The elements of a <a href="EuLisp-0.991/html/eulispcl17.html#dx21-917005"><code>vector</code></a> can be read by <code>vector-ref</code>.
 To write to an element use the function <code>(setter vector-ref)</code>,
 
 
@@ -1599,7 +1777,7 @@ To write to an element use the function <code>(setter vector-ref)</code>,
 
 
 <p>
-Similarly, the accessor <a href="EuLisp-0.991/html/eulispcl17.html#dx21-626002"><code>car</code></a> has an updater <code>(setter car)</code> (often called
+Similarly, the accessor <a href="EuLisp-0.991/html/eulispcl17.html#dx21-632002"><code>car</code></a> has an updater <code>(setter car)</code> (often called
 <code>rplaca</code> in other Lisps), and so on.  In general a reader function <code>r</code> will
 have an associated updater <code>(setter r)</code>.
 </p>
@@ -1628,9 +1806,9 @@ and methods can be defined directly:
 
 
 </li>
-<li id="sec-17.10">Convert <br/>
-The function <a href="EuLisp-0.991/html/eulispcl17.html#dx21-463004"><code>convert</code></a> is used to change an object of one type into an
-object of another type.  Thus to convert an <a href="EuLisp-0.991/html/eulispcl17.html#dx21-582005"><code>integer</code></a> to a <a href="EuLisp-0.991/html/eulispcl17.html#dx21-542005"><code>float</code></a>
+<li id="sec-18.10">Convert <br/>
+The function <a href="EuLisp-0.991/html/eulispcl17.html#dx21-469004"><code>convert</code></a> is used to change an object of one type into an
+object of another type.  Thus to convert an <a href="EuLisp-0.991/html/eulispcl17.html#dx21-588005"><code>integer</code></a> to a <a href="EuLisp-0.991/html/eulispcl17.html#dx21-548005"><code>float</code></a>
 
 
 
@@ -1649,14 +1827,14 @@ or the other way
 
 
 <p>
-Many other conversions are available: <a href="EuLisp-0.991/html/eulispcl17.html#dx21-582005"><code>integer</code></a> to <a href="EuLisp-0.991/html/eulispcl17.html#dx21-857005"><code>string</code></a>; <a href="EuLisp-0.991/html/eulispcl17.html#dx21-322005"><code>character</code></a> to
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-857005"><code>string</code></a>; <code>string</code> to <code>number</code>; <a href="EuLisp-0.991/html/eulispcl17.html#dx21-883005"><code>symbol</code></a> to <code>string</code>; <a href="EuLisp-0.991/html/eulispcl17.html#dx21-641002"><code>list</code></a> to <a href="EuLisp-0.991/html/eulispcl17.html#dx21-911005"><code>vector</code></a>;
+Many other conversions are available: <a href="EuLisp-0.991/html/eulispcl17.html#dx21-588005"><code>integer</code></a> to <a href="EuLisp-0.991/html/eulispcl17.html#dx21-863005"><code>string</code></a>; <a href="EuLisp-0.991/html/eulispcl17.html#dx21-322005"><code>character</code></a> to
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-863005"><code>string</code></a>; <code>string</code> to <code>number</code>; <a href="EuLisp-0.991/html/eulispcl17.html#dx21-889005"><code>symbol</code></a> to <code>string</code>; <a href="EuLisp-0.991/html/eulispcl17.html#dx21-647002"><code>list</code></a> to <a href="EuLisp-0.991/html/eulispcl17.html#dx21-917005"><code>vector</code></a>;
 and so on.
 </p>
 </li>
-<li id="sec-17.11">Copying <br/>
-There are two functions that copy structures: <a href="EuLisp-0.991/html/eulispcl17.html#dx21-476004"><code>deep-copy</code></a> and
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-483002"><code>shallow-copy</code></a>.  The second recursively descends a structure making copies
+<li id="sec-18.11">Copying <br/>
+There are two functions that copy structures: <a href="EuLisp-0.991/html/eulispcl17.html#dx21-482004"><code>deep-copy</code></a> and
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-489002"><code>shallow-copy</code></a>.  The second recursively descends a structure making copies
 of all the elements in the structure; the first makes a single copy of the
 top-level structure, and fills its slots will the existing elements:
 
@@ -1677,8 +1855,7 @@ top-level structure, and fills its slots will the existing elements:
 
 
 </li>
-<li id="sec-17.12">Other Tools <br/>
-Other tools that EuXLisp provides:
+<li id="sec-18.12">Other EuXLisp Tools <br/>
 <ul>
 <li>
 <code>describe</code> gives a little information about an object, e.g., <code>(describe       &lt;integer&gt;)</code> or <code>(describe 4)</code>
@@ -1705,17 +1882,17 @@ will describe the ins and outs of the function <code>foo</code>.  To untrace, us
 
 </div>
 
-<div id="outline-container-18" class="outline-2">
-<h2 id="sec-18"><span class="section-number-2">18</span> Example Modules </h2>
-<div class="outline-text-2" id="text-18">
+<div id="outline-container-19" class="outline-2">
+<h2 id="sec-19"><span class="section-number-2">19</span> Example Modules </h2>
+<div class="outline-text-2" id="text-19">
 
 <p>EuXLisp provides a few sample modules.
 </p><ul>
-<li id="sec-18.1">Trace <br/>
+<li id="sec-19.1">Trace <br/>
 The trace module has been mentioned above.
 
 </li>
-<li id="sec-18.2">Linda <br/>
+<li id="sec-19.2">Linda <br/>
 The eulinda module implements the Linda pool mechanism.
 <ul>
 <li>
@@ -1747,10 +1924,10 @@ with the arguments.
 and <code>(tril t)</code> to print some trace information as the system is running.
 </p>
 <p>
-The <code>tag</code> must be a <a href="EuLisp-0.991/html/eulispcl17.html#dx21-883005"><code>symbol</code></a> or <code>number</code>.
+The <code>tag</code> must be a <a href="EuLisp-0.991/html/eulispcl17.html#dx21-889005"><code>symbol</code></a> or <code>number</code>.
 </p>
 </li>
-<li id="sec-18.3">Modular Numbers <br/>
+<li id="sec-19.3">Modular Numbers <br/>
 The module <code>modular</code> is a simple implementation of modular integers.  The
 function mod constructs a modular number
 
@@ -1764,13 +1941,13 @@ function mod constructs a modular number
 
 
 </li>
-<li id="sec-18.4">Scheme <br/>
+<li id="sec-19.4">Scheme <br/>
 This module provides a mostly-conformant Scheme environment.  It is probably
 not wise to mix Scheme constructs, such as call/cc, with EuLisp constructs,
 such as threads.
 
 </li>
-<li id="sec-18.5">Paralation Lisp <br/>
+<li id="sec-19.5">Paralation Lisp <br/>
 This emulates a paralation system.  The module <code>tpl</code> (for tiny paralation
 lisp) exports
 <ul>
@@ -1803,7 +1980,7 @@ map.
 </li>
 </ul>
 </li>
-<li id="sec-18.6">Values <br/>
+<li id="sec-19.6">Values <br/>
 This is an emulation of Scheme and Common Lisp's multiple values.  The
 module values exports
 <ul>
@@ -1834,10 +2011,10 @@ module values exports
 value you will probably get strange results.
 </p>
 </li>
-<li id="sec-18.7">Sort <br/>
-A fast stable merge sort.  The module sort exports <a href="EuLisp-0.991/html/eulispcl17.html#dx21-410002"><code>sort</code></a> (non-destructive)
+<li id="sec-19.7">Sort <br/>
+A fast stable merge sort.  The module sort exports <a href="EuLisp-0.991/html/eulispcl17.html#dx21-418002"><code>sort</code></a> (non-destructive)
 and <code>sort!</code> (destructive).  They are called as <code>(sort l)</code>, where <code>l</code> is a
-list of values to be sorted.  The comparison operator used is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>.
+list of values to be sorted.  The comparison operator used is <a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>.
 Alternatively, you can use <code>(sort l comp)</code>, where comp is a comparator
 function.
 
@@ -1847,14 +2024,13 @@ function.
 
 </div>
 
-<div id="outline-container-19" class="outline-2">
-<h2 id="sec-19"><span class="section-number-2">19</span> EuXLisp functions </h2>
-<div class="outline-text-2" id="text-19">
+<div id="outline-container-20" class="outline-2">
+<h2 id="sec-20"><span class="section-number-2">20</span> EuLisp functions </h2>
+<div class="outline-text-2" id="text-20">
 
-<p>Here is a summary of the functions available in EuXLisp.  Not all of these
-correspond to EuLisp.
+<p>Here is a summary of the functions available in EuLisp.
 </p><ul>
-<li id="sec-19.1">Special operators <br/>
+<li id="sec-20.1">Special operators <br/>
 <ul>
 <li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-211007"><code>deflocal</code></a>
@@ -1863,19 +2039,34 @@ correspond to EuLisp.
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-207002"><code>defconstant</code></a>
 </li>
 <li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-938002"><code>defclass</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl14.html#dx18-162002"><code>defcondition</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-225003"><code>defmacro</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-948002"><code>defgeneric</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-957002"><code>defmethod</code></a>
+</li>
+<li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-215002"><code>quote</code></a>
 </li>
 <li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-221002"><code>lambda</code></a>
 </li>
 <li>
-<code>delay</code>
-</li>
-<li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-289003"><code>let</code></a>
 </li>
 <li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-292004"><code>let*</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-286002"><code>labels</code></a>
 </li>
 <li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-245003"><code>setq</code></a>
@@ -1887,7 +2078,16 @@ correspond to EuLisp.
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-262002"><code>cond</code></a>
 </li>
 <li>
+<code>when</code>
+</li>
+<li>
+<code>unless</code>
+</li>
+<li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-295004"><code>progn</code></a>
+</li>
+<li>
+<code>while</code>
 </li>
 <li>
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-265004"><code>and</code></a>
@@ -1896,37 +2096,624 @@ correspond to EuLisp.
 <a href="EuLisp-0.991/html/eulispcl16.html#dx20-268004"><code>or</code></a>
 </li>
 <li>
-<code>while</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl10.html#dx12-68001"><code>export</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl10.html#dx12-70001"><code>expose</code></a>
-</li>
-<li>
-<code>enter-module</code>
-</li>
-<li>
-<code>!&gt;</code>
-</li>
-<li>
-<code>reenter-module</code>
-</li>
-<li>
-<code>!&gt;&gt;</code>
-</li>
-<li>
 <a href="EuLisp-0.991/html/eulispcl11.html#dx13-97003"><code>call-next-method</code></a>
 </li>
 <li>
 <a href="EuLisp-0.991/html/eulispcl11.html#dx13-100003"><code>next-method?</code></a>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-932002"><code>defclass</code></a>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-240002"><code>apply</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.2">Module directives <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl10.html#dx12-68001"><code>export</code></a>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-240002"><code>apply</code></a>
+<a href="EuLisp-0.991/html/eulispcl10.html#dx12-70001"><code>expose</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.3">List functions <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-630002"><code>cons</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-632002"><code>car</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-634002"><code>cdr</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-647002"><code>list</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.4">Symbol functions <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-893002"><code>gensym</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.5">Vector functions <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-917005"><code>vector</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.6">Predicates <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-616007"><code>null?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-628002"><code>atom?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-657013"><code>number?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-626007"><code>cons?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-891002"><code>symbol?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-598002"><code>keyword?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-549021"><code>float?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-497069"><code>double-float?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-589039"><code>integer?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-866002"><code>string?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-920002"><code>vector?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-710012"><code>stream?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-437004"><code>eq</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-441002"><code>eql</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.7">Arithmetic functions <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-679002"><code>zero?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-685002"><code>positive?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-687002"><code>negative?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-593002"><code>odd?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-591002"><code>even?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-557002"><code>truncate</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-553002"><code>floor</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-551002"><code>ceiling</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-555002"><code>round</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-677002"><code>abs</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-673002"><code>gcd</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-675002"><code>lcm</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-661004"><code>+</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-663002"><code>-</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-665002"><code>*</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-667002"><code>/</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-466002"><code>min</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-464002"><code>max</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-527002"><code>sin</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-525003"><code>cos</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-529002"><code>tan</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-519003"><code>asin</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-517002"><code>acos</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-521003"><code>atan</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-537002"><code>exp</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-545004"><code>sqrt</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-543004"><code>pow</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-539003"><code>log</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-691002"><code>binary+</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-693002"><code>binary-</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-695002"><code>binary*</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-697002"><code>binary/</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-703003"><code>binary-gcd</code></a>
+</li>
+<li>
+<code>binary%</code>
+</li>
+</ul>
+</li>
+<li id="sec-20.8">Numeric comparison functions <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>=
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002">===</a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>&gt;</code></a>=
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>&gt;</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.9">I/O functions <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-780002"><code>read</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-803002"><code>swrite</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-807002"><code>write</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-819002"><code>sprin</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-823002"><code>prin</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-827002"><code>sprint</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-831002"><code>print</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-835002"><code>snewline</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-838002"><code>newline</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-841002"><code>sflush</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-844002"><code>flush</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.10">Format <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-581002"><code>sformat</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-583002"><code>format</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-585002"><code>fmt</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.11">File I/O functions <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-854002"><code>open-input-file</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-856002"><code>open-output-file</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.12">Standard streams <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-749002"><code>stdin</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-751002"><code>stdout</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-752002"><code>stderr</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.13">Plus some others <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-210002"><code>t</code></a>
+</li>
+<li>
+<code>else</code>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-143002"><code>ticks-per-second</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.14">Thread <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-121003"><code>&lt;thread&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-160002"><code>&lt;simple-thread&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-122002"><code>thread?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-124002"><code>thread-reschedule</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-127002"><code>current-thread</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-127002"><code>current-thread</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-128002"><code>thread-start</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-131002"><code>thread-value</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-150003"><code>&lt;lock&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-150007"><code>lock?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-152002"><code>lock</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-156002"><code>unlock</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-135002"><code>wait</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-272002"><code>let/cc</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl15.html#dx19-192002"><code>with-handler</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-299002"><code>unwind-protect</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl15.html#dx19-186003"><code>signal</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl15.html#dx19-198002"><code>error</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl15.html#dx19-201002"><code>cerror</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.15">Telos <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-1022002"><code>allocate</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl11.html#dx13-76003"><code>&lt;object&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl11.html#dx13-76007"><code>&lt;class&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-970002"><code>&lt;simple-class&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-615006"><code>&lt;list&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-626002"><code>&lt;cons&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-616003"><code>&lt;null&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-657010"><code>&lt;number&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-589035"><code>&lt;integer&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-560035"><code>&lt;fpi&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-549017"><code>&lt;float&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-497061"><code>&lt;double-float&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-890006"><code>&lt;symbol&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-597006"><code>&lt;keyword&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-864017"><code>&lt;string&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-709002"><code>&lt;stream&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-918006"><code>&lt;vector&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-910005"><code>&lt;table&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-916002"><code>&lt;hash-table&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl11.html#dx13-84002"><code>&lt;function&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl11.html#dx13-84006"><code>&lt;simple-function&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-1002008"><code>&lt;method&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-1002011"><code>&lt;simple-method&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-977002"><code>&lt;slot&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl18.html#dx23-977005"><code>&lt;local-slot&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-815003"><code>generic-prin</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-796002"><code>generic-write</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl12.html#dx16-135002"><code>wait</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl11.html#dx13-104004"><code>make</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl11.html#dx13-110002"><code>initialize</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.16">Setter <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-249002"><code>setter</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.17">Converter <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-475002"><code>converter</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-469004"><code>convert</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.18">Condition <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl14.html#dx18-167002"><code>condition?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl14.html#dx18-165002"><code>&lt;condition&gt;</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.19">Compare <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-449002"><code>binary&lt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-444002"><code>binary=</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002">===</a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>&gt;</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-456002"><code>&lt;</code></a>=
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>&gt;</code></a>=
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-464002"><code>max</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-466002"><code>min</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.20">Macros <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-305004"><code>quasiquote</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-308002"><code>unquote</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl16.html#dx20-311002"><code>unquote-splicing</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.21">Collect <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-362002"><code>collection?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-409002"><code>sequence?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-348020"><code>accumulate</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-351002"><code>accumulate1</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-354002"><code>all?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-358002"><code>any?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-365002"><code>concatenate</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-369002"><code>delete</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-372002"><code>do</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-375002"><code>element</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-380002"><code>empty?</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-383002"><code>fill</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-395002"><code>map</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-398002"><code>member</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-401002"><code>remove</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-404002"><code>reverse</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-412002"><code>size</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-415002"><code>slice</code></a>
+</li>
+</ul>
+</li>
+<li id="sec-20.22">Copy <br/>
+<ul>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-482004"><code>deep-copy</code></a>
+</li>
+<li>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-489002"><code>shallow-copy</code></a>
+
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-21" class="outline-2">
+<h2 id="sec-21"><span class="section-number-2">21</span> EuXLisp functions </h2>
+<div class="outline-text-2" id="text-21">
+
+<p>Here is a summary of the additional functions available in EuXLisp.  Those
+marked '*' are also in Youtoo.
+</p><ul>
+<li id="sec-21.1">Special operators <br/>
+<ul>
+<li>
+<code>delay</code>
 </li>
 <li>
 <code>map-list</code>
@@ -1939,56 +2726,46 @@ correspond to EuLisp.
 </li>
 <li>
 <code>force</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.2">List functions <br/>
+<li id="sec-21.2">List functions <br/>
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-624002"><code>cons</code></a>
+<code>caar</code> *
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-626002"><code>car</code></a>
+<code>cadr</code> *
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-628002"><code>cdr</code></a>
+<code>cdar</code> *
 </li>
 <li>
-<code>caar</code>
+<code>cddr</code> *
 </li>
 <li>
-<code>cadr</code>
+<code>caaar</code> *
 </li>
 <li>
-<code>cdar</code>
+<code>caadr</code> *
 </li>
 <li>
-<code>cddr</code>
+<code>cadar</code> *
 </li>
 <li>
-<code>caaar</code>
+<code>caddr</code> *
 </li>
 <li>
-<code>caadr</code>
+<code>cdaar</code> *
 </li>
 <li>
-<code>cadar</code>
+<code>cdadr</code> *
 </li>
 <li>
-<code>caddr</code>
+<code>cddar</code> *
 </li>
 <li>
-<code>cdaar</code>
-</li>
-<li>
-<code>cdadr</code>
-</li>
-<li>
-<code>cddar</code>
-</li>
-<li>
-<code>cdddr</code>
+<code>cdddr</code> *
 </li>
 <li>
 <code>caaaar</code>
@@ -2012,7 +2789,7 @@ correspond to EuLisp.
 <code>caddar</code>
 </li>
 <li>
-<code>cadddr</code>
+<code>cadddr</code> *
 </li>
 <li>
 <code>cdaaar</code>
@@ -2039,19 +2816,16 @@ correspond to EuLisp.
 <code>cddddr</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-641002"><code>list</code></a>
-</li>
-<li>
 <code>list*</code>
 </li>
 <li>
-<code>append</code>
+<code>append</code> *
 </li>
 <li>
 <code>last-pair</code>
 </li>
 <li>
-<code>length</code>
+<code>length</code> *
 </li>
 <li>
 <code>memv</code>
@@ -2066,15 +2840,14 @@ correspond to EuLisp.
 <code>assq</code>
 </li>
 <li>
-<code>list-ref</code>
+<code>list-ref</code> *
 </li>
 <li>
 <code>list-tail</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.3">Symbol functions <br/>
+<li id="sec-21.3">Symbol functions <br/>
 <ul>
 <li>
 <code>bound?</code>
@@ -2086,100 +2859,45 @@ correspond to EuLisp.
 <code>symbol-plist</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-887002"><code>gensym</code></a>
-</li>
-<li>
 <code>get</code>
 </li>
 <li>
 <code>put</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.4">Vector functions <br/>
+<li id="sec-21.4">Vector functions <br/>
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-911005"><code>vector</code></a>
-</li>
-<li>
-<code>make-vector</code>
+<code>make-vector</code> *
 </li>
 <li>
 <code>vector-length</code>
 </li>
 <li>
-<code>vector-ref</code>
-
+<code>vector-ref</code> *
 </li>
 </ul>
 </li>
-<li id="sec-19.5">Array functions <br/>
+<li id="sec-21.5">Predicates <br/>
 <ul>
 <li>
-<code>make-array</code>
-</li>
-<li>
-<code>array-ref</code>
-
-</li>
-</ul>
-</li>
-<li id="sec-19.6">Predicates <br/>
-<ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-610007"><code>null?</code></a>
-</li>
-<li>
-<code>atom</code>
-</li>
-<li>
-<code>list?</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-651013"><code>number?</code></a>
+<code>list?</code> *
 </li>
 <li>
 <code>boolean?</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-620007"><code>cons?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-885002"><code>symbol?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-592002"><code>keyword?</code></a>
-</li>
-<li>
 <code>complex?</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-543021"><code>float?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-491069"><code>double-float?</code></a>
 </li>
 <li>
 <code>rational?</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-583039"><code>integer?</code></a>
-</li>
-<li>
 <code>char?</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-860002"><code>string?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-914002"><code>vector?</code></a>
-</li>
-<li>
-<code>function?</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-704012"><code>stream?</code></a>
+<code>function?</code> *
 </li>
 <li>
 <code>input-stream?</code>
@@ -2188,7 +2906,7 @@ correspond to EuLisp.
 <code>output-stream?</code>
 </li>
 <li>
-<code>object?</code>
+<code>object?</code> *
 </li>
 <li>
 <code>eof-object?</code>
@@ -2196,32 +2914,10 @@ correspond to EuLisp.
 <li>
 <code>default-object?</code>
 </li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-431004"><code>eq</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-435002"><code>eql</code></a>
-
-</li>
 </ul>
 </li>
-<li id="sec-19.7">Arithmetic functions <br/>
+<li id="sec-21.6">Arithmetic functions <br/>
 <ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-673002"><code>zero?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-679002"><code>positive?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-681002"><code>negative?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-587002"><code>odd?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-585002"><code>even?</code></a>
-</li>
 <li>
 <code>exact?</code>
 </li>
@@ -2229,40 +2925,7 @@ correspond to EuLisp.
 <code>inexact?</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-551002"><code>truncate</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-547002"><code>floor</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-545002"><code>ceiling</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-549002"><code>round</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-671002"><code>abs</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-667002"><code>gcd</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-669002"><code>lcm</code></a>
-</li>
-<li>
-<code>random</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-655004"><code>+</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-657002"><code>-</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-659002"><code>*</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-661002"><code>/</code></a>
+<code>random</code> *
 </li>
 <li>
 <code>quotient</code>
@@ -2271,69 +2934,14 @@ correspond to EuLisp.
 <code>remainder</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-460002"><code>min</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>max</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-521002"><code>sin</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-519003"><code>cos</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-523002"><code>tan</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-513003"><code>asin</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-511002"><code>acos</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-515003"><code>atan</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-531002"><code>exp</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-539004"><code>sqrt</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-537004"><code>pow</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-533003"><code>log</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-685002"><code>binary+</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-687002"><code>binary-</code></a>
-</li>
-<li>
 <code>unary-</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-689002"><code>binary*</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-691002"><code>binary/</code></a>
 </li>
 <li>
 <code>unary/</code>
 </li>
-<li>
-<code>binary%</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-697003"><code>binary-gcd</code></a>
-
-</li>
 </ul>
 </li>
-<li id="sec-19.8">Bitwise logical functions <br/>
+<li id="sec-21.7">Bitwise logical functions <br/>
 <ul>
 <li>
 <code>logand</code>
@@ -2346,31 +2954,10 @@ correspond to EuLisp.
 </li>
 <li>
 <code>lognot</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.9">Numeric comparison functions <br/>
-<ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>=
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-446002">===</a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002"><code>&gt;</code></a>=
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002"><code>&gt;</code></a>
-
-</li>
-</ul>
-</li>
-<li id="sec-19.10">String functions <br/>
+<li id="sec-21.8">String functions <br/>
 <ul>
 <li>
 <code>make-string</code>
@@ -2389,17 +2976,13 @@ correspond to EuLisp.
 </li>
 <li>
 <code>substring</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.11">I/O functions <br/>
+<li id="sec-21.9">I/O functions <br/>
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-774002"><code>read</code></a>
-</li>
-<li>
-<code>read-char</code>
+<code>read-char</code> *
 </li>
 <li>
 <code>read-byte</code>
@@ -2409,13 +2992,6 @@ correspond to EuLisp.
 </li>
 <li>
 <code>read-long</code>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-797002"><code>swrite</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-801002"><code>write</code></a>
 </li>
 <li>
 <code>write-char</code>
@@ -2428,51 +3004,32 @@ correspond to EuLisp.
 </li>
 <li>
 <code>write-long</code>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-813002"><code>sprin</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-821002"><code>sprint</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-817002"><code>prin</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-825002"><code>print</code></a>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-832002"><code>newline</code></a>
 </li>
 <li>
 <code>char-ready?</code>
 </li>
 <li>
 <code>peek-char</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.12">Print control functions <br/>
+<li id="sec-21.10">Print control functions <br/>
 <ul>
 <li>
 <code>print-breadth</code>
 </li>
 <li>
 <code>print-depth</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.13">File I/O functions <br/>
+<li id="sec-21.11">File I/O functions <br/>
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-848002"><code>open-input-file</code></a>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-854002"><code>open-input-file</code></a>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-850002"><code>open-output-file</code></a>
+<a href="EuLisp-0.991/html/eulispcl17.html#dx21-856002"><code>open-output-file</code></a>
 </li>
 <li>
 <code>open-append-file</code>
@@ -2494,25 +3051,11 @@ correspond to EuLisp.
 </li>
 <li>
 <code>unlink</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.14">Standard streams <br/>
+<li id="sec-21.12">utility functions <br/>
 <ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-743002"><code>stdin</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-745002"><code>stdout</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-746002"><code>stderr</code></a>
-
-</li>
-<li>
-<code>; utility functions</code>
-</li>
 <li>
 <code>transcript-on</code>
 </li>
@@ -2526,10 +3069,10 @@ correspond to EuLisp.
 <code>prompt?</code>
 </li>
 <li>
-<code>exit</code>
+<code>exit</code> *
 </li>
 <li>
-<code>compile</code>
+<code>compile</code> *
 </li>
 <li>
 <code>decompile</code>
@@ -2542,23 +3085,33 @@ correspond to EuLisp.
 </li>
 <li>
 <code>restore</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.15">Debugging functions <br/>
+<li id="sec-21.13">Debugging functions <br/>
 <ul>
 <li>
 <code>trace-on</code>
 </li>
 <li>
 <code>trace-off</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.16">Module functions <br/>
+<li id="sec-21.14">Module functions <br/>
 <ul>
+<li>
+<code>enter-module</code>
+</li>
+<li>
+<code>!&gt;</code>
+</li>
+<li>
+<code>reenter-module</code>
+</li>
+<li>
+<code>!&gt;&gt;</code>
+</li>
 <li>
 <code>module-symbols</code>
 </li>
@@ -2576,37 +3129,19 @@ correspond to EuLisp.
 </li>
 <li>
 <code>unintern</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.17">Telos <br/>
-<ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-1016002"><code>allocate</code></a>
-</li>
-<li>
-<code>describe</code>
-</li>
-<li>
-<code>class?</code>
-</li>
-<li>
-<code>subclass?</code>
-
-</li>
-</ul>
-</li>
-<li id="sec-19.18">Tables <br/>
+<li id="sec-21.15">Tables <br/>
 <ul>
 <li>
 <code>make-table</code>
 </li>
 <li>
-<code>table-ref</code>
+<code>table-ref</code> *
 </li>
 <li>
-<code>table-comparator</code>
+<code>table-comparator</code> *
 </li>
 <li>
 <code>table-delete</code>
@@ -2615,21 +3150,20 @@ correspond to EuLisp.
 <code>table-length</code>
 </li>
 <li>
-<code>table-keys</code>
+<code>table-keys</code> *
 </li>
 <li>
-<code>table-values</code>
+<code>table-values</code> *
 </li>
 <li>
 <code>table-fill</code>
 </li>
 <li>
 <code>table-clear</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.19">Plus some others <br/>
+<li id="sec-21.16">Plus some others <br/>
 <ul>
 <li>
 <code>binary</code>
@@ -2638,7 +3172,7 @@ correspond to EuLisp.
 <code>text</code>
 </li>
 <li>
-<code>not</code>
+<code>not</code> *
 </li>
 <li>
 <code>prin1</code>
@@ -2647,16 +3181,13 @@ correspond to EuLisp.
 <code>princ</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-210002"><code>t</code></a>
-</li>
-<li>
 <code>eval</code>
 </li>
 <li>
-<code>system</code>
+<code>system</code> *
 </li>
 <li>
-<code>getenv</code>
+<code>getenv</code> *
 </li>
 <li>
 <code>putenv</code>
@@ -2668,51 +3199,23 @@ correspond to EuLisp.
 <code>current-time</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-143002"><code>ticks-per-second</code></a>
-</li>
-<li>
-<code>backtrace</code>
+<code>backtrace</code> *
 </li>
 <li>
 <code>backtrace?</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.20">Thread <br/>
+<li id="sec-21.17">Thread <br/>
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-121003"><code>&lt;thread&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-160002"><code>&lt;simple-thread&gt;</code></a>
-</li>
-<li>
 <code>make-thread</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-122002"><code>thread?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-124002"><code>thread-reschedule</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-127002"><code>current-thread</code></a>
 </li>
 <li>
 <code>thread-kill</code>
 </li>
 <li>
 <code>thread-queue</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-127002"><code>current-thread</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-128002"><code>thread-start</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-131002"><code>thread-value</code></a>
 </li>
 <li>
 <code>thread-state</code>
@@ -2725,10 +3228,6 @@ correspond to EuLisp.
 </li>
 <li>
 <code>&lt;thread-already-started&gt;</code>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-150003"><code>&lt;lock&gt;</code></a>
 </li>
 <li>
 <code>&lt;simple-lock&gt;</code>
@@ -2737,104 +3236,26 @@ correspond to EuLisp.
 <code>make-lock</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-150007"><code>lock?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-152002"><code>lock</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-156002"><code>unlock</code></a>
-</li>
-<li>
 <code>&lt;lock-condition&gt;</code>
 </li>
 <li>
 <code>&lt;lock-error&gt;</code>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-135002"><code>wait</code></a>
 </li>
 <li>
 <code>&lt;wait-condition&gt;</code>
 </li>
 <li>
 <code>&lt;wait-error&gt;</code>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-272002"><code>let/cc</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl15.html#dx19-192002"><code>with-handler</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-299002"><code>unwind-protect</code></a>
 </li>
 <li>
 <code>&lt;wrong-condition-class&gt;</code>
 </li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl15.html#dx19-186003"><code>signal</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl15.html#dx19-198002"><code>error</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl15.html#dx19-201002"><code>cerror</code></a>
-
-</li>
 </ul>
 </li>
-<li id="sec-19.21">Telos <br/>
+<li id="sec-21.18">Telos <br/>
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl11.html#dx13-76003"><code>&lt;object&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl11.html#dx13-76007"><code>&lt;class&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-964002"><code>&lt;simple-class&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-609006"><code>&lt;list&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-620002"><code>&lt;cons&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-610003"><code>&lt;null&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-651010"><code>&lt;number&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-583035"><code>&lt;integer&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-554035"><code>&lt;fpi&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-543017"><code>&lt;float&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-491061"><code>&lt;double-float&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-884006"><code>&lt;symbol&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-591006"><code>&lt;keyword&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-858017"><code>&lt;string&gt;</code></a>
-</li>
-<li>
 <code>&lt;simple-string&gt;</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-703002"><code>&lt;stream&gt;</code></a>
 </li>
 <li>
 <code>&lt;input-stream&gt;</code>
@@ -2844,9 +3265,6 @@ correspond to EuLisp.
 </li>
 <li>
 <code>&lt;i/o-stream&gt;</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-912006"><code>&lt;vector&gt;</code></a>
 </li>
 <li>
 <code>&lt;simple-vector&gt;</code>
@@ -2861,18 +3279,6 @@ correspond to EuLisp.
 <code>&lt;promise&gt;</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-904005"><code>&lt;table&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-910002"><code>&lt;hash-table&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl11.html#dx13-84002"><code>&lt;function&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl11.html#dx13-84006"><code>&lt;simple-function&gt;</code></a>
-</li>
-<li>
 <code>&lt;subr&gt;</code>
 </li>
 <li>
@@ -2885,84 +3291,39 @@ correspond to EuLisp.
 <code>&lt;simple-generic&gt;</code>
 </li>
 <li>
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-996008"><code>&lt;method&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-996011"><code>&lt;simple-method&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-971002"><code>&lt;slot&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl18.html#dx23-971005"><code>&lt;local-slot&gt;</code></a>
-</li>
-<li>
 <code>&lt;structure&gt;</code>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-809003"><code>generic-prin</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-790002"><code>generic-write</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl12.html#dx16-135002"><code>wait</code></a>
-
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl11.html#dx13-104004"><code>make</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl11.html#dx13-110002"><code>initialize</code></a>
 </li>
 <li>
 <code>class-hierarchy</code>
-
+</li>
+<li>
+<code>describe</code>
+</li>
+<li>
+<code>class?</code> *
+</li>
+<li>
+<code>subclass?</code> *
 </li>
 </ul>
 </li>
-<li id="sec-19.22">Setter <br/>
+<li id="sec-21.19">Converter <br/>
 <ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-249002"><code>setter</code></a>
-
-</li>
-</ul>
-</li>
-<li id="sec-19.23">Converter <br/>
-<ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-469002"><code>converter</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-463004"><code>convert</code></a>
-</li>
 <li>
 <code>&lt;conversion-condition&gt;</code>
 </li>
 <li>
 <code>&lt;no-converter&gt;</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.24">Condition <br/>
+<li id="sec-21.20">Condition <br/>
 <ul>
 <li>
-<a href="EuLisp-0.991/html/eulispcl14.html#dx18-162002"><code>defcondition</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl14.html#dx18-167002"><code>condition?</code></a>
-</li>
-<li>
-<code>condition-message</code>
+<code>condition-message</code> *
 </li>
 <li>
 <code>condition-value</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl14.html#dx18-165002"><code>&lt;condition&gt;</code></a>
 </li>
 <li>
 <code>&lt;telos-condition&gt;</code>
@@ -3014,59 +3375,18 @@ correspond to EuLisp.
 </li>
 <li>
 <code>&lt;user-interrupt&gt;</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.25">Compare <br/>
+<li id="sec-21.21">Compare <br/>
 <ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-443002"><code>binary&lt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-438002"><code>binary=</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-446002">===</a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002"><code>&gt;</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-450002"><code>&lt;</code></a>=
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-452002"><code>&gt;</code></a>=
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-458002"><code>max</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-460002"><code>min</code></a>
-</li>
 <li>
 <code>assoc</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.26">Macros <br/>
+<li id="sec-21.22">Macros <br/>
 <ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-225003"><code>defmacro</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-305004"><code>quasiquote</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-308002"><code>unquote</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl16.html#dx20-311002"><code>unquote-splicing</code></a>
-</li>
 <li>
 <code>symbol-macro</code>
 </li>
@@ -3075,96 +3395,16 @@ correspond to EuLisp.
 </li>
 <li>
 <code>macroexpand1</code>
-
 </li>
 </ul>
 </li>
-<li id="sec-19.27">Collect <br/>
+<li id="sec-21.23">Collect <br/>
 <ul>
 <li>
 <code>&lt;collection-condition&gt;</code>
 </li>
 <li>
 <code>&lt;collection-error&gt;</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-357002"><code>collection?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-404002"><code>sequence?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-348020"><code>accumulate</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-351002"><code>accumulate1</code></a>
-</li>
-<li>
-<code>all?</code>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-354002"><code>any?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-360002"><code>concatenate</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-364002"><code>delete</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-367002"><code>do</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-370002"><code>element</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-375002"><code>empty?</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-378002"><code>fill</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-390002"><code>map</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-393002"><code>member</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-396002"><code>remove</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-399002"><code>reverse</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-407002"><code>size</code></a>
-</li>
-<li>
-<code>slice</code>
-
-</li>
-</ul>
-</li>
-<li id="sec-19.28">Copy <br/>
-<ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-476004"><code>deep-copy</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-483002"><code>shallow-copy</code></a>
-
-</li>
-</ul>
-</li>
-<li id="sec-19.29">Format <br/>
-<ul>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-575002"><code>sformat</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-577002"><code>format</code></a>
-</li>
-<li>
-<a href="EuLisp-0.991/html/eulispcl17.html#dx21-579002"><code>fmt</code></a>
 
 </li>
 </ul>
@@ -3174,12 +3414,13 @@ correspond to EuLisp.
 
 </div>
 
-<div id="outline-container-20" class="outline-2">
-<h2 id="sec-20"><span class="section-number-2">20</span> Command Line Arguments </h2>
-<div class="outline-text-2" id="text-20">
+<div id="outline-container-22" class="outline-2">
+<h2 id="sec-22"><span class="section-number-2">22</span> Command Line Arguments </h2>
+<div class="outline-text-2" id="text-22">
 
-<p>The EuXLisp interpreter accepts a few arguments:
-</p><ul>
+<ul>
+<li id="sec-22.1">EuXLisp <br/>
+<ul>
 <li>
 <code>-h</code>, <code>--help</code> Display this usage information.
 </li>
@@ -3209,18 +3450,27 @@ default.
 </li>
 </ul>
 
-<p>Other arguments are passed to the intepreter and are available as <code>(getarg 0)</code>
-(the name of the program), <code>(getarg 1)</code> (first argument), <code>(getarg 2)</code> (second
-argument), and so on.  The function <code>getarg</code> returns <a href="EuLisp-0.991/html/eulispcl17.html#dx21-609010"><code>()</code></a> for a non-existent
-argument.
+<p>Other arguments are passed to the intepreter and are available as <code>(getarg     0)</code> (the name of the program), <code>(getarg 1)</code> (first argument), <code>(getarg 2)</code>
+(second argument), and so on.  The function <code>getarg</code> returns <a href="EuLisp-0.991/html/eulispcl17.html#dx21-615010"><code>()</code></a> for a
+non-existent argument.
 </p>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-23" class="outline-2">
+<h2 id="sec-23"><span class="section-number-2">23</span> Shell Scripts </h2>
+<div class="outline-text-2" id="text-23">
+
 <ul>
-<li id="sec-20.1">Shell Scripts <br/>
-EuXLisp can be used in a shell script by means of the <code>--script</code> flag:
+<li id="sec-23.1">EuXLisp <br/>
+can be used in a shell script by means of the <code>--script</code> flag:
 
 
 
-<pre class="src src-eulisp">#!/usr/local/bin/euxlisp --script
+<pre class="src src-eulisp">#!&lt;absolute path&gt;/euxlisp --script
 
 <span style="color: #0000ff; font-weight: bold;">(print</span> <span style="color: #00ff00;">"hello world"</span>)
 </pre>
@@ -3241,22 +3491,28 @@ prevent the use of the system function.
 
 
 </li>
+<li id="sec-23.2">Youtoo <br/>
+can also be used in a shell script by means of the <code>--script</code> flag:
+
+
+
+<pre class="src src-eulisp">#!&lt;absolute path&gt;/youtoo --script
+
+<span style="color: #0000ff; font-weight: bold;">(print</span> <span style="color: #00ff00;">"hello world"</span>)
+</pre>
+
+
+<p>
+See <i>Examples/Misc/script.em</i>.
+</p></li>
 </ul>
-</div>
-
-</div>
-
-<div id="outline-container-21" class="outline-2">
-<h2 id="sec-21"><span class="section-number-2">21</span> <a href="http://people.bath.ac.uk/masrjb/Sources/eunotes.html">The original Euscheme notes</a>. </h2>
-<div class="outline-text-2" id="text-21">
-
 </div>
 </div>
 <div id="postamble">
 <p class="author"> Author: of original Euscheme notes Russell Bradford
 <a href="mailto:no-reply">&lt;no-reply&gt;</a>
 </p>
-<p class="date"> Date: 2010-06-30 23:04:28 BST</p>
+<p class="date"> Date: 2010-07-01 22:08:47 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

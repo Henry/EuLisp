@@ -67,8 +67,8 @@
                                (,loop))))
                  (,loop)))))
 
-  (defmacro for (init condition inc . body)
-    `(progn ,init (while ,condition ,@body ,inc)))
+;;  (defmacro for (init condition inc . body)
+;;    `(progn ,init (while ,condition ,@body ,inc)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Case

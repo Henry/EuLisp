@@ -845,31 +845,34 @@ LVAL xvector()
 LVAL xmakevector()
 {
     static char *cfn_name = "make-vector";
-    LVAL arg, val, *p;
-    int len;
+    LVAL val, *p;
 
     // get the vector size
-    arg = xlgafixnum();
-    len = (int)getfixnum(arg);
+    LVAL arg = xlgafixnum();
+    int len = (int)getfixnum(arg);
 
     if (len < 0)
+    {
         xlcerror("bad length for make-vector", arg, NIL);
+    }
 
     // check for an initialization value
     if (moreargs())
     {
         arg = xlgetarg();       // get the initializer
-        xllastarg();    // make sure that's the last argument
-        cpush(arg);     // save the initializer
+        xllastarg();            // make sure that's the last argument
+        cpush(arg);             // save the initializer
         val = newvector(len);   // create the vector
         p = &val->n_vdata[0];   // initialize the vector
         for (arg = pop(); --len >= 0;)
+        {
             *p++ = arg;
+        }
     }
-
-    // no initialization value
-    else
+    else // no initialization value
+    {
         val = newvector(len);   // defaults to initializing to NIL
+    }
 
     // return the new vector
     return (val);
@@ -1002,93 +1005,8 @@ LVAL xlistvect()
     return (vect);
 }
 
-// xmakearray - built-in function 'make-array'
-LVAL xmakearray()
-{
-    LVAL makearray1(), val;
-    val = makearray1(xlargc, xlsp);
-    drop(xlargc);
-    return (val);
-}
-
-LVAL makearray1(int argc, LVAL * argv)
-{
-    int size, i;
-    LVAL arg;
-
-    // check for the end of the list of dimensions
-    if (--argc < 0)
-        return (NIL);
-
-    // get this dimension
-    arg = *argv++;
-    if (!fixp(arg))
-        xlbadtype(arg, "<integer>", "make-array");
-    size = (int)getfixnum(arg);
-
-    // make the new array
-    cpush(newvector(size));
-
-    // fill the array and return it
-    for (i = 0; i < size; ++i)
-        setelement(top(), i, makearray1(argc, argv));
-    return (pop());
-}
-
-// xaref - built-in function 'array-ref'
-LVAL xaref()
-{
-    static char *cfn_name = "array-ref";
-    LVAL array, index;
-    int i;
-
-    // get the array
-    array = xlgavector();
-
-    // get each array index
-    while (xlargc > 1)
-    {
-        index = xlgafixnum();
-        i = (int)getfixnum(index);
-        if (i < 0 || i > getsize(array))
-            xlcerror("index out of range in array-ref", index, NIL);
-        array = getelement(array, i);
-        if (!vectorp(array))
-            xlbadtype(array, "<array>", cfn_name);
-    }
-    cpush(array);
-    ++xlargc;
-    return (xvref());
-}
-
-// xaset - built-in function 'array-set!'
-LVAL xaset()
-{
-    static char *cfn_name = "array-set!";
-    LVAL array, index;
-    int i;
-
-    // get the array
-    array = xlgavector();
-
-    // get each array index
-    while (xlargc > 2)
-    {
-        index = xlgafixnum();
-        i = (int)getfixnum(index);
-        if (i < 0 || i > getsize(array))
-            xlcerror("index out of range in array-set!", index, NIL);
-        array = getelement(array, i);
-        if (!vectorp(array))
-            xlbadtype(array, "<array>", cfn_name);
-    }
-    cpush(array);
-    ++xlargc;
-    return (xvset());
-}
-
-// xnull - built-in function 'null?'
-LVAL xnull()
+// xnullp - built-in function 'null?'
+LVAL xnullp()
 {
     static char *cfn_name = "null?";
     LVAL arg;
@@ -1097,8 +1015,8 @@ LVAL xnull()
     return (null(arg) ? true : NIL);
 }
 
-// xatom - built-in function 'atom?'
-LVAL xatom()
+// xatomp - built-in function 'atom?'
+LVAL xatomp()
 {
     static char *cfn_name = "atom?";
     LVAL arg;

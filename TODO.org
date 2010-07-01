@@ -281,8 +281,13 @@
     functions (end in !) should be considered for EuLisp.  I agree with this
     suggestion to improve consistency and readability and made the corresponding
     changes including "null" -> "null?" and "atom" -> "atom?".
+*** TODO Add a Scheme-style =case= statement
 *** TODO Add a Scheme-style =else=
-    for the default clause of =cond= forms.  =else= is simply an alias for =t=.
+    for the default clause of =cond= and =case= forms.  =else= is simply an
+    alias for =t=.
+*** TODO Add =when= and =unless= conditional expressions
+*** TODO Add =while= loop construct
+*** TODO Consider renaming =labels= -> =flet*=
 * Other
 *** TODO Complete emacs mode eulisp-mode.el for EuLisp
 *** DONE Include emacs eulisp-mode.el in the git repository

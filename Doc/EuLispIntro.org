@@ -1,44 +1,154 @@
 #                            -*- mode: org; -*-
-#+TITLE:              *Using EuXLisp* (Formally Euscheme)
+#+TITLE:       *An Introduction to EuLisp, EuXLisp and Youtoo*
 #+AUTHOR: of original Euscheme notes Russell Bradford
 #+EMAIL: no-reply
 #+OPTIONS: email:nil ^:{}
 #+STARTUP: hidestars
 #+STARTUP: odd
-* [[file:../index.org][EuXLisp index]]
+* [[file:../index.org][EuLisp index]]
 * Introduction
-  These notes are based on the Euscheme HTML notes by Russell Bradford.  Most of
-  the text remains more or less unchanged but reformatted in Org-mode and
-  exported as HTML and PDF.  Also some changes have been made and continue to be
-  made to keep this document consistent with the evolving EuLisp definition and
-  EuXLisp implementation.
+  This introduction to EuLisp is based on the
+  [[http://people.bath.ac.uk/masrjb/Sources/eunotes.html][Euscheme notes]]
+  written by Russell Bradford.  Much of the text remains more or less unchanged
+  but reformatted in Org-mode and exported as HTML.  Also some changes
+  have been made and continue to be made to keep this document consistent with
+  the evolving EuLisp definition and EuXLisp and Youtoo implementations.
 
-  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small
-  and compact Lisp, but nevertheless has many interesting features, such as
-  modules, an object system, and multithreading.  EuLisp Level 1 has extra
-  features, the most notable being a full metaobject system which is implemented
-  in Youtoo not in EuXLisp.  These are a few notes on the use of EuLisp in
-  general and EuXLisp in particular and concentrate on those things unique to
-  EuLisp.
+  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small and
+  compact Lisp, but nevertheless has many interesting features, such as modules,
+  an object system, and multithreading.  EuLisp Level 1 has extra features, the
+  most notable being a full metaobject system which are implemented in Youtoo.
+  This introduction to EuLisp using EuXLisp and Youtoo concentrates on those
+  things unique to EuLisp rather than covering basic Lisp concepts which are
+  already covered well in many texts.
 
 * Running EuXLisp
-  Type /euxlisp/ which will print the banner and prompt:
-  #+BEGIN_SRC eulisp
-  EuXLisp (formally EuScheme) - Version 0.36.2
+*** [[file:./euxlisp.html][Man page]]
+    + [[file:./euxlisp.html][EuXLisp man page (HTML)]]
+    + [[file:./euxlisp.1][EuXLisp man page (ASCII)]]
+*** Setting environment variables
+    EuXLisp need two paths: where to look for the compiled image, and where to
+    look for modules to load:
+***** Image
+      First euxlisp checks the environment variable =EU_IMAGE_PATH= (a colon
+      separated list of directory names), then a builtin path, set from
+      =IMAGE_SEARCH_PATH= in the Makefile.
+***** Modules
+      ditto for environment variable =EU_MODULE_PATH=, then builtin
+      =MODULE_SEARCH_PATH= (e.g., you might want to provide a set of system
+      supplied modules).
+***** Default settings
+      The default built-in settings should work for a default build with the
+      files in their default locations.
+*** Running Interactively
+    type
+    - =Bin.${ARCH}/euxlisp=
+    without options to start the EuXLisp interpreter which will print the banner
+    and prompt:
+    #+BEGIN_SRC eulisp
+    EuXLisp (formally EuScheme) - Version 0.991
+    Reading readline history from ${HOME}/.eulisp_history
 
-  user>
-  #+END_SRC
-  where the final line is the prompt.  EuXLisp uses the usual read-eval-print
-  cycle of interactive Lisps: type something, it will be evaluated, and the
-  result printed.  To exit, use
-  #+BEGIN_SRC eulisp
-  (exit)
-  #+END_SRC
+    user>
+    #+END_SRC
+    where the final line is the prompt.  EuXLisp uses the usual read-eval-print
+    cycle of interactive Lisps: type something, it will be evaluated, and the
+    result printed.  To exit, use
+    #+BEGIN_SRC eulisp
+    (exit)
+    #+END_SRC
+    and (usually) ^D will work, too.
+*** Executing a module
+    To execute the module =fact= in file =fact.em= run
+    - =echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q=
+    The =echo= pipes the load module =!>= command to the interpreter.  In the
+    future there will be a command-line option to execute a module directly.
 
-  and (usually) ^D will work, too.
+* Running Youtoo
+*** Options
+    to see the command-line options type
+    #+BEGIN_SRC eulisp
+    Bin.x86_64/youtoo -help
+    Usage: youtoo [<options>] <source-file(s)> [<options>]
+    -help                 --  show usage
+    -version              --  show current release
+    -params               --  show current parameter setting
+    -load_path <dir>      --  add <dir> to load path
+    -c                    --  create C linkable module file only
+    -ar                   --  create C linkable library file
+    -l <lib>              --  specify C linkable library
+    -L <dir>              --  extent C linkable library load path
+    -fff <file>           --  specify C foreign function file
+    -ffl <lib>            --  specify C foreign function library
+    -o <file>             --  destination file
+    -od <dir>             --  destination directory for object files
+    --script <file>       --  script mode
+    -silent               --  silent mode
+    -verbose              --  verbose mode
+    -no_warnings          --  no warning messages
+    -no_errors            --  no error messages
+    -no_else              --  omit warning for if without else
+    -redefine             --  redefine imported bindings
+    -no_inline            --  ignore inline declarations
+    -stop_after <phase>   --  stop after compilation phase (e.g. read)
+    -recompile            --  recompile imported modules
+    -no_recompile         --  no automatic recompilation of imports
+    -no_gc                --  garbage collection library not linked
+    -cc                   --  used C compiler
+    -ld                   --  used C linker
+    -ar_cmd               --  used C ar command
+    -ranlib_cmd           --  used C ranlib command
+    -cflags               --  additional C flag
+    -static               --  no shared libraries used
+    -g                    --  C debug info
+    -i                    --  force interpretation mode
+    -no_ct_handlers       --  no compile-time error handling
+    #+END_SRC
+*** Running Interactively
+    type
+    - =Bin.${ARCH}/youtoo=
+    which will print the banner and prompt:
+    #+BEGIN_SRC eulisp
+    EuLisp System Youtoo - Version 0.991'
+    Reading readline history from ${HOME}/.eulisp_history
 
-*** [[file:./euxlisp.html][EuXLisp man page (HTML)]]
-*** [[file:./euxlisp.1][EuXLisp man page (ASCII)]]
+    user>
+    #+END_SRC
+    where the final line is the prompt.  Youtoo uses the usual read-eval-print
+    cycle of interactive Lisps: type something, it will be evaluated, and the
+    result printed.  For help type
+    #+BEGIN_SRC eulisp
+    user> help:
+    load: <file-name>          evaluate file expressions
+    ?                          previous value
+    lexical-bindings:          show lexical environment
+    verbose:                   run verbose
+    silent:                    run silent
+    trace: <function-name>     trace function invocation
+    untrace: <functon-name>    stop tracing function invocation
+    backtrace:                 show backtrace
+    values:                    show stack values
+    continue:                  continue computation
+    reset:                     resume from all errors
+    resume:                    resume from previous error
+    [Ctrl-d]                   exit interpreter or resume from previous error
+    [Ctrl-c]                   interrupt computation
+    [Ctrl-z]                   suspend interpreter
+    exit:                      exit interpreter
+    -> #<file-stream: stdout>
+    user>
+    #+END_SRC
+    to exit type
+    #+BEGIN_SRC eulisp
+    (exit)
+    #+END_SRC
+*** Compiling
+    In directory =Examples/Misc= run
+    - =Bin.${ARCH}/youtoo fact -l level1=
+    to compile module fact into a stand-alone executable. With shared libraries
+    the executable should be less the 40K.
+*** [[file:../Youtoo/README.org][See also]]
+    [[file:../Youtoo/README.org][Youtoo README]]
 
 * Constants
   There are the usual self-evaluating bits and pieces:
@@ -257,10 +367,10 @@
   from one.  If two uses a name =bar=, it is its own =bar=, and has nothing to
   do with the =bar= in one.
 
-*** Modules in EuXLisp
-    EuXLisp requires each module to be in a file of its own: thus one should be
-    in a file named one.em (for EuLisp module), and two in /two.em/.  To enter a
-    module, use
+*** Modules in EuLisp
+    EuXLisp and Youtoo require each module to be in a file of its own: thus one
+    should be in a file named one.em (for EuLisp module), and two in /two.em/.
+    To enter a module, use
     #+BEGIN_SRC eulisp
     (!> one)
     #+END_SRC
@@ -649,7 +759,7 @@
   from =two=?
 
   The answer is "the right =bar=", that is that =bar= in the module of macro
-  definition, not the =bar= in the module of macro use.  EuXLisp takes care of
+  definition, not the =bar= in the module of macro use.  EuLisp takes care of
   all of this transparently for you: essentially every symbol remembers which
   module it was defined in, and always refers back to that module for its value.
 
@@ -675,7 +785,7 @@
   in the =let/cc=.
 
   Notice that =(eq 'break '{break}) -> t=.  As symbols they are =eq=, but as
-  identifiers they are q
+  identifiers they are quite different.
 * Miscellany
 *** Keywords
     There are keywords (unbindable, unassignable, self-evaluating symbols),
@@ -810,8 +920,9 @@
     #+END_SRC
 
 *** Loops
-    EuLisp doesn't really need loops, as everything can be written easily in
-    terms of tail recursive functions.  However, EuXLisp sneaks in a while loop:
+    EuLisp doesn't really need loops, as everything can be written in terms of
+    tail recursive functions.  However sometimes a simple loop form is more
+    convenient and readable and for this a =while= loop is provided:
     #+BEGIN_SRC eulisp
     (while bool
        expr
@@ -822,8 +933,9 @@
     which loops while the bool returns =true=.
 
 *** Tables
-    EuLisp uses tables for a general association mechanism.  EuXLisp implements
-    tables as hash tables, but in general they could be implemented differently.
+    EuLisp uses tables for a general association mechanism.  EuXLisp and Youtoo
+    implement tables as hash tables, but in general they could be implemented
+    differently.
     + =make-table= returns a table.
     + =(table-ref table key)= to retrieve a value, =((setter table-ref) table
       key value)= to update.
@@ -946,8 +1058,7 @@
     (eq (car a) (car s))      -> t
     #+END_SRC
 
-*** Other Tools
-    Other tools that EuXLisp provides:
+*** Other EuXLisp Tools
     + =describe= gives a little information about an object, e.g., =(describe
       <integer>)= or =(describe 4)=
     + =trace= can be used to print a message every time a function is entered or
@@ -1038,136 +1149,66 @@
     Alternatively, you can use =(sort l comp)=, where comp is a comparator
     function.
 
-* EuXLisp functions
-  Here is a summary of the functions available in EuXLisp.  Not all of these
-  correspond to EuLisp.
+* EuLisp functions
+  Here is a summary of the functions available in EuLisp.
 *** Special operators
     + =deflocal=
     + =defconstant=
+    + =defclass=
+    + =defcondition=
+    + =defmacro=
+    + =defgeneric=
+    + =defmethod=
     + =quote=
     + =lambda=
-    + =delay=
     + =let=
     + =let*=
+    + =labels=
     + =setq=
     + =if=
     + =cond=
+    + =when=
+    + =unless=
     + =progn=
+    + =while=
     + =and=
     + =or=
-    + =while=
-    + =export=
-    + =expose=
-    + =enter-module=
-    + =!>=
-    + =reenter-module=
-    + =!>>=
     + =call-next-method=
     + =next-method?=
-    + =defclass=
     + =apply=
-    + =map-list=
-    + =load=
-    + =load-noisily=
-    + =force=
-
+*** Module directives
+    + =export=
+    + =expose=
 *** List functions
     + =cons=
     + =car=
     + =cdr=
-    + =caar=
-    + =cadr=
-    + =cdar=
-    + =cddr=
-    + =caaar=
-    + =caadr=
-    + =cadar=
-    + =caddr=
-    + =cdaar=
-    + =cdadr=
-    + =cddar=
-    + =cdddr=
-    + =caaaar=
-    + =caaadr=
-    + =caadar=
-    + =caaddr=
-    + =cadaar=
-    + =cadadr=
-    + =caddar=
-    + =cadddr=
-    + =cdaaar=
-    + =cdaadr=
-    + =cdadar=
-    + =cdaddr=
-    + =cddaar=
-    + =cddadr=
-    + =cdddar=
-    + =cddddr=
     + =list=
-    + =list*=
-    + =append=
-    + =last-pair=
-    + =length=
-    + =memv=
-    + =memq=
-    + =assv=
-    + =assq=
-    + =list-ref=
-    + =list-tail=
-
 *** Symbol functions
-    + =bound?=
-    + =symbol-value=
-    + =symbol-plist=
     + =gensym=
-    + =get=
-    + =put=
-
 *** Vector functions
     + =vector=
-    + =make-vector=
-    + =vector-length=
-    + =vector-ref=
-
-*** Array functions
-    + =make-array=
-    + =array-ref=
-
 *** Predicates
     + =null?=
-    + =atom=
-    + =list?=
+    + =atom?=
     + =number?=
-    + =boolean?=
     + =cons?=
     + =symbol?=
     + =keyword?=
-    + =complex?=
     + =float?=
     + =double-float?=
-    + =rational?=
     + =integer?=
-    + =char?=
     + =string?=
     + =vector?=
-    + =function?=
     + =stream?=
-    + =input-stream?=
-    + =output-stream?=
-    + =object?=
-    + =eof-object?=
-    + =default-object?=
     + =eq=
     + =eql=
-
 *** Arithmetic functions
     + =zero?=
     + =positive?=
     + =negative?=
     + =odd?=
     + =even?=
-    + =exact?=
-    + =inexact?=
     + =truncate=
     + =floor=
     + =ceiling=
@@ -1175,13 +1216,10 @@
     + =abs=
     + =gcd=
     + =lcm=
-    + =random=
     + =+=
     + =-=
     + =*=
     + =/=
-    + =quotient=
-    + =remainder=
     + =min=
     + =max=
     + =sin=
@@ -1196,174 +1234,65 @@
     + =log=
     + =binary+=
     + =binary-=
-    + =unary-=
     + =binary*=
     + =binary/=
-    + =unary/=
-    + =binary%=
     + =binary-gcd=
-
-*** Bitwise logical functions
-    + =logand=
-    + =logior=
-    + =logxor=
-    + =lognot=
-
+    + =binary%=
 *** Numeric comparison functions
     + =<=
     + =<==
     + ===
     + =>==
     + =>=
-
-*** String functions
-    + =make-string=
-    + =string-length=
-    + =string-null?=
-    + =string-append=
-    + =string-ref=
-    + =substring=
-
 *** I/O functions
     + =read=
-    + =read-char=
-    + =read-byte=
-    + =read-short=
-    + =read-long=
-
     + =swrite=
     + =write=
-    + =write-char=
-    + =write-byte=
-    + =write-short=
-    + =write-long=
-
     + =sprin=
-    + =sprint=
     + =prin=
+    + =sprint=
     + =print=
-
+    + =snewline=
     + =newline=
-    + =char-ready?=
-    + =peek-char=
-
-*** Print control functions
-    + =print-breadth=
-    + =print-depth=
-
+    + =sflush=
+    + =flush=
+*** Format
+    + =sformat=
+    + =format=
+    + =fmt=
 *** File I/O functions
     + =open-input-file=
     + =open-output-file=
-    + =open-append-file=
-    + =open-update-file=
-    + =close-stream=
-    + =close-input-stream=
-    + =close-output-stream=
-    + =get-file-position=
-    + =unlink=
-
 *** Standard streams
     + =stdin=
     + =stdout=
     + =stderr=
-
-    + =; utility functions=
-    + =transcript-on=
-    + =transcript-off=
-    + =getarg=
-    + =prompt?=
-    + =exit=
-    + =compile=
-    + =decompile=
-    + =gc=
-    + =save=
-    + =restore=
-
-*** Debugging functions
-    + =trace-on=
-    + =trace-off=
-
-*** Module functions
-    + =module-symbols=
-    + =module-exports=
-    + =symbol-module=
-    + =current-module=
-    + =module-list=
-    + =unintern=
-
-*** Telos
-    + =allocate=
-    + =describe=
-    + =class?=
-    + =subclass?=
-
-*** Tables
-    + =make-table=
-    + =table-ref=
-    + =table-comparator=
-    + =table-delete=
-    + =table-length=
-    + =table-keys=
-    + =table-values=
-    + =table-fill=
-    + =table-clear=
-
 *** Plus some others
-    + =binary=
-    + =text=
-    + =not=
-    + =prin1=
-    + =princ=
     + =t=
-    + =eval=
-    + =system=
-    + =getenv=
-    + =putenv=
-    + =tmpfile=
-    + =current-time=
+    + =else=
     + =ticks-per-second=
-    + =backtrace=
-    + =backtrace?=
-
 *** Thread
     + =<thread>=
     + =<simple-thread>=
-    + =make-thread=
     + =thread?=
     + =thread-reschedule=
     + =current-thread=
-    + =thread-kill=
-    + =thread-queue=
     + =current-thread=
     + =thread-start=
     + =thread-value=
-    + =thread-state=
-    + =<thread-condition>=
-    + =<thread-error>=
-    + =<thread-already-started>=
-
     + =<lock>=
-    + =<simple-lock>=
-    + =make-lock=
     + =lock?=
     + =lock=
     + =unlock=
-    + =<lock-condition>=
-    + =<lock-error>=
-
     + =wait=
-    + =<wait-condition>=
-    + =<wait-error>=
-
     + =let/cc=
     + =with-handler=
     + =unwind-protect=
-    + =<wrong-condition-class>=
     + =signal=
     + =error=
     + =cerror=
-
 *** Telos
+    + =allocate=
     + =<object>=
     + =<class>=
     + =<simple-class>=
@@ -1378,71 +1307,29 @@
     + =<symbol>=
     + =<keyword>=
     + =<string>=
-    + =<simple-string>=
     + =<stream>=
-    + =<input-stream>=
-    + =<output-stream>=
-    + =<i/o-stream>=
     + =<vector>=
-    + =<simple-vector>=
-    + =<char>=
-    + =<simple-char>=
-    + =<promise>=
     + =<table>=
     + =<hash-table>=
     + =<function>=
     + =<simple-function>=
-    + =<subr>=
-    + =<continuation>=
-    + =<generic>=
-    + =<simple-generic>=
     + =<method>=
     + =<simple-method>=
     + =<slot>=
     + =<local-slot>=
-    + =<structure>=
-
     + =generic-prin=
     + =generic-write=
     + =wait=
-
     + =make=
     + =initialize=
-    + =class-hierarchy=
-
 *** Setter
     + =setter=
-
 *** Converter
     + =converter=
     + =convert=
-    + =<conversion-condition>=
-    + =<no-converter>=
-
 *** Condition
-    + =defcondition=
     + =condition?=
-    + =condition-message=
-    + =condition-value=
     + =<condition>=
-    + =<telos-condition>=
-    + =<telos-error>=
-    + =<telos-general-error>=
-    + =<telos-bad-ref>=
-    + =<no-applicable-method>=
-    + =<no-next-method>=
-    + =<incompatible-method-domain>=
-    + =<arithmetic-condition>=
-    + =<arithmetic-error>=
-    + =<error>=
-    + =<general-error>=
-    + =<bad-type>=
-    + =<unbound-error>=
-    + =<compilation-error>=
-    + =<macro-error>=
-    + =<syntax-error>=
-    + =<user-interrupt>=
-
 *** Compare
     + =binary<=
     + =binary==
@@ -1453,20 +1340,11 @@
     + =>==
     + =max=
     + =min=
-    + =assoc=
-
 *** Macros
-    + =defmacro=
     + =quasiquote=
     + =unquote=
     + =unquote-splicing=
-    + =symbol-macro=
-    + =macroexpand=
-    + =macroexpand1=
-
 *** Collect
-    + =<collection-condition>=
-    + =<collection-error>=
     + =collection?=
     + =sequence?=
     + =accumulate=
@@ -1485,38 +1363,262 @@
     + =reverse=
     + =size=
     + =slice=
-
 *** Copy
     + =deep-copy=
     + =shallow-copy=
 
-*** Format
-    + =sformat=
-    + =format=
-    + =fmt=
+* EuXLisp functions
+  Here is a summary of the additional functions available in EuXLisp.  Those
+  marked '*' are also in Youtoo.
+*** Special operators
+    + =delay=
+    + =map-list=
+    + =load=
+    + =load-noisily=
+    + =force=
+*** List functions
+    + =caar= *
+    + =cadr= *
+    + =cdar= *
+    + =cddr= *
+    + =caaar= *
+    + =caadr= *
+    + =cadar= *
+    + =caddr= *
+    + =cdaar= *
+    + =cdadr= *
+    + =cddar= *
+    + =cdddr= *
+    + =caaaar=
+    + =caaadr=
+    + =caadar=
+    + =caaddr=
+    + =cadaar=
+    + =cadadr=
+    + =caddar=
+    + =cadddr= *
+    + =cdaaar=
+    + =cdaadr=
+    + =cdadar=
+    + =cdaddr=
+    + =cddaar=
+    + =cddadr=
+    + =cdddar=
+    + =cddddr=
+    + =list*=
+    + =append= *
+    + =last-pair=
+    + =length= *
+    + =memv=
+    + =memq=
+    + =assv=
+    + =assq=
+    + =list-ref= *
+    + =list-tail=
+*** Symbol functions
+    + =bound?=
+    + =symbol-value=
+    + =symbol-plist=
+    + =get=
+    + =put=
+*** Vector functions
+    + =make-vector= *
+    + =vector-length=
+    + =vector-ref= *
+*** Predicates
+    + =list?= *
+    + =boolean?=
+    + =complex?=
+    + =rational?=
+    + =char?=
+    + =function?= *
+    + =input-stream?=
+    + =output-stream?=
+    + =object?= *
+    + =eof-object?=
+    + =default-object?=
+*** Arithmetic functions
+    + =exact?=
+    + =inexact?=
+    + =random= *
+    + =quotient=
+    + =remainder=
+    + =unary-=
+    + =unary/=
+*** Bitwise logical functions
+    + =logand=
+    + =logior=
+    + =logxor=
+    + =lognot=
+*** String functions
+    + =make-string=
+    + =string-length=
+    + =string-null?=
+    + =string-append=
+    + =string-ref=
+    + =substring=
+*** I/O functions
+    + =read-char= *
+    + =read-byte=
+    + =read-short=
+    + =read-long=
+    + =write-char=
+    + =write-byte=
+    + =write-short=
+    + =write-long=
+    + =char-ready?=
+    + =peek-char=
+*** Print control functions
+    + =print-breadth=
+    + =print-depth=
+*** File I/O functions
+    + =open-input-file=
+    + =open-output-file=
+    + =open-append-file=
+    + =open-update-file=
+    + =close-stream=
+    + =close-input-stream=
+    + =close-output-stream=
+    + =get-file-position=
+    + =unlink=
+*** utility functions
+    + =transcript-on=
+    + =transcript-off=
+    + =getarg=
+    + =prompt?=
+    + =exit= *
+    + =compile= *
+    + =decompile=
+    + =gc=
+    + =save=
+    + =restore=
+*** Debugging functions
+    + =trace-on=
+    + =trace-off=
+*** Module functions
+    + =enter-module=
+    + =!>=
+    + =reenter-module=
+    + =!>>=
+    + =module-symbols=
+    + =module-exports=
+    + =symbol-module=
+    + =current-module=
+    + =module-list=
+    + =unintern=
+*** Tables
+    + =make-table=
+    + =table-ref= *
+    + =table-comparator= *
+    + =table-delete=
+    + =table-length=
+    + =table-keys= *
+    + =table-values= *
+    + =table-fill=
+    + =table-clear=
+*** Plus some others
+    + =binary=
+    + =text=
+    + =not= *
+    + =prin1=
+    + =princ=
+    + =eval=
+    + =system= *
+    + =getenv= *
+    + =putenv=
+    + =tmpfile=
+    + =current-time=
+    + =backtrace= *
+    + =backtrace?=
+*** Thread
+    + =make-thread=
+    + =thread-kill=
+    + =thread-queue=
+    + =thread-state=
+    + =<thread-condition>=
+    + =<thread-error>=
+    + =<thread-already-started>=
+    + =<simple-lock>=
+    + =make-lock=
+    + =<lock-condition>=
+    + =<lock-error>=
+    + =<wait-condition>=
+    + =<wait-error>=
+    + =<wrong-condition-class>=
+*** Telos
+    + =<simple-string>=
+    + =<input-stream>=
+    + =<output-stream>=
+    + =<i/o-stream>=
+    + =<simple-vector>=
+    + =<char>=
+    + =<simple-char>=
+    + =<promise>=
+    + =<subr>=
+    + =<continuation>=
+    + =<generic>=
+    + =<simple-generic>=
+    + =<structure>=
+    + =class-hierarchy=
+    + =describe=
+    + =class?= *
+    + =subclass?= *
+*** Converter
+    + =<conversion-condition>=
+    + =<no-converter>=
+*** Condition
+    + =condition-message= *
+    + =condition-value=
+    + =<telos-condition>=
+    + =<telos-error>=
+    + =<telos-general-error>=
+    + =<telos-bad-ref>=
+    + =<no-applicable-method>=
+    + =<no-next-method>=
+    + =<incompatible-method-domain>=
+    + =<arithmetic-condition>=
+    + =<arithmetic-error>=
+    + =<error>=
+    + =<general-error>=
+    + =<bad-type>=
+    + =<unbound-error>=
+    + =<compilation-error>=
+    + =<macro-error>=
+    + =<syntax-error>=
+    + =<user-interrupt>=
+*** Compare
+    + =assoc=
+*** Macros
+    + =symbol-macro=
+    + =macroexpand=
+    + =macroexpand1=
+*** Collect
+    + =<collection-condition>=
+    + =<collection-error>=
 
 * Command Line Arguments
-  The EuXLisp interpreter accepts a few arguments:
-  + =-h=, =--help= Display this usage information.
-  + =-q=, =--quiet= Print no messages, prompts or values.
-  + =-n=, =--no-image= Do not read in the initial Lisp image.
-  + =-N=, =--no-sys-calls= Disable system calls.
-  + =-s= /file/, =--script= /file/ Read and execute script from /file/, see
-    below.
-  + =-m= /file/,  =--module= /file/ Read and execute module from /file/.
-  + =-i= /file/, =--image= /file/ Read the given image /file/ rather than the
-    default.
-  + =-t=, =--trace=            Switch on byte-code level tracing.
+*** EuXLisp
+    + =-h=, =--help= Display this usage information.
+    + =-q=, =--quiet= Print no messages, prompts or values.
+    + =-n=, =--no-image= Do not read in the initial Lisp image.
+    + =-N=, =--no-sys-calls= Disable system calls.
+    + =-s= /file/, =--script= /file/ Read and execute script from /file/, see
+      below.
+    + =-m= /file/,  =--module= /file/ Read and execute module from /file/.
+    + =-i= /file/, =--image= /file/ Read the given image /file/ rather than the
+      default.
+    + =-t=, =--trace=            Switch on byte-code level tracing.
 
-  Other arguments are passed to the intepreter and are available as =(getarg 0)=
-  (the name of the program), =(getarg 1)= (first argument), =(getarg 2)= (second
-  argument), and so on.  The function =getarg= returns =()= for a non-existent
-  argument.
+    Other arguments are passed to the intepreter and are available as =(getarg
+    0)= (the name of the program), =(getarg 1)= (first argument), =(getarg 2)=
+    (second argument), and so on.  The function =getarg= returns =()= for a
+    non-existent argument.
 
-*** Shell Scripts
-    EuXLisp can be used in a shell script by means of the =--script= flag:
+* Shell Scripts
+*** EuXLisp
+    can be used in a shell script by means of the =--script= flag:
     #+BEGIN_SRC eulisp
-    #!/usr/local/bin/euxlisp --script
+    #!<absolute path>/euxlisp --script
 
     (print "hello world")
     #+END_SRC
@@ -1529,4 +1631,11 @@
     (print "hello world")
     #+END_SRC
 
-* [[http://people.bath.ac.uk/masrjb/Sources/eunotes.html][The original Euscheme notes]].
+*** Youtoo
+    can also be used in a shell script by means of the =--script= flag:
+    #+BEGIN_SRC eulisp
+    #!<absolute path>/youtoo --script
+
+    (print "hello world")
+    #+END_SRC
+    See /Examples/Misc/script.em/.

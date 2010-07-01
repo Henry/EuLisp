@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 29 June 2010, 21:44:01
+  Generated 01 July 2010, 22:08:49
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -591,12 +591,12 @@ youtoo Functions
 
   and 4 boot0 and
   block 6 macros block
-  butlast 13 macros butlast
+  butlast 12 macros butlast
   case 2 macros case
-  catch 20 macros catch
+  catch 19 macros catch
   cond 3 boot0 cond
   defclass 11 mop-defcl0 defclass
-  defcondition 16 macros defcondition
+  defcondition 15 macros defcondition
   defgeneric 2 mop-gf0 defgeneric
   defglobal 7 macros defglobal
   defmethod 5 mop-meth0 defmethod
@@ -606,10 +606,9 @@ youtoo Functions
   defmethod-keywords 9 mop-meth0 defmethod-keywords
   defmethod-sig 8 mop-meth0 defmethod-sig
   defprimclass 5 mop-defcl0 defprimclass
-  dynamic 19 macros dynamic
-  dynamic-let 12 macros dynamic-let
-  dynamic-setq 15 macros dynamic-setq
-  for 9 macros for
+  dynamic 18 macros dynamic
+  dynamic-let 11 macros dynamic-let
+  dynamic-setq 14 macros dynamic-setq
   generic-lambda 5 mop-gf0 generic-lambda
   get-global-register 5 boot0 get-global-register
   last 5 macros last
@@ -618,16 +617,16 @@ youtoo Functions
   method-function-lambda 6 mop-meth0 method-function-lambda
   method-lambda 3 mop-meth0 method-lambda
   named-method-function-lambda 10 mop-meth0 named-method-function-lambda
-  not 10 macros not
+  not 9 macros not
   or 8 boot0 or
-  return-from 14 macros return-from
+  return-from 13 macros return-from
   set-global-register 6 boot0 set-global-register
-  throw 18 macros throw
-  time 17 macros time
+  throw 17 macros throw
+  time 16 macros time
   unless 7 boot0 unless
   unwind-protect 8 macros unwind-protect
   when 2 boot0 when
-  while 11 macros while
+  while 10 macros while
   with-handler 3 macros with-handler
   with-input-file 8 stream0 with-input-file
   with-input-file-of-path 4 stream0 with-input-file-of-path

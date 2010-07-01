@@ -140,6 +140,33 @@ result is \nil{}.
 \verb+(4 2)+\\
 \end{tabular}
 
+\generic{all?}
+%
+\begin{genericargs}
+    \item[function, \classref{function}] A function to be used as a predicate on
+    the elements of the collection(s).
+    %
+    \item[collection, \classref{collection}] A collection.
+    %
+    \item[\optional{more-collections}] More collections.
+\end{genericargs}
+%
+\result%
+The {\em function\/} is applied to argument lists constructed from corresponding
+successive elements of {\em collection\/} and {\em more-collections}.  If the
+result is \true{} for all elements of {\em collection\/} and {\em
+    more-collections} the result of \genericref{all?} is \true{} otherwise
+\nil{}.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb+(all? even? #(1 2 3 4))+ & \Ra & \nil{}\\
+    \verb+(all? even? #(2 4 6 8))+ & \Ra & \true{}
+\end{tabular}
+%
+\seealso%
+\genericref{any?}.
+
 \generic{any?}
 %
 \begin{genericargs}
@@ -161,25 +188,28 @@ further applications of {\em function\/} to elements of {\em collection\/} and
 %
 \examples
 \begin{tabular}{lcl}
-\verb+(anyp even #(1 2 3 4))+ & \Ra & \true{}\\
+\verb+(any? even? #(1 2 3 4))+ & \Ra & \true{}\\
 \begin{minipage}[t]{\columnwidth}
 {\tt
     \begin{tabbing}
         (l\=et ((x (list 1 2 3 4)))\\
-        \>(anyp > x (cdr x)))
+        \>(any? > x (cdr x)))
     \end{tabbing}}
 \end{minipage}
 & \Ra & \nil{}\\
 \begin{minipage}[t]{\columnwidth}
 {\tt
     \begin{tabbing}
-        (a\=nyp\\
+        (a\=ny?\\
         \>(lambda (a b) (= (\% a b) 0))\\
         \>\verb|#(3 2) '(1 0))|
     \end{tabbing}}
 \end{minipage}
 & \Ra & \true{}
 \end{tabular}
+%
+\seealso%
+\genericref{all?}.
 
 \generic{collection?}
 %
@@ -594,6 +624,26 @@ the method for the class of {\em collection}.
     \verb+(size (make <table> 'entries '((0 . a)))+ & \Ra & \verb+1+\\
 \end{tabular}
 
+\generic{slice}
+%
+\begin{genericargs}
+    \item[sequence, \classref{sequence}] A sequence.
+    %
+    \item[start, \classref{fixed-precision-integer}] The index of the first
+    element of the slice.
+    \item[end, \classref{fixed-precision-integer}] The index of the last
+    element of the slice.
+\end{genericargs}
+%
+\result%
+The result is new sequence of the same class as {\em sequence} containing the
+elements of {\em sequence} from {\em start} up to but not including {\em end}.
+%
+\examples
+\begin{tabular}{lcl}
+    \verb+(slice '(a b c d) 1 3)+ & \Ra & \verb+(b c)+
+\end{tabular}
+
 \generic{sort}
 %
 \begin{genericargs}
@@ -623,15 +673,6 @@ returns it.
 \remarks%
 Methods on this function are only defined for \classref{list} and
 \classref{vector}.
-
-\generic{third}
-%
-\begin{genericargs}
-    \item[sequence, \classref{sequence}] A sequence.
-\end{genericargs}
-%
-\result%
-The result is contents of index position 2 of {\em sequence}.
 
 \converter{list}
 %

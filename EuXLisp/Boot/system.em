@@ -41,7 +41,6 @@
       set-car!
       set-cdr!
       vector-set!
-      array-set!
       set-file-position!
       set-symbol-value!
       set-symbol-plist!

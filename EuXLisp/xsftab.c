@@ -121,11 +121,6 @@ FUNDEF funtab[] =
     {"vector-ref", xvref},
     {"vector-set!", xvset},
 
-    // array functions
-    {"make-array", xmakearray},
-    {"array-ref", xaref},
-    {"array-set!", xaset},
-
     // conversion functions
     {"symbol->string", xsymstr},
     {"string->symbol", xstrsym},
@@ -139,8 +134,8 @@ FUNDEF funtab[] =
     {"number->string", xnumstring},
 
     // predicate functions
-    {"null?", xnull},
-    {"atom?", xatom},
+    {"null?", xnullp},
+    {"atom?", xatomp},
     {"list?", xlistp},
     {"number?", xnumberp},
     {"boolean?", xbooleanp},

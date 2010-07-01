@@ -116,10 +116,6 @@
       vector-length
       vector-ref
 
-      ;; array functions
-      make-array
-      array-ref
-
       ;; predicates
       null?
       atom

@@ -1,44 +1,154 @@
 #                            -*- mode: org; -*-
-#+TITLE:              *Using EuXLisp* (Formally Euscheme)
+#+TITLE:       *An Introduction to EuLisp, EuXLisp and Youtoo*
 #+AUTHOR: of original Euscheme notes Russell Bradford
 #+EMAIL: no-reply
 #+OPTIONS: email:nil ^:{}
 #+STARTUP: hidestars
 #+STARTUP: odd
-* [[file:../index.org][EuXLisp index]]
+* [[file:../index.org][EuLisp index]]
 * Introduction
-  These notes are based on the Euscheme HTML notes by Russell Bradford.  Most of
-  the text remains more or less unchanged but reformatted in Org-mode and
-  exported as HTML and PDF.  Also some changes have been made and continue to be
-  made to keep this document consistent with the evolving EuLisp definition and
-  EuXLisp implementation.
+  This introduction to EuLisp is based on the
+  [[http://people.bath.ac.uk/masrjb/Sources/eunotes.html][Euscheme notes]]
+  written by Russell Bradford.  Much of the text remains more or less unchanged
+  but reformatted in Org-mode and exported as HTML.  Also some changes
+  have been made and continue to be made to keep this document consistent with
+  the evolving EuLisp definition and EuXLisp and Youtoo implementations.
 
-  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0) is a small
-  and compact Lisp, but nevertheless has many interesting features, such as
-  modules, an object system, and multithreading.  EuLisp Level 1 has extra
-  features, the most notable being a full metaobject system which is implemented
-  in Youtoo not in EuXLisp.  These are a few notes on the use of EuLisp in
-  general and EuXLisp in particular and concentrate on those things unique to
-  EuLisp.
+  EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small and
+  compact Lisp, but nevertheless has many interesting features, such as modules,
+  an object system, and multithreading.  EuLisp Level 1 has extra features, the
+  most notable being a full metaobject system which are implemented in Youtoo.
+  This introduction to EuLisp using EuXLisp and Youtoo concentrates on those
+  things unique to EuLisp rather than covering basic Lisp concepts which are
+  already covered well in many texts.
 
 * Running EuXLisp
-  Type /euxlisp/ which will print the banner and prompt:
-  #+BEGIN_SRC eulisp
-  EuXLisp (formally EuScheme) - Version 0.36.2
+*** [[file:./euxlisp.html][Man page]]
+    + [[file:./euxlisp.html][EuXLisp man page (HTML)]]
+    + [[file:./euxlisp.1][EuXLisp man page (ASCII)]]
+*** Setting environment variables
+    EuXLisp need two paths: where to look for the compiled image, and where to
+    look for modules to load:
+***** Image
+      First euxlisp checks the environment variable =EU_IMAGE_PATH= (a colon
+      separated list of directory names), then a builtin path, set from
+      =IMAGE_SEARCH_PATH= in the Makefile.
+***** Modules
+      ditto for environment variable =EU_MODULE_PATH=, then builtin
+      =MODULE_SEARCH_PATH= (e.g., you might want to provide a set of system
+      supplied modules).
+***** Default settings
+      The default built-in settings should work for a default build with the
+      files in their default locations.
+*** Running Interactively
+    type
+    - =Bin.${ARCH}/euxlisp=
+    without options to start the EuXLisp interpreter which will print the banner
+    and prompt:
+    #+BEGIN_SRC eulisp
+    EuXLisp (formally EuScheme) - Version 0.991
+    Reading readline history from ${HOME}/.eulisp_history
 
-  user>
-  #+END_SRC
-  where the final line is the prompt.  EuXLisp uses the usual read-eval-print
-  cycle of interactive Lisps: type something, it will be evaluated, and the
-  result printed.  To exit, use
-  #+BEGIN_SRC eulisp
-  (exit)
-  #+END_SRC
+    user>
+    #+END_SRC
+    where the final line is the prompt.  EuXLisp uses the usual read-eval-print
+    cycle of interactive Lisps: type something, it will be evaluated, and the
+    result printed.  To exit, use
+    #+BEGIN_SRC eulisp
+    (exit)
+    #+END_SRC
+    and (usually) ^D will work, too.
+*** Executing a module
+    To execute the module =fact= in file =fact.em= run
+    - =echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q=
+    The =echo= pipes the load module =!>= command to the interpreter.  In the
+    future there will be a command-line option to execute a module directly.
 
-  and (usually) ^D will work, too.
+* Running Youtoo
+*** Options
+    to see the command-line options type
+    #+BEGIN_SRC eulisp
+    Bin.x86_64/youtoo -help
+    Usage: youtoo [<options>] <source-file(s)> [<options>]
+    -help                 --  show usage
+    -version              --  show current release
+    -params               --  show current parameter setting
+    -load_path <dir>      --  add <dir> to load path
+    -c                    --  create C linkable module file only
+    -ar                   --  create C linkable library file
+    -l <lib>              --  specify C linkable library
+    -L <dir>              --  extent C linkable library load path
+    -fff <file>           --  specify C foreign function file
+    -ffl <lib>            --  specify C foreign function library
+    -o <file>             --  destination file
+    -od <dir>             --  destination directory for object files
+    --script <file>       --  script mode
+    -silent               --  silent mode
+    -verbose              --  verbose mode
+    -no_warnings          --  no warning messages
+    -no_errors            --  no error messages
+    -no_else              --  omit warning for if without else
+    -redefine             --  redefine imported bindings
+    -no_inline            --  ignore inline declarations
+    -stop_after <phase>   --  stop after compilation phase (e.g. read)
+    -recompile            --  recompile imported modules
+    -no_recompile         --  no automatic recompilation of imports
+    -no_gc                --  garbage collection library not linked
+    -cc                   --  used C compiler
+    -ld                   --  used C linker
+    -ar_cmd               --  used C ar command
+    -ranlib_cmd           --  used C ranlib command
+    -cflags               --  additional C flag
+    -static               --  no shared libraries used
+    -g                    --  C debug info
+    -i                    --  force interpretation mode
+    -no_ct_handlers       --  no compile-time error handling
+    #+END_SRC
+*** Running Interactively
+    type
+    - =Bin.${ARCH}/youtoo=
+    which will print the banner and prompt:
+    #+BEGIN_SRC eulisp
+    EuLisp System Youtoo - Version 0.991'
+    Reading readline history from ${HOME}/.eulisp_history
 
-*** [[file:./euxlisp.html][EuXLisp man page (HTML)]]
-*** [[file:./euxlisp.1][EuXLisp man page (ASCII)]]
+    user>
+    #+END_SRC
+    where the final line is the prompt.  Youtoo uses the usual read-eval-print
+    cycle of interactive Lisps: type something, it will be evaluated, and the
+    result printed.  For help type
+    #+BEGIN_SRC eulisp
+    user> help:
+    load: <file-name>          evaluate file expressions
+    ?                          previous value
+    lexical-bindings:          show lexical environment
+    verbose:                   run verbose
+    silent:                    run silent
+    trace: <function-name>     trace function invocation
+    untrace: <functon-name>    stop tracing function invocation
+    backtrace:                 show backtrace
+    values:                    show stack values
+    continue:                  continue computation
+    reset:                     resume from all errors
+    resume:                    resume from previous error
+    [Ctrl-d]                   exit interpreter or resume from previous error
+    [Ctrl-c]                   interrupt computation
+    [Ctrl-z]                   suspend interpreter
+    exit:                      exit interpreter
+    -> #<file-stream: stdout>
+    user>
+    #+END_SRC
+    to exit type
+    #+BEGIN_SRC eulisp
+    (exit)
+    #+END_SRC
+*** Compiling
+    In directory =Examples/Misc= run
+    - =Bin.${ARCH}/youtoo fact -l level1=
+    to compile module fact into a stand-alone executable. With shared libraries
+    the executable should be less the 40K.
+*** [[file:../Youtoo/README.org][See also]]
+    [[file:../Youtoo/README.org][Youtoo README]]
 
 * Constants
   There are the usual self-evaluating bits and pieces:
@@ -49,15 +159,15 @@
     length 3, containing an integer, a symbol, and a list.
 
 * Lists and Vectors
-  Lists are created with the usual [[file:EuLisp-0.991/html/eulispcl17.html#dx21-624002][=cons=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-641002][=list=]] and quoted forms '(1 2 3).
-  Use [[file:EuLisp-0.991/html/eulispcl17.html#dx21-626002][=car=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-628002][=cdr=]] to access the elements.
+  Lists are created with the usual [[file:EuLisp-0.991/html/eulispcl17.html#dx21-630002][=cons=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-647002][=list=]] and quoted forms '(1 2 3).
+  Use [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-634002][=cdr=]] to access the elements.
 
   A vector is created by the function =make-vector= as in
   #+BEGIN_SRC eulisp
   (make-vector 4)
   #+END_SRC
   which creates a vector of length 4, indexed from 0 to 3, all elements
-  initialised to be [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609010][=()=]]s.  In fact, make-vector can take a second argument
+  initialised to be [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]]s.  In fact, make-vector can take a second argument
   #+BEGIN_SRC eulisp
   (make-vector 4 0)
   #+END_SRC
@@ -68,7 +178,7 @@
   setter function.
 
   Take care with the creation of vectors: =(make-vector 3 #(0 0 0))= will create
-  a vector of three slots, all initialised to the same [[file:EuLisp-0.991/html/eulispcl17.html#dx21-431004][=eq=]] value.
+  a vector of three slots, all initialised to the same [[file:EuLisp-0.991/html/eulispcl17.html#dx21-437004][=eq=]] value.
 
 * Expressions
   As is usual, anything that is not a constant is an expression to be evaluated,
@@ -141,7 +251,7 @@
 * Conditionals
   EuLisp has the usual =(if boolexpr trueexpr falseexpr)= (always with both
   trueexpr and falseexpr), and the [[file:EuLisp-0.991/html/eulispcl16.html#dx20-262002][=cond=]] form.  The single false value in
-  EuLisp is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609010][=()=]]: anything else is deemed to be true.  [[file:EuLisp-0.991/html/eulispcl16.html#dx20-210002][=t=]] is bound to the
+  EuLisp is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]]: anything else is deemed to be true.  [[file:EuLisp-0.991/html/eulispcl16.html#dx20-210002][=t=]] is bound to the
   symbol [[file:EuLisp-0.991/html/eulispcl16.html#dx20-210002][=t=]], providing a convenient canonical true value.  Additional
   conditional forms include
   #+BEGIN_SRC eulisp
@@ -203,8 +313,8 @@
   4 5)= prints =(1 2 (3 4 5))=, and =(bar 99 100)= prints =(99 100 ())=.
 
 * Arithmetic
-  All the usual stuff here.  Functions [[file:EuLisp-0.991/html/eulispcl17.html#dx21-655004][=+=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-657002][=-=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-659002][=*=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661002][=/=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-671002][=abs=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-521002][=sin=]],
-  [[file:EuLisp-0.991/html/eulispcl17.html#dx21-531002][=exp=]] and so on.  Use =(pow a b)= to raise =a= to power =b=.  Additionally,
+  All the usual stuff here.  Functions [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661004][=+=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-663002][=-=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-665002][=*=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-667002][=/=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-677002][=abs=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-527002][=sin=]],
+  [[file:EuLisp-0.991/html/eulispcl17.html#dx21-537002][=exp=]] and so on.  Use =(pow a b)= to raise =a= to power =b=.  Additionally,
   the basic arithmetic ops have variable arity:
   #+BEGIN_SRC eulisp
   (+)         -> 0
@@ -237,7 +347,7 @@
   )
   #+END_SRC
   The module one imports from the system module named =level0=.  This module
-  contains all the useful stuff like [[file:EuLisp-0.991/html/eulispcl17.html#dx21-624002][=cons=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-626002][=car=]], [[file:EuLisp-0.991/html/eulispcl16.html#dx20-229002][=defun=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-655004][=+=]] and so on.  In
+  contains all the useful stuff like [[file:EuLisp-0.991/html/eulispcl17.html#dx21-630002][=cons=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]], [[file:EuLisp-0.991/html/eulispcl16.html#dx20-229002][=defun=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661004][=+=]] and so on.  In
   fact, it's generally a good idea to import the =level0= module, otherwise you
   can't actually do anything.
 
@@ -257,10 +367,10 @@
   from one.  If two uses a name =bar=, it is its own =bar=, and has nothing to
   do with the =bar= in one.
 
-*** Modules in EuXLisp
-    EuXLisp requires each module to be in a file of its own: thus one should be
-    in a file named one.em (for EuLisp module), and two in /two.em/.  To enter a
-    module, use
+*** Modules in EuLisp
+    EuXLisp and Youtoo require each module to be in a file of its own: thus one
+    should be in a file named one.em (for EuLisp module), and two in /two.em/.
+    To enter a module, use
     #+BEGIN_SRC eulisp
     (!> one)
     #+END_SRC
@@ -367,10 +477,10 @@
   which is itself a first-class object: this means that classes are supported at
   the same level as any other object in the system, and can be created, passed
   to functions, returned from functions, and so on.  For example, the integer
-  =1= has class [[file:EuLisp-0.991/html/eulispcl17.html#dx21-583035][=<integer>=]] (or rather, has a class with name =<integer>=).
+  =1= has class [[file:EuLisp-0.991/html/eulispcl17.html#dx21-589035][=<integer>=]] (or rather, has a class with name =<integer>=).
 
-  In fact, EuXLisp has (class-of 1) to be [[file:EuLisp-0.991/html/eulispcl17.html#dx21-554035][=<fpi>=]] (for fixed point integer),
-  which is a subclass of [[file:EuLisp-0.991/html/eulispcl17.html#dx21-583035][=<integer>=]].
+  In fact, EuXLisp has (class-of 1) to be [[file:EuLisp-0.991/html/eulispcl17.html#dx21-560035][=<fpi>=]] (for fixed point integer),
+  which is a subclass of [[file:EuLisp-0.991/html/eulispcl17.html#dx21-589035][=<integer>=]].
 
   Classes are fully-fledged objects, so they have a class, too
   #+BEGIN_SRC eulisp
@@ -390,8 +500,8 @@
   required keywords.  This means that instances of such classes must have
   certain information passed to make in order to succeed.  Some classes are
   abstract, and you cannot make instances of them.  They are there purely for
-  other classes to inherit from.  The class [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609006][=<list>=]] is abstract, while its
-  subclass [[file:EuLisp-0.991/html/eulispcl17.html#dx21-620002][=<cons>=]] is concrete.
+  other classes to inherit from.  The class [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615006][=<list>=]] is abstract, while its
+  subclass [[file:EuLisp-0.991/html/eulispcl17.html#dx21-626002][=<cons>=]] is concrete.
 
   It is simple to create new classes by the use of defclass.
   #+BEGIN_SRC eulisp
@@ -409,7 +519,7 @@
 
   This form defines a new class named =<rat>=.  Classes in EuLisp are
   conventionally noted by the use of angle brackets =<>=, but they are just
-  normal names.  The [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609010][=()=]] next is the list of classes for =<rat>= to inherit
+  normal names.  The [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]] next is the list of classes for =<rat>= to inherit
   from.  In EuLisp Level 0, there is only single inheritance, so this should be
   a list of at most one class.  Any empty list indicates some suitable default
   super-class.
@@ -458,8 +568,8 @@
 
 *** Generic Functions
     Generic functions are (again) first-class objects in EuLisp, constructed by
-    [[file:EuLisp-0.991/html/eulispcl18.html#dx23-942002][=defgeneric=]].  Methods are added to them by defmethod (unlike some other
-    systems, a generic function must be created by defgeneric before [[file:EuLisp-0.991/html/eulispcl18.html#dx23-951002][=defmethod=]]
+    [[file:EuLisp-0.991/html/eulispcl18.html#dx23-948002][=defgeneric=]].  Methods are added to them by defmethod (unlike some other
+    systems, a generic function must be created by defgeneric before [[file:EuLisp-0.991/html/eulispcl18.html#dx23-957002][=defmethod=]]
     will work.)
     #+BEGIN_SRC eulisp
     (defgeneric foo (a b))
@@ -539,29 +649,29 @@
     run) until some other thread releases the lock.
 
 * Input and Output
-  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-774002][=read=]] to read a Lisp expression.
-  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-801002][=write=]] write to standard output in a way that can be re-read if possible.
+  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-780002][=read=]] to read a Lisp expression.
+  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-807002][=write=]] write to standard output in a way that can be re-read if possible.
     Thus, for example, strings are quoted.
-  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-817002][=prin=]] print to standard output in a human-friendly manner.  Strings and
+  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-823002][=prin=]] print to standard output in a human-friendly manner.  Strings and
     such are not quoted.  Compare
     #+BEGIN_SRC eulisp
         (prin "asd")    prints: asd
         (write "asd")   prints: "asd"
     #+END_SRC
-  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-825002][=print=]] as [[file:EuLisp-0.991/html/eulispcl17.html#dx21-817002][=prin=]], with a newline.
+  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-831002][=print=]] as [[file:EuLisp-0.991/html/eulispcl17.html#dx21-823002][=prin=]], with a newline.
   + Print and write functions are n-ary:
     #+BEGIN_SRC eulisp
         (prin "one = " 1 ", two = " 2)    prints: one = 1, two = 2
         (write "one = " 1 ", two = " 2)   prints: "one = "1", two = "2
     #+END_SRC
-  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-832002][=newline=]] output a newline.
+  + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-838002][=newline=]] output a newline.
 
   All of the above have variants beginning with an 's' which take a stream to
   print on as the first argument.
 
   For stream manipulation:
   + open-input-file takes a string, and opens and returns a corresponding
-    stream for input.  Returns [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609010][=()=]] if not such file exists.
+    stream for input.  Returns [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]] if not such file exists.
   + open-output-file creates a file if it didn't already exist.
   + open-update-file opens for append.
   + get-file-position and =(setter get-file-position)= move the file pointer in
@@ -569,19 +679,19 @@
   + close-stream closes an open stream.
 
 *** Format
-    A more complicated printing function is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-575002][=sformat=]], which is somewhat akin to
+    A more complicated printing function is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-581002][=sformat=]], which is somewhat akin to
     C's =printf=.
     #+BEGIN_SRC eulisp
     (sformat stream format-string arg arg ...)
     #+END_SRC
-    The variants [[file:EuLisp-0.991/html/eulispcl17.html#dx21-577002][=format=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-579002][=fmt=]] do not take a stream argument and the former
+    The variants [[file:EuLisp-0.991/html/eulispcl17.html#dx21-583002][=format=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-585002][=fmt=]] do not take a stream argument and the former
     prints to standard output and the latter returns the formatted output as a
     string.
 
     The format string is copied to the output, except that =~= marks an escape
     (like C's =%=):
-    + =~a= output the next arg using [[file:EuLisp-0.991/html/eulispcl17.html#dx21-817002][=prin=]]
-    + =~s= output the next arg using [[file:EuLisp-0.991/html/eulispcl17.html#dx21-801002][=write=]]
+    + =~a= output the next arg using [[file:EuLisp-0.991/html/eulispcl17.html#dx21-823002][=prin=]]
+    + =~s= output the next arg using [[file:EuLisp-0.991/html/eulispcl17.html#dx21-807002][=write=]]
     + =~%= output a newline
     + =~~= output a =~=
     + =~c= output a character
@@ -592,8 +702,8 @@
     There are other escapes to write integers in other bases, output new pages,
     and so on.
 
-    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-579002][=fmt=]] can be used with the n-ary print and write functions to write complex
-    formatted output statements in a more readable form that using [[file:EuLisp-0.991/html/eulispcl17.html#dx21-577002][=format=]]
+    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-585002][=fmt=]] can be used with the n-ary print and write functions to write complex
+    formatted output statements in a more readable form that using [[file:EuLisp-0.991/html/eulispcl17.html#dx21-583002][=format=]]
     \e.g.\
     #+BEGIN_SRC eulisp
         (print "one = " 1 ", x = " (fmt "~e" 0.000002)) prints: one = 1, x = 2.000000e-06
@@ -649,7 +759,7 @@
   from =two=?
 
   The answer is "the right =bar=", that is that =bar= in the module of macro
-  definition, not the =bar= in the module of macro use.  EuXLisp takes care of
+  definition, not the =bar= in the module of macro use.  EuLisp takes care of
   all of this transparently for you: essentially every symbol remembers which
   module it was defined in, and always refers back to that module for its value.
 
@@ -674,8 +784,8 @@
   definition.  Thus, a reference to break in the body will refer to the binding
   in the [[file:EuLisp-0.991/html/eulispcl16.html#dx20-272002][=let/cc=]].
 
-  Notice that =(eq 'break '{break}) -> t=.  As symbols they are [[file:EuLisp-0.991/html/eulispcl17.html#dx21-431004][=eq=]], but as
-  identifiers they are q
+  Notice that =(eq 'break '{break}) -> t=.  As symbols they are [[file:EuLisp-0.991/html/eulispcl17.html#dx21-437004][=eq=]], but as
+  identifiers they are quite different.
 * Miscellany
 *** Keywords
     There are keywords (unbindable, unassignable, self-evaluating symbols),
@@ -690,27 +800,27 @@
 
 *** Comparisons
     EuLisp has the usual tests for equality:
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-431004][=eq=]] for identity
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-435002][=eql=]] for identity integers and characters
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-438002][=binary==]] generic function with methods for most types
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-446002][===]] n-ary equality which calls [[file:EuLisp-0.991/html/eulispcl17.html#dx21-438002][=binary==]] for each pair
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-437004][=eq=]] for identity
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-441002][=eql=]] for identity integers and characters
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-444002][=binary==]] generic function with methods for most types
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][===]] n-ary equality which calls [[file:EuLisp-0.991/html/eulispcl17.html#dx21-444002][=binary==]] for each pair
 
     Note that
     #+BEGIN_SRC eulisp
     (eql 1 1.0)  -> ()
     (= 1 1.0)      -> t
     #+END_SRC
-    There is also the usual [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-454002][=<==]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][=>=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=>==]], which are n-ary:
+    There is also the usual [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-460002][=<==]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=>=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-462002][=>==]], which are n-ary:
     #+BEGIN_SRC eulisp
     (< a b c ...)
     #+END_SRC
     returns [[file:EuLisp-0.991/html/eulispcl16.html#dx20-210002][=t=]] when =a=, =b=, =c=, etc., form a strictly increasing sequence.
-    Similarly [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]]= for a non-decreasing sequence, and so on.
+    Similarly [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]]= for a non-decreasing sequence, and so on.
 
 *** Generic Arithmetic
-    The arithmetic operators [[file:EuLisp-0.991/html/eulispcl17.html#dx21-655004][=+=]] and so on are all n-ary, i.e., take a variable
+    The arithmetic operators [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661004][=+=]] and so on are all n-ary, i.e., take a variable
     number of arguments.  Each operator is defined in terms of a binary generic
-    function: [[file:EuLisp-0.991/html/eulispcl17.html#dx21-685002][=binary+=]] for [[file:EuLisp-0.991/html/eulispcl17.html#dx21-655004][=+=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-689002][=binary*=]] for [[file:EuLisp-0.991/html/eulispcl17.html#dx21-659002][=*=]], etc.  The n-ary form is just
+    function: [[file:EuLisp-0.991/html/eulispcl17.html#dx21-691002][=binary+=]] for [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661004][=+=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-695002][=binary*=]] for [[file:EuLisp-0.991/html/eulispcl17.html#dx21-665002][=*=]], etc.  The n-ary form is just
     a repeated application of the binary form
     #+BEGIN_SRC eulisp
     (+ a b c ...) = ((..(binary+ (binary+ a b) c) ...))
@@ -720,13 +830,13 @@
     (defmethod binary+ ((a <symbol>) (b <symbol>))
       ...)
     #+END_SRC
-    and then you can use [[file:EuLisp-0.991/html/eulispcl17.html#dx21-655004][=+=]] to add symbols: =(+ 'a 'b 'c)=.
+    and then you can use [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661004][=+=]] to add symbols: =(+ 'a 'b 'c)=.
 
     There are also generic functions =unary-= and =unary/= for the unary =(- x)=
     and =(/ x)= (reciprocal).
 
-    Similarly, the comparators [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][=>=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-454002][=<==]] etc., are all defined in terms of
-    the two generic functions [[file:EuLisp-0.991/html/eulispcl17.html#dx21-443002][=binary<=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-438002][=binary==]].
+    Similarly, the comparators [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=>=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-460002][=<==]] etc., are all defined in terms of
+    the two generic functions [[file:EuLisp-0.991/html/eulispcl17.html#dx21-449002][=binary<=]] and [[file:EuLisp-0.991/html/eulispcl17.html#dx21-444002][=binary==]].
 
 *** Local Functions
     Just like [[file:EuLisp-0.991/html/eulispcl16.html#dx20-289003][=let=]] introduces local variables, the [[file:EuLisp-0.991/html/eulispcl16.html#dx20-286002][=labels=]] form can introduce
@@ -763,7 +873,7 @@
     There are several functions supplied to iterate along collections.
     Collections include =lists=, =vectors=, =strings=, and =tables=.
 
-    The generic function [[file:EuLisp-0.991/html/eulispcl17.html#dx21-390002][=map=]] takes a function and a collection
+    The generic function [[file:EuLisp-0.991/html/eulispcl17.html#dx21-395002][=map=]] takes a function and a collection
     #+BEGIN_SRC eulisp
     (map list '(1 2 3))   -> ((1) (2) (3))
     (map - #(4 5 6))      -> #(-4 -5 -6)
@@ -810,8 +920,9 @@
     #+END_SRC
 
 *** Loops
-    EuLisp doesn't really need loops, as everything can be written easily in
-    terms of tail recursive functions.  However, EuXLisp sneaks in a while loop:
+    EuLisp doesn't really need loops, as everything can be written in terms of
+    tail recursive functions.  However sometimes a simple loop form is more
+    convenient and readable and for this a =while= loop is provided:
     #+BEGIN_SRC eulisp
     (while bool
        expr
@@ -822,8 +933,9 @@
     which loops while the bool returns =true=.
 
 *** Tables
-    EuLisp uses tables for a general association mechanism.  EuXLisp implements
-    tables as hash tables, but in general they could be implemented differently.
+    EuLisp uses tables for a general association mechanism.  EuXLisp and Youtoo
+    implement tables as hash tables, but in general they could be implemented
+    differently.
     + =make-table= returns a table.
     + =(table-ref table key)= to retrieve a value, =((setter table-ref) table
       key value)= to update.
@@ -832,11 +944,11 @@
     + =table-values= to get a list of current values.
     + =table-clear= to completely empty a table.
 
-    When looking for a match to a key in a table, the system defaults to [[file:EuLisp-0.991/html/eulispcl17.html#dx21-435002][=eql=]].
+    When looking for a match to a key in a table, the system defaults to [[file:EuLisp-0.991/html/eulispcl17.html#dx21-441002][=eql=]].
     You can change this by using =(make-table comparator)=, where =comparator=
-    is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-431004][=eq=]] or [[file:EuLisp-0.991/html/eulispcl17.html#dx21-435002][=eql=]] or [[file:EuLisp-0.991/html/eulispcl17.html#dx21-438002][=binary==]] or [[file:EuLisp-0.991/html/eulispcl17.html#dx21-446002][===]].
+    is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-437004][=eq=]] or [[file:EuLisp-0.991/html/eulispcl17.html#dx21-441002][=eql=]] or [[file:EuLisp-0.991/html/eulispcl17.html#dx21-444002][=binary==]] or [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][===]].
 
-    If a value is not found for a particular key in the table [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609010][=()=]] is returned.
+    If a value is not found for a particular key in the table [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]] is returned.
     This can be changed by =(make-table comparator fill-value)=.  Now
     =fill-value= will be returned on failure.
 
@@ -860,7 +972,7 @@
     longer usable.
 
     The continuation function can take a single optional argument which is a
-    value to pass to the continuation: the default is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609010][=()=]].
+    value to pass to the continuation: the default is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]].
 
     The forms [[file:EuLisp-0.991/html/eulispcl16.html#dx20-278002][=block=]] and [[file:EuLisp-0.991/html/eulispcl16.html#dx20-282002][=return-from=]] are simply =let/c=c and a call to a
     continuation:
@@ -889,13 +1001,13 @@
     control passes to the continuation.
 
 *** Setters
-    Structures, like =lists=, =vectors= and [[file:EuLisp-0.991/html/eulispcl18.html#dx23-935001][=class=]] instances have elements that
-    can be accessed.  The elements of a [[file:EuLisp-0.991/html/eulispcl17.html#dx21-911005][=vector=]] can be read by =vector-ref=.
+    Structures, like =lists=, =vectors= and [[file:EuLisp-0.991/html/eulispcl18.html#dx23-941001][=class=]] instances have elements that
+    can be accessed.  The elements of a [[file:EuLisp-0.991/html/eulispcl17.html#dx21-917005][=vector=]] can be read by =vector-ref=.
     To write to an element use the function =(setter vector-ref)=,
     #+BEGIN_SRC eulisp
     ((setter vector-ref) vec index val)
     #+END_SRC
-    Similarly, the accessor [[file:EuLisp-0.991/html/eulispcl17.html#dx21-626002][=car=]] has an updater =(setter car)= (often called
+    Similarly, the accessor [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]] has an updater =(setter car)= (often called
     =rplaca= in other Lisps), and so on.  In general a reader function =r= will
     have an associated updater =(setter r)=.
 
@@ -914,8 +1026,8 @@
     #+END_SRC
 
 *** Convert
-    The function [[file:EuLisp-0.991/html/eulispcl17.html#dx21-463004][=convert=]] is used to change an object of one type into an
-    object of another type.  Thus to convert an [[file:EuLisp-0.991/html/eulispcl17.html#dx21-582005][=integer=]] to a [[file:EuLisp-0.991/html/eulispcl17.html#dx21-542005][=float=]]
+    The function [[file:EuLisp-0.991/html/eulispcl17.html#dx21-469004][=convert=]] is used to change an object of one type into an
+    object of another type.  Thus to convert an [[file:EuLisp-0.991/html/eulispcl17.html#dx21-588005][=integer=]] to a [[file:EuLisp-0.991/html/eulispcl17.html#dx21-548005][=float=]]
     #+BEGIN_SRC eulisp
     (convert 1 <float>) -> 1.0
     #+END_SRC
@@ -924,13 +1036,13 @@
     (convert 2.6 <integer>) -> 2
     #+END_SRC
 
-    Many other conversions are available: [[file:EuLisp-0.991/html/eulispcl17.html#dx21-582005][=integer=]] to [[file:EuLisp-0.991/html/eulispcl17.html#dx21-857005][=string=]]; [[file:EuLisp-0.991/html/eulispcl17.html#dx21-322005][=character=]] to
-    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-857005][=string=]]; =string= to =number=; [[file:EuLisp-0.991/html/eulispcl17.html#dx21-883005][=symbol=]] to =string=; [[file:EuLisp-0.991/html/eulispcl17.html#dx21-641002][=list=]] to [[file:EuLisp-0.991/html/eulispcl17.html#dx21-911005][=vector=]];
+    Many other conversions are available: [[file:EuLisp-0.991/html/eulispcl17.html#dx21-588005][=integer=]] to [[file:EuLisp-0.991/html/eulispcl17.html#dx21-863005][=string=]]; [[file:EuLisp-0.991/html/eulispcl17.html#dx21-322005][=character=]] to
+    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-863005][=string=]]; =string= to =number=; [[file:EuLisp-0.991/html/eulispcl17.html#dx21-889005][=symbol=]] to =string=; [[file:EuLisp-0.991/html/eulispcl17.html#dx21-647002][=list=]] to [[file:EuLisp-0.991/html/eulispcl17.html#dx21-917005][=vector=]];
     and so on.
 
 *** Copying
-    There are two functions that copy structures: [[file:EuLisp-0.991/html/eulispcl17.html#dx21-476004][=deep-copy=]] and
-    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-483002][=shallow-copy=]].  The second recursively descends a structure making copies
+    There are two functions that copy structures: [[file:EuLisp-0.991/html/eulispcl17.html#dx21-482004][=deep-copy=]] and
+    [[file:EuLisp-0.991/html/eulispcl17.html#dx21-489002][=shallow-copy=]].  The second recursively descends a structure making copies
     of all the elements in the structure; the first makes a single copy of the
     top-level structure, and fills its slots will the existing elements:
     #+BEGIN_SRC eulisp
@@ -946,8 +1058,7 @@
     (eq (car a) (car s))      -> t
     #+END_SRC
 
-*** Other Tools
-    Other tools that EuXLisp provides:
+*** Other EuXLisp Tools
     + =describe= gives a little information about an object, e.g., =(describe
       <integer>)= or =(describe 4)=
     + =trace= can be used to print a message every time a function is entered or
@@ -981,7 +1092,7 @@
     Debugging tools are =print-linda-pool= to print the curent values in a pool,
     and =(tril t)= to print some trace information as the system is running.
 
-    The =tag= must be a [[file:EuLisp-0.991/html/eulispcl17.html#dx21-883005][=symbol=]] or =number=.
+    The =tag= must be a [[file:EuLisp-0.991/html/eulispcl17.html#dx21-889005][=symbol=]] or =number=.
 
 *** Modular Numbers
     The module =modular= is a simple implementation of modular integers.  The
@@ -1032,61 +1143,252 @@
     value you will probably get strange results.
 
 *** Sort
-    A fast stable merge sort.  The module sort exports [[file:EuLisp-0.991/html/eulispcl17.html#dx21-410002][=sort=]] (non-destructive)
+    A fast stable merge sort.  The module sort exports [[file:EuLisp-0.991/html/eulispcl17.html#dx21-418002][=sort=]] (non-destructive)
     and =sort!= (destructive).  They are called as =(sort l)=, where =l= is a
-    list of values to be sorted.  The comparison operator used is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]].
+    list of values to be sorted.  The comparison operator used is [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]].
     Alternatively, you can use =(sort l comp)=, where comp is a comparator
     function.
 
-* EuXLisp functions
-  Here is a summary of the functions available in EuXLisp.  Not all of these
-  correspond to EuLisp.
+* EuLisp functions
+  Here is a summary of the functions available in EuLisp.
 *** Special operators
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-211007][=deflocal=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-207002][=defconstant=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-938002][=defclass=]]
+    + [[file:EuLisp-0.991/html/eulispcl14.html#dx18-162002][=defcondition=]]
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-225003][=defmacro=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-948002][=defgeneric=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-957002][=defmethod=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-215002][=quote=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-221002][=lambda=]]
-    + =delay=
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-289003][=let=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-292004][=let*=]]
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-286002][=labels=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-245003][=setq=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-259002][=if=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-262002][=cond=]]
+    + =when=
+    + =unless=
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-295004][=progn=]]
+    + =while=
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-265004][=and=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-268004][=or=]]
-    + =while=
-    + [[file:EuLisp-0.991/html/eulispcl10.html#dx12-68001][=export=]]
-    + [[file:EuLisp-0.991/html/eulispcl10.html#dx12-70001][=expose=]]
-    + =enter-module=
-    + =!>=
-    + =reenter-module=
-    + =!>>=
     + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-97003][=call-next-method=]]
     + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-100003][=next-method?=]]
-    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-932002][=defclass=]]
     + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-240002][=apply=]]
+*** Module directives
+    + [[file:EuLisp-0.991/html/eulispcl10.html#dx12-68001][=export=]]
+    + [[file:EuLisp-0.991/html/eulispcl10.html#dx12-70001][=expose=]]
+*** List functions
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-630002][=cons=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-634002][=cdr=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-647002][=list=]]
+*** Symbol functions
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-893002][=gensym=]]
+*** Vector functions
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-917005][=vector=]]
+*** Predicates
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-616007][=null?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-628002][=atom?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-657013][=number?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-626007][=cons?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-891002][=symbol?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-598002][=keyword?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-549021][=float?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-497069][=double-float?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-589039][=integer?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-866002][=string?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-920002][=vector?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-710012][=stream?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-437004][=eq=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-441002][=eql=]]
+*** Arithmetic functions
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-679002][=zero?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-685002][=positive?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-687002][=negative?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-593002][=odd?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-591002][=even?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-557002][=truncate=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-553002][=floor=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-551002][=ceiling=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-555002][=round=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-677002][=abs=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-673002][=gcd=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-675002][=lcm=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661004][=+=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-663002][=-=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-665002][=*=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-667002][=/=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-466002][=min=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-464002][=max=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-527002][=sin=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-525003][=cos=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-529002][=tan=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-519003][=asin=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-517002][=acos=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-521003][=atan=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-537002][=exp=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-545004][=sqrt=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-543004][=pow=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-539003][=log=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-691002][=binary+=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-693002][=binary-=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-695002][=binary*=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-697002][=binary/=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-703003][=binary-gcd=]]
+    + =binary%=
+*** Numeric comparison functions
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]]=
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][===]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=>=]]=
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=>=]]
+*** I/O functions
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-780002][=read=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-803002][=swrite=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-807002][=write=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-819002][=sprin=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-823002][=prin=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-827002][=sprint=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-831002][=print=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-835002][=snewline=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-838002][=newline=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-841002][=sflush=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-844002][=flush=]]
+*** Format
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-581002][=sformat=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-583002][=format=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-585002][=fmt=]]
+*** File I/O functions
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-854002][=open-input-file=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-856002][=open-output-file=]]
+*** Standard streams
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-749002][=stdin=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-751002][=stdout=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-752002][=stderr=]]
+*** Plus some others
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-210002][=t=]]
+    + =else=
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-143002][=ticks-per-second=]]
+*** Thread
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-121003][=<thread>=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-160002][=<simple-thread>=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-122002][=thread?=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-124002][=thread-reschedule=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-127002][=current-thread=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-127002][=current-thread=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-128002][=thread-start=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-131002][=thread-value=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-150003][=<lock>=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-150007][=lock?=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-152002][=lock=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-156002][=unlock=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-135002][=wait=]]
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-272002][=let/cc=]]
+    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-192002][=with-handler=]]
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-299002][=unwind-protect=]]
+    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-186003][=signal=]]
+    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-198002][=error=]]
+    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-201002][=cerror=]]
+*** Telos
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-1022002][=allocate=]]
+    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-76003][=<object>=]]
+    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-76007][=<class>=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-970002][=<simple-class>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615006][=<list>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-626002][=<cons>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-616003][=<null>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-657010][=<number>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-589035][=<integer>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-560035][=<fpi>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-549017][=<float>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-497061][=<double-float>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-890006][=<symbol>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-597006][=<keyword>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-864017][=<string>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-709002][=<stream>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-918006][=<vector>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-910005][=<table>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-916002][=<hash-table>=]]
+    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-84002][=<function>=]]
+    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-84006][=<simple-function>=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-1002008][=<method>=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-1002011][=<simple-method>=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-977002][=<slot>=]]
+    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-977005][=<local-slot>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-815003][=generic-prin=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-796002][=generic-write=]]
+    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-135002][=wait=]]
+    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-104004][=make=]]
+    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-110002][=initialize=]]
+*** Setter
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-249002][=setter=]]
+*** Converter
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-475002][=converter=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-469004][=convert=]]
+*** Condition
+    + [[file:EuLisp-0.991/html/eulispcl14.html#dx18-167002][=condition?=]]
+    + [[file:EuLisp-0.991/html/eulispcl14.html#dx18-165002][=<condition>=]]
+*** Compare
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-449002][=binary<=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-444002][=binary==]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][===]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=>=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-456002][=<=]]=
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=>=]]=
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-464002][=max=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-466002][=min=]]
+*** Macros
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-305004][=quasiquote=]]
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-308002][=unquote=]]
+    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-311002][=unquote-splicing=]]
+*** Collect
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-362002][=collection?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-409002][=sequence?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-348020][=accumulate=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-351002][=accumulate1=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-354002][=all?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-358002][=any?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-365002][=concatenate=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-369002][=delete=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-372002][=do=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-375002][=element=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-380002][=empty?=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-383002][=fill=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-395002][=map=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-398002][=member=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-401002][=remove=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-404002][=reverse=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-412002][=size=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-415002][=slice=]]
+*** Copy
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-482004][=deep-copy=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-489002][=shallow-copy=]]
+
+* EuXLisp functions
+  Here is a summary of the additional functions available in EuXLisp.  Those
+  marked '*' are also in Youtoo.
+*** Special operators
+    + =delay=
     + =map-list=
     + =load=
     + =load-noisily=
     + =force=
-
 *** List functions
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-624002][=cons=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-626002][=car=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-628002][=cdr=]]
-    + =caar=
-    + =cadr=
-    + =cdar=
-    + =cddr=
-    + =caaar=
-    + =caadr=
-    + =cadar=
-    + =caddr=
-    + =cdaar=
-    + =cdadr=
-    + =cddar=
-    + =cdddr=
+    + =caar= *
+    + =cadr= *
+    + =cdar= *
+    + =cddr= *
+    + =caaar= *
+    + =caadr= *
+    + =cadar= *
+    + =caddr= *
+    + =cdaar= *
+    + =cdadr= *
+    + =cddar= *
+    + =cdddr= *
     + =caaaar=
     + =caaadr=
     + =caadar=
@@ -1094,7 +1396,7 @@
     + =cadaar=
     + =cadadr=
     + =caddar=
-    + =cadddr=
+    + =cadddr= *
     + =cdaaar=
     + =cdaadr=
     + =cdadar=
@@ -1103,119 +1405,51 @@
     + =cddadr=
     + =cdddar=
     + =cddddr=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-641002][=list=]]
     + =list*=
-    + =append=
+    + =append= *
     + =last-pair=
-    + =length=
+    + =length= *
     + =memv=
     + =memq=
     + =assv=
     + =assq=
-    + =list-ref=
+    + =list-ref= *
     + =list-tail=
-
 *** Symbol functions
     + =bound?=
     + =symbol-value=
     + =symbol-plist=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-887002][=gensym=]]
     + =get=
     + =put=
-
 *** Vector functions
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-911005][=vector=]]
-    + =make-vector=
+    + =make-vector= *
     + =vector-length=
-    + =vector-ref=
-
-*** Array functions
-    + =make-array=
-    + =array-ref=
-
+    + =vector-ref= *
 *** Predicates
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-610007][=null?=]]
-    + =atom=
-    + =list?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-651013][=number?=]]
+    + =list?= *
     + =boolean?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-620007][=cons?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-885002][=symbol?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-592002][=keyword?=]]
     + =complex?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-543021][=float?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-491069][=double-float?=]]
     + =rational?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-583039][=integer?=]]
     + =char?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-860002][=string?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-914002][=vector?=]]
-    + =function?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-704012][=stream?=]]
+    + =function?= *
     + =input-stream?=
     + =output-stream?=
-    + =object?=
+    + =object?= *
     + =eof-object?=
     + =default-object?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-431004][=eq=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-435002][=eql=]]
-
 *** Arithmetic functions
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-673002][=zero?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-679002][=positive?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-681002][=negative?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-587002][=odd?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-585002][=even?=]]
     + =exact?=
     + =inexact?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-551002][=truncate=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-547002][=floor=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-545002][=ceiling=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-549002][=round=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-671002][=abs=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-667002][=gcd=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-669002][=lcm=]]
-    + =random=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-655004][=+=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-657002][=-=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-659002][=*=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661002][=/=]]
+    + =random= *
     + =quotient=
     + =remainder=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-460002][=min=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=max=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-521002][=sin=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-519003][=cos=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-523002][=tan=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-513003][=asin=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-511002][=acos=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-515003][=atan=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-531002][=exp=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-539004][=sqrt=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-537004][=pow=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-533003][=log=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-685002][=binary+=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-687002][=binary-=]]
     + =unary-=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-689002][=binary*=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-691002][=binary/=]]
     + =unary/=
-    + =binary%=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-697003][=binary-gcd=]]
-
 *** Bitwise logical functions
     + =logand=
     + =logior=
     + =logxor=
     + =lognot=
-
-*** Numeric comparison functions
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]]=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-446002][===]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][=>=]]=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][=>=]]
-
 *** String functions
     + =make-string=
     + =string-length=
@@ -1223,37 +1457,23 @@
     + =string-append=
     + =string-ref=
     + =substring=
-
 *** I/O functions
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-774002][=read=]]
-    + =read-char=
+    + =read-char= *
     + =read-byte=
     + =read-short=
     + =read-long=
-
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-797002][=swrite=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-801002][=write=]]
     + =write-char=
     + =write-byte=
     + =write-short=
     + =write-long=
-
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-813002][=sprin=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-821002][=sprint=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-817002][=prin=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-825002][=print=]]
-
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-832002][=newline=]]
     + =char-ready?=
     + =peek-char=
-
 *** Print control functions
     + =print-breadth=
     + =print-depth=
-
 *** File I/O functions
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-848002][=open-input-file=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-850002][=open-output-file=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-854002][=open-input-file=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-856002][=open-output-file=]]
     + =open-append-file=
     + =open-update-file=
     + =close-stream=
@@ -1261,170 +1481,94 @@
     + =close-output-stream=
     + =get-file-position=
     + =unlink=
-
-*** Standard streams
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-743002][=stdin=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-745002][=stdout=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-746002][=stderr=]]
-
-    + =; utility functions=
+*** utility functions
     + =transcript-on=
     + =transcript-off=
     + =getarg=
     + =prompt?=
-    + =exit=
-    + =compile=
+    + =exit= *
+    + =compile= *
     + =decompile=
     + =gc=
     + =save=
     + =restore=
-
 *** Debugging functions
     + =trace-on=
     + =trace-off=
-
 *** Module functions
+    + =enter-module=
+    + =!>=
+    + =reenter-module=
+    + =!>>=
     + =module-symbols=
     + =module-exports=
     + =symbol-module=
     + =current-module=
     + =module-list=
     + =unintern=
-
-*** Telos
-    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-1016002][=allocate=]]
-    + =describe=
-    + =class?=
-    + =subclass?=
-
 *** Tables
     + =make-table=
-    + =table-ref=
-    + =table-comparator=
+    + =table-ref= *
+    + =table-comparator= *
     + =table-delete=
     + =table-length=
-    + =table-keys=
-    + =table-values=
+    + =table-keys= *
+    + =table-values= *
     + =table-fill=
     + =table-clear=
-
 *** Plus some others
     + =binary=
     + =text=
-    + =not=
+    + =not= *
     + =prin1=
     + =princ=
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-210002][=t=]]
     + =eval=
-    + =system=
-    + =getenv=
+    + =system= *
+    + =getenv= *
     + =putenv=
     + =tmpfile=
     + =current-time=
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-143002][=ticks-per-second=]]
-    + =backtrace=
+    + =backtrace= *
     + =backtrace?=
-
 *** Thread
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-121003][=<thread>=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-160002][=<simple-thread>=]]
     + =make-thread=
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-122002][=thread?=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-124002][=thread-reschedule=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-127002][=current-thread=]]
     + =thread-kill=
     + =thread-queue=
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-127002][=current-thread=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-128002][=thread-start=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-131002][=thread-value=]]
     + =thread-state=
     + =<thread-condition>=
     + =<thread-error>=
     + =<thread-already-started>=
-
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-150003][=<lock>=]]
     + =<simple-lock>=
     + =make-lock=
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-150007][=lock?=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-152002][=lock=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-156002][=unlock=]]
     + =<lock-condition>=
     + =<lock-error>=
-
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-135002][=wait=]]
     + =<wait-condition>=
     + =<wait-error>=
-
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-272002][=let/cc=]]
-    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-192002][=with-handler=]]
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-299002][=unwind-protect=]]
     + =<wrong-condition-class>=
-    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-186003][=signal=]]
-    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-198002][=error=]]
-    + [[file:EuLisp-0.991/html/eulispcl15.html#dx19-201002][=cerror=]]
-
 *** Telos
-    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-76003][=<object>=]]
-    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-76007][=<class>=]]
-    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-964002][=<simple-class>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609006][=<list>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-620002][=<cons>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-610003][=<null>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-651010][=<number>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-583035][=<integer>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-554035][=<fpi>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-543017][=<float>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-491061][=<double-float>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-884006][=<symbol>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-591006][=<keyword>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-858017][=<string>=]]
     + =<simple-string>=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-703002][=<stream>=]]
     + =<input-stream>=
     + =<output-stream>=
     + =<i/o-stream>=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-912006][=<vector>=]]
     + =<simple-vector>=
     + =<char>=
     + =<simple-char>=
     + =<promise>=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-904005][=<table>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-910002][=<hash-table>=]]
-    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-84002][=<function>=]]
-    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-84006][=<simple-function>=]]
     + =<subr>=
     + =<continuation>=
     + =<generic>=
     + =<simple-generic>=
-    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-996008][=<method>=]]
-    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-996011][=<simple-method>=]]
-    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-971002][=<slot>=]]
-    + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-971005][=<local-slot>=]]
     + =<structure>=
-
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-809003][=generic-prin=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-790002][=generic-write=]]
-    + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-135002][=wait=]]
-
-    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-104004][=make=]]
-    + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-110002][=initialize=]]
     + =class-hierarchy=
-
-*** Setter
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-249002][=setter=]]
-
+    + =describe=
+    + =class?= *
+    + =subclass?= *
 *** Converter
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-469002][=converter=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-463004][=convert=]]
     + =<conversion-condition>=
     + =<no-converter>=
-
 *** Condition
-    + [[file:EuLisp-0.991/html/eulispcl14.html#dx18-162002][=defcondition=]]
-    + [[file:EuLisp-0.991/html/eulispcl14.html#dx18-167002][=condition?=]]
-    + =condition-message=
+    + =condition-message= *
     + =condition-value=
-    + [[file:EuLisp-0.991/html/eulispcl14.html#dx18-165002][=<condition>=]]
     + =<telos-condition>=
     + =<telos-error>=
     + =<telos-general-error>=
@@ -1442,81 +1586,39 @@
     + =<macro-error>=
     + =<syntax-error>=
     + =<user-interrupt>=
-
 *** Compare
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-443002][=binary<=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-438002][=binary==]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-446002][===]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][=>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-450002][=<=]]=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-452002][=>=]]=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-458002][=max=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-460002][=min=]]
     + =assoc=
-
 *** Macros
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-225003][=defmacro=]]
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-305004][=quasiquote=]]
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-308002][=unquote=]]
-    + [[file:EuLisp-0.991/html/eulispcl16.html#dx20-311002][=unquote-splicing=]]
     + =symbol-macro=
     + =macroexpand=
     + =macroexpand1=
-
 *** Collect
     + =<collection-condition>=
     + =<collection-error>=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-357002][=collection?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-404002][=sequence?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-348020][=accumulate=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-351002][=accumulate1=]]
-    + =all?=
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-354002][=any?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-360002][=concatenate=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-364002][=delete=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-367002][=do=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-370002][=element=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-375002][=empty?=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-378002][=fill=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-390002][=map=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-393002][=member=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-396002][=remove=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-399002][=reverse=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-407002][=size=]]
-    + =slice=
-
-*** Copy
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-476004][=deep-copy=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-483002][=shallow-copy=]]
-
-*** Format
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-575002][=sformat=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-577002][=format=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-579002][=fmt=]]
 
 * Command Line Arguments
-  The EuXLisp interpreter accepts a few arguments:
-  + =-h=, =--help= Display this usage information.
-  + =-q=, =--quiet= Print no messages, prompts or values.
-  + =-n=, =--no-image= Do not read in the initial Lisp image.
-  + =-N=, =--no-sys-calls= Disable system calls.
-  + =-s= /file/, =--script= /file/ Read and execute script from /file/, see
-    below.
-  + =-m= /file/,  =--module= /file/ Read and execute module from /file/.
-  + =-i= /file/, =--image= /file/ Read the given image /file/ rather than the
-    default.
-  + =-t=, =--trace=            Switch on byte-code level tracing.
+*** EuXLisp
+    + =-h=, =--help= Display this usage information.
+    + =-q=, =--quiet= Print no messages, prompts or values.
+    + =-n=, =--no-image= Do not read in the initial Lisp image.
+    + =-N=, =--no-sys-calls= Disable system calls.
+    + =-s= /file/, =--script= /file/ Read and execute script from /file/, see
+      below.
+    + =-m= /file/,  =--module= /file/ Read and execute module from /file/.
+    + =-i= /file/, =--image= /file/ Read the given image /file/ rather than the
+      default.
+    + =-t=, =--trace=            Switch on byte-code level tracing.
 
-  Other arguments are passed to the intepreter and are available as =(getarg 0)=
-  (the name of the program), =(getarg 1)= (first argument), =(getarg 2)= (second
-  argument), and so on.  The function =getarg= returns [[file:EuLisp-0.991/html/eulispcl17.html#dx21-609010][=()=]] for a non-existent
-  argument.
+    Other arguments are passed to the intepreter and are available as =(getarg
+    0)= (the name of the program), =(getarg 1)= (first argument), =(getarg 2)=
+    (second argument), and so on.  The function =getarg= returns [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]] for a
+    non-existent argument.
 
-*** Shell Scripts
-    EuXLisp can be used in a shell script by means of the =--script= flag:
+* Shell Scripts
+*** EuXLisp
+    can be used in a shell script by means of the =--script= flag:
     #+BEGIN_SRC eulisp
-    #!/usr/local/bin/euxlisp --script
+    #!<absolute path>/euxlisp --script
 
     (print "hello world")
     #+END_SRC
@@ -1529,4 +1631,11 @@
     (print "hello world")
     #+END_SRC
 
-* [[http://people.bath.ac.uk/masrjb/Sources/eunotes.html][The original Euscheme notes]].
+*** Youtoo
+    can also be used in a shell script by means of the =--script= flag:
+    #+BEGIN_SRC eulisp
+    #!<absolute path>/youtoo --script
+
+    (print "hello world")
+    #+END_SRC
+    See /Examples/Misc/script.em/.

@@ -24,7 +24,6 @@
   (setter-setter list-ref list-set!)
   (setter-setter string-ref string-set!)
   (setter-setter vector-ref vector-set!)
-  (setter-setter array-ref array-set!)
   (setter-setter get-file-position set-file-position!)
   (setter-setter symbol-value set-symbol-value!)
   (setter-setter symbol-plist set-symbol-plist!)
