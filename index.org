@@ -16,7 +16,7 @@
 
   You should have received a copy of the GNU General Public License along with
   EuLisp in the file [[file:COPYING][COPYING]].  If not, see
-  [[<http://www.gnu.org/licenses/>]].
+  [[http://www.gnu.org/licenses/]].
 
 * Aim
   This version of the EuLisp definition and Youtoo and EuXLisp implementations
