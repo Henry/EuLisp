@@ -15,7 +15,8 @@
   A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License along with
-  EuLisp in the file [[http://henry.github.com/EuLisp/COPYING][COPYING]].  If not, see <http://www.gnu.org/licenses/>.
+  EuLisp in the file [[http://henry.github.com/EuLisp/COPYING][COPYING]].  If not, see
+  [[<http://www.gnu.org/licenses/>]].
 
 * Aim
   This version of the EuLisp definition and Youtoo and EuXLisp implementations
@@ -105,62 +106,64 @@
     + [[http://henry.github.com/EuLisp/Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps][eulisp-ffi.ps]]
 
 * Installation
-  + Pull the latest version from the GitHub repository:\\
-    git clone git://github.com/Henry/EuLisp.git
-  + "cd" into the /EuLisp/ directory
+  + Pull the latest version from the GitHub repository: \\
+    =git clone git://github.com/Henry/EuLisp.git=
+  + "cd" into the =EuLisp= directory
   + Run \\
-    /./configure/ \\
+    =./configure= \\
     and check the settings.  Edit the configure file to reflect your system if
     necessary and re-run\\
-    /./configure/.
+    =./configure=.
   + Run \\
-    /make/
+    =make=
   + If you want to use shared libraries for Youtoo (which we really recommend on
     Linux, FreeBSD, Solaris and IRIX), run \\
-    /make shared/ \\
-    and add the directory /.../EuLisp/Lib.${ARCH}/ to the environment variable
-    ~$LD_LIBRARY_PATH~.
+    =make shared= \\
+    and add the directory =.../EuLisp/Lib.${ARCH}= to the environment variable
+    =$LD_LIBRARY_PATH=.
   + You should now be able to run the =youtoo= executable \\
-    /Bin.${ARCH}/youtoo/ \\
+    =Bin.${ARCH}/youtoo= \\
     (see next section).
 
 * Getting Started with Youtoo
   + Run \\
-    /Bin.${ARCH}/youtoo/ -help \\
+    =Bin.${ARCH}/youtoo -help= \\
     to see the compiler options.
-  + In directory /Examples/Misc/ run \\
-    /Bin.${ARCH}/youtoo fact -l level1/ \\
+  + In directory =Examples/Misc= run \\
+    =Bin.${ARCH}/youtoo fact -l level1= \\
     to compile module fact into a stand-alone
     executable. With shared libraries the executable should be less the 40K.
   + Run \\
-    /Bin.${ARCH}/youtoo/ \\
+    =Bin.${ARCH}/youtoo= \\
     without options to start the Youtoo interpreter. The read-eval-print loop
-    provides extra commands (type /help:/).
+    provides extra commands (type =help:=).
   + Further information about running [[http://henry.github.com/EuLisp/Youtoo/README.org][Youtoo]].
+*** See also [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.org][EuLisp introduction]].
 
 * Getting Started with EuXLisp
   EuXLisp need two paths: where to look for the compiled image, and where to
   look for modules to load:
 *** Image
-    First euxlisp checks the environment variable ~EU_IMAGE_PATH~ (a colon
+    First euxlisp checks the environment variable =EU_IMAGE_PATH= (a colon
     separated list of directory names), then a builtin path, set from
-    ~IMAGE_SEARCH_PATH~ in the Makefile.
+    =IMAGE_SEARCH_PATH= in the Makefile.
 *** Modules
-    ditto for environment variable ~EU_MODULE_PATH~, then builtin
-    ~MODULE_SEARCH_PATH~ (e.g., you might want to provide a set of system
+    ditto for environment variable =EU_MODULE_PATH=, then builtin
+    =MODULE_SEARCH_PATH= (e.g., you might want to provide a set of system
     supplied modules).
 *** Default settings
     The default built-in settings should work for a default build with the files
     in their default locations.
 *** Running the interpreter interactively
-    Run /Bin.${ARCH}/euxlisp/ \\ without options to start the EuXLisp
+    Run =Bin.${ARCH}/euxlisp= \\
+    without options to start the EuXLisp
     interpreter. The read-eval-print loop provides extra commands see
-    [[http://henry.github.com/EuLisp/Doc/EuLispIntro.org][EuLisp and EuXLisp introduction]].
+    [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.org][EuLisp and EuXLisp introduction]].
 *** Executing a module
-    To execute the module =fact= in file /fact.em/ run \\
-    /echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q/ \\
-    The /echo/ pipes the load module /!>/ command to the interpreter.  In the
+    To execute the module =fact= in file =fact.em= run \\
+    =echo "(!> fact)"  | ../../Bin.${ARCH}/euxlisp -q= \\
+    The =echo= pipes the load module =!>= command to the interpreter.  In the
     future there will be a command-line option to execute a module directly.
-*** See also [[http://henry.github.com/EuLisp/Doc/EuLispIntro.org][EuLisp and EuXLisp introduction]].
+*** See also [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.org][EuLisp and EuXLisp introduction]].
 
 * [[http://henry.github.com/EuLisp/TODO.org][To Do]]
