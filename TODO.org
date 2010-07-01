@@ -30,6 +30,7 @@
     CLOSED: [2010-06-29 Tue 15:38]
 *** DONE Rename =abstractp:= -> =abstract?:=
     CLOSED: [2010-06-29 Tue 21:47]
+*** TODO Add =slice= method for =<vector>=
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
@@ -133,7 +134,6 @@
     CLOSED: [2010-05-06 Thu 13:46]
     =slice= for string can a wrapper around substring already available
     in Youtoo.
-*** TODO Add =slice= method for <vector>
 *** DONE Add =reverse!= method for =<string>=
     CLOSED: [2010-04-27 Tue 12:25]
     Requires equivalent ff in eul-ext.c
@@ -176,8 +176,10 @@
     for the default clause of =cond= forms.  =else= is simply an alias for =t=.
 * EuXLisp
 *** TODO Finish reformatting the C source files
-*** TODO Add =reverse!= method for =<string>=
-*** TODO Add =slice= generic function and methods
+*** DONE Add =reverse!= method for =<string>=
+    CLOSED: [2010-07-01 Thu 22:57]
+*** DONE Add =slice= method for =<list>=
+    CLOSED: [2010-07-01 Thu 23:04]
 *** DONE Add =flush= and =sflush=
     CLOSED: [2010-06-27 Sun 22:59]
 * EuLisp Definition
@@ -263,7 +265,8 @@
 *** TODO Re-reference definitions in the "Level-1" library
     so that they do not clash with those in the "Level-0" library.
 *** TODO Remove the "syntax-category" entries from the index
-*** TODO Add =slice= generic function and methods
+*** DONE Add =slice= generic function and methods
+    CLOSED: [2010-07-01 Thu 22:48]
 *** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
     CLOSED: [2010-04-27 Tue 22:48]
     Check for other =<sequence>= methods which should destructive variants.

@@ -474,6 +474,7 @@
       member
       remove
       reverse
+      reverse!
       size
       slice
 

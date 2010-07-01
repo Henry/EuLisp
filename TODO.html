@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>TODO</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-07-01 21:59:20 BST"/>
+<meta name="generated" content="2010-07-01 23:05:52 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -123,6 +123,8 @@ Add <code>snewline</code> and <code>sflush</code> to take the stream as an argum
 </li>
 <li id="sec-1.7"><span class="done DONE"> DONE</span> Rename <code>abstractp:</code> -&gt; <code>abstract?:</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-29 Tue 21:47</span></span><br/>
+</li>
+<li id="sec-1.8"><span class="todo TODO"> TODO</span> Add <code>slice</code> method for <code>&lt;vector&gt;</code> <br/>
 </li>
 </ul>
 </div>
@@ -297,13 +299,11 @@ character.
 <code>slice</code> for string can a wrapper around substring already available
 in Youtoo.
 </li>
-<li id="sec-2.26"><span class="todo TODO"> TODO</span> Add <code>slice</code> method for &lt;vector&gt; <br/>
-</li>
-<li id="sec-2.27"><span class="done DONE"> DONE</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
+<li id="sec-2.26"><span class="done DONE"> DONE</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-27 Tue 12:25</span></span><br/>
 Requires equivalent ff in eul-ext.c
 </li>
-<li id="sec-2.28"><span class="done DONE"> DONE</span> Sort out the syntax of character sequences <br/>
+<li id="sec-2.27"><span class="done DONE"> DONE</span> Sort out the syntax of character sequences <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-26 Mon 19:46</span></span><br/>
 <ul>
 <li>
@@ -316,7 +316,7 @@ Hexadecimal sequences are hard-coded to 3 digits, if not where is the end?
 How should the character '^' be written given that it is used to define
 control sequences e.g. #^c ?  Perhaps #^ ?
 </li>
-<li id="sec-2.28.1">Proposed solution <br/>
+<li id="sec-2.27.1">Proposed solution <br/>
 To remove support for control sequences which are unusual,
 system-dependent and can be created using hexadecimal characters.  Also
 fix the number of hexadecimal digits for a character to 4 which is
@@ -324,7 +324,7 @@ sufficient to support unicode but also avoids parsing problems.
 </li>
 </ul>
 </li>
-<li id="sec-2.29"><span class="todo TODO"> TODO</span> Correct the echoing of complex characters <br/>
+<li id="sec-2.28"><span class="todo TODO"> TODO</span> Correct the echoing of complex characters <br/>
 [user]: (print #\\\)
 \
 <ul>
@@ -333,32 +333,32 @@ sufficient to support unicode but also avoids parsing problems.
 </li>
 </ul>
 </li>
-<li id="sec-2.30"><span class="done DONE"> DONE</span> Change the parser to map ='nil= to ='()= <br/>
+<li id="sec-2.29"><span class="done DONE"> DONE</span> Change the parser to map ='nil= to ='()= <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-09 Sun 21:06</span></span><br/>
 so that (eq 'nil '()) =&gt; t
 </li>
-<li id="sec-2.31"><span class="done DONE"> DONE</span> (eql 3.0 3.0) should return t but it returns () <br/>
+<li id="sec-2.30"><span class="done DONE"> DONE</span> (eql 3.0 3.0) should return t but it returns () <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-10 Mon 21:50</span></span><br/>
 </li>
-<li id="sec-2.32"><span class="todo TODO"> TODO</span> Finish <code>format</code> <br/>
+<li id="sec-2.31"><span class="todo TODO"> TODO</span> Finish <code>format</code> <br/>
 Currently <code>format</code> only handles a subset of the functionality in the
 definition, in particular <code>e</code> and <code>g</code> formatting of floating-point numbers
 is missing.  <code>format</code> is complete in EuXLisp and it may be possible to reuse
 some of this functionality.
 </li>
-<li id="sec-2.33"><span class="done DONE"> DONE</span> Enable level0 modules to be loaded interactively <br/>
+<li id="sec-2.32"><span class="done DONE"> DONE</span> Enable level0 modules to be loaded interactively <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-21 Mon 14:32</span></span><br/>
 into a level1 environment by creating a dummy level0 which is a copy of the
 default env
 </li>
-<li id="sec-2.34"><span class="done DONE"> DONE</span> Include default environment variables directly into <code>youtoo</code> <br/>
+<li id="sec-2.33"><span class="done DONE"> DONE</span> Include default environment variables directly into <code>youtoo</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-21 Mon 17:12</span></span><br/>
 to avoid the need for the start-up script to set them.
 </li>
-<li id="sec-2.35"><span class="todo TODO"> TODO</span> Add the <code>-m</code> load module option <br/>
+<li id="sec-2.34"><span class="todo TODO"> TODO</span> Add the <code>-m</code> load module option <br/>
 compatible with the equivalent option added to EuXLisp.|
 </li>
-<li id="sec-2.36"><span class="done DONE"> DONE</span> Add a Scheme-style <code>else</code> <br/>
+<li id="sec-2.35"><span class="done DONE"> DONE</span> Add a Scheme-style <code>else</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-22 Tue 22:34</span></span><br/>
 for the default clause of <code>cond</code> forms.  <code>else</code> is simply an alias for <code>t</code>.
 </li>
@@ -374,9 +374,11 @@ for the default clause of <code>cond</code> forms.  <code>else</code> is simply 
 <ul>
 <li id="sec-3.1"><span class="todo TODO"> TODO</span> Finish reformatting the C source files <br/>
 </li>
-<li id="sec-3.2"><span class="todo TODO"> TODO</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
+<li id="sec-3.2"><span class="done DONE"> DONE</span> Add <code>reverse!</code> method for <code>&lt;string&gt;</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-07-01 Thu 22:57</span></span><br/>
 </li>
-<li id="sec-3.3"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
+<li id="sec-3.3"><span class="done DONE"> DONE</span> Add <code>slice</code> method for <code>&lt;list&gt;</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-07-01 Thu 23:04</span></span><br/>
 </li>
 <li id="sec-3.4"><span class="done DONE"> DONE</span> Add <code>flush</code> and <code>sflush</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-27 Sun 22:59</span></span><br/>
@@ -574,7 +576,8 @@ so that they do not clash with those in the "Level-0" library.
 </li>
 <li id="sec-4.17"><span class="todo TODO"> TODO</span> Remove the "syntax-category" entries from the index <br/>
 </li>
-<li id="sec-4.18"><span class="todo TODO"> TODO</span> Add <code>slice</code> generic function and methods <br/>
+<li id="sec-4.18"><span class="done DONE"> DONE</span> Add <code>slice</code> generic function and methods <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-07-01 Thu 22:48</span></span><br/>
 </li>
 <li id="sec-4.19"><span class="done DONE"> DONE</span> Add destructive <code>&lt;sequence&gt;</code> generic functions <code>sort!</code> and <code>reverse!</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-04-27 Tue 22:48</span></span><br/>
@@ -629,7 +632,7 @@ alias for <code>t</code>.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-07-01 21:59:20 BST</p>
+<p class="date"> Date: 2010-07-01 23:05:52 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

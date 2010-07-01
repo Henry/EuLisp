@@ -36,7 +36,7 @@
               accumulate accumulate1
               all? any?
               concatenate delete do element empty?
-              fill map member remove reverse size slice))
+              fill map member remove reverse reverse! size slice))
 
   ;;  (defcondition <collection-condition> <condition>)
   (defclass <collection-condition> (<condition>)
@@ -154,6 +154,12 @@
 
   (define-method (reverse c)
                  (missing-op "reverse" c))
+
+  ;;
+  (define-generic (reverse! c))
+
+  (define-method (reverse! c)
+                 (missing-op "reverse!" c))
 
   ;;
   (define-generic (size x))
@@ -343,6 +349,9 @@
   (define-method (reverse (l <list>))
                  (reverse-list l))
 
+  (define-method (reverse! (l <list>))
+                 (setq l (reverse-list l)))
+
   (define-method (size (l <list>))
                  (length l))
 
@@ -433,6 +442,9 @@
   (define-method (reverse (s <string>))
                  (convert (reverse-list (convert s <list>)) <string>))
 
+  (define-method (reverse! (s <string>))
+                 (setq s (convert (reverse-list (convert s <list>)) <string>)))
+
   (define-method (member o (s <string>) . test)
                  (if (memberlist o (convert s <list>)
                                  (if (null? test) eqv? (car test)))
@@ -519,6 +531,9 @@
 
   (define-method (reverse (v <vector>))
                  (convert (reverse-list (convert v <list>)) <vector>))
+
+  (define-method (reverse! (v <vector>))
+                 (setq v (convert (reverse-list (convert v <list>)) <vector>)))
 
   (define-method (size (v <vector>))
                  (vector-length v))
@@ -612,6 +627,9 @@
   (define-method (reverse (t <table>))
                  t)
 
+  (define-method (reverse! (t <table>))
+                 t)
+
   (define-method (member o (t <table>) . test)
                  (if (memberlist o (table-values t)
                                  (if (null? test) eqv? (car test)))
@@ -625,5 +643,12 @@
 
   (define-method (slice (str <string>) (s <fpi>) (e <fpi>))
     (substring str s e))
+
+  (define (slice-list list from to)
+    (if (>= from to) ()
+      (cons (list-ref list from) (slice-list list (+ from 1) to))))
+
+  (define-method (slice (list <list>) (s <fpi>) (e <fpi>))
+    (slice-list list s e))
 
   )

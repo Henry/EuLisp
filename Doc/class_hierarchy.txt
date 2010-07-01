@@ -1,0 +1,134 @@
+A  <object>
+     <bytecode>
+     <C-state>
+     <asm-function-state>
+     <asm-state>
+     <code-state>
+     <syntax-obj>
+       <if>
+       <const>
+         <literal-const>
+         <named-const>
+       <module>
+       <binding>
+         <interface-binding>
+       <syntax-expr>
+         <appl>
+           <call-next-method>
+         <fun>
+           <let*>
+           <opencoding>
+           <lambda>
+         <setq>
+         <var>
+           <global-var>
+             <global-static-var>
+           <local-var>
+             <local-static-var>
+       <syntax-def>
+     <special>
+     <handler>
+       <string*>
+       <double*>
+       <int*>
+     <socket>
+     <stream>
+       <buffered-stream>
+         <file-stream>
+           <connection>
+         <string-stream>
+     <stream-control-block>
+       <file-control-block>
+     <semaphore>
+     <character>
+A    <collection>
+       <table>
+         <simple-hash-table>
+         <hash-table>
+A      <sequence>
+A        <character-sequence>
+           <string>
+         <vector>
+A        <list>
+           <cons>
+           <null>
+A    <number>
+A      <float>
+         <double>
+A      <integer>
+         <int>
+     <condition>
+       <ct-error>
+       <read-error>
+       <stream-condition>
+         <end-of-stream>
+       <general-condition>
+     <state>
+A    <thread>
+       <simple-thread>
+A    <class>
+       <simple-class>
+       <function-class>
+A    <method>
+       <simple-method>
+A    <slot>
+       <local-slot>
+A    <function>
+       <simple-function>
+A      <generic-function>
+         <simple-generic-function>
+A    <name>
+       <symbol>
+       <keyword>
+
+
+    A = abstract,  S = subclassable, C = concrete
+
+    Level 0
+
+        object A S
+                character C
+                condition A S
+                function A S
+                        continuation C
+                        simple-function C
+                        generic function A
+                                simple-generic-function C
+                collection A S
+                        sequence A S
+                                list A
+                                        cons C
+                                        null C
+                                character-sequence A S
+                                        string C
+                                vector C
+                        table A S
+                                hash-table C
+                lock C
+                number A S
+                        integer A S
+                                fixed-precision-integer C
+                                variable-precision-integer C
+                float A S
+                        double-float C
+                stream A S
+                        string-stream C
+                        char-file-stream C
+                name A S
+                        symbol C
+                        keyword C
+                thread A S
+                        simple-thread C
+
+    Level 1
+                class A S
+                        built-in-class A
+                        simple-class C
+                        function-class C
+                slot A S                                (was slot description)
+                        local-slot C
+                function A S
+                        generic-function A S
+                                simple-generic-function C
+                method A S
+                        simple-method C
