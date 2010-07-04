@@ -36,8 +36,8 @@ classes for which they have defined behaviour is given below:
     \functionref{eql}: & \classref{object}$\times$\classref{object}
     \Ra \functionref{eq} \\
     & \classref{character}$\times$\classref{character} \\
-    & \classref{fixed-precision-integer}$\times$ \\
-    & \classref{fixed-precision-integer} \\
+    & \classref{int}$\times$ \\
+    & \classref{int} \\
     & \classref{double-float}$\times$\classref{double-float}
     \Ra \genericref{binary=}\\
     \hline
@@ -46,19 +46,19 @@ classes for which they have defined behaviour is given below:
     & \classref{null}$\times$\classref{null} \\
     & \classref{number}$\times$\classref{number}
     \Ra \functionref{eql}\\
-    & \classref{fixed-precision-integer}$\times$ \\
-    & \classref{fixed-precision-integer} \\
+    & \classref{int}$\times$ \\
+    & \classref{int} \\
     & \classref{double-float}$\times$\classref{double-float} \\
-    & \classref{double-float}$\times$\classref{fixed-precision-integer} \\
-    & \classref{fixed-precision-integer}$\times$\classref{double-float} \\
+    & \classref{double-float}$\times$\classref{int} \\
+    & \classref{int}$\times$\classref{double-float} \\
     & \classref{cons}$\times$\classref{cons} \\
     & \classref{string}$\times$\classref{string} \\
     & \classref{vector}$\times$\classref{vector} \\
     \hline
     \genericref{binary<}: & \classref{character}$\times$\classref{character} \\
     & \classref{symbol}$\times$\classref{symbol} \\
-    & \classref{fixed-precision-integer}$\times$ \\
-    & \classref{fixed-precision-integer} \\
+    & \classref{int}$\times$ \\
+    & \classref{int} \\
     & \classref{double-float}$\times$\classref{double-float} \\
     & \classref{string}$\times$\classref{string} \\
     \hline
@@ -151,7 +151,7 @@ arguments is self-referential.
 \seealso%
 Class specific methods on \genericref{binary=} are defined for
 \classref{character}, \classref{list}, \classref{number} (with specialisations
-for \classref{fixed-precision-integer} and \classref{double-float}),
+for \classref{int} and \classref{double-float}),
 \classref{string}, \classref{vectors}.  All other cases are handled by the
 default method defined for \classref{object}:
 
@@ -179,7 +179,7 @@ the class of the arguments, otherwise \nil{}.
 %
 \seealso%
 Class specific methods on \genericref{binary<} are defined for
-\classref{character}, \classref{string}, \classref{fixed-precision-integer} and
+\classref{character}, \classref{string}, \classref{int} and
 \classref{double-float}.
 
 \function{=}

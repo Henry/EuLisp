@@ -627,6 +627,78 @@ The \specopref{cond} macro provides a convenient syntax for collections of {\em
 \end{minipage}%
 \end{RewriteTable}
 
+\specop{when}
+%
+\Syntax
+\defSyntax{when}{
+    \begin{syntax}
+        \scdef{when-form}: \ra{} \classref{object} \\
+        \>  ( \specopref{when} \scref{antecedent} \\
+        \>\>\> \scref{consequent} ) \\
+    \end{syntax}}%
+\showSyntaxBox{when}
+%
+\result%
+The \scref{antecedent} is evaluated and if the result is \true{} the
+\scref{consequent} is evaluated and returned otherwise \nil{} is returned.
+%
+\rewriterules
+%
+\begin{RewriteTable}{when}{lll}
+    \begin{minipage}[t]{0.45\columnwidth}
+        \begin{tabbing}
+            00\=00\= \kill
+            (\specopref{when} \scref{antecedent} \\
+            \>\scref{consequent})
+        \end{tabbing}
+    \end{minipage}
+    &\rewrite&
+    \begin{minipage}[t]{0.45\columnwidth}
+        \begin{tabbing}
+            00\=00\= \kill
+            (\specopref{if} \=\scref{antecedent} \\
+            \>\>\scref{consequent} \\
+            \>())
+        \end{tabbing}%
+    \end{minipage}%
+\end{RewriteTable}
+
+\specop{unless}
+%
+\Syntax
+\defSyntax{unless}{
+    \begin{syntax}
+        \scdef{unless-form}: \ra{} \classref{object} \\
+        \>  ( \specopref{unless} \scref{antecedent} \\
+        \>\>\> \scref{consequent} ) \\
+    \end{syntax}}%
+\showSyntaxBox{unless}
+%
+\result%
+The \scref{antecedent} is evaluated and if the result is \nil{} the
+\scref{consequent} is evaluated and returned otherwise \nil{} is returned.
+%
+\rewriterules
+%
+\begin{RewriteTable}{unless}{lll}
+    \begin{minipage}[t]{0.45\columnwidth}
+        \begin{tabbing}
+            00\=00\= \kill
+            (\specopref{unless} \scref{antecedent} \\
+            \>\scref{consequent})
+        \end{tabbing}
+    \end{minipage}
+    &\rewrite&
+    \begin{minipage}[t]{0.45\columnwidth}
+        \begin{tabbing}
+            00\=00\= \kill
+            (\specopref{if} \=\scref{antecedent} \\
+            \>\>() \\
+            \>\scref{consequent})
+        \end{tabbing}%
+    \end{minipage}%
+\end{RewriteTable}
+
 \specop{and}
 %
 \Syntax
@@ -1310,6 +1382,11 @@ section~\ref{object-syntax-summary}.
 \showSyntax{quote}
 \showSyntax{setq}
 \showSyntax{if}
+\showSyntax{cond}
+\showSyntax{when}
+\showSyntax{unless}
+\showSyntax{and}
+\showSyntax{or}
 \showSyntax{let/cc}
 \showSyntax{labels}
 \showSyntax{progn}
@@ -1317,9 +1394,6 @@ section~\ref{object-syntax-summary}.
 \showSyntax{apply}
 \showSyntax{call-next-handler}
 \showSyntax{with-handler}
-\showSyntax{cond}
-\showSyntax{and}
-\showSyntax{or}
 \showSyntax{block}
 \showSyntax{return-from}
 \showSyntax{let}

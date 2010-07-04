@@ -5,7 +5,7 @@
 \index{general}{level-0 modules!fpi}
 \begin{optDefinition}
 The defined name of this module is {\tt fpi}.  Arithmetic operations for
-\classref{fixed-precision-integer} are defined by methods on the generic
+\classref{int} are defined by methods on the generic
 functions defined in the compare module (\ref{compare}):
 %
 \begin{flushleft}
@@ -39,17 +39,12 @@ and in the integer module:
 The behaviour of these functions is defined in the modules noted
 above.
 
-\derivedclass{fixed-precision-integer}{integer}
-\index{general}{level-0 classes!\theclass{fixed-precision-integer}}
+\derivedclass{int}{integer}
+\index{general}{level-0 classes!\theclass{int}}
 
 The class of all instances of fixed precision integers.
 
-\classalias{fpi}{fixed-precision-integer}
-%
-\remarks%
-A constant binding whose value is \classref{fixed-precision-integer}.
-
-\function{fixed-precision-integer?}
+\function{int?}
 \begin{arguments}
 \item[object] Object to examine.
 \end{arguments}
@@ -58,7 +53,7 @@ A constant binding whose value is \classref{fixed-precision-integer}.
 Returns {\em object\/} if it is fixed precision integer, otherwise
 \nil{}.
 
-\constant{most-positive-fixed-precision-integer}{fixed-precision-integer}
+\constant{most-positive-int}{int}
 \index{general}{implementation-defined!most positive fixed precision integer}
 \index{general}{conformity-clause!most positive fixed precision integer}
 
@@ -70,7 +65,7 @@ maximum-vector-index}\index{general}{implementation-defined!most positive
 fixed precision integer}\index{general}{conformity-clause!most positive
 fixed precision integer}.
 
-\constant{most-negative-fixed-precision-integer}{fixed-precision-integer}
+\constant{most-negative-int}{int}
 \index{general}{implementation-defined!most negative fixed precision integer}
 \index{general}{conformity-clause!most negative fixed precision integer}
 
@@ -84,7 +79,7 @@ precision integer}.
 \converter{string}
 %
 \begin{specargs}
-    \item[integer, \classref{fixed-precision-integer}] An integer.
+    \item[integer, \classref{int}] An integer.
 \end{specargs}
 %
 \result%
@@ -93,16 +88,16 @@ the external representation of {\em integer\/} in decimal notation.
 
 \converter{double-float}
 \begin{specargs}
-\item[integer, \classref{fixed-precision-integer}] An integer.
+\item[integer, \classref{int}] An integer.
 \end{specargs}
 
 \result%
 Returns a double float whose value is the floating point approximation
 to {\em integer}.
 
-\method{generic-prin}{fixed-precision-integer}
+\method{generic-prin}{int}
 \begin{specargs}
-\item[integer, \classref{fixed-precision-integer}] An integer to be output on {\em stream}.
+\item[integer, \classref{int}] An integer to be output on {\em stream}.
 \item[stream, \classref{stream}] The stream on which the representation is
 to be output.
 \end{specargs}
@@ -115,9 +110,9 @@ Outputs external representation of {\em integer\/} on {\em stream\/}
 in decimal as defined by {\em decimal integer} at the beginning of
 this section.
 
-\method{generic-write}{fixed-precision-integer}
+\method{generic-write}{int}
 \begin{specargs}
-\item[integer, \classref{fixed-precision-integer}] An integer to be output on {\em stream}.
+\item[integer, \classref{int}] An integer to be output on {\em stream}.
 \item[stream, \classref{stream}] The stream on which the representation is
 to be output.
 \end{specargs}

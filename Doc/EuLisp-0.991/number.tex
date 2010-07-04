@@ -37,7 +37,7 @@ The defined name of this module is {\tt number}.
 
 Numbers can take on many forms with unusual properties, specialized for
 different tasks, but two classes of number suffice for the majority of needs,
-namely integers (\classref{integer}, \constantref{fpi}) and floating point
+namely integers (\classref{integer}, \classref{int}) and floating point
 numbers (\classref{float}, \classref{double-float}).  Thus, these only are
 defined at level-0.
 
@@ -49,7 +49,7 @@ subclasses of \classref{number}, while the class of each number class might be a
 subclass of \classref{number}.  Since there are only two concrete number
 classes at level-0,
 coercion\index{general}{coercion}\index{general}{number!coercion} is simple,
-namely from \classref{fixed-precision-integer}\ to \classref{double-float}.  Any
+namely from \classref{int}\ to \classref{double-float}.  Any
 level-0 version of a library module, for example, {\em elementary-functions}
 \ref{elementary-functions}, need only define methods for these two classes.
 Mathematically, the reals are regarded as a superset of the integers and for the
@@ -72,7 +72,7 @@ in particular \genericref{binary/},
     \><flo\=at> \\
     \>    \><double-float> \\
     \><integer> \\
-    \>    \><fixed-precision-integer>
+    \>    \><int>
 \end{tabbing}}
 \end{center}
 \end{table}
