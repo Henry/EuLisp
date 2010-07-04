@@ -114,7 +114,7 @@
 
   (defun apply-binding (bindings apply-to)
    ;; (format "apply-to: ~a bindings: ~a~%" apply-to bindings)
-    (cdr (assoc apply-to bindings)))
+    (cdr (member-alist apply-to bindings)))
 
   (defmethod execute ((action <remove-action>) pi
                       wm-manager ce-manager cr-manager)
@@ -156,7 +156,7 @@
              (set-attribs (md-attribs action) ())))
            (a-vals (accumulate
                     (lambda (a x)
-                      (if (null? (assoc (car x) a))
+                      (if (null? (member-alist (car x) a))
                           (cons x a)
                         a))
                     new-attrib-vals

@@ -34,7 +34,7 @@
   ;; in future releases.
   ;;
   ;; This macro package extends Scheme with several new expression forms.
-  ;; Following is a brief summary of the new forms.  See the associated
+  ;; Following is a brief summary of the new forms.  See the member-alistiated
   ;; LaTeX documentation for a full description of their functionality.
   ;;
   ;;
@@ -746,7 +746,7 @@
            (if (null? plist)
                (erract x)
              (let* ((v '())
-                    (val (lambda (x) (cdr (assq x v))))
+                    (val (lambda (x) (cdr (member-alist x v))))
                     (fail (lambda (sf)
                             (gen x sf (cdr plist) erract size>= eta)))
                     (success (lambda (sf)
@@ -933,8 +933,8 @@
                                                          ,(ks sf)
                                                        ,p1)))))))))
                                  (case k
-                                       ((0) (ks sf))
-                                       ((1) (emit `(cons? ,e) sf kf ks))
+                                       (0 (ks sf))
+                                       (1 (emit `(cons? ,e) sf kf ks))
                                        (else
                                          (emit `((,size>= ,k) ,e) sf kf ks)))))))
                       ((cons? p)
@@ -1244,11 +1244,11 @@
            (memq (car tst) match:vector-structures)))
        (add-a
          (lambda (a)
-           (let ((new (and (cons? a) (assq (car a) c---rs))))
+           (let ((new (and (cons? a) (member-alist (car a) c---rs))))
              (if new (cons (cadr new) (cdr a)) `(car ,a)))))
        (add-d
          (lambda (a)
-           (let ((new (and (cons? a) (assq (car a) c---rs))))
+           (let ((new (and (cons? a) (member-alist (car a) c---rs))))
              (if new (cons (cddr new) (cdr a)) `(cdr ,a)))))
        (c---rs '((car caar . cdar)
                  (cdr cadr . cddr)
@@ -1279,7 +1279,7 @@
                 `(let ((x ,(cadr e))) (lambda (y) ((setter car) x y))))
                ((eq (car e) 'cdr)
                 `(let ((x ,(cadr e))) (lambda (y) ((setter cdr) x y))))
-               ((let ((a (assq (car e) get-c---rs)))
+               ((let ((a (member-alist (car e) get-c---rs)))
                   (and a
                        `(let ((x (,(cadr a) ,(cadr e))))
                           (lambda (y)
@@ -1301,7 +1301,7 @@
               `(let ((x ,(cadr e))) (lambda () (car x))))
              ((eq (car e) 'cdr)
               `(let ((x ,(cadr e))) (lambda () (cdr x))))
-             ((let ((a (assq (car e) get-c---rs)))
+             ((let ((a (member-alist (car e) get-c---rs)))
                 (and a
                      `(let ((x (,(cadr a) ,(cadr e))))
                         (lambda () (,(cddr a) x))))))

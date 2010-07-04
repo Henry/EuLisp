@@ -27,12 +27,9 @@
 ;;; Constants
 ;;;-----------------------------------------------------------------------------
   (defconstant #t t)
-  (defconstant else t)
   (defconstant #f ())
   (defconstant false ())
   (defconstant true t)
-  ;(defconstant |#\newline| #\\n)
-  ;(defconstant |#\space| #\\s)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Functions are not renamed to get correct print names
@@ -56,15 +53,14 @@
 
   (export asin)
 
-  (defun assoc (x y)
-    (assoc-list-ref y x 'equal))
+  (defun assoc (key a-list)
+    (member-alist key a-list 'equal))
 
   (defun assq (key a-list)
-    (assoc-list-ref a-list key))
-  (declare-inline assq)
+    (member-alist key a-list))
 
-  (defun assv (x y)
-    (assoc-list-ref y x 'eql))
+  (defun assv (key a-list)
+    (member-alist key a-list 'eql))
 
   (export atan)
 
@@ -88,17 +84,7 @@
   (defun call-with-output-file args
     (nyi 'call-with-input-file))
 
-  (export car cddr cdddr)
-
-  (defun cdddar (x)
-    (cdr (cddar x)))
-  (declare-inline cdddar)
-
-  (defun cddddr (x)
-    (cdr (cdddr x)))
-  (declare-inline cddddr)
-
-  (export cdr ceiling)
+  (export car cddr cdddr cdr ceiling)
 
   (defun char->integer (x)
     (character-as-int x))

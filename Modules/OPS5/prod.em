@@ -28,7 +28,7 @@
        default: ()
        reader: prod-ordered-ces
        writer: set-prod-ordered-ces)
-     (ce-vars                ; associates ce-vars with ces
+     (ce-vars                ; member-alistiates ce-vars with ces
        default: ()
        reader:  prod-ce-vars
        writer:  set-prod-ce-vars)
@@ -236,7 +236,7 @@
                 (let ((new-bindings
                         (accumulate
                           (lambda (a x)
-                            (cons (cons (car x) (cdr (assoc (cdr x) ce-ts))) a))
+                            (cons (cons (car x) (cdr (member-alist (cdr x) ce-ts))) a))
                           bindings
                           (prod-ce-vars prod))))
                   ;;(print new-bindings)
@@ -348,7 +348,7 @@
         (let* ((rest (list-remove jv-ce all-ces))
                (rest-of-ces (if (null? rest) () (cdr rest)))
                (next-ce (if (null? rest) () (car rest)))
-               (vals (assoc (cadadr test) (ce-jv-vals jv-ce) eql))
+               (vals (member-alist (cadadr test) (ce-jv-vals jv-ce) eql))
                (jv-values (if (null? vals) () (cdr vals)))
                (matching-tstamps (query-pos jv-values test)))
           (solve-join jv-ce matching-tstamps
@@ -559,10 +559,10 @@
     (let* ((ce (element (prod-pos-ces prod)
                         (- ce-num 1)))
            ;;(convert (- ce-num 1) <integer>)))
-           (val (assoc ce ce-ts)))
+           (val (member-alist ce ce-ts)))
       (if (null? val)
           (sformat ops-out "Error: No timestamp for ~a~%" (ce-id ce))
-        (cdr (assoc ce ce-ts)))))
+        (cdr (member-alist ce ce-ts)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; remove-prod-insts

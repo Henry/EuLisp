@@ -62,7 +62,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; <working-memory>
   ; Used to store working memory elements, elements are keyed by timestamp.
-  ; for now this will be a simple association list
+  ; for now this will be a simple member-alistiation list
 ;;;-----------------------------------------------------------------------------
   (defclass <working-memory> ()
     ((wm-elements
@@ -95,7 +95,7 @@
   (defgeneric wm-remove (wm timestamp)
     method: (((wm <working-memory>) timestamp)
              ;;(format "Removing timestamp: ~a~%:" timestamp)
-             (let ((rem (assoc timestamp (wm-elements wm))))
+             (let ((rem (member-alist timestamp (wm-elements wm))))
                (when (null? rem) (sformat ops-out
                                         "Remove FAILED: ~a~%" timestamp))
                (set-wm-elements wm (list-remove rem (wm-elements wm)))

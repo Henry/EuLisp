@@ -117,7 +117,7 @@
                                      (lambda (fail test)
                                        ;;(print (cadadr test))
                                        (let* ((var (cadadr test))
-                                              (tmp (assoc var (pi-bindings p)))
+                                              (tmp (member-alist var (pi-bindings p)))
                                               (val (if tmp (cdr tmp) 'NIL)))
                                          ;;(format "Test: ~a ~a ~a~%"
                                                 ;; (car test) (caadr test) val)

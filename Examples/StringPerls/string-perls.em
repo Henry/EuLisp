@@ -15,7 +15,7 @@
 ;;;-----------------------------------------------------------------------------
   (defextern eul_split_string (<string> <string>) ptr)
   (defun split-string (str delim)
-    (reverse-list! (eul_split_string str delim)))
+    (reverse-list (eul_split_string str delim)))
 
   (deflocal str "Split this string into words,honestly:no really")
   (deflocal delim " ,;:")

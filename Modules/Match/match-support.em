@@ -2,46 +2,14 @@
 (defmodule match-support
   (syntax ((except (match-let) macros) match0)
    import (level1)
-   export (caaadr caadar cadaar cadadr caddar cdaadr cdadar cddaar cddadr
-           cdddar cddddr
-           assoc assq memq
+   export (memq
            boolean?
            ;; How much of this is actually necessary?
            match:error match:andmap match:syntax-err match:set-error
            match:error-control match:disjoint-predicates
            match:vector-structures))
 
-  ;; Getters
-  (defun caaadr (l) (car (car (car (cdr l)))))
-
-  (defun caadar (l) (car (car (cdr (car l)))))
-  (defun cadaar (l) (car (cdr (car (car l)))))
-
-  (defun cadadr (l) (car (cdr (car (cdr l)))))
-  (defun caddar (l) (car (cdr (cdr (car l)))))
-
-  (defun cdaadr (l) (cdr (car (car (cdr l)))))
-  (defun cdadar (l) (cdr (car (cdr (car l)))))
-
-  (defun cddaar (l) (cdr (cdr (car (car l)))))
-  (defun cddadr (l) (cdr (cdr (car (cdr l)))))
-
-  (defun cdddar (l) (cdr (cdr (cdr (car l)))))
-  (defun cddddr (l) (cdr (cdr (cdr (cdr l)))))
-
-  ;; List-traversing predicates
-  (defgeneric assoc  (item obj . test))
-
-  (defmethod assoc (item (l <list>) . test)
-    (let ((test (if (null? test) binary= (car test))))
-      (let loop ((l l))
-           (if (null? l)
-               '()
-             (if (test (caar l) item)
-                 (car l)
-               (loop (cdr l)))))))
-
-  (defun assq (item l) (assoc item l eq))
+  ;; List-traversing
   (defun memq (item collection) (member item collection eq))
 
   ;; Type predicates

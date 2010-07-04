@@ -37,7 +37,7 @@
   (defmethod insert-new-ce ((ce-manager <ce-manager>)
                             (new-ce <condition-element>) prod)
     ;;(print "insert-new-ce")
-    (let* ((ces (assoc (ce-class-name new-ce) (cond-els ce-manager)))
+    (let* ((ces (member-alist (ce-class-name new-ce) (cond-els ce-manager)))
            (res (exists (if ces (cadr ces) ()) new-ce))
            (ce  (if res res (add-new-ce ce-manager new-ce))))
       (set-ce-prods ce (cons prod (ce-prods ce)))
@@ -48,7 +48,7 @@
     ;;(sformat ops-out "Existing ces: ~a~%" (cond-els ce-manager))
     (let* ((old-ces (cond-els ce-manager))
            (class (ce-class-name new-ce))
-           (new-class (null? (assoc class old-ces))))
+           (new-class (null? (member-alist class old-ces))))
       (if new-class
           (set-cond-els ce-manager
                         (cons (list class (list new-ce))
@@ -106,7 +106,7 @@
   (defmethod match-insert ((ce-manager <ce-manager>) wme cr-manager)
     ;;(format "match-insert: ~a" (wme-attrib-vals wme))
     (let* ((class (wme-class-name wme))
-           (ces (cadr (assoc class (cond-els ce-manager)))))
+           (ces (cadr (member-alist class (cond-els ce-manager)))))
       ;;(format "Ces to inform: ~a~%" ces)
       (do
         (lambda (x)
@@ -165,7 +165,7 @@
     ;;(print (ce-j-tests ce))
     (accumulate
       (lambda (a test)
-        (let* ((val (assoc (test-attrib test) (wme-attrib-vals wme)))
+        (let* ((val (member-alist (test-attrib test) (wme-attrib-vals wme)))
                (a-val (if (null? val) 'NIL (cdr val))))
           ;;(print (test-attrib test))
           ;;(print (wme-attrib-vals wme))
@@ -181,7 +181,7 @@
         (if (eql (test-pred test) '=)
             (cons
               (cons (test-value test)
-                    (let ((val (assoc (test-attrib test)
+                    (let ((val (member-alist (test-attrib test)
                                       (wme-attrib-vals wme))))
                       (if (null? val) 'NIL (cdr val))))
               a)
@@ -193,7 +193,7 @@
     ;;(print "compute-var-bindings-join")
     (let ((bindings (accumulate
                       (lambda (a test)
-                        (let* ((val (assoc (test-attrib test)
+                        (let* ((val (member-alist (test-attrib test)
                                            (wme-attrib-vals wme)))
                                (a-val (if (null? val) 'NIL (cdr val))))
                           (if (binary= (test-pred test) '=)
@@ -206,10 +206,10 @@
         (lambda (a test)
           (let* ((join-var (test-value test))
                  (attrib (test-attrib test))
-                 (val (assoc attrib (wme-attrib-vals wme)))
+                 (val (member-alist attrib (wme-attrib-vals wme)))
                  (jv-value (if (null? val) 'NIL (cdr val))))
 
-            (if (null? (assoc join-var (ce-jv-vals ce)))
+            (if (null? (member-alist join-var (ce-jv-vals ce)))
                 (set-ce-jv-vals
                   ce
                   (cons (cons join-var
@@ -253,7 +253,7 @@
   (defun passes-test (wme test)
     ;;(format "passes-test: ~a~%" test)
     (let* ((attrib (test-attrib test))
-           (val (assoc attrib (wme-attrib-vals wme)))
+           (val (member-alist attrib (wme-attrib-vals wme)))
            (wme-val (if (null? val) 'NIL (cdr val)))
            (pred (test-pred test))
            (tst-val (test-value test)))
@@ -284,9 +284,9 @@
   (defmethod match-remove ((ce-manager <ce-manager>) wme cr-manager)
     ;;(print "match-remove")
     ;;(print (wme-class-name wme))
-    ;;(print (assoc (wme-class-name wme) (cond-els ce-manager)))
+    ;;(print (member-alist (wme-class-name wme) (cond-els ce-manager)))
     (let* ((class (wme-class-name wme))
-           (ces (cadr (assoc class (cond-els ce-manager)))))
+           (ces (cadr (member-alist class (cond-els ce-manager)))))
       (do
         (lambda (x)
           ;;(print x)
@@ -382,7 +382,7 @@
 ;;;  join-list
   ;;  Get requested join list
   (defun join-list (ce ts)
-    (let* ((vals (assoc ts (ce-matches ce)))
+    (let* ((vals (member-alist ts (ce-matches ce)))
            (match (if (null? vals) () (caddr vals))))
       ;;(sformat ops-out "join-list: ~a~%" match)
       match))
@@ -390,7 +390,7 @@
 ;;; var-bindings
   ;;  Get requested variable bindings
   (defun var-bindings (ce ts)
-    (let* ((vals (assoc ts (ce-matches ce)))
+    (let* ((vals (member-alist ts (ce-matches ce)))
            (match (if (or (null? vals) (null? (cdr vals)))
                       () (cadr vals))))
       ;(sformat ops-out "~a ~a ~a ~%" ce ts match)
