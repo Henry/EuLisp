@@ -261,7 +261,8 @@
      ...
   )
   #+END_SRC
-  where the exprs are evaluated when the condition is true; and
+  where the exprs are evaluated when the condition is true and the result of the
+  last returned otherwise =()= is returned; and
   #+BEGIN_SRC eulisp
   (unless boolexpr
      expr
@@ -269,7 +270,8 @@
      ...
   )
   #+END_SRC
-  where the exprs are evaluated when the condition is false.
+  where the exprs are evaluated when the condition is false and the result of
+  the last returned otherwise =()= is returned.
 
 * Assignment
   =setq= as usual:
@@ -1181,11 +1183,40 @@
     + =expose=
 *** List functions
     + =cons=
+    + =list=
     + =car=
     + =cdr=
-    + =list=
+    + =caar= (see =car=)
+    + =cadr= (see =car=)
+    + =cdar= (see =car=)
+    + =cddr= (see =car=)
+    + =caaar= (see =car=)
+    + =caadr= (see =car=)
+    + =cadar= (see =car=)
+    + =caddr= (see =car=)
+    + =cdaar= (see =car=)
+    + =cdadr= (see =car=)
+    + =cddar= (see =car=)
+    + =cdddr= (see =car=)
+    + =caaaar= (see =car=)
+    + =caaadr= (see =car=)
+    + =caadar= (see =car=)
+    + =caaddr= (see =car=)
+    + =cadaar= (see =car=)
+    + =cadadr= (see =car=)
+    + =caddar= (see =car=)
+    + =cadddr= (see =car=)
+    + =cdaaar= (see =car=)
+    + =cdaadr= (see =car=)
+    + =cdadar= (see =car=)
+    + =cdaddr= (see =car=)
+    + =cddaar= (see =car=)
+    + =cddadr= (see =car=)
+    + =cdddar= (see =car=)
+    + =cddddr= (see =car=)
 *** Symbol functions
     + =gensym=
+    + =symbol-exists?=
 *** Vector functions
     + =vector=
 *** Predicates
@@ -1370,67 +1401,16 @@
 * EuXLisp functions
   Here is a summary of the additional functions available in EuXLisp.  Those
   marked '*' are also in Youtoo.
-*** Special operators
-    + =delay=
-    + =map-list=
-    + =load=
-    + =load-noisily=
-    + =force=
 *** List functions
-    + =caar= *
-    + =cadr= *
-    + =cdar= *
-    + =cddr= *
-    + =caaar= *
-    + =caadr= *
-    + =cadar= *
-    + =caddr= *
-    + =cdaar= *
-    + =cdadr= *
-    + =cddar= *
-    + =cdddr= *
-    + =caaaar=
-    + =caaadr=
-    + =caadar=
-    + =caaddr=
-    + =cadaar=
-    + =cadadr=
-    + =caddar=
-    + =cadddr= *
-    + =cdaaar=
-    + =cdaadr=
-    + =cdadar=
-    + =cdaddr=
-    + =cddaar=
-    + =cddadr=
-    + =cdddar=
-    + =cddddr=
-    + =list*=
     + =append= *
-    + =last-pair=
-    + =length= *
-    + =memv=
-    + =memq=
-    + =assv=
-    + =assq=
+    + =length= -> =list-size= *
     + =list-ref= *
-    + =list-tail=
-*** Symbol functions
-    + =bound?=
-    + =symbol-value=
-    + =symbol-plist=
-    + =get=
-    + =put=
 *** Vector functions
     + =make-vector= *
-    + =vector-length=
+    + =vector-length= -> =vector-size= *
     + =vector-ref= *
 *** Predicates
     + =list?= *
-    + =boolean?=
-    + =complex?=
-    + =rational?=
-    + =char?=
     + =function?= *
     + =input-stream?=
     + =output-stream?=
@@ -1438,25 +1418,14 @@
     + =eof-object?=
     + =default-object?=
 *** Arithmetic functions
-    + =exact?=
-    + =inexact?=
     + =random= *
-    + =quotient=
-    + =remainder=
-    + =unary-=
-    + =unary/=
-*** Bitwise logical functions
-    + =logand=
-    + =logior=
-    + =logxor=
-    + =lognot=
 *** String functions
     + =make-string=
-    + =string-length=
-    + =string-null?=
-    + =string-append=
-    + =string-ref=
-    + =substring=
+    + =string-length= -> =string-size= *
+    + =string-null?= -> =string-empty?= *
+    + =string-append= *
+    + =string-ref= *
+    + =substring= *
 *** I/O functions
     + =read-char= *
     + =read-byte=
@@ -1586,15 +1555,11 @@
     + =<macro-error>=
     + =<syntax-error>=
     + =<user-interrupt>=
-*** Compare
-    + =assoc=
-*** Macros
-    + =symbol-macro=
-    + =macroexpand=
-    + =macroexpand1=
-*** Collect
     + =<collection-condition>=
     + =<collection-error>=
+*** Macros
+    + =macroexpand=
+    + =macroexpand1=
 
 * Command Line Arguments
 *** EuXLisp

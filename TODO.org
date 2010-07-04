@@ -31,6 +31,7 @@
 *** DONE Rename =abstractp:= -> =abstract?:=
     CLOSED: [2010-06-29 Tue 21:47]
 *** TODO Add =slice= method for =<vector>=
+*** TODO Change all destructive functions to =setters=
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
@@ -174,6 +175,7 @@
 *** DONE Add a Scheme-style =else=
     CLOSED: [2010-06-22 Tue 22:34]
     for the default clause of =cond= forms.  =else= is simply an alias for =t=.
+*** TODO Rename predicate =namep= -> =name?=
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =reverse!= method for =<string>=
@@ -182,6 +184,22 @@
     CLOSED: [2010-07-01 Thu 23:04]
 *** DONE Add =flush= and =sflush=
     CLOSED: [2010-06-27 Sun 22:59]
+*** TODO Update the class hierarchy
+    + remove =simple-string=, =simple-vector= /etc./
+    + add =<sequence>=, =<character-sequence>= /etc./
+*** TODO Remove the export of =<make-...>= functions
+    Replace with generic =make <...>= calls in modules.
+*** Rename primitive Scheme functions in the C-code
+    #+BEGIN_SRC eulisp
+    (rename
+      ((begin progn)
+      (pair? cons?)
+      (real? float?)
+      (real? double-float?)
+      (procedure? function?)
+      (eq? eq)
+      (eqv? eql))
+    #+END_SRC
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
     to correspond to the EuLisp-1.0 proposals.
@@ -288,7 +306,8 @@
 *** TODO Add a Scheme-style =else=
     for the default clause of =cond= and =case= forms.  =else= is simply an
     alias for =t=.
-*** TODO Add =when= and =unless= conditional expressions
+*** DONE Add =when= and =unless= conditional expressions
+    CLOSED: [2010-07-02 Fri 10:16]
 *** TODO Add =while= loop construct
 *** TODO Consider renaming =labels= -> =flet*=
 * Other

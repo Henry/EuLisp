@@ -261,7 +261,8 @@
      ...
   )
   #+END_SRC
-  where the exprs are evaluated when the condition is true; and
+  where the exprs are evaluated when the condition is true and the result of the
+  last returned otherwise [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]] is returned; and
   #+BEGIN_SRC eulisp
   (unless boolexpr
      expr
@@ -269,7 +270,8 @@
      ...
   )
   #+END_SRC
-  where the exprs are evaluated when the condition is false.
+  where the exprs are evaluated when the condition is false and the result of
+  the last returned otherwise [[file:EuLisp-0.991/html/eulispcl17.html#dx21-615010][=()=]] is returned.
 
 * Assignment
   [[file:EuLisp-0.991/html/eulispcl16.html#dx20-245003][=setq=]] as usual:
