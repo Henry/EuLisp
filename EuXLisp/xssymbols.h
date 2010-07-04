@@ -28,7 +28,7 @@ extern LVAL s_general_error, s_no_applic_error, s_no_next_md_error;
 extern LVAL s_bad_type_error, s_telos_error, s_telos_bad_ref, s_incompatible_md;
 extern LVAL s_unbound_error, s_arith_error, s_user_intr, s_syntax_error;
 extern LVAL s_compile_error;
-extern LVAL s_letname, s_begin, s_compile, s_setmodule, s_getmodule, s_reintern;
+extern LVAL s_letname, s_progn, s_compile, s_setmodule, s_getmodule, s_reintern;
 extern LVAL s_module_directives;
 extern LVAL s_binary_plus, s_binary_minus, s_binary_times, s_binary_divide;
 extern LVAL s_quotient, s_binary_less, s_binary_equal, s_current_thread;

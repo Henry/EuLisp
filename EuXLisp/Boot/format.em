@@ -40,7 +40,7 @@
   (define (format-loop string args n len result)
           (if (< n len)
               (let ((char (string-ref string n)))
-                (if (eqv? char escape-char)
+                (if (eql char escape-char)
                     (format-escape string args (+ n 1) len result)
                   (format-loop string args (+ n 1) len
                                (cons char result))))
@@ -56,8 +56,8 @@
                   (op char string args (+ n 1) len result)))
             (format-error "misplaced escape at end of format string" string)))
 
-  (deflocal escape-table (make-table eqv?))
-  (deflocal escape-arg-table (make-table eqv?))
+  (deflocal escape-table (make-table eql))
+  (deflocal escape-arg-table (make-table eql))
 
   (define (check-args args string)
           (if (atom? args)
@@ -137,7 +137,7 @@
           (let ((count (string->number arg)))
             (if (not (integer? count))
                 (format-error "bad base for ~r in format" arg)
-              (begin
+              (progn
                 (check-args args string)
                 (format-loop string (cdr args) n len
                              (append (radix (car args) count)
@@ -223,7 +223,7 @@
           (letrec ((loop1
                      (lambda (ind)
                        (let ((ch (check-string-ref string ind len)))
-                         (cond ((eqv? ch #\.)
+                         (cond ((eql ch #\.)
                                 (loop2 (+ ind 1)))
                                ((memv ch '(#\0 #\1 #\2 #\3 #\4 #\5 #\6 #\7 #\8 #\9))
                                 (loop1 (+ ind 1)))

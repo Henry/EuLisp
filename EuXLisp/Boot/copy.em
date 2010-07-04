@@ -38,7 +38,7 @@
 
   (define (structure-copy-loop new old index len copy)
           (if (<= index len)
-              (begin
+              (progn
                 (setivar new index (copy (getivar old index)))
                 (structure-copy-loop new old (+ index 1) len copy))
             new))
@@ -91,7 +91,7 @@
 
   (define (vector-copy-loop new old index len copy)
           (if (< index len)
-              (begin
+              (progn
                 (vector-set! new index (copy (vector-ref old index)))
                 (vector-copy-loop new old (+ index 1) len copy))
             new))

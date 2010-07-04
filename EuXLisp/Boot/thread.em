@@ -82,7 +82,7 @@
                    (%display " " stream)
                    (generic-write (self state:) stream)
                    (if (> locks 0)
-                       (begin
+                       (progn
                          (%display " " stream)
                          (generic-prin locks stream)
                          (%display " lock" stream)
@@ -120,14 +120,14 @@
   (define (nconc a b)
           (if (null? a)
               b
-            (begin
+            (progn
               (set-cdr! (last-pair a) b)
               a)))
 
   ;; delete first occurence
   (define (delq x l)
           (cond ((null? l) ())
-                ((eq? x (car l)) (cdr l))
+                ((eq x (car l)) (cdr l))
                 (else (cons (car l) (delq x (cdr l))))))
 
   (deflocal current-self ())
@@ -170,7 +170,7 @@
                  (signals (get-signals new)))
             (if (null? signals)
                 ((get-cont new) t)
-              (begin
+              (progn
                 (set-signals new ())
                 (for-each                    ; deliver waiting signals
                   (lambda (s)
@@ -191,11 +191,11 @@
   (define (no-more-threads)
           (newline)
           (if die-when-no-more-threads
-              (begin
+              (progn
                 (prin "No more runnable threads. Bye...")
                 (newline)
                 (exit))
-            (begin
+            (progn
               (%display "No more runnable threads. Restarting...")
               (newline)
               (set-cont current-self ())     ; tidy up
@@ -246,8 +246,8 @@
                 (value ()))
             (letrec ((self
                        (lambda (op . args)
-                         (cond ((eq? op ready?:) ready?)
-                               ((eq? op value:)
+                         (cond ((eq op ready?:) ready?)
+                               ((eq op value:)
                                 (cond (ready? value)
                                       ((not started?)
                                        (error "thread-value on unstarted thread"
@@ -257,14 +257,14 @@
                                         (error "thread-value on killed thread"
                                                <thread-general-error>
                                                value: self))
-                                      ((eq? self (get-self (current-thread)))
+                                      ((eq self (get-self (current-thread)))
                                        (error "thread-value on self"
                                               <thread-general-error>
                                               value: self))
                                       (else
                                         (thread-reschedule)
                                         (self value:))))
-                               ((eq? op start:)
+                               ((eq op start:)
                                 (cond (killed?
                                         (error "thread start on killed thread"
                                                <thread-general-error>
@@ -279,22 +279,22 @@
                                             (set-cont (car args) cc)
                                             (add-thread-to-queue (car args))))
                                         (if started?
-                                            (begin
+                                            (progn
                                               (setq value (apply fun (car (cdr args))))
                                               (release-locks (car args))
                                               (setq ready? t)
                                               (pop-and-call-thread))
                                           (setq started? t))
                                         self)))
-                               ((eq? op kill:)
+                               ((eq op kill:)
                                 (setq killed? t)
                                 (release-locks (car args)))
-                               ((eq? op state:)
+                               ((eq op state:)
                                 (cond (killed? dead:)
                                       (ready? ready:)
                                       (started? started:)
                                       (else limbo:)))
-                               ((eq? op reset-state:)
+                               ((eq op reset-state:)
                                 (setq ready? ())
                                 (setq started? t)
                                 (setq killed? ())
@@ -306,10 +306,10 @@
 
   (define (thread-kill thread)
           (if (thread? thread)
-              (begin
+              (progn
                 ((get-self thread) kill: thread)
                 (remove-thread-from-queue thread)
-                (if (eq? thread current-self)
+                (if (eq thread current-self)
                     (pop-and-call-thread))
                 t)
             (error "not a thread in thread-kill"
@@ -325,29 +325,29 @@
   (deflocal toplevel-thread
           (let ((killed? ()))
             (define (interactive-thread op . args)
-                    (cond ((eq? op ready?:) ())
-                          ((eq? op kill:)
+                    (cond ((eq op ready?:) ())
+                          ((eq op kill:)
                            (setq killed? t)
                            (release-locks (car args)))
-                          ((eq? op state:)
+                          ((eq op state:)
                            (if killed? dead: started:))
-                          ((eq? op value:)
+                          ((eq op value:)
                            (cond (killed?
                                    (error "thread-value on killed thread"
                                           <thread-general-error>
                                           value: interactive-thread))
-                                 ((eq? toplevel-thread (current-thread))
+                                 ((eq toplevel-thread (current-thread))
                                   (error "thread-value on self"
                                          <thread-general-error>
                                          value: interactive-thread))
                                  (else
                                    (thread-reschedule)
                                    (interactive-thread value:))))
-                          ((eq? op start:)
+                          ((eq op start:)
                            (error "attempt to start running thread"
                                   <thread-already-started>
                                   value: interactive-thread))
-                          ((eq? op reset-state:)
+                          ((eq op reset-state:)
                            (setq killed? ()))
                           (else (error "unknown thread operation"
                                        <thread-general-error>
@@ -360,7 +360,7 @@
 
   (define (thread-start thread . args)
           (if (thread? thread)
-              (begin
+              (progn
                 ((get-self thread) start: thread args)
                 thread)
             (error "not a thread in thread-start"
@@ -410,7 +410,7 @@
                  (%display " value " stream)
                  (generic-write (lock-value l) stream)
                  (if (= (lock-value l) 0)
-                     (begin
+                     (progn
                        (%display " owner " stream)
                        (generic-write (lock-owner l) stream)))
                  (%display ">" stream)
@@ -446,15 +446,15 @@
   (define (unlockit l)
           (let ((owner (lock-owner l)))
             (if owner (set-locks owner (delq l (get-locks owner))))
-            (if (pair? (lock-queue l))
+            (if (cons? (lock-queue l))
                 (let ((thread (car (lock-queue l)))) ; someone waiting
                   (set-lock-queue! l (cdr (lock-queue l)))
                   (set-lock-owner! l thread)
                   (set-locks thread (cons l (get-locks thread)))
-                  (if (eq? (thread-state thread) dead:)       ; died wile waiting
+                  (if (eq (thread-state thread) dead:)       ; died wile waiting
                       (unlockit l)
                     (add-thread-to-queue thread)))
-              (begin                          ; no-one waiting
+              (progn                          ; no-one waiting
                 (set-lock-owner! l ())
                 (set-lock-value! l 1)))))
 
@@ -500,10 +500,10 @@
   ;; time     wait
   (define-method (wait (thread <thread>) (time <object>))
                  (cond ((null? time)                 ; poll
-                        (if (eq? (thread-state thread) ready:)
+                        (if (eq (thread-state thread) ready:)
                             thread
                           ()))
-                       ((eq? time t)                ; suspend until ready
+                       ((eq time t)                ; suspend until ready
                         (thread-value thread)
                         thread)
                        ((and (number? time)
@@ -516,28 +516,28 @@
   (define (thread-timeout thread time)
           (let ((state (thread-state thread))
                 (interval (round time)))
-            (cond ((eq? state ready:) thread)
-                  ((not (eq? state started:))
+            (cond ((eq state ready:) thread)
+                  ((not (eq state started:))
                    (error "waiting on non-running thread"
                           <wait-error>
                           value: thread))
                   (t (timeout-loop (+ (current-time) interval)
-                                   (lambda () (eq? (thread-state thread) ready:)))
-                     (if (eq? (thread-state thread) ready:)
+                                   (lambda () (eq (thread-state thread) ready:)))
+                     (if (eq (thread-state thread) ready:)
                          thread
                        ())))))
 
   (define (timeout-loop timeout test)
           (if (and (< (current-time) timeout)
                    (not (test)))
-              (begin
+              (progn
                 (thread-reschedule)
                 (timeout-loop timeout test))))
 
 ;;   (define (timeout-loop timeout test)
 ;;           (if (and (< (current-time) timeout)
 ;;                    (not (test)))
-;;               (begin
+;;               (progn
 ;;                 (if (null? (thread-queue))
 ;;                     (pause timeout)
 ;;                   (thread-reschedule))
@@ -545,7 +545,7 @@
 
   (define-method (wait (str <stream>) (time <object>))
                  (cond ((null? time) (char-ready? str))
-                       ((eq? time t) (stream-suspend str))
+                       ((eq time t) (stream-suspend str))
                        (t (timeout-loop (+ (current-time) (round time))
                                         (lambda () (char-ready? str)))
                           (char-ready? str))))
@@ -553,7 +553,7 @@
   (define (stream-suspend str)
           (if (char-ready? str)
               t
-            (begin
+            (progn
               (thread-reschedule)
               (stream-suspend str))))
 
@@ -574,7 +574,7 @@
                  (uwps (get-uwp-frame-uwps frame)))
             (if (null? uwps)
                 (print "*** no uwp to disestablish")
-              (if (not (eq? (car uwps) cleanups))
+              (if (not (eq (car uwps) cleanups))
                   (print "*** out of sync in uwps")))
             (set-uwp-frame-uwps frame (cdr uwps))
             ((car uwps))                      ; run after forms
@@ -589,7 +589,7 @@
           (dprint (list "disestablish handler" value handler))
           (let* ((thread (current-thread))
                  (handlers (get-handlers thread)))
-            (if (or (null? handlers) (not (eq? handler (car handlers))))
+            (if (or (null? handlers) (not (eq handler (car handlers))))
                 (print "*** out of sync in handlers")
               (set-handlers thread (cdr handlers))))
           value)
@@ -598,7 +598,7 @@
 
   (define (signal condition resume . thread)
           (let ((current (current-thread)))
-            (if (or (null? thread) (eq? (car thread) current))
+            (if (or (null? thread) (eq (car thread) current))
                 (current-thread-signal condition resume current)
               (if (not (subclass? (class-of condition) <thread-condition>))
                   (error "must be a subclass of <thread-condition> in signal"
@@ -608,10 +608,10 @@
 
   (define (current-thread-signal condition resume current)
           (if (null? (get-handlers current))
-              (begin
+              (progn
                 (default-handler condition resume)
                 (print "*** somehow returned from default handler")
-                (if (not (eq? current toplevel-thread))
+                (if (not (eq current toplevel-thread))
                     (thread-kill current)))
             (let* ((handlers (get-handlers current))
                    (handler (car handlers)))
@@ -628,7 +628,7 @@
           (dprint (list "handling" handler condition resume))
           (handler condition
                    (lambda val
-                     (if (procedure? resume)
+                     (if (function? resume)
                          (if (null? val)
                              (resume)
                            (resume (car val)))
@@ -680,17 +680,17 @@
                  (cont (get-uwp-frame-cc frame)))
             (if (null? (cdr frames))          ; toplevel, keep last frame
                 (exec-uwps frame)
-              (begin
+              (progn
                 (set-uwps thread (cdr frames))
                 (exec-uwps frame)
-                (if (eq? cc cont)
+                (if (eq cc cont)
                     ()                       ; done
                   (unwrap-uwps cc))))))
 
   (define (unwrap-and-reset)
           (dprint (list "unwrap and reset"))
           (unwrap-uwps ())
-          (if (eq? (current-thread) toplevel-thread)
+          (if (eq (current-thread) toplevel-thread)
               (reset)
             (thread-kill (current-thread))))
 
@@ -698,7 +698,7 @@
           (let ((uwps (get-uwp-frame-uwps frame)))
             (if (null? uwps)
                 ()
-              (begin
+              (progn
                 (set-uwp-frame-uwps frame (cdr uwps))
                 ((car uwps))
                 (exec-uwps frame)))))
@@ -707,7 +707,7 @@
   (defmacro with-handler (fun . body)
     `(let ((handler ,fun))
        (establish-handler handler)
-       (disestablish-handler (begin ,@body) handler)))
+       (disestablish-handler (progn ,@body) handler)))
 
   (defmacro unwind-protect (protected . afterforms)
     `(let ((cleanups (lambda () ,@afterforms)))
@@ -742,7 +742,7 @@
                 (disestablish-uwp
                   (debug-loop *xlframe* cc condition)
                   cleanups))
-            (begin
+            (progn
               (push-uwp-frame cc)
               (pop-uwp-frame
                 (let ((cleanups (lambda () (inc-depth -1))))
@@ -759,7 +759,7 @@
 
   (define (debug-prompt n)
           (if (> n 0)
-              (begin
+              (progn
                 (%display ">")
                 (debug-prompt (- n 1)))
             (%display " ")))
@@ -768,14 +768,14 @@
           (%display "DEBUG")
           (debug-prompt *debug-depth*)
           (let ((op (read)))
-            (if (eq? op **EOF**)
+            (if (eq op **EOF**)
                 (if (null? cc)
                     (unwrap-and-reset)
                   (cc)))
             (debug-loop
               (cond ((keyword? op)
                      (debug-op frameptr cc condition op ()))
-                    ((and (pair? op) (keyword? (car op)))
+                    ((and (cons? op) (keyword? (car op)))
                      (debug-op frameptr cc condition (car op) (cdr op)))
                     (t (write ((compile op (frame-env frameptr))))
                        (newline)
@@ -785,12 +785,12 @@
   (define (debug-op frameptr cc cd op args)
           (let ((fn (table-ref op-table op)))
             (if (null? fn)
-                (begin
+                (progn
                   (print op)
                   frameptr)
               (apply fn frameptr cc cd args))))
 
-  (deflocal op-table (make-table eq?))
+  (deflocal op-table (make-table eq))
 
   (define (help frameptr cc cd . args)
           (print "Debug loop.")
@@ -838,8 +838,8 @@
           frameptr)
 
   (define (locals-loop syms vals index)
-          (if (pair? syms)
-              (begin
+          (if (cons? syms)
+              (progn
                 (prin (car syms))
                 (prin ": ")
                 (indent (string-length (symbol->string (car syms))))
@@ -848,7 +848,7 @@
 
   (define (indent n)
           (if (< n 15)
-              (begin
+              (progn
                 (prin " ")
                 (indent (+ n 1)))))
 

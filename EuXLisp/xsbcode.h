@@ -38,7 +38,7 @@
 #define OP_ASET         0x1D    // set a variable in an environment
 
 #define OP_ATOM         0x1E    // atom predicate
-#define OP_EQ           0x1F    // eq? predicate
+#define OP_EQ           0x1F    // eq predicate
 #define OP_NULL         0x20    // null? (or not) predicate
 #define OP_CONS         0x21    // cons
 #define OP_CAR          0x22    // car
@@ -72,7 +72,7 @@
 #define OP_GET          0x4C    // symbol plist
 #define OP_PUT          0x4D    // symbol plist
 #define OP_CURMOD       0x50    // current-module
-#define OP_PAIRP        0x51    // pair?
+#define OP_CONSP        0x51    // cons?
 #define OP_SYMBOLP      0x52    // symbol?
 #define OP_VECTORP      0x53    // vector?
 #define OP_APPEND       0x54    // append of two args

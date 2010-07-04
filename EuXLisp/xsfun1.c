@@ -265,7 +265,7 @@ LVAL xsetcar()
 
     // replace the car
     rplaca(arg, newcar);
-    return (arg);
+    return (newcar);
 }
 
 // xisetcar - built-in function '%set-car!'
@@ -297,7 +297,7 @@ LVAL xsetcdr()
 
     // replace the cdr
     rplacd(arg, newcdr);
-    return (arg);
+    return (newcdr);
 }
 
 // xisetcdr - built-in function '%set-cdr!'
@@ -472,7 +472,7 @@ LVAL xlastpair()
 // xlength - built-in function 'length'
 LVAL xlength()
 {
-    static char *cfn_name = "list-length";
+    static char *cfn_name = "list-size";
     FIXTYPE n;
     LVAL arg;
 
@@ -621,7 +621,7 @@ static LVAL nth(int carflag)
 // xboundp - is this a value bound to this symbol?
 LVAL xboundp()
 {
-    static char *cfn_name = "bound?";
+    static char *cfn_name = "symbol-exists?";
     LVAL sym;
     sym = xlgasymbol();
     xllastarg();
@@ -1055,10 +1055,10 @@ LVAL xbooleanp()
     return (arg == true || arg == NIL ? true : NIL);
 }
 
-// xpairp - built-in function 'pair?'
-LVAL xpairp()
+// xconsp - built-in function 'cons?'
+LVAL xconsp()
 {
-    static char *cfn_name = "pair?";
+    static char *cfn_name = "cons?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
@@ -1095,10 +1095,10 @@ LVAL xintegerp()
     return (fixp(arg) ? true : NIL);
 }
 
-// xrealp - built-in function 'real?'
-LVAL xrealp()
+// xfloatp - built-in function 'float?'
+LVAL xfloatp()
 {
-    static char *cfn_name = "real?";
+    static char *cfn_name = "float?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
@@ -1118,7 +1118,7 @@ LVAL xcharp()
 // xstringp - built-in function 'string?'
 LVAL xstringp()
 {
-    static char *cfn_name = "real?";
+    static char *cfn_name = "string?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
@@ -1138,10 +1138,10 @@ LVAL xvectorp()
 #define isprocedure(x)                                                         \
     (closurep(x) || continuationp(x) || subrp(x) || xsubrp(x) || genericp(x))
 
-// xprocedurep - built-in function 'procedure?'
-LVAL xprocedurep()
+// xfunctionp - built-in function 'function?'
+LVAL xfunctionp()
 {
-    static char *cfn_name = "procedure?";
+    static char *cfn_name = "function?";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
@@ -1168,28 +1168,28 @@ LVAL xdefaultobjectp()
     return (arg == default_object ? true : NIL);
 }
 
-// xeq - built-in function 'eq?'
+// xeq - built-in function 'eq'
 LVAL xeq()
 {
     return (eqtest(eq));
 }
 
-// xeqv - built-in function 'eqv?'
+// xeqv - built-in function 'eql'
 LVAL xeqv()
 {
     return (eqtest(eqv));
 }
 
-// xequal - built-in function 'equal?'
+// xequal - built-in function 'equal'
 LVAL xequal()
 {
     return (eqtest(equal));
 }
 
-// eqtest - common code for eq?/eqv?/equal?
+// eqtest - common code for eq/eql/equal
 static LVAL eqtest(int (*fcn) ())
 {
-    static char *cfn_name = "eq?/eqv?/equal?";
+    static char *cfn_name = "eq/eql/equal";
     LVAL arg1, arg2;
     arg1 = xlgetarg();
     arg2 = xlgetarg();

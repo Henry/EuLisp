@@ -13,7 +13,7 @@
        <null>
        <number>
        <integer>
-       <fpi>
+       <int>
        <float>
        <double-float>
        <symbol>
@@ -63,7 +63,6 @@
 
        ; specials
        defclass
-       generic-lambda
        call-next-method
        next-method?
 
@@ -259,7 +258,7 @@
                  (let ((length (vector-length obj)))
                    (if (= length 0)
                        (%display "#()" s)
-                     (begin
+                     (progn
                        (%display "#(" s)
                        (inc-pr-depth 1)
                        (gfun (vector-ref obj 0) s)
@@ -271,7 +270,7 @@
   (define (write-vector1 obj s index length gfun)
           (if (= index length)
               (%display ")" s)
-            (begin
+            (progn
               (%display " " s)
               (gfun (vector-ref obj index) s)
               (write-vector1 obj s (+ index 1) length gfun))))

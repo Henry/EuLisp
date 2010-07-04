@@ -30,7 +30,7 @@ LVAL s_general_error, s_no_applic_error, s_no_next_md_error;
 LVAL s_bad_type_error, s_telos_error, s_telos_bad_ref, s_incompatible_md;
 LVAL s_unbound_error, s_arith_error, s_user_intr, s_syntax_error;
 LVAL s_compile_error;
-LVAL s_letname, s_begin, s_compile, s_setmodule, s_getmodule, s_reintern;
+LVAL s_letname, s_progn, s_compile, s_setmodule, s_getmodule, s_reintern;
 LVAL s_module_directives;
 LVAL s_binary_plus, s_binary_minus, s_binary_times, s_binary_divide;
 LVAL s_quotient, s_binary_less, s_binary_equal, s_current_thread;
@@ -188,7 +188,7 @@ void xlinitws(unsigned int ssize)
       (display (current-module))
       (display "> ")))
       (setq *last* (read *FILE-INPUT*))
-      (if (eq? *last* **eof**) (exit))
+      (if (eq *last* **eof**) (exit))
       (if prompt?
       (write (eval *last*))
       (eval *last*))
@@ -245,7 +245,7 @@ void xlinitws(unsigned int ssize)
       002e 05 0a    GREF 0a ; **eof**@root
       0030 10       PUSH
       0031 05 09    GREF 09 ; *last*@root
-      0033 1f       eq?
+      0033 1f       eq
       0034 02 00 3e BRF 003e
       0037 0b 00 3e SAVE 003e
       003a 05 0b    GREF 0b ; exit@root
@@ -481,9 +481,9 @@ void xlsymbols()
 
     s_backtracep = xlenter("backtrace?");
 
-    s_eq = xlenter("eq?");
-    s_eqv = xlenter("eqv?");
-    s_equal = xlenter("equal?");
+    s_eq = xlenter("eq");
+    s_eqv = xlenter("eql");
+    s_equal = xlenter("equal");
     s_equals = xlenter("=");
 
     s_import = xlenter("import");
@@ -516,7 +516,7 @@ void xlsymbols()
     s_syntax_error = xlenter("syntax-error");
     s_compile_error = xlenter("compilation-error");
 
-    s_begin = xlenter("begin");
+    s_progn = xlenter("progn");
     s_compile = xlenter("compile");
     s_setmodule = xlenter("set-module");
     s_getmodule = xlenter("current-module");

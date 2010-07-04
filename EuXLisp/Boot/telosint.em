@@ -73,7 +73,7 @@
                      (lambda () ()))    ; abstract?
 
   ;; tweaks to allow make of a few built-in classes
-  (deflocal builtin-make-table (make-table eq?))
+  (deflocal builtin-make-table (make-table eq))
 
   ;; cons
   (define (mkcons inits)
@@ -90,12 +90,12 @@
 
   (table-set! builtin-make-table <null> mknull)
 
-  ;; fpi
-  (define (mkfpi inits)
+  ;; int
+  (define (mkint inits)
           (find-key value: inits 0))
 
-  (set-class-keywords! <fpi> '(value:))
-  (table-set! builtin-make-table <fpi> mkfpi)
+  (set-class-keywords! <int> '(value:))
+  (table-set! builtin-make-table <int> mkint)
 
   ;; double-float
   (define (mkdfloat inits)
@@ -119,7 +119,7 @@
             (if (= len 0)
                 :                             ; null keyword
               (string->symbol
-                (if (eqv? (string-ref name (- len 1)) #\:)
+                (if (eql (string-ref name (- len 1)) #\:)
                     name
                   (string-append name ":"))))))
 
@@ -202,7 +202,7 @@
 
   ;; table
   (define (mktable inits)
-          (let ((comp (find-key comparator: inits eqv?))
+          (let ((comp (find-key comparator: inits eql))
                 (fill (find-key fill-value: inits ())))
             (make-table comp fill)))
 
@@ -250,8 +250,8 @@
           (let* ((str (symbol->string name))
                  (len (string-length str)))
             (if (and (> len 1)
-                     (eqv? (string-ref str 0) #\<)
-                     (eqv? (string-ref str (- len 1)) #\>))
+                     (eql (string-ref str 0) #\<)
+                     (eql (string-ref str (- len 1)) #\>))
                 (substring str 1 (- len 1))
               str)))
 

@@ -3,15 +3,15 @@
 
 (defmodule compare
     (import (root)
-     export (binary= = binary< < > <= >= max min assoc))
+     export (binary= = binary< < > <= >= max min member-alist))
 
-  (deflocal %equal? equal?)
+  (deflocal %equal equal)
 
-  (define-generic (equal? a b))
+  (define-generic (equal a b))
 
   ;; not as in definition, as it says eql
-  (define-method (equal? (a <object>) (b <object>))
-                 (%equal? a b))
+  (define-method (equal (a <object>) (b <object>))
+                 (%equal a b))
 
   (deflocal %< <)
 
@@ -43,7 +43,7 @@
   (define-generic (binary= a b))
 
   (define-method (binary= (a <object>) (b <object>))
-                 (%equal? a b))
+                 (%equal a b))
 
   (define-method (binary= (a <number>) (b <number>))
                  (%= a b))
@@ -95,12 +95,12 @@
 
   (deflocal %assoc assoc)
 
-  (define (assoc obj list . comp)
-          (assoc-loop obj list (if (null? comp) eqv? (car comp))))
+  (define (member-alist obj list . comp)
+          (member-alist-loop obj list (if (null? comp) eq (car comp))))
 
-  (define (assoc-loop obj list comp)
+  (define (member-alist-loop obj list comp)
           (cond ((atom? list) ())
                 ((comp obj (caar list)) (car list))
-                (t (assoc-loop obj (cdr list) comp))))
+                (t (member-alist-loop obj (cdr list) comp))))
 
   )

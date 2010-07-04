@@ -23,10 +23,10 @@
                 class ())
 
   (define (convert obj cl)
-          (if (eq? (class-of obj) cl)
+          (if (eq (class-of obj) cl)
               obj
             (let ((conv (converter cl)))
-              (if (procedure? conv)
+              (if (function? conv)
                   (conv obj)
                 (no-converter obj cl)))))
 
@@ -154,7 +154,7 @@
                  obj)
 
   ((setter converter) <integer> converter->integer)
-  ((setter converter) <fpi> converter->integer)
+  ((setter converter) <int> converter->integer)
 
   (define-generic (converter->float obj))
   (define-method (converter->float (obj <integer>))
@@ -175,16 +175,16 @@
 
   (define-generic (converter->table obj))
   (define-method (converter->table (obj <list>))
-                 (make-index-table (make-table eqv?) obj 0))
+                 (make-index-table (make-table eql) obj 0))
   (define-method (converter->table (obj <vector>))
-                 (make-index-table (make-table eqv?) (vector->list obj) 0))
+                 (make-index-table (make-table eql) (vector->list obj) 0))
   (define-method (converter->table (obj <string>))
-                 (make-index-table (make-table eqv?) (string->list obj) 0))
+                 (make-index-table (make-table eql) (string->list obj) 0))
   (define-method (converter->table (obj <table>))
                  obj)
 
   (define (make-index-table table list index)
-          (while (pair? list)
+          (while (cons? list)
             (table-set! table index (car list))
             (setq list (cdr list))
             (setq index (+ index 1)))

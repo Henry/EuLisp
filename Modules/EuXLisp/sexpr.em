@@ -32,7 +32,7 @@
     (send (car obj) stream)
     (send (cdr obj) stream))
 
-  (defmethod send ((obj <fpi>) stream)
+  (defmethod send ((obj <int>) stream)
     (send-int stream fpi-tag)
     (send-int stream obj))
 

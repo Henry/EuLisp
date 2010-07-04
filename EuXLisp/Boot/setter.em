@@ -3,7 +3,7 @@
 
 (defmodule setter
     (import (root)
-     export (setter))
+     export (setter setter-setter))
 
   (deflocal setter-table (make-table))
 
@@ -15,13 +15,6 @@
 
   (setter-setter setter setter-setter)
 
-  (define (list-set! l n v)
-          (set-car! (list-tail l n) v)
-          v)
-
-  (setter-setter car set-car!)
-  (setter-setter cdr set-cdr!)
-  (setter-setter list-ref list-set!)
   (setter-setter string-ref string-set!)
   (setter-setter vector-ref vector-set!)
   (setter-setter get-file-position set-file-position!)

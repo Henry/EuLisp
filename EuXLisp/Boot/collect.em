@@ -29,14 +29,13 @@
 ;; lists, strings, vectors, tables
 
 (defmodule collect
-
-    (import (root thread telos condcl setter convert macros copy)
+    (import (root macros0 thread telos condcl setter convert macros copy list)
      export ( <collection-condition> <collection-error>
               collection? sequence?
               accumulate accumulate1
               all? any?
               concatenate delete do element empty?
-              fill map member remove reverse reverse! size slice))
+              fill map member remove reverse size slice))
 
   ;;  (defcondition <collection-condition> <condition>)
   (defclass <collection-condition> (<condition>)
@@ -156,12 +155,6 @@
                  (missing-op "reverse" c))
 
   ;;
-  (define-generic (reverse! c))
-
-  (define-method (reverse! c)
-                 (missing-op "reverse!" c))
-
-  ;;
   (define-generic (size x))
 
   (define-method (size c)
@@ -254,7 +247,7 @@
           (apply append l (map-list (converter <list>) more)))
 
   (define-method (delete obj (l <list>) . fn)
-                 (delete-list obj l (if (null? fn) eqv? (car fn))))
+                 (delete-list obj l (if (null? fn) eql (car fn))))
 
   (define (delete-list obj l comp)
           (cond ((atom? l) (if (comp obj l) () l))
@@ -315,7 +308,7 @@
 
   (define (fill-index-list-aux l o index end)
           (if (<= index end)
-              (begin
+              (progn
                 (set-car! l o)
                 (fill-index-list-aux (cdr l) o (+ index 1) end))))
 
@@ -331,7 +324,7 @@
                           (map-list (converter <list>) more)))))
 
   (define-method (member o (l <list>) . test)
-                 (memberlist o l (if (null? test) eqv? (car test))))
+                 (memberlist o l (if (null? test) eql (car test))))
 
   (define (memberlist o l test)
           (cond ((atom? l) ())
@@ -339,7 +332,7 @@
                 (t (memberlist o (cdr l) test))))
 
   (define-method (remove obj (l <list>) . fn)
-                 (remove-list obj l (if (null? fn) eqv? (car fn))))
+                 (remove-list obj l (if (null? fn) eql (car fn))))
 
   (define (remove-list obj l comp)
           (cond ((atom? l) (if (comp obj l) () l))
@@ -348,9 +341,6 @@
 
   (define-method (reverse (l <list>))
                  (reverse-list l))
-
-  (define-method (reverse! (l <list>))
-                 (setq l (reverse-list l)))
 
   (define-method (size (l <list>))
                  (length l))
@@ -387,7 +377,7 @@
   (define (remove-seq obj seq fn class)
           (convert (delete-list obj
                                 (convert seq <list>)
-                                (if (null? fn) eqv? (car fn)))
+                                (if (null? fn) eql (car fn)))
                    class))
 
   (define-method (do (fn <function>) (s <string>) . more)
@@ -418,7 +408,7 @@
 
   (define (fill-string s o index end)
           (if (< index end)
-              (begin
+              (progn
                 (string-set! s index o)
                 (fill-all-string s o (+ index 1) end))))
 
@@ -442,12 +432,9 @@
   (define-method (reverse (s <string>))
                  (convert (reverse-list (convert s <list>)) <string>))
 
-  (define-method (reverse! (s <string>))
-                 (setq s (convert (reverse-list (convert s <list>)) <string>)))
-
   (define-method (member o (s <string>) . test)
                  (if (memberlist o (convert s <list>)
-                                 (if (null? test) eqv? (car test)))
+                                 (if (null? test) eql (car test)))
                      t
                    ()))
 
@@ -507,7 +494,7 @@
 
   (define (fill-vector v o index end)
           (if (< index end)
-              (begin
+              (progn
                 (vector-set! v index o)
                 (fill-vector v o (+ index 1) end))))
 
@@ -522,7 +509,7 @@
 
   (define-method (member o (v <vector>) . test)
                  (if (memberlist o (convert v <list>)
-                                 (if (null? test) eqv? (car test)))
+                                 (if (null? test) eql (car test)))
                      t
                    ()))
 
@@ -531,9 +518,6 @@
 
   (define-method (reverse (v <vector>))
                  (convert (reverse-list (convert v <list>)) <vector>))
-
-  (define-method (reverse! (v <vector>))
-                 (setq v (convert (reverse-list (convert v <list>)) <vector>)))
 
   (define-method (size (v <vector>))
                  (vector-length v))
@@ -567,11 +551,11 @@
                      new)))
 
   (define-method (delete obj (t <table>) . fn)
-                 (if (not (or (null? fn) (eq? (car fn) (table-comparator t))))
+                 (if (not (or (null? fn) (eq (car fn) (table-comparator t))))
                      (error "comparator incompatible with table in delete"
                             <collection-error>
                             value: (car fn))
-                   (begin
+                   (progn
                      (table-delete t obj)
                      t)))
 
@@ -616,7 +600,7 @@
             new))
 
   (define-method (remove obj (t <table>) . fn)
-                 (if (not (or (null? fn) (eq? (car fn) (table-comparator t))))
+                 (if (not (or (null? fn) (eq (car fn) (table-comparator t))))
                      (error "comparator incompatible with table in remove"
                             <collection-error>
                             value: (car fn))
@@ -627,12 +611,9 @@
   (define-method (reverse (t <table>))
                  t)
 
-  (define-method (reverse! (t <table>))
-                 t)
-
   (define-method (member o (t <table>) . test)
                  (if (memberlist o (table-values t)
-                                 (if (null? test) eqv? (car test)))
+                                 (if (null? test) eql (car test)))
                      t
                    ()))
 
@@ -641,14 +622,14 @@
 
   (define-generic (slice c s e))
 
-  (define-method (slice (str <string>) (s <fpi>) (e <fpi>))
+  (define-method (slice (str <string>) (s <int>) (e <int>))
     (substring str s e))
 
   (define (slice-list list from to)
     (if (>= from to) ()
       (cons (list-ref list from) (slice-list list (+ from 1) to))))
 
-  (define-method (slice (list <list>) (s <fpi>) (e <fpi>))
+  (define-method (slice (list <list>) (s <int>) (e <int>))
     (slice-list list s e))
 
   )

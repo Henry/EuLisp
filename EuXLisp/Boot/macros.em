@@ -20,7 +20,7 @@
             (raise-macro-error "expected symbol" s)))
 
   (define (%expand-macros expr)
-          (cond ((pair? expr)
+          (cond ((cons? expr)
                  (if (symbol? (car expr))
                      (let ((expander (get-syntax (car expr) '%syntax))
                            (mac (get-syntax (car expr) '%macro))
@@ -46,7 +46,7 @@
 
   (put-syntax 'macro '%macro
               (lambda (form)
-                (list 'begin
+                (list 'progn
                       (list 'put-syntax
                             (list 'quote (or (getprop (cadr form) '%rename)
                                              (cadr form)))
@@ -135,7 +135,7 @@
                                   (cons (%defmacro-binds (caddr form) 0)
                                         (cdddr form)))))))
 
-  ; delay if begin sequence and or while access
+  ; delay if progn sequence and or while access
 
   (put-syntax 'defmodule '%syntax identity)
   (put-syntax 'export '%syntax identity)
@@ -188,8 +188,8 @@
            (lambda (exp)
              (let ((qq-car (qq (car exp)))
                    (qq-cdr (qq (cdr exp))))
-               (if (and (pair? qq-car)
-                        (eq? (car qq-car) append-me-sym))
+               (if (and (cons? qq-car)
+                        (eq (car qq-car) append-me-sym))
                    (list 'append (cdr qq-car) qq-cdr)
                  (list 'cons qq-car qq-cdr)))))
          (qq
@@ -200,7 +200,7 @@
                     (list 'list->vector (qq (vector->list exp))))
                    ((atom? exp)         ; nil, number or boolean
                     exp)
-                   ((eq? (car exp) 'quasiquote)
+                   ((eq (car exp) 'quasiquote)
                     (setq qq-lev (add1 qq-lev))
                     (let ((qq-val
                             (if (= qq-lev 1) ; min val after inc
@@ -209,13 +209,13 @@
                               (qq-car-cdr exp))))
                       (setq qq-lev (sub1 qq-lev))
                       qq-val))
-                   ((or (eq? (car exp) 'unquote)
-                        (eq? (car exp) 'unquote-splicing))
+                   ((or (eq (car exp) 'unquote)
+                        (eq (car exp) 'unquote-splicing))
                     (setq qq-lev (sub1 qq-lev))
                     (let ((qq-val
                             (if (= qq-lev 0) ; min val
                                 ; --> outermost level
-                                (if (eq? (car exp) 'unquote-splicing)
+                                (if (eq (car exp) 'unquote-splicing)
                                     (cons append-me-sym
                                           (%expand-macros (cadr exp)))
                                   (%expand-macros (cadr exp)))
@@ -237,7 +237,7 @@
             ((atom? exp)
              ())
             (else
-              (if (eq? (car exp) append-me-sym)
+              (if (eq (car exp) append-me-sym)
                   (raise-macro-error "unquote-splicing in unspliceable position"
                                      (list 'unquote-splicing (cdr exp)))
                 (or (check-qq-expansion (car exp))
@@ -263,7 +263,7 @@
   ;        (reintern-syntax (cadr form))))
 
   (define (macroexpand1 expr)
-          (cond ((pair? expr)
+          (cond ((cons? expr)
                  (if (symbol? (car expr))
                      (let ((expander (get-syntax (car expr) '%syntax))
                            (mac (get-syntax (car expr) '%macro))
@@ -289,7 +289,7 @@
                   ())))
 
   ;; just in case we get read twice somehow
-  (if (not (bound? '%compile))
+  (if (not (symbol-exists? '%compile))
       (deflocal %compile compile))
 
   ;; use this in compile below for debugging

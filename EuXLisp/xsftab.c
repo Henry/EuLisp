@@ -96,7 +96,7 @@ FUNDEF funtab[] =
     {"set-cdr!", xsetcdr},
 
     // symbol functions
-    {"bound?", xboundp},
+    {"symbol-exists?", xboundp},
     {"symbol-value", xsymvalue},
     {"set-symbol-value!", xsetsymvalue},
     {"symbol-plist", xsymplist},
@@ -139,26 +139,27 @@ FUNDEF funtab[] =
     {"list?", xlistp},
     {"number?", xnumberp},
     {"boolean?", xbooleanp},
-    {"pair?", xpairp},
+    {"cons?", xconsp},
     {"symbol?", xsymbolp},
     {"keyword?", xkeywordp},
-    {"complex?", xrealp},       // (1)
-    {"real?", xrealp},
+    {"complex?", xfloatp},       // (1)
+    {"float?", xfloatp},
+    {"double-float?", xfloatp},
     {"rational?", xintegerp},   // (1)
     {"integer?", xintegerp},
     {"char?", xcharp},
     {"string?", xstringp},
     {"vector?", xvectorp},
-    {"procedure?", xprocedurep},
+    {"function?", xfunctionp},
     {"stream?", xstreamp},
     {"input-stream?", xinputstreamp},
     {"output-stream?", xoutputstreamp},
     {"object?", xobjectp},
     {"eof-object?", xeofobjectp},
     {"default-object?", xdefaultobjectp},
-    {"eq?", xeq},
-    {"eqv?", xeqv},
-    {"equal?", xequal},
+    {"eq", xeq},
+    {"eql", xeqv},
+    {"equal", xequal},
 
     // arithmetic functions
     {"zero?", xzerop},

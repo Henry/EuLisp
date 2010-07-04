@@ -69,7 +69,7 @@
 
   (define-generic (binary% a b))
 
-  (define-method (binary% (a <fpi>) (b <fpi>))
+  (define-method (binary% (a <int>) (b <int>))
                  (remainder a b))
 
   (define (% arg . args)
@@ -93,7 +93,7 @@
                      a
                    (binary-gcd b (remainder a b))))
 
-  (define-method (binary-gcd (a <fpi>) (b <fpi>))
+  (define-method (binary-gcd (a <int>) (b <int>))
                  (%gcd a b))
 
   (deflocal %abs abs)

@@ -263,12 +263,16 @@ void xlexecute(LVAL fun)
             case OP_SETCAR:
                 if (!consp(xlval))
                     badargtype(xlval, "<cons>", "set-car!");
-                rplaca(xlval, pop());
+                tmp = pop();
+                rplaca(xlval, tmp);
+                xlval = tmp;
                 break;
             case OP_SETCDR:
                 if (!consp(xlval))
                     badargtype(xlval, "<cons>", "set-cdr!");
-                rplacd(xlval, pop());
+                tmp = pop();
+                rplacd(xlval, tmp);
+                xlval = tmp;
                 break;
             case OP_GREFL:
                 i = *pc++ << 8;
@@ -493,7 +497,7 @@ void xlexecute(LVAL fun)
                 xlargc = 0;
                 xlval = current_mod();
                 break;
-            case OP_PAIRP:
+            case OP_CONSP:
                 xlval = consp(xlval) ? true : NIL;
                 break;
             case OP_SYMBOLP:

@@ -67,7 +67,7 @@ static void do_cond(LVAL form, int cont);
 static void do_and(LVAL form, int cont);
 static void do_or(LVAL form, int cont);
 static void do_if(LVAL form, int cont);
-static void do_begin(LVAL form, int cont);
+static void do_progn(LVAL form, int cont);
 static void do_while(LVAL form, int cont);
 static void do_access(LVAL form, int cont);
 static void do_setaccess(LVAL form, int cont);
@@ -121,7 +121,7 @@ typedef struct
 static NTDEF *nptr, ntab[] =
 {
     {"atom?", OP_ATOM, 1},
-    {"eq?", OP_EQ, 2},
+    {"eq", OP_EQ, 2},
     {"null?", OP_NULL, 1},
     {"not", OP_NULL, 1},
     {"cons", OP_CONS, 2},
@@ -143,7 +143,7 @@ static NTDEF *nptr, ntab[] =
     {"get", OP_GET, 2},
     {"put", OP_PUT, 3},
     {"current-module", OP_CURMOD, 0},
-    {"pair?", OP_PAIRP, 1},
+    {"cons?", OP_CONSP, 1},
     {"symbol?", OP_SYMBOLP, 1},
     {"vector?", OP_VECTORP, 1},
     {"append", OP_APPEND, -2},
@@ -183,8 +183,8 @@ FTDEF ftab[] =
     {"setq", do_set},
     {"if", do_if},
     {"cond", do_cond},
-    {"begin", do_begin},
-    {"sequence", do_begin},
+    {"progn", do_progn},
+    {"sequence", do_progn},
     {"and", do_and},
     {"or", do_or},
     {"while", do_while},
@@ -244,7 +244,7 @@ LVAL xlfunction(LVAL fun, LVAL fargs, LVAL body, LVAL ctenv)
 
     // compile the lambda list and the function body
     parse_lambda_list(fargs, body);
-    do_begin(body, C_RETURN);
+    do_progn(body, C_RETURN);
 
     // build the code object
     settop(make_code_object(fun));
@@ -449,7 +449,7 @@ static void define1(LVAL list, LVAL body, int cont)
         }
         else        // compile the value expression or procedure body
         {
-            do_begin(body, C_NEXT);
+            do_progn(body, C_NEXT);
         }
 
         // define the variable value
@@ -554,7 +554,7 @@ static void cd_fundefinition(LVAL fun, LVAL fargs, LVAL body)
 
     // compile the lambda list and the function body
     parse_lambda_list(fargs, body);
-    do_begin(body, C_RETURN);
+    do_progn(body, C_RETURN);
 
     // build the code object
     cpush(make_code_object(fun));
@@ -819,7 +819,7 @@ static void cd_let(LVAL name, LVAL form, int cont)
     parse_let_variables(car(form), cdr(form));
 
     // compile the body of the let/letrec
-    do_begin(cdr(form), C_RETURN);
+    do_progn(cdr(form), C_RETURN);
 
     // build the code object
     cpush(make_code_object(s_letname));
@@ -880,7 +880,7 @@ static void do_letrec(LVAL form, int cont)
     set_bound_variables(car(form));
 
     // compile the body of the let/letrec
-    do_begin(cdr(form), C_RETURN);
+    do_progn(cdr(form), C_RETURN);
 
     // build the code object
     cpush(make_code_object(s_letname));
@@ -935,7 +935,7 @@ static void do_letstar(LVAL form, int cont)
     }
     else // handle the case where there are no bindings
     {
-        do_begin(cdr(form), cont);
+        do_progn(cdr(form), cont);
     }
 }
 
@@ -958,7 +958,7 @@ static void letstar1(LVAL blist, LVAL body)
     else // handle the last binding
     {
         parse_let_variables(top(), body);
-        do_begin(body, C_RETURN);
+        do_progn(body, C_RETURN);
     }
 
     // build the code object
@@ -1145,7 +1145,7 @@ static void do_cond(LVAL form, int cont)
 
             if (cdr(car(form)))
             {
-                do_begin(cdr(car(form)), cont);
+                do_progn(cdr(car(form)), cont);
             }
             else
             {
@@ -1280,8 +1280,8 @@ static void do_if(LVAL form, int cont)
     }
 }
 
-// do_begin - compile the (BEGIN ... ) expression
-static void do_begin(LVAL form, int cont)
+// do_progn - compile the (BEGIN ... ) expression
+static void do_progn(LVAL form, int cont)
 {
     if (consp(form))
     {
@@ -1321,7 +1321,7 @@ static void do_while(LVAL form, int cont)
 
     // compile the loop body
     loop = cptr - cbase;
-    do_begin(cdr(form), C_NEXT);
+    do_progn(cdr(form), C_NEXT);
 
     // label for the first iteration
     fixup(nxt);
@@ -2492,7 +2492,7 @@ static void do_defmodule(LVAL form, int cont)
     do_expr(expr, C_NEXT);
 
     LVAL body = cdr(cdr(form));
-    body = cons(s_begin, body);
+    body = cons(s_progn, body);
     body = cons(s_quote, cons(body, NIL));
     body = cons(body, NIL);
     push(body);

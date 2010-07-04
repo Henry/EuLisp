@@ -1,64 +1,60 @@
-;;; level0.em
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
+;;; Copyright (c) 1994 Russell Bradford
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;;  File: level0.em
+;;;  Library: level0
+;;;  Description: list processing
+;;;-----------------------------------------------------------------------------
 
 (defmodule level0
     (import
-     ((rename
-        ((begin progn)
-         (pair? cons?)
-         (real? float?)
-         (real? double-float?)
-         (procedure? function?)
-         (eq? eq)
-         (eqv? eql))
-        (except
-          (defmodule)
-          root
-          system
-          thread
-          telos
-          telosint
-          setter
-          convert
-          condcl
-          arith
-          compare
-          macros
-          collect
-          copy
-          format)))
+     (;; all of the level0 modules
+      root
+      macros
+      macros0
+      system
+      thread
+      telos
+      telosint
+      setter
+      convert
+      condcl
+      arith
+      compare
+      collect
+      copy
+      format)
+
      export
-     (;; specials
+     (;; Special operators
       deflocal
       defconstant
+      defclass
+      defun
+      defgeneric
+      defmethod
       quote
       lambda
-      delay
+      progn
       let
       let*
       setq
       if
       cond
-      progn
       and
       or
+      when
+      unless
       while
-      export
-      expose
-      enter-module
-      !>
-      reenter-module
-      !>>
-      call-next-method
-      next-method?
-      defclass
       apply
-      map-list
-      load
-      load-noisily
-      force
+      block
+      return-from
+      labels
+      generic-lambda
+      method-lambda
 
-      ;; list functions
+      ;; List functions
       cons
       car
       cdr
@@ -91,46 +87,36 @@
       cdddar
       cddddr
       list
-      list*
       append
-      last-pair
       length
-      memv
-      memq
-      assv
-      assq
       list-ref
-      list-tail
+      member-alist
 
-      ;; symbol functions
-      bound?
+      ;; Symbol functions
+      symbol-exists?
       symbol-value
       symbol-plist
       gensym
       get
       put
 
-      ;; vector functions
+      ;; Vector functions
       vector
       make-vector
       vector-length
       vector-ref
 
-      ;; predicates
+      ;; Predicates
       null?
       atom
       list?
       number?
-      boolean?
       cons?
       symbol?
       keyword?
-      complex?
       float?
       double-float?
-      rational?
       integer?
-      char?
       string?
       vector?
       function?
@@ -143,14 +129,12 @@
       eq
       eql
 
-      ;; arithmetic functions
+      ;; Arithmetic functions
       zero?
       positive?
       negative?
       odd?
       even?
-      exact?
-      inexact?
       truncate
       floor
       ceiling
@@ -163,8 +147,6 @@
       -
       *
       /
-      quotient
-      remainder
       min
       max
       sin
@@ -179,35 +161,26 @@
       log
       binary+
       binary-
-      unary-
       binary*
       binary/
-      unary/
       binary%
       binary-gcd
 
-      ;; bitwise logical functions
-      logand
-      logior
-      logxor
-      lognot
-
-      ;; numeric comparison functions
+      ;; Numeric comparison functions
       <
       <=
       =
       >=
       >
 
-      ;; string functions
-      make-string
+      ;; String functions
       string-length
       string-null?
       string-append
       string-ref
       substring
 
-      ;; i/o functions
+      ;; I/O functions
       read
       read-char
       read-byte
@@ -234,11 +207,11 @@
       char-ready?
       peek-char
 
-      ;; print control functions
+      ;; Print control functions
       print-breadth
       print-depth
 
-      ;; file i/o functions
+      ;; File i/o functions
       open-input-file
       open-output-file
       open-append-file
@@ -254,38 +227,15 @@
       stdout
       stderr
 
-      ; utility functions
-      transcript-on
-      transcript-off
-      getarg
-      prompt?
-      load-module?
-      exit
-      compile
-      decompile
-      gc
-      save
-      restore
-
-      ;; debugging functions
-      trace-on
-      trace-off
-
-      ;; module functions
-      module-symbols
-      module-exports
-      symbol-module
-      current-module
-      module-list
-      unintern
-
-      ;; telos
+      ;; Telos
+      call-next-method
+      next-method?
       allocate
       describe
       class?
       subclass?
 
-      ;; tables
+      ;; Tables
       make-table
       table-ref
       table-comparator
@@ -296,7 +246,7 @@
       table-fill
       table-clear
 
-      ;; plus some others
+      ;; Plus some others
       binary
       text
       not
@@ -313,7 +263,7 @@
       backtrace
       backtrace?
 
-      ;; thread
+      ;; Thread
       <thread>
       <simple-thread>
       make-thread
@@ -351,7 +301,7 @@
       error
       cerror
 
-      ;; telos
+      ;; Telos classes
       <object>
       <class>
       <simple-class>
@@ -360,7 +310,7 @@
       <null>
       <number>
       <integer>
-      <fpi>
+      <int>
       <float>
       <double-float>
       <symbol>
@@ -398,17 +348,17 @@
       initialize
       class-hierarchy
 
-      ;; setter
+      ;; Setter
       setter
 
-      ;; converter
+      ;; Converter
       converter
 
       convert
       <conversion-condition>
       <no-converter>
 
-      ;; condcl
+      ;; Condition
       defcondition
       condition?
       condition-message
@@ -432,7 +382,7 @@
       <syntax-error>
       <user-interrupt>
 
-      ;; compare
+      ;; Comparison
       binary<
       binary=
       <
@@ -442,20 +392,18 @@
       >=
       max
       min
-      assoc
 
-      ;; macros
+      ;; Macros
       defmacro
       quasiquote
       unquote
       unquote-splicing
-      symbol-macro
       macroexpand
       macroexpand1
       ;   syntax
       ;   dprint
 
-      ;; collect
+      ;; Collect
       <collection-condition>
       <collection-error>
       collection?
@@ -474,206 +422,55 @@
       member
       remove
       reverse
-      reverse!
       size
       slice
 
-      ;; copy
+      ;; Copy
       deep-copy
       shallow-copy
 
-      ;; format
+      ;; Format
       sformat
       format
       fmt
-      )
-     export
-     (;; from telosint, export them all while developing
-      class-of
-      class-name
-      class-superclasses
-      class-precedence-list
-      class-slots
-      class-keywords
-      class-subclasses
-      class-instance-size
-      class-abstract?
-      generic-name
-      generic-args
-      generic-optargs?
-      generic-methods
-      generic-cache1
-      generic-cache2
-      method-generic
-      method-function
-      method-domain
-      add-method
-      slot-name
-      slot-keyword
-      slot-default
-      slot-required?
-      )
-     export
-     (block
-      return-from
-      labels
-      when
-      unless
-      while
-      defun
-      defgeneric
-      defmethod
-      generic-lambda
-      method-lambda
+
+      ;; Module functions
+      defmodule
       import
       syntax
-      defmodule))
+      export
+      expose
 
-  (defmacro block (tag . body)
-    (if (symbol? tag)
-        `(let/cc ,tag ,@body)
-      (error "not a symbol in block"
-             <compilation-general-error>
-             value: tag)))
+      module-symbols
+      module-exports
+      symbol-module
+      current-module
+      module-list
+      unintern
 
-  (defmacro return-from (tag . val)
-    (if (symbol? tag)
-        (if (null? val)
-            `(,tag ())
-          `(,tag ,@val))
-      (error "not a symbol in return-from"
-             <compilation-general-error>
-             value: tag)))
+      enter-module
+      !>
+      reenter-module
+      !>>
 
-  (define (letrec-binding binding)
-          (list
-            (car binding)
-            (cons 'lambda (cdr binding))))
+      ; EuXLisp utility functions
+      transcript-on
+      transcript-off
+      getarg
+      prompt?
+      load-module?
+      exit
+      compile
+      decompile
+      gc
+      save
+      restore
 
-  (defmacro labels (bindings . body)
-    `(letrec
-       ,(map-list letrec-binding bindings)
-       ,@body))
+      ;; EuXLisp debugging functions
+      trace-on
+      trace-off
+      ))
 
-  (defmacro when (test . body)
-    `(if ,test (progn ,@body) ()))
-
-  (defmacro unless (test . body)
-    `(if ,test () (progn ,@body)))
-
-  (defmacro while (test . body)
-    `(let/cc {break}                    ; break can be captured in body
-       (letrec
-         ((loop (lambda ()
-                  (when ,test
-                        ,@body
-                        (loop)))))
-         (loop))))
-
-  (define (definable-name? name)
-          (and (cons? name)
-               (or (eq (car name) 'setter)
-                   (eq (car name) 'converter))))
-
-  ; (defun foo (x) ...)
-  ; (defun (setter foo) (x) ...)
-  ; (defun (converter foo) (x) ...)
-  (defmacro defun (name args . body)
-    (cond ((symbol? name)
-           (if (bound? name)
-               (progn
-                 (prin "*** redefining ")
-                 (prin name)
-                 (prin " in module ")
-                 (print (current-module))))
-           `(define ,(cons name args)
-                    ,@body))
-          ((definable-name? name)
-           `(progn
-              ((setter ,(car name)) ,(cadr name)
-               (lambda ,args ,@body))
-              ',name))
-          (t (error "malformed name in defun"
-                    <compilation-general-error>
-                    value: name))))
-
-  ; (defgeneric foo (x)
-  ;    method: ((x <int>) ...)
-  ;    method: ((y <flt>) ...)
-  ;    ...)
-  (defmacro defgeneric (name args . body)
-    (cond ((symbol? name)
-           `(progn (define-generic ,(cons name args))
-                   ,@(defgeneric-methods name body)
-                   ',name))
-          ((definable-name? name)
-           `(progn
-              (define-generic ,(cons 'setter/converter args))
-              ((setter ,(car name)) ,(cadr name) setter/converter)
-              ,@(defgeneric-methods
-                  (list 'setter (cadr name))
-                  body)
-              ',name))
-          (t (error "malformed name in defgeneric"
-                    <compilation-general-error>
-                    value: name))))
-
-  (define (defgeneric-methods name body)
-          (cond ((null? body) ())
-                ((not (eq (car body) method:))
-                 (error "unknown keyword in defgeneric"
-                        <compilation-general-error>
-                        value: (car body)))
-                ((null? (cdr body))
-                 (error "odd-length keyword list in defgeneric"
-                        <compilation-general-error>
-                        value: name))
-                (t (cons
-                     `(defmethod ,name ,(caadr body) ,@(cdadr body))
-                     (defgeneric-methods name (cdr (cdr body)))))))
-
-  (defmacro defmethod (name args . body)
-    (if (or (symbol? name)
-            (definable-name? name))
-        `(define-method ,(cons name args) ,@body)
-      (error "malformed name in defgeneric"
-             <compilation-general-error>
-             value: name)))
-
-  (defmacro generic-lambda (args . body)
-    `(let (anonymous-generic)
-       (define-generic (anonymous-generic ,@args))
-       ,@(defgeneric-methods
-           'anonymous-generic
-           body)
-       anonymous-generic))
-
-  (defmacro method-lambda (args . body)
-    `(lambda (next-methods arg-list ,@args)
-       ,@body))
-
-  (defmacro import (mod)
-    (if (not (or (string? mod)
-                 (symbol? mod)))
-        (error "bad module name in import"
-               <compilation-general-error>
-               value: mod)
-      `(progn
-         (setq curmod (find-module (current-module)))
-         (%IMPORT curmod ,mod))))
-
-  (defmacro syntax (mod)
-    (if (not (or (string? mod)
-                 (symbol? mod)))
-        (error "bad module name in syntax"
-               <compilation-general-error>
-               value: mod)
-      `(progn
-         (setq curmod (find-module (current-module)))
-         (%IMPORT curmod ,mod))))
-
-  (defmacro defmodule (name . body)
-    (error "only use defmodule in root module"
-           <compilation-general-error>
-           value: name))
-  )
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------
