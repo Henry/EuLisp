@@ -178,8 +178,6 @@
 *** TODO Rename predicate =namep= -> =name?=
 * EuXLisp
 *** TODO Finish reformatting the C source files
-*** DONE Add =reverse!= method for =<string>=
-    CLOSED: [2010-07-01 Thu 22:57]
 *** DONE Add =slice= method for =<list>=
     CLOSED: [2010-07-01 Thu 23:04]
 *** DONE Add =flush= and =sflush=
@@ -189,7 +187,7 @@
     + add =<sequence>=, =<character-sequence>= /etc./
 *** TODO Remove the export of =<make-...>= functions
     Replace with generic =make <...>= calls in modules.
-*** Rename primitive Scheme functions in the C-code
+*** DONE Rename primitive Scheme functions in the C-code
     #+BEGIN_SRC eulisp
     (rename
       ((begin progn)
@@ -198,8 +196,11 @@
       (real? double-float?)
       (procedure? function?)
       (eq? eq)
-      (eqv? eql))
+      (eqv? eql)))
     #+END_SRC
+*** TODO Add =binary-mod= function
+    This is equivalent to =binary%= for integers but returns an <int> for
+    <double-float>s, see definition.
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
     to correspond to the EuLisp-1.0 proposals.
