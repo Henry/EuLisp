@@ -7,11 +7,12 @@
 ;;; Description: Towers of Hanoi
 ;;;  Compilation
 ;;    youtoo hanoi -l level1
-;;;  Interpretation: (!> hanoi)
+;;;  EuXLisp Interpretation: (!> hanoi)
+;;;  Youtoo Interpretation: : hanoi
 ;;;-----------------------------------------------------------------------------
 (defmodule hanoi
   (syntax (macros)
-   import (level1)
+   import (level0)
    export (hanoi))
 
 ;;;-----------------------------------------------------------------------------

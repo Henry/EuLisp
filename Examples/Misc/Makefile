@@ -13,14 +13,14 @@ include ../../Lib.$(ARCH)/Makefile
 ###-----------------------------------------------------------------------------
 ### EuLisp Level-0 examples
 ###-----------------------------------------------------------------------------
-EXAMPLES_0 = fact
+EXAMPLES_0 = fact hanoi sieve
 EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
 ###-----------------------------------------------------------------------------
 ### EuLisp Level-1 examples
 ###-----------------------------------------------------------------------------
-EXAMPLES_1 = append div dphil echo echod empty hanoi \
-	macro-dispatch-char nfib null padd sieve sumTo tak takl triang \
+EXAMPLES_1 = append div dphil echo echod empty \
+	macro-dispatch-char nfib null padd sumTo tak takl triang \
 	url url2 url3
 
 OTHERS_EM = csem
@@ -65,7 +65,7 @@ $(ARCH_DIR)/fact: fact.em
 	$(call makeExe0,fact)
 
 $(ARCH_DIR)/hanoi: hanoi.em
-	$(call makeExe1,hanoi)
+	$(call makeExe0,hanoi)
 
 $(ARCH_DIR)/macro-dispatch-char: macro-dispatch-char.em macro-dispatch-char.dat
 	$(call makeExe1,macro-dispatch-char)
@@ -83,7 +83,7 @@ $(ARCH_DIR)/random2.c: random2.em
 	${U2} ${U2FLAGS} -c random2 -od $(ARCH_DIR) -l level1 -l math
 
 $(ARCH_DIR)/sieve: sieve.em
-	$(call makeExe1,sieve)
+	$(call makeExe0,sieve)
 
 $(ARCH_DIR)/sumTo: sumTo.em
 	${U2} ${U2FLAGS} sumTo -od $(ARCH_DIR) -l boot

@@ -6,11 +6,11 @@
 ;;;  Authors: Andreas Kind
 ;;; Description: computing primes
 ;;;  Compilation
-;;    youtoo sieve -l level1
+;;    youtoo sieve -l level0
 ;;;-----------------------------------------------------------------------------
 (defmodule sieve
   (syntax (macros)
-   import (level1))
+   import (level0))
 
   (defun interval-list (m n)
     (if (> m n)
@@ -22,7 +22,7 @@
      ((remove-multiples (n l)
                         (if (null? l)
                             ()
-                          (if (= (mod (car l) n) 0)
+                          (if (= (binary% (car l) n) 0)
                               (remove-multiples n (cdr l))
                             (cons (car l)
                                   (remove-multiples n (cdr l)))))))
