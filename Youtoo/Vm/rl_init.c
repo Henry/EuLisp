@@ -338,7 +338,7 @@ char *keywords[] =
     "<null>",
     "<number>",
     "<integer>",
-    "<fpi>",
+    "<int>",
     "<float>",
     "<double-float>",
     "<symbol>",

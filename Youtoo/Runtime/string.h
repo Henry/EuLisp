@@ -9,12 +9,12 @@ extern LispRef string_bindings[];
 
 /* Module binding indices */
 #define member1_string_fn_index 54 
-#define eul_list_as_eul_string_fn_index 21 
+#define eul_list_as_eul_string_fn_index 20 
 #define tailstring_fn_index 53 
 #define do1_string_fn_index 10 
 #define _string__X60_X62_fn_index 13 
 #define string_append_fn_index 11 
-#define string_as_int_fn_index 23 
+#define string_as_int_fn_index 22 
 #define map1_string_fn_index 4 
 #define listify_string_fn_index 5 
 #define string_ref_fn_index 9 

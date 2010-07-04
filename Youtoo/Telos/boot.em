@@ -73,7 +73,7 @@
 ;;; List mapping
 ;;;-----------------------------------------------------------------------------
   (defun member-list (x l . preds)
-    (if (null? preds)
+    (if (or (null? preds) (eq (car preds) eq))
         (member1-list x l)
       (let ((pred (car preds)))
         (labels
@@ -123,7 +123,7 @@
      (loop l1 l2)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Some CommonLisp functions
+;;; Some Common Lisp functions
 ;;;-----------------------------------------------------------------------------
   (defun list-remove (x l . preds)
     (if (null? preds)
@@ -196,10 +196,11 @@
   (defun init-list-ref (l x . default)
     ((opencoded-lambda (xx ll default) (iniq))
      x l (if default (car default) ())))
+  ;(declare-inline init-list-ref)
 
-  (defun assoc-list-ref (l x . default)
-    ((opencoded-lambda (xx ll default) (assq))
-     x l (if default (car default) ())))
+  (defun assoc-list-ref (l x)
+    ((opencoded-lambda (xx ll default) (assq)) x l ()))
+  (declare-inline assoc-list-ref)
 
   (defun mapcan (fun l)
     (labels

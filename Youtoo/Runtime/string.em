@@ -203,10 +203,6 @@
     (reverse-string str))
   (defextern reverse-string (<string>) <string> "eul_reverse_str")
 
-  (defmethod reverse! ((str <string>))
-    (reverse-string! str))
-  (defextern reverse-string! (<string>) <string> "eul_reverse_des_str")
-
 ;;;-----------------------------------------------------------------------------
 ;;; Concatenation
 ;;;-----------------------------------------------------------------------------

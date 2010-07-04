@@ -49,7 +49,7 @@ void initialize_module_an_side()
   static const void *G002884[] = {I(aa,1b,47,00),I(00,86,6c,12),I(1b,34,00,00),I(00,00,00,3f),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj2 ,11),I(08,23,00,00),B(an_side ,3),I(1c,24,00,00),B(i_notify ,4),I(3c,02,2a,1d),I(87,1c,82,1d),I(24,00,00,00),B(sx_obj2 ,9),I(09,22,03,32),I(00,00,00,06),I(86,45,02,00)};
 
   /* Byte-vector with size: 29 is_init: 0 index: 6 binding: (method-compute-captured-vars) */
-  static const void *G002887[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,17),I(08,1c,83,24),B(sx_obj ,13),I(08,24,00,00),B(boot ,7),I(3c,02,1b,48),I(00,00,1c,82),I(24,00,00,00),B(sx_obj ,13),I(08,24,00,00),B(sx_obj1 ,18),I(1c,24,00,00),B(boot ,10),I(3c,02,24,00),B(sx_obj2 ,18),I(1c,24,00,00),B(list ,25),I(3c,02,23,00),B(an_side ,5),I(23,00,00,00),B(an_side ,4),I(3b,01,1c,24),B(boot ,16),I(3d,02,05,45),I(05,00,00,00)};
+  static const void *G002887[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,05),I(24,00,00,00),B(sx_obj ,17),I(08,1c,83,24),B(sx_obj ,13),I(08,24,00,00),B(boot ,7),I(3c,02,1b,48),I(00,00,1c,82),I(24,00,00,00),B(sx_obj ,13),I(08,24,00,00),B(sx_obj1 ,18),I(1c,24,00,00),B(boot ,10),I(3c,02,24,00),B(sx_obj2 ,18),I(1c,24,00,00),B(list ,37),I(3c,02,23,00),B(an_side ,5),I(23,00,00,00),B(an_side ,4),I(3b,01,1c,24),B(boot ,16),I(3d,02,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 19 is_init: 0 index: 7 binding: (method-compute-captured-vars) */
   static const void *G002890[] = {I(aa,1b,26,00),I(00,00,00,09),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(an_side ,2),I(1c,24,00,00),B(boot ,16),I(3c,02,2a,1c),I(26,00,00,00),I(00,00,00,08),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(an_side ,2),I(1c,24,00,00),B(boot ,16),I(3d,02,03,45),I(03,00,00,00)};

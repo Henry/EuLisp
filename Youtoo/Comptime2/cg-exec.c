@@ -146,7 +146,7 @@ void initialize_module_cg_exec()
   static const void *G008155[] = {I(aa,1b,83,24),B(sx_obj1 ,42),I(08,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,1e),I(24,00,00,00),B(cg_exec ,7),I(3c,00,1d,1c),I(1c,83,1d,24),B(sx_obj1 ,42),I(09,22,03,2a),I(1c,26,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,1d,83,24),B(sx_obj1 ,42),I(08,23,00,00),B(cg_exec ,53),I(1d,1d,24,00),B(i_notify ,4),I(3d,03,04,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 55 binding: set-up-bindings */
-  static const void *G008158[] = {I(a9,24,00,00),B(cg_exec ,16),I(82,24,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(aux_table ,8),I(3c,01,24,00),B(sx_node ,9),I(1c,24,00,00),B(list ,25),I(3c,02,23,00),B(cg_exec ,30),I(23,00,00,00),B(cg_exec ,54),I(3b,01,1c,24),B(boot ,16),I(3d,02,02,45),I(02,00,00,00)};
+  static const void *G008158[] = {I(a9,24,00,00),B(cg_exec ,16),I(82,24,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(aux_table ,8),I(3c,01,24,00),B(sx_node ,9),I(1c,24,00,00),B(list ,37),I(3c,02,23,00),B(cg_exec ,30),I(23,00,00,00),B(cg_exec ,54),I(3b,01,1c,24),B(boot ,16),I(3d,02,02,45),I(02,00,00,00)};
 
   eul_allocate_static_string(str_8162, "  compute-bytevector ~a ~a", 26);
   /* Byte-vector with size: 11 is_init: 0 index: 57 binding: compute-bytevector */

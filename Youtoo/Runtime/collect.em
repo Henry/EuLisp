@@ -15,8 +15,8 @@
            accumulate accumulate1 any? all? do fill find map member select
            element delete remove reset
            emptyp size
-           reverse reverse!
-           sort sort!
+           reverse
+           sort
            concatenate
            slice))
 
@@ -121,14 +121,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Reverse
 ;;;-----------------------------------------------------------------------------
-  (defgeneric reverse (c)) ;; non-destructive
-  (defgeneric reverse! (c)) ;; destructive
+  (defgeneric reverse (c))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Sort
 ;;;-----------------------------------------------------------------------------
-  (defgeneric sort (c . comp)) ;; non-destructive
-  (defgeneric sort! (c . comp)) ;; destructive
+  (defgeneric sort (c . comp))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Concatenate

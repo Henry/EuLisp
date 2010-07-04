@@ -10,17 +10,14 @@ extern LispRef fpi_bindings[];
 /* Module binding indices */
 #define int_binary__X37_fn_index 33 
 #define int__X63_fn_index 31 
-#define fixed_precision_integer__X63_fn_index 4 
-#define _fpi__X60_X62_fn_index 7 
-#define most_negative_fixed_precision_integer_fn_index () 
-#define int_binary__fn_index 15 
 #define int_binary_mod_fn_index 41 
-#define int_as_string_fn_index 8 
+#define int_as_string_fn_index 5 
 #define int_binary__X47_fn_index 12 
 #define int_binary__X42_fn_index 35 
-#define most_positive_fixed_precision_integer_fn_index () 
-#define _int__X60_X62_fn_index 6 
-#define _fixed_precision_integer__X60_X62_fn_index 2 
+#define most_negative_int_fn_index () 
+#define most_positive_int_fn_index () 
+#define _int__X60_X62_fn_index 4 
+#define int_binary__fn_index 15 
 
 
 

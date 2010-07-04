@@ -297,9 +297,6 @@
                 new-vec)))
        (loop 0 (int-binary- n 1)))))
 
-  (defmethod reverse! ((vec <vector>))
-    (reverse-vector! vec))
-
   (defun reverse-vector! (vec)
     ;; destructive reverse
     (labels

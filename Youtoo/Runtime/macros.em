@@ -75,10 +75,10 @@
 ;;;-----------------------------------------------------------------------------
   (defmacro case (keyform . clauses)
     (let ((key (gensym))
-          (last (car (last clauses))))
-      (if (null? (eq (car last) 'else))
-          ;(ct-warning () "missing else branch in (case ... ~a)" last)
-          (format "*** WARNING: missing else branch in (case ... ~a)" last)
+          (last-clause (list-ref clauses (- (list-size clauses) 1))))
+      (if (null? (eq (car last-clause) 'else))
+          ;(ct-warning () "missing else branch in (case ... ~a)" last-clause)
+          (format "*** WARNING: missing else branch in (case ... ~a)" last-clause)
         ())
       `(let ((,key ,keyform))
          (cond
@@ -87,7 +87,7 @@
                  (let ((keylist (car clause))
                        (forms (cdr clause)))
                    (cond
-                     ((and (eq clause last) (eq keylist 'else))
+                     ((and (eq clause last-clause) (eq keylist 'else))
                       `(else ,@forms))
                      ((not (list? keylist))
                       `((eql ,key ',keylist) ,@forms))
@@ -97,7 +97,8 @@
                       `((member ,key ',keylist eql) ,@forms))
                      (else
                        `((eql ,key ',(car keylist)) ,@forms)))))
-               clauses)))))
+               clauses)))
+      ))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Define condition classes
@@ -140,7 +141,7 @@
            ,res))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Auxiliary functions
+;;; Last (will become a generic function)
 ;;;-----------------------------------------------------------------------------
   (defmacro last (l . number)
     (if (null? number)

@@ -4,33 +4,27 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: fixed precision integers
+;;; Description: fixed precision integers (int)
 ;;;-----------------------------------------------------------------------------
 (defmodule fpi
   (syntax (_telos0)
    import (telos compare number integer)
-   export (<fixed-precision-integer> <fpi> <int>
-           fixed-precision-integer? int?
+   export (<int> int?
            int-binary- int-binary* int-binary/ int-binary% int-binary-mod
            int-as-string
-           most-positive-fixed-precision-integer
-           most-negative-fixed-precision-integer))
+           most-positive-int
+           most-negative-int))
 
 ;;;-----------------------------------------------------------------------------
-;;; Class <fixed-precision-integer>
+;;; Class <int>
 ;;;-----------------------------------------------------------------------------
   (defprimclass <int> fpi-class (<integer>) ())
-  (defconstant <fpi> <int>)
-  (defconstant <fixed-precision-integer> <fpi>)
-
-  (defun fixed-precision-integer? (x) (int? x))
-  ;;(declare-inline fixed-precision-integer?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Limits (-2^29 - 1  ... 2^29 - 1)
 ;;;-----------------------------------------------------------------------------
-  (defconstant most-positive-fixed-precision-integer 536870911)
-  (defconstant most-negative-fixed-precision-integer -536870911)
+  (defconstant most-positive-int 536870911)
+  (defconstant most-negative-int -536870911)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Arithmetic

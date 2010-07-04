@@ -47,6 +47,7 @@
   (defun symbol-exists? (str)
     (table-ref (get-global-register symbols) str))
 
+  ;; Removing this apparently unused definition causes Youtoo to seg-fault
   (defgeneric namep (x)
     method: ((x))
     method: (((x <name>)) t))

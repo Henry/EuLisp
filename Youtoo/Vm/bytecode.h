@@ -1902,7 +1902,7 @@ tail_call_entry_point:                                                         \
 
 
 ///-----------------------------------------------------------------------------
-/// Symbols and list searching
+/// Symbols
 ///-----------------------------------------------------------------------------
 
 #define BC_INTERN 105
@@ -1912,6 +1912,11 @@ tail_call_entry_point:                                                         \
     eul_intern_symbol(loc, eul_string_as_c_string(str));                       \
     PUSHVAL1(loc);                                                             \
     ++reg_pc;
+
+
+///-----------------------------------------------------------------------------
+/// Association list searching
+///-----------------------------------------------------------------------------
 
 #define BC_ASSQ 106
 #define BCA_ASSQ()                                                             \
@@ -1929,6 +1934,10 @@ tail_call_entry_point:                                                         \
             list=eul_cdr(list); }                                              \
     ++reg_pc;
 
+///-----------------------------------------------------------------------------
+/// Initialisation list searching
+///-----------------------------------------------------------------------------
+
 #define BC_INIQ 107
 #define BCA_INIQ()                                                             \
     LispRef list, key, fail;                                                   \
@@ -1944,6 +1953,11 @@ tail_call_entry_point:                                                         \
         else                                                                   \
             list = eul_cdr(tmp1); }                                            \
     ++reg_pc;
+
+
+///-----------------------------------------------------------------------------
+/// List-list searching
+///-----------------------------------------------------------------------------
 
 #define BC_MEMQ 108
 #define BCA_MEMQ()                                                             \

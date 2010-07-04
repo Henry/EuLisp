@@ -11,14 +11,17 @@
    import (telos convert compare collect copy number fpi)
    export (<null> <cons> <list>
            accumulate-list accumulate1-list
-           null? car cdr cons? list? atom? cons list list-size
-           list-ref init-list-ref assoc-list-ref list-drop
+           null? cons? list? atom? cons list list-size
+           list-ref init-list-ref assoc-list-ref member-alist list-drop
+           car cdr
            caar cadr cdar cddr
-           caddr cdadr cddar caadr cdaar cadar caaar cdddr cadddr
+           caddr cdadr cddar caadr cdaar cadar caaar cdddr
+           caaaar caaadr caadar caaddr cadaar cadadr caddar cadddr
+           cdaaar cdaadr cdadar cdaddr cddaar cddadr cdddar cddddr
            do1-list map1-list do2-list map2-list select-list
            reverse-list member-list member1-list anyp1-list find1-list
            do1-list-last-special map1-list-last-special
-           proper-list? as-proper-list reverse-list! slice-list))
+           proper-list? as-proper-list slice-list))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes: <list>, <cons> and <null>
@@ -126,44 +129,151 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Access
 ;;;-----------------------------------------------------------------------------
-  (defun caar (x) ((opencoded-lambda (y) (caar)) x))
+  (defun caar (x)
+    ((opencoded-lambda (y) (caar)) x))
   (declare-inline caar)
+  (defun (setter caar) (l x)
+    ((setter car) (car l) x))
 
-  (defun cadr (x) ((opencoded-lambda (y) (cadr)) x))
+  (defun cadr (x)
+    ((opencoded-lambda (y) (cadr)) x))
   (declare-inline cadr)
+  (defun (setter cadr) (l x)
+    ((setter car) (cdr l) x))
 
-  (defun cdar (x) ((opencoded-lambda (y) (cdar)) x))
+  (defun cdar (x)
+    ((opencoded-lambda (y) (cdar)) x))
   (declare-inline cdar)
+  (defun (setter cdar) (l x)
+    ((setter cdr) (car l) x))
 
-  (defun cddr (x) ((opencoded-lambda (y) (cddr)) x))
+  (defun cddr (x)
+    ((opencoded-lambda (y) (cddr)) x))
   (declare-inline cddr)
+  (defun (setter cddr) (l x)
+    ((setter cdr) (cdr l) x))
 
-  (defun caddr (x) ((opencoded-lambda (y) (caddr)) x))
+  (defun caddr (x)
+    ((opencoded-lambda (y) (caddr)) x))
   (declare-inline caddr)
+  (defun (setter caddr) (l x)
+    ((setter car) (cddr l) x))
 
   (defun cdadr (x) (cdr (cadr x)))
   (declare-inline cdadr)
+  (defun (setter cdadr) (l x)
+    ((setter cdr) (cadr l) x))
 
   (defun cddar (x) (cdr (cdar x)))
   (declare-inline cddar)
+  (defun (setter cddar) (l x)
+    ((setter cdr) (cdar l) x))
 
   (defun caadr (x) (car (cadr x)))
   (declare-inline caadr)
+  (defun (setter caadr) (l x)
+    ((setter car) (cadr l) x))
 
   (defun cdaar (x) (cdr (caar x)))
   (declare-inline cdaar)
+  (defun (setter cdaar) (l x)
+    ((setter cdr) (caar l) x))
 
   (defun cadar (x) (car (cdar x)))
   (declare-inline cadar)
+  (defun (setter cadar) (l x)
+    ((setter car) (cdar l) x))
 
   (defun caaar (x) (car (caar x)))
   (declare-inline caaar)
+  (defun (setter caaar) (l x)
+    ((setter car) (caar l) x))
 
   (defun cdddr (x) (cdr (cddr x)))
   (declare-inline cdddr)
+  (defun (setter cdddr) (l x)
+    ((setter cdr) (cddr l) x))
 
-  (defun cadddr (x) ((opencoded-lambda (y) (cadddr)) x))
+  (defun caaaar (x) (caar (caar x)))
+  (declare-inline caaaar)
+  (defun (setter caaaar) (l x)
+    ((setter car) (caaar l) x))
+
+  (defun caaadr (x) (caaar (cdr x)))
+  (declare-inline caaadr)
+  (defun (setter caaadr) (l x)
+    ((setter car) (caadr l) x))
+
+  (defun caadar (x) (caar (cdar x)))
+  (declare-inline caadar)
+  (defun (setter caadar) (l x)
+    ((setter car) (cadar l) x))
+
+  (defun caaddr (x) (caar (cddr x)))
+  (declare-inline caaddr)
+  (defun (setter caaddr) (l x)
+    ((setter car) (caddr l) x))
+
+  (defun cadaar (x) (cadr (caar x)))
+  (declare-inline cadaar)
+  (defun (setter cadaar) (l x)
+    ((setter car) (cdaar l) x))
+
+  (defun cadadr (x) (cadr (cadr x)))
+  (declare-inline cadadr)
+  (defun (setter cadadr) (l x)
+    ((setter car) (cdadr l) x))
+
+  (defun caddar (x) (cadr (cdar x)))
+  (declare-inline caddar)
+  (defun (setter caddar) (l x)
+    ((setter car) (cddar l) x))
+
+  (defun cadddr (x)
+    ((opencoded-lambda (y) (cadddr)) x))
   (declare-inline cadddr)
+  (defun (setter cadddr) (l x)
+    ((setter car) (cdddr l) x))
+
+  (defun cdaaar (x) (cdar (caar x)))
+  (declare-inline cdaaar)
+  (defun (setter cdaaar) (l x)
+    ((setter cdr) (caaar l) x))
+
+  (defun cdaadr (x) (cdar (cadr x)))
+  (declare-inline cdaadr)
+  (defun (setter cdaadr) (l x)
+    ((setter cdr) (caadr l) x))
+
+  (defun cdadar (x) (cdar (cdar x)))
+  (declare-inline cdadar)
+  (defun (setter cdadar) (l x)
+    ((setter cdr) (cadar l) x))
+
+  (defun cdaddr (x) (cdar (cddr x)))
+  (declare-inline cdaddr)
+  (defun (setter cdaddr) (l x)
+    ((setter cdr) (caddr l) x))
+
+  (defun cddaar (x) (cddr (caar x)))
+  (declare-inline cddaar)
+  (defun (setter cddaar) (l x)
+    ((setter cdr) (cdaar l) x))
+
+  (defun cddadr (x) (cddr (cadr x)))
+  (declare-inline cddadr)
+  (defun (setter cddadr) (l x)
+    ((setter cdr) (cdadr l) x))
+
+  (defun cdddar (x) (cddr (cdar x)))
+  (declare-inline cdddar)
+  (defun (setter cdddar) (l x)
+    ((setter cdr) (cddar l) x))
+
+  (defun cddddr (x) (cddr (cddr x)))
+  (declare-inline cddddr)
+  (defun (setter cddddr) (l x)
+    ((setter cdr) (cdddr l) x))
 
   (defmethod element ((l <list>) (i <int>))
     (list-ref l i))
@@ -182,7 +292,7 @@
     (list-size l))
 
 ;;;-----------------------------------------------------------------------------
-;;; Checking
+;;; Searching
 ;;;-----------------------------------------------------------------------------
   (defmethod member (x (l <list>) . preds)
     (apply member-list x l preds))
@@ -239,6 +349,18 @@
                    (loop (cdr ll1) (cdr ll2))))))
      (loop l1 l2)))
 
+  (defun member-alist (x l . preds)
+    (if (or (null? preds) (eq (car preds) eq))
+        (assoc-list-ref l x)
+      (let ((pred (car preds)))
+        (labels
+          ((loop (ll)
+                 (if (null? ll) ()
+                   (if (pred x (caar ll))
+                       (car ll)
+                     (loop (cdr ll))))))
+          (loop l)))))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Select
 ;;;-----------------------------------------------------------------------------
@@ -263,19 +385,6 @@
 ;;;-----------------------------------------------------------------------------
   (defmethod reverse ((l <list>))
     (reverse-list l))
-
-  (defun reverse-list! (l)
-    (labels
-     ((loop (ll res)
-            (if (null? ll) res
-              (let ((u (cdr ll)))
-                ((setter cdr) ll res)
-                (loop u ll)))))
-     (loop l ())))
-
-  (defmethod reverse! ((l <list>))
-    ;; destructive
-    (reverse-list! l))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Sort
