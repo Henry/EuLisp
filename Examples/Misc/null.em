@@ -6,11 +6,11 @@
 ;;;  Authors: Andreas Kind
 ;;; Description: null module
 ;;;  Compilation
-;;    youtoo null -l level1
+;;    youtoo null -l level0
 ;;;-----------------------------------------------------------------------------
 (defmodule null
   (syntax (macros)
-   import (level1))
+   import (level0))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

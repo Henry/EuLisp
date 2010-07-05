@@ -13,15 +13,13 @@ include ../../Lib.$(ARCH)/Makefile
 ###-----------------------------------------------------------------------------
 ### EuLisp Level-0 examples
 ###-----------------------------------------------------------------------------
-EXAMPLES_0 = fact hanoi sieve
+EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl
 EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
 ###-----------------------------------------------------------------------------
 ### EuLisp Level-1 examples
 ###-----------------------------------------------------------------------------
-EXAMPLES_1 = append div dphil echo echod empty \
-	macro-dispatch-char nfib null padd sumTo tak takl triang \
-	url url2 url3
+EXAMPLES_1 = dphil echo echod macro-dispatch-char padd triang url url2 url3
 
 OTHERS_EM = csem
 
@@ -44,10 +42,10 @@ all: $(EXAMPLES_EXE)
 
 # A stress test
 $(ARCH_DIR)/append: append.em | $(ARCH_DIR)/.
-	$(call makeExe1,append)
+	$(call makeExe0,append)
 
 $(ARCH_DIR)/div: div.em
-	$(call makeExe1,div)
+	$(call makeExe0,div)
 
 $(ARCH_DIR)/dphil: dphil.em
 	$(call makeExe1,dphil)
@@ -59,7 +57,7 @@ $(ARCH_DIR)/echod: echod.em
 	$(call makeExe1,echod)
 
 $(ARCH_DIR)/empty: empty.em
-	$(call makeExe1,empty)
+	$(call makeExe0,empty)
 
 $(ARCH_DIR)/fact: fact.em
 	$(call makeExe0,fact)
@@ -71,10 +69,10 @@ $(ARCH_DIR)/macro-dispatch-char: macro-dispatch-char.em macro-dispatch-char.dat
 	$(call makeExe1,macro-dispatch-char)
 
 $(ARCH_DIR)/nfib: nfib.em
-	$(call makeExe1,nfib)
+	$(call makeExe0,nfib)
 
 $(ARCH_DIR)/null: null.em
-	$(call makeExe1,null)
+	$(call makeExe0,null)
 
 $(ARCH_DIR)/padd: padd.em
 	$(call makeExe1,padd)
@@ -86,13 +84,13 @@ $(ARCH_DIR)/sieve: sieve.em
 	$(call makeExe0,sieve)
 
 $(ARCH_DIR)/sumTo: sumTo.em
-	${U2} ${U2FLAGS} sumTo -od $(ARCH_DIR) -l boot
+	$(call makeExe0,sumTo)
 
 $(ARCH_DIR)/tak: tak.em
-	$(call makeExe1,tak)
+	$(call makeExe0,tak)
 
 $(ARCH_DIR)/takl: takl.em
-	$(call makeExe1,takl)
+	$(call makeExe0,takl)
 
 $(ARCH_DIR)/triang: triang.em
 	$(call makeExe1,triang)

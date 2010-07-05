@@ -6,12 +6,12 @@
 ;;;  Authors: Andreas Kind
 ;;; Description: little stress test
 ;;;  Compilation
-;;    youtoo append -l level1
+;;    youtoo append -l level0
 ;;;  Interpretation: (!> append)
 ;;;-----------------------------------------------------------------------------
 (defmodule append
   (syntax (macros)
-   import (level1)
+   import (level0)
    export (f))
 
   (defun f (n)
