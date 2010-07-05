@@ -249,15 +249,16 @@
   (defextern eul_getenv (<string>) <string> "getenv")
 
   (defun getenv (str) (eul_getenv str))
+
   (defextern eul_system (<string>) <int> "system")
-
   (defun system (str) (eul_system str))
+
   (defextern eul_time_start () ptr)
-
   (defun time-start () (eul_time_start))
-  (defextern eul_time_stop (ptr) ptr)
 
+  (defextern eul_time_stop (ptr) ptr)
   (defun time-stop (x) (eul_time_stop x))
+
   (defextern eul_is_object (ptr) ptr)
 
 ;;;-----------------------------------------------------------------------------
