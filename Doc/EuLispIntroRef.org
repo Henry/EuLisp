@@ -1183,11 +1183,40 @@
     + [[file:EuLisp-0.991/html/eulispcl10.html#dx12-70001][=expose=]]
 *** List functions
     + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-630002][=cons=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-647002][=list=]]
     + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]]
     + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-634002][=cdr=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-647002][=list=]]
+    + =caar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cadr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cddr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caaar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caadr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cadar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caddr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdaar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdadr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cddar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdddr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caaaar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caaadr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caadar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caaddr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cadaar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cadadr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =caddar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cadddr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdaaar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdaadr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdadar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdaddr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cddaar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cddadr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cdddar= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
+    + =cddddr= (see [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]])
 *** Symbol functions
     + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-893002][=gensym=]]
+    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-897002][=symbol-exists?=]]
 *** Vector functions
     + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-917005][=vector=]]
 *** Predicates
@@ -1372,67 +1401,16 @@
 * EuXLisp functions
   Here is a summary of the additional functions available in EuXLisp.  Those
   marked '*' are also in Youtoo.
-*** Special operators
-    + =delay=
-    + =map-list=
-    + =load=
-    + =load-noisily=
-    + =force=
 *** List functions
-    + =caar= *
-    + =cadr= *
-    + =cdar= *
-    + =cddr= *
-    + =caaar= *
-    + =caadr= *
-    + =cadar= *
-    + =caddr= *
-    + =cdaar= *
-    + =cdadr= *
-    + =cddar= *
-    + =cdddr= *
-    + =caaaar=
-    + =caaadr=
-    + =caadar=
-    + =caaddr=
-    + =cadaar=
-    + =cadadr=
-    + =caddar=
-    + =cadddr= *
-    + =cdaaar=
-    + =cdaadr=
-    + =cdadar=
-    + =cdaddr=
-    + =cddaar=
-    + =cddadr=
-    + =cdddar=
-    + =cddddr=
-    + =list*=
     + =append= *
-    + =last-pair=
-    + =length= *
-    + =memv=
-    + =memq=
-    + =assv=
-    + =assq=
+    + =length= -> =list-size= *
     + =list-ref= *
-    + =list-tail=
-*** Symbol functions
-    + =bound?=
-    + =symbol-value=
-    + =symbol-plist=
-    + =get=
-    + =put=
 *** Vector functions
     + =make-vector= *
-    + =vector-length=
+    + =vector-length= -> =vector-size= *
     + =vector-ref= *
 *** Predicates
     + =list?= *
-    + =boolean?=
-    + =complex?=
-    + =rational?=
-    + =char?=
     + =function?= *
     + =input-stream?=
     + =output-stream?=
@@ -1440,25 +1418,14 @@
     + =eof-object?=
     + =default-object?=
 *** Arithmetic functions
-    + =exact?=
-    + =inexact?=
     + =random= *
-    + =quotient=
-    + =remainder=
-    + =unary-=
-    + =unary/=
-*** Bitwise logical functions
-    + =logand=
-    + =logior=
-    + =logxor=
-    + =lognot=
 *** String functions
     + =make-string=
-    + =string-length=
-    + =string-null?=
-    + =string-append=
-    + =string-ref=
-    + =substring=
+    + =string-length= -> =string-size= *
+    + =string-null?= -> =string-empty?= *
+    + =string-append= *
+    + =string-ref= *
+    + =substring= *
 *** I/O functions
     + =read-char= *
     + =read-byte=
@@ -1588,15 +1555,11 @@
     + =<macro-error>=
     + =<syntax-error>=
     + =<user-interrupt>=
-*** Compare
-    + =assoc=
-*** Macros
-    + =symbol-macro=
-    + =macroexpand=
-    + =macroexpand1=
-*** Collect
     + =<collection-condition>=
     + =<collection-error>=
+*** Macros
+    + =macroexpand=
+    + =macroexpand1=
 
 * Command Line Arguments
 *** EuXLisp

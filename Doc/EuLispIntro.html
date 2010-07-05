@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title><b>An Introduction to EuLisp, EuXLisp and Youtoo</b></title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-07-02 10:23:08 BST"/>
+<meta name="generated" content="2010-07-05 23:34:37 BST"/>
 <meta name="author" content="of original Euscheme notes Russell Bradford"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -2124,13 +2124,97 @@ function.
 <code>cons</code>
 </li>
 <li>
+<code>list</code>
+</li>
+<li>
 <code>car</code>
 </li>
 <li>
 <code>cdr</code>
 </li>
 <li>
-<code>list</code>
+<code>caar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cadr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cddr</code> (see <code>car</code>)
+</li>
+<li>
+<code>caaar</code> (see <code>car</code>)
+</li>
+<li>
+<code>caadr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cadar</code> (see <code>car</code>)
+</li>
+<li>
+<code>caddr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdaar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdadr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cddar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdddr</code> (see <code>car</code>)
+</li>
+<li>
+<code>caaaar</code> (see <code>car</code>)
+</li>
+<li>
+<code>caaadr</code> (see <code>car</code>)
+</li>
+<li>
+<code>caadar</code> (see <code>car</code>)
+</li>
+<li>
+<code>caaddr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cadaar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cadadr</code> (see <code>car</code>)
+</li>
+<li>
+<code>caddar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cadddr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdaaar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdaadr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdadar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdaddr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cddaar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cddadr</code> (see <code>car</code>)
+</li>
+<li>
+<code>cdddar</code> (see <code>car</code>)
+</li>
+<li>
+<code>cddddr</code> (see <code>car</code>)
 </li>
 </ul>
 </li>
@@ -2138,6 +2222,9 @@ function.
 <ul>
 <li>
 <code>gensym</code>
+</li>
+<li>
+<code>symbol-exists?</code>
 </li>
 </ul>
 </li>
@@ -2712,191 +2799,36 @@ function.
 <p>Here is a summary of the additional functions available in EuXLisp.  Those
 marked '*' are also in Youtoo.
 </p><ul>
-<li id="sec-21.1">Special operators <br/>
+<li id="sec-21.1">List functions <br/>
 <ul>
-<li>
-<code>delay</code>
-</li>
-<li>
-<code>map-list</code>
-</li>
-<li>
-<code>load</code>
-</li>
-<li>
-<code>load-noisily</code>
-</li>
-<li>
-<code>force</code>
-</li>
-</ul>
-</li>
-<li id="sec-21.2">List functions <br/>
-<ul>
-<li>
-<code>caar</code> *
-</li>
-<li>
-<code>cadr</code> *
-</li>
-<li>
-<code>cdar</code> *
-</li>
-<li>
-<code>cddr</code> *
-</li>
-<li>
-<code>caaar</code> *
-</li>
-<li>
-<code>caadr</code> *
-</li>
-<li>
-<code>cadar</code> *
-</li>
-<li>
-<code>caddr</code> *
-</li>
-<li>
-<code>cdaar</code> *
-</li>
-<li>
-<code>cdadr</code> *
-</li>
-<li>
-<code>cddar</code> *
-</li>
-<li>
-<code>cdddr</code> *
-</li>
-<li>
-<code>caaaar</code>
-</li>
-<li>
-<code>caaadr</code>
-</li>
-<li>
-<code>caadar</code>
-</li>
-<li>
-<code>caaddr</code>
-</li>
-<li>
-<code>cadaar</code>
-</li>
-<li>
-<code>cadadr</code>
-</li>
-<li>
-<code>caddar</code>
-</li>
-<li>
-<code>cadddr</code> *
-</li>
-<li>
-<code>cdaaar</code>
-</li>
-<li>
-<code>cdaadr</code>
-</li>
-<li>
-<code>cdadar</code>
-</li>
-<li>
-<code>cdaddr</code>
-</li>
-<li>
-<code>cddaar</code>
-</li>
-<li>
-<code>cddadr</code>
-</li>
-<li>
-<code>cdddar</code>
-</li>
-<li>
-<code>cddddr</code>
-</li>
-<li>
-<code>list*</code>
-</li>
 <li>
 <code>append</code> *
 </li>
 <li>
-<code>last-pair</code>
-</li>
-<li>
-<code>length</code> *
-</li>
-<li>
-<code>memv</code>
-</li>
-<li>
-<code>memq</code>
-</li>
-<li>
-<code>assv</code>
-</li>
-<li>
-<code>assq</code>
+<code>length</code> -&gt; <code>list-size</code> *
 </li>
 <li>
 <code>list-ref</code> *
 </li>
-<li>
-<code>list-tail</code>
-</li>
 </ul>
 </li>
-<li id="sec-21.3">Symbol functions <br/>
-<ul>
-<li>
-<code>bound?</code>
-</li>
-<li>
-<code>symbol-value</code>
-</li>
-<li>
-<code>symbol-plist</code>
-</li>
-<li>
-<code>get</code>
-</li>
-<li>
-<code>put</code>
-</li>
-</ul>
-</li>
-<li id="sec-21.4">Vector functions <br/>
+<li id="sec-21.2">Vector functions <br/>
 <ul>
 <li>
 <code>make-vector</code> *
 </li>
 <li>
-<code>vector-length</code>
+<code>vector-length</code> -&gt; <code>vector-size</code> *
 </li>
 <li>
 <code>vector-ref</code> *
 </li>
 </ul>
 </li>
-<li id="sec-21.5">Predicates <br/>
+<li id="sec-21.3">Predicates <br/>
 <ul>
 <li>
 <code>list?</code> *
-</li>
-<li>
-<code>boolean?</code>
-</li>
-<li>
-<code>complex?</code>
-</li>
-<li>
-<code>rational?</code>
-</li>
-<li>
-<code>char?</code>
 </li>
 <li>
 <code>function?</code> *
@@ -2918,70 +2850,36 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.6">Arithmetic functions <br/>
+<li id="sec-21.4">Arithmetic functions <br/>
 <ul>
-<li>
-<code>exact?</code>
-</li>
-<li>
-<code>inexact?</code>
-</li>
 <li>
 <code>random</code> *
 </li>
-<li>
-<code>quotient</code>
-</li>
-<li>
-<code>remainder</code>
-</li>
-<li>
-<code>unary-</code>
-</li>
-<li>
-<code>unary/</code>
-</li>
 </ul>
 </li>
-<li id="sec-21.7">Bitwise logical functions <br/>
-<ul>
-<li>
-<code>logand</code>
-</li>
-<li>
-<code>logior</code>
-</li>
-<li>
-<code>logxor</code>
-</li>
-<li>
-<code>lognot</code>
-</li>
-</ul>
-</li>
-<li id="sec-21.8">String functions <br/>
+<li id="sec-21.5">String functions <br/>
 <ul>
 <li>
 <code>make-string</code>
 </li>
 <li>
-<code>string-length</code>
+<code>string-length</code> -&gt; <code>string-size</code> *
 </li>
 <li>
-<code>string-null?</code>
+<code>string-null?</code> -&gt; <code>string-empty?</code> *
 </li>
 <li>
-<code>string-append</code>
+<code>string-append</code> *
 </li>
 <li>
-<code>string-ref</code>
+<code>string-ref</code> *
 </li>
 <li>
-<code>substring</code>
+<code>substring</code> *
 </li>
 </ul>
 </li>
-<li id="sec-21.9">I/O functions <br/>
+<li id="sec-21.6">I/O functions <br/>
 <ul>
 <li>
 <code>read-char</code> *
@@ -3015,7 +2913,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.10">Print control functions <br/>
+<li id="sec-21.7">Print control functions <br/>
 <ul>
 <li>
 <code>print-breadth</code>
@@ -3025,7 +2923,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.11">File I/O functions <br/>
+<li id="sec-21.8">File I/O functions <br/>
 <ul>
 <li>
 <code>open-input-file</code>
@@ -3056,7 +2954,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.12">utility functions <br/>
+<li id="sec-21.9">utility functions <br/>
 <ul>
 <li>
 <code>transcript-on</code>
@@ -3090,7 +2988,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.13">Debugging functions <br/>
+<li id="sec-21.10">Debugging functions <br/>
 <ul>
 <li>
 <code>trace-on</code>
@@ -3100,7 +2998,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.14">Module functions <br/>
+<li id="sec-21.11">Module functions <br/>
 <ul>
 <li>
 <code>enter-module</code>
@@ -3134,7 +3032,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.15">Tables <br/>
+<li id="sec-21.12">Tables <br/>
 <ul>
 <li>
 <code>make-table</code>
@@ -3165,7 +3063,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.16">Plus some others <br/>
+<li id="sec-21.13">Plus some others <br/>
 <ul>
 <li>
 <code>binary</code>
@@ -3208,7 +3106,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.17">Thread <br/>
+<li id="sec-21.14">Thread <br/>
 <ul>
 <li>
 <code>make-thread</code>
@@ -3254,7 +3152,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.18">Telos <br/>
+<li id="sec-21.15">Telos <br/>
 <ul>
 <li>
 <code>&lt;simple-string&gt;</code>
@@ -3309,7 +3207,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.19">Converter <br/>
+<li id="sec-21.16">Converter <br/>
 <ul>
 <li>
 <code>&lt;conversion-condition&gt;</code>
@@ -3319,7 +3217,7 @@ marked '*' are also in Youtoo.
 </li>
 </ul>
 </li>
-<li id="sec-21.20">Condition <br/>
+<li id="sec-21.17">Condition <br/>
 <ul>
 <li>
 <code>condition-message</code> *
@@ -3378,35 +3276,21 @@ marked '*' are also in Youtoo.
 <li>
 <code>&lt;user-interrupt&gt;</code>
 </li>
-</ul>
-</li>
-<li id="sec-21.21">Compare <br/>
-<ul>
-<li>
-<code>assoc</code>
-</li>
-</ul>
-</li>
-<li id="sec-21.22">Macros <br/>
-<ul>
-<li>
-<code>symbol-macro</code>
-</li>
-<li>
-<code>macroexpand</code>
-</li>
-<li>
-<code>macroexpand1</code>
-</li>
-</ul>
-</li>
-<li id="sec-21.23">Collect <br/>
-<ul>
 <li>
 <code>&lt;collection-condition&gt;</code>
 </li>
 <li>
 <code>&lt;collection-error&gt;</code>
+</li>
+</ul>
+</li>
+<li id="sec-21.18">Macros <br/>
+<ul>
+<li>
+<code>macroexpand</code>
+</li>
+<li>
+<code>macroexpand1</code>
 
 </li>
 </ul>
@@ -3514,7 +3398,7 @@ See <i>Examples/Misc/script.em</i>.
 <p class="author"> Author: of original Euscheme notes Russell Bradford
 <a href="mailto:no-reply">&lt;no-reply&gt;</a>
 </p>
-<p class="date"> Date: 2010-07-02 10:23:08 BST</p>
+<p class="date"> Date: 2010-07-05 23:34:37 BST</p>
 <p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
 </div>
 </div>

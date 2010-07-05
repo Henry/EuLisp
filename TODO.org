@@ -32,6 +32,9 @@
     CLOSED: [2010-06-29 Tue 21:47]
 *** TODO Add =slice= method for =<vector>=
 *** TODO Change all destructive functions to =setters=
+*** TODO Set the readline prompt rather than printing it directly
+    This should avoid some of the command-line editing problems when the prompt
+    is not printed.
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
@@ -185,7 +188,8 @@
 *** TODO Update the class hierarchy
     + remove =simple-string=, =simple-vector= /etc./
     + add =<sequence>=, =<character-sequence>= /etc./
-*** TODO Remove the export of =<make-...>= functions
+*** DONE Remove the export of =<make-...>= functions
+    CLOSED: [2010-07-05 Mon 15:20]
     Replace with generic =make <...>= calls in modules.
 *** DONE Rename primitive Scheme functions in the C-code
     #+BEGIN_SRC eulisp
@@ -198,9 +202,20 @@
       (eq? eq)
       (eqv? eql)))
     #+END_SRC
-*** TODO Add =binary-mod= function
+*** DONE Add =binary-mod= function
+    CLOSED: [2010-07-05 Mon 21:35]
     This is equivalent to =binary%= for integers but returns an <int> for
     <double-float>s, see definition.
+*** TODO Add =time= function
+    See Youtoo implementation
+*** DONE Switch-off readline when running a module with the =-m= option
+    CLOSED: [2010-07-05 Mon 15:19]
+*** DONE Rename =-length= functions -> =-size=
+    CLOSED: [2010-07-05 Mon 11:42]
+*** DONE Rename =simple-vector= -> =vector=
+    CLOSED: [2010-07-05 Mon 22:03]
+*** TODO Complete =double-float= functionality in =arith.em=
+    See =Youtoo/Runtime/double.em=
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
     to correspond to the EuLisp-1.0 proposals.
