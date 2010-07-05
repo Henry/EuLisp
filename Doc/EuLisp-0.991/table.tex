@@ -20,15 +20,15 @@ section~\ref{collection} (collections) for further operations on tables.
 The class of all instances of \classref{table}.
 %
 \begin{initoptions}
-    \item[comparator, \classref{function}]%
+    \item[comparator:, \classref{function}]%
     The function to be used to compare keys.  The default comparison function is
     \functionref{eql}.
 
-    \item[fill-value, \classref{object}]%
+    \item[fill-value:, \classref{object}]%
     An object which will be returned as the default value for any key which does
     not have an associated value.  The default fill value is \nil{}.
 
-    \item[hash-function, \classref{function}]%
+    \item[hash-function:, \classref{function}]%
     The function to be used to compute an unique key for each object stored in
     the table.  This function must return a fixed precision integer.  The hash
     function must also satisfy the constraint that if the comparison function

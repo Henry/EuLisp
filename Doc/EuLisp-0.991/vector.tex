@@ -37,20 +37,20 @@ representation of vectors is defined below.
 The class of all instances of \classref{vector}.
 %
 \begin{initoptions}
-    \item[size, \classref{int}] The number of elements in
+    \item[size:, \classref{int}] The number of elements in
     the vector.  Vectors are zero-based and thus the maximum index is {\em
         size-1}.  If not supplied the {\em size\/} is zero.
 
-    \item[fill-value, \classref{object}] An object with which to initialize the
+    \item[fill-value:, \classref{object}] An object with which to initialize the
     vector.  The default fill value is \nil{}.
 \end{initoptions}
 %
 \examples
 \begin{tabular}{lcl}
     \verb|(make <vector>)| &\Ra& \verb|#()|\\
-    \verb|(make <vector> 'size 2)| &\Ra& \verb|#(() ())|\\
-    \verb|(make <vector> 'size 3| &\Ra& \verb|#(#\a #\a #\a)|\\
-    \verb|  'fill-value #\a)|&&\\
+    \verb|(make <vector> size: 2)| &\Ra& \verb|#(() ())|\\
+    \verb|(make <vector> size: 3| &\Ra& \verb|#(#\a #\a #\a)|\\
+    \verb|  fill-value: #\a)|&&\\
 \end{tabular}
 
 \function{vector?}

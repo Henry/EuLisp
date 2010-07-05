@@ -112,7 +112,7 @@ The number of characters in the string.  Strings are zero-based and
 thus the maximum index is {\em size-1}.  If not specified the {\em
 size\/} is zero.
 %
-\item[fill-value, \classref{character}]
+\item[fill-value:, \classref{character}]
 A character with which to initialize the string.  The default fill
 character is \verb|#\x0|.
 %
@@ -122,9 +122,9 @@ character is \verb|#\x0|.
 %
 \begin{tabular}{lcl}
 \verb|(make <string>)| &\Ra& \verb|""|\\
-\verb|(make <string> 'size 2)| &\Ra& \verb|"\x0000\x0000"|\\
-\verb|(make <string> 'size 3| &\Ra& \verb|"aaa"|\\
-\verb|  'fill-value #\a)|&&\\
+\verb|(make <string> size: 2)| &\Ra& \verb|"\x0000\x0000"|\\
+\verb|(make <string> size: 3| &\Ra& \verb|"aaa"|\\
+\verb|  fill-value: #\a)|&&\\
 \end{tabular}
 %
 \function{string?}
