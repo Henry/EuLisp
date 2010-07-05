@@ -161,7 +161,7 @@
   (defmacro time (expr stream)
     (let ((x (gensym "time"))
           (res (gensym "time")))
-      `(let ((,x (time-start))
+      `(let* ((,x (time-start))
              (,res ,expr))
          (time-stop ,x)
          (sformat ,stream
