@@ -102,8 +102,7 @@
 
       ;; Vector functions
       vector
-      make-vector
-      vector-length
+      vector-size
       vector-ref
 
       ;; Predicates
@@ -140,13 +139,14 @@
       ceiling
       round
       abs
+      mod
       gcd
-      lcm
       random
       +
       -
       *
       /
+      %
       min
       max
       sin
@@ -164,6 +164,7 @@
       binary*
       binary/
       binary%
+      binary-mod
       binary-gcd
 
       ;; Numeric comparison functions
@@ -174,7 +175,7 @@
       >
 
       ;; String functions
-      string-length
+      string-size
       string-null?
       string-append
       string-ref
@@ -236,11 +237,10 @@
       subclass?
 
       ;; Tables
-      make-table
       table-ref
       table-comparator
       table-delete
-      table-length
+      table-size
       table-keys
       table-values
       table-fill
@@ -258,15 +258,17 @@
       getenv
       putenv
       tmpfile
-      current-time
-      ticks-per-second
+
+      time-start
+      time-stop
+      time
+
       backtrace
       backtrace?
 
       ;; Thread
       <thread>
       <simple-thread>
-      make-thread
       thread?
       thread-reschedule
       current-thread
@@ -282,7 +284,6 @@
 
       <lock>
       <simple-lock>
-      make-lock
       lock?
       lock
       unlock
@@ -316,13 +317,11 @@
       <symbol>
       <keyword>
       <string>
-      <simple-string>
       <stream>
       <input-stream>
       <output-stream>
       <i/o-stream>
       <vector>
-      <simple-vector>
       <char>
       <simple-char>
       <promise>
@@ -470,6 +469,17 @@
       trace-on
       trace-off
       ))
+
+  (defmacro time (expr stream)
+    (let ((x (gensym "time"))
+          (res (gensym "time")))
+      `(let* ((,x (time-start))
+             (,res ,expr))
+         (time-stop ,x)
+         (sformat ,stream
+                  "real: ~a\nuser: ~a\nsystem: ~a\n"
+                  (vector-ref ,x 0) (vector-ref ,x 1) (vector-ref ,x 2))
+         ,res)))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

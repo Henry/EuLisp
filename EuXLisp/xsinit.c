@@ -1,7 +1,12 @@
-// xsinit.c - xscheme initialization routines
-/*     Copyright (c) 1988, by David Michael Betz
-       All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: xsinit.c
+///  Description: initialization routines
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 #include "xsbcode.h"
@@ -60,15 +65,10 @@ void xlsymbols();
 // xlinitws - create an initial workspace
 void xlinitws(unsigned int ssize)
 {
-    unsigned char *bcode;
-    int type, i;
-    LVAL code;
-    FUNDEF *p;
-    extern LVAL s_gcmsgs;
-
     // allocate memory for the workspace
     xlminit(ssize);
 
+    extern LVAL s_gcmsgs;
     s_gcmsgs = NIL;
 
     obarray = newvector(HSIZE);
@@ -85,9 +85,11 @@ void xlinitws(unsigned int ssize)
     default_object = cons(xlenter("**DEFAULT**"), NIL);
 
     // install the built-in functions
+    int i;
+    FUNDEF *p;
     for (i = 0, p = funtab; p->fd_subr != NULL; ++i, ++p)
     {
-        type = (i < xsubrcnt ? XSUBR : (i < csubrcnt ? CSUBR : SUBR));
+        int type = (i < xsubrcnt ? XSUBR : (i < csubrcnt ? CSUBR : SUBR));
         xlsubr(p->fd_name, type, p->fd_subr, i);
     }
 
@@ -115,7 +117,7 @@ void xlinitws(unsigned int ssize)
     setvalue(s_flofmt, cvstring(FFMT));
 
     // build the 'eval' function
-    code = newcode(4);
+    LVAL code = newcode(4);
     cpush(code);
     setelement(code, 0, newstring(0x12));
     setelement(code, 1, xlenter("eval"));
@@ -124,26 +126,26 @@ void xlinitws(unsigned int ssize)
     drop(1);
 
     // store the byte codes
-    bcode = (unsigned char *)getstring(getbcode(code));
+    unsigned char *bcode = (unsigned char *)getstring(getbcode(code));
 
     pb(OP_FRAME);
-    pb(0x02);   // 0000 12 02 FRAME 02
+    pb(0x02);           // 0000 12 02 FRAME 02
     pb(OP_MVARG);
-    pb(0x01);   // 0002 13 01 MVARG 01
+    pb(0x01);           // 0002 13 01 MVARG 01
     pb(OP_ALAST);       // 0004 1a ALAST
     pb(OP_SAVE);
     pb(0x00);
-    pb(0x10);   // 0005 0b 00 10 SAVE 0010
+    pb(0x10);           // 0005 0b 00 10 SAVE 0010
     pb(OP_EREF);
     pb(0x00);
-    pb(0x01);   // 0008 09 00 01 EREF 00 01 ; x
+    pb(0x01);           // 0008 09 00 01 EREF 00 01 ; x
     pb(OP_PUSH);        // 000b 10 PUSH
     pb(OP_GREF);
-    pb(0x03);   // 000c 05 03 GREF 03 ; compile
+    pb(0x03);           // 000c 05 03 GREF 03 ; compile
     pb(OP_CALL);
-    pb(0x01);   // 000e 0c 01 CALL 01
+    pb(0x01);           // 000e 0c 01 CALL 01
     pb(OP_CALL);
-    pb(0x00);   // 0010 0c 00 CALL 00
+    pb(0x00);           // 0010 0c 00 CALL 00
 
     setvalue(getelement(code, 1), cvclosure(code, NIL));
 
@@ -161,22 +163,22 @@ void xlinitws(unsigned int ssize)
     bcode = (unsigned char *)getstring(getbcode(code));
 
     pb(OP_FRAME);
-    pb(0x01);   // 0000 12 01 FRAME 01
+    pb(0x01);           // 0000 12 01 FRAME 01
     pb(OP_ALAST);       // 0002 1a ALAST
     pb(OP_SAVE);
     pb(0x00);
-    pb(0x0d);   // 0003 0b 00 0d SAVE 000d
+    pb(0x0d);           // 0003 0b 00 0d SAVE 000d
     pb(OP_LIT);
-    pb(0x03);   // 0006 04 03 LIT 03 ; "xscheme.ini"
+    pb(0x03);           // 0006 04 03 LIT 03 ; "xscheme.ini"
     pb(OP_PUSH);        // 0008 10 PUSH
     pb(OP_GREF);
-    pb(0x04);   // 0009 05 04 GREF 04 ; load
+    pb(0x04);           // 0009 05 04 GREF 04 ; load
     pb(OP_CALL);
-    pb(0x01);   // 000b 0c 01 CALL 01
+    pb(0x01);           // 000b 0c 01 CALL 01
     pb(OP_GREF);
-    pb(0x05);   // 000d 05 05 GREF 05 ; *toplevel*
+    pb(0x05);           // 000d 05 05 GREF 05 ; *toplevel*
     pb(OP_CALL);
-    pb(0x00);   // 000f 0c 00 CALL 00
+    pb(0x00);           // 000f 0c 00 CALL 00
 
     setvalue(getelement(code, 1), cvclosure(code, NIL));
 
@@ -200,6 +202,11 @@ void xlinitws(unsigned int ssize)
     cpush(code);
     setelement(code, 0, newstring(0x70));
     setelement(code, 1, xlenter("*TOPLEVEL*"));
+    #ifdef READLINE
+    setelement(code, 2, xlenter("nil"));
+    #else
+    setelement(code, 2, xlenter("prompt?"));
+    #endif
     setelement(code, 3, xlenter("prompt?"));
     setelement(code, 4, xlenter("newline"));
     setelement(code, 5, xlenter("%display"));
@@ -210,7 +217,7 @@ void xlinitws(unsigned int ssize)
     setelement(code, 10, xlenter("**EOF**"));
     setelement(code, 11, xlenter("exit"));
     setelement(code, 12, xlenter("eval"));
-    setelement(code, 13, xlenter("write"));
+    setelement(code, 13, xlenter("print"));
     setelement(code, 14, xlenter("*TOPLEVEL*"));
     drop(1);
 
@@ -218,10 +225,9 @@ void xlinitws(unsigned int ssize)
     bcode = (unsigned char *)getstring(getbcode(code));
 
     /*
-
       0000 12 01    FRAME 01
       0002 1a       ALAST
-      0003 05 03    GREF 03 ; prompt?@root
+      0003 05 03    GREF 15 ; prompt?@root
       0005 02 00 22 BRF 0022
       0008 0b 00 0f SAVE 000f
       000b 05 04    GREF 04 ; newline@root
@@ -269,14 +275,13 @@ void xlinitws(unsigned int ssize)
       0060 0c 01    CALL 01
       0062 05 0e    GREF 0e ; *toplev*@root
       0064 0c 00    CALL 00
-
     */
 
     pb(OP_FRAME);
     pb(0x01);
     pb(OP_ALAST);
     pb(OP_GREF);
-    pb(0x03);
+    pb(0x02);
     pb(OP_BRF);
     pb(0x00);
     pb(0x22);
@@ -382,9 +387,6 @@ void xlinitws(unsigned int ssize)
 // xlsymbols - lookup/enter all symbols used by the runtime system
 void xlsymbols()
 {
-    LVAL sym, env;
-    extern int quiet;
-
     // top-level procedure symbol
     s_eval = xlenter("eval");
 
@@ -412,11 +414,12 @@ void xlsymbols()
     s_quote = xlenter("quote");
 
     // 'else' is a useful synonym for `t' in cond clauses
-    sym = xlenter("else");
+    LVAL sym = xlenter("else");
     setvalue(sym, true);
 
     // do we want a prompt?
     sym = xlenter("prompt?");
+    extern int quiet;
     if (quiet)
     {
         setvalue(sym, NIL);
@@ -432,9 +435,11 @@ void xlsymbols()
 
     // restore OS environment
     s_supplied_env = xlenter("supplied-env");
-    env = getvalue(s_supplied_env);
+    LVAL env = getvalue(s_supplied_env);
     for (; consp(env); env = cdr(env))
+    {
         putenv(getstring(cdr(car(env))));
+    }
 
     // time info
     set_ticks();
@@ -555,3 +560,5 @@ void xlsymbols()
     s_check_ref = xlenter("check-ref");
     #endif
 }
+
+///-----------------------------------------------------------------------------

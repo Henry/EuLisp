@@ -19,13 +19,11 @@
        <symbol>
        <keyword>
        <string>
-       <simple-string>
        <stream>
        <input-stream>
        <output-stream>
        <i/o-stream>
        <vector>
-       <simple-vector>
        <char>
        <simple-char>
        <promise>
@@ -255,7 +253,7 @@
                       (>= current-print-depth (print-depth)))
                  (%display "#(...)" s))
                 ((vector? obj)
-                 (let ((length (vector-length obj)))
+                 (let ((length (vector-size obj)))
                    (if (= length 0)
                        (%display "#()" s)
                      (progn

@@ -1,11 +1,20 @@
-// msstuff.c - OS specific routines
-/*      Copyright (c) 1988, by David Michael Betz
-        All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+//  Copyright (c) 1988, by David Michael Betz.
+//  Copyright (c) 1994, by Russell Bradford.
+//  All rights reserved.
+///-----------------------------------------------------------------------------
+/// ---                 EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+///  File: osspecific.c
+///  Description: OS specific routines
+///-----------------------------------------------------------------------------
 
+#include "xscheme.h"
 #include <sys/types.h>
 #include <time.h>
 #include <sys/time.h>
+#include <unistd.h>
+#include <sys/times.h>
+#include <errno.h>
 #include "xscheme.h"
 
 #ifdef READLINE
@@ -13,33 +22,21 @@
 #include <readline/history.h>
 #endif
 
-unsigned _stklen = 16384;
-
 // external variables
 #include "xssymbols.h"
 extern FILE *tfp;
-
-// old errnos were everywhere
-#if 0
-#if defined(CODEBLDR)
-#include <errno.h>
-#else
 extern int errno;
-#endif
-#endif
 
-// new place for errno
-#include <errno.h>
-
+// Used in xscheme.c
 int reading;
+
+// Line buffer size when not using readline
+#define LBSIZE 200
 
 // local variables
 #ifdef READLINE
 static char* lbuf;
 static char rl_histfile[255];
-#else
-#define LBSIZE 200
-static char lbuf[LBSIZE];
 #endif
 
 static int lindex;
@@ -88,31 +85,47 @@ void osinit(char *banner)
     lcount = 0;
 
     #ifdef READLINE
-    char* eulisp_history = "/.eulisp_history";
-    char* home = getenv("HOME");
-    if (home == NULL)
+    if (!quiet)
     {
-        ostputs("Cannot find environment variable HOME for reading ~/");
-        oserror(eulisp_history);
-    }
-    else
-    {
-        strcpy(rl_histfile, home);
-        strcat(rl_histfile, eulisp_history);
-
-        if (!read_history(rl_histfile))
+        char* eulisp_history = "/.eulisp_history";
+        char* home = getenv("HOME");
+        if (home == NULL)
         {
-            ostputs("Reading readline history from ");
-            ostputs(rl_histfile);
-            ostputc('\n');
+            ostputs("Cannot find environment variable HOME for reading ~/");
+            oserror(eulisp_history);
+        }
+        else
+        {
+            strcpy(rl_histfile, home);
+            strcat(rl_histfile, eulisp_history);
+
+            if (!read_history(rl_histfile))
+            {
+                ostputs("Reading readline history from ");
+                ostputs(rl_histfile);
+                ostputc('\n');
+            }
         }
     }
+    else
     #endif
+    {
+        lbuf = malloc(LBSIZE);
+    }
 }
 
 // osfinish - clean up before returning to the operating system
 void osfinish()
-{}
+{
+    extern int quiet;
+
+    #ifdef READLINE
+    if (quiet)
+    #endif
+    {
+        free(lbuf);
+    }
+}
 
 // oserror - print an error message
 void oserror(char *msg)
@@ -239,8 +252,13 @@ void rlgets()
         lbuf = (char *)NULL;
     }
 
+    // Make the prompt from the current module name
+    static char prompt[255];
+    strcpy(prompt, getstring(getmname(current_module)));
+    strcat(prompt, "> ");
+
     // Get a line from the user.
-    lbuf = readline("");
+    lbuf = readline(prompt);
 
     // If the line has any text in it,
     // save it on the history.
@@ -263,7 +281,7 @@ int ostgetc()
     {
         #ifdef READLINE
         // If it is the last character return \n
-        if (lcount == 0)
+        if (!quiet && lcount == 0)
         {
             return '\n';
         }
@@ -277,10 +295,15 @@ int ostgetc()
     reading = 1;
 
     #ifdef READLINE
-    rlgets();
-    #else
-    fgets(lbuf, LBSIZE, stdin);
+    if (!quiet)
+    {
+        rlgets();
+    }
+    else
     #endif
+    {
+        fgets(lbuf, LBSIZE, stdin);
+    }
 
     reading = 0;
 
@@ -296,7 +319,7 @@ int ostgetc()
     // If the line buffer is not allocated or the stdin is at eof
     // return EOF
     #ifdef READLINE
-    if (!lbuf || feof(stdin))
+    if ((!quiet && !lbuf) || feof(stdin))
     #else
     if (feof(stdin))
     #endif
@@ -315,7 +338,10 @@ int ostgetc()
     // For readline pretend the buffer is one longer than it really is
     // for the \n which readline strips
     #ifdef READLINE
-    lcount++;
+    if (!quiet)
+    {
+        lcount++;
+    }
     #endif
 
     // write it to the transcript file
@@ -332,7 +358,7 @@ int ostgetc()
 
     #ifdef READLINE
     // If it is the last character return \n
-    if (lcount == 0)
+    if (!quiet && lcount == 0)
     {
         return '\n';
     }
@@ -476,8 +502,6 @@ static void osflushn()
 }
 
 // time initialisation
-#ifndef NO_GTOD
-
 #define GETTIMEOFDAY(x) gettimeofday(x, NULL)
 
 static long time_offset;
@@ -506,21 +530,66 @@ LVAL xtime()
     return cvfixnum(((tp.tv_sec - time_offset) * 1000000 + tp.tv_usec) / NOISE);
 }
 
-#else
-
-void set_ticks()
+LVAL x_ticks_per_second()
 {
-    setvalue(xlenter("ticks-per-second"), cvflonum(1.0));
+    return cvfixnum(sysconf(_SC_CLK_TCK));
 }
 
-// xtime - get the current time
-LVAL xtime()
+#define TIMES_SIZE 3
+#define TIMES_REAL(x) x->n_vdata[0]
+#define TIMES_USER(x) x->n_vdata[1]
+#define TIMES_SYS(x) x->n_vdata[2]
+
+LVAL x_time_start()
 {
-    static char *cfn_name = "current-time";
+    static struct tms buffer;
+
+    LVAL res = newvector(TIMES_SIZE);
+
+    int r = (int)times(&buffer);
+    if (r == -1)
+    {
+        return NIL;
+    }
+
+    int u = (int)buffer.tms_utime;
+    int s = (int)buffer.tms_stime;
+
+    TIMES_REAL(res) = cvfixnum(r);
+    TIMES_USER(res) = cvfixnum(u);
+    TIMES_SYS(res) = cvfixnum(s);
+
+    return res;
+}
+
+LVAL x_time_stop()
+{
+    static char *cfn_name = "time-stop";
+
+    static struct tms buffer;
+
+    int r = (int)times(&buffer);
+    if (r == -1)
+    {
+        return NIL;
+    }
+
+    // get the vector
+    LVAL x = xlgavector();
     xllastarg();
-    return (cvfixnum((FIXTYPE) time((time_t) 0)));
+
+    int clk_tck = sysconf(_SC_CLK_TCK);
+    int u = (int)buffer.tms_utime;
+    int s = (int)buffer.tms_stime;
+    int old_r = (int)getfixnum(TIMES_REAL(x));
+    int old_u = (int)getfixnum(TIMES_USER(x));
+    int old_s = (int)getfixnum(TIMES_SYS(x));
+    TIMES_REAL(x) = cvflonum((double)(r - old_r) / ((double)clk_tck));
+    TIMES_USER(x) = cvflonum((double)(u - old_u) / ((double)clk_tck));
+    TIMES_SYS(x) = cvflonum((double)(s - old_s) / ((double)clk_tck));
+
+    return x;
 }
-#endif // GTOD
 
 void check_if_disabled(char *name)
 {
@@ -647,7 +716,4 @@ LVAL xputenv()
     return new;
 }
 
-// ossymbols - enter os specific symbols
-void ossymbols()
-{
-}
+///-----------------------------------------------------------------------------

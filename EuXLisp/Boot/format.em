@@ -25,17 +25,17 @@
 
   (define (sformat stream string . args)
           (%display (format-loop
-                      string args 0 (string-length string) ()) stream)
+                      string args 0 (string-size string) ()) stream)
           stream)
 
   (define (format string . args)
           (%display (format-loop
-                      string args 0 (string-length string) ()))
+                      string args 0 (string-size string) ()))
           stdout)
 
   (define (fmt string . args)
           (format-loop
-            string args 0 (string-length string) ()))
+            string args 0 (string-size string) ()))
 
   (define (format-loop string args n len result)
           (if (< n len)

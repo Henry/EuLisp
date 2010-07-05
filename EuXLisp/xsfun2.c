@@ -1008,10 +1008,10 @@ LVAL xmakestring()
     return (val);
 }
 
-// xstrlen - built-in function 'string-length'
+// xstrlen - built-in function 'string-size'
 LVAL xstrlen()
 {
-    static char *cfn_name = "string-length";
+    static char *cfn_name = "string-size";
     LVAL str;
     str = xlgastring();
     xllastarg();

@@ -32,12 +32,13 @@ extern void oscheck();
 extern void oscheck_int();
 extern void set_ticks();
 extern LVAL xtime();
+extern LVAL x_time_start();
+extern LVAL x_time_stop();
 extern void check_if_disabled(char *name);
 extern LVAL xsystem();
 extern LVAL xtmpfile();
 extern LVAL xgetenv();
 extern LVAL xputenv();
-extern void ossymbols();
 
 // xscheme.c
 extern void xlmain(int argc, char **argv);

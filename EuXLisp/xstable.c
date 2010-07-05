@@ -267,7 +267,7 @@ LVAL xtable_delete()
 // xtable_length - the number of objects in the table
 LVAL xtable_length()
 {
-    static char *cfn_name = "table-length";
+    static char *cfn_name = "table-size";
 
     LVAL table = xlgatable();
     xllastarg();

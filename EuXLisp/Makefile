@@ -91,7 +91,7 @@ CPPFLAGS = -DIMAGE='"$(IMAGE)"' -DIMAGE_MOD='"$(IMAGE_MOD)"' \
 ### Source and object files
 ###-----------------------------------------------------------------------------
 
-EUXL_C = msstuff.c xsdmem.c xsfun2.c xsint.c xsobj.c xssym.c \
+EUXL_C = osspecific.c xsdmem.c xsfun2.c xsint.c xsobj.c xssym.c \
          xscheme.c xsftab.c xsimage.c xsio.c xsprint.c \
          xscom.c xsfun1.c xsinit.c xsmath.c xsread.c \
          xsmodule.c xstable.c xsocket.c

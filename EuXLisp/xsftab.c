@@ -117,7 +117,7 @@ FUNDEF funtab[] =
     // vector functions
     {"vector", xvector},
     {"make-vector", xmakevector},
-    {"vector-length", xvlength},
+    {"vector-size", xvlength},
     {"vector-ref", xvref},
     {"vector-set!", xvset},
 
@@ -211,7 +211,7 @@ FUNDEF funtab[] =
     {">", xgtr},
 
     // string functions
-    {"string-length", xstrlen},
+    {"string-size", xstrlen},
     {"string-null?", xstrnullp},
     {"string-append", xstrappend},
     {"string-ref", xstrref},
@@ -360,7 +360,7 @@ FUNDEF funtab[] =
     {"table-set!", xtable_set},
     {"table-comparator", xtable_comparator},
     {"table-delete", xtable_delete},
-    {"table-length", xtable_length},
+    {"table-size", xtable_length},
     {"table-keys", xtable_keys},
     {"table-values", xtable_values},
 
@@ -384,6 +384,8 @@ FUNDEF funtab[] =
     {"getenv", xgetenv},
     {"putenv", xputenv},
     {"current-time", xtime},
+    {"time-start", x_time_start},
+    {"time-stop", x_time_stop},
     {"xsprintf", xsprintf},
 
     // debugging

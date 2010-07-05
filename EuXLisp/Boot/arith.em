@@ -4,144 +4,153 @@
 ;;; many of these inlined for special cases
 
 (defmodule arith
-
-    (import (root)
-     export ( binary+ binary- unary- binary* binary/ unary/ binary%
-              binary-gcd gcd abs + - * / % pow zero? quotient remainder))
+    (import (root macros0)
+     export (binary+ binary- binary* binary/ binary% binary-mod
+             binary-gcd gcd abs + - * / % mod pow zero? quotient remainder))
 
   (deflocal %+ +)
 
-  (define-generic (binary+ a b))
+  (defgeneric binary+ (a b))
 
-  (define-method (binary+ (a <number>) (b <number>))
-                 (%+ a b))
+  (defmethod binary+ ((a <number>) (b <number>))
+    (%+ a b))
 
-  (define (+ . args)
-          (cond ((null? args) 0)
-                ((null? (cdr args)) (car args))
-                ((null? (cddr args)) (binary+ (car args) (cadr args)))
-                (t (apply + (binary+ (car args) (cadr args)) (cddr args)))))
+  (defun + args
+    (cond ((null? args) 0)
+          ((null? (cdr args)) (car args))
+          ((null? (cddr args)) (binary+ (car args) (cadr args)))
+          (t (apply + (binary+ (car args) (cadr args)) (cddr args)))))
 
   (deflocal %- -)
 
-  (define-generic (binary- a b))
+  (defgeneric binary- (a b))
 
-  (define-method (binary- (a <number>) (b <number>))
-                 (%- a b))
+  (defmethod binary- ((a <number>) (b <number>))
+    (%- a b))
 
-  (define (- arg . args)
-          (cond ((null? args) (unary- arg))
-                ((null? (cdr args)) (binary- arg (car args)))
-                (t (apply - (binary- arg (car args)) (cdr args)))))
+  (defun - ( arg . args)
+    (cond ((null? args) (unary- arg))
+          ((null? (cdr args)) (binary- arg (car args)))
+          (t (apply - (binary- arg (car args)) (cdr args)))))
 
-  (define-generic (unary- a))
+  (defgeneric unary- (a))
 
-  (define-method (unary- (a <number>)) (%- a))
+  (defmethod unary- ((a <number>)) (%- a))
 
   (deflocal %* *)
 
-  (define-generic (binary* a b))
+  (defgeneric binary* (a b))
 
-  (define-method (binary* (a <number>) (b <number>))
-                 (%* a b))
+  (defmethod binary* ((a <number>) (b <number>))
+    (%* a b))
 
-  (define (* . args)
-          (cond ((null? args) 1)
-                ((null? (cdr args)) (car args))
-                ((null? (cddr args)) (binary* (car args) (cadr args)))
-                (t (apply * (binary* (car args) (cadr args)) (cddr args)))))
+  (defun * args
+    (cond ((null? args) 1)
+          ((null? (cdr args)) (car args))
+          ((null? (cddr args)) (binary* (car args) (cadr args)))
+          (t (apply * (binary* (car args) (cadr args)) (cddr args)))))
 
   (deflocal %/ /)
 
-  (define-generic (binary/ a b))
+  (defgeneric binary/ (a b))
 
-  (define-method (binary/ (a <number>) (b <number>))
-                 (%/ a b))
+  (defmethod binary/ ((a <number>) (b <number>))
+    (%/ a b))
 
-  (define (/ arg . args)
-          (cond ((null? args) (unary/ arg))
-                ((null? (cdr args)) (binary/ arg (car args)))
-                (t (apply / (binary/ arg (car args)) (cdr args)))))
+  (defun / (arg . args)
+    (cond ((null? args) (unary/ arg))
+          ((null? (cdr args)) (binary/ arg (car args)))
+          (t (apply / (binary/ arg (car args)) (cdr args)))))
 
-  (define-generic (unary/ a))
+  (defgeneric unary/ (a))
 
-  (define-method (unary/ (a <number>)) (%/ a))
+  (defmethod unary/ ((a <number>)) (%/ a))
 
-  (define-generic (binary% a b))
+  (defgeneric binary% (a b))
 
-  (define-method (binary% (a <int>) (b <int>))
-                 (remainder a b))
+  (defmethod binary% ((a <int>) (b <int>))
+    (remainder a b))
 
-  (define (% arg . args)
-          (cond ((null? args) arg)
-                ((null? (cdr args)) (binary% arg (car args)))
-                (t (apply % (binary% arg (car args)) (cdr args)))))
+  (defun % (arg . args)
+    (cond ((null? args) arg)
+          ((null? (cdr args)) (binary% arg (car args)))
+          (t (apply % (binary% arg (car args)) (cdr args)))))
+
+  (defgeneric binary-mod (a b))
+
+  (defmethod binary-mod ((a <int>) (b <int>))
+    (remainder a b))
+
+  (defun mod (arg . args)
+    (cond ((null? args) arg)
+          ((null? (cdr args)) (binary-mod arg (car args)))
+          (t (apply mod (binary-mod arg (car args)) (cdr args)))))
 
   (deflocal %gcd gcd)
 
-  (define (gcd n . args)
-          (cond ((null? args) (abs n))
-                ((null? (cdr args)) (binary-gcd n (car args)))
-                (t (binary-gcd n (apply gcd args)))))
+  (defun gcd ( n . args)
+    (cond ((null? args) (abs n))
+          ((null? (cdr args)) (binary-gcd n (car args)))
+          (t (binary-gcd n (apply gcd args)))))
 
-  (define-generic (binary-gcd a b))
+  (defgeneric binary-gcd (a b))
 
   ;; generally very inefficient
   ;; requires methods on zero? and remainder
-  (define-method (binary-gcd (a <object>) (b <object>))
-                 (if (zero? b)
-                     a
-                   (binary-gcd b (remainder a b))))
+  (defmethod binary-gcd ((a <object>) (b <object>))
+    (if (zero? b)
+        a
+      (binary-gcd b (remainder a b))))
 
-  (define-method (binary-gcd (a <int>) (b <int>))
-                 (%gcd a b))
+  (defmethod binary-gcd ((a <int>) (b <int>))
+    (%gcd a b))
 
   (deflocal %abs abs)
 
-  (define-generic (abs a))
+  (defgeneric abs (a))
 
-  (define-method (abs (a <number>))
-                 (%abs a))
+  (defmethod abs ((a <number>))
+    (%abs a))
 
-  (define-generic (pow (a <number>) (b <number>)))
+  (defgeneric pow ((a <number>) (b <number>)))
 
-  (define-method (pow (a <number>) (b <number>))
-                 (expt a b))
+  (defmethod pow ((a <number>) (b <number>))
+    (expt a b))
 
-  (define-method (pow (a <integer>) (b <integer>))
-                 (cond ((>= b 0)
-                        (cond ((= b 0) 1)
-                              ((= b 1) a)
-                              (t (int-pow a b 1))))
-                       ((= a 1) 1)
-                       ((= a -1) (if (even? b) 1 -1))
-                       (t (expt a b))))
+  (defmethod pow ((a <integer>) (b <integer>))
+    (cond ((>= b 0)
+           (cond ((= b 0) 1)
+                 ((= b 1) a)
+                 (t (int-pow a b 1))))
+          ((= a 1) 1)
+          ((= a -1) (if (even? b) 1 -1))
+          (t (expt a b))))
 
-  (define (int-pow a b sofar)
-          (cond ((> b 1)
-                 (int-pow (* a a) (quotient b 2) (if (odd? b) (* a sofar) sofar)))
-                ((= b 1) (* a sofar))
-                (t sofar)))
+  (defun int-pow (a b sofar)
+    (cond ((> b 1)
+           (int-pow (* a a) (quotient b 2) (if (odd? b) (* a sofar) sofar)))
+          ((= b 1) (* a sofar))
+          (t sofar)))
 
   (deflocal %zero? zero?)
 
-  (define-generic (zero? a))
+  (defgeneric zero? (a))
 
-  (define-method (zero? (a <number>))
-                 (%zero? a))
+  (defmethod zero? ((a <number>))
+    (%zero? a))
 
   (deflocal %quotient quotient)
 
-  (define-generic (quotient a b))
+  (defgeneric quotient (a b))
 
-  (define-method (quotient (a <integer>) (b <integer>))
-                 (%quotient a b))
+  (defmethod quotient ((a <integer>) (b <integer>))
+    (%quotient a b))
 
   (deflocal %remainder remainder)
 
-  (define-generic (remainder a b))
+  (defgeneric remainder (a b))
 
-  (define-method (remainder (a <integer>) (b <integer>))
-                 (%remainder a b))
+  (defmethod remainder ((a <integer>) (b <integer>))
+    (%remainder a b))
 
   )

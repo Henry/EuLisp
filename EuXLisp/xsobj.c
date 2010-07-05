@@ -247,7 +247,7 @@ LVAL find_key(LVAL key, LVAL inits, LVAL deefault)
     for (; inits; inits = cdr(cdr(inits)))
     {
         if (cdr(inits) == NIL)
-            xlcerror("odd-length init list", intl, s_telos_error);
+            xlcerror("odd-size init list", intl, s_telos_error);
         if (car(inits) == key)
             return car(cdr(inits));
     }
@@ -385,7 +385,7 @@ void xinitialize_object()
     else
     {
         if ((length(inits) & 1) == 1)
-            xlcerror("odd-length init list in initialize", inits,
+            xlcerror("odd-size init list in initialize", inits,
             s_telos_error);
 
         cls = class_of(xlval);
@@ -1010,13 +1010,16 @@ static LVAL init_class(int type, char *name, LVAL super, LVAL absp)
     setivar(super, SUBCLASSES, cons(cl, getivar(super, SUBCLASSES)));
 
     if (type >= 0)
+    {
         setelement(class_vector, type, cl);
+    }
 
     return cl;
 }
 
 static void init_builtin_classes()
 {
+    LVAL collection_cl, sequence_cl, character_sequence_cl;
     LVAL list_cl, integer_cl, float_cl, function_cl, simplefun_cl;
     LVAL number_cl, symbol_cl, stream_cl, vector_cl, char_cl;
     LVAL generic_cl, method_cl, slot_cl, table_cl, string_cl;
@@ -1024,7 +1027,12 @@ static void init_builtin_classes()
     // incl. NULLTYPE, KEYWORD, ISTREAM, OSTREAM, IOSTREAM
     class_vector = newvector(NTYPES + EXTRA_TYPES);
 
-    list_cl = init_class(-1, "<list>", object, true);
+    collection_cl = init_class(-1, "<collection>", object, true);
+    sequence_cl = init_class(-1, "<sequence>", collection_cl, true);
+    character_sequence_cl = init_class(-1, "<character-sequence>", sequence_cl, true);
+    string_cl = init_class(STRING, "<string>", character_sequence_cl, NIL);
+    vector_cl = init_class(VECTOR, "<vector>", sequence_cl, NIL);
+    list_cl = init_class(-1, "<list>", sequence_cl, true);
     init_class(CONS, "<cons>", list_cl, NIL);
     init_class(NTYPES, "<null>", list_cl, NIL);
 
@@ -1036,16 +1044,15 @@ static void init_builtin_classes()
 
     symbol_cl = init_class(SYMBOL, "<symbol>", object, NIL);
     init_class(KEYWORD, "<keyword>", symbol_cl, NIL);
-    string_cl = init_class(-1, "<string>", object, true);
-    init_class(STRING, "<simple-string>", string_cl, NIL);
+
     stream_cl = init_class(STREAM, "<stream>", object, true);
     init_class(ISTREAM, "<input-stream>", stream_cl, NIL);
     init_class(OSTREAM, "<output-stream>", stream_cl, NIL);
     init_class(IOSTREAM, "<i/o-stream>", stream_cl, NIL);
-    vector_cl = init_class(-1, "<vector>", object, true);
-    init_class(VECTOR, "<simple-vector>", vector_cl, NIL);
+
     char_cl = init_class(-1, "<char>", object, true);
     init_class(CHAR, "<simple-char>", char_cl, NIL);
+
     init_class(PROMISE, "<promise>", object, NIL);
     init_class(ENV, "<env>", object, NIL);
     init_class(CODE, "<code>", object, NIL);

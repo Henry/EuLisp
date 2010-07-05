@@ -53,7 +53,6 @@
                  obj)
 
   ((setter converter) <string> converter->string)
-  ((setter converter) <simple-string> converter->string)
 
   (define-generic (converter->symbol obj))
   (define-method (converter->symbol (obj <string>))
@@ -81,7 +80,7 @@
 
   (define-generic (converter->cons obj))
   (define-method (converter->cons (obj <vector>))
-                 (if (= (vector-length obj) 0)
+                 (if (= (vector-size obj) 0)
                      (no-converter obj <cons>)
                    (vector->list obj)))
   (define-method (converter->cons (obj <string>))
@@ -100,7 +99,7 @@
 
   (define-generic (converter->null obj))
   (define-method (converter->null (obj <vector>))
-                 (if (= (vector-length obj) 0)
+                 (if (= (vector-size obj) 0)
                      ()
                    (no-converter obj <null>)))
   (define-method (converter->null (obj <string>))
@@ -128,7 +127,6 @@
                  obj)
 
   ((setter converter) <vector> converter->vector)
-  ((setter converter) <simple-vector> converter->vector)
 
   (define-generic (converter->char obj))
   (define-method (converter->char (obj <integer>))
@@ -136,7 +134,7 @@
   (define-method (converter->char (obj <char>))
                  obj)
   (define-method (converter->char (obj <string>))
-                 (if (= (string-length obj) 1)
+                 (if (= (string-size obj) 1)
                      (string-ref obj 0)
                    (no-converter obj <string>)))
 

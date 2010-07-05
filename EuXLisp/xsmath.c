@@ -396,6 +396,9 @@ static LVAL binary(int fcn)
                     case 'E':
                         fval = pow(fval, farg);
                         break;
+                    case 'R':
+                        fval = fmod(fval, farg);
+                        break;
                     default:
                         badfop();
                 }
@@ -411,6 +414,7 @@ static LVAL binary(int fcn)
         case 'F':
             return (cvflonum(fval));
     }
+
     return (NIL);       // never reached
 }
 

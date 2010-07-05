@@ -60,7 +60,7 @@
 // FLOTYPE      data type for floating point numbers (float)
 // FFMT         printf format for floating point numbers (%.15g)
 
-// default important word-length dependent definitions
+// default important word-size dependent definitions
 #if WORD_LENGTH==32 // 32bit OS
 #   define AFMT             "%x"
 #   define OFFTYPE         int

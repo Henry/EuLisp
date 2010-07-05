@@ -394,7 +394,7 @@
 
   (define-method (fill (s <string>) o . k)
                  (cond ((null? k)
-                        (fill-string s o 0 (string-length s)))
+                        (fill-string s o 0 (string-size s)))
                        ((collection? (car k))
                         (fill-keyed-string s o (car k)))
                        ((and (integer? (car k))
@@ -439,7 +439,7 @@
                    ()))
 
   (define-method (size (s <string>))
-                 (string-length s))
+                 (string-size s))
 
   ;; vectors
   (define-method (collection? (l <vector>)) t)
@@ -476,11 +476,11 @@
                  (vector-set! v n e))
 
   (define-method (empty? (v <vector>))
-                 (= (vector-length v) 0))
+                 (= (vector-size v) 0))
 
   (define-method (fill (v <vector>) o . k)
                  (cond ((null? k)
-                        (fill-vector v o 0 (vector-length v)))
+                        (fill-vector v o 0 (vector-size v)))
                        ((collection? (car k))
                         (fill-keyed-vector v o (car k)))
                        ((and (integer? (car k))
@@ -520,7 +520,7 @@
                  (convert (reverse-list (convert v <list>)) <vector>))
 
   (define-method (size (v <vector>))
-                 (vector-length v))
+                 (vector-size v))
 
   ;; tables
   (define-method (collection? (l <table>)) t)
@@ -569,7 +569,7 @@
                  (table-set! t key v))
 
   (define-method (empty? (t <table>))
-                 (= (table-length t) 0))
+                 (= (table-size t) 0))
 
   (define-method (fill (t <table>) o . k)
                  (cond ((null? k)
@@ -618,7 +618,7 @@
                    ()))
 
   (define-method (size (t <table>))
-                 (table-length t))
+                 (table-size t))
 
   (define-generic (slice c s e))
 

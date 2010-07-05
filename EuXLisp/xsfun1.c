@@ -878,17 +878,17 @@ LVAL xmakevector()
     return (val);
 }
 
-// xvlength - built-in function 'vector-length'
+// xvlength - built-in function 'vector-size'
 LVAL xvlength()
 {
-    static char *cfn_name = "vector-length";
+    static char *cfn_name = "vector-size";
     LVAL arg;
     arg = xlgavector();
     xllastarg();
     return (cvfixnum((FIXTYPE) getsize(arg)));
 }
 
-// xivlength - built-in function '%vector-length'
+// xivlength - built-in function '%vector-size'
 LVAL xivlength()
 {
     static char *cfn_name = "%VECTOR-LENGTH";

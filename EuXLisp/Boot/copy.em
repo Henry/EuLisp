@@ -57,10 +57,10 @@
                   (cons-copy-loop (cdr c) copy))))
 
   ;; strings
-  (define-method (deep-copy (s <simple-string>))
+  (define-method (deep-copy (s <string>))
                  (shallow-copy s))
 
-  (define-method (shallow-copy (s <simple-string>))
+  (define-method (shallow-copy (s <string>))
                  (list->string (string->list s)))
 
   ;; characters
@@ -71,8 +71,8 @@
                  (integer->char (char->integer c)))
 
   ;; vectors
-  (define-method (deep-copy (v <simple-vector>))
-                 (let ((len (vector-length v) ))
+  (define-method (deep-copy (v <vector>))
+                 (let ((len (vector-size v) ))
                    (vector-copy-loop
                      (make-vector len ())
                      v
@@ -80,8 +80,8 @@
                      len
                      deep-copy)))
 
-  (define-method (shallow-copy (v <simple-vector>))
-                 (let ((len (vector-length v) ))
+  (define-method (shallow-copy (v <vector>))
+                 (let ((len (vector-size v) ))
                    (vector-copy-loop
                      (make-vector len ())
                      v

@@ -115,7 +115,7 @@
   ;; keyword
   (define (mkkeyword inits)
           (let* ((name (find-key string: inits ""))
-                 (len (string-length name)))
+                 (len (string-size name)))
             (if (= len 0)
                 :                             ; null keyword
               (string->symbol
@@ -137,8 +137,8 @@
                 fill))))
 
   (set-class-keywords! <string> '(size: fill-value:))
-  (set-class-keywords! <simple-string> (class-keywords <string>))
-  (table-set! builtin-make-table <simple-string> mkstring)
+  ;;***HGW (set-class-keywords! <string> (class-keywords <string>))
+  (table-set! builtin-make-table <string> mkstring)
 
   ;; input-stream
   (define (mkistream inits)
@@ -165,8 +165,8 @@
             (make-vector size fill)))
 
   (set-class-keywords! <vector> '(size: fill-value:))
-  (set-class-keywords! <simple-vector> (class-keywords <vector>))
-  (table-set! builtin-make-table <simple-vector> mkvector)
+  ;;***HGW (set-class-keywords! <vector> (class-keywords <vector>))
+  (table-set! builtin-make-table <vector> mkvector)
 
   ;; char
   (define (mkchar inits)
@@ -248,7 +248,7 @@
           (if (not (symbol? name))
               (raise-telos-error "class name not a symbol" name))
           (let* ((str (symbol->string name))
-                 (len (string-length str)))
+                 (len (string-size str)))
             (if (and (> len 1)
                      (eql (string-ref str 0) #\<)
                      (eql (string-ref str (- len 1)) #\>))

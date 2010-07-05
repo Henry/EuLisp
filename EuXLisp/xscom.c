@@ -3752,7 +3752,7 @@ static void do_readers(LVAL classname, LVAL slots)
             {
                 if (cdr(slotl) == NIL)
                 {
-                    xlcerror("odd-length slot init list", slot, s_telos_error);
+                    xlcerror("odd-size slot init list", slot, s_telos_error);
                 }
                 if (car(slotl) == s_reader)
                 {
@@ -3774,7 +3774,7 @@ static void do_writers(LVAL classname, LVAL slots)
             {
                 if (cdr(slotl) == NIL)
                 {
-                    xlcerror("odd-length slot init list", slot, s_telos_error);
+                    xlcerror("odd-size slot init list", slot, s_telos_error);
                 }
                 if (car(slotl) == s_writer)
                 {
@@ -3828,7 +3828,7 @@ static void do_accessors(LVAL classname, LVAL slots)
             {
                 if (cdr(slotl) == NIL)
                 {
-                    xlcerror("odd-length slot init list", slot, s_telos_error);
+                    xlcerror("odd-size slot init list", slot, s_telos_error);
                 }
                 if (car(slotl) == s_accessor)
                 {
@@ -3859,7 +3859,7 @@ static void check_slot_options(LVAL slots)
 
         if ((length(slot) & 1) == 0)
         {
-            xlerror("odd-length slot description in defclass", slot);
+            xlerror("odd-size slot description in defclass", slot);
         }
 
         for (slot = cdr(slot); slot; slot = cdr(cdr(slot)))
@@ -3890,7 +3890,7 @@ static void check_class_options(LVAL classopts)
 {
     if ((length(classopts) & 1) == 1)
     {
-        xlerror("odd-length class option list in defclass", classopts);
+        xlerror("odd-size class option list in defclass", classopts);
     }
 
     for (; classopts; classopts = cdr(cdr(classopts)))

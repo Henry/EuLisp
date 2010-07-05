@@ -842,7 +842,7 @@
               (progn
                 (prin (car syms))
                 (prin ": ")
-                (indent (string-length (symbol->string (car syms))))
+                (indent (string-size (symbol->string (car syms))))
                 (print (vector-ref vals index))
                 (locals-loop (cdr syms) vals (+ index 1)))))
 

@@ -73,10 +73,11 @@
     (cond ((symbol? name)
            (if (symbol-exists? name)
                (progn
-                 (prin "*** redefining ")
-                 (prin name)
-                 (prin " in module ")
-                 (print (current-module))))
+                 (%display "*** redefining ")
+                 (%display name)
+                 (%display " in module ")
+                 (%display (current-module))
+                 (newline)))
            `(define ,(cons name args)
                     ,@body))
           ((definable-name? name)
@@ -116,7 +117,7 @@
                         <compilation-general-error>
                         value: (car body)))
                 ((null? (cdr body))
-                 (error "odd-length keyword list in defgeneric"
+                 (error "odd-size keyword list in defgeneric"
                         <compilation-general-error>
                         value: name))
                 (t (cons
