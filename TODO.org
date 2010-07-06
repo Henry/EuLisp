@@ -31,6 +31,10 @@
 *** DONE Rename =abstractp:= -> =abstract?:=
     CLOSED: [2010-06-29 Tue 21:47]
 *** TODO Add =slice= method for =<vector>=
+*** TODO Reconsider =<int>=, should it be =<fpi>=?
+*** TODO What should =<double-float>= be called?
+    =<double>= as in Youtoo?  If so then the name =<float>= as the abstract base
+    class is odd.
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
@@ -201,7 +205,8 @@
     CLOSED: [2010-07-05 Mon 21:35]
     This is equivalent to =binary%= for integers but returns an <int> for
     <double-float>s, see definition.
-*** TODO Add =time= function
+*** DONE Add =time= function
+    CLOSED: [2010-07-06 Tue 13:01]
     See Youtoo implementation
 *** DONE Switch-off readline when running a module with the =-m= option
     CLOSED: [2010-07-05 Mon 15:19]
@@ -314,7 +319,8 @@
     suggestion to improve consistency and readability and made the corresponding
     changes including "null" -> "null?" and "atom" -> "atom?".
 *** TODO Add a Scheme-style =case= statement
-*** TODO Add a Scheme-style =else=
+*** DONE Add a Scheme-style =else=
+    CLOSED: [2010-07-06 Tue 12:25]
     for the default clause of =cond= and =case= forms.  =else= is simply an
     alias for =t=.
 *** DONE Add =when= and =unless= conditional expressions
