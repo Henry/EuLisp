@@ -8,7 +8,7 @@
 extern LispRef i_aux0_bindings[];
 
 /* Module binding indices */
-#define as_foreign_function_stub_name_fn_index 14 
+#define as_foreign_function_stub_name_fn_index 13 
 #define as_C_library_link_string_fn_index 19 
 #define main_link_string_fn_index 12 
 #define destination_link_string_fn_index 28 
@@ -16,7 +16,7 @@ extern LispRef i_aux0_bindings[];
 #define as_C_library_dir_link_string_fn_index 29 
 #define youtoo_fn_index 22 
 #define vm_link_string_fn_index 18 
-#define as_included_C_file_name_fn_index 13 
+#define as_included_C_file_name_fn_index 14 
 #define full_C_library_dir_link_string_fn_index 25 
 #define untrace_fn_index 11 
 #define as_interface_file_name_fn_index 7 

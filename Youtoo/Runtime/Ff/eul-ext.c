@@ -695,11 +695,11 @@ LispRef eul_string_as_eul_string_ref(LispRef x)
 
 
 ///-----------------------------------------------------------------------------
-/// Processor speed
+/// CPU time
 ///-----------------------------------------------------------------------------
-double eul_ticks_per_second()
+int eul_ticks_per_second()
 {
-    return sysconf(_SC_CLK_TCK);
+    return (int)sysconf(_SC_CLK_TCK);
 }
 
 #define TIMES_SIZE 3
@@ -707,7 +707,7 @@ double eul_ticks_per_second()
 #define TIMES_USER(x) slot_ref(x, 1)
 #define TIMES_SYS(x) slot_ref(x, 2)
 
-LispRef eul_time_start()
+LispRef eul_cpu_time()
 {
     static struct tms buffer;
 
@@ -728,29 +728,6 @@ LispRef eul_time_start()
     TIMES_SYS(res) = c_int_as_eul_int(s);
 
     return res;
-}
-
-LispRef eul_time_stop(LispRef x)
-{
-    static struct tms buffer;
-
-    int r = (int)times(&buffer);
-    if (r == -1)
-    {
-        return eul_nil;
-    }
-
-    int clk_tck = sysconf(_SC_CLK_TCK);
-    int u = (int)buffer.tms_utime;
-    int s = (int)buffer.tms_stime;
-    int old_r = eul_int_as_c_int(TIMES_REAL(x));
-    int old_u = eul_int_as_c_int(TIMES_USER(x));
-    int old_s = eul_int_as_c_int(TIMES_SYS(x));
-    eul_allocate_double(TIMES_REAL(x), (double)(r - old_r) / ((double)clk_tck));
-    eul_allocate_double(TIMES_USER(x), (double)(u - old_u) / ((double)clk_tck));
-    eul_allocate_double(TIMES_SYS(x), (double)(s - old_s) / ((double)clk_tck));
-
-    return x;
 }
 
 

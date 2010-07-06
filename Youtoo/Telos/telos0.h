@@ -14,7 +14,7 @@ extern LispRef telos0_bindings[];
 #define generic_lambda_fn_index 5 
 #define defmethod_fn_index 5 
 #define cond_fn_index 3 
-#define method_lambda_fn_index 3 
+#define method_lambda_fn_index 2 
 #define method_function_lambda_fn_index 6 
 #define defclass_fn_index 11 
 #define defprimclass_fn_index 5 
@@ -24,7 +24,7 @@ extern LispRef telos0_bindings[];
 #define set_global_register_fn_index 6 
 #define and_fn_index 4 
 #define when_fn_index 2 
-#define defmethod_args_fn_index 2 
+#define defmethod_args_fn_index 3 
 #define or_fn_index 8 
 #define named_method_function_lambda_fn_index 10 
 #define defmethod_keywords_fn_index 9 

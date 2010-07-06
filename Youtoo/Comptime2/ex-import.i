@@ -4,7 +4,7 @@
 (definterface ex-import
   (import (i-all sx-obj sx-node p-env cg-interf)
    syntax (_macros _i-aux0 _sx-obj0)
-   full-import (i-error i-notify i-param i-level1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level1 aux-table i-all sx-obj2 sx-obj1 sx-obj p-env i-ffi sx-node i-modify cg-interf)
+   full-import (i-error i-notify i-param i-level1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream double double1 float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level1 aux-table i-all sx-obj2 sx-obj1 sx-obj p-env i-ffi sx-node i-modify cg-interf)
    export (
     ((name . import-module) (pos . 7) (origin ex-import . import-module))
     ((name . expand-import) (pos . 6) (origin ex-import . expand-import))

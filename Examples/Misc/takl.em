@@ -36,7 +36,7 @@
                (shorter? (cdr x)
                          (cdr y)))))
 
-  (time (mas |18l| |12l| |6l|) stdout)
+  (time-execution (mas |18l| |12l| |6l|) stdout)
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

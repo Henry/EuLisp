@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 06 July 2010, 11:48:18
+  Generated 06 July 2010, 21:02:55
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -23,8 +23,8 @@ youtoo Functions
   != 7 compare !=
   % 15 number %
   * 23 number *
-  *absent* 47 boot1 *absent*
-  *argc* 29 boot1 *argc*
+  *absent* 46 boot1 *absent*
+  *argc* 28 boot1 *argc*
   *argv* 26 boot1 *argv*
   *backtrace-nframes* 31 boot *backtrace-nframes*
   *callback-vector* 3 callback *callback-vector*
@@ -33,7 +33,7 @@ youtoo Functions
   *default-error-handler* 3 condition *default-error-handler*
   *dispatch-macro-character-table* 17 read *dispatch-macro-character-table*
   *error* 13 boot *error*
-  *open-file-streams* 37 stream2 *open-file-streams*
+  *open-file-streams* 36 stream2 *open-file-streams*
   *open-file-streams*-lock 12 stream2 *open-file-streams*-lock
   *random-max* 3 random *random-max*
   *stack-nvalues* 9 boot *stack-nvalues*
@@ -98,7 +98,7 @@ youtoo Functions
   <symbol> 5 mop-class <symbol>
   <table> 4 table1 <table>
   <thread> 8 thread <thread>
-  <vector> 8 vector <vector>
+  <vector> 9 vector <vector>
   = 2 compare =
   > 4 compare >
   >= 11 compare >=
@@ -113,14 +113,14 @@ youtoo Functions
   abs 20 number abs
   accumulate 23 collect accumulate
   accumulate-list 26 list accumulate-list
-  accumulate-vector 11 vector accumulate-vector
+  accumulate-vector 13 vector accumulate-vector
   accumulate1 12 collect accumulate1
   accumulate1-list 24 list accumulate1-list
-  accumulate1-vector 6 vector accumulate1-vector
+  accumulate1-vector 7 vector accumulate1-vector
   add-method 8 mop-meth add-method
   add-subclass 9 mop-defcl add-subclass
   all1-table? 3 table all1-table?
-  all1-vector? 9 vector all1-vector?
+  all1-vector? 10 vector all1-vector?
   all? 16 collect all?
   allocate 8 mop-gf allocate
   alnump 8 character alnump
@@ -137,7 +137,7 @@ youtoo Functions
   as-proper-list 16 list as-proper-list
   as-uppercase 6 character as-uppercase
   assoc-list-ref 20 boot assoc-list-ref
-  atom? 37 boot1 atom?
+  atom? 36 boot1 atom?
   backtrace 8 boot backtrace
   binary% 6 number binary%
   binary* 12 number binary*
@@ -171,7 +171,7 @@ youtoo Functions
   cadr 30 list cadr
   call/ep 2 let-cc call/ep
   call1/cc 18 thread call1/cc
-  car 30 boot1 car
+  car 29 boot1 car
   cdaaar 4 list cdaaar
   cdaadr 41 list cdaadr
   cdaar 33 list cdaar
@@ -186,11 +186,11 @@ youtoo Functions
   cddddr 2 list cddddr
   cdddr 43 list cdddr
   cddr 20 list cddr
-  cdr 36 boot1 cdr
+  cdr 35 boot1 cdr
   ceiling 10 float ceiling
   cerror 3 format cerror
   character-as-string 11 character character-as-string
-  character? 34 boot1 character?
+  character? 33 boot1 character?
   class-abstract? 74 mop-class class-abstract?
   class-code 19 mop-class class-code
   class-direct-subclasses 62 mop-class class-direct-subclasses
@@ -239,7 +239,7 @@ youtoo Functions
   cons-keywords 77 mop-class cons-keywords
   cons-slot-defaults 40 mop-class cons-slot-defaults
   cons-slots 46 mop-class cons-slots
-  cons? 44 boot1 cons?
+  cons? 43 boot1 cons?
   control-block-buffer 32 stream2 control-block-buffer
   control-block-buffer-cnt 47 stream2 control-block-buffer-cnt
   control-block-buffer-pos 11 stream2 control-block-buffer-pos
@@ -250,9 +250,10 @@ youtoo Functions
   convert 2 convert convert
   converter 13 mop-class converter
   cpl-subclass? 11 mop-inspect cpl-subclass?
+  cpu-time 13 boot1 cpu-time
   current-thread 22 thread current-thread
   current-thread-queue 24 thread current-thread-queue
-  dec 46 boot1 dec
+  dec 45 boot1 dec
   deep-copy 3 copy deep-copy
   delete 26 collect delete
   digit? 7 character digit?
@@ -263,25 +264,28 @@ youtoo Functions
   do1-list-last-special 15 list do1-list-last-special
   do1-string 10 string do1-string
   do1-table 9 table do1-table
-  do1-vector 13 vector do1-vector
+  do1-vector 15 vector do1-vector
   do2-list 22 list do2-list
+  do2-vector 5 vector do2-vector
   dot 19 read dot
+  double-binary-gcd 2 double double-binary-gcd
+  double-binary-lcm 7 double double-binary-lcm
   double? 6 float double?
   dynamic-variable-ref 3 dynamic dynamic-variable-ref
   element 20 collect element
-  else 13 boot1 else
+  else 14 boot1 else
   emptyp 3 collect emptyp
   end-of-stream 19 stream2 end-of-stream
   ensure-slot-reader 2 mop-access ensure-slot-reader
   ensure-slot-writer 6 mop-access ensure-slot-writer
   eos 6 read eos
   eos-default-value 6 stream2 eos-default-value
-  eq 21 boot1 eq
-  eql 45 boot1 eql
+  eq 22 boot1 eq
+  eql 44 boot1 eql
   error 12 boot error
   error-no-applicable-methods 15 mop-gf error-no-applicable-methods
   even? 5 integer even?
-  exit 19 boot1 exit
+  exit 20 boot1 exit
   file-control-block? 25 stream2 file-control-block?
   file-lookup 17 stream file-lookup
   file-stream? 49 stream2 file-stream?
@@ -310,7 +314,7 @@ youtoo Functions
   generic-connect 44 stream2 generic-connect
   generic-function-discriminating-function 35 mop-class generic-function-discriminating-function
   generic-function-domain 59 mop-class generic-function-domain
-  generic-function-method-cache 56 mop-class generic-function-method-cache
+  generic-function-method-cache 57 mop-class generic-function-method-cache
   generic-function-method-class 48 mop-class generic-function-method-class
   generic-function-method-keywords 11 mop-class generic-function-method-keywords
   generic-function-method-lookup-function 31 mop-class generic-function-method-lookup-function
@@ -320,8 +324,8 @@ youtoo Functions
   generic-read 43 stream2 generic-read
   generic-write 28 stream2 generic-write
   gensym 6 symbol gensym
-  getenv 18 boot1 getenv
-  gf-keywords 57 mop-class gf-keywords
+  getenv 19 boot1 getenv
+  gf-keywords 56 mop-class gf-keywords
   gf-reset-cache 3 mop-gf gf-reset-cache
   gf-slot-defaults 37 mop-class gf-slot-defaults
   gf-slots 79 mop-class gf-slots
@@ -330,29 +334,31 @@ youtoo Functions
   handler? 8 handler handler?
   hash-table? 13 table1 hash-table?
   hostname 3 stream1 hostname
-  inc 20 boot1 inc
+  inc 21 boot1 inc
   init-class 3 mop-init init-class
   init-list-ref 29 boot init-list-ref
   initialize 12 mop-gf initialize
   install-callback 4 callback install-callback
-  int-binary% 33 boot1 %
-  int-binary* 35 boot1 *
-  int-binary+ 14 boot1 +
-  int-binary- 15 boot1 -
-  int-binary-mod 41 boot1 mod
+  int-binary% 32 boot1 %
+  int-binary* 34 boot1 *
+  int-binary+ 15 boot1 +
+  int-binary- 16 boot1 -
+  int-binary-mod 40 boot1 mod
   int-binary/ 12 boot1 /
-  int-binary< 43 boot1 <
+  int-binary< 42 boot1 <
   int-binary= 11 boot1 =
-  int-zero? 32 boot1 int-zero?
-  int? 31 boot1 int?
+  int-zero? 31 boot1 int-zero?
+  int? 30 boot1 int?
   integer? 4 integer integer?
   keyword-name 7 mop-class keyword-name
   keyword? 2 symbol keyword?
   lcm 22 number lcm
+  least-negative-double-float 5 double least-negative-double-float
+  least-positive-double-float 4 double least-positive-double-float
   lispin 13 read lispin
   list 25 boot1 list
   list-drop 3 list list-drop
-  list-equal 50 boot1 equal
+  list-equal 49 boot1 equal
   list-ref 23 boot list-ref
   list-remove 17 boot list-remove
   list-remove-duplicates 14 boot list-remove-duplicates
@@ -372,14 +378,15 @@ youtoo Functions
   make-generic-function 16 mop-gf make-generic-function
   make-method 3 mop-meth make-method
   make-space 24 stream make-space
-  make-vector 40 boot1 make-vector
+  make-vector 39 boot1 make-vector
   map 2 collect map
   map1-list 10 boot map1-list
   map1-list-last-special 27 list map1-list-last-special
   map1-string 4 string map1-string
   map1-table 6 table map1-table
-  map1-vector 12 vector map1-vector
+  map1-vector 14 vector map1-vector
   map2-list 17 list map2-list
+  map2-vector 12 vector map2-vector
   mapcan 6 boot mapcan
   max 5 compare max
   member 11 collect member
@@ -397,6 +404,8 @@ youtoo Functions
   min 10 compare min
   mod 18 number mod
   mode-table 5 stream1 mode-table
+  most-negative-double-float 3 double most-negative-double-float
+  most-positive-double-float 6 double most-positive-double-float
   name 8 collect name
   name-keywords 8 mop-class name-keywords
   name-slot-defaults 78 mop-class name-slot-defaults
@@ -408,13 +417,13 @@ youtoo Functions
   number? 24 number number?
   object-keywords 17 mop-class object-keywords
   object-slots 12 mop-class object-slots
-  object? 39 boot1 object?
+  object? 38 boot1 object?
   odd? 3 integer odd?
   open-file-streams 14 stream2 open-file-streams
   output-condition-contents 4 condition output-condition-contents
   output-list-contents 16 stream output-list-contents
   parse 28 read parse
-  permute 15 vector permute
+  permute 17 vector permute
   pop-dynamic-variables 8 dynamic pop-dynamic-variables
   pop-error-handlers 6 dynamic pop-error-handlers
   positive? 3 number positive?
@@ -424,14 +433,14 @@ youtoo Functions
   primitive-allocate 3 mop-prim primitive-allocate
   primitive-class-of 2 mop-prim primitive-class-of
   primitive-find-slot-position 7 mop-inspect primitive-find-slot-position
-  primitive-format 48 boot1 format
+  primitive-format 47 boot1 format
   primitive-metaclass? 6 mop-inspect primitive-metaclass?
-  primitive-prin 38 boot1 prin
+  primitive-prin 37 boot1 prin
   primitive-print 3 boot1 print
   primitive-ref 4 mop-prim primitive-ref
   primitive-slot-value 10 mop-inspect primitive-slot-value
-  primitive-sprin 23 boot1 sprin
-  primitive-sprint 28 boot1 sprint
+  primitive-sprin 24 boot1 sprin
+  primitive-sprint 27 boot1 sprint
   prin 20 stream prin
   prin-address 12 stream prin-address
   prin-char 9 stream prin-char
@@ -456,8 +465,8 @@ youtoo Functions
   reset 18 collect reset
   reverse 25 collect reverse
   reverse-list 25 boot reverse-list
-  reverse-vector 14 vector reverse-vector
-  reverse-vector! 10 vector reverse-vector!
+  reverse-vector 16 vector reverse-vector
+  reverse-vector! 11 vector reverse-vector!
   round 5 float round
   sd-keywords 18 mop-class sd-keywords
   sd-slots 30 mop-class sd-slots
@@ -467,7 +476,7 @@ youtoo Functions
   semaphore? 7 lock semaphore?
   sequence? 10 collect sequence?
   set-dispatch-macro-character 16 read set-dispatch-macro-character
-  setter 42 boot1 setter
+  setter 41 boot1 setter
   sf-direct-slot-defaults 43 mop-class sf-direct-slot-defaults
   sf-direct-slots 38 mop-class sf-direct-slots
   sf-slot-defaults 29 mop-class sf-slot-defaults
@@ -481,7 +490,7 @@ youtoo Functions
   simple-function-code 65 mop-class simple-function-code
   simple-function-environment 47 mop-class simple-function-environment
   simple-function? 4 boot1 simple-function?
-  simple-generic-function? 49 boot1 simple-generic-function?
+  simple-generic-function? 48 boot1 simple-generic-function?
   simple-hash-table? 6 table1 simple-hash-table?
   simple-thread? 39 thread simple-thread?
   size 9 collect size
@@ -494,7 +503,7 @@ youtoo Functions
   slot-required? 9 mop-class slot-required?
   slot-value 7 mop-defcl slot-value
   slot-value-using-slot 10 mop-defcl slot-value-using-slot
-  slot-writer 52 mop-class slot-writer
+  slot-writer 53 mop-class slot-writer
   slotp 13 mop-inspect slotp
   snewline 6 stream snewline
   socket-descriptor 3 socket socket-descriptor
@@ -526,7 +535,7 @@ youtoo Functions
   stream-lock 31 stream2 stream-lock
   stream-mode 17 stream2 stream-mode
   stream-read-action 8 stream2 stream-read-action
-  stream-sink 36 stream2 stream-sink
+  stream-sink 37 stream2 stream-sink
   stream-source 22 stream2 stream-source
   stream-write-action 13 stream2 stream-write-action
   stream? 40 stream2 stream?
@@ -536,18 +545,18 @@ youtoo Functions
   string-empty? 7 string string-empty?
   string-equal 8 string string-equal
   string-ref 9 boot1 string-ref
-  string-size 17 boot1 string-size
+  string-size 18 boot1 string-size
   string-stream-string-list 48 stream2 string-stream-string-list
   string-stream? 15 stream2 string-stream?
-  string? 16 boot1 string?
+  string? 17 boot1 string?
   subclass? 2 mop-inspect subclass?
   substring 6 string substring
   subvector 3 vector subvector
   swrite 3 stream swrite
   symbol-exists? 4 symbol symbol-exists?
   symbol-name 61 mop-class symbol-name
-  symbol? 22 boot1 symbol?
-  system 51 boot1 system
+  symbol? 23 boot1 symbol?
+  system 50 boot1 system
   table-comparator 8 table1 table-comparator
   table-empty? 4 table table-empty?
   table-entries 15 table1 table-entries
@@ -575,21 +584,19 @@ youtoo Functions
   thread-value 5 thread thread-value
   thread? 30 thread thread?
   ticks-per-second 3 event ticks-per-second
-  time-start 27 boot1 time-start
-  time-stop 24 boot1 time-stop
   to-stream 27 stream2 to-stream
   truncate 2 float truncate
   unlock 4 lock unlock
   unquote-mark 8 read unquote-mark
   unquote-splicing-mark 26 read unquote-splicing-mark
   uppercase? 2 character uppercase?
-  vector-append 7 vector vector-append
-  vector-empty? 16 vector vector-empty?
+  vector-append 8 vector vector-append
+  vector-empty? 18 vector vector-empty?
   vector-ref 7 boot1 vector-ref
   vector-size 8 boot1 vector-size
   vector-start 18 read vector-start
   vector-stop 23 read vector-stop
-  vector? 5 vector vector?
+  vector? 6 vector vector?
   wait 2 event wait
   warning 22 boot warning
   write 15 stream write
@@ -601,16 +608,16 @@ youtoo Functions
 
   and 4 boot0 and
   block 6 macros block
-  butlast 12 macros butlast
+  butlast 13 macros butlast
   case 2 macros case
   catch 19 macros catch
   cond 3 boot0 cond
   defclass 11 mop-defcl0 defclass
-  defcondition 15 macros defcondition
+  defcondition 16 macros defcondition
   defgeneric 2 mop-gf0 defgeneric
   defglobal 7 macros defglobal
   defmethod 5 mop-meth0 defmethod
-  defmethod-args 2 mop-meth0 defmethod-args
+  defmethod-args 3 mop-meth0 defmethod-args
   defmethod-body 7 mop-meth0 defmethod-body
   defmethod-domain 4 mop-meth0 defmethod-domain
   defmethod-keywords 9 mop-meth0 defmethod-keywords
@@ -618,21 +625,21 @@ youtoo Functions
   defprimclass 5 mop-defcl0 defprimclass
   dynamic 18 macros dynamic
   dynamic-let 11 macros dynamic-let
-  dynamic-setq 14 macros dynamic-setq
+  dynamic-setq 15 macros dynamic-setq
   generic-lambda 5 mop-gf0 generic-lambda
   get-global-register 5 boot0 get-global-register
   last 5 macros last
   let/cc 4 macros let/cc
   match-let 2 stream0 match-let
   method-function-lambda 6 mop-meth0 method-function-lambda
-  method-lambda 3 mop-meth0 method-lambda
+  method-lambda 2 mop-meth0 method-lambda
   named-method-function-lambda 10 mop-meth0 named-method-function-lambda
   not 9 macros not
   or 8 boot0 or
-  return-from 13 macros return-from
+  return-from 14 macros return-from
   set-global-register 6 boot0 set-global-register
   throw 17 macros throw
-  time 16 macros time
+  time-execution 12 macros time-execution
   unless 7 boot0 unless
   unwind-protect 8 macros unwind-protect
   when 2 boot0 when

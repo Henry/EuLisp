@@ -19,7 +19,7 @@
   (defmethod wait ((x <object>) (timeout <object>))
     (error "wait not yet implemented"))
 
-  (defextern eul_ticks_per_second () <double>)
+  (defextern eul_ticks_per_second () <int>)
   (defconstant ticks-per-second (eul_ticks_per_second))
 
 ;;;-----------------------------------------------------------------------------

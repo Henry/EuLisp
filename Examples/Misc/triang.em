@@ -58,7 +58,7 @@
            ())
           (t ())))
 
-  (time (try 22 1) stdout)
+  (time-execution (try 22 1) stdout)
   (print "triang finished")
 
 ;;;-----------------------------------------------------------------------------

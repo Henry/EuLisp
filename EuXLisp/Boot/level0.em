@@ -259,13 +259,6 @@
       putenv
       tmpfile
 
-      time-start
-      time-stop
-      time
-
-      backtrace
-      backtrace?
-
       ;; Thread
       <thread>
       <simple-thread>
@@ -447,12 +440,11 @@
       module-list
       unintern
 
+      ; EuXLisp specific functions
       enter-module
       !>
       reenter-module
       !>>
-
-      ; EuXLisp utility functions
       transcript-on
       transcript-off
       getarg
@@ -468,17 +460,28 @@
       ;; EuXLisp debugging functions
       trace-on
       trace-off
+      backtrace
+      backtrace?
+
+      ;; EuXLisp/Youtoo compatible Extensions
+      ticks-per-second
+      cpu-time
+      time-execution
       ))
 
-  (defmacro time (expr stream)
+  (defmacro time-execution (expr stream)
     (let ((x (gensym "time"))
           (res (gensym "time")))
-      `(let* ((,x (time-start))
+      `(let* ((,x (cpu-time))
              (,res ,expr))
-         (time-stop ,x)
-         (sformat ,stream
-                  "real: ~a\nuser: ~a\nsystem: ~a\n"
-                  (vector-ref ,x 0) (vector-ref ,x 1) (vector-ref ,x 2))
+         (setq ,x (map (lambda (x y)
+                         (/ (binary- x y)
+                            (convert ticks-per-second <double-float>)))
+                       (cpu-time) ,x))
+         (sprint ,stream
+                "real: "     (vector-ref ,x 0)
+                "\nuser: "   (vector-ref ,x 1)
+                "\nsystem: " (vector-ref ,x 2))
          ,res)))
 
 ;;;-----------------------------------------------------------------------------

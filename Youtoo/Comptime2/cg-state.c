@@ -35,7 +35,7 @@ void initialize_module_cg_state()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_2696, sym_2695, sym_2694, sym_2693, sym_2692, sym_2691, sym_2690, sym_2689, sym_2688, sym_2687, sym_2686, sym_2685, sym_2684, sym_2683, sym_2682, sym_2681, sym_2680, sym_2679, sym_2678, sym_2677, sym_2676, sym_2675, sym_2674, sym_2673, sym_2672, sym_2671, sym_2670, sym_2669, sym_2668, sym_2667, sym_2666, sym_2665, sym_2664, sym_2663, sym_2662, sym_2661, sym_2660, sym_2659, sym_2658, sym_2657, sym_2656, sym_2655, sym_2654, sym_2653, sym_2652, sym_2651, G002650, G002648, G002646, G002644, G002642, G002640, G002638, G002636, G002632, G002630, G002628, G002626, G002624, G002622, G002620, G002618, G002616, G002614, G002612, G002610, G002608, G002606, G002604, G002602, G002600, G002598, G002596, G002594, G002592, G002590, G002588, G002586, G002584, G002582, G002580, G002578, G002576, G002574, G002572, G002570, G002568, G002566, G002564, G002562, G002560, G002558, sym_2556, sym_2555, sym_2554, sym_2553, sym_2552, sym_2551, sym_2550, sym_2549, sym_2540, key_2539, sym_2538, key_2537, sym_2536, key_2535, sym_2534, key_2533, sym_2532, key_2531, sym_2530, key_2529, sym_2528, key_2527, sym_2526, key_2525, sym_2524, sym_2519, key_2518, sym_2517, key_2516, sym_2515, sym_2512, key_2511, sym_2510, key_2509, sym_2508, key_2500, key_2499, key_2498, sym_2497, key_2496, sym_2495, key_2494, sym_2493, key_2492, sym_2491, key_2490, sym_2489, key_2488, sym_2487, key_2486, sym_2485, key_2484, key_2483, sym_2482, key_2481, sym_2480, key_2479, G002478, G002476, G002474, G002472, G002470, G002468, G002466, G002464, G002462, G002460, G002458, G002456, G002454, G002452, G002450, G002448, G002446, G002444, G002442, G002440, G002438, G002436, G002434, G002432, G002430, G002428, G002426, G002424, G002422, G002420;
+  LispRef sym_2696, sym_2695, sym_2694, sym_2693, sym_2692, sym_2691, sym_2690, sym_2689, sym_2688, sym_2687, sym_2686, sym_2685, sym_2684, sym_2683, sym_2682, sym_2681, sym_2680, sym_2679, sym_2678, sym_2677, sym_2676, sym_2675, sym_2674, sym_2673, sym_2672, sym_2671, sym_2670, sym_2669, sym_2668, sym_2667, sym_2666, sym_2665, sym_2664, sym_2663, sym_2662, sym_2661, sym_2660, sym_2659, sym_2658, sym_2657, sym_2656, sym_2655, sym_2654, sym_2653, sym_2652, sym_2651, G002650, G002648, G002646, G002644, G002642, G002638, G002636, G002634, G002632, G002630, G002628, G002626, G002624, G002622, G002620, G002618, G002616, G002614, G002612, G002610, G002608, G002606, G002604, G002602, G002600, G002598, G002596, G002594, G002592, G002590, G002588, G002586, G002584, G002582, G002580, G002578, G002576, G002574, G002572, G002570, G002568, G002566, G002564, G002562, G002560, G002558, sym_2556, sym_2555, sym_2554, sym_2553, sym_2552, sym_2551, sym_2550, sym_2549, sym_2540, key_2539, sym_2538, key_2537, sym_2536, key_2535, sym_2534, key_2533, sym_2532, key_2531, sym_2530, key_2529, sym_2528, key_2527, sym_2526, key_2525, sym_2524, sym_2519, key_2518, sym_2517, key_2516, sym_2515, sym_2512, key_2511, sym_2510, key_2509, sym_2508, key_2500, key_2499, key_2498, sym_2497, key_2496, sym_2495, key_2494, sym_2493, key_2492, sym_2491, key_2490, sym_2489, key_2488, sym_2487, key_2486, sym_2485, key_2484, key_2483, sym_2482, key_2481, sym_2480, key_2479, G002478, G002476, G002474, G002472, G002470, G002468, G002466, G002464, G002462, G002460, G002458, G002456, G002454, G002452, G002450, G002448, G002446, G002444, G002442, G002440, G002438, G002436, G002434, G002432, G002430, G002428, G002426, G002424, G002422, G002420;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 1 is_init: 0 index: 55 binding: (method-C-state?) */
@@ -147,147 +147,147 @@ void initialize_module_cg_state()
   eul_allocate_static_cons(cons_2542, NULL, eul_as_static(cons_2543));
   eul_allocate_static_cons(cons_2541, NULL, eul_as_static(cons_2542));
   /* Byte-vector with size: 760 is_init: 0 index: 145 binding: top-level */
-  static const void *G002477[] = {I(a9,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,85),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,83),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,89),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,90),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,82),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,91),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,92),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,81),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,93),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,94),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,80),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,95),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,96),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,79),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,97),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,98),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,78),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,99),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,100),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,77),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,101),I(24,00,00,00),B(boot1 ,25),I(3c,06,1f,06),I(1f,06,1f,06),I(1f,06,1f,06),I(1f,06,1f,06),I(24,00,00,00),B(boot1 ,25),I(3c,07,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,102),I(23,00,00,00),B(cg_state ,103),I(1f,0c,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,106),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,12),I(2a,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,107),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,76),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,108),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,109),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,75),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,110),I(24,00,00,00),B(boot1 ,25),I(3c,06,1c,1c),I(24,00,00,00),B(boot1 ,25),I(3c,02,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,111),I(23,00,00,00),B(cg_state ,103),I(1f,07,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,112),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,2),I(2a,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,85),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,74),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,89),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,90),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,73),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,91),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,113),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,72),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,114),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,115),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,71),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,116),I(24,00,00,00),B(boot1 ,25),I(3c,06,1f,03),I(1f,03,1f,03),I(1f,03,24,00),B(boot1 ,25),I(3c,04,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,117),I(23,00,00,00),B(cg_state ,103),I(1f,09,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,118),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,38),I(2a,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,119),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,70),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,120),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,121),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,69),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,122),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,123),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,68),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,124),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,125),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,67),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,126),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,127),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,66),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,128),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,129),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,65),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,130),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,131),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,64),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,132),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,133),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,63),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,134),I(24,00,00,00),B(boot1 ,25),I(3c,06,1f,07),I(1f,07,1f,07),I(1f,07,1f,07),I(1f,07,1f,07),I(1f,07,24,00),B(boot1 ,25),I(3c,08,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,135),I(23,00,00,00),B(cg_state ,103),I(1f,0d,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,136),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,20),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,137),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,42),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,138),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,5),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,139),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,31),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,140),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,3),I(2a,24,00,00),B(cg_state ,42),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,42),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,141),I(23,00,00,00),B(cg_state ,62),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,42),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,42),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,12),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,42),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,141),I(23,00,00,00),B(cg_state ,61),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,42),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,42),I(2a,24,00,00),B(cg_state ,12),I(2a,24,00,00),B(cg_state ,5),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,5),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,142),I(23,00,00,00),B(cg_state ,60),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,5),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,5),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,2),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,5),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,142),I(23,00,00,00),B(cg_state ,59),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,5),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,5),I(2a,24,00,00),B(cg_state ,2),I(2a,24,00,00),B(cg_state ,31),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,31),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,143),I(23,00,00,00),B(cg_state ,58),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,31),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,31),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,38),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,31),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,143),I(23,00,00,00),B(cg_state ,57),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,31),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,31),I(2a,24,00,00),B(cg_state ,38),I(2a,24,00,00),B(cg_state ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,144),I(23,00,00,00),B(cg_state ,56),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,20),I(24,00,00,00),B(boot1 ,40),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,144),I(23,00,00,00),B(cg_state ,55),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,3),I(2a,24,00,00),B(cg_state ,20),I(45,61,00,00)};
+  static const void *G002477[] = {I(a9,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,85),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,83),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,89),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,90),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,82),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,91),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,92),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,81),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,93),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,94),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,80),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,95),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,96),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,79),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,97),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,98),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,78),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,99),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,100),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,77),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,101),I(24,00,00,00),B(boot1 ,25),I(3c,06,1f,06),I(1f,06,1f,06),I(1f,06,1f,06),I(1f,06,1f,06),I(24,00,00,00),B(boot1 ,25),I(3c,07,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,102),I(23,00,00,00),B(cg_state ,103),I(1f,0c,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,106),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,30),I(2a,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,107),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,76),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,108),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,109),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,75),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,110),I(24,00,00,00),B(boot1 ,25),I(3c,06,1c,1c),I(24,00,00,00),B(boot1 ,25),I(3c,02,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,111),I(23,00,00,00),B(cg_state ,103),I(1f,07,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,112),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,2),I(2a,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,85),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,74),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,89),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,90),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,73),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,91),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,113),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,72),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,114),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,115),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,71),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,116),I(24,00,00,00),B(boot1 ,25),I(3c,06,1f,03),I(1f,03,1f,03),I(1f,03,24,00),B(boot1 ,25),I(3c,04,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,117),I(23,00,00,00),B(cg_state ,103),I(1f,09,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,118),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,19),I(2a,24,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,25),I(3c,01,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,119),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,70),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,120),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,121),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,69),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,122),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,123),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,68),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,124),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,125),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,67),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,126),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,127),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,66),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,128),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,129),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,65),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,130),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,131),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,64),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,132),I(24,00,00,00),B(boot1 ,25),I(3c,06,23,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,133),I(23,00,00,00),B(cg_state ,86),I(23,00,00,00),B(cg_state ,87),I(23,00,00,00),B(cg_state ,63),I(3b,00,23,00),B(cg_state ,88),I(23,00,00,00),B(cg_state ,134),I(24,00,00,00),B(boot1 ,25),I(3c,06,1f,07),I(1f,07,1f,07),I(1f,07,1f,07),I(1f,07,1f,07),I(1f,07,24,00),B(boot1 ,25),I(3c,08,24,00),B(mop_class ,70),I(23,00,00,00),B(cg_state ,84),I(23,00,00,00),B(cg_state ,135),I(23,00,00,00),B(cg_state ,103),I(1f,0d,23,00),B(cg_state ,104),I(1f,06,23,00),B(cg_state ,105),I(23,00,00,00),B(cg_state ,136),I(24,00,00,00),B(mop_gf ,2),I(3c,09,1b,89),B(cg_state ,37),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,137),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,48),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,138),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,27),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,139),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,14),I(2a,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_state ,140),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,89),B(cg_state ,3),I(2a,24,00,00),B(cg_state ,48),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,48),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,141),I(23,00,00,00),B(cg_state ,62),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,48),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,48),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,30),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,48),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,141),I(23,00,00,00),B(cg_state ,61),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,48),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,48),I(2a,24,00,00),B(cg_state ,30),I(2a,24,00,00),B(cg_state ,27),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,27),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,142),I(23,00,00,00),B(cg_state ,60),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,27),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,27),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,2),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,27),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,142),I(23,00,00,00),B(cg_state ,59),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,27),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,27),I(2a,24,00,00),B(cg_state ,2),I(2a,24,00,00),B(cg_state ,14),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,14),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,143),I(23,00,00,00),B(cg_state ,58),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,14),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,14),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,19),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,14),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,143),I(23,00,00,00),B(cg_state ,57),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,14),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,14),I(2a,24,00,00),B(cg_state ,19),I(2a,24,00,00),B(cg_state ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,144),I(23,00,00,00),B(cg_state ,56),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,3),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(cg_state ,37),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(cg_state ,3),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_state ,144),I(23,00,00,00),B(cg_state ,55),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(cg_state ,3),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(cg_state ,3),I(2a,24,00,00),B(cg_state ,37),I(45,61,00,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 146 binding: code-state-stack-size! */
-  static const void *G002557[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,12),I(09,45,02,00)};
+  static const void *G002557[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,30),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 147 binding: code-state-enclosed-code! */
-  static const void *G002559[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,12),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 147 binding: C-state-code-vector-defs! */
+  static const void *G002559[] = {I(ab,1c,26,00),I(00,00,00,06),I(1d,24,00,00),B(cg_state ,37),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 148 binding: C-state-code-vector-defs! */
-  static const void *G002561[] = {I(ab,1c,26,00),I(00,00,00,06),I(1d,24,00,00),B(cg_state ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 148 binding: C-state-used-module-names? */
+  static const void *G002561[] = {I(aa,84,24,00),B(cg_state ,37),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 149 binding: C-state-used-module-names? */
-  static const void *G002563[] = {I(aa,84,24,00),B(cg_state ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 149 binding: C-state-code-vector-str? */
+  static const void *G002563[] = {I(aa,83,24,00),B(cg_state ,37),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 150 binding: asm-function-state-handle! */
-  static const void *G002565[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,38),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 150 binding: code-state-asm! */
+  static const void *G002565[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(cg_state ,30),I(09,45,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 151 binding: C-state-code-vector-str? */
-  static const void *G002567[] = {I(aa,83,24,00),B(cg_state ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 151 binding: code-state-asm? */
+  static const void *G002567[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(cg_state ,30),I(08,45,00,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 152 binding: C-state-global-index! */
-  static const void *G002569[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 17 is_init: 0 index: 152 binding: make-code-state */
+  static const void *G002569[] = {I(a8,24,00,00),B(symbol ,6),I(3c,00,1c,34),I(00,00,00,0d),I(1c,10,32,00),I(00,00,00,07),I(86,24,00,00),B(cg_state ,30),I(23,00,00,00),B(cg_state ,89),I(1f,03,23,00),B(cg_state ,91),I(1f,04,23,00),B(cg_state ,95),I(82,24,00,00),B(mop_gf ,2),I(3d,07,03,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 153 binding: code-state-asm! */
-  static const void *G002571[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(cg_state ,12),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 153 binding: C-state-globals? */
+  static const void *G002571[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(cg_state ,37),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 154 binding: asm-function-state-binding-name? */
-  static const void *G002573[] = {I(aa,84,24,00),B(cg_state ,38),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 154 binding: code-state-enclosed-code? */
+  static const void *G002573[] = {I(aa,82,24,00),B(cg_state ,30),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 155 binding: code-state-handle? */
-  static const void *G002575[] = {I(aa,26,00,00),I(00,00,00,06),I(24,00,00,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 155 binding: asm-state-init-bytevector? */
+  static const void *G002575[] = {I(aa,83,24,00),B(cg_state ,2),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 156 binding: code-state-asm? */
-  static const void *G002577[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 156 binding: C-state-initializations! */
+  static const void *G002577[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(cg_state ,37),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 157 binding: asm-function-state-pc! */
-  static const void *G002579[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,38),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 157 binding: code-state-binding-name? */
+  static const void *G002579[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(cg_state ,30),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 158 binding: code-state-stack-vars? */
-  static const void *G002581[] = {I(aa,84,24,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 158 binding: code-state-display! */
+  static const void *G002581[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,30),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 159 binding: asm-function-state-binding-name! */
-  static const void *G002583[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_state ,38),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 159 binding: code-state-stack-vars! */
+  static const void *G002583[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_state ,30),I(09,45,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 160 binding: C-state-global-index? */
-  static const void *G002585[] = {I(aa,82,24,00),B(cg_state ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 160 binding: C-state-statements? */
+  static const void *G002585[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,37),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 161 binding: code-state-stack-size? */
-  static const void *G002587[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 161 binding: C-state-used-module-names! */
+  static const void *G002587[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_state ,37),I(09,45,02,00)};
 
-  /* Byte-vector with size: 11 is_init: 0 index: 162 binding: make-asm-function-state */
-  static const void *G002589[] = {I(ab,24,00,00),B(cg_state ,38),I(23,00,00,00),B(cg_state ,89),I(1f,03,23,00),B(cg_state ,91),I(1f,04,23,00),B(cg_state ,116),I(82,24,00,00),B(mop_gf ,2),I(3d,07,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 162 binding: C-state-globals! */
+  static const void *G002589[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(cg_state ,37),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 163 binding: asm-state-bytevectors! */
-  static const void *G002591[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,2),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 163 binding: asm-function-state-handle? */
+  static const void *G002591[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,19),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 164 binding: C-state-globals? */
-  static const void *G002593[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(cg_state ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 164 binding: C-state-code-vector-defs? */
+  static const void *G002593[] = {I(aa,26,00,00),I(00,00,00,06),I(24,00,00,00),B(cg_state ,37),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 165 binding: asm-state-bytevectors? */
-  static const void *G002595[] = {I(aa,82,24,00),B(cg_state ,2),I(08,45,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 165 binding: C-state-code-vector-str! */
+  static const void *G002595[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,37),I(09,45,02,00)};
 
-  /* Byte-vector with size: 17 is_init: 0 index: 166 binding: make-code-state */
-  static const void *G002597[] = {I(a8,24,00,00),B(symbol ,6),I(3c,00,1c,34),I(00,00,00,0d),I(1c,10,32,00),I(00,00,00,07),I(86,24,00,00),B(cg_state ,12),I(23,00,00,00),B(cg_state ,89),I(1f,03,23,00),B(cg_state ,91),I(1f,04,23,00),B(cg_state ,95),I(82,24,00,00),B(mop_gf ,2),I(3d,07,03,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 166 binding: asm-state-init-bytevector! */
+  static const void *G002597[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,2),I(09,45,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 167 binding: asm-function-state-code? */
-  static const void *G002599[] = {I(aa,83,24,00),B(cg_state ,38),I(08,45,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 167 binding: code-state-enclosed-code! */
+  static const void *G002599[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,30),I(09,45,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 168 binding: asm-state-init-bytevector? */
-  static const void *G002601[] = {I(aa,83,24,00),B(cg_state ,2),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 168 binding: asm-function-state-handle! */
+  static const void *G002601[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,19),I(09,45,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 169 binding: code-state-enclosed-code? */
-  static const void *G002603[] = {I(aa,82,24,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 169 binding: C-state-global-index! */
+  static const void *G002603[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,37),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 170 binding: asm-function-state-code! */
-  static const void *G002605[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,38),I(09,45,02,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 170 binding: asm-function-state-binding-name? */
+  static const void *G002605[] = {I(aa,84,24,00),B(cg_state ,19),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 171 binding: code-state-binding-name! */
-  static const void *G002607[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(cg_state ,12),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 171 binding: code-state-handle? */
+  static const void *G002607[] = {I(aa,26,00,00),I(00,00,00,06),I(24,00,00,00),B(cg_state ,30),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 172 binding: C-state-initializations! */
-  static const void *G002609[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(cg_state ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 172 binding: asm-function-state-pc! */
+  static const void *G002609[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,19),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 173 binding: code-state-binding-name? */
-  static const void *G002611[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 173 binding: code-state-stack-vars? */
+  static const void *G002611[] = {I(aa,84,24,00),B(cg_state ,30),I(08,45,00,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 174 binding: code-state-stack-vars! */
-  static const void *G002613[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_state ,12),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 174 binding: asm-function-state-binding-name! */
+  static const void *G002613[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_state ,19),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 175 binding: code-state-display! */
-  static const void *G002615[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,12),I(09,45,02,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 175 binding: C-state-global-index? */
+  static const void *G002615[] = {I(aa,82,24,00),B(cg_state ,37),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 176 binding: C-state-decls! */
-  static const void *G002617[] = {I(ab,1c,26,00),I(00,00,00,07),I(1d,24,00,00),B(cg_state ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 176 binding: code-state-stack-size? */
+  static const void *G002617[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,30),I(08,45,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 177 binding: code-state-display? */
-  static const void *G002619[] = {I(aa,83,24,00),B(cg_state ,12),I(08,45,00,00)};
+  /* Byte-vector with size: 11 is_init: 0 index: 177 binding: make-asm-function-state */
+  static const void *G002619[] = {I(ab,24,00,00),B(cg_state ,19),I(23,00,00,00),B(cg_state ,89),I(1f,03,23,00),B(cg_state ,91),I(1f,04,23,00),B(cg_state ,116),I(82,24,00,00),B(mop_gf ,2),I(3d,07,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 178 binding: C-state-statements? */
-  static const void *G002621[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 178 binding: asm-state-bytevectors! */
+  static const void *G002621[] = {I(ab,1c,82,1d),I(24,00,00,00),B(cg_state ,2),I(09,45,02,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 179 binding: C-state-used-module-names! */
-  static const void *G002623[] = {I(ab,1c,84,1d),I(24,00,00,00),B(cg_state ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 179 binding: asm-state-bytevectors? */
+  static const void *G002623[] = {I(aa,82,24,00),B(cg_state ,2),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 180 binding: C-state-initializations? */
-  static const void *G002625[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(cg_state ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 180 binding: asm-function-state-code? */
+  static const void *G002625[] = {I(aa,83,24,00),B(cg_state ,19),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 181 binding: C-state-globals! */
-  static const void *G002627[] = {I(ab,1c,26,00),I(00,00,00,04),I(1d,24,00,00),B(cg_state ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 4 is_init: 0 index: 181 binding: asm-function-state-code! */
+  static const void *G002627[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,19),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 182 binding: asm-function-state-handle? */
-  static const void *G002629[] = {I(aa,26,00,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,38),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 182 binding: code-state-binding-name! */
+  static const void *G002629[] = {I(ab,1c,26,00),I(00,00,00,05),I(1d,24,00,00),B(cg_state ,30),I(09,45,02,00)};
 
-  eul_allocate_static_string(str_2634, "", 0);
-  eul_allocate_static_cons(cons_2633, eul_as_static(str_2634), NULL);
-  /* Byte-vector with size: 11 is_init: 0 index: 184 binding: make-C-state */
-  static const void *G002631[] = {I(a9,24,00,00),B(cg_state ,20),I(23,00,00,00),B(cg_state ,134),I(84,23,00,00),B(cg_state ,132),I(23,00,00,00),B(cg_state ,183),I(24,00,00,00),B(mop_gf ,2),I(3d,05,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 183 binding: C-state-decls! */
+  static const void *G002631[] = {I(ab,1c,26,00),I(00,00,00,07),I(1d,24,00,00),B(cg_state ,37),I(09,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 185 binding: C-state-statements! */
-  static const void *G002635[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,20),I(09,45,02,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 184 binding: code-state-display? */
+  static const void *G002633[] = {I(aa,83,24,00),B(cg_state ,30),I(08,45,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 186 binding: C-state-code-vector-defs? */
-  static const void *G002637[] = {I(aa,26,00,00),I(00,00,00,06),I(24,00,00,00),B(cg_state ,20),I(08,45,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 185 binding: C-state-initializations? */
+  static const void *G002635[] = {I(aa,26,00,00),I(00,00,00,05),I(24,00,00,00),B(cg_state ,37),I(08,45,00,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 187 binding: C-state-code-vector-str! */
-  static const void *G002639[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,20),I(09,45,02,00)};
+  eul_allocate_static_string(str_2640, "", 0);
+  eul_allocate_static_cons(cons_2639, eul_as_static(str_2640), NULL);
+  /* Byte-vector with size: 11 is_init: 0 index: 187 binding: make-C-state */
+  static const void *G002637[] = {I(a9,24,00,00),B(cg_state ,37),I(23,00,00,00),B(cg_state ,134),I(84,23,00,00),B(cg_state ,132),I(23,00,00,00),B(cg_state ,186),I(24,00,00,00),B(mop_gf ,2),I(3d,05,00,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 188 binding: asm-state-init-bytevector! */
-  static const void *G002641[] = {I(ab,1c,83,1d),I(24,00,00,00),B(cg_state ,2),I(09,45,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 188 binding: C-state-statements! */
+  static const void *G002641[] = {I(ab,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(cg_state ,37),I(09,45,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 189 binding: asm-function-state-pc? */
-  static const void *G002643[] = {I(aa,82,24,00),B(cg_state ,38),I(08,45,00,00)};
+  static const void *G002643[] = {I(aa,82,24,00),B(cg_state ,19),I(08,45,00,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 190 binding: code-state-handle! */
-  static const void *G002645[] = {I(ab,1c,26,00),I(00,00,00,06),I(1d,24,00,00),B(cg_state ,12),I(09,45,02,00)};
+  static const void *G002645[] = {I(ab,1c,26,00),I(00,00,00,06),I(1d,24,00,00),B(cg_state ,30),I(09,45,02,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 191 binding: C-state-decls? */
-  static const void *G002647[] = {I(aa,26,00,00),I(00,00,00,07),I(24,00,00,00),B(cg_state ,20),I(08,45,00,00)};
+  static const void *G002647[] = {I(aa,26,00,00),I(00,00,00,07),I(24,00,00,00),B(cg_state ,37),I(08,45,00,00)};
 
   /* Byte-vector with size: 299 is_init: 1 index: 0 binding: initialize-cg-state */
-  static const void *G002649[] = {I(87,25,00,00),B(cg_state ,1),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_state ,192),I(23,00,00,00),B(cg_state ,191),I(3b,01,25,00),B(cg_state ,54),I(23,00,00,00),B(cg_state ,193),I(23,00,00,00),B(cg_state ,190),I(3b,02,25,00),B(cg_state ,53),I(23,00,00,00),B(cg_state ,194),I(23,00,00,00),B(cg_state ,189),I(3b,01,25,00),B(cg_state ,52),I(23,00,00,00),B(cg_state ,195),I(23,00,00,00),B(cg_state ,188),I(3b,02,25,00),B(cg_state ,51),I(23,00,00,00),B(cg_state ,196),I(23,00,00,00),B(cg_state ,187),I(3b,02,25,00),B(cg_state ,50),I(23,00,00,00),B(cg_state ,197),I(23,00,00,00),B(cg_state ,186),I(3b,01,25,00),B(cg_state ,49),I(23,00,00,00),B(cg_state ,198),I(23,00,00,00),B(cg_state ,185),I(3b,02,25,00),B(cg_state ,48),I(23,00,00,00),B(cg_state ,199),I(23,00,00,00),B(cg_state ,184),I(3b,00,25,00),B(cg_state ,47),I(23,00,00,00),B(cg_state ,200),I(23,00,00,00),B(cg_state ,182),I(3b,01,25,00),B(cg_state ,46),I(23,00,00,00),B(cg_state ,201),I(23,00,00,00),B(cg_state ,181),I(3b,02,25,00),B(cg_state ,45),I(23,00,00,00),B(cg_state ,202),I(23,00,00,00),B(cg_state ,180),I(3b,01,25,00),B(cg_state ,44),I(23,00,00,00),B(cg_state ,203),I(23,00,00,00),B(cg_state ,179),I(3b,02,25,00),B(cg_state ,43),I(86,25,00,00),B(cg_state ,42),I(23,00,00,00),B(cg_state ,204),I(23,00,00,00),B(cg_state ,178),I(3b,01,25,00),B(cg_state ,41),I(23,00,00,00),B(cg_state ,205),I(23,00,00,00),B(cg_state ,177),I(3b,01,25,00),B(cg_state ,40),I(23,00,00,00),B(cg_state ,206),I(23,00,00,00),B(cg_state ,176),I(3b,02,25,00),B(cg_state ,39),I(86,25,00,00),B(cg_state ,38),I(23,00,00,00),B(cg_state ,207),I(23,00,00,00),B(cg_state ,175),I(3b,02,25,00),B(cg_state ,37),I(23,00,00,00),B(cg_state ,208),I(23,00,00,00),B(cg_state ,174),I(3b,02,25,00),B(cg_state ,36),I(23,00,00,00),B(cg_state ,209),I(23,00,00,00),B(cg_state ,173),I(3b,01,25,00),B(cg_state ,35),I(23,00,00,00),B(cg_state ,210),I(23,00,00,00),B(cg_state ,172),I(3b,02,25,00),B(cg_state ,34),I(23,00,00,00),B(cg_state ,211),I(23,00,00,00),B(cg_state ,171),I(3b,02,25,00),B(cg_state ,33),I(23,00,00,00),B(cg_state ,212),I(23,00,00,00),B(cg_state ,170),I(3b,02,25,00),B(cg_state ,32),I(86,25,00,00),B(cg_state ,31),I(23,00,00,00),B(cg_state ,213),I(23,00,00,00),B(cg_state ,169),I(3b,01,25,00),B(cg_state ,30),I(23,00,00,00),B(cg_state ,214),I(23,00,00,00),B(cg_state ,168),I(3b,01,25,00),B(cg_state ,29),I(23,00,00,00),B(cg_state ,215),I(23,00,00,00),B(cg_state ,167),I(3b,01,25,00),B(cg_state ,28),I(23,00,00,00),B(cg_state ,216),I(23,00,00,00),B(cg_state ,166),I(3b,ff,25,00),B(cg_state ,27),I(23,00,00,00),B(cg_state ,217),I(23,00,00,00),B(cg_state ,165),I(3b,01,25,00),B(cg_state ,26),I(23,00,00,00),B(cg_state ,218),I(23,00,00,00),B(cg_state ,164),I(3b,01,25,00),B(cg_state ,25),I(23,00,00,00),B(cg_state ,219),I(23,00,00,00),B(cg_state ,163),I(3b,02,25,00),B(cg_state ,24),I(23,00,00,00),B(cg_state ,220),I(23,00,00,00),B(cg_state ,162),I(3b,02,25,00),B(cg_state ,23),I(23,00,00,00),B(cg_state ,221),I(23,00,00,00),B(cg_state ,161),I(3b,01,25,00),B(cg_state ,22),I(23,00,00,00),B(cg_state ,222),I(23,00,00,00),B(cg_state ,160),I(3b,01,25,00),B(cg_state ,21),I(86,25,00,00),B(cg_state ,20),I(23,00,00,00),B(cg_state ,223),I(23,00,00,00),B(cg_state ,159),I(3b,02,25,00),B(cg_state ,19),I(23,00,00,00),B(cg_state ,224),I(23,00,00,00),B(cg_state ,158),I(3b,01,25,00),B(cg_state ,18),I(23,00,00,00),B(cg_state ,225),I(23,00,00,00),B(cg_state ,157),I(3b,02,25,00),B(cg_state ,17),I(23,00,00,00),B(cg_state ,226),I(23,00,00,00),B(cg_state ,156),I(3b,01,25,00),B(cg_state ,16),I(23,00,00,00),B(cg_state ,227),I(23,00,00,00),B(cg_state ,155),I(3b,01,25,00),B(cg_state ,15),I(23,00,00,00),B(cg_state ,228),I(23,00,00,00),B(cg_state ,154),I(3b,01,25,00),B(cg_state ,14),I(23,00,00,00),B(cg_state ,229),I(23,00,00,00),B(cg_state ,153),I(3b,02,25,00),B(cg_state ,13),I(86,25,00,00),B(cg_state ,12),I(23,00,00,00),B(cg_state ,230),I(23,00,00,00),B(cg_state ,152),I(3b,02,25,00),B(cg_state ,11),I(23,00,00,00),B(cg_state ,231),I(23,00,00,00),B(cg_state ,151),I(3b,01,25,00),B(cg_state ,10),I(23,00,00,00),B(cg_state ,232),I(23,00,00,00),B(cg_state ,150),I(3b,02,25,00),B(cg_state ,9),I(23,00,00,00),B(cg_state ,233),I(23,00,00,00),B(cg_state ,149),I(3b,01,25,00),B(cg_state ,8),I(23,00,00,00),B(cg_state ,234),I(23,00,00,00),B(cg_state ,148),I(3b,02,25,00),B(cg_state ,7),I(23,00,00,00),B(cg_state ,235),I(23,00,00,00),B(cg_state ,147),I(3b,02,25,00),B(cg_state ,6),I(86,25,00,00),B(cg_state ,5),I(23,00,00,00),B(cg_state ,236),I(23,00,00,00),B(cg_state ,146),I(3b,02,25,00),B(cg_state ,4),I(86,25,00,00),B(cg_state ,3),I(86,25,00,00),B(cg_state ,2),I(23,00,00,00),B(cg_state ,237),I(23,00,00,00),B(cg_state ,145),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G002649[] = {I(87,25,00,00),B(cg_state ,1),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_state ,192),I(23,00,00,00),B(cg_state ,191),I(3b,01,25,00),B(cg_state ,54),I(23,00,00,00),B(cg_state ,193),I(23,00,00,00),B(cg_state ,190),I(3b,02,25,00),B(cg_state ,53),I(23,00,00,00),B(cg_state ,194),I(23,00,00,00),B(cg_state ,189),I(3b,01,25,00),B(cg_state ,52),I(23,00,00,00),B(cg_state ,195),I(23,00,00,00),B(cg_state ,188),I(3b,02,25,00),B(cg_state ,51),I(23,00,00,00),B(cg_state ,196),I(23,00,00,00),B(cg_state ,187),I(3b,00,25,00),B(cg_state ,50),I(23,00,00,00),B(cg_state ,197),I(23,00,00,00),B(cg_state ,185),I(3b,01,25,00),B(cg_state ,49),I(86,25,00,00),B(cg_state ,48),I(23,00,00,00),B(cg_state ,198),I(23,00,00,00),B(cg_state ,184),I(3b,01,25,00),B(cg_state ,47),I(23,00,00,00),B(cg_state ,199),I(23,00,00,00),B(cg_state ,183),I(3b,02,25,00),B(cg_state ,46),I(23,00,00,00),B(cg_state ,200),I(23,00,00,00),B(cg_state ,182),I(3b,02,25,00),B(cg_state ,45),I(23,00,00,00),B(cg_state ,201),I(23,00,00,00),B(cg_state ,181),I(3b,02,25,00),B(cg_state ,44),I(23,00,00,00),B(cg_state ,202),I(23,00,00,00),B(cg_state ,180),I(3b,01,25,00),B(cg_state ,43),I(23,00,00,00),B(cg_state ,203),I(23,00,00,00),B(cg_state ,179),I(3b,01,25,00),B(cg_state ,42),I(23,00,00,00),B(cg_state ,204),I(23,00,00,00),B(cg_state ,178),I(3b,02,25,00),B(cg_state ,41),I(23,00,00,00),B(cg_state ,205),I(23,00,00,00),B(cg_state ,177),I(3b,02,25,00),B(cg_state ,40),I(23,00,00,00),B(cg_state ,206),I(23,00,00,00),B(cg_state ,176),I(3b,01,25,00),B(cg_state ,39),I(23,00,00,00),B(cg_state ,207),I(23,00,00,00),B(cg_state ,175),I(3b,01,25,00),B(cg_state ,38),I(86,25,00,00),B(cg_state ,37),I(23,00,00,00),B(cg_state ,208),I(23,00,00,00),B(cg_state ,174),I(3b,02,25,00),B(cg_state ,36),I(23,00,00,00),B(cg_state ,209),I(23,00,00,00),B(cg_state ,173),I(3b,01,25,00),B(cg_state ,35),I(23,00,00,00),B(cg_state ,210),I(23,00,00,00),B(cg_state ,172),I(3b,02,25,00),B(cg_state ,34),I(23,00,00,00),B(cg_state ,211),I(23,00,00,00),B(cg_state ,171),I(3b,01,25,00),B(cg_state ,33),I(23,00,00,00),B(cg_state ,212),I(23,00,00,00),B(cg_state ,170),I(3b,01,25,00),B(cg_state ,32),I(23,00,00,00),B(cg_state ,213),I(23,00,00,00),B(cg_state ,169),I(3b,02,25,00),B(cg_state ,31),I(86,25,00,00),B(cg_state ,30),I(23,00,00,00),B(cg_state ,214),I(23,00,00,00),B(cg_state ,168),I(3b,02,25,00),B(cg_state ,29),I(23,00,00,00),B(cg_state ,215),I(23,00,00,00),B(cg_state ,167),I(3b,02,25,00),B(cg_state ,28),I(86,25,00,00),B(cg_state ,27),I(23,00,00,00),B(cg_state ,216),I(23,00,00,00),B(cg_state ,166),I(3b,02,25,00),B(cg_state ,26),I(23,00,00,00),B(cg_state ,217),I(23,00,00,00),B(cg_state ,165),I(3b,02,25,00),B(cg_state ,25),I(23,00,00,00),B(cg_state ,218),I(23,00,00,00),B(cg_state ,164),I(3b,01,25,00),B(cg_state ,24),I(23,00,00,00),B(cg_state ,219),I(23,00,00,00),B(cg_state ,163),I(3b,01,25,00),B(cg_state ,23),I(23,00,00,00),B(cg_state ,220),I(23,00,00,00),B(cg_state ,162),I(3b,02,25,00),B(cg_state ,22),I(23,00,00,00),B(cg_state ,221),I(23,00,00,00),B(cg_state ,161),I(3b,02,25,00),B(cg_state ,21),I(23,00,00,00),B(cg_state ,222),I(23,00,00,00),B(cg_state ,160),I(3b,01,25,00),B(cg_state ,20),I(86,25,00,00),B(cg_state ,19),I(23,00,00,00),B(cg_state ,223),I(23,00,00,00),B(cg_state ,159),I(3b,02,25,00),B(cg_state ,18),I(23,00,00,00),B(cg_state ,224),I(23,00,00,00),B(cg_state ,158),I(3b,02,25,00),B(cg_state ,17),I(23,00,00,00),B(cg_state ,225),I(23,00,00,00),B(cg_state ,157),I(3b,01,25,00),B(cg_state ,16),I(23,00,00,00),B(cg_state ,226),I(23,00,00,00),B(cg_state ,156),I(3b,02,25,00),B(cg_state ,15),I(86,25,00,00),B(cg_state ,14),I(23,00,00,00),B(cg_state ,227),I(23,00,00,00),B(cg_state ,155),I(3b,01,25,00),B(cg_state ,13),I(23,00,00,00),B(cg_state ,228),I(23,00,00,00),B(cg_state ,154),I(3b,01,25,00),B(cg_state ,12),I(23,00,00,00),B(cg_state ,229),I(23,00,00,00),B(cg_state ,153),I(3b,01,25,00),B(cg_state ,11),I(23,00,00,00),B(cg_state ,230),I(23,00,00,00),B(cg_state ,152),I(3b,ff,25,00),B(cg_state ,10),I(23,00,00,00),B(cg_state ,231),I(23,00,00,00),B(cg_state ,151),I(3b,01,25,00),B(cg_state ,9),I(23,00,00,00),B(cg_state ,232),I(23,00,00,00),B(cg_state ,150),I(3b,02,25,00),B(cg_state ,8),I(23,00,00,00),B(cg_state ,233),I(23,00,00,00),B(cg_state ,149),I(3b,01,25,00),B(cg_state ,7),I(23,00,00,00),B(cg_state ,234),I(23,00,00,00),B(cg_state ,148),I(3b,01,25,00),B(cg_state ,6),I(23,00,00,00),B(cg_state ,235),I(23,00,00,00),B(cg_state ,147),I(3b,02,25,00),B(cg_state ,5),I(23,00,00,00),B(cg_state ,236),I(23,00,00,00),B(cg_state ,146),I(3b,02,25,00),B(cg_state ,4),I(86,25,00,00),B(cg_state ,3),I(86,25,00,00),B(cg_state ,2),I(23,00,00,00),B(cg_state ,237),I(23,00,00,00),B(cg_state ,145),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
@@ -461,13 +461,13 @@ void initialize_module_cg_state()
   eul_allocate_bytevector( G002626,G002625);
   eul_allocate_bytevector( G002628,G002627);
   eul_allocate_bytevector( G002630,G002629);
-  object_class(str_2634) = eul_static_string_class;
-  object_class(cons_2633) = eul_static_cons_class;
-  eul_cdr(cons_2633) = eul_nil;
   eul_allocate_bytevector( G002632,G002631);
+  eul_allocate_bytevector( G002634,G002633);
   eul_allocate_bytevector( G002636,G002635);
+  object_class(str_2640) = eul_static_string_class;
+  object_class(cons_2639) = eul_static_cons_class;
+  eul_cdr(cons_2639) = eul_nil;
   eul_allocate_bytevector( G002638,G002637);
-  eul_allocate_bytevector( G002640,G002639);
   eul_allocate_bytevector( G002642,G002641);
   eul_allocate_bytevector( G002644,G002643);
   eul_allocate_bytevector( G002646,G002645);
@@ -475,47 +475,47 @@ void initialize_module_cg_state()
   eul_intern_symbol(sym_2651,"C-state-decls?");
   eul_intern_symbol(sym_2652,"code-state-handle!");
   eul_intern_symbol(sym_2653,"asm-function-state-pc?");
-  eul_intern_symbol(sym_2654,"asm-state-init-bytevector!");
-  eul_intern_symbol(sym_2655,"C-state-code-vector-str!");
-  eul_intern_symbol(sym_2656,"C-state-code-vector-defs?");
-  eul_intern_symbol(sym_2657,"C-state-statements!");
-  eul_intern_symbol(sym_2658,"make-C-state");
-  eul_intern_symbol(sym_2659,"asm-function-state-handle?");
-  eul_intern_symbol(sym_2660,"C-state-globals!");
-  eul_intern_symbol(sym_2661,"C-state-initializations?");
-  eul_intern_symbol(sym_2662,"C-state-used-module-names!");
-  eul_intern_symbol(sym_2663,"C-state-statements?");
-  eul_intern_symbol(sym_2664,"code-state-display?");
-  eul_intern_symbol(sym_2665,"C-state-decls!");
-  eul_intern_symbol(sym_2666,"code-state-display!");
-  eul_intern_symbol(sym_2667,"code-state-stack-vars!");
-  eul_intern_symbol(sym_2668,"code-state-binding-name?");
-  eul_intern_symbol(sym_2669,"C-state-initializations!");
-  eul_intern_symbol(sym_2670,"code-state-binding-name!");
-  eul_intern_symbol(sym_2671,"asm-function-state-code!");
-  eul_intern_symbol(sym_2672,"code-state-enclosed-code?");
-  eul_intern_symbol(sym_2673,"asm-state-init-bytevector?");
-  eul_intern_symbol(sym_2674,"asm-function-state-code?");
-  eul_intern_symbol(sym_2675,"make-code-state");
-  eul_intern_symbol(sym_2676,"asm-state-bytevectors?");
-  eul_intern_symbol(sym_2677,"C-state-globals?");
-  eul_intern_symbol(sym_2678,"asm-state-bytevectors!");
-  eul_intern_symbol(sym_2679,"make-asm-function-state");
-  eul_intern_symbol(sym_2680,"code-state-stack-size?");
-  eul_intern_symbol(sym_2681,"C-state-global-index?");
-  eul_intern_symbol(sym_2682,"asm-function-state-binding-name!");
-  eul_intern_symbol(sym_2683,"code-state-stack-vars?");
-  eul_intern_symbol(sym_2684,"asm-function-state-pc!");
-  eul_intern_symbol(sym_2685,"code-state-asm?");
-  eul_intern_symbol(sym_2686,"code-state-handle?");
-  eul_intern_symbol(sym_2687,"asm-function-state-binding-name?");
-  eul_intern_symbol(sym_2688,"code-state-asm!");
-  eul_intern_symbol(sym_2689,"C-state-global-index!");
-  eul_intern_symbol(sym_2690,"C-state-code-vector-str?");
-  eul_intern_symbol(sym_2691,"asm-function-state-handle!");
-  eul_intern_symbol(sym_2692,"C-state-used-module-names?");
-  eul_intern_symbol(sym_2693,"C-state-code-vector-defs!");
-  eul_intern_symbol(sym_2694,"code-state-enclosed-code!");
+  eul_intern_symbol(sym_2654,"C-state-statements!");
+  eul_intern_symbol(sym_2655,"make-C-state");
+  eul_intern_symbol(sym_2656,"C-state-initializations?");
+  eul_intern_symbol(sym_2657,"code-state-display?");
+  eul_intern_symbol(sym_2658,"C-state-decls!");
+  eul_intern_symbol(sym_2659,"code-state-binding-name!");
+  eul_intern_symbol(sym_2660,"asm-function-state-code!");
+  eul_intern_symbol(sym_2661,"asm-function-state-code?");
+  eul_intern_symbol(sym_2662,"asm-state-bytevectors?");
+  eul_intern_symbol(sym_2663,"asm-state-bytevectors!");
+  eul_intern_symbol(sym_2664,"make-asm-function-state");
+  eul_intern_symbol(sym_2665,"code-state-stack-size?");
+  eul_intern_symbol(sym_2666,"C-state-global-index?");
+  eul_intern_symbol(sym_2667,"asm-function-state-binding-name!");
+  eul_intern_symbol(sym_2668,"code-state-stack-vars?");
+  eul_intern_symbol(sym_2669,"asm-function-state-pc!");
+  eul_intern_symbol(sym_2670,"code-state-handle?");
+  eul_intern_symbol(sym_2671,"asm-function-state-binding-name?");
+  eul_intern_symbol(sym_2672,"C-state-global-index!");
+  eul_intern_symbol(sym_2673,"asm-function-state-handle!");
+  eul_intern_symbol(sym_2674,"code-state-enclosed-code!");
+  eul_intern_symbol(sym_2675,"asm-state-init-bytevector!");
+  eul_intern_symbol(sym_2676,"C-state-code-vector-str!");
+  eul_intern_symbol(sym_2677,"C-state-code-vector-defs?");
+  eul_intern_symbol(sym_2678,"asm-function-state-handle?");
+  eul_intern_symbol(sym_2679,"C-state-globals!");
+  eul_intern_symbol(sym_2680,"C-state-used-module-names!");
+  eul_intern_symbol(sym_2681,"C-state-statements?");
+  eul_intern_symbol(sym_2682,"code-state-stack-vars!");
+  eul_intern_symbol(sym_2683,"code-state-display!");
+  eul_intern_symbol(sym_2684,"code-state-binding-name?");
+  eul_intern_symbol(sym_2685,"C-state-initializations!");
+  eul_intern_symbol(sym_2686,"asm-state-init-bytevector?");
+  eul_intern_symbol(sym_2687,"code-state-enclosed-code?");
+  eul_intern_symbol(sym_2688,"C-state-globals?");
+  eul_intern_symbol(sym_2689,"make-code-state");
+  eul_intern_symbol(sym_2690,"code-state-asm?");
+  eul_intern_symbol(sym_2691,"code-state-asm!");
+  eul_intern_symbol(sym_2692,"C-state-code-vector-str?");
+  eul_intern_symbol(sym_2693,"C-state-used-module-names?");
+  eul_intern_symbol(sym_2694,"C-state-code-vector-defs!");
   eul_intern_symbol(sym_2695,"code-state-stack-size!");
   eul_intern_symbol(sym_2696,"top-level");
   eul_allocate_bytevector( G002650,G002649);
@@ -655,11 +655,11 @@ void initialize_module_cg_state()
   cg_state_bindings[ 180] = G002626;
   cg_state_bindings[ 181] = G002628;
   cg_state_bindings[ 182] = G002630;
-  cg_state_bindings[ 183] = cons_2633;
-  cg_state_bindings[ 184] = G002632;
+  cg_state_bindings[ 183] = G002632;
+  cg_state_bindings[ 184] = G002634;
   cg_state_bindings[ 185] = G002636;
-  cg_state_bindings[ 186] = G002638;
-  cg_state_bindings[ 187] = G002640;
+  cg_state_bindings[ 186] = cons_2639;
+  cg_state_bindings[ 187] = G002638;
   cg_state_bindings[ 188] = G002642;
   cg_state_bindings[ 189] = G002644;
   cg_state_bindings[ 190] = G002646;

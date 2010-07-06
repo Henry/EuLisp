@@ -9,12 +9,9 @@
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
-#include <sys/types.h>
-#include <time.h>
-#include <sys/time.h>
+#include <errno.h>
 #include <unistd.h>
 #include <sys/times.h>
-#include <errno.h>
 #include "xscheme.h"
 
 #ifdef READLINE
@@ -501,38 +498,9 @@ static void osflushn()
     ostputc('\n');
 }
 
-// time initialisation
-#define GETTIMEOFDAY(x) gettimeofday(x, NULL)
-
-static long time_offset;
-
-// gettimeofday returns microseconds, but milliseconds is more realistic
-#define NOISE 1000
-
-void set_ticks()
+void set_ticks_per_second()
 {
-    struct timeval tp;
-
-    GETTIMEOFDAY(&tp);
-    time_offset = tp.tv_sec;
-    setvalue(xlenter("ticks-per-second"), cvflonum(1e6 / NOISE));
-}
-
-// xtime - get the current time
-LVAL xtime()
-{
-    static char *cfn_name = "current-time";
-    struct timeval tp;
-
-    xllastarg();
-
-    GETTIMEOFDAY(&tp);
-    return cvfixnum(((tp.tv_sec - time_offset) * 1000000 + tp.tv_usec) / NOISE);
-}
-
-LVAL x_ticks_per_second()
-{
-    return cvfixnum(sysconf(_SC_CLK_TCK));
+    setvalue(xlenter("ticks-per-second"), cvfixnum(sysconf(_SC_CLK_TCK)));
 }
 
 #define TIMES_SIZE 3
@@ -540,55 +508,26 @@ LVAL x_ticks_per_second()
 #define TIMES_USER(x) x->n_vdata[1]
 #define TIMES_SYS(x) x->n_vdata[2]
 
-LVAL x_time_start()
+LVAL x_cpu_time()
 {
     static struct tms buffer;
 
     LVAL res = newvector(TIMES_SIZE);
 
-    int r = (int)times(&buffer);
+    FIXTYPE r = (FIXTYPE)times(&buffer);
     if (r == -1)
     {
         return NIL;
     }
 
-    int u = (int)buffer.tms_utime;
-    int s = (int)buffer.tms_stime;
+    FIXTYPE u = (FIXTYPE)buffer.tms_utime;
+    FIXTYPE s = (FIXTYPE)buffer.tms_stime;
 
     TIMES_REAL(res) = cvfixnum(r);
     TIMES_USER(res) = cvfixnum(u);
     TIMES_SYS(res) = cvfixnum(s);
 
     return res;
-}
-
-LVAL x_time_stop()
-{
-    static char *cfn_name = "time-stop";
-
-    static struct tms buffer;
-
-    int r = (int)times(&buffer);
-    if (r == -1)
-    {
-        return NIL;
-    }
-
-    // get the vector
-    LVAL x = xlgavector();
-    xllastarg();
-
-    int clk_tck = sysconf(_SC_CLK_TCK);
-    int u = (int)buffer.tms_utime;
-    int s = (int)buffer.tms_stime;
-    int old_r = (int)getfixnum(TIMES_REAL(x));
-    int old_u = (int)getfixnum(TIMES_USER(x));
-    int old_s = (int)getfixnum(TIMES_SYS(x));
-    TIMES_REAL(x) = cvflonum((double)(r - old_r) / ((double)clk_tck));
-    TIMES_USER(x) = cvflonum((double)(u - old_u) / ((double)clk_tck));
-    TIMES_SYS(x) = cvflonum((double)(s - old_s) / ((double)clk_tck));
-
-    return x;
 }
 
 void check_if_disabled(char *name)

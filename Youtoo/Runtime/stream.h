@@ -43,8 +43,8 @@ extern LispRef stream_bindings[];
 #define _socket__X60_X62_fn_index 8 
 #define snewline_fn_index 6 
 #define _stream_condition__X60_X62_fn_index 38 
-#define _open_file_streams__X42_X42_fn_index 37 
-#define stream_sink_fn_index 36 
+#define _open_file_streams__X42_X42_fn_index 36 
+#define stream_sink_fn_index 37 
 #define reconnect_fn_index 18 
 #define read_into_buffer_fn_index 27 
 #define stream_mode_fn_index 17 

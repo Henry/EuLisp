@@ -37,8 +37,8 @@ extern LispRef stream2_bindings[];
 #define control_block_buffer_cnt_fn_index 47 
 #define _stream_condition__X60_X62_fn_index 38 
 #define _string_stream__X60_X62_fn_index 45 
-#define _open_file_streams__X42_X42_fn_index 37 
-#define stream_sink_fn_index 36 
+#define _open_file_streams__X42_X42_fn_index 36 
+#define stream_sink_fn_index 37 
 #define stream_source_fn_index 22 
 #define reconnect_fn_index 18 
 #define from_stream_fn_index 46 

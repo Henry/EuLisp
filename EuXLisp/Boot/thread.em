@@ -4,8 +4,7 @@
 (defmodule thread
     (import (root telos telosint condcl macros)
      export
-     (
-       <thread> <simple-thread>
+     ( <thread> <simple-thread>
        make-thread thread? thread-reschedule current-thread thread-kill
        thread-queue current-thread thread-start thread-value thread-state
        <thread-condition> <thread-error> <thread-general-error>
@@ -521,32 +520,23 @@
                    (error "waiting on non-running thread"
                           <wait-error>
                           value: thread))
-                  (t (timeout-loop (+ (current-time) interval)
+                  (t (timeout-loop (+ (vector-ref (cpu-time) 0) interval)
                                    (lambda () (eq (thread-state thread) ready:)))
                      (if (eq (thread-state thread) ready:)
                          thread
                        ())))))
 
   (define (timeout-loop timeout test)
-          (if (and (< (current-time) timeout)
+          (if (and (< (vector-ref (cpu-time) 0) timeout)
                    (not (test)))
               (progn
                 (thread-reschedule)
                 (timeout-loop timeout test))))
 
-;;   (define (timeout-loop timeout test)
-;;           (if (and (< (current-time) timeout)
-;;                    (not (test)))
-;;               (progn
-;;                 (if (null? (thread-queue))
-;;                     (pause timeout)
-;;                   (thread-reschedule))
-;;                 (timeout-loop timeout test))))
-
   (define-method (wait (str <stream>) (time <object>))
                  (cond ((null? time) (char-ready? str))
                        ((eq time t) (stream-suspend str))
-                       (t (timeout-loop (+ (current-time) (round time))
+                       (t (timeout-loop (+ (vector-ref (cpu-time) 0) (round time))
                                         (lambda () (char-ready? str)))
                           (char-ready? str))))
 

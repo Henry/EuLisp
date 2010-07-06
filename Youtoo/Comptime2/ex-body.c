@@ -52,17 +52,17 @@ void initialize_module_ex_body()
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 30 is_init: 0 index: 9 binding: complete-variable-node */
-  static const void *G001640[] = {I(aa,23,00,00),B(ex_body ,7),I(24,00,00,00),B(dynamic ,3),I(3c,01,1c,26),I(00,00,00,03),I(24,00,00,00),B(sx_obj2 ,11),I(08,1d,83,24),B(sx_obj2 ,11),I(08,1b,86,0f),I(1d,1c,0f,23),B(ex_body ,8),I(1c,0f,1f,05),I(26,00,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,1c,1c,0f),I(1f,07,1c,1c),I(26,00,00,00),I(00,00,00,06),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,08,24,00),B(ex_expr ,2),I(1c,83,1d,24),B(sx_obj2 ,11),I(09,45,0b,00)};
+  static const void *G001640[] = {I(aa,23,00,00),B(ex_body ,7),I(24,00,00,00),B(dynamic ,3),I(3c,01,1c,26),I(00,00,00,03),I(24,00,00,00),B(sx_obj2 ,28),I(08,1d,83,24),B(sx_obj2 ,28),I(08,1b,86,0f),I(1d,1c,0f,23),B(ex_body ,8),I(1c,0f,1f,05),I(26,00,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,1c,1c,0f),I(1f,07,1c,1c),I(26,00,00,00),I(00,00,00,06),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,08,24,00),B(ex_expr ,2),I(1c,83,1d,24),B(sx_obj2 ,28),I(09,45,0b,00)};
 
   /* Byte-vector with size: 30 is_init: 0 index: 10 binding: complete-constant-node */
-  static const void *G001644[] = {I(aa,23,00,00),B(ex_body ,7),I(24,00,00,00),B(dynamic ,3),I(3c,01,1c,83),I(24,00,00,00),B(sx_obj2 ,22),I(08,1d,82,24),B(sx_obj2 ,29),I(08,87,86,0f),I(1c,1c,0f,1f),I(03,1c,0f,23),B(ex_body ,8),I(1c,0f,1f,06),I(26,00,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,1c,1c,0f),I(1f,08,1c,1c),I(26,00,00,00),I(00,00,00,06),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,09,24,00),B(ex_expr ,2),I(1c,82,1d,24),B(sx_obj2 ,29),I(09,45,0c,00)};
+  static const void *G001644[] = {I(aa,23,00,00),B(ex_body ,7),I(24,00,00,00),B(dynamic ,3),I(3c,01,1c,83),I(24,00,00,00),B(sx_obj2 ,13),I(08,1d,82,24),B(sx_obj2 ,37),I(08,87,86,0f),I(1c,1c,0f,1f),I(03,1c,0f,23),B(ex_body ,8),I(1c,0f,1f,06),I(26,00,00,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,1c,1c,0f),I(1f,08,1c,1c),I(26,00,00,00),I(00,00,00,06),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,09,24,00),B(ex_expr ,2),I(1c,82,1d,24),B(sx_obj2 ,37),I(09,45,0c,00)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 13 binding: set-up-top-level-lambda */
-  static const void *G001646[] = {I(a9,24,00,00),B(sx_obj ,13),I(23,00,00,00),B(ex_body ,11),I(86,86,24,00),B(sx_node ,8),I(3c,04,24,00),B(dynamic ,3),I(24,00,00,00),B(boot1 ,42),I(3c,01,23,00),B(ex_body ,12),I(1d,1d,3c,02),I(2a,1c,45,02)};
+  static const void *G001646[] = {I(a9,24,00,00),B(sx_obj ,30),I(23,00,00,00),B(ex_body ,11),I(86,86,24,00),B(sx_node ,8),I(3c,04,24,00),B(dynamic ,3),I(24,00,00,00),B(boot1 ,41),I(3c,01,23,00),B(ex_body ,12),I(1d,1d,3c,02),I(2a,1c,45,02)};
 
   eul_allocate_static_string(str_1654, "    Top-level forms: ~a", 23);
   /* Byte-vector with size: 31 is_init: 0 index: 18 binding: complete-top-level-forms */
-  static const void *G001650[] = {I(ab,1c,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(sx_obj ,39),I(23,00,00,00),B(ex_body ,14),I(1f,03,23,00),B(ex_body ,15),I(86,24,00,00),B(mop_gf ,2),I(3c,05,23,00),B(ex_body ,16),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,23),B(ex_body ,17),I(1d,0f,1f,03),I(1c,1c,84,1d),I(24,00,00,00),B(sx_obj ,17),I(09,22,02,2a),I(1f,03,24,00),B(ex_expr ,26),I(3c,01,2a,1f),I(04,1d,1c,26),I(00,00,00,06),I(1d,24,00,00),B(sx_obj1 ,59),I(09,45,07,00)};
+  static const void *G001650[] = {I(ab,1c,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(sx_obj ,19),I(23,00,00,00),B(ex_body ,14),I(1f,03,23,00),B(ex_body ,15),I(86,24,00,00),B(mop_gf ,2),I(3c,05,23,00),B(ex_body ,16),I(1d,24,00,00),B(i_notify ,4),I(3c,02,2a,23),B(ex_body ,17),I(1d,0f,1f,03),I(1c,1c,84,1d),I(24,00,00,00),B(sx_obj ,8),I(09,22,02,2a),I(1f,03,24,00),B(ex_expr ,26),I(3c,01,2a,1f),I(04,1d,1c,26),I(00,00,00,06),I(1d,24,00,00),B(sx_obj1 ,59),I(09,45,07,00)};
 
   eul_allocate_static_string(str_1658, "   Complete variable nodes", 26);
   eul_allocate_static_string(str_1659, "   Complete constant nodes", 26);

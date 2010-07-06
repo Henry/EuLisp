@@ -52,34 +52,34 @@ void initialize_module_aux_table()
   static const void *G0028[] = {I(aa,47,00,00),I(10,24,00,00),B(stream ,11),I(3d,02,00,00)};
 
   /* Byte-vector with size: 28 is_init: 0 index: 13 binding: access-table-print */
-  static const void *G0030[] = {I(43,fe,46,01),I(1b,48,00,00),I(1c,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(34,00,00,00),I(00,00,00,34),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(table1 ,4),I(08,24,00,00),B(stream ,11),I(1c,24,00,00),B(vector ,13),I(3d,02,06,22),I(01,32,00,00),I(00,00,00,22),I(23,00,00,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,13),I(3d,01,05,45),I(05,00,00,00)};
+  static const void *G0030[] = {I(43,fe,46,01),I(1b,48,00,00),I(1c,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(34,00,00,00),I(00,00,00,34),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(table1 ,4),I(08,24,00,00),B(stream ,11),I(1c,24,00,00),B(vector ,15),I(3d,02,06,22),I(01,32,00,00),I(00,00,00,22),I(23,00,00,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,15),I(3d,01,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 14 binding: access-table-keys */
-  static const void *G0033[] = {I(aa,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,2),I(3d,01,01,00)};
+  static const void *G0033[] = {I(aa,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,2),I(3d,01,01,00)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 15 binding: anonymous */
-  static const void *G0035[] = {I(ab,1c,34,00),I(00,00,00,2e),I(24,00,00,00),B(table ,5),I(24,00,00,00),B(boot1 ,42),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,32,00,00),I(00,00,00,0a),I(47,00,00,45),I(02,00,00,00)};
+  static const void *G0035[] = {I(ab,1c,34,00),I(00,00,00,2e),I(24,00,00,00),B(table ,5),I(24,00,00,00),B(boot1 ,41),I(3c,01,47,00),I(00,1f,03,1f),I(03,1f,03,3c),I(03,2a,1c,22),I(01,32,00,00),I(00,00,00,0a),I(47,00,00,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 16 binding: anonymous */
   static const void *G0037[] = {I(aa,47,00,00),I(1c,24,00,00),B(table ,5),I(3d,02,01,00)};
 
   /* Byte-vector with size: 22 is_init: 0 index: 17 binding: make-access-table */
-  static const void *G0039[] = {I(a8,46,01,24),B(mop_gf ,2),I(24,00,00,00),B(table1 ,4),I(1d,24,00,00),B(boot ,5),I(3c,03,1b,48),I(00,00,23,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,16),I(3b,01,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,1c,23),B(aux_table ,12),I(23,00,00,00),B(aux_table ,15),I(3b,02,1d,3c),I(02,2a,1c,45),I(04,00,00,00)};
+  static const void *G0039[] = {I(a8,46,01,24),B(mop_gf ,2),I(24,00,00,00),B(table1 ,4),I(1d,24,00,00),B(boot ,5),I(3c,03,1b,48),I(00,00,23,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,16),I(3b,01,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,1c,23),B(aux_table ,12),I(23,00,00,00),B(aux_table ,15),I(3b,02,1d,3c),I(02,2a,1c,45),I(04,00,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 18 binding: access-table-size */
-  static const void *G0041[] = {I(aa,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,83),I(24,00,00,00),B(table1 ,4),I(08,45,01,00)};
+  static const void *G0041[] = {I(aa,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,83),I(24,00,00,00),B(table1 ,4),I(08,45,01,00)};
 
   /* Byte-vector with size: 8 is_init: 0 index: 19 binding: access-table-map */
-  static const void *G0043[] = {I(ab,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,1d),I(1c,24,00,00),B(table ,6),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G0043[] = {I(ab,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,1d),I(1c,24,00,00),B(table ,6),I(3d,02,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 8 is_init: 0 index: 20 binding: access-table-do */
-  static const void *G0045[] = {I(ab,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,1d),I(1c,24,00,00),B(table ,9),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G0045[] = {I(ab,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,1d),I(1c,24,00,00),B(table ,9),I(3d,02,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 21 binding: access-table-values */
-  static const void *G0047[] = {I(aa,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,16),I(3d,01,01,00)};
+  static const void *G0047[] = {I(aa,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,16),I(3d,01,01,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 22 binding: access-table-clear */
-  static const void *G0049[] = {I(aa,24,00,00),B(boot1 ,42),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,10),I(3d,01,01,00)};
+  static const void *G0049[] = {I(aa,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,10),I(3d,01,01,00)};
 
   /* Byte-vector with size: 56 is_init: 1 index: 0 binding: initialize-aux-table */
   static const void *G0051[] = {I(87,25,00,00),B(aux_table ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(aux_table ,23),I(23,00,00,00),B(aux_table ,22),I(3b,01,25,00),B(aux_table ,9),I(23,00,00,00),B(aux_table ,24),I(23,00,00,00),B(aux_table ,21),I(3b,01,25,00),B(aux_table ,8),I(23,00,00,00),B(aux_table ,25),I(23,00,00,00),B(aux_table ,20),I(3b,02,25,00),B(aux_table ,7),I(23,00,00,00),B(aux_table ,26),I(23,00,00,00),B(aux_table ,19),I(3b,02,25,00),B(aux_table ,6),I(23,00,00,00),B(aux_table ,27),I(23,00,00,00),B(aux_table ,18),I(3b,01,25,00),B(aux_table ,5),I(23,00,00,00),B(aux_table ,28),I(23,00,00,00),B(aux_table ,17),I(3b,ff,25,00),B(aux_table ,4),I(23,00,00,00),B(aux_table ,29),I(23,00,00,00),B(aux_table ,14),I(3b,01,25,00),B(aux_table ,3),I(23,00,00,00),B(aux_table ,30),I(23,00,00,00),B(aux_table ,13),I(3b,fe,25,00),B(aux_table ,2),I(86,ac,00,00)};

@@ -40,7 +40,7 @@ void initialize_module_mop_prim()
   static const void *G00579[] = {I(ab,05,45,00)};
 
   /* Byte-vector with size: 23 is_init: 0 index: 9 binding: top-level */
-  static const void *G00581[] = {I(a9,24,00,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_prim ,2),I(23,00,00,00),B(mop_prim ,7),I(23,00,00,00),B(mop_prim ,6),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,42),I(24,00,00,00),B(boot1 ,42),I(3c,01,24,00),B(mop_prim ,4),I(23,00,00,00),B(mop_prim ,8),I(23,00,00,00),B(mop_prim ,5),I(3b,03,1d,3d),I(02,02,45,02)};
+  static const void *G00581[] = {I(a9,24,00,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_prim ,2),I(23,00,00,00),B(mop_prim ,7),I(23,00,00,00),B(mop_prim ,6),I(3b,02,1d,3c),I(02,2a,24,00),B(boot1 ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,24,00),B(mop_prim ,4),I(23,00,00,00),B(mop_prim ,8),I(23,00,00,00),B(mop_prim ,5),I(3b,03,1d,3d),I(02,02,45,02)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 10 binding: primitive-class-of */
   static const void *G00585[] = {I(aa,04,45,00)};

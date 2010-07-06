@@ -12,7 +12,8 @@
    export (<vector> vector? make-vector vector-size
            maximum-vector-size
            vector-ref subvector vector-append vector-empty?
-           do1-vector map1-vector anyp1-vector all1-vector?
+           do1-vector do2-vector map1-vector map2-vector
+           anyp1-vector all1-vector?
            reverse-vector member1-vector permute
            accumulate-vector accumulate1-vector reverse-vector!))
 
@@ -116,13 +117,26 @@
                 ())))
        (loop 0))))
 
+  (defun do2-vector (fun vec1 vec2)
+    (let ((n (vector-size vec1)))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (progn
+                    (fun (vector-ref vec1 i) (vector-ref vec2 i))
+                    (loop (int-binary+ i 1)))
+                ())))
+       (loop 0))))
+
 ;;;-----------------------------------------------------------------------------
 ;;;  Map
 ;;;-----------------------------------------------------------------------------
   (defmethod map ((fun <function>) (vec <vector>) . cs)
     (if (null? cs)
         (map1-vector fun vec)
-      (call-next-method)))
+      (if (null? (cdr cs))
+          (map2-vector fun vec (car cs))
+      (call-next-method))))
 
   (defun map1-vector (fun vec)
     (let* ((n (vector-size vec))
@@ -132,6 +146,19 @@
               (if (int-binary< i n)
                   (progn
                     ((setter vector-ref) res i (fun (vector-ref vec i)))
+                    (loop (int-binary+ i 1)))
+                res)))
+       (loop 0))))
+
+  (defun map2-vector (fun vec1 vec2)
+    (let* ((n (vector-size vec1))
+           (res (make-vector n)))
+      (labels
+       ((loop (i)
+              (if (int-binary< i n)
+                  (progn
+                    ((setter vector-ref) res i
+                     (fun (vector-ref vec1 i) (vector-ref vec2 i)))
                     (loop (int-binary+ i 1)))
                 res)))
        (loop 0))))

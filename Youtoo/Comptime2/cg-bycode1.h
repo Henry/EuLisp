@@ -9,7 +9,7 @@ extern LispRef cg_bycode1_bindings[];
 
 /* Module binding indices */
 #define bytecode_args__X33_fn_index 2 
-#define bytecode_size__X33_fn_index 3 
+#define bytecode_size__X33_fn_index 4 
 #define bytecode_name__X33_fn_index 17 
 #define bytecode_code__X63_fn_index 13 
 #define bytecode_modus__X33_fn_index 9 
@@ -23,7 +23,7 @@ extern LispRef cg_bycode1_bindings[];
 #define _bytecode__X60_X62_fn_index 5 
 #define bytecode__X63_fn_index 16 
 #define bytecode_modus__X63_fn_index 15 
-#define bytecode_properties__X63_fn_index 4 
+#define bytecode_properties__X63_fn_index 3 
 #define get_register_fn_index 6 
 
 

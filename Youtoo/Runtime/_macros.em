@@ -67,18 +67,18 @@
                                (,loop))))
                  (,loop)))))
 
-  (defmacro for (init condition inc . body)
-    `(progn ,init (while ,condition ,@body ,inc)))
+;;  (defmacro for (init condition inc . body)
+;;    `(progn ,init (while ,condition ,@body ,inc)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Case
 ;;;-----------------------------------------------------------------------------
   (defmacro case (keyform . clauses)
     (let ((key (gensym))
-          (last (car (last clauses))))
-      (if (null? (eq (car last) 'else))
-          ;(ct-warning () "missing else branch in (case ... ~a)" last)
-          (format "*** WARNING: missing else branch in (case ... ~a)" last)
+          (last-clause (list-ref clauses (- (list-size clauses) 1))))
+      (if (null? (eq (car last-clause) 'else))
+          ;(ct-warning () "missing else branch in (case ... ~a)" last-clause)
+          (format "*** WARNING: missing else branch in (case ... ~a)" last-clause)
         ())
       `(let ((,key ,keyform))
          (cond
@@ -87,7 +87,7 @@
                  (let ((keylist (car clause))
                        (forms (cdr clause)))
                    (cond
-                     ((and (eq clause last) (eq keylist 'else))
+                     ((and (eq clause last-clause) (eq keylist 'else))
                       `(else ,@forms))
                      ((not (list? keylist))
                       `((eql ,key ',keylist) ,@forms))
@@ -97,7 +97,8 @@
                       `((member ,key ',keylist eql) ,@forms))
                      (else
                        `((eql ,key ',(car keylist)) ,@forms)))))
-               clauses)))))
+               clauses)))
+      ))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Define condition classes
@@ -140,7 +141,7 @@
            ,res))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Auxiliary functions
+;;; Last (will become a generic function)
 ;;;-----------------------------------------------------------------------------
   (defmacro last (l . number)
     (if (null? number)
@@ -157,15 +158,18 @@
         `(reverse-list (list-drop (reverse-list ,list) 1))
       `(reverse-list (list-drop (reverse-list ,list) ,@number))))
 
-  (defmacro time (expr stream)
+  (defmacro time-execution (expr stream)
     (let ((x (gensym "time"))
           (res (gensym "time")))
-      `(let ((,x (time-start))
+      `(let* ((,x (cpu-time))
              (,res ,expr))
-         (time-stop ,x)
-         (sformat ,stream
-                  "real: ~a\nuser: ~a\nsystem: ~a\n"
-                  (vector-ref ,x 0) (vector-ref ,x 1) (vector-ref ,x 2))
+         (setq ,x (map (lambda (x y)
+                         (/ (binary- x y) (convert ticks-per-second <double>)))
+                       (cpu-time) ,x))
+         (sprint ,stream
+                "real: "     (vector-ref ,x 0)
+                "\nuser: "   (vector-ref ,x 1)
+                "\nsystem: " (vector-ref ,x 2))
          ,res)))
 
 ;;;-----------------------------------------------------------------------------

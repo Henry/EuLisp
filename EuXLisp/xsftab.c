@@ -383,9 +383,7 @@ FUNDEF funtab[] =
     {"tmpfile", xtmpfile},
     {"getenv", xgetenv},
     {"putenv", xputenv},
-    {"current-time", xtime},
-    {"time-start", x_time_start},
-    {"time-stop", x_time_stop},
+    {"cpu-time", x_cpu_time},
     {"xsprintf", xsprintf},
 
     // debugging

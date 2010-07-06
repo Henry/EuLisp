@@ -58,7 +58,6 @@ extern LVAL xlenter_keyword();
 
 extern void init_root_module();
 extern void init_root_exports();
-extern void set_ticks();
 
 void xlsymbols();
 
@@ -441,8 +440,8 @@ void xlsymbols()
         putenv(getstring(cdr(car(env))));
     }
 
-    // time info
-    set_ticks();
+    // Set the ticks_per_second constant
+    set_ticks_per_second();
 
     // setup stdin/stdout/stderr
     setvalue(s_stdin, cvstream(stdin, PF_INPUT));

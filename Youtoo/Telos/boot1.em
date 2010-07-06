@@ -20,8 +20,7 @@
            character-as-int int-as-character
            else
            stdout stderr setter
-           *argc* *argv* getenv system exit time-start time-stop
-           *absent*))
+           *argc* *argv* getenv system exit cpu-time *absent*))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Setter
@@ -253,11 +252,8 @@
   (defextern eul_system (<string>) <int> "system")
   (defun system (str) (eul_system str))
 
-  (defextern eul_time_start () ptr)
-  (defun time-start () (eul_time_start))
-
-  (defextern eul_time_stop (ptr) ptr)
-  (defun time-stop (x) (eul_time_stop x))
+  (defextern eul_cpu_time () ptr)
+  (defun cpu-time () (eul_cpu_time))
 
   (defextern eul_is_object (ptr) ptr)
 

@@ -4,10 +4,10 @@
 (definterface cg-bycode2
   (import (i-level1 cg-bycode)
    syntax (_macros _cg-bycode0 _sx-obj0)
-   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1 cg-bycode)
+   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float double1 double stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1 cg-bycode)
    export (
     ((name . bytecode-args!) (pos . 2) (origin cg-bycode . bytecode-args!) (inline (G004265 (stack-ref 1) (static-fpi-ref 4) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
-    ((name . bytecode-size!) (pos . 3) (origin cg-bycode . bytecode-size!) (inline (G004253 (stack-ref 1) (static-ref1) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . bytecode-size!) (pos . 4) (origin cg-bycode . bytecode-size!) (inline (G004253 (stack-ref 1) (static-ref1) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
     ((name . bytecode-name!) (pos . 17) (origin cg-bycode . bytecode-name!) (inline (G004269 (stack-ref 1) (static-fpi-ref 5) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
     ((name . bytecode-code?) (pos . 13) (origin cg-bycode . bytecode-code?) (inline (G004259 (static-fpi-ref 3) (binding-ref ? <bytecode>) (primitive-relative-ref))))
     ((name . bytecode-modus!) (pos . 9) (origin cg-bycode . bytecode-modus!) (inline (G004249 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
@@ -21,7 +21,7 @@
     ((name . <bytecode>) (pos . 5) (origin cg-bycode . <bytecode>) (class . constant))
     ((name . bytecode?) (pos . 16) (origin cg-bycode . bytecode?))
     ((name . bytecode-modus?) (pos . 15) (origin cg-bycode . bytecode-modus?) (inline (G004247 (static-ref0) (binding-ref ? <bytecode>) (primitive-relative-ref))))
-    ((name . bytecode-properties?) (pos . 4) (origin cg-bycode . bytecode-properties?) (inline (G004255 (static-ref2) (binding-ref ? <bytecode>) (primitive-relative-ref))))
+    ((name . bytecode-properties?) (pos . 3) (origin cg-bycode . bytecode-properties?) (inline (G004255 (static-ref2) (binding-ref ? <bytecode>) (primitive-relative-ref))))
     ((name . get-register) (pos . 6) (origin cg-bycode . get-register) (class . constant))
    )
    local-literals (

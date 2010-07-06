@@ -7,7 +7,7 @@
 #ifndef XSPROTO_H
 #define XSPROTO_H
 
-// msstuff.c
+// osspecific.c
 extern void osinit(char *banner);
 extern void osfinish();
 extern void oserror(char *msg);
@@ -30,10 +30,8 @@ extern void ostputs(char *str);
 extern void osflush();
 extern void oscheck();
 extern void oscheck_int();
-extern void set_ticks();
-extern LVAL xtime();
-extern LVAL x_time_start();
-extern LVAL x_time_stop();
+extern void set_ticks_per_second();
+extern LVAL x_cpu_time();
 extern void check_if_disabled(char *name);
 extern LVAL xsystem();
 extern LVAL xtmpfile();

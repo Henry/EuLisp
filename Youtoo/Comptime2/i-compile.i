@@ -4,7 +4,7 @@
 (definterface i-compile
   (import (i-all i-modify p-read p-env p-parse sx-obj sx-write ex-module ex-body cg-gen cg-asm cg-dld cg-interf cg-link cg-exec)
    syntax (_macros _i-aux0)
-   full-import (i-error i-notify i-param i-level1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level1 aux-table i-all i-modify sx-obj sx-obj1 sx-obj2 p-read p-env sx-write ex-body ex-module i-ffi sx-node cg-interf ex-import ex-syntax ex-expose ex-direct cg-dld ex-expr p-parse an-side cg-stack cg-state cg-gen op-peep-r op-peep cg-bycode2 cg-bycode1 cg-bycode cg-asm cg-link cg-exec-word-length cg-exec)
+   full-import (i-error i-notify i-param i-level1 boot1 boot symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream double double1 float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl telos level1 aux-table i-all i-modify sx-obj sx-obj1 sx-obj2 p-read p-env sx-write ex-body ex-module i-ffi sx-node cg-interf ex-import ex-syntax ex-expose ex-direct cg-dld ex-expr p-parse an-side cg-stack cg-state cg-gen op-peep-r op-peep cg-bycode2 cg-bycode1 cg-bycode cg-asm cg-link cg-exec-word-length cg-exec)
    export (
     ((name . compile) (pos . 10) (origin i-compile . compile))
     ((name . interactive-compile) (pos . 9) (origin i-compile . interactive-compile))

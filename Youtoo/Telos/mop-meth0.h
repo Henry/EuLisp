@@ -10,11 +10,11 @@ extern LispRef mop_meth0_bindings[];
 /* Module binding indices */
 #define defmethod_sig_fn_index 8 
 #define defmethod_body_fn_index 7 
-#define defmethod_args_fn_index 2 
+#define defmethod_args_fn_index 3 
 #define defmethod_domain_fn_index 4 
 #define named_method_function_lambda_fn_index 10 
 #define defmethod_fn_index 5 
-#define method_lambda_fn_index 3 
+#define method_lambda_fn_index 2 
 #define method_function_lambda_fn_index 6 
 #define defmethod_keywords_fn_index 9 
 
