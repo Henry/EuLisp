@@ -81,6 +81,9 @@ extern LispRef ntok(LispRef stream, LispRef special_tokens);
 // In eul-read.c
 extern int read_into_buffer(int _file, char *buf, int n);
 
+// Return prompt-string
+extern char* eul_prompt_string();
+
 ///-----------------------------------------------------------------------------
 #endif // EUL_EXT_H
 ///-----------------------------------------------------------------------------

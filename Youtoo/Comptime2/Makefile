@@ -40,7 +40,9 @@ EVAL_EM := \
 EVAL_C := $(EVAL_EM:%.em=%.c)
 EVAL_O := $(EVAL_C:%.c=$(ARCH_DIR)/%.o)
 
-EVAL_FF_C = $(WORD_LENGTH)bit/cg-exec-word-length.c Ff/eul-dld.c Ff/Youtoo_.c
+EVAL_FF_C =  \
+    $(WORD_LENGTH)bit/cg-exec-word-length.c \
+    Ff/eul-prompt-string.c Ff/eul-dld.c Ff/Youtoo_.c
 
 EVAL_C += $(EVAL_FF_C)
 EVAL_O += $(EVAL_FF_C:%.c=$(ARCH_DIR)/%.o)

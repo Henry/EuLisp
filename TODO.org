@@ -31,10 +31,6 @@
 *** DONE Rename =abstractp:= -> =abstract?:=
     CLOSED: [2010-06-29 Tue 21:47]
 *** TODO Add =slice= method for =<vector>=
-*** TODO Change all destructive functions to =setters=
-*** TODO Set the readline prompt rather than printing it directly
-    This should avoid some of the command-line editing problems when the prompt
-    is not printed.
 * Youtoo
 *** DONE Split of word-length dependent functionality into separate modules
     CLOSED: [2010-02-23 Tue 19:31]
@@ -178,7 +174,6 @@
 *** DONE Add a Scheme-style =else=
     CLOSED: [2010-06-22 Tue 22:34]
     for the default clause of =cond= forms.  =else= is simply an alias for =t=.
-*** TODO Rename predicate =namep= -> =name?=
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=

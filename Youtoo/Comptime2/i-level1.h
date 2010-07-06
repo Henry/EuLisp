@@ -33,7 +33,7 @@ extern LispRef i_level1_bindings[];
 #define any__X63_fn_index 24 
 #define _string_stream__X60_X62_fn_index 45 
 #define _string__X60_X62_fn_index 13 
-#define string_as_int_fn_index 23 
+#define string_as_int_fn_index 22 
 #define make_vector1_fn_index 57 
 #define make_space_fn_index 24 
 #define class_direct_superclasses_fn_index 68 
@@ -317,7 +317,7 @@ extern LispRef i_level1_bindings[];
 #define _keyword__X60_X62_fn_index 81 
 #define slot_name_fn_index 80 
 #define vector_empty__X63_fn_index 16 
-#define eul_list_as_eul_string_fn_index 21 
+#define eul_list_as_eul_string_fn_index 20 
 #define read_line_fn_index 15 
 #define access_table_values_fn_index 8 
 #define access_table_do_fn_index 7 

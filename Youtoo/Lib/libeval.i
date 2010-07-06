@@ -8,7 +8,7 @@
    export (
     ((name . dynamic-binding-set1) (pos . 12) (origin cg-dld . dynamic-binding-set1) (class . ff) (arity . 3) (ff (3 0 8) 6 (eul_dyn_binding_set . ff_stub_eul_dyn_binding_set5720)))
     ((name . module-loaded?) (pos . 6) (origin cg-dld . module-loaded?))
-    ((name . ?) (pos . 13) (origin i-rep . ?))
+    ((name . ?) (pos . 15) (origin i-rep . ?))
     ((name . dynamic-binding-ref1) (pos . 11) (origin cg-dld . dynamic-binding-ref1) (class . ff) (arity . 2) (ff (3 0) 6 (eul_dyn_binding_ref . ff_stub_eul_dyn_binding_ref5719)))
     ((name . dynamic-load-module) (pos . 3) (origin cg-dld . dynamic-load-module))
     ((name . rep) (pos . 6) (origin i-rep . rep))

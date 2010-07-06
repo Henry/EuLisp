@@ -553,7 +553,7 @@ char *keyword_generator(const char *text, int state)
 #else
 int eul_rl_initialize()
 {
-    return 1;
+    return 0;
 }
 #endif
 

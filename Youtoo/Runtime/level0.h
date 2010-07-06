@@ -268,8 +268,8 @@ extern LispRef level0_bindings[];
 #define subvector_fn_index 3 
 #define slice_fn_index 4 
 #define stderr_fn_index 10 
-#define thread_reschedule_fn_index 7 
 #define _thread__X60_X62_fn_index 8 
+#define thread_reschedule_fn_index 7 
 #define control_block_buffer_size_fn_index 9 
 #define backtrace_fn_index 8 
 #define uppercase__X63_fn_index 2 

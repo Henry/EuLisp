@@ -17,7 +17,7 @@ extern LispRef boot1_bindings[];
 LispRef stream1_bindings[41];
 
 /* Foreign functions */
-static LispRef ff_stub_eul_posix_codes4793 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_posix_codes4740 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
   LispRef res;
 
@@ -25,115 +25,115 @@ static LispRef ff_stub_eul_posix_codes4793 (Stack *reg_value_stack, LispRef *sre
   return res;
 }
 
-static LispRef ff_stub_open4794 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_open4741 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004825, G004826, G004827, res;
+  LispRef G004772, G004773, G004774, res;
 
-  POPVAL1(G004827);
-  POPVAL1(G004826);
-  POPVAL1(G004825);
-  FF_RES_CONVERT0(res,open(FF_ARG_CONVERT3(G004825), FF_ARG_CONVERT0(G004826), FF_ARG_CONVERT0(G004827)));
+  POPVAL1(G004774);
+  POPVAL1(G004773);
+  POPVAL1(G004772);
+  FF_RES_CONVERT0(res,open(FF_ARG_CONVERT3(G004772), FF_ARG_CONVERT0(G004773), FF_ARG_CONVERT0(G004774)));
   return res;
 }
 
-static LispRef ff_stub_close4795 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_close4742 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004828, res;
+  LispRef G004775, res;
 
-  POPVAL1(G004828);
-  FF_RES_CONVERT0(res,close(FF_ARG_CONVERT0(G004828)));
+  POPVAL1(G004775);
+  FF_RES_CONVERT0(res,close(FF_ARG_CONVERT0(G004775)));
   return res;
 }
 
-static LispRef ff_stub_read4796 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_read4743 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004829, G004830, G004831, res;
+  LispRef G004776, G004777, G004778, res;
 
-  POPVAL1(G004831);
-  POPVAL1(G004830);
-  POPVAL1(G004829);
-  FF_RES_CONVERT0(res,read(FF_ARG_CONVERT0(G004829), FF_ARG_CONVERT3(G004830), FF_ARG_CONVERT0(G004831)));
+  POPVAL1(G004778);
+  POPVAL1(G004777);
+  POPVAL1(G004776);
+  FF_RES_CONVERT0(res,read(FF_ARG_CONVERT0(G004776), FF_ARG_CONVERT3(G004777), FF_ARG_CONVERT0(G004778)));
   return res;
 }
 
-static LispRef ff_stub_write4797 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_write4744 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004832, G004833, G004834, res;
+  LispRef G004779, G004780, G004781, res;
 
-  POPVAL1(G004834);
-  POPVAL1(G004833);
-  POPVAL1(G004832);
-  FF_RES_CONVERT0(res,write(FF_ARG_CONVERT0(G004832), FF_ARG_CONVERT3(G004833), FF_ARG_CONVERT0(G004834)));
+  POPVAL1(G004781);
+  POPVAL1(G004780);
+  POPVAL1(G004779);
+  FF_RES_CONVERT0(res,write(FF_ARG_CONVERT0(G004779), FF_ARG_CONVERT3(G004780), FF_ARG_CONVERT0(G004781)));
   return res;
 }
 
-static LispRef ff_stub_eul_sprintf4798 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_sprintf4745 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004835, G004836, G004837, G004838, res;
+  LispRef G004782, G004783, G004784, G004785, res;
 
-  POPVAL1(G004838);
-  POPVAL1(G004837);
-  POPVAL1(G004836);
-  POPVAL1(G004835);
-  FF_RES_CONVERT0(res,eul_sprintf(FF_ARG_CONVERT3(G004835), FF_ARG_CONVERT0(G004836), FF_ARG_CONVERT3(G004837), FF_ARG_CONVERT8(G004838)));
+  POPVAL1(G004785);
+  POPVAL1(G004784);
+  POPVAL1(G004783);
+  POPVAL1(G004782);
+  FF_RES_CONVERT0(res,eul_sprintf(FF_ARG_CONVERT3(G004782), FF_ARG_CONVERT0(G004783), FF_ARG_CONVERT3(G004784), FF_ARG_CONVERT8(G004785)));
   return res;
 }
 
-static LispRef ff_stub_eul_sprintf_string4799 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_sprintf_string4746 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004839, G004840, G004841, G004842, G004843, G004844, res;
+  LispRef G004786, G004787, G004788, G004789, G004790, G004791, res;
 
-  POPVAL1(G004844);
-  POPVAL1(G004843);
-  POPVAL1(G004842);
-  POPVAL1(G004841);
-  POPVAL1(G004840);
-  POPVAL1(G004839);
-  FF_RES_CONVERT0(res,eul_sprintf_string(FF_ARG_CONVERT3(G004839), FF_ARG_CONVERT0(G004840), FF_ARG_CONVERT0(G004841), FF_ARG_CONVERT0(G004842), FF_ARG_CONVERT3(G004843), FF_ARG_CONVERT3(G004844)));
+  POPVAL1(G004791);
+  POPVAL1(G004790);
+  POPVAL1(G004789);
+  POPVAL1(G004788);
+  POPVAL1(G004787);
+  POPVAL1(G004786);
+  FF_RES_CONVERT0(res,eul_sprintf_string(FF_ARG_CONVERT3(G004786), FF_ARG_CONVERT0(G004787), FF_ARG_CONVERT0(G004788), FF_ARG_CONVERT0(G004789), FF_ARG_CONVERT3(G004790), FF_ARG_CONVERT3(G004791)));
   return res;
 }
 
-static LispRef ff_stub_eul_make_socket4800 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_make_socket4747 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004845, G004846, G004847, res;
+  LispRef G004792, G004793, G004794, res;
 
-  POPVAL1(G004847);
-  POPVAL1(G004846);
-  POPVAL1(G004845);
-  FF_RES_CONVERT0(res,eul_make_socket(FF_ARG_CONVERT3(G004845), FF_ARG_CONVERT3(G004846), FF_ARG_CONVERT0(G004847)));
+  POPVAL1(G004794);
+  POPVAL1(G004793);
+  POPVAL1(G004792);
+  FF_RES_CONVERT0(res,eul_make_socket(FF_ARG_CONVERT3(G004792), FF_ARG_CONVERT3(G004793), FF_ARG_CONVERT0(G004794)));
   return res;
 }
 
-static LispRef ff_stub_eul_socket_accept4801 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_socket_accept4748 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004848, res;
+  LispRef G004795, res;
 
-  POPVAL1(G004848);
-  FF_RES_CONVERT0(res,eul_socket_accept(FF_ARG_CONVERT0(G004848)));
+  POPVAL1(G004795);
+  FF_RES_CONVERT0(res,eul_socket_accept(FF_ARG_CONVERT0(G004795)));
   return res;
 }
 
-static LispRef ff_stub_eul_make_connection4802 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_make_connection4749 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004849, G004850, G004851, res;
+  LispRef G004796, G004797, G004798, res;
 
-  POPVAL1(G004851);
-  POPVAL1(G004850);
-  POPVAL1(G004849);
-  FF_RES_CONVERT0(res,eul_make_connection(FF_ARG_CONVERT3(G004849), FF_ARG_CONVERT3(G004850), FF_ARG_CONVERT3(G004851)));
+  POPVAL1(G004798);
+  POPVAL1(G004797);
+  POPVAL1(G004796);
+  FF_RES_CONVERT0(res,eul_make_connection(FF_ARG_CONVERT3(G004796), FF_ARG_CONVERT3(G004797), FF_ARG_CONVERT3(G004798)));
   return res;
 }
 
-static LispRef ff_stub_eul_socket_strerror4803 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_socket_strerror4750 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004852, res;
+  LispRef G004799, res;
 
-  POPVAL1(G004852);
-  FF_RES_CONVERT3(res,eul_socket_strerror(FF_ARG_CONVERT0(G004852)));
+  POPVAL1(G004799);
+  FF_RES_CONVERT3(res,eul_socket_strerror(FF_ARG_CONVERT0(G004799)));
   return res;
 }
 
-static LispRef ff_stub_eul_strerror4804 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_strerror4751 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
   LispRef res;
 
@@ -141,28 +141,28 @@ static LispRef ff_stub_eul_strerror4804 (Stack *reg_value_stack, LispRef *sreg_v
   return res;
 }
 
-static LispRef ff_stub_ntok4805 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_ntok4752 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004853, G004854, res;
+  LispRef G004800, G004801, res;
 
-  POPVAL1(G004854);
-  POPVAL1(G004853);
-  FF_RES_CONVERT6(res,ntok(FF_ARG_CONVERT8(G004853), FF_ARG_CONVERT8(G004854)));
+  POPVAL1(G004801);
+  POPVAL1(G004800);
+  FF_RES_CONVERT6(res,ntok(FF_ARG_CONVERT8(G004800), FF_ARG_CONVERT8(G004801)));
   return res;
 }
 
-static LispRef ff_stub_read_into_buffer4806 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_read_into_buffer4753 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
-  LispRef G004855, G004856, G004857, res;
+  LispRef G004802, G004803, G004804, res;
 
-  POPVAL1(G004857);
-  POPVAL1(G004856);
-  POPVAL1(G004855);
-  FF_RES_CONVERT0(res,read_into_buffer(FF_ARG_CONVERT0(G004855), FF_ARG_CONVERT3(G004856), FF_ARG_CONVERT0(G004857)));
+  POPVAL1(G004804);
+  POPVAL1(G004803);
+  POPVAL1(G004802);
+  FF_RES_CONVERT0(res,read_into_buffer(FF_ARG_CONVERT0(G004802), FF_ARG_CONVERT3(G004803), FF_ARG_CONVERT0(G004804)));
   return res;
 }
 
-static LispRef ff_stub_eul_hostname4807 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
+static LispRef ff_stub_eul_hostname4754 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
 {
   LispRef res;
 
@@ -183,36 +183,36 @@ void initialize_module_stream1()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_4824, sym_4823, sym_4822, G004821, G004819, G004817, sym_4815, sym_4814, sym_4813, sym_4812, sym_4811, sym_4810, G004809;
+  LispRef sym_4771, sym_4770, sym_4769, G004768, G004766, G004764, sym_4762, sym_4761, sym_4760, sym_4759, sym_4758, sym_4757, G004756;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 83 is_init: 0 index: 35 binding: top-level */
-  static const void *G004808[] = {I(a9,41,00,00),B(stream1 ,14),I(1b,89,00,00),B(stream1 ,9),I(2a,24,00,00),B(stream1 ,9),I(82,02,1b,89),B(stream1 ,4),I(2a,24,00,00),B(stream1 ,9),I(83,02,1b,89),B(stream1 ,11),I(2a,24,00,00),B(stream1 ,9),I(84,02,1b,89),B(stream1 ,2),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,03),I(02,1b,89,00),B(stream1 ,7),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,04),I(02,1b,89,00),B(stream1 ,10),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,05),I(02,1b,89,00),B(stream1 ,8),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,06),I(02,1b,89,00),B(stream1 ,13),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,07),I(02,1b,89,00),B(stream1 ,12),I(2a,24,00,00),B(stream1 ,8),I(24,00,00,00),B(stream1 ,13),I(14,24,00,00),B(stream1 ,11),I(1c,14,24,00),B(stream1 ,11),I(24,00,00,00),B(stream1 ,7),I(14,24,00,00),B(stream1 ,2),I(24,00,00,00),B(stream1 ,7),I(14,23,00,00),B(stream1 ,29),I(24,00,00,00),B(stream1 ,4),I(23,00,00,00),B(stream1 ,30),I(1f,05,23,00),B(stream1 ,31),I(1f,06,23,00),B(stream1 ,32),I(24,00,00,00),B(stream1 ,2),I(23,00,00,00),B(stream1 ,33),I(24,00,00,00),B(stream1 ,2),I(23,00,00,00),B(stream1 ,34),I(1f,0b,24,00),B(boot1 ,25),I(3c,0c,1b,89),B(stream1 ,5),I(45,0e,00,00)};
+  static const void *G004755[] = {I(a9,41,00,00),B(stream1 ,14),I(1b,89,00,00),B(stream1 ,9),I(2a,24,00,00),B(stream1 ,9),I(82,02,1b,89),B(stream1 ,4),I(2a,24,00,00),B(stream1 ,9),I(83,02,1b,89),B(stream1 ,11),I(2a,24,00,00),B(stream1 ,9),I(84,02,1b,89),B(stream1 ,2),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,03),I(02,1b,89,00),B(stream1 ,7),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,04),I(02,1b,89,00),B(stream1 ,10),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,05),I(02,1b,89,00),B(stream1 ,8),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,06),I(02,1b,89,00),B(stream1 ,13),I(2a,24,00,00),B(stream1 ,9),I(26,00,00,00),I(00,00,00,07),I(02,1b,89,00),B(stream1 ,12),I(2a,24,00,00),B(stream1 ,8),I(24,00,00,00),B(stream1 ,13),I(14,24,00,00),B(stream1 ,11),I(1c,14,24,00),B(stream1 ,11),I(24,00,00,00),B(stream1 ,7),I(14,24,00,00),B(stream1 ,2),I(24,00,00,00),B(stream1 ,7),I(14,23,00,00),B(stream1 ,29),I(24,00,00,00),B(stream1 ,4),I(23,00,00,00),B(stream1 ,30),I(1f,05,23,00),B(stream1 ,31),I(1f,06,23,00),B(stream1 ,32),I(24,00,00,00),B(stream1 ,2),I(23,00,00,00),B(stream1 ,33),I(24,00,00,00),B(stream1 ,2),I(23,00,00,00),B(stream1 ,34),I(1f,0b,24,00),B(boot1 ,25),I(3c,0c,1b,89),B(stream1 ,5),I(45,0e,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 36 binding: hostname */
-  static const void *G004816[] = {I(a9,41,00,00),B(stream1 ,28),I(45,00,00,00)};
+  static const void *G004763[] = {I(a9,41,00,00),B(stream1 ,28),I(45,00,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 37 binding: strerror */
-  static const void *G004818[] = {I(a9,41,00,00),B(stream1 ,25),I(45,00,00,00)};
+  static const void *G004765[] = {I(a9,41,00,00),B(stream1 ,25),I(45,00,00,00)};
 
   /* Byte-vector with size: 45 is_init: 1 index: 0 binding: initialize-stream1 */
-  static const void *G004820[] = {I(87,25,00,00),B(stream1 ,1),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(stream1 ,13),I(86,25,00,00),B(stream1 ,12),I(86,25,00,00),B(stream1 ,11),I(86,25,00,00),B(stream1 ,10),I(86,25,00,00),B(stream1 ,9),I(86,25,00,00),B(stream1 ,8),I(86,25,00,00),B(stream1 ,7),I(23,00,00,00),B(stream1 ,38),I(23,00,00,00),B(stream1 ,37),I(3b,00,25,00),B(stream1 ,6),I(86,25,00,00),B(stream1 ,5),I(86,25,00,00),B(stream1 ,4),I(23,00,00,00),B(stream1 ,39),I(23,00,00,00),B(stream1 ,36),I(3b,00,25,00),B(stream1 ,3),I(86,25,00,00),B(stream1 ,2),I(23,00,00,00),B(stream1 ,40),I(23,00,00,00),B(stream1 ,35),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G004767[] = {I(87,25,00,00),B(stream1 ,1),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(86,25,00,00),B(stream1 ,13),I(86,25,00,00),B(stream1 ,12),I(86,25,00,00),B(stream1 ,11),I(86,25,00,00),B(stream1 ,10),I(86,25,00,00),B(stream1 ,9),I(86,25,00,00),B(stream1 ,8),I(86,25,00,00),B(stream1 ,7),I(23,00,00,00),B(stream1 ,38),I(23,00,00,00),B(stream1 ,37),I(3b,00,25,00),B(stream1 ,6),I(86,25,00,00),B(stream1 ,5),I(86,25,00,00),B(stream1 ,4),I(23,00,00,00),B(stream1 ,39),I(23,00,00,00),B(stream1 ,36),I(3b,00,25,00),B(stream1 ,3),I(86,25,00,00),B(stream1 ,2),I(23,00,00,00),B(stream1 ,40),I(23,00,00,00),B(stream1 ,35),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
-  eul_intern_symbol(sym_4810,"r");
-  eul_intern_symbol(sym_4811,"w");
-  eul_intern_symbol(sym_4812,"a");
-  eul_intern_symbol(sym_4813,"r+");
-  eul_intern_symbol(sym_4814,"w+");
-  eul_intern_symbol(sym_4815,"a+");
-  eul_allocate_bytevector( G004809,G004808);
-  eul_allocate_bytevector( G004817,G004816);
-  eul_allocate_bytevector( G004819,G004818);
-  eul_intern_symbol(sym_4822,"strerror");
-  eul_intern_symbol(sym_4823,"hostname");
-  eul_intern_symbol(sym_4824,"top-level");
-  eul_allocate_bytevector( G004821,G004820);
+  eul_intern_symbol(sym_4757,"r");
+  eul_intern_symbol(sym_4758,"w");
+  eul_intern_symbol(sym_4759,"a");
+  eul_intern_symbol(sym_4760,"r+");
+  eul_intern_symbol(sym_4761,"w+");
+  eul_intern_symbol(sym_4762,"a+");
+  eul_allocate_bytevector( G004756,G004755);
+  eul_allocate_bytevector( G004764,G004763);
+  eul_allocate_bytevector( G004766,G004765);
+  eul_intern_symbol(sym_4769,"strerror");
+  eul_intern_symbol(sym_4770,"hostname");
+  eul_intern_symbol(sym_4771,"top-level");
+  eul_allocate_bytevector( G004768,G004767);
 
   /* Set local bindings */
   {
@@ -221,35 +221,35 @@ void initialize_module_stream1()
       stream1_bindings[i] = eul_nil;
   }
 
-  stream1_bindings[ 14] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_posix_codes4793;
-  stream1_bindings[ 15] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_open4794;
-  stream1_bindings[ 16] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_close4795;
-  stream1_bindings[ 17] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_read4796;
-  stream1_bindings[ 18] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_write4797;
-  stream1_bindings[ 19] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_sprintf4798;
-  stream1_bindings[ 20] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_sprintf_string4799;
-  stream1_bindings[ 21] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_socket4800;
-  stream1_bindings[ 22] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_socket_accept4801;
-  stream1_bindings[ 23] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_connection4802;
-  stream1_bindings[ 24] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_socket_strerror4803;
-  stream1_bindings[ 25] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_strerror4804;
-  stream1_bindings[ 26] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_ntok4805;
-  stream1_bindings[ 27] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_read_into_buffer4806;
-  stream1_bindings[ 28] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_hostname4807;
-  stream1_bindings[ 29] = sym_4810;
-  stream1_bindings[ 30] = sym_4811;
-  stream1_bindings[ 31] = sym_4812;
-  stream1_bindings[ 32] = sym_4813;
-  stream1_bindings[ 33] = sym_4814;
-  stream1_bindings[ 34] = sym_4815;
-  stream1_bindings[ 35] = G004809;
-  stream1_bindings[ 36] = G004817;
-  stream1_bindings[ 37] = G004819;
+  stream1_bindings[ 14] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_posix_codes4740;
+  stream1_bindings[ 15] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_open4741;
+  stream1_bindings[ 16] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_close4742;
+  stream1_bindings[ 17] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_read4743;
+  stream1_bindings[ 18] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_write4744;
+  stream1_bindings[ 19] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_sprintf4745;
+  stream1_bindings[ 20] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_sprintf_string4746;
+  stream1_bindings[ 21] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_socket4747;
+  stream1_bindings[ 22] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_socket_accept4748;
+  stream1_bindings[ 23] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_make_connection4749;
+  stream1_bindings[ 24] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_socket_strerror4750;
+  stream1_bindings[ 25] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_strerror4751;
+  stream1_bindings[ 26] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_ntok4752;
+  stream1_bindings[ 27] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_read_into_buffer4753;
+  stream1_bindings[ 28] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_hostname4754;
+  stream1_bindings[ 29] = sym_4757;
+  stream1_bindings[ 30] = sym_4758;
+  stream1_bindings[ 31] = sym_4759;
+  stream1_bindings[ 32] = sym_4760;
+  stream1_bindings[ 33] = sym_4761;
+  stream1_bindings[ 34] = sym_4762;
+  stream1_bindings[ 35] = G004756;
+  stream1_bindings[ 36] = G004764;
+  stream1_bindings[ 37] = G004766;
   stream1_bindings[ 1] = eul_nil;
-  stream1_bindings[ 38] = sym_4822;
-  stream1_bindings[ 39] = sym_4823;
-  stream1_bindings[ 40] = sym_4824;
-  eul_allocate_lambda( stream1_bindings[0], "initialize-stream1", 0, G004821);
+  stream1_bindings[ 38] = sym_4769;
+  stream1_bindings[ 39] = sym_4770;
+  stream1_bindings[ 40] = sym_4771;
+  eul_allocate_lambda( stream1_bindings[0], "initialize-stream1", 0, G004768);
 
   }
 }

@@ -4,17 +4,14 @@
 ///-----------------------------------------------------------------------------
 ///  Library: level1
 ///  Authors: Julian Padget, Andreas Kind
-///  Description: Low-level read
+///  Description: Low-level read with readline support
 ///-----------------------------------------------------------------------------
-
 #include "eul-ext.h"
 
 #ifdef READLINE
 #include <readline/readline.h>
 #include <readline/history.h>
-#endif
 
-#ifdef READLINE
 extern char *rl_histfile;
 #endif
 
@@ -36,8 +33,8 @@ int read_into_buffer(int _file, char *buf, int n)
     // i.e. the REPL is being used
     if (rl_histfile && _file == 0)
     {
-        // Get a line from the user.
-        char* lbuf = readline("");
+        // Print the prompt and get a line from the user.
+        char* lbuf = readline(eul_prompt_string());
 
         // If the line has any text in it, save it on the history.
         if (lbuf)

@@ -10,7 +10,7 @@
   (syntax (_macros)
    import (i-all i-args sx-obj sx-node i-compile cg-interf cg-dld ex-expr
            ex-import ex-syntax p-env sx-obj cg-exec read)
-   export (rep eval debug-eval
+   export (rep eval debug-eval prompt-string
            show-module-bindings ? show-help show-class-hierarchy)
    expose (cg-dld))
 
@@ -32,6 +32,12 @@
   (deflocal *reset-k* ())
   (deflocal *resume-k* ())
   (deflocal *continue-k* ())
+  (deflocal *rl* 0)
+
+  ;; Prompt-string used by i-rep and readline
+  (deflocal *prompt-string* "prompt> ")
+  (defun prompt-string ()
+    *prompt-string*)
 
   ;; Readline history initializer
   (defextern initialize-rl () <int> "eul_rl_initialize")
@@ -41,7 +47,7 @@
     (if *script* ()
       (format "EuLisp System Youtoo - Version ~a\n" *version*))
 
-    (initialize-rl)
+    (setq *rl* (initialize-rl))
     (newline)
 
     (setq *current-module-name* 'user)
@@ -257,8 +263,11 @@
   (defun rep-aux ()
     (labels
      ((loop (x)
-            (format "~a> " *current-module-name*)
-            (flush)
+            ;; If readline is active it prints the prompt using `prompt-string'
+            (setq *prompt-string* (fmt "~a> " *current-module-name*))
+            (unless (= *rl* 1)
+                    (prin *prompt-string*)
+                    (flush))
             (reset-interactive-module (dynamic *actual-module*))
             (setq *number-of-warnings* 0)
             (setq *number-of-errors* 0)
@@ -282,10 +291,14 @@
   (defun debug-rep ()
     (labels
      ((loop (x)
-            (format "[error~a]~a> "
-                    (list-size *resume-k*)
-                    *current-module-name*)
-            (flush)
+            ;; If readline is active it prints the prompt using `prompt-string'
+            (setq *prompt-string*
+                  (fmt "[error~a] ~a> "
+                       (list-size *resume-k*)
+                       *current-module-name*))
+            (unless (= *rl* 1)
+                    (prin *prompt-string*)
+                    (flush))
             (reset-interactive-module (dynamic *actual-module*))
             (setq x (read lispin () (eos-default-value)))
             (if (eq x (eos-default-value))

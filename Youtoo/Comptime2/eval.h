@@ -10,7 +10,7 @@ extern LispRef eval_bindings[];
 /* Module binding indices */
 #define dynamic_binding_set1_fn_index 12 
 #define module_loaded__X63_fn_index 6 
-#define __X63_fn_index 13 
+#define __X63_fn_index 15 
 #define dynamic_binding_ref1_fn_index 11 
 #define dynamic_load_module_fn_index 3 
 #define rep_fn_index 6 

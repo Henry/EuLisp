@@ -9,7 +9,7 @@
     ((name . int-binary%) (pos . 33) (origin boot1 . %) (inline (G0068 (fpi-remainder))))
     ((name . int?) (pos . 31) (origin boot1 . int?) (inline (G0049 (fpip))))
     ((name . int-binary-mod) (pos . 41) (origin boot1 . mod) (inline (G0070 (fpi-remainder))))
-    ((name . int-as-string) (pos . 5) (origin fpi . int-as-string) (class . ff) (arity . 1) (ff (0) 3 (eul_int_as_str . ff_stub_eul_int_as_str2349)))
+    ((name . int-as-string) (pos . 5) (origin fpi . int-as-string) (class . ff) (arity . 1) (ff (0) 3 (eul_int_as_str . ff_stub_eul_int_as_str2335)))
     ((name . int-binary/) (pos . 12) (origin boot1 . /) (inline (G0066 (fpi-quotient))))
     ((name . int-binary*) (pos . 35) (origin boot1 . *) (inline (G0064 (fpi-product))))
     ((name . most-negative-int) (pos) (origin fpi . most-negative-int) (class . constant) (value -536870911))
