@@ -251,8 +251,39 @@ void rlgets()
 
     // Make the prompt from the current module name
     static char prompt[255];
-    strcpy(prompt, getstring(getmname(current_module)));
-    strcat(prompt, "> ");
+    int debug_depth = 0;
+
+    LVAL thread_module = get_module("thread");
+
+    if (thread_module)
+    {
+        // Tell the debugger that readline is handling the prompt
+        setvalue(xlenter_module("*debug-rl*", thread_module), true);
+
+        // Get the debug-depth; 0 = no error
+        debug_depth =
+            getfixnum(getvalue(xlenter_module("*debug-depth*", thread_module)));
+    }
+
+    if (debug_depth)
+    {
+        sprintf
+        (
+            prompt,
+            "[error%d] %s> ",
+            debug_depth,
+            getstring(getmname(current_module))
+        );
+    }
+    else
+    {
+        sprintf
+        (
+            prompt,
+            "%s> ",
+            getstring(getmname(current_module))
+        );
+    }
 
     // Get a line from the user.
     lbuf = readline(prompt);

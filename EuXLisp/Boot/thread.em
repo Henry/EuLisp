@@ -743,20 +743,14 @@
                     cleanups))))))
 
   (deflocal *debug-depth* 0)
+  (deflocal *debug-rl* ())
 
   (define (inc-depth inc)
           (setq *debug-depth* (+ *debug-depth* inc)))
 
-  (define (debug-prompt n)
-          (if (> n 0)
-              (progn
-                (%display ">")
-                (debug-prompt (- n 1)))
-            (%display " ")))
-
   (define (debug-loop frameptr cc condition)
-          (%display "DEBUG")
-          (debug-prompt *debug-depth*)
+          (if (not *debug-rl*) ;; If readline is not used print prompt
+                  (prin "[error" *debug-depth* "] " (current-module) ">"))
           (let ((op (read)))
             (if (eq op **EOF**)
                 (if (null? cc)
