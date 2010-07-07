@@ -275,8 +275,8 @@ extern LispRef level0_bindings[];
 #define subvector_fn_index 3 
 #define slice_fn_index 4 
 #define stderr_fn_index 10 
-#define thread_reschedule_fn_index 7 
 #define _thread__X60_X62_fn_index 8 
+#define thread_reschedule_fn_index 7 
 #define control_block_buffer_size_fn_index 9 
 #define backtrace_fn_index 8 
 #define uppercase__X63_fn_index 2 
@@ -534,9 +534,9 @@ extern LispRef level0_bindings[];
 #define _character__X60_X62_fn_index 5 
 #define binary__X42_fn_index 12 
 #define double_as_string_fn_index 12 
-#define substring_fn_index 6 
-#define end_of_stream_fn_index 19 
 #define string__X63_fn_index 17 
+#define end_of_stream_fn_index 19 
+#define substring_fn_index 6 
 #define _double__X60_X62_fn_index 7 
 #define snewline_fn_index 6 
 #define __X62_fn_index 4 
