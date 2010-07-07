@@ -2,5 +2,6 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule user
-    (import (level0))
+    (syntax (macros0)
+     import (level0))
   )

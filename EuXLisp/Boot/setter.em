@@ -2,13 +2,17 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule setter
-    (import (root)
+    (syntax (macros)
+     import (root)
      export (setter setter-setter))
 
   (deflocal setter-table (make-table))
 
   (define (setter obj)
           (table-ref setter-table obj))
+
+;;   (defmacro setter (obj)
+;;     `(table-ref setter-table ,obj))
 
   (define (setter-setter obj val)
           (table-set! setter-table obj val))

@@ -342,6 +342,7 @@
 
       ;; Setter
       setter
+      fsetter
 
       ;; Converter
       converter

@@ -7,7 +7,8 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule list
-    (import (root setter))
+    (syntax (macros)
+     import (root setter))
 
   (defun (setter car) (l x)
     (set-car! l x))

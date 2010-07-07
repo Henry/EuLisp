@@ -2,7 +2,8 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule convert
-    (import (root setter condcl thread)
+    (syntax (macros)
+     import (root setter condcl thread)
      export (converter convert <conversion-condition> <no-converter>))
 
   (deflocal converter-table (make-table))
