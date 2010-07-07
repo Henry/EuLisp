@@ -178,6 +178,8 @@
 *** DONE Add a Scheme-style =else=
     CLOSED: [2010-06-22 Tue 22:34]
     for the default clause of =cond= forms.  =else= is simply an alias for =t=.
+*** TODO Develop =map= and =do= to handle more than 2 sequences
+    for =<list>=, =<vector>= /etc./
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=
@@ -327,6 +329,8 @@
     CLOSED: [2010-07-02 Fri 10:16]
 *** TODO Add =while= loop construct
 *** TODO Consider renaming =labels= -> =flet*=
+*** TODO Consider including =append=
+    either in generic form or just for lists and perhaps strings.
 * Other
 *** TODO Complete emacs mode eulisp-mode.el for EuLisp
 *** DONE Include emacs eulisp-mode.el in the git repository
