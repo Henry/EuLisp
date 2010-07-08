@@ -17,6 +17,10 @@
 #ifdef READLINE
 #include <readline/readline.h>
 #include <readline/history.h>
+
+#include "../RLCompletion/eulisp_keywords.h"
+#include "../RLCompletion/euxlisp_keywords.h"
+#include "../RLCompletion/keyword_completion.h"
 #endif
 
 // external variables
@@ -84,6 +88,9 @@ void osinit(char *banner)
     #ifdef READLINE
     if (!quiet)
     {
+        rl_attempted_completion_function = keyword_completion;
+        rl_bind_key('\t', rl_complete);
+
         char* eulisp_history = "/.eulisp_history";
         char* home = getenv("HOME");
         if (home == NULL)
