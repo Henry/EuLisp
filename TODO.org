@@ -180,6 +180,10 @@
     for the default clause of =cond= forms.  =else= is simply an alias for =t=.
 *** TODO Develop =map= and =do= to handle more than 2 sequences
     for =<list>=, =<vector>= /etc./
+*** TODO Fix output of very large and very small =<double>= numbers
+    =print= can output numbers of the order of 1e30 but does not use exponential
+    format.  There appears to be a limit on the number of decimal places that
+    can be output which might relate to the size of on output formatting buffer.
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=
@@ -218,6 +222,7 @@
     CLOSED: [2010-07-05 Mon 22:03]
 *** TODO Complete =double-float= functionality in =arith.em=
     See =Youtoo/Runtime/double.em=
+*** TODO Consider replacing the built-in GC with Boehm-Demers
 * EuLisp Definition
 *** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
     to correspond to the EuLisp-1.0 proposals.
