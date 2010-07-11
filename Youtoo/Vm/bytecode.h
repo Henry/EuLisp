@@ -743,25 +743,29 @@ int eul_trace=0;
             {                                                                  \
                 LVPEEKVAL() = eul_nil;                                         \
             }                                                                  \
-            else if (eul_is_double(arg2))                                      \
+            else                                                               \
             {                                                                  \
-                if                                                             \
-                (                                                              \
-                    eul_double_as_c_double(arg1)                               \
-                    != eul_double_as_c_double(arg2)                            \
-                )                                                              \
-                {                                                              \
-                    LVPEEKVAL() = eul_nil;                                     \
-                }                                                              \
-                else                                                           \
-                {                                                              \
-                    LVPEEKVAL() = eul_true;                                    \
-                }                                                              \
+                LVPEEKVAL() = eul_true;                                        \
+            }                                                                  \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            if                                                                 \
+            (                                                                  \
+                eul_double_as_c_double(arg1)                                   \
+                != eul_double_as_c_double(arg2)                                \
+            )                                                                  \
+            {                                                                  \
+                LVPEEKVAL() = eul_nil;                                         \
             }                                                                  \
             else                                                               \
             {                                                                  \
-                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2);         \
+                LVPEEKVAL() = eul_true;                                        \
             }                                                                  \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+5, 2);             \
         }                                                                      \
     }                                                                          \
     else                                                                       \
