@@ -65,7 +65,7 @@ void xlexecute(LVAL fun)
     register unsigned int i;
     register int k;
     FIXTYPE fixtmp;
-    int off;
+    int off = 0;
     extern LVAL s_unbound_error, s_arith_error, s_no_next_md_error;
 
     // initialize the registers

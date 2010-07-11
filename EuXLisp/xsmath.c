@@ -228,10 +228,10 @@ LVAL xlogxor()
 static LVAL binary(int fcn)
 {
     static char *cfn_name = "binary arith op";
-    FIXTYPE ival, iarg;
-    FLOTYPE fval, farg;
-    LVAL arg;
-    int mode;
+    FIXTYPE ival = 0, iarg = 0;
+    FLOTYPE fval = 0, farg = 0;
+    LVAL arg = NULL;
+    int mode = 0;
 
     // get the first argument
     arg = xlgetarg();
@@ -524,7 +524,7 @@ static LVAL unary(int fcn)
 {
     FLOTYPE fval;
     FIXTYPE ival;
-    LVAL arg;
+    LVAL arg = NULL;
 
     // get the argument
     if (moreargs())
@@ -703,7 +703,7 @@ static LVAL predicate(int fcn)
 {
     static char *cfn_name = "arith predicate";
     FLOTYPE fval;
-    FIXTYPE ival;
+    FIXTYPE ival = 0;
     LVAL arg;
 
     // get the argument
@@ -790,10 +790,10 @@ LVAL xgtr()
 static LVAL compare(int fcn)
 {
     static char *cfn_name = "arith compare op";
-    FIXTYPE icmp, ival, iarg;
-    FLOTYPE fcmp, fval, farg;
+    FIXTYPE icmp, ival = 0, iarg = 0;
+    FLOTYPE fcmp, fval = 0, farg = 0;
     LVAL arg;
-    int mode;
+    int mode = 0;
 
     // get the first argument
     arg = xlgetarg();

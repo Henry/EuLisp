@@ -1,10 +1,9 @@
-//  Copyright (c) 1994, by Russell Bradford.
-//  All rights reserved.
+/// Copyright (c) 1994, by Russell Bradford. All rights reserved.
 ///-----------------------------------------------------------------------------
 /// ---                 EuLisp System 'EuXLisp'
 ///-----------------------------------------------------------------------------
 ///  File: xstable.c
-///  Description: stuff for tables
+///  Description: tables
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
@@ -151,8 +150,8 @@ LVAL xtable_set()
     xlargc = 2;
     LVAL val = assoc(equality);
 
-    if (val == NIL)
-    {   // new key
+    if (val == NIL)  // new key
+    {
         push(table);
         push(key);
         push(value);
@@ -233,11 +232,13 @@ LVAL xtable_delete()
         index = thash_eq(key);
         equality = eq;
     }
+
     if (comp == getvalue(s_eqv))
     {
         index = thash_eqv(key);
         equality = eqv;
     }
+
     if (comp == getvalue(s_equals))
     {
         index = thash_equals(key);
@@ -381,10 +382,9 @@ LVAL xtable_clear()
     return table;
 }
 
-/* things may be relocated on image save/restore, thus use
-   cvoptr rather than direct address: slow perhaps, as hashing time is
-   proportional to number of live segments
-*/
+// things may be relocated on image save/restore, thus use
+// cvoptr rather than direct address: slow perhaps, as hashing time is
+// proportional to number of live segments
 static int thash_eq(LVAL key)
 {
     extern OFFTYPE cvoptr();
@@ -410,7 +410,7 @@ static int thash_eqv(LVAL key)
         return 0;
     }
 
-    int val;
+    int val = 0;
     switch (ntype(key))
     {
         case FIXNUM:
@@ -435,7 +435,7 @@ static int thash_eqv(LVAL key)
 
 static int thash_equals(LVAL key)
 {
-    int val;
+    int val = 0;
     switch (ntype(key))
     {
         case FIXNUM:
@@ -455,8 +455,11 @@ static int thash_equals(LVAL key)
             break;
 
         default:
-            xlcerror("table ref on key incompatible with comparator =", key,
-            NIL);
+            xlcerror
+            (
+                "table ref on key incompatible with comparator =",
+                key, NIL
+            );
     }
 
     return val < 0 ? -val : val;
@@ -475,7 +478,7 @@ static int thash_equal(LVAL key)
         return 0;
     }
 
-    int val, len;
+    int val = 0, len = 0;
     switch (ntype(key))
     {
         case FIXNUM:
@@ -508,7 +511,6 @@ static int thash_equal(LVAL key)
         default:
             val = thash_eq(key);
             break;
-
     }
 
     return val < 0 ? -val : val;

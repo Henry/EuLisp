@@ -800,7 +800,7 @@ static void cd_let(LVAL name, LVAL form, int cont)
         xlerror("expecting binding list", form);
     }
 
-    int nxt;
+    int nxt = 0;
 
     // save a continuation
     if (cont != C_RETURN)
@@ -858,7 +858,7 @@ static void do_letrec(LVAL form, int cont)
         xlerror("expecting binding list", form);
     }
 
-    int nxt;
+    int nxt = 0;
 
     // save a continuation
     if (cont != C_RETURN)
@@ -1032,7 +1032,7 @@ static void parse_let_variables(LVAL blist, LVAL body)
             xlerror("trying to bind a keyword in let", arg);
         }
 
-        LVAL new;
+        LVAL new = NULL;
 
         // make sure the argument is a symbol
         if (symbolp(arg))
@@ -1406,7 +1406,7 @@ static void do_setaccess(LVAL form, int cont)
 // do_call - compile a function call
 static void do_call(LVAL form, int cont)
 {
-    int nxt;
+    int nxt = 0;
 
     // save a continuation
     if (cont != C_RETURN)
@@ -2502,7 +2502,7 @@ static void do_defmodule(LVAL form, int cont)
 
     #ifdef NOISY_LOAD
     char buf[128];
-    LVAL s_display;
+    LVAL s_display = NULL;
     extern int quiet;
 
     if (!quiet)
@@ -3078,7 +3078,7 @@ static void do_cnm(LVAL form, int cont)
         xlerror("extra forms in call-next-method", form);
     }
 
-    int nxt;
+    int nxt = 0;
     if (cont != C_RETURN)
     {
         putcbyte(OP_SAVE);
