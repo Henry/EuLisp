@@ -50,7 +50,7 @@
                   (iterative-div2 ll)
                   (loop ll (- i 1)))
               ())))
-     (loop l 1000)))
+     (loop l 10000)))
 
   (defun test-2 (l)
     (labels
@@ -63,13 +63,13 @@
                   (recursive-div2 ll)
                   (loop ll (- i 1)))
               ())))
-     (loop l 1000)))
+     (loop l 10000)))
 
   (defun run ()
     (test-1 *ll*)
     (test-2 *ll*))
 
-  (run)
+  (time-execution (run) stdout)
 
   (print "Finished div")
 

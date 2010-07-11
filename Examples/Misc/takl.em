@@ -20,8 +20,8 @@
         (cons n (listn (- n 1)))
       ()))
 
-  (deflocal |18l| (listn 18))
-  (deflocal |12l| (listn 12))
+  (deflocal |22l| (listn 22))
+  (deflocal |14l| (listn 14))
   (deflocal |6l| (listn 6))
 
   (defun mas (x y z)
@@ -36,7 +36,7 @@
                (shorter? (cdr x)
                          (cdr y)))))
 
-  (time-execution (mas |18l| |12l| |6l|) stdout)
+  (time-execution (mas |22l| |14l| |6l|) stdout)
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module
