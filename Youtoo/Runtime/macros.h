@@ -38,11 +38,11 @@ extern LispRef macros_bindings[];
 #define generic_lambda_fn_index 5 
 #define defmethod_fn_index 5 
 #define cond_fn_index 3 
-#define method_lambda_fn_index 2 
+#define method_lambda_fn_index 3 
 #define defclass_fn_index 11 
 #define let_cc_X47_fn_index 4 
 #define defprimclass_fn_index 5 
-#define defmethod_args_fn_index 3 
+#define defmethod_args_fn_index 2 
 #define unwind_protect_fn_index 8 
 #define with_input_file_of_path_fn_index 4 
 #define and_fn_index 4 

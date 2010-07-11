@@ -4,7 +4,7 @@
 (definterface cg-bycode1
   (import (i-level1 cg-bycode)
    syntax (_macros _cg-bycode0 _sx-obj0)
-   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float double1 double stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1 cg-bycode)
+   full-import (aux-table level1 telos mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol boot boot1 i-level1 cg-bycode)
    export (
     ((name . bytecode-args!) (pos . 2) (origin cg-bycode . bytecode-args!) (inline (G004265 (stack-ref 1) (static-fpi-ref 4) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))
     ((name . bytecode-size!) (pos . 4) (origin cg-bycode . bytecode-size!) (inline (G004253 (stack-ref 1) (static-ref1) (stack-ref 2) (binding-ref ? <bytecode>) (set-primitive-relative-ref) (nobble 2))))

@@ -4,7 +4,7 @@
 (definterface macros
   (import (level1 telos0 stream0)
    syntax (boot0)
-   full-import (symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream double double1 float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level1 mop-defcl0 mop-meth0 mop-gf0 boot0 telos0 stream0)
+   full-import (symbol stream3 random handler read table table1 vector convert1 format list socket stream2 lock stream1 stream float character compare collect fpi number integer copy convert string callback let-cc dynamic thread event condition bit mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos level1 mop-defcl0 mop-meth0 mop-gf0 boot0 telos0 stream0)
    export (
     ((name . defgeneric) (pos . 2) (origin mop-gf0 . defgeneric))
     ((name . dynamic-let) (pos . 11) (origin macros . dynamic-let))
@@ -36,11 +36,11 @@
     ((name . generic-lambda) (pos . 5) (origin mop-gf0 . generic-lambda))
     ((name . defmethod) (pos . 5) (origin mop-meth0 . defmethod))
     ((name . cond) (pos . 3) (origin boot0 . cond))
-    ((name . method-lambda) (pos . 2) (origin mop-meth0 . method-lambda))
+    ((name . method-lambda) (pos . 3) (origin mop-meth0 . method-lambda))
     ((name . defclass) (pos . 11) (origin mop-defcl0 . defclass))
     ((name . let/cc) (pos . 4) (origin macros . let/cc))
     ((name . defprimclass) (pos . 5) (origin mop-defcl0 . defprimclass))
-    ((name . defmethod-args) (pos . 3) (origin mop-meth0 . defmethod-args))
+    ((name . defmethod-args) (pos . 2) (origin mop-meth0 . defmethod-args))
     ((name . unwind-protect) (pos . 8) (origin macros . unwind-protect))
     ((name . with-input-file-of-path) (pos . 4) (origin stream0 . with-input-file-of-path))
     ((name . and) (pos . 4) (origin boot0 . and))

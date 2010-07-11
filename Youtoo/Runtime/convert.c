@@ -33,20 +33,20 @@ void initialize_module_convert()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_1626, G001625, G001623;
+  LispRef sym_1628, G001627, G001625;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 4 is_init: 0 index: 3 binding: convert */
-  static const void *G001622[] = {I(ab,24,00,00),B(mop_class ,13),I(3c,01,1c,1c),I(3d,01,02,00)};
+  static const void *G001624[] = {I(ab,24,00,00),B(mop_class ,13),I(3c,01,1c,1c),I(3d,01,02,00)};
 
   /* Byte-vector with size: 19 is_init: 1 index: 0 binding: initialize-convert */
-  static const void *G001624[] = {I(87,25,00,00),B(convert ,1),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(convert ,4),I(23,00,00,00),B(convert ,3),I(3b,02,25,00),B(convert ,2),I(86,ac,00,00)};
+  static const void *G001626[] = {I(87,25,00,00),B(convert ,1),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(convert ,4),I(23,00,00,00),B(convert ,3),I(3b,02,25,00),B(convert ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G001623,G001622);
-  eul_intern_symbol(sym_1626,"convert");
   eul_allocate_bytevector( G001625,G001624);
+  eul_intern_symbol(sym_1628,"convert");
+  eul_allocate_bytevector( G001627,G001626);
 
   /* Set local bindings */
   {
@@ -55,10 +55,10 @@ void initialize_module_convert()
       convert_bindings[i] = eul_nil;
   }
 
-  convert_bindings[ 3] = G001623;
+  convert_bindings[ 3] = G001625;
   convert_bindings[ 1] = eul_nil;
-  convert_bindings[ 4] = sym_1626;
-  eul_allocate_lambda( convert_bindings[0], "initialize-convert", 0, G001625);
+  convert_bindings[ 4] = sym_1628;
+  eul_allocate_lambda( convert_bindings[0], "initialize-convert", 0, G001627);
 
   }
 }

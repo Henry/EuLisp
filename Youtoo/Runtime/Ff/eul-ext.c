@@ -444,20 +444,23 @@ int eul_sprintf(char *buf, int buf_offset, char *fmt_str, LispRef x)
 {
     if (eul_is_int(x))
     {
-        return (int)sprintf(buf + buf_offset, fmt_str, eul_int_as_c_int(x));
+        return sprintf(buf + buf_offset, fmt_str, eul_int_as_c_int(x));
     }
     else if (eul_is_double(x))
     {
-        return (int)sprintf(buf + buf_offset, fmt_str,
-        eul_double_as_c_double(x));
+        return sprintf
+        (
+            buf + buf_offset, fmt_str,
+            eul_double_as_c_double(x)
+        );
     }
     else if (eul_is_char(x))
     {
-        return (int)sprintf(buf + buf_offset, fmt_str, eul_char_as_c_char(x));
+        return sprintf(buf + buf_offset, fmt_str, eul_char_as_c_char(x));
     }
     else
     {
-        return (int)sprintf(buf + buf_offset, fmt_str, (ptrInt) x);
+        return sprintf(buf + buf_offset, fmt_str, (ptrInt) x);
     }
 }
 
@@ -472,7 +475,7 @@ int eul_sprintf_string
 )
 {
     // Format string ignored
-    memcpy(buf + buf_offset, x + x_offset, (int)n);
+    memcpy(buf + buf_offset, x + x_offset, n);
 
     return 1;
 }

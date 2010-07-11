@@ -20,7 +20,6 @@
            dynamic
            event
            float
-           double
            fpi
            format
            read

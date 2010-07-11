@@ -23,14 +23,16 @@
 ///-----------------------------------------------------------------------------
 
 #define eul_allocate_double(loc, x)                                            \
-    { double *d_ptr;                                                           \
+    {                                                                          \
+        double *d_ptr;                                                         \
         ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_double_class), DOUBLE_SIZE);    \
         d_ptr = (double *) &(slot_ref(loc, 0));                                \
         *d_ptr = x;                                                            \
     }
 
 #define eul_allocate_double2(loc, data1, data2)                                \
-    { ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_double_class), DOUBLE_SIZE);      \
+    {                                                                          \
+        ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_double_class), DOUBLE_SIZE);    \
         slot_ref(loc, 0) = (LispRef) data1;                                    \
         slot_ref(loc, 1) = (LispRef) data2;                                    \
     }

@@ -56,7 +56,7 @@ int read_into_buffer(int _file, char *buf, int n)
             *(buf + (n >> 1) + status++) = '\n';
 
             // Re-terminate the string
-            *(buf + (n >> 1) + status) = NULL;
+            *(buf + (n >> 1) + status) = '\0';
 
             // Free the readline buffer allocated with malloc
             free(lbuf);

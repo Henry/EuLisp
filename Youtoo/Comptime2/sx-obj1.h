@@ -59,7 +59,7 @@ extern LispRef sx_obj1_bindings[];
 #define binding_immutable__X33_fn_index 67 
 #define module_syntax_env__X33_fn_index 47 
 #define binding_imported__X63_fn_index 58 
-#define module_syntax_env__X63_fn_index 23 
+#define module_syntax_env__X63_fn_index 24 
 #define module_all_used_module_names__X33_fn_index 31 
 #define module_anonymous_lambdas__X63_fn_index 25 
 #define syntax_expr_encl_lambda__X33_fn_index 26 
@@ -67,11 +67,11 @@ extern LispRef sx_obj1_bindings[];
 #define module_named_constants__X63_fn_index 36 
 #define module_max_binding_vector_size__X33_fn_index 57 
 #define module_anonymous_lambdas__X33_fn_index 35 
-#define binding_local_index__X63_fn_index 24 
+#define binding_local_index__X63_fn_index 23 
 #define _syntax_def__X60_X62_fn_index 30 
 #define module_foreign_functions__X63_fn_index 34 
 #define module_static_variables__X33_fn_index 22 
-#define module_used_module_names__X33_fn_index 10 
+#define module_used_module_names__X33_fn_index 11 
 #define syntax_expr__X63_fn_index 21 
 #define _syntax_expr__X60_X62_fn_index 3 
 #define module__X63_fn_index 45 
@@ -79,7 +79,7 @@ extern LispRef sx_obj1_bindings[];
 #define module_named_lambdas__X33_fn_index 2 
 #define module_lexical_binding_refs__X63_fn_index 55 
 #define binding_local_name__X63_fn_index 20 
-#define interface_binding__X63_fn_index 11 
+#define interface_binding__X63_fn_index 10 
 
 
 

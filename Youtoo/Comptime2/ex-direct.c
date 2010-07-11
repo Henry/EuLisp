@@ -88,7 +88,7 @@ void initialize_module_ex_direct()
 
   eul_allocate_static_string(str_5491, "exported lexical binding ~a not available", 41);
   /* Byte-vector with size: 32 is_init: 0 index: 22 binding: anonymous */
-  static const void *G005489[] = {I(ab,1b,24,00),B(sx_obj1 ,14),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,6c),I(1c,24,00,00),B(p_env ,7),I(3c,01,1b,34),I(00,00,00,45),I(1b,84,24,00),B(sx_obj1 ,42),I(08,1c,24,00),B(p_env ,11),I(3c,01,2a,1b),I(24,00,00,00),B(sx_obj ,50),I(3c,01,1b,34),I(00,00,00,19),I(1c,87,1c,82),I(1d,24,00,00),B(sx_obj ,8),I(09,22,02,32),I(00,00,00,06),I(86,22,02,32),I(00,00,00,18),I(86,23,00,00),B(ex_direct ,21),I(1f,04,24,00),B(i_notify ,6),I(3d,03,04,22),I(01,45,03,00)};
+  static const void *G005489[] = {I(ab,1b,24,00),B(sx_obj1 ,14),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,6c),I(1c,24,00,00),B(p_env ,7),I(3c,01,1b,34),I(00,00,00,45),I(1b,84,24,00),B(sx_obj1 ,42),I(08,1c,24,00),B(p_env ,11),I(3c,01,2a,1b),I(24,00,00,00),B(sx_obj ,49),I(3c,01,1b,34),I(00,00,00,19),I(1c,87,1c,82),I(1d,24,00,00),B(sx_obj ,17),I(09,22,02,32),I(00,00,00,06),I(86,22,02,32),I(00,00,00,18),I(86,23,00,00),B(ex_direct ,21),I(1f,04,24,00),B(i_notify ,6),I(3d,03,04,22),I(01,45,03,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 23 binding: expand-export */
   static const void *G005492[] = {I(aa,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(ex_direct ,11),I(23,00,00,00),B(ex_direct ,22),I(3b,02,1c,24),B(aux_table ,7),I(3d,02,01,00)};

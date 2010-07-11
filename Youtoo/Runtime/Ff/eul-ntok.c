@@ -304,7 +304,7 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
     char *p;
     int n = 0;
     int i;
-    char *tokstart;
+    char *tokstart = NULL;
 
     // variables to hold the token value
     int fpibase;

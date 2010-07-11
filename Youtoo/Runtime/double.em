@@ -3,7 +3,6 @@
 ;;; ---                         EuLisp System 'youtoo'
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: level1
-
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;; Description: double precision floats
 ;;;-----------------------------------------------------------------------------
@@ -20,7 +19,7 @@
    expose (double1))
 
 ;;;-----------------------------------------------------------------------------
-;;; Limits (-2^29  ... 2^29 - 1)
+;;; Limits
 ;;;-----------------------------------------------------------------------------
   (defextern get-double-float-max () <double> "eul_get_dbl_max")
   (defextern get-double-float-min () <double> "eul_get_dbl_min")

@@ -4,8 +4,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: tables; fixed comparator and hash-function;
-;;;    assume non-relocating garbage collector!
+;;;  Description: tables; fixed comparator and hash-function;
+;;;  Note: assumes non-relocating garbage collector!
 ;;;-----------------------------------------------------------------------------
 (defmodule table
   (syntax (_telos0)

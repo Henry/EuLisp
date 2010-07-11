@@ -15,6 +15,7 @@
 ;;; = and binary=
 ;;;-----------------------------------------------------------------------------
   (defun = (arg . args)
+    (primitive-print "=")
     (labels
      ((loop (l)
             (if (null? l) t

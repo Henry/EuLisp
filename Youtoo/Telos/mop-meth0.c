@@ -31,15 +31,15 @@ void initialize_module_mop_meth0()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_452, sym_451, sym_450, sym_449, sym_448, sym_447, sym_446, G00445, sym_443, sym_442, G00441, G00439, G00437, G00435, sym_433, sym_432, G00431, sym_429, sym_428, sym_427, sym_426, sym_425, sym_423, G00421, G00419, G00417, sym_415, sym_414, sym_413, sym_412, sym_411, key_410, G00408;
+  LispRef sym_452, sym_451, sym_450, sym_449, sym_448, sym_447, sym_446, G00445, sym_443, sym_442, G00441, G00439, G00437, G00435, sym_433, sym_432, G00431, sym_429, sym_428, sym_427, sym_426, sym_425, sym_423, G00421, G00419, sym_417, sym_416, sym_415, sym_414, sym_413, key_412, G00410, G00408;
 
   /* Code vector and literal definitions */
-  eul_allocate_static_cons(cons_409, NULL, NULL);
-  /* Byte-vector with size: 39 is_init: 0 index: 18 binding: method-lambda */
-  static const void *G00407[] = {I(a8,1b,24,00),B(mop_meth0 ,9),I(3c,01,1c,24),B(mop_meth0 ,8),I(3c,01,1d,24),B(mop_meth0 ,7),I(3c,01,1d,23),B(mop_meth0 ,12),I(24,00,00,00),B(mop_key ,3),I(3c,02,23,00),B(mop_meth0 ,11),I(1f,04,23,00),B(mop_meth0 ,13),I(24,00,00,00),B(mop_key ,2),I(3c,03,1f,03),I(24,00,00,00),B(mop_meth0 ,3),I(3c,01,1f,04),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1b,24),B(collect ,9),I(3c,01,1b,1d),I(0f,23,00,00),B(mop_meth0 ,14),I(1c,0f,1f,04),I(1f,08,0f,23),B(mop_meth0 ,15),I(1c,0f,23,00),B(mop_meth0 ,16),I(1f,09,0f,1b),I(86,0f,1d,1c),I(0f,1f,05,1c),I(0f,1f,0b,1c),I(0f,23,00,00),B(mop_meth0 ,17),I(1c,0f,45,12)};
+  /* Byte-vector with size: 26 is_init: 0 index: 11 binding: defmethod-args */
+  static const void *G00407[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,56),I(1c,7a,12,1b),I(34,00,00,00),I(00,00,00,10),I(1d,32,00,00),I(00,00,00,40),I(1d,10,7a,12),I(1b,34,00,00),I(00,00,00,1f),I(1f,03,10,1f),I(04,11,1b,24),B(mop_meth0 ,2),I(3c,01,1d,1c),I(0f,22,03,32),I(00,00,00,18),I(1f,03,72,1f),I(04,11,1b,24),B(mop_meth0 ,2),I(3c,01,1d,1c),I(0f,22,03,22),I(01,22,01,45),I(02,00,00,00)};
 
-  /* Byte-vector with size: 26 is_init: 0 index: 19 binding: defmethod-args */
-  static const void *G00416[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,56),I(1c,7a,12,1b),I(34,00,00,00),I(00,00,00,10),I(1d,32,00,00),I(00,00,00,40),I(1d,10,7a,12),I(1b,34,00,00),I(00,00,00,1f),I(1f,03,10,1f),I(04,11,1b,24),B(mop_meth0 ,3),I(3c,01,1d,1c),I(0f,22,03,32),I(00,00,00,18),I(1f,03,72,1f),I(04,11,1b,24),B(mop_meth0 ,3),I(3c,01,1d,1c),I(0f,22,03,22),I(01,22,01,45),I(02,00,00,00)};
+  eul_allocate_static_cons(cons_411, NULL, NULL);
+  /* Byte-vector with size: 39 is_init: 0 index: 19 binding: method-lambda */
+  static const void *G00409[] = {I(a8,1b,24,00),B(mop_meth0 ,9),I(3c,01,1c,24),B(mop_meth0 ,8),I(3c,01,1d,24),B(mop_meth0 ,7),I(3c,01,1d,23),B(mop_meth0 ,13),I(24,00,00,00),B(mop_key ,3),I(3c,02,23,00),B(mop_meth0 ,12),I(1f,04,23,00),B(mop_meth0 ,14),I(24,00,00,00),B(mop_key ,2),I(3c,03,1f,03),I(24,00,00,00),B(mop_meth0 ,2),I(3c,01,1f,04),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1b,24),B(collect ,9),I(3c,01,1b,1d),I(0f,23,00,00),B(mop_meth0 ,15),I(1c,0f,1f,04),I(1f,08,0f,23),B(mop_meth0 ,16),I(1c,0f,23,00),B(mop_meth0 ,17),I(1f,09,0f,1b),I(86,0f,1d,1c),I(0f,1f,05,1c),I(0f,1f,0b,1c),I(0f,23,00,00),B(mop_meth0 ,18),I(1c,0f,45,12)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 20 binding: defmethod-domain */
   static const void *G00418[] = {I(aa,1b,7a,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,40),I(1c,10,7a,12),I(1b,34,00,00),I(00,00,00,1b),I(1d,11,1b,24),B(mop_meth0 ,4),I(3c,01,86,1c),I(0f,22,02,32),I(00,00,00,1c),I(1d,10,1b,73),I(1f,04,11,1b),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1d,1c),I(0f,22,04,22),I(01,45,02,00)};
@@ -47,7 +47,7 @@ void initialize_module_mop_meth0()
   eul_allocate_static_cons(cons_422, NULL, NULL);
   eul_allocate_static_cons(cons_424, NULL, NULL);
   /* Byte-vector with size: 62 is_init: 0 index: 29 binding: defmethod */
-  static const void *G00420[] = {I(43,fe,23,00),B(mop_meth0 ,22),I(1c,24,00,00),B(mop_meth0 ,9),I(3c,01,1d,24),B(mop_meth0 ,8),I(3c,01,1f,03),I(24,00,00,00),B(mop_meth0 ,7),I(3c,01,1d,23),B(mop_meth0 ,23),I(24,00,00,00),B(mop_key ,3),I(3c,02,23,00),B(mop_meth0 ,11),I(1f,04,1f,06),I(24,00,00,00),B(mop_key ,2),I(3c,03,1f,03),I(24,00,00,00),B(mop_meth0 ,3),I(3c,01,1f,04),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1d,1f),I(08,50,1b,34),I(00,00,00,1d),I(1f,0a,86,0f),I(23,00,00,00),B(mop_meth0 ,24),I(1c,0f,22,01),I(32,00,00,00),I(00,00,00,0a),I(1f,03,1d,24),B(collect ,9),I(3c,01,1b,1f),I(04,0f,23,00),B(mop_meth0 ,14),I(1c,0f,1f,06),I(1f,0a,0f,1f),I(0f,1c,0f,23),B(mop_meth0 ,25),I(1c,0f,23,00),B(mop_meth0 ,16),I(1f,0c,0f,1f),I(12,86,0f,23),B(mop_meth0 ,26),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(mop_meth0 ,27),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1f,0b,1c),I(0f,1f,0f,1c),I(0f,23,00,00),B(mop_meth0 ,17),I(1c,0f,1b,86),I(0f,1f,1d,1c),I(0f,23,00,00),B(mop_meth0 ,28),I(1c,0f,45,1f)};
+  static const void *G00420[] = {I(43,fe,23,00),B(mop_meth0 ,22),I(1c,24,00,00),B(mop_meth0 ,9),I(3c,01,1d,24),B(mop_meth0 ,8),I(3c,01,1f,03),I(24,00,00,00),B(mop_meth0 ,7),I(3c,01,1d,23),B(mop_meth0 ,23),I(24,00,00,00),B(mop_key ,3),I(3c,02,23,00),B(mop_meth0 ,12),I(1f,04,1f,06),I(24,00,00,00),B(mop_key ,2),I(3c,03,1f,03),I(24,00,00,00),B(mop_meth0 ,2),I(3c,01,1f,04),I(24,00,00,00),B(mop_meth0 ,4),I(3c,01,1d,1f),I(08,50,1b,34),I(00,00,00,1d),I(1f,0a,86,0f),I(23,00,00,00),B(mop_meth0 ,24),I(1c,0f,22,01),I(32,00,00,00),I(00,00,00,0a),I(1f,03,1d,24),B(collect ,9),I(3c,01,1b,1f),I(04,0f,23,00),B(mop_meth0 ,15),I(1c,0f,1f,06),I(1f,0a,0f,1f),I(0f,1c,0f,23),B(mop_meth0 ,25),I(1c,0f,23,00),B(mop_meth0 ,17),I(1f,0c,0f,1f),I(12,86,0f,23),B(mop_meth0 ,26),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(mop_meth0 ,27),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1f,0b,1c),I(0f,1f,0f,1c),I(0f,23,00,00),B(mop_meth0 ,18),I(1c,0f,1b,86),I(0f,1f,1d,1c),I(0f,23,00,00),B(mop_meth0 ,28),I(1c,0f,45,1f)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 32 binding: method-function-lambda */
   static const void *G00430[] = {I(43,fe,23,00),B(mop_meth0 ,30),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(mop_meth0 ,31),I(1c,0f,45,05)};
@@ -65,28 +65,28 @@ void initialize_module_mop_meth0()
   static const void *G00440[] = {I(43,fd,1d,86),I(0f,23,00,00),B(mop_meth0 ,36),I(1c,0f,23,00),B(mop_meth0 ,30),I(1f,03,0f,1b),I(86,0f,1f,05),I(1c,0f,1f,03),I(1c,0f,23,00),B(mop_meth0 ,37),I(1c,0f,45,09)};
 
   /* Byte-vector with size: 62 is_init: 1 index: 0 binding: initialize-mop-meth0 */
-  static const void *G00444[] = {I(87,25,00,00),B(mop_meth0 ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(mop_meth0 ,25),I(23,00,00,00),B(mop_meth0 ,38),I(3b,fd,25,00),B(mop_meth0 ,10),I(23,00,00,00),B(mop_meth0 ,39),I(23,00,00,00),B(mop_meth0 ,35),I(3b,01,25,00),B(mop_meth0 ,9),I(23,00,00,00),B(mop_meth0 ,40),I(23,00,00,00),B(mop_meth0 ,34),I(3b,01,25,00),B(mop_meth0 ,8),I(23,00,00,00),B(mop_meth0 ,41),I(23,00,00,00),B(mop_meth0 ,33),I(3b,01,25,00),B(mop_meth0 ,7),I(23,00,00,00),B(mop_meth0 ,15),I(23,00,00,00),B(mop_meth0 ,32),I(3b,fe,25,00),B(mop_meth0 ,6),I(23,00,00,00),B(mop_meth0 ,42),I(23,00,00,00),B(mop_meth0 ,29),I(3b,fe,25,00),B(mop_meth0 ,5),I(23,00,00,00),B(mop_meth0 ,43),I(23,00,00,00),B(mop_meth0 ,20),I(3b,01,25,00),B(mop_meth0 ,4),I(23,00,00,00),B(mop_meth0 ,44),I(23,00,00,00),B(mop_meth0 ,19),I(3b,01,25,00),B(mop_meth0 ,3),I(23,00,00,00),B(mop_meth0 ,45),I(23,00,00,00),B(mop_meth0 ,18),I(3b,ff,25,00),B(mop_meth0 ,2),I(86,ac,00,00)};
+  static const void *G00444[] = {I(87,25,00,00),B(mop_meth0 ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(mop_meth0 ,25),I(23,00,00,00),B(mop_meth0 ,38),I(3b,fd,25,00),B(mop_meth0 ,10),I(23,00,00,00),B(mop_meth0 ,39),I(23,00,00,00),B(mop_meth0 ,35),I(3b,01,25,00),B(mop_meth0 ,9),I(23,00,00,00),B(mop_meth0 ,40),I(23,00,00,00),B(mop_meth0 ,34),I(3b,01,25,00),B(mop_meth0 ,8),I(23,00,00,00),B(mop_meth0 ,41),I(23,00,00,00),B(mop_meth0 ,33),I(3b,01,25,00),B(mop_meth0 ,7),I(23,00,00,00),B(mop_meth0 ,16),I(23,00,00,00),B(mop_meth0 ,32),I(3b,fe,25,00),B(mop_meth0 ,6),I(23,00,00,00),B(mop_meth0 ,42),I(23,00,00,00),B(mop_meth0 ,29),I(3b,fe,25,00),B(mop_meth0 ,5),I(23,00,00,00),B(mop_meth0 ,43),I(23,00,00,00),B(mop_meth0 ,20),I(3b,01,25,00),B(mop_meth0 ,4),I(23,00,00,00),B(mop_meth0 ,44),I(23,00,00,00),B(mop_meth0 ,19),I(3b,ff,25,00),B(mop_meth0 ,3),I(23,00,00,00),B(mop_meth0 ,45),I(23,00,00,00),B(mop_meth0 ,11),I(3b,01,25,00),B(mop_meth0 ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_intern_keyword(key_410,"class");
-  object_class(cons_409) = eul_static_cons_class;
-  eul_car(cons_409) = key_410;
-  eul_cdr(cons_409) = eul_nil;
-  eul_intern_symbol(sym_411,"<simple-method>");
-  eul_intern_symbol(sym_412,"make-vector");
-  eul_intern_symbol(sym_413,"method-function-lambda");
-  eul_intern_symbol(sym_414,"list");
-  eul_intern_symbol(sym_415,"make-method");
   eul_allocate_bytevector( G00408,G00407);
-  eul_allocate_bytevector( G00417,G00416);
+  eul_intern_keyword(key_412,"class");
+  object_class(cons_411) = eul_static_cons_class;
+  eul_car(cons_411) = key_412;
+  eul_cdr(cons_411) = eul_nil;
+  eul_intern_symbol(sym_413,"<simple-method>");
+  eul_intern_symbol(sym_414,"make-vector");
+  eul_intern_symbol(sym_415,"method-function-lambda");
+  eul_intern_symbol(sym_416,"list");
+  eul_intern_symbol(sym_417,"make-method");
+  eul_allocate_bytevector( G00410,G00409);
   eul_allocate_bytevector( G00419,G00418);
   eul_intern_symbol(sym_423,"absent");
   object_class(cons_422) = eul_static_cons_class;
   eul_car(cons_422) = sym_423;
   eul_cdr(cons_422) = eul_nil;
   object_class(cons_424) = eul_static_cons_class;
-  eul_car(cons_424) = key_410;
+  eul_car(cons_424) = key_412;
   eul_cdr(cons_424) = eul_nil;
   eul_intern_symbol(sym_425,"generic-function-method-class");
   eul_intern_symbol(sym_426,"named-method-function-lambda");
@@ -108,8 +108,8 @@ void initialize_module_mop_meth0()
   eul_intern_symbol(sym_448,"defmethod-body");
   eul_intern_symbol(sym_449,"defmethod");
   eul_intern_symbol(sym_450,"defmethod-domain");
-  eul_intern_symbol(sym_451,"defmethod-args");
-  eul_intern_symbol(sym_452,"method-lambda");
+  eul_intern_symbol(sym_451,"method-lambda");
+  eul_intern_symbol(sym_452,"defmethod-args");
   eul_allocate_bytevector( G00445,G00444);
 
   /* Set local bindings */
@@ -119,15 +119,15 @@ void initialize_module_mop_meth0()
       mop_meth0_bindings[i] = eul_nil;
   }
 
-  mop_meth0_bindings[ 11] = key_410;
-  mop_meth0_bindings[ 12] = cons_409;
-  mop_meth0_bindings[ 13] = sym_411;
-  mop_meth0_bindings[ 14] = sym_412;
-  mop_meth0_bindings[ 15] = sym_413;
-  mop_meth0_bindings[ 16] = sym_414;
-  mop_meth0_bindings[ 17] = sym_415;
-  mop_meth0_bindings[ 18] = G00408;
-  mop_meth0_bindings[ 19] = G00417;
+  mop_meth0_bindings[ 11] = G00408;
+  mop_meth0_bindings[ 12] = key_412;
+  mop_meth0_bindings[ 13] = cons_411;
+  mop_meth0_bindings[ 14] = sym_413;
+  mop_meth0_bindings[ 15] = sym_414;
+  mop_meth0_bindings[ 16] = sym_415;
+  mop_meth0_bindings[ 17] = sym_416;
+  mop_meth0_bindings[ 18] = sym_417;
+  mop_meth0_bindings[ 19] = G00410;
   mop_meth0_bindings[ 20] = G00419;
   mop_meth0_bindings[ 21] = sym_423;
   mop_meth0_bindings[ 22] = cons_422;

@@ -31,7 +31,7 @@ void initialize_module_i_aux0()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_1159, sym_1158, sym_1157, sym_1156, sym_1155, sym_1154, sym_1153, sym_1152, sym_1151, sym_1150, sym_1149, sym_1148, sym_1147, sym_1146, sym_1145, sym_1144, sym_1143, sym_1142, sym_1141, sym_1140, sym_1139, sym_1138, sym_1137, G001136, G001133, G001130, G001126, G001123, sym_1110, sym_1107, G001094, sym_1085, sym_1080, sym_1077, sym_1072, sym_1069, sym_1066, G001061, G001058, sym_1056, sym_1055, sym_1054, G001053, G001050, G001047, G001044, G001041, G001037, G001034, sym_1032, sym_1031, G001029, G001026, sym_1023, G001022, sym_1018, sym_1012, sym_1010, sym_1007, sym_1000, G00995, G00993, sym_991, sym_990, key_989, sym_988, sym_987, sym_986, key_985, sym_984, sym_982, sym_981, G00980, G00977, sym_971, G00968, G00965, sym_961, sym_960, G00959, sym_956, G00955, sym_953, sym_952, sym_951, sym_950, sym_948, sym_947, sym_946, sym_944, sym_943, sym_942, sym_941, sym_939, sym_938, sym_937, sym_936, sym_935, sym_934, sym_933, G00932, sym_930, sym_928, sym_927, sym_926, G00925, sym_923, sym_922, sym_921, sym_920, G00919;
+  LispRef sym_1159, sym_1158, sym_1157, sym_1156, sym_1155, sym_1154, sym_1153, sym_1152, sym_1151, sym_1150, sym_1149, sym_1148, sym_1147, sym_1146, sym_1145, sym_1144, sym_1143, sym_1142, sym_1141, sym_1140, sym_1139, sym_1138, sym_1137, G001136, G001133, G001130, G001126, G001123, sym_1110, sym_1107, G001094, sym_1085, sym_1080, sym_1077, sym_1072, sym_1069, sym_1066, G001061, G001058, sym_1056, sym_1055, sym_1054, G001053, G001050, G001047, G001044, G001041, G001037, G001034, sym_1032, sym_1031, G001029, sym_1026, G001025, G001022, sym_1018, sym_1012, sym_1010, sym_1007, sym_1000, G00995, G00993, sym_991, sym_990, key_989, sym_988, sym_987, sym_986, key_985, sym_984, sym_982, sym_981, G00980, G00977, sym_971, G00968, G00965, sym_961, sym_960, G00959, sym_956, G00955, sym_953, sym_952, sym_951, sym_950, sym_948, sym_947, sym_946, sym_944, sym_943, sym_942, sym_941, sym_939, sym_938, sym_937, sym_936, sym_935, sym_934, sym_933, G00932, sym_930, sym_928, sym_927, sym_926, G00925, sym_923, sym_922, sym_921, sym_920, G00919;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 17 is_init: 0 index: 34 binding: destination-object-dir */
@@ -103,13 +103,13 @@ void initialize_module_i_aux0()
   /* Byte-vector with size: 3 is_init: 0 index: 97 binding: main-link-string */
   static const void *G00994[] = {I(a9,23,00,00),B(i_aux0 ,96),I(45,00,00,00)};
 
-  eul_allocate_static_string(str_1024, "ff_stub_", 8);
-  /* Byte-vector with size: 11 is_init: 0 index: 100 binding: as-foreign-function-stub-name */
-  static const void *G001021[] = {I(aa,86,0f,23),B(i_aux0 ,98),I(1c,0f,1b,86),I(0f,23,00,00),B(i_aux0 ,67),I(1c,0f,1b,86),I(0f,23,00,00),B(i_aux0 ,99),I(1c,0f,23,00),B(i_aux0 ,32),I(1c,0f,45,06)};
+  eul_allocate_static_string(str_1023, ".h", 2);
+  /* Byte-vector with size: 16 is_init: 0 index: 99 binding: as-included-C-file-name */
+  static const void *G001021[] = {I(aa,1b,86,0f),I(23,00,00,00),B(i_aux0 ,66),I(1c,0f,1d,86),I(0f,23,00,00),B(i_aux0 ,67),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(i_aux0 ,37),I(1c,0f,23,00),B(i_aux0 ,98),I(86,0f,1c,1c),I(0f,23,00,00),B(i_aux0 ,32),I(1c,0f,45,0a)};
 
-  eul_allocate_static_string(str_1027, ".h", 2);
-  /* Byte-vector with size: 16 is_init: 0 index: 102 binding: as-included-C-file-name */
-  static const void *G001025[] = {I(aa,1b,86,0f),I(23,00,00,00),B(i_aux0 ,66),I(1c,0f,1d,86),I(0f,23,00,00),B(i_aux0 ,67),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(i_aux0 ,37),I(1c,0f,23,00),B(i_aux0 ,101),I(86,0f,1c,1c),I(0f,23,00,00),B(i_aux0 ,32),I(1c,0f,45,0a)};
+  eul_allocate_static_string(str_1027, "ff_stub_", 8);
+  /* Byte-vector with size: 11 is_init: 0 index: 102 binding: as-foreign-function-stub-name */
+  static const void *G001024[] = {I(aa,86,0f,23),B(i_aux0 ,100),I(1c,0f,1b,86),I(0f,23,00,00),B(i_aux0 ,67),I(1c,0f,1b,86),I(0f,23,00,00),B(i_aux0 ,101),I(1c,0f,23,00),B(i_aux0 ,32),I(1c,0f,45,06)};
 
   eul_allocate_static_string(str_1030, "-init-fun", 9);
   /* Byte-vector with size: 25 is_init: 0 index: 106 binding: as-module-init-function-name */
@@ -221,7 +221,7 @@ void initialize_module_i_aux0()
   static const void *G001132[] = {I(aa,1b,86,0f),I(23,00,00,00),B(i_aux0 ,66),I(1c,0f,1d,86),I(0f,23,00,00),B(i_aux0 ,67),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(i_aux0 ,37),I(1c,0f,1b,86),I(0f,23,00,00),B(i_aux0 ,145),I(1c,0f,23,00),B(i_aux0 ,32),I(1c,0f,45,0a)};
 
   /* Byte-vector with size: 176 is_init: 1 index: 0 binding: initialize-i-aux0 */
-  static const void *G001135[] = {I(87,25,00,00),B(i_aux0 ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(i_aux0 ,134),I(23,00,00,00),B(i_aux0 ,146),I(3b,01,25,00),B(i_aux0 ,29),I(23,00,00,00),B(i_aux0 ,147),I(23,00,00,00),B(i_aux0 ,144),I(3b,02,25,00),B(i_aux0 ,28),I(23,00,00,00),B(i_aux0 ,63),I(23,00,00,00),B(i_aux0 ,142),I(3b,01,25,00),B(i_aux0 ,27),I(23,00,00,00),B(i_aux0 ,148),I(23,00,00,00),B(i_aux0 ,139),I(3b,01,25,00),B(i_aux0 ,26),I(23,00,00,00),B(i_aux0 ,149),I(23,00,00,00),B(i_aux0 ,137),I(3b,00,25,00),B(i_aux0 ,25),I(23,00,00,00),B(i_aux0 ,150),I(23,00,00,00),B(i_aux0 ,133),I(3b,00,25,00),B(i_aux0 ,24),I(23,00,00,00),B(i_aux0 ,151),I(23,00,00,00),B(i_aux0 ,125),I(3b,01,25,00),B(i_aux0 ,23),I(23,00,00,00),B(i_aux0 ,120),I(23,00,00,00),B(i_aux0 ,123),I(3b,ff,25,00),B(i_aux0 ,22),I(23,00,00,00),B(i_aux0 ,152),I(23,00,00,00),B(i_aux0 ,119),I(3b,01,25,00),B(i_aux0 ,21),I(23,00,00,00),B(i_aux0 ,153),I(23,00,00,00),B(i_aux0 ,117),I(3b,01,25,00),B(i_aux0 ,20),I(23,00,00,00),B(i_aux0 ,129),I(23,00,00,00),B(i_aux0 ,115),I(3b,01,25,00),B(i_aux0 ,19),I(23,00,00,00),B(i_aux0 ,154),I(23,00,00,00),B(i_aux0 ,113),I(3b,00,25,00),B(i_aux0 ,18),I(23,00,00,00),B(i_aux0 ,155),I(23,00,00,00),B(i_aux0 ,111),I(3b,01,25,00),B(i_aux0 ,17),I(23,00,00,00),B(i_aux0 ,156),I(23,00,00,00),B(i_aux0 ,108),I(3b,01,25,00),B(i_aux0 ,16),I(23,00,00,00),B(i_aux0 ,157),I(23,00,00,00),B(i_aux0 ,106),I(3b,01,25,00),B(i_aux0 ,15),I(23,00,00,00),B(i_aux0 ,158),I(23,00,00,00),B(i_aux0 ,102),I(3b,01,25,00),B(i_aux0 ,14),I(23,00,00,00),B(i_aux0 ,159),I(23,00,00,00),B(i_aux0 ,100),I(3b,01,25,00),B(i_aux0 ,13),I(23,00,00,00),B(i_aux0 ,160),I(23,00,00,00),B(i_aux0 ,97),I(3b,00,25,00),B(i_aux0 ,12),I(23,00,00,00),B(i_aux0 ,161),I(23,00,00,00),B(i_aux0 ,90),I(3b,01,25,00),B(i_aux0 ,11),I(23,00,00,00),B(i_aux0 ,162),I(23,00,00,00),B(i_aux0 ,89),I(3b,fd,25,00),B(i_aux0 ,10),I(23,00,00,00),B(i_aux0 ,163),I(23,00,00,00),B(i_aux0 ,77),I(3b,01,25,00),B(i_aux0 ,9),I(23,00,00,00),B(i_aux0 ,164),I(23,00,00,00),B(i_aux0 ,75),I(3b,00,25,00),B(i_aux0 ,8),I(23,00,00,00),B(i_aux0 ,165),I(23,00,00,00),B(i_aux0 ,72),I(3b,01,25,00),B(i_aux0 ,7),I(23,00,00,00),B(i_aux0 ,35),I(23,00,00,00),B(i_aux0 ,70),I(3b,01,25,00),B(i_aux0 ,6),I(23,00,00,00),B(i_aux0 ,166),I(23,00,00,00),B(i_aux0 ,65),I(3b,02,25,00),B(i_aux0 ,5),I(23,00,00,00),B(i_aux0 ,167),I(23,00,00,00),B(i_aux0 ,62),I(3b,fe,25,00),B(i_aux0 ,4),I(23,00,00,00),B(i_aux0 ,168),I(23,00,00,00),B(i_aux0 ,40),I(3b,02,25,00),B(i_aux0 ,3),I(23,00,00,00),B(i_aux0 ,169),I(23,00,00,00),B(i_aux0 ,34),I(3b,01,25,00),B(i_aux0 ,2),I(86,ac,00,00)};
+  static const void *G001135[] = {I(87,25,00,00),B(i_aux0 ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(i_aux0 ,134),I(23,00,00,00),B(i_aux0 ,146),I(3b,01,25,00),B(i_aux0 ,29),I(23,00,00,00),B(i_aux0 ,147),I(23,00,00,00),B(i_aux0 ,144),I(3b,02,25,00),B(i_aux0 ,28),I(23,00,00,00),B(i_aux0 ,63),I(23,00,00,00),B(i_aux0 ,142),I(3b,01,25,00),B(i_aux0 ,27),I(23,00,00,00),B(i_aux0 ,148),I(23,00,00,00),B(i_aux0 ,139),I(3b,01,25,00),B(i_aux0 ,26),I(23,00,00,00),B(i_aux0 ,149),I(23,00,00,00),B(i_aux0 ,137),I(3b,00,25,00),B(i_aux0 ,25),I(23,00,00,00),B(i_aux0 ,150),I(23,00,00,00),B(i_aux0 ,133),I(3b,00,25,00),B(i_aux0 ,24),I(23,00,00,00),B(i_aux0 ,151),I(23,00,00,00),B(i_aux0 ,125),I(3b,01,25,00),B(i_aux0 ,23),I(23,00,00,00),B(i_aux0 ,120),I(23,00,00,00),B(i_aux0 ,123),I(3b,ff,25,00),B(i_aux0 ,22),I(23,00,00,00),B(i_aux0 ,152),I(23,00,00,00),B(i_aux0 ,119),I(3b,01,25,00),B(i_aux0 ,21),I(23,00,00,00),B(i_aux0 ,153),I(23,00,00,00),B(i_aux0 ,117),I(3b,01,25,00),B(i_aux0 ,20),I(23,00,00,00),B(i_aux0 ,129),I(23,00,00,00),B(i_aux0 ,115),I(3b,01,25,00),B(i_aux0 ,19),I(23,00,00,00),B(i_aux0 ,154),I(23,00,00,00),B(i_aux0 ,113),I(3b,00,25,00),B(i_aux0 ,18),I(23,00,00,00),B(i_aux0 ,155),I(23,00,00,00),B(i_aux0 ,111),I(3b,01,25,00),B(i_aux0 ,17),I(23,00,00,00),B(i_aux0 ,156),I(23,00,00,00),B(i_aux0 ,108),I(3b,01,25,00),B(i_aux0 ,16),I(23,00,00,00),B(i_aux0 ,157),I(23,00,00,00),B(i_aux0 ,106),I(3b,01,25,00),B(i_aux0 ,15),I(23,00,00,00),B(i_aux0 ,158),I(23,00,00,00),B(i_aux0 ,102),I(3b,01,25,00),B(i_aux0 ,14),I(23,00,00,00),B(i_aux0 ,159),I(23,00,00,00),B(i_aux0 ,99),I(3b,01,25,00),B(i_aux0 ,13),I(23,00,00,00),B(i_aux0 ,160),I(23,00,00,00),B(i_aux0 ,97),I(3b,00,25,00),B(i_aux0 ,12),I(23,00,00,00),B(i_aux0 ,161),I(23,00,00,00),B(i_aux0 ,90),I(3b,01,25,00),B(i_aux0 ,11),I(23,00,00,00),B(i_aux0 ,162),I(23,00,00,00),B(i_aux0 ,89),I(3b,fd,25,00),B(i_aux0 ,10),I(23,00,00,00),B(i_aux0 ,163),I(23,00,00,00),B(i_aux0 ,77),I(3b,01,25,00),B(i_aux0 ,9),I(23,00,00,00),B(i_aux0 ,164),I(23,00,00,00),B(i_aux0 ,75),I(3b,00,25,00),B(i_aux0 ,8),I(23,00,00,00),B(i_aux0 ,165),I(23,00,00,00),B(i_aux0 ,72),I(3b,01,25,00),B(i_aux0 ,7),I(23,00,00,00),B(i_aux0 ,35),I(23,00,00,00),B(i_aux0 ,70),I(3b,01,25,00),B(i_aux0 ,6),I(23,00,00,00),B(i_aux0 ,166),I(23,00,00,00),B(i_aux0 ,65),I(3b,02,25,00),B(i_aux0 ,5),I(23,00,00,00),B(i_aux0 ,167),I(23,00,00,00),B(i_aux0 ,62),I(3b,fe,25,00),B(i_aux0 ,4),I(23,00,00,00),B(i_aux0 ,168),I(23,00,00,00),B(i_aux0 ,40),I(3b,02,25,00),B(i_aux0 ,3),I(23,00,00,00),B(i_aux0 ,169),I(23,00,00,00),B(i_aux0 ,34),I(3b,01,25,00),B(i_aux0 ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
@@ -337,11 +337,11 @@ void initialize_module_i_aux0()
   object_class(cons_996) = eul_static_cons_class;
   eul_car(cons_996) = sym_950;
   eul_allocate_bytevector( G00995,G00994);
-  eul_intern_symbol(sym_1023,"gensym");
-  object_class(str_1024) = eul_static_string_class;
+  object_class(str_1023) = eul_static_string_class;
   eul_allocate_bytevector( G001022,G001021);
+  eul_intern_symbol(sym_1026,"gensym");
   object_class(str_1027) = eul_static_string_class;
-  eul_allocate_bytevector( G001026,G001025);
+  eul_allocate_bytevector( G001025,G001024);
   object_class(str_1030) = eul_static_string_class;
   eul_intern_symbol(sym_1031,"make-symbol");
   eul_intern_symbol(sym_1032,"*debug*");
@@ -493,8 +493,8 @@ void initialize_module_i_aux0()
   eul_intern_symbol(sym_1145,"as-C-hook-object-file-name");
   eul_intern_symbol(sym_1146,"as-C-hook-source-file-name");
   eul_intern_symbol(sym_1147,"as-module-init-function-name");
-  eul_intern_symbol(sym_1148,"as-included-C-file-name");
-  eul_intern_symbol(sym_1149,"as-foreign-function-stub-name");
+  eul_intern_symbol(sym_1148,"as-foreign-function-stub-name");
+  eul_intern_symbol(sym_1149,"as-included-C-file-name");
   eul_intern_symbol(sym_1150,"main-link-string");
   eul_intern_symbol(sym_1151,"untrace");
   eul_intern_symbol(sym_1152,"with-ct-handler");
@@ -582,11 +582,11 @@ void initialize_module_i_aux0()
   i_aux0_bindings[ 95] = sym_1018;
   i_aux0_bindings[ 96] = cons_996;
   i_aux0_bindings[ 97] = G00995;
-  i_aux0_bindings[ 98] = sym_1023;
-  i_aux0_bindings[ 99] = str_1024;
-  i_aux0_bindings[ 100] = G001022;
+  i_aux0_bindings[ 98] = str_1023;
+  i_aux0_bindings[ 99] = G001022;
+  i_aux0_bindings[ 100] = sym_1026;
   i_aux0_bindings[ 101] = str_1027;
-  i_aux0_bindings[ 102] = G001026;
+  i_aux0_bindings[ 102] = G001025;
   i_aux0_bindings[ 103] = str_1030;
   i_aux0_bindings[ 104] = sym_1031;
   i_aux0_bindings[ 105] = sym_1032;
