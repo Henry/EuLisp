@@ -24,7 +24,8 @@
       compare
       collect
       copy
-      format)
+      format
+      math)
 
      export
      (;; Special operators
