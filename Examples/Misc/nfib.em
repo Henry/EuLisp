@@ -11,7 +11,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule nfib
   (syntax (macros)
-   import (level0)
+   import (level0 math)
    export (nfib))
 
   (defun nfib (n)
