@@ -32,8 +32,8 @@ EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 ###-----------------------------------------------------------------------------
 ### Youtoo default compile rules for Level-0 and Level-1
 ###-----------------------------------------------------------------------------
-makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level0
-makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1
+makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level0 -l math
+makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1 -l math
 
 ###-----------------------------------------------------------------------------
 ### Youtoo compile rules for all examples
@@ -110,6 +110,7 @@ $(ARCH_DIR)/url3: url3.em
 .PHONY: runeuxlisp
 runeuxlisp: $(EXAMPLES_0_EM)
 	@$(foreach example, $(EXAMPLES_0_EM), \
+		echo "EuXLisp running " $(example); \
 		$(EUL_BIN_DIR)/euxlisp -m $(example);)
 
 # Currently echo, echod and padd are not run because they are interactive
@@ -119,6 +120,7 @@ RUN = fact append div dphil empty hanoi macro-dispatch-char nfib null \
 .PHONY: runyoutoo
 runyoutoo: $(EXAMPLES_EXE)
 	@$(foreach example, $(RUN), \
+		echo "Youtoo running " $(example); \
 		export LD_LIBRARY_PATH=$(EUL_LIB_DIR):$(LD_LIBRARY_PATH);\
 		$(ARCH_DIR)/$(example);)
 	$(ARCH_DIR)/url www.cs.bath.ac.uk /~jap/ak1/youtoo/home.html

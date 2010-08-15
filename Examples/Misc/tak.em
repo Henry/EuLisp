@@ -13,7 +13,7 @@
 ;;; TAK -- A vanilla version of the TAKeuchi function
 (defmodule tak
   (syntax (macros)
-   import (level0))
+   import (level0 math))
 
   (defun tak (x y z)
     (if (null? (< y x))
@@ -22,7 +22,7 @@
            (tak (- y 1) z x)
            (tak (- z 1) x y))))
 
-  (print (tak 18 12 6))
+  (print (tak 26 16 6))
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

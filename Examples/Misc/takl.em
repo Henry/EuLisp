@@ -13,15 +13,15 @@
 ;; TAKL -- The TAKeuchi function using lists as counters.
 (defmodule takl
   (syntax (macros)
-   import (level0))
+   import (level0 math))
 
   (defun listn (n)
     (if (null? (= 0 n))
         (cons n (listn (- n 1)))
       ()))
 
-  (deflocal |22l| (listn 22))
-  (deflocal |14l| (listn 14))
+  (deflocal |26l| (listn 26))
+  (deflocal |16l| (listn 16))
   (deflocal |6l| (listn 6))
 
   (defun mas (x y z)
@@ -36,7 +36,7 @@
                (shorter? (cdr x)
                          (cdr y)))))
 
-  (time-execution (mas |22l| |14l| |6l|) stdout)
+  (time-execution (mas |26l| |16l| |6l|) stdout)
 
 ;;;-----------------------------------------------------------------------------
   )  ;; end of module

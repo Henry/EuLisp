@@ -1,12 +1,11 @@
 ;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo'
+;;; Module: benchmark 'nfib'
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
 ;;;  Authors: Andreas Kind
-;;; Description: counting fibonacci function calls
+;;;  Description: counting fibonacci function calls
 ;;;  Compilation
-;;    youtoo nfib -l level0
+;;  youtoo nfib -l level0 -l math
 ;;;  Interpretation: (!> nfib)
 ;;;-----------------------------------------------------------------------------
 (defmodule nfib
