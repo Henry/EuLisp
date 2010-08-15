@@ -367,13 +367,6 @@
                (list binary-op (loop (cdr l)) (car l)))))
         (loop (reverse-list args)))))
 
-  ;  (defun unfold-rest-arg-appl (op args)
-  ;    (if (null? (cdr args))
-  ;       (car args)
-  ;      (list (concatenate 'int-binary op)
-  ;           (car args)
-  ;           (unfold-rest-arg-appl op (cdr args)))))
-
   (defun expand-fun-form (x env)
     ;; Like id expander, but binding is not checked
     (if (atom? x)
