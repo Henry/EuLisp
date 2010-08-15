@@ -1,18 +1,22 @@
-;;; macros.em
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
-;;; those tricky macros
-
+;;; Copyright (c) 1994 Russell Bradford
+;;;-----------------------------------------------------------------------------
+;;; ---                         EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;;  Library: level0
+;;;  Authors: Russell Bradford
+;;;  Description: basic macro functionality
+;;;-----------------------------------------------------------------------------
 (defmodule macros
     (import (root)
-     export
-     (defmacro
-      quasiquote
-      unquote
-      unquote-splicing
-      symbol-macro
-      ;syntax
-      macroexpand
-      debugging dprint))
+     export (
+             defmacro
+             quasiquote
+             unquote
+             unquote-splicing
+             symbol-macro
+             macroexpand
+             debugging
+             dprint))
 
   (define (getprop s v)
           (if (symbol? s)
@@ -258,10 +262,6 @@
   (define (symbol-macro x)
           (get-syntax x '%macro))
 
-  ;  (put-syntax 'syntax '%syntax
-  ;       (lambda (form)
-  ;        (reintern-syntax (cadr form))))
-
   (define (macroexpand1 expr)
           (cond ((cons? expr)
                  (if (symbol? (car expr))
@@ -310,4 +310,6 @@
   ;;              (%compile (expand-macros expr))
   ;;            (%compile (expand-macros expr) (car env))))
 
-  )
+;;;-----------------------------------------------------------------------------
+  )  ;; end of module
+;;;-----------------------------------------------------------------------------
