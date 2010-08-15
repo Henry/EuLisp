@@ -9,7 +9,7 @@
 
 #include <eulisp.h>
 #include <pthread.h>
-#include <gc.h>
+#include <gc/gc.h>
 
 ///-----------------------------------------------------------------------------
 /// eul_lock_create()

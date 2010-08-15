@@ -11,7 +11,7 @@
 
 #include <eulisp.h>
 #include <thread.h>
-#include <gc.h>
+#include <gc/gc.h>
 
 ///-----------------------------------------------------------------------------
 /// Thread access
