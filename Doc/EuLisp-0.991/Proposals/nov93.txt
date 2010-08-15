@@ -94,7 +94,7 @@ because I'm not sure if SIGFPE is rised only in cases of division by zero.
 However, if e.g. C supports special ieee-signals rised by hardware, one
 could distinguish easily distinguish between several subconditions.
 
-Common to both cases is that arithmetic-condition>'s are not continuable!!!!
+Common to both cases is that <arithmetic-condition>'s are not continuable!!!!
 
 
 --ulrich

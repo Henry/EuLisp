@@ -127,8 +127,7 @@
     initialised from a method-lambda rather than a function.  Discussion would
     continue offline.
 
-*** additional scan directives held over.
-
+*** additional scan directives held over
 *** deep-copy and shallow-copy
     NS wanted the definition only to require equal of an object and its copy.
     This was considered to be another case of ad-hocness around the edges and
@@ -229,7 +228,6 @@
 
 ------------------------------------------------------------------------------
 * Saturday 20th
-
 *** Organisation of class hierarchy.
     Harley proposed that, as a general principle of organisation, concrete
     classes should not inherit from concrete classes.
@@ -316,7 +314,6 @@
     dder: text for function call and apply should accommodate continuations,
     i.e. `if the function returns...'
 
-
 *** AGENDA
 
     wait method on locks
@@ -365,7 +362,6 @@
 *** n-ary comparators
     + Harley wants n-ary >, >=, <=.  Agreed.
     + Do we want != to be n-ary?  No, this is not n-ary in Dylan.
-
 
 *** Apres pizza
 
