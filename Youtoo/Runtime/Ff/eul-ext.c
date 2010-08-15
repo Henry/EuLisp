@@ -3,7 +3,7 @@
 /// ---                 EuLisp System 'youtoo'
 ///-----------------------------------------------------------------------------
 ///  Library: boot, telos, level1, eval, youtoo
-///  Authos: Andreas Kind
+///  Authors: Andreas Kind
 ///  Description: built-in foreign functions
 ///-----------------------------------------------------------------------------
 

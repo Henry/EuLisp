@@ -19,7 +19,7 @@ extern void fprint_vector (FILE *, LispRef);
 
 #ifdef WITH_CONS_TAG
 extern void eul_initialize_cons();
-#endif /* WITH_CONS_TAG */
+#endif // WITH_CONS_TAG
 
 ///-----------------------------------------------------------------------------
 /// Cons access
@@ -34,7 +34,7 @@ extern void eul_initialize_cons();
 #else
 #define eul_car(x) (slot_ref((x), 0))
 #define eul_cdr(x) (slot_ref((x), 1))
-#endif /* WITH_CONS_TAG */
+#endif // WITH_CONS_TAG
 
 #define eul_null(x) ((x) == eul_nil)
 #define eul_is_list(x) (eul_null(x) || eul_is_cons(x))
@@ -87,7 +87,7 @@ extern void eul_initialize_cons();
     {EUL_CONS_SIZE, NULL, the_car, the_cdr};                                   \
     static LispRef loc = eul_as_static(loc)
 
-#endif /* WITH_CONS_TAG */
+#endif // WITH_CONS_TAG
 
 #define LISTIFY(count)                                                         \
     {                                                                          \
