@@ -184,6 +184,10 @@
     =print= can output numbers of the order of 1e30 but does not use exponential
     format.  There appears to be a limit on the number of decimal places that
     can be output which might relate to the size of on output formatting buffer.
+*** TODO Consider adding an expander for =element= to =get-appl-expander=
+    for =<vector>=, =<string> and maybe =<list>= in file =ex-expr.em=.  This
+    might avoid the generic function call overhead for returning an element of a
+    primitive container.
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=
