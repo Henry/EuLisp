@@ -129,7 +129,12 @@ bytecode2:
 ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 .PRECIOUS: %.i %.c %.h
 %.i %.c %.h : %.em
-	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) -l level1
+	$(U2) $(U2FLAGS) -c $* -od $(ARCH_DIR) \
+		-load_path $(U2_DIR)/Comptime2 \
+		-load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
+		-load_path $(U2_DIR)/Runtime \
+		-load_path $(U2_DIR)/Telos \
+		-l level1
 endif
 
 $(ARCH_DIR)/cg-exec-word-length.o: \
