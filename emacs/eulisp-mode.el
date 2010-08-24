@@ -4,10 +4,10 @@
 ;; Maintainer: Henry G. Weller
 ;;
 ;; Created: Wed Aug 19 23:24:17 2009 (+0100)
-;; Version: 0.5
-;; Last-Updated: Sat Jun 19 19:32:46 2010 (+0100)
+;; Version: 0.6
+;; Last-Updated: Tue Aug 24 16:31:00 2010 (+0100)
 ;;           By: Henry G. Weller
-;;     Update #: 7
+;;     Update #: 8
 ;; URL: Not yet available
 ;; Keywords: EuLisp major-mode
 ;; Compatibility: GNU Emacs 23.x (may work with earlier versions)
@@ -53,6 +53,11 @@
 ;;   execution statements the same amount.
 ;; Version 0.5
 ;; * Updated predicates.
+;; Version 0.6
+;; * Improved indentation rule:
+;;     + default indentation for defmodule now 0;
+;;     + defmodule directives list now indented 1 level;
+;;     + `defun' indentation added for Eu2C-specific defining forms.
 ;; -----------------------------------------------------------------------------
 ;;
 ;; This program is free software; you can redistribute it and/or
@@ -1134,7 +1139,8 @@ of the text in #| |# block-comments"
               (t
                normal-indent))))))
 
-(defun eulisp-indent-specform (count state indent-point normal-indent)
+(defun eulisp-indent-specform
+  (count state indent-point normal-indent special-indent-factor)
   "Special-form indentation function based on `lisp-indent-specform'
 but with the additional of handling negative COUNT which is treated as
 the number of arguments at the end of the form to be excluded from special
@@ -1175,15 +1181,17 @@ indentation."
                   (error nil))))
     ;; Point is sitting on first character of last (or count) sexp.
     (if (> count 0)
-        ;; A distinguished form.  If it is the first or second form use double
-        ;; lisp-body-indent, else normal indent.  With lisp-body-indent bound
-        ;; to 2 (the default), this just happens to work the same with if as
-        ;; the older code, but it makes unwind-protect, condition-case,
-        ;; with-output-to-temp-buffer, et. al. much more tasteful.  The older,
-        ;; less hacked, behavior can be obtained by replacing below with
-        ;; (list normal-indent containing-form-start).
+        ;; A distinguished form.  If it one of first count forms use
+        ;; `special-indent-factor' times `lisp-body-indent', else normal indent.
+        ;; With `lisp-body-indent bound' to 2 (the default), this just happens
+        ;; to work the same with if as the older code, but it makes
+        ;; `unwind-protect', `condition-case', `with-output-to-temp-buffer',
+        ;; et. al. much more tasteful.  The older, less hacked, behavior can be
+        ;; obtained by replacing below with
+        ;; `(list normal-indent containing-form-start)'.
         (if (<= (- i count) 1)
-            (list (+ containing-form-column (* 2 lisp-body-indent))
+            (list (+ containing-form-column
+                     (* special-indent-factor lisp-body-indent))
                   containing-form-start)
           (list normal-indent containing-form-start))
       ;; A non-distinguished form.  Use body-indent if there are no
@@ -1257,6 +1265,7 @@ If the current line is in a call to a EuLisp function
 which has a non-nil property `eulisp-indent-function',
 that specifies how to do the indentation.  The property value can be
 * `defun', meaning indent `defun'-style;
+* `defmodule', meaning indent `defmodule'-style;
 * a positive integer N, meaning indent the first N arguments specially
   like ordinary function arguments and then indent any further
   arguments like a body;
@@ -1270,15 +1279,8 @@ that specifies how to do the indentation.  The property value can be
 This function also returns nil meaning don't specify the indentation.
 
 Adapted from `lisp-indent-function'."
-  (let ((normal-indent (current-column))
-        funform)
-    ;; Go to the opening bracket of the form
-    (goto-char (elt state 1))
-    ;; Assume that if the form is delimited by () it is a function call
-    ;; NB in EuLisp normal lists are delimited by []
-    (setq funform (looking-at "("))
-    ;; Now move forward 1 char to the first sexp
-    (forward-char)
+  (let ((normal-indent (current-column)))
+    (goto-char (1+ (elt state 1)))
     (parse-partial-sexp (point) calculate-lisp-indent-last-sexp 0 t)
     (if (and (elt state 2)
              (not (looking-at "\\w\\|\\s_")))
@@ -1296,16 +1298,18 @@ Adapted from `lisp-indent-function'."
           ;; inside the innermost containing sexp.
           (backward-prefix-chars)
           (current-column))
-      (let ((function (buffer-substring (point)
-                                        (progn (forward-sexp 1) (point))))
+      (let ((function
+             (buffer-substring (point) (progn (forward-sexp 1) (point))))
             method)
         (setq method (get (intern-soft function) 'eulisp-indent-function))
         (cond ((eq method 'defun)          ; Definition
                (lisp-indent-defform state indent-point))
+              ((eq method 'defmodule)      ; Module definition
+               (eulisp-indent-specform
+                2 state indent-point 0 1))
               ((integerp method)           ; Special form using standard indent
-               (eulisp-indent-specform method state indent-point normal-indent))
-              ((and funform (null method)) ; Non-system function call
-               (eulisp-indent-specform 0 state indent-point normal-indent))
+               (eulisp-indent-specform
+                method state indent-point normal-indent 2))
               (method                      ; Special indentation function
                (funcall method state indent-point normal-indent)))))))
 
@@ -1326,7 +1330,7 @@ given symbol SYM."
        'eulisp-indent-function indent))
 
 (defvar eulisp-indent-function-alist
-  '((defmodule . 2)
+  '((defmodule . defmodule)
     (defclass . defun)
     (defgeneric . defun)
     (defmethod . defun)
@@ -1347,7 +1351,79 @@ given symbol SYM."
     (progn . 0)
     (if . 2)
     (cond . 0)
-    (unwind-protect . 1))
+    (unwind-protect . 1)
+
+    (defaccessors . defun)
+    (def-descrs . defun)
+    (define-basic-data-types . defun)
+    (define-compiler-condition . defun)
+    (defined-class . defun)
+    (defined-fun-p . defun)
+    (defined-generic-fun . defun)
+    (defined-generic-fun-p . defun)
+    (defined-named-const-p . defun)
+    (defined-result-type . defun)
+    (defined-static . defun)
+    (defined-type . defun)
+    (define-machine-data-types . defun)
+    (define-special-sys-funs . defun)
+    (define-tail . defun)
+    (define-tail-sys-functions . defun)
+    (define-trans . defun)
+    (define-transformation . defun)
+    (definition . defun)
+    (definterface-arg-conversions . defun)
+    (definterface-arg-names . defun)
+    (definterface-arg-types . defun)
+    (definterface-clc . defun)
+    (definterface-lcl . defun)
+    (def-list . defun)
+    (def-literal-class . defun)
+    (deflocal . defun)
+    (def-lzs-object . defun)
+    (defmacro-forms . defun)
+    (def-mzs-object . defun)
+    (defsetf . defun)
+    (defstandardclass . defun)
+    (def-strategic-lattice-type . defun)
+    (defstruct . defun)
+    (def-sys-lattice-type . defun)
+    (deftrans . defun)
+    (deftransdef . defun)
+    (deftrans-literal-values . defun)
+    (deftransmod . defun)
+    (deftranssyn . defun)
+    (def-write-remaining-strategic-lattice-types . defun)
+    (def-write-super-strategic-lattice-type-p . defun)
+    (def-write-super-strategic-lattice-types . defun)
+
+    (declare . defun)
+    (declare-c-function . defun)
+    (declare-system-functions . defun)
+
+    (%define-abstract-class . defun)
+    (%define-constant . defun)
+    (%defined-type . defun)
+    (%define-function . defun)
+    (%define-generic . defun)
+    (%define-latticef-type . defun)
+    (%define-lattice-type . defun)
+    (%define-literal-expansion . defun)
+    (%define-metaclass . defun)
+    (%define-standard-class . defun)
+    (%define-tail-class . defun)
+    (%define-variable . defun)
+
+    (%declare-external-class . defun)
+    (%declare-external-constant . defun)
+    (%declare-external-function . defun)
+    (%declare-external-generic . defun)
+    (%declare-external-symbol . defun)
+    (%declare-external-variable . defun)
+
+    (%annotate-function . defun)
+    (%annotate-binding . defun)
+    )
   "Alist of indentation methods for standard EuLisp functions.")
 
 (defun eulisp-put-indent-function-alist (function-alist)
@@ -1355,6 +1431,80 @@ given symbol SYM."
             (eulisp-put-indent (car x) (cdr x))) function-alist))
 
 (eulisp-put-indent-function-alist eulisp-indent-function-alist)
+
+;; -----------------------------------------------------------------------------
+;;;  Re-formatting functions
+;; Reusing code from `slime-editing-commands'
+
+(defvar eulisp-close-parens-limit nil
+  "Maxmimum parens for `eulisp-close-all-sexp' to insert. NIL
+means to insert as many parentheses as necessary to correctly
+close the form.")
+
+(defun eulisp-close-all-parens-in-sexp (&optional region)
+  "Balance parentheses of open s-expressions at point.
+Insert enough right parentheses to balance unmatched left parentheses.
+Delete extra left parentheses.  Reformat trailing parentheses
+Lisp-stylishly.
+
+If REGION is true, operate on the region. Otherwise operate on
+the top-level sexp before point."
+  (interactive "P")
+  (let ((sexp-level 0)
+        point)
+    (save-excursion
+      (save-restriction
+        (when region
+          (narrow-to-region (region-beginning) (region-end))
+          (goto-char (point-max)))
+        ;; skip over closing parens, but not into comment
+        (skip-chars-backward ") \t\n")
+        (when (eulisp-beginning-of-comment)
+          (forward-line)
+          (skip-chars-forward " \t"))
+        (setq point (point))
+        ;; count sexps until either '(' or comment is found at first column
+        (while (and (not (looking-at "^[(;]"))
+                    (ignore-errors (backward-up-list 1) t))
+          (setq sexp-level (1+ sexp-level)))))
+    (when (> sexp-level 0)
+      ;; insert correct number of right parens
+      (goto-char point)
+      (dotimes (i sexp-level) (insert ")"))
+      ;; delete extra right parens
+      (setq point (point))
+      (skip-chars-forward " \t\n)")
+      (skip-chars-backward " \t\n")
+      (let* ((deleted-region     (delete-and-extract-region point (point)))
+             (deleted-text       (substring-no-properties deleted-region))
+             (prior-parens-count (count ?\) deleted-text)))
+        ;; Remember: we always insert as many parentheses as necessary
+        ;; and only afterwards delete the superfluously-added parens.
+        (when eulisp-close-parens-limit
+          (let ((missing-parens (- sexp-level prior-parens-count
+                                   eulisp-close-parens-limit)))
+            (dotimes (i (max 0 missing-parens))
+              (delete-char -1))))))))
+
+(defun eulisp-beginning-of-comment ()
+  "Move point to beginning of comment.
+If point is inside a comment move to beginning of comment and return point.
+Otherwise leave point unchanged and return NIL."
+  (let ((boundary (point)))
+    (beginning-of-line)
+    (cond ((re-search-forward comment-start-skip boundary t)
+           (point))
+          (t (goto-char boundary)
+             nil))))
+
+(defun eulisp-reformat-defun ()
+  "Reformat trailing parentheses Lisp-stylishly and reindent toplevel form."
+  (interactive)
+  (save-excursion
+    (end-of-defun)
+    (eulisp-close-all-parens-in-sexp)
+    (beginning-of-defun)
+    (indent-sexp)))
 
 ;; -----------------------------------------------------------------------------
 ;;; Better automatic commenting/un-commenting
