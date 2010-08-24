@@ -14,38 +14,38 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <csemaphore>
 ;;;-----------------------------------------------------------------------------
-  (defclass <csemaphore> ()
-    ((handle accessor: csemaphore-handle))
-    predicate: csemaphorep
-    keywords: (counter:))
+(defclass <csemaphore> ()
+  ((handle accessor: csemaphore-handle))
+  predicate: csemaphorep
+  keywords: (counter:))
 
-  ;(defmethod initialize ((csem <csemaphore>) inits)
-  ;  (call-next-method)
-  ;  (let ((n (init-list-ref inits counter:)))
-  ;    (if (integer? n)
-  ;       ((setter csemaphore-handle) csem (eul_sema_create n))
-  ;     ;; Basically a lock
-  ;     ((setter csemaphore-handle) csem (eul_sema_create 1)))
-  ;    csem))
+;(defmethod initialize ((csem <csemaphore>) inits)
+;  (call-next-method)
+;  (let ((n (init-list-ref inits counter:)))
+;    (if (integer? n)
+;       ((setter csemaphore-handle) csem (eul_sema_create n))
+;     ;; Basically a lock
+;     ((setter csemaphore-handle) csem (eul_sema_create 1)))
+;    csem))
 
-  ;(defextern eul_sema_create (<int>) ptr)
+;(defextern eul_sema_create (<int>) ptr)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Wait
 ;;;-----------------------------------------------------------------------------
-  (defun cwait (csem)
-    ;(eul_sema_wait (csemaphore-handle csem))
-    csem)
-  ;(defextern eul_sema_wait (ptr) ptr "sema_wait")
+(defun cwait (csem)
+  ;(eul_sema_wait (csemaphore-handle csem))
+  csem)
+;(defextern eul_sema_wait (ptr) ptr "sema_wait")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Signal
 ;;;-----------------------------------------------------------------------------
-  (defun csignal (csem)
-    ;(eul_sema_signal (csemaphore-handle csem))
-    csem)
-  ;(defextern eul_sema_signal (ptr) ptr "sema_post")
+(defun csignal (csem)
+  ;(eul_sema_signal (csemaphore-handle csem))
+  csem)
+;(defextern eul_sema_signal (ptr) ptr "sema_post")
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

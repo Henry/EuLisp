@@ -15,15 +15,15 @@
   (syntax (macros)
    import (level0 math))
 
-  (defun tak (x y z)
-    (if (null? (< y x))
-        z
-      (tak (tak (- x 1) y z)
-           (tak (- y 1) z x)
-           (tak (- z 1) x y))))
+(defun tak (x y z)
+  (if (null? (< y x))
+      z
+    (tak (tak (- x 1) y z)
+         (tak (- y 1) z x)
+         (tak (- z 1) x y))))
 
-  (print (tak 26 16 6))
+(print (tak 26 16 6))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

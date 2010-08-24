@@ -11,20 +11,20 @@
 ;;    make test
 ;;;-----------------------------------------------------------------------------
 (defmodule test1
-    (syntax (macros)
-     import (level1 pipe))
+  (syntax (macros)
+   import (level1 pipe))
 
-  (let ((x (make <pipe> process: "../../Bin.x86_64/youtoo.sh"))
-        (str ""))
-    (pprint x)
-    (system "ps -a")
-    (sprint x (+ 1 3))
-    (sprint x hierarchy:)
-    (sprint x exit:)
-    (while (setq str (read-line x () ()))
-      (prin str)
-      (flush)))
+(let ((x (make <pipe> process: "../../Bin.x86_64/youtoo.sh"))
+      (str ""))
+  (pprint x)
+  (system "ps -a")
+  (sprint x (+ 1 3))
+  (sprint x hierarchy:)
+  (sprint x exit:)
+  (while (setq str (read-line x () ()))
+    (prin str)
+    (flush)))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

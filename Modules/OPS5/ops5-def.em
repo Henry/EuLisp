@@ -7,29 +7,29 @@
 ;;; Description: Definitions for main ops5 module.
 ;;;-----------------------------------------------------------------------------
 (defmodule ops5-def
-    (syntax (macros macros-tag)
-     import (level1 basic cond-el-gf wm conflict))
+  (syntax (macros macros-tag)
+   import (level1 basic cond-el-gf wm conflict))
 
-  (print "### ops5-def")
+(print "### ops5-def")
 
-  (defclass <ops5-system> ()
-    ((ce-manager
-      reader:  ce-manager
-      writer:  set-ce-manager)
-     (cr-manager
-      default: (make-cr-manager 'mea)
-      reader:  cr-manager
-      writer:  set-cr-manager)
-     (wm-manager
-      default: (make-wm-manager)
-      reader:  wm-manager
-      writer:  set-wm-manager)))
+(defclass <ops5-system> ()
+  ((ce-manager
+    reader:  ce-manager
+    writer:  set-ce-manager)
+   (cr-manager
+    default: (make-cr-manager 'mea)
+    reader:  cr-manager
+    writer:  set-cr-manager)
+   (wm-manager
+    default: (make-wm-manager)
+    reader:  wm-manager
+    writer:  set-wm-manager)))
 
-  (export ce-manager set-ce-manager
-          cr-manager set-cr-manager
-          wm-manager set-wm-manager
-          <ops5-system>)
+(export ce-manager set-ce-manager
+ cr-manager set-cr-manager
+ wm-manager set-wm-manager
+ <ops5-system>)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

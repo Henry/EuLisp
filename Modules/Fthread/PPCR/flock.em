@@ -20,61 +20,61 @@
 ;;
 ;;  Locks with PPCR semantics are provided with class <thread-lock>.
 ;;;-----------------------------------------------------------------------------
-  (defclass <ppcr-lock> ()
-    ((handle accessor: lock-handle))
-    predicate: ppcr-lock?)
+(defclass <ppcr-lock> ()
+  ((handle accessor: lock-handle))
+  predicate: ppcr-lock?)
 
-  ;; PPCR locks are now default
-  (setq <lock> <ppcr-lock>)
+;; PPCR locks are now default
+(setq <lock> <ppcr-lock>)
 
-  (defmethod initialize ((lk <ppcr-lock>) keywords)
-    (call-next-method)
-    ((setter lock-handle) lk (eul_bsema_create))
-    lk)
+(defmethod initialize ((lk <ppcr-lock>) keywords)
+  (call-next-method)
+  ((setter lock-handle) lk (eul_bsema_create))
+  lk)
 
-  (defclass <thread-lock> ()
-    (handle)
-    predicate: thread-lock?)
+(defclass <thread-lock> ()
+  (handle)
+  predicate: thread-lock?)
 
-  (defmethod initialize ((lk <thread-lock>) keywords)
-    (call-next-method)
-    ((setter lock-handle) lk (eul_lock_create))
-    lk)
+(defmethod initialize ((lk <thread-lock>) keywords)
+  (call-next-method)
+  ((setter lock-handle) lk (eul_lock_create))
+  lk)
 
-  (defextern eul_lock_create () ptr)
+(defextern eul_lock_create () ptr)
 
-  (defextern eul_bsema_create () ptr)
+(defextern eul_bsema_create () ptr)
 
 ;;;-----------------------------------------------------------------------------
 ;;; lock
 ;;;-----------------------------------------------------------------------------
-  (defmethod lock ((lk <ppcr-lock>))
-    (eul_bsema_lock (lock-handle lk))
-    lk)
+(defmethod lock ((lk <ppcr-lock>))
+  (eul_bsema_lock (lock-handle lk))
+  lk)
 
-  (defmethod lock ((lk <thread-lock>))
-    (eul_lock (lock-handle lk))
-    lk)
+(defmethod lock ((lk <thread-lock>))
+  (eul_lock (lock-handle lk))
+  lk)
 
-  (defextern eul_bsema_lock (ptr) ptr)
+(defextern eul_bsema_lock (ptr) ptr)
 
-  (defextern eul_lock (ptr) ptr "PCR_Th_ML_Acquire")
+(defextern eul_lock (ptr) ptr "PCR_Th_ML_Acquire")
 
 ;;;-----------------------------------------------------------------------------
 ;;; unlock
 ;;;-----------------------------------------------------------------------------
-  (defmethod unlock ((lk <ppcr-lock>))
-    (eul_bsema_unlock (lock-handle lk))
-    lk)
+(defmethod unlock ((lk <ppcr-lock>))
+  (eul_bsema_unlock (lock-handle lk))
+  lk)
 
-  (defmethod unlock ((lk <thread-lock>))
-    (eul_unlock (lock-handle lk))
-    lk)
+(defmethod unlock ((lk <thread-lock>))
+  (eul_unlock (lock-handle lk))
+  lk)
 
-  (defextern eul_bsema_unlock (ptr) ptr)
+(defextern eul_bsema_unlock (ptr) ptr)
 
-  (defextern eul_unlock (ptr) ptr "PCR_Th_ML_Release")
+(defextern eul_unlock (ptr) ptr "PCR_Th_ML_Release")
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

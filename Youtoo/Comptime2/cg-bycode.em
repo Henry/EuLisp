@@ -15,11 +15,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Initialization
 ;;;-----------------------------------------------------------------------------
-  (def-syntax-obj <bytecode> () (name args code properties size modus))
-  (defconstant get-bytecode (make-access-table))
-  (defconstant get-register (make-access-table))
-  (defconstant get-stream-primitive (make-access-table))
+(def-syntax-obj <bytecode> () (name args code properties size modus))
+(defconstant get-bytecode (make-access-table))
+(defconstant get-register (make-access-table))
+(defconstant get-stream-primitive (make-access-table))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

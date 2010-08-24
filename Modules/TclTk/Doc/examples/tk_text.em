@@ -34,9 +34,9 @@
        (setq x (read s () (eos-default-value)))))))
 
 (defun change-configuration (text)
- (tk-conf-tag-text text "big" background: "Bisque3" borderwidth: "2"
-                        font: "-Adobe-Helvetica-Medium-R-Normal--*-240-*"
-                        relief: "raised"))
+  (tk-conf-tag-text text "big" background: "Bisque3" borderwidth: "2"
+                    font: "-Adobe-Helvetica-Medium-R-Normal--*-240-*"
+                    relief: "raised"))
 (defun go-in (text)
   (tk-conf-tag-text text "big" background: "SeaGreen2"))
 (defun go-out (text)

@@ -14,14 +14,14 @@
    import (level1)
    export ())
 
-  (set-dispatch-macro-character #\# #\M
-                                (lambda (s key dummy)
-                                  (reverse (read-s-expression s))))
+(set-dispatch-macro-character #\# #\M
+                              (lambda (s key dummy)
+                                (reverse (read-s-expression s))))
 
-  (let ((file (make <file-stream> file-name: "macro-dispatch-char.dat")))
-    (print (read-s-expression file))
-    (disconnect file))
+(let ((file (make <file-stream> file-name: "macro-dispatch-char.dat")))
+  (print (read-s-expression file))
+  (disconnect file))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

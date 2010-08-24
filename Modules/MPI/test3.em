@@ -18,16 +18,16 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Example
 ;;;-----------------------------------------------------------------------------
-  (let* ((s1 (make <mpi-stream>))
-         (s2 (make <mpi-stream>))
-         (remote-s (if (local-mpi-stream? s1) s2 s1))
-         (local-s (if (local-mpi-stream? s1) s1 s2))
-         ;(x "Hello world!")
-         (x 12.34))
-    (sformat stderr "Sending ~a from ~a to ~a\n" x local-s remote-s)
-    (swrite remote-s x)
-    (disconnect local-s))
+(let* ((s1 (make <mpi-stream>))
+       (s2 (make <mpi-stream>))
+       (remote-s (if (local-mpi-stream? s1) s2 s1))
+       (local-s (if (local-mpi-stream? s1) s1 s2))
+       ;(x "Hello world!")
+       (x 12.34))
+  (sformat stderr "Sending ~a from ~a to ~a\n" x local-s remote-s)
+  (swrite remote-s x)
+  (disconnect local-s))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

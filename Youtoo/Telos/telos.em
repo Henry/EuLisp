@@ -26,7 +26,7 @@
                     (stderr primitive-stderr)
                     (substring substring1)
                     (equal list-equal))
-                    boot)
+                   boot)
            mop-access
            mop-alloc
            mop-class
@@ -39,5 +39,5 @@
            mop-prim))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

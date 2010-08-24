@@ -1,6 +1,6 @@
 (defmodule tk_scrollbar2
   (syntax (macros)
-  import (level1 tcl-tk)
+   import (level1 tcl-tk)
    )
 (deflocal *lb1* ())
 (deflocal *lb2* ())
@@ -17,13 +17,13 @@
   (tk-scroll-set *scroll* first-entry last-entry))
 (defun prove ()
   (setq *scroll* (tk-make-scrollbar () command: Fun-scroll-callback))
-  (setq *lb1* (tk-make-listbox () relief: "sunken"  
+  (setq *lb1* (tk-make-listbox () relief: "sunken"
                                yscrollcommand: Fun-listbox-callback))
-  (setq *lb2* (tk-make-listbox () relief: "sunken"  
+  (setq *lb2* (tk-make-listbox () relief: "sunken"
                                yscrollcommand: Fun-listbox-callback))
-  (setq *lb3* (tk-make-listbox () relief: "sunken"  
+  (setq *lb3* (tk-make-listbox () relief: "sunken"
                                yscrollcommand: Fun-listbox-callback))
-  (setq *lb4* (tk-make-listbox () relief: "sunken"  
+  (setq *lb4* (tk-make-listbox () relief: "sunken"
                                yscrollcommand: Fun-listbox-callback))
   (tk-pack *lb1* *lb2* *lb3* *lb4* side: "left")
   (tk-pack *scroll* side: "right" fill: "y")

@@ -13,20 +13,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;; General instructions
 ;;;-----------------------------------------------------------------------------
-  (defmacro def-bytecode (name args code . properties)
-    `((setter get-bytecode) ',name
-      (make <bytecode>
-            name: ',name
-            args: ',args
-            code: ,code
-            properties: ',properties)))
+(defmacro def-bytecode (name args code . properties)
+  `((setter get-bytecode) ',name
+    (make <bytecode>
+          name: ',name
+          args: ',args
+          code: ,code
+          properties: ',properties)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Registers
 ;;;-----------------------------------------------------------------------------
-  (defmacro def-register (name code)
-    `((setter get-register) ',name ,code))
+(defmacro def-register (name code)
+  `((setter get-register) ',name ,code))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

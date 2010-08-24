@@ -11,16 +11,16 @@
    import (level0)
    export (fact))
 
-  (defun fact (x)
-    (labels
-     ((loop (xx res)
-            (if (< xx 2)
-                res
-              (loop (- xx 1) (* res xx)))))
-     (loop x 1)))
+(defun fact (x)
+  (labels
+   ((loop (xx res)
+          (if (< xx 2)
+              res
+            (loop (- xx 1) (* res xx)))))
+   (loop x 1)))
 
-  (print (fact 10))
+(print (fact 10))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -15,20 +15,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Variables
 ;;;-----------------------------------------------------------------------------
-  (def-syntax-obj <var> (<syntax-expr>) (name binding value used))
-  (def-syntax-obj <local-var> (<var>) ())
-  (def-syntax-obj <local-static-var> (<local-var>) (lambda captured))
-  (def-syntax-obj <global-var> (<var>) ())
-  (def-syntax-obj <global-static-var> (<global-var>) ())
-  (def-syntax-obj <setq> (<syntax-expr>) (binding obj))
+(def-syntax-obj <var> (<syntax-expr>) (name binding value used))
+(def-syntax-obj <local-var> (<var>) ())
+(def-syntax-obj <local-static-var> (<local-var>) (lambda captured))
+(def-syntax-obj <global-var> (<var>) ())
+(def-syntax-obj <global-static-var> (<global-var>) ())
+(def-syntax-obj <setq> (<syntax-expr>) (binding obj))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  Constants
 ;;;-----------------------------------------------------------------------------
-  (def-syntax-obj <const> (<syntax-obj>) (value))
-  (def-syntax-obj <named-const> (<const>) (name binding))
-  (def-syntax-obj <literal-const> (<const>) ())
+(def-syntax-obj <const> (<syntax-obj>) (value))
+(def-syntax-obj <named-const> (<const>) (name binding))
+(def-syntax-obj <literal-const> (<const>) ())
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

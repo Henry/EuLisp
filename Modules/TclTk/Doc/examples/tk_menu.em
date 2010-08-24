@@ -56,42 +56,42 @@
        (menu-help (tk-make-menu help tearoff: "0"))
        (menu-graphics-colour (tk-make-menu menu-graphics tearoff: "0"))
        (menu-graphics-width (tk-make-menu menu-graphics tearoff: "0")))
-       (tk-pack mbar dummy side: "top" fill: "x")
+    (tk-pack mbar dummy side: "top" fill: "x")
 
-       ;;  Because is necessary that the menus were descendents of the menubutton
-       ;;  we have to put on the widgets.
+    ;;  Because is necessary that the menus were descendents of the menubutton
+    ;;  we have to put on the widgets.
 
-       (tk-conf-widget file text: "File" underline: "0" menu: menu-file)
-       (tk-conf-widget edit text: "Edit" underline: "0" menu: menu-edit)
-       (tk-conf-widget graphics text: "Graphics" underline: "0" menu: menu-graphics)
-       (tk-conf-widget text text: "Text" underline: "0" menu: menu-text)
-       (tk-conf-widget view text: "View" underline: "0" menu: menu-view)
-       (tk-conf-widget help text: "Help" underline: "0" menu: menu-help)
-       ;; Creation of the File menu.
+    (tk-conf-widget file text: "File" underline: "0" menu: menu-file)
+    (tk-conf-widget edit text: "Edit" underline: "0" menu: menu-edit)
+    (tk-conf-widget graphics text: "Graphics" underline: "0" menu: menu-graphics)
+    (tk-conf-widget text text: "Text" underline: "0" menu: menu-text)
+    (tk-conf-widget view text: "View" underline: "0" menu: menu-view)
+    (tk-conf-widget help text: "Help" underline: "0" menu: menu-help)
+    ;; Creation of the File menu.
 
-       (tk-menu-add menu-file 'command label: "Exit" command: tk-exit)
+    (tk-menu-add menu-file 'command label: "Exit" command: tk-exit)
 
-       ;; Creation of the Text menu.
-       (tk-menu-add menu-text 'checkbutton label: "Bold" variable: "bold")
-       (tk-menu-add menu-text 'checkbutton label: "Italic" variable: "italic")
-       (tk-menu-add menu-text 'checkbutton label: "Underline" variable: "underline")
-       (tk-menu-add menu-text 'separator)
-       (tk-menu-add menu-text 'radiobutton label: "Times" variable: "font" value: "times")
-       (tk-menu-add menu-text 'radiobutton label: "Helvetica" variable: "font" value: "helvetica")
-       (tk-menu-add menu-text 'radiobutton label: "Courier" variable: "font" value: "courier")
+    ;; Creation of the Text menu.
+    (tk-menu-add menu-text 'checkbutton label: "Bold" variable: "bold")
+    (tk-menu-add menu-text 'checkbutton label: "Italic" variable: "italic")
+    (tk-menu-add menu-text 'checkbutton label: "Underline" variable: "underline")
+    (tk-menu-add menu-text 'separator)
+    (tk-menu-add menu-text 'radiobutton label: "Times" variable: "font" value: "times")
+    (tk-menu-add menu-text 'radiobutton label: "Helvetica" variable: "font" value: "helvetica")
+    (tk-menu-add menu-text 'radiobutton label: "Courier" variable: "font" value: "courier")
 
-       (tk-menu-add menu-text 'separator)
-       (tk-menu-add menu-text 'command label: "Create Square" command: createSquare)
-       (tk-menu-add menu-text 'command label: "Delete Square" command: deleteSquare)
-       (tk-menu-add menu-text 'command label: "Create Text" command: createText)
+    (tk-menu-add menu-text 'separator)
+    (tk-menu-add menu-text 'command label: "Create Square" command: createSquare)
+    (tk-menu-add menu-text 'command label: "Delete Square" command: deleteSquare)
+    (tk-menu-add menu-text 'command label: "Create Text" command: createText)
 
-       ;; Creation of the Graphics menu
+    ;; Creation of the Graphics menu
 ;;;
-       (tk-menu-add menu-graphics 'cascade label: "letter width" menu: menu-graphics-width)
-       (tk-menu-add menu-graphics 'cascade label: "colour" menu: menu-graphics-colour)
+    (tk-menu-add menu-graphics 'cascade label: "letter width" menu: menu-graphics-width)
+    (tk-menu-add menu-graphics 'cascade label: "colour" menu: menu-graphics-colour)
 ;;;
-       (tk-menu-add menu-graphics-width 'radiobutton label: "0.25 point" variable: "linewidth" value: "0.25")
-   (tk-menu-add menu-graphics-width 'radiobutton label: "0.50 point" variable: "linewidth" value: "0.50")
+    (tk-menu-add menu-graphics-width 'radiobutton label: "0.25 point" variable: "linewidth" value: "0.25")
+    (tk-menu-add menu-graphics-width 'radiobutton label: "0.50 point" variable: "linewidth" value: "0.50")
     (tk-menu-add menu-graphics-width 'radiobutton label: "1 point" variable: "linewidth" value: "1")
     (tk-menu-add menu-graphics-width 'radiobutton label: "2 point" variable: "linewidth" value: "2")
 

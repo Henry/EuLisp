@@ -14,19 +14,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <integer>
 ;;;-----------------------------------------------------------------------------
-  (defclass <integer> (<number>) ()
-    abstract?: t
-    predicate: integer?)
+(defclass <integer> (<number>) ()
+  abstract?: t
+  predicate: integer?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Even and odd
 ;;;-----------------------------------------------------------------------------
-  (defun even? (x) (zero? (binary-mod x 2)))
-  ;;(declare-inline even?)
+(defun even? (x) (zero? (binary-mod x 2)))
+;;(declare-inline even?)
 
-  (defun odd? (x) (null? (zero? (binary-mod x 2))))
-  ;;(declare-inline odd?)
+(defun odd? (x) (null? (zero? (binary-mod x 2))))
+;;(declare-inline odd?)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

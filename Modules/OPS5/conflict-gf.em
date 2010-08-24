@@ -7,10 +7,10 @@
 ;;; Description: #desc
 ;;;-----------------------------------------------------------------------------
 (defmodule #module
- (syntax (macros macros-tag)
-         import (level1 basic))
-   (export)
+  (syntax (macros macros-tag)
+   import (level1 basic))
+(export)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

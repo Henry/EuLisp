@@ -3,30 +3,30 @@
    import (level1)
    export (end-of-stream?))
 
-  ;; It's a lot simple to do (until (end-of-stream? s) (read s))
-  ;; than to use exceptions or the eof-object argument to catch end of file.
-  (defgeneric end-of-stream? (stream))
+;; It's a lot simple to do (until (end-of-stream? s) (read s))
+;; than to use exceptions or the eof-object argument to catch end of file.
+(defgeneric end-of-stream? (stream))
 
-  (defmethod end-of-stream? ((s <stream>))
-    (let ((scb (stream-source s)))
-      (and (null? (control-block-buffer scb))
-           (int-binary= (fill-buffer s) 0))))
+(defmethod end-of-stream? ((s <stream>))
+  (let ((scb (stream-source s)))
+    (and (null? (control-block-buffer scb))
+         (int-binary= (fill-buffer s) 0))))
 
-  (defmethod end-of-stream? ((ss <string-stream>))
-    (let ((scb (stream-source ss)))
-      (and (int-binary= (control-block-buffer-cnt scb)
-                        (string-size (control-block-buffer scb)))
-           (int-binary= (fill-buffer ss) 0)
-           t)))
+(defmethod end-of-stream? ((ss <string-stream>))
+  (let ((scb (stream-source ss)))
+    (and (int-binary= (control-block-buffer-cnt scb)
+                      (string-size (control-block-buffer scb)))
+         (int-binary= (fill-buffer ss) 0)
+         t)))
 
-  (defmethod end-of-stream? ((fs <file-stream>))
-    (let ((fcb (stream-source fs)))
-      (and (int-binary= (control-block-buffer-cnt fcb) 0)
-           (int-binary= (fill-buffer fs) 0)
-           t)))
+(defmethod end-of-stream? ((fs <file-stream>))
+  (let ((fcb (stream-source fs)))
+    (and (int-binary= (control-block-buffer-cnt fcb) 0)
+         (int-binary= (fill-buffer fs) 0)
+         t)))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------
 
 ;;;-----------------------------------------------------------------------------

@@ -9,50 +9,50 @@
            match:error-control match:disjoint-predicates
            match:vector-structures))
 
-  ;; List-traversing
-  (defun memq (item collection) (member item collection eq))
+;; List-traversing
+(defun memq (item collection) (member item collection eq))
 
-  ;; Type predicates
-  (defun boolean? (obj) (or (eq obj t) (eq obj '())))
+;; Type predicates
+(defun boolean? (obj) (or (eq obj t) (eq obj '())))
 
-  ;; IO
-  (defconstant print-error (lambda (msg val) (error "~a ~s~%" msg val)))
+;; IO
+(defconstant print-error (lambda (msg val) (error "~a ~s~%" msg val)))
 
-  ;; Match support routines
-  (deflocal match:error
-    (lambda (val . args)
-      (do print args)
-      (print-error "no matching clause for " val)))
+;; Match support routines
+(deflocal match:error
+  (lambda (val . args)
+    (do print args)
+    (print-error "no matching clause for " val)))
 
-  (defun match:andmap (f l)
-    (if (null? l)
-        (and)
-      (and (f (car l)) (match:andmap f (cdr l)))))
+(defun match:andmap (f l)
+  (if (null? l)
+      (and)
+    (and (f (car l)) (match:andmap f (cdr l)))))
 
-  (defun match:syntax-err (obj msg)
-    (print-error msg obj))
+(defun match:syntax-err (obj msg)
+  (print-error msg obj))
 
-  (defun match:set-error (v)
-    (setq match:error v))
+(defun match:set-error (v)
+  (setq match:error v))
 
-  (deflocal match:error-control 'error)
+(deflocal match:error-control 'error)
 
-  (defun match:set-error-control (v)
-    (setq match:error-control v))
+(defun match:set-error-control (v)
+  (setq match:error-control v))
 
-  (deflocal match:disjoint-predicates
-    (cons 'null
-          '(cons?
-            symbol?
-            boolean?
-            number?
-            string?
-            character?
-            function?
-            vector?)))
+(deflocal match:disjoint-predicates
+  (cons 'null
+        '(cons?
+          symbol?
+          boolean?
+          number?
+          string?
+          character?
+          function?
+          vector?)))
 
-  (deflocal match:vector-structures '())
+(deflocal match:vector-structures '())
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

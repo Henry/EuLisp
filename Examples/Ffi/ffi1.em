@@ -15,15 +15,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Make use of C's atoi function
 ;;;-----------------------------------------------------------------------------
-  (defextern lisp-atoi (<string>) <int> "atoi")
+(defextern lisp-atoi (<string>) <int> "atoi")
 
-  (if (< 1 *argc*)
-      (progn
-        (print (+ (lisp-atoi (vector-ref *argv* 1))
-                       (lisp-atoi "123")))
-        0) ;; Return a no error
-    (error "no parameter passed" <condition>))
+(if (< 1 *argc*)
+    (progn
+      (print (+ (lisp-atoi (vector-ref *argv* 1))
+                (lisp-atoi "123")))
+      0) ;; Return a no error
+  (error "no parameter passed" <condition>))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

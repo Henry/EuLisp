@@ -22,44 +22,44 @@
 ;;;
 ;;;  Locks with UI semantics are provided with class <thread-lock>.
 ;;;-----------------------------------------------------------------------------
-  ;; UI locks are now default
-  (setq <lock> <csemaphore>)
+;; UI locks are now default
+(setq <lock> <csemaphore>)
 
-  (defclass <thread-lock> ()
-    ((handle accessor: lock-handle))
-    predicate: thread-lock?)
+(defclass <thread-lock> ()
+  ((handle accessor: lock-handle))
+  predicate: thread-lock?)
 
-  (defmethod initialize ((lk <thread-lock>) keywords)
-    (call-next-method)
-    ((setter lock-handle) lk (eul_lock_create))
-    lk)
+(defmethod initialize ((lk <thread-lock>) keywords)
+  (call-next-method)
+  ((setter lock-handle) lk (eul_lock_create))
+  lk)
 
-  (defextern eul_lock_create () ptr)
+(defextern eul_lock_create () ptr)
 
 ;;;-----------------------------------------------------------------------------
 ;;; lock
 ;;;-----------------------------------------------------------------------------
-  ;(defmethod lock ((lk <csemaphore>))
-  ;  (cwait lk))
+;(defmethod lock ((lk <csemaphore>))
+;  (cwait lk))
 
-  (defmethod lock ((lk <thread-lock>))
-    (eul_lock (lock-handle lk))
-    lk)
+(defmethod lock ((lk <thread-lock>))
+  (eul_lock (lock-handle lk))
+  lk)
 
-  (defextern eul_lock (ptr) ptr "pthread_mutex_lock")
+(defextern eul_lock (ptr) ptr "pthread_mutex_lock")
 
 ;;;-----------------------------------------------------------------------------
 ;;; unlock
 ;;;-----------------------------------------------------------------------------
-  ;(defmethod unlock ((lk <csemaphore>))
-  ;  (csignal lk))
+;(defmethod unlock ((lk <csemaphore>))
+;  (csignal lk))
 
-  (defmethod unlock ((lk <thread-lock>))
-    (eul_unlock (lock-handle lk))
-    lk)
+(defmethod unlock ((lk <thread-lock>))
+  (eul_unlock (lock-handle lk))
+  lk)
 
-  (defextern eul_unlock (ptr) ptr "pthread_mutex_unlock")
+(defextern eul_unlock (ptr) ptr "pthread_mutex_unlock")
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

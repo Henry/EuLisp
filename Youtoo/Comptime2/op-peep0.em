@@ -13,33 +13,33 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Macros to define peep-hole optimization rules
 ;;;-----------------------------------------------------------------------------
-  (defmacro guarded-rule (lhs guard rhs)
-    (labels
-     ((rule-parameters (lhs)
-                       (if (null? lhs) ()
-                         (append!
-                          (map
-                           (lambda (param)
-                             (if (or (null? (symbol? param)) (eq param '*))
-                                 '*no-variable*
-                               param))
-                           (cdr (car lhs)))
-                          (rule-parameters (cdr lhs))))))
-     `(add-rule ',lhs
-                ,(if guard
-                     `(lambda ,(rule-parameters lhs) ,guard)
-                   ())
-                (lambda ,(rule-parameters lhs)
-                  (list ,@(map
-                           (lambda (op)
-                             `(list ',(car op)
-                                    ,@(cdr op)))
-                           rhs)))
-                ,(size lhs))))
+(defmacro guarded-rule (lhs guard rhs)
+  (labels
+   ((rule-parameters (lhs)
+                     (if (null? lhs) ()
+                       (append!
+                        (map
+                         (lambda (param)
+                           (if (or (null? (symbol? param)) (eq param '*))
+                               '*no-variable*
+                             param))
+                         (cdr (car lhs)))
+                        (rule-parameters (cdr lhs))))))
+   `(add-rule ',lhs
+              ,(if guard
+                   `(lambda ,(rule-parameters lhs) ,guard)
+                 ())
+              (lambda ,(rule-parameters lhs)
+                (list ,@(map
+                         (lambda (op)
+                           `(list ',(car op)
+                                  ,@(cdr op)))
+                         rhs)))
+              ,(size lhs))))
 
-  (defmacro simple-rule (lhs rhs)
-    `(guarded-rule ,lhs () ,rhs))
+(defmacro simple-rule (lhs rhs)
+  `(guarded-rule ,lhs () ,rhs))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -7,23 +7,23 @@
 ;;; Description:
 ;;;-----------------------------------------------------------------------------
 (defmodule action-gf
-    (syntax (macros macros-tag)
-     import (level1 basic))
+  (syntax (macros macros-tag)
+   import (level1 basic))
 
-  (defclass <action> ()
-    ())
+(defclass <action> ()
+  ())
 
-  (defclass <halt-action> (<action>)
-    ()
-    constructor: (make-halt-action))
+(defclass <halt-action> (<action>)
+  ()
+  constructor: (make-halt-action))
 
-  (defgeneric execute ((action <action>) pi
-                       wm-manager ce-manager cr-manager))
+(defgeneric execute ((action <action>) pi
+                     wm-manager ce-manager cr-manager))
 
-  (defgeneric get-ts (ce-num prod ce-ts))
+(defgeneric get-ts (ce-num prod ce-ts))
 
-  (export execute <action> <halt-action> make-halt-action get-ts)
+(export execute <action> <halt-action> make-halt-action get-ts)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

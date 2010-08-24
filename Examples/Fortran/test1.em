@@ -17,9 +17,9 @@
 ;;; Out-call to Fortran
 ;;; Future: (defextern ... language: fortran) and no ref types
 ;;;-----------------------------------------------------------------------------
-  (defextern foo (<int*> <double*>) <double> "foo_")
-  (print (foo (convert 42 <int*>) (convert 1.0 <double*>)))
+(defextern foo (<int*> <double*>) <double> "foo_")
+(print (foo (convert 42 <int*>) (convert 1.0 <double*>)))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

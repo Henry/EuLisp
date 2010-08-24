@@ -18,30 +18,30 @@
 ;;; warning is signalled when the key is absent (see also _mop-gf0)
 
 ;;;-----------------------------------------------------------------------------
-  (defun find-key (key keywords default)
-    (let ((val (init-list-ref keywords key *absent*)))
-      (if (eq val *absent*)
-          (if (eq default required:)
-              (progn
-                (warning "missing required keyword ~a" key)
-                val)
-            default)
-        val)))
+(defun find-key (key keywords default)
+  (let ((val (init-list-ref keywords key *absent*)))
+    (if (eq val *absent*)
+        (if (eq default required:)
+            (progn
+              (warning "missing required keyword ~a" key)
+              val)
+          default)
+      val)))
 
-  (defun filter-keywords (keywords ignore)
-    (labels
-        ((loop (keys res)
-               (if (null? keys)
-                   (reverse-list res)
-                 (let* ((key (car keys))
-                        (tmp (cdr keys))
-                        (val (car tmp))
-                        (rest (cdr tmp)))
-                   (if (member1-list key ignore)
-                       (loop rest res)
-                     (loop rest (cons val (cons key res))))))))
-      (loop keywords ())))
+(defun filter-keywords (keywords ignore)
+  (labels
+   ((loop (keys res)
+          (if (null? keys)
+              (reverse-list res)
+            (let* ((key (car keys))
+                   (tmp (cdr keys))
+                   (val (car tmp))
+                   (rest (cdr tmp)))
+              (if (member1-list key ignore)
+                  (loop rest res)
+                (loop rest (cons val (cons key res))))))))
+   (loop keywords ())))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

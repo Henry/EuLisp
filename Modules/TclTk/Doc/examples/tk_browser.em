@@ -101,22 +101,22 @@
          auxtext)
     ()
     (cond
-     ((and (string? *actual-object*) (eq name-slot 'data))
-      (tk-conf-widget *info-title* text: (format () "Information Message"))
-      (tk-delete *info-text* "1.0" "end")
-      (tk-insert *info-text* "end" "C representation"))
+      ((and (string? *actual-object*) (eq name-slot 'data))
+       (tk-conf-widget *info-title* text: (format () "Information Message"))
+       (tk-delete *info-text* "1.0" "end")
+       (tk-insert *info-text* "end" "C representation"))
 
-     ((eq name-slot 'Self)
-      ())
+      ((eq name-slot 'Self)
+       ())
 
-     (t
-      (add-actual-object)
-      (setq *actual-object*
-            (if (eq name-slot 'Class)
-                (class-of *actual-object*)
-              (slot-value *actual-object* name-slot)))
+      (t
+       (add-actual-object)
+       (setq *actual-object*
+             (if (eq name-slot 'Class)
+                 (class-of *actual-object*)
+               (slot-value *actual-object* name-slot)))
 
-      (generate-layout)))))
+       (generate-layout)))))
 
 ;;;;;
 ;;
@@ -129,9 +129,9 @@
         (result ()))
     (do (lambda (el)
           (progn
-           (and (null? (eq i pos))
-                (setq result (cons el result)))
-           (setq i (+ i 1))))
+            (and (null? (eq i pos))
+                 (setq result (cons el result)))
+            (setq i (+ i 1))))
         list)
     (reverse result)))
 
@@ -145,13 +145,13 @@
 ;;;;;
 (defun go-previous-object ()
   (cond
-   (*objects-inspected*
-    (let ((position (convert
-                     (car (tk-listbox-curselection *lb-previous*))
-                     <int>)))
-      (setq *actual-object* (element *objects-inspected* position))
-      (setq *objects-inspected* (remove-element *objects-inspected* position))
-      (generate-layout)))))
+    (*objects-inspected*
+     (let ((position (convert
+                      (car (tk-listbox-curselection *lb-previous*))
+                      <int>)))
+       (setq *actual-object* (element *objects-inspected* position))
+       (setq *objects-inspected* (remove-element *objects-inspected* position))
+       (generate-layout)))))
 
 ;;;;;
 ;;
@@ -193,7 +193,7 @@
 
     (do (lambda (o)
           (tk-insert *lb-previous* "end" (format () "~a" o)))
-         *objects-inspected*)
+        *objects-inspected*)
     ))
 ;;----------------------------------------------------------------------------------
 ;;
@@ -233,13 +233,13 @@
          )
 
 
-;; Global widgets in the rhs. They have to be known by the whole module.
+    ;; Global widgets in the rhs. They have to be known by the whole module.
     (setq *info-title* (tk-make-label right fg: "SeaGreen4"))
     (setq *info-text* (tk-make-text decoration width: "30" bd: "2"))
 
     (eul-associate *info-text* scroll-text 'vertical)
 
-;; Global widget in the lhs.
+    ;; Global widget in the lhs.
     (setq *lb-slots*
           (tk-make-listbox left-up width: "30" bg: "SteelBlue"))
 
@@ -270,10 +270,10 @@
     (tk-pack decoration side: "left" expand: "1" fill: "both")
     (tk-pack *info-text* side: "top" expand: "1" fill: "both")
     (tk-pack *info-hierchy* side: "bottom")
-(generate-layout)
+    (generate-layout)
 
-)
-(Tk_MainLoop))
+    )
+  (Tk_MainLoop))
 (defclass <Person> ()
   ((namePer accessor: namePer keyword: namePer:)
    (phone accessor: phone keyword: phone:)

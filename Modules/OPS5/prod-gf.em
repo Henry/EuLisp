@@ -7,19 +7,19 @@
 ;;; Description: Generic functions for production
 ;;;-----------------------------------------------------------------------------
 (defmodule prod-gf
-    (syntax (macros macros-tag)
-     import (level1 basic))
-  (print "### prod-gf")
+  (syntax (macros macros-tag)
+   import (level1 basic))
+(print "### prod-gf")
 
-  (defgeneric p-name (object))
-  (defgeneric create-prod-insts (prod ts ce join-tests cr-manager))
-  (defgeneric remove-prod-insts (prod ts ce cr-manager))
-  (defgeneric add-cond-el (prod ce))
-  (defgeneric fire (prod wm-manager ce-manager cr-manager))
+(defgeneric p-name (object))
+(defgeneric create-prod-insts (prod ts ce join-tests cr-manager))
+(defgeneric remove-prod-insts (prod ts ce cr-manager))
+(defgeneric add-cond-el (prod ce))
+(defgeneric fire (prod wm-manager ce-manager cr-manager))
 
-  (export p-name add-cond-el fire
-   create-prod-insts remove-prod-insts)
+(export p-name add-cond-el fire
+ create-prod-insts remove-prod-insts)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

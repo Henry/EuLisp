@@ -14,15 +14,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Read source file
 ;;;-----------------------------------------------------------------------------
-  (defun read-source-file (module-name)
-    (setq *pass* 'read)
-    (let ((file-name (as-source-file-name module-name)))
-      (with-input-file-of-path (stream file-name dir *load-path*)
-        (notify0 "  Reading sources from ~a~a~a.em ..."
-                dir *delimiter* module-name)
-        (setq *tmp-load-dir* dir)
-        (read-s-expression stream))))
+(defun read-source-file (module-name)
+  (setq *pass* 'read)
+  (let ((file-name (as-source-file-name module-name)))
+    (with-input-file-of-path (stream file-name dir *load-path*)
+                             (notify0 "  Reading sources from ~a~a~a.em ..."
+                                      dir *delimiter* module-name)
+                             (setq *tmp-load-dir* dir)
+                             (read-s-expression stream))))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

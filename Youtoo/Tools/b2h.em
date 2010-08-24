@@ -19,157 +19,157 @@
   (syntax (macros vmeta b2h-aux)
    import (level1))
 
-  (deflocal old-style ())
-  (deflocal verbose ())
-  (deflocal debug ())
-  (deflocal bytecodes-found 0)
-  (deflocal bytecodes-output 0) ; Doesn't include non-specified bytecodes.
+(deflocal old-style ())
+(deflocal verbose ())
+(deflocal debug ())
+(deflocal bytecodes-found 0)
+(deflocal bytecodes-output 0) ; Doesn't include non-specified bytecodes.
 
-  (defun digit (c)
-    (and (character? c)
-         (<= #\0 c #\9)))
+(defun digit (c)
+  (and (character? c)
+       (<= #\0 c #\9)))
 
-  (defun whitespace (c)
-    (and (character? c)
-         (or (eql c #\    )
-             (eql c #\ ))))
+(defun whitespace (c)
+  (and (character? c)
+       (or (eql c #\    )
+           (eql c #\ ))))
 
-  (defun letter (c)
-    (and (character? c)
-         (or (<= #\a c #\z)
-             (<= #\A c #\Z))))
+(defun letter (c)
+  (and (character? c)
+       (or (<= #\a c #\z)
+           (<= #\A c #\Z))))
 
-  (defun identifier (c)
-    (or (letter c)
-        (digit c)
-        (eql #\- c)))
+(defun identifier (c)
+  (or (letter c)
+      (digit c)
+      (eql #\- c)))
 
-  (deflocal bytecodes (make <table>))
+(deflocal bytecodes (make <table>))
 
-  (defclass <bytecode> ()
-    ((name accessor: bytecode-name keyword: name:)
-     (args accessor: bytecode-args keyword: args:)
-     (number accessor: bytecode-number keyword: number:))
-    predicate: bytecode?)
+(defclass <bytecode> ()
+  ((name accessor: bytecode-name keyword: name:)
+   (args accessor: bytecode-args keyword: args:)
+   (number accessor: bytecode-number keyword: number:))
+  predicate: bytecode?)
 
-  (defun arg-size (args)
-    (accumulate
-     (lambda (a v)
-       (if (member v '("reg" "byte") binary=)
-           (+ a 1)
-         (+ a 4)))
-     0
-     args))
+(defun arg-size (args)
+  (accumulate
+   (lambda (a v)
+     (if (member v '("reg" "byte") binary=)
+         (+ a 1)
+       (+ a 4)))
+   0
+   args))
 
-  ;; Brute force :-(. ???
-  ;; We assume that any instruction that has a name that starts with "branch"
-  ;; is a branch.  We also assume that any branch that ends with "-neg" is
-  ;; a negative branch.
-  (defun branch-info (name)
-    (if (match-expr name "branch")
-        (if (match-expr (reverse name) "gen-")
-            -1
-          1)
-      0))
+;; Brute force :-(. ???
+;; We assume that any instruction that has a name that starts with "branch"
+;; is a branch.  We also assume that any branch that ends with "-neg" is
+;; a negative branch.
+(defun branch-info (name)
+  (if (match-expr name "branch")
+      (if (match-expr (reverse name) "gen-")
+          -1
+        1)
+    0))
 
-  (defun parse-line (line lineno filename)
-    (let (name args number)
-      (when
-       (match-expr line
-                   (seq
-                    (star (type whitespace))
-                    "(def-bytecode"
-                    (star (type whitespace))
-                    (name name (seq (type letter)
-                                    (star (type identifier))))
-                    (star (type whitespace))
-                    "("
-                    (star (seq
-                           (push args (star (type identifier) 1 ()))
-                           (star (alt (type whitespace)))))
-                    ")"
-                    (star (alt (type whitespace)))
-                    (name number (seq (star (type digit) 1 ())))
-                    ))
-       (when debug (sformat stderr "match! ~d\n" number))
-       (setq bytecodes-found (+ bytecodes-found 1))
-       (let ((n (string-as-int number)))
+(defun parse-line (line lineno filename)
+  (let (name args number)
+    (when
+     (match-expr line
+                 (seq
+                  (star (type whitespace))
+                  "(def-bytecode"
+                  (star (type whitespace))
+                  (name name (seq (type letter)
+                                  (star (type identifier))))
+                  (star (type whitespace))
+                  "("
+                  (star (seq
+                         (push args (star (type identifier) 1 ()))
+                         (star (alt (type whitespace)))))
+                  ")"
+                  (star (alt (type whitespace)))
+                  (name number (seq (star (type digit) 1 ())))
+                  ))
+     (when debug (sformat stderr "match! ~d\n" number))
+     (setq bytecodes-found (+ bytecodes-found 1))
+     (let ((n (string-as-int number)))
        (if (element bytecodes n)
            (format "~a:~d: warning: bytecode ~d redefined" filename lineno n)
          ((setter element) bytecodes n
           (make <bytecode> name: name args: args number: n)))))))
 
-  (defun process-file (filename)
-    (when verbose (sformat stderr "Processing ~a\n" filename))
-    (with-input-file* filename
-      (block exit
-        (with-handler
-         (lambda (c r) (return-from exit))
-         (let loop ((i 0)
-                    (line (read-line)))
-              (parse-line line i filename)
-              (loop (+ i 1) (read-line)))))))
+(defun process-file (filename)
+  (when verbose (sformat stderr "Processing ~a\n" filename))
+  (with-input-file* filename
+                    (block exit
+                           (with-handler
+                            (lambda (c r) (return-from exit))
+                            (let loop ((i 0)
+                                       (line (read-line)))
+                                 (parse-line line i filename)
+                                 (loop (+ i 1) (read-line)))))))
 
-  (defun parse-args (args)
-    (if (null? args)
-        '()
-      (let ((first (car args))
-            (rest  (cdr args)))
-        (cond
-         ((binary= first "-O")            ;Sort
-          (setq old-style (not old-style))
-          (parse-args rest))
-         ((binary= first "-v")
-          (setq verbose (not verbose))
-          (parse-args rest))
-         ((binary= first "-d")
-          (setq debug (not debug))
-          (parse-args rest))
-         (t                             ;Not known option, so must be filename
-          args)))))
+(defun parse-args (args)
+  (if (null? args)
+      '()
+    (let ((first (car args))
+          (rest  (cdr args)))
+      (cond
+        ((binary= first "-O")            ;Sort
+         (setq old-style (not old-style))
+         (parse-args rest))
+        ((binary= first "-v")
+         (setq verbose (not verbose))
+         (parse-args rest))
+        ((binary= first "-d")
+         (setq debug (not debug))
+         (parse-args rest))
+        (t                             ;Not known option, so must be filename
+         args)))))
 
-  (defun main (args)
-    (let ((filenames (parse-args args)))
-      (do process-file filenames)
-      ;; Needs date.
-      (format "/* Generated by b2h.em from ~a  */\n"
-              (accumulate (lambda (a v)
-                            (if (> (size a) 0) (concatenate a ", " v) v))
-                          "" filenames))
-      (print "/* for Youtoo's Vm/bytecode2.h  */")
-      (print "#ifndef BYTECODE2_H")
-      (print "#define BYTECODE2_H")
-      (newline)
-      (print "#define eul_instr_inlined_arg_size(x) (eul_instr_info[(x)].inlined_arg_size)")
-      (print "#define eul_instr_branch(x) (eul_instr_info[(x)].branch)")
-      (newline)
-      (print "struct {int inlined_arg_size, branch;} eul_instr_info[256]= {")
-      (when verbose (sformat stderr "~d bytecodes found\n" bytecodes-found))
-      (let loop ((i 0))
+(defun main (args)
+  (let ((filenames (parse-args args)))
+    (do process-file filenames)
+    ;; Needs date.
+    (format "/* Generated by b2h.em from ~a  */\n"
+            (accumulate (lambda (a v)
+                          (if (> (size a) 0) (concatenate a ", " v) v))
+                        "" filenames))
+    (print "/* for Youtoo's Vm/bytecode2.h  */")
+    (print "#ifndef BYTECODE2_H")
+    (print "#define BYTECODE2_H")
+    (newline)
+    (print "#define eul_instr_inlined_arg_size(x) (eul_instr_info[(x)].inlined_arg_size)")
+    (print "#define eul_instr_branch(x) (eul_instr_info[(x)].branch)")
+    (newline)
+    (print "struct {int inlined_arg_size, branch;} eul_instr_info[256]= {")
+    (when verbose (sformat stderr "~d bytecodes found\n" bytecodes-found))
+    (let loop ((i 0))
          (let ((bc (element bytecodes i)))
            (cond
-            (bc
-             (let ((n (arg-size (bytecode-args bc)))
-                   (b (branch-info (bytecode-name bc))))
-               (if old-style
-                   (format "  {~d, ~d}, /* instruction ~d (~x)*/\n" n b i i)
-                 (format "  {~d, ~d}, /* instruction ~d (~x): ~a */\n"
-                         n b i i (bytecode-name bc))))
-             (setq bytecodes-output (+ bytecodes-output 1)))
-            (t                          ;undefined
-             (if old-style
-                 (format "  {~d, ~d}, /* instruction ~d (~x)*/\n" 0 0 i i)
-               (format "  {~d, ~d}, /* instruction ~d (~x): (undefined) */\n"
-                       0 0 i i))))
+             (bc
+              (let ((n (arg-size (bytecode-args bc)))
+                    (b (branch-info (bytecode-name bc))))
+                (if old-style
+                    (format "  {~d, ~d}, /* instruction ~d (~x)*/\n" n b i i)
+                  (format "  {~d, ~d}, /* instruction ~d (~x): ~a */\n"
+                          n b i i (bytecode-name bc))))
+              (setq bytecodes-output (+ bytecodes-output 1)))
+             (t                          ;undefined
+              (if old-style
+                  (format "  {~d, ~d}, /* instruction ~d (~x)*/\n" 0 0 i i)
+                (format "  {~d, ~d}, /* instruction ~d (~x): (undefined) */\n"
+                        0 0 i i))))
            (when (< i 255)
-             (loop (+ i 1)))))
-      (when verbose (sformat stderr "~d bytecodes output\n" bytecodes-output))
-      (print "};")
-      (newline)
-      (print "#endif /* eof */")))
+                 (loop (+ i 1)))))
+    (when verbose (sformat stderr "~d bytecodes output\n" bytecodes-output))
+    (print "};")
+    (newline)
+    (print "#endif /* eof */")))
 
-  (main (cdr ((converter <list>) *argv*))) ; get rid of program name.
+(main (cdr ((converter <list>) *argv*))) ; get rid of program name.
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -7,16 +7,16 @@
   (syntax (macros)
    import (level1))
 
-  (defmacro ecase (exp . clauses)
-    (let ((val (gensym)))
+(defmacro ecase (exp . clauses)
+  (let ((val (gensym)))
     `(let ((,val ,exp))
        (cond
-        ,@(map (lambda (clause)
-                 (let ((const (car clause))
-                       (forms (cdr clause)))
-                   `((eq ,val ',const) ,@forms)))
-               clauses)))))
+         ,@(map (lambda (clause)
+                  (let ((const (car clause))
+                        (forms (cdr clause)))
+                    `((eq ,val ',const) ,@forms)))
+                clauses)))))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

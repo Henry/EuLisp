@@ -14,14 +14,14 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Wait (timeout should be <integer>)
 ;;;-----------------------------------------------------------------------------
-  (defgeneric wait (x timeout))
+(defgeneric wait (x timeout))
 
-  (defmethod wait ((x <object>) (timeout <object>))
-    (error "wait not yet implemented"))
+(defmethod wait ((x <object>) (timeout <object>))
+  (error "wait not yet implemented"))
 
-  (defextern eul_ticks_per_second () <int>)
-  (defconstant ticks-per-second (eul_ticks_per_second))
+(defextern eul_ticks_per_second () <int>)
+(defconstant ticks-per-second (eul_ticks_per_second))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

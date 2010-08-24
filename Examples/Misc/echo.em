@@ -12,15 +12,15 @@
   (syntax (macros)
    import (level1))
 
-  (let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
-         (c (make <connection> port: port))
-         x)
-    (while (null? (eq (setq x (read-line stdin () (eos-default-value)))
-                     (eos-default-value)))
-      (sprin c x)
-      (print (read-line c)))
-    (disconnect c))
+(let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
+       (c (make <connection> port: port))
+       x)
+  (while (null? (eq (setq x (read-line stdin () (eos-default-value)))
+                    (eos-default-value)))
+    (sprin c x)
+    (print (read-line c)))
+  (disconnect c))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

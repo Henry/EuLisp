@@ -3,7 +3,7 @@
 ;;; ----------------------------------------------------------------------- ;;;
 ;;; ---                         EuLisp System 'youtoo/tk'
 ;;; ----------------------------------------------------------------------- ;;;
-;;;  Library: 
+;;;  Library:
 ;;;  Authors: J Garcia
 ;;; Description: YouToo/Tk module to test canvas widget.
 ;;; ----------------------------------------------------------------------- ;;;
@@ -43,19 +43,19 @@
          (text7 (tk-add-text-canvas canvas1 30 270 text: "Some of the item allowed in canvases" anchor: "w"))
          (scroll (tk-make-scrollbar frame1 orient: "vertical"))
          (scroll1 (tk-make-scrollbar frame2 orient: "horizontal")))
-    
-    (eul-associate canvas1 scroll 'vertical) 
+
+    (eul-associate canvas1 scroll 'vertical)
     (eul-associate canvas1 scroll1 'horizontal)
     (tk-pack but side: "top")
     (tk-pack frame1 side: "bottom")
     (tk-pack scroll side: "right" fill: "y")
     (tk-pack frame2 side: "left")
-  
+
     (tk-pack scroll1 side: "bottom" fill: "x")
     (tk-pack canvas1 side: "top")
-   
-)
+
+    )
   (Tk_MainLoop))
 (tk-test-canvas)
 )
- 
+

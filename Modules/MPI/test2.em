@@ -17,25 +17,25 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Send user input
 ;;;-----------------------------------------------------------------------------
-  (defun test ()
-    ;; Queries the user for objects to send
-    (let ((s1 (make <mpi-stream>))
-          (s2 (make <mpi-stream>))
-          x)
-      (cond ((local-mpi-stream? s1)
-             (while (setq x (read lispin () ()))
-               (format "~a sending ~a\n" s1 x)
-               (swrite s2 x))
-             (disconnect s1))
-            ((local-mpi-stream? s2)
-             (while (setq x (read s1))
-               (format "~a received instance of ~a: ~a\n"
-                       s2 (class-of x) x))
-             (disconnect s2))
-            (t
-             (error "unhandled local mpi stream" <condition>)))))
-  (test)
+(defun test ()
+  ;; Queries the user for objects to send
+  (let ((s1 (make <mpi-stream>))
+        (s2 (make <mpi-stream>))
+        x)
+    (cond ((local-mpi-stream? s1)
+           (while (setq x (read lispin () ()))
+             (format "~a sending ~a\n" s1 x)
+             (swrite s2 x))
+           (disconnect s1))
+          ((local-mpi-stream? s2)
+           (while (setq x (read s1))
+             (format "~a received instance of ~a: ~a\n"
+                     s2 (class-of x) x))
+           (disconnect s2))
+          (t
+           (error "unhandled local mpi stream" <condition>)))))
+(test)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

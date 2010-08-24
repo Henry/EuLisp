@@ -12,18 +12,18 @@
   (syntax (macros)
    import (level1))
 
-  (let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
-         (s (make <socket> port: port))
-         c x)
-    (unwind-protect
-        (while (setq c (make <connection> socket: s))
-          (while (null? (eq (setq x (read-line c () (eos-default-value)))
-                           (eos-default-value)))
-            (format "echoing ~a" x)
-            (sprin c x))
-          (disconnect c))
-      (disconnect s)))
+(let* ((port (if (< *argc* 2) 4711 (vector-ref *argv* 1)))
+       (s (make <socket> port: port))
+       c x)
+  (unwind-protect
+      (while (setq c (make <connection> socket: s))
+        (while (null? (eq (setq x (read-line c () (eos-default-value)))
+                          (eos-default-value)))
+          (format "echoing ~a" x)
+          (sprin c x))
+        (disconnect c))
+    (disconnect s)))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

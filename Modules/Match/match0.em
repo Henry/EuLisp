@@ -1,13 +1,13 @@
 ;; match0.em -- macros for match.em
 (defmodule match0
-    (syntax (macros)
-     import (level1))
+  (syntax (macros)
+   import (level1))
 
-  (defmacro letrec (inits . body)
-    `(let (,@(map (lambda (init) `(,(car init) '())) inits))
-       ,@(map (lambda (init) `(setq ,(car init) ,(cadr init))) inits)
-       ,@body))
+(defmacro letrec (inits . body)
+  `(let (,@(map (lambda (init) `(,(car init) '())) inits))
+     ,@(map (lambda (init) `(setq ,(car init) ,(cadr init))) inits)
+     ,@body))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

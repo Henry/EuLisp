@@ -14,13 +14,13 @@
   (syntax (macros)
    import (level1))
 
-  (let ((c (make <connection> host: "www.cs.bath.ac.uk" port: 80))
-        x)
-    (sprint c "GET /~jap/ak1/youtoo/home.html")
-    (while (setq x (read-line c () ()))
-      (prin x))
-    (disconnect c))
+(let ((c (make <connection> host: "www.cs.bath.ac.uk" port: 80))
+      x)
+  (sprint c "GET /~jap/ak1/youtoo/home.html")
+  (while (setq x (read-line c () ()))
+    (prin x))
+  (disconnect c))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

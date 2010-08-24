@@ -14,19 +14,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Handle Tcl events on a thread; tk-main-loop would block
 ;;;-----------------------------------------------------------------------------
-  (defun tcl-do-events ()
-    (if (= (tcl-do-one-event 1) 0)
-        (thread-reschedule)
-      ())
-    (tcl-do-events))
+(defun tcl-do-events ()
+  (if (= (tcl-do-one-event 1) 0)
+      (thread-reschedule)
+    ())
+  (tcl-do-events))
 
-  (thread-start (make <current-thread> function: tcl-do-events))
+(thread-start (make <current-thread> function: tcl-do-events))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Start-up the interpreter
 ;;;-----------------------------------------------------------------------------
-  (main *argv*)
+(main *argv*)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -6,28 +6,28 @@
 ;;; interactive scheme module
 
 (defmodule scheme
-    (import (schemer
-              (rename
-                ((error ERROR))
-                (only
-                  (!>
-                    exit
-                    expose
-                    export
-                    error
-                    defcondition
-                    <error>)
-                  level0)))
-     export (!> exit error))
+  (import (schemer
+           (rename
+            ((error ERROR))
+            (only
+             (!>
+              exit
+              expose
+              export
+              error
+              defcondition
+              <error>)
+             level0)))
+   export (!> exit error))
 
-  (expose schemer)
+(expose schemer)
 
-  (defcondition <scheme-error> <error>)
+(defcondition <scheme-error> <error>)
 
-  (define (error a b)
-          (ERROR
-            a
-            <scheme-error>
-            value: b))
+(define (error a b)
+        (ERROR
+         a
+         <scheme-error>
+         value: b))
 
-  )
+)

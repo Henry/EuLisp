@@ -16,31 +16,31 @@
    import (i-all p-env ex-module ex-body sx-write sx-node)
    export (interactive-parse))
 
-  (defmethod parse-module (sexprs)
-    (notify "  Parsing module ~a ..." *tmp-source-file-name*)
+(defmethod parse-module (sexprs)
+  (notify "  Parsing module ~a ..." *tmp-source-file-name*)
+  (setq *pass* 'parse)
+  (notify0 " .ME/SE")
+  (if (and (cons? sexprs)
+           (eq (car sexprs) 'defmodule))
+      (let ((module (expand-module sexprs)))
+        (dynamic-let  ((*actual-module* module))
+                      (notify0 " .EE")
+                      (expand-export module)
+                      (notify0 " .XE/SE")
+                      (expand-bodies module)
+                      module))
+    (ct-serious-warning
+     () "bad defmodule syntax in module ~a ..." *tmp-source-file-name*)))
+
+(defun interactive-parse (sexpr)
+  (let ((module (dynamic *actual-module*)))
     (setq *pass* 'parse)
     (notify0 " .ME/SE")
-    (if (and (cons? sexprs)
-             (eq (car sexprs) 'defmodule))
-        (let ((module (expand-module sexprs)))
-          (dynamic-let  ((*actual-module* module))
-            (notify0 " .EE")
-            (expand-export module)
-            (notify0 " .XE/SE")
-            (expand-bodies module)
-            module))
-      (ct-serious-warning
-       () "bad defmodule syntax in module ~a ..." *tmp-source-file-name*)))
-
-  (defun interactive-parse (sexpr)
-    (let ((module (dynamic *actual-module*)))
-      (setq *pass* 'parse)
-      (notify0 " .ME/SE")
-      (expand-module sexpr)
-      (notify0 " .XE/SE")
-      (expand-bodies module)
-      module))
+    (expand-module sexpr)
+    (notify0 " .XE/SE")
+    (expand-bodies module)
+    module))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -9,41 +9,41 @@
 (defmodule convert1
   (syntax (_telos0)
    import (telos condition convert collect fpi character list string vector
-           table))
+                 table))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion list, string, vector, table -> list
 ;;;-----------------------------------------------------------------------------
-  (defmethod (converter <list>) ((l <list>)) l)
+(defmethod (converter <list>) ((l <list>)) l)
 
-  (defmethod (converter <list>) ((str <string>))
-    (let ((n (int-binary- (string-size str) 1)))
-      (labels
-       ((loop (res)
-              (if (int-binary< n 0) res
-                (let ((char (string-ref str n)))
-                  (setq n (int-binary- n 1))
-                  (loop (cons char res))))))
-       (loop ()))))
+(defmethod (converter <list>) ((str <string>))
+  (let ((n (int-binary- (string-size str) 1)))
+    (labels
+     ((loop (res)
+            (if (int-binary< n 0) res
+              (let ((char (string-ref str n)))
+                (setq n (int-binary- n 1))
+                (loop (cons char res))))))
+     (loop ()))))
 
-  (defmethod (converter <list>) ((vec <vector>))
-    (let ((n (int-binary- (vector-size vec) 1)))
-      (labels
-       ((loop (res)
-              (if (int-binary< n 0) res
-                (let ((char (vector-ref vec n)))
-                  (setq n (int-binary- n 1))
-                  (loop (cons char res))))))
-       (loop ()))))
+(defmethod (converter <list>) ((vec <vector>))
+  (let ((n (int-binary- (vector-size vec) 1)))
+    (labels
+     ((loop (res)
+            (if (int-binary< n 0) res
+              (let ((char (vector-ref vec n)))
+                (setq n (int-binary- n 1))
+                (loop (cons char res))))))
+     (loop ()))))
 
-  (defmethod (converter <list>) ((tab <table>))
-    (table-values tab))
+(defmethod (converter <list>) ((tab <table>))
+  (table-values tab))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion list, string, vector, table -> string
 ;;;-----------------------------------------------------------------------------
-  (defmethod (converter <string>) ((l <list>))
-    (eul_list_as_eul_string l))
+(defmethod (converter <string>) ((l <list>))
+  (eul_list_as_eul_string l))
 ;;  (defmethod (converter <string>) ((l <list>))
 ;;    (let* ((n (list-size l))
 ;;         (res (make <string> size: n))
@@ -61,104 +61,104 @@
 ;;              res)))
 ;;       (loop l))))
 
-  (defmethod (converter <string>) ((str <string>)) str)
+(defmethod (converter <string>) ((str <string>)) str)
 
-  (defmethod (converter <string>) ((vec <vector>))
-    (let* ((n (vector-size vec))
-           (res (make <string> size: n)))
-      (setq n (int-binary- n 1))
-      (labels
-       ((loop ()
-              (if (int-binary< n 0) res
-                (let ((x (vector-ref vec n)))
-                  (if (character? x) ()
-                      (error "conversion to string with non character element "
-                             <condition>))
-                    ((setter string-ref) res n x)
-                    (setq n (int-binary- n 1))
-                    (loop)))))
-       (loop))))
+(defmethod (converter <string>) ((vec <vector>))
+  (let* ((n (vector-size vec))
+         (res (make <string> size: n)))
+    (setq n (int-binary- n 1))
+    (labels
+     ((loop ()
+            (if (int-binary< n 0) res
+              (let ((x (vector-ref vec n)))
+                (if (character? x) ()
+                  (error "conversion to string with non character element "
+                         <condition>))
+                ((setter string-ref) res n x)
+                (setq n (int-binary- n 1))
+                (loop)))))
+     (loop))))
 
-  (defmethod (converter <string>) ((tab <table>))
-    (convert (table-values tab) <string>))
+(defmethod (converter <string>) ((tab <table>))
+  (convert (table-values tab) <string>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion list, string, vector, table -> vector
 ;;;-----------------------------------------------------------------------------
-  (defmethod (converter <vector>) ((l <list>))
-    (make-vector1 (list-size l) l))
+(defmethod (converter <vector>) ((l <list>))
+  (make-vector1 (list-size l) l))
 
-  (defmethod (converter <vector>) ((str <string>))
-    (let* ((n (string-size str))
-           (res (make-vector n)))
-      (setq n (int-binary- n 1))
-      (labels
-       ((loop ()
-              (if (int-binary< n 0) res
-                (let ((x (string-ref str n)))
-                  ((setter vector-ref) res n x)
-                  (setq n (int-binary- n 1))
-                  (loop)))))
-       (loop))))
+(defmethod (converter <vector>) ((str <string>))
+  (let* ((n (string-size str))
+         (res (make-vector n)))
+    (setq n (int-binary- n 1))
+    (labels
+     ((loop ()
+            (if (int-binary< n 0) res
+              (let ((x (string-ref str n)))
+                ((setter vector-ref) res n x)
+                (setq n (int-binary- n 1))
+                (loop)))))
+     (loop))))
 
-  (defmethod (converter <vector>) ((vec <vector>)) vec)
+(defmethod (converter <vector>) ((vec <vector>)) vec)
 
-  (defmethod (converter <vector>) ((tab <table>))
-    (convert (table-values tab) <vector>))
+(defmethod (converter <vector>) ((tab <table>))
+  (convert (table-values tab) <vector>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion list, string, vector, table -> table
 ;;;-----------------------------------------------------------------------------
-  (defmethod (converter <table>) ((l <list>))
-    (let ((res (make <table>))
-          (i 0))
-      (labels
-       ((loop (ll)
-              (if (null? ll) res
-                  (let ((x (car ll)))
-                    ((setter table-ref) res i x)
-                    (setq i (int-binary+ i 1))
-                    (loop (cdr ll))))))
-       (loop l))))
+(defmethod (converter <table>) ((l <list>))
+  (let ((res (make <table>))
+        (i 0))
+    (labels
+     ((loop (ll)
+            (if (null? ll) res
+              (let ((x (car ll)))
+                ((setter table-ref) res i x)
+                (setq i (int-binary+ i 1))
+                (loop (cdr ll))))))
+     (loop l))))
 
 ;  (defmethod (converter <table>) ((str <string>))
 ;    ;; doesn't make sense!
 ;    )
 
-  (defmethod (converter <table>) ((vec <vector>))
-    (let ((n (vector-size vec))
-          (res (make <table>)))
-      (setq n (int-binary- n 1))
-      (labels
-       ((loop ()
-              (if (int-binary< n 0) res
-                (let ((x (vector-ref vec n)))
-                  ((setter table-ref) res n x)
-                  (setq n (int-binary- n 1))
-                  (loop)))))
-       (loop))))
+(defmethod (converter <table>) ((vec <vector>))
+  (let ((n (vector-size vec))
+        (res (make <table>)))
+    (setq n (int-binary- n 1))
+    (labels
+     ((loop ()
+            (if (int-binary< n 0) res
+              (let ((x (vector-ref vec n)))
+                ((setter table-ref) res n x)
+                (setq n (int-binary- n 1))
+                (loop)))))
+     (loop))))
 
-  (defmethod (converter <table>) ((tab <table>)) tab)
+(defmethod (converter <table>) ((tab <table>)) tab)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion int, character -> string
 ;;;-----------------------------------------------------------------------------
-  (defmethod (converter <string>) ((x <int>)) (int-as-string x))
-  (defmethod (converter <string>) ((x <character>)) (character-as-string x))
-  (defmethod (converter <string>) ((x <name>)) (name x))
+(defmethod (converter <string>) ((x <int>)) (int-as-string x))
+(defmethod (converter <string>) ((x <character>)) (character-as-string x))
+(defmethod (converter <string>) ((x <name>)) (name x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion character, string, int -> int
 ;;;-----------------------------------------------------------------------------
-  (defmethod (converter <int>) ((str <string>)) (string-as-int str))
-  (defmethod (converter <int>) ((c <character>)) (character-as-int c))
-  (defmethod (converter <int>) ((x <int>)) x)
+(defmethod (converter <int>) ((str <string>)) (string-as-int str))
+(defmethod (converter <int>) ((c <character>)) (character-as-int c))
+(defmethod (converter <int>) ((x <int>)) x)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion int -> character
 ;;;-----------------------------------------------------------------------------
-  (defmethod (converter <character>) ((x <int>)) (int-as-character x))
+(defmethod (converter <character>) ((x <int>)) (int-as-character x))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

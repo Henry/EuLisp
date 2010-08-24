@@ -17,21 +17,21 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Symbol echo
 ;;;-----------------------------------------------------------------------------
-  (defun echo ()
-    (let ((s1 (make <mpi-stream>))
-          (s2 (make <mpi-stream>)))
-      (cond ((local-mpi-stream? s1)
-             (write "Your input: \n")
-             (swrite s2 (read-line))
-             (write (read s2))
-             (disconnect s1))
-            ((local-mpi-stream? s2)
-             (swrite s1 (read s1))
-             (disconnect s1))
-            (t
-             (error "unhandled local mpi stream" <condition>)))))
-  (echo)
+(defun echo ()
+  (let ((s1 (make <mpi-stream>))
+        (s2 (make <mpi-stream>)))
+    (cond ((local-mpi-stream? s1)
+           (write "Your input: \n")
+           (swrite s2 (read-line))
+           (write (read s2))
+           (disconnect s1))
+          ((local-mpi-stream? s2)
+           (swrite s1 (read s1))
+           (disconnect s1))
+          (t
+           (error "unhandled local mpi stream" <condition>)))))
+(echo)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

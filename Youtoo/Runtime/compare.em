@@ -14,89 +14,89 @@
 ;;;-----------------------------------------------------------------------------
 ;;; = and binary=
 ;;;-----------------------------------------------------------------------------
-  (defun = (arg . args)
-    (primitive-print "=")
-    (labels
-     ((loop (l)
-            (if (null? l) t
-              (if (null? (binary= arg (car l))) ()
-                (loop (cdr l))))))
-     (loop args)))
+(defun = (arg . args)
+  (primitive-print "=")
+  (labels
+   ((loop (l)
+          (if (null? l) t
+            (if (null? (binary= arg (car l))) ()
+              (loop (cdr l))))))
+   (loop args)))
 
-  (defgeneric binary= (x y))
-  (defmethod binary= (x y)
-    (eql x y))
+(defgeneric binary= (x y))
+(defmethod binary= (x y)
+  (eql x y))
 
 ;;;-----------------------------------------------------------------------------
 ;;; !=
 ;;;-----------------------------------------------------------------------------
-  (defun != (arg . args)
-    (null? (apply = arg args)))
+(defun != (arg . args)
+  (null? (apply = arg args)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; < binary< and <=
 ;;;-----------------------------------------------------------------------------
-  (defun < (arg . args)
-    (labels
-     ((loop (l)
-            (let ((rest (cdr l)))
-              (if (null? rest) t
-                (if (null? (binary< (car l) (car rest))) ()
-                  (loop rest))))))
-     (loop (cons arg args))))
+(defun < (arg . args)
+  (labels
+   ((loop (l)
+          (let ((rest (cdr l)))
+            (if (null? rest) t
+              (if (null? (binary< (car l) (car rest))) ()
+                (loop rest))))))
+   (loop (cons arg args))))
 
-  (defun <= (arg . args)
-    (labels
-     ((loop (l)
-            (let ((rest (cdr l)))
-              (if (null? rest) t
-                (if (let ((arg1 (car l))
-                          (arg2 (car rest)))
-                      (and (null? (binary< arg1 arg2))
-                           (null? (binary= arg1 arg2))))
-                    ()
-                  (loop rest))))))
-     (loop (cons arg args))))
+(defun <= (arg . args)
+  (labels
+   ((loop (l)
+          (let ((rest (cdr l)))
+            (if (null? rest) t
+              (if (let ((arg1 (car l))
+                        (arg2 (car rest)))
+                    (and (null? (binary< arg1 arg2))
+                         (null? (binary= arg1 arg2))))
+                  ()
+                (loop rest))))))
+   (loop (cons arg args))))
 
-  (defgeneric binary< (x y))
+(defgeneric binary< (x y))
 
 ;;;-----------------------------------------------------------------------------
 ;;; > and >=
 ;;;-----------------------------------------------------------------------------
-  (defun > args (apply < (reverse-list args)))
-  (defun >= args (apply <= (reverse-list args)))
+(defun > args (apply < (reverse-list args)))
+(defun >= args (apply <= (reverse-list args)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install callback traps
 ;;;-----------------------------------------------------------------------------
-  (install-callback (int-binary+ first-arithmetic-cb 5) binary=)
-  (install-callback (int-binary+ first-arithmetic-cb 6) binary<)
+(install-callback (int-binary+ first-arithmetic-cb 5) binary=)
+(install-callback (int-binary+ first-arithmetic-cb 6) binary<)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Max and Min
 ;;;-----------------------------------------------------------------------------
-  (defun max (arg . args)
-    (labels
-     ((loop (l res)
-            (if (null? l) res
-              (let ((x (car l))
-                    (ll (cdr l)))
-                (if (binary< res x)
-                    (loop ll x)
-                  (loop ll res))))))
-     (loop args arg)))
+(defun max (arg . args)
+  (labels
+   ((loop (l res)
+          (if (null? l) res
+            (let ((x (car l))
+                  (ll (cdr l)))
+              (if (binary< res x)
+                  (loop ll x)
+                (loop ll res))))))
+   (loop args arg)))
 
-  (defun min (arg . args)
-    (labels
-     ((loop (l res)
-            (if (null? l) res
-              (let ((x (car l))
-                    (ll (cdr l)))
-                (if (binary< res x)
-                    (loop ll res)
-                  (loop ll x))))))
-     (loop args arg)))
+(defun min (arg . args)
+  (labels
+   ((loop (l res)
+          (if (null? l) res
+            (let ((x (car l))
+                  (ll (cdr l)))
+              (if (binary< res x)
+                  (loop ll res)
+                (loop ll x))))))
+   (loop args arg)))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -14,11 +14,11 @@
   (syntax (macros)
    import (level1))
 
-  (defun open-url (url)
-    (system (fmt "firefox ~a" url)))
+(defun open-url (url)
+  (system (fmt "firefox ~a" url)))
 
-  (open-url (vector-ref *argv* 1))
+(open-url (vector-ref *argv* 1))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

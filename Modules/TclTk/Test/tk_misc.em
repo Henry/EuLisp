@@ -8,50 +8,50 @@
 ;;; Description: YouToo/Tk module to test buttons & bindings.
 ;;;-----------------------------------------------------------------------------
 (defmodule tk_misc
-    (syntax (macros)
-     import (level1 tcltk)
-     export (test-miscellaneous))
+  (syntax (macros)
+   import (level1 tcltk)
+   export (test-miscellaneous))
 
 ;;;-----------------------------------------------------------------------------
 ;;; General variables to the module
 ;;;-----------------------------------------------------------------------------
-  (deflocal *x* 0)
-  (deflocal *y* 0)
-  (deflocal *z* 0)
-  (deflocal *t* 0)
-  (deflocal *l* 0)
+(deflocal *x* 0)
+(deflocal *y* 0)
+(deflocal *z* 0)
+(deflocal *t* 0)
+(deflocal *l* 0)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Callback Functions
 ;;;-----------------------------------------------------------------------------
-  (defun sum ()
-    (tk-destroy *y* *z*))
+(defun sum ()
+  (tk-destroy *y* *z*))
 
-  (defun buttonBind ()
-    (print "I came into the button")
-    (flush))
+(defun buttonBind ()
+  (print "I came into the button")
+  (flush))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Test Function
 ;;;-----------------------------------------------------------------------------
-  (defun test-miscellaneous ()
-    (tk-wm "title" () "Test Miscellaneous")
-    (setq *x* (tk-make-button () fg: "red" text: "Hello" command: sum))
-    (setq *y* (tk-make-label () text: "Bye Bye"))
-    (setq *z* (tk-make-frame () width: "15m" height: "10m" relief: "raised" borderwidth: "4"))
-    (setq *l* (tk-make-label *z* text: "A Frame"))
-    (tk-pack *l* side: "top" fill: "x")
-    (setq *t* (tk-make-button () fg: "blue" text: "Exit" command: tk-exit))
-    (tk-pack *x* *y* *z* *t* padx: "2c" fill: "x" side: "bottom")
-    (tk-bind *x* "<Enter>" buttonBind)
+(defun test-miscellaneous ()
+  (tk-wm "title" () "Test Miscellaneous")
+  (setq *x* (tk-make-button () fg: "red" text: "Hello" command: sum))
+  (setq *y* (tk-make-label () text: "Bye Bye"))
+  (setq *z* (tk-make-frame () width: "15m" height: "10m" relief: "raised" borderwidth: "4"))
+  (setq *l* (tk-make-label *z* text: "A Frame"))
+  (tk-pack *l* side: "top" fill: "x")
+  (setq *t* (tk-make-button () fg: "blue" text: "Exit" command: tk-exit))
+  (tk-pack *x* *y* *z* *t* padx: "2c" fill: "x" side: "bottom")
+  (tk-bind *x* "<Enter>" buttonBind)
 
-    (tk-conf-widget *x* relief: "raised" text: "Hello Again")
-    (tk-conf-widget *y* text: "Goodbye")
+  (tk-conf-widget *x* relief: "raised" text: "Hello Again")
+  (tk-conf-widget *y* text: "Goodbye")
 
-    (Tk_MainLoop))
+  (Tk_MainLoop))
 
-  (test-miscellaneous)
+(test-miscellaneous)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

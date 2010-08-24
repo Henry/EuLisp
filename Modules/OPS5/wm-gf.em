@@ -7,19 +7,19 @@
 ;;; Description: Generic functions for wmorking memory.
 ;;;-----------------------------------------------------------------------------
 (defmodule wm-gf
-    (syntax (macros macros-tag)
-     import (level1 basic))
+  (syntax (macros macros-tag)
+   import (level1 basic))
 
-  (print "### wm-gf.em")
+(print "### wm-gf.em")
 
-  (defgeneric wme-class-name (wme))
-  (defgeneric wme-attrib-vals (wme))
-  (defgeneric wme-timestamp (wme))
+(defgeneric wme-class-name (wme))
+(defgeneric wme-attrib-vals (wme))
+(defgeneric wme-timestamp (wme))
 
-  (export wme-attrib-vals
-   wme-class-name
-   wme-timestamp)
+(export wme-attrib-vals
+ wme-class-name
+ wme-timestamp)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -13,15 +13,15 @@
    import (level0 math)
    export (nfib))
 
-  (defun nfib (n)
-    (if (< 1 n)
-        (+ (nfib (- n 1))
-           (nfib (- n 2))
-           1)
-      1))
+(defun nfib (n)
+  (if (< 1 n)
+      (+ (nfib (- n 1))
+         (nfib (- n 2))
+         1)
+    1))
 
-  (time-execution (nfib 35) stdout)
+(time-execution (nfib 35) stdout)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

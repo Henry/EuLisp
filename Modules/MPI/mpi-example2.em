@@ -18,14 +18,14 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Example
 ;;;-----------------------------------------------------------------------------
-  (let* ((s1 (make <mpi-stream>))
-         (s2 (make <mpi-stream>))
-         (remote-s (if (local-mpi-stream s1) s2 s1))
-         (local-s (if (local-mpi-stream s1) s1 s2))
-         (x (read remote-s)))
-    (format "Received ~a at ~a from ~a\n" x local-s remote-s)
-    (disconnect local-s))
+(let* ((s1 (make <mpi-stream>))
+       (s2 (make <mpi-stream>))
+       (remote-s (if (local-mpi-stream s1) s2 s1))
+       (local-s (if (local-mpi-stream s1) s1 s2))
+       (x (read remote-s)))
+  (format "Received ~a at ~a from ~a\n" x local-s remote-s)
+  (disconnect local-s))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

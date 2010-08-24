@@ -12,13 +12,13 @@
   (syntax (macros)
    import (level0))
 
-  (defun sum (x res)
-    (if (= x 0)
-        res
-      (sum (- x 1) (+ x res))))
+(defun sum (x res)
+  (if (= x 0)
+      res
+    (sum (- x 1) (+ x res))))
 
-  (print (sum 10000 0))
+(print (sum 10000 0))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

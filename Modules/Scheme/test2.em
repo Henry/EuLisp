@@ -12,15 +12,15 @@
    import (scheme)
    export ())
 
-  (define (fact x)
-    (if (< x 2)
-        1
-      (* x (fact (- x 1)))))
+(define (fact x)
+        (if (< x 2)
+            1
+          (* x (fact (- x 1)))))
 
-  (display (fact 1000))
+(display (fact 1000))
 
-  (newline)
+(newline)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

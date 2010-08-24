@@ -15,29 +15,29 @@
   (syntax (macros)
    import (level0 math))
 
-  (defun listn (n)
-    (if (null? (= 0 n))
-        (cons n (listn (- n 1)))
-      ()))
+(defun listn (n)
+  (if (null? (= 0 n))
+      (cons n (listn (- n 1)))
+    ()))
 
-  (deflocal |26l| (listn 26))
-  (deflocal |16l| (listn 16))
-  (deflocal |6l| (listn 6))
+(deflocal |26l| (listn 26))
+(deflocal |16l| (listn 16))
+(deflocal |6l| (listn 6))
 
-  (defun mas (x y z)
-    (if (null? (shorter? y x))
-        z
-      (mas (mas (cdr x) y z)
-           (mas (cdr y) z x)
-           (mas (cdr z) x y))))
+(defun mas (x y z)
+  (if (null? (shorter? y x))
+      z
+    (mas (mas (cdr x) y z)
+         (mas (cdr y) z x)
+         (mas (cdr z) x y))))
 
-  (defun shorter? (x y)
-    (and y (or (null? x)
-               (shorter? (cdr x)
-                         (cdr y)))))
+(defun shorter? (x y)
+  (and y (or (null? x)
+             (shorter? (cdr x)
+                       (cdr y)))))
 
-  (time-execution (mas |26l| |16l| |6l|) stdout)
+(time-execution (mas |26l| |16l| |6l|) stdout)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

@@ -7,13 +7,13 @@
 ;;; Description: Output file.
 ;;;-----------------------------------------------------------------------------
 (defmodule ops-out
-    (syntax (macros macros-tag)
-     import (level1 basic))
+  (syntax (macros macros-tag)
+   import (level1 basic))
 
-  ;;  (deflocal ops-out (make <output-port> filename: "gcd.out"))
-  (deflocal ops-out stdout)
-  (export ops-out)
+;;  (deflocal ops-out (make <output-port> filename: "gcd.out"))
+(deflocal ops-out stdout)
+(export ops-out)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

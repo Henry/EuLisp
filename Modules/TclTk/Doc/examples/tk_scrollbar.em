@@ -3,7 +3,7 @@
     (setq result (tk-selection-get "LINE"))
     (format t "result: ~a" result)))
 (defun test-scrollbar ()
-  (tk-wm "title" () "Test Scrollbar") 
+  (tk-wm "title" () "Test Scrollbar")
   (let ((i 0)
         (frame-left (tk-make-frame () width: "3c" height: "4c"))
         (frame-right (tk-make-frame () width: "6c" height: "4c"))
@@ -13,20 +13,20 @@
         (scroll-2 (tk-make-scrollbar ()))
         (exit-but (tk-make-button () text: "Exit" command: tk-exit))
         str)
- 
+
     (eul-associate text scroll-2 'vertical)
     (eul-associate numbers-lb scroll-1 'vertical)
-    
-    (while (< i 14) 
+
+    (while (< i 14)
       (setq str (convert i <string>))
       (tk-insert numbers-lb "end" str)
       (setq i (+ i 2)))
-    
-    
+
+
     (tk-bind numbers-lb "<Button-1>" take-value)
     (tk-insert text "end" (format () "Line 1.\n2\n3\n4\n5\n...\n"))
-    
-    
+
+
     (tk-pack frame-left side: "left")
     (tk-pack frame-right side: "right")
     (tk-pack numbers-lb in: frame-left side: "left")
@@ -35,7 +35,7 @@
     (tk-pack scroll-2 in: frame-right side: "right" fill: "y")
     (tk-pack exit-but side: "bottom" pady: "5")
     )
-  
+
   (tk-main-loop))
 (test-scrollbar)
 )

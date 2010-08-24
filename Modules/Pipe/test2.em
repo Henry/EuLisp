@@ -6,15 +6,15 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule test2
-    (syntax (macros)
-     import (level1 pipe))
+  (syntax (macros)
+   import (level1 pipe))
 
-  (let ((x (make <pipe> process: "ls -l"))
-        (str ""))
-    (while
-        (setq str (read-line x () ()))
-      (prin str)))
+(let ((x (make <pipe> process: "ls -l"))
+      (str ""))
+  (while
+      (setq str (read-line x () ()))
+    (prin str)))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

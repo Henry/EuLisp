@@ -2,9 +2,9 @@
   (syntax (macros)
    import (level1))
 
-  (defmacro print-test (body)
-    `(format "~s~%    ;;=> ~s~%" ',body ,body))
+(defmacro print-test (body)
+  `(format "~s~%    ;;=> ~s~%" ',body ,body))
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------
