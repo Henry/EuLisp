@@ -1,0 +1,571 @@
+#                            -*- mode: org; -*-
+#+TITLE:                *Eu2C*
+#+AUTHOR: nil
+#+EMAIL: no-reply
+#+OPTIONS: author:nil email:nil ^:{}
+
+* [[file:../COPYING][Copyright]]
+  Copyright 1994-2010 Fraunhofer ISST,
+  Copyright 2010 Henry G. Weller.
+
+  This file is part of Eu2C.
+
+  Eu2C is free software: you can redistribute it and/or modify it under the
+  terms of the GNU General Public License version 2 as published by the Free
+  Software Foundation.
+
+  Eu2C is distributed in the hope that it will be useful, but WITHOUT ANY
+  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+  A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along with
+  this program in the file [[file:../COPYING][COPYING]].  If not, see <http://www.gnu.org/licenses/>.
+
+* General
+  Eu2C was originally developed at Fraunhofer ISST in the joint research project
+  APPLY funded by the German Ministry of Research and Technology under the
+  project code ITW9102D5.  The final release in July 1994 is publicly available
+  from [[http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c/v94_07/eu2c.tgz][eu2c.tgz]] however the terms of use are not specified.  This release of
+  Eu2C is derived from the eu2c-94-07-EUPL version kindly prepared and provided
+  by E. Ulrich Kriegel and released by Fraunhofer ISST under the [[http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1][EUPL version
+  1.1 ]] (see [[README.orig]]).  However, due to the inclusion of EuLisp code from
+  Youtoo, which is released under the GPL version 2, this version of Eu2C
+  inherits the GPL version 2 (see above) as specifically permitted under the
+  compatibility terms of the EUPL version 1.1.  Future versions of the EUPL may
+  include a compatibility clause for GPL version 3 at which point it will be
+  possible to re-release Eu2C, Youtoo and EuXLisp under the GPL version 3.
+
+* APPLY
+  This section provides a little background about the APPLY project and the
+  motivation and design of Eu2C.  The text is predominantly obtained from
+  "readme" and announcement files released with Eu2C by Fraunhofer ISST.  These
+  are available from the AI repository at CMU: [[http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c][eu2c]], see also
+  [[http://publica.fraunhofer.de/dokumente/PX-46999.html][Eu2C - Lisp to C
+  compiler]].
+
+  There were two main problems for Lisp users being considered at the time:
+  1. the efficiency, by which we mean both the run-time efficiency and the
+     efficiency of storage use and
+  2. the unsatisfactory integration capability of Lisp programs with other
+     programs. Our way of solving these problems is to compile Lisp applications
+     into C.
+
+  The main goal of APPLY project was to development a Lisp system which
+  consistently supports the efficient execution of applications and their
+  simple integration into current software environments. The aims of the Eu2C
+  development were
+  + efficient execution of Lisp applications comparable to that of C-programs
+    and
+  + simple integration of Lisp programs into non-Lisp environments.
+
+  As a first step Apply/E2C was realized as a total compiler compiling
+  EuLisp-Modules into C source code which then must be compiled by an ANSI
+  C-compiler.  To implement and describe the runtime system and to achieve high
+  performance of the C-programs generated we must have a language that can
+  handle C-data types and C-values. For this purpose ISST developed a typed
+  Lisp-like implementation language called TAIL. You can describe the
+  representation of data, the type schemes and the type lattice with TAIL. Thus
+  we have the possibility to carry out experiments with different data
+  representations or type schemes without changing the Eu2C-compiler. TAIL can
+  also be used as the basis for the implementation of other Lisp dialects. A
+  type inference system has a great effect on the speed of Lisp programs. With a
+  good type inference system you can reduce the number of dynamic type checks
+  and replace calls of generic functions by direct calls of methods. A
+  C-compiler has the best results for optimization of C-programs if the
+  C-programs look like programs written by experienced programmers.  The ISST
+  called this kind of C-code "natural C-code".  The approach is, for example, to
+  use the parameter passing mechanism of C instead of using a special Lisp stack
+  to achieve very fast function calls.
+
+  To achieve to project goals the following implementation decisions were
+  taken:
+  - The hardware stack is used instead of an own lisp control stack.
+  - Lisp data types are represented similar to C datatypes in order to avoid
+    incompatibility with hardwara datatypes and in order to enable easy data
+    exchange with non-Lisp programs.
+*** Project Partners
+    + GMD-FIT (St. Augustin, Germany)
+    + Fraunhofer ISST (Berlin, Germany)
+    + VW-GEDAS (Berlin, Germany)
+    + CAU Kiel (Kiel, Germany)
+*** GC
+    These decisions require to use a conservative pointer finding strategy for
+    gc.
+
+  The implementation comprises EuLisp-0.99 level-0.
+
+*** Compilation strategies
+    Two compilation strategies are supported:
+    - total compilation of an application including all the runtime modules
+    - total compilation of an application using a precompiled runtime system,
+      /e.g./ =eulisp-level-0=.
+
+    The former produces very efficient code but the compilation is very cpu-
+    intensive. The code produced by the second variant is a little bit less
+    efficient since optimization across the interface between application an
+    runtime system is not possible, but due to the precompiled runtime-system
+    the compilation process is much faster.
+
+*** Threads are supported
+    but use setjmp/longjmp rather than pthreads or equivalent so do not
+    currently take advantage of multi-core CPUs.
+
+*** Reports and Papers
+  + [[ftp://ftp1.fraunhofer.de/archive/gmd/apply][Apply Papers]]
+  + [[http://www.isst.fraunhofer.de/publications/isst-berichte/][Fraunhofer
+    Reports]]
+    Reports in the series ISSN: 0943-1624 relating to APPLY/Eu2C not available
+    from the APPLY archive ftp site above:
+    18. Friedrich, Horst: „Eu2C-LISP to C Compiler“, Berlin 1994.
+        See also http://publica.fraunhofer.de/dokumente/PX-46999.html
+    3. Heicking, Winfried; Rosenmüller, Rainer: „Machine description“, Berlin
+       1992.
+*** See Also
+    + [[http://publica.fraunhofer.de/dokumente/PX-46999.html][Fraunhofer Eu2C Abstract]]
+    + [[http://www.informatik.uni-kiel.de/~wg/apply.html][CLiCC]]
+    + [[http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c][AI_Repository]]
+    + [[http://www-cgi.cs.cmu.edu/Groups/AI/lang/others/eulisp/eu2c/][AI Repository 2]]
+    + [[http://www.rhinocerus.net/forum/lang-lisp/47271-need-help-building-eu2c.html][Previous compilation attempt]]
+* Installation
+*** Requirements to install and run the EuLisp->C compiler
+***** CMUCL Common Lisp compiler
+      Tested with version 20a but older should work.
+
+      Note that originally Eu2C used Franz Allegro 4.1 or 4.2 but the current
+      8.2 release is unable to compile Eu2C apparently due to some serious bugs
+      in in Allegro-8.2.
+
+      Note also than currently Eu2C cannot be compiled with SBCL due to a
+      bug/limitation in the way it supports class aliasing, see
+      [[https://bugs.launchpad.net/sbcl/+bug/618387][bug-report]].  Once this
+      issue is resolved SBCL support will be finalised.
+
+      No attempt has been made to support CLisp as the Common Lisp compiler for
+      Eu2C but the indications are that this should be possible with a modest
+      amount of work.
+
+***** GNU c compiler gcc
+      Tested with version gcc-4.4.3 but older and newer should work.
+
+*** Installation Procedure
+    + Pull the latest version from the GitHub repository:
+      - =git clone git://github.com/Henry/EuLisp.git=
+    + "cd" into the =EuLisp/Eu2C= directory.
+    + Define an environment variable Eu2CROOT to be the path of the
+      distribution directory:
+      - =export Eu2CROOT=`pwd`=
+    + For complete installation, run the command make without any arguments,
+      which takes depending on your hardware a few minutes.
+      The following will happen:
+      - CMUCL starts and the source files of the eu2c-compiler will be compiled.
+      - CMUCL starts again, reads the compiled compiler sources and creates a
+        new image containing the EuLisp->C-compiler.  If you have defined an
+        environment variable Eu2CIMAGENAME, the value of that variable will be
+        used as the new name of the CMUCL image with the eu2c compiler loaded,
+        otherwise the name will be =Lib/eu2c.cmu=.
+      - The libraries with different incarnations of Mem4C, an application
+        independent conservative garbage collector will be created.
+      - The eu2c-compiler is started first time to compile the basic module
+        which is in the default case the module =eulisp-level-0=.
+      - The eu2c-compiler is started again to be enhanced with the precompiled
+        eulisp-level-0 module. A new CMUCL image is created. Its name is
+        composed of the name of the eu2c-compiler and the name of the basic
+        module. Therefore, he default name will be
+        =Lib/eu2c.eulisp-level-0.cmu=.
+*** Compilation of EuLisp-Modules
+    There are 2 different strategies for the compilation of EuLisp modules:
+    + total compilation of an application including all the runtime modules
+    + total compilation of an application using a precompiled runtime system,
+      /e.g./ =eulisp-level-0=.
+
+    The former produces very efficient code but the compilation is very cpu-
+    intensive. The code produced by the second variant is a little bit less
+    efficient since optimization across the interface between application an
+    runtime system is not possible, but due to the precompiled runtime-system
+    the compilation process is much faster.
+
+    A general compiler-driver =Bin/eu2c= is provided which controls the
+    compilation process.  In order to compile an EuLisp Module into C and then
+    create an application simply call:
+    + =Bin/eu2c [switches] <path expression> [C-compiler switches and additional
+    C files]=
+    /e.g./ in the =Examples= sub-directory
+    + =../Bin/eu2c -bs eulisp-level-0 hello=
+
+    The compilation of the EuLisp-module =hello.em= with precompiled runtime
+    system is started. The following files will be created:
+    + hello.c    : the C code
+    + hello.inst : description of instances, will be included from =hello.c=
+    + hello      : image
+
+    The following switches are of special interest:
+    + =-C= : compiles and links the C code of the EuLisp-module (a somewhat
+      specialized driver for ANSI-C compiler and Linker)
+    + =-L= : compiles the given EuLisp-module to C and stops (runs the Eu2C
+      compiler only).
+    + Omitting both =-L= and =-C= will call the Eu2C compiler first nad then the
+      ANSI-C compiler and linker to produce an application.
+    + =-g= : sets the debug-Option for the C-compiler and suppress all C-level
+      optimizations
+    + =-bs <name>= : use the precompiled runtime-system with name <name> for
+      compilation The default is without precompiled runtime system, /i.e./ all
+      run-time system modules needed system is compiled together with the
+      application. As a tradeoff between compilation time and run-time we
+      strongly recommend to use a precompiled run-time system for
+      compilation. There is a module =eulisp-level-0= containing everything
+      defined in =level-0= of EuLisp-0.99. In addition we provide a module
+      =eulis0x= which exposes =eulisp-level-0= and contains the following
+      enhancements: command-line-interface and the base of an interface to C.
+    + =-security= : Links with a gc-library which is compiled with special
+      security features. In the default case a gc-library with security features
+      off is used.
+    + =-threads= : The precompiled run-time system =eulisp-level0= supports
+      threads.  However, threads require special care during memory management
+      activities like allocation of space. For the sake of efficiency we decided
+      to assume as a default case that there are single threaded applications
+      only. If one insist to use threads then one has to use the =-threads=
+      switch which ensures that the correct gc-library will be linked to your
+      application. (Using that library with single threaded applications would
+      reduce the application efficiency by about 10%).
+    + =-cards <start number of cards>= : Eu2C relies on a conservative memory
+      management system Mem4C[++], which allocates memory portions on cards of
+      size 4096 bytes.  The switch =-cards= determines the initial number of
+      cards allocated during system initialization.  As a default we use a value
+      of 16. That means one starts with a heap size of 64 kBytes which will be
+      increased on demand in correspondence with the configuration of the
+      Mem4C[++]-library.
+*** Examples
+    In the subdirectory $Eu2CROOT/Examples some example EuLisp programs are
+    given, some of them require to be compiled with the module =eulisp-level-0=
+    and some must be compiled with the =eulisp0x=-module.
+
+    A basic system with precompiled =eulisp0x= can be generated by calling make
+    with:
+    + =make basic_module=eulisp0x=
+
+    and used thus:
+    + cd Examples
+    + ../Bin/eu2c -bs eulisp0x command-line
+*** Makefile
+    For the easy installation we provide a script for make. The following macros
+    are used:
+    + =basic_image=: The name of the CMUCL image containing the eu2c
+      compiler. If the environment variable =$Eu2CIMAGENAME= is defined, its
+      value will be used, otherwise the name is assumed to be =eu2c.cmu=.
+    + =basic_module=: The name of the EuLisp-module which contain the basic
+      run-time system. The default value is =eulisp-level-0=. Another possible
+      basic module is =eulisp0x=.
+
+    The following targets for make are defined:
+
+    + =basic_system=: compiles the basic run-time-system and creates a new
+      CMUCL-image with basic run-time system loaded.
+    + =compile_basic_system=: compiles a basic-run-time system.
+    + =load_basic_system=: loads a pre-compiled run-time system and builds a new
+      CMUCL-image with that system pre-compiled.
+    + =<basic_image>=: compiles all compiler sources, loads them and creates an
+      CMUCL- image with name =<basic_image>= which contains the pure eu2c
+      compiler without any precompiled run-time resources.
+    + =libs=: creates the libraries for the memory management system.
+    + =clean_basic_system=: removes the pre-compiled run-time system and
+      CMUCL-image containing precompiled run-time system (approximately 16MB)
+    + =clean_compiler_sources=: deletes all source files of the eu2c compiler.
+    + =clean_run-time_sources=: deletes the eulisp source files of the run-time
+      system.
+    + =clean_eu2c_image=: deletes the CMUCL-image containing the eu2c-compiler.
+    + =clean_libs=: deletes the libraries for the memory management system.
+    + =clean_c_sources=: deletes all c source files of the memory management
+    system.
+    + =remove_sources=: removes all sources. Should only be used if you have
+    created an CMUCL-image with a precompiled run-time system.
+
+    If you plan to use Eu2C with the precompiled basic system we recommend to
+    run make with the targets clean_runtime_sources and clean_eu2c_image.
+*** Building 32bit on a 64bit machine:
+    It is possible to compile 32bit on 64bit machines using the "WL=32" option
+    to build the run-time and the -m32 option when building the applications,
+    e.g.
+    + make clean
+    + make WL=32
+    + cd Examples
+    + ../Bin/eu2c -m32 -bs eulisp-level-0 gtakl2
+    + ./gtakl2
+* Current Limitations
+*** Not yet implemented:
+    + =generic-lambda=.
+    + =scan=: the function read can be used instead.
+*** Not yet complete:
+    + =format=: the directives =~e=, =~f= and =~g= are not yet present.
+*** Known problems:
+    + Symbol case: During compilation (when the modules are read in) the symbol
+      identifiers are converted into upper case.  However, at run time read
+      distinguishes for symbols between upper and lower cases.
+    + See 9.4. in EuLisp-0.99: The module itself can not be referenced in an
+      expose directive of a module.
+    + See 9.5 in EuLisp-0.99: The syntax imports of special forms and standard
+      macros is not yet supported.  Currently they are treated in a special way.
+    + Numeric errors can be captured using =with-handler= but they are not
+      continuable.
+    + An endless recursion in which the recursive call is on the top of the
+      function level is incorrect:
+      - =(defun loop () ... (loop))=
+
+      But in all other cases the right code is generated:
+      #+BEGIN_SRC eulisp
+      (defun loop ()
+        (if ... (progn ... (loop))
+          (progn ... (loop))))
+      #+END_SRC
+    + Tables can not currently be used.
+
+* Common Lisp Compiler Extensions
+  It is necessary to extend the capabilities of the CL compiler to support:
+  + keyword symbols which end in a ":", this is formally allowed by the CL
+    standard as an implementation-dependent extension;
+  + "e" as the exponent designator for written double-precision numbers, the CL
+    standard specifies either "d" or "D".
+
+  Eu2C now includes a patch file [[file:Apply/cmu.lisp]] which adds support for
+  both of the above into the CMUCL-20a/b CL compiler.  The equivalent would have
+  to be created for other CL implementations e.g. SBCL or CLisp if they are to
+  be used to compile Eu2C.
+
+* Necessary module imports
+  The whole functionality of level 0 of EuLisp is contained in the module
+  =eulisp-level-0=. Therefore the module =eulisp-level-0= should be imported
+  as in the following example.
+  #+BEGIN_SRC eulisp
+  (defmodule test-module
+    (import (eulisp-level-0 user-module)
+     syntax (eulisp-level-0 user-module-with-macro-definition)
+     export (fct1 fct2 ...)
+     expose (...))
+    .
+    .
+    .
+    )
+  #+END_SRC
+
+* Compiler log
+  =../Bin/eu2c -bs eulisp-level-0 hello= generates (comments are enclosed in
+  <<...>>):
+  #+BEGIN_SRC eulisp
+  Eu2C: (compile-application hello)
+        using compiler image /home/dm2/henry/EuLisp/Eu2C/Eu2C/Lib/eu2c.eulisp-level-0
+
+  <<After the creation of the '.c' and '.inst' files the compilation and linking
+    of the C-sources with the help of the GNU-C-Compilers is made:>>
+
+  Eu2C: successful conversion of hello.em to hello.c
+
+  + gcc -m64 -c -o hello.o -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.c
+  + gcc -m64 -z muldefs -o hello -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.o /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/eulisp-level-0.a /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/platforms/x86_64m64/eu2c.a -lm
+  + set +x
+
+  <<In this phase warnings may appear both from the compiler and the linker. In
+    most cases these warnings have no effects on the run of the generated
+    program.>>
+
+  DONE
+
+  <<Now you can call the program with:>>
+
+  ./hello
+
+  #+END_SRC
+
+  and the log file hello.log:
+  #+BEGIN_SRC eulisp
+  *
+  NIL
+  *
+  --- loading application modules
+  ;loading module hello.em
+  ;apply module HELLO loaded
+
+  <<all user modules are loaded>>
+
+  --- handle symbol environment...
+  --- computing discriminating functions...
+
+  <<the discriminating functions of the generic functions are computed>>
+
+  --- marking all exported bindings...
+  --- converting to MZS
+
+  <<conversion into a machine level intermediate language>>
+
+  SsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssS
+
+  <<s shows that the side effect analysis of functions is made,
+    S shows the summary of the analysis results>>
+
+  *********************************************************************
+
+  <<each star or point shows the treatment of a function;
+    i means in-line was made;
+    b means the types within the type inference of
+    the functions are balanced>>
+
+  Reduce type schemes of statements ... done.
+  Reduce type schemes of functions ... done.
+  Convert type schemes to range and domain vectors ... done.
+  --- converting MZS to LZS...
+
+  <<conversion from the machine level intermediate language into the Lisp-level
+    intermediate language>>
+
+  --- generating C-code
+  hello.c...
+  hello.inst...
+  --- end of compilation ---
+
+  Total number of analysed function calls: 744
+  Total number of joined function call descriptors: 0 (0.00 %)
+
+  Total number of inferred function type schemes: 67
+  Total number of joined type scheme descriptors: 28 (41.79 %)
+
+  Total number of inferred classes: 2125
+  Total number of inferred abstract classes: 0 (0.00 %)
+
+  <<analysis statistics which show the number of analyzed functions, the number
+    of infered classes. It is also printed the percentage of abstract classes;
+    the less the number of abstract classes the more the number of instantiable
+    classes.>>
+
+  "end of compilation"
+  *
+  #+END_SRC
+
+* Examples
+  In module =takl= (contained in the Examples directory) the functions =takl=
+  and =gtakl= are defined and exported. =takl= is a simple function without
+  generic functions, =gtakl= is written with the generic function =gshorterp=.
+  With the import of the module =eulisp-level-0= the whole functionality of
+  level-0 of EuLisp is given.
+
+  The file associated with the module =takl= has to have the name =takl.em=.
+  #+BEGIN_SRC eulisp
+    (defmodule takl              ; definition of module takl
+        (import (eulisp-level-0)
+         syntax (eulisp-level-0)
+         export (takl gtakl)     ; export of functions takl and gtakl
+         )
+
+      (defun shorterp (x y)      ;auxiliary function for takl
+        (if (null y )            ;without generic
+            ()
+          (if  (null x) t
+            (shorterp (cdr x)
+                      (cdr y))) ))
+
+      (defun takl (x y z)
+        (if (null (shorterp y x))
+            z
+          (takl (takl (cdr x) y z)
+                (takl (cdr y) z x)
+                (takl (cdr z) x y))))
+
+    ;;;-----------------------------------------------------------------------------
+    ;;; takl with generic shorterp
+    ;;;-----------------------------------------------------------------------------
+      (defgeneric gshorterp ((x <list>) y)) ;auxiliary generic function for gtakl
+
+      (defmethod gshorterp ((x <null>) y)
+        y)
+
+      (defmethod gshorterp ((x <cons>) y)
+        (if (null y)
+            ()
+          (gshorterp (cdr x) (cdr y))))
+
+      (defun gtakl (x y z)
+        (if (null (gshorterp y x))
+            z
+          (gtakl (gtakl (cdr x) y z)
+                 (gtakl (cdr y) z x)
+                 (gtakl (cdr z) x y))))
+
+    ;;;-----------------------------------------------------------------------------
+      )                     ; end of module
+    ;;;-----------------------------------------------------------------------------
+  #+END_SRC
+
+  The next example shows an interface to C to measure run time of functions
+  =takl= and =gtakl= imported from the module =takl=. You can see the special
+  keyword =c-import= which imports the C-file =timing.c= contained in the
+  currend release.  The linking of the C-functions =start_timer= and =timer= was
+  made with help of the form =%declare-external-function=. In this form the
+  names of this function in EuLisp and in C and the types for the arguments and
+  result in C are declared.
+
+  The file associated with the module =test-takl= has to have the name
+  =test-takl.em=.
+
+  #+BEGIN_SRC eulisp
+    (defmodule test-takl
+        (import (eulisp-level-0
+                 (only (%void
+                        %string)
+                       tail)
+                 takl)
+         syntax (eulisp-level-0)
+         c-import ("timing.h")      ;extension of module syntax
+         )
+
+      (defun listn (n)
+        (if (= n 0)
+            ()
+          (cons n (listn (- n 1)))))
+
+      (deflocal l24 (listn 24))
+      (deflocal l18 (listn 18))
+      (deflocal l12 (listn 12))
+      (deflocal l6 (listn 6))
+
+      ;;declaration of external functions called from EuLisp
+      ;;to measure cpu consumption
+      ;;start_timer sets the first time stamp
+      ;;timer gets a char * string containing format directives
+      ;;to print the values of elapsed user time system time and their sum
+      ;;char* strings has to be  written as Tail-literals in the following
+      ;;form: (%literal %string () "string")
+
+      (%declare-external-function
+
+        (start-timer %void)          ; the name of the function is start-timer,
+        ; result of start-timer is void
+        ()                           ; no args
+        external-name |start_timer|  ; the name in C is start_timer
+        language C)                  ; the used foreign language is C
+
+      (%declare-external-function
+
+        (timer %void)                ; the name of the function is timer
+        ; result of timer is void
+        ((string %string))           ; one arg string of type char *
+        external-name |timer|        ; the name in C is timer
+        language C)                  ; the used foreign language is C
+
+      (deflocal result ())
+
+      (start-timer)
+      (setq result (takl l24 l12 l6))
+      (timer (%literal %string () "\ntakl: %.2f sec (%.2f sec system)"))
+      (format t "~%(takl l24 l12 l6) -> ~a~%" result)
+
+    ;;;-----------------------------------------------------------------------------
+      )
+    ;;;-----------------------------------------------------------------------------
+  #+END_SRC
+* TODO (This list is no where near complete)
+*** Correct case handling for symbols
+    + Currently symbols or interned with capitalised names.
+    + This can only be corrected by enabling case-preservation in CL:
+    + (setf (readtable-case *readtable*) :preserve)
+    + The consequence is that all standard CL symbols must be written in
+      uppercase.
+*** Change location of the [cho] and {inst,def} files generated
+    Currently the top-level =Makefile= does not set the location of the files
+    which are build-dependant.

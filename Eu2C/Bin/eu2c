@@ -1,0 +1,290 @@
+#!/bin/sh
+### Copyright 1994-2010 Fraunhofer ISST
+### Copyright 2010 Henry G. Weller
+###-----------------------------------------------------------------------------
+##  This file is part of
+### ---                           EuLisp System 'Eu2C'
+###-----------------------------------------------------------------------------
+##
+##  Eu2C is free software: you can redistribute it and/or modify it under the
+##  terms of the GNU General Public License version 2 as published by the Free
+##  Software Foundation.
+##
+##  Eu2C is distributed in the hope that it will be useful, but WITHOUT ANY
+##  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+##  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+##  details.
+##
+##  You should have received a copy of the GNU General Public License along with
+##  this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+###-----------------------------------------------------------------------------
+###  Title: Script to compile EuLisp applications
+###  Description:
+###  Documentation:
+###  Notes:
+##  Currently this script is hard-coded to run CMUCL
+##  with the executable name lisp.
+###  Requires:
+###  Problems:
+###  Authors:
+###-----------------------------------------------------------------------------
+
+# Set standard image name
+if [ $# = 0 -o "$1" = "-H" ]
+then
+    echo "usage: eu2c.application" \
+         " [-LCS] [-g][-cards <K>] [-bs basic-system] [-o name]" \
+         " <app> [CC-OPTIONS files]..."
+    echo "<app>:        the name of the .em application file"
+    echo "              may be preceded by a path"
+    echo "files:        additional files given to the C-compiler"
+    echo "-m32:         generate 32-bit executable"
+    echo "-m64:         generate 32-bit library and executable"
+    echo "-g:           generate debugging info for system debugger"
+    echo "-threads:     a special thread gc library will be used for linking"
+    echo "-security:    the gc library is compiled with security features on"
+    echo "-bs basic-system  use a precompiled basic system, " \
+        "e.g. -bs eulisp-level-0"
+    echo "-L:           run Lisp only"
+    echo "-cards <K>:   initial heap size in cards (card = 4096 bytes)"
+    echo "-C:           run C-compiler only to compile the executable <app>"
+    echo "-S:           run CC-compiler only for <app>.c"
+    echo "              and produce asm-code in <app>.S"
+    echo "              additional C-files  are ignored"
+    echo "possible combinations are -LC (the default) and -LS"
+    exit
+fi
+
+ARCH=`uname -m`
+
+if [ -z "$Eu2CROOT" ]
+then
+    Eu2CROOT=$HOME/EuLisp/Eu2C/Eu2C
+    export Eu2CROOT
+    Eu2CROOTSET="set"
+fi
+
+if [ -n "$Eu2CIMAGENAME" ]
+then
+    Eu2CIMAGE=$Eu2CROOT/Lib/$Eu2CIMAGENAME
+else
+    Eu2CIMAGE=$Eu2CROOT/Lib/eu2c
+fi
+
+CL="cmu"
+if [ "$CL" = "cmu" ]
+then
+    # File extension of the compiler images
+    IMAGE_EXT=".cmu"
+
+    # Eu2C compiler function
+    eu2c(){
+        lisp $APPSOURCE $BASIC_SYSTEM -core ${Eu2CIMAGE}${IMAGE_EXT} \
+            -quiet
+    }
+fi
+
+# Choose standard c compiler
+if [ -n "$Eu2C_CC" ]
+then
+    CC=$Eu2C_CC
+else
+    CC="gcc "
+fi
+
+# Set the default machine word-length to 32bit
+# but override the default for x86_64
+MWORDLEN=m32
+[ $ARCH = "x86_64" ] && MWORDLEN=m64
+
+if [ -n "$Eu2C_CC_OPTIMIZE" ]
+then
+    CCOPTIMIZE=$Eu2C_CC_OPTIMIZE
+else
+    CCOPTIMIZE="-O2 "
+fi
+
+CCOPTIONS=" "
+if [ -n "$Eu2C_CFLAGS" ]
+then
+    CCOPTIONS=${CCOPTIONS}${Eu2C_CFLAGS}
+fi
+
+STATE="-LC"
+
+INCLUDE="-I $Eu2CROOT/Runtime "
+if [ -n "$Eu2C_INCLUDE" ]
+then
+    INCLUDE=${INCLUDE}${Eu2C_INCLUDE}
+fi
+
+LINKLIBS=" -lm"
+if [ -n "$Eu2C_LINKLIBS" ]
+then
+    LINKLIBS=${LINKLIBS}${Eu2C_LINKLIBS}
+fi
+
+CARDS=""
+THREADS=""
+SECURITY=""
+BASIC_SYSTEM=""
+LOADPATCHFILE="NIL"
+Eu2CPATCH=$Eu2CROOT/patch.eu2c
+
+while [ -n "1" ]
+do
+    case $1 in
+        "-cards")
+            CARDS="-DSTART_NUM_OF_CARDS="$2" $Eu2CROOT/Runtime/heap-init.c"
+            shift
+            shift
+            ;;
+        "-L" | "-C" | "-S" | "-LC" | "-LS")
+            STATE=$1
+            shift
+            ;;
+        "-g")
+            CCOPTIMIZE="-ggdb3"
+            shift
+            ;;
+        "-o")
+            IMAGE=$2
+            shift
+            shift
+            ;;
+        "-threads")
+            THREADS="-threads"
+            shift
+            ;;
+        "-m32")
+            MWORDLEN="m32"
+            shift
+            ;;
+        "-m64")
+            MWORDLEN="m64"
+            shift
+            ;;
+        "-security")
+            SECURITY="-s"
+            shift
+            ;;
+        "-bs")
+            BASIC_SYSTEM=$2
+            shift
+            shift
+            ;;
+        *)
+            break
+    esac
+done
+
+ARCH_DIR=platforms/${ARCH}${MWORDLEN}
+GCLIB="/Runtime/$ARCH_DIR/eu2c"
+
+# Prepare application for compilation
+GCLIB=${GCLIB}${THREADS}${SECURITY}.a
+
+# Strip the optional extension from the application name
+APP=${1%.*}
+[ -z "$APP" ] && APP=$1
+shift
+
+APPNAME=${APP##*/}
+[ -z "$IMAGE" ] && IMAGE=$APPNAME
+
+# Delete compilation.log
+[ -f compilation.log ] && rm compilation.log
+
+while [ "$STATE" = "-L" -o "$STATE" = "-LC" -o "$STATE" = "-LS" ]
+do
+    if [ -f ${APP}.am ]
+    then
+        APPSOURCE=${APP}.am
+    elif [ -f ${APP}.em ]
+    then
+        APPSOURCE=${APP}.em
+    else
+        echo "Eu2C: File" ${APP}.am or ${APP}.em "doesn't exist"
+        exit 1
+    fi
+
+    echo "Eu2C: (compile-application $APP)"
+
+    # Rename $APPNAME.*
+    [ -f ${APPNAME}.c ]    && mv ${APPNAME}.c ${APPNAME}.c~
+    [ -f ${APPNAME}.inst ] && mv ${APPNAME}.inst ${APPNAME}.inst~
+    [ -f ${APPNAME}.h ]    && mv ${APPNAME}.h ${APPNAME}.h~
+    [ -f ${APPNAME}.def ]  && mv ${APPNAME}.def ${APPNAME}.def~
+
+    # Check existence of image with precompiled basic system
+    # use the image with preloaded basic system if it is younger than the
+    # original eu2c-image and than the def-file of the basic system. only in
+    # this case the right combination of compiler and basic system as available
+    # in a special image
+    if
+    [ \
+        -f "${Eu2CIMAGE}.${BASIC_SYSTEM}${IMAGE_EXT}" \
+        -a ${Eu2CIMAGE}.${BASIC_SYSTEM}${IMAGE_EXT} \
+        -nt ${Eu2CIMAGE}${IMAGE_EXT} \
+        -a -f $Eu2CROOT/EuLispModules/$BASIC_SYSTEM.def \
+        -a ${Eu2CIMAGE}.${BASIC_SYSTEM}${IMAGE_EXT} \
+        -nt $Eu2CROOT/EuLispModules/$BASIC_SYSTEM.def \
+    ]
+    then
+        Eu2CIMAGE=$Eu2CIMAGE.$BASIC_SYSTEM
+    fi
+
+    # Is there a patch file younger than image
+    if [ -f $Eu2CPATCH -a $Eu2CPATCH -nt ${Eu2CIMAGE}${IMAGE_EXT} ]
+    then
+        LOADPATCHFILE="(load (string (quote |$Eu2CPATCH|)))"
+    fi
+
+    echo "      using compiler image $Eu2CIMAGE"
+    echo $LOADPATCHFILE \
+        "(apply #'apply-compiler::compile-application" \
+        "(cdr ext:*command-line-strings*) ) (quit)" | eu2c | tee $APP.log 2>&1
+
+    if [ -f  ${APPNAME}.c ]
+    then
+        echo "Eu2C: successful conversion of $APPNAME.em to $APPNAME.c"
+    else
+        echo "Eu2C: error during compilation of" $APP
+        exit 1
+    fi
+    break
+done
+
+if [ -n "$BASIC_SYSTEM" ]
+then
+    BASIC_SYSTEM=$Eu2CROOT/Runtime/$BASIC_SYSTEM.a
+fi
+
+if [ "$STATE" = "-LC" -o "$STATE" = "-C" ]
+then
+    [ -f ${APPNAME}.o ] && mv $APPNAME.o $APPNAME.o~
+
+    set -x
+    $CC -$MWORDLEN -c -o $APPNAME.o \
+        $CCOPTIMIZE $CCOPTIONS  $INCLUDE $APPNAME.c
+    $CC -$MWORDLEN -z muldefs -o $IMAGE \
+        $CCOPTIMIZE $CCOPTIONS $INCLUDE $CARDS $APPNAME.o $* \
+        $BASIC_SYSTEM $Eu2CROOT$GCLIB $LINKLIBS
+    set +x
+else
+    if [ "${STATE}" = "-S" -o "${STATE}" = "-LS" ]
+    then
+        echo "Syntax expansion not yet installed"
+    fi
+fi
+
+# Unset the $Eu2CROOT environment variable if it wasn't proviously set
+if [ -n "$Eu2CROOTSET" ]
+then
+    unset Eu2CROOT
+fi
+
+echo "DONE"
+
+###-----------------------------------------------------------------------------
