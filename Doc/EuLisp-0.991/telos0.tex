@@ -275,17 +275,14 @@ kept, defclass should be described here also.
     \>  \keywordref{accessor}: \scref{identifier} \\
     \>  \keywordref{required?}: \scref{boolean} \\
     \scdef{class-option}: \\
-    \>  \keywordref{keywords}: ( \scseqref{keyword} ) \\
+    \>  \keywordref{keywords}: ( \scseqref{identifier} ) \\
     \>  \keywordref{constructor}: \scref{constructor-specification} \\
     \>  \keywordref{predicate}: \scref{identifier} \\
     \>  \keywordref{abstract?}: \scref{boolean} \\
     \scdef{constructor-specification}: \\
-    \>  \scref{identifier} \\
-    \>  ( \scref{identifier} \scseqref{initarg} ) \\
-    \scdef{initarg}: \\
-    \>  \scref{keyword} \\
+    \>  ( \scref{identifier} \scseqref{identifier} ) \\
     \scdef{initlist}: \\
-    \>  \scgseq{\scref{initarg} \scref{object}}
+    \>  \scgseq{\scref{identifier} \scref{object}}
 \end{syntax}}
 \showSyntaxBox{defclass}
 %
@@ -319,24 +316,24 @@ The \scref{slot-option}s are interpreted as follows:
     of an argument to be supplied in the initialization options of a call to
     \functionref{make} on the new class.  The value of this argument in the call
     to \functionref{make} is the initial value of the slot.  This option must
-    only be specified once for a particular slot.  The same \scref{initarg} name
+    only be specified once for a particular slot.  The same \scref{keyword} name
     may be used for several slots, in which case they will share the same
-    initial value if the \scref{initarg} is given to \functionref{make}.
-    Subclasses inherit the \scref{initarg}. Each slot must have at most one
-    \scref{initarg} including the inherited one. That means, a subclass can not
-    shadow or add a new \scref{initarg}, if a superclass has already defined
+    initial value if the \scref{keyword} is given to \functionref{make}.
+    Subclasses inherit the \scref{keyword}. Each slot must have at most one
+    \scref{keyword} including the inherited one. That means, a subclass can not
+    shadow or add a new \scref{keyword}, if a superclass has already defined
     one.
 
     \item[\keyworddef{default}:, \scref{level-0-form}]%
     The value of this option is a form, which is evaluated as the default
-    value of the slot, to be used if no \scref{initarg} is defined for the slot
+    value of the slot, to be used if no \scref{keyword} is defined for the slot
     or given to a call to \functionref{make}.  The expression is evaluated in
     the lexical environment of the call to \defopref{defclass} and the dynamic
     environment of the call to \functionref{make}.  The expression is evaluated
     each time \functionref{make} is called and the default value is called for.
-    The order of evaluation of the initforms in all the slots is determined by
+    The order of evaluation of the defaults in all the slots is determined by
     \genericref{initialize}.  This option must only be specified once for a
-    particular slot. Subclasses inherit the initform.  However, a more specific
+    particular slot. Subclasses inherit the default.  However, a more specific
     form may be specified in a subclass, which will shadow the inherited one.
 
     \item[\keyworddef{reader}:, \scref{identifier}]%
@@ -375,21 +372,21 @@ The \scref{slot-option}s are interpreted as follows:
 The class-options are interpreted as follows:
 %
 \begin{options}
-    \item[\keyworddef{keywords}:, \scref{list}]%
+    \item[\keyworddef{keywords}:, \sc{( \scseqref{identifier} )}]%
     The value of this option is a list of identifiers naming symbols, which
     extend the inherited names of arguments to be supplied to \functionref{make}
-    on the new class.  Initargs are inherited by union. The values of all legal
+    on the new class.  Keywords are inherited by union. The values of all legal
     arguments in the call to \functionref{make} are the initial values of
-    corresponding slots if they name a slot \scref{initarg} or are ignored by
+    corresponding slots if they name a slot \scref{keyword} or are ignored by
     the default \methodref{initialize}{object} method, otherwise. This option
     must only be specified once for a class.
 
     \item[\keyworddef{constructor}:, \scref{constructor-specification}]%
     Creates a constructor function for the new class.  The constructor
     specification gives the name to which the constructor function will be
-    bound, followed by a sequence of legal \scref{initarg}s for the class.  The
+    bound, followed by a sequence of legal \scref{keyword}s for the class.  The
     new function creates an instance of the class and fills in the slots
-    according to the match between the specified \scref{initarg}s and the given
+    according to the match between the specified \scref{keyword}s and the given
     arguments to the constructor function.  This option may be specified any
     number of times for a class.
     % Specifying the constructor in this way is equivalent to writing a
@@ -842,7 +839,7 @@ first four are usually called {\em generic dispatch}.
 \end{optPrivate}
 \begin{optRationale}
     If the default method is not executed during a call of
-    \genericref{initialize}, no check of \scref{initarg}s will be done by the
+    \genericref{initialize}, no check of \scref{keyword}s will be done by the
     system.
 
     Writers for metaobjects are not specified yet. That implies that users must
@@ -925,20 +922,20 @@ This is the default method attached to \genericref{initialize}.  This method
 performs the following steps:
 
 \begin{enumerate}
-    \item Checks if the supplied \scref{initarg}s are legal and signals an error
-    otherwise. Legal \scref{initarg}s are those specified in the class
-    definition directly or inherited from a superclass.  An \scref{initarg} may
+    \item Checks if the supplied \scref{keyword}s are legal and signals an error
+    otherwise. Legal \scref{keyword}s are those specified in the class
+    definition directly or inherited from a superclass.  An \scref{keyword} may
     be specified as a slot-option or as a class-option.
 
-    \item Initializes the slots of the object according to the \scref{initarg},
-    if supplied, or according to the most specific {\tt initform}, if specified.
+    \item Initializes the slots of the object according to the \scref{keyword},
+    if supplied, or according to the most specific {\tt default}, if specified.
     % directly in the class definition or inherited from a superclass.
     Otherwise, the slot remains ``unbound''.
 \end{enumerate}
 %
-Legal \scref{initarg}s which do not initialize a slot are ignored by the default
+Legal \scref{keyword}s which do not initialize a slot are ignored by the default
 \methodref{initialize}{object} method.  More specific methods may handle these
-\scref{initarg}s and call the default method by calling
+\scref{keyword}s and call the default method by calling
 \specopref{call-next-method}.
 %
 \end{optDefinition}

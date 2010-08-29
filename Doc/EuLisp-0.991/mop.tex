@@ -43,7 +43,7 @@ The minimum information associated with a class metaobject is:
     \item The class precedence list, ordered most specific first, beginning with
     the class itself.
     \item The list of (effective) slot descriptions.
-    \item The list of (effective) initargs.
+    \item The list of (effective) keywords.
 \end{enumerate}
 %
 Standard classes support local slots only. Shared slots can be provided by
@@ -52,13 +52,13 @@ metaobject is:
 %
 \begin{enumerate}
     \item The name, which is required to perform inheritance computations.
-    \item The initfunction, called by default to compute the initial slot value
+    \item The default-function, called by default to compute the initial slot value
     when creating a new instance.
     \item The reader, which is a function to read the corresponding slot value
     of an instance.
     \item The writer, which is a function to write the corresponding slot of an
     instance.
-    \item The initarg, which is a symbol to access the value which can be
+    \item The keyword, which is a symbol to access the value which can be
     supplied to a \functionref{make} call in order to initialize the
     corresponding slot in a newly created object.
 \end{enumerate}
@@ -123,7 +123,7 @@ of {\em class}.
 The slots determine the instance size (number of slots)
 and the slot access.
 
-\function{class-initargs}
+\function{class-keywords}
 %
 \begin{arguments}
     \item[class] A class.
@@ -134,8 +134,8 @@ A list of symbols, which can be used as legal keywords to initialize
 instances of the class.
 %
 \remarks%
-The initargs correspond to the keywords specified in the {\tt initarg}
-slot-option or the {\tt initargs} class-option when the
+The keywords correspond to the keywords specified in the {\tt keyword}
+slot-option or the {\tt keywords} class-option when the
 class and its superclasses were defined.
 %
 \end{optDefinition}
@@ -155,9 +155,9 @@ The class of all local slot descriptions.
     \item[name, string] The name of the slot.%; useful for debugging only.
     \item[reader, function] The function to access the slot.
     \item[writer, function] The function to update the slot.
-    \item[initfunction, function] The function to compute the initial value in
+    \item[default-function, function] The function to compute the initial value in
     the absence of a supplied value.
-    \item[initarg, symbol] The key to access a supplied initial value.
+    \item[keyword, symbol] The key to access a supplied initial value.
 \end{initoptions}
 
 The default value for all initoptions is \nil{}.
@@ -176,7 +176,7 @@ the slot is part, was defined.
 The slot description name is used to identify a slot description in a
 class. It has no effect on bindings.
 
-\function{slot-initfunction}
+\function{slot-default-function}
 %
 \begin{arguments}
     \item[slot] A slot description.
@@ -381,7 +381,7 @@ This function returns the generic function to which {\em method} is attached; if
         \item[name, symbol] Name of the class being initialized.
         \item[direct-superclasses, list] List of direct superclasses.
         \item[direct-slots, list] List of direct slot specifications.
-        \item[direct-initargs, list] List of direct initargs.
+        \item[direct-keywords, list] List of direct keywords.
     \end{options}
 \end{specargs}
 %
@@ -399,7 +399,7 @@ The initialization of a class takes place as follows:
     \item Perform the logical inheritance computations of:
     \begin{enumerate}
         \item class precedence list
-        \item initargs
+        \item keywords
         \item slot descriptions
     \end{enumerate}
 
@@ -419,10 +419,10 @@ COMPATIBLE-SUPERCLASSES-P cl direct-superclasses -> boolean
   COMPATIBLE-SUPERCLASS-P cl superclass -> boolean
 COMPUTE-CLASS-PRECEDENCE-LIST
 cl direct-superclasses -> list(class)
-COMPUTE-INHERITED-INITARGS
-cl direct-superclasses -> list(list(initarg))
-COMPUTE-INITARGS
-cl direct-initargs <inherited-initargs> -> list(initarg)
+COMPUTE-INHERITED-KEYWORDS
+cl direct-superclasses -> list(list(keyword))
+COMPUTE-KEYWORDS
+cl direct-keywords <inherited-keywords> -> list(keyword)
 COMPUTE-INHERITED-SLOTS
 cl direct-superclasses -> list(list(slotd))
 COMPUTE-SLOTS
@@ -473,13 +473,13 @@ cl <effective-slotds> <inherited-slotds> -> list(slotd)
     \>\>\>\>{\em cl direct-superclasses\/}
     $\rightarrow$ ({\em cl\/}$^*$)\\
     %\hline
-    {\tt compute-inherited-initargs}\\
+    {\tt compute-inherited-keywords}\\
     \>\>\>\>{\em cl direct-superclasses\/}
-    $\rightarrow$ (({\em initarg\/}$^*$)$^*$)\\
+    $\rightarrow$ (({\em keyword\/}$^*$)$^*$)\\
     %\hline
-    {\tt compute-initargs}\\
-    \>\>\>\>{\em cl direct-initargs inherited-initargs\/}\\
-    \>\>\>\>$\rightarrow$ ({\em initarg\/}$^*$)\\
+    {\tt compute-keywords}\\
+    \>\>\>\>{\em cl direct-keywords inherited-keywords\/}\\
+    \>\>\>\>$\rightarrow$ ({\em keyword\/}$^*$)\\
     %\hline
     {\tt compute-inherited-slots}\\
     \>\>\>\>{\em cl direct-superclasses\/}
@@ -537,8 +537,8 @@ cl <effective-slotds> <inherited-slotds> -> list(slotd)
 \end{tabbing}%
 \end{table}%
 %
-Note that \genericref{compute-initargs} is called by the default
-\genericref{initialize} method with all direct initargs as the second argument:
+Note that \genericref{compute-keywords} is called by the default
+\genericref{initialize} method with all direct keywords as the second argument:
 those specified as slot option and those specified as class option.
 
 \generic{compute-predicate}
@@ -626,8 +626,8 @@ argument.  The initlist is not used by this \genericref{allocate} method.
     follows:
     \begin{options}
         \item[name, symbol] The name of the slot.
-        \item[initfunction, function] A function.
-        \item[initarg, symbol] A symbol.
+        \item[default-function, function] A function.
+        \item[keyword, symbol] A symbol.
         \item[reader, function] A slot reader function.
         \item[writer, function] A slot writer function.
     \end{options}
@@ -882,31 +882,31 @@ subclasses and minimizing the access time to an indexed reference.
 \genericref{compute-defined-slot},
 \genericref{compute-and-ensure-slot-accessors}.
 
-\generic{compute-initargs}
+\generic{compute-keywords}
 %
 \begin{genericargs}
     \item[class, \classref{class}] Class being defined.
-    \item[initargs, \classref{list}] List of direct initargs.
-    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited
-    initargs.
+    \item[keywords, \classref{list}] List of direct keywords.
+    \item[inherited-keyword-lists, \classref{list}] A list of lists of inherited
+    keywords.
 \end{genericargs}
 %
 \result%
 List of symbols.
 %
 \remarks%
-Computes and returns all legal initargs for {\em class}.
+Computes and returns all legal keywords for {\em class}.
 %
 \seealso%
-\genericref{compute-inherited-initargs}.
+\genericref{compute-inherited-keywords}.
 
-\method{compute-initargs}{class}
+\method{compute-keywords}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
-    \item[initargs, \classref{list}] List of direct initargs.
-    \item[inherited-initarg-lists, \classref{list}] A list of lists of inherited
-    initargs.
+    \item[keywords, \classref{list}] List of direct keywords.
+    \item[inherited-keyword-lists, \classref{list}] A list of lists of inherited
+    keywords.
 \end{specargs}
 %
 \result%
@@ -915,8 +915,8 @@ List of symbols.
 \remarks%
 This method appends the second argument with the first element of the third
 argument (single inheritance assumption), removes duplicates and returns the
-result. Note that \genericref{compute-initargs} is called by the default
-\genericref{initialize} method with all direct initargs as the second argument:
+result. Note that \genericref{compute-keywords} is called by the default
+\genericref{initialize} method with all direct keywords as the second argument:
 those specified as slot option and those specified as class option.
 
 \generic{compute-inherited-slots}
@@ -951,7 +951,7 @@ slot descriptions of the first element of the second argument (single
 inheritance assumption). Its result is used by
 \genericref{compute-slots} as an argument.
 
-\generic{compute-inherited-initargs}
+\generic{compute-inherited-keywords}
 %
 \begin{genericargs}
     \item[class, \classref{class}] Class being defined.
@@ -961,13 +961,13 @@ inheritance assumption). Its result is used by
 \result%
 List of lists of symbols.
 \remarks%
-Computes and returns a list of lists of initargs. Its result is used by
-\genericref{compute-initargs} as an argument.
+Computes and returns a list of lists of keywords. Its result is used by
+\genericref{compute-keywords} as an argument.
 %
 \seealso%
-\genericref{compute-initargs}.
+\genericref{compute-keywords}.
 
-\method{compute-inherited-initargs}{class}
+\method{compute-inherited-keywords}{class}
 %
 \begin{specargs}
     \item[class, \classref{class}] Class being defined.
@@ -979,7 +979,7 @@ List of lists of symbols.
 %
 \remarks%
 The result of the default method
-contains one list of legal initargs of the first element of the second
+contains one list of legal keywords of the first element of the second
 argument (single inheritance assumption).
 
 \generic{compute-defined-slot}

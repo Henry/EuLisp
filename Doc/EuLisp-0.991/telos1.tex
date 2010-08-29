@@ -60,7 +60,7 @@ The \scref{slot-option-1}\/s are interpreted as follows:
     passed to \functionref{make} of the slot description class along with other
     slot options.  The values are evaluated in the lexical and dynamic
     environment of the \defopref{defclass}.  For the language defined slot
-    description classes, no slot initargs are defined which are not specified by
+    description classes, no slot keywords are defined which are not specified by
     particular \defopref{defclass} slot options.
 \end{options}
 %
@@ -143,7 +143,7 @@ level-0 are interpreted as follows:
     \classref{method} and defaults to \classref{method}.
 
     \item[{\em identifier}, expression] The symbol named by {\em identifier} and
-    the value of {\em expression} are passed to \functionref{make} as initargs.
+    the value of {\em expression} are passed to \functionref{make} as keywords.
     % and each new method.
     The values are evaluated in the lexical and dynamic environment of the
     \defopref{defgeneric}.  This option is used for classes which need extra
@@ -158,11 +158,11 @@ methods on a generic function.  These are interpreted as follows:
     The class of the method to be defined. The method class must be a subclass
     of \classref{method} and is, by default, \classref{method}. The value is
     passed to \functionref{make} as the first argument. The symbol and the value
-    are not passed as initargs to \functionref{make}.
+    are not passed as keywords to \functionref{make}.
 
     \item[{\em identifier}, expression]%
     The symbol named by {\em identifier} and the value of {\em expression} are
-    passed to \functionref{make} creating a new method as initargs.  The values
+    passed to \functionref{make} creating a new method as keywords.  The values
     are evaluated in the lexical and dynamic environment of the
     \specopref{generic-lambda}.  This option is used for classes which need extra
     information not provided by the standard options.
@@ -323,7 +323,7 @@ This syntax creates and returns an anonymous method with the given
 lambda list and body.  This anonymous method can later be added to a generic
 function with a congruent lambda list via the generic function
 \genericref{add-method}.  Note that the lambda list can be specialized to
-specify the method's domain.  The value of the special initarg \classref{class}
+specify the method's domain.  The value of the special keywords \classref{class}
 determines the class to instantiate; the rest of the initlist is passed to
 \functionref{make} called with this class.  The default method class is
 \classref{method}.

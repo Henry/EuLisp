@@ -45,6 +45,7 @@ README.org: index.org
 README: index.html TODO.html README.org
 	@echo "UPDATING all README.html files ..."
 	@$(MAKE) -C Youtoo $@
+	@$(MAKE) -C Eu2C $@
 	@$(MAKE) -C Modules $@
 	@echo "DONE"
 

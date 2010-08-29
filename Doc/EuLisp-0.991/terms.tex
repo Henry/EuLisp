@@ -157,28 +157,29 @@ in the language.
     \sc{class$_2$} which is a direct or indirect \sc{superclass} of
     \sc{class$_1$}.
 
-    \definition{initarg} \index{general}{initarg} A \scref{keyword} used in an
+    \definition{keyword} \index{general}{keyword} A \scref{keyword} used in an
     \scref{initlist} to mark the value of some \scref{slot} or additional
     information.  Used in conjunction with \functionref{make} and the other
     \scref{object} initialization functions to initialize the object.  An
-    \scref{initarg} may be declared for a \scref{slot} in a class definition
+    \scref{keyword} may be declared for a \scref{slot} in a class definition
     form using the \keywordref{keyword} \scref{slot-option} or the
     \keywordref{keywords} \sc{class-option}.
 
-    \definition{initform} \index{general}{initform} A form which is evaluated to
-    produce a default initial \scref{slot} value.  Initforms are closed in their
-    \sc{lexical} environments and the resulting \sc{closure} is called an
-    \sc{initfunction}.  An initform may be declared for a \scref{slot} in a
-    class definition form using the \keywordref{default} \scref{slot-option}.
+    \definition{default} \index{general}{default} A form which is evaluated to
+    produce a default initial \scref{slot} value.  Defaults are closed in their
+    \sc{lexical} environments and the resulting \sc{closure} is called a
+    \sc{default-function}.  A \sc{default} may be declared for a \scref{slot}
+    in a class definition form using the \keywordref{default}
+    \scref{slot-option}.
 
-    \definition{initfunction} \index{general}{initfunction} A \sc{function} of
-    no arguments whose result is used as the default value of a \scref{slot}.
-    Initfunctions capture the \sc{lexical} environment of an \sc{initform}
-    declaration in a class definition form.
+    \definition{default-function} \index{general}{default-function} A
+    \sc{function} of no arguments whose result is used as the default value of a
+    \scref{slot}.  \sc{default-function}s capture the \sc{lexical} environment
+    of a \sc{default} declaration in a class definition form.
 
     \definition{initlist} \index{general}{init-list} A list of alternating
     keywords and values which describes some not-yet instantiated object.
-    Generally the keywords correspond to the \sc{initargs} of some \sc{class}.
+    Generally the keywords correspond to the \sc{keywords} of some \sc{class}.
 
     \definition{inner dynamic}\index{general}{inner dynamic} Inner dynamic
     bindings are created by \specopref{dynamic-let}, referenced by

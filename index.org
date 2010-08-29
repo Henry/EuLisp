@@ -7,7 +7,7 @@
 * [[file:COPYING][Copyright]]
   EuLisp is free software: you can redistribute it and/or modify it under the
   terms of the GNU General Public License as published by the Free Software
-  Foundation, either version 3 of the License, or (at your option) any later
+  Foundation, either version 2 of the License, or (at your option) any later
   version.
 
   EuLisp is distributed in the hope that it will be useful, but WITHOUT ANY
@@ -19,31 +19,17 @@
   [[http://www.gnu.org/licenses/]].
 
 * Aim
-  This version of the EuLisp definition and Youtoo and EuXLisp implementations
-  are being developed in an attempt to reconcile the differences with the
-  ultimate aim to create a consistent definition and implementations which are
-  as close to EuLisp-1.0 as is possible to ascertain from the remaining
-  documents related to the standardisation process:
-*** Youtoo original sources
-    This release of Youtoo started life as
-    [[http://www.cs.bath.ac.uk/~jap/EuLisp/youtoo/youtoo0.93.tar.gz][Youtoo-0.93]]
-    developed by Andreas Kind, Julian Padget and others.  More details are
-    available from the original [[file:README.orig][README]] file and
-    [[http://www.cs.bath.ac.uk/~jap/ak1/youtoo/][the youtoo home page]].  The
-    /b2h/ and /i2doc/ tools needed to bootstrap youtoo were reverse engineered
-    and provided by
-    [[http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition][T. Kurt
-    Bond]].
-*** EuXLisp original sources
-    EuXLisp started life as
-    [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on
-    xscheme written by David Michael Betz and released under the 3-clause BSD
-    licence, see [[file:EuXLisp/ORIGINAL_LICENCE]].  However with the inclusion
-    of the GNU getopt and readline libraries this software inherits the GPL with
-    which the 3-clause BSD licence is compatible and all further developments
-    will be made under the terms of the GPL version 3, see
-    [[file:COPYING][COPYING]].
-*** EuLisp definition original sources
+  This version of the EuLisp definition and Youtoo, EuXLisp and Eu2C
+  implementations are being developed in an attempt to reconcile the differences
+  with the ultimate aim to create a consistent definition and implementations
+  which are as close to EuLisp-1.0 as is possible to ascertain from the
+  remaining documents related to the standardisation process.
+
+* Original Sources
+  The starting point for this effort has been the publicly available packs of
+  sources and documents relating to the development of the EuLisp definition and
+  implementations:
+*** EuLisp definition
     The version of the EuLisp definition supplied is this release of Youtoo
     started life as EuLisp-0.99 from the pack released by Julian Padget:
     [[ftp://ftp.bath.ac.uk/pub/eulisp/definition/931202.tar.gz][931202.tar.gz]] updated following proposals and discussions also released by
@@ -57,53 +43,87 @@
     + [[ftp://ftp.bath.ac.uk/pub/eulisp/WG/genarith.ps.gz][genarith.ps.gz]]
     + [[ftp://ftp.bath.ac.uk/pub/eulisp/WG/map.ps.gz][map.ps.gz]]
     + [[ftp://ftp.bath.ac.uk/pub/eulisp/WG/stream.ps.gz][stream.ps.gz]]
+*** EuXLisp
+    EuXLisp started life as
+    [[http://www.bath.ac.uk/~masrjb/Sources/euscheme.html][Euscheme]] based on
+    xscheme written by David Michael Betz and released under the 3-clause BSD
+    licence, see [[file:EuXLisp/ORIGINAL_LICENCE]].  However with the inclusion
+    of the GNU getopt and readline libraries this software inherits the GPL with
+    which the 3-clause BSD licence is compatible and all further developments
+    will be made under the terms of the GPL version 2, see
+    [[file:COPYING][COPYING]].
+*** Youtoo
+    This release of Youtoo started life as
+    [[http://www.cs.bath.ac.uk/~jap/EuLisp/youtoo/youtoo0.93.tar.gz][Youtoo-0.93]]
+    developed by Andreas Kind, Julian Padget and others.  More details are
+    available from the original [[file:Youtoo/README.orig][README]] file and
+    [[http://www.cs.bath.ac.uk/~jap/ak1/youtoo/][the youtoo home page]].  The
+    /b2h/ and /i2doc/ tools needed to bootstrap youtoo were reverse engineered
+    and provided by
+    [[http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition][T. Kurt
+    Bond]].
+*** Eu2C
+    Eu2C was originally developed at Fraunhofer ISST in the joint research
+    project APPLY funded by the German Ministry of Research and Technology under
+    the project code ITW9102D5.  The final release in July 1994 is publicly
+    available from
+    [[http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c/v94_07/eu2c.tgz][eu2c.tgz]]
+    however the terms of use are not specified.  This release of Eu2C is derived
+    from the eu2c-94-07-EUPL version kindly prepared and provided by E. Ulrich
+    Kriegel and released by Fraunhofer ISST under the
+    [[http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1][EUPL
+    version 1.1 ]] (see [[file:Eu2C/README.orig]]).
+    However, due to the inclusion of EuLisp code from Youtoo, which is released
+    under the GPL version 2, this version of Eu2C inherits the GPL version 2
+    (see above) as specifically permitted under the compatibility terms of the
+    EUPL version 1.1.  Future versions of the EUPL may include a compatibility
+    clause for GPL version 3 at which point it will be possible to re-release
+    Eu2C, Youtoo and EuXLisp under the GPL version 3.
 
 * General Description
+*** EuLisp
+    EuLisp is a single-valued dialect of Lisp with an integrated object system,
+    a defined meta-object protocol, modules and a simple light-weight process
+    mechanism (threads).
+***** Current Definition
+      is provided in both HTML and PDF formats:
+      + [[file:Doc/EuLisp-0.991/html/eulisp.html][EuLisp Definition Version 0.991 (HTML)]]
+      + [[file:Doc/EuLisp-0.991/eulisp.pdf][EuLisp Definition Version 0.991 (PDF)]]
+***** EuLisp-1.0 Proposals
+      are in the folowing [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]] and discussed in the minutes of the
+      [[file:Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt][meeting on 19/11/93]] and in the [[file:Doc/EuLisp-0.991/Proposals/nov93.txt][preceding]] and [[file:Doc/EuLisp-0.991/Proposals/dec93.txt][subsequent]] Email
+      correspondence.  The following reports are discussed in the above:
+      + [[file:Doc/EuLisp-0.991/Proposals/Reports/eulisp-proposals.ps][eulisp-proposals.ps]]
+      + [[file:Doc/EuLisp-0.991/Proposals/Reports/genarith.ps][genarith.ps]]
+      + [[file:Doc/EuLisp-0.991/Proposals/Reports/adv-genarith.ps][adv-genarith.ps]]
+      + [[file:Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps][eulisp-ffi.ps]]
+*** EuXLisp
+    EuXLisp is a simple EuLisp Level-0 interpreter.  EuLisp Level-0 is a small
+    and compact Lisp, but nevertheless has many interesting features, such as
+    modules, an object system, and multithreading.  EuLisp Level-1 has extra
+    features, the most notable being a full metaobject system which is
+    implemented in Youtoo not in EuXLisp.
 *** Youtoo
-    The Youtoo system is a public domain implementation of the object-oriented
-    dynamic programming language EuLisp. EuLisp is a single-valued dialect of
-    Lisp with an integrated object system, a defined meta-object protocol,
-    modules and a simple light-weight process mechanism (threads).
-
-    The Youtoo compiler/interpreter compiles EuLisp into C-embedded virtual
-    machine code which can be statically or dynamically linked with the virtual
-    machine, the conservative garbage collector, the EuLisp language library and
-    arbitrary other Lisp and foreign code (C, C++ and Fortran). Resulting
-    stand-alone executables are portable, interoperable and efficient (see The
-    Lisp Performance Page). The language implementation is extended towards a
-    Virtual Multicomputer Architecture. Object serialization and inter-process
-    communication (Sockets, MPI, Harvest Object Cache) support the migration of
-    arbitray data and code.
+    The Youtoo compiler/interpreter compiles EuLisp Level-1 into C-embedded
+    virtual machine code which can be statically or dynamically linked with the
+    virtual machine, the conservative garbage collector, the EuLisp language
+    library and arbitrary other Lisp and foreign code (C, C++ and
+    Fortran). Resulting stand-alone executables are portable, interoperable and
+    efficient (see The Lisp Performance Page). The language implementation is
+    extended towards a Virtual Multicomputer Architecture. Object serialization
+    and inter-process communication (Sockets, MPI, Harvest Object Cache) support
+    the migration of arbitray data and code.
 
     The system reuses ideas from the Oaklisp system written by Barak Pearlmutter
     and Kevin Lang. The meta-object protocol (=Telos=) was originally
     implemented in Common Lisp by Russell Bradford. By default, a garbage
     collector written by Hans Boehm and Alan Demers is used.
-*** EuXLisp
-    EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small
-    and compact Lisp, but nevertheless has many interesting features, such as
-    modules, an object system, and multithreading.  EuLisp Level 1 has extra
-    features, the most notable being a full metaobject system which is
-    implemented in Youtoo not in EuXLisp.
-
-* Documentation
-*** EuLisp definition
-    is provided in both HTML and PDF formats:
-    + [[file:Doc/EuLisp-0.991/html/eulisp.html][EuLisp Definition Version 0.991 (HTML)]]
-    + [[file:Doc/EuLisp-0.991/eulisp.pdf][EuLisp Definition Version 0.991 (PDF)]]
-*** EuLisp-1.0 Proposals
-    are in the folowing
-    [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]] and
-    discussed in the minutes of the
-    [[file:Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt][meeting on
-    19/11/93]] and in the
-    [[file:Doc/EuLisp-0.991/Proposals/nov93.txt][preceding]] and
-    [[file:Doc/EuLisp-0.991/Proposals/dec93.txt][subsequent]] Email correspondence.
-    The following reports are discussed in the above:
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/eulisp-proposals.ps][eulisp-proposals.ps]]
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/genarith.ps][genarith.ps]]
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/adv-genarith.ps][adv-genarith.ps]]
-    + [[file:Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps][eulisp-ffi.ps]]
+***** See also [[file:Youtoo/README.html][Youtoo README]]
+*** Eu2C
+    Eu2C is a EuLisp Level-0 to C compiler originally developed at Fraunhofer
+    ISST in the joint research project APPLY funded by the German Ministry of
+    Research and Technology under the project code ITW9102D5.
+***** See also  [[file:Eu2C/README.html][Eu2C README]]
 
 * Installation
   + Pull the latest version from the GitHub repository:
@@ -130,5 +150,8 @@
 
 * Getting Started with [[file:Doc/EuLispIntroRef.html#sec-4][Youtoo]]
   See [[file:Doc/EuLispIntroRef.html#sec-4][An Introduction to EuLisp, EuXLisp and Youtoo]].
+
+* Getting Started with [[file:Eu2C/Readme.html][Eu2C]]
+  See [[file:Eu2C/README.html][README]].
 
 * [[file:TODO.org][To Do]]

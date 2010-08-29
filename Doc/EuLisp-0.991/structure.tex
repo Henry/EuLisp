@@ -555,14 +555,14 @@ Cross references to related entries.
 \condition{a-condition}{condition}
 %
 \begin{initoptions}
-    \item[initarg-a, value-a] means that an instance of {\tt <a-condition>} has
-    a slot called {\tt initarg-a} which should be initialized to {\em value-a},
+    \item[keyword-a, value-a] means that an instance of {\tt <a-condition>} has
+    a slot called {\tt keyword-a} which should be initialized to {\em value-a},
     where {\em value-a} is often the name of a class, indicating that {\em
         value-a} should be an instance of that class and a description of the
     information that {\em value-a} is
     supposed to provide about the exceptional situation that has arisen.\\
     $\vdots$
-    \item[initarg-n, value-n] As for {\tt initarg-a}.
+    \item[keyword-n, value-n] As for {\tt keyword-a}.
 \end{initoptions}
 %
 \remarks%
@@ -572,14 +572,14 @@ condition will be signalled.
 \derivedclass{a-class}{class}
 %
 \begin{initoptions}
-    \item[initarg-a, value-a] means that {\tt <a-class>} has an
-    initarg whose name is {\tt initarg-a} and the description will usually
+    \item[keyword-a, value-a] means that {\tt <a-class>} has an
+    keyword whose name is {\tt keyword-a} and the description will usually
     say of what class (or classes) {\em value-a} should be an instance.
-    This initarg is required.\\ $\vdots$
-    \item[{\tt[}initarg-n, value-n{\tt]}]
-    The enclosing square brackets denote that this initarg is optional.
+    This keyword is required.\\ $\vdots$
+    \item[{\tt[}keyword-n, value-n{\tt]}]
+    The enclosing square brackets denote that this keyword is optional.
     Otherwise the interpretation of the definition is as for {\tt
-        initarg-a}.
+        keyword-a}.
 \end{initoptions}
 %
 \remarks%

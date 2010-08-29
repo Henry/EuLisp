@@ -62,7 +62,7 @@
 ;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation; either version 3, or
+;; published by the Free Software Foundation; either version 2, or
 ;; (at your option) any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -158,7 +158,7 @@ indentation for the following lines until the end of the list."))))
     (list
      '("(\\(defmodule\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-function-name-face nil t))
-     '("(\\(defstruct\\)\\>[ \t]*\\(\\sw+\\)?"
+     '("(\\(defclass\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-function-name-face nil t))
      '("(\\(defgeneric\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-function-name-face nil t))
@@ -167,6 +167,8 @@ indentation for the following lines until the end of the list."))))
      '("(\\(defconstant\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-type-face nil t))
      '("(\\(deflocal\\)\\>[ \t]*\\(\\sw+\\)?"
+       (1 font-lock-builtin-face) (2 font-lock-type-face nil t))
+     '("(\\(defglobal\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-type-face nil t))
      '("(\\(defmacro\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-function-name-face nil t))
@@ -205,7 +207,8 @@ indentation for the following lines until the end of the list."))))
           "<string>"
           "<collection>" "<sequence>" "<cons>" "<vector>"
           "<table>" "<hash-table>" "<null>"
-          "<condition>" "<special>" "<slot-description>" "<local-slot-description>"
+          "<condition>" "<special>"
+          "<slot-description>" "<local-slot-description>"
           "<stream>" "<file-stream>" "<char-file-stream>" "<string-stream>"
           "<thread>" "<lock>") 'words)
        'font-lock-type-face)
@@ -237,21 +240,6 @@ and named constant values.")
          '(;; Bindings in Lib.x86_64/liblevel1
            "%"
            "*"
-           "*absent*"
-           "*argc*"
-           "*argv*"
-           "*backtrace-nframes*"
-           "*callback-vector*"
-           "*current-no-dynamic-variables*"
-           "*current-no-error-handlers*"
-           "*default-error-handler*"
-           "*dispatch-macro-character-table*"
-           "*error*"
-           "*open-file-streams*"
-           "*open-file-streams*-lock"
-           "*random-max*"
-           "*stack-nvalues*"
-           "*warning*"
            "+"
            "-"
            "/"
@@ -317,14 +305,6 @@ and named constant values.")
            "="
            ">"
            ">="
-           "O_APPEND"
-           "O_CREAT"
-           "O_EXCL"
-           "O_NONBLOCK"
-           "O_RDONLY"
-           "O_RDWR"
-           "O_TRUNC"
-           "O_WRONLY"
            "abs"
            "accumulate"
            "accumulate-list"
@@ -832,17 +812,7 @@ and named constant values.")
            "with-source"
 
            ;; Bindings in Lib.x86_64/libeval
-           "*first-year-students*"
-           "*redefine-imported-bindings*"
-           "?"
-           "as-dynamic-binding"
-           "dynamic-binding-ref"
-           "dynamic-binding-set"
-           "dynamic-load-module"
            "eval"
-           "main"
-           "module-loaded?"
-           "rep"
            ) t) "\\>") 'font-lock-keyword-face)
       ;; User-defined types with angle-brackets
       '("\\<<\\w+>\\>" . font-lock-type-face)

@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-07-06 21:04:00" /> 
+<meta name="date" content="2010-08-29 23:31:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -512,7 +512,7 @@ class="cmtt-9">make</span></a> of the slot description class
 href="#x23-942001r1"><span 
 class="cmtt-9">defclass</span></a>.
     For the language defined slot description classes, no slot
-    initargs are defined which are not specified by particular
+    keywords are defined which are not specified by particular
     <a 
 href="#x23-942001r1"><span 
 class="cmtt-9">defclass</span></a> slot options.</p></dd></dl>
@@ -814,7 +814,7 @@ class="cmti-9">identifier  </span>and  the  value  of
     <span 
 class="cmti-9">expression </span>are passed to <a 
 href="eulispcl11.html#x13-102003r1"><span 
-class="cmtt-9">make</span></a> as initargs. The values are
+class="cmtt-9">make</span></a> as keywords. The values are
     evaluated in the lexical and dynamic environment of the
     <a 
 href="#x23-952001r2"><span 
@@ -839,7 +839,7 @@ class="cmtt-9">&#x003C;method&#x003E;</span></a>.  The  value  is  passed  to  <
 href="eulispcl11.html#x13-102003r1"><span 
 class="cmtt-9">make</span></a> as  the  first
     argument. The symbol and the value are not passed as
-    initargs to <a 
+    keywords to <a 
 href="eulispcl11.html#x13-102003r1"><span 
 class="cmtt-9">make</span></a>.
     </p></dd><dt class="options">
@@ -850,10 +850,10 @@ class="options">
     <!--l. 76--><p class="noindent" >The  symbol  named  by  <span 
 class="cmti-9">identifier  </span>and  the  value  of
     <span 
-class="cmti-9">expression  </span>are  passed  to  <a 
+class="cmti-9">expression </span>are passed to <a 
 href="eulispcl11.html#x13-102003r1"><span 
-class="cmtt-9">make</span></a> creating  a  new  method
-    as initargs. The values are evaluated in the lexical and
+class="cmtt-9">make</span></a> creating a new method as
+    keywords.  The  values  are  evaluated  in  the  lexical  and
     dynamic environment of the <a 
 href="#x23-946001r1"><span 
 class="cmtt-9">generic-lambda</span></a>. This option
@@ -1418,13 +1418,13 @@ class="cmbx-8">Result</span></h5>
 href="#x23-1188001r5"><span 
 class="cmtt-9">add-method</span></a>. Note that the lambda list can be
   specialized to specify the method&#8217;s domain. The value of the
-  special initarg <a 
+  special keywords <a 
 href="eulispcl11.html#x13-74006r2"><span 
-class="cmtt-9">&#x003C;class&#x003E;</span></a> determines the class to instantiate; the rest
-  of the initlist is passed to <a 
+class="cmtt-9">&#x003C;class&#x003E;</span></a> determines the class to instantiate; the
+  rest of the initlist is passed to <a 
 href="eulispcl11.html#x13-102003r1"><span 
-class="cmtt-9">make</span></a> called with this class. The default
-  method class is <a 
+class="cmtt-9">make</span></a> called with this class. The
+  default method class is <a 
 href="#x23-1006007r1"><span 
 class="cmtt-9">&#x003C;method&#x003E;</span></a>.
   </p>
@@ -1748,7 +1748,7 @@ is:
   class="enumerate" id="x23-971004x2">The list of (effective) slot descriptions.
         </li>
         <li 
-  class="enumerate" id="x23-971006x3">The list of (effective) initargs.</li></ol>
+  class="enumerate" id="x23-971006x3">The list of (effective) keywords.</li></ol>
   <!--l. 24--><p class="noindent" >Standard classes support local slots only. Shared slots can be
   provided by extensions. The minimal information associated with a
   slot description metaobject is:
@@ -1759,8 +1759,8 @@ is:
         computations.
         </li>
         <li 
-  class="enumerate" id="x23-971010x2">The initfunction, called by default to compute the initial
-        slot value when creating a new instance.
+  class="enumerate" id="x23-971010x2">The  default-function,  called  by  default  to  compute  the
+        initial slot value when creating a new instance.
         </li>
         <li 
   class="enumerate" id="x23-971012x3">The reader, which is a function to read the corresponding
@@ -1771,7 +1771,7 @@ is:
         slot of an instance.
         </li>
         <li 
-  class="enumerate" id="x23-971016x5">The initarg, which is a symbol to access the value which
+  class="enumerate" id="x23-971016x5">The keyword, which is a symbol to access the value which
         can be supplied to a <a 
 href="eulispcl11.html#x13-102003r1"><span 
 class="cmtt-9">make</span></a> call in order to initialize the
@@ -1996,7 +1996,7 @@ class="cmbx-8">Remarks</span></h5>
   </p><!--l. 101--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-977001r5"></a><span 
 class="cmbx-9">18.6.5   </span><span 
-class="cmtt-9">class-initargs</span>
+class="cmtt-9">class-keywords</span>
  <a 
  id="Q1-23-1373"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -2024,10 +2024,10 @@ class="cmbx-8">Result</span></h5>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x23-9800005"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 112--><p class="noindent" >The initargs correspond to the keywords specified in the <span 
-class="cmtt-9">initarg</span>
+  <!--l. 112--><p class="noindent" >The keywords correspond to the keywords specified in the <span 
+class="cmtt-9">keyword</span>
  slot-option or the <span 
-class="cmtt-9">initargs </span>class-option when the class and its
+class="cmtt-9">keywords </span>class-option when the class and its
   superclasses were defined.
   </p><!--l. 143--><p class="noindent" >
   </p>
@@ -2084,14 +2084,14 @@ class="initoptions">
     <!--l. 12--><p class="noindent" >The function to update the slot.
     </p></dd><dt class="initoptions">
 <span 
-class="cmtt-9">initfunction </span><span 
+class="cmtt-9">default-function </span><span 
 class="cmti-9">function </span>: </dt><dd 
 class="initoptions">
     <!--l. 13--><p class="noindent" >The function to compute the initial value in the absence
     of a supplied value.
     </p></dd><dt class="initoptions">
 <span 
-class="cmtt-9">initarg </span><span 
+class="cmtt-9">keyword </span><span 
 class="cmti-9">symbol </span>: </dt><dd 
 class="initoptions">
     <!--l. 15--><p class="noindent" >The key to access a supplied initial value.</p></dd></dl>
@@ -2134,7 +2134,7 @@ class. It has no effect on bindings.
                                                    </p><!--l. 34--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-985001r4"></a><span 
 class="cmbx-9">18.7.4   </span><span 
-class="cmtt-9">slot-initfunction</span>
+class="cmtt-9">slot-default-function</span>
  <a 
  id="Q1-23-1385"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -2650,10 +2650,10 @@ class="options">
               <!--l. 11--><p class="noindent" >List of direct slot specifications.
               </p></dd><dt class="options">
         <span 
-class="cmtt-9">direct-initargs </span><span 
+class="cmtt-9">direct-keywords </span><span 
 class="cmti-9">list </span>:  </dt><dd 
 class="options">
-              <!--l. 12--><p class="noindent" >List of direct initargs.</p></dd></dl>
+              <!--l. 12--><p class="noindent" >List of direct keywords.</p></dd></dl>
         </dd></dl>
   <!--l. 16--><p class="noindent" >
   </p>
@@ -2681,7 +2681,7 @@ class="cmbx-8">Remarks</span></h5>
   class="enumerate" id="x23-1018006x1">class precedence list
        </li>
        <li 
-  class="enumerate" id="x23-1018008x2">initargs
+  class="enumerate" id="x23-1018008x2">keywords
        </li>
        <li 
   class="enumerate" id="x23-1018010x3">slot descriptions</li></ol>
@@ -2769,7 +2769,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmtt-9">compute-inherited-initargs</span></td></tr></table>
+class="cmtt-9">compute-inherited-keywords</span></td></tr></table>
 <!--l.10 104-->     <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -2782,7 +2782,7 @@ class="tabbing"><span
 class="cmitt-10x-x-90">cl direct-superclasses </span><span 
 class="cmsy-9">&#x2192; </span><span 
 class="cmtt-9">((</span><span 
-class="cmitt-10x-x-90">initarg</span><sup><span 
+class="cmitt-10x-x-90">keyword</span><sup><span 
 class="cmsy-6">*</span></sup><span 
 class="cmtt-9">)</span><sup><span 
 class="cmsy-6">*</span></sup><span 
@@ -2792,7 +2792,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
-class="cmtt-9">compute-initargs</span></td></tr></table>
+class="cmtt-9">compute-keywords</span></td></tr></table>
 <!--l.10 108-->       <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -2802,7 +2802,7 @@ class="tabbing">  </td><td style="width:14px;"
 class="tabbing">  </td><td style="width:14px;" 
 class="tabbing">  </td><td  
 class="tabbing"><span 
-class="cmitt-10x-x-90">cl direct-initargs inherited-initargs</span></td></tr></table>
+class="cmitt-10x-x-90">cl direct-keywords inherited-keywords</span></td></tr></table>
 <!--l.10 109-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
@@ -2814,7 +2814,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9">&#x2192; </span><span 
 class="cmtt-9">(</span><span 
-class="cmitt-10x-x-90">initarg</span><sup><span 
+class="cmitt-10x-x-90">keyword</span><sup><span 
 class="cmsy-6">*</span></sup><span 
 class="cmtt-9">)</span></td></tr></table>
 <!--l.10 110-->                           <table  
@@ -3197,11 +3197,12 @@ class="cmitt-10x-x-90">function</span></td></tr></table>
 </div><hr class="endfloat" />
 <!--l. 168--><p class="noindent" >Note that <a 
 href="#x23-1069001r12"><span 
-class="cmtt-9">compute-initargs</span></a> is called by the default <a 
+class="cmtt-9">compute-keywords</span></a> is called by the default <a 
 href="eulispcl11.html#x13-108001r3"><span 
 class="cmtt-9">initialize</span></a>
-method with all direct initargs as the second argument: those
-specified as slot option and those specified as class option.
+method with all direct keywords as the second argument:
+those specified as slot option and those specified as class
+option.
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1018016r2"></a><span 
 class="cmbx-9">18.10.2   </span><span 
@@ -3277,8 +3278,7 @@ class="cmtt-9">compute-constructor</span>
 class="cmti-9">generic function</span><a 
  id="dx23-1022002"></a><a 
  id="dx23-1022003"></a> </i></b></div><br /> <hr />
-</p>
-                                                   <h5 class="likesyntaxssclauseHead"><a 
+</p>                                                   <h5 class="likesyntaxssclauseHead"><a 
  id="x23-10230004"></a><span 
 class="cmbx-8">Generic Arguments</span></h5>
   <!--l. 194--><p class="noindent" >
@@ -3468,13 +3468,13 @@ class="options">
               <!--l. 9--><p class="noindent" >The name of the slot.
               </p></dd><dt class="options">
         <span 
-class="cmtt-9">initfunction </span><span 
+class="cmtt-9">default-function </span><span 
 class="cmti-9">function </span>:  </dt><dd 
 class="options">
               <!--l. 10--><p class="noindent" >A function.
               </p></dd><dt class="options">
         <span 
-class="cmtt-9">initarg </span><span 
+class="cmtt-9">keyword </span><span 
 class="cmti-9">symbol </span>:  </dt><dd 
 class="options">
               <!--l. 11--><p class="noindent" >A symbol.
@@ -4200,7 +4200,7 @@ class="cmtt-9">compute-and-ensure-slot-accessors</span></a>.
   </p><!--l. 168--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1069001r12"></a><span 
 class="cmbx-9">18.14.12   </span><span 
-class="cmtt-9">compute-initargs</span>
+class="cmtt-9">compute-keywords</span>
  <a 
  id="Q1-23-1505"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -4221,18 +4221,18 @@ class="genericargs">
         <!--l. 171--><p class="noindent" >Class being defined.
         </p></dd><dt class="genericargs">
   <span 
-class="cmti-9">initargs </span><a 
+class="cmti-9">keywords </span><a 
 href="eulispcl17.html#x21-619005r1"><span 
 class="cmtt-9">&#x003C;list&#x003E;</span></a> :  </dt><dd 
 class="genericargs">
-        <!--l. 172--><p class="noindent" >List of direct initargs.
+        <!--l. 172--><p class="noindent" >List of direct keywords.
         </p></dd><dt class="genericargs">
   <span 
-class="cmti-9">inherited-initarg-lists </span><a 
+class="cmti-9">inherited-keyword-lists </span><a 
 href="eulispcl17.html#x21-619005r1"><span 
 class="cmtt-9">&#x003C;list&#x003E;</span></a> :  </dt><dd 
 class="genericargs">
-        <!--l. 173--><p class="noindent" >A list of lists of inherited initargs.</p></dd></dl>
+        <!--l. 173--><p class="noindent" >A list of lists of inherited keywords.</p></dd></dl>
                                                                                                   
                                                                                                   
 <!--l. 177--><p class="noindent" >
@@ -4245,7 +4245,7 @@ class="cmbx-8">Result</span></h5>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-107200012"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 181--><p class="noindent" >Computes and returns all legal initargs for <span 
+<!--l. 181--><p class="noindent" >Computes and returns all legal keywords for <span 
 class="cmti-9">class</span>.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
@@ -4254,11 +4254,11 @@ class="cmbx-8">See</span><span
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 184--><p class="noindent" ><a 
 href="#x23-1083001r16"><span 
-class="cmtt-9">compute-inherited-initargs</span></a>.
+class="cmtt-9">compute-inherited-keywords</span></a>.
 </p><!--l. 186--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1073001r13"></a><span 
 class="cmbx-9">18.14.13   </span><span 
-class="cmtt-9">compute-initargs &#x003C;class&#x003E;</span>
+class="cmtt-9">compute-keywords &#x003C;class&#x003E;</span>
 <a 
  id="Q1-23-1510"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -4279,18 +4279,18 @@ class="specargs">
     <!--l. 189--><p class="noindent" >Class being defined.
     </p></dd><dt class="specargs">
 <span 
-class="cmti-9">initargs </span><a 
+class="cmti-9">keywords </span><a 
 href="eulispcl17.html#x21-619005r1"><span 
 class="cmtt-9">&#x003C;list&#x003E;</span></a> : </dt><dd 
 class="specargs">
-    <!--l. 190--><p class="noindent" >List of direct initargs.
+    <!--l. 190--><p class="noindent" >List of direct keywords.
     </p></dd><dt class="specargs">
 <span 
-class="cmti-9">inherited-initarg-lists </span><a 
+class="cmti-9">inherited-keyword-lists </span><a 
 href="eulispcl17.html#x21-619005r1"><span 
 class="cmtt-9">&#x003C;list&#x003E;</span></a> : </dt><dd 
 class="specargs">
-    <!--l. 191--><p class="noindent" >A list of lists of inherited initargs.</p></dd></dl>
+    <!--l. 191--><p class="noindent" >A list of lists of inherited keywords.</p></dd></dl>
 <!--l. 195--><p class="noindent" >
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
@@ -4305,11 +4305,11 @@ class="cmbx-8">Remarks</span></h5>
 of the third argument (single inheritance assumption), removes
 duplicates and returns the result. Note that <a 
 href="#x23-1069001r12"><span 
-class="cmtt-9">compute-initargs</span></a> is
+class="cmtt-9">compute-keywords</span></a> is
 called by the default <a 
 href="eulispcl11.html#x13-108001r3"><span 
-class="cmtt-9">initialize</span></a> method with all direct initargs as
-the second argument: those specified as slot option and those
+class="cmtt-9">initialize</span></a> method with all direct keywords
+as the second argument: those specified as slot option and those
 specified as class option.
 </p><!--l. 205--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1076001r14"></a><span 
@@ -4408,7 +4408,7 @@ class="cmtt-9">compute-slots</span></a> as an argument.
 </p><!--l. 237--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1083001r16"></a><span 
 class="cmbx-9">18.14.16   </span><span 
-class="cmtt-9">compute-inherited-initargs</span>
+class="cmtt-9">compute-inherited-keywords</span>
 <a 
  id="Q1-23-1523"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -4444,10 +4444,10 @@ class="cmbx-8">Result</span></h5>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-108600016"></a><span 
 class="cmbx-8">Remarks</span></h5>
-<!--l. 247--><p class="noindent" >Computes and returns a list of lists of initargs. Its result is used by
-<a 
+<!--l. 247--><p class="noindent" >Computes and returns a list of lists of keywords. Its result is used
+by <a 
 href="#x23-1069001r12"><span 
-class="cmtt-9">compute-initargs</span></a> as an argument.
+class="cmtt-9">compute-keywords</span></a> as an argument.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
  id="x23-108700016"></a><span 
@@ -4455,11 +4455,11 @@ class="cmbx-8">See</span><span
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 251--><p class="noindent" ><a 
 href="#x23-1069001r12"><span 
-class="cmtt-9">compute-initargs</span></a>.
+class="cmtt-9">compute-keywords</span></a>.
 </p><!--l. 253--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x23-1087001r17"></a><span 
 class="cmbx-9">18.14.17   </span><span 
-class="cmtt-9">compute-inherited-initargs &#x003C;class&#x003E;</span>
+class="cmtt-9">compute-inherited-keywords &#x003C;class&#x003E;</span>
 <a 
  id="Q1-23-1528"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -4494,7 +4494,7 @@ class="cmbx-8">Result</span></h5>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x23-109000017"></a><span 
 class="cmbx-8">Remarks</span></h5>
-  <!--l. 264--><p class="noindent" >The result of the default method contains one list of legal initargs
+  <!--l. 264--><p class="noindent" >The result of the default method contains one list of legal keywords
   of the first element of the second argument (single inheritance
   assumption).
   </p><!--l. 268--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 

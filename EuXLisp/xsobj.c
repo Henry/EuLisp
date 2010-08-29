@@ -346,7 +346,7 @@ static void do_initloop(int index, LVAL slots, LVAL inits)
     if (init == NIL)
     {
         if (closurep(defaultfn))
-        {       // no initarg, a defaultfn
+        {       // no keyword, a defaultfn
             check(6);
             push(xlval);        // the object
             push(cvfixnum((FIXTYPE) index));
@@ -360,13 +360,13 @@ static void do_initloop(int index, LVAL slots, LVAL inits)
         }
         else
         {
-            setivar(xlval, index, s_unbound);   // no initarg, no defaultfn
+            setivar(xlval, index, s_unbound);   // no keyword, no defaultfn
             do_initloop(index + 1, cdr(slots), inits);
         }
     }
     else
     {
-        setivar(xlval, index, car(cdr(init)));  // an initarg
+        setivar(xlval, index, car(cdr(init)));  // a keyword
         do_initloop(index + 1, cdr(slots), inits);
     }
 }
