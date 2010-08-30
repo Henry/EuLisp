@@ -4,6 +4,119 @@
 #+AUTHOR: nil
 #+OPTIONS: author:nil email:nil ^:{}
 
+* EuLisp Definition
+*** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
+    to correspond to the EuLisp-1.0 proposals.
+    See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].
+*** TODO Undefined references [34/41]
+    + [X] class:abstract-class
+    + [X] class:character-sequence
+    + [X] class:collection
+    + [X] class:condition-class
+    + [X] class:<function>
+    + [-] class:function-class
+    + [-] class:hash-table
+    + [X] class:list
+    + [X] class:metaclass
+    + [-] class:method
+    + [X] class:name
+    + [X] class:sequence
+    + [-] class:simple-class
+    + [-] class:simple-function
+    + [-] class:simple-method
+    + [-] class:simple-thread
+    + [X] class:super-class
+    + [X] condition:condition
+    + [X] condition:no-converter
+    + [X] condition:methods-exists
+    + [X] condition:read-error
+    + [X] defform:defmacro
+    + [X] defform:defun
+    + [X] function:eq
+    + [X] function:eql
+    + [X] function:end-of-stream
+    + [X] function:fill-buffer
+    + [X] function:=
+    + [X] generic:binary<
+    + [X] generic:binary=
+    + [X] generic:eql
+    + [X] generic:eq|
+    + [X] generic:equal
+    + [X] generic:generic-prin
+    + [X] generic:method
+    + [X] generic:mod
+    + [X] generic:read
+    + [X] keyword:accessor
+    + [X] keyword:export
+    + [X] setter:method-function
+    + [X] syntax:unquote-splice
+*** TODO Add entry for the =<method>= class in Level-1
+*** TODO Add details of the =<hash-table>= class and functions
+*** TODO Update stream module
+    to corresponding to the Youtoo implementation.
+*** DONE Add descriptions of constants to "Layout and Typography"
+    CLOSED: [2010-04-01 Thu 12:16]
+    in structure.tex.  Include details of constant instances of classes and
+    constant bindings to classes (class aliases).
+*** DONE <thread> vs <abstract-thread>
+    CLOSED: [2010-06-16 Wed 09:18]
+    Sort out the difference between the EuLisp definition and the Youtoo
+    implementation with respect to the name of the abstract base-class for
+    threads.  In the definition it is =<thread>= whereas in Youtoo it is
+    =<abstract-thread>= and =<thread>= is used for the currently used thread
+    type.
+*** DONE Reformat the =defgeneric= rewrite rules to conform to the others
+    CLOSED: [2010-04-23 Fri 08:39]
+*** DONE Consider reformatting all of the rewrite rules
+    CLOSED: [2010-04-23 Fri 08:40]
+    to be more consistent with the syntax description.
+*** TODO Add the return type to the syntax descriptions
+*** TODO Add "signatures" to all function descriptions
+*** DONE Change macro definitions to special operators
+    CLOSED: [2010-06-15 Tue 23:04]
+    It doesn't seem sensible to effectively specify that certain syntax MUST be
+    implemented as macros; surely this decision should be taken by the
+    implementers and for efficiency reasons it might be preferable that more of
+    the special operators are implemented as primitives of the language.
+*** TODO Finish the "Lexical Syntax" section
+    Provide a bit more background information.
+*** TODO Introduce the "Special Forms" list in /modules.tex/
+    Or move this list to a more appropriate place, /e.g./ at the beginning of
+    the section concerning "special forms".
+*** TODO Introduce the "Level-1" library and describe "module-1"
+*** TODO Re-reference definitions in the "Level-1" library
+    so that they do not clash with those in the "Level-0" library.
+*** TODO Remove the "syntax-category" entries from the index
+*** DONE Add =slice= generic function and methods
+    CLOSED: [2010-07-01 Thu 22:48]
+*** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
+    CLOSED: [2010-04-27 Tue 22:48]
+    Check for other =<sequence>= methods which should destructive variants.
+*** DONE Clarify the wording concerning the relationship between =nil= and =()=
+    CLOSED: [2010-05-09 Sun 21:09]
+    State that (eq 'nil '()) ==> t.
+*** DONE Replace =equal= with =binary==
+    CLOSED: [2010-05-14 Fri 14:30]
+    Remove the =equal= generic function and methods and introduce a complete set
+    of =binary== methods.
+*** DONE Change naming convention for predicates? and destructive! functions
+    CLOSED: [2010-06-09 Wed 10:46]
+    There is a suggestion in the definition documents suggesting that the
+    Scheme/T naming convention for predicates (end in ?) and destructive
+    functions (end in !) should be considered for EuLisp.  I agree with this
+    suggestion to improve consistency and readability and made the corresponding
+    changes including "null" -> "null?" and "atom" -> "atom?".
+*** TODO Add a Scheme-style =case= statement
+*** DONE Add a Scheme-style =else=
+    CLOSED: [2010-07-06 Tue 12:25]
+    for the default clause of =cond= and =case= forms.  =else= is simply an
+    alias for =t=.
+*** DONE Add =when= and =unless= conditional expressions
+    CLOSED: [2010-07-02 Fri 10:16]
+*** TODO Add =while= loop construct
+*** TODO Consider renaming =labels= -> =flet*=
+*** TODO Consider including =append=
+    either in generic form or just for lists and perhaps strings.
 * Youtoo and EuXLisp
 *** DONE Replace =equal= with =binary==
     CLOSED: [2010-05-12 Wed 22:57]
@@ -227,121 +340,55 @@
 *** TODO Complete =double-float= functionality in =arith.em=
     See =Youtoo/Runtime/double.em=
 *** TODO Consider replacing the built-in GC with Boehm-Demers
-* EuLisp Definition
-*** TODO Update EuLisp definition and Youtoo and EuXLisp implementations
-    to correspond to the EuLisp-1.0 proposals.
-    See [[file:Doc/EuLisp-0.991/Proposals/Proposals.txt][proposal document]].
-*** TODO Undefined references [34/41]
-    + [X] class:abstract-class
-    + [X] class:character-sequence
-    + [X] class:collection
-    + [X] class:condition-class
-    + [X] class:<function>
-    + [-] class:function-class
-    + [-] class:hash-table
-    + [X] class:list
-    + [X] class:metaclass
-    + [-] class:method
-    + [X] class:name
-    + [X] class:sequence
-    + [-] class:simple-class
-    + [-] class:simple-function
-    + [-] class:simple-method
-    + [-] class:simple-thread
-    + [X] class:super-class
-    + [X] condition:condition
-    + [X] condition:no-converter
-    + [X] condition:methods-exists
-    + [X] condition:read-error
-    + [X] defform:defmacro
-    + [X] defform:defun
-    + [X] function:eq
-    + [X] function:eql
-    + [X] function:end-of-stream
-    + [X] function:fill-buffer
-    + [X] function:=
-    + [X] generic:binary<
-    + [X] generic:binary=
-    + [X] generic:eql
-    + [X] generic:eq|
-    + [X] generic:equal
-    + [X] generic:generic-prin
-    + [X] generic:method
-    + [X] generic:mod
-    + [X] generic:read
-    + [X] keyword:accessor
-    + [X] keyword:export
-    + [X] setter:method-function
-    + [X] syntax:unquote-splice
-*** TODO Add entry for the =<method>= class in Level-1
-*** TODO Add details of the =<hash-table>= class and functions
-*** TODO Update stream module
-    to corresponding to the Youtoo implementation.
-*** DONE Add descriptions of constants to "Layout and Typography"
-    CLOSED: [2010-04-01 Thu 12:16]
-    in structure.tex.  Include details of constant instances of classes and
-    constant bindings to classes (class aliases).
-*** DONE <thread> vs <abstract-thread>
-    CLOSED: [2010-06-16 Wed 09:18]
-    Sort out the difference between the EuLisp definition and the Youtoo
-    implementation with respect to the name of the abstract base-class for
-    threads.  In the definition it is =<thread>= whereas in Youtoo it is
-    =<abstract-thread>= and =<thread>= is used for the currently used thread
-    type.
-*** DONE Reformat the =defgeneric= rewrite rules to conform to the others
-    CLOSED: [2010-04-23 Fri 08:39]
-*** DONE Consider reformatting all of the rewrite rules
-    CLOSED: [2010-04-23 Fri 08:40]
-    to be more consistent with the syntax description.
-*** TODO Add the return type to the syntax descriptions
-*** TODO Add "signatures" to all function descriptions
-*** DONE Change macro definitions to special operators
-    CLOSED: [2010-06-15 Tue 23:04]
-    It doesn't seem sensible to effectively specify that certain syntax MUST be
-    implemented as macros; surely this decision should be taken by the
-    implementers and for efficiency reasons it might be preferable that more of
-    the special operators are implemented as primitives of the language.
-*** TODO Finish the "Lexical Syntax" section
-    Provide a bit more background information.
-*** TODO Introduce the "Special Forms" list in /modules.tex/
-    Or move this list to a more appropriate place, /e.g./ at the beginning of
-    the section concerning "special forms".
-*** TODO Introduce the "Level-1" library and describe "module-1"
-*** TODO Re-reference definitions in the "Level-1" library
-    so that they do not clash with those in the "Level-0" library.
-*** TODO Remove the "syntax-category" entries from the index
-*** DONE Add =slice= generic function and methods
-    CLOSED: [2010-07-01 Thu 22:48]
-*** DONE Add destructive =<sequence>= generic functions =sort!= and =reverse!=
-    CLOSED: [2010-04-27 Tue 22:48]
-    Check for other =<sequence>= methods which should destructive variants.
-*** DONE Clarify the wording concerning the relationship between =nil= and =()=
-    CLOSED: [2010-05-09 Sun 21:09]
-    State that (eq 'nil '()) ==> t.
-*** DONE Replace =equal= with =binary==
-    CLOSED: [2010-05-14 Fri 14:30]
-    Remove the =equal= generic function and methods and introduce a complete set
-    of =binary== methods.
-*** DONE Change naming convention for predicates? and destructive! functions
-    CLOSED: [2010-06-09 Wed 10:46]
-    There is a suggestion in the definition documents suggesting that the
-    Scheme/T naming convention for predicates (end in ?) and destructive
-    functions (end in !) should be considered for EuLisp.  I agree with this
-    suggestion to improve consistency and readability and made the corresponding
-    changes including "null" -> "null?" and "atom" -> "atom?".
-*** TODO Add a Scheme-style =case= statement
-*** DONE Add a Scheme-style =else=
-    CLOSED: [2010-07-06 Tue 12:25]
-    for the default clause of =cond= and =case= forms.  =else= is simply an
-    alias for =t=.
-*** DONE Add =when= and =unless= conditional expressions
-    CLOSED: [2010-07-02 Fri 10:16]
-*** TODO Add =while= loop construct
-*** TODO Consider renaming =labels= -> =flet*=
-*** TODO Consider including =append=
-    either in generic form or just for lists and perhaps strings.
+* Eu2C
+*** DONE Hack CMUCL to write exponent "e"
+    CLOSED: [2010-08-30 Mon 11:15]
+    C required double precision numbers to be written with "e" rather
+    than the CL standard "d".
+*** DONE Hack CMUCL to support symbols with post-fix ":"
+    CLOSED: [2010-08-30 Mon 11:17]
+    Keywords in EuLisp are symbols with a post-fix ":" which is not allowed in
+    standard CL except as an extension.  Need to hack the CMUCL reader to
+    support symbols with a post-fix ":".
+*** DONE Reformat all CL and EuLisp code
+    CLOSED: [2010-08-30 Mon 14:15]
+    to conform to a traditional CL style extended to handle the EuLisp specific
+    forms, in particular =defmodule=.  The =eulisp-mode= for Emacs supplied now
+    conforms to this style and may be used to automatically re-indent code.
+*** TODO Reformat trailing parentheses in all CL and EuLisp code
+*** TODO Change the =initlist= keywords to use the post-fix ":"
+*** DONE Rename =<fixed-precision-integer>= -> =<int>=
+    CLOSED: [2010-08-30 Mon 14:35]
+*** TODO Rename predicate functions
+    Rename predicates ending in "-p" and "p" to use the post-fix "?".  Add the
+    post-fix "?" to =atom= and =null=.
+*** TODO Consider adding a special list for the keywords
+    Currently they are simply symbols which happen to end in a ":".
+*** TODO Add support for the default =superclass= in =defclass=
+    Currently the superclass MUST be specified but the definition states that if
+    the superclass is =()= then the default superclass =<object>= will be used.
+*** TODO Consider writing a =defclass= which supports multiple-inheritance
+    Currently only single-inheritance is supported by =defclass= as specified in
+    EuLisp Level-0 but it should be possible to add support for a list of
+    super-classes as specified in EuLisp Level-1.
+*** TODO Correct case handling for symbols
+    + Currently symbols or interned with capitalised names.
+    + This can only be corrected by enabling case-preservation in CL:
+    + (setf (readtable-case *readtable*) :preserve)
+    + The consequence is that all standard CL symbols must be written in
+      uppercase.
+*** TODO Test current thread implementation in 32bit
+    If it proves effective consider writing the 64bit equivalents of the pieces
+    of assembly code necessary for 64bit operation.
+*** TODO Consider replacing current =setjmp/longjmp= threads with =pthreads=
+*** TODO Change location of the [cho], {inst,def} and executable files
+    Currently the top-level =Makefile= does not set the location of the files
+    which are build-dependant.
 * Other
-*** TODO Complete emacs mode eulisp-mode.el for EuLisp
+*** DONE Complete emacs mode eulisp-mode.el for EuLisp
+    CLOSED: [2010-08-30 Mon 14:20]
 *** DONE Include emacs eulisp-mode.el in the git repository
     CLOSED: [2010-06-19 Sat 22:46]
 *** TODO Complete emacs inferior-mode inf-eulisp.el
+    for Youtoo and EuXLisp, it would not be useful for Eu2C which is
+    non-interactive, i.e. no REPL.

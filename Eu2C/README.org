@@ -559,13 +559,5 @@
       )
     ;;;-----------------------------------------------------------------------------
   #+END_SRC
-* TODO (This list is no where near complete)
-*** Correct case handling for symbols
-    + Currently symbols or interned with capitalised names.
-    + This can only be corrected by enabling case-preservation in CL:
-    + (setf (readtable-case *readtable*) :preserve)
-    + The consequence is that all standard CL symbols must be written in
-      uppercase.
-*** Change location of the [cho] and {inst,def} files generated
-    Currently the top-level =Makefile= does not set the location of the files
-    which are build-dependant.
+
+* [[file:../TODO.org][To Do]]
