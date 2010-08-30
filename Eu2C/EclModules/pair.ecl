@@ -31,7 +31,6 @@
 (import (eulisp-kernel)
  syntax (eulisp-kernel)
  expose ((only (consp
-                atom
                 cons
                 car
                 cdr

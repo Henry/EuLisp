@@ -66,94 +66,94 @@
 (%annotate-function
   acos new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   asin new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   atan new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   atan2 new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>))
-    ((var var2) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>))
+    ((var var2) (atom? <float>)))))
 
 (%annotate-function
   cos new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   sin new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   tan new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   cosh new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   sinh new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   tanh new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   exp new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   log new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   log10 new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   pow new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>))
-    ((var var2) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>))
+    ((var var2) (atom? <float>)))))
 
 (%annotate-function
   sqrt new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 
 )

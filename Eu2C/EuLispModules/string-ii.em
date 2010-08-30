@@ -101,18 +101,18 @@
 (%annotate-function
   equal-string new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <string>))
-    ((var var2) (atom <string>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <string>))
+    ((var var2) (atom? <string>)))))
 
 (%annotate-function
   stringp new-signature
   (((var0 var1)
-    ((var var0) (atom <string>))
-    ((var var1) (atom <string>)))
+    ((var var0) (atom? <string>))
+    ((var var1) (atom? <string>)))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom (and <object> (not <string>)))))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? (and <object> (not <string>)))))))
 
 
 ) ;end of string-0

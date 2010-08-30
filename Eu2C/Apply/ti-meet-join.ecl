@@ -215,7 +215,7 @@
         (arg-def (cdr def-list)))
     (cond ((eq ^var op-symbol)          ; VAR
            (make <type-var> :id (car arg-def)))
-          ((eq ^atom op-symbol)         ; ATOM
+          ((eq ^atom? op-symbol)         ; ATOM
            (eval-to-atom (car arg-def)))
           (t             ;; undefined
            (write-message ^warning "incorrect definition of a type expression:~%~A"

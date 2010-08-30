@@ -85,29 +85,29 @@
 (%annotate-function
   streamp new-signature
   (((var0 var1)
-    ((var var0) (atom (and <object> (not <null>))))
-    ((var var1) (atom <stream>)))
+    ((var var0) (atom? (and <object> (not <null>))))
+    ((var var1) (atom? <stream>)))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom (and <object> (not <stream>)))))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? (and <object> (not <stream>)))))))
 
 (%annotate-function
   file-stream-p new-signature
   (((var0 var1)
-    ((var var0) (atom (and <object> (not <null>))))
-    ((var var1) (atom <file-stream>)))
+    ((var var0) (atom? (and <object> (not <null>))))
+    ((var var1) (atom? <file-stream>)))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom (and <object> (not <file-stream>)))))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? (and <object> (not <file-stream>)))))))
 
 ;;(%annotate-function
 ;; character-stream-p new-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom (and <object> (not <null>))))
-;;   ((var var1) (atom <character-stream>)))
+;;   ((var var0) (atom? (and <object> (not <null>))))
+;;   ((var var1) (atom? <character-stream>)))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom (and <object> (not <character-stream>)))))))
+;;   ((var var0) (atom? <null>))
+;;   ((var var1) (atom? (and <object> (not <character-stream>)))))))
 
 
 )

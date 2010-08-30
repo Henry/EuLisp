@@ -22,12 +22,11 @@
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule float
-  (import (eulisp-kernel float-i)
+  (import (eulisp-kernel
+           float-i)
    syntax (eulisp-kernel)
    expose (float-generic)
-   export (floatp <float>))
-
-
+   export (floatp
+           <float>))
 )

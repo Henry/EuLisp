@@ -30,7 +30,8 @@
 #module null
 (import (eulisp-kernel)
  syntax (eulisp-kernel)
- export (nil)
+ export (nil
+         null?)
  expose ((only ($empty-list)
                el-modules)
          (only (null)
@@ -40,4 +41,10 @@
 
 (defconstant nil ())
 
+;; Rename the CL null -> null?
+(defun null? (a)
+  (null a))
+
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

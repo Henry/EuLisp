@@ -37,7 +37,7 @@
     tail
     ;;(only (cond and) syntax-0)
     ;;zyklus(only (print) print)
-    (only (atom) pair)
+    (only (atom?) pair)
     )
 
    syntax
@@ -58,7 +58,7 @@
 
 ;;   (defun map-option-list (function option-list)
 ;;     (cond ((null option-list) nil)
-;;           ((atom (cdr option-list))
+;;           ((atom? (cdr option-list))
 ;;            (warn "option list with uneven number of elements; last one was ~A"
 ;;                  (car option-list)))
 ;;           (t (funcall function (car option-list) (cadr option-list))
@@ -66,7 +66,7 @@
 
 ;;   (defun mapl-option-list (function option-list)
 ;;     (cond ((null option-list) nil)
-;;           ((atom (cdr option-list))
+;;           ((atom? (cdr option-list))
 ;;            (warn "option list with uneven number of elements; last one was ~A"
 ;;                  (car option-list)))
 ;;           (t (funcall function option-list)
@@ -77,7 +77,7 @@
          (when error-if-not-found?
                (warn "option ~A not found in option list ~A" key option-list))
          nil)
-        ((atom (cdr option-list))
+        ((atom? (cdr option-list))
          (warn "option list with uneven number of elements; last one was ~A"
                (car option-list))
          nil)
@@ -108,7 +108,7 @@
            (progn (warn "missing options: ~A "
                         required-options)
                   nil)))
-        ((atom (cdr option-list))
+        ((atom? (cdr option-list))
          (warn "option list with uneven number of elements; last one was ~A"
                (car option-list))
          nil)
@@ -142,7 +142,7 @@
 
 (defun cddr (obj) (cdr (cdr obj)))
 
-;;(defun atom (object)
+;;(defun atom? (object)
 ;;  (null (consp object)))
 
 ;;;-----------------------------------------------------------------------------
@@ -152,21 +152,21 @@
 ;; also defined in pair.am !
 
 ;;(%annotate-function
-;; atom new-signature
+;; atom? new-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom (and <object> (not <null>))))
-;;   ((var var1) (atom (and <object> (not <cons>)))))
+;;   ((var var0) (atom? (and <object> (not <null>))))
+;;   ((var var1) (atom? (and <object> (not <cons>)))))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom <cons>)))))
+;;   ((var var0) (atom? <null>))
+;;   ((var var1) (atom? <cons>)))))
 
 (%annotate-function
   find-option new-signature
   (((var0 var1 var2 var3)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <object>))
-    ((var var2) (atom <list>))
-    ((var var3) (atom <object>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? <list>))
+    ((var var3) (atom? <object>)))))
 
 )
 ;;#module-end

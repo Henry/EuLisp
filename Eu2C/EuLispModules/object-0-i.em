@@ -200,22 +200,22 @@
 (%annotate-function
   make new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <class>))
-    ((var var2) (atom <list>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <class>))
+    ((var var2) (atom? <list>)))))
 
 ;;(%annotate-function
 ;; standard-initialize new-signature
 ;;  (((var0 var1 var2 var3)
-;;    ((var var0) (atom <object>))
-;;    ((var var1) (atom <object>))
-;;    ((var var2) (atom <cons>))
-;;    ((var var3) (atom <list>)))
+;;    ((var var0) (atom? <object>))
+;;    ((var var1) (atom? <object>))
+;;    ((var var2) (atom? <cons>))
+;;    ((var var3) (atom? <list>)))
 ;;   ((var0 var1 var2 var3)
-;;    ((var var0) (atom <object>))
+;;    ((var var0) (atom? <object>))
 ;;    ((var var1) (var var0))
-;;    ((var var2) (atom <null>))
-;;    ((var var3) (atom <list>)))))
+;;    ((var var2) (atom? <null>))
+;;    ((var var3) (atom? <list>)))))
 
 ;;;-----------------------------------------------------------------------------
 ) ;end of module object-0-i

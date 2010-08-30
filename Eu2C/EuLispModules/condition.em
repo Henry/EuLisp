@@ -329,29 +329,29 @@
 ;;;-----------------------------------------------------------------------------
 (%annotate-function cerror new-signature
   (((var0 var1 var2 var3)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <string>))
-    ((var var2) (atom <class>))
-    ((var var3) (atom <list>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <string>))
+    ((var var2) (atom? <class>))
+    ((var var3) (atom? <list>)))))
 
 (%annotate-function error-with-signal-dynamic new-signature
   (((var0 var1 var2 var3)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <string>))
-    ((var var2) (atom <class>))
-    ((var var3) (atom <list>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <string>))
+    ((var var2) (atom? <class>))
+    ((var var3) (atom? <list>)))))
 
 (%annotate-function signal-dynamic new-signature
   (((var0 var1 var2 var3)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <condition>))
-    ((var var2) (atom <object>)) ; supposed to be <continuation>
-    ((var var3) (atom <list>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <condition>))
+    ((var var2) (atom? <object>)) ; supposed to be <continuation>
+    ((var var3) (atom? <list>)))))
 
 (%annotate-function error-handler-with-format new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <condition>))
-    ((var var2) (atom <object>))))) ; supposed to be <continuation>
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <condition>))
+    ((var var2) (atom? <object>))))) ; supposed to be <continuation>
 
 )

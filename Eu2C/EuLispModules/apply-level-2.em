@@ -120,6 +120,7 @@
 
 (%annotate-function cons is-special-function cons)
 (%annotate-function null is-special-function null)
+;;(%annotate-function null? is-special-function null?)
 (%annotate-function eq is-special-function eq)
 
 (%annotate-function no-applicable-method-error is-special-function no-applicable-method-error)

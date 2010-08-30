@@ -28,23 +28,20 @@
 ;;;-----------------------------------------------------------------------------
 
 #module option-lists
-
 (import (eulisp0
          pair-ext
          list-ext
-         (only (format find remove) common-lisp))
-
- syntax (eulisp0
-         ;;(only (when) level-1-eulisp)
-         )
-
+         (only (format
+                find
+                remove)
+               common-lisp))
+ syntax (eulisp0)
  export (map-option-list
          find-option
          get-option
          replace-option-value
          check-options
-         mapl-option-list)
- )
+         mapl-option-list))
 
 ;;;-----------------------------------------------------------------------------
 ;;; errors, should be replaced by condition signalling
@@ -67,20 +64,20 @@
         ((eq condition <option-not-found>)
          (format t "~%ERROR: option ~A not found in option list ~A"
                  (get-option 'option initlist nil)
-                 (get-option 'options initlist nil)))
-        ))
+                 (get-option 'options initlist nil)))))
+
 ;;;-----------------------------------------------------------------------------
 
 (defun map-option-list (function option-list)
   (cond ((null option-list) nil)
-        ((atom (cdr option-list))
+        ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list)))
         (t (funcall function (car option-list) (cadr option-list))
            (map-option-list function (cddr option-list)))))
 
 (defun mapl-option-list (function option-list)
   (cond ((null option-list) nil)
-        ((atom (cdr option-list))
+        ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list)))
         (t (funcall function option-list)
            (mapl-option-list function (cddr option-list)))))
@@ -88,9 +85,10 @@
 (defun find-option (key option-list error-if-not-found?)
   (cond ((null option-list)
          (when error-if-not-found?
-               (option-error <option-not-found> 'option key 'options option-list))
+               (option-error <option-not-found>
+                             'option key 'options option-list))
          nil)
-        ((atom (cdr option-list))
+        ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list))
          nil)
         ((eq key (car option-list))
@@ -120,7 +118,7 @@
            (progn (option-error <mising-options>
                                 'options required-options)
                   nil)))
-        ((atom (cdr option-list))
+        ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list))
          nil)
         ((find (car option-list) required-options)
@@ -140,6 +138,5 @@
          (check-options required-options facultative-options multiple-options
                         (cddr option-list))
          nil)))
-
 
 #module-end

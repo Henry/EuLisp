@@ -203,7 +203,7 @@
               (find-in-mac-env operator))
          (transsyn (call (find-in-mac-env operator)
                          EXPRS)))
-        ((atom operator)
+        ((atom? operator)
          ;; this is for identifiers and function objects in operator position
          (cons operator (transsyn* EXPRS)))
         (t (transsyn-listop (cons (transsyn operator)
@@ -515,7 +515,7 @@
   (make-defined-sym LIT))
 
 (defun lzslit-list (list)
-  (cond ((atom list)
+  (cond ((atom? list)
          (lzslit list))
         ((eq (car list) ^%literal)
          (trans list))
@@ -881,7 +881,7 @@
       (make-undefined-function fun)))
 
 (deftrans ((operator) . ARGS)
-  (cond ((atom operator)
+  (cond ((atom? operator)
          ;; this is for identifiers and function objects in operator position
          (make-instance <app>
                         :function (trans-function operator)

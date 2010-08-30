@@ -110,11 +110,11 @@
 (defun check-syntax-components (pattern expr)
   (cond ((null pattern)
          (null expr))
-        ((atom pattern)
+        ((atom? pattern)
          (true-list-p expr))
         ((null expr)
          nil)
-        ((atom expr)
+        ((atom? expr)
          nil)
         (t
          (check-syntax-components (cdr pattern) (cdr expr)))))

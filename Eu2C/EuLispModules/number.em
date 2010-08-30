@@ -145,91 +145,91 @@
 (%annotate-function
   + new-signature
   (((var0 var1)
-    ((var var0) (atom fpi-zero))
-    ((var var1) (atom <null>)))
+    ((var var0) (atom? fpi-zero))
+    ((var var1) (atom? <null>)))
    ((var0 var1)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <cons>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <cons>)))))
 
 (%annotate-function
   - new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <number>))
+    ((var var0) (atom? <number>))
     ((var var1) (var var0))
-    ((var var2) (atom <null>)))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <number>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <number>))
+    ((var var2) (atom? <cons>)))))
 
 (%annotate-function
   * new-signature
   (((var0 var1)
-    ((var var0) (atom fpi-one))
-    ((var var1) (atom <null>)))
+    ((var var0) (atom? fpi-one))
+    ((var var1) (atom? <null>)))
    ((var0 var1)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <cons>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <cons>)))))
 
 (%annotate-function
   / new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <number>))
+    ((var var0) (atom? <number>))
     ((var var1) (var var0))
-    ((var var2) (atom <null>)))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <number>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <number>))
+    ((var var2) (atom? <cons>)))))
 
 (%annotate-function
   % new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <number>))
+    ((var var0) (atom? <number>))
     ((var var1) (var var0))
-    ((var var2) (atom <null>)))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <number>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <number>))
+    ((var var2) (atom? <cons>)))))
 
 (%annotate-function
   gcd new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <number>))
+    ((var var0) (atom? <number>))
     ((var var1) (var var0))
-    ((var var2) (atom <null>)))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <number>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <number>))
+    ((var var2) (atom? <cons>)))))
 
 (%annotate-function
   lcm new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <number>))
+    ((var var0) (atom? <number>))
     ((var var1) (var var0))
-    ((var var2) (atom <null>)))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <number>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <number>))
+    ((var var2) (atom? <cons>)))))
 
 (%annotate-function
   abs new-signature
   (((var0 var1)
-    ((var var0) (atom <number>))
+    ((var var0) (atom? <number>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   positivep new-signature
   (((var0 var1)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <object>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <object>)))))
 
 (%annotate-function
   negativep new-signature
   (((var0 var1)
-    ((var var0) (atom <number>))
-    ((var var1) (atom <object>)))))
+    ((var var0) (atom? <number>))
+    ((var var1) (atom? <object>)))))
 )

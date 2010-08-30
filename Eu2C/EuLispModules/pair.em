@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -30,25 +30,27 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule pair
-
   (import (tail
-           (only (consp) basic-syntax)
+           (only (consp)
+                 basic-syntax)
            basic-list
            basic-compare
-           (only (make-fpint) eulisp-kernel)
-           )
+           (only (make-fpint)
+                 eulisp-kernel))
    syntax (tail
-           (only (cond) syntax-0)
-           )
-   export (atom
+           (only (cond)
+                 syntax-0))
+   export (atom?
            consp
            copy-alist
            copy-list
-           copy-tree
-           )
-   expose ((only (<cons> cons car cdr list)
-                 basic-list))
-   )
+           copy-tree)
+   expose ((only (<cons>
+                  cons
+                  car
+                  cdr
+                  list)
+                 basic-list)))
 
 ;;(%define-function (consp <list>)       defined in basic-syntax
 ;;                  ((object <object>))
@@ -56,7 +58,7 @@
 ;;    object
 ;;    () ))
 
-(defun atom (object)    ;consp? z.z. nicht mšglich 1.8.93
+(defun atom? (object)    ;consp? z.z. nicht mšglich 1.8.93
   (if (consp object)     ;versuch (?identifier NIL)???in el2lzs
       ()
     't))
@@ -82,8 +84,8 @@
     #%i0))
 
 (defun copy-alist (alist)
-  (cond ((atom alist) alist)
-        ((atom (car alist))
+  (cond ((atom? alist) alist)
+        ((atom? (car alist))
          (cons (car alist)
                (copy-alist (cdr alist))))
         (t (cons (cons (car (car alist))
@@ -91,12 +93,12 @@
                  (copy-alist (cdr alist))))))
 
 (defun copy-list (list)
-  (if (atom list) list
+  (if (atom? list) list
     (cons (car list)
           (copy-list (cdr list)))))
 
 (defun copy-tree (tree)
-  (if (atom tree) tree
+  (if (atom? tree) tree
     (cons (copy-tree (car tree))
           (copy-tree (cdr tree)))))
 
@@ -108,44 +110,44 @@ generic-write
 ;;;-----------------------------------------------------------------------------
 
 (%annotate-function
-  atom new-signature
+  atom? new-signature
   (((var0 var1)
-    ((var var0) (atom (and <object> (not <null>))))
-    ((var var1) (atom (and <object> (not <cons>)))))
+    ((var var0) (atom? (and <object> (not <null>))))
+    ((var var1) (atom? (and <object> (not <cons>)))))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <cons>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <cons>)))))
 
 (%annotate-function
   copy-alist new-signature
   (((var0 var1)
-    ((var var0) (atom <list>))
+    ((var var0) (atom? <list>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   copy-list new-signature
   (((var0 var1)
-    ((var var0) (atom <list>))
+    ((var var0) (atom? <list>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   copy-tree new-signature
   (((var0 var1)
-    ((var var0) (atom <list>))
+    ((var var0) (atom? <list>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   length-pair-1 new-signature
   (((var0 var1)
-    ((var var0) (atom %signed-word-integer))
-    ((var var1) (atom <cons>)))))
+    ((var var0) (atom? %signed-word-integer))
+    ((var var1) (atom? <cons>)))))
 
 (%annotate-function
   length-pair new-signature
   (((var0 var1)
-    ((var var0) (atom <int>))
-    ((var var1) (atom <cons>)))))
+    ((var var0) (atom? <int>))
+    ((var var1) (atom? <cons>)))))
 
 ;;;-----------------------------------------------------------------------------
-
 ) ;end of module pair
+;;;-----------------------------------------------------------------------------

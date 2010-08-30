@@ -217,7 +217,7 @@
   (ti-def-write-vector stream expr 0))
 
 (defmethod ti-def-write (stream (expr <atomic-type>))
-  (format stream "(atom ")
+  (format stream "(atom? ")
   (let ((name (?name expr)))
     (if (consp name)
         (ti-write-list-enclosed stream (?name expr) t)

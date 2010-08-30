@@ -189,33 +189,33 @@
 ;;(%annotate-function
 ;; characterp new-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom (not <null>)))
-;;   ((var var1) (atom <character>)))
+;;   ((var var0) (atom? (not <null>)))
+;;   ((var var1) (atom? <character>)))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom (not <character>))))))
+;;   ((var var0) (atom? <null>))
+;;   ((var var1) (atom? (not <character>))))))
 
 (%annotate-function
   equal-character new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <character>))
-    ((var var2) (atom <character>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <character>))
+    ((var var2) (atom? <character>)))
    ((var0 var1 var2)
-    ((var var0) (atom <character>))
+    ((var var0) (atom? <character>))
     ((var var1) (var var0))
     ((var var2) (var var0)))))
 
 (%annotate-function
   as-lowercase new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
+    ((var var0) (atom? <object>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   as-uppercase new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
+    ((var var0) (atom? <object>))
     ((var var1) (var var0)))))
 
 )

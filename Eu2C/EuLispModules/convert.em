@@ -64,8 +64,8 @@
 (%annotate-function
   convert new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <object>))
-    ((var var2) (atom <class>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? <class>)))))
 
 )

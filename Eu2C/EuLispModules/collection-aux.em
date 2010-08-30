@@ -28,70 +28,59 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection-aux
-
-  (import
-   (apply
-    tail
-    eulisp-kernel
-    (only (make-string string-pointer allocate-%string) string-ii)
-    collection-convert
-    (only (binary+ binary<)
-          int
-          ;; number ;take not this: recursive module load
-          )
-    basic-list
-    (only (list atom)
-          pair)
-    (only (eql)
-          compare)
-    (only (print)
-          print)
-    (only (<string>
-           stringp
-           )
-          string)
-    character
-    vector
-
-
-    (only (<table>
-           tablep
-           table-ref
-           ?fill-value)
-          table)
-    (only ($standard-table-size)
-          table-aux)
-
-
-    (only (
-           construct-collection-info ; all defgenerics
-           ;;construct-result ; it is a function now
-           take-next-elt)
-          collection-generic)
-    collection-i
-
-    (only (strlen) c-string-interface)
-    )
-
-   syntax
-   (tail
-    apply
-    syntax-0
-    setf
-    )
-
-   export
-   (
-    ;;construct-collection-info
-    ;;construct-result
-    ;;take-next-elt
-    reverse-list
-    test-range-indizes
-    anyp-collection
-    concat-collection
-    do-collection
-    map-collection)
-   )
+  (import (apply
+           tail
+           eulisp-kernel
+           (only (make-string
+                  string-pointer
+                  allocate-%string)
+                 string-ii)
+           collection-convert
+           (only (binary+
+                  binary<)
+                 int
+                 ;; number ;take not this: recursive module load
+                 )
+           basic-list
+           (only (list
+                  atom?)
+                 pair)
+           (only (eql)
+                 compare)
+           (only (print)
+                 print)
+           (only (<string>
+                  stringp
+                  )
+                 string)
+           character
+           vector
+           (only (<table>
+                  tablep
+                  table-ref
+                  ?fill-value)
+                 table)
+           (only ($standard-table-size)
+                 table-aux)
+           (only (construct-collection-info ; all defgenerics
+                  ;;construct-result ; it is a function now
+                  take-next-elt)
+                 collection-generic)
+           collection-i
+           (only (strlen) c-string-interface))
+   syntax (tail
+           apply
+           syntax-0
+           setf)
+   export (;;construct-collection-info
+           ;;construct-result
+           ;;take-next-elt
+           reverse-list
+           test-range-indizes
+           anyp-collection
+           concat-collection
+           do-collection
+           map-collection))
 
 ;; with funcall
 ;; (defun take-next-list-element (lst)
@@ -432,13 +421,13 @@
     element))
 
 (defun nconc2 (liste element)
-  (if (atom (cdr liste))
+  (if (atom? (cdr liste))
       (setf (cdr liste) element)
     (nconc2 (cdr liste) element)))
 
 ;;  (defun nconc1 (liste element)
 ;;    (if (consp liste)
-;;      (if (atom (cdr liste))
+;;      (if (atom? (cdr liste))
 ;;        (progn
 ;;          (setf (cdr liste) element)
 ;;          liste)

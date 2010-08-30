@@ -146,20 +146,20 @@
 (%annotate-function
   gensym new-signature
   (((var0 var1)
-    ((var var0) (atom <symbol>))
-    ((var var1) (atom <list>)))))
+    ((var var0) (atom? <symbol>))
+    ((var var1) (atom? <list>)))))
 
 (%annotate-function
   gensym1 new-signature
   (((var0 var1)
-    ((var var0) (atom <symbol>))
-    ((var var1) (atom <string>)))))
+    ((var var0) (atom? <symbol>))
+    ((var var1) (atom? <string>)))))
 
 (%annotate-function
   symbol-exists-p new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <string>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <string>)))))
 
 ;;;-----------------------------------------------------------------------------
 ) ;; end of symbol

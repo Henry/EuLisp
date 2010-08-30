@@ -259,21 +259,21 @@
 (%annotate-function
   assq new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <object>))
-    ((var var2) (atom <null>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <object>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? <cons>)))))
 
 (%annotate-function
   assoc new-signature
   (((var0 var1 var2 var3)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <object>))
-    ((var var2) (atom <list>))
-    ((var var3) (atom <object>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? <list>))
+    ((var var3) (atom? <object>)))))
 
 );;;eof
 

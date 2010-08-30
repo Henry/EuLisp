@@ -43,20 +43,20 @@
 ;;(%annotate-function
 ;; int-p new-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom (and <object> (not <null>))))
-;;   ((var var1) (atom <int>)))
+;;   ((var var0) (atom? (and <object> (not <null>))))
+;;   ((var var1) (atom? <int>)))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom (and <object> (not <int>)))))))
+;;   ((var var0) (atom? <null>))
+;;   ((var var1) (atom? (and <object> (not <int>)))))))
 
 (%annotate-function
   int-p new-signature
   (((var0 var1)
-    ((var var0) (atom <int>))
-    ((var var1) (atom <int>)))
+    ((var var0) (atom? <int>))
+    ((var var1) (atom? <int>)))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom (and <object> (not <int>)))))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? (and <object> (not <int>)))))))
 
 ;;;-----------------------------------------------------------------------------
 )

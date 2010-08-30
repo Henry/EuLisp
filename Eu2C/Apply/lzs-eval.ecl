@@ -54,12 +54,20 @@
          lzs
          eval-basic
          el2lzs-error
-         (only (find-module) el2lzs-main)
-         (only (mapcar mapc assoc rest first append char-code)
+         (only (find-module)
+               el2lzs-main)
+         (only (mapcar
+                mapc
+                assoc
+                rest
+                first
+                append
+                char-code)
                common-lisp))
  syntax (eulisp1
          eval-basic
-         (only (push) common-lisp))
+         (only (push)
+               common-lisp))
  export (eval
          set-interpreter
          call)
@@ -110,7 +118,7 @@
 
 (defun make-list-syntactic (l)
   (cond ((null l) nil)
-        ((atom l) (make-syntactic l))
+        ((atom? l) (make-syntactic l))
         (t (cons (make-list-syntactic (car l))
                  (make-list-syntactic (cdr l))))))
 
@@ -256,7 +264,7 @@
     ;;--- list
     null
     consp
-    atom
+    atom?
     cons
     car
     cdr

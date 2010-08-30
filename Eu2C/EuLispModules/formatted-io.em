@@ -527,17 +527,17 @@
 (%annotate-function
   format new-signature
   (((var0 var1 var2 var3)
-    ((var var0) (atom <list>))
-    ((var var1) (atom <object>))
-    ((var var2) (atom <string>))
-    ((var var3) (atom <list>)))))
+    ((var var0) (atom? <list>))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? <string>))
+    ((var var3) (atom? <list>)))))
 
 (%annotate-function
   scan new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <list>))
-    ((var var1) (atom <string>))
-    ((var var2) (atom <list>)))))
+    ((var var0) (atom? <list>))
+    ((var var1) (atom? <string>))
+    ((var var2) (atom? <list>)))))
 
 ;;;-----------------------------------------------------------------------------
 ) ;; end of module

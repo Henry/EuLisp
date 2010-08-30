@@ -371,7 +371,7 @@
 (defmethod gen-structured-literal ((obj <pair>))
   (labels ((gen-list (l)
                      (cond ((null l) nil)
-                           ((atom l) (gen-literal l))
+                           ((atom? l) (gen-literal l))
                            (t (cons (gen-list (car l))
                                     (gen-list (cdr l)))))))
           (gen-list obj)))

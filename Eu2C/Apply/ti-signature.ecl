@@ -499,7 +499,7 @@
   (let ((prev-descr (?t-descr-before descr))
         (expr (vector-ref (?type-vec descr) index))
         (subs (?type-vars descr)))
-    (if (and prev-descr (atom prev-descr))
+    (if (and prev-descr (atom? prev-descr))
         (convert-to-atomic-type expr subs (?type-vars prev-descr))
       (convert-to-atomic-type expr subs))))
 
@@ -519,7 +519,7 @@
 (defun get-previous-subs (descr)
   (let ((prev-descr (?t-descr-before descr)))
     (if prev-descr
-        (if (atom prev-descr)
+        (if (atom? prev-descr)
             (let ((prev-subs (ti-copy-subs (?type-vars prev-descr))))
               (append-substitutions (?type-vars descr) prev-subs))
           (ti-format t "~%Notice: more than one previous descriptor"))

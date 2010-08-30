@@ -872,140 +872,140 @@
 ;;(%annotate-function
 ;; input-stream-p new-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom (and <object> (not <null>))))
-;;   ((var var1) (atom <input-stream>)))
+;;   ((var var0) (atom? (and <object> (not <null>))))
+;;   ((var var1) (atom? <input-stream>)))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom (and <object> (not <input-stream>)))))))
+;;   ((var var0) (atom? <null>))
+;;   ((var var1) (atom? (and <object> (not <input-stream>)))))))
 ;;
 ;;(%annotate-function
 ;; output-stream-p new-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom (and <object> (not <null>))))
-;;   ((var var1) (atom <output-stream>)))
+;;   ((var var0) (atom? (and <object> (not <null>))))
+;;   ((var var1) (atom? <output-stream>)))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom (and <object> (not <output-stream>)))))))
+;;   ((var var0) (atom? <null>))
+;;   ((var var1) (atom? (and <object> (not <output-stream>)))))))
 
 ;;(%annotate-function
 ;; input extend-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom <character>))
-;;   ((var var1) (atom <character-stream>)))
+;;   ((var var0) (atom? <character>))
+;;   ((var var1) (atom? <character-stream>)))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <object>))
-;;   ((var var1) (atom (and <stream> (not <character-stream>)))))))
+;;   ((var var0) (atom? <object>))
+;;   ((var var1) (atom? (and <stream> (not <character-stream>)))))))
 
 (%annotate-function
   input new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <stream>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <stream>)))))
 
 ;;(%annotate-function
 ;; uninput new-signature
 ;; (((var0 var1 var2)
-;;   ((var var0) (atom <symbol>))
-;;   ((var var1) (atom <character-stream>))
-;;   ((var var2) (atom <character>)))
+;;   ((var var0) (atom? <symbol>))
+;;   ((var var1) (atom? <character-stream>))
+;;   ((var var2) (atom? <character>)))
 ;;  ((var0 var1 var2)
-;;   ((var var0) (atom <symbol>))
-;;   ((var var1) (atom (and <stream> (not <character-stream>))))
-;;   ((var var2) (atom (and <object> (not <character>)))))))
+;;   ((var var0) (atom? <symbol>))
+;;   ((var var1) (atom? (and <stream> (not <character-stream>))))
+;;   ((var var2) (atom? (and <object> (not <character>)))))))
 
 (%annotate-function
   uninput new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <symbol>))
-    ((var var1) (atom <stream>))
-    ((var var2) (atom <object>)))))
+    ((var var0) (atom? <symbol>))
+    ((var var1) (atom? <stream>))
+    ((var var2) (atom? <object>)))))
 
 (%annotate-function
   read-line new-signature
   (((var0 var1)
-    ((var var0) (atom <string>))
-    ((var var1) (atom <stream>)))))
+    ((var var0) (atom? <string>))
+    ((var var1) (atom? <stream>)))))
 
 (%annotate-function
   %write-string new-signature
   (((var0 var1 var2)
-    ((var var0) (atom %signed-word-integer))
-    ((var var1) (atom <stream>))
-    ((var var2) (atom %string)))))
+    ((var var0) (atom? %signed-word-integer))
+    ((var var1) (atom? <stream>))
+    ((var var2) (atom? %string)))))
 
 (%annotate-function
   push-string new-signature
   (((var0 var1 var2 var3 var4)
-    ((var var0) (atom %void))
-    ((var var1) (atom %string))
-    ((var var2) (atom %signed-word-integer))
-    ((var var3) (atom %signed-word-integer))
-    ((var var4) (atom <string-stack>)))))
+    ((var var0) (atom? %void))
+    ((var var1) (atom? %string))
+    ((var var2) (atom? %signed-word-integer))
+    ((var var3) (atom? %signed-word-integer))
+    ((var var4) (atom? <string-stack>)))))
 
 (%annotate-function
   ensure-open-stream new-signature
   (((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <stream>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <stream>)))
    ((var0 var1)
-    ((var var0) (atom <stream>))
+    ((var var0) (atom? <stream>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   input-stream-p new-signature
   (((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <object>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <object>)))
    ((var0 var1)
-    ((var var0) (atom <stream>))
+    ((var var0) (atom? <stream>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   ensure-open-input-stream new-signature
   (((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <stream>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <stream>)))
    ((var0 var1)
-    ((var var0) (atom <stream>))
+    ((var var0) (atom? <stream>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   ensure-open-character-input-stream new-signature
   (((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <stream>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <stream>)))
    ((var0 var1)
-    ((var var0) (atom <stream>))
+    ((var var0) (atom? <stream>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   convert-stream-string new-signature
   (((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <object>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <object>)))
    ((var0 var1)
-    ((var var0) (atom <string>))
-    ((var var1) (atom <string-stream>)))))
+    ((var var0) (atom? <string>))
+    ((var var1) (atom? <string-stream>)))))
 
 (%annotate-function
   standard-error-stream new-signature
   (((var0)
-    ((var var0) (atom <stream>)))))
+    ((var var0) (atom? <stream>)))))
 
 (%annotate-function
   standard-input-stream new-signature
   (((var0)
-    ((var var0) (atom <stream>)))))
+    ((var var0) (atom? <stream>)))))
 
 (%annotate-function
   standard-output-stream new-signature
   (((var0)
-    ((var var0) (atom <stream>)))))
+    ((var var0) (atom? <stream>)))))
 
 (%annotate-function
   default-eos-action new-signature
   (((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <object>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <object>)))))
 
 )

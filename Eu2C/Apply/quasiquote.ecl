@@ -51,7 +51,7 @@
 ;; Quasi-quoting
 
 (defun unquote-constructor (x)
-  (cond ((atom x)
+  (cond ((atom? x)
          (cond ((or (null x) (numberp x) (stringp x) (eq x t)) x)
                (t (mkquote x))))
 
@@ -66,7 +66,7 @@
                  (unquote-constructor (cdr x))))))
 
 (defun contains-no-unquote (x)
-  (cond ((atom x) t)
+  (cond ((atom? x) t)
         ((or (eq (car x) ^unquote) (eq (car x) ^unquote-splicing))
          nil)
         (t (and (contains-no-unquote (car x))
@@ -74,7 +74,7 @@
 
 (defun mkquote (x) (list ^quote x))
 
-(defun eqcar (a b) (cond ((atom a) nil) ((eq (car a) b) t) (t nil)))
+(defun eqcar (a b) (cond ((atom? a) nil) ((eq (car a) b) t) (t nil)))
 
 ;; (defmacro quasiquote (dummy form) (unquote-constructor form))
 

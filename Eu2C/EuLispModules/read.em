@@ -42,7 +42,7 @@
                    %eq %gt %lt
                    t) tail)
     (only (<cons> <null> <list>
-                  null consp cons car %pair-length
+                  null null? consp cons car %pair-length
                   eq
                   %minus %lshiftr
                   %and %ge
@@ -794,13 +794,13 @@
 
 (%annotate-function input new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <stream>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <stream>)))))
 
 (%annotate-function read new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <list>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <list>)))))
 
 ;;;-----------------------------------------------------------------------------
 )

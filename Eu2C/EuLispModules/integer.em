@@ -55,23 +55,23 @@
 (%annotate-function
   integerp new-signature
   (((var0 var1)
-    ((var var0) (atom <integer>))
-    ((var var1) (atom <integer>)))
+    ((var var0) (atom? <integer>))
+    ((var var1) (atom? <integer>)))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom (and <object> (not <integer>)))))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? (and <object> (not <integer>)))))))
 
 (%annotate-function
   evenp new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <integer>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <integer>)))))
 
 (%annotate-function
   oddp new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <integer>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <integer>)))))
 
 ;;;-----------------------------------------------------------------------------
 )

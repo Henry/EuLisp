@@ -28,53 +28,47 @@
 ;;;-----------------------------------------------------------------------------
 
 #module string
-
-(import
- (eulisp-kernel
-  (only (code-char char string< string> subseq concatenate
-                   stringp
-                   copy-seq
-                   string<
-                   numberp
-                   string-downcase
-                   string-upcase
-                   )
-        common-lisp)
-  (rename ((make-string cl:make-string))
-          common-lisp)
-  (only (binary<) compare-generic)
-  character-generic ; as-lowercase as-uppercase
-  copy-generic ; deep-copy shallow-copy
+(import (eulisp-kernel
+         (only (code-char
+                char
+                string
+                <string>
+                subseq
+                concatenate
+                stringp
+                copy-seq
+                string<
+                numberp
+                string-downcase
+                string-upcase)
+               common-lisp)
+         (rename ((make-string cl:make-string))
+                 common-lisp)
+         (only (binary<) compare-generic)
+         character-generic ; as-lowercase as-uppercase
+         copy-generic ; deep-copy shallow-copy
   )
-
- export
- (make-string
-  string-ref        ; not in el
-  string-lt         ; not in el
-  string-gt         ; not in el
-  string-slice      ; not in el
-  string-append     ; not in el
+ export (make-string
+         string-ref        ; not in el
+         string-lt         ; not in el
+         string-gt         ; not in el
+         string-slice      ; not in el
+         string-append     ; not in el
   )
-
- export
- (
-  ;;converter
-  deep-copy
-  shallow-copy
-  binary<
-  as-lowercase
-  as-uppercase)
-
- expose
- ((only (stringp equal) common-lisp))
-
- syntax
- (eulisp-kernel
-  (rename ((defun cl:defun))
-          common-lisp)
-  (only (&optional)
-        common-lisp)))
-
+ export (;;converter
+         deep-copy
+         shallow-copy
+         binary<
+         as-lowercase
+         as-uppercase)
+ expose ((only (stringp
+                equal)
+               common-lisp))
+ syntax (eulisp-kernel
+         (rename ((defun cl:defun))
+                 common-lisp)
+         (only (&optional)
+               common-lisp)))
 
 (make-eulisp-class string)
 

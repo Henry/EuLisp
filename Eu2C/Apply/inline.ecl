@@ -121,7 +121,7 @@
 
 (defun specialize-inline-descr-p (new-descr old-descrs)
   (let ((prev-descr (?t-descr-before new-descr)))
-    (if (and prev-descr (atom prev-descr))
+    (if (and prev-descr (atom? prev-descr))
         (if (member prev-descr old-descrs)
             prev-descr
           (specialize-inline-descr-p prev-descr old-descrs))

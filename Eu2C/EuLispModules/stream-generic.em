@@ -84,26 +84,26 @@
 (%annotate-function
   close new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <stream>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <stream>)))))
 
 (%annotate-function
   flush new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <stream>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <stream>)))))
 
 (%annotate-function
   stream-position new-signature
   (((var0 var1)
-    ((var var0) (atom (or <null> <integer>)))
-    ((var var1) (atom <stream>)))))
+    ((var var0) (atom? (or <null> <integer>)))
+    ((var var1) (atom? <stream>)))))
 
 (%annotate-function
   output new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <stream>))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <stream>))
     ((var var2) (var var0)))))
 
 ;; read-line needs <string> ! Moved to stream-i.am.
@@ -111,15 +111,15 @@
 (%annotate-function
   generic-write new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
+    ((var var0) (atom? <object>))
     ((var var1) (var var0))
-    ((var var2) (atom <stream>)))))
+    ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   generic-prin new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
+    ((var var0) (atom? <object>))
     ((var var1) (var var0))
-    ((var var2) (atom <stream>)))))
+    ((var var2) (atom? <stream>)))))
 
 )

@@ -47,6 +47,7 @@
                   <cons>
                   <list>
                   null
+                  null?
                   cons
                   car
                   cdr
@@ -55,7 +56,7 @@
                   nil
                   t)
                  basic-list)
-           (only (atom)
+           (only (atom?)
                  pair))
    export (deep-copy
            equal
@@ -112,9 +113,9 @@
 ;;;-----------------------------------------------------------------------------
 (%annotate-function equal-cons new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <cons>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <cons>))
+    ((var var2) (atom? <cons>)))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

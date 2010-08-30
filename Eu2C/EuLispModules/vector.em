@@ -284,23 +284,23 @@
 ;;(%annotate-function
 ;; vectorp new-signature
 ;; (((var0 var1)
-;;   ((var var0) (atom (not <null>)))
-;;   ((var var1) (atom <vector>)))
+;;   ((var var0) (atom? (not <null>)))
+;;   ((var var1) (atom? <vector>)))
 ;;  ((var0 var1)
-;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom (not <vector>))))))
+;;   ((var var0) (atom? <null>))
+;;   ((var var1) (atom? (not <vector>))))))
 
 (%annotate-function
   make-initialized-vector new-signature
   (((var0 var1)
-    ((var var0) (atom <vector>))
-    ((var var1) (atom <list>)))))
+    ((var var0) (atom? <vector>))
+    ((var var1) (atom? <list>)))))
 
 (%annotate-function
   equal-vector new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <vector>))
-    ((var var2) (atom <vector>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <vector>))
+    ((var var2) (atom? <vector>)))))
 
 ) ;end of vector

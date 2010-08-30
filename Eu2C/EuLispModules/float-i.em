@@ -42,20 +42,20 @@
 ;;  (%annotate-function
 ;;   floatp new-signature
 ;;   (((var0 var1)
-;;     ((var var0) (atom (not <null>)))
-;;     ((var var1) (atom <float>)))
+;;     ((var var0) (atom? (not <null>)))
+;;     ((var var1) (atom? <float>)))
 ;;    ((var0 var1)
-;;     ((var var0) (atom <null>))
-;;     ((var var1) (atom (not <float>))))))
+;;     ((var var0) (atom? <null>))
+;;     ((var var1) (atom? (not <float>))))))
 
 (%annotate-function
   floatp new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom (and <object> (not <float>)))))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? (and <object> (not <float>)))))))
 
 
 

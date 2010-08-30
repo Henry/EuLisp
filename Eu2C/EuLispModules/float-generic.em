@@ -44,26 +44,26 @@
 (%annotate-function
   ceiling new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   floor new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   round new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 (%annotate-function
   truncate new-signature
   (((var0 var1)
-    ((var var0) (atom <float>))
-    ((var var1) (atom <float>)))))
+    ((var var0) (atom? <float>))
+    ((var var1) (atom? <float>)))))
 
 
 

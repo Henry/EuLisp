@@ -701,138 +701,138 @@
 ;;(%annotate-function
 ;; %write-string new-signature
 ;; (((var0 var1 var2)
-;;   ((var var0) (atom %signed-word-integer))
-;;   ((var var1) (atom <stream>))
-;;   ((var var2) (atom %string)))))
+;;   ((var var0) (atom? %signed-word-integer))
+;;   ((var var1) (atom? <stream>))
+;;   ((var var2) (atom? %string)))))
 
 ;;(%annotate-function
 ;; push-string new-signature
 ;; (((var0 var1 var2 var3 var4)
-;;   ((var var0) (atom %void))
-;;   ((var var1) (atom %string))
-;;   ((var var2) (atom %signed-word-integer))
-;;   ((var var3) (atom %signed-word-integer))
-;;   ((var var4) (atom <string-stack>)))))
+;;   ((var var0) (atom? %void))
+;;   ((var var1) (atom? %string))
+;;   ((var var2) (atom? %signed-word-integer))
+;;   ((var var3) (atom? %signed-word-integer))
+;;   ((var var4) (atom? <string-stack>)))))
 
 (%annotate-function
   %write-hex new-signature
   (((var0 var1 var2)
-    ((var var0) (atom %signed-word-integer))
-    ((var var1) (atom <stream>))
-    ((var var2) (atom <object>)))))
+    ((var var0) (atom? %signed-word-integer))
+    ((var var1) (atom? <stream>))
+    ((var var2) (atom? <object>)))))
 
 (%annotate-function
   %write-int new-signature
   (((var0 var1 var2)
-    ((var var0) (atom %signed-word-integer))
-    ((var var1) (atom <stream>))
-    ((var var2) (atom %signed-word-integer)))))
+    ((var var0) (atom? %signed-word-integer))
+    ((var var1) (atom? <stream>))
+    ((var var2) (atom? %signed-word-integer)))))
 
 (%annotate-function
   %write-float new-signature
   (((var0 var1 var2)
-    ((var var0) (atom %signed-word-integer))
-    ((var var1) (atom <stream>))
-    ((var var2) (atom <double-float>)))))
+    ((var var0) (atom? %signed-word-integer))
+    ((var var1) (atom? <stream>))
+    ((var var2) (atom? <double-float>)))))
 
 (%annotate-function
   change-exponent-marker new-signature
   (((var0 var1)
-    ((var var0) (atom %void))
-    ((var var1) (atom %string)))))
+    ((var var0) (atom? %void))
+    ((var var1) (atom? %string)))))
 
 (%annotate-function
   newline new-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <list>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <list>)))))
 
 (%annotate-function
   prin new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
+    ((var var0) (atom? <object>))
     ((var var1) (var var0))
-    ((var var2) (atom <list>)))))
+    ((var var2) (atom? <list>)))))
 
 (%annotate-function
   prin-cons new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <cons>))
-    ((var var2) (atom <stream>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <cons>))
+    ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   prin-cons1 new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <object>))
-    ((var var2) (atom <stream>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   prin-vector new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <vector>))
-    ((var var2) (atom <stream>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <vector>))
+    ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   prin-vector1 new-signature
   (((var0 var1 var2 var3 var4)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <vector>))
-    ((var var2) (atom %unsigned-word-integer))
-    ((var var3) (atom %unsigned-word-integer))
-    ((var var4) (atom <stream>)))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <vector>))
+    ((var var2) (atom? %unsigned-word-integer))
+    ((var var3) (atom? %unsigned-word-integer))
+    ((var var4) (atom? <stream>)))))
 
 (%annotate-function
   write new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
+    ((var var0) (atom? <object>))
     ((var var1) (var var0))
-    ((var var2) (atom <list>)))))
+    ((var var2) (atom? <list>)))))
 
 ;;(%annotate-function
 ;; write-1 new-signature
 ;; (((var0 var1 var2)
-;;   ((var var0) (atom <object>))
-;;   ((var var1) (atom <object>))
-;;   ((var var2) (atom <stream>)))))
+;;   ((var var0) (atom? <object>))
+;;   ((var var1) (atom? <object>))
+;;   ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   write-symbol-1 new-signature
   (((var0 var1 var2)
-    ((var var0) (atom %void))
-    ((var var1) (atom <symbol>))
-    ((var var2) (atom <stream>)))))
+    ((var var0) (atom? %void))
+    ((var var1) (atom? <symbol>))
+    ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   write-symbol-2 new-signature
   (((var0 var1 var2)
-    ((var var0) (atom %void))
-    ((var var1) (atom %string))
-    ((var var2) (atom <stream>)))))
+    ((var var0) (atom? %void))
+    ((var var1) (atom? %string))
+    ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   write-symbol-nc new-signature
   (((var0 var1 var2 var3 var4)
-    ((var var0) (atom %void))
-    ((var var1) (atom <stream>))
-    ((var var2) (atom %string))
-    ((var var3) (atom %signed-word-integer))
-    ((var var4) (atom %signed-word-integer)))))
+    ((var var0) (atom? %void))
+    ((var var1) (atom? <stream>))
+    ((var var2) (atom? %string))
+    ((var var3) (atom? %signed-word-integer))
+    ((var var4) (atom? %signed-word-integer)))))
 
 ;;(%annotate-function
 ;; prin-1 new-signature
 ;; (((var0 var1 var2)
-;;   ((var var0) (atom <object>))
-;;   ((var var1) (atom <object>))
-;;   ((var var2) (atom <stream>)))))
+;;   ((var var0) (atom? <object>))
+;;   ((var var1) (atom? <object>))
+;;   ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   print new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
+    ((var var0) (atom? <object>))
     ((var var1) (var var0))
-    ((var var2) (atom <list>)))))
+    ((var var2) (atom? <list>)))))
 
 )

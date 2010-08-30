@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;    basic-syntax provides all stuff which is needed to write simple macros and to
 ;;    use quasiquote.
@@ -79,6 +79,7 @@
 (%annotate-function append interpreter append)
 (%annotate-function eq interpreter eq)
 (%annotate-function null interpreter null)
+;;(%annotate-function null? interpreter null?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
@@ -87,58 +88,58 @@
 (%annotate-function
   consp new-signature
   (((var0 var1)
-    ((var var0) (atom (not <null>)))
-    ((var var1) (atom <cons>)))
+    ((var var0) (atom? (not <null>)))
+    ((var var1) (atom? <cons>)))
    ((var0 var1)
-    ((var var0) (atom <null>))
-    ((var var1) (atom (not <cons>))))))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? (not <cons>))))))
 
 (%annotate-function
   append new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <null>))
-    ((var var1) (atom <null>))
-    ((var var2) (atom <null>)))
+    ((var var0) (atom? <null>))
+    ((var var1) (atom? <null>))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <cons>))
-    ((var var1) (atom <cons>))
-    ((var var2) (atom <null>)))
+    ((var var0) (atom? <cons>))
+    ((var var1) (atom? <cons>))
+    ((var var2) (atom? <null>)))
    ((var0 var1 var2)
-    ((var var0) (atom <cons>))
-    ((var var1) (atom <null>))
-    ((var var2) (atom <cons>)))
+    ((var var0) (atom? <cons>))
+    ((var var1) (atom? <null>))
+    ((var var2) (atom? <cons>)))
    ((var0 var1 var2)
-    ((var var0) (atom <cons>))
-    ((var var1) (atom <cons>))
-    ((var var2) (atom <cons>)))))
+    ((var var0) (atom? <cons>))
+    ((var var1) (atom? <cons>))
+    ((var var2) (atom? <cons>)))))
 
 ;; Redefinition of the type scheme for compound types;
 ;; basic-number.am should be loaded before!
 (%annotate-function
   car comp-signature
   (((var0 var1)
-    ((var var0) (atom <object>))
-    ((var var1) (atom poly-list)))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? poly-list)))
    ((var0 var1)
-    ((var var0) (atom <int>))
-    ((var var1) (atom fpi-list)))))
+    ((var var0) (atom? <int>))
+    ((var var1) (atom? fpi-list)))))
 
 ;; Redefinition of the type scheme for compound types;
 ;; basic-number.am should be loaded before!
 (%annotate-function
   cons comp-signature
   (((var0 var1 var2)
-    ((var var0) (atom fpi-list))
-    ((var var1) (atom <int>))
-    ((var var2) (atom (or <null> fpi-list))))
+    ((var var0) (atom? fpi-list))
+    ((var var1) (atom? <int>))
+    ((var var2) (atom? (or <null> fpi-list))))
    ((var0 var1 var2)
-    ((var var0) (atom poly-list))
-    ((var var1) (atom (not <int>)))
-    ((var var2) (atom <object>)))
+    ((var var0) (atom? poly-list))
+    ((var var1) (atom? (not <int>)))
+    ((var var2) (atom? <object>)))
    ((var0 var1 var2)
-    ((var var0) (atom poly-list))
-    ((var var1) (atom <object>))
-    ((var var2) (atom (and (not <null>) (not fpi-list)))))))
+    ((var var0) (atom? poly-list))
+    ((var var1) (atom? <object>))
+    ((var var2) (atom? (and (not <null>) (not fpi-list)))))))
 
 
 ) ;end of module basic-list

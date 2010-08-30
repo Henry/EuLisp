@@ -28,57 +28,60 @@
 ;;;-----------------------------------------------------------------------------
 
 #module list
-
-(import
- (eulisp-kernel
-  (only (<symbol>) symbol)
-  (only (<number>) number)
-  (only (<character>) character)
-  (only (cons car cdr copy-list) common-lisp)
-  copy-generic ;deep-copy shallow-copy
-  )
-
- syntax
- (eulisp-kernel)
-
- expose
- ((only (consp
-         atom
-         cons
-         car
-         cdr
-         list
-         length ; not in EL
-         equal
-         copy-list ; not in EL
-         ;;copy-alist
-         ;;copy-tree
+(import (eulisp-kernel
+         null
+         (only (<symbol>)
+               symbol)
+         (only (<number>)
+               number)
+         (only (<character>)
+               character)
+         (only (cons
+                car
+                cdr
+                copy-list)
+               common-lisp)
+         (rename ((atom cl:atom))
+                 (only (atom)
+                       common-lisp))
+         copy-generic
+         ;;deep-copy
+         ;;shallow-copy
          )
-        common-lisp)
-  (only ($empty-list) el-modules)
-  (only (null) common-lisp))
-
- export
- (nil deep-copy shallow-copy)
- )
-
+ syntax (eulisp-kernel)
+ expose (null
+         (only (consp
+                cons
+                car
+                cdr
+                list
+                length ; not in EL
+                equal
+                copy-list ; not in EL
+                ;;copy-alist
+                ;;copy-tree
+                )
+               common-lisp)
+         (only ($empty-list)
+               el-modules))
+ export (atom?
+         deep-copy
+         shallow-copy))
 
 (make-eulisp-class pair cons) ; not in EL
-
 (make-eulisp-class cons cons)
-
-(make-eulisp-class null)
-
 (make-eulisp-class list list)
 
-(defconstant nil () )
+;; Rename the CL atom -> atom?
+(defun atom? (a)
+  (cl:atom a))
 
 (defmethod deep-copy ((tree cons))
   (cons (deep-copy (car tree))
         (deep-copy (cdr tree))))
 
 (defmethod deep-copy ((tree <null>))
-  nil)
+  ())
 
 (defmethod deep-copy ((tree <symbol>))
   tree)
@@ -90,11 +93,11 @@
   tree)
 
 (defmethod shallow-copy ((tree <null>))
-  nil)
+  ())
 
 (defmethod shallow-copy ((tree <cons>))
   (copy-list tree))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
-
+;;;-----------------------------------------------------------------------------

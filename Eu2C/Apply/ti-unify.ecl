@@ -30,8 +30,16 @@
 ;;;-----------------------------------------------------------------------------
 
 #module ti-unify
-(import (lzs mzs ti ti-codes ti-lattice ti-exprs ti-meet-join ti-eqs
-             ti-write ti-copy)
+(import (lzs
+         mzs
+         ti
+         ti-codes
+         ti-lattice
+         ti-exprs
+         ti-meet-join
+         ti-eqs
+         ti-write
+         ti-copy)
  syntax (ti)
  export (unify))
 
@@ -119,4 +127,6 @@
     t))
 
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

@@ -381,36 +381,36 @@
 (%annotate-function
   clear-table new-signature
   (((var0 var1)
-    ((var var0) (atom <table>))
+    ((var var0) (atom? <table>))
     ((var var1) (var var0)))))
 
 (%annotate-function
   map-table new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <table>))
-    ((var var1) (atom <function>))
+    ((var var0) (atom? <table>))
+    ((var var1) (atom? <function>))
     ((var var2) (var var0)))))
 
 (%annotate-function
   table-delete new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <table>))
+    ((var var0) (atom? <table>))
     ((var var1) (var var0))
-    ((var var2) (atom <object>)))))
+    ((var var2) (atom? <object>)))))
 
 (%annotate-function
   table-ref new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <table>))
-    ((var var2) (atom <object>)))))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <table>))
+    ((var var2) (atom? <object>)))))
 
 (%annotate-function
   setter-table-ref new-signature
   (((var0 var1 var2 var3)
-    ((var var0) (atom <object>))
-    ((var var1) (atom <table>))
-    ((var var2) (atom <object>))
+    ((var var0) (atom? <object>))
+    ((var var1) (atom? <table>))
+    ((var var2) (atom? <object>))
     ((var var3) (var var0)))))
 
 );;; eof
