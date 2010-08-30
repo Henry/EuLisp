@@ -45,7 +45,7 @@
     (only (<string>)
           string-i)
     (only (binary+)
-          fixed-precision-integer)
+          int)
     (only (eql)
           compare)
     (only (<conversion-condition> error) condition)

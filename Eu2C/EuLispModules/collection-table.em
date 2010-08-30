@@ -38,7 +38,7 @@
     (only (eql)
           compare)
     (only (binary+ binary<)
-          fixed-precision-integer)
+          int)
     (only (print) print)
     (only ($standard-table-size
            ) table-aux)

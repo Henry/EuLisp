@@ -48,7 +48,7 @@
     stream-generic
     standard-generic-function
     (only (stringp string-pointer <string>) string-ii)
-    (only (fixed-precision-integer-p <fixed-precision-integer>) fixed-precision-integer-i)
+    (only (int-p <int>) int-i)
     (only (double-float-p <double-float> dble) double-float-i)
     (only (convert-char-int characterp <character>) character)
     (only (vectorp primitive-vector-length primitive-vector-ref <vector>) vector)
@@ -230,8 +230,8 @@
 ;;       (prin-cons object stream)
 ;;       (if (null object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
-;;         (if (fixed-precision-integer-p object)
-;;           (%write-int stream (make-swi (%cast <fixed-precision-integer> object)))
+;;         (if (int-p object)
+;;           (%write-int stream (make-swi (%cast <int> object)))
 ;;             (if (symbolp object)
 ;;                (%write-string stream (%select object <symbol> name))
 ;;              (if (stringp object)
@@ -271,7 +271,7 @@
 (defmethod generic-prin ((object <null>) (stream <stream>))
   (%write-string stream (%literal %string () "()")) ())
 
-(defmethod generic-prin ((object <fixed-precision-integer>) (stream <stream>))
+(defmethod generic-prin ((object <int>) (stream <stream>))
   (%write-int stream (make-swi object)) object)
 
 (defmethod generic-prin ((object <character>) (stream <stream>))
@@ -353,8 +353,8 @@
 ;;       (write-cons-1 object stream)
 ;;       (if (null object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
-;;         (if (fixed-precision-integer-p object)
-;;           (%write-int stream (make-swi (%cast <fixed-precision-integer> object)))
+;;         (if (int-p object)
+;;           (%write-int stream (make-swi (%cast <int> object)))
 ;;           (if (symbolp object)
 ;;             (write-symbol-1 (%cast <symbol> object) stream)
 ;;             (if (stringp object)
@@ -383,7 +383,7 @@
 (defmethod generic-write ((object <null>) (stream <stream>))
   (%write-string stream (%literal %string () "()")) ())
 
-(defmethod generic-write ((object <fixed-precision-integer>) (stream <stream>))
+(defmethod generic-write ((object <int>) (stream <stream>))
   (%write-int stream (make-swi object))
   object)
 

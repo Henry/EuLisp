@@ -42,7 +42,7 @@
            eq
            ) tail)
     (only (error <condition>) condition-i)
-    (only (fixed-precision-integer-p) fixed-precision-integer-i)
+    (only (int-p) int-i)
     (only ($standard-output
            %write-unit %read-unit %peek-unit
            ensure-open-character-output-stream
@@ -220,7 +220,7 @@
       (if (%eq ch $char-ascii-d-l)
           (generic-write (car args) stream ) ;write test int
         (if (%eq ch $char-ascii-b-l) ;test int
-            (if (fixed-precision-integer-p (car args))
+            (if (int-p (car args))
                 (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                        (print-based-int-0 stream
                                           (make-swi (car args))
@@ -247,7 +247,7 @@
         (if (%eq ch $char-ascii-g-l)
             (format-float stream (car args) fstring-c cur-index)
           (if (%eq ch $char-ascii-o-l)
-              (if (fixed-precision-integer-p (car args))
+              (if (int-p (car args))
                   (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                          (print-based-int-0
                           stream
@@ -256,7 +256,7 @@
                           (%cast <string-stack> *buffer-1*)))
                 (generic-write (car args) stream ))
             (if (%eq ch $char-string-hex-l)
-                (if (fixed-precision-integer-p (car args))
+                (if (int-p (car args))
                     (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                            (print-based-int-0
                             stream
@@ -265,7 +265,7 @@
                             (%cast <string-stack> *buffer-1*)))
                   (generic-write (car args) stream ))
               (if (%eq ch $char-ascii-r-l)
-                  (if (fixed-precision-integer-p (car args))
+                  (if (int-p (car args))
                       (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                              (print-based-int-0
                               stream

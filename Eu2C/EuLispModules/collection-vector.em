@@ -414,12 +414,12 @@
 
 
 (defmethod element ((vec <vector>)
-                    (key <fixed-precision-integer>))
+                    (key <int>))
   (vector-ref vec key))
 
 
 (defmethod (setter element) ((vec <vector>)
-                             (key <fixed-precision-integer>)
+                             (key <int>)
                              (value <object>))
   (setf-vector-ref vec key value))
 
@@ -448,8 +448,8 @@
 
 ;;  (defmethod fill ((vec <vector>)
 ;;                   (object <character>) ;object to fill
-;;                   (start <fixed-precision-integer>)
-;;                   (end <fixed-precision-integer>))
+;;                   (start <int>)
+;;                   (end <int>))
 ;;    (fill-vector vec object start end))
 
 

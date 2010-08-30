@@ -422,12 +422,12 @@
 
 
 (defmethod element ((str <string>)
-                    (key <fixed-precision-integer>))
+                    (key <int>))
   (string-ref str key))
 
 
 (defmethod (setter element) ((str <string>)
-                             (key <fixed-precision-integer>)
+                             (key <int>)
                              (value <character>))
   (%setf (%extract (string-pointer str)
                    (%cast %unsigned-word-integer
@@ -461,8 +461,8 @@
 
 ;;  (defmethod fill ((str <string>)
 ;;                   (object <character>) ;object to fill
-;;                   (start <fixed-precision-integer>)
-;;                   (end <fixed-precision-integer>))
+;;                   (start <int>)
+;;                   (end <int>))
 ;;    (fill-string str object start end))
 
 

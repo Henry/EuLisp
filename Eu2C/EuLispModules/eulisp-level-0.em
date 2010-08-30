@@ -38,7 +38,7 @@
            double-float
            elementary-functions
            ;;***HGW event ; For thread support
-           fixed-precision-integer
+           int
            formatted-io
            function
            list
@@ -65,7 +65,7 @@
            double-float
            elementary-functions
            ;;***HGW event ; For thread support
-           fixed-precision-integer
+           int
            formatted-io
            function
            list
@@ -114,7 +114,7 @@
 (%annotate-function ceiling interpreter ceiling)
 (%annotate-function floor interpreter floor)
 (%annotate-function round interpreter round)
-(%annotate-function fixed-precision-integer-p interpreter fixed-precision-integer-p)
+(%annotate-function int-p interpreter int-p)
 (%annotate-function format interpreter format)
 (%annotate-function integerp interpreter integerp)
 (%annotate-function evenp interpreter evenp)

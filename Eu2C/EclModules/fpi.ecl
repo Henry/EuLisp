@@ -33,7 +33,7 @@
                common-lisp)
          (only (fixnump)
                ext))
- export (fixed-precision-integer-p)
+ export (int-p)
  expose ((only (evenp oddp)
                common-lisp)
          number)
@@ -42,11 +42,11 @@
 (progn
   (make-eulisp-class fpi fixnum)
   ;; the alias with a short namemust appear before the following assignment, to
-  ;; rename the CL-class to fixed-precision-integer and not to fpi
-  (make-eulisp-class fixed-precision-integer fixnum)
+  ;; rename the CL-class to int and not to fpi
+  (make-eulisp-class int fixnum)
   )
 
-(defun fixed-precision-integer-p (x)
+(defun int-p (x)
   (fixnump x))
 
 #module-end

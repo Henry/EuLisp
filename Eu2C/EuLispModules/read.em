@@ -30,7 +30,7 @@
 
   (import
    ;;------
-   ((only (<class> <object> <fixed-precision-integer>
+   ((only (<class> <object> <int>
                    <symbol> <integer>
                    %signed-word-integer %unsigned-word-integer
                    %signed-byte-integer
@@ -68,7 +68,7 @@
                            *not-eof-action*) stream-i)
     (only (read-line input uninput) stream-generic)
     (only (<double-float> dble set-dble make-dble) double-float-i)
-    (only (fixed-precision-integer-p) fixed-precision-integer-i)
+    (only (int-p) int-i)
     (only (strcmp) c-string-interface)
     (only (make-symbol) symbol)
     (only (prin) print)
@@ -76,7 +76,7 @@
     (only (initialize-vector-from-list
            make-uninitialized-vector  <vector>) vector)
     (only (convert-int-char convert-char-int <character>) character)
-    ;; for <fixed-precision-integer>
+    ;; for <int>
     (only (<string-stack> ?stack-string  ?cur-index *buffer-1*
                           *buffer-2* push-buffer clear-buffer) string-stack)
     )
@@ -103,7 +103,7 @@
   (
    (stream type <object> default () accessor stream
            keyword stream)
-   (error-number  type <fixed-precision-integer>
+   (error-number  type <int>
                   default 77 accessor error-number
                   keyword error-number)
    )
@@ -688,7 +688,7 @@
 (%define-function (read-based-int <integer>)
   ((stream <stream>))
   (let ((obj (read-extended-extension stream #%i0)))
-    (if (fixed-precision-integer-p obj)
+    (if (int-p obj)
         obj
       (progn
         (syntax-error stream #%i20)

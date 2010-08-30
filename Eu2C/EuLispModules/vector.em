@@ -29,7 +29,7 @@
   (import
    (tail
     (only (%pair-length) basic-list)
-    (only (make-fpint) fixed-precision-integer-i)
+    (only (make-fpint) int-i)
     (only (deep-copy shallow-copy) copy)
     (only (equal) compare-generic))
    syntax (tail syntax-0)

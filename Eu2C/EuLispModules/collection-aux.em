@@ -36,7 +36,7 @@
     (only (make-string string-pointer allocate-%string) string-ii)
     collection-convert
     (only (binary+ binary<)
-          fixed-precision-integer
+          int
           ;; number ;take not this: recursive module load
           )
     basic-list

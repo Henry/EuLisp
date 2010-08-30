@@ -18,14 +18,14 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: fixed-precision-integer.am
+;;;  Title: int.am
 ;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
-(defmodule fixed-precision-integer
+(defmodule int
   (import (tail eulisp-kernel
-                fixed-precision-integer-i
+                int-i
                 integer
                 (only (<double-float>
                        make-dble)
@@ -64,90 +64,90 @@
     negate
     zerop
     equal
-    fixed-precision-integer-p
+    int-p
     ;;constants
     <fpi>
-    most-positive-fixed-precision-integer
-    most-negative-fixed-precision-integer
+    most-positive-int
+    most-negative-int
     ;;classes
-    <fixed-precision-integer>))
+    <int>))
 
-(defconstant <fpi> <fixed-precision-integer>)
-#-(:fixed-precision-integer :big)
-(defconstant most-positive-fixed-precision-integer #xffff)
+(defconstant <fpi> <int>)
+#-(:int :big)
+(defconstant most-positive-int #xffff)
 
-#-(:fixed-precision-integer :big)
-(defconstant most-negative-fixed-precision-integer #x-10000)
+#-(:int :big)
+(defconstant most-negative-int #x-10000)
 
-#+(:fixed-precision-integer :big)
-(defconstant most-positive-fixed-precision-integer #x3fffffff)
+#+(:int :big)
+(defconstant most-positive-int #x3fffffff)
 
-#+(:fixed-precision-integer :big)
-(defconstant most-negative-fixed-precision-integer #x-40000000)
+#+(:int :big)
+(defconstant most-negative-int #x-40000000)
 
 ;;;-----------------------------------------------------------------------------
 ;;; methods and functions
 ;;;-----------------------------------------------------------------------------
 (defmethod binary+
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (make-fpint (%plus (make-swi a)
                      (make-swi b))))
 
 (defmethod binary-
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (make-fpint (%minus (make-swi a)
                       (make-swi b))))
 
 
 (defmethod binary*
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (make-fpint (%mult (make-swi a)
                      (make-swi b))))
 
 
 (defmethod binary/
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (make-fpint (%div (make-swi a)
                     (make-swi b))))
 (defmethod binary%
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (make-fpint (%rem (make-swi a)
                     (make-swi b))))
 
 (defmethod binary-mod
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (make-fpint (%rem (make-swi a)
                     (make-swi b))))
 
 (defmethod binary=
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (if (%eq (%cast %signed-word-integer a)
            (%cast %signed-word-integer b))
       a
     ()))
 
 (defmethod binary<
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (if (%lt (%cast %signed-word-integer a)
            (%cast %signed-word-integer b))
       a
     ()))
 
-(defmethod binary-gcd ((a <fixed-precision-integer>)
-                       (b <fixed-precision-integer>))
+(defmethod binary-gcd ((a <int>)
+                       (b <int>))
   (make-fpint (fpi-gcd (%swi-abs (make-swi a))
                        (%swi-abs (make-swi b)))))
 
-(defmethod binary-lcm ((a <fixed-precision-integer>)
-                       (b <fixed-precision-integer>))
+(defmethod binary-lcm ((a <int>)
+                       (b <int>))
   (%let ((aa %signed-word-integer (%swi-abs(make-swi a)))
          (bb %signed-word-integer (%swi-abs(make-swi b))))
         (make-fpint (%div (%mult aa bb)
@@ -169,22 +169,22 @@
         (fpi-gcd (%div b a) a)
       a)
     ))
-(defmethod negate ((a <fixed-precision-integer>))
+(defmethod negate ((a <int>))
   (make-fpint (%neg (make-swi a))))
 
-(defmethod zerop ((a <fixed-precision-integer>))
+(defmethod zerop ((a <int>))
   (binary= a 0))
 
 (defmethod equal
-  ((a <fixed-precision-integer>)
-   (b <fixed-precision-integer>))
+  ((a <int>)
+   (b <int>))
   (binary= a b))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Converter
 ;;;-----------------------------------------------------------------------------
 (defmethod (converter <double-float>)
-  ((object <fixed-precision-integer>))
+  ((object <int>))
   (make-dble(%citod (make-swi object))))
 
 ;;;-----------------------------------------------------------------------------
@@ -193,122 +193,122 @@
 (%annotate-function
   binary+ new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 (%annotate-function
   binary- new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 (%annotate-function
   binary/ new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 (%annotate-function
   binary* new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 (%annotate-function
   binary% new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 (%annotate-function
   binary-mod new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 (%annotate-function
   binary-gcd new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 (%annotate-function
   binary-lcm new-signature
   (((var0 var1 var2)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>))
-    ((var var2) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>))
+    ((var var2) (atom <int>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
-    ((var var1) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
+    ((var var1) (atom (and <number> (not <int>))))
     ((var var2) (atom <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom (and <number> (not <fixed-precision-integer>))))
+    ((var var0) (atom (and <number> (not <int>))))
     ((var var1) (atom <number>))
-    ((var var2) (atom (and <number> (not <fixed-precision-integer>)))))))
+    ((var var2) (atom (and <number> (not <int>)))))))
 
 ;;;-----------------------------------------------------------------------------
 )

@@ -143,7 +143,7 @@ generic-write
 (%annotate-function
   length-pair new-signature
   (((var0 var1)
-    ((var var0) (atom <fixed-precision-integer>))
+    ((var var0) (atom <int>))
     ((var var1) (atom <cons>)))))
 
 ;;;-----------------------------------------------------------------------------

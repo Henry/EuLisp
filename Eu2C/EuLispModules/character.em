@@ -32,7 +32,7 @@
     (only (binary< equal) compare-generic)
     (only (generic-prin generic-write) stream-generic)
     (only (upperp upper2lower lowerp lower2upper) char-tables)
-    (only (make-swi make-fpint) fixed-precision-integer-i)
+    (only (make-swi make-fpint) int-i)
     ;;copy
     basic-compare      ;; instead of compare which should be used if implemented right
     ;;convert
@@ -102,14 +102,14 @@
 ;;;       (make-character-box-vector))
 
 (%define-function (convert-int-char <character>)
-  ((int <fixed-precision-integer>))
+  ((int <int>))
   ;;  (%cast <character> (%plus  (%cast %signed-word-integer
   ;;                                    $character-box-vector )
   ;;                             (%ashiftl (%plus (make-swi int) #%i1) #%B2))))
   (make-character       ;(%cast %unsigned-word-integer ;RR
    (make-swi int)))     ;)  ;;RR
 
-(%define-function (convert-char-int <fixed-precision-integer>)
+(%define-function (convert-char-int <int>)
   ((char <character>))
   (make-fpint
    ;;         (%minus (%ashiftr (%minus (%cast %signed-word-integer char)

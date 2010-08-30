@@ -71,7 +71,7 @@
 (%setf $standard-table-mask
        (%minus (%cast %unsigned-word-integer
                       (make-swi
-                       (%cast <fixed-precision-integer> $standard-table-size))) #%I1))
+                       (%cast <int> $standard-table-size))) #%I1))
 
 
 (defun mapc (function . lists)
@@ -150,9 +150,9 @@
 ;;          (t (assq-aux object (cdr alist)))))
 
 
-;;  (%define-function (logand <fixed-precision-integer>)
-;;                    ((a <fixed-precision-integer>)
-;;                     (b <fixed-precision-integer>))
+;;  (%define-function (logand <int>)
+;;                    ((a <int>)
+;;                     (b <int>))
 ;;    (make-fpint (%and (make-swi a) (make-swi b))))
 
 
@@ -174,8 +174,8 @@
 ;;  (defun hash (number) ;only for numbers
 ;;    (print 'hash-number)
 ;;    (print (logand number $standard-table-mask))
-;;    (logand (%cast <fixed-precision-integer> number)
-;;            (%cast <fixed-precision-integer> $standard-table-mask)))
+;;    (logand (%cast <int> number)
+;;            (%cast <int> $standard-table-mask)))
 
 ;;  (%define-function (hash %unsigned-word-integer)
 ;;                    ((obj <object>))

@@ -37,7 +37,7 @@
            basic-list-0
            basic-compare
            tail-introspection
-           (only (<fixed-precision-integer>) basic-number)
+           (only (<int>) basic-number)
            apply-level-1)
    syntax (%tail)
    expose (basic-list-0)
@@ -120,7 +120,7 @@
     ((var var0) (atom <object>))
     ((var var1) (atom poly-list)))
    ((var0 var1)
-    ((var var0) (atom <fixed-precision-integer>))
+    ((var var0) (atom <int>))
     ((var var1) (atom fpi-list)))))
 
 ;; Redefinition of the type scheme for compound types;
@@ -129,11 +129,11 @@
   cons comp-signature
   (((var0 var1 var2)
     ((var var0) (atom fpi-list))
-    ((var var1) (atom <fixed-precision-integer>))
+    ((var var1) (atom <int>))
     ((var var2) (atom (or <null> fpi-list))))
    ((var0 var1 var2)
     ((var var0) (atom poly-list))
-    ((var var1) (atom (not <fixed-precision-integer>)))
+    ((var var1) (atom (not <int>)))
     ((var var2) (atom <object>)))
    ((var0 var1 var2)
     ((var var0) (atom poly-list))

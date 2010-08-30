@@ -20,19 +20,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;;-----------------------------------------------------------------------------
 
-(defmodule fixed-precision-integer-i
+(defmodule int-i
   (import (eulisp-kernel)
    syntax (eulisp-kernel)
-   export (<fixed-precision-integer>
-           fixed-precision-integer-p
+   export (<int>
+           int-p
            make-fpint
            make-swi))
 
-(defun fixed-precision-integer-p
+(defun int-p
   (i)
-  (%instance-of-p i <fixed-precision-integer>))
+  (%instance-of-p i <int>))
 
-(defgeneric (converter <fixed-precision-integer>)
+(defgeneric (converter <int>)
   (object))
 
 
@@ -41,22 +41,22 @@
 ;;;-----------------------------------------------------------------------------
 
 ;;(%annotate-function
-;; fixed-precision-integer-p new-signature
+;; int-p new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom (and <object> (not <null>))))
-;;   ((var var1) (atom <fixed-precision-integer>)))
+;;   ((var var1) (atom <int>)))
 ;;  ((var0 var1)
 ;;   ((var var0) (atom <null>))
-;;   ((var var1) (atom (and <object> (not <fixed-precision-integer>)))))))
+;;   ((var var1) (atom (and <object> (not <int>)))))))
 
 (%annotate-function
-  fixed-precision-integer-p new-signature
+  int-p new-signature
   (((var0 var1)
-    ((var var0) (atom <fixed-precision-integer>))
-    ((var var1) (atom <fixed-precision-integer>)))
+    ((var var0) (atom <int>))
+    ((var var1) (atom <int>)))
    ((var0 var1)
     ((var var0) (atom <null>))
-    ((var var1) (atom (and <object> (not <fixed-precision-integer>)))))))
+    ((var var1) (atom (and <object> (not <int>)))))))
 
 ;;;-----------------------------------------------------------------------------
 )

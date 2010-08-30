@@ -244,7 +244,7 @@
     round
     truncate
     ;;--- fpi
-    fixed-precision-integer-p
+    int-p
     ;;   ;--- formatted-io
     ;;   scan
     format
@@ -264,7 +264,7 @@
 
     ;;--- number
     numberp
-    +  ;; needed for :fixed-precision-integer :big
+    +  ;; needed for :int :big
     - * /
     %
     gcd lcm abs

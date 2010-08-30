@@ -179,7 +179,7 @@
 (defgeneric copy-descr-up-to (descr max-index))
 
 (defmethod copy-descr-up-to ((descr <formal-type-descr>)
-                             (max-index <fixed-precision-integer>))
+                             (max-index <int>))
   (let* ((vec (?type-vec descr))
          (size (length vec))
          (new-vec (make-array size)))
@@ -193,7 +193,7 @@
           :type-spec 0)))
 
 (defmethod copy-descr-up-to ((descr <act-type-descr>)
-                             (max-index <fixed-precision-integer>))
+                             (max-index <int>))
   (let* ((vec (?type-vec descr))
          (size (length vec))
          (new-vec (make-array size)))

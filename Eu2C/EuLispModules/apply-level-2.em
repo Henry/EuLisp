@@ -83,7 +83,7 @@
   `(%literal ,<string> characters (%literal ,%string () ,elements))
   )
 
-#+(:fixed-precision-integer :big)
+#+(:int :big)
 (progn
   (%declare-external-function (auxplus <integer>)
     ((s1 <integer>) (s2 <integer>))
@@ -94,14 +94,14 @@
 
   (%define-literal-expansion
     integer
-    `(%literal ,<fixed-precision-integer>
+    `(%literal ,<int>
                ,(auxplus (auxplus value value) 1)))
   )
 
-#-(:fixed-precision-integer :big)
+#-(:int :big)
 (%define-literal-expansion
   integer
-  `(%literal ,<fixed-precision-integer>
+  `(%literal ,<int>
              ,value))
 
 
@@ -115,7 +115,7 @@
 
 (%annotate-class <list> is-special-class <list>)
 (%annotate-class <null> is-special-class <null>)
-(%annotate-class <fixed-precision-integer> is-special-class <fpi>)
+(%annotate-class <int> is-special-class <fpi>)
 (%annotate-class <function> is-special-class <function>)
 
 (%annotate-function cons is-special-function cons)

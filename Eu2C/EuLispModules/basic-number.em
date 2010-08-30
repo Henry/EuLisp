@@ -28,7 +28,7 @@
    syntax (%tail)
    export (<number>
            <integer>
-           <fixed-precision-integer>
+           <int>
            make-fpint
            make-swi))
 
@@ -40,7 +40,7 @@
   <number>
   ())
 
-(%define-standard-class (<fixed-precision-integer> <class>)
+(%define-standard-class (<int> <class>)
   <integer>
   ((fpint type %signed-word-integer
           reader fpint))
@@ -48,44 +48,44 @@
   representation direct)
 
 
-#+(:fixed-precision-integer :big)
-(%define-function (make-fpint <fixed-precision-integer>)
+#+(:int :big)
+(%define-function (make-fpint <int>)
   ((val %signed-word-integer))
-  (%cast <fixed-precision-integer>
+  (%cast <int>
          (%or (%plus val val) #%i1)))
 
-#+(:fixed-precision-integer :big)
+#+(:int :big)
 (%define-function (make-swi %signed-word-integer)
-  ((val <fixed-precision-integer>))
+  ((val <int>))
   (%ashiftr (fpint val) #%I1))
 
 
-#-(:fixed-precision-integer :big)
-(%define-function (make-fpint <fixed-precision-integer>)
+#-(:int :big)
+(%define-function (make-fpint <int>)
   ((val %signed-word-integer))
-  (%cast <fixed-precision-integer>
+  (%cast <int>
          (%ashiftr (%lshiftl val #%I16) #%I16)))
 
-#-(:fixed-precision-integer :big)
+#-(:int :big)
 (%define-function (make-swi %signed-word-integer)
-  ((val <fixed-precision-integer>))
+  ((val <int>))
   (fpint val))
 
 
 ;;;-----------------------------------------------------------------------------
 ;;; refined lattice types for type inference
 ;;;-----------------------------------------------------------------------------
-;; Singleton subtypes of <fixed-precision-integer>.
+;; Singleton subtypes of <int>.
 (%define-lattice-type fpi-zero
-  (<fixed-precision-integer> singleton)
+  (<int> singleton)
   (bottom) () 0)
 
 (%define-lattice-type fpi-one
-  (<fixed-precision-integer> singleton)
+  (<int> singleton)
   (bottom) () 1)
 
 (%define-lattice-type fpi-rest
-  (<fixed-precision-integer>)
+  (<int>)
   (bottom))
 
 (%define-lattice-type zero
@@ -96,7 +96,7 @@
   (fpi-one)
   (bottom))
 
-;; Compound list for elements of type <fixed-precision-integer>.
+;; Compound list for elements of type <int>.
 (%define-lattice-type fpi-list
   (mono-list)
   (bottom) t)

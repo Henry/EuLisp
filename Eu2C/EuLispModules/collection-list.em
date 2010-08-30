@@ -280,12 +280,12 @@
 
 
 (defmethod element ((lst <list>)
-                    (key <fixed-precision-integer>))
+                    (key <int>))
   (element-list lst key))
 
 
 (defmethod (setter element) ((lst <list>)
-                             (key <fixed-precision-integer>)
+                             (key <int>)
                              (value <object>))
   (setter-element-list lst key value))
 
@@ -346,8 +346,8 @@
 
 ;;  (defmethod fill ((lst <list>)
 ;;                   (object <object>) ;object to fill
-;;                   (start <fixed-precision-integer>)
-;;                   (end <fixed-precision-integer>))
+;;                   (start <int>)
+;;                   (end <int>))
 ;;    (fill-list lst lst object start end))
 
 

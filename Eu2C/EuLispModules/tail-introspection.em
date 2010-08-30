@@ -65,17 +65,17 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Do the job
 ;;;-----------------------------------------------------------------------------
-#-(:fixed-precision-integer :big)
+#-(:int :big)
 (%define-function (%class-of <class> )
   ((obj <object>))
   (if (%gt (%cast %unsigned-word-integer obj)
            (%cast %unsigned-word-integer UpperHeapLimit))
       ;; neg fixnum
-      <fixed-precision-integer>
+      <int>
     (if (%gt (%literal %signed-word-integer #x10000)
              (%cast %signed-word-integer obj))
         ;; pos fixnum
-        <fixed-precision-integer>
+        <int>
       (if (%gt (%cast %signed-word-integer obj)
                (%cast %signed-word-integer LowerHeapLimit))
           ;; dynamic objects
@@ -85,11 +85,11 @@
                 (%minus (%cast %unsigned-word-integer obj)
                         (%cast %unsigned-word-integer WordLength))))))))
 
-#+(:fixed-precision-integer :big)
+#+(:int :big)
 (%define-function (%class-of <class> )
   ((obj <object>))
   (if (%eq (%and #%i1 (%cast %signed-word-integer obj)) #%i1)
-      <fixed-precision-integer>
+      <int>
     (if (%gt (%cast %signed-word-integer obj)
              (%cast %signed-word-integer LowerHeapLimit))
         ;; dynamic object

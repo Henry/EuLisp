@@ -31,7 +31,7 @@
   (import
    ;;------
    ( ;(rename ((<object> <file>)) (only (<object>) tail))
-    (only (<class> <object> <symbol> <null> <fixed-precision-integer>
+    (only (<class> <object> <symbol> <null> <int>
                    %cast %signed-word-integer %unsigned-word-integer
                    %eq %lt %gt %member %string %plus %minus
                    eq cons make-fpint make-swi
@@ -441,7 +441,7 @@
             (%let* ((ch %signed-word-integer (fgetc fd)))
                    (if (%eq ch #%i-1)
                        (make-swi
-                        (%cast <fixed-precision-integer>
+                        (%cast <int>
                                ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
                      (progn
                        (ungetc ch fd)
@@ -452,7 +452,7 @@
               (%let* ((ch %signed-word-integer (getc-buffer fd)))
                      (if (%eq ch #%i-1)
                          (make-swi
-                          (%cast <fixed-precision-integer>
+                          (%cast <int>
                                  ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
                        (progn
                          (ungetc-buffer ch fd)
@@ -468,7 +468,7 @@
             (%let* ((ch %signed-word-integer (fgetc fd)))
                    (if (%eq ch #%i-1)
                        (make-swi
-                        (%cast <fixed-precision-integer>
+                        (%cast <int>
                                ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
                      ch))
             )
@@ -477,7 +477,7 @@
               (%let* ((ch %signed-word-integer (getc-buffer fd)))
                      (if (%eq ch #%i-1)
                          (make-swi
-                          (%cast <fixed-precision-integer>
+                          (%cast <int>
                                  ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
                        (progn
                          ch))))
@@ -859,7 +859,7 @@
 ;;  (if (streamp obj)
 ;;    (if (binarystreamp (stream-transaction-unit obj))
 ;;      obj
-;;      (if (eq <fixed-precision-integer> (stream-transaction-unit obj))
+;;      (if (eq <int> (stream-transaction-unit obj))
 ;;        obj
 ;;        ()))
 ;;    ()))
