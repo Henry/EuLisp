@@ -70,7 +70,7 @@
 (defmacro development-mode ()
   '*development-mode*)
 
-(deflocal *code-debug* nil)
+(deflocal *code-debug* ())
 
 (defun toggle-code-debug ()
   (if *code-debug*
@@ -80,14 +80,14 @@
 (defun code-debug () *code-debug*)
 
 ;;; Protocol and break flag for type inference
-(deflocal *ti-verbose* nil)
+(deflocal *ti-verbose* ())
 
 (defmacro ti-verbose ()
   '*ti-verbose*)
 
 (defun toggle-ti-verbose ()
   (if *ti-verbose*
-      (setq *ti-verbose* nil)
+      (setq *ti-verbose* ())
     (setq *ti-verbose* t)))
 
 (defmacro ti-break ()
@@ -95,7 +95,7 @@
 
 (defun toggle-ti-break ()
   (if *ti-break*
-      (setq *ti-break* nil)
+      (setq *ti-break* ())
     (setq *ti-break* t)))
 
 ;;; What function is being analysed? Can be reimplemented with dynamic-let.
@@ -110,7 +110,7 @@
 (defun analysed-fun ()
   (if *analysed-fun*
       (car *analysed-fun*)
-    nil))
+    ()))
 
 (defun info-format (level string . args)
   (if (>= (dynamic *info-level*) level)

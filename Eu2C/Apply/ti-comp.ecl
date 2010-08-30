@@ -43,7 +43,7 @@
 ;;;-----------------------------------------------------------------------------
 
 ;; Copy all compound lattice types of a descriptor and set their write-access-
-;; stamp in case it is nil to the latest write-access-stamp.
+;; stamp in case it is () to the latest write-access-stamp.
 ;; See also comment for check-compound-types-before.
 (DEFGENERIC check-compound-types-after (descr))
 

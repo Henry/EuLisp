@@ -333,7 +333,7 @@
 ;;                                  jvars))))))
 ;;
 ;;(defun member-var (var jvars envl)
-;;  (cond ((eq jvars envl) nil)
+;;  (cond ((eq jvars envl) ())
 ;;        ((eq var (caar jvars)) t)
 ;;        (t (member-var var (cdr jvars) envl))))
 ;;

@@ -29,28 +29,25 @@
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
-
 (defmodule basic-list
-
   (import (%tail
            ti-sys-signatures;; this allows declaration of signatures
            basic-list-0
            basic-compare
            tail-introspection
-           (only (<int>) basic-number)
+           (only (<int>)
+                 basic-number)
            apply-level-1)
    syntax (%tail)
    expose (basic-list-0)
    export (%pair-length
            eq;;; basic-compare
            consp append
-           nil t)
-   )
+           t))
 
 ;;;-----------------------------------------------------------------------------
 ;;; append
 ;;;-----------------------------------------------------------------------------
-
 (defun consp (object)
   (%instance-of-p object <cons>))
 

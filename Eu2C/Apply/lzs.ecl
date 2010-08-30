@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;    Annotations
 ;;    ===========
@@ -136,7 +136,7 @@
   (link :initform '())  ;; Verbindung zur Verwendung der
   ;; Variablen
   (place :initform ())  ;; Adressausdruck
-  (closure :initform nil)              ; Kommt frei in einer Closure vor
+  (closure :initform ())              ; Kommt frei in einer Closure vor
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -220,8 +220,8 @@
   :Annotations
   ;;-----------
   (place :initform ())  ;; address expression
-  (expanded-literal :initform nil)     ; instance of <literal-instance>
-  (syntactic :initform nil)            ; form at the syntactic level, i.e.
+  (expanded-literal :initform ())     ; instance of <literal-instance>
+  (syntactic :initform ())            ; form at the syntactic level, i.e.
   ;; before transformation to LZS
   ;; needed to fasten eval during syntax expansion
   )
@@ -253,8 +253,8 @@
   :Annotations
   ;;-----------
   (place :initform ())   ;; Adressausdruck
-  (expanded-literal :initform nil)     ; instance of <literal-instance>
-  (syntactic :initform nil)            ; form at the syntactic level, i.e.
+  (expanded-literal :initform ())     ; instance of <literal-instance>
+  (syntactic :initform ())            ; form at the syntactic level, i.e.
   ;; before transformation to LZS
   ;; needed to fasten eval and to guarantee
   ;; eq-equality during syntax expansion
@@ -284,19 +284,19 @@
   (supers :initform ())      ; list of class-def's
   (direct-slots :initform ()); list of slot-desc's
   (options :initform ())
-  (converter :initform nil)             ; a generic-fun
+  (converter :initform ())             ; a generic-fun
   class   ;; a metaclass
   :Annotations
   ;;-----------
   (lattice-type :initform ())          ; lattice type for type inference
   (place :initform ())  ;; Adressausdruck
-  (effective-slots :initform nil)
-  (class-precedence-list :initform nil)
-  (expanded-literal :initform nil)     ; instance of <literal-instance>
-  (equal-pred :initform nil)
-  (copy-fun :initform nil)
+  (effective-slots :initform ())
+  (class-precedence-list :initform ())
+  (expanded-literal :initform ())     ; instance of <literal-instance>
+  (equal-pred :initform ())
+  (copy-fun :initform ())
   (allocator :initform ^unknown)       ; fun which allocates instances
-  (keywords :initform nil)
+  (keywords :initform ())
   (type-identifier :initform ())
   (subclasses :initform ())
   representation
@@ -308,8 +308,8 @@
 
   :Annotations
   ;;----------
-  (constructors :initform nil)
-  (predicate :initform nil)
+  (constructors :initform ())
+  (predicate :initform ())
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -320,18 +320,18 @@
 
 ;;;-----------------------------------------------------------------------------
 (def-lzs-object slot-desc (:named lzs-object+type)
-  (default-function :initform nil)          ; the function returning the initial
+  (default-function :initform ())          ; the function returning the initial
   ;; value
-  (keyword :initform nil)
+  (keyword :initform ())
   :Annotations
   ;;----------
   (initvalue :initform ^unknown)        ; set if the default is a constant
   ;; expression
-  (reader :initform nil)
-  (writer :initform nil)
-  (accessor :initform nil)
-  (slot-of :initform nil);; the class which defines the slot
-  (specializes :initform nil)           ; a slot-desc if the slot specializes
+  (reader :initform ())
+  (writer :initform ())
+  (accessor :initform ())
+  (slot-of :initform ());; the class which defines the slot
+  (specializes :initform ())           ; a slot-desc if the slot specializes
   ;; another one inherited from a
   ;; superclass
   offset
@@ -345,9 +345,9 @@
 (def-lzs-object params ()
   (var-list :initform ());; required Parameters
   (opt-list :initform ());; Liste von Instanzen von 'opt'
-  (rest :initform nil)   ;; &Rest Variable oder nil
+  (rest :initform ())   ;; &Rest Variable oder ()
   (key-list :initform ());; Liste von Instanzen von 'key'
-  (allow-other-keys :initform nil)
+  (allow-other-keys :initform ())
   :Annotations
   ;;-----------
   )
@@ -356,7 +356,7 @@
 (def-lzs-object opt ()
   var
   init;; Init Value
-  (suppl :initform nil)  ;; Supplied-p Variable oder nil
+  (suppl :initform ())  ;; Supplied-p Variable oder ()
   :Annotations
   ;;-----------
   )
@@ -376,7 +376,7 @@
 (def-lzs-object fun ()
   params
 
-  (setter :initform nil) ;; the setter function
+  (setter :initform ()) ;; the setter function
 
   :Annotations
   ;;-----------
@@ -399,10 +399,10 @@
   (fwrite-gloc :initform ())             ; the result of all write-glocs
   (sys-glocs :initform ());; are fread-gloc and fwrite-gloc
   ;; changeable
-  (inline :initform ())   ;; value: nil, test or value
+  (inline :initform ())   ;; value: (), test or value
   (interpreter :initform () )            ; function in the compilation
   ;; environment to interpret calls of fun
-  (expanded-literal :initform nil)       ; instance of <literal-instance>
+  (expanded-literal :initform ())       ; instance of <literal-instance>
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -525,7 +525,7 @@
   :Annotations
   ;;-----------
   generic-fun     ; the methods generic function
-  (expanded-literal :initform nil)     ; instance of <literal-instance>
+  (expanded-literal :initform ())     ; instance of <literal-instance>
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -622,7 +622,7 @@
 
 ;;;-----------------------------------------------------------------------------
 (def-lzs-object tagbody-form ()
-  first-form             ;; Ausdruck vor dem 1. Tag, evtl. nil
+  first-form             ;; Ausdruck vor dem 1. Tag, evtl. ()
   tagged-form-list
   :Annotations
   ;;-----------
@@ -751,7 +751,7 @@
 
 (defgeneric imported-p (object))
 
-(defmethod imported-p (object) nil)
+(defmethod imported-p (object) ())
 
 (defgeneric named-p (object))
 
@@ -762,7 +762,7 @@
 
 (defgeneric global-p (object))
 
-(defmethod global-p (object) nil)
+(defmethod global-p (object) ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; compatibility to old annotation module-id
@@ -773,7 +773,7 @@
 (defun ?module-id (lzs-object)
   (if (?module lzs-object)
       (?identifier (?module lzs-object))
-    nil))
+    ()))
 
 #module-end
 

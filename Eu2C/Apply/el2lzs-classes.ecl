@@ -144,7 +144,7 @@
            (transmod-class-options class-options))))
 
 (defun transmod-slot-specs (slot-specs)
-  (let ((accessor-bindings nil))
+  (let ((accessor-bindings ()))
     (mapc (lambda (slot-spec)
             (map-option-list
              (lambda (key value)
@@ -158,7 +158,7 @@
     accessor-bindings))
 
 (defun transmod-class-options (class-options)
-  (let ((functions nil))
+  (let ((functions ()))
     (map-option-list
      (lambda (key value)
        (cond ((eq key ^predicate)
@@ -169,7 +169,7 @@
               (push (add-const (make-instance <defined-named-const>
                                               :identifier (car value)))
                     functions))
-             (t nil)))
+             (t ())))
      class-options)
     functions))
 
@@ -203,10 +203,10 @@
   (let* ((id (first class-spec))
          (metaclass (second class-spec))
          (class-def (find-in-lex-env id))
-         (keywords (get-option ^keywords class-options nil))
+         (keywords (get-option ^keywords class-options ()))
          (supers (if superclass
                      (list (find-in-lex-env superclass))
-                   nil)))
+                   ())))
     (setf (?class class-def) (find-in-lex-env metaclass))
     (mapc #'make-defined-sym keywords)
     (~initialize class-def
@@ -218,11 +218,11 @@
                        ^direct-keywords (append
                                          (slot-keywords slot-specs)
                                          keywords)
-                       ^representation (get-option ^representation class-options nil)
-                       ^allocation (get-option ^allocation class-options nil)
+                       ^representation (get-option ^representation class-options ())
+                       ^allocation (get-option ^allocation class-options ())
                        ^direct-super-lattice-types
                        (trans-lattice-type-list
-                        (get-option ^direct-super-lattice-types class-options nil))
+                        (get-option ^direct-super-lattice-types class-options ()))
                        ))
     (bind-slot-accessors class-def slot-specs)
     (let ((init-forms
@@ -243,7 +243,7 @@
         slot-specs))
 
 (defun bind-slot-accessor (accessor-type name slot)
-  (let ((accessor nil))
+  (let ((accessor ()))
     (cond ((eq accessor-type ^reader)
            (setq accessor (~slot-description-slot-reader slot)))
           ((eq accessor-type ^accessor)
@@ -309,14 +309,14 @@
 
 (defun make-slot-spec (class slot-spec)
   (let* ((name (car slot-spec))
-         (type-option (find-option ^type (cdr slot-spec) nil))
+         (type-option (find-option ^type (cdr slot-spec) ()))
          (type (and type-option (find-in-lex-env (car type-option))))
-         (default-option (find-option ^default (cdr slot-spec) nil))
-         (keyword-option (find-option ^keyword (cdr slot-spec) nil))
-         (reader-option (or (find-option ^reader (cdr slot-spec) nil)
-                            (find-option ^accessor (cdr slot-spec) nil)))
-         (writer-option (or (find-option ^writer (cdr slot-spec) nil)
-                            (find-option ^accessor (cdr slot-spec) nil)))
+         (default-option (find-option ^default (cdr slot-spec) ()))
+         (keyword-option (find-option ^keyword (cdr slot-spec) ()))
+         (reader-option (or (find-option ^reader (cdr slot-spec) ())
+                            (find-option ^accessor (cdr slot-spec) ())))
+         (writer-option (or (find-option ^writer (cdr slot-spec) ())
+                            (find-option ^accessor (cdr slot-spec) ())))
          )
     (nconc (list ^name name
                  ^reader reader-option  ; used as a flag only for tail classes
@@ -345,8 +345,8 @@
                         (dynamic lex-env)))))
 
 (defun slot-keywords (slot-specs)
-  (if (null? slot-specs) nil
-    (let ((keyword-option (find-option ^keyword (cdar slot-specs) nil)))
+  (if (null? slot-specs) ()
+    (let ((keyword-option (find-option ^keyword (cdar slot-specs) ())))
       (if keyword-option
           (cons (car keyword-option)
                 (slot-keywords (cdr slot-specs)))
@@ -397,9 +397,9 @@
           (supers (mapcar #'find-in-lex-env superclasses)))
      (setf (?class class-def) (find-in-lex-env metaclass))
      (setf (?code-identifier class-def)
-           (get-option ^object-identifier class-options nil))
+           (get-option ^object-identifier class-options ()))
      (setf (?type-identifier class-def)
-           (get-option ^type-identifier class-options nil))
+           (get-option ^type-identifier class-options ()))
      (~initialize class-def
                   (list ^name id
                         ^direct-superclasses supers
@@ -409,22 +409,22 @@
                                 slot-specs)
                         ^direct-keywords (append
                                           (slot-keywords slot-specs)
-                                          (get-option ^keywords class-options nil))
+                                          (get-option ^keywords class-options ()))
                         ^direct-super-lattice-types
                         (trans-lattice-type-list
                          (get-option ^direct-super-lattice-types class-options
-                                     nil))
-                        ^converter (trans (get-option ^converter class-options nil))
-                        ^representation (get-option ^representation class-options nil)
+                                     ()))
+                        ^converter (trans (get-option ^converter class-options ()))
+                        ^representation (get-option ^representation class-options ())
                         ))
-     nil))) ; no initialization form is needed
+     ()))) ; no initialization form is needed
 
 (defun make-x-slot-spec (class slot-spec)
   (let* ((name (car slot-spec))
-         (type-option (find-option ^type (cdr slot-spec) nil))
+         (type-option (find-option ^type (cdr slot-spec) ()))
          (type (and type-option (find-in-lex-env (car type-option))))
-         (keyword-option (find-option ^keyword (cdr slot-spec) nil))
-         (c-identifier-option (find-option ^c-identifier (cdr slot-spec) nil))
+         (keyword-option (find-option ^keyword (cdr slot-spec) ()))
+         (c-identifier-option (find-option ^c-identifier (cdr slot-spec) ()))
          )
     (nconc (list ^name name)
            (when type-option

@@ -136,7 +136,7 @@
 ;;   (if (null? slots) object
 ;;     (let ((option (find-option (slot-description-keyword (car slots))
 ;;                                initlist
-;;                                nil)))
+;;                                ())))
 ;;       ((slot-description-slot-writer (car slots))
 ;;        object
 ;;        (cond (option (car option))
@@ -161,7 +161,7 @@
   (if (null? slots) object
     (%let ((option <list> (find-option (slot-description-keyword (car slots))
                                        initlist
-                                       nil))
+                                       ()))
            (default-function <object> (slot-description-default-function (car slots))))
           (set-nth-slot-value (%cast <instance-as-vector> object)
                               slot-position

@@ -20,10 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: module null
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    Declaration of the <null> class and null? predicate
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -33,16 +30,13 @@
                  (only (atom)
                        common-lisp)))
  syntax (eulisp-kernel)
- export (nil
-         null?)
+ export (null?)
  expose ((only ($empty-list)
                el-modules)))
 
 (make-eulisp-class null)
 
-(defconstant nil ())
-
-;; Rename the CL null -> null?
+;; Rename the CL predicate null -> null?
 (defun null? (a)
   (cl:null a))
 

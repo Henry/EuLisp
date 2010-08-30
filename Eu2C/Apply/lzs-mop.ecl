@@ -163,16 +163,16 @@
 ;;; application module TAIL.
 
 ;;(define-tail %object export (abstract-class-def)
-;;  :supers nil
-;;  :direct-slots nil
-;;  :representation nil
+;;  :supers ()
+;;  :direct-slots ()
+;;  :representation ()
 ;;  )
 
 (deflocal %object ())
 
 ;;(define-tail %class export (metaclass-def)
 ;;  :supers (list %object)
-;;  :representation nil
+;;  :representation ()
 ;;  )
 
 (deflocal %class ())
@@ -180,7 +180,7 @@
 ;;(define-tail %abstract-class export (metaclass-def)
 ;;  :supers (list %class)
 ;;  :class %class
-;;  :representation nil
+;;  :representation ()
 ;;  )
 
 (deflocal %abstract-class ())
@@ -188,7 +188,7 @@
 ;;(define-tail %tail-class export (metaclass-def)
 ;;  :supers (list %class)
 ;;  :class %class
-;;  :representation nil
+;;  :representation ()
 ;;  )
 
 (deflocal %tail-class ())
@@ -200,9 +200,9 @@
                        :identifier ^%object
                        :code-identifier "c__object__eulisp0"
                        :module $tail-module
-                       :supers nil
-                       :direct-slots nil
-                       :representation nil))
+                       :supers ()
+                       :direct-slots ()
+                       :representation ()))
   (add-lexical %object $tail-module ^export)
 
   (setq %class
@@ -212,7 +212,7 @@
                        :code-identifier "c__class__eulisp0"
                        :module $tail-module
                        :supers (list %object)
-                       :representation nil))
+                       :representation ()))
   (add-lexical %class $tail-module ^export)
 
   (setq %abstract-class
@@ -223,7 +223,7 @@
                        :module $tail-module
                        :supers (list %class)
                        :class %class
-                       :representation nil))
+                       :representation ()))
   (add-lexical %abstract-class $tail-module ^export)
 
   (setq %tail-class
@@ -234,7 +234,7 @@
                        :module $tail-module
                        :supers (list %class)
                        :class %class
-                       :representation nil))
+                       :representation ()))
   (add-lexical %tail-class $tail-module ^export)
 
 

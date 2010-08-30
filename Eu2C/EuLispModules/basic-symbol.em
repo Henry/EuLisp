@@ -71,7 +71,7 @@
 ;;; the symbol table
 ;;;-----------------------------------------------------------------------------
 
-(deflocal *symbol-table* nil)
+(deflocal *symbol-table* ())
 
 (%define-variable symbol-table-initialization-function %function)
 ;; this variable is set by the main initialization function to a function calling

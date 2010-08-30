@@ -40,10 +40,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Global variables
 ;;;-----------------------------------------------------------------------------
-(deflocal *compilation-type* nil)
+(deflocal *compilation-type* ())
 ;; The following values are supported: :application :basic-system
 
-(deflocal *basic-system* nil)
+(deflocal *basic-system* ())
 ;; either () if no precompiled basic system is used
 ;; or the module describing the basic system (got from a .def-file)
 
@@ -51,7 +51,7 @@
 ;;; Functions
 ;;;-----------------------------------------------------------------------------
 (defun signature-needed-for-code-generation-p (fun)
-  ;;answer whether the type scheme can be set to nil
+  ;;answer whether the type scheme can be set to ()
   (or (null? (eq *compilation-type* :application))
       (null? (special-sys-fun-p fun))))
 

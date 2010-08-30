@@ -24,13 +24,8 @@
 ;;    function. Type schemes are generic, i.e. they may have more than one
 ;;    line (descriptor). This file provides functions to create default type
 ;;    descriptors.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Andreas Kind
 ;;;-----------------------------------------------------------------------------
-
 
 #module ti-descrs
 (import (lzs
@@ -39,7 +34,10 @@
          ti
          ti-exprs
          ti-eqs
-         (only (make-array vector append) common-lisp))
+         (only (make-array
+                vector
+                append)
+               common-lisp))
  syntax (ti)
  export (filled-formal-descr
          filled-recursive-descr
@@ -63,8 +61,8 @@
   (fill-descr (make <formal-type-descr>
                     :type-vars (make <type-var-substitutions>)
                     :type-vec (make-array (length exprs))
-                    :stat nil
-                    :t-descr-before nil
+                    :stat ()
+                    :t-descr-before ()
                     :type-spec 0)
               exprs 0))
 
@@ -73,8 +71,8 @@
   (fill-descr (make <recursive-type-descr>
                     :type-vars (make <type-var-substitutions>)
                     :type-vec (make-array (length exprs))
-                    :stat nil
-                    :t-descr-before nil
+                    :stat ()
+                    :t-descr-before ()
                     :type-spec 0)
               exprs 0))
 
@@ -83,8 +81,8 @@
   (fill-descr (make <act-type-descr>
                     :type-vars (make <type-var-substitutions>)
                     :type-vec (make-array (length exprs))
-                    :stat nil
-                    :t-descr-before nil
+                    :stat ()
+                    :t-descr-before ()
                     :type-spec 0)
               exprs 0))
 
@@ -135,8 +133,8 @@
   (let ((descr (make <formal-type-descr>
                      :type-vars (make <type-var-substitutions>)
                      :type-vec (make-array (+ arity 1))
-                     :stat nil
-                     :t-descr-before nil
+                     :stat ()
+                     :t-descr-before ()
                      :type-spec 0)))
     (fill-descr-to descr arity)))
 
@@ -145,8 +143,8 @@
   (let ((descr (make <formal-type-descr>
                      :type-vars (make <type-var-substitutions>)
                      :type-vec (make-array (+ arity 1))
-                     :stat nil
-                     :t-descr-before nil
+                     :stat ()
+                     :t-descr-before ()
                      :type-spec 0)))
     (fill-descr-to-with-%object descr arity)))
 
@@ -155,8 +153,8 @@
   (let ((descr (make <recursive-type-descr>
                      :type-vars (make <type-var-substitutions>)
                      :type-vec (make-array (+ arity 1))
-                     :stat nil
-                     :t-descr-before nil
+                     :stat ()
+                     :t-descr-before ()
                      :type-spec 0)))
     (fill-descr-to descr arity)))
 
@@ -165,8 +163,8 @@
   (let ((descr (make <act-type-descr>
                      :type-vars (make <type-var-substitutions>)
                      :type-vec (make-array (+ arity 1))
-                     :stat nil
-                     :t-descr-before nil
+                     :stat ()
+                     :t-descr-before ()
                      :type-spec 0)))
     (fill-descr-to descr arity)))
 
@@ -175,8 +173,8 @@
   (make <formal-type-descr>
         :type-vars (make <type-var-substitutions>)
         :type-vec (make-array (+ arity 1))
-        :stat nil
-        :t-descr-before nil
+        :stat ()
+        :t-descr-before ()
         :type-spec 0))
 
 ;; Answer an empty recursive type descriptor.
@@ -184,8 +182,8 @@
   (make <recursive-type-descr>
         :type-vars (make <type-var-substitutions>)
         :type-vec (make-array (+ arity 1))
-        :stat nil
-        :t-descr-before nil
+        :stat ()
+        :t-descr-before ()
         :type-spec 0))
 
 ;; Answer an empty actual type descriptor.
@@ -193,8 +191,8 @@
   (make <act-type-descr>
         :type-vars (make <type-var-substitutions>)
         :type-vec (make-array (+ arity 1))
-        :stat nil
-        :t-descr-before nil
+        :stat ()
+        :t-descr-before ()
         :type-spec 0))
 
 ;; Answer a formal descriptor of the range and domain vector.

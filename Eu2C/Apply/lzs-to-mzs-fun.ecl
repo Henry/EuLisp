@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -83,7 +83,7 @@
              (null? (?params fun))) fun)
         ;; !!!!!!!!!!! hack
         ;; add global-generic-fun and local-generic-fun
-        ;; ((and  (print (list 'function (?identifier fun))) nil) nil)
+        ;; ((and  (print (list 'function (?identifier fun))) ()) ())
         ;; !!!!!!!!!!! debug
         ((eq (?pass fun) 1)
          (if (global-fun-p fun)
@@ -496,7 +496,7 @@
     (other-arg1 1 l var-vec nzvar)))
 
 (defun other-arg1 (from to var-vec nzvar)
-  (if (> from to) nil
+  (if (> from to) ()
     (let ((arg (vector-ref var-vec from)))
       (if (or (tempvar-p arg)
               (var-p arg))

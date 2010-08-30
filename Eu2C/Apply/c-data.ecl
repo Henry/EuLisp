@@ -27,7 +27,7 @@
 ;;;  Notes:
 ;;;  Requires:
 ;;;  Problems:
-;;;  Authors: 
+;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
 #module c-data
@@ -76,13 +76,13 @@
 ;;; variables and reset
 ;;;-----------------------------------------------------------------------------
 
-(deflocal *structure-roots* nil)
-(deflocal *vector-roots* nil)
+(deflocal *structure-roots* ())
+(deflocal *vector-roots* ())
 (defvar code-output t)
 
 (defun reset-c-data ()
-  (setq *structure-roots* nil)
-  (setq *vector-roots* nil))
+  (setq *structure-roots* ())
+  (setq *vector-roots* ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; code output
@@ -126,7 +126,7 @@
 
 (defgeneric disable-gc (literal))
 
-(defmethod disable-gc (literal) nil)
+(defmethod disable-gc (literal) ())
 
 (defmethod disable-gc ((class <defined-class>))
   (disable-gc (expand-literal class)))
@@ -142,14 +142,14 @@
 
 (defun add-structure-root (literal slot)
   (unless (?gc-not-needed literal)
-          (push (format nil "~:/EXPR/.~A"
+          (push (format () "~:/EXPR/.~A"
                         literal
                         (c-identifier slot))
                 *structure-roots*)))
 
 (defun add-vector-root (length literal)
   (unless (?gc-not-needed literal)
-          (push (format nil "{~A, (void**)~/EXPR/}"
+          (push (format () "{~A, (void**)~/EXPR/}"
                         length
                         literal)
                 *vector-roots*)))
@@ -177,14 +177,14 @@
 
 (defmethod literal-declaration (literal (class <tail-class-def>)
                                         representation)
-  nil)
+  ())
 
 (defmethod literal-declaration (literal (class <basic-class-def>)
                                         representation)
-  nil)
+  ())
 
 (defmethod literal-declaration (literal class representation)
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Defining Literals (with initial value)
@@ -193,7 +193,7 @@
 (defgeneric literal-definition (literal class representation))
 
 (defmethod literal-definition (literal class representation)
-  nil)
+  ())
 
 (defmethod literal-definition (literal class (representation <%direct>))
   ;; direct can be used only for class mappings to basic classes like
@@ -274,7 +274,7 @@
 
 (defmethod literal-definition (literal (class <%string>)
                                        representation)
-  nil)
+  ())
 
 (defconstant $unknown-initializer
   (make-literal-instance
@@ -282,7 +282,7 @@
    '(0)))
 
 (defun get-structure-components (literal values slots)
-  (if (null? values) nil
+  (if (null? values) ()
     (progn
       (when (is-pointer (~slot-description-type (car slots)))
             (add-structure-root literal (car slots)))
@@ -302,9 +302,9 @@
 (defgeneric get-vector-components (length components class))
 
 (defmethod get-vector-components (length components class)
-  (cond ((= length 0) nil)
+  (cond ((= length 0) ())
         ((null? components)
-         nil)
+         ())
         ((null? (cdr components))
          (make-list length
                     :initial-element (type-expr-for-c class
@@ -331,11 +331,11 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun string-code (string length padchar)
-  (convert-to-c-string (format nil "~V,,,VA" length padchar string)))
+  (convert-to-c-string (format () "~V,,,VA" length padchar string)))
 
 (defun convert-to-c-string (string)
   (with-output-to-string (c-string)
-                         (cl:map nil
+                         (cl:map ()
                                  (lambda (char)
                                    (princ (cond ((alphanumericp char) char)
                                                 ((find char " !#$%&'()*+,-./:;<=>?@[]^_`{|}~")
@@ -350,7 +350,7 @@
                                                 ((eq char #\') "\\'")
                                                 ((eq char #\") "\\\"")
                                                 ((eq char #\\) "\\\\")
-                                                (t (format nil "\\~3,'0O" (char-code char))))
+                                                (t (format () "\\~3,'0O" (char-code char))))
                                           c-string))
                                  string)))
 

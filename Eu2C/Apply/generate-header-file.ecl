@@ -110,7 +110,7 @@
 
 (defmethod type-declaration ((class-def <imported-class>) representation)
   ;; declarations for imported classes should come with included header files
-  nil)
+  ())
 
 (defmethod type-declaration (class-def (representation <%pointer-to-struct>))
   (write-code "~%~@<typedef ~;~Istruct ~A ~:_*~:*~A~;;~:>"
@@ -131,7 +131,7 @@
 
 (defmethod type-declaration ((class-def <basic-class-def>) representation)
   ;; basic types are mapped directly to their C counterparts
-  nil)
+  ())
 
 (defgeneric get-referred-class (representation class))
 
@@ -151,13 +151,13 @@
 
 (defmethod struct-declaration ((class-def <imported-class>) representation)
   ;; declarations for imported classes should come with included header files
-  nil)
+  ())
 
 (defmethod struct-declaration (class-def representation)
-  nil)
+  ())
 
 (defmethod struct-declaration ((class-def <basic-class-def>) representation)
-  nil)
+  ())
 
 (defmethod struct-declaration (class-def (rep <%pointer-to-struct>))
   (with-local-identifiers
@@ -173,7 +173,7 @@
   (when (exported-p class)
         (object-declaration class)))
 (defmethod generate-class-object-declaration ((class <basic-class-def>))
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Function Declarations
@@ -195,15 +195,15 @@
   ;; this scheme doesn't work for module compilation because in a single module a
   ;; discriminating function may be defined or not
   ;; the function object is not needed in any case
-  nil)
+  ())
 
 (defmethod function-declaration ((fun <special-sys-fun>))
   ;; do nothing
-  nil)
+  ())
 
 (defun types-and-parameters-1 (required function-signature i)
   (if (null? required)
-      nil
+      ()
     (progn
       (setf (?type (car required))
             (svref function-signature i))
@@ -235,7 +235,7 @@
    ;; this is because function header and body must be handled in the same
    ;; 'with-local-identifier'-context
    (mapc (lambda (var)
-           (setf (?code-identifier var) nil))
+           (setf (?code-identifier var) ()))
          (?var-list (?params fun)))))
 
 (defmethod function-declaration ((fun <defined-fun>))
@@ -245,7 +245,7 @@
 (defmethod function-declaration ((fun <imported-fun>))
   ;; the prototype of imported functions is got by including header-files into
   ;; the C source
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; constants, variables and symbols

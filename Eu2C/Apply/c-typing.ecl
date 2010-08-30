@@ -58,7 +58,7 @@
 ;;; switches and variables
 ;;;-----------------------------------------------------------------------------
 (defvar *no-cast-if-compatible-representation* t)
-(defvar *function* nil)
+(defvar *function* ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes
@@ -99,7 +99,7 @@
                ~%trying a cast to ~A for ~/EXPR/"
               (if (dynamic *function*)
                   (?identifier (dynamic *function*))
-                nil)
+                ())
               (?identifier type)
               (?identifier expr-type)
               (?identifier type)
@@ -114,7 +114,7 @@
 (defgeneric compatible-representation-p (class1 rep1 class2 rep2))
 
 (defmethod compatible-representation-p (class1 rep1 class2 rep2)
-  nil)
+  ())
 
 (defmethod compatible-representation-p (class1 (rep1 <%direct>)
                                                class2 rep2)
@@ -188,7 +188,7 @@
   (type-args-1 signature args 1))
 
 (defun type-args-1 (signature args i)
-  (if (null? args) nil
+  (if (null? args) ()
     (cons (type-expr-for-c (svref signature i)
                            (first args))
           (type-args-1 signature (rest args) (+ i 1)))))
@@ -221,7 +221,7 @@
 
 (defmethod is-pointer ((representation <%pointer>)) t)
 
-(defmethod is-pointer (representation) nil)
+(defmethod is-pointer (representation) ())
 
 
 #module-end

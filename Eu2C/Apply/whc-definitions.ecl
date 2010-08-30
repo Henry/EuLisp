@@ -192,6 +192,6 @@ non-representation-object ~s" obj))
 
 
 (defmethod compute-byte-length* ((length <null>) representation)
-  nil)
+  ())
 
 #module-end

@@ -54,7 +54,7 @@
 
 
 (defmethod converter ((dest <list>) (collection <vector>))
-  (let ((result (cons 1 nil)))
+  (let ((result (cons 1 ())))
     (convert-vector-to-list collection
                             #%I0
                             (length collection)
@@ -75,13 +75,13 @@
        (progn (setf (cdr result)
                     (cons
                      (primitive-vector-ref vec index)
-                     nil))
+                     ()))
               (cdr result)))
     result))
 
 
 (defmethod (converter <list>) ((collection <string>))
-  (let ((result (cons 1 nil)))
+  (let ((result (cons 1 ())))
     (convert-string-to-list collection
                             #%I0
                             (primitive-string-length collection)
@@ -102,7 +102,7 @@
        (progn (setf (cdr result)
                     (cons
                      (string-ref-u str index)
-                     nil))
+                     ()))
               (cdr result)))
     result))
 

@@ -62,10 +62,10 @@
                (?discriminating-fun function-object)
              function-object)))))
 
-(deflocal *literals* nil)
+(deflocal *literals* ())
 
 (defun reset-literals ()
-  (setq *literals* nil))
+  (setq *literals* ()))
 
 (defun make-literal-instance (class value-list)
   (let ((inst (make-instance <literal-instance>

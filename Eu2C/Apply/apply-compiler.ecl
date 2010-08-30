@@ -20,11 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: The Main Part of the APPLY-Compiler
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
-;;;  Authors: 
+;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
 #module apply-compiler
@@ -92,7 +88,7 @@
                common-lisp))
  export (compile-application compilation-state))
 
-(deflocal compilation-state nil)
+(deflocal compilation-state ())
 
 (defmacro call-module-function (module-name function-name . args)
   `(funcall (symbol-function (find-symbol ,(string function-name)
@@ -167,7 +163,7 @@
      (setq module (load-application-modules module-name))
 
      (when (> *frontend-errors* 0)
-           (return-from compile nil))
+           (return-from compile ()))
 
      (format t "~%--- handle symbol environment...")
      (handle-symbols module module-env)
@@ -238,7 +234,7 @@
   (dynamic-let ((*info-level* (dynamic *system-info-level*)))
                (if (null? basic-system)
                    (progn
-                     (setq *basic-system* nil)
+                     (setq *basic-system* ())
                      (load-module ^apply-level-1)            ; load the most basic things
                      (set-apply-level-1-objects)             ; provide basic things to the compiler
 
@@ -250,7 +246,7 @@
                      ;;(load-module ^tail)                    ; load modules apply and tail
                      (set-apply-objects (load-module ^apply)); binds some variables with objects
                      ;; available in apply.am)
-                     nil
+                     ()
                      )
                  (progn
                    (setq *basic-system* (load-if-module basic-system))

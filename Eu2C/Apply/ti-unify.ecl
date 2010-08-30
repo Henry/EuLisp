@@ -61,7 +61,7 @@
     (cond ((unify-exprs left-expr right-expr subs) ;unify first equation
            (ti-format2 t "~%new subs ~A" (ti-print-string subs))
            (unify (cdr stack) subs))    ;unification goes ahead
-          (t nil))))     ;;unification failed
+          (t ()))))     ;;unification failed
 
 ;;;-----------------------------------------------------------------------------
 ;;; UNIFICATION OF TYPE EXPRESSIONS
@@ -111,7 +111,7 @@
         (let ((new-expr (unify-exprs expr (?right-expr equ) subs)))
           (if new-expr
               (set-right-expr equ new-expr)
-            nil))
+            ()))
       (add-substitution subs var expr))))
 
 (defmethod add-unify-equation ((subs <type-var-substitutions>)

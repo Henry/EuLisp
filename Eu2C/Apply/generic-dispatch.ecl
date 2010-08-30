@@ -83,7 +83,7 @@
 
 (defmethod ~set-discriminating-function ((fun <fun>))
   ;;do nothing for non-generic functions
-  nil)
+  ())
 
 (defmethod ~set-discriminating-function ((gf <generic-fun>))
   ;;called after loading application modules and before analyzing functions
@@ -101,7 +101,7 @@
         (~compute-discriminating-function
          gf
          (~generic-function-domain gf)
-         nil             ;; the lookup-fn is ignored in the
+         ()             ;; the lookup-fn is ignored in the
          ;; default case
          (~generic-function-methods gf)))
   )
@@ -440,10 +440,10 @@
 
 
 (defun gf-with-closure-p (gf methods)
-  nil)
+  ())
 
 (defun gf-with-next-method-p (gf methods)
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; compute-std-discrfun-4-few-methods
@@ -548,7 +548,7 @@
 ;;; Installing and Finding Standard Discriminating Functions
 ;;;-----------------------------------------------------------------------------
 
-(deflocal *std-discr-fun-table* nil)
+(deflocal *std-discr-fun-table* ())
 ;;*std-discr-fun-table* is a sorted list of descriptions of standard dispatching
 ;;functions; the order in this list is as follows:
 ;;without closure before with closure
@@ -564,7 +564,7 @@
   (closure :reader :initarg))           ; 0 or 1 for 'no' resp. 'yes'
 
 (defun reset-generic-dispatch ()
-  (setq *std-discr-fun-table* nil))
+  (setq *std-discr-fun-table* ()))
 
 (defun map-to-std-discr-funs (fun)
   (mapc (lambda (fun-descr)

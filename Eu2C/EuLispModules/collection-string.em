@@ -27,74 +27,63 @@
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule collection-string
+  (import (tail
+           apply
+           eulisp-kernel
+           ;;collection-aux
+           (only (<string>
+                  string-pointer
+                  make-string
+                  string-append)
+                 string-ii)
+           basic-list
+           character
+           (only (eql) compare)
+           (only (print)
+                 print)
+           (only (<conversion-condition>
+                  error)
+                 condition)
+           ;;collection-generic
+           (only (strdup
+                  strlen)
+                 c-string-interface)
+           collection-generic
+           collection-aux
+           (only (primitive-setter-string-ref
+                  primitive-string-length
+                  primitive-string-ref
+                  string-ref
+                  string-ref-u)
+                 collection-i))
+   syntax (tail
+           syntax-0)
+   export (accumulate
+           accumulate1
+           anyp
+           concatenate
+           do
+           element
+           emptyp
+           fill
+           map
+           member
+           reverse
+           size
+           ;;converter
+           ;;    generic-prin
+           ;;    generic-write
+           ))
 
-  (import
-   (tail
-    apply
-    eulisp-kernel
-    ;;collection-aux
-    (only (<string>
-           string-pointer
-           make-string
-           string-append)
-          string-ii)
-    basic-list
-    character
-    (only (eql) compare)
-    (only (print)
-          print)
-    (only (<conversion-condition> error)
-          condition)
-    ;;collection-generic
-    (only (strdup strlen) c-string-interface)
-
-    collection-generic
-    collection-aux
-    (only (primitive-setter-string-ref
-           primitive-string-length
-           primitive-string-ref
-           string-ref
-           string-ref-u)
-          collection-i)
-    )
-
-   syntax
-   (tail
-    syntax-0
-    )
-
-   export
-   (accumulate
-    accumulate1
-    anyp
-    concatenate
-    do
-    element
-    emptyp
-    fill
-    map
-    member
-    reverse
-    size
-    ;;converter
-    ;;    generic-prin
-    ;;    generic-write
-    )
-   )
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; accumulate
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod accumulate ((function <function>)
                        (object <object>)
                        (str <string>))
   (map-accumulate function str object
                   (primitive-string-length str) #%I0))
-
 
 (%define-function (map-accumulate <object>)
   ((function <function>)
@@ -110,7 +99,6 @@
                       (%plus index #%I1))
     res))
 
-
 ;;  (defun map-accumulate (function str res max-len index)
 ;;    (if (< index max-len)
 ;;      (map-accumulate function
@@ -120,17 +108,12 @@
 ;;                      (+ index 1))
 ;;      res))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; accumulate1
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod accumulate1 ((function <function>)
 ;;                           (str <string>))
 ;;     (accumulate-string1 function str))
-
-
 
 (defmethod accumulate1 ((function <function>)
                         (str <string>))
@@ -141,14 +124,9 @@
                     (primitive-string-length str)
                     #%I1)))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; anyp
-;;;------------------------------------------------------------
-
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod anyp ((function <function>)
 ;;                   (str <string>) . more-collections)
 ;;    (anyp-string function str more-collections))
@@ -166,7 +144,6 @@
               (t (anyp-collection function str more-collections)))
         ))
 
-
 (%define-function (anyp-with-one-string <object>)
   ((function <function>)
    (str <string>)
@@ -176,7 +153,7 @@
       (if (function (string-ref-u str index))
           t
         (anyp-with-one-string function str (%plus index #%I1) len))
-    nil))
+    ()))
 
 (defmethod anyp-with-two-args
   ((function <function>)
@@ -210,16 +187,13 @@
           t
         (anyp-with-two-strings function str1 str2 min-length
                                (%plus index #%I1)))
-    nil))
-
+    ()))
 
 (defmethod anyp-with-two-args
   ((function <function>)
    (str1 <string>)
    (collection <object>))
-  (anyp-collection function str1 (cons collection nil)))
-
-
+  (anyp-collection function str1 (cons collection ())))
 
 ;;;anyp-string is equal to anyp-list... and can be used for all collections!!!
 ;;;so I take anyp-collection for all these
@@ -230,15 +204,13 @@
 ;;     (mapc-more-collections
 ;;      (cons
 ;;       (construct-collection-info liste)
-;;       nil)
+;;       ())
 ;;      more-collections)
 ;;     ))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; concatenate
-;;;------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 
 (defmethod concatenate ((str <string>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
@@ -257,8 +229,6 @@
               (t (concat-collection str more-collections)))
         ))
 
-
-
 ;;  (%define-function (concat-with-one-string <string>)
 ;;                     ((str <string>)
 ;;                     (index %unsigned-word-integer)
@@ -273,8 +243,6 @@
 ;;                                  (%plus index #%I1) len result))
 ;;      result)
 ;;    )
-
-
 
 ;;  (%define-function (concat-next-string <string>)
 ;;                    ((src-str <string>)
@@ -325,15 +293,13 @@
 ;;                               result-string)
 ;;    result-string)
 
-
 (defmethod concat-with-two-args
   ((str <string>) (collection <object>))
-  (concat-collection str (cons collection nil)))
+  (concat-collection str (cons collection ())))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; do
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 
 ;;  (defmethod do ((function <function>)
 ;;                 (str <string>) . more-collections)
@@ -362,7 +328,7 @@
   (if (%lt index len)
       (progn (function (string-ref-u str index))
              (do-with-one-string function str (%plus index #%I1) len))
-    nil))
+    ()))
 
 (defmethod do-with-two-args
   ((function <function>)
@@ -395,13 +361,13 @@
                        (string-ref-u str2 index))
              (do-with-two-strings function str1 str2 min-length
                                   (%plus index #%I1)))
-    nil))
+    ()))
 
 (defmethod do-with-two-args
   ((function <function>)
    (str1 <string>)
    (collection <object>))
-  (do-collection function str1 (cons collection nil)))
+  (do-collection function str1 (cons collection ())))
 
 ;;;do-string is equal to do-list... and can be used for all collections!!!
 ;;;take do-collection from -aux
@@ -411,20 +377,16 @@
 ;;     (mapc-more-collections
 ;;      (cons
 ;;       (construct-collection-info liste)
-;;       nil)
+;;       ())
 ;;      more-collections)
 ;;     ))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; element and (setter element)
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod element ((str <string>)
                     (key <int>))
   (string-ref str key))
-
 
 (defmethod (setter element) ((str <string>)
                              (key <int>)
@@ -436,35 +398,27 @@
                 (make-swi (convert-char-int value))))
   value)
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; emptyp
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod emptyp ((str <string>))
   (if  (%eq (primitive-string-ref str #%I0) #%B0)
       t
-    nil))
-
+    ()))
 
 (defun emptyp-string (str)
   (if  (%eq (primitive-string-ref str #%I0) #%B0)
       t
-    nil))
+    ()))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; fill
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod fill ((str <string>)
 ;;                   (object <character>) ;object to fill
 ;;                   (start <int>)
 ;;                   (end <int>))
 ;;    (fill-string str object start end))
-
 
 (defmethod fill ((str <string>)
                  (object <character>) . keys)
@@ -482,7 +436,7 @@
                                 #%I0
                                 (%cast %unsigned-word-integer
                                        (%minus str-len #%i1)))
-               nil)
+               ())
            (if (%eq #%i1 rest-list-length)
                (error "fill: collection does not have natural order"
                       <conversion-condition>)
@@ -498,10 +452,8 @@
                                  (make-swi (convert-char-int object)))
                           (%cast %unsigned-word-integer start)
                           (%cast %unsigned-word-integer end))
-                         nil)
-                     nil))))))
-
-
+                         ())
+                     ()))))))
 
 (%define-function (fill-string-aux %void)
   ((str-pointer %string)
@@ -509,14 +461,13 @@
    (start %unsigned-word-integer)
    (end %unsigned-word-integer))
   (if (%gt start end)
-      nil
+      ()
     (progn (%setf (%extract str-pointer start)
                   object)
            (fill-string-aux str-pointer object
                             (%plus start #%I1) end))))
 
-
-;;------------------------------------------------------------
+;;-----------------------------------------------------------------------------
 
 ;;  (defmethod map ((function <function>)
 ;;                  (str <string>) . more-collections)
@@ -535,7 +486,7 @@
 ;;                                           (make-string
 ;;                                            str-length))))
 ;;               ((%eq rest-list-length #%i1)
-;;                (map-with-two-args function str (car more-collections) nil))
+;;                (map-with-two-args function str (car more-collections) ()))
 ;;               (t (map-collection function str more-collections)))
 ;;         ))
 
@@ -582,7 +533,7 @@
 ;;    (str1 <string>)
 ;;    (collection <object>)
 ;;    (not-used <object>))
-;;   (map-collection function str1 (cons collection nil)))
+;;   (map-collection function str1 (cons collection ())))
 
 ;;;map-string is equal to map-list... and can be used for all collections!!!
 ;;;take map-collection from -aux
@@ -592,21 +543,17 @@
 ;;     (mapc-more-collections            ; ; ; ; ; ; ; ;
 ;;      (cons             ;; ;           ; ; ; ; ; ;
 ;;       (construct-collection-info liste) ; ; ; ; ; ; ; ;
-;;       nil)             ;; ;           ; ; ; ; ; ;
+;;       ())             ;; ;           ; ; ; ; ; ;
 ;;      more-collections) ;; ;           ; ; ; ; ; ;
-;;     nil                ;; ;           ; ; ; ; ; ;
+;;     ()                 ;; ;           ; ; ; ; ; ;
 ;;     liste))            ;; ;           ; ; ; ; ; ;
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; member
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod member ((object <character>)
 ;;                     (str <string>) . test)
 ;;    (member-string object str test))
-
 
 (defmethod member ((char <character>)
                    (str <string>) . test)
@@ -623,7 +570,6 @@
                           (strlen (string-pointer str)))
                          test-fct))))
 
-
 (%define-function (member-string-aux <object>)
   ((object <character>)
    (str <string>)
@@ -634,8 +580,7 @@
       (if (test (string-ref-u str index) object)
           t
         (member-string-aux object str (%plus index #%I1) len test))
-    nil))
-
+    ()))
 
 (%define-function (memq-string <object>)
   ((object <character>)
@@ -646,16 +591,11 @@
       (if (eq (string-ref-u str index) object)
           t
         (memq-string object str (%plus index #%I1) len))
-    nil))
+    ()))
 
-
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; reverse
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod reverse ((str <string>))
   (%let* ((str-pointer %string
                        (string-pointer str))
@@ -668,7 +608,6 @@
              rev-str
            (reverse-string-aux str rev-str #%I0
                                (%minus str-len #%I1)))))
-
 
 ;;  (defun reverse-string (str)
 ;;    (%let* ((str-pointer %string
@@ -683,7 +622,6 @@
 ;;             rev-str
 ;;             (reverse-string-aux str rev-str #%I0
 ;;                                 (%minus str-len #%I1)))))
-
 
 (%define-function (reverse-string-aux <string>)
   ((str <string>)
@@ -700,17 +638,11 @@
     rev-str)
   )
 
-
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; size
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod size ((str <string>))
 ;;    (string-length str))
-
 
 (defmethod size ((str <string>))
   (make-fpint (strlen (string-pointer str))))
@@ -718,7 +650,6 @@
 ;;  (defun size-string (str)
 ;;    (make-fpint (strlen (string-pointer str))))
 
-
+;;;-----------------------------------------------------------------------------
 )
-
-;;;eof
+;;;-----------------------------------------------------------------------------

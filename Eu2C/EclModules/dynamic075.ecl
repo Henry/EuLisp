@@ -35,8 +35,11 @@
          pair-ext)
  syntax (eulisp-kernel
          list-ext
-         (only (declare special) common-lisp)
-         (rename ((defvar cl:defvar)) common-lisp)))
+         (only (declare
+                 special)
+               common-lisp)
+         (rename ((defvar cl:defvar))
+                 common-lisp)))
 
 ;;defined macros: defvar dynamic dynamic-let dynamic-setq
 
@@ -50,7 +53,7 @@
 
 (defmacro dynamic (id) (make-dynamic-id id))
 
-(cl:defvar *dynamics* nil)
+(cl:defvar *dynamics* ())
 
 (defun make-and-collect-dynamic-id (id)
   (let ((dyn-id (make-dynamic-id id)))
@@ -58,13 +61,13 @@
     dyn-id))
 
 (defmacro dynamic-let (vars . body)
-  (let ((*dynamics* nil))
+  (let ((*dynamics* ()))
     `(let ,(make-dynamic-let-vars vars)
        (declare (special ,@*dynamics*))
        ,@body)))
 
 (defun make-dynamic-let-vars (vars)
-  (cond ((null? vars) nil)
+  (cond ((null? vars) ())
         ((symbolp (car vars))
          (cons (make-and-collect-dynamic-id (car vars))
                (make-dynamic-let-vars (cdr vars))))

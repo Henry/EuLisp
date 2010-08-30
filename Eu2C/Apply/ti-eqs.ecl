@@ -138,7 +138,7 @@
           (if (type-var-p right-expr)
               (get-last-substitution subs right-expr)
             equ))
-      nil)))
+      ())))
 
 (defun add-substitution (subs           ;<type-var-substitutions>
                          var            ;<type-var>
@@ -169,7 +169,7 @@
     (let ((equ (get-substitution subs var1)))
       (if (and equ (type-var-p (?right-expr equ)))
           (check-equality subs (?right-expr equ) var2)
-        nil))))
+        ()))))
 
 (defgeneric join-equation (subs var expr))
 
@@ -203,7 +203,7 @@
         (let ((new-expr (meet-type-exprs expr (?right-expr equ))))
           (if new-expr
               (set-right-expr equ new-expr)
-            nil))
+            ()))
       (add-substitution subs var expr))))
 
 (defmethod add-equation ((subs <type-var-substitutions>)
@@ -227,12 +227,12 @@
     (let ((equ (get-substitution subs var1)))
       (if equ
           (check-equality-fwd subs (?right-expr equ) var2)
-        nil))))
+        ()))))
 
 (defmethod check-equality-fwd ((subs <type-var-substitutions>)
                                (var1 <type-expr>)
                                (var2 <type-expr>))
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Reduce the number of type variables inside of substitutions.
@@ -310,7 +310,7 @@
                                  subs)
   (ti-format t "~%Warning: type expr cannot be converted to slot name")
   (ti-error)
-  nil)
+  ())
 
 (defmethod convert-to-slot-name ((expr <slot-id>)
                                  subs)
@@ -324,7 +324,7 @@
           (t
            (ti-format t "~%Warning: type var cannot be converted to slot name")
            (ti-error)
-           nil))))
+           ()))))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

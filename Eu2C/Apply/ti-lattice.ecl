@@ -93,15 +93,15 @@
 
 ;; Structure of types in the type lattice.
 (defstandardclass <lattice-type> ()
-  (name :accessor :initarg :initform nil)
-  (class :accessor :initarg :initform nil)
+  (name :accessor :initarg :initform ())
+  (class :accessor :initarg :initform ())
   (code :accessor :initarg)
-  (atomic-expr :accessor :initarg :initform nil)
+  (atomic-expr :accessor :initarg :initform ())
   (subtypes :accessor :initarg :initform ())
   (supertypes :accessor :initarg :initform ())
-  (strategic :accessor :initarg :initform nil)
-  (compound :accessor :initarg :initform nil)
-  (write-access-stamp :accessor :initarg :initform nil))
+  (strategic :accessor :initarg :initform ())
+  (compound :accessor :initarg :initform ())
+  (write-access-stamp :accessor :initarg :initform ()))
 
 ;; Structure of types in the type lattice.
 (defstandardclass <lattice-type-with-literals> (<lattice-type>)
@@ -109,9 +109,9 @@
 
 ;; Structure of the lattice used for type inference.
 (defstandardclass <lattice> ()
-  (top :accessor :initarg :initform nil)
-  (bottom :accessor :initarg :initform nil)
-  (table :accessor :initarg :initform nil)
+  (top :accessor :initarg :initform ())
+  (bottom :accessor :initarg :initform ())
+  (table :accessor :initarg :initform ())
   (latest-write-access-stamp :accessor :initform 0))
 
 ;; The global type inference lattice.
@@ -232,7 +232,7 @@
 ;; identifier.
 (defun get-class-or-lattice-type (identifier)
   (choose-class-or-lattice-type identifier
-                                (dynamic-let ((error-if-no-lexical-found nil))
+                                (dynamic-let ((error-if-no-lexical-found ()))
                                              (find-in-lex-env identifier))
                                 (get-strategic-lattice-type identifier)))
 
@@ -258,8 +258,8 @@
         (let ((lattice-type (cdr entry)))
           (if (?strategic lattice-type)
               lattice-type
-            nil))
-      nil)))
+            ()))
+      ())))
 
 ;; Answer a lattice type to a class or lattice type.
 (defgeneric as-lattice-type (obj))
@@ -431,7 +431,7 @@
     new-lattice-type))
 
 ;;; Adding strategic lattice types to the lattice; the last argument if
-;;; not nil is a list with a flag if type is compound and some literal values,
+;;; not () is a list with a flag if type is compound and some literal values,
 ;;; which are later expanded.
 (defun add-strategic-lattice-type (name supers subs compound&values)
   (let* ((is-compound (if compound&values
@@ -494,7 +494,7 @@
 (defmethod ~compute-lattice-type ((class <tail-class-def>)
                                   supers lattice-supers)
   (if (and (null? supers) (null? lattice-supers))
-      (call-next-method class nil (list ^%struct))
+      (call-next-method class () (list ^%struct))
     (call-next-method)))
 
 ;;;-----------------------------------------------------------------------------
@@ -643,7 +643,7 @@
                                (trans-lattice-type-list supers)
                                (trans-lattice-type-list subs)
                                values)
-   nil))
+   ()))
 
 (defgeneric choose-class-or-lattice-type (identifier binding lattice-type))
 

@@ -118,7 +118,7 @@
 (defgeneric identifier-for-export (id))
 
 (defmethod identifier-for-export ((id <cons>))
-  (make-symbol (format nil "~{~A~^-~}" id)))
+  (make-symbol (format () "~{~A~^-~}" id)))
 
 (defmethod identifier-for-export ((id <string>))
   (make-symbol id))
@@ -132,7 +132,7 @@
 
 (defun export-objects (module module-env)
   (mapc (lambda (object)
-          (export-obj object module nil))
+          (export-obj object module ()))
         (?exports module))
   (export-invisible* (?sym-list module) module)
   (when (eq *compilation-type* :application)
@@ -217,7 +217,7 @@
 
 (defmethod mark-invisible-exports (object module)
   ;; default: nothing must be exported invisible
-  nil)
+  ())
 
 (defmethod mark-invisible-exports ((fun <fun>) module)
   (mark-invisible-exported-classes-in-signature (?range-and-domain fun) module)
@@ -251,7 +251,7 @@
 (defgeneric export-discriminating-functions-invisible (fun module))
 
 (defmethod export-discriminating-functions-invisible (fun module)
-  nil)
+  ())
 
 (defmethod export-discriminating-functions-invisible ((fun <imported-generic-fun>) module)
   (export-invisible (?discriminating-fun fun) module))

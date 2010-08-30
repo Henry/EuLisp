@@ -191,14 +191,14 @@
 ;;  (if (%eq (vector-length object1)
 ;;           (vector-length object2))
 ;;    (compare-vectors object1 object2 #%I0 (vector-length object2))
-;;    nil))
+;;    ()))
 
 ;;(defun vector-equal (object1 object2)
 ;;  (if (%eq (%cast %unsigned-word-integer (vector-length object1))
 ;;           (%cast %unsigned-word-integer (vector-length object2)))
 ;;    (compare-vectors object1 object2 #%I0 (%cast %unsigned-word-integer
 ;;                                                 (vector-length object2)))
-;;    nil))
+;;    ()))
 ;;
 ;;(%define-function (compare-vectors <object>)
 ;;                  ((vector1 <vector>) (vector2 <vector>)
@@ -207,7 +207,7 @@
 ;;        ((equal (primitive-vector-ref vector1 i)
 ;;                (primitive-vector-ref vector2 i))
 ;;         (compare-vectors vector1 vector2 (%plus i #%I1) end))
-;;        (t nil)))
+;;        (t ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; shallow-copy

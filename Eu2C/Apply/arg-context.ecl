@@ -180,9 +180,9 @@
       ;;            (lzs2mzs-fun fun)
       ;;               (l2m-call call arglist)
       ;;               (print "************************ Start inline ****************")
-      ;;               (inline::inline-a con fun var-vec nil))
+      ;;               (inline::inline-a con fun var-vec ()))
       (call-a-function fun (?arg-list form)
-                       nil (?read-glocs form)))))
+                       () (?read-glocs form)))))
 ;;)
 
 ;;--------------------------

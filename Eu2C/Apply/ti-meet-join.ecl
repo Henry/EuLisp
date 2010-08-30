@@ -22,24 +22,30 @@
 ;;;  Description:
 ;;    This module includes functions to compute the least upper bound (join) and
 ;;    greatest lower boun (meet) of type expressions.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Andreas Kind
 ;;;-----------------------------------------------------------------------------
 
-
 #module ti-meet-join
-(import (ti ti-codes ti-lattice ti-exprs
-            messages
-            (only (format) common-lisp))
+(import (ti
+         ti-codes
+         ti-lattice
+         ti-exprs
+         messages
+         (only (format)
+               common-lisp))
  syntax (ti)
- export (meet-type-exprs-p subtype-expr-p true-subtype-expr-p eq-expr-p
-                           meet-type-exprs join-type-exprs joined-type-exprs
-                           eval-to-expr compute-to-atom normalize-atomic-type
-                           complement-type-expr-of-lattice-type
-                           not-%false-type))
+ export (meet-type-exprs-p
+         subtype-expr-p
+         true-subtype-expr-p
+         eq-expr-p
+         meet-type-exprs
+         join-type-exprs
+         joined-type-exprs
+         eval-to-expr
+         compute-to-atom
+         normalize-atomic-type
+         complement-type-expr-of-lattice-type
+         not-%false-type))
 
 ;;;-----------------------------------------------------------------------------
 ;;; MEET TYPE EXPRESSIONS
@@ -59,13 +65,13 @@
         (code2 (?code expr2)))
     (cond ((general-type-p expr1) expr2)
           ((general-type-p expr2) expr1)
-          ((complement-codes-p code1 code2) nil)
+          ((complement-codes-p code1 code2) ())
           ((subcode-p code1 code2) expr1)
           ((subcode-p code2 code1) expr2)
           (t
            (let ((new-code (meet-codes (?code expr1) (?code expr2))))
              (if (bottom-code-p new-code)
-                 nil
+                 ()
                (make <atomic-type>
                      :code new-code
                      :name (list ^and (?name expr1) (?name expr2))
@@ -75,13 +81,13 @@
                             (expr2 <slot-id>))
   (if (eq (?slot-name expr1) (?slot-name expr2))
       expr1
-    nil))
+    ()))
 
 (defmethod meet-type-exprs ((expr1 <slot-id>)
                             (expr2 <atomic-type>))
   (if (or (general-type-p expr2)
           (%object-type-p expr2))
-      expr1 nil))
+      expr1 ()))
 
 (defmethod meet-type-exprs ((expr1 <atomic-type>)
                             (expr2 <slot-id>))
@@ -109,7 +115,7 @@
 
 (defmethod subtype-expr-p ((expr1 <type-expr>)
                            (expr2 <type-expr>))
-  nil)
+  ())
 
 (defmethod subtype-expr-p ((expr1 <atomic-type>)
                            (expr2 <atomic-type>))
@@ -127,7 +133,7 @@
 
 (defmethod true-subtype-expr-p ((expr1 <type-expr>)
                                 (expr2 <type-expr>))
-  nil)
+  ())
 
 (defmethod true-subtype-expr-p ((expr1 <atomic-type>)
                                 (expr2 <atomic-type>))
@@ -144,7 +150,7 @@
 
 (defmethod eq-expr-p ((expr1 <type-expr>)
                       (expr2 <type-expr>))
-  nil)
+  ())
 
 (defmethod eq-expr-p ((expr1 <atomic-type>)
                       (expr2 <atomic-type>))

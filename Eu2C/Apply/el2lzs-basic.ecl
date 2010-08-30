@@ -56,7 +56,7 @@
            (apply (get-trans-function ',(make-eulisp-symbol name)
                                       (car expr))
                   expr expr)              ; first expr is for _whole-form_
-         nil))
+         ()))
      (defmacro ,(make-identifier (string-append "DEF" (symbol-name name)))
        (pattern result)
        (define-trans ',name pattern result))))
@@ -80,7 +80,7 @@
                      (lambda (_whole-form_ ,(first form-keyword) ,@(cdr pattern))
                        _whole-form_ ; to avoid error messages by the compiler
                        ,result)
-                     nil))
+                     ()))
               (cons ',trans-function ',pattern)))))
 
 (defun get-trans-function (trans-function key)
@@ -105,7 +105,7 @@
                       (check-syntax-components pattern expr)))
       t
     (progn (error-invalid-syntax pattern expr)
-           nil)))
+           ())))
 
 (defun check-syntax-components (pattern expr)
   (cond ((null? pattern)
@@ -113,16 +113,16 @@
         ((atom? pattern)
          (true-list-p expr))
         ((null? expr)
-         nil)
+         ())
         ((atom? expr)
-         nil)
+         ())
         (t
          (check-syntax-components (cdr pattern) (cdr expr)))))
 
 (defun true-list-p (l)
   (cond ((consp l) (true-list-p (cdr l)))
         ((null? l) t)
-        (t nil)))
+        (t ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; syntax for el2lzs-literals
@@ -157,15 +157,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Literal Expanders
 
-(deflocal *literal-expanders* nil)      ;list of literal-expansion
-(deflocal expanded-empty-list nil)
+(deflocal *literal-expanders* ())      ;list of literal-expansion
+(deflocal expanded-empty-list ())
 
 (defstandardclass <literal-expansion> ()
   (literal-class :initarg :reader)
   (class :initarg :reader)
-  (expander :accessor :initform nil)
+  (expander :accessor :initform ())
   (module :accessor :initarg)
-  (expansions :accessor :initform nil)
+  (expansions :accessor :initform ())
   (slots :initarg :reader))
 
 (defun get-literal-expander-arguments (literal-class)
@@ -188,9 +188,9 @@
 
 (defun reset-literal-expanders ()
   (mapc (lambda (exp-desc)
-          (setf (?expander exp-desc) nil)
-          (setf (?module exp-desc) nil)
-          (setf (?expansions exp-desc) nil))
+          (setf (?expander exp-desc) ())
+          (setf (?module exp-desc) ())
+          (setf (?expansions exp-desc) ()))
         *literal-expanders*)
   (setq expanded-empty-list ()))
 

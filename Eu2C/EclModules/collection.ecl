@@ -28,58 +28,56 @@
 ;;;-----------------------------------------------------------------------------
 
 #module collection
-
-(import
- (eulisp-kernel
-  list
-  (only (<vector>) vector)
-  (only (<string>) string)
-  (only (<table>) table)
-  (only (<character>) character)
-  function
-  (only (<cons> <null> <list> nil) list)
-  (only (type-of
-         coerce
-         get
-         ;;funcall
-         ;;apply
-         car
-         cdr
-         cadr
-         length
-         elt + = cons eq list print < string vector error
-         ) common-lisp)
-  (rename ((map cl:map)
-           (find cl:find)
-           (concatenate cl:concatenate)
-           (fill cl:fill))
-          common-lisp))
-
- syntax
- (eulisp-kernel
-  (only (defsetf setf case) common-lisp)
-  )
-
- export
- (
-  accumulate
-  accumulate1
-  anyp
-  collectionp
-  concatenate
-  do
-  element
-  setter-element
-  emptyp
-  fill
-  map
-  member
-  sequencep
-  size)
-
- expose
- ((only (reverse) common-lisp))
- )
+(import (eulisp-kernel
+         list
+         (only (<vector>)
+               vector)
+         (only (<string>)
+               string)
+         (only (<table>)
+               table)
+         (only (<character>)
+               character)
+         function
+         (only (<cons>
+                <null>
+                <list>)
+               list)
+         (only (type-of
+                coerce
+                get
+                ;;funcall
+                ;;apply
+                car
+                cdr
+                cadr
+                length
+                elt + = cons eq list print < string vector error
+                ) common-lisp)
+         (rename ((map cl:map)
+                  (find cl:find)
+                  (concatenate cl:concatenate)
+                  (fill cl:fill))
+                 common-lisp))
+ syntax (eulisp-kernel
+         (only (defsetf setf case) common-lisp)
+         )
+ export (accumulate
+         accumulate1
+         anyp
+         collectionp
+         concatenate
+         do
+         element
+         setter-element
+         emptyp
+         fill
+         map
+         member
+         sequencep
+         size)
+ expose ((only (reverse)
+               common-lisp)))
 
 
 (make-eulisp-class collection sequence)
@@ -107,7 +105,7 @@
 ;;            (<vector> 'cl:vector)
 ;;            (<string> 'cl:string)
 ;;            (<character> 'cl:character)
-;;            (t nil)))))
+;;            (t ())))))
 
 
 (defmacro convert (collection dest-class)
@@ -119,7 +117,7 @@
                ((eq class <vector>) 'cl:vector)
                ((eq class <string>) 'cl:string)
                ((eq class <character>) 'cl:character)
-               (t nil)))))
+               (t ())))))
 
 ;;;------------------------------------------------------------
 ;;; accumulate
@@ -193,7 +191,7 @@
 (defmethod accumulate1 ((function <function>)
                         (str <string>))
   (if (emptyp-string str)
-      nil
+      ()
     (map-accumulate-vector function str
                            (elt str 0)
                            (length str)
@@ -215,7 +213,7 @@
 
 (defmethod anyp ((function <function>)
                  (lst <null>) . more-collections)
-  nil)
+  ())
 
 
 (defmethod anyp ((function <function>)
@@ -238,7 +236,7 @@
 
 (defun mapc-more-collections (li)
   (cons (construct-collection-info (car li))
-        (mapc-more-collections1 (cdr li) nil))
+        (mapc-more-collections1 (cdr li) ()))
   )
 
 (defun mapc-more-collections1 (li res)
@@ -255,7 +253,7 @@
                         collection-list))
         (rest-elts
          (apply-rest-list
-          (cdr collection-list) nil)))
+          (cdr collection-list) ())))
     ;;(print first-apply-arg)
     ;;(print rest-elts)
     (if
@@ -263,8 +261,8 @@
             t
           (if (eq rest-elts $end-string)
               t
-            nil))
-        nil
+            ()))
+        ()
       (if (apply function
                  first-apply-arg
                  rest-elts)
@@ -273,7 +271,7 @@
 
 
 (defmethod construct-collection-info  ((collection <list>))
-  (cons collection nil))
+  (cons collection ()))
 
 
 (defmethod construct-collection-info  ((collection <vector>))
@@ -343,7 +341,7 @@
 
 (defmethod collectionp ((object <table>)) t)
 
-(defmethod collectionp (object) nil)
+(defmethod collectionp (object) ())
 
 
 (defun concatenate (collection . more-collections)
@@ -368,7 +366,7 @@
   (apply #'cl:map
          (type-of collection)
          function collection more-collections)
-  nil)
+  ())
 
 ;;(defmethod do ((function <function>)
 ;;               (collection <vector>) . more-collections)
@@ -391,7 +389,7 @@
 
 
 (defmethod emptyp ((collection <cons>))
-  nil)
+  ())
 
 (defmethod emptyp ((collection <null>))
   t)
@@ -399,12 +397,12 @@
 (defmethod emptyp ((collection <vector>))
   (if (= (length collection) 0)
       t
-    nil))
+    ()))
 
 (defmethod emptyp ((collection <string>))
   (if (= (length collection) 0)
       t
-    nil))
+    ()))
 
 
 (defun fill (collection object . keys)
@@ -417,7 +415,7 @@
               (end (cadr keys)))
           (cl:fill collection object :start start :end end))))
     )
-  nil)
+  ())
 
 
 ;;(defmethod map ((function <function>)

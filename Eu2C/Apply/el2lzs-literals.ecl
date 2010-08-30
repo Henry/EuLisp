@@ -87,7 +87,7 @@
    (representation <%pointer-to-struct>)
    values)
   (mapcar (lambda (slot)
-            (let ((entry (find-option (~slot-description-name slot) values nil)))
+            (let ((entry (find-option (~slot-description-name slot) values ())))
               (if entry (lzslit (car entry)) ;formerly: (trans (car entry))
                 ^unknown)))
           (~class-slot-descriptions class-def)))
@@ -97,7 +97,7 @@
 ;;            (representation <%struct>)
 ;;            values)
 ;;  (mapcar (lambda (slot)
-;;            (let ((entry (find-option (~slot-description-name slot) values nil)))
+;;            (let ((entry (find-option (~slot-description-name slot) values ())))
 ;;              (if entry (lzslit (car entry)) ;formerly: (trans (car entry))
 ;;                  ^unknown)))
 ;;          (~class-slot-descriptions class-def)))
@@ -145,7 +145,7 @@
                        (get-literal-expander-arguments literal-class)
                        expander
                        (dynamic lex-env)))
-   nil))
+   ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Definitions of Literal Classes
@@ -196,13 +196,13 @@
   (argument-descriptor . #'?arg-num)
   (function-pointer . #'%function-literal)
   (setter . #'?setter)
-  (name . (lambda (fun) (format nil "~A" (?identifier fun)))))
+  (name . (lambda (fun) (format () "~A" (?identifier fun)))))
 
 (def-literal-class function <imported-fun>
-  (argument-descriptor . (lambda (ignored) nil))
-  (function-pointer . (lambda (ignored) nil))
-  (setter . (lambda (ignored) nil))
-  (name . (lambda (ignored) nil)))
+  (argument-descriptor . (lambda (ignored) ()))
+  (function-pointer . (lambda (ignored) ()))
+  (setter . (lambda (ignored) ()))
+  (name . (lambda (ignored) ())))
 
 (def-literal-class generic-function <defined-generic-fun>
   (argument-descriptor . (lambda (gf)
@@ -211,16 +211,16 @@
   (function-pointer . #'%function-literal)
   (setter . #'?setter)
   (methods . #'~generic-function-methods)
-  (name . (lambda (fun) (format nil "~A" (?identifier fun))))
+  (name . (lambda (fun) (format () "~A" (?identifier fun))))
   (discrimination-depth . #'~generic-function-discrimination-depth))
 
 (def-literal-class generic-function <imported-generic-fun>
-  (argument-descriptor . (lambda (ignored) nil))
-  (function-pointer . (lambda (ignored) nil))
-  (setter . (lambda (ignored) nil))
-  (methods . (lambda (ignored) nil))
-  (name . (lambda (ignored) nil))
-  (discrimination-depth . (lambda (ignored) nil)))
+  (argument-descriptor . (lambda (ignored) ()))
+  (function-pointer . (lambda (ignored) ()))
+  (setter . (lambda (ignored) ()))
+  (methods . (lambda (ignored) ()))
+  (name . (lambda (ignored) ()))
+  (discrimination-depth . (lambda (ignored) ())))
 
 (def-literal-class method <method-def>
   (domain . #'~method-domain)
@@ -233,7 +233,7 @@
 ;;; the compiler
 
 (def-literal-class slot-description <slot-desc>
-  (name . (lambda (sd) (format nil "~A" (?identifier sd))))
+  (name . (lambda (sd) (format () "~A" (?identifier sd))))
   ;; (default-function . (lambda (sd) (if (eq (?initvalue sd) ^unknown)
   ;;                                  (~slot-description-default-function sd)
   ;;                                ^t)))
@@ -293,10 +293,10 @@ expansion of ~A~%"
 (defun check-exp-desc (literal exp-desc)
   (cond ((null? exp-desc)
          (error-invalid-literal literal)
-         nil)
+         ())
         ((null? (?expander exp-desc))
          (error-literal-expander-not-defined literal exp-desc)
-         nil)
+         ())
         (t t)))
 
 (defmethod expand-literal-using-desc (literal exp-desc)
@@ -332,7 +332,7 @@ expansion of ~A~%"
                 (setq expanded-empty-list
                       (dynamic-let ((lex-env (?lex-env (?module exp-desc))))
                                    (trans
-                                    (call (?expander exp-desc) nil))))
+                                    (call (?expander exp-desc) ()))))
                 (setf (?unexpanded expanded-empty-list) () )
                 (expand-literal expanded-empty-list)))
   expanded-empty-list)

@@ -65,14 +65,14 @@
 (defun reset-frontend-errors ()
   (setq *frontend-errors* 0))
 
-(defvar current-defining-form nil)
+(defvar current-defining-form ())
 
 (defun frontend-message (key message . args)
   (when (eq key ^error) (new-frontend-error))
   (apply #'write-message key message args))
 
-(defvar eval-fun nil)
-(defvar eval-args nil)
+(defvar eval-fun ())
+(defvar eval-args ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; used by el2lzs-main
@@ -97,7 +97,7 @@
 (defun error-no-lexical-binding (id)
   (when (dynamic error-if-no-lexical-found)
         (frontend-message ^error "no lexical binding found for ~A" id))
-  nil)
+  ())
 
 (defun error-bad-c-import-spec (file)
   (frontend-message ^error "bad filespec in c-import directive: ~S" file))
@@ -209,13 +209,13 @@
 (defvar *load-level* 0)
 
 (defun info-loading-module (path)
-  (frontend-message nil
+  (frontend-message ()
                     "~[~;.~:;~%;~V@{.~}loading module ~A~]"
                     (dynamic *info-level*)
                     (- (dynamic *load-level*) 1) path))
 
 (defun info-module-loaded (module-name)
-  (frontend-message nil
+  (frontend-message ()
                     "~[~;~;~;~%;~V@{.~}apply module ~A loaded~]"
                     (dynamic *info-level*)
                     (- (dynamic *load-level*) 1)
@@ -337,21 +337,21 @@
                     "a function must be given instead of ~A~%during evaluation of~%~A"
                     obj
                     (eval-expr))
-  nil)
+  ())
 
 (defun eval-error-cannot-interpret-function (fun)
   (frontend-message ^error
                     "cannot interpret function ~A~%during evaluation of~%~A"
                     (?identifier fun)
                     (eval-expr))
-  nil)
+  ())
 
 (defun eval-error-variable-without-value (var)
   (frontend-message ^error
                     "global binding ~A has an expression as initial value~%during evaluation of~%~A"
                     (?identifier var)
                     (eval-expr))
-  nil)
+  ())
 
 (defun eval-error-too-few-arguments ()
   (frontend-message ^error "too few arguments~%during evaluation of~%~A"

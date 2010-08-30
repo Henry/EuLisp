@@ -57,7 +57,7 @@
    )
 
 ;;   (defun map-option-list (function option-list)
-;;     (cond ((null? option-list) nil)
+;;     (cond ((null? option-list) ())
 ;;           ((atom? (cdr option-list))
 ;;            (warn "option list with uneven number of elements; last one was ~A"
 ;;                  (car option-list)))
@@ -65,7 +65,7 @@
 ;;              (map-option-list function (cddr option-list)))))
 
 ;;   (defun mapl-option-list (function option-list)
-;;     (cond ((null? option-list) nil)
+;;     (cond ((null? option-list) ())
 ;;           ((atom? (cdr option-list))
 ;;            (warn "option list with uneven number of elements; last one was ~A"
 ;;                  (car option-list)))
@@ -76,17 +76,17 @@
   (cond ((null? option-list)
          (when error-if-not-found?
                (warn "option ~A not found in option list ~A" key option-list))
-         nil)
+         ())
         ((atom? (cdr option-list))
          (warn "option list with uneven number of elements; last one was ~A"
                (car option-list))
-         nil)
+         ())
         ((eq key (car option-list))
          (cdr option-list))
         (t (find-option key (cddr option-list) error-if-not-found?))))
 
 (defun get-option (key option-list default)
-  (let ((entry (find-option key option-list nil)))
+  (let ((entry (find-option key option-list ())))
     (if entry
         (car entry)
       default)))
@@ -95,7 +95,7 @@
 ;;   ;;function is applied to the old value and must return the new
 ;;   ;;value for the specified option
 ;;   ;; the changed option-list is returned
-;;   (let ((entry (find-option key option-list nil)))
+;;   (let ((entry (find-option key option-list ())))
 ;;     (when entry
 ;;       (setf (car entry) (funcall function (car entry))))
 ;;     option-list))
@@ -107,11 +107,11 @@
              t
            (progn (warn "missing options: ~A "
                         required-options)
-                  nil)))
+                  ())))
         ((atom? (cdr option-list))
          (warn "option list with uneven number of elements; last one was ~A"
                (car option-list))
-         nil)
+         ())
         ((find (car option-list) required-options)
          (check-options (remove (car option-list) required-options)
                         facultative-options multiple-options
@@ -128,7 +128,7 @@
          (warn "undefined option: ~A" (car option-list))
          (check-options required-options facultative-options multiple-options
                         (cddr option-list))
-         nil)))
+         ())))
 
 (defun warn (str . args) ());;(..(apply format str args))
 

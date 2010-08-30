@@ -156,7 +156,7 @@
       (if (function (primitive-vector-ref vec index))
           t
         (anyp-with-one-vector function vec (%plus index #%I1) len))
-    nil))
+    ()))
 
 (defmethod anyp-with-two-args
   ((function <function>)
@@ -188,14 +188,14 @@
           t
         (anyp-with-two-vectors function vec1 vec2 min-length
                                (%plus index #%I1)))
-    nil))
+    ()))
 
 
 (defmethod anyp-with-two-args
   ((function <function>)
    (vec1 <vector>)
    (collection <object>))
-  (anyp-collection function vec1 (cons collection nil)))
+  (anyp-collection function vec1 (cons collection ())))
 
 
 
@@ -318,7 +318,7 @@
 
 (defmethod concat-with-two-args
   ((vec <vector>) (collection <object>))
-  (concat-collection vec (cons collection nil)))
+  (concat-collection vec (cons collection ())))
 
 
 
@@ -354,7 +354,7 @@
   (if (%lt index len)
       (progn (function (primitive-vector-ref vec index))
              (do-with-one-vector function vec (%plus index #%I1) len))
-    nil))
+    ()))
 
 (defmethod do-with-two-args
   ((function <function>)
@@ -385,13 +385,13 @@
                        (primitive-vector-ref vec2 index))
              (do-with-two-vectors function vec1 vec2 min-length
                                   (%plus index #%I1)))
-    nil))
+    ()))
 
 (defmethod do-with-two-args
   ((function <function>)
    (vec1 <vector>)
    (collection <object>))
-  (do-collection function vec1 (cons collection nil)))
+  (do-collection function vec1 (cons collection ())))
 
 
 
@@ -403,7 +403,7 @@
 ;;     (mapc-more-collections
 ;;      (cons
 ;;       (construct-collection-info vec)
-;;       nil)
+;;       ())
 ;;      more-collections)
 ;;     ))
 
@@ -465,7 +465,7 @@
               (fill-vector-aux vec object #%I0
                                (%cast %unsigned-word-integer
                                       (%minus vec-len #%i1)))
-              nil)
+              ())
           (if (%eq #%i1 rest-list-length)
               (error "fill: collection does not have natural order"
                      <conversion-condition>)
@@ -480,8 +480,8 @@
                          object
                          (%cast %unsigned-word-integer start)
                          (%cast %unsigned-word-integer end))
-                        nil)
-                    nil))))))
+                        ())
+                    ()))))))
 
 
 (%define-function (fill-vector-aux %void)
@@ -490,7 +490,7 @@
    (start %unsigned-word-integer)
    (end %unsigned-word-integer))
   (if (%gt start end)
-      nil
+      ()
     (progn (setf-primitive-vector-ref vec start object)
            (fill-vector-aux vec object (%plus start #%I1) end))))
 
@@ -517,7 +517,7 @@
                                           (make-uninitialized-vector
                                            vec-length))))
               ((%eq rest-list-length #%i1)
-               (map-with-two-args function vec (car more-collections) nil))
+               (map-with-two-args function vec (car more-collections) ()))
               (t (map-collection function vec more-collections)))
         ))
 
@@ -579,7 +579,7 @@
    (vec1 <vector>)
    (collection <object>)
    (not-used <object>))
-  (map-collection function vec1 (cons collection nil)))
+  (map-collection function vec1 (cons collection ())))
 
 
 ;;map-vector is equal to map-list... and can be used for all collections!!!
@@ -590,9 +590,9 @@
 ;;     (mapc-more-collections
 ;;      (cons
 ;;       (construct-collection-info vec)
-;;       nil)
+;;       ())
 ;;      more-collections)
-;;     nil
+;;     ()
 ;;     vec))
 
 ;;;------------------------------------------------------------
@@ -627,7 +627,7 @@
       (if (test (primitive-vector-ref vec index) object)
           t
         (member-vector-aux object vec (%plus index #%I1) len test))
-    nil))
+    ()))
 
 
 (%define-function (memq-vector <object>)
@@ -639,7 +639,7 @@
       (if (eq (primitive-vector-ref vec index) object)
           t
         (memq-vector object vec (%plus index #%I1) len))
-    nil))
+    ()))
 
 ;;;------------------------------------------------------------
 ;;; reverse

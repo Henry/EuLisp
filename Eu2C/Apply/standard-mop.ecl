@@ -71,7 +71,7 @@
 
 (defmethod ~converter ((class <class-def>))
   (labels ((get-converter (class-list)
-                          (cond ((null? class-list) nil)
+                          (cond ((null? class-list) ())
                                 ((?converter (car class-list)))
                                 (t (get-converter (cdr class-list))))))
           (get-converter (~class-precedence-list class))))
@@ -144,7 +144,7 @@
   (let ((initfun (~slot-description-default-function
                   (~find-slot-description vector-class ^length))))
     (if (null? initfun)
-        nil
+        ()
       (init-fun-value (?body initfun) vector-class))))
 
 
@@ -152,7 +152,7 @@
   (let ((initfun (~slot-description-default-function
                   (~find-slot-description vector-class ^length))))
     (if (null? initfun)
-        nil
+        ()
       (car (?value-list (init-fun-value (?body initfun) vector-class))))))
 
 
@@ -177,7 +177,7 @@
   (format t "~% invalid initialization form ~A for the vector class ~A"
           default class)
   (format t "~% ---------------------------------------------------~%")
-  nil)
+  ())
 
 (defmethod ~vector-class-element-type (vector-class)
   (and
@@ -206,6 +206,6 @@
 ;;  (format t "~%Error: ~A (module ~A) is no vector class"
 ;;          (?identifier class)
 ;;          (?module-id class))
-;;  nil)
+;;  ())
 
 #module-end

@@ -181,7 +181,7 @@
           (ti-write stream first))
         (if (cdr list)
             (format stream " "))
-        (ti-write-list-enclosed stream (cdr list) nil))
+        (ti-write-list-enclosed stream (cdr list) ()))
     (format stream ")")))
 
 ;; Attention: %object is displayed as <object>; %class is displayed as <class>.
@@ -251,7 +251,7 @@
 
 (defmethod ti-def-write-literals (stream (lattice-type <lattice-type>))
   ;; nothing to do
-  nil)
+  ())
 
 (defmethod ti-def-write-literals (stream (lattice-type <lattice-type-with-literals>))
   ;; the literals are in unexpanded form!
@@ -369,7 +369,7 @@
                  (?name lattice-type)
                  (?write-access-stamp lattice-type))
          (dolist (x (?subtypes lattice-type))
-                 (ti-write-lattice stream x (format nil " ~A" indent))))))
+                 (ti-write-lattice stream x (format () " ~A" indent))))))
 
 (defun ti-write-lattice-type (stream lattice-type)
   (let ((class (?class lattice-type)))
@@ -378,7 +378,7 @@
     (format stream "~%| compound: ~A" (?compound lattice-type))
     (format stream "~%| write-access-stamp: ~A"
             (?write-access-stamp lattice-type))
-    (format stream "~%| class: ~A" (if class (?identifier class) nil))
+    (format stream "~%| class: ~A" (if class (?identifier class) ()))
     (format stream "~%| supertypes: ")
     (dolist (x (?supertypes lattice-type))
             (format stream "~A " (?name x)))

@@ -123,7 +123,7 @@
   (let ((module (find-module module)))
     (if module
         (find-lexical identifier module)
-      nil)))
+      ())))
 
 (defmethod find-lexical (identifier (module <module>))
   (find-in-env (?lex-env module) identifier))
@@ -174,7 +174,7 @@
 
 (defun pp-module (mod)
   (let ((*print-pretty* t)
-        (*print-miser-width* nil))
+        (*print-miser-width* ()))
     (print (if (symbolp mod) (find-module mod) mod))))
 
 ;;;-----------------------------------------------------------------------------

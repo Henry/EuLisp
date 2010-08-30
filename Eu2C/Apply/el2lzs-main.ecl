@@ -182,9 +182,9 @@
                  ;;imported bindings
                  :key #'?identifier)
          (error-redefinition-of-imported-lexical obj)
-         nil)
+         ())
         (t (error-redefinition-of-top-lexical obj)
-           nil)))
+           ())))
 
 (defun add-to-lex-env (obj)
   (push obj (dynamic lex-env)))
@@ -254,8 +254,8 @@
 
 (defun reset-environments ()
   (setq module-env (list (find-module ^%tail)))
-  (dynamic-setq dynamic-env nil)
-  (dynamic-setq symbol-env nil))
+  (dynamic-setq dynamic-env ())
+  (dynamic-setq symbol-env ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; %TAIL: the basic module
@@ -293,7 +293,7 @@
 ;;; transformation of a module definition: the main function
 ;;;-----------------------------------------------------------------------------
 
-(defvar waiting-export-directives nil)
+(defvar waiting-export-directives ())
 
 (defun trans-module (module-def)
   (let* ((name (second module-def))
@@ -316,7 +316,7 @@
                                   :type %unsigned-word-integer
                                   :initial-value $unsigned-0)))
     (dynamic-let ((*current-module* (make-instance <module> :identifier name))
-                  (waiting-export-directives nil))
+                  (waiting-export-directives ()))
                  (setq body (trans-module-header module-def))
                  (setf (?module initflag) (dynamic *current-module*))
 
@@ -328,7 +328,7 @@
 
                  (setq body             ;; this is neccesary because of the
                        ;; progn-simplification
-                       (cond ((null? body) nil)         ; no expressions?
+                       (cond ((null? body) ())         ; no expressions?
                              ((and (consp body)        ; more than 1 expression?
                                    (eq (first body) 'es::progn))
                               (cdr body))
@@ -418,7 +418,7 @@
                   (dynamic-let ((current-defining-form form))
                                ;;to provide the current form for error message output
                                (if (add-top-lexical-bindings (transmod form))
-                                   form nil)))
+                                   form ())))
                 body))
   (setf (?lex-env (dynamic *current-module*)) (dynamic lex-env))
   body)
@@ -433,13 +433,13 @@
          ;;should also be added, at least to get possible error messages,
          ;;but the overall result is FALSE
          (add-top-lexical-bindings (cdr binding-s))
-         nil)))
+         ())))
 
 (defun module-init-function-name (module-name)
   (list ^init module-name))
 
 (defun used-modules-initialization (modules)
-  (if (null? modules) nil
+  (if (null? modules) ()
     (let ((initfun (?toplevel-forms (car modules))))
       (if (null? initfun)
           (used-modules-initialization (cdr modules))
@@ -447,7 +447,7 @@
               (used-modules-initialization (cdr modules)))))))
 
 (defun splice-lists (l)
-  (cond ((null? l) nil)
+  (cond ((null? l) ())
         ((listp (car l))
          (nconc (car l) (splice-lists (cdr l))))
         ((null? (cdr l)) l)
@@ -475,7 +475,7 @@
   (let* ((name (second module-def))
          body)
     (dynamic-let ((*current-module* (make-instance <module> :identifier name))
-                  (waiting-export-directives nil))
+                  (waiting-export-directives ()))
                  (setq body (trans-module-header module-def))
 
                  (dynamic-let ((lex-env (?lex-env (dynamic *current-module*))) ;imported bindings
@@ -549,11 +549,11 @@
   (cddr (cddr module-def)))
 
 (defun trans-directives (module-directives)
-  (cond ((null? module-directives) nil)
+  (cond ((null? module-directives) ())
         ((null? (consp module-directives))
-         (error-bad-module-directive module-directives nil))
+         (error-bad-module-directive module-directives ()))
         ((null? (cdr module-directives))
-         (error-bad-module-directive (car module-directives) nil))
+         (error-bad-module-directive (car module-directives) ()))
         ((null? (member (first module-directives)
                        ^(import syntax expose export c-import)))
          (error-bad-module-directive (first module-directives)
@@ -629,15 +629,15 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun compute-runtime-interface (import-specs)
-  (if-import (compute-interface import-specs t nil)))
+  (if-import (compute-interface import-specs t ())))
 
 (defun compute-syntax-interface (import-specs)
-  (if-syntax (compute-interface import-specs nil t)))
+  (if-syntax (compute-interface import-specs () t)))
 
 (defgeneric trans-old-style-syntax-imports (import-specs))
 
 (defmethod trans-old-style-syntax-imports ((import-specs <null>))
-  nil)
+  ())
 
 (defmethod trans-old-style-syntax-imports ((import-specs <pair>))
   (if (and (eq (first import-specs) ^syntax)
@@ -674,7 +674,7 @@
                  (error-name-clash binding1
                                    binding2))
          t)
-        (t nil)))
+        (t ())))
 
 (defun compute-interface-without-check (import-specs import? syntax?)
   (append-if-s
@@ -714,7 +714,7 @@
                     (if-syntax if2))))
 
 (defun if-diff-1 (if1 if2)
-  (cond ((null? if1) nil)
+  (cond ((null? if1) ())
         ((member (car if1) if2)
          (if-diff-1 (cdr if1) if2))
         (t (cons (car if1)
@@ -729,7 +729,7 @@
            (only-interface identifiers interface if-spec)))
 
 (defun only-interface (identifiers interface if-spec)
-  (if (null? identifiers) nil
+  (if (null? identifiers) ()
     (let ((object-in-import
            (member (car identifiers) (if-import interface)
                    :key #'?identifier))
@@ -739,7 +739,7 @@
       (cond ((and object-in-import object-in-syntax)
              (warning-binding-in-import-and-syntax (car identifiers) if-spec)
              (add-if (and object-in-import (car object-in-import))
-                     nil
+                     ()
                      (only-interface (cdr identifiers) interface if-spec)))
             ((or object-in-import object-in-syntax)
              (add-if (and object-in-import (car object-in-import))
@@ -775,7 +775,7 @@
           (pushnew module (?used-runtime-modules (dynamic *current-module*))
                    :key #'?identifier)
           (copy-list (?exports module)))
-      nil)))
+      ())))
 
 (defun module-syntax-interface (module-id)
   (let ((module (find-or-load-module module-id)))
@@ -784,7 +784,7 @@
           (pushnew module (?used-syntax-modules (dynamic *current-module*))
                    :key #'?identifier)
           (copy-list (?syntax-exports module)))
-      nil)))
+      ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; loading module files

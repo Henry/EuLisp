@@ -94,12 +94,12 @@
   (transsyn-expanded-progn (transsyn-progn-forms forms)))
 
 (defun transsyn-expanded-progn (forms)
-  (cond ((null? forms) nil)       ;; progn with 0 forms
+  (cond ((null? forms) ())       ;; progn with 0 forms
         ((null? (rest forms)) (first forms))     ; progn with 1 form
         (t (cons ^progn forms))));; progn with more forms
 
 (defun transsyn-progn-forms (forms)
-  (cond ((null? forms) nil)
+  (cond ((null? forms) ())
         ((and (consp (first forms))
               (eq (first (first forms)) ^progn))
          (transsyn-progn-forms (nconc (rest (first forms))
@@ -120,7 +120,7 @@
           (transsyn-progn body))))
 
 (defun transsyn-vars (vars)
-  (cond ((null? vars) nil)
+  (cond ((null? vars) ())
         ((symbolp (first vars))
          (setf (cdr vars) (transsyn-vars (rest vars)))
          vars)
@@ -129,7 +129,7 @@
            vars)))
 
 (defun transsyn-funs (funs)
-  (if (null? funs) nil
+  (if (null? funs) ()
     (let* ((fun (first funs))
            (ID (first fun))
            (PARAMS (second fun))
@@ -187,7 +187,7 @@
 
 (defun transsyn* (exprs)
   (if (null? exprs)
-      nil
+      ()
     (progn (setf (car exprs) (transsyn (car exprs)))
            (transsyn* (cdr exprs))
            exprs)))
@@ -297,7 +297,7 @@
       (* -1 (+ 1 (length (?var-list params))))
     (length (?var-list params))))
 
-(defvar *function-id* nil)
+(defvar *function-id* ())
 
 (defun trans-lambda (BODY funobj params)
   (dynamic-let ((*function-id* (?identifier funobj)))
@@ -327,11 +327,11 @@
                              req)))))
 
 (defmethod transmod ((id <symbol>))
-  nil)
+  ())
 
 (deftransmod ((operator) . args)
   ;; no top-level binding is defined
-  nil)
+  ())
 
 (deftransmod (defconstant id init)
   (add-const
@@ -351,7 +351,7 @@
           (make-instance <global-fun>
                          :identifier fun-spec)))
         ;; otherwise no binding is defined
-        (t nil)))
+        (t ())))
 
 ;; (deftransmod (defcondition name superclass . init-options) ...)
 
@@ -367,7 +367,7 @@
    (let ((lzs-fun (make-instance <global-fun> :identifier id)))
      (trans-lambda (transsyn-progn BODY)
                    lzs-fun
-                   (trans-params PARAMETERS nil))
+                   (trans-params PARAMETERS ()))
      lzs-fun)))
 
 ;;;-----------------------------------------------------------------------------
@@ -387,7 +387,7 @@
      (if (literal-p form)
          (progn
            (setf (?value const) form)
-           nil)
+           ())
        (list (constant-setq const form))))))
 
 (defgeneric literal-p (x))
@@ -399,7 +399,7 @@
 (defmethod literal-p ((x <fun>)) t)
 (defmethod literal-p ((x <lzs-object>))
   ;;all other lzs-objects are not literals
-  nil)
+  ())
 
 (deftransdef (deflocal ID EXPR)
   (with-defining-form
@@ -423,7 +423,7 @@
 
 (defun fun-spec-type (fun-spec)
   (if (symbolp fun-spec)
-      nil
+      ()
     (car fun-spec)))
 
 (deftransdef (defun fun-spec parameters body)
@@ -442,31 +442,31 @@
      (trans-lambda ;sets params and body in function object
       body
       fun
-      (trans-params parameters nil))
-     nil)))
+      (trans-params parameters ()))
+     ())))
 
 (deftransdef (export . IDS)
   (progn
     (setf (?exports (dynamic *current-module*))
-          (append (remove nil ; () appears if no lexical binding was found
+          (append (remove () ; () appears if no lexical binding was found
                           (mapcar (lambda (id) (find-lexical-binding id))
                                   IDS))
                   (?exports (dynamic *current-module*))))
-    nil))
+    ()))
 
 (deftransdef (export-syntax . IDS)
   ;; ATTENTION: is only right for defined objects, it goes wrong for
   ;; syntax-imported things
   (progn (setf (?syntax-exports (dynamic *current-module*))
-               (append (remove nil ; () appears if no lexical binding was found
+               (append (remove () ; () appears if no lexical binding was found
                                (mapcar (lambda (id) (find-lexical-binding id))
                                        IDS))
                        (?syntax-exports (dynamic *current-module*))))
-         nil))
+         ()))
 
 (deftransdef (expose . XSPECS)
   (progn (el2lzs-main::trans-expose XSPECS)
-         nil))
+         ()))
 
 ;; the following are the default cases for transdef
 
@@ -474,7 +474,7 @@
   (list (trans (cons operator args))))
 
 (defmethod transdef (non-list)          ; identifiers and literals on top level
-  nil);; are ignored
+  ());; are ignored
 
 ;;;-----------------------------------------------------------------------------
 ;;; TE (trans): transformation of expressions
@@ -482,7 +482,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmethod trans ((empty-list <null>))
-  nil)
+  ())
 
 (defmethod trans ((LIT <string>))
   (make-instance <structured-literal> :value LIT))
@@ -544,7 +544,7 @@
                        :form (trans EXPR))
       (progn
         (error-invalid-assignment ID)
-        nil))))
+        ()))))
 
 (defgeneric constant-value (object))
 (defmethod constant-value (object) object)
@@ -561,7 +561,7 @@
                  :pred (trans ANT) :then (trans CONS) :else (trans ALT)))
 
 (deftrans (or . FORMS)
-  (cond ((null? FORMS) nil)
+  (cond ((null? FORMS) ())
         ((null? (cdr FORMS)) (trans (car FORMS)))
         (t (make-or-expansion (trans (car FORMS))
                               (trans (cons ^or (cdr FORMS)))))))
@@ -597,7 +597,7 @@
 
 (defun complete-function (lzs-fun arguments body environment)
   (dynamic-let ((lex-env environment))
-               (trans-lambda body lzs-fun (trans-params arguments nil))))
+               (trans-lambda body lzs-fun (trans-params arguments ()))))
 
 (defun make-local-fun-identifier (local-id)
   (let ((function-id
@@ -616,9 +616,9 @@
   (trans-lambda BODY
                 (add-function
                  (make-instance <local-fun>
-                                :identifier (make-local-fun-identifier nil)
+                                :identifier (make-local-fun-identifier ())
                                 :module (dynamic *current-module*)))
-                (trans-params PARAMETERS nil)))
+                (trans-params PARAMETERS ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  variable bindings: let and let*
@@ -892,7 +892,7 @@
                         :function (trans operator)
                         :arg-list (trans-exprs ARGS)))
         (t (trans-appl (cons operator ARGS)
-                       (make-instance <local-static> :identifier nil)))))
+                       (make-instance <local-static> :identifier ())))))
 
 ;;(deftrans (apply FUN . ARGS)
 ;;  (make-instance <apply-app> :function (trans FUN) :arg-list (trans ARGS)))
@@ -1093,7 +1093,7 @@
      (setf (?initial-value var)
            (if INIT (trans (car INIT))
              ^unknown))
-     nil)))
+     ())))
 
 (deftranssyn (%define-constant ID VALUE)
   (with-defining-form
@@ -1116,7 +1116,7 @@
      (when (literal-instance-p init-value)
            (setf (?type const)
                  (?class init-value)))
-     nil)))
+     ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %declare-external-variable/constant
@@ -1127,7 +1127,7 @@
 (defun make-external-name (name language)
   name)
 ;;  (if (eq language ^C)
-;;    (format nil "_~A" name)
+;;    (format () "_~A" name)
 ;;    name)
 
 (deftranssyn (%declare-external-variable NAME TYPE . OPTIONS)
@@ -1155,27 +1155,27 @@
 (deftransdef (%declare-external-variable NAME TYPE . OPTIONS)
   (with-defining-form
    (let ((var (find-in-lex-env NAME))
-         (external-name (get-option ^external-name OPTIONS nil))
-         (language (get-option ^language OPTIONS nil))
+         (external-name (get-option ^external-name OPTIONS ()))
+         (language (get-option ^language OPTIONS ()))
          (initial-value (get-option ^initial-value OPTIONS ^unknown)))
      (setf (?initial-value var) initial-value)
      (setf (?type var) (trans TYPE))
      (setf (?code-identifier var)
            (make-external-name (or external-name NAME) language))
-     nil)))
+     ())))
 
 (deftransdef (%declare-external-constant NAME TYPE . OPTIONS)
   (with-defining-form
    (let ((const (find-in-lex-env NAME))
-         (external-name (get-option ^external-name OPTIONS nil))
-         (language (get-option ^language OPTIONS nil))
+         (external-name (get-option ^external-name OPTIONS ()))
+         (language (get-option ^language OPTIONS ()))
          (value (get-option ^value OPTIONS ^unknown)))
      (setf (?value const)
            (if (eq value ^unknown) value (trans value)))
      (setf (?type const) (trans TYPE))
      (setf (?code-identifier const)
            (make-external-name (or external-name NAME) language))
-     nil)))
+     ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %declare-external-function
@@ -1185,7 +1185,7 @@
   ;; extracts a list of classes from a specialized lambda-list
   ;; in case of a rest parameter the list is extended
   ;; by an additional class: %list
-  (cond ((null? lambda-list) nil)
+  (cond ((null? lambda-list) ())
         ((symbolp lambda-list)          ; rest parameter
          (list %list))
         ((symbolp (car lambda-list))    ; unspecialized parameter
@@ -1198,7 +1198,7 @@
 (defun lambda-parameters (lambda-list)
   ;; extracts the parameter-names from specialized lambda-list
   ;; returns a true list or if a rest parameter occurs a dotted list of symbols
-  (cond ((null? lambda-list) nil)
+  (cond ((null? lambda-list) ())
         ((symbolp lambda-list)          ; rest parameter
          lambda-list)
         ((symbolp (car lambda-list))    ; unspecialized parameter
@@ -1229,17 +1229,17 @@
    (let* ((ID (first fun-spec))
           (TYPE (second fun-spec))
           (fun (find-in-lex-env ID))
-          (external-name (get-option ^external-name OPTIONS nil))
+          (external-name (get-option ^external-name OPTIONS ()))
           (language (get-option ^language OPTIONS ^lisp)))
      (setf (?params fun)
-           (trans-params (lambda-parameters PARAMETERS) nil))
+           (trans-params (lambda-parameters PARAMETERS) ()))
      (setf (?range-and-domain fun)
            (apply #'vector (trans TYPE)
                   (lambda-specializers PARAMETERS)))
      (setf (?code-identifier fun)
            (make-external-name (or external-name ID) language))
      (setf (?language fun) language)
-     nil)))
+     ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; definterface
@@ -1253,7 +1253,7 @@
 (defun definterface-arg-conversions (arg-specs)
   ;; returns syntax only, i.e. expressions in list representation without any
   ;; transformation
-  (if (null? arg-specs) nil
+  (if (null? arg-specs) ()
     (cons (list (third (car arg-specs))  ;the converter function
                 (first (car arg-specs))) ;the argument name
           (definterface-arg-conversions (cdr arg-specs)))))
@@ -1287,7 +1287,7 @@
            (apply #'vector (trans rtype)
                   (definterface-arg-types args)))
      (setf (?code-identifier cfun-obj) external-name))
-   nil))
+   ()))
 
 (deftransdef (definterface-lcl lfun cfun result args)
   (with-defining-form
@@ -1302,12 +1302,12 @@
                           (,cfun ,@(definterface-arg-conversions args)))
                         (dynamic lex-env))
      (setf (?params cfun-obj)
-           (trans-params (definterface-arg-names args) nil))
+           (trans-params (definterface-arg-names args) ()))
      (setf (?range-and-domain cfun-obj)
            (apply #'vector (trans rtype)
                   (definterface-arg-types args)))
      (setf (?code-identifier cfun-obj) external-name))
-   nil))
+   ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %define-function
@@ -1339,11 +1339,11 @@
      (trans-lambda ;sets params and body in fun
       BODY
       fun
-      (trans-params (lambda-parameters PARAMETERS) nil))
+      (trans-params (lambda-parameters PARAMETERS) ()))
      (setf (?range-and-domain fun)
            (apply #'vector (trans TYPE)
                   (lambda-specializers PARAMETERS)))
-     nil)))
+     ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  TAIL: %let and %let*
@@ -1360,7 +1360,7 @@
           (transsyn-progn body))))
 
 (defun transsyn-%vars (vars)
-  (cond ((null? vars) nil)
+  (cond ((null? vars) ())
         (t (setf (third (first vars)) (transsyn (third (first vars))))
            (setf (cdr vars) (transsyn-%vars (rest vars)))
            vars)))
@@ -1457,7 +1457,7 @@
   (or
    (trans-%setf (trans destination) (trans source))
    (progn (error-invalid-assignment destination)
-          nil)))
+          ())))
 
 (defgeneric trans-%setf (transformed-destination source))
 
@@ -1480,7 +1480,7 @@
                 ((eq reader-fun %extract) %setf-extract)
                 ;; ((eq reader-fun %view)    %setf-view)
                 ((eq reader-fun %cast)    %setf-cast)
-                (t nil))) ; all other cases are an error
+                (t ()))) ; all other cases are an error
     (setf (?arg-list transformed-destination)
           (nconc (?arg-list transformed-destination)
                  (list source)))
@@ -1489,7 +1489,7 @@
 
 (defmethod trans-%setf (transformed-destination source)
   ;; all other cases for destinations are an error
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; %declare-external-symbol
@@ -1502,6 +1502,6 @@
                             :identifier id
                             :code-identifier xid)))
     (add-to-symbol-env sym)
-    nil))
+    ()))
 
 #module-end

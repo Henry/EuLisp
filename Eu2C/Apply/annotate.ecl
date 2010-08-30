@@ -223,7 +223,7 @@
 
 (defun transdef-%annotate (object options handler-table)
   (if (null? options)
-      nil
+      ()
     (let* ((key (car options))
            (option (cadr options))
            (handler (find-annotate-handler key handler-table
@@ -241,7 +241,7 @@
           (second entry))
       (progn
         (error-invalid-key-for-annotate key)
-        nil))))
+        ()))))
 
 (defun get-saved-annotations (object)
   (mapcar #'cdr

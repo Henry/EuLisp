@@ -93,7 +93,7 @@
   (if (%eq (%cast %signed-word-integer object)
            (%cast %signed-word-integer ()))
       t
-    nil))
+    ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; length-functions

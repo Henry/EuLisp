@@ -158,7 +158,7 @@
   ;;
   (let ((fun (?function form)))
     (if (cont-p fun) (error "continuation in argument position")
-      (call-a-function fun (?arg-list form) nil (?read-glocs form)))))
+      (call-a-function fun (?arg-list form) () (?read-glocs form)))))
 
 (defmethod l2m-a ((con <join-label>) (form <set-slot-value>))
   (set-slot-value-a con form))

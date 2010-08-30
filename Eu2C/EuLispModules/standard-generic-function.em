@@ -598,7 +598,7 @@
 (defun add-method (gf method)
   ;; first the caches have to be cleared
   (set-generic-fast-class-cache gf (list ()))
-  (set-generic-fast-method-cache gf nil)
+  (set-generic-fast-method-cache gf ())
   (set-generic-slow-cache gf (list ()))
   ;; then the method may be added
   (set-generic-function-methods

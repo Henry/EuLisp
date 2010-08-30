@@ -90,7 +90,7 @@
       (progn
         (func (car lst))
         (mapc-aux1 func (cdr lst)))
-    nil))
+    ()))
 
 
 ;;  (%define-function (%pair-length %signed-word-integer )
@@ -115,7 +115,7 @@
 ;;        res
 ;;        (if (%gt length-of-l #%i1)
 ;;          (car (cdr l))
-;;          nil))
+;;          ()))
 ;;      ))
 
 
@@ -144,7 +144,7 @@
 
 
 ;;  (defun assq-aux (object alist)
-;;    (cond ((null? alist) nil)
+;;    (cond ((null? alist) ())
 ;;          ((eq (car (car alist)) object)
 ;;           (car alist))
 ;;          (t (assq-aux object (cdr alist)))))

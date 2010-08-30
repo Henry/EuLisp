@@ -72,7 +72,7 @@
 ;;; initialize
 ;;;-----------------------------------------------------------------------------
 (defmethod initialize ((object <symbol>) . initlist)
-  (let ((option (find-option 'string initlist nil)))
+  (let ((option (find-option 'string initlist ())))
     (if option
         (make-symbol (car option))
       (make-symbol ""))))

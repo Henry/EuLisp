@@ -40,7 +40,7 @@
  export (write-message
          write-message-conditional))
 
-(defvar *current-module* nil)
+(defvar *current-module* ())
 
 (deflocal *line-length* 75)
 
@@ -54,11 +54,11 @@
 (defun write-msg (key message args)
   (when key
         (let ((header
-               (format nil "~A~@[ in module '~(~A~)'~]"
+               (format () "~A~@[ in module '~(~A~)'~]"
                        key
                        (if (dynamic *current-module*)
                            (?identifier (dynamic *current-module*))
-                         nil))))
+                         ()))))
           (format *standard-output*
                   "~%--- ~A ~V{-~}~%~
                ~@[--- in form ~((~2{~A ~} ...)~)~%~]"

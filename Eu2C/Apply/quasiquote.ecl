@@ -20,35 +20,21 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: backquote from feel for apply
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
-;;;  Authors: 
+;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
-
-
 #module quasiquote
-
-(import
- ((except (STRINGP append) eulisp1)
-  (only (CADAR
-         CADR
-         ERROR
-         STRINGP
-         append)
-        common-lisp)
-  )
-
- syntax
- (eulisp1)
-
- export
- (unquote-constructor)
- )
-
-;; Quasi-quoting
+(import ((except (STRINGP
+                  append)
+                 eulisp1)
+         (only (CADAR
+                CADR
+                ERROR
+                STRINGP
+                append)
+               common-lisp))
+ syntax (eulisp1)
+ export (unquote-constructor))
 
 (defun unquote-constructor (x)
   (cond ((atom? x)
@@ -68,15 +54,18 @@
 (defun contains-no-unquote (x)
   (cond ((atom? x) t)
         ((or (eq (car x) ^unquote) (eq (car x) ^unquote-splicing))
-         nil)
+         ())
         (t (and (contains-no-unquote (car x))
                 (contains-no-unquote (cdr x))))))
 
 (defun mkquote (x) (list ^quote x))
 
-(defun eqcar (a b) (cond ((atom? a) nil) ((eq (car a) b) t) (t nil)))
+(defun eqcar (a b) (cond ((atom? a) ()) ((eq (car a) b) t) (t ())))
 
 ;; (defmacro quasiquote (dummy form) (unquote-constructor form))
 
-
 ;;(defmacro quasiquote (skel) (unquote-constructor skel))
+
+;;;-----------------------------------------------------------------------------
+#module-end
+;;;-----------------------------------------------------------------------------

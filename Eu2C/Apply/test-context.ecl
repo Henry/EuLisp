@@ -266,7 +266,7 @@
                                                    :constant-counter 0))))
                  (l2m-call call arglist)
                  (print "************************ Start inline ****************")
-                 (inline-a con fun var-vec nil))
+                 (inline-a con fun var-vec ()))
              (test-variable (l2m-a (dynamic *arg-context*) form)
                             con)))
           (t (test-variable (l2m-a (dynamic *arg-context*) form)

@@ -49,7 +49,7 @@
      _x_))
 
 (defun remove-if (predicate list)
-  (cond ((null? list) nil)
+  (cond ((null? list) ())
         ((predicate (car list))
          (remove-if predicate (cdr list)))
         (t

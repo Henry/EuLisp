@@ -18,51 +18,40 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 #module void-context
-(import
- (eulisp1
-  SIMPLE-PROGRAMMING
-  LZS
-  MZS
-  context
-  analyse-h
-  progn-context
-  type-propagation
-  type-inference
-  function-call-context
-  (only (append error) common-lisp)
-  lzs-to-mzs-fun
-  vector
-  function-call
-  if-form
-  setq-form
-  letstar-form
-  slot-value
-  )
- ;; typeinfernce
-
- syntax
- (eulisp1)
- )
-
+(import (eulisp1
+         SIMPLE-PROGRAMMING
+         LZS
+         MZS
+         context
+         analyse-h
+         progn-context
+         type-propagation
+         type-inference
+         function-call-context
+         (only (append
+                error)
+               common-lisp)
+         lzs-to-mzs-fun
+         vector
+         function-call
+         if-form
+         setq-form
+         letstar-form
+         slot-value)
+ syntax (eulisp1))
 
 ;;------------------------------
-
 (defmethod finish-a ((con <void>) res) res)
 
 ;;------------------------------
 ;; constants
 ;;------------------------------
-
 (defmethod l2m-a ((con <void>) (form <named-const>))
   ;;
   ;; form = <defined-named-constant>, <imported-named-constant>
@@ -70,7 +59,6 @@
   ;; (warning "not used constant ~s " form)
   ()
   )
-
 
 (defmethod l2m-a ((con <void>) (form <sym>))
   ;;
@@ -181,7 +169,7 @@
   ;;
   (let ((fun (?function form)))
     (if (cont-p fun) (error "continuation not implemented")
-      (call-a-function fun (?arg-list form) nil(?read-glocs form)))))
+      (call-a-function fun (?arg-list form) () (?read-glocs form)))))
 
 (defmethod l2m-a ((con <void>) (form <set-slot-value>))
   (set-slot-value-a con form))
@@ -233,4 +221,6 @@
 ;;   ())
 ;;
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

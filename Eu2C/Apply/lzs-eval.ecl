@@ -117,7 +117,7 @@
   (map #'make-syntactic obj))
 
 (defun make-list-syntactic (l)
-  (cond ((null? l) nil)
+  (cond ((null? l) ())
         ((atom? l) (make-syntactic l))
         (t (cons (make-list-syntactic (car l))
                  (make-list-syntactic (cdr l))))))
@@ -165,7 +165,7 @@
            (with-new-values (?var-list (?params fun))
                             (?rest (?params fun))
                             args
-                            nil ; the arguments are already evaluated
+                            () ; the arguments are already evaluated
                             (eval body)))
           (t (eval-error-cannot-interpret-function fun)))))
 
@@ -351,7 +351,7 @@
     (cond (entry (cdr entry))
           ((eq (?initial-value var) ^unknown)
            (eval-error-variable-without-value var)
-           nil)
+           ())
           (t (?initial-value var)))))
 
 (defgeneric set-value (var value))
@@ -385,7 +385,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun eval-progn (forms)
-  (let ((value nil))
+  (let ((value ()))
     (mapc (lambda (form)
             (setq value (eval form)))
           forms)
@@ -401,11 +401,11 @@
 
 (defmethod eval ((obj <switch-form>))
   (eval-error-special-form-not-implemented ^switch)
-  nil)
+  ())
 
 (defmethod eval ((obj <labeled-form>))
   (eval-error-special-form-not-implemented ^labeled-form)
-  nil)
+  ())
 
 (defmethod eval ((obj <let*-form>))
   (with-new-values (?var-list obj) () (?init-list obj) #'eval
@@ -413,31 +413,31 @@
 
 (defmethod eval ((obj <labels-form>))
   (eval-error-special-form-not-implemented ^labels)
-  nil)
+  ())
 
 (defmethod eval ((obj <let/cc-form>))
   (eval-error-special-form-not-implemented ^let/cc)
-  nil)
+  ())
 
 (defmethod eval ((obj <tagbody-form>))
   (eval-error-special-form-not-implemented ^tagbody)
-  nil)
+  ())
 
 (defmethod eval ((obj <tagged-form>))
   (eval-error-special-form-not-implemented ^tagged-form)
-  nil)
+  ())
 
 (defmethod eval ((obj <mv-lambda>))
   (eval-error-special-form-not-implemented ^mv-lambda)
-  nil)
+  ())
 
 (defmethod eval ((obj <get-slot-value>))
   (eval-error-special-form-not-implemented ^%select)
-  nil)
+  ())
 
 (defmethod eval ((obj <set-slot-value>))
   (eval-error-special-form-not-implemented ^%setf-select)
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; module initialization
@@ -445,7 +445,7 @@
 
 (defun initialize-module (name)
   (call (?toplevel-forms (find-module name))
-        nil))
+        ()))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

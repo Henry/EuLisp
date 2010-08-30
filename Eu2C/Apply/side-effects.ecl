@@ -125,7 +125,7 @@
   (init-side-effecs-funs funs)
   (let ((funs-after (get-functions-used-in-literals)))
     (if (eq (length funs) (length funs-after))
-        nil ; then we are ready
+        () ; then we are ready
       (init-side-effects-literal-funs funs-after))))
 
 (defun analysis-side-effects1 (mlist)

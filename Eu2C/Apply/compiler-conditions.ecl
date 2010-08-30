@@ -66,12 +66,12 @@
   (let ((fmt (message-format condition-instance))
         (options (message-format-options condition-instance)))
     ;;check option list consistency
-    (option-lists::check-options options nil nil option-list)
+    (option-lists::check-options options () () option-list)
     (let ((fmt-args (cl:mapcar (lambda(x)
-                                 (option-lists::get-option x option-list nil))
+                                 (option-lists::get-option x option-list ()))
                                options)))
       ;;      (setf (condition-message condition-instance)
-      ;;            (apply #'cl:format nil
+      ;;            (apply #'cl:format ()
       ;;                   (cons fmt fmt-args )))
       ;;      (signal condition-instance continuation)
       (apply #'cl:format t (cons fmt fmt-args) );;only a hack

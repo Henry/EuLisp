@@ -71,7 +71,7 @@
 (defconstant $%string-type-descriptor 7)
 
 (defgeneric generated-function-p (fun))
-(defmethod generated-function-p (fun) nil)
+(defmethod generated-function-p (fun) ())
 (defmethod generated-function-p ((fun <slot-accessor-fun>)) t)
 (defmethod generated-function-p ((fun <slot-init-fun>)) t)
 (defmethod generated-function-p ((fun <constructor-fun>)) t)
@@ -83,7 +83,7 @@
   (null? *basic-system*))
 
 (defun class-allocation (alloc-if-defined)
-  (if *basic-system* nil alloc-if-defined))
+  (if *basic-system* () alloc-if-defined))
 
 (defun slot-specs-for-class ()
   (list (list ^name ^class-precedence-list
@@ -222,16 +222,16 @@
                        )))
 
 (defgeneric initialize-basic-class (class))
-(defmethod initialize-basic-class (class) nil)
+(defmethod initialize-basic-class (class) ())
 (defmethod initialize-basic-class ((class <%string>))
   (setf (?class class) %tail-class)
-  (setf (?expanded-literal class) nil)
-  (setf (?class-precedence-list class) nil))
+  (setf (?expanded-literal class) ())
+  (setf (?class-precedence-list class) ()))
 (defmethod initialize-basic-class ((class <basic-class-def>))
-  (setf (?place class) nil)
-  (setf (?expanded-literal class) nil)
+  (setf (?place class) ())
+  (setf (?expanded-literal class) ())
   (setf (?class class) %tail-class)
-  (setf (?class-precedence-list class) nil)
+  (setf (?class-precedence-list class) ())
   ;;lattice-type is set by the initialization of the type inference
   (~compute-runtime-initialization class) ;only for side effect
   )
@@ -243,17 +243,19 @@
                (make-instance <global-fun>
                               :identifier (list ^symbol-table-initializator)
                               :params (make-instance <params>
-                                                     :var-list nil
-                                                     :rest nil)
-                              :body (make-instance <progn-form>
-                                                   :form-list
-                                                   (mapcar (lambda (sym)
-                                                             (make-instance <app>
-                                                                            :function %add-symbol
-                                                                            :arg-list (list sym)))
-                                                           (dynamic symbol-env))))))
+                                                     :var-list ()
+                                                     :rest ())
+                              :body (make-instance
+                                     <progn-form>
+                                     :form-list
+                                     (mapcar (lambda (sym)
+                                               (make-instance
+                                                <app>
+                                                :function %add-symbol
+                                                :arg-list (list sym)))
+                                             (dynamic symbol-env))))))
           (setf (?symtab-initfun main-module) symtab-initfun)
-          (add-lexical symtab-initfun main-module nil))))
+          (add-lexical symtab-initfun main-module ()))))
 
 (defun name-and-export-reader (class slot-name reader-name)
   (let ((reader (~slot-description-slot-reader

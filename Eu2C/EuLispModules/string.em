@@ -95,7 +95,7 @@
           (l1 %signed-word-integer (strlen s1))
           (l2 %signed-word-integer (strlen s2)))
          (if (%eq l1 l2)
-             (b<-string #%i0 l1 s1 s2 nil)
+             (b<-string #%i0 l1 s1 s2 ())
            (if (%gt l2 l1)
                (b<-string1 #%i0 l1 s1 s2)
              '()))))
@@ -204,7 +204,7 @@
 ;;  (if (%eq #%i0 (strcmp (string-pointer string1)
 ;;                        (string-pointer string2)))
 ;;    t
-;;    nil))
+;;    ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; copy
@@ -235,7 +235,7 @@
 ;;                   (string-pointer string2))
 ;;           #%i0)
 ;;    t
-;;    nil))
+;;    ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; string-slice

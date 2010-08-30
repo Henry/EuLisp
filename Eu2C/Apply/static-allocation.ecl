@@ -26,45 +26,52 @@
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
-
 #module static-allocation
-
-(import
- ((except (format) eulisp0)
-  accessors;??for missing ?mm-type
-  (rename ((push cl:push)
-           (dolist cl:dolist)
-           (format cl:format)
-           (cadr cl:cadr)
-           (cddr cl:cddr)
-           (mapc cl:mapc))
-          (only (push dolist format cadr cddr mapc) common-lisp))
-  (only (expand-literal) expand-literal)
-  (only (~vector-class-element-type) lzs-mop)
-  (only (<class-def>) lzs)
-  (only (<stream>) el-stream)
-  (only (asm-identifier c-identifier type-identifier) code-identifier)
-  compiler-conditions
-  (only (<%pointer-to-vector>
-         <%pointer-to-struct>
-         <%machine-type>
-         ?actually-byte-length) machine-description)
-  asm-ops)
-
- syntax
- (eulisp0
-  dynamic)
-
- export
- (static-allocate
-  write-static-cards
-  write-instance-imports
-  write-global-defs
-  add-root-object
-  add-root-label  ;;soon obsolete used in whc-gen-code only
-  add-root-variable
-  initialize-static-data-code-collectors)
- )
+(import ((except (format)
+                 eulisp0)
+         accessors ;; ??for missing ?mm-type
+         (rename ((push cl:push)
+                  (dolist cl:dolist)
+                  (format cl:format)
+                  (cadr cl:cadr)
+                  (cddr cl:cddr)
+                  (mapc cl:mapc))
+                 (only (push
+                        dolist
+                        format
+                        cadr
+                        cddr
+                        mapc)
+                       common-lisp))
+         (only (expand-literal)
+               expand-literal)
+         (only (~vector-class-element-type)
+               lzs-mop)
+         (only (<class-def>)
+               lzs)
+         (only (<stream>)
+               el-stream)
+         (only (asm-identifier
+                c-identifier
+                type-identifier)
+               code-identifier)
+         compiler-conditions
+         (only (<%pointer-to-vector>
+                <%pointer-to-struct>
+                <%machine-type>
+                ?actually-byte-length)
+               machine-description)
+         asm-ops)
+ syntax (eulisp0
+         dynamic)
+ export (static-allocate
+         write-static-cards
+         write-instance-imports
+         write-global-defs
+         add-root-object
+         add-root-label  ;;soon obsolete used in whc-gen-code only
+         add-root-variable
+         initialize-static-data-code-collectors))
 
 
 ;;; Macros
@@ -86,7 +93,7 @@
 
 (defmacro with-new-alignment body
   `(dynamic-let ((*alignment* 1)
-                 (*align* nil))
+                 (*align* ()))
                 ,@body))
 
 
@@ -178,17 +185,17 @@
         ;;write end mark
         (.align 4)
         (.global "_StaticRootEnd")
-        (with-label "_StaticRootEnd" nil
+        (with-label "_StaticRootEnd" ()
                     (.skip (- #x10000 (* len 4))));;  ??
         (.global "_StaticLiteralBegin")
-        (with-label "_StaticLiteralBegin" nil
+        (with-label "_StaticLiteralBegin" ()
                     (.skip 0))
         )
        (cl:dolist (entry static-asm-code)
                   (write-static-data (car entry) (cl:cadr entry) (cl:cddr entry)))
 
        (.global "_StaticLiteralEnd")
-       (with-label "_StaticLiteralEnd" nil
+       (with-label "_StaticLiteralEnd" ()
                    (.skip 0))
        ))))
 
@@ -207,7 +214,7 @@
 
 (defgeneric instance-type-spec (representation class))
 (defmethod instance-type-spec ((representation <%pointer-to-struct>) class)
-  (cl:format nil "struct ~A" (type-identifier class)))
+  (cl:format () "struct ~A" (type-identifier class)))
 (defmethod instance-type-spec ((representation <%pointer-to-vector>) class)
   (type-identifier (~vector-class-element-type class)))
 

@@ -107,7 +107,7 @@
 
 (defun local-c-identifier (object)
   (dynamic-let ((*identifier-table* (dynamic *local-identifier-table*))
-                (*capitalize* nil))
+                (*capitalize* ()))
                (unwind-protect
                    (c-identifier object)
                  (dynamic-setq *local-identifier-table*
@@ -119,7 +119,7 @@
   ;; string
   (let ((id (?identifier object)))
     (when (consp id)
-          (setq id (make-eulisp-symbol (format nil "~{~A~^ ~}" id)))
+          (setq id (make-eulisp-symbol (format () "~{~A~^ ~}" id)))
           (setf (?identifier object) id))
     id))
 
@@ -145,7 +145,7 @@
 
 (defun main-function-id (module)
   (if (?exports module)
-      (format nil "initialize_~A" (?code-identifier module))
+      (format () "initialize_~A" (?code-identifier module))
     "main"))
 
 ;;;-----------------------------------------------------------------------------
@@ -239,11 +239,11 @@
 ;;; global variables
 ;;;-----------------------------------------------------------------------------
 
-(defvar *identifier-table* nil)
+(defvar *identifier-table* ())
 
-(defvar *local-identifier-table* nil)
+(defvar *local-identifier-table* ())
 
-(defvar *capitalize* nil)
+(defvar *capitalize* ())
 
 (deflocal *max-identifier-size* ())
 ;; () means no truncation of identifiers
@@ -260,10 +260,10 @@
   name)
 
 (defun add-prefix (prefix-char name)
-  (format nil "~A__~A" prefix-char name))
+  (format () "~A__~A" prefix-char name))
 
 (defun add-prefix&module-id (prefix-char name object)
-  (format nil "~@[~A__~]~A__~A"
+  (format () "~@[~A__~]~A__~A"
           prefix-char
           name
           (?code-identifier (or (exporting-module object)
@@ -273,7 +273,7 @@
 ;;; identifier generation for exported objects
 ;;;-----------------------------------------------------------------------------
 
-(defvar *identifier-for-export* nil)
+(defvar *identifier-for-export* ())
 
 (defun check-c-unique (string)
   ;;
@@ -333,13 +333,13 @@
 (defgeneric make-x-identifier (identifier))
 
 (defmethod make-x-identifier ((identifier <null>))
-  nil)
+  ())
 
 (defmethod make-x-identifier ((identifier <symbol>))
   (make-x-identifier (symbol-name identifier)))
 
 (defmethod make-x-identifier ((constituent-list <pair>))
-  (make-x-identifier (format nil "~{~A~^_~}" constituent-list)))
+  (make-x-identifier (format () "~{~A~^_~}" constituent-list)))
 
 (defmethod make-x-identifier ((identifier <string>))
   (check-c-unique
@@ -399,7 +399,7 @@
 (defgeneric make-c-identifier (identifier))
 
 (defmethod make-c-identifier ((identifier <null>))
-  nil)    ;old: $generated-identifier-prefix)
+  ())    ;old: $generated-identifier-prefix)
 
 (defmethod make-c-identifier ((identifier <symbol>))
   (make-c-identifier
@@ -407,7 +407,7 @@
     (symbol-name identifier))))
 
 (defmethod make-c-identifier ((constituent-list <pair>))
-  (make-c-identifier (format nil "~{~A~^_~}" constituent-list)))
+  (make-c-identifier (format () "~{~A~^_~}" constituent-list)))
 
 (defmethod make-c-identifier ((identifier <string>))
   (reduce-length
@@ -428,7 +428,7 @@
           (when (dynamic *identifier-for-export*)
                 (format t "~%!!!!Namenskonflikt bei export fuer h-File: ~A" name))
           (setf (cdr entry) (+ 1 (cdr entry)))
-          (make-unique-id (format nil "~A_~D" name (cdr entry))))
+          (make-unique-id (format () "~A_~D" name (cdr entry))))
       (progn
         (dynamic-setq *identifier-table*
                       `((,sym . 0) ,@(dynamic *identifier-table*)))
@@ -463,19 +463,19 @@
 
 (defmethod make-unique-identifier ((var <global-static>) name)
   (make-unique-id
-   (add-prefix&module-id nil name var)))
+   (add-prefix&module-id () name var)))
 
 (defmethod make-unique-identifier ((const <defined-named-const>) name)
   (make-unique-id
-   (add-prefix&module-id nil name const)))
+   (add-prefix&module-id () name const)))
 
 (defmethod make-unique-identifier ((fun <defined-fun>) name)
   (make-unique-id
-   (add-prefix&module-id nil name fun)))
+   (add-prefix&module-id () name fun)))
 
 (defmethod make-unique-identifier ((gf <defined-generic-fun>) name)
   (make-unique-id
-   (add-prefix&module-id nil name gf)))
+   (add-prefix&module-id () name gf)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; naming global objects
@@ -485,7 +485,7 @@
 
 (defmethod name-global-object (obj)
   ;; do nothing
-  nil)
+  ())
 
 (defmethod name-global-object ((class <defined-class>))
   (setf (?code-identifier (expand-literal class))
@@ -496,7 +496,7 @@
   ;; now setting the identifiers of the slots
   (dynamic-let ((*identifier-table* (copy-tree $reserved-identifiers))
                 ;;slot identifiers must be different from reserved keywords only
-                (*capitalize* nil))
+                (*capitalize* ()))
                (mapc #'c-identifier
                      (?effective-slots class))))
 
@@ -580,7 +580,7 @@
 
 (defmethod name-exported-object (obj)
   ;; do nothing
-  nil)
+  ())
 
 (defmethod name-exported-object ((binding <binding>))
   (x-identifier binding) ; sets code-identifier as a side effect
@@ -596,7 +596,7 @@
   ;; now setting the identifiers of the slots
   (dynamic-let ((*identifier-table* (copy-tree $reserved-identifiers))
                 ;;slot identifiers must be different from reserved keywords only
-                (*capitalize* nil))
+                (*capitalize* ()))
                (mapc #'c-identifier
                      (?effective-slots class))))
 

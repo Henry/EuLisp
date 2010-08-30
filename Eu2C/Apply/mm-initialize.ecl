@@ -202,9 +202,9 @@ given in the constructor form" :class )
   (setq initialized-classes ())
 
   (setq multiple-type-card-descriptors
-        nil)
+        ())
   (setq multiple-size-card-descriptors
-        nil)
+        ())
   )
 
 
@@ -473,7 +473,7 @@ given in the constructor form" :class )
   ;;generation of card descriptor if ~vector-class-instance-length is not () or
   ;;if allocation is multiple-size-card
   ;;inscribe corresponding values into class-object
-  ;;if ~vector-class-instance-length returns nil ansd allocation is not multiple-size-card
+  ;;if ~vector-class-instance-length returns () ansd allocation is not multiple-size-card
   ;;no card descriptor can be generated. So every time a constructor is called,
   ;;there will be a call to make-card-descriptor which generates one if there is none
   ;;all constructors have to use the values from that class object
@@ -540,7 +540,7 @@ given in the constructor form" :class )
                                            mm-type ctype estimated-size multiple-type-card-descriptors))
       ((eq allocation  ^multiple-size-card)
        ;;special treatent for vector with unknown size
-       ;;size nil would result in %iNIL in set-mm-card
+       ;;size () would result in %iNIL in set-mm-card
        ;; ~vector-class-instance-byte-length is always not null, so there is no
        ;; need to test length
        (canonize-multiple-card-descriptors class representation-object size mm-type ctype class multiple-size-card-descriptors))
@@ -1068,7 +1068,7 @@ given in the constructor form" :class )
   ((representation-object <%direct>)
    class slot effective-slots)
   ;; a writer for classes with representation direct isn't possible
-  nil)
+  ())
 
 (defmethod ~compute-slot-writer-using-representation
   ((representation-object <%pointer-to-struct>)

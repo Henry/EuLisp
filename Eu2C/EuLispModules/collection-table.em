@@ -167,7 +167,7 @@
 ;;          (if (function tab-res)
 ;;            t
 ;;            (anyp-with-one-table function table (binary+ index 1)))
-;;          nil)))
+;;          ())))
 
 
 (%define-function (anyp-with-one-table <object>)
@@ -176,7 +176,7 @@
    (index %unsigned-word-integer)
    (upper-limit %unsigned-word-integer))
   (if (%ge index upper-limit)
-      nil
+      ()
     (if (anyp-table-aux
          function
          (table-vector-ref (?table-vector table) index))
@@ -194,7 +194,7 @@
       (if (function (cdr (car lst)))
           t
         (anyp-table-aux function (cdr lst)))
-    nil)
+    ())
   )
 
 
@@ -310,7 +310,7 @@
 ;;      (if (eq tab-res (?fill-value table))
 ;;        (progn (function tab-res)
 ;;               (do-with-one-table function table (binary+ index 1)))
-;;        nil)))
+;;        ())))
 
 
 (%define-function (do-with-one-table <object>)
@@ -319,7 +319,7 @@
    (index %unsigned-word-integer)
    (upper-limit %unsigned-word-integer))
   (if (%ge index upper-limit)
-      nil
+      ()
     (progn
       (do-table-aux
        function
@@ -336,7 +336,7 @@
       (progn
         (function (cdr (car lst)))
         (do-table-aux function (cdr lst)))
-    nil)
+    ())
   )
 
 ;;;------------------------------------------------------------
@@ -378,7 +378,7 @@
   (if (%ge index upper-limit)
       t
     (if (table-vector-ref (?table-vector table) index)
-        nil
+        ()
       (dotimes-with-elt1 (%plus #%I1 index) upper-limit table))))
 
 
@@ -395,7 +395,7 @@
         (if (%eq #%i0 rest-list-length)
             (progn
               (print "no keys for table ")
-              nil)
+              ())
           (if (%eq #%i1 rest-list-length)
               (fill-table-aux table object (car keys))
             (print "to many arguments for table"))))
@@ -456,7 +456,7 @@
                                    (%cast %unsigned-word-integer
                                           (make-swi $standard-table-size))))
               ;;            ((%eq rest-list-length #%i1)
-              ;;             (map-with-two-args function table (car more-collections) nil))
+              ;;             (map-with-two-args function table (car more-collections) ()))
               (t (map-collection function table more-collections)))
         ))
 
@@ -500,7 +500,7 @@
                                (car (car lst))
                                (function (cdr (car lst))))
              (map-table-aux function (cdr lst) new-table))
-    nil))
+    ()))
 
 
 ;;;------------------------------------------------------------
@@ -530,7 +530,7 @@
    (object <object>)
    (test <function>))
   (if (%ge index upper-limit)
-      nil
+      ()
     (if (dotimes-with-member-aux
          object
          (table-vector-ref (?table-vector table) index)
@@ -545,7 +545,7 @@
           (test (cdr (car alist)) object)
           t
         (dotimes-with-member-aux object (cdr alist) test))
-    nil))
+    ()))
 
 
 

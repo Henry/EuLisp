@@ -54,8 +54,8 @@
 ;;  here because of name conflict with symbol <lzs-object>
 ;;  in function make-supers
 ;;;-----------------------------------------------------------------------------
-(deflocal *structure-slots* nil)
-(deflocal *annotation-slots* nil)
+(deflocal *structure-slots* ())
+(deflocal *annotation-slots* ())
 
 (defstandardclass <lzs-object> ()  ; the top node
   (source :initform () :accessor :writer :initarg)   ; some reference to the source
@@ -123,7 +123,7 @@
         ))
 
 (defun make-structure-and-annotation-slots (slots)
-  (cond ((null? slots) nil)
+  (cond ((null? slots) ())
         ((eq (car slots) ':annotations)
          (make-annotations (cdr slots)))
         ((consp (car slots))
@@ -139,7 +139,7 @@
           (make-structure-and-annotation-slots (cdr slots))))))
 
 (defun make-annotations (slots)
-  (cond ((null? slots) nil)
+  (cond ((null? slots) ())
         ((consp (car slots))
          (pushnew (caar slots) *annotation-slots*)
          (cons
@@ -161,10 +161,10 @@
     (list (get-superclass-name supers))))
 
 (defun make-predicate-name (class-name)
-  (intern (format nil "~A-P" class-name)))
+  (intern (format () "~A-P" class-name)))
 
 (defun make-mixin-predicates (class-name supers)
-  (cond ((null? supers) nil)
+  (cond ((null? supers) ())
         ((member (car supers) '(:named :global :imported))
          (cons
           `(defmethod ,(make-predicate-name (car supers))

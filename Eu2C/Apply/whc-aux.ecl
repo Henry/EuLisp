@@ -71,10 +71,10 @@
   t)
 
 (defmethod data-type-p ((type <number>))
-  nil)
+  ())
 
 (defmethod data-type-p (type)
-  nil)
+  ())
 
 (defun variable-p (var)
   (subtypep (type-of var) <var>))
@@ -96,7 +96,7 @@
 
 
 (defmethod basic-data-type-p (type)
-  nil)
+  ())
 
 (defun give-data-type (symbol)
   (when (data-type-p symbol)
@@ -137,13 +137,13 @@
   t)
 
 (defmethod data-integer-p (object)
-  nil)
+  ())
 
 (defmethod data-float-p ((instance <%float>))
   t)
 
 (defmethod data-float-p (object)
-  nil)
+  ())
 
 #module-end
 ;;; eof whc-aux.lisp

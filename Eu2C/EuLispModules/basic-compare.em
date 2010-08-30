@@ -20,34 +20,26 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 (defmodule basic-compare
-
   (import (apply-level-1
-           ti-sys-signatures          ; this allows declaration of signatures
-           )
+           ti-sys-signatures)          ; this allows declaration of signatures
    syntax (apply-level-1)
-   export (eq t nil)
-   )
+   export (eq
+           t))
 
-(defconstant nil () )
 (defconstant t 't)
 
 (defun eq (object1 object2)
   (if (%eq (%cast %signed-word-integer object1)
            (%cast %signed-word-integer object2))
       t
-    nil ))
+    ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for used for type inference
 ;;;-----------------------------------------------------------------------------
-
 ;; see also basic-list-0.am
 (%annotate-function
   eq new-signature
@@ -56,4 +48,6 @@
     ((var var1) (atom? <object>))
     ((var var2) (atom? <object>)))))
 
-); end of module basic-compare
+;;;-----------------------------------------------------------------------------
+)  ;; end of module basic-compare
+;;;-----------------------------------------------------------------------------

@@ -63,7 +63,7 @@
                     ;;is the module-name a symbol?
                     (symbolp (second module-source))))
          (error-invalid-module-definition module-source path)
-         nil)
+         ())
         ((null? (string-equal (string (second module-source))
                              (pathname-name (pathname path))))
          (warning-differing-names-for-module-and-file
@@ -76,17 +76,17 @@
 (defun load-module-file (path function)
   (dynamic-let ((*load-level* (+ 1 (dynamic *load-level*))))
                (info-loading-module path)
-               (with-open-file (file path :direction :input :if-does-not-exist nil)
+               (with-open-file (file path :direction :input :if-does-not-exist ())
                                (if file
                                    (let ((module-source (check-module path (read file))))
                                      (if module-source
                                          (cl:prog1
                                           (funcall function module-source)
                                           (info-module-loaded (second module-source)))
-                                       (progn (error-cannot-load-file path) nil)))
-                                 (progn (error-cannot-open-file path) nil)))))
+                                       (progn (error-cannot-load-file path) ())))
+                                 (progn (error-cannot-open-file path) ())))))
 
-(defvar apply-module-directory nil)
+(defvar apply-module-directory ())
 
 (defconstant $apply-module-file-extension
   (make-pathname :name :wild :type "em"))
@@ -132,7 +132,7 @@
                                  :key #'pathname-name :test #'string-equal)))
                  (if file
                      (load-module-file file function)
-                   (progn (error-cannot-find-file name) nil)))))
+                   (progn (error-cannot-find-file name) ())))))
 
 (defun load-def-file (module-name-or-path function)
   (dynamic-let ((*apply-module-file-extension* $def-module-file-extension))

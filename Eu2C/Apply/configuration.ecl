@@ -131,7 +131,7 @@
 ;;; configuration variables
 ;;;-----------------------------------------------------------------------------
 
-(defvar *inline* nil)
+(defvar *inline* ())
 ;; used in function-call
 ;; () - no inlining at all
 ;; 0   - only inlining of slot-accessors and slot-default-functions if they meet the

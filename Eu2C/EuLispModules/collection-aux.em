@@ -91,7 +91,7 @@
 ;;                       (setq x (car lst))
 ;;                       (setq lst (cdr lst))
 ;;                       x)
-;;                   nil)))))
+;;                   ())))))
 ;;
 ;; (setq xx (take-next-element '(a b c d)))
 ;;
@@ -144,7 +144,7 @@
                         collection-list))
         (rest-elts
          (apply-rest-list
-          (cdr collection-list) nil)))
+          (cdr collection-list) ())))
     (if
         (if (eq first-apply-arg $end-string)
             t
@@ -165,7 +165,7 @@
                         collection-list))
         (rest-elts
          (apply-rest-list
-          (cdr collection-list) nil)))
+          (cdr collection-list) ())))
     ;;(print first-apply-arg)
     ;;(print rest-elts)
     (if
@@ -191,7 +191,7 @@
                         collection-list))
         (rest-elts
          (apply-rest-list
-          (cdr collection-list) nil)))
+          (cdr collection-list) ())))
     (if      ;; = (or (eq ...) (eq ...))
         (if (eq first-apply-arg $end-string)
             t
@@ -209,7 +209,7 @@
 
 (defun mapc-more-collections (li)
   (cons (construct-collection-info (car li))
-        (mapc-more-collections1 (cdr li) nil))
+        (mapc-more-collections1 (cdr li) ()))
   )
 
 (defun mapc-more-collections1 (li res)
@@ -234,7 +234,7 @@
 
 
 (defmethod construct-collection-info  ((collection <list>))
-  (cons collection nil))
+  (cons collection ()))
 
 
 (defmethod construct-collection-info (collection)
@@ -353,23 +353,23 @@
    (max-index %signed-word-integer))
   (cond ((%lt start #%i0)
          (print 'error-start-end-index-of-list-in-fill1)
-         nil)
+         ())
         ((%lt end #%i0)
          (print 'error-start-end-index-of-list-in-fill2)
-         nil)
+         ())
         ((%ge start max-index)
          (print 'error-start-end-index-of-list-in-fill3)
-         nil)
+         ())
         ((%ge end max-index)
          (print 'error-start-end-index-of-list-in-fill4)
-         nil)
+         ())
         ((%gt start end)
          (print 'error-start-end-index-of-list-in-fill5)
-         nil)
+         ())
         (t t)))
 
 (defun reverse-list (liste)
-  (reverse-list-aux liste nil))
+  (reverse-list-aux liste ()))
 
 (defun reverse-list-aux (liste result)
   (if (consp liste)
@@ -392,7 +392,7 @@
 
 ;;  (defmethod concat-collection ((collection <list>)
 ;;                                (more-collections <list>))
-;;    (let ((result (cons 1 nil)))
+;;    (let ((result (cons 1 ())))
 ;;      (conc-coll-list more-collections
 ;;                      (copy-list-to-list collection result))
 ;;      (cdr result)))
@@ -401,7 +401,7 @@
 
 (defun concat-collection (collection more-collections)
 
-  (let ((res (cons 1 nil)))
+  (let ((res (cons 1 ())))
     (conc-coll (cons collection more-collections) res)
     (convert (cdr res)
              (%class-of collection))))

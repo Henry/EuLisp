@@ -245,7 +245,7 @@
                             typedescrs)))
       (if (or (and then-typedescrs else-typedescrs)
               (and (null? then-typedescrs) (null? else-typedescrs)))
-          ;; both true or both nil
+          ;; both true or both ()
           (progn
             (specialize-descrs typedescrs (?type-descr test)) ;ak
             (setf (?type-descr-s test) typedescrs)

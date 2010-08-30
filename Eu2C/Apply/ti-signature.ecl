@@ -149,8 +149,8 @@
     (make <formal-type-descr>
           :type-vec vec
           :type-vars (make <type-var-substitutions> :equations subs)
-          :stat nil
-          :t-descr-before nil
+          :stat ()
+          :t-descr-before ()
           :type-spec 0)))
 
 (defun set-defined-signature (fun descrs)
@@ -181,7 +181,7 @@
            actual-descr)
           (t
            (ti-format2 t "~%-- ... unification failed.")
-           nil))))
+           ()))))
 
 (defun unify-descr&descrs (actual-descr formal-descrs)
   (let ((result-descrs ()))
@@ -312,7 +312,7 @@
 
 (defmethod type-expr-to-class ((expr <type-var>)
                                (subs <type-var-substitutions>))
-  (type-expr-to-class (convert-to-atomic-type expr subs) nil))
+  (type-expr-to-class (convert-to-atomic-type expr subs) ()))
 
 (defmethod type-expr-to-class ((expr <slot-id>)
                                subs)
@@ -365,7 +365,7 @@
     (dovector (var i vec)
               (setf (vector-ref vec i)
                     (convert-to-atomic-type var subs)))
-    (setf (?type-vars descr) nil))      ; substitutions no longer used
+    (setf (?type-vars descr) ()))      ; substitutions no longer used
   descr)
 
 ;; Remove all indirect references via type variables.
@@ -546,7 +546,7 @@
         (let ((first-descr (car copied-descrs)))
           (join-descrs-min first-descr (cdr copied-descrs))
           (ti-statistics *joined-signature-descrs-key*)
-          (setf (?t-descr-before first-descr) nil)
+          (setf (?t-descr-before first-descr) ())
           (setq copied-descrs (list first-descr))))
     (let ((range&domain (?range-and-domain fun))
           (max-domain-type ()))
@@ -629,7 +629,7 @@
 (defgeneric recursive-descr-p (descr))
 
 (defmethod recursive-descr-p ((descr <type-descr>))
-  nil)
+  ())
 
 (defmethod recursive-descr-p ((descr <recursive-type-descr>))
   t)

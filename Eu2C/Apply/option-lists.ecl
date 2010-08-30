@@ -54,29 +54,29 @@
 (defun option-error (condition . initlist)
   (cond ((eq condition <undefined-option>)
          (format t "~%ERROR: undefined option: ~A"
-                 (get-option 'option initlist nil)))
+                 (get-option 'option initlist ())))
         ((eq condition <uneven-option-list>)
          (format t "~%ERROR: option list with uneven number of elements; last one was ~A"
-                 (get-option 'option initlist nil)))
+                 (get-option 'option initlist ())))
         ((eq condition <mising-options>)
          (format t "~%ERROR: missing options: ~A "
-                 (get-option 'options initlist nil)))
+                 (get-option 'options initlist ())))
         ((eq condition <option-not-found>)
          (format t "~%ERROR: option ~A not found in option list ~A"
-                 (get-option 'option initlist nil)
-                 (get-option 'options initlist nil)))))
+                 (get-option 'option initlist ())
+                 (get-option 'options initlist ())))))
 
 ;;;-----------------------------------------------------------------------------
 
 (defun map-option-list (function option-list)
-  (cond ((null? option-list) nil)
+  (cond ((null? option-list) ())
         ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list)))
         (t (funcall function (car option-list) (cadr option-list))
            (map-option-list function (cddr option-list)))))
 
 (defun mapl-option-list (function option-list)
-  (cond ((null? option-list) nil)
+  (cond ((null? option-list) ())
         ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list)))
         (t (funcall function option-list)
@@ -87,16 +87,16 @@
          (when error-if-not-found?
                (option-error <option-not-found>
                              'option key 'options option-list))
-         nil)
+         ())
         ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list))
-         nil)
+         ())
         ((eq key (car option-list))
          (cdr option-list))
         (t (find-option key (cddr option-list) error-if-not-found?))))
 
 (defun get-option (key option-list default)
-  (let ((entry (find-option key option-list nil)))
+  (let ((entry (find-option key option-list ())))
     (if entry
         (car entry)
       default)))
@@ -105,7 +105,7 @@
   ;;function is applied to the old value and must return the new
   ;;value for the specified option
   ;; the changed option-list is returned
-  (let ((entry (find-option key option-list nil)))
+  (let ((entry (find-option key option-list ())))
     (when entry
           (setf (car entry) (funcall function (car entry))))
     option-list))
@@ -117,10 +117,10 @@
              t
            (progn (option-error <mising-options>
                                 'options required-options)
-                  nil)))
+                  ())))
         ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list))
-         nil)
+         ())
         ((find (car option-list) required-options)
          (check-options (remove (car option-list) required-options)
                         facultative-options multiple-options
@@ -137,6 +137,6 @@
          (option-error <undefined-option> 'option (car option-list))
          (check-options required-options facultative-options multiple-options
                         (cddr option-list))
-         nil)))
+         ())))
 
 #module-end

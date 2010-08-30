@@ -56,7 +56,7 @@
 
 (defmethod collectionp ((object <vector>)) t)
 
-(defmethod collectionp (object) nil)
+(defmethod collectionp (object) ())
 
 (defmethod sequencep ((object <string>)) t)
 
@@ -64,7 +64,7 @@
 
 (defmethod sequencep ((object <vector>)) t)
 
-(defmethod sequencep (object) nil)
+(defmethod sequencep (object) ())
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

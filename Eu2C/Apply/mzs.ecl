@@ -18,13 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
 ;;;  Requires:
 ;;;  Problems:
-;;;  Authors: 
+;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
 
@@ -67,7 +67,7 @@
 
 (def-mzs-object block (mzs-object)
   (in-label  :initform ())              ; label or branch
-  (out-label :initform ())              ; lable or nil
+  (out-label :initform ())              ; lable or ()
   (body :initform ())        ; list of function-call or move's
   (interface :initform ())   ; list of move's
   (result :initform ())  ;; a void, local-variable, test, switch,
@@ -251,7 +251,7 @@
 
 (def-mzs-object return (value-statement)
   ;; deleted form *hf*
-  ;; (last-call :initform nil)             ; the last function-call
+  ;; (last-call :initform ())             ; the last function-call
   :Annotations
   ;;-----------
   ;; deleted form *hf*
@@ -302,7 +302,7 @@
 (def-mzs-object funcall (function-call)
   value   ;; the variable (or constant) with des
   ;; function address
-  (closure-call :initform nil)          ; flag for the closure-call
+  (closure-call :initform ())          ; flag for the closure-call
   value-type
   :Annotations
   ;;-----------

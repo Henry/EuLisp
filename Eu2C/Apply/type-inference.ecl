@@ -119,7 +119,7 @@
 
 (defmethod compute-inference ((fun <fun>) descrs)
   (let ((formal-descrs ())
-        (standard-inference nil))
+        (standard-inference ()))
     (cond ((eq fun %extract)
            (setq formal-descrs (convert-to-formal-descrs-%extract descrs))
            (setf (?signature fun) formal-descrs))

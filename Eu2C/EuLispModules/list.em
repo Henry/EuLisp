@@ -20,10 +20,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
@@ -52,7 +48,6 @@
                   cdr
                   list
                   consp
-                  nil
                   t)
                  basic-list)
            (only (atom?)

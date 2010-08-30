@@ -20,39 +20,32 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: The most basic dynamically loaded things for the compiler
 ;;;  Description:
-;;    This module contains all basic stuff for the compiler which is not hard-wired
-;;    but is needed for
+;;    This module contains all basic stuff for the compiler which is not
+;;    hard-wired but is needed for
 ;;    - defining classes
 ;;    - ???
-;;    This module is loaded explicitely by the compiler before any other module is
-;;    required. The following things are available for this module and the modules it
+;;    This module is loaded explicitely by the compiler before any other module
+;;    is required. The following things are available for this module and the
+;;    modules it
 ;;    uses:
 ;;    - definition of simple functions
 ;;    - constant and variable definitions
 ;;    - definition of external functions, constants and variables
 ;;    - predefined classes of TAIL and standard literals
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule apply-level-1
-
   (import (%tail
            mm-interface)
    syntax (%tail)
-
    expose ((rename ((%class <class>)
                     (%object <object>)
                     (%tail-class <tail-class>)
-                    (%abstract-class <abstract-class>)
-                    )
+                    (%abstract-class <abstract-class>))
                    %tail)
-           pointer-to-void)
+           pointer-to-void))
 
-   )
-
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

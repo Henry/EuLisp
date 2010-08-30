@@ -233,7 +233,7 @@
 
 ;; inlining is controlled by the dynamic variable *inline* which is set by the
 ;; configuration 'inline' and which may contain the following values:
-;; nil - no inlining at all
+;; () - no inlining at all
 ;; 0   - only inlining of slot-accessors and slot-default-functions if they meet the
 ;;       requirement of (dynamic *inline*) = 1
 ;; n   - inlining takes place if the "complexity" of the function is less than n

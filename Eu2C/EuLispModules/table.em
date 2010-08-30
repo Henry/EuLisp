@@ -27,11 +27,7 @@
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
-
-
-
 (defmodule table
-
   (import
    (tail
     ;; (only (print) print)
@@ -338,7 +334,7 @@
    ;;take <function>, if ok
    )
   (if (%ge index upper-limit)
-      nil
+      ()
     (progn
       (mapc fcn (table-vector-ref (?table-vector table) index))
       (dotimes-with-mapc (%plus #%I1 index) upper-limit table fcn))
@@ -359,10 +355,10 @@
    (upper-limit %unsigned-word-integer)
    (table <table>))
   (if (%ge index upper-limit)
-      nil
+      ()
     (progn
       (set-table-vector-ref (?table-vector table) index
-                            nil)
+                            ())
       (dotimes-with-setf (%plus #%I1 index) upper-limit table))
     ))
 

@@ -61,15 +61,15 @@
 (defstandardclass <type-expr> ())
 
 (defstandardclass <atomic-type> (<type-expr>)
-  (code :accessor :initarg :initform nil)
-  (name :accessor :initarg :initform nil)
-  (comp-name :accessor :initarg :initform nil))
+  (code :accessor :initarg :initform ())
+  (name :accessor :initarg :initform ())
+  (comp-name :accessor :initarg :initform ()))
 
 (defstandardclass <type-var> (<type-expr>)
-  (id :accessor :initarg :initform nil))
+  (id :accessor :initarg :initform ()))
 
 (defstandardclass <slot-id> (<type-expr>)
-  (slot-name :accessor :initarg :initform nil))
+  (slot-name :accessor :initarg :initform ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TYPE EXPRESSION PREDICATES
@@ -126,7 +126,7 @@
 (defgeneric eq-type-var-p (var1 var2))
 
 (defmethod eq-type-var-p (var1 var2)
-  nil)
+  ())
 
 (defmethod eq-type-var-p ((var1 <type-var>)
                           (var2 <type-var>))

@@ -78,9 +78,9 @@
 ;;(defun convert-to-formal-descr-%select (descr) ;<type-descr>
 ;;  (get-previous-subs descr)
 ;;  (let* ((struct-type (get-arg-type descr 1))
-;;       (struct-class (type-expr-to-class struct-type nil))
+;;       (struct-class (type-expr-to-class struct-type ()))
 ;;       (slot-name-type (get-arg-type descr 2))
-;;       (slot-name (convert-to-slot-name slot-name-type nil))
+;;       (slot-name (convert-to-slot-name slot-name-type ()))
 ;;       (result-type (general-type)))
 ;;    (if (and slot-name
 ;;           (%pointer-to-struct-class-p (?representation struct-class)))
@@ -150,9 +150,9 @@
 ;;(defun convert-to-formal-descr-%setf-select (descr) ;<type-descr>
 ;;  (get-previous-subs descr)
 ;;  (let* ((struct-type (get-arg-type descr 1))
-;;       (struct-class (type-expr-to-class struct-type nil))
+;;       (struct-class (type-expr-to-class struct-type ()))
 ;;       (slot-name-type (get-arg-type descr 2))
-;;       (slot-name (convert-to-slot-name slot-name-type nil))
+;;       (slot-name (convert-to-slot-name slot-name-type ()))
 ;;       (new-slot-type (get-arg-type descr 3))
 ;;       result-type)
 ;;    (if (and slot-name
@@ -186,13 +186,13 @@
 ;;  (let ((slot-descr (~find-slot-description struct-class slot-name)))
 ;;    (if slot-descr
 ;;      (class-as-type-expr (~slot-description-type slot-descr))
-;;      nil)))
+;;      ())))
 
 ;;(defun find-slot-type-with-slot (slot-name)
 ;;  (let* ((struct-classes (find-classes-for-slot slot-name))
 ;;       (struct-types (mapcar #'class-as-type-expr struct-classes))
 ;;       (size (length struct-types)))
-;;    (cond ((= size 0) nil)
+;;    (cond ((= size 0) ())
 ;;        ((= size 1)
 ;;         (let* ((slot-descr (~find-slot-description (car struct-classes)
 ;;                                                    slot-name))
@@ -201,7 +201,7 @@
 ;;               (filled-formal-descr (class-as-type-expr slot-class)
 ;;                                    (car struct-types)
 ;;                                    (general-type))
-;;             nil)))
+;;             ())))
 ;;        (t
 ;;         (ti-format2 t "~%Warning: is slot ~A defined twice?" slot-name)
 ;;         (filled-formal-descr (general-type)
@@ -226,7 +226,7 @@
 (defun convert-to-formal-descr-%extract (descr) ;<type-descr>
   (get-previous-subs descr)
   (let* ((vec-type (get-arg-type descr 1))
-         (vec-class (type-expr-to-class vec-type nil))
+         (vec-class (type-expr-to-class vec-type ()))
          (index-type (%integer-type))
          (result-type (general-type)))
     (if (%pointer-to-vector-class-p (?representation vec-class))
@@ -325,7 +325,7 @@
 (defgeneric %pointer-to-vector-class-p (x))
 
 (defmethod %pointer-to-vector-class-p (x)
-  nil)
+  ())
 
 (defmethod %pointer-to-vector-class-p ((x <%pointer-to-vector>))
   x)
@@ -333,7 +333,7 @@
 ;;(defgeneric %pointer-to-struct-class-p (x))
 ;;
 ;;(defmethod %pointer-to-struct-class-p (x)
-;;  nil)
+;;  ())
 ;;
 ;;(defmethod %pointer-to-struct-class-p ((x <%pointer-to-struct>))
 ;;  x)

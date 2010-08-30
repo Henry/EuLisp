@@ -51,7 +51,7 @@
   (with-defining-form
    (when options
          (warn-defgeneric-options-not-analyzed options))
-   (setf (cdr (cddr (whole-form))) nil)
+   (setf (cdr (cddr (whole-form))) ())
    (whole-form)))
 
 (deftransmod (defgeneric gf-spec lambda-list . options)
@@ -59,7 +59,7 @@
          (add-function (make-instance <global-generic-fun>
                                       :identifier gf-spec)))
         ;; otherwise no binding must be generated
-        (t nil)))
+        (t ())))
 
 (deftransdef (defgeneric gf-spec lambda-list . options)
   (with-defining-form
@@ -74,7 +74,7 @@
             ;;taken
             (setq gf (set-converter gf gf-spec)))
            (t (error-invalid-generic-function-spec gf-spec)
-              (setq gf nil)))
+              (setq gf ())))
      (~initialize gf
                   (list ^name gf-spec
                         ^domain (lambda-specializers lambda-list)
@@ -82,9 +82,9 @@
                         ;;^method-class
                         ^parameters (trans-params
                                      (lambda-parameters lambda-list)
-                                     nil)
+                                     ())
                         ))
-     nil)))
+     ())))
 
 (defun set-converter (class-def gf-spec)
   (if (class-def-p class-def)
@@ -131,7 +131,7 @@
             ;;taken
             (setq gf (get-converter gf gf-spec)))
            (t (error-invalid-generic-function-spec gf-spec)
-              (setq gf nil)))
+              (setq gf ())))
      (when gf
            (let ((method (~initialize (make-instance <method-def>)
                                       (list   ^domain specializers
@@ -146,7 +146,7 @@
              (~add-method gf method)
              (if (imported-p gf)
                  (make-dynamic-add-method-form gf method)
-               nil)))
+               ())))
      )))
 
 (defun make-dynamic-add-method-form (gf method)
@@ -158,16 +158,16 @@
 (defun get-converter (class-def gf-spec)
   (if (class-def-p class-def)
       (or (?converter class-def)
-          (and (error-no-converter class-def) nil))
+          (and (error-no-converter class-def) ()))
     (progn (error-class-required-in-converter-spec gf-spec)
-           nil)))
+           ())))
 
 (defun get-setter (fun gf-spec)
   (if (fun-p fun)
       (or (?setter fun)
-          (and (error-no-setter fun) nil))
+          (and (error-no-setter fun) ()))
     (progn (error-function-required-in-setter-spec gf-spec)
-           nil)))
+           ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; method-function-lambda
@@ -182,7 +182,7 @@
                    (make-instance function-class
                                   :identifier (append gf-id
                                                       (mapcar #'?identifier lambda-specs))))
-                  (trans-params lambda-params nil))))
+                  (trans-params lambda-params ()))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; %declare-external-generic
@@ -205,12 +205,12 @@
    (let* ((ID (first fun-spec))
           (TYPE (second fun-spec))
           (gf (find-in-lex-env ID))
-          (external-name (get-option ^external-name OPTIONS nil))
-          (language (get-option ^language OPTIONS nil))
-          (methods (get-option ^methods OPTIONS nil))
+          (external-name (get-option ^external-name OPTIONS ()))
+          (language (get-option ^language OPTIONS ()))
+          (methods (get-option ^methods OPTIONS ()))
           (domain (lambda-specializers PARAMETERS)))
      (setf (?params gf)
-           (trans-params (lambda-parameters PARAMETERS) nil))
+           (trans-params (lambda-parameters PARAMETERS) ()))
      (setf (?range-and-domain gf)
            (apply #'vector (trans TYPE) domain))
      (setf (?domain gf) domain)
@@ -222,7 +222,7 @@
                                      (cdr (cdr method-spec))) ; the domain
                              gf))
            methods)
-     nil)))
+     ())))
 
 (defun add-method-fun (method-fun domain gf)
   (~add-method gf
@@ -268,6 +268,6 @@
 ;;              class-options))
 ;;    (bind-slot-accessors class-def slot-descriptions)
 ;;    (bind-class-functions class-def class-options)
-;;    nil))
+;;    ()))
 
 #module-end

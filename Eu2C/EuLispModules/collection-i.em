@@ -124,7 +124,7 @@
       t
     (if (null? object)
         t
-      nil)))
+      ())))
 
 ;;(%define-function (%proper-list-length %signed-word-integer)
 ;;                    ((l <list>))
@@ -138,6 +138,6 @@
     (setf (cdr liste) element))
   liste)
 
-(defun and-aux (a b) (if a (if b t nil) nil))
+(defun and-aux (a b) (if a (if b t ()) ()))
 
 )

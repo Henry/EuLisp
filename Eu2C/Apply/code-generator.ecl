@@ -108,8 +108,8 @@
                          (close (dynamic code-output))))))
 
 (defun generate-code (main-module modules)
-  (let ((*print-circle* nil)
-        (*print-pretty* nil)
+  (let ((*print-circle* ())
+        (*print-pretty* ())
         )
     ;; to get the definition order of classes reverse the module list such that
     ;; the top module is the last one and the most basic is the first one

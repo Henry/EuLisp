@@ -37,9 +37,12 @@
    export (<list>
            <cons>
            <null>
-           car cdr cons null?
-           consp append
-           nil
+           car
+           cdr
+           cons
+           null?
+           consp
+           append
            t
            eq))
 

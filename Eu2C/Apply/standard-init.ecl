@@ -74,11 +74,11 @@
   ;; creates new slot definition, which means slot definitions introduced by the
   ;; current class and not inherited from the superclass
   (if (null? direct-slot-specs)
-      nil
+      ()
     (let* ((slot-spec (car direct-slot-specs))
-           (name (get-option ^name slot-spec nil))
-           (default-function (get-option ^default-function slot-spec nil))
-           (keyword (get-option ^keyword slot-spec nil)))
+           (name (get-option ^name slot-spec ()))
+           (default-function (get-option ^default-function slot-spec ()))
+           (keyword (get-option ^keyword slot-spec ())))
       (if (find name inherited-slot-descriptions
                 :key #'~slot-description-name)
           ;; it was a slot specialization
@@ -108,13 +108,13 @@
 
 (defun create-tail-slot-defs (class slot-specs)
   (if (null? slot-specs)
-      nil
+      ()
     (let* ((slot-spec (car slot-specs))
-           (name (get-option ^name slot-spec nil))
-           (default-function (get-option ^default-function slot-spec nil))
-           (keyword (get-option ^keyword slot-spec nil))
-           (reader? (get-option ^reader slot-spec nil))
-           (writer? (get-option ^writer slot-spec nil))
+           (name (get-option ^name slot-spec ()))
+           (default-function (get-option ^default-function slot-spec ()))
+           (keyword (get-option ^keyword slot-spec ()))
+           (reader? (get-option ^reader slot-spec ()))
+           (writer? (get-option ^writer slot-spec ()))
            (slot (make-instance <slot-desc>
                                 :identifier name
                                 :default-function default-function
@@ -131,21 +131,21 @@
 (defmethod ~initialize ((class <standard-class-def>) initlist)
   ;;options in initlist are: name direct-superclasses direct-slot-specs
   ;;direct-keywords representation allocation
-  (let ((name (get-option ^name initlist nil))
-        (direct-superclasses (get-option ^direct-superclasses initlist nil))
-        (direct-slot-specs (get-option ^direct-slot-descriptions initlist nil))
-        (direct-keywords (get-option ^direct-keywords initlist nil))
-        (representation (get-option ^representation initlist nil))
-        (allocation (get-option ^allocation initlist nil))
+  (let ((name (get-option ^name initlist ()))
+        (direct-superclasses (get-option ^direct-superclasses initlist ()))
+        (direct-slot-specs (get-option ^direct-slot-descriptions initlist ()))
+        (direct-keywords (get-option ^direct-keywords initlist ()))
+        (representation (get-option ^representation initlist ()))
+        (allocation (get-option ^allocation initlist ()))
         (direct-super-lattice-types (get-option ^direct-super-lattice-types
-                                                initlist nil))
+                                                initlist ()))
         effective-slots inherited-slots
         )
 
     ;; resetting of annotations holding intermediate informations during
     ;; compilation
-    (setf (?place class) nil)
-    (setf (?expanded-literal class) nil)
+    (setf (?place class) ())
+    (setf (?expanded-literal class) ())
 
     (cond ((null? (?identifier class))
            (setf (?identifier class) name))
@@ -177,27 +177,27 @@
 (defmethod ~initialize ((class <tail-class-def>) initlist)
   ;;recognized options in initlist are: name direct-slot-specs
   ;;direct-keywords representation allocation
-  (let ((name (get-option ^name initlist nil))
-        (direct-slot-specs (get-option ^direct-slot-descriptions initlist nil))
-        (direct-keywords (get-option ^direct-keywords initlist nil))
-        (representation (get-option ^representation initlist nil))
+  (let ((name (get-option ^name initlist ()))
+        (direct-slot-specs (get-option ^direct-slot-descriptions initlist ()))
+        (direct-keywords (get-option ^direct-keywords initlist ()))
+        (representation (get-option ^representation initlist ()))
         (allocation (get-option ^allocation initlist t))
         (direct-super-lattice-types (get-option ^direct-super-lattice-types
-                                                initlist nil))
+                                                initlist ()))
         effective-slots
         )
 
     ;; resetting annotations holding intermediate informations during
     ;; compilation
-    (setf (?place class) nil)
-    (setf (?expanded-literal class) nil)
+    (setf (?place class) ())
+    (setf (?expanded-literal class) ())
 
     (cond ((null? (?identifier class))
            (setf (?identifier class) name))
           ((eq (?identifier class) name))
           (t (warn "identifiers for class name (~A) and binding (~A) are not the same"
                    name (?identifier class))))
-    (setf (?supers class) nil)
+    (setf (?supers class) ())
     (setf (?lattice-type class)
           (~compute-lattice-type class () direct-super-lattice-types))
     (setf (?class-precedence-list class)  (list class))
@@ -210,19 +210,19 @@
     class))
 
 (defmethod ~initialize ((class <imported-class>) initlist)
-  (let ((name (get-option ^name initlist nil))
-        (direct-superclasses (get-option ^direct-superclasses initlist nil))
-        (effective-slot-specs (get-option ^effective-slot-descriptions initlist nil))
-        (direct-keywords (get-option ^direct-keywords initlist nil))
+  (let ((name (get-option ^name initlist ()))
+        (direct-superclasses (get-option ^direct-superclasses initlist ()))
+        (effective-slot-specs (get-option ^effective-slot-descriptions initlist ()))
+        (direct-keywords (get-option ^direct-keywords initlist ()))
         (direct-super-lattice-types (get-option ^direct-super-lattice-types
-                                                initlist nil))
-        (representation (get-option ^representation initlist nil))
-        (converter (get-option ^converter initlist nil))
+                                                initlist ()))
+        (representation (get-option ^representation initlist ()))
+        (converter (get-option ^converter initlist ()))
         )
 
     ;; resetting of annotations holding intermediate informations during
     ;; compilation
-    (setf (?place class) nil)
+    (setf (?place class) ())
 
     (cond ((null? (?identifier class))
            (setf (?identifier class) name))
@@ -246,7 +246,7 @@
                                       ()))
     (setf (?representation class)
           (~compute-representation class representation
-                                   nil)) ; no allocation
+                                   ())) ; no allocation
     (setf (?converter class) converter)
     class))
 
@@ -272,7 +272,7 @@
 
 (defmethod ~compute-inherited-slot-descriptions ((class <class-def>)
                                                  (direct-superclasses <null>))
-  (list nil))
+  (list ()))
 
 
 (defmethod ~compute-slot-descriptions ((class <class-def>)
@@ -302,10 +302,10 @@
                                            :specializes inherited-slot
                                            :slot-of class))
          (slot-spec (find (~slot-description-name inherited-slot) direct-slot-specs
-                          :key (lambda (slot-spec) (get-option ^name slot-spec nil))))
-         (default-function (get-option ^default-function slot-spec nil))
-         (type (get-option ^type slot-spec nil))
-         (keyword (get-option ^keyword slot-spec nil))
+                          :key (lambda (slot-spec) (get-option ^name slot-spec ()))))
+         (default-function (get-option ^default-function slot-spec ()))
+         (type (get-option ^type slot-spec ()))
+         (keyword (get-option ^keyword slot-spec ()))
          )
     (when default-function
           (setf (?slot default-function) specializing-slot))
@@ -332,7 +332,7 @@
     specializing-slot))
 
 (defgeneric function-with-constant-value-p (fun))
-(defmethod function-with-constant-value-p ((fun <generic-fun>)) nil)
+(defmethod function-with-constant-value-p ((fun <generic-fun>)) ())
 (defmethod function-with-constant-value-p ((fun <simple-fun>))
   (let ((body (?body fun)))
     (and (null? (eq body ^unknown))
@@ -350,9 +350,9 @@
   ;; creates new slot definitions for all given effective slots
   (mapcar (lambda (slot-spec)
             (make-instance <slot-desc>
-                           :identifier (get-option ^name slot-spec nil)
-                           :code-identifier (get-option ^c-identifier slot-spec nil)
-                           :keyword (get-option ^keyword slot-spec nil)
+                           :identifier (get-option ^name slot-spec ())
+                           :code-identifier (get-option ^c-identifier slot-spec ())
+                           :keyword (get-option ^keyword slot-spec ())
                            :type (get-option ^type slot-spec %object)
                            :slot-of class))
           effective-slot-specs))
@@ -366,7 +366,7 @@
 
 (defmethod ~compute-inherited-keywords ((class <class-def>)
                                         (direct-superclasses <null>))
-  (list nil))
+  (list ()))
 
 
 (defmethod ~compute-keywords ((class <class-def>)
@@ -419,14 +419,14 @@
   (cond ((non-congruent-lambda-lists-p (?params (?fun method))
                                        (?params gf))
          (error-non-congruent-lambda-lists method gf)
-         nil)
+         ())
         ((incompatible-method-domain-p (?domain method)
                                        (?domain gf))
          (error-incompatible-method-domain method gf)
-         nil)
+         ())
         ((method-domain-clash-p method gf)
          (error-method-domain-clash method gf)
-         nil)
+         ())
         (t t)))
 
 (defun non-congruent-lambda-lists-p (params1 params2)
@@ -437,7 +437,7 @@
                (null? (?rest params2))))))
 
 (defun incompatible-method-domain-p (method-domain gf-domain)
-  (cond ((null? method-domain) nil)
+  (cond ((null? method-domain) ())
         ((~subclassp (car method-domain)
                      (car gf-domain))
          (incompatible-method-domain-p (cdr method-domain)
@@ -452,11 +452,11 @@
 (defmethod ~initialize ((gf <defined-generic-fun>) options)
   ;;options are: name domain range method-class method*
   ;;additional option for the compiler: parameters
-  (let ((name (get-option ^name options nil))
-        (domain (get-option ^domain options nil))
-        (range (get-option ^range options nil))
-        (method-class (get-option ^method-class options nil))
-        (params (get-option ^parameters options nil)))
+  (let ((name (get-option ^name options ()))
+        (domain (get-option ^domain options ()))
+        (range (get-option ^range options ()))
+        (method-class (get-option ^method-class options ()))
+        (params (get-option ^parameters options ())))
     (cond ((null? (?identifier gf))
            (setf (?identifier gf) name))
           ((eq (?identifier gf) name))
@@ -470,10 +470,10 @@
 
 (defmethod ~initialize ((method <method-def>) options)
   ;;options are: domain range function generic-function
-  (let ((domain (get-option ^domain options nil))
-        (range (get-option ^range options nil))
-        (function (get-option ^function options nil))
-        (generic-function (get-option ^generic-function options nil)))
+  (let ((domain (get-option ^domain options ()))
+        (range (get-option ^range options ()))
+        (function (get-option ^function options ()))
+        (generic-function (get-option ^generic-function options ())))
     (setf (?domain method) domain)
     (setf (?fun method) function)
     (setf (?generic-fun method) generic-function)
@@ -497,7 +497,7 @@
 (defmethod ~add-method (gf (method <method-def>))
   ;; it is not allowed to add a method to other things than generic functions
   (error-invalid-gf-for-add-method gf)
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 #module-end

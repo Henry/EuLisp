@@ -20,31 +20,34 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: generation of interface files (only for Basic System Compilation)
 ;;;  Description:
-;;    The generation of .def-files does only work for basic System Compilation. It
-;;    doesn't work now for Module Compilation!
-;;    When compiling a Basic System a .def-file is generated containing exactly one
-;;    module definition. This module contains interface descriptions of exported
-;;    objects, macro definitions and additional compiler informations. The naming of
-;;    explicitely and invisible exported objects is done previously during export
-;;    marking (directly after loading the module files).
-;;;  Documentation:
+;;    The generation of .def-files does only work for basic System
+;;    Compilation. It doesn't work now for Module Compilation!
+;;
+;;    When compiling a Basic System a .def-file is generated containing exactly
+;;    one module definition. This module contains interface descriptions of
+;;    exported objects, macro definitions and additional compiler
+;;    informations. The naming of explicitely and invisible exported objects is
+;;    done previously during export marking (directly after loading the module
+;;    files).
 ;;;  Notes:
-;;    There are some hacks in the file which should be replaced as soon as possible.
-;;    They are marked with *hack*.
-;;;  Requires:
+;;    There are some hacks in the file which should be replaced as soon as
+;;    possible.  They are marked with *hack*.
 ;;;  Problems:
 ;;    Name conflicts (i.e. different objects may have theoretical the same
 ;;                         Lisp-identifiers) may occur in the following cases:
+;;
 ;;    * Invisible exported objects have no explicit export name. Therefore the
 ;;    definition identifier is taken and this may result in a name conflict.
-;;    * Local variables in macros and interpreted functions may shadow global bindings
-;;    The reason for this is that the explicitely and invisible exported objects of
-;;    the member modules of the basic system are put together in only one module.
-;;    Because the explicitely exported objects are renamed according to the given
-;;    export interface (this was checked already for name conflicts!) they are not the
-;;    problem. A problem are the invisible exported objects and local variables in
-;;    interpreted forms because they are teared out of the original binding context.
-;;    They should be renamed to unique identifiers.
+;;
+;;    * Local variables in macros and interpreted functions may shadow global
+;;    bindings The reason for this is that the explicitely and invisible
+;;    exported objects of the member modules of the basic system are put
+;;    together in only one module.  Because the explicitely exported objects are
+;;    renamed according to the given export interface (this was checked already
+;;    for name conflicts!) they are not the problem. A problem are the invisible
+;;    exported objects and local variables in interpreted forms because they are
+;;    teared out of the original binding context.  They should be renamed to
+;;    unique identifiers.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -99,7 +102,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; main functions
 ;;;-----------------------------------------------------------------------------
-
 (defun generate-module-def (main-module modules)
   (let ((id (?identifier main-module))
         (*package* (symbol-package ^t)))
@@ -149,7 +151,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; interface identifiers
 ;;;-----------------------------------------------------------------------------
-
 (defun if-identifier (object)
   ;; returns the interface identifier of an object: the identifier in
   ;; the module which is the compilation unit
@@ -159,7 +160,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; retrieving defined types of program objects
 ;;;-----------------------------------------------------------------------------
-
 (defun defined-type (typed-object)
   (or (?type typed-object) %object))
 
@@ -169,7 +169,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; the module init function
 ;;;-----------------------------------------------------------------------------
-
 (defun generate-initfun-def (module)
   (gen-interface (?toplevel-forms module))
   (write-def "~2%(%annotate-function ~S init-function t)"
@@ -178,7 +177,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; main working functions
 ;;;-----------------------------------------------------------------------------
-
 (defun generate-interface (modules)
   (mapc (lambda (module)
           (mapc #'gen-interface-if-exported (?class-def-list module)))
@@ -210,12 +208,11 @@
 
 (defmethod gen-interface (object)
   ;; generate only interfaces for specific objects
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; providing special compiler infos for following compilations
 ;;;-----------------------------------------------------------------------------
-
 (defun generate-compiler-info-declarations ()
   (write-def "~2%(%provide-compiler-info~
               ~%   max-used-type-descriptor ~A~
@@ -226,13 +223,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; exporting objects of %tail
 ;;;-----------------------------------------------------------------------------
-
 (defun generate-%tail-exports ()
   (gen-%tail-exports (append (?fun-list $tail-module)
                              (?class-def-list $tail-module)
                              (?var-list $tail-module)
                              (?named-const-list $tail-module))
-                     nil nil))
+                     () ()))
 
 (defun gen-%tail-exports (objects rename-part only-part)
   (cond ((null? objects)
@@ -252,7 +248,7 @@
         (t (gen-%tail-exports (cdr objects) rename-part only-part))))
 
 (defgeneric hard-wired-p (object))
-(defmethod hard-wired-p (object) nil)
+(defmethod hard-wired-p (object) ())
 (defmethod hard-wired-p ((object <basic-class-def>)) t)
 (defmethod hard-wired-p ((object <special-sys-fun>)) t)
 (defmethod hard-wired-p ((object <class-def>))
@@ -264,7 +260,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; annotations
 ;;;-----------------------------------------------------------------------------
-
 (defun gen-annotate-function (fun)
   (let ((annotations (get-function-annotations fun)))
     (when annotations
@@ -314,7 +309,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; constants and variables
 ;;;-----------------------------------------------------------------------------
-
 (defmethod gen-interface ((var <global-static>))
   (write-def "(%declare-external-variable ~S ~S~
               ~% external-name |~A|)"
@@ -344,13 +338,13 @@
           (gen-annotate-binding const)))
 
 (defgeneric gen-literal (value))
-(defmethod gen-literal (value) nil)
+(defmethod gen-literal (value) ())
 (defmethod gen-literal ((value <null>))
   "()")
 (defmethod gen-literal ((value <number>))
   value)
 (defmethod gen-literal ((value <character>))
-  (format nil "#\\~A" value))
+  (format () "#\\~A" value))
 (defmethod gen-literal ((value <sym>))
   (?identifier value))
 (defmethod gen-literal ((value <structured-literal>))
@@ -363,14 +357,14 @@
 (defgeneric gen-structured-literal (obj))
 
 (defmethod gen-structured-literal ((obj <string>))
-  (format nil "~S" obj))
+  (format () "~S" obj))
 
 (defmethod gen-structured-literal ((obj <vector>))
   (map #'gen-literal obj))
 
 (defmethod gen-structured-literal ((obj <pair>))
   (labels ((gen-list (l)
-                     (cond ((null? l) nil)
+                     (cond ((null? l) ())
                            ((atom? l) (gen-literal l))
                            (t (cons (gen-list (car l))
                                     (gen-list (cdr l)))))))
@@ -379,7 +373,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; symbols
 ;;;-----------------------------------------------------------------------------
-
 (defmethod gen-interface ((sym <sym>))
   (write-def "(%declare-external-symbol ~S |~A|)"
              (if-identifier sym)
@@ -388,7 +381,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; simple functions
 ;;;-----------------------------------------------------------------------------
-
 (defun specialized-parameters (fun)
   ;; it must be checked if the original parameter list contained a rest
   ;; parameter, because this is replaced in preceding compilation steps by a
@@ -418,7 +410,7 @@
                      (if-identifier (arg-n-type range-and-domain type-idx)))
                (spec-params (cdr vars) rest range-and-domain (+ type-idx 1))))
         (rest (?identifier rest))
-        (t nil)))
+        (t ())))
 
 (defmethod gen-interface ((fun <simple-fun>))
   (write-def "(%declare-external-function (~S ~S)~
@@ -434,19 +426,18 @@
 
 (defmethod gen-interface ((fun <special-sys-fun>))
   ;; they are hard-wired into the compiler
-  nil)
+  ())
 
 (defmethod gen-interface ((fun <discriminating-fun>))
   ;; Don't generate an interface for discriminating funs because they are only
   ;; partially defined in a basic system and may be extended by new methods in
   ;; modules using the basic system. The interface is generated for the generic
   ;; function only.
-  nil)
+  ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; generic functions
 ;;;-----------------------------------------------------------------------------
-
 (defmethod gen-interface ((gf <generic-fun>))
   (write-def "(%declare-external-generic (~S ~S)~
               ~% ~:S~
@@ -470,7 +461,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; classes
 ;;;-----------------------------------------------------------------------------
-
 (defun make-slot-specification (slot-desc)
   (list (?identifier slot-desc)
         ^type (if-identifier (?type slot-desc))
@@ -508,7 +498,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; %define-literal-expansion
 ;;;-----------------------------------------------------------------------------
-
 (defun gen-literal-expansion-definitions ()
   ;; it is required, that no strings appear in the expansion forms, also no
   ;; symbols with escaped characters should appear there
@@ -530,7 +519,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; converting LZS-representation of functions/forms into list-representation
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric lzs2list (form))
 
 (defmethod lzs2list ((obj <object>))
@@ -545,7 +533,7 @@
 (defmethod lzs2list ((obj <lzs-object>))
   (if (global-p obj)
       (if-identifier obj)
-    nil))
+    ()))
 
 (defmethod lzs2list ((obj <sym>))
   (list ^quote (if-identifier obj)))
@@ -593,7 +581,7 @@
                                        (+ 1 (dynamic *unique-index*)))
                          (cons local-static
                                (make-eulisp-symbol
-                                (format nil "~S/~D"
+                                (format () "~S/~D"
                                         (?identifier local-static)
                                         (dynamic *unique-index*)))))
                        let*-vars)))
@@ -639,7 +627,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Handling local variable names
 ;;;-----------------------------------------------------------------------------
-
 (defvar *local-var-names* (list 0)) ; a list (unique-index (var1 . name1)...)
 
 (defgeneric get-var-name (var))
@@ -686,7 +673,7 @@
 ;;         ))))
 
 (defun mk-progn (forms)
-  (if (null? forms) nil
+  (if (null? forms) ()
     (if (null? (cdr forms)) (car forms)
       (cons 'progn forms))))
 
