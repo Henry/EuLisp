@@ -4,10 +4,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 lang="en" xml:lang="en">
 <head>
-<title><b>EuLisp</b></title>
+<title>*EuLisp*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-06-14 21:51:51 BST"/>
+<meta name="generated" content="2010-08-29 23:25:59 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -80,12 +80,13 @@ lang="en" xml:lang="en">
 <ul>
 <li><a href="#sec-1">1 Copyright </a></li>
 <li><a href="#sec-2">2 Aim </a></li>
-<li><a href="#sec-3">3 General Description </a></li>
-<li><a href="#sec-4">4 Documentation </a></li>
+<li><a href="#sec-3">3 Original Sources </a></li>
+<li><a href="#sec-4">4 General Description </a></li>
 <li><a href="#sec-5">5 Installation </a></li>
-<li><a href="#sec-6">6 Getting Started with Youtoo </a></li>
-<li><a href="#sec-7">7 Getting Started with EuXLisp </a></li>
-<li><a href="#sec-8">8 To Do </a></li>
+<li><a href="#sec-6">6 Getting Started with EuXLisp </a></li>
+<li><a href="#sec-7">7 Getting Started with Youtoo </a></li>
+<li><a href="#sec-8">8 Getting Started with Eu2C </a></li>
+<li><a href="#sec-9">9 To Do </a></li>
 </ul>
 </div>
 </div>
@@ -94,46 +95,21 @@ lang="en" xml:lang="en">
 <h2 id="sec-1"><span class="section-number-2">1</span> <a href="COPYING">Copyright</a> </h2>
 <div class="outline-text-2" id="text-1">
 
-<ul>
-<li id="sec-1.1"><a href="Youtoo/COPYING">Youtoo</a> <br/>
-Youtoo is free software: you can redistribute it and/or modify it
-under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
+<p>EuLisp is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License as published by the Free Software
+Foundation, either version 2 of the License, or (at your option) any later
+version.
+</p>
 <p>
-Youtoo is distributed in the hope that it will be useful, but WITHOUT
-ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
-FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
-for more details.
+EuLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
 </p>
 <p>
 You should have received a copy of the GNU General Public License along with
-Youtoo in the file <a href="Youtoo/COPYING">COPYING</a>.  If not, see
+EuLisp in the file <a href="COPYING">COPYING</a>.  If not, see
 <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
-</p></li>
-<li id="sec-1.2"><a href="EuXLisp/LICENCE">EuXLisp</a> <br/>
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions
-are met:
-<ol>
-<li>
-Redistributions of source code must retain the above copyright
-notice, this list of conditions and the following disclaimer.
-</li>
-<li>
-Redistributions in binary form must reproduce the above copyright
-notice, this list of conditions and the following disclaimer in the
-documentation and/or other materials provided with the distribution.
-</li>
-<li>
-The name of the authors may not be used to endorse or promote products
-derived from this software without specific prior written permission.
-
-</li>
-</ol>
-</li>
-</ul>
+</p>
 </div>
 
 </div>
@@ -142,27 +118,25 @@ derived from this software without specific prior written permission.
 <h2 id="sec-2"><span class="section-number-2">2</span> Aim </h2>
 <div class="outline-text-2" id="text-2">
 
-<p>This version of the EuLisp definition and Youtoo and EuXLisp implementations
-are being developed in an attempt to reconcile the differences with the
-ultimate aim to create a consistent definition and implementations which are
-as close to EuLisp-1.0 as is possible to ascertain from the remaining
-documents related to the standardisation process:
+<p>This version of the EuLisp definition and Youtoo, EuXLisp and Eu2C
+implementations are being developed in an attempt to reconcile the differences
+with the ultimate aim to create a consistent definition and implementations
+which are as close to EuLisp-1.0 as is possible to ascertain from the
+remaining documents related to the standardisation process.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Original Sources </h2>
+<div class="outline-text-2" id="text-3">
+
+<p>The starting point for this effort has been the publicly available packs of
+sources and documents relating to the development of the EuLisp definition and
+implementations:
 </p><ul>
-<li id="sec-2.1">Youtoo original sources <br/>
-This release of Youtoo started life as
-<a href="http://www.cs.bath.ac.uk/~jap/EuLisp/youtoo/youtoo0.93.tar.gz">Youtoo-0.93</a>
-developed by Andreas Kind, Julian Padget and others.  More details are
-available from the original <a href="README.orig">README</a> file and
-<a href="http://www.cs.bath.ac.uk/~jap/ak1/youtoo/">the youtoo home page</a>.  The
-<i>b2h</i> and <i>i2doc</i> tools needed to bootstrap youtoo were reverse engineered
-and provided by
-<a href="http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition">T. Kurt Bond</a>.
-</li>
-<li id="sec-2.2">EuXLisp original sources <br/>
-EuXLisp started life as <a href="http://www.bath.ac.uk/~masrjb/Sources/euscheme.html">Euscheme</a> based on xscheme written by David Michael
-Betz.
-</li>
-<li id="sec-2.3">EuLisp definition original sources <br/>
+<li id="sec-3_1">EuLisp definition <br/>
 The version of the EuLisp definition supplied is this release of Youtoo
 started life as EuLisp-0.99 from the pack released by Julian Padget:
 <a href="ftp://ftp.bath.ac.uk/pub/eulisp/definition/931202.tar.gz">931202.tar.gz</a> updated following proposals and discussions also released by
@@ -194,49 +168,45 @@ Julian Padget:
 </li>
 <li>
 <a href="ftp://ftp.bath.ac.uk/pub/eulisp/WG/stream.ps.gz">stream.ps.gz</a>
-
 </li>
 </ul>
 </li>
-</ul>
-</div>
-
-</div>
-
-<div id="outline-container-3" class="outline-2">
-<h2 id="sec-3"><span class="section-number-2">3</span> General Description </h2>
-<div class="outline-text-2" id="text-3">
-
-<ul>
-<li id="sec-3.1">Youtoo <br/>
-The Youtoo system is a public domain implementation of the object-oriented
-dynamic programming language EuLisp. EuLisp is a single-valued dialect of
-Lisp with an integrated object system, a defined meta-object protocol,
-modules and a simple light-weight process mechanism (threads).
-
-<p>
-The Youtoo compiler/interpreter compiles EuLisp into C-embedded virtual
-machine code which can be statically or dynamically linked with the virtual
-machine, the conservative garbage collector, the EuLisp language library and
-arbitrary other Lisp and foreign code (C, C++ and Fortran). Resulting
-stand-alone executables are portable, interoperable and efficient (see The
-Lisp Performance Page). The language implementation is extended towards a
-Virtual Multicomputer Architecture. Object serialization and inter-process
-communication (Sockets, MPI, Harvest Object Cache) support the migration of
-arbitray data and code.
-</p>
-<p>
-The system reuses ideas from the Oaklisp system written by Barak Pearlmutter
-and Kevin Lang. The meta-object protocol (<code>Telos</code>) was originally
-implemented in Common Lisp by Russell Bradford. By default, a garbage
-collector written by Hans Boehm and Alan Demers is used.
-</p></li>
-<li id="sec-3.2">EuXLisp <br/>
-EuXLisp is a simple EuLisp Level 0 interpreter.  EuLisp Level 0 is a small
-and compact Lisp, but nevertheless has many interesting features, such as
-modules, an object system, and multithreading.  EuLisp Level 1 has extra
-features, the most notable being a full metaobject system which is
-implemented in Youtoo not in EuXLisp.
+<li id="sec-3_2">EuXLisp <br/>
+EuXLisp started life as
+<a href="http://www.bath.ac.uk/~masrjb/Sources/euscheme.html">Euscheme</a> based on
+xscheme written by David Michael Betz and released under the 3-clause BSD
+licence, see <a href="EuXLisp/ORIGINAL_LICENCE">EuXLisp/ORIGINAL_LICENCE</a>.  However with the inclusion
+of the GNU getopt and readline libraries this software inherits the GPL with
+which the 3-clause BSD licence is compatible and all further developments
+will be made under the terms of the GPL version 2, see
+<a href="COPYING">COPYING</a>.
+</li>
+<li id="sec-3_3">Youtoo <br/>
+This release of Youtoo started life as
+<a href="http://www.cs.bath.ac.uk/~jap/EuLisp/youtoo/youtoo0.93.tar.gz">Youtoo-0.93</a>
+developed by Andreas Kind, Julian Padget and others.  More details are
+available from the original <a href="Youtoo/README.orig">README</a> file and
+<a href="http://www.cs.bath.ac.uk/~jap/ak1/youtoo/">the youtoo home page</a>.  The
+<i>b2h</i> and <i>i2doc</i> tools needed to bootstrap youtoo were reverse engineered
+and provided by
+<a href="http://unwind-protect.org/~tkb/software.html#youtoo-and-eulisp-definition">T. Kurt Bond</a>.
+</li>
+<li id="sec-3_4">Eu2C <br/>
+Eu2C was originally developed at Fraunhofer ISST in the joint research
+project APPLY funded by the German Ministry of Research and Technology under
+the project code ITW9102D5.  The final release in July 1994 is publicly
+available from
+<a href="http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c/v94_07/eu2c.tgz">eu2c.tgz</a>
+however the terms of use are not specified.  This release of Eu2C is derived
+from the eu2c-94-07-EUPL version kindly prepared and provided by E. Ulrich
+Kriegel and released by Fraunhofer ISST under the
+<a href="http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1">EUPL version 1.1 </a> (see <a href="Eu2C/README.orig">Eu2C/README.orig</a>).
+However, due to the inclusion of EuLisp code from Youtoo, which is released
+under the GPL version 2, this version of Eu2C inherits the GPL version 2
+(see above) as specifically permitted under the compatibility terms of the
+EUPL version 1.1.  Future versions of the EUPL may include a compatibility
+clause for GPL version 3 at which point it will be possible to re-release
+Eu2C, Youtoo and EuXLisp under the GPL version 3.
 
 </li>
 </ul>
@@ -245,11 +215,16 @@ implemented in Youtoo not in EuXLisp.
 </div>
 
 <div id="outline-container-4" class="outline-2">
-<h2 id="sec-4"><span class="section-number-2">4</span> Documentation </h2>
+<h2 id="sec-4"><span class="section-number-2">4</span> General Description </h2>
 <div class="outline-text-2" id="text-4">
 
 <ul>
-<li id="sec-4.1">EuLisp definition <br/>
+<li id="sec-4_1">EuLisp <br/>
+EuLisp is a single-valued dialect of Lisp with an integrated object system,
+a defined meta-object protocol, modules and a simple light-weight process
+mechanism (threads).
+<ul>
+<li id="sec-4_1_1">Current Definition <br/>
 is provided in both HTML and PDF formats:
 <ul>
 <li>
@@ -260,14 +235,10 @@ is provided in both HTML and PDF formats:
 </li>
 </ul>
 </li>
-<li id="sec-4.2">EuLisp-1.0 Proposals <br/>
-are in the folowing
-<a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a> and
-discussed in the minutes of the
-<a href="Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt">meeting on 19/11/93</a> and in the
-<a href="Doc/EuLisp-0.991/Proposals/nov93.txt">preceding</a> and
-<a href="Doc/EuLisp-0.991/Proposals/dec93.txt">subsequent</a> Email correspondence.
-The following reports are discussed in the above:
+<li id="sec-4_1_2">EuLisp-1.0 Proposals <br/>
+are in the folowing <a href="Doc/EuLisp-0.991/Proposals/Proposals.txt">proposal document</a> and discussed in the minutes of the
+<a href="Doc/EuLisp-0.991/Proposals/Meeting_19_11_93.txt">meeting on 19/11/93</a> and in the <a href="Doc/EuLisp-0.991/Proposals/nov93.txt">preceding</a> and <a href="Doc/EuLisp-0.991/Proposals/dec93.txt">subsequent</a> Email
+correspondence.  The following reports are discussed in the above:
 <ul>
 <li>
 <a href="Doc/EuLisp-0.991/Proposals/Reports/eulisp-proposals.ps">eulisp-proposals.ps</a>
@@ -280,6 +251,45 @@ The following reports are discussed in the above:
 </li>
 <li>
 <a href="Doc/EuLisp-0.991/Proposals/Reports/eulisp-ffi.ps">eulisp-ffi.ps</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="sec-4_2">EuXLisp <br/>
+EuXLisp is a simple EuLisp Level-0 interpreter.  EuLisp Level-0 is a small
+and compact Lisp, but nevertheless has many interesting features, such as
+modules, an object system, and multithreading.  EuLisp Level-1 has extra
+features, the most notable being a full metaobject system which is
+implemented in Youtoo not in EuXLisp.
+</li>
+<li id="sec-4_3">Youtoo <br/>
+The Youtoo compiler/interpreter compiles EuLisp Level-1 into C-embedded
+virtual machine code which can be statically or dynamically linked with the
+virtual machine, the conservative garbage collector, the EuLisp language
+library and arbitrary other Lisp and foreign code (C, C++ and
+Fortran). Resulting stand-alone executables are portable, interoperable and
+efficient (see The Lisp Performance Page). The language implementation is
+extended towards a Virtual Multicomputer Architecture. Object serialization
+and inter-process communication (Sockets, MPI, Harvest Object Cache) support
+the migration of arbitray data and code.
+
+<p>
+The system reuses ideas from the Oaklisp system written by Barak Pearlmutter
+and Kevin Lang. The meta-object protocol (<code>Telos</code>) was originally
+implemented in Common Lisp by Russell Bradford. By default, a garbage
+collector written by Hans Boehm and Alan Demers is used.
+</p><ul>
+<li id="sec-4_3_1">See also <a href="Youtoo/README.html">Youtoo README</a> <br/>
+</li>
+</ul>
+</li>
+<li id="sec-4_4">Eu2C <br/>
+Eu2C is a EuLisp Level-0 to C compiler originally developed at Fraunhofer
+ISST in the joint research project APPLY funded by the German Ministry of
+Research and Technology under the project code ITW9102D5.
+<ul>
+<li id="sec-4_4_1">See also  <a href="Eu2C/README.html">Eu2C README</a> <br/>
 
 </li>
 </ul>
@@ -295,35 +305,62 @@ The following reports are discussed in the above:
 
 <ul>
 <li>
-Pull the latest version from the GitHub repository:<br/>
-git clone git://github.com/Henry/EuLisp.git
+Pull the latest version from the GitHub repository:
+<ul>
+<li>
+<code>git clone git://github.com/Henry/EuLisp.git</code>
+</li>
+</ul>
 </li>
 <li>
-"cd" into the <i>EuLisp</i> directory
+"cd" into the <code>EuLisp</code> directory
 </li>
 <li>
-Run <br/>
-<i>./configure</i> <br/>
-and check the settings.  Edit the configure file to reflect your system if
-necessary and re-run<br/>
-<i>./configure</i>.
+Run
+<ul>
+<li>
+<code>./configure</code>
+</li>
+</ul>
+
+<p>and check the settings.  Edit the configure file to reflect your system if
+necessary and re-run
+</p><ul>
+<li>
+<code>./configure</code>.
+</li>
+</ul>
 </li>
 <li>
-Run <br/>
-<i>make</i>
+Run
+<ul>
+<li>
+<code>make</code>
+</li>
+</ul>
 </li>
 <li>
 If you want to use shared libraries for Youtoo (which we really recommend on
-Linux, FreeBSD, Solaris and IRIX), run <br/>
-<i>make shared</i> <br/>
-and add the directory <i>&hellip;/EuLisp/Lib.${ARCH}</i> to the environment variable
-<code>$LD_LIBRARY_PATH</code>.
-</li>
+Linux, FreeBSD, Solaris and IRIX), run
+<ul>
 <li>
-You should now be able to run the script <br/>
-<i>Bin.${ARCH}/youtoo.sh</i> <br/>
-(see next section).
+<code>make shared</code>
+</li>
+</ul>
 
+<p>and add the directory <code>.../EuLisp/Lib.${ARCH}</code> to the environment variable
+<code>$LD_LIBRARY_PATH</code>.
+</p></li>
+<li>
+You should now be able to run the <code>youtoo</code> executable
+<ul>
+<li>
+<code>Bin.${ARCH}/youtoo</code>
+</li>
+</ul>
+
+<p>(see next section).
+</p>
 </li>
 </ul>
 </div>
@@ -331,85 +368,44 @@ You should now be able to run the script <br/>
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started with Youtoo </h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started with <a href="Doc/EuLispIntroRef.html#sec-3">EuXLisp</a> </h2>
 <div class="outline-text-2" id="text-6">
 
-<ul>
-<li>
-Run <br/>
-<i>Bin.${ARCH}/youtoo.sh</i> -help <br/>
-to see the compiler options.
-</li>
-<li>
-In directory <i>Examples/Misc</i> run <br/>
-<i>Bin.${ARCH}/youtoo.sh fact -l level1</i> <br/>
-to compile module fact into a stand-alone
-executable. With shared libraries the executable should be less the 40K.
-</li>
-<li>
-Run <br/>
-<i>Bin.${ARCH}/youtoo.sh</i> <br/>
-without options to start the Youtoo interpreter. The read-eval-print loop
-provides extra commands (type <i>help:</i>).
-</li>
-<li>
-Further information about running <a href="Youtoo/README.html">Youtoo</a>.
-
-</li>
-</ul>
+<p>See <a href="Doc/EuLispIntroRef.html#sec-3">An Introduction to EuLisp, EuXLisp and Youtoo</a>.
+</p>
 </div>
 
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Getting Started with EuXLisp </h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> Getting Started with <a href="Doc/EuLispIntroRef.html#sec-4">Youtoo</a> </h2>
 <div class="outline-text-2" id="text-7">
 
-<p>EuXLisp need two paths: where to look for the compiled image, and where to
-look for modules to load:
-</p><ul>
-<li id="sec-7.1">Image <br/>
-First euxlisp checks the environment variable <code>EU_IMAGE_PATH</code> (a colon
-separated list of directory names), then a builtin path, set from
-<code>IMAGE_SEARCH_PATH</code> in the Makefile.
-</li>
-<li id="sec-7.2">Modules <br/>
-ditto for environment variable <code>EU_MODULE_PATH</code>, then builtin
-<code>MODULE_SEARCH_PATH</code> (e.g., you might want to provide a set of system
-supplied modules).
-</li>
-<li id="sec-7.3">Default settings <br/>
-The default built-in settings should work for a default build with the files
-in their default locations.
-</li>
-<li id="sec-7.4">Running the interpreter interactively <br/>
-Run <i>Bin.${ARCH}/euxlisp</i> <br/>
-without options to start the EuXLisp interpreter. The read-eval-print loop
-provides extra commands see <a href="Doc/EuXLispNotes.html">EuXLisp</a> notes.
-</li>
-<li id="sec-7.5">Executing a module <br/>
-To execute the module <code>fact</code> in file <i>fact.em</i> run <br/>
-<i>echo "(!&gt; fact)"  | ..</i>../Bin.${ARCH}/euxlisp -q/ <br/>
-The <i>echo</i> pipes the load module <i>!&gt;</i> command to the interpreter.  In the
-future there will be a command-line option to execute a module directly.
-</li>
-<li id="sec-7.6">Further information about running <a href="Doc/EuXLispNotes.html">EuXLisp</a>. <br/>
-
-</li>
-</ul>
+<p>See <a href="Doc/EuLispIntroRef.html#sec-4">An Introduction to EuLisp, EuXLisp and Youtoo</a>.
+</p>
 </div>
 
 </div>
 
 <div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> <a href="TODO.html">To Do</a> </h2>
+<h2 id="sec-8"><span class="section-number-2">8</span> Getting Started with <a href="Eu2C/Readme.html">Eu2C</a> </h2>
 <div class="outline-text-2" id="text-8">
+
+<p>See <a href="Eu2C/README.html">README</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> <a href="TODO.html">To Do</a> </h2>
+<div class="outline-text-2" id="text-9">
 
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-06-14 21:51:51 BST</p>
-<p class="creator">HTML generated by org-mode 6.34trans in emacs 23</p>
+<p class="date"> Date: 2010-08-29 23:25:59 BST</p>
+<p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>
 </body>

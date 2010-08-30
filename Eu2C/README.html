@@ -1,0 +1,1039 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+               "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+lang="en" xml:lang="en">
+<head>
+<title>*Eu2C*</title>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
+<meta name="generator" content="Org-mode"/>
+<meta name="generated" content="2010-08-29 23:27:55 BST"/>
+<meta name="author" content="nil"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  html { font-family: Times, serif; font-size: 12pt; }
+  .title  { text-align: center; }
+  .todo   { color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #add8e6; font-weight:normal }
+  .target { }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  p.verse { margin-left: 3% }
+  pre {
+	border: 1pt solid #AEBDCC;
+	background-color: #F3F5F7;
+	padding: 5pt;
+	font-family: courier, monospace;
+        font-size: 90%;
+        overflow:auto;
+  }
+  table { border-collapse: collapse; }
+  td, th { vertical-align: top; }
+  dt { font-weight: bold; }
+  div.figure { padding: 0.5em; }
+  div.figure p { text-align: center; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size:smaller }
+  .code-highlighted {background-color:#ffff00;}
+  .org-info-js_info-navigation { border-style:none; }
+  #org-info-js_console-label { font-size:10px; font-weight:bold;
+                               white-space:nowrap; }
+  .org-info-js_search-highlight {background-color:#ffff00; color:#000000;
+                                 font-weight:bold; }
+  /*]]>*/-->
+</style>
+<script type="text/javascript">
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+
+<h1 class="title"><b>Eu2C</b></h1>
+
+
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1 Copyright </a></li>
+<li><a href="#sec-2">2 General </a></li>
+<li><a href="#sec-3">3 APPLY </a></li>
+<li><a href="#sec-4">4 Installation </a></li>
+<li><a href="#sec-5">5 Current Limitations </a></li>
+<li><a href="#sec-6">6 Common Lisp Compiler Extensions </a></li>
+<li><a href="#sec-7">7 Necessary module imports </a></li>
+<li><a href="#sec-8">8 Compiler log </a></li>
+<li><a href="#sec-9">9 Examples </a></li>
+<li><a href="#sec-10">10 (This list is no where near complete) </a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> <a href="../COPYING">Copyright</a> </h2>
+<div class="outline-text-2" id="text-1">
+
+<p>Copyright 1994-2010 Fraunhofer ISST,
+Copyright 2010 Henry G. Weller.
+</p>
+<p>
+This file is part of Eu2C.
+</p>
+<p>
+Eu2C is free software: you can redistribute it and/or modify it under the
+terms of the GNU General Public License version 2 as published by the Free
+Software Foundation.
+</p>
+<p>
+Eu2C is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR
+A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+</p>
+<p>
+You should have received a copy of the GNU General Public License along with
+this program in the file <a href="../COPYING">COPYING</a>.  If not, see <a href="http://www.gnu.org/licenses/">http://www.gnu.org/licenses/</a>.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> General </h2>
+<div class="outline-text-2" id="text-2">
+
+<p>Eu2C was originally developed at Fraunhofer ISST in the joint research project
+APPLY funded by the German Ministry of Research and Technology under the
+project code ITW9102D5.  The final release in July 1994 is publicly available
+from <a href="http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c/v94_07/eu2c.tgz">eu2c.tgz</a> however the terms of use are not specified.  This release of
+Eu2C is derived from the eu2c-94-07-EUPL version kindly prepared and provided
+by E. Ulrich Kriegel and released by Fraunhofer ISST under the <a href="http://www.osor.eu/eupl/european-union-public-licence-eupl-v.1.1">EUPL version 1.1 </a> (see <a href="#sec-2">README.orig</a>).  However, due to the inclusion of EuLisp code from
+Youtoo, which is released under the GPL version 2, this version of Eu2C
+inherits the GPL version 2 (see above) as specifically permitted under the
+compatibility terms of the EUPL version 1.1.  Future versions of the EUPL may
+include a compatibility clause for GPL version 3 at which point it will be
+possible to re-release Eu2C, Youtoo and EuXLisp under the GPL version 3.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> APPLY </h2>
+<div class="outline-text-2" id="text-3">
+
+<p>This section provides a little background about the APPLY project and the
+motivation and design of Eu2C.  The text is predominantly obtained from
+"readme" and announcement files released with Eu2C by Fraunhofer ISST.  These
+are available from the AI repository at CMU: <a href="http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c">eu2c</a>, see also
+<a href="http://publica.fraunhofer.de/dokumente/PX-46999.html">Eu2C - Lisp to C compiler</a>.
+</p>
+<p>
+There were two main problems for Lisp users being considered at the time:
+</p><ol>
+<li>
+the efficiency, by which we mean both the run-time efficiency and the
+efficiency of storage use and
+</li>
+<li>
+the unsatisfactory integration capability of Lisp programs with other
+programs. Our way of solving these problems is to compile Lisp applications
+into C.
+
+</li>
+</ol>
+
+<p>The main goal of APPLY project was to development a Lisp system which
+consistently supports the efficient execution of applications and their
+simple integration into current software environments. The aims of the Eu2C
+development were
+</p><ul>
+<li>
+efficient execution of Lisp applications comparable to that of C-programs
+and
+</li>
+<li>
+simple integration of Lisp programs into non-Lisp environments.
+
+</li>
+</ul>
+
+<p>As a first step Apply/E2C was realized as a total compiler compiling
+EuLisp-Modules into C source code which then must be compiled by an ANSI
+C-compiler.  To implement and describe the runtime system and to achieve high
+performance of the C-programs generated we must have a language that can
+handle C-data types and C-values. For this purpose ISST developed a typed
+Lisp-like implementation language called TAIL. You can describe the
+representation of data, the type schemes and the type lattice with TAIL. Thus
+we have the possibility to carry out experiments with different data
+representations or type schemes without changing the Eu2C-compiler. TAIL can
+also be used as the basis for the implementation of other Lisp dialects. A
+type inference system has a great effect on the speed of Lisp programs. With a
+good type inference system you can reduce the number of dynamic type checks
+and replace calls of generic functions by direct calls of methods. A
+C-compiler has the best results for optimization of C-programs if the
+C-programs look like programs written by experienced programmers.  The ISST
+called this kind of C-code "natural C-code".  The approach is, for example, to
+use the parameter passing mechanism of C instead of using a special Lisp stack
+to achieve very fast function calls.
+</p>
+<p>
+To achieve to project goals the following implementation decisions were
+taken:
+</p><ul>
+<li>
+The hardware stack is used instead of an own lisp control stack.
+</li>
+<li>
+Lisp data types are represented similar to C datatypes in order to avoid
+incompatibility with hardwara datatypes and in order to enable easy data
+exchange with non-Lisp programs.
+</li>
+<li id="sec-3_1">Project Partners <br/>
+<ul>
+<li>
+GMD-FIT (St. Augustin, Germany)
+</li>
+<li>
+Fraunhofer ISST (Berlin, Germany)
+</li>
+<li>
+VW-GEDAS (Berlin, Germany)
+</li>
+<li>
+CAU Kiel (Kiel, Germany)
+</li>
+</ul>
+</li>
+<li id="sec-3_2">GC <br/>
+These decisions require to use a conservative pointer finding strategy for
+gc.
+
+<p>
+The implementation comprises EuLisp-0.99 level-0.
+</p>
+</li>
+<li id="sec-3_3">Compilation strategies <br/>
+Two compilation strategies are supported:
+<ul>
+<li>
+total compilation of an application including all the runtime modules
+</li>
+<li>
+total compilation of an application using a precompiled runtime system,
+<i>e.g.</i> <code>eulisp-level-0</code>.
+
+</li>
+</ul>
+
+<p>The former produces very efficient code but the compilation is very cpu-
+intensive. The code produced by the second variant is a little bit less
+efficient since optimization across the interface between application an
+runtime system is not possible, but due to the precompiled runtime-system
+the compilation process is much faster.
+</p>
+</li>
+<li id="sec-3_4">Threads are supported <br/>
+but use setjmp/longjmp rather than pthreads or equivalent so do not
+currently take advantage of multi-core CPUs.
+
+</li>
+<li id="sec-3_5">Reports and Papers <br/>
+<ul>
+<li>
+<a href="ftp://ftp1.fraunhofer.de/archive/gmd/apply">Apply Papers</a>
+</li>
+<li>
+<a href="http://www.isst.fraunhofer.de/publications/isst-berichte/">Fraunhofer Reports</a>
+Reports in the series ISSN: 0943-1624 relating to APPLY/Eu2C not available
+from the APPLY archive ftp site above:
+<ol>
+<li>
+Friedrich, Horst: „Eu2C-LISP to C Compiler“, Berlin 1994.
+See also <a href="http://publica.fraunhofer.de/dokumente/PX-46999.html">http://publica.fraunhofer.de/dokumente/PX-46999.html</a>
+</li>
+<li>
+Heicking, Winfried; Rosenmüller, Rainer: „Machine description“, Berlin
+1992.
+</li>
+</ol>
+</li>
+</ul>
+</li>
+<li id="sec-3_6">See Also <br/>
+<ul>
+<li>
+<a href="http://publica.fraunhofer.de/dokumente/PX-46999.html">Fraunhofer Eu2C Abstract</a>
+</li>
+<li>
+<a href="http://www.informatik.uni-kiel.de/~wg/apply.html">CLiCC</a>
+</li>
+<li>
+<a href="http://www.cs.cmu.edu/afs/cs/project/ai-repository/ai/lang/others/eulisp/eu2c">AI_Repository</a>
+</li>
+<li>
+<a href="http://www-cgi.cs.cmu.edu/Groups/AI/lang/others/eulisp/eu2c/">AI Repository 2</a>
+</li>
+<li>
+<a href="http://www.rhinocerus.net/forum/lang-lisp/47271-need-help-building-eu2c.html">Previous compilation attempt</a>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> Installation </h2>
+<div class="outline-text-2" id="text-4">
+
+<ul>
+<li id="sec-4_1">Requirements to install and run the EuLisp-&gt;C compiler <br/>
+<ul>
+<li id="sec-4_1_1">CMUCL Common Lisp compiler <br/>
+Tested with version 20a but older should work.
+
+<p>
+Note that originally Eu2C used Franz Allegro 4.1 or 4.2 but the current
+8.2 release is unable to compile Eu2C apparently due to some serious bugs
+in in Allegro-8.2.
+</p>
+<p>
+Note also than currently Eu2C cannot be compiled with SBCL due to a
+bug/limitation in the way it supports class aliasing, see
+<a href="https://bugs.launchpad.net/sbcl/+bug/618387">bug-report</a>.  Once this
+issue is resolved SBCL support will be finalised.
+</p>
+<p>
+No attempt has been made to support CLisp as the Common Lisp compiler for
+Eu2C but the indications are that this should be possible with a modest
+amount of work.
+</p>
+</li>
+<li id="sec-4_1_2">GNU c compiler gcc <br/>
+Tested with version gcc-4.4.3 but older and newer should work.
+
+</li>
+</ul>
+</li>
+<li id="sec-4_2">Installation Procedure <br/>
+<ul>
+<li>
+Pull the latest version from the GitHub repository:
+<ul>
+<li>
+<code>git clone git://github.com/Henry/EuLisp.git</code>
+</li>
+</ul>
+</li>
+<li>
+"cd" into the <code>EuLisp/Eu2C</code> directory.
+</li>
+<li>
+Define an environment variable Eu2CROOT to be the path of the
+distribution directory:
+<ul>
+<li>
+<code>export Eu2CROOT=`pwd`</code>
+</li>
+</ul>
+</li>
+<li>
+For complete installation, run the command make without any arguments,
+which takes depending on your hardware a few minutes.
+The following will happen:
+<ul>
+<li>
+CMUCL starts and the source files of the eu2c-compiler will be compiled.
+</li>
+<li>
+CMUCL starts again, reads the compiled compiler sources and creates a
+new image containing the EuLisp-&gt;C-compiler.  If you have defined an
+environment variable Eu2CIMAGENAME, the value of that variable will be
+used as the new name of the CMUCL image with the eu2c compiler loaded,
+otherwise the name will be <code>Lib/eu2c.cmu</code>.
+</li>
+<li>
+The libraries with different incarnations of Mem4C, an application
+independent conservative garbage collector will be created.
+</li>
+<li>
+The eu2c-compiler is started first time to compile the basic module
+which is in the default case the module <code>eulisp-level-0</code>.
+</li>
+<li>
+The eu2c-compiler is started again to be enhanced with the precompiled
+eulisp-level-0 module. A new CMUCL image is created. Its name is
+composed of the name of the eu2c-compiler and the name of the basic
+module. Therefore, he default name will be
+<code>Lib/eu2c.eulisp-level-0.cmu</code>.
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li id="sec-4_3">Compilation of EuLisp-Modules <br/>
+There are 2 different strategies for the compilation of EuLisp modules:
+<ul>
+<li>
+total compilation of an application including all the runtime modules
+</li>
+<li>
+total compilation of an application using a precompiled runtime system,
+<i>e.g.</i> <code>eulisp-level-0</code>.
+
+</li>
+</ul>
+
+<p>The former produces very efficient code but the compilation is very cpu-
+intensive. The code produced by the second variant is a little bit less
+efficient since optimization across the interface between application an
+runtime system is not possible, but due to the precompiled runtime-system
+the compilation process is much faster.
+</p>
+<p>
+A general compiler-driver <code>Bin/eu2c</code> is provided which controls the
+compilation process.  In order to compile an EuLisp Module into C and then
+create an application simply call:
+</p><ul>
+<li>
+<code>Bin/eu2c [switches] &lt;path expression&gt; [C-compiler switches and additional     C files]</code>
+</li>
+</ul>
+
+<p><i>e.g.</i> in the <code>Examples</code> sub-directory
+</p><ul>
+<li>
+<code>../Bin/eu2c -bs eulisp-level-0 hello</code>
+
+</li>
+</ul>
+
+<p>The compilation of the EuLisp-module <code>hello.em</code> with precompiled runtime
+system is started. The following files will be created:
+</p><ul>
+<li>
+hello.c    : the C code
+</li>
+<li>
+hello.inst : description of instances, will be included from <code>hello.c</code>
+</li>
+<li>
+hello      : image
+
+</li>
+</ul>
+
+<p>The following switches are of special interest:
+</p><ul>
+<li>
+<code>-C</code> : compiles and links the C code of the EuLisp-module (a somewhat
+specialized driver for ANSI-C compiler and Linker)
+</li>
+<li>
+<code>-L</code> : compiles the given EuLisp-module to C and stops (runs the Eu2C
+compiler only).
+</li>
+<li>
+Omitting both <code>-L</code> and <code>-C</code> will call the Eu2C compiler first nad then the
+ANSI-C compiler and linker to produce an application.
+</li>
+<li>
+<code>-g</code> : sets the debug-Option for the C-compiler and suppress all C-level
+optimizations
+</li>
+<li>
+<code>-bs &lt;name&gt;</code> : use the precompiled runtime-system with name &lt;name&gt; for
+compilation The default is without precompiled runtime system, <i>i.e.</i> all
+run-time system modules needed system is compiled together with the
+application. As a tradeoff between compilation time and run-time we
+strongly recommend to use a precompiled run-time system for
+compilation. There is a module <code>eulisp-level-0</code> containing everything
+defined in <code>level-0</code> of EuLisp-0.99. In addition we provide a module
+<code>eulis0x</code> which exposes <code>eulisp-level-0</code> and contains the following
+enhancements: command-line-interface and the base of an interface to C.
+</li>
+<li>
+<code>-security</code> : Links with a gc-library which is compiled with special
+security features. In the default case a gc-library with security features
+off is used.
+</li>
+<li>
+<code>-threads</code> : The precompiled run-time system <code>eulisp-level0</code> supports
+threads.  However, threads require special care during memory management
+activities like allocation of space. For the sake of efficiency we decided
+to assume as a default case that there are single threaded applications
+only. If one insist to use threads then one has to use the <code>-threads</code>
+switch which ensures that the correct gc-library will be linked to your
+application. (Using that library with single threaded applications would
+reduce the application efficiency by about 10%).
+</li>
+<li>
+<code>-cards &lt;start number of cards&gt;</code> : Eu2C relies on a conservative memory
+management system Mem4C[++], which allocates memory portions on cards of
+size 4096 bytes.  The switch <code>-cards</code> determines the initial number of
+cards allocated during system initialization.  As a default we use a value
+of 16. That means one starts with a heap size of 64 kBytes which will be
+increased on demand in correspondence with the configuration of the
+Mem4C[++]-library.
+</li>
+</ul>
+</li>
+<li id="sec-4_4">Examples <br/>
+In the subdirectory $Eu2CROOT/Examples some example EuLisp programs are
+given, some of them require to be compiled with the module <code>eulisp-level-0</code>
+and some must be compiled with the <code>eulisp0x</code>-module.
+
+<p>
+A basic system with precompiled <code>eulisp0x</code> can be generated by calling make
+with:
+</p><ul>
+<li>
+<code>make basic_module=eulisp0x</code>
+
+</li>
+</ul>
+
+<p>and used thus:
+</p><ul>
+<li>
+cd Examples
+</li>
+<li>
+../Bin/eu2c -bs eulisp0x command-line
+</li>
+</ul>
+</li>
+<li id="sec-4_5">Makefile <br/>
+For the easy installation we provide a script for make. The following macros
+are used:
+<ul>
+<li>
+<code>basic_image</code>: The name of the CMUCL image containing the eu2c
+compiler. If the environment variable <code>$Eu2CIMAGENAME</code> is defined, its
+value will be used, otherwise the name is assumed to be <code>eu2c.cmu</code>.
+</li>
+<li>
+<code>basic_module</code>: The name of the EuLisp-module which contain the basic
+run-time system. The default value is <code>eulisp-level-0</code>. Another possible
+basic module is <code>eulisp0x</code>.
+
+</li>
+</ul>
+
+<p>The following targets for make are defined:
+</p>
+<ul>
+<li>
+<code>basic_system</code>: compiles the basic run-time-system and creates a new
+CMUCL-image with basic run-time system loaded.
+</li>
+<li>
+<code>compile_basic_system</code>: compiles a basic-run-time system.
+</li>
+<li>
+<code>load_basic_system</code>: loads a pre-compiled run-time system and builds a new
+CMUCL-image with that system pre-compiled.
+</li>
+<li>
+<code>&lt;basic_image&gt;</code>: compiles all compiler sources, loads them and creates an
+CMUCL- image with name <code>&lt;basic_image&gt;</code> which contains the pure eu2c
+compiler without any precompiled run-time resources.
+</li>
+<li>
+<code>libs</code>: creates the libraries for the memory management system.
+</li>
+<li>
+<code>clean_basic_system</code>: removes the pre-compiled run-time system and
+CMUCL-image containing precompiled run-time system (approximately 16MB)
+</li>
+<li>
+<code>clean_compiler_sources</code>: deletes all source files of the eu2c compiler.
+</li>
+<li>
+<code>clean_run-time_sources</code>: deletes the eulisp source files of the run-time
+system.
+</li>
+<li>
+<code>clean_eu2c_image</code>: deletes the CMUCL-image containing the eu2c-compiler.
+</li>
+<li>
+<code>clean_libs</code>: deletes the libraries for the memory management system.
+</li>
+<li>
+<code>clean_c_sources</code>: deletes all c source files of the memory management
+</li>
+</ul>
+
+<p>system.
+</p><ul>
+<li>
+<code>remove_sources</code>: removes all sources. Should only be used if you have
+</li>
+</ul>
+
+<p>created an CMUCL-image with a precompiled run-time system.
+</p>
+<p>
+If you plan to use Eu2C with the precompiled basic system we recommend to
+run make with the targets clean_runtime_sources and clean_eu2c_image.
+</p></li>
+<li id="sec-4_6">Building 32bit on a 64bit machine: <br/>
+It is possible to compile 32bit on 64bit machines using the "WL=32" option
+to build the run-time and the -m32 option when building the applications,
+e.g.
+<ul>
+<li>
+make clean
+</li>
+<li>
+make WL=32
+</li>
+<li>
+cd Examples
+</li>
+<li>
+../Bin/eu2c -m32 -bs eulisp-level-0 gtakl2
+</li>
+<li>
+./gtakl2
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-5" class="outline-2">
+<h2 id="sec-5"><span class="section-number-2">5</span> Current Limitations </h2>
+<div class="outline-text-2" id="text-5">
+
+<ul>
+<li id="sec-5_1">Not yet implemented: <br/>
+<ul>
+<li>
+<code>generic-lambda</code>.
+</li>
+<li>
+<code>scan</code>: the function read can be used instead.
+</li>
+</ul>
+</li>
+<li id="sec-5_2">Not yet complete: <br/>
+<ul>
+<li>
+<code>format</code>: the directives <code>~e</code>, <code>~f</code> and <code>~g</code> are not yet present.
+</li>
+</ul>
+</li>
+<li id="sec-5_3">Known problems: <br/>
+<ul>
+<li>
+Symbol case: During compilation (when the modules are read in) the symbol
+identifiers are converted into upper case.  However, at run time read
+distinguishes for symbols between upper and lower cases.
+</li>
+<li>
+See 9.4. in EuLisp-0.99: The module itself can not be referenced in an
+expose directive of a module.
+</li>
+<li>
+See 9.5 in EuLisp-0.99: The syntax imports of special forms and standard
+macros is not yet supported.  Currently they are treated in a special way.
+</li>
+<li>
+Numeric errors can be captured using <code>with-handler</code> but they are not
+continuable.
+</li>
+<li>
+An endless recursion in which the recursive call is on the top of the
+function level is incorrect:
+<ul>
+<li>
+<code>(defun loop () ... (loop))</code>
+
+</li>
+</ul>
+
+<p>But in all other cases the right code is generated:
+</p>
+
+
+<pre class="src src-eulisp">(defun <span style="color: #0000ff; font-weight: bold;">loop</span> ()
+  (if ... (progn ... (<span style="color: #0000ff; font-weight: bold;">loop</span>))
+    (progn ... (<span style="color: #0000ff; font-weight: bold;">loop</span>))))
+</pre>
+
+
+</li>
+<li>
+Tables can not currently be used.
+
+</li>
+</ul>
+</li>
+</ul>
+</div>
+
+</div>
+
+<div id="outline-container-6" class="outline-2">
+<h2 id="sec-6"><span class="section-number-2">6</span> Common Lisp Compiler Extensions </h2>
+<div class="outline-text-2" id="text-6">
+
+<p>It is necessary to extend the capabilities of the CL compiler to support:
+</p><ul>
+<li>
+keyword symbols which end in a ":", this is formally allowed by the CL
+standard as an implementation-dependent extension;
+</li>
+<li>
+"e" as the exponent designator for written double-precision numbers, the CL
+standard specifies either "d" or "D".
+
+</li>
+</ul>
+
+<p>Eu2C now includes a patch file <a href="Apply/cmu.lisp">Apply/cmu.lisp</a> which adds support for
+both of the above into the CMUCL-20a/b CL compiler.  The equivalent would have
+to be created for other CL implementations e.g. SBCL or CLisp if they are to
+be used to compile Eu2C.
+</p>
+</div>
+
+</div>
+
+<div id="outline-container-7" class="outline-2">
+<h2 id="sec-7"><span class="section-number-2">7</span> Necessary module imports </h2>
+<div class="outline-text-2" id="text-7">
+
+<p>The whole functionality of level 0 of EuLisp is contained in the module
+<code>eulisp-level-0</code>. Therefore the module <code>eulisp-level-0</code> should be imported
+as in the following example.
+</p>
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">test-module</span>
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span> user-module)
+   <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span> user-module-with-macro-definition)
+   <span style="color: #0000ff; font-weight: bold;">export</span> (<span style="color: #0000ff; font-weight: bold;">fct1</span> fct2 ...)
+   <span style="color: #0000ff; font-weight: bold;">expose</span> (<span style="color: #0000ff; font-weight: bold;">...</span>))
+  .
+  .
+  .
+  )
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-8" class="outline-2">
+<h2 id="sec-8"><span class="section-number-2">8</span> Compiler log </h2>
+<div class="outline-text-2" id="text-8">
+
+<p><code>../Bin/eu2c -bs eulisp-level-0 hello</code> generates (comments are enclosed in
+<a name="&hellip;" class="target">&hellip;</a> ):
+</p>
+
+
+<pre class="src src-eulisp"><span style="color: #000000;">Eu2C:</span> (<span style="color: #0000ff; font-weight: bold;">compile-application</span> hello)
+      using compiler image /home/dm2/henry/EuLisp/Eu2C/Eu2C/Lib/eu2c.eulisp-level-0
+
+&lt;&lt;After the creation of the '.c' and '.inst' files the compilation and linking
+  of the <span style="color: #000000;">C-sources</span> with the help of the <span style="color: #000000;">GNU-C-Compilers</span> is made:&gt;&gt;
+
+<span style="color: #000000;">Eu2C:</span> successful conversion of hello.em to hello.c
+
++ gcc -m64 -c -o hello.o -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.c
++ gcc -m64 -z muldefs -o hello -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.o /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/eulisp-level-0.a /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/platforms/x86_64m64/eu2c.a -lm
++ set +x
+
+&lt;&lt;In this phase warnings may appear both from the compiler and the linker. <span style="color: #000000;">In</span>
+  most cases these warnings have no effects on the run of the generated
+  program.&gt;&gt;
+
+<span style="color: #000000;">DONE</span>
+
+&lt;&lt;Now you can call the program with:&gt;&gt;
+
+./hello
+
+</pre>
+
+
+
+<p>
+and the log file hello.log:
+</p>
+
+
+<pre class="src src-eulisp">*
+<span style="color: #000000;">NIL</span>
+*
+--- loading application modules
+<span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">loading module hello.em
+</span><span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">apply module HELLO loaded
+</span>
+&lt;&lt;all user modules are loaded&gt;&gt;
+
+--- handle symbol environment...
+--- computing discriminating functions...
+
+&lt;&lt;the discriminating functions of the generic functions are computed&gt;&gt;
+
+--- marking all exported bindings...
+--- converting to <span style="color: #000000;">MZS</span>
+
+&lt;&lt;conversion into a machine level intermediate language&gt;&gt;
+
+<span style="color: #000000;">SsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssS</span>
+
+&lt;&lt;s shows that the side effect analysis of functions is made,
+  <span style="color: #000000;">S</span> shows the summary of the analysis results&gt;&gt;
+
+<span style="font-weight: bold; text-decoration: underline;">*********************************************************************</span>
+
+&lt;&lt;each star or point shows the treatment of a function<span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">
+</span>  i means in-line was made<span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">
+</span>  b means the types within the type inference of
+  the functions are balanced&gt;&gt;
+
+<span style="color: #000000;">Reduce</span> type schemes of statements ... done.
+<span style="color: #000000;">Reduce</span> type schemes of functions ... done.
+<span style="color: #000000;">Convert</span> type schemes to range and domain vectors ... done.
+--- converting <span style="color: #000000;">MZS</span> to <span style="color: #000000;">LZS...</span>
+
+&lt;&lt;conversion from the machine level intermediate language into the <span style="color: #000000;">Lisp-level</span>
+  intermediate language&gt;&gt;
+
+--- generating <span style="color: #000000;">C-code</span>
+hello.c...
+hello.inst...
+--- end of compilation ---
+
+<span style="color: #000000;">Total</span> number of analysed function calls: 744
+<span style="color: #000000;">Total</span> number of joined function call descriptors: 0 (<span style="color: #0000ff; font-weight: bold;">0.00</span> %)
+
+<span style="color: #000000;">Total</span> number of inferred function type schemes: 67
+<span style="color: #000000;">Total</span> number of joined type scheme descriptors: 28 (<span style="color: #0000ff; font-weight: bold;">41.79</span> %)
+
+<span style="color: #000000;">Total</span> number of inferred classes: 2125
+<span style="color: #000000;">Total</span> number of inferred abstract classes: 0 (<span style="color: #0000ff; font-weight: bold;">0.00</span> %)
+
+&lt;&lt;analysis statistics which show the number of analyzed functions, the number
+  of infered classes. <span style="color: #000000;">It</span> is also printed the percentage of abstract classes<span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">
+</span>  the less the number of abstract classes the more the number of instantiable
+  classes.&gt;&gt;
+
+<span style="color: #00ff00;">"end of compilation"</span>
+*
+</pre>
+
+
+
+</div>
+
+</div>
+
+<div id="outline-container-9" class="outline-2">
+<h2 id="sec-9"><span class="section-number-2">9</span> Examples </h2>
+<div class="outline-text-2" id="text-9">
+
+<p>In module <code>takl</code> (contained in the Examples directory) the functions <code>takl</code>
+and <code>gtakl</code> are defined and exported. <code>takl</code> is a simple function without
+generic functions, <code>gtakl</code> is written with the generic function <code>gshorterp</code>.
+With the import of the module <code>eulisp-level-0</code> the whole functionality of
+level-0 of EuLisp is given.
+</p>
+<p>
+The file associated with the module <code>takl</code> has to have the name <code>takl.em</code>.
+</p>
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">takl</span>              <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">definition of module takl
+</span>    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
+     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
+     <span style="color: #0000ff; font-weight: bold;">export</span> (<span style="color: #0000ff; font-weight: bold;">takl</span> gtakl)     <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">export of functions takl and gtakl
+</span>     )
+
+  (defun <span style="color: #0000ff; font-weight: bold;">shorterp</span> (<span style="color: #0000ff; font-weight: bold;">x</span> y)      <span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">auxiliary function for takl
+</span>    (if (<span style="color: #0000ff; font-weight: bold;">null</span> y )            <span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">without generic
+</span>        ()
+      (if  (<span style="color: #0000ff; font-weight: bold;">null</span> x) <span style="font-weight: bold; text-decoration: underline;">t</span>
+        (<span style="color: #0000ff; font-weight: bold;">shorterp</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> x)
+                  <span style="color: #0000ff; font-weight: bold;">(cdr</span> y))) ))
+
+  (defun <span style="color: #0000ff; font-weight: bold;">takl</span> (<span style="color: #0000ff; font-weight: bold;">x</span> y z)
+    (if (<span style="color: #0000ff; font-weight: bold;">null</span> (<span style="color: #0000ff; font-weight: bold;">shorterp</span> y x))
+        z
+      (<span style="color: #0000ff; font-weight: bold;">takl</span> (<span style="color: #0000ff; font-weight: bold;">takl</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> x) y z)
+            (<span style="color: #0000ff; font-weight: bold;">takl</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> y) z x)
+            (<span style="color: #0000ff; font-weight: bold;">takl</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> z) x y))))
+
+<span style="color: #ff00ff; font-weight: bold;">;;;</span><span style="color: #ff00ff;">-----------------------------------------------------------------------------
+</span>;;; takl with generic shorterp<span style="color: #ff00ff;">
+</span><span style="color: #ff00ff; font-weight: bold;">;;;</span><span style="color: #ff00ff;">-----------------------------------------------------------------------------
+</span>  (defgeneric <span style="color: #0000ff; font-weight: bold;">gshorterp</span> ((<span style="color: #0000ff; font-weight: bold;">x</span> <span style="color: #0000ff;">&lt;list&gt;</span>) y)) <span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">auxiliary generic function for gtakl
+</span>
+  (defmethod <span style="color: #0000ff; font-weight: bold;">gshorterp</span> ((<span style="color: #0000ff; font-weight: bold;">x</span> <span style="color: #0000ff;">&lt;null&gt;</span>) y)
+    y)
+
+  (defmethod <span style="color: #0000ff; font-weight: bold;">gshorterp</span> ((<span style="color: #0000ff; font-weight: bold;">x</span> <span style="color: #0000ff;">&lt;cons&gt;</span>) y)
+    (if (<span style="color: #0000ff; font-weight: bold;">null</span> y)
+        ()
+      (<span style="color: #0000ff; font-weight: bold;">gshorterp</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> x) <span style="color: #0000ff; font-weight: bold;">(cdr</span> y))))
+
+  (defun <span style="color: #0000ff; font-weight: bold;">gtakl</span> (<span style="color: #0000ff; font-weight: bold;">x</span> y z)
+    (if (<span style="color: #0000ff; font-weight: bold;">null</span> (<span style="color: #0000ff; font-weight: bold;">gshorterp</span> y x))
+        z
+      (<span style="color: #0000ff; font-weight: bold;">gtakl</span> (<span style="color: #0000ff; font-weight: bold;">gtakl</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> x) y z)
+             (<span style="color: #0000ff; font-weight: bold;">gtakl</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> y) z x)
+             (<span style="color: #0000ff; font-weight: bold;">gtakl</span> <span style="color: #0000ff; font-weight: bold;">(cdr</span> z) x y))))
+
+<span style="color: #ff00ff; font-weight: bold;">;;;</span><span style="color: #ff00ff;">-----------------------------------------------------------------------------
+</span>  )                     <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">end of module
+</span><span style="color: #ff00ff; font-weight: bold;">;;;</span><span style="color: #ff00ff;">-----------------------------------------------------------------------------
+</span></pre>
+
+
+
+<p>
+The next example shows an interface to C to measure run time of functions
+<code>takl</code> and <code>gtakl</code> imported from the module <code>takl</code>. You can see the special
+keyword <code>c-import</code> which imports the C-file <code>timing.c</code> contained in the
+currend release.  The linking of the C-functions <code>start_timer</code> and <code>timer</code> was
+made with help of the form <code>%declare-external-function</code>. In this form the
+names of this function in EuLisp and in C and the types for the arguments and
+result in C are declared.
+</p>
+<p>
+The file associated with the module <code>test-takl</code> has to have the name
+<code>test-takl.em</code>.
+</p>
+
+
+
+<pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">test-takl</span>
+    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>
+             (<span style="color: #0000ff; font-weight: bold;">only</span> (<span style="color: #0000ff; font-weight: bold;">%void</span>
+                    %string)
+                   tail)
+             takl)
+     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
+     c-import (<span style="color: #00ff00;">"timing.h"</span>)      <span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">extension of module syntax
+</span>     )
+
+  (defun <span style="color: #0000ff; font-weight: bold;">listn</span> (<span style="color: #0000ff; font-weight: bold;">n</span>)
+    (if <span style="color: #0000ff; font-weight: bold;">(=</span> n 0)
+        ()
+      <span style="color: #0000ff; font-weight: bold;">(cons</span> n (<span style="color: #0000ff; font-weight: bold;">listn</span> <span style="color: #0000ff; font-weight: bold;">(-</span> n 1)))))
+
+  (deflocal <span style="color: #0000ff;">l24</span> (<span style="color: #0000ff; font-weight: bold;">listn</span> 24))
+  (deflocal <span style="color: #0000ff;">l18</span> (<span style="color: #0000ff; font-weight: bold;">listn</span> 18))
+  (deflocal <span style="color: #0000ff;">l12</span> (<span style="color: #0000ff; font-weight: bold;">listn</span> 12))
+  (deflocal <span style="color: #0000ff;">l6</span> (<span style="color: #0000ff; font-weight: bold;">listn</span> 6))
+
+  <span style="color: #ff00ff; font-weight: bold;">;;</span><span style="color: #ff00ff;">declaration of external functions called from EuLisp
+</span>  <span style="color: #ff00ff; font-weight: bold;">;;</span><span style="color: #ff00ff;">to measure cpu consumption
+</span>  <span style="color: #ff00ff; font-weight: bold;">;;</span><span style="color: #ff00ff;">start_timer sets the first time stamp
+</span>  <span style="color: #ff00ff; font-weight: bold;">;;</span><span style="color: #ff00ff;">timer gets a char * string containing format directives
+</span>  <span style="color: #ff00ff; font-weight: bold;">;;</span><span style="color: #ff00ff;">to print the values of elapsed user time system time and their sum
+</span>  <span style="color: #ff00ff; font-weight: bold;">;;</span><span style="color: #ff00ff;">char* strings has to be  written as Tail-literals in the following
+</span>  <span style="color: #ff00ff; font-weight: bold;">;;</span><span style="color: #ff00ff;">form: (%literal %string () "string")
+</span>
+  (<span style="color: #0000ff; font-weight: bold;">%declare-external-function</span>
+
+    (<span style="color: #0000ff; font-weight: bold;">start-timer</span> %void)          <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">the name of the function is start-timer,
+</span>    <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">result of start-timer is void
+</span>    ()                           <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">no args
+</span>    external-name |start_timer|  <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">the name in C is start_timer
+</span>    language <span style="color: #000000;">C</span>)                  <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">the used foreign language is C
+</span>
+  (<span style="color: #0000ff; font-weight: bold;">%declare-external-function</span>
+
+    (<span style="color: #0000ff; font-weight: bold;">timer</span> %void)                <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">the name of the function is timer
+</span>    <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">result of timer is void
+</span>    ((<span style="color: #0000ff; font-weight: bold;">string</span> %string))           <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">one arg string of type char *
+</span>    external-name |timer|        <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">the name in C is timer
+</span>    language <span style="color: #000000;">C</span>)                  <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">the used foreign language is C
+</span>
+  (deflocal <span style="color: #0000ff;">result</span> ())
+
+  (<span style="color: #0000ff; font-weight: bold;">start-timer</span>)
+  (<span style="color: #0000ff; font-weight: bold;">setq</span> result (<span style="color: #0000ff; font-weight: bold;">takl</span> l24 l12 l6))
+  (<span style="color: #0000ff; font-weight: bold;">timer</span> (<span style="color: #0000ff; font-weight: bold;">%literal</span> %string () <span style="color: #00ff00;">"\ntakl: %.2f sec (%.2f sec system)"</span>))
+  <span style="color: #0000ff; font-weight: bold;">(format</span> <span style="font-weight: bold; text-decoration: underline;">t</span> <span style="color: #00ff00;">"~%(takl l24 l12 l6) -&gt; ~a~%"</span> result)
+
+<span style="color: #ff00ff; font-weight: bold;">;;;</span><span style="color: #ff00ff;">-----------------------------------------------------------------------------
+</span>  )
+<span style="color: #ff00ff; font-weight: bold;">;;;</span><span style="color: #ff00ff;">-----------------------------------------------------------------------------
+</span></pre>
+
+
+</div>
+
+</div>
+
+<div id="outline-container-10" class="outline-2">
+<h2 id="sec-10"><span class="section-number-2">10</span> <span class="todo TODO"> TODO</span> (This list is no where near complete) </h2>
+<div class="outline-text-2" id="text-10">
+
+<ul>
+<li id="sec-10_1">Correct case handling for symbols <br/>
+<ul>
+<li>
+Currently symbols or interned with capitalised names.
+</li>
+<li>
+This can only be corrected by enabling case-preservation in CL:
+</li>
+<li>
+(setf (readtable-case <b>readtable</b>) :preserve)
+</li>
+<li>
+The consequence is that all standard CL symbols must be written in
+uppercase.
+</li>
+</ul>
+</li>
+<li id="sec-10_2">Change location of the [cho] and {inst,def} files generated <br/>
+Currently the top-level <code>Makefile</code> does not set the location of the files
+which are build-dependant.
+</li>
+</ul>
+</div>
+</div>
+<div id="postamble">
+<p class="date"> Date: 2010-08-29 23:27:55 BST</p>
+<p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
+</div>
+</div>
+</body>
+</html>

@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-06-16 22:40:00" /> 
+<meta name="date" content="2010-08-29 23:31:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -21,16 +21,16 @@ href="eulispcl8.html#taileulispcl8.html" >prev-tail</a>] [<a
 href="#taileulispcl9.html">tail</a>] [<a 
 href="eulisp.html#eulispcl9.html" >up</a>] </p></div>
 <h3 class="clauseHead"> 9 <a 
- id="x11-500009"></a>Lexical Syntax</h3>
+ id="x11-480009"></a>Lexical Syntax</h3>
 <a 
- id="dx11-50001"></a>
+ id="dx11-48001"></a>
 <!--l. 5--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 9.1 <a 
- id="x11-510009.1"></a>Character Set</h4> <a 
- id="dx11-51001"></a>
+ id="x11-490009.1"></a>Character Set</h4> <a 
+ id="dx11-49001"></a>
 Case<a 
- id="dx11-51002"></a> is distinguished in each of characters, strings and identifiers,
+ id="dx11-49002"></a> is distinguished in each of characters, strings and identifiers,
 so that <span 
 class="cmtt-9">variable-name </span>and <span 
 class="cmtt-9">Variable-name </span>are different, but where
@@ -45,53 +45,53 @@ throughout this text, the names for individual character glyphs are
 those used in <span class="cite">[<a 
 href="eulispcl3.html#Xiso646">ISO 646 : 1991</a>]</span>.
 <!--l. 10--><p class="noindent" >The minimal character set <a 
- id="dx11-51003"></a>to support <span 
+ id="dx11-49003"></a>to support <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;is defined in syntax
 table&#x00A0;<a 
-href="#x11-510009.1">9.1<!--tex4ht:ref: character-set --></a>. The language as defined in this text uses only the
+href="#x11-490009.1">9.1<!--tex4ht:ref: character-set --></a>. The language as defined in this text uses only the
 characters given in this table. Thus, left hand sides of the
 productions in this table define and name groups of characters
 which are used later in this definition: <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">decimal-digit</span></a>, <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">upper-letter</span></a>,
 <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">lower-letter</span></a>, <a 
-href="#x11-550009.3"><span 
+href="#x11-530009.3"><span 
 class="cmti-9">letter</span></a>, <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">other-character</span></a> and <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">special-character</span></a>. Any
 character not specified here is classified under <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">other-character</span></a>,
 which permits its use as an initial or a constituent character of an
 <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> (see <span 
 class="cmsy-9">§</span>&#x00A0;<a 
-href="#x11-560009.3.0.3">9.3.0.3<!--tex4ht:ref: identifier-syntax --></a>).
+href="#x11-540009.3.0.3">9.3.0.3<!--tex4ht:ref: identifier-syntax --></a>).
 </p>
 <h5 class="syntaxssclauseHead"> 9.1.0.1 <a 
- id="x11-520009.1.0.1"></a><span 
+ id="x11-500009.1.0.1"></a><span 
 class="cmbx-8">Syntax</span></h5><a 
- id="dx11-52001"></a>
+ id="dx11-50001"></a>
 <a 
- id="dx11-52002"></a>                                                   <!--l. 48--><p class="noindent" ><div class="framebox-l" 
+ id="dx11-50002"></a>                                                   <!--l. 48--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">decimal-digit</span><a 
- id="dx11-52003"></a><a 
- id="dx11-52004"></a><span 
+ id="dx11-50003"></a><a 
+ id="dx11-50004"></a><span 
 class="cmtt-9">: one of</span></td></tr></table>
 <!--l.10 48-->                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -106,8 +106,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">upper-letter</span><a 
- id="dx11-52005"></a><a 
- id="dx11-52006"></a><span 
+ id="dx11-50005"></a><a 
+ id="dx11-50006"></a><span 
 class="cmtt-9">: one of</span></td></tr></table>
 <!--l.10 48-->                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -129,8 +129,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">lower-letter</span><a 
- id="dx11-52007"></a><a 
- id="dx11-52008"></a><span 
+ id="dx11-50007"></a><a 
+ id="dx11-50008"></a><span 
 class="cmtt-9">: one of</span></td></tr></table>
 <!--l.10 48-->                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -152,8 +152,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">letter</span><a 
- id="dx11-52009"></a><a 
- id="dx11-52010"></a><span 
+ id="dx11-50009"></a><a 
+ id="dx11-50010"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 48-->                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -161,7 +161,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">upper-letter</span></a></td></tr></table>
 <!--l.10 48-->                                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -169,7 +169,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">lower-letter</span></a></td></tr></table>
 <!--l.10 48-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -177,8 +177,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">normal-other-character</span><a 
- id="dx11-52011"></a><a 
- id="dx11-52012"></a><span 
+ id="dx11-50011"></a><a 
+ id="dx11-50012"></a><span 
 class="cmtt-9">: one of</span></td></tr></table>
 <!--l.10 48-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -193,8 +193,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">other-character</span><a 
- id="dx11-52013"></a><a 
- id="dx11-52014"></a><span 
+ id="dx11-50013"></a><a 
+ id="dx11-50014"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 48-->                                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -202,7 +202,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td style="width:14px;" 
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">normal-other-character</span></a></td><td  
 class="tabbing"><span 
 class="cmtt-9">-</span> </td></tr></table>
@@ -212,8 +212,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">special-character</span><a 
- id="dx11-52015"></a><a 
- id="dx11-52016"></a><span 
+ id="dx11-50015"></a><a 
+ id="dx11-50016"></a><span 
 class="cmtt-9">: one of</span></td></tr></table>
 <!--l.10 48-->                          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -230,8 +230,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">level-0-character</span><a 
- id="dx11-52017"></a><a 
- id="dx11-52018"></a><span 
+ id="dx11-50017"></a><a 
+ id="dx11-50018"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 48-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -239,7 +239,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">decimal-digit</span></a></td></tr></table>
 <!--l.10 48-->                                                             <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -247,7 +247,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-550009.3"><span 
+href="#x11-530009.3"><span 
 class="cmti-9">letter</span></a></td></tr></table>
 <!--l.10 48-->                                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -255,7 +255,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">other-character</span></a></td></tr></table>
 <!--l.10 48-->                                               <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -263,14 +263,14 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">special-character</span></a></td></tr></table>
 <!--l.10 48-->                                                                            </div></div>
   <h4 class="sclauseHead"> 9.2 <a 
- id="x11-530009.2"></a>Whitespace and Comments</h4> <a 
- id="dx11-53001"></a>
+ id="x11-510009.2"></a>Whitespace and Comments</h4> <a 
+ id="dx11-51001"></a>
   Whitespace characters<a 
- id="dx11-53002"></a> are spaces, newlines, line feeds, carriage
+ id="dx11-51002"></a> are spaces, newlines, line feeds, carriage
   returns, character tabulations, line tabulations and form feeds. The
   newline character is also used to represent end of record for
   configurations providing such an input model, thus, a reference to
@@ -278,34 +278,34 @@ class="cmti-9">special-character</span></a></td></tr></table>
   to end of record. Whitespace separates tokens and is only
   significant in a string or when it occurs escaped within an
   <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>.
   <!--l. 9--><p class="noindent" >A line comment <a 
- id="dx11-53003"></a>is introduced by a <span 
+ id="dx11-51003"></a>is introduced by a <span 
 class="cmti-9">semicolon </span>(<span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">;</span></span></span>) and continues up
   to, but does not include, the end of the line. Hence, a line comment
   cannot occur in the middle of a token because of the whitespace in
   the form of the newline which is to <a 
-href="#x11-540009.2.0.2"><span 
+href="#x11-520009.2.0.2"><span 
 class="cmti-9">whitespace</span></a>. An <a 
-href="#x11-580009.4.0.4"><span 
+href="#x11-560009.4.0.4"><span 
 class="cmti-9">object</span></a> comment
   <a 
- id="dx11-53004"></a>is introduced by the <span class="obeylines-h"><span class="verb"><span 
+ id="dx11-51004"></a>is introduced by the <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">#;</span></span></span> sequence optionally followed by <a 
-href="#x11-540009.2.0.2"><span 
+href="#x11-520009.2.0.2"><span 
 class="cmti-9">whitespace</span></a>
   and an <a 
-href="#x11-580009.4.0.4"><span 
+href="#x11-560009.4.0.4"><span 
 class="cmti-9">object</span></a> to be &#8220;commented out&#8221;.
   </p>
   <h5 class="syntaxssclauseHead"> 9.2.0.2 <a 
- id="x11-540009.2.0.2"></a><span 
+ id="x11-520009.2.0.2"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="dx11-54001"></a>
+ id="dx11-52001"></a>
   <a 
- id="dx11-54002"></a>
+ id="dx11-52002"></a>
   <!--l. 33--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -313,8 +313,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">whitespace</span><a 
- id="dx11-54003"></a><a 
- id="dx11-54004"></a><span 
+ id="dx11-52003"></a><a 
+ id="dx11-52004"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 33-->                                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -371,8 +371,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">comment</span><a 
- id="dx11-54005"></a><a 
- id="dx11-54006"></a><span 
+ id="dx11-52005"></a><a 
+ id="dx11-52006"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 33-->                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -397,10 +397,10 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">         </td><td  
 class="tabbing"><span 
 class="cmtt-9">#; </span><a 
-href="#x11-540009.2.0.2"><span 
+href="#x11-520009.2.0.2"><span 
 class="cmti-9">whitespace</span><span 
 class="cmsy-6">*</span></a> <a 
-href="#x11-580009.4.0.4"><span 
+href="#x11-560009.4.0.4"><span 
 class="cmti-9">object</span></a></td></tr></table>
 <!--l.10 33-->                                                                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -409,7 +409,7 @@ style="vertical-align:baseline;" class="tabbing"><td
 class="tabbing"></td></tr></table>
 <!--l.10 33-->                                                                            </div></div>
   <a 
- id="x11-54007r1"></a>
+ id="x11-52007r1"></a>
   <!--l. 36--><p class="noindent" >
   </p><div class="note">
   <span 
@@ -425,35 +425,35 @@ class="cmr-8">&#x00A0;for block comments.</span></div>
 <!--l. 119--><p class="noindent" >
 </p>
 <h4 class="sclauseHead"> 9.3 <a 
- id="x11-550009.3"></a>Identifiers</h4> <a 
- id="dx11-55001"></a>
+ id="x11-530009.3"></a>Identifiers</h4> <a 
+ id="dx11-53001"></a>
 Identifiers<a 
- id="dx11-55002"></a> in <span 
+ id="dx11-53002"></a> in <span 
 class="cmr-8">E</span><span 
 class="cmr-7">U</span><span 
 class="cmr-8">L</span><span 
 class="cmr-7">ISP</span>&#x00A0;are very similar lexically to <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>s in
 other Lisps and in other programming languages. Informally, an
 <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a><a 
- id="dx11-55003"></a> is a sequence of <span 
+ id="dx11-53003"></a> is a sequence of <span 
 class="cmti-9">letter</span><a 
- id="dx11-55004"></a><a 
- id="dx11-55005"></a>, <a 
-href="#x11-520009.1.0.1"><span 
+ id="dx11-53004"></a><a 
+ id="dx11-53005"></a>, <a 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">decimal-digit</span></a> and <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">other-character</span></a>s
 starting with a character that is not a <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">decimal-digit</span></a>. <a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">special-character</span></a>s
 must be escaped if they are to be used in the names of <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>s.
 However, because the common notations for arithmetic operations
 are the glyphs for plus (<span class="obeylines-h"><span class="verb"><span 
@@ -461,16 +461,16 @@ class="cmtt-9">+</span></span></span>) and minus (<span class="obeylines-h"><spa
 class="cmtt-9">-</span></span></span>), which are also used to
 indicate the sign of a number, these glyphs are classified as
 <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>s<a 
- id="dx11-55006"></a> in their own right as well as being part of the syntax of
+ id="dx11-53006"></a> in their own right as well as being part of the syntax of
 a number.
 <!--l. 15--><p class="noindent" >Sometimes, it might be desirable to incorporate characters in an
 <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> that are normally not legal constituents. The aim of
 escaping in <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>s is to change the meaning of particular
 characters so that they can appear where they are not otherwise
 acceptable. Identifiers containing characters that are not
@@ -483,12 +483,12 @@ class="cmtt-9">|</span></span></span>). The <span
 class="cmti-9">multiple-escape </span>denotes the
 beginning of an escaped <span 
 class="cmti-9">part </span>of an <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> and the next
 <span 
 class="cmti-9">multiple-escape </span>denotes the end of an escaped part of an
 <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>. A single character that would otherwise not be a legal
 constituent can be written by preceding it with <span 
 class="cmti-9">single-escape</span>,
@@ -500,12 +500,12 @@ class="cmti-9">single-escape </span>can be used to incorporate the <span
 class="cmti-9">multiple-escape </span>or the
 <span 
 class="cmti-9">single-escape </span>character in an <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a>, delimited (or not) by
 <span 
 class="cmti-9">multiple-escape</span>s. For example, <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">|).(|</span></span></span> is the <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> whose name
 contains the three characters <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">#\)</span></span></span>, <span class="obeylines-h"><span class="verb"><span 
@@ -513,18 +513,18 @@ class="cmtt-9">#\.</span></span></span> and <span class="obeylines-h"><span clas
 class="cmtt-9">#\(</span></span></span>, and <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">a|b|</span></span></span> is the
 <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> whose name contains the characters <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">#\a</span></span></span> and <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">#\b</span></span></span>. The
 sequence <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">||</span></span></span> is the <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> with no name, and so is <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">||||</span></span></span>,
 but <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">|\||</span></span></span> is the <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a> whose name contains the single
 character <span class="obeylines-h"><span class="verb"><span 
 class="cmtt-9">|</span></span></span>, which can also be written <span class="obeylines-h"><span class="verb"><span 
@@ -534,11 +534,11 @@ class="cmti-9">multiple-escape</span>s.
 </p><!--l. 38--><p class="noindent" >
 </p>
 <h5 class="syntaxssclauseHead"> 9.3.0.3 <a 
- id="x11-560009.3.0.3"></a><span 
+ id="x11-540009.3.0.3"></a><span 
 class="cmbx-8">Syntax</span></h5><a 
- id="dx11-56001"></a>
+ id="dx11-54001"></a>
 <a 
- id="dx11-56002"></a>
+ id="dx11-54002"></a>
                                                    <!--l. 78--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -546,8 +546,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">identifier</span><a 
- id="dx11-56003"></a><a 
- id="dx11-56004"></a><span 
+ id="dx11-54003"></a><a 
+ id="dx11-54004"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -555,7 +555,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">normal-identifier</span></a></td></tr></table>
 <!--l.10 78-->                                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -563,7 +563,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">peculiar-identifier</span></a></td></tr></table>
 <!--l.10 78-->                                               <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -571,7 +571,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-identifier</span></a></td></tr></table>
 <!--l.10 78-->                                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -579,8 +579,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">normal-identifier</span><a 
- id="dx11-56005"></a><a 
- id="dx11-56006"></a><span 
+ id="dx11-54005"></a><a 
+ id="dx11-54006"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -588,9 +588,9 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">normal-initial</span></a> <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">normal-constituent</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
 <!--l.10 78-->                                  <table  
@@ -599,8 +599,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">normal-initial</span><a 
- id="dx11-56007"></a><a 
- id="dx11-56008"></a><span 
+ id="dx11-54007"></a><a 
+ id="dx11-54008"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -608,7 +608,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-550009.3"><span 
+href="#x11-530009.3"><span 
 class="cmti-9">letter</span></a></td></tr></table>
 <!--l.10 78-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -616,7 +616,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">normal-other-character</span></a></td></tr></table>
 <!--l.10 78-->                                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -624,8 +624,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">normal-constituent</span><a 
- id="dx11-56009"></a><a 
- id="dx11-56010"></a><span 
+ id="dx11-54009"></a><a 
+ id="dx11-54010"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -633,7 +633,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-550009.3"><span 
+href="#x11-530009.3"><span 
 class="cmti-9">letter</span></a></td></tr></table>
 <!--l.10 78-->                                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -641,7 +641,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">decimal-digit</span></a></td></tr></table>
 <!--l.10 78-->                                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -649,7 +649,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">other-character</span></a></td></tr></table>
 <!--l.10 78-->                                                     <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -657,8 +657,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">peculiar-identifier</span><a 
- id="dx11-56011"></a><a 
- id="dx11-56012"></a><span 
+ id="dx11-54011"></a><a 
+ id="dx11-54012"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -677,9 +677,9 @@ class="tabbing">    </td><td style="width:14px;"
 class="tabbing"> </td><td  
 class="tabbing"><span 
 class="cmsy-9">{</span><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">peculiar-constituent</span></a> <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">normal-constituent</span><span 
 class="cmsy-6">*</span></a><span 
 class="cmsy-9">}</span>
@@ -692,9 +692,9 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">         </td><td  
 class="tabbing"><span 
 class="cmtt-9">. </span><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">peculiar-constituent</span></a> <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">normal-constituent</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
 <!--l.10 78-->                              <table  
@@ -703,8 +703,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">peculiar-constituent</span><a 
- id="dx11-56013"></a><a 
- id="dx11-56014"></a><span 
+ id="dx11-54013"></a><a 
+ id="dx11-54014"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                           <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -712,7 +712,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-550009.3"><span 
+href="#x11-530009.3"><span 
 class="cmti-9">letter</span></a></td></tr></table>
 <!--l.10 78-->                                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -720,7 +720,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">other-character</span></a></td></tr></table>
 <!--l.10 78-->                                                      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -728,8 +728,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">escaped-identifier</span><a 
- id="dx11-56015"></a><a 
- id="dx11-56016"></a><span 
+ id="dx11-54015"></a><a 
+ id="dx11-54016"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -737,9 +737,9 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-sequence</span></a> <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-sequences</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
 <!--l.10 78-->               <table  
@@ -748,9 +748,9 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">     </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">normal-initial</span></a> <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-sequences</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
 <!--l.10 78-->             <table  
@@ -760,9 +760,9 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">     </td><td  
 class="tabbing"><span 
 class="cmsy-9">\</span><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">level-0-character</span></a> <a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-sequences</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
 <!--l.10 78-->                               <table  
@@ -771,8 +771,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">escaped-sequences</span><a 
- id="dx11-56017"></a><a 
- id="dx11-56018"></a><span 
+ id="dx11-54017"></a><a 
+ id="dx11-54018"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -780,7 +780,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-sequence</span></a></td></tr></table>
 <!--l.10 78-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -788,7 +788,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-or-normal-constituent</span><span 
 class="cmsy-6">*</span></a></td></tr></table>
 <!--l.10 78-->                                <table  
@@ -797,8 +797,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">escaped-sequence</span><a 
- id="dx11-56019"></a><a 
- id="dx11-56020"></a><span 
+ id="dx11-54019"></a><a 
+ id="dx11-54020"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -807,7 +807,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">|</span><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">escaped-sequence-constituent</span><span 
 class="cmsy-6">*</span></a><span 
 class="cmtt-9">|</span></td></tr></table>
@@ -817,8 +817,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">escaped-or-normal-constituent</span><a 
- id="dx11-56021"></a><a 
- id="dx11-56022"></a><span 
+ id="dx11-54021"></a><a 
+ id="dx11-54022"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -827,7 +827,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmsy-9">\</span><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">level-0-character</span></a></td></tr></table>
 <!--l.10 78-->                                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -835,7 +835,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-560009.3.0.3"><span 
+href="#x11-540009.3.0.3"><span 
 class="cmti-9">normal-constituent</span></a></td></tr></table>
 <!--l.10 78-->                                        <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -843,8 +843,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">escaped-sequence-constituent</span><a 
- id="dx11-56023"></a><a 
- id="dx11-56024"></a><span 
+ id="dx11-54023"></a><a 
+ id="dx11-54024"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 78-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -853,7 +853,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmsy-9">\</span><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">level-0-character</span></a></td></tr></table>
 <!--l.10 78-->                             <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -861,21 +861,21 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-520009.1.0.1"><span 
+href="#x11-500009.1.0.1"><span 
 class="cmti-9">level-0-character</span></a> <span 
 class="cmtt-9">other than |</span></td></tr></table>
 <!--l.10 78-->                                                     </div></div>
  <!--l. 205--><p class="noindent" >
  </p>
  <h4 class="sclauseHead"> 9.4 <a 
- id="x11-570009.4"></a>Objects</h4> <a 
- id="dx11-57001"></a>
+ id="x11-550009.4"></a>Objects</h4> <a 
+ id="dx11-55001"></a>
   An object is either a <a 
-href="#x11-580009.4.0.4"><span 
+href="#x11-560009.4.0.4"><span 
 class="cmti-9">literal</span></a>, a <a 
-href="eulispcl17.html#x21-87000017.17.1.1"><span 
+href="eulispcl17.html#x21-89400017.17.1.1"><span 
 class="cmti-9">symbol</span></a> or a <a 
-href="eulispcl17.html#x21-61600017.13.7.1"><span 
+href="eulispcl17.html#x21-62900017.13.7.1"><span 
 class="cmti-9">list</span></a>. The syntax of the
   classes of objects that can be read by <span 
 class="cmr-8">E</span><span 
@@ -885,11 +885,11 @@ class="cmr-7">ISP</span>&#x00A0;is defined in the
   section of this definition corresponding to the class as defined
   below:
   <h5 class="syntaxssclauseHead"> 9.4.0.4 <a 
- id="x11-580009.4.0.4"></a><span 
+ id="x11-560009.4.0.4"></a><span 
 class="cmbx-8">Syntax</span></h5> <a 
- id="dx11-58001"></a>
+ id="dx11-56001"></a>
   <a 
- id="dx11-58002"></a>
+ id="dx11-56002"></a>
   <!--l. 21--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -897,8 +897,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">object</span><a 
- id="dx11-58003"></a><a 
- id="dx11-58004"></a><span 
+ id="dx11-56003"></a><a 
+ id="dx11-56004"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 21-->                                          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -906,7 +906,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-580009.4.0.4"><span 
+href="#x11-560009.4.0.4"><span 
 class="cmti-9">literal</span></a></td></tr></table>
 <!--l.10 21-->         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -914,13 +914,13 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td style="width:14px;" 
 class="tabbing"><a 
-href="eulispcl17.html#x21-61600017.13.7.1"><span 
+href="eulispcl17.html#x21-62900017.13.7.1"><span 
 class="cmti-9">list</span></a></td><td style="width:14px;" 
 class="tabbing">  </td><td style="width:219px;" 
 class="tabbing">                                            </td><td  
 class="tabbing"><span 
 class="cmsy-9">§</span><a 
-href="eulispcl17.html#x21-60600017.13"><span 
+href="eulispcl17.html#x21-61900017.13"><span 
 class="cmtt-9">17.13</span><!--tex4ht:ref: list --></a></td></tr></table>
 <!--l.10 21-->      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -928,13 +928,13 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td style="width:14px;" 
 class="tabbing"><a 
-href="eulispcl17.html#x21-87000017.17.1.1"><span 
+href="eulispcl17.html#x21-89400017.17.1.1"><span 
 class="cmti-9">symbol</span></a></td><td style="width:14px;" 
 class="tabbing"> </td><td style="width:219px;" 
 class="tabbing">                                          </td><td  
 class="tabbing"><span 
 class="cmsy-9">§</span><a 
-href="eulispcl17.html#x21-86900017.17"><span 
+href="eulispcl17.html#x21-89300017.17"><span 
 class="cmtt-9">17.17</span><!--tex4ht:ref: symbol --></a></td></tr></table>
 <!--l.10 21-->                                               <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -942,8 +942,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">literal</span><a 
- id="dx11-58005"></a><a 
- id="dx11-58006"></a><span 
+ id="dx11-56005"></a><a 
+ id="dx11-56006"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 21-->                                         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -951,7 +951,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-600009.5.0.5"><span 
+href="#x11-580009.5.0.5"><span 
 class="cmti-9">boolean</span></a></td></tr></table>
 <!--l.10 21-->          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -959,13 +959,13 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td style="width:14px;" 
 class="tabbing"><a 
-href="eulispcl17.html#x21-32300017.1.1.1"><span 
+href="eulispcl17.html#x21-32800017.1.1.1"><span 
 class="cmti-9">character</span></a></td><td style="width:14px;" 
 class="tabbing"> </td><td style="width:219px;" 
 class="tabbing">                                       </td><td  
 class="tabbing"><span 
 class="cmsy-9">§</span><a 
-href="eulispcl17.html#x21-32200017.1"><span 
+href="eulispcl17.html#x21-32700017.1"><span 
 class="cmtt-9">17.1</span><!--tex4ht:ref: character --></a></td></tr></table>
 <!--l.10 21-->       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -973,13 +973,13 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td style="width:14px;" 
 class="tabbing"><a 
-href="eulispcl17.html#x21-54300017.8.1.1"><span 
+href="eulispcl17.html#x21-55400017.8.1.1"><span 
 class="cmti-9">float</span></a></td><td style="width:14px;" 
 class="tabbing"></td><td style="width:219px;" 
 class="tabbing">                                            </td><td  
 class="tabbing"><span 
 class="cmsy-9">§</span><a 
-href="eulispcl17.html#x21-54200017.8"><span 
+href="eulispcl17.html#x21-55300017.8"><span 
 class="cmtt-9">17.8</span><!--tex4ht:ref: float --></a></td></tr></table>
 <!--l.10 21-->      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -987,13 +987,13 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td style="width:14px;" 
 class="tabbing"><a 
-href="eulispcl17.html#x21-58000017.11.1.1"><span 
+href="eulispcl17.html#x21-59300017.11.1.1"><span 
 class="cmti-9">integer</span></a></td><td style="width:14px;" 
 class="tabbing"> </td><td style="width:219px;" 
 class="tabbing">                                          </td><td  
 class="tabbing"><span 
 class="cmsy-9">§</span><a 
-href="eulispcl17.html#x21-57900017.11"><span 
+href="eulispcl17.html#x21-59200017.11"><span 
 class="cmtt-9">17.11</span><!--tex4ht:ref: integer --></a></td></tr></table>
 <!--l.10 21-->      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1001,13 +1001,13 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td style="width:14px;" 
 class="tabbing"><a 
-href="eulispcl17.html#x21-84400017.16.1.1"><span 
+href="eulispcl17.html#x21-86800017.16.1.1"><span 
 class="cmti-9">string</span></a></td><td style="width:14px;" 
 class="tabbing"> </td><td style="width:219px;" 
 class="tabbing">                                           </td><td  
 class="tabbing"><span 
 class="cmsy-9">§</span><a 
-href="eulispcl17.html#x21-84300017.16"><span 
+href="eulispcl17.html#x21-86700017.16"><span 
 class="cmtt-9">17.16</span><!--tex4ht:ref: string --></a></td></tr></table>
 <!--l.10 21-->      <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1015,13 +1015,13 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td style="width:14px;" 
 class="tabbing"><a 
-href="eulispcl17.html#x21-89800017.19.1.1"><span 
+href="eulispcl17.html#x21-92200017.19.1.1"><span 
 class="cmti-9">vector</span></a></td><td style="width:14px;" 
 class="tabbing"> </td><td style="width:219px;" 
 class="tabbing">                                           </td><td  
 class="tabbing"><span 
 class="cmsy-9">§</span><a 
-href="eulispcl17.html#x21-89700017.19"><span 
+href="eulispcl17.html#x21-92100017.19"><span 
 class="cmtt-9">17.19</span><!--tex4ht:ref: vector --></a></td></tr></table>
 <!--l.10 21-->                                                     </div></div>
  <!--l. 23--><p class="noindent" >
@@ -1029,28 +1029,28 @@ class="cmtt-9">17.19</span><!--tex4ht:ref: vector --></a></td></tr></table>
                                                                                                   
                                                                                                   
 <h4 class="sclauseHead"> 9.5 <a 
- id="x11-590009.5"></a>Boolean</h4> <a 
- id="dx11-59001"></a> A boolean value is either <span 
+ id="x11-570009.5"></a>Boolean</h4> <a 
+ id="dx11-57001"></a> A boolean value is either <span 
 class="cmti-9">false</span> <a 
- id="dx11-59002"></a>, which is represented
+ id="dx11-57002"></a>, which is represented
 by the empty list&#8212;written <a 
-href="eulispcl17.html#x21-606009r2"><span 
+href="eulispcl17.html#x21-619009r2"><span 
 class="cmtt-9">()</span></a> and is also the value of <span 
 class="cmbx-9">??</span>&#8212;or <span 
 class="cmti-9">true</span> <a 
- id="dx11-59003"></a>,
+ id="dx11-57003"></a>,
 which is represented by any other value than <a 
-href="eulispcl17.html#x21-606009r2"><span 
+href="eulispcl17.html#x21-619009r2"><span 
 class="cmtt-9">()</span></a> or if specified as
 <a 
-href="eulispcl16.html#x20-210001r3"><span 
+href="eulispcl16.html#x20-208001r3"><span 
 class="cmtt-9">t</span></a>:
 <h5 class="syntaxssclauseHead"> 9.5.0.5 <a 
- id="x11-600009.5.0.5"></a><span 
+ id="x11-580009.5.0.5"></a><span 
 class="cmbx-8">Syntax</span></h5><a 
- id="dx11-60001"></a>
+ id="dx11-58001"></a>
 <a 
- id="dx11-60002"></a>
+ id="dx11-58002"></a>
 <!--l. 46--><p class="noindent" ><div class="framebox-l" 
 style="width:27.14em;"> </p><div class="minipage"><table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1058,8 +1058,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">boolean</span><a 
- id="dx11-60003"></a><a 
- id="dx11-60004"></a><span 
+ id="dx11-58003"></a><a 
+ id="dx11-58004"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 46-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1067,7 +1067,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-600009.5.0.5"><span 
+href="#x11-580009.5.0.5"><span 
 class="cmti-9">true</span></a></td></tr></table>
 <!--l.10 46-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1075,7 +1075,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">         </td><td  
 class="tabbing"><a 
-href="#x11-600009.5.0.5"><span 
+href="#x11-580009.5.0.5"><span 
 class="cmti-9">false</span></a></td></tr></table>
 <!--l.10 46-->                                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1083,8 +1083,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">true</span><a 
- id="dx11-60005"></a><a 
- id="dx11-60006"></a><span 
+ id="dx11-58005"></a><a 
+ id="dx11-58006"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 46-->                                          <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1092,7 +1092,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="eulispcl16.html#x20-210001r3"><span 
+href="eulispcl16.html#x20-208001r3"><span 
 class="cmtt-9">t</span></a></td></tr></table>
 <!--l.10 46-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1100,10 +1100,10 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="#x11-580009.4.0.4"><span 
+href="#x11-560009.4.0.4"><span 
 class="cmti-9">object</span></a> <span 
 class="cmtt-9">not </span><a 
-href="eulispcl17.html#x21-606009r2"><span 
+href="eulispcl17.html#x21-619009r2"><span 
 class="cmtt-9">()</span></a></td></tr></table>
 <!--l.10 46-->                                            <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1111,8 +1111,8 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing"><span 
 class="cmti-9">false</span><a 
- id="dx11-60007"></a><a 
- id="dx11-60008"></a><span 
+ id="dx11-58007"></a><a 
+ id="dx11-58008"></a><span 
 class="cmtt-9">:</span></td></tr></table>
 <!--l.10 46-->                                         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1120,7 +1120,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:42px;" 
 class="tabbing">      </td><td  
 class="tabbing"><a 
-href="eulispcl17.html#x21-606009r2"><span 
+href="eulispcl17.html#x21-619009r2"><span 
 class="cmtt-9">()</span></a></td></tr></table>
 <!--l.10 46-->                                         <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1133,9 +1133,9 @@ class="cmbx-9">??</span></td></tr></table>
 <!--l. 48--><p class="noindent" >Although the class containing exactly this set of values is not
 defined in the language, notation is abused for convenience and
 <a 
-href="#x11-600009.5.0.5"><span 
+href="#x11-580009.5.0.5"><span 
 class="cmti-9">boolean</span></a> <a 
- id="dx11-60009"></a>is defined, for the purposes of this definition, to mean that
+ id="dx11-58009"></a>is defined, for the purposes of this definition, to mean that
 set of values.
 </p><!--l. 108--><p class="noindent" >
                                                  

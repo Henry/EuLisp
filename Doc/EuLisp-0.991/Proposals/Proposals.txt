@@ -161,15 +161,14 @@
   Proposal is to remove <abstract-class> and to add a new class option
   ("abstract") by which abstractness will be denoted.
 
-* DEF+YOUTOO 17. Add: 'required-initargs class option
-  To add requiredp as a slot option (Table 5) taking a boolean value.  To
-  replace initarg by keyword.  To replace initform by default.  To replace
-  initfunction (eg. B.6.4) by default-function.
-
-  At present there is no means to indicate whether an initarg is required when
-  an instance is made.  This option will permit that facility.  The new class
-  option will be followed by a list of initargs which are to be required.
-
+* DEF+YOUTOO 17. Add: required? class option
+  + Replace =initarg= by =keyword=.
+  + Replace =initform= by =default=.
+  + To replace =initfunction= (eg. B.6.4) by =default-function=.
+  + Add =required?= as a slot option (Table 5) taking a boolean value.  At
+    present there is no means to indicate whether a =keyword= is required when
+    an instance is made.  This option will permit that facility.  The new class
+    option will be followed by a list of keywords which are required.
 * REJECTED 18. Add: openp
   CLOSED: [2010-03-21 Sun 21:47]
   To add definition of openp to A.14.
