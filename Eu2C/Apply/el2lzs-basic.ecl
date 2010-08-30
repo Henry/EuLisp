@@ -100,7 +100,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun check-syntax (pattern expr)
-  (if (or (null pattern
+  (if (or (null? pattern
                 )(and (consp expr)
                       (check-syntax-components pattern expr)))
       t
@@ -108,11 +108,11 @@
            nil)))
 
 (defun check-syntax-components (pattern expr)
-  (cond ((null pattern)
-         (null expr))
+  (cond ((null? pattern)
+         (null? expr))
         ((atom? pattern)
          (true-list-p expr))
-        ((null expr)
+        ((null? expr)
          nil)
         ((atom? expr)
          nil)
@@ -121,7 +121,7 @@
 
 (defun true-list-p (l)
   (cond ((consp l) (true-list-p (cdr l)))
-        ((null l) t)
+        ((null? l) t)
         (t nil)))
 
 ;;;-----------------------------------------------------------------------------
@@ -170,7 +170,7 @@
 
 (defun get-literal-expander-arguments (literal-class)
   (let ((exp-desc (find literal-class *literal-expanders* :key #'?literal-class)))
-    (if (null exp-desc)
+    (if (null? exp-desc)
         (warn "invalid literal class: ~A" literal-class)
       (mapcar #'car (?slots exp-desc)))))
 
@@ -179,7 +179,7 @@
   ;; the same literal class
   (let ((exp-desc-list (remove literal-class *literal-expanders*
                                :key #'?literal-class :test-not #'eq)))
-    (if (null exp-desc-list)
+    (if (null? exp-desc-list)
         (warn "invalid literal class: ~A" literal-class)
       (mapc (lambda (exp-desc)
               (setf (?expander exp-desc) expander)

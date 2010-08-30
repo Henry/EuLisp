@@ -252,7 +252,7 @@
   ((vector <vector>)
    (index %unsigned-word-integer)
    (elements <list>))
-  (if (null elements)
+  (if (null? elements)
       vector
     (progn (setf-primitive-vector-ref vector index (car elements))
            (initialize-vector-from-list-rev vector

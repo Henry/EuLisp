@@ -133,7 +133,7 @@
             (setf (?type-descr-s test) type-descr-s)
             (setf (?then-type-descr-s test) then-typedescrs)
             (setf (?else-type-descr-s test) else-typedescrs)
-            (if (null (?divided test))
+            (if (null? (?divided test))
                 (progn
                   ;; link variables
                   (link-var-vec (?var-vec (?var-descr test)) test 2)
@@ -178,7 +178,7 @@
                                      (setf (?out-label bl)
                                            new-con)
                                      ;;                               (if (and (join-label-p new-con)
-                                     ;;                                        (null (eq (?context new-con)
+                                     ;;                                        (null? (eq (?context new-con)
                                      ;;                                                  (dynamic *void-context*))
                                      (setf (?result bl) then-result))
                                  () )))
@@ -261,7 +261,7 @@
   )
 
 (defun join-variables (blocks env-level)
-  (if (null blocks) env-level
+  (if (null? blocks) env-level
     (let ((block (car blocks)))
       (join-variables1 block (?env block) env-level)
       (join-variables (cdr blocks) env-level)))
@@ -314,7 +314,7 @@
 ;;    ))
 ;;
 ;;(defun join-vars1 (blocks env-level jvars)
-;;  (if (null blocks) jvars
+;;  (if (null? blocks) jvars
 ;;      (let ((benv (?env (car blocks))))
 ;;        (if (eq benv env-level)
 ;;          (join-vars1 (cdr blocks) env-level jvars)
@@ -338,7 +338,7 @@
 ;;        (t (member-var var (cdr jvars) envl))))
 ;;
 ;;(defun add-interface (bls j-vars envl)
-;;  (if (null bls) j-vars
+;;  (if (null? bls) j-vars
 ;;      (let ((bl (car bls)))
 ;;        (add-interface1 bl (?env bl) j-vars envl)
 ;;        (add-interface (cdr bls) j-vars envl))))
@@ -374,7 +374,7 @@
     (?t-path (car blocks))))
 
 (defun kill-results (bls)
-  (cond ((null bls) ())
+  (cond ((null? bls) ())
         (t (setf (?result (car bls)) (dynamic *void-context*))
            (kill-results (cdr bls)))))
 

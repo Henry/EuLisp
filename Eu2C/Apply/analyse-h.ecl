@@ -101,12 +101,12 @@
   (apply #'format t string args))
 
 (defun append-stat (list ele)
-  (if (null list) (list ele)
+  (if (null? list) (list ele)
     (progn (append-stat1 list (list ele))
            list)))
 
 (defun append-stat1 (list ele)
-  (if (null (cdr list))
+  (if (null? (cdr list))
       (setf (cdr list) ele)
     (append-stat1 (cdr list) ele)))
 

@@ -28,14 +28,15 @@
 ;;;-----------------------------------------------------------------------------
 
 #module null
-(import (eulisp-kernel)
+(import (eulisp-kernel
+         (rename ((atom cl:atom))
+                 (only (atom)
+                       common-lisp)))
  syntax (eulisp-kernel)
  export (nil
          null?)
  expose ((only ($empty-list)
-               el-modules)
-         (only (null)
-               common-lisp)))
+               el-modules)))
 
 (make-eulisp-class null)
 
@@ -43,7 +44,7 @@
 
 ;; Rename the CL null -> null?
 (defun null? (a)
-  (null a))
+  (cl:null a))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

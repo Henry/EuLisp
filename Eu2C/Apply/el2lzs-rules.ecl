@@ -94,12 +94,12 @@
   (transsyn-expanded-progn (transsyn-progn-forms forms)))
 
 (defun transsyn-expanded-progn (forms)
-  (cond ((null forms) nil)       ;; progn with 0 forms
-        ((null (rest forms)) (first forms))     ; progn with 1 form
+  (cond ((null? forms) nil)       ;; progn with 0 forms
+        ((null? (rest forms)) (first forms))     ; progn with 1 form
         (t (cons ^progn forms))));; progn with more forms
 
 (defun transsyn-progn-forms (forms)
-  (cond ((null forms) nil)
+  (cond ((null? forms) nil)
         ((and (consp (first forms))
               (eq (first (first forms)) ^progn))
          (transsyn-progn-forms (nconc (rest (first forms))
@@ -113,14 +113,14 @@
                      (transsyn-progn-forms (rest forms))))))))
 
 (defun transsyn-let-forms (let-symbol vars body)
-  (if (null vars)
+  (if (null? vars)
       (transsyn-progn body)
     (list let-symbol
           (transsyn-vars vars)
           (transsyn-progn body))))
 
 (defun transsyn-vars (vars)
-  (cond ((null vars) nil)
+  (cond ((null? vars) nil)
         ((symbolp (first vars))
          (setf (cdr vars) (transsyn-vars (rest vars)))
          vars)
@@ -129,7 +129,7 @@
            vars)))
 
 (defun transsyn-funs (funs)
-  (if (null funs) nil
+  (if (null? funs) nil
     (let* ((fun (first funs))
            (ID (first fun))
            (PARAMS (second fun))
@@ -174,7 +174,7 @@
   (transsyn-let-forms ^dynamic-let VARS BODY))
 
 (deftranssyn (labels FUNS . BODY)
-  (if (null FUNS)
+  (if (null? FUNS)
       (transsyn-progn BODY)
     `(,^labels ,(transsyn-funs FUNS) ,(transsyn-progn BODY))))
 
@@ -186,7 +186,7 @@
 (deftranssyn (dynamic ID) (whole-form))
 
 (defun transsyn* (exprs)
-  (if (null exprs)
+  (if (null? exprs)
       nil
     (progn (setf (car exprs) (transsyn (car exprs)))
            (transsyn* (cdr exprs))
@@ -217,7 +217,7 @@
   ;; function definitions using defconstant are necessary
   (with-defining-form
    (setq VALUE (transsyn VALUE))
-   (cond ((null (consp VALUE))
+   (cond ((null? (consp VALUE))
           (setf (third (whole-form)) VALUE)
           (whole-form))
          ((eq (car VALUE) ^lambda)
@@ -311,7 +311,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun trans-params (params req)
-  (cond ((null params)
+  (cond ((null? params)
          (make-instance <params>
                         :var-list (reverse req)
                         :rest ()))
@@ -561,8 +561,8 @@
                  :pred (trans ANT) :then (trans CONS) :else (trans ALT)))
 
 (deftrans (or . FORMS)
-  (cond ((null FORMS) nil)
-        ((null (cdr FORMS)) (trans (car FORMS)))
+  (cond ((null? FORMS) nil)
+        ((null? (cdr FORMS)) (trans (car FORMS)))
         (t (make-or-expansion (trans (car FORMS))
                               (trans (cons ^or (cdr FORMS)))))))
 
@@ -583,7 +583,7 @@
                  :else else-part))
 
 (defun trans-exprs (exprs)
-  (if (null exprs) ()
+  (if (null? exprs) ()
     (cons (trans (first exprs)) (trans-exprs (rest exprs)))))
 
 (deftrans (progn . EXPRS)
@@ -604,8 +604,8 @@
          (if (listp (dynamic *function-id*))
              (dynamic *function-id*)
            (list (dynamic *function-id*)))))
-    (cond ((and (null local-id)
-                (null function-id))
+    (cond ((and (null? local-id)
+                (null? function-id))
            (list ^unnamed))
           (local-id
            `(,^local ,@function-id ,local-id))
@@ -637,7 +637,7 @@
                                    (trans BODY))))
 
 (defun trans-vars (varlist vars inits ecomb)
-  (cond ((null varlist) (cons (reverse vars) (reverse inits)))
+  (cond ((null? varlist) (cons (reverse vars) (reverse inits)))
         ((symbolp (first varlist))
          (trans-vars (rest varlist)
                      (cons (make-instance <local-static>
@@ -690,7 +690,7 @@
 ;;     labels-env))
 
 ;; (defun make-labels-env (FUNS)
-;;   (if (null FUNS) ()
+;;   (if (null? FUNS) ()
 ;;     (let ((ID (first (first FUNS))))
 ;;       (cons (add-function
 ;;              (make-instance <local-fun>
@@ -1000,7 +1000,7 @@
 ;;                  :body (trans BODY)))
 
 ;; (defun trans-dvars (VARLIST vars inits)
-;;   (if (null VARLIST)
+;;   (if (null? VARLIST)
 ;;       (cons (reverse vars) (reverse inits))
 ;;     (let ((ID (first VARLIST))
 ;;           (EXPR ())
@@ -1010,7 +1010,7 @@
 ;;             (setq ID (first ID)))
 ;;       (trans-dvars MORE
 ;;                    (cons (trans-dvar ID) vars)
-;;                    (cons (if (null EXPR) ()
+;;                    (cons (if (null? EXPR) ()
 ;;                            (trans EXPR))
 ;;                          inits)))))
 
@@ -1050,7 +1050,7 @@
                                                 (make-instance <var-ref> :var v-temp)))))))
 
 (defun trans-dvars (VARLIST)
-  (if (null VARLIST)
+  (if (null? VARLIST)
       ()
     (let ((ID (first VARLIST))
           (EXPR ())
@@ -1185,7 +1185,7 @@
   ;; extracts a list of classes from a specialized lambda-list
   ;; in case of a rest parameter the list is extended
   ;; by an additional class: %list
-  (cond ((null lambda-list) nil)
+  (cond ((null? lambda-list) nil)
         ((symbolp lambda-list)          ; rest parameter
          (list %list))
         ((symbolp (car lambda-list))    ; unspecialized parameter
@@ -1198,7 +1198,7 @@
 (defun lambda-parameters (lambda-list)
   ;; extracts the parameter-names from specialized lambda-list
   ;; returns a true list or if a rest parameter occurs a dotted list of symbols
-  (cond ((null lambda-list) nil)
+  (cond ((null? lambda-list) nil)
         ((symbolp lambda-list)          ; rest parameter
          lambda-list)
         ((symbolp (car lambda-list))    ; unspecialized parameter
@@ -1253,7 +1253,7 @@
 (defun definterface-arg-conversions (arg-specs)
   ;; returns syntax only, i.e. expressions in list representation without any
   ;; transformation
-  (if (null arg-specs) nil
+  (if (null? arg-specs) nil
     (cons (list (third (car arg-specs))  ;the converter function
                 (first (car arg-specs))) ;the argument name
           (definterface-arg-conversions (cdr arg-specs)))))
@@ -1353,14 +1353,14 @@
 ;;================
 
 (defun transsyn-%let-forms (let-symbol vars body)
-  (if (null vars)
+  (if (null? vars)
       (transsyn-progn body)
     (list let-symbol
           (transsyn-%vars vars)
           (transsyn-progn body))))
 
 (defun transsyn-%vars (vars)
-  (cond ((null vars) nil)
+  (cond ((null? vars) nil)
         (t (setf (third (first vars)) (transsyn (third (first vars))))
            (setf (cdr vars) (transsyn-%vars (rest vars)))
            vars)))
@@ -1384,7 +1384,7 @@
                                    (trans BODY))))
 
 (defun trans-%vars (varlist vars inits types ecomb)
-  (cond ((null varlist) (list (reverse vars) (reverse inits) (reverse types)))
+  (cond ((null? varlist) (list (reverse vars) (reverse inits) (reverse types)))
         (t (trans-%vars (rest varlist)
                         (cons (make-instance <local-static>
                                              :identifier (first (first varlist)))

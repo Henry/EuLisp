@@ -27,62 +27,124 @@
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
 (defmodule print
-  (import
-   ((only () tail)
-    (only (<object>
-           %extract %cast
-           %string %void %unsigned-byte-integer
-           %unsigned-word-integer %signed-word-integer
-           %eq %neq %le %lt %gt
-           %plus %minus %rem %div
-           make-swi
-           <cons> <null> <list> <symbol> car cdr consp null) eulisp-kernel)
-    (only (<file>
-           fprintf-3 $standard-output %write-unit %write-string
-           ensure-open-character-output-stream
-           file-descriptor-pointer <stream>
-           file-stream-p
-           string-stream-p stream-string-stack
-           sprintf-3) stream-i)
-    (only (fprintf-3-double sprintf-3-double) c-stdio)
-    stream-generic
-    standard-generic-function
-    (only (stringp string-pointer <string>) string-ii)
-    (only (int-p <int>) int-i)
-    (only (double-float-p <double-float> dble) double-float-i)
-    (only (convert-char-int characterp <character>) character)
-    (only (vectorp primitive-vector-length primitive-vector-ref <vector>) vector)
-    (only ($char-string
-           $char-ascii-extension $char-single-escape
-           $char-ascii-plus $char-ascii-minus $char-ascii-point
-           $char-newline
-           $char-ascii-d-l $char-ascii-a-l $char-ascii-b-l
-           $char-formfeed $char-ascii-f-l $char-return $char-ascii-r-l
-           $char-ascii-tab $char-ascii-t-l $char-string-hex-l
-           $char-ascii-alert $char-ascii-backspace $char-ascii-delete
-           $char-ascii-vertical-tab $char-ascii-l-l $char-ascii-n-l
-           $char-ascii-v-l $char-ascii-zero $char-ascii-space
-           $char-ascii-e-l $char-ascii-d-l
-           letterp otherp peculiar-constituent-p normal-constituent-p
-           extended-level-0-character-p) char-tables)
-    (only (<string-stack>
-           *buffer-1* push-buffer pop-buffer clear-buffer
-           ?cur-index !cur-index ?last-index ?stack-string) string-stack)
-    (only (strlen) c-string-interface))
+  (import ((only ()
+                 tail)
+           (only (<object>
+                  %extract
+                  %cast
+                  %string
+                  %void
+                  %unsigned-byte-integer
+                  %unsigned-word-integer
+                  %signed-word-integer
+                  %eq %neq %le %lt %gt
+                  %plus %minus %rem %div
+                  make-swi
+                  <cons>
+                  <null>
+                  <list>
+                  <symbol>
+                  car
+                  cdr
+                  consp
+                  null?)
+                 eulisp-kernel)
+           (only (<file>
+                  fprintf-3
+                  $standard-output
+                  %write-unit %write-string
+                  ensure-open-character-output-stream
+                  file-descriptor-pointer
+                  <stream>
+                  file-stream-p
+                  string-stream-p
+                  stream-string-stack
+                  sprintf-3)
+                 stream-i)
+           (only (fprintf-3-double
+                  sprintf-3-double)
+                 c-stdio)
+           stream-generic
+           standard-generic-function
+           (only (stringp
+                  string-pointer
+                  <string>)
+                 string-ii)
+           (only (int-p
+                  <int>)
+                 int-i)
+           (only (double-float-p
+                  <double-float>
+                  dble)
+                 double-float-i)
+           (only (convert-char-int
+                  characterp
+                  <character>)
+                 character)
+           (only (vectorp
+                  primitive-vector-length
+                  primitive-vector-ref
+                  <vector>)
+                 vector)
+           (only ($char-string
+                  $char-ascii-extension
+                  $char-single-escape
+                  $char-ascii-plus
+                  $char-ascii-minus
+                  $char-ascii-point
+                  $char-newline
+                  $char-ascii-d-l
+                  $char-ascii-a-l
+                  $char-ascii-b-l
+                  $char-formfeed
+                  $char-ascii-f-l
+                  $char-return
+                  $char-ascii-r-l
+                  $char-ascii-tab
+                  $char-ascii-t-l
+                  $char-string-hex-l
+                  $char-ascii-alert
+                  $char-ascii-backspace
+                  $char-ascii-delete
+                  $char-ascii-vertical-tab
+                  $char-ascii-l-l
+                  $char-ascii-n-l
+                  $char-ascii-v-l
+                  $char-ascii-zero
+                  $char-ascii-space
+                  $char-ascii-e-l
+                  $char-ascii-d-l
+                  letterp
+                  otherp
+                  peculiar-constituent-p
+                  normal-constituent-p
+                  extended-level-0-character-p)
+                 char-tables)
+           (only (<string-stack>
+                  *buffer-1*
+                  push-buffer
+                  pop-buffer
+                  clear-buffer
+                  ?cur-index
+                  !cur-index
+                  ?last-index
+                  ?stack-string)
+                 string-stack)
+           (only (strlen)
+                 c-string-interface))
    syntax (tail)
-   export
-   (prin
-    print
-    write
-    output
-    newline
-    ;;write-unit         ; nicht el0.99
-    ;;%write-string      ; in stream-i      ; nicht el
-    change-exponent-marker
-    ;;prin-1
-    ;;write-1           ; nicht el
-    print-based-int-0   ; nicht el
-    ))
+   export (prin
+           print
+           write
+           output
+           newline
+           ;;write-unit         ; nicht el0.99
+           ;;%write-string      ; in stream-i      ; nicht el
+           change-exponent-marker
+           ;;prin-1
+           ;;write-1           ; nicht el
+           print-based-int-0   ; nicht el
+           ))
 
 ;;   (%define-function (%write-string %signed-word-integer)
 ;;                        ((stream <stream>)
@@ -228,7 +290,7 @@
 ;;      ;   (%write-hex stream object)
 ;;     (if (consp object)  ;(eq obj-class <cons>)
 ;;       (prin-cons object stream)
-;;       (if (null object) ;(eq obj-class <null>)
+;;       (if (null? object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
 ;;         (if (int-p object)
 ;;           (%write-int stream (make-swi (%cast <int> object)))
@@ -299,7 +361,7 @@
       (progn (%write-string stream (%literal %string  () " "))
              (generic-prin (car object) stream)
              (prin-cons1 (cdr object) stream))
-    (if (null object) ()
+    (if (null? object) ()
       (progn (%write-string stream (%literal %string () " . "))
              (generic-prin object stream)
              ())))
@@ -351,7 +413,7 @@
 ;;                      (stream <stream>))
 ;;     (if (consp object)  ;(eq obj-class <cons>)
 ;;       (write-cons-1 object stream)
-;;       (if (null object) ;(eq obj-class <null>)
+;;       (if (null? object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
 ;;         (if (int-p object)
 ;;           (%write-int stream (make-swi (%cast <int> object)))
@@ -668,7 +730,7 @@
       (progn (%write-string stream (%literal %string  () " "))
              (generic-write (car object) stream)
              (write-cons-2 (cdr object) stream))
-    (if (null object) ()
+    (if (null? object) ()
       (progn (%write-string stream (%literal %string () " . "))
              (generic-write object stream)
              ())))

@@ -76,11 +76,11 @@
 
 (defun lzs2mzs-fun (fun)
   (if (defined-generic-fun-p fun) (setq fun (?discriminating-fun fun)) ())
-  (cond ((or (null (or (global-fun-p fun)
+  (cond ((or (null? (or (global-fun-p fun)
                        (local-fun-p fun)
                        (defined-generic-fun-p fun)
                        ))
-             (null (?params fun))) fun)
+             (null? (?params fun))) fun)
         ;; !!!!!!!!!!! hack
         ;; add global-generic-fun and local-generic-fun
         ;; ((and  (print (list 'function (?identifier fun))) nil) nil)
@@ -228,7 +228,7 @@
   )
 
 (defun clear-closure-vars (env-list block)
-  (if (null env-list) ()
+  (if (null? env-list) ()
     (let ((var (car (car env-list))))
       (if (and (local-static-p var)
                (?closure var))
@@ -486,7 +486,7 @@
   ()) ; ausgeschaltet am 04.06 *hf*
 
 (defun add-zykl-links (gotos links)
-  (if (null gotos) links
+  (if (null? gotos) links
     (add-zykl-links (cdr gotos) (cons (cons (car gotos) 3 ;magic-number
                                             ) links))))
 
@@ -563,7 +563,7 @@
   ;; the type of the variable of the position n should be inserted in all
   ;; type-descr's of ntd in the position m. Each new type-path make a copy of
   ;; the type-descr's of ntd and adds this type-decr's to sumtd.
-  (if (null gotos) ntd
+  (if (null? gotos) ntd
     (let* ((goto (car gotos))
            (jvar (vector-ref (?var-vec (?var-descr goto)) n))
            (block (?block goto))
@@ -635,7 +635,7 @@
 ;;             (fill-vector-from-to (+ anf 1) end from to))))
 
 (defun diff-vars (n var gotos)
-  (if (null gotos) 0
+  (if (null? gotos) 0
     (if (eq var (vector-ref (?var-vec (?var-descr (car gotos))) n))
         (diff-vars n var (cdr gotos))
       (+ 1 (diff-vars n var (cdr gotos))))))
@@ -680,7 +680,7 @@
     ))
 
 (defun get-para2env-and-link (var-list rest block fun count cl-var)
-  (if (null var-list)
+  (if (null? var-list)
       (cond ((and rest cl-var)
              (setf (?link rest) (list (cons fun count)))
              (setf (?link cl-var) (list (cons fun (+ count 1))))
@@ -699,7 +699,7 @@
   )
 
 (defun fill-var-vector (num vect env)
-  (cond ((null env) ())
+  (cond ((null? env) ())
         (t (setf (vector-ref vect num) (car (car env)))
            (fill-var-vector (+ num 1) vect (cdr env)))))
 

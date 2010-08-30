@@ -202,7 +202,7 @@
   nil)
 
 (defun types-and-parameters-1 (required function-signature i)
-  (if (null required)
+  (if (null? required)
       nil
     (progn
       (setf (?type (car required))

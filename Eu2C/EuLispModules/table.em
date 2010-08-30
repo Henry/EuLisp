@@ -285,7 +285,7 @@
      (setf (cdr (%cast <cons> pointer))
            (cdr hash-list))
      table)
-    ((null (cdr hash-list))
+    ((null? (cdr hash-list))
      table)
     (t (table-loop table (cdr hash-list) key (cdr pointer) fcn))))
 
@@ -297,7 +297,7 @@
      (setf (cdr (%cast <cons> pointer))
            (cdr hash-list))
      table)
-    ((null (cdr hash-list))
+    ((null? (cdr hash-list))
      table)
     (t (table-loop-eq table (cdr hash-list) key (cdr pointer)))))
 

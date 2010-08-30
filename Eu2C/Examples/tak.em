@@ -36,7 +36,7 @@
    syntax (eulisp-level-0))
 
 (defun tak (x y z)
-  (if (null (< y x))
+  (if (null? (< y x))
       z
     (tak (tak (- x 1) y z)
          (tak (- y 1) z x)

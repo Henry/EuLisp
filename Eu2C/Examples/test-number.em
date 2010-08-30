@@ -60,7 +60,7 @@
         ))
 
 (defun get-fun(item li)
-  (if (null li)
+  (if (null? li)
       ()
     (if (equal item (car li))
         (car (cdr li))
@@ -72,7 +72,7 @@
     (if (consp sexpr)
         (let ((fcn (get-fun (as-lowercase (symbol-name (car sexpr)))
                             interpreter-fcn) ))
-          (if (null fcn)
+          (if (null? fcn)
               (print sexpr)
             (format t "~%~s -> ~s" sexpr (apply fcn
                                                 (cdr sexpr)) ))

@@ -45,7 +45,7 @@
 (defmethod constant-type (value)        ; may be already a <literal-instance>
   (let* ((expanded-literal (expand-literal value))
          (lattice-type (find-lattice-type-for-literal expanded-literal)))
-    (if (null lattice-type)
+    (if (null? lattice-type)
         (setq lattice-type (?lattice-type (~class-of expanded-literal))))
     (lattice-type-to-atomic-type lattice-type)))
 

@@ -62,7 +62,7 @@
     (dynamic-let ((ienv (mk-inline-env 1 (length var-vec) var-vec
                                        args))
                   (iresult resultvar))
-                 (if (or (eq con t) (null con))
+                 (if (or (eq con t) (null? con))
                      (let ((old-tds (dynamic typepathes))
                            (res (inline-block1
                                  con
@@ -129,9 +129,9 @@
 
 (defun handle-join-label-context (con)
   (let ((in-block (?in-block con)))
-    (if (null in-block) ; function without return ???
+    (if (null? in-block) ; function without return ???
         (error "inline destroy a function")
-      (if (null (cdr in-block))
+      (if (null? (cdr in-block))
           ;; only one block
           (let* ((bl (car in-block))
                  (interface (?interface bl)))
@@ -161,7 +161,7 @@
   )
 
 (defun clear-interface (interf body)
-  (if (null interf) body
+  (if (null? interf) body
     (clear-interface (cdr interf)
                      (append-stat body (car interf))))
   )
@@ -250,18 +250,18 @@
          (then-body (?body then-block))
          (then-interface (?interface then-block))
          (then-result (?result then-block))
-         (then-empty (and (null then-body) (null then-interface)))
+         (then-empty (and (null? then-body) (null? then-interface)))
          (then-empty-return (and then-empty (return-p then-result)))
          ;;   else
          (else-block (?else-block result))
          (else-body (?body else-block))
          (else-interface (?interface else-block))
          (else-result (?result else-block))
-         (else-empty (and (null else-body) (null else-interface)))
+         (else-empty (and (null? else-body) (null? else-interface)))
          (else-empty-return (and else-empty (return-p else-result)))
          (divided (?divided con))
          )
-    (if (and then-empty-return else-empty-return (null divided))
+    (if (and then-empty-return else-empty-return (null? divided))
         (let* ((var-vec (make-vector 3))
                (var-descr (make <var-descr>
                                 :var-vec var-vec
@@ -274,9 +274,9 @@
           (copy-vars 2 (?var-vec (?var-descr result)) var-descr con)
           ;; doppelter link  (link-var-vec var-vec con 2)
           (let ((value (?value then-result)))
-            (if (or (null value)
+            (if (or (null? value)
                     (and (named-const-p value)
-                         (null (?value value))))
+                         (null? (?value value))))
                 (progn
                   (setq value (?then-block con))
                   (setf (?then-block con) (?else-block con))
@@ -293,9 +293,9 @@
                    (if then-empty-return
                        (let* ((value (?value then-result))
 
-                              (newblock (if (or (null value)
+                              (newblock (if (or (null? value)
                                                 (and (named-const-p value)
-                                                     (null (?value value))))
+                                                     (null? (?value value))))
                                             ;; the result is () / false
                                             (progn
                                               (setf (?else-type-descr-s con)
@@ -317,9 +317,9 @@
                      ())
                    (if else-empty-return
                        (let* ((value (?value else-result))
-                              (newblock (if (or (null value)
+                              (newblock (if (or (null? value)
                                                 (and (named-const-p value)
-                                                     (null (?value value))))
+                                                     (null? (?value value))))
                                             ;; the result is () / false
                                             (progn
                                               (setf (?else-type-descr-s con)
@@ -378,7 +378,7 @@
     (setf (?in-label block)
           (if (consp in-label)
               (cons test in-label)
-            (if (null in-label) (list test)
+            (if (null? in-label) (list test)
               (list test in-label)))))
   )
 
@@ -527,7 +527,7 @@
       ;; make a type - inference
       (setq typedescrs
             (inference (?function stat) typedescrs))
-      (if (null typedescrs) (error "Typeerror")
+      (if (null? typedescrs) (error "Typeerror")
         (progn
           ;; add the type-descriptors
           (setf (?type-descr-s newcall) typedescrs)
@@ -705,14 +705,14 @@
       (setq typedescrs
             (inference fun typedescrs))
       (if (and (generic-fun-p fun) *actual-method-subset*
-               (null (cdr *actual-method-subset*))) ; only one method
+               (null? (cdr *actual-method-subset*))) ; only one method
           (progn
             (format t "m")
             (setq fun (?fun (car *actual-method-subset*)))
             (setf (?function newcall) fun)
             )
         ())
-      (if (null typedescrs) (error "Error: type clash")
+      (if (null? typedescrs) (error "Error: type clash")
         (progn
           ;; add the type-descriptors
           (setf (?type-descr-s newcall) typedescrs)

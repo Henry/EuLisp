@@ -65,7 +65,8 @@
            ) print)
     (only (generic-prin generic-write ) stream-generic)
     (only (symbolp) symbol);; inserted by ak
-    (only (null) basic-list-0)         ; inserted by ak
+    (only (null?)
+          basic-list-0)         ; inserted by ak
     (only (read read-based-int1) read)
     (only (integerp) integer)
     (only (floatp) float-i)
@@ -107,7 +108,7 @@
       (progn
         (if (symbolp stream) ; symbolp added by ak to avoid c-compiler warning
             (progn           ; if global optimization is on
-              (if (null (eq stream 't))
+              (if (null? (eq stream 't))
                   (error
                    "~Warning: the current output stream is designated by t")
                 ())

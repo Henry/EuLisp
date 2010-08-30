@@ -235,11 +235,11 @@
                      nil nil))
 
 (defun gen-%tail-exports (objects rename-part only-part)
-  (cond ((null objects)
+  (cond ((null? objects)
          `(rename ,rename-part (only ,only-part %tail)))
         ((and (hard-wired-p (car objects))
               (exported-for-lisp-p (car objects))
-              (null (invisible-exported-p (car objects))))
+              (null? (invisible-exported-p (car objects))))
          (gen-%tail-exports (cdr objects)
                             (if (eq (?identifier (car objects))
                                     (if-identifier (car objects)))
@@ -370,7 +370,7 @@
 
 (defmethod gen-structured-literal ((obj <pair>))
   (labels ((gen-list (l)
-                     (cond ((null l) nil)
+                     (cond ((null? l) nil)
                            ((atom? l) (gen-literal l))
                            (t (cons (gen-list (car l))
                                     (gen-list (cdr l)))))))
@@ -676,8 +676,8 @@
 ;;; -------------------
 
 ;; (defmacro cond clauses
-;;   (if (null clauses) ()
-;;     (if (null (cdr (car clauses))) `(or ,(car (car clauses))
+;;   (if (null? clauses) ()
+;;     (if (null? (cdr (car clauses))) `(or ,(car (car clauses))
 ;;                                         (cond ,@(cdr clauses)))
 ;;       (if (eq (car (car clauses)) 't) `(progn ,@(cdr (car clauses)))
 ;;         `(if ,(car (car clauses))
@@ -686,13 +686,13 @@
 ;;         ))))
 
 (defun mk-progn (forms)
-  (if (null forms) nil
-    (if (null (cdr forms)) (car forms)
+  (if (null? forms) nil
+    (if (null? (cdr forms)) (car forms)
       (cons 'progn forms))))
 
 (defun cond1 (clauses)
-  (if (null clauses) ()
-    (if (null (cdr (car clauses)))
+  (if (null? clauses) ()
+    (if (null? (cdr (car clauses)))
         (list 'or (car (car clauses))
               (cond1 (cdr clauses)))
       (if (eq (car (car clauses)) 't)
@@ -707,16 +707,16 @@
 (export-syntax cond)
 
 ;; (defmacro and forms
-;;   (if (null forms) 't
-;;     (if (null (cdr forms)) (car forms)
+;;   (if (null? forms) 't
+;;     (if (null? (cdr forms)) (car forms)
 ;;       `(if ,(car forms)
 ;;            (and ,@(cdr forms))
 ;;          ())
 ;;       )))
 
 (defun and1 (forms)
-  (if (null forms) 't
-    (if (null (cdr forms)) (car forms)
+  (if (null? forms) 't
+    (if (null? (cdr forms)) (car forms)
       (list 'if (car forms)
             (and1 (cdr forms))
             ())
@@ -727,38 +727,38 @@
 (export-syntax and)
 
 ;; (defmacro when (cond . forms)
-;;   (if (null forms) ()
+;;   (if (null? forms) ()
 ;;     `(if ,cond (progn ,@forms) () )))
 
 (defun when (cond . forms)
-  (if (null forms) ()
+  (if (null? forms) ()
     (list 'if cond (mk-progn forms) () )))
 (export-syntax when)
 
 ;; (defmacro unless (cond . forms)
-;;   (if (null forms) ()
+;;   (if (null? forms) ()
 ;;     `(if ,cond () (progn ,@forms) )))
 
 (defun unless (cond . forms)
-  (if (null forms) ()
+  (if (null? forms) ()
     (list 'if cond () (mk-progn forms) )))
 (export-syntax unless)
 
 ;; (defmacro block (identifier . forms)
-;;   (if (null forms) ()
+;;   (if (null? forms) ()
 ;;     `(let/cc ,identifier ,@forms)))
 
 (defun block (identifier . forms)
-  (if (null forms) ()
+  (if (null? forms) ()
     (cons 'let/cc
           (cons identifier forms))))
 (export-syntax block)
 
 ;; (defmacro return-from (identifier . form)
-;;   `(,identifier ,(if (null form) () (car form))))
+;;   `(,identifier ,(if (null? form) () (car form))))
 
 (defun return-from (identifier . form)
-  (list identifier (if (null form) () (car form))))
+  (list identifier (if (null? form) () (car form))))
 (export-syntax return-from)
 
 ;;; ----------------------

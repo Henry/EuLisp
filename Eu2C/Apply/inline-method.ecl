@@ -113,7 +113,7 @@
         (if (eq c-mth mth)
             (next-specific-method1 (cdr m-lst) dom mth s-dom s-mth)
           (if (and (more-specific-p dom c-dom)
-                   (or (null s-dom)
+                   (or (null? s-dom)
                        (more-specific-p c-mth s-dom)))
               (next-specific-method1 (cdr m-lst) dom mth c-dom c-mth)
             (next-specific-method1 (cdr m-lst) dom mth s-dom s-mth))))

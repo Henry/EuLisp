@@ -30,8 +30,8 @@
    syntax (eulisp0x timing))
 
 (defun umdrehen (l)
-  (if (null l) ()
-    (if (null (cdr l))
+  (if (null? l) ()
+    (if (null? (cdr l))
         l
       (cons (car (umdrehen (cdr l)))
             (umdrehen (cons (car l)

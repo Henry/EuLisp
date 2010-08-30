@@ -83,7 +83,7 @@
         (t (cons (car cenv) (unbind1 vl (cdr cenv) oenv)))))
 
 (defun bind-vars (var-list init-list type-list rgloc-list wgloc-list)
-  (cond ((null var-list) ())
+  (cond ((null? var-list) ())
         (t (bind-vars1 (car var-list)
                        (if init-list (l2m-a (dynamic *arg-context*)
                                             (car init-list)) ())
@@ -112,7 +112,7 @@
   (subst-and-check-tempvar1 link locstat type))
 
 (defun subst-and-check-tempvar1 (link var type)
-  (if (null link) ()
+  (if (null? link) ()
     (let* ((stat (car (car link)))
            (in (cdr (car link)))
            (td (?type-descr stat))

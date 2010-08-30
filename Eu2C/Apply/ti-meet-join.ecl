@@ -134,7 +134,7 @@
   (let ((code1 (?code expr1))
         (code2 (?code expr2)))
     (and (subcode-p code1 code2)
-         (null (eq-code-p code1 code2)))))
+         (null? (eq-code-p code1 code2)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Answer whether a type expr is equal to another.

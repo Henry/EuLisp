@@ -175,7 +175,7 @@
   (clrhash *the-statistics*))
 
 (defun ti-statistics (key)
-  (if (null key) (ti-error))
+  (if (null? key) (ti-error))
   (let ((value (get-ti-statistics key)))
     (if value
         (setf (gethash key *the-statistics*) (+ value 1))

@@ -32,7 +32,7 @@
             (i)
             (remove-if
              (lambda (word-in-table)
-               (null (eql (element (as-lowercase word) i)
+               (null? (eql (element (as-lowercase word) i)
                           (element (as-lowercase word-in-table) i))))
              table)))
           (dotimes (i (size word))

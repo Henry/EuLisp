@@ -67,7 +67,7 @@
        ,@body)))
 
 (defun make-dynamic-let-vars (vars)
-  (cond ((null vars) nil)
+  (cond ((null? vars) nil)
         ((symbolp (car vars))
          (cons (make-and-collect-dynamic-id (car vars))
                (make-dynamic-let-vars (cdr vars))))

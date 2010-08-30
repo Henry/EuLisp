@@ -40,7 +40,7 @@
  expose (accessors))
 
 (defun make-supers (supers)
-  (if (null supers) '(<mzs-object>)
+  (if (null? supers) '(<mzs-object>)
     (list (make-eulisp-class-id (car supers)))))
 
 (defmacro def-mzs-object (name super . slots)

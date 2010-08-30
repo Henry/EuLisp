@@ -28,16 +28,15 @@
 ;;;-----------------------------------------------------------------------------
 
 #module dynamic075
-
-(import
- (eulisp-kernel pair symbol null pair-ext)
-
- syntax
- (eulisp-kernel
-  list-ext
-  (only (declare special) common-lisp)
-  (rename ((defvar cl:defvar)) common-lisp))
- )
+(import (eulisp-kernel
+         pair
+         symbol
+         null
+         pair-ext)
+ syntax (eulisp-kernel
+         list-ext
+         (only (declare special) common-lisp)
+         (rename ((defvar cl:defvar)) common-lisp)))
 
 ;;defined macros: defvar dynamic dynamic-let dynamic-setq
 
@@ -65,7 +64,7 @@
        ,@body)))
 
 (defun make-dynamic-let-vars (vars)
-  (cond ((null vars) nil)
+  (cond ((null? vars) nil)
         ((symbolp (car vars))
          (cons (make-and-collect-dynamic-id (car vars))
                (make-dynamic-let-vars (cdr vars))))

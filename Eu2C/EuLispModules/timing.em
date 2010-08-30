@@ -49,7 +49,7 @@
        (if (,%eq (,start-timer) (%literal ,<c.long> 0))
            (progn
              (setq res ,form)
-             (if (,%eq (,timer ,(if (null messg)
+             (if (,%eq (,timer ,(if (null? messg)
                                     `(,c.string ,std-fmt)
                                   `(,c.string ,(car messg))))
                        (%literal ,<c.long> 0))

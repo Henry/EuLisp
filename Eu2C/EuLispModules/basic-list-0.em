@@ -41,7 +41,6 @@
            car
            cdr
            cons
-           null
            null?
            list
            %list-length
@@ -90,12 +89,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; predicates (automatic generation at apply-level-1 isn't possible)
 ;;;-----------------------------------------------------------------------------
-(defun null (object)
-  (if (%eq (%cast %signed-word-integer object)
-           (%cast %signed-word-integer ()))
-      t
-    nil))
-
 (defun null? (object)
   (if (%eq (%cast %signed-word-integer object)
            (%cast %signed-word-integer ()))
@@ -166,15 +159,6 @@
     ((var var0) (atom? <cons>))
     ((var var1) (atom? <object>))
     ((var var2) (atom? <object>)))))
-
-(%annotate-function
-  null new-signature
-  (((var0 var1)
-    ((var var0) (atom? (and <object> (not <null>))))
-    ((var var1) (atom? <null>)))
-   ((var0 var1)
-    ((var var0) (atom? <null>))
-    ((var var1) (atom? (and <object> (not <null>)))))))
 
 (%annotate-function
   null? new-signature

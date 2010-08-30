@@ -156,7 +156,7 @@
 ;; adds one new element to an environment if it is not NIL
 ;; in the cases when this element cannot be NIL cons is used for efficiency
 (defun env-plus (new env)
-  (if (null new)
+  (if (null? new)
       env
     (cons new env)))
 
@@ -173,7 +173,7 @@
       (error-no-lexical-binding id)))
 
 (defun add-top-lexical (obj)
-  (cond ((null (member (?identifier obj) (dynamic lex-env)
+  (cond ((null? (member (?identifier obj) (dynamic lex-env)
                        :key #'?identifier))
          (push obj (dynamic lex-env))
          t)
@@ -328,7 +328,7 @@
 
                  (setq body             ;; this is neccesary because of the
                        ;; progn-simplification
-                       (cond ((null body) nil)         ; no expressions?
+                       (cond ((null? body) nil)         ; no expressions?
                              ((and (consp body)        ; more than 1 expression?
                                    (eq (first body) 'es::progn))
                               (cdr body))
@@ -424,8 +424,8 @@
   body)
 
 (defun add-top-lexical-bindings (binding-s)
-  (cond ((null binding-s) t)
-        ((null (consp binding-s))
+  (cond ((null? binding-s) t)
+        ((null? (consp binding-s))
          (add-top-lexical binding-s))
         ((add-top-lexical-bindings (car binding-s))
          (add-top-lexical-bindings (cdr binding-s)))
@@ -439,29 +439,29 @@
   (list ^init module-name))
 
 (defun used-modules-initialization (modules)
-  (if (null modules) nil
+  (if (null? modules) nil
     (let ((initfun (?toplevel-forms (car modules))))
-      (if (null initfun)
+      (if (null? initfun)
           (used-modules-initialization (cdr modules))
         (cons (make-instance <app> :function initfun :arg-list () )
               (used-modules-initialization (cdr modules)))))))
 
 (defun splice-lists (l)
-  (cond ((null l) nil)
+  (cond ((null? l) nil)
         ((listp (car l))
          (nconc (car l) (splice-lists (cdr l))))
-        ((null (cdr l)) l)
+        ((null? (cdr l)) l)
         (t (splice-lists-1 l))))
 
 (defun splice-lists-1 (l)
   ;;l has at least 2 elements and«its first one isn't a list
-  (cond ((null (cdr l))
+  (cond ((null? (cdr l))
          (if (listp (car l)) (car l) l))
         ((listp (second l))
          (setf (cdr l)
                (nconc (second l) (splice-lists (cddr l))))
          l)
-        ((null (cddr l)) l)
+        ((null? (cddr l)) l)
         (t (splice-lists (cdr l))
            l)))
 
@@ -549,17 +549,17 @@
   (cddr (cddr module-def)))
 
 (defun trans-directives (module-directives)
-  (cond ((null module-directives) nil)
-        ((null (consp module-directives))
+  (cond ((null? module-directives) nil)
+        ((null? (consp module-directives))
          (error-bad-module-directive module-directives nil))
-        ((null (cdr module-directives))
+        ((null? (cdr module-directives))
          (error-bad-module-directive (car module-directives) nil))
-        ((null (member (first module-directives)
+        ((null? (member (first module-directives)
                        ^(import syntax expose export c-import)))
          (error-bad-module-directive (first module-directives)
                                      (second module-directives))
          (trans-directives (cddr module-directives)))
-        ((null (listp (second module-directives)))
+        ((null? (listp (second module-directives)))
          (error-bad-module-directive (first module-directives)
                                      (second module-directives))
          (trans-directives (cddr module-directives)))
@@ -714,7 +714,7 @@
                     (if-syntax if2))))
 
 (defun if-diff-1 (if1 if2)
-  (cond ((null if1) nil)
+  (cond ((null? if1) nil)
         ((member (car if1) if2)
          (if-diff-1 (cdr if1) if2))
         (t (cons (car if1)
@@ -729,7 +729,7 @@
            (only-interface identifiers interface if-spec)))
 
 (defun only-interface (identifiers interface if-spec)
-  (if (null identifiers) nil
+  (if (null? identifiers) nil
     (let ((object-in-import
            (member (car identifiers) (if-import interface)
                    :key #'?identifier))
@@ -762,7 +762,7 @@
                    (if-syntax interface)))))
 
 (defun rename-binding (binding bindings-to-be-renamed rename-spec)
-  (cond ((null bindings-to-be-renamed) binding)
+  (cond ((null? bindings-to-be-renamed) binding)
         ((eq binding (car bindings-to-be-renamed))
          (make-binding :identifier (second (car rename-spec))
                        :refers-to binding))

@@ -85,7 +85,7 @@
 (defun small-table-ref-aux
   (entries key default)
   (cond
-    ((null entries)
+    ((null? entries)
      default)
     ((eq (table-key entries)
          key)
@@ -96,7 +96,7 @@
 (defun set-small-table-ref
   (table key value)
   (let ((entries (table-entries table)))
-    (if  (null entries)
+    (if  (null? entries)
         (progn (set-table-entries table (make-table-entry key value ()))
                value)
       (set-small-table-ref-aux entries key value (table-next entries))
@@ -108,7 +108,7 @@
   (cond
     ((eq key (table-key entries))
      (set-table-value entries value))
-    ((null next)
+    ((null? next)
      (set-table-next entries (make-table-entry key value ())))
     (t (set-small-table-ref-aux (table-next entries) key value (table-next next)))))
 
@@ -116,7 +116,7 @@
 (defun small-table-delete
   (table key)
   (let ((entries (table-entries table)))
-    (if (null entries)
+    (if (null? entries)
         ()
       (if (eq key (table-key entries))
           (set-table-entries table (table-next entries))
@@ -126,7 +126,7 @@
 
 (defun small-table-delete-aux
   (entries key before)
-  (cond ((null entries)
+  (cond ((null? entries)
          ())
         ((eq (table-key entries) key)
          (set-table-next before (table-next entries)))

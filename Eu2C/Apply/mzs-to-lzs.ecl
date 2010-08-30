@@ -35,6 +35,7 @@
          MZS
          ;;  LZS-mop ; ~class-of
          lzs-modules
+         null
          accessors
          vector
          simple-programming ; only for the hack !!!
@@ -54,7 +55,8 @@
                 reverse
                 member
                 format  ; only for the hack !!!
-                ) common-lisp)
+                )
+               common-lisp)
          ;;  code-print
          ;;  code-debug
          debugging
@@ -62,7 +64,7 @@
          ;;  codegen-data ; get-structure-offset (possible: get-instance-size), size-of
          )
  syntax (eulisp1)
- export (mzs2lzs-4-modules ; (modul-list)
+ export (mzs2lzs-4-modules
          *assembler-code-generated*))
 
 (defvar *assembler-code-generated* ())
@@ -78,7 +80,7 @@
   ;;  (mzs2lzs-functions (?fun-list (car m-list))) ; exported-funs
   ;;  (mzs2lzs-functions (get-functions-used-in-literals)))
 
-  (if (null m-list) (mzs2lzs-functions (get-functions-used-in-literals))
+  (if (null? m-list) (mzs2lzs-functions (get-functions-used-in-literals))
     (progn ;(pause-mzs2lzs)
       (mzs2lzs-4-module (car m-list))
       (mzs2lzs-4-modules1 (cdr m-list)))))
@@ -90,7 +92,7 @@
   )
 
 (defun mzs2lzs-functions (fun-list)
-  (if (null fun-list) ()
+  (if (null? fun-list) ()
     (progn (mzs2lzs-fun (car fun-list))
            (mzs2lzs-functions (cdr fun-list))))
   )
@@ -225,7 +227,7 @@
                 (collect-var-types (?link (vector-ref var-vec idx)))
               ())))
       (if vartype
-          (if (null (cdr vartype))
+          (if (null? (cdr vartype))
               (if (or (eq funtype (car vartype))
                       (eq (car vartype) %void))
                   (setq vartype ())
@@ -356,7 +358,7 @@
       form-list)))
 
 (defun find-label (label labels)
-  (if (null labels) ()
+  (if (null? labels) ()
     (if (eq (car (car labels)) label)
         (cdr (car labels))
       (find-label label (cdr labels))))
@@ -368,7 +370,7 @@
     (if b (append a b) a)))
 
 (defun stats2lzs (stat-list)
-  (if (null stat-list) ()
+  (if (null? stat-list) ()
     (let ((stat (stat2lzs (car stat-list))))
       (if stat (cons stat (stats2lzs (cdr stat-list)))
         (stats2lzs (cdr stat-list)))))
@@ -393,9 +395,9 @@
          (link (?link var)))
     ;; build a correkt statement
     (setf (?instance stat) (vector-ref var-vec 1))
-    (if (null (cdr link)) stat ; result never used
+    (if (null? (cdr link)) stat ; result never used
       (if (and (tempvar-p var)
-               (null (cdr (cdr link))))
+               (null? (cdr (cdr link))))
           ;; result only once used
           (let* ((used-stat (if (eq (cdr (car link)) 0)
                                 (car (cdr link))
@@ -403,7 +405,7 @@
                  (where-used (cdr used-stat)))
             (setq used-stat (car used-stat))
             (if (and (eq block (?block used-stat))
-                     (null (return-p used-stat)))
+                     (null? (return-p used-stat)))
                 (progn
                   (setf (vector-ref (?var-vec (?var-descr used-stat))
                                     where-used) stat)
@@ -448,7 +450,7 @@
   (collect-var-types1 links 0 0 () ()))
 
 (defun collect-var-types1 (links obj sonst instl tl)
-  (if (null links)
+  (if (null? links)
       (if (>= obj sonst) ()
         (if tl (append instl tl) ()))
     (let ((link (car links)))
@@ -513,8 +515,8 @@
          (var (vector-ref var-vec 0))
          (link (?link var)))
     ;; add typecheck
-    (if (or (null inputfoo)
-            (null (or (?type-descr fun)
+    (if (or (null? inputfoo)
+            (null? (or (?type-descr fun)
                       (?range-and-domain fun)))) ()
       (let* ((funtype (vector-ref (if (?type-descr fun)
                                       (?type-descr fun)
@@ -524,7 +526,7 @@
                        (result-path-to-input stat 0 () ()))
                   (collect-var-types link) ())))
         (if vartype
-            (if (null (cdr vartype))
+            (if (null? (cdr vartype))
                 (if (or (eq funtype (car vartype))
                         (eq (car vartype) %void))
                     (setq vartype ())
@@ -543,8 +545,8 @@
                           :arg-list (list app
                                           (expand-literal vartype))
                           :type-descr vec))))))
-    (if (null (cdr link)) app ; result never used
-      (if (and (tempvar-p var) (null (cdr (cdr link))))
+    (if (null? (cdr link)) app ; result never used
+      (if (and (tempvar-p var) (null? (cdr (cdr link))))
           ;; result only once used
           (let* ((used-stat (if (eq (cdr (car link)) 0)
                                 (car (cdr link))
@@ -552,7 +554,7 @@
                  (where-used (cdr used-stat)))
             (setq used-stat (car used-stat))
             (if (and (eq block (?block used-stat))
-                     (null (return-p used-stat)))
+                     (null? (return-p used-stat)))
                 (progn
                   (setf (vector-ref (?var-vec (?var-descr used-stat))
                                     where-used) app)
@@ -606,7 +608,7 @@
               )))))
 
 (defun mk-local-static2 (link)
-  (if (null link) ()
+  (if (null? link) ()
     (let ((stat (car (car link))))
       (if (and (move-p stat) (eq (cdr (car link)) 1))
           (let ((local-static (vector-ref (?var-vec (?var-descr stat)) 0)))
@@ -620,7 +622,7 @@
   )
 
 (defun mk-local-static1 (link var)
-  (if (null (cdr link))
+  (if (null? (cdr link))
       (let* ((fun (analysed-fun))
              (name (name-of fun))
              (printwarn (if (consp name)
@@ -640,7 +642,7 @@
       (mk-local-static11 link))))
 
 (defun mk-local-static11 (link)
-  (if (null link) ()
+  (if (null? link) ()
     (let ((stat (car (car link))))
       (if (and (move-p stat) (eq (cdr (car link)) 1))
           (let ((local-static (vector-ref (?var-vec (?var-descr stat)) 0)))
@@ -653,12 +655,12 @@
   )
 
 (defun is-parameter (link)
-  (if (null link) ()
+  (if (null? link) ()
     (if (fun-p (car (car link))) t
       (is-parameter (cdr link)))))
 
 (defun replace-var (link var)
-  (if (null link) ()
+  (if (null? link) ()
     (let ((stat (car (car link)))
           (where (cdr (car link))))
       (if (return-p stat)
@@ -774,8 +776,7 @@
 (defmethod result2lzs ((result <void>) out-label labels)
   () )
 
-;; !!! class <null> not defined ??
-(defmethod result2lzs ((result null) out-label
+(defmethod result2lzs ((result <null>) out-label
                        labels)
   () )
 

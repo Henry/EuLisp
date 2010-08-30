@@ -53,9 +53,9 @@
  )
 
 (defun check-module (path module-source)
-  (cond ((null (and (consp module-source)
+  (cond ((null? (and (consp module-source)
                     ;;is it a true list?
-                    (null (cdr (last module-source)))
+                    (null? (cdr (last module-source)))
                     ;;is it at least (defmodule name directives) ?
                     (<= 3 (length module-source))
                     (eq (first module-source)
@@ -64,7 +64,7 @@
                     (symbolp (second module-source))))
          (error-invalid-module-definition module-source path)
          nil)
-        ((null (string-equal (string (second module-source))
+        ((null? (string-equal (string (second module-source))
                              (pathname-name (pathname path))))
          (warning-differing-names-for-module-and-file
           (second module-source)

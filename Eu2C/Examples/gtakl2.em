@@ -49,7 +49,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun gtakl (x y z)
-  (if (null (gshorterp y x))
+  (if (null? (gshorterp y x))
       z
     (gtakl (gtakl (cdr x) y z)
            (gtakl (cdr y) z x)

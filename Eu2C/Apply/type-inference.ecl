@@ -151,7 +151,7 @@
 
 (defmethod compute-inference ((fun <defined-generic-fun>) descrs)
   (ti-format2 t "~%== GENERIC FUNCTION DESCRS:~A" (ti-print-string fun))
-  (if (null (?signature fun))
+  (if (null? (?signature fun))
       (ti-format2 t "~%~A" (?identifier fun)))
   (ti-format2 t "~%== ACTUAL DESCRS:~A"
               (ti-print-string
@@ -179,7 +179,7 @@
     ;;         (ti-short-write-methods t *actual-method-subset*)
     ;;         (terpri) (terpri)))
     (ti-format2 t "~%== NEW DESCRS:~A" (ti-print-string result-descrs))
-    (if (null *actual-method-subset*)
+    (if (null? *actual-method-subset*)
         (ti-error))      ;; no applicable method!
     result-descrs))
 
@@ -215,7 +215,7 @@
     ;;      (cond (*ti-verbose*
     ;;       (dotimes (i (length (?type-vec new-descr)))
     ;;         (setq optimized
-    ;;           (or (null (and (subtype-expr-p
+    ;;           (or (null? (and (subtype-expr-p
     ;;                           (get-arg-type old-descr i)
     ;;                           (get-arg-type new-descr i))
     ;;                          (subtype-expr-p

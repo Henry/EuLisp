@@ -133,7 +133,7 @@
 ;;; for initialization
 
 ;; (defun standard-initialize (object slots initlist)
-;;   (if (null slots) object
+;;   (if (null? slots) object
 ;;     (let ((option (find-option (slot-description-keyword (car slots))
 ;;                                initlist
 ;;                                nil)))
@@ -158,7 +158,7 @@
 (%define-function (standard-init <object>)
   ((object <object>) (slots <list>) (initlist <list>)
    (slot-position %unsigned-word-integer))
-  (if (null slots) object
+  (if (null? slots) object
     (%let ((option <list> (find-option (slot-description-keyword (car slots))
                                        initlist
                                        nil))

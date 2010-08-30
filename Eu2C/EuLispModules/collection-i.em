@@ -122,7 +122,7 @@
 (defun listp (object)
   (if (consp object)
       t
-    (if (null object)
+    (if (null? object)
         t
       nil)))
 

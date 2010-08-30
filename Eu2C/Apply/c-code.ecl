@@ -375,7 +375,7 @@
          ;; because they are defined in the application to allow more optimized dispatch
          ;; functions.
          "extern ")
-        ((null (c-extern-p fun))
+        ((null? (c-extern-p fun))
          "static ")
         (t "")))
 
@@ -543,8 +543,8 @@
                               (dynamic *return*)
                             nil))
                 (*context*
-                 (cond ((null colon?) nil)
-                       ((null args) :block)
+                 (cond ((null? colon?) nil)
+                       ((null? args) :block)
                        (t nil))))
                (write-stmt object stream)))
 
@@ -722,7 +722,7 @@
                            args)))
 
 (defmethod write-call ((fun <imported-fun>) args types stream)
-  (if (or (null (dynamic *empty-list-in-register*))
+  (if (or (null? (dynamic *empty-list-in-register*))
           (is-lisp fun))
       (format stream "~@<~A(~:I~{~/EXPR/~^, ~_~})~:>"
               (c-identifier fun)
@@ -1095,7 +1095,7 @@
                           1))
 
 (defun types-and-parameters-1 (required function-signature i)
-  (if (null required)
+  (if (null? required)
       nil
     (progn
       (setf (?type (car required))
@@ -1107,14 +1107,14 @@
                                      (+ i 1))))))
 
 (defun type-var-init-list (vars inits types)
-  (if (null vars) nil
+  (if (null? vars) nil
     (progn
       (unless (?type (car vars)) ;*4*
               (setf (?type (car vars)) (or (car types)
                                            %object)))
       (cons (list (type-identifier (?type (car vars)))
                   (local-c-identifier (car vars))
-                  (null (eq (car inits) ^unknown))
+                  (null? (eq (car inits) ^unknown))
                   (car inits))
             (type-var-init-list (cdr vars) (cdr inits) (cdr types)))
       )))
@@ -1132,7 +1132,7 @@
   (or (sym-p object)
       (literal-instance-p object)
       (class-def-p object)
-      (null (lzs-object-p object))))
+      (null? (lzs-object-p object))))
 
 (defgeneric initial-value (var))
 (defmethod initial-value ((var <global-static>)) (?initial-value var))

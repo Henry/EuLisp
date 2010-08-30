@@ -222,7 +222,7 @@
   (if (< index (length vec-left))
       (let ((left-var (vector-ref vec-left index))
             (right-var (vector-ref vec-right index)))
-        (if (null (eq-type-var-p left-var right-var))
+        (if (null? (eq-type-var-p left-var right-var))
             (add-substitution subs left-var right-var))
         (vec-application-subs vec-left vec-right (+ index 1) subs))))
 

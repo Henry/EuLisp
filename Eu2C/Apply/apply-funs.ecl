@@ -388,7 +388,7 @@
         (es::class-of (setq %class-of function))
         (es::vector-class-instance-size (setq %vector-class-instance-size function))
         (es::cons (setq %cons function))
-        (es::null (setq nullfun function))
+        (es::null? (setq nullfun function))
         (es::eq (setq eqfun function))
         (es::no-applicable-method-error (setq no-applicable-method-error function))
         (es::call-next-method (setq %call-next-method function))

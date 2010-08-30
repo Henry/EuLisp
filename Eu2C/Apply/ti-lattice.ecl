@@ -214,7 +214,7 @@
 (defun find-super-non-compound-type (lattice-type) ;<lattice-type>
   (let* ((supers (?supertypes lattice-type))
          (type (member-with-args (lambda (x)
-                                   (null (?compound x))) supers)))
+                                   (null? (?compound x))) supers)))
     (if type (car type)
       (find-super-non-compound-type (car supers)))))
 
@@ -224,7 +224,7 @@
 
 ;;; Return a list of lattice types corresponding to a list of type names.
 (defun as-lattice-types (identifiers)
-  (if (null identifiers)
+  (if (null? identifiers)
       (list *top*)
     (mapcar #'as-lattice-type identifiers)))
 
@@ -484,7 +484,7 @@
                                 :name (?identifier class)
                                 :class class))
         (subs (list ^bottom)))
-    (if (and (consp supers) (null (car supers)))
+    (if (and (consp supers) (null? (car supers)))
         (setq supers (list *top*)))
     (add-lattice-type-between new-lattice-type
                               (append supers lattice-supers)
@@ -493,7 +493,7 @@
 
 (defmethod ~compute-lattice-type ((class <tail-class-def>)
                                   supers lattice-supers)
-  (if (and (null supers) (null lattice-supers))
+  (if (and (null? supers) (null? lattice-supers))
       (call-next-method class nil (list ^%struct))
     (call-next-method)))
 
@@ -563,8 +563,8 @@
 ;;; Answer whether all subtypes of first arg meet with a given lattice-type.
 (defun meet-all-subtypes-p (supertype     ;<lattice-type>
                             lattice-type) ;<lattice-type>
-  (null (member-with-args (lambda (subtype)
-                            (null (meet-lattice-types-p subtype lattice-type)))
+  (null? (member-with-args (lambda (subtype)
+                            (null? (meet-lattice-types-p subtype lattice-type)))
                           (?subtypes supertype))))
 
 ;;; Answer the normalized complement of a lattice type.

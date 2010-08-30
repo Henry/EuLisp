@@ -69,21 +69,21 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun map-option-list (function option-list)
-  (cond ((null option-list) nil)
+  (cond ((null? option-list) nil)
         ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list)))
         (t (funcall function (car option-list) (cadr option-list))
            (map-option-list function (cddr option-list)))))
 
 (defun mapl-option-list (function option-list)
-  (cond ((null option-list) nil)
+  (cond ((null? option-list) nil)
         ((atom? (cdr option-list))
          (option-error <uneven-option-list> 'option (car option-list)))
         (t (funcall function option-list)
            (mapl-option-list function (cddr option-list)))))
 
 (defun find-option (key option-list error-if-not-found?)
-  (cond ((null option-list)
+  (cond ((null? option-list)
          (when error-if-not-found?
                (option-error <option-not-found>
                              'option key 'options option-list))
@@ -112,8 +112,8 @@
 
 (defun check-options (required-options facultative-options multiple-options
                                        option-list)
-  (cond ((null option-list)
-         (if (null required-options)
+  (cond ((null? option-list)
+         (if (null? required-options)
              t
            (progn (option-error <mising-options>
                                 'options required-options)

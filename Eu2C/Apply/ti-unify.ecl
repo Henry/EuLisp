@@ -117,7 +117,7 @@
 (defmethod add-unify-equation ((subs <type-var-substitutions>)
                                (var <type-var>)
                                (expr <type-var>))
-  (if (null (check-equality subs var expr))
+  (if (null? (check-equality subs var expr))
       (let ((equ (get-last-substitution subs var)))
         (if equ
             (let ((right-expr (?right-expr equ)))

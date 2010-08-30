@@ -73,24 +73,24 @@
 (%annotate-function * code-identifier |eu2c_mult|)
 
 (defun / (number . more-numbers)
-  (if (null more-numbers)
+  (if (null? more-numbers)
       (binary/ 1 number)
     (binary/ number (accumulate1 binary* more-numbers))))
 (%annotate-function / code-identifier |eu2c_div|)
 
 (defun % (number . more-numbers)
-  (if (null more-numbers)
+  (if (null? more-numbers)
       number
     (binary% number (accumulate1 binary* more-numbers))))
 (%annotate-function % code-identifier |eu2c_rem|)
 
 (defun gcd (number . more-numbers)
-  (if (null more-numbers)
+  (if (null? more-numbers)
       number
     (accumulate binary-gcd number more-numbers)))
 
 (defun lcm (number . more-numbers)
-  (if (null more-numbers)
+  (if (null? more-numbers)
       number
     (accumulate binary-lcm number more-numbers)))
 

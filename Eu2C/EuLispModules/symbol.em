@@ -99,7 +99,7 @@
   $converter-string)
 
 (defun gensym string
-  (if (null string)
+  (if (null? string)
       (gensym1 "G")
     (gensym1 (car string))))
 
@@ -122,7 +122,7 @@
 (%define-function (find-symbol-in-table <object>)
   ((name <string>)
    (table <list>))
-  (cond ((null table)
+  (cond ((null? table)
          ())
         ((%eq #%i0
               (strcmp (%select name <string> characters)

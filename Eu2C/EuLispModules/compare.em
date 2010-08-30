@@ -137,7 +137,7 @@
 ;;                         (class-slot-readers (%class-of object1))))
 ;;
 ;;  (defun compare-slot-values (object1 object2 slot-readers)
-;;    (if (null slot-readers) 't
+;;    (if (null? slot-readers) 't
 ;;        (and (equal ((car slot-readers) object1)
 ;;                    ((car slot-readers) object2))
 ;;             (compare-slot-values object1 object2
@@ -157,7 +157,7 @@
 ;;          (equal-string object1 object2)
 ;;          (if (vectorp object1)
 ;;            (equal-vector object1 object2)
-;;          (if (null object1)      ; 1.8.93 fehler rest wird abgeschnitten
+;;          (if (null? object1)      ; 1.8.93 fehler rest wird abgeschnitten
 ;; ergebnis ist t
 ;;            t
 ;;            (if (consp object1)

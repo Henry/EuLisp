@@ -78,8 +78,7 @@
 (%annotate-function cons interpreter cons)
 (%annotate-function append interpreter append)
 (%annotate-function eq interpreter eq)
-(%annotate-function null interpreter null)
-;;(%annotate-function null? interpreter null?)
+(%annotate-function null? interpreter null?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference

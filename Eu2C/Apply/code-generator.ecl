@@ -153,7 +153,7 @@
         (name-global-object (?toplevel-forms module)))
   (mapc #'name-global-object (?class-def-list module))
   (mapc (lambda (con)
-          (when (or (null (fun-p (?value con)))
+          (when (or (null? (fun-p (?value con)))
                     (function-needed-p (?value con))
                     (imported-p (?value con)))
                 (name-global-object con)))

@@ -38,7 +38,7 @@
   `(progn ,@(da1 aclist)))
 
 (defun da1 (aclist)
-  (if (null aclist) ()
+  (if (null? aclist) ()
     (let ((el (car aclist)))
       `(,(mk!acc el)
         ,(ex!acc el)

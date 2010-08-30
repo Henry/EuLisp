@@ -169,7 +169,7 @@
       (setq typedescrs
             (inference fun typedescrs))
       (if (and (generic-fun-p fun) *actual-method-subset*
-               (null (cdr *actual-method-subset*))) ; only one method
+               (null? (cdr *actual-method-subset*))) ; only one method
           (progn
             ;;           (format t "M")
             (setq fun (?fun (car *actual-method-subset*)))
@@ -197,7 +197,7 @@
           (setf (?body curblock)
                 (append-stat (?body curblock) call))
           ;; add annotation to the function
-          (cond ((null (funcall-p call))
+          (cond ((null? (funcall-p call))
                  (setf (dynamic calls)
                        (cons call (dynamic calls)))))
           ;; result
@@ -249,7 +249,7 @@
                         (end-blocks  (?end-blocks f-label))
                         (calls (?calls fun)))
                    (if (and (eq start-block (car end-blocks))
-                            (null (cdr end-blocks)))
+                            (null? (cdr end-blocks)))
                        (if (or (module-init-fun-p (analysed-fun))
                                (eq (dynamic *inline*) 0))
                            (and (or (slot-accessor-fun-p fun)
@@ -269,7 +269,7 @@
     (if (< nr (dynamic *inline*)) t ())))
 
 (defun only-asm-stats1 (stats n)
-  (if (null stats) n
+  (if (null? stats) n
     (let ((stat (car stats)))
       (if (or (last-asm-p stat)
               (asm-p stat)

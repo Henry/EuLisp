@@ -117,7 +117,7 @@
   (map #'make-syntactic obj))
 
 (defun make-list-syntactic (l)
-  (cond ((null l) nil)
+  (cond ((null? l) nil)
         ((atom? l) (make-syntactic l))
         (t (cons (make-list-syntactic (car l))
                  (make-list-syntactic (cdr l))))))
@@ -161,7 +161,7 @@
         (body (?body fun)))
     (cond (interpreter
            (apply interpreter args))
-          ((null (eq body ^unknown))
+          ((null? (eq body ^unknown))
            (with-new-values (?var-list (?params fun))
                             (?rest (?params fun))
                             args
@@ -262,7 +262,7 @@
     oddp
 
     ;;--- list
-    null
+    null?
     consp
     atom?
     cons

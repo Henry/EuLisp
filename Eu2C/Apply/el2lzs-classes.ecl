@@ -266,13 +266,13 @@
 (defun name-slot-accessors (slot)
   ;;installs default names for accessors not explicitely named
   (when (and (~slot-description-slot-reader slot)
-             (null (?identifier (~slot-description-slot-reader slot))))
+             (null? (?identifier (~slot-description-slot-reader slot))))
         (setf (?identifier (~slot-description-slot-reader slot))
               (list ^reader (~slot-description-name slot)
                     ^of (?identifier (?slot-of slot))
                     )))
   (when (and (~slot-description-slot-writer slot)
-             (null (?identifier (~slot-description-slot-writer slot))))
+             (null? (?identifier (~slot-description-slot-writer slot))))
         (setf (?identifier (~slot-description-slot-writer slot))
               (list ^setter
                     (~slot-description-name slot)
@@ -345,7 +345,7 @@
                         (dynamic lex-env)))))
 
 (defun slot-keywords (slot-specs)
-  (if (null slot-specs) nil
+  (if (null? slot-specs) nil
     (let ((keyword-option (find-option ^keyword (cdar slot-specs) nil)))
       (if keyword-option
           (cons (car keyword-option)

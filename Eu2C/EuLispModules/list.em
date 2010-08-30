@@ -46,7 +46,6 @@
    expose ((only (<null>
                   <cons>
                   <list>
-                  null
                   null?
                   cons
                   car

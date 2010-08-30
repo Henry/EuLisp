@@ -188,7 +188,7 @@
   (type-args-1 signature args 1))
 
 (defun type-args-1 (signature args i)
-  (if (null args) nil
+  (if (null? args) nil
     (cons (type-expr-for-c (svref signature i)
                            (first args))
           (type-args-1 signature (rest args) (+ i 1)))))
@@ -210,7 +210,7 @@
   (or (?type var)
       (setf (?type var)
             (if (and (named-const-p var)
-                     (null (eq (?value var) ^unknown)))
+                     (null? (eq (?value var) ^unknown)))
                 (~class-of (?value var))
               %object))))
 

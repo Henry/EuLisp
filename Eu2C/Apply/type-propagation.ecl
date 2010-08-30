@@ -82,7 +82,7 @@
 
 (defun make-formal-type-descr1
   (tpathes stat result con-type var-vec arg-num old-type-descr recursive)
-  (if (null tpathes) old-type-descr
+  (if (null? tpathes) old-type-descr
     (let* ((curpath (car tpathes))
            ;;             (typevec (make-vector (+ arg-num 1)))
            ;;             (typedescr (make <formal-type-descr>
@@ -134,7 +134,7 @@
   )
 
 (defun make-actual-type-descr1 (tpathes stat var-vec arg-num old-type-descr)
-  (if (null tpathes) old-type-descr
+  (if (null? tpathes) old-type-descr
     (let* ((curpath (car tpathes))
            ;;             (typevec (make-vector (+ arg-num 1)))
            ;;             (typedescr (make <act-type-descr>
@@ -153,7 +153,7 @@
              (cdr tpathes) stat var-vec arg-num old-type-descr)))))
 ;; *hf* 27.05
 (defun make-move-tds (tds var move)
-  (if (null tds) ()
+  (if (null? tds) ()
     (let* ((curp (car tds))
            (td (empty-actual-descr 1))
            (type (get-arg-type var curp)))
@@ -246,7 +246,7 @@
 ;;))
 
 ;;(defun prop-var-type (var type path err)
-;;  (if (null (or (tempvar-p var) (local-static-p var))) ()
+;;  (if (null? (or (tempvar-p var) (local-static-p var))) ()
 ;; !!!! global variables not correct implemented !!!
 ;;      (let ((new ()))
 ;;        (dynamic-let ((new-td-stats ()))
@@ -255,7 +255,7 @@
 ;;        (next-inference-steps new))))
 ;;
 ;;(defun next-inference-steps (td-st-list)
-;;  (cond ((null td-st-list) ())
+;;  (cond ((null? td-st-list) ())
 ;;        (t (let ((td (car (car td-st-list)))
 ;;                 (stat (cdr (car td-st-list))))
 ;;             (cond ((specialize-fun-app-type
@@ -267,12 +267,12 @@
 ;;             (next-inference-steps (cdr td-st-list))))))
 
 ;;(defun prop-link-type (spath path link type err)
-;;  (if (null spath) ()
+;;  (if (null? spath) ()
 ;;      (progn (find-link-to-set-type (car spath) link path type err)
 ;;             (prop-link-type (cdr spath) path link type err))))
 ;;
 ;;(defun find-link-to-set-type (block link path type err)
-;;  (cond  ((null link) ())
+;;  (cond  ((null? link) ())
 ;;         ((eq (car (car link)) block)
 ;;          (set-type (car link) path type err)
 ;;          (find-link-to-set-type block (cdr link) path type err))
@@ -289,7 +289,7 @@
 ;;           (let ((tvec (?type-vec curtd)))
 ;;             (cond ((eq (vector-ref tvec where) type) () )
 ;;                   (t (setf (vector-ref tvec where) type)
-;;                      (if (null (assoc curtd (dynamic new-td-stats)))
+;;                      (if (null? (assoc curtd (dynamic new-td-stats)))
 ;;                        (setf (dynamic new-td-stats)
 ;;                              (cons (cons curtd stat)
 ;;                                    (dynamic new-td-stats)))
@@ -445,14 +445,14 @@
   (get-var-type1 var path (?link var)))
 
 (defun get-var-type1 (var path varlink)
-  (if (null path) (general-type)
+  (if (null? path) (general-type)
     (let* ((stat (?stat path))
            (link (assoc stat varlink)))
-      (if (null link) (get-var-type3 var (?t-descr-before path) varlink)
+      (if (null? link) (get-var-type3 var (?t-descr-before path) varlink)
         (get-descr-type path (cdr link))))))
 
 (defun get-var-type3 (var tds link)
-  (if (null tds) (general-type)
+  (if (null? tds) (general-type)
     (if (consp tds)
         (let ((tp (get-var-type2 var (car tds) link)))
           (if tp tp
@@ -460,15 +460,15 @@
       (get-var-type1 var tds link))))
 
 (defun get-var-type2 (var path varlink)
-  (if (null path) ()
+  (if (null? path) ()
     (let* ((stat (?stat path))
            (link (assoc stat varlink)))
-      (if (null link) (get-var-type3 var (?t-descr-before path) varlink)
+      (if (null? link) (get-var-type3 var (?t-descr-before path) varlink)
         (get-descr-type path (cdr link))))))
 
 ;;***HGW removed unused function
 ;; (defun find-type-descr (path typedescrs)
-;;   (if (null typedescrs) ()
+;;   (if (null? typedescrs) ()
 ;;     (let ((typedescr (car typedescrs)))
 ;;       (if (eq  (?path typedescr) path) typedescr
 ;;         (find-type-descr path (cdr typedescrs))))))
@@ -476,13 +476,13 @@
 
 (defmethod get-arg-type ((var <global-static>) path)
   (let ((typ (?type var)))
-    (if (null typ) (%object-type)
+    (if (null? typ) (%object-type)
       (class-as-type-expr typ)))
   )
 
 (defmethod get-arg-type ((var <imported-static>) path)
   (let ((typ (?type var)))
-    (if (null typ) (%object-type)
+    (if (null? typ) (%object-type)
       (class-as-type-expr typ)))
   )
 

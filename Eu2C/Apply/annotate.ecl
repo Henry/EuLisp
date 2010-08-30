@@ -222,7 +222,7 @@
 (deflocal *saved-annotations* ())
 
 (defun transdef-%annotate (object options handler-table)
-  (if (null options)
+  (if (null? options)
       nil
     (let* ((key (car options))
            (option (cadr options))
@@ -258,7 +258,7 @@
 (deftransdef (%provide-compiler-info . options)
   (with-defining-form
    (labels ((traverse-options (options)
-                              (unless (null options)
+                              (unless (null? options)
                                       (provide-compiler-info (car options)
                                                              (cadr options))
                                       (traverse-options (cddr options)))))

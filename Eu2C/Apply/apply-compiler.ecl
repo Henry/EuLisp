@@ -236,7 +236,7 @@
   ;; the result is the module describing the basic system or () if compilation is
   ;; done from scratch
   (dynamic-let ((*info-level* (dynamic *system-info-level*)))
-               (if (null basic-system)
+               (if (null? basic-system)
                    (progn
                      (setq *basic-system* nil)
                      (load-module ^apply-level-1)            ; load the most basic things

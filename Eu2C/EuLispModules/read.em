@@ -27,71 +27,121 @@
 ;;;  Authors: Horst Friedrich, Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
 (defmodule read
-
-  (import
-   ;;------
-   ((only (<class> <object> <int>
-                   <symbol> <integer>
-                   %signed-word-integer %unsigned-word-integer
-                   %signed-byte-integer
-                   %string
-                   make-fpint make-swi
-                   %extract
-                   %cast
-                   %mult %plus
-                   %eq %gt %lt
-                   t) tail)
-    (only (<cons> <null> <list>
-                  null null? consp cons car %pair-length
+  (import ((only (<class>
+                  <object>
+                  <int>
+                  <symbol>
+                  <integer>
+                  %signed-word-integer
+                  %unsigned-word-integer
+                  %signed-byte-integer
+                  %string
+                  make-fpint make-swi
+                  %extract
+                  %cast
+                  %mult %plus
+                  %eq %gt %lt
+                  t)
+                 tail)
+           (only (<cons>
+                  <null>
+                  <list>
+                  null?
+                  consp
+                  cons
+                  car
+                  %pair-length
                   eq
                   %minus %lshiftr
                   %and %ge
-                  %void %double-float) apply)
-    (only (get-dispatch-macro-character) read-i)
-    (only (error <condition>) condition-i)
-    (only ($closed-bracket ;$opend-bracket
-           $point
-           $char-string $char-single-escape
-           $char-eof $char-formfeed
-           $char-return $char-newline
-           $char-open-bracket $char-string-hex-l
-           $char-string-hex-u $char-control-extension
-           *char-class-token* char-class
-           *token-states* half-vec-ref half-vec-vec-ref
-           upperp
-           digit2figure10 digit2figure16) char-tables)
-    (only ($standard-input %peek-unit %unread-unit %read-unit
-                           ensure-open-character-input-stream
-                           sscanf-3 file-descriptor-pointer
-                           <stream> <end-of-stream>
-                           stream-eos-action setf-stream-eos-action
-                           *not-eof-action*) stream-i)
-    (only (read-line input uninput) stream-generic)
-    (only (<double-float> dble set-dble make-dble) double-float-i)
-    (only (int-p) int-i)
-    (only (strcmp) c-string-interface)
-    (only (make-symbol) symbol)
-    (only (prin) print)
-    (only (make-string <string> duplicate-%string) string-ii)
-    (only (initialize-vector-from-list
-           make-uninitialized-vector  <vector>) vector)
-    (only (convert-int-char convert-char-int <character>) character)
-    ;; for <int>
-    (only (<string-stack> ?stack-string  ?cur-index *buffer-1*
-                          *buffer-2* push-buffer clear-buffer) string-stack)
-    )
-
-   syntax
-   (tail)
-
-   export
-   (input uninput read-line
-          <syntax-error>
-          read-based-int1 ;; nicht el
-          read   ; nicht in el0.99
-          ;; read-unit peek-unit ; nicht in el0.99
-          )
-   )
+                  %void %double-float)
+                 apply)
+           (only (get-dispatch-macro-character)
+                 read-i)
+           (only (error <condition>)
+                 condition-i)
+           (only ($closed-bracket
+                  ;$opend-bracket
+                  $point
+                  $char-string
+                  $char-single-escape
+                  $char-eof
+                  $char-formfeed
+                  $char-return
+                  $char-newline
+                  $char-open-bracket
+                  $char-string-hex-l
+                  $char-string-hex-u
+                  $char-control-extension
+                  *char-class-token*
+                  char-class
+                  *token-states*
+                  half-vec-ref
+                  half-vec-vec-ref
+                  upperp
+                  digit2figure10
+                  digit2figure16)
+                 char-tables)
+           (only ($standard-input
+                  %peek-unit
+                  %unread-unit
+                  %read-unit
+                  ensure-open-character-input-stream
+                  sscanf-3
+                  file-descriptor-pointer
+                  <stream>
+                  <end-of-stream>
+                  stream-eos-action
+                  setf-stream-eos-action
+                  *not-eof-action*)
+                 stream-i)
+           (only (read-line
+                  input
+                  uninput)
+                 stream-generic)
+           (only (<double-float>
+                  dble
+                  set-dble
+                  make-dble)
+                 double-float-i)
+           (only (int-p)
+                 int-i)
+           (only (strcmp)
+                 c-string-interface)
+           (only (make-symbol)
+                 symbol)
+           (only (prin)
+                 print)
+           (only (make-string
+                  <string>
+                  duplicate-%string)
+                 string-ii)
+           (only (initialize-vector-from-list
+                  make-uninitialized-vector
+                  <vector>)
+                 vector)
+           (only (convert-int-char
+                  convert-char-int
+                  <character>)
+                 character)
+           ;; for <int>
+           (only (<string-stack>
+                  ?stack-string
+                  ?cur-index
+                  *buffer-1*
+                  *buffer-2*
+                  push-buffer
+                  clear-buffer)
+                 string-stack))
+   syntax (tail)
+   export (input
+           uninput
+           read-line
+           <syntax-error>
+           read-based-int1 ;; nicht el
+           read   ; nicht in el0.99
+           ;; read-unit peek-unit ; nicht in el0.99
+          ))
 
 ;; es fehlt noch eine ausfuehrliche fehlerbehandlung !!
 
@@ -681,7 +731,7 @@
                                                  (make-fpint ch2)))
                                        (function (get-dispatch-macro-character
                                                   #\# subchar)))
-                                  (if (null function)
+                                  (if (null? function)
                                       (syntax-error stream #%i20)
                                     (function stream subchar)))))))))))))))
 

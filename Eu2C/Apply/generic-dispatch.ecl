@@ -770,7 +770,7 @@
 ;;      sortm)))
 ;;
 ;;(defun sort-methods1 (ms lst)
-;;  (if (null ms) lst
+;;  (if (null? ms) lst
 ;;      (let* ((m (car ms))
 ;;             (mdom (~method-domain m)))
 ;;        (if (more-specific-p mdom (car (car lst)))

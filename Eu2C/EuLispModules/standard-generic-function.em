@@ -243,7 +243,7 @@
    (cpl <list>)
    (class <class>)
    (method <object>))
-  (if (null methods) method
+  (if (null? methods) method
     (%let* ((dclass <class>
                     (car (method-domain (%cast <method> (car methods))))))
            (if (%member dclass cpl) ; method is applicable
@@ -344,7 +344,7 @@
    (class1 <class>)
    (class2 <class>)
    (method <object>))
-  (if (null methods) method
+  (if (null? methods) method
     (%let* ((mdomain <cons> (method-domain (%cast <method> (car methods))))
             (dclass1 <class> (car mdomain))
             (dclass2 <class> (car (cdr mdomain))))
@@ -579,7 +579,7 @@
     method))
 
 (defun domain-of-applicable-method-p (m-dom arg-dom)
-  (if (null arg-dom) t
+  (if (null? arg-dom) t
     (if (%member (car m-dom)
                  (class-precedence-list (%cast <class> (car arg-dom))))
         (domain-of-applicable-method-p (cdr m-dom) (cdr arg-dom))

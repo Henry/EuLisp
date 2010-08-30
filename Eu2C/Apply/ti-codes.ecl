@@ -114,7 +114,7 @@
 
 ;;; Answer whether two type codes do meet, e.g. do have set the same bits.
 (defun meet-codes-p (code1 code2)
-  (null (bottom-code-p (meet-codes code1 code2))))
+  (null? (bottom-code-p (meet-codes code1 code2))))
 
 ;;; Answer whether one type code is a subcode of another.
 (defun subcode-p (code1 code2)

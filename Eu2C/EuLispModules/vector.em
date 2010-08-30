@@ -111,7 +111,7 @@
 ;;  (make-fpint (%pair-length l))) ;;(((.. length-1 l)))
 
 ;;(defun length-1 (l)        ; besser aus basic-pair ?
-;;    (if (null l)
+;;    (if (null? l)
 ;;      #%i0
 ;;      (%plus #%i1 (length-1 (cdr l)))))
 
@@ -152,7 +152,7 @@
   ((vector <vector>)
    (i %unsigned-word-integer)
    (elements <list>))
-  (if (null elements) vector
+  (if (null? elements) vector
     (progn (setf-primitive-vector-ref vector i (car elements))
            (initialize-vector-from-list
             vector

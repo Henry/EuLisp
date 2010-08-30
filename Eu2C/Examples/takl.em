@@ -48,16 +48,16 @@
 (deflocal l6 (listn 6))
 
 (defun takl (x y z)
-  (if (null (shorterp y x))
+  (if (null? (shorterp y x))
       z
     (takl (takl (cdr x) y z)
           (takl (cdr y) z x)
           (takl (cdr z) x y))))
 
 (defun shorterp (x y)
-  (if (null y )
+  (if (null? y )
       ()
-    (if  (null x) t
+    (if  (null? x) t
       (shorterp (cdr x)
                 (cdr y))) ))
 

@@ -56,7 +56,7 @@
   )
 
 (defun l2m-function-call (statement arg-list nr arg-context)
-  (if (null arg-list) ()
+  (if (null? arg-list) ()
     (let ((var-or-constant (l2m-a arg-context (car arg-list))))
       (setf (vector-ref (?var-vec (?var-descr statement))
                         nr) var-or-constant)

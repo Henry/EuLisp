@@ -30,7 +30,7 @@
   (import
    (object-0 ;apply-level-1
     (only (hold-threads cont-threads) thread-b)
-    (only (null <list>) basic-list-0)
+    (only (null? <list>) basic-list-0)
     (only (t) basic-list)
     (only (eq) basic-compare)
     (only (<function>) function-i)

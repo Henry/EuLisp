@@ -129,7 +129,7 @@
 (deflocal timer-started ()) ; the interval timer is still not started
 
 (defun start-timer ()
-  (when (null timer-started)
+  (when (null? timer-started)
         ; start the timer to periodically switch between threads
         (set-interval-timer 'real   ;real-timer
                             50000   ;each 50000 microseconds
@@ -185,7 +185,7 @@
 
 ;       (defmethod wait ((thread <thread>) (timeout <object>))
 ;               (cond   ((thread-terminated thread) thread)
-;                       ((null timeout) ())
+;                       ((null? timeout) ())
 ;                       ((eq timeout t)
 ;                        (progn (wait-in-T-LST (waiters thread)) thread))
 ;                       (t (thread-wait-aux thread (get-timer timeout)))))
@@ -231,7 +231,7 @@
 ;               (set-tmp-locks thread tl))
 
 (defun find-tl (on-thread tl-lst thread)
-  (if (null tl-lst)
+  (if (null? tl-lst)
       (let ((tl (make-tmp-lock thread)))
         (hold-threads)
         (set-next-on-thread tl (tmp-locks on-thread))
@@ -244,7 +244,7 @@
 
 
 (defun free-tl-waiters (thread tl-lst)
-  (unless (null tl-lst)
+  (unless (null? tl-lst)
           (when (eq (result tl-lst) 'unknown)
                 (unless (eq (waiter tl-lst) thread)
                         (set-result tl-lst thread)
@@ -341,7 +341,7 @@
 
 
 (defun register-tl-on-timer (tl)
-  (if (null time-queue)
+  (if (null? time-queue)
       (progn
         (set-next-in-time tl ())
         (setq time-queue tl))
@@ -352,7 +352,7 @@
       (insert-tl tl time-queue))))
 
 (defun insert-tl (tl queue)
-  (if (null (next-in-time queue))
+  (if (null? (next-in-time queue))
       (progn
         (set-next-in-time tl ())
         (set-next-in-time queue tl))
@@ -373,7 +373,7 @@
     (progn (cont-threads) (thread-reschedule) (keep-up))))
 
 (defun busy-tmp-locks ()
-  (if (null time-queue)
+  (if (null? time-queue)
       ()
     (if (eq (result time-queue) 'unknown)
         t
@@ -382,7 +382,7 @@
         (busy-tmp-locks)))))
 
 (defun free-expired-waiters (this-time)
-  (unless (null time-queue)
+  (unless (null? time-queue)
           (when (time-lt (end-time time-queue) this-time)
                 (when (eq (result time-queue) 'unknown)
                       (set-result time-queue ())

@@ -353,7 +353,7 @@ given in the constructor form" :class )
   ((representation-object <%pointer-to-vector>) class allocation mm-type)
   (canonize-gc-tracer class representation-object)
   (setq allocation (canonize-allocation class representation-object allocation))
-  (if (and mm-type (or (cl:not (null (~vector-class-instance-length class)))
+  (if (and mm-type (or (cl:not (null? (~vector-class-instance-length class)))
                        (eq allocation ^multiple-size-card)))
       (progn
         (canonize-mm-type class representation-object mm-type)
@@ -454,7 +454,7 @@ given in the constructor form" :class )
   ;;returns either #%i0 or an corresponding lzs-expression with %size-of or
   ;;value of $dynamic-class-mm-card-for-vector-classes
   (let ((size (~vector-class-instance-length class)))
-    (if (null size)
+    (if (null? size)
         (if (eq allocation ^multiple-size-card)
             (literal-instance %signed-word-integer 0)
           $dynamic-class-mm-card-for-vector-classes)
@@ -711,7 +711,7 @@ given in the constructor form" :class )
 ;;           (compiler-error
 ;;            <wrong-initialization-argument-length-for-vector-class> ()
 ;;                           :class class :length initial-length))
-;;          ((and (null initial-length) (cl:not length-parameter))
+;;          ((and (null? initial-length) (cl:not length-parameter))
 ;;           (compiler-error <missing-length-argument> () :class class))
 ;;          (initial-length (literal-instance %signed-word-integer (?byte-length-of-instance representation-instance)))
 ;;;;a hack to get true size
@@ -737,7 +737,7 @@ given in the constructor form" :class )
            (compiler-error
             <wrong-initialization-argument-length-for-vector-class> ()
             :class class :length initial-length))
-          ((and (null initial-length) (cl:not length-parameter))
+          ((and (null? initial-length) (cl:not length-parameter))
            (compiler-error <missing-length-argument> () :class class))
           (initial-length
            `(,%mult (,%cast ,%unsigned-word-integer (,%size-as-component  ,(~vector-class-element-type class) ))
@@ -1133,7 +1133,7 @@ given in the constructor form" :class )
   (mm-describe initialized-classes))
 
 (defun mm-describe(l)
-  (if (null l)
+  (if (null? l)
       ()
     (progn
       (let* ((class (car l))

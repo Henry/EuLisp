@@ -287,7 +287,7 @@
 (defun def-write-super-strategic-lattice-type-p (lattice-type)
   (and (?subtypes lattice-type)
        (eq-lattice-type *bottom* (car (?subtypes lattice-type)))
-       (null (member lattice-type  *def-strategic-lattice-types*))))
+       (null? (member lattice-type  *def-strategic-lattice-types*))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; WRITING TYPE EQUATIONS AND SUBSTITUTIONS

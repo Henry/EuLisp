@@ -52,7 +52,7 @@
 
 (defun unquote-constructor (x)
   (cond ((atom? x)
-         (cond ((or (null x) (numberp x) (stringp x) (eq x t)) x)
+         (cond ((or (null? x) (numberp x) (stringp x) (eq x t)) x)
                (t (mkquote x))))
 
         ((eq (car x) ^unquote) (cadr x))

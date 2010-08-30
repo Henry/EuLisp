@@ -73,7 +73,7 @@
 (defun create-slot-defs (class direct-slot-specs inherited-slot-descriptions)
   ;; creates new slot definition, which means slot definitions introduced by the
   ;; current class and not inherited from the superclass
-  (if (null direct-slot-specs)
+  (if (null? direct-slot-specs)
       nil
     (let* ((slot-spec (car direct-slot-specs))
            (name (get-option ^name slot-spec nil))
@@ -107,7 +107,7 @@
       value)))
 
 (defun create-tail-slot-defs (class slot-specs)
-  (if (null slot-specs)
+  (if (null? slot-specs)
       nil
     (let* ((slot-spec (car slot-specs))
            (name (get-option ^name slot-spec nil))
@@ -147,7 +147,7 @@
     (setf (?place class) nil)
     (setf (?expanded-literal class) nil)
 
-    (cond ((null (?identifier class))
+    (cond ((null? (?identifier class))
            (setf (?identifier class) name))
           ((eq (?identifier class) name))
           (t (warn "identifiers for class name (~A) and binding (~A) are not the same"
@@ -192,7 +192,7 @@
     (setf (?place class) nil)
     (setf (?expanded-literal class) nil)
 
-    (cond ((null (?identifier class))
+    (cond ((null? (?identifier class))
            (setf (?identifier class) name))
           ((eq (?identifier class) name))
           (t (warn "identifiers for class name (~A) and binding (~A) are not the same"
@@ -224,7 +224,7 @@
     ;; compilation
     (setf (?place class) nil)
 
-    (cond ((null (?identifier class))
+    (cond ((null? (?identifier class))
            (setf (?identifier class) name))
           ((eq (?identifier class) name))
           (t (warn "identifiers for class name (~A) and binding (~A) are not the same"
@@ -311,7 +311,7 @@
           (setf (?slot default-function) specializing-slot))
     (setf (?default-function specializing-slot)
           (or default-function (?default-function inherited-slot)))
-    (cond ((null default-function)
+    (cond ((null? default-function)
            (setf (?initvalue specializing-slot)
                  (?initvalue inherited-slot)))
           ((function-with-constant-value-p default-function)
@@ -335,15 +335,15 @@
 (defmethod function-with-constant-value-p ((fun <generic-fun>)) nil)
 (defmethod function-with-constant-value-p ((fun <simple-fun>))
   (let ((body (?body fun)))
-    (and (null (eq body ^unknown))
+    (and (null? (eq body ^unknown))
          (or (and (named-const-p body)
-                  (null (eq (?value body) ^unknown)))
+                  (null? (eq (?value body) ^unknown)))
              (sym-p body)
              (structured-literal-p body)
              (literal-instance-p body)
              (class-def-p body)
              (fun-p body)
-             (null (lzs-object-p body)) ; for example a number
+             (null? (lzs-object-p body)) ; for example a number
              ))))
 
 (defmethod create-slot-defs-of-imported-class (class effective-slot-specs)
@@ -430,14 +430,14 @@
         (t t)))
 
 (defun non-congruent-lambda-lists-p (params1 params2)
-  (null (and (= (length (?var-list params1))
+  (null? (and (= (length (?var-list params1))
                 (length (?var-list params2)))
              (if (?rest params1)
                  (?rest params2)
-               (null (?rest params2))))))
+               (null? (?rest params2))))))
 
 (defun incompatible-method-domain-p (method-domain gf-domain)
-  (cond ((null method-domain) nil)
+  (cond ((null? method-domain) nil)
         ((~subclassp (car method-domain)
                      (car gf-domain))
          (incompatible-method-domain-p (cdr method-domain)
@@ -457,7 +457,7 @@
         (range (get-option ^range options nil))
         (method-class (get-option ^method-class options nil))
         (params (get-option ^parameters options nil)))
-    (cond ((null (?identifier gf))
+    (cond ((null? (?identifier gf))
            (setf (?identifier gf) name))
           ((eq (?identifier gf) name))
           (t (warn "identifiers for generic function name (~A) and binding (~A) are not the same"

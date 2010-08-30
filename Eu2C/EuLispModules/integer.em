@@ -46,7 +46,7 @@
     ()))
 
 (defun oddp (x)
-  (null (zerop (binary-mod x 2))))
+  (null? (zerop (binary-mod x 2))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference

@@ -57,7 +57,7 @@
    )
 
 ;;   (defun map-option-list (function option-list)
-;;     (cond ((null option-list) nil)
+;;     (cond ((null? option-list) nil)
 ;;           ((atom? (cdr option-list))
 ;;            (warn "option list with uneven number of elements; last one was ~A"
 ;;                  (car option-list)))
@@ -65,7 +65,7 @@
 ;;              (map-option-list function (cddr option-list)))))
 
 ;;   (defun mapl-option-list (function option-list)
-;;     (cond ((null option-list) nil)
+;;     (cond ((null? option-list) nil)
 ;;           ((atom? (cdr option-list))
 ;;            (warn "option list with uneven number of elements; last one was ~A"
 ;;                  (car option-list)))
@@ -73,7 +73,7 @@
 ;;              (mapl-option-list function (cddr option-list)))))
 
 (defun find-option (key option-list error-if-not-found?)
-  (cond ((null option-list)
+  (cond ((null? option-list)
          (when error-if-not-found?
                (warn "option ~A not found in option list ~A" key option-list))
          nil)
@@ -102,8 +102,8 @@
 
 (defun check-options (required-options facultative-options multiple-options
                                        option-list)
-  (cond ((null option-list)
-         (if (null required-options)
+  (cond ((null? option-list)
+         (if (null? required-options)
              t
            (progn (warn "missing options: ~A "
                         required-options)
@@ -143,7 +143,7 @@
 (defun cddr (obj) (cdr (cdr obj)))
 
 ;;(defun atom? (object)
-;;  (null (consp object)))
+;;  (null? (consp object)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference

@@ -265,7 +265,7 @@
 
 (defmethod class-as-type-expr ((class <class-def>))
   (let ((lattice-type (?lattice-type class)))
-    (if (null lattice-type)
+    (if (null? lattice-type)
         (ti-format t  "Warning: Can't find lattice type for class ~A" class)
       (lattice-type-to-atomic-type lattice-type))))
 

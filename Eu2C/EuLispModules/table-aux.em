@@ -95,7 +95,7 @@
 
 ;;  (%define-function (%pair-length %signed-word-integer )
 ;;                    ((l <list>))
-;;    (if (null l)
+;;    (if (null? l)
 ;;      #%i0
 ;;      (%plus #%i1 (%pair-length (cdr l)))))
 
@@ -123,28 +123,28 @@
 ;;    (assoc-aux object alist (if lst (car lst) eql)))
 
 ;;  (defun assoc-aux (object alist predicate)
-;;         (cond ((null alist) () )
+;;         (cond ((null? alist) () )
 ;;               ((predicate (car (car alist)) object)
 ;;                (car alist))
 ;;               (t (assoc-aux object (cdr alist) predicate))))
 
 
 (defun assoc (object alist predicate)
-  (cond ((null alist) () )
+  (cond ((null? alist) () )
         ((predicate (car (car alist)) object)
          (car alist))
         (t (assoc object (cdr alist) predicate))))
 
 
 (defun assq (object alist)
-  (cond ((null alist) ())
+  (cond ((null? alist) ())
         ((eq (car (car alist)) object)
          (car alist))
         (t (assq object (cdr alist)))))
 
 
 ;;  (defun assq-aux (object alist)
-;;    (cond ((null alist) nil)
+;;    (cond ((null? alist) nil)
 ;;          ((eq (car (car alist)) object)
 ;;           (car alist))
 ;;          (t (assq-aux object (cdr alist)))))

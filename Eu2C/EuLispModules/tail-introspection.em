@@ -147,7 +147,7 @@
   ((class <class>)
    (object <object>)
    (class-list <list>))
-  (if (null class-list)
+  (if (null? class-list)
       (typecheck-error object class-list)
     (if (%subclassp class (car class-list))
         object

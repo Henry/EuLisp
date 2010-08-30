@@ -71,7 +71,7 @@
 
 (defmethod ~converter ((class <class-def>))
   (labels ((get-converter (class-list)
-                          (cond ((null class-list) nil)
+                          (cond ((null? class-list) nil)
                                 ((?converter (car class-list)))
                                 (t (get-converter (cdr class-list))))))
           (get-converter (~class-precedence-list class))))
@@ -143,7 +143,7 @@
 (defmethod ~vector-class-instance-length-literal (vector-class)
   (let ((initfun (~slot-description-default-function
                   (~find-slot-description vector-class ^length))))
-    (if (null initfun)
+    (if (null? initfun)
         nil
       (init-fun-value (?body initfun) vector-class))))
 
@@ -151,7 +151,7 @@
 (defmethod ~vector-class-instance-length (vector-class)
   (let ((initfun (~slot-description-default-function
                   (~find-slot-description vector-class ^length))))
-    (if (null initfun)
+    (if (null? initfun)
         nil
       (car (?value-list (init-fun-value (?body initfun) vector-class))))))
 

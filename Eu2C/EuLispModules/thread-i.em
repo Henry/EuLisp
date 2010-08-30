@@ -25,21 +25,45 @@
 
 
 (defmodule thread-i
-  (import
-   (object-0 thread-ii thread-b
-             (only (cons car cdr null t) list)
-             (only (eq) compare)
-             (only (setter <function>) function)
-             (only (signal error <thread-condition> <wrong-condition-class>
-                           <domain-condition>) condition)
-             (only (<object> <class> %cast %void %instance-of-p) tail))
-   syntax
-   ((only (when unless) syntax-0))
-   export
-   (TL-empty TL-single TL-on-top TL-on-end TL-revolve
-             TL-leave-first TL-queue-on-top wait-in-T-LST
-             thread-yield The-Sequential-Set))
-
+  (import (object-0
+           thread-ii
+           thread-b
+           (only (cons
+                  car
+                  cdr
+                  null?
+                  t)
+                 list)
+           (only (eq)
+                 compare)
+           (only (setter
+                  <function>)
+                 function)
+           (only (signal
+                  error
+                  <thread-condition>
+                  <wrong-condition-class>
+                  <domain-condition>)
+                 condition)
+           (only (<object>
+                  <class>
+                  %cast
+                  %void
+                  %instance-of-p)
+                 tail))
+   syntax ((only (when
+                  unless)
+                 syntax-0))
+   export (TL-empty
+           TL-single
+           TL-on-top
+           TL-on-end
+           TL-revolve
+           TL-leave-first
+           TL-queue-on-top
+           wait-in-T-LST
+           thread-yield
+           The-Sequential-Set))
 
 (deflocal The-Sequential-Set (make-T-LST))
 
@@ -50,7 +74,7 @@
 
 (%define-function (TL-empty <object>)
   ((TL <T-LST>))
-  (null (First TL)))
+  (null? (First TL)))
 
 ;; test whether there's only one thread in a T-LST; in that case First and
 ;; Last point to the same thread. This Function may fail, if the T-LST is empty
@@ -117,24 +141,24 @@
 
 (%define-function (raise-conditions %void)
   ((thread <thread>))
-  (unless (null (condqueue thread))
+  (unless (null? (condqueue thread))
           (let ((c (car (condqueue thread))))
             (set-condqueue thread (cdr (condqueue thread)))
             (raise-condition c)
             (raise-conditions thread))))
 
 (defun register-condition-1 (queue condpair)
-  (if (null (cdr queue))
+  (if (null? (cdr queue))
       ((setter cdr) queue condpair)
     (register-condition-1 (cdr queue) condpair)))
 
 (defun register-condition (thread condpair)
-  (if (null (condqueue thread))
+  (if (null? (condqueue thread))
       (set-condqueue thread condpair)
     (register-condition-1 (condqueue thread) condpair)))
 
 (defun signal-with-threads (condition continuation . thread)
-  (if (null thread)
+  (if (null? thread)
       (normal-signal condition continuation)
     (if (%instance-of-p condition <thread-condition>)
         (if (threadp (car thread))
@@ -163,7 +187,7 @@
   (m-thread-yield (m-thread to))
   ;; got control back, this is the ONLY such point!!
   (restore-dynamics (saved-dynamics from))
-  (unless (null (condqueue from))
+  (unless (null? (condqueue from))
           (raise-conditions from)))
 
 ;;;-----------------------------------------------------------------------------

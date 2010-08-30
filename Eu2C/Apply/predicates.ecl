@@ -52,8 +52,8 @@
 ;;;-----------------------------------------------------------------------------
 (defun signature-needed-for-code-generation-p (fun)
   ;;answer whether the type scheme can be set to nil
-  (or (null (eq *compilation-type* :application))
-      (null (special-sys-fun-p fun))))
+  (or (null? (eq *compilation-type* :application))
+      (null? (special-sys-fun-p fun))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; used after mark-as-exported was called in compile[apply-compiler]
@@ -62,7 +62,7 @@
   (and (eq *compilation-type* :basic-system)
        (global-p obj)
        (?exported obj)
-       (null (discriminating-fun-p obj))))
+       (null? (discriminating-fun-p obj))))
 
 (defun exported-p (obj)
   (and (global-p obj)
@@ -71,13 +71,13 @@
 (defun class-sealed-p (class)
   ;; returns true if it is impossible to create an additional subclass for class
   ;; outside the compilation unit (i.e in using modules or at runtime)
-  (or (null (?exported class))
+  (or (null? (?exported class))
       (eq *compilation-type* :application)))
 
 (defun generic-function-sealed-p (gf)
   ;; returns true if it is impossible to add additional methods outside the
   ;; compilation unit (i.e in using modules or at runtime)
-  (or (null (?exported gf))
+  (or (null? (?exported gf))
       (eq *compilation-type* :application)))
 
 ;;;-----------------------------------------------------------------------------
@@ -91,7 +91,7 @@
 ;;; tests for lisp functions
 ;;;-----------------------------------------------------------------------------
 (defun is-lisp (obj)
-  (or (null (imported-p obj))
+  (or (null? (imported-p obj))
       (eq (?language obj) ^lisp)))
 
 ;;;-----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:  change pass from 3 to 5
@@ -33,6 +33,7 @@
          type-propagation
          debugging
          type-inference
+         null
          (only (specialize-descrs
                 get-previous-subs)
                ti-signature)
@@ -51,7 +52,7 @@
 
 
 (defun types-hand-on-modules (m-list)
-  (if (null m-list)
+  (if (null? m-list)
       (types-hand-on-funs (get-functions-used-in-literals))
     (progn
       ;;(pause-types-hand-on-modules)
@@ -64,7 +65,7 @@
     (types-hand-on-funs (?fun-list modul))))
 
 (defun types-hand-on-funs (fun-list)
-  (if (null fun-list) ()
+  (if (null? fun-list) ()
     (progn (types-hand-on-fun (car fun-list))
            (types-hand-on-funs (cdr fun-list)))))
 
@@ -96,7 +97,7 @@
   block)
 
 (defun walk-stats (stat-list)
-  (if (null stat-list) ()
+  (if (null? stat-list) ()
     (let ((stat (walk-stat (car stat-list))))
       (if stat (cons stat (walk-stats (cdr stat-list)))
         (walk-stats (cdr stat-list))))))
@@ -213,8 +214,7 @@
 (defmethod walk-result ((result <void>) out-label)
   () )
 
-;; !!! class <null> not defined ??
-(defmethod walk-result ((result null) out-label
+(defmethod walk-result ((result <null>) out-label
                         )
   () )
 
@@ -244,7 +244,7 @@
                             (?function test)
                             typedescrs)))
       (if (or (and then-typedescrs else-typedescrs)
-              (and (null then-typedescrs) (null else-typedescrs)))
+              (and (null? then-typedescrs) (null? else-typedescrs)))
           ;; both true or both nil
           (progn
             (specialize-descrs typedescrs (?type-descr test)) ;ak

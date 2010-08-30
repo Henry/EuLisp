@@ -137,7 +137,7 @@
     ()))
 
 (defun analysis-side-effects2 (mlist)
-  (if (null mlist) ()
+  (if (null? mlist) ()
     (let* ((m (car mlist))
            (tl (?toplevel-forms m)))
       (a-s-e-funs (?fun-list m))
@@ -152,7 +152,7 @@
 
 (defun a-s-e-fun (fun)
   (if (or (?sys-glocs fun)
-          (null (?fread-gloc fun)))
+          (null? (?fread-gloc fun)))
       ()
     (let* ((frg (?fread-gloc fun))
            (fwg (?fwrite-gloc fun))
@@ -173,7 +173,7 @@
 (defvar cur-module ())
 
 ;;(defun init-side-effecs (mlist)
-;;  (if (null mlist) ()
+;;  (if (null? mlist) ()
 ;;      (let* ((m (car mlist))
 ;;             (tl (?toplevel-forms m)))
 ;;        (dynamic-let ((cur-module m))
@@ -183,7 +183,7 @@
 ;;)
 
 (defun init-side-effecs-funs (funl)
-  (if (null funl) ()
+  (if (null? funl) ()
     (progn (init-side-effecs-fun (car funl))
            (init-side-effecs-funs (cdr funl)))))
 
@@ -203,9 +203,9 @@
   (if (or (= (?pass fun) 1)
           ;; (?fread-gloc fun)
           ;; (?sys-glocs fun)
-          (null (or (defined-fun-p fun)
+          (null? (or (defined-fun-p fun)
                     (defined-generic-fun-p fun)))
-          (null (?params fun))
+          (null? (?params fun))
           )
       (if (and (imported-fun-p fun) (eq (?pass fun) 0))
           (setf (?pass fun) 1)
@@ -269,7 +269,7 @@
     ()))
 
 (defun compute-argnum (nr var-list rest)
-  (if (null var-list)
+  (if (null? var-list)
       (if rest (- 0 (+ nr 1)) nr)
     (compute-argnum (+ nr 1) (cdr var-list) rest)))
 
@@ -323,7 +323,7 @@
 (defun balance-side-effects (lfgloc+gloc old-glocs)
   ;; lfgloc+gloc - list of fgloc's and gloc's
   ;; old-glocs - list of gloc's
-  (if (null lfgloc+gloc) old-glocs
+  (if (null? lfgloc+gloc) old-glocs
     (let ((fgloc-or-gloc (car lfgloc+gloc)))
       (if (gloc-p fgloc-or-gloc)
           (if (gloc-assoc fgloc-or-gloc old-glocs)
@@ -335,7 +335,7 @@
                                  (?glocs fgloc-or-gloc) old-glocs))))))
 
 (defun balance-side-effects1 (new-glocs old-glocs)
-  (if (null new-glocs) old-glocs
+  (if (null? new-glocs) old-glocs
     (let ((ng (car new-glocs)))
       (if (gloc-assoc ng old-glocs)
           (balance-side-effects1 (cdr new-glocs) old-glocs)
@@ -345,7 +345,7 @@
   (gloc-assoc1 (?gplace gloc) gloc-list))
 
 (defun gloc-assoc1 (gplace gloc-list)
-  (if (null gloc-list) ()
+  (if (null? gloc-list) ()
     (let ((gloc (car gloc-list)))
       (if (eq (?gplace gloc) gplace) gloc-list
         (gloc-assoc1 gplace (cdr gloc-list))))))
@@ -621,7 +621,7 @@
       ())))
 
 (defun side-effects-args (arg-list)
-  (if (null arg-list) ()
+  (if (null? arg-list) ()
     (let ((res (side-effects (car arg-list))))
       (if res
           (if (consp res)
@@ -825,7 +825,7 @@
 
 
 (defun collect-literals-list (args)
-  (if (null args) ()
+  (if (null? args) ()
     (let* ((first (car args))
            (rest (cdr args))
            (cfirst (collect-literals first))
@@ -865,7 +865,7 @@
   (if (fun-p fun)
       (if (special-sys-fun-p fun) () ; at time no argument-check !!!
         (let ((params (?params fun)))
-          (if (null params) ()
+          (if (null? params) ()
             (let ((length-var-list (length (?var-list params)))
                   (length-arg-list (length arg-list))
                   (rest (?rest params)))
@@ -994,7 +994,7 @@
   form)
 
 (defun side-effects-progn (list)
-  (if (null list) ()
+  (if (null? list) ()
     (if (cdr list)
         (progn (side-effects (car list))
                (side-effects-progn (cdr list)))
@@ -1031,12 +1031,12 @@
   form)
 
 (defun side-effects-let*-vars (var-list)
-  (if (null var-list) ()
+  (if (null? var-list) ()
     (cons (side-effects-leT*-var (car var-list))
           (side-effects-let*-vars (cdr var-list)))))
 
 (defun side-effects-let*-inits (forms)
-  (if (null forms) ()
+  (if (null? forms) ()
     (cons (side-effects (car forms))
           (side-effects-let*-inits (cdr forms)))))
 
@@ -1079,7 +1079,7 @@
   (side-effects (?body form)))
 
 (defun init-side-effects-labels (fun-list)
-  (if (null fun-list) ()
+  (if (null? fun-list) ()
     (progn (init-side-effecs-fun (car fun-list))
            (init-side-effects-labels (cdr fun-list)))))
 

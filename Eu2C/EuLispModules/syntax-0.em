@@ -48,8 +48,8 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmacro cond clauses
-  (if (null clauses) ()
-    (if (null (cdr (car clauses))) `(or ,(car (car clauses))
+  (if (null? clauses) ()
+    (if (null? (cdr (car clauses))) `(or ,(car (car clauses))
                                         (cond ,@(cdr clauses)))
       (if (eq (car (car clauses)) 't) `(progn ,@(cdr (car clauses)))
         `(if ,(car (car clauses))
@@ -58,26 +58,26 @@
         ))))
 
 (defmacro and forms
-  (if (null forms) 't
-    (if (null (cdr forms)) (car forms)
+  (if (null? forms) 't
+    (if (null? (cdr forms)) (car forms)
       `(if ,(car forms)
            (and ,@(cdr forms))
          ())
       )))
 
 (defmacro when (cond . forms)
-  (if (null forms) ()
+  (if (null? forms) ()
     `(if ,cond (progn ,@forms) () )))
 
 (defmacro unless (cond . forms)
-  (if (null forms) ()
+  (if (null? forms) ()
     `(if ,cond () (progn ,@forms) )))
 
 (defmacro block (identifier . forms)
-  (if (null forms) ()
+  (if (null? forms) ()
     `(let/cc ,identifier ,@forms)))
 
 (defmacro return-from (identifier . form)
-  `(,identifier ,(if (null form) () (car form))))
+  `(,identifier ,(if (null? form) () (car form))))
 
 ) ;end of module syntax-0

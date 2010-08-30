@@ -53,7 +53,7 @@
 
 ;; The following variant uses slot readers and slot writers for initialization
 ;; (defun deep-copy-initialize (new-object old-object slots)
-;;   (if (null slots) new-object
+;;   (if (null? slots) new-object
 ;;     (progn
 ;;       ((slot-description-slot-writer (car slots))
 ;;        new-object
@@ -71,7 +71,7 @@
   ((new-object <instance-as-vector>)
    (old-object <instance-as-vector>)
    (slots <list>) (slot-index %unsigned-word-integer))
-  (if (null slots) (%cast <object> new-object)
+  (if (null? slots) (%cast <object> new-object)
     (progn
       (set-nth-slot-value
        new-object slot-index
@@ -96,7 +96,7 @@
 
 ;; The following variant uses slot readers and slot writers for initialization
 ;; (defun shallow-copy-initialize (new-object old-object slots)
-;;   (if (null slots) new-object
+;;   (if (null? slots) new-object
 ;;     (progn
 ;;       ((slot-description-slot-writer (car slots))
 ;;        new-object
@@ -113,7 +113,7 @@
   ((new-object <instance-as-vector>)
    (old-object <instance-as-vector>)
    (slots <list>) (slot-index %unsigned-word-integer))
-  (if (null slots) (%cast <object> new-object)
+  (if (null? slots) (%cast <object> new-object)
     (progn
       (set-nth-slot-value new-object slot-index
                           (get-nth-slot-value old-object slot-index))

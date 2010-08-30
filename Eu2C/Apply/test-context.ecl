@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -181,7 +181,7 @@
 ;;(deflocal nullfun ()) ; defined with eqfun in apply-funs
 
 (defun test-variable (var test)
-  ;;  (if (null test-functions)
+  ;;  (if (null? test-functions)
   ;;    (setq test-functions
   ;;          (list %neq %eq %gt %lt %ge %le))
   ;;    ())
@@ -216,10 +216,10 @@
   ;; <cont>, <defined-named-constant>, <imported-named-constant>
   ;;
   (let ((fun (?function form)))
-    ;;    (if (null nullfun) (setq nullfun
-    ;;                             (find-lexical ^null ^null))
+    ;;    (if (null? nullfun) (setq nullfun
+    ;;                             (find-lexical ^null? ^null?))
     ;;        ())
-    ;;    (if (null test-functions)
+    ;;    (if (null? test-functions)
     ;;      (setq test-functions
     ;;            (list %neq %eq %gt %lt %ge %le))
     ;;      ())

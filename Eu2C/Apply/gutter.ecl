@@ -67,9 +67,9 @@
   )
 
 ;;  (let ((newvar (assoc var (dynamic env))))
-;;    (cond ((null newvar)
+;;    (cond ((null? newvar)
 ;;           (setq newvar (assoc var (dynamic globenv)))
-;;           (cond ((null newvar)
+;;           (cond ((null? newvar)
 ;;                  (warning
 ;;                 "seltsam, die Variable ~s ist nicht in der Umgebung"
 ;;                          var)
@@ -134,7 +134,7 @@
       (mk-sigwi n))))
 
 (defun compute-arg-descr1 (var)
-  (if (null var) 0
+  (if (null? var) 0
     (+ 1 (compute-arg-descr1 (cdr var)))))
 
 (defun mk-sigwi (n)
@@ -145,7 +145,7 @@
 
 
 (defun get-closure-number (var cl nr)
-  (if (null cl)
+  (if (null? cl)
       (progn (warning "Var ~s not found in closure" var) nr)
     (if (eq (cdr (car cl)) var) (mk-sigwi nr)
       (get-closure-number var (cdr cl) (+ nr 1))))

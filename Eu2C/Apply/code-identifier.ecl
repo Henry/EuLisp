@@ -366,7 +366,7 @@
 (defun delete-leading-and-terminating-nonalpha (string)
   (let ((start (position-if #'c-alpha-char-p string))
         (end (position-if #'alphanumericp string :from-end t)))
-    (cond ((null start) $generated-identifier-prefix)
+    (cond ((null? start) $generated-identifier-prefix)
           ((and (= start 0)
                 (= (+ end 1) (length string)))
            string)

@@ -20,24 +20,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: The kernel of EuLisp
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module eulisp-kernel
-(import ((only
-          (null
-           symbolp
-           first
-           cons
-           list
-           rest
-           t)
-          common-lisp)
-         (rename ((defun cl:defun)
+(import ((only (symbolp
+                first
+                cons
+                list
+                rest
+                t)
+               common-lisp)
+         (rename ((null cl:null)
+                  (defun cl:defun)
                   (defmacro cl:defmacro))
                  common-lisp)
          el-modules)
@@ -93,14 +88,15 @@
                defmethod)
 
 (cl:defun make-cl-lambda-list (el-lambda-list)
-          (cond ((null el-lambda-list) ())
+          (cond ((cl:null el-lambda-list) ())
                 ((symbolp el-lambda-list) (list '&rest el-lambda-list))
                 (t (cons (first el-lambda-list)
                          (make-cl-lambda-list (rest el-lambda-list))))))
 
 (cl:defmacro defmacro (name lambda-list . body)
              `(progn (export-syntax ,name)
-                     (cl:defmacro ,name ,(make-cl-lambda-list lambda-list) ,@body)))
+                     (cl:defmacro ,name ,(make-cl-lambda-list lambda-list)
+                                  ,@body)))
 
 (cl:defmacro deflocalmacro (name lambda-list . body)
              `(cl:defmacro ,name ,(make-cl-lambda-list lambda-list) ,@body))
@@ -139,5 +135,6 @@
 (cl:defmacro defmethod (name lambda-list . body)
              `(cl:defmethod ,name ,(make-cl-lambda-list lambda-list) ,@body))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

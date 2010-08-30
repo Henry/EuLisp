@@ -85,7 +85,7 @@
 (defun clear-types2-global-optimization (fun)
   (if (and (simple-fun-p fun) (= (?pass fun) 3))
       (let* ((applications (append (?rec-calls fun) (?applications fun)))
-             (typedescr (cond ((null (?applications fun))  ; e.g. init funs
+             (typedescr (cond ((null? (?applications fun))  ; e.g. init funs
                                (balance (?signature fun)))
                               ((unknown-applications-p fun); e.g. exported
                                (balance (?signature fun)))
@@ -105,7 +105,7 @@
 
 ;;; Convert type expressions to classes.
 (defun clear-types3 (fun)
-  (if (null (signature-needed-for-code-generation-p fun))
+  (if (null? (signature-needed-for-code-generation-p fun))
       (setf (?signature fun) ()))       ; no longer needed
   (if (and (simple-fun-p fun)
            (or (= (?pass fun) 5)
@@ -169,7 +169,7 @@
 (defun balance-and-clear-types-calls (call)
   (balance-and-clear-types call)
   (if (and (generic-fun-p (?function call))
-           (null (member call (dynamic generic-calls))))
+           (null? (member call (dynamic generic-calls))))
       (dynamic-setq generic-calls (cons call (dynamic generic-calls))))
   )
 
@@ -182,7 +182,7 @@
       (setf (?type-descr move) td))
     (if (and (or (tempvar-p var)
                  (local-static-p var))
-             (null (member var (dynamic move-vars)))
+             (null? (member var (dynamic move-vars)))
              (more-than-one-assignment (?link var)))
         (dynamic-setq move-vars (cons var (dynamic move-vars)))
       ()))

@@ -80,7 +80,7 @@
   (if *basic-system* ^effective-slot-descriptions ^direct-slot-descriptions))
 
 (defun accessor-bindings-needed-p ()
-  (null *basic-system*))
+  (null? *basic-system*))
 
 (defun class-allocation (alloc-if-defined)
   (if *basic-system* nil alloc-if-defined))
@@ -154,7 +154,7 @@
                             (list ^name ^%abstract-class
                                   ^direct-superclasses (list %class)
                                   (slot-description-option)
-                                  (if (null *basic-system*)
+                                  (if (null? *basic-system*)
                                       ()
                                     (slot-specs-for-class))
                                   ^direct-keywords ()
@@ -166,7 +166,7 @@
                             (list ^name ^%tail-class
                                   ^direct-superclasses (list %class)
                                   (slot-description-option)
-                                  (if (null *basic-system*)
+                                  (if (null? *basic-system*)
                                       ()
                                     (slot-specs-for-class))
                                   ^direct-keywords ()

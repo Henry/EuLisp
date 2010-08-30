@@ -20,64 +20,49 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: collection for lists
 ;;;  Description: collection for lists gives the functionality described in A.2
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
-
 (defmodule collection-list
+  (import (tail
+           apply
+           eulisp-kernel
+           ;;collection-aux
+           (only (eql)
+                 compare)
+           basic-list
+           (only (print)
+                 print)
+           (only (<conversion-condition>
+                  error)
+                 condition)
+           ;;convert
+           collection-generic
+           collection-aux)
+   syntax (tail
+           syntax-0
+           setf)
+   export (accumulate
+           accumulate1
+           anyp
+           concatenate
+           do
+           element
+           emptyp
+           fill
+           map
+           member
+           memq-list
+           memq-proper-list
+           reverse
+           size
+           ;;converter
+           ;;    generic-prin
+           ;;    generic-write
+           ))
 
-  (import
-   (tail
-    apply
-    eulisp-kernel
-    ;;collection-aux
-    (only (eql) compare)
-    basic-list
-    (only (print) print)
-    (only (<conversion-condition> error)
-          condition)
-    ;;convert
-
-    collection-generic
-    collection-aux
-    )
-
-   syntax
-   (tail
-    syntax-0
-    setf)
-
-   export
-   (accumulate
-    accumulate1
-    anyp
-    concatenate
-    do
-    element
-    emptyp
-    fill
-    map
-    member
-    memq-list
-    memq-proper-list
-    reverse
-    size
-    ;;converter
-    ;;    generic-prin
-    ;;    generic-write
-    )
-   )
-
-
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; accumulate
-;;;------------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 (defmethod accumulate ((function <function>)
                        (object <object>)
                        (lst <cons>))
@@ -97,13 +82,9 @@
                       )
     res))
 
-
-
 ;;;------------------------------------------------------------
 ;;; accumulate1
 ;;;------------------------------------------------------------
-
-
 (defmethod accumulate1 ((function <function>)
                         (lst <cons>))
   (map-accumulate function (cdr lst) (car lst)))
@@ -112,16 +93,12 @@
                         (lst <null>))
   lst)
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; anyp
-;;;------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod anyp ((function <function>)
 ;;                   (lst <list>) . more-collections)
 ;;    (anyp-list function lst more-collections))
-
 
 (defmethod anyp ((function <function>)
                  (lst <cons>) . more-collections)
@@ -134,17 +111,16 @@
               (t (anyp-collection function lst more-collections)))
         ))
 
-
 (defmethod anyp ((function <function>)
                  (lst <null>) . more-collections)
-  nil)
+  ())
 
 (defun anyp-with-one-list (function lst)
   (if (consp lst) ;for improper lists
       (if (function (car lst))
           t
         (anyp-with-one-list function (cdr lst)))
-    nil))
+    ()))
 
 (defmethod anyp-with-two-args
   ((function <function>)
@@ -154,27 +130,22 @@
       (if (function (car lst1) (car lst2))
           t
         (anyp-with-two-args function (cdr lst1) (cdr lst2)))
-    nil))
+    ()))
 
 (defmethod anyp-with-two-args
   ((function <function>)
    (lst1 <list>)
    (collection <object>))
-  (anyp-collection function lst1 (cons collection nil)))
+  (anyp-collection function lst1 (cons collection ())))
 
-
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; concatenate
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod concatenate ((lst <list>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
                            (%list-length more-collections)))
         (cond ((%eq rest-list-length #%i0)
-               (let ((result (cons 1 nil)))
+               (let ((result (cons 1 ())))
                  (concat-with-one-list lst result)
                  (cdr result)))
               ((%eq rest-list-length #%i1)
@@ -192,48 +163,38 @@
                                    (cdr result)))
     result))
 
-
 (defmethod concat-with-two-args ((lst1 <null>) (lst2 <null>))
   () )
 
 (defmethod concat-with-two-args ((lst1 <null>) (lst2 <cons>))
-  (let ((result (cons 1 nil)))
+  (let ((result (cons 1 ())))
     (concat-with-one-list lst2 result)
     (cdr result)) )
 
 (defmethod concat-with-two-args ((lst1 <cons>) (lst2 <null>))
-  (let ((result (cons 1 nil)))
+  (let ((result (cons 1 ())))
     (concat-with-one-list lst1 result)
     (cdr result)) )
 
 (defmethod concat-with-two-args ((lst1 <cons>) (lst2 <cons>))
-  (let ((result (cons 1 nil)))
+  (let ((result (cons 1 ())))
     (concat-with-one-list
      lst2
      (concat-with-one-list lst1 result))
     (cdr result)))
 
-
 (defmethod concat-with-two-args
   ((lst1 <list>) (collection <object>))
-  (concat-collection lst1 (cons collection nil)))
+  (concat-collection lst1 (cons collection ())))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; do
-;;;------------------------------------------------------------
-
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod do ((function <function>)
 ;;                 (lst <list>) . more-collections)
 ;;    do-list)
 
-
-;;;          ##
 (defmethod do ((function <function>)
-;;;          ##
                (lst <cons>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
                            (%list-length more-collections)))
@@ -244,18 +205,15 @@
               (t (do-collection function lst more-collections)))
         ))
 
-
-;;;          ##
 (defmethod do ((function <function>)
-;;;          ##
                (lst <null>) . more-collections)
-  nil)
+  ())
 
 (defun do-with-one-list (function lst)
   (if (consp lst) ;for improper lists
       (progn (function (car lst))
              (do-with-one-list function (cdr lst)))
-    nil))
+    ()))
 
 (defmethod do-with-two-args
   ((function <function>)
@@ -264,35 +222,27 @@
   (if (and (consp lst1) (consp lst2)) ;for improper lists
       (progn (function (car lst1) (car lst2))
              (do-with-two-args function (cdr lst1) (cdr lst2)))
-    nil))
+    ()))
 
 (defmethod do-with-two-args
   ((function <function>)
    (lst1 <list>)
    (collection <object>))
-  (do-collection function lst1 (cons collection nil)))
+  (do-collection function lst1 (cons collection ())))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; element and (setter element)
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod element ((lst <list>)
                     (key <int>))
   (element-list lst key))
-
 
 (defmethod (setter element) ((lst <list>)
                              (key <int>)
                              (value <object>))
   (setter-element-list lst key value))
 
-
-;;;-------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (%define-function (element-list-aux <object>)
   ((lst <cons>)
    (key %signed-word-integer)
@@ -307,49 +257,39 @@
   (if (%lt index max-index)
       t
     (progn (print 'index-for-element-list-to-great)
-           nil))
+           ()))
   )
 
 (defun element-list (lst key)
   (%let ((swi-key %signed-word-integer (make-swi key)))
         (if (test-list-index (%pair-length lst) swi-key)
             (car (element-list-aux lst swi-key #%i0))
-          nil)))
+          ())))
 
 (defun setter-element-list (lst key value)
   (%let ((swi-key %signed-word-integer (make-swi key)))
         (if (test-list-index (%pair-length lst) swi-key)
             (setf (car (element-list-aux lst swi-key #%i0))
                   value)
-          nil)))
+          ())))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; emptyp
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod emptyp ((lst <null>))
   t)
 
-
 (defmethod emptyp ((lst <cons>))
-  nil)
+  ())
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; fill
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod fill ((lst <list>)
 ;;                   (object <object>) ;object to fill
 ;;                   (start <int>)
 ;;                   (end <int>))
 ;;    (fill-list lst lst object start end))
-
 
 (defmethod fill ((lst <list>)
                  (object <object>) . keys)
@@ -369,8 +309,8 @@
                        object
                        (%minus end start)
                        #%i0)
-                    nil)))))
-  nil)
+                    ())))))
+  ())
 
 (%define-function (go-to-start-list <list>)
   ((lst <list>)
@@ -386,35 +326,31 @@
    (n %signed-word-integer)
    (index %signed-word-integer))
   (if (%gt index n)
-      nil
+      ()
     (progn (setf (car lst) object)
            (fill-list-aux (cdr lst) object n (%plus index #%i1)))
     ))
-
-
 
 ;;;------------------------------------------------------------
 ;;; map
 ;;;------------------------------------------------------------
 
-
 ;;  (defmethod map ((function <function>)
 ;;                  (lst <list>) . more-collections)
 ;;    (map-list function lst more-collections))
-
 
 (defmethod map ((function <function>)
                 (lst <cons>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
                            (%list-length more-collections)))
         (cond ((%eq rest-list-length #%i0)
-               (let ((result (cons 1 nil)))
+               (let ((result (cons 1 ())))
                  (map-with-one-list function lst result)
                  (cdr result)))
               ((%eq rest-list-length #%i1)
                (map-with-two-args function lst (car more-collections) ())
 
-               ;;            (let ((result (cons 1 nil)))
+               ;;            (let ((result (cons 1 ())))
                ;;              (map-with-two-args function lst
                ;;                                 (car more-collections)
                ;;                                 result)
@@ -427,8 +363,7 @@
 
 (defmethod map ((function <function>)
                 (lst <null>) . more-collections)
-  nil)
-
+  ())
 
 ;;;here with cons and reverse
 ;;  (defun map-with-one-list (function lst result)
@@ -439,16 +374,15 @@
 ;;                               result))
 ;;      (reverse result)))
 
-
 ;;; to avoid the reverse take this
 (defun map-with-one-list (function lst result)
   (if (consp lst) ;for improper lists
       (map-with-one-list function
                          (cdr lst)
                          (progn (setf (cdr result)
-                                      (cons (function (car lst)) nil))
+                                      (cons (function (car lst)) ()))
                                 (cdr result)))
-    nil))
+    ()))
 
 ;;  (defmethod map-with-two-args
 ;;             ((function <function>)
@@ -462,21 +396,19 @@
 ;;                         (progn
 ;;                           (setf (cdr result)
 ;;                                    (cons (function (car lst1) (car lst2))
-;;                                          nil))
+;;                                          ()))
 ;;                           (cdr result))
 ;;                         )
-;;      nil))
-
+;;      ()))
 
 (defmethod map-with-two-args
   ((function <function>)
    (lst1 <list>)
    (lst2 <list>)
    (not-used <object>))
-  (let ((result (cons 1 nil)))
+  (let ((result (cons 1 ())))
     (map-with-two-args-aux function lst1 lst2 result)
     (cdr result)))
-
 
 (defun map-with-two-args-aux (function lst1 lst2 result)
   (if (and (consp lst1) (consp lst2)) ;for improper lists
@@ -486,11 +418,10 @@
                              (progn
                                (setf (cdr result)
                                      (cons (function (car lst1) (car lst2))
-                                           nil))
+                                           ()))
                                (cdr result))
                              )
-    nil))
-
+    ()))
 
 (defmethod map-with-two-args
   ((function <function>)
@@ -498,14 +429,11 @@
    (collection <object>)
    (not-used <object>)
    )
-  (map-collection function lst1 (cons collection nil)))
+  (map-collection function lst1 (cons collection ())))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; member
-;;;------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod member ((object <object>)
 ;;                     (lst <list>)
 ;;                     (test <function>))
@@ -521,12 +449,9 @@
         (memq-list object lst)
       (member-list-aux object lst test-fct))))
 
-
-
 (defmethod member ((object <object>)
                    (lst <null>) . test)
-  nil)
-
+  ())
 
 (defun member-list-aux (object lst test)
   (if (consp (cdr lst))
@@ -535,7 +460,7 @@
         (member-list-aux object (cdr lst) test))
     (if (test (car lst) object)
         lst
-      nil)))
+      ())))
 
 (defun memq-list (object lst)
   (if (consp (cdr lst))
@@ -544,47 +469,35 @@
         (memq-list object (cdr lst)))
     (if (eq (car lst) object)
         lst
-      nil)))
+      ())))
 
 (defun memq-proper-list (object lst)
   (if lst
       (if (eq (car lst) object)
           lst
         (memq-proper-list object (cdr lst)))
-    nil
-    ))
+    ()))
 
-
-
-;;;---------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; reverse
-;;;---------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod reverse ((lst <cons>))
   (reverse-list lst))
 
-
-
 (defmethod reverse ((lst <null>))
-  nil)
-
+  ())
 
 ;;;reverse-list is in collection-aux now
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; size
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod size ((lst <cons>))
   (make-fpint (%pair-length lst)))
-
 
 (defmethod size ((lst <null>))
   0)
 
+;;;-----------------------------------------------------------------------------
 )
-
-
+;;;-----------------------------------------------------------------------------

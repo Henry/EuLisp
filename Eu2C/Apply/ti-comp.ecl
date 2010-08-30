@@ -59,7 +59,7 @@
                                        (if new-atom
                                            (set-right-expr equ new-atom)
                                          (setq no-type-clash ())))))))))
-             (if (null no-type-clash)
+             (if (null? no-type-clash)
                  (ti-format t "~%Notice: type descriptor removed (after): ~A"
                             (ti-print-string descr))
                no-type-clash)))
@@ -93,7 +93,7 @@
 (DEFMETHOD check-compound-types-after ((lattice-type <lattice-type>))
            (if (?compound lattice-type)
                (let ((new-lattice-type (copy-lattice-type lattice-type)))
-                 (if (null (?write-access-stamp new-lattice-type))
+                 (if (null? (?write-access-stamp new-lattice-type))
                      (setf (?write-access-stamp new-lattice-type)
                            (new-write-access-stamp)))
                  (format t "~%after: outcomming stamp: ~A min-stamp: ~A new stamp: ~A latest-stamp: ~A - ~A"
@@ -129,7 +129,7 @@
                                        (if new-atom
                                            (set-right-expr equ (compute-to-atom new-name))
                                          (setq no-type-clash ())))))))))
-             (if (null no-type-clash)
+             (if (null? no-type-clash)
                  (ti-format t "~%Notice: type descriptor removed (before): ~A"
                             (ti-print-string descr))
                no-type-clash)))
@@ -190,7 +190,7 @@
                                    (if new-name
                                        (set-right-expr equ new-name)
                                      (setq no-type-clash new-name))))))))
-             (if (null no-type-clash)
+             (if (null? no-type-clash)
                  (ti-format t "~%Notice: type descriptor removed (convert): ~A"
                             (ti-print-string descr))
                no-type-clash)))

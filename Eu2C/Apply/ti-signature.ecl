@@ -80,7 +80,7 @@
   (if (eq key ^new-signature)           ; new signature
       (let ((new-descrs (def-descrs descrs-def)))
         (new-fun-with-defined-signatures fun)
-        (if (null *use-compound-types*)
+        (if (null? *use-compound-types*)
             (setq new-descrs
                   (delete-if-not #'convert-all-compound-types new-descrs)))
         (if (?signature fun)
@@ -108,7 +108,7 @@
 
 (defun comp-signature (fun key descrs-def)
   (if (eq key ^comp-signature)          ; renew signature
-      (if (null *use-compound-types*)
+      (if (null? *use-compound-types*)
           (write-message ^info "compound type scheme of ~A function ~A::~A ignored" ; *IM* 01.03.94
                          (funtype-of fun)
                          (?module-id fun)
@@ -126,9 +126,9 @@
   (if (eq key ^extend-signature)        ; extend signature
       (let ((new-descrs (def-descrs descrs-def))
             (signature (?signature fun)))
-        (if (null signature)
+        (if (null? signature)
             (new-fun-with-defined-signatures fun))
-        (if (null *use-compound-types*)
+        (if (null? *use-compound-types*)
             (setq new-descrs
                   (delete-if-not #'convert-all-compound-types new-descrs)))
         (set-defined-signature fun (append signature new-descrs))
@@ -218,7 +218,7 @@
     (let ((new-descrs (if special
                           (unify-descrs-1-to-1 reduced-descrs formal-descrs)
                         (unify-descrs&descrs reduced-descrs formal-descrs))))
-      (cond ((null new-descrs)
+      (cond ((null? new-descrs)
              (let* ((return-descrs
                      (mapcar #'get-previous-subs reduced-descrs))
                     (error-descrs
@@ -248,7 +248,7 @@
          (remove-if (lambda (method)
                       (let* ((method-fun (?fun method))
                              (type-descr (range&domain-descr method-fun)))
-                        (if (null (?type-descr method-fun)) ; to remove!
+                        (if (null? (?type-descr method-fun)) ; to remove!
                             (setf (?type-descr method-fun) type-descr))
                         (member-if-not (lambda (descr)
                                          (sub-descr-p descr type-descr))
@@ -283,7 +283,7 @@
         (ok t))
     (dotimes (i arity)
              (let ((j (+ i 1)))
-               (cond ((null (subtype-expr-p (get-arg-type descr1 j)
+               (cond ((null? (subtype-expr-p (get-arg-type descr1 j)
                                             (get-arg-type descr2 j)))
                       (setq i arity)
                       (setq ok ())))))
@@ -405,7 +405,7 @@
 ;;; Check if result type of descr is supertype of all result types of descrs.
 (defun check-result-subtypes (descrs descr)
   (dolist (descr1 descrs)
-          (if (null (meet-result-types-p descr1 descr))
+          (if (null? (meet-result-types-p descr1 descr))
               (notify-type-clash2 (get-result-type descr)
                                   (get-result-type descr1)))))
 
@@ -510,7 +510,7 @@
 ;; Answer the substitutions of the previous type descriptor.
 (defun previous-subs (descr)
   (let ((prev-descr (?t-descr-before descr)))
-    (if (or (null prev-descr)           ; no prev descr?
+    (if (or (null? prev-descr)           ; no prev descr?
             (consp prev-descr))         ; more than one prev descr?
         (make <type-var-substitutions>) ; prev subs already used
       (?type-vars prev-descr))))
@@ -550,7 +550,7 @@
           (setq copied-descrs (list first-descr))))
     (let ((range&domain (?range-and-domain fun))
           (max-domain-type ()))
-      (cond ((null range&domain)
+      (cond ((null? range&domain)
              ;;           (convert-general-to-%object-type copied-descrs) ; EuLisp function
              (setq max-domain-type (%object-type)))
             (t             ;; Tail function
@@ -563,7 +563,7 @@
       (setq copied-descrs
             (delete-if-not #'convert-all-compound-types copied-descrs)))
     (setf (?signature fun) copied-descrs)
-    ;;    (if (null (?range-and-domain fun))
+    ;;    (if (null? (?range-and-domain fun))
     ;;      (format t "~%~%-- NEW SIGNATURE~A" (ti-print-string fun)))
     ))
 
@@ -681,7 +681,7 @@
         (if (and equ1 equ2)
             (let ((expr1 (?right-expr equ1))
                   (expr2 (?right-expr equ2)))
-              (if (null (%void-type-p expr1))
+              (if (null? (%void-type-p expr1))
                   (set-right-expr equ1 (join-type-exprs expr1 expr2)))
               (join-two-descrs-min descr1 descr2 (+ index 1))))))
   descr1)
@@ -693,7 +693,7 @@
   (let* ((result-equ (get-last-substitution (?type-vars descr)
                                             (vector-ref (?type-vec descr) 0)))
          (result-type (?right-expr result-equ)))
-    (if (null (subtype-expr-p result-type type-expr))
+    (if (null? (subtype-expr-p result-type type-expr))
         (if (%void-type-p type-expr)
             (set-result-type-min descr type-expr)
           (let ((domain-type
@@ -739,7 +739,7 @@
     (dotimes (i (length vec))
              (let ((expr-min (vector-ref vec-min i))
                    (equ (get-last-substitution subs (vector-ref vec i))))
-               (cond ((null (subtype-expr-p (?right-expr equ) expr-min))
+               (cond ((null? (subtype-expr-p (?right-expr equ) expr-min))
                       (set-right-expr equ expr-min)
                       (setq specialized t)))))
     specialized))

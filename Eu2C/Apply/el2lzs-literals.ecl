@@ -291,10 +291,10 @@ expansion of ~A~%"
           (?literal-class exp-desc) literal))
 
 (defun check-exp-desc (literal exp-desc)
-  (cond ((null exp-desc)
+  (cond ((null? exp-desc)
          (error-invalid-literal literal)
          nil)
-        ((null (?expander exp-desc))
+        ((null? (?expander exp-desc))
          (error-literal-expander-not-defined literal exp-desc)
          nil)
         (t t)))

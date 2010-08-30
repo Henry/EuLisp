@@ -81,8 +81,8 @@
                 ,@body))
 
 (defun initialize-variables (vars rst values eval-function)
-  (cond ((null vars) (initialize-rest rst values eval-function))
-        ((null values) (eval-error-too-few-arguments))
+  (cond ((null? vars) (initialize-rest rst values eval-function))
+        ((null? values) (eval-error-too-few-arguments))
         (t (push (cons (first vars)
                        (if eval-function
                            (funcall eval-function (first values))
@@ -92,9 +92,9 @@
                                  (rest values) eval-function))))
 
 (defun initialize-rest (rst values eval-function)
-  (cond ((and (null rst) values)
+  (cond ((and (null? rst) values)
          (eval-error-too-many-arguments))
-        ((null rst))
+        ((null? rst))
         (t (push (cons rst
                        (if eval-function
                            (mapcar eval-function values)

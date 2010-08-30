@@ -195,7 +195,7 @@
 
 (defun create-predefined-standard-classes ()
   (setq %object
-        (make-instance (if (null *basic-system*)
+        (make-instance (if (null? *basic-system*)
                            <abstract-class-def> <imported-class>)
                        :identifier ^%object
                        :code-identifier "c__object__eulisp0"
@@ -206,7 +206,7 @@
   (add-lexical %object $tail-module ^export)
 
   (setq %class
-        (make-instance (if (null *basic-system*)
+        (make-instance (if (null? *basic-system*)
                            <metaclass-def> <imported-class>)
                        :identifier ^%class
                        :code-identifier "c__class__eulisp0"
@@ -216,7 +216,7 @@
   (add-lexical %class $tail-module ^export)
 
   (setq %abstract-class
-        (make-instance (if (null *basic-system*)
+        (make-instance (if (null? *basic-system*)
                            <metaclass-def> <imported-class>)
                        :identifier ^%abstract-class
                        :code-identifier "c__abstract_class__eulisp0"
@@ -227,7 +227,7 @@
   (add-lexical %abstract-class $tail-module ^export)
 
   (setq %tail-class
-        (make-instance (if (null *basic-system*)
+        (make-instance (if (null? *basic-system*)
                            <metaclass-def> <imported-class>)
                        :identifier ^%tail-class
                        :code-identifier "c__tail_class__eulisp0"

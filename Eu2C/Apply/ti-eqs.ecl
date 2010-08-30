@@ -94,7 +94,7 @@
 (defun substitute-type-var (eqs         ;<type-equation-stack>
                             var-old     ;<type-var>
                             expr-new)   ;<type-expr>
-  (if (null (eq-type-var-p var-old expr-new))
+  (if (null? (eq-type-var-p var-old expr-new))
       (dolist (equ (?equations eqs))
               (let ((left-expr (?left-expr equ))
                     (right-expr (?right-expr equ)))
@@ -184,7 +184,7 @@
 (defmethod join-equation ((subs <type-var-substitutions>)
                           (var <type-var>)
                           (expr <type-var>))
-  (if (null (check-equality subs var expr))
+  (if (null? (check-equality subs var expr))
       (let ((equ (get-last-substitution subs var)))
         (if equ
             (let ((right-expr (?right-expr equ)))
@@ -209,7 +209,7 @@
 (defmethod add-equation ((subs <type-var-substitutions>)
                          (var <type-var>)
                          (expr <type-var>))
-  (if (null (check-equality subs var expr))
+  (if (null? (check-equality subs var expr))
       (let ((equ (get-last-substitution subs var)))
         (if equ
             (let ((right-expr (?right-expr equ)))
@@ -250,7 +250,7 @@
   (let ((index (position-if (lambda (vec-var2)
                               (and
                                (check-equality-fwd subs1 vec-var vec-var2)
-                               (null (eq-type-var-p vec-var vec-var2))))
+                               (null? (eq-type-var-p vec-var vec-var2))))
                             vec)))
     (if index
         (add-substitution subs2 vec-var (vector-ref vec index))

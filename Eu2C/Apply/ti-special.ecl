@@ -117,7 +117,7 @@
          (slot-name (?identifier slot-description))
          (new-slot-value-type
           (meet-type-exprs slot-value-type (get-arg-type descr 2))))
-    (if (null new-slot-value-type)
+    (if (null? new-slot-value-type)
         (setq new-slot-value-type slot-value-type))
     (if *use-compound-types*
         (check-write-access-stamp struct-type slot-name slot-value-type))
@@ -299,7 +299,7 @@
 ;;       (result-type (general-type)))
 ;;    (if (subtype-expr-p obj-type class-type)
 ;;      (setq result-type (not-%false-type))
-;;      (if (null (meet-type-exprs-p obj-type class-type))
+;;      (if (null? (meet-type-exprs-p obj-type class-type))
 ;;        (setq result-type (%false-type))))
 ;;    (ti-format2 t "~%Notice: %instance-of-p with object ~A, class ~A and result ~A"
 ;;             (ti-print-string-no-cr obj-type)
@@ -355,7 +355,7 @@
                    (meet-type-exprs-p (get-arg-type descr 1)
                                       (get-arg-type descr 2))
                  t)
-             (null (%false-type-p result)))))
+             (null? (%false-type-p result)))))
       (ti-format2 t " ~A" answer)
       answer)))
 

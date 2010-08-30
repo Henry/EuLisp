@@ -282,7 +282,7 @@
    '(0)))
 
 (defun get-structure-components (literal values slots)
-  (if (null values) nil
+  (if (null? values) nil
     (progn
       (when (is-pointer (~slot-description-type (car slots)))
             (add-structure-root literal (car slots)))
@@ -303,9 +303,9 @@
 
 (defmethod get-vector-components (length components class)
   (cond ((= length 0) nil)
-        ((null components)
+        ((null? components)
          nil)
-        ((null (cdr components))
+        ((null? (cdr components))
          (make-list length
                     :initial-element (type-expr-for-c class
                                                       (car components))))

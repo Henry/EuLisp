@@ -97,7 +97,7 @@
   (append slots new-slots))
 
 (defun add-mixin-slots (supers slots)
-  (cond ((null supers) slots)
+  (cond ((null? supers) slots)
         ((eq (car supers) ':named)
          (add-mixin-slots (cdr supers)
                           (add-annotations
@@ -123,7 +123,7 @@
         ))
 
 (defun make-structure-and-annotation-slots (slots)
-  (cond ((null slots) nil)
+  (cond ((null? slots) nil)
         ((eq (car slots) ':annotations)
          (make-annotations (cdr slots)))
         ((consp (car slots))
@@ -139,7 +139,7 @@
           (make-structure-and-annotation-slots (cdr slots))))))
 
 (defun make-annotations (slots)
-  (cond ((null slots) nil)
+  (cond ((null? slots) nil)
         ((consp (car slots))
          (pushnew (caar slots) *annotation-slots*)
          (cons
@@ -156,7 +156,7 @@
   (make-eulisp-class-id (car (last supers))))
 
 (defun make-supers (supers)
-  (if (null supers)
+  (if (null? supers)
       '(<lzs-object>)
     (list (get-superclass-name supers))))
 
@@ -164,7 +164,7 @@
   (intern (format nil "~A-P" class-name)))
 
 (defun make-mixin-predicates (class-name supers)
-  (cond ((null supers) nil)
+  (cond ((null? supers) nil)
         ((member (car supers) '(:named :global :imported))
          (cons
           `(defmethod ,(make-predicate-name (car supers))

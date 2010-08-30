@@ -52,7 +52,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun gtakl (x y z)
-  (if (null (gshorterp y x))
+  (if (null? (gshorterp y x))
       z
     (gtakl (gtakl (cdr x) y z)
            (gtakl (cdr y) z x)
@@ -64,7 +64,7 @@
   y)
 
 (defmethod gshorterp ((x <cons>) y)
-  (if (null y)
+  (if (null? y)
       ()
     (gshorterp (cdr x) (cdr y))))
 

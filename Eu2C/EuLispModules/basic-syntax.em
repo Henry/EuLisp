@@ -18,30 +18,31 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;    basic-syntax provides all stuff which is needed to write simple macros and to
-;;    use quasiquote.
+;;    basic-syntax provides all stuff which is needed to write simple macros and
+;;    to use quasiquote.
 ;;;  Documentation:
 ;;;  Notes:
-;;    append and consp are defined in this module and should be imported from here.
-;;;  Requires:
-;;;  Problems:
+;;    append and consp are defined in this module and should be imported from
+;;    here.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-syntax
-
   (import (%tail
            basic-list
            basic-compare)
    syntax (%tail)
-   export (<list> <cons> <null>
-                  car cdr cons null
-                  consp append
-                  nil t;;; basic-list
-                  eq   ;; basic-compare
-                  )
-   )
+   export (<list>
+           <cons>
+           <null>
+           car cdr cons null?
+           consp append
+           nil
+           t
+           eq))
 
+;;;-----------------------------------------------------------------------------
 ) ;end of module basic-syntax
+;;;-----------------------------------------------------------------------------

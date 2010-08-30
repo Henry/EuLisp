@@ -209,9 +209,9 @@
 ;; Answer whether range-and-domain can be directly used for the signature.
 (defun range&domain-as-signature-p (fun)
   (and (?range-and-domain fun)
-       (null (?signature fun))
-       (null (defined-generic-fun-p fun))
-       (null (eq %object (vector-ref (?range-and-domain fun) 0)))))
+       (null? (?signature fun))
+       (null? (defined-generic-fun-p fun))
+       (null? (eq %object (vector-ref (?range-and-domain fun) 0)))))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

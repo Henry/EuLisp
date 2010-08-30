@@ -109,7 +109,7 @@
 (defun explicitely-exported-p (object)
   (and (global-p object)
        (?exported object)
-       (null (consp (car (?exported object))))))
+       (null? (consp (car (?exported object))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; creating identifiers for export
