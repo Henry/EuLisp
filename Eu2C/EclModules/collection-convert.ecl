@@ -130,7 +130,7 @@
   ((lst <list>)
    (result-vector <vector>)
    (start %unsigned-word-integer))
-  (if (consp lst)
+  (if (cons? lst)
       (progn
         (setf-primitive-vector-ref result-vector
                                    start
@@ -226,7 +226,7 @@
   ((lst <list>)
    (result-string <string>)
    (index %unsigned-word-integer))
-  (if (consp lst)
+  (if (cons? lst)
       (progn
         (primitive-setter-string-ref result-string
                                      index

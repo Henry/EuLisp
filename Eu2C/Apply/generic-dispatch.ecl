@@ -508,7 +508,7 @@
     ()))
 
 (defun compute-if-cascade (cl-varl tree args)
-  (if (consp tree)
+  (if (cons? tree)
       (if (cdr tree)
           (let* ((cl-m (car tree))
                  (class (car cl-m))

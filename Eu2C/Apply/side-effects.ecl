@@ -293,7 +293,7 @@
             (seresult (side-effects body)))
        (setf (?body fun) (collect-literals body))
        (if seresult
-           (if (consp seresult)
+           (if (cons? seresult)
                (dynamic-setq read-glocs
                              (append seresult (dynamic read-glocs)))
              (dynamic-setq read-glocs
@@ -611,7 +611,7 @@
             )
         (let ((sresult (side-effects fun)))
           (if sresult
-              (if (consp sresult)
+              (if (cons? sresult)
                   (dynamic-setq read-glocs
                                 (append sresult (dynamic read-glocs)))
                 (dynamic-setq read-glocs
@@ -624,7 +624,7 @@
   (if (null? arg-list) ()
     (let ((res (side-effects (car arg-list))))
       (if res
-          (if (consp res)
+          (if (cons? res)
               (append res (side-effects-args (cdr arg-list)))
             (cons res (side-effects-args (cdr arg-list))))
         (side-effects-args (cdr arg-list))))))
@@ -699,7 +699,7 @@
       (collect-literals self)
     (if (eq one-arg ^t)
         (collect-literals t)
-      (if (consp one-arg)
+      (if (cons? one-arg)
           (make <app>
                 :function (car one-arg)
                 :arg-list (collect-literals-list
@@ -760,7 +760,7 @@
 
 (defun select-vars (lst)
   (if lst
-      (if (consp (car lst))
+      (if (cons? (car lst))
           (cons (car (car lst))
                 (select-vars (cdr lst)))
         (select-vars (cdr lst)))
@@ -768,7 +768,7 @@
 
 (defun select-inits (lst)
   (if lst
-      (if (consp (car lst))
+      (if (cons? (car lst))
           (cons (cdr (car lst))
                 (select-inits (cdr lst)))
         (select-inits (cdr lst)))
@@ -1008,11 +1008,11 @@
         (setf (?read-gloc form) test-rgloc) ())
     (if then-rgloc
         (if else-rgloc
-            (if (consp then-rgloc)
-                (if (consp else-rgloc)
+            (if (cons? then-rgloc)
+                (if (cons? else-rgloc)
                     (append then-rgloc else-rgloc)
                   (cons else-rgloc then-rgloc))
-              (if (consp else-rgloc)
+              (if (cons? else-rgloc)
                   (cons then-rgloc else-rgloc)
                 (list then-rgloc else-rgloc)))
           then-rgloc)

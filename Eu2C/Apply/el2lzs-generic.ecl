@@ -38,7 +38,7 @@
          quasiquote
          option-lists
          (only (%add-method) apply-funs)
-         (only (warn listp append mapcar mapc make-instance vector)
+         (only (warn list? append mapcar mapc make-instance vector)
                common-lisp))
  syntax (eulisp1
          el2lzs-main)
@@ -176,7 +176,7 @@
 (defun trans-method-function-lambda (gf function-class lambda-params
                                         lambda-specs body)
   (let ((gf-id (?identifier gf)))
-    (unless (listp gf-id) (setq gf-id (list gf-id)))
+    (unless (list? gf-id) (setq gf-id (list gf-id)))
     (trans-lambda body
                   (add-function
                    (make-instance function-class

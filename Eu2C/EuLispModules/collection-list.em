@@ -75,7 +75,7 @@
 
 
 (defun map-accumulate (function lst res)
-  (if (consp lst)
+  (if (cons? lst)
       (map-accumulate function
                       (cdr lst)
                       (function res (car lst))
@@ -116,7 +116,7 @@
   ())
 
 (defun any?-with-one-list (function lst)
-  (if (consp lst) ;for improper lists
+  (if (cons? lst) ;for improper lists
       (if (function (car lst))
           t
         (any?-with-one-list function (cdr lst)))
@@ -126,7 +126,7 @@
   ((function <function>)
    (lst1 <list>)
    (lst2 <list>))
-  (if (and (consp lst1) (consp lst2))
+  (if (and (cons? lst1) (cons? lst2))
       (if (function (car lst1) (car lst2))
           t
         (any?-with-two-args function (cdr lst1) (cdr lst2)))
@@ -154,7 +154,7 @@
         ))
 
 (defun concat-with-one-list (lst result)
-  (if (consp lst) ;for improper lists
+  (if (cons? lst) ;for improper lists
       (concat-with-one-list (cdr lst)
                             (progn (setf (cdr result)
                                          (cons (car lst)
@@ -210,7 +210,7 @@
   ())
 
 (defun do-with-one-list (function lst)
-  (if (consp lst) ;for improper lists
+  (if (cons? lst) ;for improper lists
       (progn (function (car lst))
              (do-with-one-list function (cdr lst)))
     ()))
@@ -219,7 +219,7 @@
   ((function <function>)
    (lst1 <list>)
    (lst2 <list>))
-  (if (and (consp lst1) (consp lst2)) ;for improper lists
+  (if (and (cons? lst1) (cons? lst2)) ;for improper lists
       (progn (function (car lst1) (car lst2))
              (do-with-two-args function (cdr lst1) (cdr lst2)))
     ()))
@@ -367,7 +367,7 @@
 
 ;;;here with cons and reverse
 ;;  (defun map-with-one-list (function lst result)
-;;    (if lst ;(consp lst) for improper lists
+;;    (if lst ;(cons? lst) for improper lists
 ;;      (map-with-one-list function
 ;;                         (cdr lst)
 ;;                         (cons (function (car lst))
@@ -376,7 +376,7 @@
 
 ;;; to avoid the reverse take this
 (defun map-with-one-list (function lst result)
-  (if (consp lst) ;for improper lists
+  (if (cons? lst) ;for improper lists
       (map-with-one-list function
                          (cdr lst)
                          (progn (setf (cdr result)
@@ -389,7 +389,7 @@
 ;;              (lst1 <list>)
 ;;              (lst2 <list>)
 ;;              (result <object>))
-;;    (if (and (consp lst1) (consp lst2)) ;for improper lists
+;;    (if (and (cons? lst1) (cons? lst2)) ;for improper lists
 ;;      (map-with-two-args function
 ;;                         (cdr lst1)
 ;;                         (cdr lst2)
@@ -411,7 +411,7 @@
     (cdr result)))
 
 (defun map-with-two-args-aux (function lst1 lst2 result)
-  (if (and (consp lst1) (consp lst2)) ;for improper lists
+  (if (and (cons? lst1) (cons? lst2)) ;for improper lists
       (map-with-two-args-aux function
                              (cdr lst1)
                              (cdr lst2)
@@ -454,7 +454,7 @@
   ())
 
 (defun member-list-aux (object lst test)
-  (if (consp (cdr lst))
+  (if (cons? (cdr lst))
       (if (test (car lst) object)
           lst
         (member-list-aux object (cdr lst) test))
@@ -463,7 +463,7 @@
       ())))
 
 (defun memq-list (object lst)
-  (if (consp (cdr lst))
+  (if (cons? (cdr lst))
       (if (eq (car lst) object)
           lst
         (memq-list object (cdr lst)))

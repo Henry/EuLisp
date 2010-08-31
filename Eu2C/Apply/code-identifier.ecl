@@ -52,6 +52,8 @@
          export
          expand-literal
          tail-module whc-classes
+         (only (cons?)
+               list)
          (only (position-if
                 substitute-if
                 delete-if-not
@@ -118,7 +120,7 @@
   ;; if the id is a list then ?identifier is set by transforming the list into a
   ;; string
   (let ((id (?identifier object)))
-    (when (consp id)
+    (when (cons? id)
           (setq id (make-eulisp-symbol (format () "~{~A~^ ~}" id)))
           (setf (?identifier object) id))
     id))

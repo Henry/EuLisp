@@ -69,7 +69,7 @@
 (defun rep()
   (format t  "~%Don't Panic> ")
   (let ((sexpr (read)))
-    (if (consp sexpr)
+    (if (cons? sexpr)
         (let ((fcn (get-fun (as-lowercase (symbol-name (car sexpr)))
                             interpreter-fcn) ))
           (if (null? fcn)

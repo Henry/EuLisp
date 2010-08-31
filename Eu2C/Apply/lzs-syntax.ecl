@@ -126,7 +126,7 @@
   (cond ((null? slots) ())
         ((eq (car slots) ':annotations)
          (make-annotations (cdr slots)))
-        ((consp (car slots))
+        ((cons? (car slots))
          (pushnew (caar slots) *structure-slots*)
          (cons
           (append (car slots)
@@ -140,7 +140,7 @@
 
 (defun make-annotations (slots)
   (cond ((null? slots) ())
-        ((consp (car slots))
+        ((cons? (car slots))
          (pushnew (caar slots) *annotation-slots*)
          (cons
           (append (car slots)

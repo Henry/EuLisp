@@ -91,7 +91,7 @@
 (defun export-identifier (object)
   (or (and (global-p object)
            (?exported object)
-           (if (consp (car (?exported object)))
+           (if (cons? (car (?exported object)))
                (car (car (?exported object)))
              (car (?exported object))))
       (?identifier object)))
@@ -104,12 +104,12 @@
 (defun invisible-exported-p (object)
   (and (global-p object)
        (?exported object)
-       (consp (car (?exported object)))))
+       (cons? (car (?exported object)))))
 
 (defun explicitely-exported-p (object)
   (and (global-p object)
        (?exported object)
-       (null? (consp (car (?exported object))))))
+       (null? (cons? (car (?exported object))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; creating identifiers for export

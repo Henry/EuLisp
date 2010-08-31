@@ -100,7 +100,7 @@
   ;; /translation-type/ = acc | logical | select1 | select2
   ;;
   (setf (car value) (get-function (find-in-lex-env (car value))))
-  (if (consp (car (cdr value)))
+  (if (cons? (car (cdr value)))
       (setf (car (car (cdr value)))
             (get-function (find-in-lex-env (car (car (cdr value))))))
     ())

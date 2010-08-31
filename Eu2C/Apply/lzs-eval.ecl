@@ -263,7 +263,7 @@
 
     ;;--- list
     null?
-    consp
+    cons?
     atom?
     cons
     car

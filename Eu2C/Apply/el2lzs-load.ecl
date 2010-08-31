@@ -53,7 +53,7 @@
  )
 
 (defun check-module (path module-source)
-  (cond ((null? (and (consp module-source)
+  (cond ((null? (and (cons? module-source)
                     ;;is it a true list?
                     (null? (cdr (last module-source)))
                     ;;is it at least (defmodule name directives) ?

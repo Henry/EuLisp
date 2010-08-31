@@ -511,7 +511,7 @@
 (defun previous-subs (descr)
   (let ((prev-descr (?t-descr-before descr)))
     (if (or (null? prev-descr)           ; no prev descr?
-            (consp prev-descr))         ; more than one prev descr?
+            (cons? prev-descr))         ; more than one prev descr?
         (make <type-var-substitutions>) ; prev subs already used
       (?type-vars prev-descr))))
 
@@ -808,7 +808,7 @@
 (defgeneric ti-short-write (stream obj))
 
 (defmethod ti-short-write (stream descrs)
-  (if (and *ti-short-print* (consp descrs))
+  (if (and *ti-short-print* (cons? descrs))
       (ti-short-write stream (join-descrs-min (ti-copy-descr (car descrs))
                                               (cdr descrs)))
     (ti-write stream descrs)))

@@ -484,7 +484,7 @@
                                 :name (?identifier class)
                                 :class class))
         (subs (list ^bottom)))
-    (if (and (consp supers) (null? (car supers)))
+    (if (and (cons? supers) (null? (car supers)))
         (setq supers (list *top*)))
     (add-lattice-type-between new-lattice-type
                               (append supers lattice-supers)
@@ -572,7 +572,7 @@
   *top*)
 
 (defun compute-normalized-lattice-type (name)
-  (if (consp name)
+  (if (cons? name)
       (let ((op-symbol (car name))
             (arg-def (cdr name)))
         (cond ((eq ^not op-symbol)

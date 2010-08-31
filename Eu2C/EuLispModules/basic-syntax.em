@@ -24,7 +24,7 @@
 ;;    to use quasiquote.
 ;;;  Documentation:
 ;;;  Notes:
-;;    append and consp are defined in this module and should be imported from
+;;    append and cons? are defined in this module and should be imported from
 ;;    here.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
@@ -41,7 +41,7 @@
            cdr
            cons
            null?
-           consp
+           cons?
            append
            t
            eq))

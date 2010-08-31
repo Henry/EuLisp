@@ -241,7 +241,7 @@
   (set-list-values table collection 0))
 
 (defun set-list-values (table lst index)
-  (if (consp lst)
+  (if (cons? lst)
       (progn (setter-table-ref table index (car lst))
              (set-list-values table (cdr lst) (binary+ index 1)))
     table))

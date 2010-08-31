@@ -318,7 +318,7 @@
 
 (defun linearize-par-moves1 (block)
   (let ((moves (?interface block)))
-    (if (and (consp moves) (cdr moves))
+    (if (and (cons? moves) (cdr moves))
         (setf (?interface block ) (lin-par-moves moves))
       ())))
 
@@ -357,7 +357,7 @@
                    (?type-descr move)))
              (test (test-change-or-tempvar setvar (list usedvar) rest)))
         (if test
-            (if (consp test)
+            (if (cons? test)
                 ;; change moves
                 (let ((temp (car test)))
                   (setf (car test) move)

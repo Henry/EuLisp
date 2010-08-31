@@ -46,7 +46,7 @@
                   <symbol>
                   car
                   cdr
-                  consp
+                  cons?
                   null?)
                  eulisp-kernel)
            (only (<file>
@@ -288,7 +288,7 @@
 ;;                      (stream <stream>))
 ;;      ;  (let ((obj-class (%class-of object))) ;fehlt class-of
 ;;      ;   (%write-hex stream object)
-;;     (if (consp object)  ;(eq obj-class <cons>)
+;;     (if (cons? object)  ;(eq obj-class <cons>)
 ;;       (prin-cons object stream)
 ;;       (if (null? object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
@@ -357,7 +357,7 @@
 (%define-function (prin-cons1 <null>)
   ((object <object>)
    (stream <stream>))
-  (if (consp object)
+  (if (cons? object)
       (progn (%write-string stream (%literal %string  () " "))
              (generic-prin (car object) stream)
              (prin-cons1 (cdr object) stream))
@@ -411,7 +411,7 @@
 ;;   (%define-function (write-1 <object>)
 ;;                     ((object <object>)
 ;;                      (stream <stream>))
-;;     (if (consp object)  ;(eq obj-class <cons>)
+;;     (if (cons? object)  ;(eq obj-class <cons>)
 ;;       (write-cons-1 object stream)
 ;;       (if (null? object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
@@ -726,7 +726,7 @@
 (%define-function (write-cons-2 <null>)
   ((object <object>)
    (stream <stream>))
-  (if (consp object)
+  (if (cons? object)
       (progn (%write-string stream (%literal %string  () " "))
              (generic-write (car object) stream)
              (write-cons-2 (cdr object) stream))

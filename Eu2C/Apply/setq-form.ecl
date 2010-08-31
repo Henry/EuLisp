@@ -60,7 +60,7 @@
      (?write-gloc form)
      (let ((rgloc (?read-gloc form)))
        (if rgloc
-           (if (consp rgloc) rgloc (list rgloc))
+           (if (cons? rgloc) rgloc (list rgloc))
          ()))))
   )
 

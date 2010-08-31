@@ -69,7 +69,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun lzs2mzs (modul-or-list)
-  (lzs2mzs1 (if (consp modul-or-list) modul-or-list (list modul-or-list))))
+  (lzs2mzs1 (if (cons? modul-or-list) modul-or-list (list modul-or-list))))
 
 (defun lzs2mzs1 (mlist)
   ;; -------------------------------------------

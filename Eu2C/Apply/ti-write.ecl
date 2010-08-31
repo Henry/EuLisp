@@ -176,7 +176,7 @@
   (if list
       (let ((first (car list)))
         (if start (format stream "("))
-        (if (consp first)
+        (if (cons? first)
             (ti-write-list-enclosed stream first t)
           (ti-write stream first))
         (if (cdr list)
@@ -187,7 +187,7 @@
 ;; Attention: %object is displayed as <object>; %class is displayed as <class>.
 (defmethod ti-write (stream (expr <atomic-type>))
   (let ((name (?name expr)))
-    (if (consp name)
+    (if (cons? name)
         (ti-write-list-enclosed stream (?name expr) t)
       (cond ((and *%object* (%object-type-p expr))
              (format stream "<OBJECT>"))
@@ -219,7 +219,7 @@
 (defmethod ti-def-write (stream (expr <atomic-type>))
   (format stream "(atom? ")
   (let ((name (?name expr)))
-    (if (consp name)
+    (if (cons? name)
         (ti-write-list-enclosed stream (?name expr) t)
       (ti-write stream name)))
   (format stream ")"))

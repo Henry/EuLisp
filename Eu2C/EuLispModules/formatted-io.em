@@ -38,7 +38,7 @@
            %extract %eq
            %plus %minus %mult
            make-swi make-fpint
-           cons car cdr consp
+           cons car cdr cons?
            eq
            ) tail)
     (only (error <condition>) condition-i)
@@ -198,7 +198,7 @@
                                             fstring-c
                                             (%plus #%i1 cur-index)
                                             length args))
-                          (if (consp args)
+                          (if (cons? args)
                               (format2-cons stream
                                             fstring-c
                                             cur-index length args fp1-n ch)

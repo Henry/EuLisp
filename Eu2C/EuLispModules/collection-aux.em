@@ -372,7 +372,7 @@
   (reverse-list-aux liste ()))
 
 (defun reverse-list-aux (liste result)
-  (if (consp liste)
+  (if (cons? liste)
       (reverse-list-aux (cdr liste) (cons (car liste) result))
     result))
 
@@ -414,7 +414,7 @@
     res))
 
 (defun nconc-wh (liste element)
-  (if (consp liste)
+  (if (cons? liste)
       (progn
         (nconc2 liste element)
         liste)
@@ -426,7 +426,7 @@
     (nconc2 (cdr liste) element)))
 
 ;;  (defun nconc1 (liste element)
-;;    (if (consp liste)
+;;    (if (cons? liste)
 ;;      (if (atom? (cdr liste))
 ;;        (progn
 ;;          (setf (cdr liste) element)

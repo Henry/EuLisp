@@ -143,7 +143,7 @@
 (defun cddr (obj) (cdr (cdr obj)))
 
 ;;(defun atom? (object)
-;;  (null? (consp object)))
+;;  (null? (cons? object)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference

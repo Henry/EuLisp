@@ -72,7 +72,7 @@
                 subclassp
                 nconc
                 get
-                listp
+                list?
                 vector)
                common-lisp)
          lzs accessors
@@ -328,7 +328,7 @@
                  (setq body             ;; this is neccesary because of the
                        ;; progn-simplification
                        (cond ((null? body) ())         ; no expressions?
-                             ((and (consp body)        ; more than 1 expression?
+                             ((and (cons? body)        ; more than 1 expression?
                                    (eq (first body) 'es::progn))
                               (cdr body))
                              (t (list body))))         ; exactly 1 expression
@@ -424,7 +424,7 @@
 
 (defun add-top-lexical-bindings (binding-s)
   (cond ((null? binding-s) t)
-        ((null? (consp binding-s))
+        ((null? (cons? binding-s))
          (add-top-lexical binding-s))
         ((add-top-lexical-bindings (car binding-s))
          (add-top-lexical-bindings (cdr binding-s)))
@@ -447,7 +447,7 @@
 
 (defun splice-lists (l)
   (cond ((null? l) ())
-        ((listp (car l))
+        ((list? (car l))
          (nconc (car l) (splice-lists (cdr l))))
         ((null? (cdr l)) l)
         (t (splice-lists-1 l))))
@@ -455,8 +455,8 @@
 (defun splice-lists-1 (l)
   ;;l has at least 2 elements and«its first one isn't a list
   (cond ((null? (cdr l))
-         (if (listp (car l)) (car l) l))
-        ((listp (second l))
+         (if (list? (car l)) (car l) l))
+        ((list? (second l))
          (setf (cdr l)
                (nconc (second l) (splice-lists (cddr l))))
          l)
@@ -536,7 +536,7 @@
 
 (defun has-old-style-module-header (module-def)
   (and (>= (length module-def) 4)
-       (consp (fourth module-def))
+       (cons? (fourth module-def))
        (eq ^syntax (car (fourth module-def)))))
 
 (defun trans-old-style-module-header (module-def)
@@ -549,7 +549,7 @@
 
 (defun trans-directives (module-directives)
   (cond ((null? module-directives) ())
-        ((null? (consp module-directives))
+        ((null? (cons? module-directives))
          (error-bad-module-directive module-directives ()))
         ((null? (cdr module-directives))
          (error-bad-module-directive (car module-directives) ()))
@@ -558,7 +558,7 @@
          (error-bad-module-directive (first module-directives)
                                      (second module-directives))
          (trans-directives (cddr module-directives)))
-        ((null? (listp (second module-directives)))
+        ((null? (list? (second module-directives)))
          (error-bad-module-directive (first module-directives)
                                      (second module-directives))
          (trans-directives (cddr module-directives)))
@@ -641,7 +641,7 @@
 (defmethod trans-old-style-syntax-imports ((import-specs <pair>))
   (if (and (eq (first import-specs) ^syntax)
            (cdr import-specs)
-           (listp (second import-specs)))
+           (list? (second import-specs)))
       (setf (?syntax-env (dynamic *current-module*))
             (append
              (compute-syntax-interface (second import-specs))

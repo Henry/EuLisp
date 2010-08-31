@@ -22,7 +22,7 @@
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation
 ;;    of Lisp-Systems".
-;;    In this version function 'shorterp' is realized as a generic function
+;;    In this version function 'shorter?' is realized as a generic function
 ;;    with four methods specializing on both arguments.
 ;;;  See also:
 ;;    tak, takl and gtakl
@@ -42,29 +42,29 @@
 (deflocal l6 (listn 6))
 
 ;;;-----------------------------------------------------------------------------
-;;; takl with generic shorterp
+;;; takl with generic shorter?
 ;;;-----------------------------------------------------------------------------
 
 (defun gtakl (x y z)
-  (if (null? (gshorterp y x))
+  (if (null? (gshorter? y x))
       z
     (gtakl (gtakl (cdr x) y z)
            (gtakl (cdr y) z x)
            (gtakl (cdr z) x y))))
 
-(defgeneric gshorterp ((x <list>) (y <list>)))
+(defgeneric gshorter? ((x <list>) (y <list>)))
 
-(defmethod gshorterp ((x <null>) (y <cons>))
+(defmethod gshorter? ((x <null>) (y <cons>))
   y)
 
-(defmethod gshorterp ((x <cons>) (y <null>))
+(defmethod gshorter? ((x <cons>) (y <null>))
   ())
 
-(defmethod gshorterp ((x <null>) (y <null>))
+(defmethod gshorter? ((x <null>) (y <null>))
   ())
 
-(defmethod gshorterp ((x <cons>) (y <cons>))
-  (gshorterp (cdr x) (cdr y)))
+(defmethod gshorter? ((x <cons>) (y <cons>))
+  (gshorter? (cdr x) (cdr y)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Run the test

@@ -57,7 +57,7 @@
     string-ref
     string-ref-u
     string-length
-    listp
+    list?
     nconc
     and-aux)
    )
@@ -119,8 +119,8 @@
                      (%cast %unsigned-word-integer
                             (make-swi n)))))))
 
-(defun listp (object)
-  (if (consp object)
+(defun list? (object)
+  (if (cons? object)
       t
     (if (null? object)
         t

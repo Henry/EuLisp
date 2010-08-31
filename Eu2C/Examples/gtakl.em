@@ -24,7 +24,7 @@
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
 ;;    Lisp-Systems" and adapted to EuLisp.
 ;;
-;;    In this version the function 'shorterp' is realized as a generic function
+;;    In this version the function 'shorter?' is realized as a generic function
 ;;    with two methods specializing on the first argument.
 ;;;  Notes:
 ;;    The benchmark is called with 26, 16 and 6 instead of 18, 12 and 6 as in
@@ -48,25 +48,25 @@
 (deflocal l6 (listn 6))
 
 ;;;-----------------------------------------------------------------------------
-;;; takl with generic shorterp
+;;; takl with generic shorter?
 ;;;-----------------------------------------------------------------------------
 
 (defun gtakl (x y z)
-  (if (null? (gshorterp y x))
+  (if (null? (gshorter? y x))
       z
     (gtakl (gtakl (cdr x) y z)
            (gtakl (cdr y) z x)
            (gtakl (cdr z) x y))))
 
-(defgeneric gshorterp ((x <list>) y))
+(defgeneric gshorter? ((x <list>) y))
 
-(defmethod gshorterp ((x <null>) y)
+(defmethod gshorter? ((x <null>) y)
   y)
 
-(defmethod gshorterp ((x <cons>) y)
+(defmethod gshorter? ((x <cons>) y)
   (if (null? y)
       ()
-    (gshorterp (cdr x) (cdr y))))
+    (gshorter? (cdr x) (cdr y))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Run the test

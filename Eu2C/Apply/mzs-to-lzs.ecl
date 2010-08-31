@@ -36,6 +36,8 @@
          ;;  LZS-mop ; ~class-of
          lzs-modules
          null
+         (only (cons?)
+               list)
          accessors
          vector
          simple-programming ; only for the hack !!!
@@ -625,7 +627,7 @@
   (if (null? (cdr link))
       (let* ((fun (analysed-fun))
              (name (name-of fun))
-             (printwarn (if (consp name)
+             (printwarn (if (cons? name)
                             (if (or (eq (car name) ^method)
                                     (eq (car name) ^setter)
                                     (eq (car name) ^converter)) t ())

@@ -376,7 +376,7 @@
 (defun add-inlabel (test block)
   (let ((in-label (?in-label block)))
     (setf (?in-label block)
-          (if (consp in-label)
+          (if (cons? in-label)
               (cons test in-label)
             (if (null? in-label) (list test)
               (list test in-label)))))

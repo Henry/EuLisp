@@ -31,7 +31,7 @@
 
 (defmodule pair
   (import (tail
-           (only (consp)
+           (only (cons?)
                  basic-syntax)
            basic-list
            basic-compare
@@ -41,7 +41,7 @@
            (only (cond)
                  syntax-0))
    export (atom?
-           consp
+           cons?
            copy-alist
            copy-list
            copy-tree)
@@ -52,14 +52,14 @@
                   list)
                  basic-list)))
 
-;;(%define-function (consp <list>)       defined in basic-syntax
+;;(%define-function (cons? <list>)       defined in basic-syntax
 ;;                  ((object <object>))
 ;;  (if (%eq (%class-of object) <cons>)
 ;;    object
 ;;    () ))
 
-(defun atom? (object)    ;consp? z.z. nicht mšglich 1.8.93
-  (if (consp object)     ;versuch (?identifier NIL)???in el2lzs
+(defun atom? (object)    ;cons?? z.z. nicht mšglich 1.8.93
+  (if (cons? object)     ;versuch (?identifier NIL)???in el2lzs
       ()
     't))
 
@@ -78,8 +78,8 @@
 (defun length-pair(pair)
   (make-fpint (length-pair-1)))
 
-(defun length-pair-1 (pair)         ;s.o. consp?
-  (if (consp (cdr pair))
+(defun length-pair-1 (pair)         ;s.o. cons??
+  (if (cons? (cdr pair))
       (%plus #%i1 (length-pair-1 (cdr pair)))
     #%i0))
 

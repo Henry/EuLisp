@@ -41,17 +41,13 @@
                 cdr
                 copy-list)
                common-lisp)
-         (rename ((atom cl:atom))
-                 (only (atom)
-                       common-lisp))
          copy-generic
          ;;deep-copy
          ;;shallow-copy
          )
  syntax (eulisp-kernel)
  expose (null
-         (only (consp
-                cons
+         (only (cons
                 car
                 cdr
                 list
@@ -65,6 +61,8 @@
          (only ($empty-list)
                el-modules))
  export (atom?
+         cons?
+         list?
          deep-copy
          shallow-copy))
 
@@ -72,9 +70,14 @@
 (make-eulisp-class cons cons)
 (make-eulisp-class list list)
 
-;; Rename the CL atom -> atom?
 (defun atom? (a)
   (cl:atom a))
+
+(defun cons? (a)
+  (cl:consp a))
+
+(defun list? (a)
+  (cl:listp a))
 
 (defmethod deep-copy ((tree cons))
   (cons (deep-copy (car tree))

@@ -135,7 +135,7 @@
 
 
 (defun map-accumulate-list (function lst res)
-  (if (consp lst)
+  (if (cons? lst)
       (map-accumulate-list function
                            (cdr lst)
                            (funcall function res (car lst))

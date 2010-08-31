@@ -58,7 +58,7 @@
                 remove
                 vector
                 format
-                listp
+                list?
                 list*
                 string
                 string-downcase
@@ -100,14 +100,14 @@
 
 (defun transsyn-progn-forms (forms)
   (cond ((null? forms) ())
-        ((and (consp (first forms))
+        ((and (cons? (first forms))
               (eq (first (first forms)) ^progn))
          (transsyn-progn-forms (nconc (rest (first forms))
                                       (rest forms))))
         ;; expand the first form; if the result is an progn then put its forms
         ;; onto the current progn-level
         (t (let ((form (transsyn (first forms))))
-             (if (and (consp form) (eq (first form) ^progn))
+             (if (and (cons? form) (eq (first form) ^progn))
                  (append (cdr form) (transsyn-progn-forms (rest forms)))
                (cons form
                      (transsyn-progn-forms (rest forms))))))))
@@ -217,7 +217,7 @@
   ;; function definitions using defconstant are necessary
   (with-defining-form
    (setq VALUE (transsyn VALUE))
-   (cond ((null? (consp VALUE))
+   (cond ((null? (cons? VALUE))
           (setf (third (whole-form)) VALUE)
           (whole-form))
          ((eq (car VALUE) ^lambda)
@@ -495,7 +495,7 @@
 (deftrans (quote LIT)
   (cond ((symbol? LIT)
          (make-defined-sym LIT))
-        ((consp LIT)
+        ((cons? LIT)
          (make-instance <structured-literal> :value (lzslit LIT)))
         (t (trans LIT))))
 
@@ -601,7 +601,7 @@
 
 (defun make-local-fun-identifier (local-id)
   (let ((function-id
-         (if (listp (dynamic *function-id*))
+         (if (list? (dynamic *function-id*))
              (dynamic *function-id*)
            (list (dynamic *function-id*)))))
     (cond ((and (null? local-id)
@@ -1005,7 +1005,7 @@
 ;;     (let ((ID (first VARLIST))
 ;;           (EXPR ())
 ;;           (MORE (rest VARLIST)))
-;;       (when (consp ID)
+;;       (when (cons? ID)
 ;;             (setq EXPR (second ID))
 ;;             (setq ID (first ID)))
 ;;       (trans-dvars MORE
@@ -1055,7 +1055,7 @@
     (let ((ID (first VARLIST))
           (EXPR ())
           (MORE (rest VARLIST)))
-      (when (consp ID)
+      (when (cons? ID)
             (setq EXPR (second ID))
             (setq ID (first ID)))
       (cons
@@ -1214,8 +1214,8 @@
    (whole-form)))
 
 (deftranssyn (declare-c-function name result-type args)
-  (let ((name (if (consp name) (car name) name))
-        (external-name (if (consp name) (cadr name) name)))
+  (let ((name (if (cons? name) (car name) name))
+        (external-name (if (cons? name) (cadr name) name)))
     `(,^%declare-external-function (,name ,result-type) ,args
                                    ,^language ^c
                                    ,^external-name ,(string-downcase (string external-name)))))

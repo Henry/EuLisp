@@ -235,14 +235,14 @@
 
 ;;; Convet lists like ^(and (not <integer>) <null>) to (^and (^not #..) #..).
 (defun convert-def-list-to-expr-name (def-list)
-  (if (consp def-list)
+  (if (cons? def-list)
       (cons (car def-list)
             (mapcar #'convert-def-list-to-expr-name (cdr def-list)))
     (get-lattice-type def-list)))
 
 ;;; Convert lists like (^and (^not #..) #..) to atoms.
 (defun compute-to-atom (name)
-  (if (consp name)       ;; nested?
+  (if (cons? name)       ;; nested?
       (let ((op-symbol (car name)))
         (if (eq ^not op-symbol)         ; NOT
             (complement-type-expr-of-lattice-type (car (cdr name)))
@@ -260,7 +260,7 @@
 
 ;; Answer a a corresponding complement type expr of a lattice type.
 (defun complement-type-expr-of-lattice-type (name)
-  (if (consp name)       ;;nested?
+  (if (cons? name)       ;;nested?
       (progn
         (write-message ^warning "operator NOT only defined on atomic types: ~A" name) ; *IM* 01.03.94
         (ti-error)

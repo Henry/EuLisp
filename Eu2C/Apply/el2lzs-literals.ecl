@@ -107,7 +107,7 @@
    (representation <%pointer-to-vector>)
    values)
   (list (car values) ; the length specification
-        (cond ((consp (car (cdr values)))
+        (cond ((cons? (car (cdr values)))
                (mapcar #'lzslit (car (cdr values))))
               (t (car (cdr values))))))
 
@@ -362,7 +362,7 @@ expansion of ~A~%"
 
 (defmethod expand-slot-values (literal class representation values)
   (mapcar (lambda (literal)
-            (if (and (consp literal)
+            (if (and (cons? literal)
                      (eq (car literal) ^%literal))
                 (expand-literal (trans literal))
               (expand-literal literal)))

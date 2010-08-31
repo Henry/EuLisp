@@ -24,7 +24,7 @@
 ;;    use quasiquote.
 ;;;  Documentation:
 ;;;  Notes:
-;;    append and consp are defined in this module and should be imported from here.
+;;    append and cons? are defined in this module and should be imported from here.
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr
@@ -42,17 +42,17 @@
    expose (basic-list-0)
    export (%pair-length
            eq;;; basic-compare
-           consp append
+           cons? append
            t))
 
 ;;;-----------------------------------------------------------------------------
 ;;; append
 ;;;-----------------------------------------------------------------------------
-(defun consp (object)
+(defun cons? (object)
   (%instance-of-p object <cons>))
 
 (defun append (list1 list2)
-  (if (consp list1)
+  (if (cons? list1)
       (cons (car list1)
             (append (cdr list1) list2))
     list2))
@@ -63,7 +63,7 @@
 
 (%define-function (%pair-length %signed-word-integer )
   ((l <list>))
-  (if (consp l) (%plus #%i1 (%pair-length (cdr l)))
+  (if (cons? l) (%plus #%i1 (%pair-length (cdr l)))
     #%i0))
 
 ;;;-----------------------------------------------------------------------------
@@ -82,7 +82,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (%annotate-function
-  consp new-signature
+  cons? new-signature
   (((var0 var1)
     ((var var0) (atom? (not <null>)))
     ((var var1) (atom? <cons>)))

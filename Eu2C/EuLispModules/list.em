@@ -47,7 +47,7 @@
                   car
                   cdr
                   list
-                  consp
+                  cons?
                   t)
                  basic-list)
            (only (atom?)

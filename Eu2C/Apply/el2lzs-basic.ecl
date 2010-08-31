@@ -101,7 +101,7 @@
 
 (defun check-syntax (pattern expr)
   (if (or (null? pattern
-                )(and (consp expr)
+                )(and (cons? expr)
                       (check-syntax-components pattern expr)))
       t
     (progn (error-invalid-syntax pattern expr)
@@ -120,7 +120,7 @@
          (check-syntax-components (cdr pattern) (cdr expr)))))
 
 (defun true-list-p (l)
-  (cond ((consp l) (true-list-p (cdr l)))
+  (cond ((cons? l) (true-list-p (cdr l)))
         ((null? l) t)
         (t ())))
 

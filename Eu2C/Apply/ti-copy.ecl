@@ -60,7 +60,7 @@
   (make <type-equation-stack>
         :equations
         (mapcar (lambda (equ)
-                  (ti-copy&rename-equ equ new-vars (consp same-vars)))
+                  (ti-copy&rename-equ equ new-vars (cons? same-vars)))
                 (?equations stack))))
 
 (defun ti-copy-subs (subs)
@@ -70,11 +70,11 @@
 (defun ti-copy&rename-subs (subs new-vars . same-vars)
   (make <type-var-substitutions>
         :equations (mapcar (lambda (equ)
-                             (ti-copy&rename-equ equ new-vars (consp same-vars)))
+                             (ti-copy&rename-equ equ new-vars (cons? same-vars)))
                            (?equations subs))))
 
 (defun ti-copy&rename-equ (equ new-vars . same-vars)
-  (let ((with-same-vars (consp same-vars))
+  (let ((with-same-vars (cons? same-vars))
         (left-expr (?left-expr equ))
         (right-expr (?right-expr equ)))
     (cons (if (type-var-p left-expr)
@@ -96,7 +96,7 @@
          (new-vec (make-array size)))
     (dotimes (i size)
              (setf (vector-ref new-vec i)
-                   (ti-copy&rename-var (vector-ref vec i) new-vars (consp same-vars))))
+                   (ti-copy&rename-var (vector-ref vec i) new-vars (cons? same-vars))))
     new-vec))
 
 (defun ti-copy&rename-var (var new-vars . same-vars)
@@ -147,7 +147,7 @@
 
 (defmethod ti-copy&rename-descr ((descr <formal-type-descr>)
                                  new-vars . same-vars)
-  (let ((with-same-vars (consp same-vars)))
+  (let ((with-same-vars (cons? same-vars)))
     (make <formal-type-descr>
           :type-vars (ti-copy&rename-subs (?type-vars descr) new-vars with-same-vars)
           :type-vec (ti-copy&rename-vec (?type-vec descr) new-vars with-same-vars)
@@ -157,7 +157,7 @@
 
 (defmethod ti-copy&rename-descr ((descr <recursive-type-descr>)
                                  new-vars . same-vars)
-  (let ((with-same-vars (consp same-vars)))
+  (let ((with-same-vars (cons? same-vars)))
     (make <recursive-type-descr>
           :type-vars (ti-copy&rename-subs (?type-vars descr) new-vars with-same-vars)
           :type-vec (ti-copy&rename-vec (?type-vec descr) new-vars with-same-vars)
@@ -167,7 +167,7 @@
 
 (defmethod ti-copy&rename-descr ((descr <act-type-descr>)
                                  new-vars . same-vars)
-  (let ((with-same-vars (consp same-vars)))
+  (let ((with-same-vars (cons? same-vars)))
     (make <act-type-descr>
           :type-vars (ti-copy&rename-subs (?type-vars descr) new-vars with-same-vars)
           :type-vec (ti-copy&rename-vec (?type-vec descr) new-vars with-same-vars)
@@ -216,7 +216,7 @@
                           (?type-vec actual-descr)
                           0
                           copy-subs)
-    (ti-copy&rename-subs (?type-vars formal-descr) copy-subs (consp same-vars))))
+    (ti-copy&rename-subs (?type-vars formal-descr) copy-subs (cons? same-vars))))
 
 (defun vec-application-subs (vec-left vec-right index subs)
   (if (< index (length vec-left))

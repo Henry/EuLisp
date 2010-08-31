@@ -21,7 +21,7 @@
 ;;;  Title: Benchmark 'takl'
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
-;;    Lisp-Systems". Additionally a version was added where the function 'shorterp' is
+;;    Lisp-Systems". Additionally a version was added where the function 'shorter?' is
 ;;    realized as a generic function with two methods specializing on the first
 ;;    argument. The specialization was restricted to the first argument to be
 ;;    comparable with C++.
@@ -51,42 +51,42 @@
 (deflocal l6 (listn 6))
 
 (defun takl (x y z)
-  (if (null? (shorterp y x))
+  (if (null? (shorter? y x))
       z
     (takl (takl (cdr x) y z)
           (takl (cdr y) z x)
           (takl (cdr z) x y))))
 
-(defun shorterp (x y)
+(defun shorter? (x y)
   (if (null? y )
       ()
     (if  (null? x) t
-      (shorterp (cdr x)
+      (shorter? (cdr x)
                 (cdr y))) ))
 
 (time (takl l24 l12 l6)
       "\n(takl i24 l12 l6) : %.2f sec %.2f sec system %.2f sec sum\n")
 
 ;;;-----------------------------------------------------------------------------
-;;; takl with generic shorterp
+;;; takl with generic shorter?
 ;;;-----------------------------------------------------------------------------
 
 (defun gtakl (x y z)
-  (if (null? (gshorterp y x))
+  (if (null? (gshorter? y x))
       z
     (gtakl (gtakl (cdr x) y z)
            (gtakl (cdr y) z x)
            (gtakl (cdr z) x y))))
 
-(defgeneric gshorterp ((x <list>) y))
+(defgeneric gshorter? ((x <list>) y))
 
-(defmethod gshorterp ((x <null>) y)
+(defmethod gshorter? ((x <null>) y)
   y)
 
-(defmethod gshorterp ((x <cons>) y)
+(defmethod gshorter? ((x <cons>) y)
   (if (null? y)
       ()
-    (gshorterp (cdr x) (cdr y))))
+    (gshorter? (cdr x) (cdr y))))
 
 (time (gtakl l24 l12 l6)
       "\n(gtakl 24l 12l 6l): %.2f sec %.2f sec system %.2f sum\n")

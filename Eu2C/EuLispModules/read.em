@@ -47,7 +47,7 @@
                   <null>
                   <list>
                   null?
-                  consp
+                  cons?
                   cons
                   car
                   %pair-length
@@ -435,7 +435,7 @@
   ((stream <stream>))
   (let ((lv1 (read-expression stream)))
     ;;          (print 'read-vector-result-list) (print lv1)
-    (if (consp lv1)
+    (if (cons? lv1)
         (initialize-vector-from-list
          (make-uninitialized-vector
           (%cast %unsigned-word-integer

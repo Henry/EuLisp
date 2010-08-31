@@ -453,7 +453,7 @@
 
 (defun get-var-type3 (var tds link)
   (if (null? tds) (general-type)
-    (if (consp tds)
+    (if (cons? tds)
         (let ((tp (get-var-type2 var (car tds) link)))
           (if tp tp
             (get-var-type3 var (cdr tds) link)))

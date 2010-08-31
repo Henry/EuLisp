@@ -108,7 +108,7 @@
 
 (defun check-configuration
   (conf)
-  (if (consp conf)
+  (if (cons? conf)
       ()
     (cl:error "~%Error wrong expression ~s for conditional read" conf))
   (let ((op (car conf)))

@@ -286,7 +286,7 @@
 (defun get-reduce-annotation (reduce-value)
   (setf (car reduce-value)
         (if-identifier (car reduce-value)))
-  (when (consp (second reduce-value))
+  (when (cons? (second reduce-value))
         (setf (car (second reduce-value))
               (if-identifier (car (second reduce-value)))))
   (list ^reduce reduce-value))
@@ -322,7 +322,7 @@
   (let ((lit (gen-literal value)))
     (if (or (sym-p value)
             (and (structured-literal-p value)
-                 (consp (?value value))))
+                 (cons? (?value value))))
         (list ^quote lit)
       lit)))
 

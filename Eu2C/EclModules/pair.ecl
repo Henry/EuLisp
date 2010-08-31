@@ -30,7 +30,7 @@
 #module pair
 (import (eulisp-kernel)
  syntax (eulisp-kernel)
- expose ((only (consp
+ expose ((only (cons?
                 cons
                 car
                 cdr

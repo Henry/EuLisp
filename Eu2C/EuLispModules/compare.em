@@ -54,7 +54,7 @@
                   equal
                   equal-character)
                  character)
-           (only (consp)
+           (only (cons?)
                  pair)
            (only (equal)
                  list))
@@ -159,14 +159,14 @@
 ;;          (if (null? object1)      ; 1.8.93 fehler rest wird abgeschnitten
 ;; ergebnis ist t
 ;;            t
-;;            (if (consp object1)
+;;            (if (cons? object1)
 ;;              (equal-cons object1 object2)
 ;;            (if (number? object1)          ; jetzt fehlt alles ab hier
 ;;              (binary= object1 object2)
 ;;              (if (character? object1)
 ;;                (equal-character object1 object2)
 ;;
-;;                (if (consp object1)
+;;                (if (cons? object1)
 ;;                  (equal-cons object1 object2)
 ;;
 ;;                  ())))))
