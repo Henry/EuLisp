@@ -35,9 +35,7 @@
          #+ :cmu (only (fixnump) ext)
          number)
  syntax (eulisp-kernel)
- export (single-precision-integer-p)
- expose ((only (evenp oddp)
-               common-lisp)))
+ export (single-precision-integer-p))
 
 
 (progn

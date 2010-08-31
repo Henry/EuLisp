@@ -119,7 +119,7 @@
   ;; the name of the basic system -- if given -- is converted into a symbol to
   ;; make it sure that the default load path is used
   ;; the basic system is a string if taken from the Lisp-command-line
-  (when (stringp basic-system)
+  (when (string? basic-system)
         (setq basic-system (make-symbol basic-system)))
 
   (if *basic-system*

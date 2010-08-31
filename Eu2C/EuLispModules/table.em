@@ -28,41 +28,34 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule table
-  (import
-   (tail
-    ;; (only (print) print)
-    (only (eql)
-          compare )
-    basic-list
-    (only (%list-length) basic-list-0)
-    table-aux
-    )
-
-   syntax
-   (tail
-    syntax-0
-    setf)
-
-   export
-   (<table>
-    tablep
-    ?table-vector
-    ?fill-value
-    table-vector-ref
-    make-table
-    table-ref
-    setter-table-ref
-    table-delete
-    map-table
-    clear-table
-    ;; map-table-index;only to test; gives the list of a lists of a hash index
-    hash
-    assoc
-    assq
-    ;;    generic-prin
-    ;;    generic-write
-    )
-   )
+  (import (tail
+           ;; (only (print) print)
+           (only (eql)
+                 compare)
+           basic-list
+           (only (%list-length)
+                 basic-list-0)
+           table-aux)
+   syntax (tail
+           syntax-0
+           setf)
+   export (<table>
+           table?
+           ?table-vector
+           ?fill-value
+           table-vector-ref
+           make-table
+           table-ref
+           setter-table-ref
+           table-delete
+           map-table
+           clear-table
+           hash
+           assoc
+           assq
+           ;;    generic-prin
+           ;;    generic-write
+           ))
 
 
 (defgeneric (converter <table>) (object))
@@ -89,15 +82,12 @@
            ))
   representation pointer-to-vector
   allocation single-card
-  constructor (make-vector-table)
-  )
+  constructor (make-vector-table))
 
 
 ;;;-----------------------------------------------------------------------------
 ;;; Definition of class table
 ;;;-----------------------------------------------------------------------------
-
-
 (%define-standard-class (<table> <class>)
   <object>
   ((table-vector
@@ -130,8 +120,7 @@
                comparator
                fill-value
                hash-function)
-  predicate tablep
-  )
+  predicate table?)
 
 
 

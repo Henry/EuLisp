@@ -39,7 +39,7 @@
    syntax (tail)
 
    export (<string>
-           stringp
+           string?
            duplicate-%string
            allocate-%string
            make-string
@@ -51,11 +51,11 @@
 
 
 ;;;-----------------------------------------------------------------------------
-;;; stringp
+;;; string?
 ;;;-----------------------------------------------------------------------------
 
 
-(defun stringp (object)
+(defun string? (object)
   (%instance-of-p object <string>))
 
 ;;;-----------------------------------------------------------------------------
@@ -106,7 +106,7 @@
     ((var var2) (atom? <string>)))))
 
 (%annotate-function
-  stringp new-signature
+  string? new-signature
   (((var0 var1)
     ((var var0) (atom? <string>))
     ((var var1) (atom? <string>)))
@@ -114,9 +114,6 @@
     ((var var0) (atom? <null>))
     ((var var1) (atom? (and <object> (not <string>)))))))
 
-
-) ;end of string-0
-
-
-
-
+;;;-----------------------------------------------------------------------------
+)  ;; end of string-ii
+;;;-----------------------------------------------------------------------------

@@ -38,25 +38,22 @@
                common-lisp))
  syntax (eulisp-kernel
          number-i)
- expose ((only (numberp
-                integerp
-                + - * / < > <= >=
+ expose ((only (+ - * / < > <= >=
                 max
                 min
                 gcd
                 lcm
                 abs
-                zerop
                 signum
                 ceiling
                 floor
                 round
-                truncate
-                evenp
-                oddp)
+                truncate)
                common-lisp)
          number-i)
- export (float?
+ export (number?
+         integer?
+         float?
          binary<
          binary=
          binary+
@@ -69,12 +66,23 @@
          binary%
          %
          negate
-         positivep
-         negativep))
+         zero?
+         positive?
+         negative?
+         even?
+         odd?))
 
 
 ;;(make-eulisp-class number) ; now in `number-i'
+
+(defun number? (obj)
+  (cl:numberp obj))
+
 (make-eulisp-class integer)
+
+(defun integer? (obj)
+  (cl:integerp obj))
+
 (make-eulisp-class float)
 
 (defun float? (obj)
@@ -116,10 +124,19 @@
 (defun negate (n)
   (- n))
 
-(defun positivep (n)
+(defun zero? (n)
+  (cl:zerop n))
+
+(defun positive? (n)
   (plusp n))
 
-(defun negativep (n)
+(defun negative? (n)
   (minusp n))
+
+(defun even? (n)
+  (cl:evenp n))
+
+(defun odd? (n)
+  (cl:oddp n))
 
 #module-end

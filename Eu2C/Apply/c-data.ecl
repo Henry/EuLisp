@@ -45,7 +45,6 @@
                configuration)
          (only (format
                 mapc
-                ;;stringp
                 make-list
                 char
                 subseq
@@ -231,7 +230,7 @@
                       length
                       (second (?value-list literal))    ; the components
                       element-type)))
-    (if (stringp components)
+    (if (string? components)
         (write-data "~%~:[static ~;~]LITERAL(~A) = {VTAG(~A, ~:/EXPR/), \"~A\"};"
                     (exported-for-lisp-p (?unexpanded literal))
                     (c-identifier literal)
@@ -258,7 +257,7 @@
 ;;                      length
 ;;                      (second (?value-list literal))    ; the components
 ;;                      element-type)))
-;;    (if (stringp components)
+;;    (if (string? components)
 ;;      (write-data "~%~A ~A = \"~A\";"
 ;;                  (type-identifier class)
 ;;                  (c-identifier literal)

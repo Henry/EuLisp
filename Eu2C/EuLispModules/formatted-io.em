@@ -42,7 +42,7 @@
            eq
            ) tail)
     (only (error <condition>) condition-i)
-    (only (int-p) int-i)
+    (only (int?) int-i)
     (only ($standard-output
            %write-unit %read-unit %peek-unit
            ensure-open-character-output-stream
@@ -68,7 +68,7 @@
     (only (null?)
           basic-list-0)         ; inserted by ak
     (only (read read-based-int1) read)
-    (only (integerp) integer)
+    (only (integer?) integer)
     (only (float?) float-i)
     (only (<double-float> make-dble set-dble dble) double-float-i)
     (only (sscanf-3 sprintf-3-double) c-stdio)
@@ -76,7 +76,7 @@
     (only (*buffer-1*
            <string-stack> clear-buffer
            push-buffer ?stack-string make-string-stack) string-stack)
-    (only (stringp
+    (only (string?
            string-pointer <string> make-string
            allocate-%string duplicate-%string) string-ii)
     (only (strlen) c-string-interface)
@@ -221,7 +221,7 @@
       (if (%eq ch $char-ascii-d-l)
           (generic-write (car args) stream ) ;write test int
         (if (%eq ch $char-ascii-b-l) ;test int
-            (if (int-p (car args))
+            (if (int? (car args))
                 (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                        (print-based-int-0 stream
                                           (make-swi (car args))
@@ -248,7 +248,7 @@
         (if (%eq ch $char-ascii-g-l)
             (format-float stream (car args) fstring-c cur-index)
           (if (%eq ch $char-ascii-o-l)
-              (if (int-p (car args))
+              (if (int? (car args))
                   (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                          (print-based-int-0
                           stream
@@ -257,7 +257,7 @@
                           (%cast <string-stack> *buffer-1*)))
                 (generic-write (car args) stream ))
             (if (%eq ch $char-string-hex-l)
-                (if (int-p (car args))
+                (if (int? (car args))
                     (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                            (print-based-int-0
                             stream
@@ -266,7 +266,7 @@
                             (%cast <string-stack> *buffer-1*)))
                   (generic-write (car args) stream ))
               (if (%eq ch $char-ascii-r-l)
-                  (if (int-p (car args))
+                  (if (int? (car args))
                       (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                              (print-based-int-0
                               stream
@@ -421,7 +421,7 @@
    (cur-index %signed-word-integer)
    (length %signed-word-integer))
   (let ((obj (%cast <object> (read-integer stream base))))
-    (if (integerp obj)
+    (if (integer? obj)
         (cons obj (scan1 stream fstring-c cur-index length))
       (progn (dynamic-setq saved-cur-index
                            (make-fpint cur-index))

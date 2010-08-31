@@ -66,11 +66,11 @@
                  c-stdio)
            stream-generic
            standard-generic-function
-           (only (stringp
+           (only (string?
                   string-pointer
                   <string>)
                  string-ii)
-           (only (int-p
+           (only (int?
                   <int>)
                  int-i)
            (only (double-float?
@@ -292,11 +292,11 @@
 ;;       (prin-cons object stream)
 ;;       (if (null? object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
-;;         (if (int-p object)
+;;         (if (int? object)
 ;;           (%write-int stream (make-swi (%cast <int> object)))
 ;;             (if (symbol? object)
 ;;                (%write-string stream (%select object <symbol> name))
-;;              (if (stringp object)
+;;              (if (string? object)
 ;;                (%write-string stream (string-pointer (%cast <string> object)))
 ;;    ;; vector
 ;;                (if (vector? object)
@@ -415,11 +415,11 @@
 ;;       (write-cons-1 object stream)
 ;;       (if (null? object) ;(eq obj-class <null>)
 ;;         (%write-string stream (%literal %string () "()"))
-;;         (if (int-p object)
+;;         (if (int? object)
 ;;           (%write-int stream (make-swi (%cast <int> object)))
 ;;           (if (symbol? object)
 ;;             (write-symbol-1 (%cast <symbol> object) stream)
-;;             (if (stringp object)
+;;             (if (string? object)
 ;;               (write-string-1 (%cast <string> object) stream)
 ;;   ;; vector
 ;;               (if (vector? object)

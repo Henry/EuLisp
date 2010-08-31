@@ -23,17 +23,23 @@
 ;;    converter
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
-
 (defmodule double-float
   (import (eulisp-kernel
            double-float-i
-           c-math number-generic float-generic elementary-functions-generic
-           (only (binary= binary< equal) compare-generic)
+           c-math
+           number-generic
+           float-generic
+           elementary-functions-generic
+           (only (binary=
+                  binary<
+                  equal)
+                 compare-generic)
            integer-32
            convert)
    c-import (<float.h>)
    syntax (eulisp-kernel
-           (only (and) syntax-0))
+           (only (and)
+                 syntax-0))
    export (<double-float>
            double-float?
            most-positive-double-float
@@ -42,7 +48,10 @@
            most-negative-double-float)
    expose (number-generic
            float-generic
-           (only (binary= binary< equal) compare)
+           (only (binary=
+                  binary<
+                  equal)
+                 compare)
            elementary-functions-generic))
 
 ;;;-----------------------------------------------------------------------------
@@ -222,7 +231,7 @@
 (defmethod negate ((d <double-float>))
   (make-dble(%neg (dble d))))
 
-(defmethod zerop ((d <double-float>))
+(defmethod zero? ((d <double-float>))
   (if (%eq (dble d) #%d0.0)
       d
     ()))

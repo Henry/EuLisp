@@ -20,32 +20,31 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: generic functions of default module number
 ;;;  Description:
-;;    Module contains all generic functions defined for subclasses of class <number>
-;;;  Documentation:
+;;    Module contains all generic functions defined for subclasses of class
+;;    <number>
 ;;;  Notes:
-;;    The default generic functions with special characters in its name are defined
-;;    with only character names to provide a better readability at the C level. The
-;;    EuLisp names are provided by a special interface module 'number-generic'.
-;;;  Requires:
-;;;  Problems:
+;;    The default generic functions with special characters in its name are
+;;    defined with only character names to provide a better readability at the C
+;;    level. The EuLisp names are provided by a special interface module
+;;    'number-generic'.
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
 (defmodule number-generic-i
   (import (eulisp-kernel
-           (only (<number>) number-i))
+           (only (<number>)
+                 number-i))
    syntax (eulisp-kernel)
-   export
-   (binary-plus
-    binary-minus
-    binary-div
-    binary-mult
-    binary-rem
-    binary-mod
-    binary-gcd
-    binary-lcm
-    negate
-    zerop))
+   export (binary-plus
+           binary-minus
+           binary-div
+           binary-mult
+           binary-rem
+           binary-mod
+           binary-gcd
+           binary-lcm
+           negate
+           zero?))
 
 
 (defgeneric binary-plus ((n1 <number>) (n2 <number>)))
@@ -66,6 +65,8 @@
 
 (defgeneric negate ((n <number>)))
 
-(defgeneric zerop ((n <number>)))
+(defgeneric zero? ((n <number>)))
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

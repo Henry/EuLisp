@@ -24,24 +24,22 @@
   (import (eulisp-kernel)
    syntax (eulisp-kernel)
    export (<int>
-           int-p
+           int?
            make-fpint
            make-swi))
 
-(defun int-p
+(defun int?
   (i)
   (%instance-of-p i <int>))
 
 (defgeneric (converter <int>)
   (object))
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 ;;(%annotate-function
-;; int-p new-signature
+;; int? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (and <object> (not <null>))))
 ;;   ((var var1) (atom? <int>)))
@@ -50,7 +48,7 @@
 ;;   ((var var1) (atom? (and <object> (not <int>)))))))
 
 (%annotate-function
-  int-p new-signature
+  int? new-signature
   (((var0 var1)
     ((var var0) (atom? <int>))
     ((var var1) (atom? <int>)))

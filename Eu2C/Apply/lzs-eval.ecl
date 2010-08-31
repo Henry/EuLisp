@@ -252,14 +252,14 @@
     round
     truncate
     ;;--- fpi
-    int-p
+    int?
     ;;   ;--- formatted-io
     ;;   scan
     format
     ;;--- integer
-    integerp
-    evenp
-    oddp
+    integer?
+    even?
+    odd?
 
     ;;--- list
     null?
@@ -271,20 +271,22 @@
     list
 
     ;;--- number
-    numberp
+    number?
     +  ;; needed for :int :big
     - * /
     %
-    gcd lcm abs
-    zerop
+    gcd
+    lcm
+    abs
+    zero?
     negate
     signum
-    positivep
-    negativep
+    positive?
+    negative?
 
     ;;--- stream
-    streamp
-    ;;   character-stream-p
+    stream?
+    ;;   character-stream?
     ;;   standard-input-stream
     ;;   standard-output-stream
     ;;   standard-error-stream
@@ -292,7 +294,7 @@
     close
     ;;   flush
     ;;   stream-position
-    ;;   end-of-stream-p
+    ;;   end-of-stream?
     ;;   input
     ;;   uninput
     ;;   output
@@ -303,7 +305,7 @@
     ;;   newline
 
     ;;--- string
-    stringp
+    string?
     ;;as-lowercase
     ;;as-uppercase
     binary<
@@ -313,10 +315,10 @@
     gensym
     make-symbol
     symbol-name
-    symbol-exists-p
+    symbol-exists?
 
     ;;--- table
-    tablep
+    table?
     clear-table
 
     ;;--- vector

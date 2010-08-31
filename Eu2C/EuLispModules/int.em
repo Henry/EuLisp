@@ -40,7 +40,7 @@
                        binary-gcd
                        binary-lcm
                        negate
-                       zerop)
+                       zero?)
                       number-generic)
                 (only (binary<
                        binary=
@@ -62,9 +62,9 @@
     binary-gcd
     binary-lcm
     negate
-    zerop
+    zero?
     equal
-    int-p
+    int?
     ;;constants
     <fpi>
     most-positive-int
@@ -172,7 +172,7 @@
 (defmethod negate ((a <int>))
   (make-fpint (%neg (make-swi a))))
 
-(defmethod zerop ((a <int>))
+(defmethod zero? ((a <int>))
   (binary= a 0))
 
 (defmethod equal

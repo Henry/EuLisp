@@ -122,7 +122,7 @@
 
 ;;; Answer whether two lattice type codes are complementary.
 (defun complement-codes-p (code1 code2)
-  (zerop (+ code1 code2)))
+  (zero? (+ code1 code2)))
 
 
 #module-end

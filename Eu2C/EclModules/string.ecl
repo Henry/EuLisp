@@ -35,10 +35,9 @@
                 <string>
                 subseq
                 concatenate
-                stringp
                 copy-seq
                 string<
-                numberp
+                number?
                 string-downcase
                 string-upcase)
                common-lisp)
@@ -49,6 +48,7 @@
          copy-generic ; deep-copy shallow-copy
   )
  export (make-string
+         string?
          string-ref        ; not in el
          string-lt         ; not in el
          string-gt         ; not in el
@@ -61,8 +61,7 @@
          binary<
          as-lowercase
          as-uppercase)
- expose ((only (stringp
-                equal)
+ expose ((only (equal)
                common-lisp))
  syntax (eulisp-kernel
          (rename ((defun cl:defun))
@@ -76,6 +75,9 @@
 
 (cl:defun make-string (n &optional (character $null-char))
           (cl:make-string n :initial-element  character))
+
+(defun string? (string)
+  (cl:stringp string))
 
 (defun string-ref (string n)
   (char string n))
@@ -100,7 +102,7 @@
   (copy-seq strng))
 
 (defmethod binary< ((strng1 <string>)(strng2 <string>))
-  (if (numberp (string< strng1 strng2))
+  (if (number? (string< strng1 strng2))
       t
     ()))
 

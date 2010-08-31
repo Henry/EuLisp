@@ -53,7 +53,7 @@
          make-table
          table-ref
          setter-table-ref
-         tablep
+         table?
          table-delete
          clear-table))
 
@@ -94,15 +94,13 @@
 (defsetf table-ref (table key) (value)
   `(setter-table-ref ,table ,key ,value))
 
-(defun tablep(o)
+(defun table? (o)
   (typep o '<table>))
 
-(defmethod table-delete
-  ((table <table>) key)
+(defmethod table-delete ((table <table>) key)
   (remhash key (table-hash-table-reader table)))
 
-(defmethod clear-table
-  ((table <table>))
+(defmethod clear-table ((table <table>))
   (clrhash (table-hash-table-reader table))table)
 
 (defmethod map-table

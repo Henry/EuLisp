@@ -104,7 +104,7 @@
                   set-dble
                   make-dble)
                  double-float-i)
-           (only (int-p)
+           (only (int?)
                  int-i)
            (only (strcmp)
                  c-string-interface)
@@ -738,7 +738,7 @@
 (%define-function (read-based-int <integer>)
   ((stream <stream>))
   (let ((obj (read-extended-extension stream #%i0)))
-    (if (int-p obj)
+    (if (int? obj)
         obj
       (progn
         (syntax-error stream #%i20)

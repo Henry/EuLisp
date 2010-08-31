@@ -31,45 +31,44 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule compare
-  (import
-   (eulisp-kernel
-    compare-generic
-    (only (eq) basic-compare)
-    (only (%list-length) basic-list-0)
-    (only (numberp) number-i)
-    (only (<vector>
-           vector?
-           equal
-           equal-vector
-           primitive-vector-length
-           primitive-vector-ref)
-          vector)
-    (only (stringp equal-string) string-ii)  ;; string
-    (only (<character>
-           character?
-           equal
-           equal-character) character)
-    (only (consp) pair)
-    (only (equal) list)
-    )
-
-   syntax
-   (eulisp-kernel
-    (only (and cond) syntax-0)
-    )
-
-   expose
-   (compare-generic)   ;;  binary<, binary=, equal
-
-   export
-   (eq
-    eql
-    =
-    <
-    max
-    min
-    )
-   )
+  (import (eulisp-kernel
+           compare-generic
+           (only (eq)
+                 basic-compare)
+           (only (%list-length)
+                 basic-list-0)
+           (only (number?)
+                 number-i)
+           (only (<vector>
+                  vector?
+                  equal
+                  equal-vector
+                  primitive-vector-length
+                  primitive-vector-ref)
+                 vector)
+           (only (string?
+                  equal-string)
+                 string-ii)  ;; string
+           (only (<character>
+                  character?
+                  equal
+                  equal-character)
+                 character)
+           (only (consp)
+                 pair)
+           (only (equal)
+                 list))
+   syntax (eulisp-kernel
+           (only (and
+                  cond)
+                 syntax-0))
+   expose (compare-generic)   ;;  binary<, binary=, equal
+   export (eq
+           eql
+           =
+           <
+           max
+           min))
 
 
 (defun eql (object1 object2)
@@ -153,7 +152,7 @@
 ;;      t
 ;;      (if (eq (%class-of object1)
 ;;              (%class-of object2))
-;;        (if (stringp object1)
+;;        (if (string? object1)
 ;;          (equal-string object1 object2)
 ;;          (if (vector? object1)
 ;;            (equal-vector object1 object2)
@@ -162,7 +161,7 @@
 ;;            t
 ;;            (if (consp object1)
 ;;              (equal-cons object1 object2)
-;;            (if (numberp object1)          ; jetzt fehlt alles ab hier
+;;            (if (number? object1)          ; jetzt fehlt alles ab hier
 ;;              (binary= object1 object2)
 ;;              (if (character? object1)
 ;;                (equal-character object1 object2)

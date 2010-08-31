@@ -47,7 +47,7 @@
     gensym
     gensym1
     symbol-name
-    symbol-exists-p
+    symbol-exists?
     make-symbol
     initialize))
 
@@ -108,15 +108,15 @@
          (string-append arg
                         (make-string (convert-to-%string $gensym-counter)))))
     (%setf $gensym-counter (%plus $gensym-counter #%I1))
-    (if (symbol-exists-p new-name)
+    (if (symbol-exists? new-name)
         (gensym1 arg)
       (make-symbol new-name)))
   )
 
 ;;;-----------------------------------------------------------------------------
-;;; symbol-exists-p
+;;; symbol-exists?
 ;;;-----------------------------------------------------------------------------
-(defun symbol-exists-p (name)
+(defun symbol-exists? (name)
   (find-symbol-in-table name *symbol-table*))
 
 (%define-function (find-symbol-in-table <object>)
@@ -156,7 +156,7 @@
     ((var var1) (atom? <string>)))))
 
 (%annotate-function
-  symbol-exists-p new-signature
+  symbol-exists? new-signature
   (((var0 var1)
     ((var var0) (atom? <object>))
     ((var var1) (atom? <string>)))))

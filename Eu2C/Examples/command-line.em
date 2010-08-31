@@ -36,7 +36,7 @@
 (defun select ()
   (format t "~%argument number:")
   (let ((n (read)))
-    (cond ((null? (numberp n)))
+    (cond ((null? (number? n)))
           ((< n argc)
            (format t "~%~s" (element argv n))
            (select))

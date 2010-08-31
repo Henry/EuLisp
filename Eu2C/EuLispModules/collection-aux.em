@@ -50,13 +50,13 @@
            (only (print)
                  print)
            (only (<string>
-                  stringp
+                  string?
                   )
                  string)
            character
            vector
            (only (<table>
-                  tablep
+                  table?
                   table-ref
                   ?fill-value)
                  table)

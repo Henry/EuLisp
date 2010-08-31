@@ -122,7 +122,7 @@
 
 ;;; Toggable format function for type-inference.
 (defmacro ti-format args
-  (let ((ok (if (numberp *ti-verbose*)
+  (let ((ok (if (number? *ti-verbose*)
                 (> *ti-verbose* 0)
               *ti-verbose*)))
     (if ok
@@ -130,7 +130,7 @@
 
 ;;; Second toggable format function for type-inference.
 (defmacro ti-format2 args
-  (if (and (numberp *ti-verbose*)
+  (if (and (number? *ti-verbose*)
            (> *ti-verbose* 1))
       `(format ,@args)))
 
@@ -144,7 +144,7 @@
   (setq *ti-verbose* 2))
 
 ;;(defmacro ti-error args
-;;  (let ((ok (if (numberp *ti-break*)
+;;  (let ((ok (if (number? *ti-break*)
 ;;              (> *ti-break* 0)
 ;;            *ti-break*)))
 ;;    (if ok
@@ -195,18 +195,18 @@
     (format t "~%Total number of analysed function calls: ~A" calls)
     (format t "~%Total number of joined function call descriptors: ~A (~,2F %)"
             joined-calls
-            (if (zerop calls) 0
+            (if (zero? calls) 0
               (* (/ (float joined-calls) (float calls)) 100)))
     (ti-format t "~%Total number of analysed %setf-select calls: ~A" select)
     (format t "~2%Total number of inferred function type schemes: ~A" signatures)
     (format t "~%Total number of joined type scheme descriptors: ~A (~,2F %)"
             joined-signatures
-            (if (zerop signatures) 0
+            (if (zero? signatures) 0
               (* (/ (float joined-signatures) (float signatures)) 100)))
     (format t "~2%Total number of inferred classes: ~A" classes)
     (format t "~%Total number of inferred abstract classes: ~A (~,2F %)"
             abstract-classes
-            (if (zerop classes) 0
+            (if (zero? classes) 0
               (* (/ (float abstract-classes) (float classes)) 100)))))
 
 #module-end

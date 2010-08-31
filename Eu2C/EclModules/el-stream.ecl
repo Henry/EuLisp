@@ -20,34 +20,34 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: standard module stream
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module el-stream
-
-(import
- ((except (let) eulisp-kernel) ; zur Sicherheit, da noch nicht zwischen export
-  ;; und syntax-export unterschieden wird
-  (only (*package*) common-lisp)
-  (rename ((read cl:read)) common-lisp))
-
- syntax
- ((except (let) eulisp-kernel)
-  (only (let &optional declare special) common-lisp)
-  (rename ((defun cl:defun)) common-lisp))
-
- export
- (read)
-
- expose
- ((only (streamp close read-char read-byte peek-char write-char write-byte
-                 print )
-        common-lisp))
- )
+(import ((except (let)
+                 eulisp-kernel)
+         (only (*package*)
+               common-lisp)
+         (rename ((read cl:read))
+                 common-lisp))
+ syntax ((except (let)
+                 eulisp-kernel)
+         (only (let
+                &optional
+                declare special)
+               common-lisp)
+         (rename ((defun cl:defun))
+                 common-lisp))
+ export (read
+         stream?)
+ expose ((only (close
+                read-char
+                read-byte
+                peek-char
+                write-char
+                write-byte
+                print)
+               common-lisp)))
 
 (cl:defun read (&optional stream)
           (let ((*package* $eulisp-symbol-package))
@@ -56,4 +56,9 @@
                 (read-eulisp stream)
               (read-eulisp))))
 
+(defun stream? (s)
+  (cl:streamp s))
+
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

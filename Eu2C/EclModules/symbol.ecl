@@ -41,7 +41,7 @@
  expose ((only (symbol-name)
                common-lisp))
  export (gensym
-         symbol-exists-p
+         symbol-exists?
          symbol?))
 
 (make-eulisp-class symbol)
@@ -57,7 +57,7 @@
                                (cl:gensym)))
                   $eulisp-symbol-package))
 
-(defun symbol-exists-p (name)
+(defun symbol-exists? (name)
   (find-symbol name $eulisp-symbol-package))
 
 ;;;-----------------------------------------------------------------------------

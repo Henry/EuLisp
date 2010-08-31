@@ -52,10 +52,10 @@
     ;; input-stream output-stream ; nicht in el0.99
     read ; nicht in el0.99
     prin open close
-    streamp file-stream-p
+    stream? file-stream-p
     input-stream-p output-stream-p ; nicht in el0.99
     ;; io-stream-p  ; nicht in el0.99
-    character-stream-p
+    character-stream?
     ;; binary-stream-p  ; nicht in el0.99
     open-p ; nicht in el0.99
     flush print
@@ -64,7 +64,7 @@
     standard-error-stream
     stream-position
     set-stream-position ; nicht in el0.99, aber fur setter stream-position
-    end-of-stream-p input uninput read-line
+    end-of-stream? input uninput read-line
     output newline write
     <stream-condition>
     <end-of-stream>
@@ -83,7 +83,7 @@
 ;; still to annotate:
 
 (%annotate-function
-  streamp new-signature
+  stream? new-signature
   (((var0 var1)
     ((var var0) (atom? (and <object> (not <null>))))
     ((var var1) (atom? <stream>)))
@@ -101,7 +101,7 @@
     ((var var1) (atom? (and <object> (not <file-stream>)))))))
 
 ;;(%annotate-function
-;; character-stream-p new-signature
+;; character-stream? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (and <object> (not <null>))))
 ;;   ((var var1) (atom? <character-stream>)))
@@ -109,6 +109,6 @@
 ;;   ((var var0) (atom? <null>))
 ;;   ((var var1) (atom? (and <object> (not <character-stream>)))))))
 
-
+;;;-----------------------------------------------------------------------------
 )
-
+;;;-----------------------------------------------------------------------------

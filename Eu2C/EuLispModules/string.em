@@ -45,7 +45,7 @@
    syntax (tail syntax-0)
    export
    (<string>
-    stringp
+    string?
     ;;  string-length ;because there is no methods!
     ;;  (converter <symbol>)
     make-string ;;***HGW
@@ -80,7 +80,7 @@
 ;;; converter method
 ;;;-----------------------------------------------------------------------------
 (defmethod (converter <symbol>) ((collection <string>))
-  (let ((sym (symbol-exists-p collection)))
+  (let ((sym (symbol-exists? collection)))
     (if sym
         sym
       (make-symbol collection)

@@ -27,11 +27,7 @@
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
-
-
-
 (defmodule table-aux
-
   (import
    (tail
     apply
@@ -43,7 +39,7 @@
      (symbol? <symbol>)
      symbol)
     ;;(only (prin) print)
-    (only (<string> stringp)
+    (only (<string> string?)
           string-ii)
     (only (eql)
           compare )
@@ -184,7 +180,7 @@
 ;;           (cond
 ;;            ((symbol? obj)
 ;;             (hash-for-symbols obj))
-;;            ((stringp obj)
+;;            ((string? obj)
 ;; ;;(prin 'hashindex-for-strings)
 ;;             (hash-for-strings obj))
 ;;            ((character? obj)

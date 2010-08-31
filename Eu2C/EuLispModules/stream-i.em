@@ -70,7 +70,7 @@
              ;; <input-stream> <output-stream> <io-stream> <stream-unit> input-stream output-stream
              stdin stdout stderr %peek-unit %read-unit %write-unit
              fprintf-3 sprintf-3 fscanf-3 sscanf-3 EOF
-             streamp file-stream-p
+             stream? file-stream-p
              opened-streams open $standard-input
              $standard-output $standard-error-output fflush flush close
              ensure-open-character-input-stream
@@ -79,13 +79,13 @@
              standard-error-stream
              %unread-unit stream-position
              set-stream-position ;(only as setter)
-             end-of-stream-p
+             end-of-stream?
 
              ensure-open-character-output-stream
              file-descriptor-pointer make-file-stream
              input-stream-p output-stream-p
              ;; io-stream-p
-             character-stream-p
+             character-stream?
              ;; binary-stream-p
              open-p
              stream-direction
@@ -160,12 +160,12 @@
 ;;;                         writer setf-stream-eos-action)
 ;;;        ;(name type <string> accessor stream-name)
 ;;;        )
-;;;        predicate streamp        ;;rr
+;;;        predicate stream?        ;;rr
 ;;;       representation pointer-to-struct
 ;;;)
 
-(defmethod streamp ((object <stream>)) 't)
-(defmethod streamp ((object <object>)) ())
+(defmethod stream? ((object <stream>)) 't)
+(defmethod stream? ((object <object>)) ())
 
 (%define-standard-class (<file-stream> <class>)
   <stream>
@@ -569,23 +569,23 @@
 
 
 (defun input-stream-p (obj)
-  (if (streamp obj)
-      (if ;(inputstreamp (stream-direction obj))
+  (if (stream? obj)
+      (if ;(inputstream? (stream-direction obj))
           (eq 'input (stream-direction obj))
           obj
         ())
     ()))
 
 (defun output-stream-p (obj)
-  (if (streamp obj)
-      (if ;(outputstreamp (stream-direction obj))
+  (if (stream? obj)
+      (if ;(outputstream? (stream-direction obj))
           (eq 'output (stream-direction obj))
           obj
         ())
     ()))
 
-(defmethod character-stream-p ((object <object>)) ())
-(defmethod character-stream-p ((object <stream>))
+(defmethod character-stream? ((object <object>)) ())
+(defmethod character-stream? ((object <stream>))
   (if (eq <character> (stream-transaction-unit object))
       object
     ()))
@@ -632,7 +632,7 @@
 
 (defun ensure-open-character-input-stream (stream)
   (if (ensure-open-input-stream stream)
-      (if (character-stream-p stream)
+      (if (character-stream? stream)
           stream
         (progn ;(error "Attempt to use stream ~A as character-input-stream." stream)
           ()))
@@ -640,7 +640,7 @@
 
 (defun ensure-open-character-output-stream (stream)
   (if (ensure-open-output-stream stream)
-      (if (character-stream-p stream)
+      (if (character-stream? stream)
           stream
         (progn ;(error "Attempt to use stream ~A as character-input-stream." stream)
           ()))
@@ -704,7 +704,7 @@
           ()))
     ()))
 
-(defun end-of-stream-p (stream)
+(defun end-of-stream? (stream)
   (if (file-stream-p stream)
       (%let ((lvpos %signed-word-integer
                     (ftell ;;(%cast %unsigned-word-integer
@@ -762,7 +762,7 @@
 ;;        ((mode-string type %string default
 ;;                                   (%literal %string () "r")
 ;;                        accessor ?mode-string)) ;rr
-;;           predicate inputstreamp
+;;           predicate inputstream?
 ;;        ;;(dummy type %unsigned-word-integer))
 ;;        ; constructor
 ;;        constructor (make-input-stream)
@@ -779,7 +779,7 @@
 ;;                            (%literal %string () "w")
 ;;                        accessor ?mode-string))
 ;;(dummy type %unsigned-word-integer))
-;;             predicate outputstreamp
+;;             predicate outputstream?
 ;;        constructor (make-output-stream)
 ;;        allocation single-card
 ;;        representation pointer-to-struct)
@@ -793,7 +793,7 @@
 ;;      ((mode-string default (%literal %string () "r+")
 ;;                            accessor ?mode-string))
 ;;        ; constructor ???
-;;             predicate iostreamp
+;;             predicate iostream?
 ;;             allocation single-card
 ;;        representation pointer-to-struct)
 ;;
@@ -806,7 +806,7 @@
 ;;        ((dummy type %unsigned-word-integer))
 ;;        ; constructor
 ;;        constructor (make-character-stream)
-;;             predicate characterstreamp
+;;             predicate characterstream?
 ;;        allocation single-card
 ;;        representation pointer-to-struct)
 ;;
@@ -815,7 +815,7 @@
 ;;        ((dummy type %unsigned-word-integer))
 ;;        ; constructor
 ;;        constructor (make-binary-stream)
-;;             predicate binarystreamp
+;;             predicate binarystream?
 ;;        allocation single-card
 ;;        representation pointer-to-struct)
 
@@ -849,15 +849,15 @@
 ;;      stream)
 
 ;;(defun io-stream-p (obj) ; nicht notwendig
-;;  (if (streamp obj)
-;;    (if (iostreamp (stream-direction obj))
+;;  (if (stream? obj)
+;;    (if (iostream? (stream-direction obj))
 ;;      obj
 ;;      ())
 ;;    ()))
 
 ;;(defun binary-stream-p (obj)
-;;  (if (streamp obj)
-;;    (if (binarystreamp (stream-transaction-unit obj))
+;;  (if (stream? obj)
+;;    (if (binarystream? (stream-transaction-unit obj))
 ;;      obj
 ;;      (if (eq <int> (stream-transaction-unit obj))
 ;;        obj

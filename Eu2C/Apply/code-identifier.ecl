@@ -128,7 +128,7 @@
                 (copy-tree $reserved-identifiers)))
 
 (defun make-identifier-table-entry (id)
-  (cons (if (stringp id)
+  (cons (if (string? id)
             (make-symbol id)
           id)
         0))

@@ -28,15 +28,12 @@
                common-lisp))
  syntax (eulisp-kernel)
  export (double-float?)
- expose ((only (numberp
-                integerp
-                + - * / < > <= >=
+ expose ((only (+ - * / < > <= >=
                 max
                 min
                 gcd
                 lcm
-                abs
-                zerop)
+                abs)
                common-lisp)))
 
 (make-eulisp-class double-float)

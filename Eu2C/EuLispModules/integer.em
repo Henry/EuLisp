@@ -24,36 +24,36 @@
 (defmodule integer
   (import (eulisp-kernel
            (only (binary-mod
-                  zerop)
+                  zero?)
                  number-generic))
    syntax (eulisp-kernel)
    expose (integer-generic)
-   export (integerp
+   export (integer?
            <integer>
-           evenp
-           oddp))
+           even?
+           odd?))
 
-(defun integerp
+(defun integer?
   (i)
   (%instance-of-p i <integer>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Even and odd
 ;;;-----------------------------------------------------------------------------
-(defun evenp (x)
-  (if (zerop (binary-mod x 2))
+(defun even? (x)
+  (if (zero? (binary-mod x 2))
       t
     ()))
 
-(defun oddp (x)
-  (null? (zerop (binary-mod x 2))))
+(defun odd? (x)
+  (null? (zero? (binary-mod x 2))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
 
 (%annotate-function
-  integerp new-signature
+  integer? new-signature
   (((var0 var1)
     ((var var0) (atom? <integer>))
     ((var var1) (atom? <integer>)))
@@ -62,13 +62,13 @@
     ((var var1) (atom? (and <object> (not <integer>)))))))
 
 (%annotate-function
-  evenp new-signature
+  even? new-signature
   (((var0 var1)
     ((var var0) (atom? <object>))
     ((var var1) (atom? <integer>)))))
 
 (%annotate-function
-  oddp new-signature
+  odd? new-signature
   (((var0 var1)
     ((var var0) (atom? <object>))
     ((var var1) (atom? <integer>)))))

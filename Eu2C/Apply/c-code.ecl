@@ -90,7 +90,6 @@
                 svref
                 vector
                 string
-                stringp
                 string-equal
                 assoc
                 list*
@@ -261,13 +260,13 @@
          :test #'string-equal)))
 
 (defun generate-include (filespec)
-  (write-code (if (stringp filespec)
+  (write-code (if (string? filespec)
                   "~%#include ~S"
                 "~%#include ~(~A~)")
               filespec))
 
 (defun get-file-spec (include-spec)
-  (if (stringp include-spec)
+  (if (string? include-spec)
       include-spec
     (let ((file-spec (string include-spec)))
       (subseq file-spec 1 (- (length file-spec) 1)))))

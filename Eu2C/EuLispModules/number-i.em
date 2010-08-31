@@ -24,19 +24,18 @@
 (defmodule number-i
   (import ( eulisp-kernel)
    syntax (eulisp-kernel)
-   export (<number> numberp))
+   export (<number>
+           number?))
 
-
-(defun numberp
+(defun number?
   (i)
   (%instance-of-p i <number>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 ;;(%annotate-function
-;; numberp new-signature
+;; number? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (and <object> (not <null>))))
 ;;   ((var var1) (atom? <number>)))
@@ -45,7 +44,7 @@
 ;;   ((var var1) (atom? (and <object> (not <number>)))))))
 
 (%annotate-function
-  numberp new-signature
+  number? new-signature
   (((var0 var1)
     ((var var0) (atom? <number>))
     ((var var1) (atom? <number>)))
@@ -53,4 +52,6 @@
     ((var var0) (atom? <null>))
     ((var var1) (atom? (and <object> (not <number>)))))))
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

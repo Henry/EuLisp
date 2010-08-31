@@ -73,7 +73,6 @@
                 nconc
                 get
                 listp
-                stringp
                 vector)
                common-lisp)
          lzs accessors
@@ -613,7 +612,7 @@
 (defun trans-c-imports (file-spec-list)
   (mapc (lambda (file)
           (if (or (symbol? file)
-                  (stringp file))
+                  (string? file))
               (setf (?c-imports (dynamic *current-module*))
                     (cons file (?c-imports (dynamic *current-module*))))
             (error-bad-c-import-spec file)))

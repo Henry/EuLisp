@@ -20,33 +20,29 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: module fpint
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module fpi
 (import (eulisp-kernel
-         (only (find-class class-name)
+         (only (find-class
+                class-name)
                common-lisp)
          (only (fixnump)
                ext))
- export (int-p)
- expose ((only (evenp oddp)
-               common-lisp)
-         number)
+ export (int?)
+ expose (number)
  syntax (eulisp-kernel))
 
 (progn
   (make-eulisp-class fpi fixnum)
   ;; the alias with a short namemust appear before the following assignment, to
   ;; rename the CL-class to int and not to fpi
-  (make-eulisp-class int fixnum)
-  )
+  (make-eulisp-class int fixnum))
 
-(defun int-p (x)
+(defun int? (x)
   (fixnump x))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

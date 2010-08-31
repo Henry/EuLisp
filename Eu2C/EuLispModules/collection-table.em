@@ -95,7 +95,7 @@
 
 (defun contains-seqs (lst)
   (if lst
-      (if (tablep (car lst))
+      (if (table? (car lst))
           (contains-seqs (cdr lst))
         t)
     ()))

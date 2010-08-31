@@ -42,9 +42,9 @@
 
    export
    ;;------
-   (  streamp
+   (  stream?
       file-stream-p
-      character-stream-p
+      character-stream?
       close
       flush
       stream-position
@@ -58,9 +58,9 @@
       )
    )
 
-(defgeneric streamp ((object <object>)))
+(defgeneric stream? ((object <object>)))
 (defgeneric file-stream-p ((object <object>)))
-(defgeneric character-stream-p ((object <object>)))
+(defgeneric character-stream? ((object <object>)))
 (defgeneric close ((stream <stream>)))
 (defgeneric flush ((stream <stream>)))
 (defgeneric stream-position ((stream <stream>)))

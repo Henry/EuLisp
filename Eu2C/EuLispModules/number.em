@@ -22,8 +22,8 @@
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
-;;    Explicit Identifiers for the C-level are given as annotations to +, -... to
-;;    achieve better readability.
+;;    Explicit Identifiers for the C-level are given as annotations to +,
+;;    -... to achieve better readability.
 ;;;  Requires:
 ;;;  Problems:
 ;;    no conditions til now
@@ -39,13 +39,12 @@
            (only (binary= binary<)
                  compare-generic))
    syntax (tail)
-
    expose (number-generic
-           (only (binary= binary<)
+           (only (binary=
+                  binary<)
                  compare-generic))
-
    export (<number>
-           numberp
+           number?
            +
            -
            *
@@ -55,9 +54,8 @@
            lcm
            abs
            signum
-           positivep
-           negativep)
-   )
+           positive?
+           negative?))
 
 
 (defun + numbers
@@ -94,23 +92,25 @@
       number
     (accumulate binary-lcm number more-numbers)))
 
-(defun abs(number)
+(defun abs (number)
   (if (binary< number 0)
       (negate number)
     number))
 
-(defun positivep(number)
+(defun positive? (number)
   (if (binary< 0 number)
       t
     ()))
+(%annotate-function positive? code-identifier |eu2c_positivep|)
 
-(defun negativep(number)
+(defun negative? (number)
   (if (binary< number 0)
       t
     ()))
+(%annotate-function negative? code-identifier |eu2c_negativep|)
 
 (defun signum(number)
-  (if (zerop number)
+  (if (zero? number)
       number
     (binary/ number (abs number))))
 
@@ -222,14 +222,17 @@
     ((var var1) (var var0)))))
 
 (%annotate-function
-  positivep new-signature
+  positive? new-signature
   (((var0 var1)
     ((var var0) (atom? <number>))
     ((var var1) (atom? <object>)))))
 
 (%annotate-function
-  negativep new-signature
+  negative? new-signature
   (((var0 var1)
     ((var var0) (atom? <number>))
     ((var var1) (atom? <object>)))))
+
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------
