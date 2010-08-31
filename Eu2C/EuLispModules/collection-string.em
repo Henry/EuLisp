@@ -61,11 +61,11 @@
            syntax-0)
    export (accumulate
            accumulate1
-           anyp
+           any?
            concatenate
            do
            element
-           emptyp
+           empty?
            fill
            map
            member
@@ -117,7 +117,7 @@
 
 (defmethod accumulate1 ((function <function>)
                         (str <string>))
-  (if (emptyp-string str)
+  (if (empty?-string str)
       ()
     (map-accumulate function str
                     (string-ref-u str #%I0)
@@ -125,26 +125,26 @@
                     #%I1)))
 
 ;;;-----------------------------------------------------------------------------
-;;; anyp
+;;; any?
 ;;;-----------------------------------------------------------------------------
-;;  (defmethod anyp ((function <function>)
+;;  (defmethod any? ((function <function>)
 ;;                   (str <string>) . more-collections)
-;;    (anyp-string function str more-collections))
+;;    (any?-string function str more-collections))
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (str <string>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
                            (%list-length more-collections)))
         (cond ((%eq rest-list-length #%i0)
-               (anyp-with-one-string function str #%I0
+               (any?-with-one-string function str #%I0
                                      (%cast %unsigned-word-integer
                                             (strlen (string-pointer str)))))
               ((%eq rest-list-length #%i1)
-               (anyp-with-two-args function str (car more-collections)))
-              (t (anyp-collection function str more-collections)))
+               (any?-with-two-args function str (car more-collections)))
+              (t (any?-collection function str more-collections)))
         ))
 
-(%define-function (anyp-with-one-string <object>)
+(%define-function (any?-with-one-string <object>)
   ((function <function>)
    (str <string>)
    (index %unsigned-word-integer)
@@ -152,10 +152,10 @@
   (if (%lt index len)
       (if (function (string-ref-u str index))
           t
-        (anyp-with-one-string function str (%plus index #%I1) len))
+        (any?-with-one-string function str (%plus index #%I1) len))
     ()))
 
-(defmethod anyp-with-two-args
+(defmethod any?-with-two-args
   ((function <function>)
    (str1 <string>)
    (str2 <string>))
@@ -169,13 +169,13 @@
                      (if (%le str-length1 str-length2)
                          str-length1
                        str-length2)))
-        (anyp-with-two-strings function
+        (any?-with-two-strings function
                                str1
                                str2
                                min-length
                                #%I0)))
 
-(%define-function (anyp-with-two-strings <object>)
+(%define-function (any?-with-two-strings <object>)
   ((function <function>)
    (str1 <string>)
    (str2 <string>)
@@ -185,21 +185,21 @@
       (if (function (string-ref-u str1 index)
                     (string-ref-u str2 index))
           t
-        (anyp-with-two-strings function str1 str2 min-length
+        (any?-with-two-strings function str1 str2 min-length
                                (%plus index #%I1)))
     ()))
 
-(defmethod anyp-with-two-args
+(defmethod any?-with-two-args
   ((function <function>)
    (str1 <string>)
    (collection <object>))
-  (anyp-collection function str1 (cons collection ())))
+  (any?-collection function str1 (cons collection ())))
 
-;;;anyp-string is equal to anyp-list... and can be used for all collections!!!
-;;;so I take anyp-collection for all these
+;;;any?-string is equal to any?-list... and can be used for all collections!!!
+;;;so I take any?-collection for all these
 
-;;  (defun anyp-string (function liste . more-collections)
-;;    (map-anyp-apply
+;;  (defun any?-string (function liste . more-collections)
+;;    (map-any?-apply
 ;;     function
 ;;     (mapc-more-collections
 ;;      (cons
@@ -399,14 +399,14 @@
   value)
 
 ;;;-----------------------------------------------------------------------------
-;;; emptyp
+;;; empty?
 ;;;-----------------------------------------------------------------------------
-(defmethod emptyp ((str <string>))
+(defmethod empty? ((str <string>))
   (if  (%eq (primitive-string-ref str #%I0) #%B0)
       t
     ()))
 
-(defun emptyp-string (str)
+(defun empty?-string (str)
   (if  (%eq (primitive-string-ref str #%I0) #%B0)
       t
     ()))

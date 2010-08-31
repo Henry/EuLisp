@@ -40,25 +40,25 @@
    export
    (accumulate
     accumulate1
-    anyp
-    collectionp
+    any?
+    collection?
     concatenate
     do
     element
     ;;element1
-    emptyp
+    empty?
     fill
     map
     member
     reverse
-    sequencep
+    sequence?
     size
 
     ;;now the aux methods
     construct-collection-info
     construct-result
     take-next-elt
-    anyp-with-two-args
+    any?-with-two-args
     concat-with-two-args
     do-with-two-args
     map-with-two-args
@@ -69,9 +69,9 @@
 
 (defgeneric accumulate1 (function collection))
 
-(defgeneric anyp (function collection . more-collection))
+(defgeneric any? (function collection . more-collection))
 
-(defgeneric collectionp (object))
+(defgeneric collection? (object))
 
 (defgeneric concatenate (collection . more-collection))
 
@@ -83,7 +83,7 @@
                               (key <object>)
                               (value <object>)))
 
-(defgeneric emptyp (collection))
+(defgeneric empty? (collection))
 
 (defgeneric fill (collection object . keys))
 
@@ -93,7 +93,7 @@
 
 (defgeneric reverse (collection))
 
-(defgeneric sequencep (object))
+(defgeneric sequence? (object))
 
 (defgeneric size (collection))
 
@@ -105,7 +105,7 @@
 
 (defgeneric take-next-elt (element collection))
 
-(defgeneric anyp-with-two-args (function collection1 collection2))
+(defgeneric any?-with-two-args (function collection1 collection2))
 
 (defgeneric concat-with-two-args (collection1 collection2))
 

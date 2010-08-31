@@ -23,7 +23,7 @@
 ;;;  Documentation:
 ;;;  Notes:
 ;;;  Requires:
-;;;  Problems: accumulate accumulate1 anyp concatenate do fill map
+;;;  Problems: accumulate accumulate1 any? concatenate do fill map
 ;;    are ***not yet treated***
 ;;    ???reverse-table should copy the table???
 ;;;  Authors: Winfried Heicking
@@ -66,13 +66,13 @@
     table-delete
     accumulate
     accumulate1
-    anyp
+    any?
     do
-    ;;anyp-table
+    ;;any?-table
     concatenate
     ;;do-table
     element
-    emptyp
+    empty?
     fill
     map
     ;;map-tab
@@ -142,46 +142,46 @@
 
 
 ;;;------------------------------------------------------------
-;;; anyp
+;;; any?
 ;;;------------------------------------------------------------------
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (table <table>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
                            (%list-length more-collections)))
         (cond ((%eq rest-list-length #%i0)
-               (anyp-with-one-table function
+               (any?-with-one-table function
                                     table
                                     #%I0
                                     (%cast %unsigned-word-integer
                                            (make-swi $standard-table-size))))
               ;;            ((%eq rest-list-length #%i1)
-              ;;             (anyp-with-two-args function table (car more-collections)))
-              (t (anyp-collection function table more-collections)))
+              ;;             (any?-with-two-args function table (car more-collections)))
+              (t (any?-collection function table more-collections)))
         ))
 
 
-;;    (defun anyp-with-one-table (function table index)
+;;    (defun any?-with-one-table (function table index)
 ;;      (let ((tab-res (table-ref table index)))
 ;;        (if (eq tab-res (?fill-value table))
 ;;          (if (function tab-res)
 ;;            t
-;;            (anyp-with-one-table function table (binary+ index 1)))
+;;            (any?-with-one-table function table (binary+ index 1)))
 ;;          ())))
 
 
-(%define-function (anyp-with-one-table <object>)
+(%define-function (any?-with-one-table <object>)
   ((function <function>)
    (table <table>)
    (index %unsigned-word-integer)
    (upper-limit %unsigned-word-integer))
   (if (%ge index upper-limit)
       ()
-    (if (anyp-table-aux
+    (if (any?-table-aux
          function
          (table-vector-ref (?table-vector table) index))
         t
-      (anyp-with-one-table
+      (any?-with-one-table
        function
        table
        (%plus #%I1 index)
@@ -189,11 +189,11 @@
     ))
 
 
-(defun anyp-table-aux (function lst)
+(defun any?-table-aux (function lst)
   (if lst
       (if (function (cdr (car lst)))
           t
-        (anyp-table-aux function (cdr lst)))
+        (any?-table-aux function (cdr lst)))
     ())
   )
 
@@ -361,10 +361,10 @@
 
 
 ;;;------------------------------------------------------------
-;;; emptyp
+;;; empty?
 ;;;------------------------------------------------------------------
 
-(defmethod emptyp ((table <table>))
+(defmethod empty? ((table <table>))
   (dotimes-with-elt1 #%I0
                      (%cast %unsigned-word-integer
                             (make-swi $standard-table-size))

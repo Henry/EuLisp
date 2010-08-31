@@ -77,7 +77,7 @@
            ;;take-next-elt
            reverse-list
            test-range-indizes
-           anyp-collection
+           any?-collection
            concat-collection
            do-collection
            map-collection))
@@ -104,8 +104,8 @@
 
 (defun or-aux (a b) (if a t (if b t ())))
 
-(defun anyp-collection (function lst  more-collections)
-  (anyp-with-apply
+(defun any?-collection (function lst  more-collections)
+  (any?-with-apply
    function
    (mapc-more-collections
     (cons
@@ -138,7 +138,7 @@
       more-collections)))))
 
 
-(defun anyp-with-apply (function collection-list)
+(defun any?-with-apply (function collection-list)
   (let ((first-apply-arg
          (take-next-elt (car (car collection-list))
                         collection-list))
@@ -156,7 +156,7 @@
                  first-apply-arg
                  rest-elts)
           t
-        (anyp-with-apply function collection-list)))))
+        (any?-with-apply function collection-list)))))
 
 
 (defun do-with-apply (function collection-list)

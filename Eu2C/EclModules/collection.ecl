@@ -64,17 +64,17 @@
          )
  export (accumulate
          accumulate1
-         anyp
-         collectionp
+         any?
+         collection?
          concatenate
          do
          element
          setter-element
-         emptyp
+         empty?
          fill
          map
          member
-         sequencep
+         sequence?
          size)
  expose ((only (reverse)
                common-lisp)))
@@ -190,43 +190,43 @@
 
 (defmethod accumulate1 ((function <function>)
                         (str <string>))
-  (if (emptyp-string str)
+  (if (empty?-string str)
       ()
     (map-accumulate-vector function str
                            (elt str 0)
                            (length str)
                            1)))
-(defun emptyp-string (str)
+(defun empty?-string (str)
   (if (= (length str) 0)
       t
     ()))
 
 ;;;------------------------------------------------------------
-;;; anyp
+;;; any?
 ;;;------------------------------------------------------------
 
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (lst <cons>) . more-collections)
-  (anyp-collection function lst more-collections))
+  (any?-collection function lst more-collections))
 
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (lst <null>) . more-collections)
   ())
 
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (str <vector>) . more-collections)
-  (anyp-collection function str more-collections))
+  (any?-collection function str more-collections))
 
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (str <string>) . more-collections)
-  (anyp-collection function str more-collections))
+  (any?-collection function str more-collections))
 
-(defun anyp-collection (function lst  more-collections)
-  (anyp-with-apply
+(defun any?-collection (function lst  more-collections)
+  (any?-with-apply
    function
    (mapc-more-collections
     (cons
@@ -247,7 +247,7 @@
 
     res))
 
-(defun anyp-with-apply (function collection-list)
+(defun any?-with-apply (function collection-list)
   (let ((first-apply-arg
          (take-next-elt (car (car collection-list))
                         collection-list))
@@ -267,7 +267,7 @@
                  first-apply-arg
                  rest-elts)
           t
-        (anyp-with-apply function collection-list)))))
+        (any?-with-apply function collection-list)))))
 
 
 (defmethod construct-collection-info  ((collection <list>))
@@ -333,15 +333,15 @@
       $end-string)))
 
 
-(defmethod collectionp ((object <list>)) t)
+(defmethod collection? ((object <list>)) t)
 
-(defmethod collectionp ((object <vector>)) t)
+(defmethod collection? ((object <vector>)) t)
 
-(defmethod collectionp ((object <string>)) t)
+(defmethod collection? ((object <string>)) t)
 
-(defmethod collectionp ((object <table>)) t)
+(defmethod collection? ((object <table>)) t)
 
-(defmethod collectionp (object) ())
+(defmethod collection? (object) ())
 
 
 (defun concatenate (collection . more-collections)
@@ -388,18 +388,18 @@
   (setf (elt collection key) value))
 
 
-(defmethod emptyp ((collection <cons>))
+(defmethod empty? ((collection <cons>))
   ())
 
-(defmethod emptyp ((collection <null>))
+(defmethod empty? ((collection <null>))
   t)
 
-(defmethod emptyp ((collection <vector>))
+(defmethod empty? ((collection <vector>))
   (if (= (length collection) 0)
       t
     ()))
 
-(defmethod emptyp ((collection <string>))
+(defmethod empty? ((collection <string>))
   (if (= (length collection) 0)
       t
     ()))
@@ -450,16 +450,16 @@
 
 ;;; reverse like in CL
 
-(defmethod sequencep ((collection <list>))
+(defmethod sequence? ((collection <list>))
   t)
 
-(defmethod sequencep ((collection <vector>))
+(defmethod sequence? ((collection <vector>))
   t)
 
-(defmethod sequencep ((collection <string>))
+(defmethod sequence? ((collection <string>))
   t)
 
-(defmethod sequencep (collection)
+(defmethod sequence? (collection)
   ())
 
 

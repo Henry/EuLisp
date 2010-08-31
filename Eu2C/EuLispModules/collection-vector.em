@@ -54,11 +54,11 @@
    export
    (accumulate
     accumulate1
-    anyp
+    any?
     concatenate
     do
     element
-    emptyp
+    empty?
     fill
     map
     member
@@ -123,31 +123,31 @@
 
 
 ;;;------------------------------------------------------------
-;;; anyp
+;;; any?
 ;;;------------------------------------------------------------
 
 
 
 
-;;  (defmethod anyp ((function <function>)
+;;  (defmethod any? ((function <function>)
 ;;                   (vec <vector>) . more-collections)
-;;    (anyp-vector function vec more-collections))
+;;    (any?-vector function vec more-collections))
 
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (vec <vector>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
                            (%list-length more-collections)))
         (cond ((%eq rest-list-length #%i0)
-               (anyp-with-one-vector function vec #%I0
+               (any?-with-one-vector function vec #%I0
                                      (primitive-vector-length vec)))
               ((%eq rest-list-length #%i1)
-               (anyp-with-two-args function vec (car more-collections)))
-              (t (anyp-collection function vec more-collections)))
+               (any?-with-two-args function vec (car more-collections)))
+              (t (any?-collection function vec more-collections)))
         ))
 
 
-(%define-function (anyp-with-one-vector <object>)
+(%define-function (any?-with-one-vector <object>)
   ((function <function>)
    (vec <vector>)
    (index %unsigned-word-integer)
@@ -155,10 +155,10 @@
   (if (%lt index len)
       (if (function (primitive-vector-ref vec index))
           t
-        (anyp-with-one-vector function vec (%plus index #%I1) len))
+        (any?-with-one-vector function vec (%plus index #%I1) len))
     ()))
 
-(defmethod anyp-with-two-args
+(defmethod any?-with-two-args
   ((function <function>)
    (vec1 <vector>)
    (vec2 <vector>))
@@ -170,13 +170,13 @@
                      (if (%le vec-length1 vec-length2)
                          vec-length1
                        vec-length2)))
-        (anyp-with-two-vectors function
+        (any?-with-two-vectors function
                                vec1
                                vec2
                                min-length
                                #%I0)))
 
-(%define-function (anyp-with-two-vectors <object>)
+(%define-function (any?-with-two-vectors <object>)
   ((function <function>)
    (vec1 <vector>)
    (vec2 <vector>)
@@ -186,16 +186,16 @@
       (if (function (primitive-vector-ref vec1 index)
                     (primitive-vector-ref vec2 index))
           t
-        (anyp-with-two-vectors function vec1 vec2 min-length
+        (any?-with-two-vectors function vec1 vec2 min-length
                                (%plus index #%I1)))
     ()))
 
 
-(defmethod anyp-with-two-args
+(defmethod any?-with-two-args
   ((function <function>)
    (vec1 <vector>)
    (collection <object>))
-  (anyp-collection function vec1 (cons collection ())))
+  (any?-collection function vec1 (cons collection ())))
 
 
 
@@ -425,17 +425,17 @@
 
 
 ;;;------------------------------------------------------------
-;;; emptyp
+;;; empty?
 ;;;------------------------------------------------------------
 
 
-(defmethod emptyp ((vec <vector>))
+(defmethod empty? ((vec <vector>))
   (if (%eq (primitive-vector-length vec) #%I0)
       t
     ()))
 
 
-;;  (defun emptyp-vector (vec)
+;;  (defun empty?-vector (vec)
 ;;    (if (%eq (primitive-vector-length vec) #%I0)
 ;;      t
 ;;      ()))

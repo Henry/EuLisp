@@ -196,17 +196,17 @@
     ;;--- collection
     accumulate
     accumulate1
-    anyp
-    collectionp
+    any?
+    collection?
     concatenate
     do
     element
-    emptyp
+    empty?
     fill
     map
     member
     reverse
-    sequencep
+    sequence?
     size
 
     ;;--- comparision

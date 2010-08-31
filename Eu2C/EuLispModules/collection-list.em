@@ -43,11 +43,11 @@
            setf)
    export (accumulate
            accumulate1
-           anyp
+           any?
            concatenate
            do
            element
-           emptyp
+           empty?
            fill
            map
            member
@@ -94,49 +94,49 @@
   lst)
 
 ;;;-----------------------------------------------------------------------------
-;;; anyp
+;;; any?
 ;;;-----------------------------------------------------------------------------
-;;  (defmethod anyp ((function <function>)
+;;  (defmethod any? ((function <function>)
 ;;                   (lst <list>) . more-collections)
-;;    (anyp-list function lst more-collections))
+;;    (any?-list function lst more-collections))
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (lst <cons>) . more-collections)
   (%let ((rest-list-length %signed-word-integer
                            (%list-length more-collections)))
         (cond ((%eq rest-list-length #%i0)
-               (anyp-with-one-list function lst))
+               (any?-with-one-list function lst))
               ((%eq rest-list-length #%i1)
-               (anyp-with-two-args function lst (car more-collections)))
-              (t (anyp-collection function lst more-collections)))
+               (any?-with-two-args function lst (car more-collections)))
+              (t (any?-collection function lst more-collections)))
         ))
 
-(defmethod anyp ((function <function>)
+(defmethod any? ((function <function>)
                  (lst <null>) . more-collections)
   ())
 
-(defun anyp-with-one-list (function lst)
+(defun any?-with-one-list (function lst)
   (if (consp lst) ;for improper lists
       (if (function (car lst))
           t
-        (anyp-with-one-list function (cdr lst)))
+        (any?-with-one-list function (cdr lst)))
     ()))
 
-(defmethod anyp-with-two-args
+(defmethod any?-with-two-args
   ((function <function>)
    (lst1 <list>)
    (lst2 <list>))
   (if (and (consp lst1) (consp lst2))
       (if (function (car lst1) (car lst2))
           t
-        (anyp-with-two-args function (cdr lst1) (cdr lst2)))
+        (any?-with-two-args function (cdr lst1) (cdr lst2)))
     ()))
 
-(defmethod anyp-with-two-args
+(defmethod any?-with-two-args
   ((function <function>)
    (lst1 <list>)
    (collection <object>))
-  (anyp-collection function lst1 (cons collection ())))
+  (any?-collection function lst1 (cons collection ())))
 
 ;;;-----------------------------------------------------------------------------
 ;;; concatenate
@@ -274,12 +274,12 @@
           ())))
 
 ;;;-----------------------------------------------------------------------------
-;;; emptyp
+;;; empty?
 ;;;-----------------------------------------------------------------------------
-(defmethod emptyp ((lst <null>))
+(defmethod empty? ((lst <null>))
   t)
 
-(defmethod emptyp ((lst <cons>))
+(defmethod empty? ((lst <cons>))
   ())
 
 ;;;-----------------------------------------------------------------------------

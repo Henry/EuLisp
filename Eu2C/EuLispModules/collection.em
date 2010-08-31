@@ -30,8 +30,8 @@
 (defmodule collection
   (import (tail
            eulisp-kernel
-           (only (collectionp
-                  sequencep)
+           (only (collection?
+                  sequence?)
                  collection-generic)
            (only (<vector>)
                  vector)
@@ -40,31 +40,31 @@
            (only (<table>)
                  collection-table))
    syntax (tail)
-   export (collectionp
-           sequencep)
+   export (collection?
+           sequence?)
    expose (collection-list
            collection-string
            collection-vector
            collection-table
            collection-convert))
 
-(defmethod collectionp ((object <table>)) t)
+(defmethod collection? ((object <table>)) t)
 
-(defmethod collectionp ((object <string>)) t)
+(defmethod collection? ((object <string>)) t)
 
-(defmethod collectionp ((object <list>)) t)
+(defmethod collection? ((object <list>)) t)
 
-(defmethod collectionp ((object <vector>)) t)
+(defmethod collection? ((object <vector>)) t)
 
-(defmethod collectionp (object) ())
+(defmethod collection? (object) ())
 
-(defmethod sequencep ((object <string>)) t)
+(defmethod sequence? ((object <string>)) t)
 
-(defmethod sequencep ((object <list>)) t)
+(defmethod sequence? ((object <list>)) t)
 
-(defmethod sequencep ((object <vector>)) t)
+(defmethod sequence? ((object <vector>)) t)
 
-(defmethod sequencep (object) ())
+(defmethod sequence? (object) ())
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module
