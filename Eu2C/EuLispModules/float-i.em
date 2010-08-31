@@ -18,29 +18,29 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;;  Title: EL-in-CL: double floats
+;;;  Description:
+;;;  Authors:
 ;;;-----------------------------------------------------------------------------
-
 (defmodule float-i
   (import (eulisp-kernel)
    syntax (eulisp-kernel)
-   export (<float> floatp))
-
+   export (<float>
+           float?))
 
 (%define-abstract-class (<float> <abstract-class>)
   <number>
-  ()
-  )
-(defun floatp
+  ())
+
+(defun float?
   (i)
   (%instance-of-p i <float>))
-
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 ;;  (%annotate-function
-;;   floatp new-signature
+;;   float? new-signature
 ;;   (((var0 var1)
 ;;     ((var var0) (atom? (not <null>)))
 ;;     ((var var1) (atom? <float>)))
@@ -49,7 +49,7 @@
 ;;     ((var var1) (atom? (not <float>))))))
 
 (%annotate-function
-  floatp new-signature
+  float? new-signature
   (((var0 var1)
     ((var var0) (atom? <float>))
     ((var var1) (atom? <float>)))
@@ -57,7 +57,6 @@
     ((var var0) (atom? <null>))
     ((var var1) (atom? (and <object> (not <float>)))))))
 
-
-
-
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

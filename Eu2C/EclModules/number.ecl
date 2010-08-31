@@ -31,17 +31,15 @@
 
 (import (eulisp-kernel
          number-i
-         (only (binary< binary=)
+         (only (binary<
+                binary=)
                compare-generic)
          (only (< = + - * / mod gcd lcm rem plusp minusp)
                common-lisp))
-
  syntax (eulisp-kernel
          number-i)
-
  expose ((only (numberp
                 integerp
-                floatp
                 + - * / < > <= >=
                 max
                 min
@@ -58,8 +56,8 @@
                 oddp)
                common-lisp)
          number-i)
-
- export (binary<
+ export (float?
+         binary<
          binary=
          binary+
          binary-
@@ -78,6 +76,9 @@
 ;;(make-eulisp-class number) ; now in `number-i'
 (make-eulisp-class integer)
 (make-eulisp-class float)
+
+(defun float? (obj)
+  (cl:floatp obj))
 
 (defmethod binary< ((n1 <number>) (n2 <number>))
   (< n1 n2))

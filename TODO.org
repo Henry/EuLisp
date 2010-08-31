@@ -137,7 +137,7 @@
 *** DONE Change =newline= and =flush= to operate on =stdout=
     CLOSED: [2010-06-29 Tue 15:31]
     Add =snewline= and =sflush= to take the stream as an argument.
-*** DONE Add =spprint= and change =pprint= to use stdout
+*** DONE Add =sprint= and change =print= to use stdout
     CLOSED: [2010-06-29 Tue 16:58]
 *** DONE Rename require predicate keyword =requiredp:= -> =required?:=
     CLOSED: [2010-06-29 Tue 15:38]
@@ -359,9 +359,6 @@
 *** TODO Change the =initlist= keywords to use the post-fix ":"
 *** DONE Rename =<fixed-precision-integer>= -> =<int>=
     CLOSED: [2010-08-30 Mon 14:35]
-*** TODO Rename predicate functions
-    Rename predicates ending in "-p" and "p" to use the post-fix "?".  Add the
-    post-fix "?" to =atom= and =null=.
 *** TODO Consider adding a special list for the keywords
     Currently they are simply symbols which happen to end in a ":".
 *** TODO Add support for the default =superclass= in =defclass=
@@ -384,6 +381,24 @@
 *** TODO Change location of the [cho], {inst,def} and executable files
     Currently the top-level =Makefile= does not set the location of the files
     which are build-dependant.
+*** TODO Replace =equal= with =binary==
+    Remove the =equal= generic function and methods and introduce a complete set
+    of =binary== methods.  The only difference between the definition of =equal=
+    and =binary== is the latter applies type coercion whereas =equal= was
+    defined not two.  If this property is an important feature =equal= could be
+    reinstated as a function wrapper around =binary== which does a
+    type-consistency check.
+*** TODO Rename predicate functions
+    Rename predicates ending in "-p" and "p" to use the post-fix "?".  Add the
+    post-fix "?" to =atom= and =null=.
+*** TODO Change =prin=, =print= and =write= to be n-ary
+    Add =sprin=, =sprint= and =swrite= to take the stream as the first argument.
+*** TODO Change =newline= and =flush= to operate on =stdout=
+    Add =snewline= and =sflush= to take the stream as an argument.
+*** TODO Add =sprint= and change =print= to use stdout
+*** TODO Add =sformat= and change =format= to use stdout
+*** TODO Rename require predicate keyword =requiredp:= -> =required?:=
+*** TODO =abstractp:= -> =abstract?:=
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]

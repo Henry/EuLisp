@@ -69,7 +69,7 @@
           basic-list-0)         ; inserted by ak
     (only (read read-based-int1) read)
     (only (integerp) integer)
-    (only (floatp) float-i)
+    (only (float?) float-i)
     (only (<double-float> make-dble set-dble dble) double-float-i)
     (only (sscanf-3 sprintf-3-double) c-stdio)
     (only (<character> character?) character)
@@ -465,7 +465,7 @@
    (cur-index %signed-word-integer)
    (length %signed-word-integer))
   (let ((obj (%cast <object> (read-float stream float-length ch))))
-    (if (floatp obj)
+    (if (float? obj)
         (cons obj (scan1 stream fstring-c cur-index length))
       (progn (dynamic-setq saved-cur-index
                            (make-fpint cur-index))

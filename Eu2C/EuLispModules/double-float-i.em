@@ -24,18 +24,18 @@
 
 (defmodule double-float-i
   (import (eulisp-kernel
-           (only (<float>)float-i))
+           (only (<float>)
+                 float-i))
    syntax (eulisp-kernel)
-   export (<double-float> dble set-dble make-dble double-float-p))
-
-
+   export (<double-float>
+           dble
+           set-dble
+           make-dble
+           double-float?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class definition
 ;;;-----------------------------------------------------------------------------
-
-
-
 (%define-standard-class (<double-float> <class>)
   <float>
   (
@@ -50,30 +50,23 @@
   ;;hw requires that double are 8 byte aligned
   allocation single-card)
 
-
-
-
-
-(defun double-float-p
+(defun double-float?
   (i)
   (%instance-of-p i <double-float>))
-
 
 (%define-literal-expansion float
   `(%literal ,<double-float> dble (%literal ,%double-float ,value)))
 
-
-
 (defgeneric (converter <double-float>)
   (object))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%define-lattice-type df-list (mono-list) (bottom) t)
 
 ;;  (%annotate-function
-;;   double-float-p new-signature
+;;   double-float? new-signature
 ;;   (((var0 var1)
 ;;     ((var var0) (atom? (and <object> (not <null>))))
 ;;     ((var var1) (atom? <double-float>)))
@@ -82,7 +75,7 @@
 ;;     ((var var1) (atom? (and <object> (not <double-float>)))))))
 
 (%annotate-function
-  double-float-p new-signature
+  double-float? new-signature
   (((var0 var1)
     ((var var0) (atom? <double-float>))
     ((var var1) (atom? <double-float>)))
@@ -90,5 +83,6 @@
     ((var var0) (atom? <null>))
     ((var var1) (atom? (and <object> (not <double-float>)))))))
 
-
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

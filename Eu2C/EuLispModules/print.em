@@ -73,7 +73,7 @@
            (only (int-p
                   <int>)
                  int-i)
-           (only (double-float-p
+           (only (double-float?
                   <double-float>
                   dble)
                  double-float-i)
@@ -308,7 +308,7 @@
 ;;                                           (make-swi
 ;;                                       (convert-char-int (%cast <character> object))))
 ;;            ;;float
-;;                        (if (double-float-p object)
+;;                        (if (double-float? object)
 ;;                           (%write-float stream (%cast <double-float> object))
 ;;               ;;             (%write-string stream (%literal %string () ".?."))
 ;;                         (%write-hex stream object)
@@ -429,7 +429,7 @@
 ;;                 (if (character? object)
 ;;                   (write-character-1 (%cast <character> object) stream)
 ;;       ;;float
-;;                   (if (double-float-p object)
+;;                   (if (double-float? object)
 ;;                     (%write-float stream (%cast <double-float> object))
 ;;                     (%write-hex stream object)
 ;;                     )

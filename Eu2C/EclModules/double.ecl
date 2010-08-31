@@ -20,21 +20,16 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: double floats
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module double
-
-(import ((only (typep) common-lisp))
+(import ((only (typep)
+               common-lisp))
  syntax (eulisp-kernel)
- export (double-float-p)
+ export (double-float?)
  expose ((only (numberp
                 integerp
-                floatp
                 + - * / < > <= >=
                 max
                 min
@@ -46,7 +41,9 @@
 
 (make-eulisp-class double-float)
 
-(defun double-float-p (obj)
+(defun double-float? (obj)
   (typep obj 'cl:double-float))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

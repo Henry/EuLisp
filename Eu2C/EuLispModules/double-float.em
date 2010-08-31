@@ -35,7 +35,7 @@
    syntax (eulisp-kernel
            (only (and) syntax-0))
    export (<double-float>
-           double-float-p
+           double-float?
            most-positive-double-float
            least-positive-double-float
            least-negative-double-float

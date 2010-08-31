@@ -109,8 +109,8 @@
 ;;(%annotate-function convert interpreter convert);convert is macro in collection
 (%annotate-function shallow-copy interpreter shallow-copy)
 (%annotate-function deep-copy interpreter deep-copy)
-(%annotate-function double-float-p interpreter double-float-p)
-(%annotate-function floatp interpreter floatp)
+(%annotate-function double-float? interpreter double-float?)
+(%annotate-function float? interpreter float?)
 (%annotate-function ceiling interpreter ceiling)
 (%annotate-function floor interpreter floor)
 (%annotate-function round interpreter round)

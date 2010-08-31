@@ -227,7 +227,7 @@
     deep-copy
 
     ;;--- double-float
-    double-float-p
+    double-float?
 
     ;;--- elementary-functions
     ;;   acos
@@ -246,7 +246,7 @@
     ;;   pow
     ;;   sqrt
     ;;--- float, number
-    floatp
+    float?
     ceiling
     floor
     round
