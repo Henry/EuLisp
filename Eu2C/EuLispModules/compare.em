@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -38,7 +38,7 @@
     (only (%list-length) basic-list-0)
     (only (numberp) number-i)
     (only (<vector>
-           vectorp
+           vector?
            equal
            equal-vector
            primitive-vector-length
@@ -155,7 +155,7 @@
 ;;              (%class-of object2))
 ;;        (if (stringp object1)
 ;;          (equal-string object1 object2)
-;;          (if (vectorp object1)
+;;          (if (vector? object1)
 ;;            (equal-vector object1 object2)
 ;;          (if (null? object1)      ; 1.8.93 fehler rest wird abgeschnitten
 ;; ergebnis ist t

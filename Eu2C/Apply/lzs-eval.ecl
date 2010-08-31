@@ -320,7 +320,7 @@
     clear-table
 
     ;;--- vector
-    vectorp
+    vector?
 
     ))
 

@@ -35,7 +35,7 @@
    syntax (tail syntax-0)
    export
    (<vector>
-    vectorp
+    vector?
     ;;  length      ;; wofur ? rr
     vector-length
     vector-ref
@@ -60,7 +60,7 @@
    )
 
 ;;;-----------------------------------------------------------------------------
-;;; <vector> and vectorp
+;;; <vector> and vector?
 ;;;-----------------------------------------------------------------------------
 (%define-standard-class (<vector> <class>)
   <object>
@@ -75,7 +75,7 @@
   constructor (make-uninitialized-vector
                length)
   constructor (make-vector-with-init length element)
-  predicate vectorp
+  predicate vector?
   )
 
 (defgeneric (converter <vector>)(object))
@@ -282,7 +282,7 @@
 ;; automatically generated
 
 ;;(%annotate-function
-;; vectorp new-signature
+;; vector? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (not <null>)))
 ;;   ((var var1) (atom? <vector>)))
@@ -303,4 +303,6 @@
     ((var var1) (atom? <vector>))
     ((var var2) (atom? <vector>)))))
 
-) ;end of vector
+;;;-----------------------------------------------------------------------------
+)  ;; end of vector
+;;;-----------------------------------------------------------------------------

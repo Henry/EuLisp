@@ -25,35 +25,37 @@
 ;;;-----------------------------------------------------------------------------
 
 #module vector
-
-(import
- (eulisp-kernel
-  ;;level-0-eulisp
-  (only (make-array svref svset vector
-                    vectorp
-                    equal
-                    +
-                    <
-                    elt
-                    length
-                    ) common-lisp)
-  copy-generic ; deep-copy shallow-copy
-  )
-
- syntax
- (eulisp-kernel
-  (only (defsetf) common-lisp))
-
- export
- (make-vector make-initialized-vector vector-ref
-              vectorp
-              equal
-              deep-copy
-              shallow-copy) ;(setf vector-ref)
- )
+(import (eulisp-kernel
+         (only (make-array
+                svref
+                svset
+                vector
+                equal
+                +
+                <
+                elt
+                length)
+               common-lisp)
+         (rename ((vectorp cl:vectorp))
+                 (only (vectorp)
+                       common-lisp))
+         copy-generic)
+ syntax (eulisp-kernel
+         (only (defsetf)
+               common-lisp))
+ export (make-vector
+         make-initialized-vector
+         vector-ref
+         vector?
+         equal
+         deep-copy
+         shallow-copy))
 
 (defun make-vector (size)
   (make-array size))
+
+(defun vector? (v)
+  (cl:vectorp v))
 
 (defmacro make-initialized-vector objs ; *ak*
   `(vector ,@objs))
@@ -98,4 +100,6 @@
                      0))
   )
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

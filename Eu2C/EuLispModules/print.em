@@ -81,7 +81,7 @@
                   characterp
                   <character>)
                  character)
-           (only (vectorp
+           (only (vector?
                   primitive-vector-length
                   primitive-vector-ref
                   <vector>)
@@ -299,7 +299,7 @@
 ;;              (if (stringp object)
 ;;                (%write-string stream (string-pointer (%cast <string> object)))
 ;;    ;; vector
-;;                (if (vectorp object)
+;;                (if (vector? object)
 ;;         ;; (prin-vector (%cast <vector> object) stream)
 ;;                     (generic-prin (%cast <vector> object) stream)
 ;;       ;; character
@@ -422,7 +422,7 @@
 ;;             (if (stringp object)
 ;;               (write-string-1 (%cast <string> object) stream)
 ;;   ;; vector
-;;               (if (vectorp object)
+;;               (if (vector? object)
 ;;       ;;              (write-vector-1 (%cast <vector> object) stream)
 ;;                 (generic-write (%cast <vector> object) stream)
 ;;     ;; character
