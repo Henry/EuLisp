@@ -47,7 +47,7 @@
           string-ii)
     (only (eql)
           compare )
-    (only (<character> convert-char-int characterp)
+    (only (<character> convert-char-int character?)
           character)
     )
    syntax
@@ -187,7 +187,7 @@
 ;;            ((stringp obj)
 ;; ;;(prin 'hashindex-for-strings)
 ;;             (hash-for-strings obj))
-;;            ((characterp obj)
+;;            ((character? obj)
 ;;             (hash-for-chars obj))
 ;;            (t (%cast %unsigned-word-integer (make-swi obj)))
 ;;            ))

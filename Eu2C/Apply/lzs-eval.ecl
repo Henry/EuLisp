@@ -189,7 +189,7 @@
     char-code             ;; needed to expand character literals
 
     ;;--- character
-    characterp
+    character?
     as-lowercase
     as-uppercase
 

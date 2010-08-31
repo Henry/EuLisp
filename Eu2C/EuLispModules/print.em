@@ -78,7 +78,7 @@
                   dble)
                  double-float-i)
            (only (convert-char-int
-                  characterp
+                  character?
                   <character>)
                  character)
            (only (vector?
@@ -303,7 +303,7 @@
 ;;         ;; (prin-vector (%cast <vector> object) stream)
 ;;                     (generic-prin (%cast <vector> object) stream)
 ;;       ;; character
-;;                     (if (characterp object)
+;;                     (if (character? object)
 ;;                        (%write-unit stream
 ;;                                           (make-swi
 ;;                                       (convert-char-int (%cast <character> object))))
@@ -426,7 +426,7 @@
 ;;       ;;              (write-vector-1 (%cast <vector> object) stream)
 ;;                 (generic-write (%cast <vector> object) stream)
 ;;     ;; character
-;;                 (if (characterp object)
+;;                 (if (character? object)
 ;;                   (write-character-1 (%cast <character> object) stream)
 ;;       ;;float
 ;;                   (if (double-float-p object)

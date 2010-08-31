@@ -46,7 +46,7 @@
           vector)
     (only (stringp equal-string) string-ii)  ;; string
     (only (<character>
-           characterp
+           character?
            equal
            equal-character) character)
     (only (consp) pair)
@@ -164,7 +164,7 @@
 ;;              (equal-cons object1 object2)
 ;;            (if (numberp object1)          ; jetzt fehlt alles ab hier
 ;;              (binary= object1 object2)
-;;              (if (characterp object1)
+;;              (if (character? object1)
 ;;                (equal-character object1 object2)
 ;;
 ;;                (if (consp object1)

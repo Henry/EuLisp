@@ -20,47 +20,44 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: standard module character
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module character
-
-(syntax
- (eulisp-kernel)
-
- import
- (eulisp-kernel
-  (only (binary<) compare-generic)
-  character-generic  ; as-lowercase as-uppercase
-  (only (char-downcase char-upcase char<)
-        common-lisp))
-
- expose
- ((only (characterp
-         equal
-         copy ; not in EL
-         )
-        common-lisp))
-
- export
- (as-lowercase as-uppercase binary<)
- )
+(syntax (eulisp-kernel)
+ import (eulisp-kernel
+         (only (binary<)
+               compare-generic)
+         character-generic  ; as-lowercase as-uppercase
+         (only (char-downcase
+                char-upcase
+                char<)
+               common-lisp)
+          (rename ((characterp cl:characterp))
+                 (only (characterp)
+                       common-lisp)))
+ expose ((only (equal
+                copy) ; not in EL
+               common-lisp))
+ export (character?
+         as-lowercase
+         as-uppercase
+         binary<))
 
 (make-eulisp-class character)
 
+(defun character? (c)
+  (cl:characterp c))
+
 (defmethod as-lowercase ((object <character>))
-  (char-downcase object)
-  )
+  (char-downcase object))
 
 (defmethod as-uppercase ((object <character>))
-  (char-upcase object)
-  )
+  (char-upcase object))
 
 (defmethod binary< ((c1 <character>) (c2 <character>))
   (char< c1 c2))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

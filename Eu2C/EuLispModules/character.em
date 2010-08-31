@@ -42,7 +42,7 @@
 
    export
    (<character> convert-int-char convert-char-int char-code
-                characterp equal-character
+                character? equal-character
                 binary<
                 equal
                 as-lowercase as-uppercase
@@ -62,7 +62,7 @@
               accessor char-code))      ;rr
   representation pointer-to-struct  ;direct ;rr
   constructor (make-character char-code)   ;rr
-  predicate characterp)
+  predicate character?)
 
 
 (%define-standard-class (<character-box-vector> <class>)
@@ -187,7 +187,7 @@
 ;; The predicate function is generated automatically.
 
 ;;(%annotate-function
-;; characterp new-signature
+;; character? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (not <null>)))
 ;;   ((var var1) (atom? <character>)))

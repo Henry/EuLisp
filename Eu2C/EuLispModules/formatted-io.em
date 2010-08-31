@@ -72,7 +72,7 @@
     (only (floatp) float-i)
     (only (<double-float> make-dble set-dble dble) double-float-i)
     (only (sscanf-3 sprintf-3-double) c-stdio)
-    (only (<character> characterp) character)
+    (only (<character> character?) character)
     (only (*buffer-1*
            <string-stack> clear-buffer
            push-buffer ?stack-string make-string-stack) string-stack)
@@ -445,7 +445,7 @@
    (cur-index %signed-word-integer)
    (length %signed-word-integer))
   (let ((obj (read-character stream)))
-    (if (characterp obj)
+    (if (character? obj)
         (cons obj (scan1 stream fstring-c cur-index length))
       (progn (dynamic-setq saved-cur-index
                            (make-fpint cur-index))

@@ -83,7 +83,7 @@
            ;;***HGW thread ; For thread support
            vector))
 
-(%annotate-function characterp interpreter characterp)
+(%annotate-function character? interpreter character?)
 (%annotate-function as-lowercase interpreter as-lowercase)
 (%annotate-function as-uppercase interpreter as-uppercase)
 (%annotate-function accumulate interpreter accumulate)

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: create and ref to vectors
+;;;  Title: EL-in-CL: standard module vector
 ;;;  Description:
 ;;    make-vector, vector-ref and (setf (vector-ref ..) ..)
 ;;;  Authors: Horst Friedrich
@@ -74,8 +74,7 @@
         (setf (elt dest-vec index)
               (deep-copy (elt source-vec index)))
         (init-new-vector-deep source-vec dest-vec len (+ index 1)))
-    dest-vec)
-  )
+    dest-vec))
 
 (defmethod deep-copy ((vec <vector>))
   (let ((len (length vec)))
@@ -89,16 +88,14 @@
       (progn
         (setf (elt dest-vec index) (elt source-vec index))
         (init-new-vector source-vec dest-vec len (+ index 1)))
-    dest-vec)
-  )
+    dest-vec))
 
 (defmethod shallow-copy ((vec <vector>))
   (let ((len (length vec)))
     (init-new-vector vec
                      (make-vector len)
                      len
-                     0))
-  )
+                     0)))
 
 ;;;-----------------------------------------------------------------------------
 #module-end
