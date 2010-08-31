@@ -20,17 +20,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 #module accessors
-
-(import ((except (concatenate) eulisp0)
-         (only (intern concatenate string)
+(import ((except (concatenate)
+                 eulisp0)
+         (only (intern
+                concatenate
+                string)
                common-lisp))
  syntax (eulisp0))
 
@@ -114,8 +112,7 @@
   value
   value-list
   var
-  var-list
-  )
+  var-list)
 
 (defaccessors ; --- annotation slots of LZS ---
   accessor
@@ -202,8 +199,7 @@
   write-gloc-list
   write-glocs
   write-stats
-  writer
-  )
+  writer)
 
 (defaccessors ; --- structure slots of MZS ---
   ;;NOTE that some structure slots of the MZS have the same name as annotation
@@ -241,8 +237,7 @@
   type-vec
   used-places
   value-type
-  var-vec
-  )
+  var-vec)
 
 (defaccessors ; --- annotation slots of MZS ---
   divided
@@ -258,7 +253,8 @@
   successor-blocks
   t-descr-after
   t-path
-  then-type-descr-s
-  )
+  then-type-descr-s)
 
-#module-end ;end of module accessors
+;;;-----------------------------------------------------------------------------
+#module-end  ;; end of module accessors
+;;;-----------------------------------------------------------------------------

@@ -40,7 +40,7 @@
      (%list-length)
      basic-list)
     (only
-     (symbolp <symbol>)
+     (symbol? <symbol>)
      symbol)
     ;;(only (prin) print)
     (only (<string> stringp)
@@ -182,7 +182,7 @@
 ;;    (%let ((hash-num %unsigned-word-integer #%I0))
 ;;     (setq hash-num
 ;;           (cond
-;;            ((symbolp obj)
+;;            ((symbol? obj)
 ;;             (hash-for-symbols obj))
 ;;            ((stringp obj)
 ;; ;;(prin 'hashindex-for-strings)

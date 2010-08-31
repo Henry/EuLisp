@@ -43,7 +43,7 @@
    syntax (tail syntax-0)
    export
    (<symbol>
-    symbolp
+    symbol?
     gensym
     gensym1
     symbol-name
@@ -52,7 +52,7 @@
     initialize))
 
 ;;;-----------------------------------------------------------------------------
-;;; <symbol> and symbolp are defined in basic-symbol
+;;; <symbol> and symbol? are defined in basic-symbol
 ;;; Also the literal-expansion for symbols is defined there.
 ;;;-----------------------------------------------------------------------------
 (defgeneric (converter <symbol>)(object))
@@ -141,7 +141,7 @@
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
 
-;; symbolp is generated automatically
+;; symbol? is generated automatically
 
 (%annotate-function
   gensym new-signature

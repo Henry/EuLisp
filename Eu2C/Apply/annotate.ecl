@@ -20,30 +20,31 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Transformation of %annotate-forms to LZS
 ;;;  Description:
-;;    This module defines the transformation of %annotate-forms of TAIL to the LZS.
+;;    This module defines the transformation of %annotate-forms of TAIL to LZS.
 ;;    %annotate-function: provide information about a function
 ;;    %annotate-class:    provide information about a class
-;;    %annotate-binding:  provide information about a global variable or a constant
+;;    %annotate-binding:  provide information about a global variable or a
+;;                        constant
 ;;    The handlers for the keywords of %annotate-... are defined in the a-list
 ;;    *annotate-...-handlers*. The handlers are functions of three arguments:
 ;;    1. the object (%annotate-function: instance of LZS-class <fun>
-;;                                       %annotate-class: instance of LZS-class <class-def>
-;;                                       %annotate-binding: instance of LZS-class <global-static>
+;;                                       %annotate-class:
+;;                                         instance of LZS-class <class-def>
+;;                                       %annotate-binding:
+;;                                         instance of LZS-class <global-static>
 ;;                                       or <named-const>)
 ;;    2. the annotate-keyword
 ;;    3. the form after the keyword (a list or a symbol in most cases)
-;;;  Documentation:
 ;;;  Notes:
 ;;    A distinction is made between %annotate-function, %annotate-class and
 ;;    %annotate-binding to make error detection (no function/class-object, bad
-;;                                                  keyword) a bit simpler.
-;;;  Requires:
-;;;  Problems:
+;;    keyword) a bit simpler.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module annotate
-(import ((except (assoc) eulisp1)
+(import ((except (assoc)
+                 eulisp1)
          lzs
          el2lzs-main
          el2lzs-error
@@ -53,23 +54,36 @@
                 set-special-binding
                 provide-compiler-info)
                apply-funs)
-         (only (set-interpreter call) lzs-eval)
-         (only (set-read-side-effect set-write-side-effect) side-effects-h)
-         (only (new-signature extend-signature
-                              comp-signature renew-signature) ti-signature)
-         (only (set-std-discr-fun) generic-dispatch)
-         (only (assoc cddr cadr second third remove-if-not mapcar)
+         (only (set-interpreter
+                call)
+               lzs-eval)
+         (only (set-read-side-effect
+                set-write-side-effect)
+               side-effects-h)
+         (only (new-signature
+                extend-signature
+                comp-signature
+                renew-signature)
+               ti-signature)
+         (only (set-std-discr-fun)
+               generic-dispatch)
+         (only (assoc
+                cddr
+                cadr
+                second
+                third
+                remove-if-not
+                mapcar)
                common-lisp))
  syntax (eulisp1
          el2lzs-main
-         (only (push) common-lisp))
- export (get-saved-annotations)
- )
+         (only (push)
+               common-lisp))
+ export (get-saved-annotations))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Handler
 ;;;-----------------------------------------------------------------------------
-
 (defun set-inline (fun key value)
   (setf (?inline fun) value))
 
@@ -95,7 +109,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; simple setting of different annotations
 ;;;-----------------------------------------------------------------------------
-
 (defun set-code-identifier (obj key value)
   (cond ((eq key ^code-identifier)
          (setf (?code-identifier obj) value))
@@ -218,7 +231,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; common stuff for %annotate-....
 ;;;-----------------------------------------------------------------------------
-
 (deflocal *saved-annotations* ())
 
 (defun transdef-%annotate (object options handler-table)
@@ -252,7 +264,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; %provide-compiler-info
 ;;;-----------------------------------------------------------------------------
-
 (deftranssyn (%provide-compiler-info . options) (whole-form))
 
 (deftransdef (%provide-compiler-info . options)
@@ -265,4 +276,6 @@
            (traverse-options options))
    ))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

@@ -612,7 +612,7 @@
 
 (defun trans-c-imports (file-spec-list)
   (mapc (lambda (file)
-          (if (or (symbolp file)
+          (if (or (symbol? file)
                   (stringp file))
               (setf (?c-imports (dynamic *current-module*))
                     (cons file (?c-imports (dynamic *current-module*))))
@@ -683,7 +683,7 @@
            import-specs)))
 
 (defun compute-interface-1 (import-spec import? syntax?)
-  (if (symbolp import-spec)            ; a module name
+  (if (symbol? import-spec)            ; a module name
       (mk-if (and import? (module-runtime-interface import-spec))
              (and syntax? (module-syntax-interface import-spec)))
     (let ((interface (compute-interface-without-check (cddr import-spec)

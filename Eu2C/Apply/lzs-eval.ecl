@@ -309,7 +309,7 @@
     binary<
 
     ;;--- symbol
-    symbolp
+    symbol?
     gensym
     make-symbol
     symbol-name

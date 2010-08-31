@@ -64,7 +64,7 @@
            print ;; nur fur test
            ) print)
     (only (generic-prin generic-write ) stream-generic)
-    (only (symbolp) symbol);; inserted by ak
+    (only (symbol?) symbol);; inserted by ak
     (only (null?)
           basic-list-0)         ; inserted by ak
     (only (read read-based-int1) read)
@@ -106,7 +106,7 @@
 (defun format (stream fstring . args)
   (if stream
       (progn
-        (if (symbolp stream) ; symbolp added by ak to avoid c-compiler warning
+        (if (symbol? stream) ; symbol? added by ak to avoid c-compiler warning
             (progn           ; if global optimization is on
               (if (null? (eq stream 't))
                   (error

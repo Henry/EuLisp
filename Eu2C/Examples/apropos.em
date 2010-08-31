@@ -46,7 +46,7 @@
 (defun run ()
   (format t "~%Please enter the word beginning: ")
   (let ((input (read)))
-    (when (symbolp input)
+    (when (symbol? input)
           (print (apropos (symbol-name input) words))
           (run))))
 

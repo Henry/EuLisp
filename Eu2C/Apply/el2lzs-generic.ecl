@@ -55,7 +55,7 @@
    (whole-form)))
 
 (deftransmod (defgeneric gf-spec lambda-list . options)
-  (cond ((symbolp gf-spec)
+  (cond ((symbol? gf-spec)
          (add-function (make-instance <global-generic-fun>
                                       :identifier gf-spec)))
         ;; otherwise no binding must be generated

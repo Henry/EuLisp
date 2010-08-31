@@ -175,7 +175,7 @@
 (defun pp-module (mod)
   (let ((*print-pretty* t)
         (*print-miser-width* ()))
-    (print (if (symbolp mod) (find-module mod) mod))))
+    (print (if (symbol? mod) (find-module mod) mod))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; retrieving the environment of the module TAIL

@@ -34,7 +34,7 @@
    syntax (apply-level-2)
 
    export (<symbol>
-           symbolp
+           symbol?
            make-symbol-without-copy
            #+(:symbol-with-plist :t)  symbol-plist
            *symbol-table*
@@ -42,7 +42,7 @@
            ))
 
 ;;;-----------------------------------------------------------------------------
-;;; <symbol> and symbolp
+;;; <symbol> and symbol?
 ;;;-----------------------------------------------------------------------------
 (%define-standard-class (<symbol> <class>)
   <object>
@@ -54,7 +54,7 @@
   representation pointer-to-struct
   allocation multiple-type-card
   constructor (make-symbol-without-copy name)
-  predicate symbolp)
+  predicate symbol?)
 
 
 

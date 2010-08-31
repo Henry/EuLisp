@@ -20,27 +20,25 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Providing LZS-Objects definied in the Application Module APPLY
 ;;;  Description:
-;;    The function set-apply-funs sets some variables to LZS-objects extracted from
-;;    the lexical environment of the module APPLY. The variables are all exported. The
-;;    function set-apply-funs can be called after! the module apply was loaded.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    The function set-apply-funs sets some variables to LZS-objects extracted
+;;    from the lexical environment of the module APPLY. The variables are all
+;;    exported. The function set-apply-funs can be called after! the module
+;;    apply was loaded.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module apply-funs
-
 (import (eulisp0
          el2lzs
          el2lzs-error
          lzs accessors
          tail-module
-         (only (stable-sort find)
+         (only (stable-sort
+                find)
                common-lisp))
  syntax (eulisp0
-         (only (case push)
+         (only (case
+                push)
                common-lisp))
  export (set-apply-objects
          set-apply-level-1-objects
@@ -53,9 +51,7 @@
          *special-classes*
          *special-bindings*)
 
-;;; ---------------------------
-;;; apply-level-1-objects begin
-
+ ;; apply-level-1-objects begin
  export (trace-pair
          trace-pointer
          trace-nothing
@@ -81,29 +77,29 @@
 
          <pointer-to-void>
          )
-;;; apply-level-1-objects end
-;;; -------------------------
-;;; apply-level-2-objects begin
+ ;; apply-level-1-objects end
 
+ ;; apply-level-2-objects begin
  export (%instance-of-p
          %class-of
 
          %vector-class-instance-size
 
-         %cons %list <null>-class <function>-class <fpi>-class
+         %cons
+         %list
+         <null>-class
+         <function>-class
+         <fpi>-class
          nullfun
          eqfun
          test-functions
          no-applicable-method-error
          %call-next-method
          %next-method-p
-         typecheck
-         )
-;;; apply-level-2-objects end
-;;; -------------------------
+         typecheck)
+ ;; apply-level-2-objects end
 
- export (
-         ;; for closures
+ export (;; for closures
          %closure-push ; (var closure-or-())
          %closure-value ; (closure pos-fixnum)
          %set-closure-value ; (closure pos-fixnum value)
@@ -151,18 +147,12 @@
 
          ;; subclassp, not yet needed directly by the compiler, it is only used
          ;; in the macro defcondition
-         %subclassp
-         )
-
- export (provide-compiler-info)
-;;; apply objects end
-;;; -----------------
- )
+         %subclassp)
+ export (provide-compiler-info))
 
 ;;;-----------------------------------------------------------------------------
-;;; apply-level-1-objects begin
+;;; apply-level-1-objects
 ;;;-----------------------------------------------------------------------------
-
 (deflocal trace-pair ())
 (deflocal trace-pointer ())
 (deflocal trace-nothing ())
@@ -188,12 +178,8 @@
 (deflocal <pointer-to-void> ())
 
 ;;;-----------------------------------------------------------------------------
-;;; apply-level-1-objects end
+;;; apply-level-2-objects
 ;;;-----------------------------------------------------------------------------
-;;;-----------------------------------------------------------------------------
-;;; apply-level-2-objects begin
-;;;-----------------------------------------------------------------------------
-
 (deflocal %instance-of-p ())
 (deflocal %class-of ())
 (deflocal %vector-class-instance-size ())
@@ -211,9 +197,8 @@
 (deflocal typecheck ())
 
 ;;;-----------------------------------------------------------------------------
-;;; apply-level-2-objects end
+;;; Apply objects
 ;;;-----------------------------------------------------------------------------
-
 ;; for closures
 (deflocal %closure-push ())
 (deflocal %closure-value ())
@@ -264,9 +249,8 @@
 (deflocal %subclassp ())
 
 ;;;-----------------------------------------------------------------------------
-;;; apply objects end
+;;; Other objects
 ;;;-----------------------------------------------------------------------------
-
 (deflocal apply-environment ())
 
 (defun set-apply-objects (apply-module)
@@ -292,18 +276,17 @@
   (setq %funcall8 (get-funcall-function 8))
   )
 
-(defun set-apply-level-1-objects ()
-  )
+(defun set-apply-level-1-objects ())
 
 (defun set-apply-level-2-objects ()
-  (setq test-functions (list %neq %eq %gt %lt %ge %le))
-  )
+  (setq test-functions (list %neq %eq %gt %lt %ge %le)))
+
 ;;;-----------------------------------------------------------------------------
-;;; hadling apply- and funcall-functions
+;;; handling apply- and funcall-functions
 ;;;-----------------------------------------------------------------------------
-;;; The following looks a bit complicated if the retrieval is done as above.
-;;; However, the implementation is prepared for a more flexible use by following
-;;; compiler passes.
+;; The following looks a bit complicated if the retrieval is done as above.
+;; However, the implementation is prepared for a more flexible use by following
+;; compiler passes.
 
 (deflocal *apply-functions* ())
 (deflocal *funcall-functions* ())
@@ -341,9 +324,9 @@
   (get-from-apply/funcall-table number-of-args *funcall-functions*))
 
 ;;;-----------------------------------------------------------------------------
-;;; set-special-function: handles keyword is-special-function of %annotate-function
+;;; set-special-function:
+;;;  handles keyword is-special-function of %annotate-function
 ;;;-----------------------------------------------------------------------------
-
 (deflocal *special-functions* ())
 
 (defun set-special-function (function keyword type)
@@ -364,7 +347,8 @@
         (es::get-dynamic (setq %get-dynamic function))
         (es::set-dynamic (setq %set-dynamic function))
         (es::make-dynamic (setq %make-dynamic function))
-        (es::initialize-global-dynamic (setq %initialize-global-dynamic function))
+        (es::initialize-global-dynamic
+         (setq %initialize-global-dynamic function))
 
         ;;apply-level-1-objects
         (es::trace-pair (setq trace-pair function))
@@ -380,17 +364,21 @@
         (es::class-mm-type (setq class-mm-type function))
         (es::class-mm-card (setq class-mm-card function))
         (es::allocate-on-single-card (setq allocate-on-single-card function))
-        (es::allocate-on-multiple-type-card (setq allocate-on-multiple-type-card function))
-        (es::allocate-on-multiple-size-card (setq allocate-on-multiple-size-card function))
+        (es::allocate-on-multiple-type-card
+         (setq allocate-on-multiple-type-card function))
+        (es::allocate-on-multiple-size-card
+         (setq allocate-on-multiple-size-card function))
 
         ;;apply-level-2-objects
         (es::instance-of-p (setq %instance-of-p function))
         (es::class-of (setq %class-of function))
-        (es::vector-class-instance-size (setq %vector-class-instance-size function))
+        (es::vector-class-instance-size
+         (setq %vector-class-instance-size function))
         (es::cons (setq %cons function))
         (es::null? (setq nullfun function))
         (es::eq (setq eqfun function))
-        (es::no-applicable-method-error (setq no-applicable-method-error function))
+        (es::no-applicable-method-error
+         (setq no-applicable-method-error function))
         (es::call-next-method (setq %call-next-method function))
         (es::next-method-p (setq %next-method-p function))
         (es::typecheck (setq typecheck function))
@@ -402,9 +390,9 @@
         (t (error-invalid-special-specification keyword type))))
 
 ;;;-----------------------------------------------------------------------------
-;;; set-special-class: handles keyword is-special-class of %annotate-class
+;;; set-special-class:
+;;;  handles keyword is-special-class of %annotate-class
 ;;;-----------------------------------------------------------------------------
-
 (deflocal *special-classes* ())
 
 (defun set-special-class (class keyword type)
@@ -421,9 +409,9 @@
 
 
 ;;;-----------------------------------------------------------------------------
-;;; set-special-binding: handles keyword is-special-binding of %annotate-binding
+;;; set-special-binding:
+;;;  handles keyword is-special-binding of %annotate-binding
 ;;;-----------------------------------------------------------------------------
-
 (deflocal *special-bindings* ())
 
 (defun set-special-binding (binding keyword type)
@@ -446,7 +434,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; providing special infos from the application to the compiler
 ;;;-----------------------------------------------------------------------------
-
 (defun provide-compiler-info (key value)
   (case key
         (es::max-used-type-descriptor
@@ -455,4 +442,6 @@
          (setq max-used-card-descriptor value))
         (t (error-invalid-key-for-%provide-compiler-info key))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

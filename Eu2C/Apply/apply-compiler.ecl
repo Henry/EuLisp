@@ -27,19 +27,25 @@
 (import (level-1-eulisp
          lzs
          mzs-to-lzs
-         (only (configurationp init-configuration-table)
+         (only (configurationp
+                init-configuration-table)
                configuration)
-         (only (ti-initialize update-all-type-expr-codes)
+         (only (ti-initialize
+                update-all-type-expr-codes)
                ti-init)
          (only (expand-all-lattice-type-literals)
                ti-lattice)
          (only (ti-print-statistics)
                ti)
-         (only (module-env $tail-module find-module load-module)
+         (only (module-env
+                $tail-module
+                find-module
+                load-module)
                el2lzs)
          (only (reset-%tail)
                tail-module)
-         (only (reset-environments load-if-module)
+         (only (reset-environments
+                load-if-module)
                el2lzs-main) ; because importing from el2lzs doesn't function
          (only (export-objects)
                export)
@@ -47,26 +53,28 @@
                expand-literal)
          (only (reset-literal-expanders)
                el2lzs-literals)
-         (only (*frontend-errors* reset-frontend-errors)
+         (only (*frontend-errors*
+                reset-frontend-errors)
                el2lzs-error)
          (only (create-predefined-standard-classes)
                lzs-mop)
          (only (initialize-predefined-standard-classes
                 initialize-predefined-standard-classes-part-2
-                handle-symbols
-                )
+                handle-symbols)
                lzs-class-init)
          (only (reset-code-identifier)
                code-identifier)
          (only (init-mm-initialize)
                mm-initialize)
-         (only (reset-generic-dispatch set-discriminating-functions)
+         (only (reset-generic-dispatch
+                set-discriminating-functions)
                generic-dispatch)
          (only (set-apply-objects
                 set-apply-level-1-objects
                 set-apply-level-2-objects)
                apply-funs)
-         (only (*compilation-type* *basic-system*)
+         (only (*compilation-type*
+                *basic-system*)
                predicates)
          (only (?identifier)
                accessors)
@@ -86,7 +94,8 @@
  syntax (level-1-eulisp
          (only (return-from when)
                common-lisp))
- export (compile-application compilation-state))
+ export (compile-application
+         compilation-state))
 
 (deflocal compilation-state ())
 
@@ -98,7 +107,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; main function to compile
 ;;;-----------------------------------------------------------------------------
-
 (defun compile-application (module-name . basic-system)
   (when basic-system (setq basic-system (car basic-system)))
   (compile :application module-name basic-system))
@@ -123,16 +131,16 @@
     ;; this is the case if a dump is created with a preloaded basic system
     (progn
       (setq *compilation-type* compilation-type)
-      (setq *basic-system* basic-system) ; the initial value, will be updated later
+      (setq *basic-system* basic-system) ; the initial value, will be updated
+                                         ; later
       ;; to a module object
 
       ;;initialize configuration-table
       (init-configuration-table)
 
       (when *basic-system*
-            ;; if a basic system is used
-            ;; these variables must be set to () independent of the value given in the
-            ;; configuration file
+            ;; if a basic system is used these variables must be set to ()
+            ;; independent of the value given in the configuration file
             (dynamic-setq *static-mm-type* ())
             (dynamic-setq *static-mm-card* ()))
 
@@ -146,8 +154,8 @@
       )))
 
 (defun compile (compilation-type module-name basic-system)
-  ;; module-name may be a symbol, a string interpreted as a load path or the empty
-  ;; string (on Mac only) where a file dialog appears
+  ;; module-name may be a symbol, a string interpreted as a load path or the
+  ;; empty string (on Mac only) where a file dialog appears
 
   (and
 
@@ -174,8 +182,8 @@
      (format t "~%--- marking all exported bindings...")
      (export-objects module module-env)
 
-     ;; now the deflocal-variable module-env (module el2lzs) contains the list of
-     ;; all direct or indirect loaded application modules
+     ;; now the deflocal-variable module-env (module el2lzs) contains the list
+     ;; of all direct or indirect loaded application modules
 
      (format t "~%--- converting to MZS ")
 
@@ -214,7 +222,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;;
 ;;;-----------------------------------------------------------------------------
-
 (defun reset-compiler ()
   (reset-frontend-errors)
   (reset-%tail)
@@ -235,16 +242,22 @@
                (if (null? basic-system)
                    (progn
                      (setq *basic-system* ())
-                     (load-module ^apply-level-1)            ; load the most basic things
-                     (set-apply-level-1-objects)             ; provide basic things to the compiler
+                     (load-module ^apply-level-1)  ; load the most basic things
+                     (set-apply-level-1-objects)   ; provide basic things to the
+                                                   ; compiler
 
                      (init-mm-initialize)
                      (initialize-predefined-standard-classes-part-2)
 
-                     (load-module ^apply-level-2)            ; load def of <cons>, now predicates can be constructed
-                     (set-apply-level-2-objects)             ; provide secons layer of basic things
-                     ;;(load-module ^tail)                    ; load modules apply and tail
-                     (set-apply-objects (load-module ^apply)); binds some variables with objects
+                     (load-module ^apply-level-2)  ; load def of <cons>, now
+                                                   ; predicates can be
+                                                   ; constructed
+                     (set-apply-level-2-objects)   ; provide secons layer of
+                                                   ; basic things
+                     ;;(load-module ^tail)         ; load modules apply and tail
+                     (set-apply-objects (load-module ^apply)); binds some
+                                                             ; variables with
+                                                             ; objects
                      ;; available in apply.am)
                      ()
                      )
@@ -274,5 +287,6 @@
               basic-system-id)
       )))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

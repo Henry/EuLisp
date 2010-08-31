@@ -61,7 +61,7 @@
                     (eq (first module-source)
                         'ES::defmodule)
                     ;;is the module-name a symbol?
-                    (symbolp (second module-source))))
+                    (symbol? (second module-source))))
          (error-invalid-module-definition module-source path)
          ())
         ((null? (string-equal (string (second module-source))

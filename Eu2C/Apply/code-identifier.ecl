@@ -315,7 +315,7 @@
   string)
 
 (defun check-x-identifier (id)
-  (when (symbolp id) (setq id (symbol-name id)))
+  (when (symbol? id) (setq id (symbol-name id)))
   (check-c-unique (check-for-non-c-id-chars id))
   id)
 

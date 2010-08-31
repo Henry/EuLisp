@@ -197,7 +197,7 @@
 
 (defmethod ti-write (stream (expr <type-var>))
   (let ((id (?id expr)))
-    (if (symbolp id)
+    (if (symbol? id)
         (format stream "~A" id)
       (format stream "var~A" (?id expr)))))
 
@@ -226,7 +226,7 @@
 
 (defmethod ti-def-write (stream (expr <type-var>))
   (let ((id (?id expr)))
-    (if (symbolp id)
+    (if (symbol? id)
         (format stream "(var ~A)" id)
       (format stream "(var var~A)" (?id expr)))))
 

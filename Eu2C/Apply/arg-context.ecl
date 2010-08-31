@@ -18,49 +18,39 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 #module arg-context
-(import
- (eulisp1
-  SIMPLE-PROGRAMMING
-  LZS
-  MZS
-  context
-  analyse-h
-  progn-context
-  type-propagation
-  (only (error) common-lisp)
-  type-inference
-  lzs-to-mzs-fun
-  function-call-context
-  vector
-  function-call
-  if-form
-  letstar-form
-  setq-form
-  slot-value
-  gutter)
-
- syntax
- (eulisp1)
- )
-
-
+(import (eulisp1
+         SIMPLE-PROGRAMMING
+         LZS
+         MZS
+         context
+         analyse-h
+         progn-context
+         type-propagation
+         (only (error)
+               common-lisp)
+         type-inference
+         lzs-to-mzs-fun
+         function-call-context
+         vector
+         function-call
+         if-form
+         letstar-form
+         setq-form
+         slot-value
+         gutter)
+ syntax (eulisp1))
 
 (defmethod finish-a ((con <arg>) form) form)
 
-;;--------------------------
-;; constants
-;;--------------------------
-
+;;;-----------------------------------------------------------------------------
+;;; Constants
+;;;-----------------------------------------------------------------------------
 (defmethod l2m-a ((con <arg>) (form <named-const>))
   ;;
   ;; form = <defined-named-constant>, <imported-named-constant>
@@ -114,8 +104,7 @@
   (lzs2mzs-fun form)
   (if (eq (?function-type form) $closure)
       (make-a-closure-function form (dynamic block))
-    form)
-  )
+    form))
 
 (defmethod l2m-a ((con <arg>) (form <imported-fun>))
   (setf (?function-type form) $data)
@@ -143,13 +132,9 @@
 (defmethod l2m-a ((con <arg>) (form <null>))
   form)
 
-;;--------------------------
-;;   end of constans
-;;--------------------------
-
-;;--------------------------
-;;   begin of variables
-;;--------------------------
+;;;-----------------------------------------------------------------------------
+;;; Variables
+;;;-----------------------------------------------------------------------------
 (defmethod l2m-a ((con <arg>) (form <var-ref>))
   ;;
   ;; var = <local-static>, <global-static>, <imported-static>, <dynamic>
@@ -159,36 +144,34 @@
       var))
   )
 
-;;--------------------------
-;;   begin of function call
-;;--------------------------
-
+;;;-----------------------------------------------------------------------------
+;;; function call
+;;;-----------------------------------------------------------------------------
 (defmethod l2m-a ((con <arg>) (form <app>))
   ;;
   (let ((fun (?function form)))
     (if (cont-p fun) (error "continuation in argument position")
-      ;;        (if (eq (common-lisp::class-of fun) lzs-mop::<slot-accessor-fun>)
-      ;;          (let* ((arglist (?arg-list form))
-      ;;                    (arg-num (length arglist))
-      ;;                    (var-vec (make-vector (+ arg-num 1)))
-      ;;                    (call (make <call>
-      ;;                                :function fun
-      ;;                                :arg-num arg-num
-      ;;                                :var-descr (make <var-descr>
-      ;;                                                 :var-vec var-vec
-      ;;                                                 :constant-counter 0))))
-      ;;            (lzs2mzs-fun fun)
-      ;;               (l2m-call call arglist)
-      ;;               (print "************************ Start inline ****************")
-      ;;               (inline::inline-a con fun var-vec ()))
+      ;; (if (eq (common-lisp::class-of fun) lzs-mop::<slot-accessor-fun>)
+      ;;   (let* ((arglist (?arg-list form))
+      ;;             (arg-num (length arglist))
+      ;;             (var-vec (make-vector (+ arg-num 1)))
+      ;;             (call (make <call>
+      ;;                         :function fun
+      ;;                         :arg-num arg-num
+      ;;                         :var-descr (make <var-descr>
+      ;;                                          :var-vec var-vec
+      ;;                                          :constant-counter 0))))
+      ;;     (lzs2mzs-fun fun)
+      ;;        (l2m-call call arglist)
+      ;;        (print "************************ Start inline ****************")
+      ;;        (inline::inline-a con fun var-vec ()))
       (call-a-function fun (?arg-list form)
                        () (?read-glocs form)))))
 ;;)
 
-;;--------------------------
-;;   end of function call
-;;--------------------------
-
+;;;-----------------------------------------------------------------------------
+;;; Other
+;;;-----------------------------------------------------------------------------
 (defmethod l2m-a ((con <arg>) (form <set-slot-value>))
   (set-slot-value-a con form))
 
@@ -242,4 +225,6 @@
 ;;   ())
 ;;
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

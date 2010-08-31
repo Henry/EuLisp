@@ -121,7 +121,7 @@
 
 (defun transsyn-vars (vars)
   (cond ((null? vars) ())
-        ((symbolp (first vars))
+        ((symbol? (first vars))
          (setf (cdr vars) (transsyn-vars (rest vars)))
          vars)
         (t (setf (second (first vars)) (transsyn (second (first vars))))
@@ -193,13 +193,13 @@
            exprs)))
 
 (defun transsyn-listop (expr)
-  (if (symbolp (first expr))
+  (if (symbol? (first expr))
       (transsyn expr)
     (progn (setf (cdr expr) (transsyn* (cdr expr)))
            expr)))
 
 (deftranssyn ((operator) . EXPRS)
-  (cond ((and (symbolp operator)
+  (cond ((and (symbol? operator)
               (find-in-mac-env operator))
          (transsyn (call (find-in-mac-env operator)
                          EXPRS)))
@@ -315,7 +315,7 @@
          (make-instance <params>
                         :var-list (reverse req)
                         :rest ()))
-        ((symbolp params)  ;; error if (neq rst ())
+        ((symbol? params)  ;; error if (neq rst ())
          (make-instance <params>
                         :var-list (reverse req)
                         :rest (make-instance <local-static>
@@ -345,7 +345,7 @@
 
 (deftransmod (defun fun-spec parameters body)
   ;;the body was transformed to a single form by transsyn
-  (cond ((symbolp fun-spec)
+  (cond ((symbol? fun-spec)
          ;; a (function) binding is defined
          (add-function
           (make-instance <global-fun>
@@ -417,12 +417,12 @@
                                    (trans EXPR))))))
 
 (defun fun-spec-name (fun-spec)
-  (if (symbolp fun-spec)
+  (if (symbol? fun-spec)
       fun-spec
     (car (cdr fun-spec))))
 
 (defun fun-spec-type (fun-spec)
-  (if (symbolp fun-spec)
+  (if (symbol? fun-spec)
       ()
     (car fun-spec)))
 
@@ -493,7 +493,7 @@
 (defmethod trans ((LIT <object>)) LIT)
 
 (deftrans (quote LIT)
-  (cond ((symbolp LIT)
+  (cond ((symbol? LIT)
          (make-defined-sym LIT))
         ((consp LIT)
          (make-instance <structured-literal> :value (lzslit LIT)))
@@ -638,7 +638,7 @@
 
 (defun trans-vars (varlist vars inits ecomb)
   (cond ((null? varlist) (cons (reverse vars) (reverse inits)))
-        ((symbolp (first varlist))
+        ((symbol? (first varlist))
          (trans-vars (rest varlist)
                      (cons (make-instance <local-static>
                                           :identifier (first varlist))
@@ -1186,9 +1186,9 @@
   ;; in case of a rest parameter the list is extended
   ;; by an additional class: %list
   (cond ((null? lambda-list) ())
-        ((symbolp lambda-list)          ; rest parameter
+        ((symbol? lambda-list)          ; rest parameter
          (list %list))
-        ((symbolp (car lambda-list))    ; unspecialized parameter
+        ((symbol? (car lambda-list))    ; unspecialized parameter
          (cons %object
                (lambda-specializers (cdr lambda-list))))
         (t;;; specialized parameter
@@ -1199,9 +1199,9 @@
   ;; extracts the parameter-names from specialized lambda-list
   ;; returns a true list or if a rest parameter occurs a dotted list of symbols
   (cond ((null? lambda-list) ())
-        ((symbolp lambda-list)          ; rest parameter
+        ((symbol? lambda-list)          ; rest parameter
          lambda-list)
-        ((symbolp (car lambda-list))    ; unspecialized parameter
+        ((symbol? (car lambda-list))    ; unspecialized parameter
          (cons (car lambda-list)
                (lambda-parameters (cdr lambda-list))))
         (t;;; specialized parameter

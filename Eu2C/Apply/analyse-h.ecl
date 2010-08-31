@@ -28,37 +28,50 @@
 ;;;-----------------------------------------------------------------------------
 
 #module analyse-h
-
-(import ((except (format) eulisp1)
+(import ((except (format)
+                 eulisp1)
          lzs
          mzs
          accessors
-         (only (assoc format) common-lisp))
-
+         (only (assoc
+                format)
+               common-lisp))
  syntax (eulisp1
          apply-standard)
-
  export  (<cast>
-          closure env pathes typepathes block
-          rec-calls calls tests moves
-          get-slot-value set-slot-value
-          $normal $data $closure
-          $funcall warning
-          *started-and-not-finished-functions* *counter* l2m-a
-          append-stat  cons-block a-number finish-a
-          *actual-method-subset*)
- )
+          closure
+          env
+          pathes
+          typepathes
+          block
+          rec-calls
+          calls
+          tests
+          moves
+          get-slot-value
+          set-slot-value
+          $normal
+          $data
+          $closure
+          $funcall
+          warning
+          *started-and-not-finished-functions* *counter*
+          l2m-a
+          append-stat
+          cons-block
+          a-number
+          finish-a
+          *actual-method-subset*))
 
+;;;-----------------------------------------------------------------------------
+;;; Classes
+;;;-----------------------------------------------------------------------------
 (defstandardclass <cast> ()
-  (type :accessor :initarg :initform ())
-  )
-
-;;--- definitions, exportations, initialization forms
+  (type :accessor :initarg :initform ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; global-environments
 ;;;-----------------------------------------------------------------------------
-
 (defvar closure  ())
 (defvar env       ())
 (defvar pathes ())
@@ -68,7 +81,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; annotations for the function
 ;;;-----------------------------------------------------------------------------
-
 (defvar rec-calls ())
 (defvar calls    ())
 (defvar tests ())
@@ -120,4 +132,6 @@
 
 (deflocal *actual-method-subset* ())
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

@@ -53,7 +53,7 @@
 (defgeneric expand-literal (literal))
 
 (defun %function-literal (function-object)
-  (if (symbolp function-object)
+  (if (symbol? function-object)
       function-object            ; return ^unknown... as it is
     (make-literal-instance
      ;;%function

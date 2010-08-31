@@ -24,14 +24,14 @@
 ;;;-----------------------------------------------------------------------------
 
 #module eulisp-kernel
-(import ((only (symbolp
-                first
+(import ((only (first
                 cons
                 list
                 rest
                 t)
                common-lisp)
          (rename ((null cl:null)
+                  (symbolp cl:symbolp)
                   (defun cl:defun)
                   (defmacro cl:defmacro))
                  common-lisp)
@@ -89,7 +89,7 @@
 
 (cl:defun make-cl-lambda-list (el-lambda-list)
           (cond ((cl:null el-lambda-list) ())
-                ((symbolp el-lambda-list) (list '&rest el-lambda-list))
+                ((cl:symbolp el-lambda-list) (list '&rest el-lambda-list))
                 (t (cons (first el-lambda-list)
                          (make-cl-lambda-list (rest el-lambda-list))))))
 

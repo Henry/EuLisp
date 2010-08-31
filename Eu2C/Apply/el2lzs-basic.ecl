@@ -64,7 +64,7 @@
 (defun define-trans (trans-function pattern result)
   (let ((trans-function (make-eulisp-symbol trans-function))
         (form-keyword (first pattern)))
-    (if (symbolp form-keyword)
+    (if (symbol? form-keyword)
         (progn
           (setq form-keyword (make-eulisp-symbol (car pattern)))
           `(progn (setf (get ',form-keyword ',trans-function)
@@ -84,12 +84,12 @@
               (cons ',trans-function ',pattern)))))
 
 (defun get-trans-function (trans-function key)
-  (car (or (and (symbolp key)
+  (car (or (and (symbol? key)
                 (get key trans-function))
            (get ^t trans-function))))
 
 (defun get-trans-pattern (trans-function key)
-  (cdr (or (and (symbolp key)
+  (cdr (or (and (symbol? key)
                 (get key trans-function))
            (get ^t trans-function))))
 

@@ -20,38 +20,33 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: symbol
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module symbol
-
-(import
- (eulisp-kernel
-  ;;compare
-  (only (intern find-symbol eq) common-lisp)
-  (rename ((gensym cl:gensym)) common-lisp))
-
- syntax
- (eulisp-kernel
-  (rename ((defun cl:defun)
-           (symbolp cl:symbolp)) common-lisp)
-  (only (&optional) common-lisp))
-
- expose
- ((only (symbol-name)
-        common-lisp))
-
- export
- (gensym symbol-exists-p symbolp)
- )
+(import (eulisp-kernel
+         ;;compare
+         (only (intern
+                find-symbol
+                eq)
+               common-lisp)
+         (rename ((gensym cl:gensym))
+                 common-lisp))
+ syntax (eulisp-kernel
+         (rename ((defun cl:defun)
+                  (symbolp cl:symbolp))
+                 common-lisp)
+         (only (&optional)
+               common-lisp))
+ expose ((only (symbol-name)
+               common-lisp))
+ export (gensym
+         symbol-exists-p
+         symbol?))
 
 (make-eulisp-class symbol)
 
-(defun symbolp (object)
+(defun symbol? (object)
   (if (eq object ())
       ()
     (cl:symbolp object)))
@@ -65,4 +60,6 @@
 (defun symbol-exists-p (name)
   (find-symbol name $eulisp-symbol-package))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------
