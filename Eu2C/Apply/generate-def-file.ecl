@@ -197,7 +197,7 @@
          ;; the type schemes of hard-wired special-sys-funs are loaded
          ;; explicitely by importing ti-sys-signatures.def
          )
-        ((exported-for-lisp-p object)
+        ((exported-for-lisp? object)
          (write-def "~2%~:[(export ~S~:*)~%~;~]"
                     (invisible-exported? object)
                     (if-identifier object))
@@ -234,7 +234,7 @@
   (cond ((null? objects)
          `(rename ,rename-part (only ,only-part %tail)))
         ((and (hard-wired-p (car objects))
-              (exported-for-lisp-p (car objects))
+              (exported-for-lisp? (car objects))
               (null? (invisible-exported? (car objects))))
          (gen-%tail-exports (cdr objects)
                             (if (eq (?identifier (car objects))

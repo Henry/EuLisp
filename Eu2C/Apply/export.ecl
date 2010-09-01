@@ -106,7 +106,7 @@
        (?exported object)
        (cons? (car (?exported object)))))
 
-(defun explicitely-exported-p (object)
+(defun explicitely-exported? (object)
   (and (global-p object)
        (?exported object)
        (null? (cons? (car (?exported object))))))
@@ -183,7 +183,7 @@
 (defun search-and-mark-invisible-exports (module-env if-module)
   (labels ((mark-invisible-exports-for-object-list (objects)
                                                    (mapc (lambda (obj)
-                                                           (when (explicitely-exported-p obj)
+                                                           (when (explicitely-exported? obj)
                                                                  (mark-invisible-exports obj if-module)))
                                                          objects)))
           (mapc (lambda (module)

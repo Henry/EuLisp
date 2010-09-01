@@ -162,14 +162,14 @@
 (defmethod literal-declaration (literal class
                                         (representation <%pointer-to-struct>))
   (write-data "~%~:[static ~;~]S_LITERAL(~A, ~A);"
-              (exported-for-lisp-p (?unexpanded literal))
+              (exported-for-lisp? (?unexpanded literal))
               (type-identifier (?class literal))
               (c-identifier literal)))
 
 (defmethod literal-declaration (literal class
                                         (representation <%pointer-to-vector>))
   (write-data "~%~:[static ~;~]V_LITERAL(~A, ~A, ~A);"
-              (exported-for-lisp-p (?unexpanded literal))
+              (exported-for-lisp? (?unexpanded literal))
               (type-identifier (~vector-class-element-type class))
               (c-identifier literal)
               (get-length-of-vector-literal literal class)))
@@ -204,7 +204,7 @@
                                        (representation <%pointer-to-struct>))
 
   (write-data "~%~:[static ~;~]LITERAL(~A) = {STAG(~:/EXPR/), {~{~:/EXPR/~^, ~}}};"
-              (exported-for-lisp-p (?unexpanded literal))
+              (exported-for-lisp? (?unexpanded literal))
               (c-identifier literal)
               class
               (get-structure-components
@@ -232,7 +232,7 @@
                       element-type)))
     (if (string? components)
         (write-data "~%~:[static ~;~]LITERAL(~A) = {VTAG(~A, ~:/EXPR/), \"~A\"};"
-                    (exported-for-lisp-p (?unexpanded literal))
+                    (exported-for-lisp? (?unexpanded literal))
                     (c-identifier literal)
                     length
                     class
@@ -241,7 +241,7 @@
         (when (is-pointer element-type)
               (add-vector-root length literal))
         (write-data "~%~:[static ~;~]LITERAL(~A) = {VTAG(~A*sizeof(~A), ~:/EXPR/), {~{~:/EXPR/~^, ~}}};"
-                    (exported-for-lisp-p (?unexpanded literal))
+                    (exported-for-lisp? (?unexpanded literal))
                     (c-identifier literal)
                     length
                     (type-identifier element-type)

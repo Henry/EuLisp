@@ -209,44 +209,44 @@
 
 ;;; Answer whether a type expression correspondes to the top of the lattice.
 (defun general-type-p (type-expr)
-  (eq-code-p (?code type-expr) *top-code*))
+  (eq-code? (?code type-expr) *top-code*))
 
 ;;; Answer whether a type expression correspondes to %object.
 (defun %object-type? (type-expr)
-  (eq-code-p (?code type-expr) *%object-code*))
+  (eq-code? (?code type-expr) *%object-code*))
 
 ;;; Answer whether a type expression correspondes to %false.
 (defun %false-type-p (type-expr)
-  (eq-code-p (?code type-expr) *%false-code*))
+  (eq-code? (?code type-expr) *%false-code*))
 
 ;;; Answer whether a type expression correspondes to %void.
 (defun %void-type? (type-expr)
   (and (atomic-type? type-expr)
-       (eq-code-p (?code type-expr) *%void-code*)))
+       (eq-code? (?code type-expr) *%void-code*)))
 
 ;;; Answer whether a type expression correspondes to %class.
 (defun %class-type? (type-expr)
   (and (atomic-type? type-expr)
-       (eq-code-p (?code type-expr) *%class-code*)))
+       (eq-code? (?code type-expr) *%class-code*)))
 
 ;;; Answer whether a type expression correspondes to fpi-list.
 (defun fpi-list-type-p (type-expr)
-  (eq-code-p (?code type-expr) *fpi-list-code*))
+  (eq-code? (?code type-expr) *fpi-list-code*))
 
 ;;; Answer whether a type expression correspondes to the bottom of the lattice.
 (defun no-type? (type-expr)
-  (eq-code-p (?code type-expr) *bottom-code*))
+  (eq-code? (?code type-expr) *bottom-code*))
 
 ;;; Answer whether a type expression correspondes to <null>.
 (defun <null>-type? (type-expr)
-  (eq-code-p (?code type-expr) *<null>-code*))
+  (eq-code? (?code type-expr) *<null>-code*))
 
 ;;; Answer whether a type expression correspondes to <null>.
 (defun <function>-type-p (type-expr)
-  (eq-code-p (?code type-expr) *<function>-code*))
+  (eq-code? (?code type-expr) *<function>-code*))
 
 (defun <fpi>-type-p (type-expr)
-  (eq-code-p (?code type-expr) *<fpi>-code*))
+  (eq-code? (?code type-expr) *<fpi>-code*))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TYPE EXPRESSION/LZS-CLASS CONNECTION

@@ -597,11 +597,11 @@
 
 ;;; Answer whether a lattice type denotes the bottom type.
 (defun bottom-lattice-type? (lattice-type) ;<lattice-type>
-  (eq-code-p (?code lattice-type) *bottom-code*))
+  (eq-code? (?code lattice-type) *bottom-code*))
 
 ;;; Answer whether a lattice type denotes the top type.
 (defun top-lattice-type? (lattice-type) ;<lattice-type>
-  (eq-code-p (?code lattice-type) *top-code*))
+  (eq-code? (?code lattice-type) *top-code*))
 
 ;;; Answer whether the intersection of two lattice types is not *bottom-type*.
 (defun meet-lattice-types? (lattice-type1  ;<lattice-type>
@@ -616,10 +616,10 @@
 ;;; Answer whether two lattice types are equal.
 (defun eq-lattice-type (lattice-type1   ;<lattice-type>
                         lattice-type2)  ;<lattice-type>
-  (eq-code-p (?code lattice-type1) (?code lattice-type2)))
+  (eq-code? (?code lattice-type1) (?code lattice-type2)))
 
 ;;; Answer whether the class corresponding to a lattice type is exported.
-(defun exported-p (lattice-type) ;<lattice-type>
+(defun exported? (lattice-type) ;<lattice-type>
   (let ((class (?class lattice-type)))
     (if class
         (?exported class)

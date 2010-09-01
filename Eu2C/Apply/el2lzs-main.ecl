@@ -659,11 +659,11 @@
   (let ((iface (compute-interface-without-check import-specs import? syntax?)))
     (mk-if
      (delete-duplicates (if-import iface)
-                        :test #'equal-binding-p)
+                        :test #'equal-binding?)
      (delete-duplicates (if-syntax iface)
-                        :test #'equal-binding-p))))
+                        :test #'equal-binding?))))
 
-(defun equal-binding-p (binding1 binding2)
+(defun equal-binding? (binding1 binding2)
   (cond ((eq binding1 binding2) ; a shortcut for the following test
          t)
         ((eq (?identifier binding1)

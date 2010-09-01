@@ -37,7 +37,7 @@
  export (meet-type-exprs?
          subtype-expr?
          true-subtype-expr?
-         eq-expr-p
+         eq-expr?
          meet-type-exprs
          join-type-exprs
          joined-type-exprs
@@ -140,23 +140,23 @@
   (let ((code1 (?code expr1))
         (code2 (?code expr2)))
     (and (subcode? code1 code2)
-         (null? (eq-code-p code1 code2)))))
+         (null? (eq-code? code1 code2)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Answer whether a type expr is equal to another.
 ;;;-----------------------------------------------------------------------------
 
-(defgeneric eq-expr-p (expr1 expr2))
+(defgeneric eq-expr? (expr1 expr2))
 
-(defmethod eq-expr-p ((expr1 <type-expr>)
+(defmethod eq-expr? ((expr1 <type-expr>)
                       (expr2 <type-expr>))
   ())
 
-(defmethod eq-expr-p ((expr1 <atomic-type>)
+(defmethod eq-expr? ((expr1 <atomic-type>)
                       (expr2 <atomic-type>))
-  (eq-code-p (?code expr1) (?code expr2)))
+  (eq-code? (?code expr1) (?code expr2)))
 
-(defmethod eq-expr-p ((expr1 <slot-id>)
+(defmethod eq-expr? ((expr1 <slot-id>)
                       (expr2 <slot-id>))
   (eq (?slot-name expr1) (?slot-name expr2)))
 

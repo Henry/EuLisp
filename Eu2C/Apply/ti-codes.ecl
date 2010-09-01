@@ -44,7 +44,7 @@
          complement-code
          substract-codes
          xor-codes
-         eq-code-p
+         eq-code?
          meet-codes?
          subcode?
          bottom-code?
@@ -105,12 +105,12 @@
 ;;;-----------------------------------------------------------------------------
 
 ;;; Answer whether two type codes are equal.
-(defun eq-code-p (code1 code2)
+(defun eq-code? (code1 code2)
   (= code1 code2))
 
 ;;; Answer whether a type code is the bottom type code.
 (defun bottom-code? (code)
-  (eq-code-p code (bottom-code)))
+  (eq-code? code (bottom-code)))
 
 ;;; Answer whether two type codes do meet, e.g. do have set the same bits.
 (defun meet-codes? (code1 code2)
@@ -118,7 +118,7 @@
 
 ;;; Answer whether one type code is a subcode of another.
 (defun subcode? (code1 code2)
-  (eq-code-p (meet-codes code1 code2) code1))
+  (eq-code? (meet-codes code1 code2) code1))
 
 ;;; Answer whether two lattice type codes are complementary.
 (defun complement-codes? (code1 code2)

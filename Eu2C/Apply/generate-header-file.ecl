@@ -94,7 +94,7 @@
 ;;; Type, Structure and Object Declarations for Classes
 ;;;-----------------------------------------------------------------------------
 (defun generate-type-declaration (class-def)
-  (when (exported-p class-def)
+  (when (exported? class-def)
         (type-declaration class-def (?representation class-def))))
 
 (defun object-declaration (obj)
@@ -144,7 +144,7 @@
                         ref-class)))
 
 (defun generate-struct-declaration (class-def)
-  (when (exported-p class-def)
+  (when (exported? class-def)
         (struct-declaration class-def (?representation class-def))))
 
 (defgeneric struct-declaration (class-def representation))
@@ -170,7 +170,7 @@
 
 (defgeneric generate-class-object-declaration (class))
 (defmethod generate-class-object-declaration (class)
-  (when (exported-p class)
+  (when (exported? class)
         (object-declaration class)))
 (defmethod generate-class-object-declaration ((class <basic-class-def>))
   ())
@@ -180,7 +180,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun generate-function-declaration (fun)
-  (when (exported-p fun)
+  (when (exported? fun)
         (write-code "~%")
         (function-declaration fun)))
 
@@ -252,19 +252,19 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun generate-var-declaration (var)
-  (when (exported-p var)
+  (when (exported? var)
         (write-code "~%extern ~A ~A;"
                     (type-identifier (global-var-type var))
                     (c-identifier var))))
 
 (defun generate-const-declaration (const)
-  (when (exported-p const)
+  (when (exported? const)
         (write-code "~%extern ~A ~A;"
                     (type-identifier (global-var-type const))
                     (c-identifier const))))
 
 (defun generate-sym-declaration (sym)
-  (when (exported-p sym)
+  (when (exported? sym)
         (object-declaration sym)))
 
 ;;;-----------------------------------------------------------------------------

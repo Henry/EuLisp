@@ -58,8 +58,8 @@
   give-constant
   give-variable-or-constant
   basic-data-type?
-  data-float-p
-  data-integer-p
+  data-float?
+  data-integer?
   )
  )
 
@@ -67,19 +67,19 @@
 
 ;;;-------------------------------------------------------------
 
-(defmethod data-type-p ((type <class-def>))
+(defmethod data-type? ((type <class-def>))
   t)
 
-(defmethod data-type-p ((type <number>))
+(defmethod data-type? ((type <number>))
   ())
 
-(defmethod data-type-p (type)
+(defmethod data-type? (type)
   ())
 
 (defun variable? (var)
   (subtypep (type-of var) <var>))
 
-(defun constant-p (var)
+(defun constant? (var)
   (subtypep (type-of var) <named-const>))
 
 (defun pointer-data-type? (type)
@@ -99,7 +99,7 @@
   ())
 
 (defun give-data-type (symbol)
-  (when (data-type-p symbol)
+  (when (data-type? symbol)
         symbol))
 
 
@@ -125,24 +125,24 @@
         var))
 
 (defun give-constant (var)
-  (when (constant-p var)
+  (when (constant? var)
         var))
 
 (defun give-variable-or-constant (var)
-  (when (or (constant-p var)
+  (when (or (constant? var)
             (variable? var))
         var))
 
-(defmethod data-integer-p ((instance <%integer>))
+(defmethod data-integer? ((instance <%integer>))
   t)
 
-(defmethod data-integer-p (object)
+(defmethod data-integer? (object)
   ())
 
-(defmethod data-float-p ((instance <%float>))
+(defmethod data-float? ((instance <%float>))
   t)
 
-(defmethod data-float-p (object)
+(defmethod data-float? (object)
   ())
 
 #module-end

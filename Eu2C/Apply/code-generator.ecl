@@ -122,7 +122,7 @@
     (map-modules #'expand-literal #'?sym-list modules)
     ;; all functions are needed as objects if they are exported for Lisp
     (map-modules (lambda (fun)
-                   (when (exported-for-lisp-p fun)
+                   (when (exported-for-lisp? fun)
                          (expand-literal fun)))
                  #'?fun-list modules)
     (name-objects main-module modules)

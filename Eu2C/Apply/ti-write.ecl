@@ -266,7 +266,7 @@
 
 (defun def-write-super-strategic-lattice-types (stream class)
   (let ((strategic-supers
-         (remove-if-not #'def-write-super-strategic-lattice-type-p
+         (remove-if-not #'def-write-super-strategic-lattice-type?
                         (?supertypes (?lattice-type class)))))
     (mapc (lambda (lattice-type)
             (setq *def-strategic-lattice-types*
@@ -278,13 +278,13 @@
 (defun def-write-remaining-strategic-lattice-types (stream)
   (mapc (lambda (entry)
           (let ((lattice-type (cdr entry)))
-            (cond ((def-write-super-strategic-lattice-type-p lattice-type)
+            (cond ((def-write-super-strategic-lattice-type? lattice-type)
                    (setq *def-strategic-lattice-types*
                          (cons lattice-type *def-strategic-lattice-types*))
                    (ti-def-write stream lattice-type)))))
         *strategic-lattice-types*))
 
-(defun def-write-super-strategic-lattice-type-p (lattice-type)
+(defun def-write-super-strategic-lattice-type? (lattice-type)
   (and (?subtypes lattice-type)
        (eq-lattice-type *bottom* (car (?subtypes lattice-type)))
        (null? (member lattice-type  *def-strategic-lattice-types*))))

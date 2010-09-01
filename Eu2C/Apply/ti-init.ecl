@@ -118,7 +118,7 @@
 (defun update-atomic-type-expr-codes (atomic-expr)
   (let ((new-code (?code (compute-to-atom (?name atomic-expr))))
         (old-code (?code atomic-expr)))
-    (if (null? (eq-code-p old-code new-code))
+    (if (null? (eq-code? old-code new-code))
         (progn
           (setf (?code atomic-expr) new-code)
           (ti-format t "~%Notice: code of expr ~A updated"

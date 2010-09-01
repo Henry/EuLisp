@@ -384,7 +384,7 @@
 (defun function-storage-class (fun)
   (cond ((and (eq *compilation-type* :basic-system)
               (discriminating-fun-p fun)
-              (exported-for-lisp-p fun))
+              (exported-for-lisp? fun))
          ;; Discriminating functions of exported generic functions are declared extern
          ;; because they are defined in the application to allow more optimized dispatch
          ;; functions.
@@ -422,7 +422,7 @@
   ;; another context (it may be for example a method function) and code is
   ;; generated from this pointer.
   (unless (and (eq *compilation-type* :basic-system)
-               (exported-for-lisp-p fun))
+               (exported-for-lisp? fun))
           (when (and (?discriminating-fun fun)
                      (discriminating-fun-p (?discriminating-fun fun)))
                 (generate-function-definition (?discriminating-fun fun)))))

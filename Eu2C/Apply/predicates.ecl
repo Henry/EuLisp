@@ -30,8 +30,8 @@
  export (*compilation-type*  ; set by `compile' in module apply-compiler
          *basic-system*      ; set by `load-basic-modules' in module apply-compiler
          signature-needed-for-code-generation?
-         exported-for-lisp-p
-         exported-p
+         exported-for-lisp?
+         exported?
          class-sealed?
          generic-function-sealed-p
          unknown-applications?
@@ -58,13 +58,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; used after mark-as-exported was called in compile[apply-compiler]
 ;;;-----------------------------------------------------------------------------
-(defun exported-for-lisp-p (obj)
+(defun exported-for-lisp? (obj)
   (and (eq *compilation-type* :basic-system)
        (global-p obj)
        (?exported obj)
        (null? (discriminating-fun-p obj))))
 
-(defun exported-p (obj)
+(defun exported? (obj)
   (and (global-p obj)
        (?exported obj)))
 
