@@ -157,7 +157,7 @@
   (discr-depth (?discrimination-arguments gf) 0))
 
 ;;;-----------------------------------------------------------------------------
-;;; few-methods-p
+;;; few-methods?
 ;;;-----------------------------------------------------------------------------
 
 (defconstant $maximum-of-few-methods 8)
@@ -165,7 +165,7 @@
 
 (defvar error-methods ())
 
-(defun few-methods-p (gf methods) ; *hf* domain removed
+(defun few-methods? (gf methods) ; *hf* domain removed
   (let ((da (?discrimination-arguments gf))
         (do (~generic-function-domain gf)))
     (if methods
@@ -435,11 +435,11 @@
     (setf (cdr l1) l2)))
 
 ;;;-----------------------------------------------------------------------------
-;;; gf-with-closure-p
+;;; gf-with-closure?
 ;;;-----------------------------------------------------------------------------
 
 
-(defun gf-with-closure-p (gf methods)
+(defun gf-with-closure? (gf methods)
   ())
 
 (defun gf-with-next-method? (gf methods)
@@ -689,8 +689,8 @@
 (defmethod ~compute-discriminating-function
   ((gf <generic-fun>) domain lookup-fn methods)
   ;; methods may be empty !!!
-  (let ((few-methods (few-methods-p gf methods))
-        (closure (gf-with-closure-p gf methods))
+  (let ((few-methods (few-methods? gf methods))
+        (closure (gf-with-closure? gf methods))
         (next-method (gf-with-next-method? gf methods))
         )
     (if methods

@@ -33,7 +33,7 @@
          exported-for-lisp?
          exported?
          class-sealed?
-         generic-function-sealed-p
+         generic-function-sealed?
          unknown-applications?
          is-lisp))
 
@@ -74,7 +74,7 @@
   (or (null? (?exported class))
       (eq *compilation-type* :application)))
 
-(defun generic-function-sealed-p (gf)
+(defun generic-function-sealed? (gf)
   ;; returns true if it is impossible to add additional methods outside the
   ;; compilation unit (i.e in using modules or at runtime)
   (or (null? (?exported gf))

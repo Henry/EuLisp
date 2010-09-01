@@ -128,16 +128,16 @@
     (filled-formal-descr new-slot-value-type struct-type new-slot-value-type)))
 
 (defun check-write-access-stam? (struct-type slot-name slot-value-type)
-  (if (fpi-list-type-p struct-type)
+  (if (fpi-list-type? struct-type)
       (progn
         (format t "~%struct: ~A, slot: ~A, value: ~A"
                 (ti-print-string-no-cr struct-type)
                 (ti-print-string-no-cr slot-name)
                 (ti-print-string-no-cr slot-value-type))
         (if (or (and (eq slot-name ^car)
-                     (<fpi>-type-p slot-value-type))
+                     (<fpi>-type? slot-value-type))
                 (and (eq slot-name ^cdr)
-                     (or (fpi-list-type-p slot-value-type)
+                     (or (fpi-list-type? slot-value-type)
                          (<null>-type? slot-value-type))))
             (format t "~%Notice: write access stamp NOT updated")
           (set-write-access-stam? (?lattice-type struct-type))))
@@ -350,12 +350,12 @@
               (ti-print-string descr))
   (let ((result (get-arg-type descr 0)))
     (let ((answer
-           (if (general-type-p result)
+           (if (general-type? result)
                (if (eq fun %eq)
                    (meet-type-exprs? (get-arg-type descr 1)
                                       (get-arg-type descr 2))
                  t)
-             (null? (%false-type-p result)))))
+             (null? (%false-type? result)))))
       (ti-format2 t " ~A" answer)
       answer)))
 
@@ -367,12 +367,12 @@
               (ti-print-string descr))
   (let ((result (get-arg-type descr 0)))
     (let ((answer
-           (if (general-type-p result)
+           (if (general-type? result)
                (if (eq fun %neq)
                    (meet-type-exprs? (get-arg-type descr 1)
                                       (get-arg-type descr 2))
                  t)
-             (%false-type-p result))))
+             (%false-type? result))))
       (ti-format2 t " ~A" answer)
       answer)))
 

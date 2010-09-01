@@ -63,8 +63,8 @@
                             (expr2 <atomic-type>))
   (let ((code1 (?code expr1))
         (code2 (?code expr2)))
-    (cond ((general-type-p expr1) expr2)
-          ((general-type-p expr2) expr1)
+    (cond ((general-type? expr1) expr2)
+          ((general-type? expr2) expr1)
           ((complement-codes? code1 code2) ())
           ((subcode? code1 code2) expr1)
           ((subcode? code2 code1) expr2)
@@ -85,7 +85,7 @@
 
 (defmethod meet-type-exprs ((expr1 <slot-id>)
                             (expr2 <atomic-type>))
-  (if (or (general-type-p expr2)
+  (if (or (general-type? expr2)
           (%object-type? expr2))
       expr1 ()))
 
@@ -176,7 +176,7 @@
                             (expr2 <atomic-type>))
   (let ((code1 (?code expr1))
         (code2 (?code expr2)))
-    (cond ((or (general-type-p expr1) (general-type-p expr2)) (general-type))
+    (cond ((or (general-type? expr1) (general-type? expr2)) (general-type))
           ((complement-codes? code1 code2) (general-type))
           ((subcode? code1 code2) expr2)
           ((subcode? code2 code1) expr1)
@@ -189,7 +189,7 @@
 
 (defmethod join-type-exprs ((expr1 <slot-id>)
                             (expr2 <type-expr>))
-  (if (or (general-type-p expr2)
+  (if (or (general-type? expr2)
           (%object-type? expr2))
       expr1 expr2))
 

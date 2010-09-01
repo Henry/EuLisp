@@ -192,7 +192,7 @@
         modules))
 
 (defun gen-interface-if-exported (object)
-  (cond ((hard-wired-p object)
+  (cond ((hard-wired? object)
          ;; the exports are done in the interface section
          ;; the type schemes of hard-wired special-sys-funs are loaded
          ;; explicitely by importing ti-sys-signatures.def
@@ -233,7 +233,7 @@
 (defun gen-%tail-exports (objects rename-part only-part)
   (cond ((null? objects)
          `(rename ,rename-part (only ,only-part %tail)))
-        ((and (hard-wired-p (car objects))
+        ((and (hard-wired? (car objects))
               (exported-for-lisp? (car objects))
               (null? (invisible-exported? (car objects))))
          (gen-%tail-exports (cdr objects)
@@ -247,11 +247,11 @@
                                   only-part)))
         (t (gen-%tail-exports (cdr objects) rename-part only-part))))
 
-(defgeneric hard-wired-p (object))
-(defmethod hard-wired-p (object) ())
-(defmethod hard-wired-p ((object <basic-class-def>)) t)
-(defmethod hard-wired-p ((object <special-sys-fun>)) t)
-(defmethod hard-wired-p ((object <class-def>))
+(defgeneric hard-wired? (object))
+(defmethod hard-wired? (object) ())
+(defmethod hard-wired? ((object <basic-class-def>)) t)
+(defmethod hard-wired? ((object <special-sys-fun>)) t)
+(defmethod hard-wired? ((object <class-def>))
   (or (eq object %object)
       (eq object %class)
       (eq object %abstract-class)

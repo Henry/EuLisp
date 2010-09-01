@@ -93,7 +93,7 @@
                                    :slot-of class)))
           (when default-function
                 (setf (?slot default-function) slot)
-                (when (function-with-constant-value-p default-function)
+                (when (function-with-constant-value? default-function)
                       (setf (?initvalue slot)
                             (get-constant-function-value default-function))))
           (cons slot
@@ -314,7 +314,7 @@
     (cond ((null? default-function)
            (setf (?initvalue specializing-slot)
                  (?initvalue inherited-slot)))
-          ((function-with-constant-value-p default-function)
+          ((function-with-constant-value? default-function)
            (setf (?initvalue specializing-slot)
                  (get-constant-function-value default-function))))
     (setf (?type specializing-slot)
@@ -331,9 +331,9 @@
             (or keyword (?keyword inherited-slot))))
     specializing-slot))
 
-(defgeneric function-with-constant-value-p (fun))
-(defmethod function-with-constant-value-p ((fun <generic-fun>)) ())
-(defmethod function-with-constant-value-p ((fun <simple-fun>))
+(defgeneric function-with-constant-value? (fun))
+(defmethod function-with-constant-value? ((fun <generic-fun>)) ())
+(defmethod function-with-constant-value? ((fun <simple-fun>))
   (let ((body (?body fun)))
     (and (null? (eq body ^unknown))
          (or (and (named-const-p body)

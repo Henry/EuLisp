@@ -43,14 +43,14 @@
          substitute-type-var class-as-type-expr
          new-type-var new-type-var-id reset-actual-type-var-id
          lattice-type-to-atomic-type lattice-type-to-atomic-types
-         general-type general-type-p
+         general-type general-type?
          <null>-type <null>-type?
          %object-type %object-type?
          %void-type %void-type?
-         %false-type %false-type-p
-         fpi-list-type fpi-list-type-p
-         <function>-type <function>-type-p
-         <fpi>-type <fpi>-type-p
+         %false-type %false-type?
+         fpi-list-type fpi-list-type?
+         <function>-type <function>-type?
+         <fpi>-type <fpi>-type?
          no-type? %class-type? %function-type %integer-type)
  )
 
@@ -208,7 +208,7 @@
   (lattice-type-to-atomic-type *<fpi>*))
 
 ;;; Answer whether a type expression correspondes to the top of the lattice.
-(defun general-type-p (type-expr)
+(defun general-type? (type-expr)
   (eq-code? (?code type-expr) *top-code*))
 
 ;;; Answer whether a type expression correspondes to %object.
@@ -216,7 +216,7 @@
   (eq-code? (?code type-expr) *%object-code*))
 
 ;;; Answer whether a type expression correspondes to %false.
-(defun %false-type-p (type-expr)
+(defun %false-type? (type-expr)
   (eq-code? (?code type-expr) *%false-code*))
 
 ;;; Answer whether a type expression correspondes to %void.
@@ -230,7 +230,7 @@
        (eq-code? (?code type-expr) *%class-code*)))
 
 ;;; Answer whether a type expression correspondes to fpi-list.
-(defun fpi-list-type-p (type-expr)
+(defun fpi-list-type? (type-expr)
   (eq-code? (?code type-expr) *fpi-list-code*))
 
 ;;; Answer whether a type expression correspondes to the bottom of the lattice.
@@ -242,10 +242,10 @@
   (eq-code? (?code type-expr) *<null>-code*))
 
 ;;; Answer whether a type expression correspondes to <null>.
-(defun <function>-type-p (type-expr)
+(defun <function>-type? (type-expr)
   (eq-code? (?code type-expr) *<function>-code*))
 
-(defun <fpi>-type-p (type-expr)
+(defun <fpi>-type? (type-expr)
   (eq-code? (?code type-expr) *<fpi>-code*))
 
 ;;;-----------------------------------------------------------------------------

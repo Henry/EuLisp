@@ -114,7 +114,7 @@
                common-lisp))
  export (generate-c-code
          reset-c-code
-         function-needed-p ; needed by code-generator
+         function-needed? ; needed by code-generator
          map-modules)
 
  ;;the following exports are for generate-header-file only
@@ -347,7 +347,7 @@
   ;; do nothing
   ())
 
-(defun function-needed-p (fun)
+(defun function-needed? (fun)
   (or (>= (?pass fun) $last-pass)
       (and (generic-fun-p fun)
            (~generic-function-discriminating-function fun)
@@ -356,7 +356,7 @@
 
 (defmethod generate-function-protype ((fun <defined-fun>))
   ;; all global objects already must be named
-  (when (function-needed-p fun)
+  (when (function-needed? fun)
         (with-local-identifiers
          (generate-function-header fun t)    ; with storage class
          (write-code ";")
@@ -443,7 +443,7 @@
 
 (defun generate-function-definition (fun)
   ;; parameters already should have a code identifier
-  (when (function-needed-p fun)
+  (when (function-needed? fun)
         (dynamic-let ((*return* (result-type fun))
                       (*function* fun))
                      (generate-function-comment fun)

@@ -70,11 +70,11 @@
 (defconstant $tail-class-type-descriptor 6)
 (defconstant $%string-type-descriptor 7)
 
-(defgeneric generated-function-p (fun))
-(defmethod generated-function-p (fun) ())
-(defmethod generated-function-p ((fun <slot-accessor-fun>)) t)
-(defmethod generated-function-p ((fun <slot-init-fun>)) t)
-(defmethod generated-function-p ((fun <constructor-fun>)) t)
+(defgeneric generated-function? (fun))
+(defmethod generated-function? (fun) ())
+(defmethod generated-function? ((fun <slot-accessor-fun>)) t)
+(defmethod generated-function? ((fun <slot-init-fun>)) t)
+(defmethod generated-function? ((fun <constructor-fun>)) t)
 
 (defun slot-description-option ()
   (if *basic-system* ^effective-slot-descriptions ^direct-slot-descriptions))
@@ -108,7 +108,7 @@
 ;;; remove all generated accessor-functions... created in a previous run for
 ;;; %object... in module %tail
                (setf (?fun-list $tail-module)
-                     (remove-if #'generated-function-p (?fun-list $tail-module)))
+                     (remove-if #'generated-function? (?fun-list $tail-module)))
 
                (~initialize %object
                             (list ^name ^%object

@@ -296,7 +296,7 @@
 (defmethod convert-general-to-%object-type ((subs <type-var-substitutions>))
   (dolist (equ (?equations subs))
           (let ((expr (?right-expr equ)))
-            (if (and (atomic-type? expr) (general-type-p expr))
+            (if (and (atomic-type? expr) (general-type? expr))
                 (set-right-expr equ (%object-type))))))
 
 ;;;-----------------------------------------------------------------------------
