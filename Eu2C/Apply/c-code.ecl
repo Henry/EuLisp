@@ -1023,7 +1023,7 @@
 ;;   (write-enveloped-expr
 ;;    stream 14
 ;;    "~@<~:[~14/EXPR/~:_->~;~14@/EXPR/~:_.~]~A~:>"
-;;    (instance-p (?instance form))
+;;    (instance? (?instance form))
 ;;    (dynamic-let ((*no-cast-if-compatible-representation* ()))
 ;;                 (type-expr-for-c (?slot-of (?slot form))
 ;;                                  (?instance form)))
@@ -1033,7 +1033,7 @@
 ;;   (write-enveloped-expr
 ;;    stream 1
 ;;    "~@<~:[~14/EXPR/~:_->~;~14@/EXPR/~:_.~]~A ~:_= ~1/EXPR/~:>"
-;;    (instance-p (?instance form))
+;;    (instance? (?instance form))
 ;;    (dynamic-let ((*no-cast-if-compatible-representation* ()))
 ;;                 (type-expr-for-c (?slot-of (?slot form))
 ;;                                  (?instance form)))
@@ -1045,8 +1045,8 @@
   (write-enveloped-expr
    stream 14
    "~@<~:[~14/EXPR/~:_->~;~14@/EXPR/~:_.~]~A~:>"
-   (instance-p (?instance form))
-   (if (instance-p (?instance form))
+   (instance? (?instance form))
+   (if (instance? (?instance form))
        (?instance form)
      (dynamic-let ((*no-cast-if-compatible-representation* ()))
                   (type-expr-for-c (?slot-of (?slot form))
@@ -1057,8 +1057,8 @@
   (write-enveloped-expr
    stream 1
    "~@<~:[~14/EXPR/~:_->~;~14@/EXPR/~:_.~]~A ~:_= ~1/EXPR/~:>"
-   (instance-p (?instance form))
-   (if (instance-p (?instance form))
+   (instance? (?instance form))
+   (if (instance? (?instance form))
        (?instance form)
      (dynamic-let ((*no-cast-if-compatible-representation* ()))
                   (type-expr-for-c (?slot-of (?slot form))
@@ -1072,7 +1072,7 @@
 ;;   (write-enveloped-expr
 ;;    stream 14
 ;;    "~@<~:[~14/EXPR/~:_->~;~14@/EXPR/~:_.~]~A~:>"
-;;    (instance-p (?instance form))
+;;    (instance? (?instance form))
 ;;    (?instance form)
 ;;    (c-identifier (?slot form))))
 
@@ -1080,7 +1080,7 @@
 ;;   (write-enveloped-expr
 ;;    stream 1
 ;;    "~@<~:[~14/EXPR/~:_->~;~14@/EXPR/~:_.~]~A ~:_= ~1/EXPR/~:>"
-;;    (instance-p (?instance form))
+;;    (instance? (?instance form))
 ;;    (?instance form)
 ;;    (c-identifier (?slot form))
 ;;    (type-expr-for-c (~slot-description-type (?slot form))
@@ -1141,7 +1141,7 @@
   (list (?label tagged-form)
         (?form tagged-form)))
 
-(defun instance-p (object)
+(defun instance? (object)
   (or (sym-p object)
       (literal-instance-p object)
       (class-def-p object)
