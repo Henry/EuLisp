@@ -70,7 +70,7 @@
              ;; <input-stream> <output-stream> <io-stream> <stream-unit> input-stream output-stream
              stdin stdout stderr %peek-unit %read-unit %write-unit
              fprintf-3 sprintf-3 fscanf-3 sscanf-3 EOF
-             stream? file-stream-p
+             stream? file-stream?
              opened-streams open $standard-input
              $standard-output $standard-error-output fflush flush close
              ensure-open-character-input-stream
@@ -83,7 +83,7 @@
 
              ensure-open-character-output-stream
              file-descriptor-pointer make-file-stream
-             input-stream-p output-stream-p
+             input-stream? output-stream?
              ;; io-stream-p
              character-stream?
              ;; binary-stream-p
@@ -91,7 +91,7 @@
              stream-direction
              stream-opened ensure-open-input-stream ensure-open-stream
              convert-stream-string
-             string-stream-p
+             string-stream?
              stream-string-stack
              make-string-stream
              <stream-condition>
@@ -179,19 +179,19 @@
    ;;                                     default default-eos-action)
    )
   constructor (make-file-stream file-descriptor-pointer direction)
-  ;;        predicate file-stream-p
+  ;;        predicate file-stream?
   allocation single-card
   representation pointer-to-struct)
 
-(defmethod file-stream-p ((object <file-stream>)) 't)
-(defmethod file-stream-p ((object <object>)) ())
+(defmethod file-stream? ((object <file-stream>)) 't)
+(defmethod file-stream? ((object <object>)) ())
 
 (%define-standard-class (<char-file-stream> <class>)
   <file-stream>
   ((transaction-unit type <object>
                      default <character>))
   constructor (make-char-file-stream file-descriptor-pointer direction)
-  predicate char-file-stream-p
+  predicate char-file-stream?
   allocation single-card
   representation pointer-to-struct)
 
@@ -202,7 +202,7 @@
                  writer setf-stream-string-stack
                  keyword string-stack))
   constructor (make-string-stream string-stack direction)
-  predicate string-stream-p
+  predicate string-stream?
   allocation single-card
   representation pointer-to-struct)
 
@@ -363,14 +363,14 @@
 (%define-function (%write-string %signed-word-integer)
   ((stream <stream>)
    (str %string))
-  (if (file-stream-p stream)
+  (if (file-stream? stream)
       (%let ((fd <file> ;;%unsigned-word-integer
                  ;;(%cast %unsigned-word-integer
                  (file-descriptor-pointer stream))) ;;)
             (fprintf-3 fd (%literal %string () "%s")
                        (%cast %signed-word-integer str))
             )
-    (if (string-stream-p stream)
+    (if (string-stream? stream)
         (%let ((fd <string-stack> (stream-string-stack stream))
                (length  %signed-word-integer (strlen str)))
               (push-string str #%i0 length fd)
@@ -434,7 +434,7 @@
 
 (%define-function (%peek-unit %signed-word-integer)
   ((stream <stream>))
-  (if (file-stream-p stream)
+  (if (file-stream? stream)
       (%let ((fd <file> ;;%unsigned-word-integer
                  ;;(%cast %unsigned-word-integer
                  (file-descriptor-pointer stream))) ;;)
@@ -447,7 +447,7 @@
                        (ungetc ch fd)
                        ch))
                    ))
-    (if (string-stream-p stream)
+    (if (string-stream? stream)
         (%let ((fd <string-stack> (stream-string-stack stream)))
               (%let* ((ch %signed-word-integer (getc-buffer fd)))
                      (if (%eq ch #%i-1)
@@ -461,7 +461,7 @@
 
 (%define-function (%read-unit %signed-word-integer)
   ((stream <stream>))
-  (if (file-stream-p stream)
+  (if (file-stream? stream)
       (%let ((fd <file> ;;%unsigned-word-integer
                  ;;(%cast %unsigned-word-integer
                  (file-descriptor-pointer stream))) ;;)
@@ -472,7 +472,7 @@
                                ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
                      ch))
             )
-    (if (string-stream-p stream)
+    (if (string-stream? stream)
         (%let ((fd <string-stack> (stream-string-stack stream)))
               (%let* ((ch %signed-word-integer (getc-buffer fd)))
                      (if (%eq ch #%i-1)
@@ -487,13 +487,13 @@
 (%define-function (%unread-unit %signed-word-integer)
   ((stream <stream>)
    (ch %signed-word-integer))
-  (if (file-stream-p stream)
+  (if (file-stream? stream)
       (%let ((fd <file> ;;%unsigned-word-integer
                  ;;(%cast %unsigned-word-integer
                  (file-descriptor-pointer stream))) ;;)
             (ungetc ch fd))
     ;;     ((.. EOF))
-    (if (string-stream-p stream)
+    (if (string-stream? stream)
         (%let ((fd <string-stack> (stream-string-stack stream)))
               (ungetc-buffer ch fd)
               #%i0)
@@ -504,12 +504,12 @@
 (%define-function (%write-unit %signed-word-integer)
   ((stream <stream>)
    (ch %signed-word-integer))
-  (if (file-stream-p stream)
+  (if (file-stream? stream)
       (%let ((fd <file> ;;%unsigned-word-integer
                  ;; (%cast %unsigned-word-integer
                  (file-descriptor-pointer stream))) ;;)
             (putc ch fd))
-    (if (string-stream-p stream)
+    (if (string-stream? stream)
         (%let ((fd <string-stack> (stream-string-stack stream)))
               (push-buffer ch fd)
               #%i0)
@@ -568,7 +568,7 @@
   )
 
 
-(defun input-stream-p (obj)
+(defun input-stream? (obj)
   (if (stream? obj)
       (if ;(inputstream? (stream-direction obj))
           (eq 'input (stream-direction obj))
@@ -576,7 +576,7 @@
         ())
     ()))
 
-(defun output-stream-p (obj)
+(defun output-stream? (obj)
   (if (stream? obj)
       (if ;(outputstream? (stream-direction obj))
           (eq 'output (stream-direction obj))
@@ -616,7 +616,7 @@
 
 (defun ensure-open-input-stream (stream)
   (if (ensure-open-stream stream)
-      (if (input-stream-p stream)
+      (if (input-stream? stream)
           stream
         (progn ;(error "Attempt to use stream ~A as input-stream." stream)
           ()))
@@ -624,7 +624,7 @@
 
 (defun ensure-open-output-stream (stream)
   (if (ensure-open-stream stream)
-      (if (output-stream-p stream)
+      (if (output-stream? stream)
           stream
         (progn ;(error "Attempt to use stream ~A as input-stream." stream)
           ()))
@@ -660,11 +660,11 @@
 
 (defmethod stream-position ((stream <stream>))
   (if (ensure-open-stream stream)
-      (if (file-stream-p stream)
+      (if (file-stream? stream)
           (make-fpint (%cast %signed-word-integer
                              (ftell ;;(%cast %unsigned-word-integer
                               (file-descriptor-pointer stream)))) ;;)
-        (if (string-stream-p stream)
+        (if (string-stream? stream)
             (%let ((fd <string-stack> (stream-string-stack stream)))
                   (make-fpint (?cur-index fd)))
           ()))
@@ -675,7 +675,7 @@
 
 (defun set-stream-position (stream pos)
   (if (ensure-open-stream stream)
-      (if (file-stream-p stream)
+      (if (file-stream? stream)
           (if (eq pos 'stream-end)
               (if (%eq #%i-1 (%cast %signed-word-integer
                                     (fseek ;;(%cast %unsigned-word-integer
@@ -692,7 +692,7 @@
                 (error "set stream position falled" 'stream stream
                        'invalid-stream-position pos)
               't))
-        (if (string-stream-p stream)
+        (if (string-stream? stream)
             (%let ((fd <string-stack> (stream-string-stack stream)))
                   (if (eq pos 'stream-end)
                       (progn (!cur-index fd (?last-index fd)) 't)
@@ -705,7 +705,7 @@
     ()))
 
 (defun end-of-stream? (stream)
-  (if (file-stream-p stream)
+  (if (file-stream? stream)
       (%let ((lvpos %signed-word-integer
                     (ftell ;;(%cast %unsigned-word-integer
                      (file-descriptor-pointer stream)))) ;;)
@@ -722,7 +722,7 @@
                             (file-descriptor-pointer stream) ;;)
                             lvpos #%i0)
                            ()))))
-    (if (string-stream-p stream)
+    (if (string-stream? stream)
         (%let ((fd <string-stack> (stream-string-stack stream)))
               (if (%lt (?cur-index fd ) (?last-index fd))
                   't
@@ -734,7 +734,7 @@
   (convert-stream-string stream))
 
 (defun convert-stream-string (stream)
-  (if (string-stream-p stream)
+  (if (string-stream? stream)
       (progn
         (push-buffer #%i0 (stream-string-stack stream))
         (let ((string
@@ -870,7 +870,7 @@
 ;; still to annotate:
 
 ;;(%annotate-function
-;; input-stream-p new-signature
+;; input-stream? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (and <object> (not <null>))))
 ;;   ((var var1) (atom? <input-stream>)))
@@ -879,7 +879,7 @@
 ;;   ((var var1) (atom? (and <object> (not <input-stream>)))))))
 ;;
 ;;(%annotate-function
-;; output-stream-p new-signature
+;; output-stream? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (and <object> (not <null>))))
 ;;   ((var var1) (atom? <output-stream>)))
@@ -952,7 +952,7 @@
     ((var var1) (var var0)))))
 
 (%annotate-function
-  input-stream-p new-signature
+  input-stream? new-signature
   (((var0 var1)
     ((var var0) (atom? <null>))
     ((var var1) (atom? <object>)))

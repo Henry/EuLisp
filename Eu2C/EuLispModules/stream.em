@@ -52,8 +52,8 @@
     ;; input-stream output-stream ; nicht in el0.99
     read ; nicht in el0.99
     prin open close
-    stream? file-stream-p
-    input-stream-p output-stream-p ; nicht in el0.99
+    stream? file-stream?
+    input-stream? output-stream? ; nicht in el0.99
     ;; io-stream-p  ; nicht in el0.99
     character-stream?
     ;; binary-stream-p  ; nicht in el0.99
@@ -92,7 +92,7 @@
     ((var var1) (atom? (and <object> (not <stream>)))))))
 
 (%annotate-function
-  file-stream-p new-signature
+  file-stream? new-signature
   (((var0 var1)
     ((var var0) (atom? (and <object> (not <null>))))
     ((var var1) (atom? <file-stream>)))

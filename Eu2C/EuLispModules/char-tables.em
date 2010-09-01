@@ -58,7 +58,7 @@
     *token-states* half-vec-ref half-vec-vec-ref
     letterp upperp lowerp digitp otherp
     peculiar-constituent-p normal-constituent-p
-    extended-level-0-character-p
+    extended-level-0-character?
     digit2figure10 digit2figure16
     upper2lower lower2upper)
    )
@@ -490,7 +490,7 @@
       'true
     (digitp ch)))
 
-(%define-function (extended-level-0-character-p <object>)
+(%define-function (extended-level-0-character? <object>)
   ((ch %signed-word-integer))
   (if (%lt ch #%i34)
       ()

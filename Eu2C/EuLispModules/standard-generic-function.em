@@ -548,7 +548,7 @@
   (if walk-methods
       (%let* ((cur-meth <method> (car walk-methods))
               (cur-domain <cons> (method-domain cur-meth)))
-             (if (domain-of-applicable-method-p cur-domain
+             (if (domain-of-applicable-method? cur-domain
                                                 arg-classes)
                  (special-lookup-fn-n-aux1
                   (cdr walk-methods) arg-classes cur-domain
@@ -561,7 +561,7 @@
   (if walk-methods
       (%let* ((cur-meth <method> (car walk-methods))
               (cur-domain <cons> (method-domain cur-meth)))
-             (if (domain-of-applicable-method-p cur-domain
+             (if (domain-of-applicable-method? cur-domain
                                                 arg-classes)
                  (if (more-specific-domain cur-domain domain)
                      (special-lookup-fn-n-aux1 (cdr walk-methods)
@@ -578,11 +578,11 @@
                                          method)))
     method))
 
-(defun domain-of-applicable-method-p (m-dom arg-dom)
+(defun domain-of-applicable-method? (m-dom arg-dom)
   (if (null? arg-dom) t
     (if (%member (car m-dom)
                  (class-precedence-list (%cast <class> (car arg-dom))))
-        (domain-of-applicable-method-p (cdr m-dom) (cdr arg-dom))
+        (domain-of-applicable-method? (cdr m-dom) (cdr arg-dom))
       ())))
 
 (defun more-specific-domain (m-dom1 m-dom2)

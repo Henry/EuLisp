@@ -56,8 +56,8 @@
                   ensure-open-character-output-stream
                   file-descriptor-pointer
                   <stream>
-                  file-stream-p
-                  string-stream-p
+                  file-stream?
+                  string-stream?
                   stream-string-stack
                   sprintf-3)
                  stream-i)
@@ -118,7 +118,7 @@
                   otherp
                   peculiar-constituent-p
                   normal-constituent-p
-                  extended-level-0-character-p)
+                  extended-level-0-character?)
                  char-tables)
            (only (<string-stack>
                   *buffer-1*
@@ -149,14 +149,14 @@
 ;;   (%define-function (%write-string %signed-word-integer)
 ;;                        ((stream <stream>)
 ;;                          (str %string))
-;;     (if (file-stream-p stream)
+;;     (if (file-stream? stream)
 ;;       (%let ((fd %unsigned-word-integer
 ;;                     (%cast %unsigned-word-integer
 ;;                            (file-descriptor-pointer stream))))
 ;;          (fprintf-3 fd (%literal %string () "%s")
 ;;                     (%cast %signed-word-integer str))
 ;;          )
-;;       (if (string-stream-p stream)
+;;       (if (string-stream? stream)
 ;;         (%let ((fd <string-stack> (stream-string-stack stream))
 ;;                   (length  %signed-word-integer (strlen str)))
 ;;             (push-string str #%i0 length fd)
@@ -193,7 +193,7 @@
 (%define-function (%write-int %signed-word-integer)
   ((stream <stream>)
    (int %signed-word-integer))
-  (if (file-stream-p stream)
+  (if (file-stream? stream)
       (%let ((fd <file> (file-descriptor-pointer stream)))
             (fprintf-3 fd (%literal %string () "%d") int))
     (progn
@@ -562,7 +562,7 @@
   (if (%lt idx length)
       (%let ((ch1 %signed-word-integer
                   (%cast %signed-word-integer (%extract object idx))))
-            (if (extended-level-0-character-p ch1)
+            (if (extended-level-0-character? ch1)
                 (progn
                   (if (%eq ch1 $char-string)
                       (%write-unit stream $char-single-escape)
@@ -674,7 +674,7 @@
   (%write-unit stream $char-single-escape)
   (%let ((ch1 %signed-word-integer
               (make-swi (convert-char-int object))))
-        (if (extended-level-0-character-p ch1)
+        (if (extended-level-0-character? ch1)
             (%write-unit stream ch1)
           (progn
             (if (%eq ch1 $char-ascii-delete)

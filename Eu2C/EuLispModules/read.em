@@ -756,13 +756,13 @@
    (base %signed-word-integer)
    (res %signed-word-integer))
   (%let ((ch %signed-word-integer (%peek-unit stream)))
-        (if (based-digit-p ch base)
+        (if (based-digit? ch base)
             (progn (%read-unit stream)
                    (read-based-int1 stream base (%plus (%mult base res)
                                                        (digit2figure16 ch))))
           (make-fpint (%mult *sign* res)))))
 
-(%define-function (based-digit-p <object>)
+(%define-function (based-digit? <object>)
   ((ch %signed-word-integer)
    (base %signed-word-integer))
   (if (%lt ch #%i48) ; 0

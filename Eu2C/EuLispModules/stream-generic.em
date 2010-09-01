@@ -43,7 +43,7 @@
    export
    ;;------
    (  stream?
-      file-stream-p
+      file-stream?
       character-stream?
       close
       flush
@@ -59,7 +59,7 @@
    )
 
 (defgeneric stream? ((object <object>)))
-(defgeneric file-stream-p ((object <object>)))
+(defgeneric file-stream? ((object <object>)))
 (defgeneric character-stream? ((object <object>)))
 (defgeneric close ((stream <stream>)))
 (defgeneric flush ((stream <stream>)))
@@ -78,7 +78,7 @@
 
 ;; still to annotate:
 
-;; Predicates (e.g. file-stream-p ..) are annotated in stream.am because
+;; Predicates (e.g. file-stream? ..) are annotated in stream.am because
 ;; the classes <file-stream> .. do not exist here.
 
 (%annotate-function
