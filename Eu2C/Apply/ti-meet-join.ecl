@@ -34,9 +34,9 @@
          (only (format)
                common-lisp))
  syntax (ti)
- export (meet-type-exprs-p
-         subtype-expr-p
-         true-subtype-expr-p
+ export (meet-type-exprs?
+         subtype-expr?
+         true-subtype-expr?
          eq-expr-p
          meet-type-exprs
          join-type-exprs
@@ -66,8 +66,8 @@
     (cond ((general-type-p expr1) expr2)
           ((general-type-p expr2) expr1)
           ((complement-codes? code1 code2) ())
-          ((subcode-p code1 code2) expr1)
-          ((subcode-p code2 code1) expr2)
+          ((subcode? code1 code2) expr1)
+          ((subcode? code2 code1) expr2)
           (t
            (let ((new-code (meet-codes (?code expr1) (?code expr2))))
              (if (bottom-code? new-code)
@@ -86,7 +86,7 @@
 (defmethod meet-type-exprs ((expr1 <slot-id>)
                             (expr2 <atomic-type>))
   (if (or (general-type-p expr2)
-          (%object-type-p expr2))
+          (%object-type? expr2))
       expr1 ()))
 
 (defmethod meet-type-exprs ((expr1 <atomic-type>)
@@ -97,31 +97,31 @@
 ;;; Answer whether a type expr meets another.
 ;;;-----------------------------------------------------------------------------
 
-(defgeneric meet-type-exprs-p (expr1 expr2))
+(defgeneric meet-type-exprs? (expr1 expr2))
 
-(defmethod meet-type-exprs-p ((expr1 <type-expr>)
+(defmethod meet-type-exprs? ((expr1 <type-expr>)
                               (expr2 <type-expr>))
   (meet-type-exprs expr1 expr2))
 
-(defmethod meet-type-exprs-p ((expr1 <atomic-type>)
+(defmethod meet-type-exprs? ((expr1 <atomic-type>)
                               (expr2 <atomic-type>))
-  (meet-codes-p (?code expr1) (?code expr2)))
+  (meet-codes? (?code expr1) (?code expr2)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Answer whether a type expr is subtype of another.
 ;;;-----------------------------------------------------------------------------
 
-(defgeneric subtype-expr-p (expr1 expr2))
+(defgeneric subtype-expr? (expr1 expr2))
 
-(defmethod subtype-expr-p ((expr1 <type-expr>)
+(defmethod subtype-expr? ((expr1 <type-expr>)
                            (expr2 <type-expr>))
   ())
 
-(defmethod subtype-expr-p ((expr1 <atomic-type>)
+(defmethod subtype-expr? ((expr1 <atomic-type>)
                            (expr2 <atomic-type>))
-  (subcode-p (?code expr1) (?code expr2)))
+  (subcode? (?code expr1) (?code expr2)))
 
-(defmethod subtype-expr-p ((expr1 <slot-id>)
+(defmethod subtype-expr? ((expr1 <slot-id>)
                            (expr2 <slot-id>))
   (eq (?slot-name expr1) (?slot-name expr2)))
 
@@ -129,17 +129,17 @@
 ;;; Answer whether a type expr is a true subtype of another.
 ;;;-----------------------------------------------------------------------------
 
-(defgeneric true-subtype-expr-p (expr1 expr2))
+(defgeneric true-subtype-expr? (expr1 expr2))
 
-(defmethod true-subtype-expr-p ((expr1 <type-expr>)
+(defmethod true-subtype-expr? ((expr1 <type-expr>)
                                 (expr2 <type-expr>))
   ())
 
-(defmethod true-subtype-expr-p ((expr1 <atomic-type>)
+(defmethod true-subtype-expr? ((expr1 <atomic-type>)
                                 (expr2 <atomic-type>))
   (let ((code1 (?code expr1))
         (code2 (?code expr2)))
-    (and (subcode-p code1 code2)
+    (and (subcode? code1 code2)
          (null? (eq-code-p code1 code2)))))
 
 ;;;-----------------------------------------------------------------------------
@@ -178,8 +178,8 @@
         (code2 (?code expr2)))
     (cond ((or (general-type-p expr1) (general-type-p expr2)) (general-type))
           ((complement-codes? code1 code2) (general-type))
-          ((subcode-p code1 code2) expr2)
-          ((subcode-p code2 code1) expr1)
+          ((subcode? code1 code2) expr2)
+          ((subcode? code2 code1) expr1)
           (t
            (let ((new-code (join-codes code1 code2)))
              (make <atomic-type>
@@ -190,7 +190,7 @@
 (defmethod join-type-exprs ((expr1 <slot-id>)
                             (expr2 <type-expr>))
   (if (or (general-type-p expr2)
-          (%object-type-p expr2))
+          (%object-type? expr2))
       expr1 expr2))
 
 (defmethod join-type-exprs ((expr1 <type-expr>)

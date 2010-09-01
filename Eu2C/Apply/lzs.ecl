@@ -64,7 +64,7 @@
  export (def-lzs-object ;macro from lzs-syntax
           make-structure-and-annotation-slots
           make-predicate-name)
- export (imported-p named-p global-p) ;mixin predicates
+ export (imported-p named? global-p) ;mixin predicates
  export (<lzs-object> lzs-object-p) ; from lzs-syntax
  export (?unexpanded ?symtab-initfun) ;should be exported automatically
  expose (accessors))
@@ -753,9 +753,9 @@
 
 (defmethod imported-p (object) ())
 
-(defgeneric named-p (object))
+(defgeneric named? (object))
 
-(defmethod named-p (object)
+(defmethod named? (object)
   ;; this means that all 'global' object are also 'named'
   ;; 'global' is a submixin of 'named'
   (global-p object))

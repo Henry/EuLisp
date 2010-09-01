@@ -29,12 +29,12 @@
  expose ()
  export (*compilation-type*  ; set by `compile' in module apply-compiler
          *basic-system*      ; set by `load-basic-modules' in module apply-compiler
-         signature-needed-for-code-generation-p
+         signature-needed-for-code-generation?
          exported-for-lisp-p
          exported-p
          class-sealed?
          generic-function-sealed-p
-         unknown-applications-p
+         unknown-applications?
          is-lisp))
 
 ;;;-----------------------------------------------------------------------------
@@ -50,7 +50,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Functions
 ;;;-----------------------------------------------------------------------------
-(defun signature-needed-for-code-generation-p (fun)
+(defun signature-needed-for-code-generation? (fun)
   ;;answer whether the type scheme can be set to ()
   (or (null? (eq *compilation-type* :application))
       (null? (special-sys-fun-p fun))))
@@ -83,7 +83,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; called after side effect analysis
 ;;;-----------------------------------------------------------------------------
-(defun unknown-applications-p (fun)
+(defun unknown-applications? (fun)
   (or (?exported fun)
       (?expanded-literal fun)))
 

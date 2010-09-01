@@ -279,7 +279,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; general predicates
 ;;;-----------------------------------------------------------------------------
-(defun subclass-p (class superclass)
+(defun subclass? (class superclass)
   (member superclass (~class-precedence-list class)))
 
 #module-end

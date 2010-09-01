@@ -415,36 +415,36 @@
 ;;; Initialization of Generic Functions and Methods
 ;;;-----------------------------------------------------------------------------
 
-(defun method-valid-p (method gf)
-  (cond ((non-congruent-lambda-lists-p (?params (?fun method))
+(defun method-valid? (method gf)
+  (cond ((non-congruent-lambda-lists? (?params (?fun method))
                                        (?params gf))
          (error-non-congruent-lambda-lists method gf)
          ())
-        ((incompatible-method-domain-p (?domain method)
+        ((incompatible-method-domain? (?domain method)
                                        (?domain gf))
          (error-incompatible-method-domain method gf)
          ())
-        ((method-domain-clash-p method gf)
+        ((method-domain-clash? method gf)
          (error-method-domain-clash method gf)
          ())
         (t t)))
 
-(defun non-congruent-lambda-lists-p (params1 params2)
+(defun non-congruent-lambda-lists? (params1 params2)
   (null? (and (= (length (?var-list params1))
                 (length (?var-list params2)))
              (if (?rest params1)
                  (?rest params2)
                (null? (?rest params2))))))
 
-(defun incompatible-method-domain-p (method-domain gf-domain)
+(defun incompatible-method-domain? (method-domain gf-domain)
   (cond ((null? method-domain) ())
         ((~subclass? (car method-domain)
                      (car gf-domain))
-         (incompatible-method-domain-p (cdr method-domain)
+         (incompatible-method-domain? (cdr method-domain)
                                        (cdr gf-domain)))
         (t t)))
 
-(defun method-domain-clash-p (method gf)
+(defun method-domain-clash? (method gf)
   (find (?domain method) (?method-list gf)
         :key #'?domain
         :test #'equal))
@@ -482,12 +482,12 @@
     method))
 
 (defmethod ~add-method ((gf <global-generic-fun>) (method <method-def>))
-  (when (method-valid-p method gf)
+  (when (method-valid? method gf)
         (push method (?method-list gf)))
   gf)
 
 (defmethod ~add-method ((gf <imported-generic-fun>) (method <method-def>))
-  (when t ; (method-valid-p method gf) this test should be used but the problem
+  (when t ; (method-valid? method gf) this test should be used but the problem
         ;; is that sometimes the method functions are declared in the .def-file
         ;; after the generic function is declared and so the method functions
         ;; have the slot params not set when add-method is called

@@ -189,7 +189,7 @@
   (let ((name (?name expr)))
     (if (cons? name)
         (ti-write-list-enclosed stream (?name expr) t)
-      (cond ((and *%object* (%object-type-p expr))
+      (cond ((and *%object* (%object-type? expr))
              (format stream "<OBJECT>"))
             ((and *%class* (%class-type? expr))
              (format stream "<CLASS>"))

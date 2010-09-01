@@ -37,7 +37,7 @@
          type-inference
          type-propagation
          (only (get-result-type) ti-signature)
-         (only (true-subtype-expr-p) ti-meet-join)
+         (only (true-subtype-expr?) ti-meet-join)
          (only (get-last-substitution set-right-expr) ti-eqs)
          (only (ti-print-string-no-cr) ti-write)
          vector
@@ -104,11 +104,11 @@
         new-descrs))
 
 (defun specialize-inline-descr (new-descr old-descrs)
-  (let ((old-descr (specialize-inline-descr-p new-descr old-descrs)))
+  (let ((old-descr (specialize-inline-descr? new-descr old-descrs)))
     (if old-descr
         (let ((old-result-type (get-result-type old-descr))
               (new-result-type (get-result-type new-descr)))
-          (if (true-subtype-expr-p old-result-type
+          (if (true-subtype-expr? old-result-type
                                    new-result-type)
               (let* ((subs (?type-vars new-descr))
                      (type-var (vector-ref (?type-vec new-descr) 0))
@@ -119,12 +119,12 @@
                 ;;                      (ti-print-string-no-cr old-result-type))
                 ))))))
 
-(defun specialize-inline-descr-p (new-descr old-descrs)
+(defun specialize-inline-descr? (new-descr old-descrs)
   (let ((prev-descr (?t-descr-before new-descr)))
     (if (and prev-descr (atom? prev-descr))
         (if (member prev-descr old-descrs)
             prev-descr
-          (specialize-inline-descr-p prev-descr old-descrs))
+          (specialize-inline-descr? prev-descr old-descrs))
       ())))
 
 (defun handle-join-label-context (con)
@@ -752,7 +752,7 @@
 
 (defmethod handle-new-var (con to to-descr stat)
   (setf (vector-ref (?var-vec to-descr) to) con)
-  (if (simple-constant-p con)
+  (if (simple-constant? con)
       (setf (?constant-counter to-descr)
             (+ (?constant-counter to-descr) 1))
     ())
@@ -781,7 +781,7 @@
 
 (defmethod copy-old-var (con to to-descr stat)
   (setf (vector-ref (?var-vec to-descr) to) con)
-  (if (simple-constant-p con)
+  (if (simple-constant? con)
       (setf (?constant-counter to-descr)
             (+ (?constant-counter to-descr) 1))
     ())

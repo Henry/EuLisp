@@ -69,7 +69,7 @@
 (defun abstract-class? (class-def)
   (eq (?class class-def) %abstract-class))
 
-(defun tail-class-p (class-def)
+(defun tail-class? (class-def)
   (eq (?class class-def) %tail-class))
 
 ;;;-----------------------------------------------------------------------------
@@ -413,7 +413,7 @@
 (defun s-m-s-m (s-m ml)
   (if ml
       (let ((m (car ml)))
-        (if (more-specific-p (~method-domain m) (~method-domain s-m))
+        (if (more-specific? (~method-domain m) (~method-domain s-m))
             (s-m-s-m m (cdr ml))
           (s-m-s-m s-m (cdr ml))))
     s-m))
@@ -764,7 +764,7 @@
 ;;                                      (~method-domain (car methods))
 ;;                                      (car method)))))
 ;;         (last (last-method sortm)))
-;;    (if (more-specific-p (car last)
+;;    (if (more-specific? (car last)
 ;;                         gf-dom)
 ;;      (add-error-method gf-dom gf sortm)
 ;;      sortm)))
@@ -773,7 +773,7 @@
 ;;  (if (null? ms) lst
 ;;      (let* ((m (car ms))
 ;;             (mdom (~method-domain m)))
-;;        (if (more-specific-p mdom (car (car lst)))
+;;        (if (more-specific? mdom (car (car lst)))
 ;;          (sort-methods1 (cdr ms)
 ;;                         (cons (cons mdom m) lst))
 ;;          (progn
@@ -784,7 +784,7 @@
 ;;(defun sort-methods2 (mdom m lst)
 ;;  (if (cdr lst)
 ;;    (let ((nxdom (car (car (cdr lst)))))
-;;      (if (more-specific-p mdom nxdom)
+;;      (if (more-specific? mdom nxdom)
 ;;          (setf (cdr lst)
 ;;                (cons (cons mdom m)
 ;;                      (cdr lst)))
@@ -813,7 +813,7 @@
 ;;                    method tree)
 ;;      (calc-d-tree (cdr d-args) (cdr gf-dom) (cdr dom) method tree))
 ;;    (let ((method1 (cdr tree)))
-;;      (if (more-specific-p (~method-domain method)
+;;      (if (more-specific? (~method-domain method)
 ;;                           (~method-domain method1))
 ;;        (setf (cdr tree) method) ())
 ;;      tree)))

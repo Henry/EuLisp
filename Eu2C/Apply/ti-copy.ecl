@@ -77,10 +77,10 @@
   (let ((with-same-vars (cons? same-vars))
         (left-expr (?left-expr equ))
         (right-expr (?right-expr equ)))
-    (cons (if (type-var-p left-expr)
+    (cons (if (type-var? left-expr)
               (ti-copy&rename-var left-expr new-vars with-same-vars)
             left-expr)
-          (if (type-var-p right-expr)
+          (if (type-var? right-expr)
               (ti-copy&rename-var (cdr equ) new-vars with-same-vars)
             right-expr))))
 
@@ -222,7 +222,7 @@
   (if (< index (length vec-left))
       (let ((left-var (vector-ref vec-left index))
             (right-var (vector-ref vec-right index)))
-        (if (null? (eq-type-var-p left-var right-var))
+        (if (null? (eq-type-var? left-var right-var))
             (add-substitution subs left-var right-var))
         (vec-application-subs vec-left vec-right (+ index 1) subs))))
 

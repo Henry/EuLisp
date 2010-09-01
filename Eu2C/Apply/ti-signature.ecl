@@ -231,7 +231,7 @@
 
 (defun application-subs-check-%void (formal-descr actual-descr)
   (let ((subs (application-subs formal-descr actual-descr)))
-    (if (%void-type-p (get-result-type actual-descr))
+    (if (%void-type? (get-result-type actual-descr))
         (let ((equ (get-last-substitution
                     subs
                     (vector-ref (?type-vec actual-descr) 0))))
@@ -251,7 +251,7 @@
                         (if (null? (?type-descr method-fun)) ; to remove!
                             (setf (?type-descr method-fun) type-descr))
                         (member-if-not (lambda (descr)
-                                         (sub-descr-p descr type-descr))
+                                         (sub-descr? descr type-descr))
                                        actual-descrs)))
                     (?method-list fun))))
     (if method-subset    ;; any methods called for sure?
@@ -264,26 +264,26 @@
 ;;; Remove all methods with true super domain types compared to any other
 ;;; method in the list.
 (defun reduce-method-subset (methods origin-methods)
-  (let ((new-subset (remove-duplicates (sort methods #'sub-method-p)
-                                       :from-end t :test #'sub-method-p)))
+  (let ((new-subset (remove-duplicates (sort methods #'sub-method?)
+                                       :from-end t :test #'sub-method?)))
     (remove-if-not (lambda (origin-method)
                      (member-if (lambda (method)
-                                  (sub-method-p origin-method method))
+                                  (sub-method? origin-method method))
                                 new-subset))
                    origin-methods)))
 
-(defun sub-method-p (method1 method2)
-  (sub-descr-p (?type-descr (?fun method1))
+(defun sub-method? (method1 method2)
+  (sub-descr? (?type-descr (?fun method1))
                (?type-descr (?fun method2))))
 
 ;; Answer whether agrument types of an type descriptor are subtype
 ;; expressions of an other; NOTE: result type is not considered!
-(defun sub-descr-p (descr1 descr2)
+(defun sub-descr? (descr1 descr2)
   (let ((arity (- (length (?type-vec descr1)) 1))
         (ok t))
     (dotimes (i arity)
              (let ((j (+ i 1)))
-               (cond ((null? (subtype-expr-p (get-arg-type descr1 j)
+               (cond ((null? (subtype-expr? (get-arg-type descr1 j)
                                             (get-arg-type descr2 j)))
                       (setq i arity)
                       (setq ok ())))))
@@ -405,17 +405,17 @@
 ;;; Check if result type of descr is supertype of all result types of descrs.
 (defun check-result-subtypes (descrs descr)
   (dolist (descr1 descrs)
-          (if (null? (meet-result-types-p descr1 descr))
+          (if (null? (meet-result-types? descr1 descr))
               (notify-type-clash2 (get-result-type descr)
                                   (get-result-type descr1)))))
 
 ;;; Answer whether result type of descr1 is subtype of result type of descr2.
-(defun meet-result-types-p (descr1 descr2)
+(defun meet-result-types? (descr1 descr2)
   (let ((result1 (get-result-type descr1))
         (result2 (get-result-type descr2)))
-    (or (subtype-expr-p result2 (%void-type)) ; void fits to all types
-        (or (subtype-expr-p result1 result2)
-            (cond ((meet-type-exprs-p result1 result2)
+    (or (subtype-expr? result2 (%void-type)) ; void fits to all types
+        (or (subtype-expr? result1 result2)
+            (cond ((meet-type-exprs? result1 result2)
                    (let ((fun (analysed-fun)))
                      #+ :cmu fun
                      (ti-format
@@ -430,7 +430,7 @@
 
 ;;; Check if first type expression is subtype of second type expression.
 (defun check-subtype-exprs (expr1 expr2)
-  (if (subtype-expr-p expr1 expr2)
+  (if (subtype-expr? expr1 expr2)
       expr1
     (notify-type-clash3 expr1 expr2)))
 
@@ -477,7 +477,7 @@
                            (index <integer>); *IM* 01.03.94
                            (new-expr <type-var>))
   (let ((vec (?type-vec descr)))
-    (if (contains-type-var-p vec new-expr)
+    (if (contains-type-var? vec new-expr)
         (call-next-method)
       (setf (vector-ref vec index) new-expr))))
 
@@ -559,7 +559,7 @@
       (dolist (descr copied-descrs)
               (specialize-result-type descr max-domain-type)))
     (if *use-compound-types*
-        (mapc #'reset-write-access-stamps copied-descrs)
+        (mapc #'reset-write-access-stam?s copied-descrs)
       (setq copied-descrs
             (delete-if-not #'convert-all-compound-types copied-descrs)))
     (setf (?signature fun) copied-descrs)
@@ -620,18 +620,18 @@
   (let ((rec-descrs ())
         (non-rec-descrs ()))
     (dolist (descr descrs)
-            (if (recursive-descr-p descr)
+            (if (recursive-descr? descr)
                 (setq rec-descrs (cons descr rec-descrs))
               (setq non-rec-descrs (cons descr non-rec-descrs))))
     (cons rec-descrs non-rec-descrs)))
 
 ;; Answer whether a type descriptor is recursive or not.
-(defgeneric recursive-descr-p (descr))
+(defgeneric recursive-descr? (descr))
 
-(defmethod recursive-descr-p ((descr <type-descr>))
+(defmethod recursive-descr? ((descr <type-descr>))
   ())
 
-(defmethod recursive-descr-p ((descr <recursive-type-descr>))
+(defmethod recursive-descr? ((descr <recursive-type-descr>))
   t)
 
 ;; Join a type descriptor with a list of type descriptors.
@@ -681,7 +681,7 @@
         (if (and equ1 equ2)
             (let ((expr1 (?right-expr equ1))
                   (expr2 (?right-expr equ2)))
-              (if (null? (%void-type-p expr1))
+              (if (null? (%void-type? expr1))
                   (set-right-expr equ1 (join-type-exprs expr1 expr2)))
               (join-two-descrs-min descr1 descr2 (+ index 1))))))
   descr1)
@@ -693,8 +693,8 @@
   (let* ((result-equ (get-last-substitution (?type-vars descr)
                                             (vector-ref (?type-vec descr) 0)))
          (result-type (?right-expr result-equ)))
-    (if (null? (subtype-expr-p result-type type-expr))
-        (if (%void-type-p type-expr)
+    (if (null? (subtype-expr? result-type type-expr))
+        (if (%void-type? type-expr)
             (set-result-type-min descr type-expr)
           (let ((domain-type
                  (meet-type-exprs result-type type-expr)))
@@ -739,7 +739,7 @@
     (dotimes (i (length vec))
              (let ((expr-min (vector-ref vec-min i))
                    (equ (get-last-substitution subs (vector-ref vec i))))
-               (cond ((null? (subtype-expr-p (?right-expr equ) expr-min))
+               (cond ((null? (subtype-expr? (?right-expr equ) expr-min))
                       (set-right-expr equ expr-min)
                       (setq specialized t)))))
     specialized))

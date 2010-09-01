@@ -38,20 +38,20 @@
          <atomic-type> ?code ?name ?comp-name
          <type-var> ?id
          <slot-id> ?slot-name
-         atomic-type? type-var-p slot-id-p
-         contains-type-var-p eq-type-var-p
+         atomic-type? type-var? slot-id?
+         contains-type-var? eq-type-var?
          substitute-type-var class-as-type-expr
          new-type-var new-type-var-id reset-actual-type-var-id
          lattice-type-to-atomic-type lattice-type-to-atomic-types
          general-type general-type-p
-         <null>-type <null>-type-p
-         %object-type %object-type-p
-         %void-type %void-type-p
+         <null>-type <null>-type?
+         %object-type %object-type?
+         %void-type %void-type?
          %false-type %false-type-p
          fpi-list-type fpi-list-type-p
          <function>-type <function>-type-p
          <fpi>-type <fpi>-type-p
-         no-type-p %class-type? %function-type %integer-type)
+         no-type? %class-type? %function-type %integer-type)
  )
 
 ;;;-----------------------------------------------------------------------------
@@ -84,51 +84,51 @@
   #t)
 
 ;;;-----------------------------------------------------------------------------
-(defgeneric type-var-p (expr))
+(defgeneric type-var? (expr))
 
-(defmethod type-var-p ((expr <type-expr>))
+(defmethod type-var? ((expr <type-expr>))
   #f)
 
-(defmethod type-var-p ((expr <type-var>))
+(defmethod type-var? ((expr <type-var>))
   #t)
 
 ;;;-----------------------------------------------------------------------------
-(defgeneric slot-id-p (expr))
+(defgeneric slot-id? (expr))
 
-(defmethod slot-id-p ((expr <slot-id>))
+(defmethod slot-id? ((expr <slot-id>))
   #t)
 
-(defmethod slot-id-p ((expr <type-expr>))
+(defmethod slot-id? ((expr <type-expr>))
   #f)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Answer whether an type expression contains a type varible.
-(defgeneric contains-type-var-p (obj var))
+(defgeneric contains-type-var? (obj var))
 
-(defmethod contains-type-var-p ((expr <type-expr>)
+(defmethod contains-type-var? ((expr <type-expr>)
                                 (var <type-var>))
   #f)
 
-(defmethod contains-type-var-p ((expr <type-var>)
+(defmethod contains-type-var? ((expr <type-var>)
                                 (var <type-var>))
-  (eq-type-var-p expr var))
+  (eq-type-var? expr var))
 
-(defmethod contains-type-var-p ((obj <pair>)
+(defmethod contains-type-var? ((obj <pair>)
                                 (var <type-var>))
-  (member-with-args #'contains-type-var-p obj var))
+  (member-with-args #'contains-type-var? obj var))
 
-(defmethod contains-type-var-p ((vec <vector>)
+(defmethod contains-type-var? ((vec <vector>)
                                 (var <type-var>))
-  (find var vec :test #'eq-type-var-p))
+  (find var vec :test #'eq-type-var?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Answer whether two type varibles are equal.
-(defgeneric eq-type-var-p (var1 var2))
+(defgeneric eq-type-var? (var1 var2))
 
-(defmethod eq-type-var-p (var1 var2)
+(defmethod eq-type-var? (var1 var2)
   ())
 
-(defmethod eq-type-var-p ((var1 <type-var>)
+(defmethod eq-type-var? ((var1 <type-var>)
                           (var2 <type-var>))
   (eq (?id var1) (?id var2)))
 
@@ -212,7 +212,7 @@
   (eq-code-p (?code type-expr) *top-code*))
 
 ;;; Answer whether a type expression correspondes to %object.
-(defun %object-type-p (type-expr)
+(defun %object-type? (type-expr)
   (eq-code-p (?code type-expr) *%object-code*))
 
 ;;; Answer whether a type expression correspondes to %false.
@@ -220,7 +220,7 @@
   (eq-code-p (?code type-expr) *%false-code*))
 
 ;;; Answer whether a type expression correspondes to %void.
-(defun %void-type-p (type-expr)
+(defun %void-type? (type-expr)
   (and (atomic-type? type-expr)
        (eq-code-p (?code type-expr) *%void-code*)))
 
@@ -234,11 +234,11 @@
   (eq-code-p (?code type-expr) *fpi-list-code*))
 
 ;;; Answer whether a type expression correspondes to the bottom of the lattice.
-(defun no-type-p (type-expr)
+(defun no-type? (type-expr)
   (eq-code-p (?code type-expr) *bottom-code*))
 
 ;;; Answer whether a type expression correspondes to <null>.
-(defun <null>-type-p (type-expr)
+(defun <null>-type? (type-expr)
   (eq-code-p (?code type-expr) *<null>-code*))
 
 ;;; Answer whether a type expression correspondes to <null>.

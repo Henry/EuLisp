@@ -76,19 +76,19 @@
 (defmethod data-type-p (type)
   ())
 
-(defun variable-p (var)
+(defun variable? (var)
   (subtypep (type-of var) <var>))
 
 (defun constant-p (var)
   (subtypep (type-of var) <named-const>))
 
-(defun pointer-data-type-p (type)
+(defun pointer-data-type? (type)
   (subtypep (type-of type) <%pointer>))
 
-(defun prestruct-data-type-p (type)
+(defun prestruct-data-type? (type)
   (subtypep (type-of type) <%prestruct>))
 
-(defun union-data-type-p (type)
+(defun union-data-type? (type)
   (subtypep (type-of type) <%union>))
 
 (defmethod basic-data-type? ((type <basic-class-def>))
@@ -109,19 +109,19 @@
 
 
 (defun give-pointer-data-type (symbol)
-  (when (pointer-data-type-p symbol)
+  (when (pointer-data-type? symbol)
         symbol))
 
 (defun give-prestruct-data-type (symbol)
-  (when (prestruct-data-type-p symbol)
+  (when (prestruct-data-type? symbol)
         symbol))
 
 (defun give-union-data-type (symbol)
-  (when (union-data-type-p symbol)
+  (when (union-data-type? symbol)
         symbol))
 
 (defun give-variable (var)
-  (when (variable-p var)
+  (when (variable? var)
         var))
 
 (defun give-constant (var)
@@ -130,7 +130,7 @@
 
 (defun give-variable-or-constant (var)
   (when (or (constant-p var)
-            (variable-p var))
+            (variable? var))
         var))
 
 (defmethod data-integer-p ((instance <%integer>))

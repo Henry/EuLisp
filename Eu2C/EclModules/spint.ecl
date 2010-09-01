@@ -35,7 +35,7 @@
          #+ :cmu (only (fixnump) ext)
          number)
  syntax (eulisp-kernel)
- export (single-precision-integer-p))
+ export (single-precision-integer?))
 
 
 (progn
@@ -45,7 +45,7 @@
   (make-eulisp-class single-precision-integer fixnum)
   )
 
-(defun single-precision-integer-p (x)
+(defun single-precision-integer? (x)
   (fixnump x))
 
 #module-end

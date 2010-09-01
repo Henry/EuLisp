@@ -37,7 +37,7 @@
   analyse-h
   vector ; make-vector and vector-ref
   (only (assoc format logand ash) common-lisp)
-  (only (valid-for-then-p valid-for-else-p) ti-special)
+  (only (valid-for-then? valid-for-else?) ti-special)
   type-inference)
 
  syntax
@@ -492,7 +492,7 @@
 (defun select-then-type-descr (fun td)
   (if td
       (let ((curtd (car td)))
-        (if (valid-for-then-p fun (car td))
+        (if (valid-for-then? fun (car td))
             (cons curtd (select-then-type-descr fun (cdr td)))
           (select-then-type-descr fun (cdr td)))
         )
@@ -501,7 +501,7 @@
 (defun select-else-type-descr (fun td)
   (if td
       (let ((curtd (car td)))
-        (if (valid-for-else-p fun (car td))
+        (if (valid-for-else? fun (car td))
             (cons curtd (select-else-type-descr fun (cdr td)))
           (select-else-type-descr fun (cdr td))
           ))

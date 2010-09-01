@@ -208,17 +208,17 @@
          (old-result-type (get-result-type old-descr))
          (optimized ()))
     ;;    (format t "g")      ;; mark global optimization
-    (cond ((%void-type-p new-result-type)
+    (cond ((%void-type? new-result-type)
            (set-result-type-min new-descr old-result-type))
-          ((true-subtype-expr-p old-result-type new-result-type)
+          ((true-subtype-expr? old-result-type new-result-type)
            (set-result-type-min new-descr old-result-type)))
     ;;      (cond (*ti-verbose*
     ;;       (dotimes (i (length (?type-vec new-descr)))
     ;;         (setq optimized
-    ;;           (or (null? (and (subtype-expr-p
+    ;;           (or (null? (and (subtype-expr?
     ;;                           (get-arg-type old-descr i)
     ;;                           (get-arg-type new-descr i))
-    ;;                          (subtype-expr-p
+    ;;                          (subtype-expr?
     ;;                           (get-arg-type new-descr i)
     ;;                           (get-arg-type old-descr i))))
     ;;               optimized)))

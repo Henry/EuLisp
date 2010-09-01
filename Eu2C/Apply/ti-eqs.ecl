@@ -45,7 +45,7 @@
  export (<type-var-substitutions>
          ?left-expr ?right-expr set-left-expr set-right-expr
          new-type-equation eval-to-equation
-         contains-type-var-p
+         contains-type-var?
          substitute-type-var
          <type-equation-stack> ?equations
          push-type-equation pop-type-equation
@@ -94,13 +94,13 @@
 (defun substitute-type-var (eqs         ;<type-equation-stack>
                             var-old     ;<type-var>
                             expr-new)   ;<type-expr>
-  (if (null? (eq-type-var-p var-old expr-new))
+  (if (null? (eq-type-var? var-old expr-new))
       (dolist (equ (?equations eqs))
               (let ((left-expr (?left-expr equ))
                     (right-expr (?right-expr equ)))
-                (if (eq-type-var-p left-expr var-old)
+                (if (eq-type-var? left-expr var-old)
                     (set-left-expr equ expr-new)
-                  (if (eq-type-var-p var-old right-expr)
+                  (if (eq-type-var? var-old right-expr)
                       (set-right-expr equ expr-new))))))
   eqs)
 
@@ -126,7 +126,7 @@
 ;; Answer the type equation that has a special type var at the left side.
 (defun get-substitution (subs           ;<type-var-substitutions>
                          var)           ;<type-var>
-  (assoc var (?equations subs) :test #'eq-type-var-p))
+  (assoc var (?equations subs) :test #'eq-type-var?))
 
 ;;; Answer the last equation of a list of equations. The var of the
 ;;; right expression of the last equation does not occur again in the subs.
@@ -135,7 +135,7 @@
   (let ((equ (get-substitution subs var)))
     (if equ
         (let ((right-expr (?right-expr equ)))
-          (if (type-var-p right-expr)
+          (if (type-var? right-expr)
               (get-last-substitution subs right-expr)
             equ))
       ())))
@@ -167,7 +167,7 @@
           (check-equality-fwd subs var2 var1))
       t
     (let ((equ (get-substitution subs var1)))
-      (if (and equ (type-var-p (?right-expr equ)))
+      (if (and equ (type-var? (?right-expr equ)))
           (check-equality subs (?right-expr equ) var2)
         ()))))
 
@@ -223,7 +223,7 @@
 (defmethod check-equality-fwd ((subs <type-var-substitutions>)
                                (var1 <type-var>)
                                (var2 <type-var>))
-  (if (eq-type-var-p var1 var2) t
+  (if (eq-type-var? var1 var2) t
     (let ((equ (get-substitution subs var1)))
       (if equ
           (check-equality-fwd subs (?right-expr equ) var2)
@@ -250,7 +250,7 @@
   (let ((index (position-if (lambda (vec-var2)
                               (and
                                (check-equality-fwd subs1 vec-var vec-var2)
-                               (null? (eq-type-var-p vec-var vec-var2))))
+                               (null? (eq-type-var? vec-var vec-var2))))
                             vec)))
     (if index
         (add-substitution subs2 vec-var (vector-ref vec index))

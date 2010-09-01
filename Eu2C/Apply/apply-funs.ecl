@@ -293,9 +293,9 @@
 
 (defun add-to-apply/funcall-table (fun table)
   (stable-sort (cons fun table)
-               #'more-required-arguments-p))
+               #'more-required-arguments?))
 
-(defun more-required-arguments-p (fun1 fun2)
+(defun more-required-arguments? (fun1 fun2)
   (> (length (?var-list (?params fun1)))
      (length (?var-list (?params fun2)))))
 

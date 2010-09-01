@@ -43,7 +43,7 @@
  (eulisp1)
 
  export (l2m-call
-         simple-constant-p)
+         simple-constant?)
  )
 
 
@@ -60,7 +60,7 @@
     (let ((var-or-constant (l2m-a arg-context (car arg-list))))
       (setf (vector-ref (?var-vec (?var-descr statement))
                         nr) var-or-constant)
-      (if (simple-constant-p var-or-constant)
+      (if (simple-constant? var-or-constant)
           (setf (?constant-counter
                  (?var-descr statement))
                 (+ 1 (?constant-counter
@@ -71,33 +71,33 @@
       )))
 
 
-(defgeneric simple-constant-p (lzs-object))
+(defgeneric simple-constant? (lzs-object))
 
-(defmethod simple-constant-p ((obj <named-const>))
-  (simple-constant-p (?value obj)))
+(defmethod simple-constant? ((obj <named-const>))
+  (simple-constant? (?value obj)))
 
-(defmethod simple-constant-p ((obj <structured-literal>))
+(defmethod simple-constant? ((obj <structured-literal>))
   t)
 
-(defmethod simple-constant-p ((obj <sym>))
+(defmethod simple-constant? ((obj <sym>))
   t)
 
-(defmethod simple-constant-p ((obj <symbol>))
+(defmethod simple-constant? ((obj <symbol>))
   t)
 
-(defmethod simple-constant-p ((obj <fpi>))
+(defmethod simple-constant? ((obj <fpi>))
   t)
 
-(defmethod simple-constant-p ((obj <double-float>))
+(defmethod simple-constant? ((obj <double-float>))
   t)
 
-(defmethod simple-constant-p ((obj <character>))
+(defmethod simple-constant? ((obj <character>))
   t)
 
-(defmethod simple-constant-p ((obj <null>))
+(defmethod simple-constant? ((obj <null>))
   t)
 
-(defmethod simple-constant-p ((obj <object>))
+(defmethod simple-constant? ((obj <object>))
   #f)
 
 #module-end

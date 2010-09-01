@@ -111,7 +111,7 @@
   (cond ((null? pattern)
          (null? expr))
         ((atom? pattern)
-         (true-list-p expr))
+         (true-list? expr))
         ((null? expr)
          ())
         ((atom? expr)
@@ -119,8 +119,8 @@
         (t
          (check-syntax-components (cdr pattern) (cdr expr)))))
 
-(defun true-list-p (l)
-  (cond ((cons? l) (true-list-p (cdr l)))
+(defun true-list? (l)
+  (cond ((cons? l) (true-list? (cdr l)))
         ((null? l) t)
         (t ())))
 

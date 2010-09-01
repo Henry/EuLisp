@@ -78,12 +78,12 @@
          def-sys-lattice-type def-strategic-lattice-type
          ~compute-lattice-type compute-normalized-lattice-type
          join-lattice-types meet-lattice-types complement-lattice-type-code
-         meet-lattice-types-p lattice-subtype-p
-         top-lattice-type-p bottom-lattice-type?
+         meet-lattice-types? lattice-subtype?
+         top-lattice-type? bottom-lattice-type?
          eq-lattice-type copy-lattice-type
          expand-all-lattice-type-literals
          find-lattice-type-for-literal
-         set-write-access-stamp new-write-access-stamp
+         set-write-access-stam? new-write-access-stamp
          convert-to-super-non-compound-type
          trans-lattice-type-list))
 
@@ -179,7 +179,7 @@
     (setf (?latest-write-access-stamp *the-lattice*) new-stamp)
     new-stamp))
 
-(defun set-write-access-stamp (lattice-type)           ;<lattice-type>
+(defun set-write-access-stam? (lattice-type)           ;<lattice-type>
   (let ((new-stamp (new-write-access-stamp)))
     (setf (?write-access-stamp lattice-type) new-stamp)
     (set-subtype-write-access-stamps lattice-type new-stamp)))
@@ -506,8 +506,8 @@
                            lattice-type2) ;<lattice-type>
   (let ((code1 (?code lattice-type1))
         (code2 (?code lattice-type2)))
-    (cond ((subcode-p code1 code2) lattice-type1)
-          ((subcode-p code2 code1) lattice-type2)
+    (cond ((subcode? code1 code2) lattice-type1)
+          ((subcode? code2 code1) lattice-type2)
           (t (ti-format t "~%Warning: can't meet lattice types")
              (ti-error)
              *top*))))
@@ -517,8 +517,8 @@
                            lattice-type2) ;<lattice-type>
   (let ((code1 (?code lattice-type1))
         (code2 (?code lattice-type2)))
-    (cond ((subcode-p code1 code2) lattice-type2)
-          ((subcode-p code2 code1) lattice-type1)
+    (cond ((subcode? code1 code2) lattice-type2)
+          ((subcode? code2 code1) lattice-type1)
           (t
            (let ((joins1
                   (mapcar (lambda (supertype)
@@ -540,7 +540,7 @@
 (defun min-lattice-type (lattice-types)
   (let ((min-type (car lattice-types)))
     (dolist (type (cdr lattice-types))
-            (if (lattice-subtype-p type min-type)
+            (if (lattice-subtype? type min-type)
                 (setq min-type type)))
     min-type))
 
@@ -551,7 +551,7 @@
 ;;  (if lattice-types
 ;;      (let ((first-type (car lattice-types)))
 ;;      (min-lattice-type1 (cdr lattice-types)
-;;                         (if (lattice-subtype-p first-type min-type)
+;;                         (if (lattice-subtype? first-type min-type)
 ;;                             first-type
 ;;                           min-type)))
 ;;    min-type))
@@ -561,10 +561,10 @@
   (complement-code (?code lattice-type)))
 
 ;;; Answer whether all subtypes of first arg meet with a given lattice-type.
-(defun meet-all-subtypes-p (supertype     ;<lattice-type>
+(defun meet-all-subtypes? (supertype     ;<lattice-type>
                             lattice-type) ;<lattice-type>
   (null? (member-with-args (lambda (subtype)
-                            (null? (meet-lattice-types-p subtype lattice-type)))
+                            (null? (meet-lattice-types? subtype lattice-type)))
                           (?subtypes supertype))))
 
 ;;; Answer the normalized complement of a lattice type.
@@ -600,18 +600,18 @@
   (eq-code-p (?code lattice-type) *bottom-code*))
 
 ;;; Answer whether a lattice type denotes the top type.
-(defun top-lattice-type-p (lattice-type) ;<lattice-type>
+(defun top-lattice-type? (lattice-type) ;<lattice-type>
   (eq-code-p (?code lattice-type) *top-code*))
 
 ;;; Answer whether the intersection of two lattice types is not *bottom-type*.
-(defun meet-lattice-types-p (lattice-type1  ;<lattice-type>
+(defun meet-lattice-types? (lattice-type1  ;<lattice-type>
                              lattice-type2) ;<lattice-type>
-  (meet-codes-p (?code lattice-type1)(?code lattice-type2)))
+  (meet-codes? (?code lattice-type1)(?code lattice-type2)))
 
 ;;; Answer whether one lattice type is a subtype of another.
-(defun lattice-subtype-p (lattice-type1  ;<lattice-type>
+(defun lattice-subtype? (lattice-type1  ;<lattice-type>
                           lattice-type2) ;<lattice-type>
-  (subcode-p (?code lattice-type1) (?code lattice-type2)))
+  (subcode? (?code lattice-type1) (?code lattice-type2)))
 
 ;;; Answer whether two lattice types are equal.
 (defun eq-lattice-type (lattice-type1   ;<lattice-type>

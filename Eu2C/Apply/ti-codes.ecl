@@ -45,8 +45,8 @@
          substract-codes
          xor-codes
          eq-code-p
-         meet-codes-p
-         subcode-p
+         meet-codes?
+         subcode?
          bottom-code?
          complement-codes?))
 
@@ -113,11 +113,11 @@
   (eq-code-p code (bottom-code)))
 
 ;;; Answer whether two type codes do meet, e.g. do have set the same bits.
-(defun meet-codes-p (code1 code2)
+(defun meet-codes? (code1 code2)
   (null? (bottom-code? (meet-codes code1 code2))))
 
 ;;; Answer whether one type code is a subcode of another.
-(defun subcode-p (code1 code2)
+(defun subcode? (code1 code2)
   (eq-code-p (meet-codes code1 code2) code1))
 
 ;;; Answer whether two lattice type codes are complementary.

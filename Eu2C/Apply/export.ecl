@@ -81,7 +81,7 @@
  export (export-objects
          export-identifier
          exporting-module
-         invisible-exported-p))
+         invisible-exported?))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -101,7 +101,7 @@
        (?exported object)
        (cdr (?exported object))))
 
-(defun invisible-exported-p (object)
+(defun invisible-exported? (object)
   (and (global-p object)
        (?exported object)
        (cons? (car (?exported object)))))

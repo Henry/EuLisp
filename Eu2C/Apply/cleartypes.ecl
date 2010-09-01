@@ -87,7 +87,7 @@
       (let* ((applications (append (?rec-calls fun) (?applications fun)))
              (typedescr (cond ((null? (?applications fun))  ; e.g. init funs
                                (balance (?signature fun)))
-                              ((unknown-applications-p fun); e.g. exported
+                              ((unknown-applications? fun); e.g. exported
                                (balance (?signature fun)))
                               (t
                                (balance-applications fun applications)))))
@@ -105,7 +105,7 @@
 
 ;;; Convert type expressions to classes.
 (defun clear-types3 (fun)
-  (if (null? (signature-needed-for-code-generation-p fun))
+  (if (null? (signature-needed-for-code-generation? fun))
       (setf (?signature fun) ()))       ; no longer needed
   (if (and (simple-fun-p fun)
            (or (= (?pass fun) 5)

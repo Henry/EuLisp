@@ -52,7 +52,7 @@
          transform-call-next-method
          transform-next-method?
          arg-error
-         more-specific-p))
+         more-specific?))
 
 
 (defvar in-generic-fun ())
@@ -112,17 +112,17 @@
              (c-dom (~method-domain c-mth)))
         (if (eq c-mth mth)
             (next-specific-method1 (cdr m-lst) dom mth s-dom s-mth)
-          (if (and (more-specific-p dom c-dom)
+          (if (and (more-specific? dom c-dom)
                    (or (null? s-dom)
-                       (more-specific-p c-mth s-dom)))
+                       (more-specific? c-mth s-dom)))
               (next-specific-method1 (cdr m-lst) dom mth c-dom c-mth)
             (next-specific-method1 (cdr m-lst) dom mth s-dom s-mth))))
     s-mth))
 
-(defun more-specific-p (dom1 dom2)
+(defun more-specific? (dom1 dom2)
   (if dom1
       (if (eq (car dom1) (car dom2))
-          (more-specific-p (cdr dom1) (cdr dom2))
+          (more-specific? (cdr dom1) (cdr dom2))
         (if (member (car dom2)
                     (~class-precedence-list (car dom1)))
             t ()))

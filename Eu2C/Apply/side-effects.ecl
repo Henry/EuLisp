@@ -633,7 +633,7 @@
   (let* ((fun (?function form))
          (arg-list (?arg-list form)))
     (if (and (fun-p fun) (?reduce fun))
-        (reduce-app (?reduce fun) arg-list form)
+        (reduce-ap? (?reduce fun) arg-list form)
       (if (eq fun %call-next-method)
           (dynamic-let ((next-method?arams
                          (?params (?fun (dynamic in-method)))))
@@ -648,7 +648,7 @@
                     (collect-literals-list arg-list)))
             form))))))
 
-(defun reduce-app (red-descr arg-list form)
+(defun reduce-ap? (red-descr arg-list form)
   (let ((bin-fun (car red-descr))
         (one-arg (car (cdr red-descr)))
         (zero-arg (car (cdr (cdr red-descr))))

@@ -199,7 +199,7 @@
          )
         ((exported-for-lisp-p object)
          (write-def "~2%~:[(export ~S~:*)~%~;~]"
-                    (invisible-exported-p object)
+                    (invisible-exported? object)
                     (if-identifier object))
          (gen-interface object))
         ))
@@ -235,7 +235,7 @@
          `(rename ,rename-part (only ,only-part %tail)))
         ((and (hard-wired-p (car objects))
               (exported-for-lisp-p (car objects))
-              (null? (invisible-exported-p (car objects))))
+              (null? (invisible-exported? (car objects))))
          (gen-%tail-exports (cdr objects)
                             (if (eq (?identifier (car objects))
                                     (if-identifier (car objects)))

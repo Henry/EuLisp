@@ -36,7 +36,7 @@
              (only (format) common-lisp))
  syntax (ti)
  export (check-compound-types-before check-compound-types-after
-                                     convert-all-compound-types reset-write-access-stamps))
+                                     convert-all-compound-types reset-write-access-stam?s))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Check compound types and convert them to uncompound ones probably.
@@ -227,23 +227,23 @@
              ()))
 
 ;; Set write-access-stamps of all lattice type of a descriptor to nil.
-(DEFGENERIC reset-write-access-stamps (obj))
+(DEFGENERIC reset-write-access-stam?s (obj))
 
-(DEFMETHOD reset-write-access-stamps ((descr <type-descr>))
+(DEFMETHOD reset-write-access-stam?s ((descr <type-descr>))
            (dolist (equ (?equations (?type-vars descr)))
                    (let ((expr (?right-expr equ)))
                      (if (atomic-type? expr)
-                         (reset-write-access-stamps (?name expr))))))
+                         (reset-write-access-stam?s (?name expr))))))
 
-(DEFMETHOD reset-write-access-stamps ((name <pair>))
+(DEFMETHOD reset-write-access-stam?s ((name <pair>))
            (let ((op-symbol (car name)))
              (cond ((eq op-symbol ^not)
-                    (reset-write-access-stamps (car (cdr name))))
+                    (reset-write-access-stam?s (car (cdr name))))
                    ((or (eq op-symbol ^or) (eq op-symbol ^and))
-                    (reset-write-access-stamps (car (cdr name)))
-                    (reset-write-access-stamps (car (cdr (cdr name))))))))
+                    (reset-write-access-stam?s (car (cdr name)))
+                    (reset-write-access-stam?s (car (cdr (cdr name))))))))
 
-(DEFMETHOD reset-write-access-stamps ((lattice-type <lattice-type>))
+(DEFMETHOD reset-write-access-stam?s ((lattice-type <lattice-type>))
            (if (?compound lattice-type)
                (setf (?write-access-stamp lattice-type) ())))
 

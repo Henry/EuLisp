@@ -44,7 +44,7 @@
          convert-to-formal-descrs-%extract
          convert-to-formal-descrs-%setf-extract
          convert-to-formal-descrs-%funcall
-         valid-for-then-p valid-for-else-p))
+         valid-for-then? valid-for-else?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; CREATING FORMAL SIGNATURES FOR SOME TAIL FUNCTIONS
@@ -83,7 +83,7 @@
 ;;       (slot-name (convert-to-slot-name slot-name-type ()))
 ;;       (result-type (general-type)))
 ;;    (if (and slot-name
-;;           (%pointer-to-struct-class-p (?representation struct-class)))
+;;           (%pointer-to-struct-class? (?representation struct-class)))
 ;;      (setq result-type
 ;;        (or (find-slot-type-with-slot&struct slot-name struct-class)
 ;;            result-type))
@@ -138,10 +138,10 @@
                      (<fpi>-type-p slot-value-type))
                 (and (eq slot-name ^cdr)
                      (or (fpi-list-type-p slot-value-type)
-                         (<null>-type-p slot-value-type))))
+                         (<null>-type? slot-value-type))))
             (format t "~%Notice: write access stamp NOT updated")
-          (set-write-access-stamp (?lattice-type struct-type))))
-    (set-write-access-stamp (?lattice-type struct-type))))
+          (set-write-access-stam? (?lattice-type struct-type))))
+    (set-write-access-stam? (?lattice-type struct-type))))
 
 ;;(defun convert-to-formal-descrs-%setf-select (descrs)
 ;;  (mapcar #'convert-to-formal-descr-%setf-select descrs))
@@ -156,7 +156,7 @@
 ;;       (new-slot-type (get-arg-type descr 3))
 ;;       result-type)
 ;;    (if (and slot-name
-;;           (%pointer-to-struct-class-p (?representation struct-class)))
+;;           (%pointer-to-struct-class? (?representation struct-class)))
 ;;      (setq new-slot-type
 ;;        (or (find-slot-type-with-slot&struct slot-name struct-class)
 ;;            new-slot-type))
@@ -229,7 +229,7 @@
          (vec-class (type-expr-to-class vec-type ()))
          (index-type (%integer-type))
          (result-type (general-type)))
-    (if (%pointer-to-vector-class-p (?representation vec-class))
+    (if (%pointer-to-vector-class? (?representation vec-class))
         (let ((elem-class (~vector-class-element-type vec-class)))
           (if elem-class
               (setq result-type (class-as-type-expr elem-class)))))
@@ -253,7 +253,7 @@
          (index-type (%integer-type))
          (new-elem-type (get-arg-type descr 3))
          result-type)
-    (if (%pointer-to-vector-class-p (?representation vec-class))
+    (if (%pointer-to-vector-class? (?representation vec-class))
         (let ((elem-class (~vector-class-element-type vec-class)))
           (if elem-class
               (setq new-elem-type (class-as-type-expr elem-class)))))
@@ -297,9 +297,9 @@
 ;;  (let* ((obj-type (get-arg-type descr 1))
 ;;       (class-type (get-arg-type descr 2))
 ;;       (result-type (general-type)))
-;;    (if (subtype-expr-p obj-type class-type)
+;;    (if (subtype-expr? obj-type class-type)
 ;;      (setq result-type (not-%false-type))
-;;      (if (null? (meet-type-exprs-p obj-type class-type))
+;;      (if (null? (meet-type-exprs? obj-type class-type))
 ;;        (setq result-type (%false-type))))
 ;;    (ti-format2 t "~%Notice: %instance-of? with object ~A, class ~A and result ~A"
 ;;             (ti-print-string-no-cr obj-type)
@@ -322,20 +322,20 @@
 
 ;;;-----------------------------------------------------------------------------
 
-(defgeneric %pointer-to-vector-class-p (x))
+(defgeneric %pointer-to-vector-class? (x))
 
-(defmethod %pointer-to-vector-class-p (x)
+(defmethod %pointer-to-vector-class? (x)
   ())
 
-(defmethod %pointer-to-vector-class-p ((x <%pointer-to-vector>))
+(defmethod %pointer-to-vector-class? ((x <%pointer-to-vector>))
   x)
 
-;;(defgeneric %pointer-to-struct-class-p (x))
+;;(defgeneric %pointer-to-struct-class? (x))
 ;;
-;;(defmethod %pointer-to-struct-class-p (x)
+;;(defmethod %pointer-to-struct-class? (x)
 ;;  ())
 ;;
-;;(defmethod %pointer-to-struct-class-p ((x <%pointer-to-struct>))
+;;(defmethod %pointer-to-struct-class? ((x <%pointer-to-struct>))
 ;;  x)
 
 ;;;-----------------------------------------------------------------------------
@@ -343,16 +343,16 @@
 ;;;-----------------------------------------------------------------------------
 
 ;;; Answer whether descr is valid for then-case.
-(defun valid-for-then-p (fun            ;<fun>
+(defun valid-for-then? (fun            ;<fun>
                          descr)         ;<type-descr>
-  (ti-format2 t "~%valid-for-then-p ~A ~A"
+  (ti-format2 t "~%valid-for-then? ~A ~A"
               (?identifier fun)
               (ti-print-string descr))
   (let ((result (get-arg-type descr 0)))
     (let ((answer
            (if (general-type-p result)
                (if (eq fun %eq)
-                   (meet-type-exprs-p (get-arg-type descr 1)
+                   (meet-type-exprs? (get-arg-type descr 1)
                                       (get-arg-type descr 2))
                  t)
              (null? (%false-type-p result)))))
@@ -360,16 +360,16 @@
       answer)))
 
 ;;; Answer whether descr is valid for else-case.
-(defun valid-for-else-p (fun            ;<fun>
+(defun valid-for-else? (fun            ;<fun>
                          descr)         ;<type-descr>
-  (ti-format2 t "~%valid-for-else-p ~A ~A"
+  (ti-format2 t "~%valid-for-else? ~A ~A"
               (?identifier fun)
               (ti-print-string descr))
   (let ((result (get-arg-type descr 0)))
     (let ((answer
            (if (general-type-p result)
                (if (eq fun %neq)
-                   (meet-type-exprs-p (get-arg-type descr 1)
+                   (meet-type-exprs? (get-arg-type descr 1)
                                       (get-arg-type descr 2))
                  t)
              (%false-type-p result))))
