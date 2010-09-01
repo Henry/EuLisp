@@ -109,7 +109,7 @@
 ;;; providing some special objects to the compiler
 ;;;-----------------------------------------------------------------------------
 
-(%annotate-function %instance-of-p is-special-function instance-of-p)
+(%annotate-function %instance-of? is-special-function instance-of?)
 (%annotate-function %class-of is-special-function class-of)
 (%annotate-function %vector-class-instance-size is-special-function vector-class-instance-size)
 

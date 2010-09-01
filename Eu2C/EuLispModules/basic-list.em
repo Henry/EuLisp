@@ -47,7 +47,7 @@
 ;;; append
 ;;;-----------------------------------------------------------------------------
 (defun cons? (object)
-  (%instance-of-p object <cons>))
+  (%instance-of? object <cons>))
 
 (defun append (list1 list2)
   (if (cons? list1)

@@ -982,7 +982,7 @@ given in the constructor form" :class )
                 (cl:make-instance <predicate-fun>
                                   :range-and-domain (cl:vector %object %object))
                 ^(object)              ;; lambda-list
-                `(,%instance-of-p ,^object ,class)    ; body
+                `(,%instance-of? ,^object ,class)    ; body
                 ()))))
     ;;set signature for predicate
     (set-predicate-signature pred class)

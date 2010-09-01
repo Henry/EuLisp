@@ -43,7 +43,7 @@
            )
    syntax (%tail)
    export (%class-of
-           %instance-of-p
+           %instance-of?
            %subclass?
            typecheck
            %vector-class-instance-size))
@@ -111,7 +111,7 @@
             (%minus (%cast %unsigned-word-integer obj)
                     #%I8)))))
 
-(%define-function (%instance-of-p <object>)
+(%define-function (%instance-of? <object>)
   ((instance <object>)
    (class <class>))
   (%let ((class-of-instance <class> (%class-of instance)))

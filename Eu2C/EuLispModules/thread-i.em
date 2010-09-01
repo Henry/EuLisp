@@ -49,7 +49,7 @@
                   <class>
                   %cast
                   %void
-                  %instance-of-p)
+                  %instance-of?)
                  tail))
    syntax ((only (when
                   unless)
@@ -160,7 +160,7 @@
 (defun signal-with-threads (condition continuation . thread)
   (if (null? thread)
       (normal-signal condition continuation)
-    (if (%instance-of-p condition <thread-condition>)
+    (if (%instance-of? condition <thread-condition>)
         (if (thread? (car thread))
             (let ((condpair (cons
                              (cons condition continuation) ())))

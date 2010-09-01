@@ -284,15 +284,15 @@
 ;;    (filled-formal-descr result-type obj-type)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Generate a formal descriptor for %instance-of-p
+;;; Generate a formal descriptor for %instance-of?
 ;;;-----------------------------------------------------------------------------
 
-;;(defun convert-to-formal-descrs-%instance-of-p (descrs)
-;;  (mapcar #'convert-to-formal-descr-%instance-of-p descrs))
+;;(defun convert-to-formal-descrs-%instance-of? (descrs)
+;;  (mapcar #'convert-to-formal-descr-%instance-of? descrs))
 ;;
-;;(defgeneric convert-to-formal-descr-%instance-of-p (descr))
+;;(defgeneric convert-to-formal-descr-%instance-of? (descr))
 ;;
-;;(defmethod convert-to-formal-descr-%instance-of-p ((descr <type-descr>))
+;;(defmethod convert-to-formal-descr-%instance-of? ((descr <type-descr>))
 ;;  (get-previous-subs descr)
 ;;  (let* ((obj-type (get-arg-type descr 1))
 ;;       (class-type (get-arg-type descr 2))
@@ -301,7 +301,7 @@
 ;;      (setq result-type (not-%false-type))
 ;;      (if (null? (meet-type-exprs-p obj-type class-type))
 ;;        (setq result-type (%false-type))))
-;;    (ti-format2 t "~%Notice: %instance-of-p with object ~A, class ~A and result ~A"
+;;    (ti-format2 t "~%Notice: %instance-of? with object ~A, class ~A and result ~A"
 ;;             (ti-print-string-no-cr obj-type)
 ;;             (ti-print-string-no-cr class-type)
 ;;             (ti-print-string-no-cr result-type))

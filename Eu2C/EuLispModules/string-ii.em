@@ -56,7 +56,7 @@
 
 
 (defun string? (object)
-  (%instance-of-p object <string>))
+  (%instance-of? object <string>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; string-append

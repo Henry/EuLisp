@@ -34,7 +34,7 @@
     (only (t) basic-list)
     (only (eq) basic-compare)
     (only (<function>) function-i)
-    (only (<object> <class> %cast %void %instance-of-p %pjmpbuf
+    (only (<object> <class> %cast %void %instance-of? %pjmpbuf
                     %signed-word-integer) tail)
     (only (<dynamic> unwind stop-unwind-before continue-at
                      top-dynamic global-dynamic letcc-result) letcc)
@@ -119,7 +119,7 @@
   representation pointer-to-struct
   allocation multiple-type-card)
 
-(defun thread? (obj) (%instance-of-p obj <thread>))
+(defun thread? (obj) (%instance-of? obj <thread>))
 
 
 (%define-function (save-dynamics %void) ((d <saved-dynamics>))

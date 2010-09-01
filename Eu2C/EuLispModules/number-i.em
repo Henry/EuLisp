@@ -29,7 +29,7 @@
 
 (defun number?
   (i)
-  (%instance-of-p i <number>))
+  (%instance-of? i <number>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference

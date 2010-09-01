@@ -34,7 +34,7 @@
 
 (defun float?
   (i)
-  (%instance-of-p i <float>))
+  (%instance-of? i <float>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference

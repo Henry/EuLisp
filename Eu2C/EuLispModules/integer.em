@@ -35,7 +35,7 @@
 
 (defun integer?
   (i)
-  (%instance-of-p i <integer>))
+  (%instance-of? i <integer>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Even and odd

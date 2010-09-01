@@ -532,7 +532,7 @@
 
 (defmethod trans ((ID <symbol>))
   (let ((VAR (find-in-lex-env ID)))
-    (cond ((instance-of-p VAR <static>)
+    (cond ((instance-of? VAR <static>)
            (make-instance <var-ref> :var VAR))
           (t (constant-value VAR)))))
 

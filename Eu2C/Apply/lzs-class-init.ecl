@@ -53,7 +53,7 @@
  (eulisp1
   apply-standard
   debugging
-  (only (instance-of-p) el2lzs-main)
+  (only (instance-of?) el2lzs-main)
   (only (setf push)
         common-lisp)
   )

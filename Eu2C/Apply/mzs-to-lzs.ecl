@@ -463,7 +463,7 @@
         (if (function-call-p (car link))
             (let ((fun (?function (car link))))
               (if (eq fun %class-of) ()
-                (if (eq fun %instance-of-p)
+                (if (eq fun %instance-of?)
                     (let ((itype (vector-ref (?var-vec (?var-descr (car link))) 2)))
                       (if (member itype instl)
                           (collect-var-types1 (cdr links) obj sonst instl tl)

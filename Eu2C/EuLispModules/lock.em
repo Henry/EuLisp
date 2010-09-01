@@ -39,7 +39,7 @@
     (only (hold-threads
            cont-threads)
           thread-b)
-    (only (%instance-of-p
+    (only (%instance-of?
            %signed-word-integer
            <class>
            <object>)
@@ -63,7 +63,7 @@
   allocation multiple-type-card )
 
 (defun lock? (obj)
-  (%instance-of-p obj <lock>))
+  (%instance-of? obj <lock>))
 
 (%define-function (lock <lock>)
   ((l <lock>))

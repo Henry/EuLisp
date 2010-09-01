@@ -30,7 +30,7 @@
 
 (defun int?
   (i)
-  (%instance-of-p i <int>))
+  (%instance-of? i <int>))
 
 (defgeneric (converter <int>)
   (object))

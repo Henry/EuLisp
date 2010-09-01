@@ -266,12 +266,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  auxilliary functions
 ;;;-----------------------------------------------------------------------------
-(defun instance-of-p (instance class)
+(defun instance-of? (instance class)
   (subclass? (class-of instance) class))
 
 (defun find-instances-of (zws-class environment)
   (remove-if-not (lambda (obj)
-                   (instance-of-p obj zws-class))
+                   (instance-of? obj zws-class))
                  environment))
 
 (defun make-defined-sym (id)
@@ -286,7 +286,7 @@
             (add-to-symbol-env sym))
     sym))
 
-(export instance-of-p find-instances-of make-defined-sym)
+(export instance-of? find-instances-of make-defined-sym)
 
 ;;;-----------------------------------------------------------------------------
 ;;; transformation of a module definition: the main function

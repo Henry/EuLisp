@@ -80,7 +80,7 @@
  ;; apply-level-1-objects end
 
  ;; apply-level-2-objects begin
- export (%instance-of-p
+ export (%instance-of?
          %class-of
 
          %vector-class-instance-size
@@ -180,7 +180,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; apply-level-2-objects
 ;;;-----------------------------------------------------------------------------
-(deflocal %instance-of-p ())
+(deflocal %instance-of? ())
 (deflocal %class-of ())
 (deflocal %vector-class-instance-size ())
 (deflocal %list ())
@@ -370,7 +370,7 @@
          (setq allocate-on-multiple-size-card function))
 
         ;;apply-level-2-objects
-        (es::instance-of-p (setq %instance-of-p function))
+        (es::instance-of? (setq %instance-of? function))
         (es::class-of (setq %class-of function))
         (es::vector-class-instance-size
          (setq %vector-class-instance-size function))

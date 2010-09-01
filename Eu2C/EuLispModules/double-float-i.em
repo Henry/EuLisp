@@ -52,7 +52,7 @@
 
 (defun double-float?
   (i)
-  (%instance-of-p i <double-float>))
+  (%instance-of? i <double-float>))
 
 (%define-literal-expansion float
   `(%literal ,<double-float> dble (%literal ,%double-float ,value)))
