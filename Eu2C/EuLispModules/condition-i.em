@@ -78,7 +78,7 @@
    (continuation type <object>  default () keyword
                  continuation
                  accessor continuation ))
-  predicate conditionp
+  predicate condition?
   representation pointer-to-struct
   constructor (make-condition )
   allocation multiple-type-card)

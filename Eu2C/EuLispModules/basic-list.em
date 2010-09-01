@@ -20,13 +20,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;    basic-syntax provides all stuff which is needed to write simple macros and to
-;;    use quasiquote.
-;;;  Documentation:
+;;    basic-syntax provides all stuff which is needed to write simple macros and
+;;    to use quasiquote.
 ;;;  Notes:
-;;    append and cons? are defined in this module and should be imported from here.
-;;;  Requires:
-;;;  Problems:
+;;    append and cons? are defined in this module and should be imported from
+;;    here.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 (defmodule basic-list
@@ -137,5 +135,6 @@
     ((var var1) (atom? <object>))
     ((var var2) (atom? (and (not <null>) (not fpi-list)))))))
 
-
-) ;end of module basic-list
+;;;-----------------------------------------------------------------------------
+)  ;; end of module basic-list
+;;;-----------------------------------------------------------------------------

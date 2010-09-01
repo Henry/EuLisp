@@ -20,30 +20,24 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 (defmodule standard-generic-function
-
-
-  (import ( tail
-            function ; <function>
-            basic-list
-;;; printf-1 ; for debug
-            basic-compare ; eq
-            tail-introspection ; %class-of, %member
-;;;string ; for error messages
-;;; symbol
-;;; vector
-            (rename ((no-applicable-method-error no-applicable-method)) basic-condition)
-            )
-
-   ;; syntax
-   syntax (apply-level-1 basic-syntax))
+  (import (tail
+           function ; <function>
+           basic-list
+           ;; printf-1 ; for debug
+           basic-compare ; eq
+           tail-introspection ; %class-of, %member
+           ;; string ; for error messages
+           ;; symbol
+           ;; vector
+           (rename ((no-applicable-method-error
+                     no-applicable-method))
+                   basic-condition))
+   syntax (apply-level-1
+           basic-syntax))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  T E S T
@@ -608,4 +602,6 @@
 
 (%annotate-function add-method is-special-function add-method)
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

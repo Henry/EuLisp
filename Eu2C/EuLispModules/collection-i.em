@@ -1,4 +1,3 @@
-
 ;;; Copyright 1994-2010 Fraunhofer ISST
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -21,46 +20,35 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: auxiliary functions for collections
 ;;;  Description: collection gives the functionality described in A.2
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
-
-
 (defmodule collection-i
-  (import
-   (apply
-    tail
-    eulisp-kernel
-    (only (string-pointer) string-ii)
-    basic-list
-    (only (<string>)
-          string)
-    character
-    (only (strdup strlen) c-string-interface)
-    )
-
-   syntax
-   (tail
-    apply
-    syntax-0
-    setf
-    )
-
-   export
-   (primitive-setter-string-ref
-    primitive-string-length
-    primitive-string-ref
-    string-ref
-    string-ref-u
-    string-length
-    list?
-    nconc
-    and-aux)
-   )
+  (import (apply
+           tail
+           eulisp-kernel
+           (only (string-pointer)
+                 string-ii)
+           basic-list
+           (only (<string>)
+                 string)
+           character
+           (only (strdup
+                  strlen)
+                 c-string-interface))
+   syntax (tail
+           apply
+           syntax-0
+           setf)
+   export (primitive-setter-string-ref
+           primitive-string-length
+           primitive-string-ref
+           string-ref
+           string-ref-u
+           string-length
+           list?
+           nconc
+           and-aux))
 
 ;;first the aux functions for strings
 
@@ -140,4 +128,6 @@
 
 (defun and-aux (a b) (if a (if b t ()) ()))
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

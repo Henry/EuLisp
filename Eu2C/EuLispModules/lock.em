@@ -20,24 +20,38 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: semaphores as part of the thread implementation
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Jens Bimberg
 ;;;-----------------------------------------------------------------------------
 (defmodule lock
-  (import
-   ((only (<T-LST> make-T-LST First <thread>) thread-ii)
-    (only (wait-in-T-LST TL-empty TL-revolve TL-on-top
-                         TL-leave-first The-Sequential-Set thread-yield) thread-i)
-    (only (hold-threads cont-threads) thread-b)
-    (only (%instance-of-p %signed-word-integer <class> <object>) tail)
-    (only (eq) basic-compare)
-    (only (<symbol>) basic-symbol)
-    )
-   export
-   (<lock> lock? lock unlock))
+  (import ((only (<T-LST>
+                  make-T-LST
+                  First
+                  <thread>)
+                 thread-ii)
+    (only (wait-in-T-LST
+           TL-empty
+           TL-revolve
+           TL-on-top
+           TL-leave-first
+           The-Sequential-Set
+           thread-yield)
+          thread-i)
+    (only (hold-threads
+           cont-threads)
+          thread-b)
+    (only (%instance-of-p
+           %signed-word-integer
+           <class>
+           <object>)
+          tail)
+    (only (eq)
+          basic-compare)
+    (only (<symbol>)
+          basic-symbol))
+   export (<lock>
+           lock?
+           lock
+           unlock))
 
 (%define-standard-class (<lock> <class>)
   <object>

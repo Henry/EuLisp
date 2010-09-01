@@ -20,48 +20,85 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich, Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule char-tables
-
-  (import
-   ((only (%string <class> <object>
-                   %unsigned-word-integer %signed-word-integer %signed-byte-integer
-                   %signed-half-integer %gt %ge %lt %plus %minus %le %eq) tail))
-
-   syntax
-   (tail)
-
-   export
-   ($closed-bracket        ;;$opend-bracket
-    $point
-    $char-string $char-single-escape $char-EOF $char-formfeed
-    $char-return $char-newline
-    $char-open-bracket $char-string-hex-l $char-string-hex-u
-    $char-control-extension
-    $char-tilde $char-ascii-a-l $char-ascii-a-u $char-ascii-% $char-ascii-s-l
-    $char-ascii-b-l $char-ascii-c-l $char-ascii-d-l $char-ascii-e-l
-    $char-ascii-f-l $char-ascii-g-l $char-ascii-o-l $char-ascii-r-l
-    $char-ascii-t-l $char-ascii-& $char-ascii-page-seperator
-    $char-ascii-tab $char-ascii-extension
-    $char-ascii-plus $char-ascii-minus $char-ascii-point
-    $char-ascii-alert $char-ascii-backspace $char-ascii-delete
-    $char-ascii-vertical-tab $char-ascii-l-l $char-ascii-n-l
-    $char-ascii-v-l $char-ascii-zero $char-ascii-space
-    *char-class-token*
-    char-class
-    *token-states* half-vec-ref half-vec-vec-ref
-    letter? upper? lower? digit? other?
-    peculiar-constituent? normal-constituent?
-    extended-level-0-character?
-    digit2figure10 digit2figure16
-    upper2lower lower2upper)
-   )
+  (import ((only (%string
+                  <class>
+                  <object>
+                  %unsigned-word-integer
+                  %signed-word-integer
+                  %signed-byte-integer
+                  %signed-half-integer
+                  %gt
+                  %ge
+                  %lt
+                  %plus
+                  %minus
+                  %le
+                  %eq)
+                 tail))
+   syntax (tail)
+   export ($closed-bracket
+           ;;$opened-bracket
+           $point
+           $char-string
+           $char-single-escape
+           $char-EOF $char-formfeed
+           $char-return
+           $char-newline
+           $char-open-bracket
+           $char-string-hex-l
+           $char-string-hex-u
+           $char-control-extension
+           $char-tilde
+           $char-ascii-a-l
+           $char-ascii-a-u
+           $char-ascii-%
+           $char-ascii-s-l
+           $char-ascii-b-l
+           $char-ascii-c-l
+           $char-ascii-d-l
+           $char-ascii-e-l
+           $char-ascii-f-l
+           $char-ascii-g-l
+           $char-ascii-o-l
+           $char-ascii-r-l
+           $char-ascii-t-l
+           $char-ascii-&
+           $char-ascii-page-seperator
+           $char-ascii-tab
+           $char-ascii-extension
+           $char-ascii-plus
+           $char-ascii-minus
+           $char-ascii-point
+           $char-ascii-alert
+           $char-ascii-backspace
+           $char-ascii-delete
+           $char-ascii-vertical-tab
+           $char-ascii-l-l
+           $char-ascii-n-l
+           $char-ascii-v-l
+           $char-ascii-zero
+           $char-ascii-space
+           *char-class-token*
+           char-class
+           *token-states*
+           half-vec-ref
+           half-vec-vec-ref
+           letter?
+           upper?
+           lower?
+           digit?
+           other?
+           peculiar-constituent?
+           normal-constituent?
+           extended-level-0-character?
+           digit2figure10
+           digit2figure16
+           upper2lower
+           lower2upper))
 
 ;; special characters
 (%define-constant $char-return        #%i13) ;; signed mšglich
@@ -313,7 +350,7 @@
 ;;   state-number/  |   new-state,result,error
 ;;   description    |       next-action
 ;;
-;;                                                          #    12 (  13 )  14 "  15 ;  16 `  17 '  18 ,
+;; #    12 (  13 )  14 "  15 ;  16 `  17 '  18 ,
 ;;                0     1     2     3    4    5    6    7   8    9    10    11
 ;;----------------------------------------------------------------------------
 ;;               | al-| d,D| di-|  + |  - |  . |  \ |  | |ter-|whi-| eof| err|
@@ -380,56 +417,70 @@
   allocation multiple-type-card)
 
 (%define-constant *token-states*
-  (%literal <half-vec-vec> ()
-            ((%literal <half-vec> ()   ;; 0
-                       (#%h257 #%h257 #%h1282 #%h259 #%h515
-                               #%h1284 ; action (5) == 1280, result 4 == 4
-                               #%h773 #%h774 #%h788 #%h768 #%h2100
-                               #%h2099
-                               #%h789 ; action (3) == 768, result [1] == 21
-                               #%h790 #%h791 #%h792 #%h793 #%h794 #%h795))
-             (%literal <half-vec> ()   ;; 1
-                       (#%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h773 #%h774 #%h1053 #%h797 #%h1053
-                               #%h2099 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053))
-             (%literal <half-vec> ()   ;; 2
-                       (#%h296 #%h296 #%h1282 #%h296 #%h296 #%h1287 #%h1832 #%h1832 #%h1054 #%h798 #%h1054
-                               #%h2099 #%h1054 #%h1054 #%h1054 #%h1054 #%h1054 #%h1054 #%h1054))
-             (%literal <half-vec> ()   ;; 3
-                       (#%h257 #%h257 #%h1282
-                               #%h257 #%h257 #%h1288 #%h773 #%h774 #%h1054
-                               #%h797 #%h1053
-                               #%h2099 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053))
-             (%literal <half-vec> ()   ;; 4
-                       (#%h257 #%h257 #%h1287 #%h257 #%h257 #%h257 #%h773 #%h774 #%h1068 #%h796 #%h1052
-                               #%h2099 #%h1068 #%h1068 #%h1068 #%h1068 #%h1068 #%h1068 #%h1068))
-             (%literal <half-vec> ()   ;; 5
-                       (#%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h2100
-                               #%h2099 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257))
-             (%literal <half-vec> ()   ;; 6
-                       (#%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h777 #%h769 #%h262 #%h262 #%h2100
-                               #%h2099 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262))
-             (%literal <half-vec> ()   ;; 7
-                       (#%h297 #%h1546 #%h1287
-                               #%h298 #%h298
-                               #%h257 ; 1(1) statt [23] (1) #%h299
-                               #%h1838 #%h1839 #%h1055 #%h799 #%h1055
-                               #%h2099 #%h1055 #%h1055 #%h1055 #%h1055 #%h1055 #%h1055 #%h1055))
-             (%literal <half-vec> ()   ;; 8
-                       (#%h257 #%h257 #%h1287 #%h257 #%h257 #%h257 #%h773 #%h774 #%h1053 #%h797 #%h1053
-                               #%h2099 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053))
-             (%literal <half-vec> ()   ;; 9
-                       (#%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h2100
-                               #%h2099 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262))
-             (%literal <half-vec> ()   ;; 10
-                       (#%h304 #%h304 #%h1292 #%h267 #%h1291 #%h304 #%h1840 #%h1840 #%h1073 #%h817 #%h2100
-                               #%h2099 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073))
-             (%literal <half-vec> ()
-                       (#%h304 #%h304 #%h1292 #%h306 #%h306 #%h304 #%h1840 #%h1840 #%h1073 #%h817 #%h2100
-                               #%h2099 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073))
-             (%literal <half-vec> ()
-                       (#%h304 #%h304 #%h1292 #%h304 #%h304 #%h304 #%h1840 #%h1840 #%h1056 #%h800 #%h1056
-                               #%h2099 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056))
-             )))
+  (%literal
+   <half-vec-vec> ()
+   ((%literal
+     <half-vec> ()   ;; 0
+     (#%h257 #%h257 #%h1282 #%h259 #%h515
+             #%h1284 ; action (5) == 1280, result 4 == 4
+             #%h773 #%h774 #%h788 #%h768 #%h2100
+             #%h2099
+             #%h789 ; action (3) == 768, result [1] == 21
+             #%h790 #%h791 #%h792 #%h793 #%h794 #%h795))
+    (%literal
+     <half-vec> ()   ;; 1
+     (#%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h773 #%h774 #%h1053 #%h797 #%h1053
+             #%h2099 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053))
+    (%literal
+     <half-vec> ()   ;; 2
+     (#%h296 #%h296 #%h1282 #%h296 #%h296 #%h1287 #%h1832 #%h1832 #%h1054 #%h798 #%h1054
+             #%h2099 #%h1054 #%h1054 #%h1054 #%h1054 #%h1054 #%h1054 #%h1054))
+    (%literal
+     <half-vec> ()   ;; 3
+     (#%h257 #%h257 #%h1282
+             #%h257 #%h257 #%h1288 #%h773 #%h774 #%h1054
+             #%h797 #%h1053
+             #%h2099 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053))
+    (%literal
+     <half-vec> ()   ;; 4
+     (#%h257 #%h257 #%h1287 #%h257 #%h257 #%h257 #%h773 #%h774 #%h1068 #%h796 #%h1052
+             #%h2099 #%h1068 #%h1068 #%h1068 #%h1068 #%h1068 #%h1068 #%h1068))
+    (%literal
+     <half-vec> ()   ;; 5
+     (#%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h2100
+             #%h2099 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257 #%h257))
+    (%literal
+     <half-vec> ()   ;; 6
+     (#%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h777 #%h769 #%h262 #%h262 #%h2100
+             #%h2099 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262))
+    (%literal
+     <half-vec> ()   ;; 7
+     (#%h297 #%h1546 #%h1287
+             #%h298 #%h298
+             #%h257 ; 1(1) statt [23] (1) #%h299
+             #%h1838 #%h1839 #%h1055 #%h799 #%h1055
+             #%h2099 #%h1055 #%h1055 #%h1055 #%h1055 #%h1055 #%h1055 #%h1055))
+    (%literal
+     <half-vec> ()   ;; 8
+     (#%h257 #%h257 #%h1287 #%h257 #%h257 #%h257 #%h773 #%h774 #%h1053 #%h797 #%h1053
+             #%h2099 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053 #%h1053))
+    (%literal
+     <half-vec> ()   ;; 9
+     (#%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h2100
+             #%h2099 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262 #%h262))
+    (%literal <half-vec> ()   ;; 10
+              (#%h304 #%h304 #%h1292 #%h267 #%h1291 #%h304 #%h1840 #%h1840
+                      #%h1073 #%h817 #%h2100 #%h2099 #%h1073 #%h1073 #%h1073
+                      #%h1073 #%h1073 #%h1073 #%h1073))
+    (%literal
+     <half-vec> ()
+     (#%h304 #%h304 #%h1292 #%h306 #%h306 #%h304 #%h1840 #%h1840 #%h1073 #%h817 #%h2100
+             #%h2099 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073 #%h1073))
+    (%literal
+     <half-vec> ()
+     (#%h304 #%h304 #%h1292 #%h304 #%h304 #%h304 #%h1840 #%h1840 #%h1056 #%h800 #%h1056
+             #%h2099 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056))
+    )))
 
 (%define-function (upper? <object>)
   ((ch %signed-word-integer))
@@ -513,4 +564,6 @@
       (%minus digit #%i48) ;; char-code of zero in ASCCI
       )))
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

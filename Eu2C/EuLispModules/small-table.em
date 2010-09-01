@@ -51,7 +51,7 @@
   constructor (make-table-entry table-key
                                 table-value
                                 table-next)
-  predicate table-entry-p)
+  predicate table-entry?)
 
 (%define-standard-class (<small-table> <class>)
   <object>
