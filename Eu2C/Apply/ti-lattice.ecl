@@ -367,7 +367,7 @@
 (defun min-class (classes)
   (let ((min-class (car classes)))
     (dolist (class (cdr classes))
-            (if (subclassp class min-class)
+            (if (subclass? class min-class)
                 (setq min-class class)))
     min-class))
 
@@ -378,12 +378,12 @@
 ;;  (if classes
 ;;      (let ((first-class (car classes)))
 ;;      (min-class1 (cdr classes)
-;;                         (if (subclassp first-class min-class)
+;;                         (if (subclass? first-class min-class)
 ;;                             first-class
 ;;                           min-class)))
 ;;    min-class))
 
-(defun subclassp (class1 class2)
+(defun subclass? (class1 class2)
   (member class2 (~class-precedence-list class1)))
 
 ;;; Add a lattice type at a specified position into a lattice.

@@ -54,10 +54,10 @@
     prin open close
     stream? file-stream?
     input-stream? output-stream? ; nicht in el0.99
-    ;; io-stream-p  ; nicht in el0.99
+    ;; io-stream?  ; nicht in el0.99
     character-stream?
-    ;; binary-stream-p  ; nicht in el0.99
-    open-p ; nicht in el0.99
+    ;; binary-stream?  ; nicht in el0.99
+    open? ; nicht in el0.99
     flush print
     ;; write-unit read-unit peek-unit ; nicht in el0.99
     standard-input-stream standard-output-stream

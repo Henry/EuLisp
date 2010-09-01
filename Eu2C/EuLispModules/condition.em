@@ -77,7 +77,7 @@
 (defmacro defcondition (condition-class-name
                         super-class-name
                         slot-descriptions . init-options)
-  `(progn (if (%subclassp (if ,super-class-name ,super-class-name <condition>)
+  `(progn (if (%subclass? (if ,super-class-name ,super-class-name <condition>)
                           <condition>)
               ()
             (error defcondition-error-string <condition>))

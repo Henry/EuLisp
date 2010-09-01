@@ -37,7 +37,7 @@
     (only (<symbol>) basic-symbol)
     )
    export
-   (<lock> lockp lock unlock))
+   (<lock> lock? lock unlock))
 
 (%define-standard-class (<lock> <class>)
   <object>
@@ -48,7 +48,7 @@
   constructor (make-lock) representation pointer-to-struct
   allocation multiple-type-card )
 
-(defun lockp (obj)
+(defun lock? (obj)
   (%instance-of-p obj <lock>))
 
 (%define-function (lock <lock>)

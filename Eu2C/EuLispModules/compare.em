@@ -26,7 +26,7 @@
 ;;;  Problems:
 ;;    The default method for equal cannot work yet because an additional slot in class
 ;;    objects is needed which contains a list of slot readers.
-;;    Introduce something like subclassp to fasten eql
+;;    Introduce something like subclass? to fasten eql
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -77,9 +77,9 @@
     (let ((class1 (%class-of object1))
           (class2 (%class-of object2)))
       (if (eq class1 class2)
-          (cond ((%subclassp class1 <number>)
+          (cond ((%subclass? class1 <number>)
                  (binary= object1 object2))
-                ((%subclassp class1 <character>)
+                ((%subclass? class1 <character>)
                  (equal-character object1 object2))
                 (t () ))
         () ))))
@@ -88,9 +88,9 @@
 ;;  (defun eql (object1 object2)
 ;;    (and (eq (%class-of object1)
 ;;             (%class-of object2))
-;;         (cond ((%subclassp object1 <number>)
+;;         (cond ((%subclass? object1 <number>)
 ;;                (binary= object1 object2))
-;;               ((%subclassp object1 <character>)
+;;               ((%subclass? object1 <character>)
 ;;                (equal object1 object2))
 ;;               (t (eq object1 object2)))))
 

@@ -84,10 +84,10 @@
              ensure-open-character-output-stream
              file-descriptor-pointer make-file-stream
              input-stream? output-stream?
-             ;; io-stream-p
+             ;; io-stream?
              character-stream?
-             ;; binary-stream-p
-             open-p
+             ;; binary-stream?
+             open?
              stream-direction
              stream-opened ensure-open-input-stream ensure-open-stream
              convert-stream-string
@@ -600,7 +600,7 @@
    (file-descriptor-pointer stream)) ;;)
   ())
 
-(defun open-p (stream)
+(defun open? (stream)
   (let ((lvstate (stream-opened stream)))
     (if (eq 'open lvstate)
         stream
@@ -834,7 +834,7 @@
 ;;          (lvpos-ini (get-option 'positionable inilist lvpositionable)))
 ;;      ;          (if (stream-direction? (cadr inilist))
 ;;      ;            (cerror "Missmatch in the argument list of open" <stream-condition>))
-;;      ;            (if (stream-unit-p (cadr inilist))
+;;      ;            (if (stream-unit? (cadr inilist))
 ;;      ;              (cerror "Missmatch in the argument list of open" <stream-condition>))
 ;;      (setf-file-descriptor-pointer stream
 ;;            (open-fd (string-pointer handle)
@@ -848,14 +848,14 @@
 ;;      (setq opened-streams (cons stream opened-streams))))
 ;;      stream)
 
-;;(defun io-stream-p (obj) ; nicht notwendig
+;;(defun io-stream? (obj) ; nicht notwendig
 ;;  (if (stream? obj)
 ;;    (if (iostream? (stream-direction obj))
 ;;      obj
 ;;      ())
 ;;    ()))
 
-;;(defun binary-stream-p (obj)
+;;(defun binary-stream? (obj)
 ;;  (if (stream? obj)
 ;;    (if (binarystream? (stream-transaction-unit obj))
 ;;      obj

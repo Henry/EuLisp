@@ -59,9 +59,9 @@
          debugging
          name-of-fun
          inline-method ; transform-call-next-method
-         ;; transform-next-method-p
+         ;; transform-next-method?
          ;; arg-error in-generic-fun in-method
-         apply-funs ; %cons, typecheck, %call-next-method, %next-method-p
+         apply-funs ; %cons, typecheck, %call-next-method, %next-method?
          expand-literal
          tail-module ; %cast
          (only (append
@@ -635,11 +635,11 @@
     (if (and (fun-p fun) (?reduce fun))
         (reduce-app (?reduce fun) arg-list form)
       (if (eq fun %call-next-method)
-          (dynamic-let ((next-method-params
+          (dynamic-let ((next-method?arams
                          (?params (?fun (dynamic in-method)))))
                        (transform-call-next-method arg-list form))
-        (if (eq fun %next-method-p)
-            (transform-next-method-p arg-list form)
+        (if (eq fun %next-method?)
+            (transform-next-method? arg-list form)
           (progn
             (setf (?arg-list form)
                   (if (eq fun %cast)

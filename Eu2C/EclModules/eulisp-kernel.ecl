@@ -62,7 +62,7 @@
            labels
            flet
            unwind-protect
-           next-method-p
+           next-method?
            call-next-method
            funcall
            apply)

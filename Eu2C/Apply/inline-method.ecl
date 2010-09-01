@@ -48,16 +48,16 @@
  export (inline-method
          in-generic-fun
          in-method
-         next-method-params
+         next-method?arams
          transform-call-next-method
-         transform-next-method-p
+         transform-next-method?
          arg-error
          more-specific-p))
 
 
 (defvar in-generic-fun ())
 (defvar in-method ())
-(defvar next-method-params ())
+(defvar next-method?arams ())
 
 (defun transform-call-next-method (arg-list form)
   (let ((gf (dynamic in-generic-fun))
@@ -68,7 +68,7 @@
     (if (and gf mf)
         (let ((nm (next-specific-method mf gf)))
           (if nm
-              (let ((params (dynamic next-method-params)))
+              (let ((params (dynamic next-method?arams)))
                 (make <app>
                       :function nm
                       :arg-list (mk-var-ref (?var-list params)
@@ -86,18 +86,18 @@
       (cons (make <var-ref> :var (car vars))
             (mk-var-ref (cdr vars) rest))
     (if rest (list (make <var-ref> :var rest)) ())))
-(defun transform-next-method-p (arg-list form)
+(defun transform-next-method? (arg-list form)
   (let ((gf (dynamic in-generic-fun))
         (mf (dynamic in-method)))
     (if arg-list
-        (arg-error %next-method-p (length arg-list) "too many")
+        (arg-error %next-method? (length arg-list) "too many")
       ())
     (if (and gf mf)
         (let ((nm (next-specific-method mf gf)))
           (if nm (expand-literal ;^t
                   66) ()))  ; hock !!!
       (progn
-        (outside-error %next-method-p)
+        (outside-error %next-method?)
         form))))
 
 (defun next-specific-method (meth gf)
@@ -279,8 +279,8 @@
                    ())))
     (if (eq fun %call-next-method)
         (transform-call-next-method (?arg-list form) form)
-      (if (eq fun %next-method-p)
-          (transform-next-method-p (?arg-list form) form)
+      (if (eq fun %next-method?)
+          (transform-next-method? (?arg-list form) form)
         (make-instance <app>
                        :function (if newvar
                                      (make-instance <var-ref> :var (cdr newvar)) fun)

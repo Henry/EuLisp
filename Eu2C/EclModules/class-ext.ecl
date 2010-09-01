@@ -37,14 +37,14 @@
          level-1-eulisp)
  syntax (level-1-eulisp
          apply-standard)
- export (subclassp
+ export (subclass?
          define-singleton-apply-class)
  expose ((only (defstandardclass
                  make-eulisp-class-id
                  make-eulisp-class-id)
                apply-standard)))
 
-(defun subclassp (class1 class2)
+(defun subclass? (class1 class2)
   (subtypep class1 class2))
 
 ;;;-----------------------------------------------------------------------------

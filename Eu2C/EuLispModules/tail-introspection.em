@@ -44,7 +44,7 @@
    syntax (%tail)
    export (%class-of
            %instance-of-p
-           %subclassp
+           %subclass?
            typecheck
            %vector-class-instance-size))
 
@@ -126,14 +126,14 @@
             ())
           )))
 
-(%define-function (%subclassp <object>)
+(%define-function (%subclass? <object>)
   ((c1 <class>)
    (c2 <class>))
   (if (%member c2 (%select c1 <class> class-precedence-list))
       't
     ()))
 
-(%annotate-function %subclassp is-special-function subclassp)
+(%annotate-function %subclass? is-special-function subclass?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type Check
@@ -149,7 +149,7 @@
    (class-list <list>))
   (if (null? class-list)
       (typecheck-error object class-list)
-    (if (%subclassp class (car class-list))
+    (if (%subclass? class (car class-list))
         object
       (typecheck1 class object (cdr class-list)))))
 

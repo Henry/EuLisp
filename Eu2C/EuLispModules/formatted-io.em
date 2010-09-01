@@ -56,7 +56,7 @@
            $char-ascii-t-l $char-ascii-& $char-ascii-page-seperator
            $char-ascii-tab $char-ascii-point
            $char-string-hex-l
-           digitp digit2figure10
+           digit? digit2figure10
            char-class *char-class-token*
            ) char-tables)
     (only (print-based-int-0
@@ -164,7 +164,7 @@
       (%let ((ch %signed-word-integer
                  (%cast %signed-word-integer (%extract fstring-c
                                                        cur-index))))
-            (if (digitp ch)
+            (if (digit? ch)
                 (format2 stream fstring-c (%plus #%i1 cur-index) length args
                          (%plus (%mult fp1-n #%i10)
                                 (digit2figure10 ch))
@@ -362,7 +362,7 @@
       (%let ((ch %signed-word-integer
                  (%cast %signed-word-integer (%extract fstring-c
                                                        cur-index))))
-            (if (digitp ch)
+            (if (digit? ch)
                 (scan2 stream fstring-c (%plus #%i1 cur-index) length
                        (%plus (%mult fp1-n #%i10)
                               (digit2figure10 ch)))

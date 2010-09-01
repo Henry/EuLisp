@@ -438,7 +438,7 @@
 
 (defun incompatible-method-domain-p (method-domain gf-domain)
   (cond ((null? method-domain) ())
-        ((~subclassp (car method-domain)
+        ((~subclass? (car method-domain)
                      (car gf-domain))
          (incompatible-method-domain-p (cdr method-domain)
                                        (cdr gf-domain)))

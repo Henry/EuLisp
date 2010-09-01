@@ -95,7 +95,7 @@
          test-functions
          no-applicable-method-error
          %call-next-method
-         %next-method-p
+         %next-method?
          typecheck)
  ;; apply-level-2-objects end
 
@@ -145,9 +145,9 @@
          ;; dynamic method table extension
          %add-method
 
-         ;; subclassp, not yet needed directly by the compiler, it is only used
+         ;; subclass?, not yet needed directly by the compiler, it is only used
          ;; in the macro defcondition
-         %subclassp)
+         %subclass?)
  export (provide-compiler-info))
 
 ;;;-----------------------------------------------------------------------------
@@ -193,7 +193,7 @@
 (deflocal test-functions ())
 (deflocal no-applicable-method-error ())
 (deflocal %call-next-method ())
-(deflocal %next-method-p ())
+(deflocal %next-method? ())
 (deflocal typecheck ())
 
 ;;;-----------------------------------------------------------------------------
@@ -246,7 +246,7 @@
 ;; dynamic method table extension
 (deflocal %add-method ())
 
-(deflocal %subclassp ())
+(deflocal %subclass? ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Other objects
@@ -380,13 +380,13 @@
         (es::no-applicable-method-error
          (setq no-applicable-method-error function))
         (es::call-next-method (setq %call-next-method function))
-        (es::next-method-p (setq %next-method-p function))
+        (es::next-method? (setq %next-method? function))
         (es::typecheck (setq typecheck function))
 
         ;;others
         (es::add-symbol (setq %add-symbol function))
         (es::add-method (setq %add-method function))
-        (es::subclassp (setq %subclassp function))
+        (es::subclass? (setq %subclass? function))
         (t (error-invalid-special-specification keyword type))))
 
 ;;;-----------------------------------------------------------------------------

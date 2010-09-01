@@ -124,7 +124,7 @@
 
 (%annotate-function no-applicable-method-error is-special-function no-applicable-method-error)
 (%annotate-function call-next-method is-special-function call-next-method)
-(%annotate-function next-method-p is-special-function next-method-p)
+(%annotate-function next-method? is-special-function next-method?)
 (%annotate-function typecheck is-special-function typecheck)
 
 )

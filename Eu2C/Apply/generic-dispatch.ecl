@@ -442,7 +442,7 @@
 (defun gf-with-closure-p (gf methods)
   ())
 
-(defun gf-with-next-method-p (gf methods)
+(defun gf-with-next-method? (gf methods)
   ())
 
 ;;;-----------------------------------------------------------------------------
@@ -453,7 +453,7 @@
   (if (method-def-p few-methods) (?fun few-methods)
     ;; few-methods is a dedecision tree
     (dynamic-let ((in-generic-fun gf)
-                  (next-method-params (?params gf)))
+                  (next-method?arams (?params gf)))
                  (let* ((params (?params gf))
                         (d-vars (?discrimination-arguments gf))
                         (d-args (make-d-var-refs d-vars (?var-list params)))
@@ -691,7 +691,7 @@
   ;; methods may be empty !!!
   (let ((few-methods (few-methods-p gf methods))
         (closure (gf-with-closure-p gf methods))
-        (next-method (gf-with-next-method-p gf methods))
+        (next-method (gf-with-next-method? gf methods))
         )
     (if methods
         (if few-methods

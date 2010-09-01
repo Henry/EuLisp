@@ -56,7 +56,7 @@
     *char-class-token*
     char-class
     *token-states* half-vec-ref half-vec-vec-ref
-    letter? upper? lower? digitp other?
+    letter? upper? lower? digit? other?
     peculiar-constituent? normal-constituent?
     extended-level-0-character?
     digit2figure10 digit2figure16
@@ -458,7 +458,7 @@
       'true
     (lower? ch)))
 
-(%define-function (digitp <object>)
+(%define-function (digit? <object>)
   ((ch %signed-word-integer))
   (if (%lt ch #%i48) ; 0
       ()
@@ -488,7 +488,7 @@
   ((ch %signed-word-integer))
   (if (peculiar-constituent? ch) ;A
       'true
-    (digitp ch)))
+    (digit? ch)))
 
 (%define-function (extended-level-0-character? <object>)
   ((ch %signed-word-integer))

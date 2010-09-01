@@ -31,13 +31,13 @@
 
   (import (apply-level-1)
    syntax (apply-level-1 basic-syntax)
-   export (call-next-method next-method-p)
+   export (call-next-method next-method?)
    )
 
 (defun call-next-method ()
   ())
 
-(defun next-method-p ()
+(defun next-method? ()
   ())
 
 ) ; end of module basic-std-gf

@@ -69,7 +69,7 @@
                 mapcan
                 member
                 reverse
-                subclassp
+                subclass?
                 nconc
                 get
                 list?
@@ -267,7 +267,7 @@
 ;;;  auxilliary functions
 ;;;-----------------------------------------------------------------------------
 (defun instance-of-p (instance class)
-  (subclassp (class-of instance) class))
+  (subclass? (class-of instance) class))
 
 (defun find-instances-of (zws-class environment)
   (remove-if-not (lambda (obj)

@@ -84,7 +84,7 @@
  ;;--- General
  export (~initialize
          ~class-of
-         ~subclassp)
+         ~subclass?)
 
  export (%object
          %class
@@ -250,7 +250,7 @@
 
 (defgeneric ~class-of (object))
 
-(defun ~subclassp (sub super)
+(defun ~subclass? (sub super)
   (member super (?class-precedence-list sub)))
 
 ;;;-----------------------------------------------------------------------------
