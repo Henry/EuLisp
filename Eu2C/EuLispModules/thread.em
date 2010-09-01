@@ -71,7 +71,7 @@
            (only (with-handler)
                  condition))
    export (<thread>
-           threadp
+           thread?
            thread-reschedule
            current-thread
            thread-start

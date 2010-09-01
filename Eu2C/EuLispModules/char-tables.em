@@ -56,8 +56,8 @@
     *char-class-token*
     char-class
     *token-states* half-vec-ref half-vec-vec-ref
-    letterp upperp lowerp digitp otherp
-    peculiar-constituent-p normal-constituent-p
+    letter? upper? lower? digitp other?
+    peculiar-constituent? normal-constituent?
     extended-level-0-character?
     digit2figure10 digit2figure16
     upper2lower lower2upper)
@@ -431,13 +431,13 @@
                                #%h2099 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056 #%h1056))
              )))
 
-(%define-function (upperp <object>)
+(%define-function (upper? <object>)
   ((ch %signed-word-integer))
   (if (%gt ch #%i64)
       (if (%gt ch #%i90)
           () 'true) ()))
 
-(%define-function (lowerp <object>)
+(%define-function (lower? <object>)
   ((ch %signed-word-integer))
   (if (%lt ch #%i97) ;a
       ()
@@ -452,11 +452,11 @@
   ((ch %signed-word-integer))
   (%plus $char-ascii-a-u (%minus ch $char-ascii-a-l)))
 
-(%define-function (letterp <object>)
+(%define-function (letter? <object>)
   ((ch %signed-word-integer))
-  (if (upperp ch) ;A
+  (if (upper? ch) ;A
       'true
-    (lowerp ch)))
+    (lower? ch)))
 
 (%define-function (digitp <object>)
   ((ch %signed-word-integer))
@@ -465,7 +465,7 @@
     (if (%le ch #%i57) ; 9
         'true ())))
 
-(%define-function (otherp <object>)
+(%define-function (other? <object>)
   ((ch %signed-word-integer))
   (if (%lt ch #%i42) ; *
       ()
@@ -478,15 +478,15 @@
         (if (%le ch #%i62) ; >
             'true ())))))
 
-(%define-function (peculiar-constituent-p <object>)
+(%define-function (peculiar-constituent? <object>)
   ((ch %signed-word-integer))
-  (if (letterp ch) ;A
+  (if (letter? ch) ;A
       'true
-    (otherp ch)))
+    (other? ch)))
 
-(%define-function (normal-constituent-p <object>)
+(%define-function (normal-constituent? <object>)
   ((ch %signed-word-integer))
-  (if (peculiar-constituent-p ch) ;A
+  (if (peculiar-constituent? ch) ;A
       'true
     (digitp ch)))
 

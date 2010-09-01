@@ -114,10 +114,10 @@
                   $char-ascii-space
                   $char-ascii-e-l
                   $char-ascii-d-l
-                  letterp
-                  otherp
-                  peculiar-constituent-p
-                  normal-constituent-p
+                  letter?
+                  other?
+                  peculiar-constituent?
+                  normal-constituent?
                   extended-level-0-character?)
                  char-tables)
            (only (<string-stack>
@@ -467,11 +467,11 @@
   (%let ((length %signed-word-integer (strlen object))
          (ch1 %signed-word-integer
               (%cast %signed-word-integer (%extract object #%I0))))
-        (if (letterp ch1)
+        (if (letter? ch1)
             (progn
               (%write-unit stream ch1)
               (write-symbol-nc stream object #%i1 length))
-          (if (otherp ch1)
+          (if (other? ch1)
               (write-symbol-2-other ch1 length object stream)
             (progn
               (%write-unit stream $char-single-escape)
@@ -488,7 +488,7 @@
           (%write-unit stream ch1)
         (%let ((ch2 %signed-word-integer
                     (%cast %signed-word-integer (%extract object #%I1))))
-              (if (peculiar-constituent-p ch2)
+              (if (peculiar-constituent? ch2)
                   ()
                 (%write-unit stream $char-single-escape))
               (%write-unit stream ch1)
@@ -499,7 +499,7 @@
             (%write-unit stream ch1)
           (%let ((ch2 %signed-word-integer
                       (%cast %signed-word-integer (%extract object #%I1))))
-                (if (peculiar-constituent-p ch2)
+                (if (peculiar-constituent? ch2)
                     ()
                   (%write-unit stream $char-single-escape))
                 (%write-unit stream ch1)
@@ -512,7 +512,7 @@
                 (%write-unit stream ch1))
             (%let ((ch2 %signed-word-integer
                         (%cast %signed-word-integer (%extract object #%I1))))
-                  (if (peculiar-constituent-p ch2)
+                  (if (peculiar-constituent? ch2)
                       ()
                     (%write-unit stream $char-single-escape))
                   (%write-unit stream ch1)
@@ -532,7 +532,7 @@
   (if (%lt idx length)
       (%let ((ch1 %signed-word-integer
                   (%cast %signed-word-integer (%extract object idx))))
-            (if (normal-constituent-p ch1)
+            (if (normal-constituent? ch1)
                 ()
               (%write-unit stream $char-single-escape))
             (%write-unit stream ch1)

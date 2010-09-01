@@ -38,7 +38,7 @@
     (only (generic-prin generic-write) stream-generic)
     c-string-interface
     (only (convert-int-char) character)
-    (only (upperp upper2lower lowerp lower2upper) char-tables)
+    (only (upper? upper2lower lower? lower2upper) char-tables)
     (only (as-lowercase as-uppercase) character)
     (only (deep-copy shallow-copy) copy)
     )
@@ -147,7 +147,7 @@
   (if (%le idx length)
       (%let ((ch %signed-word-integer
                  (%cast %signed-word-integer (%extract s2 idx))))  ;;RR
-            (if (upperp ch)
+            (if (upper? ch)
                 (%setf (%extract s2 idx)
                        (%cast %unsigned-byte-integer (upper2lower
                                                       ch)))
@@ -175,7 +175,7 @@
   (if (%le idx length)
       (%let ((ch %signed-word-integer
                  (%cast %signed-word-integer (%extract s2 idx)))) ;;RR
-            (if (lowerp ch)
+            (if (lower? ch)
                 (%setf (%extract s2 idx)
                        (%cast %unsigned-byte-integer (lower2upper
                                                       ch)))

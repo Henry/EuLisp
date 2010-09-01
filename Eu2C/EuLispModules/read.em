@@ -78,7 +78,7 @@
                   *token-states*
                   half-vec-ref
                   half-vec-vec-ref
-                  upperp
+                  upper?
                   digit2figure10
                   digit2figure16)
                  char-tables)
@@ -467,7 +467,7 @@
                  (%let ((ch2 %signed-word-integer
                              (%read-unit stream)))
                        ;;(print 'read-char-control) (print ch2)
-                       (if (upperp ch2)
+                       (if (upper? ch2)
                            (%minus ch2 #%i64) ; control-A == 1
                          (%minus ch2 #%i96)))) ; control-a == 1
         (read-character-named ch stream)))))
@@ -535,7 +535,7 @@
   (if (%eq counter #%i4)
       ch-code-res
     (%let* ((ch %signed-word-integer (%peek-unit stream)))
-           (if (hex-digit-p ch)
+           (if (hex-digit? ch)
                (progn (%read-unit stream)
                       (read-char-escape-hex stream
                                             (%plus (digit2figure16 ch)
@@ -630,7 +630,7 @@
       (progn (push-buffer ch-code-res (%cast <string-stack> *buffer-2*))
              (read-string stream))
     (%let* ((ch %signed-word-integer (%peek-unit stream)))
-           (if (hex-digit-p ch)
+           (if (hex-digit? ch)
                (progn (%read-unit stream)
                       (read-string-escape-hex stream
                                               (%plus (digit2figure16 ch)
@@ -639,7 +639,7 @@
              (progn (push-buffer ch-code-res (%cast <string-stack> *buffer-2*))
                     (read-string stream))))))
 
-(%define-function (hex-digit-p <object>)
+(%define-function (hex-digit? <object>)
   ((ch %signed-word-integer))
   (if (%lt #%i47 ch)
       (if (%gt #%i58 ch)   ; 0-9

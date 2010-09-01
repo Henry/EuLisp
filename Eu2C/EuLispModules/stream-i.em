@@ -254,7 +254,7 @@
                reader pplp-out-stream
                keyword pplp-out-stream))
   constructor (make-pp-line-position-stream0 pplp-out-stream)
-  predicate pp-line-position-stream-p
+  predicate pp-line-position-stream?
   allocation single-card
   representation pointer-to-struct)
 
@@ -342,20 +342,20 @@
 
 (%define-function (line-position %signed-word-integer)
   ((stream <stream>))
-  (if (pp-line-position-stream-p stream)
+  (if (pp-line-position-stream? stream)
       (pplp-line-position stream)
     #%i0))
 
 (%define-function (left-margin %signed-word-integer)
   ((stream <stream>))
-  (if (pp-line-position-stream-p stream)
+  (if (pp-line-position-stream? stream)
       (pplp-left-margin stream)
     #%i0))
 
 (%define-function (set-left-margin %signed-word-integer)
   ((stream <stream>)
    (lm %signed-word-integer))
-  (if (pp-line-position-stream-p stream)
+  (if (pp-line-position-stream? stream)
       (setf-pplp-left-margin stream lm)
     #%i0))
 
@@ -375,7 +375,7 @@
                (length  %signed-word-integer (strlen str)))
               (push-string str #%i0 length fd)
               length)
-      (if (pp-line-position-stream-p stream)
+      (if (pp-line-position-stream? stream)
           (%write-string-special stream str #%i0 (strlen str))
         #%i0)))
   )
@@ -513,7 +513,7 @@
         (%let ((fd <string-stack> (stream-string-stack stream)))
               (push-buffer ch fd)
               #%i0)
-      (if (pp-line-position-stream-p stream)
+      (if (pp-line-position-stream? stream)
           (%write-unit-special stream ch)
         #%i0))))
 
@@ -832,7 +832,7 @@
 ;;    (let ((lvdir-ini (get-option 'direction inilist lvdirection))
 ;;          (lvtrans-ini (get-option 'transaction-unit inilist lvtransaction-unit))
 ;;          (lvpos-ini (get-option 'positionable inilist lvpositionable)))
-;;      ;          (if (stream-direction-p (cadr inilist))
+;;      ;          (if (stream-direction? (cadr inilist))
 ;;      ;            (cerror "Missmatch in the argument list of open" <stream-condition>))
 ;;      ;            (if (stream-unit-p (cadr inilist))
 ;;      ;              (cerror "Missmatch in the argument list of open" <stream-condition>))

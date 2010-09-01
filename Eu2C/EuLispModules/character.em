@@ -31,7 +31,7 @@
    (tail
     (only (binary< equal) compare-generic)
     (only (generic-prin generic-write) stream-generic)
-    (only (upperp upper2lower lowerp lower2upper) char-tables)
+    (only (upper? upper2lower lower? lower2upper) char-tables)
     (only (make-swi make-fpint) int-i)
     ;;copy
     basic-compare      ;; instead of compare which should be used if implemented right
@@ -170,13 +170,13 @@
 
 (defmethod as-lowercase ((object <object>))
   (%let ((ch %signed-word-integer (char-code object)))  ;RR
-        (if (upperp ch)
+        (if (upper? ch)
             (make-character (upper2lower ch))
           object)))
 
 (defmethod as-uppercase ((object <object>))
   (%let ((ch %signed-word-integer (char-code object)))  ;RR
-        (if (lowerp ch)
+        (if (lower? ch)
             (make-character (lower2upper ch))
           object)))
 

@@ -161,7 +161,7 @@
   (if (null? thread)
       (normal-signal condition continuation)
     (if (%instance-of-p condition <thread-condition>)
-        (if (threadp (car thread))
+        (if (thread? (car thread))
             (let ((condpair (cons
                              (cons condition continuation) ())))
               (hold-threads)

@@ -43,7 +43,7 @@
    ((only (when unless) syntax-0)
     )
    export
-   (<thread> threadp make-thread
+   (<thread> thread? make-thread
              state value function args next waiters condqueue m-thread
              set-state set-value set-args set-next set-condqueue set-m-thread
              tmp-locks set-tmp-locks
@@ -119,7 +119,7 @@
   representation pointer-to-struct
   allocation multiple-type-card)
 
-(defun threadp (obj) (%instance-of-p obj <thread>))
+(defun thread? (obj) (%instance-of-p obj <thread>))
 
 
 (%define-function (save-dynamics %void) ((d <saved-dynamics>))

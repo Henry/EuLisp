@@ -250,7 +250,7 @@
          index
          (%cast %unsigned-byte-integer
                 (char-code
-                 (right-char-p (primitive-vector-ref vec index)))))
+                 (right-char? (primitive-vector-ref vec index)))))
         (convert-vector-to-string vec
                                   result-string
                                   vec-length
@@ -281,7 +281,7 @@
                                      index
                                      (%cast %unsigned-byte-integer
                                             (char-code
-                                             (right-char-p (car lst)))))
+                                             (right-char? (car lst)))))
         (convert-list-to-string (cdr lst)
                                 result-string
                                 (%plus index #%I1)))
@@ -373,13 +373,13 @@
 
 
 
-(defgeneric right-char-p (what))
+(defgeneric right-char? (what))
 
 
-(defmethod right-char-p ((what <character>))
+(defmethod right-char? ((what <character>))
   what)
 
-(defmethod right-char-p ((what <object>))
+(defmethod right-char? ((what <object>))
   (error "convert: no characters for string "  <conversion-condition>))
 
 
