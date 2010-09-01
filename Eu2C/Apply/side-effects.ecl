@@ -117,7 +117,7 @@
 (defun init-side-effecs-xfuns (funs)
   (when funs
         (let ((fun (car funs)))
-          (when (and (global-p fun) (?exported fun))
+          (when (and (global? fun) (?exported fun))
                 (init-side-effecs-fun fun)))
         (init-side-effecs-xfuns (cdr funs))))
 
@@ -203,18 +203,18 @@
   (if (or (= (?pass fun) 1)
           ;; (?fread-gloc fun)
           ;; (?sys-glocs fun)
-          (null? (or (defined-fun-p fun)
-                    (defined-generic-fun-p fun)))
+          (null? (or (defined-fun? fun)
+                    (defined-generic-fun? fun)))
           (null? (?params fun))
           )
-      (if (and (imported-fun-p fun) (eq (?pass fun) 0))
+      (if (and (imported-fun? fun) (eq (?pass fun) 0))
           (setf (?pass fun) 1)
         ())
     (progn (setf (?pass fun) 1)
            (setf (?arg-num fun) (compute-argnum 0
                                                 (?var-list (?params fun))
                                                 (?rest (?params fun))))
-           (if (local-fun-p fun)
+           (if (local-fun? fun)
                (let ((cl ()))
                  (dynamic-let ((env (get-parameter fun))
                                (used-cl-vars ()))
@@ -232,7 +232,7 @@
                  ;;                            (setf (?fun-list (dynamic cur-module))
                  ;;                                  (cons fun fl)))))
                  )
-             (if (global-generic-fun-p fun)
+             (if (global-generic-fun? fun)
                  (let ((df (?discriminating-fun fun)))
                    (init-side-effecs-fun df)
                    (init-side-effects-methods fun
@@ -325,7 +325,7 @@
   ;; old-glocs - list of gloc's
   (if (null? lfgloc+gloc) old-glocs
     (let ((fgloc-or-gloc (car lfgloc+gloc)))
-      (if (gloc-p fgloc-or-gloc)
+      (if (gloc? fgloc-or-gloc)
           (if (gloc-assoc fgloc-or-gloc old-glocs)
               (balance-side-effects (cdr lfgloc+gloc) old-glocs)
             (balance-side-effects (cdr lfgloc+gloc)
@@ -568,16 +568,16 @@
 (defmethod side-effects ((form <app>))
   (let ((fun (?function form))
         (arg-list (?arg-list form)))
-    (if (named-const-p fun)
+    (if (named-const? fun)
         (let ((value (?value fun)))
           (if (eq value ^unknown) ()
             (progn
               (setf (?function form) value)
               (setq fun value))))
       ())
-    (if (or (global-fun-p fun)
-            (imported-fun-p fun)
-            (global-generic-fun-p fun))
+    (if (or (global-fun? fun)
+            (imported-fun? fun)
+            (global-generic-fun? fun))
         (if (eq fun %apply)
             (progn
               (setq fun (map-apply (length arg-list)))
@@ -590,14 +590,14 @@
         (init-side-effecs-fun fun)
         (setq arg-list (?arg-list form))))
     (setf (?function form) fun)
-    (if (and (fun-p fun) (?reduce fun))
+    (if (and (fun? fun) (?reduce fun))
         () ; make the translation in the collect-literal-pass
       (checkup-arguments fun arg-list form))
     (let ((args (side-effects-args (?arg-list form))))
       (if args
           (dynamic-setq read-glocs (append args (dynamic read-glocs)))
         ())
-      (if (fun-p fun)
+      (if (fun? fun)
           (progn
             (init-side-effecs-fun fun)
             (let ((frgloc (?fread-gloc fun))
@@ -632,7 +632,7 @@
 (defmethod collect-literals ((form <app>))
   (let* ((fun (?function form))
          (arg-list (?arg-list form)))
-    (if (and (fun-p fun) (?reduce fun))
+    (if (and (fun? fun) (?reduce fun))
         (reduce-ap? (?reduce fun) arg-list form)
       (if (eq fun %call-next-method)
           (dynamic-let ((next-method?arams
@@ -862,8 +862,8 @@
 
 (defun checkup-arguments (fun arg-list application)
   ;; !!! Hack
-  (if (fun-p fun)
-      (if (special-sys-fun-p fun) () ; at time no argument-check !!!
+  (if (fun? fun)
+      (if (special-sys-fun? fun) () ; at time no argument-check !!!
         (let ((params (?params fun)))
           (if (null? params) ()
             (let ((length-var-list (length (?var-list params)))
@@ -900,7 +900,7 @@
                       (setf (?arg-list application)
                             (use-first-arguments
                              length-var-list arg-list)))))))))
-        ) ; (if (special-sys-fun-p fun) ()) ; at time no argument-check !!!
+        ) ; (if (special-sys-fun? fun) ()) ; at time no argument-check !!!
     ()))
 
 (defun add-arguments (n)
@@ -948,11 +948,11 @@
 
 (defmethod side-effects ((form <setq-form>))
   (let ((sresult (side-effects (?form form)))
-        (var (if (defined-named-const-p (?location form))
+        (var (if (defined-named-const? (?location form))
                  ()
                (?var (?location form)))))
     (if sresult (setf (?read-gloc form) sresult) ())
-    (if (local-static-p var)
+    (if (local-static? var)
         (if (member var (dynamic env)) ()
           (progn (setf (?closure var) 't)
                  ;;              ; debug *closure*
@@ -961,9 +961,9 @@
                  ;;               (unterbrechung var (dynamic env))
                  (dynamic-setq used-cl-vars 't)))
       ())
-    (if (or (global-static-p var)
-            (local-static-p var)
-            (dynamic-p var))
+    (if (or (global-static? var)
+            (local-static? var)
+            (dynamic? var))
         (let ((gloc (make <gloc> :gplace var)))
           (setf (?write-gloc form) gloc)
           (dynamic-setq write-glocs

@@ -276,7 +276,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun generate-type-declaration (class-def)
-  (unless (imported-p class-def)
+  (unless (imported? class-def)
           (type-declaration class-def (?representation class-def))))
 
 (defgeneric type-declaration (class-def representation))
@@ -317,7 +317,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun generate-struct-declaration (class-def)
-  (unless (imported-p class-def)
+  (unless (imported? class-def)
           (struct-declaration class-def (?representation class-def))))
 
 (defgeneric struct-declaration (class-def representation))
@@ -349,7 +349,7 @@
 
 (defun function-needed? (fun)
   (or (>= (?pass fun) $last-pass)
-      (and (generic-fun-p fun)
+      (and (generic-fun? fun)
            (~generic-function-discriminating-function fun)
            (>= (?pass (~generic-function-discriminating-function fun))
                $last-pass))))
@@ -383,7 +383,7 @@
 
 (defun function-storage-class (fun)
   (cond ((and (eq *compilation-type* :basic-system)
-              (discriminating-fun-p fun)
+              (discriminating-fun? fun)
               (exported-for-lisp? fun))
          ;; Discriminating functions of exported generic functions are declared extern
          ;; because they are defined in the application to allow more optimized dispatch
@@ -424,7 +424,7 @@
   (unless (and (eq *compilation-type* :basic-system)
                (exported-for-lisp? fun))
           (when (and (?discriminating-fun fun)
-                     (discriminating-fun-p (?discriminating-fun fun)))
+                     (discriminating-fun? (?discriminating-fun fun)))
                 (generate-function-definition (?discriminating-fun fun)))))
 
 
@@ -433,7 +433,7 @@
              (?discriminating-fun fun)
              ;; no code must be generated for an imported function used as
              ;; discriminating function
-             (discriminating-fun-p (?discriminating-fun fun)))
+             (discriminating-fun? (?discriminating-fun fun)))
         (generate-function-definition (?discriminating-fun fun))))
 
 (defmethod generate-definition ((fun <discriminating-fun>))
@@ -454,11 +454,11 @@
                                   (?body fun))))))
 
 (defun block-form? (form)
-  (or (progn-form-p form)
-      (let*-form-p form)
-      (labels-form-p form)
-      (let/cc-form-p form)
-      (tagbody-form-p form)
+  (or (progn-form? form)
+      (let*-form? form)
+      (labels-form? form)
+      (let/cc-form? form)
+      (tagbody-form? form)
       ))
 
 (defgeneric generate-function-comment (fun))
@@ -502,7 +502,7 @@
   ())
 
 (defmethod generate-definition ((const <defined-named-const>))
-  (if (fun-p (?value const))
+  (if (fun? (?value const))
       ;; (write-code "~%#define ~A ~A"
       ;;                 (c-identifier const)
       ;;                 (c-identifier (?value const)))
@@ -594,7 +594,7 @@
           (else-forms (?else form))))
 
 (defun else-forms (form)
-  (if (if-form-p form)
+  (if (if-form? form)
       (list* (?pred form)
              (?then form)
              (else-forms (?else form)))
@@ -822,7 +822,7 @@
   (or (second (cl:assoc fun $sys-fun-table))
       (cl:string (?identifier fun))))
 
-(defun sys-fun-precedence (fun)
+(defun sys-fun?recedence (fun)
   (or (third (cl:assoc fun $sys-fun-table))
       100))
 
@@ -830,7 +830,7 @@
   ;; casts should not be necessary because basic tail functions only operate on
   ;; basic tail types
   (cl:apply #'write-enveloped-expr
-            stream (sys-fun-precedence fun) (sys-fun-format fun) args))
+            stream (sys-fun?recedence fun) (sys-fun-format fun) args))
 
 ;;; ------------
 ;;; %eq and %neq must be handled in a special way because their arguments may be
@@ -918,7 +918,7 @@
   (default-write (cons fun args) stream))
 
 (defmethod write-call ((const <named-const>) args types stream)
-  (if (fun-p (?value const))
+  (if (fun? (?value const))
       ;;(write-call (?value const) args stream)
       (format stream "~@<~A(~:I~{~/EXPR/~^, ~:_~})~:>"
               (c-identifier const)
@@ -1011,7 +1011,7 @@
   ;;the assignment *
   (if (eq (?form form) ^unknown) ()
     (format stream "~@<~A ~:_= ~/EXPR/~:>"
-            (c-identifier (if (var-ref-p (?location form)) ;*5*
+            (c-identifier (if (var-ref? (?location form)) ;*5*
                               (?var (?location form))
                             (?location form)))
             (type-expr-for-c (get-type form)
@@ -1097,7 +1097,7 @@
 (defun c-extern? (fun)
   (or t  ; at this place it should be proved whether the functions pointer is
       ;; used (function as data) or not (test result T resp. NIL) *11*
-      (imported-p fun)
+      (imported? fun)
       (?exported fun)))
 
 (defun types-and-parameters (fun)
@@ -1142,10 +1142,10 @@
         (?form tagged-form)))
 
 (defun instance? (object)
-  (or (sym-p object)
-      (literal-instance-p object)
-      (class-def-p object)
-      (null? (lzs-object-p object))))
+  (or (sym? object)
+      (literal-instance? object)
+      (class-def? object)
+      (null? (lzs-object? object))))
 
 (defgeneric initial-value (var))
 (defmethod initial-value ((var <global-static>)) (?initial-value var))

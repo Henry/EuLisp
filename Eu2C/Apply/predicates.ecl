@@ -53,19 +53,19 @@
 (defun signature-needed-for-code-generation? (fun)
   ;;answer whether the type scheme can be set to ()
   (or (null? (eq *compilation-type* :application))
-      (null? (special-sys-fun-p fun))))
+      (null? (special-sys-fun? fun))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; used after mark-as-exported was called in compile[apply-compiler]
 ;;;-----------------------------------------------------------------------------
 (defun exported-for-lisp? (obj)
   (and (eq *compilation-type* :basic-system)
-       (global-p obj)
+       (global? obj)
        (?exported obj)
-       (null? (discriminating-fun-p obj))))
+       (null? (discriminating-fun? obj))))
 
 (defun exported? (obj)
-  (and (global-p obj)
+  (and (global? obj)
        (?exported obj)))
 
 (defun class-sealed? (class)
@@ -91,7 +91,7 @@
 ;;; tests for lisp functions
 ;;;-----------------------------------------------------------------------------
 (defun is-lisp (obj)
-  (or (null? (imported-p obj))
+  (or (null? (imported? obj))
       (eq (?language obj) ^lisp)))
 
 ;;;-----------------------------------------------------------------------------

@@ -46,7 +46,7 @@
           make-structure-and-annotation-slots
           make-predicate-name
           <lzs-object>
-          lzs-object-p)
+          lzs-object?)
  expose (accessors))
 
 ;;;-----------------------------------------------------------------------------
@@ -161,7 +161,7 @@
     (list (get-superclass-name supers))))
 
 (defun make-predicate-name (class-name)
-  (intern (format () "~A-P" class-name)))
+  (intern (format () "~A?" class-name)))
 
 (defun make-mixin-predicates (class-name supers)
   (cond ((null? supers) ())

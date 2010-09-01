@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -60,15 +60,15 @@
                             (?type-list form)
                             (?read-gloc-list form)
                             (?write-gloc-list form))
-                 (if (join-label-p con)
+                 (if (join-label? con)
                      (setf (?rebind-vars con)
                            (cons var-list
                                  (?rebind-vars con)))
                    ())
                  (setq res (l2m-a con (?body form)))
                  ;; !!!!! missing unbind !!!!!
-                 (if (or (function-label-p con)
-                         (join-label-p con))
+                 (if (or (function-label? con)
+                         (join-label? con))
                      () (unbind var-list oldenv))
                  res
                  )))
@@ -101,7 +101,7 @@
 (defmethod bind-vars1 ((var <local-static>) init type rgloc wgloc)
   (if (?closure var)
       (add-closure-var-value var init (dynamic block))
-    (if (tempvar-p init)
+    (if (tempvar? init)
         (progn
           (subst-and-check-tempvar (?link init) var type)
           (add-env var var))

@@ -320,14 +320,14 @@
 
 (defun gen-const-value (value)
   (let ((lit (gen-literal value)))
-    (if (or (sym-p value)
-            (and (structured-literal-p value)
+    (if (or (sym? value)
+            (and (structured-literal? value)
                  (cons? (?value value))))
         (list ^quote lit)
       lit)))
 
 (defmethod gen-interface ((const <named-const>))
-  (unless (fun-p (?value const))
+  (unless (fun? (?value const))
           (write-def "(%declare-external-constant ~S ~S~
                  ~% external-name |~A|~
                  ~@[~% value ~A~])"
@@ -531,7 +531,7 @@
   "()")
 
 (defmethod lzs2list ((obj <lzs-object>))
-  (if (global-p obj)
+  (if (global? obj)
       (if-identifier obj)
     ()))
 

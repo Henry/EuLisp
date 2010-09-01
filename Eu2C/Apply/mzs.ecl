@@ -59,7 +59,7 @@
 
 (defstandardclass <mzs-object> () )     ; the top node
 
-(export <mzs-object> mzs-object-p)
+(export <mzs-object> mzs-object?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; definition of basic blocks

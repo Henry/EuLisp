@@ -127,7 +127,7 @@
 (define-defstandardclass-handler :predicate
   #'(lambda (class-name value)
       (declare (ignore value))
-      `(defun ,(new-name "" class-name "-P" "<>") (x)
+      `(defun ,(new-name "" class-name "?" "<>") (x)
          (typep x ',class-name)))
   #'(lambda (result)
       (list nil nil result)))

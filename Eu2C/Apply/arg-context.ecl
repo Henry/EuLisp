@@ -140,7 +140,7 @@
   ;; var = <local-static>, <global-static>, <imported-static>, <dynamic>
   ;;
   (let ((var (?var form)))
-    (if (local-static-p var) (rename var)
+    (if (local-static? var) (rename var)
       var))
   )
 
@@ -150,7 +150,7 @@
 (defmethod l2m-a ((con <arg>) (form <app>))
   ;;
   (let ((fun (?function form)))
-    (if (cont-p fun) (error "continuation in argument position")
+    (if (cont? fun) (error "continuation in argument position")
       ;; (if (eq (common-lisp::class-of fun) lzs-mop::<slot-accessor-fun>)
       ;;   (let* ((arglist (?arg-list form))
       ;;             (arg-num (length arglist))

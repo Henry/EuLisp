@@ -56,7 +56,7 @@
          lzs-syntax      ; make-structure-and-annotation-slots
          ;; make-predicate-name
          ;; <lzs-object>
-         ;; lzs-object-p
+         ;; lzs-object?
          accessors)
  syntax (eulisp0
          apply-standard) ; only the macro defstandardclass
@@ -64,8 +64,8 @@
  export (def-lzs-object ;macro from lzs-syntax
           make-structure-and-annotation-slots
           make-predicate-name)
- export (imported-p named? global-p) ;mixin predicates
- export (<lzs-object> lzs-object-p) ; from lzs-syntax
+ export (imported? named? global?) ;mixin predicates
+ export (<lzs-object> lzs-object?) ; from lzs-syntax
  export (?unexpanded ?symtab-initfun) ;should be exported automatically
  expose (accessors))
 
@@ -356,7 +356,7 @@
 (def-lzs-object opt ()
   var
   init;; Init Value
-  (suppl :initform ())  ;; Supplied-p Variable oder ()
+  (suppl :initform ())  ;; Supplied Variable oder ()
   :Annotations
   ;;-----------
   )
@@ -749,20 +749,20 @@
 ;;; predicates testing mixins
 ;;;----------------------------------------------------------------------------
 
-(defgeneric imported-p (object))
+(defgeneric imported? (object))
 
-(defmethod imported-p (object) ())
+(defmethod imported? (object) ())
 
 (defgeneric named? (object))
 
 (defmethod named? (object)
   ;; this means that all 'global' object are also 'named'
   ;; 'global' is a submixin of 'named'
-  (global-p object))
+  (global? object))
 
-(defgeneric global-p (object))
+(defgeneric global? (object))
 
-(defmethod global-p (object) ())
+(defmethod global? (object) ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; compatibility to old annotation module-id

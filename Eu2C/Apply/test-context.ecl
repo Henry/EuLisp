@@ -67,10 +67,10 @@
   (finish-test-a con var-or-constant))
 
 (defun finish-test-a (con var-or-constant)
-  (cond ((or (var-p var-or-constant)
-             (tempvar-p var-or-constant))
+  (cond ((or (var? var-or-constant)
+             (tempvar? var-or-constant))
          (test-variable var-or-constant con))
-        ((named-const-p var-or-constant)
+        ((named-const? var-or-constant)
          (if (eq (?value var-or-constant) $false)
              (setf (?then-block con) ())
            (setf (?else-block con) ())))
@@ -206,7 +206,7 @@
   ;; var = <local-static>, <global-static>, <imported-static>, <dynamic>
   ;;
   (let ((var (?var form)))
-    (test-variable (if (local-static-p var) (rename var) var) con)))
+    (test-variable (if (local-static? var) (rename var) var) con)))
 
 
 (defmethod l2m-a ((con <test>) (form <app>))
@@ -249,7 +249,7 @@
              ))
           ;;          ((eq (?inline fun) ^test) ...
           ;;          ((eq (?inline fun) ^value) ...
-          ((global-fun-p fun)
+          ((global-fun? fun)
            ;; analyse the called fun first
            (lzs2mzs-fun fun)
            (if (eq (?inline fun) ^test)

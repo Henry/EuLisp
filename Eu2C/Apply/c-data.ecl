@@ -100,13 +100,13 @@
   (when (configuration? ':int ':small)
         (write-data "~%SMALL_INT_SKIP;"))
   (mapc (lambda (lit)
-          (unless (imported-p (?unexpanded lit))
+          (unless (imported? (?unexpanded lit))
                   (literal-declaration lit
                                        (?class lit)
                                        (?representation (?class lit)))))
         *literals*)
   (mapc (lambda (literal)
-          (unless (imported-p (?unexpanded literal))
+          (unless (imported? (?unexpanded literal))
                   (literal-definition literal
                                       (?class literal)
                                       (?representation (?class literal)))))

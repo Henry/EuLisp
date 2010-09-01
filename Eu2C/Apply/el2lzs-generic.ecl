@@ -87,7 +87,7 @@
      ())))
 
 (defun set-converter (class-def gf-spec)
-  (if (class-def-p class-def)
+  (if (class-def? class-def)
       (if (?converter class-def)
           (error-converter-redefinition class-def)
         (setf (?converter class-def)
@@ -96,7 +96,7 @@
     (error-class-required-in-converter-spec gf-spec)))
 
 (defun set-setter (fun gf-spec)
-  (if (fun-p fun)
+  (if (fun? fun)
       (if (?setter fun)
           (error-setter-redefinition fun)
         (setf (?setter fun)
@@ -144,7 +144,7 @@
                                                          body)
                                               ^generic-function gf))))
              (~add-method gf method)
-             (if (imported-p gf)
+             (if (imported? gf)
                  (make-dynamic-add-method-form gf method)
                ())))
      )))
@@ -156,14 +156,14 @@
                        )))
 
 (defun get-converter (class-def gf-spec)
-  (if (class-def-p class-def)
+  (if (class-def? class-def)
       (or (?converter class-def)
           (and (error-no-converter class-def) ()))
     (progn (error-class-required-in-converter-spec gf-spec)
            ())))
 
 (defun get-setter (fun gf-spec)
-  (if (fun-p fun)
+  (if (fun? fun)
       (or (?setter fun)
           (and (error-no-setter fun) ()))
     (progn (error-function-required-in-setter-spec gf-spec)

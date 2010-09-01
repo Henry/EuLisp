@@ -108,7 +108,7 @@
   (start-analyse-fun fun) ; for debugging
   (if (or (eq (?pass fun) 5)
           (eq (?pass fun) 3))
-      ;;    (and  (or (global-fun-p fun) (local-fun-p fun))
+      ;;    (and  (or (global-fun? fun) (local-fun? fun))
       ;;           (?params fun))
       (let* ((var-vec (?var-vec (?var-descr fun)))
              (type-vec (?type-descr fun))
@@ -154,29 +154,29 @@
 (defgeneric stat-path-to-input (stat idx depth funs vars))
 
 (defmethod stat-path-to-input ((stat <function-statement>) idx depth funs vars)
-  (var-path-to-input (vector-ref (?var-vec (?var-descr stat)) idx)
+  (var?ath-to-input (vector-ref (?var-vec (?var-descr stat)) idx)
                      depth funs vars))
 
 (defmethod stat-path-to-input (stat idx depth funs vars) ())
 
-(defgeneric var-path-to-input (var depth funs vars))
+(defgeneric var?ath-to-input (var depth funs vars))
 
-(defmethod var-path-to-input ((var <tempvar>) depth funs vars)
+(defmethod var?ath-to-input ((var <tempvar>) depth funs vars)
   (if (member var vars) ()
     (links-path-to-input (?link var) depth funs (cons var vars))))
 
-(defmethod var-path-to-input ((var <local-static>) depth funs vars)
+(defmethod var?ath-to-input ((var <local-static>) depth funs vars)
   (if (member var vars) ()
     (links-path-to-input (?link var) depth funs (cons var vars))))
 
-(defmethod var-path-to-input ((app <app>) depth funs vars)
+(defmethod var?ath-to-input ((app <app>) depth funs vars)
   (result-path-to-input-fun (?function app) depth funs vars))
 
-(defmethod var-path-to-input ((ref <var-ref>) depth funs vars)
-  (var-path-to-input (?var ref) depth funs vars))
+(defmethod var?ath-to-input ((ref <var-ref>) depth funs vars)
+  (var?ath-to-input (?var ref) depth funs vars))
 
 
-(defmethod var-path-to-input (var depth funs vars) ())
+(defmethod var?ath-to-input (var depth funs vars) ())
 
 (defun links-path-to-input (links depth funs vars)
   (if links
@@ -185,7 +185,7 @@
             (if (result-path-to-input (car l) depth funs vars)
                 t
               (links-path-to-input (cdr links) depth funs vars))
-          (if (defined-fun-p (car l))
+          (if (defined-fun? (car l))
               (call-path-to-input (car l) (cdr l) depth funs vars)
             (links-path-to-input (cdr links) depth funs vars))))
     ()))
@@ -193,7 +193,7 @@
 (defgeneric result-path-to-input (stat depth funs vars))
 
 (defmethod result-path-to-input ((stat <move>) depth funs vars)
-  (var-path-to-input (vector-ref (?var-vec (?var-descr stat)) 1)
+  (var?ath-to-input (vector-ref (?var-vec (?var-descr stat)) 1)
                      depth funs vars))
 
 (defmethod result-path-to-input ((stat <call>) depth funs vars)
@@ -208,13 +208,13 @@
   (if (eq fun inputfoo) t
     (if (member fun funs) ()
       (if (> depth max-depth) ()
-        (if (defined-generic-fun-p fun)
-            (var-path-to-input
+        (if (defined-generic-fun? fun)
+            (var?ath-to-input
              (vector-ref (?var-vec
                           (?var-descr (?discriminating-fun fun))) 0)
              (+ depth 1) (cons fun funs) vars)
-          (if (defined-fun-p fun)
-              (var-path-to-input
+          (if (defined-fun? fun)
+              (var?ath-to-input
                (vector-ref (?var-vec (?var-descr fun)) 0)
                (+ depth 1) (cons fun funs) vars)
             ())))))
@@ -265,7 +265,7 @@
   (if (<= from to)
       (let* ((var (vector-ref vec from))
              (link (?link var))
-             (local-static ;(if (local-static-p var) ()
+             (local-static ;(if (local-static? var) ()
               (mk-local-static1 link var)))
         ;;)
         (if local-static (setq var local-static) ())
@@ -326,7 +326,7 @@
 
 (defun collect-first-forms1 (form-list)
   (if form-list
-      (if (tagged-form-p (car form-list)) ()
+      (if (tagged-form? (car form-list)) ()
         (cons (car form-list)
               (collect-first-forms1 (cdr form-list))))
     () )
@@ -334,7 +334,7 @@
 
 (defun delete-first-forms (form-list)
   (if form-list
-      (if (tagged-form-p (car form-list)) form-list
+      (if (tagged-form? (car form-list)) form-list
         (delete-first-forms (cdr form-list)))
     () )
   )
@@ -398,7 +398,7 @@
     ;; build a correkt statement
     (setf (?instance stat) (vector-ref var-vec 1))
     (if (null? (cdr link)) stat ; result never used
-      (if (and (tempvar-p var)
+      (if (and (tempvar? var)
                (null? (cdr (cdr link))))
           ;; result only once used
           (let* ((used-stat (if (eq (cdr (car link)) 0)
@@ -407,7 +407,7 @@
                  (where-used (cdr used-stat)))
             (setq used-stat (car used-stat))
             (if (and (eq block (?block used-stat))
-                     (null? (return-p used-stat)))
+                     (null? (return? used-stat)))
                 (progn
                   (setf (vector-ref (?var-vec (?var-descr used-stat))
                                     where-used) stat)
@@ -457,10 +457,10 @@
         (if tl (append instl tl) ()))
     (let ((link (car links)))
       (if (or (eq (cdr link) 0)
-              (return-p (car link))
-              (goto-p (car link)))
+              (return? (car link))
+              (goto? (car link)))
           (collect-var-types1 (cdr links) obj sonst instl tl)
-        (if (function-call-p (car link))
+        (if (function-call? (car link))
             (let ((fun (?function (car link))))
               (if (eq fun %class-of) ()
                 (if (eq fun %instance-of?)
@@ -548,7 +548,7 @@
                                           (expand-literal vartype))
                           :type-descr vec))))))
     (if (null? (cdr link)) app ; result never used
-      (if (and (tempvar-p var) (null? (cdr (cdr link))))
+      (if (and (tempvar? var) (null? (cdr (cdr link))))
           ;; result only once used
           (let* ((used-stat (if (eq (cdr (car link)) 0)
                                 (car (cdr link))
@@ -556,7 +556,7 @@
                  (where-used (cdr used-stat)))
             (setq used-stat (car used-stat))
             (if (and (eq block (?block used-stat))
-                     (null? (return-p used-stat)))
+                     (null? (return? used-stat)))
                 (progn
                   (setf (vector-ref (?var-vec (?var-descr used-stat))
                                     where-used) app)
@@ -600,8 +600,8 @@
     var-ref))
 
 (defun mk-local-static (var link)
-  (if (local-static-p var) var
-    (if (and (var-ref-p var) (local-static-p (?var var)))
+  (if (local-static? var) var
+    (if (and (var-ref? var) (local-static? (?var var)))
         (?var var)
       (let ((local-static (mk-local-static2 link)))
         (make <local-static>
@@ -612,12 +612,12 @@
 (defun mk-local-static2 (link)
   (if (null? link) ()
     (let ((stat (car (car link))))
-      (if (and (move-p stat) (eq (cdr (car link)) 1))
+      (if (and (move? stat) (eq (cdr (car link)) 1))
           (let ((local-static (vector-ref (?var-vec (?var-descr stat)) 0)))
-            (if (local-static-p local-static)
+            (if (local-static? local-static)
                 local-static
-              (if (and (var-ref-p local-static)
-                       (local-static-p (?var local-static)))
+              (if (and (var-ref? local-static)
+                       (local-static? (?var local-static)))
                   (?var local-static)
                 (mk-local-static2 (cdr link)))))
         (mk-local-static2 (cdr link)))))
@@ -646,9 +646,9 @@
 (defun mk-local-static11 (link)
   (if (null? link) ()
     (let ((stat (car (car link))))
-      (if (and (move-p stat) (eq (cdr (car link)) 1))
+      (if (and (move? stat) (eq (cdr (car link)) 1))
           (let ((local-static (vector-ref (?var-vec (?var-descr stat)) 0)))
-            (if (local-static-p local-static)
+            (if (local-static? local-static)
                 (if (is-parameter (?link local-static)) () local-static)
               (mk-local-static11 (cdr link))
               ))
@@ -658,16 +658,16 @@
 
 (defun is-parameter (link)
   (if (null? link) ()
-    (if (fun-p (car (car link))) t
+    (if (fun? (car (car link))) t
       (is-parameter (cdr link)))))
 
 (defun replace-var (link var)
   (if (null? link) ()
     (let ((stat (car (car link)))
           (where (cdr (car link))))
-      (if (return-p stat)
+      (if (return? stat)
           (setf (?value stat) var)
-        (if (or (goto-p stat) (fun-p stat)) ()
+        (if (or (goto? stat) (fun? stat)) ()
           (setf (vector-ref (?var-vec (?var-descr stat)) where) var)))
       (replace-var (cdr link) var)))
   )
@@ -693,18 +693,18 @@
          (from (vector-ref var-vec 1))
          ;; (to-type (vector-ref type-vec 0))
          ;; (from-type (vector-ref type-vec 1))
-         (to-var (if (var-ref-p to-var-ref) (?var to-var-ref) to-var-ref))
+         (to-var (if (var-ref? to-var-ref) (?var to-var-ref) to-var-ref))
          )
-    (if (var-ref-p to-var-ref)
-        (if (and (var-ref-p from) (eq (?var from) to-var)) ()
+    (if (var-ref? to-var-ref)
+        (if (and (var-ref? from) (eq (?var from) to-var)) ()
           (make <setq-form>
-                :form (if (var-p from)
+                :form (if (var? from)
                           (make <var-ref> :var from)
                         from)
                 :location to-var-ref :type-descr type-vec))
-      (if (local-static-p to-var)
+      (if (local-static? to-var)
           (let ((link (?link to-var)))
-            (if (and (var-ref-p from)
+            (if (and (var-ref? from)
                      (eq (?var from) to-var))
                 (progn (replace-var link (make <var-ref> :var to-var))
                        ())
@@ -712,22 +712,22 @@
                                                (vector-ref type-vec 0)
                                                ^unknowm
                                                link)))
-                (make <setq-form> :form (if (var-p from)
+                (make <setq-form> :form (if (var? from)
                                             (make <var-ref> :var from)
                                           from)
                       :location var-ref :type-descr type-vec)
                 )))
-        (if (tempvar-p to-var)
+        (if (tempvar? to-var)
             (let* ((link (?link to-var))
                    (var-ref (add-let-variable to-var
                                               (vector-ref type-vec 0)
                                               ^unknowm
                                               link)))
-              (make <setq-form> :form (if (var-p from)
+              (make <setq-form> :form (if (var? from)
                                           (make <var-ref> :var from)
                                         from)
                     :location var-ref :type-descr type-vec))
-          (make <setq-form> :form (if (var-p from)
+          (make <setq-form> :form (if (var? from)
                                       (make <var-ref> :var from)
                                     from)
                 :location (make <var-ref> :var to-var)
@@ -748,7 +748,7 @@
 (defmethod result2lzs ((result <return>) out-label
                        labels)
   (let ((value (?value result)))
-    (if (tempvar-p value) () ; result of last-call
+    (if (tempvar? value) () ; result of last-call
       (list value)))
   )
 
@@ -825,8 +825,8 @@
 (defun find-join-label1 (block)
   (let ((result (?result block))
         (out-label (?out-label block)))
-    (if (join-label-p out-label) (cons out-label 1)
-      (if (test-p result)
+    (if (join-label? out-label) (cons out-label 1)
+      (if (test? result)
           (let* ((then (find-join-label1 (?then-block result)))
                  (else (if then (find-join-label1 (?else-block result)) ())))
             (if else

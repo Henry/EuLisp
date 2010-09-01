@@ -55,7 +55,7 @@
 (defun setq-form-a (con form)
   (let ((location (?location form)))
     (setq-form1
-     (if (var-ref-p location) (?var location) location)
+     (if (var-ref? location) (?var location) location)
      (l2m-a (dynamic *arg-context*) (?form form))
      (?write-gloc form)
      (let ((rgloc (?read-gloc form)))

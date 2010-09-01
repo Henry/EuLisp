@@ -160,7 +160,7 @@
   (or (?type var) %object))
 
 (defmethod get-type ((call <app>))
-  (if (special-sys-fun-p (?function call))
+  (if (special-sys-fun? (?function call))
       (result-type call)   ;; use the inferred type because of
     ;; overloading
     (result-type (?function call))))    ; use the declared type
@@ -201,7 +201,7 @@
 
 (defun range-and-domain (fun) ;*9*
   (map (lambda (type)
-         (if (named-const-p type)
+         (if (named-const? type)
              (?value type)
            type))
        (?range-and-domain fun)))
@@ -209,7 +209,7 @@
 (defun global-var-type (var)
   (or (?type var)
       (setf (?type var)
-            (if (and (named-const-p var)
+            (if (and (named-const? var)
                      (null? (eq (?value var) ^unknown)))
                 (~class-of (?value var))
               %object))))

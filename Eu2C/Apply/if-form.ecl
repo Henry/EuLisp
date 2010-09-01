@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -144,8 +144,8 @@
                   (setf (?result (dynamic block)) test)
                   (setf (?block test) (dynamic block)))
               ())
-            (let ((new-con (if (or (function-label-p con)
-                                   (join-label-p con)) con
+            (let ((new-con (if (or (function-label? con)
+                                   (join-label? con)) con
                              (make <join-label>
                                    :context con
                                    :env-level env
@@ -168,7 +168,7 @@
                              (progn
                                (setf (?t-path (dynamic block))
                                      (dynamic typepathes))
-                               (if (label-p new-con)
+                               (if (label? new-con)
                                    (let ((bl (dynamic block)))
                                      (setf (?env bl)
                                            (dynamic env))
@@ -177,7 +177,7 @@
                                                  (?in-block new-con)))
                                      (setf (?out-label bl)
                                            new-con)
-                                     ;;                               (if (and (join-label-p new-con)
+                                     ;;                               (if (and (join-label? new-con)
                                      ;;                                        (null? (eq (?context new-con)
                                      ;;                                                  (dynamic *void-context*))
                                      (setf (?result bl) then-result))
@@ -203,7 +203,7 @@
                              (let ((bl (dynamic block)))
                                (setf (?t-path bl)
                                      (dynamic typepathes))
-                               (if (label-p new-con)
+                               (if (label? new-con)
                                    (progn
                                      (setf (?env bl)
                                            (dynamic env))
@@ -408,8 +408,8 @@
         ;; link the variables
         (setf (?link jvar)
               (cons (cons move 0) (?link jvar)))
-        (if (or (local-static-p q)
-                (tempvar-p q))
+        (if (or (local-static? q)
+                (tempvar? q))
             (setf (?link q)
                   (cons (cons move 1) (?link q)))
           ())

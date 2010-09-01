@@ -75,10 +75,10 @@
 
 
 (defun lzs2mzs-fun (fun)
-  (if (defined-generic-fun-p fun) (setq fun (?discriminating-fun fun)) ())
-  (cond ((or (null? (or (global-fun-p fun)
-                       (local-fun-p fun)
-                       (defined-generic-fun-p fun)
+  (if (defined-generic-fun? fun) (setq fun (?discriminating-fun fun)) ())
+  (cond ((or (null? (or (global-fun? fun)
+                       (local-fun? fun)
+                       (defined-generic-fun? fun)
                        ))
              (null? (?params fun))) fun)
         ;; !!!!!!!!!!! hack
@@ -86,7 +86,7 @@
         ;; ((and  (print (list 'function (?identifier fun))) ()) ())
         ;; !!!!!!!!!!! debug
         ((eq (?pass fun) 1)
-         (if (global-fun-p fun)
+         (if (global-fun? fun)
              (dynamic-let ((closure ())
                            ;;(local-funs ())
                            )
@@ -94,7 +94,7 @@
                           ;;                       (format t " Closure ~A "
                           ;;                               (dynamic closure))
                           )
-           ;;          (if (global-generic-fun-p fun)
+           ;;          (if (global-generic-fun? fun)
            ;;            (dynamic-let ((closure ())
            ;;           ;;(local-funs ())
            ;;                          )
@@ -230,7 +230,7 @@
 (defun clear-closure-vars (env-list block)
   (if (null? env-list) ()
     (let ((var (car (car env-list))))
-      (if (and (local-static-p var)
+      (if (and (local-static? var)
                (?closure var))
           (progn
             (add-closure-var (car (car env-list)) block)
@@ -498,8 +498,8 @@
 (defun other-arg1 (from to var-vec nzvar)
   (if (> from to) ()
     (let ((arg (vector-ref var-vec from)))
-      (if (or (tempvar-p arg)
-              (var-p arg))
+      (if (or (tempvar? arg)
+              (var? arg))
           (if (member arg nzvar)
               (other-arg1 (+ from 1) to var-vec nzvar)
             t)
@@ -591,8 +591,8 @@
       (setf (vector-ref var-vec 0) var)
       (setf (?link var) (cons (cons move 0) (?link var)))
       (setf (vector-ref var-vec 1) jvar)
-      (if (or (local-static-p jvar)
-              (tempvar-p jvar))
+      (if (or (local-static? jvar)
+              (tempvar? jvar))
           (setf (?link jvar) (cons (cons move 1) (?link jvar)))
         ())
       (add-moves-and-type-descr-s var n (+ m 1) (cdr gotos) newsum ())

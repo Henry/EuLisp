@@ -36,7 +36,7 @@
  syntax (eulisp0
          apply-standard)
  export (<binding>
-         binding-p
+         binding?
          make-binding
          finally-refered-object
          get-lzs-object)
@@ -72,7 +72,7 @@
 (defun get-lzs-object (object)
   ;; get-lzs-object returns the object finally refered to if object is a
   ;; renamed object or otherwise returns its argument
-  (if (binding-p object)
+  (if (binding? object)
       (?refers-finally-to object)
     object))
 

@@ -374,7 +374,7 @@
                     (eval-expr)))
 
 (defun eval-expr ()
-  (cons (if (fun-p (dynamic eval-fun))
+  (cons (if (fun? (dynamic eval-fun))
             (?identifier (dynamic eval-fun))
           (dynamic eval-fun))
         (dynamic eval-args)))

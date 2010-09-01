@@ -146,7 +146,7 @@
   ;; var = <local-static>, <global-static>, <imported-static>, <dynamic>
   ;;
   (let ((var (?var form)))
-    (if (local-static-p var) (rename var)
+    (if (local-static? var) (rename var)
       var))
   )
 
@@ -157,7 +157,7 @@
   ;; <cont>, <defined-named-constant>, <imported-named-constant>
   ;;
   (let ((fun (?function form)))
-    (if (cont-p fun) (error "continuation in argument position")
+    (if (cont? fun) (error "continuation in argument position")
       (call-a-function fun (?arg-list form) () (?read-glocs form)))))
 
 (defmethod l2m-a ((con <join-label>) (form <set-slot-value>))

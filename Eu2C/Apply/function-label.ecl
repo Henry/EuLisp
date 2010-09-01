@@ -62,12 +62,12 @@
 ;;---------------------------------
 
 (defmethod finish-a ((con <function-label>) var-or-const)
-  (cond ((or (tempvar-p var-or-const)
-             (local-static-p var-or-const))
+  (cond ((or (tempvar? var-or-const)
+             (local-static? var-or-const))
          (setf (?link var-or-const)
                (cons (cons (return-variable var-or-const con) 1) ;1-01.06 *hf*
                      (?link var-or-const)))) ; ! neu 02.06 *hf*
-        ((var-p var-or-const) (return-variable var-or-const con))
+        ((var? var-or-const) (return-variable var-or-const con))
         (t  (return-constant var-or-const con))))
 
 
@@ -255,7 +255,7 @@
   ;; var = <local-static>, <global-static>, <imported-static>, <dynamic>
   ;;
   (let ((variable (?var form)))
-    (cond ((or (local-static-p variable) (tempvar-p variable)) ; neu 26.05 *hf*
+    (cond ((or (local-static? variable) (tempvar? variable)) ; neu 26.05 *hf*
            (setq variable (rename variable))
            (setf (?link variable)
                  (cons (cons (return-variable variable con) 1) ;1-01.06 *hf*
@@ -328,10 +328,10 @@
   (let ((fun (?function form))
         (in-fun (?function con))
         (arg-list (?arg-list form)))
-    (if (cont-p fun) (l2m-a con (car (?arg-list form)))
+    (if (cont? fun) (l2m-a con (car (?arg-list form)))
       ;; ??? dieser Aufruf ist unklar !!!!!!!!!
       (if (or (eq fun in-fun)
-              (and (generic-fun-p fun)
+              (and (generic-fun? fun)
                    (eq (?discriminating-fun fun) in-fun)
                    (setq fun (?discriminating-fun fun))))
           ;; rest-recursion
@@ -419,8 +419,8 @@
                    (?type-descr-s in-fun)
                    () ; no recursive
                    )))
-          (if (or (local-static-p result)
-                  (tempvar-p result))
+          (if (or (local-static? result)
+                  (tempvar? result))
               (setf (?link result)
                     (cons (cons return 1) ;1-01.06 *hf*
                           (?link result))) ; ! neu 03.06 *hf*

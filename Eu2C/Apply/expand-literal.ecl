@@ -58,7 +58,7 @@
     (make-literal-instance
      ;;%function
      (cl:symbol-value (cl:find-symbol "%FUNCTION" "MACHINE-DESCRIPTION"))
-     (list (if (generic-fun-p function-object)
+     (list (if (generic-fun? function-object)
                (?discriminating-fun function-object)
              function-object)))))
 
@@ -76,7 +76,7 @@
 
 (defmethod get-functions-used-in-literals ()
   (mapcan (lambda (lit)
-            (remove-if-not #'fun-p (?value-list lit)))
+            (remove-if-not #'fun? (?value-list lit)))
           *literals*))
 
 (defmethod ?byte-length-as-component ((pobj t))

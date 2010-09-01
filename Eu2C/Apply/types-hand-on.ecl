@@ -105,8 +105,8 @@
 (defun find-join-label1 (block)
   (let ((result (?result block))
         (out-label (?out-label block)))
-    (if (join-label-p out-label) (cons out-label 1)
-      (if (test-p result)
+    (if (join-label? out-label) (cons out-label 1)
+      (if (test? result)
           (let* ((then (find-join-label1 (?then-block result)))
                  (else (if then (find-join-label1 (?else-block result)) ())))
             (if else

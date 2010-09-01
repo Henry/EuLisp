@@ -588,12 +588,12 @@ given in the constructor form" :class )
 ;;; Generation of trace functions
 ;;;-----------------------------------------------------------------------------
 
-(defgeneric pointer-representation-p(representation))
+(defgeneric pointer-representation?(representation))
 
-(defmethod pointer-representation-p
+(defmethod pointer-representation?
   ((representation <%pointer>))
   t)
-(defmethod pointer-representation-p
+(defmethod pointer-representation?
   (representation)
   ())
 
@@ -608,7 +608,7 @@ given in the constructor form" :class )
          (len (length slot-descrs))
          (ptr ^ptr)
          (trace-calls (cl:mapcan (lambda(slot)
-                                   (if (pointer-representation-p
+                                   (if (pointer-representation?
                                         (?representation (~slot-description-type slot)))
                                        (list `(,trace-pointer (,%cast
                                                                ,<pointer-to-void>
@@ -649,7 +649,7 @@ given in the constructor form" :class )
 (defmethod generate-trace-code
   ((representation-instance <%pointer-to-vector>)
    class )
-  (if (pointer-representation-p (?representation (~vector-class-element-type class)))
+  (if (pointer-representation? (?representation (~vector-class-element-type class)))
       ;;since all elements have the same type, use trace-general-object
       (%function-literal trace-general-object)
     ;;noting to do here

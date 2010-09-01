@@ -42,7 +42,7 @@
          set-write-side-effect
          <gloc> <fgloc>
          ?gplace ?fun ?glocs
-         gloc-p
+         gloc?
          )
  )
 

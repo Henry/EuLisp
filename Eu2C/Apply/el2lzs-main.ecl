@@ -334,7 +334,7 @@
                              (t (list body))))         ; exactly 1 expression
 
                  (dynamic-let ((lex-env (?lex-env (dynamic *current-module*))) ;imported bindings
-                               (dynamic-env (remove-if-not #'dynamic-p
+                               (dynamic-env (remove-if-not #'dynamic?
                                                            (?var-list (dynamic *current-module*))))
                                ;;(symbol-env (?sym-list (dynamic *current-module*)))
                                (undefined-functions ()))
@@ -478,7 +478,7 @@
                  (setq body (trans-module-header module-def))
 
                  (dynamic-let ((lex-env (?lex-env (dynamic *current-module*))) ;imported bindings
-                               (dynamic-env (remove-if-not #'dynamic-p
+                               (dynamic-env (remove-if-not #'dynamic?
                                                            (?var-list (dynamic *current-module*))))
                                ;;(symbol-env (?sym-list (dynamic *current-module*)))
                                (undefined-functions ()))

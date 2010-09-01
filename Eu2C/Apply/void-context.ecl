@@ -168,7 +168,7 @@
   ;; (not jet impleemnted)
   ;;
   (let ((fun (?function form)))
-    (if (cont-p fun) (error "continuation not implemented")
+    (if (cont? fun) (error "continuation not implemented")
       (call-a-function fun (?arg-list form) () (?read-glocs form)))))
 
 (defmethod l2m-a ((con <void>) (form <set-slot-value>))

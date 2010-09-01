@@ -208,7 +208,7 @@
 (defun range&domain-as-signature-p (fun)
   (and (?range-and-domain fun)
        (null? (?signature fun))
-       (null? (defined-generic-fun-p fun))
+       (null? (defined-generic-fun? fun))
        (null? (eq %object (vector-ref (?range-and-domain fun) 0)))))
 
 ;;;-----------------------------------------------------------------------------

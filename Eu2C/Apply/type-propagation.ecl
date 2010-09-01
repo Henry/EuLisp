@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -172,16 +172,16 @@
 (defun link-var-vec1 (var-vec stat nr arg-anz)
   (if (> nr arg-anz) var-vec
     (let ((var (vector-ref var-vec nr)))
-      (cond ((or (local-static-p var)
-                 (tempvar-p var))
+      (cond ((or (local-static? var)
+                 (tempvar? var))
              (setf (?link var)
                    (cons (cons stat nr)
                          (?link var)))))
       (link-var-vec1 var-vec stat (+ nr 1) arg-anz))))
 
 (defun link-funcall-variable (var funcall)
-  (cond ((or (local-static-p var)
-             (tempvar-p var))
+  (cond ((or (local-static? var)
+             (tempvar? var))
          (setf (?link var)
                (cons (cons funcall $funcall)
                      (?link var)))
@@ -223,7 +223,7 @@
 ;;      (if (= tspec 0) (propagate-type-descr1
 ;;                       (cdr tdescrs) call varvec argnum)
 ;;          ())
-;;      (if (and (act-type-descr-p td)
+;;      (if (and (act-type-descr? td)
 ;;               (> (?error-spec td) 0))
 ;;        (progn (setq tspec (?error-spec td))
 ;;               (setq error t))
@@ -246,7 +246,7 @@
 ;;))
 
 ;;(defun prop-var-type (var type path err)
-;;  (if (null? (or (tempvar-p var) (local-static-p var))) ()
+;;  (if (null? (or (tempvar? var) (local-static? var))) ()
 ;; !!!! global variables not correct implemented !!!
 ;;      (let ((new ()))
 ;;        (dynamic-let ((new-td-stats ()))
@@ -259,7 +259,7 @@
 ;;        (t (let ((td (car (car td-st-list)))
 ;;                 (stat (cdr (car td-st-list))))
 ;;             (cond ((specialize-fun-app-type
-;;                     (if (fun-p stat) stat (?function stat))
+;;                     (if (fun? stat) stat (?function stat))
 ;;                     td
 ;;                     (?var-descr stat) (?arg-num stat))
 ;;                    (propagate-type-descrs (list td) stat)))
@@ -295,7 +295,7 @@
 ;;                                    (dynamic new-td-stats)))
 ;;                        ())))))
 ;;; make a new typedescr
-;;          (t (let* ((curtd (if (fun-p stat)
+;;          (t (let* ((curtd (if (fun? stat)
 ;;                            (make <formal-type-descr>
 ;;                                  :path path
 ;;                                  :type-spec 0)

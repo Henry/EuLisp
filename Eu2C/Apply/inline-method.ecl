@@ -162,7 +162,7 @@
 (defun inline-method (method-def var-list)
   (let* ((fun (?fun method-def))
          (params (?params fun)))
-    (if (imported-p fun)
+    (if (imported? fun)
         (progn
           (if (?rest params)
               (progn
@@ -274,7 +274,7 @@
 
 (defmethod copy-lzs-form ((form <app>))
   (let* ((fun (?function form))
-         (newvar (if (var-ref-p fun)
+         (newvar (if (var-ref? fun)
                      (assoc (?var fun) (dynamic inline-env))
                    ())))
     (if (eq fun %call-next-method)
@@ -310,7 +310,7 @@
 
 (defmethod copy-lzs-form ((form <setq-form>))
   (let* ((location (?location form))
-         (isvar (if (defined-named-const-p location)
+         (isvar (if (defined-named-const? location)
                     () t))
          (newvar (if isvar (assoc (?var location) (dynamic inline-env))
                    ())))
@@ -341,7 +341,7 @@
 (defun copy-var-list (old-vars)
   (if old-vars
       (cons (let ((var (car old-vars)))
-              (if (local-static-p var)
+              (if (local-static? var)
                   (make-instance <local-static>
                                  :identifier (?identifier var)
                                  :module (?module var))

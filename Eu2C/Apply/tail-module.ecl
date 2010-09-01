@@ -190,7 +190,7 @@
 
 (defun reset-%tail ()
   (setf (?fun-list $tail-module)
-        (delete-if-not #'special-sys-fun-p (?fun-list $tail-module)))
+        (delete-if-not #'special-sys-fun? (?fun-list $tail-module)))
   ;;?var-list is set by set-init-fun-for-tail-module
   (setf (?named-const-list $tail-module) ())
   (setf (?sym-list $tail-module) ())

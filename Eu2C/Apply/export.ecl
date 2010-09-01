@@ -89,7 +89,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun export-identifier (object)
-  (or (and (global-p object)
+  (or (and (global? object)
            (?exported object)
            (if (cons? (car (?exported object)))
                (car (car (?exported object)))
@@ -97,17 +97,17 @@
       (?identifier object)))
 
 (defun exporting-module (object)
-  (and (global-p object)
+  (and (global? object)
        (?exported object)
        (cdr (?exported object))))
 
 (defun invisible-exported? (object)
-  (and (global-p object)
+  (and (global? object)
        (?exported object)
        (cons? (car (?exported object)))))
 
 (defun explicitely-exported? (object)
-  (and (global-p object)
+  (and (global? object)
        (?exported object)
        (null? (cons? (car (?exported object))))))
 
@@ -172,7 +172,7 @@
   ;; 1. the case of generated functions bound to constants is handled separately
   ;;    then only the function is exported
   ;; 2. no invisible exports are possible for constants
-  (if (fun-p (?value object))
+  (if (fun? (?value object))
       (export-obj (?value object) module (or export-identifier (?identifier object)))
     (mark-object-as-exported object module (or export-identifier (?identifier object)))))
 
@@ -287,7 +287,7 @@
 (defun export-objects-used-in-macro-function (fun module)
   (traverse-lzs-form (?body fun)
                      (lambda (form)
-                       (when (global-p form)
+                       (when (global? form)
                              (export-invisible form module)))))
 
 (defmethod traverse-lzs-form (form function)

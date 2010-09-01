@@ -75,12 +75,12 @@
   ;; var-ref - funcall
   ;; cont - goto ??
   ;;  defined-named-const, imported-named-const - funcall
-  (if (named-const-p fun)
+  (if (named-const? fun)
       (setq fun (?value fun))
-    (if (var-ref-p fun) (setq fun (?var fun)) ()))
+    (if (var-ref? fun) (setq fun (?var fun)) ()))
   (let* ((arg-num (length arg-list))
          (call
-          (cond ((fun-p fun)
+          (cond ((fun? fun)
                  (let ((rglocs
                         (if (?fread-gloc fun)
                             (balance-side-effects1
@@ -89,7 +89,7 @@
                        (wglocs
                         (if (?fwrite-gloc fun)
                             (?glocs (?fwrite-gloc fun)) ())))
-                   (if (special-sys-fun-p fun)
+                   (if (special-sys-fun? fun)
                        (if last
                            (make <last-asm> :function fun
                                  :read-glocs rglocs
@@ -107,13 +107,13 @@
                      ))
                  )
                 ;; var = <local-static>, <global-static>, <imported-static>, <dynamic>
-                ((local-static-p fun)
+                ((local-static? fun)
                  (make <funcall> :value fun :closure-call t
                        :read-glocs (balance-side-effects1
                                     (?glocs *funcall-fread-gloc*)
                                     read-glocs)
                        :write-glocs (?glocs *funcall-fwrite-gloc*)))
-                ((var-p fun)
+                ((var? fun)
                  ;; global-read
                  (make <funcall> :value fun :closure-call t
                        :read-glocs (balance-side-effects1
@@ -152,7 +152,7 @@
                                    arg-num
                                    ())))
       ;; rename local-static-variable
-      (if (and (funcall-p call) (local-static-p (?value call)))
+      (if (and (funcall? call) (local-static? (?value call)))
           (let ((tempvar (rename (?value call))))
             (setq fun  tempvar)
             (setf (?value call) fun))
@@ -168,7 +168,7 @@
       ;; make a type - inference
       (setq typedescrs
             (inference fun typedescrs))
-      (if (and (generic-fun-p fun) *actual-method-subset*
+      (if (and (generic-fun? fun) *actual-method-subset*
                (null? (cdr *actual-method-subset*))) ; only one method
           (progn
             ;;           (format t "M")
@@ -190,14 +190,14 @@
         ;; link variable
         (let ((curblock (dynamic block)))
           (link-var-vec var-vec call arg-num)
-          (if (funcall-p call)
+          (if (funcall? call)
               (link-funcall-variable (?value call) call) ())
           ;; add the statement to the Block
           (setf (?block call) curblock)
           (setf (?body curblock)
                 (append-stat (?body curblock) call))
           ;; add annotation to the function
-          (cond ((null? (funcall-p call))
+          (cond ((null? (funcall? call))
                  (setf (dynamic calls)
                        (cons call (dynamic calls)))))
           ;; result
@@ -206,8 +206,8 @@
 (defun unlink-var-vec (var-vec call nr arg-num)
   (if (> nr arg-num) var-vec
     (let ((var (vector-ref var-vec nr)))
-      (if (or (local-static-p var)
-              (tempvar-p var))
+      (if (or (local-static? var)
+              (tempvar? var))
           (setf (?link var) (unlink-var-vec1 (?link var) call))
         ())
       (unlink-var-vec var-vec call (+ nr 1) arg-num))))
@@ -240,7 +240,7 @@
 ;; (dynamic *inline*) is defined in the module 'configuration'
 
 (defun inline-able (fun)
-  (if (global-fun-p fun)
+  (if (global-fun? fun)
       (progn (lzs2mzs-fun fun)
              (if (and (dynamic *inline*)
                       (> (?pass fun) 2))
@@ -250,10 +250,10 @@
                         (calls (?calls fun)))
                    (if (and (eq start-block (car end-blocks))
                             (null? (cdr end-blocks)))
-                       (if (or (module-init-fun-p (analysed-fun))
+                       (if (or (module-init-fun? (analysed-fun))
                                (eq (dynamic *inline*) 0))
-                           (and (or (slot-accessor-fun-p fun)
-                                    (slot-init-fun-p fun))
+                           (and (or (slot-accessor-fun? fun)
+                                    (slot-init-fun? fun))
                                 (only-asm-stats-small calls))
                          (only-asm-stats-big calls))
                      ()))
@@ -271,10 +271,10 @@
 (defun only-asm-stats1 (stats n)
   (if (null? stats) n
     (let ((stat (car stats)))
-      (if (or (last-asm-p stat)
-              (asm-p stat)
-              (and (or (call-p stat) (last-call-p stat))
-                   (constructor-fun-p (?function stat))))
+      (if (or (last-asm? stat)
+              (asm? stat)
+              (and (or (call? stat) (last-call? stat))
+                   (constructor-fun? (?function stat))))
           (only-asm-stats1 (cdr stats) n)
         (only-asm-stats1 (cdr stats) (+ n 1))
         ))))

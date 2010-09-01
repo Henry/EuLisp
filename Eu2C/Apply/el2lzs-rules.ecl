@@ -538,7 +538,7 @@
 
 (deftrans (setq ID EXPR)
   (let ((location (trans ID)))
-    (if (var-ref-p location)
+    (if (var-ref? location)
         (make-instance <setq-form>
                        :location location
                        :form (trans EXPR))
@@ -1113,7 +1113,7 @@
            init-value) ; this must be a literal, which means that if value is
      ;; a constant then its initial value must be
      ;; already computed and known at compile time
-     (when (literal-instance-p init-value)
+     (when (literal-instance? init-value)
            (setf (?type const)
                  (?class init-value)))
      ())))

@@ -98,7 +98,7 @@
       `(progn
          (defclass ,class-name ,supers (,@slots))
          (setq ,class-name (find-class ',class-name))
-         (defun ,(new-name "" name "-P") (x) (typep x ',class-name))
+         (defun ,(new-name "" name "?") (x) (typep x ',class-name))
          (eval-when
              (:compile-toplevel :load-toplevel :execute)
            (export ',new-names))

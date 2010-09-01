@@ -559,7 +559,7 @@
   (c-identifier var))
 
 (defmethod name-global-object ((const <named-const>))
-  (if (fun-p (?value const))
+  (if (fun? (?value const))
       (name-global-object (?value const))
     (c-identifier const)))
 
@@ -637,7 +637,7 @@
   (x-identifier var))
 
 (defmethod name-exported-object ((const <named-const>))
-  (if (fun-p (?value const))
+  (if (fun? (?value const))
       (name-exported-object (?value const))
     (x-identifier const)))
 

@@ -155,7 +155,7 @@
 
 (defun lzs2mzs-exported-fun (fun)
   (if (eq (?pass fun) 3) ()
-    (if (and (global-fun-p fun) (?exported fun))
+    (if (and (global-fun? fun) (?exported fun))
         (lzs2mzs-fun fun) ())))
 
 #module-end

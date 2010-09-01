@@ -177,7 +177,7 @@
                      (compute-decision-tree da do methods
                                             ;;(sort-methods da do gf methods)
                                             )))
-                (if (or (method-def-p tree)
+                (if (or (method-def? tree)
                         (< (length tree) $maximum-of-decisions))
                     (progn
                       (if (dynamic error-methods)
@@ -450,7 +450,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defun compute-std-discrfun-4-few-methods (gf few-methods)
-  (if (method-def-p few-methods) (?fun few-methods)
+  (if (method-def? few-methods) (?fun few-methods)
     ;; few-methods is a dedecision tree
     (dynamic-let ((in-generic-fun gf)
                   (next-method?arams (?params gf)))

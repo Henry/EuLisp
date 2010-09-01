@@ -102,7 +102,7 @@
 
 (defun get-constant-function-value (fun)
   (let ((value (?body fun)))
-    (if (named-const-p value)
+    (if (named-const? value)
         (?value value)
       value)))
 
@@ -336,14 +336,14 @@
 (defmethod function-with-constant-value? ((fun <simple-fun>))
   (let ((body (?body fun)))
     (and (null? (eq body ^unknown))
-         (or (and (named-const-p body)
+         (or (and (named-const? body)
                   (null? (eq (?value body) ^unknown)))
-             (sym-p body)
-             (structured-literal-p body)
-             (literal-instance-p body)
-             (class-def-p body)
-             (fun-p body)
-             (null? (lzs-object-p body)) ; for example a number
+             (sym? body)
+             (structured-literal? body)
+             (literal-instance? body)
+             (class-def? body)
+             (fun? body)
+             (null? (lzs-object? body)) ; for example a number
              ))))
 
 (defmethod create-slot-defs-of-imported-class (class effective-slot-specs)

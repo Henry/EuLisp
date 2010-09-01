@@ -59,7 +59,7 @@
 ;;; Condense generic type schemes (type-descr-s) of statements to one-line
 ;;; schemes (type-descr).
 (defun clear-types1 (fun)
-  (if (and (simple-fun-p fun)
+  (if (and (simple-fun? fun)
            (or (= (?pass fun) 3)
                (= (?pass fun) 5)))
       (let ((calls (?calls fun))
@@ -83,7 +83,7 @@
 ;;; Condense generic type schemes (signature) of functions to one-line
 ;;; schemes (type-descr). Global optimization is performed.
 (defun clear-types2-global-optimization (fun)
-  (if (and (simple-fun-p fun) (= (?pass fun) 3))
+  (if (and (simple-fun? fun) (= (?pass fun) 3))
       (let* ((applications (append (?rec-calls fun) (?applications fun)))
              (typedescr (cond ((null? (?applications fun))  ; e.g. init funs
                                (balance (?signature fun)))
@@ -98,7 +98,7 @@
 ;;; Condense generic type schemes (signature) of functions to one-line
 ;;; schemes (type-descr). No global optimization is performed.
 (defun clear-types2 (fun)
-  (if (and (simple-fun-p fun) (= (?pass fun) 3))
+  (if (and (simple-fun? fun) (= (?pass fun) 3))
       (progn
         (setf (?type-descr fun) (balance (?signature fun)))
         (setf (?type-descr-s fun) ()))))
@@ -107,7 +107,7 @@
 (defun clear-types3 (fun)
   (if (null? (signature-needed-for-code-generation? fun))
       (setf (?signature fun) ()))       ; no longer needed
-  (if (and (simple-fun-p fun)
+  (if (and (simple-fun? fun)
            (or (= (?pass fun) 5)
                (= (?pass fun) 3)))
       (let ((calls (?calls fun))
@@ -168,7 +168,7 @@
 
 (defun balance-and-clear-types-calls (call)
   (balance-and-clear-types call)
-  (if (and (generic-fun-p (?function call))
+  (if (and (generic-fun? (?function call))
            (null? (member call (dynamic generic-calls))))
       (dynamic-setq generic-calls (cons call (dynamic generic-calls))))
   )
@@ -180,8 +180,8 @@
     (if tds
         (setf (?type-descr move) (balance tds))
       (setf (?type-descr move) td))
-    (if (and (or (tempvar-p var)
-                 (local-static-p var))
+    (if (and (or (tempvar? var)
+                 (local-static? var))
              (null? (member var (dynamic move-vars)))
              (more-than-one-assignment (?link var)))
         (dynamic-setq move-vars (cons var (dynamic move-vars)))

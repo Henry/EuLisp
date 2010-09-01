@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
@@ -180,9 +180,9 @@
   (inline-body (?body block) ())
   (inline-interface (?interface block))
   (inline-result con (?result block))
-  (if (test-p (?result block))
+  (if (test? (?result block))
       ()
-    (if (goto-p (?result block))
+    (if (goto? (?result block))
         (setf (?out-label (dynamic block))
               (cdr (assoc (?out-label block) (dynamic ienv))))
       (inline-out-label (?out-label block) con)))
@@ -251,14 +251,14 @@
          (then-interface (?interface then-block))
          (then-result (?result then-block))
          (then-empty (and (null? then-body) (null? then-interface)))
-         (then-empty-return (and then-empty (return-p then-result)))
+         (then-empty-return (and then-empty (return? then-result)))
          ;;   else
          (else-block (?else-block result))
          (else-body (?body else-block))
          (else-interface (?interface else-block))
          (else-result (?result else-block))
          (else-empty (and (null? else-body) (null? else-interface)))
-         (else-empty-return (and else-empty (return-p else-result)))
+         (else-empty-return (and else-empty (return? else-result)))
          (divided (?divided con))
          )
     (if (and then-empty-return else-empty-return (null? divided))
@@ -275,7 +275,7 @@
           ;; doppelter link  (link-var-vec var-vec con 2)
           (let ((value (?value then-result)))
             (if (or (null? value)
-                    (and (named-const-p value)
+                    (and (named-const? value)
                          (null? (?value value))))
                 (progn
                   (setq value (?then-block con))
@@ -294,7 +294,7 @@
                        (let* ((value (?value then-result))
 
                               (newblock (if (or (null? value)
-                                                (and (named-const-p value)
+                                                (and (named-const? value)
                                                      (null? (?value value))))
                                             ;; the result is () / false
                                             (progn
@@ -318,7 +318,7 @@
                    (if else-empty-return
                        (let* ((value (?value else-result))
                               (newblock (if (or (null? value)
-                                                (and (named-const-p value)
+                                                (and (named-const? value)
                                                      (null? (?value value))))
                                             ;; the result is () / false
                                             (progn
@@ -704,7 +704,7 @@
       ;; make a type - inference
       (setq typedescrs
             (inference fun typedescrs))
-      (if (and (generic-fun-p fun) *actual-method-subset*
+      (if (and (generic-fun? fun) *actual-method-subset*
                (null? (cdr *actual-method-subset*))) ; only one method
           (progn
             (format t "m")
