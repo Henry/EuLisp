@@ -51,7 +51,7 @@
            (let ((no-type-clash t))
              (dolist (equ (?equations (?type-vars descr)))
                      (let ((expr (?right-expr equ)))
-                       (if (and no-type-clash (atomic-type-p expr))
+                       (if (and no-type-clash (atomic-type? expr))
                            (if (?comp-name expr)
                                (let ((new-name (check-compound-types-after (?name expr))))
                                  (if new-name
@@ -121,7 +121,7 @@
                  (no-type-clash t))
              (dolist (equ eqs)
                      (let ((expr (?right-expr equ)))
-                       (if (and no-type-clash (atomic-type-p expr))
+                       (if (and no-type-clash (atomic-type? expr))
                            (if (?comp-name expr)
                                (let ((new-name (check-compound-types-before (?name expr))))
                                  (if new-name
@@ -183,7 +183,7 @@
            (let ((no-type-clash t))
              (dolist (equ (?equations (?type-vars descr)))
                      (let ((expr (?right-expr equ)))
-                       (if (and no-type-clash (atomic-type-p expr))
+                       (if (and no-type-clash (atomic-type? expr))
                            (let ((new-name (convert-all-compound-types (?name expr))))
                              (if new-name
                                  (let ((new-name (compute-to-atom new-name)))
@@ -232,7 +232,7 @@
 (DEFMETHOD reset-write-access-stamps ((descr <type-descr>))
            (dolist (equ (?equations (?type-vars descr)))
                    (let ((expr (?right-expr equ)))
-                     (if (atomic-type-p expr)
+                     (if (atomic-type? expr)
                          (reset-write-access-stamps (?name expr))))))
 
 (DEFMETHOD reset-write-access-stamps ((name <pair>))

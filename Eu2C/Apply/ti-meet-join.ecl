@@ -65,12 +65,12 @@
         (code2 (?code expr2)))
     (cond ((general-type-p expr1) expr2)
           ((general-type-p expr2) expr1)
-          ((complement-codes-p code1 code2) ())
+          ((complement-codes? code1 code2) ())
           ((subcode-p code1 code2) expr1)
           ((subcode-p code2 code1) expr2)
           (t
            (let ((new-code (meet-codes (?code expr1) (?code expr2))))
-             (if (bottom-code-p new-code)
+             (if (bottom-code? new-code)
                  ()
                (make <atomic-type>
                      :code new-code
@@ -177,7 +177,7 @@
   (let ((code1 (?code expr1))
         (code2 (?code expr2)))
     (cond ((or (general-type-p expr1) (general-type-p expr2)) (general-type))
-          ((complement-codes-p code1 code2) (general-type))
+          ((complement-codes? code1 code2) (general-type))
           ((subcode-p code1 code2) expr2)
           ((subcode-p code2 code1) expr1)
           (t

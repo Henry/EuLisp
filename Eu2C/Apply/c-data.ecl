@@ -41,7 +41,7 @@
          lzs accessors
          lzs-mop
          predicates
-         (only (configurationp)
+         (only (configuration?)
                configuration)
          (only (format
                 mapc
@@ -97,7 +97,7 @@
 (defun generate-c-data ()
   (setq *literals*
         (reverse (remove (expand-literal ()) *literals*)))
-  (when (configurationp ':int ':small)
+  (when (configuration? ':int ':small)
         (write-data "~%SMALL_INT_SKIP;"))
   (mapc (lambda (lit)
           (unless (imported-p (?unexpanded lit))

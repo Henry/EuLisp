@@ -80,7 +80,7 @@
                           :expression expr))
           ((eq expr-type type) expr)
           ((and (dynamic *no-cast-if-compatible-representation*)
-                (compatible-representation-p type (?representation type)
+                (compatible-representation? type (?representation type)
                                              expr-type (?representation expr-type)))
            expr)
           ((or (is-subclass expr-type type)
@@ -111,30 +111,30 @@
 (defun is-subclass (class superclass)
   (member class (~class-precedence-list superclass)))
 
-(defgeneric compatible-representation-p (class1 rep1 class2 rep2))
+(defgeneric compatible-representation? (class1 rep1 class2 rep2))
 
-(defmethod compatible-representation-p (class1 rep1 class2 rep2)
+(defmethod compatible-representation? (class1 rep1 class2 rep2)
   ())
 
-(defmethod compatible-representation-p (class1 (rep1 <%direct>)
+(defmethod compatible-representation? (class1 (rep1 <%direct>)
                                                class2 rep2)
   (setq class1
         (~slot-description-type (car (~class-slot-descriptions class1))))
-  (compatible-representation-p class1 (?representation class1)
+  (compatible-representation? class1 (?representation class1)
                                class2 rep2))
 
-(defmethod compatible-representation-p (class1 rep1
+(defmethod compatible-representation? (class1 rep1
                                                class2 (rep2 <%direct>))
   (setq class2
         (~slot-description-type (car (~class-slot-descriptions class2))))
-  (compatible-representation-p class1 rep1
+  (compatible-representation? class1 rep1
                                class2 (?representation class2)))
 
-(defmethod compatible-representation-p (class1 (rep1 <%pointer>)
+(defmethod compatible-representation? (class1 (rep1 <%pointer>)
                                                class2 (rep2 <%pointer-to-void>))
   t)
 
-(defmethod compatible-representation-p (class1 (rep1 <%pointer-to-void>)
+(defmethod compatible-representation? (class1 (rep1 <%pointer-to-void>)
                                                class2 (rep2 <%pointer>))
   t)
 

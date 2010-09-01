@@ -359,14 +359,14 @@
       (subseq string 0 *max-identifier-size*)
     string))
 
-(defun c-alpha-char-p (char)
+(defun c-alpha-char? (char)
   (or (alpha-char-p char) (eql char #\_)))
 
-(defun c-alphanumeric-char-p (char)
+(defun c-alphanumeric-char? (char)
   (or (alphanumericp char) (eql char #\_)))
 
 (defun delete-leading-and-terminating-nonalpha (string)
-  (let ((start (position-if #'c-alpha-char-p string))
+  (let ((start (position-if #'c-alpha-char? string))
         (end (position-if #'alphanumericp string :from-end t)))
     (cond ((null? start) $generated-identifier-prefix)
           ((and (= start 0)
@@ -380,7 +380,7 @@
                  string))
 
 (defun delete-non-c-id-chars (string)
-  (delete-if-not #'c-alphanumeric-char-p string))
+  (delete-if-not #'c-alphanumeric-char? string))
 
 (defun make-c-unique (string)
   ;; This function must transform a given name such that

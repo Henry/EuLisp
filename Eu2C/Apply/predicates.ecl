@@ -32,7 +32,7 @@
          signature-needed-for-code-generation-p
          exported-for-lisp-p
          exported-p
-         class-sealed-p
+         class-sealed?
          generic-function-sealed-p
          unknown-applications-p
          is-lisp))
@@ -68,7 +68,7 @@
   (and (global-p obj)
        (?exported obj)))
 
-(defun class-sealed-p (class)
+(defun class-sealed? (class)
   ;; returns true if it is impossible to create an additional subclass for class
   ;; outside the compilation unit (i.e in using modules or at runtime)
   (or (null? (?exported class))

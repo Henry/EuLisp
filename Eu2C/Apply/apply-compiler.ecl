@@ -27,7 +27,7 @@
 (import (level-1-eulisp
          lzs
          mzs-to-lzs
-         (only (configurationp
+         (only (configuration?
                 init-configuration-table)
                configuration)
          (only (ti-initialize

@@ -79,7 +79,7 @@
 (defun slot-description-option ()
   (if *basic-system* ^effective-slot-descriptions ^direct-slot-descriptions))
 
-(defun accessor-bindings-needed-p ()
+(defun accessor-bindings-needed? ()
   (null? *basic-system*))
 
 (defun class-allocation (alloc-if-defined)
@@ -133,7 +133,7 @@
                                   ^mm-type $class-type-descriptor
                                   ))
 
-               (when (accessor-bindings-needed-p)
+               (when (accessor-bindings-needed?)
                      (name-and-export-reader %class ^class-precedence-list
                                              ^%class-precedence-list)
                      (name-and-export-reader %class ^slot-descriptions
@@ -182,8 +182,8 @@
                                   (list (list ^name ^length)
                                         (list ^name ^element
                                               ^type %unsigned-byte-integer
-                                              ^reader (accessor-bindings-needed-p)
-                                              ^writer (accessor-bindings-needed-p))
+                                              ^reader (accessor-bindings-needed?)
+                                              ^writer (accessor-bindings-needed?))
                                         )
                                   ^direct-keywords (let ((keywords ^(length element)))
                                                      (mapc #'make-defined-sym keywords)

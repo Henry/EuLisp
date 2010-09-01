@@ -389,7 +389,7 @@
          ;; because they are defined in the application to allow more optimized dispatch
          ;; functions.
          "extern ")
-        ((null? (c-extern-p fun))
+        ((null? (c-extern? fun))
          "static ")
         (t "")))
 
@@ -450,10 +450,10 @@
                      (with-local-identifiers
                       (generate-function-header fun ())       ; without storage class
                       (write-code "~%~:[{~;~]~@/STMT/~@*~:[}~;~]"
-                                  (block-form-p (?body fun))
+                                  (block-form? (?body fun))
                                   (?body fun))))))
 
-(defun block-form-p (form)
+(defun block-form? (form)
   (or (progn-form-p form)
       (let*-form-p form)
       (labels-form-p form)
@@ -860,7 +860,7 @@
         (type1 (svref types 1))
         (type2 (svref types 2)))
     (cond ((eq type1 type2) args) ; to make the most simple case fast
-          ((c-typing::compatible-representation-p type1
+          ((c-typing::compatible-representation? type1
                                                   (~class-representation type1)
                                                   type2
                                                   (~class-representation type2))
@@ -1094,7 +1094,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Information about LZS-Objects
 ;;;-----------------------------------------------------------------------------
-(defun c-extern-p (fun)
+(defun c-extern? (fun)
   (or t  ; at this place it should be proved whether the functions pointer is
       ;; used (function as data) or not (test result T resp. NIL) *11*
       (imported-p fun)

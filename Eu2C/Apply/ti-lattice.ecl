@@ -79,7 +79,7 @@
          ~compute-lattice-type compute-normalized-lattice-type
          join-lattice-types meet-lattice-types complement-lattice-type-code
          meet-lattice-types-p lattice-subtype-p
-         top-lattice-type-p bottom-lattice-type-p
+         top-lattice-type-p bottom-lattice-type?
          eq-lattice-type copy-lattice-type
          expand-all-lattice-type-literals
          find-lattice-type-for-literal
@@ -596,7 +596,7 @@
 ;;;-----------------------------------------------------------------------------
 
 ;;; Answer whether a lattice type denotes the bottom type.
-(defun bottom-lattice-type-p (lattice-type) ;<lattice-type>
+(defun bottom-lattice-type? (lattice-type) ;<lattice-type>
   (eq-code-p (?code lattice-type) *bottom-code*))
 
 ;;; Answer whether a lattice type denotes the top type.

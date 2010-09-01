@@ -120,14 +120,14 @@
     (if (null? new-slot-value-type)
         (setq new-slot-value-type slot-value-type))
     (if *use-compound-types*
-        (check-write-access-stamp struct-type slot-name slot-value-type))
+        (check-write-access-stam? struct-type slot-name slot-value-type))
     ;;    (format t "~%Notice: %setf-select with type ~A for slot ~A in ~A"
     ;;          (ti-print-string-no-cr new-slot-value-type)
     ;;          slot-name
     ;;          (ti-print-string-no-cr struct-type))
     (filled-formal-descr new-slot-value-type struct-type new-slot-value-type)))
 
-(defun check-write-access-stamp (struct-type slot-name slot-value-type)
+(defun check-write-access-stam? (struct-type slot-name slot-value-type)
   (if (fpi-list-type-p struct-type)
       (progn
         (format t "~%struct: ~A, slot: ~A, value: ~A"
@@ -168,7 +168,7 @@
 ;;                new-slot-type)))))
 ;;    (setq result-type new-slot-type)
 ;;    (if *use-compound-types*
-;;      (check-write-access-stamp
+;;      (check-write-access-stam?
 ;;       (compute-normalized-lattice-type (?name struct-type))
 ;;       slot-name
 ;;       (compute-normalized-lattice-type (?name new-slot-type))))

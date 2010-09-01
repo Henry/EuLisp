@@ -38,7 +38,7 @@
          <atomic-type> ?code ?name ?comp-name
          <type-var> ?id
          <slot-id> ?slot-name
-         atomic-type-p type-var-p slot-id-p
+         atomic-type? type-var-p slot-id-p
          contains-type-var-p eq-type-var-p
          substitute-type-var class-as-type-expr
          new-type-var new-type-var-id reset-actual-type-var-id
@@ -51,7 +51,7 @@
          fpi-list-type fpi-list-type-p
          <function>-type <function>-type-p
          <fpi>-type <fpi>-type-p
-         no-type-p %class-type-p %function-type %integer-type)
+         no-type-p %class-type? %function-type %integer-type)
  )
 
 ;;;-----------------------------------------------------------------------------
@@ -75,12 +75,12 @@
 ;;; TYPE EXPRESSION PREDICATES
 ;;;-----------------------------------------------------------------------------
 
-(defgeneric atomic-type-p (expr))
+(defgeneric atomic-type? (expr))
 
-(defmethod atomic-type-p ((expr <type-expr>))
+(defmethod atomic-type? ((expr <type-expr>))
   #f)
 
-(defmethod atomic-type-p ((expr <atomic-type>))
+(defmethod atomic-type? ((expr <atomic-type>))
   #t)
 
 ;;;-----------------------------------------------------------------------------
@@ -221,12 +221,12 @@
 
 ;;; Answer whether a type expression correspondes to %void.
 (defun %void-type-p (type-expr)
-  (and (atomic-type-p type-expr)
+  (and (atomic-type? type-expr)
        (eq-code-p (?code type-expr) *%void-code*)))
 
 ;;; Answer whether a type expression correspondes to %class.
-(defun %class-type-p (type-expr)
-  (and (atomic-type-p type-expr)
+(defun %class-type? (type-expr)
+  (and (atomic-type? type-expr)
        (eq-code-p (?code type-expr) *%class-code*)))
 
 ;;; Answer whether a type expression correspondes to fpi-list.

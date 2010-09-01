@@ -66,7 +66,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; should be provided generally in a separate module
 
-(defun abstract-class-p (class-def)
+(defun abstract-class? (class-def)
   (eq (?class class-def) %abstract-class))
 
 (defun tail-class-p (class-def)
@@ -333,7 +333,7 @@
   ;; Inserts a methods into a decision tree. The problems of this task were the
   ;; insertion of error methods and methods for abstract classes which must work
   ;; for all instantiable subclasses.
-  (if (abstract-class-p m-dom)
+  (if (abstract-class? m-dom)
       (insert-method-loop (~class-subclasses m-dom) meth tree)
     (let ((item (assoc m-dom (cdr tree))))
       (if item
@@ -375,7 +375,7 @@
         t ())))
 
 (defun sum-of-all-subclasses (dom)
-  (if (abstract-class-p dom)
+  (if (abstract-class? dom)
       (sum-of-all-subclasses-list (~class-subclasses dom))
     (+ 1 (sum-of-all-subclasses-list (~class-subclasses dom)))))
 

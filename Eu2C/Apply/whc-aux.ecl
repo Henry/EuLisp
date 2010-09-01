@@ -57,7 +57,7 @@
   give-variable
   give-constant
   give-variable-or-constant
-  basic-data-type-p
+  basic-data-type?
   data-float-p
   data-integer-p
   )
@@ -91,11 +91,11 @@
 (defun union-data-type-p (type)
   (subtypep (type-of type) <%union>))
 
-(defmethod basic-data-type-p ((type <basic-class-def>))
+(defmethod basic-data-type? ((type <basic-class-def>))
   t)
 
 
-(defmethod basic-data-type-p (type)
+(defmethod basic-data-type? (type)
   ())
 
 (defun give-data-type (symbol)
@@ -104,7 +104,7 @@
 
 
 (defun give-basic-data-type (symbol)
-  (when (basic-data-type-p symbol)
+  (when (basic-data-type? symbol)
         symbol))
 
 

@@ -191,7 +191,7 @@
         (ti-write-list-enclosed stream (?name expr) t)
       (cond ((and *%object* (%object-type-p expr))
              (format stream "<OBJECT>"))
-            ((and *%class* (%class-type-p expr))
+            ((and *%class* (%class-type? expr))
              (format stream "<CLASS>"))
             (t (ti-write stream name))))))
 

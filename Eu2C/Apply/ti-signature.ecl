@@ -39,7 +39,7 @@
              ti ti-codes  ti-lattice ti-exprs ti-eqs ti-write ti-copy
              ti-meet-join ti-unify ti-descrs ti-comp debugging
              messages ; *IM* 01.03.94
-             (only (class-sealed-p) predicates)
+             (only (class-sealed?) predicates)
              (only (name-of funtype-of) name-of-fun)
              (only (append dolist mapc mapcar vector remove-if-not
                            remove-if abs delete-if-not
@@ -338,7 +338,7 @@
 (defmethod get-most-specialized-class ((class <abstract-class-def>))
   (let ((subs (~class-subclasses class)))
     (if (and (= (length subs) 1)        ; one subclass?
-             (class-sealed-p class))    ; the one and only?
+             (class-sealed? class))    ; the one and only?
         (get-most-specialized-class (car subs))
       class)))
 

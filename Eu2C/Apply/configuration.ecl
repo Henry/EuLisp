@@ -51,7 +51,7 @@
  export (?configuration
          ?configuration-value
          ?configuration-values
-         configurationp
+         configuration?
          *global-optimization*
          init-configuration-table
          *ti-break*))
@@ -75,7 +75,7 @@
 ;;; interface functions
 ;;;-----------------------------------------------------------------------------
 
-(defun configurationp (key value)
+(defun configuration? (key value)
   (if (cl:member value (cdr(car(cl:member key configuration-table :key #'car))))
       t
     ()))
@@ -118,7 +118,7 @@
            (cl:some #'check-configuration (cdr conf)))
           ((eq op 'eulisp-symbol::and)
            (cl:every #'check-configuration (cdr conf)))
-          (t (configurationp (car conf) (car (cdr conf)))))))
+          (t (configuration? (car conf) (car (cdr conf)))))))
 
 
 

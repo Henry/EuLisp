@@ -130,9 +130,9 @@
   (dolist (equ (?equations (?type-vars obj)))
           (let ((left-expr (?left-expr equ))
                 (right-expr (?right-expr equ)))
-            (if (atomic-type-p left-expr)
+            (if (atomic-type? left-expr)
                 (update-atomic-type-expr-codes left-expr))
-            (if (atomic-type-p right-expr)
+            (if (atomic-type? right-expr)
                 (update-atomic-type-expr-codes right-expr)))))
 
 (defmethod update-type-expr-codes ((obj <fun>))

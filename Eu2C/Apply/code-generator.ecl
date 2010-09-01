@@ -30,7 +30,7 @@
 #module code-generator
 (import
  (level-1-eulisp
-  (only (?configuration configurationp) configuration)
+  (only (?configuration configuration?) configuration)
   accessors lzs
   predicates
   c-code
