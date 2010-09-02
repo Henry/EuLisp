@@ -55,10 +55,10 @@ all: all0 all0x
 all0: $(EXAMPLES_0_EXE)
 all0x: $(EXAMPLES_0X_EXE)
 
-$(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/eulisp-level-0.def
+$(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/eulisp-level-0.def
 	../Bin/eu2c -$(WL) -bs eulisp-level-0 $<
 
-$(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/eulisp0x.def
+$(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/eulisp0x.def
 	../Bin/eu2c -$(WL) -bs eulisp0x $<
 
 ###-----------------------------------------------------------------------------

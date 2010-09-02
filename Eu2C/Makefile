@@ -122,7 +122,7 @@ ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules
 	@echo "===> Compile the module library " $@
 	@cd ${Eu2CROOT}/EuLispModules && \
 	mkdir -p $(ARCH_DIR) && \
-	cp ti-sys-signatures.em ti-sys-signatures.def && \
+	cp ti-sys-signatures.em $(ARCH_DIR)/ti-sys-signatures.def && \
 	echo "(apply-compiler::compile-basic-system (cadr ext:*command-line-strings*)) (quit)" | \
 	$(call Eu2C,${Eu2CROOT}/$(eu2c_image),$(module)) && \
 	$(CC) -$(WL) $(CFLAGS) -I${Eu2CROOT}/Runtime -I$(ARCH_DIR) \
@@ -148,7 +148,10 @@ $(module_image): $(eu2c_image) ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
 README: README.html
 
 clean_images:
-	@rm -f ${Eu2CROOT}/Lib/*.$(image_ext)
+	@rm -f ${Eu2CROOT}/Lib/$(ARCH)/*.$(image_ext)
+
+distclean_images:
+	rm -rf ${Eu2CROOT}/Lib/*
 
 clean_module:
 	@rm -f ${Eu2CROOT}/EuLispModules/ti-sys-signatures.def
@@ -160,14 +163,11 @@ distclean_module: clean_module
 clean_fasl:
 	@rm -f ${Eu2CROOT}/{.,Apply,EclModules}/*.{fasl,bin,sse2f}
 
-clean_backups:
-	@rm -f {.,Apply,EclModules,EuLispModules}/*~
-
-clean: clean_fasl clean_backups
+clean: clean_fasl
 	@$(MAKE) -C ${Eu2CROOT}/Runtime clean
 	@$(MAKE) -C ${Eu2CROOT}/Examples clean
 
-distclean: clean_fasl clean_images distclean_module clean_backups
+distclean: clean_fasl distclean_images distclean_module
 	@$(MAKE) -C ${Eu2CROOT}/Runtime distclean
 	@$(MAKE) -C ${Eu2CROOT}/Examples distclean
 

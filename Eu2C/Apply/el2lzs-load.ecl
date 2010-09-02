@@ -92,7 +92,9 @@
   (make-pathname :name :wild :type "em"))
 
 (defconstant $def-module-file-extension
-  (make-pathname :name :wild :type "def"))
+  (make-pathname :name :wild :type "def"
+                 :directory `(:relative
+                              "platforms" ,common-lisp-user::*arch*)))
 
 (defvar *apply-module-file-extension* $apply-module-file-extension)
 

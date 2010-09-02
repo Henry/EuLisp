@@ -212,12 +212,6 @@ do
 
     echo "Eu2C: (compile-application $APP)"
 
-    # Rename $APPNAME.*
-    #[ -f ${APPNAME}.c ]    && mv ${APPNAME}.c ${APPNAME}.c~
-    #[ -f ${APPNAME}.inst ] && mv ${APPNAME}.inst ${APPNAME}.inst~
-    #[ -f ${APPNAME}.h ]    && mv ${APPNAME}.h ${APPNAME}.h~
-    #[ -f ${APPNAME}.def ]  && mv ${APPNAME}.def ${APPNAME}.def~
-
     # Check existence of image with precompiled basic system
     # use the image with preloaded basic system if it is younger than the
     # original eu2c-image and than the def-file of the basic system. only in
@@ -225,12 +219,12 @@ do
     # in a special image
     if
     [ \
-        -f "${Eu2CIMAGE}.${BASIC_SYSTEM}${IMAGE_EXT}" \
+        -f ${Eu2CIMAGE}.${BASIC_SYSTEM}${IMAGE_EXT} \
         -a ${Eu2CIMAGE}.${BASIC_SYSTEM}${IMAGE_EXT} \
         -nt ${Eu2CIMAGE}${IMAGE_EXT} \
-        -a -f $Eu2CROOT/EuLispModules/$BASIC_SYSTEM.def \
+        -a -f ${Eu2CROOT}/EuLispModules/${ARCH_DIR}/${BASIC_SYSTEM}.def \
         -a ${Eu2CIMAGE}.${BASIC_SYSTEM}${IMAGE_EXT} \
-        -nt $Eu2CROOT/EuLispModules/$BASIC_SYSTEM.def \
+        -nt ${Eu2CROOT}/EuLispModules/${ARCH_DIR}/${BASIC_SYSTEM}.def \
     ]
     then
         Eu2CIMAGE=$Eu2CIMAGE.$BASIC_SYSTEM
@@ -267,7 +261,6 @@ fi
 
 if [ "$STATE" = "-LC" -o "$STATE" = "-C" ]
 then
-    #[ -f ${APPNAME}.o ] && mv $APPNAME.o $APPNAME.o~
     set -x
     $CC -$MWORDLEN -c -o $ARCH_DIR/$APPNAME.o \
         $CCOPTIMIZE $CCOPTIONS  $INCLUDE $ARCH_DIR/$APPNAME.c

@@ -107,10 +107,8 @@
   (dynamic-let ((code-output
                  (if (code-debug) t
                    (open (make-pathname
-                          ;;***HGW Currently the .def file MUST be in the module
-                          ;;   directory
-                          ;; :directory `(:relative
-                          ;;             "platforms" ,common-lisp-user::*arch*)
+                          :directory `(:relative
+                                       "platforms" ,common-lisp-user::*arch*)
                           :name (string-downcase
                                  (string
                                   (?identifier main-module)))

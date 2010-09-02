@@ -361,7 +361,8 @@
     CLOSED: [2010-08-30 Mon 14:35]
 *** TODO Consider adding a special list for the keywords
     Currently they are simply symbols which happen to end in a ":".
-*** TODO Add support for the default =superclass= in =defclass=
+*** DONE Add support for the default =superclass= in =defclass=
+    CLOSED: [2010-09-02 Thu 15:45]
     Currently the superclass MUST be specified but the definition states that if
     the superclass is =()= then the default superclass =<object>= will be used.
 *** TODO Consider writing a =defclass= which supports multiple-inheritance
@@ -389,7 +390,8 @@
     defined not two.  If this property is an important feature =equal= could be
     reinstated as a function wrapper around =binary== which does a
     type-consistency check.
-*** TODO Rename predicate functions
+*** DONE Rename predicate functions
+    CLOSED: [2010-09-02 Thu 15:45]
     Rename predicates ending in "-p" and "p" to use the post-fix "?".  Add the
     post-fix "?" to =atom= and =null=.
 *** TODO Change =prin=, =print= and =write= to be n-ary
@@ -398,8 +400,19 @@
     Add =snewline= and =sflush= to take the stream as an argument.
 *** TODO Add =sprint= and change =print= to use stdout
 *** TODO Add =sformat= and change =format= to use stdout
-*** TODO Rename require predicate keyword =requiredp:= -> =required?:=
-*** TODO =abstractp:= -> =abstract?:=
+*** TODO Add =required?:= predicate keyword to class
+*** TODO Add =abstract?:= predicate keyword to class
+*** TODO Investigate the GC in 64bit
+    Examples/umdrehen.em fails in 64bit probably due to a memory allocation
+    error.
+*** TODO Investigate the =generate-*hack*=
+    In file =Apply/generate-def-file.ecl= the =generate-*hack*= is necessary
+    because
+    1. the macro definitions are not yet moved to the def-file;
+    2. variables imported from c are not moved to the def-file because
+       include-statements for the c-preprocessor can't be generated, due to the
+       explicit declaration of c-import in the module interface without
+       connection to the variable declarations.
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]
