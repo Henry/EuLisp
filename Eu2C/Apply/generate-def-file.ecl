@@ -827,18 +827,16 @@
 ;;;-----------------------------------------------------------------------------
 ;;; from module object-0-i
 ;;;-----------------------------------------------------------------------------
-;; (defmacro defclass (class-name superclass
-;;                                 slot-descriptions . class-options)
+;; (defmacro defclass (class-name superclass slot-descriptions . class-options)
 ;;   `(%define-standard-class
 ;;      (,class-name <structure-class>)
-;;      ,superclass
+;;      ,(or superclass '<object>)
 ;;      ,slot-descriptions
 ;;      representation pointer-to-struct
 ;;      allocation multiple-type-card
 ;;      ,@class-options))
 
-(defun defclass (class-name superclass
-                             slot-descriptions . class-options)
+(defun defclass (class-name superclass slot-descriptions . class-options)
   (cons '%define-standard-class
         (cons (list class-name '<structure-class>)
               (cons (or superclass '<object>)
