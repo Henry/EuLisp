@@ -9,7 +9,7 @@
   (import (eulisp-level-0
            (only (<pointer-to-void>)
                  pointer-to-void))
-   syntax (eulisp-level-0 hmm))
+   syntax (eulisp-level-0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Tower definition
