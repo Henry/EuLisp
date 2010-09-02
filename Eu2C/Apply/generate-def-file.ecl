@@ -34,20 +34,20 @@
 ;;    possible.  They are marked with *hack*.
 ;;;  Problems:
 ;;    Name conflicts (i.e. different objects may have theoretical the same
-;;                         Lisp-identifiers) may occur in the following cases:
+;;    Lisp-identifiers) may occur in the following cases:
 ;;
 ;;    * Invisible exported objects have no explicit export name. Therefore the
-;;    definition identifier is taken and this may result in a name conflict.
+;;      definition identifier is taken and this may result in a name conflict.
 ;;
 ;;    * Local variables in macros and interpreted functions may shadow global
-;;    bindings The reason for this is that the explicitely and invisible
-;;    exported objects of the member modules of the basic system are put
-;;    together in only one module.  Because the explicitely exported objects are
-;;    renamed according to the given export interface (this was checked already
-;;    for name conflicts!) they are not the problem. A problem are the invisible
-;;    exported objects and local variables in interpreted forms because they are
-;;    teared out of the original binding context.  They should be renamed to
-;;    unique identifiers.
+;;      bindings The reason for this is that the explicitely and invisible
+;;      exported objects of the member modules of the basic system are put
+;;      together in only one module.  Because the explicitely exported objects
+;;      are renamed according to the given export interface (this was checked
+;;      already for name conflicts!) they are not the problem. A problem are the
+;;      invisible exported objects and local variables in interpreted forms
+;;      because they are teared out of the original binding context.  They
+;;      should be renamed to unique identifiers.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -125,16 +125,13 @@
                id)
     ))
 
-
-
 (defun write-def (format . args)
   (apply #'format (dynamic code-output) format args))
 
-(defun lattice-type-hack ()
-  ;;*hack*
-  ;;the following definitions are written directly into the .def-file because it
-  ;;is forgotten by the appropriate interface functions of the type inference
-  ;;system
+(defun lattice-type-*hack* ()
+  ;; the following definitions are written directly into the .def-file because it
+  ;; is forgotten by the appropriate interface functions of the type inference
+  ;; system
   (write-def
    "
 (%define-lattice-type mono-list (<cons>) (bottom) t)
@@ -181,7 +178,7 @@
   (mapc (lambda (module)
           (mapc #'gen-interface-if-exported (?class-def-list module)))
         modules)
-  (lattice-type-hack) ;*hack*
+  (lattice-type-*hack*)
   (def-write-remaining-strategic-lattice-types (dynamic code-output))
   (mapc (lambda (module)
           (mapc #'gen-interface-if-exported (?fun-list module))
@@ -390,7 +387,8 @@
                       (?rest (?params fun))
                       (function-signature fun)
                       1))
-        ((and (?arg-num fun) (minusp (?arg-num fun))) ; this function originally had a rest parameter?
+        ((and (?arg-num fun) (minusp (?arg-num fun))) ; this function originally
+                                                      ; had a rest parameter?
          (spec-params (butlast (?var-list (?params fun)))
                       (car (last (?var-list (?params fun)))) ; the parameter
                       ;; which was
@@ -648,20 +646,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; *hack*
 ;;;-----------------------------------------------------------------------------
-;;; The following hack is necessary because
-;;; 1. the macro definitions are not yet moved to the def-file
-;;; 2. variables imported from c are not moved to the def-file because
-;;; include-statements for the c-preprocessor can#t be generated, due to the
-;;; explicit declaration of c-import in the module interface without connection
-;;; to the variable declarations
+;; The following hack is necessary because
+;; 1. the macro definitions are not yet moved to the def-file
+;; 2. variables imported from c are not moved to the def-file because
+;; include-statements for the c-preprocessor can't be generated, due to the
+;; explicit declaration of c-import in the module interface without connection
+;; to the variable declarations
 
 (defun generate-*hack* ()
   (write-def
    "
-;;; -------------------
+;;;-----------------------------------------------------------------------------
 ;;; from module syntax-0
-;;; -------------------
-
+;;;-----------------------------------------------------------------------------
 ;; (defmacro cond clauses
 ;;   (if (null? clauses) ()
 ;;     (if (null? (cdr (car clauses))) `(or ,(car (car clauses))
@@ -748,10 +745,9 @@
   (list identifier (if (null? form) () (car form))))
 (export-syntax return-from)
 
-;;; ----------------------
+;;;-----------------------------------------------------------------------------
 ;;; from module condition
-;;; ----------------------
-
+;;;-----------------------------------------------------------------------------
 ;; (defmacro defcondition (condition-class-name super-class-name
 ;;                                              slot-descriptions . init-options)
 ;;   `(progn
@@ -765,8 +761,9 @@
 ;;        allocation multiple-type-card
 ;;        ,@init-options)))
 
-(defun defcondition (condition-class-name super-class-name
-                                          slot-descriptions . init-options)
+(defun defcondition (condition-class-name
+                     super-class-name
+                     slot-descriptions . init-options)
   (list 'progn
         (list 'if
               (list %subclass?
@@ -776,14 +773,16 @@
               (list 'error
                     \"Superclass in defcondition is not a subclass of <condition>\"
                     <condition>))
-        (cons 'defclass (cons condition-class-name
-                               (cons (if super-class-name super-class-name <condition>)
-                                     (cons slot-descriptions
-                                           init-options))))))
+        (cons 'defclass
+              (cons condition-class-name
+                    (cons (if super-class-name super-class-name <condition>)
+                          (cons slot-descriptions
+                                init-options))))))
 (export-syntax defcondition)
 
 ;; (defmacro with-handler (handler-fun . protected-forms)
-;;   `(dynamic-let ((shadowed-default-handler (dynamic dynamic-default-signal-handler))
+;;   `(dynamic-let ((shadowed-default-handler
+;;                   (dynamic dynamic-default-signal-handler))
 ;;                  (dynamic-default-signal-handler
 ;;                   (lambda(condition continuation)
 ;;                     (,handler-fun condition continuation)
@@ -794,20 +793,21 @@
 
 (defun with-handler (handler-fun . protected-forms)
   (cons 'dynamic-let
-        (cons (list '(shadowed-default-handler (dynamic dynamic-default-signal-handler))
+        (cons (list '(shadowed-default-handler
+                      (dynamic dynamic-default-signal-handler))
                     (list 'dynamic-default-signal-handler
                           (list 'lambda '(condition continuation)
                                 (list handler-fun 'condition 'continuation)
-                                '(let ((active-handler (dynamic shadowed-default-handler )))
+                                '(let ((active-handler
+                                        (dynamic shadowed-default-handler )))
                                    (active-handler
                                     condition continuation )))))
               protected-forms)))
 (export-syntax with-handler)
 
-;;; ----------------------
+;;;-----------------------------------------------------------------------------
 ;;; from module mm-interface
-;;; ----------------------
-
+;;;-----------------------------------------------------------------------------
 (%declare-external-variable mtss %signed-byte-integer
   language c
   external-name |MTSS|)
@@ -815,6 +815,7 @@
 (%declare-external-variable stms %signed-byte-integer
   language c
   external-name |STMS|)
+
 (%declare-external-variable stss %signed-byte-integer
   language c
   external-name |STSS|)
@@ -823,10 +824,9 @@
 (%annotate-binding stms is-special-binding stms)
 (%annotate-binding stss is-special-binding stss)
 
-;;; --------------------
+;;;-----------------------------------------------------------------------------
 ;;; from module object-0-i
-;;; --------------------
-
+;;;-----------------------------------------------------------------------------
 ;; (defmacro defclass (class-name superclass
 ;;                                 slot-descriptions . class-options)
 ;;   `(%define-standard-class
@@ -841,15 +841,19 @@
                              slot-descriptions . class-options)
   (cons '%define-standard-class
         (cons (list class-name '<structure-class>)
-              (cons superclass
+              (cons (or superclass '<object>)
                     (cons slot-descriptions
-                          (cons 'representation (cons 'pointer-to-struct
-                                                      (cons 'allocation (cons 'multiple-type-card
-                                                                              class-options)))))))))
+                          (cons 'representation
+                                (cons 'pointer-to-struct
+                                      (cons 'allocation
+                                            (cons 'multiple-type-card
+                                                  class-options)))))))))
 (export-syntax defclass)
 
 "
 
 ))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

@@ -16,7 +16,7 @@
 ;;;-----------------------------------------------------------------------------
 (defconstant *max-tower-height* 10)
 
-(defclass <tower> <object>
+(defclass <tower> ()
   ((id reader tower-id keyword id:)
    (blocks accessor tower-blocks)))
 

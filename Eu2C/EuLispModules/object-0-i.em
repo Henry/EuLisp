@@ -101,7 +101,7 @@
 (defmacro defclass (class-name superclass slot-descriptions . class-options)
   `(%define-standard-class
      (,class-name <structure-class>)
-     ,superclass
+     (or ,superclass <object>)
      ,slot-descriptions
      representation pointer-to-struct
      allocation multiple-type-card
