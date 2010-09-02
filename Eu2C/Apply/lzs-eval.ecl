@@ -20,36 +20,33 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: An interpreter working on LZS-representation of Lisp-programs
 ;;;  Description:
-;;    The function EVAL evaluates an expression given in LZS-form. The function CALL
-;;    applies an LZS-function to some arguments given also as LZS-objects. The
-;;    interpreter is first used during macro expansion, but can also be used by
-;;    compile-time evaluation of constant expressions and during activation of the
-;;    MOP. The installation of interpreter functions for LZS-functions which body
-;;    should not be interpreted is done by %annotate with the option
-;;    "interpreter". The value given to this option must be one of the symbols in
-;;    $system-function-table, which provides some functions of the compilation
-;;    environment to the interpreter.
-;;;  Documentation:
+;;    The function EVAL evaluates an expression given in LZS-form. The function
+;;    CALL applies an LZS-function to some arguments given also as
+;;    LZS-objects. The interpreter is first used during macro expansion, but can
+;;    also be used by compile-time evaluation of constant expressions and during
+;;    activation of the MOP. The installation of interpreter functions for
+;;    LZS-functions which body should not be interpreted is done by %annotate
+;;    with the option "interpreter". The value given to this option must be one
+;;    of the symbols in $system-function-table, which provides some functions of
+;;    the compilation environment to the interpreter.
 ;;;  Notes:
 ;;    1. Up to now not all special forms are supported.
-;;    2. $system-function-table should contain later all "basic" EuLisp functions. (What
-;;                                                                                  basic means?)
-;;    3. Global lexical variables are supported only if their initial value is a
-;;    simple literal (symbol, character, string or number or lists/vectors of them) or
-;;    if the value is set by a macro expansion before using it.
-;;;  Requires:
+;;    2. $system-function-table should contain later all "basic" EuLisp
+;;    functions. (What basic means?)  3. Global lexical variables are supported
+;;    only if their initial value is a simple literal (symbol, character, string
+;;    or number or lists/vectors of them) or if the value is set by a macro
+;;    expansion before using it.
 ;;;  Problems:
 ;;    1. What must be done to support MOP-activation during compile time?
-;;    2. No module is initialized during macro expansion because the macro language is
-;;    only a subset of EuLisp and it is not clear when a module should be initialized
-;;    during compile time. Another problem is that there is no distinction between
-;;    top-level forms needed during syntax expansion and forms needed during runtime
-;;    only.
+;;    2. No module is initialized during macro expansion because the macro
+;;    language is only a subset of EuLisp and it is not clear when a module
+;;    should be initialized during compile time. Another problem is that there
+;;    is no distinction between top-level forms needed during syntax expansion
+;;    and forms needed during runtime only.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-eval
-
 (import (eulisp1
          lzs
          eval-basic
@@ -76,10 +73,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; transforming literals to syntactic constructs
 ;;;-----------------------------------------------------------------------------
-;;; make-syntactic transforms LZS-literals to objects of the compile time
-;;; environment such that they can act as syntaxtic constructs. For example in
-;;; the case of structured-literals of the LZS, which must be transformed to
-;;; "normal" literals
+;; make-syntactic transforms LZS-literals to objects of the compile time
+;; environment such that they can act as syntaxtic constructs. For example in
+;; the case of structured-literals of the LZS, which must be transformed to
+;; "normal" literals
 
 (defgeneric make-syntactic (obj))
 
@@ -123,12 +120,11 @@
                  (make-list-syntactic (cdr l))))))
 
 (defmethod make-structured-literal-syntactic ((obj <pair>))
-  (make-list-syntactic obj))
+c  (make-list-syntactic obj))
 
 ;;;-----------------------------------------------------------------------------
 ;;; eval
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric eval (lzsobj))
 
 ;;; the default case:
@@ -139,9 +135,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; function application
 ;;;-----------------------------------------------------------------------------
-
-;;; Because of the optimization during transformation from EuLisp to LZS only
-;;; <var-ref>, <fun> or <named-const> can appear as operator
+;; Because of the optimization during transformation from EuLisp to LZS only
+;; <var-ref>, <fun> or <named-const> can appear as operator
 
 (defgeneric call-eval-fun (fn args))
 
@@ -178,15 +173,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; $system-function-table
 ;;;-----------------------------------------------------------------------------
-;;; Is used by %annotate-handler 'set-interpreter' to install interpreter functions
-
+;; Is used by %annotate-handler 'set-interpreter' to install interpreter
+;; functions
 
 (defconstant $system-function-table
   (declare-system-functions
 
     ;;--- special non-EuLisp-functions needed to implement the basics of EuLisp
-    append ;; needed by quasiquote
-    char-code             ;; needed to expand character literals
+    append         ;; needed by quasiquote
+    char-code      ;; needed to expand character literals
 
     ;;--- character
     character?
@@ -253,7 +248,7 @@
     truncate
     ;;--- fpi
     int?
-    ;;   ;--- formatted-io
+    ;;--- formatted-io
     ;;   scan
     format
     ;;--- integer
@@ -327,6 +322,7 @@
     ))
 
 (defun set-interpreter (lzs-fun annotate-key id)
+  annotate-key ;;***HGW
   (let ((entry (assoc id $system-function-table)))
     (if entry
         (setf (?interpreter lzs-fun)
@@ -336,7 +332,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; named constants and variable references
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric get-value (var))
 
 (defmethod get-value ((var <named-const>))
@@ -385,7 +380,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; special forms
 ;;;-----------------------------------------------------------------------------
-
 (defun eval-progn (forms)
   (let ((value ()))
     (mapc (lambda (form)
@@ -444,7 +438,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; module initialization
 ;;;-----------------------------------------------------------------------------
-
 (defun initialize-module (name)
   (call (?toplevel-forms (find-module name))
         ()))

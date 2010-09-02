@@ -20,31 +20,36 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Special Inference with some System Functions (%select, %extract ..)
 ;;;  Description:
-;;    This file provides functions that compute formal type descriptors for
-;;    some system functions, that are treated specially.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    This file provides functions that compute formal type descriptors for some
+;;    system functions, that are treated specially.
 ;;;  Authors: Andreas Kind
 ;;;-----------------------------------------------------------------------------
 
-
 #module ti-special
-(import
- (mzs lzs lzs-mop
-      representation ; whc-classes
-      tail-module standard-init
-      ti ti-exprs ti-eqs ti-meet-join ti-write ti-signature
-      ti-descrs ti-lattice
-      (only (format) common-lisp))
+(import (mzs
+         lzs
+         lzs-mop
+         representation ; whc-classes
+         tail-module
+         standard-init
+         ti
+         ti-exprs
+         ti-eqs
+         ti-meet-join
+         ti-write
+         ti-signature
+         ti-descrs
+         ti-lattice
+         (only (format)
+               common-lisp))
  syntax (ti)
  export (formal-descrs-get-slot-value
          formal-descrs-set-slot-value
          convert-to-formal-descrs-%extract
          convert-to-formal-descrs-%setf-extract
          convert-to-formal-descrs-%funcall
-         valid-for-then? valid-for-else?))
+         valid-for-then?
+         valid-for-else?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; CREATING FORMAL SIGNATURES FOR SOME TAIL FUNCTIONS
@@ -61,6 +66,7 @@
 
 ;;; Create a formal descr to get slot value.
 (defun formal-descr-get-slot-value (descr slot-description)
+  descr ;;***HGW not used
   (let* ((struct-class (?slot-of slot-description))
          (struct-type (class-as-type-expr struct-class))
          (slot-value-class (?type slot-description))
@@ -376,5 +382,6 @@
       (ti-format2 t " ~A" answer)
       answer)))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

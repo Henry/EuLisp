@@ -37,7 +37,7 @@
          tail-module
          lzs-mop
          quasiquote
-         (only (set-interpreter call) lzs-eval)
+         (only (call) lzs-eval)
          (only (get-defined-lattice-type add-lattice-type
                                          trans-lattice-type-list) ti-lattice)
          (only (mapcar nconc mapc warn list* reverse vector append)

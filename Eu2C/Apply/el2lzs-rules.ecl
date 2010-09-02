@@ -46,8 +46,7 @@
          ;;(only (%list) apply-funs)
          apply-funs
          quasiquote
-         (only (set-interpreter
-                call)
+         (only (call)
                lzs-eval)
          (only (REVERSE
                 APPEND

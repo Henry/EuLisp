@@ -18,12 +18,8 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
@@ -41,6 +37,7 @@
          set-slot-value-a))
 
 (defun get-slot-value-a (con form)
+  con  ;;***HGW not used
   (let* ((from (l2m-a (dynamic *arg-context*)
                       (?instance form)))
          (res (make <tempvar> :tnr (a-number)))
@@ -75,6 +72,7 @@
     res))
 
 (defun set-slot-value-a (con form)
+  con  ;;***HGW not used
   (let* ((init (l2m-a (dynamic *arg-context*)
                       (?value form)))
          (from (l2m-a (dynamic *arg-context*)
@@ -116,5 +114,6 @@
       ())
     res))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------
