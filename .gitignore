@@ -31,7 +31,9 @@ Examples/*/*.[hi]
 Tools/*.[chi]
 
 # Ignore personal test area
-Examples/Test
+/Examples/Test
+/Eu2C/Scripts
+/Modules/Case
 
 # Ignore Eu2c CL object files
 *.bin

@@ -98,6 +98,8 @@ fi
 MWORDLEN=m32
 [ $ARCH = "x86_64" ] && MWORDLEN=m64
 
+ARCH_DIR=platforms/${ARCH}${MWORDLEN}
+
 if [ -n "$Eu2C_CC_OPTIMIZE" ]
 then
     CCOPTIMIZE=$Eu2C_CC_OPTIMIZE
@@ -113,7 +115,7 @@ fi
 
 STATE="-LC"
 
-INCLUDE="-I $Eu2CROOT/Runtime "
+INCLUDE="-I$Eu2CROOT/Runtime -I$Eu2CROOT/EuLispModules/$ARCH_DIR "
 if [ -n "$Eu2C_INCLUDE" ]
 then
     INCLUDE=${INCLUDE}${Eu2C_INCLUDE}
@@ -179,7 +181,6 @@ do
     esac
 done
 
-ARCH_DIR=platforms/${ARCH}${MWORDLEN}
 GCLIB="/Runtime/$ARCH_DIR/eu2c"
 
 # Prepare application for compilation
@@ -212,10 +213,10 @@ do
     echo "Eu2C: (compile-application $APP)"
 
     # Rename $APPNAME.*
-    [ -f ${APPNAME}.c ]    && mv ${APPNAME}.c ${APPNAME}.c~
-    [ -f ${APPNAME}.inst ] && mv ${APPNAME}.inst ${APPNAME}.inst~
-    [ -f ${APPNAME}.h ]    && mv ${APPNAME}.h ${APPNAME}.h~
-    [ -f ${APPNAME}.def ]  && mv ${APPNAME}.def ${APPNAME}.def~
+    #[ -f ${APPNAME}.c ]    && mv ${APPNAME}.c ${APPNAME}.c~
+    #[ -f ${APPNAME}.inst ] && mv ${APPNAME}.inst ${APPNAME}.inst~
+    #[ -f ${APPNAME}.h ]    && mv ${APPNAME}.h ${APPNAME}.h~
+    #[ -f ${APPNAME}.def ]  && mv ${APPNAME}.def ${APPNAME}.def~
 
     # Check existence of image with precompiled basic system
     # use the image with preloaded basic system if it is younger than the
@@ -235,6 +236,8 @@ do
         Eu2CIMAGE=$Eu2CIMAGE.$BASIC_SYSTEM
     fi
 
+    mkdir -p $ARCH_DIR
+
     # Is there a patch file younger than image
     if [ -f $Eu2CPATCH -a $Eu2CPATCH -nt ${Eu2CIMAGE}${IMAGE_EXT} ]
     then
@@ -244,9 +247,10 @@ do
     echo "      using compiler image $Eu2CIMAGE"
     echo $LOADPATCHFILE \
         "(apply #'apply-compiler::compile-application" \
-        "(cdr ext:*command-line-strings*) ) (quit)" | eu2c | tee $APP.log 2>&1
+        "(cdr ext:*command-line-strings*) ) (quit)" | eu2c \
+        | tee $ARCH_DIR/$APP.log 2>&1
 
-    if [ -f  ${APPNAME}.c ]
+    if [ -f ${ARCH_DIR}/${APPNAME}.c ]
     then
         echo "Eu2C: successful conversion of $APPNAME.em to $APPNAME.c"
     else
@@ -258,18 +262,17 @@ done
 
 if [ -n "$BASIC_SYSTEM" ]
 then
-    BASIC_SYSTEM=$Eu2CROOT/Runtime/$BASIC_SYSTEM.a
+    BASIC_SYSTEM=$Eu2CROOT/EuLispModules/$ARCH_DIR/$BASIC_SYSTEM.a
 fi
 
 if [ "$STATE" = "-LC" -o "$STATE" = "-C" ]
 then
     [ -f ${APPNAME}.o ] && mv $APPNAME.o $APPNAME.o~
-
     set -x
-    $CC -$MWORDLEN -c -o $APPNAME.o \
-        $CCOPTIMIZE $CCOPTIONS  $INCLUDE $APPNAME.c
-    $CC -$MWORDLEN -z muldefs -o $IMAGE \
-        $CCOPTIMIZE $CCOPTIONS $INCLUDE $CARDS $APPNAME.o $* \
+    $CC -$MWORDLEN -c -o $ARCH_DIR/$APPNAME.o \
+        $CCOPTIMIZE $CCOPTIONS  $INCLUDE $ARCH_DIR/$APPNAME.c
+    $CC -$MWORDLEN -z muldefs -o $ARCH_DIR/$IMAGE \
+        $CCOPTIMIZE $CCOPTIONS $INCLUDE $CARDS $ARCH_DIR/$APPNAME.o $* \
         $BASIC_SYSTEM $Eu2CROOT$GCLIB $LINKLIBS
     set +x
 else

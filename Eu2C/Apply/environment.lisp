@@ -37,22 +37,24 @@
 ;;;  from the first command-line argument
 ;; -----------------------------------------------------------------------------
 
-(let ((arch-string
-       (cadr
-        #+ :sbcl sb-ext:*posix-argv*
-        #+ :cmu ext:*command-line-strings*
-        )))
-  (cond
-   ((equal arch-string "m32")
-    (setq *features* (append *features* '(:word32))))
-   ((equal arch-string "m64")
-    (setq *features* (append *features* '(:word64))))
-   (t
-    (format
-     t
-     "~%First command line argument does not specify machine type m32 or m64~%")
-    (quit))
+(defparameter *arch*
+  (cadr
+   #+ :sbcl sb-ext:*posix-argv*
+   #+ :cmu ext:*command-line-strings*
    ))
+(export '*arch*)
+
+(cond
+ ((search "m32" *arch*)
+  (setq *features* (append *features* '(:word32))))
+ ((search "m64" *arch*)
+  (setq *features* (append *features* '(:word64))))
+ (t
+  (format
+   t
+   "~%First command line argument does not specify machine type m32 or m64~%")
+  (quit))
+ )
 
 ;; -----------------------------------------------------------------------------
 ;;; Portable POSIX functions
@@ -152,8 +154,7 @@ split at the UNIX separator #\/."
         (list
          (make-pathname :directory '(:relative))
          (make-pathname :directory '(:relative "EuLispModules"))
-         (make-pathname :directory `(,@$applyroot "EuLispModules")))
-        ))
+         (make-pathname :directory `(,@$applyroot "EuLispModules")))))
 
 #+(or :sbcl :cmu)
 (defun dump-apply (name)

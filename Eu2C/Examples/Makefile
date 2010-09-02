@@ -21,6 +21,22 @@
 ###  Author: Henry G. Weller
 ###-----------------------------------------------------------------------------
 
+ARCH := $(shell uname -m)
+include ../../Lib.$(ARCH)/Makefile
+
+# Set the default machine word-length to 32
+# but override the default for x86_84 architectures
+# May also be overridden on the command-line
+WL = m32
+ifeq ($(ARCH),x86_64)
+    WL = m64
+endif
+
+ARCH := $(ARCH)$(WL)
+
+###-----------------------------------------------------------------------------
+### All examples
+###-----------------------------------------------------------------------------
 EXAMPLES_EM = $(wildcard *.em)
 EXAMPLES = $(EXAMPLES_EM:%.em=%)
 
@@ -30,11 +46,10 @@ EXAMPLES = $(EXAMPLES_EM:%.em=%)
 
 .PHONY: clean
 clean:
-	@rm -f $(EXAMPLES) \
-		$(EXAMPLES:%=%.c) $(EXAMPLES:%=%.h) $(EXAMPLES:%=%.o) \
-		$(EXAMPLES:%=%.inst) $(EXAMPLES:%=%.log) *~
+	@rm -rf $(ARCH_DIR)
 
 .PHONY: distclean
 distclean: clean
+	@rm -rf platforms
 
 ###-----------------------------------------------------------------------------

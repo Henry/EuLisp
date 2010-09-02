@@ -44,13 +44,15 @@ ifeq ($(ARCH),x86_64)
     WL = m64
 endif
 
+ARCH := $(ARCH)$(WL)
+
 ###-----------------------------------------------------------------------------
 ### Set Common Lisp compiler
 ###-----------------------------------------------------------------------------
 CL = cmu
 ifeq ($(CL),cmu)
     image_ext = cmu
-    ECL2Eu2C = lisp $(WL) $(1) -load $(2)
+    ECL2Eu2C = lisp $(ARCH) $(1) -load $(2)
     Eu2C = lisp $(2) -core $(1)
 else
     ifeq ($(CL),sbcl)
@@ -114,26 +116,25 @@ runtime:
 ###  Compile the module library
 ###-----------------------------------------------------------------------------
 .PHONY: modlib
-modlib: ${Eu2CROOT}/Runtime/$(module).a
-${Eu2CROOT}/Runtime/$(module).a: $(eu2c_image) $(EuLispModules)
+modlib: ${Eu2CROOT}/Runtime/$(ARCH_DIR)/$(module).a
+${Eu2CROOT}/Runtime/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules)
 	@echo "===> Compile the module library " $@
 	cd ${Eu2CROOT}/EuLispModules && \
+	mkdir -p $(ARCH_DIR) && \
 	cp ti-sys-signatures.em ti-sys-signatures.def && \
 	echo "(apply-compiler::compile-basic-system (cadr ext:*command-line-strings*)) (quit)" | \
 	$(call Eu2C,${Eu2CROOT}/$(eu2c_image),$(module)) && \
-	mv $(module).[hc] ${Eu2CROOT}/Runtime && \
-	cd ${Eu2CROOT}/Runtime && \
-	$(CC) -$(WL) $(CFLAGS) -I. -I${Eu2CROOT}/EuLispModules \
-		-c $(module).c -o $(module).o && \
-	ar rcv $(module).a $(module).o && \
-	ranlib $(module).a
+	$(CC) -$(WL) $(CFLAGS) -I${Eu2CROOT}/Runtime -I$(ARCH_DIR) \
+		-c $(ARCH_DIR)/$(module).c -o $(ARCH_DIR)/$(module).o && \
+	ar rcv $(ARCH_DIR)/$(module).a $(ARCH_DIR)/$(module).o && \
+	ranlib $(ARCH_DIR)/$(module).a
 
 ###-----------------------------------------------------------------------------
 ###  Create the eu2c compiler image including the module
 ###-----------------------------------------------------------------------------
 .PHONY: modeu2c
 modeu2c: $(module_image)
-$(module_image): $(eu2c_image) ${Eu2CROOT}/Runtime/$(module).a
+$(module_image): $(eu2c_image) ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
 	@echo "===> Create the module compiler image " $@
 	echo "(let ((name (cadr ext:*command-line-strings*)))(apply-compiler::load-basic-system :application name) (dump-apply (concatenate 'string (string (quote |$(eu2c).|)) name))) (quit)" | \
 		$(call Eu2C,$(eu2c_image),$(module))
@@ -150,8 +151,10 @@ clean_images:
 
 clean_module:
 	@rm -f ${Eu2CROOT}/EuLispModules/ti-sys-signatures.def
-	@rm -f ${Eu2CROOT}/Runtime/$(module).[ahco]
-	@rm -f ${Eu2CROOT}/EuLispModules/$(module).{inst,def}
+	@rm -rf ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)
+
+distclean_module: clean_module
+	@rm -rf ${Eu2CROOT}/EuLispModules/platforms
 
 clean_fasl:
 	@rm -f ${Eu2CROOT}/{.,Apply,EclModules}/*.{fasl,bin,sse2f}
@@ -160,11 +163,11 @@ clean_backups:
 	@rm -f {.,Apply,EclModules,EuLispModules}/*~
 
 clean: clean_fasl clean_backups
-	$(MAKE) -C ${Eu2CROOT}/Runtime distclean
-	$(MAKE) -C ${Eu2CROOT}/Examples clean
+	@$(MAKE) -C ${Eu2CROOT}/Runtime clean
+	@$(MAKE) -C ${Eu2CROOT}/Examples clean
 
-distclean: clean_fasl clean_images clean_module clean_backups
-	$(MAKE) -C ${Eu2CROOT}/Runtime distclean
-	$(MAKE) -C ${Eu2CROOT}/Examples distclean
+distclean: clean_fasl clean_images distclean_module clean_backups
+	@$(MAKE) -C ${Eu2CROOT}/Runtime distclean
+	@$(MAKE) -C ${Eu2CROOT}/Examples distclean
 
 ###-----------------------------------------------------------------------------
