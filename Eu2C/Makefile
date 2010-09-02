@@ -101,8 +101,8 @@ eu2c_level: eu2c runtime modlib modeu2c
 eu2c: $(eu2c_image)
 $(eu2c_image): $(Apply) $(EclModules)
 	@echo "===> Create the basic eu2c compiler image " $@
-	$(call ECL2Eu2C,,Apply/boot1.lisp)
-	$(call ECL2Eu2C,$(eu2c),Apply/boot2.lisp)
+	@$(call ECL2Eu2C,,Apply/boot1.lisp)
+	@$(call ECL2Eu2C,$(eu2c),Apply/boot2.lisp)
 
 ###-----------------------------------------------------------------------------
 ###  Compile the C runtime/GC library
@@ -110,16 +110,16 @@ $(eu2c_image): $(Apply) $(EclModules)
 .PHONY: runtime
 runtime:
 	@echo "===> Compile the C runtime library"
-	$(MAKE) -C ${Eu2CROOT}/Runtime WL=$(WL)
+	@$(MAKE) -C ${Eu2CROOT}/Runtime WL=$(WL)
 
 ###-----------------------------------------------------------------------------
 ###  Compile the module library
 ###-----------------------------------------------------------------------------
 .PHONY: modlib
-modlib: ${Eu2CROOT}/Runtime/$(ARCH_DIR)/$(module).a
-${Eu2CROOT}/Runtime/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules)
+modlib: ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
+${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules)
 	@echo "===> Compile the module library " $@
-	cd ${Eu2CROOT}/EuLispModules && \
+	@cd ${Eu2CROOT}/EuLispModules && \
 	mkdir -p $(ARCH_DIR) && \
 	cp ti-sys-signatures.em ti-sys-signatures.def && \
 	echo "(apply-compiler::compile-basic-system (cadr ext:*command-line-strings*)) (quit)" | \
@@ -136,7 +136,7 @@ ${Eu2CROOT}/Runtime/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules)
 modeu2c: $(module_image)
 $(module_image): $(eu2c_image) ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
 	@echo "===> Create the module compiler image " $@
-	echo "(let ((name (cadr ext:*command-line-strings*)))(apply-compiler::load-basic-system :application name) (dump-apply (concatenate 'string (string (quote |$(eu2c).|)) name))) (quit)" | \
+	@echo "(let ((name (cadr ext:*command-line-strings*)))(apply-compiler::load-basic-system :application name) (dump-apply (concatenate 'string (string (quote |$(eu2c).|)) name))) (quit)" | \
 		$(call Eu2C,$(eu2c_image),$(module))
 
 ###-----------------------------------------------------------------------------

@@ -20,8 +20,8 @@
 ###-----------------------------------------------------------------------------
 ###  Title: Runtime Makefile
 ###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
+include ../../Lib.$(ARCH)/Makefile
 
 # Set default word-length option
 WL = m32
@@ -29,12 +29,13 @@ ifeq ($(ARCH),x86_64)
     WL = m64
 endif
 
+ARCH := $(ARCH)$(WL)
+
 CC = gcc
 GCCFLAGS = -std=gnu99 -Wall -O2
 EU2C_FLAGS = -$(WL)
 CFLAGS = $(GCCFLAGS) $(EU2C_FLAGS)
 
-ARCH_DIR = platforms/$(ARCH)$(WL)
 .PRECIOUS: %/.
 %/.:
 	mkdir -p $(@)

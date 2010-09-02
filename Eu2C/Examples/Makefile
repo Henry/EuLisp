@@ -41,6 +41,17 @@ EXAMPLES_EM = $(wildcard *.em)
 EXAMPLES = $(EXAMPLES_EM:%.em=%)
 
 ###-----------------------------------------------------------------------------
+### Eu2C compile rules for all examples
+###-----------------------------------------------------------------------------
+all: $(ARCH_DIR)/hello $(ARCH_DIR)/hanoi
+
+$(ARCH_DIR)/hello: hello.em ${Eu2CROOT}/EuLispModules/eulisp-level-0.def
+	../Bin/eu2c -bs eulisp-level-0 hello
+
+$(ARCH_DIR)/hanoi: hanoi.em ${Eu2CROOT}/EuLispModules/eulisp-level-0.def
+	../Bin/eu2c -bs eulisp-level-0 hanoi
+
+###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 
