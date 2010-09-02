@@ -20,7 +20,6 @@
 ###  Title: Examples Makefile
 ###  Author: Henry G. Weller
 ###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
@@ -37,24 +36,43 @@ ARCH := $(ARCH)$(WL)
 ###-----------------------------------------------------------------------------
 ### All examples
 ###-----------------------------------------------------------------------------
-EXAMPLES_EM = $(wildcard *.em)
-EXAMPLES = $(EXAMPLES_EM:%.em=%)
+EXAMPLES_0 = gtakl2 gtakl hanoi hello tak takl \
+             test-class test-double apropos test-number
+
+EXAMPLES_0X = command-line gtakl2t taklt takt umdrehen
+
+EXAMPLES_0_EXE = $(EXAMPLES_0:%=$(ARCH_DIR)/%)
+EXAMPLES_0X_EXE = $(EXAMPLES_0X:%=$(ARCH_DIR)/%)
+
+EXAMPLES = $(EXAMPLES_0) $(EXAMPLES_0X)
+EXAMPLES_EXE = $(EXAMPLES_0_EXE) $(EXAMPLES_0X_EXE)
 
 ###-----------------------------------------------------------------------------
 ### Eu2C compile rules for all examples
 ###-----------------------------------------------------------------------------
-all: $(ARCH_DIR)/hello $(ARCH_DIR)/hanoi
+all: all0 all0x
 
-$(ARCH_DIR)/hello: hello.em ${Eu2CROOT}/EuLispModules/eulisp-level-0.def
-	../Bin/eu2c -bs eulisp-level-0 hello
+all0: $(EXAMPLES_0_EXE)
+all0x: $(EXAMPLES_0X_EXE)
 
-$(ARCH_DIR)/hanoi: hanoi.em ${Eu2CROOT}/EuLispModules/eulisp-level-0.def
-	../Bin/eu2c -bs eulisp-level-0 hanoi
+$(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/eulisp-level-0.def
+	../Bin/eu2c -$(WL) -bs eulisp-level-0 $<
+
+$(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/eulisp0x.def
+	../Bin/eu2c -$(WL) -bs eulisp0x $<
+
+###-----------------------------------------------------------------------------
+###  Run the examples
+###-----------------------------------------------------------------------------
+.PHONY: run
+run: $(EXAMPLES_EXE)
+	@$(foreach example, $(EXAMPLES_EXE), \
+		echo "Running " $(example); \
+		$(example);)
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)

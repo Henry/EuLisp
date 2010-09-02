@@ -65,26 +65,6 @@ then
     Eu2CROOTSET="set"
 fi
 
-if [ -n "$Eu2CIMAGENAME" ]
-then
-    Eu2CIMAGE=$Eu2CROOT/Lib/$Eu2CIMAGENAME
-else
-    Eu2CIMAGE=$Eu2CROOT/Lib/eu2c
-fi
-
-CL="cmu"
-if [ "$CL" = "cmu" ]
-then
-    # File extension of the compiler images
-    IMAGE_EXT=".cmu"
-
-    # Eu2C compiler function
-    eu2c(){
-        lisp $APPSOURCE $BASIC_SYSTEM -core ${Eu2CIMAGE}${IMAGE_EXT} \
-            -quiet
-    }
-fi
-
 # Choose standard c compiler
 if [ -n "$Eu2C_CC" ]
 then
@@ -97,8 +77,6 @@ fi
 # but override the default for x86_64
 MWORDLEN=m32
 [ $ARCH = "x86_64" ] && MWORDLEN=m64
-
-ARCH_DIR=platforms/${ARCH}${MWORDLEN}
 
 if [ -n "$Eu2C_CC_OPTIMIZE" ]
 then
@@ -114,12 +92,6 @@ then
 fi
 
 STATE="-LC"
-
-INCLUDE="-I$Eu2CROOT/Runtime -I$Eu2CROOT/EuLispModules/$ARCH_DIR "
-if [ -n "$Eu2C_INCLUDE" ]
-then
-    INCLUDE=${INCLUDE}${Eu2C_INCLUDE}
-fi
 
 LINKLIBS=" -lm"
 if [ -n "$Eu2C_LINKLIBS" ]
@@ -180,6 +152,34 @@ do
             break
     esac
 done
+
+ARCH_DIR=platforms/${ARCH}${MWORDLEN}
+
+if [ -n "$Eu2CIMAGENAME" ]
+then
+    Eu2CIMAGE=$Eu2CROOT/Lib/${ARCH}${MWORDLEN}/$Eu2CIMAGENAME
+else
+    Eu2CIMAGE=$Eu2CROOT/Lib/${ARCH}${MWORDLEN}/eu2c
+fi
+
+CL="cmu"
+if [ "$CL" = "cmu" ]
+then
+    # File extension of the compiler images
+    IMAGE_EXT=".cmu"
+
+    # Eu2C compiler function
+    eu2c(){
+        lisp $APPSOURCE $BASIC_SYSTEM -core ${Eu2CIMAGE}${IMAGE_EXT} \
+            -quiet
+    }
+fi
+
+INCLUDE="-I$Eu2CROOT/Runtime -I$Eu2CROOT/EuLispModules/$ARCH_DIR "
+if [ -n "$Eu2C_INCLUDE" ]
+then
+    INCLUDE=${INCLUDE}${Eu2C_INCLUDE}
+fi
 
 GCLIB="/Runtime/$ARCH_DIR/eu2c"
 
@@ -267,7 +267,7 @@ fi
 
 if [ "$STATE" = "-LC" -o "$STATE" = "-C" ]
 then
-    [ -f ${APPNAME}.o ] && mv $APPNAME.o $APPNAME.o~
+    #[ -f ${APPNAME}.o ] && mv $APPNAME.o $APPNAME.o~
     set -x
     $CC -$MWORDLEN -c -o $ARCH_DIR/$APPNAME.o \
         $CCOPTIMIZE $CCOPTIONS  $INCLUDE $ARCH_DIR/$APPNAME.c

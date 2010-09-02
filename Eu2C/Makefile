@@ -73,10 +73,10 @@ CFLAGS = -O2
 ### Eu2C compiler image names
 ###-----------------------------------------------------------------------------
 eu2c = eu2c
-eu2c_image = Lib/$(eu2c).$(image_ext)
+eu2c_image = Lib/$(ARCH)/$(eu2c).$(image_ext)
 
 module = eulisp-level-0
-module_image = Lib/eu2c.$(module).$(image_ext)
+module_image = Lib/$(ARCH)/eu2c.$(module).$(image_ext)
 
 ###-----------------------------------------------------------------------------
 ### Source files
@@ -101,6 +101,7 @@ eu2c_level: eu2c runtime modlib modeu2c
 eu2c: $(eu2c_image)
 $(eu2c_image): $(Apply) $(EclModules)
 	@echo "===> Create the basic eu2c compiler image " $@
+	@mkdir -p Lib/$(ARCH)
 	@$(call ECL2Eu2C,,Apply/boot1.lisp)
 	@$(call ECL2Eu2C,$(eu2c),Apply/boot2.lisp)
 

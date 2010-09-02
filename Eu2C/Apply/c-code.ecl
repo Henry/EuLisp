@@ -191,42 +191,56 @@
 
    "
 
-~A(~:[~;int argc, char *argv[]~]~:*)
-{void **p;
-      struct VECTOR_ROOTS *v;
-      int i;
-      ~:[~2*~;
-         /* initialization of the memory management system */
-         INITIALIZE_GC;
-         set_lowest_type_descriptor(~A);
-         set_lowest_card_descriptor(~A);
-         /* initialization of NIL/empty list */
-         SET_NIL;
-         SET_CLASS_OF_NIL;
-         /* providing command line arguments */
-         command_line_length=argc;
-         command_line=argv;
-         ~]
-      /* providing root addresses to the memory manager */
-      p=STRUCTURE_ROOTS;
-      while (*p!=0)
-      {add_to_root_set(*p);
-                      p+=1;}
-                      v=VECTOR_ROOTS;
-                      while ((*v).length!=0)
-                      {for (i=0;i<(*v).length;i++) add_to_root_set((*v).pointer+i);
-                            v+=1;}
-                            p=VARIABLE_ROOTS;
-                            while (*p!=0)
-                            {add_to_root_set(*p);
-                                            p+=1;}
-                                            ~{ /* initialization of the symbol table */
-                                                  ~A = (function)~A;~}
-                                                  ~@[ /* initialization of the basic system */
-                                                         initialize_~A();~]
-                                                         /* initialization of the applications top module */
-                                                         ~A();}
-                                                         "
+int ~A(~:[~;int argc, char *argv[]~]~:*)
+{
+    void **p;
+    struct VECTOR_ROOTS *v;
+    int i;
+~:[~2*~;
+    // initialization of the memory management system
+    INITIALIZE_GC;
+    set_lowest_type_descriptor(~A);
+    set_lowest_card_descriptor(~A);
+    // initialization of NIL/empty list
+    SET_NIL;
+    SET_CLASS_OF_NIL;
+    // providing command line arguments
+    command_line_length=argc;
+    command_line=argv;
+~]
+    // providing root addresses to the memory manager
+    p=STRUCTURE_ROOTS;
+    while (*p!=0)
+    {
+        add_to_root_set(*p);
+        p += 1;
+    }
+    v=VECTOR_ROOTS;
+    while ((*v).length!=0)
+    {
+        for (i=0; i<(*v).length; i++) add_to_root_set((*v).pointer+i);
+        v += 1;
+    }
+    p=VARIABLE_ROOTS;
+    while (*p!=0)
+    {
+        add_to_root_set(*p);
+        p+=1;
+    }
+    ~{
+    // initialization of the symbol table
+    ~A =
+        (function)~A;
+    ~}
+    ~@[
+    // initialization of the basic system
+    initialize_~A();
+    ~]
+    // initialization of the applications top module
+    ~A();
+    return 0;
+}
+"
    (main-function-id main-module)
    (eq *compilation-type* :application)
    (+ max-used-type-descriptor 1)

@@ -164,7 +164,7 @@ split at the UNIX separator #\/."
   #+ :cmu (setf ext:*after-save-initializations*
                 (append ext:*after-save-initializations* (list 'image-init)))
   #+ :sbcl (save-lisp-and-die (concatenate 'string "Bin/" name) :executable t)
-  #+ :cmu (save-lisp (concatenate 'string "Lib/" name ".cmu"))
+  #+ :cmu (save-lisp (concatenate 'string "Lib/" *arch* "/" name ".cmu"))
   )
 
 ;; -----------------------------------------------------------------------------

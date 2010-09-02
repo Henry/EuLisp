@@ -378,7 +378,8 @@
     If it proves effective consider writing the 64bit equivalents of the pieces
     of assembly code necessary for 64bit operation.
 *** TODO Consider replacing current =setjmp/longjmp= threads with =pthreads=
-*** TODO Change location of the [cho], {inst,def} and executable files
+*** DONE Change location of the [cho], {inst,def} and executable files
+    CLOSED: [2010-09-02 Thu 13:38]
     Currently the top-level =Makefile= does not set the location of the files
     which are build-dependant.
 *** TODO Replace =equal= with =binary==
