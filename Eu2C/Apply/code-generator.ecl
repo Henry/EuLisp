@@ -64,7 +64,7 @@
                                  (string
                                   (?identifier main-module)))
                           :type "c")
-                         :direction :output :if-exists :new-version))))
+                         :direction :output :if-exists :supersede))))
                (unwind-protect
                    (generate-c-code main-module modules)
                  (unless (eq (dynamic code-output) t)
@@ -81,7 +81,7 @@
                                  (string
                                   (?identifier main-module)))
                           :type "inst")
-                         :direction :output :if-exists :new-version))))
+                         :direction :output :if-exists :supersede))))
                (unwind-protect
                    (generate-c-data)
                  (unless (eq (dynamic code-output) t)
@@ -97,7 +97,7 @@
                                  (string
                                   (?identifier main-module)))
                           :type "h")
-                         :direction :output :if-exists :new-version))))
+                         :direction :output :if-exists :supersede))))
                (unwind-protect
                    (generate-header-file main-module modules)
                  (unless (eq (dynamic code-output) t)
@@ -115,7 +115,7 @@
                                  (string
                                   (?identifier main-module)))
                           :type "def")
-                         :direction :output :if-exists :new-version))))
+                         :direction :output :if-exists :supersede))))
                (unwind-protect
                    (generate-module-def main-module modules)
                  (unless (eq (dynamic code-output) t)
