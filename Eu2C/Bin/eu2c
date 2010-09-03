@@ -170,8 +170,7 @@ then
 
     # Eu2C compiler function
     eu2c(){
-        lisp $APPSOURCE $BASIC_SYSTEM -core ${Eu2CIMAGE}${IMAGE_EXT} \
-            -quiet
+        lisp -core ${Eu2CIMAGE}${IMAGE_EXT} -quiet
     }
 fi
 
@@ -239,9 +238,18 @@ do
     fi
 
     echo "      using compiler image $Eu2CIMAGE"
+
+    # Check if a basic system should be loaded and set compiler arguments
+    if [ -n "$BASIC_SYSTEM" ]
+    then
+        eu2c_args="\"$APPSOURCE\" \"$BASIC_SYSTEM\""
+    else
+        eu2c_args="\"$APPSOURCE\""
+    fi
+
     echo $LOADPATCHFILE \
-        "(apply #'apply-compiler::compile-application" \
-        "(cdr ext:*command-line-strings*) ) (quit)" | eu2c \
+        "(apply-compiler::compile-application $eu2c_args)\
+         (quit)" | eu2c \
         | tee $ARCH_DIR/$APP.log 2>&1
 
     if [ -f ${ARCH_DIR}/${APPNAME}.c ]
