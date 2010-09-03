@@ -47,37 +47,34 @@
                   (compile cl:compile))
                  common-lisp))
  expose (el-modules
-         (only
-          (t
-           quote
-           setq
-           setf
-           if
-           cond
-           and
-           or
-           progn
-           let
-           let*
-           labels
-           flet
-           unwind-protect
-           next-method?
-           call-next-method
-           funcall
-           apply)
-          common-lisp)))
+         (only (t
+                quote
+                setq
+                setf
+                if
+                cond
+                and
+                or
+                progn
+                let
+                let*
+                labels
+                flet
+                unwind-protect
+                next-method?
+                call-next-method
+                funcall
+                apply)
+               common-lisp)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; <object>: the root of the inheritance tree
 ;;;-----------------------------------------------------------------------------
-
 (make-eulisp-class object t)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Defining Forms
 ;;;-----------------------------------------------------------------------------
-
 (export-syntax defmacro
                deflocalmacro
                defun
@@ -119,7 +116,8 @@
 
 ;;***HGW this is a hacked version to filter-out the specialisers
 (cl:defmacro defgeneric (name lambda-list)
-             `(cl:defgeneric ,name ,(make-cl-generic-fun-lambda-list lambda-list)))
+             `(cl:defgeneric ,name
+                             ,(make-cl-generic-fun-lambda-list lambda-list)))
 (cl:defun make-cl-generic-fun-lambda-list (el-lambda-list)
           (cl:mapcar (cl:lambda (arg) (cl:if (cl:listp arg) (cl:car arg) arg))
                      (make-cl-lambda-list el-lambda-list)))

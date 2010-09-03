@@ -109,7 +109,7 @@
     (write-def "~%(defmodule ~a~
                     ~% (import (%tail~
                     ~%          ti-sys-signatures~
-                    ~%          (rename ((%class <class>)) (only (%class) %tail))
+                    ~%          (rename ((%class <class>)) (only (%class) %tail))~
                     ~%          ~A)~
                     ~%  syntax (%tail)~
                     ~%  export (<object> <class>)~
