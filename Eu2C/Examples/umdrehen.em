@@ -23,11 +23,11 @@
 ;;;  Description:
 ;;    A variation of reverse.
 ;;;  Compilation:
-;;    Compile this module with extended system eulisp0x.
+;;    Compile this module with extended system level-0x.
 ;;;-----------------------------------------------------------------------------
 (defmodule umdrehen
-  (import (eulisp0x)
-   syntax (eulisp0x timing))
+  (import (level-0x)
+   syntax (level-0x timing))
 
 (defun umdrehen (l)
   (if (null? l) ()

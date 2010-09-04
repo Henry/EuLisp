@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-classes
-(import (level-1-eulisp
+(import (level-1
          el2lzs-rules
          el2lzs-error
          option-lists
@@ -42,7 +42,7 @@
                                          trans-lattice-type-list) ti-lattice)
          (only (mapcar nconc mapc warn list* reverse vector append)
                common-lisp))
- syntax (level-1-eulisp
+ syntax (level-1
          el2lzs-main
          (only (prog1) common-lisp))
  export (get-class-or-lattice-type get-lattice-type)

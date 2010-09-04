@@ -30,7 +30,7 @@
 (defmodule option-lists
 
   (import
-   (;level-0-eulisp
+   (;level-0
     ;; pair-ext
     ;; list-ext
     ;;(only (warn find remove) common-lisp)
@@ -41,7 +41,7 @@
     )
 
    syntax
-   (;level-0-eulisp
+   (;level-0
     tail
     (only (cond and when) syntax-0)
     )

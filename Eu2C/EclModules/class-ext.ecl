@@ -34,8 +34,8 @@
                common-lisp)
          (only (make-eulisp-class-id)
                apply-standard)
-         level-1-eulisp)
- syntax (level-1-eulisp
+         level-1)
+ syntax (level-1
          apply-standard)
  export (subclass?
          define-singleton-apply-class)

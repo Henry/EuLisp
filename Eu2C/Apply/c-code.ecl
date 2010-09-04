@@ -65,7 +65,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module c-code
-(import (level-0-eulisp
+(import (level-0
          lzs
          accessors
          list-ext
@@ -105,7 +105,7 @@
                 neq
                 *error-output*)
                common-lisp))
- syntax (level-0-eulisp
+ syntax (level-0
          dynamic
          code-identifier
          c-code-syntax

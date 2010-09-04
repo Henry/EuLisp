@@ -24,14 +24,14 @@
 ;;;-----------------------------------------------------------------------------
 
 #module slot-value
-(import (level-1-eulisp
+(import (level-1
          context
          LZS
          analyse-h
          MZS
          type-propagation
          type-inference)
- syntax (level-1-eulisp
+ syntax (level-1
          simple-programming)
  export (get-slot-value-a
          set-slot-value-a))

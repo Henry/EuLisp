@@ -29,15 +29,15 @@
 ;;;  Notes:
 ;;    The benchmark is called with 24, 12 and 6 instead of 18, 12 and 6 as in Gabriel
 ;;    to get times greater than one second on SPARC-machines.
-;;    Compile this module with basic system eulisp0x.
+;;    Compile this module with basic system level-0x.
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 (defmodule taklt
-  (import (eulisp0x timing)
-   syntax (eulisp0x timing))
+  (import (level-0x timing)
+   syntax (level-0x timing))
 
 (defun listn (n)
   (if (eql n 0)

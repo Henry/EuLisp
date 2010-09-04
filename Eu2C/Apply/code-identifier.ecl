@@ -44,7 +44,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module code-identifier
-(import (level-0-eulisp
+(import (level-0
          lzs
          accessors
          binding
@@ -75,7 +75,7 @@
                 copy-seq
                 subseq)
                common-lisp))
- syntax (level-0-eulisp
+ syntax (level-0
          dynamic
          (only (when
                 unless

@@ -24,7 +24,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module code-generator
-(import (level-1-eulisp
+(import (level-1
          (only (?configuration
                 configuration?)
                configuration)
@@ -50,7 +50,7 @@
                 string-downcase
                 string format)
                common-lisp))
- syntax (level-1-eulisp)
+ syntax (level-1)
  export (generate-code))
 
 

@@ -45,12 +45,12 @@
              symbol
              table
              vector
-             level-0-eulisp
+             level-0
              pair-ext
              list-ext
              dynamic
              control1
-             level-1-eulisp
+             level-1
              class-ext)
     (:lisp defstandardclass
            simple-programming)

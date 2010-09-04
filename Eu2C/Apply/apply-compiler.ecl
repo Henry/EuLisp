@@ -24,7 +24,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module apply-compiler
-(import (level-1-eulisp
+(import (level-1
          lzs
          mzs-to-lzs
          (only (configuration?
@@ -91,7 +91,7 @@
                 string-equal
                 find-package)
                common-lisp))
- syntax (level-1-eulisp
+ syntax (level-1
          (only (return-from when)
                common-lisp))
  export (compile-application

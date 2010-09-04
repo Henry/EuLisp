@@ -58,8 +58,8 @@ all0x: $(EXAMPLES_0X_EXE)
 $(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/eulisp-level-0.def
 	../Bin/eu2c -$(WL) -bs eulisp-level-0 $<
 
-$(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/eulisp0x.def
-	../Bin/eu2c -$(WL) -bs eulisp0x $<
+$(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0x.def
+	../Bin/eu2c -$(WL) -bs level-0x $<
 
 ###-----------------------------------------------------------------------------
 ###  Run the examples

@@ -20,8 +20,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Level 0 of EuLisp extended for interaction with C
 ;;;  Description:
-;;    This is intended as a basic system which provides level 0 of EuLisp and some
-;;    additional things needed for interaction with C
+;;    This is intended as a basic system which provides level 0 of EuLisp and
+;;    some additional things needed for interaction with C
 ;;;  Documentation:
 ;;;  Notes:
 ;;;  Requires:
@@ -29,13 +29,13 @@
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
-(defmodule  eulisp0x
-
+(defmodule level-0x
   (import (eulisp-level-0)
    syntax (eulisp-level-0)
    expose (eulisp-level-0
            unix-interface
-           c-interface)
-   )
+           c-interface))
 
-) ;end
+;;;-----------------------------------------------------------------------------
+)  ; End of module
+;;;-----------------------------------------------------------------------------

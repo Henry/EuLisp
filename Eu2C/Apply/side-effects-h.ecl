@@ -30,11 +30,11 @@
 ;;;-----------------------------------------------------------------------------
 
 #module side-effects-h
-(import (level-1-eulisp
+(import (level-1
          accessors
          )
 
- syntax  (level-1-eulisp
+ syntax  (level-1
           apply-standard
           (only (make) simple-programming))
 

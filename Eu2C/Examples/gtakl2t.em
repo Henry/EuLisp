@@ -29,8 +29,8 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule gtakl2t
-  (import (eulisp0x timing)
-   syntax (eulisp0x timing))
+  (import (level-0x timing)
+   syntax (level-0x timing))
 
 (defun listn (n)
   (if (eql n 0)

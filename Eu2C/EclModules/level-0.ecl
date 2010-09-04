@@ -18,17 +18,28 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: the standard module level-1-eulisp
+;;;  Title: EL-in-CL: Level 0 of EuLisp
 ;;;  Description:
-;;    Provides level 1 of EuLisp.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
-#module level-1-eulisp
+#module level-0
 (syntax (eulisp-kernel)
- expose (level-0-eulisp
-         dynamic
-         control1))
+ expose (eulisp-kernel
+         character
+         collection
+         condition
+         compare
+         double
+         null
+         number
+         pair
+         spint
+         el-stream
+         string
+         symbol
+         table
+         vector))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

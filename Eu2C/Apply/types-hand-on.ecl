@@ -47,7 +47,7 @@
                 format
                 mapc)
                common-lisp))
- syntax (level-1-eulisp)
+ syntax (level-1)
  export (types-hand-on-modules))
 
 

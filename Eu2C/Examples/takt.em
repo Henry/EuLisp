@@ -24,16 +24,16 @@
 ;;    Lisp-Systems" and adapted to EuLisp.
 ;;;  Documentation:
 ;;;  Notes:
-;;    The benchmark is called with 24, 12 and 6 instead of 18, 12 and 6 as in Gabriel
-;;    to get times greater than one second on SPARC-machines.
+;;    The benchmark is called with 24, 12 and 6 instead of 18, 12 and 6 as in
+;;    Gabriel to get times greater than one second on SPARC-machines.
 ;;;  Requires:
 ;;;  Problems:
-;;;  Authors: 
+;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
 (defmodule takt
-  (import (eulisp0x timing)
-   syntax (eulisp0x timing))
+  (import (level-0x timing)
+   syntax (level-0x timing))
 
 (defun tak (x y z)
   (if (null? (< y x))
@@ -49,4 +49,6 @@
 (time (tak 26 16 6)
       "\n(tak i24 l12 l6) : %.2f sec %.2f sec system %.2f sec sum\n")
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

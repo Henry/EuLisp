@@ -40,7 +40,7 @@
 
     (:eulisp ,(make-pathname :directory `(,@$applyroot "EclModules")
                              :name "el-modules")
-             level-1-eulisp)
+             level-1)
     (:lisp ,(make-pathname :directory `(,@$applyroot "Apply")
                            :name "defstandardclass")
            ,(make-pathname :directory `(,@$applyroot "Apply")

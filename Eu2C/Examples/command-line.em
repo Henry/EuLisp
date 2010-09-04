@@ -22,11 +22,11 @@
 ;;;  Description:
 ;;    Test the POSIX command-line handling
 ;;;  Compilation:
-;;    Compile this module with extended system eulisp0x.
+;;    Compile this module with extended system level-0x.
 ;;;-----------------------------------------------------------------------------
 (defmodule command-line
-  (import (eulisp0x)
-   syntax (eulisp0x))
+  (import (level-0x)
+   syntax (level-0x))
 
 (do (lambda (arg)(format t "~%~s" arg)) (command-line-arguments))
 
