@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-generic
-(import (eulisp1
+(import (level-1
          el2lzs-rules
          el2lzs-error
          pair-ext
@@ -40,7 +40,7 @@
          (only (%add-method) apply-funs)
          (only (warn list? append mapcar mapc make-instance vector)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          el2lzs-main)
  )
 ;;;-----------------------------------------------------------------------------

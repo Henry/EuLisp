@@ -31,7 +31,7 @@
 
 #module machine-description
 
-(import (eulisp0
+(import (level-0
          representation
          lzs
          mzs
@@ -43,7 +43,7 @@
          (rename ((error cl:error))
                  (only (error)
                        common-lisp)))
- syntax (eulisp1
+ syntax (level-1
          apply-standard
          whc-basic-data-types
          ;;rr-md-read

@@ -52,7 +52,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module generate-def-file
-(import (eulisp0
+(import (level-0
          el2lzs
          (only ($tail-module)
                el2lzs-main)
@@ -92,7 +92,7 @@
                 butlast
                 last)
                common-lisp))
- syntax (eulisp0
+ syntax (level-0
          dynamic
          (only (with-open-file
                 push)

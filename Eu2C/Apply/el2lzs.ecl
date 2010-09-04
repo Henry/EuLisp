@@ -32,10 +32,10 @@
 
 #module el2lzs
 (import
- (eulisp0 el2lzs-main)
+ (level-0 el2lzs-main)
 
  syntax
- (eulisp0 dynamic)
+ (level-0 dynamic)
 
  export   ;; for interactive use
  (load-module             ;;(module-id | path | "") loads and translates a module

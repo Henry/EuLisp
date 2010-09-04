@@ -24,7 +24,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module void-context
-(import (eulisp1
+(import (level-1
          SIMPLE-PROGRAMMING
          LZS
          MZS
@@ -44,7 +44,7 @@
          setq-form
          letstar-form
          slot-value)
- syntax (eulisp1))
+ syntax (level-1))
 
 ;;------------------------------
 (defmethod finish-a ((con <void>) res) res)

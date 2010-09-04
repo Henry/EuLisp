@@ -51,14 +51,14 @@
 
 #module lzs
 
-(import (eulisp0
+(import (level-0
          apply-standard  ; only make-eulisp-class-id
          lzs-syntax      ; make-structure-and-annotation-slots
          ;; make-predicate-name
          ;; <lzs-object>
          ;; lzs-object?
          accessors)
- syntax (eulisp0
+ syntax (level-0
          apply-standard) ; only the macro defstandardclass
  syntax (lzs-syntax)    ; only the macro def-lzs-object
  export (def-lzs-object ;macro from lzs-syntax

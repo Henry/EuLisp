@@ -28,14 +28,14 @@
 ;;;-----------------------------------------------------------------------------
 
 #module move
-(import (eulisp1
+(import (level-1
          context
          LZS
          analyse-h
          MZS
          type-propagation
          type-inference)
- syntax (eulisp1
+ syntax (level-1
          simple-programming)
  export (add-move
          add-move1

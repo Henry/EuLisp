@@ -24,7 +24,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module arg-context
-(import (eulisp1
+(import (level-1
          SIMPLE-PROGRAMMING
          LZS
          MZS
@@ -44,7 +44,7 @@
          setq-form
          slot-value
          gutter)
- syntax (eulisp1))
+ syntax (level-1))
 
 (defmethod finish-a ((con <arg>) form) form)
 

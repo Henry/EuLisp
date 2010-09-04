@@ -29,7 +29,7 @@
 
 #module lzs2mzs
 (import
- ((except (format) eulisp1)
+ ((except (format) level-1)
   simple-programming
   LZS
   MZS
@@ -57,7 +57,7 @@
   )
 
  syntax
- (eulisp1)
+ (level-1)
 
  export
  (lzs2mzs)

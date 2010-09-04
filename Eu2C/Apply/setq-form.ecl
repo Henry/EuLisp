@@ -30,7 +30,7 @@
 #module setq-form
 
 (import
- (eulisp1
+ (level-1
   context
   LZS
   analyse-h
@@ -41,7 +41,7 @@
   )
 
  syntax
- (eulisp1
+ (level-1
   simple-programming)
 
  export

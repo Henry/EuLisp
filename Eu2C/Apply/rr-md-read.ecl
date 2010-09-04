@@ -26,12 +26,12 @@
 #module RR-MD-READ
 
 (import
- (eulisp1
+ (level-1
   (only (get-option) option-lists)
   )
 
  syntax
- (eulisp1
+ (level-1
   lzs-modules
   (only (mapcan ) common-lisp)
   )

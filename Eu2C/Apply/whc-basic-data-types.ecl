@@ -34,7 +34,7 @@
 #module whc-basic-data-types
 (import (representation
          lzs
-         eulisp1
+         level-1
          (only (get-option)
                option-lists)
          (only (<tail-class-def>)
@@ -49,7 +49,7 @@
                common-lisp)
          class-ext
          whc-aux)
- syntax (eulisp1
+ syntax (level-1
          apply-standard
          (only (setf)
                common-lisp)

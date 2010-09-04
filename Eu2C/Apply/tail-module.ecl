@@ -32,7 +32,7 @@
 
 #module tail-module
 (import (accessors
-         eulisp1
+         level-1
          LZS
          MZS
          machine-description; for the whole machine-description
@@ -47,7 +47,7 @@
                 delete-if-not
                 last butlast)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          apply-standard
          debugging
          machine-description)

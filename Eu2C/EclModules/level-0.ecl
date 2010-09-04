@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: Level 0 of EuLisp
+;;;  Title: EL-in-CL: Level-0 of EuLisp
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
@@ -28,14 +28,21 @@
  expose (eulisp-kernel
          character
          collection
-         condition
          compare
+         condition
+         ;;convert
+         copy
          double
-         null
+         ;;elementary-functions
+         ;;event
+         formatted-io
+         fpi
+         function
+         list
+         ;;lock
          number
-         pair
-         spint
-         el-stream
+         telos0     ;syntax-0
+         el-stream  ;stream
          string
          symbol
          table

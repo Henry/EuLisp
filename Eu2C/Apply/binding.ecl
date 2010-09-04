@@ -28,12 +28,12 @@
 ;;;-----------------------------------------------------------------------------
 
 #module binding
-(import (eulisp0
+(import (level-0
          apply-standard
          accessors
          (only (make-instance call-next-method)
                common-lisp))
- syntax (eulisp0
+ syntax (level-0
          apply-standard)
  export (<binding>
          binding?

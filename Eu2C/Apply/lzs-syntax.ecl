@@ -29,10 +29,10 @@
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-syntax
-(import (eulisp0
+(import (level-0
          apply-standard
          accessors)
- syntax (eulisp0
+ syntax (level-0
          apply-standard)
  import ((only (append
                 caar

@@ -22,7 +22,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-basic
-(import (eulisp1
+(import (level-1
          el2lzs-error
          (only (first get)
                common-lisp)
@@ -35,7 +35,7 @@
                common-lisp)       ;; for literal expansion only
          expand-literal
          accessors)
- syntax (eulisp1
+ syntax (level-1
          (only (declare ignore)
                common-lisp)
          apply-standard             ; for literal expansion only

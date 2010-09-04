@@ -31,7 +31,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module c-data
-(import ((except (format) eulisp1)
+(import ((except (format) level-1)
          list-ext
          el2lzs-literals
          code-identifier
@@ -59,7 +59,7 @@
                 make-instance)
                common-lisp))
 
- syntax (eulisp1
+ syntax (level-1
          (only (with-output-to-string
                 push
                 dolist)

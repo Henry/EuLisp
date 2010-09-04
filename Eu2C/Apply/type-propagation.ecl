@@ -29,7 +29,7 @@
 
 #module type-propagation
 (import
- ((except (format) eulisp1)
+ ((except (format) level-1)
   SIMPLE-PROGRAMMING
   LZS
   MZS
@@ -41,7 +41,7 @@
   type-inference)
 
  syntax
- (eulisp1)
+ (level-1)
 
  export
  (

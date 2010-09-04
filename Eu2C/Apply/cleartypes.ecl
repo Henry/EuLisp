@@ -30,7 +30,7 @@
 #module cleartypes
 
 (import
- ((except (format) eulisp1)
+ ((except (format) level-1)
   LZS
   MZS
   type-inference
@@ -42,7 +42,7 @@
   )
 
  syntax
- (eulisp1)
+ (level-1)
 
  export
  (clear-types1

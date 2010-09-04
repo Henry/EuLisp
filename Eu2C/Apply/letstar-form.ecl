@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module letstar-form
-(import (eulisp1
+(import (level-1
          accessors
          context
          LZS
@@ -38,7 +38,7 @@
          move
          gutter
          type-inference)
- syntax (eulisp1
+ syntax (level-1
          simple-programming)
  export (letstar-a))
 

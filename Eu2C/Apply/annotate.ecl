@@ -44,7 +44,7 @@
 
 #module annotate
 (import ((except (assoc)
-                 eulisp1)
+                 level-1)
          lzs
          el2lzs-main
          el2lzs-error
@@ -75,7 +75,7 @@
                 remove-if-not
                 mapcar)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          el2lzs-main
          (only (push)
                common-lisp))

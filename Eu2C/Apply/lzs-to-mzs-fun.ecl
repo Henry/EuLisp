@@ -30,7 +30,7 @@
 #module lzs-to-mzs-fun
 
 (import
- ((except (format reverse) eulisp1)
+ ((except (format reverse) level-1)
   simple-programming
   accessors
   debugging
@@ -57,7 +57,7 @@
  ;; typeinfernce
 
  syntax
- (eulisp1)
+ (level-1)
 
  export
  (lzs2mzs-fun

@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module apply-funs
-(import (eulisp0
+(import (level-0
          el2lzs
          el2lzs-error
          lzs accessors
@@ -36,7 +36,7 @@
          (only (stable-sort
                 find)
                common-lisp))
- syntax (eulisp0
+ syntax (level-0
          (only (case
                 push)
                common-lisp))

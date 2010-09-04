@@ -34,7 +34,7 @@
 
 (import
  (accessors
-  eulisp1
+  level-1
   lzs
   lzs-mop
   lzs-modules
@@ -50,7 +50,7 @@
   machine-description)
 
  syntax
- (eulisp1
+ (level-1
   apply-standard
   debugging
   (only (instance-of?) el2lzs-main)
@@ -195,7 +195,7 @@
 
                ()
 
-;;; the accessor %string-ref is not yet needed in the implementation of eulisp0
+;;; the accessor %string-ref is not yet needed in the implementation of level-0
 ;;; to provide this accessor a different mechanism is necessary because %string
 ;;; is an imported class
 ;;;(name-and-export-accessor %string ^element

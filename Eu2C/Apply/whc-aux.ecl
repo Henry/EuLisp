@@ -31,7 +31,7 @@
 #module whc-aux
 
 (import
- (eulisp1
+ (level-1
   expand-literal
 
   lzs
@@ -45,7 +45,7 @@
   )
 
  syntax
- (eulisp1
+ (level-1
   apply-standard
   lzs-modules)
 

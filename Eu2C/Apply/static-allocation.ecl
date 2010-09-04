@@ -28,7 +28,7 @@
 
 #module static-allocation
 (import ((except (format)
-                 eulisp0)
+                 level-0)
          accessors ;; ??for missing ?mm-type
          (rename ((push cl:push)
                   (dolist cl:dolist)
@@ -62,7 +62,7 @@
                 ?actually-byte-length)
                machine-description)
          asm-ops)
- syntax (eulisp0
+ syntax (level-0
          dynamic)
  export (static-allocate
          write-static-cards

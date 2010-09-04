@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module configuration
-(import ((except (member read) eulisp1)
+(import ((except (member read) level-1)
          (only (read-eulisp $eulisp-readtable) el-modules)
          (rename ((second cl:second)
                   (member cl:member)
@@ -47,7 +47,7 @@
                        common-lisp)
                  (only ($applyroot)) common-lisp-user)
          )
- syntax (eulisp1)
+ syntax (level-1)
  export (?configuration
          ?configuration-value
          ?configuration-values

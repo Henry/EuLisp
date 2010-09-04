@@ -29,14 +29,14 @@
 
 #module analyse-h
 (import ((except (format)
-                 eulisp1)
+                 level-1)
          lzs
          mzs
          accessors
          (only (assoc
                 format)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          apply-standard)
  export  (<cast>
           closure

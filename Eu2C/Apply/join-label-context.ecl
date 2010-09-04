@@ -29,7 +29,7 @@
 
 #module join-label-context
 (import
- (eulisp1
+ (level-1
   SIMPLE-PROGRAMMING
   LZS
   MZS
@@ -47,7 +47,7 @@
  ;; typeinfernce
 
  syntax
- (eulisp1)
+ (level-1)
  )
 
 ;;;-----------------------------------------------------------------------------

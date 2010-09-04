@@ -33,7 +33,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-literals
-(import (eulisp0
+(import (level-0
          apply-standard
          option-lists
          ;; el2lzs-main
@@ -49,7 +49,7 @@
          (only (mapcar mapc make-instance find identity
                        warn format string)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          el2lzs-rules
          (only (push) common-lisp))
  export (expand-literal

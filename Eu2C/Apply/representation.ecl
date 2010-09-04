@@ -30,14 +30,14 @@
 #module representation
 
 (import
- (eulisp1
+ (level-1
   lzs
   (only (<tail-class-def>) lzs-mop)
   ;;accessors
   )
 
  syntax
- (eulisp1
+ (level-1
   (only (defstandardclass) apply-standard)
   )
 

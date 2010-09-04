@@ -29,7 +29,7 @@
 
 #module if-form
 (import
- ((except (format) eulisp1)
+ ((except (format) level-1)
   SIMPLE-PROGRAMMING
   LZS
   MZS
@@ -48,7 +48,7 @@
  ;; typeinfernce
 
  syntax
- (eulisp1)
+ (level-1)
 
  export
  (if-form-a) ; label if-form -> tempvar

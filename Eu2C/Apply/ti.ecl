@@ -31,7 +31,7 @@
 
 
 #module ti
-(import (eulisp1
+(import (level-1
          apply-standard
          debugging
          (only (format
@@ -42,7 +42,7 @@
                 clrhash
                 gethash
                 make-hash-table) common-lisp))
- syntax (eulisp1 debugging)
+ syntax (level-1 debugging)
  export (member-with-args
          dovector
          ti-format
@@ -66,7 +66,7 @@
          *joined-signature-descrs-key*
          *inferred-abstract-classes-key*
          *%setf-select-key*)
- expose (eulisp1
+ expose (level-1
          accessors
          apply-standard
          simple-programming

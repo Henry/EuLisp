@@ -44,7 +44,7 @@
 
 #module side-effects
 (import ((except (format)
-                 eulisp1)
+                 level-1)
          lzs
          mzs
          simple-programming
@@ -67,7 +67,7 @@
          (only (append
                 format)
                common-lisp))
- syntax (eulisp1)
+ syntax (level-1)
  expose (side-effects-h)
  export (analysis-side-effects ; args: module-list
          ;; bild read-glocs/write-glocs etc.

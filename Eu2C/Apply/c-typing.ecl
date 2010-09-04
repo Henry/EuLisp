@@ -27,7 +27,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module c-typing
-(import (eulisp0
+(import (level-0
          list-ext
          lzs
          accessors
@@ -41,7 +41,7 @@
                 vector
                 make-instance)
                common-lisp))
- syntax (eulisp0
+ syntax (level-0
          dynamic
          class-ext)
  export (type-expr-for-c

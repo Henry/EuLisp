@@ -22,7 +22,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module compiler-conditions
-(import (eulisp0
+(import (level-0
          (only (get-option
                 check-options)
                option-lists)
@@ -37,7 +37,7 @@
                         make-instance
                         error)
                        common-lisp)))
- syntax (eulisp0)
+ syntax (level-0)
  export (compiler-error
          define-compiler-condition))
 

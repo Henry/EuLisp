@@ -29,7 +29,7 @@
 
 #module test-context
 (import
- (eulisp1
+ (level-1
   SIMPLE-PROGRAMMING
   LZS
   MZS
@@ -48,13 +48,13 @@
   gutter
   apply-funs ; nullfun & eqfun
   (only (string=
-         ;;symbol-name ; it is in eulisp0
+         ;;symbol-name ; it is in level-0
          ) common-lisp)
   )
  ;; typeinfernce
 
  syntax
- (eulisp1)
+ (level-1)
  )
 
 

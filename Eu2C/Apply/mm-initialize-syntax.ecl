@@ -26,12 +26,12 @@
   tail-module
   (only (?var) accessors)
   (only (get-option check-options) option-lists)
-  eulisp0
+  level-0
   expand-literal
   (only ($mtss $stss $stms max-used-card-descriptor max-used-type-descriptor) apply-funs)
   )
  syntax
- (eulisp0
+ (level-0
   (rename ((incf cl:incf)
            (push cl:push))
           (only (incf push ) common-lisp)))

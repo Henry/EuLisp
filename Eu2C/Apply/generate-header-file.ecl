@@ -36,7 +36,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module generate-header-file
-(import (eulisp0
+(import (level-0
          accessors
          lzs
          representation
@@ -49,7 +49,7 @@
          (only (mapc mapcar list* svref)
                common-lisp))
 
- syntax (eulisp0
+ syntax (level-0
          c-code-syntax
          code-identifier
          )

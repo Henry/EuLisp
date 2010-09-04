@@ -33,7 +33,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-rules
-(import (eulisp1
+(import (level-1
          el2lzs-main
          el2lzs-error
          pair-ext
@@ -63,7 +63,7 @@
                 string-downcase
                 prog1)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          el2lzs-main
          (only (case)
                common-lisp))

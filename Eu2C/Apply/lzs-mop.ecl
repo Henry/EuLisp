@@ -50,7 +50,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-mop
-(import (eulisp1
+(import (level-1
          accessors
          lzs
          el2lzs
@@ -59,7 +59,7 @@
          (only (remove-duplicates substitute find append mapc make-instance)
                common-lisp))
 
- syntax (eulisp1
+ syntax (level-1
          apply-standard
          el2lzs)
 
@@ -198,7 +198,7 @@
         (make-instance (if (null? *basic-system*)
                            <abstract-class-def> <imported-class>)
                        :identifier ^%object
-                       :code-identifier "c__object__eulisp0"
+                       :code-identifier "c__object__level_0"
                        :module $tail-module
                        :supers ()
                        :direct-slots ()
@@ -209,7 +209,7 @@
         (make-instance (if (null? *basic-system*)
                            <metaclass-def> <imported-class>)
                        :identifier ^%class
-                       :code-identifier "c__class__eulisp0"
+                       :code-identifier "c__class__level_0"
                        :module $tail-module
                        :supers (list %object)
                        :representation ()))
@@ -219,7 +219,7 @@
         (make-instance (if (null? *basic-system*)
                            <metaclass-def> <imported-class>)
                        :identifier ^%abstract-class
-                       :code-identifier "c__abstract_class__eulisp0"
+                       :code-identifier "c__abstract_class__level_0"
                        :module $tail-module
                        :supers (list %class)
                        :class %class
@@ -230,7 +230,7 @@
         (make-instance (if (null? *basic-system*)
                            <metaclass-def> <imported-class>)
                        :identifier ^%tail-class
-                       :code-identifier "c__tail_class__eulisp0"
+                       :code-identifier "c__tail_class__level_0"
                        :module $tail-module
                        :supers (list %class)
                        :class %class

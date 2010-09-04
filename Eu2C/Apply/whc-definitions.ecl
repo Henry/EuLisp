@@ -31,7 +31,7 @@
 #module whc-definitions
 (import (representation
          accessors
-         eulisp1
+         level-1
          lzs
          mzs
          mm-initialize
@@ -45,7 +45,7 @@
                 setf
                 warn)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          apply-standard
          debugging)
  export (%pointer

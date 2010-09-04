@@ -47,7 +47,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-eval
-(import (eulisp1
+(import (level-1
          lzs
          eval-basic
          el2lzs-error
@@ -61,7 +61,7 @@
                 append
                 char-code)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          eval-basic
          (only (push)
                common-lisp))

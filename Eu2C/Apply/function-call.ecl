@@ -29,7 +29,7 @@
 
 #module function-call
 
-(import ((except (format) eulisp1)
+(import ((except (format) level-1)
          SIMPLE-PROGRAMMING
          lzs
          mzs
@@ -53,7 +53,7 @@
          configuration ; nothing imported, only to initialize (dynamic *inline*)
          )
 
- syntax (eulisp1)
+ syntax (level-1)
 
  export (call-a-function ; fun arg-list last
          )

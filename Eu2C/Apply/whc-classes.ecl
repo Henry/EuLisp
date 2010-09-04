@@ -32,8 +32,8 @@
 
 #module whc-classes
 
-(import (eulisp0)
- syntax (eulisp0)
+(import (level-0)
+ syntax (level-0)
  expose (representation))
 
 

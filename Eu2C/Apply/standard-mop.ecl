@@ -22,7 +22,7 @@
 
 #module standard-mop
 (import
- (eulisp0
+ (level-0
   lzs-mop
   lzs
   el2lzs-literals
@@ -30,7 +30,7 @@
   (only (<%string>) tail-module)
   (only (find format) common-lisp))
  syntax
- (eulisp0)
+ (level-0)
  )
 
 ;;;-----------------------------------------------------------------------------

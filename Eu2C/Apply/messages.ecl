@@ -28,14 +28,14 @@
 ;;;-----------------------------------------------------------------------------
 
 #module messages
-(import (eulisp0
+(import (level-0
          configuration
          lzs
          accessors
          (only (format
                 *standard-output*)
                common-lisp))
- syntax (eulisp0
+ syntax (level-0
          dynamic)
  export (write-message
          write-message-conditional))

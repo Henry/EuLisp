@@ -28,14 +28,14 @@
 ;;;-----------------------------------------------------------------------------
 
 #module option-lists
-(import (eulisp0
+(import (level-0
          pair-ext
          list-ext
          (only (format
                 find
                 remove)
                common-lisp))
- syntax (eulisp0)
+ syntax (level-0)
  export (map-option-list
          find-option
          get-option

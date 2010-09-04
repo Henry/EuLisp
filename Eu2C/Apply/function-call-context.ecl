@@ -29,7 +29,7 @@
 
 #module function-call-context
 (import
- (eulisp1
+ (level-1
   SIMPLE-PROGRAMMING
   LZS
   MZS
@@ -40,7 +40,7 @@
  ;; typeinfernce
 
  syntax
- (eulisp1)
+ (level-1)
 
  export (l2m-call
          simple-constant?)

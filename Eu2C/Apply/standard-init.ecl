@@ -31,7 +31,7 @@
 
 #module standard-init
 
-(import (eulisp1
+(import (level-1
          lzs-mop
          accessors
          lzs
@@ -50,7 +50,7 @@
                 nconc
                 vector)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          (only (case
                 push)
                common-lisp)))

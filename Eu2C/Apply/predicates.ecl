@@ -22,10 +22,10 @@
 ;;;-----------------------------------------------------------------------------
 
 #module predicates
-(import (eulisp0
+(import (level-0
          lzs
          accessors)
- syntax (eulisp0)
+ syntax (level-0)
  expose ()
  export (*compilation-type*  ; set by `compile' in module apply-compiler
          *basic-system*      ; set by `load-basic-modules' in module apply-compiler

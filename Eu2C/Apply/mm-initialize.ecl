@@ -60,7 +60,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module mm-initialize
-(import (eulisp0
+(import (level-0
          mm-initialize-syntax ;for constants last-used-tds...
          compiler-conditions
          (only (?configuration-value)
@@ -107,7 +107,7 @@
                         not)
                        common-lisp))
          expand-literal)
- syntax (eulisp1
+ syntax (level-1
          mm-initialize-syntax
          (rename
           ((push cl:push)

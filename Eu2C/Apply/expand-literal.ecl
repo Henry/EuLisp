@@ -30,13 +30,13 @@
 
 #module expand-literal
 (import
- (eulisp0
+ (level-0
   lzs accessors
   ;; tail-module using explicitely machine-description::%function
   (only (remove-if-not make-instance mapcan)
         common-lisp))
  syntax
- (eulisp1
+ (level-1
   (only (push)
         common-lisp))
 

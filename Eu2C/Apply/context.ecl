@@ -28,9 +28,9 @@
 ;;;-----------------------------------------------------------------------------
 
 #module context
-(import (eulisp1
+(import (level-1
          mzs)
- syntax (eulisp1
+ syntax (level-1
          simple-programming)
  export  (*void-context*
           *arg-context*))

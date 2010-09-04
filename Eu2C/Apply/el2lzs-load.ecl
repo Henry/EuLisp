@@ -38,14 +38,14 @@
 
 
 #module el2lzs-load
-(import (eulisp1
+(import (level-1
          el2lzs-error
          (only (first second last directory
                       merge-pathnames make-pathname
                       string pathname-name pathname string-equal find)
                common-lisp)
          (only ($apply-module-search-path) cl-user))
- syntax (eulisp1
+ syntax (level-1
          (only (with-open-file)
                common-lisp))
  export (load-apply-module

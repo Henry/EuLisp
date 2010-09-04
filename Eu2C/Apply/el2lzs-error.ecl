@@ -29,7 +29,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-error
-(import (eulisp1
+(import (level-1
          lzs
          accessors
          configuration; only to get initialization of dynamic *[system-]info-level*
@@ -40,7 +40,7 @@
                 second
                 mapcar)
                common-lisp))
- syntax (eulisp1
+ syntax (level-1
          apply-standard)
  export (*frontend-errors*
          frontend-message

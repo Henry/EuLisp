@@ -25,12 +25,12 @@
 
 #module accessors
 (import ((except (concatenate)
-                 eulisp0)
+                 level-0)
          (only (intern
                 concatenate
                 string)
                common-lisp))
- syntax (eulisp0))
+ syntax (level-0))
 
 (defmacro defaccessors aclist
   `(progn ,@(da1 aclist)))

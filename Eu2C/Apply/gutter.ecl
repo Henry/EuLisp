@@ -29,7 +29,7 @@
 
 #module gutter
 (import
- (eulisp1
+ (level-1
   SIMPLE-PROGRAMMING
   lzs
   mzs
@@ -46,7 +46,7 @@
   (only (assoc) common-lisp))
 
  syntax
- (eulisp1)
+ (level-1)
 
  export
  (make-a-closure-function ; (fun block)

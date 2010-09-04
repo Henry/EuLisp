@@ -23,7 +23,7 @@
 #module lzs-modules
 
 (import
- ((except (concatenate) eulisp1)
+ ((except (concatenate) level-1)
   lzs
   accessors
   el2lzs-main
@@ -33,7 +33,7 @@
   (only (make-eulisp-class-id) apply-standard)
   debugging)
  syntax
- (eulisp1
+ (level-1
   (only (generic-flet push) common-lisp)
   el2lzs-main
   class-ext

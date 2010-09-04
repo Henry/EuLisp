@@ -29,13 +29,13 @@
 
 #module name-of-fun
 
-(import (eulisp1
+(import (level-1
          accessors
          lzs
          mzs
          )
 
- syntax (eulisp1)
+ syntax (level-1)
 
  export (name-of funtype-of)
 

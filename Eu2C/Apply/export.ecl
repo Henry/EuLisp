@@ -58,7 +58,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module export
-(import (eulisp0
+(import (level-0
          binding
          apply-funs
          lzs accessors
@@ -75,7 +75,7 @@
                 append
                 svref)
                common-lisp))
- syntax (eulisp0
+ syntax (level-0
          (only (dotimes)
                common-lisp))
  export (export-objects

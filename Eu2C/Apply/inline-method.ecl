@@ -29,7 +29,7 @@
 
 #module inline-method
 (import ((except (format)
-                 eulisp1)
+                 level-1)
          LZS
          LZS-MOP
          simple-programming
@@ -44,7 +44,7 @@
                 append
                 format)
                common-lisp))
- syntax (eulisp1)
+ syntax (level-1)
  export (inline-method
          in-generic-fun
          in-method

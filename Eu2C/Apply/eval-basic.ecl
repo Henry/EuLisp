@@ -29,14 +29,14 @@
 
 #module eval-basic
 
-(import (eulisp1
+(import (level-1
          lzs
          el2lzs-error
          (only (find-module) el2lzs-main)
          (only (mapcar mapc assoc rest first append char-code)
                common-lisp))
 
- syntax (eulisp1
+ syntax (level-1
          (only (push) common-lisp))
 
  export (*global-variables*

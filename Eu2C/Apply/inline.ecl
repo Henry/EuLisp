@@ -28,7 +28,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module inline
-(import ((except (format print) eulisp1)
+(import ((except (format print) level-1)
          SIMPLE-PROGRAMMING
          LZS
          MZS
@@ -43,7 +43,7 @@
          vector
          (only (error format print assoc length append mapc) common-lisp)
          function-call-context)
- syntax (eulisp1)
+ syntax (level-1)
  export (inline-a))
 
 

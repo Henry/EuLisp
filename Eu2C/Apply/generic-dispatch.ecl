@@ -34,7 +34,7 @@
 ;;;-----------------------------------------------------------------------------
 
 #module generic-dispatch
-(import (eulisp0
+(import (level-0
          apply-standard
          accessors
          lzs
@@ -54,8 +54,7 @@
                 error
                 funcall)
                common-lisp))
- syntax (eulisp1 ; level-1 because of when which is actually in level-1
-         )
+ syntax (level-1)
  export (reset-generic-dispatch
          set-discriminating-functions
          set-std-discr-fun
@@ -899,5 +898,6 @@
 ;;             (compute-subtree-list (cdr cl-list) d-args gf-dom doml method))
 ;;    ()))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

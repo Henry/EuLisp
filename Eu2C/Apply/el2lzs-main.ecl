@@ -39,7 +39,7 @@
 #module el2lzs-main
 (import ((except (member
                   concatenate)
-                 eulisp1)
+                 level-1)
          class-ext
          (only (first
                 second
@@ -79,7 +79,7 @@
          binding
          el2lzs-load
          el2lzs-error)
- syntax (eulisp1
+ syntax (level-1
          el2lzs-basic
          class-ext
          (only (case

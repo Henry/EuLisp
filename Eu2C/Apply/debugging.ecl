@@ -29,12 +29,12 @@
 
 #module debugging
 (import
- (eulisp0
+ (level-0
   (only (format) common-lisp)
   (only (*ti-break*) configuration))
 
  syntax
- (eulisp0
+ (level-0
   dynamic
   )
 

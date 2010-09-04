@@ -30,10 +30,10 @@
 
 #module c-code-syntax
 (import ((except (format)
-                 eulisp0)
+                 level-0)
          (only (format)
                common-lisp))
- syntax (eulisp0
+ syntax (level-0
          dynamic))
 
 (defmacro write-code (format-string . args)

@@ -65,7 +65,7 @@
          name-of-fun
          ;;  codegen-data ; get-structure-offset (possible: get-instance-size), size-of
          )
- syntax (eulisp1)
+ syntax (level-1)
  export (mzs2lzs-4-modules
          *assembler-code-generated*))
 
