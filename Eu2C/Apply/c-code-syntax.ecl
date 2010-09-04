@@ -29,13 +29,16 @@
 ;;;-----------------------------------------------------------------------------
 
 #module c-code-syntax
-(import ((except (format) eulisp0)
-         (only (format) common-lisp))
+(import ((except (format)
+                 eulisp0)
+         (only (format)
+               common-lisp))
  syntax (eulisp0
          dynamic))
 
 (defmacro write-code (format-string . args)
   `(format (dynamic code-output) ,format-string ,@args))
 
+;;;-----------------------------------------------------------------------------
 #module-end
-
+;;;-----------------------------------------------------------------------------

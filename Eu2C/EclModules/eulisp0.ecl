@@ -20,46 +20,35 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: Level 0 of EuLisp
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module eulisp0
+(import (eulisp-kernel)
+ syntax (eulisp-kernel)
+ expose (eulisp-kernel
+         character
+         collection
+         compare
+         condition
+         ;;convert
+         copy
+         double
+         ;;elementary-functions
+         ;;event
+         formatted-io
+         fpi
+         function
+         list
+         ;;lock
+         number
+         telos0     ;syntax-0
+         el-stream  ;stream
+         string
+         symbol
+         table
+         vector))
 
-(import
- (eulisp-kernel)
-
- syntax
- (eulisp-kernel)
-
- expose
- (eulisp-kernel
-  control1 ; now macros when, unless, block...
-  character
-  collection
-  compare
-  el-conditions ; condition
-  ;;convert
-  copy
-  double
-  ;;elementary-functions
-  ;;event
-  formatted-io
-  fpi
-  function
-  list
-  ;;lock
-  number
-  telos0     ;syntax-0
-  el-stream  ;stream
-  string
-  symbol
-  table
-  vector
-  )
- )
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

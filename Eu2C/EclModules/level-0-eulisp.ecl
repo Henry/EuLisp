@@ -20,36 +20,27 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: Level 0 of EuLisp
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module level-0-eulisp
+(syntax (eulisp-kernel)
+ expose (eulisp-kernel
+         character
+         collection
+         condition
+         compare
+         double
+         null
+         number
+         pair
+         spint
+         el-stream
+         string
+         symbol
+         table
+         vector))
 
-(
- syntax
- (eulisp-kernel)
-
- expose
- (eulisp-kernel
-  character
-  collection075
-  el-conditions
-  compare
-  double
-  null
-  number
-  pair
-  spint
-  el-stream
-  string
-  symbol
-  table
-  vector
-  )
- )
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

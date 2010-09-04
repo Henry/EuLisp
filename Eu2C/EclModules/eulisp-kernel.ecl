@@ -55,7 +55,11 @@
                 cond
                 and
                 or
+                when
+                unless
                 progn
+                block
+                return-from
                 let
                 let*
                 labels

@@ -21,16 +21,15 @@
 ;;;  Title: EL-in-CL: the standard module level-1-eulisp
 ;;;  Description:
 ;;    Provides level 1 of EuLisp.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module level-1-eulisp
 (syntax (eulisp-kernel)
  expose (level-0-eulisp
-         dynamic075
+         dynamic
          control1))
+
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

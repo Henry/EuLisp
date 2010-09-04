@@ -20,20 +20,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: some standard Level1 extensions for control
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module control1
 (syntax (eulisp-kernel)
- expose ((only (when
-                unless
-                block
-                return-from
-                catch throw)
+ expose ((only (catch
+                throw)
                common-lisp)))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

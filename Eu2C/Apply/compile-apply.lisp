@@ -20,10 +20,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 (in-package cl-user)
@@ -31,15 +27,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; apply packages for compilation
 ;;;-----------------------------------------------------------------------------
-
 (defvar *apply-packages*
-  '(
-    (:eulisp el-modules
+  '((:eulisp el-modules
              eulisp-kernel
              character
              collection
-             el-conditions-0
-             el-conditions
+             condition-0
+             condition
              compare
              double
              null
@@ -57,21 +51,16 @@
              dynamic
              control1
              level-1-eulisp
-             class-ext
-             )
-
+             class-ext)
     (:lisp defstandardclass
            simple-programming)
-
     (:zs   accessors
            lzs
            mzs)
-
     (:general debugging
               option-lists
               compiler-conditions
               configuration)
-
     (:frontend el2lzs-basic
                el2lzs-error
                el2lzs-load
@@ -103,10 +92,8 @@
                standard-init
                mm-initialize
                lzs-class-init)
-
-    (:generic  inline-method
-               generic-dispatch)
-
+    (:generic inline-method
+              generic-dispatch)
     (:ti ti
          ti-codes
          ti-lattice
@@ -125,9 +112,7 @@
          type-inference
 
          ti-init
-         type-propagation
-         )
-
+         type-propagation)
     (:mzs side-effects-h
           context
           analyse-h
@@ -151,27 +136,21 @@
           void-context
           cleartypes
           lzs2mzs)
-
     (:codegen mzs-to-lzs
               code-identifier
               c-typing
               c-data
               c-code-syntax
-              c-code
-              )
-
+              c-code)
     (:top code-generator
           generate-header-file
           generate-def-file
           apply-compiler)
-
     )) ; end of *apply-packages*
-
 
 ;;;-----------------------------------------------------------------------------
 ;;; compile-apply
 ;;;-----------------------------------------------------------------------------
-
 (defun compile-apply (&rest packages)
   (load-apply :lisp)
   (unless packages
@@ -198,3 +177,7 @@
                            path))))
                     *eulisp-module-search-path*)))
     (and file (compile-file file :verbose t))))
+
+;;;-----------------------------------------------------------------------------
+;;  End of compile-apply
+;;;-----------------------------------------------------------------------------
