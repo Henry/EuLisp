@@ -22,11 +22,11 @@
 ;;;  Description: Simple `hello' example
 ;;    which prints a symbol rather than a string
 ;;;  Compilation:
-;;    Compile this module with basic system eulisp-level-0.
+;;    Compile this module with basic system level-0.
 ;;;-----------------------------------------------------------------------------
 (defmodule hello
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0))
+  (import (level-0)
+   syntax (level-0))
 
 (print 'hello)
 (print 'HELLO)

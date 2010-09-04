@@ -30,9 +30,9 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule level-0x
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0)
-   expose (eulisp-level-0
+  (import (level-0)
+   syntax (level-0)
+   expose (level-0
            unix-interface
            c-interface))
 

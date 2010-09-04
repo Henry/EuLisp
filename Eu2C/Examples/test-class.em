@@ -23,10 +23,10 @@
 ;;;  Authors: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-class
-  (import (eulisp-level-0
+  (import (level-0
            (only (<pointer-to-void>)
                  pointer-to-void))
-   syntax (eulisp-level-0
+   syntax (level-0
            ))
 
 (defclass <tower> <object>

@@ -243,7 +243,7 @@ total compilation of an application including all the runtime modules
 </li>
 <li>
 total compilation of an application using a precompiled runtime system,
-<i>e.g.</i> <code>eulisp-level-0</code>.
+<i>e.g.</i> <code>level-0</code>.
 
 </li>
 </ul>
@@ -382,14 +382,14 @@ independent conservative garbage collector will be created.
 </li>
 <li>
 The eu2c-compiler is started first time to compile the basic module
-which is in the default case the module <code>eulisp-level-0</code>.
+which is in the default case the module <code>level-0</code>.
 </li>
 <li>
 The eu2c-compiler is started again to be enhanced with the precompiled
-eulisp-level-0 module. A new CMUCL image is created. Its name is
+level-0 module. A new CMUCL image is created. Its name is
 composed of the name of the eu2c-compiler and the name of the basic
 module. Therefore, he default name will be
-<code>Lib/eu2c.eulisp-level-0.cmu</code>.
+<code>Lib/eu2c.level-0.cmu</code>.
 </li>
 </ul>
 </li>
@@ -403,7 +403,7 @@ total compilation of an application including all the runtime modules
 </li>
 <li>
 total compilation of an application using a precompiled runtime system,
-<i>e.g.</i> <code>eulisp-level-0</code>.
+<i>e.g.</i> <code>level-0</code>.
 
 </li>
 </ul>
@@ -427,7 +427,7 @@ create an application simply call:
 <p><i>e.g.</i> in the <code>Examples</code> sub-directory
 </p><ul>
 <li>
-<code>../Bin/eu2c -bs eulisp-level-0 hello</code>
+<code>../Bin/eu2c -bs level-0 hello</code>
 
 </li>
 </ul>
@@ -471,9 +471,9 @@ compilation The default is without precompiled runtime system, <i>i.e.</i> all
 run-time system modules needed system is compiled together with the
 application. As a tradeoff between compilation time and run-time we
 strongly recommend to use a precompiled run-time system for
-compilation. There is a module <code>eulisp-level-0</code> containing everything
+compilation. There is a module <code>level-0</code> containing everything
 defined in <code>level-0</code> of EuLisp-0.99. In addition we provide a module
-<code>eulis0x</code> which exposes <code>eulisp-level-0</code> and contains the following
+<code>eulis0x</code> which exposes <code>level-0</code> and contains the following
 enhancements: command-line-interface and the base of an interface to C.
 </li>
 <li>
@@ -504,7 +504,7 @@ Mem4C[++]-library.
 </li>
 <li id="sec-4_4">Examples <br/>
 In the subdirectory $Eu2CROOT/Examples some example EuLisp programs are
-given, some of them require to be compiled with the module <code>eulisp-level-0</code>
+given, some of them require to be compiled with the module <code>level-0</code>
 and some must be compiled with the <code>eulisp0x</code>-module.
 
 <p>
@@ -538,7 +538,7 @@ value will be used, otherwise the name is assumed to be <code>eu2c.cmu</code>.
 </li>
 <li>
 <code>basic_module</code>: The name of the EuLisp-module which contain the basic
-run-time system. The default value is <code>eulisp-level-0</code>. Another possible
+run-time system. The default value is <code>level-0</code>. Another possible
 basic module is <code>eulisp0x</code>.
 
 </li>
@@ -616,7 +616,7 @@ make WL=32
 cd Examples
 </li>
 <li>
-../Bin/eu2c -m32 -bs eulisp-level-0 gtakl2
+../Bin/eu2c -m32 -bs level-0 gtakl2
 </li>
 <li>
 ./gtakl2
@@ -732,14 +732,14 @@ be used to compile Eu2C.
 <div class="outline-text-2" id="text-7">
 
 <p>The whole functionality of level 0 of EuLisp is contained in the module
-<code>eulisp-level-0</code>. Therefore the module <code>eulisp-level-0</code> should be imported
+<code>level-0</code>. Therefore the module <code>level-0</code> should be imported
 as in the following example.
 </p>
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">test-module</span>
-  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span> user-module)
-   <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span> user-module-with-macro-definition)
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span> user-module)
+   <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span> user-module-with-macro-definition)
    <span style="color: #0000ff; font-weight: bold;">export</span> (<span style="color: #0000ff; font-weight: bold;">fct1</span> fct2 ...)
    <span style="color: #0000ff; font-weight: bold;">expose</span> (<span style="color: #0000ff; font-weight: bold;">...</span>))
   .
@@ -758,13 +758,13 @@ as in the following example.
 <h2 id="sec-8"><span class="section-number-2">8</span> Compiler log </h2>
 <div class="outline-text-2" id="text-8">
 
-<p><code>../Bin/eu2c -bs eulisp-level-0 hello</code> generates (comments are enclosed in
+<p><code>../Bin/eu2c -bs level-0 hello</code> generates (comments are enclosed in
 <a name="&hellip;" class="target">&hellip;</a> ):
 </p>
 
 
 <pre class="src src-eulisp"><span style="color: #000000;">Eu2C:</span> (<span style="color: #0000ff; font-weight: bold;">compile-application</span> hello)
-      using compiler image /home/dm2/henry/EuLisp/Eu2C/Eu2C/Lib/eu2c.eulisp-level-0
+      using compiler image /home/dm2/henry/EuLisp/Eu2C/Eu2C/Lib/eu2c.level-0
 
 &lt;&lt;After the creation of the '.c' and '.inst' files the compilation and linking
   of the <span style="color: #000000;">C-sources</span> with the help of the <span style="color: #000000;">GNU-C-Compilers</span> is made:&gt;&gt;
@@ -772,7 +772,7 @@ as in the following example.
 <span style="color: #000000;">Eu2C:</span> successful conversion of hello.em to hello.c
 
 + gcc -m64 -c -o hello.o -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.c
-+ gcc -m64 -z muldefs -o hello -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.o /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/eulisp-level-0.a /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/platforms/x86_64m64/eu2c.a -lm
++ gcc -m64 -z muldefs -o hello -O2 -I /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime hello.o /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/level-0.a /home/dm2/henry/EuLisp/Eu2C/Eu2C/Runtime/platforms/x86_64m64/eu2c.a -lm
 + set +x
 
 &lt;&lt;In this phase warnings may appear both from the compiler and the linker. <span style="color: #000000;">In</span>
@@ -869,7 +869,7 @@ hello.inst...
 <p>In module <code>takl</code> (contained in the Examples directory) the functions <code>takl</code>
 and <code>gtakl</code> are defined and exported. <code>takl</code> is a simple function without
 generic functions, <code>gtakl</code> is written with the generic function <code>gshorterp</code>.
-With the import of the module <code>eulisp-level-0</code> the whole functionality of
+With the import of the module <code>level-0</code> the whole functionality of
 level-0 of EuLisp is given.
 </p>
 <p>
@@ -878,8 +878,8 @@ The file associated with the module <code>takl</code> has to have the name <code
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">takl</span>              <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">definition of module takl
-</span>    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
-     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
+</span>    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>)
+     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>)
      <span style="color: #0000ff; font-weight: bold;">export</span> (<span style="color: #0000ff; font-weight: bold;">takl</span> gtakl)     <span style="color: #ff00ff; font-weight: bold;">; </span><span style="color: #ff00ff;">export of functions takl and gtakl
 </span>     )
 
@@ -941,12 +941,12 @@ The file associated with the module <code>test-takl</code> has to have the name
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">test-takl</span>
-    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>
+    (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>
              (<span style="color: #0000ff; font-weight: bold;">only</span> (<span style="color: #0000ff; font-weight: bold;">%void</span>
                     %string)
                    tail)
              takl)
-     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">eulisp-level-0</span>)
+     <span style="color: #0000ff; font-weight: bold;">syntax</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>)
      c-import (<span style="color: #00ff00;">"timing.h"</span>)      <span style="color: #ff00ff; font-weight: bold;">;</span><span style="color: #ff00ff;">extension of module syntax
 </span>     )
 

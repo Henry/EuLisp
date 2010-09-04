@@ -45,7 +45,7 @@ then
     echo "-threads:     a special thread gc library will be used for linking"
     echo "-security:    the gc library is compiled with security features on"
     echo "-bs basic-system  use a precompiled basic system, " \
-        "e.g. -bs eulisp-level-0"
+        "e.g. -bs level-0"
     echo "-L:           run Lisp only"
     echo "-cards <K>:   initial heap size in cards (card = 4096 bytes)"
     echo "-C:           run C-compiler only to compile the executable <app>"

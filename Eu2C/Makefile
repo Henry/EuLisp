@@ -31,7 +31,7 @@
 ###   CL=cmu
 ###   WL=[m32 on 32bit machines and m64 on 64bit machines]
 ###   eu2c=eu2c
-###   module=eulisp-level-0
+###   module=level-0
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
@@ -75,7 +75,7 @@ CFLAGS = -O2
 eu2c = eu2c
 eu2c_image = Lib/$(ARCH)/$(eu2c).$(image_ext)
 
-module = eulisp-level-0
+module = level-0
 module_image = Lib/$(ARCH)/eu2c.$(module).$(image_ext)
 
 ###-----------------------------------------------------------------------------

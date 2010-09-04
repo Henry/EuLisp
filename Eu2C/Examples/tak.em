@@ -27,13 +27,13 @@
 ;;    The benchmark is called with 26, 16 and 6 instead of 18, 12 and 6 as in
 ;;    Gabriel to get times greater than one second on current machines.
 ;;;  Compilation:
-;;    Compile this module with basic system eulisp-level-0.
+;;    Compile this module with basic system level-0.
 ;;;  See also:
 ;;    takl, gtakl and gtakl2
 ;;;-----------------------------------------------------------------------------
 (defmodule tak
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0))
+  (import (level-0)
+   syntax (level-0))
 
 (defun tak (x y z)
   (if (null? (< y x))

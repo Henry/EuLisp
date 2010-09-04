@@ -22,7 +22,7 @@
 ;;;  Description:
 ;;    Most basic double-precision number test
 ;;;  Compilation:
-;;    Compile this module with basic system eulisp-level-0.
+;;    Compile this module with basic system level-0.
 ;;;  Documentation:
 ;;;  Notes:
 ;;;  Requires:
@@ -30,8 +30,8 @@
 ;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 (defmodule test-double
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0))
+  (import (level-0)
+   syntax (level-0))
 
 (print 0.9D0)
 

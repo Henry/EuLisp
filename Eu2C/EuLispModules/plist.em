@@ -22,8 +22,8 @@
 
 (defmodule plist
   (import ( tail basic-symbol
-                 eulisp-level-0)
-   syntax (eulisp-level-0)
+                 level-0)
+   syntax (level-0)
    export (get symbol-plist put))
 
 

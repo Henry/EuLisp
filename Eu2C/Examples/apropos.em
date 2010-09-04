@@ -20,12 +20,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Example 'apropos'
 ;;;  Compilation:
-;;    Compile this module with basic system eulisp-level-0
-;;    eu2c -bs eulisp-level-0 apropos
+;;    Compile this module with basic system level-0
+;;    eu2c -bs level-0 apropos
 ;;;-----------------------------------------------------------------------------
 (defmodule apropos
-  (import (eulisp-level-0 cl-ext)
-   syntax (eulisp-level-0 cl-ext))
+  (import (level-0 cl-ext)
+   syntax (level-0 cl-ext))
 
 (defun apropos (word table)
   (labels ((get-words-with-char

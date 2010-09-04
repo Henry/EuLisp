@@ -22,11 +22,11 @@
 ;;;  Description:
 ;;    Simple mathematical expression interpreter
 ;;;  Compilation:
-;;    Compile this module with basic system eulisp-level-0.
+;;    Compile this module with basic system level-0.
 ;;;-----------------------------------------------------------------------------
 (defmodule test-number
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0))
+  (import (level-0)
+   syntax (level-0))
 
 (deflocal interpreter-fcn
   (list "binary+" binary+

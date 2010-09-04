@@ -27,8 +27,8 @@
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 (defmodule cl-ext
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0)
+  (import (level-0)
+   syntax (level-0)
    export (caar rplaca rplacd remove-if)
    )
 

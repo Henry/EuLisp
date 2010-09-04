@@ -6,8 +6,8 @@
 ;;;  Description: Towers of Hanoi
 ;;;-----------------------------------------------------------------------------
 (defmodule hanoi
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0))
+  (import (level-0)
+   syntax (level-0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Tower definition

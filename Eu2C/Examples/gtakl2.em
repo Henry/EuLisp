@@ -32,8 +32,8 @@
 ;;    tak, takl, and gtakl
 ;;;-----------------------------------------------------------------------------
 (defmodule gtakl2
-  (import (eulisp-level-0)
-   syntax (eulisp-level-0))
+  (import (level-0)
+   syntax (level-0))
 
 (defun listn (n)
   (if (eql n 0)
