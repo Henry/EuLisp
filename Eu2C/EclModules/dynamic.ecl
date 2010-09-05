@@ -43,12 +43,12 @@
          (rename ((defvar cl:defvar))
                  common-lisp)))
 
-;;defined macros: defvar dynamic dynamic-let dynamic-setq
+;;defined macros: defglobal dynamic dynamic-let dynamic-setq
 
 (defun make-dynamic-id (id)
   (make-eulisp-symbol id))
 
-(defmacro defvar (id init)
+(defmacro defglobal (id init)
   `(progn
      (cl:defvar ,(make-dynamic-id id))
      (setq ,(make-dynamic-id id) ,init)))

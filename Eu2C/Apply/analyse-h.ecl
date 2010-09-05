@@ -72,21 +72,21 @@
 ;;;-----------------------------------------------------------------------------
 ;;; global-environments
 ;;;-----------------------------------------------------------------------------
-(defvar closure  ())
-(defvar env       ())
-(defvar pathes ())
-(defvar typepathes ())
-(defvar block ())
+(defglobal closure  ())
+(defglobal env       ())
+(defglobal pathes ())
+(defglobal typepathes ())
+(defglobal block ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; annotations for the function
 ;;;-----------------------------------------------------------------------------
-(defvar rec-calls ())
-(defvar calls    ())
-(defvar tests ())
-(defvar moves ())
-(defvar get-slot-value ())
-(defvar set-slot-value ())
+(defglobal rec-calls ())
+(defglobal calls    ())
+(defglobal tests ())
+(defglobal moves ())
+(defglobal get-slot-value ())
+(defglobal set-slot-value ())
 ;; function types
 (defconstant $normal 0)
 (defconstant $data   1)
@@ -96,8 +96,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; local variables
 ;;;-----------------------------------------------------------------------------
-(defvar *started-and-not-finished-functions* ())
-(defvar *counter*                               1)
+(defglobal *started-and-not-finished-functions* ())
+(defglobal *counter*                               1)
 
 (defun a-number ()
   (let ((n (dynamic *counter*)))

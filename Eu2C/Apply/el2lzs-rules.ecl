@@ -225,7 +225,7 @@
           (setf (third (whole-form)) VALUE)
           (whole-form)))))
 
-(deftranssyn (defvar ID VALUE)
+(deftranssyn (defglobal ID VALUE)
   (with-defining-form
    (setf (third (whole-form)) (transsyn VALUE))
    (whole-form)))
@@ -296,7 +296,7 @@
       (* -1 (+ 1 (length (?var-list params))))
     (length (?var-list params))))
 
-(defvar *function-id* ())
+(defglobal *function-id* ())
 
 (defun trans-lambda (BODY funobj params)
   (dynamic-let ((*function-id* (?identifier funobj)))
@@ -404,10 +404,10 @@
   (with-defining-form
    (list (trans (list ^setq ID EXPR)))))
 
-;; (deftransdef (defvar ID EXPR)
+;; (deftransdef (defglobal ID EXPR)
 ;;              (list (trans (list ^dynamic-setq ID EXPR))))
 
-(deftransdef (defvar ID EXPR)
+(deftransdef (defglobal ID EXPR)
   (with-defining-form
    (list
     (make-instance <app>
@@ -970,7 +970,7 @@
 ;;; dynamic bindings
 ;;;-----------------------------------------------------------------------------
 
-;; (defvar ...) -> <dynamic>
+;; (defglobal ...) -> <dynamic>
 
 ;; (defun trans-dvar (ID)
 ;;   (let ((VAR (find-in-dynamic-env ID)))

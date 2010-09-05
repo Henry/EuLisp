@@ -71,7 +71,7 @@
 
 
 
-(defvar new-td-stats ())
+(defglobal new-td-stats ())
 
 (defun make-formal-type-descr
   (tpathes stat result con-type var-descr arg-num old-type-descr

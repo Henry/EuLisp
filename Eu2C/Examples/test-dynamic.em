@@ -1,4 +1,3 @@
-;;; Copyright 1994-2010 Fraunhofer ISST
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
@@ -18,17 +17,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: the standard module level-0
+;;;  Title: Example 'test-dynamic'
 ;;;  Description:
-;;;  Authors: Ingo Mohr
+;;    Basic tests of dynamic
+;;;  Authors: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+(defmodule test-dynamic
+  (import (level-0)
+   syntax (level-0))
 
-#module formatted-io
-(import (eulisp-kernel)
- syntax (eulisp-kernel)
- expose ((only (format)
-               common-lisp)))
+(defglobal hmm 1)
+
+(print (dynamic hmm))
 
 ;;;-----------------------------------------------------------------------------
-#module-end
+)  ;; end of module
 ;;;-----------------------------------------------------------------------------

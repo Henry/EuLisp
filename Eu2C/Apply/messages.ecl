@@ -40,7 +40,7 @@
  export (write-message
          write-message-conditional))
 
-(defvar *current-module* ())
+(defglobal *current-module* ())
 
 (deflocal *line-length* 75)
 

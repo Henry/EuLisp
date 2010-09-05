@@ -77,7 +77,7 @@
 
 (deflocal *structure-roots* ())
 (deflocal *vector-roots* ())
-(defvar code-output t)
+(defglobal code-output t)
 
 (defun reset-c-data ()
   (setq *structure-roots* ())

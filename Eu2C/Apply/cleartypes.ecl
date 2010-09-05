@@ -53,8 +53,8 @@
 
 
 
-(defvar move-vars ())
-(defvar generic-calls ())
+(defglobal move-vars ())
+(defglobal generic-calls ())
 
 ;;; Condense generic type schemes (type-descr-s) of statements to one-line
 ;;; schemes (type-descr).

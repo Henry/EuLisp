@@ -162,7 +162,7 @@
 (defconstant $maximum-of-few-methods 8)
 (defconstant $maximum-of-decisions 12)
 
-(defvar error-methods ())
+(defglobal error-methods ())
 
 (defun few-methods? (gf methods) ; *hf* domain removed
   (let ((da (?discrimination-arguments gf))

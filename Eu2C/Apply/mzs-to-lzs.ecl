@@ -69,7 +69,7 @@
  export (mzs2lzs-4-modules
          *assembler-code-generated*))
 
-(defvar *assembler-code-generated* ())
+(defglobal *assembler-code-generated* ())
 
 (deflocal inputfoo ())
 
@@ -99,10 +99,10 @@
            (mzs2lzs-functions (cdr fun-list))))
   )
 ;; --------- dynamic-variables -------------
-(defvar *var-list* ())
-(defvar *init-list* ())
-(defvar *type-list* ())
-(defvar *tagbody-form* ())
+(defglobal *var-list* ())
+(defglobal *init-list* ())
+(defglobal *type-list* ())
+(defglobal *tagbody-form* ())
 
 (defun mzs2lzs-fun (fun)
   (start-analyse-fun fun) ; for debugging
@@ -788,7 +788,7 @@
     (list tagged))
   )
 
-(defvar *joind-labels* ())
+(defglobal *joind-labels* ())
 
 (defmethod result2lzs ((test <test>) out-label
                        labels)

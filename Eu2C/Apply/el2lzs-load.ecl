@@ -86,7 +86,7 @@
                                        (progn (error-cannot-load-file path) ())))
                                  (progn (error-cannot-open-file path) ())))))
 
-(defvar apply-module-directory ())
+(defglobal apply-module-directory ())
 
 (defconstant $apply-module-file-extension
   (make-pathname :name :wild :type "em"))
@@ -96,7 +96,7 @@
                  :directory `(:relative
                               "platforms" ,common-lisp-user::*arch*)))
 
-(defvar *apply-module-file-extension* $apply-module-file-extension)
+(defglobal *apply-module-file-extension* $apply-module-file-extension)
 
 (defun directory-of-apply-modules (pathes)
   (cl:mapcan (lambda (path)

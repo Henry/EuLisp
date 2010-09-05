@@ -69,7 +69,7 @@
     (progn (types-hand-on-fun (car fun-list))
            (types-hand-on-funs (cdr fun-list)))))
 
-(defvar cur-fun ()) ; currend function
+(defglobal cur-fun ()) ; currend function
 
 (defun types-hand-on-fun (fun)
   (start-analyse-fun fun);; for debugging

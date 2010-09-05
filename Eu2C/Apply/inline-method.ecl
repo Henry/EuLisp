@@ -55,9 +55,9 @@
          more-specific?))
 
 
-(defvar in-generic-fun ())
-(defvar in-method ())
-(defvar next-method?arams ())
+(defglobal in-generic-fun ())
+(defglobal in-method ())
+(defglobal next-method?arams ())
 
 (defun transform-call-next-method (arg-list form)
   (let ((gf (dynamic in-generic-fun))
@@ -157,7 +157,7 @@
   )
 ;;definitions and init-forms
 
-(defvar inline-env ())
+(defglobal inline-env ())
 
 (defun inline-method (method-def var-list)
   (let* ((fun (?fun method-def))

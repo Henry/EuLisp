@@ -23,20 +23,22 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule condition
-  (import  (tail eulisp-kernel
-                 function
-                 standard-generic-function
-                 (only (make) object-0-i)
-                 (only (make )object-0-i)
-                 formatted-io
-                 stream
-                 (only (equal) compare)
-                 condition-i
-                 )
-   syntax ( tail function standard-generic-function condition-ii)
-
-   export (
-           <condition>
+  (import (tail
+           eulisp-kernel
+           function
+           standard-generic-function
+           (only (make)
+                 object-0-i)
+           formatted-io
+           stream
+           (only (equal)
+                 compare)
+           condition-i)
+   syntax (tail
+           function
+           standard-generic-function
+           condition-ii)
+   export (<condition>
            <execution-condition>
            <invalid-operator>
            <domain-condition>
@@ -48,8 +50,6 @@
            <division-by-zero>
            <conversion-condition>
            <no-converter>
-;;;rr          <stream-condition>
-;;;rr          <syntax-error>
            <thread-condition>
            <thread-already-started>
            <wrong-thread-continuation>
@@ -65,8 +65,7 @@
            signal
            error
            cerror
-           defcondition-error-string
-           ))
+           defcondition-error-string))
 
 ;;;-----------------------------------------------------------------------------
 ;;; A very simple defcondition
@@ -142,8 +141,7 @@
 
 (%define-standard-class (<domain-condition> <class> )
   <execution-condition>
-  ((result type <object> default () keyword result accessor result)
-   )
+  ((result type <object> default () keyword result accessor result))
   representation pointer-to-struct
   allocation multiple-type-card)
 
@@ -191,7 +189,6 @@
 ;; used in stream-i---read+formatted-io !!!!!!
 ;; (define-condition-class <syntax-error> <condition> )
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; Thread condition
 ;;;-----------------------------------------------------------------------------
@@ -208,7 +205,6 @@
 (define-condition-class <wrong-thread-continuation> <thread-condition> )
 
 (define-condition-class <wrong-condition-class> <thread-condition> )
-
 
 ;;;-----------------------------------------------------------------------------
 ;;; Telos condition
@@ -292,7 +288,7 @@
 
 (defun returning-signal-handler(condition continuation))
 
-(defvar dynamic-default-signal-handler returning-signal-handler)
+(defglobal dynamic-default-signal-handler returning-signal-handler)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Define signal working  with dynamic-default-signal-handler
@@ -354,4 +350,6 @@
     ((var var1) (atom? <condition>))
     ((var var2) (atom? <object>))))) ; supposed to be <continuation>
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module condition
+;;;-----------------------------------------------------------------------------

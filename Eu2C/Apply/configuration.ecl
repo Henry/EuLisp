@@ -131,26 +131,26 @@
 ;;; configuration variables
 ;;;-----------------------------------------------------------------------------
 
-(defvar *inline* ())
+(defglobal *inline* ())
 ;; used in function-call
 ;; () - no inlining at all
 ;; 0   - only inlining of slot-accessors and slot-default-functions if they meet the
 ;;       requirement of (dynamic *inline*) = 1
 ;; n   - inlining takes place if the "complexity" of the function is less than n
-(defvar *info-level* 2)
+(defglobal *info-level* 2)
 
-(defvar *system-info-level* 2)
+(defglobal *system-info-level* 2)
 ;; 0 no infos, very short warnings and errors
 ;; 1 very short infos
 ;; 2 some infos
 ;; 3 all infos
 
-(defvar *static-mm-type* ^t)
+(defglobal *static-mm-type* ^t)
 ;; t  - sytem generates values during compile time
 ;;      only applicable for total and rt-system compilation
 ;; () - results in one additional indirection for each allocation of an instance
 
-(defvar *static-mm-card* ^t)
+(defglobal *static-mm-card* ^t)
 ;; t  - sytem generates values during compile time
 ;;      only applicable for total and rt-system compilation
 ;; () - results in one additional indirection for each allocation of an instance

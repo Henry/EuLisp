@@ -56,7 +56,7 @@
 ;;; basics for the variable environment
 ;;;-----------------------------------------------------------------------------
 
-(defvar variable-environment () )
+(defglobal variable-environment () )
 ;;; holds the current bindings of local lexical variables in an a-list of the form
 ;;; ((a-lzs-local-static . value) ...).
 

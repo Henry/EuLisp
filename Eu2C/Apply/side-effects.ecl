@@ -81,9 +81,9 @@
 
 (deflocal *amend-glocs* ())
 
-(defvar read-glocs ())
+(defglobal read-glocs ())
 
-(defvar write-glocs ())
+(defglobal write-glocs ())
 
 (deflocal *funcall-read-glocs* ())
 
@@ -170,7 +170,7 @@
                (setq *amend-glocs* ^t)))
       )))
 
-(defvar cur-module ())
+(defglobal cur-module ())
 
 ;;(defun init-side-effecs (mlist)
 ;;  (if (null? mlist) ()
@@ -193,7 +193,7 @@
                (init-side-effecs-fun2 fun)))
 
 ;; To avoid: Warning: Undefined variable ES::USED-CL-VARS
-#+ :cmu (defvar used-cl-vars ())
+#+ :cmu (defglobal used-cl-vars ())
 
 (defun init-side-effecs-fun2 (fun)
   ;; (start-analyse-fun fun)

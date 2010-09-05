@@ -18,13 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Signalling errors, warnings and infos for specific situations detected by
-;;    the frontend
+;;;  Title: Signalling errors, warnings and infos
+;;  for specific situations detected by the frontend
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -32,7 +28,7 @@
 (import (level-1
          lzs
          accessors
-         configuration; only to get initialization of dynamic *[system-]info-level*
+         configuration ; only to get initialization of dynamic *[system-]info-level*
          binding
          debugging
          messages
@@ -65,14 +61,14 @@
 (defun reset-frontend-errors ()
   (setq *frontend-errors* 0))
 
-(defvar current-defining-form ())
+(defglobal current-defining-form ())
 
 (defun frontend-message (key message . args)
   (when (eq key ^error) (new-frontend-error))
   (apply #'write-message key message args))
 
-(defvar eval-fun ())
-(defvar eval-args ())
+(defglobal eval-fun ())
+(defglobal eval-args ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; used by el2lzs-main
@@ -92,7 +88,7 @@
  warning-binding-in-import-and-syntax
  )
 
-(defvar error-if-no-lexical-found t)
+(defglobal error-if-no-lexical-found t)
 
 (defun error-no-lexical-binding (id)
   (when (dynamic error-if-no-lexical-found)
@@ -206,7 +202,7 @@
                     module-name
                     path))
 
-(defvar *load-level* 0)
+(defglobal *load-level* 0)
 
 (defun info-loading-module (path)
   (frontend-message ()

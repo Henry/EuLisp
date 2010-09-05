@@ -507,7 +507,7 @@
           *literal-expanders*))
 
 ;; To avoid: Warning: Undefined variable ES::*LOCAL-VAR-NAMES*
-#+ :cmu (defvar *local-var-names* ())
+#+ :cmu (defglobal *local-var-names* ())
 
 (defun make-expansion-form (expander-fun)
   (dynamic-let ((*local-var-names*
@@ -625,7 +625,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Handling local variable names
 ;;;-----------------------------------------------------------------------------
-(defvar *local-var-names* (list 0)) ; a list (unique-index (var1 . name1)...)
+(defglobal *local-var-names* (list 0)) ; a list (unique-index (var1 . name1)...)
 
 (defgeneric get-var-name (var))
 

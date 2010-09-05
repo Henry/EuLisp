@@ -241,11 +241,11 @@
 ;;; global variables
 ;;;-----------------------------------------------------------------------------
 
-(defvar *identifier-table* ())
+(defglobal *identifier-table* ())
 
-(defvar *local-identifier-table* ())
+(defglobal *local-identifier-table* ())
 
-(defvar *capitalize* ())
+(defglobal *capitalize* ())
 
 (deflocal *max-identifier-size* ())
 ;; () means no truncation of identifiers
@@ -275,7 +275,7 @@
 ;;; identifier generation for exported objects
 ;;;-----------------------------------------------------------------------------
 
-(defvar *identifier-for-export* ())
+(defglobal *identifier-for-export* ())
 
 (defun check-c-unique (string)
   ;;

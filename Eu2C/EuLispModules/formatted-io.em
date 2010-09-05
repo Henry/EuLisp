@@ -20,69 +20,125 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule formatted-io
-  (import
-   ((only (<class>
-           <list> <object>
-           %cast
-           %signed-word-integer %unsigned-word-integer
-           %signed-byte-integer %unsigned-byte-integer
-           %void %string %double-float
-           %gt %lt
-           %extract %eq
-           %plus %minus %mult
-           make-swi make-fpint
-           cons car cdr cons?
-           eq
-           ) tail)
-    (only (error <condition>) condition-i)
-    (only (int?) int-i)
-    (only ($standard-output
-           %write-unit %read-unit %peek-unit
-           ensure-open-character-output-stream
-           <stream> <string-stream> make-string-stream
-           convert-stream-string %write-string) stream-i)
-    (only ($char-formfeed
-           $char-return $char-newline
-           $char-tilde $char-ascii-a-l $char-ascii-% $char-ascii-s-l
-           $char-ascii-b-l $char-ascii-c-l $char-ascii-d-l $char-ascii-e-l
-           $char-ascii-f-l $char-ascii-g-l $char-ascii-o-l $char-ascii-r-l
-           $char-ascii-t-l $char-ascii-& $char-ascii-page-seperator
-           $char-ascii-tab $char-ascii-point
-           $char-string-hex-l
-           digit? digit2figure10
-           char-class *char-class-token*
-           ) char-tables)
-    (only (print-based-int-0
-           change-exponent-marker ;; %write-string
-           print ;; nur fur test
-           ) print)
-    (only (generic-prin generic-write ) stream-generic)
-    (only (symbol?) symbol);; inserted by ak
-    (only (null?)
-          basic-list-0)         ; inserted by ak
-    (only (read read-based-int1) read)
-    (only (integer?) integer)
-    (only (float?) float-i)
-    (only (<double-float> make-dble set-dble dble) double-float-i)
-    (only (sscanf-3 sprintf-3-double) c-stdio)
-    (only (<character> character?) character)
-    (only (*buffer-1*
-           <string-stack> clear-buffer
-           push-buffer ?stack-string make-string-stack) string-stack)
-    (only (string?
-           string-pointer <string> make-string
-           allocate-%string duplicate-%string) string-ii)
-    (only (strlen) c-string-interface)
-    )
+  (import ((only (<class>
+                  <list>
+                  <object>
+                  %cast
+                  %signed-word-integer
+                  %unsigned-word-integer
+                  %signed-byte-integer
+                  %unsigned-byte-integer
+                  %void
+                  %string
+                  %double-float
+                  %gt
+                  %lt
+                  %extract
+                  %eq
+                  %plus
+                  %minus
+                  %mult
+                  make-swi
+                  make-fpint
+                  cons
+                  car
+                  cdr
+                  cons?
+                  eq)
+                 tail)
+           (only (error
+                  <condition>)
+                 condition-i)
+           (only (int?)
+                 int-i)
+           (only ($standard-output
+                  %write-unit
+                  %read-unit
+                  %peek-unit
+                  ensure-open-character-output-stream
+                  <stream>
+                  <string-stream>
+                  make-string-stream
+                  convert-stream-string
+                  %write-string)
+                 stream-i)
+           (only ($char-formfeed
+                  $char-return
+                  $char-newline
+                  $char-tilde
+                  $char-ascii-a-l
+                  $char-ascii-%
+                  $char-ascii-s-l
+                  $char-ascii-b-l
+                  $char-ascii-c-l
+                  $char-ascii-d-l
+                  $char-ascii-e-l
+                  $char-ascii-f-l
+                  $char-ascii-g-l
+                  $char-ascii-o-l
+                  $char-ascii-r-l
+                  $char-ascii-t-l
+                  $char-ascii-&
+                  $char-ascii-page-seperator
+                  $char-ascii-tab
+                  $char-ascii-point
+                  $char-string-hex-l
+                  digit?
+                  digit2figure10
+                  char-class
+                  *char-class-token*)
+                 char-tables)
+           (only (print-based-int-0
+                  change-exponent-marker ;; %write-string
+                  print) ;; nur fur test
+                 print)
+           (only (generic-prin
+                  generic-write ) stream-generic)
+           (only (symbol?)
+                 symbol);; inserted by ak
+           (only (null?)
+                 basic-list-0)         ; inserted by ak
+           (only (read
+                  read-based-int1)
+                 read)
+           (only (integer?)
+                 integer)
+           (only (float?)
+                 float-i)
+           (only (<double-float>
+                  make-dble
+                  set-dble
+                  dble)
+                 double-float-i)
+           (only (sscanf-3
+                  sprintf-3-double)
+                 c-stdio)
+           (only (<character>
+                  character?)
+                 character)
+           (only (*buffer-1*
+                  <string-stack>
+                  clear-buffer
+                  push-buffer
+                  ?stack-string
+                  make-string-stack)
+                 string-stack)
+           (only (string?
+                  string-pointer
+                  <string>
+                  make-string
+                  allocate-%string
+                  duplicate-%string)
+                 string-ii)
+           (only (strlen)
+                 c-string-interface))
    syntax (tail)
-   export (format scan))
+   export (format
+           scan))
 
 (%define-standard-class (<scan-mismatch> <class> )
   <condition>
@@ -93,8 +149,7 @@
           accessor input
           keyword input))
   representation pointer-to-struct
-  allocation multiple-type-card
-  )
+  allocation multiple-type-card)
 
 (%define-variable $temp-format-string-stream <string-stream>)
 
@@ -130,7 +185,7 @@
                args)
       (convert-stream-string $temp-format-string-stream))))
 
-(defvar *tilde-index* 0)
+(defglobal *tilde-index* 0)
 
 (%define-function (format1 <object>)
   ((stream <stream>)
@@ -314,9 +369,9 @@
       (write-n-tabs stream (%minus n #%i1))
     ()))
 
-(defvar last-scan-string "")
+(defglobal last-scan-string "")
 
-(defvar saved-cur-index 0)
+(defglobal saved-cur-index 0)
 
 (defun scan (fstring . stream-list)
   (dynamic-let ((last-scan-string fstring)

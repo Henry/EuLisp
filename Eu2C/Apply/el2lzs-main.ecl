@@ -160,7 +160,7 @@
     (cons new env)))
 
 ;;;-----------------------------------------------------------------------------
-(defvar lex-env ())      ;; the lexical environment which can grow and shrink
+(defglobal lex-env ())      ;; the lexical environment which can grow and shrink
 
 (defun find-in-lex-env (id)
   (or (find-in-env (dynamic lex-env) id)
@@ -198,7 +198,7 @@
                   ,@forms)))
 
 ;;;-----------------------------------------------------------------------------
-(defvar mac-env ())      ;; the lexical environment for syntax expansion
+(defglobal mac-env ())      ;; the lexical environment for syntax expansion
 
 (defun find-in-mac-env (id)
   (find-in-env (dynamic mac-env) id))
@@ -207,7 +207,7 @@
   (push obj (dynamic mac-env)))
 
 ;;;-----------------------------------------------------------------------------
-(defvar symbol-env ())   ;; the set of used symbols
+(defglobal symbol-env ())   ;; the set of used symbols
 
 (defun find-in-symbol-env (id)
   (find-in-env (dynamic symbol-env) id))
@@ -216,7 +216,7 @@
   `(push ,obj (dynamic symbol-env)))
 
 ;;;-----------------------------------------------------------------------------
-(defvar dynamic-env ())  ;; the set of dynamic variables
+(defglobal dynamic-env ())  ;; the set of dynamic variables
 ;; (all are viewed as global ones)
 (defun find-in-dynamic-env (id)
   (find-in-env (dynamic dynamic-env) id))
@@ -224,7 +224,7 @@
 (defmacro add-to-dynamic-env (obj)
   `(push ,obj (dynamic dynamic-env)))
 
-(defvar undefined-functions () )
+(defglobal undefined-functions () )
 
 (defun make-undefined-function (fun)
   (let ((undefined-fun (find-in-env (dynamic undefined-functions) fun)))
@@ -292,7 +292,7 @@
 ;;; transformation of a module definition: the main function
 ;;;-----------------------------------------------------------------------------
 
-(defvar waiting-export-directives ())
+(defglobal waiting-export-directives ())
 
 (defun trans-module (module-def)
   (let* ((name (second module-def))

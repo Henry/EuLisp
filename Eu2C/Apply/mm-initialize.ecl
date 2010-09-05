@@ -121,7 +121,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; list of class init forms - must be reset in ~compute-runtime-initialization
 ;;;-----------------------------------------------------------------------------
-(defvar *class-initialization-forms* ())
+(defglobal *class-initialization-forms* ())
 
 ;;definitions and init-forms
 ;;;-----------------------------------------------------------------------------

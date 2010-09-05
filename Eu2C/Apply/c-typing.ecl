@@ -57,8 +57,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; switches and variables
 ;;;-----------------------------------------------------------------------------
-(defvar *no-cast-if-compatible-representation* t)
-(defvar *function* ())
+(defglobal *no-cast-if-compatible-representation* t)
+(defglobal *function* ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes

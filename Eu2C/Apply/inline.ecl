@@ -48,8 +48,8 @@
 
 
 ;; definitions and init-forms
-(defvar ienv ())
-(defvar iresult ())
+(defglobal ienv ())
+(defglobal iresult ())
 
 (defun inline-a (con fun args resultvar)
   ;; inline-a will be calld with a <test> or an <arg> - context

@@ -36,7 +36,7 @@
           *arg-context*))
 
 ;;--- definitions, exportations, initialization forms
-(defvar *void-context* (make <void>)) ; create of a instance
-(defvar *arg-context* (make <arg>))
+(defglobal *void-context* (make <void>)) ; create of a instance
+(defglobal *arg-context* (make <arg>))
 
 #module-end

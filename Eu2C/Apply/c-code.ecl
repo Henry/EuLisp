@@ -133,11 +133,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;; switches and variables
 ;;;-----------------------------------------------------------------------------
-(defvar *empty-list-in-register* t)
+(defglobal *empty-list-in-register* t)
 
 ;; necessary for literals, t means that the literal itself must be used instead
 ;; of its pointer
-(defvar *no-pointer* ())
+(defglobal *no-pointer* ())
 
 (defconstant $last-pass 100)
 
@@ -576,11 +576,11 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
                        (t ()))))
                (write-stmt object stream)))
 
-(defvar *return* ())
+(defglobal *return* ())
 ;; *return* says for STMT: return a value if it the last expression
 ;;               for EXPR: return a value of this type
 
-(defvar *context* ())
+(defglobal *context* ())
 
 (defun default-write (object stream)
   (write object
@@ -970,7 +970,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
                 (*min-precedence* (if args (car args) 0)))
                (write-expr object stream)))
 
-(defvar *min-precedence* 0)
+(defglobal *min-precedence* 0)
 
 (defgeneric write-expr (object stream))
 
@@ -1146,7 +1146,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
             (type-var-init-list (cdr vars) (cdr inits) (cdr types)))
       )))
 
-(defvar *label-index* 0)
+(defglobal *label-index* 0)
 
 (defun label-and-form (tagged-form)
   (setf (?label tagged-form)

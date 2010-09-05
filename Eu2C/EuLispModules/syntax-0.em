@@ -18,35 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 (defmodule syntax-0
-
-  ;;  (import ((rename ((%object <object>)
-  ;;                    (%class <class>)
-  ;;                    (%tail-class <tail-class>))
-  ;;             tail)
   (import (tail
            basic-list
-           basic-syntax
-           )
+           basic-syntax)
    syntax (tail)
    expose (basic-list
            basic-compare
-           basic-syntax)
-   )
+           basic-syntax))
 
 ;;;-----------------------------------------------------------------------------
 ;;; cond
 ;;;-----------------------------------------------------------------------------
-
 (defmacro cond clauses
   (if (null? clauses) ()
     (if (null? (cdr (car clauses))) `(or ,(car (car clauses))
@@ -80,4 +68,6 @@
 (defmacro return-from (identifier . form)
   `(,identifier ,(if (null? form) () (car form))))
 
+;;;-----------------------------------------------------------------------------
 ) ;end of module syntax-0
+;;;-----------------------------------------------------------------------------
