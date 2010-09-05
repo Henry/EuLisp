@@ -151,7 +151,7 @@
 * Getting Started with [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-4][Youtoo]]
   See [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-4][An Introduction to EuLisp, EuXLisp and Youtoo]].
 
-* Getting Started with [[http://henry.github.com/EuLisp/Eu2C/Readme.html][Eu2C]]
+* Getting Started with [[http://henry.github.com/EuLisp/Eu2C/README.html][Eu2C]]
   See [[http://henry.github.com/EuLisp/Eu2C/README.html][README]].
 
 * [[http://henry.github.com/EuLisp/TODO.org][To Do]]

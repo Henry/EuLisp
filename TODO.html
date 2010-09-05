@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*TODO*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-08-30 14:21:22 BST"/>
+<meta name="generated" content="2010-09-05 22:16:28 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -349,7 +349,7 @@ Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the 
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-29 Tue 15:31</span></span><br/>
 Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
 </li>
-<li id="sec-2_5"><span class="done DONE"> DONE</span> Add <code>spprint</code> and change <code>pprint</code> to use stdout <br/>
+<li id="sec-2_5"><span class="done DONE"> DONE</span> Add <code>sprint</code> and change <code>print</code> to use stdout <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-29 Tue 16:58</span></span><br/>
 </li>
 <li id="sec-2_6"><span class="done DONE"> DONE</span> Rename require predicate keyword <code>requiredp:</code> -&gt; <code>required?:</code> <br/>
@@ -717,25 +717,23 @@ conforms to this style and may be used to automatically re-indent code.
 </li>
 <li id="sec-5_5"><span class="todo TODO"> TODO</span> Change the <code>initlist</code> keywords to use the post-fix ":" <br/>
 </li>
-<li id="sec-5_6"><span class="todo TODO"> TODO</span> Rename <code>&lt;fixed-precision-integer&gt;</code> -&gt; <code>&lt;int&gt;</code> <br/>
+<li id="sec-5_6"><span class="done DONE"> DONE</span> Rename <code>&lt;fixed-precision-integer&gt;</code> -&gt; <code>&lt;int&gt;</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-08-30 Mon 14:35</span></span><br/>
 </li>
-<li id="sec-5_7"><span class="todo TODO"> TODO</span> Rename predicate functions <br/>
-Rename predicates ending in "-p" and "p" to use the post-fix "?".  Add the
-post-fix "?" to <code>atom</code> and <code>null</code>.
-</li>
-<li id="sec-5_8"><span class="todo TODO"> TODO</span> Consider adding a special list for the keywords <br/>
+<li id="sec-5_7"><span class="todo TODO"> TODO</span> Consider adding a special list for the keywords <br/>
 Currently they are simply symbols which happen to end in a ":".
 </li>
-<li id="sec-5_9"><span class="todo TODO"> TODO</span> Add support for the default <code>superclass</code> in <code>defclass</code> <br/>
+<li id="sec-5_8"><span class="done DONE"> DONE</span> Add support for the default <code>superclass</code> in <code>defclass</code> <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-09-02 Thu 15:45</span></span><br/>
 Currently the superclass MUST be specified but the definition states that if
 the superclass is <code>()</code> then the default superclass <code>&lt;object&gt;</code> will be used.
 </li>
-<li id="sec-5_10"><span class="todo TODO"> TODO</span> Consider writing a <code>defclass</code> which supports multiple-inheritance <br/>
+<li id="sec-5_9"><span class="todo TODO"> TODO</span> Consider writing a <code>defclass</code> which supports multiple-inheritance <br/>
 Currently only single-inheritance is supported by <code>defclass</code> as specified in
 EuLisp Level-0 but it should be possible to add support for a list of
 super-classes as specified in EuLisp Level-1.
 </li>
-<li id="sec-5_11"><span class="todo TODO"> TODO</span> Correct case handling for symbols <br/>
+<li id="sec-5_10"><span class="todo TODO"> TODO</span> Correct case handling for symbols <br/>
 <ul>
 <li>
 Currently symbols or interned with capitalised names.
@@ -752,9 +750,62 @@ uppercase.
 </li>
 </ul>
 </li>
-<li id="sec-5_12"><span class="todo TODO"> TODO</span> Change location of the [cho] and {inst,def} files generated <br/>
+<li id="sec-5_11"><span class="todo TODO"> TODO</span> Test current thread implementation in 32bit <br/>
+If it proves effective consider writing the 64bit equivalents of the pieces
+of assembly code necessary for 64bit operation.
+</li>
+<li id="sec-5_12"><span class="todo TODO"> TODO</span> Consider replacing current <code>setjmp/longjmp</code> threads with <code>pthreads</code> <br/>
+</li>
+<li id="sec-5_13"><span class="done DONE"> DONE</span> Change location of the [cho], {inst,def} and executable files <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-09-02 Thu 13:38</span></span><br/>
 Currently the top-level <code>Makefile</code> does not set the location of the files
 which are build-dependant.
+</li>
+<li id="sec-5_14"><span class="todo TODO"> TODO</span> Replace <code>equal</code> with <code>binary=</code> <br/>
+Remove the <code>equal</code> generic function and methods and introduce a complete set
+of <code>binary=</code> methods.  The only difference between the definition of <code>equal</code>
+and <code>binary=</code> is the latter applies type coercion whereas <code>equal</code> was
+defined not two.  If this property is an important feature <code>equal</code> could be
+reinstated as a function wrapper around <code>binary=</code> which does a
+type-consistency check.
+</li>
+<li id="sec-5_15"><span class="done DONE"> DONE</span> Rename predicate functions <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-09-02 Thu 15:45</span></span><br/>
+Rename predicates ending in "-p" and "p" to use the post-fix "?".  Add the
+post-fix "?" to <code>atom</code> and <code>null</code>.
+</li>
+<li id="sec-5_16"><span class="todo TODO"> TODO</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
+Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the stream as the first argument.
+</li>
+<li id="sec-5_17"><span class="todo TODO"> TODO</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
+Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
+</li>
+<li id="sec-5_18"><span class="todo TODO"> TODO</span> Add <code>sprint</code> and change <code>print</code> to use stdout <br/>
+</li>
+<li id="sec-5_19"><span class="todo TODO"> TODO</span> Add <code>sformat</code> and change <code>format</code> to use stdout <br/>
+</li>
+<li id="sec-5_20"><span class="todo TODO"> TODO</span> Add <code>required?:</code> predicate keyword to class <br/>
+</li>
+<li id="sec-5_21"><span class="todo TODO"> TODO</span> Add <code>abstract?:</code> predicate keyword to class <br/>
+</li>
+<li id="sec-5_22"><span class="todo TODO"> TODO</span> Investigate the GC in 64bit <br/>
+Examples/umdrehen.em fails in 64bit probably due to a memory allocation
+error.
+</li>
+<li id="sec-5_23"><span class="todo TODO"> TODO</span> Investigate the <code>generate-*hack*</code> <br/>
+In file <code>Apply/generate-def-file.ecl</code> the <code>generate-*hack*</code> is necessary
+because
+<ol>
+<li>
+the macro definitions are not yet moved to the def-file;
+</li>
+<li>
+variables imported from c are not moved to the def-file because
+include-statements for the c-preprocessor can't be generated, due to the
+explicit declaration of c-import in the module interface without
+connection to the variable declarations.
+</li>
+</ol>
 </li>
 </ul>
 </div>
@@ -780,7 +831,7 @@ non-interactive, i.e. no REPL.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-08-30 14:21:22 BST</p>
+<p class="date"> Date: 2010-09-05 22:16:28 BST</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

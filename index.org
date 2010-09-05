@@ -151,7 +151,7 @@
 * Getting Started with [[file:Doc/EuLispIntroRef.html#sec-4][Youtoo]]
   See [[file:Doc/EuLispIntroRef.html#sec-4][An Introduction to EuLisp, EuXLisp and Youtoo]].
 
-* Getting Started with [[file:Eu2C/Readme.html][Eu2C]]
+* Getting Started with [[file:Eu2C/README.html][Eu2C]]
   See [[file:Eu2C/README.html][README]].
 
 * [[file:TODO.org][To Do]]
