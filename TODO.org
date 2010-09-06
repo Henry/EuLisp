@@ -413,8 +413,13 @@
        include-statements for the c-preprocessor can't be generated, due to the
        explicit declaration of c-import in the module interface without
        connection to the variable declarations.
-*** TODO Split defglobal and dynamic-??? from Apply/el2lzs-rules.ecl
-    into a level-1 file.
+*** TODO Split =defglobal= and =dynamic-???= from =Apply/el2lzs-rules.ecl=
+    into a =level-1= file.
+*** TODO Create a =level-1= module
+    including the =level-0=, =dynamic= and =control-1= modules.
+*** TODO Create the =control-1= module
+    containing the =throw= and =catch= functionality.  Perhaps the macros from
+    Youtoo can be re-used for this.
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]
