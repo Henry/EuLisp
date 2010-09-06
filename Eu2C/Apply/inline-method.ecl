@@ -20,16 +20,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: inline of LZS-Functions
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 #module inline-method
 (import ((except (format)
-                 level-1)
+                 level-0)
+         dynamic
          LZS
          LZS-MOP
          simple-programming
@@ -44,11 +41,12 @@
                 append
                 format)
                common-lisp))
- syntax (level-1)
+ syntax (level-0
+         dynamic)
  export (inline-method
          in-generic-fun
          in-method
-         next-method?arams
+         next-method-params
          transform-call-next-method
          transform-next-method?
          arg-error
@@ -57,7 +55,7 @@
 
 (defglobal in-generic-fun ())
 (defglobal in-method ())
-(defglobal next-method?arams ())
+(defglobal next-method-params ())
 
 (defun transform-call-next-method (arg-list form)
   (let ((gf (dynamic in-generic-fun))
@@ -68,7 +66,7 @@
     (if (and gf mf)
         (let ((nm (next-specific-method mf gf)))
           (if nm
-              (let ((params (dynamic next-method?arams)))
+              (let ((params (dynamic next-method-params)))
                 (make <app>
                       :function nm
                       :arg-list (mk-var-ref (?var-list params)
@@ -380,5 +378,6 @@
 ;;
 ;;(defmethod copy-lzs-form ((form <mv-lambda>))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

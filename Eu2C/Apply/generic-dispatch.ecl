@@ -452,7 +452,7 @@
   (if (method-def? few-methods) (?fun few-methods)
     ;; few-methods is a dedecision tree
     (dynamic-let ((in-generic-fun gf)
-                  (next-method?arams (?params gf)))
+                  (next-method-params (?params gf)))
                  (let* ((params (?params gf))
                         (d-vars (?discrimination-arguments gf))
                         (d-args (make-d-var-refs d-vars (?var-list params)))

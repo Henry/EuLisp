@@ -413,6 +413,8 @@
        include-statements for the c-preprocessor can't be generated, due to the
        explicit declaration of c-import in the module interface without
        connection to the variable declarations.
+*** TODO Split defglobal and dynamic-??? from Apply/el2lzs-rules.ecl
+    into a level-1 file.
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]

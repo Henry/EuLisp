@@ -18,36 +18,36 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;-----------------------------------------------------------------------------
 
 #module lzs-modules
-
-(import
- ((except (concatenate) level-1)
-  lzs
-  accessors
-  el2lzs-main
-  (only (*PRINT-PRETTY* *PRINT-MISER-WIDTH* concatenate cerror intern
-                        make-instance mapcar)
-        common-lisp)
-  (only (make-eulisp-class-id) apply-standard)
-  debugging)
- syntax
- (level-1
-  (only (generic-flet push) common-lisp)
-  el2lzs-main
-  class-ext
-  debugging)
-
- export
- ($tail-module ; from el2lzs-main
-  pp-module
-  find-lexical add-lexical
-  export-lexical export-syntax-lexical
-  tail-environment)
- )
-
-;; (export-syntax define-tail)
+(import ((except (concatenate)
+                 level-0)
+         dynamic
+         lzs
+         accessors
+         el2lzs-main
+         (only (*PRINT-PRETTY*
+                *PRINT-MISER-WIDTH*
+                concatenate
+                cerror
+                intern
+                make-instance
+                mapcar)
+               common-lisp)
+         (only (make-eulisp-class-id)
+               apply-standard)
+         debugging)
+ syntax (level-0
+         dynamic
+         (only (generic-flet push) common-lisp)
+         el2lzs-main
+         class-ext
+         debugging)
+ export ($tail-module
+         pp-module
+         find-lexical add-lexical
+         export-lexical export-syntax-lexical
+         tail-environment))
 
 ;;;-----------------------------------------------------------------------------
 ;;; add-defined-object (obj module)
@@ -180,10 +180,9 @@
 ;;;-----------------------------------------------------------------------------
 ;;; retrieving the environment of the module TAIL
 ;;;-----------------------------------------------------------------------------
-
 (defun tail-environment ()
   (?exports $tail-module))
 
-
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

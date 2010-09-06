@@ -39,7 +39,8 @@
 #module el2lzs-main
 (import ((except (member
                   concatenate)
-                 level-1)
+                 level-0)
+         dynamic
          class-ext
          (only (first
                 second
@@ -79,7 +80,8 @@
          binding
          el2lzs-load
          el2lzs-error)
- syntax (level-1
+ syntax (level-0
+         dynamic
          el2lzs-basic
          class-ext
          (only (case

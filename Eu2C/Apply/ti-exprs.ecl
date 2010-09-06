@@ -20,44 +20,69 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Type Expressions for Type Inference
 ;;;  Description:
-;;    Type expressions can be subdivided into atomic types, slot identifications, and type variables. Atomic types have a link to a lattice type or to a combinations of lattice types. A combination of lattice types can be created with lattice operations meet, join, and complement.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    Type expressions can be subdivided into atomic types, slot
+;;    identifications, and type variables. Atomic types have a link to a lattice
+;;    type or to a combinations of lattice types. A combination of lattice types
+;;    can be created with lattice operations meet, join, and complement.
 ;;;  Authors: Andreas Kind
 ;;;-----------------------------------------------------------------------------
 
 
 #module ti-exprs
-(import (lzs lzs-mop
-             machine-description ti ti-codes ti-lattice
-             (only (find) common-lisp))
+(import (lzs
+         lzs-mop
+         machine-description
+         ti
+         ti-codes
+         ti-lattice
+         (only (find)
+               common-lisp))
  syntax (ti)
  export (<type-expr>
-         <atomic-type> ?code ?name ?comp-name
-         <type-var> ?id
-         <slot-id> ?slot-name
-         atomic-type? type-var? slot-id?
-         contains-type-var? eq-type-var?
-         substitute-type-var class-as-type-expr
-         new-type-var new-type-var-id reset-actual-type-var-id
-         lattice-type-to-atomic-type lattice-type-to-atomic-types
-         general-type general-type?
-         <null>-type <null>-type?
-         %object-type %object-type?
-         %void-type %void-type?
-         %false-type %false-type?
-         fpi-list-type fpi-list-type?
-         <function>-type <function>-type?
-         <fpi>-type <fpi>-type?
-         no-type? %class-type? %function-type %integer-type)
- )
+         <atomic-type>
+         ?code
+         ?name
+         ?comp-name
+         <type-var>
+         ?id
+         <slot-id>
+         ?slot-name
+         atomic-type?
+         type-var?
+         slot-id?
+         contains-type-var?
+         eq-type-var?
+         substitute-type-var
+         class-as-type-expr
+         new-type-var
+         new-type-var-id
+         reset-actual-type-var-id
+         lattice-type-to-atomic-type
+         lattice-type-to-atomic-types
+         general-type
+         general-type?
+         <null>-type
+         <null>-type?
+         %object-type
+         %object-type?
+         %void-type
+         %void-type?
+         %false-type
+         %false-type?
+         fpi-list-type
+         fpi-list-type?
+         <function>-type
+         <function>-type?
+         <fpi>-type
+         <fpi>-type?
+         no-type?
+         %class-type?
+         %function-type
+         %integer-type))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TYPE EXPRESSIONS
 ;;;-----------------------------------------------------------------------------
-
 (defstandardclass <type-expr> ())
 
 (defstandardclass <atomic-type> (<type-expr>)
@@ -269,4 +294,6 @@
         (ti-format t  "Warning: Can't find lattice type for class ~A" class)
       (lattice-type-to-atomic-type lattice-type))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

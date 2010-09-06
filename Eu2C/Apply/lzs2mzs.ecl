@@ -18,50 +18,42 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 #module lzs2mzs
-(import
- ((except (format) level-1)
-  simple-programming
-  LZS
-  MZS
-  context
-  analyse-h
-  vector ; make-vector and vector-ref
-  arg-context
-  function-call-context
-  function-label
-  join-label-context
-  progn-context
-  switch-context
-  test-context
-  void-context
-  type-propagation
-  type-inference
-  (only (mapc format) common-lisp)
-  lzs-to-mzs-fun
-  cleartypes
-  side-effects
-  expand-literal
-  apply-funs
-  types-hand-on
-  debugging
-  )
-
- syntax
- (level-1)
-
- export
- (lzs2mzs)
- )
+(import ((except (format)
+                 level-0)
+         simple-programming
+         LZS
+         MZS
+         context
+         analyse-h
+         vector ; make-vector and vector-ref
+         arg-context
+         function-call-context
+         function-label
+         join-label-context
+         progn-context
+         switch-context
+         test-context
+         void-context
+         type-propagation
+         type-inference
+         (only (mapc
+                format)
+               common-lisp)
+         lzs-to-mzs-fun
+         cleartypes
+         side-effects
+         expand-literal
+         apply-funs
+         types-hand-on
+         debugging)
+ syntax (level-0)
+ export (lzs2mzs))
 
 
 ;;;-----------------------------------------------------------------------------
@@ -158,4 +150,6 @@
     (if (and (global-fun? fun) (?exported fun))
         (lzs2mzs-fun fun) ())))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

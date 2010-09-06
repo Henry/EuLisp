@@ -26,12 +26,11 @@
 ;;;  Notes:
 ;;;  Authors: Winfried Heicking, E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
-;;;begin module whc-definitions
 
 #module whc-definitions
 (import (representation
          accessors
-         level-1
+         level-0
          lzs
          mzs
          mm-initialize
@@ -45,7 +44,7 @@
                 setf
                 warn)
                common-lisp))
- syntax (level-1
+ syntax (level-0
          apply-standard
          debugging)
  export (%pointer

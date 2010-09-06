@@ -28,11 +28,17 @@
 ;;;-----------------------------------------------------------------------------
 
 #module configuration
-(import ((except (member read) level-1)
-         (only (read-eulisp $eulisp-readtable) el-modules)
+(import ((except (member
+                  read)
+                 level-0)
+         dynamic
+         (only (read-eulisp
+                $eulisp-readtable)
+               el-modules)
          (rename ((second cl:second)
                   (member cl:member)
-                  (set-dispatch-macro-character cl::set-dispatch-macro-character)
+                  (set-dispatch-macro-character
+                   cl::set-dispatch-macro-character)
                   (error cl:error)
                   (char= cl:char=)
                   (not cl:not)
@@ -42,12 +48,23 @@
                   (read cl:read)
                   (with-open-file cl:with-open-file)
                   (make-pathname cl:make-pathname))
-                 (only (values not some every make-pathname member second
-                               read set-dispatch-macro-character error char= with-open-file)
+                 (only (values
+                        not
+                        some
+                        every
+                        make-pathname
+                        member
+                        second
+                        read
+                        set-dispatch-macro-character
+                        error
+                        char=
+                        with-open-file)
                        common-lisp)
-                 (only ($applyroot)) common-lisp-user)
-         )
- syntax (level-1)
+                 (only ($applyroot))
+                 common-lisp-user))
+ syntax (level-0
+         dynamic)
  export (?configuration
          ?configuration-value
          ?configuration-values

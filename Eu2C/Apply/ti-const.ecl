@@ -21,25 +21,25 @@
 ;;;  Title: Type Inference of Constants
 ;;;  Description:
 ;;    Link between EuLisp constants and type expressions.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Andreas Kind
 ;;;-----------------------------------------------------------------------------
 
 #module ti-const
-(import (ti lzs ti-lattice ti-exprs ti-signature
-            (only (~class-of) lzs-mop)
-            (only (expand-literal) expand-literal))
+(import (ti
+         lzs
+         ti-lattice
+         ti-exprs
+         ti-signature
+         (only (~class-of)
+               lzs-mop)
+         (only (expand-literal)
+               expand-literal))
  syntax (ti)
-
  export (constant-type))
 
 ;;;-----------------------------------------------------------------------------
 ;;; CONSTANT TYPE EXPRESSIONS
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric constant-type (value))
 
 (defmethod constant-type (value)        ; may be already a <literal-instance>
@@ -63,4 +63,6 @@
 (defmethod constant-type ((value <named-const>))
   (lattice-type-to-atomic-type (?lattice-type (?type value))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

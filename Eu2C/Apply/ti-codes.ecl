@@ -24,17 +24,18 @@
 ;;    bit operations to implement the lattice operations meet, join, and
 ;;    complement. This modules provides the bit codes and operations on
 ;;    them.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Andreas Kind
 ;;;-----------------------------------------------------------------------------
 
-
 #module ti-codes
 (import (ti
-         (only (logand logior logxor logandc2 expt minusp) common-lisp))
+         (only (logand
+                logior
+                logxor
+                logandc2
+                expt
+                minusp)
+               common-lisp))
  syntax (ti)
  export (bottom-code
          reset-used-codes
@@ -124,5 +125,6 @@
 (defun complement-codes? (code1 code2)
   (zero? (+ code1 code2)))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

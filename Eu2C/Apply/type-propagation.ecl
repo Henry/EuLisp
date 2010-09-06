@@ -28,48 +28,48 @@
 ;;;-----------------------------------------------------------------------------
 
 #module type-propagation
-(import
- ((except (format) level-1)
-  SIMPLE-PROGRAMMING
-  LZS
-  MZS
-  context
-  analyse-h
-  vector ; make-vector and vector-ref
-  (only (assoc format logand ash) common-lisp)
-  (only (valid-for-then? valid-for-else?) ti-special)
-  type-inference)
-
- syntax
- (level-1)
-
- export
- (
-  make-move-tds ; (tds var move)
-  fill-type-vec ; (typevec curpath varvec from to) -> type-vec
-  fill-type-vector-with-types ; (n td tvec) from n to 0
-  make-formal-type-descr ;
-  ;; (tpathes stat result con-type var-descr arg-num old-type-descr)
-  ;;     -> type-descr-s
-  make-actual-type-descr ; (tpathes stat var-descr arg-num old-type-descr)
-  ;;######################     -> type-descr-s
-  ;;make-formal-type-descr-with-result-type ;(pathes var-descr arg-num
-  ;;#######################################   result-type old-type-descr)
-  ;;#######################################    ->  type-descr-s
-  ;;make-actual-type-descr-with-result-type ; (tpathes stat var-descr arg-num
-  ;;#######################################    result-type old-type-descr)
-  ;;    ->  type-descr
-  link-var-vec ; (var-vec stat arg-num) - > vare-vec
-  link-funcall-variable ; (var funcall) -> ()
-  ;; propagate-type-descrs
-  get-arg-type ; (var-or-constant type-path) -> type-expr
-  select-then-type-descr ; type-descriptors
-  select-else-type-descr ; type-descriptors
-  set-slot-tds get-slot-tds
-  )
- )
-
-
+(import ((except (format)
+                 level-0)
+         dynamic
+         SIMPLE-PROGRAMMING
+         LZS
+         MZS
+         context
+         analyse-h
+         vector ; make-vector and vector-ref
+         (only (assoc
+                format
+                logand
+                ash)
+               common-lisp)
+         (only (valid-for-then?
+                valid-for-else?)
+               ti-special)
+         type-inference)
+ syntax (level-0
+         dynamic)
+ export (make-move-tds ; (tds var move)
+         fill-type-vec ; (typevec curpath varvec from to) -> type-vec
+         fill-type-vector-with-types ; (n td tvec) from n to 0
+         make-formal-type-descr ;
+         ;; (tpathes stat result con-type var-descr arg-num old-type-descr)
+         ;;     -> type-descr-s
+         make-actual-type-descr ; (tpathes stat var-descr arg-num old-type-descr)
+         ;;######################     -> type-descr-s
+         ;;make-formal-type-descr-with-result-type ;(pathes var-descr arg-num
+         ;;#######################################   result-type old-type-descr)
+         ;;#######################################    ->  type-descr-s
+         ;;make-actual-type-descr-with-result-type ; (tpathes stat var-descr arg-num
+         ;;#######################################    result-type old-type-descr)
+         ;;    ->  type-descr
+         link-var-vec ; (var-vec stat arg-num) - > vare-vec
+         link-funcall-variable ; (var funcall) -> ()
+         ;; propagate-type-descrs
+         get-arg-type ; (var-or-constant type-path) -> type-expr
+         select-then-type-descr ; type-descriptors
+         select-else-type-descr ; type-descriptors
+         set-slot-tds get-slot-tds
+         ))
 
 (defglobal new-td-stats ())
 
@@ -507,4 +507,6 @@
           ))
     ()))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

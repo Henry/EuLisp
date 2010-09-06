@@ -20,53 +20,43 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-to-mzs-fun
-
-(import
- ((except (format reverse) level-1)
-  simple-programming
-  accessors
-  debugging
-  LZS
-  lzs-mop
-  MZS
-  context
-  analyse-h
-  vector ; make-vector and vector-ref
-  type-propagation
-  type-inference
-  ti-descrs
-  side-effects
-  apply-funs
-  (only
-   (mapc
-    format
-    terpri
-    length
-    append
-    reverse) common-lisp)
-  name-of-fun
-  )
- ;; typeinfernce
-
- syntax
- (level-1)
-
- export
- (lzs2mzs-fun
-  indent-counter
-  add-function-call
-  add-closure-var)
- )
-
-
+(import ((except (format
+                  reverse)
+                 level-0)
+         dynamic
+         simple-programming
+         accessors
+         debugging
+         LZS
+         lzs-mop
+         MZS
+         context
+         analyse-h
+         vector ; make-vector and vector-ref
+         type-propagation
+         type-inference
+         ti-descrs
+         side-effects
+         apply-funs
+         (only (mapc
+                format
+                terpri
+                length
+                append
+                reverse)
+               common-lisp)
+         name-of-fun
+         )
+ syntax (level-0
+         dynamic)
+ export (lzs2mzs-fun
+         indent-counter
+         add-function-call
+         add-closure-var))
 
 ;; pass = 0 - the function is not analysed
 ;; pass = 1 - side-effecs are analysed
@@ -708,5 +698,6 @@
 ;;(if (= num 0) ()
 ;;    (fill-type-vector (- num 1) vect type)))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

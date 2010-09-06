@@ -31,39 +31,44 @@
 ;;;begin module lzs-class-init
 
 #module lzs-class-init
-
-(import
- (accessors
-  level-1
-  lzs
-  lzs-mop
-  lzs-modules
-  standard-init
-  el2lzs
-  expand-literal
-  tail-module
-  apply-funs
-  (only (make-defined-sym) el2lzs-main)
-  (only (*basic-system* *compilation-type*) predicates)
-  (only (make-instance append mapc apply mapcar vector remove-if)
-        common-lisp)
-  machine-description)
-
- syntax
- (level-1
-  apply-standard
-  debugging
-  (only (instance-of?) el2lzs-main)
-  (only (setf push)
-        common-lisp)
-  )
-
- export
- (initialize-predefined-standard-classes
-  initialize-predefined-standard-classes-part-2
-  handle-symbols
-  )
- )
+(import (accessors
+         level-0
+         dynamic
+         lzs
+         lzs-mop
+         lzs-modules
+         standard-init
+         el2lzs
+         expand-literal
+         tail-module
+         apply-funs
+         (only (make-defined-sym)
+               el2lzs-main)
+         (only (*basic-system*
+                *compilation-type*)
+               predicates)
+         (only (make-instance
+                append
+                mapc
+                apply
+                mapcar
+                vector
+                remove-if)
+               common-lisp)
+         machine-description)
+ syntax (level-0
+         dynamic
+         apply-standard
+         debugging
+         (only (instance-of?)
+               el2lzs-main)
+         (only (setf
+                push)
+               common-lisp))
+ export (initialize-predefined-standard-classes
+         initialize-predefined-standard-classes-part-2
+         handle-symbols
+         ))
 
 (defconstant $class-type-descriptor 4)
 (defconstant $abstract-class-type-descriptor 5)
@@ -274,5 +279,6 @@
     (push accessor (?lex-env $tail-module))
     (push accessor (?exports $tail-module))))
 
-#module-end
-;;;eof lzs-class-init
+;;;-----------------------------------------------------------------------------
+#module-end  ;; eof lzs-class-init
+;;;-----------------------------------------------------------------------------

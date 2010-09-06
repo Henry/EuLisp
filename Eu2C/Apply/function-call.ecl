@@ -28,8 +28,9 @@
 ;;;-----------------------------------------------------------------------------
 
 #module function-call
-
-(import ((except (format) level-1)
+(import ((except (format)
+                 level-0)
+         dynamic
          SIMPLE-PROGRAMMING
          lzs
          mzs
@@ -42,7 +43,9 @@
          vector
          lzs-to-mzs-fun
          function-call-context
-         (only (error format) common-lisp)
+         (only (error
+                format)
+               common-lisp)
          type-inference
          side-effects
          gutter
@@ -50,14 +53,10 @@
          inline
          debugging
          tail-module ; %cast
-         configuration ; nothing imported, only to initialize (dynamic *inline*)
-         )
-
- syntax (level-1)
-
- export (call-a-function ; fun arg-list last
-         )
- )
+         configuration) ; nothing imported, only to initialize (dynamic *inline*)
+ syntax (level-0
+         dynamic)
+ export (call-a-function))
 
 (defun call-a-function (fun arg-list last read-glocs)
   ;;
@@ -279,4 +278,6 @@
         (only-asm-stats1 (cdr stats) (+ n 1))
         ))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

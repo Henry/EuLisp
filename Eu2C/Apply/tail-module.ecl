@@ -23,16 +23,12 @@
 ;;    the definition functions for tail data types
 ;;;  Documentation:
 ;;    see in the APPLY-paper machine description
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
-
 #module tail-module
 (import (accessors
-         level-1
+         level-0
          LZS
          MZS
          machine-description; for the whole machine-description
@@ -47,7 +43,7 @@
                 delete-if-not
                 last butlast)
                common-lisp))
- syntax (level-1
+ syntax (level-0
          apply-standard
          debugging
          machine-description)
@@ -253,4 +249,6 @@
                           forms
                           (last (?form-list progn)))))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

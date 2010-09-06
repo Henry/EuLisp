@@ -26,14 +26,14 @@
 #module quasiquote
 (import ((except (STRINGP
                   append)
-                 level-1)
+                 level-0)
          (only (CADAR
                 CADR
                 ERROR
                 STRINGP
                 append)
                common-lisp))
- syntax (level-1)
+ syntax (level-0)
  export (unquote-constructor))
 
 (defun unquote-constructor (x)

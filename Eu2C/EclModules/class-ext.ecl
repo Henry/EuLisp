@@ -34,8 +34,8 @@
                common-lisp)
          (only (make-eulisp-class-id)
                apply-standard)
-         level-1)
- syntax (level-1
+         level-0)
+ syntax (level-0
          apply-standard)
  export (subclass?
          define-singleton-apply-class)
@@ -71,4 +71,6 @@
        (defconstant ,identifier (make-instance ,class-id ,@initial-values))
        (export ,identifier ,class-id))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

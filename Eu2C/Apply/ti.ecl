@@ -22,16 +22,11 @@
 ;;;  Description:
 ;;    Auxiliary functions for formatting, error signaling, collections, and
 ;;    statistics.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Andreas Kind
 ;;;-----------------------------------------------------------------------------
 
-
 #module ti
-(import (level-1
+(import (level-0
          apply-standard
          debugging
          (only (format
@@ -41,8 +36,10 @@
                 dotimes
                 clrhash
                 gethash
-                make-hash-table) common-lisp))
- syntax (level-1 debugging)
+                make-hash-table)
+               common-lisp))
+ syntax (level-0
+         debugging)
  export (member-with-args
          dovector
          ti-format
@@ -66,7 +63,7 @@
          *joined-signature-descrs-key*
          *inferred-abstract-classes-key*
          *%setf-select-key*)
- expose (level-1
+ expose (level-0
          accessors
          apply-standard
          simple-programming
@@ -75,7 +72,8 @@
                 dolist
                 mapc
                 mapcar
-                maphash) common-lisp)))
+                maphash)
+               common-lisp)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TYPE INFERENCE PARAMETERS
@@ -105,7 +103,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; BASIC COLLECTION FUNCTIONS
 ;;;-----------------------------------------------------------------------------
-
 (defun member-with-args (pred list . args)
   (member-if (lambda (x) (apply pred x args)) list))
 
@@ -119,7 +116,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TYPE INFERENCE FORMAT/ERROR
 ;;;-----------------------------------------------------------------------------
-
 ;;; Toggable format function for type-inference.
 (defmacro ti-format args
   (let ((ok (if (number? *ti-verbose*)
@@ -157,7 +153,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type inference statistics.
 ;;;-----------------------------------------------------------------------------
-
 (deflocal *the-statistics* (make-hash-table))
 
 (deflocal *fun-call-key* 'fun-call)
@@ -209,4 +204,6 @@
             (if (zero? classes) 0
               (* (/ (float abstract-classes) (float classes)) 100)))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

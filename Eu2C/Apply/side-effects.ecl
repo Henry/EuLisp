@@ -44,7 +44,8 @@
 
 #module side-effects
 (import ((except (format)
-                 level-1)
+                 level-0)
+         dynamic
          lzs
          mzs
          simple-programming
@@ -67,7 +68,8 @@
          (only (append
                 format)
                common-lisp))
- syntax (level-1)
+ syntax (level-0
+         dynamic)
  expose (side-effects-h)
  export (analysis-side-effects ; args: module-list
          ;; bild read-glocs/write-glocs etc.
@@ -635,7 +637,7 @@
     (if (and (fun? fun) (?reduce fun))
         (reduce-ap? (?reduce fun) arg-list form)
       (if (eq fun %call-next-method)
-          (dynamic-let ((next-method?arams
+          (dynamic-let ((next-method-params
                          (?params (?fun (dynamic in-method)))))
                        (transform-call-next-method arg-list form))
         (if (eq fun %next-method?)
@@ -1107,4 +1109,6 @@
 (defun synthesis-types-in-side-effects (mlist)
   mlist)
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

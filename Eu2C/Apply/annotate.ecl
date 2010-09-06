@@ -44,7 +44,7 @@
 
 #module annotate
 (import ((except (assoc)
-                 level-1)
+                 level-0)
          lzs
          el2lzs-main
          el2lzs-error
@@ -75,7 +75,7 @@
                 remove-if-not
                 mapcar)
                common-lisp))
- syntax (level-1
+ syntax (level-0
          el2lzs-main
          (only (push)
                common-lisp))
@@ -122,8 +122,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Handler functions for %annotate-function
 ;;;-----------------------------------------------------------------------------
-;;; If the save-original-value-flag is t then the value of the option is saved
-;;; and later retrieved to put it into the .def-file as it was originally given.
+;; If the save-original-value-flag is t then the value of the option is saved
+;; and later retrieved to put it into the .def-file as it was originally given.
 
 (deflocal *annotate-function-handlers*
   `(;(keyword function save-original-value-flag)
@@ -158,12 +158,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %annotate-function
 ;;;-----------------------------------------------------------------------------
-;;; syntax: (%annotate-function <function-id> {<key> <description>}*)
-;;; <function-id> : global function binding
-;;; <key> : symbol
-;;; <description> : any literal
-;;; %describe-function provides some informations about functions, which are needed
-;;; by the compiler but are not computable
+;; syntax: (%annotate-function <function-id> {<key> <description>}*)
+;; <function-id> : global function binding
+;; <key> : symbol
+;; <description> : any literal
+;; %describe-function provides some informations about functions, which are
+;; needed by the compiler but are not computable
 
 (defgeneric get-function (lzs-object))
 
@@ -186,12 +186,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %annotate-class
 ;;;-----------------------------------------------------------------------------
-;;; syntax: (%annotate-class <function-id> {<key> <description>}*)
-;;; <function-id> : global function binding
-;;; <key> : symbol
-;;; <description> : any literal
-;;; %describe-function provides some informations about functions, which are needed
-;;; by the compiler but are not computable
+;; syntax: (%annotate-class <function-id> {<key> <description>}*)
+;; <function-id> : global function binding
+;; <key> : symbol
+;; <description> : any literal
+;; %describe-function provides some informations about functions, which are
+;; needed by the compiler but are not computable
 
 (defgeneric get-class (lzs-object))
 (defmethod get-class ((object <class-def>)) object)
@@ -213,12 +213,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %annotate-binding
 ;;;-----------------------------------------------------------------------------
-;;; syntax: (%annotate-binding <var-or-const-id> {<key> <description>}*)
-;;; <var-or-const-id> : global binding defined by deflocal or defconstant
-;;; <key> : symbol
-;;; <description> : any literal
-;;; %describe-binding provides some informations about variables and constants,
-;;; which are needed by the compiler but are not computable
+;; syntax: (%annotate-binding <var-or-const-id> {<key> <description>}*)
+;; <var-or-const-id> : global binding defined by deflocal or defconstant
+;; <key> : symbol
+;; <description> : any literal
+;; %describe-binding provides some informations about variables and constants,
+;; which are needed by the compiler but are not computable
 
 (deftranssyn (%annotate-binding id . options) (whole-form))
 

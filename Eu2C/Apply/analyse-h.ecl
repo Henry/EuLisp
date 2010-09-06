@@ -20,23 +20,21 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: definitions for the transformation from LZS to MZS
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 #module analyse-h
 (import ((except (format)
-                 level-1)
+                 level-0)
+         dynamic
          lzs
          mzs
          accessors
          (only (assoc
                 format)
                common-lisp))
- syntax (level-1
+ syntax (level-0
+         dynamic
          apply-standard)
  export  (<cast>
           closure

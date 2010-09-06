@@ -21,17 +21,14 @@
 ;;;  Title: Code Generator for Data
 ;;;  Description:
 ;;    This modules provides the generation of code for global Variables, named
-;;    constants and literals. Only assembly code for the SPARC processor is generated
-;;    which can be processed by the SPARC-Assembler from SUN.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    constants and literals.
 ;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
 #module c-data
-(import ((except (format) level-1)
+(import ((except (format)
+                 level-0)
+         dynamic
          list-ext
          el2lzs-literals
          code-identifier
@@ -58,13 +55,12 @@
                 nconc
                 make-instance)
                common-lisp))
-
- syntax (level-1
+ syntax (level-0
+         dynamic
          (only (with-output-to-string
                 push
                 dolist)
                common-lisp))
-
  export (generate-c-data
          get-instance
          reset-c-data
@@ -74,7 +70,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; variables and reset
 ;;;-----------------------------------------------------------------------------
-
 (deflocal *structure-roots* ())
 (deflocal *vector-roots* ())
 (defglobal code-output t)
@@ -86,14 +81,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; code output
 ;;;-----------------------------------------------------------------------------
-
 (defun write-data (format . args)
   (apply #'format (dynamic code-output) format args))
 
 ;;;-----------------------------------------------------------------------------
 ;;; generate-c-data
 ;;;-----------------------------------------------------------------------------
-
 (defun generate-c-data ()
   (setq *literals*
         (reverse (remove (expand-literal ()) *literals*)))
@@ -122,7 +115,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; disabling gc for literals
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric disable-gc (literal))
 
 (defmethod disable-gc (literal) ())
@@ -138,7 +130,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; collection of root addresses for GC
 ;;;-----------------------------------------------------------------------------
-
 (defun add-structure-root (literal slot)
   (unless (?gc-not-needed literal)
           (push (format () "~:/EXPR/.~A"
@@ -156,7 +147,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Declaring Literals
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric literal-declaration (literal class representation))
 
 (defmethod literal-declaration (literal class
@@ -188,7 +178,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Defining Literals (with initial value)
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric literal-definition (literal class representation))
 
 (defmethod literal-definition (literal class representation)
@@ -328,7 +317,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Strings
 ;;;-----------------------------------------------------------------------------
-
 (defun string-code (string length padchar)
   (convert-to-c-string (format () "~V,,,VA" length padchar string)))
 
@@ -358,4 +346,6 @@
                          (second (?value-list literal))
                          (~vector-class-element-type (?class literal))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

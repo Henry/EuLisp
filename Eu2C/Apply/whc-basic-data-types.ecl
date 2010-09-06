@@ -31,10 +31,11 @@
 ;;    here with define-tail for the aux-data-types too
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
+
 #module whc-basic-data-types
 (import (representation
          lzs
-         level-1
+         level-0
          (only (get-option)
                option-lists)
          (only (<tail-class-def>)
@@ -49,7 +50,7 @@
                common-lisp)
          class-ext
          whc-aux)
- syntax (level-1
+ syntax (level-0
          apply-standard
          (only (setf)
                common-lisp)

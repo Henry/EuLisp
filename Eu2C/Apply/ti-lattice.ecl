@@ -42,6 +42,7 @@
          ti
          ti-codes
          messages
+         dynamic
          (only (acons
                 assoc
                 format
@@ -53,7 +54,8 @@
                 append)
                common-lisp))
  syntax (ti
-         el2lzs-main)
+         el2lzs-main
+         dynamic)
  export (<lattice-type>
          ?name ?code ?class ?supertypes ?subtypes
          ?strategic ?compound ?write-access-stamp ?atomic-expr
@@ -628,7 +630,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; %define-lattice-type (came form el2lzs-classes.em)
 ;;;-----------------------------------------------------------------------------
-
 (defun trans-lattice-type-list (lattice-types)
   (mapcar #'get-class-or-lattice-type lattice-types))
 
@@ -666,4 +667,6 @@
                                          (lattice-type <null>))
   (error-neither-class-nor-lattice-type identifier))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

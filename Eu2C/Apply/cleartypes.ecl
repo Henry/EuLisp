@@ -28,30 +28,28 @@
 ;;;-----------------------------------------------------------------------------
 
 #module cleartypes
-
-(import
- ((except (format) level-1)
-  LZS
-  MZS
-  type-inference
-  ti-signature
-  vector
-  predicates
-  (only (%void) tail-module)
-  (only (mapc mapcar format append) common-lisp)
-  )
-
- syntax
- (level-1)
-
- export
- (clear-types1
-  clear-types2
-  clear-types2-global-optimization
-  clear-types3)
- )
-
-
+(import ((except (format)
+                 level-0)
+         dynamic
+         LZS
+         MZS
+         type-inference
+         ti-signature
+         vector
+         predicates
+         (only (%void)
+               tail-module)
+         (only (mapc
+                mapcar
+                format
+                append)
+               common-lisp))
+ syntax (level-0
+         dynamic)
+ export (clear-types1
+         clear-types2
+         clear-types2-global-optimization
+         clear-types3))
 
 (defglobal move-vars ())
 (defglobal generic-calls ())
@@ -203,4 +201,6 @@
         (more-than-one-assignment-aux (cdr link)))
     ()))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

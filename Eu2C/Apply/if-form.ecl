@@ -28,33 +28,34 @@
 ;;;-----------------------------------------------------------------------------
 
 #module if-form
-(import
- ((except (format) level-1)
-  SIMPLE-PROGRAMMING
-  LZS
-  MZS
-  context
-  analyse-h ; make-vector and vector-ref
-  type-propagation
-  progn-context
-  ;;  void-context
-  vector
-  lzs-to-mzs-fun
-  debugging
-  name-of-fun
-  ;;  function-call-context
-  (only (append caar assoc cdar caar format error) common-lisp)
-  type-inference)
- ;; typeinfernce
-
- syntax
- (level-1)
-
- export
- (if-form-a) ; label if-form -> tempvar
- )
-
-
+(import ((except (format)
+                 level-0)
+         dynamic
+         SIMPLE-PROGRAMMING
+         LZS
+         MZS
+         context
+         analyse-h ; make-vector and vector-ref
+         type-propagation
+         progn-context
+         ;;  void-context
+         vector
+         lzs-to-mzs-fun
+         debugging
+         name-of-fun
+         ;;  function-call-context
+         (only (append
+                caar
+                assoc
+                cdar
+                caar
+                format
+                error)
+               common-lisp)
+         type-inference)
+ syntax (level-0
+         dynamic)
+ export (if-form-a)) ; label if-form -> tempvar
 
 (defun if-form-a (con form)
   (let* ((t-block (make <block>))
@@ -416,4 +417,6 @@
         (join-results1 jvar (cdr blocks)))
     ()))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

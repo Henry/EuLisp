@@ -28,7 +28,10 @@
 ;;;-----------------------------------------------------------------------------
 
 #module inline
-(import ((except (format print) level-1)
+(import ((except (format
+                  print)
+                 level-0)
+         dynamic
          SIMPLE-PROGRAMMING
          LZS
          MZS
@@ -43,7 +46,8 @@
          vector
          (only (error format print assoc length append mapc) common-lisp)
          function-call-context)
- syntax (level-1)
+ syntax (level-0
+         dynamic)
  export (inline-a))
 
 
@@ -787,4 +791,6 @@
     ())
   )
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------
