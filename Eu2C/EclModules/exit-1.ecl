@@ -18,12 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: some standard Level1 extensions for control
+;;;  Title: EL-in-CL: Level-1 exit extensions
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
-#module control1
+#module exit-1
 (syntax (eulisp-kernel)
  expose ((only (catch
                 throw)

@@ -1,9 +1,6 @@
-\sclause{Lists}
+\defModule{list}{Lists}
 \index{general}{null}
 \label{null}
-\index{general}{list}
-\index{general}{list!module}
-\label{list}
 \index{general}{pair}
 \label{pair}
 %
@@ -25,7 +22,6 @@ also section~\ref{collection} (collections) for further operations on lists.
 % list is one containing a \functionref{cdr} which is not a list.
 
 \derivedclass{list}{collection}
-\index{general}{level-0 classes!\theclass{list}}
 %
 The class of all lists.
 
@@ -39,8 +35,7 @@ parenthesis.  The empty list is also used to denote the boolean value
 {\em false}.
 
 \derivedclass{null}{list}
-\index{general}{level-0 classes!\theclass{null}}
-
+%
 The class whose only instance is the empty list, denoted \nil{}.
 
 \function{null?}
@@ -138,8 +133,7 @@ is defined in syntax table~\ref{pair-syntax}.
 \end{tabular}
 
 \derivedclass{cons}{list}
-\index{general}{level-0 classes!\theclass{pair}}
-
+%
 The class of all instances of \classref{cons}.  An instance of the class
 \classref{cons}\ (also known informally as a {\em dotted pair\/} or a {\em
     pair\/}) is a 2-tuple, whose slots are called, for historical reasons,

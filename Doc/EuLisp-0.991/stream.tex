@@ -1,10 +1,6 @@
 %%% ----------------------------------------------------------------------------
 %%% Streams
-\sclause{Streams}
-\label{stream}
-\index{general}{stream}
-\index{general}{stream!module}
-\index{general}{level-0 modules!stream}
+\defModule{stream}{Streams}
 %
 \begin{optDefinition}
 The defined name of this module is {\tt stream}.
@@ -29,7 +25,6 @@ provide an interface between two objects through the two functions
 % ------------------------------------------------------------------------------
 \derivedclass{stream}{object}
 % ------------------------------------------------------------------------------
-\index{general}{level-0 classes!\classref{stream}}
 %
 This is the root of the stream class hierarchy and also defines the basic
 stream class.
@@ -90,7 +85,6 @@ stream whose {\tt stream-write-action} is the given argument.
 % ------------------------------------------------------------------------------
 \derivedclass{buffered-stream}{stream}
 % ------------------------------------------------------------------------------
-\index{general}{level-0 classes!\theclass{buffered-stream}}
 %
 This class specializes \classref{stream} by the use of a buffer which may grow
 arbitrarily large. The transaction unit of \classref{buffered-stream} is
@@ -99,7 +93,6 @@ arbitrarily large. The transaction unit of \classref{buffered-stream} is
 % ------------------------------------------------------------------------------
 \derivedclass{fixed-buffered-stream}{buffered-stream}
 % ------------------------------------------------------------------------------
-\index{general}{level-0 classes!\theclass{fixed-buffered-stream}}
 %
 This class specializes \classref{buffered-stream} by placing a bound on the
 growth of the buffer. The transaction unit of \classref{fixed-buffered-stream}
@@ -108,7 +101,6 @@ is \classref{object}.
 % ------------------------------------------------------------------------------
 \derivedclass{file-stream}{fixed-buffered-stream}
 % ------------------------------------------------------------------------------
-\index{general}{level-0 classes!\theclass{file-stream}}
 %
 This class specializes \classref{fixed-buffered-stream} by providing an
 interface to data stored in files on disk. The transaction unit of
@@ -139,7 +131,6 @@ Returns {\em object\/} if it is a \classref{file-stream} otherwise \nil{}.
 % ------------------------------------------------------------------------------
 \derivedclass{string-stream}{buffered-stream}
 % ------------------------------------------------------------------------------
-\index{general}{level-0 classes!\theclass{string-stream}}
 %
 The class of the default string stream.
 

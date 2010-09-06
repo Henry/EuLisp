@@ -15,15 +15,16 @@ DOCUMENT = eulisp
 ###-----------------------------------------------------------------------------
 
 TEX_FILES = \
-    bibliography.tex  eulisp.tex        modules.tex    syntaxObjects0.tex \
+    bibliography.tex  eulisp.tex        modules.tex    level-0.tex \
     float.tex         mop.tex           syntax.tex     character.tex \
-    foreword.tex      table.tex         collect.tex    format.tex \
-    number.tex        telos0.tex        conditions.tex fpint.tex \
-    prim.tex          telos1.tex        control0.tex   terms.tex \
-    control1.tex      integer.tex       stream.tex     threads.tex \
+    foreword.tex      table.tex         collection.tex formatted-io.tex \
+    number.tex        telos-0.tex       condition.tex  fpint.tex \
+    prim.tex          telos-1.tex       control-0.tex  terms.tex \
+    dynamic.tex       integer.tex       stream.tex     thread.tex \
     convert.tex       introduction.tex  string.tex     vector.tex \
     copy.tex          list.tex          structure.tex  compare.tex \
-    double.tex        mathlib.tex       symbol.tex     modules1.tex
+    double.tex        mathlib.tex       symbol.tex     modules-1.tex \
+    level-1.tex       exit-1.tex
 
 STY_FILES = eulisp.sty
 
@@ -32,8 +33,8 @@ STY_FILES = eulisp.sty
 SOURCE_FILES = $(TEX_FILES) $(STY_FILES) Makefile
 
 SECTION_IND_FILES = \
-    function.ind      macro.ind         generic.ind    method.ind \
-    condition.ind     constant.ind      class.ind
+    function.ind      special.ind       generic.ind \
+    condition.ind     constant.ind      class.ind      module.ind
 
 IND_FILES = $(SECTION_IND_FILES) general.ind
 # keyword.ind

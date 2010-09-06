@@ -1,8 +1,5 @@
 \clause{Concurrency}
-\index{general}{thread}
-\index{general}{level-0 modules!thread}
-\index{general}{lock}
-\index{general}{level-0 modules!lock}
+\index{general}{concurrency}
 %
 \begin{optPrivate}
 Added this section since it seems to need an introduction rather than
@@ -149,9 +146,8 @@ scenario the following loop will exit eventually:
 %
 \end{optDefinition}
 
-\sclause{Threads}
-\index{general}{thread}
-\label{thread}
+\gdef\module{level-0}
+\defModule{thread}{Threads}
 \gdef\module{thread}
 %
 \begin{optPrivate}
@@ -171,7 +167,6 @@ The defined name of this module is {\tt thread}.
 This section defines the operations on threads.
 
 \derivedclass{thread}{object}
-\index{general}{level-0 classes!\theclass{thread}}
 %
 The class of all instances of \classref{thread}.
 %
@@ -369,14 +364,13 @@ the one on which it was created.
 Signalled by \functionref{thread-start} if the given thread has been started
 already.
 
-\sclause{Locks}
-\index{general}{lock}
-\label{lock}
+\gdef\module{level-0}
+\defModule{lock}{Locks}
 \gdef\module{lock}
+%
 The defined name of this module is {\tt lock}.
 
 \derivedclass{lock}{object}
-\index{general}{level-0 classes!\theclass{lock}}
 %
 The class of all instances of \classref{lock}.  This class has no
 init-options.  The result of calling \functionref{make} on \classref{lock}
@@ -432,7 +426,6 @@ called \classref{lock} on the lock can gain exclusive access.
 \classref{lock}.
 
 \derivedclass{simple-thread}{thread}
-\index{general}{level-0 classes!\theclass{simple-thread}}
 %
 Place holder for \classref{simple-thread} class.
 

@@ -84,6 +84,19 @@
 }
 
 % ------------------------------------------------------------------------------
+%%% Module clause
+
+\newcommand{\defModule}[2]
+{%
+    \sclause{#2}
+    \label{#1}
+    \index{general}{#1}
+    \index{general}{#1!module}
+    \indexmodule{#1}
+    \gdef\module{#1}
+}
+
+% ------------------------------------------------------------------------------
 %%% Entry clause
 
 \newcounter{entryclause}[sclause]
@@ -192,7 +205,8 @@
     {%
         \label{\genericlabel{#2}}%
         \ttindexdef{#1}%
-        \index{generic}{#1@{\tt{}#1} (\module)}%
+        \index{generic}{#1@{\tt{}#1}}%
+        \index{generic}{#1@{\tt{}#1}!{\tt{}defgeneric} (\module)}%
     }%
 }
 \newcommand*{\generic}[1]
@@ -210,7 +224,8 @@
     {%
         \label{\methodlabel{#1#2}}%
         \ttindex{#1}%
-        \indexmeth{#1}%
+        %\indexmeth{#1}%
+        \index{generic}{#1@{\tt{}#1}!#2@{\tt{}defmethod #2} (\module)}%
     }%
 }
 \newcommand*{\methodref}[2]{\hyperref[\methodlabel{#1#2}]{{\tt #1 <#2>}}}
@@ -223,7 +238,7 @@
     {%
         \label{\syntaxlabel{#1}}%
         \ttindexdef{#1}%
-        \index{general}{syntax!#1}%
+        \index{special}{#1@{\tt{}#1} (\module)}%
     }%
 }
 \newcommand*{\syntaxref}[1]{\hyperref[\syntaxlabel{#1}]{{\tt{}#1}}}
@@ -236,23 +251,10 @@
     {%
         \label{\specoplabel{#1}}%
         \ttindexdef{#1}%
-        \index{general}{special operator!#1}%
+        \index{special}{#1@{\tt{}#1} (\module)}%
     }%
 }
 \newcommand*{\specopref}[1]{\hyperref[\specoplabel{#1}]{{\tt{}#1}}}
-
-%%%  Macro
-\newcommand*{\macrolabel}[1]{macro:#1}
-\newcommand{\macro}[1]
-{%
-    \entryclause{#1}{macro}
-    {%
-        \label{\macrolabel{#1}}%
-        \ttindexdef{#1}%
-        \index{macro}{#1@{\tt{}#1} (\module)}%
-    }%
-}
-\newcommand*{\macroref}[1]{\hyperref[\macrolabel{#1}]{{\tt{}#1}}}
 
 %%%  Defining operator
 \newcommand*{\defoplabel}[1]{defop:#1}
@@ -262,7 +264,7 @@
     {%
         \label{\defoplabel{#1}}%
         \ttindexdef{#1}%
-        \index{general}{defining operator!#1}%
+        \index{special}{#1@{\tt{}#1} (\module)}%
     }%
 }
 \newcommand*{\defopref}[1]{\hyperref[\defoplabel{#1}]{{\tt{}#1}}}
@@ -276,6 +278,7 @@
         \label{\constantlabel{#1}}%
         \ttindexdef{#1}%
         \index{constant}{#1@{\tt{}#1} (\module)}%
+        \index{general}{constant!#1}
     }%
 }
 \newcommand*{\constantref}[1]{\hyperref[\constantlabel{#1}]{{\tt{}#1}}}
@@ -347,6 +350,7 @@
     \label{\keywordlabel{#1}}%
     \ttindexdef{#1}%
     % \index{keyword}{#1@{\tt{}#1} (\module)}%
+    \index{general}{keyword!#1}
 }
 \newcommand*{\keywordref}[1]{\hyperref[\keywordlabel{#1}]{{\tt{}#1}}}
 
@@ -413,7 +417,7 @@
 \newcommand{\showSyntaxBox}[1]
 {%
     \ttsubindex{#1}{syntax table}%
-    \index{general}{syntax tables!#1@{\tt #1}}%
+    %\index{general}{syntax tables!#1@{\tt #1}}%
     \framebox[\linewidth][l]{\csname #1 Syntax\endcsname}%
 }
 
@@ -442,7 +446,7 @@
 {%
     \sc{#1}%
     \label{\sclabel{#1}}%
-    \ttindex{#1}\index{general}{syntax category!#1}%
+    %\ttindex{#1}\index{general}{syntax category!#1}%
 }
 \newcommand*{\scref}[1]{\hyperref[\sclabel{#1}]{\sc{#1}}}
 \newcommand*{\scoptref}[1]{\hyperref[\sclabel{#1}]{\scopt{#1}}}

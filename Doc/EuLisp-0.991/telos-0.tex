@@ -5,8 +5,9 @@
 \label{obj-0}
 \label{telos0}
 \index{general}{telos0}
-\index{general}{level-0 modules!telos0}
 \index{general}{telos0!module}
+\indexmodule{telos0}
+\gdef\module{telos0}
 %
 \begin{optPrivate}
     The structure of the final description is still open.  So far only
@@ -160,14 +161,12 @@ specified, all objects declared to be of a certain class may be indirect
 instances of that class.
 
 \class{object}
-\index{general}{level-0 classes!\theclass{object}}
 %
 The root of the inheritance hierarchy. \classref{object}\ defines the basic
 methods for initialization and external representation of objects.  No
 initialization options are specified for \classref{object}.
 
 \class{class}
-\index{general}{level-0 classes!\theclass{class}}
 %
 The default super-class including for itself.  All classes defined using the
 \defopref{defclass} form are direct or indirect subclasses of
@@ -430,22 +429,18 @@ The class-options are interpreted as follows:
 \begin{optDefinition}
 %
 \derivedclass{function}{object}
-\index{general}{level-0 classes!\theclass{function}}
 %
 The class of all functions.
 
 \derivedclass{simple-function}{function}
-\index{general}{level-0 classes!\theclass{simple-function}}
 %
 Place holder for \classref{simple-function} class.
 
 \derivedclass{generic-function}{function}
-\index{general}{level-0 classes!\theclass{generic-function}}
 %
 The class of all generic functions.
 
 \derivedclass{simple-generic-function}{generic-function}
-\index{general}{level-0 classes!\theclass{simple-generic-function}}
 %
 Place holder for \classref{simple-generic-function} class..
 
@@ -955,7 +950,6 @@ explicitly.
 \sclause{Other Abstract Classes}
 %
 \derivedclass{name}{object}
-\index{general}{level-0 classes!\theclass{name}}
 %
 The class of all ``names''.
 %

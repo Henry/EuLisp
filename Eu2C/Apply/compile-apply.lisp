@@ -49,7 +49,7 @@
              pair-ext
              list-ext
              dynamic
-             control1
+             exit-1
              level-1
              class-ext)
     (:lisp defstandardclass

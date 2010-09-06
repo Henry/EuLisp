@@ -28,7 +28,7 @@
 (syntax (eulisp-kernel)
  expose (level-0
          dynamic
-         control1))
+         exit-1))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

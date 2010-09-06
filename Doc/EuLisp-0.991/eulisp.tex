@@ -6,6 +6,7 @@
 \setlength\oddsidemargin{-15mm}
 \setlength\evensidemargin{-5mm}
 
+\usepackage{etex}
 \usepackage{makeidx}
 \usepackage{multind}
 \usepackage{url}
@@ -58,16 +59,13 @@
 \setcounter{tocdepth}{3} % add more levels to table of contents
 
 % ensure generation of indexes
+\makeindex{module}
+\makeindex{class}
+\makeindex{special}
 \makeindex{function}
-\makeindex{macro}
 \makeindex{generic}
-\makeindex{method}
 \makeindex{condition}
 \makeindex{constant}
-\makeindex{class}
-%\makeindex{keyword}
-%\makeindex{module}
-
 \makeindex{general}
 
 % -----------------------------------------------------------------------
@@ -105,43 +103,43 @@
 \input{structure}
 \input{terms}
 \newpage\input{syntax}
-\gdef\module{} \newpage\input{modules}
+\gdef\module{}\newpage\input{modules}
 
-\gdef\module{telos0} \newpage\input{telos0}
-\gdef\module{threads} \newpage\input{threads}
-\gdef\module{condition} \newpage\input{conditions}
-\gdef\module{eulisp0} \newpage\input{control0}
+\gdef\module{level-0}\newpage\input{telos-0}
+\gdef\module{level-0}\newpage\input{control-0}
+\gdef\module{level-0}\newpage\input{condition}
+\gdef\module{level-0}\newpage\input{thread}
 
 % -----------------------------------------------------------------------
 %%% Level-0 Module Library
 \clause{Level-0 Module Library}
 \label{section:level-0}
 This section describes the classes required at level-0 and the operations
-defined on instances of those classes \index{general}{level-0 classes}.  The
+defined on instances of those classes.  The
 section is organized by module in alphabetical order.  These sub-sections
 contain information about the predefined classes in \eulisp\ that are necessary
 to make the language usable.
 
-\gdef\module{character} \input{character}
-\gdef\module{collection} \newpage\input{collect}
-\gdef\module{compare} \newpage\input{compare}
-\gdef\module{convert} \newpage\input{convert}
-\gdef\module{copy} \newpage\input{copy}
-\gdef\module{double} \newpage\input{double}
-\gdef\module{mathlib} \newpage\input{mathlib}
-\gdef\module{float} \newpage\input{float}
-\gdef\module{fpint} \newpage\input{fpint}
-\gdef\module{formatted-io} \newpage\input{format}
-\gdef\module{integer} \newpage\input{integer}
-\gdef\module{keyword} \newpage\input{keyword}
-\gdef\module{list} \newpage\input{list}
-\gdef\module{number} \newpage\input{number}
-\gdef\module{stream} \newpage\input{stream}
-\gdef\module{string} \newpage\input{string}
-\gdef\module{symbol} \newpage\input{symbol}
-\gdef\module{table} \newpage\input{table}
-\gdef\module{vector} \newpage\input{vector}
-\gdef\module{level-0}\newpage\input{syntaxObjects0}
+\gdef\module{level-0}\input{character}
+\gdef\module{level-0}\newpage\input{collection}
+\gdef\module{level-0}\newpage\input{compare}
+\gdef\module{level-0}\newpage\input{convert}
+\gdef\module{level-0}\newpage\input{copy}
+\gdef\module{level-0}\newpage\input{double}
+\gdef\module{level-0}\newpage\input{float}
+\gdef\module{level-0}\newpage\input{formatted-io}
+\gdef\module{level-0}\newpage\input{fpint}
+\gdef\module{level-0}\newpage\input{integer}
+\gdef\module{level-0}\newpage\input{keyword}
+\gdef\module{level-0}\newpage\input{list}
+\gdef\module{level-0}\newpage\input{mathlib}
+\gdef\module{level-0}\newpage\input{number}
+\gdef\module{level-0}\newpage\input{stream}
+\gdef\module{level-0}\newpage\input{string}
+\gdef\module{level-0}\newpage\input{symbol}
+\gdef\module{level-0}\newpage\input{table}
+\gdef\module{level-0}\newpage\input{vector}
+\gdef\module{level-0}\newpage\input{level-0}
 
 % -----------------------------------------------------------------------
 %%% Programming Language EuLisp, Level-1
@@ -149,13 +147,15 @@ to make the language usable.
 \label{section:level-1}
 This section describes the additions features in \eulisp\ level-1 including the
 reflective aspects of the object system and how to program the metaobject
-protocol and some additional control forms.
+protocol and support for dynamic variable and related control forms.
 
-\gdef\module{level-1}\input{modules1}
-\gdef\module{level-1}\newpage\input{telos1}
+\gdef\module{level-1}\input{modules-1}
+\gdef\module{level-1}\newpage\input{telos-1}
 \gdef\module{level-1}\newpage\input{mop}
 \gdef\module{level-1}\newpage\input{prim}
-\gdef\module{level-1}\newpage\input{control1}
+\gdef\module{level-1}\newpage\input{dynamic}
+\gdef\module{level-1}\newpage\input{exit-1}
+\gdef\module{level-1}\newpage\input{level-1}
 
 % -----------------------------------------------------------------------
 %%% Bibliography
@@ -163,16 +163,13 @@ protocol and some additional control forms.
 
 % -----------------------------------------------------------------------
 %%% Indexes
-
+\printindex{module}{Module Index}
+\printindex{class}{Class Index}
+\printindex{special}{Special Forms Index}
 \printindex{function}{Function Index}
-\printindex{macro}{Macro Index}
 \printindex{generic}{Generic Function Index}
-\printindex{method}{Method Index}
 \printindex{condition}{Condition Index}
 \printindex{constant}{Constant Index}
-\printindex{class}{Class Index}
-%\printindex{keyword}{Keyword Index}
-% \printindex{module}{Module Index}
 \printindex{general}{Index}
 
 % -----------------------------------------------------------------------
