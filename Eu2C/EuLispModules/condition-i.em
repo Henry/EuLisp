@@ -21,25 +21,25 @@
 ;;;  Title: eulisp conditions
 ;;;  Description:
 ;;    Provides condition classes and a function most-saimple-error-handler which
-;;    should work above apply-level-1
-;;    most-simple-error-handler is called with 2 $strings, message and name-of-condition-class
+;;    should work above apply-level-1 most-simple-error-handler is called with 2
+;;    $strings, message and name-of-condition-class
 ;;;  Notes:
 ;;    $make-function contains a dummy make which in fact is only an allocate
 ;;    must be reset as soon as possible to the original value of make
 ;;    $signal-function contains a very simple version of signal which calls the
-;;    function bound to $default-signal-handler
-;;    as soon as dynamic is available, $signal-function has to be reset to genuine
-;;    signal calling function bound on $dynamic-default-signal-handler
+;;    function bound to $default-signal-handler as soon as dynamic is available,
+;;    $signal-function has to be reset to genuine signal calling function bound
+;;    on $dynamic-default-signal-handler
 ;;;  Problems:
-;;    tested in feel, does work for one-threaded applications only
-;;    for multiple threaded apps handler must be explicitely established
-;;    and deestablished, respectively
-;;    0.99 specifies not all conditions, no description is given for
+;;    tested in feel, does work for one-threaded applications only for multiple
+;;    threaded apps handler must be explicitely established and de-established,
+;;    respectively 0.99 specifies not all conditions, no description is given
+;;    for
 ;;    <no-converter>
 ;;    <stream-condition>
 ;;    some conditions are only given in text, not in the condition index
-;;    J. Dalton signal returns: signal static does nothing because there is no mean to
-;;    catch signals at that level
+;;    J. Dalton signal returns: signal static does nothing because there is no
+;;    mean to catch signals at that level
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
@@ -56,7 +56,7 @@
              <signal.h>
              "c-runtime.h")
    export (<condition>
-           <execution-condition>
+           <general-condition>
            <typecheck-error>
            <telos-condition>
            <no-applicable-method>
@@ -84,12 +84,12 @@
   allocation multiple-type-card)
 
 ;;;-----------------------------------------------------------------------------
-;;; <execution-condition>
+;;; <general-condition>
 ;;;-----------------------------------------------------------------------------
-(define-condition-class <execution-condition> <condition> )
+(define-condition-class <general-condition> <condition> )
 
 (%define-standard-class (<typecheck-error> <class>)
-  <execution-condition>
+  <general-condition>
   ((object type <object> keyword object accessor object)
    (class-list type <list> keyword class-list accessor class-list))
   allocation multiple-type-card

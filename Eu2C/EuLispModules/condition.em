@@ -39,7 +39,7 @@
            standard-generic-function
            condition-ii)
    export (<condition>
-           <execution-condition>
+           <general-condition>
            <invalid-operator>
            <domain-condition>
            <cannot-update-setter>
@@ -105,10 +105,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Execution condition
 ;;;-----------------------------------------------------------------------------
-;;<execution-condition> already defined in module condition-i
+;;<general-condition> already defined in module condition-i
 
 (%define-standard-class (<invalid-operator> <class>)
-  <execution-condition>
+  <general-condition>
   ((invalid-operator type <object> default () keyword invalid-operator
                      accessor invalid-operator))
   representation pointer-to-struct
@@ -116,7 +116,7 @@
 
 
 (%define-standard-class (<range-condition> <class> )
-  <execution-condition>
+  <general-condition>
   ((argument type <object> default () keyword argument
              accessor argument))
   representation pointer-to-struct
@@ -124,7 +124,7 @@
 
 
 (%define-standard-class (<cannot-update-setter> <class> )
-  <execution-condition>
+  <general-condition>
   ((accessor type <object> default () keyword accessor accessor accessor)
    (updater type <object> default () keyword updater accessor updater))
   representation pointer-to-struct
@@ -132,7 +132,7 @@
 
 
 (%define-standard-class (<no-setter> <class> )
-  <execution-condition>
+  <general-condition>
   ((object type <object> default ()  keyword object accessor object)
    )
   representation pointer-to-struct
@@ -140,7 +140,7 @@
 
 
 (%define-standard-class (<domain-condition> <class> )
-  <execution-condition>
+  <general-condition>
   ((result type <object> default () keyword result accessor result))
   representation pointer-to-struct
   allocation multiple-type-card)

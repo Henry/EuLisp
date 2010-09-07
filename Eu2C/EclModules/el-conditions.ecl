@@ -29,60 +29,52 @@
 ;;;-----------------------------------------------------------------------------
 
 #module el-conditions
-(import
- (eulisp-kernel
-  el-conditions-0)
-
- syntax
- (eulisp-kernel el-conditions-0)
-
-
-
- expose ((only (defcondition with-handled-conditions  let/cc) el-conditions-0))
- export ( signal
-          condition-message
-          <condition>
-          <execution-condition>
-          <invalid-operator>
-          <bad-apply-argument>
-          <cannot-update-setter>
-          <no-setter>
-          <improper-unquote-splice>
-          <environment-condition>
-          <arithmetic-condition>
-          <division-by-zero>
-          <conversion-condition>
-          <no-converter>
-          <stream-condition>
-          <syntax-error>
-          <thread-condition>
-          <telos-condition>
-          <no-next-method>
-          <no-congruent-lambda-list>
-          <incompatible-method-signature>
-          <no-applicable-method>))
-
-
-;;definitions and init-forms
-
-
+(import (eulisp-kernel
+         el-conditions-0)
+ syntax (eulisp-kernel
+         el-conditions-0)
+ expose ((only (defcondition
+                with-handled-conditions
+                let/cc)
+               el-conditions-0))
+ export (signal
+         condition-message
+         <condition>
+         <general-condition>
+         <invalid-operator>
+         <bad-apply-argument>
+         <cannot-update-setter>
+         <no-setter>
+         <improper-unquote-splice>
+         <environment-condition>
+         <arithmetic-condition>
+         <division-by-zero>
+         <conversion-condition>
+         <no-converter>
+         <stream-condition>
+         <syntax-error>
+         <thread-condition>
+         <telos-condition>
+         <no-next-method>
+         <no-congruent-lambda-list>
+         <incompatible-method-signature>
+         <no-applicable-method>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Definition of EL level-0-condition classes
 ;;;-----------------------------------------------------------------------------
-
 (defcondition <condition>
               ()
               ((continuation :accessor   condition-continuation
                              :initarg :continuation)
                (message :accessor condition-message :initarg message)))
 
-(defcondition <execution-condition>(<condition>)())
-(defcondition <invalid-operator>(<execution-condition>)())
-(defcondition <bad-apply-argument>(<execution-condition>)())
-(defcondition <cannot-update-setter>(<execution-condition>)())
-(defcondition <no-setter>(<execution-condition>)())
-(defcondition <improper-unquote-splice>(<execution-condition>)())
+(defcondition <general-condition>(<condition>)())
+(defcondition <invalid-operator>(<general-condition>)())
+(defcondition <bad-apply-argument>(<general-condition>)())
+(defcondition <cannot-update-setter>(<general-condition>)())
+(defcondition <no-setter>(<general-condition>)())
+(defcondition <improper-unquote-splice>(<general-condition>)())
 (defcondition <environment-condition>(<condition>)())
 (defcondition <arithmetic-condition>(<condition>)())
 (defcondition <division-by-zero> (<arithmetic-condition>)())
@@ -103,8 +95,6 @@
     ())
   (cl:signal condition))
 
-
+;;;-----------------------------------------------------------------------------
 #module-end
-
-
-
+;;;-----------------------------------------------------------------------------

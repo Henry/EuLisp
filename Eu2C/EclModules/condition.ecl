@@ -39,7 +39,7 @@
  export (signal
          condition-message
          <condition>
-         <execution-condition>
+         <general-condition>
          <invalid-operator>
          <bad-apply-argument>
          <cannot-update-setter>
@@ -69,12 +69,12 @@
                              :initarg :continuation)
                (message :accessor condition-message :initarg message)))
 
-(defcondition <execution-condition>(<condition>)())
-(defcondition <invalid-operator>(<execution-condition>)())
-(defcondition <bad-apply-argument>(<execution-condition>)())
-(defcondition <cannot-update-setter>(<execution-condition>)())
-(defcondition <no-setter>(<execution-condition>)())
-(defcondition <improper-unquote-splice>(<execution-condition>)())
+(defcondition <general-condition>(<condition>)())
+(defcondition <invalid-operator>(<general-condition>)())
+(defcondition <bad-apply-argument>(<general-condition>)())
+(defcondition <cannot-update-setter>(<general-condition>)())
+(defcondition <no-setter>(<general-condition>)())
+(defcondition <improper-unquote-splice>(<general-condition>)())
 (defcondition <environment-condition>(<condition>)())
 (defcondition <arithmetic-condition>(<condition>)())
 (defcondition <division-by-zero> (<arithmetic-condition>)())
