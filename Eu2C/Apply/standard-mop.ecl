@@ -51,7 +51,7 @@
 (defmethod ~class-precedence-list ((class <class-def>))
   (?class-precedence-list class))
 
-(defmethod ~class-slot-descriptions ((class <class-def>))
+(defmethod ~class-slots ((class <class-def>))
   (?effective-slots class))
 
 (defmethod ~class-keywords ((class <class-def>))
@@ -60,9 +60,9 @@
 (defmethod ~class-representation ((class <class-def>))
   (?representation class))
 
-(defmethod ~find-slot-description ((class <class-def>) slot-name)
-  (find slot-name (~class-slot-descriptions class)
-        :key #'~slot-description-name))
+(defmethod ~find-slot ((class <class-def>) slot-name)
+  (find slot-name (~class-slots class)
+        :key #'~slot-name))
 
 (defmethod ~class-subclasses ((class <class-def>))
   (?subclasses class))
@@ -77,25 +77,25 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Slot Introspection
 ;;;-----------------------------------------------------------------------------
-(defmethod ~slot-description-name ((slot <slot-desc>))
+(defmethod ~slot-name ((slot <slot-desc>))
   (?identifier slot))
 
-(defmethod ~slot-description-default-function ((slot <slot-desc>))
+(defmethod ~slot-default-function ((slot <slot-desc>))
   (?default-function slot))
 
-(defmethod ~slot-description-slot-reader ((slot <slot-desc>))
+(defmethod ~slot-slot-reader ((slot <slot-desc>))
   (?reader slot))
 
-(defmethod ~slot-description-slot-writer ((slot <slot-desc>))
+(defmethod ~slot-slot-writer ((slot <slot-desc>))
   (?writer slot))
 
-(defmethod ~slot-description-type ((slot <slot-desc>))
+(defmethod ~slot-type ((slot <slot-desc>))
   (?type slot))
 
-(defmethod ~slot-description-keyword ((slot <slot-desc>))
+(defmethod ~slot-keyword ((slot <slot-desc>))
   (?keyword slot))
 
-(defmethod ~slot-description-initvalue ((slot <slot-desc>))
+(defmethod ~slot-initvalue ((slot <slot-desc>))
   (?initvalue slot))
 
 ;;;-----------------------------------------------------------------------------
@@ -135,16 +135,16 @@
 ;;; Introspection of Vector Classes
 ;;;-----------------------------------------------------------------------------
 (defmethod ~vector-class-instance-length-literal (vector-class)
-  (let ((initfun (~slot-description-default-function
-                  (~find-slot-description vector-class ^length))))
+  (let ((initfun (~slot-default-function
+                  (~find-slot vector-class ^length))))
     (if (null? initfun)
         ()
       (init-fun-value (?body initfun) vector-class))))
 
 
 (defmethod ~vector-class-instance-length (vector-class)
-  (let ((initfun (~slot-description-default-function
-                  (~find-slot-description vector-class ^length))))
+  (let ((initfun (~slot-default-function
+                  (~find-slot vector-class ^length))))
     (if (null? initfun)
         ()
       (car (?value-list (init-fun-value (?body initfun) vector-class))))))
@@ -176,14 +176,14 @@
 (defmethod ~vector-class-element-type (vector-class)
   (and
    ;;(check-for-vetcor-class vector-class (?representation vector-class))
-   (~slot-description-type
-    (~find-slot-description vector-class ^element))))
+   (~slot-type
+    (~find-slot vector-class ^element))))
 
 (defmethod ~vector-class-element-default-function (vector-class)
   (and
    ;;(check-for-vetcor-class vector-class (?representation vector-class))
-   (~slot-description-default-function
-    (~find-slot-description vector-class ^element))))
+   (~slot-default-function
+    (~find-slot vector-class ^element))))
 
 ;; check-for-vector-class cannot use the representation for its test because the
 ;; vector class accessors are already needed during computation of representations

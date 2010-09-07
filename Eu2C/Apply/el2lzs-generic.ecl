@@ -237,10 +237,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;
 ;;(deftranssyn (%define-generic genfun-spec spec-lambda-list)
-;;  (progn (mapc (lambda (slot-description)
-;;                 (setf (third slot-description)
-;;                       (transsyn (third slot-description))))
-;;               slot-descriptions)
+;;  (progn (mapc (lambda (slot)
+;;                 (setf (third slot)
+;;                       (transsyn (third slot))))
+;;               slots)
 ;;         (whole-form)))
 ;;
 ;;(deftransmod (%define-generic genfun-spec spec-lambda-list)
@@ -249,7 +249,7 @@
 ;;                  :identifier ID)))
 ;;    (add-class class)
 ;;    (nconc (list class)
-;;           (transmod-slot-descriptions slot-descriptions)
+;;           (transmod-slots slots)
 ;;           (transmod-class-options class-options))))
 ;;
 ;;
@@ -259,14 +259,14 @@
 ;;         (class-def (find-in-lex-env id))
 ;;         (supers (list (find-in-lex-env superclass))))
 ;;    (setf (?class class-def) (find-in-lex-env metaclass))
-;;???    (transdef-slot-descriptions slot-descriptions (?direct-slots class-def) class-def)
+;;???    (transdef-slots slots (?direct-slots class-def) class-def)
 ;;    (~initialize class-def
 ;;       (list* ^name id
 ;;              ^direct-superclasses supers
-;;              ^direct-slot-descriptions (mapcar #'slot-name-type-init
-;;                                                slot-descriptions)
+;;              ^direct-slots (mapcar #'slot-name-type-init
+;;                                                slots)
 ;;              class-options))
-;;    (bind-slot-accessors class-def slot-descriptions)
+;;    (bind-slot-accessors class-def slots)
 ;;    (bind-class-functions class-def class-options)
 ;;    ()))
 

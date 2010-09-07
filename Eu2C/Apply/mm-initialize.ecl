@@ -604,16 +604,16 @@ given in the constructor form" :class )
    class )
   ;;returns a symbol naming the trace function or a lambda list
   ;;containing (trace (%select object slot-name))-forms
-  (let* ((slot-descrs (~class-slot-descriptions class))
+  (let* ((slot-descrs (~class-slots class))
          (len (length slot-descrs))
          (ptr ^ptr)
          (trace-calls (cl:mapcan (lambda(slot)
                                    (if (pointer-representation?
-                                        (?representation (~slot-description-type slot)))
+                                        (?representation (~slot-type slot)))
                                        (list `(,trace-pointer (,%cast
                                                                ,<pointer-to-void>
                                                                (,^%select ,ptr ,class; *UK* 20.01.94
-                                                                          ,(~slot-description-name
+                                                                          ,(~slot-name
                                                                             slot)))))
                                      (); no trace necessary
                                      )) slot-descrs))
@@ -800,7 +800,7 @@ given in the constructor form" :class )
     (cl:make-instance <constructor-fun>
                       :range-and-domain
                       (cl:vector class
-                                 (~slot-description-type (car (~class-slot-descriptions
+                                 (~slot-type (car (~class-slots
                                                                class))));;superclasses may not
                       ;;have slots
                       :keywords parameters
@@ -817,12 +817,12 @@ given in the constructor form" :class )
   ((representation-object <%pointer-to-struct>)
    class parameters)
   ;;parameters which doesn't name a slot keyword are ignored
-  (let* ((slot-descriptions (~class-slot-descriptions class))
+  (let* ((slots (~class-slots class))
          (access-list
           (cl:mapcar (lambda(slot)
-                       (let ((slot-name (~slot-description-name slot))
-                             (keyword (~slot-description-keyword slot))
-                             (default-function (~slot-description-default-function slot)))
+                       (let ((slot-name (~slot-name slot))
+                             (keyword (~slot-keyword slot))
+                             (default-function (~slot-default-function slot)))
                          (if (member keyword parameters)
                              ;;keyword of slot is contained in parameters
                              (list ^%setf (list ^%select ^alloc class slot-name) ; *UK* 20.01.94
@@ -833,7 +833,7 @@ given in the constructor form" :class )
                                      (list default-function))
                              ;;do nothing
                              ()))))
-                     slot-descriptions))
+                     slots))
          )
     (add-function
      (complete-function
@@ -841,9 +841,9 @@ given in the constructor form" :class )
                         :range-and-domain
                         (apply #'cl:vector class
                                (cl:mapcar (lambda (keyword)
-                                            (~slot-description-type
-                                             (cl:find keyword slot-descriptions
-                                                      :key #'~slot-description-keyword)))
+                                            (~slot-type
+                                             (cl:find keyword slots
+                                                      :key #'~slot-keyword)))
                                           parameters))
                         :keywords parameters
                         :constructor-for class)
@@ -868,7 +868,7 @@ given in the constructor form" :class )
   ;;element can be omitted in which case the vector is leaved uninitialized
   ;;if element is given then an default-function is generated which runs over the
   ;;whole vector and initializes its elements with the argument element
-  (let* ((slot-descriptions (~class-slot-descriptions class))
+  (let* ((slots (~class-slots class))
          (number-of-slots (if (~vector-class-instance-length-literal class)
                               (~vector-class-instance-length-literal class)
                             `(,%cast ,%unsigned-word-integer ,^length)))
@@ -911,9 +911,9 @@ given in the constructor form" :class )
                         :range-and-domain
                         (apply #'cl:vector class
                                (cl:mapcar (lambda (slot-name)
-                                            (~slot-description-type
-                                             (cl:find slot-name slot-descriptions
-                                                      :key #'~slot-description-name)))
+                                            (~slot-type
+                                             (cl:find slot-name slots
+                                                      :key #'~slot-name)))
                                           parameters))
                         :keywords parameters
                         :constructor-for class)
@@ -1009,10 +1009,10 @@ given in the constructor form" :class )
   (add-function
    (complete-function (cl:make-instance <slot-accessor-fun>
                                         :slot slot
-                                        :range-and-domain (cl:vector (~slot-description-type slot)
+                                        :range-and-domain (cl:vector (~slot-type slot)
                                                                      class))
                       ^(object)
-                      `(,%cast  ,(~slot-description-type slot) ,^object)
+                      `(,%cast  ,(~slot-type slot) ,^object)
                       (tail-environment))))
 
 (defmethod ~compute-slot-reader-using-representation
@@ -1021,21 +1021,21 @@ given in the constructor form" :class )
   (add-function
    (complete-function (cl:make-instance <slot-accessor-fun>
                                         :slot slot
-                                        :range-and-domain (cl:vector (~slot-description-type slot)
+                                        :range-and-domain (cl:vector (~slot-type slot)
                                                                      class))
                       ^(object)
-                      `(,^%select ,^object ,class ,(~slot-description-name slot)); *UK* 20.01.94
+                      `(,^%select ,^object ,class ,(~slot-name slot)); *UK* 20.01.94
                       (tail-environment))))
 
 (defmethod ~compute-slot-reader-using-representation
   ((representation-object <%pointer-to-vector>)
    class slot effective-slots)
-  (if (eq ^element (~slot-description-name slot))
+  (if (eq ^element (~slot-name slot))
       ;;reader for element = access fun for vectors
       (add-function
        (complete-function (cl:make-instance <slot-accessor-fun>
                                             :slot slot
-                                            :range-and-domain (cl:vector (~slot-description-type slot)
+                                            :range-and-domain (cl:vector (~slot-type slot)
                                                                          class %unsigned-word-integer))
                           ^(object index)
                           `(,%extract ,^object ,^index)
@@ -1076,12 +1076,12 @@ given in the constructor form" :class )
   (add-function
    (complete-function (cl:make-instance <slot-accessor-fun>
                                         :slot slot
-                                        :range-and-domain (cl:vector (~slot-description-type slot)
+                                        :range-and-domain (cl:vector (~slot-type slot)
                                                                      class
-                                                                     (~slot-description-type slot)))
+                                                                     (~slot-type slot)))
                       ^(object new-value)
                       `(,^%setf (,^%select ,^object ,class; *UK* 20.01.94
-                                           ,(~slot-description-name slot))
+                                           ,(~slot-name slot))
                                 ,^new-value)
                       (tail-environment))))
 
@@ -1090,13 +1090,13 @@ given in the constructor form" :class )
   ((representation-object <%pointer-to-vector>)
    class slot effective-slots)
 
-  (if (eq ^element (~slot-description-name slot))
+  (if (eq ^element (~slot-name slot))
       (add-function
        (complete-function (cl:make-instance <slot-accessor-fun>
                                             :slot slot
-                                            :range-and-domain (cl:vector (~slot-description-type slot)
+                                            :range-and-domain (cl:vector (~slot-type slot)
                                                                          class %unsigned-word-integer
-                                                                         (~slot-description-type slot)))
+                                                                         (~slot-type slot)))
                           ^(object index new-value)
                           `(,^%setf (,%extract ,^object ,^index)
                                     ,^new-value)

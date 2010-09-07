@@ -119,14 +119,14 @@
 (defmethod compatible-representation? (class1 (rep1 <%direct>)
                                                class2 rep2)
   (setq class1
-        (~slot-description-type (car (~class-slot-descriptions class1))))
+        (~slot-type (car (~class-slots class1))))
   (compatible-representation? class1 (?representation class1)
                                class2 rep2))
 
 (defmethod compatible-representation? (class1 rep1
                                                class2 (rep2 <%direct>))
   (setq class2
-        (~slot-description-type (car (~class-slot-descriptions class2))))
+        (~slot-type (car (~class-slots class2))))
   (compatible-representation? class1 rep1
                                class2 (?representation class2)))
 
@@ -172,10 +172,10 @@
   (get-type (?location form)))
 
 (defmethod get-type ((form <get-slot-value>))
-  (~slot-description-type (?slot form)))
+  (~slot-type (?slot form)))
 
 (defmethod get-type ((form <set-slot-value>))
-  (~slot-description-type (?slot form)))
+  (~slot-type (?slot form)))
 
 (defun result-type (expr)
   (svref (or (?type-descr expr)

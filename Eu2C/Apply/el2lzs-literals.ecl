@@ -87,20 +87,20 @@
    (representation <%pointer-to-struct>)
    values)
   (mapcar (lambda (slot)
-            (let ((entry (find-option (~slot-description-name slot) values ())))
+            (let ((entry (find-option (~slot-name slot) values ())))
               (if entry (lzslit (car entry)) ;formerly: (trans (car entry))
                 ^unknown)))
-          (~class-slot-descriptions class-def)))
+          (~class-slots class-def)))
 
 ;;(defmethod deftrans-literal-values
 ;;           ((class-def <class-def>)
 ;;            (representation <%struct>)
 ;;            values)
 ;;  (mapcar (lambda (slot)
-;;            (let ((entry (find-option (~slot-description-name slot) values ())))
+;;            (let ((entry (find-option (~slot-name slot) values ())))
 ;;              (if entry (lzslit (car entry)) ;formerly: (trans (car entry))
 ;;                  ^unknown)))
-;;          (~class-slot-descriptions class-def)))
+;;          (~class-slots class-def)))
 
 (defmethod deftrans-literal-values
   ((class-def <class-def>)
@@ -232,16 +232,16 @@
 ;;; classes are handled directly, because <class> & co. are defined as part of
 ;;; the compiler
 
-(def-literal-class slot-description <slot-desc>
+(def-literal-class slot <slot-desc>
   (name . (lambda (sd) (format () "~A" (?identifier sd))))
   ;; (default-function . (lambda (sd) (if (eq (?initvalue sd) ^unknown)
-  ;;                                  (~slot-description-default-function sd)
+  ;;                                  (~slot-default-function sd)
   ;;                                ^t)))
-  (default-function . #'~slot-description-default-function)
+  (default-function . #'~slot-default-function)
   (initvalue . #'?initvalue)
-  (keyword . #'~slot-description-keyword)
-  (reader . #'~slot-description-slot-reader)
-  (writer . #'~slot-description-slot-writer)
+  (keyword . #'~slot-keyword)
+  (reader . #'~slot-slot-reader)
+  (writer . #'~slot-slot-writer)
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -370,7 +370,7 @@ expansion of ~A~%"
 
 (defmethod expand-slot-values (literal class
                                        (representation <%direct>) values)
-  (setq class (~slot-description-type (car (~class-slot-descriptions class))))
+  (setq class (~slot-type (car (~class-slots class))))
   (expand-slot-values literal
                       class
                       (~class-representation class)
@@ -408,7 +408,7 @@ expansion of ~A~%"
 (defmethod expand-class ((class <standard-class-def>) representation)
   ;;slots of classes are (in this order):
   ;;class-precedence-list
-  ;;slot-descriptions
+  ;;slots
   ;;mm-type
   ;;mm-card
   ;;gc-tracer
@@ -420,7 +420,7 @@ expansion of ~A~%"
               (make-literal-instance
                (~class-of class)
                (list (~class-precedence-list class)
-                     (~class-slot-descriptions class)
+                     (~class-slots class)
                      (?mm-type representation)
                      (?mm-card representation)
                      ^unknown ; gc-tracer not needed, slot should be removed
@@ -437,7 +437,7 @@ expansion of ~A~%"
                          (representation <%pointer-to-vector>))
   ;;slots of classes are (in this order):
   ;;class-precedence-list
-  ;;slot-descriptions = () --- they are not needed for vector classes
+  ;;slots = () --- they are not needed for vector classes
   ;;mm-type
   ;;mm-card
   ;;gc-tracer
@@ -463,7 +463,7 @@ expansion of ~A~%"
         (?expanded-literal class))))
 
 (defmethod expand-class ((class <tail-class-def>) representation)
-  ;;don't write out slot-descriptions
+  ;;don't write out slots
   (or (?expanded-literal class)
       (progn
         (setf (?expanded-literal class)
@@ -484,7 +484,7 @@ expansion of ~A~%"
         (?expanded-literal class))))
 
 (defmethod expand-class ((class <abstract-class-def>) representation)
-  ;;don't write out slot-descriptions
+  ;;don't write out slots
   (or (?expanded-literal class)
       (progn
         (setf (?expanded-literal class)

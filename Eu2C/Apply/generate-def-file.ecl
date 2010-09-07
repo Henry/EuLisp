@@ -749,21 +749,21 @@
 ;;; from module condition
 ;;;-----------------------------------------------------------------------------
 ;; (defmacro defcondition (condition-class-name super-class-name
-;;                                              slot-descriptions . init-options)
+;;                                              slots . init-options)
 ;;   `(progn
 ;;      (if (%subclass? (if ,super-class-name ,super-class-name <condition>) <condition>)
 ;;          ()
 ;;        (error defcondition-error-string <condition>))
 ;;      (%define-standard-class (,condition-class-name <class>)
 ;;        ,(if super-class-name super-class-name <condition>)
-;;        ,slot-descriptions
+;;        ,slots
 ;;        representation pointer-to-struct
 ;;        allocation multiple-type-card
 ;;        ,@init-options)))
 
 (defun defcondition (condition-class-name
                      super-class-name
-                     slot-descriptions . init-options)
+                     slots . init-options)
   (list 'progn
         (list 'if
               (list %subclass?
@@ -776,7 +776,7 @@
         (cons 'defclass
               (cons condition-class-name
                     (cons (if super-class-name super-class-name <condition>)
-                          (cons slot-descriptions
+                          (cons slots
                                 init-options))))))
 (export-syntax defcondition)
 
@@ -827,20 +827,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;; from module object-0-i
 ;;;-----------------------------------------------------------------------------
-;; (defmacro defclass (class-name superclass slot-descriptions . class-options)
+;; (defmacro defclass (class-name superclass slots . class-options)
 ;;   `(%define-standard-class
 ;;      (,class-name <class>)
 ;;      ,(or superclass '<object>)
-;;      ,slot-descriptions
+;;      ,slots
 ;;      representation pointer-to-struct
 ;;      allocation multiple-type-card
 ;;      ,@class-options))
 
-(defun defclass (class-name superclass slot-descriptions . class-options)
+(defun defclass (class-name superclass slots . class-options)
   (cons '%define-standard-class
         (cons (list class-name '<class>)
               (cons (or superclass '<object>)
-                    (cons slot-descriptions
+                    (cons slots
                           (cons 'representation
                                 (cons 'pointer-to-struct
                                       (cons 'allocation

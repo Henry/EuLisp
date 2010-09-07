@@ -321,8 +321,8 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 (defmethod get-referred-class (representation class) class)
 
 (defmethod get-referred-class ((representation <%direct>) class)
-  (let ((ref-class (~slot-description-type
-                    (car (~class-slot-descriptions class)))))
+  (let ((ref-class (~slot-type
+                    (car (~class-slots class)))))
     (get-referred-class (?representation ref-class)
                         ref-class)))
 
@@ -343,9 +343,9 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
   (write-code "~2%~@<struct ~;~:I~A ~:_{~:I~:{~A ~A;~:^ ~_~}~;};~:>"
               (type-identifier class-def)
               (mapcar (lambda (slot)
-                        (list (type-identifier (~slot-description-type slot))
+                        (list (type-identifier (~slot-type slot))
                               (c-identifier slot)))
-                      (~class-slot-descriptions class-def))))
+                      (~class-slots class-def))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Function Prototypes
@@ -707,8 +707,8 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 (defmethod instance-access ((representation <%direct>) class instance stream)
   (instance-access
    (?representation
-    (~slot-description-type
-     (car (~class-slot-descriptions (?class instance)))))
+    (~slot-type
+     (car (~class-slots (?class instance)))))
    class instance stream))
 
 (defmethod instance-access ((representation <%pointer-to-void>)
@@ -1052,7 +1052,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 ;;                 (type-expr-for-c (?slot-of (?slot form))
 ;;                                  (?instance form)))
 ;;    (c-identifier (?slot form))
-;;    (type-expr-for-c (~slot-description-type (?slot form))
+;;    (type-expr-for-c (~slot-type (?slot form))
 ;;                     (?value form))))
 
 (defmethod write-expr ((form <get-slot-value>) stream)
@@ -1078,7 +1078,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
                   (type-expr-for-c (?slot-of (?slot form))
                                    (?instance form))))
    (c-identifier (?slot form))
-   (type-expr-for-c (~slot-description-type (?slot form))
+   (type-expr-for-c (~slot-type (?slot form))
                     (?value form))))
 
 ;; error if the instance is a function app
@@ -1097,7 +1097,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 ;;    (instance? (?instance form))
 ;;    (?instance form)
 ;;    (c-identifier (?slot form))
-;;    (type-expr-for-c (~slot-description-type (?slot form))
+;;    (type-expr-for-c (~slot-type (?slot form))
 ;;                     (?value form))))
 
 (defun write-enveloped-expr (stream precedence format . args)

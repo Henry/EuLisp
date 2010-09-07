@@ -33,7 +33,7 @@
 ;;;  Notes:
 ;;    1. The arguments of the ~-functions are not exactly the same as for their
 ;;    EuLisp counterparts. They differ in structure. For example
-;;    ~compute-slot-descriptions gets a list of slot descriptions instead a list
+;;    ~compute-slots gets a list of slot descriptions instead a list
 ;;    of slot specifications (the list form).
 ;;
 ;;    2. The following activation order must be taken into account during class
@@ -97,21 +97,21 @@
  ;;--- Class Introspection
  export (~class-name
          ~class-precedence-list
-         ~class-slot-descriptions
+         ~class-slots
          ~class-keywords
          ~class-representation
-         ~find-slot-description
+         ~find-slot
          ~class-subclasses
          ~converter)
 
  ;;--- Slot Introspection
- export (~slot-description-name
-         ~slot-description-default-function
-         ~slot-description-slot-reader
-         ~slot-description-slot-writer
-         ~slot-description-type
-         ~slot-description-keyword
-         ~slot-description-initvalue)
+ export (~slot-name
+         ~slot-default-function
+         ~slot-slot-reader
+         ~slot-slot-writer
+         ~slot-type
+         ~slot-keyword
+         ~slot-initvalue)
 
  ;;--- Generic Function Introspection
  export (~generic-function-domain
@@ -128,8 +128,8 @@
 
  ;;--- Class Initialization
  export (~compute-class-precedence-list
-         ~compute-inherited-slot-descriptions
-         ~compute-slot-descriptions
+         ~compute-inherited-slots
+         ~compute-slots
          ~compute-inherited-keywords
          ~compute-keywords
          ~compute-representation
@@ -261,13 +261,13 @@
 
 (defgeneric ~class-precedence-list (class))
 
-(defgeneric ~class-slot-descriptions (class))
+(defgeneric ~class-slots (class))
 
 (defgeneric ~class-keywords (class))
 
 (defgeneric ~class-representation (class))
 
-(defgeneric ~find-slot-description (class slot-name))
+(defgeneric ~find-slot (class slot-name))
 
 (defgeneric ~class-subclasses (class))
 
@@ -276,19 +276,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Slot Introspection
 ;;;-----------------------------------------------------------------------------
-(defgeneric ~slot-description-name (slot))
+(defgeneric ~slot-name (slot))
 
-(defgeneric ~slot-description-default-function (slot))
+(defgeneric ~slot-default-function (slot))
 
-(defgeneric ~slot-description-slot-reader (slot))
+(defgeneric ~slot-slot-reader (slot))
 
-(defgeneric ~slot-description-slot-writer (slot))
+(defgeneric ~slot-slot-writer (slot))
 
-(defgeneric ~slot-description-type (slot)) ;returns the class for slot values
+(defgeneric ~slot-type (slot)) ;returns the class for slot values
 
-(defgeneric ~slot-description-keyword (slot))
+(defgeneric ~slot-keyword (slot))
 
-(defgeneric ~slot-description-initvalue (slot))
+(defgeneric ~slot-initvalue (slot))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Generic Function Introspection
@@ -319,10 +319,10 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric ~compute-class-precedence-list (class direct-superclasses))
 
-(defgeneric ~compute-inherited-slot-descriptions (class direct-superclasses))
+(defgeneric ~compute-inherited-slots (class direct-superclasses))
 
-(defgeneric ~compute-slot-descriptions (class direct-slot-specs
-                                              inherited-slot-descriptions))
+(defgeneric ~compute-slots (class direct-slot-specs
+                                              inherited-slots))
 
 (defgeneric ~compute-inherited-keywords (class direct-superclasses))
 
@@ -393,7 +393,7 @@
                   for slot ~A of class ~A.~
                   The inherited keyword is ~A from class ~A."
                     keyword
-                    (~slot-description-name slot)
+                    (~slot-name slot)
                     (~class-name (?slot-of slot))
                     (?keyword inherited-slot)
                     (~class-name (?slot-of inherited-slot))

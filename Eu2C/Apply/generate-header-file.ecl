@@ -138,8 +138,8 @@
 (defmethod get-referred-class (representation class) class)
 
 (defmethod get-referred-class ((representation <%direct>) class)
-  (let ((ref-class (~slot-description-type
-                    (car (~class-slot-descriptions class)))))
+  (let ((ref-class (~slot-type
+                    (car (~class-slots class)))))
     (get-referred-class (?representation ref-class)
                         ref-class)))
 
@@ -164,9 +164,9 @@
    (write-code "~2%~@<struct ~;~:I~A ~:_{~:I~:{~A ~A;~:^ ~_~}~;};~:>"
                (type-identifier class-def)
                (mapcar (lambda (slot)
-                         (list (type-identifier (~slot-description-type slot))
+                         (list (type-identifier (~slot-type slot))
                                (local-c-identifier slot)))
-                       (~class-slot-descriptions class-def)))))
+                       (~class-slots class-def)))))
 
 (defgeneric generate-class-object-declaration (class))
 (defmethod generate-class-object-declaration (class)

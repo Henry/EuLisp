@@ -59,21 +59,21 @@
 ;;; Generate a formal descriptor for %select
 ;;;-----------------------------------------------------------------------------
 
-(defun formal-descrs-get-slot-value (descrs slot-description)
+(defun formal-descrs-get-slot-value (descrs slot)
   (mapcar (lambda (descr)
-            (formal-descr-get-slot-value descr slot-description))
+            (formal-descr-get-slot-value descr slot))
           descrs))
 
 ;;; Create a formal descr to get slot value.
-(defun formal-descr-get-slot-value (descr slot-description)
+(defun formal-descr-get-slot-value (descr slot)
   descr ;;***HGW not used
-  (let* ((struct-class (?slot-of slot-description))
+  (let* ((struct-class (?slot-of slot))
          (struct-type (class-as-type-expr struct-class))
-         (slot-value-class (?type slot-description))
+         (slot-value-class (?type slot))
          (slot-value-type (class-as-type-expr slot-value-class)))
     ;;    (format t "~%Notice: %select with type ~A for slot ~A in ~A"
     ;;          (ti-print-string-no-cr slot-value-type)
-    ;;          (?identifier slot-description)
+    ;;          (?identifier slot)
     ;;          (ti-print-string-no-cr struct-type))
     (filled-formal-descr slot-value-type struct-type)))
 
@@ -109,18 +109,18 @@
 ;;; Generate a formal descriptor for %setf-select
 ;;;-----------------------------------------------------------------------------
 
-(defun formal-descrs-set-slot-value (descrs slot-description)
+(defun formal-descrs-set-slot-value (descrs slot)
   (mapcar (lambda (descr)
-            (formal-descr-set-slot-value descr slot-description))
+            (formal-descr-set-slot-value descr slot))
           descrs))
 
 ;;; Create a formal descr to set slot value.
-(defun formal-descr-set-slot-value (descr slot-description)
-  (let* ((struct-class (?slot-of slot-description))
+(defun formal-descr-set-slot-value (descr slot)
+  (let* ((struct-class (?slot-of slot))
          (struct-type (class-as-type-expr struct-class))
-         (slot-value-class (?type slot-description))
+         (slot-value-class (?type slot))
          (slot-value-type (class-as-type-expr slot-value-class))
-         (slot-name (?identifier slot-description))
+         (slot-name (?identifier slot))
          (new-slot-value-type
           (meet-type-exprs slot-value-type (get-arg-type descr 2))))
     (if (null? new-slot-value-type)
@@ -189,9 +189,9 @@
 ;;;-----------------------------------------------------------------------------
 
 ;;(defun find-slot-type-with-slot&struct (slot-name struct-class)
-;;  (let ((slot-descr (~find-slot-description struct-class slot-name)))
+;;  (let ((slot-descr (~find-slot struct-class slot-name)))
 ;;    (if slot-descr
-;;      (class-as-type-expr (~slot-description-type slot-descr))
+;;      (class-as-type-expr (~slot-type slot-descr))
 ;;      ())))
 
 ;;(defun find-slot-type-with-slot (slot-name)
@@ -200,9 +200,9 @@
 ;;       (size (length struct-types)))
 ;;    (cond ((= size 0) ())
 ;;        ((= size 1)
-;;         (let* ((slot-descr (~find-slot-description (car struct-classes)
+;;         (let* ((slot-descr (~find-slot (car struct-classes)
 ;;                                                    slot-name))
-;;                (slot-class (~slot-description-type slot-descr)))
+;;                (slot-class (~slot-type slot-descr)))
 ;;           (if slot-class
 ;;               (filled-formal-descr (class-as-type-expr slot-class)
 ;;                                    (car struct-types)
@@ -216,8 +216,8 @@
 
 ;;(defun find-classes-for-slot (slot-name)
 ;;  (let ((result-classes ()))
-;;    (dolist (slot-descr *list-of-new-slot-descriptions*)
-;;      (if (eq slot-name (~slot-description-name slot-descr))
+;;    (dolist (slot-descr *list-of-new-slots*)
+;;      (if (eq slot-name (~slot-name slot-descr))
 ;;        (setq result-classes (cons (?slot-of slot-descr) result-classes))))
 ;;    result-classes))
 

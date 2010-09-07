@@ -41,16 +41,16 @@
   (deep-copy-initialize
    (allocate (%class-of object))
    object
-   (%select (%class-of object) <class> slot-descriptions)))
+   (%select (%class-of object) <class> slots)))
 
 ;; The following variant uses slot readers and slot writers for initialization
 ;; (defun deep-copy-initialize (new-object old-object slots)
 ;;   (if (null? slots) new-object
 ;;     (progn
-;;       ((slot-description-slot-writer (car slots))
+;;       ((slot-slot-writer (car slots))
 ;;        new-object
 ;;        (deep-copy
-;;         ((slot-description-slot-reader (car slots)) old-object)))
+;;         ((slot-slot-reader (car slots)) old-object)))
 ;;       (deep-copy-initialize new-object old-object
 ;;                             (cdr slots)))))
 
@@ -81,15 +81,15 @@
   (shallow-copy-initialize
    (allocate (%class-of object))
    object
-   (%select (%class-of object) <class> slot-descriptions)))
+   (%select (%class-of object) <class> slots)))
 
 ;; The following variant uses slot readers and slot writers for initialization
 ;; (defun shallow-copy-initialize (new-object old-object slots)
 ;;   (if (null? slots) new-object
 ;;     (progn
-;;       ((slot-description-slot-writer (car slots))
+;;       ((slot-slot-writer (car slots))
 ;;        new-object
-;;        ((slot-description-slot-reader (car slots)) old-object))
+;;        ((slot-slot-reader (car slots)) old-object))
 ;;       (shallow-copy-initialize new-object old-object
 ;;                                (cdr slots)))))
 

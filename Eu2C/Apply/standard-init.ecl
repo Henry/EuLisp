@@ -70,7 +70,7 @@
         slots)
   slots)
 
-(defun create-slot-defs (class direct-slot-specs inherited-slot-descriptions)
+(defun create-slot-defs (class direct-slot-specs inherited-slots)
   ;; creates new slot definition, which means slot definitions introduced by the
   ;; current class and not inherited from the superclass
   (if (null? direct-slot-specs)
@@ -79,12 +79,12 @@
            (name (get-option ^name slot-spec ()))
            (default-function (get-option ^default-function slot-spec ()))
            (keyword (get-option ^keyword slot-spec ())))
-      (if (find name inherited-slot-descriptions
-                :key #'~slot-description-name)
+      (if (find name inherited-slots
+                :key #'~slot-name)
           ;; it was a slot specialization
           (create-slot-defs class (cdr direct-slot-specs)
-                            inherited-slot-descriptions)
-        ;; it was a slot definition, a new slot-description must be created
+                            inherited-slots)
+        ;; it was a slot definition, a new slot must be created
         (let ((slot (make-instance <slot-desc>
                                    :identifier name
                                    :default-function default-function
@@ -98,7 +98,7 @@
                             (get-constant-function-value default-function))))
           (cons slot
                 (create-slot-defs class (cdr direct-slot-specs)
-                                  inherited-slot-descriptions)))))))
+                                  inherited-slots)))))))
 
 (defun get-constant-function-value (fun)
   (let ((value (?body fun)))
@@ -133,7 +133,7 @@
   ;;direct-keywords representation allocation
   (let ((name (get-option ^name initlist ()))
         (direct-superclasses (get-option ^direct-superclasses initlist ()))
-        (direct-slot-specs (get-option ^direct-slot-descriptions initlist ()))
+        (direct-slot-specs (get-option ^direct-slots initlist ()))
         (direct-keywords (get-option ^direct-keywords initlist ()))
         (representation (get-option ^representation initlist ()))
         (allocation (get-option ^allocation initlist ()))
@@ -164,9 +164,9 @@
           (~compute-keywords class direct-keywords
                              (~compute-inherited-keywords class direct-superclasses)))
     (setq inherited-slots
-          (~compute-inherited-slot-descriptions class direct-superclasses))
+          (~compute-inherited-slots class direct-superclasses))
     (setq effective-slots
-          (~compute-slot-descriptions class direct-slot-specs
+          (~compute-slots class direct-slot-specs
                                       inherited-slots))
     (setf (?effective-slots class) effective-slots)
     (setf (?representation class)
@@ -178,7 +178,7 @@
   ;;recognized options in initlist are: name direct-slot-specs
   ;;direct-keywords representation allocation
   (let ((name (get-option ^name initlist ()))
-        (direct-slot-specs (get-option ^direct-slot-descriptions initlist ()))
+        (direct-slot-specs (get-option ^direct-slots initlist ()))
         (direct-keywords (get-option ^direct-keywords initlist ()))
         (representation (get-option ^representation initlist ()))
         (allocation (get-option ^allocation initlist t))
@@ -212,7 +212,7 @@
 (defmethod ~initialize ((class <imported-class>) initlist)
   (let ((name (get-option ^name initlist ()))
         (direct-superclasses (get-option ^direct-superclasses initlist ()))
-        (effective-slot-specs (get-option ^effective-slot-descriptions initlist ()))
+        (effective-slot-specs (get-option ^effective-slots initlist ()))
         (direct-keywords (get-option ^direct-keywords initlist ()))
         (direct-super-lattice-types (get-option ^direct-super-lattice-types
                                                 initlist ()))
@@ -242,7 +242,7 @@
           (~compute-keywords class direct-keywords
                              (~compute-inherited-keywords class direct-superclasses)))
     (setf (?effective-slots class)
-          (~compute-slot-descriptions class effective-slot-specs
+          (~compute-slots class effective-slot-specs
                                       ()))
     (setf (?representation class)
           (~compute-representation class representation
@@ -263,28 +263,28 @@
 
 
 ;;;-----------------------------------------------------------------------------
-;;; ~compute-inherited-slot-descriptions, ~compute-slot-descriptions
+;;; ~compute-inherited-slots, ~compute-slots
 ;;;-----------------------------------------------------------------------------
 
-(defmethod ~compute-inherited-slot-descriptions ((class <class-def>)
+(defmethod ~compute-inherited-slots ((class <class-def>)
                                                  direct-superclasses)
-  (list (~class-slot-descriptions (car direct-superclasses))))
+  (list (~class-slots (car direct-superclasses))))
 
-(defmethod ~compute-inherited-slot-descriptions ((class <class-def>)
+(defmethod ~compute-inherited-slots ((class <class-def>)
                                                  (direct-superclasses <null>))
   (list ()))
 
 
-(defmethod ~compute-slot-descriptions ((class <class-def>)
+(defmethod ~compute-slots ((class <class-def>)
                                        direct-slot-specs
-                                       inherited-slot-descriptions)
+                                       inherited-slots)
   (nconc (mapcar (lambda (inherited-slot)
                    (create-specializing-slot class inherited-slot direct-slot-specs))
-                 (car inherited-slot-descriptions))
+                 (car inherited-slots))
          (create-slot-defs class direct-slot-specs
-                           (car inherited-slot-descriptions))))
+                           (car inherited-slots))))
 
-(defmethod ~compute-slot-descriptions ((class <imported-class>)
+(defmethod ~compute-slots ((class <imported-class>)
                                        effective-slot-specs
                                        not-used)
   ;; in case of imported classes the list of effective slots is given such that
@@ -298,10 +298,10 @@
   ;; creates slot-specs for slots specializing inherited ones and for slots
   ;; simply inherited from superclass without specialization
   (let* ((specializing-slot (make-instance <slot-desc>
-                                           :identifier (~slot-description-name inherited-slot)
+                                           :identifier (~slot-name inherited-slot)
                                            :specializes inherited-slot
                                            :slot-of class))
-         (slot-spec (find (~slot-description-name inherited-slot) direct-slot-specs
+         (slot-spec (find (~slot-name inherited-slot) direct-slot-specs
                           :key (lambda (slot-spec) (get-option ^name slot-spec ()))))
          (default-function (get-option ^default-function slot-spec ()))
          (type (get-option ^type slot-spec ()))
@@ -400,7 +400,7 @@
 ;;  ; to avoid creation of accessors for slot 'length' of %string because this is
 ;;  ; not allowed before apply-level-2
 ;;  (mapc (lambda (slot)
-;;          (unless (eq ^length (~slot-description-name slot))
+;;          (unless (eq ^length (~slot-name slot))
 ;;            (setf (?reader slot)
 ;;                  (~compute-slot-reader class slot effective-slots))
 ;;            (setf (?writer slot)

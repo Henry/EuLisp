@@ -212,7 +212,7 @@
     (~initialize class-def
                  (list ^name id
                        ^direct-superclasses supers
-                       ^direct-slot-descriptions (mapcar (lambda (s)
+                       ^direct-slots (mapcar (lambda (s)
                                                            (make-slot-spec class-def s))
                                                          slot-specs)
                        ^direct-keywords (append
@@ -234,7 +234,7 @@
 
 (defun bind-slot-accessors (class-def slot-specs)
   (mapc (lambda (slot-spec)
-          (let ((slot (~find-slot-description class-def (car slot-spec))))
+          (let ((slot (~find-slot class-def (car slot-spec))))
             (map-option-list
              (lambda (key value)
                (bind-slot-accessor key value slot))
@@ -245,15 +245,15 @@
 (defun bind-slot-accessor (accessor-type name slot)
   (let ((accessor ()))
     (cond ((eq accessor-type ^reader)
-           (setq accessor (~slot-description-slot-reader slot)))
+           (setq accessor (~slot-slot-reader slot)))
           ((eq accessor-type ^accessor)
-           (setq accessor (~slot-description-slot-reader slot))
+           (setq accessor (~slot-slot-reader slot))
            (setf (?setter accessor)
-                 (~slot-description-slot-writer slot))
+                 (~slot-slot-writer slot))
            (unless (?identifier (?setter accessor))
                    (setf (?identifier (?setter accessor)) (list ^setter name))))
           ((eq accessor-type ^writer)
-           (setq accessor (~slot-description-slot-writer slot))))
+           (setq accessor (~slot-slot-writer slot))))
     (when accessor
           (setf (?value (find-in-lex-env name)) accessor)
           ;; the following installs a listed identifier to avoid that two objects
@@ -265,17 +265,17 @@
 
 (defun name-slot-accessors (slot)
   ;;installs default names for accessors not explicitely named
-  (when (and (~slot-description-slot-reader slot)
-             (null? (?identifier (~slot-description-slot-reader slot))))
-        (setf (?identifier (~slot-description-slot-reader slot))
-              (list ^reader (~slot-description-name slot)
+  (when (and (~slot-slot-reader slot)
+             (null? (?identifier (~slot-slot-reader slot))))
+        (setf (?identifier (~slot-slot-reader slot))
+              (list ^reader (~slot-name slot)
                     ^of (?identifier (?slot-of slot))
                     )))
-  (when (and (~slot-description-slot-writer slot)
-             (null? (?identifier (~slot-description-slot-writer slot))))
-        (setf (?identifier (~slot-description-slot-writer slot))
+  (when (and (~slot-slot-writer slot)
+             (null? (?identifier (~slot-slot-writer slot))))
+        (setf (?identifier (~slot-slot-writer slot))
               (list ^setter
-                    (~slot-description-name slot)
+                    (~slot-name slot)
                     ^of
                     (?identifier (?slot-of slot))
                     )))
@@ -403,7 +403,7 @@
      (~initialize class-def
                   (list ^name id
                         ^direct-superclasses supers
-                        ^effective-slot-descriptions
+                        ^effective-slots
                         (mapcar (lambda (s)
                                   (make-x-slot-spec class-def s))
                                 slot-specs)

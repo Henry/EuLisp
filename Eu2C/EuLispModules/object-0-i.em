@@ -42,15 +42,15 @@
            initialize
 
            ;; the following must not be visible to the level-0 user
-           <slot-description>
-           slot-description-name
-           slot-description-keyword
-           slot-description-default-function
+           <slot>
+           slot-name
+           slot-keyword
+           slot-default-function
 
            ;; the following two are necessary only if initialize , deep-copy and
            ;; shallow-copy (see module 'copy') are working via slot accessors
-           ;;slot-description-slot-reader
-           ;;slot-description-slot-writer
+           ;;slot-slot-reader
+           ;;slot-slot-writer
 
            <instance-as-vector>
            get-nth-slot-value
@@ -59,20 +59,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Slot descriptions
 ;;;-----------------------------------------------------------------------------
-(%define-standard-class (<slot-description> <class>)
+(%define-standard-class (<slot> <class>)
   <object>
-  ((name reader slot-description-name
+  ((name reader slot-name
          type %string)
-   (keyword reader slot-description-keyword)
-   (default-function reader slot-description-default-function)
-   ;; (reader reader slot-description-slot-reader)
-   ;; (writer reader slot-description-slot-writer)
+   (keyword reader slot-keyword)
+   (default-function reader slot-default-function)
+   ;; (reader reader slot-slot-reader)
+   ;; (writer reader slot-slot-writer)
    )
   allocation single-card
   representation pointer-to-struct)
 
-(%define-literal-expansion slot-description
-  `(%literal ,<slot-description>
+(%define-literal-expansion slot
+  `(%literal ,<slot>
              name (%literal ,%string () ,name)
              keyword ,keyword
              default-function ,default-function
@@ -83,11 +83,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;; defclass
 ;;;-----------------------------------------------------------------------------
-(defmacro defclass (class-name superclass slot-descriptions . class-options)
+(defmacro defclass (class-name superclass slots . class-options)
   `(%define-standard-class
      (,class-name <class>)
      ,(or superclass '<object>)
-     ,slot-descriptions
+     ,slots
      representation pointer-to-struct
      allocation multiple-type-card
      ,@class-options))
@@ -110,7 +110,7 @@
 
 (defmethod initialize (object . initlist)
   (standard-initialize object
-                       (%class-slot-descriptions (%class-of object))
+                       (%class-slots (%class-of object))
                        initlist))
 
 ;;;-----------------------------------------------------------------------------
@@ -119,14 +119,14 @@
 
 ;; (defun standard-initialize (object slots initlist)
 ;;   (if (null? slots) object
-;;     (let ((option (find-option (slot-description-keyword (car slots))
+;;     (let ((option (find-option (slot-keyword (car slots))
 ;;                                initlist
 ;;                                ())))
-;;       ((slot-description-slot-writer (car slots))
+;;       ((slot-slot-writer (car slots))
 ;;        object
 ;;        (cond (option (car option))
-;;              ((slot-description-default-function (car slots))
-;;               ((slot-description-default-function (car slots))))
+;;              ((slot-default-function (car slots))
+;;               ((slot-default-function (car slots))))
 ;;              (t (make-unbound-slot (%class-of object) (car slots)))))
 ;;       (standard-initialize object (cdr slots) initlist))))
 
@@ -144,15 +144,15 @@
   ((object <object>) (slots <list>) (initlist <list>)
    (slot-position %unsigned-word-integer))
   (if (null? slots) object
-    (%let ((option <list> (find-option (slot-description-keyword (car slots))
+    (%let ((option <list> (find-option (slot-keyword (car slots))
                                        initlist
                                        ()))
-           (default-function <object> (slot-description-default-function (car slots))))
+           (default-function <object> (slot-default-function (car slots))))
           (set-nth-slot-value (%cast <instance-as-vector> object)
                               slot-position
                               (cond (option (car option))
-                                    ((slot-description-default-function (car slots))
-                                     ((slot-description-default-function (car slots))))
+                                    ((slot-default-function (car slots))
+                                     ((slot-default-function (car slots))))
                                     (t (make-unbound-slot (%class-of object) (car slots)))))
           (standard-init object (cdr slots) initlist (%plus slot-position #%I1)))))
 
@@ -172,7 +172,7 @@
           type <class>
           keyword class)
    (slot reader unbound-slot-slot
-         type <slot-description>
+         type <slot>
          keyword slot)
    )
   constructor (make-unbound-slot class slot)

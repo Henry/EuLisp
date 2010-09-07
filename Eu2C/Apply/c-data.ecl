@@ -186,7 +186,7 @@
 (defmethod literal-definition (literal class (representation <%direct>))
   ;; direct can be used only for class mappings to basic classes like
   ;; %signed-word-integer
-  (let ((class (~slot-description-type (car (~class-slot-descriptions class)))))
+  (let ((class (~slot-type (car (~class-slots class)))))
     (literal-definition literal class (?representation class))))
 
 (defmethod literal-definition (literal class
@@ -199,7 +199,7 @@
               (get-structure-components
                literal
                (?value-list literal)
-               (~class-slot-descriptions class))))
+               (~class-slots class))))
 
 (defmethod literal-definition (literal (class <tail-class-def>)
                                        (representation <%pointer-to-struct>))
@@ -209,7 +209,7 @@
               (get-structure-components
                literal
                (?value-list literal)
-               (~class-slot-descriptions class))))
+               (~class-slots class))))
 
 (defmethod literal-definition (literal class
                                        (representation <%pointer-to-vector>))
@@ -272,11 +272,11 @@
 (defun get-structure-components (literal values slots)
   (if (null? values) ()
     (progn
-      (when (is-pointer (~slot-description-type (car slots)))
+      (when (is-pointer (~slot-type (car slots)))
             (add-structure-root literal (car slots)))
       (cons (if (eq (car values) ^unknown)
                 $unknown-initializer
-              (type-expr-for-c (~slot-description-type (car slots))
+              (type-expr-for-c (~slot-type (car slots))
                                (car values)))
             (get-structure-components literal (cdr values) (cdr slots))))))
 

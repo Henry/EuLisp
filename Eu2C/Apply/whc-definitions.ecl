@@ -136,7 +136,7 @@ non-representation-object ~s" obj))
 (defun make-pointer-to-struct (class-obj)
   (let ((byte-length 0)
         (maximum-alignment 0))
-    (dolist (slot-descr (~class-slot-descriptions class-obj))
+    (dolist (slot-descr (~class-slots class-obj))
             (when (> (?alignment (?representation (?type slot-descr)))
                      maximum-alignment)
                   (setq maximum-alignment (?alignment (?representation (?type
@@ -160,7 +160,7 @@ non-representation-object ~s" obj))
    :alignment (?alignment (?representation %unsigned-word-integer))
    :byte-length
    (?byte-length (?representation
-                  (?type (car (~class-slot-descriptions class-obj)))))
+                  (?type (car (~class-slots class-obj)))))
    ))
 
 

@@ -75,14 +75,14 @@
 
 (defmacro defcondition (condition-class-name
                         super-class-name
-                        slot-descriptions . init-options)
+                        slots . init-options)
   `(progn (if (%subclass? (if ,super-class-name ,super-class-name <condition>)
                           <condition>)
               ()
             (error defcondition-error-string <condition>))
           (%define-standard-class (,condition-class-name <class>)
             ,(if super-class-name super-class-name <condition>)
-            ,slot-descriptions
+            ,slots
             representation pointer-to-struct
             allocation multiple-type-card
             ,@init-options)))

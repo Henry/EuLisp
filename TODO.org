@@ -426,7 +426,8 @@
 *** TODO Create the =control-1= module
     containing the =throw= and =catch= functionality.  Perhaps the macros from
     Youtoo can be re-used for this.
-*** TODO Renaming according to 1.0 proposals
+*** DONE Renaming according to 1.0 proposals
+    CLOSED: [2010-09-07 Tue 15:45]
     + Rename <execution-condition> as <general-condition>
     + Rename <syntax-error> as <read-error>
     + Rename <slot-description> as <slot> (and all other such references)

@@ -183,15 +183,15 @@
         (ti-error))      ;; no applicable method!
     result-descrs))
 
-(defun inference-get-slot-value (descrs slot-description)
-  (let ((formal-descrs (formal-descrs-get-slot-value descrs slot-description))
+(defun inference-get-slot-value (descrs slot)
+  (let ((formal-descrs (formal-descrs-get-slot-value descrs slot))
         (fun %select))
     (setf (?signature fun) formal-descrs)
     (unify-descrs fun descrs formal-descrs t)))
 
-(defun inference-set-slot-value (descrs slot-description)
+(defun inference-set-slot-value (descrs slot)
   (ti-statistics *%setf-select-key*)
-  (let ((formal-descrs (formal-descrs-set-slot-value descrs slot-description))
+  (let ((formal-descrs (formal-descrs-set-slot-value descrs slot))
         (fun %setf-select))
     (setf (?signature fun) formal-descrs)
     (unify-descrs fun descrs formal-descrs t)))

@@ -236,7 +236,7 @@
   (mapc (lambda (slot)
           (when (?type slot)
                 (export-invisible (?type slot) module)))
-        (~class-slot-descriptions class)))
+        (~class-slots class)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; invisible export of discriminating functions of imported generic functions

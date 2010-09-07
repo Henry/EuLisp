@@ -81,8 +81,8 @@
 (defmethod generated-function? ((fun <slot-init-fun>)) t)
 (defmethod generated-function? ((fun <constructor-fun>)) t)
 
-(defun slot-description-option ()
-  (if *basic-system* ^effective-slot-descriptions ^direct-slot-descriptions))
+(defun slot-option ()
+  (if *basic-system* ^effective-slots ^direct-slots))
 
 (defun accessor-bindings-needed? ()
   (null? *basic-system*))
@@ -93,7 +93,7 @@
 (defun slot-specs-for-class ()
   (list (list ^name ^class-precedence-list
               ^type %object)
-        (list ^name ^slot-descriptions
+        (list ^name ^slots
               ^type %object)
         (list ^name ^mm-type
               ^type %signed-word-integer)
@@ -118,18 +118,18 @@
                (~initialize %object
                             (list ^name ^%object
                                   ^direct-superclasses ()
-                                  (slot-description-option) ()
+                                  (slot-option) ()
                                   ^direct-keywords ()
                                   ^representation ^pointer-to-void
                                   ))
                (~initialize %class
                             (list ^name ^%class
                                   ^direct-superclasses (list %object)
-                                  (slot-description-option)
+                                  (slot-option)
                                   (slot-specs-for-class)
                                   ^direct-keywords (let ((keywords ^(name
                                                                      direct-superclasses
-                                                                     direct-slot-descriptions
+                                                                     direct-slots
                                                                      direct-keywords)))
                                                      (mapc #'make-defined-sym keywords)
                                                      keywords)
@@ -141,8 +141,8 @@
                (when (accessor-bindings-needed?)
                      (name-and-export-reader %class ^class-precedence-list
                                              ^%class-precedence-list)
-                     (name-and-export-reader %class ^slot-descriptions
-                                             ^%class-slot-descriptions)
+                     (name-and-export-reader %class ^slots
+                                             ^%class-slots)
                      (name-and-export-accessor %class ^mm-type
                                                ^%class-mm-type)
                      (name-and-export-accessor %class ^mm-card
@@ -158,7 +158,7 @@
                (~initialize %abstract-class
                             (list ^name ^%abstract-class
                                   ^direct-superclasses (list %class)
-                                  (slot-description-option)
+                                  (slot-option)
                                   (if (null? *basic-system*)
                                       ()
                                     (slot-specs-for-class))
@@ -170,7 +170,7 @@
                (~initialize %tail-class
                             (list ^name ^%tail-class
                                   ^direct-superclasses (list %class)
-                                  (slot-description-option)
+                                  (slot-option)
                                   (if (null? *basic-system*)
                                       ()
                                     (slot-specs-for-class))
@@ -183,7 +183,7 @@
                             ;; ATTENTION: %string is an imported class in every case
                             (list ^name ^%string
                                   ^direct-superclasses ()
-                                  ^effective-slot-descriptions
+                                  ^effective-slots
                                   (list (list ^name ^length)
                                         (list ^name ^element
                                               ^type %unsigned-byte-integer
@@ -263,16 +263,16 @@
           (add-lexical symtab-initfun main-module ()))))
 
 (defun name-and-export-reader (class slot-name reader-name)
-  (let ((reader (~slot-description-slot-reader
-                 (~find-slot-description class slot-name))))
+  (let ((reader (~slot-slot-reader
+                 (~find-slot class slot-name))))
     (setf (?identifier reader) reader-name)
     (push reader (?lex-env $tail-module))
     (push reader (?exports $tail-module))))
 
 (defun name-and-export-accessor (class slot-name accessor-name)
-  (let* ((slot (~find-slot-description class slot-name))
-         (accessor (~slot-description-slot-reader slot))
-         (writer (~slot-description-slot-writer slot)))
+  (let* ((slot (~find-slot class slot-name))
+         (accessor (~slot-slot-reader slot))
+         (writer (~slot-slot-writer slot)))
     (setf (?identifier accessor) accessor-name)
     (setf (?identifier writer) (list ^setter accessor-name))
     (setf (?setter accessor) writer)

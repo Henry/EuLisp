@@ -39,7 +39,7 @@
          option-lists
          tail-module
          (only (%object
-                ~find-slot-description)
+                ~find-slot)
                lzs-mop)
          apply-funs
          quasiquote
@@ -1411,7 +1411,7 @@
   ;; class should be a binding or a class-object
   (make-instance <get-slot-value>
     :instance (trans structure)
-    :slot (or (~find-slot-description (trans class) slot-id)
+    :slot (or (~find-slot (trans class) slot-id)
               (error-invalid-slot-name class slot-id))
     ))
 
