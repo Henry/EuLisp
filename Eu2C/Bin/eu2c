@@ -252,7 +252,8 @@ do
          (quit)" | eu2c \
         | tee $ARCH_DIR/$APP.log 2>&1
 
-    if [ -f ${ARCH_DIR}/${APPNAME}.c ]
+    if [ -f ${ARCH_DIR}/${APPNAME}.c \
+         -a ${ARCH_DIR}/${APPNAME}.c -nt ${APPSOURCE} ]
     then
         echo "Eu2C: successful conversion of $APPNAME.em to $APPNAME.c"
     else
