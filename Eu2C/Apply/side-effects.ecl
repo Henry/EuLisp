@@ -35,10 +35,6 @@
 ;;    $closure - used closure-vars (and possible as data)
 ;;    * set (?closure local-static)
 ;;    * env = (var1 var2 var3 ...)
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 

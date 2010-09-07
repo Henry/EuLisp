@@ -18,19 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
 ;;    Interface module
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule tail
-
   (import (%tail)
    syntax (%tail)
    expose ((rename ((%class <class>)
@@ -38,6 +32,8 @@
                     (%abstract-class <abstract-class>)
                     (%object <object>))
                    %tail)
-           apply)
-   )
-) ; end of module tail
+           apply))
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module tail
+;;;-----------------------------------------------------------------------------

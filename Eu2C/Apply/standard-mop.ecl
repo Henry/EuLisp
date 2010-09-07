@@ -18,25 +18,24 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;-----------------------------------------------------------------------------
 
 #module standard-mop
-(import
- (level-0
-  lzs-mop
-  lzs
-  el2lzs-literals
-  (only (<%pointer-to-vector>) representation) ;whc-classes
-  (only (<%string>) tail-module)
-  (only (find format) common-lisp))
- syntax
- (level-0)
- )
+(import (level-0
+         lzs-mop
+         lzs
+         el2lzs-literals
+         (only (<%pointer-to-vector>)
+               representation) ;whc-classes
+         (only (<%string>)
+               tail-module)
+         (only (find
+                format)
+               common-lisp))
+ syntax (level-0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; ~class-of
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~class-of (object)
   (literal-type object))
 
@@ -46,7 +45,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~class-name ((class <class-def>))
   (?identifier class))
 
@@ -79,7 +77,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Slot Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~slot-description-name ((slot <slot-desc>))
   (?identifier slot))
 
@@ -104,7 +101,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Generic Function Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~generic-function-domain ((gf <generic-fun>))
   (?domain gf))
 
@@ -126,7 +122,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Method Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~method-domain ((method <method-def>))
   (?domain method))
 
@@ -139,7 +134,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Introspection of Vector Classes
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~vector-class-instance-length-literal (vector-class)
   (let ((initfun (~slot-description-default-function
                   (~find-slot-description vector-class ^length))))
@@ -208,4 +202,6 @@
 ;;          (?module-id class))
 ;;  ())
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

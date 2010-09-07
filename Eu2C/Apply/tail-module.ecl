@@ -38,10 +38,10 @@
          (only (*basic-system*)
                predicates)
          (only (make-instance
-                vector
-                append
-                delete-if-not
-                last butlast)
+                 vector
+                 append
+                 delete-if-not
+                 last butlast)
                common-lisp))
  syntax (level-0
          apply-standard
@@ -163,10 +163,10 @@
   %funcall
   ;;??%setf
 
-  ;;  %setjmp
-  ;;  %longjmp
+  ;; %setjmp
+  ;; %longjmp
 
-;;;now export the following from tail!!
+  ;; now export the following from tail!!
   %pointer-of-variable
   %pointer-of-function
   %pointer-of-extract
@@ -183,7 +183,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; resetting module %tail
 ;;;-----------------------------------------------------------------------------
-
 (defun reset-%tail ()
   (setf (?fun-list $tail-module)
         (delete-if-not #'special-sys-fun? (?fun-list $tail-module)))
@@ -211,35 +210,33 @@
         (setf (?var-list $tail-module) ())
         (setf (?toplevel-forms $tail-module) ()))
     (let ((initflag (make-instance <global-static>
-                                   :identifier ^basic-initialization-done
-                                   :module $tail-module
-                                   :type %unsigned-word-integer
-                                   :initial-value $unsigned-0)))
+                      :identifier ^basic-initialization-done
+                      :module $tail-module
+                      :type %unsigned-word-integer
+                      :initial-value $unsigned-0)))
       (setf (?var-list $tail-module) (list initflag))
       (setf (?toplevel-forms $tail-module)
             (make-instance <global-fun>
-                           :range-and-domain (vector %unsigned-word-integer)
-                           :params (make-instance <params>)
-                           :body
-                           (make-instance <if-form>
-                                          :pred
-                                          (make-instance <app>
-                                                         :function %eq
-                                                         :arg-list (list (make-instance <var-ref> :var initflag)
-                                                                         $unsigned-0))
-                                          :then
-                                          (make-instance <progn-form>
-                                                         :form-list (list (make-instance <setq-form>
-                                                                                         :location (make-instance <var-ref>
-                                                                                                                  :var initflag)
-                                                                                         :form $unsigned-1)))
-                                          :else
-                                          $unsigned-1)
-                           :exported ()
-                           :identifier "basic-initialization"
-                           :module $tail-module)))
-    ))
-
+              :range-and-domain (vector %unsigned-word-integer)
+              :params (make-instance <params>)
+              :body
+              (make-instance <if-form>
+                :pred
+                (make-instance <app>
+                  :function %eq
+                  :arg-list (list (make-instance <var-ref> :var initflag)
+                                  $unsigned-0))
+                :then
+                (make-instance <progn-form>
+                  :form-list (list (make-instance <setq-form>
+                                     :location (make-instance <var-ref>
+                                                 :var initflag)
+                                     :form $unsigned-1)))
+                :else
+                $unsigned-1)
+              :exported ()
+              :identifier "basic-initialization"
+              :module $tail-module)))))
 
 (defun add-toplevel-forms-for-tail-module (forms)
   (unless *basic-system*

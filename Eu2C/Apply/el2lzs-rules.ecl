@@ -23,12 +23,10 @@
 ;;    Ingo Mohr: The mapping of EuLisp the Lisp-related intermediate language
 ;;    (APPLY Working Paper)
 ;;;  Notes:
-;;    Up to now nearly no error-checking or error-handling takes places. This means,
-;;    that the incoming EuLisp-module must be in correct syntax.
-;;    Dynamic variables, let/cc and unwind-protect are mapped to other forms. So they
+;;    Up to now nearly no error-checking or error-handling takes places. This
+;;    means, that the incoming EuLisp-module must be in correct syntax.  Dynamic
+;;    variables, let/cc and unwind-protect are mapped to other forms. So they
 ;;    are not expressed in form of their LZS-counterparts.
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -43,16 +41,15 @@
          (only (%object
                 ~find-slot-description)
                lzs-mop)
-         ;;(only (%list) apply-funs)
          apply-funs
          quasiquote
          (only (call)
                lzs-eval)
-         (only (REVERSE
-                APPEND
-                NOT
-                NCONC
-                MAPCAR
+         (only (reverse
+                append
+                not
+                nconc
+                mapcar
                 mapc
                 remove
                 vector
@@ -73,12 +70,11 @@
  export (transsyn-progn
          complete-function
          trans-params
-         trans-lambda             ; for el2lzs-generic
+         trans-lambda
          lambda-specializers
-         lambda-parameters ; for el2lzs-generic
-         fun-spec-name fun-spec-type           ; for el2lzs-generic
-         compute-arg-descr      ;; for generic-dispatch
-         )
+         lambda-parameters
+         fun-spec-name fun-spec-type
+         compute-arg-descr)
  export (add-function
          add-class
          add-const
@@ -88,7 +84,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TS (transsyn): expands and simplifies syntax
 ;;;-----------------------------------------------------------------------------
-
 (defun transsyn-progn (forms)
   (transsyn-expanded-progn (transsyn-progn-forms forms)))
 
@@ -150,8 +145,8 @@
          (whole-form)))
 
 (deftranssyn (if ANT CONS ALT)
-  ;; it is possible to handle this by the default case (expand all arguments) but
-  ;; a separate rules provides early detection of syntax violations
+  ;; it is possible to handle this by the default case (expand all arguments)
+  ;; but a separate rules provides early detection of syntax violations
   (list ^if
         (transsyn ANT)
         (transsyn CONS)
@@ -264,9 +259,8 @@
 ;;;                collection of objects into environments
 ;;;-----------------------------------------------------------------------------
 
-;;;-----------------------------------------------------------------------------
-;;; some auxillary functions to extend the lists of defined objects in a
-;;; lzs-module
+;; some auxillary functions to extend the lists of defined objects in a
+;; lzs-module
 
 (defun add-function (fun)
   (push fun (?fun-list (dynamic *current-module*)))
@@ -301,28 +295,29 @@
 (defun trans-lambda (BODY funobj params)
   (dynamic-let ((*function-id* (?identifier funobj)))
                (setf (?params funobj) params)
-               (setf (?body funobj) (in-lex-env (env-plus (?rest params)
-                                                          (append (?var-list params) lex-env))
-                                                (trans BODY)))
+               (setf (?body funobj)
+                     (in-lex-env
+                      (env-plus (?rest params)
+                                (append (?var-list params) lex-env))
+                      (trans BODY)))
                (setf (?arg-num funobj) (compute-arg-descr params))
                funobj))
 
 ;;;-----------------------------------------------------------------------------
-
 (defun trans-params (params req)
   (cond ((null? params)
          (make-instance <params>
-                        :var-list (reverse req)
-                        :rest ()))
+           :var-list (reverse req)
+           :rest ()))
         ((symbol? params)  ;; error if (neq rst ())
          (make-instance <params>
-                        :var-list (reverse req)
-                        :rest (make-instance <local-static>
-                                             :identifier params)))
+           :var-list (reverse req)
+           :rest (make-instance <local-static>
+                   :identifier params)))
         (t
          (trans-params (rest params)
                        (cons (make-instance <local-static>
-                                            :identifier (first params))
+                               :identifier (first params))
                              req)))))
 
 (defmethod transmod ((id <symbol>))
@@ -335,12 +330,12 @@
 (deftransmod (defconstant id init)
   (add-const
    (make-instance <defined-named-const>
-                  :identifier id)))
+     :identifier id)))
 
 (deftransmod (deflocal id init)
   (add-var
    (make-instance <global-static>
-                  :identifier id)))
+     :identifier id)))
 
 (deftransmod (defun fun-spec parameters body)
   ;;the body was transformed to a single form by transsyn
@@ -348,7 +343,7 @@
          ;; a (function) binding is defined
          (add-function
           (make-instance <global-fun>
-                         :identifier fun-spec)))
+            :identifier fun-spec)))
         ;; otherwise no binding is defined
         (t ())))
 
@@ -358,8 +353,9 @@
   ;; This rule is only activated for local macro definitions in the syntax
   ;; section. Macro definitions in the module body are mapped to
   ;; defun-forms during the syntax expansion.
-  ;; The body must be syntax-expanded here. Therefore, the caller of transmod for
-  ;; local macros should set (dynamic mac-env) and (dynamic lex-env) right.
+  ;;
+  ;; The body must be syntax-expanded here. Therefore, the caller of transmod
+  ;; for local macros should set (dynamic mac-env) and (dynamic lex-env) right.
   ;; transmod can transform also the body of the local macro because only
   ;; references to imported bindings can appear.
   (with-defining-form
@@ -374,9 +370,9 @@
 ;;;-----------------------------------------------------------------------------
 (defun constant-setq (obj init)
   (make-instance <setq-form> ;trans for setq to a constant
-                 ;;isn't possible !
-                 :location obj
-                 :form init))
+    ;;isn't possible !
+    :location obj
+    :form init))
 
 (deftransdef (defconstant ID INIT)
   (with-defining-form
@@ -411,9 +407,9 @@
   (with-defining-form
    (list
     (make-instance <app>
-                   :function %initialize-global-dynamic
-                   :arg-list (list (make-defined-sym ID)
-                                   (trans EXPR))))))
+      :function %initialize-global-dynamic
+      :arg-list (list (make-defined-sym ID)
+                      (trans EXPR))))))
 
 (defun fun-spec-name (fun-spec)
   (if (symbol? fun-spec)
@@ -436,7 +432,7 @@
                   (setf (?setter fun)
                         (add-function
                          (make-instance <global-fun>
-                                        :identifier fun-spec)))))
+                           :identifier fun-spec)))))
            )
      (trans-lambda ;sets params and body in function object
       body
@@ -479,7 +475,6 @@
 ;;; TE (trans): transformation of expressions
 ;;; constants,literals and variables
 ;;;-----------------------------------------------------------------------------
-
 (defmethod trans ((empty-list <null>))
   ())
 
@@ -528,7 +523,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; variables and assignments
 ;;;-----------------------------------------------------------------------------
-
 (defmethod trans ((ID <symbol>))
   (let ((VAR (find-in-lex-env ID)))
     (cond ((instance-of? VAR <static>)
@@ -539,8 +533,8 @@
   (let ((location (trans ID)))
     (if (var-ref? location)
         (make-instance <setq-form>
-                       :location location
-                       :form (trans EXPR))
+          :location location
+          :form (trans EXPR))
       (progn
         (error-invalid-assignment ID)
         ()))))
@@ -557,7 +551,7 @@
 ;;;-----------------------------------------------------------------------------
 (deftrans (if ANT CONS ALT)
   (make-instance <if-form>
-                 :pred (trans ANT) :then (trans CONS) :else (trans ALT)))
+    :pred (trans ANT) :then (trans CONS) :else (trans ALT)))
 
 (deftrans (or . FORMS)
   (cond ((null? FORMS) ())
@@ -569,17 +563,17 @@
 (defmethod make-or-expansion (first-form else-part)
   (let ((var (make-instance <local-static>)))
     (make-instance <let*-form>
-                   :var-list (list var)
-                   :init-list (list first-form)
-                   :body (make-instance <if-form>
-                                        :pred (make-instance <var-ref> :var var)
-                                        :then (make-instance <var-ref> :var var)
-                                        :else else-part))))
+      :var-list (list var)
+      :init-list (list first-form)
+      :body (make-instance <if-form>
+              :pred (make-instance <var-ref> :var var)
+              :then (make-instance <var-ref> :var var)
+              :else else-part))))
 (defmethod make-or-expansion ((first-form <var-ref>) else-part)
   (make-instance <if-form>
-                 :pred first-form
-                 :then first-form
-                 :else else-part))
+    :pred first-form
+    :then first-form
+    :else else-part))
 
 (defun trans-exprs (exprs)
   (if (null? exprs) ()
@@ -591,8 +585,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; variable bindings: lambda expressions
 ;;;-----------------------------------------------------------------------------
-
-;;; --- completion of partially created function objects
+;; --- completion of partially created function objects
 
 (defun complete-function (lzs-fun arguments body environment)
   (dynamic-let ((lex-env environment))
@@ -615,8 +608,8 @@
   (trans-lambda BODY
                 (add-function
                  (make-instance <local-fun>
-                                :identifier (make-local-fun-identifier ())
-                                :module (dynamic *current-module*)))
+                   :identifier (make-local-fun-identifier ())
+                   :module (dynamic *current-module*)))
                 (trans-params PARAMETERS ())))
 
 ;;;-----------------------------------------------------------------------------
@@ -630,23 +623,23 @@
 
 (defun trans-let (BODY v)
   (make-instance <let*-form>
-                 :var-list (vars v)
-                 :init-list (inits v)
-                 :body (in-lex-env (append (vars v) lex-env)
-                                   (trans BODY))))
+    :var-list (vars v)
+    :init-list (inits v)
+    :body (in-lex-env (append (vars v) lex-env)
+                      (trans BODY))))
 
 (defun trans-vars (varlist vars inits ecomb)
   (cond ((null? varlist) (cons (reverse vars) (reverse inits)))
         ((symbol? (first varlist))
          (trans-vars (rest varlist)
                      (cons (make-instance <local-static>
-                                          :identifier (first varlist))
+                             :identifier (first varlist))
                            vars)
                      (cons () inits)
                      ecomb))
         (t (trans-vars (rest varlist)
                        (cons (make-instance <local-static>
-                                            :identifier (first (first varlist)))
+                               :identifier (first (first varlist)))
                              vars)
                        (cons (in-lex-env (funcall ecomb lex-env vars)
                                          (trans (second (first varlist))))
@@ -702,7 +695,7 @@
 ;;         (BODY (third FUN)))
 ;;     (setf (?params fun-obj) (trans-params PARAMETERS () ))
 ;;     (setf (?body fun-obj) (in-lex-env (env-plus (?rest (?params fun-obj))
-;;                                                 (append (?var-list (?params fun-obj))
+;;                                         (append (?var-list (?params fun-obj))
 ;;                                                         lex-env))
 ;;                                       (trans BODY)))
 ;;     fun))
@@ -712,25 +705,25 @@
 
 (defun make-app (fun . args)
   (make-instance <app>
-                 :function fun
-                 :arg-list args))
+    :function fun
+    :arg-list args))
 
 (defun make-var-ref (var)
   (make-instance <var-ref> :var var))
 
 (defun make-local-static (id type)
   (make-instance <local-static>
-                 :identifier id
-                 :type type))
+    :identifier id
+    :type type))
 
 (defun make-setq (var val)
   (make-instance <setq-form>
-                 :location (make-var-ref var)
-                 :form val))
+    :location (make-var-ref var)
+    :form val))
 
 (defun make-progn forms
   (make-instance <progn-form>
-                 :form-list (el2lzs-main::splice-lists forms)))
+    :form-list (el2lzs-main::splice-lists forms)))
 
 (defun trans-labels (BODY FUNCTIONS)
   (let* ((vars (mapcar (lambda (fun)
@@ -739,23 +732,24 @@
          (funs (in-lex-env (append vars lex-env)
                            (mapcar #'trans-label-fun FUNCTIONS)))
          (unsigned-0 (make-instance <literal-instance>
-                                    :class %unsigned-word-integer
-                                    :value-list '(0))))
+                       :class %unsigned-word-integer
+                       :value-list '(0))))
     (make-instance <let*-form>
-                   :var-list vars
-                   :init-list (mapcar (lambda (fun)
-                                        (make-app %cast <function>-class unsigned-0))
-                                      funs)
-                   :type-list (mapcar (lambda (fun) <function>-class)
-                                      funs)
-                   :body
-                   (apply #'make-progn
-                          (append
-                           (mapcar (lambda (var fun)
-                                     (make-setq var fun))
-                                   vars funs)
-                           (list (in-lex-env (append vars lex-env)
-                                             (trans BODY))))))))
+      :var-list vars
+      :init-list (mapcar
+                  (lambda (fun)
+                    (make-app %cast <function>-class unsigned-0))
+                  funs)
+      :type-list (mapcar (lambda (fun) <function>-class)
+                         funs)
+      :body
+      (apply #'make-progn
+             (append
+              (mapcar (lambda (var fun)
+                        (make-setq var fun))
+                      vars funs)
+              (list (in-lex-env (append vars lex-env)
+                                (trans BODY))))))))
 
 (defun trans-label-fun (FUN)
   (let* ((ID (first FUN))
@@ -763,11 +757,12 @@
          (BODY (third FUN))
          (fun-obj (add-function
                    (make-instance <local-fun>
-                                  :identifier (make-local-fun-identifier ID)))))
+                     :identifier (make-local-fun-identifier ID)))))
     (setf (?params fun-obj) (trans-params PARAMETERS () ))
-    (setf (?body fun-obj) (in-lex-env (env-plus (?rest (?params fun-obj))
-                                                (append (?var-list (?params fun-obj))
-                                                        lex-env))
+    (setf (?body fun-obj) (in-lex-env (env-plus
+                                       (?rest (?params fun-obj))
+                                       (append (?var-list (?params fun-obj))
+                                               lex-env))
                                       (trans BODY)))
     fun-obj))
 
@@ -787,19 +782,19 @@
 
 (defun trans-let/cc (BODY cont)
   (let* ((v-buffer (make-instance <local-static>
-                                  :identifier ^jmp-buffer
-                                  :type %jmpbuf))
+                     :identifier ^jmp-buffer
+                     :type %jmpbuf))
          (v-buffer-closure-var (make-instance <local-static>
-                                              :identifier ^jmp-buffer-closure-var))
+                                 :identifier ^jmp-buffer-closure-var))
          (v-current-unwind (make-instance <local-static>
-                                          :identifier ^current-unwind))
+                             :identifier ^current-unwind))
          (v-current-dynamic (make-instance <local-static>
-                                           :identifier ^current-dynamic))
+                              :identifier ^current-dynamic))
          (cont-closure
           (add-function
            (complete-function
             (make-instance <local-fun>
-                           :identifier (make-local-fun-identifier (?identifier cont)))
+              :identifier (make-local-fun-identifier (?identifier cont)))
             ^(result)
             ^(progn
                (%setf letcc-result result)
@@ -812,51 +807,54 @@
             (list* v-current-unwind v-buffer-closure-var
                    apply-environment)))))
     (setf (?range-and-domain cont-closure)
-          (vector %void %object %object)) ; !!! cons/object is a hack (constructed, local
+          (vector %void %object %object)) ; !!! cons/object is a hack
+                                          ; (constructed, local
     ;; !!! closure-function)
     (make-instance <let*-form>
-                   :var-list (list v-current-unwind
-                                   v-current-dynamic
-                                   ;;cont
-                                   v-buffer
-                                   )
-                   :init-list (list
-                               (make-instance <app>
-                                              :function %cast
-                                              :arg-list (list %object (make-instance <var-ref> :var %unwind)))
-                               (make-instance <var-ref> :var %top-dynamic)
-                               ;;cont-closure
-                               ^unknown
-                               ;; (make-instance <var-ref> :var v-buffer) ; trick
-                               )
-                   :type-list (list %object ;%pjmpbuf
-                                    %dynamic
-                                    ;;%object
-                                    %jmpbuf
-                                    )
-                   :body
-                   ;;  (make-instance <let*-form> :var-list (list v-buffer)
-                   ;;       :type-list (list %jmpbuf) :body
-                   (make-instance <if-form>
-                                  :pred (in-lex-env (cons v-buffer apply-environment)
-                                                    (trans ^(%eq (%setjmp jmp-buffer)
-                                                                 (%literal %signed-word-integer 0))))
-                                  :then (make-instance <let*-form>
-                                                       :var-list (list v-buffer-closure-var cont)
-                                                       :init-list (list (in-lex-env (cons v-buffer apply-environment)
-                                                                                    (trans ^(%cast <object>
-                                                                                                   (%pointer-of jmp-buffer))))
-                                                                        cont-closure)
-                                                       :type-list (list %object %object)
-                                                       :body (in-lex-env (list* cont v-buffer-closure-var lex-env)
-                                                                         (trans BODY)))
-                                  ;;(in-lex-env (cons cont lex-env)
-                                  ;;                  (trans BODY))
-                                  :else (in-lex-env (list* ;v-buffer
-                                                     v-current-dynamic apply-environment)
-                                                    (trans ^(progn
-                                                              (%setf top-dynamic current-dynamic)
-                                                              letcc-result)))))))
+      :var-list (list v-current-unwind
+                      v-current-dynamic
+                      ;;cont
+                      v-buffer
+                      )
+      :init-list (list
+                  (make-instance <app>
+                    :function %cast
+                    :arg-list (list %object
+                                    (make-instance <var-ref> :var %unwind)))
+                  (make-instance <var-ref> :var %top-dynamic)
+                  ;;cont-closure
+                  ^unknown
+                  ;; (make-instance <var-ref> :var v-buffer) ; trick
+                  )
+      :type-list (list %object ;%pjmpbuf
+                       %dynamic
+                       ;;%object
+                       %jmpbuf
+                       )
+      :body
+      ;;  (make-instance <let*-form> :var-list (list v-buffer)
+      ;;       :type-list (list %jmpbuf) :body
+      (make-instance <if-form>
+        :pred (in-lex-env (cons v-buffer apply-environment)
+                          (trans ^(%eq (%setjmp jmp-buffer)
+                                       (%literal %signed-word-integer 0))))
+        :then (make-instance <let*-form>
+                :var-list (list v-buffer-closure-var cont)
+                :init-list (list (in-lex-env
+                                  (cons v-buffer apply-environment)
+                                  (trans ^(%cast <object>
+                                                 (%pointer-of jmp-buffer))))
+                                 cont-closure)
+                :type-list (list %object %object)
+                :body (in-lex-env (list* cont v-buffer-closure-var lex-env)
+                                  (trans BODY)))
+        ;;(in-lex-env (cons cont lex-env)
+        ;;                  (trans BODY))
+        :else (in-lex-env (list* ;v-buffer
+                           v-current-dynamic apply-environment)
+                          (trans ^(progn
+                                    (%setf top-dynamic current-dynamic)
+                                    letcc-result)))))))
 
 (deftrans (let/cc ID BODY)
   (trans-let/cc BODY (make-instance <cont> :identifier ID)))
@@ -864,14 +862,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; function calls and application
 ;;;-----------------------------------------------------------------------------
-
 (defun trans-appl (expr var)
   (make-instance <let*-form>
-                 :var-list (list var)
-                 :init-list (list (trans (first expr)))
-                 :body (make-instance <app>
-                                      :function (make-instance <var-ref> :var var)
-                                      :arg-list (trans-exprs (rest expr)))))
+    :var-list (list var)
+    :init-list (list (trans (first expr)))
+    :body (make-instance <app>
+            :function (make-instance <var-ref> :var var)
+            :arg-list (trans-exprs (rest expr)))))
 
 (defun trans-function (fun)
   ;; avoids () in functional position for non-existing function-objects during
@@ -883,13 +880,13 @@
   (cond ((atom? operator)
          ;; this is for identifiers and function objects in operator position
          (make-instance <app>
-                        :function (trans-function operator)
-                        :arg-list (trans-exprs ARGS)))
+           :function (trans-function operator)
+           :arg-list (trans-exprs ARGS)))
         ((or (eq (car operator) ^dynamic)
              (eq (car operator) ^lambda))
          (make-instance <app>
-                        :function (trans operator)
-                        :arg-list (trans-exprs ARGS)))
+           :function (trans operator)
+           :arg-list (trans-exprs ARGS)))
         (t (trans-appl (cons operator ARGS)
                        (make-instance <local-static> :identifier ())))))
 
@@ -899,55 +896,55 @@
 ;;;-----------------------------------------------------------------------------
 ;;; unwind-protect
 ;;;-----------------------------------------------------------------------------
-
 (defun make-uwp (protected-forms cleanup-forms)
   (let* ((v-buffer (make-local-static ^jmp-buffer %jmpbuf))
          (v-current-unwind (make-local-static ^current-unwind %pjmpbuf))
          (v-current-dynamic (make-local-static ^current-dynamic %object))
-         (v-current-letcc-result (make-local-static ^current-letcc-result %object))
+         (v-current-letcc-result
+          (make-local-static ^current-letcc-result %object))
          (v-result (make-local-static ^result %object))
          )
     (make-instance <let*-form>
-                   :var-list (list v-buffer
-                                   v-current-unwind
-                                   v-current-dynamic)
-                   :type-list (list %object
-                                    %dynamic
-                                    %jmpbuf)
-                   :init-list (list ^unknown
-                                    (make-var-ref %unwind)
-                                    (make-var-ref %top-dynamic))
-                   :body
-                   (make-instance <if-form>
-                                  :pred
-                                  (in-lex-env (cons v-buffer apply-environment)
-                                              (trans ^(%eq (%setjmp jmp-buffer)
-                                                           (%literal %signed-word-integer 0))))
-                                  :then
-                                  (make-instance <let*-form>
-                                                 :var-list (list v-result)
-                                                 :type-list (list %object)
-                                                 :init-list (list (make-progn
-                                                                   (make-setq %unwind
-                                                                              (make-app %pointer-of-variable
-                                                                                        (make-var-ref v-buffer)))
-                                                                   protected-forms))
-                                                 :body
-                                                 (make-progn (make-setq %unwind (make-var-ref v-current-unwind))
-                                                             cleanup-forms
-                                                             (make-var-ref v-result)))
-                                  :else
-                                  (make-instance <let*-form>
-                                                 :var-list (list v-current-letcc-result)
-                                                 :type-list (list %object)
-                                                 :init-list (list (make-var-ref %letcc-result))
-                                                 :body
-                                                 (make-progn
-                                                  (make-setq %top-dynamic (make-var-ref v-current-dynamic))
-                                                  cleanup-forms
-                                                  (make-setq %letcc-result (make-var-ref v-current-letcc-result))
-                                                  (make-app %unwind-continue
-                                                            (make-var-ref v-current-unwind))))))))
+      :var-list (list v-buffer
+                      v-current-unwind
+                      v-current-dynamic)
+      :type-list (list %object
+                       %dynamic
+                       %jmpbuf)
+      :init-list (list ^unknown
+                       (make-var-ref %unwind)
+                       (make-var-ref %top-dynamic))
+      :body
+      (make-instance <if-form>
+        :pred
+        (in-lex-env (cons v-buffer apply-environment)
+                    (trans ^(%eq (%setjmp jmp-buffer)
+                                 (%literal %signed-word-integer 0))))
+        :then
+        (make-instance <let*-form>
+          :var-list (list v-result)
+          :type-list (list %object)
+          :init-list (list (make-progn
+                            (make-setq %unwind
+                                       (make-app %pointer-of-variable
+                                                 (make-var-ref v-buffer)))
+                            protected-forms))
+          :body
+          (make-progn (make-setq %unwind (make-var-ref v-current-unwind))
+                      cleanup-forms
+                      (make-var-ref v-result)))
+        :else
+        (make-instance <let*-form>
+          :var-list (list v-current-letcc-result)
+          :type-list (list %object)
+          :init-list (list (make-var-ref %letcc-result))
+          :body
+          (make-progn
+           (make-setq %top-dynamic (make-var-ref v-current-dynamic))
+           cleanup-forms
+           (make-setq %letcc-result (make-var-ref v-current-letcc-result))
+           (make-app %unwind-continue
+                     (make-var-ref v-current-unwind))))))))
 
 (deftrans (unwind-protect protected-forms . cleanup-forms)
   (make-uwp (trans protected-forms)
@@ -956,20 +953,17 @@
 ;;;-----------------------------------------------------------------------------
 ;;; method combination
 ;;;-----------------------------------------------------------------------------
-
 ;;call-next-method
 ;;next-method?
 
 ;;;-----------------------------------------------------------------------------
 ;;; condition handling
 ;;;-----------------------------------------------------------------------------
-
 ;;with-handler
 
 ;;;-----------------------------------------------------------------------------
 ;;; dynamic bindings
 ;;;-----------------------------------------------------------------------------
-
 ;; (defglobal ...) -> <dynamic>
 
 ;; (defun trans-dvar (ID)
@@ -986,7 +980,8 @@
 
 ;; (deftrans (dynamic-setq ID FORM)
 ;;           (make-instance <setq-form>
-;;                          :location (make-instance <var-ref> :var (trans-dvar ID))
+;;                          :location (make-instance <var-ref>
+;;                          :var (trans-dvar ID))
 ;;                          :form (trans FORM)))
 
 ;; (deftrans (dynamic-let VARS BODY)
@@ -1016,37 +1011,37 @@
 
 (deftrans (dynamic ID)
   (make-instance <app>
-                 :function %get-dynamic
-                 :arg-list (list (make-defined-sym ID))))
+    :function %get-dynamic
+    :arg-list (list (make-defined-sym ID))))
 
 (deftrans (dynamic-setq ID FORM)
   (make-instance <app>
-                 :function %set-dynamic
-                 :arg-list (list (make-defined-sym ID)
-                                 (trans FORM))))
+    :function %set-dynamic
+    :arg-list (list (make-defined-sym ID)
+                    (trans FORM))))
 
 (defun trans-dlet (BODY vars)
   (let ((v-current-dynamic (make-instance <local-static>
-                                          :identifier ^current-dynamic))
+                             :identifier ^current-dynamic))
         (v-temp (make-instance <local-static>
-                               :identifier ^tmp-dlet)))
+                  :identifier ^tmp-dlet)))
     (make-instance <let*-form>
-                   :var-list (list v-current-dynamic v-temp)
-                   :init-list (list (make-instance <var-ref> :var %top-dynamic)
-                                    ())
-                   :type-list (list %dynamic %object)
-                   :body
-                   (make-instance <progn-form>
-                                  :form-list
-                                  (append vars
-                                          (list (make-instance <setq-form>
-                                                               :location (make-instance <var-ref> :var v-temp)
-                                                               :form (trans BODY))
-                                                (make-instance <setq-form>
-                                                               :location (make-instance <var-ref> :var %top-dynamic)
-                                                               :form (make-instance <var-ref> :var v-current-dynamic)
-                                                               )
-                                                (make-instance <var-ref> :var v-temp)))))))
+      :var-list (list v-current-dynamic v-temp)
+      :init-list (list (make-instance <var-ref> :var %top-dynamic)
+                       ())
+      :type-list (list %dynamic %object)
+      :body
+      (make-instance <progn-form>
+        :form-list
+        (append vars
+                (list (make-instance <setq-form>
+                        :location (make-instance <var-ref> :var v-temp)
+                        :form (trans BODY))
+                      (make-instance <setq-form>
+                        :location (make-instance <var-ref> :var %top-dynamic)
+                        :form (make-instance <var-ref> :var v-current-dynamic)
+                        )
+                      (make-instance <var-ref> :var v-temp)))))))
 
 (defun trans-dvars (VARLIST)
   (if (null? VARLIST)
@@ -1059,12 +1054,12 @@
             (setq ID (first ID)))
       (cons
        (make-instance <setq-form>
-                      :location (make-instance <var-ref> :var %top-dynamic)
-                      :form (make-instance <app>
-                                           :function %make-dynamic
-                                           :arg-list (list (make-defined-sym ID)
-                                                           (trans EXPR)
-                                                           (make-instance <var-ref> :var %top-dynamic))))
+         :location (make-instance <var-ref> :var %top-dynamic)
+         :form (make-instance <app>
+                 :function %make-dynamic
+                 :arg-list (list (make-defined-sym ID)
+                                 (trans EXPR)
+                                 (make-instance <var-ref> :var %top-dynamic))))
        (trans-dvars MORE)))))
 
 (deftrans (dynamic-let VARS BODY)
@@ -1073,7 +1068,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %define-variable, %define-constant
 ;;;-----------------------------------------------------------------------------
-
 (deftranssyn (%define-variable ID TYPE . INIT)
   (with-defining-form
    (when INIT (setf (cdr (cddr (whole-form)))
@@ -1083,7 +1077,7 @@
 (deftransmod (%define-variable ID TYPE . INIT)
   (add-var
    (make-instance <global-static>
-                  :identifier id)))
+     :identifier id)))
 
 (deftransdef (%define-variable ID TYPE . INIT)
   (with-defining-form
@@ -1102,7 +1096,7 @@
 (deftransmod (%define-constant ID VALUE)
   (add-const
    (make-instance <defined-named-const>
-                  :identifier id)))
+     :identifier id)))
 
 (deftransdef (%define-constant ID VALUE)
   (with-defining-form
@@ -1120,7 +1114,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %declare-external-variable/constant
 ;;;-----------------------------------------------------------------------------
-
 ;; the following function depends on the used compiler and should be placed in a
 ;; machine-dependent module
 (defun make-external-name (name language)
@@ -1144,12 +1137,12 @@
 (deftransmod (%declare-external-variable NAME TYPE . OPTIONS)
   (add-var
    (make-instance <imported-static>
-                  :identifier NAME)))
+     :identifier NAME)))
 
 (deftransmod (%declare-external-constant NAME TYPE . OPTIONS)
   (add-const
    (make-instance <imported-named-const>
-                  :identifier NAME)))
+     :identifier NAME)))
 
 (deftransdef (%declare-external-variable NAME TYPE . OPTIONS)
   (with-defining-form
@@ -1179,7 +1172,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %declare-external-function
 ;;;-----------------------------------------------------------------------------
-
 (defun lambda-specializers (lambda-list)
   ;; extracts a list of classes from a specialized lambda-list
   ;; in case of a rest parameter the list is extended
@@ -1217,7 +1209,8 @@
         (external-name (if (cons? name) (cadr name) name)))
     `(,^%declare-external-function (,name ,result-type) ,args
                                    ,^language ^c
-                                   ,^external-name ,(string-downcase (string external-name)))))
+                                   ,^external-name
+                                   ,(string-downcase (string external-name)))))
 
 (deftransmod (%declare-external-function fun-spec params . options)
   (let ((ID (first fun-spec)))
@@ -1376,17 +1369,17 @@
 
 (defun trans-%let (BODY v)
   (make-instance <let*-form>
-                 :var-list (%vars v)
-                 :init-list (%inits v)
-                 :type-list (%types v)
-                 :body (in-lex-env (append (%vars v) lex-env)
-                                   (trans BODY))))
+    :var-list (%vars v)
+    :init-list (%inits v)
+    :type-list (%types v)
+    :body (in-lex-env (append (%vars v) lex-env)
+                      (trans BODY))))
 
 (defun trans-%vars (varlist vars inits types ecomb)
   (cond ((null? varlist) (list (reverse vars) (reverse inits) (reverse types)))
         (t (trans-%vars (rest varlist)
                         (cons (make-instance <local-static>
-                                             :identifier (first (first varlist)))
+                                :identifier (first (first varlist)))
                               vars)
                         (cons (in-lex-env (funcall ecomb lex-env vars)
                                           (trans (third (first varlist))))
@@ -1417,10 +1410,10 @@
 (deftrans (%select structure class slot-id)
   ;; class should be a binding or a class-object
   (make-instance <get-slot-value>
-                 :instance (trans structure)
-                 :slot (or (~find-slot-description (trans class) slot-id)
-                           (error-invalid-slot-name class slot-id))
-                 ))
+    :instance (trans structure)
+    :slot (or (~find-slot-description (trans class) slot-id)
+              (error-invalid-slot-name class slot-id))
+    ))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TAIL: %setf and %pointer-of
@@ -1433,13 +1426,13 @@
 
 (defmethod trans-%pointer-of ((transformed-entity <var-ref>))
   (make-instance <app>
-                 :function %pointer-of-variable
-                 :arg-list (list transformed-entity)))
+    :function %pointer-of-variable
+    :arg-list (list transformed-entity)))
 
 (defmethod trans-%pointer-of ((transformed-entity <fun>))
   (make-instance <app>
-                 :function %pointer-of-function
-                 :arg-list (list transformed-entity)))
+    :function %pointer-of-function
+    :arg-list (list transformed-entity)))
 
 (defmethod trans-%pointer-of ((transformed-entity <app>))
   (let ((operator (?function transformed-entity)))
@@ -1462,15 +1455,15 @@
 
 (defmethod trans-%setf ((transformed-destination <var-ref>) source)
   (make-instance <setq-form>
-                 :location transformed-destination
-                 :form source))
+    :location transformed-destination
+    :form source))
 
 (defmethod trans-%setf ((transformed-destination <get-slot-value>) source)
   (make-instance <set-slot-value>
-                 :instance (?instance transformed-destination)
-                 :slot (?slot transformed-destination)
-                 :value source
-                 ))
+    :instance (?instance transformed-destination)
+    :slot (?slot transformed-destination)
+    :value source
+    ))
 
 (defmethod trans-%setf ((transformed-destination <app>) source)
   (let ((reader-fun (?function transformed-destination)))
@@ -1493,14 +1486,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; %declare-external-symbol
 ;;;-----------------------------------------------------------------------------
-
 (deftranssyn (%declare-external-symbol id xid) (whole-form))
 
 (deftransdef (%declare-external-symbol id xid)
   (let ((sym (make-instance <imported-sym>
-                            :identifier id
-                            :code-identifier xid)))
+               :identifier id
+               :code-identifier xid)))
     (add-to-symbol-env sym)
     ()))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

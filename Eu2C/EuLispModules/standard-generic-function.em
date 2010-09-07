@@ -131,8 +131,7 @@
 
 (%define-standard-class (<standard-generic-function> <class>)
   <generic-function>
-  ()
-  )
+  ())
 
 (%define-standard-class (<method> <class>)
   <object>
@@ -145,8 +144,7 @@
    (generic-function type <generic-function>
                      accessor method-generic-function))
   representation pointer-to-struct
-  allocation single-card
-  )
+  allocation single-card)
 
 
 (%define-literal-expansion generic-function
@@ -222,9 +220,10 @@
                   (set-generic-fast-class-cache gf class)
                   (set-generic-fast-method-cache gf
                                                  (%cast <object> fun)) ; *TI*
-                  (set-generic-slow-cache gf
-                                          (cons (cons class
-                                                      (%cast <object> fun)) (generic-slow-cache gf)))
+                  (set-generic-slow-cache
+                   gf
+                   (cons (cons class
+                               (%cast <object> fun)) (generic-slow-cache gf)))
                   fun)
           (progn
             (no-applicable-method gf (list class) arg)
@@ -295,8 +294,8 @@
                               (function-address
                                (method-function (%cast <method> method)))))
                         (set-generic-fast-class-cache gf cl-lst)
-                        (set-generic-fast-method-cache gf
-                                                       (%cast <object> fun)) ; *ti*
+                        (set-generic-fast-method-cache
+                         gf (%cast <object> fun)) ; *ti*
                         ((setter cdr) entry
                          (cons (cons class2 (cons cl-lst
                                                   (%cast <object> fun) ; *ti*
@@ -320,10 +319,12 @@
                          (method-function (%cast <method> method)))))
                   (set-generic-fast-class-cache gf cl-lst)
                   (set-generic-fast-method-cache gf (%cast <object> fun)) ; *ti*
-                  (set-generic-slow-cache gf
-                                          (cons (list class1 (cons class2 (cons cl-lst
-                                                                                (%cast <object> fun)))) ; *ti*
-                                                (generic-slow-cache gf)))
+                  (set-generic-slow-cache
+                   gf (cons (list class1
+                                  (cons class2
+                                        (cons cl-lst
+                                              (%cast <object> fun)))) ; *ti*
+                            (generic-slow-cache gf)))
                   fun)
           (progn
             (no-applicable-method gf (list class1 class2) arg1 arg2)
@@ -347,9 +348,11 @@
                    ;; method is applicable
                    (let ((more-specific
                           (if (%eq dclass1 class1)
-                              (if (%member class2 (class-precedence-list dclass2))
+                              (if (%member class2
+                                           (class-precedence-list dclass2))
                                   t ())
-                            (if (%member class1 (class-precedence-list dclass1))
+                            (if (%member class1
+                                         (class-precedence-list dclass1))
                                 t ()))))
                      (if more-specific
                          (special-lookup-fn-2-aux (cdr methods)
@@ -383,6 +386,7 @@
   ;;      (%funcall (%std-discrfun-n gf x y z) x y z))
   ;; or
   ;; (defgeneric gf (x y . z) ... )
+
   ;; => (defun gf (x y . z)
   ;;      (%funcall (%std-discrfun-n gf x y z) x y z))
   ;; discrimination-depth (dt) = number (%signed-word-integer)
@@ -398,7 +402,8 @@
            %signed-word-integer (generic-discrimination-depth gf))
           (classes-of-args <list>
                            (if (%gt discrimination-depth #%i2)
-                               (compute-class-list (%minus discrimination-depth #%i2) args)
+                               (compute-class-list
+                                (%minus discrimination-depth #%i2) args)
                              ()))
           (class-cache <cons> (generic-fast-class-cache gf)))
          ;; result is a <function>

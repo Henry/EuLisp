@@ -20,21 +20,22 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: A part of the EuLisp Meta Object Protocol used at Compile Time
 ;;;  Description:
-;;    This module provides some subclasses of the LZS-class <class-def> for a better
-;;    division of standard-, meta- and tail-classes.
-;;    This module also provides functions of the EuLisp-MOP which are needed by the
-;;    compiler to compute resp. initialize things like classes and generic functions
-;;    at compile time. The domain of these functions are the compile time
+;;    This module provides some subclasses of the LZS-class <class-def> for a
+;;    better division of standard-, meta- and tail-classes.  This module also
+;;    provides functions of the EuLisp-MOP which are needed by the compiler to
+;;    compute resp. initialize things like classes and generic functions at
+;;    compile time. The domain of these functions are the compile time
 ;;    representations (LZS representation) of classes, generic functions etc.
-;;    The naming is done by prefixing the original names of the EuLisp MOP by a tilde.
-;;    For example ~class-precedence-list is a function like
-;;    class-precedence-list of EuLisp but works with LZS representations of classes.
-;;;  Documentation:
+;;    The naming is done by prefixing the original names of the EuLisp MOP by a
+;;    tilde.  For example ~class-precedence-list is a function like
+;;    class-precedence-list of EuLisp but works with LZS representations of
+;;    classes.
 ;;;  Notes:
-;;    1. The arguments of the ~-functions are not exactly the same as for their EuLisp
-;;    counterparts. They differ in structure. For example ~compute-slot-descriptions
-;;    gets a list of slot descriptions instead a list of slot specifications (the list
-;;                                                                                form).
+;;    1. The arguments of the ~-functions are not exactly the same as for their
+;;    EuLisp counterparts. They differ in structure. For example
+;;    ~compute-slot-descriptions gets a list of slot descriptions instead a list
+;;    of slot specifications (the list form).
+;;
 ;;    2. The following activation order must be taken into account during class
 ;;    initailization (read top down, left right):
 ;;    ~compute-representation
@@ -44,8 +45,6 @@
 ;;    ~compute-allocator
 ;;    |
 ;;    ~compute-constructor
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -55,14 +54,18 @@
          lzs
          el2lzs
          el2lzs-error
-         (only (*basic-system*) predicates)
-         (only (remove-duplicates substitute find append mapc make-instance)
+         (only (*basic-system*)
+               predicates)
+         (only (remove-duplicates
+                substitute
+                find
+                append
+                mapc
+                make-instance)
                common-lisp))
-
  syntax (level-1
          apply-standard
          el2lzs)
-
  ;;--- lzs specializations
  expose ((only (<standard-class-def>
                 <abstract-class-def>
@@ -239,13 +242,11 @@
 
 
   (setf (?class %object) %abstract-class)
-  (setf (?class %class) %class)
-  )
+  (setf (?class %class) %class))
 
 ;;;-----------------------------------------------------------------------------
 ;;; General
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~initialize (object initlist))
 
 (defgeneric ~class-of (object))
@@ -256,7 +257,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~class-name (class))
 
 (defgeneric ~class-precedence-list (class))
@@ -276,7 +276,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Slot Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~slot-description-name (slot))
 
 (defgeneric ~slot-description-default-function (slot))
@@ -294,7 +293,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Generic Function Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~generic-function-domain (generic-fun))
 
 (defgeneric ~generic-function-method-class (generic-fun))
@@ -310,7 +308,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Method Introspection
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~method-domain (method-def))
 
 (defgeneric ~method-function (method-def))
@@ -320,7 +317,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class Initialization
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~compute-class-precedence-list (class direct-superclasses))
 
 (defgeneric ~compute-inherited-slot-descriptions (class direct-superclasses))
@@ -348,7 +344,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Inheritance Protocol
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~compute-and-ensure-slot-accessors
   (class effective-slots inherited-slots))
 
@@ -361,7 +356,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Method Lookup and Generic Dispatch
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~set-discriminating-function (generic-fun)
   ;;called after loading application modules and before analyzing functions
   ;;this means that all statically collected methods are stored in the
@@ -382,7 +376,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Introspection of Vector Classes
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric ~vector-class-instance-length (vector-class))
 
 (defgeneric ~vector-class-instance-length-literal (vector-class))
@@ -394,7 +387,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Errors
 ;;;-----------------------------------------------------------------------------
-
 (defun error-redefinition-of-inherited-keyword (slot inherited-slot keyword)
   (frontend-message ^error
                     "Attempt to add ~A as new keyword~

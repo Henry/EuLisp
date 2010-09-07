@@ -20,19 +20,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-std-gf
-
   (import (apply-level-1)
-   syntax (apply-level-1 basic-syntax)
-   export (call-next-method next-method?)
-   )
+   syntax (apply-level-1
+           basic-syntax)
+   export (call-next-method
+           next-method?))
 
 (defun call-next-method ()
   ())
@@ -40,4 +36,6 @@
 (defun next-method? ()
   ())
 
+;;;-----------------------------------------------------------------------------
 ) ; end of module basic-std-gf
+;;;-----------------------------------------------------------------------------
