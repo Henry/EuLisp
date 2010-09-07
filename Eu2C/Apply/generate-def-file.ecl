@@ -829,7 +829,7 @@
 ;;;-----------------------------------------------------------------------------
 ;; (defmacro defclass (class-name superclass slot-descriptions . class-options)
 ;;   `(%define-standard-class
-;;      (,class-name <structure-class>)
+;;      (,class-name <class>)
 ;;      ,(or superclass '<object>)
 ;;      ,slot-descriptions
 ;;      representation pointer-to-struct
@@ -838,7 +838,7 @@
 
 (defun defclass (class-name superclass slot-descriptions . class-options)
   (cons '%define-standard-class
-        (cons (list class-name '<structure-class>)
+        (cons (list class-name '<class>)
               (cons (or superclass '<object>)
                     (cons slot-descriptions
                           (cons 'representation

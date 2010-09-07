@@ -37,13 +37,11 @@
            syntax-0
            tail)
    export (<object>
-           <structure>
            make
            allocate
            initialize
 
            ;; the following must not be visible to the level-0 user
-           <structure-class>
            <slot-description>
            slot-description-name
            slot-description-keyword
@@ -85,22 +83,9 @@
 ;;;-----------------------------------------------------------------------------
 ;;; defclass
 ;;;-----------------------------------------------------------------------------
-(%define-metaclass (<structure-class> <class>)
-  <class>
-  (
-   ;; no additional slots are neccesary
-   ))
-
-(%define-abstract-class (<structure> <abstract-class>)
-  <object>
-  ;; the superclass of all defclass-classes
-  (
-   ;; no predefined slots
-   ))
-
 (defmacro defclass (class-name superclass slot-descriptions . class-options)
   `(%define-standard-class
-     (,class-name <structure-class>)
+     (,class-name <class>)
      ,(or superclass '<object>)
      ,slot-descriptions
      representation pointer-to-struct

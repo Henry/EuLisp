@@ -117,6 +117,9 @@
 *** TODO Consider renaming =labels= -> =flet*=
 *** TODO Consider including =append=
     either in generic form or just for lists and perhaps strings.
+*** TODO Add support for Level-0 style super-class specification
+    If only one super-class is specified allow single-inheritance syntax of
+    specifying the class directly rather than as a list.
 * Youtoo and EuXLisp
 *** DONE Replace =equal= with =binary==
     CLOSED: [2010-05-12 Wed 22:57]
@@ -301,6 +304,9 @@
     for =<vector>=, =<string> and maybe =<list>= in file =ex-expr.em=.  This
     might avoid the generic function call overhead for returning an element of a
     primitive container.
+*** TODO Add support for Level-0 style super-class specification
+    If only one super-class is specified allow single-inheritance syntax of
+    specifying the class directly rather than as a list.
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=
@@ -420,6 +426,11 @@
 *** TODO Create the =control-1= module
     containing the =throw= and =catch= functionality.  Perhaps the macros from
     Youtoo can be re-used for this.
+*** TODO Renaming according to 1.0 proposals
+    + Rename <execution-condition> as <general-condition>
+    + Rename <syntax-error> as <read-error>
+    + Rename <slot-description> as <slot> (and all other such references)
+    + To remove <structure> and <structure-class>
 * Other
 *** DONE Complete emacs mode eulisp-mode.el for EuLisp
     CLOSED: [2010-08-30 Mon 14:20]

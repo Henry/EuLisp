@@ -28,7 +28,7 @@
 ;;    problems with synchronization in case of module compilation
 ;;    4. the allocator function is generated only for representation
 ;;    pointer-to-struct. this should be changed in the future to
-;;    a. allocator only for instances of <structure-class>
+;;    a. allocator only for instances of <class>
 ;;    b. for all classes if this is needed
 ;;;  Requires:
 ;;;  Problems:

@@ -20,10 +20,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: standard module copy
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -34,18 +30,14 @@
            object-0-i
            setf)
    export (deep-copy
-           shallow-copy)
-   )
+           shallow-copy))
 
 ;;;-----------------------------------------------------------------------------
 ;;; deep-copy
 ;;;-----------------------------------------------------------------------------
 (defgeneric deep-copy (object))
 
-(defmethod deep-copy (object)
-  object)
-
-(defmethod deep-copy ((object <structure>))
+(defmethod deep-copy ((object <object>))
   (deep-copy-initialize
    (allocate (%class-of object))
    object
@@ -85,10 +77,7 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric shallow-copy (object))
 
-(defmethod shallow-copy (object)
-  object)
-
-(defmethod shallow-copy ((object <structure>))
+(defmethod shallow-copy ((object <object>))
   (shallow-copy-initialize
    (allocate (%class-of object))
    object

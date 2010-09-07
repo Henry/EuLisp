@@ -18,12 +18,8 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -31,8 +27,6 @@
   (import (eulisp-kernel)
    syntax (eulisp-kernel)
    expose ((only (<object>
-                  <structure>
-                  <structure-class> ;this should not be visible to the level-0-user
                   defclass
                   make
                   allocate

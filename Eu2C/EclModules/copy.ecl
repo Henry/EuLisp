@@ -20,38 +20,28 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: EL-in-CL: standard module copy
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module copy
-
-(import
- (eulisp-kernel
-  (only (deep-copy shallow-copy) list)
-  (only (deep-copy shallow-copy) string)
-  (only (deep-copy shallow-copy) vector)
-  ;;(only (<structure>) telos0)
-  ;;(only (deep-copy shallow-copy) table)
-  )
-
- syntax
- (eulisp-kernel)
-
- export
- (deep-copy shallow-copy)
- )
+(import (eulisp-kernel
+         (only (deep-copy
+                shallow-copy) list)
+         (only (deep-copy
+                shallow-copy) string)
+         (only (deep-copy
+                shallow-copy)
+               vector))
+ syntax (eulisp-kernel)
+ export (deep-copy
+         shallow-copy))
 
 (defmethod deep-copy ((object <object>))
-  ;;(object <structure>) ; write it!!!
   object)
 
 (defmethod shallow-copy ((object <object>))
-  ;;(object <structure>) ; write it !!!
   object)
 
+;;;-----------------------------------------------------------------------------
 #module-end
-
+;;;-----------------------------------------------------------------------------
