@@ -187,7 +187,7 @@
 ;;; Syntax error
 ;;;-----------------------------------------------------------------------------
 ;; used in stream-i---read+formatted-io !!!!!!
-;; (define-condition-class <syntax-error> <condition> )
+;; (define-condition-class <read-error> <condition> )
 
 ;;;-----------------------------------------------------------------------------
 ;;; Thread condition

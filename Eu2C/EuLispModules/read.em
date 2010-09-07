@@ -137,7 +137,7 @@
    export (input
            uninput
            read-line
-           <syntax-error>
+           <read-error>
            read-based-int1 ;; nicht el
            read   ; nicht in el0.99
            ;; read-unit peek-unit ; nicht in el0.99
@@ -146,9 +146,9 @@
 ;; es fehlt noch eine ausfuehrliche fehlerbehandlung !!
 
 ;;;----------------------------------------------------------------------------
-;;; <syntax-error>
+;;; <read-error>
 ;;;----------------------------------------------------------------------------
-(%define-standard-class (<syntax-error> <class> )
+(%define-standard-class (<read-error> <class> )
   <condition>
   (
    (stream type <object> default () accessor stream
@@ -244,9 +244,9 @@
   ;;         (print (%cast <object> stream))
   (let ((expr (read-expression1 stream)))
     (if (eq expr (%cast <object> $closed-bracket))
-        (syntax-error stream #%i12)
+        (read-error stream #%i12)
       (if (eq expr (%cast <object> $point))
-          (syntax-error stream #%i13)
+          (read-error stream #%i13)
         expr))))
 
 (%define-function (read-expression1 <object>)
@@ -304,17 +304,17 @@
             (scan-float *sign* (%cast <string-stack> *buffer-2*))
           (if (%eq tok #%i12)
               (scan-float *sign* (%cast <string-stack> *buffer-2*))
-            (syntax-error stream (%minus tok #%i20)
+            (read-error stream (%minus tok #%i20)
                           ;; notwendig,
                           ;; da TI
                           ;; %pointer
                           ;; findet?!
                           )))))))
 
-(%define-function (syntax-error <null>)
+(%define-function (read-error <null>)
   ((stream <stream>)
    (err-nr %signed-word-integer))
-  (error "Syntax Error" <syntax-error>
+  (error "Syntax Error" <read-error>
          'stream stream
          'error-number
          (make-fpint err-nr))
@@ -387,7 +387,7 @@
     (if (eq expr (%cast <object> $closed-bracket))
         ()
       (if (eq expr (%cast <object> $point))
-          (syntax-error stream #%i13)
+          (read-error stream #%i13)
         (cons expr (read-list1 stream))))))
 
 (%define-function (read-list1 <object>)
@@ -398,13 +398,13 @@
       (if (eq expr (%cast <object> $point))
           (let ((last-expr (read-expression1 stream)))
             (if (eq last-expr (%cast <object> $closed-bracket))
-                (syntax-error stream #%i14)
+                (read-error stream #%i14)
               (if (eq last-expr (%cast <object> $point))
-                  (syntax-error stream #%i15)
+                  (read-error stream #%i15)
                 (let ((bracket (read-expression1 stream)))
                   (if (eq bracket (%cast <object> $closed-bracket))
                       last-expr
-                    (syntax-error stream #%i16))))))
+                    (read-error stream #%i16))))))
         (cons expr (read-list1 stream))))))
 
 (%define-function (read-comment <null>)
@@ -428,7 +428,7 @@
                      (read-character stream))
             (read-extended-extension stream #%i0)
             ;;           (read-based-int stream)
-            ;;           (syntax-error stream #%i15)
+            ;;           (read-error stream #%i15)
             ))))
 
 (%define-function (read-vector <object>)
@@ -442,7 +442,7 @@
                  ;;                      (make-swi
                  (%pair-length lv1)))   ;;)
          #%I0 lv1)
-      (syntax-error stream #%i15))))
+      (read-error stream #%i15))))
 
 (%define-function (read-character <character>)
   ((stream <stream>))
@@ -489,7 +489,7 @@
                 ch)
             (if (%eq tok #%i9)
                 (convert-name-char-code stream (%cast <string-stack> *buffer-1*))
-              (progn (syntax-error stream #%i17)
+              (progn (read-error stream #%i17)
                      $char-control-extension))))))
 
 (%define-function (convert-name-char-code %signed-word-integer)
@@ -526,7 +526,7 @@
       (if (%eq #%i0 (strcmp string (%literal %string () "tab"))) #%i9
         (if (%eq #%i0 (strcmp string (%literal %string () "space"))) #%i32
           (if (%eq #%i0 (strcmp string (%literal %string () "vertical-tab"))) #%i11
-            (progn (syntax-error stream #%i17) $char-control-extension)))))))
+            (progn (read-error stream #%i17) $char-control-extension)))))))
 
 (%define-function (read-char-escape-hex %signed-word-integer)
   ((stream <stream>)
@@ -552,7 +552,7 @@
            (if (%eq ch $char-single-escape)
                (read-string-escape stream)
              (if (%eq ch $char-eof)
-                 (progn (syntax-error stream #%i13)
+                 (progn (read-error stream #%i13)
                         (push-buffer #%i0 (%cast <string-stack> *buffer-2*))
                         (scan-string (%cast <string-stack> *buffer-2*)))
                (progn (push-buffer ch (%cast <string-stack> *buffer-2*))
@@ -615,7 +615,7 @@
             (if (%eq ch $char-string-hex-l) ; x
                 (read-string-escape-hex stream #%i0 #%i0)
               ;; (if (%eq ch $char-eof) or other chars
-              (progn (syntax-error stream #%i13)
+              (progn (read-error stream #%i13)
                      (push-buffer $char-newline (%cast <string-stack> *buffer-2*))
                      (read-string stream)) )))))))
 
@@ -732,7 +732,7 @@
                                        (function (get-dispatch-macro-character
                                                   #\# subchar)))
                                   (if (null? function)
-                                      (syntax-error stream #%i20)
+                                      (read-error stream #%i20)
                                     (function stream subchar)))))))))))))))
 
 (%define-function (read-based-int <integer>)
@@ -741,7 +741,7 @@
     (if (int? obj)
         obj
       (progn
-        (syntax-error stream #%i20)
+        (read-error stream #%i20)
         0))))
 
 (%define-function (read-based-int2 <integer>)
@@ -749,7 +749,7 @@
    (base %signed-word-integer))
   (if (%lt base #%i37)
       (read-based-int1 stream base #%i0)
-    (progn (syntax-error stream #%i20) 0)))
+    (progn (read-error stream #%i20) 0)))
 
 (%define-function (read-based-int1 <integer>)
   ((stream <stream>)

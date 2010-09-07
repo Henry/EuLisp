@@ -51,7 +51,7 @@
          <conversion-condition>
          <no-converter>
          <stream-condition>
-         <syntax-error>
+         <read-error>
          <thread-condition>
          <telos-condition>
          <no-next-method>
@@ -81,7 +81,7 @@
 (defcondition <conversion-condition>(<condition>)())
 (defcondition <no-converter>(<conversion-condition>)())
 (defcondition <stream-condition>(<condition>)())
-(defcondition <syntax-error>(<condition>)())
+(defcondition <read-error>(<condition>)())
 (defcondition <thread-condition>(<condition>)())
 (defcondition <telos-condition>(<condition>)())
 (defcondition <no-next-method>(<telos-condition>)())
