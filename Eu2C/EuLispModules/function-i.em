@@ -37,8 +37,7 @@
            function-arg-descr
            function-name
            setter
-           make-function)
-   )
+           make-function))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <function>

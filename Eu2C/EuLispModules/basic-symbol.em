@@ -18,28 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-symbol
-
   (import (apply-level-2)
-
    syntax (apply-level-2)
-
    export (<symbol>
            symbol?
            make-symbol-without-copy
            #+(:symbol-with-plist :t)  symbol-plist
            *symbol-table*
-           add-symbol
-           ))
+           add-symbol))
 
 ;;;-----------------------------------------------------------------------------
 ;;; <symbol> and symbol?
@@ -56,8 +48,6 @@
   constructor (make-symbol-without-copy name)
   predicate symbol?)
 
-
-
 #-(:symbol-with-plist :t)
 (%define-literal-expansion symbol
   `(%literal ,<symbol> name (%literal ,%string () ,name) )
@@ -70,12 +60,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;; the symbol table
 ;;;-----------------------------------------------------------------------------
-
 (deflocal *symbol-table* ())
 
 (%define-variable symbol-table-initialization-function %function)
-;; this variable is set by the main initialization function to a function calling
-;; add-symbol for every static symbol
+;; this variable is set by the main initialization function to a function
+;; calling add-symbol for every static symbol
 
 (%funcall symbol-table-initialization-function)
 ;; after this call the symbol table is filled with the static symbols and may be
@@ -89,7 +78,6 @@
 (%annotate-binding symbol-table-initialization-function
   is-special-binding symtab-initfun-var)
 
+;;;-----------------------------------------------------------------------------
 ) ;end of basic-symbol.am
-
-
-
+;;;-----------------------------------------------------------------------------
