@@ -148,7 +148,7 @@ static NTDEF *nptr, ntab[] =
     {"vector?", OP_VECTORP, 1},
     {"append", OP_APPEND, -2},
     {"list", OP_LIST, -2},
-    {"list-size", OP_LENGTH, 1},
+    {"length", OP_LENGTH, 1},
     {"reverse", OP_REVERSE, 1},
     {"caar", OP_CAAR, 1},
     {"cadr", OP_CADR, 1},

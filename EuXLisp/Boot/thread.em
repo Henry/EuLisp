@@ -72,7 +72,7 @@
 
 (define-method (generic-write (thr <thread>) stream)
                (let ((self (get-self thr))
-                     (locks (list-size (get-locks thr)))
+                     (locks (length (get-locks thr)))
                      (signals (get-signals thr)))
                  (%display "#<" stream)
                  (display-class-name thr stream)
@@ -146,7 +146,7 @@
                (setq r-t-r-q (nconc r-t-r-q (list thread))))
               (else
                (insert-thread-in-queue      ; not at start of queue
-                r-t-r-q (cdr r-t-r-q) thread (random (list-size r-t-r-q))))))
+                r-t-r-q (cdr r-t-r-q) thread (random (length r-t-r-q))))))
 
 (define (insert-thread-in-queue before after thread n)
         (if (= n 0)
@@ -460,7 +460,7 @@
 (define (release-locks thread)
         (let ((locks (get-locks thread)))
           (if locks
-              (let ((len (list-size locks)))
+              (let ((len (length locks)))
                 (for-each unlockit (get-locks thread))
                 (%display ";; warning: thread finished holding ")
                 (%display len)

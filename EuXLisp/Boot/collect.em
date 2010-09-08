@@ -343,7 +343,7 @@
                (reverse-list l))
 
 (define-method (size (l <list>))
-               (list-size l))
+               (length l))
 
 ;; strings
 (define-method (collection? (l <string>)) t)
