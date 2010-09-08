@@ -70,27 +70,27 @@
 
 #+ :word32 (define-machine-data-types
              (%byte
-              :byte-length 1
+              :byte-size 1
               :alignment 1
               )
 
              (%half-word
-              :byte-length 2
+              :byte-size 2
               :alignment 2
               )
 
              (%word
-              :byte-length 4
+              :byte-size 4
               :alignment 4
               )
 
              (%double-word
-              :byte-length 8
+              :byte-size 8
               :alignment 8
               )
 
              (%quad-word
-              :byte-length 16
+              :byte-size 16
               :alignment 8
               )
              )
@@ -98,19 +98,19 @@
 
 #+ :word64 (define-machine-data-types
              (%byte
-              :byte-length 1
+              :byte-size 1
               :alignment 1)
 
              (%half-word
-              :byte-length 4
+              :byte-size 4
               :alignment 4)
 
              (%word
-              :byte-length 8
+              :byte-size 8
               :alignment 8)
 
              (%double-word
-              :byte-length 16
+              :byte-size 16
               :alignment 8)
              )
 

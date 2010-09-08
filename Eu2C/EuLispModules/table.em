@@ -33,7 +33,7 @@
            (only (eql)
                  compare)
            basic-list
-           (only (%list-length)
+           (only (%list-size)
                  basic-list-0)
            table-aux)
    syntax (tail
@@ -60,10 +60,10 @@
 
 (defgeneric (converter <table>) (object))
 
-;;  (%define-function (%proper-list-length %signed-word-integer)
+;;  (%define-function (%proper-list-size %signed-word-integer)
 ;;                    ((l <list>))
 ;;    (if l
-;;      (%plus #%i1 (%proper-list-length (cdr l)))
+;;      (%plus #%i1 (%proper-list-size (cdr l)))
 ;;      #%i0))
 
 
@@ -126,16 +126,16 @@
 
 ;;  (defun make-table ini-opts
 ;;    ;comparator fill-value hash-function
-;;    (%let ((rest-list-length %signed-word-integer
-;;                             (%list-length ini-opts))
+;;    (%let ((rest-list-size %signed-word-integer
+;;                             (%list-size ini-opts))
 ;;           (comparator <function> eql)
 ;;           (fill-value <object> ())
 ;;           (hash-fct <function> hash)
 ;;           )
-;;      (cond ((%eq rest-list-length #%i0) t)
-;;            ((%eq rest-list-length #%i1)
+;;      (cond ((%eq rest-list-size #%i0) t)
+;;            ((%eq rest-list-size #%i1)
 ;;             (setq comparator (car ini-opts)))
-;;            ((%eq rest-list-length #%i2)
+;;            ((%eq rest-list-size #%i2)
 ;;             (setq comparator (car ini-opts))
 ;;             (setq fill-value (car (cdr ini-opts))))
 ;;            (t
@@ -214,7 +214,7 @@
           (hash-list <list>
                      (table-vector-ref (?table-vector table) hash-index))
           (cmp <function> (?comparator table)) ;function for funcall
-          (hash-list-len %signed-word-integer (%pair-length hash-list)))
+          (hash-list-len %signed-word-integer (%pair-size hash-list)))
          (cond ((%eq #%i0 hash-list-len) ())   ;the alist contains nothing, do nothing
                ((%eq #%i1 hash-list-len)       ;the alist contains only 1 element
                 (if (eq cmp eq)

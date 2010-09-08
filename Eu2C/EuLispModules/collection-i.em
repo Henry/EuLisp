@@ -41,11 +41,11 @@
            syntax-0
            setf)
    export (primitive-setter-string-ref
-           primitive-string-length
+           primitive-string-size
            primitive-string-ref
            string-ref
            string-ref-u
-           string-length
+           string-size
            list?
            nconc
            and-aux))
@@ -66,10 +66,10 @@
   (%setf (%extract (string-pointer string) n) value))
 
 
-;;  (defun string-length (string)
+;;  (defun string-size (string)
 ;;    (make-fpint (strlen (string-pointer string))))
 
-(%define-function (primitive-string-length %unsigned-word-integer)
+(%define-function (primitive-string-size %unsigned-word-integer)
   ((string <string>))
   (%cast %unsigned-word-integer (strlen (string-pointer string))))
 
@@ -96,7 +96,7 @@
     (%cast %signed-word-integer
            (%extract (string-pointer string) n)))))
 
-(defun string-length (string)
+(defun string-size (string)
   (make-fpint (strlen (string-pointer string))))
 
 (defun string-ref (string n)
@@ -114,10 +114,10 @@
         t
       ())))
 
-;;(%define-function (%proper-list-length %signed-word-integer)
+;;(%define-function (%proper-list-size %signed-word-integer)
 ;;                    ((l <list>))
 ;;    (if l
-;;      (%plus #%i1 (%proper-list-length (cdr l)))
+;;      (%plus #%i1 (%proper-list-size (cdr l)))
 ;;      #%i0))
 
 (defun nconc (liste element)

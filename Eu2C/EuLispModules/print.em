@@ -82,7 +82,7 @@
                   <character>)
                  character)
            (only (vector?
-                  primitive-vector-length
+                  primitive-vector-size
                   primitive-vector-ref
                   <vector>)
                  vector)
@@ -374,7 +374,7 @@
   ((object <vector>)
    (stream <stream>))
   (%write-string stream (%literal %string () "#("))
-  (%let ((length %unsigned-word-integer (primitive-vector-length object)))
+  (%let ((length %unsigned-word-integer (primitive-vector-size object)))
         (if (%neq length #%I0)
             (progn
               (generic-prin (primitive-vector-ref object #%I0) stream)
@@ -641,7 +641,7 @@
   ((object <vector>)
    (stream <stream>))
   (%write-string stream (%literal %string () "#("))
-  (%let ((length %unsigned-word-integer (primitive-vector-length object)))
+  (%let ((length %unsigned-word-integer (primitive-vector-size object)))
         (if (%neq length #%I0)
             (progn
               (generic-write (primitive-vector-ref object #%I0) stream)

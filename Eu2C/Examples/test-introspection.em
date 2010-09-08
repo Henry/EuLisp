@@ -43,7 +43,8 @@
   ((cl <class>))
   (%select cl <class> class-precedence-list))
 
-(print (class-precedence-list <null>))
+(print (class-precedence-list <list>))
+(print <list>)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

@@ -58,9 +58,9 @@
     <address-expr>
     ?alignment
     ?allocation
-    ?byte-length
-    ?byte-length-of-instance
-    ?byte-length-as-component
+    ?byte-size
+    ?byte-size-of-instance
+    ?byte-size-as-component
     ?mm-type
     ?mm-card
 
@@ -70,9 +70,9 @@
 
 (defgeneric ?alignment (obj))
 (defgeneric ?allocation (obj))
-(defgeneric ?byte-length (obj))
-(defgeneric ?byte-length-as-component (pobj))
-(defgeneric ?byte-length-of-instance (obj))
+(defgeneric ?byte-size (obj))
+(defgeneric ?byte-size-as-component (pobj))
+(defgeneric ?byte-size-of-instance (obj))
 (defgeneric ?mm-type (obj))
 (defgeneric ?mm-card(obj))
 
@@ -82,7 +82,7 @@
 (defstandardclass <%representation> ()
   (alignment :accessor :initarg)    ;alignment (of all types)
 
-  (byte-length :accessor :initarg)  ;length (in bytes) of all types
+  (byte-size :accessor :initarg)  ;length (in bytes) of all types
 
   (allocation :accessor :initarg :initform ())  ;slots
   (mm-type  :accessor :initarg :initform ())      ;for the
@@ -133,7 +133,7 @@
 
 (defstandardclass <%pointer-to-void> (<%pointer>)
   (alignment :initform 4)
-  (byte-length :initform 4)
+  (byte-size :initform 4)
   )
 
 (defstandardclass <%direct> (<%representation>))

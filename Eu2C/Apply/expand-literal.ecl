@@ -79,10 +79,10 @@
             (remove-if-not #'fun? (?value-list lit)))
           *literals*))
 
-(defmethod ?byte-length-as-component ((pobj t))
+(defmethod ?byte-size-as-component ((pobj t))
   (if (expand-literal pobj)
       (if (?class (expand-literal pobj))
-          (?byte-length-as-component (?class (expand-literal pobj)))
+          (?byte-size-as-component (?class (expand-literal pobj)))
         4)
     4))
 

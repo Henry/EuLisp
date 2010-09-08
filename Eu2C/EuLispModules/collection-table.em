@@ -45,7 +45,7 @@
     (only (<string>)
           string-ii)
     (only (<vector>
-           primitive-vector-length
+           primitive-vector-size
            primitive-vector-ref)
           vector)
     (only (element size) collection-vector)
@@ -90,7 +90,7 @@
 
 
 
-;;;(deflocal standard-length-of-hash-table 4096) ;import from table-aux
+;;;(deflocal standard-size-of-hash-table 4096) ;import from table-aux
 
 
 (defun contains-seqs (lst)
@@ -147,15 +147,15 @@
 
 (defmethod any? ((function <function>)
                  (table <table>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (any?-with-one-table function
                                     table
                                     #%I0
                                     (%cast %unsigned-word-integer
                                            (make-swi $standard-table-size))))
-              ;;            ((%eq rest-list-length #%i1)
+              ;;            ((%eq rest-list-size #%i1)
               ;;             (any?-with-two-args function table (car more-collections)))
               (t (any?-collection function table more-collections)))
         ))
@@ -205,11 +205,11 @@
 
 
 ;;    (defmethod concatenate ((table <table>) . more-collections)
-;;      (%let ((rest-list-length %signed-word-integer
-;;                               (%list-length more-collections)))
-;;        (cond ((%eq rest-list-length #%i0)
+;;      (%let ((rest-list-size %signed-word-integer
+;;                               (%list-size more-collections)))
+;;        (cond ((%eq rest-list-size #%i0)
 ;;               table)
-;;              ((%eq rest-list-length #%i1)
+;;              ((%eq rest-list-size #%i1)
 ;;               (concat-with-two-args table (car more-collections)))
 ;;              (t (concat-collection table more-collections)))
 ;;        )
@@ -217,11 +217,11 @@
 
 
 (defmethod concatenate ((table <table>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                table)
-              ;;              ((%eq rest-list-length #%i1)
+              ;;              ((%eq rest-list-size #%i1)
               ;;               (concat-with-two-args table (car more-collections)))
               (t (concat-collection-tab table more-collections)))
         )
@@ -290,15 +290,15 @@
 
 (defmethod do ((function <function>)
                (table <table>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (do-with-one-table function
                                   table
                                   #%I0
                                   (%cast %unsigned-word-integer
                                          (make-swi $standard-table-size))))
-              ;;            ((%eq rest-list-length #%i1)
+              ;;            ((%eq rest-list-size #%i1)
               ;;             (do-with-two-args function table (car more-collections)))
               (t (do-collection function table more-collections)))
         ))
@@ -390,13 +390,13 @@
 
 (defmethod fill ((table <table>)
                  (object <object>) . keys)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length keys)))
-        (if (%eq #%i0 rest-list-length)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size keys)))
+        (if (%eq #%i0 rest-list-size)
             (progn
               (print "no keys for table ")
               ())
-          (if (%eq #%i1 rest-list-length)
+          (if (%eq #%i1 rest-list-size)
               (fill-table-aux table object (car keys))
             (print "to many arguments for table"))))
   )
@@ -420,16 +420,16 @@
   (fill-table-aux-v table
                     object
                     keys-of-collection
-                    (primitive-vector-length keys-of-collection)
+                    (primitive-vector-size keys-of-collection)
                     #%I0))
 
 (%define-function (fill-table-aux-v <object>)
   ((table <table>)
    (object <object>)
    (keys-of-collection <vector>)
-   (max-length %unsigned-word-integer)
+   (max-size %unsigned-word-integer)
    (index %unsigned-word-integer))
-  (if (%lt index max-length)
+  (if (%lt index max-size)
       (progn (setter-table-ref
               table
               (primitive-vector-ref keys-of-collection index)
@@ -437,7 +437,7 @@
              (fill-table-aux-v table
                                object
                                keys-of-collection
-                               max-length
+                               max-size
                                (%plus index #%I1)))
     ()))
 
@@ -446,16 +446,16 @@
 
 (defmethod map ((function <function>)
                 (table <table>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (map-with-one-table function
                                    table
                                    (make-table eql () hash)
                                    #%I0
                                    (%cast %unsigned-word-integer
                                           (make-swi $standard-table-size))))
-              ;;            ((%eq rest-list-length #%i1)
+              ;;            ((%eq rest-list-size #%i1)
               ;;             (map-with-two-args function table (car more-collections) ()))
               (t (map-collection function table more-collections)))
         ))
@@ -568,7 +568,7 @@
 (defmethod size ((table <table>))
   (make-fpint
    (%cast %signed-word-integer
-          (dotimes-with-length
+          (dotimes-with-size
            #%I0
            (%cast %unsigned-word-integer
                   (make-swi $standard-table-size))
@@ -577,19 +577,19 @@
 
 
 
-(%define-function (dotimes-with-length %unsigned-word-integer)
+(%define-function (dotimes-with-size %unsigned-word-integer)
   ((index %unsigned-word-integer)
    (upper-limit %unsigned-word-integer)
    (table <table>)
    (leng %unsigned-word-integer))
   (if (%ge index upper-limit)
       leng
-    (dotimes-with-length
+    (dotimes-with-size
      (%plus #%I1 index)
      upper-limit table
      (%plus leng
             (%cast %unsigned-word-integer
-                   (%pair-length (table-vector-ref (?table-vector table) index)))))))
+                   (%pair-size (table-vector-ref (?table-vector table) index)))))))
 
 
 

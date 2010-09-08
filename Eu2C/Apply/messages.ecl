@@ -42,7 +42,7 @@
 
 (defglobal *current-module* ())
 
-(deflocal *line-length* 75)
+(deflocal *line-size* 75)
 
 (defun write-message (key message . args)
   (write-msg key message args))
@@ -63,11 +63,11 @@
                   "~%--- ~A ~V{-~}~%~
                ~@[--- in form ~((~2{~A ~} ...)~)~%~]"
                   header
-                  (- *line-length* (length header) 5)
+                  (- *line-size* (length header) 5)
                   '(())
                   (dynamic current-defining-form)
                   )))
   (format *standard-output* "~?" message args)
-  (when key (format *standard-output* "~%~V{-~}" *line-length* '(()))))
+  (when key (format *standard-output* "~%~V{-~}" *line-size* '(()))))
 
 #module-end

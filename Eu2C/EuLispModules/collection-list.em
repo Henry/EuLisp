@@ -102,11 +102,11 @@
 
 (defmethod any? ((function <function>)
                  (lst <cons>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (any?-with-one-list function lst))
-              ((%eq rest-list-length #%i1)
+              ((%eq rest-list-size #%i1)
                (any?-with-two-args function lst (car more-collections)))
               (t (any?-collection function lst more-collections)))
         ))
@@ -142,13 +142,13 @@
 ;;; concatenate
 ;;;-----------------------------------------------------------------------------
 (defmethod concatenate ((lst <list>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (let ((result (cons 1 ())))
                  (concat-with-one-list lst result)
                  (cdr result)))
-              ((%eq rest-list-length #%i1)
+              ((%eq rest-list-size #%i1)
                (concat-with-two-args lst (car more-collections)))
               (t (concat-collection lst more-collections)))
         ))
@@ -196,11 +196,11 @@
 
 (defmethod do ((function <function>)
                (lst <cons>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (do-with-one-list function lst))
-              ((%eq rest-list-length #%i1)
+              ((%eq rest-list-size #%i1)
                (do-with-two-args function lst (car more-collections)))
               (t (do-collection function lst more-collections)))
         ))
@@ -262,13 +262,13 @@
 
 (defun element-list (lst key)
   (%let ((swi-key %signed-word-integer (make-swi key)))
-        (if (test-list-index (%pair-length lst) swi-key)
+        (if (test-list-index (%pair-size lst) swi-key)
             (car (element-list-aux lst swi-key #%i0))
           ())))
 
 (defun setter-element-list (lst key value)
   (%let ((swi-key %signed-word-integer (make-swi key)))
-        (if (test-list-index (%pair-length lst) swi-key)
+        (if (test-list-index (%pair-size lst) swi-key)
             (setf (car (element-list-aux lst swi-key #%i0))
                   value)
           ())))
@@ -293,12 +293,12 @@
 
 (defmethod fill ((lst <list>)
                  (object <object>) . keys)
-  (%let ((list-len %signed-word-integer (%pair-length lst))
-         (rest-list-length %signed-word-integer
-                           (%list-length keys)))
-        (if (%eq #%i0 rest-list-length)
+  (%let ((list-len %signed-word-integer (%pair-size lst))
+         (rest-list-size %signed-word-integer
+                           (%list-size keys)))
+        (if (%eq #%i0 rest-list-size)
             (fill-list-aux lst object (%minus list-len #%i1) #%i0)
-          (if (%eq #%i1 rest-list-length)
+          (if (%eq #%i1 rest-list-size)
               (error "fill: collection does not have natural order"
                      <conversion-condition>)
             (%let ((start %signed-word-integer (make-swi (car keys)))
@@ -341,13 +341,13 @@
 
 (defmethod map ((function <function>)
                 (lst <cons>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (let ((result (cons 1 ())))
                  (map-with-one-list function lst result)
                  (cdr result)))
-              ((%eq rest-list-length #%i1)
+              ((%eq rest-list-size #%i1)
                (map-with-two-args function lst (car more-collections) ())
 
                ;;            (let ((result (cons 1 ())))
@@ -493,7 +493,7 @@
 ;;; size
 ;;;-----------------------------------------------------------------------------
 (defmethod size ((lst <cons>))
-  (make-fpint (%pair-length lst)))
+  (make-fpint (%pair-size lst)))
 
 (defmethod size ((lst <null>))
   0)

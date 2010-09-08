@@ -134,7 +134,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Introspection of Vector Classes
 ;;;-----------------------------------------------------------------------------
-(defmethod ~vector-class-instance-length-literal (vector-class)
+(defmethod ~vector-class-instance-size-literal (vector-class)
   (let ((initfun (~slot-default-function
                   (~find-slot vector-class ^length))))
     (if (null? initfun)
@@ -142,7 +142,7 @@
       (init-fun-value (?body initfun) vector-class))))
 
 
-(defmethod ~vector-class-instance-length (vector-class)
+(defmethod ~vector-class-instance-size (vector-class)
   (let ((initfun (~slot-default-function
                   (~find-slot vector-class ^length))))
     (if (null? initfun)

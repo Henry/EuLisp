@@ -353,7 +353,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;;
 ;;;-----------------------------------------------------------------------------
-(defun reduce-length (string)
+(defun reduce-size (string)
   (if (and *max-identifier-size*
            (> (length string) *max-identifier-size*))
       (subseq string 0 *max-identifier-size*)
@@ -412,7 +412,7 @@
   (make-c-identifier (format () "~{~A~^_~}" constituent-list)))
 
 (defmethod make-c-identifier ((identifier <string>))
-  (reduce-length
+  (reduce-size
    (make-c-unique
     (delete-non-c-id-chars
      (substitute-with-underscore

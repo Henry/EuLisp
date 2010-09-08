@@ -59,7 +59,7 @@
          (only (<%pointer-to-vector>
                 <%pointer-to-struct>
                 <%machine-type>
-                ?actually-byte-length)
+                ?actually-byte-size)
                machine-description)
          asm-ops)
  syntax (level-0
@@ -139,7 +139,7 @@
   (with-new-alignment
    ;;write length in bytes
    (.word (* (car (?value-list literal-instance))
-             (?actually-byte-length (?representation
+             (?actually-byte-size (?representation
                                      (~vector-class-element-type (?class literal-instance))))))
    ;;write class label
    (.word (extract-class-label-from-literal literal-instance)))

@@ -52,7 +52,7 @@
            collection-generic
            collection-aux
            (only (primitive-setter-string-ref
-                  primitive-string-length
+                  primitive-string-size
                   primitive-string-ref
                   string-ref
                   string-ref-u)
@@ -83,7 +83,7 @@
                        (object <object>)
                        (str <string>))
   (map-accumulate function str object
-                  (primitive-string-length str) #%I0))
+                  (primitive-string-size str) #%I0))
 
 (%define-function (map-accumulate <object>)
   ((function <function>)
@@ -121,7 +121,7 @@
       ()
     (map-accumulate function str
                     (string-ref-u str #%I0)
-                    (primitive-string-length str)
+                    (primitive-string-size str)
                     #%I1)))
 
 ;;;-----------------------------------------------------------------------------
@@ -133,13 +133,13 @@
 
 (defmethod any? ((function <function>)
                  (str <string>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (any?-with-one-string function str #%I0
                                      (%cast %unsigned-word-integer
                                             (strlen (string-pointer str)))))
-              ((%eq rest-list-length #%i1)
+              ((%eq rest-list-size #%i1)
                (any?-with-two-args function str (car more-collections)))
               (t (any?-collection function str more-collections)))
         ))
@@ -159,33 +159,33 @@
   ((function <function>)
    (str1 <string>)
    (str2 <string>))
-  (%let*((str-length1 %unsigned-word-integer
+  (%let*((str-size1 %unsigned-word-integer
                       (%cast %unsigned-word-integer
                              (strlen (string-pointer str1))))
-         (str-length2 %unsigned-word-integer
+         (str-size2 %unsigned-word-integer
                       (%cast %unsigned-word-integer
                              (strlen (string-pointer str2))))
-         (min-length %unsigned-word-integer
-                     (if (%le str-length1 str-length2)
-                         str-length1
-                       str-length2)))
+         (min-size %unsigned-word-integer
+                     (if (%le str-size1 str-size2)
+                         str-size1
+                       str-size2)))
         (any?-with-two-strings function
                                str1
                                str2
-                               min-length
+                               min-size
                                #%I0)))
 
 (%define-function (any?-with-two-strings <object>)
   ((function <function>)
    (str1 <string>)
    (str2 <string>)
-   (min-length %unsigned-word-integer)
+   (min-size %unsigned-word-integer)
    (index %unsigned-word-integer))
-  (if (%lt index min-length)
+  (if (%lt index min-size)
       (if (function (string-ref-u str1 index)
                     (string-ref-u str2 index))
           t
-        (any?-with-two-strings function str1 str2 min-length
+        (any?-with-two-strings function str1 str2 min-size
                                (%plus index #%I1)))
     ()))
 
@@ -213,18 +213,18 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmethod concatenate ((str <string>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (string-append str "")
-               ;;             (%let ((str-length %unsigned-word-integer
-               ;;                                (primitive-string-length str)))
+               ;;             (%let ((str-size %unsigned-word-integer
+               ;;                                (primitive-string-size str)))
                ;;               (concat-with-one-string str #%I0
-               ;;                                       str-length
+               ;;                                       str-size
                ;;                                       (make-string
-               ;;                                        str-length)))
+               ;;                                        str-size)))
                )
-              ((%eq rest-list-length #%i1)
+              ((%eq rest-list-size #%i1)
                (concat-with-two-args str (car more-collections)))
               (t (concat-collection str more-collections)))
         ))
@@ -246,16 +246,16 @@
 
 ;;  (%define-function (concat-next-string <string>)
 ;;                    ((src-str <string>)
-;;                     (src-length %unsigned-word-integer)
+;;                     (src-size %unsigned-word-integer)
 ;;                     (index %unsigned-word-integer)
 ;;                     (start %unsigned-word-integer)
 ;;                     (result <string>))
-;;    (if (%lt index src-length)
+;;    (if (%lt index src-size)
 ;;      (progn (primitive-setter-string-ref
 ;;              result
 ;;              start
 ;;              (primitive-string-ref src-str index))
-;;             (concat-next-string src-str src-length
+;;             (concat-next-string src-str src-size
 ;;                                 (%plus index #%I1)
 ;;                                 (%plus start #%I1)
 ;;                                 result))
@@ -268,28 +268,28 @@
   (string-append str1 ""))
 
 ;;  (defmethod concat-with-two-args ((str1 <string>) (str2 <string>))
-;;    (%let ((str-length1 %unsigned-word-integer
-;;                         (primitive-string-length str1))
-;;            (str-length2 %unsigned-word-integer
-;;                         (primitive-string-length str2)))
+;;    (%let ((str-size1 %unsigned-word-integer
+;;                         (primitive-string-size str1))
+;;            (str-size2 %unsigned-word-integer
+;;                         (primitive-string-size str2)))
 ;;           (concat-with-two-strings
 ;;            str1
-;;            str-length1
+;;            str-size1
 ;;            str2
-;;            str-length2
+;;            str-size2
 ;;            #%I0
 ;;            (make-string
-;;             (%plus str-length1 str-length2)))))
+;;             (%plus str-size1 str-size2)))))
 
 ;;  (%define-function (concat-with-two-strings <object>)
 ;;                    ((str1 <string>)
-;;                     (str-length1 %unsigned-word-integer)
+;;                     (str-size1 %unsigned-word-integer)
 ;;                     (str2 <string>)
-;;                     (str-length2 %unsigned-word-integer)
+;;                     (str-size2 %unsigned-word-integer)
 ;;                     (index %unsigned-word-integer)
 ;;                     (result-string <string>))
-;;    (concat-with-one-string str1 index str-length1 result-string)
-;;    (concat-next-string str2 str-length2 #%I0 str-length1
+;;    (concat-with-one-string str1 index str-size1 result-string)
+;;    (concat-next-string str2 str-size2 #%I0 str-size1
 ;;                               result-string)
 ;;    result-string)
 
@@ -309,13 +309,13 @@
 (defmethod do ((function <function>)
 ;;;           ##
                (str <string>) . more-collections)
-  (%let ((rest-list-length %signed-word-integer
-                           (%list-length more-collections)))
-        (cond ((%eq rest-list-length #%i0)
+  (%let ((rest-list-size %signed-word-integer
+                           (%list-size more-collections)))
+        (cond ((%eq rest-list-size #%i0)
                (do-with-one-string function str #%I0
                                    (%cast %unsigned-word-integer
                                           (strlen (string-pointer str)))))
-              ((%eq rest-list-length #%i1)
+              ((%eq rest-list-size #%i1)
                (do-with-two-args function str (car more-collections)))
               (t (do-collection function str more-collections)))
         ))
@@ -334,32 +334,32 @@
   ((function <function>)
    (str1 <string>)
    (str2 <string>))
-  (%let*((str-length1 %unsigned-word-integer
+  (%let*((str-size1 %unsigned-word-integer
                       (%cast %unsigned-word-integer
                              (strlen (string-pointer str1))))
-         (str-length2 %unsigned-word-integer
+         (str-size2 %unsigned-word-integer
                       (%cast %unsigned-word-integer
                              (strlen (string-pointer str2))))
-         (min-length %unsigned-word-integer
-                     (if (%le str-length1 str-length2)
-                         str-length1
-                       str-length2)))
+         (min-size %unsigned-word-integer
+                     (if (%le str-size1 str-size2)
+                         str-size1
+                       str-size2)))
         (do-with-two-strings function
                              str1
                              str2
-                             min-length
+                             min-size
                              #%I0)))
 
 (%define-function (do-with-two-strings <object>)
   ((function <function>)
    (str1 <string>)
    (str2 <string>)
-   (min-length %unsigned-word-integer)
+   (min-size %unsigned-word-integer)
    (index %unsigned-word-integer))
-  (if (%lt index min-length)
+  (if (%lt index min-size)
       (progn (function (string-ref-u str1 index)
                        (string-ref-u str2 index))
-             (do-with-two-strings function str1 str2 min-length
+             (do-with-two-strings function str1 str2 min-size
                                   (%plus index #%I1)))
     ()))
 
@@ -426,9 +426,9 @@
           (str-len %signed-word-integer
                    (%cast %signed-word-integer
                           (strlen str-pointer)))
-          (rest-list-length %signed-word-integer
-                            (%list-length keys)))
-         (if (%eq #%i0 rest-list-length)
+          (rest-list-size %signed-word-integer
+                            (%list-size keys)))
+         (if (%eq #%i0 rest-list-size)
              (progn
                (fill-string-aux str-pointer
                                 (%cast %unsigned-byte-integer
@@ -437,7 +437,7 @@
                                 (%cast %unsigned-word-integer
                                        (%minus str-len #%i1)))
                ())
-           (if (%eq #%i1 rest-list-length)
+           (if (%eq #%i1 rest-list-size)
                (error "fill: collection does not have natural order"
                       <conversion-condition>)
              (%let ((start %signed-word-integer
@@ -475,17 +475,17 @@
 
 ;; (defmethod map ((function <function>)
 ;;                 (str <string>) . more-collections)
-;;   (%let ((rest-list-length %signed-word-integer
-;;                            (%list-length more-collections)))
-;;         (cond ((%eq rest-list-length #%i0)
-;;                (%let ((str-length %unsigned-word-integer
+;;   (%let ((rest-list-size %signed-word-integer
+;;                            (%list-size more-collections)))
+;;         (cond ((%eq rest-list-size #%i0)
+;;                (%let ((str-size %unsigned-word-integer
 ;;                                   (%cast %unsigned-word-integer
 ;;                                          (strlen (string-pointer str)))))
 ;;                      (map-with-one-string function str #%I0
-;;                                           str-length
+;;                                           str-size
 ;;                                           (make-string
-;;                                            str-length))))
-;;               ((%eq rest-list-length #%i1)
+;;                                            str-size))))
+;;               ((%eq rest-list-size #%i1)
 ;;                (map-with-two-args function str (car more-collections) ()))
 ;;               (t (map-collection function str more-collections)))
 ;;         ))
@@ -510,23 +510,23 @@
 ;;    (str1 <string>)
 ;;    (str2 <string>)
 ;;    (not-used <object>))
-;;   (%let* ((str-length1 %unsigned-word-integer
+;;   (%let* ((str-size1 %unsigned-word-integer
 ;;                        (%cast %unsigned-word-integer
 ;;                               (strlen (string-pointer str1))))
-;;           (str-length2 %unsigned-word-integer
+;;           (str-size2 %unsigned-word-integer
 ;;                        (%cast %unsigned-word-integer
 ;;                               (strlen (string-pointer str2))))
-;;           (min-length %unsigned-word-integer
-;;                       (if (%le str-length1 str-length2)
-;;                           str-length1
-;;                         str-length2)))
+;;           (min-size %unsigned-word-integer
+;;                       (if (%le str-size1 str-size2)
+;;                           str-size1
+;;                         str-size2)))
 ;;          (map-with-two-strings function
 ;;                                str1
 ;;                                str2
-;;                                min-length
+;;                                min-size
 ;;                                #%I0
 ;;                                (make-uninitialized-vector
-;;                                 min-length))))
+;;                                 min-size))))
 
 ;; (defmethod map-with-two-args
 ;;   ((function <function>)
@@ -642,7 +642,7 @@
 ;;; size
 ;;;-----------------------------------------------------------------------------
 ;;  (defmethod size ((str <string>))
-;;    (string-length str))
+;;    (string-size str))
 
 (defmethod size ((str <string>))
   (make-fpint (strlen (string-pointer str))))

@@ -28,7 +28,7 @@
 (defmodule vector
   (import
    (tail
-    (only (%pair-length) basic-list)
+    (only (%pair-size) basic-list)
     (only (make-fpint) int-i)
     (only (deep-copy shallow-copy) copy)
     (only (equal) compare-generic))
@@ -37,7 +37,7 @@
    (<vector>
     vector?
     ;;  length      ;; wofur ? rr
-    vector-length
+    vector-size
     vector-ref
     setf-vector-ref
     make-initialized-vector        ;;
@@ -54,7 +54,7 @@
     initialize-vector-from-list       ; fur read
     primitive-vector-ref
     setf-primitive-vector-ref
-    primitive-vector-length
+    primitive-vector-size
     make-vector
     )
    )
@@ -65,7 +65,7 @@
 (%define-standard-class (<vector> <class>)
   <object>
   ((length type %unsigned-word-integer keyword length
-           reader primitive-vector-length)
+           reader primitive-vector-size)
    (element keyword element
             type <object> ;new
             reader primitive-vector-ref
@@ -97,7 +97,7 @@
 ;;
 ;;(%define-function (convert-vector-list <list>)
 ;;                  ((vector <vector>))
-;;  (convert-vector-list1 vector #%I0 (primitive-vector-length vector)))
+;;  (convert-vector-list1 vector #%I0 (primitive-vector-size vector)))
 ;;
 ;;(%define-function (convert-vector-list1 <list>)
 ;;                  ((vector <vector>)
@@ -108,7 +108,7 @@
 ;;            (convert-vector-list1 vector (%plus i #%I1) l))))
 
 ;;(defun length(l)            ;; wofur ? rr
-;;  (make-fpint (%pair-length l))) ;;(((.. length-1 l)))
+;;  (make-fpint (%pair-size l))) ;;(((.. length-1 l)))
 
 ;;(defun length-1 (l)        ; besser aus basic-pair ?
 ;;    (if (null? l)
@@ -135,10 +135,10 @@
 ;;; length
 ;;;-----------------------------------------------------------------------------
 ;;(defmethod length ((object <vector>))
-;;  (make-fpint (%cast %signed-word-integer (primitive-vector-length object))))
+;;  (make-fpint (%cast %signed-word-integer (primitive-vector-size object))))
 
-(defun vector-length (object)
-  (make-fpint (%cast %signed-word-integer (primitive-vector-length object))))
+(defun vector-size (object)
+  (make-fpint (%cast %signed-word-integer (primitive-vector-size object))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; make-initialized-vector
@@ -146,7 +146,7 @@
 (defun make-initialized-vector elements
   (initialize-vector-from-list
    (make-uninitialized-vector
-    (%cast %unsigned-word-integer (%pair-length elements))) #%I0 elements))
+    (%cast %unsigned-word-integer (%pair-size elements))) #%I0 elements))
 
 (%define-function (initialize-vector-from-list <vector>)
   ((vector <vector>)
@@ -168,12 +168,12 @@
 
 (defun equal-vector (object1 object2)
   (if (%eq (%cast %unsigned-word-integer
-                  (primitive-vector-length object1))
+                  (primitive-vector-size object1))
            (%cast %unsigned-word-integer
-                  (primitive-vector-length object2)))
+                  (primitive-vector-size object2)))
       (compare-vectors object1 object2 #%I0
                        (%cast %unsigned-word-integer
-                              (primitive-vector-length object2)))
+                              (primitive-vector-size object2)))
     ()))
 
 (%define-function (compare-vectors <object>)
@@ -188,16 +188,16 @@
         (t ())))
 
 ;;(defmethod equal ((object1 <vector> (object2 <vector>)))
-;;  (if (%eq (vector-length object1)
-;;           (vector-length object2))
-;;    (compare-vectors object1 object2 #%I0 (vector-length object2))
+;;  (if (%eq (vector-size object1)
+;;           (vector-size object2))
+;;    (compare-vectors object1 object2 #%I0 (vector-size object2))
 ;;    ()))
 
 ;;(defun vector-equal (object1 object2)
-;;  (if (%eq (%cast %unsigned-word-integer (vector-length object1))
-;;           (%cast %unsigned-word-integer (vector-length object2)))
+;;  (if (%eq (%cast %unsigned-word-integer (vector-size object1))
+;;           (%cast %unsigned-word-integer (vector-size object2)))
 ;;    (compare-vectors object1 object2 #%I0 (%cast %unsigned-word-integer
-;;                                                 (vector-length object2)))
+;;                                                 (vector-size object2)))
 ;;    ()))
 ;;
 ;;(%define-function (compare-vectors <object>)
@@ -214,15 +214,15 @@
 ;;;-----------------------------------------------------------------------------
 (defmethod shallow-copy ((object <vector>))
   (initialize-vector-from-vector
-   (make-uninitialized-vector (primitive-vector-length object))
+   (make-uninitialized-vector (primitive-vector-size object))
    object #%I0
-   (primitive-vector-length object)))
+   (primitive-vector-size object)))
 
 (defun vector-copy (object)
   (initialize-vector-from-vector
-   (make-uninitialized-vector (primitive-vector-length object))
+   (make-uninitialized-vector (primitive-vector-size object))
    object #%I0
-   (primitive-vector-length object)))
+   (primitive-vector-size object)))
 
 (%define-function (initialize-vector-from-vector <vector>)
   ((vector <vector>)
@@ -244,13 +244,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;(defmethod deep-copy ((object <vector>))
 ;;  (initialize-vector-from-vector
-;;   (make-uninitialized-vector (primitive-vector-length object))
+;;   (make-uninitialized-vector (primitive-vector-size object))
 ;;   object #%I0
-;;   (primitive-vector-length object)))
+;;   (primitive-vector-size object)))
 
 (defmethod deep-copy ((object <vector>))
   (%let ((length-vector %unsigned-word-integer
-                        (primitive-vector-length object)))
+                        (primitive-vector-size object)))
         (deep-copy-vec
          object
          (make-uninitialized-vector length-vector)

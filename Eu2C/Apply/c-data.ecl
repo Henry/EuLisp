@@ -162,7 +162,7 @@
               (exported-for-lisp? (?unexpanded literal))
               (type-identifier (~vector-class-element-type class))
               (c-identifier literal)
-              (get-length-of-vector-literal literal class)))
+              (get-size-of-vector-literal literal class)))
 
 (defmethod literal-declaration (literal (class <tail-class-def>)
                                         representation)
@@ -213,7 +213,7 @@
 
 (defmethod literal-definition (literal class
                                        (representation <%pointer-to-vector>))
-  (let* ((length (get-length-of-vector-literal literal class))
+  (let* ((length (get-size-of-vector-literal literal class))
          (element-type (~vector-class-element-type class))
          (components (get-vector-components
                       length
@@ -240,7 +240,7 @@
 ;;tail vectors are stored like lisp vectors to make the length available
 ;;(defmethod literal-definition (literal (class <tail-class-def>)
 ;;                                       (representation <%pointer-to-vector>))
-;;  (let* ((length (get-length-of-vector-literal literal class))
+;;  (let* ((length (get-size-of-vector-literal literal class))
 ;;         (element-type (~vector-class-element-type class))
 ;;         (components (get-vector-components
 ;;                      length
@@ -280,10 +280,10 @@
                                (car values)))
             (get-structure-components literal (cdr values) (cdr slots))))))
 
-(defun get-length-of-vector-literal (literal class)
+(defun get-size-of-vector-literal (literal class)
   (setf (first (?value-list literal))
         (or (first (?value-list literal))     ; the length spec in literal
-            (~vector-class-instance-length class) ; defined length in class
+            (~vector-class-instance-size class) ; defined length in class
             (length (second (?value-list literal))) ;the length of the given sequence
             )))
 
@@ -342,7 +342,7 @@
                                  string)))
 
 (defun make-c-string (literal)
-  (get-vector-components (get-length-of-vector-literal literal (?class literal))
+  (get-vector-components (get-size-of-vector-literal literal (?class literal))
                          (second (?value-list literal))
                          (~vector-class-element-type (?class literal))))
 

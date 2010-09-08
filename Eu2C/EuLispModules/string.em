@@ -46,7 +46,7 @@
    export
    (<string>
     string?
-    ;;  string-length ;because there is no methods!
+    ;;  string-size ;because there is no methods!
     ;;  (converter <symbol>)
     make-string ;;***HGW
     string-pointer ;;***HGW
@@ -224,7 +224,7 @@
 ;;(defmethod length ((string <string>))
 ;;  (make-fpint (strlen (string-pointer string))))
 
-;;(defun string-length (string)
+;;(defun string-size (string)
 ;;  (make-fpint (strlen (string-pointer string))))
 
 ;;;-----------------------------------------------------------------------------
@@ -242,7 +242,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;(defun string-slice (string start end)
 ;;  (%let* ((start %signed-word-integer (make-swi start))
-;;          (length %signed-word-integer (compute-resulting-length
+;;          (length %signed-word-integer (compute-resulting-size
 ;;                                        (make-swi end) start
 ;;                                        (strlen (string-pointer string))))
 ;;          (new-string-ptr %string
@@ -256,13 +256,13 @@
 ;;    (%setf (%extract new-string-ptr length) #%b0)       ;terminate with 0
 ;;    (make-string new-string-ptr)))
 ;;
-;;(%define-function (compute-resulting-length %signed-word-integer)
+;;(%define-function (compute-resulting-size %signed-word-integer)
 ;;                  ((start %signed-word-integer)
 ;;                   (end %signed-word-integer)
 ;;                   (length %signed-word-integer))
-;;   (cond ((%lt start #%i0) (compute-resulting-length #%i0 end length))
+;;   (cond ((%lt start #%i0) (compute-resulting-size #%i0 end length))
 ;;         ((%le end start) #%i0)
-;;         ((%gt end length) (compute-resulting-length start length length))
+;;         ((%gt end length) (compute-resulting-size start length length))
 ;;         (t (%minus end start))))
 
 ;;;-----------------------------------------------------------------------------

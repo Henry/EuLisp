@@ -42,7 +42,7 @@
 ;;    representation direct : it is assumed that classes with such a
 ;;    representation have only one slot !!!!
 ;;    4. problem with direct
-;;    5. ensure-vector-length hack
+;;    5. ensure-vector-size hack
 ;;    6. %size-of only correct code for pointer-to-struct and pointer-to-vector
 ;;    to use %size-of, constructors for multiple-type-card-allocated objects have
 ;;    use the cds stored in the class !!!
@@ -86,8 +86,8 @@
                 ) machine-description)
          tail-module
          apply-funs
-         (only (?byte-length-of-instance
-                ?byte-length-as-component)
+         (only (?byte-size-of-instance
+                ?byte-size-as-component)
                representation)
          (only (set-predicate-signature)
                type-inference)
@@ -134,12 +134,12 @@
 (define-compiler-condition <no-allocation-argument> (<condition>)
   "Neither class ~A nor its superclass ~A have a allocation argument." :class :super )
 
-(define-compiler-condition <wrong-initialization-argument-length-for-vector-class> (<condition>)
+(define-compiler-condition <wrong-initialization-argument-size-for-vector-class> (<condition>)
   "The vector class ~A is defined with an initvalue of ~A for length and can ~
 therefore not have a length argument for the constructor function" :class
 :length)
 
-(define-compiler-condition <missing-length-argument> (<condition>)
+(define-compiler-condition <missing-size-argument> (<condition>)
   "The vector class ~A is defined without  an initvalue and no init-value is~
 given in the constructor form" :class )
 
@@ -353,7 +353,7 @@ given in the constructor form" :class )
   ((representation-object <%pointer-to-vector>) class allocation mm-type)
   (canonize-gc-tracer class representation-object)
   (setq allocation (canonize-allocation class representation-object allocation))
-  (if (and mm-type (or (cl:not (null? (~vector-class-instance-length class)))
+  (if (and mm-type (or (cl:not (null? (~vector-class-instance-size class)))
                        (eq allocation ^multiple-size-card)))
       (progn
         (canonize-mm-type class representation-object mm-type)
@@ -450,10 +450,10 @@ given in the constructor form" :class )
            (dynamic *class-initialization-forms*))
   )
 
-(defun ~vector-class-instance-byte-length (class allocation)
+(defun ~vector-class-instance-byte-size (class allocation)
   ;;returns either #%i0 or an corresponding lzs-expression with %size-of or
   ;;value of $dynamic-class-mm-card-for-vector-classes
-  (let ((size (~vector-class-instance-length class)))
+  (let ((size (~vector-class-instance-size class)))
     (if (null? size)
         (if (eq allocation ^multiple-size-card)
             (literal-instance %signed-word-integer 0)
@@ -470,17 +470,17 @@ given in the constructor form" :class )
   ((representation-object <%pointer-to-vector>) class allocation)
   ;;actions to be done
   ;;set dummy values into mm-slots of representation-object to have no unbound slots
-  ;;generation of card descriptor if ~vector-class-instance-length is not () or
+  ;;generation of card descriptor if ~vector-class-instance-size is not () or
   ;;if allocation is multiple-size-card
   ;;inscribe corresponding values into class-object
-  ;;if ~vector-class-instance-length returns () ansd allocation is not multiple-size-card
+  ;;if ~vector-class-instance-size returns () ansd allocation is not multiple-size-card
   ;;no card descriptor can be generated. So every time a constructor is called,
   ;;there will be a call to make-card-descriptor which generates one if there is none
   ;;all constructors have to use the values from that class object
   ;;generate card descriptor using mm-type from class and
   ;;then set mm-card
 
-  (let ((size (~vector-class-instance-byte-length class allocation)))
+  (let ((size (~vector-class-instance-byte-size class allocation)))
     (if (eq size $dynamic-class-mm-card-for-vector-classes)
         ;;signal that there is a vector-class without known length
         (setf(?mm-card representation-object) $dynamic-class-mm-card-for-vector-classes)
@@ -515,8 +515,8 @@ given in the constructor form" :class )
   ;;mm-type not set -> must be generated during run time
   ;;creation of card-descriptors
   (let ((estimated-size (+ (?alignment representation-object)
-                           (?byte-length-of-instance representation-object)))
-        (size (~vector-class-instance-byte-length class allocation))
+                           (?byte-size-of-instance representation-object)))
+        (size (~vector-class-instance-byte-size class allocation))
         (ctype (card-type-code allocation)))
     (cond
       ((eq allocation ^single-card)
@@ -541,7 +541,7 @@ given in the constructor form" :class )
       ((eq allocation  ^multiple-size-card)
        ;;special treatent for vector with unknown size
        ;;size () would result in %iNIL in set-mm-card
-       ;; ~vector-class-instance-byte-length is always not null, so there is no
+       ;; ~vector-class-instance-byte-size is always not null, so there is no
        ;; need to test length
        (canonize-multiple-card-descriptors class representation-object size mm-type ctype class multiple-size-card-descriptors))
       (t (compiler-error <wrong-allocation-argument> () :argument allocation
@@ -553,7 +553,7 @@ given in the constructor form" :class )
   ;;mm-type not set -> must be generated during run time
   ;;creation of card-descriptors
   (let ((estimated-size (+ (?alignment representation-object)
-                           (?byte-length-of-instance representation-object)))
+                           (?byte-size-of-instance representation-object)))
         ;;estimated-size is the size of instance in bytes
         ;;this calculatiion is not necessaryly machine-independent
         ;;alignment is added to estimated size to place objects with
@@ -678,7 +678,7 @@ given in the constructor form" :class )
          (mm-type (?mm-type representation))
          (mm-card (?mm-card representation))
          (allocation (?allocation representation))
-         ;;(size (?byte-length-of-instance representation))
+         ;;(size (?byte-size-of-instance representation))
          (tds (if (eq mm-type $dummy-class-mm-type)
                   `(,class-mm-type ,class)
                 (convert-literal-for-allocation mm-type) ))
@@ -703,45 +703,45 @@ given in the constructor form" :class )
 ;;; corresponding descriptor already exists - otherwise it creates one.
 ;;;-----------------------------------------------------------------------------
 
-;;(defun ensure-vector-length
+;;(defun ensure-vector-size
 ;;       (representation-instance class parameters)
-;;  (let ((initial-length (~vector-class-instance-length class ))
+;;  (let ((initial-size (~vector-class-instance-size class ))
 ;;        (length-parameter (cl:find ^length parameters)))
-;;    (cond ((and length-parameter initial-length)
+;;    (cond ((and length-parameter initial-size)
 ;;           (compiler-error
-;;            <wrong-initialization-argument-length-for-vector-class> ()
-;;                           :class class :length initial-length))
-;;          ((and (null? initial-length) (cl:not length-parameter))
-;;           (compiler-error <missing-length-argument> () :class class))
-;;          (initial-length (literal-instance %signed-word-integer (?byte-length-of-instance representation-instance)))
+;;            <wrong-initialization-argument-size-for-vector-class> ()
+;;                           :class class :length initial-size))
+;;          ((and (null? initial-size) (cl:not length-parameter))
+;;           (compiler-error <missing-size-argument> () :class class))
+;;          (initial-size (literal-instance %signed-word-integer (?byte-size-of-instance representation-instance)))
 ;;;;a hack to get true size
-;;          (initial-length
-;;           (literal-instance %signed-word-integer (* initial-length
-;;                                                       (?byte-length-as-component  (?representation
+;;          (initial-size
+;;           (literal-instance %signed-word-integer (* initial-size
+;;                                                       (?byte-size-as-component  (?representation
 ;;                                                                                (~vector-class-element-type class)) ))))
 ;;          (length-parameter
-;;           `(,%mult ,(literal-instance %signed-word-integer (?byte-length-as-component  (?representation
+;;           `(,%mult ,(literal-instance %signed-word-integer (?byte-size-as-component  (?representation
 ;;                                                                                        (~vector-class-element-type class)) ))
 ;;                     (,%cast ,%signed-word-integer ,^length)))
 ;;          )
 ;;    ))
 
-(defun ensure-vector-length
+(defun ensure-vector-size
   (representation-instance class parameters)
   ;;
   ;;representation * class * parameters -> %unsigned-word-integer
   ;;
-  (let ((initial-length (~vector-class-instance-length-literal class ))
+  (let ((initial-size (~vector-class-instance-size-literal class ))
         (length-parameter (cl:find ^length parameters)))
-    (cond ((and length-parameter initial-length)
+    (cond ((and length-parameter initial-size)
            (compiler-error
-            <wrong-initialization-argument-length-for-vector-class> ()
-            :class class :length initial-length))
-          ((and (null? initial-length) (cl:not length-parameter))
-           (compiler-error <missing-length-argument> () :class class))
-          (initial-length
+            <wrong-initialization-argument-size-for-vector-class> ()
+            :class class :length initial-size))
+          ((and (null? initial-size) (cl:not length-parameter))
+           (compiler-error <missing-size-argument> () :class class))
+          (initial-size
            `(,%mult (,%cast ,%unsigned-word-integer (,%size-as-component  ,(~vector-class-element-type class) ))
-                    initial-length))
+                    initial-size))
           (length-parameter
            `(,%mult (,%cast ,%unsigned-word-integer (,%size-as-component  ,(~vector-class-element-type class)))
                     (,%cast ,%unsigned-word-integer ,^length)))
@@ -754,7 +754,7 @@ given in the constructor form" :class )
          (mm-type (?mm-type representation))
          (mm-card (?mm-card representation))
          (allocation (?allocation representation))
-         (size (ensure-vector-length representation class parameters))
+         (size (ensure-vector-size representation class parameters))
          (ctype (card-type-code allocation)); *UK* 10.01.94
          (tds (if (eq mm-type $dummy-class-mm-type)
                   `(,class-mm-type ,class )
@@ -869,8 +869,8 @@ given in the constructor form" :class )
   ;;if element is given then an default-function is generated which runs over the
   ;;whole vector and initializes its elements with the argument element
   (let* ((slots (~class-slots class))
-         (number-of-slots (if (~vector-class-instance-length-literal class)
-                              (~vector-class-instance-length-literal class)
+         (number-of-slots (if (~vector-class-instance-size-literal class)
+                              (~vector-class-instance-size-literal class)
                             `(,%cast ,%unsigned-word-integer ,^length)))
          (init-value (if (member ^element parameters)
                          ^element
@@ -1049,7 +1049,7 @@ given in the constructor form" :class )
                         ^(object)
                         ;;                        `(,%cast ,%unsigned-word-integer
                         ;;                                (,%div  (,%vector-class-instance-size ,^object)
-                        ;;                                        ,(literal-instance %unsigned-word-integer (?byte-length-as-component  (?representation
+                        ;;                                        ,(literal-instance %unsigned-word-integer (?byte-size-as-component  (?representation
                         ;;
                         ;;                                                                           (~vector-class-element-type class))))))
                         `(,%div  (,%vector-class-instance-size ,^object)

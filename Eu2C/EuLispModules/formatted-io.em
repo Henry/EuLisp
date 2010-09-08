@@ -514,12 +514,12 @@
 
 (%define-function (read-float-0 <list>)
   ((stream <stream>)
-   (float-length %signed-word-integer)
+   (float-size %signed-word-integer)
    (ch %signed-word-integer)
    (fstring-c %string)
    (cur-index %signed-word-integer)
    (length %signed-word-integer))
-  (let ((obj (%cast <object> (read-float stream float-length ch))))
+  (let ((obj (%cast <object> (read-float stream float-size ch))))
     (if (float? obj)
         (cons obj (scan1 stream fstring-c cur-index length))
       (progn (dynamic-setq saved-cur-index

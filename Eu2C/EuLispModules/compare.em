@@ -35,7 +35,7 @@
            compare-generic
            (only (eq)
                  basic-compare)
-           (only (%list-length)
+           (only (%list-size)
                  basic-list-0)
            (only (number?)
                  number-i)
@@ -43,7 +43,7 @@
                   vector?
                   equal
                   equal-vector
-                  primitive-vector-length
+                  primitive-vector-size
                   primitive-vector-ref)
                  vector)
            (only (string?
@@ -102,12 +102,12 @@
 ;;  (defun equal-vector(object1 object2)
 ;;    ;  (print object1)
 ;;    ;  (print object2)
-;;    ;  (print (primitive-vector-length object1))
-;;    ;  (print (primitive-vector-length object2))
-;;    (if (%eq (%cast %unsigned-word-integer (primitive-vector-length object1))
-;;             (%cast %unsigned-word-integer (primitive-vector-length object2)))
+;;    ;  (print (primitive-vector-size object1))
+;;    ;  (print (primitive-vector-size object2))
+;;    (if (%eq (%cast %unsigned-word-integer (primitive-vector-size object1))
+;;             (%cast %unsigned-word-integer (primitive-vector-size object2)))
 ;;      (compare-vectors object1 object2 #%I0 (%cast %unsigned-word-integer
-;;                                                   (primitive-vector-length object2)))
+;;                                                   (primitive-vector-size object2)))
 ;;      ()))
 ;;  (%define-function (compare-vectors <object>)
 ;;                    ((vector1 <vector>) (vector2 <vector>)
@@ -179,10 +179,10 @@
       (eq-rec (cons arg1 things))
     t))
 
-;;    (%let ((rest-list-length %signed-word-integer
-;;                             (%list-length things)))
-;;      (cond ((%eq rest-list-length #%i0)()) ; error too few arguments
-;;            ((%eq rest-list-length #%i1) t)
+;;    (%let ((rest-list-size %signed-word-integer
+;;                             (%list-size things)))
+;;      (cond ((%eq rest-list-size #%i0)()) ; error too few arguments
+;;            ((%eq rest-list-size #%i1) t)
 ;;            (t (eq-rec things)))
 ;;      ))
 
@@ -203,10 +203,10 @@
       (less-rec (cons arg1 things))
     t))
 
-;;    (%let ((rest-list-length %signed-word-integer
-;;                             (%list-length things)))
-;;      (cond ((%eq rest-list-length #%i0)())
-;;            ((%eq rest-list-length #%i1) t)
+;;    (%let ((rest-list-size %signed-word-integer
+;;                             (%list-size things)))
+;;      (cond ((%eq rest-list-size #%i0)())
+;;            ((%eq rest-list-size #%i1) t)
 ;;            (t (less-rec things)))
 ;;      ))
 
@@ -223,10 +223,10 @@
 ;;; > not in eulisp!
 ;;
 ;;  (defun > things
-;;    (%let ((rest-list-length %signed-word-integer
-;;                             (%list-length things)))
-;;      (cond ((%eq rest-list-length #%i0)())
-;;            ((%eq rest-list-length #%i1) t)
+;;    (%let ((rest-list-size %signed-word-integer
+;;                             (%list-size things)))
+;;      (cond ((%eq rest-list-size #%i0)())
+;;            ((%eq rest-list-size #%i1) t)
 ;;            (t (greater-rec things)))
 ;;      ))
 ;;
@@ -245,10 +245,10 @@
       (max-rec things arg1)
     arg1))
 
-;;    (%let ((rest-list-length %signed-word-integer
-;;                             (%list-length things)))
-;;      (cond ((%eq rest-list-length #%i0)())
-;;            ((%eq rest-list-length #%i1) (car things))
+;;    (%let ((rest-list-size %signed-word-integer
+;;                             (%list-size things)))
+;;      (cond ((%eq rest-list-size #%i0)())
+;;            ((%eq rest-list-size #%i1) (car things))
 ;;            (t (max-rec (cdr things) (car things))))
 ;;      ))
 
@@ -267,10 +267,10 @@
       (min-rec things arg1)
     arg1))
 
-;;    (%let ((rest-list-length %signed-word-integer
-;;                             (%list-length things)))
-;;      (cond ((%eq rest-list-length #%i0)())
-;;            ((%eq rest-list-length #%i1) t)
+;;    (%let ((rest-list-size %signed-word-integer
+;;                             (%list-size things)))
+;;      (cond ((%eq rest-list-size #%i0)())
+;;            ((%eq rest-list-size #%i1) t)
 ;;            (t (min-rec things (car things))))
 ;;      ))
 

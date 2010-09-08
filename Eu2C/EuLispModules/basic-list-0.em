@@ -43,7 +43,7 @@
            cons
            null?
            list
-           %list-length
+           %list-size
            %member))
 
 ;;;-----------------------------------------------------------------------------
@@ -98,9 +98,9 @@
 ;;;-----------------------------------------------------------------------------
 ;;; length-functions
 ;;;-----------------------------------------------------------------------------
-(%define-function (%list-length %signed-word-integer)
+(%define-function (%list-size %signed-word-integer)
   ((arg <list>))
-  (if arg (%plus (%list-length (cdr arg)) #%i1) #%i0))
+  (if arg (%plus (%list-size (cdr arg)) #%i1) #%i0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; member-function

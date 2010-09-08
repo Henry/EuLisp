@@ -56,9 +56,9 @@
   representation pointer-to-struct
   allocation single-card)
 
-(%define-tail-class (<static-vector-length>  <tail-class>)
+(%define-tail-class (<static-vector-size>  <tail-class>)
   ((length type %unsigned-word-integer
-           accessor static-vector-length))
+           accessor static-vector-size))
   representation pointer-to-struct
   allocation single-card)
 
@@ -106,8 +106,8 @@
       ;; dynamic allocated vector class instance
       (%cast %unsigned-word-integer
              (object-size (%cast <pointer-to-void> obj)))
-    (static-vector-length
-     (%cast <static-vector-length>
+    (static-vector-size
+     (%cast <static-vector-size>
             (%minus (%cast %unsigned-word-integer obj)
                     #%I8)))))
 

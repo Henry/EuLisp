@@ -87,7 +87,7 @@
   (let ((result (cons 1 ())))
     (convert-vector-to-list collection
                             #%I0
-                            (primitive-vector-length collection)
+                            (primitive-vector-size collection)
                             result)
     (cdr result)))
 
@@ -95,13 +95,13 @@
 (%define-function (convert-vector-to-list <list>)
   ((vec <vector>)
    (index %unsigned-word-integer)
-   (vec-length %unsigned-word-integer)
+   (vec-size %unsigned-word-integer)
    (result <list>))
-  (if (%lt index vec-length)
+  (if (%lt index vec-size)
       (convert-vector-to-list
        vec
        (%plus index #%I1)
-       vec-length
+       vec-size
        (progn (setf (cdr result)
                     (cons
                      (primitive-vector-ref vec index)
@@ -114,7 +114,7 @@
   (let ((result (cons 1 ())))
     (convert-string-to-list collection
                             #%I0
-                            (primitive-string-length collection)
+                            (primitive-string-size collection)
                             result)
     (cdr result)))
 
@@ -122,13 +122,13 @@
 (%define-function (convert-string-to-list <list>)
   ((str <string>)
    (index %unsigned-word-integer)
-   (str-length %unsigned-word-integer)
+   (str-size %unsigned-word-integer)
    (result <list>))
-  (if (%lt index str-length)
+  (if (%lt index str-size)
       (convert-string-to-list
        str
        (%plus index #%I1)
-       str-length
+       str-size
        (progn (setf (cdr result)
                     (cons
                      (string-ref-u str index)
@@ -160,12 +160,12 @@
 
 (defmethod (converter <vector>) ((collection <list>))
   (%let (
-         ;;           (vec-length %unsigned-word-integer
-         ;;                        (%pair-length collection))
+         ;;           (vec-size %unsigned-word-integer
+         ;;                        (%pair-size collection))
          (result-vector <vector>
                         (make-uninitialized-vector
                          (%cast %unsigned-word-integer
-                                (%pair-length collection)))))
+                                (%pair-size collection)))))
         (convert-list-to-vector collection result-vector #%I0)))
 
 
@@ -187,26 +187,26 @@
 
 
 (defmethod (converter <vector>) ((collection <string>))
-  (%let* ((vec-length %unsigned-word-integer
-                      (primitive-string-length collection))
+  (%let* ((vec-size %unsigned-word-integer
+                      (primitive-string-size collection))
           (result-vector <vector>
                          (make-uninitialized-vector
-                          vec-length)))
-         (convert-string-to-vector collection result-vector vec-length #%I0)))
+                          vec-size)))
+         (convert-string-to-vector collection result-vector vec-size #%I0)))
 
 (%define-function (convert-string-to-vector <vector>)
   ((str <string>)
    (result-vector <vector>)
-   (str-length %unsigned-word-integer)
+   (str-size %unsigned-word-integer)
    (index %unsigned-word-integer))
-  (if (%lt index str-length)
+  (if (%lt index str-size)
       (progn
         (setf-primitive-vector-ref result-vector
                                    index
                                    (string-ref-u str index))
         (convert-string-to-vector str
                                   result-vector
-                                  str-length
+                                  str-size
                                   (%plus index #%I1)))
     result-vector))
 
@@ -227,23 +227,23 @@
 
 
 (defmethod (converter <string>) ((collection <vector>))
-  (%let* ((str-length %unsigned-word-integer
-                      (primitive-vector-length collection))
+  (%let* ((str-size %unsigned-word-integer
+                      (primitive-vector-size collection))
           (result-string <string>
                          (make-string
                           (allocate-%string
                            (%plus #%i1
                                   (%cast %signed-word-integer
-                                         str-length))))))
-         (convert-vector-to-string collection result-string str-length #%I0)))
+                                         str-size))))))
+         (convert-vector-to-string collection result-string str-size #%I0)))
 
 
 (%define-function (convert-vector-to-string <string>)
   ((vec <vector>)
    (result-string <string>)
-   (vec-length %unsigned-word-integer)
+   (vec-size %unsigned-word-integer)
    (index %unsigned-word-integer))
-  (if (%lt index vec-length)
+  (if (%lt index vec-size)
       (progn
         (primitive-setter-string-ref
          result-string
@@ -253,7 +253,7 @@
                  (right-char? (primitive-vector-ref vec index)))))
         (convert-vector-to-string vec
                                   result-string
-                                  vec-length
+                                  vec-size
                                   (%plus index #%I1)))
     result-string))
 
@@ -262,12 +262,12 @@
 
 (defmethod (converter <string>) ((collection <list>))
   (%let* (
-;;;            (str-length %signed-word-integer
-;;;                        (%pair-length collection))
+;;;            (str-size %signed-word-integer
+;;;                        (%pair-size collection))
           (result-string <string>
                          (make-string
                           (allocate-%string
-                           (%plus #%i1 (%pair-length collection))))))
+                           (%plus #%i1 (%pair-size collection))))))
          (convert-list-to-string collection result-string #%I0)))
 
 
@@ -321,15 +321,15 @@
   (let ((table (make-table eql () hash)))
     (convert-vector-to-table collection
                              table
-                             (primitive-vector-length collection) #%I0)))
+                             (primitive-vector-size collection) #%I0)))
 
 
 (%define-function (convert-vector-to-table <table>)
   ((vec <vector>)
    (result-table <table>)
-   (vec-length %unsigned-word-integer)
+   (vec-size %unsigned-word-integer)
    (index %unsigned-word-integer))
-  (if (%lt index vec-length)
+  (if (%lt index vec-size)
       (progn
         (setter-table-ref
          result-table
@@ -337,7 +337,7 @@
          (primitive-vector-ref vec index))
         (convert-vector-to-table vec
                                  result-table
-                                 vec-length
+                                 vec-size
                                  (%plus index #%I1)))
     result-table))
 
@@ -346,22 +346,22 @@
   (let ((table (make-table eql () hash)))
     (convert-string-to-table collection
                              table
-                             (primitive-string-length collection)
+                             (primitive-string-size collection)
                              #%I0)))
 
 (%define-function (convert-string-to-table <table>)
   ((str <string>)
    (result-table <table>)
-   (str-length %unsigned-word-integer)
+   (str-size %unsigned-word-integer)
    (index %unsigned-word-integer))
-  (if (%lt index str-length)
+  (if (%lt index str-size)
       (progn
         (setter-table-ref result-table
                           (make-fpint (%cast %signed-word-integer index))
                           (string-ref-u str index))
         (convert-string-to-table str
                                  result-table
-                                 str-length
+                                 str-size
                                  (%plus index #%I1)))
     result-table))
 

@@ -312,7 +312,7 @@
   (let ((index (car (cdr (car collection-info))))
         (vector (car (car collection-info)))
         res)
-    (if (binary< index (vector-length vector)) ;=lenght of vector
+    (if (binary< index (vector-size vector)) ;=lenght of vector
         (progn
           (setq res
                 (vector-ref vector index)) ;give element
@@ -325,7 +325,7 @@
   (let ((index (car (cdr (car liste))))
         (str (car (car liste)))
         res)
-    (if (binary< index (string-length str)) ;=lenght of string
+    (if (binary< index (string-size str)) ;=lenght of string
         (progn
           (setq res
                 (string-ref str index)) ;give element

@@ -152,8 +152,8 @@
          ~compute-discrimination-arguments)
 
  ;;--- Introspection of Vector Classes
- export (~vector-class-instance-length
-         ~vector-class-instance-length-literal
+ export (~vector-class-instance-size
+         ~vector-class-instance-size-literal
          ~vector-class-element-type
          ~vector-class-element-default-function)
 
@@ -376,9 +376,9 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Introspection of Vector Classes
 ;;;-----------------------------------------------------------------------------
-(defgeneric ~vector-class-instance-length (vector-class))
+(defgeneric ~vector-class-instance-size (vector-class))
 
-(defgeneric ~vector-class-instance-length-literal (vector-class))
+(defgeneric ~vector-class-instance-size-literal (vector-class))
 
 (defgeneric ~vector-class-element-type (vector-class))
 

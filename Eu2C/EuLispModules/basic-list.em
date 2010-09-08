@@ -38,7 +38,7 @@
            apply-level-1)
    syntax (%tail)
    expose (basic-list-0)
-   export (%pair-length
+   export (%pair-size
            eq;;; basic-compare
            cons? append
            t))
@@ -59,9 +59,9 @@
 ;;; length-functions
 ;;;-----------------------------------------------------------------------------
 
-(%define-function (%pair-length %signed-word-integer )
+(%define-function (%pair-size %signed-word-integer )
   ((l <list>))
-  (if (cons? l) (%plus #%i1 (%pair-length (cdr l)))
+  (if (cons? l) (%plus #%i1 (%pair-size (cdr l)))
     #%i0))
 
 ;;;-----------------------------------------------------------------------------

@@ -38,7 +38,7 @@
    (length type %unsigned-word-integer))
   representation pointer-to-vector)
 
-(%declare-external-variable command-line-length %signed-word-integer
+(%declare-external-variable command-line-size %signed-word-integer
   language C
   external-name |command_line_length|)
 
@@ -52,7 +52,7 @@
 (%define-function (make-argument-list <cons>)
   ((n %signed-word-integer)
    (li <list>))
-  (if (%eq n command-line-length)
+  (if (%eq n command-line-size)
       li
     (cons (make-string (string-n command-line
                                  (%cast %unsigned-word-integer n)))

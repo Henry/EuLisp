@@ -406,10 +406,10 @@
 
 
 (defun fill (collection object . keys)
-  (let ((rest-list-length (length keys)))
-    (if (= rest-list-length 0)
+  (let ((rest-list-size (length keys)))
+    (if (= rest-list-size 0)
         (cl:fill collection object)
-      (if (= rest-list-length 1)
+      (if (= rest-list-size 1)
           (error  "collection with list of indizes")
         (let ((start (car keys))
               (end (cadr keys)))

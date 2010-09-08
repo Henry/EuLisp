@@ -52,32 +52,32 @@
          %pointer-to-vector))
 
 
-(defmethod ?byte-length-as-component ((pobj <class-def>))
+(defmethod ?byte-size-as-component ((pobj <class-def>))
   (if (?representation pobj)
-      (?byte-length-as-component1 (?representation pobj))
+      (?byte-size-as-component1 (?representation pobj))
     (progn
       (cl:error "error ~a von <class-def> hat keine representation" pobj)
       4)))
 
-(defmethod ?byte-length-as-component ((pobj <%representation>))
-  (?byte-length-as-component1 pobj))
+(defmethod ?byte-size-as-component ((pobj <%representation>))
+  (?byte-size-as-component1 pobj))
 
-(defgeneric ?byte-length-as-component1 (pobj))
+(defgeneric ?byte-size-as-component1 (pobj))
 
-(defmethod ?byte-length-as-component1 ((pobj <%pointer>))
-  (?byte-length (?representation %signed-word-integer))
+(defmethod ?byte-size-as-component1 ((pobj <%pointer>))
+  (?byte-size (?representation %signed-word-integer))
   )
 
-(defmethod ?byte-length-as-component1 ((pobj t))
-  (?byte-length pobj)
+(defmethod ?byte-size-as-component1 ((pobj t))
+  (?byte-size pobj)
   )
 
 
-(defmethod ?byte-length-of-instance ((obj <%representation>))
-  (?byte-length obj))
+(defmethod ?byte-size-of-instance ((obj <%representation>))
+  (?byte-size obj))
 
-(defmethod ?byte-length-of-instance (obj)
-  (cl:error "?byte-length-of representation called for a
+(defmethod ?byte-size-of-instance (obj)
+  (cl:error "?byte-size-of representation called for a
 non-representation-object ~s" obj))
 
 
@@ -134,17 +134,17 @@ non-representation-object ~s" obj))
 
 
 (defun make-pointer-to-struct (class-obj)
-  (let ((byte-length 0)
+  (let ((byte-size 0)
         (maximum-alignment 0))
     (dolist (slot-descr (~class-slots class-obj))
             (when (> (?alignment (?representation (?type slot-descr)))
                      maximum-alignment)
                   (setq maximum-alignment (?alignment (?representation (?type
                                                                         slot-descr)))))
-            (setq byte-length (+ byte-length (?byte-length-as-component (?representation (?type slot-descr))))))
+            (setq byte-size (+ byte-size (?byte-size-as-component (?representation (?type slot-descr))))))
     (make-instance
      <%pointer-to-struct>
-     :byte-length byte-length
+     :byte-size byte-size
      :alignment maximum-alignment; *UK* 03.01.94
      )
     ))
@@ -158,39 +158,39 @@ non-representation-object ~s" obj))
   (make-instance
    <%direct>
    :alignment (?alignment (?representation %unsigned-word-integer))
-   :byte-length
-   (?byte-length (?representation
+   :byte-size
+   (?byte-size (?representation
                   (?type (car (~class-slots class-obj)))))
    ))
 
 
 (defun make-pointer-to-vector (class-obj)
-  (let* ((length-slot (~vector-class-instance-length class-obj))
+  (let* ((length-slot (~vector-class-instance-size class-obj))
          (length  (if length-slot
                       length-slot
                     0)))
     (make-instance
      <%pointer-to-vector>
      :alignment (?alignment (?representation %signed-word-integer))
-     :byte-length (compute-byte-length*
+     :byte-size (compute-byte-size*
                    length
                    (?representation (~vector-class-element-type class-obj)))
      )))
 
 
-(defgeneric compute-byte-length* (length representation))
+(defgeneric compute-byte-size* (length representation))
 
 
-(defmethod compute-byte-length* (length (representation <%pointer>))
-  (* length (?byte-length (?representation %unsigned-word-integer))))
+(defmethod compute-byte-size* (length (representation <%pointer>))
+  (* length (?byte-size (?representation %unsigned-word-integer))))
 
 
-(defmethod compute-byte-length* (length (representation <%machine-type>))
-  (* length (?byte-length representation)))
+(defmethod compute-byte-size* (length (representation <%machine-type>))
+  (* length (?byte-size representation)))
 
 
 
-(defmethod compute-byte-length* ((length <null>) representation)
+(defmethod compute-byte-size* ((length <null>) representation)
   ())
 
 #module-end

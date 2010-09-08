@@ -84,7 +84,7 @@
               `(deflocal ,(car li)
                  (make-instance
                   <%machine-type>
-                  :byte-length ,(get-option :byte-length (cdr li) ())
+                  :byte-size ,(get-option :byte-size (cdr li) ())
                   :alignment ,(get-option :alignment (cdr li) ())))))
            machine-datas))
     `(progn ,@classes)))

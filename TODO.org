@@ -422,12 +422,24 @@
 *** TODO Split =defglobal= and =dynamic-???= from =Apply/el2lzs-rules.ecl=
     into a =level-1= file.
 *** TODO Create a =level-1= module
-    including the =level-0=, =dynamic= and =control-1= modules.
-*** TODO Create the =control-1= module
+    including the =level-0=, =dynamic= and =exit-1= modules.
+*** TODO Create the =exit-1= module
     containing the =throw= and =catch= functionality.  Perhaps the macros from
     Youtoo can be re-used for this.
+*** TODO Add support for =generic-lambda=
+    See Youtoo.
+*** TODO Investigate exposing MOP functionality from =lzs-mop.ecl=
+    It may be possible to expose the EuLisp Level-1 MOP functionality already
+    present and use it in EuLisp modules, e.g. =test-introspection.em=
+    #+BEGIN_SRC eulisp
+    (%define-function (class-precedence-list <cons>)
+      ((cl <class>))
+      (%select cl <class> class-precedence-list))
+
+    (print (class-precedence-list <null>))
+    #+END_SRC
 *** DONE Renaming according to 1.0 proposals
-    CLOSED: [2010-09-07 Tue 15:45]
+    CLOSED: [2010-09-07 Tue 21:45]
     + Rename <execution-condition> as <general-condition>
     + Rename <syntax-error> as <read-error>
     + Rename <slot-description> as <slot> (and all other such references)

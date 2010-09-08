@@ -33,7 +33,7 @@
     apply
     eulisp-kernel
     (only
-     (%list-length)
+     (%list-size)
      basic-list)
     (only
      (symbol? <symbol>)
@@ -72,7 +72,7 @@
 
 (defun mapc (function . lists)
   ;;(function &rest lists)
-  (if (%eq (%list-length lists) #%i1)
+  (if (%eq (%list-size lists) #%i1)
       (mapc-aux1 function (car lists))
     ()
     ;;(prin 'more-than-one-list-for-mapc)
@@ -89,15 +89,15 @@
     ()))
 
 
-;;  (%define-function (%pair-length %signed-word-integer )
+;;  (%define-function (%pair-size %signed-word-integer )
 ;;                    ((l <list>))
 ;;    (if (null? l)
 ;;      #%i0
-;;      (%plus #%i1 (%pair-length (cdr l)))))
+;;      (%plus #%i1 (%pair-size (cdr l)))))
 
 
 ;;  (defun assoc (object alist . l)
-;;    (%let* ((length-of-l %signed-word-integer (%list-length l))
+;;    (%let* ((length-of-l %signed-word-integer (%list-size l))
 ;;            (predicate <function>
 ;;                       (if (%gt length-of-l #%i0)
 ;;                           (car l)

@@ -125,7 +125,7 @@
                   (%funcall (function-address foo) args)))
             (if (%eq arg-descr #%i0)
                 (wrong-argument-number foo arg-descr
-                                       (%list-length args) args)
+                                       (%list-size args) args)
               (apply>=1 foo arg-descr (car args) (cdr args))))))
   )
 
@@ -451,7 +451,7 @@
           (wrong-argument-number
            foo arg-descr #%i8
            (list arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8)))
-      (too-many-arguments foo arg-descr (%plus #%i8 (%list-length args))
+      (too-many-arguments foo arg-descr (%plus #%i8 (%list-size args))
                           (cons arg1
                                 (cons arg2
                                       (cons arg3
@@ -476,7 +476,7 @@
       (let ((cl-vars (function-closure-vars foo)))
         (if cl-vars (%funcall (function-address foo) args cl-vars)
           (%funcall (function-address foo) args)))
-    (wrong-argument-number foo arg-descr (%list-length args) args))
+    (wrong-argument-number foo arg-descr (%list-size args) args))
   )
 
 (%define-function (apply>-3 <object>)

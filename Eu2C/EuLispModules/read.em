@@ -50,7 +50,7 @@
                   cons?
                   cons
                   car
-                  %pair-length
+                  %pair-size
                   eq
                   %minus %lshiftr
                   %and %ge
@@ -440,7 +440,7 @@
          (make-uninitialized-vector
           (%cast %unsigned-word-integer
                  ;;                      (make-swi
-                 (%pair-length lv1)))   ;;)
+                 (%pair-size lv1)))   ;;)
          #%I0 lv1)
       (read-error stream #%i15))))
 
