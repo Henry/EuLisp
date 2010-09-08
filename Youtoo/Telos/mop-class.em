@@ -15,6 +15,7 @@
   (syntax (_boot0)
    import (boot mop-prim)
    export (<object>
+           <metaclass>
            <simple-class> <class> <function-class>
            <function> <simple-function>
            <generic-function> <simple-generic-function>
@@ -55,13 +56,17 @@
 (defconstant <simple-class>
   (primitive-allocate () class-size))
 
-((setter primitive-class-of) <simple-class> <simple-class>)
+(defconstant <metaclass>
+  (primitive-allocate () class-size))
+
+((setter primitive-class-of) <metaclass> <simple-class>)
+((setter primitive-class-of) <simple-class> <metaclass>)
 
 (defconstant <class>
-  (primitive-allocate <simple-class> class-size))
+  (primitive-allocate <metaclass> class-size))
 
 (defconstant <function-class>
-  (primitive-allocate <simple-class> class-size))
+  (primitive-allocate <metaclass> class-size))
 
 (defconstant class-slotz
   '(name instance-length direct-superclasses direct-subclasses slots

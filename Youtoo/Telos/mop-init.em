@@ -34,6 +34,14 @@
             ()                         ; cpl
             t)                         ; absp
 
+(init-class <metaclass> 'metaclass class-size
+            (list <simple-class>)      ; supers
+            ()                         ; subs
+            class-keywordz             ; keywords
+            (list <simple-class>
+                  <object>)            ; cpl
+            t)                         ; absp
+
 (init-class <class> 'class class-size
             (list <object>)            ; supers
             (list <simple-class>       ; subs
@@ -44,7 +52,7 @@
 
 (init-class <simple-class> 'simple-class class-size
             (list <class>)             ; supers
-            ()                         ; subs
+            (list <metaclass>)         ; subs
             class-keywordz             ; keywords
             (list <class> <object>)    ; cpl
             ())                        ; absp

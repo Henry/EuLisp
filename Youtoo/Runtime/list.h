@@ -24,7 +24,7 @@ extern LispRef list_bindings[];
 #define caaaar_fn_index 13 
 #define atom__X63_fn_index 36 
 #define cdaadr_fn_index 41 
-#define _cons__X60_X62_fn_index 71 
+#define _cons__X60_X62_fn_index 72 
 #define cddadr_fn_index 12 
 #define cdr_fn_index 35 
 #define list_ref_fn_index 23 
@@ -34,7 +34,7 @@ extern LispRef list_bindings[];
 #define slice_list_fn_index 40 
 #define _null__X60_X62_fn_index 25 
 #define assoc_list_ref_fn_index 20 
-#define _list__X60_X62_fn_index 63 
+#define _list__X60_X62_fn_index 64 
 #define cddr_fn_index 20 
 #define map1_list_fn_index 10 
 #define caddr_fn_index 32 
