@@ -253,25 +253,25 @@
                     (>= current-print-depth (print-depth)))
                (%display "#(...)" s))
               ((vector? obj)
-               (let ((length (vector-size obj)))
-                 (if (= length 0)
+               (let ((size (vector-size obj)))
+                 (if (= size 0)
                      (%display "#()" s)
                    (progn
                      (%display "#(" s)
                      (inc-pr-depth 1)
                      (gfun (vector-ref obj 0) s)
-                     (write-vector1 obj s 1 length gfun)
+                     (write-vector1 obj s 1 size gfun)
                      (inc-pr-depth -1)))))
               (t (%write obj s)))        ; new subclass of <vector>
         obj)
 
-(define (write-vector1 obj s index length gfun)
-        (if (= index length)
+(define (write-vector1 obj s index size gfun)
+        (if (= index size)
             (%display ")" s)
           (progn
             (%display " " s)
             (gfun (vector-ref obj index) s)
-            (write-vector1 obj s (+ index 1) length gfun))))
+            (write-vector1 obj s (+ index 1) size gfun))))
 
 (define-generic (wait thread timeout))
 )

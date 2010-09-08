@@ -81,7 +81,7 @@ FUNDEF funtab[] =
     {"append", xappend},
     {"reverse-list", xreverse},
     {"last-pair", xlastpair},
-    {"length", xlength},
+    {"list-size", xlength},
     {"member-list", xmember},
     {"memv", xmemv},
     {"memq", xmemq},
