@@ -60,8 +60,10 @@
                   (fill cl:fill))
                  common-lisp))
  syntax (eulisp-kernel
-         (only (defsetf setf case) common-lisp)
-         )
+         (only (defsetf
+                 setf
+                 case)
+               common-lisp))
  export (accumulate
          accumulate1
          any?
@@ -82,19 +84,15 @@
 
 (make-eulisp-class collection sequence)
 
-
 ;;(defun member (element collection)
 ;;(find element collection))
 
 (deflocal $end-string "end of collection")
 
-
-;;;---------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; converter
-;;;---------------------------------------------------------------
-;;; e.g.: (convert '(a b c) <list>)
-
-
+;;;-----------------------------------------------------------------------------
+;; e.g.: (convert '(a b c) <list>)
 
 ;;(defmacro convert (collection dest-class)
 ;;  `(let ((coll ,collection) (class ',dest-class))
@@ -107,7 +105,6 @@
 ;;            (<character> 'cl:character)
 ;;            (t ())))))
 
-
 (defmacro convert (collection dest-class)
   `(let ((coll ,collection) (class ,dest-class))
      (coerce coll
@@ -119,10 +116,9 @@
                ((eq class <character>) 'cl:character)
                (t ())))))
 
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; accumulate
-;;;------------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 (defmethod accumulate ((function <function>)
                        (object <object>)
                        (lst <cons>))
@@ -162,13 +158,9 @@
   (map-accumulate-vector function str object
                          (length str) 0))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; accumulate1
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod accumulate1 ((function <function>)
                         (lst <cons>))
   (map-accumulate-list function (cdr lst) (car lst)))
@@ -201,11 +193,9 @@
       t
     ()))
 
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; any?
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod any? ((function <function>)
                  (lst <cons>) . more-collections)
   (any?-collection function lst more-collections))
@@ -447,9 +437,9 @@
 (defmethod member (object collection . rest)
   (error  "collection not a list"))
 
-
-;;; reverse like in CL
-
+;;;-----------------------------------------------------------------------------
+;;; sequence?
+;;;-----------------------------------------------------------------------------
 (defmethod sequence? ((collection <list>))
   t)
 
@@ -465,7 +455,6 @@
 
 (defun size (collection) (length collection))
 
-
-
-
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

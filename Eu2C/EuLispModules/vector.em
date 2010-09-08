@@ -24,40 +24,39 @@
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule vector
-  (import
-   (tail
-    (only (%pair-size) basic-list)
-    (only (make-fpint) int-i)
-    (only (deep-copy shallow-copy) copy)
-    (only (equal) compare-generic))
-   syntax (tail syntax-0)
-   export
-   (<vector>
-    vector?
-    ;;  length      ;; wofur ? rr
-    vector-size
-    vector-ref
-    setf-vector-ref
-    make-initialized-vector        ;;
-    make-uninitialized-vector
-    make-vector-with-init
-    maximum-vector-index
-    equal
-    equal-vector
-    ;;vector-equal
-    ;;copy
-    ;;vector-copy
-    deep-copy
-    shallow-copy
-    initialize-vector-from-list       ; fur read
-    primitive-vector-ref
-    setf-primitive-vector-ref
-    primitive-vector-size
-    make-vector
-    )
-   )
+  (import (tail
+           (only (%pair-size)
+                 basic-list)
+           (only (make-fpint)
+                 int-i)
+           (only (deep-copy
+                  shallow-copy)
+                 copy)
+           (only (equal)
+                 compare-generic))
+   syntax (tail
+           syntax-0)
+   export (<vector>
+           vector?
+           vector-size
+           vector-ref
+           setf-vector-ref
+           make-initialized-vector
+           make-uninitialized-vector
+           make-vector-with-init
+           maximum-vector-index
+           equal
+           vector-equal
+           ;;copy
+           ;;vector-copy
+           deep-copy
+           shallow-copy
+           initialize-vector-from-list
+           primitive-vector-ref
+           setf-primitive-vector-ref
+           primitive-vector-size
+           make-vector))
 
 ;;;-----------------------------------------------------------------------------
 ;;; <vector> and vector?
@@ -89,8 +88,8 @@
 
 
 (%define-literal-expansion vector
-  `(%literal ,<vector>  () ,elements) ; falsch vector wird nicht expandiert
-  ;; `(%literal ,<vector>  () ,@(convert-vector-list elements)) ; falsch vector wird nicht expandiert
+  `(%literal ,<vector>  () ,elements) ; false vector is not expanded
+  ;; `(%literal ,<vector>  () ,@(convert-vector-list elements)) ; false vector is not expanded
   )
 
 ;;(%annotate-function convert-vector-list interpreter elements)
@@ -107,13 +106,13 @@
 ;;      (cons (primitive-vector-ref vector i)
 ;;            (convert-vector-list1 vector (%plus i #%I1) l))))
 
-;;(defun length(l)            ;; wofur ? rr
-;;  (make-fpint (%pair-size l))) ;;(((.. length-1 l)))
+;;(defun length(l)            ;; For what ? rr
+;;  (make-fpint (%pair-size l))) ;;(((.. size-1 l)))
 
-;;(defun length-1 (l)        ; besser aus basic-pair ?
+;;(defun size-1 (l)        ; better basic-pair ?
 ;;    (if (null? l)
 ;;      #%i0
-;;      (%plus #%i1 (length-1 (cdr l)))))
+;;      (%plus #%i1 (size-1 (cdr l)))))
 
 (defun vector-ref (vec index)
   (primitive-vector-ref
@@ -132,11 +131,8 @@
 (defconstant maximum-vector-index #xffff)
 
 ;;;-----------------------------------------------------------------------------
-;;; length
+;;; Size
 ;;;-----------------------------------------------------------------------------
-;;(defmethod length ((object <vector>))
-;;  (make-fpint (%cast %signed-word-integer (primitive-vector-size object))))
-
 (defun vector-size (object)
   (make-fpint (%cast %signed-word-integer (primitive-vector-size object))))
 
@@ -161,12 +157,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; equal
 ;;;-----------------------------------------------------------------------------
-(defmethod  equal
-  ((object1 <vector>)
-   (object2 <vector>))
-  (equal-vector object1 object2))
+(defmethod equal ((object1 <vector>) (object2 <vector>))
+  (vector-equal object1 object2))
 
-(defun equal-vector (object1 object2)
+(defun vector-equal (object1 object2)
   (if (%eq (%cast %unsigned-word-integer
                   (primitive-vector-size object1))
            (%cast %unsigned-word-integer
@@ -249,12 +243,12 @@
 ;;   (primitive-vector-size object)))
 
 (defmethod deep-copy ((object <vector>))
-  (%let ((length-vector %unsigned-word-integer
+  (%let ((vec-size %unsigned-word-integer
                         (primitive-vector-size object)))
         (deep-copy-vec
          object
-         (make-uninitialized-vector length-vector)
-         length-vector
+         (make-uninitialized-vector vec-size)
+         vec-size
          #%I0)))
 
 (%define-function (deep-copy-vec <vector>)
@@ -297,7 +291,7 @@
     ((var var1) (atom? <list>)))))
 
 (%annotate-function
-  equal-vector new-signature
+  vector-equal new-signature
   (((var0 var1 var2)
     ((var var0) (atom? <object>))
     ((var var1) (atom? <vector>))

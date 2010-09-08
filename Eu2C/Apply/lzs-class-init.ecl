@@ -22,10 +22,9 @@
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
-;;    The initialization of predefined classes is divided into two steps to break the
-;;    circle
-;;    initialization of <class> -> slot-accessors are needed to generate runtime
-;;    initialization -> <class> has to be initialized .
+;;    The initialization of predefined classes is divided into two steps to
+;;    break the circle initialization of <class> -> slot-accessors are needed to
+;;    generate runtime initialization -> <class> has to be initialized.
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 ;;;begin module lzs-class-init
@@ -109,9 +108,8 @@
 
 (defun initialize-predefined-standard-classes ()
   (dynamic-let ((*current-module* $tail-module))
-
-;;; remove all generated accessor-functions... created in a previous run for
-;;; %object... in module %tail
+               ;; remove all generated accessor-functions... created in a
+               ;; previous run for %object... in module %tail
                (setf (?fun-list $tail-module)
                      (remove-if #'generated-function? (?fun-list $tail-module)))
 
@@ -127,11 +125,12 @@
                                   ^direct-superclasses (list %object)
                                   (slot-option)
                                   (slot-specs-for-class)
-                                  ^direct-keywords (let ((keywords ^(name
-                                                                     direct-superclasses
-                                                                     direct-slots
-                                                                     direct-keywords)))
-                                                     (mapc #'make-defined-sym keywords)
+                                  ^direct-keywords
+                                  (let ((keywords ^(name
+                                                    direct-superclasses
+                                                    direct-slots
+                                                    direct-keywords)))
+                                    (mapc #'make-defined-sym keywords)
                                                      keywords)
                                   ^representation ^pointer-to-struct
                                   ^allocation (class-allocation ^multiple-type-card)

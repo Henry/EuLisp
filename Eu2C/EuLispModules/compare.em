@@ -20,13 +20,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
 ;;;  Problems:
-;;    The default method for equal cannot work yet because an additional slot in class
-;;    objects is needed which contains a list of slot readers.
-;;    Introduce something like subclass? to fasten eql
+;;    The default method for equal cannot work yet because an additional slot in
+;;    class objects is needed which contains a list of slot readers.  Introduce
+;;    something like subclass? to fasten eql
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -42,7 +39,7 @@
            (only (<vector>
                   vector?
                   equal
-                  equal-vector
+                  vector-equal
                   primitive-vector-size
                   primitive-vector-ref)
                  vector)
@@ -97,9 +94,9 @@
 ;;  (defmethod  equal
 ;;              ((object1 <vector>)
 ;;               (object2 <vector>))
-;;    (equal-vector object1 object2))
+;;    (vector-equal object1 object2))
 ;;
-;;  (defun equal-vector(object1 object2)
+;;  (defun vector-equal(object1 object2)
 ;;    ;  (print object1)
 ;;    ;  (print object2)
 ;;    ;  (print (primitive-vector-size object1))
@@ -155,7 +152,7 @@
 ;;        (if (string? object1)
 ;;          (equal-string object1 object2)
 ;;          (if (vector? object1)
-;;            (equal-vector object1 object2)
+;;            (vector-equal object1 object2)
 ;;          (if (null? object1)      ; 1.8.93 fehler rest wird abgeschnitten
 ;; ergebnis ist t
 ;;            t
@@ -172,8 +169,9 @@
 ;;                  ())))))
 ;;        ())))
 
+;;;-----------------------------------------------------------------------------
 ;;; =
-
+;;;-----------------------------------------------------------------------------
 (defun = (arg1 . things)
   (if things
       (eq-rec (cons arg1 things))
@@ -196,8 +194,9 @@
     (car list1))
   )
 
+;;;-----------------------------------------------------------------------------
 ;;; <
-
+;;;-----------------------------------------------------------------------------
 (defun < (arg1 . things)
   (if things
       (less-rec (cons arg1 things))
@@ -238,8 +237,9 @@
 ;;      t)
 ;;    )
 
+;;;-----------------------------------------------------------------------------
 ;;; max
-
+;;;-----------------------------------------------------------------------------
 (defun max (arg1 . things)
   (if things
       (max-rec things arg1)
@@ -260,8 +260,9 @@
     max-value)
   )
 
+;;;-----------------------------------------------------------------------------
 ;;; min
-
+;;;-----------------------------------------------------------------------------
 (defun min (arg1 . things)
   (if things
       (min-rec things arg1)
@@ -285,8 +286,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
-
 (%annotate-function
   eql new-signature
   (((var0 var1 var2)
@@ -298,4 +297,6 @@
     ((var var1) (atom? <object>))
     ((var var2) (atom? <object>)))))
 
+;;;-----------------------------------------------------------------------------
 ) ; end of compare.am
+;;;-----------------------------------------------------------------------------

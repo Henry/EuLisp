@@ -165,9 +165,9 @@ non-representation-object ~s" obj))
 
 
 (defun make-pointer-to-vector (class-obj)
-  (let* ((length-slot (~vector-class-instance-size class-obj))
-         (length  (if length-slot
-                      length-slot
+  (let* ((slot-size (~vector-class-instance-size class-obj))
+         (length  (if slot-size
+                      slot-size
                     0)))
     (make-instance
      <%pointer-to-vector>

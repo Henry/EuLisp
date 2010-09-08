@@ -864,40 +864,40 @@
       (if (special-sys-fun? fun) () ; at time no argument-check !!!
         (let ((params (?params fun)))
           (if (null? params) ()
-            (let ((length-var-list (length (?var-list params)))
-                  (length-arg-list (length arg-list))
+            (let ((var-list-size (length (?var-list params)))
+                  (arg-list-size (length arg-list))
                   (rest (?rest params)))
-              (if (eq length-var-list length-arg-list)
+              (if (eq var-list-size arg-list-size)
                   (if rest
                       (setf (?arg-list application)
                             (append arg-list '(())))
                     ())
                 (if rest
-                    (if (> length-arg-list length-var-list)
-                        (cons-rest-arguments length-var-list
+                    (if (> arg-list-size var-list-size)
+                        (cons-rest-arguments var-list-size
                                              arg-list application)
                       (progn
-                        (arg-error fun (- length-var-list length-arg-list)
+                        (arg-error fun (- var-list-size arg-list-size)
                                    "too few")
                         (setf (?arg-list application)
                               (append arg-list
                                       (add-arguments
-                                       (+ (- length-var-list length-arg-list)
+                                       (+ (- var-list-size arg-list-size)
                                           1))))))
-                  (if (> length-var-list length-arg-list)
+                  (if (> var-list-size arg-list-size)
                       (progn
-                        (arg-error fun (- length-var-list length-arg-list)
+                        (arg-error fun (- var-list-size arg-list-size)
                                    "too few")
                         (setf (?arg-list application)
                               (append arg-list
                                       (add-arguments
-                                       (- length-var-list length-arg-list)))))
+                                       (- var-list-size arg-list-size)))))
                     (progn
-                      (arg-error fun (- length-arg-list length-var-list)
+                      (arg-error fun (- arg-list-size var-list-size)
                                  "too many")
                       (setf (?arg-list application)
                             (use-first-arguments
-                             length-var-list arg-list)))))))))
+                             var-list-size arg-list)))))))))
         ) ; (if (special-sys-fun? fun) ()) ; at time no argument-check !!!
     ()))
 

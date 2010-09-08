@@ -22,7 +22,7 @@
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
-;;    The functions length-pair, copy-alist, copy-list and copy-tree are tested in an Common Lisp
+;;    The functions pair-size, copy-alist, copy-list and copy-tree are tested in an Common Lisp
 ;;    environment.
 ;;;  Requires:
 ;;;  Problems:
@@ -73,14 +73,14 @@
 ;;(defun list l l) aus basic-list basic-list-0 ;am 1.8.93 nicht moglich
 
 ;;(defmethod length ((pair <cons>))
-;;  (length-pair pair))
+;;  (pair-size pair))
 
-(defun length-pair(pair)
-  (make-fpint (length-pair-1)))
+(defun pair-size(pair)
+  (make-fpint (pair-size-1)))
 
-(defun length-pair-1 (pair)         ;s.o. cons??
+(defun pair-size-1 (pair)         ;s.o. cons??
   (if (cons? (cdr pair))
-      (%plus #%i1 (length-pair-1 (cdr pair)))
+      (%plus #%i1 (pair-size-1 (cdr pair)))
     #%i0))
 
 (defun copy-alist (alist)
@@ -137,13 +137,13 @@ generic-write
     ((var var1) (var var0)))))
 
 (%annotate-function
-  length-pair-1 new-signature
+  pair-size-1 new-signature
   (((var0 var1)
     ((var var0) (atom? %signed-word-integer))
     ((var var1) (atom? <cons>)))))
 
 (%annotate-function
-  length-pair new-signature
+  pair-size new-signature
   (((var0 var1)
     ((var var0) (atom? <int>))
     ((var var1) (atom? <cons>)))))

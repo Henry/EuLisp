@@ -97,9 +97,9 @@
 
 
 ;;  (defun assoc (object alist . l)
-;;    (%let* ((length-of-l %signed-word-integer (%list-size l))
+;;    (%let* ((size-of-l %signed-word-integer (%list-size l))
 ;;            (predicate <function>
-;;                       (if (%gt length-of-l #%i0)
+;;                       (if (%gt size-of-l #%i0)
 ;;                           (car l)
 ;;               ;;(%cast <function> (car l))
 ;;                           eql))
@@ -109,7 +109,7 @@
 ;;                 ))
 ;;      (if res
 ;;        res
-;;        (if (%gt length-of-l #%i1)
+;;        (if (%gt size-of-l #%i1)
 ;;          (car (cdr l))
 ;;          ()))
 ;;      ))

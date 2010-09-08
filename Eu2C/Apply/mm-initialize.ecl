@@ -706,12 +706,12 @@ given in the constructor form" :class )
 ;;(defun ensure-vector-size
 ;;       (representation-instance class parameters)
 ;;  (let ((initial-size (~vector-class-instance-size class ))
-;;        (length-parameter (cl:find ^length parameters)))
-;;    (cond ((and length-parameter initial-size)
+;;        (parameter-size (cl:find ^length parameters)))
+;;    (cond ((and parameter-size initial-size)
 ;;           (compiler-error
 ;;            <wrong-initialization-argument-size-for-vector-class> ()
 ;;                           :class class :length initial-size))
-;;          ((and (null? initial-size) (cl:not length-parameter))
+;;          ((and (null? initial-size) (cl:not parameter-size))
 ;;           (compiler-error <missing-size-argument> () :class class))
 ;;          (initial-size (literal-instance %signed-word-integer (?byte-size-of-instance representation-instance)))
 ;;;;a hack to get true size
@@ -719,7 +719,7 @@ given in the constructor form" :class )
 ;;           (literal-instance %signed-word-integer (* initial-size
 ;;                                                       (?byte-size-as-component  (?representation
 ;;                                                                                (~vector-class-element-type class)) ))))
-;;          (length-parameter
+;;          (parameter-size
 ;;           `(,%mult ,(literal-instance %signed-word-integer (?byte-size-as-component  (?representation
 ;;                                                                                        (~vector-class-element-type class)) ))
 ;;                     (,%cast ,%signed-word-integer ,^length)))
@@ -732,17 +732,17 @@ given in the constructor form" :class )
   ;;representation * class * parameters -> %unsigned-word-integer
   ;;
   (let ((initial-size (~vector-class-instance-size-literal class ))
-        (length-parameter (cl:find ^length parameters)))
-    (cond ((and length-parameter initial-size)
+        (parameter-size (cl:find ^length parameters)))
+    (cond ((and parameter-size initial-size)
            (compiler-error
             <wrong-initialization-argument-size-for-vector-class> ()
             :class class :length initial-size))
-          ((and (null? initial-size) (cl:not length-parameter))
+          ((and (null? initial-size) (cl:not parameter-size))
            (compiler-error <missing-size-argument> () :class class))
           (initial-size
            `(,%mult (,%cast ,%unsigned-word-integer (,%size-as-component  ,(~vector-class-element-type class) ))
                     initial-size))
-          (length-parameter
+          (parameter-size
            `(,%mult (,%cast ,%unsigned-word-integer (,%size-as-component  ,(~vector-class-element-type class)))
                     (,%cast ,%unsigned-word-integer ,^length)))
           )
