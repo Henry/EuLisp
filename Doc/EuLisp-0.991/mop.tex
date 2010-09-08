@@ -29,13 +29,29 @@ General multiple inheritance can be provided by extensions.  Nor is it possible
 to use a class as a superclass which is not defined at the time of class
 definition.  Again, such forward reference facilities can be provided by
 extensions. The distinction between metaclasses and non-metaclasses is made
-explicit by a special class, named \theclass{metaclass}, which is the class of
+explicit by a special class, named \classref{metaclass}, which is the class of
 all metaclasses. This is different from ObjVlisp, where whether a class is a
 metaclass depends on the superclass list of the class in question.  It is
-implementation-defined whether \theclass{metaclass} itself is specializable or
+implementation-defined whether \classref{metaclass} itself is specializable or
 not. This implies that implementations are free to restrict the instantiation
-tree (excluding the selfinstantiation loop of \theclass{metaclass}) to a depth
-of three levels.
+tree (excluding the selfinstantiation loop of \classref{metaclass}) to a depth
+of three levels.  The metaclasses defined at level-1 are shown in
+table~\ref{level-1-metaclass-hierarchy}.
+%
+\begin{table}[ht]
+\caption{Level-1 metaclass hierarchy}
+\label{level-1-metaclass-hierarchy}
+{\tt
+    \begin{tabbing}
+        00\=00\=00\=00\= \kill
+        $\cal A$ \classref{object}
+        {\normalfont See level-0 table~\ref{level-0-class-hierarchy}} \\
+        \>$\cal A$ \classref{class} \\
+        \>\>$\cal C$ \classref{simple-class} \\
+        \>\>$\cal C$ \classref{function-class}
+    \end{tabbing}
+}
+\end{table}
 
 The minimum information associated with a class metaobject is:
 %
@@ -52,8 +68,8 @@ metaobject is:
 %
 \begin{enumerate}
     \item The name, which is required to perform inheritance computations.
-    \item The default-function, called by default to compute the initial slot value
-    when creating a new instance.
+    \item The default-function, called by default to compute the initial slot
+    value when creating a new instance.
     \item The reader, which is a function to read the corresponding slot value
     of an instance.
     \item The writer, which is a function to write the corresponding slot of an
@@ -66,23 +82,22 @@ metaobject is:
 The metaobject classes defined for slot descriptions at level-1 are shown in
 table~\ref{level-1-class-hierarchy}.
 %
-\begin{table}
+\begin{table}[ht]
 \caption{Level-1 class hierarchy}
 \label{level-1-class-hierarchy}
 {\tt
-\begin{tabbing}
-    00\=00\=00\=00\= \kill
-    $\cal A$ \classref{class} \\
-    \>$\cal C$ \classref{simple-class} \\
-    \>$\cal C$ \classref{function-class} \\
-    $\cal A$ \classref{slot} \\
-    \>$\cal C$ \classref{local-slot} \\
-    $\cal A$ \classref{function} \\
-    \>$\cal A$ \classref{generic-function} \\
-    \>\>$\cal C$ \classref{simple-generic-function} \\
-    $\cal A$ \classref{method} \\
-    \>$\cal C$ \classref{simple-method}
-\end{tabbing}
+    \begin{tabbing}
+        00\=00\=00\=00\= \kill
+        $\cal A$ \classref{object}
+        {\normalfont See level-0 table~\ref{level-0-class-hierarchy}} \\
+        \>$\cal A$ \classref{slot} \\
+        \>\>$\cal C$ \classref{local-slot} \\
+        \>$\cal A$ \classref{function} \\
+        \>\>$\cal A$ \classref{generic-function} \\
+        \>\>\>$\cal C$ \classref{simple-generic-function} \\
+        \>$\cal A$ \classref{method} \\
+        \>\>$\cal C$ \classref{simple-method}
+    \end{tabbing}
 }
 \end{table}
 
@@ -100,6 +115,10 @@ equivalent to the result of calling \functionref{compute-class-precedence-list}.
 \remarks%
 The class precedence list is used to control the inheritance of slots and
 methods.
+
+\class{metaclass}
+%
+Place holder for \classref{metaclass}.
 
 \derivedclass{simple-class}{class}
 %
