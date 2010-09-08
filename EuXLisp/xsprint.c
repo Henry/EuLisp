@@ -305,7 +305,7 @@ static void putstring(LVAL fptr, char *str, int len)
 
 /* do we need to escape this id when printing?
  * yes if (1) it contains a dodgy character
- *        (2) it is the id of zero length
+ *        (2) it is the id of zero size
  *        (3) it starts with the syntax of a number
  *        (4) it ends with a : but is not a keyword
  *
@@ -323,7 +323,7 @@ static int escaped_id(char *id, int keyword)
     if
     (
         strpbrk(id, "|\\#()\"',;` ")
-     || id[0] == 0                                            // zero length id
+     || id[0] == 0                                            // zero size id
      || (!keyword && id[strlen(id) - 1] == ':')
      || isdigit(id[0])                                               // 123
      || (id[0] == '.' && !id[1])                                     // |.|
@@ -411,7 +411,7 @@ static void putthread(LVAL fptr, LVAL val, LVAL cls)
         xlputstr(fptr, " ");
         if (!strcmp(getstring(getpname(getslotname(car(slots)))), "locks"))
         {
-            len = length(getivar(val, i));
+            len = list_size(getivar(val, i));
             xlprin1(cvsfixnum(len), fptr);
         }
         else

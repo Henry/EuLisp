@@ -265,8 +265,8 @@ LVAL xtable_delete()
     return cdr(val);
 }
 
-// xtable_length - the number of objects in the table
-LVAL xtable_length()
+// xtable_size - the number of objects in the table
+LVAL xtable_size()
 {
     static char *cfn_name = "table-size";
 

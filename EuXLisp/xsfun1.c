@@ -469,8 +469,8 @@ LVAL xlastpair()
     return (list);
 }
 
-// xlength - built-in function 'length'
-LVAL xlength()
+// xsize - built-in function 'list_size'
+LVAL xsize()
 {
     static char *cfn_name = "list-size";
     FIXTYPE n;
@@ -480,11 +480,11 @@ LVAL xlength()
     arg = xlgalist();
     xllastarg();
 
-    // find the length
+    // find the list_size
     for (n = (FIXTYPE) 0; consp(arg); ++n)
         arg = cdr(arg);
 
-    // return the length
+    // return the list_size
     return (cvfixnum(n));
 }
 
@@ -853,7 +853,7 @@ LVAL xmakevector()
 
     if (len < 0)
     {
-        xlcerror("bad length for make-vector", arg, NIL);
+        xlcerror("bad size for make-vector", arg, NIL);
     }
 
     // check for an initialization value
@@ -878,8 +878,8 @@ LVAL xmakevector()
     return (val);
 }
 
-// xvlength - built-in function 'vector-size'
-LVAL xvlength()
+// xvsize - built-in function 'vector-size'
+LVAL xvsize()
 {
     static char *cfn_name = "vector-size";
     LVAL arg;
@@ -888,10 +888,10 @@ LVAL xvlength()
     return (cvfixnum((FIXTYPE) getsize(arg)));
 }
 
-// xivlength - built-in function '%vector-size'
-LVAL xivlength()
+// xivsize - built-in function '%vector-size'
+LVAL xivsize()
 {
-    static char *cfn_name = "%VECTOR-LENGTH";
+    static char *cfn_name = "%VECTOR-SIZE";
     LVAL arg;
     arg = xlgetarg();
     xllastarg();
@@ -998,7 +998,7 @@ LVAL xlistvect()
     xllastarg();
 
     // make a vector from the list
-    size = length(xlval);
+    size = list_size(xlval);
     vect = newvector(size);
     for (p = &vect->n_vdata[0]; --size >= 0; xlval = cdr(xlval))
         *p++ = car(xlval);

@@ -40,7 +40,7 @@ void xapply()
     if (!listp(arglist))
         xlbadtype(arglist, "<list>", cfn_name);
 
-    nargs = length(arglist);
+    nargs = list_size(arglist);
 
     // check for room for extra args
     check(nargs - 1);
@@ -986,7 +986,7 @@ LVAL xmakestring()
     len = (int)getfixnum(arg);
 
     if (len < 0)
-        xlcerror("bad length for make-string", arg, NIL);
+        xlcerror("bad size for make-string", arg, NIL);
 
     // check for an initialization value
     if (moreargs())
@@ -1040,7 +1040,7 @@ LVAL xstrappend()
     saveargc = xlargc;
     savesp = xlsp;
 
-    // find the length of the new string
+    // find the size of the new string
     for (len = 0; moreargs();)
     {
         tmp = xlgastring();
@@ -1189,7 +1189,7 @@ LVAL xliststring()
     xllastarg();
 
     // make a vector from the list
-    size = length(xlval);
+    size = list_size(xlval);
     str = newstring(size + 1);
     for (p = getstring(str); --size >= 0; xlval = cdr(xlval))
         if (charp(car(xlval)))

@@ -77,7 +77,7 @@
 #define OP_VECTORP      0x53    // vector?
 #define OP_APPEND       0x54    // append of two args
 #define OP_LIST         0x55    // list of two args
-#define OP_LENGTH       0x56    // length of a list
+#define OP_SIZE         0x56    // length of a list
 #define OP_REVERSE      0x57
 #define OP_CAAR         0x5C
 #define OP_CADR         0x5D

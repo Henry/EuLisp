@@ -384,7 +384,7 @@ void xinitialize_object()
         xlreturn();
     else
     {
-        if ((length(inits) & 1) == 1)
+        if ((list_size(inits) & 1) == 1)
             xlcerror("odd-size init list in initialize", inits,
             s_telos_error);
 
@@ -446,7 +446,7 @@ LVAL xinitialize_class()
 
     merge_keywords(obj, super, inits);
 
-    size = length(getivar(obj, SLOTS));
+    size = list_size(getivar(obj, SLOTS));
     setivar(obj, INSTSIZE, cvfixnum((FIXTYPE) size));
 
     // link into hierarchy

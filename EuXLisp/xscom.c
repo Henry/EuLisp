@@ -148,7 +148,7 @@ static NTDEF *nptr, ntab[] =
     {"vector?", OP_VECTORP, 1},
     {"append", OP_APPEND, -2},
     {"list", OP_LIST, -2},
-    {"list-size", OP_LENGTH, 1},
+    {"list-size", OP_SIZE, 1},
     {"reverse", OP_REVERSE, 1},
     {"caar", OP_CAAR, 1},
     {"cadr", OP_CADR, 1},
@@ -1100,7 +1100,7 @@ static void set_bound_variables(LVAL blist)
 static LVAL make_code_object(LVAL fun)
 {
     // create a code object
-    LVAL code = newcode(FIRSTLIT + length(car(cdr(info))));
+    LVAL code = newcode(FIRSTLIT + list_size(car(cdr(info))));
     cpush(code);
     setbcode(code, newstring(cptr - cbase));
     setcname(code, fun);        // function name
@@ -1448,7 +1448,7 @@ static int push_args(LVAL form)
 // do_nary - compile nary operator expressions
 static void do_nary(int op, int n, LVAL form, int cont)
 {
-    if (n < 0 && (n = (-n)) != length(cdr(form)))
+    if (n < 0 && (n = (-n)) != list_size(cdr(form)))
     {
         do_call(form, cont);
     }
@@ -1718,8 +1718,8 @@ static void fixup(int chn)
     }
 }
 
-// length - find the length of a list
-int length(LVAL list)
+// list_size - find the size of a list
+int list_size(LVAL list)
 {
     int len;
 
@@ -3857,7 +3857,7 @@ static void check_slot_options(LVAL slots)
             xlerror("bad slot description in defclass", slot);
         }
 
-        if ((length(slot) & 1) == 0)
+        if ((list_size(slot) & 1) == 0)
         {
             xlerror("odd-size slot description in defclass", slot);
         }
@@ -3888,7 +3888,7 @@ static void check_slot_options(LVAL slots)
 
 static void check_class_options(LVAL classopts)
 {
-    if ((length(classopts) & 1) == 1)
+    if ((list_size(classopts) & 1) == 1)
     {
         xlerror("odd-size class option list in defclass", classopts);
     }

@@ -434,7 +434,7 @@ void xlexecute(LVAL fun)
                     LVAL mfl, al, args;
                     al = pop();
                     mfl = xlval;
-                    xlargc = length(al);
+                    xlargc = list_size(al);
                     check(xlargc + 2);
                     args = al;
                     for (xlsp -= xlargc, p = xlsp; consp(args);
@@ -531,12 +531,12 @@ void xlexecute(LVAL fun)
             case OP_LIST:      // 2 args
                 xlval = cons(xlval, cons(pop(), NIL));
                 break;
-            case OP_LENGTH:
+            case OP_SIZE:
                 if (!listp(xlval))
                     badargtype(xlval, "<list>", "list-size");
                 cpush(xlval);
                 xlargc = 1;
-                xlval = xlength();
+                xlval = xsize();
                 break;
             case OP_REVERSE:
                 if (!listp(xlval))

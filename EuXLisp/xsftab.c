@@ -81,7 +81,7 @@ FUNDEF funtab[] =
     {"append", xappend},
     {"reverse-list", xreverse},
     {"last-pair", xlastpair},
-    {"list-size", xlength},
+    {"list-size", xsize},
     {"member-list", xmember},
     {"memv", xmemv},
     {"memq", xmemq},
@@ -117,7 +117,7 @@ FUNDEF funtab[] =
     // vector functions
     {"vector", xvector},
     {"make-vector", xmakevector},
-    {"vector-size", xvlength},
+    {"vector-size", xvsize},
     {"vector-ref", xvref},
     {"vector-set!", xvset},
 
@@ -301,7 +301,7 @@ FUNDEF funtab[] =
     {"%CDR", xicdr},
     {"%SET-CAR!", xisetcar},
     {"%SET-CDR!", xisetcdr},
-    {"%VECTOR-LENGTH", xivlength},
+    {"%VECTOR-SIZE", xivsize},
     {"%VECTOR-REF", xivref},
     {"%VECTOR-SET!", xivset},
     {"%KEYWORDS", xkeyword_array},
@@ -360,7 +360,7 @@ FUNDEF funtab[] =
     {"table-set!", xtable_set},
     {"table-comparator", xtable_comparator},
     {"table-delete", xtable_delete},
-    {"table-size", xtable_length},
+    {"table-size", xtable_size},
     {"table-keys", xtable_keys},
     {"table-values", xtable_values},
 
@@ -564,7 +564,7 @@ int equals(LVAL arg1, LVAL arg2)
 // vectorequal - compare two vectors
 int vectorequal(LVAL v1, LVAL v2)
 {
-    // compare the vector lengths
+    // compare the vector sizes
     int len;
     if ((len = getsize(v1)) != getsize(v2))
     {
