@@ -533,7 +533,7 @@ void xlexecute(LVAL fun)
                 break;
             case OP_LENGTH:
                 if (!listp(xlval))
-                    badargtype(xlval, "<list>", "length");
+                    badargtype(xlval, "<list>", "list-size");
                 cpush(xlval);
                 xlargc = 1;
                 xlval = xlength();

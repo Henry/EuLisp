@@ -89,7 +89,7 @@
     cddddr
     list
     append
-    length
+    list-size
     list-ref
     member-alist
 
