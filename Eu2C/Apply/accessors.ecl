@@ -122,6 +122,7 @@
   arg-num
   c-imports
   calls
+  class-name
   class-precedence-list
   closure
   closure-vars

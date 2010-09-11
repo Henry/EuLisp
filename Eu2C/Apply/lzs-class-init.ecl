@@ -27,8 +27,6 @@
 ;;    generate runtime initialization -> <class> has to be initialized.
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
-;;;begin module lzs-class-init
-
 #module lzs-class-init
 (import (accessors
          level-0
@@ -66,8 +64,7 @@
                common-lisp))
  export (initialize-predefined-standard-classes
          initialize-predefined-standard-classes-part-2
-         handle-symbols
-         ))
+         handle-symbols))
 
 (defconstant $class-type-descriptor 4)
 (defconstant $abstract-class-type-descriptor 5)
@@ -90,7 +87,9 @@
   (if *basic-system* () alloc-if-defined))
 
 (defun slot-specs-for-class ()
-  (list (list ^name ^class-precedence-list
+  (list (list ^name ^class-name
+              ^type %object)
+        (list ^name ^class-precedence-list
               ^type %object)
         (list ^name ^slots
               ^type %object)
@@ -103,111 +102,108 @@
         (list ^name ^converter
               ^type %object)
         (list ^name ^allocator
-              ^type %function)
-        ))
+              ^type %function)))
 
 (defun initialize-predefined-standard-classes ()
-  (dynamic-let ((*current-module* $tail-module))
-               ;; remove all generated accessor-functions... created in a
-               ;; previous run for %object... in module %tail
-               (setf (?fun-list $tail-module)
-                     (remove-if #'generated-function? (?fun-list $tail-module)))
+  (dynamic-let
+   ((*current-module* $tail-module))
+   ;; remove all generated accessor-functions... created in a
+   ;; previous run for %object... in module %tail
+   (setf (?fun-list $tail-module)
+         (remove-if #'generated-function? (?fun-list $tail-module)))
 
-               (~initialize %object
-                            (list ^name ^%object
-                                  ^direct-superclasses ()
-                                  (slot-option) ()
-                                  ^direct-keywords ()
-                                  ^representation ^pointer-to-void
-                                  ))
-               (~initialize %class
-                            (list ^name ^%class
-                                  ^direct-superclasses (list %object)
-                                  (slot-option)
-                                  (slot-specs-for-class)
-                                  ^direct-keywords
-                                  (let ((keywords ^(name
-                                                    direct-superclasses
-                                                    direct-slots
-                                                    direct-keywords)))
-                                    (mapc #'make-defined-sym keywords)
-                                                     keywords)
-                                  ^representation ^pointer-to-struct
-                                  ^allocation (class-allocation ^multiple-type-card)
-                                  ^mm-type $class-type-descriptor
-                                  ))
+   (~initialize %object
+                (list ^name ^%object
+                      ^direct-superclasses ()
+                      (slot-option) ()
+                      ^direct-keywords ()
+                      ^representation ^pointer-to-void
+                      ))
+   (~initialize %class
+                (list ^name ^%class
+                      ^direct-superclasses (list %object)
+                      (slot-option)
+                      (slot-specs-for-class)
+                      ^direct-keywords
+                      (let ((keywords ^(name
+                                        direct-superclasses
+                                        direct-slots
+                                        direct-keywords)))
+                        (mapc #'make-defined-sym keywords)
+                        keywords)
+                      ^representation ^pointer-to-struct
+                      ^allocation (class-allocation ^multiple-type-card)
+                      ^mm-type $class-type-descriptor
+                      ))
 
-               (when (accessor-bindings-needed?)
-                     (name-and-export-reader %class ^class-precedence-list
-                                             ^%class-precedence-list)
-                     (name-and-export-reader %class ^slots
-                                             ^%class-slots)
-                     (name-and-export-accessor %class ^mm-type
-                                               ^%class-mm-type)
-                     (name-and-export-accessor %class ^mm-card
-                                               ^%class-mm-card)
-                     (name-and-export-accessor %class ^gc-tracer
-                                               ^%class-gc-tracer)
-                     (name-and-export-reader %class ^converter
-                                             ^%class-converter)
-                     (name-and-export-reader %class ^allocator
-                                             ^%class-allocator)
-                     )
+   (when (accessor-bindings-needed?)
+         (name-and-export-reader %class ^class-name
+                                 ^%class-name)
+         (name-and-export-reader %class ^class-precedence-list
+                                 ^%class-precedence-list)
+         (name-and-export-reader %class ^slots
+                                 ^%class-slots)
+         (name-and-export-accessor %class ^mm-type
+                                   ^%class-mm-type)
+         (name-and-export-accessor %class ^mm-card
+                                   ^%class-mm-card)
+         (name-and-export-accessor %class ^gc-tracer
+                                   ^%class-gc-tracer)
+         (name-and-export-reader %class ^converter
+                                 ^%class-converter)
+         (name-and-export-reader %class ^allocator
+                                 ^%class-allocator)
+         )
 
-               (~initialize %abstract-class
-                            (list ^name ^%abstract-class
-                                  ^direct-superclasses (list %class)
-                                  (slot-option)
-                                  (if (null? *basic-system*)
-                                      ()
-                                    (slot-specs-for-class))
-                                  ^direct-keywords ()
-                                  ^representation ^pointer-to-struct
-                                  ^mm-type $abstract-class-type-descriptor
-                                  ^allocation (class-allocation ^multiple-type-card)
-                                  ))
-               (~initialize %tail-class
-                            (list ^name ^%tail-class
-                                  ^direct-superclasses (list %class)
-                                  (slot-option)
-                                  (if (null? *basic-system*)
-                                      ()
-                                    (slot-specs-for-class))
-                                  ^direct-keywords ()
-                                  ^representation ^pointer-to-struct
-                                  ^mm-type $tail-class-type-descriptor
-                                  ^allocation (class-allocation ^multiple-type-card)
-                                  ))
-               (~initialize %string
-                            ;; ATTENTION: %string is an imported class in every case
-                            (list ^name ^%string
-                                  ^direct-superclasses ()
-                                  ^effective-slots
-                                  (list (list ^name ^length)
-                                        (list ^name ^element
-                                              ^type %unsigned-byte-integer
-                                              ^reader (accessor-bindings-needed?)
-                                              ^writer (accessor-bindings-needed?))
-                                        )
-                                  ^direct-keywords (let ((keywords ^(length element)))
-                                                     (mapc #'make-defined-sym keywords)
-                                                     keywords)
-                                  ^representation ^pointer-to-vector
-                                  ^mm-type $%string-type-descriptor
-                                  ^allocation ^multiple-size-card
-                                  ))
-
-               ()
-
-;;; the accessor %string-ref is not yet needed in the implementation of level-0
-;;; to provide this accessor a different mechanism is necessary because %string
-;;; is an imported class
-;;;(name-and-export-accessor %string ^element
-;;;                            ^%string-ref)
-
-               (mapc #'initialize-basic-class (?class-def-list $tail-module))
-
-               ))
+   (~initialize %abstract-class
+                (list ^name ^%abstract-class
+                      ^direct-superclasses (list %class)
+                      (slot-option)
+                      (if (null? *basic-system*)
+                          ()
+                        (slot-specs-for-class))
+                      ^direct-keywords ()
+                      ^representation ^pointer-to-struct
+                      ^mm-type $abstract-class-type-descriptor
+                      ^allocation (class-allocation ^multiple-type-card)
+                      ))
+   (~initialize %tail-class
+                (list ^name ^%tail-class
+                      ^direct-superclasses (list %class)
+                      (slot-option)
+                      (if (null? *basic-system*)
+                          ()
+                        (slot-specs-for-class))
+                      ^direct-keywords ()
+                      ^representation ^pointer-to-struct
+                      ^mm-type $tail-class-type-descriptor
+                      ^allocation (class-allocation ^multiple-type-card)
+                      ))
+   (~initialize %string
+                ;; ATTENTION: %string is an imported class in every case
+                (list ^name ^%string
+                      ^direct-superclasses ()
+                      ^effective-slots
+                      (list (list ^name ^length)
+                            (list ^name ^element
+                                  ^type %unsigned-byte-integer
+                                  ^reader (accessor-bindings-needed?)
+                                  ^writer (accessor-bindings-needed?))
+                            )
+                      ^direct-keywords (let ((keywords ^(length element)))
+                                         (mapc #'make-defined-sym keywords)
+                                         keywords)
+                      ^representation ^pointer-to-vector
+                      ^mm-type $%string-type-descriptor
+                      ^allocation ^multiple-size-card
+                      ))
+   ()
+   ;; the accessor %string-ref is not yet needed in the implementation of
+   ;; level-0 to provide this accessor a different mechanism is necessary
+   ;; because %string is an imported class
+   ;; (name-and-export-accessor %string ^element
+   ;;                            ^%string-ref)
+   (mapc #'initialize-basic-class (?class-def-list $tail-module))))
 
 (defun initialize-predefined-standard-classes-part-2 ()
   (unless *basic-system*
@@ -222,19 +218,23 @@
                         (~compute-runtime-initialization %tail-class))
                        (add-toplevel-forms-for-tail-module
                         (~compute-runtime-initialization %string))
-
                        )))
 
 (defgeneric initialize-basic-class (class))
+
 (defmethod initialize-basic-class (class) ())
+
 (defmethod initialize-basic-class ((class <%string>))
   (setf (?class class) %tail-class)
   (setf (?expanded-literal class) ())
+  (setf (?class-name class) ())
   (setf (?class-precedence-list class) ()))
+
 (defmethod initialize-basic-class ((class <basic-class-def>))
   (setf (?place class) ())
   (setf (?expanded-literal class) ())
   (setf (?class class) %tail-class)
+  (setf (?class-name class) ())
   (setf (?class-precedence-list class) ())
   ;;lattice-type is set by the initialization of the type inference
   (~compute-runtime-initialization class) ;only for side effect
@@ -245,19 +245,19 @@
   (when (eq *compilation-type* :application)
         (let ((symtab-initfun
                (make-instance <global-fun>
-                              :identifier (list ^symbol-table-initializator)
-                              :params (make-instance <params>
-                                                     :var-list ()
-                                                     :rest ())
-                              :body (make-instance
-                                     <progn-form>
-                                     :form-list
-                                     (mapcar (lambda (sym)
-                                               (make-instance
-                                                <app>
-                                                :function %add-symbol
-                                                :arg-list (list sym)))
-                                             (dynamic symbol-env))))))
+                 :identifier (list ^symbol-table-initializator)
+                 :params (make-instance <params>
+                           :var-list ()
+                           :rest ())
+                 :body (make-instance
+                         <progn-form>
+                         :form-list
+                         (mapcar (lambda (sym)
+                                   (make-instance
+                                     <app>
+                                     :function %add-symbol
+                                     :arg-list (list sym)))
+                                 (dynamic symbol-env))))))
           (setf (?symtab-initfun main-module) symtab-initfun)
           (add-lexical symtab-initfun main-module ()))))
 

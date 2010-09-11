@@ -256,9 +256,8 @@
 
 ;;;-----------------------------------------------------------------------------
 ;;; TM (transmod): definitions into LZS without body expansion
-;;;                collection of objects into environments
+;;  collection of objects into environments
 ;;;-----------------------------------------------------------------------------
-
 ;; some auxillary functions to extend the lists of defined objects in a
 ;; lzs-module
 
@@ -655,7 +654,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  variable bindings: labels
 ;;;-----------------------------------------------------------------------------
-
 ;; The following is deactivated because labels-form is not handled right by the
 ;; following compiler passes. Therefore labels is mapped to a let*-form.
 
@@ -1441,9 +1439,9 @@
                 ((eq operator %select) %pointer-of-select)))
     transformed-entity))
 
-;;; a syntax-transformation-rule for %setf isn't necessary because the
-;;; destination may be also a macro call expanding to one of the allowed
-;;; destination specifications
+;; a syntax-transformation-rule for %setf isn't necessary because the
+;; destination may be also a macro call expanding to one of the allowed
+;; destination specifications
 
 (deftrans (%setf destination source)
   (or
@@ -1494,6 +1492,18 @@
                :code-identifier xid)))
     (add-to-symbol-env sym)
     ()))
+
+;; (deftranssyn (%class-name cl)
+;;   (progn
+;;     (setf (second (whole-form)) (transsyn cl))
+;;     (whole-form)))
+
+;; (deftrans (%class-name cl)
+;;   (make-instance <defined-sym>
+;;     :name (string (symbol-name (?class (?var (trans cl)))))
+;;     :package "eulisp"
+;;     ;:identifier id
+;;     ))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

@@ -22,9 +22,6 @@
 ;;;  Description:
 ;;;  Documentation:
 ;;    lzs-syntax contains the macro def-lzs-object for lzs
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Winfried Heicking, Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 

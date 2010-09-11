@@ -20,17 +20,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: initialization protocol of the compile time MOP for standard classes
 ;;;  Description:
-;;    The methods for <standard-class-def> implement the single inheritance case which
-;;    is the default for the predefined EuLisp class <class>.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    The methods for <standard-class-def> implement the single inheritance case
+;;    which is the default for the predefined EuLisp class <class>.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 #module standard-init
-
 (import (level-1
          lzs-mop
          accessors
@@ -156,13 +151,16 @@
     (mapc (lambda (superclass)
             (push class (?subclasses superclass)))
           direct-superclasses)
-    (setf (?lattice-type class) (~compute-lattice-type class direct-superclasses
-                                                       direct-super-lattice-types))
+    (setf (?lattice-type class)
+          (~compute-lattice-type class direct-superclasses
+                                 direct-super-lattice-types))
+    (setf (?class-name class) name)
     (setf (?class-precedence-list class)
           (~compute-class-precedence-list class direct-superclasses))
     (setf (?keywords class)
-          (~compute-keywords class direct-keywords
-                             (~compute-inherited-keywords class direct-superclasses)))
+          (~compute-keywords
+           class direct-keywords
+           (~compute-inherited-keywords class direct-superclasses)))
     (setq inherited-slots
           (~compute-inherited-slots class direct-superclasses))
     (setq effective-slots
@@ -200,6 +198,7 @@
     (setf (?supers class) ())
     (setf (?lattice-type class)
           (~compute-lattice-type class () direct-super-lattice-types))
+    (setf (?class-name class) name)
     (setf (?class-precedence-list class)  (list class))
     (setf (?keywords class) direct-keywords)
     (setq effective-slots (create-tail-slot-defs class direct-slot-specs))
@@ -236,6 +235,7 @@
     (setf (?lattice-type class)
           (~compute-lattice-type class direct-superclasses
                                  direct-super-lattice-types))
+    (setf (?class-name class) name)
     (setf (?class-precedence-list class)
           (~compute-class-precedence-list class direct-superclasses))
     (setf (?keywords class)
@@ -253,33 +253,30 @@
 ;;;-----------------------------------------------------------------------------
 ;;; ~compute-class-precedence-list
 ;;;-----------------------------------------------------------------------------
-(defmethod ~compute-class-precedence-list ((class <class-def>)
-                                           direct-superclasses)
+(defmethod ~compute-class-precedence-list
+  ((class <class-def>) direct-superclasses)
   (cons class (~class-precedence-list (car direct-superclasses))))
 
-(defmethod ~compute-class-precedence-list ((class <class-def>)
-                                           (direct-superclasses <null>))
+(defmethod ~compute-class-precedence-list
+  ((class <class-def>) (direct-superclasses <null>))
   (list class))
-
 
 ;;;-----------------------------------------------------------------------------
 ;;; ~compute-inherited-slots, ~compute-slots
 ;;;-----------------------------------------------------------------------------
-
-(defmethod ~compute-inherited-slots ((class <class-def>)
-                                                 direct-superclasses)
+(defmethod ~compute-inherited-slots
+  ((class <class-def>) direct-superclasses)
   (list (~class-slots (car direct-superclasses))))
 
-(defmethod ~compute-inherited-slots ((class <class-def>)
-                                                 (direct-superclasses <null>))
+(defmethod ~compute-inherited-slots
+  ((class <class-def>) (direct-superclasses <null>))
   (list ()))
 
-
-(defmethod ~compute-slots ((class <class-def>)
-                                       direct-slot-specs
-                                       inherited-slots)
+(defmethod ~compute-slots
+  ((class <class-def>) direct-slot-specs inherited-slots)
   (nconc (mapcar (lambda (inherited-slot)
-                   (create-specializing-slot class inherited-slot direct-slot-specs))
+                   (create-specializing-slot
+                    class inherited-slot direct-slot-specs))
                  (car inherited-slots))
          (create-slot-defs class direct-slot-specs
                            (car inherited-slots))))
@@ -297,16 +294,17 @@
                                      inherited-slot direct-slot-specs)
   ;; creates slot-specs for slots specializing inherited ones and for slots
   ;; simply inherited from superclass without specialization
-  (let* ((specializing-slot (make-instance <slot-desc>
-                                           :identifier (~slot-name inherited-slot)
-                                           :specializes inherited-slot
-                                           :slot-of class))
+  (let* ((specializing-slot (make-instance
+                              <slot-desc>
+                              :identifier (~slot-name inherited-slot)
+                              :specializes inherited-slot
+                              :slot-of class))
          (slot-spec (find (~slot-name inherited-slot) direct-slot-specs
-                          :key (lambda (slot-spec) (get-option ^name slot-spec ()))))
+                          :key (lambda (slot-spec)
+                                 (get-option ^name slot-spec ()))))
          (default-function (get-option ^default-function slot-spec ()))
          (type (get-option ^type slot-spec ()))
-         (keyword (get-option ^keyword slot-spec ()))
-         )
+         (keyword (get-option ^keyword slot-spec ())))
     (when default-function
           (setf (?slot default-function) specializing-slot))
     (setf (?default-function specializing-slot)
@@ -349,12 +347,13 @@
 (defmethod create-slot-defs-of-imported-class (class effective-slot-specs)
   ;; creates new slot definitions for all given effective slots
   (mapcar (lambda (slot-spec)
-            (make-instance <slot-desc>
-                           :identifier (get-option ^name slot-spec ())
-                           :code-identifier (get-option ^c-identifier slot-spec ())
-                           :keyword (get-option ^keyword slot-spec ())
-                           :type (get-option ^type slot-spec %object)
-                           :slot-of class))
+            (make-instance
+              <slot-desc>
+              :identifier (get-option ^name slot-spec ())
+              :code-identifier (get-option ^c-identifier slot-spec ())
+              :keyword (get-option ^keyword slot-spec ())
+              :type (get-option ^type slot-spec %object)
+              :slot-of class))
           effective-slot-specs))
 
 ;;;-----------------------------------------------------------------------------
@@ -373,16 +372,13 @@
                               keywords inherited-keyword-lists)
   (remove-duplicates (append keywords (car inherited-keyword-lists))))
 
-;;;-----------------------------------------------------------------------------
-;;; ~compute-representation defined in representation.em
-;;; ~compute-constructor defined in mm-initialize.em
-;;; ~compute-predicate defined in mm-initialize.em
-;;;-----------------------------------------------------------------------------
+;; ~compute-representation defined in representation.em
+;; ~compute-constructor defined in mm-initialize.em
+;; ~compute-predicate defined in mm-initialize.em
 
 ;;;-----------------------------------------------------------------------------
 ;;; Initialization of the Slot Access Protocol
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~compute-and-ensure-slot-accessors
   ((class <standard-class-def>) effective-slots inherited-slots)
   ;; a reader and a writer is generated for every type of slot (new,
@@ -414,7 +410,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Initialization of Generic Functions and Methods
 ;;;-----------------------------------------------------------------------------
-
 (defun method-valid? (method gf)
   (cond ((non-congruent-lambda-lists? (?params (?fun method))
                                        (?params gf))

@@ -39,8 +39,7 @@
                   object-size) mm-interface)
            pointer-to-void
            basic-list-0
-           basic-number
-           )
+           basic-number)
    syntax (%tail)
    export (%class-of
            %instance-of?

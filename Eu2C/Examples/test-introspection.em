@@ -43,8 +43,16 @@
   ((cl <class>))
   (%select cl <class> class-precedence-list))
 
-(print (class-precedence-list <list>))
-(print <list>)
+(%define-function (class-name <symbol>)
+  ((cl <class>))
+  (%select cl <class> class-name))
+
+;; (%define-function (class-name <symbol>)
+;;   ((cla <class>))
+;;   (%class-name cla))
+
+(print (class-name (car (cdr (class-precedence-list <list>)))))
+(print (class-name <list>))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

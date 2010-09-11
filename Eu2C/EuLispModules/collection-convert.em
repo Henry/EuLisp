@@ -20,68 +20,47 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: collection consist of list, string, vector, table,
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection-convert
-
-  (import
-   (apply
-    tail
-    eulisp-kernel
-    (only (make-string string-pointer allocate-%string)
-          string-ii)
-    (only (strlen) c-string-interface)
-
-    (only (print) print)
-    basic-list
-    (only (list)
-          pair)
-
-    (only (<string>)
-          string-i)
-    (only (binary+)
-          int)
-    (only (eql)
-          compare)
-    (only (<conversion-condition> error) condition)
-    character
-    vector
-    table
-    collection-i
-    convert
-    )
-
-   syntax
-   (tail
-    apply
-    syntax-0
-    setf
-    )
-
-   export
-   (converter
-    convert
-    )
-   )
-
-
-
-
-
-
-
-
-
+  (import (apply
+           tail
+           eulisp-kernel
+           (only (make-string
+                  string-pointer
+                  allocate-%string)
+                 string-ii)
+           (only (strlen)
+                 c-string-interface)
+           (only (print)
+                 print)
+           basic-list
+           (only (list)
+                 pair)
+           (only (<string>)
+                 string-i)
+           (only (binary+)
+                 int)
+           (only (eql)
+                 compare)
+           (only (<conversion-condition>
+                  error)
+                 condition)
+           character
+           vector
+           table
+           collection-i
+           convert)
+   syntax (tail
+           apply
+           syntax-0
+           setf)
+   export (converter
+           convert))
 
 (defmethod (converter <list>) ((collection <list>))
   collection)
-
-
 
 (defmethod (converter <list>) ((collection <vector>))
   (let ((result (cons 1 ())))
@@ -90,7 +69,6 @@
                             (primitive-vector-size collection)
                             result)
     (cdr result)))
-
 
 (%define-function (convert-vector-to-list <list>)
   ((vec <vector>)
@@ -109,7 +87,6 @@
               (cdr result)))
     result))
 
-
 (defmethod (converter <list>) ((collection <string>))
   (let ((result (cons 1 ())))
     (convert-string-to-list collection
@@ -117,7 +94,6 @@
                             (primitive-string-size collection)
                             result)
     (cdr result)))
-
 
 (%define-function (convert-string-to-list <list>)
   ((str <string>)
@@ -136,7 +112,6 @@
               (cdr result)))
     result))
 
-
 (defmethod (converter <list>) ((collection <table>))
   (convert-table-to-list collection 0))
 
@@ -147,16 +122,8 @@
       (cons tab-res (convert-table-to-list table (binary+ index 1)))
       )))
 
-
-
-
-
-
 (defmethod (converter <vector>) ((collection <vector>))
   collection)
-
-
-
 
 (defmethod (converter <vector>) ((collection <list>))
   (%let (
@@ -167,7 +134,6 @@
                          (%cast %unsigned-word-integer
                                 (%pair-size collection)))))
         (convert-list-to-vector collection result-vector #%I0)))
-
 
 (%define-function (convert-list-to-vector <vector>)
   ((lst <list>)
@@ -183,8 +149,6 @@
                                 (%plus start #%I1))
         )
     result-vector))
-
-
 
 (defmethod (converter <vector>) ((collection <string>))
   (%let* ((vec-size %unsigned-word-integer
@@ -210,21 +174,11 @@
                                   (%plus index #%I1)))
     result-vector))
 
-
 (defmethod (converter <vector>) ((collection <table>))
   (convert (convert collection <list>) <vector>))
 
-
-
-
-
-
-
 (defmethod (converter <string>) ((collection <string>))
   collection)
-
-
-
 
 (defmethod (converter <string>) ((collection <vector>))
   (%let* ((str-size %unsigned-word-integer
@@ -236,7 +190,6 @@
                                   (%cast %signed-word-integer
                                          str-size))))))
          (convert-vector-to-string collection result-string str-size #%I0)))
-
 
 (%define-function (convert-vector-to-string <string>)
   ((vec <vector>)
@@ -257,9 +210,6 @@
                                   (%plus index #%I1)))
     result-string))
 
-
-
-
 (defmethod (converter <string>) ((collection <list>))
   (%let* (
 ;;;            (str-size %signed-word-integer
@@ -269,7 +219,6 @@
                           (allocate-%string
                            (%plus #%i1 (%pair-size collection))))))
          (convert-list-to-string collection result-string #%I0)))
-
 
 (%define-function (convert-list-to-string <string>)
   ((lst <list>)
@@ -287,27 +236,15 @@
                                 (%plus index #%I1)))
     result-string))
 
-
 (defmethod (converter <string>) ((collection <table>))
   (convert (convert collection <list>) <string>))
-
-
-
-
-
-
-
 
 (defmethod (converter <table>) ((collection <table>))
   collection)
 
-
-
-
 (defmethod (converter <table>) ((collection <list>))
   (let ((table (make-table eql () hash)))
     (convert-list-to-table collection table 0)))
-
 
 (defun convert-list-to-table (lst table index)
   (if (cons? lst)
@@ -315,14 +252,11 @@
              (convert-list-to-table (cdr lst) table (binary+ index 1)))
     table))
 
-
-
 (defmethod (converter <table>) ((collection <vector>))
   (let ((table (make-table eql () hash)))
     (convert-vector-to-table collection
                              table
                              (primitive-vector-size collection) #%I0)))
-
 
 (%define-function (convert-vector-to-table <table>)
   ((vec <vector>)
@@ -365,16 +299,7 @@
                                  (%plus index #%I1)))
     result-table))
 
-
-
-
-
-
-
-
-
 (defgeneric right-char? (what))
-
 
 (defmethod right-char? ((what <character>))
   what)
@@ -382,7 +307,6 @@
 (defmethod right-char? ((what <object>))
   (error "convert: no characters for string "  <conversion-condition>))
 
-
+;;;-----------------------------------------------------------------------------
 )
-
-;;;eof
+;;;-----------------------------------------------------------------------------

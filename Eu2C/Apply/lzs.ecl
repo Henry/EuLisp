@@ -34,14 +34,6 @@
 ;;;-----------------------------------------------------------------------------
 
 ;;;-----------------------------------------------------------------------------
-;; deflzs stuetzt sich nicht auf defstruct sondern auf defclass, weil
-;; - in defclass fuer Slots eine Typspezifikation angegeben werden kann,
-;;   ohne dass eine Initform angegeben werden muss,
-;; - die Accessor-Funktionen generisch sind, und somit fuer verschiedene
-;;   Klassen gleiche Namen haben koennen.
-;;;-----------------------------------------------------------------------------
-
-;;;-----------------------------------------------------------------------------
 ;; Deflzs was not based on defstruct but on defclass, because
 ;; - defclass supports type specification for slots,
 ;;   without which an Initform must be specified,
@@ -50,7 +42,6 @@
 ;;;-----------------------------------------------------------------------------
 
 #module lzs
-
 (import (level-0
          apply-standard  ; only make-eulisp-class-id
          lzs-syntax      ; make-structure-and-annotation-slots
@@ -64,9 +55,13 @@
  export (def-lzs-object ;macro from lzs-syntax
           make-structure-and-annotation-slots
           make-predicate-name)
- export (imported? named? global?) ;mixin predicates
- export (<lzs-object> lzs-object?) ; from lzs-syntax
- export (?unexpanded ?symtab-initfun) ;should be exported automatically
+ export (imported?
+         named?
+         global?) ;mixin predicates
+ export (<lzs-object>
+         lzs-object?) ; from lzs-syntax
+ export (?unexpanded
+         ?symtab-initfun) ;should be exported automatically
  expose (accessors))
 
 ;;;-----------------------------------------------------------------------------
@@ -75,7 +70,6 @@
 ;; Zuerst werden die Slots genannt, die den Strukturteil des Knotens beschreiben
 ;; und dann, gefolgt von :Annotations der Annotationsteil.
 ;;;-----------------------------------------------------------------------------
-
 (def-lzs-object lzs-object+type (lzs-object)
   :Annotations
   ;;-----------
@@ -135,7 +129,7 @@
   ;;-----------
   (link :initform '())  ;; Verbindung zur Verwendung der
   ;; Variablen
-  (place :initform ())  ;; Adressausdruck
+  (place :initform ())  ;; Address Expression
   (closure :initform ())              ; Kommt frei in einer Closure vor
   )
 
@@ -147,7 +141,7 @@
   ;;-----------
   (read-stats :initform ())            ; Lesen von dieser glob. Variablen
   (write-stats :initform ())           ; Beschreiben dieser glob. Variablen
-  (place :initform ())   ;; Adressausdruck
+  (place :initform ())   ;; Address Expression
   (initial-value :initform ^unknown)
   )
 
@@ -159,7 +153,7 @@
   ;;-----------
   (read-stats :initform ())            ; Lesen von dieser glob. Variablen
   (write-stats :initform ())           ; Beschreiben dieser glob. Variablen
-  (place :initform ())  ;; Adressausdruck
+  (place :initform ())  ;; Address Expression
   (initial-value :initform ^unknown)   ; used only to transmit initial value
   ;; for eval in .def-files
   )
@@ -174,7 +168,7 @@
   ;;-----------
   (read-stats :initform ())            ; Lesen von dieser glob. Variablen
   (write-stats :initform ())           ; Beschreiben dieser glob. Variablen
-  (place :initform ())  ;; Adressausdruck
+  (place :initform ())  ;; Address Expression
   )
 
 ;;;-----------------------------------------------------------------------------
@@ -196,7 +190,7 @@
    :initform ^unknown)
   :Annotations
   ;;-----------
-  (place :initform ())  ;; Adressausdruck
+  (place :initform ())  ;; Address Expression
   )
 ;;;-----------------------------------------------------------------------------
 (def-lzs-object defined-named-const (named-const)
@@ -252,13 +246,14 @@
   value
   :Annotations
   ;;-----------
-  (place :initform ())   ;; Adressausdruck
+  (place :initform ())   ;; Address Expression
   (expanded-literal :initform ())     ; instance of <literal-instance>
   (syntactic :initform ())            ; form at the syntactic level, i.e.
   ;; before transformation to LZS
   ;; needed to fasten eval and to guarantee
   ;; eq-equality during syntax expansion
   )
+
 ;;;-----------------------------------------------------------------------------
 ;; Eine zur Ubersetzungszeit bekannte Instanz einer Klasse.
 ;; Wird benoetigt zur Darstellung von #s(struct-name ..) in Common Lisp.
@@ -268,7 +263,7 @@
   value-list;; Werte der Slots als Liste von Literals
   :Annotations
   ;;-----------
-  (place :initform ())  ;; Adressausdruck
+  (place :initform ())  ;; Address Expression
   (expanded :initform ())              ; a flag, needed only to avoid recursion
   ;; during literal expansion
   (unexpanded :initform ^unknown)      ; the literal before expansion
@@ -276,9 +271,9 @@
   )
 
 ;;;-----------------------------------------------------------------------------
-;; Knoten zur Darstellung von definierenden und angewandten Vorkommen von
-;; Klassen.
-;; Die Klasse 'class' ist in CLOS schon vergeben, deshalb 'class-def'.
+;; Node for the representation of defining and applied occurrences of
+;; Classes.
+;; The class 'class' is already assigned in CLOS, so 'class-def'.
 ;;;-----------------------------------------------------------------------------
 (def-lzs-object class-def (:global :named lzs-object+type)
   (supers :initform ())      ; list of class-def's
@@ -289,8 +284,9 @@
   :Annotations
   ;;-----------
   (lattice-type :initform ())          ; lattice type for type inference
-  (place :initform ())  ;; Adressausdruck
+  (place :initform ())  ;; Address Expression
   (effective-slots :initform ())
+  (class-name :initform ())
   (class-precedence-list :initform ())
   (expanded-literal :initform ())     ; instance of <literal-instance>
   (equal-pred :initform ())
@@ -305,7 +301,6 @@
 
 ;;;-----------------------------------------------------------------------------
 (def-lzs-object defined-class (class-def)
-
   :Annotations
   ;;----------
   (constructors :initform ())
@@ -418,11 +413,8 @@
   ;; fun
   tests
   moves
-
   get-slot-value
-  set-slot-value
-
-  )
+  set-slot-value)
 
 ;;;-----------------------------------------------------------------------------
 ;; Definierte einfache Funktion
@@ -775,6 +767,6 @@
       (?identifier (?module lzs-object))
     ()))
 
-#module-end
-
-;;;end of module lzs
+;;;-----------------------------------------------------------------------------
+#module-end  ;; end of module lzs
+;;;-----------------------------------------------------------------------------

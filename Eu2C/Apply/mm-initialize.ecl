@@ -20,22 +20,24 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: initialize classes for memory management system
 ;;;  Notes:
-;;    1. at the moment the slot gc-tracer belongs to the class, not to the representation
-;;    this should be changed in the near future and all calls to (?gc-tracer class)
-;;    should be changed into (?gc-tracer representation-object)
-;;    2. length parameter in representation pointer-to-vector is assumed to be of type %unsigned-word-integer
-;;    3. we are going to generate mm-types if none are given - there might be minor
-;;    problems with synchronization in case of module compilation
+;;    1. at the moment the slot gc-tracer belongs to the class, not to the
+;;    representation this should be changed in the near future and all calls to
+;;    (?gc-tracer class) should be changed into (?gc-tracer
+;;    representation-object)
+;;    2. length parameter in representation pointer-to-vector is assumed to be
+;;    of type %unsigned-word-integer
+;;    3. we are going to generate mm-types if none are given - there might be
+;;    minor problems with synchronization in case of module compilation
 ;;    4. the allocator function is generated only for representation
 ;;    pointer-to-struct. this should be changed in the future to
 ;;    a. allocator only for instances of <class>
 ;;    b. for all classes if this is needed
-;;;  Requires:
 ;;;  Problems:
-;;    1. any changes of type <pointer-to-void> must be done conformely with changes in
-;;    the generation of trace functions for <%pointer-to-struct>-thingies.
-;;    2. now there is a cast to %unsigned-word-integer which should be replaced with an
-;;    type %pointer....
+;;    1. any changes of type <pointer-to-void> must be done conformely with
+;;    changes in the generation of trace functions for
+;;    <%pointer-to-struct>-thingies.
+;;    2. now there is a cast to %unsigned-word-integer which should be replaced
+;;    with an type %pointer....
 ;;    3. ~compute constructor:
 ;;    the generated let expr needs a genuine variable alloc
 ;;    what about constructors if a user writes its own intialization
@@ -44,18 +46,18 @@
 ;;    4. problem with direct
 ;;    5. ensure-vector-size hack
 ;;    6. %size-of only correct code for pointer-to-struct and pointer-to-vector
-;;    to use %size-of, constructors for multiple-type-card-allocated objects have
-;;    use the cds stored in the class !!!
-;;    what about dynamically calculated card and type descriptors?
-;;    Ensure that init-frorms of "library module" is executed first!!!!!!!!!
-;;    estimated-size in canonize-mm-card methods is not necessaryly machine
-;;    independent
-;;    there should be an option which defines the use of that estimation
+;;    to use %size-of, constructors for multiple-type-card-allocated objects
+;;    have use the cds stored in the class !!!  what about dynamically
+;;    calculated card and type descriptors?  Ensure that init-frorms of "library
+;;    module" is executed first!!!!!!!!!  estimated-size in canonize-mm-card
+;;    methods is not necessaryly machine independent there should be an option
+;;    which defines the use of that estimation
 ;;    7. card-type-code contains lzs-object
 ;;    8. all lexical env's replaced by empty lists
-;;    9. %string is initialized by dummy-initialization -> the file basic-string.am
-;;    contains the initialization with card-descriptor 11   <<<<<<<<< Attention
-;;    therefore last-used-card-descriptor is set to 11 in init-mm-initialize
+;;    9. %string is initialized by dummy-initialization -> the file
+;;    basic-string.am contains the initialization with card-descriptor 11
+;;    <<<<<<<<< Attention therefore last-used-card-descriptor is set to 11 in
+;;    init-mm-initialize
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
@@ -127,40 +129,40 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Definition of used compiler-conditions
 ;;;-----------------------------------------------------------------------------
-
 (define-compiler-condition <wrong-allocation-argument> (<condition>)
   "The allocation argument ~A in class ~A is not defined" :argument :class )
 
 (define-compiler-condition <no-allocation-argument> (<condition>)
-  "Neither class ~A nor its superclass ~A have a allocation argument." :class :super )
+  "Neither class ~A nor its superclass ~A have a allocation argument."
+  :class :super )
 
 (define-compiler-condition <wrong-initialization-argument-size-for-vector-class> (<condition>)
   "The vector class ~A is defined with an initvalue of ~A for length and can ~
-therefore not have a length argument for the constructor function" :class
-:length)
+therefore not have a length argument for the constructor function"
+  :class :length)
 
 (define-compiler-condition <missing-size-argument> (<condition>)
   "The vector class ~A is defined without  an initvalue and no init-value is~
-given in the constructor form" :class )
+given in the constructor form"
+  :class )
 
 ;;;-----------------------------------------------------------------------------
 ;;; Constants
 ;;;-----------------------------------------------------------------------------
-
-
 (defconstant $dummy-class-mm-type (literal-instance %signed-word-integer -1))
 (defconstant $dummy-class-mm-card (literal-instance %signed-word-integer -1))
 
 ;;$dynamic-class-mm-card-for-vector-classes is used to signal the need for
-;;creating card descriptors in constructor functions during class definition and allocation
-;;if no length is given and if allocation is not on multiple-size-cards
+;;creating card descriptors in constructor functions during class definition and
+;;allocation if no length is given and if allocation is not on
+;;multiple-size-cards
 
-(defconstant $dynamic-class-mm-card-for-vector-classes (literal-instance %signed-word-integer -10))
+(defconstant $dynamic-class-mm-card-for-vector-classes
+  (literal-instance %signed-word-integer -10))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Variables, initial values for accumulator vars are set in init-mm-initialize
-;;;-----------------------------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 (deflocal generated-mm-types ())
 (deflocal initialized-classes ())
 
@@ -207,11 +209,9 @@ given in the constructor form" :class )
         ())
   )
 
-
 ;;;-----------------------------------------------------------------------------
 ;;;
 ;;;-----------------------------------------------------------------------------
-
 (defun dummy-initialization-for
   (class representation-object)
   (setf(?mm-type representation-object) $dummy-class-mm-type)
@@ -231,18 +231,19 @@ given in the constructor form" :class )
 
   (let ((mm-type (if (dynamic *static-mm-type*)
                      (progn
-                       (setq max-used-type-descriptor (+ 1
-                                                         max-used-type-descriptor))
-                       ;; *UK* 21.06.94 not sure whether or not the following will
-                       ;; ever be used
-                       (cl:push (cons max-used-type-descriptor class) generated-mm-types)
+                       (setq max-used-type-descriptor
+                             (+ 1 max-used-type-descriptor))
+                       ;; *UK* 21.06.94 not sure whether or not the following
+                       ;; will ever be used
+                       (cl:push (cons max-used-type-descriptor class)
+                                generated-mm-types)
                        max-used-type-descriptor)
                    ;;use dynamically estimated mm-type
                    ()
                    )))
 
-    (mm-initialize-using-representation representation-object class allocation mm-type))
-  )
+    (mm-initialize-using-representation
+     representation-object class allocation mm-type)))
 
 (defgeneric mm-initialize
   (class representation-object allocation))
@@ -252,8 +253,8 @@ given in the constructor form" :class )
   ;;insert dummy values
   (dummy-initialization-for class representation-object))
 
-;;the following method have to be activated if the method for <imported-class> is
-;;changed (see above)
+;;the following method have to be activated if the method for <imported-class>
+;;is changed (see above)
 ;;(defmethod mm-initialize
 ;;           ((class <basic-class-def>) representation-object allocation )
 ;;  ;;insert dummy values
@@ -283,7 +284,8 @@ given in the constructor form" :class )
   (class representation-object )
   ;;computes gc-tracer for a class and fills slot gc-tracer
   ;; should become true in the future
-  ;; (setf(?gc-tracer representation-object) (generate-trace-code  representation-object class))
+  ;; (setf(?gc-tracer representation-object)
+  ;;   (generate-trace-code  representation-object class))
   (setf(?gc-tracer class) (generate-trace-code representation-object class )))
 
 (defun canonize-mm-type
@@ -292,19 +294,19 @@ given in the constructor form" :class )
                                                            mm-type))
   ;;add default (set-type-descriptor mm-type class (?gc-tracer
   ;;representation-object))
-  (cl:push (cl:make-instance <app>
-                             :function set-type-descriptor
-                             :arg-list (list
-                                        (literal-instance %unsigned-word-integer mm-type)
-                                        (cl:make-instance <app>
-                                                          :function %cast
-                                                          :arg-list (list
-                                                                     %unsigned-word-integer
-                                                                     class))
-                                        (?gc-tracer class); *IM* 10.03.94
-                                        ))
-           (dynamic *class-initialization-forms*))
-  )
+  (cl:push (cl:make-instance
+            <app>
+            :function set-type-descriptor
+            :arg-list (list
+                       (literal-instance %unsigned-word-integer mm-type)
+                       (cl:make-instance <app>
+                                         :function %cast
+                                         :arg-list (list
+                                                    %unsigned-word-integer
+                                                    class))
+                       (?gc-tracer class); *IM* 10.03.94
+                       ))
+           (dynamic *class-initialization-forms*)))
 
 (defun canonize-allocation (class representation-object allocation)
   ;;if no representation is given lookup in the superclass
@@ -312,7 +314,8 @@ given in the constructor form" :class )
 
   (setq allocation
         (if allocation
-            ;;one step evaluation of allocation symbols using configuration table
+            ;;one step evaluation of allocation symbols using configuration
+            ;;table
             (?configuration-value allocation)
           ;;use configuration of superclass which is already evaluated
           (?allocation (~class-representation
@@ -320,8 +323,8 @@ given in the constructor form" :class )
   (if allocation
       (setf (?allocation representation-object) allocation)
     (compiler-error <no-allocation-argument> () :class (?identifier class)
-                    :super  (?identifier (car (cdr (~class-precedence-list class))))))
-
+                    :super (?identifier
+                            (car (cdr (~class-precedence-list class))))))
   allocation)
 
 (defun create-runtime-mm-defaults
@@ -345,9 +348,7 @@ given in the constructor form" :class )
       (progn
         (canonize-mm-type class representation-object mm-type)
         (canonize-mm-card class representation-object allocation mm-type))
-    (create-runtime-mm-defaults  representation-object class allocation))
-  )
-
+    (create-runtime-mm-defaults  representation-object class allocation)))
 
 (defmethod mm-initialize-using-representation
   ((representation-object <%pointer-to-vector>) class allocation mm-type)
@@ -358,9 +359,7 @@ given in the constructor form" :class )
       (progn
         (canonize-mm-type class representation-object mm-type)
         (canonize-mm-card class representation-object allocation mm-type))
-    (create-runtime-mm-defaults  representation-object class allocation))
-  )
-
+    (create-runtime-mm-defaults  representation-object class allocation)))
 
 (defmethod create-runtime-cdscr-default
   (class cdscr cardtype size tdscr)
@@ -373,14 +372,11 @@ given in the constructor form" :class )
                                         size
                                         (literal-instance %unsigned-word-integer tdscr)
                                         ))
-           (dynamic *class-initialization-forms*))
-
-  )
+           (dynamic *class-initialization-forms*)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Generation of type and card descriptors during runtime
 ;;;-----------------------------------------------------------------------------
-
 ;;if no value for mm-type is given, it should be created during run time
 
 (defmethod create-runtime-mm-type-default
@@ -392,23 +388,27 @@ given in the constructor form" :class )
   ;;inscribe corresponding values into class-object
   ;;all constructors have to use the values from that class object
   ;;generate type-descriptor and sets mm-type
-  (cl:push (cl:make-instance <app>
-                             :function set-class-mm-type
-                             :arg-list (list
-                                        class
-                                        (cl:make-instance <app>
-                                                          :function make-type-descriptor
-                                                          :arg-list (list
-                                                                     (cl:make-instance <app>
-                                                                                       :function %cast
-                                                                                       :arg-list (list
-                                                                                                  %unsigned-word-integer
-                                                                                                  class))
-                                                                     (cl:make-instance <app>
-                                                                                       :function %cast
-                                                                                       :arg-list (list
-                                                                                                  %function
-                                                                                                  (?gc-tracer class)))))))
+  (cl:push (cl:make-instance
+            <app>
+            :function set-class-mm-type
+            :arg-list (list
+                       class
+                       (cl:make-instance
+                        <app>
+                        :function make-type-descriptor
+                        :arg-list (list
+                                   (cl:make-instance
+                                    <app>
+                                    :function %cast
+                                    :arg-list (list
+                                               %unsigned-word-integer
+                                               class))
+                                   (cl:make-instance
+                                    <app>
+                                    :function %cast
+                                    :arg-list (list
+                                               %function
+                                               (?gc-tracer class)))))))
            (dynamic *class-initialization-forms*)))
 
 
@@ -421,34 +421,36 @@ given in the constructor form" :class )
                            (if (eq allocation ^multiple-size-card)
                                $stms
                              $stss)
-                           ))
-  )
+                           )))
 
 (defmethod create-runtime-mm-card-default
   ((representation-object <%pointer-to-struct>) class allocation)
-  ;;actions to be done
-  ;;set dummy values into mm-slots of representation-object to have no unbound values
+  ;;actions to be done set dummy values into mm-slots of representation-object
+  ;;to have no unbound values
   (setf(?mm-card representation-object) $dummy-class-mm-card)
   ;;generation card descriptor
   ;;inscribe corresponding values into class-object
   ;;all constructors have to use the values from that class object
   ;;generate card descriptor using mm-type from class and
   ;;then set mm-card
-  (cl:push (cl:make-instance <app>
-                             :function set-class-mm-card
-                             :arg-list (list
-                                        class
-                                        (cl:make-instance <app>
-                                                          :function make-card-descriptor
-                                                          :arg-list (list (card-type-code allocation); *UK* 10.01.94
-                                                                          (cl:make-instance <app>
-                                                                                            :function %size-of-instance
-                                                                                            :arg-list (list class))
-                                                                          (cl:make-instance <app>
-                                                                                            :function class-mm-type
-                                                                                            :arg-list (list class))))))
-           (dynamic *class-initialization-forms*))
-  )
+  (cl:push (cl:make-instance
+            <app>
+            :function set-class-mm-card
+            :arg-list (list
+                       class
+                       (cl:make-instance
+                        <app>
+                        :function make-card-descriptor
+                        :arg-list (list (card-type-code allocation); *UK* 10.01.94
+                                        (cl:make-instance
+                                         <app>
+                                         :function %size-of-instance
+                                         :arg-list (list class))
+                                        (cl:make-instance
+                                         <app>
+                                         :function class-mm-type
+                                         :arg-list (list class))))))
+           (dynamic *class-initialization-forms*)))
 
 (defun ~vector-class-instance-byte-size (class allocation)
   ;;returns either #%i0 or an corresponding lzs-expression with %size-of or
@@ -458,59 +460,62 @@ given in the constructor form" :class )
         (if (eq allocation ^multiple-size-card)
             (literal-instance %signed-word-integer 0)
           $dynamic-class-mm-card-for-vector-classes)
-      (cl:make-instance <app>
-                        :function %mult
-                        :arg-list (list (literal-instance %signed-word-integer size)
-                                        (cl:make-instance <app>
-                                                          :function %size-as-component
-                                                          :arg-list (list (~vector-class-element-type
-                                                                           class))))))))
+      (cl:make-instance
+       <app>
+       :function %mult
+       :arg-list (list (literal-instance %signed-word-integer size)
+                       (cl:make-instance
+                        <app>
+                        :function %size-as-component
+                        :arg-list (list (~vector-class-element-type
+                                         class))))))))
 
 (defmethod create-runtime-mm-card-default
   ((representation-object <%pointer-to-vector>) class allocation)
-  ;;actions to be done
-  ;;set dummy values into mm-slots of representation-object to have no unbound slots
-  ;;generation of card descriptor if ~vector-class-instance-size is not () or
-  ;;if allocation is multiple-size-card
-  ;;inscribe corresponding values into class-object
-  ;;if ~vector-class-instance-size returns () ansd allocation is not multiple-size-card
-  ;;no card descriptor can be generated. So every time a constructor is called,
-  ;;there will be a call to make-card-descriptor which generates one if there is none
-  ;;all constructors have to use the values from that class object
-  ;;generate card descriptor using mm-type from class and
-  ;;then set mm-card
-
+  ;;actions to be done set dummy values into mm-slots of representation-object
+  ;;to have no unbound slots generation of card descriptor if
+  ;;~vector-class-instance-size is not () or if allocation is multiple-size-card
+  ;;inscribe corresponding values into class-object if
+  ;;~vector-class-instance-size returns () ansd allocation is not
+  ;;multiple-size-card no card descriptor can be generated. So every time a
+  ;;constructor is called, there will be a call to make-card-descriptor which
+  ;;generates one if there is none all constructors have to use the values from
+  ;;that class object generate card descriptor using mm-type from class and then
+  ;;set mm-card
   (let ((size (~vector-class-instance-byte-size class allocation)))
     (if (eq size $dynamic-class-mm-card-for-vector-classes)
         ;;signal that there is a vector-class without known length
-        (setf(?mm-card representation-object) $dynamic-class-mm-card-for-vector-classes)
-
+        (setf(?mm-card representation-object)
+             $dynamic-class-mm-card-for-vector-classes)
       ;;there is a length defined as initvalue or vector is allocated on multiple
       ;;size card
       (progn
-        ;;set dummy values into mm-slots of representation-object to have no unbound slots
+        ;;set dummy values into mm-slots of representation-object to have no
+        ;;unbound slots
         (setf(?mm-card representation-object) $dummy-class-mm-card)
-        (cl:push (cl:make-instance <app>
-                                   :function set-class-mm-card
-                                   :arg-list (list
-                                              class
-                                              (cl:make-instance <app>
-                                                                :function make-card-descriptor
-                                                                :arg-list (list (card-type-code allocation); *UK* 10.01.94
-                                                                                size
-                                                                                (cl:make-instance <app>
-                                                                                                  :function class-mm-type
-                                                                                                  :arg-list (list class))))))
-                 (dynamic *class-initialization-forms*)))))
-  )
+        (cl:push (cl:make-instance
+                  <app>
+                  :function set-class-mm-card
+                  :arg-list (list
+                             class
+                             (cl:make-instance
+                              <app>
+                              :function make-card-descriptor
+                              :arg-list (list (card-type-code allocation); *UK* 10.01.94
+                                              size
+                                              (cl:make-instance
+                                               <app>
+                                               :function class-mm-type
+                                               :arg-list (list class))))))
+                 (dynamic *class-initialization-forms*))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; canonize-mm... methods try to estimate descriptors during compilation time
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric canonize-mm-card (class representation-object allocation mm-type))
 
-(defmethod canonize-mm-card (class (representation-object <%pointer-to-vector>) allocation mm-type)
+(defmethod canonize-mm-card
+  (class (representation-object <%pointer-to-vector>) allocation mm-type)
   ;;assume that allocation and mm-type are set
   ;;mm-type not set -> must be generated during run time
   ;;creation of card-descriptors
@@ -537,13 +542,16 @@ given in the constructor form" :class )
       ;;non-standard-alignments on proper mtss cards
       ((eq allocation ^multiple-type-card)
        (canonize-multiple-card-descriptors class representation-object size
-                                           mm-type ctype estimated-size multiple-type-card-descriptors))
+                                           mm-type ctype estimated-size
+                                           multiple-type-card-descriptors))
       ((eq allocation  ^multiple-size-card)
        ;;special treatent for vector with unknown size
        ;;size () would result in %iNIL in set-mm-card
        ;; ~vector-class-instance-byte-size is always not null, so there is no
        ;; need to test length
-       (canonize-multiple-card-descriptors class representation-object size mm-type ctype class multiple-size-card-descriptors))
+       (canonize-multiple-card-descriptors
+        class representation-object size mm-type ctype class
+        multiple-size-card-descriptors))
       (t (compiler-error <wrong-allocation-argument> () :argument allocation
                          :class (?identifier class))))))
 
@@ -577,9 +585,13 @@ given in the constructor form" :class )
       ;;multiple type card descriptors is something like an option list with
       ;;estimated-size and corresponding card descriptor
       ((eq allocation ^multiple-type-card)
-       (canonize-multiple-card-descriptors class representation-object size mm-type ctype estimated-size multiple-type-card-descriptors))
+       (canonize-multiple-card-descriptors
+        class representation-object size mm-type ctype estimated-size
+        multiple-type-card-descriptors))
       ((eq allocation  ^multiple-size-card)
-       (canonize-multiple-card-descriptors class representation-object size mm-type ctype class multiple-size-card-descriptors))
+       (canonize-multiple-card-descriptors
+        class representation-object size mm-type ctype class
+        multiple-size-card-descriptors))
       (t (compiler-error <wrong-allocation-argument> () :argument allocation
                          :class (?identifier class))))))
 
@@ -587,7 +599,6 @@ given in the constructor form" :class )
 ;;;-----------------------------------------------------------------------------
 ;;; Generation of trace functions
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric pointer-representation?(representation))
 
 (defmethod pointer-representation?
@@ -607,17 +618,18 @@ given in the constructor form" :class )
   (let* ((slot-descrs (~class-slots class))
          (len (length slot-descrs))
          (ptr ^ptr)
-         (trace-calls (cl:mapcan (lambda(slot)
-                                   (if (pointer-representation?
-                                        (?representation (~slot-type slot)))
-                                       (list `(,trace-pointer (,%cast
-                                                               ,<pointer-to-void>
-                                                               (,^%select ,ptr ,class; *UK* 20.01.94
-                                                                          ,(~slot-name
-                                                                            slot)))))
-                                     (); no trace necessary
-                                     )) slot-descrs))
-         )
+         (trace-calls
+          (cl:mapcan (lambda(slot)
+                       (if (pointer-representation?
+                            (?representation (~slot-type slot)))
+                           (list `(,trace-pointer
+                                   (,%cast
+                                    ,<pointer-to-void>
+                                    (,^%select ,ptr ,class; *UK* 20.01.94
+                                               ,(~slot-name
+                                                 slot)))))
+                         (); no trace necessary
+                         )) slot-descrs)))
     (let ((le (length trace-calls)))
       (cond
         ;;nothing to do - object does not contain pointer
@@ -631,10 +643,10 @@ given in the constructor form" :class )
         (t (%function-literal
             (add-function
              (complete-function
-              (cl:make-instance <global-fun>
-                                :range-and-domain (cl:vector %void class %signed-word-integer)
-                                :identifier (list ^trace (?identifier class))
-                                )
+              (cl:make-instance
+               <global-fun>
+               :range-and-domain (cl:vector %void class %signed-word-integer)
+               :identifier (list ^trace (?identifier class)))
               (list ptr ^length)
               (if (= le 1)
                   (car trace-calls)
@@ -643,18 +655,15 @@ given in the constructor form" :class )
               ;;(?lex-env (find-module ^mm-interface))
               ))))))))
 
-
-
-
 (defmethod generate-trace-code
   ((representation-instance <%pointer-to-vector>)
    class )
-  (if (pointer-representation? (?representation (~vector-class-element-type class)))
+  (if (pointer-representation?
+       (?representation (~vector-class-element-type class)))
       ;;since all elements have the same type, use trace-general-object
       (%function-literal trace-general-object)
     ;;noting to do here
     (%function-literal trace-nothing)))
-
 
 (defmethod generate-trace-code
   ((representation-instance <%direct>) class)
@@ -663,7 +672,6 @@ given in the constructor form" :class )
 ;;;-----------------------------------------------------------------------------
 ;;; generation of forms used for the creation of constructors
 ;;;-----------------------------------------------------------------------------
-
 (defun convert-literal-for-allocation
   (li)
   ;;mm-type and mm-card are stored as %signed-word-integer
@@ -691,7 +699,7 @@ given in the constructor form" :class )
           `(,allocate-on-multiple-type-card ,cds ,tds)
         (if (eq allocation ^multiple-size-card)
             ;; `(,allocate-on-multiple-size-card ,cds ,(literal-instance
-            ;;                                          %signed-word-integer size))
+            ;;                                      %signed-word-integer size))
             `(,allocate-on-multiple-size-card ,cds (,%size-of-instance ,class))
           (compiler-error <wrong-allocation-argument> () :argument allocation
                           :class (?identifier class)))))))
@@ -702,7 +710,6 @@ given in the constructor form" :class )
 ;;; call to make-card-descriptor which looks in the mm-database whether or not a
 ;;; corresponding descriptor already exists - otherwise it creates one.
 ;;;-----------------------------------------------------------------------------
-
 ;;(defun ensure-vector-size
 ;;       (representation-instance class parameters)
 ;;  (let ((initial-size (~vector-class-instance-size class ))
@@ -713,15 +720,17 @@ given in the constructor form" :class )
 ;;                           :class class :length initial-size))
 ;;          ((and (null? initial-size) (cl:not parameter-size))
 ;;           (compiler-error <missing-size-argument> () :class class))
-;;          (initial-size (literal-instance %signed-word-integer (?byte-size-of-instance representation-instance)))
+;;          (initial-size (literal-instance %signed-word-integer
+;; (?byte-size-of-instance representation-instance)))
 ;;;;a hack to get true size
 ;;          (initial-size
 ;;           (literal-instance %signed-word-integer (* initial-size
-;;                                                       (?byte-size-as-component  (?representation
-;;                                                                                (~vector-class-element-type class)) ))))
+;;                                  (?byte-size-as-component  (?representation
+;;                                     (~vector-class-element-type class)) ))))
 ;;          (parameter-size
-;;           `(,%mult ,(literal-instance %signed-word-integer (?byte-size-as-component  (?representation
-;;                                                                                        (~vector-class-element-type class)) ))
+;;           `(,%mult ,(literal-instance %signed-word-integer
+;; (?byte-size-as-component  (?representation
+;; (~vector-class-element-type class)) ))
 ;;                     (,%cast ,%signed-word-integer ,^length)))
 ;;          )
 ;;    ))
@@ -740,13 +749,15 @@ given in the constructor form" :class )
           ((and (null? initial-size) (cl:not parameter-size))
            (compiler-error <missing-size-argument> () :class class))
           (initial-size
-           `(,%mult (,%cast ,%unsigned-word-integer (,%size-as-component  ,(~vector-class-element-type class) ))
+           `(,%mult (,%cast ,%unsigned-word-integer
+                            (,%size-as-component
+                             ,(~vector-class-element-type class) ))
                     initial-size))
           (parameter-size
-           `(,%mult (,%cast ,%unsigned-word-integer (,%size-as-component  ,(~vector-class-element-type class)))
-                    (,%cast ,%unsigned-word-integer ,^length)))
-          )
-    ))
+           `(,%mult (,%cast ,%unsigned-word-integer
+                            (,%size-as-component
+                             ,(~vector-class-element-type class)))
+                    (,%cast ,%unsigned-word-integer ,^length))))))
 
 (defmethod generate-allocation-code
   ((representation <%pointer-to-vector>) class parameters)
@@ -773,11 +784,9 @@ given in the constructor form" :class )
           (compiler-error <wrong-allocation-argument> () :argument allocation
                           :class (?identifier class)))))))
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; generation of constructors and predicates
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~compute-constructor
   ((class <abstract-class-def>) parameters)
   ())
@@ -786,7 +795,6 @@ given in the constructor form" :class )
   ((class <standard-class-def>) parameters)
   (~compute-constructor-using-representation (?representation class) class
                                              parameters))
-
 
 (defmethod ~compute-constructor-using-representation
   ((representation-object <%direct>)
@@ -797,21 +805,20 @@ given in the constructor form" :class )
   ;;class for which the constructor is created
   (add-function
    (complete-function
-    (cl:make-instance <constructor-fun>
-                      :range-and-domain
-                      (cl:vector class
-                                 (~slot-type (car (~class-slots
-                                                               class))));;superclasses may not
-                      ;;have slots
-                      :keywords parameters
-                      :constructor-for class)
+    (cl:make-instance
+     <constructor-fun>
+     :range-and-domain
+     (cl:vector class
+                (~slot-type (car (~class-slots
+                                  class))));;superclasses may not
+     ;;have slots
+     :keywords parameters
+     :constructor-for class)
     parameters         ;; lambda-list
     `(,%cast ,class ,(car parameters)); body
     ();;empty env
     ;;(?lex-env (find-module ^mm-interface))
     )))
-
-
 
 (defmethod ~compute-constructor-using-representation
   ((representation-object <%pointer-to-struct>)
@@ -819,34 +826,35 @@ given in the constructor form" :class )
   ;;parameters which doesn't name a slot keyword are ignored
   (let* ((slots (~class-slots class))
          (access-list
-          (cl:mapcar (lambda(slot)
-                       (let ((slot-name (~slot-name slot))
-                             (keyword (~slot-keyword slot))
-                             (default-function (~slot-default-function slot)))
-                         (if (member keyword parameters)
-                             ;;keyword of slot is contained in parameters
-                             (list ^%setf (list ^%select ^alloc class slot-name) ; *UK* 20.01.94
-                                   keyword)
-                           (if default-function
-                               ;;there is a default-function
-                               (list ^%setf (list ^%select ^alloc class slot-name) ; *UK* 20.01.94
-                                     (list default-function))
-                             ;;do nothing
-                             ()))))
-                     slots))
-         )
+          (cl:mapcar
+           (lambda(slot)
+             (let ((slot-name (~slot-name slot))
+                   (keyword (~slot-keyword slot))
+                   (default-function (~slot-default-function slot)))
+               (if (member keyword parameters)
+                   ;;keyword of slot is contained in parameters
+                   (list ^%setf (list ^%select ^alloc class slot-name) ; *UK* 20.01.94
+                         keyword)
+                 (if default-function
+                     ;;there is a default-function
+                     (list ^%setf (list ^%select ^alloc class slot-name) ; *UK* 20.01.94
+                           (list default-function))
+                   ;;do nothing
+                   ()))))
+           slots)))
     (add-function
      (complete-function
-      (cl:make-instance <constructor-fun>
-                        :range-and-domain
-                        (apply #'cl:vector class
-                               (cl:mapcar (lambda (keyword)
-                                            (~slot-type
-                                             (cl:find keyword slots
-                                                      :key #'~slot-keyword)))
-                                          parameters))
-                        :keywords parameters
-                        :constructor-for class)
+      (cl:make-instance
+       <constructor-fun>
+       :range-and-domain
+       (apply #'cl:vector class
+              (cl:mapcar (lambda (keyword)
+                           (~slot-type
+                            (cl:find keyword slots
+                                     :key #'~slot-keyword)))
+                         parameters))
+       :keywords parameters
+       :constructor-for class)
       parameters         ;; lambda-list
       `(,^let ((,^alloc (,%cast ,class ,(generate-allocation-code
                                          representation-object class parameters))))
@@ -855,8 +863,7 @@ given in the constructor form" :class )
                ,^alloc))  ;; body
       ;;(?lex-env (find-module ^mm-interface))
       (); empty env
-      )))
-  )
+      ))))
 
 (defmethod ~compute-constructor-using-representation
   ((representation-object <%pointer-to-vector>)
@@ -881,22 +888,25 @@ given in the constructor form" :class )
     ;;making init-fun
     (if init-value
         (progn
-          (setq init-fun (cl:make-instance <global-fun>
-                                           :range-and-domain (cl:vector %void class
-                                                                        %unsigned-word-integer
-                                                                        (~vector-class-element-type class))
-                                           :identifier (list ^init (?identifier class))
-                                           ))
+          (setq init-fun (cl:make-instance
+                          <global-fun>
+                          :range-and-domain (cl:vector %void class
+                                                       %unsigned-word-integer
+                                                       (~vector-class-element-type class))
+                          :identifier (list ^init (?identifier class))
+                          ))
           (add-function
            (complete-function
             init-fun
             ;; lambda-list
             ^(instance length value)
             ;; body
-
             `(,^if (,%gt ,^length ,(literal-instance %unsigned-word-integer 0))
-                   (,^progn (,^%setf ,^length (,%minus ,^length
-                                                       ,(literal-instance %unsigned-word-integer 1)))
+                   (,^progn
+                    (,^%setf ,^length
+                             (,%minus ,^length
+                                      ,(literal-instance
+                                        %unsigned-word-integer 1)))
                             (,^%setf(,^%extract ,^instance ,^length)
                                     ,^value)
                             (,init-fun ,^instance ,^length ,^value))
@@ -907,21 +917,23 @@ given in the constructor form" :class )
     ;;still to do initialization
     (add-function
      (complete-function
-      (cl:make-instance <constructor-fun>
-                        :range-and-domain
-                        (apply #'cl:vector class
-                               (cl:mapcar (lambda (slot-name)
-                                            (~slot-type
-                                             (cl:find slot-name slots
-                                                      :key #'~slot-name)))
-                                          parameters))
-                        :keywords parameters
-                        :constructor-for class)
+      (cl:make-instance
+       <constructor-fun>
+       :range-and-domain
+       (apply #'cl:vector class
+              (cl:mapcar (lambda (slot-name)
+                           (~slot-type
+                            (cl:find slot-name slots
+                                     :key #'~slot-name)))
+                         parameters))
+       :keywords parameters
+       :constructor-for class)
       parameters         ;; lambda-list
 
       (if init-fun
-          `(,^let ((,^alloc (,%cast ,class ,(generate-allocation-code
-                                             representation-object class parameters))))
+          `(,^let ((,^alloc (,%cast ,class
+                                    ,(generate-allocation-code
+                                      representation-object class parameters))))
                   (,^progn
 
                    (,init-fun ,^alloc ,number-of-slots ,init-value)
@@ -930,21 +942,19 @@ given in the constructor form" :class )
         `(,%cast ,class ,(generate-allocation-code
                           representation-object class parameters)))
       ();;empty env
-      ))
-    ))
-
-
+      ))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; installing allocator function in a class
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric canonize-allocator (class representation))
 
 (defmethod canonize-allocator (class representation)
   ;;dummy-method
   ())
-(defmethod canonize-allocator ((class <tail-class-def>) (representation <%pointer-to-struct>))
+
+(defmethod canonize-allocator ((class <tail-class-def>)
+                               (representation <%pointer-to-struct>))
   (if (eq (?allocation representation) ^unknown)
       ()
     (add-function
@@ -975,7 +985,6 @@ given in the constructor form" :class )
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~compute-predicate ((class <standard-class-def>))
   (let ((pred (add-function
                (complete-function
@@ -993,24 +1002,24 @@ given in the constructor form" :class )
   ((class <tail-class-def>))
   ())
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; Reader and Writer
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~compute-slot-reader
   (class slot effective-slots)
   (~compute-slot-reader-using-representation (?representation class) class slot
                                              effective-slots))
+
 ;;reader for direct values is only a cast to the slot-type
 (defmethod ~compute-slot-reader-using-representation
   ((representation-object <%direct>)
    class slot effective-slots)
   (add-function
-   (complete-function (cl:make-instance <slot-accessor-fun>
-                                        :slot slot
-                                        :range-and-domain (cl:vector (~slot-type slot)
-                                                                     class))
+   (complete-function (cl:make-instance
+                       <slot-accessor-fun>
+                       :slot slot
+                       :range-and-domain (cl:vector (~slot-type slot)
+                                                    class))
                       ^(object)
                       `(,%cast  ,(~slot-type slot) ,^object)
                       (tail-environment))))
@@ -1019,10 +1028,11 @@ given in the constructor form" :class )
   ((representation-object <%pointer-to-struct>)
    class slot effective-slots)
   (add-function
-   (complete-function (cl:make-instance <slot-accessor-fun>
-                                        :slot slot
-                                        :range-and-domain (cl:vector (~slot-type slot)
-                                                                     class))
+   (complete-function (cl:make-instance
+                       <slot-accessor-fun>
+                       :slot slot
+                       :range-and-domain (cl:vector (~slot-type slot)
+                                                    class))
                       ^(object)
                       `(,^%select ,^object ,class ,(~slot-name slot)); *UK* 20.01.94
                       (tail-environment))))
@@ -1033,36 +1043,38 @@ given in the constructor form" :class )
   (if (eq ^element (~slot-name slot))
       ;;reader for element = access fun for vectors
       (add-function
-       (complete-function (cl:make-instance <slot-accessor-fun>
-                                            :slot slot
-                                            :range-and-domain (cl:vector (~slot-type slot)
-                                                                         class %unsigned-word-integer))
+       (complete-function (cl:make-instance
+                           <slot-accessor-fun>
+                           :slot slot
+                           :range-and-domain (cl:vector (~slot-type slot)
+                                                        class %unsigned-word-integer))
                           ^(object index)
                           `(,%extract ,^object ,^index)
                           (tail-environment)))
     ;;reader for length = call to object-size which is imported in mm-initialize
     (add-function
-     (complete-function (cl:make-instance <slot-accessor-fun>
-                                          :slot slot
-                                          :range-and-domain (cl:vector %unsigned-word-integer
-                                                                       class))
+     (complete-function (cl:make-instance
+                         <slot-accessor-fun>
+                         :slot slot
+                         :range-and-domain (cl:vector %unsigned-word-integer
+                                                      class))
                         ^(object)
-                        ;;                        `(,%cast ,%unsigned-word-integer
-                        ;;                                (,%div  (,%vector-class-instance-size ,^object)
-                        ;;                                        ,(literal-instance %unsigned-word-integer (?byte-size-as-component  (?representation
+                        ;;     `(,%cast ,%unsigned-word-integer
+                        ;;      (,%div  (,%vector-class-instance-size ,^object)
+                        ;;       ,(literal-instance %unsigned-word-integer
+                        ;;      (?byte-size-as-component  (?representation
                         ;;
-                        ;;                                                                           (~vector-class-element-type class))))))
+                        ;;      (~vector-class-element-type class))))))
                         `(,%div  (,%vector-class-instance-size ,^object)
-                                 (,%cast ,%unsigned-word-integer (,%size-as-component ,(~vector-class-element-type class))))
+                                 (,%cast ,%unsigned-word-integer
+                                         (,%size-as-component
+                                          ,(~vector-class-element-type class))))
                         (tail-environment)))))
-
-
 
 (defmethod ~compute-slot-writer
   (class slot effective-slots)
   (~compute-slot-writer-using-representation (?representation class) class slot
                                              effective-slots))
-
 
 (defmethod ~compute-slot-writer-using-representation
   ((representation-object <%direct>)
@@ -1074,36 +1086,36 @@ given in the constructor form" :class )
   ((representation-object <%pointer-to-struct>)
    class slot effective-slots)
   (add-function
-   (complete-function (cl:make-instance <slot-accessor-fun>
-                                        :slot slot
-                                        :range-and-domain (cl:vector (~slot-type slot)
-                                                                     class
-                                                                     (~slot-type slot)))
+   (complete-function (cl:make-instance
+                       <slot-accessor-fun>
+                       :slot slot
+                       :range-and-domain (cl:vector (~slot-type slot)
+                                                    class
+                                                    (~slot-type slot)))
                       ^(object new-value)
                       `(,^%setf (,^%select ,^object ,class; *UK* 20.01.94
                                            ,(~slot-name slot))
                                 ,^new-value)
                       (tail-environment))))
 
-
 (defmethod ~compute-slot-writer-using-representation
   ((representation-object <%pointer-to-vector>)
    class slot effective-slots)
-
   (if (eq ^element (~slot-name slot))
       (add-function
-       (complete-function (cl:make-instance <slot-accessor-fun>
-                                            :slot slot
-                                            :range-and-domain (cl:vector (~slot-type slot)
-                                                                         class %unsigned-word-integer
-                                                                         (~slot-type slot)))
+       (complete-function (cl:make-instance
+                           <slot-accessor-fun>
+                           :slot slot
+                           :range-and-domain (cl:vector
+                                              (~slot-type slot)
+                                              class %unsigned-word-integer
+                                              (~slot-type slot)))
                           ^(object index new-value)
                           `(,^%setf (,%extract ,^object ,^index)
                                     ,^new-value)
                           (tail-environment)))
     ;;writer for length cannot be constructed
-    ()
-    ))
+    ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; ~compute-runtime-initialization initializes representation
@@ -1116,19 +1128,15 @@ given in the constructor form" :class )
                                 (?allocation representation-object)))
                (dynamic *class-initialization-forms*)))
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; ~compute-allocator
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ~compute-allocator(class)
   (canonize-allocator class (?representation class)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; general information about representation
 ;;;-----------------------------------------------------------------------------
-
-
 (defun info()
   (mm-describe initialized-classes))
 
@@ -1141,9 +1149,13 @@ given in the constructor form" :class )
              (mm-type (car (?value-list(?mm-type representation))))
              (mm-card (car (?value-list (?mm-card representation))))
              (allocation (symbol-name (?allocation representation))))
-        (cl:format t "~%Class ~a has ~%~3Trepresentation ~a ~%~3Tmm-type: ~A ~%~3Tmm-card: ~A
+        (cl:format
+         t
+         "~%Class ~a has ~%~3Trepresentation ~a ~%~3Tmm-type: ~A ~%~3Tmm-card: ~A
 ~%~3Tallocation: ~a" (symbol-name (?identifier class))
 (cl:class-name (cl:class-of representation)) mm-type mm-card allocation))
 (mm-describe (cdr l)))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

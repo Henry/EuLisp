@@ -177,8 +177,7 @@
   %setf-extract
   %setf-select
   %setf-view
-  %setf-cast
-  )
+  %setf-cast)
 
 ;;;-----------------------------------------------------------------------------
 ;;; resetting module %tail

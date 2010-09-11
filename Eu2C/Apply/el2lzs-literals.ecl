@@ -20,15 +20,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Transformation of Literals into LZS
 ;;;  Description:
-;;;  Documentation:
 ;;;  Notes:
-;;    expand-literal for <standard-class-def> should use the slot descriptions of the
-;;    class and not explicitely an explicit slot order and explicit slot types.
-;;    The whole technique to transform objects into literal instances has to be
-;;    reworked, at least for imported objects. The stuff for imported objects is more
-;;    a hack than a pretty implementation. Search for "imported" to get these places.
-;;;  Requires:
-;;;  Problems:
+;;    expand-literal for <standard-class-def> should use the slot descriptions
+;;    of the class and not explicitely an explicit slot order and explicit slot
+;;    types.  The whole technique to transform objects into literal instances
+;;    has to be reworked, at least for imported objects. The stuff for imported
+;;    objects is more a hack than a pretty implementation. Search for "imported"
+;;    to get these places.
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -36,7 +34,6 @@
 (import (level-0
          apply-standard
          option-lists
-         ;; el2lzs-main
          el2lzs-rules
          expand-literal
          lzs
@@ -45,22 +42,27 @@
          lzs-eval
          list-ext
          tail-module
-         representation ;whc-classes ;representations and some superclasses
-         (only (mapcar mapc make-instance find identity
-                       warn format string)
+         representation
+         (only (mapcar
+                mapc
+                make-instance
+                find
+                identity
+                warn
+                format
+                string)
                common-lisp))
  syntax (level-1
          el2lzs-rules
-         (only (push) common-lisp))
+         (only (push)
+               common-lisp))
  export (expand-literal
          literal-type
-         reset-literal-expanders)
- )
+         reset-literal-expanders))
 
 ;;;-----------------------------------------------------------------------------
 ;;; %literal
 ;;;-----------------------------------------------------------------------------
-
 (deftranssyn (%literal class . values)
   (whole-form))
 
@@ -74,9 +76,7 @@
 
 (defgeneric deftrans-literal-values (class representation values))
 
-(defmethod deftrans-literal-values (class-def
-                                    representation
-                                    values)
+(defmethod deftrans-literal-values (class-def representation values)
   ;;the default case: return the value list as it is
   ;; this is used for the following representations:
   ;; direct, vector, pointer-to-vector
@@ -114,10 +114,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; %function
 ;;;-----------------------------------------------------------------------------
-;;; (%function fun)
-;;; usable in the same places as quote
-;;; fun must be a constant binding created by defun, defgeneric, %define-function
-;;; or %declare-external-function
+;; (%function fun)
+;; usable in the same places as quote
+;; fun must be a constant binding created by defun, defgeneric, %define-function
+;; or %declare-external-function
 
 (deftranssyn (%function function)
   (whole-form))
@@ -128,7 +128,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; %define-literal-expansion
 ;;;-----------------------------------------------------------------------------
-
 (deftranssyn (%define-literal-expansion literal-class expander)
   (with-defining-form
    (setf (third (whole-form))
@@ -150,7 +149,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Definitions of Literal Classes
 ;;;-----------------------------------------------------------------------------
-
 (defun list-of-vector-elements (vector)
   (cl:map 'cl:list #'identity vector))
 
@@ -229,8 +227,8 @@
                         (%function-literal (~method-function m))))
   (generic-function . #'~method-generic-function))
 
-;;; classes are handled directly, because <class> & co. are defined as part of
-;;; the compiler
+;; classes are handled directly, because <class> & co. are defined as part of
+;; the compiler
 
 (def-literal-class slot <slot-desc>
   (name . (lambda (sd) (format () "~A" (?identifier sd))))
@@ -247,18 +245,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;; expand-literal
 ;;;-----------------------------------------------------------------------------
-;;expand-literal is defined in expand-literal.em to avoid cyclic dependencies in the
-;;module-dependency-graph
-;;(defgeneric expand-literal (literal))
+;; expand-literal is defined in expand-literal.em to avoid cyclic dependencies
+;; in the module-dependency-graph
+;; (defgeneric expand-literal (literal))
 
 (defmethod expand-literal ((literal <literal-instance>))
   (unless (?expanded literal)
-          (setf (?expanded literal) t)        ; to avoid infinite expansion loops this
-          ;; flag must be set before expanding the
-          ;; slots
+          (setf (?expanded literal) t) ; to avoid infinite expansion loops this
+                                       ; flag must be set before expanding the
+                                       ; slots
           (setf (?value-list literal)
-                (expand-slot-values literal (?class literal)
-                                    (?representation (?class literal)) (?value-list literal)))
+                (expand-slot-values
+                 literal
+                 (?class literal)
+                 (?representation (?class literal)) (?value-list literal)))
           (setf (?expanded literal) t))
   literal)
 
@@ -274,8 +274,8 @@
   ;; if a special marker like UNKNOWN was found return this
   literal)
 
-;;; NOTE: More methods for expand-literal are defined by def-literal-class. These
-;;;       methods are calling expand-literal-using-desc.
+;; NOTE: More methods for expand-literal are defined by def-literal-class. These
+;;       methods are calling expand-literal-using-desc.
 
 (defmethod expand-literal (literal)
   ;; The default case: no special expander defined
@@ -376,8 +376,8 @@ expansion of ~A~%"
                       (~class-representation class)
                       values))
 
-(defmethod expand-slot-values (literal class
-                                       (representation <%pointer-to-vector>) values)
+(defmethod expand-slot-values
+  (literal class (representation <%pointer-to-vector>) values)
   (list (car values)
         (expand-vector-elements (car (cdr values)))))
 
@@ -396,30 +396,37 @@ expansion of ~A~%"
 ;;;-----------------------------------------------------------------------------
 ;;; Expansion for Standard Classes
 ;;;-----------------------------------------------------------------------------
-
 (defmethod expand-literal ((class <defined-class>))
   (expand-class class (~class-representation class)))
 
 (defmethod expand-literal ((class <imported-class>))
   class)
 
+(defun make-class-name (class)
+  (make-instance <defined-sym>
+    :name (string (~class-name class))
+    :package "eulisp"))
+
 (defgeneric expand-class (class representation))
 
+;; slots of classes are (in this order):
+;; class-name
+;; class-precedence-list
+;; slots
+;; mm-type
+;; mm-card
+;; gc-tracer
+;; converter
+;; allocator
+
 (defmethod expand-class ((class <standard-class-def>) representation)
-  ;;slots of classes are (in this order):
-  ;;class-precedence-list
-  ;;slots
-  ;;mm-type
-  ;;mm-card
-  ;;gc-tracer
-  ;;converter
-  ;;allocator
   (or (?expanded-literal class)
       (progn
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (~class-precedence-list class)
+               (list (make-class-name class)
+                     (~class-precedence-list class)
                      (~class-slots class)
                      (?mm-type representation)
                      (?mm-card representation)
@@ -435,20 +442,14 @@ expansion of ~A~%"
 
 (defmethod expand-class ((class <standard-class-def>)
                          (representation <%pointer-to-vector>))
-  ;;slots of classes are (in this order):
-  ;;class-precedence-list
   ;;slots = () --- they are not needed for vector classes
-  ;;mm-type
-  ;;mm-card
-  ;;gc-tracer
-  ;;converter
-  ;;allocator
   (or (?expanded-literal class)
       (progn
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (~class-precedence-list class)
+               (list (make-class-name class)
+                     (~class-precedence-list class)
                      ()
                      (?mm-type representation)
                      (?mm-card representation)
@@ -469,7 +470,8 @@ expansion of ~A~%"
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (~class-precedence-list class)
+               (list (make-class-name class)
+                     (~class-precedence-list class)
                      ()
                      (?mm-type representation)
                      (?mm-card representation)
@@ -490,17 +492,21 @@ expansion of ~A~%"
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (~class-precedence-list class)
+               (list (make-class-name class)
+                     (~class-precedence-list class)
                      () ; slot-descs are needed only for make, and this is not
                      ;; allowed for abstract classes
                      (?mm-type representation)
                      (?mm-card representation)
                      ^unknown ; gc-tracer not needed, slot should be removed
                      (~converter class)
-                     ^unknown ; instance creation is not allowed for abstract classes
+                     ^unknown ; instance creation is not allowed for abstract
+                              ; classes
                      )))
         (setf (?unexpanded (?expanded-literal class)) class)
         (expand-literal (?expanded-literal class))
         (?expanded-literal class))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------

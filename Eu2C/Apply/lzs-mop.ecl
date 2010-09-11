@@ -199,7 +199,8 @@
 (defun create-predefined-standard-classes ()
   (setq %object
         (make-instance (if (null? *basic-system*)
-                           <abstract-class-def> <imported-class>)
+                           <abstract-class-def>
+                         <imported-class>)
                        :identifier ^%object
                        :code-identifier "c__object__level_0"
                        :module $tail-module
@@ -210,7 +211,8 @@
 
   (setq %class
         (make-instance (if (null? *basic-system*)
-                           <metaclass-def> <imported-class>)
+                           <metaclass-def>
+                         <imported-class>)
                        :identifier ^%class
                        :code-identifier "c__class__level_0"
                        :module $tail-module
@@ -220,7 +222,8 @@
 
   (setq %abstract-class
         (make-instance (if (null? *basic-system*)
-                           <metaclass-def> <imported-class>)
+                           <metaclass-def>
+                         <imported-class>)
                        :identifier ^%abstract-class
                        :code-identifier "c__abstract_class__level_0"
                        :module $tail-module
@@ -231,7 +234,8 @@
 
   (setq %tail-class
         (make-instance (if (null? *basic-system*)
-                           <metaclass-def> <imported-class>)
+                           <metaclass-def>
+                         <imported-class>)
                        :identifier ^%tail-class
                        :code-identifier "c__tail_class__level_0"
                        :module $tail-module

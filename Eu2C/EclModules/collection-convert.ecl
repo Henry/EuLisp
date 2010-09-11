@@ -20,38 +20,18 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: collection consist of list, string, vector, table,
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
 #module collection-convert
-
-(import
- (eulisp-kernel
-
-  )
-
- syntax
- (eulisp-kernel
-  )
-
- export
- (converter)
- )
+(import (eulisp-kernel)
+ syntax (eulisp-kernel)
+ export (converter))
 
 (defgeneric right-char? (what))
 
-
-
-
-
 (defmethod converter ((dest <list>) (collection <list>))
   collection)
-
-
 
 (defmethod converter ((dest <list>) (collection <vector>))
   (let ((result (cons 1 ())))
@@ -60,7 +40,6 @@
                             (length collection)
                             result)
     (cdr result)))
-
 
 (%define-function (convert-vector-to-list <list>)
   ((vec <vector>)
@@ -79,7 +58,6 @@
               (cdr result)))
     result))
 
-
 (defmethod (converter <list>) ((collection <string>))
   (let ((result (cons 1 ())))
     (convert-string-to-list collection
@@ -87,7 +65,6 @@
                             (primitive-string-size collection)
                             result)
     (cdr result)))
-
 
 (%define-function (convert-string-to-list <list>)
   ((str <string>)
@@ -106,14 +83,8 @@
               (cdr result)))
     result))
 
-
-
-
 (defmethod (converter <vector>) ((collection <vector>))
   collection)
-
-
-
 
 (defmethod (converter <vector>) ((collection <list>))
   (%let (
@@ -124,7 +95,6 @@
                          (%cast %unsigned-word-integer
                                 (%pair-size collection)))))
         (convert-list-to-vector collection result-vector #%I0)))
-
 
 (%define-function (convert-list-to-vector <vector>)
   ((lst <list>)
@@ -140,8 +110,6 @@
                                 (%plus start #%I1))
         )
     result-vector))
-
-
 
 (defmethod (converter <vector>) ((collection <string>))
   (%let* ((vec-size %unsigned-word-integer
@@ -167,15 +135,8 @@
                                   (%plus index #%I1)))
     result-vector))
 
-
-
-
-
 (defmethod (converter <string>) ((collection <string>))
   collection)
-
-
-
 
 (defmethod (converter <string>) ((collection <vector>))
   (%let* ((str-size %unsigned-word-integer
@@ -187,7 +148,6 @@
                                   (%cast %signed-word-integer
                                          str-size))))))
          (convert-vector-to-string collection result-string str-size #%I0)))
-
 
 (%define-function (convert-vector-to-string <string>)
   ((vec <vector>)
@@ -208,9 +168,6 @@
                                   (%plus index #%I1)))
     result-string))
 
-
-
-
 (defmethod (converter <string>) ((collection <list>))
   (%let* (
           ;;            (str-size %signed-word-integer
@@ -220,7 +177,6 @@
                           (allocate-%string
                            (%plus #%i1 (%pair-size collection))))))
          (convert-list-to-string collection result-string #%I0)))
-
 
 (%define-function (convert-list-to-string <string>)
   ((lst <list>)
@@ -238,9 +194,6 @@
                                 (%plus index #%I1)))
     result-string))
 
-
-
-
 (defmethod right-char? ((what <character>))
   what)
 
@@ -248,4 +201,6 @@
   (print "error for convert in concatenate to string, no character")
   #\a)
 
+;;;-----------------------------------------------------------------------------
 ;;;eof
+;;;-----------------------------------------------------------------------------

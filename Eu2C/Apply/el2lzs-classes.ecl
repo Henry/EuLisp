@@ -20,10 +20,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Transformation of class definitions into LZS
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
@@ -37,21 +33,31 @@
          tail-module
          lzs-mop
          quasiquote
-         (only (call) lzs-eval)
-         (only (get-defined-lattice-type add-lattice-type
-                                         trans-lattice-type-list) ti-lattice)
-         (only (mapcar nconc mapc warn list* reverse vector append)
+         (only (call)
+               lzs-eval)
+         (only (get-defined-lattice-type
+                add-lattice-type
+                trans-lattice-type-list)
+               ti-lattice)
+         (only (mapcar
+                nconc
+                mapc
+                warn
+                list*
+                reverse
+                vector
+                append)
                common-lisp))
  syntax (level-1
          el2lzs-main
-         (only (prog1) common-lisp))
- export (get-class-or-lattice-type get-lattice-type)
- )
+         (only (prog1)
+               common-lisp))
+ export (get-class-or-lattice-type
+         get-lattice-type))
 
 ;;;-----------------------------------------------------------------------------
 ;;; TS (transsyn)
 ;;;-----------------------------------------------------------------------------
-
 (deftranssyn (%define-standard-class class-spec superclass
                slot-specs . class-options)
   (with-defining-form
@@ -212,25 +218,28 @@
     (~initialize class-def
                  (list ^name id
                        ^direct-superclasses supers
-                       ^direct-slots (mapcar (lambda (s)
-                                                           (make-slot-spec class-def s))
-                                                         slot-specs)
+                       ^direct-slots (mapcar
+                                      (lambda (s)
+                                        (make-slot-spec class-def s))
+                                      slot-specs)
                        ^direct-keywords (append
                                          (slot-keywords slot-specs)
                                          keywords)
-                       ^representation (get-option ^representation class-options ())
+                       ^representation (get-option
+                                        ^representation class-options ())
                        ^allocation (get-option ^allocation class-options ())
                        ^direct-super-lattice-types
                        (trans-lattice-type-list
-                        (get-option ^direct-super-lattice-types class-options ()))
-                       ))
+                        (get-option ^direct-super-lattice-types
+                                    class-options ()))))
     (bind-slot-accessors class-def slot-specs)
     (let ((init-forms
            (reverse (~compute-runtime-initialization class-def))))
       ;; allocator and constructors can be created only
       ;; after ~compute-runtime-initialization
       (compute&bind-class-functions class-def class-options)
-      init-forms)))
+      init-forms)
+    ))
 
 (defun bind-slot-accessors (class-def slot-specs)
   (mapc (lambda (slot-spec)
@@ -256,9 +265,9 @@
            (setq accessor (~slot-slot-writer slot))))
     (when accessor
           (setf (?value (find-in-lex-env name)) accessor)
-          ;; the following installs a listed identifier to avoid that two objects
-          ;; have the same name (a constant with accessor as value has already the
-          ;; same name)
+          ;; the following installs a listed identifier to avoid that two
+          ;; objects have the same name (a constant with accessor as value has
+          ;; already the same name)
           (unless (?identifier accessor)
                   (setf (?identifier accessor) (list name)))
           )))
@@ -278,8 +287,7 @@
                     (~slot-name slot)
                     ^of
                     (?identifier (?slot-of slot))
-                    )))
-  )
+                    ))))
 
 (defun compute&bind-class-functions (class-def class-options)
   ;; ATTN: the allocator has to be created before any constructor
@@ -301,8 +309,8 @@
     (when function
           (setf (?value (find-in-lex-env name))
                 function)
-          ;; the following installs a listed identifier to avoid that two objects
-          ;; have the same name
+          ;; the following installs a listed identifier to avoid that two
+          ;; objects have the same name
           (unless (?identifier function)
                   (setf (?identifier function) (list name)))
           )))
@@ -335,7 +343,8 @@
 (defun create-slot-init-function (class slot-name slot-type default)
   (let ((init-fun
          (make-instance <slot-init-fun>
-                        :identifier (list ^init slot-name ^of (?identifier class)))))
+                        :identifier (list ^init slot-name
+                                          ^of (?identifier class)))))
     (when slot-type
           (setf (?range-and-domain init-fun) (vector slot-type)))
     (add-function          ;; install it as a global function
@@ -355,7 +364,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; %declare-external-class
 ;;;-----------------------------------------------------------------------------
-
 (deftranssyn (%declare-external-class class-spec superclasses
                slot-specs . class-options)
   (with-defining-form
@@ -417,7 +425,8 @@
                         ^converter (trans (get-option ^converter class-options ()))
                         ^representation (get-option ^representation class-options ())
                         ))
-     ()))) ; no initialization form is needed
+     ; no initialization form is needed
+     ())))
 
 (defun make-x-slot-spec (class slot-spec)
   (let* ((name (car slot-spec))
@@ -435,4 +444,6 @@
            (when c-identifier-option
                  (list ^c-identifier (car c-identifier-option))))))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------
