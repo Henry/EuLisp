@@ -211,7 +211,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; concatenate
 ;;;-----------------------------------------------------------------------------
-
 (defmethod concatenate ((str <string>) . more-collections)
   (%let ((rest-list-size %signed-word-integer
                            (%list-size more-collections)))
@@ -635,20 +634,13 @@
          index
          (primitive-string-ref str (%minus str-len index)))
         (reverse-string-aux str rev-str (%plus index #%I1) str-len))
-    rev-str)
-  )
+    rev-str))
 
 ;;;-----------------------------------------------------------------------------
 ;;; size
 ;;;-----------------------------------------------------------------------------
-;;  (defmethod size ((str <string>))
-;;    (string-size str))
-
 (defmethod size ((str <string>))
   (make-fpint (strlen (string-pointer str))))
-
-;;  (defun size-string (str)
-;;    (make-fpint (strlen (string-pointer str))))
 
 ;;;-----------------------------------------------------------------------------
 )

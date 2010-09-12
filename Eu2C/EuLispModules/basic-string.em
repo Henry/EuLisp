@@ -20,31 +20,24 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: make C-strings available for Lisp
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-string
-
   (import ((rename ((%class <class>))
                    %tail)
            mm-interface
            c-string-interface)
-
    syntax (%tail)
-
    export (duplicate-%string
            allocate-%string
-           %string
-           )
-   )
-;;the following type and card descriptors for %string are the only ones which are
-;;predefined and which cannot be changed
+           %string))
+
+;; The following type and card descriptors for %string are the only ones which
+;; are predefined and which cannot be changed
 (%define-constant $%string-type-descriptor
   (%literal %unsigned-word-integer 2))
+
 (%define-constant $%string-card-descriptor
   (%literal %unsigned-word-integer 2))
 
@@ -55,7 +48,8 @@
 (%define-function (allocate-%string %string)
   ((length %signed-word-integer))
   (%cast %string (allocate-on-multiple-size-card
-                  $%string-type-descriptor ; see the call of set-card-descriptor below
+                  $%string-type-descriptor ; see the call of set-card-descriptor
+                                           ; below
                   (%plus length #%i1))))
 
 (%define-constant unique-address-for-gc-type-descriptor-of-%string
@@ -65,13 +59,12 @@
                      (%cast %unsigned-word-integer
                             unique-address-for-gc-type-descriptor-of-%string)
                      (%function trace-nothing))
+
 (set-card-descriptor $%string-card-descriptor
                      stms  ; card type single-type-multiple-size
                      #%i0  ; size not needed for multiple-size-card
                      $%string-type-descriptor);;multiple-size-card
 
-) ;end of basic-string
-
-
-
-
+;;;-----------------------------------------------------------------------------
+)  ;; End of basic-string
+;;;-----------------------------------------------------------------------------

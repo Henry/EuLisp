@@ -20,61 +20,51 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Module string
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------
 
 (defmodule string
-  (import
-   (tail
-    syntax-0
-    string-ii
-    convert
-    symbol
-    (only (binary< equal) compare-generic)
-    (only (generic-prin generic-write) stream-generic)
-    c-string-interface
-    (only (convert-int-char) character)
-    (only (upper? upper2lower lower? lower2upper) char-tables)
-    (only (as-lowercase as-uppercase) character)
-    (only (deep-copy shallow-copy) copy)
-    )
-   syntax (tail syntax-0)
-   export
-   (<string>
-    string?
-    ;;  string-size ;because there is no methods!
-    ;;  (converter <symbol>)
-    make-string ;;***HGW
-    string-pointer ;;***HGW
-    equal ; bzw equal-string
-    deep-copy
-    shallow-copy
-    binary<
-    as-lowercase
-    as-uppercase
-    generic-prin
-    generic-write
-    converter
-    convert
-    ;;        nicht in el0.99:
-    ;;        string-ref
-    ;;        string-pointer ;only for intern use for table
-    ;;        ;string-lt ;because it is a method
-    ;;        string-slice
-    ;;        string-append
-    )
-   expose
-   (
-    ;;(only (equal) compare)
-    ;;(only (copy) copy)
-    ;;(only (length) length) ; because there is no methods!
-    ;;(only (generic-prin generic-write) printer-generic)
-    )
-   )
+  (import (tail
+           syntax-0
+           string-ii
+           convert
+           symbol
+           (only (binary<
+                  equal)
+                 compare-generic)
+           (only (generic-prin
+                  generic-write)
+                 stream-generic)
+           c-string-interface
+           (only (convert-int-char)
+                 character)
+           (only (upper?
+                  upper2lower
+                  lower?
+                  lower2upper)
+                 char-tables)
+           (only (as-lowercase
+                  as-uppercase)
+                 character)
+           (only (deep-copy
+                  shallow-copy)
+                 copy))
+   syntax (tail
+           syntax-0)
+   export (<string>
+           string?
+           make-string
+           string-pointer
+           equal
+           deep-copy
+           shallow-copy
+           binary<
+           as-lowercase
+           as-uppercase
+           generic-prin
+           generic-write
+           converter
+           convert))
 
 ;;;-----------------------------------------------------------------------------
 ;;; converter method
@@ -83,8 +73,7 @@
   (let ((sym (symbol-exists? collection)))
     (if sym
         sym
-      (make-symbol collection)
-      )))
+      (make-symbol collection))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; binary<
@@ -199,19 +188,9 @@
 (defmethod equal ((string1 <string>) (string2 <string>))
   (equal-string string1 string2))
 
-;; z.Z. in compare-equal
-;;(defmethod equal ((string1 <string>) (string2 <string>))
-;;  (if (%eq #%i0 (strcmp (string-pointer string1)
-;;                        (string-pointer string2)))
-;;    t
-;;    ()))
-
 ;;;-----------------------------------------------------------------------------
 ;;; copy
 ;;;-----------------------------------------------------------------------------
-;;(defmethod copy ((string <string>))
-;;  (make-string (duplicate-%string (string-pointer string))))
-
 (defmethod deep-copy ((string <string>))
   (make-string (duplicate-%string (string-pointer string))))
 
@@ -219,13 +198,8 @@
   (make-string (duplicate-%string (string-pointer string))))
 
 ;;;-----------------------------------------------------------------------------
-;;; length
+;;; size (in collection-string)
 ;;;-----------------------------------------------------------------------------
-;;(defmethod length ((string <string>))
-;;  (make-fpint (strlen (string-pointer string))))
-
-;;(defun string-size (string)
-;;  (make-fpint (strlen (string-pointer string))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; string-lt
@@ -268,8 +242,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; printing
 ;;;-----------------------------------------------------------------------------
-;;(defmethod generic-write ((string <string>)
-;;                          (stream <stream>))
 
 ;;;-----------------------------------------------------------------------------
 ) ;end of string

@@ -20,16 +20,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule print
-  (import ((only ()
-                 tail)
-           (only (<object>
+  (import ((only (<class>
+                  <object>
                   %extract
                   %cast
                   %string
@@ -138,14 +134,13 @@
            write
            output
            newline
-           ;;write-unit         ; nicht el0.99
-           ;;%write-string      ; in stream-i      ; nicht el
            change-exponent-marker
-           ;;prin-1
-           ;;write-1           ; nicht el
            print-based-int-0   ; nicht el
            ))
 
+;;;-----------------------------------------------------------------------------
+;;; Write primitives
+;;;-----------------------------------------------------------------------------
 ;;   (%define-function (%write-string %signed-word-integer)
 ;;                        ((stream <stream>)
 ;;                          (str %string))
@@ -252,6 +247,9 @@
 ;;       (%write-unit (%cast %unsigned-word-integer stdout) obj)))
 ;;  ())
 
+;;;-----------------------------------------------------------------------------
+;;;output
+;;;-----------------------------------------------------------------------------
 (defmethod output ((stream <stream>) (unit <object>))
   ;;(defun output (stream unit)
   (let ((obj (make-swi (convert-char-int unit))))
@@ -260,6 +258,9 @@
       ()))
   unit)
 
+;;;-----------------------------------------------------------------------------
+;;; newline
+;;;-----------------------------------------------------------------------------
 (defun newline stream-list
   (if stream-list
       (let ((stream (car stream-list)))
@@ -270,6 +271,9 @@
     (%write-unit $standard-output $char-newline))
   #\newline)
 
+;;;-----------------------------------------------------------------------------
+;;; prin
+;;;-----------------------------------------------------------------------------
 (defun prin (object . stream-list)
   (if stream-list
       (let ((stream (car stream-list)))
@@ -282,6 +286,10 @@
 ;; auf generic-prin abbilden!
 ;; f string-streams nicht fd als %unsingned-word-intger definieren und
 ;; durchreichen (sondern als <object> besser stream durchreichen)
+
+;; To depict generic prin-!
+;; f string-stream not defined as fd %unsingned-word-intger
+;; reach through (but better than <object> stream reach through)
 
 ;;   (%define-function (prin-1 <object>)
 ;;                     ((object <object>)
@@ -317,6 +325,9 @@
 ;;      object
 ;;       )
 
+;;;-----------------------------------------------------------------------------
+;;; generic-prin
+;;;-----------------------------------------------------------------------------
 (defmethod generic-prin ((object <object>) (stream <stream>))
   (%write-hex stream object) object)
 
@@ -327,8 +338,12 @@
   (%write-string stream (string-pointer object)) object)
 
 (defmethod generic-prin ((object <symbol>) (stream <stream>))
-  (%write-string stream (%select object <symbol>
-                                 name)) object)
+  (%write-string stream (%select object <symbol> name))
+  object)
+
+(defmethod generic-prin ((class <class>) (stream <stream>))
+  (%write-string stream (string-pointer (%select class <class> class-name)))
+ class)
 
 (defmethod generic-prin ((object <null>) (stream <stream>))
   (%write-string stream (%literal %string () "()")) ())
@@ -351,8 +366,7 @@
   (generic-prin (car object) stream)
   (prin-cons1 (cdr object) stream)
   (%write-string stream (%literal %string () ")"))
-  ()
-  )
+  ())
 
 (%define-function (prin-cons1 <null>)
   ((object <object>)
@@ -396,7 +410,8 @@
     ()))
 
 ;;;-----------------------------------------------------------------------------
-
+;;; write
+;;;-----------------------------------------------------------------------------
 (defun write (object . stream-list)
   (if stream-list
       (let ((stream (car stream-list)))
@@ -406,36 +421,9 @@
             (generic-write object $standard-output))))
     (generic-write object $standard-output)))
 
-;; auf generic-write abbilden!
-
-;;   (%define-function (write-1 <object>)
-;;                     ((object <object>)
-;;                      (stream <stream>))
-;;     (if (cons? object)  ;(eq obj-class <cons>)
-;;       (write-cons-1 object stream)
-;;       (if (null? object) ;(eq obj-class <null>)
-;;         (%write-string stream (%literal %string () "()"))
-;;         (if (int? object)
-;;           (%write-int stream (make-swi (%cast <int> object)))
-;;           (if (symbol? object)
-;;             (write-symbol-1 (%cast <symbol> object) stream)
-;;             (if (string? object)
-;;               (write-string-1 (%cast <string> object) stream)
-;;   ;; vector
-;;               (if (vector? object)
-;;       ;;              (write-vector-1 (%cast <vector> object) stream)
-;;                 (generic-write (%cast <vector> object) stream)
-;;     ;; character
-;;                 (if (character? object)
-;;                   (write-character-1 (%cast <character> object) stream)
-;;       ;;float
-;;                   (if (double-float? object)
-;;                     (%write-float stream (%cast <double-float> object))
-;;                     (%write-hex stream object)
-;;                     )
-;;                   )))))))
-;;     object)
-
+;;;-----------------------------------------------------------------------------
+;;; generite-write
+;;;-----------------------------------------------------------------------------
 (defmethod generic-write ((object <object>) (stream <stream>))
   (%write-hex stream object) object)
 
@@ -737,7 +725,8 @@
   )
 
 ;;;-----------------------------------------------------------------------------
-
+;;; print
+;;;-----------------------------------------------------------------------------
 (defun print (object . stream-list)
   (if stream-list
       (%let ((stream <stream> (%cast <stream>(car stream-list))))
@@ -754,12 +743,9 @@
   (generic-prin object stream)
   (%write-unit stream $char-newline))
 
-;; auf generic-write und prin zurückführen?
-
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-;;
 ;;(%annotate-function
 ;; %write-string new-signature
 ;; (((var0 var1 var2)
@@ -897,4 +883,6 @@
     ((var var1) (var var0))
     ((var var2) (atom? <list>)))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module print
+;;;-----------------------------------------------------------------------------

@@ -402,11 +402,6 @@ expansion of ~A~%"
 (defmethod expand-literal ((class <imported-class>))
   class)
 
-(defun make-class-name (class)
-  (make-instance <defined-sym>
-    :name (string (~class-name class))
-    :package "eulisp"))
-
 (defgeneric expand-class (class representation))
 
 ;; slots of classes are (in this order):
@@ -425,7 +420,7 @@ expansion of ~A~%"
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (make-class-name class)
+               (list (string (~class-name class))
                      (~class-precedence-list class)
                      (~class-slots class)
                      (?mm-type representation)
@@ -448,7 +443,7 @@ expansion of ~A~%"
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (make-class-name class)
+               (list (string (~class-name class))
                      (~class-precedence-list class)
                      ()
                      (?mm-type representation)
@@ -470,7 +465,7 @@ expansion of ~A~%"
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (make-class-name class)
+               (list (string (~class-name class))
                      (~class-precedence-list class)
                      ()
                      (?mm-type representation)
@@ -492,7 +487,7 @@ expansion of ~A~%"
         (setf (?expanded-literal class)
               (make-literal-instance
                (~class-of class)
-               (list (make-class-name class)
+               (list (string (~class-name class))
                      (~class-precedence-list class)
                      () ; slot-descs are needed only for make, and this is not
                      ;; allowed for abstract classes

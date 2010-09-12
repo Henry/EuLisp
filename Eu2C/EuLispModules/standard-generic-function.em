@@ -30,6 +30,7 @@
            ;; printf-1 ; for debug
            basic-compare ; eq
            tail-introspection ; %class-of, %member
+           class-introspection
            ;; string ; for error messages
            ;; symbol
            ;; vector
@@ -52,10 +53,6 @@
 ;;  "no applicable-method for gf class-list"
 ;;  (error "no applicable method" <no-applicable-method> gf class-list args)
 ;;)
-
-(%define-function (class-precedence-list <cons>)
-  ((cl <class>))
-  (%select cl <class> class-precedence-list))
 
 (%define-function (%assq <object>)
   ((ele <object>)

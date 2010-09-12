@@ -24,32 +24,34 @@
 ;;;  Notes:
 ;;;  Requires:
 ;;;  Problems:
-;;    generation of gensym-name is a hack use converter number-string from printer if
-;;    possible
+;;    generation of gensym-name is a hack use converter number-string from
+;;    printer if possible
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
 (defmodule symbol
-  (import
-   (tail
-    basic-list
-    basic-symbol
-    c-string-interface
-    ;; printer-generic
-    string-ii
-    (only (find-option) option-lists)
-    (only (initialize) object-0-i)
-    (only (sprintf-3) c-stdio))
-   syntax (tail syntax-0)
-   export
-   (<symbol>
-    symbol?
-    gensym
-    gensym1
-    symbol-name
-    symbol-exists?
-    make-symbol
-    initialize))
+  (import (tail
+           basic-list
+           basic-symbol
+           c-string-interface
+           ;; printer-generic
+           string-ii
+           (only (find-option)
+                 option-lists)
+           (only (initialize)
+                 object-0-i)
+           (only (sprintf-3)
+                 c-stdio))
+   syntax (tail
+           syntax-0)
+   export (<symbol>
+           symbol?
+           gensym
+           gensym1
+           symbol-name
+           symbol-exists?
+           make-symbol
+           initialize))
 
 ;;;-----------------------------------------------------------------------------
 ;;; <symbol> and symbol? are defined in basic-symbol
@@ -110,8 +112,7 @@
     (%setf $gensym-counter (%plus $gensym-counter #%I1))
     (if (symbol-exists? new-name)
         (gensym1 arg)
-      (make-symbol new-name)))
-  )
+      (make-symbol new-name))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; symbol-exists?
@@ -140,7 +141,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 ;; symbol? is generated automatically
 
 (%annotate-function

@@ -1,3 +1,4 @@
+;;; Copyright 1994-2010 Fraunhofer ISST
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
@@ -17,22 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'test-introspection'
+;;;  Title:
 ;;;  Description:
-;;    Basic tests of class introspection
 ;;;  Authors: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-(defmodule test-introspection
-  (import (level-0
-           object-1)
-   syntax (level-0
-           object-1))
 
-(print (class-name (car (cdr (class-precedence-list <list>)))))
-(print (size (class-name <list>)))
-(print (class-precedence-list <list>))
-(print <list>)
+(defmodule object-1
+  (expose (object-0
+           class-introspection))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; end of module object-1
 ;;;-----------------------------------------------------------------------------
