@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-09-06 22:21:00" /> 
+<meta name="date" content="2010-09-12 12:20:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -214,59 +214,59 @@ href="eulispcl17.html#x22-96700017.5" id="QQ2-22-1356">Object Introspection</a><
   <br />&#x00A0;<span class="sclauseToc">17.6 <a 
 href="eulispcl17.html#x22-97100017.6" id="QQ2-22-1361">Class Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.7 <a 
-href="eulispcl17.html#x22-98100017.7" id="QQ2-22-1377">Slot Introspection</a></span>
+href="eulispcl17.html#x22-98300017.7" id="QQ2-22-1382">Slot Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.8 <a 
-href="eulispcl17.html#x22-99200017.8" id="QQ2-22-1394">Generic Function Introspection</a></span>
+href="eulispcl17.html#x22-99400017.8" id="QQ2-22-1399">Generic Function Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.9 <a 
-href="eulispcl17.html#x22-100600017.9" id="QQ2-22-1413">Method Introspection</a></span>
+href="eulispcl17.html#x22-100800017.9" id="QQ2-22-1418">Method Introspection</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.10 <a 
-href="eulispcl17.html#x22-101500017.10" id="QQ2-22-1428">Class Initialization</a></span>
+href="eulispcl17.html#x22-101700017.10" id="QQ2-22-1433">Class Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.11 <a 
-href="eulispcl17.html#x22-103300017.11" id="QQ2-22-1454">Slot Description Initialization</a></span>
+href="eulispcl17.html#x22-103500017.11" id="QQ2-22-1459">Slot Description Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.12 <a 
-href="eulispcl17.html#x22-103600017.12" id="QQ2-22-1458">Generic Function Initialization</a></span>
+href="eulispcl17.html#x22-103800017.12" id="QQ2-22-1463">Generic Function Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.13 <a 
-href="eulispcl17.html#x22-104000017.13" id="QQ2-22-1463">Method Initialization</a></span>
+href="eulispcl17.html#x22-104200017.13" id="QQ2-22-1468">Method Initialization</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.14 <a 
-href="eulispcl17.html#x22-104300017.14" id="QQ2-22-1467">Inheritance Protocol</a></span>
+href="eulispcl17.html#x22-104500017.14" id="QQ2-22-1472">Inheritance Protocol</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.15 <a 
-href="eulispcl17.html#x22-112100017.15" id="QQ2-22-1570">Slot Access Protocol</a></span>
+href="eulispcl17.html#x22-112300017.15" id="QQ2-22-1575">Slot Access Protocol</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.16 <a 
-href="eulispcl17.html#x22-117600017.16" id="QQ2-22-1643">Method Lookup and Generic Dispatch</a></span>
+href="eulispcl17.html#x22-117800017.16" id="QQ2-22-1648">Method Lookup and Generic Dispatch</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.17 <a 
-href="eulispcl17.html#x22-119500017.17" id="QQ2-22-1668">Low Level Allocation Primitives</a></span>
+href="eulispcl17.html#x22-119700017.17" id="QQ2-22-1673">Low Level Allocation Primitives</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.18 <a 
-href="eulispcl17.html#x22-121100017.18" id="QQ2-22-1689">Dynamic Binding</a></span>
+href="eulispcl17.html#x22-121300017.18" id="QQ2-22-1694">Dynamic Binding</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.19 <a 
-href="eulispcl17.html#x22-123000017.19" id="QQ2-22-1714">Exit Extensions</a></span>
+href="eulispcl17.html#x22-123200017.19" id="QQ2-22-1719">Exit Extensions</a></span>
   <br />&#x00A0;<span class="sclauseToc">17.20 <a 
-href="eulispcl17.html#x22-123900017.20" id="QQ2-22-1725">Syntax of Level-1 objects</a></span>
+href="eulispcl17.html#x22-124100017.20" id="QQ2-22-1730">Syntax of Level-1 objects</a></span>
                                                                                                   
                                                                                                   
 <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.20.1 <a 
-href="eulispcl17.html#x22-124000017.20.1" id="QQ2-22-1726">Syntax of Level-1 modules</a></span>
+href="eulispcl17.html#x22-124200017.20.1" id="QQ2-22-1731">Syntax of Level-1 modules</a></span>
 <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.20.2 <a 
-href="eulispcl17.html#x22-124100017.20.2" id="QQ2-22-1727">Syntax of Level-1 defining forms</a></span>
+href="eulispcl17.html#x22-124300017.20.2" id="QQ2-22-1732">Syntax of Level-1 defining forms</a></span>
 <br />&#x00A0;&#x00A0;<span class="ssclauseToc">17.20.3 <a 
-href="eulispcl17.html#x22-124200017.20.3" id="QQ2-22-1728">Syntax of Level-1 special forms</a></span>
+href="eulispcl17.html#x22-124400017.20.3" id="QQ2-22-1733">Syntax of Level-1 special forms</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-124300017.20.3">Bibliography</a></span>
+href="eulisp.html#x1-124500017.20.3">Bibliography</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-124400017.20.3">Module Index</a></span>
+href="eulisp.html#x1-124600017.20.3">Module Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-124500017.20.3">Class Index</a></span>
+href="eulisp.html#x1-124700017.20.3">Class Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-124600017.20.3">Special Forms Index</a></span>
+href="eulisp.html#x1-124800017.20.3">Special Forms Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-124700017.20.3">Function Index</a></span>
+href="eulisp.html#x1-124900017.20.3">Function Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-124800017.20.3">Generic Function Index</a></span>
+href="eulisp.html#x1-125000017.20.3">Generic Function Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-124900017.20.3">Condition Index</a></span>
+href="eulisp.html#x1-125100017.20.3">Condition Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-125000017.20.3">Constant Index</a></span>
+href="eulisp.html#x1-125200017.20.3">Constant Index</a></span>
 <br /><span class="likefibicl@useToc"><a 
-href="eulisp.html#x1-125100017.20.3">Index</a></span>
+href="eulisp.html#x1-125300017.20.3">Index</a></span>
 </div> <span 
 class="cmbx-9">Figures</span>
 <div class="tableofcontents"><span class="lofToc">&#x00A0;<a 
@@ -287,10 +287,11 @@ class="cmbx-9">Tables</span>
 href="eulispcl11.html#x13-740011">Level-0 class hierarchy</a></span><br /><span class="lotToc">2&#x00A0;<a 
 href="eulispcl12.html#x16-2410132">Condition class hierarchy</a></span><br /><span class="lotToc">3&#x00A0;<a 
 href="eulispcl16.html#x20-3270093">Character digrams</a></span><br /><span class="lotToc">4&#x00A0;<a 
-href="eulispcl16.html#x20-6610074">Level-0
-number class hierarchy</a></span><br /><span class="lotToc">5&#x00A0;<a 
-href="eulispcl17.html#x22-9710175">Level-1 class hierarchy</a></span><br /><span class="lotToc">6&#x00A0;<a 
-href="eulispcl17.html#x22-10180156">Initialization Call Structure</a></span><br />
+href="eulispcl16.html#x20-6610074">Level-0 number class
+hierarchy</a></span><br /><span class="lotToc">5&#x00A0;<a 
+href="eulispcl17.html#x22-9710015">Level-1 metaclass hierarchy</a></span><br /><span class="lotToc">6&#x00A0;<a 
+href="eulispcl17.html#x22-9710186">Level-1 class hierarchy</a></span><br /><span class="lotToc">7&#x00A0;<a 
+href="eulispcl17.html#x22-10200157">Initialization Call Structure</a></span><br />
 </div>
                                                  
                                                                                                   

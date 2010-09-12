@@ -101,6 +101,29 @@ table~\ref{level-1-class-hierarchy}.
 }
 \end{table}
 
+\class{metaclass}
+%
+Place holder for \classref{metaclass}.
+
+\derivedclass{simple-class}{class}
+%
+Place holder for \classref{simple-class}.
+
+\derivedclass{function-class}{class}
+%
+Place holder for \classref{function-class}.
+
+\function{class-name}
+%
+\begin{arguments}
+    \item[class] A class.
+\end{arguments}
+%
+\result%
+Returns a {\em string\/} which is \methodref{binary=}{string} to that given as
+the argument to the call to \functionref{defclass} which created {\em class}.
+It is an error to modify this string.
+
 \function{class-precedence-list}
 %
 \begin{arguments}
@@ -115,18 +138,6 @@ equivalent to the result of calling \functionref{compute-class-precedence-list}.
 \remarks%
 The class precedence list is used to control the inheritance of slots and
 methods.
-
-\class{metaclass}
-%
-Place holder for \classref{metaclass}.
-
-\derivedclass{simple-class}{class}
-%
-Place holder for \classref{simple-class}.
-
-\derivedclass{function-class}{class}
-%
-Place holder for \classref{function-class}.
 
 \function{class-slots}
 %
