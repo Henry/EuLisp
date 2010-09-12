@@ -177,6 +177,7 @@ Linux)
         CFLAGS="$CFLAGS -DWITH_PCR_TREADS -I${EUL_GC_DIR}/posix -I${EUL_GC_DIR} -I${EUL_GC_DIR}/include -I${EUL_GC_DIR}/gc"
     else
         CFLAGS="$CFLAGS ${EUL_GC_INCLUDE}"
+        CLIBS="$CLIBS -lpthread"
     fi
     ;;
 
