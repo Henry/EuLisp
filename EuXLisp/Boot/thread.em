@@ -83,7 +83,7 @@
                  (if (> locks 0)
                      (progn
                        (%display " " stream)
-                       (generic-prin locks stream)
+                       (generic-print locks stream)
                        (%display " lock" stream)
                        (if (> locks 1) (%display "s" stream))))
                  (if (not (null? signals))
@@ -91,7 +91,7 @@
                  (%display ">" stream)
                  thr))
 
-(define-method (generic-prin (thr <thread>) stream)
+(define-method (generic-print (thr <thread>) stream)
                (generic-write thr stream))
 
 (define (make-uwp-frame cont)

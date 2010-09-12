@@ -65,7 +65,7 @@
     reverse
     size
     ;;converter
-    ;;    generic-prin
+    ;;    generic-print
     ;;    generic-write
     )
    )

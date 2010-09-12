@@ -20,7 +20,7 @@
 ;; keywords:            a list of the allowable keywords for this class
 ;; predicate:           a predicate function for this class
 ;; constructor:         a constructor function for this class
-;; print-function:      a function to be added as a method to generic-prin
+;; print-function:      a function to be added as a method to generic-print
 ;;                          to print an instance
 ;; The predicate: and constructor: keywords can be repeated.
 ;; Allowable slot-keywords include
@@ -231,7 +231,7 @@
 (defun do-printfn (name keywords)
   (let ((fun (find-key print-function: keywords ())))
     (if (null? fun) ()
-      `((defmethod generic-prin ((obj ,name) str)
+      `((defmethod generic-print ((obj ,name) str)
           (,fun obj str))))))
 
 ;;;-----------------------------------------------------------------------------

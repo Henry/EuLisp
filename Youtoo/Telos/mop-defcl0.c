@@ -211,7 +211,7 @@ void initialize_module_mop_defcl0()
   eul_allocate_bytevector( G001179,G001178);
   eul_intern_symbol(sym_1182,"obj");
   eul_intern_symbol(sym_1183,"str");
-  eul_intern_symbol(sym_1184,"generic-prin");
+  eul_intern_symbol(sym_1184,"generic-print");
   eul_intern_symbol(sym_1185,"defmethod");
   eul_allocate_bytevector( G001181,G001180);
   eul_intern_symbol(sym_1188,"do-printfn");

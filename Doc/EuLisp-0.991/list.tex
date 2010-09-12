@@ -47,7 +47,7 @@ The class whose only instance is the empty list, denoted \nil{}.
 \result%
 Returns \true\/ if {\em object} is the empty list, otherwise \nil{}.
 
-\method{generic-prin}{null}
+\method{generic-print}{null}
 %
 \begin{specargs}
     \item[null] The empty list.
@@ -285,7 +285,7 @@ whose \functionref{car} field contains {\em object$_1$}.
     \verb|(list 1 2 3)| &\Ra& \verb|(1 2 3)|
 \end{tabular}
 
-\method{generic-prin}{cons}
+\method{generic-print}{cons}
 %
 \begin{specargs}
     \item[pair, \classref{cons}] The pair to be output on {\em stream}.
@@ -298,7 +298,7 @@ The pair supplied as the first argument.
 %
 \remarks%
 Output the external representation of {\em pair\/} on {\em stream\/} as
-described at the beginning of this section.  Uses \genericref{generic-prin} to
+described at the beginning of this section.  Uses \genericref{generic-print} to
 produce the external representation of the contents of the \functionref{car} and
 \functionref{cdr} slots of {\em pair}.
 

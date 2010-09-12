@@ -102,7 +102,7 @@
     (cons (copy-tree (car tree))
           (copy-tree (cdr tree)))))
 
-;;generic-prin
+;;generic-print
 generic-write
 
 ;;;-----------------------------------------------------------------------------

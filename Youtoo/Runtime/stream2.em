@@ -22,7 +22,7 @@
                     control-block-descriptor stream-control-block?
                     file-control-block?
                     stdin stdout stderr
-                    generic-prin generic-write generic-read flush-buffer fill-buffer
+                    generic-print generic-write generic-read flush-buffer fill-buffer
                     reconnect disconnect generic-connect
                     open-file-streams *open-file-streams* *open-file-streams*-lock
                     eos-default-value <stream-condition> <end-of-stream>
@@ -177,7 +177,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Generic prin/write/read
 ;;;-----------------------------------------------------------------------------
-(defgeneric generic-prin (x s))
+(defgeneric generic-print (x s))
 (defgeneric generic-write (x s))
 (defgeneric generic-read (stream eos-error? eos-value))
 (defgeneric end-of-stream (s))

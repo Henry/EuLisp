@@ -25,7 +25,7 @@
           ((setter tower-blocks) x (loop n ()))
           x))
 
-(defmethod generic-prin ((x <tower>) (s <stream>))
+(defmethod generic-print ((x <tower>) (s <stream>))
   (format s "#<tower ~a: ~a>" (tower-id x) (tower-blocks x)))
 
 ;;;-----------------------------------------------------------------------------

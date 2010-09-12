@@ -32,7 +32,7 @@
            (only (binary<
                   equal)
                  compare-generic)
-           (only (generic-prin
+           (only (generic-print
                   generic-write)
                  stream-generic)
            c-string-interface
@@ -61,7 +61,7 @@
            binary<
            as-lowercase
            as-uppercase
-           generic-prin
+           generic-print
            generic-write
            converter
            convert))

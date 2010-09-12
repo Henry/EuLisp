@@ -47,7 +47,7 @@
     <local-slot>
     <structure>
 
-    generic-prin
+    generic-print
     sprin
     sprint
     prin
@@ -149,24 +149,24 @@
           (setq n (- n 1))))
 
 ; generic printing
-(define-generic (generic-prin obj s))
+(define-generic (generic-print obj s))
 
-(define-method (generic-prin (obj <object>) s)
+(define-method (generic-print (obj <object>) s)
                (%display obj s)
                obj)
 
-(define-method (generic-prin (obj <null>) s)
+(define-method (generic-print (obj <null>) s)
                (%display "()" s)
                obj)
 
-(define-method (generic-prin (obj <list>) s)
-               (write-list obj s generic-prin))
+(define-method (generic-print (obj <list>) s)
+               (write-list obj s generic-print))
 
-(define-method (generic-prin (obj <vector>) s)
-               (write-vector obj s generic-prin))
+(define-method (generic-print (obj <vector>) s)
+               (write-vector obj s generic-print))
 
 (define (sprin-all s objs)
-        (for-each (lambda (x) (generic-prin x s)) objs)
+        (for-each (lambda (x) (generic-print x s)) objs)
         s)
 
 (define (sprin s . objs)

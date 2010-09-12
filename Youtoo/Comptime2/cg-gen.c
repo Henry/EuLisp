@@ -161,7 +161,7 @@ void initialize_module_cg_gen()
   eul_allocate_static_string(str_4053, "compile time error condition: ", 30);
   eul_allocate_static_string(str_4054, "code generation error", 21);
   /* Byte-vector with size: 26 is_init: 0 index: 104 binding: (method-G003130) */
-  static const void *G004051[] = {I(ab,24,00,00),B(stream2 ,10),I(23,00,00,00),B(cg_gen ,101),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,10),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_gen ,102),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_gen ,103),I(47,00,00,24),B(boot ,12),I(3d,04,02,45),I(02,00,00,00)};
+  static const void *G004051[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(cg_gen ,101),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_gen ,102),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_gen ,103),I(47,00,00,24),B(boot ,12),I(3d,04,02,45),I(02,00,00,00)};
 
   eul_allocate_static_string(str_4060, "  Encoding module ~a ...", 24);
   /* Byte-vector with size: 110 is_init: 0 index: 109 binding: (method-encode) */
@@ -254,7 +254,7 @@ void initialize_module_cg_gen()
   eul_allocate_static_string(str_4137, "compile time error condition: ", 30);
   eul_allocate_static_string(str_4138, "code generation error", 21);
   /* Byte-vector with size: 26 is_init: 0 index: 159 binding: (method-G002901) */
-  static const void *G004135[] = {I(ab,24,00,00),B(stream2 ,10),I(23,00,00,00),B(cg_gen ,157),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,10),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_gen ,158),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_gen ,103),I(47,00,00,24),B(boot ,12),I(3d,04,02,45),I(02,00,00,00)};
+  static const void *G004135[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(cg_gen ,157),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_gen ,158),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_gen ,103),I(47,00,00,24),B(boot ,12),I(3d,04,02,45),I(02,00,00,00)};
 
   eul_allocate_static_string(str_4142, "  Encoding module ~a ...", 24);
   eul_allocate_static_string(str_4143, "  Code for ~a's top-level forms:", 32);

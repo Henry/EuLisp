@@ -53,7 +53,7 @@
            hash
            assoc
            assq
-           ;;    generic-prin
+           ;;    generic-print
            ;;    generic-write
            ))
 

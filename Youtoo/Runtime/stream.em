@@ -211,7 +211,7 @@
       (do1-list
        (lambda (x)
          (if (object? x)
-             (generic-prin x stream)
+             (generic-print x stream)
            (progn
              (prin-string "#<C: " 5 stream)
              (prin-address x stream)

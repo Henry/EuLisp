@@ -278,12 +278,12 @@
   (if stream-list
       (let ((stream (car stream-list)))
         (if (ensure-open-character-output-stream stream)
-            (generic-prin object stream)
+            (generic-print object stream)
           (progn ;(stream-error)
-            (generic-prin object $standard-output))))
-    (generic-prin object $standard-output)))
+            (generic-print object $standard-output))))
+    (generic-print object $standard-output)))
 
-;; auf generic-prin abbilden!
+;; auf generic-print abbilden!
 ;; f string-streams nicht fd als %unsingned-word-intger definieren und
 ;; durchreichen (sondern als <object> besser stream durchreichen)
 
@@ -309,7 +309,7 @@
 ;;    ;; vector
 ;;                (if (vector? object)
 ;;         ;; (prin-vector (%cast <vector> object) stream)
-;;                     (generic-prin (%cast <vector> object) stream)
+;;                     (generic-print (%cast <vector> object) stream)
 ;;       ;; character
 ;;                     (if (character? object)
 ;;                        (%write-unit stream
@@ -326,44 +326,44 @@
 ;;       )
 
 ;;;-----------------------------------------------------------------------------
-;;; generic-prin
+;;; generic-print
 ;;;-----------------------------------------------------------------------------
-(defmethod generic-prin ((object <object>) (stream <stream>))
+(defmethod generic-print ((object <object>) (stream <stream>))
   (%write-hex stream object) object)
 
-(defmethod generic-prin ((object <double-float>) (stream <stream>))
+(defmethod generic-print ((object <double-float>) (stream <stream>))
   (%write-float stream object) object)
 
-(defmethod generic-prin ((object <string>) (stream <stream>))
+(defmethod generic-print ((object <string>) (stream <stream>))
   (%write-string stream (string-pointer object)) object)
 
-(defmethod generic-prin ((object <symbol>) (stream <stream>))
+(defmethod generic-print ((object <symbol>) (stream <stream>))
   (%write-string stream (%select object <symbol> name))
   object)
 
-(defmethod generic-prin ((class <class>) (stream <stream>))
+(defmethod generic-print ((class <class>) (stream <stream>))
   (%write-string stream (string-pointer (%select class <class> class-name)))
  class)
 
-(defmethod generic-prin ((object <null>) (stream <stream>))
+(defmethod generic-print ((object <null>) (stream <stream>))
   (%write-string stream (%literal %string () "()")) ())
 
-(defmethod generic-prin ((object <int>) (stream <stream>))
+(defmethod generic-print ((object <int>) (stream <stream>))
   (%write-int stream (make-swi object)) object)
 
-(defmethod generic-prin ((object <character>) (stream <stream>))
+(defmethod generic-print ((object <character>) (stream <stream>))
   (%write-unit stream
                (make-swi (convert-char-int object)))
   object)
 
-(defmethod generic-prin ((object <cons>) (stream <stream>))
+(defmethod generic-print ((object <cons>) (stream <stream>))
   (prin-cons object stream) object)
 
 (%define-function (prin-cons <null>)
   ((object <cons>)
    (stream <stream>))
   (%write-string stream (%literal %string () "("))
-  (generic-prin (car object) stream)
+  (generic-print (car object) stream)
   (prin-cons1 (cdr object) stream)
   (%write-string stream (%literal %string () ")"))
   ())
@@ -373,15 +373,15 @@
    (stream <stream>))
   (if (cons? object)
       (progn (%write-string stream (%literal %string  () " "))
-             (generic-prin (car object) stream)
+             (generic-print (car object) stream)
              (prin-cons1 (cdr object) stream))
     (if (null? object) ()
       (progn (%write-string stream (%literal %string () " . "))
-             (generic-prin object stream)
+             (generic-print object stream)
              ())))
   )
 
-(defmethod generic-prin ((object <vector>) (stream <stream>))
+(defmethod generic-print ((object <vector>) (stream <stream>))
   (prin-vector object stream) object)
 
 (%define-function (prin-vector <null>)
@@ -391,7 +391,7 @@
   (%let ((length %unsigned-word-integer (primitive-vector-size object)))
         (if (%neq length #%I0)
             (progn
-              (generic-prin (primitive-vector-ref object #%I0) stream)
+              (generic-print (primitive-vector-ref object #%I0) stream)
               (prin-vector1 object length #%I1 stream))
           ()))
   (%write-string stream (%literal %string () ")"))
@@ -405,7 +405,7 @@
    (stream <stream>))
   (if (%lt idx length)
       (progn (%write-string stream (%literal %string  () " "))
-             (generic-prin (primitive-vector-ref object idx) stream)
+             (generic-print (primitive-vector-ref object idx) stream)
              (prin-vector1 object length (%plus idx #%I1) stream))
     ()))
 
@@ -740,7 +740,7 @@
 (%define-function (print-1 %void)
   ((object <object>)
    (stream <stream>))
-  (generic-prin object stream)
+  (generic-print object stream)
   (%write-unit stream $char-newline))
 
 ;;;-----------------------------------------------------------------------------

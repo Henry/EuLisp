@@ -19,8 +19,8 @@
       ((stream-write-action s) x s)
     ()))
 
-(defmethod generic-prin (x (s <stream>))
-  ;; Default generic-prin == generic-write
+(defmethod generic-print (x (s <stream>))
+  ;; Default generic-print == generic-write
   (generic-write x s))
 
 ;;;------------------------------------------------------------------------
@@ -44,10 +44,10 @@
   (let ((str (symbol-name x)))
     ;; should also check for start comment!
     (if (all? graph? str)
-        (generic-prin str s)
+        (generic-print str s)
       (progn
         (sprin-one-char s #\|)
-        (generic-prin str s)
+        (generic-print str s)
         (sprin-one-char s #\|))))
   x)
 
@@ -162,7 +162,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Prin on file streams; default same as write
 ;;;-----------------------------------------------------------------------------
-(defmethod generic-prin ((vec <vector>) (s <buffered-stream>))
+(defmethod generic-print ((vec <vector>) (s <buffered-stream>))
   (let ((n (vector-size vec)))
     (cond ((int-binary= n 0)
            (prin-string "#()" 3 s))
@@ -187,9 +187,9 @@
               (sprin-one-char s #\) ))))))
   vec)
 
-(defmethod generic-prin ((l <cons>) (s <buffered-stream>))
+(defmethod generic-print ((l <cons>) (s <buffered-stream>))
   (sprin-one-char s #\( )
-  (let ((tail (output-list-contents l generic-prin s)))
+  (let ((tail (output-list-contents l generic-print s)))
     (if (null? tail) ()
       (progn
         (prin-string " . " 3 s)
@@ -197,26 +197,26 @@
   (sprin-one-char s #\) )
   l)
 
-(defmethod generic-prin ((c <character>) (s <buffered-stream>))
+(defmethod generic-print ((c <character>) (s <buffered-stream>))
   ;    (if (graph? c)
   (sprin-one-char s c)
   ;      (generic-write c s))
   c)
 
-(defmethod generic-prin ((x <symbol>) (s <buffered-stream>))
-  (generic-prin (symbol-name x) s)
+(defmethod generic-print ((x <symbol>) (s <buffered-stream>))
+  (generic-print (symbol-name x) s)
   x)
 
-;  (defmethod generic-prin ((x <symbol>) (s <buffered-stream>))
+;  (defmethod generic-print ((x <symbol>) (s <buffered-stream>))
 ;    (let ((str (symbol-name x)))
 ;      (prin-string str (string-size str) s)
 ;      x))
 
-(defmethod generic-prin ((str <string>) (s <buffered-stream>))
+(defmethod generic-print ((str <string>) (s <buffered-stream>))
   (prin-string str (string-size str) s)
   str)
 
-(defmethod generic-prin ((x <class>) (s <buffered-stream>))
+(defmethod generic-print ((x <class>) (s <buffered-stream>))
   (let ((class-name (symbol-name (or (class-name x) 'anonymous))))
     ;         (meta-class-name (symbol-name (class-name (class-of x)))))
     ;      (sprin-one-char s #\#)

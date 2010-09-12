@@ -30,7 +30,7 @@
   (import
    (tail
     (only (binary< equal) compare-generic)
-    (only (generic-prin generic-write) stream-generic)
+    (only (generic-print generic-write) stream-generic)
     (only (upper? upper2lower lower? lower2upper) char-tables)
     (only (make-swi make-fpint) int-i)
     ;;copy
@@ -46,7 +46,7 @@
                 binary<
                 equal
                 as-lowercase as-uppercase
-                generic-prin generic-write)
+                generic-print generic-write)
    )
 
 ;;(expose (only (copy) copy))
@@ -154,7 +154,7 @@
 ;;        ()))
 
 ;; siehe print.am
-;; (defmethod generic-prin
+;; (defmethod generic-print
 ;;   ((c <character>) stream))
 
 ;; (defmethod generic-write

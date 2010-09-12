@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-09-12 12:20:00" /> 
+<meta name="date" content="2010-09-12 21:44:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -806,7 +806,7 @@ argument.
 </p><!--l. 194--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-346001r11"></a><span 
 class="cmbx-9">16.1.11   </span><span 
-class="cmtt-9">generic-prin &#x003C;character&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;character&#x003E;</span>
 <a 
  id="Q1-20-461"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -5517,7 +5517,7 @@ class="cmbx-8">Result</span></h5>
   <!--l. 131--><p class="noindent" >Constructs and returns a string, the characters of which correspond
   to the external representation of <span 
 class="cmti-9">x </span>as produced by <span 
-class="cmtt-9">generic-prin</span>,
+class="cmtt-9">generic-print</span>,
   namely that specified in the syntax as <span 
 class="cmtt-9">[</span><span 
 class="cmti-9">sign</span><span 
@@ -5568,7 +5568,7 @@ It is defined for the sake of symmetry.
 </p><!--l. 148--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-514001r9"></a><span 
 class="cmbx-9">16.6.9   </span><span 
-class="cmtt-9">generic-prin &#x003C;double-float&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;double-float&#x003E;</span>
 <a 
  id="Q1-20-697"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -6722,7 +6722,7 @@ class="cmti-9">integer</span>.
 </p><!--l. 91--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-553001r7"></a><span 
 class="cmbx-9">16.9.7   </span><span 
-class="cmtt-9">generic-prin &#x003C;int&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;int&#x003E;</span>
 <a 
  id="Q1-20-756"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -7547,7 +7547,7 @@ class="cmtt-9">()</span></a>.
   </p><!--l. 75--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-576001r6"></a><span 
 class="cmbx-9">16.11.6   </span><span 
-class="cmtt-9">generic-prin &#x003C;keyword&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;keyword&#x003E;</span>
  <a 
  id="Q1-20-791"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -7840,7 +7840,7 @@ class="cmtt-9">()</span></a>.
 </p><!--l. 43--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-590001r5"></a><span 
 class="cmbx-9">16.12.5   </span><span 
-class="cmtt-9">generic-prin &#x003C;null&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;null&#x003E;</span>
 <a 
  id="Q1-20-812"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -8739,7 +8739,7 @@ class="cmtt-9">&#x00A0;3)</span></span></span></td>
 </tr></table></div>                                                  <!--l. 281--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-622001r20"></a><span 
 class="cmbx-9">16.12.20   </span><span 
-class="cmtt-9">generic-prin &#x003C;cons&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;cons&#x003E;</span>
  <a 
  id="Q1-20-859"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -8781,13 +8781,13 @@ class="cmti-9">pair </span>on <span
 class="cmti-9">stream </span>as described
   at the beginning of this section. Uses <a 
 href="#x20-819002r48"><span 
-class="cmtt-9">generic-prin</span></a> to produce the
-  external representation of the contents of the <a 
+class="cmtt-9">generic-print</span></a> to produce
+  the external representation of the contents of the <a 
 href="#x20-604001r12"><span 
 class="cmtt-9">car</span></a> and <a 
 href="#x20-606001r13"><span 
-class="cmtt-9">cdr</span></a> slots of
-  <span 
+class="cmtt-9">cdr</span></a> slots
+  of <span 
 class="cmti-9">pair</span>.
   </p><!--l. 298--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-625001r21"></a><span 
@@ -12649,7 +12649,7 @@ class="cmtt-9">&#x003C;end-of-stream&#x003E;</span></a><a
   </p><!--l. 718--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-819002r48"></a><span 
 class="cmbx-9">16.15.48   </span><span 
-class="cmtt-9">generic-prin</span>
+class="cmtt-9">generic-print</span>
  <a 
  id="Q1-20-1149"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -12784,7 +12784,7 @@ class="cmti-9">...</span>
 on the output stream <span 
 class="cmti-9">stream </span>using <a 
 href="#x20-819002r48"><span 
-class="cmtt-9">generic-prin</span></a> for each
+class="cmtt-9">generic-print</span></a> for each
 object.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
@@ -12793,7 +12793,7 @@ class="cmbx-8">See</span><span
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 760--><p class="noindent" ><a 
 href="#x20-819002r48"><span 
-class="cmtt-9">generic-prin</span></a>.
+class="cmtt-9">generic-print</span></a>.
 </p><!--l. 763--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-827001r50"></a><span 
 class="cmbx-9">16.15.50   </span><span 
@@ -12904,8 +12904,8 @@ class="cmti-9">... </span>on the
   output stream <span 
 class="cmti-9">stream </span>using <a 
 href="#x20-819002r48"><span 
-class="cmtt-9">generic-prin</span></a> for each object, followed
-  by a newline character.
+class="cmtt-9">generic-print</span></a> for each object,
+  followed by a newline character.
   </p>
   <h5 class="likesyntaxssclauseHead"><a 
  id="x20-83500051"></a><span 
@@ -12913,7 +12913,7 @@ class="cmbx-8">See</span><span
 class="cmbx-8">&#x00A0;also</span></h5>
   <!--l. 799--><p class="noindent" ><a 
 href="#x20-819002r48"><span 
-class="cmtt-9">generic-prin</span></a>.
+class="cmtt-9">generic-print</span></a>.
   </p><!--l. 802--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-835001r52"></a><span 
 class="cmbx-9">16.15.52   </span><span 
@@ -14406,7 +14406,7 @@ class="cmti-9">string</span>.
 <hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-888001r11"></a><span 
 class="cmbx-9">16.16.11   </span><span 
-class="cmtt-9">generic-prin &#x003C;string&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;string&#x003E;</span>
 <a 
  id="Q1-20-1246"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -14803,7 +14803,7 @@ class="cmtt-9">()</span></a>.
 </p><!--l. 105--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-903001r7"></a><span 
 class="cmbx-9">16.17.7   </span><span 
-class="cmtt-9">generic-prin &#x003C;symbol&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;symbol&#x003E;</span>
 <a 
  id="Q1-20-1269"></a>
 </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 
@@ -15490,7 +15490,7 @@ class="cmti-9">vector</span>.
   </p><!--l. 99--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x20-933001r8"></a><span 
 class="cmbx-9">16.19.8   </span><span 
-class="cmtt-9">generic-prin &#x003C;vector&#x003E;</span>
+class="cmtt-9">generic-print &#x003C;vector&#x003E;</span>
  <a 
  id="Q1-20-1313"></a>
  </div><div style="text-align: right; width: 50%; float: left;"><b><i> <span 

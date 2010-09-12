@@ -39,7 +39,7 @@
                            (error "bad format string ~s" str)
                          (let ((x (car l)))
                            (if (object? x)
-                               (generic-prin x s)
+                               (generic-print x s)
                              (sprin s x))
                            (loop (cdr info) (cdr l)))))
                       ((eq c #\s)

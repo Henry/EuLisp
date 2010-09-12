@@ -19,7 +19,7 @@
 
 (defmethod get-ct-error-condition-class (x) <ct-error>)
 
-(defmethod generic-prin ((c <ct-error>) (s <stream>))
+(defmethod generic-print ((c <ct-error>) (s <stream>))
   (ct-serious-warning (ct-error-value c) (condition-message c)))
 
 (defun ct-error (value str . args)

@@ -18,7 +18,7 @@
 " . 23)
     ("*** TOTAL NUMBER OF WARNINGS: ~a
 " . 22)
-    (|(method generic-prin)| . 20)
+    (|(method generic-print)| . 20)
     (|(method get-ct-error-condition-class)| . 19)
     (|(setter ct-error-value)| . 18)
     ((ct-error-value:) . 17)

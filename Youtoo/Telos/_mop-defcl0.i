@@ -23,7 +23,7 @@
     (do-accessors . 84)
     (do-printfn . 83)
     (defmethod . 81)
-    (generic-prin . 80)
+    (generic-print . 80)
     (str . 79)
     (obj . 78)
     ((keywords: predicate: class: constructor: print-function:) . 74)

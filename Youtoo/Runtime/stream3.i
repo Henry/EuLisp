@@ -9,7 +9,7 @@
    )
    local-literals (
     (top-level . 50)
-    (|(method generic-prin)| . 48)
+    (|(method generic-print)| . 48)
     (|(method generic-write)| . 47)
     (": " . 43)
     ("#<" . 42)

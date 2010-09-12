@@ -84,7 +84,7 @@ void initialize_module__mop_defcl0()
   static const void *G001343[] = {I(ab,46,08,1b),I(12,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,f6),I(1c,10,23,00),B(_mop_defcl0 ,48),I(50,1b,34,00),I(00,00,00,d2),I(1d,73,1b,7a),I(12,1b,34,00),I(00,00,00,46),I(23,00,00,00),B(_mop_defcl0 ,68),I(86,0f,1f,06),I(1c,0f,23,00),B(_mop_defcl0 ,69),I(1c,0f,23,00),B(_mop_defcl0 ,70),I(1c,0f,1b,86),I(0f,23,00,00),B(_mop_defcl0 ,68),I(1c,0f,1f,07),I(1c,0f,23,00),B(_mop_defcl0 ,35),I(1c,0f,22,07),I(32,00,00,00),I(00,00,00,70),I(1c,11,23,00),B(_mop_defcl0 ,58),I(23,00,00,00),B(_mop_defcl0 ,67),I(3b,01,1c,24),B(collect ,2),I(3c,02,1f,03),I(10,86,1b,48),I(00,00,23,00),B(_mop_defcl0 ,58),I(23,00,00,00),B(_mop_defcl0 ,66),I(3b,03,48,00),I(00,47,00,00),I(1f,06,11,1b),I(1f,05,86,47),I(00,00,3c,03),I(1f,0c,1c,0f),I(23,00,00,00),B(_mop_defcl0 ,69),I(1c,0f,1b,86),I(0f,1f,08,1c),I(0f,1f,08,1c),I(0f,23,00,00),B(_mop_defcl0 ,35),I(1c,0f,22,0c),I(1f,05,75,1f),I(07,1c,24,00),B(_mop_defcl0 ,9),I(3c,02,1d,1c),I(0f,22,05,32),I(00,00,00,16),I(1d,75,1f,04),I(1c,24,00,00),B(_mop_defcl0 ,9),I(3d,02,05,22),I(01,22,01,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 72 binding: strip-<> */
-  static const void *G001348[] = {I(aa,1b,82,02),I(1b,82,0b,27),I(3c,50,1b,34),I(00,00,00,25),I(1c,06,1b,2c),I(1f,03,83,1d),I(24,00,00,00),B(string ,6),I(3c,03,41,00),B(boot1 ,55),I(22,03,32,00),I(00,00,00,07),I(1d,45,03,00)};
+  static const void *G001348[] = {I(aa,1b,82,02),I(1b,82,0b,27),I(3c,50,1b,34),I(00,00,00,25),I(1c,06,1b,2c),I(1f,03,83,1d),I(24,00,00,00),B(string ,6),I(3c,03,41,00),B(boot1 ,54),I(22,03,32,00),I(00,00,00,07),I(1d,45,03,00)};
 
   eul_allocate_static_cons(cons_1352, NULL, NULL);
   eul_allocate_static_cons(cons_1357, NULL, NULL);
@@ -211,7 +211,7 @@ void initialize_module__mop_defcl0()
   eul_allocate_bytevector( G001361,G001360);
   eul_intern_symbol(sym_1364,"obj");
   eul_intern_symbol(sym_1365,"str");
-  eul_intern_symbol(sym_1366,"generic-prin");
+  eul_intern_symbol(sym_1366,"generic-print");
   eul_intern_symbol(sym_1367,"defmethod");
   eul_allocate_bytevector( G001363,G001362);
   eul_intern_symbol(sym_1370,"do-printfn");

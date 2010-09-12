@@ -53,7 +53,7 @@
       uninput
       output
       read-line
-      generic-prin
+      generic-print
       generic-write
       )
    )
@@ -69,7 +69,7 @@
 (defgeneric uninput ((stream <stream>) (object <object>)))
 (defgeneric output ((stream <stream>) (object <object>)))
 (defgeneric read-line ((stream <stream>)))
-(defgeneric generic-prin ((object <object>) (stream <stream>)))
+(defgeneric generic-print ((object <object>) (stream <stream>)))
 (defgeneric generic-write ((object <object>) (stream <stream>)))
 
 ;;;-----------------------------------------------------------------------------
@@ -116,7 +116,7 @@
     ((var var2) (atom? <stream>)))))
 
 (%annotate-function
-  generic-prin new-signature
+  generic-print new-signature
   (((var0 var1 var2)
     ((var var0) (atom? <object>))
     ((var var1) (var var0))

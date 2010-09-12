@@ -96,7 +96,7 @@
                   change-exponent-marker ;; %write-string
                   print) ;; nur fur test
                  print)
-           (only (generic-prin
+           (only (generic-print
                   generic-write ) stream-generic)
            (only (symbol?)
                  symbol);; inserted by ak
@@ -270,7 +270,7 @@
    (fp1-n %signed-word-integer)
    (ch %signed-word-integer))
   (if (%eq ch $char-ascii-a-l)
-      (generic-prin (car args) stream )
+      (generic-print (car args) stream )
     (if (%eq ch $char-ascii-s-l)
         (generic-write (car args) stream )
       (if (%eq ch $char-ascii-d-l)

@@ -266,7 +266,7 @@
     new-vector))
 
 ;;***HGW converter <pair>
-;;generic-prin
+;;generic-print
 ;;generic-write
 
 ;;;-----------------------------------------------------------------------------

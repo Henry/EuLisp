@@ -86,7 +86,7 @@ void initialize_module_cg_asm()
   eul_allocate_static_string(str_6406, "compile time error condition: ", 30);
   eul_allocate_static_string(str_6407, "assembler error", 15);
   /* Byte-vector with size: 26 is_init: 0 index: 32 binding: (method-G005949) */
-  static const void *G006404[] = {I(ab,24,00,00),B(stream2 ,10),I(23,00,00,00),B(cg_asm ,29),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,10),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_asm ,30),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_asm ,31),I(47,00,00,24),B(boot ,12),I(3d,04,02,45),I(02,00,00,00)};
+  static const void *G006404[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(cg_asm ,29),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2a),I(23,00,00,00),B(cg_asm ,30),I(24,00,00,00),B(i_error ,5),I(23,00,00,00),B(cg_asm ,31),I(47,00,00,24),B(boot ,12),I(3d,04,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 30 is_init: 0 index: 33 binding: anonymous */
   static const void *G006409[] = {I(ab,1c,12,1b),I(34,00,00,00),I(00,00,00,10),I(1c,32,00,00),I(00,00,00,68),I(1d,10,1b,26),I(00,00,00,06),I(24,00,00,00),B(cg_state ,12),I(08,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(cg_state ,12),I(08,1d,26,00),I(00,00,00,04),I(24,00,00,00),B(cg_state ,12),I(08,1f,03,82),I(24,00,00,00),B(cg_state ,12),I(08,1b,1f,07),I(47,00,01,3c),I(02,1d,1f,05),I(1f,05,24,00),B(cg_asm ,2),I(3c,03,1f,09),I(11,1c,1f,03),I(0f,47,00,01),I(3d,02,0a,22),I(07,45,03,00)};

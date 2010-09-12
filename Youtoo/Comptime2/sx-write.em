@@ -53,10 +53,10 @@
         "#<macro-function>"
       (fmt "~a" obj))))
 
-(defmethod generic-prin ((x <module>) (s <stream>))
+(defmethod generic-print ((x <module>) (s <stream>))
   (sformat s "#<module: ~a>" (module-name? x)))
 
-(defmethod generic-prin ((x <binding>) (s <stream>))
+(defmethod generic-print ((x <binding>) (s <stream>))
   (let* ((module (binding-module? x))
          (local-name (binding-local-name? x))
          (local-index (binding-local-index? x))
@@ -69,46 +69,46 @@
 ;;; New generic printing (depends on *pprint*)
 
 ;;;-----------------------------------------------------------------------------
-(defmethod generic-prin ((x <syntax-obj>) (s <stream>))
+(defmethod generic-print ((x <syntax-obj>) (s <stream>))
   (if (dynamic *pprint*)
-      (new-generic-prin x s)
+      (new-generic-print x s)
     (call-next-method)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Generic printing of the abstract syntax objects
 ;;;-----------------------------------------------------------------------------
-(defgeneric new-generic-prin (x s))
+(defgeneric new-generic-print (x s))
 
-(defmethod new-generic-prin ((x <function>) s)
+(defmethod new-generic-print ((x <function>) s)
   (sformat s "#<macro-function>"))
 
-(defmethod new-generic-prin ((x <syntax-obj>) s)
+(defmethod new-generic-print ((x <syntax-obj>) s)
   (if (member1-list 'binding (find-slot-names x))
       (sformat s "~a" (slot-value x 'binding))
     (sformat s "<unprintable syntax object>")))
 
-(defmethod new-generic-prin ((x <module>) s)
+(defmethod new-generic-print ((x <module>) s)
   (sformat s "~a" (module-name? x)))
 
-(defmethod new-generic-prin ((x <binding>) s)
+(defmethod new-generic-print ((x <binding>) s)
   (sformat s "~a" (binding-local-name? x)))
 
-(defmethod new-generic-prin ((x <var>) s)
+(defmethod new-generic-print ((x <var>) s)
   (sformat s "~a" (var-name? x)))
 
-(defmethod new-generic-prin ((x <setq>) s)
+(defmethod new-generic-print ((x <setq>) s)
   (sformat s "(setq ~a ~a)" (setq-binding? x) (setq-obj? x)))
 
-(defmethod new-generic-prin ((x <named-const>) s)
+(defmethod new-generic-print ((x <named-const>) s)
   (sformat s "~a" (named-const-name? x)))
 
-(defmethod new-generic-prin ((x <literal-const>) s)
+(defmethod new-generic-print ((x <literal-const>) s)
   (sformat s "~a" (const-value? x)))
 
-;  (defmethod new-generic-prin ((x <keywrd>) s)
+;  (defmethod new-generic-print ((x <keywrd>) s)
 ;    (sformat s "~a" (const-value? x)))
 
-(defmethod new-generic-prin ((x <lambda>) s)
+(defmethod new-generic-print ((x <lambda>) s)
   (if (and (number? (dynamic *pprint*)) (< (dynamic *pprint*) 2))
       (sformat s "~a" (fun-name? x))
     (sformat s "(~a ~a ~a)"
@@ -117,23 +117,23 @@
                "lambda")
              (fun-args? x) (fun-body? x))))
 
-(defmethod new-generic-prin ((x <opencoding>) s)
+(defmethod new-generic-print ((x <opencoding>) s)
   (sformat s "(opencoded-lambda ~a ~a)" (fun-args? x) (fun-body? x)))
 
-(defmethod new-generic-prin ((x <let*>) s)
+(defmethod new-generic-print ((x <let*>) s)
   (sformat s "(let* (")
   (do1-list (lambda (var)
               (sformat s "(~a ~a)" var (and (var? var) (var-value? var))))
             (fun-args? x))
   (sformat s ") ~a)" (fun-body? x)))
 
-(defmethod new-generic-prin ((x <appl>) s)
+(defmethod new-generic-print ((x <appl>) s)
   (sformat s "~a" (cons (appl-fun? x) (appl-args? x))))
 
-;  (defmethod new-generic-prin ((x <progn>) s)
+;  (defmethod new-generic-print ((x <progn>) s)
 ;    (sformat s "(progn ~a)" (progn-forms? x)))
 
-(defmethod new-generic-prin ((x <if>) s)
+(defmethod new-generic-print ((x <if>) s)
   (sformat s "(if ~a ~a ~a)" (if-pred? x) (if-then? x) (if-else? x)))
 
 ;;;-----------------------------------------------------------------------------
