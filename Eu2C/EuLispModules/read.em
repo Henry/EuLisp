@@ -20,12 +20,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Problems:
+;;  Lacking a detailed error treatment.
 ;;;  Authors: Horst Friedrich, Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule read
   (import ((only (<class>
                   <object>
@@ -82,7 +81,7 @@
                   digit2figure10
                   digit2figure16)
                  char-tables)
-           (only ($standard-input
+           (only (stdin
                   %peek-unit
                   %unread-unit
                   %read-unit
@@ -138,12 +137,8 @@
            uninput
            read-line
            <read-error>
-           read-based-int1 ;; nicht el
-           read   ; nicht in el0.99
-           ;; read-unit peek-unit ; nicht in el0.99
-          ))
-
-;; es fehlt noch eine ausfuehrliche fehlerbehandlung !!
+           read-based-int1
+           read))
 
 ;;;----------------------------------------------------------------------------
 ;;; <read-error>
@@ -155,8 +150,7 @@
            keyword stream)
    (error-number  type <int>
                   default 77 accessor error-number
-                  keyword error-number)
-   )
+                  keyword error-number))
   representation pointer-to-struct
   allocation multiple-type-card)
 
@@ -171,7 +165,7 @@
                       (if (ensure-open-character-input-stream stream)
                           (%read-unit stream)
                         (progn ;(stream-condition-error 'read o-stream)
-                          (%read-unit $standard-input))))))
+                          (%read-unit stdin))))))
         (convert-int-char (make-fpint unit))))
 
 
@@ -228,17 +222,18 @@
         (if (ensure-open-character-input-stream stream)
             (read-expression stream)
           (progn ;(stream-condition-error 'read stream)
-            (read-expression $standard-input))
+            (read-expression stdin))
           ))
-    (read-expression $standard-input)
+    (read-expression stdin)
     ))
 
 ;; fur string streams nicht auf fd reduzieren, stream durchreichen!
+;; for string streams not be reduced to fd, stream reach through!
 
 ;;;-----------------------------------------------------------------------------
 ;;; read-procedure self
 ;;;-----------------------------------------------------------------------------
-(%define-function  (read-expression <object>)
+(%define-function (read-expression <object>)
   ((stream <stream>))
   ;;         (print 'read-expression)
   ;;         (print (%cast <object> stream))
@@ -479,7 +474,9 @@
               (read-token #%i1
                           (%and ch #%i127)
                           stream)))
-        ;;(print 'read-char-name)(print tok)(print (%cast <string-stack> *buffer-1*))
+        ;;(print 'read-char-name)
+        ;;(print tok)
+        ;;(print (%cast <string-stack> *buffer-1*))
         (if (%lt tok #%i8)
             ch
           (if (%eq tok #%i8)
@@ -812,29 +809,24 @@
   (push-buffer  char (%cast <string-stack> *buffer-1*))
   ())
 
-;;   ;      ----
 ;;   (defun peek-unit o-stream
-;;   ;      ----
 ;;     (let ((unit
 ;;            (if o-stream
 ;;              (if (ensure-open-character-input-stream (car o-stream))
 ;;                (%peek-unit (car o-stream))
 ;;                (progn ;(stream-condition-error 'read o-stream)
-;;                  (%peek-unit $standard-input)))
-;;            (%peek-unit $standard-input))))
+;;                  (%peek-unit stdin)))
+;;            (%peek-unit stdin))))
 ;;       (convert-int-char (make-fpint unit))))
 
-;;
-;;   ;      ----
 ;;   (defun read-unit o-stream
-;;      ;      ----
 ;;     (let ((unit
 ;;            (if o-stream
 ;;              (if (ensure-open-character-input-stream (car o-stream))
 ;;                (%read-unit (car o-stream))
 ;;                (progn ;(stream-condition-error 'read o-stream)
-;;                  (%read-unit $standard-input)))
-;;               (%read-unit $standard-input))))
+;;                  (%read-unit stdin)))
+;;               (%read-unit stdin))))
 ;;       (convert-int-char (make-fpint unit))))
 
 ;;;-----------------------------------------------------------------------------
@@ -853,5 +845,5 @@
     ((var var1) (atom? <list>)))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module read
 ;;;-----------------------------------------------------------------------------

@@ -20,22 +20,33 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems: use stdio ... from c
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule c-stdio
   (import (tail)
    syntax (tail)
    c-import (<stdio.h>)
-   export (FILE* stdin stdout stderr EOF fgetc fflush ungetc putc
-                 fprintf-3  sprintf-3
-                 fscanf-3 sscanf-3 open-fd close-fd
-                 fseek ftell
-                 fprintf-3-double
-                 sprintf-3-double))
+   export (FILE*
+           c-stdin
+           c-stdout
+           c-stderr
+           EOF
+           fgetc
+           fflush
+           ungetc
+           putc
+           fprintf-3
+           sprintf-3
+           fscanf-3
+           sscanf-3
+           open-fd
+           close-fd
+           fseek
+           ftell
+           fprintf-3-double
+           sprintf-3-double))
+
 
 (%declare-external-class (FILE* <tail-class>)
   ()
@@ -45,15 +56,15 @@
   type-identifier |FILE *|)
 
 
-(%declare-external-variable stdin FILE*
+(%declare-external-variable c-stdin FILE*
   language c
   external-name |stdin|)
 
-(%declare-external-variable stdout FILE*
+(%declare-external-variable c-stdout FILE*
   language c
   external-name |stdout|)
 
-(%declare-external-variable stderr FILE*
+(%declare-external-variable c-stderr FILE*
   language c
   external-name |stderr|)
 
@@ -155,4 +166,6 @@
   external-name |fclose|
   )
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

@@ -20,36 +20,22 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule read-i
+  (import (tail
+           apply
+           (only (equal)
+                 compare)
+           (only (<character>)
+                 character)
+           (only (print)
+                 print))
+   syntax (tail)
+   export (get-dispatch-macro-character
+           set-dispatch-macro-character))
 
-  (import
-   ;;------
-   (tail
-    apply
-    ;;      (only (element) collection-table)
-    (only (;eql
-           equal
-           ) compare)
-    ;;      (only (<table>) table)
-    ;;      (only (make) object-0)
-    (only (<character>) character)
-    (only (print) print)
-    )
-
-   syntax
-   ;;------
-   (tail)
-
-   export
-   ;;------
-   (get-dispatch-macro-character set-dispatch-macro-character)
-   )
 
 ;;(defconstant
 (deflocal
@@ -75,8 +61,7 @@
 (defun get-dispatch-macro-character
   (disp-char subchar . readtable-list)
   ;;(element *extension-macro-table* subchar)
-  (assoc-char-eql *extension-macro-table* subchar)
-  )
+  (assoc-char-eql *extension-macro-table* subchar))
 
 (defun assoc-char-eql (plist subchar)
   (if plist
@@ -109,4 +94,6 @@
 ;;      (progn (print "other from:")
 ;;             (print object)))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module read-i
+;;;-----------------------------------------------------------------------------

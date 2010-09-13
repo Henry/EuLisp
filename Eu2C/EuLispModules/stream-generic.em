@@ -20,47 +20,26 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule stream-generic
+  (import (tail
+           apply
+           standard-generic-function
+           (only (<stream>)
+                 stream-ii))
+   syntax (tail)
+   export (close
+           flush
+           stream-position
+           input
+           uninput
+           output
+           read-line
+           generic-print
+           generic-write))
 
-  (import
-   ;;------
-   (tail
-    apply
-    standard-generic-function
-    (only (<stream>) stream-ii)
-    )
-
-   syntax
-   ;;------
-   (tail)
-
-   export
-   ;;------
-   (  stream?
-      file-stream?
-      character-stream?
-      close
-      flush
-      stream-position
-      ;;set-stream-position ;(only as setter)
-      input
-      uninput
-      output
-      read-line
-      generic-print
-      generic-write
-      )
-   )
-
-(defgeneric stream? ((object <object>)))
-(defgeneric file-stream? ((object <object>)))
-(defgeneric character-stream? ((object <object>)))
 (defgeneric close ((stream <stream>)))
 (defgeneric flush ((stream <stream>)))
 (defgeneric stream-position ((stream <stream>)))
@@ -75,12 +54,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
-;; still to annotate:
-
-;; Predicates (e.g. file-stream? ..) are annotated in stream.am because
-;; the classes <file-stream> .. do not exist here.
-
 (%annotate-function
   close new-signature
   (((var0 var1)
@@ -122,4 +95,6 @@
     ((var var1) (var var0))
     ((var var2) (atom? <stream>)))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module stream-generic
+;;;-----------------------------------------------------------------------------

@@ -47,7 +47,7 @@
                  eulisp-kernel)
            (only (<file>
                   fprintf-3
-                  $standard-output
+                  stdout
                   %write-unit %write-string
                   ensure-open-character-output-stream
                   file-descriptor-pointer
@@ -131,6 +131,7 @@
    syntax (tail)
    export (prin
            print
+           sprint
            write
            output
            newline
@@ -231,8 +232,8 @@
 ;;        (if (ensure-open-character-output-stream stream)
 ;;          (fflush (file-descriptor-pointer stream))
 ;;          (progn ;(stream-error)
-;;              (fflush (%cast %unsigned-word-integer stdout)))))
-;;       (fflush (%cast %unsigned-word-integer stdout))))
+;;              (fflush (%cast %unsigned-word-integer c-stdout)))))
+;;       (fflush (%cast %unsigned-word-integer c-stdout))))
 
 ;;(defun write-unit (unit . stream-list)
 ;;  (let ((obj (%cast %signed-word-integer
@@ -243,8 +244,8 @@
 ;;          (%write-unit (%cast %unsigned-word-integer
 ;;                                  (file-descriptor-pointer stream)) obj)
 ;;          (progn ;(stream-error)
-;;              (%write-unit (%cast %unsigned-word-integer stdout) obj))))
-;;       (%write-unit (%cast %unsigned-word-integer stdout) obj)))
+;;              (%write-unit (%cast %unsigned-word-integer c-stdout) obj))))
+;;       (%write-unit (%cast %unsigned-word-integer c-stdout) obj)))
 ;;  ())
 
 ;;;-----------------------------------------------------------------------------
@@ -267,8 +268,8 @@
         (if (ensure-open-character-output-stream stream)
             (%write-unit stream $char-newline)
           (progn ;(stream-error)
-            (%write-unit $standard-output $char-newline))))
-    (%write-unit $standard-output $char-newline))
+            (%write-unit stdout $char-newline))))
+    (%write-unit stdout $char-newline))
   #\newline)
 
 ;;;-----------------------------------------------------------------------------
@@ -280,8 +281,8 @@
         (if (ensure-open-character-output-stream stream)
             (generic-print object stream)
           (progn ;(stream-error)
-            (generic-print object $standard-output))))
-    (generic-print object $standard-output)))
+            (generic-print object stdout))))
+    (generic-print object stdout)))
 
 ;; auf generic-print abbilden!
 ;; f string-streams nicht fd als %unsingned-word-intger definieren und
@@ -418,8 +419,8 @@
         (if (ensure-open-character-output-stream stream)
             (generic-write object stream)
           (progn ;(stream-error)
-            (generic-write object $standard-output))))
-    (generic-write object $standard-output)))
+            (generic-write object stdout))))
+    (generic-write object stdout)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; generite-write
@@ -729,19 +730,47 @@
 ;;;-----------------------------------------------------------------------------
 (defun print (object . stream-list)
   (if stream-list
-      (%let ((stream <stream> (%cast <stream>(car stream-list))))
+      (%let ((stream <stream> (%cast <stream> (car stream-list))))
             (if (ensure-open-character-output-stream stream)
                 (print-1 object stream)
               (progn ;(stream-error)
-                (print-1 object (%cast <stream> $standard-output)))))
-    (print-1 object (%cast <stream> $standard-output)))
+                (print-1 object (%cast <stream> stdout)))))
+    (print-1 object (%cast <stream> stdout)))
   object)
 
-(%define-function (print-1 %void)
-  ((object <object>)
-   (stream <stream>))
+(%define-function (print-1 %void) ((object <object>) (stream <stream>))
   (generic-print object stream)
   (%write-unit stream $char-newline))
+
+;; (%define-function (sprint <stream>)
+;;   ((stream <stream>)
+;;    (object <object>))
+;;   (if (ensure-open-character-output-stream stream)
+;;       (print-1 object stream)
+;;     (progn                              ; (stream-error)
+;;       (print-1 object (%cast <stream> stdout))))
+;;   stream)
+
+(%define-function (sprint <stream>) ((stream <stream>) . objects)
+  (if objects
+      (sprint-aux stream objects)
+    ())
+  (%write-unit stream $char-newline)
+  stream)
+
+;; (defun sprint-aux (stream objects)
+;;   (if objects
+;;       (progn
+;;         (generic-print (car objects) stream)
+;;         (sprint-aux stream (cdr objects)))
+;;     ()))
+
+(%define-function (sprint-aux <null>) ((stream <stream>) objects)
+  (if objects
+      (progn
+        (generic-print (car objects) stream)
+        (sprint-aux stream (cdr objects)))
+    ()))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference

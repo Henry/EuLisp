@@ -55,7 +55,7 @@
                  condition-i)
            (only (int?)
                  int-i)
-           (only ($standard-output
+           (only (stdout
                   %write-unit
                   %read-unit
                   %peek-unit
@@ -167,7 +167,7 @@
                   (error
                    "~Warning: the current output stream is designated by t")
                 ())
-              (format1 $standard-output
+              (format1 stdout
                        (string-pointer fstring)
                        #%i0
                        (strlen (string-pointer fstring))
@@ -383,7 +383,7 @@
                                  #%i0
                                  (strlen (string-pointer fstring))
                                  )
-                        (scan1 $standard-output
+                        (scan1 stdout
                                (string-pointer fstring)
                                #%i0
                                (strlen (string-pointer fstring))

@@ -276,7 +276,7 @@
       (progn
         (format 't
                 "Enter <return> to exit~%      cont to continue with continuation~%> ")
-        (if (equal "cont" (read-line (standard-input-stream)))
+        (if (equal "cont" (read-line stdin))
             (progn
               (format 't "~%Enter return-value:")
               (continuation (read)))

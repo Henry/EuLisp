@@ -20,99 +20,156 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich, Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule stream-i
-
-  (import
-   ;;------
-   ( ;(rename ((<object> <file>)) (only (<object>) tail))
-    (only (<class> <object> <symbol> <null> <int>
-                   %cast %signed-word-integer %unsigned-word-integer
-                   %eq %lt %gt %member %string %plus %minus
-                   eq cons make-fpint make-swi
-                   %void %extract) tail)
-    stream-ii
-    standard-generic-function
-    stream-generic
-    (only (<function>) function-i)
-    (only (error <condition>) condition-i)
-    (only (check-options get-option) option-lists)
-    (only (<string> string-pointer make-string duplicate-%string allocate-%string) string-ii)
-    (only (<character>) character)
-    (rename ((FILE* <file>)) (only (FILE*) c-stdio))
-    (only (stdin stdout stderr EOF fgetc fflush ungetc putc
-                 fprintf-3 ;sprintf-3
-                 fscanf-3 sprintf-3 sscanf-3 open-fd close-fd
-                 ftell fseek) c-stdio)
-    (only (getc-buffer ungetc-buffer clear-buffer
-                       <string-stack> push-buffer ?stack-string !cur-index
-                       make-string-stack  pop-buffer ?cur-index ?last-index) string-stack)
-    (only ($char-eof $char-newline $char-ascii-space) char-tables)
-    (only (strlen) c-string-interface)
-    convert
-    )
-
-
-   syntax
-   ;;------
-   (tail
-    (only (when unless) syntax-0))
-
-   export
-   ;;------
-   (; <stream-properties> <stream-direction>
-    <stream> <file-stream> <char-file-stream> <string-stream>
-             ;; <input-stream> <output-stream> <io-stream> <stream-unit> input-stream output-stream
-             stdin stdout stderr %peek-unit %read-unit %write-unit
-             fprintf-3 sprintf-3 fscanf-3 sscanf-3 EOF
-             stream? file-stream?
-             opened-streams open $standard-input
-             $standard-output $standard-error-output fflush flush close
-             ensure-open-character-input-stream
-
-             standard-input-stream standard-output-stream
-             standard-error-stream
-             %unread-unit stream-position
-             set-stream-position ;(only as setter)
-             end-of-stream?
-
-             ensure-open-character-output-stream
-             file-descriptor-pointer make-file-stream
-             input-stream? output-stream?
-             ;; io-stream?
-             character-stream?
-             ;; binary-stream?
-             open?
-             stream-direction
-             stream-opened ensure-open-input-stream ensure-open-stream
-             convert-stream-string
-             string-stream?
-             stream-string-stack
-             make-string-stream
-             <stream-condition>
-             <end-of-stream>
-             <inappropriate-stream-position>
-             make-string-input-stream make-string-output-stream
-             converter
-             convert
-             stream-eos-action
-             setf-stream-eos-action
-             <file>
-             %write-string
-             ;;push-string
-             line-position
-             left-margin
-             set-left-margin
-             make-pp-line-position-stream
-             pplp-line-position setf-pplp-line-position
-             *not-eof-action*
-             )
-   )
+  (import ((only (<class>
+                  <object>
+                  <symbol>
+                  <null>
+                  <int>
+                  %cast
+                  %signed-word-integer
+                  %unsigned-word-integer
+                  %eq
+                  %lt
+                  %gt
+                  %member
+                  %string
+                  %plus
+                  %minus
+                  eq
+                  cons
+                  make-fpint
+                  make-swi
+                  %void
+                  %extract)
+                 tail)
+           stream-ii
+           standard-generic-function
+           stream-generic
+           (only (<function>)
+                 function-i)
+           (only (error
+                  <condition>)
+                 condition-i)
+           (only (check-options
+                  get-option)
+                 option-lists)
+           (only (<string>
+                  string-pointer
+                  make-string
+                  duplicate-%string
+                  allocate-%string)
+                 string-ii)
+           (only (<character>)
+                 character)
+           (rename ((FILE* <file>))
+                   (only (FILE*)
+                         c-stdio))
+           (only (c-stdin
+                  c-stdout
+                  c-stderr
+                  EOF
+                  fgetc
+                  fflush
+                  ungetc
+                  putc
+                  fprintf-3
+                  fscanf-3
+                  sprintf-3
+                  sscanf-3
+                  open-fd
+                  close-fd
+                  ftell
+                  fseek)
+                 c-stdio)
+           (only (getc-buffer
+                  ungetc-buffer
+                  clear-buffer
+                  <string-stack>
+                  push-buffer
+                  ?stack-string
+                  !cur-index
+                  make-string-stack
+                  pop-buffer
+                  ?cur-index
+                  ?last-index)
+                 string-stack)
+           (only ($char-eof
+                  $char-newline
+                  $char-ascii-space)
+                 char-tables)
+           (only (strlen)
+                 c-string-interface)
+           convert)
+   syntax (tail
+           (only (when
+                  unless)
+                 syntax-0))
+   export (<stream>
+           <file-stream>
+           <char-file-stream>
+           <string-stream>
+           c-stdin
+           c-stdout
+           c-stderr
+           %peek-unit
+           %read-unit
+           %write-unit
+           fprintf-3
+           sprintf-3
+           fscanf-3
+           sscanf-3
+           EOF
+           stream?
+           file-stream?
+           opened-streams
+           open
+           stdin
+           stdout
+           stderr
+           fflush
+           flush
+           close
+           ensure-open-character-input-stream
+           %unread-unit stream-position
+           set-stream-position
+           end-of-stream?
+           ensure-open-character-output-stream
+           file-descriptor-pointer
+           make-file-stream
+           input-stream?
+           output-stream?
+           character-stream?
+           open?
+           stream-direction
+           stream-opened
+           ensure-open-input-stream
+           ensure-open-stream
+           convert-stream-string
+           string-stream?
+           stream-string-stack
+           make-string-stream
+           <stream-condition>
+           <end-of-stream>
+           <inappropriate-stream-position>
+           make-string-input-stream
+           make-string-output-stream
+           converter
+           convert
+           stream-eos-action
+           setf-stream-eos-action
+           <file>
+           %write-string
+           line-position
+           left-margin
+           set-left-margin
+           make-pp-line-position-stream
+           pplp-line-position
+           setf-pplp-line-position
+           *not-eof-action*))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Stream condition
@@ -128,8 +185,7 @@
   <stream-condition>
   ()
   representation pointer-to-struct
-  allocation multiple-type-card
-  )
+  allocation multiple-type-card)
 
 (%define-standard-class (<inappropriate-stream-position> <class>)
   <stream-condition>
@@ -137,35 +193,7 @@
                             default () accessor invalid-stream-position
                             keyword invalid-stream-position))
   representation pointer-to-struct
-  allocation multiple-type-card
-  )
-
-
-;;;(%define-standard-class (<stream> <class>)
-;;;                        <object>
-;;;       ((direction type <symbol> ;<stream-direction>
-;;;                              keyword direction
-;;;                              reader stream-direction
-;;;                              writer setf-stream-direction)
-;;;        (transaction-unit type <object>
-;;;                                         reader stream-transaction-unit
-;;;                                         writer setf-stream-transaction-unit)
-;;;        (positionable type <object>
-;;;                                   reader stream-positionable
-;;;                                   writer setf-stream-positionable)
-;;;        (opened type <object>
-;;;                          reader stream-opened
-;;;                          writer setf-stream-opened)
-;;;             (eos-action type %function reader stream-eos-action
-;;;                         writer setf-stream-eos-action)
-;;;        ;(name type <string> accessor stream-name)
-;;;        )
-;;;        predicate stream?        ;;rr
-;;;       representation pointer-to-struct
-;;;)
-
-(defmethod stream? ((object <stream>)) 't)
-(defmethod stream? ((object <object>)) ())
+  allocation multiple-type-card)
 
 (%define-standard-class (<file-stream> <class>)
   <stream>
@@ -179,12 +207,12 @@
    ;;                                     default default-eos-action)
    )
   constructor (make-file-stream file-descriptor-pointer direction)
-  ;;        predicate file-stream?
+  predicate file-stream?
   allocation single-card
   representation pointer-to-struct)
 
-(defmethod file-stream? ((object <file-stream>)) 't)
-(defmethod file-stream? ((object <object>)) ())
+;;(defmethod file-stream? ((object <file-stream>)) 't)
+;;(defmethod file-stream? ((object <object>)) ())
 
 (%define-standard-class (<char-file-stream> <class>)
   <file-stream>
@@ -264,8 +292,7 @@
     (setf-stream-direction nstr (stream-direction stream))
     (setf-stream-transaction-unit nstr (stream-transaction-unit stream))
     (setf-stream-opened nstr (stream-opened stream))
-    nstr
-    ))
+    nstr))
 
 (defmethod close ((stream <pp-line-position-stream>))
   (setf-stream-opened stream 'closed)
@@ -291,8 +318,7 @@
         (%write-string (pplp-out-stream stream)
                        (?stack-string buffer))
         (clear-buffer buffer)
-        (setf-pplp-bcur-position stream #%i0)
-        )
+        (setf-pplp-bcur-position stream #%i0))
   ((converter <string>) (pplp-out-stream stream)))
 
 (%define-function (%write-unit-special %signed-word-integer)
@@ -306,9 +332,9 @@
             ;; write-buffer
             (progn
 
-              ;;        (%write-string $standard-output (%literal %string () "<<<-"))
-              ;;        (%write-string $standard-output (?stack-string fd))
-              ;;        (%write-string $standard-output (%literal %string () "->>>"))
+              ;;(%write-string stdout (%literal %string () "<<<-"))
+              ;;(%write-string stdout (?stack-string fd))
+              ;;(%write-string stdout (%literal %string () "->>>"))
 
               (%write-string (pplp-out-stream stream) (?stack-string fd))
               (clear-buffer fd)
@@ -377,8 +403,7 @@
               length)
       (if (pp-line-position-stream? stream)
           (%write-string-special stream str #%i0 (strlen str))
-        #%i0)))
-  )
+        #%i0))))
 
 (%define-function (%write-string-special %signed-word-integer)
   ((stream <stream>)
@@ -405,8 +430,8 @@
              (push-string string (%plus idx #%i1) length string-stack))
     ()))
 
-(deflocal $standard-input
-  (let (( stream (make-char-file-stream (%cast <file> stdin)
+(deflocal stdin
+  (let (( stream (make-char-file-stream (%cast <file> c-stdin)
                                         'input)))
     (setf-stream-opened stream 'open)
     (setf-stream-transaction-unit stream <character>)
@@ -414,23 +439,19 @@
                             (%cast <function> default-eos-action))
     stream))
 
-(deflocal $standard-output
-  (let ((stream (make-file-stream (%cast <file> stdout)
+(deflocal stdout
+  (let ((stream (make-file-stream (%cast <file> c-stdout)
                                   'output)))
     (setf-stream-opened stream 'open)
     (setf-stream-transaction-unit stream <character>)
     stream))
 
-(deflocal $standard-error-output
-  (let ((stream (make-file-stream (%cast <file> stderr)
+(deflocal stderr
+  (let ((stream (make-file-stream (%cast <file> c-stderr)
                                   'output)))
     (setf-stream-opened stream 'open)
     (setf-stream-transaction-unit stream <character>)
     stream) )
-
-(defun standard-input-stream () $standard-input)
-(defun standard-output-stream () $standard-output)
-(defun standard-error-stream () $standard-error-output)
 
 (%define-function (%peek-unit %signed-word-integer)
   ((stream <stream>))
@@ -442,7 +463,8 @@
                    (if (%eq ch #%i-1)
                        (make-swi
                         (%cast <int>
-                               ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
+                               ((stream-eos-action stream) stream)))
+                     ; EOS (%cast %signed-word-integer $char-eof)
                      (progn
                        (ungetc ch fd)
                        ch))
@@ -453,7 +475,8 @@
                      (if (%eq ch #%i-1)
                          (make-swi
                           (%cast <int>
-                                 ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
+                                 ((stream-eos-action stream) stream)))
+                       ; EOS (%cast %signed-word-integer $char-eof)
                        (progn
                          (ungetc-buffer ch fd)
                          ch))))
@@ -469,7 +492,8 @@
                    (if (%eq ch #%i-1)
                        (make-swi
                         (%cast <int>
-                               ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
+                               ((stream-eos-action stream) stream)))
+                     ; EOS (%cast %signed-word-integer $char-eof)
                      ch))
             )
     (if (string-stream? stream)
@@ -478,7 +502,8 @@
                      (if (%eq ch #%i-1)
                          (make-swi
                           (%cast <int>
-                                 ((stream-eos-action stream) stream))) ; EOS (%cast %signed-word-integer $char-eof)
+                                 ((stream-eos-action stream) stream)))
+                       ; EOS (%cast %signed-word-integer $char-eof)
                        (progn
                          ch))))
       #%i0))
@@ -497,8 +522,7 @@
         (%let ((fd <string-stack> (stream-string-stack stream)))
               (ungetc-buffer ch fd)
               #%i0)
-      #%i0))
-  )
+      #%i0)))
 
 
 (%define-function (%write-unit %signed-word-integer)
@@ -545,7 +569,8 @@
                                       (%literal %string () "w")))
                                 (%literal %string () "r")))))
             lvdir)))
-      (if (%eq #%i0 (%cast %signed-word-integer (file-descriptor-pointer stream)))
+      (if (%eq #%i0 (%cast %signed-word-integer
+                           (file-descriptor-pointer stream)))
           (setf-stream-opened stream ())
         (setf-stream-opened stream 'open))
       ;;(setf-stream-direction stream lvdir)
@@ -564,8 +589,7 @@
       (error "end of stream" <end-of-stream>
              ;; <stream-condition>
              'stream stream)
-      ()))
-  )
+      ())))
 
 
 (defun input-stream? (obj)
@@ -584,6 +608,7 @@
         ())
     ()))
 
+(defgeneric character-stream? ((object <object>)))
 (defmethod character-stream? ((object <object>)) ())
 (defmethod character-stream? ((object <stream>))
   (if (eq <character> (stream-transaction-unit object))
@@ -727,8 +752,7 @@
               (if (%lt (?cur-index fd ) (?last-index fd))
                   't
                 ()))
-      ())
-    ))
+      ())))
 
 (defmethod (converter <string>) ((stream <stream>))
   (convert-stream-string stream))
@@ -749,13 +773,11 @@
 
 ;;(%define-abstract-class (<stream-properties> <abstract-class>)
 ;;                        <object>
-;;       ()
-;;)
+;;       ())
 ;;
 ;;(%define-abstract-class (<stream-direction> <abstract-class>)
 ;;                        <stream-properties>
-;;       ()
-;;)
+;;       ())
 
 ;;(%define-standard-class (<input-stream> <class>)
 ;;                       <stream-direction>
@@ -988,24 +1010,11 @@
     ((var var1) (atom? <string-stream>)))))
 
 (%annotate-function
-  standard-error-stream new-signature
-  (((var0)
-    ((var var0) (atom? <stream>)))))
-
-(%annotate-function
-  standard-input-stream new-signature
-  (((var0)
-    ((var var0) (atom? <stream>)))))
-
-(%annotate-function
-  standard-output-stream new-signature
-  (((var0)
-    ((var var0) (atom? <stream>)))))
-
-(%annotate-function
   default-eos-action new-signature
   (((var0 var1)
     ((var var0) (atom? <null>))
     ((var var1) (atom? <object>)))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module stream-i
+;;;-----------------------------------------------------------------------------

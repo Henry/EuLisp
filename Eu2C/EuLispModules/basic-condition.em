@@ -34,7 +34,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; declare external functions to realize error
 ;;;-----------------------------------------------------------------------------
-
 (%declare-external-function (c-exit %void)
   ((status %signed-word-integer))
   language C
@@ -48,7 +47,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; define basic error and bind error
 ;;;-----------------------------------------------------------------------------
-
 (defun basic-error (message condition-class . init-args)
   (c-puts (%literal %string () "Simple Error signalled:"))
   (c-puts (string-pointer message))
@@ -57,35 +55,27 @@
   message ;; only to make type inference happy
   )
 
-
 (deflocal error basic-error)
 
 ;;;-----------------------------------------------------------------------------
 ;;; define constants for conditions
 ;;;-----------------------------------------------------------------------------
-
-
 (deflocal $<no-applicable-method> ())
 (deflocal $<typecheck-error> ())
-
-
-
 
 ;;;-----------------------------------------------------------------------------
 ;;; define functions calling error
 ;;;-----------------------------------------------------------------------------
-
-
 (defun no-applicable-method-error (gf . args)
   (error "No applicable Methods found" $<no-applicable-method> 'generic gf
          'arguments args)
   ;;make type-inference happy
   gf)
 
-
-
 (defun typecheck-error (object class-list)
-  (error "Typecheck-Error" $<typecheck-error> 'object object 'class-list class-list))
+  (error "Typecheck-Error"
+         $<typecheck-error> 'object object 'class-list class-list))
 
-
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

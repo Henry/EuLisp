@@ -20,34 +20,26 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule stream-ii
-
-  (import
-   ;;------
-   (tail
-    (only (<function>) function-i)
-    )
-
-
-   syntax
-   ;;------
-   (tail)
-
-   export
-   ;;------
-   (<stream>
-    stream-direction setf-stream-direction
-    stream-transaction-unit setf-stream-transaction-unit
-    stream-positionable setf-stream-positionable
-    stream-opened setf-stream-opened
-    stream-eos-action setf-stream-eos-action)
-   )
+  (import (tail
+           (only (<function>)
+                 function-i))
+   syntax (tail)
+   export (<stream>
+           stream?
+           stream-direction
+           setf-stream-direction
+           stream-transaction-unit
+           setf-stream-transaction-unit
+           stream-positionable
+           setf-stream-positionable
+           stream-opened
+           setf-stream-opened
+           stream-eos-action
+           setf-stream-eos-action))
 
 (%define-standard-class (<stream> <class>)
   <object>
@@ -65,11 +57,10 @@
            reader stream-opened
            writer setf-stream-opened)
    (eos-action type <function> reader stream-eos-action
-               writer setf-stream-eos-action)
-   )
-  representation pointer-to-struct
-  )
+               writer setf-stream-eos-action))
+  predicate stream?
+  representation pointer-to-struct)
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module stream-ii
 ;;;-----------------------------------------------------------------------------

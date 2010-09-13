@@ -41,17 +41,18 @@
            ;; <io-stream> <stream-unit>  ; nicht in el0.99
            ;; input-stream output-stream ; nicht in el0.99
            read ; nicht in el0.99
-           prin open close
+           prin
+           open
+           close
            stream? file-stream?
            input-stream? output-stream? ; nicht in el0.99
            ;; io-stream?  ; nicht in el0.99
            character-stream?
            ;; binary-stream?  ; nicht in el0.99
            open? ; nicht in el0.99
-           flush print
+           flush
+           print
            ;; write-unit read-unit peek-unit ; nicht in el0.99
-           standard-input-stream standard-output-stream
-           standard-error-stream
            stream-position
            set-stream-position ; nicht in el0.99, aber fur setter stream-position
            end-of-stream? input uninput read-line
@@ -62,7 +63,10 @@
            make-string-input-stream make-string-output-stream
            converter
            convert
-           <read-error>))
+           <read-error>
+           stdin
+           stdout
+           stderr))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
