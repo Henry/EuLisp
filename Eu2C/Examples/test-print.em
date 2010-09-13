@@ -28,7 +28,12 @@
    syntax (level-0))
 
 (sprint stderr "hmm " 1 " end")
-(sprint stdout "hmm " 1 " end")
+
+(with-handler
+ (lambda (condition continuation)
+   (print "error"))
+   (sprint stdin "hmm " 1 " end"))
+
 (sprint stdout (stream? stdout))
 (sprint stdout (file-stream? stdout))
 

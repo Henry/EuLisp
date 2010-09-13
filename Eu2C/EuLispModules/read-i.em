@@ -20,6 +20,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title:
 ;;;  Description:
+;;  The function supplied to set-dispatch-macro-characte has the arguments:
+;;          stream
+;;          char    the subchar
+;;
+;;  (set-dispatch-macro-character #\# % read-tail-short-literals)
+;;
+;;  (defun read-tail-short-literals (stream subchar)
+;;    (let ((subsubchar (read-char stream))
+;;          (object (read stream)))
+;;      (if (equal subsubchar #\i)
+;;        (progn (print "make signed-word-integer from:")
+;;               (print object))
+;;        (progn (print "other from:")
+;;               (print object)))))
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
 
@@ -36,8 +50,6 @@
    export (get-dispatch-macro-character
            set-dispatch-macro-character))
 
-
-;;(defconstant
 (deflocal
   *extension-macro-table*
   ;;(make <table>)
@@ -72,27 +84,6 @@
           (cdr (car plist))
         (assoc-char-eql (cdr plist) subchar))
     ()))
-
-;;; function has the arguments:
-;;;
-;;;          stream
-;;;          char    the subchar
-;;;          arg     NIL or the number between disp-char and subchar
-;;;                  (in time only NIL!!)
-
-;;; Example:
-;;
-;;(set-dispatch-macro-character #\# % read-tail-short-literals)
-;;
-;;(defun read-tail-short-literals
-;;       (stream subchar)
-;;  (let ((subsubchar (input stream))
-;;        (object (read stream)))
-;;    (if (equal subsubchar #\i)
-;;      (progn (print "make signed-word-integer from:")
-;;             (print object))
-;;      (progn (print "other from:")
-;;             (print object)))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module read-i

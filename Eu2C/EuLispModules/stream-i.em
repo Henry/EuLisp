@@ -919,13 +919,13 @@
 ;;   ((var var1) (atom? (and <stream> (not <character-stream>)))))))
 
 (%annotate-function
-  input new-signature
+  read-char new-signature
   (((var0 var1)
     ((var var0) (atom? <object>))
     ((var var1) (atom? <stream>)))))
 
 ;;(%annotate-function
-;; uninput new-signature
+;; putback-char new-signature
 ;; (((var0 var1 var2)
 ;;   ((var var0) (atom? <symbol>))
 ;;   ((var var1) (atom? <character-stream>))
@@ -936,7 +936,7 @@
 ;;   ((var var2) (atom? (and <object> (not <character>)))))))
 
 (%annotate-function
-  uninput new-signature
+  putback-char new-signature
   (((var0 var1 var2)
     ((var var0) (atom? <symbol>))
     ((var var1) (atom? <stream>))

@@ -33,8 +33,8 @@
    export (close
            flush
            stream-position
-           input
-           uninput
+           read-char
+           putback-char
            output
            read-line
            generic-print
@@ -44,8 +44,8 @@
 (defgeneric flush ((stream <stream>)))
 (defgeneric stream-position ((stream <stream>)))
 (defgeneric (setter stream-position) ((stream <stream>) (object <object>)))
-(defgeneric input ((stream <stream>)))
-(defgeneric uninput ((stream <stream>) (object <object>)))
+(defgeneric read-char ((stream <stream>)))
+(defgeneric putback-char ((stream <stream>) (object <object>)))
 (defgeneric output ((stream <stream>) (object <object>)))
 (defgeneric read-line ((stream <stream>)))
 (defgeneric generic-print ((object <object>) (stream <stream>)))

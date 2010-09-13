@@ -20,24 +20,20 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: eulisp conditions
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 
 (defmodule condition-ii
   (import (tail)
-   syntax (tail)
-   )
+   syntax (tail))
 
 (defmacro define-condition-class (name superclass)
   `(%define-standard-class (,name <class>)
      ,superclass
      ()
-
      representation pointer-to-struct
      allocation multiple-type-card))
 
+;;;-----------------------------------------------------------------------------
 )
+;;;-----------------------------------------------------------------------------

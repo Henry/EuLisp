@@ -95,8 +95,8 @@
                   *not-eof-action*)
                  stream-i)
            (only (read-line
-                  input
-                  uninput)
+                  read-char
+                  putback-char)
                  stream-generic)
            (only (<double-float>
                   dble
@@ -133,8 +133,8 @@
                   clear-buffer)
                  string-stack))
    syntax (tail)
-   export (input
-           uninput
+   export (read-char
+           putback-char
            read-line
            <read-error>
            read-based-int1
@@ -159,7 +159,7 @@
 ;;------------------------------------------------------------------------------
 ;;; Functions
 ;;------------------------------------------------------------------------------
-(defmethod input ((stream <stream>))
+(defmethod read-char ((stream <stream>))
   (%let ((unit %signed-word-integer
                (%cast %signed-word-integer
                       (if (ensure-open-character-input-stream stream)
@@ -168,8 +168,7 @@
                           (%read-unit stdin))))))
         (convert-int-char (make-fpint unit))))
 
-
-(defmethod uninput ((stream <stream>) (object <object>))
+(defmethod putback-char ((stream <stream>) (object <object>))
   (if (ensure-open-character-input-stream stream)
       (%unread-unit stream (make-swi (convert-char-int object)))
     (progn ;(stream-condition-error 'read o-stream)
@@ -832,9 +831,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-;; supposed to be generic function!
 
-(%annotate-function input new-signature
+(%annotate-function read-char new-signature
   (((var0 var1)
     ((var var0) (atom? <object>))
     ((var var1) (atom? <stream>)))))

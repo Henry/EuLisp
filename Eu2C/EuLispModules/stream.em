@@ -26,41 +26,39 @@
 (defmodule stream
   (import (tail
            stream-i
-           read print)
+           read
+           print)
    syntax (tail)
-
-   export (;; <stream-properties> <stream-direction> ; nicht in el0.99
-           <stream>
-           <file-stream> ; nicht in el0.99
+   export (<stream>
+           <file-stream>
            <char-file-stream>
            <string-stream>
-           ;; end-of-stream s.o. condition
-           ;; converter to string s.o.
-           convert-stream-string ; fur converter to string
-           ;; <input-stream> <output-stream> ; nicht in el0.99
-           ;; <io-stream> <stream-unit>  ; nicht in el0.99
-           ;; input-stream output-stream ; nicht in el0.99
-           read ; nicht in el0.99
+           convert-stream-string
+           read
            prin
            open
            close
-           stream? file-stream?
-           input-stream? output-stream? ; nicht in el0.99
-           ;; io-stream?  ; nicht in el0.99
+           stream?
+           file-stream?
+           input-stream?
+           output-stream?
            character-stream?
-           ;; binary-stream?  ; nicht in el0.99
-           open? ; nicht in el0.99
+           open?
            flush
            print
-           ;; write-unit read-unit peek-unit ; nicht in el0.99
            stream-position
-           set-stream-position ; nicht in el0.99, aber fur setter stream-position
-           end-of-stream? input uninput read-line
-           output newline write
+           set-stream-position
+           end-of-stream?
+           read-char
+           putback-char
+           read-line
+           output
+           newline write
            <stream-condition>
            <end-of-stream>
            <inappropriate-stream-position>
-           make-string-input-stream make-string-output-stream
+           make-string-input-stream
+           make-string-output-stream
            converter
            convert
            <read-error>
@@ -88,15 +86,6 @@
    ((var0 var1)
     ((var var0) (atom? <null>))
     ((var var1) (atom? (and <object> (not <file-stream>)))))))
-
-;;(%annotate-function
-;; character-stream? new-signature
-;; (((var0 var1)
-;;   ((var var0) (atom? (and <object> (not <null>))))
-;;   ((var var1) (atom? <character-stream>)))
-;;  ((var0 var1)
-;;   ((var var0) (atom? <null>))
-;;   ((var var1) (atom? (and <object> (not <character-stream>)))))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of modules stream

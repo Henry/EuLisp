@@ -57,6 +57,9 @@
                   stream-string-stack
                   sprintf-3)
                  stream-i)
+           (only (error
+                  <condition>)
+                 condition-i)
            (only (fprintf-3-double
                   sprintf-3-double)
                  c-stdio)
@@ -129,7 +132,8 @@
            (only (strlen)
                  c-string-interface))
    syntax (tail)
-   export (prin
+   export (<write-error>
+           prin
            print
            sprint
            write
@@ -138,6 +142,20 @@
            change-exponent-marker
            print-based-int-0   ; nicht el
            ))
+
+;;;----------------------------------------------------------------------------
+;;; <write-error>
+;;;----------------------------------------------------------------------------
+(%define-standard-class (<write-error> <class> )
+  <condition>
+  (
+   (stream type <object> default () accessor stream
+           keyword stream)
+   (error-number  type <int>
+                  default 77 accessor error-number
+                  keyword error-number))
+  representation pointer-to-struct
+  allocation multiple-type-card)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Write primitives
@@ -753,7 +771,9 @@
 
 (%define-function (sprint <stream>) ((stream <stream>) . objects)
   (if objects
-      (sprint-aux stream objects)
+      (if (ensure-open-character-output-stream stream)
+          (sprint-aux stream objects)
+        (error "Stream is not open for output" <write-error> 'stream stream))
     ())
   (%write-unit stream $char-newline)
   stream)
