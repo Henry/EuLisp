@@ -35,11 +35,15 @@
                   %unsigned-word-integer
                   %signed-byte-integer
                   %string
-                  make-fpint make-swi
+                  make-fpint
+                  make-swi
                   %extract
                   %cast
-                  %mult %plus
-                  %eq %gt %lt
+                  %mult
+                  %plus
+                  %eq
+                  %gt
+                  %lt
                   t)
                  tail)
            (only (<cons>
@@ -57,7 +61,8 @@
                  apply)
            (only (get-dispatch-macro-character)
                  read-i)
-           (only (error <condition>)
+           (only (error
+                  <condition>)
                  condition-i)
            (only ($closed-bracket
                   ;$opend-bracket
@@ -184,7 +189,7 @@
         (let ((lvstring (read-line-1 stream)))
           (setf-stream-eos-action stream eos-action)
           (if (eq $end-of-stream-string lvstring)
-              (progn (error "end-of-stream" <end-of-stream> 'stream stream)
+              (progn (error <end-of-stream> "end-of-stream" 'stream stream)
                      $end-of-stream-string)
             lvstring)))
     (progn ;(stream-condition-error 'read o-stream)
@@ -308,7 +313,7 @@
 (%define-function (read-error <null>)
   ((stream <stream>)
    (err-nr %signed-word-integer))
-  (error "Syntax Error" <read-error>
+  (error <read-error> "Syntax Error"
          'stream stream
          'error-number
          (make-fpint err-nr))

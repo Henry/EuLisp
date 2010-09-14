@@ -37,7 +37,7 @@
   (let ((blocks (tower-blocks x)))
     (if (or (null? blocks) (< y (car blocks)))
         ((setter tower-blocks) x (cons y blocks))
-      (error "cannot push block of size ~a on tower ~a" y x))))
+      (error <condition> "cannot push block of size ~a on tower ~a" y x))))
 
 (defgeneric pop (x))
 
@@ -47,7 +47,7 @@
         (progn
           ((setter tower-blocks) x (cdr blocks))
           (car blocks))
-      (error "cannot pop block from emtpy tower ~a" x))))
+      (error <condition> "cannot pop block from emtpy tower ~a" x))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Move n blocks from tower x1 to tower x2 using x3 as buffer

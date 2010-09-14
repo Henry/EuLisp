@@ -61,7 +61,7 @@
   (if (%eq arg-descr #%i0)
       (too-many-arguments foo arg-descr arg-counter args)
     ())
-  ;;  (error foo arg-descr arg-counter args)
+  ;;  (error <range-condition> foo arg-descr arg-counter args)
   )
 
 (%define-function (wrong-argument-number <null>)
@@ -73,7 +73,7 @@
   (if (%eq arg-descr #%i0)
       (wrong-argument-number foo arg-descr arg-counter args)
     ())
-  ;;  (error foo arg-descr arg-counter args))
+  ;;(error <range-condition> foo arg-descr arg-counter args))
   )
 
 ;;;-----------------------------------------------------------------------------

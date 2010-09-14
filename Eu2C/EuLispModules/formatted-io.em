@@ -64,7 +64,8 @@
                   <string-stream>
                   make-string-stream
                   convert-stream-string
-                  %write-string)
+                  %write-string
+                  <stream-condition>)
                  stream-i)
            (only ($char-formfeed
                   $char-return
@@ -164,7 +165,7 @@
         (if (symbol? stream) ; symbol? added by ak to avoid c-compiler warning
             (progn           ; if global optimization is on
               (if (null? (eq stream 't))
-                  (error
+                  (error <stream-condition>
                    "~Warning: the current output stream is designated by t")
                 ())
               (format1 stdout
@@ -389,7 +390,8 @@
                                (strlen (string-pointer fstring))
                                ))))
                  (if (%gt (make-swi (dynamic saved-cur-index)) #%i0)
-                     (error "scan mismatch" <scan-mismatch>
+                     (error <scan-mismatch>
+                            "scan mismatch"
                             'format-string (dynamic fstring)
                             'input res)
                    res))))

@@ -58,6 +58,7 @@
                   sprintf-3)
                  stream-i)
            (only (error
+                  cerror
                   <condition>)
                  condition-i)
            (only (fprintf-3-double
@@ -773,7 +774,7 @@
   (if objects
       (if (ensure-open-character-output-stream stream)
           (sprint-aux stream objects)
-        (error "Stream is not open for output" <write-error> 'stream stream))
+        (cerror <write-error> "Stream is not open for output" 'stream stream))
     ())
   (%write-unit stream $char-newline)
   stream)

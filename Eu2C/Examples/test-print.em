@@ -29,6 +29,8 @@
 
 (sprint stderr "hmm " 1 " end")
 
+(sprint stdin "hmm " 1 " end")
+
 (with-handler
  (lambda (condition continuation)
    (print "error"))
@@ -36,6 +38,8 @@
 
 (sprint stdout (stream? stdout))
 (sprint stdout (file-stream? stdout))
+
+(sprint stdout "End")
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

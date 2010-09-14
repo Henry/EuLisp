@@ -329,7 +329,7 @@ For what it's worth, T has *AND, *OR, and *IF.
 Hi Julian,
 on page 24 it is stated signal should never return.
 But what about if one thread signals a condition to another thread.
-page19: A signal on a determined thread has nop discernable effect on
+page19: A signal on a determined thread has no discernable effect on
 either the signalled or signalling thread ...
 Is it correct, if we understand it in the following sense:
 if no thread is given signal should never return?

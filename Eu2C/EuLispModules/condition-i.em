@@ -65,7 +65,8 @@
            c-exit
            signal ; now set to a faked signal
            condition-message)
-   expose ((only (error)
+   expose ((only (error
+                  cerror)
                  basic-condition)))
 
 ;;;-----------------------------------------------------------------------------
@@ -73,14 +74,17 @@
 ;;;-----------------------------------------------------------------------------
 (%define-standard-class (<condition> <class>)
   <object>
-  ((message type <object> default () keyword message
+  ((message type <object>
+            default ()
+            keyword message:
             accessor condition-message)
-   (continuation type <object>  default () keyword
-                 continuation
-                 accessor continuation ))
+   ;; (continuation type <object>
+   ;;               default ()
+   ;;               keyword continuation:
+   ;;               accessor continuation)
+   )
   predicate condition?
   representation pointer-to-struct
-  constructor (make-condition )
   allocation multiple-type-card)
 
 ;;;-----------------------------------------------------------------------------
@@ -90,8 +94,12 @@
 
 (%define-standard-class (<typecheck-error> <class>)
   <general-condition>
-  ((object type <object> keyword object accessor object)
-   (class-list type <list> keyword class-list accessor class-list))
+  ((object type <object>
+           keyword object:
+           accessor object)
+   (class-list type <list>
+               keyword class-list:
+               accessor class-list))
   allocation multiple-type-card
   representation pointer-to-struct)
 (setq $<typecheck-error> <typecheck-error>)
@@ -101,10 +109,13 @@
 ;;;-----------------------------------------------------------------------------
 (%define-standard-class (<arithmetic-condition> <class> )
   <condition>
-  ((operator type <object> default () keyword operator accessor operator)
+  ((operator type <object>
+             default ()
+             keyword operator:
+             accessor operator)
    (operand-list type <list>
                  default ()
-                 keyword operand-list
+                 keyword operand-list:
                  accessor operand-list))
   representation pointer-to-struct
   allocation multiple-type-card)
@@ -116,10 +127,14 @@
 
 (%define-standard-class (<no-applicable-method> <class> )
   <telos-condition>
-  ((generic type <object> default ()
-            keyword generic accessor generic)
-   (arguments type <object> default ()
-              keyword arguments accessor arguments))
+  ((generic type <object>
+            default ()
+            keyword generic:
+            accessor generic)
+   (arguments type <object>
+              default ()
+              keyword arguments:
+              accessor arguments))
   representation pointer-to-struct
   allocation multiple-type-card)
 (setq $<no-applicable-method> <no-applicable-method>)
@@ -182,9 +197,9 @@
   sig)
 
 ;;;-----------------------------------------------------------------------------
-;;; Specification signals which has to be handled by c-signal and the
-;; transformed to a signal call
-;; IMHO, there should be a means that generated C code will use the actual
+;;; Specification signals
+;; which has to be handled by c-signal and the transformed to a signal call.
+;; Maybe there should be a means that generated C code will use the actual
 ;; signal masks from <signal.h>
 ;;;-----------------------------------------------------------------------------
 
@@ -195,15 +210,16 @@
           (%cast %sighandler (function-address apply-fpe-handler)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Error
+;;; Set initial values for error and cerror
 ;;;-----------------------------------------------------------------------------
-(defun error-with-signal-static (error-message condition-class . init-args)
+(defun error-with-signal-static (condition-class error-message . init-args)
   (let ((condition (%allocate  condition-class)))
     ((setter condition-message) condition error-message)
     (signal-static condition ())
     (error-handler-with-puts condition ())))
 
 (setq error error-with-signal-static)
+(setq cerror error-with-signal-static)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module condition-i

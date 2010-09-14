@@ -3,7 +3,7 @@
 #+TITLE:                 *Proposals for EuLisp-1.0*
 #+OPTIONS: ^:{} author:nil
 
-#+TODO: ACCEPTED DEF+YOUTOO YOUTOO DEF | DONE REJECTED
+#+TODO: ACCEPTED DEF+IMP IMP DEF | DONE REJECTED
 
 * DONE 1. Static Errors Might Be Signalled
   CLOSED: [2010-03-21 Sun 21:25]
@@ -32,7 +32,7 @@
     + There doesn't seem to be a good argument for cluttering the syntax with
       this additional defform.
 
-* DEF+YOUTOO 4. Level-0 telos conditions become static errors
+* DEF+IMP 4. Level-0 telos conditions become static errors
   except <no-applicable-method>
 
   As a consequence of the redefinition of static error, all but one of
@@ -64,13 +64,13 @@
   Proposal is to add a function with this name, which will parse the given
   stream and return s-expressions.  To add definition of read to A.14.
 
-* DEF+YOUTOO 8. Class-specific input functions
+* DEF+IMP 8. Class-specific input functions
   Add functions to read class-specific objects.
 
   These are: read-character, read-float, read-integer, read-list,
   read-string, read-symbol, read-vector.
 
-* DEF+YOUTOO 9. Invariant generic-function application behaviour
+* DEF+IMP 9. Invariant generic-function application behaviour
   This issue is concerned with the application of generic functions before all
   their methods have been defined.  It is proposed that an error be signalled if
   a method is defined on a generic function for a class to which it has
@@ -93,7 +93,7 @@
   application on a specific argument class.  In consequence, an
   implementation does not need to reset a gf cache, but only extend it.
 
-* DEF+YOUTOO 10. Method default specializers
+* DEF+IMP 10. Method default specializers
   If the domain of a generic function is restricted what is the default
   specialization of a method argument?
 
@@ -106,7 +106,7 @@
   generic function.  However, this has implications for method-lambda,
   since the identity of the host gf is not known at that time.
 
-* DEF+YOUTOO 11. Rest arguments in generic-functions
+* DEF+IMP 11. Rest arguments in generic-functions
   This is straightforward at level-0 and the current syntax for
   defgeneric and for defmethod allows for rest arguments.  Issue is
   how this should affect generic-function-domain (at level-1).
@@ -129,19 +129,19 @@
   CLOSED: [2010-03-20 Sat 22:23]
   Little extra functionality is gained, but security is lost by their inclusion.
 
-* DEF+YOUTOO 13. Additional scan directives
+* DEF+IMP 13. Additional scan directives
   for objects of classes that can be read
 
   This proposal stems from the one for class-specific input functions see 8.
   The argument is that those functions should be reflected in class-specific
   scan directives for character, float, integer, list, string, symbol, vector.
 
-* DEF+YOUTOO 14. Domain and range of deep-copy and shallow-copy
+* DEF+IMP 14. Domain and range of deep-copy and shallow-copy
   It should be explicitly stated that the range of deep-copy and shallow-copy
   shall be the same class as the domain.  Furthermore, it is an error for any
   method to transgress this requirement.  See 15.
 
-* DEF+YOUTOO 15. Specification of result types
+* DEF+IMP 15. Specification of result types
   To add more specific information regarding the class of the result where
   appropriate.
 
@@ -161,7 +161,7 @@
   Proposal is to remove <abstract-class> and to add a new class option
   ("abstract") by which abstractness will be denoted.
 
-* DEF+YOUTOO 17. Add: required? class option
+* DEF+IMP 17. Add: required? class option
   + Replace =initarg= by =keyword=.
   + Replace =initform= by =default=.
   + To replace =initfunction= (eg. B.6.4) by =default-function=.
@@ -180,7 +180,7 @@
 
   To replace d|D by e|E.
 
-* DEF+YOUTOO 20. Module initialization order.
+* DEF+IMP 20. Module initialization order.
   To add the wording in the proposal to 9.7.
 
   It is easy to write a program which unintentionally relies on the
@@ -193,7 +193,7 @@
   arising from the module dependencies.  This partial order must be preserved by
   a conforming configuration.
 
-* DEF+YOUTOO 21. Argument order to (setter element)
+* DEF+IMP 21. Argument order to (setter element)
   The argument order for (setter element) is defined as collection, key, value,
   where the association of key and value is to be added to or modified in
   collection.  This is awkward for collections in which associations are defined
@@ -202,7 +202,7 @@
   Proposal is to place the value immediately after collection and the remaining
   arguments be keys, eg. ((setter element) collection value key1 key2 ...).
 
-* DEF+YOUTOO 22. Add: <collection> and <sequence> as abstract classes
+* DEF+IMP 22. Add: <collection> and <sequence> as abstract classes
   At level-0, new structures can be defined and these can be incorporated into
   the collection mechanism by adding a method either to collectionp or sequencep
   and whatever else is required for other collection operations.
@@ -224,7 +224,7 @@
 	    <string>
 	    <vector>
 
-* DEF+YOUTOO 23. Make thread-start and thread-value generic
+* DEF+IMP 23. Make thread-start and thread-value generic
   add: generic-signal
   add: wait method for <lock>
 
@@ -247,7 +247,7 @@
 
   Proposal: add a wait method for <lock>.
 
-* DEF+YOUTOO 24. Non-hygenic semantics for macros
+* DEF+IMP 24. Non-hygenic semantics for macros
   To expand the description of syntax expansion in 9.7, in particular to
   enumerate some of the typical problems stemming from non-hygenic expansion.
 
@@ -258,7 +258,7 @@
   peculiar to Eulisp which follows from modules, namely the need to import
   whatever the expansion might depend upon.
 
-* DEF+YOUTOO 25. Status of =and= and =or=
+* DEF+IMP 25. Status of =and= and =or=
   Partially clarified by 2.  Functional versions also to be defined with the
   same names as the macros (13.4).
 
@@ -267,17 +267,17 @@
   To replace the extended names for special characters (eg. #\newline) by their
   string digram equivalents (see table A.7), eg. #\\n.
 
-* DEF+YOUTOO 27. Keywords
+* DEF+IMP 27. Keywords
   To expand the minimal character set (table 2) to be ISO Latin 1.  To add the
   (concrete) class <keyword>, the abstract class <name> and make <symbol> a
   subclass of <name>.
 
-* DEF+YOUTOO 28. With-handler
+* DEF+IMP 28. With-handler
   To change the example (fig. 5) to use an externally defined generic function
   rather than a dynamically constructed gf and to use catch/throw instead of
   let/cc.
 
-* DEF+YOUTOO 29. Class hierarchy revision
+* DEF+IMP 29. Class hierarchy revision
   To replace figure 3 by the (level 0) hierarchy given in RJB's message
   [[Meeting_19_11_93.org]] and to add a new figure in Annex B showing the full level
   0 and level 1 hierarchy.  To note that only abstract classes are subclassable
@@ -289,23 +289,24 @@
     <structure> and <structure-class>.  To replace defstruct at level-0 by
     defclass.  Additions to the hierarchy as per RJB/DDERs' diagram.
 
-* DEF+YOUTOO 30. Points raised by ulrich kriegel
+* DEF+IMP 30. Points raised by ulrich kriegel
   arithmetic coercions: to add the generic function lift, to define methods on
   it to describe coercion consistent with "floating point" contagion, except in
   the case of comparison operators and to describe its interaction with the
   n-ary arithmetic operators.  (Note: lift is not to be called by the binary
-  generic operators).  To note that coercion of a <vpi> to a <double-float> may
-  overflow and that case "is an error".  To add <vpi>
-  (<variable-precision-integer>) and all the necessary methods.
+  generic operators).
 
   JAP: not clear to me how lift can work given the parenthetical remark
   above...unless it takes the operator to be applied as an argument.  Should (+
   a b c) ==> (lift a (lift b c binary+) binary+)??
-
-  condition class accessors: to define <condition> with two slots, message and
-  message-args, where message is a format string matching the message-args.  To
-  remove all defined slots in subclasses of <condition>.  To remove
-  defcondition.
+*** DEF+IMP To add <vpi> (<variable-precision-integer>)
+    and all the necessary methods.  Note that coercion of a <vpi> to a
+    <double-float> may overflow and that case "is an error".
+*** REJECTED  condition class accessors
+    to define <condition> with two slots, message and message-args, where
+    message is a format string matching the message-args.
+*** REJECTED To remove all defined slots in subclasses of <condition>.
+*** REJECTED To remove defcondition
 
 * DONE 31. Add: n-ary comparators
   CLOSED: [2010-05-11 Tue 11:21]
@@ -314,7 +315,7 @@
     What is the advantage of restricting =!== to be binary given that === is
     n-ary?  Implemented =!== as an n-ary function.
 
-* DEF+YOUTOO 32. Collection and sequence functions
+* DEF+IMP 32. Collection and sequence functions
   To add definitions of first, second, last and sort as <sequence> functions.
   To add definitions of delete (destructive) and remove (constructive) as
   <collection> functions.  To add the notion of explicit keys and to clarify the
@@ -330,10 +331,10 @@
   To add Nitsan, Neil and Odile to the list of contributors.  To transfer Greg
   from the editors to the contributors.
 
-* DEF+YOUTOO 34. Streams
+* DEF+IMP 34. Streams
   A detailed proposal based on POSIX and buffered I/O will be sent by HED.
 
-* DEF+YOUTOO 35. Filenames
+* DEF+IMP 35. Filenames
   To add the (concrete) class <filename> (where??) with the external
   syntax #F"...".  To add definitions of the functions: basename, extension,
   dirname, device and merge-filenames.  To add a converter method from <string>

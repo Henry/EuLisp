@@ -8,16 +8,27 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule condition
   (syntax (_macros)
-   import (telos thread dynamic let-cc)
-   export (<condition> condition? condition-message
-                       <general-condition> signal error *default-error-handler*
-                       output-condition-contents push-error-handler pop-error-handlers))
+   import (telos
+           thread
+           dynamic
+           let-cc)
+   export (<condition>
+           condition?
+           condition-message
+           <general-condition>
+           signal
+           error
+           *default-error-handler*
+           output-condition-contents
+           push-error-handler
+           pop-error-handlers))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <condition> and <general-condition>
 ;;;-----------------------------------------------------------------------------
 (defclass <condition> (<object>)
-  ((message keyword: message: accessor: condition-message))
+  ((message keyword: message:
+            accessor: condition-message))
   predicate: condition?)
 
 (defclass <general-condition> (<condition>)
@@ -75,5 +86,5 @@
      (loop (cdr (class-slots cl))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module condition
 ;;;-----------------------------------------------------------------------------

@@ -22,10 +22,14 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-condition
-  (import (%tail apply-level-1 string-i)
+  (import (%tail
+           apply-level-1
+           string-i)
    syntax (%tail )
-   c-import (<stdio.h> <stdlib.h>)
+   c-import (<stdio.h>
+             <stdlib.h>)
    export (error
+           cerror
            typecheck-error
            no-applicable-method-error
            $<no-applicable-method>
@@ -45,17 +49,18 @@
   external-name |puts|)
 
 ;;;-----------------------------------------------------------------------------
-;;; define basic error and bind error
+;;; define basic error and bind error and cerror
 ;;;-----------------------------------------------------------------------------
-(defun basic-error (message condition-class . init-args)
+(defun basic-error (condition-class message . init-args)
   (c-puts (%literal %string () "Simple Error signalled:"))
   (c-puts (string-pointer message))
   (c-puts (%literal %string () "->exit 2"))
   (c-exit #%i2)
-  message ;; only to make type inference happy
-  )
+  ;; to make type inference happy
+  message)
 
 (deflocal error basic-error)
+(deflocal cerror basic-error)
 
 ;;;-----------------------------------------------------------------------------
 ;;; define constants for conditions
@@ -67,15 +72,17 @@
 ;;; define functions calling error
 ;;;-----------------------------------------------------------------------------
 (defun no-applicable-method-error (gf . args)
-  (error "No applicable Methods found" $<no-applicable-method> 'generic gf
+  (error $<no-applicable-method> "No applicable Methods found"
+         'generic gf
          'arguments args)
-  ;;make type-inference happy
+  ;; to make type-inference happy
   gf)
 
 (defun typecheck-error (object class-list)
-  (error "Typecheck-Error"
-         $<typecheck-error> 'object object 'class-list class-list))
+  (error $<typecheck-error> "Typecheck-Error"
+         'object object
+         'class-list class-list))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module basic-condition
 ;;;-----------------------------------------------------------------------------

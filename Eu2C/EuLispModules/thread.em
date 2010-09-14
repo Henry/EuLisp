@@ -140,7 +140,8 @@
   ((thread <thread>) . keywords )
   (start-timer)
   (unless (eq (state thread) 'new)
-          (error "Thread already started" <thread-already-started>
+          (error <thread-already-started>
+                 "Thread already started"
                  'current-thread (current-thread) 'thread thread))
   (set-args thread keywords)
   (hold-threads)

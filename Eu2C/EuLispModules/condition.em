@@ -79,7 +79,8 @@
   `(progn (if (%subclass? (if ,super-class-name ,super-class-name <condition>)
                           <condition>)
               ()
-            (error defcondition-error-string <condition>))
+            (error <condition>
+                   defcondition-error-string))
           (%define-standard-class (,condition-class-name <class>)
             ,(if super-class-name super-class-name <condition>)
             ,slots
@@ -109,7 +110,9 @@
 
 (%define-standard-class (<invalid-operator> <class>)
   <general-condition>
-  ((invalid-operator type <object> default () keyword invalid-operator
+  ((invalid-operator type <object>
+                     default ()
+                     keyword invalid-operator:
                      accessor invalid-operator))
   representation pointer-to-struct
   allocation multiple-type-card)
@@ -117,31 +120,41 @@
 
 (%define-standard-class (<range-condition> <class> )
   <general-condition>
-  ((argument type <object> default () keyword argument
+  ((argument type <object>
+             default ()
+             keyword argument:
              accessor argument))
   representation pointer-to-struct
   allocation multiple-type-card)
 
-
 (%define-standard-class (<cannot-update-setter> <class> )
   <general-condition>
-  ((accessor type <object> default () keyword accessor accessor accessor)
-   (updater type <object> default () keyword updater accessor updater))
+  ((accessor type <object>
+             default ()
+             keyword accessor:
+             accessor accessor)
+   (updater type <object>
+            default ()
+            keyword updater:
+            accessor updater))
   representation pointer-to-struct
   allocation multiple-type-card)
-
 
 (%define-standard-class (<no-setter> <class> )
   <general-condition>
-  ((object type <object> default ()  keyword object accessor object)
-   )
+  ((object type <object>
+           default ()
+           keyword object:
+           accessor object))
   representation pointer-to-struct
   allocation multiple-type-card)
 
-
 (%define-standard-class (<domain-condition> <class> )
   <general-condition>
-  ((result type <object> default () keyword result accessor result))
+  ((result type <object>
+           default ()
+           keyword result:
+           accessor result))
   representation pointer-to-struct
   allocation multiple-type-card)
 
@@ -162,8 +175,13 @@
 ;;;-----------------------------------------------------------------------------
 (%define-standard-class (<conversion-condition> <class> )
   <condition>
-  ((source type <object> default () keyword source accessor source)
-   (target-class type <object> default () keyword target-class
+  ((source type <object>
+           default ()
+           keyword source:
+           accessor source)
+   (target-class type <object>
+                 default ()
+                 keyword target-class:
                  accessor target-class))
   representation pointer-to-struct
   allocation multiple-type-card)
@@ -173,30 +191,26 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Stream condition
 ;;;-----------------------------------------------------------------------------
-;; used in stream-i---read+formatted-io !!!!!!
 ;; located in stream-i
-;; R.R.
-
-;; (%define-standard-class (<stream-condition> <class> )
-;;   <condition>
-;;   ((stream type <object> default () keyword stream accessor stream))
-;;   representation pointer-to-struct
-;;   allocation multiple-type-card)
 
 ;;;-----------------------------------------------------------------------------
-;;; Syntax error
+;;; Read error
 ;;;-----------------------------------------------------------------------------
-;; used in stream-i---read+formatted-io !!!!!!
-;; (define-condition-class <read-error> <condition> )
+;; located in stream-i
 
 ;;;-----------------------------------------------------------------------------
 ;;; Thread condition
 ;;;-----------------------------------------------------------------------------
 (%define-standard-class (<thread-condition> <class> )
   <condition>
-  ((current-thread type <object> default () keyword current-thread
+  ((current-thread type <object>
+                   default ()
+                   keyword current-thread:
                    accessor current-thread)
-   (thread type <object> default () keyword thread accessor thread))
+   (thread type <object>
+           default ()
+           keyword thread:
+           accessor thread))
   representation pointer-to-struct
   allocation multiple-type-card)
 
@@ -213,27 +227,39 @@
 
 (%define-standard-class (<no-next-method> <class> )
   <telos-condition>
-  ((method type <object> default () keyword method
+  ((method type <object>
+           default ()
+           keyword method:
            accessor no-next-method-method)
-   (operand-list type <object> default () keyword operand-list
+   (operand-list type <object>
+                 default ()
+                 keyword operand-list:
                  accessor operand-list))
   representation pointer-to-struct
   allocation multiple-type-card)
 
 (%define-standard-class (<non-congruent-lambda-lists> <class> )
   <telos-condition>
-  ((generic type <object> default () keyword generic
+  ((generic type <object>
+            default ()
+            keyword generic:
             accessor non-congruent-lambda-lists-generic)
-   (method type <object> default () keyword method
+   (method type <object>
+           default ()
+           keyword method:
            accessor non-congruent-lambda-lists-method))
   representation pointer-to-struct
   allocation multiple-type-card)
 
 (%define-standard-class (<incompatible-method-domain> <class> )
   <telos-condition>
-  ((generic type <object> default () keyword generic
+  ((generic type <object>
+            default ()
+            keyword generic:
             accessor incompatible-method-domain-generic)
-   (method type <object> default () keyword method
+   (method type <object>
+           default ()
+           keyword method:
            accessor incompatible-method-domain-method))
   representation pointer-to-struct
   allocation multiple-type-card)
@@ -242,27 +268,39 @@
 
 (%define-standard-class (<method-domain-clash> <class> )
   <telos-condition>
-  ((generic type <object> default () keyword generic
+  ((generic type <object>
+            default ()
+            keyword generic:
             accessor method-domain-clash-generic)
-   (methods type <list> default () keyword methods accessor methods))
+   (methods type <list>
+            default ()
+            keyword methods:
+            accessor methods))
   representation pointer-to-struct
   allocation multiple-type-card)
 
 ;;;-----------------------------------------------------------------------------
 ;;; define generic fcn and methods for accessors called method and generic
 ;;;-----------------------------------------------------------------------------
-(defgeneric method(condition))
+(defgeneric method (condition))
+
 (defmethod method((c <no-next-method>))
   (no-next-method-method c))
+
 (defmethod method((c <non-congruent-lambda-lists>))
   (non-congruent-lambda-lists-method c))
+
 (defmethod method((c <incompatible-method-domain>))
   (incompatible-method-domain-method c))
+
 (defgeneric generic(condition))
+
 (defmethod generic((c <non-congruent-lambda-lists>))
   (non-congruent-lambda-lists-generic c))
+
 (defmethod generic((c <incompatible-method-domain>))
   (incompatible-method-domain-generic c))
+
 (defmethod generic((c <method-domain-clash>))
   (method-domain-clash-generic c))
 
@@ -299,22 +337,24 @@
     (handler condition continuation)))
 
 ;;;-----------------------------------------------------------------------------
-;;; set final values for signal-function error and cerror
+;;; Set final values for signal-function error and cerror
 ;;;-----------------------------------------------------------------------------
 (setq signal signal-dynamic)
 
-(defun cerror (error-message condition-class . init-args)
-  (let ((condition (apply make  condition-class
+(defun cerror-with-format (condition-class error-message . init-args)
+  (let ((condition (apply make condition-class
+                          message: error-message
                           init-args)))
-    ((setter condition-message) condition error-message)
     (let/cc cerror-fixed-up
       (signal condition cerror-fixed-up)
       (error-handler-with-format condition cerror-fixed-up))))
 
-(defun error-with-signal-dynamic (error-message condition-class . init-args)
-  (let ((condition (apply make  condition-class
+(setq cerror cerror-with-format)
+
+(defun error-with-signal-dynamic (condition-class error-message . init-args)
+  (let ((condition (apply make condition-class
+                          message: error-message
                           init-args)))
-    ((setter condition-message) condition error-message)
     (signal-dynamic condition ())
     (error-handler-with-format condition ())))
 
@@ -323,18 +363,18 @@
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-(%annotate-function cerror new-signature
+(%annotate-function cerror-with-format new-signature
   (((var0 var1 var2 var3)
     ((var var0) (atom? <null>))
-    ((var var1) (atom? <string>))
-    ((var var2) (atom? <class>))
+    ((var var1) (atom? <class>))
+    ((var var2) (atom? <string>))
     ((var var3) (atom? <list>)))))
 
 (%annotate-function error-with-signal-dynamic new-signature
   (((var0 var1 var2 var3)
     ((var var0) (atom? <null>))
-    ((var var1) (atom? <string>))
-    ((var var2) (atom? <class>))
+    ((var var1) (atom? <class>))
+    ((var var2) (atom? <string>))
     ((var var3) (atom? <list>)))))
 
 (%annotate-function signal-dynamic new-signature

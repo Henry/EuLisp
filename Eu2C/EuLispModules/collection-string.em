@@ -437,8 +437,8 @@
                                        (%minus str-len #%i1)))
                ())
            (if (%eq #%i1 rest-list-size)
-               (error "fill: collection does not have natural order"
-                      <conversion-condition>)
+               (error <conversion-condition>
+                      "fill: collection does not have natural order")
              (%let ((start %signed-word-integer
                            (make-swi (car keys)))
                     (end %signed-word-integer

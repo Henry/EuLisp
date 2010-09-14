@@ -167,9 +167,10 @@
               (hold-threads)
               (register-condition (car thread) condpair)
               (cont-threads) ())
-          (error "Optional argument to signal not a thread"
-                 <domain-condition>))
-      (error "No thread condition" <wrong-condition-class>
+          (error <domain-condition>
+                 "Optional argument to signal not a thread"))
+      (error <wrong-condition-class>
+             "No thread condition"
              'current-thread (First The-Sequential-Set)
              'condition condition))))
 

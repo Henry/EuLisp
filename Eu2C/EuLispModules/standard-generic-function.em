@@ -51,7 +51,7 @@
 
 ;;(defun no-applicable-method (gf class-list . args)
 ;;  "no applicable-method for gf class-list"
-;;  (error "no applicable method" <no-applicable-method> gf class-list args)
+;;  (error <no-applicable-method> "no applicable method" gf class-list args)
 ;;)
 
 (%define-function (%assq <object>)

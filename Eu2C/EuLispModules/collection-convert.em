@@ -305,7 +305,7 @@
   what)
 
 (defmethod right-char? ((what <object>))
-  (error "convert: no characters for string "  <conversion-condition>))
+  (error <conversion-condition> "convert: no characters for string "))
 
 ;;;-----------------------------------------------------------------------------
 )

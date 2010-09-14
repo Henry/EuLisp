@@ -211,9 +211,6 @@
   allocation single-card
   representation pointer-to-struct)
 
-;;(defmethod file-stream? ((object <file-stream>)) 't)
-;;(defmethod file-stream? ((object <object>)) ())
-
 (%define-standard-class (<char-file-stream> <class>)
   <file-stream>
   ((transaction-unit type <object>
@@ -586,9 +583,8 @@
   (if *not-eof-action*
       (%cast <object> (make-fpint $char-eof))
     (progn
-      (error "end of stream" <end-of-stream>
-             ;; <stream-condition>
-             'stream stream)
+      (error <end-of-stream>
+             "end of stream" 'stream stream)
       ())))
 
 
@@ -635,7 +631,8 @@
   (let ((lvstate (stream-opened stream)))
     (if (eq 'open lvstate)
         stream
-      ;;(error "Attempt to use stream ~A wich is ~A."
+      ;;(error <stream-condition>
+      ;;       "Attempt to use stream ~A wich is ~A."
       ;;       stream lvstate)
       ())))
 
@@ -643,7 +640,9 @@
   (if (ensure-open-stream stream)
       (if (input-stream? stream)
           stream
-        (progn ;(error "Attempt to use stream ~A as input-stream." stream)
+        (progn
+          ;;(error <stream-condition>
+          ;;       "Attempt to use stream ~A as input-stream." stream)
           ()))
     ()))
 
@@ -651,7 +650,8 @@
   (if (ensure-open-stream stream)
       (if (output-stream? stream)
           stream
-        (progn ;(error "Attempt to use stream ~A as input-stream." stream)
+        (progn ;;(error <stream-condition>
+          ;;            "Attempt to use stream ~A as input-stream." stream)
           ()))
     ()))
 
@@ -659,7 +659,8 @@
   (if (ensure-open-input-stream stream)
       (if (character-stream? stream)
           stream
-        (progn ;(error "Attempt to use stream ~A as character-input-stream." stream)
+        (progn ;;(error <stream-condition>
+          ;;            "Attempt to use stream ~A as character-input-stream." stream)
           ()))
     ()))
 
@@ -667,7 +668,8 @@
   (if (ensure-open-output-stream stream)
       (if (character-stream? stream)
           stream
-        (progn ;(error "Attempt to use stream ~A as character-input-stream." stream)
+        (progn ;;(error <stream-condition>
+          ;;            "Attempt to use stream ~A as character-input-stream." stream)
           ()))
     ()))
 
@@ -706,7 +708,8 @@
                                     (fseek ;;(%cast %unsigned-word-integer
                                      (file-descriptor-pointer stream) ;;)
                                      #%i0 #%i2)))
-                  (error "set stream position falled" 'stream stream
+                  (error <stream-condition>
+                         "set stream position falled" 'stream stream
                          'invalid-stream-position pos)
                 't)
             (if (%eq #%i-1 (%cast %signed-word-integer
@@ -714,7 +717,8 @@
                                    (file-descriptor-pointer stream) ;;)
                                    (make-swi pos)
                                    #%i0)))
-                (error "set stream position falled" 'stream stream
+                (error <stream-condition>
+                       "set stream position falled" 'stream stream
                        'invalid-stream-position pos)
               't))
         (if (string-stream? stream)
@@ -724,7 +728,8 @@
                     (%let ((ipos %signed-word-integer (make-swi pos)))
                           (if (%lt ipos (?last-index fd))
                               (progn (!cur-index fd ipos) 't)
-                            (error "set stream position falled" 'stream stream
+                            (error <stream-condition>
+                                   "set stream position falled" 'stream stream
                                    'invalid-stream-position pos)))))
           ()))
     ()))
@@ -855,9 +860,9 @@
 ;;          (lvtrans-ini (get-option 'transaction-unit inilist lvtransaction-unit))
 ;;          (lvpos-ini (get-option 'positionable inilist lvpositionable)))
 ;;      ;          (if (stream-direction? (cadr inilist))
-;;      ;            (cerror "Missmatch in the argument list of open" <stream-condition>))
+;;      ;            (cerror <stream-condition> "Missmatch in the argument list of open"))
 ;;      ;            (if (stream-unit? (cadr inilist))
-;;      ;              (cerror "Missmatch in the argument list of open" <stream-condition>))
+;;      ;              (cerror <stream-condition> "Missmatch in the argument list of open"))
 ;;      (setf-file-descriptor-pointer stream
 ;;            (open-fd (string-pointer handle)
 ;;                     (%cast %string (?mode-string lvdirection))))

@@ -72,12 +72,13 @@ hierarchy is shown in table~\ref{condition-class-hierarchy}.
     \>\>\conditionref{thread-already-started} \\
     \>\>\conditionref{wrong-thread-continuation} \\
     \>\>\conditionref{wrong-condition-class} \\
-    \>\conditionref{generic-function-condition} \\
+    \>\conditionref{telos-condition} \\
     \>\>\conditionref{no-next-method} \\
-    \>\>\conditionref{non-congruent-lambda-lists} \\
-    \>\>\conditionref{incompatible-method-domain} \\
-    \>\>\conditionref{no-applicable-method} \\
-    \>\>\conditionref{method-domain-clash}
+    \>\>\conditionref{generic-function-condition} \\
+    \>\>\>\conditionref{non-congruent-lambda-lists} \\
+    \>\>\>\conditionref{incompatible-method-domain} \\
+    \>\>\>\conditionref{no-applicable-method} \\
+    \>\>\>\conditionref{method-domain-clash}
 \end{tabbing}%
 }%
 \end{table}
@@ -211,7 +212,7 @@ the condition class \conditionref{thread-condition}.
 %
 This is the general condition class for conditions arising from operations in
 the object system at level 0. The following direct subclasses of
-<generic-function-condition> are defined at level 0:
+\conditionref{generic-function-condition} are defined at level 0:
 %
 \begin{subclasses}
     \item[no-applicable-method] signalled by a generic function when there is
@@ -496,9 +497,9 @@ An illustration of the use of all three cases is given here:
 \function{error}
 %
 \begin{arguments}
-    \item[error-message] a string containing relevant information.
-
     \item[condition-class] the class of condition to be signalled.
+
+    \item[error-message] a string containing relevant information.
 
     \item[init-option\/$^*$] a sequence of options to be passed to {\tt
         initialize-instance} when making the instance of condition.
@@ -510,16 +511,16 @@ The result is \nil{}.
 \remarks%
 The \functionref{error} function signals a non-continuable error.  It calls
 \functionref{signal} with an instance of a condition of {\em condition-class}
-initialized from {\em init-option}\/s, the {\em error-message} and a {\em
-    resume} continuation value of \nil{}, signifying that the condition was not
-signalled continuably.
+initialized fromthe {\em error-message}, {\em init-option}\/s and a {\em resume}
+continuation value of \nil{}, signifying that the condition was not signalled
+continuably.
 
 \function{cerror}
 %
 \begin{arguments}
-    \item[error-message] a string containing relevant information.
-
     \item[condition-class] the class of condition to be signalled.
+
+    \item[error-message] a string containing relevant information.
 
     \item[init-option\/$^*$] a sequence of options to be passed to {\tt
         initialize-instance} when making the instance of condition.
@@ -531,7 +532,7 @@ The result is \nil{}.
 \remarks%
 The \functionref{cerror} function signals a continuable error.  It calls
 \functionref{signal} with an instance of a condition of {\em condition-class}
-initialized from {\em init-option}\/s, the {\em error-message} and a {\em
+initialized from the {\em error-message}, {\em init-option}\/s and a {\em
     resume} continuation value which is the continuation of the
 \functionref{cerror} expression.  A non-\nil{}\/ resume continuation signifies
 that the condition has been signalled continuably.
