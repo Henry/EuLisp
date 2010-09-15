@@ -6,12 +6,18 @@
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;; Description: dynamic (i.e. fluid) variables
 ;;;-----------------------------------------------------------------------------
+
 (defmodule dynamic
   (syntax (_telos0)
-   import (telos thread)
-   export (push-dynamic-variable pop-dynamic-variables dynamic-variable-ref
-                                 push-error-handler pop-error-handlers
-                                 *current-no-dynamic-variables* *current-no-error-handlers*))
+   import (telos
+           thread)
+   export (push-dynamic-variable
+           pop-dynamic-variables
+           dynamic-variable-ref
+           push-error-handler
+           pop-error-handlers
+           *current-no-dynamic-variables*
+           *current-no-error-handlers*))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Dynamic variable access
@@ -22,7 +28,7 @@
   (labels
    ((loop (ll)
           (if (null? ll)
-              (error "dynamic variable ~a not available" name)
+              (error () "dynamic variable ~a not available" name)
             (if (eq name (car ll))
                 (car (cdr ll))
               (loop (cdr (cdr ll)))))))
@@ -32,7 +38,7 @@
   (labels
    ((loop (ll)
           (if (null? ll)
-              (error "dynamic variable ~a not available" name)
+              (error () "dynamic variable ~a not available" name)
             (if (eq name (car ll))
                 ((setter car) (cdr ll) val)
               (loop (cdr (cdr ll)))))))

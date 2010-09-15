@@ -47,7 +47,7 @@
 ;;;-----------------------------------------------------------------------------
 (defun callback-thunk (str)
   (lambda args  ; args still on the value stack
-    (error str <general-condition> arguments: args)))
+    (error <general-condition> str arguments: args)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install the callbacks (see also modules number and compare)
@@ -98,10 +98,11 @@
 (install-callback CB-division-by-zero (callback-thunk "division by zero"))
 (install-callback CB-read-overflow
                   (lambda (str negp)
-                    (error (if negp
+                    (error <general-condition>
+                           (if negp
                                "integer underflow"
                              "integer overerflow")
-                           <general-condition> arguments: (list str))))
+                           arguments: (list str))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

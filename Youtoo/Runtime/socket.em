@@ -29,9 +29,11 @@
          (n (socket-queue-size x))
          (fd (eul_make_socket port "tcp" n)))
     (if (int-binary= fd -1)
-        (error (strerror) <stream-condition> value: x)
+        (error <stream-condition>
+                (strerror) value: x)
       (if (int-binary< fd -1)
-          (error (eul_socket_strerror fd) <stream-condition> value: x)
+          (error <stream-condition>
+                 (eul_socket_strerror fd) <stream-condition> value: x)
         (progn
           ((setter socket-descriptor) x fd)
           (with-lock *open-file-streams*-lock

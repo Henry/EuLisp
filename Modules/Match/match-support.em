@@ -16,7 +16,8 @@
 (defun boolean? (obj) (or (eq obj t) (eq obj '())))
 
 ;; IO
-(defconstant print-error (lambda (msg val) (error "~a ~s~%" msg val)))
+(defconstant print-error (lambda (msg val)
+                           (error <condition> (fmt "~a ~s~%" msg val))))
 
 ;; Match support routines
 (deflocal match:error

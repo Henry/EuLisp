@@ -35,7 +35,7 @@
         (if info2
             (eul-file-newer? (car info1) (car info2))
           name1)
-      (error "no such file ~a" name1))))
+      (error <condition> (fmt "no such file ~a" name1)))))
 
 (defextern eul-file-newer? (<string> <string>) ptr "eul_file_newer_p")
 

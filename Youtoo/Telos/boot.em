@@ -15,6 +15,7 @@
                   anyp1-list anyp2-list mapcan init-list-ref assoc-list-ref
                   reverse-list sort-list list-remove list-remove-duplicates
                   apply error *error* warning *warning*
+                  error *error*
                   backtrace *backtrace-nframes* stack-values *stack-nvalues*
                   getchar listify-env-string))
 
@@ -223,9 +224,20 @@
 ;;;-----------------------------------------------------------------------------
 (deflocal *error* ())
 
-(defun error (str . args)
+;; (defun error (str . args)
+;;   (if *error*
+;;       (apply *error* str args)
+;;     (progn
+;;       (write-object "*** ERROR [level1]: " stderr)
+;;       (apply format stderr str args)
+;;       (write-object "\n" stderr)  ; #\\n stderr)
+;;       (write-object "***    See Backtrace? (y/n) " stderr)
+;;       (if (eq (getchar) #\y) (backtrace) ())
+;;       (exit))))
+
+(defun error (condclass str . args)
   (if *error*
-      (apply *error* str args)
+      (apply *error* condclass str args)
     (progn
       (write-object "*** ERROR [level1]: " stderr)
       (apply format stderr str args)

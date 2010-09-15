@@ -57,11 +57,11 @@
         (progn
           (flush-buffer fstream)
           (if (int-binary= (eul_close (control-block-descriptor sink)) 0) ()
-            (error (strerror) <stream-condition> value: fstream)))
+            (error <stream-condition> (strerror) value: fstream)))
       ())
     (if (file-control-block? source)
         (if (int-binary= (eul_close (control-block-descriptor source)) 0) ()
-          (error (strerror) <stream-condition> value: fstream))
+          (error <stream-condition> (strerror) value: fstream))
       ())
     (with-lock *open-file-streams*-lock
                (setq *open-file-streams*
@@ -73,7 +73,7 @@
       (with-lock *open-file-streams*-lock
                  (setq *open-file-streams*
                        (list-remove x *open-file-streams*)))
-    (error (strerror) <stream-condition> value: x)))
+    (error <stream-condition> (strerror) value: x)))
 
 ;;;------------------------------------------------------------------------
 ;;; Buffer Management
@@ -148,7 +148,7 @@
   sstream)
 
 (defmethod end-of-stream ((stream <stream>))
-  (error "end of stream" <end-of-stream> value: stream))
+  (error <end-of-stream> "end of stream" value: stream))
 
 (defmethod end-of-stream ((fstream <file-stream>))
   (disconnect fstream)

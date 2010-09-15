@@ -33,7 +33,8 @@
                      s2 (class-of x) x))
            (disconnect s2))
           (t
-           (error "unhandled local mpi stream" <condition>)))))
+           (error <condition>
+                  "unhandled local mpi stream")))))
 (test)
 
 ;;;-----------------------------------------------------------------------------

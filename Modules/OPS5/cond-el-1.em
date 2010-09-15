@@ -58,7 +58,7 @@
 ;;; generic-prin
 ;  Print out a <condition-element> is a useful format.
 ;;;-----------------------------------------------------------------------------
-(defmethod generic-prin ((ce <condition-element>) (s <stream>))
+(defmethod generic-print ((ce <condition-element>) (s <stream>))
   (sformat ops-out "Condition Element: ~a ~a ~a~% Prods: "
            (class-of ce) (ce-id ce) (ce-class-name ce))
   (do

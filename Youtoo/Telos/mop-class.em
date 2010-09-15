@@ -139,7 +139,7 @@
   (let ((fun (primitive-ref cl 8)))
     (or (simple-function? fun)
         (simple-generic-function? fun)
-        (error "non-functional converter ~a at class <~a>"
+        (error () "non-functional converter ~a at class <~a>"
                fun (class-name cl)))))
 
 (defun (setter converter) (cl val)

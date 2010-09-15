@@ -46,12 +46,12 @@
 
 (define (missing-op name val)
         (error
+         <collection-error>
          (if (collection? val)
              (string-append
               "missing " name " operation for collection")
            (string-append
             "not a collection in " name))
-         <collection-error>
          value: val))
 
 (define-generic (collection? x))
@@ -285,8 +285,8 @@
                            (not (atom? (cdr k)))
                            (integer? (cadr k)))
                       (fill-index-list l o (car k) (cadr k)))
-                     (t (error "bad keys in fill"
-                               <collection-error>
+                     (t (error <collection-error>
+                               "bad keys in fill"
                                value: k)))
                ())
 
@@ -367,8 +367,8 @@
                  (let ((result (concatenate-lists (convert s <list>) more)))
                    (if (all?-1 char? result)
                        (convert result <string>)
-                     (error "not a char in result of concatenate string"
-                            <collection-error>
+                     (error <collection-error>
+                            "not a char in result of concatenate string"
                             value: result)))))
 
 (define-method (delete obj (s <string>) . fn)
@@ -401,8 +401,8 @@
                            (not (atom? (cdr k)))
                            (integer? (cadr k)))
                       (fill-string s o (car k) (cadr k)))
-                     (t (error "bad keys in fill"
-                               <collection-error>
+                     (t (error <collection-error>
+                               "bad keys in fill"
                                value: k)))
                ())
 
@@ -422,8 +422,8 @@
                (let ((result (maplist fn (convert s <list>) more)))
                  (if (all?-1 char? result)
                      (convert result <string>)
-                   (error "not a char in result of map string"
-                          <collection-error>
+                   (error <collection-error>
+                          "not a char in result of map string"
                           value: result))))
 
 (define-method (remove obj (s <string>) . fn)
@@ -487,8 +487,8 @@
                            (not (atom? (cdr k)))
                            (integer? (cadr k)))
                       (fill-vector v o (car k) (cadr k)))
-                     (t (error "bad keys in fill"
-                               <collection-error>
+                     (t (error <collection-error>
+                               "bad keys in fill"
                                value: k)))
                ())
 
@@ -552,8 +552,8 @@
 
 (define-method (delete obj (t <table>) . fn)
                (if (not (or (null? fn) (eq (car fn) (table-comparator t))))
-                   (error "comparator incompatible with table in delete"
-                          <collection-error>
+                   (error <collection-error>
+                          "comparator incompatible with table in delete"
                           value: (car fn))
                  (progn
                    (table-delete t obj)
@@ -580,15 +580,15 @@
                       (set-table-fill! t o))
                      ((collection? (car k))
                       (fill-keyed-table t o (car k)))
-                     (t (error "no natural order for tables in fill"
-                               <collection-error>
+                     (t (error <collection-error>
+                               "no natural order for tables in fill"
                                value: k))))
 
 (define-method (map (fn <function>) (t <table>) . more)
                (cond ((null? more)
                       (map-table fn t))
-                     (t (error "no natural order for table in map"
-                               <collection-error>
+                     (t (error <collection-error>
+                               "no natural order for table in map"
                                value: f))))
 
 (define (map-table fn t)
@@ -601,8 +601,8 @@
 
 (define-method (remove obj (t <table>) . fn)
                (if (not (or (null? fn) (eq (car fn) (table-comparator t))))
-                   (error "comparator incompatible with table in remove"
-                          <collection-error>
+                   (error <collection-error>
+                          "comparator incompatible with table in remove"
                           value: (car fn))
                  (let ((new (shallow-copy t)))
                    (table-delete new obj)

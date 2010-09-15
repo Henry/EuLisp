@@ -1348,7 +1348,7 @@
     + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-1002011][=<simple-method>=]]
     + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-977002][=<slot>=]]
     + [[file:EuLisp-0.991/html/eulispcl18.html#dx23-977005][=<local-slot>=]]
-    + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-815003][=generic-prin=]]
+    + =generic-print=
     + [[file:EuLisp-0.991/html/eulispcl17.html#dx21-796002][=generic-write=]]
     + [[file:EuLisp-0.991/html/eulispcl12.html#dx16-135002][=wait=]]
     + [[file:EuLisp-0.991/html/eulispcl11.html#dx13-104004][=make=]]

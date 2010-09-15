@@ -40,7 +40,7 @@
                 ((and (cons? gfname) (eq (car gfname) 'converter))
                  (setq name (car (cdr gfname)))
                  '(setter converter))
-                (t (error "bad name for generic function ~a" gfname)))))
+                (t (error () "bad name for generic function ~a" gfname)))))
     `(progn
        (,target ,name
                 (make-generic-function

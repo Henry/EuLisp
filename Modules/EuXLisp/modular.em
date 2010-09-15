@@ -13,11 +13,11 @@
   predicate: modular-number?)
 
 (defmethod generic-write ((a <modular-number>) stream)
-  (generic-prin "#<" stream)
-  (generic-prin (modular-number-value a) stream)
-  (generic-prin " mod " stream)
-  (generic-prin (modular-number-modulus a) stream)
-  (generic-prin ">" stream)
+  (generic-print "#<" stream)
+  (generic-print (modular-number-value a) stream)
+  (generic-print " mod " stream)
+  (generic-print (modular-number-modulus a) stream)
+  (generic-print ">" stream)
   a)
 
 (defun mod (a n)
@@ -33,8 +33,8 @@
               arg2 0)
 
 (defun modular-mismatch (moda modb)
-  (error "mismatch moduli in modular +"
-         <modular-argument-mismatch>
+  (error <modular-argument-mismatch>
+         "mismatch moduli in modular +"
          arg1: moda
          arg2: modb))
 
@@ -93,8 +93,8 @@
 
 (defun inverse-mod-n (a n)
   (if (> (gcd a n) 1)
-      (error "no modular inverse"
-             <no-modular-inverse>
+      (error <no-modular-inverse>
+             "no modular inverse"
              value: a
              modulus: n)
     (let ((ans (gcd-cofactors a n 1 0 0 1)))

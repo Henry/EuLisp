@@ -8,7 +8,8 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule macros
   (import (level1)
-   expose (telos0 stream0)
+   expose (telos0
+           stream0)
    syntax (boot0))
 
 ;;;-----------------------------------------------------------------------------
@@ -164,8 +165,7 @@
     `(let* ((,x (cpu-time))
             (,res ,expr))
        (setq ,x (map (lambda (x y)
-                       (/ (binary- x y)
-                          (convert ticks-per-second <double-float>)))
+                       (/ (binary- x y) (convert ticks-per-second <double>)))
                      (cpu-time) ,x))
        (sprint ,stream
                "real: "     (vector-ref ,x 0)

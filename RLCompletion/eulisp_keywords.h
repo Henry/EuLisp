@@ -308,7 +308,7 @@ char *eulisp_keywords[] =
     "<local-slot>",
     "<structure>",
 
-    "generic-prin",
+    "generic-print",
     "generic-write",
     "wait",
 

@@ -32,10 +32,10 @@
             (write-values vs stream generic-write)))
   vals)
 
-(defmethod generic-prin ((vals <values>) stream)
+(defmethod generic-print ((vals <values>) stream)
   (let ((vs (get-values vals)))
     (unless (null? vs)
-            (write-values vs stream generic-prin)))
+            (write-values vs stream generic-print)))
   vals)
 
 (defun write-values (vs stream gfn)

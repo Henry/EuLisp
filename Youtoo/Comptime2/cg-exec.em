@@ -7,10 +7,22 @@
 ;;; Description: executes compiled code
 ;;;-----------------------------------------------------------------------------
 (defmodule cg-exec
-  (syntax (_macros _i-aux0)
-   import (cg-exec-word-length i-all i-modify p-env sx-obj sx-node
-                               cg-state cg-asm cg-interf i-ffi ex-expr cg-dld)
-   export (execute reset-interactive-module))
+  (syntax (_macros
+           _i-aux0)
+   import (cg-exec-word-length
+           i-all
+           i-modify
+           p-env
+           sx-obj
+           sx-node
+           cg-state
+           cg-asm
+           cg-interf
+           i-ffi
+           ex-expr
+           cg-dld)
+   export (execute
+           reset-interactive-module))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Globals (not nice but good to speed up the interpreter)
@@ -51,11 +63,13 @@
 (defun next-local-index ()
   (let ((index (module-binding-vector-size? *module*)))
     (if index ()
-      (error "statically linked module ~a cannot get new bindings"
-             (module-name? *module*)))
+      (error <condition>
+              (fmt "statically linked module ~a cannot get new bindings"
+                   (module-name? *module*))))
     (if (< index (module-max-binding-vector-size? *module*)) ()
-      (error "module ~a cannot have more than ~a bindings"
-             (module-name? *module*) index))
+      (error <condition>
+              (fmt "module ~a cannot have more than ~a bindings"
+                   (module-name? *module*)) index))
     (module-binding-vector-size! *module* (+ index 1))
     index))
 
@@ -218,5 +232,5 @@
                 local-index binding-name))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module cg-exec
 ;;;-----------------------------------------------------------------------------

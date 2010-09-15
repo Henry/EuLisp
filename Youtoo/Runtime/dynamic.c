@@ -39,7 +39,7 @@ void initialize_module_dynamic()
   /* Code vector and literal definitions */
   eul_allocate_static_string(str_736, "dynamic variable ~a not available", 33);
   /* Byte-vector with size: 22 is_init: 0 index: 10 binding: anonymous */
-  static const void *G00734[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(dynamic ,9),I(47,00,00,24),B(boot ,12),I(3d,02,02,32),I(00,00,00,34),I(1c,10,47,00),I(00,1c,50,1b),I(34,00,00,00),I(00,00,00,18),I(1f,03,11,1b),I(47,00,01,8f),I(22,01,32,00),I(00,00,00,13),I(1f,03,11,1b),I(11,47,00,02),I(3d,01,05,22),I(01,22,02,45),I(02,00,00,00)};
+  static const void *G00734[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,20),I(86,23,00,00),B(dynamic ,9),I(47,00,00,24),B(boot ,12),I(3d,03,02,32),I(00,00,00,34),I(1c,10,47,00),I(00,1c,50,1b),I(34,00,00,00),I(00,00,00,18),I(1f,03,11,1b),I(47,00,01,8f),I(22,01,32,00),I(00,00,00,13),I(1f,03,11,1b),I(11,47,00,02),I(3d,01,05,22),I(01,22,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 17 is_init: 0 index: 12 binding: (setter-dynamic-variable-ref) */
   static const void *G00737[] = {I(ab,46,03,1c),I(48,00,00,1b),I(48,00,01,86),I(1b,48,00,02),I(23,00,00,00),B(dynamic ,11),I(23,00,00,00),B(dynamic ,10),I(3b,01,48,00),I(02,24,00,00),B(thread ,22),I(3c,00,1b,84),I(24,00,00,00),B(thread ,8),I(08,47,00,02),I(3d,01,04,45),I(04,00,00,00)};
@@ -52,7 +52,7 @@ void initialize_module_dynamic()
 
   eul_allocate_static_string(str_747, "dynamic variable ~a not available", 33);
   /* Byte-vector with size: 20 is_init: 0 index: 17 binding: anonymous */
-  static const void *G00745[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,20),I(23,00,00,00),B(dynamic ,16),I(47,00,00,24),B(boot ,12),I(3d,02,02,32),I(00,00,00,2c),I(1c,10,47,00),I(00,1c,50,1b),I(34,00,00,00),I(00,00,00,10),I(1f,03,73,32),I(00,00,00,12),I(1f,03,11,1b),I(11,47,00,01),I(3d,01,05,22),I(01,22,02,45),I(02,00,00,00)};
+  static const void *G00745[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,20),I(86,23,00,00),B(dynamic ,16),I(47,00,00,24),B(boot ,12),I(3d,03,02,32),I(00,00,00,2c),I(1c,10,47,00),I(00,1c,50,1b),I(34,00,00,00),I(00,00,00,10),I(1f,03,73,32),I(00,00,00,12),I(1f,03,11,1b),I(11,47,00,01),I(3d,01,05,22),I(01,22,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 16 is_init: 0 index: 18 binding: dynamic-variable-ref */
   static const void *G00748[] = {I(aa,46,02,1b),I(48,00,00,86),I(1b,48,00,01),I(23,00,00,00),B(dynamic ,11),I(23,00,00,00),B(dynamic ,17),I(3b,01,48,00),I(01,24,00,00),B(thread ,22),I(3c,00,1b,84),I(24,00,00,00),B(thread ,8),I(08,47,00,01),I(3d,01,03,45),I(03,00,00,00)};

@@ -32,8 +32,8 @@
               (no-converter obj cl)))))
 
 (define (no-converter obj class)
-        (error "no such converter"
-               <no-converter>
+        (error <no-converter>
+               "no such converter"
                source: obj
                class: class))
 

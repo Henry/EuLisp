@@ -7,15 +7,37 @@
 ;;; Description: tables; fixed comparator and hash-function;
 ;;;    assume non-relocating garbage collector!
 ;;;-----------------------------------------------------------------------------
+
 (defmodule table1
   (syntax (_telos0)
-   import (telos convert copy collect compare list fpi string vector)
-   export (<table> table? <simple-hash-table> simple-hash-table?
-                   <hash-table> hash-table?
-                   *min-table-entries* *table-fill-factor*
-                   table-entries table-fill-value table-size table-threshold
-                   table-hash-function table-comparator
-                   table-values table-keys clear-table))
+   import (telos
+           condition
+           convert
+           copy
+           collect
+           compare
+           list
+           format
+           fpi
+           string
+           vector)
+   export (<table>
+           table?
+           <simple-hash-table>
+           simple-hash-table?
+           <hash-table>
+           hash-table?
+           *min-table-entries*
+           *table-fill-factor*
+           table-entries
+           table-fill-value
+           table-size
+           table-threshold
+           table-hash-function
+           table-comparator
+           table-values
+           table-keys
+           clear-table))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Allocation
@@ -63,8 +85,9 @@
                 (apply make <simple-hash-table>
                        (filter-keywords inits
                                         '(comparator: hash-function:)))
-              (error "table initialization of ~a without hash function"
-                     tab)))))
+              (error <condition>
+                      (fmt "table initialization of ~a without hash function"
+                           tab))))))
     (call-next-method)))
 
 ;;;-----------------------------------------------------------------------------
@@ -117,8 +140,8 @@
       ())))
 
 (defmethod table-keys ((tab <simple-hash-table>))
-  (error "keys of table ~a not accessable" tab))
+  (error <condition> (fmt "keys of table ~a not accessable" tab)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module table
 ;;;-----------------------------------------------------------------------------

@@ -20,8 +20,8 @@
 (defgeneric send (obj stream))
 
 (defmethod send (obj stream)
-  (error "don't know how to send object"
-         <send-error>
+  (error <send-error>
+         "don't know how to send object"
          value: obj))
 
 (defmethod send ((obj <null>) stream)
@@ -78,8 +78,8 @@
           ((= tag vector-tag) (recv-vector stream))
           ((= tag char-tag) (convert (recv-int stream) <integer>))
           ((= tag structure-tag) (recv-structure stream))
-          (t (error "unknown tag type in recv"
-                    <recv-error>
+          (t (error <recv-error>
+                    "unknown tag type in recv"
                     value: tag)))))
 
 (defun recv-vector (stream)

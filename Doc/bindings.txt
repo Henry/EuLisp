@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 06 July 2010, 21:02:55
+  Generated 15 September 2010, 11:03:04
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -34,7 +34,7 @@ youtoo Functions
   *dispatch-macro-character-table* 17 read *dispatch-macro-character-table*
   *error* 13 boot *error*
   *open-file-streams* 36 stream2 *open-file-streams*
-  *open-file-streams*-lock 12 stream2 *open-file-streams*-lock
+  *open-file-streams*-lock 11 stream2 *open-file-streams*-lock
   *random-max* 3 random *random-max*
   *stack-nvalues* 9 boot *stack-nvalues*
   *warning* 3 boot *warning*
@@ -43,21 +43,21 @@ youtoo Functions
   / 10 number /
   < 3 compare <
   <= 8 compare <=
-  <buffered-stream> 20 stream2 <buffered-stream>
+  <buffered-stream> 19 stream2 <buffered-stream>
   <character-sequence> 2 string <character-sequence>
   <character> 5 character <character>
-  <class> 75 mop-class <class>
+  <class> 76 mop-class <class>
   <collection> 22 collect <collection>
   <condition> 8 condition <condition>
   <connection> 2 socket <connection>
-  <cons> 71 mop-class <cons>
+  <cons> 72 mop-class <cons>
   <current-thread> 15 thread <current-thread>
   <double*> 5 handler <double*>
   <double-float> 9 float <double-float>
   <double> 7 float <double>
-  <end-of-stream> 7 stream2 <end-of-stream>
-  <file-control-block> 4 stream2 <file-control-block>
-  <file-stream> 5 stream2 <file-stream>
+  <end-of-stream> 6 stream2 <end-of-stream>
+  <file-control-block> 3 stream2 <file-control-block>
+  <file-stream> 4 stream2 <file-stream>
   <float> 4 float <float>
   <function-class> 24 mop-class <function-class>
   <function> 27 mop-class <function>
@@ -68,10 +68,11 @@ youtoo Functions
   <int*> 4 handler <int*>
   <int> 4 fpi <int>
   <integer> 2 integer <integer>
-  <keyword> 81 mop-class <keyword>
-  <list> 63 mop-class <list>
+  <keyword> 82 mop-class <keyword>
+  <list> 64 mop-class <list>
   <local-slot> 51 mop-class <local-slot>
   <lock> 2 lock <lock>
+  <metaclass> 62 mop-class <metaclass>
   <method> 22 mop-class <method>
   <name> 33 mop-class <name>
   <null> 25 mop-class <null>
@@ -80,7 +81,7 @@ youtoo Functions
   <read-error> 9 read <read-error>
   <semaphore> 8 lock <semaphore>
   <sequence> 7 collect <sequence>
-  <simple-class> 70 mop-class <simple-class>
+  <simple-class> 71 mop-class <simple-class>
   <simple-function> 2 mop-class <simple-function>
   <simple-generic-function> 15 mop-class <simple-generic-function>
   <simple-hash-table> 14 table1 <simple-hash-table>
@@ -90,8 +91,8 @@ youtoo Functions
   <socket> 8 socket <socket>
   <state> 25 thread <state>
   <stream-condition> 38 stream2 <stream-condition>
-  <stream-control-block> 23 stream2 <stream-control-block>
-  <stream> 21 stream2 <stream>
+  <stream-control-block> 22 stream2 <stream-control-block>
+  <stream> 20 stream2 <stream>
   <string*> 6 handler <string*>
   <string-stream> 45 stream2 <string-stream>
   <string> 13 string <string>
@@ -154,7 +155,7 @@ youtoo Functions
   bit-not 4 bit bit-not
   bit-shift 3 bit bit-shift
   bit-xor 6 bit bit-xor
-  buffered-stream? 16 stream2 buffered-stream?
+  buffered-stream? 15 stream2 buffered-stream?
   caaaar 13 list caaaar
   caaadr 36 list caaadr
   caaar 34 list caaar
@@ -191,19 +192,19 @@ youtoo Functions
   cerror 3 format cerror
   character-as-string 11 character character-as-string
   character? 33 boot1 character?
-  class-abstract? 74 mop-class class-abstract?
+  class-abstract? 75 mop-class class-abstract?
   class-code 19 mop-class class-code
-  class-direct-subclasses 62 mop-class class-direct-subclasses
-  class-direct-superclasses 68 mop-class class-direct-superclasses
-  class-instance-length 73 mop-class class-instance-length
-  class-keywords 69 mop-class class-keywords
+  class-direct-subclasses 63 mop-class class-direct-subclasses
+  class-direct-superclasses 69 mop-class class-direct-superclasses
+  class-instance-length 74 mop-class class-instance-length
+  class-keywords 70 mop-class class-keywords
   class-keywordz 23 mop-class class-keywordz
   class-name 14 mop-class class-name
   class-of 5 mop-inspect class-of
   class-precedence-list 6 mop-class class-precedence-list
-  class-slot-defaults 67 mop-class class-slot-defaults
+  class-slot-defaults 68 mop-class class-slot-defaults
   class-slots 50 mop-class class-slots
-  class-slotz 64 mop-class class-slotz
+  class-slotz 65 mop-class class-slotz
   class? 4 mop-inspect class?
   clear-table 10 table1 clear-table
   collectionp 21 collect collectionp
@@ -236,17 +237,17 @@ youtoo Functions
   connection-port 7 socket connection-port
   connection? 4 socket connection?
   cons 2 boot1 cons
-  cons-keywords 77 mop-class cons-keywords
+  cons-keywords 78 mop-class cons-keywords
   cons-slot-defaults 40 mop-class cons-slot-defaults
   cons-slots 46 mop-class cons-slots
   cons? 43 boot1 cons?
   control-block-buffer 32 stream2 control-block-buffer
   control-block-buffer-cnt 47 stream2 control-block-buffer-cnt
-  control-block-buffer-pos 11 stream2 control-block-buffer-pos
-  control-block-buffer-size 9 stream2 control-block-buffer-size
+  control-block-buffer-pos 10 stream2 control-block-buffer-pos
+  control-block-buffer-size 8 stream2 control-block-buffer-size
   control-block-descriptor 41 stream2 control-block-descriptor
   control-block-file-name 33 stream2 control-block-file-name
-  control-block-mode 29 stream2 control-block-mode
+  control-block-mode 28 stream2 control-block-mode
   convert 2 convert convert
   converter 13 mop-class converter
   cpl-subclass? 11 mop-inspect cpl-subclass?
@@ -268,29 +269,27 @@ youtoo Functions
   do2-list 22 list do2-list
   do2-vector 5 vector do2-vector
   dot 19 read dot
-  double-binary-gcd 2 double double-binary-gcd
-  double-binary-lcm 7 double double-binary-lcm
   double? 6 float double?
   dynamic-variable-ref 3 dynamic dynamic-variable-ref
   element 20 collect element
   else 14 boot1 else
   emptyp 3 collect emptyp
-  end-of-stream 19 stream2 end-of-stream
+  end-of-stream 18 stream2 end-of-stream
   ensure-slot-reader 2 mop-access ensure-slot-reader
   ensure-slot-writer 6 mop-access ensure-slot-writer
   eos 6 read eos
-  eos-default-value 6 stream2 eos-default-value
+  eos-default-value 5 stream2 eos-default-value
   eq 22 boot1 eq
   eql 44 boot1 eql
   error 12 boot error
   error-no-applicable-methods 15 mop-gf error-no-applicable-methods
   even? 5 integer even?
   exit 20 boot1 exit
-  file-control-block? 25 stream2 file-control-block?
+  file-control-block? 24 stream2 file-control-block?
   file-lookup 17 stream file-lookup
   file-stream? 49 stream2 file-stream?
   fill 19 collect fill
-  fill-buffer 3 stream2 fill-buffer
+  fill-buffer 2 stream2 fill-buffer
   filter-keywords 3 mop-key filter-keywords
   finalize 14 mop-gf finalize
   find 14 collect find
@@ -301,34 +300,34 @@ youtoo Functions
   float? 3 float float?
   floor 8 float floor
   flush 2 stream flush
-  flush-buffer 24 stream2 flush-buffer
+  flush-buffer 23 stream2 flush-buffer
   fmt 2 format fmt
   format 5 format format
   fprintf 22 stream fprintf
   from-stream 46 stream2 from-stream
   function-domain 16 mop-class function-domain
-  function-name 72 mop-class function-name
-  function-slot-defaults 66 mop-class function-slot-defaults
+  function-name 73 mop-class function-name
+  function-slot-defaults 67 mop-class function-slot-defaults
   function? 8 mop-inspect function?
   gcd 21 number gcd
   generic-connect 44 stream2 generic-connect
   generic-function-discriminating-function 35 mop-class generic-function-discriminating-function
-  generic-function-domain 59 mop-class generic-function-domain
+  generic-function-domain 60 mop-class generic-function-domain
   generic-function-method-cache 57 mop-class generic-function-method-cache
   generic-function-method-class 48 mop-class generic-function-method-class
   generic-function-method-keywords 11 mop-class generic-function-method-keywords
   generic-function-method-lookup-function 31 mop-class generic-function-method-lookup-function
   generic-function-methods 42 mop-class generic-function-methods
   generic-function? 3 mop-inspect generic-function?
-  generic-prin 2 stream2 generic-prin
+  generic-print 30 stream2 generic-print
   generic-read 43 stream2 generic-read
-  generic-write 28 stream2 generic-write
+  generic-write 27 stream2 generic-write
   gensym 6 symbol gensym
   getenv 19 boot1 getenv
   gf-keywords 56 mop-class gf-keywords
   gf-reset-cache 3 mop-gf gf-reset-cache
   gf-slot-defaults 37 mop-class gf-slot-defaults
-  gf-slots 79 mop-class gf-slots
+  gf-slots 80 mop-class gf-slots
   graph? 10 character graph?
   handle 3 handler handle
   handler? 8 handler handler?
@@ -353,8 +352,6 @@ youtoo Functions
   keyword-name 7 mop-class keyword-name
   keyword? 2 symbol keyword?
   lcm 22 number lcm
-  least-negative-double-float 5 double least-negative-double-float
-  least-positive-double-float 4 double least-positive-double-float
   lispin 13 read lispin
   list 25 boot1 list
   list-drop 3 list list-drop
@@ -395,7 +392,7 @@ youtoo Functions
   member1-list 30 boot member1-list
   member1-vector 2 vector member1-vector
   method-domain 58 mop-class method-domain
-  method-function 76 mop-class method-function
+  method-function 77 mop-class method-function
   method-generic-function 54 mop-class method-generic-function
   method-keywords 45 mop-class method-keywords
   method-slot-defaults 34 mop-class method-slot-defaults
@@ -404,11 +401,9 @@ youtoo Functions
   min 10 compare min
   mod 18 number mod
   mode-table 5 stream1 mode-table
-  most-negative-double-float 3 double most-negative-double-float
-  most-positive-double-float 6 double most-positive-double-float
   name 8 collect name
   name-keywords 8 mop-class name-keywords
-  name-slot-defaults 78 mop-class name-slot-defaults
+  name-slot-defaults 79 mop-class name-slot-defaults
   name-slots 3 mop-class name-slots
   negate 13 number negate
   negative? 2 number negative?
@@ -419,7 +414,7 @@ youtoo Functions
   object-slots 12 mop-class object-slots
   object? 38 boot1 object?
   odd? 3 integer odd?
-  open-file-streams 14 stream2 open-file-streams
+  open-file-streams 13 stream2 open-file-streams
   output-condition-contents 4 condition output-condition-contents
   output-list-contents 16 stream output-list-contents
   parse 28 read parse
@@ -459,7 +454,7 @@ youtoo Functions
   read-line 15 read read-line
   read-s-expression 12 read read-s-expression
   read-token 27 read read-token
-  reconnect 18 stream2 reconnect
+  reconnect 17 stream2 reconnect
   remove 13 collect remove
   remove-class 4 mop-defcl remove-class
   reset 18 collect reset
@@ -487,7 +482,7 @@ youtoo Functions
   sig= 10 mop-gf sig=
   signal 2 condition signal
   signum 5 number signum
-  simple-function-code 65 mop-class simple-function-code
+  simple-function-code 66 mop-class simple-function-code
   simple-function-environment 47 mop-class simple-function-environment
   simple-function? 4 boot1 simple-function?
   simple-generic-function? 48 boot1 simple-generic-function?
@@ -497,8 +492,8 @@ youtoo Functions
   slice 4 collect slice
   slice-list 40 list slice-list
   slot-default 10 mop-class slot-default
-  slot-keyword 60 mop-class slot-keyword
-  slot-name 80 mop-class slot-name
+  slot-keyword 61 mop-class slot-keyword
+  slot-name 81 mop-class slot-name
   slot-reader 32 mop-class slot-reader
   slot-required? 9 mop-class slot-required?
   slot-value 7 mop-defcl slot-value
@@ -528,16 +523,16 @@ youtoo Functions
   state-context-stack-size 12 thread state-context-stack-size
   state-value-stack 14 thread state-value-stack
   state-value-stack-size 35 thread state-value-stack-size
-  stderr 10 stream2 stderr
+  stderr 9 stream2 stderr
   stdin 50 stream2 stdin
   stdout 34 stream2 stdout
-  stream-control-block? 30 stream2 stream-control-block?
+  stream-control-block? 29 stream2 stream-control-block?
   stream-lock 31 stream2 stream-lock
-  stream-mode 17 stream2 stream-mode
-  stream-read-action 8 stream2 stream-read-action
+  stream-mode 16 stream2 stream-mode
+  stream-read-action 7 stream2 stream-read-action
   stream-sink 37 stream2 stream-sink
-  stream-source 22 stream2 stream-source
-  stream-write-action 13 stream2 stream-write-action
+  stream-source 21 stream2 stream-source
+  stream-write-action 12 stream2 stream-write-action
   stream? 40 stream2 stream?
   strerror 6 stream1 strerror
   string-append 11 string string-append
@@ -547,14 +542,14 @@ youtoo Functions
   string-ref 9 boot1 string-ref
   string-size 18 boot1 string-size
   string-stream-string-list 48 stream2 string-stream-string-list
-  string-stream? 15 stream2 string-stream?
+  string-stream? 14 stream2 string-stream?
   string? 17 boot1 string?
   subclass? 2 mop-inspect subclass?
   substring 6 string substring
   subvector 3 vector subvector
   swrite 3 stream swrite
   symbol-exists? 4 symbol symbol-exists?
-  symbol-name 61 mop-class symbol-name
+  symbol-name 59 mop-class symbol-name
   symbol? 23 boot1 symbol?
   system 50 boot1 system
   table-comparator 8 table1 table-comparator
@@ -584,7 +579,7 @@ youtoo Functions
   thread-value 5 thread thread-value
   thread? 30 thread thread?
   ticks-per-second 3 event ticks-per-second
-  to-stream 27 stream2 to-stream
+  to-stream 26 stream2 to-stream
   truncate 2 float truncate
   unlock 4 lock unlock
   unquote-mark 8 read unquote-mark
@@ -617,7 +612,7 @@ youtoo Functions
   defgeneric 2 mop-gf0 defgeneric
   defglobal 7 macros defglobal
   defmethod 5 mop-meth0 defmethod
-  defmethod-args 3 mop-meth0 defmethod-args
+  defmethod-args 2 mop-meth0 defmethod-args
   defmethod-body 7 mop-meth0 defmethod-body
   defmethod-domain 4 mop-meth0 defmethod-domain
   defmethod-keywords 9 mop-meth0 defmethod-keywords
@@ -632,7 +627,7 @@ youtoo Functions
   let/cc 4 macros let/cc
   match-let 2 stream0 match-let
   method-function-lambda 6 mop-meth0 method-function-lambda
-  method-lambda 2 mop-meth0 method-lambda
+  method-lambda 3 mop-meth0 method-lambda
   named-method-function-lambda 10 mop-meth0 named-method-function-lambda
   not 9 macros not
   or 8 boot0 or

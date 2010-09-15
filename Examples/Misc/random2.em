@@ -60,7 +60,7 @@
    (i97 default: 96 accessor: state-i97)
    (j97 default: 32 accessor: state-j97)))
 
-(defmethod generic-prin ((st <random-state>) (s <stream>))
+(defmethod generic-print ((st <random-state>) (s <stream>))
   (sformat s "#<random-state ~a ~a>" (state-ij st) (state-kl st)))
 
 ;;;-----------------------------------------------------------------------------

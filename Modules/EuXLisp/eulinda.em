@@ -52,7 +52,7 @@
            (linda-pool-tuple-table p))
   p)
 
-(defmethod generic-prin ((p <linda-pool>) s)
+(defmethod generic-print ((p <linda-pool>) s)
   (sformat s "#<linda-pool: ~s>"
            (linda-pool-tuple-table p))
   p)
@@ -194,8 +194,8 @@
 
 (defun check-pool (p)
   (unless (pool? p)
-          (error "not a pool"
-                 <bad-type>
+          (error <bad-type>
+                 "not a pool"
                  value: p
                  expected-type: <linda-pool>)))
 
@@ -203,8 +203,8 @@
   (when (or (eq tag '?)
             (and (cons? tag)
                  (eq (car tag) '?)))
-        (error "constant tag only"
-               <general-error>
+        (error <general-error>
+               "constant tag only"
                value: tag)))
 
 (defun make-linda-tuple-table ()
@@ -223,7 +223,7 @@
            (linda-tuple-value lt))
   lt)
 
-(defmethod generic-prin ((lt linda-tuple) s)
+(defmethod generic-print ((lt linda-tuple) s)
   (sformat s "#<linda-tuple: ~a ~a>"
            (linda-tuple-tag lt)
            (linda-tuple-value lt))

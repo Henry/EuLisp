@@ -6,15 +6,32 @@
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;; Description: collections
 ;;;-----------------------------------------------------------------------------
+
 (defmodule collect
   (syntax (_telos0)
-   import (telos compare)
+   import (telos
+           compare)
    export (name
-           <collection> <sequence>
-           collectionp sequence?
-           accumulate accumulate1 any? all? do fill find map member select
-           element delete remove reset
-           emptyp size
+           <collection>
+           <sequence>
+           collectionp
+           sequence?
+           accumulate
+           accumulate1
+           any?
+           all?
+           do
+           fill
+           find
+           map
+           member
+           select
+           element
+           delete
+           remove
+           reset
+           emptyp
+           size
            reverse
            sort
            concatenate
@@ -99,7 +116,7 @@
      (loop 0))))
 
 (defmethod fill ((c <collection>) x . keys)
-  (error "fill not yet implemented"))
+  (error () "fill not yet implemented"))
 
 (defmethod find (x (c <collection>) . preds)
   (apply member x c preds))

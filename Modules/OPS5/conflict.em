@@ -43,7 +43,7 @@
                                         timestamps: ce-ts-list:
                                         rating: first-ts:))
 
-(defmethod generic-prin ((pi <prod-instantiation>) (s <stream>))
+(defmethod generic-print ((pi <prod-instantiation>) (s <stream>))
   (print "Production Instantiation:")
   (sformat ops-out "First-ts: ~a Rating: ~a~% Ts: ~a~%"
            (first-ts pi) (rating pi) (timestamps pi))

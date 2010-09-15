@@ -4,7 +4,7 @@
 (definterface convert1
   (import (telos condition convert collect fpi character list string vector table)
    syntax (_telos0)
-   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos let-cc dynamic thread event condition convert compare callback collect integer number copy fpi string character list vector table1 table)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos let-cc dynamic thread event condition convert compare callback collect integer number copy fpi string character list vector table1 stream stream1 lock stream2 socket format table)
    export (
    )
    local-literals (

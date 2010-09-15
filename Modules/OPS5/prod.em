@@ -44,7 +44,7 @@
     writer:  set-prod-rating))
   constructor: (make-production p-name:))
 
-(defmethod generic-prin ((prod <production>) (s <stream>))
+(defmethod generic-print ((prod <production>) (s <stream>))
   (sformat ops-out "Production: ~a~% Cond-Els: " (p-name prod))
   (map
    (lambda (x)

@@ -1024,7 +1024,7 @@
                    (prin
                     "FATAL ERROR IN PATTERN MATCHER")
                    (newline)
-                   (error () "THIS NEVER HAPPENS"))))))))
+                   (error <condition> "THIS NEVER HAPPENS"))))))))
     (emit
      (lambda (tst sf kf ks)
        (cond

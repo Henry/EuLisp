@@ -238,8 +238,8 @@ void initialize_module_mop_class()
   static const void *G001210[] = {I(aa,26,00,00),I(00,00,00,04),I(02,45,00,00)};
 
   eul_allocate_static_string(str_1214, "non-functional converter ~a at class <~a>", 41);
-  /* Byte-vector with size: 19 is_init: 0 index: 225 binding: converter */
-  static const void *G001212[] = {I(aa,1b,26,00),I(00,00,00,08),I(02,1b,7f,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,32),I(1c,80,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,20),I(1f,03,82,02),I(23,00,00,00),B(mop_class ,224),I(1f,04,1d,24),B(boot ,12),I(3d,03,05,22),I(01,22,01,45),I(03,00,00,00)};
+  /* Byte-vector with size: 20 is_init: 0 index: 225 binding: converter */
+  static const void *G001212[] = {I(aa,1b,26,00),I(00,00,00,08),I(02,1b,7f,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,36),I(1c,80,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,24),I(1f,03,82,02),I(86,23,00,00),B(mop_class ,224),I(1f,05,1f,03),I(24,00,00,00),B(boot ,12),I(3d,04,05,22),I(01,22,01,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 226 binding: class-name */
   static const void *G001215[] = {I(aa,82,02,45),I(00,00,00,00)};

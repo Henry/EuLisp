@@ -68,7 +68,7 @@ void initialize_module_mop_inspect()
 
   eul_allocate_static_string(str_1603, "slot ~a not found in class ~a", 29);
   /* Byte-vector with size: 24 is_init: 0 index: 26 binding: primitive-find-slot-position */
-  static const void *G001601[] = {I(43,04,1c,12),I(1b,34,00,00),I(00,00,00,23),I(23,00,00,00),B(mop_inspect ,25),I(1f,04,1f,06),I(24,00,00,00),B(boot ,12),I(3d,03,05,32),I(00,00,00,38),I(1d,10,1b,84),I(02,1f,05,1c),I(50,1b,34,00),I(00,00,00,0e),I(1f,04,32,00),I(00,00,00,1f),I(1f,05,11,1f),I(05,83,14,1f),I(09,1f,09,1f),I(03,1f,03,24),B(mop_inspect ,7),I(3d,04,0a,22),I(02,22,03,45),I(05,00,00,00)};
+  static const void *G001601[] = {I(43,04,1c,12),I(1b,34,00,00),I(00,00,00,23),I(86,23,00,00),B(mop_inspect ,25),I(1f,05,1f,07),I(24,00,00,00),B(boot ,12),I(3d,04,05,32),I(00,00,00,38),I(1d,10,1b,84),I(02,1f,05,1c),I(50,1b,34,00),I(00,00,00,0e),I(1f,04,32,00),I(00,00,00,1f),I(1f,05,11,1f),I(05,83,14,1f),I(09,1f,09,1f),I(03,1f,03,24),B(mop_inspect ,7),I(3d,04,0a,22),I(02,22,03,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 9 is_init: 0 index: 27 binding: function? */
   static const void *G001604[] = {I(aa,1b,04,24),B(mop_class ,27),I(24,00,00,00),B(mop_inspect ,2),I(3c,02,1b,34),I(00,00,00,0d),I(1c,32,00,00),I(00,00,00,08),I(86,45,02,00)};

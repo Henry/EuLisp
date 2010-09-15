@@ -89,7 +89,7 @@
 ;;;-----------------------------------------------------------------------------
 (defun primitive-find-slot-position (cl name slots index)
   (cond ((null? slots)
-         (error "slot ~a not found in class ~a" name cl))
+         (error () "slot ~a not found in class ~a" name cl))
         ((eq name (slot-name (car slots)))
          index)
         (t

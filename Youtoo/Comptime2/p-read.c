@@ -16,6 +16,8 @@ extern LispRef i_all_bindings[];
 extern LispRef read_bindings[];
 extern LispRef i_notify_bindings[];
 extern LispRef mop_gf_bindings[];
+extern LispRef condition_bindings[];
+extern LispRef format_bindings[];
 extern LispRef boot_bindings[];
 extern LispRef stream_bindings[];
 extern LispRef string_bindings[];
@@ -41,34 +43,34 @@ void initialize_module_p_read()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_622, G00621, sym_618, sym_617, key_616, sym_613, G00612, G00610;
+  LispRef sym_623, G00622, sym_619, sym_618, key_617, sym_614, G00613, G00611;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 7 is_init: 0 index: 3 binding: anonymous */
-  static const void *G00609[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G00610[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_614, ".em", 3);
-  eul_allocate_static_string(str_615, "No such file or directory ~a in ~a", 34);
-  eul_allocate_static_string(str_619, "  Reading sources from ~a~a~a.em ...", 36);
-  /* Byte-vector with size: 73 is_init: 0 index: 11 binding: read-source-file */
-  static const void *G00611[] = {I(aa,46,01,23),B(p_read ,4),I(89,00,00,00),B(i_param ,59),I(2a,1b,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(p_read ,5),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(stream ,17),I(1c,24,00,00),B(i_param ,16),I(24,00,00,00),B(boot ,5),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,27),I(23,00,00,00),B(p_read ,6),I(1f,03,24,00),B(i_param ,16),I(24,00,00,00),B(boot ,12),I(3d,03,05,32),I(00,00,00,ac),I(1c,10,1d,11),I(24,00,00,00),B(stream2 ,4),I(23,00,00,00),B(p_read ,7),I(1f,03,24,00),B(mop_gf ,2),I(3c,03,86,1c),I(48,00,00,23),B(p_read ,8),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(p_read ,9),I(23,00,00,00),B(p_read ,3),I(3b,00,1c,0f),I(23,00,00,00),B(p_read ,8),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(p_read ,10),I(1f,05,24,00),B(i_param ,22),I(1f,0d,24,00),B(i_notify ,4),I(3c,04,2a,1f),I(04,89,00,00),B(i_param ,36),I(2a,47,00,00),I(24,00,00,00),B(read ,12),I(3c,01,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,08,45),I(05,00,00,00)};
+  eul_allocate_static_string(str_615, ".em", 3);
+  eul_allocate_static_string(str_616, "No such file or directory ~a in ~a", 34);
+  eul_allocate_static_string(str_620, "  Reading sources from ~a~a~a.em ...", 36);
+  /* Byte-vector with size: 78 is_init: 0 index: 11 binding: read-source-file */
+  static const void *G00612[] = {I(aa,46,01,23),B(p_read ,4),I(89,00,00,00),B(i_param ,59),I(2a,1b,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(p_read ,5),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(stream ,17),I(1c,24,00,00),B(i_param ,16),I(24,00,00,00),B(boot ,5),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,3b),I(23,00,00,00),B(p_read ,6),I(1f,03,24,00),B(i_param ,16),I(24,00,00,00),B(format ,2),I(3c,03,24,00),B(condition ,8),I(1c,24,00,00),B(boot ,12),I(3d,02,06,22),I(01,32,00,00),I(00,00,00,ae),I(1c,10,1d,11),I(24,00,00,00),B(stream2 ,4),I(23,00,00,00),B(p_read ,7),I(1f,03,24,00),B(mop_gf ,2),I(3c,03,86,1c),I(48,00,00,23),B(p_read ,8),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(p_read ,9),I(23,00,00,00),B(p_read ,3),I(3b,00,1c,0f),I(23,00,00,00),B(p_read ,8),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(p_read ,10),I(1f,05,24,00),B(i_param ,22),I(1f,0d,24,00),B(i_notify ,4),I(3c,04,2a,1f),I(04,89,00,00),B(i_param ,36),I(2a,47,00,00),I(24,00,00,00),B(read ,12),I(3c,01,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,08,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 19 is_init: 1 index: 0 binding: initialize-p-read */
-  static const void *G00620[] = {I(87,25,00,00),B(p_read ,1),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(p_read ,12),I(23,00,00,00),B(p_read ,11),I(3b,01,25,00),B(p_read ,2),I(86,ac,00,00)};
+  static const void *G00621[] = {I(87,25,00,00),B(p_read ,1),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(p_read ,12),I(23,00,00,00),B(p_read ,11),I(3b,01,25,00),B(p_read ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G00610,G00609);
-  eul_intern_symbol(sym_613,"read");
-  object_class(str_614) = eul_static_string_class;
+  eul_allocate_bytevector( G00611,G00610);
+  eul_intern_symbol(sym_614,"read");
   object_class(str_615) = eul_static_string_class;
-  eul_intern_keyword(key_616,"file-name");
-  eul_intern_symbol(sym_617,"*clean-ups*");
-  eul_intern_symbol(sym_618,"anonymous");
-  object_class(str_619) = eul_static_string_class;
-  eul_allocate_bytevector( G00612,G00611);
-  eul_intern_symbol(sym_622,"read-source-file");
-  eul_allocate_bytevector( G00621,G00620);
+  object_class(str_616) = eul_static_string_class;
+  eul_intern_keyword(key_617,"file-name");
+  eul_intern_symbol(sym_618,"*clean-ups*");
+  eul_intern_symbol(sym_619,"anonymous");
+  object_class(str_620) = eul_static_string_class;
+  eul_allocate_bytevector( G00613,G00612);
+  eul_intern_symbol(sym_623,"read-source-file");
+  eul_allocate_bytevector( G00622,G00621);
 
   /* Set local bindings */
   {
@@ -77,18 +79,18 @@ void initialize_module_p_read()
       p_read_bindings[i] = eul_nil;
   }
 
-  p_read_bindings[ 3] = G00610;
-  p_read_bindings[ 4] = sym_613;
-  p_read_bindings[ 5] = str_614;
-  p_read_bindings[ 6] = str_615;
-  p_read_bindings[ 7] = key_616;
-  p_read_bindings[ 8] = sym_617;
-  p_read_bindings[ 9] = sym_618;
-  p_read_bindings[ 10] = str_619;
-  p_read_bindings[ 11] = G00612;
+  p_read_bindings[ 3] = G00611;
+  p_read_bindings[ 4] = sym_614;
+  p_read_bindings[ 5] = str_615;
+  p_read_bindings[ 6] = str_616;
+  p_read_bindings[ 7] = key_617;
+  p_read_bindings[ 8] = sym_618;
+  p_read_bindings[ 9] = sym_619;
+  p_read_bindings[ 10] = str_620;
+  p_read_bindings[ 11] = G00613;
   p_read_bindings[ 1] = eul_nil;
-  p_read_bindings[ 12] = sym_622;
-  eul_allocate_lambda( p_read_bindings[0], "initialize-p-read", 0, G00621);
+  p_read_bindings[ 12] = sym_623;
+  eul_allocate_lambda( p_read_bindings[0], "initialize-p-read", 0, G00622);
 
   }
 }

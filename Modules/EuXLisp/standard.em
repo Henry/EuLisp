@@ -10,8 +10,8 @@
 (defun subst (a b c)
   (if (list? c)
       (map (lambda (e) (if (binary= b e) a e)) c)
-    (error "trying to to subst into a non-list"
-           <bad-type>
+    (error <bad-type>
+           "trying to to subst into a non-list"
            value: c
            expected-type: <list>)))
 

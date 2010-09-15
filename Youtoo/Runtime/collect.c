@@ -45,7 +45,7 @@ void initialize_module_collect()
 
   eul_allocate_static_string(str_1537, "fill not yet implemented", 24);
   /* Byte-vector with size: 5 is_init: 0 index: 29 binding: (method-fill) */
-  static const void *G001535[] = {I(43,fd,23,00),B(collect ,28),I(24,00,00,00),B(boot ,12),I(3d,01,03,00)};
+  static const void *G001535[] = {I(43,fd,86,23),B(collect ,28),I(24,00,00,00),B(boot ,12),I(3d,02,03,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 30 binding: anonymous */
   static const void *G001538[] = {I(aa,1b,47,00),I(00,24,00,00),B(collect ,20),I(3d,02,01,00)};

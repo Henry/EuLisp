@@ -10,20 +10,23 @@
 ;;;    functions:
 ;;;        current-thread current-thread-queue thread-suspend thread-reschedule
 ;;;-----------------------------------------------------------------------------
+
 (defmodule thread
   (syntax (_macros)
-   import (telos event)
-   export (<current-thread> <thread> thread? <simple-thread> simple-thread?
-                            thread? current-thread current-thread-queue thread-state
-                            thread-continuation thread-returned? thread-return-value
-                            thread-reschedule thread-suspend
-                            thread-block thread-unblock
-                            thread-start thread-value tconc
-                            thread-dynamic-variables thread-error-handlers
-                            <state> state-value-stack state-value-stack-size
-                            state-context-stack state-context-stack-size
-                            fill-thread-state restore-thread-state
-                            fill-simple-state restore-simple-state call1/cc))
+   import (telos
+           event)
+   export (<current-thread>
+           <thread> thread? <simple-thread> simple-thread?
+           thread? current-thread current-thread-queue thread-state
+           thread-continuation thread-returned? thread-return-value
+           thread-reschedule thread-suspend
+           thread-block thread-unblock
+           thread-start thread-value tconc
+           thread-dynamic-variables thread-error-handlers
+           <state> state-value-stack state-value-stack-size
+           state-context-stack state-context-stack-size
+           fill-thread-state restore-thread-state
+           fill-simple-state restore-simple-state call1/cc))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes <thread> and <simple-thread>
@@ -68,7 +71,7 @@
   (call-next-method)
   (let ((fun (init-list-ref inits function:)))
     (if (function? fun) ()
-      (error "missing required keyword ~a" function:))
+      (error () "missing required keyword ~a" function:))
     (call1/cc
      (lambda (k)
        (let ((args (call1/cc
@@ -187,7 +190,7 @@
 
 (defun thread-queue-remove ()
   (if (null? *thread-queue*)
-      (error "empty thread queue")
+      (error () "empty thread queue")
     (let ((thrd (car *thread-queue*)))
       (setq *thread-queue* (cdr *thread-queue*))
       thrd)))
@@ -195,7 +198,7 @@
 (defun thread-queue-remove-last ()
   (let ((ll (reverse-list *thread-queue*)))
     (if (null? ll)
-        (error "empty thread queue")
+        (error () "empty thread queue")
       (let ((thrd (car ll)))
         (setq *thread-queue* (reverse-list (cdr ll)))
         thrd))))

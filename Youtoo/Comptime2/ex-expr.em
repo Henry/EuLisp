@@ -6,13 +6,30 @@
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;; Description: expanding expressions into syntax nodes
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ex-expr
-  (syntax (_macros _i-aux0 _ex-aux0)
-   import (i-all p-env sx-node sx-obj ex-import ex-syntax ex-direct cg-dld)
-   export (expand-expr expand-exprs get-macro-expander complete-lambda-node
-                       filter-vars filter-init-forms *nil*
-                       protect-tilde protect-newline protect-backslash
-                       protect-doublequote))
+  (syntax (_macros
+           _i-aux0
+           _ex-aux0)
+   import (i-all
+           p-env
+           sx-node
+           sx-obj
+           ex-import
+           ex-syntax
+           ex-direct
+           cg-dld)
+   export (expand-expr
+           expand-exprs
+           get-macro-expander
+           complete-lambda-node
+           filter-vars
+           filter-init-forms
+           *nil*
+           protect-tilde
+           protect-newline
+           protect-backslash
+           protect-doublequote))
 
 ;;;-----------------------------------------------------------------------------
 ;;; EXPRESSION expander
@@ -768,7 +785,7 @@
                                                        (make-let* (append new-vars (fun-args? body))
                                                                   (fun-body? body))
                                                      (make-let* new-vars body))))
-                                                (t (error "" <condition>))))))
+                                                (t (error <condition> ""))))))
 
 (defun lift-let*-vars (vars)
   (labels

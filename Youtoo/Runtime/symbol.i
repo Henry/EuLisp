@@ -4,7 +4,7 @@
 (definterface symbol
   (import (telos convert compare collect character string table fpi)
    syntax (_telos0)
-   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc convert callback compare collect string copy integer number fpi character table1 vector list table)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc convert callback compare collect string copy integer number fpi character table1 stream stream1 lock stream2 socket format vector list table)
    export (
     ((name . <keyword>) (pos . 82) (origin mop-class . <keyword>) (class . constant))
     ((name . name) (pos . 8) (origin collect . name))

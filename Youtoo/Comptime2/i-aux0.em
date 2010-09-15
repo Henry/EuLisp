@@ -26,7 +26,8 @@
                              (sformat stderr "compile time error condition: ")
                              (spprint stderr c)
                              (if *no-ct-handlers* ()
-                               (error ,str <ct-error> ct-error-value: ,error-value)))
+                               (error <ct-error>
+                                       ,str ct-error-value: ,error-value)))
                     method: (((c <ct-error>) f)))   ; pass signal to next handler
     (progn ,@forms)))
 

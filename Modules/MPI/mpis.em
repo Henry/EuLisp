@@ -39,10 +39,10 @@
         ((setter mpi-stream-tag) x t)
         (connect os x)
         ((setter mpi-stream-tag) x ()))
-    (error "exceeded specified number of mpi stream" <condition>))
+    (error <condition> "exceeded specified number of mpi stream"))
   x)
 
-(defmethod generic-prin ((x <mpi-stream>) (s <stream>))
+(defmethod generic-print ((x <mpi-stream>) (s <stream>))
   (sformat s "#<~a: ~a ~a>"
            (class-name (class-of x))
            (mpi-stream-host x)
@@ -64,7 +64,7 @@
          (tag (mpi-stream-tag s))
          (res (eul-mpi-send x rank tag)))
     (if (null? res)
-        (error "mpi write error with ~a" x)
+        (error <condition> (fmt "mpi write error with ~a" x))
       s)))
 
 (defmethod generic-write ((x <double>) (s <mpi-stream>))
@@ -72,7 +72,7 @@
          (tag (mpi-stream-tag s))
          (res (eul-mpi-send x rank tag)))
     (if (null? res)
-        (error "mpi write error with ~a" x)
+        (error <condition> (fmt "mpi write error with ~a" x))
       s)))
 
 (defmethod generic-write ((x <character>) (s <mpi-stream>))
@@ -80,7 +80,7 @@
          (tag (mpi-stream-tag s))
          (res (eul-mpi-send x rank tag)))
     (if (null? res)
-        (error "mpi write error with ~a" x)
+        (error <condition> (fmt "mpi write error with ~a" x))
       s)))
 
 (defmethod generic-write ((x <string>) (s <mpi-stream>))
@@ -88,7 +88,7 @@
          (tag (mpi-stream-tag s))
          (res (eul-mpi-send x rank tag)))
     (if (null? res)
-        (error "mpi write error with ~a" x)
+        (error <condition> (fmt "mpi write error with ~a" x))
       s)))
 
 (defmethod generic-write ((x <object>) (s <mpi-stream>))
@@ -117,7 +117,7 @@
                  (if (null? objp)
                      (let ((res (eul-mpi-receive rank msg-tag n)))
                        (if (null? res)
-                           (error "mpi read error" <condition>)
+                           (error <condition> "mpi read error")
                          res))
                    (let ((os (mpi-stream-object-stream s)))
                      ((setter mpi-stream-tag) s t)
@@ -126,7 +126,7 @@
                        res)))
                (let ((res (eul-mpi-receive rank msg-tag n)))
                  (if (null? res)
-                     (error "mpi read error" <condition>)
+                     (error <condition> "mpi read error")
                    res))))))))
 
 ;;;-----------------------------------------------------------------------------

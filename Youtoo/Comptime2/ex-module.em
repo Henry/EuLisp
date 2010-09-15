@@ -159,7 +159,7 @@
                                                         ())
                                                       (e `((setter setter) ,(cadr name)
                                                            (named-lambda ,name ,params ,@body)) e))
-                                                  (error "bad defun syntax" <condition>)))))))
+                                                  (error <condition> "bad defun syntax")))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install DEFMACRO expander

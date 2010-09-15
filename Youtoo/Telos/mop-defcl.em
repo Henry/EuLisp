@@ -50,7 +50,7 @@
   (labels
    ((loop (l)
           (if (null? l)
-              (error "slot ~a not found in class ~a" name cl)
+              (error () "slot ~a not found in class ~a" name cl)
             (let* ((slot (car l))
                    (x (slot-name slot)))
               (if (eq x name) slot

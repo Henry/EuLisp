@@ -6,11 +6,18 @@
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;; Description: simulation of runtime value stack and display
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-stack
   (syntax (_macros)
-   import (i-all sx-obj cg-state)
-   export (push-display pop-display display-var-index
-                        move-stack push-stack-var stack-var-index))
+   import (i-all
+           sx-obj
+           cg-state)
+   export (push-display
+           pop-display
+           display-var-index
+           move-stack
+           push-stack-var
+           stack-var-index))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Simulating display movement for code generation
@@ -64,7 +71,7 @@
               (if (eq (cadr l) var)
                   (car l)
                 (loop (cddr l)))
-            (error "parameter not on stack" <condition>))))
+            (error <condition> "parameter not on stack"))))
    (- (code-state-stack-size? state)
       (+ (loop (code-state-stack-vars? state)) 1))))
 
@@ -77,5 +84,5 @@
    (code-state-stack-vars! state (loop (code-state-stack-vars? state)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module cg-stack
 ;;;-----------------------------------------------------------------------------

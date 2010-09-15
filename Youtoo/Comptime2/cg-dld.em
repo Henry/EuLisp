@@ -8,11 +8,23 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule cg-dld
   (syntax (_macros _i-aux0)
-   import (i-all sx-obj sx-node ex-import ex-syntax i-modify cg-interf p-env)
-   export (dynamic-binding-ref dynamic-binding-set
-                               dynamic-load-module as-dynamic-binding
-                               module-loaded? as-C-module-name
-                               dynamic-binding-ref1 dynamic-binding-set1 dynamic-load-module1))
+   import (i-all
+           sx-obj
+           sx-node
+           ex-import
+           ex-syntax
+           i-modify
+           cg-interf
+           p-env)
+   export (dynamic-binding-ref
+           dynamic-binding-set
+           dynamic-load-module
+           as-dynamic-binding
+           module-loaded?
+           as-C-module-name
+           dynamic-binding-ref1
+           dynamic-binding-set1
+           dynamic-load-module1))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Get and set an exported top-level lexical binding dynamically
@@ -23,8 +35,9 @@
          (binding (or (get-syntax-binding binding-name module)
                       (get-lexical-binding binding-name module)
                       (get-external-binding binding-name module)
-                      (error "binding ~a not available in module ~a"
-                             binding-name module-name))))
+                      (error <condition>
+                             (fmt "binding ~a not available in module ~a"
+                                  binding-name) module-name))))
     ;      (pprint binding) (flush)
     (as-dynamic-binding binding)))
 
@@ -36,8 +49,9 @@
                                (module-name? module))))
     (if (or (get-binding-info binding 'opencoding)
             (get-binding-info binding 'ff))
-        (error "binding ~a not accessable in module ~a"
-               (binding-local-name? binding) origin-module-name)
+        (error <condition>
+               (fmt "binding ~a not accessable in module ~a"
+                    (binding-local-name? binding)) origin-module-name)
       (dynamic-binding-ref1 (as-C-module-name origin-module-name) index))))
 
 (defun dynamic-binding-set (binding-name module-name x)
@@ -46,14 +60,16 @@
          (binding (or (get-syntax-binding binding-name module)
                       (get-lexical-binding binding-name module)
                       (get-external-binding binding-name module)
-                      (error "binding ~a not available in module ~a"
-                             binding-name module-name)))
+                      (error <condition>
+                              (fmt "binding ~a not available in module ~a"
+                                   binding-name) module-name)))
          (index (binding-local-index? binding))
          (origin-module-name (binding-module? binding)))
     (if (or (get-binding-info binding 'opencoding)
             (get-binding-info binding 'ff))
-        (error "binding ~a not accessable in module ~a"
-               binding-name module-name)
+        (error <condition>
+                (fmt "binding ~a not accessable in module ~a"
+                     binding-name) module-name)
       (dynamic-binding-set1 (as-C-module-name origin-module-name) index x))))
 
 ;;;-----------------------------------------------------------------------------
@@ -110,7 +126,9 @@
                     (notify0 "run module ~a" module-name)
                     ((dynamic-binding-ref1 module-name-str 0))
                     module)
-                (error "module ~a can't be loaded correctly" module-name)))))
+                (error <condition>
+                        (fmt "module ~a can't be loaded correctly"
+                             module-name))))))
       ;; Clean-up forms
       (if (eq module-name 'user) ()
         ((setter *get-loaded-module*) module-name ()))
@@ -204,5 +222,5 @@
            "eul_module_name_as_C_module_name_string")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module cg-dld
 ;;;-----------------------------------------------------------------------------

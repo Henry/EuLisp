@@ -76,7 +76,7 @@
          (apply (car meth-funs) values))))))
 
 (defun error-no-applicable-methods (gf values)
-  (error "no applicable methods for ~a\n    arguments: ~a\n    classes: ~a"
+  (error () "no applicable methods for ~a\n    arguments: ~a\n    classes: ~a"
          (function-name gf) values (map1-list class-of values)))
 
 ;;;-----------------------------------------------------------------------------

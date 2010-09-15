@@ -29,7 +29,8 @@
            (swrite s1 (read s1))
            (disconnect s1))
           (t
-           (error "unhandled local mpi stream" <condition>)))))
+           (error <condition>
+                  "unhandled local mpi stream")))))
 (echo)
 
 ;;;-----------------------------------------------------------------------------

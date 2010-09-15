@@ -130,7 +130,7 @@
     (if x
         (if (null? (car x))
             ((setter car) x pc)
-          (error "label multiply defined" <condition>))
+          (error <condition> "label multiply defined"))
       (let ((fun (setter table)))
         (fun label (list pc))))))
 

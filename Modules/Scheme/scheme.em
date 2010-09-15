@@ -411,7 +411,7 @@
 ;                  (t (loop (cdr prev))))))))
 
 (defun runtime ()
-  (vector-ref (time-start) 0))
+  (vector-ref (cpu-time) 0))
 
 (defun set-car! (x y)
   ((setter car) x y))

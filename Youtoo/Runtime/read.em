@@ -225,7 +225,7 @@
 (defclass <read-error> (<condition>) ())
 
 (defun read-error (s msg . args)
-  (error (apply fmt msg args) <read-error> value: s))
+  (error <read-error> (apply fmt msg args) value: s))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Special tags

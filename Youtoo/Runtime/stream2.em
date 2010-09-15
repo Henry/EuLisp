@@ -137,7 +137,7 @@
              (flag (init-list-ref mode-table mode O_RDONLY))
              (fd (eul_open file-name flag #o666)))
         (if (int-binary= fd -1)
-            (error (strerror) <stream-condition> value: fs)
+            (error <stream-condition> (strerror) value: fs)
           (let ((fcb (make <file-control-block>
                            file-name: file-name
                            mode: mode

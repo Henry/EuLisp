@@ -23,7 +23,8 @@
   (ct-serious-warning (ct-error-value c) (condition-message c)))
 
 (defun ct-error (value str . args)
-  (error (apply fmt str args) <ct-error> ct-error-value: value))
+  (error <ct-error>
+         (apply fmt str args) ct-error-value: value))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Exit from compilation

@@ -4,11 +4,11 @@
 (definterface handler
   (import (telos callback convert convert1 fpi float string collect)
    syntax (_telos0)
-   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc callback convert table table1 vector list character string fpi copy number integer collect compare convert1 float)
+   full-import (mop-alloc mop-access mop-prim mop-key mop-class mop-init mop-inspect mop-gf mop-meth mop-defcl boot boot1 telos condition event thread dynamic let-cc callback convert table format socket stream2 lock stream1 stream table1 vector list character string fpi copy number integer collect compare convert1 float)
    export (
     ((name . <int*>) (pos . 4) (origin handler . <int*>) (class . constant))
     ((name . <handler>) (pos . 2) (origin handler . <handler>) (class . constant))
-    ((name . handle) (pos . 3) (origin handler . handle) (inline (G009853 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G009855 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . handle) (pos . 3) (origin handler . handle) (inline (G009839 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G009841 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
     ((name . <string*>) (pos . 6) (origin handler . <string*>) (class . constant))
     ((name . <double*>) (pos . 5) (origin handler . <double*>) (class . constant))
     ((name . handler?) (pos . 8) (origin handler . handler?))

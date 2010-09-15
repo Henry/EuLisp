@@ -6,10 +6,19 @@
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;; Description: expanding import/export dirctives into syntax nodes
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ex-direct
-  (syntax (_macros _i-aux0)
-   import (i-all p-env sx-obj sx-node ex-import ex-syntax ex-expose)
-   export (expand-directive expand-export))
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           p-env
+           sx-obj
+           sx-node
+           ex-import
+           ex-syntax
+           ex-expose)
+   export (expand-directive
+           expand-export))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Module directive expander
@@ -30,9 +39,11 @@
             (let ((directive-expander (get-directive-expander (car x))))
               (if directive-expander
                   directive-expander
-                (error "no directive expander ~a available" x))))
+                (error <condition>
+                        (fmt "no directive expander ~a available" x)))))
            (t
-            (error "no directive expander ~a available" x)))))
+            (error <condition>
+                    (fmt "no directive expander ~a available" x))))))
     (expander x e)))
 
 (defun expand-directive (x)
@@ -96,5 +107,5 @@
                               (e (cdr (cdr x)) e)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module ex-direct
 ;;;-----------------------------------------------------------------------------

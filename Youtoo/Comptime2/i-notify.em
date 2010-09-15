@@ -60,8 +60,9 @@
         (apply basic-warning *errors* "ERROR" str args)
         value)
     ;; Force error to be catched by interpreter loop
-    (error (apply fmt str args) (get-ct-error-condition-class ())
-           ct-error-value: (dynamic *actual-module*))))
+    (error (get-ct-error-condition-class ())
+            (apply fmt str args)
+            ct-error-value: (dynamic *actual-module*))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

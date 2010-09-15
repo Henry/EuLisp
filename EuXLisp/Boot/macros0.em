@@ -23,8 +23,8 @@
 (defmacro block (tag . body)
   (if (symbol? tag)
       `(let/cc ,tag ,@body)
-    (error "not a symbol in block"
-           <compilation-general-error>
+    (error <compilation-general-error>
+           "not a symbol in block"
            value: tag)))
 
 (defmacro return-from (tag . val)
@@ -32,8 +32,8 @@
       (if (null? val)
           `(,tag ())
         `(,tag ,@val))
-    (error "not a symbol in return-from"
-           <compilation-general-error>
+    (error <compilation-general-error>
+           "not a symbol in return-from"
            value: tag)))
 
 (define (letrec-binding binding)
@@ -85,8 +85,8 @@
             ((setter ,(car name)) ,(cadr name)
              (lambda ,args ,@body))
             ',name))
-        (t (error "malformed name in defun"
-                  <compilation-general-error>
+        (t (error <compilation-general-error>
+                  "malformed name in defun"
                   value: name))))
 
 ; (defgeneric foo (x)
@@ -106,19 +106,19 @@
                (list 'setter (cadr name))
                body)
             ',name))
-        (t (error "malformed name in defgeneric"
-                  <compilation-general-error>
+        (t (error <compilation-general-error>
+                  "malformed name in defgeneric"
                   value: name))))
 
 (define (defgeneric-methods name body)
         (cond ((null? body) ())
               ((not (eq (car body) method:))
-               (error "unknown keyword in defgeneric"
-                      <compilation-general-error>
+               (error <compilation-general-error>
+                      "unknown keyword in defgeneric"
                       value: (car body)))
               ((null? (cdr body))
-               (error "odd-size keyword list in defgeneric"
-                      <compilation-general-error>
+               (error <compilation-general-error>
+                      "odd-size keyword list in defgeneric"
                       value: name))
               (t (cons
                   `(defmethod ,name ,(caadr body) ,@(cdadr body))
@@ -128,8 +128,8 @@
   (if (or (symbol? name)
           (definable-name? name))
       `(define-method ,(cons name args) ,@body)
-    (error "malformed name in defgeneric"
-           <compilation-general-error>
+    (error <compilation-general-error>
+           "malformed name in defgeneric"
            value: name)))
 
 (defmacro generic-lambda (args . body)
@@ -147,8 +147,8 @@
 (defmacro import (mod)
   (if (not (or (string? mod)
                (symbol? mod)))
-      (error "bad module name in import"
-             <compilation-general-error>
+      (error <compilation-general-error>
+             "bad module name in import"
              value: mod)
     `(progn
        (setq curmod (find-module (current-module)))
@@ -157,16 +157,16 @@
 (defmacro syntax (mod)
   (if (not (or (string? mod)
                (symbol? mod)))
-      (error "bad module name in syntax"
-             <compilation-general-error>
+      (error <compilation-general-error>
+             "bad module name in syntax"
              value: mod)
     `(progn
        (setq curmod (find-module (current-module)))
        (%IMPORT curmod ,mod))))
 
 (defmacro defmodule (name . body)
-  (error "only use defmodule in root module"
-         <compilation-general-error>
+  (error <compilation-general-error>
+         "only use defmodule in root module"
          value: name))
 
 )

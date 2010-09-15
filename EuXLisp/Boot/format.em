@@ -21,7 +21,7 @@
 (defcondition <format-error> <stream-error>)
 
 (define (format-error msg val)
-        (error msg <format-error> value: val))
+        (error <format-error> msg value: val))
 
 (define (sformat stream string . args)
         (%display (format-loop

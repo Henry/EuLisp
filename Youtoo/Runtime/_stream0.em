@@ -136,7 +136,8 @@
         (res (gensym)))
     `(let ((,info (apply file-lookup ,name ,path)))
        (if (null? ,info)
-           (error "No such file or directory ~a in ~a" ,name ,path)
+           (error <condition>
+                   (fmt "No such file or directory ~a in ~a" ,name ,path))
          (let ((,file-name (car ,info))
                (,dir (cdr ,info)))
            (with-input-file (,s ,file-name) ,@body))))))

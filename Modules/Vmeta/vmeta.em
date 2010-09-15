@@ -176,7 +176,7 @@
             ((or (binary= i ,max) (not ,matcher))
              (and (>= i ,min) (<= i ,max)))))
     (t
-     (error "~s is not a valid star form." x))))
+     (error <condition> (fmt "~s is not a valid star form." x)))))
 
 (defmacro push (item place)
   `(setq ,place (cons ,item ,place)))

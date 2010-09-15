@@ -31,7 +31,7 @@
           ((setter tower-blocks) x (loop n ()))
           x))
 
-(defmethod generic-prin ((x <tower>) (s <stream>))
+(defmethod generic-print ((x <tower>) (s <stream>))
   (sformat s "#<tower ~a: ~a>" (tower-id x) (tower-blocks x)))
 
 ;;;-----------------------------------------------------------------------------
@@ -43,7 +43,7 @@
   (let ((blocks (tower-blocks x)))
     (if (or (null? blocks) (< y (car blocks)))
         ((setter tower-blocks) x (cons y blocks))
-      (error "cannot push block of size ~a on tower ~a" y x))))
+      (error <condition> (fmt "cannot push block of size ~a on tower ~a" y x)))))
 
 (defgeneric pop (x))
 
@@ -53,7 +53,7 @@
         (progn
           ((setter tower-blocks) x (cdr blocks))
           (car blocks))
-      (error "cannot pop block from emtpy tower ~a" x))))
+      (error <condition> (fmt "cannot pop block from emtpy tower ~a" x)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Move n blocks from tower x1 to tower x2 using x3 as buffer

@@ -249,28 +249,28 @@
                             ((eq op value:)
                              (cond (ready? value)
                                    ((not started?)
-                                    (error "thread-value on unstarted thread"
-                                           <thread-general-error>
+                                    (error <thread-general-error>
+                                           "thread-value on unstarted thread"
                                            value: self))
                                    (killed?
-                                    (error "thread-value on killed thread"
-                                           <thread-general-error>
+                                    (error <thread-general-error>
+                                           "thread-value on killed thread"
                                            value: self))
                                    ((eq self (get-self (current-thread)))
-                                    (error "thread-value on self"
-                                           <thread-general-error>
+                                    (error <thread-general-error>
+                                           "thread-value on self"
                                            value: self))
                                    (else
                                     (thread-reschedule)
                                     (self value:))))
                             ((eq op start:)
                              (cond (killed?
-                                    (error "thread start on killed thread"
-                                           <thread-general-error>
+                                    (error <thread-general-error>
+                                           "thread start on killed thread"
                                            value: self))
                                    (started?
-                                    (error "attempt to start running thread"
-                                           <thread-already-started>
+                                    (error <thread-already-started>
+                                           "attempt to start running thread"
                                            value: self))
                                    (else
                                     (call/cc
@@ -298,8 +298,8 @@
                              (setq started? t)
                              (setq killed? ())
                              (setq value ()))
-                            (else (error "unknown thread operation"
-                                         <thread-general-error>
+                            (else (error <thread-general-error>
+                                         "unknown thread operation"
                                          value: op))))))
                   self)))
 
@@ -311,8 +311,8 @@
               (if (eq thread current-self)
                   (pop-and-call-thread))
               t)
-          (error "not a thread in thread-kill"
-                 <thread-general-error>
+          (error <thread-general-error>
+                 "not a thread in thread-kill"
                  value: thread)))
 
 (define (thread-queue) r-t-r-q)
@@ -332,24 +332,24 @@
                    (if killed? dead: started:))
                   ((eq op value:)
                    (cond (killed?
-                          (error "thread-value on killed thread"
-                                 <thread-general-error>
+                          (error <thread-general-error>
+                                 "thread-value on killed thread"
                                  value: interactive-thread))
                          ((eq toplevel-thread (current-thread))
-                          (error "thread-value on self"
-                                 <thread-general-error>
+                          (error <thread-general-error>
+                                 "thread-value on self"
                                  value: interactive-thread))
                          (else
                           (thread-reschedule)
                           (interactive-thread value:))))
                   ((eq op start:)
-                   (error "attempt to start running thread"
-                          <thread-already-started>
+                   (error <thread-already-started>
+                          "attempt to start running thread"
                           value: interactive-thread))
                   ((eq op reset-state:)
                    (setq killed? ()))
-                  (else (error "unknown thread operation"
-                               <thread-general-error>
+                  (else (error <thread-general-error>
+                               "unknown thread operation"
                                value: op))))
     (let ((thread (%make-thread interactive-thread ())))
       (set-uwps thread (list (make-uwp-frame ())))
@@ -362,22 +362,22 @@
             (progn
               ((get-self thread) start: thread args)
               thread)
-          (error "not a thread in thread-start"
-                 <thread-general-error>
+          (error <thread-general-error>
+                 "not a thread in thread-start"
                  value: thread)))
 
 (define (thread-value thread)
         (if (thread? thread)
             ((get-self thread) value:)
-          (error "not a thread in thread-value"
-                 <thread-general-error>
+          (error <thread-general-error>
+                 "not a thread in thread-value"
                  value: thread)))
 
 (define (thread-state thread)
         (if (thread? thread)
             ((get-self thread) state:)
-          (error "not a thread in thread-state"
-                 <thread-general-error>
+          (error <thread-general-error>
+                 "not a thread in thread-state"
                  value: thread)))
 
 ;; locks
@@ -472,16 +472,16 @@
 (define (lock l)
         (if (lock? l)
             (lockit l)
-          (error "not a lock in LOCK"
-                 <lock-error>
+          (error <lock-error>
+                 "not a lock in LOCK"
                  value: l))
         l)
 
 (define (unlock l)
         (if (lock? l)
             (unlockit l)
-          (error "not a lock in LOCK"
-                 <lock-error>
+          (error <lock-error>
+                 "not a lock in LOCK"
                  value: l))
         l)
 
@@ -508,8 +508,8 @@
                      ((and (number? time)
                            (>= time 0))
                       (thread-timeout thread time))
-                     (t (error "not a valid timeout in wait"
-                               <wait-error>
+                     (t (error <wait-error>
+                               "not a valid timeout in wait"
                                value: time))))
 
 (define (thread-timeout thread time)
@@ -517,8 +517,8 @@
               (interval (round time)))
           (cond ((eq state ready:) thread)
                 ((not (eq state started:))
-                 (error "waiting on non-running thread"
-                        <wait-error>
+                 (error <wait-error>
+                        "waiting on non-running thread"
                         value: thread))
                 (t (timeout-loop (+ (vector-ref (cpu-time) 0) interval)
                                  (lambda () (eq (thread-state thread) ready:)))
@@ -591,8 +591,8 @@
           (if (or (null? thread) (eq (car thread) current))
               (current-thread-signal condition resume current)
             (if (not (subclass? (class-of condition) <thread-condition>))
-                (error "must be a subclass of <thread-condition> in signal"
-                       <wrong-condition-class>
+                (error  <wrong-condition-class>
+                        "must be a subclass of <thread-condition> in signal"
                        value: condition)
               (other-thread-signal condition resume (car thread))))))
 
@@ -622,8 +622,8 @@
                        (if (null? val)
                            (resume)
                          (resume (car val)))
-                     (error "attempt to resume non-continuation"
-                            <general-error>
+                     (error <general-error>
+                            "attempt to resume non-continuation"
                             value: resume)))))
 
 (define (other-thread-signal condition resume thread)
@@ -639,8 +639,8 @@
           (unwrap-uwps cc)
           (cond ((null? z) (cc))
                 ((null? (cdr z)) (cc (car z)))
-                (t (error "too many args passed to continuation"
-                          <general-error>
+                (t (error <general-error>
+                          "too many args passed to continuation"
                           value: z)))))
 
 (defmacro let/cc (name . body)
@@ -704,14 +704,14 @@
      (establish-uwp cleanups)
      (disestablish-uwp ,protected cleanups)))
 
-(define (error message condclass . opts)
+(define (error condclass message . opts)
         (signal (apply make condclass message: message opts) ()))
 
-;;   (define (cerror message condclass . opts)
+;;   (define (cerror condclass message . opts)
 ;;           (let/cc resume
 ;;             (signal (apply make condclass message: message opts) resume)))
 
-(define (cerror message condclass . opts)
+(define (cerror condclass message . opts)
         (call/cc (lambda (cc)
                    (push-uwp-frame cc)
                    (pop-uwp-frame
@@ -798,8 +798,8 @@
 
 (define (resume frameptr cc cd . args)
         (if (null? cc)
-            (error "attempt to resume from a non-continuable error"
-                   <general-error>
+            (error <general-error>
+                   "attempt to resume from a non-continuable error"
                    value: cc))
         (if (null? args)
             (cc)

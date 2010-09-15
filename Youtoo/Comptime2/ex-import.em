@@ -6,11 +6,19 @@
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;; Description: expanding import dirctives into syntax nodes
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ex-import
-  (syntax (_macros _i-aux0 _sx-obj0)
-   import (i-all sx-obj sx-node p-env cg-interf)
-   export (expand-old-imports expand-import import-module
-                              register-imported-module))
+  (syntax (_macros
+           _i-aux0
+           _sx-obj0)
+   import (i-all
+           sx-obj
+           sx-node
+           p-env
+           cg-interf)
+   export (expand-old-imports
+           expand-import import-module
+           register-imported-module))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Import expander
@@ -32,9 +40,9 @@
             (let ((import-expander (get-import-expander (car x))))
               (if import-expander
                   import-expander
-                (error "no import expander ~a available" x))))
+                (error <condition> (fmt "no import expander ~a available" x)))))
            (t
-            (error "no import expander ~a available" x)))))
+            (error <condition> (fmt "no import expander ~a available" x))))))
     (expander x e)))
 
 (defun expand-import (x) (import-expander x import-expander))
@@ -166,5 +174,5 @@
                                               (new-node module-name 'used-module-name)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module ex-import
 ;;;-----------------------------------------------------------------------------

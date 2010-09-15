@@ -6,6 +6,7 @@
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;; Description: syntactic sugar helpful in the expansion phase
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ex-aux0
   (syntax (macros)
    import (level1))
@@ -16,7 +17,8 @@
          x
        (if (and (cons? x) (eq (car x) 'setter))
            x
-         (error "bad value ~a" x)))))
+         (error <condition>
+                (fmt "bad value ~a" x))))))
 
 (defmacro get-params (form) `(caddr ,form))
 
@@ -26,13 +28,15 @@
   `(let ((x (cdr (cddr ,form))))
      (if (or (null? x) (cons? x))
          x
-       (error "body ~a not a list" x))))
+       (error <condition>
+              (fmt "body ~a not a list" x)))))
 
 (defmacro get-lambda-body (form)
   `(let ((x (cddr ,form)))
      (if (or (null? x) (cons? x))
          x
-       (error "body ~a not a list" x))))
+       (error <condition>
+              (fmt "body ~a not a list" x)))))
 
 (defmacro get-value (form) `(caddr ,form))
 
@@ -41,5 +45,5 @@
 (defmacro get-top-level-forms (form) `(cdr (cddr ,form)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module ex-aux0
 ;;;-----------------------------------------------------------------------------

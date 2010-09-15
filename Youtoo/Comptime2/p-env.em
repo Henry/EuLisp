@@ -79,7 +79,7 @@
           (if (null? *interpreter*) ()
             ((setter (module-interactive-lexical-env? module))
              binding-name proper-binding)))
-      (error "no actual module" <ct-error>))))
+      (error <ct-error> "no actual module"))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; External environment
@@ -122,7 +122,7 @@
             ())
           ((setter (module-external-env? module))
            binding-name proper-binding))
-      (error "no actual module specified" <ct-error>))))
+      (error <ct-error> "no actual module specified"))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Syntax environment
@@ -182,7 +182,7 @@
               proper-binding old-lexical-binding)))
           ((setter (module-syntax-env? module))
            binding-name proper-binding))
-      (error "no actual module specified" <ct-error>))))
+      (error <ct-error> "no actual module specified"))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Expand hard-code level1 bindings

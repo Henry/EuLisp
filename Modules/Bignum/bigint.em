@@ -31,7 +31,7 @@
           ((string? val)
            ((setter bigint-value) x (mpz-init-set-str val 10)))
           (t
-           (error "cannot allocate bigint for ~a" val)))
+           (error <condition> (fmt "cannot allocate bigint for ~a" val))))
     x))
 
 (defun make-bigint-fast (ptr)

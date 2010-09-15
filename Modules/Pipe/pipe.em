@@ -26,7 +26,8 @@
   (let* ((name (convert (pipe-process x) <string>))
          (fds (eul-fork-child name)))
     (if (integer? fds)
-        (error (eul-pipe-strerror fds) <stream-condition> value: x)
+        (error <stream-condition>
+               (eul-pipe-strerror fds) value: x)
       (let* ((fcb1 (make <file-control-block>
                          file-name: name
                          mode: 'r

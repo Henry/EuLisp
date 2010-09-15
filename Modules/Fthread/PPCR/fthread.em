@@ -33,7 +33,7 @@
   (let ((fun (init-list-ref inits function:)))
     (if (function? fun)
         ((setter thread-function) thrd fun)
-      (error "missing required keyword ~a" function:))
+      (error <condition> "missing required keyword ~a" function:))
     thrd))
 
 ;;;-----------------------------------------------------------------------------

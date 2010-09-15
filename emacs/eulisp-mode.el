@@ -62,7 +62,7 @@
 ;;
 ;; This program is free software; you can redistribute it and/or
 ;; modify it under the terms of the GNU General Public License as
-;; published by the Free Software Foundation; either version 2, or
+;; published by the Free Software Foundation; either version 3, or
 ;; (at your option) any later version.
 ;;
 ;; This program is distributed in the hope that it will be useful,
@@ -177,6 +177,8 @@ indentation for the following lines until the end of the list."))))
      '("(\\(make\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-type-face nil t))
      '("\\<\\(error\\)\\>\\(.*\\)"
+       (1 font-lock-warning-face) (2 font-lock-warning-face nil t))
+     '("\\<\\(cerror\\)\\>\\(.*\\)"
        (1 font-lock-warning-face) (2 font-lock-warning-face nil t))
      ))
   "Highlight function declarations, strings, comments and errors.")
@@ -497,7 +499,7 @@ and named constant values.")
            "generic-function-method-lookup-function"
            "generic-function-methods"
            "generic-function?"
-           "generic-prin"
+           "generic-print"
            "generic-read"
            "generic-write"
            "gensym"
@@ -1393,6 +1395,8 @@ given symbol SYM."
 
     (%annotate-function . defun)
     (%annotate-binding . defun)
+
+    (make-instance . defun)
     )
   "Alist of indentation methods for standard EuLisp functions.")
 

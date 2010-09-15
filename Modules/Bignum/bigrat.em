@@ -42,8 +42,8 @@
                    (mpq-set-den blah (mpz-init-set-si b))
                    ((setter bigrat-value) x blah)))
                 (t
-                 (error "cannot allocate bigrat for ~a" val))))
-      (error "cannot allocate bigrat for ~a" val))
+                 (error <condition> (fmt "cannot allocate bigrat for ~a" val)))))
+      (error <condition> (fmt "cannot allocate bigrat for ~a" val)))
     x))
 
 (defun make-bigrat-fast (ptr)

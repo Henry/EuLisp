@@ -7,12 +7,27 @@
 ;;;  Description: tables; fixed comparator and hash-function;
 ;;;  Note: assumes non-relocating garbage collector!
 ;;;-----------------------------------------------------------------------------
+
 (defmodule table
   (syntax (_telos0)
-   import (telos convert copy collect compare list fpi string vector table1)
+   import (telos
+           condition
+           convert
+           copy
+           collect
+           compare
+           list
+           fpi
+           string
+           vector
+           table1)
    expose (table1)
-   export (table-ref table-empty?
-                     do1-table map1-table anyp1-table all1-table?))
+   export (table-ref
+           table-empty?
+           do1-table
+           map1-table
+           anyp1-table
+           all1-table?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Table ref
@@ -157,7 +172,7 @@
 (defmethod do ((fun <function>) (tab <hash-table>) . cs)
   (if (null? cs)
       (do1-table fun tab)
-    (error "do on multiple tables not yet implemented")))
+    (error <condition> "do on multiple tables not yet implemented")))
 
 (defun do1-table (fun tab)
   ;; Attention -- key (ie (car entry) might not be a Lisp object when tab
@@ -174,7 +189,7 @@
 (defmethod map ((fun <function>) (tab <hash-table>) . cs)
   (if (null? cs)
       (map1-table fun tab)
-    (error "map on multiple tables not yet implemented")))
+    (error <condition> "map on multiple tables not yet implemented")))
 
 (defun map1-table (fun tab)
   ;; Attention -- key (ie (car entry) might not be a Lisp object when tab
@@ -202,7 +217,7 @@
 (defmethod any? ((fun <function>) (tab <hash-table>) . cs)
   (if (null? cs)
       (anyp1-table fun tab)
-    (error "any? on multiple tables not yet implemented")))
+    (error <condition> "any? on multiple tables not yet implemented")))
 
 (defun anyp1-table (fun tab)
   (anyp1-vector (lambda (entry)
@@ -217,7 +232,7 @@
 (defmethod all? ((fun <function>) (tab <hash-table>) . cs)
   (if (null? cs)
       (all1-table? fun tab)
-    (error "all? on multiple tables not yet implemented")))
+    (error <condition> "all? on multiple tables not yet implemented")))
 
 (defun all1-table? (fun tab)
   (all1-vector? (lambda (entry)
@@ -260,5 +275,5 @@
 (defgeneric (converter <table>) (x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module table
 ;;;-----------------------------------------------------------------------------

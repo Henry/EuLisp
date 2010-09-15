@@ -111,7 +111,7 @@ void initialize_module_i_args()
   eul_allocate_static_string(str_500, "compile time error condition: ", 30);
   eul_allocate_static_string(str_501, "bad parameter ~a", 16);
   /* Byte-vector with size: 28 is_init: 0 index: 66 binding: (method-G003) */
-  static const void *G00498[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(i_args ,63),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,34),I(23,00,00,00),B(i_args ,64),I(47,00,00,24),B(format ,2),I(3c,02,1b,24),B(i_error ,5),I(23,00,00,00),B(i_args ,65),I(47,00,00,24),B(boot ,12),I(3d,04,03,22),I(01,45,02,00)};
+  static const void *G00498[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(i_args ,63),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,34),I(23,00,00,00),B(i_args ,64),I(47,00,00,24),B(format ,2),I(3c,02,24,00),B(i_error ,5),I(1c,23,00,00),B(i_args ,65),I(47,00,00,24),B(boot ,12),I(3d,04,03,22),I(01,45,02,00)};
 
   eul_allocate_static_string(str_507, "-help", 5);
   eul_allocate_static_string(str_508, "-version", 8);

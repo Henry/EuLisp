@@ -79,7 +79,7 @@ void initialize_module_thread()
 
   eul_allocate_static_string(str_456, "missing required keyword ~a", 27);
   /* Byte-vector with size: 28 is_init: 0 index: 57 binding: (method-initialize) */
-  static const void *G00453[] = {I(ab,46,03,1c),I(48,00,00,47),I(00,00,1c,37),I(02,2a,1b,23),B(thread ,55),I(24,00,00,00),B(boot ,29),I(3c,02,1b,48),I(00,01,47,00),I(01,24,00,00),B(mop_inspect ,8),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,21),I(23,00,00,00),B(thread ,56),I(23,00,00,00),B(thread ,55),I(24,00,00,00),B(boot ,12),I(3c,02,2a,23),B(thread ,53),I(23,00,00,00),B(thread ,54),I(3b,01,24,00),B(thread ,18),I(3d,01,04,00)};
+  static const void *G00453[] = {I(ab,46,03,1c),I(48,00,00,47),I(00,00,1c,37),I(02,2a,1b,23),B(thread ,55),I(24,00,00,00),B(boot ,29),I(3c,02,1b,48),I(00,01,47,00),I(01,24,00,00),B(mop_inspect ,8),I(3c,01,1b,34),I(00,00,00,0d),I(86,32,00,00),I(00,00,00,21),I(86,23,00,00),B(thread ,56),I(23,00,00,00),B(thread ,55),I(24,00,00,00),B(boot ,12),I(3c,03,2a,23),B(thread ,53),I(23,00,00,00),B(thread ,54),I(3b,01,24,00),B(thread ,18),I(3d,01,04,00)};
 
   /* Byte-vector with size: 1 is_init: 0 index: 58 binding: (method-simple-thread?) */
   static const void *G00457[] = {I(aa,1b,45,01)};
@@ -164,7 +164,7 @@ void initialize_module_thread()
 
   eul_allocate_static_string(str_568, "empty thread queue", 18);
   /* Byte-vector with size: 18 is_init: 0 index: 139 binding: thread-queue-remove */
-  static const void *G00566[] = {I(a9,24,00,00),B(thread ,10),I(12,1b,34,00),I(00,00,00,1e),I(23,00,00,00),B(thread ,138),I(24,00,00,00),B(boot ,12),I(3d,01,01,32),I(00,00,00,21),I(24,00,00,00),B(thread ,10),I(10,24,00,00),B(thread ,10),I(11,1b,89,00),B(thread ,10),I(2a,1c,22,02),I(45,01,00,00)};
+  static const void *G00566[] = {I(a9,24,00,00),B(thread ,10),I(12,1b,34,00),I(00,00,00,1e),I(86,23,00,00),B(thread ,138),I(24,00,00,00),B(boot ,12),I(3d,02,01,32),I(00,00,00,21),I(24,00,00,00),B(thread ,10),I(10,24,00,00),B(thread ,10),I(11,1b,89,00),B(thread ,10),I(2a,1c,22,02),I(45,01,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 140 binding: call1/cc */
   static const void *G00569[] = {I(aa,24,00,00),B(thread ,25),I(24,00,00,00),B(mop_gf ,2),I(3c,01,24,00),B(thread ,31),I(3c,02,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,08),I(86,45,01,00)};
@@ -201,7 +201,7 @@ void initialize_module_thread()
 
   eul_allocate_static_string(str_593, "empty thread queue", 18);
   /* Byte-vector with size: 20 is_init: 0 index: 152 binding: thread-queue-remove-last */
-  static const void *G00591[] = {I(a9,24,00,00),B(thread ,10),I(24,00,00,00),B(boot ,25),I(3c,01,1b,12),I(1b,34,00,00),I(00,00,00,1f),I(23,00,00,00),B(thread ,151),I(24,00,00,00),B(boot ,12),I(3d,01,02,32),I(00,00,00,1d),I(1c,10,1d,11),I(24,00,00,00),B(boot ,25),I(3c,01,1b,89),B(thread ,10),I(2a,1c,22,02),I(45,02,00,00)};
+  static const void *G00591[] = {I(a9,24,00,00),B(thread ,10),I(24,00,00,00),B(boot ,25),I(3c,01,1b,12),I(1b,34,00,00),I(00,00,00,1f),I(86,23,00,00),B(thread ,151),I(24,00,00,00),B(boot ,12),I(3d,02,02,32),I(00,00,00,1d),I(1c,10,1d,11),I(24,00,00,00),B(boot ,25),I(3c,01,1b,89),B(thread ,10),I(2a,1c,22,02),I(45,02,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 153 binding: state-value-stack-size */
   static const void *G00594[] = {I(aa,84,24,00),B(thread ,25),I(08,45,00,00)};

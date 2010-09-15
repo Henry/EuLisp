@@ -23,7 +23,7 @@
                           (t
                            `(and ,exp ,(expand (cdr vars) body))))))
                      (t
-                      (error "not a proper list" vars)))))
+                      (error <condition> (fmt "not a proper list~a~%" vars))))))
           (expand vars body)))
 
 ;;;-----------------------------------------------------------------------------

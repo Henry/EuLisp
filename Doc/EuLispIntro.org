@@ -1348,7 +1348,7 @@
     + =<simple-method>=
     + =<slot>=
     + =<local-slot>=
-    + =generic-prin=
+    + =generic-print=
     + =generic-write=
     + =wait=
     + =make=

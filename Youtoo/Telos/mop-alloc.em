@@ -22,7 +22,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmethod allocate ((cl <class>) inits)
   (if (class-abstract? cl)
-      (error "can't allocate an instance of abstract-class ~a" cl)
+      (error () "can't allocate an instance of abstract-class ~a" cl)
     (primitive-allocate cl (class-instance-length cl))))
 
 ;;;-----------------------------------------------------------------------------
@@ -82,7 +82,7 @@
         (direct-slotds (find-key direct-slots: keywords ()))
         (direct-keys (find-key direct-keywords: keywords ())))
     (if (compatible-superclasses? cl direct-supers) ()
-      (error "~a can not be a subclass of ~a" cl direct-supers))
+      (error () "~a can not be a subclass of ~a" cl direct-supers))
     ((setter class-precedence-list) cl
      (compute-class-precedence-list cl direct-supers))
     ((setter class-keywords) cl

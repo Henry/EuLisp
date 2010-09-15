@@ -6,9 +6,16 @@
 ;;;  Authors: Andreas Kind, Keith Playford
 ;;; Description: expanding expose dirctives into syntax nodes
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ex-expose
-  (syntax (_macros _i-aux0)
-   import (i-all p-env sx-obj sx-node cg-interf ex-import)
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           p-env
+           sx-obj
+           sx-node
+           cg-interf
+           ex-import)
    export (expand-expose))
 
 ;;;-----------------------------------------------------------------------------
@@ -31,9 +38,9 @@
             (let ((expose-expander (get-expose-expander (car x))))
               (if expose-expander
                   expose-expander
-                (error "no expose expander ~a available" x))))
+                (error <condition> (fmt "no expose expander ~a available" x)))))
            (t
-            (error "no expose expander ~a available" x)))))
+            (error <condition> (fmt "no expose expander ~a available" x))))))
     (expander x e)))
 
 (defun expand-expose (x) (expose-expander x expose-expander))

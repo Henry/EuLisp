@@ -26,13 +26,13 @@
     accessor: attr))
   constructor: make-paralation-internal)
 
-(defmethod generic-prin ((p <paralation-internal>) str)
+(defmethod generic-print ((p <paralation-internal>) str)
   (sformat str "#<paralation-internal size ~a shape ~s attributes ~s>"
            (p-size p) (shape-internal p) (attr p))
   p)
 
 (defmethod generic-write ((p <paralation-internal>) str)
-  (generic-prin p str))
+  (generic-print p str))
 
 (defclass <field> ()
   ((value
@@ -43,7 +43,7 @@
     accessor: paralation))
   constructor: make-field)
 
-(defmethod generic-prin ((o <field>) str)
+(defmethod generic-print ((o <field>) str)
   (sformat str "#F~a" (convert (value o) <cons>))
   o)
 
@@ -65,7 +65,7 @@
     accessor: to-key))
   constructor: make-mapping)
 
-(defmethod generic-prin ((m <mapping>) str)
+(defmethod generic-print ((m <mapping>) str)
   (sformat str "#<mapping from ~a to ~a>"
            (from-key m) (to-key m)))
 
