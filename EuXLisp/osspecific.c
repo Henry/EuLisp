@@ -1,11 +1,25 @@
-//  Copyright (c) 1988, by David Michael Betz.
-//  Copyright (c) 1994, by Russell Bradford.
-//  All rights reserved.
+/// Copyright 1988 David Michael Betz
+/// Copyright 1994 Russell Bradford
+/// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
-/// ---                 EuLisp System 'EuXLisp'
+//  This file is part of
+/// ---                           EuLisp System 'EuXLisp'
 ///-----------------------------------------------------------------------------
-///  File: osspecific.c
-///  Description: OS specific routines
+//
+//  EuXLisp is free software: you can redistribute it and/or modify it under the
+//  terms of the GNU General Public License version 2 as published by the Free
+//  Software Foundation.
+//
+//  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+//  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+//  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with
+//  this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+///-----------------------------------------------------------------------------
+///  Title: OS specific functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
@@ -61,7 +75,7 @@ static void osflushn();
 void ostputc(), ostputs(), oscheck(), osflush();
 void check_if_disabled();
 
-// main - the main routine
+// main - the main function
 int main(int argc, char *argv[])
 {
     xlmain(argc, argv);

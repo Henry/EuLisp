@@ -1,5 +1,36 @@
-;;; converter.em
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;;  Title: EuLisp Level-0 convert module
+;;;  Description:
+;;    from\to  string  list  vector  table  symbol  char  integer  float  number
+;;
+;;    string      X     X       X      X      X                             X
+;;    list        X     X       X      X
+;;    vector      X     X       X      X
+;;    table       X     X       X      X
+;;    symbol      X                           X
+;;    char        X                           X       X       X
+;;    integer     X                           X       X       X       X
+;;    float       X                           X               X       X
+;;;-----------------------------------------------------------------------------
 
 (defmodule convert
   (syntax (macros)
@@ -198,15 +229,6 @@
 ((setter converter) <table> converter->table)
 ((setter converter) <hash-table> converter->table)
 
-)
-
-from\to   string  list  vector  table  symbol  char  integer  float  number
-
-string       X     X       X      X      X                             X
-list         X     X       X      X
-vector       X     X       X      X
-table        X     X       X      X
-symbol       X                           X
-char         X                           X       X       X
-integer      X                           X       X       X       X
-float        X                           X               X       X
+;;;-----------------------------------------------------------------------------
+)  ;; End of module convert
+;;;-----------------------------------------------------------------------------

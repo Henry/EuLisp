@@ -19,11 +19,6 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: Lisp Part of thread implementation
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Jens Bimberg
 ;;;-----------------------------------------------------------------------------
 (defmodule thread
@@ -392,4 +387,7 @@
                 (free-expired-waiters this-time))))
 
 (start-keep-up-thread (make-thread keep-up))
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module thread
+;;;-----------------------------------------------------------------------------

@@ -1,12 +1,30 @@
+### Copyright 1994 Russell Bradford
+### Copyright 2010 Henry G. Weller
 ###-----------------------------------------------------------------------------
-### ---                   EuLisp System 'EuXLisp'
+##  This file is part of
+### ---                           EuLisp System 'Eu2C'
 ###-----------------------------------------------------------------------------
-
+##
+##  Eu2C is free software: you can redistribute it and/or modify it under the
+##  terms of the GNU General Public License version 2 as published by the Free
+##  Software Foundation.
+##
+##  Eu2C is distributed in the hope that it will be useful, but WITHOUT ANY
+##  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+##  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+##  details.
+##
+##  You should have received a copy of the GNU General Public License along with
+##  this program.  If not, see <http://www.gnu.org/licenses/>.
+##
 ###-----------------------------------------------------------------------------
-### EuXLisp executable Makefile
-###  Tested on sunos, aix, solaris, linux, ultrix, stardent, irix.
+### Title: EuXLisp Top-level Makefile
+###  Note: set Eu2CROOT e.g. export Eu2CROOT=`pwd`
+### Usage: make
+###  Notes:
+##    Originally tested on sunos, aix, solaris, Linux, ultrix, stardent, irix,
+##    but this version only on Linux.
 ###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
 

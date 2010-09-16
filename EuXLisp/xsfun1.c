@@ -1,7 +1,26 @@
-// xsfun1.c - xscheme built-in functions - part 1
-/*     Copyright (c) 1988, by David Michael Betz
-       All Rights Reserved */
-// Euscheme code Copyright (c) 1994 Russell Bradford
+/// Copyright 1988 David Michael Betz
+/// Copyright 1994 Russell Bradford
+/// Copyright 2010 Henry G. Weller
+///-----------------------------------------------------------------------------
+//  This file is part of
+/// ---                           EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+//
+//  EuXLisp is free software: you can redistribute it and/or modify it under the
+//  terms of the GNU General Public License version 2 as published by the Free
+//  Software Foundation.
+//
+//  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+//  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+//  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with
+//  this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+///-----------------------------------------------------------------------------
+///  Title: xscheme built-in functions - part 1
+///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
 
@@ -223,7 +242,7 @@ LVAL xcddddr()
     return (cxr("dddd"));
 }
 
-// cxr - common car/cdr routine
+// cxr - common car/cdr function
 static LVAL cxr(char *adstr)
 {
     static char *cfn_name = "c[ad]r";
@@ -506,7 +525,7 @@ LVAL xmemq()
     return (member(eq));
 }
 
-// member - common routine for member/memv/memq
+// member - common function for member/memv/memq
 LVAL xlmember(LVAL x, LVAL list, int (*fcn) (LVAL a, LVAL b))
 {
     LVAL val;
@@ -554,7 +573,7 @@ LVAL xassq()
     return (assoc(eq));
 }
 
-// assoc - common routine for assoc/assv/assq
+// assoc - common function for assoc/assv/assq
 LVAL assoc(int (*fcn) ())
 {
     static char *cfn_name = "assoc/assv/assq";

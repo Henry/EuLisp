@@ -1,11 +1,25 @@
-//  Copyright (c) 1988, by David Michael Betz.
-//  Copyright (c) 1994, by Russell Bradford.
-//  All rights reserved.
+/// Copyright 1988 David Michael Betz
+/// Copyright 1994 Russell Bradford
+/// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
-/// ---                 EuLisp System 'EuXLisp'
+//  This file is part of
+/// ---                           EuLisp System 'EuXLisp'
 ///-----------------------------------------------------------------------------
-///  File: xscheme.h
-///  Description: xscheme definitions
+//
+//  EuXLisp is free software: you can redistribute it and/or modify it under the
+//  terms of the GNU General Public License version 2 as published by the Free
+//  Software Foundation.
+//
+//  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+//  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+//  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with
+//  this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+///-----------------------------------------------------------------------------
+///  Title: xscheme definitions
 ///-----------------------------------------------------------------------------
 #ifndef XSCHEME_H
 #define XSCHEME_H
@@ -54,8 +68,8 @@
 // AFMT         printf format for addresses ("%x" or "%lx")
 // OFFTYPE      number the size of an address (int or long)
 // FIXTYPE      data type for fixed point numbers (long)
-// ITYPE        fixed point input conversion routine type (long atol())
-// ICNV         fixed point input conversion routine (atol)
+// ITYPE        fixed point input conversion function type (long atol())
+// ICNV         fixed point input conversion function (atol)
 // IFMT         printf format for fixed point numbers ("%ld")
 // FLOTYPE      data type for floating point numbers (float)
 // FFMT         printf format for floating point numbers (%.15g)
@@ -497,7 +511,7 @@ extern LVAL obarray;            // prototype symbols
 
 #define xlenter(name)           xlenter_module(name,current_module)
 
-// external routine declarations
+// external function declarations
 #include "xsproto.h"
 
 ///-----------------------------------------------------------------------------

@@ -1,11 +1,25 @@
-//  Copyright (c) 1988, by David Michael Betz.
-//  Copyright (c) 1994, by Russell Bradford.
-//  All rights reserved.
+/// Copyright 1988 David Michael Betz
+/// Copyright 1994 Russell Bradford
+/// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
-/// ---                 EuLisp System 'EuXLisp'
+//  This file is part of
+/// ---                           EuLisp System 'EuXLisp'
 ///-----------------------------------------------------------------------------
-///  File: xscom.c
-///  Description: A simple scheme bytecode compiler
+//
+//  EuXLisp is free software: you can redistribute it and/or modify it under the
+//  terms of the GNU General Public License version 2 as published by the Free
+//  Software Foundation.
+//
+//  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+//  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+//  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with
+//  this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+///-----------------------------------------------------------------------------
+///  Title: A simple scheme bytecode compiler
 ///-----------------------------------------------------------------------------
 
 #define NOISY_LOAD
@@ -418,7 +432,7 @@ static void do_deflocal(LVAL form, int cont)
 }
 
 
-// define1 - helper routine for do_define
+// define1 - helper function for do_define
 static void define1(LVAL list, LVAL body, int cont)
 {
     // handle nested definitions
@@ -939,7 +953,7 @@ static void do_letstar(LVAL form, int cont)
     }
 }
 
-// letstar1 - helper routine for let*
+// letstar1 - helper function for let*
 static void letstar1(LVAL blist, LVAL body)
 {
     // push the next initialization expressions

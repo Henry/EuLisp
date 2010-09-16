@@ -1,32 +1,28 @@
-;;; collection.em
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
-;;;
-;;; many are inefficient and could do with a rewrite
-;;;
-;;; the semantics of some (tables, in particular) may be awry
-
-;; <collection-condition>
-;; accumulate
-;; accumulate1
-;; all?
-;; any?
-;; collection?
-;; concatenate
-;; delete
-;; do
-;; element
-;; (setter element)
-;; empty?
-;; fill
-;; map
-;; member
-;; remove
-;; reverse
-;; sequence?
-;; size
-;; and converters
-
-;; lists, strings, vectors, tables
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;;  Title: EuLisp Level-0 collection module
+;;;  Problems:
+;;    * Many are inefficient and could do with a rewrite.
+;;    * The semantics of some (tables, in particular) may be awry.
+;;;-----------------------------------------------------------------------------
 
 (defmodule collection
   (import (root
@@ -655,4 +651,6 @@
 (define-method (slice (list <list>) (s <int>) (e <int>))
                (slice-list list s e))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module collection
+;;;-----------------------------------------------------------------------------

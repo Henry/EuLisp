@@ -18,7 +18,7 @@
 ##  this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 ###-----------------------------------------------------------------------------
-###  Title: Eu2C Top-level Makefile
+### Title: Eu2C Top-level Makefile
 ###  Note: set Eu2CROOT e.g. export Eu2CROOT=`pwd`
 ### Usage: make [options]
 ### Options:

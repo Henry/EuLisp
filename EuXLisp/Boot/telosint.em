@@ -1,52 +1,68 @@
-;;; telosint.em
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
-;;;
-;;; symbols not usually exported from telos.em
-;;; mainly introspective stuff
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;;  Title: Symbols not usually exported from telos level-0
+;;;  Description:
+;;    Mainly introspective functionality.
+;;;-----------------------------------------------------------------------------
 
 (defmodule telosint
   (import (root)
-   export
-   (
-    next-methods
-    arg-list
-    class-of
-    class-name
-    class-superclasses
-    class-precedence-list
-    class-slots
-    class-keywords
-    set-class-keywords!
-    class-subclasses
-    class-instance-size
-    class-abstract?
-    class?
-    subclass?
-    generic-name
-    generic-args
-    set-generic-args!
-    generic-optargs?
-    generic-methods
-    generic-cache1
-    generic-cache2
-    make-generic
-    make-method
-    method-generic
-    method-function
-    method-domain
-    add-method
-    slot-name
-    slot-keyword
-    slot-default
-    set-slot-default!
-    slot-required?
-    set-slot-required?!
-    find-slot-index
-    initialize-object
-    initialize-class
-    builtin-make-table
-    display-class-name)
-   )
+   export (next-methods
+           arg-list
+           class-of
+           class-name
+           class-superclasses
+           class-precedence-list
+           class-slots
+           class-keywords
+           set-class-keywords!
+           class-subclasses
+           class-instance-size
+           class-abstract?
+           class?
+           subclass?
+           generic-name
+           generic-args
+           set-generic-args!
+           generic-optargs?
+           generic-methods
+           generic-cache1
+           generic-cache2
+           make-generic
+           make-method
+           method-generic
+           method-function
+           method-domain
+           add-method
+           slot-name
+           slot-keyword
+           slot-default
+           set-slot-default!
+           slot-required?
+           set-slot-required?!
+           find-slot-index
+           initialize-object
+           initialize-class
+           builtin-make-table
+           display-class-name))
 
 ; install <class> slot defaults
 (deflocal slots (class-slots <class>))
@@ -257,4 +273,7 @@
 
 (define (display-class-name obj stream)
         (%display (strip<> (class-name (class-of obj))) stream))
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module telosint
+;;;-----------------------------------------------------------------------------

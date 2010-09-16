@@ -19,11 +19,8 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;;  Title: collection consist of list, string, vector, table,
-;;;  Description: collection gives the functionality described in A.2
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;;  Description:
+;;    collection gives the functionality described in A.2
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
@@ -67,5 +64,5 @@
 (defmethod sequence? (object) ())
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+) ;; End of module collection
 ;;;-----------------------------------------------------------------------------

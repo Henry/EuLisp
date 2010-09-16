@@ -1,8 +1,29 @@
-// this code possibly written by David Halls
-// socket.c -- functions for socket manipulation
-// Euscheme code Copyright (c) 1994 Russell Bradford
-
-// WARNING: this code is under development, and is possibly buggy
+/// Copyright 1994 Russell Bradford
+/// Copyright 2010 Henry G. Weller
+///-----------------------------------------------------------------------------
+//  This file is part of
+/// ---                           EuLisp System 'EuXLisp'
+///-----------------------------------------------------------------------------
+//
+//  EuXLisp is free software: you can redistribute it and/or modify it under the
+//  terms of the GNU General Public License version 2 as published by the Free
+//  Software Foundation.
+//
+//  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+//  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+//  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with
+//  this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+///-----------------------------------------------------------------------------
+///  Title: Socket manipulation
+///  Notes:
+//    This code possibly written by David Halls.
+///  WARNING:
+//    this code is under development, and is possibly buggy
+///-----------------------------------------------------------------------------
 
 #ifdef SOCK
 
@@ -465,7 +486,7 @@ LVAL socket_ip_to_host()
     return (cvstring(hp->h_name));
 }
 
-// convert to stream to get I/O routines for free
+// convert to stream to get I/O functions for free
 
 // (socket-convert-to-stream fd)
 LVAL socket_convert_to_stream()
@@ -901,7 +922,7 @@ bool_t xdr_recv_string(handle, ip, len)
     return retval;
 }
 
-// entry routines for XDR I/O to and from streams
+// entry functions for XDR I/O to and from streams
 
 // (stream-xdr-send-int stream val)
 LVAL stream_xdr_send_int()

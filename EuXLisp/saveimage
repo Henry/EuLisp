@@ -1,5 +1,5 @@
 ;; Load all the level-0 modules, enter the user module and save the image
 (gc 0 3)
-(!> level0)
+(!> level-0)
 (!> user)
 (save "euxlisp.wks")

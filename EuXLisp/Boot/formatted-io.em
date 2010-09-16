@@ -1,14 +1,29 @@
-;;; Copyright (c) 1994 Russell Bradford
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'EuXLisp'
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
 ;;;-----------------------------------------------------------------------------
-;;;  File: format.em
-;;;  Library: level0
-;;;  Author: Russell Bradford
-;;;  Description: formatted output
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;;  Title: EuLisp Level-0 formatted-io module
+;;;  Description:
+;;    formatted output
 ;;;-----------------------------------------------------------------------------
 
-(defmodule format
+(defmodule formatted-io
   (import (root
            condition
            thread
@@ -298,4 +313,6 @@
               sofar
             (read-string stream (cons ch sofar)))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module formatted-io
+;;;-----------------------------------------------------------------------------

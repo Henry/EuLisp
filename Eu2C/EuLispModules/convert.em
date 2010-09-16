@@ -18,41 +18,25 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: collection consist of list, string, vector, table,
+;;;  Title: EuLisp Level-0 convert module
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    collection consist of list, string, vector, table,
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
 (defmodule convert
-
-  (import
-   (apply
-    (rename ((%class-converter converter ))
-            tail)
-    eulisp-kernel
-    ;;standard-generic-function
-    )
-
-   syntax
-   (tail
-    apply
-    ;;syntax-0
-    ;;setf
-    )
-
-   export
-   (convert
-    converter)
-
-   )
+  (import (apply
+           (rename ((%class-converter
+                     converter ))
+                   tail)
+           eulisp-kernel)
+   syntax (tail
+           apply)
+   export (convert
+           converter))
 
 ;;  (%define-function (converter <function>) ((class <class>))
 ;;    (%class-converter class))
-
 
 (defun convert (object class)
   ((converter class) object))
@@ -68,4 +52,6 @@
     ((var var1) (atom? <object>))
     ((var var2) (atom? <class>)))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module convert
+;;;-----------------------------------------------------------------------------

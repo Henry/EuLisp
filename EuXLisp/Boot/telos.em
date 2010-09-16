@@ -1,114 +1,133 @@
-;;; telos.em
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;;  Title: EuLisp Level-0 telos module
+;;;-----------------------------------------------------------------------------
 
 (defmodule telos
-  (import (root telosint)
-   export ;; classes
-   (
-    <object>
-    <class>
-    <simple-class>
-    <list>
-    <cons>
-    <null>
-    <number>
-    <integer>
-    <int>
-    <float>
-    <double-float>
-    <symbol>
-    <keyword>
-    <string>
-    <stream>
-    <input-stream>
-    <output-stream>
-    <i/o-stream>
-    <vector>
-    <char>
-    <simple-char>
-    <promise>
-    <env>
-    <code>
-    <module>
-    <table>
-    <hash-table>
-    <function>
-    <simple-function>
-    <closure>
-    <subr>
-    <continuation>
-    <generic>
-    <simple-generic>
-    <xsubr>
-    <csubr>
-    <method>
-    <simple-method>
-    <slot>
-    <local-slot>
+  (import (root
+           telosint)
+   export (;; classes
+           <object>
+           <class>
+           <simple-class>
+           <list>
+           <cons>
+           <null>
+           <number>
+           <integer>
+           <int>
+           <float>
+           <double-float>
+           <symbol>
+           <keyword>
+           <string>
+           <stream>
+           <input-stream>
+           <output-stream>
+           <i/o-stream>
+           <vector>
+           <char>
+           <simple-char>
+           <promise>
+           <env>
+           <code>
+           <module>
+           <table>
+           <hash-table>
+           <function>
+           <simple-function>
+           <closure>
+           <subr>
+           <continuation>
+           <generic>
+           <simple-generic>
+           <xsubr>
+           <csubr>
+           <method>
+           <simple-method>
+           <slot>
+           <local-slot>
 
-    generic-print
-    sprin
-    sprint
-    prin
-    print
+           generic-print
+           sprin
+           sprint
+           prin
+           print
 
-    generic-write
-    swrite
-    write
+           generic-write
+           swrite
+           write
 
-    wait
+           wait
 
-    ; specials
-    defclass
-    call-next-method
-    next-method?
+           ; specials
+           defclass
+           call-next-method
+           next-method?
 
-    ; functions
-    make
-    allocate
-    initialize
+           ; functions
+           make
+           allocate
+           initialize
 
-    ; debugging
-    describe
-    class-hierarchy
+           ; debugging
+           describe
+           class-hierarchy
 
-    current-print-depth
-    )
-   export ;; from telosint, while developing
-   (
-    class-of
-    class-name
-    class-superclasses
-    class-precedence-list
-    class-slots
-    class-keywords
-    ;   set-class-keywords!
-    class-subclasses
-    class-instance-size
-    class-abstract?
-    class?
-    subclass?
-    generic-name
-    generic-args
-    generic-methods
-    generic-cache1
-    generic-cache2
-    make-generic
-    make-method
-    method-generic
-    method-function
-    method-domain
-    add-method
-    slot-name
-    slot-keyword
-    slot-default
-    ;   set-slot-default!
-    slot-required?
-    ;   set-slot-required?!
-    ;   find-slot-index
-    ;   initialize-object
-    ;   initialize-class
-    ))
+           current-print-depth
+           )
+   export (;; from telosint, while developing
+           class-of
+           class-name
+           class-superclasses
+           class-precedence-list
+           class-slots
+           class-keywords
+           ;   set-class-keywords!
+           class-subclasses
+           class-instance-size
+           class-abstract?
+           class?
+           subclass?
+           generic-name
+           generic-args
+           generic-methods
+           generic-cache1
+           generic-cache2
+           make-generic
+           make-method
+           method-generic
+           method-function
+           method-domain
+           add-method
+           slot-name
+           slot-keyword
+           slot-default
+           ;   set-slot-default!
+           slot-required?
+           ;   set-slot-required?!
+           ;   find-slot-index
+           ;   initialize-object
+           ;   initialize-class
+           ))
 
 (define (make cl . inits)
         (let ((maker (table-ref builtin-make-table cl)))
@@ -273,4 +292,7 @@
             (write-vector1 obj s (+ index 1) size gfun))))
 
 (define-generic (wait thread timeout))
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module telos
+;;;-----------------------------------------------------------------------------

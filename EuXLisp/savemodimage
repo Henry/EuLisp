@@ -1,5 +1,5 @@
 ;; Load all the level-0 modules, enter the root module and save the image
 (gc 0 3)
-(!> level0)
+(!> level-0)
 (!> root)
 (save "euxlisp_mod.wks")

@@ -1,11 +1,25 @@
-//  Copyright (c) 1988, by David Michael Betz.
-//  Copyright (c) 1994, by Russell Bradford.
-//  All rights reserved.
+/// Copyright 1988 David Michael Betz
+/// Copyright 1994 Russell Bradford
+/// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
-/// ---                 EuLisp System 'EuXLisp'
+//  This file is part of
+/// ---                           EuLisp System 'EuXLisp'
 ///-----------------------------------------------------------------------------
-///  File: xsimage.c
-///  Description: memory image save/restore functions
+//
+//  EuXLisp is free software: you can redistribute it and/or modify it under the
+//  terms of the GNU General Public License version 2 as published by the Free
+//  Software Foundation.
+//
+//  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+//  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+//  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+//  details.
+//
+//  You should have received a copy of the GNU General Public License along with
+//  this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+///-----------------------------------------------------------------------------
+///  Title: memory image save/restore functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
@@ -41,7 +55,7 @@ extern FUNDEF funtab[];
 static OFFTYPE off, foff;
 static FILE *fp;
 
-// external routines
+// external functions
 extern FILE *osbopen();
 
 static char *image_search_path[] = { IMAGE_SEARCH_PATH, 0 };

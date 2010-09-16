@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title:
+;;;  Title: EuLisp Level-0 compare module
 ;;;  Description:
 ;;;  Problems:
 ;;    The default method for equal cannot work yet because an additional slot in
@@ -298,5 +298,5 @@
     ((var var2) (atom? <object>)))))
 
 ;;;-----------------------------------------------------------------------------
-) ; end of compare.am
+)  ;; End of module compare
 ;;;-----------------------------------------------------------------------------
