@@ -32,7 +32,7 @@ extern LVAL s_letname, s_progn, s_compile, s_setmodule, s_getmodule, s_reintern;
 extern LVAL s_module_directives;
 extern LVAL s_binary_plus, s_binary_minus, s_binary_times, s_binary_divide;
 extern LVAL s_quotient, s_binary_less, s_binary_equal, s_current_thread;
-extern LVAL s_thread_class, s_qualified_symbols, s_structure;
+extern LVAL s_thread_class, s_qualified_symbols;
 extern LVAL s_set_generic_args, s_macro_error, s_supplied_env, s_debug;
 extern LVAL s_xlframe, s_gcmsgs, s_arg_list, s_next_methods;
 #ifndef NO_CHECK_REF

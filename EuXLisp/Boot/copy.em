@@ -9,16 +9,9 @@
 
 (define-generic (deep-copy obj))
 
-(define-method (deep-copy (obj <object>))
-               obj)
-
 (define-generic (shallow-copy obj))
 
-(define-method (shallow-copy (obj <object>))
-               obj)
-
-;; structure classes
-(define-method (deep-copy (s <structure>))
+(define-method (deep-copy (s <object>))
                (let ((cl (class-of s)))
                  (structure-copy-loop
                   (allocate cl ())
@@ -27,7 +20,7 @@
                   (class-instance-size cl)
                   deep-copy)))
 
-(define-method (shallow-copy (s <structure>))
+(define-method (shallow-copy (s <object>))
                (let ((cl (class-of s)))
                  (structure-copy-loop
                   (allocate cl ())

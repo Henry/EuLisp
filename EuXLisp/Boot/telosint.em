@@ -54,7 +54,7 @@
 (set-slot-default! (list-ref slots 0)
                    (lambda () 'anon)) ; name
 (set-slot-default! (list-ref slots 1)
-                   (lambda () (list <structure>))) ; superclasses
+                   (lambda () (list <object>))) ; superclasses
 (set-slot-default! (list-ref slots 5)
                    (lambda () ()))    ; subclasses
 (set-slot-default! (list-ref slots 7)
@@ -66,7 +66,7 @@
 (set-slot-default! (list-ref sslots 0)
                    (lambda () 'anon)) ; name
 (set-slot-default! (list-ref sslots 1)
-                   (lambda () (list <structure>))) ; superclasses
+                   (lambda () (list <object>))) ; superclasses
 (set-slot-default! (list-ref sslots 5)
                    (lambda () ()))    ; subclasses
 (set-slot-default! (list-ref sslots 7)

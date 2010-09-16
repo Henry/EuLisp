@@ -331,7 +331,6 @@
     <simple-method>
     <slot>
     <local-slot>
-    <structure>
 
     generic-print
     generic-write

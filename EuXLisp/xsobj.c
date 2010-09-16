@@ -403,9 +403,6 @@ LVAL xinitialize_class()
     static char *cfn_name = "initialize <class>";
     LVAL obj, inits, super, val;
     int size;
-    #if 0
-    extern LVAL s_structure;
-    #endif
 
     obj = xlgetarg();
     inits = xlgalist();
@@ -429,14 +426,8 @@ LVAL xinitialize_class()
         super, s_telos_error);
 
     #if 0
-    #if 0
-    if (!xlsubclassp(super, getvalue(s_structure)))
-        xlcerror("only subclassing of <structure> allowed at level 0", super,
-        s_telos_error);
-    #else
     if (getivar(super, ABSTRACTP) == NIL)
         xlcerror("only subclassing of abstract classes", super, s_telos_error);
-    #endif
     #endif
 
     val = cons(obj, getivar(super, CPL));
@@ -1076,8 +1067,6 @@ static void init_builtin_classes()
 
     slot_cl = init_class(-1, "<slot>", object, true);
     init_class(SLOT, "<local-slot>", slot_cl, NIL);
-
-    init_class(-1, "<structure>", object, true);
 }
 
 void xloinit()

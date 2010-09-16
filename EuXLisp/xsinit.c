@@ -39,7 +39,7 @@ LVAL s_letname, s_progn, s_compile, s_setmodule, s_getmodule, s_reintern;
 LVAL s_module_directives;
 LVAL s_binary_plus, s_binary_minus, s_binary_times, s_binary_divide;
 LVAL s_quotient, s_binary_less, s_binary_equal, s_current_thread;
-LVAL s_thread_class, s_qualified_symbols, s_structure, s_set_generic_args;
+LVAL s_thread_class, s_qualified_symbols, s_set_generic_args;
 LVAL s_macro_error, s_supplied_env, s_debug, s_xlframe, s_gcmsgs;
 LVAL s_arg_list, s_next_methods;
 #ifndef NO_CHECK_REF
@@ -538,8 +538,6 @@ void xlsymbols()
     s_current_thread = xlenter("current-self");
     s_thread_class = xlenter("<thread>");
     s_qualified_symbols = xlenter("qualified-symbols?");
-
-    s_structure = xlenter("<structure>");
 
     s_set_generic_args = xlenter("set-generic-args!");
 

@@ -45,7 +45,6 @@
     <simple-method>
     <slot>
     <local-slot>
-    <structure>
 
     generic-print
     sprin
