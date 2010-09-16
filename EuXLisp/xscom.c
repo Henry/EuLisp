@@ -3998,6 +3998,38 @@ static void do_defclass(LVAL form, int cont)
     drop(1);
 }
 
+static int do_supercondition(LVAL super)
+{
+    //***HGW and check that any superclass provided is a <condition>
+
+    LVAL supercond = super;
+    if (super == NIL)
+    {
+        supercond = xlenter_module("<condition>", get_module("condition"));
+    }
+
+    putcbyte(OP_NIL);
+    putcbyte(OP_PUSH);
+
+    int lev, off;
+    if (findvariable(supercond, &lev, &off))
+    {
+        cd_evariable(OP_EREF, lev, off);
+    }
+    else
+    {
+        cd_variable(OP_GREF, supercond);
+    }
+
+    putcbyte(OP_CONS);
+    putcbyte(OP_PUSH);
+
+    do_literal(s_superclasses, C_NEXT);
+    putcbyte(OP_PUSH);
+
+    return 2;
+}
+
 static void do_defcondition(LVAL form, int cont)
 {
     cpush(form);
@@ -4031,10 +4063,6 @@ static void do_defcondition(LVAL form, int cont)
         xlerror("bad slot descriptions in defclass", form);
     }
 
-    //***HGW Need to make this the default superclass
-    //***HGW and check that any superclass provided is a <condition>
-    //***HGW LVAL s_condition = xlenter_module("<condition>", get_module("condition"));
-
     LVAL classopts = cdr(cdr(cdr(form)));
 
     check_slot_options(slots);
@@ -4046,7 +4074,7 @@ static void do_defcondition(LVAL form, int cont)
     int nargs = 0;
     nargs += do_keywords(slots, classopts);
     nargs += do_slots(slots);
-    nargs += do_superclass(super);
+    nargs += do_supercondition(super);
     nargs += do_abstractp(classopts);
 
     do_literal(name, C_NEXT);

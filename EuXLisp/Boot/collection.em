@@ -60,7 +60,7 @@
            size
            slice))
 
-(defcondition <collection-condition> <condition>
+(defcondition <collection-condition> ()
   ()
   abstract?: t)
 
