@@ -3,8 +3,14 @@
 
 (defmodule convert
   (syntax (macros)
-   import (root setter condcl thread)
-   export (converter convert <conversion-condition> <no-converter>))
+   import (root
+           setter
+           condition
+           thread)
+   export (converter
+           convert
+           <conversion-condition>
+           <no-converter>))
 
 (deflocal converter-table (make-table))
 
@@ -15,13 +21,13 @@
  (lambda (cl fun)
    ((setter table-ref) converter-table cl fun)))
 
-;;  (defcondition <conversion-condition> ())
-(defclass <conversion-condition> (<condition>)
+(defcondition <conversion-condition> <condition>
   ()
   abstract?: t)
+
 (defcondition <no-converter> <conversion-condition>
-              source ()
-              class ())
+              ((source default: ())
+               (class default: ())))
 
 (define (convert obj cl)
         (if (eq (class-of obj) cl)

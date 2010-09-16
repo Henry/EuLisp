@@ -2,16 +2,45 @@
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 (defmodule thread
-  (import (root telos telosint condcl macros)
-   export
-   ( <thread> <simple-thread>
-              make-thread thread? thread-reschedule current-thread thread-kill
-              thread-queue current-thread thread-start thread-value thread-state
-              <thread-condition> <thread-error> <thread-general-error>
-              <thread-already-started> <lock> <simple-lock> make-lock lock? lock unlock
-              <lock-condition> <lock-error> wait <wait-condition> <wait-error>
-              let/cc with-handler unwind-protect <wrong-condition-class>
-              signal error cerror))
+  (import (root
+           telos
+           telosint
+           condition
+           macros)
+   export (<thread>
+           <simple-thread>
+           make-thread
+           thread?
+           thread-reschedule
+           current-thread
+           thread-kill
+           thread-queue
+           current-thread
+           thread-start
+           thread-value
+           thread-state
+           <thread-condition>
+           <thread-error>
+           <thread-general-error>
+           <thread-already-started>
+           <lock>
+           <simple-lock>
+           make-lock
+           lock?
+           lock
+           unlock
+           <lock-condition>
+           <lock-error>
+           wait
+           <wait-condition>
+           <wait-error>
+           let/cc
+           with-handler
+           unwind-protect
+           <wrong-condition-class>
+           signal
+           error
+           cerror))
 
 (define (no-thread op . args)
         no-state:)
@@ -41,7 +70,7 @@
   predicate: thread?
   abstract?: t)
 
-(defclass <simple-thread> (<thread>) ())
+(defclass <simple-thread> <thread> ())
 
 ;; avoid calling make, which calls mkthread
 (define (%make-thread self cont)
@@ -103,18 +132,17 @@
 (define (get-uwp-frame-uwps uwpf) (cdr uwpf))
 (define (set-uwp-frame-uwps uwpf val) (set-cdr! uwpf val))
 
-;;  (defcondition <thread-condition> <condition>)
-(defclass <thread-condition> (<condition>)
+(defcondition <thread-condition> <condition>
   ()
   abstract?: t)
-;;  (defcondition <thread-error> <thread-condition>
-;;    value "no-value")
-(defclass <thread-error> (<thread-condition>)
+
+(defcondition <thread-error> <thread-condition>
   ((value reader: thread-error-value
           keyword: value:))
   abstract?: t)
-(defcondition <thread-general-error> <thread-error>)
-(defcondition <thread-already-started> <thread-error>)
+
+(defcondition <thread-general-error> <thread-error> ())
+(defcondition <thread-already-started> <thread-error> ())
 
 (define (nconc a b)
         (if (null? a)
@@ -397,7 +425,7 @@
   predicate: lock?
   abstract?: t)
 
-(defclass <simple-lock> (<lock>)
+(defclass <simple-lock> <lock>
   ()
   constructor: (make-lock))
 
@@ -415,12 +443,12 @@
                (%display ">" stream)
                l)
 
-;;  (defcondition <lock-condition> <condition>)
-(defclass <lock-condition> (<condition>)
+(defcondition <lock-condition> <condition>
   ()
   abstract?: t)
+
 (defcondition <lock-error> <lock-condition>
-              value "no-value")
+              ((value default: "no-value")))
 
 (define (add-thread-to-lock-queue lock thread)
         (set-lock-queue!
@@ -487,12 +515,12 @@
 
 ;; waiting
 
-;;  (defcondition <wait-condition> <condition>)
-(defclass <wait-condition> (<condition>)
+(defcondition <wait-condition> <condition>
   ()
   abstract?: t)
+
 (defcondition <wait-error> <wait-condition>
-              value "no-value")
+              ((value default: "no-value")))
 
 ;; ()       poll
 ;; t       suspend until ready
@@ -584,7 +612,7 @@
             (set-handlers thread (cdr handlers))))
         value)
 
-(defcondition <wrong-condition-class> <thread-error>)
+(defcondition <wrong-condition-class> <thread-error> ())
 
 (define (signal condition resume . thread)
         (let ((current (current-thread)))

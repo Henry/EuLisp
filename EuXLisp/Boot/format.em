@@ -7,18 +7,24 @@
 ;;;  Author: Russell Bradford
 ;;;  Description: formatted output
 ;;;-----------------------------------------------------------------------------
+
 (defmodule format
-  (import (root condcl thread setter convert)
-   export (sformat format fmt))
+  (import (root
+           condition
+           thread
+           setter
+           convert)
+   export (sformat
+           format
+           fmt))
 
 (deflocal escape-char #\~)
 
-;; (defcondition <stream-error> <error>) but abstract
-(defclass <stream-error> (<error>)
+(defcondition <stream-error> <error>
   ()
   abstract?: t)
 
-(defcondition <format-error> <stream-error>)
+(defcondition <format-error> <stream-error> ())
 
 (define (format-error msg val)
         (error <format-error> msg value: val))

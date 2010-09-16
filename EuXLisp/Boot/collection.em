@@ -1,4 +1,4 @@
-;;; collect.em
+;;; collection.em
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 ;;;
 ;;; many are inefficient and could do with a rewrite
@@ -28,21 +28,44 @@
 
 ;; lists, strings, vectors, tables
 
-(defmodule collect
-  (import (root macros0 thread telos condcl setter convert macros copy list)
-   export ( <collection-condition> <collection-error>
-                                   collection? sequence?
-                                   accumulate accumulate1
-                                   all? any?
-                                   concatenate delete do element empty?
-                                   fill map member remove reverse size slice))
+(defmodule collection
+  (import (root
+           macros0
+           thread
+           telos
+           condition
+           setter
+           convert
+           macros
+           copy
+           list)
+   export (<collection-condition>
+           <collection-error>
+           collection?
+           sequence?
+           accumulate
+           accumulate1
+           all?
+           any?
+           concatenate
+           delete
+           do
+           element
+           empty?
+           fill
+           map
+           member
+           remove
+           reverse
+           size
+           slice))
 
-;;  (defcondition <collection-condition> <condition>)
-(defclass <collection-condition> (<condition>)
+(defcondition <collection-condition> <condition>
   ()
   abstract?: t)
+
 (defcondition <collection-error> <collection-condition>
-              value "no value")
+  ((value default: "no-value")))
 
 (define (missing-op name val)
         (error

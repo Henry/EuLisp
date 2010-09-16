@@ -19,10 +19,10 @@
     telosint
     setter
     convert
-    condcl
-    arith
+    condition
+    number
     compare
-    collect
+    collection
     copy
     format
     math)

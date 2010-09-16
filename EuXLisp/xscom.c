@@ -3153,13 +3153,13 @@ static int do_superclass(LVAL super)
     putcbyte(OP_PUSH);
 
     int lev, off;
-    if (findvariable(car(super), &lev, &off))
+    if (findvariable(super, &lev, &off))
     {
         cd_evariable(OP_EREF, lev, off);
     }
     else
     {
-        cd_variable(OP_GREF, car(super));
+        cd_variable(OP_GREF, super);
     }
 
     putcbyte(OP_CONS);
@@ -3931,7 +3931,7 @@ static void do_defclass(LVAL form, int cont)
     }
 
     LVAL super = car(cdr(form));
-    if (!listp(super) || (super != NIL && !symbolp(car(super))))
+    if (super != NIL && !symbolp(super))
     {
         xlerror("bad superclass in defclass", form);
     }
@@ -3998,95 +3998,139 @@ static void do_defclass(LVAL form, int cont)
     drop(1);
 }
 
-static LVAL defcondition_slot(LVAL name, LVAL value)
-{
-    if (!symbolp(name))
-    {
-        xlerror("condition slot not a symbol", name);
-    }
-
-    char keyname[STRMAX + 1];
-    strcpy(keyname, getstring(getpname(name)));
-
-    int len = strlen(keyname);
-    if (keyname[len - 1] != ':')
-    {
-        keyname[len] = ':';
-        keyname[len + 1] = 0;
-    }
-    LVAL key = xlenter_keyword(keyname);
-
-    LVAL slot = cons(name,
-    cons(s_keyword, cons(key, cons(s_default, cons(value, NIL)))));
-
-    return slot;
-}
-
 static void do_defcondition(LVAL form, int cont)
 {
-    LVAL s_condition = xlenter_module("<condition>", get_module("condcl"));
+    cpush(form);
+
     if (atom(form))
     {
         xlfail("missing body in defcondition", s_syntax_error);
     }
-    LVAL name = car(form);
 
+    LVAL name = car(form);
     if (atom(cdr(form)))
     {
         xlerror("missing supercondition in defcondition", name);
     }
+
     LVAL super = car(cdr(form));
     if (!symbolp(super) && (super != NIL))
     {
         xlerror("bad supercondition in defcondition", super);
     }
 
-    cpush(form);
 
-    LVAL def = cons(s_defclass, NIL);
-    cpush(def);
-
-    rplacd(def, cons(name, NIL));
-    def = cdr(def);
-    if (super == NIL)
+    if (atom(cdr(cdr(form))))
     {
-        rplacd(def, cons(cons(s_condition, NIL), NIL));
+        xlerror("missing slot descriptions in defclass", form);
+    }
+
+    LVAL slots = car(cdr(cdr(form)));
+    if (!listp(slots))
+    {
+        xlerror("bad slot descriptions in defclass", form);
+    }
+
+    //***HGW Need to make this the default superclass
+    //***HGW and check that any superclass provided is a <condition>
+    //***HGW LVAL s_condition = xlenter_module("<condition>", get_module("condition"));
+
+    LVAL classopts = cdr(cdr(cdr(form)));
+
+    check_slot_options(slots);
+    check_class_options(classopts);
+
+    putcbyte(OP_SAVE);
+    int nxt = putcword(0);
+
+    int nargs = 0;
+    nargs += do_keywords(slots, classopts);
+    nargs += do_slots(slots);
+    nargs += do_superclass(super);
+    nargs += do_abstractp(classopts);
+
+    do_literal(name, C_NEXT);
+    putcbyte(OP_PUSH);
+    nargs++;
+
+    do_literal(s_name, C_NEXT);
+    putcbyte(OP_PUSH);
+    nargs++;
+
+    do_class_class(classopts);
+    nargs++;
+
+    cd_variable(OP_GREF, s_make);
+    putcbyte(OP_CALL);
+    putcbyte(nargs);
+    fixup(nxt);
+
+    int lev, off;
+    if (findvariable(name, &lev, &off))
+    {
+        cd_evariable(OP_ESET, lev, off);
     }
     else
     {
-        rplacd(def, cons(cons(super, NIL), NIL));
-    }
-    def = cdr(def);
-
-    rplacd(def, cons(NIL, NIL));
-    def = cdr(def);
-
-    form = cdr(cdr(form));
-    while (form)
-    {
-        if (atom(cdr(form)))
-        {
-            xlerror("malformed defclass option", car(form));
-        }
-
-        if (car(def) == NIL)
-        {
-            rplaca(def, cons(defcondition_slot(car(form), car(cdr(form))),
-            NIL));
-            def = car(def);
-        }
-        else
-        {
-            rplacd(def, cons(defcondition_slot(car(form), car(cdr(form))),
-            NIL));
-            def = cdr(def);
-        }
-        form = cdr(cdr(form));
+        cd_variable(OP_GSET, name);
     }
 
-    do_expr(pop(), cont);
+    do_constructor(name, classopts);
+    do_predicate(name, classopts);
+    do_readers(name, slots);
+    do_writers(name, slots);
+    do_accessors(name, slots);
+
+    do_literal(name, cont);
+
     drop(1);
 
+
+//     cpush(form);
+
+//     LVAL def = cons(s_defclass, NIL);
+//     cpush(def);
+
+//     rplacd(def, cons(name, NIL));
+//     def = cdr(def);
+//     if (super == NIL)
+//     {
+//         rplacd(def, cons(s_condition, NIL));
+//     }
+//     else
+//     {
+//         rplacd(def, cons(super, NIL));
+//     }
+//     def = cdr(def);
+
+//     rplacd(def, cons(NIL, NIL));
+//     def = cdr(def);
+
+//     form = cdr(cdr(form));
+//     while (form)
+//     {
+//         if (atom(cdr(form)))
+//         {
+//             xlerror("malformed defclass option", car(form));
+//         }
+
+//         if (car(def) == NIL)
+//         {
+//             rplaca(def, cons(defcondition_slot(car(form), car(cdr(form))),
+//             NIL));
+//             def = car(def);
+//         }
+//         else
+//         {
+//             rplacd(def, cons(defcondition_slot(car(form), car(cdr(form))),
+//             NIL));
+//             def = cdr(def);
+//         }
+//         form = cdr(cdr(form));
+//     }
+
+//     do_expr(pop(), cont);
+//     drop(1);
 }
 
 LVAL xmacro_error()

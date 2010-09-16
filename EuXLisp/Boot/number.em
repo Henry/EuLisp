@@ -1,12 +1,30 @@
-;;; arith.em
+;;; number.em
 ;;; Euscheme code Copyright (c) 1994 Russell Bradford
 
 ;;; many of these inlined for special cases
 
-(defmodule arith
-  (import (root macros0)
-   export (binary+ binary- binary* binary/ binary% binary-mod
-                   binary-gcd gcd abs + - * / % mod pow zero? quotient remainder))
+(defmodule number
+  (import (root
+           macros0)
+   export (binary+
+           binary-
+           binary*
+           binary/
+           binary%
+           binary-mod
+           binary-gcd
+           gcd
+           abs
+           +
+           -
+           *
+           /
+           %
+           mod
+           pow
+           zero?
+           quotient
+           remainder))
 
 (deflocal %+ +)
 

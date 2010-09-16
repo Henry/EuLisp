@@ -173,10 +173,17 @@
 
 ; let/cc with-handler unwind-protect
 
+;; (put-syntax 'defcondition '%syntax
+;;             (lambda (form)
+;;               (cons 'defcondition
+;;                     (%expand-list (cdr form)))))
+
 (put-syntax 'defcondition '%syntax
             (lambda (form)
               (cons 'defcondition
-                    (%expand-list (cdr form)))))
+                    (cons (or (getprop (cadr form) '%rename) (cadr form))
+                          (cons (%expand-arg-list (caddr form))
+                                (%expand-list (cdddr form)))))))
 
 ;; the following is the original xscheme macro code
 ;;
