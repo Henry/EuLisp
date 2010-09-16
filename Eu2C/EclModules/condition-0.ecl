@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: el-conditions in cl
+;;; Title: el-conditions in cl
 ;;;  Description:
 ;;    fake of the EL-Condition system
 ;;;  Problems:

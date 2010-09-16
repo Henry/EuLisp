@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title:
+;;; Title:
 ;;;  Description:
 ;;    basic-syntax provides all stuff which is needed to write simple macros and
 ;;    to use quasiquote.

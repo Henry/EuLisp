@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Interface to memory management system
+;;; Title: Interface to memory management system
 ;;;  Notes:
 ;;    <pointer-to-void> as defconstant represented, exclude when in %tail
 ;;;  Problems:

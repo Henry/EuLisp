@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: module fpint
+;;; Title: EL-in-CL: module fpint
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------

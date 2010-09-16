@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: definition of classes for the basic data types and implementation
+;;; Title: definition of classes for the basic data types and implementation
 ;;;  Description:
 ;;    macros and aux functions to read in the basic data types
 ;;;  Documentation:

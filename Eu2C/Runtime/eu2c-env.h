@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Optimizations for the SPARC architecture
+/// Title: Optimizations for the SPARC architecture
 ///  Library: Runtime
 ///-----------------------------------------------------------------------------
 #ifndef EU2C_ENV_H

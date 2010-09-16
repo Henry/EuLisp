@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: basic functionality for strings
+;;; Title: basic functionality for strings
 ;;    everything symbol needs to be happy
 ;;;  Description:
 ;;;  Documentation:

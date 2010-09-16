@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Simple timer support
+/// Title: Simple timer support
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///  Description:

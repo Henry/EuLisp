@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: generic functions of default module number
+;;; Title: generic functions of default module number
 ;;;  Description:
 ;;    Module contains all generic functions defined for subclasses of class
 ;;    <number>

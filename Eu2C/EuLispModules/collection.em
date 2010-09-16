@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: collection consist of list, string, vector, table,
+;;; Title: EuLisp Level-0 module collection
 ;;;  Description:
-;;    collection gives the functionality described in A.2
+;;    Collection gives the functionality described in A.2.
+;;    Collection consist of list, string, vector and table.
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 

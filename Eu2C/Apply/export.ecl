@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Handling of explicit and invisible exports.
+;;; Title: Handling of explicit and invisible exports.
 ;;;  Description:
 ;;;  Documentation:
 ;;    All explicitly exported objects are marked as exported by storing a pair

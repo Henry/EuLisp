@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Lattice and Lattice Types Used for Type Inference
+;;; Title: Lattice and Lattice Types Used for Type Inference
 ;;;  Description:
 ;;    Implementation of an complementary lattice with intersection (meet), union
 ;;    (join) and complement of lattice types. Lattice types are used in atomic type

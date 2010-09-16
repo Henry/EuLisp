@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Expand-Literal
+;;; Title: Expand-Literal
 ;;;  Description:
 ;;    Provides things to transform literals into instances of <literal-instance>.
 ;;;  Documentation:

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: all analyses in context function-call
+;;; Title: all analyses in context function-call
 ;;;  Description: fill the var-vector of a statement
 ;;;  Documentation:
 ;;;  Notes:

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: thread internals to be known by signal
+;;; Title: thread internals to be known by signal
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

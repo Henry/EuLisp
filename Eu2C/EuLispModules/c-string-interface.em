@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: interface to c-strings
+;;; Title: interface to c-strings
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

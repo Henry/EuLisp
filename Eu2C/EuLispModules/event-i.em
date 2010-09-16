@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: internal event handling mechanisms
+;;; Title: internal event handling mechanisms
 ;;;  Description:
 ;;    defines the generic function wait
 ;;    and the double float constant ticks-ps-fixnum

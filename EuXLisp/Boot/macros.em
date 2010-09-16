@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 macro functionality
+;;; Title: EuLisp Level-0 macro functionality
 ;;;-----------------------------------------------------------------------------
 
 (defmodule macros

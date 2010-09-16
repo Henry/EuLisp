@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'apropos'
+;;; Title: Example 'apropos'
 ;;;  Compilation:
 ;;    Compile this module with basic system level-0
 ;;    eu2c -bs level-0 apropos

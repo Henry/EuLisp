@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: contains class definition and accessors
+;;; Title: contains class definition and accessors
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Expose all Modules comprising level-0
+;;; Title: Expose all Modules comprising level-0
 ;;;  Description:
 ;;;  Authors: Rainer Rosenmuller, Winfried Heicking, Ingo Mohr
 ;;;-----------------------------------------------------------------------------

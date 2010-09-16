@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: introspection functions
+;;; Title: introspection functions
 ;;;  Notes:
 ;;    %class-of must be changed with introduction of static cards
 ;;;  Problems:

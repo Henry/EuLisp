@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: standard module copy
+;;; Title: EL-in-CL: standard module copy
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------

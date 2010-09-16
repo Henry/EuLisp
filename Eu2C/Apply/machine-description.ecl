@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Mashine-description of Register, Location and Parameter-passing
+;;; Title: Mashine-description of Register, Location and Parameter-passing
 ;;;  Description:
 ;;    the definition functions for tail data types
 ;;;  Documentation:

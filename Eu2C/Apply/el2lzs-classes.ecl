@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Transformation of class definitions into LZS
+;;; Title: Transformation of class definitions into LZS
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------

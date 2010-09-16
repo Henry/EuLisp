@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: timer interrupt handling
+;;; Title: timer interrupt handling
 ;;;  Description:
 ;;    interface to unix interval timers and signals
 ;;    enables creating a real and a virtual timer

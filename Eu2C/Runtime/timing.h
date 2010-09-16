@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Wrapper around the POSIX times function
+/// Title: Wrapper around the POSIX times function
 ///  Library: Runtime
 ///-----------------------------------------------------------------------------
 #ifndef TIMING_H

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Additional access to system internals
+;;; Title: Additional access to system internals
 ;;;  Description:
 ;;    The exported symbols are those not exported from level-0
 ;;;-----------------------------------------------------------------------------

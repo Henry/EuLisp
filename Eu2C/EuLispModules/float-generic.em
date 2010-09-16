@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: defgenerics for float
+;;; Title: defgenerics for float
 ;;;-----------------------------------------------------------------------------
 
 (defmodule float-generic

@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: A simple scheme bytecode compiler
+/// Title: A simple scheme bytecode compiler
 ///-----------------------------------------------------------------------------
 
 #define NOISY_LOAD

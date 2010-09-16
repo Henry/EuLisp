@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Inference with Compound Lattice Types (fpi-list, sy-list, cons-list ..)
+;;; Title: Inference with Compound Lattice Types (fpi-list, sy-list, cons-list ..)
 ;;;  Description:
 ;;    We distinguish monomorphic lists (mono-lists) and polymorphic lists
 ;;    (poly-lists). Monomorphic lists contain elements with the same type,

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: macros and aux functions to read in the basic data types
+;;; Title: macros and aux functions to read in the basic data types
 ;;;  Description:
 ;;    macros and aux functions to read in the basic data types
 ;;    first the machine data types of the machine,

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: dynamic bindings for Level1
+;;; Title: EL-in-CL: dynamic bindings for Level1
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

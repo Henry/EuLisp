@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: aux file for table
+;;; Title: aux file for table
 ;;;  Description: tables provide a general key to value association mechanism
 ;;;  Documentation:
 ;;;  Notes:

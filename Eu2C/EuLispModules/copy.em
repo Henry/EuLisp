@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: standard module copy
+;;; Title: standard module copy
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: auxiliary functions for collections
+;;; Title: auxiliary functions for collections
 ;;;  Description: collection gives the functionality described in A.2
 ;;;  Documentation:
 ;;;  Notes:

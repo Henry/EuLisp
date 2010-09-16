@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Card allocation and reclaiming functions
+/// Title: Card allocation and reclaiming functions
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///-----------------------------------------------------------------------------

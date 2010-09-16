@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: standard module stream
+;;; Title: EL-in-CL: standard module stream
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;-----------------------------------------------------------------------------

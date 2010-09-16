@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Code Generator for Data
+;;; Title: Code Generator for Data
 ;;;  Description:
 ;;    This modules provides the generation of code for global Variables, named
 ;;    constants and literals.

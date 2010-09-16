@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: architecture dependent xalloc definitions
+/// Title: architecture dependent xalloc definitions
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///-----------------------------------------------------------------------------

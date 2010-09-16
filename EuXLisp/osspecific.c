@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: OS specific functions
+/// Title: OS specific functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

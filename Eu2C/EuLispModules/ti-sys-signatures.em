@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: TAIL Type Schemes
+;;; Title: TAIL Type Schemes
 ;;;  Description:
 ;;    This application modules describes type schemes of all predefined TAIL
 ;;    functions and adds some strategic lattice types to the lattice used

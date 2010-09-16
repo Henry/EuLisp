@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: module spint
+;;; Title: EL-in-CL: module spint
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: simple-programming.lisp
+;;; Title: simple-programming.lisp
 ;;;  Description:
 ;;    provides macro to facilitate class definition
 ;;;  Documentation:

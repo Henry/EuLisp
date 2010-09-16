@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: module for the definition of tail data types
+;;; Title: module for the definition of tail data types
 ;;;  Description:
 ;;    the definition functions for tail data types
 ;;;  Documentation:

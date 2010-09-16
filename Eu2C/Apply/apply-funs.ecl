@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Providing LZS-Objects definied in the Application Module APPLY
+;;; Title: Providing LZS-Objects definied in the Application Module APPLY
 ;;;  Description:
 ;;    The function set-apply-funs sets some variables to LZS-objects extracted
 ;;    from the lexical environment of the module APPLY. The variables are all

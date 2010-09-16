@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: analyse of side-effects and synthese of types
+;;; Title: analyse of side-effects and synthese of types
 ;;;  Description:
 ;;    * the pass-slot will be changed from 0 to 1
 ;;    * if not (?sys-glocs fun) is set, fill slot fread-gloc and fwrite-gloc

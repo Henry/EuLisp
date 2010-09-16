@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: initialize classes for memory management system
+;;; Title: initialize classes for memory management system
 ;;;  Notes:
 ;;    1. at the moment the slot gc-tracer belongs to the class, not to the
 ;;    representation this should be changed in the near future and all calls to

@@ -17,7 +17,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: CMUCL compiler modifications to support EuLisp
+;;; Title: CMUCL compiler modifications to support EuLisp
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

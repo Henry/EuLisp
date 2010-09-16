@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: generic functions of default module compare
+;;; Title: generic functions of default module compare
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

@@ -17,7 +17,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 math module
+;;; Title: EuLisp Level-0 math module
 ;;;-----------------------------------------------------------------------------
 
 (defmodule math

@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Built-in function table
+/// Title: Built-in function table
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

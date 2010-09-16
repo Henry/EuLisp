@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Transformation of Literals into LZS
+;;; Title: Transformation of Literals into LZS
 ;;;  Description:
 ;;;  Notes:
 ;;    expand-literal for <standard-class-def> should use the slot descriptions

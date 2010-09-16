@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Type Inference of Constants
+;;; Title: Type Inference of Constants
 ;;;  Description:
 ;;    Link between EuLisp constants and type expressions.
 ;;;  Authors: Andreas Kind

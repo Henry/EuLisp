@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Signalling errors, warnings and infos
+;;; Title: Signalling errors, warnings and infos
 ;;  for specific situations detected by the frontend
 ;;;  Description:
 ;;;  Authors: Ingo Mohr

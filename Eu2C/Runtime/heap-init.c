@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Heap initialization
+/// Title: Heap initialization
 ///  Library: Runtime
 ///  Authors: E. Ulrich Kriegel
 ///  Description:

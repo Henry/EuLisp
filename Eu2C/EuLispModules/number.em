@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: the number module
+;;; Title: the number module
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

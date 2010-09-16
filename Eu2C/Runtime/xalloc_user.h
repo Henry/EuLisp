@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xalloc user include file
+/// Title: xalloc user include file
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///  Description:

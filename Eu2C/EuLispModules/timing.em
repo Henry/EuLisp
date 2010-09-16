@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: timer interface routines
+;;; Title: timer interface routines
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 

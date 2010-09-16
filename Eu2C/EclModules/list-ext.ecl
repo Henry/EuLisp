@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: some CL-like extensions for lists
+;;; Title: EL-in-CL: some CL-like extensions for lists
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

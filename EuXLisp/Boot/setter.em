@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 setter functionality
+;;; Title: EuLisp Level-0 setter functionality
 ;;;-----------------------------------------------------------------------------
 
 (defmodule setter

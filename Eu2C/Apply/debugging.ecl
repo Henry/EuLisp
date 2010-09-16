@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Tools for Compiler Debugging
+;;; Title: Tools for Compiler Debugging
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

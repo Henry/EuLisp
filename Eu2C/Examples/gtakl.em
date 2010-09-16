@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Benchmark 'gtakl'
+;;; Title: Benchmark 'gtakl'
 ;;;  Authors: Ingo Mohr
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of

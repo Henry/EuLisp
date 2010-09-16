@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'test-number'
+;;; Title: Example 'test-number'
 ;;;  Description:
 ;;    Simple mathematical expression interpreter
 ;;;  Compilation:

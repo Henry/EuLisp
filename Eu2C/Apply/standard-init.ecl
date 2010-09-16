@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: initialization protocol of the compile time MOP for standard classes
+;;; Title: initialization protocol of the compile time MOP for standard classes
 ;;;  Description:
 ;;    The methods for <standard-class-def> implement the single inheritance case
 ;;    which is the default for the predefined EuLisp class <class>.

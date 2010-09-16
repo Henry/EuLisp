@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Compiler Interface to Basic Module %tail
+;;; Title: Compiler Interface to Basic Module %tail
 ;;;  Description:
 ;;    the definition functions for tail data types
 ;;;  Documentation:

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: collection consist of list, string, vector, table,
+;;; Title: collection consist of list, string, vector, table,
 ;;;  Description: definitions of defgeneric for collections
 ;;;  Documentation:
 ;;;  Notes:

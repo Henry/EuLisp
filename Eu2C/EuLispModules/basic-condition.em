@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: very basic condition and error signalling facility
+;;; Title: very basic condition and error signalling facility
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-condition

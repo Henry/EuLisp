@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Level 0 of EuLisp extended for interaction with C
+;;; Title: Level 0 of EuLisp extended for interaction with C
 ;;;  Description:
 ;;    This is intended as a basic system which provides level 0 of EuLisp and
 ;;    some additional things needed for interaction with C

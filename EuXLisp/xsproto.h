@@ -17,7 +17,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Function prototypes
+/// Title: Function prototypes
 ///  Description:
 //    Automatically generated function prototypes by cproto
 ///-----------------------------------------------------------------------------

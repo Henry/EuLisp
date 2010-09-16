@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: The interface of the Eulisp-to-LZS-Transformer
+;;; Title: The interface of the Eulisp-to-LZS-Transformer
 ;;;  Description:
 ;;    This module provides a common interface for the transformation from EuLisp to LZS.
 ;;;  Documentation:

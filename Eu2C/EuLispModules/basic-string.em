@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: make C-strings available for Lisp
+;;; Title: make C-strings available for Lisp
 ;;;  Description:
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Encoding Lattice Types
+;;; Title: Encoding Lattice Types
 ;;;  Description:
 ;;    Bit codes are assigned to lattice types in order to use fast low-level
 ;;    bit operations to implement the lattice operations meet, join, and

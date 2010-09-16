@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Signalling Compiler Messages
+;;; Title: Signalling Compiler Messages
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

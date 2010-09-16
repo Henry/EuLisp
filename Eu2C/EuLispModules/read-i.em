@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title:
+;;; Title:
 ;;;  Description:
 ;;  The function supplied to set-dispatch-macro-characte has the arguments:
 ;;          stream

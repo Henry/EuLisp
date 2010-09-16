@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'command-line'
+;;; Title: Example 'command-line'
 ;;;  Description:
 ;;    Test the POSIX command-line handling
 ;;;  Compilation:

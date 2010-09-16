@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: inline of LZS-Functions
+;;; Title: inline of LZS-Functions
 ;;;  Description:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------

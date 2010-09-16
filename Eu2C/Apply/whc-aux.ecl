@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: auxiliary functions
+;;; Title: auxiliary functions
 ;;;  Description:
 ;;    the functions for generation of code
 ;;;  Documentation:

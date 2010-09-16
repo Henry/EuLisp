@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Initialization of c runtime constants
+/// Title: Initialization of c runtime constants
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///  Description:

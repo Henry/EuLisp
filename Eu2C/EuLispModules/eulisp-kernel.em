@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: eulisp pure
+;;; Title: eulisp pure
 ;;;  Problems:
 ;;    qd version, to bee cleaned up
 ;;;  Authors: E. Ulrich Kriegel

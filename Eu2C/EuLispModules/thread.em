@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Lisp Part of thread implementation
+;;; Title: Lisp Part of thread implementation
 ;;;  Authors: Jens Bimberg
 ;;;-----------------------------------------------------------------------------
 (defmodule thread

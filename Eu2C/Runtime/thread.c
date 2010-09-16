@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Threads with setjmp and longjmp
+/// Title: Threads with setjmp and longjmp
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 /// Problems: System V setjmp/longjmp do not save/restore signal mask.

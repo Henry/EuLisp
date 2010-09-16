@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: initialization functions
+/// Title: initialization functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

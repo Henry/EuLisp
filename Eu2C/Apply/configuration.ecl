@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: interface to configuration of apply
+;;; Title: interface to configuration of apply
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

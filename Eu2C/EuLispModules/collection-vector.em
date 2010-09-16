@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: collection for vectors
+;;; Title: collection for vectors
 ;;;  Description: collection for vectors gives the functionality described in A.2
 ;;;  Documentation:
 ;;;  Notes:

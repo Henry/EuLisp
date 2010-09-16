@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xscheme built-in arithmetic functions
+/// Title: xscheme built-in arithmetic functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

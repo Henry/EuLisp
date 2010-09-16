@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xalloc allocate functions
+/// Title: xalloc allocate functions
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///-----------------------------------------------------------------------------

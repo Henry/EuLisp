@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: basic stuff for lists
+;;; Title: basic stuff for lists
 ;;;  Description:
 ;;    This module contains all definitions for lists which are needed by other
 ;;    basic parts of the runtime environment provided by the module tail. The

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: An interpreter for the LZS
+;;; Title: An interpreter for the LZS
 ;;;  Description:
 ;;;  Documentation:
 ;;    lzs-syntax contains the macro def-lzs-object for lzs

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: generation of header files
+;;; Title: generation of header files
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

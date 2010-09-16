@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Loading of EuLisp sources
+;;; Title: Loading of EuLisp sources
 ;;;  Description:
 ;;    EL2LZS-LOAD contains all stuff for loading EuLisp sources, which depends on the
 ;;    underlying file system and on the Lisp-system in which the compiler is running.

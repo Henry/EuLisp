@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: a call to a function
+;;; Title: a call to a function
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

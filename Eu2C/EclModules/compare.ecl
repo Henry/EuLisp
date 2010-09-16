@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: standard module compare
+;;; Title: EL-in-CL: standard module compare
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

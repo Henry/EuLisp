@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Symbols not usually exported from telos level-0
+;;; Title: Symbols not usually exported from telos level-0
 ;;;  Description:
 ;;    Mainly introspective functionality.
 ;;;-----------------------------------------------------------------------------

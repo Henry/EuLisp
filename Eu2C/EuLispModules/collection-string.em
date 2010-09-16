@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: tables provide a general key to value association mechanism
+;;; Title: tables provide a general key to value association mechanism
 ;;;  Description: collection for strings gives the functionality described in A.2
 ;;;  Documentation:
 ;;;  Notes:

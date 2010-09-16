@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: collection for lists
+;;; Title: collection for lists
 ;;;  Description: collection for lists gives the functionality described in A.2
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------

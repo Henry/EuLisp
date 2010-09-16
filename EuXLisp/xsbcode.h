@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xscheme compiler byte code definitions
+/// Title: xscheme compiler byte code definitions
 ///-----------------------------------------------------------------------------
 #ifndef XSBCODE_H
 #define XSBCODE_H

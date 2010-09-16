@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: balanced all types and add types to move-statements
+;;; Title: balanced all types and add types to move-statements
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

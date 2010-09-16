@@ -17,7 +17,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'test-class'
+;;; Title: Example 'test-class'
 ;;;  Description:
 ;;    Basic tests of class construction, initialisation and slot access.
 ;;;  Authors: Henry G. Weller

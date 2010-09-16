@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: class definition and accessors for <double-float>
+;;; Title: class definition and accessors for <double-float>
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 

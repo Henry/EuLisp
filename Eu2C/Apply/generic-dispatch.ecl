@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Computation of Method Lookup and Generic Dispatch at Compile Time
+;;; Title: Computation of Method Lookup and Generic Dispatch at Compile Time
 ;;;  Description:
 ;;    Assumptions:
 ;;    1. No method is added at runtime

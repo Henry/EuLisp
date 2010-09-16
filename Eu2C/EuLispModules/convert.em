@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 convert module
+;;; Title: EuLisp Level-0 convert module
 ;;;  Description:
 ;;    collection consist of list, string, vector, table,
 ;;;  Authors: Winfried Heicking

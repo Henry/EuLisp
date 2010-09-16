@@ -17,7 +17,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'test-introspection'
+;;; Title: Example 'test-introspection'
 ;;;  Description:
 ;;    Basic tests of the new print functions
 ;;;  Authors: Henry G. Weller

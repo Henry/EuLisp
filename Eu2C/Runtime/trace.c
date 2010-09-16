@@ -17,7 +17,7 @@
 //  You should have received a copy of the GNU General Public License along with
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 ///-----------------------------------------------------------------------------
-///  Title: xalloc functions concerning gc, rootset
+/// Title: xalloc functions concerning gc, rootset
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///-----------------------------------------------------------------------------

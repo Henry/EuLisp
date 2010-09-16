@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Transformation of %annotate-forms to LZS
+;;; Title: Transformation of %annotate-forms to LZS
 ;;;  Description:
 ;;    This module defines the transformation of %annotate-forms of TAIL to LZS.
 ;;    %annotate-function: provide information about a function

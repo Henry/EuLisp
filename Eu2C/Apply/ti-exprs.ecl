@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Type Expressions for Type Inference
+;;; Title: Type Expressions for Type Inference
 ;;;  Description:
 ;;    Type expressions can be subdivided into atomic types, slot
 ;;    identifications, and type variables. Atomic types have a link to a lattice

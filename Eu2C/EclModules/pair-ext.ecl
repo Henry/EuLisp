@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: module pair-ext - some extensions for pairs inherited from CL
+;;; Title: EL-in-CL: module pair-ext - some extensions for pairs inherited from CL
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

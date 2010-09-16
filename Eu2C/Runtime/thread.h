@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Interface thread -- mm-system and thread -- Lisp
+/// Title: Interface thread -- mm-system and thread -- Lisp
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///-----------------------------------------------------------------------------

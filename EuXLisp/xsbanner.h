@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: EuXLisp identification
+/// Title: EuXLisp identification
 ///-----------------------------------------------------------------------------
 #ifndef XSBANNER_H
 #define XSBANNER_H

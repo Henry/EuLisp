@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: A part of the EuLisp Meta Object Protocol used at Compile Time
+;;; Title: A part of the EuLisp Meta Object Protocol used at Compile Time
 ;;;  Description:
 ;;    This module provides some subclasses of the LZS-class <class-def> for a
 ;;    better division of standard-, meta- and tail-classes.  This module also

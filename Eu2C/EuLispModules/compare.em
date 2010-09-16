@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 compare module
+;;; Title: EuLisp Level-0 compare module
 ;;;  Description:
 ;;;  Problems:
 ;;    The default method for equal cannot work yet because an additional slot in

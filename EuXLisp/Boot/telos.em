@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 telos module
+;;; Title: EuLisp Level-0 telos module
 ;;;-----------------------------------------------------------------------------
 
 (defmodule telos

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: the standard module level-1
+;;; Title: EL-in-CL: the standard module level-1
 ;;;  Description:
 ;;    Provides level 1 of EuLisp.
 ;;;  Authors: Ingo Mohr

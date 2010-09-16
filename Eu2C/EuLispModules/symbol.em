@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: standard module symbol (eulisp level 0)
+;;; Title: standard module symbol (eulisp level 0)
 ;;;  Description: some more thingies for symbols
 ;;;  Documentation:
 ;;;  Notes:

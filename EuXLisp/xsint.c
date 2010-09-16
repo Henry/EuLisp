@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xscheme bytecode interpreter
+/// Title: xscheme bytecode interpreter
 ///-----------------------------------------------------------------------------
 
 #define CHECK_REF

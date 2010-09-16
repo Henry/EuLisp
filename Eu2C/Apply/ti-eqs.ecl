@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Type Equations for Type Inference
+;;; Title: Type Equations for Type Inference
 ;;;  Description:
 ;;    Type equations are used in descriptors of type schemes. Type equations
 ;;    allow to define equation systems to describe the dependencies between

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: module null
+;;; Title: EL-in-CL: module null
 ;;;  Description:
 ;;    Declaration of the <null> class and null? predicate
 ;;;  Authors: Ingo Mohr

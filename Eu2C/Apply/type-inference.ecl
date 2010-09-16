@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Main Type Inference File
+;;; Title: Main Type Inference File
 ;;;  Description:
 ;;    Provides type inference functions, that are used in other
 ;;    parts of the APPLY compiler.

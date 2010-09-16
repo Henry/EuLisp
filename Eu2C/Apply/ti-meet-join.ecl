@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Operations on Type Expressions for Type Inference
+;;; Title: Operations on Type Expressions for Type Inference
 ;;;  Description:
 ;;    This module includes functions to compute the least upper bound (join) and
 ;;    greatest lower boun (meet) of type expressions.

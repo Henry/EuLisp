@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xalloc configuration file
+/// Title: xalloc configuration file
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///  Description:

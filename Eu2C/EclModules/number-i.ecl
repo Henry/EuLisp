@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: the abstract number classes and its operations
+;;; Title: EL-in-CL: the abstract number classes and its operations
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

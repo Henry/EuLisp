@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 collection module
+;;; Title: EuLisp Level-0 collection module
 ;;;  Problems:
 ;;    * Many are inefficient and could do with a rewrite.
 ;;    * The semantics of some (tables, in particular) may be awry.

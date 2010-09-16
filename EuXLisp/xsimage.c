@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: memory image save/restore functions
+/// Title: memory image save/restore functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

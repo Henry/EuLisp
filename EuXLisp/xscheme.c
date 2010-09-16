@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xscheme main function
+/// Title: xscheme main function
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

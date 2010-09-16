@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Benchmark 'takl'
+;;; Title: Benchmark 'takl'
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
 ;;    Lisp-Systems". Additionally a version was added where the function 'shorter?' is

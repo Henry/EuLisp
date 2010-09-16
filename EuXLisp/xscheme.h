@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xscheme definitions
+/// Title: xscheme definitions
 ///-----------------------------------------------------------------------------
 #ifndef XSCHEME_H
 #define XSCHEME_H

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: The most basic dynamically loaded things for the compiler
+;;; Title: The most basic dynamically loaded things for the compiler
 ;;;  Description:
 ;;    This module contains all basic stuff for the compiler which is not
 ;;    hard-wired but is needed for

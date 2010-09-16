@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: number-generic
+;;; Title: number-generic
 ;;;  Description:
 ;;    Provides all generic functions defined for subclasses of class <number>.
 ;;;  Documentation:

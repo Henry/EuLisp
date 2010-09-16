@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;; Title: 
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:any changes of tat type must be done conformely with the generation of

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Mapping of Lisp-Identifiers to C-Identifiers
+;;; Title: Mapping of Lisp-Identifiers to C-Identifiers
 ;;;  Description:
 ;;;  Documentation:
 ;;    The following prefixes are used to avoid unnecessary number suffixes:

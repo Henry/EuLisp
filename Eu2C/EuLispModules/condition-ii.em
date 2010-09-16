@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: eulisp conditions
+;;; Title: eulisp conditions
 ;;;  Description:
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------

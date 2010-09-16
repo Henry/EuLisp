@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: double float module
+;;; Title: double float module
 ;;;  Problems:
 ;;    converter
 ;;;  Authors: E. Ulrich Kriegel

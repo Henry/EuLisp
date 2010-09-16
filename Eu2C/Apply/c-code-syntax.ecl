@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: syntax definitions for c-code
+;;; Title: syntax definitions for c-code
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

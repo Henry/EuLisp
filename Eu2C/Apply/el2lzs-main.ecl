@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp-to-LZS-Transformer: the common parts
+;;; Title: EuLisp-to-LZS-Transformer: the common parts
 ;;;  Description:
 ;;    This module contains all things which are needed for the implementation of
 ;;    transformation rules (implemented in EL2LZS-RULES) and for the work with

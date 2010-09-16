@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Socket manipulation
+/// Title: Socket manipulation
 ///  Notes:
 //    This code possibly written by David Halls.
 ///  WARNING:

@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Table entries for machine specific functions
+/// Title: Table entries for machine specific functions
 ///-----------------------------------------------------------------------------
 #ifndef OSPTRS_H
 #define OSPTRS_H

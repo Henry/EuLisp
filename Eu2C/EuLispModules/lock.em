@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: semaphores as part of the thread implementation
+;;; Title: semaphores as part of the thread implementation
 ;;;  Description:
 ;;;  Authors: Jens Bimberg
 ;;;-----------------------------------------------------------------------------

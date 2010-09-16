@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Rules for the EuLisp-to-LZS-Transformer
+;;; Title: Rules for the EuLisp-to-LZS-Transformer
 ;;;  Documentation:
 ;;    Ingo Mohr: The mapping of EuLisp the Lisp-related intermediate language
 ;;    (APPLY Working Paper)

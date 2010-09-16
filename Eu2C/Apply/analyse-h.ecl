@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: definitions for the transformation from LZS to MZS
+;;; Title: definitions for the transformation from LZS to MZS
 ;;;  Description:
 ;;;  Authors: Horst Friedrich
 ;;;-----------------------------------------------------------------------------

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: character
+;;; Title: character
 ;;;  Problems:
 ;;    character box vector cannot be allocated statically til now
 ;;    literal expander for vectors needed

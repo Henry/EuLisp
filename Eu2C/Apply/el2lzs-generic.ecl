@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Transformation of generic function definitions into LZS
+;;; Title: Transformation of generic function definitions into LZS
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

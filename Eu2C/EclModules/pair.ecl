@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: module pair
+;;; Title: EL-in-CL: module pair
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

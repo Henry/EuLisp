@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: the float module
+;;; Title: the float module
 ;;;  Authors: E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 

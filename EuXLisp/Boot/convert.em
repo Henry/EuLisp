@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 convert module
+;;; Title: EuLisp Level-0 convert module
 ;;;  Description:
 ;;    from\to  string  list  vector  table  symbol  char  integer  float  number
 ;;

@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: extern declarations for machine specific functions
+/// Title: extern declarations for machine specific functions
 ///-----------------------------------------------------------------------------
 #ifndef OSDEFS_H
 #define OSDEFS_H

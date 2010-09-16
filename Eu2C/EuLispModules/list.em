@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 list module
+;;; Title: EuLisp Level-0 list module
 ;;;  Description:
 ;;    list processing
 ;;;  Authors: Horst Friedrich

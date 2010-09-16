@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Module definitions
+/// Title: Module definitions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

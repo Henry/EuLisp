@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Functions to work with option lists
+;;; Title: Functions to work with option lists
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

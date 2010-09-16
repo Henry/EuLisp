@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Benchmark 'tak'
+;;; Title: Benchmark 'tak'
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
 ;;    Lisp-Systems" and adapted to EuLisp.

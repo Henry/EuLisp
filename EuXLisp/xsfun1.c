@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xscheme built-in functions - part 1
+/// Title: xscheme built-in functions - part 1
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

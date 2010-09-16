@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EL-in-CL: standard module character-generic
+;;; Title: EL-in-CL: standard module character-generic
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

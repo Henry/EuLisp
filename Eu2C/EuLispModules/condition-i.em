@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: eulisp conditions
+;;; Title: eulisp conditions
 ;;;  Description:
 ;;    Provides condition classes and a function most-saimple-error-handler which
 ;;    should work above apply-level-1 most-simple-error-handler is called with 2

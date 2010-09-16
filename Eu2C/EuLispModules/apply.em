@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: interface module apply
+;;; Title: interface module apply
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

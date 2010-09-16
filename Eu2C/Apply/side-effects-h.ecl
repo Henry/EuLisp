@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title:
+;;; Title:
 ;;;  Description:
 ;;    definition of the structures for side-effect analyse and teh function
 ;;    set-side-effect

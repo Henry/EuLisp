@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Default Type Descriptors
+;;; Title: Default Type Descriptors
 ;;;  Description:
 ;;    Type schemes (signatures) describe the range and domain of a
 ;;    function. Type schemes are generic, i.e. they may have more than one

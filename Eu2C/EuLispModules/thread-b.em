@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: interface to the c-part of threads
+;;; Title: interface to the c-part of threads
 ;;;  Description:
 ;;    interface to the lower part of threads (implemented in c)
 ;;    it is desired never to change this interface, since this migth require

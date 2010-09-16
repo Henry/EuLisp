@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Auxiliary Functions and Parameters for Type Inference
+;;; Title: Auxiliary Functions and Parameters for Type Inference
 ;;;  Description:
 ;;    Auxiliary functions for formatting, error signaling, collections, and
 ;;    statistics.

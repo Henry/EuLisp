@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: macros for compiler conditions
+;;; Title: macros for compiler conditions
 ;;;-----------------------------------------------------------------------------
 
 #module compiler-conditions

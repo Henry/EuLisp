@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: generation of interface files (only for Basic System Compilation)
+;;; Title: generation of interface files (only for Basic System Compilation)
 ;;;  Description:
 ;;    The generation of .def-files does only work for basic System
 ;;    Compilation. It doesn't work now for Module Compilation!

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Tests setter
+;;; Title: Tests setter
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

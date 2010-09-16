@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Input functions
+/// Title: Input functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

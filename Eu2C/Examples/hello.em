@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'hello'
+;;; Title: Example 'hello'
 ;;;  Description: Simple `hello' example
 ;;    which prints a symbol rather than a string
 ;;;  Compilation:

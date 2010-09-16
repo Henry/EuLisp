@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: allocation of context-structures
+;;; Title: allocation of context-structures
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

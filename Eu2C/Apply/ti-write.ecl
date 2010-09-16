@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Formatting Type Inference Objects
+;;; Title: Formatting Type Inference Objects
 ;;;  Description:
 ;;    This modules provides generic functions to write and print all kinds
 ;;    of objects that are concerned during the type inference process.

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: 
+;;; Title: 
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

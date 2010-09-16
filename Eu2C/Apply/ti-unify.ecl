@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: A Modified Unification Algorithm for Type Inference
+;;; Title: A Modified Unification Algorithm for Type Inference
 ;;;  Description:
 ;;    Insert equations of type expressions into a given set of variable
 ;;    substitutions.

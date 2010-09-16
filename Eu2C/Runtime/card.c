@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xalloc card and type description
+/// Title: xalloc card and type description
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///  Description:

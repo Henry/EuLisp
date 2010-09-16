@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xscheme dynamic memory management functions
+/// Title: xscheme dynamic memory management functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

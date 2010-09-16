@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: An interpreter working on LZS-representation of Lisp-programs
+;;; Title: An interpreter working on LZS-representation of Lisp-programs
 ;;;  Description:
 ;;    The function EVAL evaluates an expression given in LZS-form. The function
 ;;    CALL applies an LZS-function to some arguments given also as

@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Copying Type Inference Objects
+;;; Title: Copying Type Inference Objects
 ;;;  Description:
 ;;    This module provides a generic function to copy all kinds of objects
 ;;    that are concerned during the type inference process.

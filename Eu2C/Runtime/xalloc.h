@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: xalloc internal definitions
+/// Title: xalloc internal definitions
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
 ///  Description: xalloc internal definitions

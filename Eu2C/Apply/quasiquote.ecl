@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: backquote from feel for apply
+;;; Title: backquote from feel for apply
 ;;;  Description:
 ;;;  Authors:
 ;;;-----------------------------------------------------------------------------

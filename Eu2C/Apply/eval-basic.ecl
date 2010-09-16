@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Syntax definitions and other basic definitions for eval
+;;; Title: Syntax definitions and other basic definitions for eval
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

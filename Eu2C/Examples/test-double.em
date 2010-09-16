@@ -17,7 +17,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Example 'test-double'
+;;; Title: Example 'test-double'
 ;;;  Authors: Henry G. Weller
 ;;;  Description:
 ;;    Most basic double-precision number test

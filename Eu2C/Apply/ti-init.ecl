@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Initialization of the Typ Inference System
+;;; Title: Initialization of the Typ Inference System
 ;;;  Description:
 ;;    This module provides functions to reset and initialize the type
 ;;    inference system

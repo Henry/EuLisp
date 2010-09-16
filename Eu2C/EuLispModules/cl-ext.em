@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Some useful Common-Lisp Functions
+;;; Title: Some useful Common-Lisp Functions
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

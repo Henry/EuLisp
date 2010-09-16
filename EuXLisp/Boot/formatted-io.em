@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: EuLisp Level-0 formatted-io module
+;;; Title: EuLisp Level-0 formatted-io module
 ;;;  Description:
 ;;    formatted output
 ;;;-----------------------------------------------------------------------------

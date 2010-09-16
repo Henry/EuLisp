@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: numbers without integer and all predicates
+;;; Title: numbers without integer and all predicates
 ;;;-----------------------------------------------------------------------------
 
 (defmodule number-i

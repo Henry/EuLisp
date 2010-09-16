@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: EuXLisp symbol declarations
+/// Title: EuXLisp symbol declarations
 ///-----------------------------------------------------------------------------
 #ifndef XSSYMBOLS_H
 #define XSSYMBOLS_H

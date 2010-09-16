@@ -19,7 +19,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Symbol handling functions
+/// Title: Symbol handling functions
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"

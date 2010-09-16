@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: The Main Part of the APPLY-Compiler
+;;; Title: The Main Part of the APPLY-Compiler
 ;;;  Description:
 ;;;  Authors:
 ;;;-----------------------------------------------------------------------------

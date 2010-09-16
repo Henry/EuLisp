@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: basic initialisation of the object system
+;;; Title: basic initialisation of the object system
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:

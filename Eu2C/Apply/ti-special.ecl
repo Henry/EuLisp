@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: Special Inference with some System Functions (%select, %extract ..)
+;;; Title: Special Inference with some System Functions (%select, %extract ..)
 ;;;  Description:
 ;;    This file provides functions that compute formal type descriptors for some
 ;;    system functions, that are treated specially.

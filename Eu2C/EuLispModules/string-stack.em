@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Title: string-stack
+;;; Title: string-stack
 ;;;  Description:
 ;;;  Documentation:
 ;;;  Notes:
