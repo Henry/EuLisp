@@ -863,7 +863,7 @@ void xlminit(unsigned int ssize)
         xlfatal("insufficient memory");
     total += (long)n;
 
-    // initialize structures that are marked by the collector
+    // initialize objects that are marked by the collector
     default_object = eof_object = true = NIL;
     xlfun = xlenv = xlval = NIL;
 

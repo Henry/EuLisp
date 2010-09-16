@@ -2246,7 +2246,7 @@ static void reintern_vector_symbols(LVAL form)
 }
 
 // make all symbols in a defmodule body be in current module
-// structures: lists & vectors only
+// classes: lists & vectors only
 static void reintern_module_symbols(LVAL body)
 {
     for (; consp(body); body = cdr(body))

@@ -43,7 +43,7 @@
 
 (defmacro defstruct (name superclass slot-descriptions . class-options)
   `(defclass ,name
-     (,(if (null? superclass) '<structure> superclass))
+     (,(if (null? superclass) '<object> superclass))
      ,(map (lambda (slot)
              (if (atom? slot)
                  slot

@@ -13,7 +13,7 @@
 
 (define-method (deep-copy (s <object>))
                (let ((cl (class-of s)))
-                 (structure-copy-loop
+                 (copy-loop
                   (allocate cl ())
                   s
                   1
@@ -22,18 +22,18 @@
 
 (define-method (shallow-copy (s <object>))
                (let ((cl (class-of s)))
-                 (structure-copy-loop
+                 (copy-loop
                   (allocate cl ())
                   s
                   1
                   (class-instance-size cl)
                   identity)))
 
-(define (structure-copy-loop new old index len copy)
+(define (copy-loop new old index len copy)
         (if (<= index len)
             (progn
               (setivar new index (copy (getivar old index)))
-              (structure-copy-loop new old (+ index 1) len copy))
+              (copy-loop new old (+ index 1) len copy))
           new))
 
 ;; conses

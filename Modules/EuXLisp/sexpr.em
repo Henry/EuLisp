@@ -56,7 +56,7 @@
   (send-int stream char-tag)
   (send-int stream (convert obj <integer>)))
 
-(defmethod send ((obj <structure>) stream)
+(defmethod send ((obj <object>) stream)
   (send-int stream structure-tag)
   (send-structure obj stream))
 

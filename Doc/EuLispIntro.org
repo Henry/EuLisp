@@ -1527,7 +1527,6 @@
     + =<continuation>=
     + =<generic>=
     + =<simple-generic>=
-    + =<structure>=
     + =class-hierarchy=
     + =describe=
     + =class?= *

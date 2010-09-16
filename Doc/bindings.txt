@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 15 September 2010, 11:03:04
+  Generated 16 September 2010, 14:30:30
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -64,7 +64,7 @@ youtoo Functions
   <general-condition> 5 condition <general-condition>
   <generic-function> 44 mop-class <generic-function>
   <handler> 2 handler <handler>
-  <hash-table> 9 table1 <hash-table>
+  <hash-table> 11 table1 <hash-table>
   <int*> 4 handler <int*>
   <int> 4 fpi <int>
   <integer> 2 integer <integer>
@@ -84,7 +84,7 @@ youtoo Functions
   <simple-class> 71 mop-class <simple-class>
   <simple-function> 2 mop-class <simple-function>
   <simple-generic-function> 15 mop-class <simple-generic-function>
-  <simple-hash-table> 14 table1 <simple-hash-table>
+  <simple-hash-table> 15 table1 <simple-hash-table>
   <simple-method> 55 mop-class <simple-method>
   <simple-thread> 34 thread <simple-thread>
   <slot> 49 mop-class <slot>
@@ -97,7 +97,7 @@ youtoo Functions
   <string-stream> 45 stream2 <string-stream>
   <string> 13 string <string>
   <symbol> 5 mop-class <symbol>
-  <table> 4 table1 <table>
+  <table> 3 table1 <table>
   <thread> 8 thread <thread>
   <vector> 9 vector <vector>
   = 2 compare =
@@ -120,7 +120,7 @@ youtoo Functions
   accumulate1-vector 7 vector accumulate1-vector
   add-method 8 mop-meth add-method
   add-subclass 9 mop-defcl add-subclass
-  all1-table? 3 table all1-table?
+  all1-table? 5 table all1-table?
   all1-vector? 10 vector all1-vector?
   all? 16 collect all?
   allocate 8 mop-gf allocate
@@ -206,7 +206,7 @@ youtoo Functions
   class-slots 50 mop-class class-slots
   class-slotz 65 mop-class class-slotz
   class? 4 mop-inspect class?
-  clear-table 10 table1 clear-table
+  clear-table 12 table1 clear-table
   collectionp 21 collect collectionp
   compatible-superclass? 8 mop-alloc compatible-superclass?
   compatible-superclasses? 14 mop-alloc compatible-superclasses?
@@ -331,7 +331,7 @@ youtoo Functions
   graph? 10 character graph?
   handle 3 handler handle
   handler? 8 handler handler?
-  hash-table? 13 table1 hash-table?
+  hash-table? 7 table1 hash-table?
   hostname 3 stream1 hostname
   inc 21 boot1 inc
   init-class 3 mop-init init-class
@@ -380,7 +380,7 @@ youtoo Functions
   map1-list 10 boot map1-list
   map1-list-last-special 27 list map1-list-last-special
   map1-string 4 string map1-string
-  map1-table 6 table map1-table
+  map1-table 2 table map1-table
   map1-vector 14 vector map1-vector
   map2-list 17 list map2-list
   map2-vector 12 vector map2-vector
@@ -486,7 +486,7 @@ youtoo Functions
   simple-function-environment 47 mop-class simple-function-environment
   simple-function? 4 boot1 simple-function?
   simple-generic-function? 48 boot1 simple-generic-function?
-  simple-hash-table? 6 table1 simple-hash-table?
+  simple-hash-table? 5 table1 simple-hash-table?
   simple-thread? 39 thread simple-thread?
   size 9 collect size
   slice 4 collect slice
@@ -552,17 +552,17 @@ youtoo Functions
   symbol-name 59 mop-class symbol-name
   symbol? 23 boot1 symbol?
   system 50 boot1 system
-  table-comparator 8 table1 table-comparator
-  table-empty? 4 table table-empty?
-  table-entries 15 table1 table-entries
+  table-comparator 10 table1 table-comparator
+  table-empty? 6 table table-empty?
+  table-entries 16 table1 table-entries
   table-fill-value 17 table1 table-fill-value
-  table-hash-function 11 table1 table-hash-function
+  table-hash-function 13 table1 table-hash-function
   table-keys 2 table1 table-keys
-  table-ref 5 table table-ref
-  table-size 5 table1 table-size
-  table-threshold 12 table1 table-threshold
-  table-values 16 table1 table-values
-  table? 7 table1 table?
+  table-ref 7 table table-ref
+  table-size 4 table1 table-size
+  table-threshold 14 table1 table-threshold
+  table-values 8 table1 table-values
+  table? 6 table1 table?
   tconc 28 thread tconc
   the-method-lookup-function 7 mop-gf the-method-lookup-function
   thread-block 2 thread thread-block

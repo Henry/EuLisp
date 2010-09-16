@@ -203,7 +203,7 @@ indentation for the following lines until the end of the list."))))
       ;; Built-in types
       (cons
        (regexp-opt
-        '("<object>" "<structure>"
+        '("<object>"
           "<symbol>" "<number>"
           "<integer>" "<fixed-precision-integer>" "<float>" "<double-float>"
           "<string>"
@@ -1306,6 +1306,7 @@ given symbol SYM."
     (defclass . defun)
     (defgeneric . defun)
     (defmethod . defun)
+    (defcondition . defun)
     (defconstant . defun)
     (deflocal . defun)
     (defmacro . defun)
@@ -1324,6 +1325,9 @@ given symbol SYM."
     (if . 2)
     (cond . 0)
     (unwind-protect . 1)
+
+    (install-import-expander . defun)
+    (install-directive-expander . defun)
 
     (defaccessors . defun)
     (def-descrs . defun)
