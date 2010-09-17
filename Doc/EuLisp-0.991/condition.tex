@@ -99,7 +99,7 @@ hierarchy is shown in table~\ref{condition-class-hierarchy}.
     \scdef{defcondition-form}: \\
     \>  ( \defopref{defcondition} \scref{condition-class-name} \\
     \>\>  \scref{condition-superclass-name} \\
-    \>\>  \scseqref{slot-name} ) \\
+    \>\>  ( \scseqref{slot} ) \scseqref{class-option} ) \\
     \scdef{condition-class-name}: \\
     \> \scref{identifier} \\
     \scdef{condition-superclass-name}: \\
@@ -114,18 +114,21 @@ hierarchy is shown in table~\ref{condition-class-hierarchy}.
     \item[\scref{condition-superclass-name}] A symbol naming a binding of a
     class to be used as the superclass of the new condition class.
 
-    \item[\scseqref{slot-name}] A sequence of keywords used to name and to
-    identify additional slots begin defined for this condition class.
+    \item[\scref{slot}] Either a \scref{slot-name} or a list of
+    \scref{slot-name} followed by some \scref{slot-option}s.
+
+    \item[\scref{class-option}] A key and a value which, taken together, apply
+    to the condition as a whole.
 \end{arguments}
 %
 \remarks%
-This defining form defines a new condition class.  The first argument is the
-name to which the new condition class will be bound.  The second is the name of
-the superclass of the new condition class and an {\em init-option\/} is an
-identifier followed by its (default) initial value.  If {\em superclass-name\/}
-is \nil{}, the superclass is taken to be \classref{condition}.  Otherwise {\em
-    superclass-name\/} must be \classref{condition}\ or the name of one of its
-subclasses.
+This defining form defines a new condition class, it is analogous to
+\defopref{defclass} except in the in the specification of and default
+superclass.  The first argument is the name to which the new condition class
+will be bound, the second is the name of the superclass of the new condition
+class.  If {\em superclass-name\/} is \nil{}, the superclass is taken to be
+\classref{condition}.  Otherwise {\em superclass-name\/} must be
+\classref{condition}\ or the name of one of its subclasses.
 
 \derivedclass{condition}{object}
 \label{\conditionlabel{condition}}
@@ -133,9 +136,6 @@ subclasses.
 \begin{initoptions}
     \item[message, \classref{string}] A string, containing information which
     should pertain to the situation which caused the condition to be signalled.
-
-    \item[message-arguments, \classref{list}] A list of objects to be used in
-    processing the message format string.
 \end{initoptions}
 %
 \remarks%

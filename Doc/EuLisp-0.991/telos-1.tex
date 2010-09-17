@@ -9,10 +9,12 @@
 \defSyntax{defclass-1}{
 \begin{syntax}
     \scdef{defclass-1-form}: \\
-    \>  ( \defopref{defclass} \scref{class-name} \scref{superclass-list} \\
+    \>  ( \defopref{defclass} \scref{class-name} \scref{superclass-names} \\
     \>\>   ( \scseqref{slot-1} ) \\
     \>\>   \scseqref{class-option-1} ) \\
-    \scdef{superclass-list}: \\
+    \scdef{superclass-names}: \\
+    \>  \nil{} \\
+    \>  superclass-name \\
     \>  ( \scseqref{superclass-name} ) \\
     \scdef{slot-1}: \\
     \>  \scref{slot} \\
@@ -28,11 +30,13 @@
 \showSyntaxBox{defclass-1}
 %
 \begin{arguments}
-    \item[\scref{superclass-list}] A list of symbols naming bindings of classes
-    to be used as the superclasses of the new class (multiple
+    \item[\scref{superclass-names}] Either a symbol or a list of symbols naming
+    bindings of the class/classes to be used as the superclass/superclasses of
+    the new class (multiple
     inheritance\index{general}{inheritance!multiple}\index{general}{multiple
-        inheritance}).  This is different from \defopref{defclass} at level-0,
-    where only one superclass may be specified.
+        inheritance}).  If this list of superclass names is empty, the
+    superclass is \classref{object}.  This is different from \defopref{defclass}
+    at level-0, where only one superclass may be specified.
 
     \item[\scref{slot-1}] A list of slot specifications (see
     below), comprising either a {\em slot-name} or a list of a {\em slot-name}
@@ -45,12 +49,9 @@
 \end{arguments}
 %
 \remarks%
-This defining form defines a new class.  The resulting class will be
-bound to \scref{class-name}.  The second argument is a list of
-superclasses.  If this list is empty, the superclass is \classref{object}.
-The third argument is a list of slots.  The remaining
-arguments are class options.  All the slot options and class options
-are exactly the same way as for \defopref{defclass} (\ref{defclass}).
+This defining form defines a new class.  The resulting class will be bound to
+\scref{class-name}.  All the slot and class options are exactly the same as for
+\defopref{defclass} (\ref{defclass}).
 
 \noindent
 The \scref{slot-option-1}\/s are interpreted as follows:
