@@ -20,8 +20,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title:
 ;;;  Description:
-;;; Problems:
-;;  Lacking a detailed error treatment.
+;;;  Problems:
+;;    Lacking a detailed error treatment.
 ;;;  Authors: Horst Friedrich, Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
 
@@ -61,8 +61,8 @@
                  apply)
            (only (get-dispatch-macro-character)
                  read-i)
-           (only (error
-                  <condition>)
+           condition-ii
+           (only (error)
                  condition-i)
            (only ($closed-bracket
                   ;$opend-bracket
@@ -137,7 +137,8 @@
                   push-buffer
                   clear-buffer)
                  string-stack))
-   syntax (tail)
+   syntax (tail
+           condition-ii)
    export (read-char
            putback-char
            read-line
@@ -148,16 +149,15 @@
 ;;;----------------------------------------------------------------------------
 ;;; <read-error>
 ;;;----------------------------------------------------------------------------
-(%define-standard-class (<read-error> <class> )
-  <condition>
-  (
-   (stream type <object> default () accessor stream
+(defcondition <read-error> <condition>
+  ((stream type <object>
+           default ()
+           accessor stream
            keyword stream)
-   (error-number  type <int>
-                  default 77 accessor error-number
-                  keyword error-number))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+   (error-number type <int>
+                 default 77
+                 accessor error-number
+                 keyword error-number)))
 
 (%define-variable *sign* %signed-word-integer #%i1)
 
@@ -805,7 +805,8 @@
                   (%cast %unsigned-word-integer float-pointer))
         (clear-buffer (%cast <string-stack> *buffer-1*))
         (clear-buffer (%cast <string-stack> *buffer-2*))
-        (set-dble float-pointer (%mult (%cast %double-float sign) (dble float-pointer)))
+        (set-dble float-pointer (%mult (%cast %double-float sign)
+                                       (dble float-pointer)))
         float-pointer))
 
 (%define-function (char2string %void) ;eof

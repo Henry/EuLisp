@@ -31,9 +31,9 @@
                  object-0-i)
            formatted-io
            stream
+           condition-i
            (only (equal)
-                 compare)
-           condition-i)
+                 compare))
    syntax (tail
            function
            standard-generic-function
@@ -64,29 +64,7 @@
            condition-message
            signal
            error
-           cerror
-           defcondition-error-string))
-
-;;;-----------------------------------------------------------------------------
-;;; A very simple defcondition
-;;;-----------------------------------------------------------------------------
-(defconstant defcondition-error-string
-  "Superclass in defcondition is not a subclass of <condition>")
-
-(defmacro defcondition (condition-class-name
-                        super-class-name
-                        slots . init-options)
-  `(progn (if (%subclass? (if ,super-class-name ,super-class-name <condition>)
-                          <condition>)
-              ()
-            (error <condition>
-                   defcondition-error-string))
-          (%define-standard-class (,condition-class-name <class>)
-            ,(if super-class-name super-class-name <condition>)
-            ,slots
-            representation pointer-to-struct
-            allocation multiple-type-card
-            ,@init-options)))
+           cerror))
 
 ;;;-----------------------------------------------------------------------------
 ;;; with-handler
@@ -105,30 +83,21 @@
 
 ;;;-----------------------------------------------------------------------------
 ;;; Execution condition
+;; <general-condition> defined in condition-i
 ;;;-----------------------------------------------------------------------------
-;;<general-condition> already defined in module condition-i
-
-(%define-standard-class (<invalid-operator> <class>)
-  <general-condition>
+(defcondition <invalid-operator> <general-condition>
   ((invalid-operator type <object>
                      default ()
                      keyword invalid-operator:
-                     accessor invalid-operator))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+                     accessor invalid-operator)))
 
-
-(%define-standard-class (<range-condition> <class> )
-  <general-condition>
+(defcondition <range-condition> <general-condition>
   ((argument type <object>
              default ()
              keyword argument:
-             accessor argument))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+             accessor argument)))
 
-(%define-standard-class (<cannot-update-setter> <class> )
-  <general-condition>
+(defcondition <cannot-update-setter> <general-condition>
   ((accessor type <object>
              default ()
              keyword accessor:
@@ -136,45 +105,36 @@
    (updater type <object>
             default ()
             keyword updater:
-            accessor updater))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+            accessor updater)))
 
-(%define-standard-class (<no-setter> <class> )
-  <general-condition>
+(defcondition <no-setter> <general-condition>
   ((object type <object>
            default ()
            keyword object:
-           accessor object))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+           accessor object)))
 
-(%define-standard-class (<domain-condition> <class> )
-  <general-condition>
+(defcondition <domain-condition> <general-condition>
   ((result type <object>
            default ()
            keyword result:
-           accessor result))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+           accessor result)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Environment condition
 ;;;-----------------------------------------------------------------------------
-(define-condition-class <environment-condition> <condition> )
+(defcondition <environment-condition> () ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Arithmetic condition
+;; <arithmetic-condition> defined in condition-i
 ;;;-----------------------------------------------------------------------------
-;;condition <arithmetic-condition> already defined in module condition-i
 
-(define-condition-class <division-by-zero> <arithmetic-condition>)
+(defcondition <division-by-zero> <arithmetic-condition> ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion condition
 ;;;-----------------------------------------------------------------------------
-(%define-standard-class (<conversion-condition> <class> )
-  <condition>
+(defcondition <conversion-condition> <condition>
   ((source type <object>
            default ()
            keyword source:
@@ -182,27 +142,22 @@
    (target-class type <object>
                  default ()
                  keyword target-class:
-                 accessor target-class))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+                 accessor target-class)))
 
-(define-condition-class <no-converter> <conversion-condition> )
+(defcondition <no-converter> <conversion-condition> ())
 
 ;;;-----------------------------------------------------------------------------
-;;; Stream condition
+;;; Stream condition --- located in stream-i
 ;;;-----------------------------------------------------------------------------
-;; located in stream-i
 
 ;;;-----------------------------------------------------------------------------
-;;; Read error
+;;; Read error located --- in stream-i
 ;;;-----------------------------------------------------------------------------
-;; located in stream-i
 
 ;;;-----------------------------------------------------------------------------
 ;;; Thread condition
 ;;;-----------------------------------------------------------------------------
-(%define-standard-class (<thread-condition> <class> )
-  <condition>
+(defcondition <thread-condition> <condition>
   ((current-thread type <object>
                    default ()
                    keyword current-thread:
@@ -210,23 +165,21 @@
    (thread type <object>
            default ()
            keyword thread:
-           accessor thread))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+           accessor thread)))
 
-(define-condition-class <thread-already-started> <thread-condition>)
+(defcondition <thread-already-started> <thread-condition> ())
 
-(define-condition-class <wrong-thread-continuation> <thread-condition> )
+(defcondition <wrong-thread-continuation> <thread-condition> ())
 
-(define-condition-class <wrong-condition-class> <thread-condition> )
+(defcondition <wrong-condition-class> <thread-condition> ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Telos condition
+;; <telos-condition> defined in condition-i
+;; <no-applicable-method> defined in condition-i
 ;;;-----------------------------------------------------------------------------
-;; condition <telos-condition> already defined in mmodule condition-i
 
-(%define-standard-class (<no-next-method> <class> )
-  <telos-condition>
+(defcondition <no-next-method> <telos-condition>
   ((method type <object>
            default ()
            keyword method:
@@ -234,12 +187,9 @@
    (operand-list type <object>
                  default ()
                  keyword operand-list:
-                 accessor operand-list))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+                 accessor operand-list)))
 
-(%define-standard-class (<non-congruent-lambda-lists> <class> )
-  <telos-condition>
+(defcondition <non-congruent-lambda-lists> <telos-condition>
   ((generic type <object>
             default ()
             keyword generic:
@@ -247,12 +197,9 @@
    (method type <object>
            default ()
            keyword method:
-           accessor non-congruent-lambda-lists-method))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+           accessor non-congruent-lambda-lists-method)))
 
-(%define-standard-class (<incompatible-method-domain> <class> )
-  <telos-condition>
+(defcondition <incompatible-method-domain> <telos-condition>
   ((generic type <object>
             default ()
             keyword generic:
@@ -260,14 +207,9 @@
    (method type <object>
            default ()
            keyword method:
-           accessor incompatible-method-domain-method))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+           accessor incompatible-method-domain-method)))
 
-;;condition <no-applicable-method> already defined in module condition-i
-
-(%define-standard-class (<method-domain-clash> <class> )
-  <telos-condition>
+(defcondition <method-domain-clash> <telos-condition>
   ((generic type <object>
             default ()
             keyword generic:
@@ -275,9 +217,7 @@
    (methods type <list>
             default ()
             keyword methods:
-            accessor methods))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+            accessor methods)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; define generic fcn and methods for accessors called method and generic

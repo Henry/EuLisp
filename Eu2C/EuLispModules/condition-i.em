@@ -47,7 +47,8 @@
   (import (tail
            (only (function-address)
                  function-i)
-           basic-condition)
+           basic-condition
+           condition-ii)
    syntax (tail
            syntax-0
            condition-ii)
@@ -70,45 +71,24 @@
                  basic-condition)))
 
 ;;;-----------------------------------------------------------------------------
-;;; definition of condition class
-;;;-----------------------------------------------------------------------------
-(%define-standard-class (<condition> <class>)
-  <object>
-  ((message type <object>
-            default ()
-            keyword message:
-            accessor condition-message)
-   ;; (continuation type <object>
-   ;;               default ()
-   ;;               keyword continuation:
-   ;;               accessor continuation)
-   )
-  predicate condition?
-  representation pointer-to-struct
-  allocation multiple-type-card)
-
-;;;-----------------------------------------------------------------------------
 ;;; <general-condition>
 ;;;-----------------------------------------------------------------------------
-(define-condition-class <general-condition> <condition> )
+(defcondition <general-condition> () ())
 
-(%define-standard-class (<typecheck-error> <class>)
-  <general-condition>
+(defcondition <typecheck-error> <general-condition>
   ((object type <object>
            keyword object:
            accessor object)
    (class-list type <list>
                keyword class-list:
-               accessor class-list))
-  allocation multiple-type-card
-  representation pointer-to-struct)
+               accessor class-list)))
+
 (setq $<typecheck-error> <typecheck-error>)
 
 ;;;-----------------------------------------------------------------------------
 ;;; <arithmetic-condition>
 ;;;-----------------------------------------------------------------------------
-(%define-standard-class (<arithmetic-condition> <class> )
-  <condition>
+(defcondition <arithmetic-condition> <condition>
   ((operator type <object>
              default ()
              keyword operator:
@@ -116,17 +96,14 @@
    (operand-list type <list>
                  default ()
                  keyword operand-list:
-                 accessor operand-list))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+                 accessor operand-list)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; <telos-condition>
 ;;;-----------------------------------------------------------------------------
-(define-condition-class <telos-condition> <condition> )
+(defcondition <telos-condition> () ())
 
-(%define-standard-class (<no-applicable-method> <class> )
-  <telos-condition>
+(defcondition <no-applicable-method> <telos-condition>
   ((generic type <object>
             default ()
             keyword generic:
@@ -134,9 +111,8 @@
    (arguments type <object>
               default ()
               keyword arguments:
-              accessor arguments))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+              accessor arguments)))
+
 (setq $<no-applicable-method> <no-applicable-method>)
 
 ;;;-----------------------------------------------------------------------------

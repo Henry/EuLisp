@@ -51,8 +51,8 @@
            stream-generic
            (only (<function>)
                  function-i)
-           (only (error
-                  <condition>)
+           condition-ii
+           (only (error)
                  condition-i)
            (only (check-options
                   get-option)
@@ -107,7 +107,8 @@
    syntax (tail
            (only (when
                   unless)
-                 syntax-0))
+                 syntax-0)
+           condition-ii)
    export (<stream>
            <file-stream>
            <char-file-stream>
@@ -174,26 +175,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Stream condition
 ;;;-----------------------------------------------------------------------------
-(%define-standard-class (<stream-condition> <class> )
-  <condition>
-  ((stream type <object> default () accessor stream
-           keyword stream))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+(defcondition <stream-condition> <condition>
+  ((stream type <object>
+           default ()
+           accessor stream
+           keyword stream)))
 
-(%define-standard-class (<end-of-stream> <class>)
-  <stream-condition>
-  ()
-  representation pointer-to-struct
-  allocation multiple-type-card)
+(defcondition <end-of-stream> <stream-condition> ())
 
-(%define-standard-class (<inappropriate-stream-position> <class>)
-  <stream-condition>
+(defcondition <inappropriate-stream-position> <stream-condition>
   ((invalid-stream-position type <object>
-                            default () accessor invalid-stream-position
-                            keyword invalid-stream-position))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+                            default ()
+                            accessor invalid-stream-position
+                            keyword invalid-stream-position)))
 
 (%define-standard-class (<file-stream> <class>)
   <stream>

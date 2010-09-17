@@ -18,7 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: very basic condition and error signalling facility
+;;; Title: Basic condition and error signalling facility
+;;;  Description:
+;;    This is a low-level error handling system which does not use the
+;;    <condition> class and hence can be used for boot-strapping purposes
+;;    until enough functionality is available to support <condition>.
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-condition

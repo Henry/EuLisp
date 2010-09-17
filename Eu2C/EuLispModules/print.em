@@ -57,9 +57,9 @@
                   stream-string-stack
                   sprintf-3)
                  stream-i)
+           condition-ii
            (only (error
-                  cerror
-                  <condition>)
+                  cerror)
                  condition-i)
            (only (fprintf-3-double
                   sprintf-3-double)
@@ -132,7 +132,8 @@
                  string-stack)
            (only (strlen)
                  c-string-interface))
-   syntax (tail)
+   syntax (tail
+           condition-ii)
    export (<write-error>
            prin
            print
@@ -141,22 +142,20 @@
            output
            newline
            change-exponent-marker
-           print-based-int-0   ; nicht el
-           ))
+           print-based-int-0))   ; nicht el
 
 ;;;----------------------------------------------------------------------------
 ;;; <write-error>
 ;;;----------------------------------------------------------------------------
-(%define-standard-class (<write-error> <class> )
-  <condition>
-  (
-   (stream type <object> default () accessor stream
+(defcondition <write-error> <condition>
+  ((stream type <object>
+           default ()
+           accessor stream
            keyword stream)
-   (error-number  type <int>
-                  default 77 accessor error-number
-                  keyword error-number))
-  representation pointer-to-struct
-  allocation multiple-type-card)
+   (error-number type <int>
+                 default 77
+                 accessor error-number
+                 keyword error-number)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Write primitives

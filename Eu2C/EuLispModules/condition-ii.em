@@ -18,22 +18,61 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: eulisp conditions
+;;; Title: EuLisp Level-0 condition module
 ;;;  Description:
-;;;  Authors: E. Ulrich Kriegel
+;;    Provides the <condition> superclass and the defcondition macro.
+;;    defcondition corresponds to defclass with <condition> as the
+;;    default superclass and the superclass checked to be a <condition>.
+;;;  Authors: E. Ulrich Kriegel and Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule condition-ii
   (import (tail)
-   syntax (tail))
-
-(defmacro define-condition-class (name superclass)
-  `(%define-standard-class (,name <class>)
-     ,superclass
-     ()
-     representation pointer-to-struct
-     allocation multiple-type-card))
+   syntax (tail)
+   export (<condition>
+           condition-message
+           defcondition-error-string
+           %subclass?))
 
 ;;;-----------------------------------------------------------------------------
-)
+;;; <condition>
+;;;-----------------------------------------------------------------------------
+(%define-standard-class (<condition> <class>)
+  <object>
+  ((message type <object>
+            default ()
+            keyword message:
+            accessor condition-message)
+   ;; (continuation type <object>
+   ;;               default ()
+   ;;               keyword continuation:
+   ;;               accessor continuation)
+   )
+  predicate condition?
+  representation pointer-to-struct
+  allocation multiple-type-card)
+
+;;;-----------------------------------------------------------------------------
+;;; defcondition
+;;;-----------------------------------------------------------------------------
+(defconstant defcondition-error-string
+  "Superclass in defcondition is not a subclass of <condition>")
+
+(defmacro defcondition (condition-class-name
+                        super-class-name
+                        slots . class-options)
+  `(progn (if (%subclass? ,(or super-class-name '<condition>) <condition>)
+              ()
+            (error <condition>
+                   defcondition-error-string))
+          (%define-standard-class
+            (,condition-class-name <class>)
+            ,(or super-class-name '<condition>)
+            ,slots
+            representation pointer-to-struct
+            allocation multiple-type-card
+            ,@class-options)))
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module condition-ii
 ;;;-----------------------------------------------------------------------------
