@@ -21,9 +21,9 @@ U2 = $(U2_BOOT)
 ### Output file names
 ###-----------------------------------------------------------------------------
 
-LEVEL0_LIB = $(EUL_LIB_DIR)/liblevel0.a
-LEVEL0_LIB_I = $(EUL_LIB_DIR)/liblevel0.i
-LEVEL0_SHARED_LIB = $(EUL_LIB_DIR)/liblevel0.so
+LEVEL0_LIB = $(EUL_LIB_DIR)/liblevel-0.a
+LEVEL0_LIB_I = $(EUL_LIB_DIR)/liblevel-0.i
+LEVEL0_SHARED_LIB = $(EUL_LIB_DIR)/liblevel-0.so
 
 LEVEL1_LIB = $(EUL_LIB_DIR)/liblevel1.a
 LEVEL1_LIB_I = $(EUL_LIB_DIR)/liblevel1.i
@@ -50,7 +50,7 @@ LEVELN_EM = bit.em callback.em character.em collect.em compare.em condition.em \
 	random.em read.em socket.em stream.em stream1.em stream2.em stream3.em \
 	string.em symbol.em table.em table1.em let-cc.em thread.em vector.em
 
-LEVEL0_EM = $(LEVELN_EM) level0.em
+LEVEL0_EM = $(LEVELN_EM) level-0.em
 LEVEL0_C := $(LEVEL0_EM:%.em=%.c)
 LEVEL0_O := ${LEVEL0_C:%.c=$(ARCH_DIR)/%.o}
 
@@ -124,7 +124,7 @@ $(MATH_SHARED_LIB): $(MATH_O)
 ###-----------------------------------------------------------------------------
 
 .PHONY: boot
-boot:	libtelos.i _macros.i liblevel0.i liblevel1.i libmath.i
+boot:	libtelos.i _macros.i liblevel-0.i liblevel1.i libmath.i
 	@rm -f libtelos.i
 	$(MAKE) -C ../Telos boot-syntax
 	$(MAKE) boot-syntax

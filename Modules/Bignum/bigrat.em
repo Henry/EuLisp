@@ -14,7 +14,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class definition
 ;;;-----------------------------------------------------------------------------
-(defclass <bigrat> (<number>)
+(defclass <bigrat> <number>
   ((bigrat-value accessor: bigrat-value keyword: value: required?: t))
   predicate: bigrat?)
 

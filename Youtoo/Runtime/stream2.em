@@ -39,7 +39,7 @@
    (buffer-cnt accessor: control-block-buffer-cnt default: 0))
   predicate: stream-control-block?)
 
-(defclass <file-control-block> (<stream-control-block>)
+(defclass <file-control-block> <stream-control-block>
   ((file-name accessor: control-block-file-name keyword: file-name:
               default: "")
    (mode accessor: control-block-mode keyword: mode: default: 'r)
@@ -74,16 +74,16 @@
   constructor: (from-stream read-action:)
   constructor: (to-stream write-action:))
 
-(defclass <buffered-stream> (<stream>)
+(defclass <buffered-stream> <stream>
   ()
   predicate: buffered-stream?)
 
-(defclass <string-stream> (<buffered-stream>)
+(defclass <string-stream> <buffered-stream>
   ((string-list accessor: string-stream-string-list))
   keywords: (string:)
   predicate: string-stream?)
 
-(defclass <file-stream> (<buffered-stream>)
+(defclass <file-stream> <buffered-stream>
   ()
   keywords: (file-name:)
   predicate: file-stream?)
@@ -210,9 +210,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Error handling
 ;;;-----------------------------------------------------------------------------
-(defclass <stream-condition> (<condition>)
+(defclass <stream-condition> <condition>
   ((value keyword: value: accessor: value)))
-(defcondition <end-of-stream> <stream-condition>)
+
+(defcondition <end-of-stream> <stream-condition> ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Open file streams

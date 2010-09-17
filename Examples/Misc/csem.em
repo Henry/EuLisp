@@ -16,7 +16,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; The counting semaphore class
 ;;;-----------------------------------------------------------------------------
-(defclass <csemaphore> (<semaphore>)
+(defclass <csemaphore> <semaphore>
   ((counter-lock default: (make <lock>)
                  accessor: counter-lock)
    (mutex-lock default: (make <lock>)

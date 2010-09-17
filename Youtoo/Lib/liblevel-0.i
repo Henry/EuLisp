@@ -1,10 +1,10 @@
 ;;; EuLisp system 'youtoo'
-;;;   Library interface file for module level0
+;;;   Library interface file for module level-0
 
-(definterface level0
+(definterface level-0
   (import ()
    syntax ()
-   full-import (level0 telos boot1 boot mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol)
+   full-import (level-0 telos boot1 boot mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key mop-prim mop-access mop-alloc bit condition event thread dynamic let-cc callback string convert copy integer number fpi collect compare character float stream stream1 lock stream2 socket list format convert1 vector table1 table read handler random stream3 symbol)
    export (
     ((name . >=) (pos . 11) (origin compare . >=))
     ((name . character-as-string) (pos . 11) (origin character . character-as-string))

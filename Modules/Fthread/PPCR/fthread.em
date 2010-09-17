@@ -18,7 +18,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <ppcr-thread>
 ;;;-----------------------------------------------------------------------------
-(defclass <ppcr-thread> (<thread>)
+(defclass <ppcr-thread> <thread>
   ((function accessor: thread-function)
    (returned accessor: thread-returned?)
    (return-value accessor: thread-return-value)

@@ -47,7 +47,7 @@
   keywords: (function:)
   predicate: thread?)
 
-(defclass <simple-thread> (<thread>)
+(defclass <simple-thread> <thread>
   ((continuation accessor: thread-continuation)
    (state accessor: thread-state)
    (returned accessor: thread-returned?)

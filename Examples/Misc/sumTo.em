@@ -6,11 +6,11 @@
 ;;;  Authors: Andreas Kind
 ;;; Description: compute the sum up to 10000
 ;;;  Compilation
-;;    youtoo sumTo -l level0
+;;    youtoo sumTo -l level-0
 ;;;-----------------------------------------------------------------------------
 (defmodule sumTo
   (syntax (macros)
-   import (level0))
+   import (level-0))
 
 (defun sum (x res)
   (if (= x 0)

@@ -58,7 +58,7 @@ boot: $(U2_BOOT) $(EUL_BOOT_DIR)/Bin.$(ARCH)/b2h
 	$(MAKE) -C Youtoo
 	$(MAKE) -C Comptime2 bytecode2
 	$(MAKE) -C $(EUL_BOOT_DIR)/Youtoo/Tools;
-	mkdir -p Lib; cp $(EUL_LIB_DIR)/lib{boot,eval,level0,level1,math,telos}.i Lib
+	mkdir -p Lib; cp $(EUL_LIB_DIR)/lib{boot,eval,level-0,level1,math,telos}.i Lib
 	rm -f {Telos,Runtime,Comptime2}/lib*.i
 	@echo "DONE"
 

@@ -13,7 +13,7 @@
 ;; TAKL -- The TAKeuchi function using lists as counters.
 (defmodule takl
   (syntax (macros)
-   import (level0 math))
+   import (level-0 math))
 
 (defun listn (n)
   (if (null? (= 0 n))

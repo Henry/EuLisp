@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*An Introduction to EuLisp, EuXLisp and Youtoo*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-09-16 14:30:27 BST"/>
+<meta name="generated" content="2010-09-17 22:17:28 BST"/>
 <meta name="author" content="of original Euscheme notes Russell Bradford"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -690,7 +690,7 @@ Here is a simple module:
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">one</span>
-  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>))
 
   (defun <span style="color: #0000ff; font-weight: bold;">foo</span> ...)
   (defun <span style="color: #0000ff; font-weight: bold;">bar</span> ...)
@@ -703,9 +703,9 @@ Here is a simple module:
 
 
 <p>
-The module one imports from the system module named <code>level0</code>.  This module
+The module one imports from the system module named <code>level-0</code>.  This module
 contains all the useful stuff like <a href="EuLisp-0.991/html/eulispcl17.html#dx21-630002"><code>cons</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-632002"><code>car</code></a>, <a href="EuLisp-0.991/html/eulispcl16.html#dx20-229002"><code>defun</code></a>, <a href="EuLisp-0.991/html/eulispcl17.html#dx21-661004"><code>+</code></a> and so on.  In
-fact, it's generally a good idea to import the <code>level0</code> module, otherwise you
+fact, it's generally a good idea to import the <code>level-0</code> module, otherwise you
 can't actually do anything.
 </p>
 <p>
@@ -719,7 +719,7 @@ If now, we have
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">two</span>
-  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span> one))
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span> one))
 
   ...
 )
@@ -727,7 +727,7 @@ If now, we have
 
 
 <p>
-the module two imports one (and <code>level0</code>), so two can refer to <code>foo</code> and <code>baz</code>
+the module two imports one (and <code>level-0</code>), so two can refer to <code>foo</code> and <code>baz</code>
 from one.  If two uses a name <code>bar</code>, it is its own <code>bar</code>, and has nothing to
 do with the <code>bar</code> in one.
 </p>
@@ -766,12 +766,12 @@ To re-load a module (after, say, changing the file) use <code>(!&gt;&gt; one)</c
 </p>
 <p>
 Modules can rename and filter on <a href="EuLisp-0.991/html/eulispcl10.html#dx12-69001"><code>import</code></a> (not yet on <a href="EuLisp-0.991/html/eulispcl10.html#dx12-68001"><code>export</code></a>).  Use
-level0.em for all the basic stuff, e.g.,
+level-0.em for all the basic stuff, e.g.,
 </p>
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">mymod</span>
-  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>))
   ...
   )
 </pre>
@@ -1349,7 +1349,7 @@ into the current module?
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">one</span>
-  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>))
 
   (defmacro <span style="color: #0000ff; font-weight: bold;">foo</span> (<span style="color: #0000ff; font-weight: bold;">x</span>)
      `<span style="color: #0000ff; font-weight: bold;">(car</span> (<span style="color: #0000ff; font-weight: bold;">bar</span> ,x)))
@@ -1368,7 +1368,7 @@ Here the module <code>one</code> exports foo only, but <code>foo</code> expands 
 
 
 <pre class="src src-eulisp">(defmodule <span style="color: #0000ff; font-weight: bold;">two</span>
-  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level0</span>))
+  (<span style="color: #0000ff; font-weight: bold;">import</span> (<span style="color: #0000ff; font-weight: bold;">level-0</span>))
 
   ...
   (<span style="color: #0000ff; font-weight: bold;">foo</span> 4)
@@ -3394,7 +3394,7 @@ See <i>Examples/Misc/script.em</i>.
 <div id="postamble">
 <p class="author"> Author: of original Euscheme notes Russell Bradford
 </p>
-<p class="date"> Date: 2010-09-16 14:30:27 BST</p>
+<p class="date"> Date: 2010-09-17 22:17:28 BST</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

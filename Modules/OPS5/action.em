@@ -16,7 +16,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Action Classes
 ;;;-----------------------------------------------------------------------------
-(defclass <make-action> (<action>)
+(defclass <make-action> <action>
   ((mk-wme-name
     keyword: mk-wme-name:
     reader:  mk-wme-name)
@@ -25,13 +25,13 @@
     reader:  mk-attribs))
   constructor: (make-make-action mk-wme-name: mk-attribs:))
 
-(defclass <remove-action> (<action>)
+(defclass <remove-action> <action>
   ((rm-elt-desigs
     keyword: rm-elt-desigs:
     reader:  rm-elt-desigs))
   constructor: (make-remove-action rm-elt-desigs:))
 
-(defclass <modify-action> (<action>)
+(defclass <modify-action> <action>
   ((md-attribs
     keyword: md-attribs:
     reader:  md-attribs)
@@ -40,13 +40,13 @@
     reader:  md-elt-desig))
   constructor: (make-modify-action md-elt-desig: md-attribs:))
 
-(defclass <write-action> (<action>)
+(defclass <write-action> <action>
   ((wr-data
     keyword: wr-data:
     reader:  wr-data))
   constructor: (make-write-action wr-data:))
 
-(defclass <bind-action> (<action>)
+(defclass <bind-action> <action>
   ((bd-var
     keyword: bd-var:
     reader:  bd-var)

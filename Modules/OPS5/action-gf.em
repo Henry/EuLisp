@@ -13,7 +13,7 @@
 (defclass <action> ()
   ())
 
-(defclass <halt-action> (<action>)
+(defclass <halt-action> <action>
   ()
   constructor: (make-halt-action))
 

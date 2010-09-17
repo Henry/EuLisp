@@ -1,6 +1,6 @@
 (defmodule mem
   (syntax (macros)
-   import (level0))
+   import (level-0))
 
 (defconstant *lifetime* 100)
 (defconstant *blocksize* 1000)

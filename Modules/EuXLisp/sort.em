@@ -30,7 +30,7 @@
 ;;; this is a stable sort.
 
 (defmodule sort
-  (import (level0)
+  (import (level-0)
    export (sort sort!))
 
 (defconstant set-cdr! (setter cdr))

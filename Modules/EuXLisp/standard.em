@@ -1,10 +1,10 @@
 ;; some non-EuLisp stuff to stop Feel users whinging
 
 (defmodule standard
-  (import (level0)
+  (import (level-0)
    export (subst nconc make-symbol symbol-name while for ++ -- defstruct))
 
-(expose level0)
+(expose level-0)
 
 ;; subst a for b in c
 (defun subst (a b c)

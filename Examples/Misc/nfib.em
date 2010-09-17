@@ -5,12 +5,12 @@
 ;;;  Authors: Andreas Kind
 ;;;  Description: counting fibonacci function calls
 ;;;  Compilation
-;;  youtoo nfib -l level0 -l math
+;;  youtoo nfib -l level-0 -l math
 ;;;  Interpretation: (!> nfib)
 ;;;-----------------------------------------------------------------------------
 (defmodule nfib
   (syntax (macros)
-   import (level0 math)
+   import (level-0 math)
    export (nfib))
 
 (defun nfib (n)

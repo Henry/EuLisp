@@ -282,9 +282,9 @@
     definition, in particular =e= and =g= formatting of floating-point numbers
     is missing.  =format= is complete in EuXLisp and it may be possible to reuse
     some of this functionality.
-*** DONE Enable level0 modules to be loaded interactively
+*** DONE Enable level-0 modules to be loaded interactively
     CLOSED: [2010-06-21 Mon 14:32]
-    into a level1 environment by creating a dummy level0 which is a copy of the
+    into a level1 environment by creating a dummy level-0 which is a copy of the
     default env
 *** DONE Include default environment variables directly into =youtoo=
     CLOSED: [2010-06-21 Mon 17:12]

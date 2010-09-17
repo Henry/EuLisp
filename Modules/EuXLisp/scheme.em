@@ -17,7 +17,7 @@
               error
               defcondition
               <error>)
-             level0)))
+             level-0)))
    export (!> exit error))
 
 (expose schemer)

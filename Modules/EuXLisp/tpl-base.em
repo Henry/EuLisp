@@ -5,7 +5,7 @@
 ;;; Basic classes and macros.
 
 (defmodule tpl-base
-  (import (level0)
+  (import (level-0)
    export (<paralation-internal> p-size index-internal shape-internal
                                  attr make-paralation-internal <field> value paralation make-field
                                  copy-field <mapping> from-key to-key make-mapping elwise))

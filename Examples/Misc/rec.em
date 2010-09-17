@@ -5,13 +5,13 @@
 ;;;  Library: misc
 ;;;  Authors: Andreas Kind
 ;;;  Description: recursion test
-;;;  Compilation: ../youtoo rec -l level0
+;;;  Compilation: ../youtoo rec -l level-0
 ;;;  Interpretation: (!> rec)
 ;;; -----------------------------------------------------------------------
 
 (defmodule rec
   (syntax (macros)
-   import (level0)
+   import (level-0)
    export (run))
 
 (defun test (f g n)

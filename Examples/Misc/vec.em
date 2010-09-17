@@ -1,6 +1,6 @@
 (defmodule vec
   (syntax (macros)
-   import (level0))
+   import (level-0))
 
 (deflocal *size* 1000000)
 (deflocal *vec1* ())

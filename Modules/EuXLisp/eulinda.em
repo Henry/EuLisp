@@ -27,7 +27,7 @@
 ;; (linda-read pp 'foo 1 2 3)        suspends
 
 (defmodule eulinda
-  (import (level0)
+  (import (level-0)
    export (<linda-pool> make-linda-pool linda-in linda-read
                         linda-out linda-evallinda-in? linda-read?
                         linda-in-tuple linda-read-tuple

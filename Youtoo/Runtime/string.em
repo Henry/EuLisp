@@ -19,7 +19,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Classes: <string>
 ;;;-----------------------------------------------------------------------------
-(defclass <character-sequence> (<sequence>) () abstract?: t)
+(defclass <character-sequence> <sequence> () abstract?: t)
 
 (defprimclass <string> string-class (<character-sequence>)
               ((data accessor: string-data)))

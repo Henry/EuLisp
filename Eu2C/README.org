@@ -219,7 +219,7 @@
     + =-security= : Links with a gc-library which is compiled with special
       security features. In the default case a gc-library with security features
       off is used.
-    + =-threads= : The precompiled run-time system =eulisp-level0= supports
+    + =-threads= : The precompiled run-time system =eulisp-level-0= supports
       threads.  However, threads require special care during memory management
       activities like allocation of space. For the sake of efficiency we decided
       to assume as a default case that there are single threaded applications

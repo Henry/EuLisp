@@ -15,7 +15,7 @@
 ;;;
 
 (defmodule values
-  (import (level0)
+  (import (level-0)
    export (values call-with-values
                   multiple-value-setq multiple-value-list multiple-value-call
                   values-list multiple-value-bind))

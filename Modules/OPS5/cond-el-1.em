@@ -79,7 +79,7 @@
   ;     (ce-matches ce))
   )
 
-(defclass <pos-join-ce> (<condition-element>)
+(defclass <pos-join-ce> <condition-element>
   ((j-tests                    ; join-variable tests in condition element
     default: ()
     reader: pos-j-tests
@@ -91,10 +91,10 @@
   constructor: (make-pos-join-ce ce-class-name:)
   constructor: (make-pos-from-njoin-ce ce-class-name:
                                        c-tests: v-tests:))
-(defclass <pos-njoin-ce> (<condition-element>) ()
+(defclass <pos-njoin-ce> <condition-element> ()
   constructor: (make-pos-njoin-ce ce-class-name:))
 
-(defclass <neg-join-ce> (<condition-element>)
+(defclass <neg-join-ce> <condition-element>
   ((j-tests                    ; join-variable tests in condition element
     default:  ()
     reader: neg-j-tests
@@ -107,7 +107,7 @@
   constructor: (make-neg-from-njoin-ce ce-class-name:
                                        c-tests: v-tests:))
 
-(defclass <neg-njoin-ce> (<condition-element>) ()
+(defclass <neg-njoin-ce> <condition-element> ()
   constructor: (make-neg-njoin-ce ce-class-name:))
 
 ;; Generic function to access pos-j-tests and neg-j-tests

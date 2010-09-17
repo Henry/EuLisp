@@ -2,12 +2,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'youtoo'
 ;;;-----------------------------------------------------------------------------
-;;;  Library: level0
+;;;  Library: level-0
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;; Description: Programming Language EuLisp, Level-0
-;;;  Attention: Update Comptime2/cg-dld.em if level0 modules change!
+;;;  Attention: Update Comptime2/cg-dld.em if level-0 modules change!
 ;;;-----------------------------------------------------------------------------
-(defmodule level0
+(defmodule level-0
   (syntax (_telos0)
    expose (bit
            callback

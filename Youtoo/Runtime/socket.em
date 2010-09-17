@@ -44,7 +44,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Socket connections
 ;;;-----------------------------------------------------------------------------
-(defclass <connection> (<file-stream>)
+(defclass <connection> <file-stream>
   ((host accessor: connection-host keyword: host: default: (hostname))
    (port accessor: connection-port keyword: port: default: 4711))
   keywords: (socket:)

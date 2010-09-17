@@ -17,7 +17,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; MPI stream class
 ;;;-----------------------------------------------------------------------------
-(defclass <mpi-stream> (<stream>)
+(defclass <mpi-stream> <stream>
   ((host accessor: mpi-stream-host)
    (rank accessor: mpi-stream-rank)
    (object-stream accessor: mpi-stream-object-stream)

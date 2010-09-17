@@ -52,13 +52,13 @@ Other args are not interpreted, but are available though
 
 .SH FEATURES
 The module that contains all the useful stuff (e.g.,
-\fBcons\fP and friends) is called \fBlevel0\fP: if you import no modules,
+\fBcons\fP and friends) is called \fBlevel-0\fP: if you import no modules,
 you get nothing at all, not even special forms. So a typical module looks like
 \fB
 .nf
 
 (defmodule foo
-   (import (level0 ...))
+   (import (level-0 ...))
 
    ...
 )

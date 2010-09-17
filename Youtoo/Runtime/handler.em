@@ -21,7 +21,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Handle foreign C pointers
 ;;;-----------------------------------------------------------------------------
-(defclass <handler> (<object>)
+(defclass <handler> <object>
   ((handle accessor: handle keyword: handle:))
   predicate: handler?)
 

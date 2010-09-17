@@ -6,14 +6,15 @@
 ;;;  Authors: Russell Bradford, Andreas Kind
 ;;; Description: defining form 'defclass'
 ;;;-----------------------------------------------------------------------------
+
 (defmodule _mop-defcl0
   (syntax (boot0)
    import (level1))
 
 ;;;-----------------------------------------------------------------------------
-;;; Syntax: (defclass name (supers) (slots) {keywords}*), where
+;;; Syntax: (defclass name supers (slots) {keywords}*), where
 ;; name is a symbol,
-;; supers is {class}*,
+;; supers is {() | class | ({class}*)},
 ;; slots is {symbol | (symbol {slot-keywords}*)}, and
 ;; keywords and slot-keywords are {key val}. Allowable keywords include
 ;; class:               the class of the class begin defined
@@ -39,7 +40,9 @@
        (defconstant ,cl-name
          (make ,(find-key class: keywords '<simple-class>)
                name: ',real-name
-               direct-superclasses: (list ,@(or supers '(<object>)))
+               direct-superclasses:
+               (list ,@(or (if (list? supers) supers (list supers))
+                           '(<object>)))
                direct-slots: (list ,@(do-direct-slotds slots))
                direct-keywords:
                ',(append (find-key keywords: keywords ())
@@ -65,7 +68,9 @@
        (initialize ,cl-name
                    (list name: ',real-name
                          direct-superclasses:
-                         (list ,@(or supers '(<object>)))
+                         ;(list ,@(or supers '(<object>)))
+                         (list ,@(or (if (list? supers) supers (list supers))
+                                     '(<object>)))
                          direct-slots:
                          (list ,@(do-direct-slotds slots))
                          direct-keywords:
@@ -251,5 +256,5 @@
    (loop slots ())))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module mop-defcl0
 ;;;-----------------------------------------------------------------------------

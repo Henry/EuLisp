@@ -32,7 +32,7 @@ EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 ###-----------------------------------------------------------------------------
 ### Youtoo default compile rules for Level-0 and Level-1
 ###-----------------------------------------------------------------------------
-makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level0 -l math
+makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level-0 -l math
 makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1 -l math
 
 ###-----------------------------------------------------------------------------

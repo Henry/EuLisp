@@ -13,7 +13,7 @@
 ;;; TAK -- A vanilla version of the TAKeuchi function
 (defmodule tak
   (syntax (macros)
-   import (level0 math))
+   import (level-0 math))
 
 (defun tak (x y z)
   (if (null? (< y x))

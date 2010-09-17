@@ -38,19 +38,19 @@ void initialize_module__telos0()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef G001384;
+  LispRef G001392;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 23 is_init: 1 index: 0 binding: initialize-_telos0 */
-  static const void *G001383[] = {I(87,25,00,00),B(_telos0 ,1),I(24,00,00,00),B(_mop_defcl0 ,1),I(3e,0b,24,00),B(_mop_defcl0 ,0),I(3c,00,21,01),I(24,00,00,00),B(_mop_meth0 ,1),I(3e,0b,24,00),B(_mop_meth0 ,0),I(3c,00,21,01),I(24,00,00,00),B(_mop_gf0 ,1),I(3e,0b,24,00),B(_mop_gf0 ,0),I(3c,00,21,01),I(24,00,00,00),B(_boot0 ,1),I(3e,0b,24,00),B(_boot0 ,0),I(3c,00,21,01),I(86,ac,00,00)};
+  static const void *G001391[] = {I(87,25,00,00),B(_telos0 ,1),I(24,00,00,00),B(_mop_defcl0 ,1),I(3e,0b,24,00),B(_mop_defcl0 ,0),I(3c,00,21,01),I(24,00,00,00),B(_mop_meth0 ,1),I(3e,0b,24,00),B(_mop_meth0 ,0),I(3c,00,21,01),I(24,00,00,00),B(_mop_gf0 ,1),I(3e,0b,24,00),B(_mop_gf0 ,0),I(3c,00,21,01),I(24,00,00,00),B(_boot0 ,1),I(3e,0b,24,00),B(_boot0 ,0),I(3c,00,21,01),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G001384,G001383);
+  eul_allocate_bytevector( G001392,G001391);
 
   /* Set local bindings */
   _telos0_bindings[ 1] = eul_nil;
-  eul_allocate_lambda( _telos0_bindings[0], "initialize-_telos0", 0, G001384);
+  eul_allocate_lambda( _telos0_bindings[0], "initialize-_telos0", 0, G001392);
 
   }
 }

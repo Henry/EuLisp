@@ -3,7 +3,7 @@
 ;;; EuSchemed by RJB, Sept 95.
 
 (defmodule tpl
-  (import (level0 tpl-base)
+  (import (level-0 tpl-base)
    export (<field> paralation index <mapping> elwise
                    make-paralation match move inverse
                    field-ref field-length vref shape shape-class

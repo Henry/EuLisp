@@ -14,7 +14,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Compile-time error conditions
 ;;;-----------------------------------------------------------------------------
-(defclass <ct-error> (<condition>)
+(defclass <ct-error> <condition>
   ((value keyword: ct-error-value: accessor: ct-error-value)))
 
 (defmethod get-ct-error-condition-class (x) <ct-error>)

@@ -338,7 +338,7 @@
   Here is a simple module:
   #+BEGIN_SRC eulisp
   (defmodule one
-    (import (level0))
+    (import (level-0))
 
     (defun foo ...)
     (defun bar ...)
@@ -348,9 +348,9 @@
     (export foo baz)
   )
   #+END_SRC
-  The module one imports from the system module named =level0=.  This module
+  The module one imports from the system module named =level-0=.  This module
   contains all the useful stuff like [[file:EuLisp-0.991/html/eulispcl17.html#dx21-630002][=cons=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-632002][=car=]], [[file:EuLisp-0.991/html/eulispcl16.html#dx20-229002][=defun=]], [[file:EuLisp-0.991/html/eulispcl17.html#dx21-661004][=+=]] and so on.  In
-  fact, it's generally a good idea to import the =level0= module, otherwise you
+  fact, it's generally a good idea to import the =level-0= module, otherwise you
   can't actually do anything.
 
   In module one we define a few name, like =foo=, =bar= and =baz=, and export
@@ -360,12 +360,12 @@
   If now, we have
   #+BEGIN_SRC eulisp
   (defmodule two
-    (import (level0 one))
+    (import (level-0 one))
 
     ...
   )
   #+END_SRC
-  the module two imports one (and =level0=), so two can refer to =foo= and =baz=
+  the module two imports one (and =level-0=), so two can refer to =foo= and =baz=
   from one.  If two uses a name =bar=, it is its own =bar=, and has nothing to
   do with the =bar= in one.
 
@@ -392,10 +392,10 @@
     To re-load a module (after, say, changing the file) use =(!>> one)=.
 
     Modules can rename and filter on [[file:EuLisp-0.991/html/eulispcl10.html#dx12-69001][=import=]] (not yet on [[file:EuLisp-0.991/html/eulispcl10.html#dx12-68001][=export=]]).  Use
-    level0.em for all the basic stuff, e.g.,
+    level-0.em for all the basic stuff, e.g.,
     #+BEGIN_SRC eulisp
     (defmodule mymod
-      (import (level0))
+      (import (level-0))
       ...
       )
     #+END_SRC
@@ -734,7 +734,7 @@
   into the current module?
   #+BEGIN_SRC eulisp
   (defmodule one
-    (import (level0))
+    (import (level-0))
 
     (defmacro foo (x)
        `(car (bar ,x)))
@@ -748,7 +748,7 @@
   =bar=.
   #+BEGIN_SRC eulisp
   (defmodule two
-    (import (level0))
+    (import (level-0))
 
     ...
     (foo 4)

@@ -4,13 +4,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: Misc
 ;;;  Authors: Andreas Kind
-;;; Description: empty level0 module
+;;; Description: empty level-0 module
 ;;;  Compilation
-;;    youtoo empty -l level0
+;;    youtoo empty -l level-0
 ;;;-----------------------------------------------------------------------------
 (defmodule empty
   (syntax (macros)
-   import (level0))
+   import (level-0))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

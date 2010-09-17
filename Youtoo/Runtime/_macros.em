@@ -6,9 +6,11 @@
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;; Description: level1 macros
 ;;;-----------------------------------------------------------------------------
+
 (defmodule _macros
   (import (level1)
-   expose (_telos0 _stream0)
+   expose (_telos0
+           _stream0)
    syntax (_boot0))
 
 ;;;-----------------------------------------------------------------------------
@@ -55,7 +57,7 @@
   `((dynamic ,tag) (progn ,@forms)))
 
 ;;;-----------------------------------------------------------------------------
-;;; Loopings
+;;; While loop
 ;;;-----------------------------------------------------------------------------
 (defmacro while (condition . body)
   (let ((loop (gensym)))
@@ -97,20 +99,17 @@
                    `((member ,key ',keylist eql) ,@forms))
                   (else
                    `((eql ,key ',(car keylist)) ,@forms)))))
-            clauses)))
-    ))
+            clauses)))))
 
 ;;;-----------------------------------------------------------------------------
-;;; Define condition classes
+;;; defcondition
 ;;;-----------------------------------------------------------------------------
-(defmacro defcondition (name super . init-options)
-  (if (null? super)
-      `(defclass ,name (<condition>) () ,@init-options)
-    `(defclass ,name (,super) () ,@init-options)))
+(defmacro defcondition (name super slots . keywords)
+  `(defclass ,name ,(or super '<condition>) ,slots ,@keywords))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Dynamic variables
-;;; defglobal is top-level form only; must not be used within dynamic-let
+;;    defglobal is top-level form only; must not be used within dynamic-let
 ;;;-----------------------------------------------------------------------------
 (defmacro defglobal (name val) `(push-dynamic-variable ',name ,val))
 
@@ -173,5 +172,5 @@
        ,res)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module macros
 ;;;-----------------------------------------------------------------------------

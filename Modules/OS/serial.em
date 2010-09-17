@@ -47,7 +47,7 @@
 ;;;------------------------------------------------------------------------
 ;;; Object stream class
 ;;;------------------------------------------------------------------------
-(defclass <object-stream> (<stream>)
+(defclass <object-stream> <stream>
   ((cache accessor: object-stream-cache default: #(() ()))
    (cache-index accessor: object-stream-cache-index default: 0))
   predicate: object-stream?)

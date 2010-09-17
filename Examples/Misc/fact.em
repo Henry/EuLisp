@@ -8,7 +8,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule fact
   (syntax (macros)
-   import (level0)
+   import (level-0)
    export (fact))
 
 (defun fact (x)

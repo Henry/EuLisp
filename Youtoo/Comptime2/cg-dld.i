@@ -29,7 +29,7 @@
     ("binding ~a not accessable in module ~a" . 52)
     ("binding ~a not available in module ~a" . 51)
     ("binding ~a not available in module ~a" . 47)
-    (level0 . 44)
+    (level-0 . 44)
     (math . 43)
     (name: . 42)
     ("Create default modules ..." . 41)

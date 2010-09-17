@@ -50,10 +50,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Classes: <collection> and <sequence>
 ;;;-----------------------------------------------------------------------------
-(defclass <collection> (<object>) ()
+(defclass <collection> <object> ()
   abstract?: t)
 
-(defclass <sequence> (<collection>) ()
+(defclass <sequence> <collection> ()
   keywords: (size: fill-value:)
   abstract?: t)
 

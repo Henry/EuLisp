@@ -1,7 +1,7 @@
 ;;; sending stuff over sockets
 
 (defmodule sexpr
-  (import (level0 socket)
+  (import (level-0 socket)
    export (<send-error> <recv-error> send recv))
 
 (defconstant null-tag 0)

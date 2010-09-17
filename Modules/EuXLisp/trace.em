@@ -1,5 +1,5 @@
 (defmodule trace
-  (import (level0)
+  (import (level-0)
    export (trace untrace))
 
 (defconstant trace-table (make-table eq))

@@ -20,7 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <ui-thread>
 ;;;-----------------------------------------------------------------------------
-(defclass <ui-thread> (<thread>)
+(defclass <ui-thread> <thread>
   ((function accessor: thread-function)
    (returned accessor: thread-returned?)
    (return-value accessor: thread-return-value)

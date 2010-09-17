@@ -9,7 +9,7 @@
   ((u accessor: foo-u keyword: u: default: 34)
    (v accessor: foo-v keyword: v: default: 35)))
 
-(defclass <bar> (<foo>)
+(defclass <bar> <foo>
   ((r accessor: bar-r keyword: r: default: 36)))
 
 (defun baz x (print (reverse x)))

@@ -50,7 +50,7 @@
 
 (defextern hash-object (ptr) <int> "eul_hash_object")
 
-(defclass <table> (<collection>)
+(defclass <table> <collection>
   ((entries accessor: table-entries)
    (fill-value keyword: fill-value: reader: table-fill-value)
    (size default: 0 accessor: table-size)
@@ -63,7 +63,7 @@
               ;; Has to have same memory layout as <table>
               predicate: simple-hash-table?)
 
-(defclass <hash-table> (<table>)
+(defclass <hash-table> <table>
   ((comparator default: eql accessor: table-comparator keyword: comparator:)
    (hash-function default: *default-hash-function*
                   accessor: table-hash-function

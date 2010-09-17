@@ -210,7 +210,7 @@ void initialize_module_cg_dld()
   object_class(str_5777) = eul_static_string_class;
   eul_intern_keyword(key_5778,"name");
   eul_intern_symbol(sym_5779,"math");
-  eul_intern_symbol(sym_5780,"level0");
+  eul_intern_symbol(sym_5780,"level-0");
   eul_allocate_bytevector( G005776,G005775);
   eul_allocate_bytevector( G005782,G005781);
   object_class(str_5785) = eul_static_string_class;

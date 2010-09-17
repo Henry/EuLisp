@@ -9,7 +9,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defmodule triang
   (syntax (macros)
-   import (level0 math))
+   import (level-0 math))
 
 (deflocal *answer* ())
 (deflocal *final* ())

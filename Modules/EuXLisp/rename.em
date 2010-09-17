@@ -8,7 +8,7 @@
                     (lambda church)
                     (car cdr)
                     (cdr car))
-                   level0)))
+                   level-0)))
 
 (procedure foo (x)
            (bind ((y 1))

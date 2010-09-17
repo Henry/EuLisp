@@ -26,12 +26,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Class <condition> and <general-condition>
 ;;;-----------------------------------------------------------------------------
-(defclass <condition> (<object>)
+(defclass <condition> <object>
   ((message keyword: message:
             accessor: condition-message))
   predicate: condition?)
 
-(defclass <general-condition> (<condition>)
+(defclass <general-condition> <condition>
   ((arguments keyword: arguments:)))
 
 ;;;-----------------------------------------------------------------------------

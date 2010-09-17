@@ -14,7 +14,7 @@
 ;; This file contains a recursive as well as an iterative test.
 (defmodule div
   (syntax (macros)
-   import (level0 math)
+   import (level-0 math)
    export (test-1 test-2 *ll*))
 
 (defun create-n (n)
