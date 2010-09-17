@@ -452,7 +452,9 @@ static void define1(LVAL list, LVAL body, int cont)
 
         // make sure it's a symbol
         if (!symbolp(list))
+        {
             xlerror("expecting a symbol", list);
+        }
 
         // check for a procedure definition
         if (consp(body) && consp(car(body)) && car(car(body)) == s_lambda)
@@ -1321,8 +1323,6 @@ static void do_progn(LVAL form, int cont)
 // do_while - compile the (WHILE ... ) expression
 static void do_while(LVAL form, int cont)
 {
-    int loop, nxt;
-
     // make sure there is a test expression
     if (atom(form))
     {
@@ -1331,10 +1331,10 @@ static void do_while(LVAL form, int cont)
 
     // skip around the 'body' to the test expression
     putcbyte(OP_BR);
-    nxt = putcword(0);
+    int nxt = putcword(0);
 
     // compile the loop body
-    loop = cptr - cbase;
+    int loop = cptr - cbase;
     do_progn(cdr(form), C_NEXT);
 
     // label for the first iteration
@@ -1590,8 +1590,7 @@ static int findcvariable(LVAL sym, int *poff)
 {
     LVAL a = getelement(car(car(info)), 0);
 
-    int off;
-    for (off = 1; consp(a); a = cdr(a), ++off)
+    for (int off = 1; consp(a); a = cdr(a), ++off)
     {
         if (sym == car(a))
         {
@@ -1602,8 +1601,8 @@ static int findcvariable(LVAL sym, int *poff)
     return (FALSE);
 }
 
-/* litequal - test for equality that distinguishes symbols from
-   different modules */
+// litequal - test for equality that distinguishes symbols from
+// different modules
 static int litequal(LVAL a, LVAL b)
 {
     if (a == b)
@@ -4014,12 +4013,20 @@ static void do_defclass(LVAL form, int cont)
 
 static int do_supercondition(LVAL super)
 {
-    //***HGW and check that any superclass provided is a <condition>
+    LVAL s_condition = xlenter_module("<condition>", get_module("condition"));
 
     LVAL supercond = super;
     if (super == NIL)
     {
-        supercond = xlenter_module("<condition>", get_module("condition"));
+        supercond = s_condition;
+    }
+    else if (!xlsubclassp(class_of(supercond), class_of(s_condition)))
+    {
+        xlerror
+        (
+            "bad super-condition in defcondition, should be a <condition>",
+            supercond
+        );
     }
 
     putcbyte(OP_NIL);
@@ -4126,53 +4133,6 @@ static void do_defcondition(LVAL form, int cont)
     do_literal(name, cont);
 
     drop(1);
-
-
-//     cpush(form);
-
-//     LVAL def = cons(s_defclass, NIL);
-//     cpush(def);
-
-//     rplacd(def, cons(name, NIL));
-//     def = cdr(def);
-//     if (super == NIL)
-//     {
-//         rplacd(def, cons(s_condition, NIL));
-//     }
-//     else
-//     {
-//         rplacd(def, cons(super, NIL));
-//     }
-//     def = cdr(def);
-
-//     rplacd(def, cons(NIL, NIL));
-//     def = cdr(def);
-
-//     form = cdr(cdr(form));
-//     while (form)
-//     {
-//         if (atom(cdr(form)))
-//         {
-//             xlerror("malformed defclass option", car(form));
-//         }
-
-//         if (car(def) == NIL)
-//         {
-//             rplaca(def, cons(defcondition_slot(car(form), car(cdr(form))),
-//             NIL));
-//             def = car(def);
-//         }
-//         else
-//         {
-//             rplacd(def, cons(defcondition_slot(car(form), car(cdr(form))),
-//             NIL));
-//             def = cdr(def);
-//         }
-//         form = cdr(cdr(form));
-//     }
-
-//     do_expr(pop(), cont);
-//     drop(1);
 }
 
 LVAL xmacro_error()

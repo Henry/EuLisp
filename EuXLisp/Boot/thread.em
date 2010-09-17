@@ -152,8 +152,7 @@
 (define (get-uwp-frame-uwps uwpf) (cdr uwpf))
 (define (set-uwp-frame-uwps uwpf val) (set-cdr! uwpf val))
 
-(defcondition <thread-condition> <condition>
-  ()
+(defcondition <thread-condition> () ()
   abstract?: t)
 
 (defcondition <thread-error> <thread-condition>
@@ -463,12 +462,11 @@
                (%display ">" stream)
                l)
 
-(defcondition <lock-condition> <condition>
-  ()
+(defcondition <lock-condition> () ()
   abstract?: t)
 
 (defcondition <lock-error> <lock-condition>
-              ((value default: "no-value")))
+  ((value default: "no-value")))
 
 (define (add-thread-to-lock-queue lock thread)
         (set-lock-queue!
@@ -535,12 +533,11 @@
 
 ;; waiting
 
-(defcondition <wait-condition> <condition>
-  ()
+(defcondition <wait-condition> () ()
   abstract?: t)
 
 (defcondition <wait-error> <wait-condition>
-              ((value default: "no-value")))
+  ((value default: "no-value")))
 
 ;; ()       poll
 ;; t       suspend until ready
@@ -641,7 +638,7 @@
             (if (not (subclass? (class-of condition) <thread-condition>))
                 (error  <wrong-condition-class>
                         "must be a subclass of <thread-condition> in signal"
-                       value: condition)
+                        value: condition)
               (other-thread-signal condition resume (car thread))))))
 
 (define (current-thread-signal condition resume current)
