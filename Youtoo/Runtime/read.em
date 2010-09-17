@@ -222,7 +222,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Read error
 ;;;-----------------------------------------------------------------------------
-(defclass <read-error> <condition> ())
+(defcondition <read-error> () ())
 
 (defun read-error (s msg . args)
   (error <read-error> (apply fmt msg args) value: s))

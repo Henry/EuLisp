@@ -210,8 +210,9 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Error handling
 ;;;-----------------------------------------------------------------------------
-(defclass <stream-condition> <condition>
-  ((value keyword: value: accessor: value)))
+(defcondition <stream-condition> ()
+  ((value keyword: value:
+          accessor: value)))
 
 (defcondition <end-of-stream> <stream-condition> ())
 

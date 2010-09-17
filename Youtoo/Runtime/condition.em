@@ -31,7 +31,7 @@
             accessor: condition-message))
   predicate: condition?)
 
-(defclass <general-condition> <condition>
+(defcondition <general-condition> ()
   ((arguments keyword: arguments:)))
 
 ;;;-----------------------------------------------------------------------------
