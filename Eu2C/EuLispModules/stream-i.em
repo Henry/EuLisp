@@ -177,9 +177,9 @@
 ;;;-----------------------------------------------------------------------------
 (defcondition <stream-condition> <condition>
   ((stream type <object>
+           keyword stream:
            default ()
-           accessor stream
-           keyword stream)))
+           accessor stream)))
 
 (defcondition <end-of-stream> <stream-condition> ())
 
@@ -673,8 +673,8 @@
 (defmethod flush ((stream <file-stream>))
   (if (ensure-open-output-stream stream)
       (if (%eq #%i0 (%cast %signed-word-integer
-                           (fflush ;;(%cast %unsigned-word-integer
-                            (file-descriptor-pointer stream)))) ;;)
+                           (fflush
+                            (file-descriptor-pointer stream))))
           't
         ())
     ()))
@@ -854,9 +854,9 @@
 ;;          (lvtrans-ini (get-option 'transaction-unit inilist lvtransaction-unit))
 ;;          (lvpos-ini (get-option 'positionable inilist lvpositionable)))
 ;;      ;          (if (stream-direction? (cadr inilist))
-;;      ;            (cerror <stream-condition> "Missmatch in the argument list of open"))
+;;      ;            (error <stream-condition> "Missmatch in the argument list of open"))
 ;;      ;            (if (stream-unit? (cadr inilist))
-;;      ;              (cerror <stream-condition> "Missmatch in the argument list of open"))
+;;      ;              (error <stream-condition> "Missmatch in the argument list of open"))
 ;;      (setf-file-descriptor-pointer stream
 ;;            (open-fd (string-pointer handle)
 ;;                     (%cast %string (?mode-string lvdirection))))

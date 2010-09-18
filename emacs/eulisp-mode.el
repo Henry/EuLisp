@@ -174,6 +174,8 @@ indentation for the following lines until the end of the list."))))
        (1 font-lock-builtin-face) (2 font-lock-function-name-face nil t))
      '("(\\(defun\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-function-name-face nil t))
+     '("(\\(defcondition\\)\\>[ \t]*\\(\\sw+\\)?"
+       (1 font-lock-builtin-face) (2 font-lock-function-name-face nil t))
      '("(\\(make\\)\\>[ \t]*\\(\\sw+\\)?"
        (1 font-lock-builtin-face) (2 font-lock-type-face nil t))
      '("\\<\\(error\\)\\>\\(.*\\)"

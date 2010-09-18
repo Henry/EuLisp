@@ -149,15 +149,15 @@
 ;;;----------------------------------------------------------------------------
 ;;; <read-error>
 ;;;----------------------------------------------------------------------------
-(defcondition <read-error> <condition>
+(defcondition <read-error> ()
   ((stream type <object>
+           keyword stream:
            default ()
-           accessor stream
-           keyword stream)
+           accessor stream)
    (error-number type <int>
+                 keyword error-number:
                  default 77
-                 accessor error-number
-                 keyword error-number)))
+                 accessor error-number)))
 
 (%define-variable *sign* %signed-word-integer #%i1)
 
@@ -169,18 +169,19 @@
                (%cast %signed-word-integer
                       (if (ensure-open-character-input-stream stream)
                           (%read-unit stream)
-                        (progn ;(stream-condition-error 'read o-stream)
+                        (progn
+                          (read-error stream #%i10)
                           (%read-unit stdin))))))
         (convert-int-char (make-fpint unit))))
 
 (defmethod putback-char ((stream <stream>) (object <object>))
   (if (ensure-open-character-input-stream stream)
       (%unread-unit stream (make-swi (convert-char-int object)))
-    (progn ;(stream-condition-error 'read o-stream)
-      ))
+    (read-error stream #%i10))
   't)
 
-(deflocal $end-of-stream-string (make-string (%literal %string () "END-OF-STREAM")))
+(deflocal $end-of-stream-string
+  (make-string (%literal %string () "END-OF-STREAM")))
 
 (defmethod read-line ((stream <stream>))
   (if (ensure-open-character-input-stream stream)
@@ -189,12 +190,12 @@
         (let ((lvstring (read-line-1 stream)))
           (setf-stream-eos-action stream eos-action)
           (if (eq $end-of-stream-string lvstring)
-              (progn (error <end-of-stream> "end-of-stream" 'stream stream)
+              (progn (error <end-of-stream>
+                            "End of stream during read-line"
+                            stream: stream)
                      $end-of-stream-string)
             lvstring)))
-    (progn ;(stream-condition-error 'read o-stream)
-      ))
-  )
+    (read-error stream #%i10)))
 
 (defun read-line-eos-action (stream)
   (make-fpint $char-eof))
@@ -313,10 +314,9 @@
 (%define-function (read-error <null>)
   ((stream <stream>)
    (err-nr %signed-word-integer))
-  (error <read-error> "Syntax Error"
-         'stream stream
-         'error-number
-         (make-fpint err-nr))
+  (error <read-error> "Read Error"
+         stream: stream
+         error-number: (make-fpint err-nr))
   (clear-buffer (%cast <string-stack> *buffer-1*))
   (clear-buffer (%cast <string-stack> *buffer-2*))
   ())
@@ -819,8 +819,7 @@
 ;;            (if o-stream
 ;;              (if (ensure-open-character-input-stream (car o-stream))
 ;;                (%peek-unit (car o-stream))
-;;                (progn ;(stream-condition-error 'read o-stream)
-;;                  (%peek-unit stdin)))
+;;               (read-error stream #%i10))
 ;;            (%peek-unit stdin))))
 ;;       (convert-int-char (make-fpint unit))))
 
@@ -829,8 +828,7 @@
 ;;            (if o-stream
 ;;              (if (ensure-open-character-input-stream (car o-stream))
 ;;                (%read-unit (car o-stream))
-;;                (progn ;(stream-condition-error 'read o-stream)
-;;                  (%read-unit stdin)))
+;;               read-error stream #%i10))
 ;;               (%read-unit stdin))))
 ;;       (convert-int-char (make-fpint unit))))
 

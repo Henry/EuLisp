@@ -164,10 +164,10 @@
       (progn
         (if (symbol? stream) ; symbol? added by ak to avoid c-compiler warning
             (progn           ; if global optimization is on
-              (if (null? (eq stream 't))
-                  (error <stream-condition>
-                   "~Warning: the current output stream is designated by t")
-                ())
+              ;;(if (null? (eq stream 't))
+              ;;    (error <stream-condition>
+              ;;     "~Warning: the current output stream is designated by t")
+              ;;  ())
               (format1 stdout
                        (string-pointer fstring)
                        #%i0

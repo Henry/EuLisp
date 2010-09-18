@@ -147,15 +147,15 @@
 ;;;----------------------------------------------------------------------------
 ;;; <write-error>
 ;;;----------------------------------------------------------------------------
-(defcondition <write-error> <condition>
+(defcondition <write-error> ()
   ((stream type <object>
+           keyword stream:
            default ()
-           accessor stream
-           keyword stream)
+           accessor stream)
    (error-number type <int>
-                 default 77
-                 accessor error-number
-                 keyword error-number)))
+                 keyword error-number:
+                 default 78
+                 accessor error-number)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Write primitives
@@ -244,25 +244,23 @@
                                      #%I1))))
           ())))
 
-;;(defun flush stream-list      in stream-i
+;; (defun flush stream-list      in stream-i
 ;;  (if stream-list
 ;;      (let ((stream (car stream-list)))
 ;;        (if (ensure-open-character-output-stream stream)
 ;;          (fflush (file-descriptor-pointer stream))
-;;          (progn ;(stream-error)
-;;              (fflush (%cast %unsigned-word-integer c-stdout)))))
+;;         ()))
 ;;       (fflush (%cast %unsigned-word-integer c-stdout))))
 
-;;(defun write-unit (unit . stream-list)
+;; (defun write-unit (unit . stream-list)
 ;;  (let ((obj (%cast %signed-word-integer
 ;;                    (make-swi (convert-char-int unit)))))
 ;;  (if stream-list
 ;;      (let ((stream (car stream-list)))
 ;;        (if (ensure-open-character-output-stream stream)
 ;;          (%write-unit (%cast %unsigned-word-integer
-;;                                  (file-descriptor-pointer stream)) obj)
-;;          (progn ;(stream-error)
-;;              (%write-unit (%cast %unsigned-word-integer c-stdout) obj))))
+;;                              (file-descriptor-pointer stream)) obj)
+;;          ()))
 ;;       (%write-unit (%cast %unsigned-word-integer c-stdout) obj)))
 ;;  ())
 
@@ -270,7 +268,6 @@
 ;;;output
 ;;;-----------------------------------------------------------------------------
 (defmethod output ((stream <stream>) (unit <object>))
-  ;;(defun output (stream unit)
   (let ((obj (make-swi (convert-char-int unit))))
     (if (ensure-open-character-output-stream stream)
         (%write-unit stream obj)
@@ -285,8 +282,7 @@
       (let ((stream (car stream-list)))
         (if (ensure-open-character-output-stream stream)
             (%write-unit stream $char-newline)
-          (progn ;(stream-error)
-            (%write-unit stdout $char-newline))))
+          ()))
     (%write-unit stdout $char-newline))
   #\newline)
 
@@ -298,15 +294,14 @@
       (let ((stream (car stream-list)))
         (if (ensure-open-character-output-stream stream)
             (generic-print object stream)
-          (progn ;(stream-error)
-            (generic-print object stdout))))
+          ()))
     (generic-print object stdout)))
 
 ;; auf generic-print abbilden!
 ;; f string-streams nicht fd als %unsingned-word-intger definieren und
 ;; durchreichen (sondern als <object> besser stream durchreichen)
 
-;; To depict generic prin-!
+;; To depict generic-print!
 ;; f string-stream not defined as fd %unsingned-word-intger
 ;; reach through (but better than <object> stream reach through)
 
@@ -436,8 +431,7 @@
       (let ((stream (car stream-list)))
         (if (ensure-open-character-output-stream stream)
             (generic-write object stream)
-          (progn ;(stream-error)
-            (generic-write object stdout))))
+          ()))
     (generic-write object stdout)))
 
 ;;;-----------------------------------------------------------------------------
@@ -751,8 +745,7 @@
       (%let ((stream <stream> (%cast <stream> (car stream-list))))
             (if (ensure-open-character-output-stream stream)
                 (print-1 object stream)
-              (progn ;(stream-error)
-                (print-1 object (%cast <stream> stdout)))))
+              ()))
     (print-1 object (%cast <stream> stdout)))
   object)
 
@@ -760,20 +753,11 @@
   (generic-print object stream)
   (%write-unit stream $char-newline))
 
-;; (%define-function (sprint <stream>)
-;;   ((stream <stream>)
-;;    (object <object>))
-;;   (if (ensure-open-character-output-stream stream)
-;;       (print-1 object stream)
-;;     (progn                              ; (stream-error)
-;;       (print-1 object (%cast <stream> stdout))))
-;;   stream)
-
 (%define-function (sprint <stream>) ((stream <stream>) . objects)
   (if objects
       (if (ensure-open-character-output-stream stream)
           (sprint-aux stream objects)
-        (cerror <write-error> "Stream is not open for output" 'stream stream))
+        ())
     ())
   (%write-unit stream $char-newline)
   stream)
