@@ -29,15 +29,19 @@
 
 (sprint stderr "hmm " 1 " end")
 
-(sprint stdin "hmm " 1 " end")
+;; (sprint stdin "hmm " 1 " end")
 
-(with-handler
- (lambda (condition continuation)
-   (print "error"))
-   (sprint stdin "hmm " 1 " end"))
+;; (with-handler
+;;  (lambda (condition continuation)
+;;    (print "error"))
+;;    (sprint stdin "hmm " 1 " end"))
 
 (sprint stdout (stream? stdout))
 (sprint stdout (file-stream? stdout))
+
+(sformat stdout "hello ~a~%" 1)
+(nformat "hello ~a~%" 1)
+(print (fmt "hello ~a~%" 1))
 
 (sprint stdout "End")
 

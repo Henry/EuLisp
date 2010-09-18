@@ -45,9 +45,9 @@
 (deflocal liste '(1 2 3 4 5 6 7 8 9 10 11 12 13 14)) ;; Works 32bit not 64bit
 ;;(deflocal liste '(1 2 3 4 5 6 7 8 9)) ;; Works both 32bit and 64bit
 
-(format t "~%(umdrehen '~a)" liste)
+(format "~%(umdrehen '~a)" liste)
 
-(format t "~%==> ~a~%" (time (umdrehen liste)
+(format "~%==> ~a~%" (time (umdrehen liste)
                              "\numdrehen: usertime %.2f sec (system %.2f)"))
 
 ;;;-----------------------------------------------------------------------------

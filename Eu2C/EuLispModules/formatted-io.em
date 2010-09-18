@@ -138,10 +138,12 @@
            (only (strlen)
                  c-string-interface))
    syntax (tail)
-   export (format
+   export (sformat
+           format
+           fmt
            scan))
 
-(%define-standard-class (<scan-mismatch> <class> )
+(%define-standard-class (<scan-mismatch> <class>)
   <condition>
   ((format-string type <string> default ""
                   accessor format-string
@@ -159,32 +161,27 @@
        (make-string-stack (allocate-%string #%i128) #%i128)
        'output))
 
-(defun format (stream fstring . args)
-  (if stream
-      (progn
-        (if (symbol? stream) ; symbol? added by ak to avoid c-compiler warning
-            (progn           ; if global optimization is on
-              ;;(if (null? (eq stream 't))
-              ;;    (error <stream-condition>
-              ;;     "~Warning: the current output stream is designated by t")
-              ;;  ())
-              (format1 stdout
-                       (string-pointer fstring)
-                       #%i0
-                       (strlen (string-pointer fstring))
-                       args))
-          (format1 stream
-                   (string-pointer fstring)
-                   #%i0
-                   (strlen (string-pointer fstring))
-                   args)))
-    (progn
-      (format1 $temp-format-string-stream
-               (string-pointer fstring)
-               #%i0
-               (strlen (string-pointer fstring))
-               args)
-      (convert-stream-string $temp-format-string-stream))))
+(defun sformat (stream fstring . args)
+  (format1 stream
+           (string-pointer fstring)
+           #%i0
+           (strlen (string-pointer fstring))
+           args))
+
+(defun format (fstring . args)
+  (format1 stdout
+           (string-pointer fstring)
+           #%i0
+           (strlen (string-pointer fstring))
+           args))
+
+(defun fmt (fstring . args)
+  (format1 $temp-format-string-stream
+           (string-pointer fstring)
+           #%i0
+           (strlen (string-pointer fstring))
+           args)
+  (convert-stream-string $temp-format-string-stream))
 
 (defglobal *tilde-index* 0)
 
@@ -583,12 +580,26 @@
 ;;;-----------------------------------------------------------------------------
 
 (%annotate-function
-  format new-signature
+  sformat new-signature
   (((var0 var1 var2 var3)
     ((var var0) (atom? <list>))
     ((var var1) (atom? <object>))
     ((var var2) (atom? <string>))
     ((var var3) (atom? <list>)))))
+
+(%annotate-function
+  format new-signature
+  (((var0 var1 var2)
+    ((var var0) (atom? <list>))
+    ((var var1) (atom? <string>))
+    ((var var2) (atom? <list>)))))
+
+(%annotate-function
+  fmt new-signature
+  (((var0 var1 var2)
+    ((var var0) (atom? <string>))
+    ((var var1) (atom? <string>))
+    ((var var2) (atom? <list>)))))
 
 (%annotate-function
   scan new-signature

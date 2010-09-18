@@ -28,19 +28,21 @@
   (import (level-0x)
    syntax (level-0x))
 
-(do (lambda (arg)(format t "~%~s" arg)) (command-line-arguments))
+(do (lambda (arg)
+      (format "~%~s" arg))
+    (command-line-arguments))
 
 (deflocal argv (command-line-arguments))
 (deflocal argc (size argv))
 
 (defun select ()
-  (format t "~%argument number:")
+  (format "~%argument number:")
   (let ((n (read)))
     (cond ((null? (number? n)))
           ((< n argc)
-           (format t "~%~s" (element argv n))
+           (format "~%~s" (element argv n))
            (select))
-          (t (format t "~%There are only the arguments 0..~a" (- argc 1))
+          (t (format "~%There are only the arguments 0..~a" (- argc 1))
              (select)))))
 
 ;;;-----------------------------------------------------------------------------

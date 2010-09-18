@@ -67,14 +67,14 @@
       (get-fun item (cdr (cdr li))))))
 
 (defun rep()
-  (format t  "~%Don't Panic> ")
+  (format  "~%Don't Panic> ")
   (let ((sexpr (read)))
     (if (cons? sexpr)
         (let ((fcn (get-fun (as-lowercase (symbol-name (car sexpr)))
                             interpreter-fcn) ))
           (if (null? fcn)
               (print sexpr)
-            (format t "~%~s -> ~s" sexpr (apply fcn
+            (format "~%~s -> ~s" sexpr (apply fcn
                                                 (cdr sexpr)) ))
           (rep))
       (progn (print sexpr)
@@ -82,10 +82,10 @@
                  ()
                (rep) ))) ))
 
-(format t "~%most-positive-double-float ~s" most-positive-double-float)
-(format t "~%least-positive-double-float ~s" least-positive-double-float)
-(format t "~%most-negative-double-float ~s" most-negative-double-float)
-(format t "~%least-negative-double-float ~s" least-negative-double-float)
+(format "~%most-positive-double-float ~s" most-positive-double-float)
+(format "~%least-positive-double-float ~s" least-positive-double-float)
+(format "~%most-negative-double-float ~s" most-negative-double-float)
+(format "~%least-negative-double-float ~s" least-negative-double-float)
 
 (rep)
 

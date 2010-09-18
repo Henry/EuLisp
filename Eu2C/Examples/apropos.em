@@ -44,7 +44,7 @@
     "Lisp" "Liebe" "Liste"))
 
 (defun run ()
-  (format t "~%Please enter the word beginning: ")
+  (format "~%Please enter the word beginning: ")
   (let ((input (read)))
     (when (symbol? input)
           (print (apropos (symbol-name input) words))

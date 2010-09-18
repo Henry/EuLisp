@@ -248,17 +248,16 @@
 ;;; Establish dynamic-default-signal-handler
 ;;;-----------------------------------------------------------------------------
 (defun error-handler-with-format (condition continuation)
-  (format 't "~%-----------------------A Condition has been signaled------------------~%message: ~a~%"
+  (format "~%-----------------------A Condition has been signaled------------------~%message: ~a~%"
           (condition-message condition))
   (if continuation
       (progn
-        (format 't
-                "Enter <return> to exit~%      cont to continue with continuation~%> ")
+        (format "Enter <return> to exit~%      cont to continue with continuation~%> ")
         (if (equal "cont" (read-line stdin))
             (progn
-              (format 't "~%Enter return-value:")
+              (format "~%Enter return-value:")
               (continuation (read)))
-          (progn (format 't "~%EXIT ")
+          (progn (format "~%EXIT ")
                  (c-exit #%i2)
                  condition)))
     (progn (c-exit #%i2)
