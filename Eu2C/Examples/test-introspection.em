@@ -28,10 +28,10 @@
    syntax (level-0
            object-1))
 
-(print (class-name (car (cdr (class-precedence-list <list>)))))
-(print (size (class-name <list>)))
-(print (class-precedence-list <list>))
-(print <list>)
+(print (class-name (car (cdr (class-precedence-list <list>)))) nl)
+(print (size (class-name <list>)) nl)
+(print (class-precedence-list <list>) nl)
+(print <list> nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

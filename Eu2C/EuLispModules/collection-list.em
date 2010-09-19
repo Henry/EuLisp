@@ -30,7 +30,8 @@
            (only (eql)
                  compare)
            basic-list
-           (only (print)
+           (only (print
+                  nl)
                  print)
            (only (<conversion-condition>
                   error)
@@ -256,7 +257,7 @@
    (index %signed-word-integer))
   (if (%lt index max-index)
       t
-    (progn (print 'index-for-element-list-to-great)
+    (progn (print 'index-for-element-list-to-great nl)
            ()))
   )
 

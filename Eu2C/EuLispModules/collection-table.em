@@ -23,75 +23,70 @@
 ;;;  Documentation:
 ;;;  Notes:
 ;;;  Requires:
-;;;  Problems: accumulate accumulate1 any? concatenate do fill map
-;;    are ***not yet treated***
+;;;  Problems:
+;;    accumulate accumulate1 any? concatenate do fill map are ***not implemented***
 ;;    ???reverse-table should copy the table???
 ;;;  Authors: Winfried Heicking
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection-table
-
-  (import
-   (tail
-    apply
-    eulisp-kernel
-    (only (eql)
-          compare)
-    (only (binary+ binary<)
-          int)
-    (only (print) print)
-    (only ($standard-table-size
-           ) table-aux)
-    (only (<string>)
-          string-ii)
-    (only (<vector>
-           primitive-vector-size
-           primitive-vector-ref)
-          vector)
-    (only (element size) collection-vector)
-    (only (element size) collection-string)
-    collection-generic
-    collection-aux
-    table
-    )
-
-   syntax
-   (tail
-    syntax-0)
-
-   export
-   (<table>
-    make-table
-    setter-table-ref
-    table-delete
-    accumulate
-    accumulate1
-    any?
-    do
-    ;;any?-table
-    concatenate
-    ;;do-table
-    element
-    empty?
-    fill
-    map
-    ;;map-tab
-    ;; (map-table is already in table)
-    member
-    ;;reverse-table
-    reverse
-    size
-    ;;converter
-    ;;    generic-print
-    ;;    generic-write
-    )
-   )
-
-
-
+  (import (tail
+           apply
+           eulisp-kernel
+           (only (eql)
+                 compare)
+           (only (binary+
+                  binary<)
+                 int)
+           (only (print
+                  nl)
+                 print)
+           (only ($standard-table-size)
+                 table-aux)
+           (only (<string>)
+                 string-ii)
+           (only (<vector>
+                  primitive-vector-size
+                  primitive-vector-ref)
+                 vector)
+           (only (element
+                  size)
+                 collection-vector)
+           (only (element
+                  size)
+                 collection-string)
+           collection-generic
+           collection-aux
+           table)
+   syntax (tail
+           syntax-0)
+   export (<table>
+           make-table
+           setter-table-ref
+           table-delete
+           accumulate
+           accumulate1
+           any?
+           do
+           ;;any?-table
+           concatenate
+           ;;do-table
+           element
+           empty?
+           fill
+           map
+           ;;map-tab
+           ;; (map-table is already in table)
+           member
+           ;;reverse-table
+           reverse
+           size
+           ;;converter
+           ;;    generic-print
+           ;;    generic-write
+           ))
 
 ;;;(deflocal standard-size-of-hash-table 4096) ;import from table-aux
-
 
 (defun contains-seqs (lst)
   (if lst
@@ -100,17 +95,13 @@
         t)
     ()))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; accumulate
-;;;------------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 (defmethod accumulate ((function <function>)
                        (object <object>)
                        (table <table>))
   (accumulate-table function table object 0))
-
-
 
 (defun accumulate-table (function table res index)
   (let ((tab-res (table-ref table index)))
@@ -119,16 +110,11 @@
       (accumulate-table function
                         table
                         (function res tab-res)
-                        (binary+ index 1)))
-    ))
+                        (binary+ index 1)))))
 
-
-;;------------------------------------------------------------
+;;------------------------------------------------------------------------------
 ;;; accumulate1
-;;;------------------------------------------------------------------
-
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod accumulate1 ((function <function>)
                         (table <table>))
   (let ((tab-res (table-ref table 0)))
@@ -139,12 +125,9 @@
                         tab-res
                         1))))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; any?
-;;;------------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 (defmethod any? ((function <function>)
                  (table <table>) . more-collections)
   (%let ((rest-list-size %signed-word-integer
@@ -155,11 +138,9 @@
                                     #%I0
                                     (%cast %unsigned-word-integer
                                            (make-swi $standard-table-size))))
-              ;;            ((%eq rest-list-size #%i1)
-              ;;             (any?-with-two-args function table (car more-collections)))
-              (t (any?-collection function table more-collections)))
-        ))
-
+              ;;        ((%eq rest-list-size #%i1)
+              ;;   (any?-with-two-args function table (car more-collections)))
+              (t (any?-collection function table more-collections)))))
 
 ;;    (defun any?-with-one-table (function table index)
 ;;      (let ((tab-res (table-ref table index)))
@@ -168,7 +149,6 @@
 ;;            t
 ;;            (any?-with-one-table function table (binary+ index 1)))
 ;;          ())))
-
 
 (%define-function (any?-with-one-table <object>)
   ((function <function>)
@@ -185,25 +165,18 @@
        function
        table
        (%plus #%I1 index)
-       upper-limit))
-    ))
-
+       upper-limit))))
 
 (defun any?-table-aux (function lst)
   (if lst
       (if (function (cdr (car lst)))
           t
         (any?-table-aux function (cdr lst)))
-    ())
-  )
+    ()))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; concatenate
-;;;------------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;    (defmethod concatenate ((table <table>) . more-collections)
 ;;      (%let ((rest-list-size %signed-word-integer
 ;;                               (%list-size more-collections)))
@@ -215,17 +188,14 @@
 ;;        )
 ;;      )
 
-
 (defmethod concatenate ((table <table>) . more-collections)
   (%let ((rest-list-size %signed-word-integer
                            (%list-size more-collections)))
         (cond ((%eq rest-list-size #%i0)
                table)
-              ;;              ((%eq rest-list-size #%i1)
-              ;;               (concat-with-two-args table (car more-collections)))
-              (t (concat-collection-tab table more-collections)))
-        )
-  )
+              ;;          ((%eq rest-list-size #%i1)
+              ;;           (concat-with-two-args table (car more-collections)))
+              (t (concat-collection-tab table more-collections)))))
 
 (defun concat-collection-tab (table more-collections)
   (if more-collections
@@ -233,7 +203,6 @@
              (concat-collection-tab table
                                     (cdr more-collections)))
     table))
-
 
 (defgeneric set-table-values (collection (table <table>)))
 
@@ -245,7 +214,6 @@
       (progn (setter-table-ref table index (car lst))
              (set-list-values table (cdr lst) (binary+ index 1)))
     table))
-
 
 (defmethod set-table-values ((collection <vector>) (table <table>))
   (set-vector-values table
@@ -264,7 +232,6 @@
                                 (binary+ index 1)))
     table))
 
-
 (defmethod set-table-values ((collection <string>) (table <table>))
   (set-string-values table
                      collection
@@ -282,12 +249,9 @@
                                 (binary+ index 1)))
     table))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; do
-;;;------------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod do ((function <function>)
                (table <table>) . more-collections)
   (%let ((rest-list-size %signed-word-integer
@@ -298,12 +262,9 @@
                                   #%I0
                                   (%cast %unsigned-word-integer
                                          (make-swi $standard-table-size))))
-              ;;            ((%eq rest-list-size #%i1)
-              ;;             (do-with-two-args function table (car more-collections)))
-              (t (do-collection function table more-collections)))
-        ))
-
-
+              ;;        ((%eq rest-list-size #%i1)
+              ;;       (do-with-two-args function table (car more-collections)))
+              (t (do-collection function table more-collections)))))
 
 ;;  (defun do-with-one-table (function table index)
 ;;    (let ((tab-res (table-ref table index)))
@@ -311,7 +272,6 @@
 ;;        (progn (function tab-res)
 ;;               (do-with-one-table function table (binary+ index 1)))
 ;;        ())))
-
 
 (%define-function (do-with-one-table <object>)
   ((function <function>)
@@ -336,40 +296,30 @@
       (progn
         (function (cdr (car lst)))
         (do-table-aux function (cdr lst)))
-    ())
-  )
+    ()))
 
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; element
-;;;------------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod element ((table <table>) (key <object>))
   (table-ref table key))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; (setter element)
-;;;------------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod (setter element) ((table <table>)
                              (key <object>)
                              (value <object>))
   (setter-table-ref table key value))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; empty?
-;;;------------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 (defmethod empty? ((table <table>))
   (dotimes-with-elt1 #%I0
                      (%cast %unsigned-word-integer
                             (make-swi $standard-table-size))
                      table))
-
 
 (%define-function (dotimes-with-elt1 <object>)
   ((index %unsigned-word-integer)
@@ -381,26 +331,20 @@
         ()
       (dotimes-with-elt1 (%plus #%I1 index) upper-limit table))))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; fill
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod fill ((table <table>)
                  (object <object>) . keys)
   (%let ((rest-list-size %signed-word-integer
                            (%list-size keys)))
         (if (%eq #%i0 rest-list-size)
             (progn
-              (print "no keys for table ")
+              (print "no keys for table" nl)
               ())
           (if (%eq #%i1 rest-list-size)
               (fill-table-aux table object (car keys))
-            (print "to many arguments for table"))))
-  )
-
+            (print "to many arguments for table" nl)))))
 
 (defgeneric fill-table-aux (table object keys-of-collection))
 
@@ -441,9 +385,7 @@
                                (%plus index #%I1)))
     ()))
 
-
-;;;------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
 (defmethod map ((function <function>)
                 (table <table>) . more-collections)
   (%let ((rest-list-size %signed-word-integer
@@ -460,7 +402,6 @@
               (t (map-collection function table more-collections)))
         ))
 
-
 ;;  (defun map-with-one-table (function table index result)
 ;;    (let ((tab-res (table-ref table index)))
 ;;      (if (eq tab-res (?fill-value table))
@@ -471,7 +412,6 @@
 ;;               (map-with-one-table function table
 ;;                                   (binary+ index 1) result))
 ;;        result)))
-
 
 (%define-function (map-with-one-table <object>)
   ((function <function>)
@@ -491,8 +431,7 @@
        table
        new-table
        (%plus #%I1 index)
-       upper-limit))
-    ))
+       upper-limit))))
 
 (defun map-table-aux (function lst new-table)
   (if lst
@@ -502,12 +441,9 @@
              (map-table-aux function (cdr lst) new-table))
     ()))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; member
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod member ((object <object>)
                    (table <table>) . test)
   (dotimes-with-member1
@@ -520,8 +456,6 @@
        (car test)
      eql)
    ))
-
-
 
 (%define-function (dotimes-with-member1 <object>)
   ((index %unsigned-word-integer)
@@ -547,24 +481,15 @@
         (dotimes-with-member-aux object (cdr alist) test))
     ()))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; reverse
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod reverse ((table <table>))
   table)
 
-
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; size
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod size ((table <table>))
   (make-fpint
    (%cast %signed-word-integer
@@ -574,8 +499,6 @@
                   (make-swi $standard-table-size))
            table
            #%I0))))
-
-
 
 (%define-function (dotimes-with-size %unsigned-word-integer)
   ((index %unsigned-word-integer)
@@ -589,11 +512,9 @@
      upper-limit table
      (%plus leng
             (%cast %unsigned-word-integer
-                   (%pair-size (table-vector-ref (?table-vector table) index)))))))
+                   (%pair-size
+                    (table-vector-ref (?table-vector table) index)))))))
 
-
-
-
-)
-
-;;;eof
+;;;-----------------------------------------------------------------------------
+)  ;; End of module collection-table
+;;;-----------------------------------------------------------------------------

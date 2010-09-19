@@ -114,8 +114,6 @@
                  c-string-interface)
            (only (make-symbol)
                  symbol)
-           (only (prin)
-                 print)
            (only (make-string
                   <string>
                   duplicate-%string)
@@ -240,8 +238,8 @@
 ;;;-----------------------------------------------------------------------------
 (%define-function (read-expression <object>)
   ((stream <stream>))
-  ;;         (print 'read-expression)
-  ;;         (print (%cast <object> stream))
+  ;;         (print 'read-expression nl)
+  ;;         (print (%cast <object> stream) nl)
   (let ((expr (read-expression1 stream)))
     (if (eq expr (%cast <object> $closed-bracket))
         (read-error stream #%i12)
@@ -325,9 +323,9 @@
   ((state %signed-word-integer)
    (char %signed-word-integer)
    (stream <stream>))
-  ;;      (print 'read-token)
-  ;;      (print (%cast <object> state)) (print (%cast <object> char))
-  ;;      (print (%cast <object> (char-class *char-class-token* char)))
+  ;;      (print 'read-token nl)
+  ;;      (print (%cast <object> state) nl) (print (%cast <object> char) nl)
+  ;;      (print (%cast <object> (char-class *char-class-token* char)) nl)
   (%let* ((state  %signed-word-integer
                   ;; noch fehler in %let mit typen darum cast notwendig:
                   (%cast %signed-word-integer
@@ -340,8 +338,9 @@
                                              (%cast %unsigned-word-integer char))))))
           (action %signed-word-integer (%lshiftr state #%I8))
           (next-state %signed-word-integer (%and state #%i255)))
-         ;;                (print (%cast <object> state))
-         ;;                (print (%cast <object> action)) (print (%cast <object> next-state))
+         ;;                (print (%cast <object> state) nl)
+         ;;                (print (%cast <object> action) nl)
+         ;;                (print (%cast <object> next-state) nl)
 
          (read-token-action action char stream)
          (if (%ge next-state #%i20)
@@ -418,8 +417,8 @@
 (%define-function (read-extension <object>)
   ((stream <stream>))
   (%let ((ch %signed-word-integer (%peek-unit stream)))
-        ;;              (print 'read-extension-char)
-        ;;     (print ch)
+        ;;              (print 'read-extension-char nl)
+        ;;     (print ch nl)
         (if (%eq ch $char-open-bracket)
             (read-vector stream)
           (if (%eq ch $char-single-escape)
@@ -433,7 +432,7 @@
 (%define-function (read-vector <object>)
   ((stream <stream>))
   (let ((lv1 (read-expression stream)))
-    ;;          (print 'read-vector-result-list) (print lv1)
+    ;;          (print 'read-vector-result-list nl) (print lv1 nl)
     (if (cons? lv1)
         (initialize-vector-from-list
          (make-uninitialized-vector
@@ -446,8 +445,8 @@
 (%define-function (read-character <character>)
   ((stream <stream>))
   (%let ((ch %signed-word-integer (%peek-unit stream)))
-        ;;(print 'read-character)
-        ;;(print ch)
+        ;;(print 'read-character nl)
+        ;;(print ch nl)
         (%let ((ch1 %signed-word-integer
                     (read-character-1 ch stream)))
               (convert-int-char (make-fpint ch1)))))
@@ -465,7 +464,7 @@
           (progn (%read-unit stream)
                  (%let ((ch2 %signed-word-integer
                              (%read-unit stream)))
-                       ;;(print 'read-char-control) (print ch2)
+                       ;;(print 'read-char-control nl) (print ch2 nl)
                        (if (upper? ch2)
                            (%minus ch2 #%i64) ; control-A == 1
                          (%minus ch2 #%i96)))) ; control-a == 1
@@ -478,9 +477,9 @@
               (read-token #%i1
                           (%and ch #%i127)
                           stream)))
-        ;;(print 'read-char-name)
-        ;;(print tok)
-        ;;(print (%cast <string-stack> *buffer-1*))
+        ;;(print 'read-char-name nl)
+        ;;(print tok nl)
+        ;;(print (%cast <string-stack> *buffer-1*) nl)
         (if (%lt tok #%i8)
             ch
           (if (%eq tok #%i8)
@@ -502,7 +501,7 @@
          ;;         (idx2 %signed-word-integer #%i0) ; removed by ak; never used
          )
         (push-buffer #%i0 string-stack)
-        ;;       (print 'convert-name-char-code) ;(%write-string stream string) ;(print idx)
+        ;;       (print 'convert-name-char-code nl) ;(%write-string stream string) ;(print idx nl)
         (clear-buffer string-stack)
         (if (%eq idx #%i1)
             (progn ; stuss fur hf , falsch optimierung idx mehrmals verwenden,
@@ -624,9 +623,9 @@
   ((stream <stream>)
    (ch-code-res %signed-word-integer)
    (counter %signed-word-integer))
-  ;;(prin 'read-string-escape-hex)
-  ;;(prin ch-code-res)
-  ;;(prin counter)
+  ;;(print 'read-string-escape-hex nl)
+  ;;(print ch-code-res nl)
+  ;;(print counter nl)
   (if (%eq counter #%i4)
       (progn (push-buffer ch-code-res (%cast <string-stack> *buffer-2*))
              (read-string stream))

@@ -40,7 +40,8 @@
            basic-list
            character
            (only (eql) compare)
-           (only (print)
+           (only (print
+                  nl)
                  print)
            (only (<conversion-condition>
                   error)
@@ -616,7 +617,7 @@
 ;;                            (strlen str-pointer)))
 ;;            (rev-str <string>
 ;;                     (make-string (strdup str-pointer))))
-;;           (print rev-str)
+;;           (print rev-str nl)
 ;;           (if (%eq str-len #%I0)
 ;;             rev-str
 ;;             (reverse-string-aux str rev-str #%I0

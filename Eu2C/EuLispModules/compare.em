@@ -97,10 +97,10 @@
 ;;    (vector-equal object1 object2))
 ;;
 ;;  (defun vector-equal(object1 object2)
-;;    ;  (print object1)
-;;    ;  (print object2)
-;;    ;  (print (primitive-vector-size object1))
-;;    ;  (print (primitive-vector-size object2))
+;;    ;  (print object1 nl)
+;;    ;  (print object2 nl)
+;;    ;  (print (primitive-vector-size object1) nl)
+;;    ;  (print (primitive-vector-size object2) nl)
 ;;    (if (%eq (%cast %unsigned-word-integer (primitive-vector-size object1))
 ;;             (%cast %unsigned-word-integer (primitive-vector-size object2)))
 ;;      (compare-vectors object1 object2 #%I0 (%cast %unsigned-word-integer

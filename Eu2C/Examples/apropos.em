@@ -47,7 +47,7 @@
   (format "~%Please enter the word beginning: ")
   (let ((input (read)))
     (when (symbol? input)
-          (print (apropos (symbol-name input) words))
+          (print (apropos (symbol-name input) words) nl)
           (run))))
 
 ;;;-----------------------------------------------------------------------------

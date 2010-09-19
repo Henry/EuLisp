@@ -73,11 +73,11 @@
         (let ((fcn (get-fun (as-lowercase (symbol-name (car sexpr)))
                             interpreter-fcn) ))
           (if (null? fcn)
-              (print sexpr)
+              (print sexpr nl)
             (format "~%~s -> ~s" sexpr (apply fcn
                                                 (cdr sexpr)) ))
           (rep))
-      (progn (print sexpr)
+      (progn (print sexpr nl)
              (if (eq 'bye sexpr)
                  ()
                (rep) ))) ))

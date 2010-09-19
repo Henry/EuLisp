@@ -28,8 +28,8 @@
   (import (level-0)
    syntax (level-0))
 
-(print 'hello)
-(print 'HELLO)
+(print 'hello nl)
+(print 'HELLO nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

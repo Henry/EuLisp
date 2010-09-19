@@ -24,33 +24,30 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule test-class
   (import (level-0
+           tail
            (only (<pointer-to-void>)
                  pointer-to-void))
-   syntax (level-0
-           ))
+   syntax (level-0))
 
 (defclass <tower> <object>
-  (
-   ;;(hmm reader hmm keyword hmm default 10)
+  ((hmm reader hmm keyword hmm default 10)
    (id reader tower-id keyword id)
-   (blocks accessor tower-blocks)
-   )
-  )
+   (blocks accessor tower-blocks)))
 
 ;(deflocal str (make <string> characters "hmm"))
 ;(initialize str 'characters "hmm")
 ;(deflocal str (make-string "hmm"))
-;(print (string-pointer str))
+;(print (string-pointer str) nl)
 
 (deflocal hmm1 (make <tower>))
 ;; (hmm hmm1)
-;; (print (hmm hmm1))
+;(print (hmm hmm1) nl)
 
 ;; (deflocal hqz 2)
-;; (print hqz)
+;; (print hqz nl)
 
 ;; (deflocal hqz: 1)
-;; (print hqz:)
+;; (print hqz: nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

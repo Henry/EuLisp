@@ -35,7 +35,6 @@
            <string-stream>
            convert-stream-string
            read
-           prin
            open
            close
            stream?
@@ -46,6 +45,7 @@
            open?
            flush
            print
+           sprint
            stream-position
            set-stream-position
            end-of-stream?
@@ -53,7 +53,8 @@
            putback-char
            read-line
            output
-           newline write
+           nl
+           write
            <stream-condition>
            <end-of-stream>
            <inappropriate-stream-position>

@@ -47,7 +47,8 @@
                  pair)
            (only (eql)
                  compare)
-           (only (print)
+           (only (print
+                  nl)
                  print)
            (only (<string>
                   string?
@@ -166,8 +167,8 @@
         (rest-elts
          (apply-rest-list
           (cdr collection-list) ())))
-    ;;(print first-apply-arg)
-    ;;(print rest-elts)
+    ;;(print first-apply-arg nl)
+    ;;(print rest-elts nl)
     (if
         (if (eq first-apply-arg $end-string)
             t
@@ -238,7 +239,7 @@
 
 
 (defmethod construct-collection-info (collection)
-  (print "unknown type for collection"))
+  (print "unknown type for collection" nl))
 
 
 
@@ -276,7 +277,7 @@
 
 
 (defmethod take-next-elt ((element <object>) (collection <object>))
-  (print 'unknown-collection))
+  (print 'unknown-collection nl))
 
 
 
@@ -352,19 +353,19 @@
    (end %signed-word-integer)
    (max-index %signed-word-integer))
   (cond ((%lt start #%i0)
-         (print 'error-start-end-index-of-list-in-fill1)
+         (print 'error-start-end-index-of-list-in-fill1 nl)
          ())
         ((%lt end #%i0)
-         (print 'error-start-end-index-of-list-in-fill2)
+         (print 'error-start-end-index-of-list-in-fill2 nl)
          ())
         ((%ge start max-index)
-         (print 'error-start-end-index-of-list-in-fill3)
+         (print 'error-start-end-index-of-list-in-fill3 nl)
          ())
         ((%ge end max-index)
-         (print 'error-start-end-index-of-list-in-fill4)
+         (print 'error-start-end-index-of-list-in-fill4 nl)
          ())
         ((%gt start end)
-         (print 'error-start-end-index-of-list-in-fill5)
+         (print 'error-start-end-index-of-list-in-fill5 nl)
          ())
         (t t)))
 

@@ -135,14 +135,13 @@
    syntax (tail
            condition-ii)
    export (<write-error>
-           prin
            print
            sprint
            write
            output
-           newline
+           nl
            change-exponent-marker
-           print-based-int-0))   ; nicht el
+           print-based-int-0))
 
 ;;;----------------------------------------------------------------------------
 ;;; <write-error>
@@ -273,71 +272,6 @@
         (%write-unit stream obj)
       ()))
   unit)
-
-;;;-----------------------------------------------------------------------------
-;;; newline
-;;;-----------------------------------------------------------------------------
-(defun newline stream-list
-  (if stream-list
-      (let ((stream (car stream-list)))
-        (if (ensure-open-character-output-stream stream)
-            (%write-unit stream $char-newline)
-          ()))
-    (%write-unit stdout $char-newline))
-  #\newline)
-
-;;;-----------------------------------------------------------------------------
-;;; prin
-;;;-----------------------------------------------------------------------------
-(defun prin (object . stream-list)
-  (if stream-list
-      (let ((stream (car stream-list)))
-        (if (ensure-open-character-output-stream stream)
-            (generic-print object stream)
-          ()))
-    (generic-print object stdout)))
-
-;; auf generic-print abbilden!
-;; f string-streams nicht fd als %unsingned-word-intger definieren und
-;; durchreichen (sondern als <object> besser stream durchreichen)
-
-;; To depict generic-print!
-;; f string-stream not defined as fd %unsingned-word-intger
-;; reach through (but better than <object> stream reach through)
-
-;;   (%define-function (prin-1 <object>)
-;;                     ((object <object>)
-;;                      (stream <stream>))
-;;      ;  (let ((obj-class (%class-of object))) ;fehlt class-of
-;;      ;   (%write-hex stream object)
-;;     (if (cons? object)  ;(eq obj-class <cons>)
-;;       (prin-cons object stream)
-;;       (if (null? object) ;(eq obj-class <null>)
-;;         (%write-string stream (%literal %string () "()"))
-;;         (if (int? object)
-;;           (%write-int stream (make-swi (%cast <int> object)))
-;;             (if (symbol? object)
-;;                (%write-string stream (%select object <symbol> name))
-;;              (if (string? object)
-;;                (%write-string stream (string-pointer (%cast <string> object)))
-;;    ;; vector
-;;                (if (vector? object)
-;;         ;; (prin-vector (%cast <vector> object) stream)
-;;                     (generic-print (%cast <vector> object) stream)
-;;       ;; character
-;;                     (if (character? object)
-;;                        (%write-unit stream
-;;                                           (make-swi
-;;                                       (convert-char-int (%cast <character> object))))
-;;            ;;float
-;;                        (if (double-float? object)
-;;                           (%write-float stream (%cast <double-float> object))
-;;               ;;             (%write-string stream (%literal %string () ".?."))
-;;                         (%write-hex stream object)
-;;                          )
-;;                      )))))))
-;;      object
-;;       )
 
 ;;;-----------------------------------------------------------------------------
 ;;; generic-print
@@ -738,43 +672,33 @@
   )
 
 ;;;-----------------------------------------------------------------------------
-;;; print
+;;; sprint
 ;;;-----------------------------------------------------------------------------
-(defun print (object . stream-list)
-  (if stream-list
-      (%let ((stream <stream> (%cast <stream> (car stream-list))))
-            (if (ensure-open-character-output-stream stream)
-                (print-1 object stream)
-              ()))
-    (print-1 object (%cast <stream> stdout)))
-  object)
-
-(%define-function (print-1 %void) ((object <object>) (stream <stream>))
-  (generic-print object stream)
-  (%write-unit stream $char-newline))
+(%define-function (sprint-1 <null>) ((stream <stream>) objects)
+  (if objects
+      (progn
+        (generic-print (car objects) stream)
+        (sprint-1 stream (cdr objects)))
+    ()))
 
 (%define-function (sprint <stream>) ((stream <stream>) . objects)
   (if objects
       (if (ensure-open-character-output-stream stream)
-          (sprint-aux stream objects)
+          (sprint-1 stream objects)
         ())
     ())
-  (%write-unit stream $char-newline)
   stream)
 
-;; (defun sprint-aux (stream objects)
-;;   (if objects
-;;       (progn
-;;         (generic-print (car objects) stream)
-;;         (sprint-aux stream (cdr objects)))
-;;     ()))
-
-(%define-function (sprint-aux <null>) ((stream <stream>) objects)
+;;;-----------------------------------------------------------------------------
+;;; print
+;;;-----------------------------------------------------------------------------
+(%define-function (print <stream>) objects
   (if objects
-      (progn
-        (generic-print (car objects) stream)
-        (sprint-aux stream (cdr objects)))
-    ()))
+      (sprint-1 stdout objects)
+    ())
+  stdout)
+
+(defconstant nl #\\n)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
@@ -821,19 +745,6 @@
   (((var0 var1)
     ((var var0) (atom? %void))
     ((var var1) (atom? %string)))))
-
-(%annotate-function
-  newline new-signature
-  (((var0 var1)
-    ((var var0) (atom? <object>))
-    ((var var1) (atom? <list>)))))
-
-(%annotate-function
-  prin new-signature
-  (((var0 var1 var2)
-    ((var var0) (atom? <object>))
-    ((var var1) (var var0))
-    ((var var2) (atom? <list>)))))
 
 (%annotate-function
   prin-cons new-signature
@@ -902,19 +813,18 @@
     ((var var3) (atom? %signed-word-integer))
     ((var var4) (atom? %signed-word-integer)))))
 
-;;(%annotate-function
-;; prin-1 new-signature
-;; (((var0 var1 var2)
-;;   ((var var0) (atom? <object>))
-;;   ((var var1) (atom? <object>))
-;;   ((var var2) (atom? <stream>)))))
+(%annotate-function
+  sprint new-signature
+  (((var0 var1 var2)
+    ((var var0) (atom? <stream>))
+    ((var var1) (var var0))
+    ((var var2) (atom? <list>)))))
 
 (%annotate-function
   print new-signature
-  (((var0 var1 var2)
-    ((var var0) (atom? <object>))
-    ((var var1) (var var0))
-    ((var var2) (atom? <list>)))))
+  (((var0 var1)
+    ((var var0) (atom? <stream>))
+    ((var var1) (atom? <list>)))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module print

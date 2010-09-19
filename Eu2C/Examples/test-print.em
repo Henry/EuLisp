@@ -27,23 +27,23 @@
            print)
    syntax (level-0))
 
-(sprint stderr "hmm " 1 " end")
+(sprint stderr "hmm " 1 " end\n")
 
 ;; (sprint stdin "hmm " 1 " end")
 
 ;; (with-handler
 ;;  (lambda (condition continuation)
-;;    (print "error"))
+;;    (print "error" nl))
 ;;    (sprint stdin "hmm " 1 " end"))
 
 (sprint stdout (stream? stdout))
 (sprint stdout (file-stream? stdout))
 
 (sformat stdout "hello ~a~%" 1)
-(nformat "hello ~a~%" 1)
-(print (fmt "hello ~a~%" 1))
-
-(sprint stdout "End")
+(format "hello ~a~%" 1)
+(sprint stdout (fmt "hello ~a~%" 1))
+(sprint stdout "End\n" nl nl)
+(print nl nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

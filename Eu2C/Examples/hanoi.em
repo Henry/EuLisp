@@ -6,7 +6,10 @@
 ;;;  Description: Towers of Hanoi
 ;;;-----------------------------------------------------------------------------
 (defmodule hanoi
-  (import (level-0)
+  (import (level-0
+           (only (<pointer-to-void>)
+                 pointer-to-void)
+           tail)
    syntax (level-0))
 
 ;;;-----------------------------------------------------------------------------
@@ -58,7 +61,7 @@
   (if (= n 1)
       (progn
         (push x2 (pop x1))
-        (print x1) (print x2) (print x3) (newline))
+        (print x1 "    " x2 "    " x3 nl))
     (progn
       (move (- n 1) x1 x3 x2)
       (move 1 x1 x2 x3)
@@ -74,7 +77,7 @@
     (build-tower x1 *max-tower-height*)
     (build-tower x2 0)
     (build-tower x3 0)
-    (print x1) (print x2) (print x3)
+    (print x1 "    " x2 "    " x3 nl)
     (move *max-tower-height* x1 x2 x3)))
 
 (hanoi)

@@ -30,10 +30,10 @@
 ;;    (let ((subsubchar (read-char stream))
 ;;          (object (read stream)))
 ;;      (if (equal subsubchar #\i)
-;;        (progn (print "make signed-word-integer from:")
-;;               (print object))
-;;        (progn (print "other from:")
-;;               (print object)))))
+;;        (progn (print "make signed-word-integer from:" nl)
+;;               (print object nl))
+;;        (progn (print "other from:" nl)
+;;               (print object nl)))))
 ;;;  Authors: Rainer Rosenmuller
 ;;;-----------------------------------------------------------------------------
 
@@ -44,7 +44,8 @@
                  compare)
            (only (<character>)
                  character)
-           (only (print)
+           (only (print
+                  nl)
                  print))
    syntax (tail)
    export (get-dispatch-macro-character
@@ -58,7 +59,7 @@
 (defun set-dispatch-macro-character
   (disp-char subchar function . readtable-list)
   (if readtable-list
-      (print "there is no readtable in Eulisp, argument will be ignored")
+      (print "there is no readtable in Eulisp, argument will be ignored" nl)
     ())
   (if (equal #\# disp-char)
       (progn
@@ -67,7 +68,7 @@
               (cons (cons subchar function)
                     *extension-macro-table*))
         )
-    (print "there is no other dispatch macro character (as #\#) in Eulisp, no changes")
+    (print "there is no other dispatch macro character (as #\#) in Eulisp, no changes" nl)
     ))
 
 (defun get-dispatch-macro-character

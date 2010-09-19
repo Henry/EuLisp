@@ -38,7 +38,6 @@
     (only
      (symbol? <symbol>)
      symbol)
-    ;;(only (prin) print)
     (only (<string> string?)
           string-ii)
     (only (eql)
@@ -75,7 +74,7 @@
   (if (%eq (%list-size lists) #%i1)
       (mapc-aux1 function (car lists))
     ()
-    ;;(prin 'more-than-one-list-for-mapc)
+    ;;(print 'more-than-one-list-for-mapc nl)
     )
   )
 
@@ -168,8 +167,8 @@
 
 
 ;;  (defun hash (number) ;only for numbers
-;;    (print 'hash-number)
-;;    (print (logand number $standard-table-mask))
+;;    (print 'hash-number nl)
+;;    (print (logand number $standard-table-mask) nl)
 ;;    (logand (%cast <int> number)
 ;;            (%cast <int> $standard-table-mask)))
 
@@ -181,7 +180,7 @@
 ;;            ((symbol? obj)
 ;;             (hash-for-symbols obj))
 ;;            ((string? obj)
-;; ;;(prin 'hashindex-for-strings)
+;; ;;(print 'hashindex-for-strings nl)
 ;;             (hash-for-strings obj))
 ;;            ((character? obj)
 ;;             (hash-for-chars obj))

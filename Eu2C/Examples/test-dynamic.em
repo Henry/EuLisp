@@ -28,7 +28,7 @@
 
 (defglobal hmm 1)
 
-(print (dynamic hmm))
+(print (dynamic hmm) nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; end of module

@@ -303,7 +303,7 @@
             (setq hash-list (table-vector-ref (?table-vector table) index))
             (when hash-list
                   hash-list
-                  ;;(print hash-list)          ;take this if print is ok for dotted pairs
+                  ;;(print hash-list nl)          ;take this if print is ok for dotted pairs
                   )
             (dotimes-with-elt (%plus #%I1 index) upper-limit table))
           )))
