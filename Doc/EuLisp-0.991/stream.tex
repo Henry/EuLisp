@@ -745,44 +745,6 @@ defined: \methodref{generic-write}{character},
 \methodref{generic-write}{string} and \methodref{generic-write}{vector}.
 
 % ------------------------------------------------------------------------------
-\function{sprin}
-% ------------------------------------------------------------------------------
-\begin{arguments}
-    \item[stream] A character stream on which {\em object\/} is to
-    be output.
-    \item[{\optional{object$_1$ object$_2$ ...}}] A sequence of objects to be
-    output on {\em stream}.
-\end{arguments}
-%
-\result%
-Returns {\em stream}.
-%
-\remarks%
-Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
-output stream {\em stream\/} using \genericref{generic-print} for each object.
-%
-\seealso%
-\genericref{generic-print}.
-
-% ------------------------------------------------------------------------------
-\function{prin}
-% ------------------------------------------------------------------------------
-\begin{arguments}
-    \item[{\optional{object$_1$ object$_2$ ...}}] A sequence of objects to be
-    output on \instanceref{stdout}.
-\end{arguments}
-%
-\result%
-Returns \instanceref{stdout}.
-%
-\remarks%
-Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
-output stream \instanceref{stdout} using \genericref{sprin} for each object.
-%
-\seealso%
-\functionref{sprin}, \genericref{sprin}.
-
-% ------------------------------------------------------------------------------
 \function{sprint}
 % ------------------------------------------------------------------------------
 \begin{arguments}
@@ -797,8 +759,7 @@ Returns {\em stream}.
 %
 \remarks%
 Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
-output stream {\em stream\/} using \genericref{generic-print} for each object,
-followed by a newline character.
+output stream {\em stream\/} using \genericref{generic-print} for each object.
 %
 \seealso%
 \genericref{generic-print}.
@@ -816,37 +777,10 @@ Returns \instanceref{stdout}.
 %
 \remarks%
 Outputs the external representation of {\em object$_1$ object$_2$ ...} on the
-output stream \instanceref{stdout} using \genericref{sprint} for each object,
-followed by a newline character.
+output stream \instanceref{stdout} using \genericref{sprint} for each object.
 %
 \seealso%
-\functionref{sprint}, \genericref{sprint}.
-
-% ------------------------------------------------------------------------------
-\function{snewline}
-% ------------------------------------------------------------------------------
-\begin{arguments}
-    \item[stream] A stream on which the newline is to be output.
-\end{arguments}
-%
-\result%
-Returns {\em stream}.
-%
-\remarks%
-Outputs a newline character to {\em stream}.
-
-% ------------------------------------------------------------------------------
-\function{newline}
-% ------------------------------------------------------------------------------
-%
-\result%
-Returns \instanceref{stdout}.
-%
-\remarks%
-Outputs a newline character to \instanceref{stdout}.
-%
-\seealso%
-\functionref{snewline}.
+\functionref{sprint} and \genericref{generic-print}.
 
 % ------------------------------------------------------------------------------
 \function{sflush}

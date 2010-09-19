@@ -10,7 +10,7 @@
 <meta name="originator" content="TeX4ht (http://www.cse.ohio-state.edu/~gurari/TeX4ht/)" /> 
 <!-- html,1,next,noannex,xhtml --> 
 <meta name="src" content="eulisp.tex" /> 
-<meta name="date" content="2010-09-17 22:36:00" /> 
+<meta name="date" content="2010-09-19 21:51:00" /> 
 <link rel="stylesheet" type="text/css" href="eulisp.css" /> 
 </head><body 
 >
@@ -100,7 +100,7 @@ indirect instances of this class. The inheritance rules, the
 applicability of methods and the generic dispatch are described in
 detail later in this section.
 </p><!--l. 43--><p class="noindent" >Classes are defined using the <a 
-href="eulispcl17.html#x22-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> (<a 
 href="#x13-76001r1">11.3.1<!--tex4ht:ref: defclass --></a>) and <a 
 href="eulispcl13.html#x17-242001r1"><span 
@@ -108,18 +108,18 @@ class="cmtt-9">defcondition</span></a>
 (<a 
 href="eulispcl13.html#x17-242001r1">13.0.1<!--tex4ht:ref: defcondition --></a>) defining forms, both of which create top-lexical bindings.
 </p><!--l. 47--><p class="noindent" >Generic functions are defined using the <a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a><a 
  id="dx13-73004"></a> defining form,which creates a named generic function in the top-lexical environment
  of the module in which it appears and <a 
-href="eulispcl17.html#x22-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a><a 
  id="dx13-73005"></a>, which
  creates an anonymous generic function. These forms are described
  in detail later in this section.
  </p><!--l. 54--><p class="noindent" >Methods can either be defined at the same time as the generic
  function, or else defined separately using the <a 
-href="eulispcl17.html#x22-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a> macro,
  which adds a new method to an existing generic function. This
  macro is described in detail later in this section.
@@ -314,7 +314,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl16.html#x20-868005r2"><span 
+href="eulispcl16.html#x20-854005r2"><span 
 class="cmtt-9">&#x003C;string&#x003E;</span></a></td></tr></table>
 <!--l.10 26-->                                 <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -326,7 +326,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl16.html#x20-922002r2"><span 
+href="eulispcl16.html#x20-908002r2"><span 
 class="cmtt-9">&#x003C;vector&#x003E;</span></a></td></tr></table>
 <!--l.10 27-->                                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -337,7 +337,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-41.png" alt="A" class="9x-x-41" /> </span><a 
-href="eulispcl16.html#x20-914004r1"><span 
+href="eulispcl16.html#x20-900004r1"><span 
 class="cmtt-9">&#x003C;table&#x003E;</span></a></td></tr></table>
 <!--l.10 28-->                              <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -349,7 +349,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl16.html#x20-920001r4"><span 
+href="eulispcl16.html#x20-906001r4"><span 
 class="cmtt-9">&#x003C;hash-table&#x003E;</span></a></td></tr></table>
 <!--l.10 29-->                                       <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -481,7 +481,7 @@ class="tabbing">  </td><td
 class="tabbing"><span 
 class="cmsy-9"><img 
 src="cmsy9-43.png" alt="C" class="9x-x-43" /> </span><a 
-href="eulispcl16.html#x20-894002r2"><span 
+href="eulispcl16.html#x20-880002r2"><span 
 class="cmtt-9">&#x003C;symbol&#x003E;</span></a></td></tr></table>
 <!--l.10 42-->                                  <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -570,7 +570,7 @@ class="cmti-9">class</span><a
  id="dx13-74007"></a> </i></b></div><br /> <hr />
 </p><!--l. 72--><p class="noindent" >The default super-class including for itself. All classes defined using
 the <a 
-href="eulispcl17.html#x22-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> form are direct or indirect subclasses of <a 
 href="#x13-74005r2"><span 
 class="cmtt-9">&#x003C;class&#x003E;</span></a>.
@@ -659,7 +659,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl17.html#x22-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> <a 
 href="#x13-7700011.3.1.1"><span 
 class="cmti-9">class-name</span></a> <a 
@@ -967,7 +967,7 @@ class="arguments">
  id="x13-7900011.3.1.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 53--><p class="noindent" ><a 
-href="eulispcl17.html#x22-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> defines a new structure class. Structure classes support
 single inheritance as described above. Neither class redefinition nor
 changing the class of an instance is supported by structure
@@ -1033,7 +1033,7 @@ href="#x13-102003r1"><span
 class="cmtt-9">make</span></a>.  The
     expression is evaluated in the lexical environment of the
     call to <a 
-href="eulispcl17.html#x22-942001r1"><span 
+href="eulispcl17.html#x22-928001r1"><span 
 class="cmtt-9">defclass</span></a> and the dynamic environment of the call
     to <a 
 href="#x13-102003r1"><span 
@@ -1359,7 +1359,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-name</span></a> <a 
@@ -1438,7 +1438,7 @@ class="tabbing"><span
 class="cmtt-9">( </span><a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">specialized-lambda-list</span></a> <a 
-href="eulispcl17.html#x22-94100017.1"><span 
+href="eulispcl17.html#x22-92700017.1"><span 
 class="cmti-9">form</span><span 
 class="cmsy-6">*</span></a> <span 
 class="cmtt-9">)</span></td></tr></table>
@@ -1582,7 +1582,7 @@ any methods defined on this generic function have the same
 domain. These conditions apply both to methods defined at the
 same time as the generic function and to any methods added
 subsequently by <a 
-href="eulispcl17.html#x22-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a>. An <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a> is an identifier
@@ -1613,7 +1613,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> <a 
 href="eulispcl9.html#x11-540009.3.0.3"><span 
 class="cmti-9">identifier</span></a></td></tr></table>
@@ -1648,7 +1648,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">   </td><td  
 class="tabbing">(<a 
-href="eulispcl17.html#x22-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a></td></tr></table>
 <!--l.10 120-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1671,7 +1671,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a></td></tr></table>
 <!--l.10 128-->                                   <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1716,7 +1716,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">   </td><td  
 class="tabbing">(<a 
-href="eulispcl17.html#x22-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a></td></tr></table>
 <!--l.10 138-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1739,7 +1739,7 @@ cellpadding="0" border="0" cellspacing="0"
 class="tabbing"><tr  
 style="vertical-align:baseline;" class="tabbing"><td  
 class="tabbing">(<a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a></td></tr></table>
 <!--l.10 146-->                                <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1790,7 +1790,7 @@ class="tabbing"><tr
 style="vertical-align:baseline;" class="tabbing"><td style="width:13px;" 
 class="tabbing">   </td><td  
 class="tabbing">(<a 
-href="eulispcl17.html#x22-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a></td></tr></table>
 <!--l.10 157-->                    <table  
 cellpadding="0" border="0" cellspacing="0" 
@@ -1810,7 +1810,7 @@ class="cmsy-6">*</span></a>))</td></tr></table>
  id="x13-8700011.4.5.2"></a><span 
 class="cmbx-8">Examples</span></h5>
   <!--l. 164--><p class="noindent" >In the following example of the use of <a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> a generic
   function named <span 
 class="cmtt-9">gf-0 </span>is defined with three methods attached to it.
@@ -1822,7 +1822,7 @@ class="cmsy-9">&#x00D7; </span><span
 class="cmtt-9">&#x003C;class-a&#x003E;</span>.
   In consequence, each method added to the generic function, both
   here and later (by <a 
-href="eulispcl17.html#x22-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a>), must have a domain which is a
   subclass of <a 
 href="#x13-74002r1"><span 
@@ -1907,9 +1907,9 @@ class="cmtt-9">&#x00A0;...))</span>
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 184--><p class="noindent" ><a 
-href="eulispcl17.html#x22-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a>, <a 
-href="eulispcl17.html#x22-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a>.
                                                                                                   
                                                                                                   
@@ -1943,7 +1943,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl17.html#x22-961001r2"><span 
+href="eulispcl17.html#x22-947001r2"><span 
 class="cmtt-9">defmethod</span></a> <a 
 href="#x13-8900011.4.6.1"><span 
 class="cmti-9">gf-locator</span></a></td></tr></table>
@@ -2063,7 +2063,7 @@ style="vertical-align:baseline;" class="tabbing"><td style="width:42px;"
 class="tabbing">      </td><td  
 class="tabbing"><span 
 class="cmtt-9">( </span><a 
-href="eulispcl17.html#x22-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a> <a 
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">gf-lambda-list</span></a></td></tr></table>
@@ -2083,7 +2083,7 @@ class="cmtt-9">)</span></td></tr></table>
  id="x13-9200011.4.7.1"></a><span 
 class="cmbx-8">Remarks</span></h5>
 <!--l. 228--><p class="noindent" ><a 
-href="eulispcl17.html#x22-946001r1"><span 
+href="eulispcl17.html#x22-932001r1"><span 
 class="cmtt-9">generic-lambda</span></a> creates and returns an anonymous generic
 function that can be applied immediately, much like the normal
 <a 
@@ -2094,7 +2094,7 @@ class="cmti-9">gf-lambda-list</span></a> and the <a
 href="#x13-8300011.4.5.1"><span 
 class="cmti-9">level-0-init-option</span></a>s are
 interpreted exactly as for the level-0 definition of <a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a>.
 </p>
 <h5 class="likesyntaxssclauseHead"><a 
@@ -2102,7 +2102,7 @@ class="cmtt-9">defgeneric</span></a>.
 class="cmbx-8">Examples</span></h5>
 <!--l. 231--><p class="noindent" >In the following example an anonymous version of <span 
 class="cmtt-9">gf-0 </span>(see    <a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a> above) is defined. In all other respects the resulting
   object is the same as <span 
 class="cmtt-9">gf-0</span>.
@@ -2195,7 +2195,7 @@ class="cmtt-9">&#x00A0;...))</span>
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 248--><p class="noindent" ><a 
-href="eulispcl17.html#x22-952001r2"><span 
+href="eulispcl17.html#x22-938001r2"><span 
 class="cmtt-9">defgeneric</span></a>.
 </p><!--l. 681--><p class="noindent" >
 </p>
@@ -2590,14 +2590,14 @@ class="cmbx-8">Remarks</span></h5>
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a> creates a new object calling
 <a 
-href="eulispcl17.html#x22-1028001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a> and initializes it by calling <a 
 href="#x13-108001r3"><span 
 class="cmtt-9">initialize</span></a>. <a 
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a> returns
 whatever <a 
-href="eulispcl17.html#x22-1028001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a> returns as its result.
 </p><!--l. 26--><p class="noindent" ><hr /> <div style="text-align: left; width: 50%; float: left;"> <a 
  id="x13-105001r2"></a><span 
@@ -2640,7 +2640,7 @@ class="cmti-9">class </span>must be a structure class, the <a
 href="#x13-7700011.3.1.1"><span 
 class="cmti-9">initlist</span></a> is ignored. The
 behaviour of <a 
-href="eulispcl17.html#x22-1028001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a> is extended at level-1 for classes not
 accessible at level-0. The level-0 behaviour is not affected by the
 level-1 extension.
@@ -2688,7 +2688,7 @@ class="cmbx-8">Remarks</span></h5>
 href="#x13-102003r1"><span 
 class="cmtt-9">make</span></a> on a new uninitialized object created by calling
   <a 
-href="eulispcl17.html#x22-1028001r6"><span 
+href="eulispcl17.html#x22-1014001r6"><span 
 class="cmtt-9">allocate</span></a>.
   </p><!--l. 57--><p class="noindent" >Users may extend <a 
 href="#x13-108001r3"><span 
@@ -2811,7 +2811,7 @@ class="cmti-9">class</span><a
 class="cmbx-8">See</span><span 
 class="cmbx-8">&#x00A0;also</span></h5>
 <!--l. 17--><p class="noindent" ><a 
-href="eulispcl16.html#x20-894002r2"><span 
+href="eulispcl16.html#x20-880002r2"><span 
 class="cmtt-9">&#x003C;symbol&#x003E;</span></a> and <a 
 href="eulispcl16.html#x20-569002r2"><span 
 class="cmtt-9">&#x003C;keyword&#x003E;</span></a>.
