@@ -38,4 +38,7 @@
 (defun write-next-bv-byte (x)
   ((setter string-ref) *bv* *bv-index* (int-as-character x))
   (setq *bv-index* (+ *bv-index* 1)))
-)  ; end of module
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module
+;;;-----------------------------------------------------------------------------
