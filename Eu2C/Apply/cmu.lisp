@@ -505,6 +505,64 @@ as opposed to the : being part of a package scoping operator."
           (set-cmt-entry char #'read-token))))
   )
 
+;; -----------------------------------------------------------------------------
+;;; Add support for reading C character digrams to CMUCL
+;;  \a \b \d \f \l \n \r \t \v
+;; -----------------------------------------------------------------------------
+(macrolet
+    ((frob (char-names-list)
+           (collect
+            ((results))
+            (dolist (code char-names-list)
+              (destructuring-bind (ccode names)
+                  code
+                (dolist (name names)
+                  (results (cons name (code-char ccode))))))
+            `(defparameter char-name-alist ',(results)
+               "This is the alist of (character-name . character) for characters with
+  long names.  The first name in this list for a given character is used
+  on typeout and is the preferred form for input."))))
+  ;; Note: the char-name listed here should be what string-capitalize
+  ;; would produce.  This is needed to match what format ~:C would
+  ;; produce.
+  (frob ((#x00 ("Null" "^@" "NUL"))
+         (#x01 ("^A" "SOH"))
+         (#x02 ("^B" "STX"))
+         (#x03 ("^C" "ETX"))
+         (#x04 ("^D" "EOT"))
+         (#x05 ("^E" "ENQ"))
+         (#x06 ("^F" "ACK"))
+         (#x07 ("Bell" "^g" "BEL" "\\a"))
+         (#x08 ("Backspace" "^h" "BS" "\\b"))
+         (#x09 ("Tab" "^i" "HT" "\\t"))
+         (#x0A ("Newline" "Linefeed" "^j" "LF" "NL" "NLL" "\\n" "\\l"))
+         (#x0B ("Vt" "^k" "\\v"))
+         (#x0C ("Page" "^l" "Form" "Formfeed" "FF" "NP" "\\f"))
+         (#x0D ("Return" "^m" "RET" "CR" "\\r"))
+         (#x0E ("^N" "SO"))
+         (#x0F ("^O" "SI"))
+         (#x10 ("^P" "DLE"))
+         (#x11 ("^Q" "DC1"))
+         (#x12 ("^R" "DC2"))
+         (#x13 ("^S" "DC3"))
+         (#x14 ("^T" "DC4"))
+         (#x15 ("^U" "NAK"))
+         (#x16 ("^V" "SYN"))
+         (#x17 ("^W" "ETB"))
+         (#x18 ("^X" "CAN"))
+         (#x19 ("^Y" "EM" "EOM"))
+         (#x1A ("^Z" "SUB"))
+         (#x1B ("Escape" "^[" "Altmode" "ESC" "Alt"))
+         (#x1C ("Is4" "FS" "^\\"))
+         (#x1D ("Is3" "GS" "^]"))
+         (#x1E ("Is2" "RS" "^^"))
+         (#x1F ("Is1" "US" "^_"))
+         (#x20 ("Space" "SP" "SPC"))
+         (#x7f ("Rubout" "Delete" "DEL" "\\d")))))
+
+;; -----------------------------------------------------------------------------
+;;; Return to the user-package
+;; -----------------------------------------------------------------------------
 (in-package #:cl-user)
 
 ;; -----------------------------------------------------------------------------
