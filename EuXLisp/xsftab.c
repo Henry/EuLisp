@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Built-in function table
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
@@ -271,7 +272,7 @@ FUNDEF funtab[] =
     {"display", xdisplay},
     {"%display", xdisplay},
     {"print", xprint},
-    {"snewline", xsnewline},
+    {"printnl", xprint},
     {"newline", xnewline},
     {"sflush", xsflush},
     {"flush", xflush},

@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Definitions for classes and objects
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef XSOBJ_H
 #define XSOBJ_H

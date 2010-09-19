@@ -30,6 +30,7 @@
 ;;    char        X                           X       X       X
 ;;    integer     X                           X       X       X       X
 ;;    float       X                           X               X       X
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule convert

@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: xscheme built-in functions - part 2
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
@@ -696,21 +697,6 @@ LVAL xdisplay()
     // print the value
     xlprinc(val, fptr);
     return (true);
-}
-
-// xsnewline - terminate the current print line
-LVAL xsnewline()
-{
-    static char *cfn_name = "snewline";
-
-    // get file pointer
-    LVAL fptr = xlgaostream();
-    xllastarg();
-
-    // terminate the print line and return the stream
-    xlterpri(fptr);
-
-    return (fptr);
 }
 
 // xnewline - terminate the current print line to stdout

@@ -21,6 +21,7 @@
 ;;; Title: EuLisp Level-0 formatted-io module
 ;;;  Description:
 ;;    formatted output
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule formatted-io

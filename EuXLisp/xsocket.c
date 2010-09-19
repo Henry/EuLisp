@@ -23,6 +23,7 @@
 //    This code possibly written by David Halls.
 ///  WARNING:
 //    this code is under development, and is possibly buggy
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #ifdef SOCK

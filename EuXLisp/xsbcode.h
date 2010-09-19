@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: xscheme compiler byte code definitions
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef XSBCODE_H
 #define XSBCODE_H

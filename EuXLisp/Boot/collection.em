@@ -22,6 +22,7 @@
 ;;;  Problems:
 ;;    * Many are inefficient and could do with a rewrite.
 ;;    * The semantics of some (tables, in particular) may be awry.
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection

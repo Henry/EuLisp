@@ -21,6 +21,7 @@
 ;;; Title: EuLisp Level-0 number module
 ;;;  Notes:
 ;;    many of these inlined for special cases
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule number

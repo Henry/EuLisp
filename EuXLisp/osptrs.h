@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Table entries for machine specific functions
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef OSPTRS_H
 #define OSPTRS_H

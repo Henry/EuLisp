@@ -21,6 +21,7 @@
 ;;; Title: Symbols not usually exported from telos level-0
 ;;;  Description:
 ;;    Mainly introspective functionality.
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule telosint

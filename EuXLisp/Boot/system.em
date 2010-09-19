@@ -21,6 +21,7 @@
 ;;; Title: Additional access to system internals
 ;;;  Description:
 ;;    The exported symbols are those not exported from level-0
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule system

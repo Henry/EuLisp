@@ -24,6 +24,7 @@
 ###  Notes:
 ##    Originally tested on sunos, aix, solaris, Linux, ultrix, stardent, irix,
 ##    but this version only on Linux.
+###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile

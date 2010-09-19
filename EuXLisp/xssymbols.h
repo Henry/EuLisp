@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: EuXLisp symbol declarations
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef XSSYMBOLS_H
 #define XSSYMBOLS_H

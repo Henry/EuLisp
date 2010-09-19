@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: initialization functions
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "xscheme.h"
@@ -230,7 +231,7 @@ void xlinitws(unsigned int ssize)
     setelement(code, 10, xlenter("**EOF**"));
     setelement(code, 11, xlenter("exit"));
     setelement(code, 12, xlenter("eval"));
-    setelement(code, 13, xlenter("print"));
+    setelement(code, 13, xlenter("printnl"));
     setelement(code, 14, xlenter("*TOPLEVEL*"));
     drop(1);
 

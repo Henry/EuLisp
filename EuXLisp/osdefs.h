@@ -20,6 +20,7 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: extern declarations for machine specific functions
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef OSDEFS_H
 #define OSDEFS_H

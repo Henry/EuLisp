@@ -20,6 +20,7 @@
 /// Title: Function prototypes
 ///  Description:
 //    Automatically generated function prototypes by cproto
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef XSPROTO_H
 #define XSPROTO_H
