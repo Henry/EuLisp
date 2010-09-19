@@ -96,7 +96,7 @@
                (%display name)
                (%display " in module ")
                (%display (current-module))
-               (newline)))
+               (%display "\n")))
          `(define ,(cons name args)
                   ,@body))
         ((definable-name? name)

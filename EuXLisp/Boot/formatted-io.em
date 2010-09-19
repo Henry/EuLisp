@@ -189,7 +189,7 @@
 
 (define (n-tabs count result)
         (if (> count 0)
-            (n-tabs (- count 1) (cons #\tab result))
+            (n-tabs (- count 1) (cons #\\t result))
           result))
 
 ((setter table-ref) escape-arg-table #\t escape-int-tab)
@@ -205,7 +205,7 @@
 ; % newline
 (define (escape-% char string args n len result)
         (format-loop string args n len
-                     (cons #\newline result)))
+                     (cons #\\n result)))
 
 ((setter table-ref) escape-table #\% escape-%)
 
@@ -215,7 +215,7 @@
 ; | newpage
 (define (escape-pipe char string args n len result)
         (format-loop string args n len
-                     (cons #\formfeed result)))
+                     (cons #\\f result)))
 
 ((setter table-ref) escape-table #\| escape-pipe)
 

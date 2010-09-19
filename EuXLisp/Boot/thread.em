@@ -235,15 +235,15 @@
 (deflocal die-when-no-more-threads ())
 
 (define (no-more-threads)
-        (newline)
+        (print nl)
         (if die-when-no-more-threads
             (progn
-              (prin "No more runnable threads. Bye...")
-              (newline)
+              (print "No more runnable threads. Bye...")
+              (print nl)
               (exit))
           (progn
             (%display "No more runnable threads. Restarting...")
-            (newline)
+            (print nl)
             (set-cont current-self ())     ; tidy up
             (set-locks current-self ())
             (set-state current-self (list () (list ())))
@@ -252,15 +252,13 @@
             (reset))))
 
 ;;   (define (no-more-threads)
-;;           (newline)
-;;           (prin "No more runnable threads. Bye...")
-;;           (newline)
+;;           (print nl)
+;;           (print "No more runnable threads. Bye...\n")
 ;;           (exit))
 
 ;;   (define (no-more-threads)
-;;           (newline)
-;;           (%display "No more runnable threads. Restarting...")
-;;           (newline)
+;;           (print nl)
+;;           (%display "No more runnable threads. Restarting...\n")
 ;;           (set-cont current-self ())          ; tidy up
 ;;           (set-locks current-self ())
 ;;           (set-state current-self (list () (list ())))
@@ -512,8 +510,7 @@
                 (%display len)
                 (%display " lock")
                 (if (> len 1) (%display "s"))
-                (%display " -- released")
-                (newline)))))
+                (%display " -- released\n")))))
 
 (define (lock l)
         (if (lock? l)
@@ -608,9 +605,9 @@
                (frame (car (get-uwps thread)))
                (uwps (get-uwp-frame-uwps frame)))
           (if (null? uwps)
-              (print "*** no uwp to disestablish")
+              (print "*** no uwp to disestablish\n")
             (if (not (eq (car uwps) cleanups))
-                (print "*** out of sync in uwps")))
+                (print "*** out of sync in uwps\n")))
           (set-uwp-frame-uwps frame (cdr uwps))
           ((car uwps))                      ; run after forms
           value))
@@ -625,7 +622,7 @@
         (let* ((thread (current-thread))
                (handlers (get-handlers thread)))
           (if (or (null? handlers) (not (eq handler (car handlers))))
-              (print "*** out of sync in handlers")
+              (print "*** out of sync in handlers\n")
             (set-handlers thread (cdr handlers))))
         value)
 
@@ -645,7 +642,7 @@
         (if (null? (get-handlers current))
             (progn
               (default-handler condition resume)
-              (print "*** somehow returned from default handler")
+              (print "*** somehow returned from default handler\n")
               (if (not (eq current toplevel-thread))
                   (thread-kill current)))
           (let* ((handlers (get-handlers current))
@@ -767,7 +764,7 @@
 ;; debugging support
 
 (define (debug cc condition)
-        (print "\nDebug loop.  Type help: for help")
+        (print "\nDebug loop.  Type help: for help\n")
         (frame-where *xlframe* cc condition)
         (setq current-print-depth 0)
         (if (null? cc)
@@ -795,7 +792,7 @@
 
 (define (debug-loop frameptr cc condition)
         (if (not *debug-rl*) ;; If readline is not used print prompt
-            (prin "[error" *debug-depth* "] " (current-module) ">"))
+            (print "[error" *debug-depth* "] " (current-module) ">"))
         (let ((op (read)))
           (if (eq op **EOF**)
               (if (null? cc)
@@ -807,7 +804,7 @@
                  ((and (cons? op) (keyword? (car op)))
                   (debug-op frameptr cc condition (car op) (cdr op)))
                  (t (write ((compile op (frame-env frameptr))))
-                    (newline)
+                    (print nl)
                     frameptr))
            cc condition)))
 
@@ -815,23 +812,22 @@
         (let ((fn (table-ref op-table op)))
           (if (null? fn)
               (progn
-                (print op)
+                (print op nl)
                 frameptr)
             (apply fn frameptr cc cd args))))
 
 (deflocal op-table (make-table eq))
 
 (define (help frameptr cc cd . args)
-        (print "Debug loop.")
-        (print "top:                                return to top level")
-        (print "resume:  or  (resume: val)          resume from error")
-        (print "bt:                                 backtrace")
-        (print "locals:                             local variables")
-        (print "cond:                               current condition")
-        (print "up:  or  (up: n)                    up one or n frames")
-        (print "down:  or  (down: n)                down one or n frames")
-        (print "where:                              current function")
-        (newline)
+        (print "Debug loop.\n")
+        (print "top:                                return to top level\n")
+        (print "resume:  or  (resume: val)          resume from error\n")
+        (print "bt:                                 backtrace\n")
+        (print "locals:                             local variables\n")
+        (print "cond:                               current condition\n")
+        (print "up:  or  (up: n)                    up one or n frames\n")
+        (print "down:  or  (down: n)                down one or n frames\n")
+        (print "where:                              current function\n\n")
         frameptr)
 
 (table-set! op-table help: help)
@@ -863,22 +859,22 @@
                          (locals-loop (vector-ref (%CAR e) 0) (%CAR e) 1)
                          (if (%CDR e) (loop (%CDR e))))))
                 (loop (frame-env frameptr)))
-        (newline)
+        (print nl)
         frameptr)
 
 (define (locals-loop syms vals index)
         (if (cons? syms)
             (progn
-              (prin (car syms))
-              (prin ": ")
+              (print (car syms))
+              (print ": ")
               (indent (string-size (symbol->string (car syms))))
-              (print (vector-ref vals index))
+              (print (vector-ref vals index) nl)
               (locals-loop (cdr syms) vals (+ index 1)))))
 
 (define (indent n)
         (if (< n 15)
             (progn
-              (prin " ")
+              (print " ")
               (indent (+ n 1)))))
 
 (table-set! op-table locals: locals)
@@ -888,16 +884,14 @@
 (table-set! op-table down: frame-down)
 
 (define (frame-where frameptr cc cd . args)
-        (prin "Broken at ")
-        (print (frame-fun frameptr))
-        (newline)
+        (print "Broken at ")
+        (print (frame-fun frameptr) nl nl)
         frameptr)
 
 (table-set! op-table where: frame-where)
 
 (define (frame-cond frameptr cc cd . args)
-        (print cd)
-        (newline)
+        (print cd nl nl)
         frameptr)
 
 (table-set! op-table cond: frame-cond)

@@ -412,25 +412,25 @@ static LVAL read_special(LVAL fptr)
                 for (p = buf; *p; p++)
                     if (isupper(*p))
                         *p = tolower(*p);
-                if (strcmp(buf, "alert") == 0)
+                if (strcmp(buf, "\\a") == 0) // alert
                     ch = '\007';        // '\a'
-                else if (strcmp(buf, "backspace") == 0)
+                else if (strcmp(buf, "\\b") == 0) // backspace
                     ch = '\b';
-                else if (strcmp(buf, "delete") == 0)
+                else if (strcmp(buf, "\\d") == 0) // delete
                     ch = '\177';
-                else if (strcmp(buf, "formfeed") == 0)
+                else if (strcmp(buf, "\\f") == 0) // formfeed
                     ch = '\f';
-                else if (strcmp(buf, "linefeed") == 0)
+                else if (strcmp(buf, "\\l") == 0) // linefeed
                     ch = '\n';
-                else if (strcmp(buf, "newline") == 0)
+                else if ((strcmp(buf, "\\n") == 0)) // newline
                     ch = '\n';
-                else if (strcmp(buf, "return") == 0)
+                else if (strcmp(buf, "\\r") == 0) // return
                     ch = '\r';
                 else if (strcmp(buf, "space") == 0)
                     ch = ' ';
-                else if (strcmp(buf, "tab") == 0)
+                else if (strcmp(buf, "\\t") == 0) // tab
                     ch = '\t';
-                else if (strcmp(buf, "vertical-tab") == 0)
+                else if (strcmp(buf, "\\v") == 0) // vertical-tab
                     ch = '\v';
                 else if (strlen(buf) > 1)
                     xlcerror("unexpected symbol after '#\\'", cvstring(buf),

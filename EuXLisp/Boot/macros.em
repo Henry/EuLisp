@@ -318,7 +318,7 @@
         (let ((result (%expand-macros expr)))
           (prin1 expr)
           (display " ==>> ")
-          (print result)
+          (print result nl)
           result))
 
 (define (compile expr . env)

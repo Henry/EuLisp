@@ -208,15 +208,11 @@
            write-short
            write-long
 
-           sprin
            sprint
-           prin
            print
-
-           snewline
-           newline
            sflush
            flush
+           nl
 
            char-ready?
            peek-char

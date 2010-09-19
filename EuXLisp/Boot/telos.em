@@ -67,10 +67,9 @@
            <local-slot>
 
            generic-print
-           sprin
            sprint
-           prin
            print
+           nl
 
            generic-write
            swrite
@@ -129,6 +128,9 @@
            ;   initialize-class
            ))
 
+;;;-----------------------------------------------------------------------------
+;;; Class make and initialisation functions
+;;;-----------------------------------------------------------------------------
 (define (make cl . inits)
         (let ((maker (table-ref builtin-make-table cl)))
           (if (null? maker)
@@ -144,7 +146,9 @@
                (call-next-method)
                (initialize-class cl inits))
 
-;; class-hierarchy
+;;;-----------------------------------------------------------------------------
+;;; Class introspection
+;;;-----------------------------------------------------------------------------
 (define (class-hierarchy . top)
         (hierarchy (if (null? top) <object> (car top)) 0)
         t)
@@ -155,7 +159,7 @@
           (%display "   "))
         (indent depth)
         (%display cl)
-        (newline)
+        (print nl)
         (for-each
          (lambda (c)
            (hierarchy c (+ depth 2)))
@@ -166,7 +170,17 @@
           (princ " ")
           (setq n (- n 1))))
 
-; generic printing
+
+;;;-----------------------------------------------------------------------------
+;;; Printing
+;;;-----------------------------------------------------------------------------
+
+; Convenient character constant for printing a newline
+(defconstant nl #\\n)
+
+;;;-----------------------------------------------------------------------------
+;;;  Generic print functions
+;;;-----------------------------------------------------------------------------
 (define-generic (generic-print obj s))
 
 (define-method (generic-print (obj <object>) s)
@@ -183,26 +197,24 @@
 (define-method (generic-print (obj <vector>) s)
                (write-vector obj s generic-print))
 
-(define (sprin-all s objs)
+;;;-----------------------------------------------------------------------------
+;;;  N-ary print functions
+;;;-----------------------------------------------------------------------------
+(define (sprint-1 s objs)
         (for-each (lambda (x) (generic-print x s)) objs)
         s)
 
-(define (sprin s . objs)
-        (sprin-all s objs))
-
 (define (sprint s . objs)
-        (sprin-all s objs)
-        (snewline s))
-
-(define (prin . objs)
-        (sprin-all stdout objs))
+        (sprint-1 s objs))
 
 (deflocal %print print)
 
 (define (print . objs)
-        (sprin-all stdout objs)
-        (newline))
+        (sprint-1 stdout objs))
 
+;;;-----------------------------------------------------------------------------
+;;;  Generic write functions
+;;;-----------------------------------------------------------------------------
 (define-generic (generic-write obj s))
 
 (define-method (generic-write (obj <object>) s)
@@ -219,24 +231,31 @@
 (define-method (generic-write (obj <vector>) s)
                (write-vector obj s generic-write))
 
-(define (swrite-all s objs)
+;;;-----------------------------------------------------------------------------
+;;;  N-ary write functions
+;;;-----------------------------------------------------------------------------
+(define (swrite-1 s objs)
         (for-each (lambda (x) (generic-write x s)) objs)
         s)
 
 (define (swrite s . objs)
-        (swrite-all s objs))
+        (swrite-1 s objs))
 
 (deflocal %write write)
 
 (define (write . objs)
-        (swrite-all stdout objs))
+        (swrite-1 stdout objs))
 
-;; a feeble attempt at stopping infinite loops
+;;;-----------------------------------------------------------------------------
+;;;  Ancillary write functions
+;;;-----------------------------------------------------------------------------
+
+;; A feeble attempt at stopping infinite loops
 (deflocal current-print-depth 0)
 (define (inc-pr-depth n)
         (setq current-print-depth (+ current-print-depth n)))
 
-;; maintain tail recursion in write-list1
+;; Maintain tail recursion in write-list1
 (define (write-list obj s gfun)
         (cond ((and (print-depth)
                     (>= current-print-depth (print-depth)))
@@ -291,6 +310,9 @@
             (gfun (vector-ref obj index) s)
             (write-vector1 obj s (+ index 1) size gfun))))
 
+;;;-----------------------------------------------------------------------------
+;;; Wait functions
+;;;-----------------------------------------------------------------------------
 (define-generic (wait thread timeout))
 
 ;;;-----------------------------------------------------------------------------
