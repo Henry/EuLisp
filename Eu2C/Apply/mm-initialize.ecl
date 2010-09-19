@@ -59,6 +59,7 @@
 ;;    <<<<<<<<< Attention therefore last-used-card-descriptor is set to 11 in
 ;;    init-mm-initialize
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module mm-initialize

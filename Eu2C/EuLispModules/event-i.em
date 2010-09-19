@@ -25,6 +25,7 @@
 ;;;  Documentation:
 ;;;  Problems:
 ;;;  Authors: Jens Bimberg
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule event-i
   (import

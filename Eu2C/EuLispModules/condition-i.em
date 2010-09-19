@@ -41,6 +41,7 @@
 ;;    J. Dalton signal returns: signal static does nothing because there is no
 ;;    mean to catch signals at that level
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule condition-i

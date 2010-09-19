@@ -21,6 +21,7 @@
 ;;;  Description:
 ;;    Basic tests of the new print functions
 ;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-print
   (import (level-0
@@ -46,5 +47,5 @@
 (print nl nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module test-print
 ;;;-----------------------------------------------------------------------------

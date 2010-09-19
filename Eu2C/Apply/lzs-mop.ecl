@@ -46,6 +46,7 @@
 ;;    |
 ;;    ~compute-constructor
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-mop

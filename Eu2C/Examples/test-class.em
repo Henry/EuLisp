@@ -21,6 +21,7 @@
 ;;;  Description:
 ;;    Basic tests of class construction, initialisation and slot access.
 ;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-class
   (import (level-0
@@ -50,5 +51,5 @@
 ;; (print hqz: nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module test-class
 ;;;-----------------------------------------------------------------------------

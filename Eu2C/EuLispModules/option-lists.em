@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr, Rainer Rosenmuller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule option-lists

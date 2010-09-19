@@ -34,6 +34,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 

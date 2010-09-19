@@ -26,6 +26,7 @@
 ;;    append and cons? are defined in this module and should be imported from
 ;;    here.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule basic-list
   (import (%tail
@@ -136,5 +137,5 @@
 ;;     ((var var2) (atom? (and (not <null>) (not fpi-list)))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module basic-list
+)  ;; End of module basic-list
 ;;;-----------------------------------------------------------------------------

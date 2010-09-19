@@ -21,6 +21,7 @@
 ;;; Title:
 ;;;  Description:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule basic-compare
   (import (apply-level-1
@@ -49,5 +50,5 @@
     ((var var2) (atom? <object>)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module basic-compare
+)  ;; End of module basic-compare
 ;;;-----------------------------------------------------------------------------

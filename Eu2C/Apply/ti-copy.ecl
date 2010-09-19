@@ -27,6 +27,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 

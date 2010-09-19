@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 
@@ -65,4 +66,4 @@
 (%annotate-function %dynamic-setq is-special-function set-dynamic)
 (%annotate-function make-dynamic is-special-function make-dynamic)
 
-); end of module apply
+)  ;; End of module apply

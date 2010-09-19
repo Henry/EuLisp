@@ -21,6 +21,7 @@
 ;;; Title: int.am
 ;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule int

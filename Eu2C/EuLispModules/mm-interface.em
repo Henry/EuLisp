@@ -24,6 +24,7 @@
 ;;;  Problems:
 ;;    %pointer-to-void
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule mm-interface

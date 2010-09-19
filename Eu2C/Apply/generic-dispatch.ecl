@@ -30,6 +30,7 @@
 ;;;  Requires:
 ;;;  Problems: error methods and gf with no methods
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;    extended by Horst Friedrich
 ;;;-----------------------------------------------------------------------------
 

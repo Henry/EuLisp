@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: class definition and accessors for <double-float>
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule double-float-i

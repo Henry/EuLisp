@@ -30,6 +30,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Jens Bimberg
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule timer
   (import

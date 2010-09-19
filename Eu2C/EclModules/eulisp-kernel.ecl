@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: The kernel of EuLisp
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module eulisp-kernel

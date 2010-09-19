@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Benchmark 'takl'
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
 ;;    Lisp-Systems" and adapted to EuLisp.
@@ -68,5 +69,5 @@
 (format "~%(takl l26 l16 l6) => ~a~%" (takl l26 l16 l6))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module takl
 ;;;-----------------------------------------------------------------------------

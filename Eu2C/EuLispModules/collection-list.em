@@ -21,6 +21,7 @@
 ;;; Title: collection for lists
 ;;;  Description: collection for lists gives the functionality described in A.2
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule collection-list
   (import (tail

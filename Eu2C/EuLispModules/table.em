@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule table

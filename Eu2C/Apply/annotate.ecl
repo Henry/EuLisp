@@ -40,6 +40,7 @@
 ;;    %annotate-binding to make error detection (no function/class-object, bad
 ;;    keyword) a bit simpler.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module annotate

@@ -22,6 +22,7 @@
 ;;;  Description:
 ;;    Interface module
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tail

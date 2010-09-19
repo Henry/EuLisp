@@ -26,6 +26,7 @@
 ;;    here one can only accept a condition
 ;;    Error and cerror not exported because of package conflicts in n-1 files
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module el-conditions-0

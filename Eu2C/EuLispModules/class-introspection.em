@@ -21,6 +21,7 @@
 ;;; Title:
 ;;;  Description:
 ;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule class-introspection
@@ -45,5 +46,5 @@
   (%select cl <class> class-precedence-list))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module class-introspection
+)  ;; End of module class-introspection
 ;;;-----------------------------------------------------------------------------

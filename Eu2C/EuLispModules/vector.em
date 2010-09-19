@@ -22,6 +22,7 @@
 ;;    commented generic functions
 ;;    commented literal expander
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule vector
@@ -298,5 +299,5 @@
     ((var var2) (atom? <vector>)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of vector
+)  ;; End of module vector
 ;;;-----------------------------------------------------------------------------

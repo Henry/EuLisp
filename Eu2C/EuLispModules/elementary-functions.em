@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: the elementary functions module with defgenerics
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule elementary-functions

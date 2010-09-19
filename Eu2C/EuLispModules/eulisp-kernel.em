@@ -22,6 +22,7 @@
 ;;;  Problems:
 ;;    qd version, to bee cleaned up
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule eulisp-kernel

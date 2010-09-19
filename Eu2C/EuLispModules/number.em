@@ -28,6 +28,7 @@
 ;;;  Problems:
 ;;    no conditions til now
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule number

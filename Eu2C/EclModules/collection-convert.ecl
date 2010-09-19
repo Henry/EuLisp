@@ -21,6 +21,7 @@
 ;;; Title: collection consist of list, string, vector, table,
 ;;;  Description:
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module collection-convert

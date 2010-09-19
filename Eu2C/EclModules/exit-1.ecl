@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: Level-1 exit extensions
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module exit-1

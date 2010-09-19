@@ -24,6 +24,7 @@
 ;;    (poly-lists). Monomorphic lists contain elements with the same type,
 ;;    for example <symbol>, <fpi> or <cons>.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module ti-comp

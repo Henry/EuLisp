@@ -21,6 +21,7 @@
 ;;; Title: definitions for the transformation from LZS to MZS
 ;;;  Description:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module analyse-h

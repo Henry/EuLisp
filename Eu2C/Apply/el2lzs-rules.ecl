@@ -28,6 +28,7 @@
 ;;    variables, let/cc and unwind-protect are mapped to other forms. So they
 ;;    are not expressed in form of their LZS-counterparts.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-rules

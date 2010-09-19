@@ -25,6 +25,7 @@
 ;;    complement. This modules provides the bit codes and operations on
 ;;    them.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module ti-codes

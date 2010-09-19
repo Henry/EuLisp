@@ -27,6 +27,7 @@
 ;;    generation of gensym-name is a hack use converter number-string from
 ;;    printer if possible
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule symbol
@@ -162,5 +163,5 @@
     ((var var1) (atom? <string>)))))
 
 ;;;-----------------------------------------------------------------------------
-) ;; end of symbol
+)  ;; End of module symbol
 ;;;-----------------------------------------------------------------------------

@@ -27,6 +27,7 @@
 ;;;  Problems:any changes of tat type must be done conformely with the generation of
 ;;    trace functions for <%pointer-to-struct>- thingies in module mm-initialize.em
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;    CONTACT:e. E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
 (defmodule pointer-to-void

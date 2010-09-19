@@ -22,6 +22,7 @@
 ;;;  Description:
 ;;    Link between EuLisp constants and type expressions.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module ti-const

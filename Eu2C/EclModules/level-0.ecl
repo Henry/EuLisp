@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: Level-0 of EuLisp
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module level-0

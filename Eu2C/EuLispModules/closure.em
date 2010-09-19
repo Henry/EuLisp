@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule closure
   (import (apply-level-1
@@ -66,4 +67,4 @@
    (fun %function))
   (make-function arg closure fun))
 
-); end of module closure
+)  ;; End of module closure

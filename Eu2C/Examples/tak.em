@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Benchmark 'tak'
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
 ;;    Lisp-Systems" and adapted to EuLisp.
@@ -49,5 +50,5 @@
 (format "~%(tak 26 16 6) => ~a~%" (tak 26 16 6))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module tak
 ;;;-----------------------------------------------------------------------------

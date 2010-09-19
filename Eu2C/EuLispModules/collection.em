@@ -23,6 +23,7 @@
 ;;    Collection gives the functionality described in A.2.
 ;;    Collection consist of list, string, vector and table.
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection

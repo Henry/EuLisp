@@ -21,8 +21,8 @@
 ;;;  Description:
 ;;    basic thread functions for use in modules thread and lock
 ;;;  Authors: Jens Bimberg
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-
 
 (defmodule thread-i
   (import (object-0
@@ -203,5 +203,5 @@
   (cont-threads))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module thread-i
 ;;;-----------------------------------------------------------------------------

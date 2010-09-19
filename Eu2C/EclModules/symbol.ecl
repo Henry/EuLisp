@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: symbol
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module symbol

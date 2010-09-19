@@ -21,6 +21,7 @@
 ;;;  Description:
 ;;    Basic tests of class introspection
 ;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-introspection
   (import (level-0
@@ -34,5 +35,5 @@
 (print <list> nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module test-introspection
 ;;;-----------------------------------------------------------------------------

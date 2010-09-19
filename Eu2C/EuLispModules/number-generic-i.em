@@ -28,6 +28,7 @@
 ;;    level. The EuLisp names are provided by a special interface module
 ;;    'number-generic'.
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule number-generic-i

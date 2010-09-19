@@ -22,6 +22,7 @@
 ;;  for specific situations detected by the frontend
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-error

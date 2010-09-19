@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: EuLisp Level-0 condition module
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule condition

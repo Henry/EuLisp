@@ -23,6 +23,7 @@
 ;;    This module includes functions to compute the least upper bound (join) and
 ;;    greatest lower boun (meet) of type expressions.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module ti-meet-join

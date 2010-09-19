@@ -25,6 +25,7 @@
 ;;    line (descriptor). This file provides functions to create default type
 ;;    descriptors.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module ti-descrs

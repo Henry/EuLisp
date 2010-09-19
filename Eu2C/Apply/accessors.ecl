@@ -21,6 +21,7 @@
 ;;; Title:
 ;;;  Description:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module accessors
@@ -257,5 +258,5 @@
   then-type-descr-s)
 
 ;;;-----------------------------------------------------------------------------
-#module-end  ;; end of module accessors
+#module-end  ;; End of module accessors
 ;;;-----------------------------------------------------------------------------

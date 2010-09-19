@@ -22,6 +22,7 @@
 ;;;  Problems:
 ;;    converter
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule double-float
   (import (eulisp-kernel

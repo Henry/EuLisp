@@ -21,6 +21,7 @@
 ;;; Title: Transformation of class definitions into LZS
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-classes

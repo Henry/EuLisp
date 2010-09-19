@@ -22,6 +22,7 @@
 ;;;  Description:
 ;;    Provides level 1 of EuLisp.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module level-1

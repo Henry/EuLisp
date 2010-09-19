@@ -26,6 +26,7 @@
 ;;    break the circle initialization of <class> -> slot-accessors are needed to
 ;;    generate runtime initialization -> <class> has to be initialized.
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 #module lzs-class-init
 (import (accessors

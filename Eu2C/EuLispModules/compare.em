@@ -25,6 +25,7 @@
 ;;    class objects is needed which contains a list of slot readers.  Introduce
 ;;    something like subclass? to fasten eql
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule compare

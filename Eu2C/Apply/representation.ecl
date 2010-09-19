@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: 
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module representation

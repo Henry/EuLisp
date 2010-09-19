@@ -21,6 +21,7 @@
 ;;; Title: make C-strings available for Lisp
 ;;;  Description:
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-string

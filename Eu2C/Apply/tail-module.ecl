@@ -24,6 +24,7 @@
 ;;;  Documentation:
 ;;    see in the APPLY-paper machine description
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module tail-module

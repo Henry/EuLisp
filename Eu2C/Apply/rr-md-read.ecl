@@ -21,6 +21,7 @@
 ;;; Title:   Read of Mashine Description:
 ;;;        Register and Operation Code Generation
 ;;;  Authors: Rainer Rosenmuller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module RR-MD-READ

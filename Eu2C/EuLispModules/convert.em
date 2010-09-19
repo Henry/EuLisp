@@ -22,6 +22,7 @@
 ;;;  Description:
 ;;    collection consist of list, string, vector, table,
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule convert

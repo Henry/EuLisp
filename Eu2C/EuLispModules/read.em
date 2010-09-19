@@ -23,6 +23,7 @@
 ;;;  Problems:
 ;;    Lacking a detailed error treatment.
 ;;;  Authors: Horst Friedrich, Rainer Rosenmuller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule read

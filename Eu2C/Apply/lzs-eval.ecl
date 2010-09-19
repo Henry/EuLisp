@@ -44,6 +44,7 @@
 ;;    is no distinction between top-level forms needed during syntax expansion
 ;;    and forms needed during runtime only.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-eval

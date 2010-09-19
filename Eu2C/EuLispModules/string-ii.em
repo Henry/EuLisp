@@ -26,6 +26,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule string-ii
@@ -115,5 +116,5 @@
     ((var var1) (atom? (and <object> (not <string>)))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of string-ii
+)  ;; End of module string-ii
 ;;;-----------------------------------------------------------------------------

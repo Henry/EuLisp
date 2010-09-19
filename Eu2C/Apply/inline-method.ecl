@@ -21,6 +21,7 @@
 ;;; Title: inline of LZS-Functions
 ;;;  Description:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module inline-method

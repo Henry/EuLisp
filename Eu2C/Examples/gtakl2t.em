@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Benchmark 'gtakl2'
+;;; Title: Benchmark 'gtakl2t'
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation
 ;;    of Lisp-Systems".
@@ -75,5 +75,5 @@
 
 
 ;;;-----------------------------------------------------------------------------
-) ;; end of module
+)  ;; End of module gtakl2t
 ;;;-----------------------------------------------------------------------------

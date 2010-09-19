@@ -26,6 +26,7 @@
 ;;;  Notes:
 ;;    here with define-tail for the aux-data-types too
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 

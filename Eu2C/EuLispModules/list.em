@@ -22,6 +22,7 @@
 ;;;  Description:
 ;;    list processing
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule list

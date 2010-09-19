@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: module fpint
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module fpi

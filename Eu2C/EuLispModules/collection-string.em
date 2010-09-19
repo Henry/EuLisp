@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems: setter-string-ref has to store into string.am
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection-string

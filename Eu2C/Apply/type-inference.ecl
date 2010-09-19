@@ -44,6 +44,7 @@
 ;;    ti            Auxiliary Functions and Parameters for Type Inference
 ;;;  Problems:
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module type-inference

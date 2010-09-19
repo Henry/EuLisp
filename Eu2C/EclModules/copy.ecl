@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: standard module copy
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module copy

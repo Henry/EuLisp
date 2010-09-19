@@ -27,6 +27,7 @@
 ;;    append and cons? are defined in this module and should be imported from
 ;;    here.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-syntax
@@ -47,5 +48,5 @@
            eq))
 
 ;;;-----------------------------------------------------------------------------
-) ;end of module basic-syntax
+)  ;; End of module basic-syntax
 ;;;-----------------------------------------------------------------------------

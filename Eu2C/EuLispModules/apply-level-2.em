@@ -36,6 +36,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 

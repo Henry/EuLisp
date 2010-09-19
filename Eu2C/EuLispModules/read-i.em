@@ -35,6 +35,7 @@
 ;;        (progn (print "other from:" nl)
 ;;               (print object nl)))))
 ;;;  Authors: Rainer Rosenmuller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule read-i

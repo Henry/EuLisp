@@ -36,6 +36,7 @@
 ;;    * set (?closure local-static)
 ;;    * env = (var1 var2 var3 ...)
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module side-effects

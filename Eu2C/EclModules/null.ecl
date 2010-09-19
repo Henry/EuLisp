@@ -22,6 +22,7 @@
 ;;;  Description:
 ;;    Declaration of the <null> class and null? predicate
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module null

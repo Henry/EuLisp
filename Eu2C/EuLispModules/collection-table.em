@@ -27,6 +27,7 @@
 ;;    accumulate accumulate1 any? concatenate do fill map are ***not implemented***
 ;;    ???reverse-table should copy the table???
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection-table

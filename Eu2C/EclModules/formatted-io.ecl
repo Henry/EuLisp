@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: the standard module level-0
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module formatted-io

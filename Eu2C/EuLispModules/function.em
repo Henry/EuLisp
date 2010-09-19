@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule function
 
@@ -756,5 +757,5 @@
 (%annotate-function %funcall8 is-special-function funcall)
 
 ;;;-----------------------------------------------------------------------------
-); end of module function
+)  ;; End of module function
 ;;;-----------------------------------------------------------------------------

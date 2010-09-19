@@ -24,6 +24,7 @@
 ;;    defcondition corresponds to defclass with <condition> as the
 ;;    default superclass and the superclass checked to be a <condition>.
 ;;;  Authors: E. Ulrich Kriegel and Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule condition-ii

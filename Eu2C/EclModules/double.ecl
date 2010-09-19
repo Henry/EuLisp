@@ -21,6 +21,7 @@
 ;;; Title: EL-in-CL: double floats
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module double

@@ -23,6 +23,7 @@
 ;;    The methods for <standard-class-def> implement the single inheritance case
 ;;    which is the default for the predefined EuLisp class <class>.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module standard-init

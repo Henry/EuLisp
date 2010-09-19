@@ -24,6 +24,7 @@
 ;;    functions and adds some strategic lattice types to the lattice used
 ;;    for type inference.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ti-sys-signatures

@@ -25,12 +25,16 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cl-ext
   (import (level-0)
    syntax (level-0)
-   export (caar rplaca rplacd remove-if)
-   )
+   export (caar
+           rplaca
+           rplacd
+           remove-if))
 
 (defun caar (l)
   (car (car l)))
@@ -70,5 +74,5 @@
              (loop 0))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module cl-ext
 ;;;-----------------------------------------------------------------------------

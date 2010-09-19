@@ -62,6 +62,7 @@
 ;;    The symbols EXPR and STMT are imported explicitely from package USER to
 ;;    make them available for the ~/.../-directive of format.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module c-code

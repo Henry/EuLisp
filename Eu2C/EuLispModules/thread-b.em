@@ -28,6 +28,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Jens Bimberg
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule thread-b
   (import ((only (%void <object> %function %signed-word-integer) tail))

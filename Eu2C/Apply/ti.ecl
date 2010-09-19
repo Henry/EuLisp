@@ -23,6 +23,7 @@
 ;;    Auxiliary functions for formatting, error signaling, collections, and
 ;;    statistics.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module ti

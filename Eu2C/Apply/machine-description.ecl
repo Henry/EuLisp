@@ -27,6 +27,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel, Ingo Mohr, Rainer Rosenmuller, Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module machine-description

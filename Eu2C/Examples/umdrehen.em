@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Example 'umdrehen'
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;  Description:
 ;;    A variation of reverse.
 ;;;  Compilation:
@@ -51,5 +52,5 @@
                              "\numdrehen: usertime %.2f sec (system %.2f)"))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module umdrehen
 ;;;-----------------------------------------------------------------------------

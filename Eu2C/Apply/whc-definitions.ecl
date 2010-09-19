@@ -25,6 +25,7 @@
 ;;    see in the APPLY-paper TAIL:eine getypte implementationssprache fuer APPLY
 ;;;  Notes:
 ;;;  Authors: Winfried Heicking, E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module whc-definitions

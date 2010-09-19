@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule setf
@@ -43,5 +44,5 @@
     ,@(cdr (cdr access))
     ,new-value))
 
-) ; end of module setf
+)  ;; End of module setf
 

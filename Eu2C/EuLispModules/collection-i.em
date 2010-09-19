@@ -21,6 +21,7 @@
 ;;; Title: auxiliary functions for collections
 ;;;  Description: collection gives the functionality described in A.2
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection-i

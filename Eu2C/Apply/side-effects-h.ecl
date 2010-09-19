@@ -27,6 +27,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module side-effects-h

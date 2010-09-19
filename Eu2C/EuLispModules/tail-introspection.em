@@ -24,6 +24,7 @@
 ;;;  Problems:
 ;;    %class-of explicitely assumed that it is called for valid lisp data only
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule tail-introspection
   (import ((rename ((%class <class>)

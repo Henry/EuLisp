@@ -22,6 +22,7 @@
 ;;;  Description:
 ;;    make-vector, vector-ref and (setf (vector-ref ..) ..)
 ;;;  Authors: Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module vector

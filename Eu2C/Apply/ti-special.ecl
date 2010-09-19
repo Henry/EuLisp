@@ -23,6 +23,7 @@
 ;;    This file provides functions that compute formal type descriptors for some
 ;;    system functions, that are treated specially.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module ti-special

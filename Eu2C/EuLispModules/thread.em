@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Lisp Part of thread implementation
 ;;;  Authors: Jens Bimberg
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule thread
   (import (thread-ii

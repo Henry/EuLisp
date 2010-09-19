@@ -21,6 +21,7 @@
 ;;; Title:
 ;;;  Description:
 ;;;  Authors: Rainer Rosenmuller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule stream-ii

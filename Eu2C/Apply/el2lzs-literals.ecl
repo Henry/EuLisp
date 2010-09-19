@@ -28,6 +28,7 @@
 ;;    objects is more a hack than a pretty implementation. Search for "imported"
 ;;    to get these places.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-literals

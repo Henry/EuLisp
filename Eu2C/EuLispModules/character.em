@@ -23,6 +23,7 @@
 ;;    character box vector cannot be allocated statically til now
 ;;    literal expander for vectors needed
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule character

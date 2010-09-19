@@ -21,6 +21,7 @@
 ;;;  Description:
 ;;    Basic tests of dynamic
 ;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-dynamic
   (import (level-0)
@@ -31,5 +32,5 @@
 (print (dynamic hmm) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module test-dynamic
 ;;;-----------------------------------------------------------------------------

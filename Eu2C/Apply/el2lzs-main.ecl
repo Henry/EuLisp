@@ -34,6 +34,7 @@
 ;;    used with explicit package qualifier. In the future el2lzs-main should be
 ;;    divided into 2 modules.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module el2lzs-main

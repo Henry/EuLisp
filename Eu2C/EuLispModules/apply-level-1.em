@@ -33,6 +33,7 @@
 ;;    - definition of external functions, constants and variables
 ;;    - predefined classes of TAIL and standard literals
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule apply-level-1

@@ -24,6 +24,7 @@
 ;;;  Documentation:
 ;;;  Notes:
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 ;;; begin whc-aux.em

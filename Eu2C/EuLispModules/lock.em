@@ -21,6 +21,7 @@
 ;;; Title: semaphores as part of the thread implementation
 ;;;  Description:
 ;;;  Authors: Jens Bimberg
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule lock
   (import ((only (<T-LST>

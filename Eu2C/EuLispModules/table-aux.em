@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems: !!!hash function only for symbols, strings and fpint!!!
 ;;;  Authors: Winfried Heicking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule table-aux

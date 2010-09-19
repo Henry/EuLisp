@@ -25,6 +25,7 @@
 ;;    exported. The function set-apply-funs can be called after! the module
 ;;    apply was loaded.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module apply-funs

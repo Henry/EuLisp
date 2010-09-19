@@ -25,6 +25,7 @@
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel, Horst Friedrich
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule function-i
@@ -73,5 +74,5 @@
   allocation single-card)
 
 ;;;-----------------------------------------------------------------------------
-); end of module function-i
+)  ;; End of module function-i
 ;;;-----------------------------------------------------------------------------

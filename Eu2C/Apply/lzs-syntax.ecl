@@ -23,6 +23,7 @@
 ;;;  Documentation:
 ;;    lzs-syntax contains the macro def-lzs-object for lzs
 ;;;  Authors: Winfried Heicking, Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module lzs-syntax

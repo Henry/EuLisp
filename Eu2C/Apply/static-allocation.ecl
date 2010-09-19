@@ -24,6 +24,7 @@
 ;;    til now adjustment array is put directly in front of static data
 ;;    all adresses in this array til 0xffffffff are considered as root addresses
 ;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module static-allocation

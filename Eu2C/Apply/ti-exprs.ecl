@@ -25,6 +25,7 @@
 ;;    type or to a combinations of lattice types. A combination of lattice types
 ;;    can be created with lattice operations meet, join, and complement.
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 

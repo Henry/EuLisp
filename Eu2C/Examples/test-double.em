@@ -19,6 +19,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Example 'test-double'
 ;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;  Description:
 ;;    Most basic double-precision number test
 ;;;  Compilation:
@@ -36,5 +37,5 @@
 (print 0.9D0 nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; end of module
+)  ;; End of module test-double
 ;;;-----------------------------------------------------------------------------

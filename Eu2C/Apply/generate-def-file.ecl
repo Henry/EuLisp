@@ -49,6 +49,7 @@
 ;;      because they are teared out of the original binding context.  They
 ;;      should be renamed to unique identifiers.
 ;;;  Authors: Ingo Mohr
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 #module generate-def-file

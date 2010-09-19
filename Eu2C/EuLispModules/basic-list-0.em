@@ -28,6 +28,7 @@
 ;;    This module is needed for apply-level-1 and therefore some restrictions
 ;;    must be considered, e.g. class definitions without predicates.
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-list-0
@@ -229,5 +230,5 @@
     ((var var2) (atom? <object>)))))
 
 ;;;-----------------------------------------------------------------------------
-) ; end of module basic-list-0
+)  ;; End of module basic-list-0
 ;;;-----------------------------------------------------------------------------
