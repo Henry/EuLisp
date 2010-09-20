@@ -26,8 +26,8 @@ extern LispRef stream2_bindings[];
 extern LispRef i_param_bindings[];
 extern LispRef stream_bindings[];
 
-/* Module bindings with size 134 */
-LispRef i_args_bindings[134];
+/* Module bindings with size 135 */
+LispRef i_args_bindings[135];
 
 /* Foreign functions */
 
@@ -43,7 +43,7 @@ void initialize_module_i_args()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_575, sym_574, sym_573, sym_572, sym_571, G00570, G00567, G00560, G00557, key_555, sym_506, sym_505, G00504, key_502, G00499, G00497, G00476, G00440;
+  LispRef sym_576, sym_575, sym_574, sym_573, sym_572, G00571, G00568, G00560, G00557, key_555, sym_506, sym_505, G00504, key_502, G00499, G00497, G00476, G00440;
 
   /* Code vector and literal definitions */
   eul_allocate_static_string(str_441, "Usage: youtoo [<options>] <source-file(s)> [<options>]", 54);
@@ -170,18 +170,19 @@ void initialize_module_i_args()
 
   eul_allocate_static_string(str_561, "EuLisp System 'youtoo'", 22);
   eul_allocate_static_string(str_562, "Version ~a updated\n", 19);
-  eul_allocate_static_string(str_563, "Copyright (c) 1996, 1997 by A Kind & University of Bath", 55);
-  eul_allocate_static_string(str_564, "This is free software; see the source and the file COPYING for copying conditions.", 82);
-  eul_allocate_static_string(str_565, "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.", 87);
-  /* Byte-vector with size: 27 is_init: 0 index: 126 binding: print-version */
-  static const void *G00559[] = {I(a9,23,00,00),B(i_args ,121),I(24,00,00,00),B(stream ,11),I(3c,01,2a,23),B(i_args ,122),I(24,00,00,00),B(i_param ,43),I(24,00,00,00),B(format ,5),I(3c,02,2a,23),B(i_args ,123),I(24,00,00,00),B(stream ,11),I(3c,01,2a,23),B(i_args ,124),I(24,00,00,00),B(stream ,11),I(3c,01,2a,23),B(i_args ,125),I(24,00,00,00),B(stream ,11),I(3c,01,2a,24),B(stream ,10),I(3c,00,2a,24),B(stream ,2),I(3d,00,00,00)};
+  eul_allocate_static_string(str_563, "Copyright 1996, 1997 A. Kind & University of Bath", 49);
+  eul_allocate_static_string(str_564, "Copyright 2010 Henry G. Weller", 30);
+  eul_allocate_static_string(str_565, "This is free software; see the source and the file COPYING for copying conditions.", 82);
+  eul_allocate_static_string(str_566, "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.", 87);
+  /* Byte-vector with size: 31 is_init: 0 index: 127 binding: print-version */
+  static const void *G00559[] = {I(a9,23,00,00),B(i_args ,121),I(24,00,00,00),B(stream ,11),I(3c,01,2a,23),B(i_args ,122),I(24,00,00,00),B(i_param ,43),I(24,00,00,00),B(format ,5),I(3c,02,2a,23),B(i_args ,123),I(24,00,00,00),B(stream ,11),I(3c,01,2a,23),B(i_args ,124),I(24,00,00,00),B(stream ,11),I(3c,01,2a,23),B(i_args ,125),I(24,00,00,00),B(stream ,11),I(3c,01,2a,23),B(i_args ,126),I(24,00,00,00),B(stream ,11),I(3c,01,2a,24),B(stream ,10),I(3c,00,2a,24),B(stream ,2),I(3d,00,00,00)};
 
-  eul_allocate_static_string(str_568, "  ~a = ~a\n", 10);
-  /* Byte-vector with size: 5 is_init: 0 index: 128 binding: print-param */
-  static const void *G00566[] = {I(ab,23,00,00),B(i_args ,127),I(1d,1d,24,00),B(format ,5),I(3d,03,02,00)};
+  eul_allocate_static_string(str_569, "  ~a = ~a\n", 10);
+  /* Byte-vector with size: 5 is_init: 0 index: 129 binding: print-param */
+  static const void *G00567[] = {I(ab,23,00,00),B(i_args ,128),I(1d,1d,24,00),B(format ,5),I(3d,03,02,00)};
 
   /* Byte-vector with size: 38 is_init: 1 index: 0 binding: initialize-i-args */
-  static const void *G00569[] = {I(87,25,00,00),B(i_args ,1),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(i_args ,129),I(23,00,00,00),B(i_args ,128),I(3b,02,25,00),B(i_args ,6),I(23,00,00,00),B(i_args ,130),I(23,00,00,00),B(i_args ,126),I(3b,00,25,00),B(i_args ,5),I(23,00,00,00),B(i_args ,131),I(23,00,00,00),B(i_args ,120),I(3b,01,25,00),B(i_args ,4),I(23,00,00,00),B(i_args ,132),I(23,00,00,00),B(i_args ,61),I(3b,00,25,00),B(i_args ,3),I(23,00,00,00),B(i_args ,133),I(23,00,00,00),B(i_args ,41),I(3b,00,25,00),B(i_args ,2),I(86,ac,00,00)};
+  static const void *G00570[] = {I(87,25,00,00),B(i_args ,1),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(i_args ,130),I(23,00,00,00),B(i_args ,129),I(3b,02,25,00),B(i_args ,6),I(23,00,00,00),B(i_args ,131),I(23,00,00,00),B(i_args ,127),I(3b,00,25,00),B(i_args ,5),I(23,00,00,00),B(i_args ,132),I(23,00,00,00),B(i_args ,120),I(3b,01,25,00),B(i_args ,4),I(23,00,00,00),B(i_args ,133),I(23,00,00,00),B(i_args ,61),I(3b,00,25,00),B(i_args ,3),I(23,00,00,00),B(i_args ,134),I(23,00,00,00),B(i_args ,41),I(3b,00,25,00),B(i_args ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
@@ -304,15 +305,16 @@ void initialize_module_i_args()
   object_class(str_563) = eul_static_string_class;
   object_class(str_564) = eul_static_string_class;
   object_class(str_565) = eul_static_string_class;
+  object_class(str_566) = eul_static_string_class;
   eul_allocate_bytevector( G00560,G00559);
-  object_class(str_568) = eul_static_string_class;
-  eul_allocate_bytevector( G00567,G00566);
-  eul_intern_symbol(sym_571,"print-param");
-  eul_intern_symbol(sym_572,"print-version");
-  eul_intern_symbol(sym_573,"parse-args");
-  eul_intern_symbol(sym_574,"print-params");
-  eul_intern_symbol(sym_575,"print-help");
-  eul_allocate_bytevector( G00570,G00569);
+  object_class(str_569) = eul_static_string_class;
+  eul_allocate_bytevector( G00568,G00567);
+  eul_intern_symbol(sym_572,"print-param");
+  eul_intern_symbol(sym_573,"print-version");
+  eul_intern_symbol(sym_574,"parse-args");
+  eul_intern_symbol(sym_575,"print-params");
+  eul_intern_symbol(sym_576,"print-help");
+  eul_allocate_bytevector( G00571,G00570);
 
   /* Set local bindings */
   {
@@ -440,16 +442,17 @@ void initialize_module_i_args()
   i_args_bindings[ 123] = str_563;
   i_args_bindings[ 124] = str_564;
   i_args_bindings[ 125] = str_565;
-  i_args_bindings[ 126] = G00560;
-  i_args_bindings[ 127] = str_568;
-  i_args_bindings[ 128] = G00567;
+  i_args_bindings[ 126] = str_566;
+  i_args_bindings[ 127] = G00560;
+  i_args_bindings[ 128] = str_569;
+  i_args_bindings[ 129] = G00568;
   i_args_bindings[ 1] = eul_nil;
-  i_args_bindings[ 129] = sym_571;
   i_args_bindings[ 130] = sym_572;
   i_args_bindings[ 131] = sym_573;
   i_args_bindings[ 132] = sym_574;
   i_args_bindings[ 133] = sym_575;
-  eul_allocate_lambda( i_args_bindings[0], "initialize-i-args", 0, G00570);
+  i_args_bindings[ 134] = sym_576;
+  eul_allocate_lambda( i_args_bindings[0], "initialize-i-args", 0, G00571);
 
   }
 }

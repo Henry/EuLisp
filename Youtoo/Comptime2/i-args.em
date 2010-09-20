@@ -1,6 +1,22 @@
-;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+;;; Copyright 1997 A. Kind & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
@@ -263,7 +279,8 @@
 (defun print-version ()
   (print "EuLisp System 'youtoo'")
   (format "Version ~a updated\n" *version*)
-  (print "Copyright (c) 1996, 1997 by A Kind & University of Bath")
+  (print "Copyright 1996, 1997 A. Kind & University of Bath")
+  (print "Copyright 2010 Henry G. Weller")
   (print "This is free software; see the source and the file COPYING for copying conditions.")
   (print "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.")
   (newline)

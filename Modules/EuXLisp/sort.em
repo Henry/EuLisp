@@ -1,5 +1,5 @@
-;;; Copyright (c) 1985 Yale University
-;;;     Authors: N Adams, R Kelsey, D Kranz, J Philbin, J Rees.
+;;; Copyright 1985 Yale University
+;;;  Authors: N Adams, R Kelsey, D Kranz, J Philbin, J Rees.
 
 ;;; This material was developed by the T Project at the Yale
 ;;; University Computer Science Department.  Permission to copy this

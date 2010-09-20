@@ -1,7 +1,23 @@
 #!/bin/sh
-### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
+### Copyright 1997 A. Kind & University of Bath
+### Copyright 2010 Henry G. Weller
 ###-----------------------------------------------------------------------------
-### ---                  EuLisp System 'youtoo'
+##  This file is part of
+### ---                         EuLisp System 'Youtoo'
+###-----------------------------------------------------------------------------
+##
+##  Youtoo is free software: you can redistribute it and/or modify it under the
+##  terms of the GNU General Public License version 2 as published by the Free
+##  Software Foundation.
+##
+##  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+##  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+##  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+##  details.
+##
+##  You should have received a copy of the GNU General Public License along with
+##  this program.  If not, see <http://www.gnu.org/licenses/>.
+##
 ###-----------------------------------------------------------------------------
 ### Description: system configuration
 ###-----------------------------------------------------------------------------
@@ -345,11 +361,12 @@ fi
 
 name_rc=${EUL_DIR}/.eulrc.${ARCH}
 echo "  Creating ${EUL_DIR}/.eulrc.${ARCH} ..."
-echo ";;; Copyright (c) by A Kind & University of Bath. All rights reserved." > $name_rc
-echo >> $name_rc
-echo ";;; --------------------------------------------------------------------" >> $name_rc
-echo ";;;                      EuLisp System 'youtoo'" >> $name_rc
-echo ";;; --------------------------------------------------------------------" >> $name_rc
+echo ";;; Copyright 1997 A. Kind & University of Bath" > $name_rc
+echo ";;; Copyright 2010 Henry G. Weller" >> $name_rc
+echo ";;;-----------------------------------------------------------------------------" >> $name_rc
+echo ";;  This file is part of" >> $name_rc
+echo ";;; ---                         EuLisp System 'Youtoo'" >> $name_rc
+echo ";;;-----------------------------------------------------------------------------" >> $name_rc
 echo >> $name_rc
 echo \( >> $name_rc
 echo \(CC \. \"${CC}\"\) >> $name_rc
@@ -368,11 +385,12 @@ echo \) >> $name_rc
 
 name=${EUL_LIB_DIR}/Makefile
 echo "  Creating ${EUL_LIB_DIR}/Makefile ..."
-echo "### Copyright (c) by A Kind & University of Bath. All rights reserved." > $name
-echo >> $name
-echo "###---------------------------------------------------------------------" >> $name
-echo "###                      EuLisp System 'youtoo'" >> $name
-echo "###---------------------------------------------------------------------" >> $name
+echo "### Copyright 1997 A. Kind & University of Bath" > $name
+echo "### Copyright 2010 Henry G. Weller" >> $name
+echo "###-----------------------------------------------------------------------------" >> $name
+echo "##  This file is part of" >> $name
+echo "### ---                         EuLisp System 'Youtoo'" >> $name
+echo "###-----------------------------------------------------------------------------" >> $name
 echo >> $name
 echo CC = ${CC} >> $name
 echo "CFLAGS = ${WORD_LEN_OP} ${EUL_DIR_OP} ${EUL_ARCH_OP} ${CFLAGS}" >> $name

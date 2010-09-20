@@ -1,5 +1,6 @@
-;;; this code written by David Halls
-;;; Euscheme code Copyright (c) 1994 Russell Bradford
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;; this code originally written by David Halls
 
 ;;; to use this the interpreter must have been compiled with -DSOCK
 

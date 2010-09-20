@@ -1,11 +1,7 @@
-;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'Eu2C'
-;;;-----------------------------------------------------------------------------
 ;;;  Authors: Andreas Kind, Henry G. Weller
 ;;;  Maintainer: Henry G. Weller
 ;;;  Description: Towers of Hanoi
-;;;-----------------------------------------------------------------------------
 (defmodule hanoi
   (import (level-0
            (only (<pointer-to-void>)
@@ -13,9 +9,7 @@
            tail)
    syntax (level-0))
 
-;;;-----------------------------------------------------------------------------
 ;;; Tower definition
-;;;-----------------------------------------------------------------------------
 (defconstant *max-tower-height* 10)
 
 (defclass <tower> ()
@@ -32,9 +26,7 @@
 (defmethod generic-print ((x <tower>) (s <stream>))
   (sformat s "#<tower ~a: ~a>" (tower-id x) (tower-blocks x)))
 
-;;;-----------------------------------------------------------------------------
 ;;; Access to tower blocks
-;;;-----------------------------------------------------------------------------
 (defgeneric push ((x <object>) (y <object>)))
 
 (defmethod push ((x <tower>) (y <int>))
@@ -53,9 +45,7 @@
           (car blocks))
       (error <condition> "cannot pop block from emtpy tower ~a" x))))
 
-;;;-----------------------------------------------------------------------------
 ;;; Move n blocks from tower x1 to tower x2 using x3 as buffer
-;;;-----------------------------------------------------------------------------
 (defgeneric move (n x1 x2 x3))
 
 (defmethod move ((n <int>) (x1 <tower>) (x2 <tower>) (x3 <tower>))
@@ -68,9 +58,7 @@
       (move 1 x1 x2 x3)
       (move (- n 1) x3 x2 x1))))
 
-;;;-----------------------------------------------------------------------------
 ;;; Initialize and run the 'Towers of Hanoi'
-;;;-----------------------------------------------------------------------------
 (defun hanoi ()
   (let ((x1 (make <tower> id: 0))
         (x2 (make <tower> id: 1))
@@ -83,6 +71,4 @@
 
 (hanoi)
 
-;;;-----------------------------------------------------------------------------
 )  ;; End of module hanoi
-;;;-----------------------------------------------------------------------------

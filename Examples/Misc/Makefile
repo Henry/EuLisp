@@ -1,43 +1,28 @@
-### Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-###-----------------------------------------------------------------------------
 ### ---                             EuLisp Examples
-###-----------------------------------------------------------------------------
 
-###-----------------------------------------------------------------------------
 ### EuLisp miscellaneous examples Makefile
-###-----------------------------------------------------------------------------
 
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
-###-----------------------------------------------------------------------------
 ### EuLisp Level-0 examples
-###-----------------------------------------------------------------------------
 EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl triang
 EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
-###-----------------------------------------------------------------------------
 ### EuLisp Level-1 examples
-###-----------------------------------------------------------------------------
 EXAMPLES_1 = dphil echo echod macro-dispatch-char padd url url2 url3
 
 OTHERS_EM = csem
 
-###-----------------------------------------------------------------------------
 ### All examples
-###-----------------------------------------------------------------------------
 EXAMPLES = $(EXAMPLES_0) $(EXAMPLES_1)
 EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
-###-----------------------------------------------------------------------------
 ### Youtoo default compile rules for Level-0 and Level-1
-###-----------------------------------------------------------------------------
 makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level-0 -l math
 makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1 -l math
 
-###-----------------------------------------------------------------------------
 ### Youtoo compile rules for all examples
-###-----------------------------------------------------------------------------
 all: $(EXAMPLES_EXE)
 
 # A stress test
@@ -104,9 +89,7 @@ $(ARCH_DIR)/url2: url2.em
 $(ARCH_DIR)/url3: url3.em
 	$(call makeExe1,url3)
 
-###-----------------------------------------------------------------------------
 ###  Run the examples
-###-----------------------------------------------------------------------------
 .PHONY: runeuxlisp
 runeuxlisp: $(EXAMPLES_0_EM)
 	@$(foreach example, $(EXAMPLES_0_EM), \
@@ -129,7 +112,6 @@ runyoutoo: $(EXAMPLES_EXE)
 .PHONY: run
 run: runeuxlisp runyoutoo
 
-###-----------------------------------------------------------------------------
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
@@ -140,4 +122,3 @@ clean:
 distclean: clean
 	@rm -rf platforms
 
-###-----------------------------------------------------------------------------

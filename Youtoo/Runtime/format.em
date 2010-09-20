@@ -1,11 +1,7 @@
-;;; Copyright (c) 1997 by A Kind & University of Bath. All rights reserved.
-;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'Youtoo'
-;;;-----------------------------------------------------------------------------
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
 ;;;  Description: formatted output (a first attempt!)
-;;;-----------------------------------------------------------------------------
 
 (defmodule format
   (syntax (_macros)
@@ -27,9 +23,7 @@
            fmt
            cerror))
 
-;;;-----------------------------------------------------------------------------
 ;;; Formatted output
-;;;-----------------------------------------------------------------------------
 (defextern format-info (<string>) ptr "eul_format_info")
 
 (defun sformat (s str . args)
@@ -108,9 +102,7 @@
                      (control-block-buffer scb) 0
                      (control-block-buffer-pos scb))))))
 
-;;;-----------------------------------------------------------------------------
 ;;; Formatted error messages
-;;;-----------------------------------------------------------------------------
 ;; error already defined in module boot
 ;; (setq *error*
 ;;       (named-lambda error (str class . rest)
@@ -132,9 +124,7 @@
 (defun cerror (condclass str . rest)
   (let/cc k (signal (apply make condclass message: str rest) k)))
 
-;;;-----------------------------------------------------------------------------
 ;;; Socket connections
-;;;-----------------------------------------------------------------------------
 (defmethod initialize ((x <connection>) inits)
   (call-next-method)
   (let ((s (init-list-ref inits socket:))
@@ -176,6 +166,4 @@
                        (cons x *open-file-streams*)))
       x)))
 
-;;;-----------------------------------------------------------------------------
 )  ;; End of module format
-;;;-----------------------------------------------------------------------------
