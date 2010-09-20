@@ -560,31 +560,31 @@ static void putcharacter(LVAL fptr, int ch)
     switch (ch)
     {
         case '\007':   // '\a'
-            xlputstr(fptr, "#\\a");
+            xlputstr(fptr, "#\\\\a");
             break;
         case '\b':
-            xlputstr(fptr, "#\\b");
+            xlputstr(fptr, "#\\\\b");
             break;
         case '\177':
-            xlputstr(fptr, "#\\d");
+            xlputstr(fptr, "#\\\\d");
             break;
         case '\f':
-            xlputstr(fptr, "#\\f");
+            xlputstr(fptr, "#\\\\f");
             break;
         case '\n':
-            xlputstr(fptr, "#\\n");
+            xlputstr(fptr, "#\\\\n");
             break;
         case '\r':
-            xlputstr(fptr, "#\\r");
+            xlputstr(fptr, "#\\\\r");
             break;
         case ' ':
             xlputstr(fptr, " ");
             break;
         case '\t':
-            xlputstr(fptr, "#\\t");
+            xlputstr(fptr, "#\\\\t");
             break;
         case '\v':
-            xlputstr(fptr, "#\\v");
+            xlputstr(fptr, "#\\\\v");
             break;
         case EOF:
             xlputstr(fptr, "#\\eof");
