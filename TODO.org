@@ -304,9 +304,11 @@
     for =<vector>=, =<string> and maybe =<list>= in file =ex-expr.em=.  This
     might avoid the generic function call overhead for returning an element of a
     primitive container.
-*** TODO Add support for Level-0 style super-class specification
+*** DONE Add support for Level-0 style super-class specification
+    CLOSED: [2010-09-20 Mon 22:41]
     If only one super-class is specified allow single-inheritance syntax of
     specifying the class directly rather than as a list.
+*** TODO Correct =write=ing of character digrams and escape sequences in strings
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=
