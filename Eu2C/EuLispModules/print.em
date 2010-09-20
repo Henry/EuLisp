@@ -136,8 +136,9 @@
    syntax (tail
            condition-ii)
    export (<write-error>
-           print
            sprint
+           print
+           swrite
            write
            output
            nl
@@ -306,24 +307,24 @@
   object)
 
 (defmethod generic-print ((object <cons>) (stream <stream>))
-  (prin-cons object stream) object)
+  (print-cons object stream) object)
 
-(%define-function (prin-cons <null>)
+(%define-function (print-cons <null>)
   ((object <cons>)
    (stream <stream>))
   (%write-string stream (%literal %string () "("))
   (generic-print (car object) stream)
-  (prin-cons1 (cdr object) stream)
+  (print-cons1 (cdr object) stream)
   (%write-string stream (%literal %string () ")"))
   ())
 
-(%define-function (prin-cons1 <null>)
+(%define-function (print-cons1 <null>)
   ((object <object>)
    (stream <stream>))
   (if (cons? object)
       (progn (%write-string stream (%literal %string  () " "))
              (generic-print (car object) stream)
-             (prin-cons1 (cdr object) stream))
+             (print-cons1 (cdr object) stream))
     (if (null? object) ()
       (progn (%write-string stream (%literal %string () " . "))
              (generic-print object stream)
@@ -331,9 +332,9 @@
   )
 
 (defmethod generic-print ((object <vector>) (stream <stream>))
-  (prin-vector object stream) object)
+  (print-vector object stream) object)
 
-(%define-function (prin-vector <null>)
+(%define-function (print-vector <null>)
   ((object <vector>)
    (stream <stream>))
   (%write-string stream (%literal %string () "#("))
@@ -341,13 +342,13 @@
         (if (%neq length #%I0)
             (progn
               (generic-print (primitive-vector-ref object #%I0) stream)
-              (prin-vector1 object length #%I1 stream))
+              (print-vector1 object length #%I1 stream))
           ()))
   (%write-string stream (%literal %string () ")"))
   ()
   )
 
-(%define-function (prin-vector1 <null>)
+(%define-function (print-vector1 <null>)
   ((object <vector>)
    (length %unsigned-word-integer)
    (idx    %unsigned-word-integer)
@@ -355,19 +356,8 @@
   (if (%lt idx length)
       (progn (%write-string stream (%literal %string  () " "))
              (generic-print (primitive-vector-ref object idx) stream)
-             (prin-vector1 object length (%plus idx #%I1) stream))
+             (print-vector1 object length (%plus idx #%I1) stream))
     ()))
-
-;;;-----------------------------------------------------------------------------
-;;; write
-;;;-----------------------------------------------------------------------------
-(defun write (object . stream-list)
-  (if stream-list
-      (let ((stream (car stream-list)))
-        (if (ensure-open-character-output-stream stream)
-            (generic-write object stream)
-          ()))
-    (generic-write object stdout)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; generite-write
@@ -614,23 +604,23 @@
             (%write-unit stream ch1)
           (progn
             (if (%eq ch1 $char-ascii-delete)
-                (%write-string stream (%literal %string () "delete"))
+                (%write-string stream (%literal %string () "\\d"))
               (if (%eq ch1 $char-ascii-space)
-                  (%write-string stream (%literal %string () "space"))
+                  (%write-string stream (%literal %string () " "))
                 (if (%eq ch1 $char-ascii-alert)
-                    (%write-string stream (%literal %string () "alert"))
+                    (%write-string stream (%literal %string () "\\a"))
                   (if (%eq ch1 $char-ascii-backspace)
-                      (%write-string stream (%literal %string () "backspace"))
+                      (%write-string stream (%literal %string () "\\b"))
                     (if (%eq ch1 $char-formfeed)
-                        (%write-string stream (%literal %string () "formfeed"))
+                        (%write-string stream (%literal %string () "\\f"))
                       (if (%eq ch1 $char-newline)
-                          (%write-string stream (%literal %string () "newline"))
+                          (%write-string stream (%literal %string () "\\n"))
                         (if (%eq ch1 $char-return)
-                            (%write-string stream (%literal %string () "return"))
+                            (%write-string stream (%literal %string () "\\r"))
                           (if (%eq ch1 $char-ascii-tab)
-                              (%write-string stream (%literal %string () "tab"))
+                              (%write-string stream (%literal %string () "\\t"))
                             (if (%eq ch1 $char-ascii-vertical-tab)
-                                (%write-string stream (%literal %string () "vertical-tab"))
+                                (%write-string stream (%literal %string () "\\v"))
                               (progn
                                 (%write-unit stream $char-string-hex-l)
                                 (%write-unit stream $char-ascii-zero)
@@ -671,6 +661,33 @@
              (generic-write object stream)
              ())))
   )
+
+;;;-----------------------------------------------------------------------------
+;;; swrite
+;;;-----------------------------------------------------------------------------
+(%define-function (swrite-1 <null>) ((stream <stream>) objects)
+  (if objects
+      (progn
+        (generic-write (car objects) stream)
+        (swrite-1 stream (cdr objects)))
+    ()))
+
+(%define-function (swrite <stream>) ((stream <stream>) . objects)
+  (if objects
+      (if (ensure-open-character-output-stream stream)
+          (swrite-1 stream objects)
+        ())
+    ())
+  stream)
+
+;;;-----------------------------------------------------------------------------
+;;; write
+;;;-----------------------------------------------------------------------------
+(%define-function (write <stream>) objects
+  (if objects
+      (swrite-1 stdout objects)
+    ())
+  stdout)
 
 ;;;-----------------------------------------------------------------------------
 ;;; sprint
@@ -748,48 +765,34 @@
     ((var var1) (atom? %string)))))
 
 (%annotate-function
-  prin-cons new-signature
+  print-cons new-signature
   (((var0 var1 var2)
     ((var var0) (atom? <null>))
     ((var var1) (atom? <cons>))
     ((var var2) (atom? <stream>)))))
 
 (%annotate-function
-  prin-cons1 new-signature
+  print-cons1 new-signature
   (((var0 var1 var2)
     ((var var0) (atom? <null>))
     ((var var1) (atom? <object>))
     ((var var2) (atom? <stream>)))))
 
 (%annotate-function
-  prin-vector new-signature
+  print-vector new-signature
   (((var0 var1 var2)
     ((var var0) (atom? <null>))
     ((var var1) (atom? <vector>))
     ((var var2) (atom? <stream>)))))
 
 (%annotate-function
-  prin-vector1 new-signature
+  print-vector1 new-signature
   (((var0 var1 var2 var3 var4)
     ((var var0) (atom? <null>))
     ((var var1) (atom? <vector>))
     ((var var2) (atom? %unsigned-word-integer))
     ((var var3) (atom? %unsigned-word-integer))
     ((var var4) (atom? <stream>)))))
-
-(%annotate-function
-  write new-signature
-  (((var0 var1 var2)
-    ((var var0) (atom? <object>))
-    ((var var1) (var var0))
-    ((var var2) (atom? <list>)))))
-
-;;(%annotate-function
-;; write-1 new-signature
-;; (((var0 var1 var2)
-;;   ((var var0) (atom? <object>))
-;;   ((var var1) (atom? <object>))
-;;   ((var var2) (atom? <stream>)))))
 
 (%annotate-function
   write-symbol-1 new-signature
@@ -813,6 +816,19 @@
     ((var var2) (atom? %string))
     ((var var3) (atom? %signed-word-integer))
     ((var var4) (atom? %signed-word-integer)))))
+
+(%annotate-function
+  swrite new-signature
+  (((var0 var1 var2)
+    ((var var0) (atom? <stream>))
+    ((var var1) (var var0))
+    ((var var2) (atom? <list>)))))
+
+(%annotate-function
+  write new-signature
+  (((var0 var1)
+    ((var var0) (atom? <stream>))
+    ((var var1) (atom? <list>)))))
 
 (%annotate-function
   sprint new-signature

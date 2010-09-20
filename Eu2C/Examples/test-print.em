@@ -24,8 +24,7 @@
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-print
-  (import (level-0
-           print)
+  (import (level-0)
    syntax (level-0))
 
 (sprint stderr "hmm " 1 " end\n")
@@ -44,6 +43,9 @@
 (format "hello ~a~%" 1)
 (sprint stdout (fmt "hello ~a~%" 1))
 (sprint stdout "End\n" nl nl)
+
+(write #\\n)
+
 (print nl nl)
 
 ;;;-----------------------------------------------------------------------------
