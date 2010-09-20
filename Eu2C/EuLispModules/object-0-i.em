@@ -20,10 +20,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title:
 ;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -31,9 +27,7 @@
 (defmodule object-0-i
   (import (eulisp-kernel
            tail
-           option-lists
-           (only (<pointer-to-void>)
-                 pointer-to-void)) ;;***HGW needed for defclass
+           option-lists)
    syntax (eulisp-kernel
            syntax-0
            tail)

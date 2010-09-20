@@ -32,7 +32,9 @@
                   make
                   allocate
                   initialize)
-                 object-0-i)))
+                 object-0-i)
+           (only (<class>)
+                 apply-level-1)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module object-0

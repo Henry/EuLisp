@@ -24,10 +24,7 @@
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-class
-  (import (level-0
-           tail
-           (only (<pointer-to-void>)
-                 pointer-to-void))
+  (import (level-0)
    syntax (level-0))
 
 (defclass <tower> <object>
@@ -41,8 +38,8 @@
 ;(print (string-pointer str) nl)
 
 (deflocal hmm1 (make <tower>))
-;; (hmm hmm1)
-;(print (hmm hmm1) nl)
+(hmm hmm1)
+(print (hmm hmm1) nl)
 
 ;; (deflocal hqz 2)
 ;; (print hqz nl)
