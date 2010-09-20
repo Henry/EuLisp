@@ -1,18 +1,35 @@
+;;; Copyright 1997 J. Garcia & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;;  By Julio Garcia Moreno & University of Bath.                           ;;;
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo/tk'
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library:
-;;;  Authors: Julio Garcia Moreno
-;;; Description: The next example shows how text widget works.
-;;;
+;;; Title: Test text widget
+;;;  Library: tcltk
+;;;  Authors: J Garcia
+;;;  Description:
+;;    This exmaple show the way text widgets works, and some of
+;;    the commands that can be done in YouToo/tk.
 ;;;-----------------------------------------------------------------------------
-;; This exmaple show the way text widgets works, and some of
-;; the commands that can be done in YouToo/tk.
+
 (defmodule tk_text
   (syntax (macros)
-   import (level1 tcltk))
+   import (level1
+           tcltk))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Callback Functions

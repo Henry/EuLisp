@@ -1,31 +1,53 @@
+;;; Copyright 1997 J. Garcia & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;;  By Julio Garcia Moreno & University of Bath.
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo/tk'
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library:
-;;;  Authors: Julio Garcia Moreno
-;;; Description: YouToo/Tk module
-;;    that provides additional basic operations for
-;;    text and canvas widget classes.
+;;; Title: Additional operations for text and canvas widget classes
+;;;  Library: tcltk
+;;;  Authors: J Garcia
 ;;;-----------------------------------------------------------------------------
+
 (defmodule tk_class2
   (syntax (macros)
-   import (level1 tk_general)
-   export (tk-add-arc-canvas tk-add-bitmap-canvas tk-add-image-canvas
-                             tk-add-line-canvas tk-add-oval-canvas tk-add-polygon-canvas tk-add-rectangle-canvas
-                             tk-add-text-canvas tk-add-window-canvas tk-bind-item-canvas tk-conf-item-canvas
-                             tk-find-canvas-above tk-find-canvas-all tk-find-canvas-below tk-find-canvas-enclosed
-                             tk-find-canvas-overlapping tk-find-canvas-withtag tk-lower-item-canvas
-                             tk-move-item-canvas tk-coords-item-canvas tk-delete-item-canvas
-                             tk-text-index tk-text-mark tk-text-tag-add tk-bind-tag-text tk-conf-tag-text))
+   import (level1
+           tk_general)
+   export (tk-add-arc-canvas
+           tk-add-bitmap-canvas tk-add-image-canvas
+           tk-add-line-canvas tk-add-oval-canvas
+           tk-add-polygon-canvas tk-add-rectangle-canvas
+           tk-add-text-canvas tk-add-window-canvas
+           tk-bind-item-canvas tk-conf-item-canvas
+           tk-find-canvas-above tk-find-canvas-all
+           tk-find-canvas-below tk-find-canvas-enclosed
+           tk-find-canvas-overlapping tk-find-canvas-withtag
+           tk-lower-item-canvas
+           tk-move-item-canvas tk-coords-item-canvas tk-delete-item-canvas
+           tk-text-index tk-text-mark tk-text-tag-add tk-bind-tag-text
+           tk-conf-tag-text))
 
 ;;;-----------------------------------------------------------------------------
 ;;; The next part of code provides commands to CANVAS widget.
 ;;;-----------------------------------------------------------------------------
 (defextern eul_create_item_canvas (<string> <string> ptr ptr) ptr)
 
-(defextern eul_tk_bind_element (<string> ptr <string> <string> <string> <string> ptr) ptr)
+(defextern eul_tk_bind_element
+           (<string> ptr <string> <string> <string> <string> ptr) ptr)
 
 ;(defextern eul_tk_find_canvas (<string> ptr <string> ptr) ptr)
 

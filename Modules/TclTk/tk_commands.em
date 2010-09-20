@@ -1,18 +1,36 @@
+;;; Copyright 1997 J. Garcia & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;;  By Julio Garcia Moreno & University of Bath.
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo/tk'
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library:
-;;;  Authors: Julio Garcia Moreno
-;;; Description: YouToo/Tk module that provides the general functions .
+;;; Title: General functions
+;;;  Library: tcltk
+;;;  Authors: J Garcia
 ;;;-----------------------------------------------------------------------------
+
 (defmodule tk_commands
   (syntax (macros)
-   import (level1 tk_general)
-   export (tk-pack tk-bind tk-destroy tk-exit tk-get-variable tk-set-variable
-                   tk-wm tk-selection-get tk-get-result tk-focus tk-map-widget
-                   tk-unmap-widget tk-grab-set tk-bell))
+   import (level1
+           tk_general)
+   export (tk-pack
+           tk-bind tk-destroy tk-exit tk-get-variable tk-set-variable
+           tk-wm tk-selection-get tk-get-result tk-focus tk-map-widget
+           tk-unmap-widget tk-grab-set tk-bell))
 
 (defextern eul_tk_pack (<string> ptr) ptr)
 (defextern eul_tk_bind (<string> <string> <string> ptr) ptr)

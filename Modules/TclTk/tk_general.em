@@ -1,23 +1,41 @@
-;;;  By J Garcia & University of Bath. All rights reserved.
+;;; Copyright 1997 J. Garcia & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo/tk'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;;  Library: tcl-tk
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: General functions
+;;;  Library: tcltk
 ;;;  Authors: J Garcia
-;;; Description: YouToo/Tk module that provides general functions.
 ;;;-----------------------------------------------------------------------------
+
 (defmodule tk_general
   (syntax (macros)
    import (level1)
-   export (<tk-button> <tk-label> <tk-frame>  <tk-canvas> <tk-checkbutton>
-                       <tk-entry> <tk-listbox> <tk-menu> <tk-menubutton> <tk-message>
-                       <tk-radiobutton> <tk-scale> <tk-scrollbar> <tk-text> <tk-toplevel>
-                       <tk-object> <tk-item-canvas>
-                       eul_initialize_tk tk-name tk-handler
-                       Tk_MainLoop tk-main-loop Tcl_DoOneEvent tcl-do-one-event
-                       tk-item-canvas-id as-c-options as-c-accessors tk-object?
-                       tk-button? tk-canvas? tk-entry? tk-listbox? tk-scrollbar?
-                       tk-text? tk-toplevel? tk-item-canvas? tk_allocate_registers))
+   export (<tk-button>
+           <tk-label> <tk-frame>  <tk-canvas> <tk-checkbutton>
+           <tk-entry> <tk-listbox> <tk-menu> <tk-menubutton> <tk-message>
+           <tk-radiobutton> <tk-scale> <tk-scrollbar> <tk-text> <tk-toplevel>
+           <tk-object> <tk-item-canvas>
+           eul_initialize_tk tk-name tk-handler
+           Tk_MainLoop tk-main-loop Tcl_DoOneEvent tcl-do-one-event
+           tk-item-canvas-id as-c-options as-c-accessors tk-object?
+           tk-button? tk-canvas? tk-entry? tk-listbox? tk-scrollbar?
+           tk-text? tk-toplevel? tk-item-canvas? tk_allocate_registers))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Foreign Functions Declarations

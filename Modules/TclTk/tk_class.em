@@ -1,22 +1,40 @@
-;;;  By Julio Garcia Moreno & University of Bath.
+;;; Copyright 1997 J. Garcia & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;; ---                         EuLisp System 'youtoo/tk'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;;  Library: tcl-tk
-;;;  Authors: Julio Garcia Moreno
-;;; Description: YouToo/Tk module that provides the basic operations for the
-;;;               widget classes.
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Basic operations for the widget classes
+;;;  Library: tcltk
+;;;  Authors: J Garcia
+;;;-----------------------------------------------------------------------------
+
 (defmodule tk_class
   (syntax (macros)
-   import (level1 tk_general)
-   export (tk-make-button tk-make-label tk-make-frame tk-make-canvas
-                          tk-make-checkbutton tk-make-entry tk-make-listbox tk-make-menu
-                          tk-make-menubutton tk-make-message tk-make-radiobutton
-                          tk-make-scale tk-make-scrollbar tk-make-text tk-make-toplevel
-                          tk-conf-widget tk-menu-add tk-insert tk-delete tk-xview tk-yview
-                          tk-get-value-widget tk-scroll-set tk-listbox-curselection
-                          tk-button-flash eul-associate tk-set-value-widget))
+   import (level1
+           tk_general)
+   export (tk-make-button
+           tk-make-label tk-make-frame tk-make-canvas
+           tk-make-checkbutton tk-make-entry tk-make-listbox tk-make-menu
+           tk-make-menubutton tk-make-message tk-make-radiobutton
+           tk-make-scale tk-make-scrollbar tk-make-text tk-make-toplevel
+           tk-conf-widget tk-menu-add tk-insert tk-delete tk-xview tk-yview
+           tk-get-value-widget tk-scroll-set tk-listbox-curselection
+           tk-button-flash eul-associate tk-set-value-widget))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Extern Declarations (Call foreign functions.)

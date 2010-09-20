@@ -1,10 +1,36 @@
-;; Merge sort.
-;; Copyright Juha Heinanen 1988
-;; This code may be freely distributed.
-;; Modified to run under euscheme Tracy Gardner 1995
+;;; Copyright 1988 J.Heinanen
+;;; Copyright 1995 T. Gardner & University of Bath
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Merge sort
+;;;  Library: OPS5
+;;;  Authors: Juha Heinanen, Tracy Gardner
+;;;  Description:
+;;    Juha Heinanen's merge sort modified to run under euscheme
+;;;-----------------------------------------------------------------------------
+
 (defmodule merge
-  (syntax (macros macros-tag)
-   import (level1 basic)
+  (syntax (macros
+           macros-tag)
+   import (level1
+           basic)
    export (merge-sort))
 
 (print "### merge")

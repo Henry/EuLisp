@@ -18,10 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: compiler/interpreter entry point with tck/tk
 ;;;  Library: tcltk
 ;;;  Authors: Andreas Kind
-;;; Description: compiler/interpreter entry point with tck/tk
 ;;;-----------------------------------------------------------------------------
+
 (defmodule you2tk
   (syntax (macros)
    import (level1 math eval tcltk macros)

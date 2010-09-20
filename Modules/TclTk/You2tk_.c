@@ -1,4 +1,3 @@
-
 /// Copyright 1997 A. Kind & University of Bath
 /// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -38,3 +37,5 @@ void run_application()
     initialize_module_you2tk();
     execute_lambda(you2tk_bindings[0]);
 }
+
+///-----------------------------------------------------------------------------
