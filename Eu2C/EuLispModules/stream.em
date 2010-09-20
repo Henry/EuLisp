@@ -45,8 +45,8 @@
            character-stream?
            open?
            flush
-           print
            sprint
+           print
            stream-position
            set-stream-position
            end-of-stream?
@@ -55,6 +55,7 @@
            read-line
            output
            nl
+           swrite
            write
            <stream-condition>
            <end-of-stream>

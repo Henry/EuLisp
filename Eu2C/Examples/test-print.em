@@ -45,6 +45,7 @@
 (sprint stdout "End\n" nl nl)
 
 (write #\\n)
+(swrite stdout #\\n #\\f)
 
 (print nl nl)
 
