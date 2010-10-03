@@ -42,6 +42,7 @@ then
     echo "-m32:         generate 32-bit executable"
     echo "-m64:         generate 32-bit library and executable"
     echo "-g:           generate debugging info for system debugger"
+    echo "-w:           generate warnings from C-compiler"
     echo "-threads:     a special thread gc library will be used for linking"
     echo "-security:    the gc library is compiled with security features on"
     echo "-bs basic-system  use a precompiled basic system, " \
@@ -85,7 +86,7 @@ else
     CCOPTIMIZE="-O2 "
 fi
 
-CCOPTIONS="-std=gnu99 -Wall "
+CCOPTIONS="-std=gnu99 "
 if [ -n "$Eu2C_CFLAGS" ]
 then
     CCOPTIONS=${CCOPTIONS}${Eu2C_CFLAGS}
@@ -120,6 +121,10 @@ do
             ;;
         "-g")
             CCOPTIMIZE="-ggdb3 -O0 "
+            shift
+            ;;
+        "-w")
+            CCWARN="-Wall -Wno-unused "
             shift
             ;;
         "-o")
@@ -272,7 +277,7 @@ if [ "$STATE" = "-LC" -o "$STATE" = "-C" ]
 then
     set -x
     $CC -$MWORDLEN -c -o $ARCH_DIR/$APPNAME.o \
-        $CCOPTIMIZE $CCOPTIONS  $INCLUDE $ARCH_DIR/$APPNAME.c
+        $CCWARN $CCOPTIMIZE $CCOPTIONS  $INCLUDE $ARCH_DIR/$APPNAME.c
     $CC -$MWORDLEN -z muldefs -o $ARCH_DIR/$IMAGE \
         $CCOPTIMIZE $CCOPTIONS $INCLUDE $CARDS $ARCH_DIR/$APPNAME.o $* \
         $BASIC_SYSTEM $Eu2CROOT$GCLIB $LINKLIBS
