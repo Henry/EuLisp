@@ -19,8 +19,9 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: xalloc configuration file
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///  Description:
 ///    Configuration of xalloc parameters like number of card descriptors,
 ///    used types
@@ -53,7 +54,11 @@
 // There's no reason to set the size of the used Cards
 // to the machines page size (as to get by get_page_size()),
 // but it must be a power of 2 at least
+#ifdef __i386
 #define CARDSIZE        0x1000
+#else
+#define CARDSIZE        0x2000
+#endif
 
 // Maximum Heap size (in cards of CARDSIZE byte)
 // including static cards
@@ -115,9 +120,8 @@
 //      - marking works a bit faster
 #define STACK_ON_HEAP
 
-/* we leave a gap of STACKGAP bytes below the machines
- * stack pointer when using stacksegment for our mark stack
- */
+// we leave a gap of STACKGAP bytes below the machines
+// stack pointer when using stacksegment for our mark stack
 #define STACKGAP        1024
 
 ///-----------------------------------------------------------------------------
@@ -137,10 +141,10 @@
 #define FAST_STMS       // prefer gc to extensive search in free lists on stms
 
 // Alignment forcing on MTSS-cards, if there's nothing defined
-// here we set it to 4 internally, that's enough for pointers
-// and long integers; for doubles it should be increased to 8.
-// Be sure not to set it to something else than a power of 2 !!
-// #define MT_ALIGNMENT 8
+// here we set it to 1 word internally, that's enough for pointers
+// and long integers; for doubles it should be increased to 8 on 32 bit
+// machines.
+// #define MT_ALIGN_WORDS 1
 
 // Undefine USE_LARGE, if any used object may be put onto one
 // card of CARDSIZE byte. Note, that we actually need 32 byte
@@ -169,8 +173,11 @@
 ///-----------------------------------------------------------------------------
 /// What to do on internal errors ?
 ///-----------------------------------------------------------------------------
-#define error(m)        (fprintf(stderr,"%s Good bye!\n",m), exit(0))
-#define error1(format,value) (fprintf(stderr,format,value), exit(0))
+#define error(m)                                                               \
+    (fprintf(stderr,"Error: %s Good bye!\n",m), exit(0))
+
+#define error1(format, value)                                                  \
+    (fprintf(stderr, format, value), exit(0))
 
 // skip sweeping phase in gc, sweep during allocs
 #define SKIP_SWEEP

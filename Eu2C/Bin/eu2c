@@ -85,7 +85,7 @@ else
     CCOPTIMIZE="-O2 "
 fi
 
-CCOPTIONS=" "
+CCOPTIONS="-std=gnu99 -Wall "
 if [ -n "$Eu2C_CFLAGS" ]
 then
     CCOPTIONS=${CCOPTIONS}${Eu2C_CFLAGS}
@@ -119,7 +119,7 @@ do
             shift
             ;;
         "-g")
-            CCOPTIMIZE="-ggdb3"
+            CCOPTIMIZE="-ggdb3 -O0 "
             shift
             ;;
         "-o")

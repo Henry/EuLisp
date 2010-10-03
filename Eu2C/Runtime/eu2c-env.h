@@ -19,7 +19,8 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Optimizations for the SPARC architecture
-///  Library: Runtime
+///  Library: Xalloc
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EU2C_ENV_H
 #define EU2C_ENV_H

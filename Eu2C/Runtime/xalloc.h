@@ -19,20 +19,25 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: xalloc internal definitions
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///  Description: xalloc internal definitions
-///    contains macros to be used in xalloc functions since they are separeted
-///    into several modules. NOT to be used by outside user
+//    Contains macros to be used in xalloc functions since they are separated
+//    into several modules.
+///  Note:
+//    NOT to be used by outside user
 ///-----------------------------------------------------------------------------
 #ifndef XALLOC_MISC_H
 #define XALLOC_MISC_H
 
 #include <string.h>
+#include <unistd.h>
 
 #include "xalloc_arch.h"
 #include "xalloc_conf.h"
-#include "xalloc_user.h"   // def's of STSS ..., prototypes
+#include "xalloc_user.h"
+#include "c-runtime.h"
 
 #ifndef NOTHREADS
 #include "thread.h"
@@ -49,7 +54,6 @@
 ///-----------------------------------------------------------------------------
 /// Some simple sizes and macros to be found anywhere
 ///-----------------------------------------------------------------------------
-
 #define BITS_PER_BYTE 8
 #define LOG_BITS_PER_BYTE 3
 #define LOG_BYTES_PER_WORD (LOG_WORD_SIZE - LOG_BITS_PER_BYTE)
@@ -57,12 +61,12 @@
 #define byte2word(s) (((s) + (BYTES_PER_WORD - 1)) >> LOG_BYTES_PER_WORD)
 #define word2byte(s) ((s) << LOG_BYTES_PER_WORD)
 
-#define isset(w,b)      ((w) & (1<<(b)))
-#define set(w,b)        ((w) |= (1<<(b)))
-#define reset(w,b)      ((w) &= ~(1<<(b)))
+#define isset(w,b)   ((w) & (1l<<(b)))
+#define set(w,b)     ((w) |= (1l<<(b)))
+#define reset(w,b)   ((w) &= ~(1l<<(b)))
 
-#define max(x,y)        (((x) > (y))? (x) : (y))
-#define min(x,y)        (((x) < (y))? (x) : (y))
+#define max(x,y)     (((x) > (y))? (x) : (y))
+#define min(x,y)     (((x) < (y))? (x) : (y))
 
 #ifndef NULL
 #define NULL    0
@@ -78,13 +82,13 @@
 
 typedef struct _CardHeader
 {
-    struct _Card    **card_index;           /* ptr to card reference-list*/
-    long            object_size;            /* size in words */
-    long            object_byte_size;       /* object-size in bytes */
-    long            card_nb;                /* nb of basic cards */
+    struct _Card    **card_index;           // ptr to card reference-list
+    long            object_size;            // size in words
+    long            object_byte_size;       // object-size in bytes
+    long            card_nb;                // nb of basic cards
     long            type_descriptor;
-    long            object_mask;            /* mask for fast pointer test */
-    struct _Card    *next_card;             /* to link cards together */
+    long            object_mask;            // mask for fast pointer test
+    struct _Card    *next_card;             // to link cards together
     long            markbits[NB_OF_MARK_WORDS];
 } CardHeader;
 
@@ -105,13 +109,12 @@ typedef struct _Card
     long    userspace[USERSPACE];
 } card;
 
-#define basiccards(s)   (((s) <= USERSPACE) ? 1                                \
-    : (((s) - USERSPACE) / (byte2word(CARDSIZE)) + 2))
+#define basiccards(s)                                                          \
+    (((s) <= USERSPACE) ? 1 : (((s) - USERSPACE) / (byte2word(CARDSIZE)) + 2))
 
 ///-----------------------------------------------------------------------------
 /// Macros to handle information on cards
 ///-----------------------------------------------------------------------------
-
 #define get_size(c)     ((c)->size)
 #define get_mask(c)     ((c)->mask)
 #define get_tdscr(c)    ((c)->type_dscr)
@@ -136,32 +139,30 @@ typedef struct _Card
 // we need information about marking in xalloc.c, too,
 // because we use markbits another way on STMS
 
-#define markword(c,p)   (((c)->mkarea)[((long)(p) & CARDMASK)>>                \
-    (LOG_WORD_SIZE+LOG_BYTES_PER_WORD)])
+#define markword(c,p)                                                          \
+    (((c)->mkarea)[((long)(p) & CARDMASK)>> (LOG_WORD_SIZE+LOG_BYTES_PER_WORD)])
+
 #define markbit(p)      (((long)(p)>>LOG_BYTES_PER_WORD) & (WORD_SIZE-1))
 
 #define ismarked(c,p)   isset(markword(c,p), markbit(p))
 #define mark(c,p)       set(markword(c,p), markbit(p))
 #define unmark(c,p)     reset(markword(c,p), markbit(p))
 
-#define large_unmark(c) ((c)->mkarea[0] = 0)    // faster than mask first bit
+// Faster than mask first bit
+#define large_unmark(c) ((c)->mkarea[0] = 0)
 
-#ifndef __sparc__
-#define bzero(p, n)     memset((p), 0, (n))
-#endif
-
-#define clear_marks(c)  bzero((c)->mkarea, NB_OF_MARK_WORDS * sizeof(long))
+#define clear_marks(c)  memset((c)->mkarea, 0, NB_OF_MARK_WORDS*sizeof(long))
 
 ///-----------------------------------------------------------------------------
 /// Macros to test values to be pointers
 ///-----------------------------------------------------------------------------
 #define is_pointer(p)   (((long)(p) > 0) && (((long)(p) & 3) == 0))
 
-#define p_in_heap(p)    (((((long)(p)) & 3) == 0)                              \
-    && ((p) > HEAPBEGIN)                                                       \
-    && ((p) < HEAPEND))
+#define p_in_heap(p)                                                           \
+    (((((long)(p)) & 3) == 0) && ((p) > HEAPBEGIN) && ((p) < HEAPEND))
 
-#define living_card(c)  (((long)((c)->root) >= (long)first_card_index)         \
+#define living_card(c)                                                         \
+    (((long)((c)->root) >= (long)first_card_index)                             \
     && ((long)((c)->root) < (long)last_card_index)                             \
     && (*((c)->root) == (c)))
 
@@ -169,19 +170,24 @@ typedef struct _Card
 #ifdef USE_LARGE
 #ifdef OPTIMIZED_POINTER_TESTS
 
-#define consistent_pointer(c,p,s,m) ((((long)(p) & (m)) == 0) ||               \
+#define consistent_pointer(c,p,s,m)                                            \
+    ((((long)(p) & (m)) == 0) ||                                               \
     ((((long *)(c) + byte2word(CARDSIZE) - (p)) % (s)) == 0) ||                \
     (((s) > USERSPACE) && ((p) == ((c)->userspace))))
-#define obj_begin(c,p,s,m) (((s) > USERSPACE) ? (c)->userspace :               \
+
+#define obj_begin(c,p,s,m) \
+    (((s) > USERSPACE) ? (c)->userspace :                                      \
     ((m) != DEFAULT_MASK) ? (long)(p) & ~(m) :                                 \
     (p) + 1 + (((long *)(c) + byte2word(CARDSIZE) - 1 - (p)) % (s)) - (s))
 
 #else   // argument m is never used
 
-#define consistent_pointer(c,p,s,m) (                                          \
-        ((((long *)(c) + byte2word(CARDSIZE) - (p)) % (s)) == 0) ||            \
-        (((s) > USERSPACE) && ((p) == ((c)->userspace))))
-#define obj_begin(c,p,s,m) (((s) > USERSPACE) ? (c)->userspace :               \
+#define consistent_pointer(c,p,s,m)                                            \
+    (((((long *)(c) + byte2word(CARDSIZE) - (p)) % (s)) == 0) ||               \
+    (((s) > USERSPACE) && ((p) == ((c)->userspace))))
+
+#define obj_begin(c,p,s,m)                                                     \
+    (((s) > USERSPACE) ? (c)->userspace :                                      \
     (p) + 1 + (((long *)(c) + byte2word(CARDSIZE) - 1 - (p)) % (s)) - (s))
 
 #endif  // OPTIMIZED_POINTER_TESTS
@@ -190,24 +196,28 @@ typedef struct _Card
 
 #ifdef OPTIMIZED_POINTER_TESTS
 
-#define consistent_pointer(c,p,s,m) ((((long)(p) & (m)) == 0) ||               \
+#define consistent_pointer(c,p,s,m)                                            \
+    ((((long)(p) & (m)) == 0) ||                                               \
     ((((long *)(c) + byte2word(CARDSIZE) - (p)) % (s)) == 0))
-#define obj_begin(c,p,s,m) (((m) != DEFAULT_MASK) ? (long)(p) & ~(m) :         \
+
+#define obj_begin(c,p,s,m) \
+    (((m) != DEFAULT_MASK) ? (long)(p) & ~(m) :                                \
     (p) + 1 + (((long *)(c) + byte2word(CARDSIZE) - 1 - (p)) % (s)) - (s))
 
 #else   // argument m is never used
 
-#define consistent_pointer(c,p,s,m) (                                          \
-        (((long *)(c) + byte2word(CARDSIZE) - (p)) % (s)) == 0)
-#define obj_begin(c,p,s,m) (                                                   \
-        (p) + 1 + (((long *)(c) + byte2word(CARDSIZE) - 1 - (p)) % (s)) - (s))
+#define consistent_pointer(c,p,s,m)                                            \
+    ((((long *)(c) + byte2word(CARDSIZE) - (p)) % (s)) == 0)
+
+#define obj_begin(c,p,s,m)                                                     \
+    ((p) + 1 + (((long *)(c) + byte2word(CARDSIZE) - 1 - (p)) % (s)) - (s))
 
 #endif  // OPTIMIZED_POINTER_TESTS
 
 #endif  // USE_LARGE
 
 #ifdef  USE_STMS
-#define consistent_ms_pointer(c,p)      ismarked((c),(p)-1)
+#define consistent_ms_pointer(c,p) ismarked((c), (p)-1)
 #endif  // USE_STMS
 
 
@@ -242,18 +252,17 @@ struct _gcarrays
 #define gcarraybegin    (long *)(&gcarrays)
 #define gcarrayend      (long *)((char *)(&gcarrays) + sizeof(gcarrays))
 
-card          **used_cards_end;
+card     **used_cards_end = NULL;
 
-CardDscr        last_used_card;
-TypeDscr        last_used_type;
+CardDscr last_used_card = 0;
+TypeDscr last_used_type = 0;
 
-#define is_tdscr(td)    (((td)>0) && ((td)<last_used_type))
-#define is_cdscr(cd)    (((cd)>=0) && ((cd)<last_used_card))
+#define is_tdscr(td) (((td)>0) && ((td)<last_used_type))
+#define is_cdscr(cd) (((cd)>=0) && ((cd)<last_used_card))
 
 ///-----------------------------------------------------------------------------
 /// Macros to handle information hold in these arrays
 ///-----------------------------------------------------------------------------
-
 #ifndef MULTI_FSL
 #define get_free_object(cd)     (Freepts[cd])
 #define get_freept_addr(cd)     (&Freepts[cd])
@@ -265,8 +274,8 @@ TypeDscr        last_used_type;
 #define get_card_d(cd)          (Cards[cd])
 #define get_full_d(cd)          (Fulls[cd])
 
-#define ms_card_d(cd)           (! get_size_d(cd))
-#define mt_card_d(cd)           (! get_type_d(cd))
+#define ms_card_d(cd)           (!get_size_d(cd))
+#define mt_card_d(cd)           (!get_type_d(cd))
 
 #define store_type_d(cd,t)      Types[cd] = (t)
 #define store_size_d(cd,s)      Sizes[cd] = (s)
@@ -284,28 +293,28 @@ TypeDscr        last_used_type;
 #define next_card_index(c)      ++c
 #define prev_card_index(c)      --c
 
-#define MT_ALIGN_WORDS          byte2word(MT_ALIGNMENT)
-#define MT_AL_MASK              (MT_ALIGN_WORDS - 1)
-
 // increase x up to a multiple of MT_ALIGN_WORDS and by another MT_ALIGN_WORDS
 // words to hold type information
+#define MT_AL_MASK      (MT_ALIGN_WORDS - 1)
 #define MT_ALIGN(x)     (((x + (MT_AL_MASK)) & ~(MT_AL_MASK)) + MT_ALIGN_WORDS)
 
 ///-----------------------------------------------------------------------------
 /// Macros to do some jobs needed in different functions
 ///-----------------------------------------------------------------------------
-
-#define register_card(c)        (c)->root = last_card_index,                   \
+#define register_card(c)                                                       \
+    (c)->root = last_card_index,                                               \
     *last_card_index = (c),                                                    \
     next_card_index(last_card_index)
 
-#define DEFAULT_MASK    -1
+#define DEFAULT_MASK    -1l
 #define set_default_mask(c)     ((c)->mask = DEFAULT_MASK)
 
 #ifdef OPTIMIZED_POINTER_TESTS
 #define set_mask(c)                                                            \
-    {  switch(get_size(c))                                                     \
-        { case 1:                                                              \
+    {                                                                          \
+        switch(get_size(c))                                                    \
+        {                                                                      \
+            case 1:                                                            \
                 c->mask = 0x3;                                                 \
                 break;                                                         \
             case 2:                                                            \
@@ -318,7 +327,8 @@ TypeDscr        last_used_type;
                 c->mask = 0x1f;                                                \
                 break;                                                         \
             default:                                                           \
-                set_default_mask(c);}                                          \
+                set_default_mask(c);                                           \
+        }                                                                      \
     }
 #else
 #define set_mask(c)     set_default_mask(c)
@@ -327,7 +337,8 @@ TypeDscr        last_used_type;
 #ifdef  USE_STMS
 // variable spaces contain pointer to next space and their own length.
 // variable objects of size 1 are not allowed
-typedef struct _vobject {
+typedef struct _vobject
+{
     struct _vobject *vnext;
     long            vlength;
 } vobject;
@@ -335,26 +346,38 @@ typedef struct _vobject {
 #endif
 
 ///-----------------------------------------------------------------------------
-/// Vars and prototypes from heap-module
+/// Prototypes from heap-module
 ///-----------------------------------------------------------------------------
-long    *HEAPBEGIN, *HEAPEND;
-long    hincr, curnumcard;
-long    inc_heap_size(int noc);
-#define inc_heap()      inc_heap_size(hincr)
-void    initialize_heap();
-long    *new_card();
-long    *new_large_card();
-void    reclaim_card();
+extern long hincr, curnumcard;
+
+long inc_heap_size(long noc);
+
+#define inc_heap() inc_heap_size(hincr)
+
+void initialize_heap();
+long *new_card();
+
+#ifdef USE_LARGE
+long *new_large_card(register long n);
+void reclaim_card(register long *c, register long n);
+#else
+void reclaim_card(register long *c);
+#endif
 
 ///-----------------------------------------------------------------------------
 /// function that is defined in xalloc.c and used in card.c as well
 ///-----------------------------------------------------------------------------
-long * build_free_list();
+long *build_free_list();
 
 ///-----------------------------------------------------------------------------
 /// Global vars for statistics
 ///-----------------------------------------------------------------------------
-int start_nb_of_cards;
+extern int start_nb_of_cards;
+
+///-----------------------------------------------------------------------------
+/// Flush registers by calling flush_registers(0, 0, 0, 0, 0, 0)
+///-----------------------------------------------------------------------------
+void flush_registers();
 
 ///-----------------------------------------------------------------------------
 #endif  // XALLOC_MISC_H

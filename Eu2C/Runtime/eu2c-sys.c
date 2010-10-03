@@ -19,24 +19,27 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title:
-///  Library: Runtime
+///  Library: Xalloc
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #include "eu2c-sys.h"
 
 #ifndef LSHIFTR
 #include <limits.h>
-int LSHIFTR(int i, int s)
+long LSHIFTR(long i, long s)
 {
     return (i >> s) & (LONG_MAX >> (s - 1));
 }
 #endif
 
+
 #ifndef ASHIFTR
-int ASHIFTR(int i, int s)
+long ASHIFTR(long i, long s)
 {
     //***HGW return (i < 0) ? -((-i) >> s) : i >> s;
     return i >> s;
 }
 #endif
+
 
 ///-----------------------------------------------------------------------------

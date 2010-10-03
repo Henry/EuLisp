@@ -19,8 +19,9 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title:  Initialization of c runtime constants
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Ingo Mohr
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef C_RUNTIME_H
 #define C_RUNTIME_H

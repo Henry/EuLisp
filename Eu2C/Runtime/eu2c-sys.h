@@ -19,7 +19,8 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title:
-///  Library: Runtime
+///  Library: Xalloc
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EU2C_SYS_H
 #define EU2C_SYS_H
@@ -34,13 +35,24 @@
 #endif
 
 #define V_LITERAL(el_type, name, length)                                       \
-    struct name{unsigned int L; void *C; el_type I[length];} name
+    struct name                                                                \
+    {                                                                          \
+        unsigned long L;                                                       \
+        void *C;                                                               \
+        el_type I[length];                                                     \
+    } name
 
 #define S_LITERAL(type, name)                                                  \
-    struct name{unsigned int unused; void *C; struct type I;} name
+    struct name                                                                \
+    {                                                                          \
+        unsigned long unused;                                                  \
+        void *C;                                                               \
+        struct type I;                                                         \
+    } name
 
 #define LITERAL(name)                                                          \
     struct name name STRUCTURE_ALIGNMENT
+
 #define STAG(class)                                                            \
     0, class
 
@@ -49,16 +61,26 @@
 
 // Define empty_list only in the most basic basic system
 #ifdef BASIC_SYSTEM
-extern struct empty_list{unsigned int unused; void *C; long I;} empty_list;
+extern struct empty_list                                                       \
+{                                                                              \
+    unsigned long unused;                                                      \
+    void *C;                                                                   \
+    long I;                                                                    \
+} empty_list;
 #else
-struct empty_list{unsigned int unused; void *C; long I;} empty_list;
+struct empty_list                                                              \
+{                                                                              \
+    unsigned long unused;                                                      \
+    void *C;                                                                   \
+    long I;                                                                    \
+} empty_list;
 #endif
 #define SET_CLASS_OF_NIL empty_list.C=&c__null__eulisp0.I;
 
 
 #ifdef NIL_REGISTER
 register long* NIL NIL_REGISTER;
-#define SET_NIL NIL=&empty_list.I
+#define SET_NIL NIL = &empty_list.I
 #define XCALL(call) ({register typeof(call) AUX=call; SET_NIL; AUX;})
 #define YCALL(call) (call, SET_NIL)
 #else
@@ -71,10 +93,10 @@ register long* NIL NIL_REGISTER;
 #define SMALL_INT_SKIP
 
 #ifndef LSHIFTR
-extern int LSHIFTR(int i, int s);
+extern long LSHIFTR(long i, long s);
 #endif
 #ifndef ASHIFTR
-extern int ASHIFTR(int i, int s);
+extern long ASHIFTR(long i, long s);
 #endif
 
 #define GET_JMPBUF(bufptr) *bufptr

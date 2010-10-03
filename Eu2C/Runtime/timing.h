@@ -20,6 +20,7 @@
 ///-----------------------------------------------------------------------------
 /// Title: Wrapper around the POSIX times function
 ///  Library: Runtime
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef TIMING_H
 #define TIMING_H

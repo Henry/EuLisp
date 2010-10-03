@@ -19,8 +19,9 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: architecture dependent xalloc definitions
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef XALLOC_ARCH_H
 #define XALLOC_ARCH_H
@@ -34,20 +35,13 @@
 #define BYTES_PER_WORD 4
 #define LOG_WORD_SIZE 5
 
-// Alignment forcing if high alignment is necessary, normally 4-byte-alignment
+// Alignment forcing if high alignment is necessary, normally word-alignment
 // should be enough, but it may be set to sizeof(double)
-#define MT_ALIGNMENT    4
+#define MT_ALIGN_WORDS  1
 
 #define STACK_GROWS_DOWN
 #define PTR_ALIGN       4
-#define NB_REGS         6
-#define SAVE_REGS()                      \
-    asm("mov reg_safe,      %eax");      \
-    asm("mov reg_safe + 4,  %ebx");      \
-    asm("mov reg_safe + 8,  %ecx");      \
-    asm("mov reg_safe + 12, %edx");      \
-    asm("mov reg_safe + 16, %esi");      \
-    asm("mov reg_safe + 20, %edi")
+
 #define ARCH_KNOWN
 #endif // __i386
 
@@ -62,18 +56,11 @@
 
 // Alignment forcing if high alignment is necessary, normally 8-byte-alignment
 // should be enough
-#define MT_ALIGNMENT    8
+#define MT_ALIGN_WORDS  1
 
 #define STACK_GROWS_DOWN
 #define PTR_ALIGN       8
-#define NB_REGS         6
-#define SAVE_REGS()                                                            \
-    asm("mov reg_safe,      %eax");                                            \
-    asm("mov reg_safe + 8,  %ebx");                                            \
-    asm("mov reg_safe + 16, %ecx");                                            \
-    asm("mov reg_safe + 24, %edx");                                            \
-    asm("mov reg_safe + 32, %esi");                                            \
-    asm("mov reg_safe + 40, %edi")
+
 #define ARCH_KNOWN
 #endif // __x86_64
 
@@ -89,9 +76,8 @@
 #define STACK_GROWS_DOWN
 #define PTR_ALIGN       4
 #define DATASTART       (long *)&etext
-#define SAVE_REGS()     asm("t  3")     /* ST_FLUSH_WINDOWS */
 #define ARCH_KNOWN
-#endif  /* __sparc__ */
+#endif  // __sparc__s
 
 ///-----------------------------------------------------------------------------
 /// Unknown

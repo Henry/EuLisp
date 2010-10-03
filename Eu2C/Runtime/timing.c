@@ -21,6 +21,7 @@
 /// Title: Simple timer support
 ///  Library: Runtime
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///  Description:
 //    start_timer locally saves the current time
 //    timer prints the used time since start_timer using a format string
@@ -42,6 +43,7 @@ long start_timer()
     times(&tb);
     startutime = tb.tms_utime;
     startstime = tb.tms_stime;
+
     return 0;
 }
 
@@ -49,14 +51,18 @@ long timer(char *string)
 {
     times(&tb);
     int clock_freq = sysconf(_SC_CLK_TCK);
+
     printf
     (
         string,
         (double)(tb.tms_utime - startutime)/clock_freq,
         (double)(tb.tms_stime - startstime)/clock_freq,
-        (double)(tb.tms_utime - startutime + tb.tms_stime - startstime)/clock_freq
+        (double)(tb.tms_utime - startutime + tb.tms_stime - startstime)
+        /clock_freq
     );
+
     xalloc_info();
+
     return 0;
 }
 

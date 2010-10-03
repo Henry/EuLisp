@@ -41,10 +41,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Run the test
 ;;;-----------------------------------------------------------------------------
-
-;; There is currently an issue with the GC running 64bit:
-(deflocal liste '(1 2 3 4 5 6 7 8 9 10 11 12 13 14)) ;; Works 32bit not 64bit
-;;(deflocal liste '(1 2 3 4 5 6 7 8 9)) ;; Works both 32bit and 64bit
+(deflocal liste '(1 2 3 4 5 6 7 8 9 10 11 12 13 14))
 
 (format "~%(umdrehen '~a)" liste)
 

@@ -19,11 +19,12 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Heap initialization
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: E. Ulrich Kriegel
+///  Maintainer: Henry G. Weller
 ///  Description:
-///    contains only the heap initialization function to be recompiled with
-///    -DSTART_NUM_OF_CARDS=nnn if necessary
+//    Contains only the heap initialization function to be recompiled with
+//    -DSTART_NUM_OF_CARDS=nnn if necessary
 ///-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <unistd.h>
@@ -35,13 +36,13 @@ extern long *FCL;
 // get first part of heap
 void initialize_heap()
 {
-    void *current_break;
     curnumcard = 0;
     hincr = START_NUM_OF_CARDS;
     start_nb_of_cards = START_NUM_OF_CARDS;
 
     // Ensure that heap starts above 64 K boundary. unfortunately, brk() is not
     // Available on some arch's
+    void *current_break = NULL;
     if ((current_break = sbrk(0)) < (void *)MINHEAPBEGIN)
     {
         sbrk(MINHEAPBEGIN - (long)current_break);
@@ -54,5 +55,6 @@ void initialize_heap()
     // the free card list
     HEAPBEGIN = FCL;
 }
+
 
 ///-----------------------------------------------------------------------------

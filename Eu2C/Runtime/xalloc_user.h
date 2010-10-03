@@ -19,8 +19,9 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: xalloc user include file
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///  Description:
 ///    Macros and prototypes of functions around xalloc / garbage collection
 ///-----------------------------------------------------------------------------
@@ -36,8 +37,8 @@ extern "C"
 {
 #endif
 
-    typedef unsigned long int CardDscr;
-    typedef unsigned long int TypeDscr;
+    typedef unsigned long CardDscr;
+    typedef unsigned long TypeDscr;
 
     TypeDscr describe_type
     (
@@ -88,7 +89,7 @@ extern "C"
     // returns NO_CONSISTENT_POINTER if so
     unsigned long safe_get_type(long *ptr);
 
-    #define NO_CONSISTENT_POINTER   0xffffffff
+    #define NO_CONSISTENT_POINTER  (long)-1
 
     // possible values for cardtype
     #define MTSS    1
@@ -111,7 +112,7 @@ extern "C"
 
     void force_garbage_collection();
 
-    long inc_heap_size(int nb_of_cards );
+    long inc_heap_size(long nb_of_cards );
 
     void initialize_root_set();
 

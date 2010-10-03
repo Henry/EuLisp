@@ -19,10 +19,11 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Initialization of c runtime constants
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///  Description:
-//    e.g. size of FILE or jmp_buf
+//    e.g. initialise size of FILE, jmp_buf etc.
 ///-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <signal.h>
@@ -76,6 +77,7 @@ void gc_init()
     }
 }
 #endif
+
 
 void c_runtime_init()
 {

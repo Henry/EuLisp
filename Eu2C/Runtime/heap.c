@@ -19,131 +19,183 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Card allocation and reclaiming functions
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #include <stdio.h>
 #include <unistd.h>
 #include "xalloc.h"
 
-long *FCL = NULL;               /* free card list , used only here and in
-                                 * heap-init.c */
+///-----------------------------------------------------------------------------
+/// Global vars for heap
+///-----------------------------------------------------------------------------
+long *HEAPBEGIN, *HEAPEND;
+long hincr, curnumcard;
 
-long inc_heap_size(register int noc)         /* increase Heap by noc cards, but at most up
-                                 * to MAX_NUM_OF_CARDS, change hincr */
+// Free card list , used only here and in heap-init.c
+long *FCL = NULL;
+
+
+///-----------------------------------------------------------------------------
+/// Global vars for statistics
+///-----------------------------------------------------------------------------
+int start_nb_of_cards = 0;
+
+
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
+// increase Heap by noc cards, but at most up to MAX_NUM_OF_CARDS, change hincr
+long inc_heap_size(register long noc)
 {
-    register long *s;           /* to hold the new segment */
-    long offset;
-    noc = max(1, noc);  /* increase heap by one card at least */
-    /* maximum heap size already reached ? */
+    #ifdef PRINTSIZES
+    fprintf(stderr, "Heapsize is now %ld byte.\n", curnumcard*CARDSIZE);
+    #endif
+
+    // increase heap by one card at least
+    noc = max(1, noc);
+
+    // maximum heap size already reached ?
     if (curnumcard >= MAX_NUM_OF_CARDS)
-        return (0);
-    /* less than noc to get ? */
+    {
+        return 0;
+    }
+
+    // less than noc to get ?
     if (curnumcard + noc > MAX_NUM_OF_CARDS)
+    {
         noc = MAX_NUM_OF_CARDS - curnumcard;
-    /* align the current break at a multiple of CARDSIZE */
-    offset = ((long)sbrk(0) & CARDMASK);
+    }
+
+    // align the current break at a multiple of CARDSIZE
+    long offset = ((long)sbrk(0) & CARDMASK);
+
     if (offset)
+    {
         sbrk(CARDSIZE - offset);
-    /* try to get the storage ...impossible ? */
-    if ((s = (long *)sbrk(noc * CARDSIZE)) == (long *)-1)
-        return (0);
-    /* succesful */
-    curnumcard += noc;  /* increase current number of cards */
-    s[0] = (long)FCL;   /* put new storage into FCL */
-    s[1] = (long)noc;
+    }
+
+    // Try to get the storage ...impossible ?
+    register long *s = (long *)sbrk(noc*CARDSIZE);
+    if (s == (long *)-1)
+    {
+        return 0;
+    }
+
+    // succesful
+    curnumcard += noc;  // increase current number of cards
+    s[0] = (long)FCL;   // put new storage into FCL
+    s[1] = noc;
     FCL = s;
-    HEAPEND = (long *)sbrk(0);  /* increase HEAPEND */
-    hincr = HMULT * curnumcard / HDIFF; /* update heap_increment */
-#ifdef  PRINTSIZES
-    fprintf(stderr, "Heapsize is now %i byte.\n", curnumcard * CARDSIZE);
-#endif
-    return (noc);
+    HEAPEND = (long *)sbrk(0);  // increase HEAPEND
+    hincr = HMULT*curnumcard/HDIFF; // update heap_increment
+
+    #ifdef PRINTSIZES
+    fprintf(stderr, "Heapsize is now %ld byte.\n", curnumcard*CARDSIZE);
+    #endif
+
+    return noc;
 }
 
 
 long *new_card()
 {
-    register long *c;
     if (FCL == NULL)
-        return (NULL);  /* FCL empty */
+    {
+        return NULL;  // FCL empty
+    }
     if (FCL[1] > 1)
     {
-        FCL[1]--;       /* leave all but one card there */
-        return (&FCL[FCL[1] * byte2word(CARDSIZE)]);
+        FCL[1]--;       // leave all but one card there
+        long *c = (&FCL[FCL[1]*byte2word(CARDSIZE)]);
+
+        return c;
     }
     else
     {
-        c = FCL;        /* only one card left */
-        FCL = (long *)FCL[0];   /* connect parts of FCL */
-        return (c);
+        long *c = FCL;        // only one card left
+        FCL = (long *)FCL[0];   // connect parts of FCL
+        return c;
     }
 }
 
-#ifdef  USE_LARGE
 
-long *new_large_card(register int n)
+#ifdef USE_LARGE
+
+long *new_large_card(register long n)
 {
-    register long **last, *act, df;
-    last = &FCL;
+    register long **last = &FCL;
+    register long *act = 0;
+
     while ((act = *last))
     {
+        register long df = 0;
         if ((df = act[1] - n) > 0)
         {
-            act[1] = df;        /* leave some cards there */
-            return (&act[df * byte2word(CARDSIZE)]);
+            act[1] = df;        // leave some cards there
+            return &act[df*byte2word(CARDSIZE)];
         }
+
         if (df == 0)
         {
-            *last = (long *)*act;       /* connect parts of FCL */
-            return (act);
+            *last = (long *)*act;       // connect parts of FCL
+            return act;
         }
-        last = (long **)act;    /* df < 0, continue search */
+
+        last = (long **)act;    // df < 0, continue search
     }
-    return (NULL);
+
+    return NULL;
 }
 
-/* Our FCL is a sorted list in that way, that the part with the highest address
- * is pointed to by FCL and the part with the lowest one points to nil itself.
- * So inc_card_space is allowed to put the new part of our heap onto the begin
- * of this list. (We assume, that any newly allocated part of our heap starts
- * at a higher address than the one before.)
- */
 
-void reclaim_card(register long *c, register int n)
+// Our FCL is a sorted list in that way, that the part with the highest address
+// is pointed to by FCL and the part with the lowest one points to nil itself.
+// So inc_card_space is allowed to put the new part of our heap onto the begin
+// of this list. (We assume, that any newly allocated part of our heap starts
+// at a higher address than the one before.)
+void reclaim_card(register long *c, register long n)
 {
-    register long **last, *act;
-    last = &FCL;
+    register long **last = &FCL;
+    register long *act = NULL;
+
     while ((act = *last))
     {
         if (c > act)
-        {       /* c has a higher address than the found part, so we are sure
-                 * to leave it here */
-            if (&act[act[1] * byte2word(CARDSIZE)] == c)
+        {
+            // c has a higher address than the found part, so we are sure to
+            // leave it here
+            if (&act[act[1]*byte2word(CARDSIZE)] == c)
             {
-                act[1] += n;    /* onto the end of this part */
+                act[1] += n;    // onto the end of this part
                 return;
             }
             else
             {
-                *last = c;      /* new part between two old */
+                *last = c;      // new part between two old
                 c[0] = (long)act;
                 c[1] = n;
                 return;
             }
-        }       /* c starts at a a lower address than the found part; if it can
-                 * be connected with the found part, we can leave it here, but
-                 * normally we have to loop */
-        if (&c[n * byte2word(CARDSIZE)] == act)
+        }
+
+        // c starts at a a lower address than the found part; if it can
+        // be connected with the found part, we can leave it here, but
+        // normally we have to loop
+
+        if (&c[n*byte2word(CARDSIZE)] == act)
         {
-            *last = c;  /* onto the begin of this part */
+            *last = c;  // onto the begin of this part
             c[0] = act[0];
             c[1] = act[1] + n;
-            /* now check whether it is possible to connect this with the next
-             * smaller part */
+
+            // now check whether it is possible to connect this with the next
+            // smaller part
             if ((act = (long *)c[0]))
-            {   /* if next part exists */
-                if (&act[act[1] * byte2word(CARDSIZE)] == c)
+            {
+                // if next part exists
+                if (&act[act[1]*byte2word(CARDSIZE)] == c)
                 {
                     *last = act;
                     act[1] += c[1];
@@ -152,20 +204,22 @@ void reclaim_card(register long *c, register int n)
             return;
         }
         else
-            last = (long **)act;        /* continue with next part */
+        {
+            last = (long **)act;        // continue with next part
+        }
     }
-    /* c is smaller than any part of the FCL */
+
+    // c is smaller than any part of the FCL
     *last = c;
     c[0] = 0;
     c[1] = n;
 }
 
-#else
 
-/* If not defined USE_LARGE there's no reason for building a sorted list,
- * just put the returned card onto the begin of the FCL
- */
+#else  // Not USE_LARGE
 
+// If not defined USE_LARGE there's no reason for building a sorted list,
+// just put the returned card onto the begin of the FCL
 void reclaim_card(register long *c)
 {
     c[0] = (long)FCL;
@@ -173,6 +227,7 @@ void reclaim_card(register long *c)
     FCL = c;
 }
 
-#endif
+#endif  // USE_LARGE
+
 
 ///-----------------------------------------------------------------------------

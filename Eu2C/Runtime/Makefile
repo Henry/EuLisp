@@ -32,7 +32,7 @@ endif
 ARCH := $(ARCH)$(WL)
 
 CC = gcc
-GCCFLAGS = -std=gnu99 -Wall -O2
+GCCFLAGS = -std=gnu99 -Wall -O0 -ggdb3
 EU2C_FLAGS = -$(WL)
 CFLAGS = $(GCCFLAGS) $(EU2C_FLAGS)
 
@@ -50,6 +50,7 @@ $(ARCH_DIR)/%.o : %.[cs] | $(ARCH_DIR)/.
 ###-----------------------------------------------------------------------------
 
 ARCHIVES = $(ARCH_DIR)/eu2c.a $(ARCH_DIR)/eu2c-s.a
+#	$(ARCH_DIR)/eu2c-threads.a $(ARCH_DIR)/eu2c-threads-s.a
 
 ###-----------------------------------------------------------------------------
 ### Source and object files
@@ -93,17 +94,23 @@ $(ARCH_DIR)/eu2c-s.a: $(RUNTIME_HC)
 	$(MAKE) clean
 
 $(ARCH_DIR)/eu2c-threads.a: $(RUNTIME_HC) $(THREAD_HC)
-	$(MAKE) makea ARCHIVE=$@ EU2C_FLAGS=-$(WL)
+	$(MAKE) makeat ARCHIVE=$@ EU2C_FLAGS=-$(WL)
 	$(MAKE) clean
 
 $(ARCH_DIR)/eu2c-threads-s.a: $(RUNTIME_HC) $(THREAD_HC)
-	$(MAKE) makea ARCHIVE=$@ EU2C_FLAGS="-$(WL) -DESCURITY_FIRST"
+	$(MAKE) makeat ARCHIVE=$@ EU2C_FLAGS="-$(WL) -DESCURITY_FIRST"
 	$(MAKE) clean
 
 .PHONY: makea
 makea:  $(RUNTIME_O)
 	rm -f $(ARCHIVE)
 	ar rv $(ARCHIVE) $(RUNTIME_O)
+	ranlib $(ARCHIVE)
+
+.PHONY: makeat
+makeat:  $(RUNTIME_O) $(THREAD_O)
+	rm -f $(ARCHIVE)
+	ar rv $(ARCHIVE) $(RUNTIME_O) $(THREAD_O)
 	ranlib $(ARCHIVE)
 
 ###-----------------------------------------------------------------------------

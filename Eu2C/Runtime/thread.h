@@ -19,8 +19,9 @@
 //
 ///-----------------------------------------------------------------------------
 /// Title: Interface thread -- mm-system and thread -- Lisp
-///  Library: Runtime
+///  Library: Xalloc
 ///  Authors: Jens Bimberg
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef THREAD_H
 #define THREAD_H
