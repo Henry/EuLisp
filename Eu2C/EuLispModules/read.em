@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: Read functions
 ;;;  Problems:
 ;;    Lacking a detailed error treatment.
 ;;;  Authors: Horst Friedrich, Rainer Rosenmuller
@@ -93,6 +92,7 @@
                   %read-unit
                   ensure-open-character-input-stream
                   sscanf-3
+                  sscanf-3-double
                   file-descriptor-pointer
                   <stream>
                   <end-of-stream>
@@ -135,7 +135,9 @@
                   *buffer-2*
                   push-buffer
                   clear-buffer)
-                 string-stack))
+                 string-stack)
+           (only (<double*>)
+                 c-math))
    syntax (tail
            condition-ii)
    export (read-char
@@ -800,9 +802,8 @@
                                (make-dble (%cast %double-float
                                                  0)))
                         ))
-        (sscanf-3 (?stack-string string-stack)
-                  (%literal %string () "%le")
-                  (%cast %unsigned-word-integer float-pointer))
+        (sscanf-3-double (?stack-string string-stack)
+                  (%literal %string () "%le") (%cast <double*> float-pointer))
         (clear-buffer (%cast <string-stack> *buffer-1*))
         (clear-buffer (%cast <string-stack> *buffer-2*))
         (set-dble float-pointer (%mult (%cast %double-float sign)

@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: Print and write functions
 ;;;  Authors: Rainer Rosenmuller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -161,36 +160,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Write primitives
 ;;;-----------------------------------------------------------------------------
-;;   (%define-function (%write-string %signed-word-integer)
-;;                        ((stream <stream>)
-;;                          (str %string))
-;;     (if (file-stream? stream)
-;;       (%let ((fd %unsigned-word-integer
-;;                     (%cast %unsigned-word-integer
-;;                            (file-descriptor-pointer stream))))
-;;          (fprintf-3 fd (%literal %string () "%s")
-;;                     (%cast %signed-word-integer str))
-;;          )
-;;       (if (string-stream? stream)
-;;         (%let ((fd <string-stack> (stream-string-stack stream))
-;;                   (length  %signed-word-integer (strlen str)))
-;;             (push-string str #%i0 length fd)
-;;             length)
-;;         #%i0))
-;;      )
-;;
-;;   (%define-function (push-string %void)
-;;                     ((string %string)
-;;                      (idx %signed-word-integer)
-;;                      (length %signed-word-integer)
-;;                      (string-stack <string-stack>))
-;;     (if (%lt idx length)
-;;       (progn (push-buffer
-;;               (%cast %signed-word-integer
-;;                      (%extract string idx)) string-stack)
-;;              (push-string string (%plus idx #%i1) length string-stack))
-;;       ()))
-
 (%define-function (%write-hex %signed-word-integer)
   ((stream <stream>)
    (str <object>))
@@ -200,7 +169,7 @@
                 (n-buf %signed-word-integer
                        (sprintf-3
                         buf-str
-                        (%literal %string () "#<object %8x>")
+                        (%literal %string () "#<object %8lx>")
                         (%cast %signed-word-integer str))))
                (%write-string stream buf-str)
                n-buf)))
@@ -210,7 +179,7 @@
    (int %signed-word-integer))
   (if (file-stream? stream)
       (%let ((fd <file> (file-descriptor-pointer stream)))
-            (fprintf-3 fd (%literal %string () "%d") int))
+            (fprintf-3 fd (%literal %string () "%ld") int))
     (progn
       (clear-buffer (%cast <string-stack> *buffer-1*))
       (print-based-int-0 stream int #%i10 (%cast <string-stack> *buffer-1*))

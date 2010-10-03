@@ -25,7 +25,9 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule c-stdio
-  (import (tail)
+  (import (tail
+           (only (<double*>)
+                 c-math))
    syntax (tail)
    c-import (<stdio.h>)
    export (FILE*
@@ -41,10 +43,12 @@
            sprintf-3
            fscanf-3
            sscanf-3
+           sscanf-3-double
            open-fd
            close-fd
            fseek
            ftell
+           fprintf-3-string
            fprintf-3-double
            sprintf-3-double))
 
@@ -118,6 +122,14 @@
   external-name |fprintf|)
 
 
+(%declare-external-function (fprintf-3-string %signed-word-integer)
+  ((arg1 FILE*)
+   (arg2 %string)
+   (arg3 %string))
+  language c
+  external-name |fprintf|)
+
+
 (%declare-external-function (fprintf-3-double %signed-word-integer)
   ((arg1 FILE*)
    (arg2 %string)
@@ -154,6 +166,13 @@
   language c
   external-name |sscanf|)
 
+(%declare-external-function (sscanf-3-double %signed-word-integer)
+  ((arg1 %string)
+   (arg2 %string)
+   (arg3 <double*>))
+  language c
+  external-name |sscanf|)
+
 (%declare-external-function (open-fd FILE*)
   ((fname %string)
    (mode %string))
@@ -168,5 +187,5 @@
   )
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module c-stdio
 ;;;-----------------------------------------------------------------------------

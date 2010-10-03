@@ -78,9 +78,11 @@
                   ungetc
                   putc
                   fprintf-3
+                  fprintf-3-string
                   fscanf-3
                   sprintf-3
                   sscanf-3
+                  sscanf-3-double
                   open-fd
                   close-fd
                   ftell
@@ -124,6 +126,7 @@
            sprintf-3
            fscanf-3
            sscanf-3
+           sscanf-3-double
            EOF
            stream?
            file-stream?
@@ -385,9 +388,7 @@
       (%let ((fd <file> ;;%unsigned-word-integer
                  ;;(%cast %unsigned-word-integer
                  (file-descriptor-pointer stream))) ;;)
-            (fprintf-3 fd (%literal %string () "%s")
-                       (%cast %signed-word-integer str))
-            )
+            (fprintf-3-string fd (%literal %string () "%s") str))
     (if (string-stream? stream)
         (%let ((fd <string-stack> (stream-string-stack stream))
                (length  %signed-word-integer (strlen str)))
