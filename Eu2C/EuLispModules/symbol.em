@@ -97,7 +97,7 @@
 (%define-function (convert-to-%string %string)
   ((val %unsigned-word-integer))
   (sprintf-3 $converter-string
-             (%literal %string 2 "%d")
+             (%literal %string 3 "%ld")
              (%cast %signed-word-integer val))
   $converter-string)
 

@@ -115,20 +115,14 @@
                common-lisp))
  export (generate-c-code
          reset-c-code
-         function-needed? ; needed by code-generator
-         map-modules)
-
- ;;the following exports are for generate-header-file only
- ;; export (generate-type-declaration
- ;;         generate-struct-declaration)
- )
+         function-needed?
+         map-modules))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Specials for Printing Code
 ;;;-----------------------------------------------------------------------------
 
 (cl:import 'cl-user::stmt) ; makes STMT available for ~/.../
-
 (cl:import 'cl-user::expr) ; makes EXPR available for ~/.../
 
 ;;;-----------------------------------------------------------------------------
@@ -161,7 +155,8 @@
     (generate-includes main-module module-list)
     (if (eq *compilation-type* :application)
         (write-code "~2%int command_line_length;~%char** command_line;")
-      (write-code "~2%extern int command_line_length;~%extern char** command_line;"))
+      (write-code
+       "~2%extern int command_line_length;~%extern char** command_line;"))
     (map-modules #'generate-type-declaration #'?class-def-list
                  module-list) ; assumes that the top module is the last such
     ;; that the objects are handled in definition order
@@ -184,8 +179,7 @@
     ))
 
 (defun generate-default-definitions (main-module)
-  (write-code "~2%void add_to_root_set(void *pointer);")
-  )
+  (write-code "~2%void add_to_root_set(void *pointer);"))
 
 (defun generate-main (main-module)
   (write-code
@@ -259,8 +253,8 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 
 (defun generate-includes (main-module modules)
   (if *basic-system*
-      ;; if a basic system is used then the eu2c-system-header-file is included by
-      ;; basic-system.h
+      ;; if a basic system is used then the eu2c-system-header-file is included
+      ;;  by basic-system.h
       (write-code "~%#include \"~(~A~).h\"" (?identifier *basic-system*))
     ;; otherwise it has to be included directly
     (write-code "~%#include \"eu2c-~:[total~;mod~].h\""
@@ -400,9 +394,9 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
   (cond ((and (eq *compilation-type* :basic-system)
               (discriminating-fun? fun)
               (exported-for-lisp? fun))
-         ;; Discriminating functions of exported generic functions are declared extern
-         ;; because they are defined in the application to allow more optimized dispatch
-         ;; functions.
+         ;; Discriminating functions of exported generic functions are declared
+         ;; extern because they are defined in the application to allow more
+         ;; optimized dispatch functions.
          "extern ")
         ((null? (c-extern? fun))
          "static ")
@@ -463,7 +457,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
                       (*function* fun))
                      (generate-function-comment fun)
                      (with-local-identifiers
-                      (generate-function-header fun ())       ; without storage class
+                      (generate-function-header fun ())  ; without storage class
                       (write-code "~%~:[{~;~]~@/STMT/~@*~:[}~;~]"
                                   (block-form? (?body fun))
                                   (?body fun))))))
@@ -554,7 +548,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 ;; ~/STMT/   Print statement not in return context;
 ;; (dynamic *return*) = () during the call of write-stmt.
 ;; ~@/STMT/  Print statement in return context (the value of the LZS-expression
-;;                                                  given as argument must be returned with C-return).
+;;                         given as argument must be returned with C-return).
 ;; (dynamic *return*) = return-type during the call of write-stmt
 ;; ~n:/STMT/ Print statement in a special context determined by n:
 ;; For write-stmt (dynamic *context*) is set to a non-nil value.
@@ -638,8 +632,7 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
           (type-var-init-list (?var-list form)
                               (?init-list form)
                               (?type-list form))
-          (?body form))
-  )
+          (?body form)))
 
 (defmethod write-stmt ((form <labels-form>) stream)
   (default-write form stream))
@@ -683,7 +676,6 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 ;;;-----------------------------------------------------------------------------
 ;;; instance access
 ;;;-----------------------------------------------------------------------------
-
 (defgeneric instance-access (representation class instance stream))
 
 (defmethod instance-access ((representation <%machine-type>)
@@ -793,45 +785,46 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 ;; 13   ->   ! ~ ++ -- + - * & (type) sizeof
 ;; 14   ->   () [] -> .
 
-(defconstant $sys-fun-table `(
-                              ;;structure of an element:
-                              ;;(special-sysfun format-string C-operator-precedence)
-                              ;;comparision
-                              ;;(,%eq "(~8/EXPR/ == ~9/EXPR/)" 8)
-                              ;;(,%neq "(~8/EXPR/ != ~9/EXPR/)" 8)
-                              (,%gt "(~9/EXPR/ > ~10/EXPR/)" 9)
-                              (,%lt "(~9/EXPR/ < ~10/EXPR/)" 9)
-                              (,%ge "(~9/EXPR/ >= ~10/EXPR/)" 9)
-                              (,%le "(~9/EXPR/ <= ~10/EXPR/)" 9)
-                              ;;arithmetic
-                              (,%plus "(~11/EXPR/ + ~12/EXPR/)" 11)
-                              (,%minus "(~11/EXPR/ - ~12/EXPR/)" 11)
-                              (,%neg "(- ~14/EXPR/)" 13)
-                              (,%mult "(~12/EXPR/ * ~13/EXPR/)" 12)
-                              (,%div "(~12/EXPR/ / ~13/EXPR/)" 12)
-                              (,%rem "(~12/EXPR/ % ~13/EXPR/)" 12)
-                              (,%abs "abs(~/EXPR/)" 14)
-                              ;;bitwise logical
-                              (,%not "(~~~14/EXPR/)" 13)
-                              (,%and "(~7/EXPR/ & ~8/EXPR/)" 7)
-                              (,%or "(~5/EXPR/ | ~6/EXPR/)" 5)
-                              (,%xor "(~6/EXPR/ ^ ~7/EXPR/)" 6)
-                              (,%lshiftl "(~10/EXPR/ << ~11/EXPR/)" 10)
-                              (,%lshiftr "LSHIFTR(~/EXPR/, ~/EXPR/)" 14)
-                              (,%ashiftr "ASHIFTR(~/EXPR/, ~/EXPR/)" 14)
-                              ;;conversions
-                              (,%citos "(float)~14/EXPR/" 13)
-                              (,%citod "(double)~14/EXPR/" 13)
-                              (,%cstoi "(signed long)~14/EXPR/" 13)
-                              (,%cstod "(double)~14/EXPR/" 13)
-                              (,%cdtoi "(signed long)~14/EXPR/" 13)
-                              (,%cdtos "(float)~14/EXPR/" 13)
-                              ;;others
-                              (,%funcall "~@<(*~13/EXPR/)(~:I~@{~/EXPR/~^, ~_~})~:>" 14)
-                              (,%setjmp "setjmp(~/EXPR/)" 14)
-                              (,%longjmp "longjmp(~/EXPR/, ~/EXPR/)" 14)
-                              (,%pointer-of-variable "&~14/EXPR/" 13)
-                              ))
+(defconstant $sys-fun-table
+  `(
+    ;;structure of an element:
+    ;;(special-sysfun format-string C-operator-precedence)
+    ;;comparision
+    ;;(,%eq "(~8/EXPR/ == ~9/EXPR/)" 8)
+    ;;(,%neq "(~8/EXPR/ != ~9/EXPR/)" 8)
+    (,%gt "(~9/EXPR/ > ~10/EXPR/)" 9)
+    (,%lt "(~9/EXPR/ < ~10/EXPR/)" 9)
+    (,%ge "(~9/EXPR/ >= ~10/EXPR/)" 9)
+    (,%le "(~9/EXPR/ <= ~10/EXPR/)" 9)
+    ;;arithmetic
+    (,%plus "(~11/EXPR/ + ~12/EXPR/)" 11)
+    (,%minus "(~11/EXPR/ - ~12/EXPR/)" 11)
+    (,%neg "(- ~14/EXPR/)" 13)
+    (,%mult "(~12/EXPR/ * ~13/EXPR/)" 12)
+    (,%div "(~12/EXPR/ / ~13/EXPR/)" 12)
+    (,%rem "(~12/EXPR/ % ~13/EXPR/)" 12)
+    (,%abs "abs(~/EXPR/)" 14)
+    ;;bitwise logical
+    (,%not "(~~~14/EXPR/)" 13)
+    (,%and "(~7/EXPR/ & ~8/EXPR/)" 7)
+    (,%or "(~5/EXPR/ | ~6/EXPR/)" 5)
+    (,%xor "(~6/EXPR/ ^ ~7/EXPR/)" 6)
+    (,%lshiftl "(~10/EXPR/ << ~11/EXPR/)" 10)
+    (,%lshiftr "LSHIFTR(~/EXPR/, ~/EXPR/)" 14)
+    (,%ashiftr "ASHIFTR(~/EXPR/, ~/EXPR/)" 14)
+    ;;conversions
+    (,%citos "(float)~14/EXPR/" 13)
+    (,%citod "(double)~14/EXPR/" 13)
+    (,%cstoi "(signed long)~14/EXPR/" 13)
+    (,%cstod "(double)~14/EXPR/" 13)
+    (,%cdtoi "(signed long)~14/EXPR/" 13)
+    (,%cdtos "(float)~14/EXPR/" 13)
+    ;;others
+    (,%funcall "~@<(*~13/EXPR/)(~:I~@{~/EXPR/~^, ~_~})~:>" 14)
+    (,%setjmp "setjmp(~/EXPR/)" 14)
+    (,%longjmp "longjmp(~/EXPR/, ~/EXPR/)" 14)
+    (,%pointer-of-variable "&~14/EXPR/" 13)
+    ))
 
 (defun sys-fun-format (fun)
   (or (second (cl:assoc fun $sys-fun-table))
@@ -847,10 +840,9 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
   (cl:apply #'write-enveloped-expr
             stream (sys-fun?recedence fun) (sys-fun-format fun) args))
 
-;;; ------------
-;;; %eq and %neq must be handled in a special way because their arguments may be
-;;; any Lisp- or Tail-Object, in the case of a class-subclass comparision the
-;;; balancing of the types is needed (cast to the higher class)
+;; %eq and %neq must be handled in a special way because their arguments may be
+;; any Lisp- or Tail-Object, in the case of a class-subclass comparision the
+;; balancing of the types is needed (cast to the higher class)
 
 (defmethod write-call ((fun <%eq>) args types stream)
   (write-comparision-call "~8/EXPR/ == ~9/EXPR/" args types stream))
@@ -950,18 +942,21 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 ;; must be an LZS-expression usable as a C-expression, which are: app, var-ref,
 ;; named-const, any literal incl. classes, fun, or setq-form. EXPR calls a
 ;; generic function write-expr which prints the equivalent C-expression. A
-;; numeric argument ~n/EXPR/ says that no parantheses are needed to get the right
-;; evaluation order if the operator precedence of the expression to be printed is
-;; greater than or equal to n. The function write-enveloped-expr prints an
-;; expression with or without parantheses dependent on the precedences.
+;; numeric argument ~n/EXPR/ says that no parantheses are needed to get the
+;; right evaluation order if the operator precedence of the expression to be
+;; printed is greater than or equal to n. The function write-enveloped-expr
+;; prints an expression with or without parantheses dependent on the
+;; precedences.
 
-;; ~n/EXPR/   Print expression. Print with parantheses if the precedence of the
-;; argument is lower than n. In write-expr n is the value of
-;; (dynamic *min-precedence*). The default for n is 0.
-;; ~:/EXPR/   If the argument is () then don't use the empty-list-register even if
+;; ~n/EXPR/ Print expression. Print with parantheses if the precedence of the
+;; argument is lower than n. In write-expr n is the value of (dynamic
+;; *min-precedence*). The default for n is 0.
+
+;; ~:/EXPR/ If the argument is () then don't use the empty-list-register even if
 ;; (dynamic *empty-list-in-register*) is true.
-;; ~@/EXPR/   The pointer reference is done outside, therefore use 'instance' instead
-;; of '&instance'.
+
+;; ~@/EXPR/ The pointer reference is done outside, therefore use 'instance'
+;; instead of '&instance'.
 
 (defun expr (stream object colon? atsign? . args)
   (dynamic-let ((*no-pointer*
@@ -985,7 +980,8 @@ int ~A(~:[~;int argc, char *argv[]~]~:*)
 (defmethod write-expr ((object <null>) stream)
   (if (dynamic *empty-list-in-register*)
       (format stream "NIL")
-    (write-enveloped-expr stream 13 "&empty_list.I"))) ; this is for static access
+    (write-enveloped-expr stream 13 "&empty_list.I"))) ; this is for static
+                                                       ; access
 
 (defmethod write-expr ((object <fun>) stream)
   (write-string (c-identifier object) stream))

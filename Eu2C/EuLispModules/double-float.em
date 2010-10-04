@@ -58,7 +58,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Constants and externel definitions
 ;;;-----------------------------------------------------------------------------
-
 (%declare-external-variable mpdf %double-float
   language c
   external-name |DBL_MAX|)
@@ -66,9 +65,6 @@
 (%declare-external-variable lpdf %double-float
   language c
   external-name |DBL_MIN|)
-
-
-
 
 (defconstant most-positive-double-float (make-dble mpdf))
 (defconstant least-positive-double-float (make-dble lpdf))
@@ -81,7 +77,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Functions and Methods
 ;;;-----------------------------------------------------------------------------
-
 (defmethod binary+ ((d1 <double-float>)
                     (d2 <double-float>))
   (make-dble (%plus (dble d1)(dble d2))))
@@ -132,11 +127,9 @@
   (make-dble (%div (%citod(make-swi f))
                    (dble d))))
 
-
 (defmethod binary% ((d1 <double-float>)
                     (d2 <double-float>))
   (make-dble (%fmod (dble d1)(dble d2))))
-
 
 (defmethod binary% ((f <int>)
                     (d <double-float>))
@@ -145,7 +138,6 @@
 (defmethod binary% ((d <double-float>)
                     (f <int>))
   (make-dble (%fmod (dble d) (%citod(make-swi f)))))
-
 
 (defmethod binary-mod ((d1 <double-float>)
                        (d2 <double-float>))
@@ -179,11 +171,9 @@
                  (make-dble frac))
              (make-dble frac)))))
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; methods for gf in compare
 ;;;-----------------------------------------------------------------------------
-
 (defmethod binary= ((d1 <double-float>)
                     (d2 <double-float>))
   (if  (%eq (dble d1)(dble d2))
@@ -240,7 +230,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; methods for elementary-functions
 ;;;-----------------------------------------------------------------------------
-
 (defmethod acos ((d <double-float>))
   (make-dble (%acos (dble d))))
 
@@ -264,11 +253,8 @@
 (defmethod tan ((d <double-float>))
   (make-dble (%tan (dble d))))
 
-
 (defmethod cosh ((d <double-float>))
   (make-dble (%cosh (dble d))))
-
-
 
 (defmethod sinh ((d <double-float>))
   (make-dble (%sinh (dble d))))
@@ -282,7 +268,6 @@
 (defmethod log ((d <double-float>))
   (make-dble (%log (dble d))))
 
-
 (defmethod log10 ((d <double-float>))
   (make-dble (%log10 (dble d))))
 
@@ -291,15 +276,12 @@
   (make-dble (%pow (dble d1)
                    (dble d2))))
 
-
 (defmethod sqrt ((d <double-float>))
   (make-dble (%sqrt (dble d))))
-
 
 ;;;-----------------------------------------------------------------------------
 ;;; methods for float
 ;;;-----------------------------------------------------------------------------
-
 (defmethod ceiling ((d <double-float>))
   (make-dble (%ceil(dble d))))
 
@@ -325,11 +307,10 @@
                  (setq inew (%minus inew #%i1)))
              ()))
          (make-fpint inew)))
+
 ;;;-----------------------------------------------------------------------------
 ;;; converter
 ;;;-----------------------------------------------------------------------------
-
-
 (defmethod (converter <int>)
   ((object <double-float>))
   (make-fpint(%cdtoi (dble object))))
@@ -337,7 +318,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   binary+ renew-signature
   (((var0 var1 var2)
@@ -500,4 +480,6 @@
     ((var var2) (atom? (and <number> (and (not <int>)
                                          (not <double-float>))))))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module double-float
+;;;-----------------------------------------------------------------------------
