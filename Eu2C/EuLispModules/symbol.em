@@ -18,13 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: standard module symbol (eulisp level 0)
-;;;  Description: some more thingies for symbols
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
+;;; Title: Level-0 symbol module
 ;;;  Problems:
-;;    generation of gensym-name is a hack use converter number-string from
+;;    Generation of gensym-name is a hack use converter number-string from
 ;;    printer if possible
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller

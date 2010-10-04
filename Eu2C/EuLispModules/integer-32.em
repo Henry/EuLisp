@@ -18,13 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Integer-32
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule integer-32
   (import (tail)
    syntax (tail)
-   export (<integer-32>  <long*> make-i32 i32 setf-i32))
-
+   export (<integer-32>
+           <long*>
+           make-i32
+           i32
+           setf-i32))
 
 (%define-tail-class (<integer-32>  <tail-class>)
   ((i32 type %signed-word-integer
@@ -35,12 +40,13 @@
   representation pointer-to-struct
   allocation multiple-type-card)
 
-
-
 (%declare-external-class (<long*> <tail-class>)
   ()
   ()
   language C
   representation pointer-to-void
   type-identifier |long *|)
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module integer-32
+;;;-----------------------------------------------------------------------------

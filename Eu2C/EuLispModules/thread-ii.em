@@ -18,40 +18,72 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: thread internals to be known by signal
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: Thread internals to be known by signal
 ;;;  Authors: Jens Bimberg
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule thread-ii
-  (import
-   (object-0 ;apply-level-1
-    (only (hold-threads cont-threads) thread-b)
-    (only (null? <list>) basic-list-0)
-    (only (t) basic-list)
-    (only (eq) basic-compare)
-    (only (<function>) function-i)
-    (only (<object> <class> %cast %void %instance-of? %pjmpbuf
-                    %signed-word-integer) tail)
-    (only (<dynamic> unwind stop-unwind-before continue-at
-                     top-dynamic global-dynamic letcc-result) letcc)
-    )
-   syntax
-   ((only (when unless) syntax-0)
-    )
-   export
-   (<thread> thread? make-thread
-             state value function args next waiters condqueue m-thread
-             set-state set-value set-args set-next set-condqueue set-m-thread
-             tmp-locks set-tmp-locks
-             saved-dynamics save-dynamics restore-dynamics
-             <T-LST> make-T-LST First Set-First Last Set-Last
-             )
-   )
+  (import (object-0
+           (only (hold-threads
+                  cont-threads)
+                 thread-b)
+           (only (null?
+                  <list>)
+                 basic-list-0)
+           (only (t)
+                 basic-list)
+           (only (eq)
+                 basic-compare)
+           (only (<function>)
+                 function-i)
+           (only (<object>
+                  <class>
+                  %cast
+                  %void
+                  %instance-of?
+                  %pjmpbuf
+                  %signed-word-integer)
+                 tail)
+           (only (<dynamic>
+                  unwind
+                  stop-unwind-before
+                  continue-at
+                  top-dynamic
+                  global-dynamic
+                  letcc-result)
+                 letcc))
+   syntax ((only (when
+                  unless)
+                 syntax-0))
+   export (<thread>
+           thread?
+           make-thread
+           state
+           value
+           function
+           args
+           next
+           waiters
+           condqueue
+           m-thread
+           set-state
+           set-value
+           set-args
+           set-next
+           set-condqueue
+           set-m-thread
+           tmp-locks
+           set-tmp-locks
+           saved-dynamics
+           save-dynamics
+           restore-dynamics
+           <T-LST>
+           make-T-LST
+           First
+           Set-First
+           Last
+           Set-Last))
 
 (%define-standard-class (<T-LST> <class>)
   <object>
@@ -136,4 +168,7 @@
   (setq continue-at        (s-continue-at        d))
   (setq top-dynamic        (s-top-dynamic        d))
   (setq letcc-result       (s-letcc-result       d)))
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module thread-ii
+;;;-----------------------------------------------------------------------------

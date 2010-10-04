@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: Formatted-IO
 ;;;  Authors: Rainer Rosenmuller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -579,7 +578,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   sformat new-signature
   (((var0 var1 var2 var3)

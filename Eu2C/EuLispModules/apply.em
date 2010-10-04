@@ -19,37 +19,27 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: interface module apply
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Horst Friedrich
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule apply
-
   (import (apply-level-2
            function
-           letcc
-           )
+           letcc)
    syntax (apply-level-2)
    expose (apply-level-2
            function
-           basic-symbol   ; provides symbols with literal expansion
+           basic-symbol
            letcc
            (rename ((%unsigned-byte-integer %character))
-                   (only (%unsigned-byte-integer) %tail))
-           )
-   )
+                   (only (%unsigned-byte-integer)
+                         %tail))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; providing some special objects to the compiler
 ;;;-----------------------------------------------------------------------------
 
-;; for closures
 (%annotate-function %closure-push is-special-function closure-push)
 (%annotate-function %closure-value is-special-function closure-value)
 (%annotate-function %set-closure-value is-special-function set-closure-value)
@@ -66,4 +56,6 @@
 (%annotate-function %dynamic-setq is-special-function set-dynamic)
 (%annotate-function make-dynamic is-special-function make-dynamic)
 
+;;;-----------------------------------------------------------------------------
 )  ;; End of module apply
+;;;-----------------------------------------------------------------------------

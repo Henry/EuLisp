@@ -51,15 +51,14 @@
 
 #-(:symbol-with-plist :t)
 (%define-literal-expansion symbol
-  `(%literal ,<symbol> name (%literal ,%string () ,name) )
-  )
+  `(%literal ,<symbol> name (%literal ,%string () ,name) ))
+
 #+(:symbol-with-plist :t)
 (%define-literal-expansion symbol
-  `(%literal ,<symbol> name (%literal ,%string () ,name) plist ())
-  )
+  `(%literal ,<symbol> name (%literal ,%string () ,name) plist ()))
 
 ;;;-----------------------------------------------------------------------------
-;;; the symbol table
+;;; Symbol table
 ;;;-----------------------------------------------------------------------------
 (deflocal *symbol-table* ())
 

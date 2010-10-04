@@ -18,8 +18,14 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Generic functions for integer
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule integer-generic
   (import (eulisp-kernel)
-   syntax (eulisp-kernel)))
+   syntax (eulisp-kernel))
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module integer-generic
+;;;-----------------------------------------------------------------------------

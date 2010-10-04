@@ -18,36 +18,34 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: timer interrupt handling
+;;; Title: Timer interrupt handling
 ;;;  Description:
-;;    interface to unix interval timers and signals
-;;    enables creating a real and a virtual timer
-;;    (set-real-timer x fun) (set-virtual-timer x fun)
-;;    both timers fire any x microseconds and then call fun
-;;    used by threads to reschedule
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    interface to unix interval timers and signals enables creating a real and
+;;    a virtual timer (set-real-timer x fun) (set-virtual-timer x fun) both
+;;    timers fire any x microseconds and then call fun used by threads to
+;;    reschedule
 ;;;  Authors: Jens Bimberg
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule timer
-  (import
-   ((only (%signed-word-integer
-           <class>
-           <object>
-           %void
-           make-swi
-           %cast
-           %sighandler)
-          tail)
-    (only (<integer>) integer)
-    (only (<symbol>) symbol)
-    (only (eq) compare)
-    (only (<function>
-           function-address)
-          function-i))
+  (import ((only (%signed-word-integer
+                  <class>
+                  <object>
+                  %void
+                  make-swi
+                  %cast
+                  %sighandler)
+                 tail)
+           (only (<integer>)
+                 integer)
+           (only (<symbol>)
+                 symbol)
+           (only (eq)
+                 compare)
+           (only (<function>
+                  function-address)
+                 function-i))
    c-import (<sys/time.h>
              <signal.h>)
    export (set-interval-timer
@@ -151,5 +149,5 @@
                    (%cast itimer #%i0)))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module timer
 ;;;-----------------------------------------------------------------------------

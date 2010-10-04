@@ -19,78 +19,53 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: collection for vectors
-;;;  Description: collection for vectors gives the functionality described in A.2
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;;  Description:
+;;    collection for vectors gives the functionality described in A.2
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule collection-vector
-
-  (import
-   (tail
-    apply
-    eulisp-kernel
-    ;;collection-aux
-    (only (eql) compare)
-    basic-list
-    vector
-    (only (print)
-          print)
-    (only (<conversion-condition> error)
-          condition)
-
-    collection-generic
-    collection-aux
-    )
-
-   syntax
-   (tail
-    syntax-0)
-
-   export
-   (accumulate
-    accumulate1
-    any?
-    concatenate
-    do
-    element
-    empty?
-    fill
-    map
-    member
-    reverse
-    size
-    ;;converter
-    ;;    generic-print
-    ;;    generic-write
-    )
-   )
-
-
-
-
+  (import (tail
+           apply
+           eulisp-kernel
+           (only (eql)
+                 compare)
+           basic-list
+           vector
+           (only (print)
+                 print)
+           (only (<conversion-condition> error)
+                 condition)
+           collection-generic
+           collection-aux)
+   syntax (tail
+           syntax-0)
+   export (accumulate
+           accumulate1
+           any?
+           concatenate
+           do
+           element
+           empty?
+           fill
+           map
+           member
+           reverse
+           size))
 
 ;;;------------------------------------------------------------
 ;;; accumulate
 ;;;------------------------------------------------------------------
-
-
 ;;  (defmethod accumulate ((function <function>)
 ;;                         (object <object>)
 ;;                         (vec <vector>))
 ;;    (accumulate-vector function object vec))
 
-
 (defmethod accumulate ((function <function>)
                        (object <object>)
                        (vec <vector>))
   (map-accumulate function vec object (primitive-vector-size vec) #%I0))
-
 
 (%define-function (map-accumulate <object>)
   ((function <function>)
@@ -101,18 +76,14 @@
   (if (%lt index max-len)
       (map-accumulate function
                       vec
-                      (function res (primitive-vector-ref vec index));take this if funcall ok
+                      (function res (primitive-vector-ref vec index))
                       max-len
                       (%plus index #%I1))
     res))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; accumulate1
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod accumulate1 ((function <function>)
                         (vec <vector>))
   (if (%eq (primitive-vector-size vec) #%I0)
@@ -122,18 +93,12 @@
                     (primitive-vector-size vec)
                     #%I1))) ;start is second element
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; any?
-;;;------------------------------------------------------------
-
-
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod any? ((function <function>)
 ;;                   (vec <vector>) . more-collections)
 ;;    (any?-vector function vec more-collections))
-
 
 (defmethod any? ((function <function>)
                  (vec <vector>) . more-collections)
@@ -146,7 +111,6 @@
                (any?-with-two-args function vec (car more-collections)))
               (t (any?-collection function vec more-collections)))
         ))
-
 
 (%define-function (any?-with-one-vector <object>)
   ((function <function>)
@@ -191,21 +155,15 @@
                                (%plus index #%I1)))
     ()))
 
-
 (defmethod any?-with-two-args
   ((function <function>)
    (vec1 <vector>)
    (collection <object>))
   (any?-collection function vec1 (cons collection ())))
 
-
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; concatenate
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod concatenate ((vec <vector>) . more-collections)
   (%let ((rest-list-size %signed-word-integer
                            (%list-size more-collections)))
@@ -221,7 +179,6 @@
               (t (concat-collection vec more-collections)))
         ))
 
-
 (%define-function (concat-with-one-vector <vector>)
   ((vec <vector>)
    (index %unsigned-word-integer)
@@ -235,7 +192,6 @@
              (concat-with-one-vector vec
                                      (%plus index #%I1) len result))
     result))
-
 
 (%define-function (concat-next-vector <vector>)
   ((src-vec <vector>)
@@ -283,7 +239,6 @@
                   #%I0
                   (primitive-vector-size vec)))
 
-
 (%define-function (vector-to-list <list>)
   ((vec <vector>)
    (index %unsigned-word-integer)
@@ -295,7 +250,6 @@
                             vec-size))
     ()))
 
-
 (defmethod concat-with-two-args ((vec <vector>) (no-vec <null>))
   (%let ((vec-size %unsigned-word-integer
                      (primitive-vector-size vec)))
@@ -303,7 +257,6 @@
                                 vec-size
                                 (make-uninitialized-vector
                                  vec-size))))
-
 
 (%define-function (concat-with-two-vectors <object>)
   ((vec1 <vector>)
@@ -321,19 +274,12 @@
   ((vec <vector>) (collection <object>))
   (concat-collection vec (cons collection ())))
 
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; do
-;;;------------------------------------------------------------
-
-
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod do ((function <function>)
 ;;                 (vec <vector>) . more-collections)
 ;;    (do-vector function vec more-collections))
-
 
 (defmethod do ((function <function>)
                (vec <vector>) . more-collections)
@@ -394,8 +340,6 @@
    (collection <object>))
   (do-collection function vec1 (cons collection ())))
 
-
-
 ;;do-vector is equal to do-list ... and can be used for all collections!!!
 
 ;;  (defun do-vector (function vec . more-collections)
@@ -408,51 +352,39 @@
 ;;      more-collections)
 ;;     ))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; element and (setter element)
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod element ((vec <vector>)
                     (key <int>))
   (vector-ref vec key))
-
 
 (defmethod (setter element) ((vec <vector>)
                              (key <int>)
                              (value <object>))
   (setf-vector-ref vec key value))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; empty?
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod empty? ((vec <vector>))
   (if (%eq (primitive-vector-size vec) #%I0)
       t
     ()))
-
 
 ;;  (defun empty?-vector (vec)
 ;;    (if (%eq (primitive-vector-size vec) #%I0)
 ;;      t
 ;;      ()))
 
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; fill
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod fill ((vec <vector>)
 ;;                   (object <character>) ;object to fill
 ;;                   (start <int>)
 ;;                   (end <int>))
 ;;    (fill-vector vec object start end))
-
 
 (defmethod fill ((vec <vector>)
                  (object <object>) . keys)
@@ -495,16 +427,12 @@
     (progn (setf-primitive-vector-ref vec start object)
            (fill-vector-aux vec object (%plus start #%I1) end))))
 
-
-
-;;------------------------------------------------------------
-
-
-
+;;;-----------------------------------------------------------------------------
+;;; map
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod map ((function <function>)
 ;;                  (vec <vector>) . more-collections)
 ;;    (map-vector function vec more-collections))
-
 
 (defmethod map ((function <function>)
                 (vec <vector>) . more-collections)
@@ -596,16 +524,13 @@
 ;;     ()
 ;;     vec))
 
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; member
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod member ((object <object>)
 ;;                     (vec <vector>)
 ;;                     (test <function>))
 ;;    (member-vector object vec test))
-
 
 (defmethod member ((object <object>)
                    (vec <vector>) . test)
@@ -630,7 +555,6 @@
         (member-vector-aux object vec (%plus index #%I1) len test))
     ()))
 
-
 (%define-function (memq-vector <object>)
   ((object <object>)
    (vec <vector>)
@@ -642,11 +566,9 @@
         (memq-vector object vec (%plus index #%I1) len))
     ()))
 
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; reverse
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod reverse ((vec <vector>))
   (%let* ((vec-len %unsigned-word-integer
                    (primitive-vector-size vec))
@@ -656,7 +578,6 @@
              rev-vec
            (reverse-vector-aux vec rev-vec #%I0
                                (%minus vec-len #%I1)))))
-
 
 ;;  (defun reverse-vector (vec)
 ;;    (%let* ((vec-len %unsigned-word-integer
@@ -683,22 +604,15 @@
     rev-vec)
   )
 
-
-
-
-;;;------------------------------------------------------------
+;;;-----------------------------------------------------------------------------
 ;;; size
-;;;------------------------------------------------------------
-
-
+;;;-----------------------------------------------------------------------------
 (defmethod size ((vec <vector>))
   (vector-size vec))
-
 
 ;;  (defun size-vector (vec)
 ;;    (vector-size vec))
 
-)
-
-;;;eof
-
+;;;-----------------------------------------------------------------------------
+)  ;; End of module collection-vector
+;;;-----------------------------------------------------------------------------

@@ -27,8 +27,7 @@
 
 (defmodule convert
   (import (apply
-           (rename ((%class-converter
-                     converter ))
+           (rename ((%class-converter converter ))
                    tail)
            eulisp-kernel)
    syntax (tail
@@ -45,7 +44,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   convert new-signature
   (((var0 var1 var2)

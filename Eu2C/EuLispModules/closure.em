@@ -18,15 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: Support for closures
 ;;;  Authors: Horst Friedrich
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule closure
   (import (apply-level-1
            (only (<cons>
@@ -67,4 +63,6 @@
    (fun %function))
   (make-function arg closure fun))
 
+;;;-----------------------------------------------------------------------------
 )  ;; End of module closure
+;;;-----------------------------------------------------------------------------

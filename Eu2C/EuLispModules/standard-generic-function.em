@@ -18,25 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: Standard generic functions
 ;;;  Authors: Horst Friedrich
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule standard-generic-function
   (import (tail
-           function ; <function>
+           function
            basic-list
-           ;; printf-1 ; for debug
-           basic-compare ; eq
-           tail-introspection ; %class-of, %member
+           basic-compare
+           tail-introspection
            class-introspection
-           ;; string ; for error messages
-           ;; symbol
-           ;; vector
-           (rename ((no-applicable-method-error
-                     no-applicable-method))
+           (rename ((no-applicable-method-error no-applicable-method))
                    basic-condition))
    syntax (apply-level-1
            basic-syntax))
@@ -71,7 +65,6 @@
           (%equal-list (cdr l1) (cdr l2))
         ())
     t))
-
 
 ;;;-----------------------------------------------------------------------------
 (%define-standard-class (<generic-function> <class>) ; !!! <function-class>)
@@ -121,11 +114,9 @@
    (slow-cache type <list>
                default (list ())
                accessor generic-slow-cache
-               writer set-generic-slow-cache)
-   )
+               writer set-generic-slow-cache))
   representation pointer-to-struct
-  allocation single-card
-  )
+  allocation single-card)
 
 (%define-standard-class (<standard-generic-function> <class>)
   <generic-function>
@@ -161,8 +152,7 @@
              discrimination-depth (%literal ,%signed-word-integer ,discrimination-depth)
              fast-class-cache (())
              slow-cache ,(cons () ())
-             setter ,(if setter setter error-no-setter-defined)
-             ))
+             setter ,(if setter setter error-no-setter-defined)))
 
 (%define-literal-expansion method
   `(%literal ,<method>
@@ -191,10 +181,9 @@
   (%let ((class-of-arg <class> (%class-of arg)))
         (if (%eq class-of-arg (generic-fast-class-cache gf))
             (%cast %function (generic-fast-method-cache gf))
-          (special-lookup-fn-1 gf class-of-arg arg))
-        ))
+          (special-lookup-fn-1 gf class-of-arg arg))))
 
-(%annotate-function %std-discrfun-1 is-standard-discriminator () )
+(%annotate-function %std-discrfun-1 is-standard-discriminator ())
 
 (%define-function (special-lookup-fn-1 %function)
   ((gf <standard-generic-function>)
@@ -501,8 +490,7 @@
             (no-applicable-method gf cl-lst2
                                   arg1 arg2 args)
             (function-address
-             (lambda (a b . c) ())))))))
-  )
+             (lambda (a b . c) ()))))))))
 
 (%define-function (walk-cache <list>)
   ((gf <generic-function>)
@@ -591,7 +579,6 @@
                        (class-precedence-list cl1))
               t ()))))
 
-
 (defun add-method (gf method)
   ;; first the caches have to be cleared
   (set-generic-fast-class-cache gf (list ()))
@@ -606,5 +593,5 @@
 (%annotate-function add-method is-special-function add-method)
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module standard-generic-functions
 ;;;-----------------------------------------------------------------------------

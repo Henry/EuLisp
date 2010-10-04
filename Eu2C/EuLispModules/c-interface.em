@@ -18,6 +18,8 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: C-interface
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule c-interface
@@ -25,10 +27,14 @@
    syntax (tail)
    expose ((rename ((make-swi c.long)
                     (make-fpint lisp.fpint))
-                   (only (make-swi make-fpint) basic-number))
+                   (only (make-swi
+                          make-fpint)
+                         basic-number))
            (rename ((make-string lisp.string)
                     (string-pointer c.string))
-                   (only (make-string string-pointer) string-i))
+                   (only (make-string
+                          string-pointer)
+                         string-i))
            (rename ((%signed-word-integer <c.long>)
                     (%unsigned-word-integer <c.unsigned-long>)
                     (%signed-byte-integer <c.char>)
@@ -74,6 +80,8 @@
                   %cdtoi
                   %cdtos
                   )
-                 tail))
+                 tail)))
 
-   ))
+;;;-----------------------------------------------------------------------------
+)  ;; End of module c-interface
+;;;-----------------------------------------------------------------------------

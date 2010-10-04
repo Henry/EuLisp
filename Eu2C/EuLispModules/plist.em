@@ -18,14 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Symbol property lists
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule plist
-  (import ( tail basic-symbol
-                 level-0)
+  (import (tail
+           basic-symbol
+           level-0)
    syntax (level-0)
-   export (get symbol-plist put))
-
+   export (get
+           symbol-plist
+           put))
 
 (%define-function (find-entry <object>)
   ((element <symbol>)
@@ -37,8 +41,6 @@
              (%cast %unsigned-word-integer (car li)))
         li
       (find-entry element (cdr li)))))
-
-
 
 (defun get(symbol indicator)
   (let ((val (find-entry indicator (symbol-plist symbol))))
@@ -53,8 +55,10 @@
     (if val
         ((setter car) (cdr val) new)
       ((setter symbol-plist) symbol (cons indicator (cons new sp)))))
-  new
-  )
+  new)
 
 ((setter setter) get put)
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module plist
+;;;-----------------------------------------------------------------------------

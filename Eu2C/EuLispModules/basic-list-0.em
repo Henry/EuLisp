@@ -32,7 +32,7 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule basic-list-0
-  (import (ti-sys-signatures ;; this allows declaration of signatures
+  (import (ti-sys-signatures
            apply-level-1
            basic-compare)
    syntax (apply-level-1)
@@ -217,7 +217,6 @@
     ((var var2) (atom? (not <null>))))))
 
 ;; Defined in basic-compare.am but there is no class <null> available.
-
 (%annotate-function
   eq new-signature
   (((var0 var1 var2)

@@ -19,43 +19,22 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Functions to work with option lists
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr, Rainer Rosenmuller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule option-lists
-
-  (import
-   (;level-0
-    ;; pair-ext
-    ;; list-ext
-    ;;(only (warn find remove) common-lisp)
-    tail
-    ;;(only (cond and) syntax-0)
-    ;;zyklus(only (print) print)
-    (only (atom?) pair)
-    )
-
-   syntax
-   (;level-0
-    tail
-    (only (cond and when) syntax-0)
-    )
-
-   export
-   (;map-option-list
-    find-option
-    get-option
-    ;;replace-option-value
-    check-options
-    ;;mapl-option-list
-    )
-   )
+  (import (tail
+           (only (atom?)
+                 pair))
+   syntax (tail
+           (only (cond
+                   and
+                   when)
+                 syntax-0))
+   export (find-option
+           get-option
+           check-options))
 
 ;;   (defun map-option-list (function option-list)
 ;;     (cond ((null? option-list) ())
@@ -131,7 +110,7 @@
                         (cddr option-list))
          ())))
 
-(defun warn (str . args) ());;(..(apply format str args))
+(defun warn (str . args) ())
 
 (defun find (obj list)
   (%member obj list))
@@ -143,24 +122,9 @@
 
 (defun cddr (obj) (cdr (cdr obj)))
 
-;;(defun atom? (object)
-;;  (null? (cons? object)))
-
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
-;; also defined in pair.am !
-
-;;(%annotate-function
-;; atom? new-signature
-;; (((var0 var1)
-;;   ((var var0) (atom? (and <object> (not <null>))))
-;;   ((var var1) (atom? (and <object> (not <cons>)))))
-;;  ((var0 var1)
-;;   ((var var0) (atom? <null>))
-;;   ((var var1) (atom? <cons>)))))
-
 (%annotate-function
   find-option new-signature
   (((var0 var1 var2 var3)
@@ -169,5 +133,6 @@
     ((var var2) (atom? <list>))
     ((var var3) (atom? <object>)))))
 
-)
-;;#module-end
+;;;-----------------------------------------------------------------------------
+)  ;; End of module option-lists
+;;;-----------------------------------------------------------------------------

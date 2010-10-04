@@ -18,9 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
-;;    Interface module
+;;; Title: Tail interface
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

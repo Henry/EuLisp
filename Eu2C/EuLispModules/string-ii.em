@@ -19,70 +19,54 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: basic functionality for strings
-;;    everything symbol needs to be happy
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr, E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule string-ii
-
   (import (tail
            string-i
            c-string-interface
            basic-string
-           (only (allocate-on-multiple-size-card) mm-interface))
-
+           (only (allocate-on-multiple-size-card)
+                 mm-interface))
    syntax (tail)
-
    export (<string>
            string?
            duplicate-%string
            allocate-%string
            make-string
-           string-pointer ;only for intern use for table
+           string-pointer
            string-append
-           equal-string
-           )
-   )
-
+           equal-string))
 
 ;;;-----------------------------------------------------------------------------
 ;;; string?
 ;;;-----------------------------------------------------------------------------
-
-
 (defun string? (object)
   (%instance-of? object <string>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; string-append
 ;;;-----------------------------------------------------------------------------
-
-
-
 (defun string-append (string1 string2)
   (%let* ((length1 %signed-word-integer
                    (strlen (string-pointer string1)))
           (new-string-ptr %string
-                          (allocate-%string (%plus #%i1
-                                                   (%plus length1
-                                                          (strlen (string-pointer string2)))))))
+                          (allocate-%string
+                           (%plus #%i1
+                                  (%plus length1
+                                         (strlen (string-pointer string2)))))))
          (strcpy new-string-ptr (string-pointer string1))
-         (strcpy (%cast %string (%plus (%cast %signed-word-integer new-string-ptr) length1))
+         (strcpy (%cast %string
+                        (%plus (%cast %signed-word-integer new-string-ptr)
+                               length1))
                  (string-pointer string2))
-         (make-string new-string-ptr)
-         ))
+         (make-string new-string-ptr)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; equal-string
 ;;;-----------------------------------------------------------------------------
-
-
 (defun equal-string (string1 string2)
   (%let ((length1 %signed-word-integer
                   (strlen (string-pointer string1)))
@@ -98,7 +82,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   equal-string new-signature
   (((var0 var1 var2)

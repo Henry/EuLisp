@@ -18,13 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: generic functions of default module compare
-;;;  Description:
-;;;  Documentation:
+;;; Title: generic functions of module compare
 ;;;  Notes:
-;;    This module provides some generic functions with its default EuLisp names. They
-;;    are defined in compare-generic-i with names which appear as more readable
-;;    C-identifiers in the generated C-Code.
+;;    This module provides some generic functions with its default EuLisp
+;;    names. They are defined in compare-generic-i with names which appear as
+;;    more readable C-identifiers in the generated C-Code.
 ;;;  Requires:
 ;;;  Problems:
 ;;;  Authors: Ingo Mohr
@@ -39,13 +37,11 @@
                    compare-generic-i))
    expose ((rename ((binary-lt binary<)
                     (binary-eq binary=))
-                   compare-generic-i))
-   )
+                   compare-generic-i)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   binary< new-signature
   (((var0 var1 var2)
@@ -98,5 +94,6 @@
     ((var var1) (atom? <object>))
     ((var var2) (atom? <object>)))))
 
-
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module compare-generic
+;;;-----------------------------------------------------------------------------

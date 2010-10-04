@@ -19,52 +19,45 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: string-stack
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Rainer Rosenmuller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule string-stack
-
-  (import
-   ;;------
-   ((only (<class> <object>
-                   %lt %plus %minus %extract %cast
-                   %string %void
-                   %signed-word-integer
-                   %signed-byte-integer
-                   %unsigned-byte-integer ;; vermutlich f %string f zugriffstypen
-                   ) tail)
-    ;;(only (allocate-%string) basic-class-init)
-    (only (strcpy) c-string-interface)
-    (only (make-string <string> duplicate-%string
-                       allocate-%string) string-ii)
-    )
-
-
-   syntax
-   ;;------
-   (tail )
-
-   export
-   ;;------
-   (    <string-stack>
-        ?stack-string
-        ?cur-index
-        !cur-index
-        ?last-index
-        make-string-stack
-        *buffer-1*
-        *buffer-2*
-        push-buffer
-        pop-buffer
-        clear-buffer
-        getc-buffer
-        ungetc-buffer)
-   )
+  (import ((only (<class>
+                  <object>
+                  %lt
+                  %plus
+                  %minus
+                  %extract
+                  %cast
+                  %string
+                  %void
+                  %signed-word-integer
+                  %signed-byte-integer
+                  %unsigned-byte-integer)
+                 tail)
+           (only (strcpy)
+                 c-string-interface)
+           (only (make-string
+                  <string>
+                  duplicate-%string
+                  allocate-%string)
+                 string-ii))
+   syntax (tail)
+   export (<string-stack>
+           ?stack-string
+           ?cur-index
+           !cur-index
+           ?last-index
+           make-string-stack
+           *buffer-1*
+           *buffer-2*
+           push-buffer
+           pop-buffer
+           clear-buffer
+           getc-buffer
+           ungetc-buffer))
 
 ;;(%define-variable *buffer-1* %string (%literal %string #i255))
 ;;(%define-variable *buffer-2* %string (%literal %string #i255))
@@ -120,9 +113,11 @@
         (!cur-index stack (%plus #%i1 (?cur-index stack))))
     (progn (%setf (%extract (?stack-string stack) (?last-index stack)) #%B0)
            (!stack-string stack
-                          (%let ((new-string-ptr %string
-                                                 (allocate-%string (%plus (?last-index stack)
-                                                                          (?last-index stack)))))
+                          (%let ((new-string-ptr
+                                  %string
+                                  (allocate-%string
+                                   (%plus (?last-index stack)
+                                          (?last-index stack)))))
                                 (strcpy new-string-ptr (?stack-string stack))
                                 new-string-ptr))
            (!last-index stack (%plus (?last-index stack) (?last-index
@@ -159,4 +154,7 @@
 (%define-function (clear-buffer %void)
   ((stack <string-stack>))
   (!cur-index stack #%i0))
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module string-stack
+;;;-----------------------------------------------------------------------------

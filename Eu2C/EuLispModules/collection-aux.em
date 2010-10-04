@@ -18,12 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: auxiliary functions for collections
-;;;  Description: collection gives the functionality described in A.2
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: Auxiliary functions for collections described in A.2
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -39,9 +34,7 @@
            collection-convert
            (only (binary+
                   binary<)
-                 int
-                 ;; number ;take not this: recursive module load
-                 )
+                 int)
            basic-list
            (only (list
                   atom?)
@@ -52,8 +45,7 @@
                   nl)
                  print)
            (only (<string>
-                  string?
-                  )
+                  string?)
                  string)
            character
            vector
@@ -64,46 +56,28 @@
                  table)
            (only ($standard-table-size)
                  table-aux)
-           (only (construct-collection-info ; all defgenerics
-                  ;;construct-result ; it is a function now
+           (only (construct-collection-info
                   take-next-elt)
                  collection-generic)
            collection-i
-           (only (strlen) c-string-interface))
+           (only (strlen)
+                 c-string-interface))
    syntax (tail
            apply
            syntax-0
            setf)
-   export (;;construct-collection-info
-           ;;construct-result
-           ;;take-next-elt
-           reverse-list
+   export (reverse-list
            test-range-indizes
            any?-collection
            concat-collection
            do-collection
            map-collection))
 
-;; with funcall
-;; (defun take-next-list-element (lst)
-;;   (function (lambda ()
-;;               (let (x)
-;;                 (if lst
-;;                     (progn
-;;                       (setq x (car lst))
-;;                       (setq lst (cdr lst))
-;;                       x)
-;;                   ())))))
-;;
-;; (setq xx (take-next-element '(a b c d)))
-;;
-;; (funcall xx)
-
 (deflocal $end-string "end of collection")
 
-;;;-----------------------------------------------------------------
-;;first the aux functions
-
+;;;-----------------------------------------------------------------------------
+;;; First the aux functions
+;;;-----------------------------------------------------------------------------
 (defun or-aux (a b) (if a t (if b t ())))
 
 (defun any?-collection (function lst  more-collections)
@@ -112,9 +86,7 @@
    (mapc-more-collections
     (cons
      lst
-     more-collections))
-   ))
-
+     more-collections))))
 
 (defun do-collection (function lst  more-collections)
   (do-with-apply
@@ -122,13 +94,8 @@
    (mapc-more-collections
     (cons
      lst
-     more-collections))
-   ))
+     more-collections))))
 
-
-
-
-;;;      ############## new 6.12.
 (defun map-collection (function lst  more-collections)
   (construct-result
    lst
@@ -138,7 +105,6 @@
      (cons
       lst
       more-collections)))))
-
 
 (defun any?-with-apply (function collection-list)
   (let ((first-apply-arg
@@ -160,7 +126,6 @@
           t
         (any?-with-apply function collection-list)))))
 
-
 (defun do-with-apply (function collection-list)
   (let ((first-apply-arg
          (take-next-elt (car (car collection-list))
@@ -181,12 +146,8 @@
         (apply function
                first-apply-arg
                rest-elts)
-        (do-with-apply function collection-list))
-      )))
+        (do-with-apply function collection-list)))))
 
-
-
-;;; new 6.12.
 (defun map-with-apply (function collection-list)
   (let ((first-apply-arg
          (take-next-elt (car (car collection-list))
@@ -207,12 +168,9 @@
             (map-with-apply function collection-list))
       )))
 
-
-
 (defun mapc-more-collections (li)
   (cons (construct-collection-info (car li))
-        (mapc-more-collections1 (cdr li) ()))
-  )
+        (mapc-more-collections1 (cdr li) ())))
 
 (defun mapc-more-collections1 (li res)
   (if li
@@ -222,33 +180,23 @@
 
     res))
 
-
-;;new 6.12.
 (defmethod construct-collection-info  ((collection <table>))
   (list collection 0))
 
 (defmethod construct-collection-info  ((collection <vector>))
   (list collection 0))
 
-
 (defmethod construct-collection-info  ((collection <string>))
   (list collection 0))
-
 
 (defmethod construct-collection-info  ((collection <list>))
   (cons collection ()))
 
-
 (defmethod construct-collection-info (collection)
   (print "unknown type for collection" nl))
 
-
-
-;;;new 6.12.
 (defun construct-result (collection result)
   (convert result (%class-of collection)))
-
-
 
 (%define-function (initialize-vector-from-list-rev <vector>)
   ((vector <vector>)
@@ -261,7 +209,6 @@
                                             (%minus index #%I1)
                                             (cdr elements)))))
 
-
 (defmethod take-next-elt ((element <list>) (collection <object>))
   (next-list-elt collection))
 
@@ -271,16 +218,12 @@
 (defmethod take-next-elt ((element <string>) (collection <object>))
   (next-string-elt collection))
 
-
 ;;new 6.12.
 (defmethod take-next-elt ((element <table>) (collection <object>))
   (next-table-elt collection))
 
-
 (defmethod take-next-elt ((element <object>) (collection <object>))
   (print 'unknown-collection nl))
-
-
 
 (defun apply-rest-list (collection-list result-list)
   (if collection-list
@@ -294,9 +237,6 @@
           ))
     result-list))
 
-
-
-;;*collection-infos*: ((list) ...)
 (defun next-list-elt (liste)
   (let ((one-arg-list (car liste))
         (lst (car (car liste))))
@@ -305,10 +245,6 @@
                      (cdr lst))
                (car lst))
       $end-string)))
-
-
-;;list of table-infos:: ((vector index) ...)
-;;for vectors too!
 
 (defun next-vector-elt (collection-info)
   (let ((index (car (cdr (car collection-info))))
@@ -336,8 +272,6 @@
           res)
       $end-string)))
 
-
-
 (defun next-table-elt (collection-info)
   (let* ((index (car (cdr (car collection-info))))
          (table (car (car collection-info)))
@@ -347,7 +281,6 @@
       (progn (setf (car (cdr (car collection-info)))
                    (binary+ index 1))
              tab-res))))
-
 
 (%define-function (test-range-indizes <object>)
   ((start %signed-word-integer)
@@ -378,10 +311,9 @@
       (reverse-list-aux (cdr liste) (cons (car liste) result))
     result))
 
-;;-------------------------------------
-
+;;;-----------------------------------------------------------------------------
 ;;; concat for all collections (default)
-
+;;;-----------------------------------------------------------------------------
 ;;  (defgeneric concat-collection (collection more-collections))
 ;;
 ;;  (defgeneric copy-to-list (collection result))
@@ -390,8 +322,6 @@
 ;;
 ;;  (defgeneric copy-to-string (collection result start))
 
-
-
 ;;  (defmethod concat-collection ((collection <list>)
 ;;                                (more-collections <list>))
 ;;    (let ((result (cons 1 ())))
@@ -399,15 +329,12 @@
 ;;                      (copy-list-to-list collection result))
 ;;      (cdr result)))
 
-
-
 (defun concat-collection (collection more-collections)
 
   (let ((res (cons 1 ())))
     (conc-coll (cons collection more-collections) res)
     (convert (cdr res)
              (%class-of collection))))
-
 
 (defun conc-coll (more-collections res)
   (if more-collections
@@ -427,19 +354,6 @@
       (setf (cdr liste) element)
     (nconc2 (cdr liste) element)))
 
-;;  (defun nconc1 (liste element)
-;;    (if (cons? liste)
-;;      (if (atom? (cdr liste))
-;;        (progn
-;;          (setf (cdr liste) element)
-;;          liste)
-;;        (nconc1 (cdr liste) element))
-;;      element))
-
-
-
-
-
-)
-
-;;eof
+;;;-----------------------------------------------------------------------------
+)  ;; End of module collection-aux
+;;;-----------------------------------------------------------------------------

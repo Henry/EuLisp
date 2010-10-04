@@ -18,14 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
+;;; Title: Basic syntax
 ;;;  Description:
-;;    basic-syntax provides all stuff which is needed to write simple macros and
-;;    to use quasiquote.
-;;;  Documentation:
+;;    Provides all the functionality needed to write simple macros and to use
+;;    `quasiquote'.
 ;;;  Notes:
-;;    append and cons? are defined in this module and should be imported from
-;;    here.
+;;    `append' and `cons?' are exported from this module and should be imported
+;;    from here.
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

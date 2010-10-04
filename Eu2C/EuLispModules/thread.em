@@ -18,10 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Lisp Part of thread implementation
+;;; Title: Level-0 thread module
 ;;;  Authors: Jens Bimberg
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule thread
   (import (thread-ii
            thread-i

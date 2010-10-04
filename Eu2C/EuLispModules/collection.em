@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EuLisp Level-0 module collection
+;;; Title: Level-0 module collection
 ;;;  Description:
 ;;    Collection gives the functionality described in A.2.
 ;;    Collection consist of list, string, vector and table.
@@ -66,5 +66,5 @@
 (defmethod sequence? (object) ())
 
 ;;;-----------------------------------------------------------------------------
-) ;; End of module collection
+)  ;; End of module collection
 ;;;-----------------------------------------------------------------------------

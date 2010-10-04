@@ -23,22 +23,20 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule small-table
-  (tail)
-(syntax (tail syntax-0))
-(export
- <small-table>
- make-small-table
- small-table-ref
- set-small-table-ref
- small-table-delete
- ;;for tests only
- table-entries
- table-key
- table-next
- table-value
- make-table-with-entries
- )
-
+  (import (tail)
+   syntax (tail
+            syntax-0)
+   export (<small-table>
+            make-small-table
+            small-table-ref
+            set-small-table-ref
+            small-table-delete
+            ;;for tests only
+            table-entries
+            table-key
+            table-next
+            table-value
+            make-table-with-entries))
 
 (%define-standard-class (<table-entry> <class>)
   <object>
@@ -67,21 +65,16 @@
   allocation multiple-type-card
   representation pointer-to-struct)
 
-
-
 (defun make-small-table comparator
   (if comparator
       (make-table-with-entries (car comparator))
     (make-table-with-entries eq)))
-
-
 
 (defun small-table-ref
   (table key . no-entry-value)
   (small-table-ref-aux (table-entries table) key (if no-entry-value
                                                      (car no-entry-value)
                                                    no-entry-value) ))
-
 
 (defun small-table-ref-aux
   (entries key default)
@@ -93,7 +86,6 @@
      (table-value entries))
     (t (small-table-ref-aux (table-next entries) key default))))
 
-
 (defun set-small-table-ref
   (table key value)
   (let ((entries (table-entries table)))
@@ -103,7 +95,6 @@
       (set-small-table-ref-aux entries key value (table-next entries))
       )))
 
-
 (defun  set-small-table-ref-aux
   (entries key value next)
   (cond
@@ -111,8 +102,8 @@
      (set-table-value entries value))
     ((null? next)
      (set-table-next entries (make-table-entry key value ())))
-    (t (set-small-table-ref-aux (table-next entries) key value (table-next next)))))
-
+    (t (set-small-table-ref-aux (table-next entries) key value
+                                (table-next next)))))
 
 (defun small-table-delete
   (table key)
@@ -124,7 +115,6 @@
         (small-table-delete-aux (table-next entries) key entries))
       )))
 
-
 (defun small-table-delete-aux
   (entries key before)
   (cond ((null? entries)
@@ -133,11 +123,8 @@
          (set-table-next before (table-next entries)))
         (t (small-table-delete-aux (table-next entries) key entries))))
 
-
-
-
 )
 
-
-
-
+;;;----------------------------------------------------------------------------
+)  ;; End of module small-table
+;;;-----------------------------------------------------------------------------

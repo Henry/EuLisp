@@ -18,20 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: defgenerics for float
+;;; Title: Generic functions for float
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule float-generic
   (import (eulisp-kernel
-           (only (<float>) float-i))
+           (only (<float>)
+                 float-i))
    syntax (eulisp-kernel)
+   export (ceiling
+           floor
+           round
+           truncate))
 
-   export
-   (ceiling
-    floor
-    round
-    truncate))
-
+;;;-----------------------------------------------------------------------------
+;;; Generic functions
+;;;-----------------------------------------------------------------------------
 (defgeneric ceiling((f1 <float>)))
 (defgeneric floor ((f1 <float>)))
 (defgeneric round ((f1 <float>)))
@@ -40,7 +43,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   ceiling new-signature
   (((var0 var1)
@@ -56,15 +58,15 @@
 (%annotate-function
   round new-signature
   (((var0 var1)
-    ((var var0) (atom? <float>))
+    ((var var0) (atom? <int>))
     ((var var1) (atom? <float>)))))
 
 (%annotate-function
   truncate new-signature
   (((var0 var1)
-    ((var var0) (atom? <float>))
+    ((var var0) (atom? <int>))
     ((var var1) (atom? <float>)))))
 
-
-
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module float-generic
+;;;-----------------------------------------------------------------------------

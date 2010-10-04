@@ -18,27 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: 
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:any changes of tat type must be done conformely with the generation of
-;;    trace functions for <%pointer-to-struct>- thingies in module mm-initialize.em
-;;;  Requires:
-;;;  Problems:any changes of tat type must be done conformely with the generation of
-;;    trace functions for <%pointer-to-struct>- thingies in module mm-initialize.em
+;;; Title: pointer-to-void
+;;;  Problems:
+;;    any changes of tail type must be done conformely with the generation of
+;;    trace functions for <%pointer-to-struct>- thingies in module
+;;    mm-initialize.em
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
-;;    CONTACT:e. E. Ulrich Kriegel
 ;;;-----------------------------------------------------------------------------
+
 (defmodule pointer-to-void
-
-  (import ()
-
-   syntax (%tail)
-
+  (syntax (%tail)
    expose ((rename ((%object <pointer-to-void>))
-                   (only (%object) %tail)))
-   )
+                   (only (%object)
+                         %tail))))
 
 ;;(export <pointer-to-void>)
 ;;
@@ -46,4 +39,6 @@
 ;;                      ((ptr-to-void-value type %signed-word-integer))
 ;;                      representation direct)
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module pointer-to-void
+;;;-----------------------------------------------------------------------------

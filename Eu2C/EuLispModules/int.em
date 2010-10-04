@@ -18,60 +18,56 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: int.am
-;;;  Problems:
+;;; Title: Level-0 module int
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule int
-  (import (tail eulisp-kernel
-                int-i
-                integer
-                (only (<double-float>
-                       make-dble)
-                      double-float-i)
-                convert
-                (only (binary+
-                       binary-
-                       binary/
-                       binary*
-                       binary%
-                       binary-mod
-                       binary-gcd
-                       binary-lcm
-                       negate
-                       zero?)
-                      number-generic)
-                (only (binary<
-                       binary=
-                       equal)
-                      compare-generic))
+  (import (tail
+           eulisp-kernel
+           int-i
+           integer
+           (only (<double-float>
+                  make-dble)
+                 double-float-i)
+           convert
+           (only (binary+
+                  binary-
+                  binary/
+                  binary*
+                  binary%
+                  binary-mod
+                  binary-gcd
+                  binary-lcm
+                  negate
+                  zero?)
+                 number-generic)
+           (only (binary<
+                  binary=
+                  equal)
+                 compare-generic))
    syntax (eulisp-kernel
            (only (and)
                  syntax-0))
-   export
-   (;;functions or methods
-    binary+
-    binary-
-    binary/
-    binary*
-    binary%
-    binary-mod
-    binary<
-    binary=
-    binary-gcd
-    binary-lcm
-    negate
-    zero?
-    equal
-    int?
-    ;;constants
-    <fpi>
-    most-positive-int
-    most-negative-int
-    ;;classes
-    <int>))
+   export (binary+
+           binary-
+           binary/
+           binary*
+           binary%
+           binary-mod
+           binary<
+           binary=
+           binary-gcd
+           binary-lcm
+           negate
+           zero?
+           equal
+           int?
+           <fpi>
+           most-positive-int
+           most-negative-int
+           <int>))
 
 (defconstant <fpi> <int>)
 #-(:int :big)
@@ -101,13 +97,11 @@
   (make-fpint (%minus (make-swi a)
                       (make-swi b))))
 
-
 (defmethod binary*
   ((a <int>)
    (b <int>))
   (make-fpint (%mult (make-swi a)
                      (make-swi b))))
-
 
 (defmethod binary/
   ((a <int>)
@@ -153,7 +147,6 @@
          (bb %signed-word-integer (%swi-abs(make-swi b))))
         (make-fpint (%div (%mult aa bb)
                           (fpi-gcd aa bb)))))
-
 
 (%define-function (%swi-abs %signed-word-integer)
   ((a %signed-word-integer))
@@ -312,5 +305,5 @@
     ((var var2) (atom? (and <number> (not <int>)))))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module int
 ;;;-----------------------------------------------------------------------------

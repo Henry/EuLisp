@@ -18,13 +18,16 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Interface to the C math library
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule c-math
-
   (import (tail
-           (only (<long*>) integer-32)
-           (only (<double-float>) double-float-i))
+           (only (<long*>)
+                 integer-32)
+           (only (<double-float>)
+                 double-float-i))
    syntax (tail)
    c-import (<math.h>)
    export (%acos
@@ -49,8 +52,7 @@
            %frexp
            %modf
            %fmod
-           <double*>)
-   )
+           <double*>))
 
 (%declare-external-class (<double*> <tail-class>)
   ()
@@ -103,31 +105,25 @@
   language C
   external-name |sinh|)
 
-
 (%declare-external-function (%tanh %double-float)
   ((d %double-float))
   language C
   external-name |tanh|)
-
 
 (%declare-external-function (%exp %double-float)
   ((d %double-float))
   language C
   external-name |exp|)
 
-
-
 (%declare-external-function (%log %double-float)
   ((d %double-float))
   language C
   external-name |log|)
 
-
 (%declare-external-function (%log10 %double-float)
   ((d %double-float))
   language C
   external-name |log10|)
-
 
 (%declare-external-function (%pow %double-float)
   ((d1 %double-float)
@@ -177,4 +173,6 @@
   language C
   external-name |fmod|)
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module c-math
+;;;-----------------------------------------------------------------------------

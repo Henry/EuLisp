@@ -18,21 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: interface to c-strings
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: interface to the C string library
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule c-string-interface
-
   (import (%tail)
    syntax (%tail)
-   export (strcmp strdup strlen strcpy strncpy)
+   export (strcmp
+           strdup
+           strlen
+           strcpy
+           strncpy)
    c-import (<string.h>))
 
 (%declare-external-function (strcmp %signed-word-integer)
@@ -62,4 +60,7 @@
    (n %signed-word-integer))
   external-name |strncpy|
   language C)
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module c-string-interface
+;;;-----------------------------------------------------------------------------

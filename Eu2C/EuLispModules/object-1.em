@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: object-1
 ;;;  Authors: Henry G. Weller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

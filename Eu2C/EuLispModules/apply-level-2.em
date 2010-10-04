@@ -20,33 +20,29 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: The most basic dynamically loaded things for the compiler
 ;;;  Description:
-;;    This module contains all basic stuff for the compiler which is not hard-wired
-;;    but is needed for
+;;    This module contains all basic stuff for the compiler which is not
+;;    hard-wired but is needed for
 ;;    - defining classes
 ;;    - ???
-;;    This module is loaded explicitely by the compiler before any other module is
-;;    required. The following things are available for this module and the modules it
+;;    This module is loaded explicitely by the compiler before any other module
+;;    is required. The following things are available for this module and the
+;;    modules it
 ;;    uses:
 ;;    - definition of simple functions
 ;;    - constant and variable definitions
 ;;    - definition of external functions, constants and variables
 ;;    - predefined classes of TAIL and standard literals
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-
 (defmodule apply-level-2
   (import (apply-level-1
            basic-condition
-           ti-sys-signatures   ; provides signatures for predefined tail-functions
+           ti-sys-signatures
            basic-list
            basic-syntax
-           basic-number; *UK* 22.09.93
+           basic-number
            string-i
            tail-introspection
            basic-std-gf
@@ -62,13 +58,13 @@
            string-i
            tail-introspection
            basic-number
-           closure)) ; *hf* 18.08
+           closure))
 
 ;;;-----------------------------------------------------------------------------
-;;; literal expanders for pair and null
+;;; Literal expanders for pair and null
 ;;;-----------------------------------------------------------------------------
-;;; the literal expanders for pair and null cannot be defined earlier, because
-;;; basic-syntax is needed and basic symtax needs basic-list
+;; The literal expanders for pair and null cannot be defined earlier, because
+;; basic-syntax is needed and basic symtax needs basic-list
 
 (%define-literal-expansion
   null
@@ -81,23 +77,19 @@
              cdr ,cdr))
 
 (%define-literal-expansion string
-  `(%literal ,<string> characters (%literal ,%string () ,elements))
-  )
+  `(%literal ,<string> characters (%literal ,%string () ,elements)))
 
 #+(:int :big)
 (progn
   (%declare-external-function (auxplus <integer>)
-    ((s1 <integer>) (s2 <integer>))
-    ;;for annotation only
-    )
+    ((s1 <integer>) (s2 <integer>)))
 
   (%annotate-function auxplus interpreter +)
 
   (%define-literal-expansion
     integer
     `(%literal ,<int>
-               ,(auxplus (auxplus value value) 1)))
-  )
+               ,(auxplus (auxplus value value) 1))))
 
 #-(:int :big)
 (%define-literal-expansion
@@ -105,14 +97,14 @@
   `(%literal ,<int>
              ,value))
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; providing some special objects to the compiler
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function %instance-of? is-special-function instance-of?)
 (%annotate-function %class-of is-special-function class-of)
-(%annotate-function %vector-class-instance-size is-special-function vector-class-instance-size)
+
+(%annotate-function %vector-class-instance-size
+  is-special-function vector-class-instance-size)
 
 (%annotate-class <list> is-special-class <list>)
 (%annotate-class <null> is-special-class <null>)
@@ -123,9 +115,13 @@
 (%annotate-function null? is-special-function null?)
 (%annotate-function eq is-special-function eq)
 
-(%annotate-function no-applicable-method-error is-special-function no-applicable-method-error)
+(%annotate-function no-applicable-method-error
+  is-special-function no-applicable-method-error)
+
 (%annotate-function call-next-method is-special-function call-next-method)
 (%annotate-function next-method? is-special-function next-method?)
 (%annotate-function typecheck is-special-function typecheck)
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module apply-level-2
+;;;-----------------------------------------------------------------------------

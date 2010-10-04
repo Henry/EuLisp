@@ -18,9 +18,8 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EL-in-CL: double floats
-;;;  Description:
-;;;  Authors:
+;;; Title: Floating-point numbers
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule float-i
   (import (eulisp-kernel)
@@ -58,5 +57,5 @@
     ((var var1) (atom? (and <object> (not <float>)))))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module float-i
 ;;;-----------------------------------------------------------------------------

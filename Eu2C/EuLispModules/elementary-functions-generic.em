@@ -18,31 +18,31 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: the elementary functions module with defgenerics
+;;; Title: Generic elementary functions
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule elementary-functions-generic
   (import (eulisp-kernel
-           (only (<float>) float-i))
+           (only (<float>)
+                 float-i))
    syntax (eulisp-kernel)
-   export
-   (acos
-    asin
-    atan
-    atan2
-    cos
-    sin
-    tan
-    cosh
-    sinh
-    tanh
-    exp
-    log
-    log10
-    pow
-    sqrt))
+   export (acos
+           asin
+           atan
+           atan2
+           cos
+           sin
+           tan
+           cosh
+           sinh
+           tanh
+           exp
+           log
+           log10
+           pow
+           sqrt))
 
 (defgeneric acos((f <float>)))
 (defgeneric asin((f <float>)))
@@ -63,7 +63,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   acos new-signature
   (((var0 var1)
@@ -156,5 +155,6 @@
     ((var var0) (atom? <float>))
     ((var var1) (atom? <float>)))))
 
-
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module elementary-functions-generic
+;;;-----------------------------------------------------------------------------

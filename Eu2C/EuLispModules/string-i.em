@@ -30,7 +30,6 @@
            string-pointer
            make-string))
 
-
 (%define-standard-class (<string> <class>)
   <object>
   ((characters
@@ -44,5 +43,5 @@
 (defgeneric (converter <string>) (object))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module string-i
 ;;;-----------------------------------------------------------------------------

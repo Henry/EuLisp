@@ -18,9 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: eulisp pure
-;;;  Problems:
-;;    qd version, to bee cleaned up
+;;; Title: Primitive EuLisp functionality
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -36,5 +34,5 @@
            standard-generic-function))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module eulisp-kernel
 ;;;-----------------------------------------------------------------------------

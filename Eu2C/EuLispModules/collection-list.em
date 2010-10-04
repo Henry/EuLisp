@@ -19,15 +19,16 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: collection for lists
-;;;  Description: collection for lists gives the functionality described in A.2
+;;;  Description:
+;;    Collection for lists gives the functionality described in A.2
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule collection-list
   (import (tail
            apply
            eulisp-kernel
-           ;;collection-aux
            (only (eql)
                  compare)
            basic-list
@@ -37,7 +38,6 @@
            (only (<conversion-condition>
                   error)
                  condition)
-           ;;convert
            collection-generic
            collection-aux)
    syntax (tail
@@ -56,11 +56,7 @@
            memq-list
            memq-proper-list
            reverse
-           size
-           ;;converter
-           ;;    generic-print
-           ;;    generic-write
-           ))
+           size))
 
 ;;;-----------------------------------------------------------------------------
 ;;; accumulate
@@ -74,7 +70,6 @@
                        (object <object>)
                        (lst <null>))
   object)
-
 
 (defun map-accumulate (function lst res)
   (if (cons? lst)
@@ -489,8 +484,6 @@
 (defmethod reverse ((lst <null>))
   ())
 
-;;;reverse-list is in collection-aux now
-
 ;;;-----------------------------------------------------------------------------
 ;;; size
 ;;;-----------------------------------------------------------------------------
@@ -501,5 +494,5 @@
   0)
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module collection-list
 ;;;-----------------------------------------------------------------------------

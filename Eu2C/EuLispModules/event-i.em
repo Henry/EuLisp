@@ -20,32 +20,47 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: internal event handling mechanisms
 ;;;  Description:
-;;    defines the generic function wait
-;;    and the double float constant ticks-ps-fixnum
-;;;  Documentation:
-;;;  Problems:
+;;    Defines the generic function wait and the double float constant
+;;    ticks-per-second
 ;;;  Authors: Jens Bimberg
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-(defmodule event-i
-  (import
-   ((only (<class> %signed-word-integer make-swi %gt %lt %eq %plus %minus
-                   %cast <object> %void) tail)
-    (only (* / binary-mod) number)
-    (only (<integer>) integer)
-    (only (t) basic-list)
-    (only (set-timer) timer)
-    )
-   syntax ((only (when unless) syntax-0))
-   export (wait get-timer timeout-expired ticks-per-second
-                time-lt get-this-time sleep-until))
 
-; at first the constant ticks-ps-fixnum to be exported
+(defmodule event-i
+  (import ((only (<class>
+                  %signed-word-integer
+                  make-swi
+                  %gt
+                  %lt
+                  %eq
+                  %plus
+                  %minus
+                  %cast
+                  <object>
+                  %void)
+                 tail)
+           (only (*
+                  /
+                  binary-mod)
+                 number)
+           (only (<integer>)
+                 integer)
+           (only (t)
+                 basic-list)
+           (only (set-timer)
+                 timer))
+   syntax ((only (when
+                  unless)
+                 syntax-0))
+   export (wait
+           get-timer
+           timeout-expired
+           ticks-per-second
+           time-lt
+           get-this-time
+           sleep-until))
 
 (defconstant ticks-per-second 100.0)
-
-; for internal use the same as a fixnum
-
 (defconstant ticks-ps-fixnum 100)
 (defconstant usec-per-tick (/ 1000000 ticks-ps-fixnum))
 
@@ -66,15 +81,12 @@
    (tzp <object>))
   language c external-name |gettimeofday|)
 
-; the generic function wait holds the current thread until timeout did expire
-; or a condition connected with object did occure, whichever comes first
-
+;; The generic function wait holds the current thread until timeout did expire
+;; or a condition connected with object did occure, whichever comes first
 (defgeneric wait (object timeout))
 
-; a couple of functions to be used in methods of wait
-
-; get an object to describe the time after timeout ticks
-
+;; a couple of functions to be used in methods of wait
+;; get an object to describe the time after timeout ticks
 (%define-function (get-timer struct-timeval)
   ((timeout <integer>))
   (let ((sec  (make-swi (/   timeout ticks-ps-fixnum)))
@@ -89,8 +101,7 @@
           (setf-tv-sec tp (%plus (tv-sec tp) #%i1)))
     tp))
 
-; test whether the time described by a timer object did expire
-
+;; test whether the time described by a timer object did expire
 (%define-function (timeout-expired <object>)
   ((tp struct-timeval))
   (gettime local-tp (%cast <object> #%i0))
@@ -102,8 +113,7 @@
           ())
       ())))
 
-; compare two timer objects
-
+;; compare two timer objects
 (defun time-lt (timer1 timer2)
   (if (%lt (tv-sec timer1) (tv-sec timer2))
       t
@@ -113,15 +123,13 @@
           ())
       ())))
 
-; get a timer object to describe the current time
-; since current time changes this object should not be stored to long
-
+;; get a timer object to describe the current time
+;; since current time changes this object should not be stored to long
 (defun get-this-time ()
   (gettime local-tp (%cast <object> #%i0))
   local-tp)
 
-; pause until a time according to a timer object
-
+;; pause until a time according to a timer object
 (%declare-external-function (c-pause %void) ()
   language C external-name |pause|)
 
@@ -141,4 +149,7 @@
   (if (time-lt (get-this-time) timer)
       (busy-wait timer)
     ()))
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module event-i
+;;;-----------------------------------------------------------------------------

@@ -18,48 +18,39 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: aux file for table
-;;;  Description: tables provide a general key to value association mechanism
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems: !!!hash function only for symbols, strings and fpint!!!
+;;; Title: Table auxilary functions
+;;;  Description:
+;;    tables provide a general key to value association mechanism
+;;;  Problems:
+;;    hash function only for symbols, strings and fpint
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule table-aux
-  (import
-   (tail
-    apply
-    eulisp-kernel
-    (only
-     (%list-size)
-     basic-list)
-    (only
-     (symbol? <symbol>)
-     symbol)
-    (only (<string> string?)
-          string-ii)
-    (only (eql)
-          compare )
-    (only (<character> convert-char-int character?)
-          character)
-    )
-   syntax
-   (tail
-    syntax-0)
-
-   export
-   (mapc
-    hash
-    assoc
-    assq
-    $standard-table-mask
-    $standard-table-size
-    )
-   )
-
+  (import (tail
+           apply
+           eulisp-kernel
+           (only
+            (%list-size)
+            basic-list)
+           (only
+            (symbol? <symbol>)
+            symbol)
+           (only (<string> string?)
+                 string-ii)
+           (only (eql)
+                 compare )
+           (only (<character> convert-char-int character?)
+                 character))
+   syntax (tail
+           syntax-0)
+   export (mapc
+           hash
+           assoc
+           assq
+           $standard-table-mask
+           $standard-table-size))
 
 (deflocal $standard-table-size 256)
 
@@ -69,17 +60,13 @@
                       (make-swi
                        (%cast <int> $standard-table-size))) #%I1))
 
-
 (defun mapc (function . lists)
   ;;(function &rest lists)
   (if (%eq (%list-size lists) #%i1)
       (mapc-aux1 function (car lists))
     ()
     ;;(print 'more-than-one-list-for-mapc nl)
-    )
-  )
-
-
+    ))
 
 (defun mapc-aux1 (func lst)
   (if lst
@@ -88,13 +75,11 @@
         (mapc-aux1 func (cdr lst)))
     ()))
 
-
 ;;  (%define-function (%pair-size %signed-word-integer )
 ;;                    ((l <list>))
 ;;    (if (null? l)
 ;;      #%i0
 ;;      (%plus #%i1 (%pair-size (cdr l)))))
-
 
 ;;  (defun assoc (object alist . l)
 ;;    (%let* ((size-of-l %signed-word-integer (%list-size l))
@@ -114,7 +99,6 @@
 ;;          ()))
 ;;      ))
 
-
 ;;  (defun assoc (object alist . lst)
 ;;    (assoc-aux object alist (if lst (car lst) eql)))
 
@@ -124,13 +108,11 @@
 ;;                (car alist))
 ;;               (t (assoc-aux object (cdr alist) predicate))))
 
-
 (defun assoc (object alist predicate)
   (cond ((null? alist) () )
         ((predicate (car (car alist)) object)
          (car alist))
         (t (assoc object (cdr alist) predicate))))
-
 
 (defun assq (object alist)
   (cond ((null? alist) ())
@@ -138,19 +120,16 @@
          (car alist))
         (t (assq object (cdr alist)))))
 
-
 ;;  (defun assq-aux (object alist)
 ;;    (cond ((null? alist) ())
 ;;          ((eq (car (car alist)) object)
 ;;           (car alist))
 ;;          (t (assq-aux object (cdr alist)))))
 
-
 ;;  (%define-function (logand <int>)
 ;;                    ((a <int>)
 ;;                     (b <int>))
 ;;    (make-fpint (%and (make-swi a) (make-swi b))))
-
 
 ;;------------------------------------------------------------
 ;;;hash takes an object and generates an index (for the vector)
@@ -165,7 +144,6 @@
 ;;
 ;;  (defmethod hash ((number <number>))
 ;;    (logand number $standard-table-mask))
-
 
 ;;  (defun hash (number) ;only for numbers
 ;;    (print 'hash-number nl)
@@ -191,8 +169,6 @@
 ;;     )
 ;;    )
 
-
-
 ;;;hash function only for basic data types!!!
 
 (%define-function (hash %unsigned-word-integer)
@@ -200,38 +176,31 @@
   (%and (%lshiftr (%cast %unsigned-word-integer obj) #%I2)
         $standard-table-mask))
 
-
 ;; !!!more defmethods for the other objects!!
 ;;
 ;;;;------------------------------------------------------------
-
-
 
 ;;hash-function is the working horse
 ;;;;it takes a string and gives a number, normalized with
 ;;;;the $standard-table-mask (to cut off the bits greater than
 ;;;;the max length of the vector)
 
-
 (%define-function (hash-for-symbols %unsigned-word-integer)
   ((sym <symbol>))
   (%let ((str %string (%select sym <symbol> name)))
-        (dotimes-with-sum #%I0 str #%I0)
-        ))
+        (dotimes-with-sum #%I0 str #%I0)))
 
 (%define-function (hash-for-strings %unsigned-word-integer)
   ((strng <string>))
   (%let ((str %string (%select strng <string> characters)))
-        (dotimes-with-sum #%I0 str #%I0)
-        ))
+        (dotimes-with-sum #%I0 str #%I0)))
 
 (%define-function (hash-for-chars %unsigned-word-integer)
   ((char <character>))
   (%let ((sum %unsigned-word-integer
               (%cast %unsigned-word-integer
                      (make-swi (convert-char-int char)))))
-        sum
-        ))
+        sum))
 
 (%define-function (dotimes-with-sum %unsigned-word-integer)
   ((index %unsigned-word-integer)
@@ -245,13 +214,11 @@
                       (%plus
                        (%cast
                         %unsigned-word-integer
-                        (%extract str index)) sum))
-    ))
+                        (%extract str index)) sum))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   assq new-signature
   (((var0 var1 var2)
@@ -271,5 +238,6 @@
     ((var var2) (atom? <list>))
     ((var var3) (atom? <object>)))))
 
-);;;eof
-
+;;;-----------------------------------------------------------------------------
+)  ;; End of module table-aux
+;;;-----------------------------------------------------------------------------

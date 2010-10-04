@@ -18,14 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
-;;;  Documentation:
+;;; Title: pair
 ;;;  Notes:
-;;    The functions pair-size, copy-alist, copy-list and copy-tree are tested in an Common Lisp
-;;    environment.
-;;;  Requires:
-;;;  Problems:
+;;    The functions pair-size, copy-alist, copy-list and copy-tree are tested in
+;;    an Common Lisp environment.
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -104,12 +100,11 @@
           (copy-tree (cdr tree)))))
 
 ;;generic-print
-generic-write
+;;generic-write
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   atom? new-signature
   (((var0 var1)

@@ -19,18 +19,16 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: tables provide a general key to value association mechanism
-;;;  Description: tables provide a general key to value association mechanism
-;;;  Documentation:
-;;;  Notes: write more methods for key objects (function hash)
-;;;  Requires:
-;;;  Problems:
+;;;  Description:
+;;    tables provide a general key to value association mechanism
+;;;  Notes:
+;;    write more methods for key objects (function hash)
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule table
   (import (tail
-           ;; (only (print) print)
            (only (eql)
                  compare)
            basic-list
@@ -53,11 +51,7 @@
            clear-table
            hash
            assoc
-           assq
-           ;;    generic-print
-           ;;    generic-write
-           ))
-
+           assq))
 
 (defgeneric (converter <table>) (object))
 
@@ -78,8 +72,8 @@
            default
            #%I256
            ;;warum geht das nicht???
-           ;;                                   (%cast %unsigned-word-integer
-           ;;                                          (make-swi $standard-table-size))
+           ;;        (%cast %unsigned-word-integer
+           ;;             (make-swi $standard-table-size))
            ))
   representation pointer-to-vector
   allocation single-card
@@ -123,8 +117,6 @@
                hash-function)
   predicate table?)
 
-
-
 ;;  (defun make-table ini-opts
 ;;    ;comparator fill-value hash-function
 ;;    (%let ((rest-list-size %signed-word-integer
@@ -149,8 +141,6 @@
 ;;                               fill-value
 ;;                               hash-fct)))
 
-
-
 ;;  (defun table-ref (table key)
 ;;    (%let* ((hash-list <list> (table-vector-ref
 ;;                               (?table-vector table)
@@ -167,7 +157,6 @@
 ;;          )
 ;;      ))
 
-
 (defun table-ref (table key)
   (let* ((hash-list (table-vector-ref
                      (?table-vector table)
@@ -182,7 +171,6 @@
       (?fill-value table)
       )
     ))
-
 
 (defun setter-table-ref (table key value)
   (%let* ((table-vector <table-vector> (?table-vector table))
@@ -206,7 +194,6 @@
                                  (cons (cons key value) hash-list)))
          value
          ))
-
 
 (defun table-delete (table key)
   (%let* ((hash-index %unsigned-word-integer
@@ -260,10 +247,7 @@
                     (table-loop table
                                 (cdr (%cast <cons> hash-list))
                                 key hash-list cmp)))))
-         table
-         )
-  )
-
+         table))
 
 (defun table-loop (table hash-list key pointer fcn)
   (cond
@@ -274,7 +258,6 @@
     ((null? (cdr hash-list))
      table)
     (t (table-loop table (cdr hash-list) key (cdr pointer) fcn))))
-
 
 (defun table-loop-eq (table hash-list key pointer)
   (cond
@@ -287,11 +270,8 @@
      table)
     (t (table-loop-eq table (cdr hash-list) key (cdr pointer)))))
 
-
-
 ;;;map-table-index is only to test the hash table
 ;;;;it prints the whole alists of the vector elements
-
 
 (%define-function (dotimes-with-elt %void)
   ((index %unsigned-word-integer)
@@ -315,7 +295,6 @@
                            (make-swi $standard-table-size))
                     table))
 
-
 (%define-function (dotimes-with-mapc %void)
   ((index %unsigned-word-integer)
    (upper-limit %unsigned-word-integer)
@@ -330,7 +309,6 @@
       (dotimes-with-mapc (%plus #%I1 index) upper-limit table fcn))
     ))
 
-
 (defun map-table (fcn table)
   (dotimes-with-mapc #%I0
                      (%cast %unsigned-word-integer
@@ -338,7 +316,6 @@
                      table
                      fcn)
   table)
-
 
 (%define-function (dotimes-with-setf %void)
   ((index %unsigned-word-integer)
@@ -352,7 +329,6 @@
       (dotimes-with-setf (%plus #%I1 index) upper-limit table))
     ))
 
-
 (defun clear-table (table)
   (dotimes-with-setf #%I0
                      (%cast %unsigned-word-integer
@@ -363,7 +339,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   clear-table new-signature
   (((var0 var1)
@@ -399,5 +374,6 @@
     ((var var2) (atom? <object>))
     ((var var3) (var var0)))))
 
-);;; eof
-
+;;;-----------------------------------------------------------------------------
+)  ;; End of module table
+;;;-----------------------------------------------------------------------------

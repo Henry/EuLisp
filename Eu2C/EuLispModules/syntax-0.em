@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: Level-0 syntax
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -43,16 +42,14 @@
       (if (eq (car (car clauses)) 't) `(progn ,@(cdr (car clauses)))
         `(if ,(car (car clauses))
              (progn ,@(cdr (car clauses)))
-           (cond ,@(cdr clauses)))
-        ))))
+           (cond ,@(cdr clauses)))))))
 
 (defmacro and forms
   (if (null? forms) 't
     (if (null? (cdr forms)) (car forms)
       `(if ,(car forms)
            (and ,@(cdr forms))
-         ())
-      )))
+         ()))))
 
 (defmacro when (cond . forms)
   (if (null? forms) ()

@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: Level-0 stream module
 ;;;  Authors: Rainer Rosenmuller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

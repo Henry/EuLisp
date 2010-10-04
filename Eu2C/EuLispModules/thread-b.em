@@ -20,13 +20,9 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: interface to the c-part of threads
 ;;;  Description:
-;;    interface to the lower part of threads (implemented in c)
-;;    it is desired never to change this interface, since this migth require
-;;    changes in thread, thread-i, lock and event
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;    interface to the lower part of threads (implemented in c) it is desired
+;;    never to change this interface, since this migth require changes in
+;;    thread, thread-i, lock and event
 ;;;  Authors: Jens Bimberg
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -34,8 +30,7 @@
   (import ((only (%void <object> %function %signed-word-integer) tail))
    c-import ("thread.h")
    export (thread-schedule hold-threads cont-threads
-                           m-thread-init m-thread-create m-thread-yield)
-   )
+                           m-thread-init m-thread-create m-thread-yield))
 
 (%declare-external-variable thread-schedule %signed-word-integer
   language c
@@ -59,4 +54,6 @@
   ((m-thread <object>))
   language c external-name |m_thread_yield|)
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module thread-b
+;;;-----------------------------------------------------------------------------

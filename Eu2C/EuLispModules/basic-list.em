@@ -28,6 +28,7 @@
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule basic-list
   (import (%tail
            ti-sys-signatures;; this allows declaration of signatures
@@ -67,7 +68,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; interpreter annotations
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function car interpreter car)
 (%annotate-function cdr interpreter cdr)
 (%annotate-function cons interpreter cons)
@@ -78,7 +78,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function
   cons? new-signature
   (((var0 var1)

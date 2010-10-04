@@ -19,11 +19,10 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: double float module
-;;;  Problems:
-;;    converter
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule double-float
   (import (eulisp-kernel
            double-float-i
@@ -108,7 +107,6 @@
 (defmethod binary* ((f <int>)
                     (d <double-float>))
   (make-dble (%mult (%citod(make-swi f))(dble d))))
-
 
 (defmethod binary* ((d <double-float>)
                     (f <int>))
@@ -283,7 +281,7 @@
 ;;; methods for float
 ;;;-----------------------------------------------------------------------------
 (defmethod ceiling ((d <double-float>))
-  (make-dble (%ceil(dble d))))
+  (make-dble (%ceil (dble d))))
 
 (defmethod floor ((d <double-float>))
   (make-dble (%floor (dble d))))
@@ -311,8 +309,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; converter
 ;;;-----------------------------------------------------------------------------
-(defmethod (converter <int>)
-  ((object <double-float>))
+(defmethod (converter <int>) ((object <double-float>))
   (make-fpint(%cdtoi (dble object))))
 
 ;;;-----------------------------------------------------------------------------

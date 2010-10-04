@@ -19,13 +19,11 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: tables provide a general key to value association mechanism
-;;;  Description: collection for tables gives the functionality described in A.2
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
+;;;  Description:
+;;    collection for tables gives the functionality described in A.2
 ;;;  Problems:
-;;    accumulate accumulate1 any? concatenate do fill map are ***not implemented***
-;;    ???reverse-table should copy the table???
+;;    accumulate accumulate1 any? concatenate do fill map are ***not
+;;    implemented*** ???reverse-table should copy the table???
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -69,25 +67,14 @@
            accumulate1
            any?
            do
-           ;;any?-table
            concatenate
-           ;;do-table
            element
            empty?
            fill
            map
-           ;;map-tab
-           ;; (map-table is already in table)
            member
-           ;;reverse-table
            reverse
-           size
-           ;;converter
-           ;;    generic-print
-           ;;    generic-write
-           ))
-
-;;;(deflocal standard-size-of-hash-table 4096) ;import from table-aux
+           size))
 
 (defun contains-seqs (lst)
   (if lst
@@ -387,6 +374,8 @@
     ()))
 
 ;;;-----------------------------------------------------------------------------
+;;; map
+;;;-----------------------------------------------------------------------------
 (defmethod map ((function <function>)
                 (table <table>) . more-collections)
   (%let ((rest-list-size %signed-word-integer
@@ -399,7 +388,8 @@
                                    (%cast %unsigned-word-integer
                                           (make-swi $standard-table-size))))
               ;;            ((%eq rest-list-size #%i1)
-              ;;             (map-with-two-args function table (car more-collections) ()))
+              ;;             (map-with-two-args function table
+              ;;                                (car more-collections) ()))
               (t (map-collection function table more-collections)))
         ))
 

@@ -18,11 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: semaphores as part of the thread implementation
-;;;  Description:
+;;; Title: Semaphores as part of the thread implementation
 ;;;  Authors: Jens Bimberg
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule lock
   (import ((only (<T-LST>
                   make-T-LST
@@ -86,4 +86,7 @@
       (thread-yield thread (First The-Sequential-Set))))
   (cont-threads)
   l)
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module lock
+;;;-----------------------------------------------------------------------------

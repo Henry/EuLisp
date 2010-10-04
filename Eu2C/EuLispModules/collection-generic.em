@@ -18,53 +18,37 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: collection consist of list, string, vector, table,
-;;;  Description: definitions of defgeneric for collections
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: Generic functions of collection
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collection-generic
-
-  (import
-   (tail
-    standard-generic-function)
-
-   syntax
-   (tail
-    syntax-0)
-
-   export
-   (accumulate
-    accumulate1
-    any?
-    collection?
-    concatenate
-    do
-    element
-    ;;element1
-    empty?
-    fill
-    map
-    member
-    reverse
-    sequence?
-    size
-
-    ;;now the aux methods
-    construct-collection-info
-    construct-result
-    take-next-elt
-    any?-with-two-args
-    concat-with-two-args
-    do-with-two-args
-    map-with-two-args
-    )
-   )
+  (import (tail
+           standard-generic-function)
+   syntax (tail
+           syntax-0)
+   export (accumulate
+           accumulate1
+           any?
+           collection?
+           concatenate
+           do
+           element
+           empty?
+           fill
+           map
+           member
+           reverse
+           sequence?
+           size
+           construct-collection-info
+           construct-result
+           take-next-elt
+           any?-with-two-args
+           concat-with-two-args
+           do-with-two-args
+           map-with-two-args))
 
 (defgeneric accumulate (function object collection))
 
@@ -80,9 +64,10 @@
 
 (defgeneric element (collection key))
 
-(defgeneric (setter element) ((collection <object>)
-                              (key <object>)
-                              (value <object>)))
+(defgeneric (setter element)
+  ((collection <object>)
+   (key <object>)
+   (value <object>)))
 
 (defgeneric empty? (collection))
 
@@ -98,8 +83,9 @@
 
 (defgeneric size (collection))
 
-;;;aux methods
-
+;;;-----------------------------------------------------------------------------
+;;; Auxillary functions
+;;;-----------------------------------------------------------------------------
 (defgeneric construct-collection-info (collection))
 
 (defgeneric construct-result (collection result))
@@ -114,4 +100,6 @@
 
 (defgeneric map-with-two-args (function collection1 collection2 result))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module collection-generic
+;;;-----------------------------------------------------------------------------

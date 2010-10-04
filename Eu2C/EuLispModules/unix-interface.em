@@ -18,21 +18,14 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: 
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
-;;;  Authors: 
+;;; Title: Unix interface
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule unix-interface
   (import (tail)
    syntax (tail)
-   export (command-line-arguments)
-   )
+   export (command-line-arguments))
 
 (%define-tail-class (<vector-of-strings> <tail-class>)
   ((element type %string reader string-n)
@@ -59,4 +52,6 @@
                                  (%cast %unsigned-word-integer n)))
           (make-argument-list (%plus n #%i1) li))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module unix-interface
+;;;-----------------------------------------------------------------------------

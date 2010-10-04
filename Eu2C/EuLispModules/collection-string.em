@@ -19,11 +19,10 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: tables provide a general key to value association mechanism
-;;;  Description: collection for strings gives the functionality described in A.2
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems: setter-string-ref has to store into string.am
+;;;  Description:
+;;    Collection for strings gives the functionality described in A.2
+;;;  Problems:
+;;    setter-string-ref has to store into string.am
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -32,7 +31,6 @@
   (import (tail
            apply
            eulisp-kernel
-           ;;collection-aux
            (only (<string>
                   string-pointer
                   make-string
@@ -47,7 +45,6 @@
            (only (<conversion-condition>
                   error)
                  condition)
-           ;;collection-generic
            (only (strdup
                   strlen)
                  c-string-interface)
@@ -72,11 +69,7 @@
            map
            member
            reverse
-           size
-           ;;converter
-           ;;    generic-print
-           ;;    generic-write
-           ))
+           size))
 
 ;;;-----------------------------------------------------------------------------
 ;;; accumulate
@@ -301,7 +294,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; do
 ;;;-----------------------------------------------------------------------------
-
 ;;  (defmethod do ((function <function>)
 ;;                 (str <string>) . more-collections)
 ;;    (do-string function str more-collections))
@@ -468,8 +460,9 @@
            (fill-string-aux str-pointer object
                             (%plus start #%I1) end))))
 
-;;-----------------------------------------------------------------------------
-
+;;;-----------------------------------------------------------------------------
+;;; map
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod map ((function <function>)
 ;;                  (str <string>) . more-collections)
 ;;    (map-string function str more-collections))
@@ -645,5 +638,5 @@
   (make-fpint (strlen (string-pointer str))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module collection-string
 ;;;-----------------------------------------------------------------------------

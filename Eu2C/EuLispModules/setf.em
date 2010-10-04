@@ -18,31 +18,22 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Tests setter
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: setf using setter
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule setf
-  (import
-   (apply-level-2
-    (only (setter) function))
-
-   syntax (apply-level-2)
-
-   ;;export-syntax
-   ;;(setf)
-   )
+  (import (apply-level-2
+           (only (setter)
+                 function))
+   syntax (apply-level-2))
 
 (defmacro setf (access new-value)
   `((,setter ,(car access)) ,(car (cdr access))
     ,@(cdr (cdr access))
     ,new-value))
 
+;;;-----------------------------------------------------------------------------
 )  ;; End of module setf
-
+;;;-----------------------------------------------------------------------------

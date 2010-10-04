@@ -18,17 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: the elementary functions module with defgenerics
+;;; Title: elementary functions and constants
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule elementary-functions
   (import (tail
-           (only (%atan) c-math)
-           (only (make-dble) double-float-i))
+           (only (%atan)
+                 c-math)
+           (only (make-dble)
+                 double-float-i))
    syntax (tail)
    expose (elementary-functions-generic)
    export (pi))
+
 (defconstant pi (make-dble (%mult #%d4.0 (%atan #%d1.0))))
-)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module elementary-functions
+;;;-----------------------------------------------------------------------------

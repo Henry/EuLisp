@@ -18,21 +18,14 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: Functions
 ;;;  Authors: Horst Friedrich
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule function
-
   (import (apply-level-1
-           basic-list ;
-           function-i
-           )
+           basic-list
+           function-i)
    syntax (apply-level-1
            basic-syntax)
    export (<function>
@@ -42,13 +35,10 @@
            function-arg-descr
            function-name
            apply
-           ;;<function-class>
            setter
-           %apply3       ;; for standard-generic-function
-           error-no-setter-defined-handler ;variable
-           error-no-setter-defined      ;function, for standard-generic-function
-           )
-   )
+           %apply3
+           error-no-setter-defined-handler
+           error-no-setter-defined))
 
 ;;;-----------------------------------------------------------------------------
 ;;; not defined functions
@@ -78,7 +68,7 @@
   )
 
 ;;;-----------------------------------------------------------------------------
-;;; needed at EuLisp level 1
+;;; needed for EuLisp level-1
 ;;;-----------------------------------------------------------------------------
 ;; (%define-metaclass (<function-class> <class>) ;; <class> ist die Metaklasse
 ;;                    <object>    ;; <object> ist die
@@ -96,9 +86,8 @@
              setter ,(if setter setter error-no-setter-defined)))
 
 ;;;-----------------------------------------------------------------------------
-;;; stuff for setter
+;;; setter
 ;;;-----------------------------------------------------------------------------
-
 (%define-variable error-no-setter-defined-handler %function
   (%function error-no-setter-defined-default-handler))
 
@@ -127,8 +116,7 @@
             (if (%eq arg-descr #%i0)
                 (wrong-argument-number foo arg-descr
                                        (%list-size args) args)
-              (apply>=1 foo arg-descr (car args) (cdr args))))))
-  )
+              (apply>=1 foo arg-descr (car args) (cdr args)))))))
 
 
 (%define-function (%apply2 <object>)
@@ -144,8 +132,7 @@
                 (if (%lt arg-descr #%i2)
                     (apply>-2 foo arg-descr (cons arg1 args))
                   (apply>=2 foo arg-descr arg1 (car args) (cdr args)))
-              (apply>=2 foo arg-descr arg1 (car args) (cdr args))))))
-  )
+              (apply>=2 foo arg-descr arg1 (car args) (cdr args)))))))
 
 (%define-function (%apply3 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -155,14 +142,14 @@
     (%let ((arg-descr %signed-word-integer (function-arg-descr foo)))
           (if (%eq arg-descr #%i-3)
               (let ((cl-vars (function-closure-vars foo)))
-                (if cl-vars (%funcall (function-address foo) arg1 arg2 args cl-vars)
+                (if cl-vars (%funcall (function-address foo)
+                                      arg1 arg2 args cl-vars)
                   (%funcall (function-address foo) arg1 arg2 args)))
             (if (%gt arg-descr #%i-3)
                 (if (%lt arg-descr #%i3)
                     (apply>-3 foo arg-descr arg1 (cons arg2 args))
                   (apply>=3 foo arg-descr arg1 arg2 (car args) (cdr args)))
-              (apply>=3 foo arg-descr arg1 arg2 (car args) (cdr args))))))
-  )
+              (apply>=3 foo arg-descr arg1 arg2 (car args) (cdr args)))))))
 
 (%define-function (%apply4 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -172,7 +159,8 @@
     (%let ((arg-descr %signed-word-integer (function-arg-descr foo)))
           (if (%eq arg-descr #%i-4)
               (let ((cl-vars (function-closure-vars foo)))
-                (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 args cl-vars)
+                (if cl-vars (%funcall (function-address foo)
+                                      arg1 arg2 arg3 args cl-vars)
                   (%funcall (function-address foo) arg1 arg2 arg3 args)))
             (if (%gt arg-descr #%i-4)
                 (if (%lt arg-descr #%i4)
@@ -180,8 +168,7 @@
                   (apply>=4 foo arg-descr arg1 arg2 arg3
                             (car args) (cdr args)))
               (apply>=4 foo arg-descr arg1 arg2 arg3
-                        (car args) (cdr args))))))
-  )
+                        (car args) (cdr args)))))))
 
 (%define-function (%apply5 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -201,8 +188,7 @@
                   (apply>=5 foo arg-descr arg1 arg2 arg3 arg4
                             (car args) (cdr args)))
               (apply>=5 foo arg-descr arg1 arg2 arg3 arg4
-                        (car args) (cdr args))))))
-  )
+                        (car args) (cdr args)))))))
 
 (%define-function (%apply6 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -224,8 +210,7 @@
                   (apply>=6 foo arg-descr arg1 arg2 arg3 arg4 arg5
                             (car args) (cdr args)))
               (apply>=6 foo arg-descr arg1 arg2 arg3 arg4 arg5
-                        (car args) (cdr args))))))
-  )
+                        (car args) (cdr args)))))))
 
 (%define-function (%apply7 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -237,7 +222,8 @@
           (if (%eq arg-descr #%i-7)
               (let ((cl-vars (function-closure-vars foo)))
                 (if cl-vars (%funcall (function-address foo)
-                                      arg1 arg2 arg3 arg4 arg5 arg6 args cl-vars)
+                                      arg1 arg2 arg3 arg4 arg5 arg6 args
+                                      cl-vars)
                   (%funcall (function-address foo)
                             arg1 arg2 arg3 arg4 arg5 arg6 args)))
             (if (%gt arg-descr #%i-7)
@@ -247,8 +233,7 @@
                   (apply>=7 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6
                             (car args) (cdr args)))
               (apply>=7 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6
-                        (car args) (cdr args))))))
-  )
+                        (car args) (cdr args)))))))
 
 (%define-function (%apply8 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -260,7 +245,8 @@
           (if (%eq arg-descr #%i-8)
               (let ((cl-vars (function-closure-vars foo)))
                 (if cl-vars (%funcall (function-address foo)
-                                      arg1 arg2 arg3 arg4 arg5 arg6 arg7 args cl-vars)
+                                      arg1 arg2 arg3 arg4 arg5 arg6
+                                      arg7 args cl-vars)
                   (%funcall (function-address foo)
                             arg1 arg2 arg3 arg4 arg5 arg6 arg7 args)))
             (if (%gt arg-descr #%i-8)
@@ -270,8 +256,7 @@
                   (apply>=8 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 arg7
                             (car args) (cdr args)))
               (apply>=8 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 arg7
-                        (car args) (cdr args))))))
-  )
+                        (car args) (cdr args)))))))
 
 (%define-function (apply>=1 <object>)
   ((foo <function>)
@@ -288,8 +273,7 @@
               (if cl-vars (%funcall (function-address foo) arg1 cl-vars)
                 (%funcall (function-address foo) arg1)))
           (wrong-argument-number foo arg-descr #%i1 (list arg1)))
-      (apply>=2 foo arg-descr arg1 (car args) (cdr args))))
-  )
+      (apply>=2 foo arg-descr arg1 (car args) (cdr args)))))
 
 (%define-function (apply>=2 <object>)
   ((foo <function>)
@@ -306,8 +290,7 @@
               (if cl-vars (%funcall (function-address foo) arg1 arg2 cl-vars)
                 (%funcall (function-address foo) arg1 arg2)))
           (wrong-argument-number foo arg-descr #%i2 (list arg1 arg2)))
-      (apply>=3 foo arg-descr arg1 arg2 (car args) (cdr args))))
-  )
+      (apply>=3 foo arg-descr arg1 arg2 (car args) (cdr args)))))
 
 (%define-function (apply>=3 <object>)
   ((foo <function>)
@@ -317,17 +300,18 @@
 
   (if (%eq arg-descr #%i-4)
       (let ((cl-vars (function-closure-vars foo)))
-        (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 args cl-vars)
+        (if cl-vars (%funcall (function-address foo)
+                              arg1 arg2 arg3 args cl-vars)
           (%funcall (function-address foo) arg1 arg2 arg3 args)))
     (if (null? args)
         (if (%eq arg-descr #%i3)
             (let ((cl-vars (function-closure-vars foo)))
-              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 cl-vars)
+              (if cl-vars (%funcall (function-address foo)
+                                    arg1 arg2 arg3 cl-vars)
                 (%funcall (function-address foo) arg1 arg2 arg3)))
           (wrong-argument-number foo arg-descr #%i3
                                  (list arg1 arg2 arg3)))
-      (apply>=4 foo arg-descr arg1 arg2 arg3 (car args) (cdr args))))
-  )
+      (apply>=4 foo arg-descr arg1 arg2 arg3 (car args) (cdr args)))))
 
 (%define-function (apply>=4 <object>)
   ((foo <function>)
@@ -344,12 +328,12 @@
     (if (null? args)
         (if (%eq arg-descr #%i4)
             (let ((cl-vars (function-closure-vars foo)))
-              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 arg4 cl-vars)
+              (if cl-vars (%funcall (function-address foo)
+                                    arg1 arg2 arg3 arg4 cl-vars)
                 (%funcall (function-address foo) arg1 arg2 arg3 arg4)))
           (wrong-argument-number foo arg-descr #%i4
                                  (list arg1 arg2 arg3 arg4)))
-      (apply>=5 foo arg-descr arg1 arg2 arg3 arg4 (car args) (cdr args))))
-  )
+      (apply>=5 foo arg-descr arg1 arg2 arg3 arg4 (car args) (cdr args)))))
 
 (%define-function (apply>=5 <object>)
   ((foo <function>)
@@ -373,8 +357,7 @@
           (wrong-argument-number foo arg-descr #%i5
                                  (list arg1 arg2 arg3 arg4 arg5)))
       (apply>=6 foo arg-descr
-                arg1 arg2 arg3 arg4 arg5 (car args) (cdr args))))
-  )
+                arg1 arg2 arg3 arg4 arg5 (car args) (cdr args)))))
 
 (%define-function (apply>=6 <object>)
   ((foo <function>)
@@ -399,8 +382,7 @@
           (wrong-argument-number foo arg-descr #%i6
                                  (list arg1 arg2 arg3 arg4 arg5 arg6)))
       (apply>=7 foo arg-descr
-                arg1 arg2 arg3 arg4 arg5 arg6 (car args) (cdr args))))
-  )
+                arg1 arg2 arg3 arg4 arg5 arg6 (car args) (cdr args)))))
 
 (%define-function (apply>=7 <object>)
   ((foo <function>)
@@ -426,8 +408,7 @@
                                  (list arg1 arg2 arg3 arg4 arg5 arg6 arg7)))
       (apply>=8 foo arg-descr
                 arg1 arg2 arg3 arg4 arg5 arg6 arg7
-                (car args) (cdr args))))
-  )
+                (car args) (cdr args)))))
 
 (%define-function (apply>=8 <object>)
   ((foo <function>)
@@ -439,14 +420,16 @@
   (if (%eq arg-descr #%i-8)
       (let ((cl-vars (function-closure-vars foo)))
         (if cl-vars (%funcall (function-address foo)
-                              arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 args cl-vars)
+                              arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8
+                              args cl-vars)
           (%funcall (function-address foo)
                     arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 args)))
     (if (null? args)
         (if (%eq arg-descr #%i8)
             (let ((cl-vars (function-closure-vars foo)))
               (if cl-vars (%funcall (function-address foo)
-                                    arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 cl-vars)
+                                    arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8
+                                    cl-vars)
                 (%funcall (function-address foo)
                           arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8)))
           (wrong-argument-number
@@ -464,8 +447,7 @@
                                                           arg7
                                                           (cons
                                                            arg8
-                                                           args)))))))))))
-  )
+                                                           args))))))))))))
 
 
 (%define-function (apply>-2 <object>)
@@ -477,8 +459,7 @@
       (let ((cl-vars (function-closure-vars foo)))
         (if cl-vars (%funcall (function-address foo) args cl-vars)
           (%funcall (function-address foo) args)))
-    (wrong-argument-number foo arg-descr (%list-size args) args))
-  )
+    (wrong-argument-number foo arg-descr (%list-size args) args)))
 
 (%define-function (apply>-3 <object>)
   ((foo <function>)
@@ -489,8 +470,7 @@
       (let ((cl-vars (function-closure-vars foo)))
         (if cl-vars (%funcall (function-address foo) arg1 args cl-vars)
           (%funcall (function-address foo) arg1 args)))
-    (apply>-2 foo arg-descr (cons arg1 args)))
-  )
+    (apply>-2 foo arg-descr (cons arg1 args))))
 
 (%define-function (apply>-4 <object>)
   ((foo <function>)
@@ -501,8 +481,7 @@
       (let ((cl-vars (function-closure-vars foo)))
         (if cl-vars (%funcall (function-address foo) arg1 arg2 args cl-vars)
           (%funcall (function-address foo) arg1 arg2 args)))
-    (apply>-3 foo arg-descr arg1 (cons arg2 args)))
-  )
+    (apply>-3 foo arg-descr arg1 (cons arg2 args))))
 
 (%define-function (apply>-5 <object>)
   ((foo <function>)
@@ -512,10 +491,10 @@
 
   (if (%eq arg-descr #%i-4)
       (let ((cl-vars (function-closure-vars foo)))
-        (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 args cl-vars)
+        (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 args
+                              cl-vars)
           (%funcall (function-address foo) arg1 arg2 arg3 args)))
-    (apply>-4 foo arg-descr arg1 arg2 (cons arg3 args)))
-  )
+    (apply>-4 foo arg-descr arg1 arg2 (cons arg3 args))))
 
 (%define-function (apply>-6 <object>)
   ((foo <function>)
@@ -529,8 +508,7 @@
                               arg1 arg2 arg3 arg4 args cl-vars)
           (%funcall (function-address foo)
                     arg1 arg2 arg3 arg4 args)))
-    (apply>-5 foo arg-descr arg1 arg2 arg3 (cons arg4 args)))
-  )
+    (apply>-5 foo arg-descr arg1 arg2 arg3 (cons arg4 args))))
 
 (%define-function (apply>-7 <object>)
   ((foo <function>)
@@ -544,8 +522,7 @@
                               arg1 arg2 arg3 arg4 arg5 args cl-vars)
           (%funcall (function-address foo)
                     arg1 arg2 arg3 arg4 arg5 args)))
-    (apply>-6 foo arg-descr arg1 arg2 arg3 arg4 (cons arg5 args)))
-  )
+    (apply>-6 foo arg-descr arg1 arg2 arg3 arg4 (cons arg5 args))))
 
 (%define-function (apply>-8 <object>)
   ((foo <function>)
@@ -560,8 +537,7 @@
                               arg1 arg2 arg3 arg4 arg5 arg6 args cl-vars)
           (%funcall (function-address foo)
                     arg1 arg2 arg3 arg4 arg5 arg6 args)))
-    (apply>-7 foo arg-descr arg1 arg2 arg3 arg4 arg5 (cons arg6 args)))
-  )
+    (apply>-7 foo arg-descr arg1 arg2 arg3 arg4 arg5 (cons arg6 args))))
 
 (%define-function (apply>-9 <object>)
   ((foo <function>)
@@ -576,8 +552,7 @@
                               arg1 arg2 arg3 arg4 arg5 arg6 arg7 args cl-vars)
           (%funcall (function-address foo)
                     arg1 arg2 arg3 arg4 arg5 arg6 arg7 args)))
-    (apply>-8 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 (cons arg7 args)))
-  )
+    (apply>-8 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 (cons arg7 args))))
 
 (%define-function (apply>-10 <object>)
   ((foo <function>)
@@ -589,11 +564,12 @@
   (if (%eq arg-descr #%i-9)
       (let ((cl-vars (function-closure-vars foo)))
         (if cl-vars (%funcall (function-address foo)
-                              arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 args cl-vars)
+                              arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 args
+                              cl-vars)
           (%funcall (function-address foo)
                     arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 args)))
-    (apply>-9 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 arg7 (cons arg8 args)))
-  )
+    (apply>-9 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 arg7
+              (cons arg8 args))))
 
 ;;---------------------------------------------------------------
 
@@ -619,8 +595,7 @@
               (let ((cl-vars (function-closure-vars foo)))
                 (if cl-vars (%funcall (function-address foo) () cl-vars)
                   (%funcall (function-address foo) ())))
-            (wrong-argument-number foo arg-descr #%i0 ()))))
-  )
+            (wrong-argument-number foo arg-descr #%i0 ())))))
 
 (%define-function (%funcall1 <object>)
   ((foo <function>) (arg1 <object>))
@@ -631,8 +606,7 @@
             (let ((cl-vars (function-closure-vars foo)))
               (if cl-vars (%funcall (function-address foo) arg1 cl-vars)
                 (%funcall (function-address foo) arg1)))
-          (apply>-3 foo arg-descr arg1 ())))
-  )
+          (apply>-3 foo arg-descr arg1 ()))))
 
 (%define-function (%funcall2 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>))
@@ -643,8 +617,7 @@
             (let ((cl-vars (function-closure-vars foo)))
               (if cl-vars (%funcall (function-address foo) arg1 arg2 cl-vars)
                 (%funcall (function-address foo) arg1 arg2)))
-          (apply>-4 foo arg-descr arg1 arg2 ())))
-  )
+          (apply>-4 foo arg-descr arg1 arg2 ()))))
 
 (%define-function (%funcall3 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -654,10 +627,10 @@
                     (function-arg-descr foo)))
         (if (%eq arg-descr #%i3)
             (let ((cl-vars (function-closure-vars foo)))
-              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 cl-vars)
+              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3
+                                    cl-vars)
                 (%funcall (function-address foo) arg1 arg2 arg3)))
-          (apply>-5 foo arg-descr arg1 arg2 arg3 ())))
-  )
+          (apply>-5 foo arg-descr arg1 arg2 arg3 ()))))
 
 (%define-function (%funcall4 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -667,10 +640,10 @@
                     (function-arg-descr foo)))
         (if (%eq arg-descr #%i4)
             (let ((cl-vars (function-closure-vars foo)))
-              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 arg4 cl-vars)
+              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 arg4
+                                    cl-vars)
                 (%funcall (function-address foo) arg1 arg2 arg3 arg4)))
-          (apply>-6 foo arg-descr arg1 arg2 arg3 arg4 ())))
-  )
+          (apply>-6 foo arg-descr arg1 arg2 arg3 arg4 ()))))
 
 (%define-function (%funcall5 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -680,10 +653,10 @@
                     (function-arg-descr foo)))
         (if (%eq arg-descr #%i5)
             (let ((cl-vars (function-closure-vars foo)))
-              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 arg4 arg5 cl-vars)
+              (if cl-vars (%funcall (function-address foo) arg1 arg2 arg3 arg4
+                                    arg5 cl-vars)
                 (%funcall (function-address foo) arg1 arg2 arg3 arg4 arg5)))
-          (apply>-7 foo arg-descr arg1 arg2 arg3 arg4 arg5 ())))
-  )
+          (apply>-7 foo arg-descr arg1 arg2 arg3 arg4 arg5 ()))))
 
 (%define-function (%funcall6 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -698,8 +671,7 @@
                                     arg1 arg2 arg3 arg4 arg5 arg6 cl-vars)
                 (%funcall (function-address foo)
                           arg1 arg2 arg3 arg4 arg5 arg6)))
-          (apply>-8 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 ())))
-  )
+          (apply>-8 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 ()))))
 
 (%define-function (%funcall7 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -714,8 +686,7 @@
                                     arg1 arg2 arg3 arg4 arg5 arg6 arg7 cl-vars)
                 (%funcall (function-address foo)
                           arg1 arg2 arg3 arg4 arg5 arg6 arg7)))
-          (apply>-9 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 arg7 ())))
-  )
+          (apply>-9 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 arg7 ()))))
 
 (%define-function (%funcall8 <object>)
   ((foo <function>) (arg1 <object>) (arg2 <object>)
@@ -727,15 +698,16 @@
         (if (%eq arg-descr #%i8)
             (let ((cl-vars (function-closure-vars foo)))
               (if cl-vars (%funcall (function-address foo)
-                                    arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 cl-vars)
+                                    arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8
+                                    cl-vars)
                 (%funcall (function-address foo)
                           arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8)))
-          (apply>-10 foo arg-descr arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 ()))))
+          (apply>-10 foo arg-descr
+                     arg1 arg2 arg3 arg4 arg5 arg6 arg7 arg8 ()))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; providing special objects to the compiler
 ;;;-----------------------------------------------------------------------------
-
 (%annotate-function apply   is-special-function apply)
 (%annotate-function %apply1 is-special-function apply)
 (%annotate-function %apply2 is-special-function apply)

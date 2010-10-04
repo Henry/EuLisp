@@ -22,10 +22,6 @@
 ;;;  Description:
 ;;    This is intended as a basic system which provides level 0 of EuLisp and
 ;;    some additional things needed for interaction with C
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

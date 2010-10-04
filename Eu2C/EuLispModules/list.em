@@ -19,8 +19,6 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: EuLisp Level-0 list module
-;;;  Description:
-;;    list processing
 ;;;  Authors: Horst Friedrich
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------

@@ -18,43 +18,33 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: generic functions of default module compare
-;;;  Description:
-;;;  Documentation:
+;;; Title: generic functions of module compare
 ;;;  Notes:
-;;    The default generic functions with special characters in its name are defined
-;;    with only character names to provide a better readability at the C level. The
-;;    EuLisp names are provided by the special interface module 'compare-generic'.
-;;;  Requires:
-;;;  Problems:
+;;    The default generic functions with special characters in its name are
+;;    defined with only character names to provide a better readability at the C
+;;    level. The EuLisp names are provided by the special interface module
+;;    'compare-generic'.
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule compare-generic-i
-  (import
-   (eulisp-kernel
-    (only (<number>) number-i))
-
-   syntax
-   (eulisp-kernel)
-
-   export
-   (binary-lt binary-eq equal)
-   )
+  (import (eulisp-kernel
+           (only (<number>)
+                 number-i))
+   syntax (eulisp-kernel)
+   export (binary-lt
+           binary-eq
+           equal))
 
 ;;;-----------------------------------------------------------------------------
 ;;;
 ;;;-----------------------------------------------------------------------------
 
 (defgeneric binary-lt ((n1 <object>) (n2 <object>)))
-
 (defgeneric binary-eq ((n1 <number>) (n2 <number>)))
-
 (defgeneric equal (o1 o2))
 
 ;;;-----------------------------------------------------------------------------
-;;; type schemes for type inference are defined in compare-generic
+)  ;; End of module compare-generic-i
 ;;;-----------------------------------------------------------------------------
-
-)

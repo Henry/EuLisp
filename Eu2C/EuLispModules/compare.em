@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EuLisp Level-0 compare module
-;;;  Description:
+;;; Title: Level-0 compare module
 ;;;  Problems:
 ;;    The default method for equal cannot work yet because an additional slot in
 ;;    class objects is needed which contains a list of slot readers.  Introduce
@@ -60,7 +59,7 @@
            (only (and
                   cond)
                  syntax-0))
-   expose (compare-generic)   ;;  binary<, binary=, equal
+   expose (compare-generic)
    export (eq
            eql
            =
@@ -68,7 +67,9 @@
            max
            min))
 
-
+;;;-----------------------------------------------------------------------------
+;;; eql
+;;;-----------------------------------------------------------------------------
 (defun eql (object1 object2)
   (if (eq object1 object2 )
       t
@@ -92,6 +93,9 @@
 ;;                (equal object1 object2))
 ;;               (t (eq object1 object2)))))
 
+;;;-----------------------------------------------------------------------------
+;;; equal
+;;;-----------------------------------------------------------------------------
 ;;  (defmethod  equal
 ;;              ((object1 <vector>)
 ;;               (object2 <vector>))
@@ -104,8 +108,9 @@
 ;;    ;  (print (primitive-vector-size object2) nl)
 ;;    (if (%eq (%cast %unsigned-word-integer (primitive-vector-size object1))
 ;;             (%cast %unsigned-word-integer (primitive-vector-size object2)))
-;;      (compare-vectors object1 object2 #%I0 (%cast %unsigned-word-integer
-;;                                                   (primitive-vector-size object2)))
+;;      (compare-vectors object1 object2 #%I0
+;;               (%cast %unsigned-word-integer
+;;                      (primitive-vector-size object2)))
 ;;      ()))
 ;;  (%define-function (compare-vectors <object>)
 ;;                    ((vector1 <vector>) (vector2 <vector>)
@@ -116,16 +121,12 @@
 ;;           (compare-vectors vector1 vector2 (%plus i #%I1) end))
 ;;          (t ())))
 
-
-
 ;;  (defmethod equal ((pair1 <cons>) (pair2 <cons>))
 ;;    (equal-cons pair1 pair2))
 ;;
 ;;  (defun equal-cons(pair1 pair2)
 ;;    (and (equal (car pair1) (car pair2))
 ;;         (equal (cdr pair1) (cdr pair2))))
-
-
 
 ;;  (defmethod equal ((object1 <object>) (object2 <object>))
 ;;    (and (eq (%class-of object1)
@@ -139,7 +140,6 @@
 ;;                    ((car slot-readers) object2))
 ;;             (compare-slot-values object1 object2
 ;;                                  (cdr slot-readers)))))
-
 
 (defmethod equal ((object1 <object>) (object2 <object>))
   (if (eq object1 object2)
@@ -192,8 +192,7 @@
       (if (binary= (car list1) (car (cdr list1)))
           (eq-rec (cdr list1))
         ())
-    (car list1))
-  )
+    (car list1)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; <
@@ -258,8 +257,7 @@
       (if (binary< max-value (car list1))
           (max-rec (cdr list1) (car list1))
         (max-rec (cdr list1) max-value))
-    max-value)
-  )
+    max-value))
 
 ;;;-----------------------------------------------------------------------------
 ;;; min
@@ -281,11 +279,10 @@
       (if (binary< min-value (car list1))
           (min-rec (cdr list1) min-value)
         (min-rec (cdr list1) (car list1)))
-    min-value)
-  )
+    min-value))
 
 ;;;-----------------------------------------------------------------------------
-;;; type schemes for type inference
+;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
 (%annotate-function
   eql new-signature

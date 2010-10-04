@@ -21,8 +21,8 @@
 ;;; Title: TAIL Type Schemes
 ;;;  Description:
 ;;    This application modules describes type schemes of all predefined TAIL
-;;    functions and adds some strategic lattice types to the lattice used
-;;    for type inference.
+;;    functions and adds some strategic lattice types to the lattice used for
+;;    type inference.
 ;;;  Authors: Andreas Kind
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -327,5 +327,5 @@
 ;;                 ((var var1) (atom? %jmpbuf)))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module ti-sys-signatures
 ;;;-----------------------------------------------------------------------------

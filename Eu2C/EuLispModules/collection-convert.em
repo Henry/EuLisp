@@ -18,8 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: collection consist of list, string, vector, table,
-;;;  Description:
+;;; Title: Collection conversion
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -309,5 +308,5 @@
   (error <conversion-condition> "convert: no characters for string "))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module collection-convert
 ;;;-----------------------------------------------------------------------------

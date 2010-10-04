@@ -19,14 +19,11 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: the number module
-;;;  Description:
-;;;  Documentation:
 ;;;  Notes:
 ;;    Explicit Identifiers for the C-level are given as annotations to +,
 ;;    -... to achieve better readability.
-;;;  Requires:
 ;;;  Problems:
-;;    no conditions til now
+;;    no conditions so far
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -63,7 +60,8 @@
   (accumulate binary+ 0 numbers))
 (%annotate-function + code-identifier |eu2c_plus|)
 
-(defun - (number . more-numbers)
+(defun -
+  (number . more-numbers)
   (binary- number (accumulate1 binary+ more-numbers)))
 (%annotate-function - code-identifier |eu2c_minus|)
 
@@ -118,7 +116,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; annotation to reduce functions
 ;;;-----------------------------------------------------------------------------
-
 ;;(%annotate-function /foo/ reduce
 ;;       (binary-foo one-argument-tanslation zero-argument-translation
 ;;        translation-type)
@@ -141,8 +138,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
 ;; could be more precise with compound types
+
 (%annotate-function
   + new-signature
   (((var0 var1)
@@ -235,5 +232,5 @@
     ((var var1) (atom? <object>)))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module number
 ;;;-----------------------------------------------------------------------------

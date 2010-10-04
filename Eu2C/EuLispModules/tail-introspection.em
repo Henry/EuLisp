@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: introspection functions
+;;; Title: Tail introspection functions
 ;;;  Notes:
 ;;    %class-of must be changed with introduction of static cards
 ;;;  Problems:
@@ -26,18 +26,21 @@
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule tail-introspection
   (import ((rename ((%class <class>)
                     (%object <object>)
                     (%tail-class <tail-class>))
                    %tail)
-           (only (typecheck-error) basic-condition)
+           (only (typecheck-error)
+                 basic-condition)
            ti-sys-signatures     ;; this allows declaration of signatures
            (only (LowerHeapLimit
                   UpperHeapLimit
                   WordLength
                   object-class
-                  object-size) mm-interface)
+                  object-size)
+                 mm-interface)
            pointer-to-void
            basic-list-0
            basic-number)
@@ -154,5 +157,5 @@
       (typecheck1 class object (cdr class-list)))))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module tail-introspection
 ;;;-----------------------------------------------------------------------------

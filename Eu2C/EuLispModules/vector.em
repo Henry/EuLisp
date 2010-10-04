@@ -18,6 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Level-0 vector module
 ;;;  Problems:
 ;;    commented generic functions
 ;;    commented literal expander
@@ -233,7 +234,6 @@
                                             (%plus i #%I1) end))
     vector))
 
-
 ;;;-----------------------------------------------------------------------------
 ;;; deep-copy
 ;;;-----------------------------------------------------------------------------
@@ -266,25 +266,9 @@
              (deep-copy-vec old-vector new-vector leng (%plus index #%I1)))
     new-vector))
 
-;;***HGW converter <pair>
-;;generic-print
-;;generic-write
-
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
-;; automatically generated
-
-;;(%annotate-function
-;; vector? new-signature
-;; (((var0 var1)
-;;   ((var var0) (atom? (not <null>)))
-;;   ((var var1) (atom? <vector>)))
-;;  ((var0 var1)
-;;   ((var var0) (atom? <null>))
-;;   ((var var1) (atom? (not <vector>))))))
-
 (%annotate-function
   make-initialized-vector new-signature
   (((var0 var1)

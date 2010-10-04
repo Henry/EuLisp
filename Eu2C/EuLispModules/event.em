@@ -18,16 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: event handling mechanisms
+;;; Title: Event handling
 ;;;  Description:
-;;    defines the generic function wait
-;;    and the double float constant ticks-ps-fixnum
-;;;  Documentation:
-;;;  Problems:
+;;    Exposes the generic function wait and the double float constant
+;;    ticks-per-second
 ;;;  Authors: Jens Bimberg
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule event
-  (expose ((only (ticks-per-second wait) event-i))))
+  (expose ((only (ticks-per-second
+                  wait)
+                 event-i)))
 
+;;;-----------------------------------------------------------------------------
+)  ;; End of module event
+;;;-----------------------------------------------------------------------------

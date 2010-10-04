@@ -21,13 +21,10 @@
 ;;; Title: number-generic
 ;;;  Description:
 ;;    Provides all generic functions defined for subclasses of class <number>.
-;;;  Documentation:
 ;;;  Notes:
-;;    This module provides some generic functions with its default EuLisp names. They
-;;    are defined in number-generic-i with names which appear as more readable
-;;    C-identifiers in the generated C-Code.
-;;;  Requires:
-;;;  Problems:
+;;    This module provides some generic functions with its default EuLisp
+;;    names. They are defined in number-generic-i with names which appear as
+;;    more readable C-identifiers in the generated C-Code.
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -40,6 +37,8 @@
                     (binary-div binary/)
                     (binary-mult binary*)
                     (binary-rem binary%))
-                   number-generic-i))
-   )
-)
+                   number-generic-i)))
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module number-generic
+;;;-----------------------------------------------------------------------------

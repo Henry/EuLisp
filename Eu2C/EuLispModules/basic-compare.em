@@ -18,20 +18,26 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title:
-;;;  Description:
+;;; Title: Basic comparison function `eq'
 ;;;  Authors: Horst Friedrich
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule basic-compare
   (import (apply-level-1
-           ti-sys-signatures)          ; this allows declaration of signatures
+           ti-sys-signatures)
    syntax (apply-level-1)
    export (eq
            t))
 
+;;;-----------------------------------------------------------------------------
+;;; Global constants
+;;;-----------------------------------------------------------------------------
 (defconstant t 't)
 
+;;;-----------------------------------------------------------------------------
+;;; eq
+;;;-----------------------------------------------------------------------------
 (defun eq (object1 object2)
   (if (%eq (%cast %signed-word-integer object1)
            (%cast %signed-word-integer object2))
@@ -41,7 +47,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; type schemes for used for type inference
 ;;;-----------------------------------------------------------------------------
-;; see also basic-list-0.am
 (%annotate-function
   eq new-signature
   (((var0 var1 var2)

@@ -18,48 +18,39 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: 
-;;;  Description:
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
+;;; Title: let/cc
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule letcc
-
   (import (apply-level-2
            basic-symbol)
-
    syntax (apply-level-2)
-
-   c-import (<setjmp.h>  ; needed to get setjmp and longjmp, which must be
-             ;; available for code generation
-             <stdlib.h>) ; to get NULL
-
+   c-import (<setjmp.h>
+             <stdlib.h>)
    export (unwind
            stop-unwind-before
            continue-at
            top-dynamic
            global-dynamic
            letcc-result
-
            unwind-continue
-
            <dynamic>
            make-dynamic
            %dynamic
-           %dynamic-setq
-           )
-   )
+           %dynamic-setq))
 
 (%define-variable unwind %pjmpbuf)
 (%define-variable stop-unwind-before %pjmpbuf)
 (%define-variable continue-at %pjmpbuf)
-(%define-variable top-dynamic <dynamic>) ; holds the list of current dynamic bindings
-(%define-variable global-dynamic <dynamic>) ; holds the list of global dynamic bindings
+
+;; holds the list of current dynamic bindings
+(%define-variable top-dynamic <dynamic>)
+
+;; holds the list of global dynamic bindings
+(%define-variable global-dynamic <dynamic>)
+
 (%define-variable letcc-result <object>)
 
 (%declare-external-function (get-jmpbuf %jmpbuf)
@@ -104,9 +95,9 @@
   (set-dynamic-value (get-dynamic name top-dynamic) value))
 
 (%define-function (get-dynamic <dynamic>) ((name <symbol>) (var <dynamic>))
-  ;; a null test is needed to handle the errorneous case that no special binding is found
-  ;; which can only occur during module initialization ( a dynamic binding is used before
-  ;; it is initialized)
+  ;; a null test is needed to handle the errorneous case that no special binding
+  ;; is found which can only occur during module initialization ( a dynamic
+  ;; binding is used before it is initialized)
   (if (%eq (dynamic-name var) name)
       var
     (get-dynamic name (next-dynamic var))))
@@ -119,4 +110,6 @@
 (%annotate-function initialize-global-dynamic
   is-special-function initialize-global-dynamic)
 
-) ;end letcc
+;;;-----------------------------------------------------------------------------
+)  ;; End of module letcc
+;;;-----------------------------------------------------------------------------

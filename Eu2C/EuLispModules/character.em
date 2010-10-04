@@ -18,51 +18,52 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: character
+;;; Title: Standard module character
 ;;;  Problems:
-;;    character box vector cannot be allocated statically til now
-;;    literal expander for vectors needed
+;;    Character box vector cannot be allocated statically until now, literal
+;;    expander for vectors needed.
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule character
-
-  (import
-   (tail
-    (only (binary< equal) compare-generic)
-    (only (generic-print generic-write) stream-generic)
-    (only (upper? upper2lower lower? lower2upper) char-tables)
-    (only (make-swi make-fpint) int-i)
-    ;;copy
-    basic-compare      ;; instead of compare which should be used if implemented right
-    ;;convert
-    )
-
+  (import (tail
+           (only (binary<
+                  equal)
+                 compare-generic)
+           (only (generic-print
+                  generic-write)
+                 stream-generic)
+           (only (upper?
+                  upper2lower
+                  lower?
+                  lower2upper)
+                 char-tables)
+           (only (make-swi
+                  make-fpint)
+                 int-i)
+           basic-compare)
    syntax (tail)
-
-   export
-   (<character> convert-int-char convert-char-int char-code
-                character? equal-character
-                binary<
-                equal
-                as-lowercase as-uppercase
-                generic-print generic-write)
-   )
-
-;;(expose (only (copy) copy))
-;;(expose (only (equal) compare))
-;;(expose (only (converter) convert))
-;;(expose printer-generic)
-
+   export (<character>
+           convert-int-char
+           convert-char-int
+           char-code
+           character?
+           equal-character
+           binary<
+           equal
+           as-lowercase
+           as-uppercase
+           generic-print
+           generic-write))
 
 (%define-standard-class (<character> <class>)
   <object>
-  ((char-code type %signed-word-integer ;rr
+  ((char-code type %signed-word-integer
               keyword char-code
-              accessor char-code))      ;rr
-  representation pointer-to-struct  ;direct ;rr
-  constructor (make-character char-code)   ;rr
+              accessor char-code))
+  representation pointer-to-struct
+  constructor (make-character char-code)
   predicate character?)
 
 
@@ -75,7 +76,7 @@
   representation pointer-to-vector
   allocation multiple-type-card)
 
-;;; at time static generation not possible, take dynamic generation
+;; at this time static generation is not possible, take dynamic generation
 ;;(defconstant $character-box-vector (%literal <character-box-vector> 257
 ;; rr class is not possible hier                         (<character>)))
 ;; rr mehrfache anlegen des vectors in asm               ()))
@@ -94,13 +95,13 @@
 ;;
 ;;(fill-vector $character-box-vector #%I0 #%I257 <character>)
 
-;;; rr dynamic generation is not possible, crash with %class-of, vector will be
-;;; inside of heap
-;;; (%define-variable $character-box-vector <character-box-vector>)
-;;;value of %define-variable must be a literal!
-;;;so take %setf to overcome this
-;;; rr (%setf $character-box-vector
-;;;       (make-character-box-vector))
+;; rr dynamic generation is not possible, crash with %class-of, vector will be
+;; inside of heap
+;; (%define-variable $character-box-vector <character-box-vector>)
+;; value of %define-variable must be a literal!
+;; so take %setf to overcome this
+;; rr (%setf $character-box-vector
+;;       (make-character-box-vector))
 
 (%define-function (convert-int-char <character>)
   ((int <int>))
@@ -184,18 +185,6 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
-
-;; The predicate function is generated automatically.
-
-;;(%annotate-function
-;; character? new-signature
-;; (((var0 var1)
-;;   ((var var0) (atom? (not <null>)))
-;;   ((var var1) (atom? <character>)))
-;;  ((var0 var1)
-;;   ((var var0) (atom? <null>))
-;;   ((var var1) (atom? (not <character>))))))
-
 (%annotate-function
   equal-character new-signature
   (((var0 var1 var2)
@@ -219,4 +208,6 @@
     ((var var0) (atom? <object>))
     ((var var1) (var var0)))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module character
+;;;-----------------------------------------------------------------------------

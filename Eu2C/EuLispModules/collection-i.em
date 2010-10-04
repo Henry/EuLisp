@@ -51,21 +51,20 @@
            nconc
            and-aux))
 
-;;first the aux functions for strings
-
+;;;-----------------------------------------------------------------------------
+;;; Auxillary functions for strings
+;;;-----------------------------------------------------------------------------
 ;;  (defun setter-string-ref (string n value)
 ;;    (%setf (%extract (string-pointer string)
 ;;                     (%cast %unsigned-word-integer
 ;;                            (make-swi n)))
 ;;           (make-swi (convert-char-int value))))
 
-
 (%define-function (primitive-setter-string-ref %void)
   ((string <string>)
    (n %unsigned-word-integer)
    (value %unsigned-byte-integer))
   (%setf (%extract (string-pointer string) n) value))
-
 
 ;;  (defun string-size (string)
 ;;    (make-fpint (strlen (string-pointer string))))
@@ -74,12 +73,10 @@
   ((string <string>))
   (%cast %unsigned-word-integer (strlen (string-pointer string))))
 
-
 (%define-function (primitive-string-ref %unsigned-byte-integer)
   ((string <string>)
    (n %unsigned-word-integer))
   (%cast %unsigned-byte-integer (%extract (string-pointer string) n)))
-
 
 ;;  (defun string-ref (string n)
 ;;    (convert-int-char
@@ -113,6 +110,7 @@
       t
     (if (null? object)
         t
+
       ())))
 
 ;;(%define-function (%proper-list-size %signed-word-integer)
@@ -130,5 +128,5 @@
 (defun and-aux (a b) (if a (if b t ()) ()))
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module collection-i
 ;;;-----------------------------------------------------------------------------
