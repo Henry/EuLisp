@@ -116,7 +116,8 @@
  export (generate-c-code
          reset-c-code
          function-needed?
-         map-modules))
+         map-modules
+         generate-default-function-prototype))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Specials for Printing Code

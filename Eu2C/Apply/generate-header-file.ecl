@@ -18,20 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: generation of header files
-;;;  Description:
-;;;  Documentation:
+;;; Title: Generation of header files
 ;;;  Notes:
 ;;    The first version of this module was copied in its main parts from module
 ;;    'c-code'. Future implementations should integrate both implementation of
 ;;    declaration generation. The main difference is that
-;;    1. not explicitely exported classes may be represented in the header file as
-;;    void* and that
+;;    1. not explicitly exported classes may be represented in the header file
+;;       as void* and that
 ;;    2. declarations are generated only for exported objects
 ;;;  Requires:
-;;    (dynamic code-output) must be bound to a stream to which the C-code should be
-;;    written
-;;;  Problems:
+;;    (dynamic code-output) must be bound to a stream to which the C-code should
+;;    be written
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -46,17 +43,19 @@
          c-typing
          predicates
          lzs-mop
-         (only (expand-literal) expand-literal)
-         (only (mapc mapcar list* svref)
-               common-lisp))
-
+         (only (expand-literal)
+               expand-literal)
+         (only (mapc
+                mapcar
+                list*
+                svref)
+               common-lisp)
+         (only (generate-default-function-prototype)
+               c-code))
  syntax (level-0
          c-code-syntax
-         code-identifier
-         )
-
- export (generate-header-file)
- )
+         code-identifier)
+ export (generate-header-file))
 
 (defun generate-header-file (main-module modules)
   (let ((id (?identifier main-module)))
@@ -78,18 +77,19 @@
             (mapc #'generate-sym-declaration (?sym-list module))
             )
           modules)
+    (mapc #'generate-default-function-prototype modules)
     (write-code "~2%/***    module initialization function    ***/")
     (write-code  "~%/*** must be called one and only one time ***/")
     (write-code "~%extern void ~A();" (main-function-id main-module))
     ;;(write-code "~2%/*** renamed exports ***/")
     ;;(mapc #'generate-rename-macro *rename-exports*)
-    (write-code "~2%/*end of header file for EuLisp module '~(~A~)'  */~2%" id)))
+    (write-code
+     "~2%/*end of header file for EuLisp module '~(~A~)'  */~2%" id)))
 
 (defun generate-eu2c-includes ()
   (when (eq *compilation-type* :basic-system)
         (write-code "~%#include \"eu2c-total.h\"~
-                 ~%#include <stdio.h>"))) ; to provide FILE for class-def of
-;; <file-stream>
+                 ~%#include <stdio.h>")))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type, Structure and Object Declarations for Classes
@@ -191,11 +191,11 @@
   (object-declaration fun))
 
 (defmethod function-declaration ((fun <discriminating-fun>))
-  ;; discriminating functions of exported generic functions have to be defined in
-  ;; the application, therefore no prototype is needed
-  ;; this scheme doesn't work for module compilation because in a single module a
-  ;; discriminating function may be defined or not
-  ;; the function object is not needed in any case
+  ;; discriminating functions of exported generic functions have to be defined
+  ;; in the application, therefore no prototype is needed this scheme doesn't
+  ;; work for module compilation because in a single module a discriminating
+  ;; function may be defined or not the function object is not needed in any
+  ;; case
   ())
 
 (defmethod function-declaration ((fun <special-sys-fun>))
@@ -283,4 +283,6 @@
 (defun subclass? (class superclass)
   (member superclass (~class-precedence-list class)))
 
+;;;-----------------------------------------------------------------------------
 #module-end
+;;;-----------------------------------------------------------------------------
