@@ -18,7 +18,6 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;-----------------------------------------------------------------------------
 
 ;;;-----------------------------------------------------------------------------
 ;;; setting some special features
@@ -42,7 +41,7 @@
 
 (defpackage "EL-MODULES"
   (:shadow "EXPORT" "MAKE-SYMBOL" #-:eval-when-cltl2 "EVAL-WHEN")
-  (:import-from common-lisp-user cl-user::*eulisp-module-search-path*
+  (:import-from common-lisp-user cl-user::*ecl-module-search-path*
                 #+:eval-when-cltl2 eval-when )
   (:use #:cl) ;;***HGW
   (:export
@@ -51,7 +50,7 @@
    EXPORT EXPORT-SYNTAX EXPOSE
    make-eulisp-class
    read-eulisp
-   *eulisp-module-search-path* $eulisp-readtable))
+   *ecl-module-search-path* $eulisp-readtable))
 
 ;; additionally defines cl-user::require-eulisp-module to be used in load-Files
 
@@ -513,7 +512,7 @@
                          (file-write-date compiled-file))
                      compiled-file)
                     (t file))))
-        *eulisp-module-search-path*))
+        *ecl-module-search-path*))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  class names

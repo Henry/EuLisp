@@ -20,13 +20,15 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Towers of Hanoi
 ;;;  Description:
+;;    Example use of classes in the algorithm to solve the "Towers of Hanoi"
+;;    problem.
 ;;;  Authors: Andreas Kind, Henry G. Weller
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule hanoi
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Tower definition

@@ -27,7 +27,7 @@
 ;;    - a string, which is used as the argument for load
 ;;    - "", in which case a dialog is opened to ask for the file to be loaded
 ;;    - a symbol - the name of a module - for which the path is determined using the
-;;    content of $apply-module-search-path. The constant $apply-module-search-path
+;;    content of $eulisp-module-search-path. The constant $eulisp-module-search-path
 ;;    must be set before loading this module. Their name is placed in the CL-package
 ;;    USER.
 ;;;  Notes:
@@ -41,17 +41,25 @@
 #module el2lzs-load
 (import (level-1
          el2lzs-error
-         (only (first second last directory
-                      merge-pathnames make-pathname
-                      string pathname-name pathname string-equal find)
+         (only (first
+                second
+                last
+                directory
+                merge-pathnames
+                make-pathname
+                string
+                pathname-name
+                pathname
+                string-equal
+                find)
                common-lisp)
-         (only ($apply-module-search-path) cl-user))
+         (only ($eulisp-module-search-path)
+               cl-user))
  syntax (level-1
          (only (with-open-file)
                common-lisp))
  export (load-apply-module
-         load-def-file)
- )
+         load-def-file))
 
 (defun check-module (path module-source)
   (cond ((null? (and (cons? module-source)
@@ -119,7 +127,7 @@
                     :button-string "Load")))
   (dynamic-let ((apply-module-directory
                  (directory-of-apply-modules
-                  (cons path $apply-module-search-path))))
+                  (cons path $eulisp-module-search-path))))
                (load-module-file (merge-pathnames path
                                                   (dynamic *apply-module-file-extension*))
                                  function)))
@@ -130,7 +138,7 @@
   ;; files.
   (dynamic-let ((apply-module-directory
                  (or (dynamic apply-module-directory)
-                     (directory-of-apply-modules $apply-module-search-path))))
+                     (directory-of-apply-modules $eulisp-module-search-path))))
                (let ((file (find (string name) (dynamic apply-module-directory)
                                  :key #'pathname-name :test #'string-equal)))
                  (if file

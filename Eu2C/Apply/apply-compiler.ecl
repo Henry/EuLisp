@@ -19,8 +19,6 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: The Main Part of the APPLY-Compiler
-;;;  Description:
-;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
 #module apply-compiler
@@ -46,7 +44,7 @@
                tail-module)
          (only (reset-environments
                 load-if-module)
-               el2lzs-main) ; because importing from el2lzs doesn't function
+               el2lzs-main)
          (only (export-objects)
                export)
          (only (reset-literals)
@@ -92,11 +90,17 @@
                 find-package)
                common-lisp))
  syntax (level-1
-         (only (return-from when)
+         (only (return-from
+                when
+                append
+                make-pathname)
                common-lisp))
  export (compile-application
          compilation-state))
 
+;;;-----------------------------------------------------------------------------
+;;; Support functions and macros
+;;;-----------------------------------------------------------------------------
 (deflocal compilation-state ())
 
 (defmacro call-module-function (module-name function-name . args)
@@ -105,10 +109,18 @@
             ,@args))
 
 ;;;-----------------------------------------------------------------------------
-;;; main function to compile
+;;; Compilation functions
 ;;;-----------------------------------------------------------------------------
 (defun compile-application (module-name . basic-system)
-  (when basic-system (setq basic-system (car basic-system)))
+  (when basic-system
+        (progn (setq basic-system (car basic-system))
+               (setq common-lisp-user::$eulisp-module-search-path
+                     (append (list (make-pathname
+                                    :directory
+                                    `(,@common-lisp-user::$applyroot
+                                      "EuLispModules"
+                                      ,basic-system)))
+                             common-lisp-user::$eulisp-module-search-path))))
   (compile :application module-name basic-system))
 
 (defun compile-basic-system (module-name . basic-system)
@@ -155,8 +167,7 @@
 
 (defun compile (compilation-type module-name basic-system)
   ;; module-name may be a symbol, a string interpreted as a load path or the
-  ;; empty string (on Mac only) where a file dialog appears
-
+  ;; empty string where a file dialog appears
   (and
 
    (load-basic-system compilation-type basic-system)
@@ -232,12 +243,11 @@
   (reset-literal-expanders)
   (reset-code-identifier)
   (reset-generic-dispatch)
-  (initialize-predefined-standard-classes)
-  )
+  (initialize-predefined-standard-classes))
 
 (defun load-basic-modules (basic-system)
-  ;; the result is the module describing the basic system or () if compilation is
-  ;; done from scratch
+  ;; the result is the module describing the basic system or () if compilation
+  ;; is done from scratch
   (dynamic-let ((*info-level* (dynamic *system-info-level*)))
                (if (null? basic-system)
                    (progn
@@ -265,9 +275,7 @@
                    (setq *basic-system* (load-if-module basic-system))
                    (set-apply-level-1-objects)
                    (set-apply-level-2-objects)
-                   (set-apply-objects *basic-system*)
-                   )
-                 )))
+                   (set-apply-objects *basic-system*)))))
 
 (defun load-application-modules (module-name)
   (load-module module-name))
@@ -284,8 +292,7 @@
                  Eu2C with preloaded basic system ~A ~
                  cannot provide the required basic system ~A"
               (?identifier preloaded-basic-system)
-              basic-system-id)
-      )))
+              basic-system-id))))
 
 ;;;-----------------------------------------------------------------------------
 #module-end

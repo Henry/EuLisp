@@ -107,18 +107,18 @@ split at the UNIX separator #\/."
   )
 
 ;; -----------------------------------------------------------------------------
-;;; Setting *eulisp-module-search-path* for Eulisp-in-CL modules
+;;; Setting *ecl-module-search-path* for Eulisp-in-CL modules
 ;; -----------------------------------------------------------------------------
-(defparameter *eulisp-module-search-path*
+(defparameter *ecl-module-search-path*
   (list
    (make-pathname :directory '(:relative))
    (make-pathname :directory '(:relative "EclModules"))
    (make-pathname :directory '(:relative "Apply"))
    ))
-(export '*eulisp-module-search-path*)
+(export '*ecl-module-search-path*)
 
-(defparameter $apply-module-search-path nil)
-(export '$apply-module-search-path)
+(defparameter $eulisp-module-search-path nil)
+(export '$eulisp-module-search-path)
 
 ;; -----------------------------------------------------------------------------
 ;;; Set compilation environment
@@ -148,9 +148,9 @@ split at the UNIX separator #\/."
                 (cons :absolute (split-path (getenv "Eu2CROOT")))))))
     (format t "~%Environment variable Eu2CROOT is not defined -- Sorry~%")
     (quit))
-  (when (boundp '$apply-module-search-path)
-    (makunbound '$apply-module-search-path))
-  (setq $apply-module-search-path
+  (when (boundp '$eulisp-module-search-path)
+    (makunbound '$eulisp-module-search-path))
+  (setq $eulisp-module-search-path
         (list
          (make-pathname :directory '(:relative))
          (make-pathname :directory '(:relative "EuLispModules"))

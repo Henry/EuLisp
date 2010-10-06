@@ -175,7 +175,7 @@
                                                  (string name))
                                           :type "lisp")
                            path))))
-                    *eulisp-module-search-path*)))
+                    *ecl-module-search-path*)))
     (and file (compile-file file :verbose t))))
 
 ;;;-----------------------------------------------------------------------------
