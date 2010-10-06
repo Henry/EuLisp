@@ -64,7 +64,7 @@
                  c-string-interface))
    syntax (tail
            apply
-           syntax-0
+           syntax-i
            setf)
    export (reverse-list
            test-range-indizes

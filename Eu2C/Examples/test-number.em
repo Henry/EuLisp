@@ -23,10 +23,11 @@
 ;;    Simple mathematical expression interpreter
 ;;;  Compilation:
 ;;    Compile this module with basic system level-0.
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-number
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (deflocal interpreter-fcn
   (list "binary+" binary+

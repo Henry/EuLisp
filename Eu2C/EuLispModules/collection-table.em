@@ -58,7 +58,7 @@
            collection-aux
            table)
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (<table>
            make-table
            setter-table-ref

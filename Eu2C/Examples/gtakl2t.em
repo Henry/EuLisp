@@ -26,11 +26,12 @@
 ;;    with four methods specializing on both arguments.
 ;;;  See also:
 ;;    tak, takl and gtakl
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule gtakl2t
   (import (level-0x timing)
-   syntax (level-0x timing))
+   syntax (syntax-0 timing))
 
 (defun listn (n)
   (if (eql n 0)

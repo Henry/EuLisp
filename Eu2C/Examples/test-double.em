@@ -18,21 +18,15 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Example 'test-double'
-;;;  Authors: Henry G. Weller
-;;;  Maintainer: Henry G. Weller
 ;;;  Description:
 ;;    Most basic double-precision number test
 ;;;  Compilation:
 ;;    Compile this module with basic system level-0.
-;;;  Documentation:
-;;;  Notes:
-;;;  Requires:
-;;;  Problems:
-;;;  Authors:
+;;;  Authors: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-double
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (print 1.9e0 nl)
 (print ((converter <int>) 1.9e0) nl)

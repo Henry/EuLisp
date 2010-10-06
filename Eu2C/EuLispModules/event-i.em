@@ -51,7 +51,7 @@
                  timer))
    syntax ((only (when
                   unless)
-                 syntax-0))
+                 syntax-i))
    export (wait
            get-timer
            timeout-expired

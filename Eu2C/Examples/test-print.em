@@ -21,11 +21,10 @@
 ;;;  Description:
 ;;    Basic tests of the new print functions
 ;;;  Authors: Henry G. Weller
-;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-print
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (sprint stderr "hmm " 1 " end\n")
 

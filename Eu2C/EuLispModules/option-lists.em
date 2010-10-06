@@ -31,7 +31,7 @@
            (only (cond
                    and
                    when)
-                 syntax-0))
+                 syntax-i))
    export (find-option
            get-option
            check-options))

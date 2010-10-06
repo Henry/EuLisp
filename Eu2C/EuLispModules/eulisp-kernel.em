@@ -27,7 +27,7 @@
   (import (tail
            function
            standard-generic-function)
-   syntax (syntax-0
+   syntax (syntax-i
            standard-generic-function)
    expose (function
            tail

@@ -109,7 +109,7 @@
    syntax (tail
            (only (when
                   unless)
-                 syntax-0)
+                 syntax-i)
            condition-ii)
    export (<stream>
            <file-stream>

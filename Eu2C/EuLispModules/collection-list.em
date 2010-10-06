@@ -41,7 +41,7 @@
            collection-generic
            collection-aux)
    syntax (tail
-           syntax-0
+           syntax-i
            setf)
    export (accumulate
            accumulate1

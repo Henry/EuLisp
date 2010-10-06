@@ -21,11 +21,10 @@
 ;;;  Description:
 ;;    Basic tests of class construction, initialisation and slot access.
 ;;;  Authors: Henry G. Weller
-;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule test-class
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (defclass <tower> <object>
   ((hmm reader hmm keyword hmm default 10)

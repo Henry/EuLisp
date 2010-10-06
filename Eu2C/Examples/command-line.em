@@ -23,10 +23,11 @@
 ;;    Test the POSIX command-line handling
 ;;;  Compilation:
 ;;    Compile this module with extended system level-0x.
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule command-line
   (import (level-0x)
-   syntax (level-0x))
+   syntax (syntax-0))
 
 (do (lambda (arg)
       (format "~%~s" arg))

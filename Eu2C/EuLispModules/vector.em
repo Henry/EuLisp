@@ -38,7 +38,7 @@
            (only (equal)
                  compare-generic))
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (<vector>
            vector?
            vector-size

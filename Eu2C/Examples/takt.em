@@ -18,22 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Benchmark 'tak'
+;;; Title: Benchmark 'takt'
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
 ;;    Lisp-Systems" and adapted to EuLisp.
-;;;  Documentation:
 ;;;  Notes:
 ;;    The benchmark is called with 24, 12 and 6 instead of 18, 12 and 6 as in
 ;;    Gabriel to get times greater than one second on SPARC-machines.
-;;;  Requires:
-;;;  Problems:
-;;;  Authors:
 ;;;-----------------------------------------------------------------------------
 
 (defmodule takt
   (import (level-0x timing)
-   syntax (level-0x timing))
+   syntax (syntax-0 timing))
 
 (defun tak (x y z)
   (if (null? (< y x))
@@ -50,5 +46,5 @@
       "\n(tak i24 l12 l6) : %.2f sec %.2f sec system %.2f sec sum\n")
 
 ;;;-----------------------------------------------------------------------------
-)
+)  ;; End of module takt
 ;;;-----------------------------------------------------------------------------

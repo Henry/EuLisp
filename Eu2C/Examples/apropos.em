@@ -22,10 +22,11 @@
 ;;;  Compilation:
 ;;    Compile this module with basic system level-0
 ;;    eu2c -bs level-0 apropos
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule apropos
   (import (level-0 cl-ext)
-   syntax (level-0 cl-ext))
+   syntax (syntax-0 cl-ext))
 
 (defun apropos (word table)
   (labels ((get-words-with-char

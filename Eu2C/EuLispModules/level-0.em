@@ -47,7 +47,7 @@
            stream
            string
            symbol
-           syntax-0
+           syntax-i
            table
            ;;***HGW thread ; For thread support
            vector)
@@ -73,7 +73,7 @@
            stream
            string
            symbol
-           syntax-0
+           syntax-i
            table
            ;;***HGW thread ; For thread support
            vector))

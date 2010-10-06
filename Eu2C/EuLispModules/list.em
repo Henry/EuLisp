@@ -38,7 +38,7 @@
                  compare-generic))
    syntax (tail
            (only (and)
-                 syntax-0))
+                 syntax-i))
    expose ((only (<null>
                   <cons>
                   <list>

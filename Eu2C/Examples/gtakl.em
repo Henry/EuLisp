@@ -37,7 +37,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule gtakl
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (defun listn (n)
   (if (eql n 0)

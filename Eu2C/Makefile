@@ -141,9 +141,18 @@ $(module_image): $(eu2c_image) ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
 		$(call Eu2C,$(eu2c_image),$(module))
 
 ###-----------------------------------------------------------------------------
+###  Create all four options on a 64bit machine
+###-----------------------------------------------------------------------------
+.PHONY: all
+all:
+	@$(MAKE)
+	@$(MAKE) module=level-0x
+	@$(MAKE) WL=m32
+	@$(MAKE) WL=m32 module=level-0x
+
+###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 .PHONY: README
 README: README.html
 

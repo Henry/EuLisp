@@ -40,7 +40,7 @@
            (only (sprintf-3)
                  c-stdio))
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (<symbol>
            symbol?
            gensym

@@ -23,10 +23,11 @@
 ;;    which prints a symbol rather than a string
 ;;;  Compilation:
 ;;    Compile this module with basic system level-0.
+;;;  Authors: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule hello
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (print 'hello nl)
 (print 'HELLO nl)

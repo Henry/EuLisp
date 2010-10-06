@@ -30,10 +30,11 @@
 ;;    Gabriel to get times greater than one second on current machines.
 ;;;  See also:
 ;;    tak, takl, and gtakl
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule gtakl2
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (defun listn (n)
   (if (eql n 0)

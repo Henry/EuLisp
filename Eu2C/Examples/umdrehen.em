@@ -19,16 +19,16 @@
 ;;
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Example 'umdrehen'
-;;;  Authors: E. Ulrich Kriegel
-;;;  Maintainer: Henry G. Weller
 ;;;  Description:
 ;;    A variation of reverse.
 ;;;  Compilation:
 ;;    Compile this module with extended system level-0x.
+;;;  Authors: E. Ulrich Kriegel
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule umdrehen
   (import (level-0x)
-   syntax (level-0x timing))
+   syntax (syntax-0 timing))
 
 (defun umdrehen (l)
   (if (null? l) ()

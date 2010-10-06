@@ -49,7 +49,7 @@
                  compare-generic))
    syntax (eulisp-kernel
            (only (and)
-                 syntax-0))
+                 syntax-i))
    export (binary+
            binary-
            binary/

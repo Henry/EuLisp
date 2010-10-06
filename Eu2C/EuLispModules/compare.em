@@ -58,7 +58,7 @@
    syntax (eulisp-kernel
            (only (and
                   cond)
-                 syntax-0))
+                 syntax-i))
    expose (compare-generic)
    export (eq
            eql

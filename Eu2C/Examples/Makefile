@@ -34,6 +34,19 @@ endif
 ARCH := $(ARCH)$(WL)
 
 ###-----------------------------------------------------------------------------
+### Basic system and optimisation switch
+###-----------------------------------------------------------------------------
+BS0 = -bs level-0
+BS0X = -bs level-0x
+
+OPT =
+# If optimisation is set to "ti" (type-inference) unset the basic system
+ifeq ($(OPT),ti)
+    BS0 =
+    BS0X =
+endif
+
+###-----------------------------------------------------------------------------
 ### All examples
 ###-----------------------------------------------------------------------------
 EXAMPLES_0 = gtakl2 gtakl hanoi hello tak takl \
@@ -55,11 +68,13 @@ all: all0 all0x
 all0: $(EXAMPLES_0_EXE)
 all0x: $(EXAMPLES_0X_EXE)
 
-$(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0.def
-	../Bin/eu2c -$(WL) -bs level-0 $<
+$(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em \
+		${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0.def
+	../Bin/eu2c -$(WL) $(BS0) $<
 
-$(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0x.def
-	../Bin/eu2c -$(WL) -bs level-0x $<
+$(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em \
+		${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0x.def
+	../Bin/eu2c -$(WL) $(BS0X) $<
 
 ###-----------------------------------------------------------------------------
 ###  Run the examples

@@ -52,7 +52,7 @@
                  tail))
    syntax ((only (when
                   unless)
-                 syntax-0))
+                 syntax-i))
    export (TL-empty
            TL-single
            TL-on-top

@@ -39,7 +39,7 @@
                  c-string-interface))
    syntax (tail
            apply
-           syntax-0
+           syntax-i
            setf)
    export (primitive-setter-string-ref
            primitive-string-size

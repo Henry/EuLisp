@@ -21,24 +21,21 @@
 ;;; Title: Benchmark 'takl'
 ;;;  Description:
 ;;    This benchmark was taken from R.P.Gabriel: "Performance and Evaluation of
-;;    Lisp-Systems". Additionally a version was added where the function 'shorter?' is
-;;    realized as a generic function with two methods specializing on the first
-;;    argument. The specialization was restricted to the first argument to be
-;;    comparable with C++.
-;;;  Documentation:
+;;    Lisp-Systems". Additionally a version was added where the function
+;;    'shorter?' is realized as a generic function with two methods specialising
+;;    on the first argument. The specialization was restricted to the first
+;;    argument to be comparable with C++.
 ;;;  Notes:
-;;    The benchmark is called with 24, 12 and 6 instead of 18, 12 and 6 as in Gabriel
-;;    to get times greater than one second on SPARC-machines.
-;;    Compile this module with basic system level-0x.
-;;;  Requires:
-;;;  Problems:
+;;    The benchmark is called with 24, 12 and 6 instead of 18, 12 and 6 as in
+;;    Gabriel to get times greater than one second on SPARC-machines.  Compile
+;;    this module with basic system level-0x.
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule taklt
   (import (level-0x timing)
-   syntax (level-0x timing))
+   syntax (syntax-0 timing))
 
 (defun listn (n)
   (if (eql n 0)
@@ -92,4 +89,6 @@
 (time (gtakl l24 l12 l6)
       "\n(gtakl 24l 12l 6l): %.2f sec %.2f sec system %.2f sum\n")
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module taklt
+;;;-----------------------------------------------------------------------------

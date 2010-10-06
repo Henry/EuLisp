@@ -27,7 +27,7 @@
   (import (tail
            standard-generic-function)
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (accumulate
            accumulate1
            any?

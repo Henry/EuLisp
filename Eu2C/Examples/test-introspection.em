@@ -26,7 +26,7 @@
 (defmodule test-introspection
   (import (level-0
            object-1)
-   syntax (level-0
+   syntax (syntax-0
            object-1))
 
 (print (class-name (car (cdr (class-precedence-list <list>)))) nl)

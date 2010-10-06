@@ -54,7 +54,7 @@
            convert)
    syntax (tail
            apply
-           syntax-0
+           syntax-i
            setf)
    export (converter
            convert))

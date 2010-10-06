@@ -55,7 +55,7 @@
                  letcc))
    syntax ((only (when
                   unless)
-                 syntax-0))
+                 syntax-i))
    export (<thread>
            thread?
            make-thread

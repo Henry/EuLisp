@@ -40,7 +40,7 @@
            collection-generic
            collection-aux)
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (accumulate
            accumulate1
            any?

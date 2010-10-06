@@ -39,7 +39,7 @@
    c-import (<float.h>)
    syntax (eulisp-kernel
            (only (and)
-                 syntax-0))
+                 syntax-i))
    export (<double-float>
            double-float?
            most-positive-double-float

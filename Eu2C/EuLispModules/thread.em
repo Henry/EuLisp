@@ -64,7 +64,7 @@
    syntax ((only (unless
                   when
                   cond)
-                 syntax-0)
+                 syntax-i)
            (only (with-handler)
                  condition))
    export (<thread>

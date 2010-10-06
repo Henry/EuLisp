@@ -36,7 +36,7 @@
                  eulisp-kernel))
    syntax (tail
            (only (cond)
-                 syntax-0))
+                 syntax-i))
    export (atom?
            cons?
            copy-alist

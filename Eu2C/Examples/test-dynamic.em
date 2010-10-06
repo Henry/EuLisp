@@ -25,7 +25,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule test-dynamic
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (defglobal hmm 1)
 

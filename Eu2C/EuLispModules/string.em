@@ -25,7 +25,7 @@
 
 (defmodule string
   (import (tail
-           syntax-0
+           syntax-i
            string-ii
            convert
            symbol
@@ -50,7 +50,7 @@
                   shallow-copy)
                  copy))
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (<string>
            string?
            make-string

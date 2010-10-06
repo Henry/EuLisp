@@ -44,7 +44,7 @@
            (only (<character> convert-char-int character?)
                  character))
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (mapc
            hash
            assoc

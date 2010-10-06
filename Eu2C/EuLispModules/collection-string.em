@@ -57,7 +57,7 @@
                   string-ref-u)
                  collection-i))
    syntax (tail
-           syntax-0)
+           syntax-i)
    export (accumulate
            accumulate1
            any?

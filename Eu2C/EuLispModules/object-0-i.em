@@ -28,7 +28,7 @@
            tail
            option-lists)
    syntax (eulisp-kernel
-           syntax-0
+           syntax-i
            tail)
    export (<object>
            make

@@ -34,7 +34,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule tak
   (import (level-0)
-   syntax (level-0))
+   syntax (syntax-0))
 
 (defun tak (x y z)
   (if (null? (< y x))

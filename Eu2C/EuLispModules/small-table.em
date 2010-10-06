@@ -25,7 +25,7 @@
 (defmodule small-table
   (import (tail)
    syntax (tail
-            syntax-0)
+            syntax-i)
    export (<small-table>
             make-small-table
             small-table-ref

@@ -36,7 +36,7 @@
                  basic-list-0)
            table-aux)
    syntax (tail
-           syntax-0
+           syntax-i
            setf)
    export (<table>
            table?

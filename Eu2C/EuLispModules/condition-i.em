@@ -51,7 +51,7 @@
            basic-condition
            condition-ii)
    syntax (tail
-           syntax-0
+           syntax-i
            condition-ii)
    c-import (<stdlib.h>
              <stdio.h>
