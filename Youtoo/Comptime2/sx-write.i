@@ -10,7 +10,7 @@
    )
    local-literals (
     (top-level . 69)
-    (binding-prin-string . 68)
+    (binding-print-string . 68)
     (pprint-module . 67)
     ("
   syntax-env:" . 65)

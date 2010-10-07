@@ -8,8 +8,8 @@
 ;;; corresponding objects.
 ;;;-----------------------------------------------------------------------------
 (defmodule reader
-  (syntax (macros macros-tag)
-   import (level1 basic reader-ce reader-vars
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic reader-ce reader-vars
                   prod-gf prod cond-el-gf cond-el-1
                   reader-act ops-out)) ;; ops-reader))
 

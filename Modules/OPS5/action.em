@@ -7,8 +7,8 @@
 ;;; Description: Action stuff
 ;;;-----------------------------------------------------------------------------
 (defmodule action
-  (syntax (macros macros-tag)
-   import (level1 basic reader-vars reader-ce
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic reader-vars reader-ce
                   prod action-gf wm wm-gf conflict ops-out))
 
 (defun accept () (read-s-expression stdin))

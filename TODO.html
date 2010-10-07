@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*TODO*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-10-07 15:55:16 BST"/>
+<meta name="generated" content="2010-10-07 22:14:46 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -411,36 +411,30 @@ Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the 
 </li>
 </ul>
 <ul>
-<li id="sec-2_4"><span class="done DONE"> DONE</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
-<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-29 Tue 15:31</span></span><br/>
-Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
-</li>
-</ul>
-<ul>
-<li id="sec-2_5"><span class="done DONE"> DONE</span> Add <code>sprint</code> and change <code>print</code> to use stdout <br/>
+<li id="sec-2_4"><span class="done DONE"> DONE</span> Add <code>sprint</code> and change <code>print</code> to use stdout <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-29 Tue 16:58</span></span><br/>
 </li>
 </ul>
 <ul>
-<li id="sec-2_6"><span class="done DONE"> DONE</span> Rename require predicate keyword <code>requiredp:</code> -&gt; <code>required?:</code> <br/>
+<li id="sec-2_5"><span class="done DONE"> DONE</span> Rename require predicate keyword <code>requiredp:</code> -&gt; <code>required?:</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-29 Tue 15:38</span></span><br/>
 </li>
 </ul>
 <ul>
-<li id="sec-2_7"><span class="done DONE"> DONE</span> Rename <code>abstractp:</code> -&gt; <code>abstract?:</code> <br/>
+<li id="sec-2_6"><span class="done DONE"> DONE</span> Rename <code>abstractp:</code> -&gt; <code>abstract?:</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-29 Tue 21:47</span></span><br/>
 </li>
 </ul>
 <ul>
-<li id="sec-2_8"><span class="todo TODO"> TODO</span> Add <code>slice</code> method for <code>&lt;vector&gt;</code> <br/>
+<li id="sec-2_7"><span class="todo TODO"> TODO</span> Add <code>slice</code> method for <code>&lt;vector&gt;</code> <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-2_9"><span class="todo TODO"> TODO</span> Reconsider <code>&lt;int&gt;</code>, should it be <code>&lt;fpi&gt;</code>? <br/>
+<li id="sec-2_8"><span class="todo TODO"> TODO</span> Reconsider <code>&lt;int&gt;</code>, should it be <code>&lt;fpi&gt;</code>? <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-2_10"><span class="todo TODO"> TODO</span> What should <code>&lt;double-float&gt;</code> be called? <br/>
+<li id="sec-2_9"><span class="todo TODO"> TODO</span> What should <code>&lt;double-float&gt;</code> be called? <br/>
 <code>&lt;double&gt;</code> as in Youtoo?  If so then the name <code>&lt;float&gt;</code> as the abstract base
 class is odd.
 </li>
@@ -777,6 +771,9 @@ specifying the class directly rather than as a list.
 </ul>
 <ul>
 <li id="sec-3_37"><span class="todo TODO"> TODO</span> Correct =write=ing of character digrams and escape sequences in strings <br/>
+*** TODO Correct =defconstant= to handle character constants correctly
+See <code>(deflocal nl #\\n)</code> which should be <code>(defconstant nl #\\n)</code> in
+<code>stream.em</code>.
 </li>
 </ul>
 </div>
@@ -993,39 +990,38 @@ post-fix "?" to <code>atom</code> and <code>null</code>.
 </li>
 </ul>
 <ul>
-<li id="sec-5_16"><span class="todo TODO"> TODO</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
+<li id="sec-5_16"><span class="done DONE"> DONE</span> Change <code>prin</code>, <code>print</code> and <code>write</code> to be n-ary <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-07 Thu 22:11</span></span><br/>
 Add <code>sprin</code>, <code>sprint</code> and <code>swrite</code> to take the stream as the first argument.
 </li>
 </ul>
 <ul>
-<li id="sec-5_17"><span class="todo TODO"> TODO</span> Change <code>newline</code> and <code>flush</code> to operate on <code>stdout</code> <br/>
-Add <code>snewline</code> and <code>sflush</code> to take the stream as an argument.
+<li id="sec-5_17"><span class="done DONE"> DONE</span> Add <code>sprint</code> and change <code>print</code> to use stdout <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-07 Thu 22:11</span></span><br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5_18"><span class="todo TODO"> TODO</span> Add <code>sprint</code> and change <code>print</code> to use stdout <br/>
+<li id="sec-5_18"><span class="done DONE"> DONE</span> Add <code>sformat</code> and change <code>format</code> to use stdout <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-07 Thu 22:11</span></span><br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5_19"><span class="todo TODO"> TODO</span> Add <code>sformat</code> and change <code>format</code> to use stdout <br/>
+<li id="sec-5_19"><span class="todo TODO"> TODO</span> Add <code>required?:</code> predicate keyword to class <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5_20"><span class="todo TODO"> TODO</span> Add <code>required?:</code> predicate keyword to class <br/>
+<li id="sec-5_20"><span class="todo TODO"> TODO</span> Add <code>abstract?:</code> predicate keyword to class <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-5_21"><span class="todo TODO"> TODO</span> Add <code>abstract?:</code> predicate keyword to class <br/>
-</li>
-</ul>
-<ul>
-<li id="sec-5_22"><span class="todo TODO"> TODO</span> Investigate the GC in 64bit <br/>
+<li id="sec-5_21"><span class="done DONE"> DONE</span> Investigate the GC in 64bit <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-07 Thu 22:11</span></span><br/>
 Examples/umdrehen.em fails in 64bit probably due to a memory allocation
 error.
 </li>
 </ul>
 <ul>
-<li id="sec-5_23"><span class="todo TODO"> TODO</span> Investigate the <code>generate-*hack*</code> <br/>
+<li id="sec-5_22"><span class="todo TODO"> TODO</span> Investigate the <code>generate-*hack*</code> <br/>
 In file <code>Apply/generate-def-file.ecl</code> the <code>generate-*hack*</code> is necessary
 because
 <ol>
@@ -1043,28 +1039,28 @@ connection to the variable declarations.
 </li>
 </ul>
 <ul>
-<li id="sec-5_24"><span class="todo TODO"> TODO</span> Split <code>defglobal</code> and <code>dynamic-???</code> from <code>Apply/el2lzs-rules.ecl</code> <br/>
+<li id="sec-5_23"><span class="todo TODO"> TODO</span> Split <code>defglobal</code> and <code>dynamic-???</code> from <code>Apply/el2lzs-rules.ecl</code> <br/>
 into a <code>level-1</code> file.
 </li>
 </ul>
 <ul>
-<li id="sec-5_25"><span class="todo TODO"> TODO</span> Create a <code>level-1</code> module <br/>
+<li id="sec-5_24"><span class="todo TODO"> TODO</span> Create a <code>level-1</code> module <br/>
 including the <code>level-0</code>, <code>dynamic</code> and <code>exit-1</code> modules.
 </li>
 </ul>
 <ul>
-<li id="sec-5_26"><span class="todo TODO"> TODO</span> Create the <code>exit-1</code> module <br/>
+<li id="sec-5_25"><span class="todo TODO"> TODO</span> Create the <code>exit-1</code> module <br/>
 containing the <code>throw</code> and <code>catch</code> functionality.  Perhaps the macros from
 Youtoo can be re-used for this.
 </li>
 </ul>
 <ul>
-<li id="sec-5_27"><span class="todo TODO"> TODO</span> Add support for <code>generic-lambda</code> <br/>
+<li id="sec-5_26"><span class="todo TODO"> TODO</span> Add support for <code>generic-lambda</code> <br/>
 See Youtoo.
 </li>
 </ul>
 <ul>
-<li id="sec-5_28"><span class="todo TODO"> TODO</span> Investigate exposing MOP functionality from <code>lzs-mop.ecl</code> <br/>
+<li id="sec-5_27"><span class="todo TODO"> TODO</span> Investigate exposing MOP functionality from <code>lzs-mop.ecl</code> <br/>
 It may be possible to expose the EuLisp Level-1 MOP functionality already
 present and use it in EuLisp modules, e.g. <code>test-introspection.em</code>
 
@@ -1081,7 +1077,7 @@ present and use it in EuLisp modules, e.g. <code>test-introspection.em</code>
 </li>
 </ul>
 <ul>
-<li id="sec-5_29"><span class="done DONE"> DONE</span> Renaming according to 1.0 proposals <br/>
+<li id="sec-5_28"><span class="done DONE"> DONE</span> Renaming according to 1.0 proposals <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-09-07 Tue 21:45</span></span><br/>
 <ul>
 <li>
@@ -1127,7 +1123,7 @@ non-interactive, i.e. no REPL.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-10-07 15:55:16 BST</p>
+<p class="date"> Date: 2010-10-07 22:14:46 BST</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

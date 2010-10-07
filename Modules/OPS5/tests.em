@@ -7,8 +7,8 @@
 ;;; Description: Functions for handling OPS5 tests.
 ;;;-----------------------------------------------------------------------------
 (defmodule tests
-  (syntax (macros macros-tag)
-   import (level1 basic))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic))
 
 (defun test-attrib (x) (car x))
 (defun test-pred   (x) (cadr x))

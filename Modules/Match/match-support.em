@@ -1,7 +1,7 @@
 ;; match-scm.em -- scheme compatibility and support routines for match.em
 (defmodule match-support
-  (syntax ((except (match-let) macros) match0)
-   import (level1)
+  (syntax ((except (match-let) syntax-0) match0)
+   import (level-0)
    export (memq
            boolean?
            ;; How much of this is actually necessary?

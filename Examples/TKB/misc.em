@@ -1,7 +1,7 @@
 ;; Just some odds and ends, not intended to be compilable.
 (defmodule misc
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 ;; Given the arity of a lambda with rest args and the actual arguments
 ;; return a list with the fixed arguments and the rest arguments separated.

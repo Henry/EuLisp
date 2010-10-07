@@ -5,8 +5,8 @@
 ;;          implementation.
 
 (defmodule conflict
-  (syntax (macros macros-tag)
-   import (level1 basic merge prod-gf ops-out))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic merge prod-gf ops-out))
 
 (print "### conflict" nl)
 

@@ -1,46 +1,44 @@
 ;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'youtoo'
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
-;;;  Authors: Chris McConnell, ccm@cs.cmu.edu
-;;; Description: Pseudo-random number generator
-;;;
-;;   This file implements a portable pseudo-random number generator for
-;;   Common LISP.  It has been converted from a C program that was
-;;   converted from a FORTRAN program.  I did not pick the variable
-;;   names or pretend to have figured out how it works.  The
-;;   correctness of the generator can be verified by the TEST function
-;;   at the end of the file.
-;;
-;;;  Compilation
-;;    youtoo -c random2 -l level1 -l math
-;;;-----------------------------------------------------------------------------
+;;; Title: Pseudo-random number generator
+;;;  Authors: Chris McConnell, Andreas Kind
+;;;  Description:
+;;    This file implements a portable pseudo-random number generator for Common
+;;    LISP.  It has been converted from a C program that was converted from a
+;;    FORTRAN program.  I did not pick the variable names or pretend to have
+;;    figured out how it works.  The correctness of the generator can be
+;;    verified by the TEST function at the end of the file.
 ;;;   Original C header:
-;;;
-;;;    This is the random number generator proposed by George Marsaglia in
-;;;    Florida State University Report: FSU-SCRI-87-50
-;;;
-;;;    This Random Number Generator is based on the algorithm in a FORTRAN
-;;;    version published by George Marsaglia and Arif Zaman, Florida State
-;;;    University; ref.: see original comments below.
+;;    This is the random number generator proposed by George Marsaglia in
+;;    Florida State University Report: FSU-SCRI-87-50
+;;
+;;    This Random Number Generator is based on the algorithm in a FORTRAN
+;;    version published by George Marsaglia and Arif Zaman, Florida State
+;;    University; ref.: see original comments below.
+;;
+;;    At the fhw (Fachhochschule Wiesbaden, W.Germany), Dept. of Computer
+;;    Science, we have written sources in further languages (C, Modula-2
+;;    Turbo-Pascal(3.0, 5.0), Basic and Ada) to get exactly the same test
+;;    results compared with the original FORTRAN version.
+;;                                                             April 1989
+;;    Karl-L. Noell <NOELL@DWIFH1.BITNET>
+;;    Helmut  Weber <WEBER@DWIFH1.BITNET>
+;;;  Compilation
+;;    youtoo -c random2 -l level-0 -l math
 ;;;-----------------------------------------------------------------------------
-;;;    At the fhw (Fachhochschule Wiesbaden, W.Germany), Dept. of Computer
-;;;    Science, we have written sources in further languages (C, Modula-2
-;;;    Turbo-Pascal(3.0, 5.0), Basic and Ada) to get exactly the same test
-;;;    results compared with the original FORTRAN version.
-;;;                                                          April 1989
-;;;-----------------------------------------------------------------------------
-;;;                              Karl-L. Noell <NOELL@DWIFH1.BITNET>
-;;;                         and  Helmut  Weber <WEBER@DWIFH1.BITNET>
-;;;-----------------------------------------------------------------------------
-;;; EuLisp'ed: PAB (for Feel '91)
-;;;            Andreas Kind (for youtoo '95) ak1@maths.bath.ac.uk
-;;;-----------------------------------------------------------------------------
+
 (defmodule random2
-  (syntax (macros)
-   import (level1 math)
-   export (*random-state* seed-state random2 random-one
-                          random-float random-integer random-range))
+  (syntax (syntax-0)
+   import (level-0
+           math)
+   export (*random-state*
+           seed-state
+           random2
+           random-one
+           random-float
+           random-integer
+           random-range))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Return a random value between 0.0 and 1.0 from default random state
@@ -177,10 +175,6 @@
       (trunc number))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
-;;;-----------------------------------------------------------------------------
-
-;;;-----------------------------------------------------------------------------
 ;;; Test the random number generator
 ;;  it should print out n = n t six times if it works correctly
 ;;;-----------------------------------------------------------------------------
@@ -199,3 +193,7 @@
         (setq y (+ 1 y))))))
 
 (test)
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module random2
+;;;-----------------------------------------------------------------------------

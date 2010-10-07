@@ -23,8 +23,8 @@
 ;;; Description: bignums
 ;;;-----------------------------------------------------------------------------
 (defmodule bigrat
-  (syntax (macros)
-   import (level1 bigint mpz mpq)
+  (syntax (syntax-0)
+   import (level-0 bigint mpz mpq)
    export (<bigrat> bigrat? make-bigrat-fast numerator denumerator))
 
 ;;;-----------------------------------------------------------------------------

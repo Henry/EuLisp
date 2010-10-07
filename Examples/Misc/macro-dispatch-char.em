@@ -18,26 +18,26 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: Common Lisp like dispatch macro characters
 ;;;  Authors: Andreas Kind
-;;; Description: Common Lisp like dispatch macro characters
 ;;;  Compilation
 ;;    Needs file macro-dispatch-char.dat
 ;;    with (1 2 3 #M(4 5 6) 7 8 9)
 ;;;-----------------------------------------------------------------------------
-(defmodule macro-dispatch-char
-  (syntax (macros)
-   import (level1)
-   export ())
 
-(set-dispatch-macro-character #\# #\M
-                              (lambda (s key dummy)
-                                (reverse (read-s-expression s))))
+(defmodule macro-dispatch-char
+  (syntax (syntax-0)
+   import (level-0))
+
+(set-dispatch-macro-character
+ #\# #\M
+ (lambda (s key dummy)
+   (reverse (read-s-expression s))))
 
 (let ((file (make <file-stream> file-name: "macro-dispatch-char.dat")))
   (print (read-s-expression file) nl)
   (disconnect file))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module macro-dispatch-char
 ;;;-----------------------------------------------------------------------------

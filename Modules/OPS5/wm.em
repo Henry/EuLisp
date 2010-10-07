@@ -3,8 +3,8 @@
 ;; Author : Tracy Gardner
 ;; Description: Working Memory Module for OPS5.
 (defmodule wm
-  (syntax (macros macros-tag)
-   import (level1 basic prod-gf wm-gf cond-el-gf conflict ops-out))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic prod-gf wm-gf cond-el-gf conflict ops-out))
 
 (print "### wm" nl)
 

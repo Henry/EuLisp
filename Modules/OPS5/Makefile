@@ -65,7 +65,7 @@ TEST_EXE = $(TEST_EM:%.em=$(ARCH_DIR)/%)
 lib: $(EUL_MODULE_LIB)
 
 $(EUL_MODULE_LIB) $(EUL_MODULE_LIB_I): $(MODULE_EM) $(OTHER_EM) | $(ARCH_DIR)/.
-	$(U2) $(U2FLAGS) -ar $(MODULE_EM) -od $(ARCH_DIR) -l level1 -recompile
+	$(U2) $(U2FLAGS) -ar $(MODULE_EM) -od $(ARCH_DIR) -l level-0 -recompile
 	mv -f $(ARCH_DIR)/$(MODULE_LIB) $(EUL_MODULE_LIB)
 	mv -f $(MODULE_LIB_I) $(EUL_MODULE_LIB_I)
 
@@ -74,7 +74,7 @@ $(EUL_MODULE_LIB) $(EUL_MODULE_LIB_I): $(MODULE_EM) $(OTHER_EM) | $(ARCH_DIR)/.
 ###-----------------------------------------------------------------------------
 
 $(ARCH_DIR)/% : %.em $(EUL_MODULE_LIB) $(EUL_MODULE_LIB_I) | $(ARCH_DIR)/.
-	$(U2) $(U2FLAGS) $< -od $(ARCH_DIR) -l level1 -l $(MODULE) -no_recompile
+	$(U2) $(U2FLAGS) $< -od $(ARCH_DIR) -l level-0 -l $(MODULE) -no_recompile
 
 .PHONY: test
 test:  $(TEST_EXE)

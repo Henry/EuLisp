@@ -6,11 +6,12 @@ ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
 ### EuLisp Level-0 examples
-EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl triang
+EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl triang \
+	random2 macro-dispatch-char
 EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
 ### EuLisp Level-1 examples
-EXAMPLES_1 = dphil echo echod macro-dispatch-char padd url url2 url3
+EXAMPLES_1 = dphil echo echod padd url url2 url3
 
 OTHERS_EM = csem
 
@@ -51,7 +52,7 @@ $(ARCH_DIR)/hanoi: hanoi.em
 	$(call makeExe0,hanoi)
 
 $(ARCH_DIR)/macro-dispatch-char: macro-dispatch-char.em macro-dispatch-char.dat
-	$(call makeExe1,macro-dispatch-char)
+	$(call makeExe0,macro-dispatch-char)
 
 $(ARCH_DIR)/nfib: nfib.em
 	$(call makeExe0,nfib)
@@ -62,8 +63,8 @@ $(ARCH_DIR)/null: null.em
 $(ARCH_DIR)/padd: padd.em
 	$(call makeExe1,padd)
 
-$(ARCH_DIR)/random2.c: random2.em
-	${U2} ${U2FLAGS} -c random2 -od $(ARCH_DIR) -l level1 -l math
+$(ARCH_DIR)/random2: random2.em
+	$(call makeExe0,random2)
 
 $(ARCH_DIR)/sieve: sieve.em
 	$(call makeExe0,sieve)

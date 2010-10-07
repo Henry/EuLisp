@@ -14,7 +14,7 @@ include ../../Lib.$(ARCH)/Makefile
 EXAMPLES = string-perls
 EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
-makeExe = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1
+makeExe = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level-0
 
 ###-----------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ $(ARCH_DIR)/eul-string-perls.o: eul-string-perls.c | $(ARCH_DIR)/.
 	$(CC) $(CFLAGS) -c eul-string-perls.c -o $(ARCH_DIR)/eul-string-perls.o
 
 $(ARCH_DIR)/string-perls: string-perls.em $(ARCH_DIR)/eul-string-perls.o
-	${U2} ${U2FLAGS} string-perls -od $(ARCH_DIR) -l level1 \
+	${U2} ${U2FLAGS} string-perls -od $(ARCH_DIR) -l level-0 \
 		-cflags -lpcre \
 		-fff eul-string-perls
 

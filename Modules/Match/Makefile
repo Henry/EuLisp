@@ -69,14 +69,14 @@ $(MODULE): match.i
 match.i:  match0.i match-support.i
 
 %.i : %.em
-	${U2} -c ${U2FLAGS} $< -l level1
+	${U2} -c ${U2FLAGS} $< -l level-0
 
 ###-----------------------------------------------------------------------------
 ### Test
 ###-----------------------------------------------------------------------------
 
 $(ARCH_DIR)/% : %.em | $(ARCH_DIR)/.
-	${U2} ${U2FLAGS} $< -od $(ARCH_DIR) -l level1
+	${U2} ${U2FLAGS} $< -od $(ARCH_DIR) -l level-0
 
 $(ARCH_DIR)/test-match: $(EXTRA_EM:.em=.i) match.i test-match-macros.i
 

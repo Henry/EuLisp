@@ -6,8 +6,8 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule test2
-  (syntax (macros)
-   import (level1 pipe))
+  (syntax (syntax-0)
+   import (level-0 pipe))
 
 (let ((x (make <pipe> process: "ls -l"))
       (str ""))

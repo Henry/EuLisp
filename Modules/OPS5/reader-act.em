@@ -7,8 +7,8 @@
 ;;; Description: Functions to set up actions
 ;;;-----------------------------------------------------------------------------
 (defmodule reader-act
-  (syntax (macros macros-tag)
-   import (level1 basic prod action ops-out))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic prod action ops-out))
 
 (defconstant ops-warn format)
 

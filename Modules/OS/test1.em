@@ -1,6 +1,6 @@
 (defmodule test1
-  (syntax (macros)
-   import (level1 serial))
+  (syntax (syntax-0)
+   import (level-0 serial))
 
 (defun foo (x) x)
 

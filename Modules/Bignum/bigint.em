@@ -23,8 +23,8 @@
 ;;; Description: bignums
 ;;;-----------------------------------------------------------------------------
 (defmodule bigint
-  (syntax (macros)
-   import (level1 mpz)
+  (syntax (syntax-0)
+   import (level-0 mpz)
    export (<bigint> bigint? bigint-value make-bigint-fast))
 
 ;;;-----------------------------------------------------------------------------
@@ -57,7 +57,7 @@
 
 (defmethod generic-write ((r <bigint>) (s <stream>) )
   (let ((str (mpz-get-str 10 (bigint-value r))))
-    (prin-string str (string-size str) s)))
+    (print-string str (string-size str) s)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Binary +

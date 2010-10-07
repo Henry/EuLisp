@@ -7,8 +7,8 @@
 ;;; Description: test module
 ;;;-----------------------------------------------------------------------------
 (defmodule test1
-  (syntax (macros)
-   import (level1 ops5))
+  (syntax (syntax-0)
+   import (level-0 ops5))
 
 (if (< *argc* 2)
     (sformat stderr "*** USAGE: ~a <ops5-file>\n" (vector-ref *argv* 0))

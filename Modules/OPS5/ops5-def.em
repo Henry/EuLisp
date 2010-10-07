@@ -7,8 +7,8 @@
 ;;; Description: Definitions for main ops5 module.
 ;;;-----------------------------------------------------------------------------
 (defmodule ops5-def
-  (syntax (macros macros-tag)
-   import (level1 basic cond-el-gf wm conflict))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic cond-el-gf wm conflict))
 
 (print "### ops5-def" nl)
 

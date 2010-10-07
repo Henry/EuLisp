@@ -43,14 +43,14 @@ TEST_EXE = $(TEST_EM:%.em=$(ARCH_DIR)/%)
 lib: $(SYNTAX_MODULE_LIB_I)
 
 %.i : %.em
-	${U2} -c ${U2FLAGS} $< -l level1
+	${U2} -c ${U2FLAGS} $< -l level-0
 
 ###-----------------------------------------------------------------------------
 ### Test
 ###-----------------------------------------------------------------------------
 
 $(ARCH_DIR)/% : %.em $(SYNTAX_MODULE_LIB_I) | $(ARCH_DIR)/.
-	$(U2) $(U2FLAGS) $< -od $(ARCH_DIR) -l level1
+	$(U2) $(U2FLAGS) $< -od $(ARCH_DIR) -l level-0
 
 .PHONY: test
 test: $(TEST_EXE)

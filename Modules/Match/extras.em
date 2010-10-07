@@ -1,6 +1,6 @@
 (defmodule extras
-  (syntax (macros)
-   import (level1)
+  (syntax (syntax-0)
+   import (level-0)
    export (end-of-stream?))
 
 ;; It's a lot simple to do (until (end-of-stream? s) (read s))

@@ -3,8 +3,8 @@
 ;; Author : Tracy Gardner
 ;; Description: Production related classes for OPS5 implementation.
 (defmodule prod
-  (syntax (macros macros-tag)
-   import (level1 basic prod-gf cond-el-gf cond-el-2
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic prod-gf cond-el-gf cond-el-2
                   conflict action-gf ops-out))
 
 ;;;-----------------------------------------------------------------------------

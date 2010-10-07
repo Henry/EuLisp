@@ -137,9 +137,6 @@
 *** DONE Change =prin=, =print= and =write= to be n-ary
     CLOSED: [2010-06-15 Tue 15:30]
     Add =sprin=, =sprint= and =swrite= to take the stream as the first argument.
-*** DONE Change =newline= and =flush= to operate on =stdout=
-    CLOSED: [2010-06-29 Tue 15:31]
-    Add =snewline= and =sflush= to take the stream as an argument.
 *** DONE Add =sprint= and change =print= to use stdout
     CLOSED: [2010-06-29 Tue 16:58]
 *** DONE Rename require predicate keyword =requiredp:= -> =required?:=
@@ -309,6 +306,9 @@
     If only one super-class is specified allow single-inheritance syntax of
     specifying the class directly rather than as a list.
 *** TODO Correct =write=ing of character digrams and escape sequences in strings
+*** TODO Correct =defconstant= to handle character constants correctly
+    See =(deflocal nl #\\n)= which should be =(defconstant nl #\\n)= in
+    =stream.em=.
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=
@@ -402,15 +402,17 @@
     CLOSED: [2010-09-02 Thu 15:45]
     Rename predicates ending in "-p" and "p" to use the post-fix "?".  Add the
     post-fix "?" to =atom= and =null=.
-*** TODO Change =prin=, =print= and =write= to be n-ary
+*** DONE Change =prin=, =print= and =write= to be n-ary
+    CLOSED: [2010-10-07 Thu 22:11]
     Add =sprin=, =sprint= and =swrite= to take the stream as the first argument.
-*** TODO Change =newline= and =flush= to operate on =stdout=
-    Add =snewline= and =sflush= to take the stream as an argument.
-*** TODO Add =sprint= and change =print= to use stdout
-*** TODO Add =sformat= and change =format= to use stdout
+*** DONE Add =sprint= and change =print= to use stdout
+    CLOSED: [2010-10-07 Thu 22:11]
+*** DONE Add =sformat= and change =format= to use stdout
+    CLOSED: [2010-10-07 Thu 22:11]
 *** TODO Add =required?:= predicate keyword to class
 *** TODO Add =abstract?:= predicate keyword to class
-*** TODO Investigate the GC in 64bit
+*** DONE Investigate the GC in 64bit
+    CLOSED: [2010-10-07 Thu 22:11]
     Examples/umdrehen.em fails in 64bit probably due to a memory allocation
     error.
 *** TODO Investigate the =generate-*hack*=

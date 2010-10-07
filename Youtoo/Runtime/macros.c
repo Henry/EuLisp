@@ -40,169 +40,169 @@ void initialize_module_macros()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_633, sym_632, sym_631, sym_630, sym_629, sym_628, sym_627, sym_626, sym_625, sym_624, sym_623, sym_622, sym_621, sym_620, G00619, sym_617, G00616, G00614, G00612, sym_610, sym_609, G00608, sym_606, sym_605, G00604, G00602, sym_600, G00599, sym_597, sym_596, sym_592, sym_591, sym_590, sym_589, sym_588, sym_587, sym_586, sym_585, sym_584, sym_583, sym_582, sym_581, G00578, sym_576, G00575, G00573, sym_571, sym_570, sym_569, G00568, G00566, sym_564, sym_563, sym_562, sym_561, sym_560, G00559, sym_557, G00556, sym_554, G00553, sym_551, sym_550, sym_549, G00548, sym_546, sym_545, sym_544, G00543, sym_541, sym_540, sym_539, G00538, sym_536, sym_535, sym_534, G00532, sym_530, sym_529, sym_528, sym_527, sym_526, G00525;
+  LispRef sym_1158, sym_1157, sym_1156, sym_1155, sym_1154, sym_1153, sym_1152, sym_1151, sym_1150, sym_1149, sym_1148, sym_1147, sym_1146, sym_1145, G001144, sym_1142, G001141, G001139, G001137, sym_1135, sym_1134, G001133, sym_1131, sym_1130, G001129, G001127, sym_1125, G001124, sym_1122, sym_1121, sym_1117, sym_1116, sym_1115, sym_1114, sym_1113, sym_1112, sym_1111, sym_1110, sym_1109, sym_1108, sym_1107, sym_1106, G001103, sym_1101, G001100, G001098, sym_1096, sym_1095, sym_1094, G001093, G001091, sym_1089, sym_1088, sym_1087, sym_1086, sym_1085, G001084, sym_1082, G001081, sym_1079, G001078, sym_1076, sym_1075, sym_1074, G001073, sym_1071, sym_1070, sym_1069, G001068, sym_1066, sym_1065, sym_1064, G001063, sym_1061, sym_1060, sym_1059, G001057, sym_1055, sym_1054, sym_1053, sym_1052, sym_1051, G001050;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 73 is_init: 0 index: 25 binding: anonymous */
-  static const void *G00524[] = {I(aa,1b,10,1c),I(11,1d,47,00),I(01,50,1b,34),I(00,00,00,15),I(1d,23,00,00),B(macros ,20),I(50,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,16),I(23,00,00,00),B(macros ,20),I(1f,03,0f,32),I(00,00,00,ec),I(1f,03,7b,24),B(macros ,9),I(3c,01,1b,34),I(00,00,00,31),I(1f,04,86,0f),I(23,00,00,00),B(macros ,21),I(1c,0f,1b,86),I(0f,47,00,00),I(1c,0f,23,00),B(macros ,22),I(1c,0f,1b,1f),I(09,0f,22,05),I(32,00,00,00),I(00,00,00,b1),I(1f,04,12,1b),I(34,00,00,00),I(00,00,00,24),I(47,00,00,86),I(0f,23,00,00),B(macros ,23),I(1c,0f,1b,1f),I(07,0f,22,02),I(32,00,00,00),I(00,00,00,87),I(1f,05,11,1b),I(34,00,00,00),I(00,00,00,3c),I(1f,06,86,0f),I(23,00,00,00),B(macros ,21),I(1c,0f,23,00),B(macros ,22),I(86,0f,1c,1c),I(0f,47,00,00),I(1c,0f,23,00),B(macros ,24),I(1c,0f,1b,1f),I(0c,0f,22,06),I(32,00,00,00),I(00,00,00,45),I(24,00,00,00),B(boot1 ,14),I(34,00,00,00),I(00,00,00,34),I(1f,06,10,1b),I(86,0f,23,00),B(macros ,21),I(1c,0f,1b,86),I(0f,47,00,00),I(1c,0f,23,00),B(macros ,22),I(1c,0f,1b,1f),I(0c,0f,22,06),I(32,00,00,00),I(00,00,00,09),I(86,22,01,22),I(01,22,01,45),I(05,00,00,00)};
+  static const void *G001049[] = {I(aa,1b,10,1c),I(11,1d,47,00),I(01,50,1b,34),I(00,00,00,15),I(1d,23,00,00),B(macros ,20),I(50,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,16),I(23,00,00,00),B(macros ,20),I(1f,03,0f,32),I(00,00,00,ec),I(1f,03,7b,24),B(macros ,9),I(3c,01,1b,34),I(00,00,00,31),I(1f,04,86,0f),I(23,00,00,00),B(macros ,21),I(1c,0f,1b,86),I(0f,47,00,00),I(1c,0f,23,00),B(macros ,22),I(1c,0f,1b,1f),I(09,0f,22,05),I(32,00,00,00),I(00,00,00,b1),I(1f,04,12,1b),I(34,00,00,00),I(00,00,00,24),I(47,00,00,86),I(0f,23,00,00),B(macros ,23),I(1c,0f,1b,1f),I(07,0f,22,02),I(32,00,00,00),I(00,00,00,87),I(1f,05,11,1b),I(34,00,00,00),I(00,00,00,3c),I(1f,06,86,0f),I(23,00,00,00),B(macros ,21),I(1c,0f,23,00),B(macros ,22),I(86,0f,1c,1c),I(0f,47,00,00),I(1c,0f,23,00),B(macros ,24),I(1c,0f,1b,1f),I(0c,0f,22,06),I(32,00,00,00),I(00,00,00,45),I(24,00,00,00),B(boot1 ,14),I(34,00,00,00),I(00,00,00,34),I(1f,06,10,1b),I(86,0f,23,00),B(macros ,21),I(1c,0f,1b,86),I(0f,47,00,00),I(1c,0f,23,00),B(macros ,22),I(1c,0f,1b,1f),I(0c,0f,22,06),I(32,00,00,00),I(00,00,00,09),I(86,22,01,22),I(01,22,01,45),I(05,00,00,00)};
 
-  eul_allocate_static_string(str_533, "*** WARNING: missing else branch in (case ... ~a)", 49);
+  eul_allocate_static_string(str_1058, "*** WARNING: missing else branch in (case ... ~a)", 49);
   /* Byte-vector with size: 39 is_init: 0 index: 30 binding: case */
-  static const void *G00531[] = {I(43,fe,46,02),I(24,00,00,00),B(symbol ,6),I(3c,00,1c,24),B(boot ,18),I(3c,01,1b,2c),I(1f,03,1c,24),B(boot ,23),I(3c,02,1f,03),I(1c,1c,48,00),I(00,1b,48,00),I(01,47,00,01),I(10,1b,23,00),B(macros ,20),I(50,12,1b,34),I(00,00,00,1d),I(23,00,00,00),B(macros ,26),I(47,00,01,24),B(format ,5),I(3c,02,32,00),I(00,00,00,07),I(86,2a,1f,09),I(86,0f,47,00),I(00,1c,0f,1b),I(86,0f,23,00),B(macros ,27),I(23,00,00,00),B(macros ,25),I(3b,01,1f,0c),I(24,00,00,00),B(collect ,2),I(3c,02,23,00),B(macros ,28),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(macros ,29),I(1c,0f,45,11)};
+  static const void *G001056[] = {I(43,fe,46,02),I(24,00,00,00),B(symbol ,6),I(3c,00,1c,24),B(boot ,18),I(3c,01,1b,2c),I(1f,03,1c,24),B(boot ,23),I(3c,02,1f,03),I(1c,1c,48,00),I(00,1b,48,00),I(01,47,00,01),I(10,1b,23,00),B(macros ,20),I(50,12,1b,34),I(00,00,00,1d),I(23,00,00,00),B(macros ,26),I(47,00,01,24),B(format ,5),I(3c,02,32,00),I(00,00,00,07),I(86,2a,1f,09),I(86,0f,47,00),I(00,1c,0f,1b),I(86,0f,23,00),B(macros ,27),I(23,00,00,00),B(macros ,25),I(3b,01,1f,0c),I(24,00,00,00),B(collect ,2),I(3c,02,23,00),B(macros ,28),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(macros ,29),I(1c,0f,45,11)};
 
   /* Byte-vector with size: 23 is_init: 0 index: 34 binding: with-handler */
-  static const void *G00537[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1d,86),I(0f,23,00,00),B(macros ,31),I(1c,0f,23,00),B(macros ,32),I(1f,04,0f,1b),I(86,0f,1f,04),I(1c,0f,1b,86),I(0f,83,86,0f),I(23,00,00,00),B(macros ,33),I(1c,0f,1f,08),I(86,0f,1c,1c),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,29),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,23,00,00),B(macros ,32),I(1c,0f,45,11)};
+  static const void *G001062[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1d,86),I(0f,23,00,00),B(macros ,31),I(1c,0f,23,00),B(macros ,32),I(1f,04,0f,1b),I(86,0f,1f,04),I(1c,0f,1b,86),I(0f,83,86,0f),I(23,00,00,00),B(macros ,33),I(1c,0f,1f,08),I(86,0f,1c,1c),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,29),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,23,00,00),B(macros ,32),I(1c,0f,45,11)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 38 binding: let/cc */
-  static const void *G00542[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1d,86),I(0f,1b,1f,03),I(0f,23,00,00),B(macros ,35),I(1c,0f,23,00),B(macros ,36),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,37),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1b,86,0f),I(1f,09,86,0f),I(1c,1c,0f,23),B(macros ,29),I(1c,0f,45,0e)};
+  static const void *G001067[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1d,86),I(0f,1b,1f,03),I(0f,23,00,00),B(macros ,35),I(1c,0f,23,00),B(macros ,36),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,37),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,1b,86,0f),I(1f,09,86,0f),I(1c,1c,0f,23),B(macros ,29),I(1c,0f,45,0e)};
 
   /* Byte-vector with size: 27 is_init: 0 index: 42 binding: last */
-  static const void *G00547[] = {I(43,fe,1b,12),I(1b,34,00,00),I(00,00,00,3b),I(1d,86,0f,23),B(macros ,39),I(1c,0f,83,86),I(0f,1c,1c,0f),I(23,00,00,00),B(macros ,40),I(1c,0f,1b,86),I(0f,1f,08,1c),I(0f,23,00,00),B(macros ,41),I(1c,0f,22,07),I(32,00,00,00),I(00,00,00,30),I(1d,86,0f,23),B(macros ,39),I(1c,0f,1b,1f),I(04,0f,23,00),B(macros ,40),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,23,00,00),B(macros ,41),I(1c,0f,22,06),I(45,03,00,00)};
+  static const void *G001072[] = {I(43,fe,1b,12),I(1b,34,00,00),I(00,00,00,3b),I(1d,86,0f,23),B(macros ,39),I(1c,0f,83,86),I(0f,1c,1c,0f),I(23,00,00,00),B(macros ,40),I(1c,0f,1b,86),I(0f,1f,08,1c),I(0f,23,00,00),B(macros ,41),I(1c,0f,22,07),I(32,00,00,00),I(00,00,00,30),I(1d,86,0f,23),B(macros ,39),I(1c,0f,1b,1f),I(04,0f,23,00),B(macros ,40),I(1c,0f,1b,86),I(0f,1f,07,1c),I(0f,23,00,00),B(macros ,41),I(1c,0f,22,06),I(45,03,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 44 binding: block */
-  static const void *G00552[] = {I(a8,23,00,00),B(macros ,43),I(1c,0f,45,01)};
+  static const void *G001077[] = {I(a8,23,00,00),B(macros ,43),I(1c,0f,45,01)};
 
   /* Byte-vector with size: 8 is_init: 0 index: 46 binding: defglobal */
-  static const void *G00555[] = {I(ab,1c,86,0f),I(23,00,00,00),B(macros ,21),I(1c,0f,1d,86),I(0f,1c,1c,0f),I(23,00,00,00),B(macros ,45),I(1c,0f,45,06)};
+  static const void *G001080[] = {I(ab,1c,86,0f),I(23,00,00,00),B(macros ,21),I(1c,0f,1d,86),I(0f,1c,1c,0f),I(23,00,00,00),B(macros ,45),I(1c,0f,45,06)};
 
   /* Byte-vector with size: 47 is_init: 0 index: 52 binding: unwind-protect */
-  static const void *G00558[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,23,00),B(macros ,47),I(86,0f,23,00),B(macros ,21),I(1c,0f,83,86),I(0f,23,00,00),B(macros ,48),I(1c,0f,1b,86),I(0f,1f,06,1c),I(24,00,00,00),B(boot ,7),I(3c,02,86,1c),I(0f,23,00,00),B(macros ,49),I(1c,0f,23,00),B(macros ,47),I(86,0f,23,00),B(macros ,50),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(macros ,51),I(1c,0f,1b,86),I(0f,1f,0c,1c),I(0f,23,00,00),B(macros ,45),I(1c,0f,1f,12),I(86,0f,1f,11),I(1c,0f,1b,86),I(0f,83,86,0f),I(23,00,00,00),B(macros ,48),I(1c,0f,1f,15),I(86,0f,1c,1c),I(0f,1f,18,1c),I(24,00,00,00),B(boot ,7),I(3c,02,1f,05),I(1c,0f,23,00),B(macros ,29),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,23,00,00),B(macros ,32),I(1c,0f,45,1f)};
+  static const void *G001083[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,23,00),B(macros ,47),I(86,0f,23,00),B(macros ,21),I(1c,0f,83,86),I(0f,23,00,00),B(macros ,48),I(1c,0f,1b,86),I(0f,1f,06,1c),I(24,00,00,00),B(boot ,7),I(3c,02,86,1c),I(0f,23,00,00),B(macros ,49),I(1c,0f,23,00),B(macros ,47),I(86,0f,23,00),B(macros ,50),I(1c,0f,1b,86),I(0f,1f,03,1c),I(0f,23,00,00),B(macros ,51),I(1c,0f,1b,86),I(0f,1f,0c,1c),I(0f,23,00,00),B(macros ,45),I(1c,0f,1f,12),I(86,0f,1f,11),I(1c,0f,1b,86),I(0f,83,86,0f),I(23,00,00,00),B(macros ,48),I(1c,0f,1f,15),I(86,0f,1c,1c),I(0f,1f,18,1c),I(24,00,00,00),B(boot ,7),I(3c,02,1f,05),I(1c,0f,23,00),B(macros ,29),I(1c,0f,1b,86),I(0f,1f,0b,1c),I(0f,23,00,00),B(macros ,32),I(1c,0f,45,1f)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 53 binding: not */
-  static const void *G00565[] = {I(aa,86,0f,23),B(macros ,23),I(1c,0f,45,01)};
+  static const void *G001090[] = {I(aa,86,0f,23),B(macros ,23),I(1c,0f,45,01)};
 
   /* Byte-vector with size: 23 is_init: 0 index: 57 binding: while */
-  static const void *G00567[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1b,86),I(0f,1b,86,0f),I(1f,03,1c,24),B(boot ,7),I(3c,02,1f,05),I(1c,0f,23,00),B(macros ,54),I(1c,0f,1b,86),I(0f,86,1c,0f),I(1f,07,1c,0f),I(1b,86,0f,1f),I(09,86,0f,1b),I(86,0f,1d,1c),I(0f,23,00,00),B(macros ,55),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,56),I(1c,0f,23,00),B(macros ,43),I(1c,0f,45,12)};
+  static const void *G001092[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1b,86),I(0f,1b,86,0f),I(1f,03,1c,24),B(boot ,7),I(3c,02,1f,05),I(1c,0f,23,00),B(macros ,54),I(1c,0f,1b,86),I(0f,86,1c,0f),I(1f,07,1c,0f),I(1b,86,0f,1f),I(09,86,0f,1b),I(86,0f,1d,1c),I(0f,23,00,00),B(macros ,55),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,56),I(1c,0f,23,00),B(macros ,43),I(1c,0f,45,12)};
 
   /* Byte-vector with size: 9 is_init: 0 index: 58 binding: anonymous */
-  static const void *G00572[] = {I(aa,1b,10,1b),I(86,0f,23,00),B(macros ,21),I(1c,0f,1f,03),I(11,1b,10,1b),I(86,0f,1f,03),I(1c,0f,23,00),B(macros ,45),I(1c,0f,45,08)};
+  static const void *G001097[] = {I(aa,1b,10,1b),I(86,0f,23,00),B(macros ,21),I(1c,0f,1f,03),I(11,1b,10,1b),I(86,0f,1f,03),I(1c,0f,23,00),B(macros ,45),I(1c,0f,45,08)};
 
   /* Byte-vector with size: 27 is_init: 0 index: 60 binding: dynamic-let */
-  static const void *G00574[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,2a,23),B(macros ,27),I(23,00,00,00),B(macros ,58),I(3b,01,1d,24),B(collect ,2),I(3c,02,23,00),B(macros ,32),I(1d,0f,1f,03),I(24,00,00,00),B(collect ,9),I(3c,01,1b,86),I(0f,23,00,00),B(macros ,48),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,59),I(1c,0f,1b,86),I(0f,1f,08,1c),I(24,00,00,00),B(boot ,7),I(3c,02,23,00),B(macros ,32),I(1c,0f,45,0c)};
+  static const void *G001099[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,2a,23),B(macros ,27),I(23,00,00,00),B(macros ,58),I(3b,01,1d,24),B(collect ,2),I(3c,02,23,00),B(macros ,32),I(1d,0f,1f,03),I(24,00,00,00),B(collect ,9),I(3c,01,1b,86),I(0f,23,00,00),B(macros ,48),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,59),I(1c,0f,1b,86),I(0f,1f,08,1c),I(24,00,00,00),B(boot ,7),I(3c,02,23,00),B(macros ,32),I(1c,0f,45,0c)};
 
-  eul_allocate_static_string(str_579, "time", 4);
-  eul_allocate_static_string(str_580, "time", 4);
-  eul_allocate_static_string(str_593, "\nsystem: ", 9);
-  eul_allocate_static_string(str_594, "\nuser: ", 7);
-  eul_allocate_static_string(str_595, "real: ", 6);
+  eul_allocate_static_string(str_1104, "time", 4);
+  eul_allocate_static_string(str_1105, "time", 4);
+  eul_allocate_static_string(str_1118, "\nsystem: ", 9);
+  eul_allocate_static_string(str_1119, "\nuser: ", 7);
+  eul_allocate_static_string(str_1120, "real: ", 6);
   /* Byte-vector with size: 84 is_init: 0 index: 80 binding: time-execution */
-  static const void *G00577[] = {I(ab,23,00,00),B(macros ,61),I(24,00,00,00),B(symbol ,6),I(3c,01,23,00),B(macros ,62),I(24,00,00,00),B(symbol ,6),I(3c,01,23,00),B(macros ,63),I(86,0f,1b,86),I(0f,1f,03,1c),I(0f,1f,06,86),I(0f,1f,04,1c),I(0f,1b,86,0f),I(1f,03,1c,0f),I(23,00,00,00),B(macros ,64),I(86,0f,23,00),B(macros ,65),I(1c,0f,23,00),B(macros ,64),I(86,0f,23,00),B(macros ,65),I(1c,0f,23,00),B(macros ,66),I(1c,0f,23,00),B(macros ,67),I(86,0f,23,00),B(macros ,68),I(1c,0f,23,00),B(macros ,69),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,70),I(1c,0f,1b,86),I(0f,1f,0a,1c),I(0f,23,00,00),B(macros ,49),I(1c,0f,23,00),B(macros ,63),I(86,0f,1f,17),I(86,0f,1c,1c),I(0f,1f,03,1c),I(0f,23,00,00),B(macros ,71),I(1c,0f,1b,86),I(0f,1f,1c,1c),I(0f,23,00,00),B(macros ,72),I(1c,0f,82,86),I(0f,1f,1f,1c),I(0f,23,00,00),B(macros ,73),I(1c,0f,83,86),I(0f,1f,22,1c),I(0f,23,00,00),B(macros ,73),I(1c,0f,84,86),I(0f,1f,25,1c),I(0f,23,00,00),B(macros ,73),I(1c,0f,23,00),B(macros ,74),I(86,0f,1c,1c),I(0f,23,00,00),B(macros ,75),I(1c,0f,1f,06),I(1c,0f,23,00),B(macros ,76),I(1c,0f,1f,0b),I(1c,0f,23,00),B(macros ,77),I(1c,0f,1f,2f),I(1c,0f,23,00),B(macros ,78),I(1c,0f,1f,2f),I(86,0f,1c,1c),I(0f,1f,14,1c),I(0f,1f,2b,1c),I(0f,23,00,00),B(macros ,79),I(1c,0f,45,37)};
+  static const void *G001102[] = {I(ab,23,00,00),B(macros ,61),I(24,00,00,00),B(symbol ,6),I(3c,01,23,00),B(macros ,62),I(24,00,00,00),B(symbol ,6),I(3c,01,23,00),B(macros ,63),I(86,0f,1b,86),I(0f,1f,03,1c),I(0f,1f,06,86),I(0f,1f,04,1c),I(0f,1b,86,0f),I(1f,03,1c,0f),I(23,00,00,00),B(macros ,64),I(86,0f,23,00),B(macros ,65),I(1c,0f,23,00),B(macros ,64),I(86,0f,23,00),B(macros ,65),I(1c,0f,23,00),B(macros ,66),I(1c,0f,23,00),B(macros ,67),I(86,0f,23,00),B(macros ,68),I(1c,0f,23,00),B(macros ,69),I(1c,0f,1b,86),I(0f,1f,04,1c),I(0f,23,00,00),B(macros ,70),I(1c,0f,1b,86),I(0f,1f,0a,1c),I(0f,23,00,00),B(macros ,49),I(1c,0f,23,00),B(macros ,63),I(86,0f,1f,17),I(86,0f,1c,1c),I(0f,1f,03,1c),I(0f,23,00,00),B(macros ,71),I(1c,0f,1b,86),I(0f,1f,1c,1c),I(0f,23,00,00),B(macros ,72),I(1c,0f,82,86),I(0f,1f,1f,1c),I(0f,23,00,00),B(macros ,73),I(1c,0f,83,86),I(0f,1f,22,1c),I(0f,23,00,00),B(macros ,73),I(1c,0f,84,86),I(0f,1f,25,1c),I(0f,23,00,00),B(macros ,73),I(1c,0f,23,00),B(macros ,74),I(86,0f,1c,1c),I(0f,23,00,00),B(macros ,75),I(1c,0f,1f,06),I(1c,0f,23,00),B(macros ,76),I(1c,0f,1f,0b),I(1c,0f,23,00),B(macros ,77),I(1c,0f,1f,2f),I(1c,0f,23,00),B(macros ,78),I(1c,0f,1f,2f),I(86,0f,1c,1c),I(0f,1f,14,1c),I(0f,1f,2b,1c),I(0f,23,00,00),B(macros ,79),I(1c,0f,45,37)};
 
   /* Byte-vector with size: 25 is_init: 0 index: 82 binding: butlast */
-  static const void *G00598[] = {I(43,fe,1b,12),I(1b,34,00,00),I(00,00,00,37),I(1d,86,0f,23),B(macros ,81),I(1c,0f,83,86),I(0f,1c,1c,0f),I(23,00,00,00),B(macros ,41),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,81),I(1c,0f,22,06),I(32,00,00,00),I(00,00,00,2c),I(1d,86,0f,23),B(macros ,81),I(1c,0f,1b,1f),I(04,0f,23,00),B(macros ,41),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,81),I(1c,0f,22,05),I(45,03,00,00)};
+  static const void *G001123[] = {I(43,fe,1b,12),I(1b,34,00,00),I(00,00,00,37),I(1d,86,0f,23),B(macros ,81),I(1c,0f,83,86),I(0f,1c,1c,0f),I(23,00,00,00),B(macros ,41),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,81),I(1c,0f,22,06),I(32,00,00,00),I(00,00,00,2c),I(1d,86,0f,23),B(macros ,81),I(1c,0f,1b,1f),I(04,0f,23,00),B(macros ,41),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,81),I(1c,0f,22,05),I(45,03,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 83 binding: return-from */
-  static const void *G00601[] = {I(43,fe,23,00),B(macros ,32),I(1c,0f,1d,1c),I(24,00,00,00),B(boot1 ,25),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G001126[] = {I(43,fe,23,00),B(macros ,32),I(1c,0f,1d,1c),I(24,00,00,00),B(boot1 ,25),I(3d,02,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 86 binding: dynamic-setq */
-  static const void *G00603[] = {I(ab,23,00,00),B(macros ,84),I(86,0f,23,00),B(macros ,85),I(1c,0f,1f,03),I(86,0f,23,00),B(macros ,21),I(1c,0f,1f,04),I(86,0f,1c,1c),I(0f,1f,04,1c),I(0f,45,08,00)};
+  static const void *G001128[] = {I(ab,23,00,00),B(macros ,84),I(86,0f,23,00),B(macros ,85),I(1c,0f,1f,03),I(86,0f,23,00),B(macros ,21),I(1c,0f,1f,04),I(86,0f,1c,1c),I(0f,1f,04,1c),I(0f,45,08,00)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 89 binding: defcondition */
-  static const void *G00607[] = {I(43,fc,1d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(macros ,87),I(1f,03,1f,03),I(0f,1c,1c,0f),I(1f,07,1c,0f),I(23,00,00,00),B(macros ,88),I(1c,0f,45,09)};
+  static const void *G001132[] = {I(43,fc,1d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(macros ,87),I(1f,03,1f,03),I(0f,1c,1c,0f),I(1f,07,1c,0f),I(23,00,00,00),B(macros ,88),I(1c,0f,45,09)};
 
   /* Byte-vector with size: 8 is_init: 0 index: 90 binding: throw */
-  static const void *G00611[] = {I(43,fe,1c,86),I(0f,23,00,00),B(macros ,50),I(1c,0f,23,00),B(macros ,32),I(1f,03,0f,1b),I(86,0f,1d,1c),I(0f,45,06,00)};
+  static const void *G001136[] = {I(43,fe,1c,86),I(0f,23,00,00),B(macros ,50),I(1c,0f,23,00),B(macros ,32),I(1f,03,0f,1b),I(86,0f,1d,1c),I(0f,45,06,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 91 binding: dynamic */
-  static const void *G00613[] = {I(aa,86,0f,23),B(macros ,21),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,84),I(1c,0f,45,03)};
+  static const void *G001138[] = {I(aa,86,0f,23),B(macros ,21),I(1c,0f,1b,86),I(0f,23,00,00),B(macros ,84),I(1c,0f,45,03)};
 
   /* Byte-vector with size: 13 is_init: 0 index: 93 binding: catch */
-  static const void *G00615[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1b,86),I(0f,1f,03,1c),I(0f,1b,86,0f),I(1b,1f,05,0f),I(23,00,00,00),B(macros ,92),I(1c,0f,1b,86),I(0f,1f,06,1c),I(0f,23,00,00),B(macros ,43),I(1c,0f,45,0a)};
+  static const void *G001140[] = {I(43,fe,24,00),B(symbol ,6),I(3c,00,1b,86),I(0f,1f,03,1c),I(0f,1b,86,0f),I(1b,1f,05,0f),I(23,00,00,00),B(macros ,92),I(1c,0f,1b,86),I(0f,1f,06,1c),I(0f,23,00,00),B(macros ,43),I(1c,0f,45,0a)};
 
   /* Byte-vector with size: 126 is_init: 1 index: 0 binding: initialize-macros */
-  static const void *G00618[] = {I(87,25,00,00),B(macros ,1),I(24,00,00,00),B(stream0 ,1),I(3e,0b,24,00),B(stream0 ,0),I(3c,00,21,01),I(24,00,00,00),B(telos0 ,1),I(3e,0b,24,00),B(telos0 ,0),I(3c,00,21,01),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(macros ,94),I(23,00,00,00),B(macros ,93),I(3b,fe,25,00),B(macros ,19),I(23,00,00,00),B(macros ,50),I(23,00,00,00),B(macros ,91),I(3b,01,25,00),B(macros ,18),I(23,00,00,00),B(macros ,95),I(23,00,00,00),B(macros ,90),I(3b,fe,25,00),B(macros ,17),I(23,00,00,00),B(macros ,96),I(23,00,00,00),B(macros ,89),I(3b,fc,25,00),B(macros ,16),I(23,00,00,00),B(macros ,97),I(23,00,00,00),B(macros ,86),I(3b,02,25,00),B(macros ,15),I(23,00,00,00),B(macros ,98),I(23,00,00,00),B(macros ,83),I(3b,fe,25,00),B(macros ,14),I(23,00,00,00),B(macros ,99),I(23,00,00,00),B(macros ,82),I(3b,fe,25,00),B(macros ,13),I(23,00,00,00),B(macros ,100),I(23,00,00,00),B(macros ,80),I(3b,02,25,00),B(macros ,12),I(23,00,00,00),B(macros ,92),I(23,00,00,00),B(macros ,60),I(3b,fe,25,00),B(macros ,11),I(23,00,00,00),B(macros ,101),I(23,00,00,00),B(macros ,57),I(3b,fe,25,00),B(macros ,10),I(23,00,00,00),B(macros ,102),I(23,00,00,00),B(macros ,53),I(3b,01,25,00),B(macros ,9),I(23,00,00,00),B(macros ,59),I(23,00,00,00),B(macros ,52),I(3b,fe,25,00),B(macros ,8),I(23,00,00,00),B(macros ,103),I(23,00,00,00),B(macros ,46),I(3b,02,25,00),B(macros ,7),I(23,00,00,00),B(macros ,104),I(23,00,00,00),B(macros ,44),I(3b,ff,25,00),B(macros ,6),I(23,00,00,00),B(macros ,105),I(23,00,00,00),B(macros ,42),I(3b,fe,25,00),B(macros ,5),I(23,00,00,00),B(macros ,43),I(23,00,00,00),B(macros ,38),I(3b,fe,25,00),B(macros ,4),I(23,00,00,00),B(macros ,106),I(23,00,00,00),B(macros ,34),I(3b,fe,25,00),B(macros ,3),I(23,00,00,00),B(macros ,107),I(23,00,00,00),B(macros ,30),I(3b,fe,25,00),B(macros ,2),I(86,ac,00,00)};
+  static const void *G001143[] = {I(87,25,00,00),B(macros ,1),I(24,00,00,00),B(stream0 ,1),I(3e,0b,24,00),B(stream0 ,0),I(3c,00,21,01),I(24,00,00,00),B(telos0 ,1),I(3e,0b,24,00),B(telos0 ,0),I(3c,00,21,01),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(23,00,00,00),B(macros ,94),I(23,00,00,00),B(macros ,93),I(3b,fe,25,00),B(macros ,19),I(23,00,00,00),B(macros ,50),I(23,00,00,00),B(macros ,91),I(3b,01,25,00),B(macros ,18),I(23,00,00,00),B(macros ,95),I(23,00,00,00),B(macros ,90),I(3b,fe,25,00),B(macros ,17),I(23,00,00,00),B(macros ,96),I(23,00,00,00),B(macros ,89),I(3b,fc,25,00),B(macros ,16),I(23,00,00,00),B(macros ,97),I(23,00,00,00),B(macros ,86),I(3b,02,25,00),B(macros ,15),I(23,00,00,00),B(macros ,98),I(23,00,00,00),B(macros ,83),I(3b,fe,25,00),B(macros ,14),I(23,00,00,00),B(macros ,99),I(23,00,00,00),B(macros ,82),I(3b,fe,25,00),B(macros ,13),I(23,00,00,00),B(macros ,100),I(23,00,00,00),B(macros ,80),I(3b,02,25,00),B(macros ,12),I(23,00,00,00),B(macros ,92),I(23,00,00,00),B(macros ,60),I(3b,fe,25,00),B(macros ,11),I(23,00,00,00),B(macros ,101),I(23,00,00,00),B(macros ,57),I(3b,fe,25,00),B(macros ,10),I(23,00,00,00),B(macros ,102),I(23,00,00,00),B(macros ,53),I(3b,01,25,00),B(macros ,9),I(23,00,00,00),B(macros ,59),I(23,00,00,00),B(macros ,52),I(3b,fe,25,00),B(macros ,8),I(23,00,00,00),B(macros ,103),I(23,00,00,00),B(macros ,46),I(3b,02,25,00),B(macros ,7),I(23,00,00,00),B(macros ,104),I(23,00,00,00),B(macros ,44),I(3b,ff,25,00),B(macros ,6),I(23,00,00,00),B(macros ,105),I(23,00,00,00),B(macros ,42),I(3b,fe,25,00),B(macros ,5),I(23,00,00,00),B(macros ,43),I(23,00,00,00),B(macros ,38),I(3b,fe,25,00),B(macros ,4),I(23,00,00,00),B(macros ,106),I(23,00,00,00),B(macros ,34),I(3b,fe,25,00),B(macros ,3),I(23,00,00,00),B(macros ,107),I(23,00,00,00),B(macros ,30),I(3b,fe,25,00),B(macros ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_intern_symbol(sym_526,"else");
-  eul_intern_symbol(sym_527,"quote");
-  eul_intern_symbol(sym_528,"eql");
-  eul_intern_symbol(sym_529,"null?");
-  eul_intern_symbol(sym_530,"member");
-  eul_allocate_bytevector( G00525,G00524);
-  object_class(str_533) = eul_static_string_class;
-  eul_intern_symbol(sym_534,"anonymous");
-  eul_intern_symbol(sym_535,"cond");
-  eul_intern_symbol(sym_536,"let");
-  eul_allocate_bytevector( G00532,G00531);
-  eul_intern_symbol(sym_539,"push-error-handler");
-  eul_intern_symbol(sym_540,"progn");
-  eul_intern_symbol(sym_541,"pop-error-handlers");
-  eul_allocate_bytevector( G00538,G00537);
-  eul_intern_symbol(sym_544,"call/ep-lambda");
-  eul_intern_symbol(sym_545,"named-lambda");
-  eul_intern_symbol(sym_546,"call/ep");
-  eul_allocate_bytevector( G00543,G00542);
-  eul_intern_symbol(sym_549,"list-size");
-  eul_intern_symbol(sym_550,"-");
-  eul_intern_symbol(sym_551,"list-drop");
-  eul_allocate_bytevector( G00548,G00547);
-  eul_intern_symbol(sym_554,"let/cc");
-  eul_allocate_bytevector( G00553,G00552);
-  eul_intern_symbol(sym_557,"push-dynamic-variable");
-  eul_allocate_bytevector( G00556,G00555);
-  eul_intern_symbol(sym_560,"*clean-ups*");
-  eul_intern_symbol(sym_561,"pop-dynamic-variables");
-  eul_intern_symbol(sym_562,"lambda");
-  eul_intern_symbol(sym_563,"dynamic");
-  eul_intern_symbol(sym_564,"cons");
-  eul_allocate_bytevector( G00559,G00558);
-  eul_allocate_bytevector( G00566,G00565);
-  eul_intern_symbol(sym_569,"when");
-  eul_intern_symbol(sym_570,"labels");
-  eul_intern_symbol(sym_571,"break");
-  eul_allocate_bytevector( G00568,G00567);
-  eul_allocate_bytevector( G00573,G00572);
-  eul_intern_symbol(sym_576,"unwind-protect");
-  eul_allocate_bytevector( G00575,G00574);
-  object_class(str_579) = eul_static_string_class;
-  object_class(str_580) = eul_static_string_class;
-  eul_intern_symbol(sym_581,"cpu-time");
-  eul_intern_symbol(sym_582,"y");
-  eul_intern_symbol(sym_583,"x");
-  eul_intern_symbol(sym_584,"binary-");
-  eul_intern_symbol(sym_585,"<double>");
-  eul_intern_symbol(sym_586,"ticks-per-second");
-  eul_intern_symbol(sym_587,"convert");
-  eul_intern_symbol(sym_588,"/");
-  eul_intern_symbol(sym_589,"map");
-  eul_intern_symbol(sym_590,"setq");
-  eul_intern_symbol(sym_591,"vector-ref");
-  eul_intern_symbol(sym_592,"nl");
-  object_class(str_593) = eul_static_string_class;
-  object_class(str_594) = eul_static_string_class;
-  object_class(str_595) = eul_static_string_class;
-  eul_intern_symbol(sym_596,"sprint");
-  eul_intern_symbol(sym_597,"let*");
-  eul_allocate_bytevector( G00578,G00577);
-  eul_intern_symbol(sym_600,"reverse-list");
-  eul_allocate_bytevector( G00599,G00598);
-  eul_allocate_bytevector( G00602,G00601);
-  eul_intern_symbol(sym_605,"dynamic-variable-ref");
-  eul_intern_symbol(sym_606,"setter");
-  eul_allocate_bytevector( G00604,G00603);
-  eul_intern_symbol(sym_609,"<condition>");
-  eul_intern_symbol(sym_610,"defclass");
-  eul_allocate_bytevector( G00608,G00607);
-  eul_allocate_bytevector( G00612,G00611);
-  eul_allocate_bytevector( G00614,G00613);
-  eul_intern_symbol(sym_617,"dynamic-let");
-  eul_allocate_bytevector( G00616,G00615);
-  eul_intern_symbol(sym_620,"catch");
-  eul_intern_symbol(sym_621,"throw");
-  eul_intern_symbol(sym_622,"defcondition");
-  eul_intern_symbol(sym_623,"dynamic-setq");
-  eul_intern_symbol(sym_624,"return-from");
-  eul_intern_symbol(sym_625,"butlast");
-  eul_intern_symbol(sym_626,"time-execution");
-  eul_intern_symbol(sym_627,"while");
-  eul_intern_symbol(sym_628,"not");
-  eul_intern_symbol(sym_629,"defglobal");
-  eul_intern_symbol(sym_630,"block");
-  eul_intern_symbol(sym_631,"last");
-  eul_intern_symbol(sym_632,"with-handler");
-  eul_intern_symbol(sym_633,"case");
-  eul_allocate_bytevector( G00619,G00618);
+  eul_intern_symbol(sym_1051,"else");
+  eul_intern_symbol(sym_1052,"quote");
+  eul_intern_symbol(sym_1053,"eql");
+  eul_intern_symbol(sym_1054,"null?");
+  eul_intern_symbol(sym_1055,"member");
+  eul_allocate_bytevector( G001050,G001049);
+  object_class(str_1058) = eul_static_string_class;
+  eul_intern_symbol(sym_1059,"anonymous");
+  eul_intern_symbol(sym_1060,"cond");
+  eul_intern_symbol(sym_1061,"let");
+  eul_allocate_bytevector( G001057,G001056);
+  eul_intern_symbol(sym_1064,"push-error-handler");
+  eul_intern_symbol(sym_1065,"progn");
+  eul_intern_symbol(sym_1066,"pop-error-handlers");
+  eul_allocate_bytevector( G001063,G001062);
+  eul_intern_symbol(sym_1069,"call/ep-lambda");
+  eul_intern_symbol(sym_1070,"named-lambda");
+  eul_intern_symbol(sym_1071,"call/ep");
+  eul_allocate_bytevector( G001068,G001067);
+  eul_intern_symbol(sym_1074,"list-size");
+  eul_intern_symbol(sym_1075,"-");
+  eul_intern_symbol(sym_1076,"list-drop");
+  eul_allocate_bytevector( G001073,G001072);
+  eul_intern_symbol(sym_1079,"let/cc");
+  eul_allocate_bytevector( G001078,G001077);
+  eul_intern_symbol(sym_1082,"push-dynamic-variable");
+  eul_allocate_bytevector( G001081,G001080);
+  eul_intern_symbol(sym_1085,"*clean-ups*");
+  eul_intern_symbol(sym_1086,"pop-dynamic-variables");
+  eul_intern_symbol(sym_1087,"lambda");
+  eul_intern_symbol(sym_1088,"dynamic");
+  eul_intern_symbol(sym_1089,"cons");
+  eul_allocate_bytevector( G001084,G001083);
+  eul_allocate_bytevector( G001091,G001090);
+  eul_intern_symbol(sym_1094,"when");
+  eul_intern_symbol(sym_1095,"labels");
+  eul_intern_symbol(sym_1096,"break");
+  eul_allocate_bytevector( G001093,G001092);
+  eul_allocate_bytevector( G001098,G001097);
+  eul_intern_symbol(sym_1101,"unwind-protect");
+  eul_allocate_bytevector( G001100,G001099);
+  object_class(str_1104) = eul_static_string_class;
+  object_class(str_1105) = eul_static_string_class;
+  eul_intern_symbol(sym_1106,"cpu-time");
+  eul_intern_symbol(sym_1107,"y");
+  eul_intern_symbol(sym_1108,"x");
+  eul_intern_symbol(sym_1109,"binary-");
+  eul_intern_symbol(sym_1110,"<double>");
+  eul_intern_symbol(sym_1111,"ticks-per-second");
+  eul_intern_symbol(sym_1112,"convert");
+  eul_intern_symbol(sym_1113,"/");
+  eul_intern_symbol(sym_1114,"map");
+  eul_intern_symbol(sym_1115,"setq");
+  eul_intern_symbol(sym_1116,"vector-ref");
+  eul_intern_symbol(sym_1117,"nl");
+  object_class(str_1118) = eul_static_string_class;
+  object_class(str_1119) = eul_static_string_class;
+  object_class(str_1120) = eul_static_string_class;
+  eul_intern_symbol(sym_1121,"sprint");
+  eul_intern_symbol(sym_1122,"let*");
+  eul_allocate_bytevector( G001103,G001102);
+  eul_intern_symbol(sym_1125,"reverse-list");
+  eul_allocate_bytevector( G001124,G001123);
+  eul_allocate_bytevector( G001127,G001126);
+  eul_intern_symbol(sym_1130,"dynamic-variable-ref");
+  eul_intern_symbol(sym_1131,"setter");
+  eul_allocate_bytevector( G001129,G001128);
+  eul_intern_symbol(sym_1134,"<condition>");
+  eul_intern_symbol(sym_1135,"defclass");
+  eul_allocate_bytevector( G001133,G001132);
+  eul_allocate_bytevector( G001137,G001136);
+  eul_allocate_bytevector( G001139,G001138);
+  eul_intern_symbol(sym_1142,"dynamic-let");
+  eul_allocate_bytevector( G001141,G001140);
+  eul_intern_symbol(sym_1145,"catch");
+  eul_intern_symbol(sym_1146,"throw");
+  eul_intern_symbol(sym_1147,"defcondition");
+  eul_intern_symbol(sym_1148,"dynamic-setq");
+  eul_intern_symbol(sym_1149,"return-from");
+  eul_intern_symbol(sym_1150,"butlast");
+  eul_intern_symbol(sym_1151,"time-execution");
+  eul_intern_symbol(sym_1152,"while");
+  eul_intern_symbol(sym_1153,"not");
+  eul_intern_symbol(sym_1154,"defglobal");
+  eul_intern_symbol(sym_1155,"block");
+  eul_intern_symbol(sym_1156,"last");
+  eul_intern_symbol(sym_1157,"with-handler");
+  eul_intern_symbol(sym_1158,"case");
+  eul_allocate_bytevector( G001144,G001143);
 
   /* Set local bindings */
   {
@@ -211,96 +211,96 @@ void initialize_module_macros()
       macros_bindings[i] = eul_nil;
   }
 
-  macros_bindings[ 20] = sym_526;
-  macros_bindings[ 21] = sym_527;
-  macros_bindings[ 22] = sym_528;
-  macros_bindings[ 23] = sym_529;
-  macros_bindings[ 24] = sym_530;
-  macros_bindings[ 25] = G00525;
-  macros_bindings[ 26] = str_533;
-  macros_bindings[ 27] = sym_534;
-  macros_bindings[ 28] = sym_535;
-  macros_bindings[ 29] = sym_536;
-  macros_bindings[ 30] = G00532;
-  macros_bindings[ 31] = sym_539;
-  macros_bindings[ 32] = sym_540;
-  macros_bindings[ 33] = sym_541;
-  macros_bindings[ 34] = G00538;
-  macros_bindings[ 35] = sym_544;
-  macros_bindings[ 36] = sym_545;
-  macros_bindings[ 37] = sym_546;
-  macros_bindings[ 38] = G00543;
-  macros_bindings[ 39] = sym_549;
-  macros_bindings[ 40] = sym_550;
-  macros_bindings[ 41] = sym_551;
-  macros_bindings[ 42] = G00548;
-  macros_bindings[ 43] = sym_554;
-  macros_bindings[ 44] = G00553;
-  macros_bindings[ 45] = sym_557;
-  macros_bindings[ 46] = G00556;
-  macros_bindings[ 47] = sym_560;
-  macros_bindings[ 48] = sym_561;
-  macros_bindings[ 49] = sym_562;
-  macros_bindings[ 50] = sym_563;
-  macros_bindings[ 51] = sym_564;
-  macros_bindings[ 52] = G00559;
-  macros_bindings[ 53] = G00566;
-  macros_bindings[ 54] = sym_569;
-  macros_bindings[ 55] = sym_570;
-  macros_bindings[ 56] = sym_571;
-  macros_bindings[ 57] = G00568;
-  macros_bindings[ 58] = G00573;
-  macros_bindings[ 59] = sym_576;
-  macros_bindings[ 60] = G00575;
-  macros_bindings[ 61] = str_579;
-  macros_bindings[ 62] = str_580;
-  macros_bindings[ 63] = sym_581;
-  macros_bindings[ 64] = sym_582;
-  macros_bindings[ 65] = sym_583;
-  macros_bindings[ 66] = sym_584;
-  macros_bindings[ 67] = sym_585;
-  macros_bindings[ 68] = sym_586;
-  macros_bindings[ 69] = sym_587;
-  macros_bindings[ 70] = sym_588;
-  macros_bindings[ 71] = sym_589;
-  macros_bindings[ 72] = sym_590;
-  macros_bindings[ 73] = sym_591;
-  macros_bindings[ 74] = sym_592;
-  macros_bindings[ 75] = str_593;
-  macros_bindings[ 76] = str_594;
-  macros_bindings[ 77] = str_595;
-  macros_bindings[ 78] = sym_596;
-  macros_bindings[ 79] = sym_597;
-  macros_bindings[ 80] = G00578;
-  macros_bindings[ 81] = sym_600;
-  macros_bindings[ 82] = G00599;
-  macros_bindings[ 83] = G00602;
-  macros_bindings[ 84] = sym_605;
-  macros_bindings[ 85] = sym_606;
-  macros_bindings[ 86] = G00604;
-  macros_bindings[ 87] = sym_609;
-  macros_bindings[ 88] = sym_610;
-  macros_bindings[ 89] = G00608;
-  macros_bindings[ 90] = G00612;
-  macros_bindings[ 91] = G00614;
-  macros_bindings[ 92] = sym_617;
-  macros_bindings[ 93] = G00616;
+  macros_bindings[ 20] = sym_1051;
+  macros_bindings[ 21] = sym_1052;
+  macros_bindings[ 22] = sym_1053;
+  macros_bindings[ 23] = sym_1054;
+  macros_bindings[ 24] = sym_1055;
+  macros_bindings[ 25] = G001050;
+  macros_bindings[ 26] = str_1058;
+  macros_bindings[ 27] = sym_1059;
+  macros_bindings[ 28] = sym_1060;
+  macros_bindings[ 29] = sym_1061;
+  macros_bindings[ 30] = G001057;
+  macros_bindings[ 31] = sym_1064;
+  macros_bindings[ 32] = sym_1065;
+  macros_bindings[ 33] = sym_1066;
+  macros_bindings[ 34] = G001063;
+  macros_bindings[ 35] = sym_1069;
+  macros_bindings[ 36] = sym_1070;
+  macros_bindings[ 37] = sym_1071;
+  macros_bindings[ 38] = G001068;
+  macros_bindings[ 39] = sym_1074;
+  macros_bindings[ 40] = sym_1075;
+  macros_bindings[ 41] = sym_1076;
+  macros_bindings[ 42] = G001073;
+  macros_bindings[ 43] = sym_1079;
+  macros_bindings[ 44] = G001078;
+  macros_bindings[ 45] = sym_1082;
+  macros_bindings[ 46] = G001081;
+  macros_bindings[ 47] = sym_1085;
+  macros_bindings[ 48] = sym_1086;
+  macros_bindings[ 49] = sym_1087;
+  macros_bindings[ 50] = sym_1088;
+  macros_bindings[ 51] = sym_1089;
+  macros_bindings[ 52] = G001084;
+  macros_bindings[ 53] = G001091;
+  macros_bindings[ 54] = sym_1094;
+  macros_bindings[ 55] = sym_1095;
+  macros_bindings[ 56] = sym_1096;
+  macros_bindings[ 57] = G001093;
+  macros_bindings[ 58] = G001098;
+  macros_bindings[ 59] = sym_1101;
+  macros_bindings[ 60] = G001100;
+  macros_bindings[ 61] = str_1104;
+  macros_bindings[ 62] = str_1105;
+  macros_bindings[ 63] = sym_1106;
+  macros_bindings[ 64] = sym_1107;
+  macros_bindings[ 65] = sym_1108;
+  macros_bindings[ 66] = sym_1109;
+  macros_bindings[ 67] = sym_1110;
+  macros_bindings[ 68] = sym_1111;
+  macros_bindings[ 69] = sym_1112;
+  macros_bindings[ 70] = sym_1113;
+  macros_bindings[ 71] = sym_1114;
+  macros_bindings[ 72] = sym_1115;
+  macros_bindings[ 73] = sym_1116;
+  macros_bindings[ 74] = sym_1117;
+  macros_bindings[ 75] = str_1118;
+  macros_bindings[ 76] = str_1119;
+  macros_bindings[ 77] = str_1120;
+  macros_bindings[ 78] = sym_1121;
+  macros_bindings[ 79] = sym_1122;
+  macros_bindings[ 80] = G001103;
+  macros_bindings[ 81] = sym_1125;
+  macros_bindings[ 82] = G001124;
+  macros_bindings[ 83] = G001127;
+  macros_bindings[ 84] = sym_1130;
+  macros_bindings[ 85] = sym_1131;
+  macros_bindings[ 86] = G001129;
+  macros_bindings[ 87] = sym_1134;
+  macros_bindings[ 88] = sym_1135;
+  macros_bindings[ 89] = G001133;
+  macros_bindings[ 90] = G001137;
+  macros_bindings[ 91] = G001139;
+  macros_bindings[ 92] = sym_1142;
+  macros_bindings[ 93] = G001141;
   macros_bindings[ 1] = eul_nil;
-  macros_bindings[ 94] = sym_620;
-  macros_bindings[ 95] = sym_621;
-  macros_bindings[ 96] = sym_622;
-  macros_bindings[ 97] = sym_623;
-  macros_bindings[ 98] = sym_624;
-  macros_bindings[ 99] = sym_625;
-  macros_bindings[ 100] = sym_626;
-  macros_bindings[ 101] = sym_627;
-  macros_bindings[ 102] = sym_628;
-  macros_bindings[ 103] = sym_629;
-  macros_bindings[ 104] = sym_630;
-  macros_bindings[ 105] = sym_631;
-  macros_bindings[ 106] = sym_632;
-  macros_bindings[ 107] = sym_633;
-  eul_allocate_lambda( macros_bindings[0], "initialize-macros", 0, G00619);
+  macros_bindings[ 94] = sym_1145;
+  macros_bindings[ 95] = sym_1146;
+  macros_bindings[ 96] = sym_1147;
+  macros_bindings[ 97] = sym_1148;
+  macros_bindings[ 98] = sym_1149;
+  macros_bindings[ 99] = sym_1150;
+  macros_bindings[ 100] = sym_1151;
+  macros_bindings[ 101] = sym_1152;
+  macros_bindings[ 102] = sym_1153;
+  macros_bindings[ 103] = sym_1154;
+  macros_bindings[ 104] = sym_1155;
+  macros_bindings[ 105] = sym_1156;
+  macros_bindings[ 106] = sym_1157;
+  macros_bindings[ 107] = sym_1158;
+  eul_allocate_lambda( macros_bindings[0], "initialize-macros", 0, G001144);
 
   }
 }

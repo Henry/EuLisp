@@ -1,6 +1,6 @@
 (defmodule ffi
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 (defextern ext_get_struct () ptr)
 (defextern ext_print_struct (ptr) ptr)

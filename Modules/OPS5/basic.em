@@ -7,8 +7,8 @@
 ;;; Description: Basic functions etc.
 ;;;-----------------------------------------------------------------------------
 (defmodule basic
-  (syntax (macros)
-   import (level1)
+  (syntax (syntax-0)
+   import (level-0)
    export (NIL))
 
 (print "### basic" nl)

@@ -3,8 +3,8 @@
 ;;; Test application
 ;;;-----------------------------------------------------------------------------
 (defmodule test-vmeta
-  (syntax (macros vmeta)
-   import (level1))
+  (syntax (syntax-0 vmeta)
+   import (level-0))
 
 (defun digit (c)
   (and (character? c)

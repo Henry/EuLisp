@@ -7,8 +7,8 @@
 ;;; Description: Functions for creating condition elements.
 ;;;-----------------------------------------------------------------------------
 (defmodule reader-ce
-  (syntax (macros macros-tag)
-   import (level1 basic reader-vars cond-el-1 cond-el-2 tests ops-out))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic reader-vars cond-el-1 cond-el-2 tests ops-out))
 
 (print "### reader-ce" nl)
 

@@ -9,8 +9,8 @@
 
 
 /* Imported modules */
-extern void initialize_module_level1();
-extern LispRef level1_bindings[];
+extern void initialize_module_level_0();
+extern LispRef level_0_bindings[];
 extern LispRef collect_bindings[];
 extern LispRef stream_bindings[];
 extern LispRef format_bindings[];
@@ -44,7 +44,7 @@ static int is_initialized = 0;
 void initialize_module_ffi()
 {
   if (is_initialized) return;
-  initialize_module_level1();
+  initialize_module_level_0();
   eul_fast_table_set(eul_modules,"ffi",(LispRef) ffi_bindings);
   is_initialized = 1;
   {
@@ -60,13 +60,13 @@ void initialize_module_ffi()
   eul_allocate_static_string(str_23, "  ", 2);
   eul_allocate_static_string(str_24, "*** Finished creating", 21);
   /* Byte-vector with size: 42 is_init: 0 index: 10 binding: anonymous */
-  static const void *G0019[] = {I(aa,1b,26,00),I(00,00,00,32),I(1a,1b,34,00),I(00,00,00,7e),I(41,00,00,00),B(ffi ,3),I(23,00,00,00),B(ffi ,6),I(1f,03,24,00),B(format ,5),I(3c,02,2a,23),B(ffi ,7),I(24,00,00,00),B(stream ,9),I(3c,01,2a,1b),I(41,00,00,00),B(ffi ,4),I(22,01,2a,23),B(ffi ,8),I(24,00,00,00),B(stream ,9),I(3c,01,2a,1b),I(24,00,00,00),B(stream ,14),I(3c,01,2a,1b),I(24,00,00,00),B(ffi ,2),I(0f,1b,89,00),B(ffi ,2),I(2a,1f,03,2b),I(47,00,00,3d),I(01,04,22,02),I(32,00,00,00),I(00,00,00,23),I(23,00,00,00),B(ffi ,9),I(24,00,00,00),B(stream ,11),I(24,00,00,00),B(stream ,9),I(3d,02,02,45),I(02,00,00,00)};
+  static const void *G0019[] = {I(aa,1b,26,00),I(00,00,00,32),I(1a,1b,34,00),I(00,00,00,7e),I(41,00,00,00),B(ffi ,3),I(23,00,00,00),B(ffi ,6),I(1f,03,24,00),B(format ,5),I(3c,02,2a,23),B(ffi ,7),I(24,00,00,00),B(stream ,12),I(3c,01,2a,1b),I(41,00,00,00),B(ffi ,4),I(22,01,2a,23),B(ffi ,8),I(24,00,00,00),B(stream ,12),I(3c,01,2a,1b),I(24,00,00,00),B(stream ,16),I(3c,01,2a,1b),I(24,00,00,00),B(ffi ,2),I(0f,1b,89,00),B(ffi ,2),I(2a,1f,03,2b),I(47,00,00,3d),I(01,04,22,02),I(32,00,00,00),I(00,00,00,23),I(23,00,00,00),B(ffi ,9),I(24,00,00,00),B(stream ,14),I(24,00,00,00),B(stream ,12),I(3d,02,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 21 is_init: 0 index: 12 binding: top-level */
   static const void *G0025[] = {I(a9,46,02,86),I(89,00,00,00),B(ffi ,2),I(2a,86,1b,48),I(00,00,23,00),B(ffi ,11),I(23,00,00,00),B(ffi ,10),I(3b,01,48,00),I(00,82,47,00),I(00,3c,01,2a),I(23,00,00,00),B(ffi ,11),I(23,00,00,00),B(ffi ,5),I(3b,01,24,00),B(ffi ,2),I(24,00,00,00),B(collect ,6),I(3d,02,01,45),I(01,00,00,00)};
 
   /* Byte-vector with size: 15 is_init: 1 index: 0 binding: initialize-ffi */
-  static const void *G0028[] = {I(87,25,00,00),B(ffi ,1),I(24,00,00,00),B(level1 ,1),I(3e,0b,24,00),B(level1 ,0),I(3c,00,21,01),I(86,25,00,00),B(ffi ,2),I(23,00,00,00),B(ffi ,13),I(23,00,00,00),B(ffi ,12),I(3b,00,3d,00),I(00,ac,00,00)};
+  static const void *G0028[] = {I(87,25,00,00),B(ffi ,1),I(24,00,00,00),B(level_0 ,1),I(3e,0b,24,00),B(level_0 ,0),I(3c,00,21,01),I(86,25,00,00),B(ffi ,2),I(23,00,00,00),B(ffi ,13),I(23,00,00,00),B(ffi ,12),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */

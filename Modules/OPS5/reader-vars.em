@@ -7,8 +7,8 @@
 ;;; Description: Functions to handle reading variables.
 ;;;-----------------------------------------------------------------------------
 (defmodule reader-vars
-  (syntax (macros macros-tag)
-   import (level1 basic ops-out))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic ops-out))
 
 (print "### reader-vars" nl)
 

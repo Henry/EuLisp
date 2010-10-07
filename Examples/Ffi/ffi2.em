@@ -23,11 +23,11 @@
 ;;; Description: foreign function test
 ;;;  Compilation
 ;;    cc $(CFLAGS) -c eul-ffi2.c
-;;    youtoo ffi2 -l level1 -fff eul-ffi2
+;;    youtoo ffi2 -l level-0 -fff eul-ffi2
 ;;;-----------------------------------------------------------------------------
 (defmodule ffi2
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; External functions using C pointers

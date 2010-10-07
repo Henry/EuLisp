@@ -1,6 +1,6 @@
 (defmodule test3
-  (syntax (macros)
-   import (level1 serial))
+  (syntax (syntax-0)
+   import (level-0 serial))
 
 (defmethod generic-connect ((s1 <stream>) (s2 <stream>) options)
   (let ((mode (init-list-ref options mode: 'r)))

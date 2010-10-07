@@ -1,9 +1,9 @@
 ;;; EuLysses header
 (defmodule ops-ak
-  (syntax (macros macros-tag)
-   import (level1 basic cond-el-gf wm conflict))
-;  (syntax (macros)
-;   import (level1 basic cond-el-gf prod-gf wm-gf ops5-def ;ops-out
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic cond-el-gf wm conflict))
+;  (syntax (syntax-0)
+;   import (level-0 basic cond-el-gf prod-gf wm-gf ops5-def ;ops-out
 ;          )
 ;   export ())
 

@@ -49,15 +49,15 @@
            write
            sprint
            print
-           sprin-one-char
-           sprin-char
-           prin-char
+           sprint-one-char
+           sprint-char
+           print-char
            nl
            *int-size-in-decimal-digits*
            *double-size-in-decimal-digits*
            output-list-contents
-           prin-string
-           prin-address
+           print-string
+           print-address
            make-space
            file-lookup))
 
@@ -236,9 +236,9 @@
          (if (object? x)
              (generic-write x stream)
            (progn
-             (prin-string "#<C: " 5 stream)
-             (prin-address x stream)
-             (sprin-one-char stream #\>))))
+             (print-string "#<C: " 5 stream)
+             (print-address x stream)
+             (sprint-one-char stream #\>))))
        args)
     ())
   stream)
@@ -249,25 +249,25 @@
 (defun write args
   (swrite-all stdout args))
 
-(defun sprin-all (stream args)
+(defun sprint-all (stream args)
   (if args
       (do1-list
        (lambda (x)
          (if (object? x)
              (generic-print x stream)
            (progn
-             (prin-string "#<C: " 5 stream)
-             (prin-address x stream)
-             (sprin-one-char stream #\>))))
+             (print-string "#<C: " 5 stream)
+             (print-address x stream)
+             (sprint-one-char stream #\>))))
        args)
     ())
   stream)
 
 (defun sprint (stream . args)
-  (sprin-all stream args))
+  (sprint-all stream args))
 
 (defun print args
-  (sprin-all stdout args))
+  (sprint-all stdout args))
 
 (defun sflush (stream)
   (flush-buffer stream))
@@ -282,17 +282,17 @@
 ;;;------------------------------------------------------------------------
 ;;; Some low level functions to get things printed on <file-stream>s
 ;;;------------------------------------------------------------------------
-(defun sprin-char (stream char . times)
+(defun sprint-char (stream char . times)
   (if times
-      (sprin-char* stream char (car times))
-    (sprin-one-char stream char)))
+      (sprint-char* stream char (car times))
+    (sprint-one-char stream char)))
 
-(defun prin-char (char . times)
+(defun print-char (char . times)
   (if times
-      (sprin-char* stdout char (car times))
-    (sprin-one-char stdout char)))
+      (sprint-char* stdout char (car times))
+    (sprint-one-char stdout char)))
 
-(defun sprin-one-char (stream char)
+(defun sprint-one-char (stream char)
   (let* ((scb (stream-sink stream))
          (pos (control-block-buffer-pos scb))
          (new-pos (int-binary+ pos 1))
@@ -304,7 +304,7 @@
         (flush-buffer stream)
       ())))
 
-(defun sprin-char* (stream char times)
+(defun sprint-char* (stream char times)
   (let* ((scb (stream-sink stream))
          (bufsiz (control-block-buffer-size scb)))
     (labels
@@ -352,11 +352,11 @@
   (let* ((buf (make <string> size: *double-size-in-decimal-digits*))
          (n (eul_sprintf buf 0 c-format-str x))
          (str (substring buf 0 n)))
-    (prin-string str n s)))
+    (print-string str n s)))
 
-(defun prin-address (x s) (fprintf s "0x%08X" x))
+(defun print-address (x s) (fprintf s "0x%08X" x))
 
-(defun prin-string (str n s)
+(defun print-string (str n s)
   (let* ((scb (stream-sink s))
          (bufsiz (control-block-buffer-size scb))
          (max (int-binary- bufsiz 1)))
@@ -392,7 +392,7 @@
    ((loop (ll)
           (fun (car ll) s)
           (cond ((cons? (cdr ll))
-                 (sprin-one-char s #\ )
+                 (sprint-one-char s #\ )
                  (loop (cdr ll)))
                 (t
                  (cdr ll)))))

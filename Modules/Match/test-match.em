@@ -1,6 +1,6 @@
 (defmodule test-match
-  (syntax ((except (match-let) macros) match test-match-macros)
-   import (level1 match-support))
+  (syntax ((except (match-let) syntax-0) match test-match-macros)
+   import (level-0 match-support))
 
 (defun f1 (l)
   (match l

@@ -7,8 +7,8 @@
 ;;; Description: main module
 ;;;-----------------------------------------------------------------------------
 (defmodule ops5
-  (syntax (macros macros-tag)
-   import (level1 basic conflict cond-el-gf wm reader ops5-def)
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic conflict cond-el-gf wm reader ops5-def)
    expose (conflict cond-el-gf wm reader ops5-def)
    export (ops-load))
 

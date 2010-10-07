@@ -35,7 +35,7 @@
             (let* ((j (car info))
                    (n (progn (setq info (cdr info)) (car info)))
                    (c (progn (setq info (cdr info)) (car info))))
-              ;; following lines are inlined prin-string function
+              ;; following lines are inlined print-string function
               (make-space s n)
               (let ((pos (control-block-buffer-pos scb))
                     (buf (control-block-buffer scb)))
@@ -60,7 +60,7 @@
                              (swrite s x))
                            (loop (cdr info) (cdr l)))))
                       ((eq c #\%)
-                       (sprin-one-char s #\\n)
+                       (sprint-one-char s #\\n)
                        (loop (cdr info) l))
                       ((or (eq c #\x) (eq c #\o)
                            (eq c #\f) (eq c #\e) (eq c #\g))

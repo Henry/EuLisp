@@ -27,9 +27,9 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule merge
-  (syntax (macros
+  (syntax (syntax-0
            macros-tag)
-   import (level1
+   import (level-0
            basic)
    export (merge-sort))
 

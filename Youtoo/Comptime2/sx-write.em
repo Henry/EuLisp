@@ -42,7 +42,7 @@
                     ;; Attention -- name is ptr to C string!
                     (sformat stream "\n   (~a . ~a)"
                              (binding-local-name? binding)
-                             (binding-prin-string binding)))
+                             (binding-print-string binding)))
                   (module-lexical-env? module))
                  (sformat stream "\n  external-env:")
                  (access-table-do
@@ -50,7 +50,7 @@
                     ;; Attention -- name is ptr to C string!
                     (sformat stream "\n   (~a . ~a)"
                              (binding-local-name? binding)
-                             (binding-prin-string binding)))
+                             (binding-print-string binding)))
                   (module-external-env? module))
                  (sformat stream "\n  syntax-env:")
                  (access-table-do
@@ -58,12 +58,12 @@
                     ;; Attention -- name is ptr to C string!
                     (sformat stream "\n   (~a . ~a)"
                              (binding-local-name? binding)
-                             (binding-prin-string binding)))
+                             (binding-print-string binding)))
                   (module-syntax-env? module))
                  (sprint stream nl))
     module))
 
-(defun binding-prin-string (binding)
+(defun binding-print-string (binding)
   (let ((obj (binding-obj? binding)))
     (if (function? obj)
         "#<macro-function>"

@@ -23,8 +23,8 @@
 ;;; Description: object streams
 ;;;-----------------------------------------------------------------------------
 (defmodule serial
-  (syntax (macros)
-   import (level1)
+  (syntax (syntax-0)
+   import (level-0)
    export (<object-stream> object-stream-cache object-stream-cache-index
                            *serial-standard-modules* serialize deserialize reset
                            ;; used in eul-serial.c
@@ -35,10 +35,10 @@
 
 ;;;-----------------------------------------------------------------------------
 ;;; Define standard EuLisp modules
-;;; This should reflect full-import in Lib.sgi/liblevel1.i as default
+;;; This should reflect full-import in Lib.sgi/liblevel-0.i as default
 ;;;-----------------------------------------------------------------------------
 (deflocal *serial-standard-modules*
-  #(level1 telos boot1 boot
+  #(level-0 telos boot1 boot
            mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key
            mop-prim mop-access mop-alloc bit condition event thread dynamic
            let-cc callback string convert copy integer number fpi collect compare
@@ -582,7 +582,7 @@
 
 (defmethod generic-print ((c <character>) (s <buffered-stream>))
   ;    (if (graph? c)
-  (sprin-one-char s c)
+  (sprint-one-char s c)
   ;      (generic-write c s))
   c)
 

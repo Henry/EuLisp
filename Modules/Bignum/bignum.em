@@ -25,8 +25,8 @@
 ;;    see Makefile
 ;;;-----------------------------------------------------------------------------
 (defmodule bignum
-  (syntax (macros)
-   import (level1 bigint bigrat)
+  (syntax (syntax-0)
+   import (level-0 bigint bigrat)
    expose (bigint bigrat))
 
 ;;;-----------------------------------------------------------------------------

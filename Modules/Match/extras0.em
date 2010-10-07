@@ -1,7 +1,7 @@
-;; Extra macros
+;; Extra syntax-0
 (defmodule extras0
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 (defmacro and-let* (vars . body)
   (labels ((expand (vars body)

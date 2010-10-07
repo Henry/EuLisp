@@ -1,6 +1,6 @@
 (defmodule test-match-macros
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 (defmacro print-test (body)
   `(format "~s~%    ;;=> ~s~%" ',body ,body))

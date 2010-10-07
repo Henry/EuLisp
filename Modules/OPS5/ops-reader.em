@@ -6,9 +6,9 @@
 ;;; Author : Tracy Gardner (tag@maths.bath.ac.uk)
 ;;; Description: Reads literal/production from OPS5 file
 ;;;-----------------------------------------------------------------------------
-(defmodule ops-reader ;; (import (level1))
-  (syntax (macros macros-tag)
-   import (level1 basic))
+(defmodule ops-reader ;; (import (level-0))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic))
 
 (deflocal *prog*
   '((literalize monkey

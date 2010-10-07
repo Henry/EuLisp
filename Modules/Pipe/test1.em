@@ -27,13 +27,14 @@
 ;;    make test
 ;;;-----------------------------------------------------------------------------
 (defmodule test1
-  (syntax (macros)
-   import (level1 pipe))
+  (syntax (syntax-0)
+   import (level-0 pipe))
 
-(let ((x (make <pipe> process: "../../Bin.x86_64/youtoo.sh"))
+(let ((x (make <pipe> process: "/home/dm2/henry/EuLisp/EuLisp/Modules/Pipe/../../Bin.x86_64/youtoo.sh"))
       (str ""))
   (pprint x)
   (system "ps -a")
+  (sprint x nl)
   (sprint x (+ 1 3) nl)
   (sprint x hierarchy: nl)
   (sprint x exit: nl)
@@ -42,5 +43,5 @@
     (flush)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test1
 ;;;-----------------------------------------------------------------------------

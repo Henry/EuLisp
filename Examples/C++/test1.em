@@ -23,11 +23,11 @@
 ;;; Description: C++ interoperability
 ;;;  Compilation
 ;;   g++ -c eul-cc1.cc
-;;   youtoo test1 -l level1 -fff eul-cc1
+;;   youtoo test1 -l level-0 -fff eul-cc1
 ;;;-----------------------------------------------------------------------------
 (defmodule test1
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Out-call to C++

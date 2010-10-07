@@ -1,7 +1,7 @@
-;; match0.em -- macros for match.em
+;; match0.em -- syntax-0 for match.em
 (defmodule match0
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 (defmacro letrec (inits . body)
   `(let (,@(map (lambda (init) `(,(car init) '())) inits))

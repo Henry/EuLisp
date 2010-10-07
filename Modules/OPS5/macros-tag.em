@@ -8,8 +8,8 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule macros-tag
   ()
-; (syntax (macros)
-;        import (level1))
+; (syntax (syntax-0)
+;        import (level-0))
 
 ;  (defmacro while (condition . body)
 ;    `(let/cc break                      ; (syntax break)

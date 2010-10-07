@@ -7,8 +7,8 @@
 ;; * Structures certainly don't.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defmodule match
-  (syntax ((except (match-let) macros) match0)
-   import (level1 match-support)
+  (syntax ((except (match-let) syntax-0) match0)
+   import (level-0 match-support)
    export (match match-lambda match-lambda* match-let match-let*))
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -1357,7 +1357,7 @@
          (cons (car l) (rdc (cdr l)))))))
    (list genmatch genletrec gendefine pattern-var?)))
 
-;; These are the actual macros.  They are the user-visible interface to
+;; These are the actual syntax-0.  They are the user-visible interface to
 ;; actual macro expanders.
 (defmacro match args
   (cond

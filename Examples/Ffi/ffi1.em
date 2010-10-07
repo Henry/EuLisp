@@ -22,11 +22,11 @@
 ;;;  Authors: Andreas Kind
 ;;; Description: foreign function test
 ;;;  Compilation
-;;    youtoo ffi1 -l level1
+;;    youtoo ffi1 -l level-0
 ;;;-----------------------------------------------------------------------------
 (defmodule ffi1
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Make use of C's atoi function

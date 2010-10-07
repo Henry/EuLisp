@@ -7,8 +7,8 @@
 ;;; Description: More condition element stuff.
 ;;;-----------------------------------------------------------------------------
 (defmodule cond-el-2
-  (syntax (macros macros-tag)
-   import (level1 basic cond-el-gf cond-el-1
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic cond-el-gf cond-el-1
                   tests prod-gf wm-gf ops5-def ops-out))
 
 (print "### cond-el-2" nl)

@@ -1,11 +1,11 @@
 ;;; Verbose META in EuLisp.
 ;;;-----------------------------------------------------------------------------
-;;; Support macros for VMETA
+;;; Support syntax-0 for VMETA
 ;;;  Author: T. Kurt Bond
 ;;;-----------------------------------------------------------------------------
 (defmodule vmeta-aux
-  (syntax (macros)
-   import (level1))
+  (syntax (syntax-0)
+   import (level-0))
 
 (defmacro ecase (exp . clauses)
   (let ((val (gensym)))

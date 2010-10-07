@@ -7,8 +7,8 @@
 ;;; Description:
 ;;;-----------------------------------------------------------------------------
 (defmodule action-gf
-  (syntax (macros macros-tag)
-   import (level1 basic))
+  (syntax (syntax-0 macros-tag)
+   import (level-0 basic))
 
 (defclass <action> ()
   ())
