@@ -69,7 +69,7 @@ void initialize_module_stream3()
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 19 is_init: 0 index: 3 binding: (method-generic-print) */
-  static const void *G0010436[] = {I(ab,1c,82,02),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(stream3 ,2),I(82,02,1d,27),I(3c,24,00,00),B(stream ,25),I(3c,02,2a,1b),I(06,1c,1c,1f),I(05,24,00,00),B(stream ,4),I(3c,03,2a,1f),I(03,27,3e,24),B(stream ,25),I(3c,02,2a,1f),I(04,45,05,00)};
+  static const void *G0010436[] = {I(ab,1c,82,02),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(stream3 ,2),I(82,02,1d,27),I(3c,24,00,00),B(stream ,26),I(3c,02,2a,1b),I(06,1c,1c,1f),I(05,24,00,00),B(stream ,4),I(3c,03,2a,1f),I(03,27,3e,24),B(stream ,26),I(3c,02,2a,1f),I(04,45,05,00)};
 
   /* Byte-vector with size: 5 is_init: 0 index: 4 binding: (method-generic-print) */
   static const void *G0010439[] = {I(ab,1c,06,1d),I(1c,1f,03,24),B(stream ,4),I(3c,03,2a,1d),I(45,03,00,00)};
@@ -78,20 +78,20 @@ void initialize_module_stream3()
   static const void *G0010441[] = {I(ab,1c,82,02),I(1b,1d,24,00),B(stream2 ,30),I(3c,02,2a,1d),I(45,03,00,00)};
 
   /* Byte-vector with size: 4 is_init: 0 index: 6 binding: (method-generic-print) */
-  static const void *G0010443[] = {I(ab,1b,1d,24),B(stream ,25),I(3c,02,2a,1c),I(45,02,00,00)};
+  static const void *G0010443[] = {I(ab,1b,1d,24),B(stream ,26),I(3c,02,2a,1c),I(45,02,00,00)};
 
   eul_allocate_static_string(str_10447, " . ", 3);
   /* Byte-vector with size: 27 is_init: 0 index: 8 binding: (method-generic-print) */
-  static const void *G0010445[] = {I(ab,1b,27,28),I(24,00,00,00),B(stream ,25),I(3c,02,2a,1c),I(24,00,00,00),B(stream2 ,30),I(1d,24,00,00),B(stream ,16),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,2d),I(23,00,00,00),B(stream3 ,7),I(26,00,00,00),I(00,00,00,03),I(1f,04,24,00),B(stream ,4),I(3c,03,2a,1d),I(1d,24,00,00),B(stream ,23),I(3c,02,2a,1d),I(27,29,24,00),B(stream ,25),I(3c,02,2a,1f),I(03,45,04,00)};
+  static const void *G0010445[] = {I(ab,1b,27,28),I(24,00,00,00),B(stream ,26),I(3c,02,2a,1c),I(24,00,00,00),B(stream2 ,30),I(1d,24,00,00),B(stream ,17),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,2d),I(23,00,00,00),B(stream3 ,7),I(26,00,00,00),I(00,00,00,03),I(1f,04,24,00),B(stream ,4),I(3c,03,2a,1d),I(1d,24,00,00),B(stream ,24),I(3c,02,2a,1d),I(27,29,24,00),B(stream ,26),I(3c,02,2a,1f),I(03,45,04,00)};
 
   /* Byte-vector with size: 19 is_init: 0 index: 9 binding: anonymous */
-  static const void *G0010448[] = {I(a9,47,00,03),I(47,00,02,1a),I(1b,34,00,00),I(00,00,00,3f),I(47,00,00,47),I(00,03,02,47),I(00,01,1c,24),B(stream ,23),I(3c,02,2a,47),I(00,01,27,20),I(24,00,00,00),B(stream ,25),I(3c,02,2a,47),I(00,03,2b,1b),I(48,00,03,47),I(00,04,3d,00),I(03,22,02,32),I(00,00,00,06),I(86,45,01,00)};
+  static const void *G0010448[] = {I(a9,47,00,03),I(47,00,02,1a),I(1b,34,00,00),I(00,00,00,3f),I(47,00,00,47),I(00,03,02,47),I(00,01,1c,24),B(stream ,24),I(3c,02,2a,47),I(00,01,27,20),I(24,00,00,00),B(stream ,26),I(3c,02,2a,47),I(00,03,2b,1b),I(48,00,03,47),I(00,04,3d,00),I(03,22,02,32),I(00,00,00,06),I(86,45,01,00)};
 
   eul_allocate_static_string(str_10452, "#()", 3);
   eul_allocate_static_string(str_10453, "#(", 2);
   eul_allocate_static_string(str_10454, "#(", 2);
   /* Byte-vector with size: 61 is_init: 0 index: 13 binding: (method-generic-print) */
-  static const void *G0010450[] = {I(ab,46,06,1c),I(48,00,00,1b),I(48,00,01,47),I(00,00,06,1b),I(2d,1b,34,00),I(00,00,00,26),I(23,00,00,00),B(stream3 ,10),I(26,00,00,00),I(00,00,00,03),I(47,00,01,24),B(stream ,4),I(3c,03,32,00),I(00,00,00,bc),I(1c,83,19,1b),I(34,00,00,00),I(00,00,00,4c),I(23,00,00,00),B(stream3 ,11),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,47),I(00,00,82,02),I(47,00,01,1c),I(24,00,00,00),B(stream ,23),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,25),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,6c),I(1d,2c,82,1c),I(48,00,02,1b),I(48,00,03,23),B(stream3 ,12),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,86),I(1b,48,00,04),I(23,00,00,00),B(stream3 ,2),I(23,00,00,00),B(stream3 ,9),I(3b,00,48,00),I(04,47,00,04),I(3c,00,2a,47),I(00,00,47,00),I(02,02,47,00),I(01,1c,24,00),B(stream ,23),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,25),I(3c,02,22,04),I(22,01,2a,47),I(00,00,45,04)};
+  static const void *G0010450[] = {I(ab,46,06,1c),I(48,00,00,1b),I(48,00,01,47),I(00,00,06,1b),I(2d,1b,34,00),I(00,00,00,26),I(23,00,00,00),B(stream3 ,10),I(26,00,00,00),I(00,00,00,03),I(47,00,01,24),B(stream ,4),I(3c,03,32,00),I(00,00,00,bc),I(1c,83,19,1b),I(34,00,00,00),I(00,00,00,4c),I(23,00,00,00),B(stream3 ,11),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,47),I(00,00,82,02),I(47,00,01,1c),I(24,00,00,00),B(stream ,24),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,26),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,6c),I(1d,2c,82,1c),I(48,00,02,1b),I(48,00,03,23),B(stream3 ,12),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,86),I(1b,48,00,04),I(23,00,00,00),B(stream3 ,2),I(23,00,00,00),B(stream3 ,9),I(3b,00,48,00),I(04,47,00,04),I(3c,00,2a,47),I(00,00,47,00),I(02,02,47,00),I(01,1c,24,00),B(stream ,24),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,26),I(3c,02,22,04),I(22,01,2a,47),I(00,00,45,04)};
 
   eul_allocate_static_string(str_10457, "#<~a: ~a:~a>", 12);
   /* Byte-vector with size: 15 is_init: 0 index: 15 binding: (method-generic-write) */
@@ -108,23 +108,23 @@ void initialize_module_stream3()
   static const void *G0010461[] = {I(ab,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1d,26,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1f,03,82),I(24,00,00,00),B(stream2 ,20),I(08,1f,04,04),I(1b,82,02,1d),I(23,00,00,00),B(stream3 ,18),I(50,1b,34,00),I(00,00,00,36),I(1f,04,24,00),B(stream2 ,24),I(3c,01,1b,34),I(00,00,00,15),I(1f,05,84,24),B(stream2 ,3),I(08,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(stream3 ,19),I(22,01,32,00),I(00,00,00,30),I(1f,05,24,00),B(stream2 ,24),I(3c,01,1b,34),I(00,00,00,15),I(1f,06,84,24),B(stream2 ,3),I(08,32,00,00),I(00,00,00,0f),I(23,00,00,00),B(stream3 ,20),I(22,01,1f,07),I(23,00,00,00),B(stream3 ,21),I(1f,04,1f,03),I(24,00,00,00),B(format ,4),I(3c,04,2a,1f),I(08,45,09,00)};
 
   /* Byte-vector with size: 12 is_init: 0 index: 23 binding: (method-generic-write) */
-  static const void *G0010467[] = {I(ab,1b,27,22),I(24,00,00,00),B(stream ,25),I(3c,02,2a,1c),I(06,1d,1c,1f),I(03,24,00,00),B(stream ,4),I(3c,03,2a,1c),I(27,22,24,00),B(stream ,25),I(3c,02,2a,1d),I(45,03,00,00)};
+  static const void *G0010467[] = {I(ab,1b,27,22),I(24,00,00,00),B(stream ,26),I(3c,02,2a,1c),I(06,1d,1c,1f),I(03,24,00,00),B(stream ,4),I(3c,03,2a,1c),I(27,22,24,00),B(stream ,26),I(3c,02,2a,1d),I(45,03,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 24 binding: (method-generic-write) */
-  static const void *G0010469[] = {I(ab,1b,27,23),I(24,00,00,00),B(stream ,25),I(3c,02,2a,1b),I(27,5c,24,00),B(stream ,25),I(3c,02,2a,1b),I(1d,24,00,00),B(stream ,25),I(3c,02,2a,1c),I(45,02,00,00)};
+  static const void *G0010469[] = {I(ab,1b,27,23),I(24,00,00,00),B(stream ,26),I(3c,02,2a,1b),I(27,5c,24,00),B(stream ,26),I(3c,02,2a,1b),I(1d,24,00,00),B(stream ,26),I(3c,02,2a,1c),I(45,02,00,00)};
 
   eul_allocate_static_string(str_10473, " . ", 3);
   /* Byte-vector with size: 27 is_init: 0 index: 26 binding: (method-generic-write) */
-  static const void *G0010471[] = {I(ab,1b,27,28),I(24,00,00,00),B(stream ,25),I(3c,02,2a,1c),I(24,00,00,00),B(stream2 ,27),I(1d,24,00,00),B(stream ,16),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,2d),I(23,00,00,00),B(stream3 ,25),I(26,00,00,00),I(00,00,00,03),I(1f,04,24,00),B(stream ,4),I(3c,03,2a,1d),I(1d,24,00,00),B(stream ,3),I(3c,02,2a,1d),I(27,29,24,00),B(stream ,25),I(3c,02,2a,1f),I(03,45,04,00)};
+  static const void *G0010471[] = {I(ab,1b,27,28),I(24,00,00,00),B(stream ,26),I(3c,02,2a,1c),I(24,00,00,00),B(stream2 ,27),I(1d,24,00,00),B(stream ,17),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,2d),I(23,00,00,00),B(stream3 ,25),I(26,00,00,00),I(00,00,00,03),I(1f,04,24,00),B(stream ,4),I(3c,03,2a,1d),I(1d,24,00,00),B(stream ,3),I(3c,02,2a,1d),I(27,29,24,00),B(stream ,26),I(3c,02,2a,1f),I(03,45,04,00)};
 
   /* Byte-vector with size: 19 is_init: 0 index: 27 binding: anonymous */
-  static const void *G0010474[] = {I(a9,47,00,03),I(47,00,02,1a),I(1b,34,00,00),I(00,00,00,3f),I(47,00,00,47),I(00,03,02,47),I(00,01,1c,24),B(stream ,3),I(3c,02,2a,47),I(00,01,27,20),I(24,00,00,00),B(stream ,25),I(3c,02,2a,47),I(00,03,2b,1b),I(48,00,03,47),I(00,04,3d,00),I(03,22,02,32),I(00,00,00,06),I(86,45,01,00)};
+  static const void *G0010474[] = {I(a9,47,00,03),I(47,00,02,1a),I(1b,34,00,00),I(00,00,00,3f),I(47,00,00,47),I(00,03,02,47),I(00,01,1c,24),B(stream ,3),I(3c,02,2a,47),I(00,01,27,20),I(24,00,00,00),B(stream ,26),I(3c,02,2a,47),I(00,03,2b,1b),I(48,00,03,47),I(00,04,3d,00),I(03,22,02,32),I(00,00,00,06),I(86,45,01,00)};
 
   eul_allocate_static_string(str_10478, "#()", 3);
   eul_allocate_static_string(str_10479, "#(", 2);
   eul_allocate_static_string(str_10480, "#(", 2);
   /* Byte-vector with size: 61 is_init: 0 index: 31 binding: (method-generic-write) */
-  static const void *G0010476[] = {I(ab,46,06,1c),I(48,00,00,1b),I(48,00,01,47),I(00,00,06,1b),I(2d,1b,34,00),I(00,00,00,26),I(23,00,00,00),B(stream3 ,28),I(26,00,00,00),I(00,00,00,03),I(47,00,01,24),B(stream ,4),I(3c,03,32,00),I(00,00,00,bc),I(1c,83,19,1b),I(34,00,00,00),I(00,00,00,4c),I(23,00,00,00),B(stream3 ,29),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,47),I(00,00,82,02),I(47,00,01,1c),I(24,00,00,00),B(stream ,3),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,25),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,6c),I(1d,2c,82,1c),I(48,00,02,1b),I(48,00,03,23),B(stream3 ,30),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,86),I(1b,48,00,04),I(23,00,00,00),B(stream3 ,2),I(23,00,00,00),B(stream3 ,27),I(3b,00,48,00),I(04,47,00,04),I(3c,00,2a,47),I(00,00,47,00),I(02,02,47,00),I(01,1c,24,00),B(stream ,3),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,25),I(3c,02,22,04),I(22,01,2a,47),I(00,00,45,04)};
+  static const void *G0010476[] = {I(ab,46,06,1c),I(48,00,00,1b),I(48,00,01,47),I(00,00,06,1b),I(2d,1b,34,00),I(00,00,00,26),I(23,00,00,00),B(stream3 ,28),I(26,00,00,00),I(00,00,00,03),I(47,00,01,24),B(stream ,4),I(3c,03,32,00),I(00,00,00,bc),I(1c,83,19,1b),I(34,00,00,00),I(00,00,00,4c),I(23,00,00,00),B(stream3 ,29),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,47),I(00,00,82,02),I(47,00,01,1c),I(24,00,00,00),B(stream ,3),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,26),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,6c),I(1d,2c,82,1c),I(48,00,02,1b),I(48,00,03,23),B(stream3 ,30),I(84,47,00,01),I(24,00,00,00),B(stream ,4),I(3c,03,2a,86),I(1b,48,00,04),I(23,00,00,00),B(stream3 ,2),I(23,00,00,00),B(stream3 ,27),I(3b,00,48,00),I(04,47,00,04),I(3c,00,2a,47),I(00,00,47,00),I(02,02,47,00),I(01,1c,24,00),B(stream ,3),I(3c,02,2a,47),I(00,01,27,29),I(24,00,00,00),B(stream ,26),I(3c,02,22,04),I(22,01,2a,47),I(00,00,45,04)};
 
   eul_allocate_static_string(str_10483, "#<~a: ~a>", 9);
   /* Byte-vector with size: 10 is_init: 0 index: 33 binding: (method-generic-write) */
@@ -132,17 +132,17 @@ void initialize_module_stream3()
 
   eul_allocate_static_string(str_10486, "%f", 2);
   /* Byte-vector with size: 6 is_init: 0 index: 35 binding: (method-generic-write) */
-  static const void *G0010484[] = {I(ab,1b,23,00),B(stream3 ,34),I(1f,03,24,00),B(stream ,22),I(3c,03,2a,1b),I(45,02,00,00)};
+  static const void *G0010484[] = {I(ab,1b,23,00),B(stream3 ,34),I(1f,03,24,00),B(stream ,23),I(3c,03,2a,1b),I(45,02,00,00)};
 
   eul_allocate_static_string(str_10489, "%i", 2);
   /* Byte-vector with size: 6 is_init: 0 index: 37 binding: (method-generic-write) */
-  static const void *G0010487[] = {I(ab,1b,23,00),B(stream3 ,36),I(1f,03,24,00),B(stream ,22),I(3c,03,2a,1b),I(45,02,00,00)};
+  static const void *G0010487[] = {I(ab,1b,23,00),B(stream3 ,36),I(1f,03,24,00),B(stream ,23),I(3c,03,2a,1b),I(45,02,00,00)};
 
   /* Byte-vector with size: 9 is_init: 0 index: 38 binding: (method-generic-write) */
-  static const void *G0010490[] = {I(ab,1c,82,02),I(1b,06,1c,1c),I(1f,04,24,00),B(stream ,4),I(3c,03,2a,1d),I(27,3a,24,00),B(stream ,25),I(3c,02,2a,1f),I(03,45,04,00)};
+  static const void *G0010490[] = {I(ab,1c,82,02),I(1b,06,1c,1c),I(1f,04,24,00),B(stream ,4),I(3c,03,2a,1d),I(27,3a,24,00),B(stream ,26),I(3c,02,2a,1f),I(03,45,04,00)};
 
   /* Byte-vector with size: 21 is_init: 0 index: 39 binding: (method-generic-write) */
-  static const void *G0010492[] = {I(ab,1c,82,02),I(24,00,00,00),B(character ,10),I(1c,24,00,00),B(collect ,16),I(3c,02,1b,34),I(00,00,00,15),I(1c,1f,03,24),B(stream2 ,30),I(3c,02,32,00),I(00,00,00,28),I(1d,27,7c,24),B(stream ,25),I(3c,02,2a,1c),I(1f,03,24,00),B(stream2 ,30),I(3c,02,2a,1d),I(27,7c,24,00),B(stream ,25),I(3c,02,2a,1f),I(03,45,04,00)};
+  static const void *G0010492[] = {I(ab,1c,82,02),I(24,00,00,00),B(character ,10),I(1c,24,00,00),B(collect ,16),I(3c,02,1b,34),I(00,00,00,15),I(1c,1f,03,24),B(stream2 ,30),I(3c,02,32,00),I(00,00,00,28),I(1d,27,7c,24),B(stream ,26),I(3c,02,2a,1c),I(1f,03,24,00),B(stream2 ,30),I(3c,02,2a,1d),I(27,7c,24,00),B(stream ,26),I(3c,02,2a,1f),I(03,45,04,00)};
 
   eul_allocate_static_string(str_10496, "()", 2);
   /* Byte-vector with size: 6 is_init: 0 index: 41 binding: (method-generic-write) */
@@ -151,7 +151,7 @@ void initialize_module_stream3()
   eul_allocate_static_string(str_10499, "#<", 2);
   eul_allocate_static_string(str_10500, ": ", 2);
   /* Byte-vector with size: 22 is_init: 0 index: 44 binding: (method-generic-write) */
-  static const void *G0010497[] = {I(ab,23,00,00),B(stream3 ,42),I(84,1d,24,00),B(stream ,4),I(3c,03,2a,1c),I(04,1b,82,02),I(82,02,1b,06),I(1c,1c,1f,05),I(24,00,00,00),B(stream ,4),I(3c,03,2a,23),B(stream3 ,43),I(84,1f,05,24),B(stream ,4),I(3c,03,2a,1f),I(04,1f,04,24),B(stream ,12),I(3c,02,2a,1f),I(03,27,3e,24),B(stream ,25),I(3c,02,2a,1f),I(04,45,05,00)};
+  static const void *G0010497[] = {I(ab,23,00,00),B(stream3 ,42),I(84,1d,24,00),B(stream ,4),I(3c,03,2a,1c),I(04,1b,82,02),I(82,02,1b,06),I(1c,1c,1f,05),I(24,00,00,00),B(stream ,4),I(3c,03,2a,23),B(stream3 ,43),I(84,1f,05,24),B(stream ,4),I(3c,03,2a,1f),I(04,1f,04,24),B(stream ,12),I(3c,02,2a,1f),I(03,27,3e,24),B(stream ,26),I(3c,02,2a,1f),I(04,45,05,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 45 binding: (method-generic-print) */
   static const void *G0010501[] = {I(ab,24,00,00),B(stream2 ,27),I(3d,02,00,00)};

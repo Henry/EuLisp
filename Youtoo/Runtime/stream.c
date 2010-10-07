@@ -38,8 +38,8 @@ extern LispRef string_bindings[];
 extern LispRef boot_bindings[];
 extern LispRef stream2_bindings[];
 
-/* Module bindings with size 120 */
-LispRef stream_bindings[120];
+/* Module bindings with size 121 */
+LispRef stream_bindings[121];
 
 /* Foreign functions */
 static LispRef ff_stub_eul_file_lookup6465 (Stack *reg_value_stack, LispRef *sreg_value_sp, LispRef *sreg_value_sb)
@@ -79,158 +79,158 @@ void initialize_module_stream()
   LispRef sym_6608, sym_6607, sym_6606, sym_6605, sym_6604, sym_6603, sym_6602, sym_6601, sym_6600, sym_6599, sym_6598, sym_6597, sym_6596, sym_6595, sym_6594, sym_6593, sym_6592, sym_6591, sym_6590, sym_6589, sym_6588, sym_6587, sym_6586, sym_6585, sym_6584, G006583, G006581, G006579, G006577, G006575, G006573, G006571, G006569, G006566, G006564, G006562, G006560, G006558, G006556, G006554, G006552, G006550, G006547, G006545, G006543, G006541, G006539, G006536, G006534, G006532, G006530, G006528, G006524, G006522, G006520, sym_6518, sym_6517, sym_6516, sym_6515, sym_6514, sym_6513, sym_6512, G006511, sym_6509, sym_6508, sym_6507, G006506, G006504, G006502, G006500, G006498, sym_6496, sym_6495, G006494, G006492, G006490, G006488, G006486, G006484, G006482, key_6480, G006479, key_6477, G006475, G006473, G006471, G006469, G006467;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 41 is_init: 0 index: 27 binding: (method-generic-read) */
+  /* Byte-vector with size: 41 is_init: 0 index: 28 binding: (method-generic-read) */
   static const void *G006466[] = {I(43,03,1d,26),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1b,82,24),B(stream2 ,22),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,06,1d),I(1c,19,1b,34),I(00,00,00,15),I(1f,07,24,00),B(stream2 ,2),I(3c,01,2d,32),I(00,00,00,06),I(86,1b,34,00),I(00,00,00,26),I(1f,07,34,00),I(00,00,00,16),I(1f,08,24,00),B(stream2 ,18),I(3d,01,09,32),I(00,00,00,07),I(1f,06,32,00),I(00,00,00,39),I(1f,05,82,24),B(stream2 ,22),I(08,1f,06,26),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,1d,0b),I(1d,2b,1f,09),I(1c,1c,82,1d),I(24,00,00,00),B(stream2 ,22),I(09,22,02,2a),I(1c,22,04,45),I(09,00,00,00)};
 
-  /* Byte-vector with size: 43 is_init: 0 index: 28 binding: (method-generic-read) */
+  /* Byte-vector with size: 43 is_init: 0 index: 29 binding: (method-generic-read) */
   static const void *G006468[] = {I(43,03,1d,26),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1b,82,24),B(stream2 ,22),I(08,2d,1b,34),I(00,00,00,15),I(1f,04,24,00),B(stream2 ,2),I(3c,01,2d,32),I(00,00,00,06),I(86,1b,34,00),I(00,00,00,26),I(1f,04,34,00),I(00,00,00,16),I(1f,05,24,00),B(stream2 ,18),I(3d,01,06,32),I(00,00,00,07),I(1f,03,32,00),I(00,00,00,55),I(1d,82,24,00),B(stream2 ,22),I(08,1f,03,83),I(24,00,00,00),B(stream2 ,22),I(08,2b,1c,2c),I(1f,05,1c,1c),I(82,1d,24,00),B(stream2 ,22),I(09,22,02,2a),I(1f,05,1d,1c),I(83,1d,24,00),B(stream2 ,22),I(09,22,02,2a),I(1f,05,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,1f,03),I(0b,22,04,45),I(06,00,00,00)};
 
-  /* Byte-vector with size: 8 is_init: 0 index: 29 binding: (method-generic-read) */
+  /* Byte-vector with size: 8 is_init: 0 index: 30 binding: (method-generic-read) */
   static const void *G006470[] = {I(43,03,1d,26),I(00,00,00,03),I(24,00,00,00),B(stream2 ,20),I(08,1f,03,1f),I(03,1f,03,1f),I(03,3d,03,04),I(45,04,00,00)};
 
-  /* Byte-vector with size: 4 is_init: 0 index: 30 binding: (method-end-of-stream) */
+  /* Byte-vector with size: 4 is_init: 0 index: 31 binding: (method-end-of-stream) */
   static const void *G006472[] = {I(aa,1b,24,00),B(stream2 ,39),I(3c,01,2a,38),I(01,00,45,01)};
 
   eul_allocate_static_string(str_6476, "end of stream", 13);
-  /* Byte-vector with size: 9 is_init: 0 index: 33 binding: (method-end-of-stream) */
-  static const void *G006474[] = {I(aa,24,00,00),B(stream2 ,6),I(23,00,00,00),B(stream ,31),I(23,00,00,00),B(stream ,32),I(1f,03,24,00),B(boot ,12),I(3d,04,01,00)};
+  /* Byte-vector with size: 9 is_init: 0 index: 34 binding: (method-end-of-stream) */
+  static const void *G006474[] = {I(aa,24,00,00),B(stream2 ,6),I(23,00,00,00),B(stream ,32),I(23,00,00,00),B(stream ,33),I(1f,03,24,00),B(boot ,12),I(3d,04,01,00)};
 
-  /* Byte-vector with size: 45 is_init: 0 index: 35 binding: (method-flush-buffer) */
-  static const void *G006478[] = {I(aa,1b,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,83,24),B(stream2 ,22),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,82,1f),I(03,24,00,00),B(string ,6),I(3c,03,1f,04),I(82,24,00,00),B(stream2 ,45),I(08,1c,24,00),B(boot1 ,25),I(3c,01,1c,1c),I(24,00,00,00),B(boot ,7),I(3c,02,1f,07),I(1c,1c,82,1d),I(24,00,00,00),B(stream2 ,45),I(09,22,02,2a),I(1f,06,82,1c),I(83,1d,24,00),B(stream2 ,22),I(09,22,02,2a),I(1f,06,84,24),B(stream2 ,22),I(08,24,00,00),B(string ,13),I(23,00,00,00),B(stream ,34),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,08),I(1c,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,09,45,0a)};
+  /* Byte-vector with size: 45 is_init: 0 index: 36 binding: (method-flush-buffer) */
+  static const void *G006478[] = {I(aa,1b,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,83,24),B(stream2 ,22),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,82,1f),I(03,24,00,00),B(string ,6),I(3c,03,1f,04),I(82,24,00,00),B(stream2 ,45),I(08,1c,24,00),B(boot1 ,25),I(3c,01,1c,1c),I(24,00,00,00),B(boot ,7),I(3c,02,1f,07),I(1c,1c,82,1d),I(24,00,00,00),B(stream2 ,45),I(09,22,02,2a),I(1f,06,82,1c),I(83,1d,24,00),B(stream2 ,22),I(09,22,02,2a),I(1f,06,84,24),B(stream2 ,22),I(08,24,00,00),B(string ,13),I(23,00,00,00),B(stream ,35),I(1d,24,00,00),B(mop_gf ,2),I(3c,03,1f,08),I(1c,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,09,45,0a)};
 
-  /* Byte-vector with size: 24 is_init: 0 index: 36 binding: (method-flush-buffer) */
+  /* Byte-vector with size: 24 is_init: 0 index: 37 binding: (method-flush-buffer) */
   static const void *G006481[] = {I(aa,1b,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,82,24),B(stream2 ,3),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1d,83,24),B(stream2 ,22),I(08,41,00,00),B(stream1 ,18),I(22,03,85,19),I(1b,34,00,00),I(00,00,00,0f),I(86,32,00,00),I(00,00,00,18),I(1c,82,1c,83),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1d,45,03,00)};
 
-  /* Byte-vector with size: 34 is_init: 0 index: 37 binding: (method-flush-buffer) */
+  /* Byte-vector with size: 34 is_init: 0 index: 38 binding: (method-flush-buffer) */
   static const void *G006483[] = {I(aa,1b,26,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,24,00,00),B(collect ,25),I(3c,01,1c,1c),I(24,00,00,00),B(boot ,7),I(3c,02,1f,04),I(1c,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,03,86,1c),I(26,00,00,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(87,45,06,00)};
 
-  /* Byte-vector with size: 28 is_init: 0 index: 38 binding: (method-fill-buffer) */
+  /* Byte-vector with size: 28 is_init: 0 index: 39 binding: (method-fill-buffer) */
   static const void *G006485[] = {I(aa,1b,82,24),B(stream2 ,45),I(08,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(82,32,00,00),I(00,00,00,56),I(1d,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1d,11,1f),I(04,1c,1c,82),I(1d,24,00,00),B(stream2 ,45),I(09,22,02,2a),I(1f,03,10,1d),I(1c,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1d,82,1c,82),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(83,22,03,45),I(03,00,00,00)};
 
-  /* Byte-vector with size: 27 is_init: 0 index: 39 binding: (method-fill-buffer) */
+  /* Byte-vector with size: 27 is_init: 0 index: 40 binding: (method-fill-buffer) */
   static const void *G006487[] = {I(aa,26,00,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1b,84,24),B(stream2 ,22),I(08,1c,82,24),B(stream2 ,3),I(08,1d,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1c,1c,1f),I(04,41,00,00),B(stream1 ,27),I(22,03,1f,04),I(1c,1c,82,1d),I(24,00,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,03,84,17),I(1b,2c,1f,06),I(1c,1c,83,1d),I(24,00,00,00),B(stream2 ,22),I(09,22,02,2a),I(1d,45,07,00)};
 
-  /* Byte-vector with size: 33 is_init: 0 index: 40 binding: (method-fill-buffer) */
+  /* Byte-vector with size: 33 is_init: 0 index: 41 binding: (method-fill-buffer) */
   static const void *G006489[] = {I(aa,1b,26,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(82,32,00,00),I(00,00,00,42),I(1c,24,00,00),B(boot ,25),I(3c,01,1f,04),I(1c,1c,26,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(1f,03,86,1c),I(26,00,00,00),I(00,00,00,03),I(1d,24,00,00),B(stream2 ,22),I(09,22,02,2a),I(83,22,01,45),I(05,00,00,00)};
 
-  /* Byte-vector with size: 7 is_init: 0 index: 41 binding: anonymous */
+  /* Byte-vector with size: 7 is_init: 0 index: 42 binding: anonymous */
   static const void *G006491[] = {I(a9,47,00,00),I(24,00,00,00),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  /* Byte-vector with size: 52 is_init: 0 index: 44 binding: (method-disconnect) */
-  static const void *G006493[] = {I(aa,46,01,1b),I(83,24,00,00),B(socket ,8),I(08,1b,41,00),B(stream1 ,16),I(22,01,2d,1b),I(34,00,00,00),I(00,00,00,90),I(24,00,00,00),B(stream2 ,11),I(1b,48,00,00),I(23,00,00,00),B(stream ,42),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(stream ,43),I(23,00,00,00),B(stream ,41),I(3b,00,1c,0f),I(23,00,00,00),B(stream ,42),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(05,24,00,00),B(stream2 ,36),I(24,00,00,00),B(boot ,17),I(3c,02,1b,89),B(stream2 ,36),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(22,05,32,00),I(00,00,00,2b),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,38),I(1c,23,00,00),B(stream ,32),I(1f,06,24,00),B(boot ,12),I(3d,04,04,22),I(01,45,03,00)};
+  /* Byte-vector with size: 52 is_init: 0 index: 45 binding: (method-disconnect) */
+  static const void *G006493[] = {I(aa,46,01,1b),I(83,24,00,00),B(socket ,8),I(08,1b,41,00),B(stream1 ,16),I(22,01,2d,1b),I(34,00,00,00),I(00,00,00,90),I(24,00,00,00),B(stream2 ,11),I(1b,48,00,00),I(23,00,00,00),B(stream ,43),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(stream ,44),I(23,00,00,00),B(stream ,42),I(3b,00,1c,0f),I(23,00,00,00),B(stream ,43),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(05,24,00,00),B(stream2 ,36),I(24,00,00,00),B(boot ,17),I(3c,02,1b,89),B(stream2 ,36),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(22,05,32,00),I(00,00,00,2b),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,38),I(1c,23,00,00),B(stream ,33),I(1f,06,24,00),B(boot ,12),I(3d,04,04,22),I(01,45,03,00)};
 
-  /* Byte-vector with size: 7 is_init: 0 index: 45 binding: anonymous */
+  /* Byte-vector with size: 7 is_init: 0 index: 46 binding: anonymous */
   static const void *G006497[] = {I(a9,47,00,00),I(24,00,00,00),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  /* Byte-vector with size: 91 is_init: 0 index: 46 binding: (method-disconnect) */
-  static const void *G006499[] = {I(aa,46,02,1b),I(26,00,00,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,24,00,00),B(stream2 ,21),I(1c,24,00,00),B(stream2 ,24),I(3c,01,1b,34),I(00,00,00,61),I(1f,03,24,00),B(stream2 ,23),I(3c,01,2a,1d),I(82,24,00,00),B(stream2 ,3),I(08,1b,41,00),B(stream1 ,16),I(22,01,2d,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2b),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,38),I(1c,23,00,00),B(stream ,32),I(1f,09,24,00),B(boot ,12),I(3c,04,22,01),I(22,02,32,00),I(00,00,00,07),I(86,2a,1c,24),B(stream2 ,24),I(3c,01,1b,34),I(00,00,00,55),I(1d,82,24,00),B(stream2 ,3),I(08,1b,41,00),B(stream1 ,16),I(22,01,2d,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2b),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,38),I(1c,23,00,00),B(stream ,32),I(1f,0a,24,00),B(boot ,12),I(3c,04,22,01),I(22,02,32,00),I(00,00,00,07),I(86,2a,24,00),B(stream2 ,11),I(1b,48,00,00),I(23,00,00,00),B(stream ,42),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(stream ,43),I(23,00,00,00),B(stream ,45),I(3b,00,1c,0f),I(23,00,00,00),B(stream ,42),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(07,24,00,00),B(stream2 ,36),I(24,00,00,00),B(boot ,17),I(3c,02,1b,89),B(stream2 ,36),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,38),I(01,09,45,0a)};
+  /* Byte-vector with size: 91 is_init: 0 index: 47 binding: (method-disconnect) */
+  static const void *G006499[] = {I(aa,46,02,1b),I(26,00,00,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,24,00,00),B(stream2 ,21),I(1c,24,00,00),B(stream2 ,24),I(3c,01,1b,34),I(00,00,00,61),I(1f,03,24,00),B(stream2 ,23),I(3c,01,2a,1d),I(82,24,00,00),B(stream2 ,3),I(08,1b,41,00),B(stream1 ,16),I(22,01,2d,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2b),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,38),I(1c,23,00,00),B(stream ,33),I(1f,09,24,00),B(boot ,12),I(3c,04,22,01),I(22,02,32,00),I(00,00,00,07),I(86,2a,1c,24),B(stream2 ,24),I(3c,01,1b,34),I(00,00,00,55),I(1d,82,24,00),B(stream2 ,3),I(08,1b,41,00),B(stream1 ,16),I(22,01,2d,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,2b),I(24,00,00,00),B(stream1 ,6),I(3c,00,24,00),B(stream2 ,38),I(1c,23,00,00),B(stream ,33),I(1f,0a,24,00),B(boot ,12),I(3c,04,22,01),I(22,02,32,00),I(00,00,00,07),I(86,2a,24,00),B(stream2 ,11),I(1b,48,00,00),I(23,00,00,00),B(stream ,43),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(stream ,44),I(23,00,00,00),B(stream ,46),I(3b,00,1c,0f),I(23,00,00,00),B(stream ,43),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,24,00),B(lock ,3),I(3c,01,2a,1f),I(07,24,00,00),B(stream2 ,36),I(24,00,00,00),B(boot ,17),I(3c,02,1b,89),B(stream2 ,36),I(47,00,00,24),B(lock ,4),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,38),I(01,09,45,0a)};
 
-  /* Byte-vector with size: 12 is_init: 0 index: 47 binding: (method-disconnect) */
+  /* Byte-vector with size: 12 is_init: 0 index: 48 binding: (method-disconnect) */
   static const void *G006501[] = {I(aa,1b,86,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(1b,86,1c,26),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(86,45,01,00)};
 
-  /* Byte-vector with size: 32 is_init: 0 index: 48 binding: (method-reconnect) */
+  /* Byte-vector with size: 32 is_init: 0 index: 49 binding: (method-reconnect) */
   static const void *G006503[] = {I(ab,1c,26,00),I(00,00,00,04),I(24,00,00,00),B(stream2 ,20),I(08,1c,1c,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(1d,86,1c,26),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(1d,26,00,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1d,1c,1c),I(26,00,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(1f,03,86,1c),I(26,00,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(86,45,04,00)};
 
-  /* Byte-vector with size: 50 is_init: 0 index: 52 binding: (method-generic-connect) */
-  static const void *G006505[] = {I(43,03,1d,82),I(24,00,00,00),B(stream2 ,20),I(08,1b,23,00),B(stream ,49),I(50,1b,34,00),I(00,00,00,22),I(1f,04,1f,04),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,90),I(1c,23,00,00),B(stream ,50),I(50,1b,34,00),I(00,00,00,22),I(1f,05,1f,05),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,62),I(1d,23,00,00),B(stream ,51),I(50,1b,34,00),I(00,00,00,22),I(1f,06,1f,06),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,34),I(1f,06,1f,06),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(1f,06,1f,06),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,22),I(01,22,01,2a),I(86,45,05,00)};
+  /* Byte-vector with size: 50 is_init: 0 index: 53 binding: (method-generic-connect) */
+  static const void *G006505[] = {I(43,03,1d,82),I(24,00,00,00),B(stream2 ,20),I(08,1b,23,00),B(stream ,50),I(50,1b,34,00),I(00,00,00,22),I(1f,04,1f,04),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,90),I(1c,23,00,00),B(stream ,51),I(50,1b,34,00),I(00,00,00,22),I(1f,05,1f,05),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,62),I(1d,23,00,00),B(stream ,52),I(50,1b,34,00),I(00,00,00,22),I(1f,06,1f,06),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,32),I(00,00,00,34),I(1f,06,1f,06),I(1c,26,00,00),I(00,00,00,04),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,2a),I(1f,06,1f,06),I(1c,26,00,00),I(00,00,00,05),I(1d,24,00,00),B(stream2 ,20),I(09,22,02,22),I(01,22,01,2a),I(86,45,05,00)};
 
-  /* Byte-vector with size: 462 is_init: 0 index: 60 binding: top-level */
-  static const void *G006510[] = {I(a9,24,00,00),B(stream2 ,44),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,20),I(24,00,00,00),B(stream2 ,20),I(86,24,00,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,44),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,53),I(23,00,00,00),B(stream ,52),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,44),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,17),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,20),I(24,00,00,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,17),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,54),I(23,00,00,00),B(stream ,48),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,17),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,39),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,39),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,55),I(23,00,00,00),B(stream ,47),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,39),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,39),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,39),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,55),I(23,00,00,00),B(stream ,46),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,39),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,39),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(socket ,8),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,39),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,55),I(23,00,00,00),B(stream ,44),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,39),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,56),I(23,00,00,00),B(stream ,40),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,56),I(23,00,00,00),B(stream ,39),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,45),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,56),I(23,00,00,00),B(stream ,38),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,57),I(23,00,00,00),B(stream ,37),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,57),I(23,00,00,00),B(stream ,36),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,45),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,57),I(23,00,00,00),B(stream ,35),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,18),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,18),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,58),I(23,00,00,00),B(stream ,33),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,18),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,18),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,18),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,58),I(23,00,00,00),B(stream ,30),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,18),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,43),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,20),I(86,86,24,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,59),I(23,00,00,00),B(stream ,29),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,43),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,4),I(86,86,24,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,59),I(23,00,00,00),B(stream ,28),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,43),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,45),I(86,86,24,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,59),I(23,00,00,00),B(stream ,27),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,43),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,60,45),I(60,00,00,00)};
+  /* Byte-vector with size: 464 is_init: 0 index: 61 binding: top-level */
+  static const void *G006510[] = {I(a9,27,0a,89),B(stream ,13),I(2a,24,00,00),B(stream2 ,44),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,20),I(24,00,00,00),B(stream2 ,20),I(86,24,00,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,44),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,54),I(23,00,00,00),B(stream ,53),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,44),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,17),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(stream2 ,20),I(24,00,00,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,17),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,55),I(23,00,00,00),B(stream ,49),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,17),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,39),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,39),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,56),I(23,00,00,00),B(stream ,48),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,39),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,39),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,39),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,56),I(23,00,00,00),B(stream ,47),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,39),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,39),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(socket ,8),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,39),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,56),I(23,00,00,00),B(stream ,45),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,39),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,57),I(23,00,00,00),B(stream ,41),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,57),I(23,00,00,00),B(stream ,40),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,2),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,45),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,2),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,57),I(23,00,00,00),B(stream ,39),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,2),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,58),I(23,00,00,00),B(stream ,38),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,58),I(23,00,00,00),B(stream ,37),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,23),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,45),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,23),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,58),I(23,00,00,00),B(stream ,36),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,23),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,18),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,20),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,18),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,59),I(23,00,00,00),B(stream ,34),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,18),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,18),I(26,00,00,00),I(00,00,00,03),I(02,83,24,00),B(stream2 ,4),I(24,00,00,00),B(boot1 ,39),I(3c,02,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,18),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,59),I(23,00,00,00),B(stream ,31),I(3b,01,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,18),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,43),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,20),I(86,86,24,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,60),I(23,00,00,00),B(stream ,30),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,43),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,4),I(86,86,24,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,60),I(23,00,00,00),B(stream ,29),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,43),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,2a,24),B(stream2 ,43),I(26,00,00,00),I(00,00,00,03),I(02,26,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,45),I(86,86,24,00),B(boot1 ,39),I(3c,04,24,00),B(boot1 ,25),I(3c,00,24,00),B(stream2 ,43),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(stream ,60),I(23,00,00,00),B(stream ,28),I(3b,03,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,24,00),B(stream2 ,43),I(1c,24,00,00),B(mop_meth ,5),I(3d,02,60,45),I(60,00,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 61 binding: flush */
+  /* Byte-vector with size: 5 is_init: 0 index: 62 binding: flush */
   static const void *G006519[] = {I(a9,24,00,00),B(stream2 ,34),I(24,00,00,00),B(stream2 ,23),I(3d,01,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 62 binding: swrite */
+  /* Byte-vector with size: 3 is_init: 0 index: 63 binding: swrite */
   static const void *G006521[] = {I(43,fe,24,00),B(stream ,8),I(3d,02,00,00)};
 
   eul_allocate_static_string(str_6525, "%s", 2);
   eul_allocate_static_string(str_6526, "%s", 2);
-  /* Byte-vector with size: 47 is_init: 0 index: 65 binding: anonymous */
-  static const void *G006523[] = {I(aa,47,00,01),I(1c,15,82,1c),I(1a,1b,34,00),I(00,00,00,ae),I(47,00,02,1d),I(24,00,00,00),B(stream ,24),I(3c,02,47,00),I(04,83,24,00),B(stream2 ,22),I(08,47,00,04),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1d,34,00),I(00,00,00,36),I(1b,1d,1f,06),I(1f,08,23,00),B(stream ,63),I(47,00,00,41),B(stream1 ,20),I(22,06,2a,1c),I(1f,05,14,47),I(00,04,1c,1c),I(83,1d,24,00),B(stream2 ,22),I(09,22,03,32),I(00,00,00,3f),I(1b,1d,47,00),I(05,1f,08,23),B(stream ,64),I(47,00,00,41),B(stream1 ,20),I(22,06,2a,1c),I(47,00,05,14),I(47,00,04,1c),I(1c,83,1d,24),B(stream2 ,22),I(09,22,02,2a),I(1f,06,47,00),I(05,14,47,00),I(03,3d,01,07),I(22,01,22,03),I(32,00,00,00),I(00,00,00,09),I(86,45,03,00)};
+  /* Byte-vector with size: 47 is_init: 0 index: 66 binding: anonymous */
+  static const void *G006523[] = {I(aa,47,00,01),I(1c,15,82,1c),I(1a,1b,34,00),I(00,00,00,ae),I(47,00,02,1d),I(24,00,00,00),B(stream ,25),I(3c,02,47,00),I(04,83,24,00),B(stream2 ,22),I(08,47,00,04),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1d,34,00),I(00,00,00,36),I(1b,1d,1f,06),I(1f,08,23,00),B(stream ,64),I(47,00,00,41),B(stream1 ,20),I(22,06,2a,1c),I(1f,05,14,47),I(00,04,1c,1c),I(83,1d,24,00),B(stream2 ,22),I(09,22,03,32),I(00,00,00,3f),I(1b,1d,47,00),I(05,1f,08,23),B(stream ,65),I(47,00,00,41),B(stream1 ,20),I(22,06,2a,1c),I(47,00,05,14),I(47,00,04,1c),I(1c,83,1d,24),B(stream2 ,22),I(09,22,02,2a),I(1f,06,47,00),I(05,14,47,00),I(03,3d,01,07),I(22,01,22,03),I(32,00,00,00),I(00,00,00,09),I(86,45,03,00)};
 
-  /* Byte-vector with size: 32 is_init: 0 index: 66 binding: prin-string */
-  static const void *G006527[] = {I(43,03,46,07),I(1d,48,00,00),I(1c,48,00,01),I(1b,48,00,02),I(47,00,02,26),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,48,00),I(04,47,00,04),I(84,24,00,00),B(stream2 ,22),I(08,2c,1b,48),I(00,05,86,1b),I(48,00,03,23),B(stream ,43),I(23,00,00,00),B(stream ,65),I(3b,01,48,00),I(03,82,47,00),I(03,3c,01,2a),I(47,00,01,2c),I(47,00,00,1c),I(0b,27,0a,51),I(1b,34,00,00),I(00,00,00,17),I(47,00,02,24),B(stream2 ,23),I(3c,01,32,00),I(00,00,00,07),I(86,2a,47,00),I(00,45,08,00)};
+  /* Byte-vector with size: 32 is_init: 0 index: 67 binding: prin-string */
+  static const void *G006527[] = {I(43,03,46,07),I(1d,48,00,00),I(1c,48,00,01),I(1b,48,00,02),I(47,00,02,26),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,48,00),I(04,47,00,04),I(84,24,00,00),B(stream2 ,22),I(08,2c,1b,48),I(00,05,86,1b),I(48,00,03,23),B(stream ,44),I(23,00,00,00),B(stream ,66),I(3b,01,48,00),I(03,82,47,00),I(03,3c,01,2a),I(47,00,01,2c),I(47,00,00,1c),I(0b,27,0a,51),I(1b,34,00,00),I(00,00,00,17),I(47,00,02,24),B(stream2 ,23),I(3c,01,32,00),I(00,00,00,07),I(86,2a,47,00),I(00,45,08,00)};
 
-  /* Byte-vector with size: 17 is_init: 0 index: 67 binding: sprintf */
-  static const void *G006529[] = {I(ab,24,00,00),B(string ,13),I(23,00,00,00),B(stream ,34),I(26,00,00,00),I(00,00,00,19),I(24,00,00,00),B(mop_gf ,2),I(3c,03,1b,82),I(1f,04,1f,04),I(41,00,00,00),B(stream1 ,19),I(22,04,1c,82),I(1d,24,00,00),B(string ,6),I(3d,03,04,45),I(04,00,00,00)};
+  /* Byte-vector with size: 17 is_init: 0 index: 68 binding: sprintf */
+  static const void *G006529[] = {I(ab,24,00,00),B(string ,13),I(23,00,00,00),B(stream ,35),I(26,00,00,00),I(00,00,00,19),I(24,00,00,00),B(mop_gf ,2),I(3c,03,1b,82),I(1f,04,1f,04),I(41,00,00,00),B(stream1 ,19),I(22,04,1c,82),I(1d,24,00,00),B(string ,6),I(3d,03,04,45),I(04,00,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 68 binding: snewline */
-  static const void *G006531[] = {I(aa,27,0a,24),B(stream ,25),I(3d,02,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 69 binding: snewline */
+  static const void *G006531[] = {I(aa,27,0a,24),B(stream ,26),I(3d,02,00,00)};
 
-  /* Byte-vector with size: 7 is_init: 0 index: 69 binding: sprint */
-  static const void *G006533[] = {I(43,fe,1c,1c),I(24,00,00,00),B(stream ,19),I(3c,02,2a,1c),I(27,0a,24,00),B(stream ,25),I(3d,02,02,00)};
+  /* Byte-vector with size: 7 is_init: 0 index: 70 binding: sprint */
+  static const void *G006533[] = {I(43,fe,1c,1c),I(24,00,00,00),B(stream ,20),I(3c,02,2a,1c),I(27,0a,24,00),B(stream ,26),I(3d,02,02,00)};
 
   eul_allocate_static_string(str_6537, "#<C: ", 5);
-  /* Byte-vector with size: 24 is_init: 0 index: 71 binding: anonymous */
-  static const void *G006535[] = {I(aa,1b,24,00),B(boot1 ,38),I(3c,01,1b,34),I(00,00,00,19),I(1c,47,00,00),I(24,00,00,00),B(stream2 ,27),I(3d,02,02,32),I(00,00,00,3c),I(23,00,00,00),B(stream ,70),I(26,00,00,00),I(00,00,00,05),I(47,00,00,24),B(stream ,4),I(3c,03,2a,1c),I(47,00,00,24),B(stream ,12),I(3c,02,2a,47),I(00,00,27,3e),I(24,00,00,00),B(stream ,25),I(3d,02,02,45),I(02,00,00,00)};
+  /* Byte-vector with size: 24 is_init: 0 index: 72 binding: anonymous */
+  static const void *G006535[] = {I(aa,1b,24,00),B(boot1 ,38),I(3c,01,1b,34),I(00,00,00,19),I(1c,47,00,00),I(24,00,00,00),B(stream2 ,27),I(3d,02,02,32),I(00,00,00,3c),I(23,00,00,00),B(stream ,71),I(26,00,00,00),I(00,00,00,05),I(47,00,00,24),B(stream ,4),I(3c,03,2a,1c),I(47,00,00,24),B(stream ,12),I(3c,02,2a,47),I(00,00,27,3e),I(24,00,00,00),B(stream ,26),I(3d,02,02,45),I(02,00,00,00)};
 
-  /* Byte-vector with size: 14 is_init: 0 index: 72 binding: swrite-all */
-  static const void *G006538[] = {I(ab,46,01,1c),I(48,00,00,1b),I(34,00,00,00),I(00,00,00,28),I(23,00,00,00),B(stream ,43),I(23,00,00,00),B(stream ,71),I(3b,01,1c,24),B(boot ,16),I(3c,02,32,00),I(00,00,00,07),I(86,2a,47,00),I(00,45,02,00)};
+  /* Byte-vector with size: 14 is_init: 0 index: 73 binding: swrite-all */
+  static const void *G006538[] = {I(ab,46,01,1c),I(48,00,00,1b),I(34,00,00,00),I(00,00,00,28),I(23,00,00,00),B(stream ,44),I(23,00,00,00),B(stream ,72),I(3b,01,1c,24),B(boot ,16),I(3c,02,32,00),I(00,00,00,07),I(86,2a,47,00),I(00,45,02,00)};
 
-  /* Byte-vector with size: 15 is_init: 0 index: 73 binding: prin-char */
-  static const void *G006540[] = {I(43,fe,1b,34),I(00,00,00,21),I(1b,10,24,00),B(stream2 ,34),I(1f,03,1d,24),B(stream ,14),I(3d,03,03,22),I(01,32,00,00),I(00,00,00,1a),I(24,00,00,00),B(stream2 ,34),I(1d,24,00,00),B(stream ,25),I(3d,02,02,45),I(02,00,00,00)};
+  /* Byte-vector with size: 15 is_init: 0 index: 74 binding: prin-char */
+  static const void *G006540[] = {I(43,fe,1b,34),I(00,00,00,21),I(1b,10,24,00),B(stream2 ,34),I(1f,03,1d,24),B(stream ,15),I(3d,03,03,22),I(01,32,00,00),I(00,00,00,1a),I(24,00,00,00),B(stream2 ,34),I(1d,24,00,00),B(stream ,26),I(3d,02,02,45),I(02,00,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 74 binding: newline */
-  static const void *G006542[] = {I(a9,24,00,00),B(stream2 ,34),I(27,0a,24,00),B(stream ,25),I(3d,02,00,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 75 binding: newline */
+  static const void *G006542[] = {I(a9,24,00,00),B(stream2 ,34),I(27,0a,24,00),B(stream ,26),I(3d,02,00,00)};
 
-  /* Byte-vector with size: 9 is_init: 0 index: 75 binding: print */
-  static const void *G006544[] = {I(a8,24,00,00),B(stream2 ,34),I(1c,24,00,00),B(stream ,19),I(3c,02,2a,24),B(stream2 ,34),I(27,0a,24,00),B(stream ,25),I(3d,02,01,00)};
+  /* Byte-vector with size: 9 is_init: 0 index: 76 binding: print */
+  static const void *G006544[] = {I(a8,24,00,00),B(stream2 ,34),I(1c,24,00,00),B(stream ,20),I(3c,02,2a,24),B(stream2 ,34),I(27,0a,24,00),B(stream ,26),I(3d,02,01,00)};
 
   eul_allocate_static_string(str_6548, "0x%08X", 6);
-  /* Byte-vector with size: 5 is_init: 0 index: 77 binding: prin-address */
-  static const void *G006546[] = {I(ab,1b,23,00),B(stream ,76),I(1f,03,24,00),B(stream ,22),I(3d,03,02,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 78 binding: prin-address */
+  static const void *G006546[] = {I(ab,1b,23,00),B(stream ,77),I(1f,03,24,00),B(stream ,23),I(3d,03,02,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 78 binding: sflush */
+  /* Byte-vector with size: 3 is_init: 0 index: 79 binding: sflush */
   static const void *G006549[] = {I(aa,24,00,00),B(stream2 ,23),I(3d,01,00,00)};
 
-  /* Byte-vector with size: 36 is_init: 0 index: 79 binding: anonymous */
+  /* Byte-vector with size: 36 is_init: 0 index: 80 binding: anonymous */
   static const void *G006551[] = {I(aa,1b,47,00),I(02,1a,1b,34),I(00,00,00,85),I(47,00,04,83),I(24,00,00,00),B(stream2 ,22),I(08,1b,2b,47),I(00,04,26,00),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,1f,03),I(47,00,01,0c),I(2a,47,00,04),I(1d,1c,83,1d),I(24,00,00,00),B(stream2 ,22),I(09,22,02,2a),I(47,00,01,27),I(0a,51,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0d),I(1d,47,00,05),I(1a,12,1b,34),I(00,00,00,15),I(47,00,00,24),B(stream2 ,23),I(3c,01,32,00),I(00,00,00,07),I(86,2a,1f,06),I(2b,47,00,03),I(3d,01,07,22),I(05,32,00,00),I(00,00,00,08),I(86,45,02,00)};
 
-  /* Byte-vector with size: 22 is_init: 0 index: 80 binding: sprin-char* */
-  static const void *G006553[] = {I(43,03,46,07),I(1d,48,00,00),I(1c,48,00,01),I(1b,48,00,02),I(47,00,00,26),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,48,00),I(04,47,00,04),I(84,24,00,00),B(stream2 ,22),I(08,1b,48,00),I(05,86,1b,48),I(00,03,23,00),B(stream ,43),I(23,00,00,00),B(stream ,79),I(3b,01,48,00),I(03,82,47,00),I(03,3d,01,06),I(45,06,00,00)};
+  /* Byte-vector with size: 22 is_init: 0 index: 81 binding: sprin-char* */
+  static const void *G006553[] = {I(43,03,46,07),I(1d,48,00,00),I(1c,48,00,01),I(1b,48,00,02),I(47,00,00,26),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,48,00),I(04,47,00,04),I(84,24,00,00),B(stream2 ,22),I(08,1b,48,00),I(05,86,1b,48),I(00,03,23,00),B(stream ,44),I(23,00,00,00),B(stream ,80),I(3b,01,48,00),I(03,82,47,00),I(03,3d,01,06),I(45,06,00,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 81 binding: write */
+  /* Byte-vector with size: 5 is_init: 0 index: 82 binding: write */
   static const void *G006555[] = {I(a8,24,00,00),B(stream2 ,34),I(1c,24,00,00),B(stream ,8),I(3d,02,01,00)};
 
-  /* Byte-vector with size: 14 is_init: 0 index: 82 binding: anonymous */
-  static const void *G006557[] = {I(aa,1b,10,1b),I(47,00,01,47),I(00,00,3c,02),I(2a,1c,11,7a),I(1b,34,00,00),I(00,00,00,23),I(47,00,01,27),I(20,24,00,00),B(stream ,25),I(3c,02,2a,1d),I(11,47,00,02),I(3d,01,03,32),I(00,00,00,07),I(1d,11,45,03)};
+  /* Byte-vector with size: 14 is_init: 0 index: 83 binding: anonymous */
+  static const void *G006557[] = {I(aa,1b,10,1b),I(47,00,01,47),I(00,00,3c,02),I(2a,1c,11,7a),I(1b,34,00,00),I(00,00,00,23),I(47,00,01,27),I(20,24,00,00),B(stream ,26),I(3c,02,2a,1d),I(11,47,00,02),I(3d,01,03,32),I(00,00,00,07),I(1d,11,45,03)};
 
-  /* Byte-vector with size: 12 is_init: 0 index: 83 binding: output-list-contents */
-  static const void *G006559[] = {I(43,03,46,03),I(1c,48,00,00),I(1b,48,00,01),I(86,1b,48,00),I(02,23,00,00),B(stream ,43),I(23,00,00,00),B(stream ,82),I(3b,01,48,00),I(02,1f,03,47),I(00,02,3d,01),I(04,45,04,00)};
+  /* Byte-vector with size: 12 is_init: 0 index: 84 binding: output-list-contents */
+  static const void *G006559[] = {I(43,03,46,03),I(1c,48,00,00),I(1b,48,00,01),I(86,1b,48,00),I(02,23,00,00),B(stream ,44),I(23,00,00,00),B(stream ,83),I(3b,01,48,00),I(02,1f,03,47),I(00,02,3d,01),I(04,45,04,00)};
 
-  /* Byte-vector with size: 8 is_init: 0 index: 84 binding: file-lookup */
-  static const void *G006561[] = {I(43,fe,1c,24),B(string ,13),I(24,00,00,00),B(convert ,2),I(3c,02,1b,1d),I(41,00,00,00),B(stream ,26),I(45,05,00,00)};
+  /* Byte-vector with size: 8 is_init: 0 index: 85 binding: file-lookup */
+  static const void *G006561[] = {I(43,fe,1c,24),B(string ,13),I(24,00,00,00),B(convert ,2),I(3c,02,1b,1d),I(41,00,00,00),B(stream ,27),I(45,05,00,00)};
 
-  /* Byte-vector with size: 12 is_init: 0 index: 85 binding: sprin-char */
-  static const void *G006563[] = {I(43,fd,1b,34),I(00,00,00,1d),I(1b,10,1f,03),I(1f,03,1d,24),B(stream ,14),I(3d,03,04,22),I(01,32,00,00),I(00,00,00,12),I(1d,1d,24,00),B(stream ,25),I(3d,02,03,45),I(03,00,00,00)};
+  /* Byte-vector with size: 12 is_init: 0 index: 86 binding: sprin-char */
+  static const void *G006563[] = {I(43,fd,1b,34),I(00,00,00,1d),I(1b,10,1f,03),I(1f,03,1d,24),B(stream ,15),I(3d,03,04,22),I(01,32,00,00),I(00,00,00,12),I(1d,1d,24,00),B(stream ,26),I(3d,02,03,45),I(03,00,00,00)};
 
   eul_allocate_static_string(str_6567, "#<C: ", 5);
-  /* Byte-vector with size: 24 is_init: 0 index: 87 binding: anonymous */
-  static const void *G006565[] = {I(aa,1b,24,00),B(boot1 ,38),I(3c,01,1b,34),I(00,00,00,19),I(1c,47,00,00),I(24,00,00,00),B(stream2 ,30),I(3d,02,02,32),I(00,00,00,3c),I(23,00,00,00),B(stream ,86),I(26,00,00,00),I(00,00,00,05),I(47,00,00,24),B(stream ,4),I(3c,03,2a,1c),I(47,00,00,24),B(stream ,12),I(3c,02,2a,47),I(00,00,27,3e),I(24,00,00,00),B(stream ,25),I(3d,02,02,45),I(02,00,00,00)};
+  /* Byte-vector with size: 24 is_init: 0 index: 88 binding: anonymous */
+  static const void *G006565[] = {I(aa,1b,24,00),B(boot1 ,38),I(3c,01,1b,34),I(00,00,00,19),I(1c,47,00,00),I(24,00,00,00),B(stream2 ,30),I(3d,02,02,32),I(00,00,00,3c),I(23,00,00,00),B(stream ,87),I(26,00,00,00),I(00,00,00,05),I(47,00,00,24),B(stream ,4),I(3c,03,2a,1c),I(47,00,00,24),B(stream ,12),I(3c,02,2a,47),I(00,00,27,3e),I(24,00,00,00),B(stream ,26),I(3d,02,02,45),I(02,00,00,00)};
 
-  /* Byte-vector with size: 14 is_init: 0 index: 88 binding: sprin-all */
-  static const void *G006568[] = {I(ab,46,01,1c),I(48,00,00,1b),I(34,00,00,00),I(00,00,00,28),I(23,00,00,00),B(stream ,43),I(23,00,00,00),B(stream ,87),I(3b,01,1c,24),B(boot ,16),I(3c,02,32,00),I(00,00,00,07),I(86,2a,47,00),I(00,45,02,00)};
+  /* Byte-vector with size: 14 is_init: 0 index: 89 binding: sprin-all */
+  static const void *G006568[] = {I(ab,46,01,1c),I(48,00,00,1b),I(34,00,00,00),I(00,00,00,28),I(23,00,00,00),B(stream ,44),I(23,00,00,00),B(stream ,88),I(3b,01,1c,24),B(boot ,16),I(3c,02,32,00),I(00,00,00,07),I(86,2a,47,00),I(00,45,02,00)};
 
-  /* Byte-vector with size: 5 is_init: 0 index: 89 binding: prin */
-  static const void *G006570[] = {I(a8,24,00,00),B(stream2 ,34),I(1c,24,00,00),B(stream ,19),I(3d,02,01,00)};
+  /* Byte-vector with size: 5 is_init: 0 index: 90 binding: prin */
+  static const void *G006570[] = {I(a8,24,00,00),B(stream2 ,34),I(1c,24,00,00),B(stream ,20),I(3d,02,01,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 90 binding: connect */
+  /* Byte-vector with size: 3 is_init: 0 index: 91 binding: connect */
   static const void *G006572[] = {I(43,fd,24,00),B(stream2 ,44),I(3d,03,00,00)};
 
-  /* Byte-vector with size: 20 is_init: 0 index: 91 binding: fprintf */
-  static const void *G006574[] = {I(43,03,24,00),B(string ,13),I(23,00,00,00),B(stream ,34),I(26,00,00,00),I(00,00,00,19),I(24,00,00,00),B(mop_gf ,2),I(3c,03,1b,82),I(1f,04,1f,04),I(41,00,00,00),B(stream1 ,19),I(22,04,1c,82),I(1d,24,00,00),B(string ,6),I(3c,03,1b,1d),I(1f,07,24,00),B(stream ,4),I(3d,03,06,45),I(06,00,00,00)};
+  /* Byte-vector with size: 20 is_init: 0 index: 92 binding: fprintf */
+  static const void *G006574[] = {I(43,03,24,00),B(string ,13),I(23,00,00,00),B(stream ,35),I(26,00,00,00),I(00,00,00,19),I(24,00,00,00),B(mop_gf ,2),I(3c,03,1b,82),I(1f,04,1f,04),I(41,00,00,00),B(stream1 ,19),I(22,04,1c,82),I(1d,24,00,00),B(string ,6),I(3c,03,1b,1d),I(1f,07,24,00),B(stream ,4),I(3d,03,06,45),I(06,00,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 92 binding: sprin */
-  static const void *G006576[] = {I(43,fe,24,00),B(stream ,19),I(3d,02,00,00)};
+  /* Byte-vector with size: 3 is_init: 0 index: 93 binding: sprin */
+  static const void *G006576[] = {I(43,fe,24,00),B(stream ,20),I(3d,02,00,00)};
 
-  /* Byte-vector with size: 19 is_init: 0 index: 93 binding: make-space */
+  /* Byte-vector with size: 19 is_init: 0 index: 94 binding: make-space */
   static const void *G006578[] = {I(ab,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,84,24),B(stream2 ,22),I(08,1c,83,24),B(stream2 ,22),I(08,1c,1c,15),I(1f,04,1c,1a),I(1b,34,00,00),I(00,00,00,0f),I(87,32,00,00),I(00,00,00,17),I(1f,06,24,00),B(stream2 ,23),I(3c,01,2a,1f),I(05,1f,04,1a),I(45,07,00,00)};
 
-  /* Byte-vector with size: 32 is_init: 0 index: 94 binding: sprin-one-char */
+  /* Byte-vector with size: 32 is_init: 0 index: 95 binding: sprin-one-char */
   static const void *G006580[] = {I(ab,1c,26,00),I(00,00,00,05),I(24,00,00,00),B(stream2 ,20),I(08,1b,83,24),B(stream2 ,22),I(08,1b,2b,1d),I(84,24,00,00),B(stream2 ,22),I(08,1f,03,26),I(00,00,00,03),I(24,00,00,00),B(stream2 ,22),I(08,1b,1f,04),I(1f,07,0c,2a),I(1f,04,1f,03),I(1c,83,1d,24),B(stream2 ,22),I(09,22,02,2a),I(1f,05,27,0a),I(51,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,0d),I(1f,03,1f,03),I(1a,12,1b,34),I(00,00,00,15),I(1f,08,24,00),B(stream2 ,23),I(3d,01,09,32),I(00,00,00,06),I(86,45,09,00)};
 
-  /* Byte-vector with size: 212 is_init: 1 index: 0 binding: initialize-stream */
-  static const void *G006582[] = {I(87,25,00,00),B(stream ,1),I(24,00,00,00),B(fpi ,1),I(3e,0b,24,00),B(fpi ,0),I(3c,00,21,01),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(list ,1),I(3e,0b,24,00),B(list ,0),I(3c,00,21,01),I(24,00,00,00),B(collect ,1),I(3e,0b,24,00),B(collect ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(socket ,1),I(3e,0b,24,00),B(socket ,0),I(3c,00,21,01),I(24,00,00,00),B(stream2 ,1),I(3e,0b,24,00),B(stream2 ,0),I(3c,00,21,01),I(24,00,00,00),B(stream1 ,1),I(3e,0b,24,00),B(stream1 ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(stream ,95),I(23,00,00,00),B(stream ,94),I(3b,02,25,00),B(stream ,25),I(23,00,00,00),B(stream ,96),I(23,00,00,00),B(stream ,93),I(3b,02,25,00),B(stream ,24),I(23,00,00,00),B(stream ,97),I(23,00,00,00),B(stream ,92),I(3b,fe,25,00),B(stream ,23),I(23,00,00,00),B(stream ,98),I(23,00,00,00),B(stream ,91),I(3b,03,25,00),B(stream ,22),I(23,00,00,00),B(stream ,99),I(23,00,00,00),B(stream ,90),I(3b,fd,25,00),B(stream ,21),I(23,00,00,00),B(stream ,100),I(23,00,00,00),B(stream ,89),I(3b,ff,25,00),B(stream ,20),I(23,00,00,00),B(stream ,101),I(23,00,00,00),B(stream ,88),I(3b,02,25,00),B(stream ,19),I(23,00,00,00),B(stream ,102),I(23,00,00,00),B(stream ,85),I(3b,fd,25,00),B(stream ,18),I(23,00,00,00),B(stream ,103),I(23,00,00,00),B(stream ,84),I(3b,fe,25,00),B(stream ,17),I(23,00,00,00),B(stream ,104),I(23,00,00,00),B(stream ,83),I(3b,03,25,00),B(stream ,16),I(23,00,00,00),B(stream ,105),I(23,00,00,00),B(stream ,81),I(3b,ff,25,00),B(stream ,15),I(23,00,00,00),B(stream ,106),I(23,00,00,00),B(stream ,80),I(3b,03,25,00),B(stream ,14),I(23,00,00,00),B(stream ,107),I(23,00,00,00),B(stream ,78),I(3b,01,25,00),B(stream ,13),I(23,00,00,00),B(stream ,108),I(23,00,00,00),B(stream ,77),I(3b,02,25,00),B(stream ,12),I(23,00,00,00),B(stream ,109),I(23,00,00,00),B(stream ,75),I(3b,ff,25,00),B(stream ,11),I(23,00,00,00),B(stream ,110),I(23,00,00,00),B(stream ,74),I(3b,00,25,00),B(stream ,10),I(23,00,00,00),B(stream ,111),I(23,00,00,00),B(stream ,73),I(3b,fe,25,00),B(stream ,9),I(23,00,00,00),B(stream ,112),I(23,00,00,00),B(stream ,72),I(3b,02,25,00),B(stream ,8),I(23,00,00,00),B(stream ,113),I(23,00,00,00),B(stream ,69),I(3b,fe,25,00),B(stream ,7),I(23,00,00,00),B(stream ,114),I(23,00,00,00),B(stream ,68),I(3b,01,25,00),B(stream ,6),I(23,00,00,00),B(stream ,115),I(23,00,00,00),B(stream ,67),I(3b,02,25,00),B(stream ,5),I(23,00,00,00),B(stream ,116),I(23,00,00,00),B(stream ,66),I(3b,03,25,00),B(stream ,4),I(23,00,00,00),B(stream ,117),I(23,00,00,00),B(stream ,62),I(3b,fe,25,00),B(stream ,3),I(23,00,00,00),B(stream ,118),I(23,00,00,00),B(stream ,61),I(3b,00,25,00),B(stream ,2),I(23,00,00,00),B(stream ,119),I(23,00,00,00),B(stream ,60),I(3b,00,3d,00),I(00,ac,00,00)};
+  /* Byte-vector with size: 214 is_init: 1 index: 0 binding: initialize-stream */
+  static const void *G006582[] = {I(87,25,00,00),B(stream ,1),I(24,00,00,00),B(fpi ,1),I(3e,0b,24,00),B(fpi ,0),I(3c,00,21,01),I(24,00,00,00),B(string ,1),I(3e,0b,24,00),B(string ,0),I(3c,00,21,01),I(24,00,00,00),B(list ,1),I(3e,0b,24,00),B(list ,0),I(3c,00,21,01),I(24,00,00,00),B(collect ,1),I(3e,0b,24,00),B(collect ,0),I(3c,00,21,01),I(24,00,00,00),B(convert ,1),I(3e,0b,24,00),B(convert ,0),I(3c,00,21,01),I(24,00,00,00),B(lock ,1),I(3e,0b,24,00),B(lock ,0),I(3c,00,21,01),I(24,00,00,00),B(condition ,1),I(3e,0b,24,00),B(condition ,0),I(3c,00,21,01),I(24,00,00,00),B(dynamic ,1),I(3e,0b,24,00),B(dynamic ,0),I(3c,00,21,01),I(24,00,00,00),B(socket ,1),I(3e,0b,24,00),B(socket ,0),I(3c,00,21,01),I(24,00,00,00),B(stream2 ,1),I(3e,0b,24,00),B(stream2 ,0),I(3c,00,21,01),I(24,00,00,00),B(stream1 ,1),I(3e,0b,24,00),B(stream1 ,0),I(3c,00,21,01),I(24,00,00,00),B(telos ,1),I(3e,0b,24,00),B(telos ,0),I(3c,00,21,01),I(23,00,00,00),B(stream ,96),I(23,00,00,00),B(stream ,95),I(3b,02,25,00),B(stream ,26),I(23,00,00,00),B(stream ,97),I(23,00,00,00),B(stream ,94),I(3b,02,25,00),B(stream ,25),I(23,00,00,00),B(stream ,98),I(23,00,00,00),B(stream ,93),I(3b,fe,25,00),B(stream ,24),I(23,00,00,00),B(stream ,99),I(23,00,00,00),B(stream ,92),I(3b,03,25,00),B(stream ,23),I(23,00,00,00),B(stream ,100),I(23,00,00,00),B(stream ,91),I(3b,fd,25,00),B(stream ,22),I(23,00,00,00),B(stream ,101),I(23,00,00,00),B(stream ,90),I(3b,ff,25,00),B(stream ,21),I(23,00,00,00),B(stream ,102),I(23,00,00,00),B(stream ,89),I(3b,02,25,00),B(stream ,20),I(23,00,00,00),B(stream ,103),I(23,00,00,00),B(stream ,86),I(3b,fd,25,00),B(stream ,19),I(23,00,00,00),B(stream ,104),I(23,00,00,00),B(stream ,85),I(3b,fe,25,00),B(stream ,18),I(23,00,00,00),B(stream ,105),I(23,00,00,00),B(stream ,84),I(3b,03,25,00),B(stream ,17),I(23,00,00,00),B(stream ,106),I(23,00,00,00),B(stream ,82),I(3b,ff,25,00),B(stream ,16),I(23,00,00,00),B(stream ,107),I(23,00,00,00),B(stream ,81),I(3b,03,25,00),B(stream ,15),I(23,00,00,00),B(stream ,108),I(23,00,00,00),B(stream ,79),I(3b,01,25,00),B(stream ,14),I(86,25,00,00),B(stream ,13),I(23,00,00,00),B(stream ,109),I(23,00,00,00),B(stream ,78),I(3b,02,25,00),B(stream ,12),I(23,00,00,00),B(stream ,110),I(23,00,00,00),B(stream ,76),I(3b,ff,25,00),B(stream ,11),I(23,00,00,00),B(stream ,111),I(23,00,00,00),B(stream ,75),I(3b,00,25,00),B(stream ,10),I(23,00,00,00),B(stream ,112),I(23,00,00,00),B(stream ,74),I(3b,fe,25,00),B(stream ,9),I(23,00,00,00),B(stream ,113),I(23,00,00,00),B(stream ,73),I(3b,02,25,00),B(stream ,8),I(23,00,00,00),B(stream ,114),I(23,00,00,00),B(stream ,70),I(3b,fe,25,00),B(stream ,7),I(23,00,00,00),B(stream ,115),I(23,00,00,00),B(stream ,69),I(3b,01,25,00),B(stream ,6),I(23,00,00,00),B(stream ,116),I(23,00,00,00),B(stream ,68),I(3b,02,25,00),B(stream ,5),I(23,00,00,00),B(stream ,117),I(23,00,00,00),B(stream ,67),I(3b,03,25,00),B(stream ,4),I(23,00,00,00),B(stream ,118),I(23,00,00,00),B(stream ,63),I(3b,fe,25,00),B(stream ,3),I(23,00,00,00),B(stream ,119),I(23,00,00,00),B(stream ,62),I(3b,00,25,00),B(stream ,2),I(23,00,00,00),B(stream ,120),I(23,00,00,00),B(stream ,61),I(3b,00,3d,00),I(00,ac,00,00)};
 
 
   /* Initializations */
@@ -332,105 +332,105 @@ void initialize_module_stream()
   /* Set local bindings */
   {
     int i;
-    for (i = 2; i < 26; i++)
+    for (i = 2; i < 27; i++)
       stream_bindings[i] = eul_nil;
   }
 
-  stream_bindings[ 26] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_file_lookup6465;
-  stream_bindings[ 27] = G006467;
-  stream_bindings[ 28] = G006469;
-  stream_bindings[ 29] = G006471;
-  stream_bindings[ 30] = G006473;
-  stream_bindings[ 31] = str_6476;
-  stream_bindings[ 32] = key_6477;
-  stream_bindings[ 33] = G006475;
-  stream_bindings[ 34] = key_6480;
-  stream_bindings[ 35] = G006479;
-  stream_bindings[ 36] = G006482;
-  stream_bindings[ 37] = G006484;
-  stream_bindings[ 38] = G006486;
-  stream_bindings[ 39] = G006488;
-  stream_bindings[ 40] = G006490;
-  stream_bindings[ 41] = G006492;
-  stream_bindings[ 42] = sym_6495;
-  stream_bindings[ 43] = sym_6496;
-  stream_bindings[ 44] = G006494;
-  stream_bindings[ 45] = G006498;
-  stream_bindings[ 46] = G006500;
-  stream_bindings[ 47] = G006502;
-  stream_bindings[ 48] = G006504;
-  stream_bindings[ 49] = sym_6507;
-  stream_bindings[ 50] = sym_6508;
-  stream_bindings[ 51] = sym_6509;
-  stream_bindings[ 52] = G006506;
-  stream_bindings[ 53] = sym_6512;
-  stream_bindings[ 54] = sym_6513;
-  stream_bindings[ 55] = sym_6514;
-  stream_bindings[ 56] = sym_6515;
-  stream_bindings[ 57] = sym_6516;
-  stream_bindings[ 58] = sym_6517;
-  stream_bindings[ 59] = sym_6518;
-  stream_bindings[ 60] = G006511;
-  stream_bindings[ 61] = G006520;
-  stream_bindings[ 62] = G006522;
-  stream_bindings[ 63] = str_6525;
-  stream_bindings[ 64] = str_6526;
-  stream_bindings[ 65] = G006524;
-  stream_bindings[ 66] = G006528;
-  stream_bindings[ 67] = G006530;
-  stream_bindings[ 68] = G006532;
-  stream_bindings[ 69] = G006534;
-  stream_bindings[ 70] = str_6537;
-  stream_bindings[ 71] = G006536;
-  stream_bindings[ 72] = G006539;
-  stream_bindings[ 73] = G006541;
-  stream_bindings[ 74] = G006543;
-  stream_bindings[ 75] = G006545;
-  stream_bindings[ 76] = str_6548;
-  stream_bindings[ 77] = G006547;
-  stream_bindings[ 78] = G006550;
-  stream_bindings[ 79] = G006552;
-  stream_bindings[ 80] = G006554;
-  stream_bindings[ 81] = G006556;
-  stream_bindings[ 82] = G006558;
-  stream_bindings[ 83] = G006560;
-  stream_bindings[ 84] = G006562;
-  stream_bindings[ 85] = G006564;
-  stream_bindings[ 86] = str_6567;
-  stream_bindings[ 87] = G006566;
-  stream_bindings[ 88] = G006569;
-  stream_bindings[ 89] = G006571;
-  stream_bindings[ 90] = G006573;
-  stream_bindings[ 91] = G006575;
-  stream_bindings[ 92] = G006577;
-  stream_bindings[ 93] = G006579;
-  stream_bindings[ 94] = G006581;
+  stream_bindings[ 27] = (LispRef) (LispRef (*) (Stack *, LispRef *, LispRef *)) ff_stub_eul_file_lookup6465;
+  stream_bindings[ 28] = G006467;
+  stream_bindings[ 29] = G006469;
+  stream_bindings[ 30] = G006471;
+  stream_bindings[ 31] = G006473;
+  stream_bindings[ 32] = str_6476;
+  stream_bindings[ 33] = key_6477;
+  stream_bindings[ 34] = G006475;
+  stream_bindings[ 35] = key_6480;
+  stream_bindings[ 36] = G006479;
+  stream_bindings[ 37] = G006482;
+  stream_bindings[ 38] = G006484;
+  stream_bindings[ 39] = G006486;
+  stream_bindings[ 40] = G006488;
+  stream_bindings[ 41] = G006490;
+  stream_bindings[ 42] = G006492;
+  stream_bindings[ 43] = sym_6495;
+  stream_bindings[ 44] = sym_6496;
+  stream_bindings[ 45] = G006494;
+  stream_bindings[ 46] = G006498;
+  stream_bindings[ 47] = G006500;
+  stream_bindings[ 48] = G006502;
+  stream_bindings[ 49] = G006504;
+  stream_bindings[ 50] = sym_6507;
+  stream_bindings[ 51] = sym_6508;
+  stream_bindings[ 52] = sym_6509;
+  stream_bindings[ 53] = G006506;
+  stream_bindings[ 54] = sym_6512;
+  stream_bindings[ 55] = sym_6513;
+  stream_bindings[ 56] = sym_6514;
+  stream_bindings[ 57] = sym_6515;
+  stream_bindings[ 58] = sym_6516;
+  stream_bindings[ 59] = sym_6517;
+  stream_bindings[ 60] = sym_6518;
+  stream_bindings[ 61] = G006511;
+  stream_bindings[ 62] = G006520;
+  stream_bindings[ 63] = G006522;
+  stream_bindings[ 64] = str_6525;
+  stream_bindings[ 65] = str_6526;
+  stream_bindings[ 66] = G006524;
+  stream_bindings[ 67] = G006528;
+  stream_bindings[ 68] = G006530;
+  stream_bindings[ 69] = G006532;
+  stream_bindings[ 70] = G006534;
+  stream_bindings[ 71] = str_6537;
+  stream_bindings[ 72] = G006536;
+  stream_bindings[ 73] = G006539;
+  stream_bindings[ 74] = G006541;
+  stream_bindings[ 75] = G006543;
+  stream_bindings[ 76] = G006545;
+  stream_bindings[ 77] = str_6548;
+  stream_bindings[ 78] = G006547;
+  stream_bindings[ 79] = G006550;
+  stream_bindings[ 80] = G006552;
+  stream_bindings[ 81] = G006554;
+  stream_bindings[ 82] = G006556;
+  stream_bindings[ 83] = G006558;
+  stream_bindings[ 84] = G006560;
+  stream_bindings[ 85] = G006562;
+  stream_bindings[ 86] = G006564;
+  stream_bindings[ 87] = str_6567;
+  stream_bindings[ 88] = G006566;
+  stream_bindings[ 89] = G006569;
+  stream_bindings[ 90] = G006571;
+  stream_bindings[ 91] = G006573;
+  stream_bindings[ 92] = G006575;
+  stream_bindings[ 93] = G006577;
+  stream_bindings[ 94] = G006579;
+  stream_bindings[ 95] = G006581;
   stream_bindings[ 1] = eul_nil;
-  stream_bindings[ 95] = sym_6584;
-  stream_bindings[ 96] = sym_6585;
-  stream_bindings[ 97] = sym_6586;
-  stream_bindings[ 98] = sym_6587;
-  stream_bindings[ 99] = sym_6588;
-  stream_bindings[ 100] = sym_6589;
-  stream_bindings[ 101] = sym_6590;
-  stream_bindings[ 102] = sym_6591;
-  stream_bindings[ 103] = sym_6592;
-  stream_bindings[ 104] = sym_6593;
-  stream_bindings[ 105] = sym_6594;
-  stream_bindings[ 106] = sym_6595;
-  stream_bindings[ 107] = sym_6596;
-  stream_bindings[ 108] = sym_6597;
-  stream_bindings[ 109] = sym_6598;
-  stream_bindings[ 110] = sym_6599;
-  stream_bindings[ 111] = sym_6600;
-  stream_bindings[ 112] = sym_6601;
-  stream_bindings[ 113] = sym_6602;
-  stream_bindings[ 114] = sym_6603;
-  stream_bindings[ 115] = sym_6604;
-  stream_bindings[ 116] = sym_6605;
-  stream_bindings[ 117] = sym_6606;
-  stream_bindings[ 118] = sym_6607;
-  stream_bindings[ 119] = sym_6608;
+  stream_bindings[ 96] = sym_6584;
+  stream_bindings[ 97] = sym_6585;
+  stream_bindings[ 98] = sym_6586;
+  stream_bindings[ 99] = sym_6587;
+  stream_bindings[ 100] = sym_6588;
+  stream_bindings[ 101] = sym_6589;
+  stream_bindings[ 102] = sym_6590;
+  stream_bindings[ 103] = sym_6591;
+  stream_bindings[ 104] = sym_6592;
+  stream_bindings[ 105] = sym_6593;
+  stream_bindings[ 106] = sym_6594;
+  stream_bindings[ 107] = sym_6595;
+  stream_bindings[ 108] = sym_6596;
+  stream_bindings[ 109] = sym_6597;
+  stream_bindings[ 110] = sym_6598;
+  stream_bindings[ 111] = sym_6599;
+  stream_bindings[ 112] = sym_6600;
+  stream_bindings[ 113] = sym_6601;
+  stream_bindings[ 114] = sym_6602;
+  stream_bindings[ 115] = sym_6603;
+  stream_bindings[ 116] = sym_6604;
+  stream_bindings[ 117] = sym_6605;
+  stream_bindings[ 118] = sym_6606;
+  stream_bindings[ 119] = sym_6607;
+  stream_bindings[ 120] = sym_6608;
   eul_allocate_lambda( stream_bindings[0], "initialize-stream", 0, G006583);
 
   }

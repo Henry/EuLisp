@@ -1,8 +1,34 @@
-;;; modular arithmetic
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Modular arithmetic
+;;;  Maintainer: Henry G. Weller
+;;;-----------------------------------------------------------------------------
 
 (defmodule modular
-  (import (level-0)
-   export (mod <modular-error> <modular-number> <no-modular-inverse>))
+  (syntax (syntax-0)
+   import (level-0)
+   export (Mod
+           <modular-error>
+           <modular-number>
+           <no-modular-inverse>))
 
 (defclass <modular-number> ()
   ((value keyword: value:
@@ -20,17 +46,16 @@
   (generic-print ">" stream)
   a)
 
-(defun mod (a n)
+(defun Mod (a n)
   (make-modular-number
    (if (< a 0) (+ n a) a)
    n))
 
-(defcondition  <modular-error> ())
+(defcondition <modular-error> () ())
 
-(defcondition <modular-argument-mismatch>
-              <modular-error>
-              arg1 0
-              arg2 0)
+(defcondition <modular-argument-mismatch> <modular-error>
+  ((arg1 default: 0)
+   (arg2 default: 0)))
 
 (defun modular-mismatch (moda modb)
   (error <modular-argument-mismatch>
@@ -42,10 +67,10 @@
   (let ((moda (modular-number-modulus a))
         (modb (modular-number-modulus b)))
     (if (= moda modb)
-        (mod
-         (remainder (+ (modular-number-value a)
-                       (modular-number-value b))
-                    moda)
+        (Mod
+         (% (+ (modular-number-value a)
+               (modular-number-value b))
+            moda)
          moda)
       (modular-mismatch moda modb))))
 
@@ -53,25 +78,25 @@
   (let ((moda (modular-number-modulus a))
         (modb (modular-number-modulus b)))
     (if (= moda modb)
-        (mod
-         (remainder (- (modular-number-value a)
-                       (modular-number-value b))
-                    moda)
+        (Mod
+         (% (- (modular-number-value a)
+               (modular-number-value b))
+            moda)
          moda)
       (modular-mismatch moda modb))))
 
-(defmethod unary- ((a <modular-number>))
-  (let ((moda (modular-number-modulus a)))
-    (mod (- moda (modular-number-value a)) moda)))
+;; (defmethod unary- ((a <modular-number>))
+;;   (let ((moda (modular-number-modulus a)))
+;;     (Mod (- moda (modular-number-value a)) moda)))
 
 (defmethod binary* ((a <modular-number>) (b <modular-number>))
   (let ((moda (modular-number-modulus a))
         (modb (modular-number-modulus b)))
     (if (= moda modb)
-        (mod
-         (remainder (* (modular-number-value a)
-                       (modular-number-value b))
-                    moda)
+        (Mod
+         (% (* (modular-number-value a)
+               (modular-number-value b))
+            moda)
          moda)
       (modular-mismatch moda modb))))
 
@@ -82,14 +107,13 @@
         (binary* a (unary/ b))
       (modular-mismatch moda modb))))
 
-(defmethod unary/ ((a <modular-number>))
-  (let ((moda (modular-number-modulus a)))
-    (mod (inverse-mod-n (modular-number-value a) moda) moda)))
+;; (defmethod unary/ ((a <modular-number>))
+;;   (let ((moda (modular-number-modulus a)))
+;;     (Mod (inverse-mod-n (modular-number-value a) moda) moda)))
 
-(defcondition <no-modular-inverse>
-              <modular-error>
-              value 0
-              modulus 0)
+(defcondition <no-modular-inverse> <modular-error>
+  ((value default: 0)
+   (modulus default: 0)))
 
 (defun inverse-mod-n (a n)
   (if (> (gcd a n) 1)
@@ -112,4 +136,6 @@
        (- cfa1 (* q cfb1))
        (- cfa2 (* q cfb2))))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module modular
+;;;-----------------------------------------------------------------------------

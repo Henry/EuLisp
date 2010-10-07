@@ -26,7 +26,7 @@
 
 (defmodule number
   (import (root
-           macros0)
+           syntax-0)
    export (binary+
            binary-
            binary*

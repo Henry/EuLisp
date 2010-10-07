@@ -18,11 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Programming Language EuLisp, Level-0
 ;;;  Library: level-0
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: Programming Language EuLisp, Level-0
-;;;  Attention: Update Comptime2/cg-dld.em if level-0 modules change!
+;;;  Attention:
+;;    Update Comptime2/cg-dld.em if level-0 modules change!
 ;;;-----------------------------------------------------------------------------
+
 (defmodule level-0
   (syntax (_telos0)
    expose (bit
@@ -56,5 +58,5 @@
            vector))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module level-0
 ;;;-----------------------------------------------------------------------------

@@ -24,8 +24,9 @@
 ;;;  Compilation
 ;;    youtoo sumTo -l level-0
 ;;;-----------------------------------------------------------------------------
+
 (defmodule sumTo
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0))
 
 (defun sum (x res)
@@ -33,8 +34,8 @@
       res
     (sum (- x 1) (+ x res))))
 
-(print (sum 10000 0))
+(print (sum 10000 0) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module sumTo
 ;;;-----------------------------------------------------------------------------

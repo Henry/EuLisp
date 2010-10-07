@@ -10,14 +10,14 @@ extern LispRef stream_bindings[];
 /* Module binding indices */
 #define _stream_control_block__X60_X62_fn_index 22 
 #define file_stream__X63_fn_index 49 
-#define sprin_one_char_fn_index 25 
+#define sprin_one_char_fn_index 26 
 #define string_stream_string_list_fn_index 48 
-#define prin_fn_index 20 
+#define prin_fn_index 21 
 #define control_block_buffer_cnt_fn_index 47 
 #define _string_stream__X60_X62_fn_index 45 
 #define prin_address_fn_index 12 
-#define sprin_char_fn_index 18 
-#define make_space_fn_index 24 
+#define sprin_char_fn_index 19 
+#define make_space_fn_index 25 
 #define stream_source_fn_index 21 
 #define eul_socket_strerror_fn_index 24 
 #define O_TRUNC_fn_index 13 
@@ -28,14 +28,14 @@ extern LispRef stream_bindings[];
 #define O_WRONLY_fn_index 11 
 #define generic_read_fn_index 43 
 #define control_block_descriptor_fn_index 41 
-#define file_lookup_fn_index 17 
+#define file_lookup_fn_index 18 
 #define socket_host_fn_index 11 
 #define eul_make_socket_fn_index 21 
 #define sprint_fn_index 7 
 #define eul_socket_accept_fn_index 22 
-#define output_list_contents_fn_index 16 
+#define output_list_contents_fn_index 17 
 #define stream__X63_fn_index 40 
-#define sprin_fn_index 23 
+#define sprin_fn_index 24 
 #define _stream__X60_X62_fn_index 20 
 #define _buffered_stream__X60_X62_fn_index 19 
 #define disconnect_fn_index 39 
@@ -61,7 +61,7 @@ extern LispRef stream_bindings[];
 #define eul_sprintf_fn_index 19 
 #define buffered_stream__X63_fn_index 15 
 #define control_block_file_name_fn_index 33 
-#define write_fn_index 15 
+#define write_fn_index 16 
 #define string_stream__X63_fn_index 14 
 #define open_file_streams_fn_index 13 
 #define control_block_buffer_fn_index 32 
@@ -80,7 +80,7 @@ extern LispRef stream_bindings[];
 #define control_block_buffer_pos_fn_index 10 
 #define stream_control_block__X63_fn_index 29 
 #define O_CREAT_fn_index 8 
-#define fprintf_fn_index 22 
+#define fprintf_fn_index 23 
 #define eul_close_fn_index 16 
 #define stderr_fn_index 9 
 #define control_block_buffer_size_fn_index 8 
@@ -92,7 +92,7 @@ extern LispRef stream_bindings[];
 #define eul_make_connection_fn_index 23 
 #define eos_default_value_fn_index 5 
 #define O_RDWR_fn_index 2 
-#define sflush_fn_index 13 
+#define sflush_fn_index 14 
 #define _file_stream__X60_X62_fn_index 4 
 #define to_stream_fn_index 26 
 #define _file_control_block__X60_X62_fn_index 3 
@@ -100,8 +100,9 @@ extern LispRef stream_bindings[];
 #define prin_char_fn_index 9 
 #define eul_open_fn_index 15 
 #define _double_size_in_decimal_digits__X42_X42_fn_index () 
-#define connect_fn_index 21 
+#define connect_fn_index 22 
 #define eul_read_fn_index 17 
+#define nl_fn_index 13 
 #define file_control_block__X63_fn_index 24 
 #define socket_port_fn_index 9 
 #define O_APPEND_fn_index 7 

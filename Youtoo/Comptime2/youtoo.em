@@ -24,7 +24,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmodule youtoo
   ;; Final, proper executable!
-  (import (level-0 level1 math eval i-aux0 macros))
+  (import (level-0 level1 math eval i-aux0 macros syntax-0))
 
   (main *argv*)
 

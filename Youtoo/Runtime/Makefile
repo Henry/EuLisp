@@ -74,7 +74,7 @@ LEVEL0_FF_C = Ff/eul-ext.c Ff/eul-ntok.c Ff/eul-read.c Ff/eul-sock.c
 LEVEL0_C += $(LEVEL0_FF_C)
 LEVEL0_O += ${LEVEL0_FF_C:%.c=$(ARCH_DIR)/%.o}
 
-LEVEL0_MAC_EM = stream0.em macros.em
+LEVEL0_MAC_EM = stream0.em macros.em syntax-0.em
 LEVEL0_MAC_C = $(LEVEL0_MAC_EM:%.em=%.c)
 LEVEL0_MAC_O = ${LEVEL0_MAC_C:%.c=$(ARCH_DIR)/%.o}
 
@@ -148,6 +148,10 @@ boot:	libtelos.i _macros.i liblevel-0.i liblevel1.i libmath.i
 .PHONY: boot-syntax
 boot-syntax:
 	$(U2) $(U2FLAGS) -c macros -od $(ARCH_DIR) \
+		-load_path $(U2_DIR)/Runtime \
+		-load_path $(U2_DIR)/Telos \
+		-l level1
+	$(U2) $(U2FLAGS) -c syntax-0 -od $(ARCH_DIR) \
 		-load_path $(U2_DIR)/Runtime \
 		-load_path $(U2_DIR)/Telos \
 		-l level1

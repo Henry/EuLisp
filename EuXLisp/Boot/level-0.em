@@ -26,7 +26,7 @@
   (import (;; all of the level-0 modules
            root
            macros
-           macros0
+           syntax-0
            system
            thread
            telos
@@ -490,7 +490,8 @@
        (sprint ,stream
                "real: "     (vector-ref ,x 0)
                "\nuser: "   (vector-ref ,x 1)
-               "\nsystem: " (vector-ref ,x 2))
+               "\nsystem: " (vector-ref ,x 2)
+               nl)
        ,res)))
 
 ;;;-----------------------------------------------------------------------------

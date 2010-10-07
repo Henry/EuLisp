@@ -11,8 +11,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; TAKL -- The TAKeuchi function using lists as counters.
+
 (defmodule takl
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0 math))
 
 (defun listn (n)
@@ -39,5 +40,5 @@
 (time-execution (mas |26l| |16l| |6l|) stdout)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module takl
 ;;;-----------------------------------------------------------------------------

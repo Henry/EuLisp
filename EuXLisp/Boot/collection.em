@@ -27,7 +27,7 @@
 
 (defmodule collection
   (import (root
-           macros0
+           syntax-0
            thread
            telos
            condition

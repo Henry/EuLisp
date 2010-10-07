@@ -7,8 +7,9 @@
 ; Language:     EuLisp
 ; Status:       Public Domain
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defmodule triang
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0 math))
 
 (deflocal *answer* ())
@@ -59,8 +60,8 @@
         (t ())))
 
 (time-execution (try 22 1) stdout)
-(print "triang finished")
+(print "triang finished" nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module triang
 ;;;-----------------------------------------------------------------------------

@@ -1,4 +1,3 @@
-;;; Copyright 1997 A. Kind & University of Bath
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
@@ -18,17 +17,14 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: Misc
-;;;  Authors: Andreas Kind
-;;; Description: empty level-0 module
-;;;  Compilation
-;;    youtoo empty -l level-0
+;;; Title: level-0 syntax
+;;;  Library: level-0
+;;;  Authors: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-(defmodule empty
-  (syntax (syntax-0)
-   import (level-0))
+(defmodule syntax-0
+  (syntax (macros))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module empty
+)  ;; End of module syntax-0
 ;;;-----------------------------------------------------------------------------

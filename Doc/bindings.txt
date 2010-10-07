@@ -1,5 +1,5 @@
 youtoo Functions
-  Generated 17 September 2010, 22:17:29
+  Generated 07 October 2010, 15:56:20
 
 ---------------------------------------------------------------------------
 0. Legend
@@ -232,7 +232,7 @@ youtoo Functions
   concatenate 17 collect concatenate
   condition-message 6 condition condition-message
   condition? 7 condition condition?
-  connect 21 stream connect
+  connect 22 stream connect
   connection-host 5 socket connection-host
   connection-port 7 socket connection-port
   connection? 4 socket connection?
@@ -286,7 +286,7 @@ youtoo Functions
   even? 5 integer even?
   exit 20 boot1 exit
   file-control-block? 24 stream2 file-control-block?
-  file-lookup 17 stream file-lookup
+  file-lookup 18 stream file-lookup
   file-stream? 49 stream2 file-stream?
   fill 19 collect fill
   fill-buffer 2 stream2 fill-buffer
@@ -303,7 +303,7 @@ youtoo Functions
   flush-buffer 23 stream2 flush-buffer
   fmt 2 format fmt
   format 5 format format
-  fprintf 22 stream fprintf
+  fprintf 23 stream fprintf
   from-stream 46 stream2 from-stream
   function-domain 16 mop-class function-domain
   function-name 73 mop-class function-name
@@ -374,7 +374,7 @@ youtoo Functions
   make 2 mop-gf make
   make-generic-function 16 mop-gf make-generic-function
   make-method 3 mop-meth make-method
-  make-space 24 stream make-space
+  make-space 25 stream make-space
   make-vector 39 boot1 make-vector
   map 2 collect map
   map1-list 10 boot map1-list
@@ -408,6 +408,7 @@ youtoo Functions
   negate 13 number negate
   negative? 2 number negative?
   newline 10 stream newline
+  nl 13 stream nl
   null? 10 boot1 null?
   number? 24 number number?
   object-keywords 17 mop-class object-keywords
@@ -416,7 +417,7 @@ youtoo Functions
   odd? 3 integer odd?
   open-file-streams 13 stream2 open-file-streams
   output-condition-contents 4 condition output-condition-contents
-  output-list-contents 16 stream output-list-contents
+  output-list-contents 17 stream output-list-contents
   parse 28 read parse
   permute 17 vector permute
   pop-dynamic-variables 8 dynamic pop-dynamic-variables
@@ -436,7 +437,7 @@ youtoo Functions
   primitive-slot-value 10 mop-inspect primitive-slot-value
   primitive-sprin 24 boot1 sprin
   primitive-sprint 27 boot1 sprint
-  prin 20 stream prin
+  prin 21 stream prin
   prin-address 12 stream prin-address
   prin-char 9 stream prin-char
   prin-string 4 stream prin-string
@@ -476,7 +477,7 @@ youtoo Functions
   sf-direct-slots 38 mop-class sf-direct-slots
   sf-slot-defaults 29 mop-class sf-slot-defaults
   sf-slots 41 mop-class sf-slots
-  sflush 13 stream sflush
+  sflush 14 stream sflush
   sformat 4 format sformat
   shallow-copy 2 copy shallow-copy
   sig= 10 mop-gf sig=
@@ -510,9 +511,9 @@ youtoo Functions
   sort-list 15 boot sort-list
   special-tokens 30 read special-tokens
   spprint 8 mop-access spprint
-  sprin 23 stream sprin
-  sprin-char 18 stream sprin-char
-  sprin-one-char 25 stream sprin-one-char
+  sprin 24 stream sprin
+  sprin-char 19 stream sprin-char
+  sprin-one-char 26 stream sprin-one-char
   sprint 7 stream sprint
   sprintf 5 stream sprintf
   sread 10 read sread
@@ -594,7 +595,7 @@ youtoo Functions
   vector? 6 vector vector?
   wait 2 event wait
   warning 22 boot warning
-  write 15 stream write
+  write 16 stream write
   zero? 16 number zero?
 
 ---------------------------------------------------------------------------

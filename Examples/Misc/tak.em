@@ -11,8 +11,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;;; TAK -- A vanilla version of the TAKeuchi function
+
 (defmodule tak
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0 math))
 
 (defun tak (x y z)
@@ -22,8 +23,8 @@
          (tak (- y 1) z x)
          (tak (- z 1) x y))))
 
-(print (tak 26 16 6))
+(print (tak 26 16 6) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module tak
 ;;;-----------------------------------------------------------------------------

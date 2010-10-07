@@ -23,7 +23,7 @@
 ;;; Description: faculty function in EuLisp
 ;;;-----------------------------------------------------------------------------
 (defmodule fact
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0)
    export (fact))
 
@@ -35,8 +35,8 @@
             (loop (- xx 1) (* res xx)))))
    (loop x 1)))
 
-(print (fact 10))
+(print (fact 10) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module fact
 ;;;-----------------------------------------------------------------------------

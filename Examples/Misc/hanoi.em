@@ -18,16 +18,16 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: Towers of Hanoi
 ;;;  Authors: Andreas Kind
-;;; Description: Towers of Hanoi
 ;;;  Compilation
-;;    youtoo hanoi -l level1
+;;    youtoo hanoi -l level-0
 ;;;  EuXLisp Interpretation: (!> hanoi)
 ;;;  Youtoo Interpretation: : hanoi
 ;;;-----------------------------------------------------------------------------
+
 (defmodule hanoi
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0)
    export (hanoi))
 
@@ -59,7 +59,8 @@
   (let ((blocks (tower-blocks x)))
     (if (or (null? blocks) (< y (car blocks)))
         ((setter tower-blocks) x (cons y blocks))
-      (error <condition> (fmt "cannot push block of size ~a on tower ~a" y x)))))
+      (error <condition>
+             (fmt "cannot push block of size ~a on tower ~a" y x)))))
 
 (defgeneric pop (x))
 
@@ -69,7 +70,8 @@
         (progn
           ((setter tower-blocks) x (cdr blocks))
           (car blocks))
-      (error <condition> (fmt "cannot pop block from emtpy tower ~a" x)))))
+      (error <condition>
+             (fmt "cannot pop block from emtpy tower ~a" x)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Move n blocks from tower x1 to tower x2 using x3 as buffer
@@ -80,7 +82,7 @@
   (if (= n 1)
       (progn
         (push x2 (pop x1))
-        (print x1) (print x2) (print x3) (newline))
+        (print x1 nl) (print x2 nl) (print x3 nl nl))
     (progn
       (move (- n 1) x1 x3 x2)
       (move 1 x1 x2 x3)
@@ -96,7 +98,7 @@
     (build-tower x1 *max-tower-height*)
     (build-tower x2 0)
     (build-tower x3 0)
-    (print x1) (print x2) (print x3)
+    (print x1 nl) (print x2 nl) (print x3 nl nl)
     (move *max-tower-height* x1 x2 x3)))
 
 (hanoi)

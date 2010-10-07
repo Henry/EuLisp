@@ -13,7 +13,7 @@
 ;; DIV2 -- Benchmark which divides by 2 using lists of n ()'s.
 ;; This file contains a recursive as well as an iterative test.
 (defmodule div
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0 math)
    export (test-1 test-2 *ll*))
 
@@ -71,8 +71,8 @@
 
 (time-execution (run) stdout)
 
-(print "Finished div")
+(print "Finished div" nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module div
 ;;;-----------------------------------------------------------------------------

@@ -24,8 +24,9 @@
 ;;;  Compilation
 ;;    youtoo sieve -l level-0
 ;;;-----------------------------------------------------------------------------
+
 (defmodule sieve
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0))
 
 (defun interval-list (m n)
@@ -50,8 +51,8 @@
 (defun primes<= (n)
   (sieve (interval-list 2 n)))
 
-(print (primes<= 300))
+(print (primes<= 300) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module sieve
 ;;;-----------------------------------------------------------------------------

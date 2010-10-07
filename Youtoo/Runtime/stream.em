@@ -18,21 +18,52 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: streams
 ;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;; Description: streams
 ;;;-----------------------------------------------------------------------------
+
 (defmodule stream
   (syntax (_macros)
-   import (telos stream1 stream2 socket dynamic condition lock convert
-                 collect list string fpi)
-   expose (stream1 stream2 socket)
-   export (connect sflush flush snewline newline sprintf fprintf
-                   swrite write sprin sprint prin print
-                   sprin-one-char sprin-char prin-char
-                   *int-size-in-decimal-digits* *double-size-in-decimal-digits*
-                   output-list-contents
-                   prin-string prin-address make-space file-lookup))
+   import (telos
+           stream1
+           stream2
+           socket
+           dynamic
+           condition
+           lock
+           convert
+           collect
+           list
+           string
+           fpi)
+   expose (stream1
+           stream2
+           socket)
+   export (connect
+           sflush
+           flush
+           snewline
+           newline
+           sprintf
+           fprintf
+           swrite
+           write
+           sprin
+           sprint
+           prin
+           print
+           sprin-one-char
+           sprin-char
+           prin-char
+           nl
+           *int-size-in-decimal-digits*
+           *double-size-in-decimal-digits*
+           output-list-contents
+           prin-string
+           prin-address
+           make-space
+           file-lookup))
 
 ;;;------------------------------------------------------------------------
 ;;; Stream Manipulation Functions
@@ -262,6 +293,10 @@
 (defun newline ()
   (sprin-one-char stdout #\\n))
 
+;;***HGW this should be defconstant
+;; but currently it does not work correctly for characters
+(deflocal nl #\\n)
+
 ;;;------------------------------------------------------------------------
 ;;; Some low level functions to get things printed on <file-stream>s
 ;;;------------------------------------------------------------------------
@@ -389,5 +424,5 @@
   (eul-file-lookup (convert name <string>) dirs))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module stream
 ;;;-----------------------------------------------------------------------------

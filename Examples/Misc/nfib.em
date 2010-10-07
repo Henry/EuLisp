@@ -4,8 +4,9 @@
 ;;;  Compilation
 ;;  youtoo nfib -l level-0 -l math
 ;;;  Interpretation: (!> nfib)
+
 (defmodule nfib
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0 math)
    export (nfib))
 
@@ -18,4 +19,6 @@
 
 (time-execution (nfib 35) stdout)
 
+;;;-----------------------------------------------------------------------------
 )  ;; End of module
+;;;-----------------------------------------------------------------------------

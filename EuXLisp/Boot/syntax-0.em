@@ -18,11 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EuLisp Level-0 macros0 module
+;;; Title: EuLisp Level-0 syntax-0 module
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-(defmodule macros0
+(defmodule syntax-0
   (import (root
            macros)
    export (block
@@ -190,5 +190,5 @@
          value: name))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module macros0
+)  ;; End of module syntax-0
 ;;;-----------------------------------------------------------------------------
