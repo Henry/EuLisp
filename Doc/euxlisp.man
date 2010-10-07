@@ -58,7 +58,8 @@ you get nothing at all, not even special forms. So a typical module looks like
 .nf
 
 (defmodule foo
-   (import (level-0 ...))
+   (syntax (syntax-0)
+    import (level-0 ...))
 
    ...
 )

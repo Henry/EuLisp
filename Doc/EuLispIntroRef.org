@@ -338,7 +338,8 @@
   Here is a simple module:
   #+BEGIN_SRC eulisp
   (defmodule one
-    (import (level-0))
+    (syntax (syntax-0)
+     import (level-0))
 
     (defun foo ...)
     (defun bar ...)
@@ -360,7 +361,8 @@
   If now, we have
   #+BEGIN_SRC eulisp
   (defmodule two
-    (import (level-0 one))
+    (syntax (syntax-0)
+     import (level-0 one))
 
     ...
   )
@@ -395,7 +397,8 @@
     level-0.em for all the basic stuff, e.g.,
     #+BEGIN_SRC eulisp
     (defmodule mymod
-      (import (level-0))
+      (syntax (syntax-0)
+       import (level-0))
       ...
       )
     #+END_SRC
@@ -734,7 +737,8 @@
   into the current module?
   #+BEGIN_SRC eulisp
   (defmodule one
-    (import (level-0))
+    (syntax (syntax-0)
+     import (level-0))
 
     (defmacro foo (x)
        `(car (bar ,x)))
@@ -748,7 +752,8 @@
   =bar=.
   #+BEGIN_SRC eulisp
   (defmodule two
-    (import (level-0))
+    (syntax (syntax-0)
+     import (level-0))
 
     ...
     (foo 4)

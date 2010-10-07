@@ -64,7 +64,8 @@ that contains all the useful stuff (e.g., <b>cons</b> and friends) is called <b>
 if you import no modules, you get nothing at all, not even special forms.
 So a typical module looks like <b> <br>
 <pre>(defmodule foo
-   (import (level-0 ...))
+   (syntax (syntax-0)
+    import (level-0 ...))
    ...
 )
 </pre> and should be in a file named <b>foo.em</b> 
