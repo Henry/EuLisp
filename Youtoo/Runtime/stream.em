@@ -43,15 +43,11 @@
    export (connect
            sflush
            flush
-           snewline
-           newline
            sprintf
            fprintf
            swrite
            write
-           sprin
            sprint
-           prin
            print
            sprin-one-char
            sprin-char
@@ -267,31 +263,17 @@
     ())
   stream)
 
-(defun sprin (stream . args)
+(defun sprint (stream . args)
   (sprin-all stream args))
 
-(defun sprint (stream . args)
-  (sprin-all stream args)
-  (sprin-one-char stream #\\n))
-
-(defun prin args
-  (sprin-all stdout args))
-
 (defun print args
-  (sprin-all stdout args)
-  (sprin-one-char stdout #\\n))
+  (sprin-all stdout args))
 
 (defun sflush (stream)
   (flush-buffer stream))
 
-(defun snewline (stream)
-  (sprin-one-char stream #\\n))
-
 (defun flush ()
   (flush-buffer stdout))
-
-(defun newline ()
-  (sprin-one-char stdout #\\n))
 
 ;;***HGW this should be defconstant
 ;; but currently it does not work correctly for characters

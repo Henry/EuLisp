@@ -8,7 +8,7 @@
    export (
     ((name . <int*>) (pos . 4) (origin handler . <int*>) (class . constant))
     ((name . <handler>) (pos . 2) (origin handler . <handler>) (class . constant))
-    ((name . handle) (pos . 3) (origin handler . handle) (inline (G009839 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G009841 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
+    ((name . handle) (pos . 3) (origin handler . handle) (inline (G003091 (static-ref0) (binding-ref ? <handler>) (primitive-relative-ref))) (setter (G003093 (stack-ref 1) (static-ref0) (stack-ref 2) (binding-ref ? <handler>) (set-primitive-relative-ref) (nobble 2))))
     ((name . <string*>) (pos . 6) (origin handler . <string*>) (class . constant))
     ((name . <double*>) (pos . 5) (origin handler . <double*>) (class . constant))
     ((name . handler?) (pos . 8) (origin handler . handler?))

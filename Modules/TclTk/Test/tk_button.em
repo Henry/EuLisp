@@ -40,7 +40,7 @@
 ;;;-----------------------------------------------------------------------------
 (defun Value-frame1 ()
   (let ((auxtext (fmt "Value: ~a" (tk-get-variable "pts"))))
-    (prin "pts: ") (print auxtext)
+    (print "pts: ") (print auxtext nl)
     (tk-conf-widget *result1* text: auxtext)))
 
 (defun Values-frame2 ()

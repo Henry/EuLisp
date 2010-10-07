@@ -37,7 +37,7 @@
   (sformat c "GET ~a\n" file-name)
   (while (null? (eq (setq x (read-line c () (eos-default-value)))
                     (eos-default-value)))
-    (prin x))
+    (print x))
   (disconnect c))
 
 ;;;-----------------------------------------------------------------------------

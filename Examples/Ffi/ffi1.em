@@ -36,7 +36,7 @@
 (if (< 1 *argc*)
     (progn
       (print (+ (lisp-atoi (vector-ref *argv* 1))
-                (lisp-atoi "123")))
+                (lisp-atoi "123")) nl)
       0) ;; Return a no error
   (error <condition> "no parameter passed"))
 

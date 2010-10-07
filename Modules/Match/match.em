@@ -292,11 +292,10 @@
         (lambda (x)
           (let ((exp (car (cddddr x))))
             (if (not (car (cddddr x)))
-                (progn (prin
-                        "Warning: unreachable pattern ")
-                       (prin (car x))
-                       (prin " in ")
-                       (prin match-expr)
+                (progn (print "Warning: unreachable pattern ")
+                       (print (car x))
+                       (print " in ")
+                       (print match-expr)
                        (print nl))
               ())))
         plist)))
@@ -1021,8 +1020,7 @@
                                                   kf
                                                   (vloop (+ 1 n)))))))))))
                   (else
-                   (prin
-                    "FATAL ERROR IN PATTERN MATCHER")
+                   (print "FATAL ERROR IN PATTERN MATCHER")
                    (print nl)
                    (error <condition> "THIS NEVER HAPPENS"))))))))
     (emit

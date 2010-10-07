@@ -33,7 +33,7 @@
            basic)
    export (merge-sort))
 
-(print "### merge")
+(print "### merge" nl)
 
 (defun merge! (list1 list2 previous less?)
   ; Merges list1 and list2 into cdr of previous

@@ -11,7 +11,7 @@
    import (level1 basic cond-el-gf cond-el-1
                   tests prod-gf wm-gf ops5-def ops-out))
 
-(print "### cond-el-2")
+(print "### cond-el-2" nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Condition Element Manager Stuff
@@ -25,7 +25,7 @@
                     (sformat ops-out "Class: ~a ~a~%" (class-of (caar ces))
                              (size (cadar ces)))
                     (do
-                     print
+                     (lambda (x) (print x nl))
                      (cadar ces))
                     (loop (cdr ces))))))
           (loop (cond-els ce-man))))
@@ -36,7 +36,7 @@
 ;;;-----------------------------------------------------------------------------
 (defmethod insert-new-ce ((ce-manager <ce-manager>)
                           (new-ce <condition-element>) prod)
-  ;;(print "insert-new-ce")
+  ;;(print "insert-new-ce" nl)
   (let* ((ces (member-alist (ce-class-name new-ce) (cond-els ce-manager)))
          (res (exists (if ces (cadr ces) ()) new-ce))
          (ce  (if res res (add-new-ce ce-manager new-ce))))
@@ -77,7 +77,7 @@
            (size (ce-c-tests ce))))
 
 (defun exists (cond-els ce)
-  ;;(print "exists")
+  ;;(print "exists" nl)
   (labels ((loop (rest)
                  (cond
                    ((null? rest) ())
@@ -110,12 +110,12 @@
     ;;(format "Ces to inform: ~a~%" ces)
     (do
      (lambda (x)
-       ;;(print x)
+       ;;(print x nl)
        (match-insert-ce wme x cr-manager))
      ces)))
 
 (defmethod match-insert-ce (wme (ce <pos-join-ce>) cr-manager)
-  ;;(print "match-insert-ce")
+  ;;(print "match-insert-ce" nl)
   (when (match-insert-join wme ce)
         (inform-create-prod-insts (wme-timestamp wme) ce
                                   (join-list ce (wme-timestamp wme))
@@ -134,7 +134,7 @@
         (inform-remove-prod-insts (wme-timestamp wme) ce cr-manager)))
 
 (defun match-insert-njoin (wme ce)
-  ;;(print "match-insert-njoin")
+  ;;(print "match-insert-njoin" nl)
   (let ((ret (const-match wme ce)))
     (when ret         ; wme passes constant tests
           (let ((v-bindings (compute-var-bindings-njoin wme ce)))
@@ -147,8 +147,8 @@
 
 (defun match-insert-join (wme ce)
   ;;(format "match-insert-join")
-  ;;(print ce)
-  ;;(print wme)
+  ;;(print ce nl)
+  ;;(print wme nl)
   (let ((ret (const-match wme ce)))
     (when ret           ; wme passes constant tests
           (let ((v-bindings (compute-var-bindings-join wme ce))
@@ -157,25 +157,25 @@
             (set-ce-matches ce (cons (cons (wme-timestamp wme)
                                            (list v-bindings jv-tests))
                                      (ce-matches ce)))))
-    ;;(print ret)
+    ;;(print ret nl)
     ret))
 
 (defun compute-jv-tests (wme ce)
-  ;;(print "compute-jv-tests")
-  ;;(print (ce-j-tests ce))
+  ;;(print "compute-jv-tests" nl)
+  ;;(print (ce-j-tests ce) nl)
   (accumulate
    (lambda (a test)
      (let* ((val (member-alist (test-attrib test) (wme-attrib-vals wme)))
             (a-val (if (null? val) 'NIL (cdr val))))
-       ;;(print (test-attrib test))
-       ;;(print (wme-attrib-vals wme))
-       ;;(print a-val)
+       ;;(print (test-attrib test) nl)
+       ;;(print (wme-attrib-vals wme) nl)
+       ;;(print a-val nl)
        (cons (cons a-val (list (list (test-pred test) (test-var test)))) a)))
    ()
    (ce-j-tests ce)))
 
 (defun compute-var-bindings-njoin (wme ce)
-  ;;(print "compute-var-bindings-njoin")
+  ;;(print "compute-var-bindings-njoin" nl)
   (accumulate
    (lambda (a test)
      (if (eql (test-pred test) '=)
@@ -190,7 +190,7 @@
    (ce-v-tests ce)))
 
 (defun compute-var-bindings-join (wme ce)
-  ;;(print "compute-var-bindings-join")
+  ;;(print "compute-var-bindings-join" nl)
   (let ((bindings (accumulate
                    (lambda (a test)
                      (let* ((val (member-alist (test-attrib test)
@@ -234,7 +234,7 @@
      (ce-j-tests ce))))
 
 (defun const-match (wme ce)
-  ;;(print "const-match")
+  ;;(print "const-match" nl)
   (let ((const-tests (ce-c-tests ce)))
     (labels ((test (tests)
                    (cond
@@ -282,14 +282,14 @@
     res))
 
 (defmethod match-remove ((ce-manager <ce-manager>) wme cr-manager)
-  ;;(print "match-remove")
-  ;;(print (wme-class-name wme))
-  ;;(print (member-alist (wme-class-name wme) (cond-els ce-manager)))
+  ;;(print "match-remove" nl)
+  ;;(print (wme-class-name wme) nl)
+  ;;(print (member-alist (wme-class-name wme) (cond-els ce-manager)) nl)
   (let* ((class (wme-class-name wme))
          (ces (cadr (member-alist class (cond-els ce-manager)))))
     (do
      (lambda (x)
-       ;;(print x)
+       ;;(print x nl)
        (match-remove-ce (wme-timestamp wme) x cr-manager))
      ces)))
 
@@ -344,7 +344,7 @@
 ;; inform-
 ;; Initiate appropriate join stage
 (defun inform-create-prod-insts (ts ce join-tests cr-manager)
-  ;;(print "inform-create-prod-insts")
+  ;;(print "inform-create-prod-insts" nl)
   (let ((prods (ce-prods ce)))
     (do
      (lambda (prod)

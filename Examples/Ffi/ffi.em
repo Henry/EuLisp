@@ -10,14 +10,14 @@
      (cond ((< n 50)
             (let ((s (ext_get_struct)))
               (format "struct #~d~%" n)
-              (prin "  ")
+              (print "  ")
               (ext_print_struct s)
-              (prin "  ")
+              (print "  ")
               (write s)
               (setq structs (cons s structs))
               (loop (+ n 1))))
            (t
-            (print "*** Finished creating"))))
+            (print "*** Finished creating" nl))))
 
 (do (lambda (s) (ext_print_struct s)) structs)
 

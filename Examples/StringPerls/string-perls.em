@@ -20,7 +20,7 @@
 (deflocal str "Split this string into words,honestly:no really")
 (deflocal delim " ,;:")
 (format "Splitting \"~a\" at delimiters \"~a\"~%" str delim)
-(print (split-string str delim))
+(print (split-string str delim) nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Match
@@ -31,7 +31,7 @@
 
 (setq str "From: an.email@address.org\\n")
 (deflocal regex "^From: ([^@]+)@([^\\n]+)")
-(print (match-string str regex))
+(print (match-string str regex) nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Match-all
@@ -42,7 +42,7 @@
 
 (setq str "a b a b a ")
 (setq regex " a ")
-(print (match-all-string str regex))
+(print (match-all-string str regex) nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Return Success

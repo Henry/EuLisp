@@ -24,7 +24,7 @@
 (defun open-ops-file (name)
   (make <file-stream> file-name: name mode: 'r))
 
-(print "### reader.em")
+(print "### reader.em" nl)
 
 (defconstant ops-err format)
 (defconstant ops-warn format)

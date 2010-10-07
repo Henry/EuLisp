@@ -11,8 +11,9 @@
 ; Status:       Public Domain
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defmodule puzzle
-  (syntax (macros scheme0)
-   import (level1))
+  (syntax (syntax-0
+           scheme0)
+   import (level-0))
 
 ;; PUZZLE -- Forest Baskett's Puzzle benchmark, originally written in Pascal.
 (defconstant *size* 511)
@@ -145,14 +146,14 @@
     (cond ((fit 0 m)
            (setq n (place 0 m)))
           (t
-           (print "Error.")))
+           (print "Error." nl)))
     (cond ((trial n)
            (format "Success in ~a trials.\n" *kount*))
           (t
-           (print "Failure.\n")))))
+           (print "Failure.\n\n")))))
 
 (start)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module puzzle
 ;;;-----------------------------------------------------------------------------

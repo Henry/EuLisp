@@ -41,7 +41,7 @@
 (end-of-stream? ss)
 (deflocal fs (make <file-stream> file-name: "/dev/null" mode: 'r))
 (with-output-file (f "/tmp/end-of-stream-test.dat")
-                  (print "this" f))
+                  (print "this" f nl))
 (deflocal fs (make <file-stream> file-name: "/tmp/end-of-stream-test.dat"))
 (let loop ((i 0)) (cond ((< i 5) (read-char fs) (loop (+ i 1)))))
 (end-of-stream? fs)

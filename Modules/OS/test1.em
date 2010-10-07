@@ -4,10 +4,10 @@
 
 (defun foo (x) x)
 
-(defun foo1 (x) (print x))
-(defun foo2 (x) (print x) (print x))
+(defun foo1 (x) (print x nl))
+(defun foo2 (x) (print x nl) (print x nl))
 
-(defun foo3 (x) (print x) (prin x))
+(defun foo3 (x) (print x nl) (print x))
 (format "$$$ foo ~a\n" (eul_lambda_refs foo))
 (format "$$$ foo1 ~a\n" (eul_lambda_refs foo1))
 (format "$$$ foo2 ~a\n" (eul_lambda_refs foo2))

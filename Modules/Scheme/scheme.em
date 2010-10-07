@@ -207,8 +207,11 @@
 (export denumerator)
 
 (defun display (x . y)
-  (apply prin x y)
+  (apply print x y)
   (apply flush y))
+
+(defun newline ()
+  (print nl))
 
 (defun eof-object? (x)
   (eq (eos-default-value) x))

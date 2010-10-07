@@ -11,7 +11,7 @@
    import (level1)
    export (NIL))
 
-(print "### basic")
+(print "### basic" nl)
 
 (defconstant NIL ())
 

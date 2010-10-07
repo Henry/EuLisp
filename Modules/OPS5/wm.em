@@ -6,7 +6,7 @@
   (syntax (macros macros-tag)
    import (level1 basic prod-gf wm-gf cond-el-gf conflict ops-out))
 
-(print "### wm")
+(print "### wm" nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; <wm-clock>
@@ -78,7 +78,7 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric wm-insert (wm wm-element)
   method: (((wm <working-memory>) (wm-element <wm-element>))
-           ;;(print "Inserting new WME:")
+           ;;(print "Inserting new WME:" nl)
            ;;(format "~a: ~a ~a~%" (c-name wm-element)
            ;;     (attrib-vals wm-element)
            ;;   (timestamp wm-element))
@@ -127,14 +127,14 @@
 (defgeneric insert-wme (wm-manager ce-manager cr-manager class-name bindings)
   method: (((wm-manager <wm-manager>) ce-manager cr-manager
             class-name bindings)
-           ;;(print "insert-wme")
+           ;;(print "insert-wme" nl)
            (let ((new-wme
                   (make-wm-element class-name
                                    (get-timestamp
                                     (clock wm-manager))
                                    bindings)))
              (wm-insert (working-mem wm-manager) new-wme)
-             ;;(print "Wme inserted")
+             ;;(print "Wme inserted" nl)
              (inform-of-insert ce-manager new-wme cr-manager))))
 
 ;;;-----------------------------------------------------------------------------

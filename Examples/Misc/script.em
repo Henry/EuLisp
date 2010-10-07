@@ -23,9 +23,9 @@
 ;;;  Authors: Andreas Kind
 ;;; Description: sample EuLisp script using hash-bang
 ;;;-----------------------------------------------------------------------------
-(print 42)
-(print 43)
+(print 42 nl)
+(print 43 nl)
 (+ 1 2)
 (defclass <foo> () ())
-(print <foo>)
-(print (make <foo>))
+(print <foo> nl)
+(print (make <foo>) nl)

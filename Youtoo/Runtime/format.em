@@ -49,7 +49,7 @@
                          (let ((x (car l)))
                            (if (object? x)
                                (generic-print x s)
-                             (sprin s x))
+                             (sprint s x))
                            (loop (cdr info) (cdr l)))))
                       ((eq c #\s)
                        (if (null? l)
@@ -73,7 +73,7 @@
                             (car l))
                            (loop (cdr info) (cdr l)))))
                       ((eq c #\~)
-                       (sprin s #\~)
+                       (sprint s #\~)
                        (loop (cdr info) l))
                       (t
                        (loop (cdr info) l)))))))

@@ -36,7 +36,7 @@
         (while (null? (eq (setq x (read-line c () (eos-default-value)))
                           (eos-default-value)))
           (format "echoing ~a" x)
-          (sprin c x))
+          (sprint c x))
         (disconnect c))
     (disconnect s)))
 

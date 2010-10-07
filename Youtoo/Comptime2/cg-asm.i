@@ -66,7 +66,7 @@
     (init-bytevector: . 37)
     (assemble . 36)
     ("  Assembling module ~a ..." . 35)
-    (|(method G004718)| . 34)
+    (|(method G005968)| . 34)
     (ct-error-value: . 31)
     ("assembler error" . 30)
     ("compile time error condition: " . 29)

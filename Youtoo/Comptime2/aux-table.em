@@ -86,7 +86,7 @@
          (tab (fun () ())))
     (if (null? ss)
         (do1-vector print (table-entries tab))
-      (do1-vector (lambda (entry) (print entry (car ss)))))))
+      (do1-vector (lambda (entry) (print entry (car ss) nl))))))
 ;;;-----------------------------------------------------------------------------
 ;;; Clearing
 ;;;-----------------------------------------------------------------------------

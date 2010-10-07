@@ -10,7 +10,7 @@
   (syntax (macros macros-tag)
    import (level1 basic reader-vars cond-el-1 cond-el-2 tests ops-out))
 
-(print "### reader-ce")
+(print "### reader-ce" nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; read-ce

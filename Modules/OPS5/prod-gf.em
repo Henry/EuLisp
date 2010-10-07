@@ -9,7 +9,8 @@
 (defmodule prod-gf
   (syntax (macros macros-tag)
    import (level1 basic))
-(print "### prod-gf")
+
+(print "### prod-gf" nl)
 
 (defgeneric p-name (object))
 (defgeneric create-prod-insts (prod ts ce join-tests cr-manager))

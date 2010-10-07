@@ -12,7 +12,7 @@
 (defclass <bar> <foo>
   ((r accessor: bar-r keyword: r: default: 36)))
 
-(defun baz x (print (reverse x)))
+(defun baz x (print (reverse x) nl))
 (defun boo x x)
 
 (defgeneric boz (x y))
@@ -78,9 +78,9 @@
       ((binary= type "thread")
        (let ((thr (make <current-thread> function: (lambda (thr)
                                                      (spprint stderr thr)
-                                                     (sprint stderr 42)
+                                                     (sprint stderr 42 nl)
                                                      (swrite os thr)
-                                                     (sprint stderr 43)))))
+                                                     (sprint stderr 43 nl)))))
          (thread-start thr thr)
          (thread-value thr)))
       (t

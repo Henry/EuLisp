@@ -285,7 +285,7 @@
 ;;;-----------------------------------------------------------------------------
 (let/cc exit
   (let loop ((x ()))
-       (print "? ")
+       (print "? " nl)
        (let/cc restart
          (with-handler
           (lambda (c k)
@@ -293,6 +293,6 @@
             (restart ()))
           (setq x (read lispin () (eos-default-value)))
           (if (eq x (eos-default-value))
-              (progn (print "Exiting") (exit 0))
+              (progn (print "Exiting" nl) (exit 0))
             (format "- ~s\n" x))))
        (loop x)))

@@ -7,7 +7,7 @@
 ;          )
 ;   export ())
 
-(print 'OK)
+(print 'OK nl)
 
 (defclass <ops5-system> ()
   ((ce-manager
@@ -21,7 +21,7 @@
     default: (make-wm-manager)
     reader:  wm-manager
     writer:  set-wm-manager)))
-(print 'OK)
+(print 'OK nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module

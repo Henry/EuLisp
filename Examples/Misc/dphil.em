@@ -49,7 +49,7 @@
                 ((setter vector-ref) *chopsticks* i lk)
                 (loop (+ i 1)))
             ())))
-   (print "initializing ...")
+   (print "initializing ..." nl)
    (loop 0)))
 
 ;;;-----------------------------------------------------------------------------
@@ -120,11 +120,11 @@
                      (progn
                        (thread-start (car l) i)
                        (start-threads (+ i 1) (cdr l))))))
-   (print "Creating threads ...")
+   (print "Creating threads ..." nl)
    (let ((thrds (create-threads *no-philosophers* ())))
-     (print "Starting threads ...")
+     (print "Starting threads ..." nl)
      (start-threads 1 thrds)
-     (print "Scheduling threads ...")
+     (print "Scheduling threads ..." nl)
      ;;     (while (current-thread-queue) (thread-reschedule))
      ;;     (thread-join-all)
      (do thread-value thrds)

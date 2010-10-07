@@ -10,7 +10,7 @@
   (syntax (macros macros-tag)
    import (level1 basic ops-out))
 
-(print "### reader-vars")
+(print "### reader-vars" nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; get-join-vars
@@ -52,7 +52,7 @@
                                (loop (cdr rest) (car all-vars) (cdr all-vars)
                                      (append new-prod new-ce)))))))
                      (loop prod-rest () () ()))))
-    ;;(print res)
+    ;;(print res nl)
     res))
 
 (defun split-symbols (ce)
@@ -170,16 +170,16 @@
   ;;(sformat ops-out "not member: ~a~%" (null? (member new-var vars)))
   (cond
     ((is-constant new-var)
-     ;;(print "constant")
+     ;;(print "constant" nl)
      (get-vars rest vars join-vars))
     ((member new-var vars)
-     ;;(print "join-var")
+     ;;(print "join-var" nl)
      (get-vars rest vars
                (if (member new-var join-vars)
                    join-vars
                  (cons new-var join-vars))))
     (t
-     ;;(print "non-join var")
+     ;;(print "non-join var" nl)
      (get-vars rest (cons new-var vars) join-vars))))
 
 (defun is-constant (x)

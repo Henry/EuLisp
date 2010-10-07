@@ -10,7 +10,7 @@
   (syntax (macros macros-tag)
    import (level1 basic cond-el-gf wm conflict))
 
-(print "### ops5-def")
+(print "### ops5-def" nl)
 
 (defclass <ops5-system> ()
   ((ce-manager

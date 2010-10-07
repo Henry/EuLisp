@@ -45,22 +45,22 @@
 ;;;-----------------------------------------------------------------------------
 (let ((x (convert 3 <int*>)))
   (ext_foo_int x)
-  (print (convert x <int>)))
+  (print (convert x <int>) nl))
 (let ((x (convert 3.0 <double*>)))
   (ext_foo_double x)
-  (print (convert x <double>)))
+  (print (convert x <double>) nl))
 (let ((x (convert "abc" <string*>)))
   (ext_foo_string x)
-  (print (convert x <string>)))
+  (print (convert x <string>) nl))
 (let ((x (ext_foo_int2)))
-  (print (convert x <int>)))
+  (print (convert x <int>) nl))
 (let ((x (ext_foo_double2)))
-  (print (convert x <double>)))
+  (print (convert x <double>) nl))
 (let ((x (ext_foo_string2)))
-  (print (convert x <string>)))
+  (print (convert x <string>) nl))
 
-(print (eq (ext_nil) 'nil))
-(print (eq (ext_nil) '()))
+(print (eq (ext_nil) 'nil) nl)
+(print (eq (ext_nil) '()) nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module

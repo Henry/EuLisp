@@ -10,7 +10,7 @@
   (syntax (macros macros-tag)
    import (level1 basic))
 
-(print "### wm-gf.em")
+(print "### wm-gf.em" nl)
 
 (defgeneric wme-class-name (wme))
 (defgeneric wme-attrib-vals (wme))

@@ -8,7 +8,7 @@
   (syntax (macros macros-tag)
    import (level1 basic merge prod-gf ops-out))
 
-(print "### conflict")
+(print "### conflict" nl)
 
 (defclass <conflict-set> ()
   ((prod-insts
@@ -44,7 +44,7 @@
                                         rating: first-ts:))
 
 (defmethod generic-print ((pi <prod-instantiation>) (s <stream>))
-  (print "Production Instantiation:")
+  (print "Production Instantiation:" nl)
   (sformat ops-out "First-ts: ~a Rating: ~a~% Ts: ~a~%"
            (first-ts pi) (rating pi) (timestamps pi))
   (sformat ops-out "Prod: ~a~% Bindings: ~a~%" (p-name (pi-prod pi))
@@ -61,9 +61,9 @@
   constructor: (make-cr-manager strategy:))
 
 (defun print-cr (cr)
-  (print "Conflict Set:")
+  (print "Conflict Set:" nl)
   (do
-   print
+   (lambda (x) (print x nl))
    (prod-insts (cs cr)))
   ())
 
@@ -71,7 +71,7 @@
                        (prod-inst <prod-instantiation>))
   method: (((cr-man <cr-manager>)
             (prod-inst <prod-instantiation>))
-           ;;(print "cs-insert")
+           ;;(print "cs-insert" nl)
            ; sort timestamps into decreasing order
            (set-timestamps prod-inst (merge-sort
                                       (timestamps prod-inst)
@@ -105,17 +105,17 @@
 (defun remove-by-bindings (cr-man tests prod0)
   ;;(format "remove-by-bindings: ~a" tests)
   (let ((c-set (cs cr-man)))
-    ;;(print c-set)
+    ;;(print c-set nl)
     (set-prod-insts c-set
                     (accumulate
                      (lambda (a p)
                        (if (eql prod0 (pi-prod p))
                            (progn ;;(format "Trying to remove: ~a~%" p)
-                             ;;(print (size tests))
+                             ;;(print (size tests) nl)
                              (if
                                  (accumulate
                                   (lambda (fail test)
-                                    ;;(print (cadadr test))
+                                    ;;(print (cadadr test) nl)
                                     (let* ((var (cadadr test))
                                            (tmp (member-alist var (pi-bindings p)))
                                            (val (if tmp (cdr tmp) 'NIL)))
@@ -124,28 +124,28 @@
                                       (if (test-succeeds (car test)
                                                          (caadr test)
                                                          val)
-                                          fail ;;(progn (prin "SUCC ") fail)
+                                          fail ;;(progn (print "SUCC ") fail)
                                         ())))
                                   't
                                   tests)
-                                 a ;;(progn (print "PI Removed") a)
+                                 a ;;(progn (print "PI Removed" nl) a)
                                (cons p a)))
                          (cons p a)))
                      ()
                      (prod-insts c-set)))
-    ;;(print c-set)
+    ;;(print c-set nl)
     c-set))
 
 (defun set-cr-strategy (cr-man strat)
   (set-strategy (cr-man) strat))
 
 (defun fire-prod-inst (cr-manager wm-manager ce-manager)
-  ;; (print "OPS5: Conflict Resolution Process initiated")
+  ;; (print "OPS5: Conflict Resolution Process initiated" nl)
   ;; (print-cr cr-manager)
   (let* ((cset (prod-insts (cs cr-manager)))
          (prod-inst
           (if (null? cset)
-              (progn (print "OPS5: conflict set empty: goodbye")
+              (progn (print "OPS5: conflict set empty: goodbye" nl)
                      ())
             (if (binary= (strategy cr-manager) 'mea)
                 (select-mea cset)
@@ -175,14 +175,14 @@
    (cdr cs)))
 
 (defun select-lex (cs)
-  ;;(print "select-lex")
+  ;;(print "select-lex" nl)
   (let ((best-lex (find-best-lex 0 cs)))
     ;;(sformat ops-out "Best lex: ~a~%" best-lex)
     (car
      (cond
        ((= (size best-lex) 1) best-lex)
        (t ; need to go by rating
-        ;;(print "Go by rating")
+        ;;(print "Go by rating" nl)
         (accumulate
          (lambda (best next)
            (let ((best-rating (rating (car best)))
@@ -214,7 +214,7 @@
           ()
           c-set)))
     (cond
-      ;;(print new-c-set)
+      ;;(print new-c-set nl)
       ((null? new-c-set) c-set) ; members of c-set all equal so far
       ((= (size new-c-set) 1) new-c-set) ; one dominating prod-inst
       (t (find-best-lex (+ elt 1) new-c-set)))))

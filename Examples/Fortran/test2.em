@@ -41,7 +41,7 @@
 ;;; Out-call to Fortran
 ;;;-----------------------------------------------------------------------------
 (defextern foo (<int*> <double*>) <double>)
-(print (foo (convert 42 <int*)1 (convert 1.0 <double*>)))
+(print (foo (convert 42 <int*)1 (convert 1.0 <double*>)) nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module

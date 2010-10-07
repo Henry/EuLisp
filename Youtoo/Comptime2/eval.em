@@ -40,7 +40,7 @@
   (with-handler (generic-lambda (c k)
                                 method: ((c k)) ; pass signal to next handler
                                 method: (((c <ct-error>) k)
-                                         (print c stderr)
+                                         (sprint stderr c nl)
                                          (ct-exit -1)))
                 (ct-reset)
                 (parse-args argv)

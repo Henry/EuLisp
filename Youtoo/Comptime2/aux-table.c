@@ -48,11 +48,11 @@ void initialize_module_aux_table()
   LispRef sym_60, sym_59, sym_58, sym_57, sym_56, sym_55, sym_54, sym_53, G0052, G0050, G0048, G0046, G0044, G0042, G0040, G0038, G0036, G0034, sym_32, G0031, G0029;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 4 is_init: 0 index: 11 binding: anonymous */
-  static const void *G0028[] = {I(aa,47,00,00),I(10,24,00,00),B(stream ,11),I(3d,02,00,00)};
+  /* Byte-vector with size: 6 is_init: 0 index: 11 binding: anonymous */
+  static const void *G0028[] = {I(aa,47,00,00),I(10,24,00,00),B(stream ,11),I(24,00,00,00),B(stream ,9),I(3d,03,00,00)};
 
   /* Byte-vector with size: 28 is_init: 0 index: 13 binding: access-table-print */
-  static const void *G0030[] = {I(43,fe,46,01),I(1b,48,00,00),I(1c,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(34,00,00,00),I(00,00,00,34),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(table1 ,3),I(08,24,00,00),B(stream ,11),I(1c,24,00,00),B(vector ,15),I(3d,02,06,22),I(01,32,00,00),I(00,00,00,22),I(23,00,00,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,15),I(3d,01,05,45),I(05,00,00,00)};
+  static const void *G0030[] = {I(43,fe,46,01),I(1b,48,00,00),I(1c,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,47),I(00,00,12,1b),I(34,00,00,00),I(00,00,00,34),I(1c,26,00,00),I(00,00,00,03),I(24,00,00,00),B(table1 ,3),I(08,24,00,00),B(stream ,9),I(1c,24,00,00),B(vector ,15),I(3d,02,06,22),I(01,32,00,00),I(00,00,00,22),I(23,00,00,00),B(aux_table ,12),I(23,00,00,00),B(aux_table ,11),I(3b,01,24,00),B(vector ,15),I(3d,01,05,45),I(05,00,00,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 14 binding: access-table-keys */
   static const void *G0033[] = {I(aa,24,00,00),B(boot1 ,41),I(3c,01,86,86),I(1d,3c,02,24),B(table1 ,2),I(3d,01,01,00)};

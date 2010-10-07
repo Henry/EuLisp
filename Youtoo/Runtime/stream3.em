@@ -184,7 +184,7 @@
            (prin-string "#()" 3 s))
           ((int-binary= n 1)
            (prin-string "#(" 2 s)
-           (sprin s (vector-ref vec 0))
+           (sprint s (vector-ref vec 0))
            (sprin-one-char s #\) ))
           (t
            (let ((m (int-binary- n 1))
@@ -194,12 +194,12 @@
               ((loop ()
                      (and (int-binary< i m)
                           (progn
-                            (sprin s (vector-ref vec i))
+                            (sprint s (vector-ref vec i))
                             (sprin-one-char s #\  )
                             (setq i (int-binary+ i 1))
                             (loop)))))
               (loop)
-              (sprin s (vector-ref vec m))
+              (sprint s (vector-ref vec m))
               (sprin-one-char s #\) ))))))
   vec)
 
@@ -209,7 +209,7 @@
     (if (null? tail) ()
       (progn
         (prin-string " . " 3 s)
-        (sprin s tail))))
+        (sprint s tail))))
   (sprin-one-char s #\) )
   l)
 

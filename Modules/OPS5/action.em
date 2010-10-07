@@ -78,14 +78,14 @@
 
 ;; Process rhs values (such a variables, compute, etc)
 (defun rhs-val (val pi)
-  ;;(print "rhs-val")
+  ;;(print "rhs-val" nl)
   (if (atom? val)
       (if (is-ops5-var val)
           (apply-binding (pi-bindings pi) val)
         val)
     (cond
       ((eql (car val) 'crlf)
-       (print "") ())
+       (print "" nl) ())
       ((eql (car val) 'accept)
        (let ((res (accept))) res))
       ((eql (car val) 'compute)
@@ -99,8 +99,8 @@
 ;;  Compute expression wrt production instantiation
 ;;;-----------------------------------------------------------------------------
 (defun compute (exprn pi)
-  ;; (print compute)
-  ;; (print exprn)
+  ;; (print compute nl)
+  ;; (print exprn nl)
   (let ((arg1 (rhs-val (car exprn) pi))
         (op   (cadr exprn))
         (arg2 (rhs-val (caddr exprn) pi)))
@@ -118,7 +118,7 @@
 
 (defmethod execute ((action <remove-action>) pi
                     wm-manager ce-manager cr-manager)
-  ;;(print "*** remove-action")
+  ;;(print "*** remove-action" nl)
   (let ((ce-ts (ce-ts-list pi))
         (ce-nums (rm-elt-desigs action)))
     (labels ((loop (elt-desigs)
@@ -146,7 +146,7 @@
          (new-attrib-vals
           (labels
            ((set-attribs (alist newlist)
-                         ;;(print alist)
+                         ;;(print alist nl)
                          (cond
                            ((null? alist) newlist)
                            (t (set-attribs (cddr alist)

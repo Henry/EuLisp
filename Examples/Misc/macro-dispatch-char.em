@@ -35,7 +35,7 @@
                                 (reverse (read-s-expression s))))
 
 (let ((file (make <file-stream> file-name: "macro-dispatch-char.dat")))
-  (print (read-s-expression file))
+  (print (read-s-expression file) nl)
   (disconnect file))
 
 ;;;-----------------------------------------------------------------------------

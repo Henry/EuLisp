@@ -59,7 +59,7 @@
 ;;;-----------------------------------------------------------------------------
 (defun test1 ()
   ;;((setter thread-concurrency) 16)
-  (print (p-add 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16)))
+  (print (p-add 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16) nl))
 
 (defun make-list (x)
   (if (zero? x)
@@ -73,7 +73,7 @@
              (setq x (read lispin () (eos-default-value)))
              (null? (eq x (eos-default-value))))
       ;;((setter thread-concurrency) x)
-      (print (apply p-add (make-list x))))))
+      (print (apply p-add (make-list x)) nl))))
 (test2)
 
 ;;;-----------------------------------------------------------------------------

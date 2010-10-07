@@ -32,9 +32,9 @@
 
 (let ((c (make <connection> host: "www.cs.bath.ac.uk" port: 80))
       x)
-  (sprint c "GET /~jap/ak1/youtoo/home.html")
+  (sprint c "GET /~jap/ak1/youtoo/home.html" nl)
   (while (setq x (read-line c () ()))
-    (prin x))
+    (print x))
   (disconnect c))
 
 ;;;-----------------------------------------------------------------------------

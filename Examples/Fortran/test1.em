@@ -34,7 +34,7 @@
 ;;; Future: (defextern ... language: fortran) and no ref types
 ;;;-----------------------------------------------------------------------------
 (defextern foo (<int*> <double*>) <double> "foo_")
-(print (foo (convert 42 <int*>) (convert 1.0 <double*>)))
+(print (foo (convert 42 <int*>) (convert 1.0 <double*>)) nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module

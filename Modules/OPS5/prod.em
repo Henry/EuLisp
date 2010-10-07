@@ -50,7 +50,7 @@
    (lambda (x)
      (sformat ops-out "~a " (ce-id x)))
    (prod-ces prod))
-  (print "Pos: ")
+  (print "Pos: " nl)
   (map
    (lambda (x)
      (sformat ops-out "~a " (ce-id x)))
@@ -105,7 +105,7 @@
 ;; () otherwise.
 
 (defun all-satisfied (prod)
-  ;;(print "all-satisfied")
+  ;;(print "all-satisfied" nl)
   (accumulate
    (lambda (a x)
      (if (is-satisfied x)
@@ -132,9 +132,9 @@
   ;;(sformat ops-out "Create prod insts ~a~%" ts)
   ;;(sformat ops-out "Prod: ~a~%" (p-name prod))
   (when (all-satisfied prod)
-        ;;(print "")
-        ;;(print "attempting join")
-        ;;(prin (p-name prod)) (format "(~a)" ts) (sflush stdout)
+        ;;(print "" nl)
+        ;;(print "attempting join" nl)
+        ;;(print (p-name prod)) (format "(~a)" ts) (sflush stdout)
         (begin-join prod ts ce join-tests cr-manager)))
 
 ;;;-----------------------------------------------------------------------------
@@ -147,12 +147,12 @@
                         join-tests
                         cr-manager)
   method: (((prod <production>) ts (ce <pos-join-ce>) join-tests cr-manager)
-           ;;(print "begin-join (pj)")
+           ;;(print "begin-join (pj)" nl)
            ;;(sformat ops-out "join-list: ~a~%" join-tests)
            ;;(sformat ops-out "ts: ~a~%" ts)
            ;;(sformat ops-out "ce: ~a~%" ce)
-           ;;(print  (prod-ordered-ces prod))
-           ;;(print  (list-remove ce (prod-ordered-ces prod)))
+           ;;(print  (prod-ordered-ces prod) nl)
+           ;;(print  (list-remove ce (prod-ordered-ces prod)) nl)
            (let* ((all-ces (prod-ordered-ces prod))
                   (ces (list-remove ce all-ces))
                   (bindings (var-bindings ce ts)))
@@ -167,14 +167,14 @@
                    (list ts) (list (cons ce ts)) join-tests bindings
                    cr-manager)))
   method: (((prod <production>) ts (ce <neg-join-ce>) join-tests cr-manager)
-           ;;(print "begin-join (nj)")
+           ;;(print "begin-join (nj)" nl)
            (let* ((all-ces (prod-ordered-ces prod))
                   (ces (list-remove ce all-ces))
                   (bindings (var-bindings ce ts)))
              ;;(sformat ops-out "join-list: ~a~%" join-tests)
              ;;(sformat ops-out "Trying to instantiate (nj): ~a~%"
              ;;      (p-name prod))
-             ;;(print all-ces)
+             ;;(print all-ces nl)
              ;;(sformat ops-out "Bindings: ~a~%" bindings)
              (join ce prod
                    (if (null? ces) () (car ces))
@@ -183,13 +183,13 @@
                    cr-manager)))
 
   method: (((prod <production>) ts (ce <pos-njoin-ce>) join-tests cr-manager)
-           ;;(print "begin-join (pnj)")
+           ;;(print "begin-join (pnj)" nl)
            (let* ((all-ces (prod-ordered-ces prod))
                   (ces (list-remove ce all-ces))
                   (bindings (var-bindings ce ts)))
              ;;(sformat ops-out "Trying to instantiate (pnj): ~a~%"
              ;;      (p-name prod))
-             ;;(print all-ces)
+             ;;(print all-ces nl)
              ;;(sformat ops-out "Bindings: ~a ~a~%" bindings ts)
              (join ce prod
                    (if (null? ces) () (car ces))
@@ -198,7 +198,7 @@
                    cr-manager)))
 
   method: (((prod <production>) ts (ce <neg-njoin-ce>) join-tests cr-manager)
-           ;;(print "begin-join (nnj)")
+           ;;(print "begin-join (nnj)" nl)
            (let* ((all-ces (prod-ordered-ces prod))
                   (ces (list-remove ce all-ces))
                   (bindings (var-bindings ce ts)))
@@ -218,18 +218,18 @@
                   timestamps ce-ts join-tests bindings cr-manager)
   method: (((ce0 <condition-element>) prod next-ce ce-list
             timestamps ce-ts join-tests bindings cr-manager)
-           ;;(print "join")
+           ;;(print "join" nl)
            ;;(sformat ops-out "tests: ~a~%" join-tests)
            ;;(sformat ops-out "bindings: ~a~%" bindings)
            ;;(sformat ops-out "Prod: ~a Ces to go: ~a~%"
            ;;  (prod-name prod) (size ce-list))
            (cond
              ((null? next-ce) ;create prod inst
-              ;;(print ce-list)
+              ;;(print ce-list nl)
               ;;(sformat ops-out  "Inserting Prod Inst: ~a~%" (p-name prod))
               ;;(format "Bindings: ~a~%" bindings)
-              ;;(print join-tests)
-              ;;(print timestamps)
+              ;;(print join-tests nl)
+              ;;(print timestamps nl)
               ;;(format "Ce-ts: ~a~%" ce-ts)
               ;;(format "Ce-vars: ~a~%" (prod-ce-vars prod))
               ;; Add bindings for ce-vars
@@ -239,16 +239,16 @@
                         (cons (cons (car x) (cdr (member-alist (cdr x) ce-ts))) a))
                       bindings
                       (prod-ce-vars prod))))
-                ;;(print new-bindings)
-                ;;(print (prod-rating prod))
-                ;;(print (get-ts 1 prod ce-ts))
+                ;;(print new-bindings nl)
+                ;;(print (prod-rating prod) nl)
+                ;;(print (get-ts 1 prod ce-ts) nl)
                 (cs-insert cr-manager
                            (make-prod-instantiation prod new-bindings
                                                     timestamps ce-ts
                                                     (prod-rating prod)
                                                     (get-ts 1 prod ce-ts)))))
              (t
-              ;;(print "join-next")
+              ;;(print "join-next" nl)
               (join-next ce0 prod next-ce ce-list timestamps ce-ts
                          join-tests bindings cr-manager)))))
 
@@ -281,11 +281,11 @@
 (defun dummy-join (ce0 prod curr-ce ce-list timestamps
                        ce-ts join-tests bindings cr-manager)
   (format "-") (sflush stdout)
-  ;;(print "dummy-join")
+  ;;(print "dummy-join" nl)
   (let* ((next-ce (if (null? ce-list) () (car ce-list)))
          (rest-of-ces (if (null? next-ce) () (cdr ce-list)))
          (matching-wmes (ce-matches curr-ce)))
-    ;; (print matching-wmes)
+    ;; (print matching-wmes nl)
     (if (null? matching-wmes)
         (join ce0 prod next-ce rest-of-ces timestamps ce-ts join-tests
               bindings cr-manager)
@@ -305,7 +305,7 @@
   ;;(format ".") (sflush stdout)
   ;;(sformat ops-out "join-join: ~a~%" join-tests)
   ;;(format "Remaining ces: ~a~%" (size ce-list))
-  ;;(print bindings)
+  ;;(print bindings nl)
   (let* ((next-ce (if (null? ce-list) () (car ce-list)))
          (rest-of-ces (if (null? next-ce) () (cdr ce-list)))
          (all-ces (cons curr-ce ce-list))
@@ -313,7 +313,7 @@
           (if (eql (class-of curr-ce) <neg-join-ce>)
               (labels ((loop (ces)
                              (when (null? ces)
-                                   (print "Error: Unable to continue join"))
+                                   (print "Error: Unable to continue join" nl))
                              (let ((jtest (find-shared-jv join-tests
                                                           (car ces))))
                                (if jtest (cons jtest (car ces))
@@ -373,25 +373,25 @@
   method: (((jv-ce <condition-element>) matching-tstamps
             ce0 prod next-ce rest-of-ces timestamps ce-ts
             join-tests bindings cr-manager)
-           (print "solve-join: ERROR")))
+           (print "solve-join: ERROR" nl)))
 
 (defun solve-join-pos (jv-ce matching-tstamps
                              ce0 prod next-ce rest-of-ces timestamps ce-ts
                              join-tests bindings cr-manager)
-  ;;(prin "P ") (sflush stdout)
-  ;;(print "solve-join-pos")
+  ;;(print "P ") (sflush stdout)
+  ;;(print "solve-join-pos" nl)
   ;;(sformat ops-out "bindings: ~a~%" bindings)
   ;;(sformat ops-out "join-tests: ~a~%" join-tests)
   ;;(format       "tstamps: ~a~%" matching-tstamps)
-  ;;(print rest-of-ces)
-  ;;(prin (size matching-tstamps)) (sflush stdout)
+  ;;(print rest-of-ces nl)
+  ;;(print (size matching-tstamps)) (sflush stdout)
   (do
    (lambda (x)
      ;;(format "current tstamp: ~a~%" x)
      (let ((consis-b (compute-consistent join-tests (join-list jv-ce x))))
-       ;;(print consis-b)
+       ;;(print consis-b nl)
        (when consis-b
-             ;;(print "solve-join-pos join 1")
+             ;;(print "solve-join-pos join 1" nl)
              (join ce0 prod next-ce rest-of-ces (cons x timestamps)
                    (cons (cons jv-ce x) ce-ts)
                    consis-b
@@ -402,8 +402,8 @@
 (defun solve-join-neg (jv-ce matching-tstamps
                              ce0 prod next-ce rest-of-ces timestamps ce-ts
                              join-tests bindings cr-manager)
-  ;;(print "solve-join-neg")
-  ;;(prin "N ")   (print matching-tstamps)
+  ;;(print "solve-join-neg" nl)
+  ;;(print "N ")   (print matching-tstamps nl)
   ;;(sflush stdout)
   (let ((res (labels
               ((find-consis (tstamps jtests ce)
@@ -416,7 +416,7 @@
                                (find-consis (cdr tstamps) jtests ce)))))
               (find-consis matching-tstamps join-tests jv-ce))))
     ;;(if res (format "No join: ~a~%" res)
-    ;;(print "No match -- join continuing"))
+    ;;(print "No match -- join continuing" nl))
     (unless ;; if there are no consistent variable
      ;; bindings for jv-ce (-ve) then continue the join
      res
@@ -438,7 +438,7 @@
                          (t (let* ((test0 (car join0))
                                    (jv (cadadr test0))
                                    (test1 (find-test jv join1)))
-                              ;;(print test1)
+                              ;;(print test1 nl)
                               (cond
                                 ((null? test1) ; no occurence of jv
                                  (consis (cdr join0)
@@ -476,7 +476,7 @@
                              (car tests))
                             (t (find-test jv (cdr tests))))))
               (consis j-tests0 j-tests1 ()))))
-    ;;(print res)
+    ;;(print res nl)
     res))
 
 (defun set-union (l1 l2)
@@ -489,19 +489,19 @@
    l2))
 
 (defun find-shared-jv (join0 curr-ce)
-  ;; (print "find-shared-jv")
-  ;;(print (ce-j-tests curr-ce))
-  ;;(print (class-of curr-ce))
-  ;;(print curr-ce)
+  ;; (print "find-shared-jv" nl)
+  ;;(print (ce-j-tests curr-ce) nl)
+  ;;(print (class-of curr-ce) nl)
+  ;;(print curr-ce nl)
   (if (eql (class-of curr-ce) <neg-join-ce>)
       ;; All jvs must be in list by now
       (let ((var (caddr (car (ce-j-tests curr-ce)))))
         ;; (format "Var: ~a~%" var) (sflush stdout)
         (labels ((loop (jlist)
-                       ;;(when jlist (print (car jlist))
-                       ;;    (print (cadadr (car jlist))))
+                       ;;(when jlist (print (car jlist) nl)
+                       ;;    (print (cadadr (car jlist)) nl))
                        (cond
-                         ((null? jlist) (print "ERROR"))
+                         ((null? jlist) (print "ERROR" nl))
                          ((eql (cadadr (car jlist)) var)
                           ;;(format "j-test: ~a~%" (car jlist))
                           (car jlist))
@@ -541,7 +541,7 @@
   (let ((val (car test))
         (var (cadadr test))
         (pred (caadr test)))
-    ;;(print "query")
+    ;;(print "query" nl)
     ;;(sformat ops-out "val: ~a pred: ~a var: ~a jv-values: ~a~%" val pred
     ;;    var jv-values)
     (let ((res (accumulate
@@ -552,7 +552,7 @@
                     a))
                 ()
                 jv-values)))
-      ;;(print res)
+      ;;(print res nl)
       res)))
 
 (defmethod get-ts (ce-num (prod <production>) ce-ts)

@@ -34,11 +34,11 @@
       (str ""))
   (pprint x)
   (system "ps -a")
-  (sprint x (+ 1 3))
-  (sprint x hierarchy:)
-  (sprint x exit:)
+  (sprint x (+ 1 3) nl)
+  (sprint x hierarchy: nl)
+  (sprint x exit: nl)
   (while (setq str (read-line x () ()))
-    (prin str)
+    (print str)
     (flush)))
 
 ;;;-----------------------------------------------------------------------------

@@ -221,11 +221,11 @@
                   ;;(sformat stderr "min-s: ~s max-s: ~s min: ~s max: ~s x: ~s\n"
                   ;;        min-specified max-specified min max x)
                   ;;(if (null? max-specified)
-                  ;;    (print "max-specified null")
-                  ;;  (print "max-speicified not null"))
+                  ;;    (print "max-specified null" nl)
+                  ;;  (print "max-speicified not null" nl))
                   ;;(if (symbol? max-specified)
-                  ;;    (print "max-specified symbol?")
-                  ;;  (print "max-specified not symbol?"))
+                  ;;    (print "max-specified symbol?" nl)
+                  ;;  (print "max-specified not symbol?" nl))
                   ;;(sformat stderr "class-of max-specified: ~a\n"
                   ;;        (class-of max-specified))
                   (match-star min-specified   ; min-specified

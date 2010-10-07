@@ -10,7 +10,7 @@
   (syntax (macros macros-tag)
    import (level1 basic))
 
-;;  (print "### cond-el-gf")
+;;  (print "### cond-el-gf" nl)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Generic function to access pos-j-tests and neg-j-tests transparently

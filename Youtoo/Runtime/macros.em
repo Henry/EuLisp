@@ -184,7 +184,8 @@
        (sprint ,stream
                "real: "     (vector-ref ,x 0)
                "\nuser: "   (vector-ref ,x 1)
-               "\nsystem: " (vector-ref ,x 2))
+               "\nsystem: " (vector-ref ,x 2)
+               nl)
        ,res)))
 
 ;;;-----------------------------------------------------------------------------
