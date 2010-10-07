@@ -64,7 +64,7 @@
     (format "EuLisp System Youtoo - Version ~a\n" *version*))
 
   (setq *rl* (initialize-rl))
-  (newline)
+  (print nl)
 
   (setq *current-module-name* 'user)
   (dynamic-setq *actual-module* (get-module *current-module-name*))
@@ -319,7 +319,7 @@
           (setq x (read lispin () (eos-default-value)))
           (if (eq x (eos-default-value))
               (progn
-                (newline)
+                (print nl)
                 (debug-eval resume:))
             (format "-> ~s\n" (debug-eval x)))
           (loop ())))

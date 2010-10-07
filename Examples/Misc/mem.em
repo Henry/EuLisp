@@ -1,5 +1,5 @@
 (defmodule mem
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0))
 
 (defconstant *lifetime* 100)

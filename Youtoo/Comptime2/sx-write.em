@@ -60,7 +60,7 @@
                              (binding-local-name? binding)
                              (binding-prin-string binding)))
                   (module-syntax-env? module))
-                 (snewline stream))
+                 (sprint stream nl))
     module))
 
 (defun binding-prin-string (binding)

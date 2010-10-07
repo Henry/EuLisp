@@ -348,8 +348,8 @@ extern LispRef i_all_bindings[];
 #define int_binary__X47_fn_index 12 
 #define fill_buffer_fn_index 2 
 #define _redefine_imported_bindings__X42_X42_fn_index 31 
+#define stdin_fn_index 50 
 #define eul_list_as_eul_string_fn_index 20 
-#define map_fn_index 2 
 #define deep_copy_fn_index 3 
 #define even__X63_fn_index 5 
 #define cdaddr_fn_index 44 
@@ -360,7 +360,7 @@ extern LispRef i_all_bindings[];
 #define access_table_values_fn_index 8 
 #define read_line_fn_index 15 
 #define access_table_do_fn_index 7 
-#define stdin_fn_index 50 
+#define map_fn_index 2 
 #define _get_loaded_syntax_module__X42_X42_fn_index 30 
 #define name_slot_defaults_fn_index 79 
 #define compute_specialized_slot_fn_index 15 

@@ -27,7 +27,7 @@
 ;;; -----------------------------------------------------------------------
 
 (defmodule rec
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0)
    export (run))
 

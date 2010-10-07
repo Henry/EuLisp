@@ -211,7 +211,7 @@
 ;;; Print main parameters
 ;;;-----------------------------------------------------------------------------
 (defun print-params ()
-  (newline)
+  (print nl)
   (print "PARAMETER SETTINGS:")
   (print-param "*silent*" *silent*)
   (print-param "*verbose*" *verbose*)
@@ -283,7 +283,7 @@
   (print "Copyright 2010 Henry G. Weller")
   (print "This is free software; see the source and the file COPYING for copying conditions.")
   (print "There is NO warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.")
-  (newline)
+  (print nl)
   (flush))
 
 ;;;-----------------------------------------------------------------------------

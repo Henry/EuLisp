@@ -34,7 +34,7 @@
   (if (null? var) ()
     (progn
       (apply sformat s str args)
-      (snewline s)
+      (sprint s nl)
       (sflush s))))
 
 (defun notify0 (str . args)

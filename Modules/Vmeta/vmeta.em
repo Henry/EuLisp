@@ -275,15 +275,14 @@
            (index 0)
            (end   (size sequence)))
       ,(compile-match expr)))
-  (newline))
+  (print nl))
 
 (defmacro doit (sequence . forms)
   `(let* ((sequence ,sequence)
           (index 0)
           (end (size sequence)))
      (write (progn ,@forms))
-     (newline)
-     (newline)
+     (print nl nl)
      t))
 
 (defmacro testit (expr expected)
@@ -293,5 +292,5 @@
                ',expr ,res ,expected))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module vmeta
 ;;;-----------------------------------------------------------------------------

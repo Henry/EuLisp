@@ -1,5 +1,5 @@
 (defmodule arith0
-  (syntax (macros)
+  (syntax (syntax-0)
    import (level-0 math))
 
 (defconstant *max* 100001)

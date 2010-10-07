@@ -139,10 +139,10 @@
     (print "/* for Youtoo's Vm/bytecode2.h  */")
     (print "#ifndef BYTECODE2_H")
     (print "#define BYTECODE2_H")
-    (newline)
+    (print nl)
     (print "#define eul_instr_inlined_arg_size(x) (eul_instr_info[(x)].inlined_arg_size)")
     (print "#define eul_instr_branch(x) (eul_instr_info[(x)].branch)")
-    (newline)
+    (print nl)
     (print "struct {int inlined_arg_size, branch;} eul_instr_info[256]= {")
     (when verbose (sformat stderr "~d bytecodes found\n" bytecodes-found))
     (let loop ((i 0))
@@ -165,7 +165,7 @@
                  (loop (+ i 1)))))
     (when verbose (sformat stderr "~d bytecodes output\n" bytecodes-output))
     (print "};")
-    (newline)
+    (print nl)
     (print "#endif /* eof */")))
 
 (main (cdr ((converter <list>) *argv*))) ; get rid of program name.

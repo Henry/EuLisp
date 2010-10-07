@@ -297,7 +297,7 @@
                        (prin (car x))
                        (prin " in ")
                        (prin match-expr)
-                       (newline))
+                       (print nl))
               ())))
         plist)))
     (validate-pattern
@@ -1023,7 +1023,7 @@
                   (else
                    (prin
                     "FATAL ERROR IN PATTERN MATCHER")
-                   (newline)
+                   (print nl)
                    (error <condition> "THIS NEVER HAPPENS"))))))))
     (emit
      (lambda (tst sf kf ks)

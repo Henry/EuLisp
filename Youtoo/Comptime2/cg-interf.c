@@ -61,377 +61,377 @@ void initialize_module_cg_interf()
   is_initialized = 1;
   {
   /* Declarations */
-  LispRef sym_4212, sym_4211, sym_4210, sym_4209, sym_4208, sym_4207, sym_4206, sym_4205, sym_4204, sym_4203, sym_4202, sym_4201, sym_4200, sym_4199, sym_4198, sym_4197, sym_4196, sym_4195, sym_4194, sym_4193, sym_4192, sym_4191, sym_4190, sym_4189, G004188, G004184, G004181, G004179, G004176, G004170, G004166, G004163, G004160, G004154, key_4152, key_4151, key_4150, key_4149, key_4148, key_4147, key_4146, G004145, G004143, G004131, G004129, sym_4126, sym_4125, sym_4124, G004123, G004119, G004114, sym_4112, G004105, G004103, G004099, G004097, G004095, G004091, G004089, sym_4087, sym_4086, sym_4085, sym_4084, sym_4083, sym_4082, sym_4081, G004075, G004073, G004071, key_4069, G004066, G004064, G004061, sym_4051, sym_4050, key_4049, key_4048, G004044, G004042, G004040, G004038, G004035, G004031, G004029, G004027, G004024, G004022, G004020, G004016, G004012, sym_4010, G004009, G004007;
+  LispRef sym_1959, sym_1958, sym_1957, sym_1956, sym_1955, sym_1954, sym_1953, sym_1952, sym_1951, sym_1950, sym_1949, sym_1948, sym_1947, sym_1946, sym_1945, sym_1944, sym_1943, sym_1942, sym_1941, sym_1940, sym_1939, sym_1938, sym_1937, sym_1936, G001935, G001931, G001928, G001926, G001923, G001917, G001913, G001910, G001907, G001901, key_1899, key_1898, key_1897, key_1896, key_1895, key_1894, key_1893, G001892, G001890, G001878, G001876, sym_1873, sym_1872, sym_1871, G001870, G001866, G001861, sym_1859, G001852, G001850, G001846, G001844, G001842, G001838, G001836, sym_1834, sym_1833, sym_1832, sym_1831, sym_1830, sym_1829, sym_1828, G001822, G001820, G001818, key_1816, G001813, G001811, G001808, sym_1798, sym_1797, key_1796, key_1795, G001791, G001789, G001787, G001785, G001782, G001778, G001776, G001774, G001771, G001769, G001767, G001763, G001759, sym_1757, G001756, G001754;
 
   /* Code vector and literal definitions */
   /* Byte-vector with size: 9 is_init: 0 index: 26 binding: anonymous */
-  static const void *G004006[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,47,00,00),I(1c,1f,03,24),B(cg_interf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001753[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,47,00,00),I(1c,1f,03,24),B(cg_interf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 11 is_init: 0 index: 28 binding: anonymous */
-  static const void *G004008[] = {I(aa,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,26),I(3b,02,1c,24),B(aux_table ,7),I(3d,02,01,00)};
+  static const void *G001755[] = {I(aa,26,00,00),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,26),I(3b,02,1c,24),B(aux_table ,7),I(3d,02,01,00)};
 
-  eul_allocate_static_string(str_4013, "   export (\n", 12);
-  eul_allocate_static_string(str_4014, "  )\n", 4);
+  eul_allocate_static_string(str_1760, "   export (\n", 12);
+  eul_allocate_static_string(str_1761, "  )\n", 4);
   /* Byte-vector with size: 26 is_init: 0 index: 31 binding: write-library-interface-export */
-  static const void *G004011[] = {I(ab,46,01,1c),I(48,00,00,47),I(00,00,23,00),B(cg_interf ,29),I(24,00,00,00),B(format ,4),I(3c,02,2a,83),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(cg_interf ,24),I(1c,24,00,00),B(boot ,10),I(3c,02,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,28),I(3b,01,1c,24),B(boot ,16),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,30),I(24,00,00,00),B(format ,4),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G001758[] = {I(ab,46,01,1c),I(48,00,00,47),I(00,00,23,00),B(cg_interf ,29),I(24,00,00,00),B(format ,4),I(3c,02,2a,83),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(cg_interf ,24),I(1c,24,00,00),B(boot ,10),I(3c,02,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,28),I(3b,01,1c,24),B(boot ,16),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,30),I(24,00,00,00),B(format ,4),I(3d,02,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_4017, "   literals (\n", 14);
-  eul_allocate_static_string(str_4018, "   )\n", 5);
+  eul_allocate_static_string(str_1764, "   literals (\n", 14);
+  eul_allocate_static_string(str_1765, "   )\n", 5);
   /* Byte-vector with size: 10 is_init: 0 index: 34 binding: write-interface-literals */
-  static const void *G004015[] = {I(ab,1c,23,00),B(cg_interf ,32),I(24,00,00,00),B(format ,4),I(3c,02,2a,1c),I(23,00,00,00),B(cg_interf ,33),I(24,00,00,00),B(format ,4),I(3d,02,02,00)};
+  static const void *G001762[] = {I(ab,1c,23,00),B(cg_interf ,32),I(24,00,00,00),B(format ,4),I(3c,02,2a,1c),I(23,00,00,00),B(cg_interf ,33),I(24,00,00,00),B(format ,4),I(3d,02,02,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 35 binding: anonymous */
-  static const void *G004019[] = {I(aa,87,24,00),B(cg_interf ,12),I(3d,02,00,00)};
+  static const void *G001766[] = {I(aa,87,24,00),B(cg_interf ,12),I(3d,02,00,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 36 binding: load-library-interfaces */
-  static const void *G004021[] = {I(a9,24,00,00),B(i_param ,16),I(24,00,00,00),B(i_param ,9),I(89,00,00,00),B(i_param ,16),I(2a,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,35),I(3b,01,24,00),B(i_param ,14),I(24,00,00,00),B(boot ,16),I(3c,02,2a,1b),I(89,00,00,00),B(i_param ,16),I(45,01,00,00)};
+  static const void *G001768[] = {I(a9,24,00,00),B(i_param ,16),I(24,00,00,00),B(i_param ,9),I(89,00,00,00),B(i_param ,16),I(2a,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,35),I(3b,01,24,00),B(i_param ,14),I(24,00,00,00),B(boot ,16),I(3c,02,2a,1b),I(89,00,00,00),B(i_param ,16),I(45,01,00,00)};
 
-  eul_allocate_static_string(str_4025, ".i", 2);
+  eul_allocate_static_string(str_1772, ".i", 2);
   /* Byte-vector with size: 23 is_init: 0 index: 38 binding: get-module-load-dir */
-  static const void *G004023[] = {I(aa,1b,24,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,1d),I(1b,26,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,59),I(08,32,00,00),I(00,00,00,38),I(1c,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,1b),I(23,00,00,00),B(cg_interf ,37),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_modify ,7),I(3d,01,04,22),I(02,45,02,00)};
+  static const void *G001770[] = {I(aa,1b,24,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,1d),I(1b,26,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,59),I(08,32,00,00),I(00,00,00,38),I(1c,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,1b),I(23,00,00,00),B(cg_interf ,37),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_modify ,7),I(3d,01,04,22),I(02,45,02,00)};
 
   /* Byte-vector with size: 8 is_init: 0 index: 39 binding: anonymous */
-  static const void *G004026[] = {I(aa,83,24,00),B(sx_obj1 ,59),I(08,47,00,00),I(1c,24,00,00),B(boot ,7),I(3c,02,1b,48),I(00,00,47,00),I(00,45,02,00)};
+  static const void *G001773[] = {I(aa,83,24,00),B(sx_obj1 ,59),I(08,47,00,00),I(1c,24,00,00),B(boot ,7),I(3c,02,1b,48),I(00,00,47,00),I(00,45,02,00)};
 
   /* Byte-vector with size: 15 is_init: 0 index: 40 binding: get-library-names */
-  static const void *G004028[] = {I(a9,46,01,24),B(p_env ,14),I(24,00,00,00),B(i_param ,14),I(24,00,00,00),B(boot ,10),I(3c,02,86,1b),I(48,00,00,23),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,39),I(3b,01,1d,24),B(boot ,16),I(3c,02,2a,47),I(00,00,45,02)};
+  static const void *G001775[] = {I(a9,46,01,24),B(p_env ,14),I(24,00,00,00),B(i_param ,14),I(24,00,00,00),B(boot ,10),I(3c,02,86,1b),I(48,00,00,23),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,39),I(3b,01,1d,24),B(boot ,16),I(3c,02,2a,47),I(00,00,45,02)};
 
-  eul_allocate_static_string(str_4032, ".em", 3);
-  eul_allocate_static_string(str_4033, ".i", 2);
+  eul_allocate_static_string(str_1779, ".em", 3);
+  eul_allocate_static_string(str_1780, ".i", 2);
   /* Byte-vector with size: 34 is_init: 0 index: 43 binding: anonymous */
-  static const void *G004030[] = {I(aa,24,00,00),B(cg_interf ,6),I(3c,00,1c,1c),I(86,6c,1b,34),I(00,00,00,19),I(1d,47,00,00),I(24,00,00,00),B(i_modify ,2),I(3d,02,03,32),I(00,00,00,62),I(1d,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0b),I(1f,03,82,02),I(1b,23,00,00),B(cg_interf ,41),I(24,00,00,00),B(string ,11),I(3c,02,47,00),I(00,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0c),I(47,00,00,82),I(02,1b,23,00),B(cg_interf ,42),I(24,00,00,00),B(string ,11),I(3c,02,1f,03),I(1c,24,00,00),B(i_modify ,8),I(3d,02,09,22),I(06,45,03,00)};
+  static const void *G001777[] = {I(aa,24,00,00),B(cg_interf ,6),I(3c,00,1c,1c),I(86,6c,1b,34),I(00,00,00,19),I(1d,47,00,00),I(24,00,00,00),B(i_modify ,2),I(3d,02,03,32),I(00,00,00,62),I(1d,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0b),I(1f,03,82,02),I(1b,23,00,00),B(cg_interf ,41),I(24,00,00,00),B(string ,11),I(3c,02,47,00),I(00,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0c),I(47,00,00,82),I(02,1b,23,00),B(cg_interf ,42),I(24,00,00,00),B(string ,11),I(3c,02,1f,03),I(1c,24,00,00),B(i_modify ,8),I(3d,02,09,22),I(06,45,03,00)};
 
-  eul_allocate_static_string(str_4036, ".c", 2);
+  eul_allocate_static_string(str_1783, ".c", 2);
   /* Byte-vector with size: 67 is_init: 0 index: 45 binding: directly-or-indirectly-modified? */
-  static const void *G004034[] = {I(aa,46,01,1b),I(48,00,00,47),I(00,00,24,00),B(i_param ,23),I(50,1b,34,00),I(00,00,00,16),I(24,00,00,00),B(i_param ,35),I(32,00,00,00),I(00,00,00,09),I(86,1b,34,00),I(00,00,00,0e),I(87,32,00,00),I(00,00,00,d6),I(47,00,00,24),B(i_param ,23),I(50,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,28),I(24,00,00,00),B(i_param ,10),I(34,00,00,00),I(00,00,00,10),I(87,32,00,00),I(00,00,00,10),I(24,00,00,00),B(i_param ,35),I(12,1b,34,00),I(00,00,00,92),I(47,00,00,24),B(i_modify ,4),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,72),I(47,00,00,7d),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0c),I(47,00,00,82),I(02,1b,23,00),B(cg_interf ,44),I(24,00,00,00),B(string ,11),I(3c,02,1b,24),B(i_modify ,7),I(3c,01,12,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,2c),I(47,00,00,24),B(cg_interf ,15),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,43),I(3b,01,1c,24),B(boot ,28),I(3d,02,0b,22),I(01,22,04,22),I(01,32,00,00),I(00,00,00,08),I(86,22,02,45),I(03,00,00,00)};
+  static const void *G001781[] = {I(aa,46,01,1b),I(48,00,00,47),I(00,00,24,00),B(i_param ,23),I(50,1b,34,00),I(00,00,00,16),I(24,00,00,00),B(i_param ,35),I(32,00,00,00),I(00,00,00,09),I(86,1b,34,00),I(00,00,00,0e),I(87,32,00,00),I(00,00,00,d6),I(47,00,00,24),B(i_param ,23),I(50,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,28),I(24,00,00,00),B(i_param ,10),I(34,00,00,00),I(00,00,00,10),I(87,32,00,00),I(00,00,00,10),I(24,00,00,00),B(i_param ,35),I(12,1b,34,00),I(00,00,00,92),I(47,00,00,24),B(i_modify ,4),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,72),I(47,00,00,7d),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,00,0c),I(47,00,00,82),I(02,1b,23,00),B(cg_interf ,44),I(24,00,00,00),B(string ,11),I(3c,02,1b,24),B(i_modify ,7),I(3c,01,12,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,2c),I(47,00,00,24),B(cg_interf ,15),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,43),I(3b,01,1c,24),B(boot ,28),I(3d,02,0b,22),I(01,22,04,22),I(01,32,00,00),I(00,00,00,08),I(86,22,02,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 46 binding: find-imported-syntax-module */
-  static const void *G004037[] = {I(aa,1b,24,00),B(p_env ,17),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,12),I(1c,24,00,00),B(i_param ,5),I(3d,01,02,45),I(02,00,00,00)};
+  static const void *G001784[] = {I(aa,1b,24,00),B(p_env ,17),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,12),I(1c,24,00,00),B(i_param ,5),I(3d,01,02,45),I(02,00,00,00)};
 
   /* Byte-vector with size: 20 is_init: 0 index: 47 binding: write-interface-file */
-  static const void *G004039[] = {I(aa,1b,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(i_param ,28),I(34,00,00,00),I(00,00,00,18),I(1b,24,00,00),B(i_param ,23),I(50,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,12),I(1d,24,00,00),B(cg_interf ,18),I(3d,01,03,45),I(03,00,00,00)};
+  static const void *G001786[] = {I(aa,1b,26,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(i_param ,28),I(34,00,00,00),I(00,00,00,18),I(1b,24,00,00),B(i_param ,23),I(50,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,12),I(1d,24,00,00),B(cg_interf ,18),I(3d,01,03,45),I(03,00,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 48 binding: anonymous */
-  static const void *G004041[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G001788[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_4045, "lib~a.i", 7);
-  eul_allocate_static_string(str_4046, "~a~a~a", 6);
-  eul_allocate_static_string(str_4047, "  Writing library interface file ~a", 35);
-  eul_allocate_static_string(str_4052, ";;; EuLisp system 'youtoo'\n", 27);
-  eul_allocate_static_string(str_4053, ";;;   Library interface file for module ~a\n\n", 44);
-  eul_allocate_static_string(str_4054, "(definterface ~a\n", 17);
-  eul_allocate_static_string(str_4055, "  (import ()\n", 13);
-  eul_allocate_static_string(str_4056, "   syntax ()\n", 13);
-  eul_allocate_static_string(str_4057, "   full-import ~a\n", 18);
-  eul_allocate_static_string(str_4058, "   literals (\n   )\n", 19);
-  eul_allocate_static_string(str_4059, "  )\n)  ; end of interface", 25);
+  eul_allocate_static_string(str_1792, "lib~a.i", 7);
+  eul_allocate_static_string(str_1793, "~a~a~a", 6);
+  eul_allocate_static_string(str_1794, "  Writing library interface file ~a", 35);
+  eul_allocate_static_string(str_1799, ";;; EuLisp system 'youtoo'\n", 27);
+  eul_allocate_static_string(str_1800, ";;;   Library interface file for module ~a\n\n", 44);
+  eul_allocate_static_string(str_1801, "(definterface ~a\n", 17);
+  eul_allocate_static_string(str_1802, "  (import ()\n", 13);
+  eul_allocate_static_string(str_1803, "   syntax ()\n", 13);
+  eul_allocate_static_string(str_1804, "   full-import ~a\n", 18);
+  eul_allocate_static_string(str_1805, "   literals (\n   )\n", 19);
+  eul_allocate_static_string(str_1806, "  )\n)  ; end of interface", 25);
   /* Byte-vector with size: 105 is_init: 0 index: 64 binding: write-library-interface-file */
-  static const void *G004043[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,49),I(1c,24,00,00),B(format ,2),I(3c,02,1d,26),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,50),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3c,04,1f,04),I(83,24,00,00),B(sx_obj1 ,59),I(08,1f,04,1c),I(0f,23,00,00),B(cg_interf ,51),I(1f,05,24,00),B(i_notify ,3),I(3c,02,2a,24),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,04,23,00),B(cg_interf ,53),I(23,00,00,00),B(cg_interf ,54),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,48),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,56),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,57),I(1f,0b,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,58),I(1f,0b,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,59),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,60),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,61),I(1f,06,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,1f,0b),I(24,00,00,00),B(cg_interf ,13),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,62),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,63),I(24,00,00,00),B(format ,4),I(3c,02,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,06,2a),I(1f,06,45,07)};
+  static const void *G001790[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,49),I(1c,24,00,00),B(format ,2),I(3c,02,1d,26),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,50),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3c,04,1f,04),I(83,24,00,00),B(sx_obj1 ,59),I(08,1f,04,1c),I(0f,23,00,00),B(cg_interf ,51),I(1f,05,24,00),B(i_notify ,3),I(3c,02,2a,24),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,04,23,00),B(cg_interf ,53),I(23,00,00,00),B(cg_interf ,54),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,48),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,56),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,57),I(1f,0b,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,58),I(1f,0b,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,59),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,60),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,61),I(1f,06,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,1f,0b),I(24,00,00,00),B(cg_interf ,13),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,62),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,63),I(24,00,00,00),B(format ,4),I(3c,02,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,06,2a),I(1f,06,45,07)};
 
-  eul_allocate_static_string(str_4062, "Create library interface file ...", 33);
+  eul_allocate_static_string(str_1809, "Create library interface file ...", 33);
   /* Byte-vector with size: 16 is_init: 0 index: 66 binding: create-library-interface-file */
-  static const void *G004060[] = {I(aa,23,00,00),B(cg_interf ,65),I(24,00,00,00),B(i_notify ,3),I(3c,01,2a,1b),I(24,00,00,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,11),I(1c,24,00,00),B(cg_interf ,12),I(3c,01,24,00),B(cg_interf ,10),I(3d,01,02,00)};
+  static const void *G001807[] = {I(aa,23,00,00),B(cg_interf ,65),I(24,00,00,00),B(i_notify ,3),I(3c,01,2a,1b),I(24,00,00,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,11),I(1c,24,00,00),B(cg_interf ,12),I(3c,01,24,00),B(cg_interf ,10),I(3d,01,02,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 67 binding: (method-G003543) */
-  static const void *G004063[] = {I(ab,86,45,02)};
+  /* Byte-vector with size: 1 is_init: 0 index: 67 binding: (method-G001290) */
+  static const void *G001810[] = {I(ab,86,45,02)};
 
-  eul_allocate_static_string(str_4067, "compile time error condition: ", 30);
-  eul_allocate_static_string(str_4068, "bad interface syntax ~a", 23);
-  /* Byte-vector with size: 28 is_init: 0 index: 71 binding: (method-G003543) */
-  static const void *G004065[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(cg_interf ,68),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,34),I(23,00,00,00),B(cg_interf ,69),I(47,00,01,24),B(format ,2),I(3c,02,24,00),B(i_error ,5),I(1c,23,00,00),B(cg_interf ,70),I(47,00,01,24),B(boot ,12),I(3d,04,03,22),I(01,45,02,00)};
+  eul_allocate_static_string(str_1814, "compile time error condition: ", 30);
+  eul_allocate_static_string(str_1815, "bad interface syntax ~a", 23);
+  /* Byte-vector with size: 28 is_init: 0 index: 71 binding: (method-G001290) */
+  static const void *G001812[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(cg_interf ,68),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,34),I(23,00,00,00),B(cg_interf ,69),I(47,00,01,24),B(format ,2),I(3c,02,24,00),B(i_error ,5),I(1c,23,00,00),B(cg_interf ,70),I(47,00,01,24),B(boot ,12),I(3d,04,03,22),I(01,45,02,00)};
 
   /* Byte-vector with size: 6 is_init: 0 index: 72 binding: anonymous */
-  static const void *G004070[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G001817[] = {I(a9,83,24,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 73 binding: anonymous */
-  static const void *G004072[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G001819[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_4076, "lib~a.i", 7);
-  eul_allocate_static_string(str_4077, ".i", 2);
-  eul_allocate_static_string(str_4078, "No such file or directory ~a in ~a", 34);
-  eul_allocate_static_string(str_4079, "Reading library interface ~a ...", 32);
-  eul_allocate_static_string(str_4080, "  Reading interface ~a ...", 26);
+  eul_allocate_static_string(str_1823, "lib~a.i", 7);
+  eul_allocate_static_string(str_1824, ".i", 2);
+  eul_allocate_static_string(str_1825, "No such file or directory ~a in ~a", 34);
+  eul_allocate_static_string(str_1826, "Reading library interface ~a ...", 32);
+  eul_allocate_static_string(str_1827, "  Reading interface ~a ...", 26);
   /* Byte-vector with size: 243 is_init: 0 index: 86 binding: load-module-interface */
-  static const void *G004074[] = {I(43,fe,46,02),I(1b,34,00,00),I(00,00,00,1f),I(23,00,00,00),B(cg_interf ,74),I(1d,24,00,00),B(format ,2),I(3c,02,32,00),I(00,00,00,2a),I(1c,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,23),B(cg_interf ,75),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(24,00,00,00),B(stream ,18),I(1c,24,00,00),B(i_param ,16),I(24,00,00,00),B(boot ,5),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,3b),I(23,00,00,00),B(cg_interf ,76),I(1f,03,24,00),B(i_param ,16),I(24,00,00,00),B(format ,2),I(3c,03,24,00),B(condition ,8),I(1c,24,00,00),B(boot ,12),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,cb),I(1c,10,1d,11),I(24,00,00,00),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,03,24,00),B(mop_gf ,2),I(3c,03,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,73),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,1f),I(09,34,00,00),I(00,00,00,1f),I(23,00,00,00),B(cg_interf ,77),I(1f,09,24,00),B(i_notify ,3),I(3c,02,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_interf ,78),I(1f,09,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(04,89,00,00),B(i_param ,36),I(2a,47,00,00),I(24,00,00,00),B(read ,12),I(3c,01,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,08,1b),I(48,00,01,1f),I(05,24,00,00),B(sx_node ,3),I(3c,01,23,00),B(cg_interf ,79),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,72),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,84),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_interf ,27),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,80),I(23,00,00,00),B(cg_interf ,71),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,80),I(23,00,00,00),B(cg_interf ,67),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,47),I(00,01,73,2a),I(23,00,00,00),B(cg_interf ,79),I(24,00,00,00),B(dynamic ,3),I(3c,01,47,00),I(01,11,1b,73),I(23,00,00,00),B(cg_interf ,81),I(1c,24,00,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,82),I(1d,24,00,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,83),I(1f,03,24,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,84),I(1f,04,24,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,85),I(1f,05,24,00),B(cg_interf ,19),I(3c,02,1f,07),I(1f,05,1c,26),I(00,00,00,03),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,07,1f,03),I(1c,84,1d,24),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,07,1f,04),I(1c,83,1d,24),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,07,1c,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(24,00,00,00),B(cg_interf ,20),I(1d,24,00,00),B(boot ,16),I(3c,02,2a,1f),I(07,83,24,00),B(dynamic ,6),I(3c,01,2a,1b),I(83,24,00,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(45,25,00,00)};
+  static const void *G001821[] = {I(43,fe,46,02),I(1b,34,00,00),I(00,00,00,1f),I(23,00,00,00),B(cg_interf ,74),I(1d,24,00,00),B(format ,2),I(3c,02,32,00),I(00,00,00,2a),I(1c,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1d,82,02,23),B(cg_interf ,75),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(24,00,00,00),B(stream ,18),I(1c,24,00,00),B(i_param ,16),I(24,00,00,00),B(boot ,5),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,3b),I(23,00,00,00),B(cg_interf ,76),I(1f,03,24,00),B(i_param ,16),I(24,00,00,00),B(format ,2),I(3c,03,24,00),B(condition ,8),I(1c,24,00,00),B(boot ,12),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,cb),I(1c,10,1d,11),I(24,00,00,00),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,03,24,00),B(mop_gf ,2),I(3c,03,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,73),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,1f),I(09,34,00,00),I(00,00,00,1f),I(23,00,00,00),B(cg_interf ,77),I(1f,09,24,00),B(i_notify ,3),I(3c,02,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_interf ,78),I(1f,09,24,00),B(i_notify ,3),I(3c,02,2a,1f),I(04,89,00,00),B(i_param ,36),I(2a,47,00,00),I(24,00,00,00),B(read ,12),I(3c,01,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,08,1b),I(48,00,01,1f),I(05,24,00,00),B(sx_node ,3),I(3c,01,23,00),B(cg_interf ,79),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,72),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,84),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_interf ,27),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,80),I(23,00,00,00),B(cg_interf ,71),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,80),I(23,00,00,00),B(cg_interf ,67),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,47),I(00,01,73,2a),I(23,00,00,00),B(cg_interf ,79),I(24,00,00,00),B(dynamic ,3),I(3c,01,47,00),I(01,11,1b,73),I(23,00,00,00),B(cg_interf ,81),I(1c,24,00,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,82),I(1d,24,00,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,83),I(1f,03,24,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,84),I(1f,04,24,00),B(cg_interf ,19),I(3c,02,23,00),B(cg_interf ,85),I(1f,05,24,00),B(cg_interf ,19),I(3c,02,1f,07),I(1f,05,1c,26),I(00,00,00,03),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,07,1f,03),I(1c,84,1d,24),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,07,1f,04),I(1c,83,1d,24),B(sx_obj1 ,59),I(09,22,02,2a),I(1f,07,1c,1c),I(26,00,00,00),I(00,00,00,04),I(1d,24,00,00),B(sx_obj1 ,59),I(09,22,02,2a),I(24,00,00,00),B(cg_interf ,20),I(1d,24,00,00),B(boot ,16),I(3c,02,2a,1f),I(07,83,24,00),B(dynamic ,6),I(3c,01,2a,1b),I(83,24,00,00),B(dynamic ,8),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1b),I(45,25,00,00)};
 
   /* Byte-vector with size: 9 is_init: 0 index: 87 binding: anonymous */
-  static const void *G004088[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,47,00,00),I(1c,1f,03,24),B(cg_interf ,17),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001835[] = {I(ab,1b,26,00),I(00,00,00,06),I(24,00,00,00),B(sx_obj1 ,42),I(08,47,00,00),I(1c,1f,03,24),B(cg_interf ,17),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_4092, "   export (\n", 12);
-  eul_allocate_static_string(str_4093, "   )\n", 5);
+  eul_allocate_static_string(str_1839, "   export (\n", 12);
+  eul_allocate_static_string(str_1840, "   )\n", 5);
   /* Byte-vector with size: 22 is_init: 0 index: 90 binding: write-interface-export */
-  static const void *G004090[] = {I(ab,46,01,1c),I(48,00,00,47),I(00,00,23,00),B(cg_interf ,88),I(24,00,00,00),B(format ,4),I(3c,02,2a,26),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,87),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,89),I(24,00,00,00),B(format ,4),I(3d,02,02,00)};
+  static const void *G001837[] = {I(ab,46,01,1c),I(48,00,00,47),I(00,00,23,00),B(cg_interf ,88),I(24,00,00,00),B(format ,4),I(3c,02,2a,26),I(00,00,00,0f),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,87),I(3b,02,1c,24),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,89),I(24,00,00,00),B(format ,4),I(3d,02,02,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 91 binding: new-literal */
-  static const void *G004094[] = {I(ab,24,00,00),B(i_param ,47),I(24,00,00,00),B(boot1 ,41),I(3c,01,1d,1d),I(1d,3d,02,03),I(45,03,00,00)};
+  static const void *G001841[] = {I(ab,24,00,00),B(i_param ,47),I(24,00,00,00),B(boot1 ,41),I(3c,01,1d,1d),I(1d,3d,02,03),I(45,03,00,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 92 binding: (method-G003685) */
-  static const void *G004096[] = {I(ab,86,45,02)};
+  /* Byte-vector with size: 1 is_init: 0 index: 92 binding: (method-G001432) */
+  static const void *G001843[] = {I(ab,86,45,02)};
 
-  eul_allocate_static_string(str_4100, "compile time error condition: ", 30);
-  eul_allocate_static_string(str_4101, "bad interface syntax ~a", 23);
-  /* Byte-vector with size: 28 is_init: 0 index: 95 binding: (method-G003685) */
-  static const void *G004098[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(cg_interf ,93),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,34),I(23,00,00,00),B(cg_interf ,94),I(47,00,01,24),B(format ,2),I(3c,02,24,00),B(i_error ,5),I(1c,23,00,00),B(cg_interf ,70),I(47,00,01,24),B(boot ,12),I(3d,04,03,22),I(01,45,02,00)};
+  eul_allocate_static_string(str_1847, "compile time error condition: ", 30);
+  eul_allocate_static_string(str_1848, "bad interface syntax ~a", 23);
+  /* Byte-vector with size: 28 is_init: 0 index: 95 binding: (method-G001432) */
+  static const void *G001845[] = {I(ab,24,00,00),B(stream2 ,9),I(23,00,00,00),B(cg_interf ,93),I(24,00,00,00),B(format ,4),I(3c,02,2a,24),B(stream2 ,9),I(1d,24,00,00),B(mop_access ,8),I(3c,02,2a,24),B(i_param ,55),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,34),I(23,00,00,00),B(cg_interf ,94),I(47,00,01,24),B(format ,2),I(3c,02,24,00),B(i_error ,5),I(1c,23,00,00),B(cg_interf ,70),I(47,00,01,24),B(boot ,12),I(3d,04,03,22),I(01,45,02,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 96 binding: anonymous */
-  static const void *G004102[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G001849[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_4106, "  Get-full-import-names module-name: ~a", 39);
-  eul_allocate_static_string(str_4107, ".i", 2);
-  eul_allocate_static_string(str_4108, "  Getting full import from ~a ...", 33);
-  eul_allocate_static_string(str_4109, "No such file or directory ~a in ~a", 34);
-  eul_allocate_static_string(str_4110, "  dir ~a ...", 12);
-  eul_allocate_static_string(str_4111, "  Get-full-import-names spec: ~a", 32);
+  eul_allocate_static_string(str_1853, "  Get-full-import-names module-name: ~a", 39);
+  eul_allocate_static_string(str_1854, ".i", 2);
+  eul_allocate_static_string(str_1855, "  Getting full import from ~a ...", 33);
+  eul_allocate_static_string(str_1856, "No such file or directory ~a in ~a", 34);
+  eul_allocate_static_string(str_1857, "  dir ~a ...", 12);
+  eul_allocate_static_string(str_1858, "  Get-full-import-names spec: ~a", 32);
   /* Byte-vector with size: 193 is_init: 0 index: 104 binding: get-full-import-names */
-  static const void *G004104[] = {I(aa,46,02,1b),I(24,00,00,00),B(i_param ,41),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,02,ed),I(1c,24,00,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,15),I(1b,83,24,00),B(sx_obj1 ,59),I(08,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,02,bb),I(23,00,00,00),B(cg_interf ,97),I(1f,04,24,00),B(i_notify ,4),I(3c,02,2a,86),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,02,95),I(1f,04,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0b),I(1f,05,82,02),I(23,00,00,00),B(cg_interf ,98),I(24,00,00,00),B(string ,11),I(3c,02,23,00),B(cg_interf ,99),I(1c,24,00,00),B(i_notify ,4),I(3c,02,2a,24),B(stream ,18),I(1c,24,00,00),B(i_param ,16),I(24,00,00,00),B(boot ,5),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,3b),I(23,00,00,00),B(cg_interf ,100),I(1f,03,24,00),B(i_param ,16),I(24,00,00,00),B(format ,2),I(3c,03,24,00),B(condition ,8),I(1c,24,00,00),B(boot ,12),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,9b),I(1c,10,1d,11),I(24,00,00,00),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,03,24,00),B(mop_gf ,2),I(3c,03,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,96),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_interf ,101),I(1f,05,24,00),B(i_notify ,4),I(3c,02,2a,47),I(00,00,24,00),B(read ,12),I(3c,01,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,08,1b),I(48,00,01,23),B(cg_interf ,102),I(47,00,01,24),B(i_notify ,4),I(3c,02,2a,84),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_interf ,27),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,103),I(23,00,00,00),B(cg_interf ,95),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,103),I(23,00,00,00),B(cg_interf ,92),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,47),I(00,01,11,1b),I(73,23,00,00),B(cg_interf ,82),I(1c,24,00,00),B(cg_interf ,19),I(3c,02,24,00),B(i_param ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,1f,1f),I(1d,1d,3c,02),I(2a,1c,83,24),B(dynamic ,6),I(3c,01,2a,1b),I(22,1c,22,01),I(22,02,45,02)};
+  static const void *G001851[] = {I(aa,46,02,1b),I(24,00,00,00),B(i_param ,41),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,02,ed),I(1c,24,00,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,15),I(1b,83,24,00),B(sx_obj1 ,59),I(08,32,00,00),I(00,00,00,08),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,02,bb),I(23,00,00,00),B(cg_interf ,97),I(1f,04,24,00),B(i_notify ,4),I(3c,02,2a,86),I(1b,34,00,00),I(00,00,00,0f),I(1b,32,00,00),I(00,00,02,95),I(1f,04,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0b),I(1f,05,82,02),I(23,00,00,00),B(cg_interf ,98),I(24,00,00,00),B(string ,11),I(3c,02,23,00),B(cg_interf ,99),I(1c,24,00,00),B(i_notify ,4),I(3c,02,2a,24),B(stream ,18),I(1c,24,00,00),B(i_param ,16),I(24,00,00,00),B(boot ,5),I(3c,03,1b,12),I(1b,34,00,00),I(00,00,00,3b),I(23,00,00,00),B(cg_interf ,100),I(1f,03,24,00),B(i_param ,16),I(24,00,00,00),B(format ,2),I(3c,03,24,00),B(condition ,8),I(1c,24,00,00),B(boot ,12),I(3c,02,22,01),I(32,00,00,00),I(00,00,00,9b),I(1c,10,1d,11),I(24,00,00,00),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,03,24,00),B(mop_gf ,2),I(3c,03,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,96),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,23),B(cg_interf ,101),I(1f,05,24,00),B(i_notify ,4),I(3c,02,2a,47),I(00,00,24,00),B(read ,12),I(3c,01,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,08,1b),I(48,00,01,23),B(cg_interf ,102),I(47,00,01,24),B(i_notify ,4),I(3c,02,2a,84),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(mop_class ,20),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,24,00),B(boot1 ,25),I(3c,00,23,00),B(cg_interf ,27),I(1f,03,24,00),B(mop_class ,15),I(24,00,00,00),B(mop_class ,55),I(1f,05,1f,05),I(24,00,00,00),B(mop_gf ,16),I(3c,06,1b,26),I(00,00,00,03),I(02,84,86,86),I(24,00,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,03),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,103),I(23,00,00,00),B(cg_interf ,95),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,06),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,07),I(26,00,00,00),I(00,00,00,03),I(02,84,24,00),B(i_error ,5),I(86,24,00,00),B(boot1 ,39),I(3c,03,24,00),B(boot1 ,25),I(3c,00,1f,0a),I(26,00,00,00),I(00,00,00,04),I(02,1c,1c,24),B(boot ,7),I(3c,02,1f,04),I(1f,04,23,00),B(cg_interf ,103),I(23,00,00,00),B(cg_interf ,92),I(3b,02,1f,03),I(24,00,00,00),B(mop_meth ,3),I(3c,04,1f,0d),I(1c,24,00,00),B(mop_meth ,5),I(3c,02,1f,0e),I(24,00,00,00),B(dynamic ,5),I(3c,01,2a,47),I(00,01,11,1b),I(73,23,00,00),B(cg_interf ,82),I(1c,24,00,00),B(cg_interf ,19),I(3c,02,24,00),B(i_param ,41),I(24,00,00,00),B(boot1 ,41),I(3c,01,1f,1f),I(1d,1d,3c,02),I(2a,1c,83,24),B(dynamic ,6),I(3c,01,2a,1b),I(22,1c,22,01),I(22,02,45,02)};
 
-  eul_allocate_static_string(str_4115, ".o", 2);
-  eul_allocate_static_string(str_4116, ".o", 2);
-  eul_allocate_static_string(str_4117, " ", 1);
+  eul_allocate_static_string(str_1862, ".o", 2);
+  eul_allocate_static_string(str_1863, ".o", 2);
+  eul_allocate_static_string(str_1864, " ", 1);
   /* Byte-vector with size: 59 is_init: 0 index: 108 binding: anonymous */
-  static const void *G004113[] = {I(ab,1c,12,1b),I(34,00,00,00),I(00,00,00,10),I(1c,32,00,00),I(00,00,00,dc),I(1d,10,24,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,58),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,1b),I(23,00,00,00),B(cg_interf ,105),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,22),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,52),I(1c,24,00,00),B(string ,11),I(3c,02,22,04),I(32,00,00,00),I(00,00,00,2c),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_interf ,106),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(47,00,01,24),B(i_modify ,7),I(3c,01,1f,05),I(11,24,00,00),B(i_param ,22),I(1f,03,24,00),B(string ,11),I(3c,02,1d,1c),I(24,00,00,00),B(string ,11),I(3c,02,23,00),B(cg_interf ,107),I(1c,24,00,00),B(string ,11),I(3c,02,1f,08),I(1c,24,00,00),B(string ,11),I(3c,02,1f,04),I(1c,47,00,00),I(3d,02,0b,22),I(08,45,03,00)};
+  static const void *G001860[] = {I(ab,1c,12,1b),I(34,00,00,00),I(00,00,00,10),I(1c,32,00,00),I(00,00,00,dc),I(1d,10,24,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,58),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,1b),I(23,00,00,00),B(cg_interf ,105),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,22),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,52),I(1c,24,00,00),B(string ,11),I(3c,02,22,04),I(32,00,00,00),I(00,00,00,2c),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_interf ,106),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(47,00,01,24),B(i_modify ,7),I(3c,01,1f,05),I(11,24,00,00),B(i_param ,22),I(1f,03,24,00),B(string ,11),I(3c,02,1d,1c),I(24,00,00,00),B(string ,11),I(3c,02,23,00),B(cg_interf ,107),I(1c,24,00,00),B(string ,11),I(3c,02,1f,08),I(1c,24,00,00),B(string ,11),I(3c,02,1f,04),I(1c,47,00,00),I(3d,02,0b,22),I(08,45,03,00)};
 
-  eul_allocate_static_string(str_4120, ".o", 2);
-  eul_allocate_static_string(str_4121, ".o", 2);
+  eul_allocate_static_string(str_1867, ".o", 2);
+  eul_allocate_static_string(str_1868, ".o", 2);
   /* Byte-vector with size: 70 is_init: 0 index: 111 binding: link-string */
-  static const void *G004118[] = {I(aa,46,03,1b),I(24,00,00,00),B(cg_interf ,5),I(3c,01,1c,24),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,15),I(1b,83,24,00),B(sx_obj1 ,59),I(08,32,00,00),I(00,00,00,11),I(1d,24,00,00),B(cg_interf ,15),I(3c,01,24,00),B(cg_interf ,6),I(3c,00,24,00),B(number ,9),I(3c,02,24,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,5c),I(1f,03,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0b),I(1f,04,82,02),I(1b,23,00,00),B(cg_interf ,109),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,22),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,52),I(1c,24,00,00),B(string ,11),I(3c,02,22,04),I(32,00,00,00),I(00,00,00,34),I(1f,03,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0b),I(1f,04,82,02),I(23,00,00,00),B(cg_interf ,110),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(1b,48,00,01),I(24,00,00,00),B(i_param ,22),I(47,00,01,24),B(string ,11),I(3c,02,1f,04),I(1c,24,00,00),B(string ,11),I(3c,02,86,1b),I(48,00,00,23),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,108),I(3b,02,48,00),I(00,1f,04,1d),I(47,00,00,3d),I(02,08,00,00)};
+  static const void *G001865[] = {I(aa,46,03,1b),I(24,00,00,00),B(cg_interf ,5),I(3c,01,1c,24),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,15),I(1b,83,24,00),B(sx_obj1 ,59),I(08,32,00,00),I(00,00,00,11),I(1d,24,00,00),B(cg_interf ,15),I(3c,01,24,00),B(cg_interf ,6),I(3c,00,24,00),B(number ,9),I(3c,02,24,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,5c),I(1f,03,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0b),I(1f,04,82,02),I(1b,23,00,00),B(cg_interf ,109),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,22),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,52),I(1c,24,00,00),B(string ,11),I(3c,02,22,04),I(32,00,00,00),I(00,00,00,34),I(1f,03,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0b),I(1f,04,82,02),I(23,00,00,00),B(cg_interf ,110),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(1b,48,00,01),I(24,00,00,00),B(i_param ,22),I(47,00,01,24),B(string ,11),I(3c,02,1f,04),I(1c,24,00,00),B(string ,11),I(3c,02,86,1b),I(48,00,00,23),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,108),I(3b,02,48,00),I(00,1f,04,1d),I(47,00,00,3d),I(02,08,00,00)};
 
-  eul_allocate_static_string(str_4127, "    ~a\n", 7);
+  eul_allocate_static_string(str_1874, "    ~a\n", 7);
   /* Byte-vector with size: 49 is_init: 0 index: 116 binding: write-interface-binding */
-  static const void *G004122[] = {I(43,03,1b,24),B(sx_node ,27),I(3c,01,1c,84),I(24,00,00,00),B(sx_obj1 ,42),I(08,1b,24,00),B(sx_obj1 ,70),I(3c,01,1b,34),I(00,00,00,1d),I(1f,03,84,24),B(sx_obj1 ,42),I(08,24,00,00),B(sx_obj ,36),I(3c,01,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,23),I(1f,04,84,24),B(sx_obj1 ,42),I(08,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,09),I(1f,06,22,01),I(1f,05,82,24),B(sx_obj1 ,42),I(08,1f,06,83),I(24,00,00,00),B(sx_obj1 ,42),I(08,1f,06,1f),I(03,1f,03,1f),I(03,23,00,00),B(cg_interf ,112),I(1f,0d,0f,23),B(cg_interf ,113),I(1d,0f,1f,05),I(1f,05,0f,23),B(cg_interf ,114),I(1c,0f,1b,1f),I(06,0f,1f,03),I(1c,0f,1f,05),I(1c,0f,1f,14),I(23,00,00,00),B(cg_interf ,115),I(1d,24,00,00),B(format ,4),I(3d,03,15,00)};
+  static const void *G001869[] = {I(43,03,1b,24),B(sx_node ,27),I(3c,01,1c,84),I(24,00,00,00),B(sx_obj1 ,42),I(08,1b,24,00),B(sx_obj1 ,70),I(3c,01,1b,34),I(00,00,00,1d),I(1f,03,84,24),B(sx_obj1 ,42),I(08,24,00,00),B(sx_obj ,36),I(3c,01,32,00),I(00,00,00,07),I(86,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,23),I(1f,04,84,24),B(sx_obj1 ,42),I(08,1b,34,00),I(00,00,00,0e),I(1b,32,00,00),I(00,00,00,09),I(1f,06,22,01),I(1f,05,82,24),B(sx_obj1 ,42),I(08,1f,06,83),I(24,00,00,00),B(sx_obj1 ,42),I(08,1f,06,1f),I(03,1f,03,1f),I(03,23,00,00),B(cg_interf ,112),I(1f,0d,0f,23),B(cg_interf ,113),I(1d,0f,1f,05),I(1f,05,0f,23),B(cg_interf ,114),I(1c,0f,1b,1f),I(06,0f,1f,03),I(1c,0f,1f,05),I(1c,0f,1f,14),I(23,00,00,00),B(cg_interf ,115),I(1d,24,00,00),B(format ,4),I(3d,03,15,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 117 binding: anonymous */
-  static const void *G004128[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
+  static const void *G001875[] = {I(a9,47,00,00),I(24,00,00,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
 
-  eul_allocate_static_string(str_4132, ".i", 2);
-  eul_allocate_static_string(str_4133, "~a~a~a", 6);
-  eul_allocate_static_string(str_4134, "  Creating ~a ...", 17);
-  eul_allocate_static_string(str_4135, ";;; EuLisp system 'youtoo'\n", 27);
-  eul_allocate_static_string(str_4136, ";;;   Interface file for module ~a\n\n", 36);
-  eul_allocate_static_string(str_4137, "(definterface ~a\n", 17);
-  eul_allocate_static_string(str_4138, "  (import ~a\n", 13);
-  eul_allocate_static_string(str_4139, "   syntax ~a\n", 13);
-  eul_allocate_static_string(str_4140, "   full-import ~a\n", 18);
-  eul_allocate_static_string(str_4141, "))\n", 3);
+  eul_allocate_static_string(str_1879, ".i", 2);
+  eul_allocate_static_string(str_1880, "~a~a~a", 6);
+  eul_allocate_static_string(str_1881, "  Creating ~a ...", 17);
+  eul_allocate_static_string(str_1882, ";;; EuLisp system 'youtoo'\n", 27);
+  eul_allocate_static_string(str_1883, ";;;   Interface file for module ~a\n\n", 36);
+  eul_allocate_static_string(str_1884, "(definterface ~a\n", 17);
+  eul_allocate_static_string(str_1885, "  (import ~a\n", 13);
+  eul_allocate_static_string(str_1886, "   syntax ~a\n", 13);
+  eul_allocate_static_string(str_1887, "   full-import ~a\n", 18);
+  eul_allocate_static_string(str_1888, "))\n", 3);
   /* Byte-vector with size: 125 is_init: 0 index: 128 binding: write-module-interface-file */
-  static const void *G004130[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1b,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_interf ,118),I(24,00,00,00),B(string ,11),I(3c,02,1f,03),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,119),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3c,04,1f,05),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,59),I(08,1f,06,84),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(sx_obj1 ,29),I(1c,24,00,00),B(boot ,10),I(3c,02,1f,08),I(83,24,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,120),I(1f,07,24,00),B(i_notify ,3),I(3c,02,2a,24),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,06,23,00),B(cg_interf ,53),I(23,00,00,00),B(cg_interf ,54),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,117),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,121),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,122),I(1f,0e,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,123),I(1f,0e,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,124),I(1f,09,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,125),I(1f,07,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,126),I(1f,06,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,1f,0e),I(24,00,00,00),B(cg_interf ,13),I(3c,02,2a,47),I(00,00,1f,0e),I(24,00,00,00),B(cg_interf ,25),I(3c,02,2a,47),I(00,00,1f,0e),I(24,00,00,00),B(cg_interf ,3),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,127),I(24,00,00,00),B(format ,4),I(3c,02,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,06,2a),I(1f,09,45,0a)};
+  static const void *G001877[] = {I(aa,46,01,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1b,7d,1b),I(34,00,00,00),I(00,00,00,10),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_interf ,118),I(24,00,00,00),B(string ,11),I(3c,02,1f,03),I(26,00,00,00),I(00,00,00,14),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,119),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3c,04,1f,05),I(26,00,00,00),I(00,00,00,03),I(24,00,00,00),B(sx_obj1 ,59),I(08,1f,06,84),I(24,00,00,00),B(sx_obj1 ,59),I(08,24,00,00),B(sx_obj1 ,29),I(1c,24,00,00),B(boot ,10),I(3c,02,1f,08),I(83,24,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,120),I(1f,07,24,00),B(i_notify ,3),I(3c,02,2a,24),B(stream2 ,4),I(23,00,00,00),B(cg_interf ,52),I(1f,06,23,00),B(cg_interf ,53),I(23,00,00,00),B(cg_interf ,54),I(24,00,00,00),B(mop_gf ,2),I(3c,05,86,1c),I(48,00,00,23),B(cg_interf ,55),I(24,00,00,00),B(dynamic ,3),I(3c,01,23,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,117),I(3b,00,1c,0f),I(23,00,00,00),B(cg_interf ,55),I(1c,24,00,00),B(dynamic ,2),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,121),I(24,00,00,00),B(format ,4),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,122),I(1f,0e,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,123),I(1f,0e,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,124),I(1f,09,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,125),I(1f,07,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,23,00),B(cg_interf ,126),I(1f,06,24,00),B(format ,4),I(3c,03,2a,47),I(00,00,1f,0e),I(24,00,00,00),B(cg_interf ,13),I(3c,02,2a,47),I(00,00,1f,0e),I(24,00,00,00),B(cg_interf ,25),I(3c,02,2a,47),I(00,00,1f,0e),I(24,00,00,00),B(cg_interf ,3),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,127),I(24,00,00,00),B(format ,4),I(3c,02,1b,20),I(04,1f,03,47),I(00,00,24,00),B(stream2 ,39),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3c,01,2a,1f),I(04,22,06,2a),I(1f,09,45,0a)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 129 binding: get-interface-info */
-  static const void *G004142[] = {I(ab,1b,1d,24),B(boot ,29),I(3d,02,02,00)};
+  static const void *G001889[] = {I(ab,1b,1d,24),B(boot ,29),I(3d,02,02,00)};
 
   /* Byte-vector with size: 36 is_init: 0 index: 137 binding: make-interface-binding */
-  static const void *G004144[] = {I(aa,23,00,00),B(cg_interf ,112),I(1c,24,00,00),B(sx_node ,11),I(3c,02,23,00),B(cg_interf ,114),I(1d,24,00,00),B(sx_node ,11),I(3c,02,1b,10),I(1c,11,23,00),B(cg_interf ,113),I(1f,05,24,00),B(sx_node ,11),I(3c,02,1f,05),I(11,1b,75,24),B(sx_obj1 ,72),I(23,00,00,00),B(cg_interf ,130),I(1f,08,23,00),B(cg_interf ,131),I(1f,08,23,00),B(cg_interf ,132),I(86,23,00,00),B(cg_interf ,133),I(1f,0b,23,00),B(cg_interf ,134),I(87,23,00,00),B(cg_interf ,135),I(1f,0e,23,00),B(cg_interf ,136),I(1f,0e,24,00),B(mop_gf ,2),I(3c,0f,24,00),B(p_env ,11),I(3d,01,08,45),I(08,00,00,00)};
+  static const void *G001891[] = {I(aa,23,00,00),B(cg_interf ,112),I(1c,24,00,00),B(sx_node ,11),I(3c,02,23,00),B(cg_interf ,114),I(1d,24,00,00),B(sx_node ,11),I(3c,02,1b,10),I(1c,11,23,00),B(cg_interf ,113),I(1f,05,24,00),B(sx_node ,11),I(3c,02,1f,05),I(11,1b,75,24),B(sx_obj1 ,72),I(23,00,00,00),B(cg_interf ,130),I(1f,08,23,00),B(cg_interf ,131),I(1f,08,23,00),B(cg_interf ,132),I(86,23,00,00),B(cg_interf ,133),I(1f,0b,23,00),B(cg_interf ,134),I(87,23,00,00),B(cg_interf ,135),I(1f,0e,23,00),B(cg_interf ,136),I(1f,0e,24,00),B(mop_gf ,2),I(3c,0f,24,00),B(p_env ,11),I(3d,01,08,45),I(08,00,00,00)};
 
-  eul_allocate_static_string(str_4155, "~a~alib~a.a", 11);
-  eul_allocate_static_string(str_4156, "lib~a.a", 7);
-  eul_allocate_static_string(str_4157, "~a~a~a ", 7);
-  eul_allocate_static_string(str_4158, "foreign function library ~a does not exist", 42);
+  eul_allocate_static_string(str_1902, "~a~alib~a.a", 11);
+  eul_allocate_static_string(str_1903, "lib~a.a", 7);
+  eul_allocate_static_string(str_1904, "~a~a~a ", 7);
+  eul_allocate_static_string(str_1905, "foreign function library ~a does not exist", 42);
   /* Byte-vector with size: 36 is_init: 0 index: 142 binding: anonymous */
-  static const void *G004153[] = {I(aa,24,00,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,30),I(23,00,00,00),B(cg_interf ,138),I(24,00,00,00),B(i_param ,52),I(24,00,00,00),B(i_param ,22),I(1f,03,24,00),B(format ,2),I(3c,04,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_interf ,139),I(1c,24,00,00),B(format ,2),I(3c,02,1b,24),B(i_modify ,5),I(3c,01,1b,34),I(00,00,00,25),I(23,00,00,00),B(cg_interf ,140),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3d,04,03,32),I(00,00,00,18),I(85,23,00,00),B(cg_interf ,141),I(1f,03,24,00),B(i_error ,4),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001900[] = {I(aa,24,00,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,30),I(23,00,00,00),B(cg_interf ,138),I(24,00,00,00),B(i_param ,52),I(24,00,00,00),B(i_param ,22),I(1f,03,24,00),B(format ,2),I(3c,04,32,00),I(00,00,00,18),I(23,00,00,00),B(cg_interf ,139),I(1c,24,00,00),B(format ,2),I(3c,02,1b,24),B(i_modify ,5),I(3c,01,1b,34),I(00,00,00,25),I(23,00,00,00),B(cg_interf ,140),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3d,04,03,32),I(00,00,00,18),I(85,23,00,00),B(cg_interf ,141),I(1f,03,24,00),B(i_error ,4),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_4161, "", 0);
+  eul_allocate_static_string(str_1908, "", 0);
   /* Byte-vector with size: 20 is_init: 0 index: 144 binding: ffl-link-string */
-  static const void *G004159[] = {I(a9,24,00,00),B(i_param ,4),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,143),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,142),I(3b,01,1d,24),B(boot ,10),I(3c,02,24,00),B(collect ,17),I(1c,24,00,00),B(boot ,5),I(3d,02,03,22),I(01,45,02,00)};
+  static const void *G001906[] = {I(a9,24,00,00),B(i_param ,4),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,143),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,142),I(3b,01,1d,24),B(boot ,10),I(3c,02,24,00),B(collect ,17),I(1c,24,00,00),B(boot ,5),I(3d,02,03,22),I(01,45,02,00)};
 
-  eul_allocate_static_string(str_4164, "    (~s ~a)\n", 12);
+  eul_allocate_static_string(str_1911, "    (~s ~a)\n", 12);
   /* Byte-vector with size: 12 is_init: 0 index: 146 binding: anonymous */
-  static const void *G004162[] = {I(ab,1b,10,1b),I(47,00,01,86),I(6c,1b,34,00),I(00,00,00,22),I(47,00,00,23),B(cg_interf ,145),I(1f,05,1f,05),I(24,00,00,00),B(format ,4),I(3d,04,04,32),I(00,00,00,06),I(86,45,04,00)};
+  static const void *G001909[] = {I(ab,1b,10,1b),I(47,00,01,86),I(6c,1b,34,00),I(00,00,00,22),I(47,00,00,23),B(cg_interf ,145),I(1f,05,1f,05),I(24,00,00,00),B(format ,4),I(3d,04,04,32),I(00,00,00,06),I(86,45,04,00)};
 
-  eul_allocate_static_string(str_4167, "   literals (\n", 14);
-  eul_allocate_static_string(str_4168, "   )\n", 5);
+  eul_allocate_static_string(str_1914, "   literals (\n", 14);
+  eul_allocate_static_string(str_1915, "   )\n", 5);
   /* Byte-vector with size: 29 is_init: 0 index: 149 binding: write-library-interface-literals */
-  static const void *G004165[] = {I(ab,46,02,1c),I(48,00,00,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1c,83,24),B(sx_obj1 ,59),I(08,0f,1b,48),I(00,01,47,00),I(00,23,00,00),B(cg_interf ,147),I(24,00,00,00),B(format ,4),I(3c,02,2a,23),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,146),I(3b,02,24,00),B(i_param ,47),I(24,00,00,00),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,148),I(24,00,00,00),B(format ,4),I(3d,02,03,45),I(03,00,00,00)};
+  static const void *G001912[] = {I(ab,46,02,1c),I(48,00,00,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1c,83,24),B(sx_obj1 ,59),I(08,0f,1b,48),I(00,01,47,00),I(00,23,00,00),B(cg_interf ,147),I(24,00,00,00),B(format ,4),I(3c,02,2a,23),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,146),I(3b,02,24,00),B(i_param ,47),I(24,00,00,00),B(aux_table ,7),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,148),I(24,00,00,00),B(format ,4),I(3d,02,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_4171, ".o", 2);
-  eul_allocate_static_string(str_4172, ".o", 2);
-  eul_allocate_static_string(str_4173, "~a~a~a ", 7);
-  eul_allocate_static_string(str_4174, "foreign function file ~a does not exist", 39);
+  eul_allocate_static_string(str_1918, ".o", 2);
+  eul_allocate_static_string(str_1919, ".o", 2);
+  eul_allocate_static_string(str_1920, "~a~a~a ", 7);
+  eul_allocate_static_string(str_1921, "foreign function file ~a does not exist", 39);
   /* Byte-vector with size: 51 is_init: 0 index: 154 binding: anonymous */
-  static const void *G004169[] = {I(aa,24,00,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,58),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,1b),I(23,00,00,00),B(cg_interf ,150),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,22),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,52),I(1c,24,00,00),B(string ,11),I(3c,02,22,04),I(32,00,00,00),I(00,00,00,2c),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_interf ,151),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(1b,24,00,00),B(i_modify ,5),I(3c,01,1b,34),I(00,00,00,25),I(23,00,00,00),B(cg_interf ,152),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3d,04,03,32),I(00,00,00,18),I(85,23,00,00),B(cg_interf ,153),I(1f,03,24,00),B(i_error ,4),I(3d,03,03,45),I(03,00,00,00)};
+  static const void *G001916[] = {I(aa,24,00,00),B(i_param ,52),I(34,00,00,00),I(00,00,00,58),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,1b),I(23,00,00,00),B(cg_interf ,150),I(24,00,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,22),I(1c,24,00,00),B(string ,11),I(3c,02,24,00),B(i_param ,52),I(1c,24,00,00),B(string ,11),I(3c,02,22,04),I(32,00,00,00),I(00,00,00,2c),I(1b,7d,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,0a),I(1c,82,02,23),B(cg_interf ,151),I(24,00,00,00),B(string ,11),I(3c,02,22,01),I(1b,24,00,00),B(i_modify ,5),I(3c,01,1b,34),I(00,00,00,25),I(23,00,00,00),B(cg_interf ,152),I(1c,24,00,00),B(i_param ,22),I(1f,04,24,00),B(format ,2),I(3d,04,03,32),I(00,00,00,18),I(85,23,00,00),B(cg_interf ,153),I(1f,03,24,00),B(i_error ,4),I(3d,03,03,45),I(03,00,00,00)};
 
-  eul_allocate_static_string(str_4177, "", 0);
+  eul_allocate_static_string(str_1924, "", 0);
   /* Byte-vector with size: 20 is_init: 0 index: 156 binding: fff-link-string */
-  static const void *G004175[] = {I(a9,24,00,00),B(i_param ,12),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,155),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,154),I(3b,01,1d,24),B(boot ,10),I(3c,02,24,00),B(collect ,17),I(1c,24,00,00),B(boot ,5),I(3d,02,03,22),I(01,45,02,00)};
+  static const void *G001922[] = {I(a9,24,00,00),B(i_param ,12),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,155),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,154),I(3b,01,1d,24),B(boot ,10),I(3c,02,24,00),B(collect ,17),I(1c,24,00,00),B(boot ,5),I(3d,02,03,22),I(01,45,02,00)};
 
   /* Byte-vector with size: 18 is_init: 0 index: 157 binding: find-imported-module */
-  static const void *G004178[] = {I(aa,1b,24,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,34),I(1c,24,00,00),B(cg_interf ,7),I(3c,01,1b,34),I(00,00,00,15),I(1d,24,00,00),B(i_param ,18),I(3d,01,03,32),I(00,00,00,10),I(1d,24,00,00),B(cg_interf ,12),I(3d,01,03,22),I(01,45,02,00)};
+  static const void *G001925[] = {I(aa,1b,24,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,34),I(1c,24,00,00),B(cg_interf ,7),I(3c,01,1b,34),I(00,00,00,15),I(1d,24,00,00),B(i_param ,18),I(3d,01,03,32),I(00,00,00,10),I(1d,24,00,00),B(cg_interf ,12),I(3d,01,03,22),I(01,45,02,00)};
 
-  eul_allocate_static_string(str_4182, "    ~s\n", 7);
+  eul_allocate_static_string(str_1929, "    ~s\n", 7);
   /* Byte-vector with size: 6 is_init: 0 index: 159 binding: anonymous */
-  static const void *G004180[] = {I(aa,47,00,00),I(23,00,00,00),B(cg_interf ,158),I(1d,24,00,00),B(format ,4),I(3d,03,01,00)};
+  static const void *G001927[] = {I(aa,47,00,00),I(23,00,00,00),B(cg_interf ,158),I(1d,24,00,00),B(format ,4),I(3d,03,01,00)};
 
-  eul_allocate_static_string(str_4185, "   local-literals (\n", 20);
-  eul_allocate_static_string(str_4186, "   )\n", 5);
+  eul_allocate_static_string(str_1932, "   local-literals (\n", 20);
+  eul_allocate_static_string(str_1933, "   )\n", 5);
   /* Byte-vector with size: 22 is_init: 0 index: 162 binding: write-interface-local-literals */
-  static const void *G004183[] = {I(ab,46,01,1c),I(48,00,00,47),I(00,00,23,00),B(cg_interf ,160),I(24,00,00,00),B(format ,4),I(3c,02,2a,26),I(00,00,00,04),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,159),I(3b,01,1c,24),B(boot ,16),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,161),I(24,00,00,00),B(format ,4),I(3d,02,02,00)};
+  static const void *G001930[] = {I(ab,46,01,1c),I(48,00,00,47),I(00,00,23,00),B(cg_interf ,160),I(24,00,00,00),B(format ,4),I(3c,02,2a,26),I(00,00,00,04),I(24,00,00,00),B(sx_obj1 ,59),I(08,23,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,159),I(3b,01,1c,24),B(boot ,16),I(3c,02,2a,47),I(00,00,23,00),B(cg_interf ,161),I(24,00,00,00),B(format ,4),I(3d,02,02,00)};
 
   /* Byte-vector with size: 172 is_init: 1 index: 0 binding: initialize-cg-interf */
-  static const void *G004187[] = {I(87,25,00,00),B(cg_interf ,1),I(24,00,00,00),B(p_env ,1),I(3e,0b,24,00),B(p_env ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_node ,1),I(3e,0b,24,00),B(sx_node ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(i_modify ,1),I(3e,0b,24,00),B(i_modify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_interf ,163),I(23,00,00,00),B(cg_interf ,162),I(3b,02,25,00),B(cg_interf ,25),I(23,00,00,00),B(cg_interf ,164),I(23,00,00,00),B(cg_interf ,157),I(3b,01,25,00),B(cg_interf ,24),I(23,00,00,00),B(cg_interf ,165),I(23,00,00,00),B(cg_interf ,156),I(3b,00,25,00),B(cg_interf ,23),I(23,00,00,00),B(cg_interf ,166),I(23,00,00,00),B(cg_interf ,149),I(3b,02,25,00),B(cg_interf ,22),I(23,00,00,00),B(cg_interf ,167),I(23,00,00,00),B(cg_interf ,144),I(3b,00,25,00),B(cg_interf ,21),I(23,00,00,00),B(cg_interf ,168),I(23,00,00,00),B(cg_interf ,137),I(3b,01,25,00),B(cg_interf ,20),I(23,00,00,00),B(cg_interf ,169),I(23,00,00,00),B(cg_interf ,129),I(3b,02,25,00),B(cg_interf ,19),I(23,00,00,00),B(cg_interf ,170),I(23,00,00,00),B(cg_interf ,128),I(3b,01,25,00),B(cg_interf ,18),I(23,00,00,00),B(cg_interf ,171),I(23,00,00,00),B(cg_interf ,116),I(3b,03,25,00),B(cg_interf ,17),I(23,00,00,00),B(cg_interf ,172),I(23,00,00,00),B(cg_interf ,111),I(3b,01,25,00),B(cg_interf ,16),I(23,00,00,00),B(cg_interf ,173),I(23,00,00,00),B(cg_interf ,104),I(3b,01,25,00),B(cg_interf ,15),I(23,00,00,00),B(cg_interf ,174),I(23,00,00,00),B(cg_interf ,91),I(3b,02,25,00),B(cg_interf ,14),I(23,00,00,00),B(cg_interf ,175),I(23,00,00,00),B(cg_interf ,90),I(3b,02,25,00),B(cg_interf ,13),I(23,00,00,00),B(cg_interf ,176),I(23,00,00,00),B(cg_interf ,86),I(3b,fe,25,00),B(cg_interf ,12),I(23,00,00,00),B(cg_interf ,177),I(23,00,00,00),B(cg_interf ,66),I(3b,01,25,00),B(cg_interf ,11),I(23,00,00,00),B(cg_interf ,178),I(23,00,00,00),B(cg_interf ,64),I(3b,01,25,00),B(cg_interf ,10),I(23,00,00,00),B(cg_interf ,179),I(23,00,00,00),B(cg_interf ,47),I(3b,01,25,00),B(cg_interf ,9),I(23,00,00,00),B(cg_interf ,180),I(23,00,00,00),B(cg_interf ,46),I(3b,01,25,00),B(cg_interf ,8),I(23,00,00,00),B(cg_interf ,181),I(23,00,00,00),B(cg_interf ,45),I(3b,01,25,00),B(cg_interf ,7),I(23,00,00,00),B(cg_interf ,182),I(23,00,00,00),B(cg_interf ,40),I(3b,00,25,00),B(cg_interf ,6),I(23,00,00,00),B(cg_interf ,183),I(23,00,00,00),B(cg_interf ,38),I(3b,01,25,00),B(cg_interf ,5),I(23,00,00,00),B(cg_interf ,184),I(23,00,00,00),B(cg_interf ,36),I(3b,00,25,00),B(cg_interf ,4),I(23,00,00,00),B(cg_interf ,185),I(23,00,00,00),B(cg_interf ,34),I(3b,02,25,00),B(cg_interf ,3),I(23,00,00,00),B(cg_interf ,186),I(23,00,00,00),B(cg_interf ,31),I(3b,02,25,00),B(cg_interf ,2),I(86,ac,00,00)};
+  static const void *G001934[] = {I(87,25,00,00),B(cg_interf ,1),I(24,00,00,00),B(p_env ,1),I(3e,0b,24,00),B(p_env ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_node ,1),I(3e,0b,24,00),B(sx_node ,0),I(3c,00,21,01),I(24,00,00,00),B(sx_obj ,1),I(3e,0b,24,00),B(sx_obj ,0),I(3c,00,21,01),I(24,00,00,00),B(i_modify ,1),I(3e,0b,24,00),B(i_modify ,0),I(3c,00,21,01),I(24,00,00,00),B(i_all ,1),I(3e,0b,24,00),B(i_all ,0),I(3c,00,21,01),I(23,00,00,00),B(cg_interf ,163),I(23,00,00,00),B(cg_interf ,162),I(3b,02,25,00),B(cg_interf ,25),I(23,00,00,00),B(cg_interf ,164),I(23,00,00,00),B(cg_interf ,157),I(3b,01,25,00),B(cg_interf ,24),I(23,00,00,00),B(cg_interf ,165),I(23,00,00,00),B(cg_interf ,156),I(3b,00,25,00),B(cg_interf ,23),I(23,00,00,00),B(cg_interf ,166),I(23,00,00,00),B(cg_interf ,149),I(3b,02,25,00),B(cg_interf ,22),I(23,00,00,00),B(cg_interf ,167),I(23,00,00,00),B(cg_interf ,144),I(3b,00,25,00),B(cg_interf ,21),I(23,00,00,00),B(cg_interf ,168),I(23,00,00,00),B(cg_interf ,137),I(3b,01,25,00),B(cg_interf ,20),I(23,00,00,00),B(cg_interf ,169),I(23,00,00,00),B(cg_interf ,129),I(3b,02,25,00),B(cg_interf ,19),I(23,00,00,00),B(cg_interf ,170),I(23,00,00,00),B(cg_interf ,128),I(3b,01,25,00),B(cg_interf ,18),I(23,00,00,00),B(cg_interf ,171),I(23,00,00,00),B(cg_interf ,116),I(3b,03,25,00),B(cg_interf ,17),I(23,00,00,00),B(cg_interf ,172),I(23,00,00,00),B(cg_interf ,111),I(3b,01,25,00),B(cg_interf ,16),I(23,00,00,00),B(cg_interf ,173),I(23,00,00,00),B(cg_interf ,104),I(3b,01,25,00),B(cg_interf ,15),I(23,00,00,00),B(cg_interf ,174),I(23,00,00,00),B(cg_interf ,91),I(3b,02,25,00),B(cg_interf ,14),I(23,00,00,00),B(cg_interf ,175),I(23,00,00,00),B(cg_interf ,90),I(3b,02,25,00),B(cg_interf ,13),I(23,00,00,00),B(cg_interf ,176),I(23,00,00,00),B(cg_interf ,86),I(3b,fe,25,00),B(cg_interf ,12),I(23,00,00,00),B(cg_interf ,177),I(23,00,00,00),B(cg_interf ,66),I(3b,01,25,00),B(cg_interf ,11),I(23,00,00,00),B(cg_interf ,178),I(23,00,00,00),B(cg_interf ,64),I(3b,01,25,00),B(cg_interf ,10),I(23,00,00,00),B(cg_interf ,179),I(23,00,00,00),B(cg_interf ,47),I(3b,01,25,00),B(cg_interf ,9),I(23,00,00,00),B(cg_interf ,180),I(23,00,00,00),B(cg_interf ,46),I(3b,01,25,00),B(cg_interf ,8),I(23,00,00,00),B(cg_interf ,181),I(23,00,00,00),B(cg_interf ,45),I(3b,01,25,00),B(cg_interf ,7),I(23,00,00,00),B(cg_interf ,182),I(23,00,00,00),B(cg_interf ,40),I(3b,00,25,00),B(cg_interf ,6),I(23,00,00,00),B(cg_interf ,183),I(23,00,00,00),B(cg_interf ,38),I(3b,01,25,00),B(cg_interf ,5),I(23,00,00,00),B(cg_interf ,184),I(23,00,00,00),B(cg_interf ,36),I(3b,00,25,00),B(cg_interf ,4),I(23,00,00,00),B(cg_interf ,185),I(23,00,00,00),B(cg_interf ,34),I(3b,02,25,00),B(cg_interf ,3),I(23,00,00,00),B(cg_interf ,186),I(23,00,00,00),B(cg_interf ,31),I(3b,02,25,00),B(cg_interf ,2),I(86,ac,00,00)};
 
 
   /* Initializations */
-  eul_allocate_bytevector( G004007,G004006);
-  eul_intern_symbol(sym_4010,"anonymous");
-  eul_allocate_bytevector( G004009,G004008);
-  object_class(str_4013) = eul_static_string_class;
-  object_class(str_4014) = eul_static_string_class;
-  eul_allocate_bytevector( G004012,G004011);
-  object_class(str_4017) = eul_static_string_class;
-  object_class(str_4018) = eul_static_string_class;
-  eul_allocate_bytevector( G004016,G004015);
-  eul_allocate_bytevector( G004020,G004019);
-  eul_allocate_bytevector( G004022,G004021);
-  object_class(str_4025) = eul_static_string_class;
-  eul_allocate_bytevector( G004024,G004023);
-  eul_allocate_bytevector( G004027,G004026);
-  eul_allocate_bytevector( G004029,G004028);
-  object_class(str_4032) = eul_static_string_class;
-  object_class(str_4033) = eul_static_string_class;
-  eul_allocate_bytevector( G004031,G004030);
-  object_class(str_4036) = eul_static_string_class;
-  eul_allocate_bytevector( G004035,G004034);
-  eul_allocate_bytevector( G004038,G004037);
-  eul_allocate_bytevector( G004040,G004039);
-  eul_allocate_bytevector( G004042,G004041);
-  object_class(str_4045) = eul_static_string_class;
-  object_class(str_4046) = eul_static_string_class;
-  object_class(str_4047) = eul_static_string_class;
-  eul_intern_keyword(key_4048,"file-name");
-  eul_intern_keyword(key_4049,"mode");
-  eul_intern_symbol(sym_4050,"w");
-  eul_intern_symbol(sym_4051,"*clean-ups*");
-  object_class(str_4052) = eul_static_string_class;
-  object_class(str_4053) = eul_static_string_class;
-  object_class(str_4054) = eul_static_string_class;
-  object_class(str_4055) = eul_static_string_class;
-  object_class(str_4056) = eul_static_string_class;
-  object_class(str_4057) = eul_static_string_class;
-  object_class(str_4058) = eul_static_string_class;
-  object_class(str_4059) = eul_static_string_class;
-  eul_allocate_bytevector( G004044,G004043);
-  object_class(str_4062) = eul_static_string_class;
-  eul_allocate_bytevector( G004061,G004060);
-  eul_allocate_bytevector( G004064,G004063);
-  object_class(str_4067) = eul_static_string_class;
-  object_class(str_4068) = eul_static_string_class;
-  eul_intern_keyword(key_4069,"ct-error-value");
-  eul_allocate_bytevector( G004066,G004065);
-  eul_allocate_bytevector( G004071,G004070);
-  eul_allocate_bytevector( G004073,G004072);
-  object_class(str_4076) = eul_static_string_class;
-  object_class(str_4077) = eul_static_string_class;
-  object_class(str_4078) = eul_static_string_class;
-  object_class(str_4079) = eul_static_string_class;
-  object_class(str_4080) = eul_static_string_class;
-  eul_intern_symbol(sym_4081,"*actual-module*");
-  eul_intern_symbol(sym_4082,"(method G003543)");
-  eul_intern_symbol(sym_4083,"import");
-  eul_intern_symbol(sym_4084,"full-import");
-  eul_intern_symbol(sym_4085,"syntax");
-  eul_intern_symbol(sym_4086,"export");
-  eul_intern_symbol(sym_4087,"local-literals");
-  eul_allocate_bytevector( G004075,G004074);
-  eul_allocate_bytevector( G004089,G004088);
-  object_class(str_4092) = eul_static_string_class;
-  object_class(str_4093) = eul_static_string_class;
-  eul_allocate_bytevector( G004091,G004090);
-  eul_allocate_bytevector( G004095,G004094);
-  eul_allocate_bytevector( G004097,G004096);
-  object_class(str_4100) = eul_static_string_class;
-  object_class(str_4101) = eul_static_string_class;
-  eul_allocate_bytevector( G004099,G004098);
-  eul_allocate_bytevector( G004103,G004102);
-  object_class(str_4106) = eul_static_string_class;
-  object_class(str_4107) = eul_static_string_class;
-  object_class(str_4108) = eul_static_string_class;
-  object_class(str_4109) = eul_static_string_class;
-  object_class(str_4110) = eul_static_string_class;
-  object_class(str_4111) = eul_static_string_class;
-  eul_intern_symbol(sym_4112,"(method G003685)");
-  eul_allocate_bytevector( G004105,G004104);
-  object_class(str_4115) = eul_static_string_class;
-  object_class(str_4116) = eul_static_string_class;
-  object_class(str_4117) = eul_static_string_class;
-  eul_allocate_bytevector( G004114,G004113);
-  object_class(str_4120) = eul_static_string_class;
-  object_class(str_4121) = eul_static_string_class;
-  eul_allocate_bytevector( G004119,G004118);
-  eul_intern_symbol(sym_4124,"name");
-  eul_intern_symbol(sym_4125,"pos");
-  eul_intern_symbol(sym_4126,"origin");
-  object_class(str_4127) = eul_static_string_class;
-  eul_allocate_bytevector( G004123,G004122);
-  eul_allocate_bytevector( G004129,G004128);
-  object_class(str_4132) = eul_static_string_class;
-  object_class(str_4133) = eul_static_string_class;
-  object_class(str_4134) = eul_static_string_class;
-  object_class(str_4135) = eul_static_string_class;
-  object_class(str_4136) = eul_static_string_class;
-  object_class(str_4137) = eul_static_string_class;
-  object_class(str_4138) = eul_static_string_class;
-  object_class(str_4139) = eul_static_string_class;
-  object_class(str_4140) = eul_static_string_class;
-  object_class(str_4141) = eul_static_string_class;
-  eul_allocate_bytevector( G004131,G004130);
-  eul_allocate_bytevector( G004143,G004142);
-  eul_intern_keyword(key_4146,"local-name");
-  eul_intern_keyword(key_4147,"module");
-  eul_intern_keyword(key_4148,"immutable");
-  eul_intern_keyword(key_4149,"obj");
-  eul_intern_keyword(key_4150,"imported");
-  eul_intern_keyword(key_4151,"local-index");
-  eul_intern_keyword(key_4152,"info");
-  eul_allocate_bytevector( G004145,G004144);
-  object_class(str_4155) = eul_static_string_class;
-  object_class(str_4156) = eul_static_string_class;
-  object_class(str_4157) = eul_static_string_class;
-  object_class(str_4158) = eul_static_string_class;
-  eul_allocate_bytevector( G004154,G004153);
-  object_class(str_4161) = eul_static_string_class;
-  eul_allocate_bytevector( G004160,G004159);
-  object_class(str_4164) = eul_static_string_class;
-  eul_allocate_bytevector( G004163,G004162);
-  object_class(str_4167) = eul_static_string_class;
-  object_class(str_4168) = eul_static_string_class;
-  eul_allocate_bytevector( G004166,G004165);
-  object_class(str_4171) = eul_static_string_class;
-  object_class(str_4172) = eul_static_string_class;
-  object_class(str_4173) = eul_static_string_class;
-  object_class(str_4174) = eul_static_string_class;
-  eul_allocate_bytevector( G004170,G004169);
-  object_class(str_4177) = eul_static_string_class;
-  eul_allocate_bytevector( G004176,G004175);
-  eul_allocate_bytevector( G004179,G004178);
-  object_class(str_4182) = eul_static_string_class;
-  eul_allocate_bytevector( G004181,G004180);
-  object_class(str_4185) = eul_static_string_class;
-  object_class(str_4186) = eul_static_string_class;
-  eul_allocate_bytevector( G004184,G004183);
-  eul_intern_symbol(sym_4189,"write-interface-local-literals");
-  eul_intern_symbol(sym_4190,"find-imported-module");
-  eul_intern_symbol(sym_4191,"fff-link-string");
-  eul_intern_symbol(sym_4192,"write-library-interface-literals");
-  eul_intern_symbol(sym_4193,"ffl-link-string");
-  eul_intern_symbol(sym_4194,"make-interface-binding");
-  eul_intern_symbol(sym_4195,"get-interface-info");
-  eul_intern_symbol(sym_4196,"write-module-interface-file");
-  eul_intern_symbol(sym_4197,"write-interface-binding");
-  eul_intern_symbol(sym_4198,"link-string");
-  eul_intern_symbol(sym_4199,"get-full-import-names");
-  eul_intern_symbol(sym_4200,"new-literal");
-  eul_intern_symbol(sym_4201,"write-interface-export");
-  eul_intern_symbol(sym_4202,"load-module-interface");
-  eul_intern_symbol(sym_4203,"create-library-interface-file");
-  eul_intern_symbol(sym_4204,"write-library-interface-file");
-  eul_intern_symbol(sym_4205,"write-interface-file");
-  eul_intern_symbol(sym_4206,"find-imported-syntax-module");
-  eul_intern_symbol(sym_4207,"directly-or-indirectly-modified?");
-  eul_intern_symbol(sym_4208,"get-library-names");
-  eul_intern_symbol(sym_4209,"get-module-load-dir");
-  eul_intern_symbol(sym_4210,"load-library-interfaces");
-  eul_intern_symbol(sym_4211,"write-interface-literals");
-  eul_intern_symbol(sym_4212,"write-library-interface-export");
-  eul_allocate_bytevector( G004188,G004187);
+  eul_allocate_bytevector( G001754,G001753);
+  eul_intern_symbol(sym_1757,"anonymous");
+  eul_allocate_bytevector( G001756,G001755);
+  object_class(str_1760) = eul_static_string_class;
+  object_class(str_1761) = eul_static_string_class;
+  eul_allocate_bytevector( G001759,G001758);
+  object_class(str_1764) = eul_static_string_class;
+  object_class(str_1765) = eul_static_string_class;
+  eul_allocate_bytevector( G001763,G001762);
+  eul_allocate_bytevector( G001767,G001766);
+  eul_allocate_bytevector( G001769,G001768);
+  object_class(str_1772) = eul_static_string_class;
+  eul_allocate_bytevector( G001771,G001770);
+  eul_allocate_bytevector( G001774,G001773);
+  eul_allocate_bytevector( G001776,G001775);
+  object_class(str_1779) = eul_static_string_class;
+  object_class(str_1780) = eul_static_string_class;
+  eul_allocate_bytevector( G001778,G001777);
+  object_class(str_1783) = eul_static_string_class;
+  eul_allocate_bytevector( G001782,G001781);
+  eul_allocate_bytevector( G001785,G001784);
+  eul_allocate_bytevector( G001787,G001786);
+  eul_allocate_bytevector( G001789,G001788);
+  object_class(str_1792) = eul_static_string_class;
+  object_class(str_1793) = eul_static_string_class;
+  object_class(str_1794) = eul_static_string_class;
+  eul_intern_keyword(key_1795,"file-name");
+  eul_intern_keyword(key_1796,"mode");
+  eul_intern_symbol(sym_1797,"w");
+  eul_intern_symbol(sym_1798,"*clean-ups*");
+  object_class(str_1799) = eul_static_string_class;
+  object_class(str_1800) = eul_static_string_class;
+  object_class(str_1801) = eul_static_string_class;
+  object_class(str_1802) = eul_static_string_class;
+  object_class(str_1803) = eul_static_string_class;
+  object_class(str_1804) = eul_static_string_class;
+  object_class(str_1805) = eul_static_string_class;
+  object_class(str_1806) = eul_static_string_class;
+  eul_allocate_bytevector( G001791,G001790);
+  object_class(str_1809) = eul_static_string_class;
+  eul_allocate_bytevector( G001808,G001807);
+  eul_allocate_bytevector( G001811,G001810);
+  object_class(str_1814) = eul_static_string_class;
+  object_class(str_1815) = eul_static_string_class;
+  eul_intern_keyword(key_1816,"ct-error-value");
+  eul_allocate_bytevector( G001813,G001812);
+  eul_allocate_bytevector( G001818,G001817);
+  eul_allocate_bytevector( G001820,G001819);
+  object_class(str_1823) = eul_static_string_class;
+  object_class(str_1824) = eul_static_string_class;
+  object_class(str_1825) = eul_static_string_class;
+  object_class(str_1826) = eul_static_string_class;
+  object_class(str_1827) = eul_static_string_class;
+  eul_intern_symbol(sym_1828,"*actual-module*");
+  eul_intern_symbol(sym_1829,"(method G001290)");
+  eul_intern_symbol(sym_1830,"import");
+  eul_intern_symbol(sym_1831,"full-import");
+  eul_intern_symbol(sym_1832,"syntax");
+  eul_intern_symbol(sym_1833,"export");
+  eul_intern_symbol(sym_1834,"local-literals");
+  eul_allocate_bytevector( G001822,G001821);
+  eul_allocate_bytevector( G001836,G001835);
+  object_class(str_1839) = eul_static_string_class;
+  object_class(str_1840) = eul_static_string_class;
+  eul_allocate_bytevector( G001838,G001837);
+  eul_allocate_bytevector( G001842,G001841);
+  eul_allocate_bytevector( G001844,G001843);
+  object_class(str_1847) = eul_static_string_class;
+  object_class(str_1848) = eul_static_string_class;
+  eul_allocate_bytevector( G001846,G001845);
+  eul_allocate_bytevector( G001850,G001849);
+  object_class(str_1853) = eul_static_string_class;
+  object_class(str_1854) = eul_static_string_class;
+  object_class(str_1855) = eul_static_string_class;
+  object_class(str_1856) = eul_static_string_class;
+  object_class(str_1857) = eul_static_string_class;
+  object_class(str_1858) = eul_static_string_class;
+  eul_intern_symbol(sym_1859,"(method G001432)");
+  eul_allocate_bytevector( G001852,G001851);
+  object_class(str_1862) = eul_static_string_class;
+  object_class(str_1863) = eul_static_string_class;
+  object_class(str_1864) = eul_static_string_class;
+  eul_allocate_bytevector( G001861,G001860);
+  object_class(str_1867) = eul_static_string_class;
+  object_class(str_1868) = eul_static_string_class;
+  eul_allocate_bytevector( G001866,G001865);
+  eul_intern_symbol(sym_1871,"name");
+  eul_intern_symbol(sym_1872,"pos");
+  eul_intern_symbol(sym_1873,"origin");
+  object_class(str_1874) = eul_static_string_class;
+  eul_allocate_bytevector( G001870,G001869);
+  eul_allocate_bytevector( G001876,G001875);
+  object_class(str_1879) = eul_static_string_class;
+  object_class(str_1880) = eul_static_string_class;
+  object_class(str_1881) = eul_static_string_class;
+  object_class(str_1882) = eul_static_string_class;
+  object_class(str_1883) = eul_static_string_class;
+  object_class(str_1884) = eul_static_string_class;
+  object_class(str_1885) = eul_static_string_class;
+  object_class(str_1886) = eul_static_string_class;
+  object_class(str_1887) = eul_static_string_class;
+  object_class(str_1888) = eul_static_string_class;
+  eul_allocate_bytevector( G001878,G001877);
+  eul_allocate_bytevector( G001890,G001889);
+  eul_intern_keyword(key_1893,"local-name");
+  eul_intern_keyword(key_1894,"module");
+  eul_intern_keyword(key_1895,"immutable");
+  eul_intern_keyword(key_1896,"obj");
+  eul_intern_keyword(key_1897,"imported");
+  eul_intern_keyword(key_1898,"local-index");
+  eul_intern_keyword(key_1899,"info");
+  eul_allocate_bytevector( G001892,G001891);
+  object_class(str_1902) = eul_static_string_class;
+  object_class(str_1903) = eul_static_string_class;
+  object_class(str_1904) = eul_static_string_class;
+  object_class(str_1905) = eul_static_string_class;
+  eul_allocate_bytevector( G001901,G001900);
+  object_class(str_1908) = eul_static_string_class;
+  eul_allocate_bytevector( G001907,G001906);
+  object_class(str_1911) = eul_static_string_class;
+  eul_allocate_bytevector( G001910,G001909);
+  object_class(str_1914) = eul_static_string_class;
+  object_class(str_1915) = eul_static_string_class;
+  eul_allocate_bytevector( G001913,G001912);
+  object_class(str_1918) = eul_static_string_class;
+  object_class(str_1919) = eul_static_string_class;
+  object_class(str_1920) = eul_static_string_class;
+  object_class(str_1921) = eul_static_string_class;
+  eul_allocate_bytevector( G001917,G001916);
+  object_class(str_1924) = eul_static_string_class;
+  eul_allocate_bytevector( G001923,G001922);
+  eul_allocate_bytevector( G001926,G001925);
+  object_class(str_1929) = eul_static_string_class;
+  eul_allocate_bytevector( G001928,G001927);
+  object_class(str_1932) = eul_static_string_class;
+  object_class(str_1933) = eul_static_string_class;
+  eul_allocate_bytevector( G001931,G001930);
+  eul_intern_symbol(sym_1936,"write-interface-local-literals");
+  eul_intern_symbol(sym_1937,"find-imported-module");
+  eul_intern_symbol(sym_1938,"fff-link-string");
+  eul_intern_symbol(sym_1939,"write-library-interface-literals");
+  eul_intern_symbol(sym_1940,"ffl-link-string");
+  eul_intern_symbol(sym_1941,"make-interface-binding");
+  eul_intern_symbol(sym_1942,"get-interface-info");
+  eul_intern_symbol(sym_1943,"write-module-interface-file");
+  eul_intern_symbol(sym_1944,"write-interface-binding");
+  eul_intern_symbol(sym_1945,"link-string");
+  eul_intern_symbol(sym_1946,"get-full-import-names");
+  eul_intern_symbol(sym_1947,"new-literal");
+  eul_intern_symbol(sym_1948,"write-interface-export");
+  eul_intern_symbol(sym_1949,"load-module-interface");
+  eul_intern_symbol(sym_1950,"create-library-interface-file");
+  eul_intern_symbol(sym_1951,"write-library-interface-file");
+  eul_intern_symbol(sym_1952,"write-interface-file");
+  eul_intern_symbol(sym_1953,"find-imported-syntax-module");
+  eul_intern_symbol(sym_1954,"directly-or-indirectly-modified?");
+  eul_intern_symbol(sym_1955,"get-library-names");
+  eul_intern_symbol(sym_1956,"get-module-load-dir");
+  eul_intern_symbol(sym_1957,"load-library-interfaces");
+  eul_intern_symbol(sym_1958,"write-interface-literals");
+  eul_intern_symbol(sym_1959,"write-library-interface-export");
+  eul_allocate_bytevector( G001935,G001934);
 
   /* Set local bindings */
   {
@@ -440,169 +440,169 @@ void initialize_module_cg_interf()
       cg_interf_bindings[i] = eul_nil;
   }
 
-  cg_interf_bindings[ 26] = G004007;
-  cg_interf_bindings[ 27] = sym_4010;
-  cg_interf_bindings[ 28] = G004009;
-  cg_interf_bindings[ 29] = str_4013;
-  cg_interf_bindings[ 30] = str_4014;
-  cg_interf_bindings[ 31] = G004012;
-  cg_interf_bindings[ 32] = str_4017;
-  cg_interf_bindings[ 33] = str_4018;
-  cg_interf_bindings[ 34] = G004016;
-  cg_interf_bindings[ 35] = G004020;
-  cg_interf_bindings[ 36] = G004022;
-  cg_interf_bindings[ 37] = str_4025;
-  cg_interf_bindings[ 38] = G004024;
-  cg_interf_bindings[ 39] = G004027;
-  cg_interf_bindings[ 40] = G004029;
-  cg_interf_bindings[ 41] = str_4032;
-  cg_interf_bindings[ 42] = str_4033;
-  cg_interf_bindings[ 43] = G004031;
-  cg_interf_bindings[ 44] = str_4036;
-  cg_interf_bindings[ 45] = G004035;
-  cg_interf_bindings[ 46] = G004038;
-  cg_interf_bindings[ 47] = G004040;
-  cg_interf_bindings[ 48] = G004042;
-  cg_interf_bindings[ 49] = str_4045;
-  cg_interf_bindings[ 50] = str_4046;
-  cg_interf_bindings[ 51] = str_4047;
-  cg_interf_bindings[ 52] = key_4048;
-  cg_interf_bindings[ 53] = key_4049;
-  cg_interf_bindings[ 54] = sym_4050;
-  cg_interf_bindings[ 55] = sym_4051;
-  cg_interf_bindings[ 56] = str_4052;
-  cg_interf_bindings[ 57] = str_4053;
-  cg_interf_bindings[ 58] = str_4054;
-  cg_interf_bindings[ 59] = str_4055;
-  cg_interf_bindings[ 60] = str_4056;
-  cg_interf_bindings[ 61] = str_4057;
-  cg_interf_bindings[ 62] = str_4058;
-  cg_interf_bindings[ 63] = str_4059;
-  cg_interf_bindings[ 64] = G004044;
-  cg_interf_bindings[ 65] = str_4062;
-  cg_interf_bindings[ 66] = G004061;
-  cg_interf_bindings[ 67] = G004064;
-  cg_interf_bindings[ 68] = str_4067;
-  cg_interf_bindings[ 69] = str_4068;
-  cg_interf_bindings[ 70] = key_4069;
-  cg_interf_bindings[ 71] = G004066;
-  cg_interf_bindings[ 72] = G004071;
-  cg_interf_bindings[ 73] = G004073;
-  cg_interf_bindings[ 74] = str_4076;
-  cg_interf_bindings[ 75] = str_4077;
-  cg_interf_bindings[ 76] = str_4078;
-  cg_interf_bindings[ 77] = str_4079;
-  cg_interf_bindings[ 78] = str_4080;
-  cg_interf_bindings[ 79] = sym_4081;
-  cg_interf_bindings[ 80] = sym_4082;
-  cg_interf_bindings[ 81] = sym_4083;
-  cg_interf_bindings[ 82] = sym_4084;
-  cg_interf_bindings[ 83] = sym_4085;
-  cg_interf_bindings[ 84] = sym_4086;
-  cg_interf_bindings[ 85] = sym_4087;
-  cg_interf_bindings[ 86] = G004075;
-  cg_interf_bindings[ 87] = G004089;
-  cg_interf_bindings[ 88] = str_4092;
-  cg_interf_bindings[ 89] = str_4093;
-  cg_interf_bindings[ 90] = G004091;
-  cg_interf_bindings[ 91] = G004095;
-  cg_interf_bindings[ 92] = G004097;
-  cg_interf_bindings[ 93] = str_4100;
-  cg_interf_bindings[ 94] = str_4101;
-  cg_interf_bindings[ 95] = G004099;
-  cg_interf_bindings[ 96] = G004103;
-  cg_interf_bindings[ 97] = str_4106;
-  cg_interf_bindings[ 98] = str_4107;
-  cg_interf_bindings[ 99] = str_4108;
-  cg_interf_bindings[ 100] = str_4109;
-  cg_interf_bindings[ 101] = str_4110;
-  cg_interf_bindings[ 102] = str_4111;
-  cg_interf_bindings[ 103] = sym_4112;
-  cg_interf_bindings[ 104] = G004105;
-  cg_interf_bindings[ 105] = str_4115;
-  cg_interf_bindings[ 106] = str_4116;
-  cg_interf_bindings[ 107] = str_4117;
-  cg_interf_bindings[ 108] = G004114;
-  cg_interf_bindings[ 109] = str_4120;
-  cg_interf_bindings[ 110] = str_4121;
-  cg_interf_bindings[ 111] = G004119;
-  cg_interf_bindings[ 112] = sym_4124;
-  cg_interf_bindings[ 113] = sym_4125;
-  cg_interf_bindings[ 114] = sym_4126;
-  cg_interf_bindings[ 115] = str_4127;
-  cg_interf_bindings[ 116] = G004123;
-  cg_interf_bindings[ 117] = G004129;
-  cg_interf_bindings[ 118] = str_4132;
-  cg_interf_bindings[ 119] = str_4133;
-  cg_interf_bindings[ 120] = str_4134;
-  cg_interf_bindings[ 121] = str_4135;
-  cg_interf_bindings[ 122] = str_4136;
-  cg_interf_bindings[ 123] = str_4137;
-  cg_interf_bindings[ 124] = str_4138;
-  cg_interf_bindings[ 125] = str_4139;
-  cg_interf_bindings[ 126] = str_4140;
-  cg_interf_bindings[ 127] = str_4141;
-  cg_interf_bindings[ 128] = G004131;
-  cg_interf_bindings[ 129] = G004143;
-  cg_interf_bindings[ 130] = key_4146;
-  cg_interf_bindings[ 131] = key_4147;
-  cg_interf_bindings[ 132] = key_4148;
-  cg_interf_bindings[ 133] = key_4149;
-  cg_interf_bindings[ 134] = key_4150;
-  cg_interf_bindings[ 135] = key_4151;
-  cg_interf_bindings[ 136] = key_4152;
-  cg_interf_bindings[ 137] = G004145;
-  cg_interf_bindings[ 138] = str_4155;
-  cg_interf_bindings[ 139] = str_4156;
-  cg_interf_bindings[ 140] = str_4157;
-  cg_interf_bindings[ 141] = str_4158;
-  cg_interf_bindings[ 142] = G004154;
-  cg_interf_bindings[ 143] = str_4161;
-  cg_interf_bindings[ 144] = G004160;
-  cg_interf_bindings[ 145] = str_4164;
-  cg_interf_bindings[ 146] = G004163;
-  cg_interf_bindings[ 147] = str_4167;
-  cg_interf_bindings[ 148] = str_4168;
-  cg_interf_bindings[ 149] = G004166;
-  cg_interf_bindings[ 150] = str_4171;
-  cg_interf_bindings[ 151] = str_4172;
-  cg_interf_bindings[ 152] = str_4173;
-  cg_interf_bindings[ 153] = str_4174;
-  cg_interf_bindings[ 154] = G004170;
-  cg_interf_bindings[ 155] = str_4177;
-  cg_interf_bindings[ 156] = G004176;
-  cg_interf_bindings[ 157] = G004179;
-  cg_interf_bindings[ 158] = str_4182;
-  cg_interf_bindings[ 159] = G004181;
-  cg_interf_bindings[ 160] = str_4185;
-  cg_interf_bindings[ 161] = str_4186;
-  cg_interf_bindings[ 162] = G004184;
+  cg_interf_bindings[ 26] = G001754;
+  cg_interf_bindings[ 27] = sym_1757;
+  cg_interf_bindings[ 28] = G001756;
+  cg_interf_bindings[ 29] = str_1760;
+  cg_interf_bindings[ 30] = str_1761;
+  cg_interf_bindings[ 31] = G001759;
+  cg_interf_bindings[ 32] = str_1764;
+  cg_interf_bindings[ 33] = str_1765;
+  cg_interf_bindings[ 34] = G001763;
+  cg_interf_bindings[ 35] = G001767;
+  cg_interf_bindings[ 36] = G001769;
+  cg_interf_bindings[ 37] = str_1772;
+  cg_interf_bindings[ 38] = G001771;
+  cg_interf_bindings[ 39] = G001774;
+  cg_interf_bindings[ 40] = G001776;
+  cg_interf_bindings[ 41] = str_1779;
+  cg_interf_bindings[ 42] = str_1780;
+  cg_interf_bindings[ 43] = G001778;
+  cg_interf_bindings[ 44] = str_1783;
+  cg_interf_bindings[ 45] = G001782;
+  cg_interf_bindings[ 46] = G001785;
+  cg_interf_bindings[ 47] = G001787;
+  cg_interf_bindings[ 48] = G001789;
+  cg_interf_bindings[ 49] = str_1792;
+  cg_interf_bindings[ 50] = str_1793;
+  cg_interf_bindings[ 51] = str_1794;
+  cg_interf_bindings[ 52] = key_1795;
+  cg_interf_bindings[ 53] = key_1796;
+  cg_interf_bindings[ 54] = sym_1797;
+  cg_interf_bindings[ 55] = sym_1798;
+  cg_interf_bindings[ 56] = str_1799;
+  cg_interf_bindings[ 57] = str_1800;
+  cg_interf_bindings[ 58] = str_1801;
+  cg_interf_bindings[ 59] = str_1802;
+  cg_interf_bindings[ 60] = str_1803;
+  cg_interf_bindings[ 61] = str_1804;
+  cg_interf_bindings[ 62] = str_1805;
+  cg_interf_bindings[ 63] = str_1806;
+  cg_interf_bindings[ 64] = G001791;
+  cg_interf_bindings[ 65] = str_1809;
+  cg_interf_bindings[ 66] = G001808;
+  cg_interf_bindings[ 67] = G001811;
+  cg_interf_bindings[ 68] = str_1814;
+  cg_interf_bindings[ 69] = str_1815;
+  cg_interf_bindings[ 70] = key_1816;
+  cg_interf_bindings[ 71] = G001813;
+  cg_interf_bindings[ 72] = G001818;
+  cg_interf_bindings[ 73] = G001820;
+  cg_interf_bindings[ 74] = str_1823;
+  cg_interf_bindings[ 75] = str_1824;
+  cg_interf_bindings[ 76] = str_1825;
+  cg_interf_bindings[ 77] = str_1826;
+  cg_interf_bindings[ 78] = str_1827;
+  cg_interf_bindings[ 79] = sym_1828;
+  cg_interf_bindings[ 80] = sym_1829;
+  cg_interf_bindings[ 81] = sym_1830;
+  cg_interf_bindings[ 82] = sym_1831;
+  cg_interf_bindings[ 83] = sym_1832;
+  cg_interf_bindings[ 84] = sym_1833;
+  cg_interf_bindings[ 85] = sym_1834;
+  cg_interf_bindings[ 86] = G001822;
+  cg_interf_bindings[ 87] = G001836;
+  cg_interf_bindings[ 88] = str_1839;
+  cg_interf_bindings[ 89] = str_1840;
+  cg_interf_bindings[ 90] = G001838;
+  cg_interf_bindings[ 91] = G001842;
+  cg_interf_bindings[ 92] = G001844;
+  cg_interf_bindings[ 93] = str_1847;
+  cg_interf_bindings[ 94] = str_1848;
+  cg_interf_bindings[ 95] = G001846;
+  cg_interf_bindings[ 96] = G001850;
+  cg_interf_bindings[ 97] = str_1853;
+  cg_interf_bindings[ 98] = str_1854;
+  cg_interf_bindings[ 99] = str_1855;
+  cg_interf_bindings[ 100] = str_1856;
+  cg_interf_bindings[ 101] = str_1857;
+  cg_interf_bindings[ 102] = str_1858;
+  cg_interf_bindings[ 103] = sym_1859;
+  cg_interf_bindings[ 104] = G001852;
+  cg_interf_bindings[ 105] = str_1862;
+  cg_interf_bindings[ 106] = str_1863;
+  cg_interf_bindings[ 107] = str_1864;
+  cg_interf_bindings[ 108] = G001861;
+  cg_interf_bindings[ 109] = str_1867;
+  cg_interf_bindings[ 110] = str_1868;
+  cg_interf_bindings[ 111] = G001866;
+  cg_interf_bindings[ 112] = sym_1871;
+  cg_interf_bindings[ 113] = sym_1872;
+  cg_interf_bindings[ 114] = sym_1873;
+  cg_interf_bindings[ 115] = str_1874;
+  cg_interf_bindings[ 116] = G001870;
+  cg_interf_bindings[ 117] = G001876;
+  cg_interf_bindings[ 118] = str_1879;
+  cg_interf_bindings[ 119] = str_1880;
+  cg_interf_bindings[ 120] = str_1881;
+  cg_interf_bindings[ 121] = str_1882;
+  cg_interf_bindings[ 122] = str_1883;
+  cg_interf_bindings[ 123] = str_1884;
+  cg_interf_bindings[ 124] = str_1885;
+  cg_interf_bindings[ 125] = str_1886;
+  cg_interf_bindings[ 126] = str_1887;
+  cg_interf_bindings[ 127] = str_1888;
+  cg_interf_bindings[ 128] = G001878;
+  cg_interf_bindings[ 129] = G001890;
+  cg_interf_bindings[ 130] = key_1893;
+  cg_interf_bindings[ 131] = key_1894;
+  cg_interf_bindings[ 132] = key_1895;
+  cg_interf_bindings[ 133] = key_1896;
+  cg_interf_bindings[ 134] = key_1897;
+  cg_interf_bindings[ 135] = key_1898;
+  cg_interf_bindings[ 136] = key_1899;
+  cg_interf_bindings[ 137] = G001892;
+  cg_interf_bindings[ 138] = str_1902;
+  cg_interf_bindings[ 139] = str_1903;
+  cg_interf_bindings[ 140] = str_1904;
+  cg_interf_bindings[ 141] = str_1905;
+  cg_interf_bindings[ 142] = G001901;
+  cg_interf_bindings[ 143] = str_1908;
+  cg_interf_bindings[ 144] = G001907;
+  cg_interf_bindings[ 145] = str_1911;
+  cg_interf_bindings[ 146] = G001910;
+  cg_interf_bindings[ 147] = str_1914;
+  cg_interf_bindings[ 148] = str_1915;
+  cg_interf_bindings[ 149] = G001913;
+  cg_interf_bindings[ 150] = str_1918;
+  cg_interf_bindings[ 151] = str_1919;
+  cg_interf_bindings[ 152] = str_1920;
+  cg_interf_bindings[ 153] = str_1921;
+  cg_interf_bindings[ 154] = G001917;
+  cg_interf_bindings[ 155] = str_1924;
+  cg_interf_bindings[ 156] = G001923;
+  cg_interf_bindings[ 157] = G001926;
+  cg_interf_bindings[ 158] = str_1929;
+  cg_interf_bindings[ 159] = G001928;
+  cg_interf_bindings[ 160] = str_1932;
+  cg_interf_bindings[ 161] = str_1933;
+  cg_interf_bindings[ 162] = G001931;
   cg_interf_bindings[ 1] = eul_nil;
-  cg_interf_bindings[ 163] = sym_4189;
-  cg_interf_bindings[ 164] = sym_4190;
-  cg_interf_bindings[ 165] = sym_4191;
-  cg_interf_bindings[ 166] = sym_4192;
-  cg_interf_bindings[ 167] = sym_4193;
-  cg_interf_bindings[ 168] = sym_4194;
-  cg_interf_bindings[ 169] = sym_4195;
-  cg_interf_bindings[ 170] = sym_4196;
-  cg_interf_bindings[ 171] = sym_4197;
-  cg_interf_bindings[ 172] = sym_4198;
-  cg_interf_bindings[ 173] = sym_4199;
-  cg_interf_bindings[ 174] = sym_4200;
-  cg_interf_bindings[ 175] = sym_4201;
-  cg_interf_bindings[ 176] = sym_4202;
-  cg_interf_bindings[ 177] = sym_4203;
-  cg_interf_bindings[ 178] = sym_4204;
-  cg_interf_bindings[ 179] = sym_4205;
-  cg_interf_bindings[ 180] = sym_4206;
-  cg_interf_bindings[ 181] = sym_4207;
-  cg_interf_bindings[ 182] = sym_4208;
-  cg_interf_bindings[ 183] = sym_4209;
-  cg_interf_bindings[ 184] = sym_4210;
-  cg_interf_bindings[ 185] = sym_4211;
-  cg_interf_bindings[ 186] = sym_4212;
-  eul_allocate_lambda( cg_interf_bindings[0], "initialize-cg-interf", 0, G004188);
+  cg_interf_bindings[ 163] = sym_1936;
+  cg_interf_bindings[ 164] = sym_1937;
+  cg_interf_bindings[ 165] = sym_1938;
+  cg_interf_bindings[ 166] = sym_1939;
+  cg_interf_bindings[ 167] = sym_1940;
+  cg_interf_bindings[ 168] = sym_1941;
+  cg_interf_bindings[ 169] = sym_1942;
+  cg_interf_bindings[ 170] = sym_1943;
+  cg_interf_bindings[ 171] = sym_1944;
+  cg_interf_bindings[ 172] = sym_1945;
+  cg_interf_bindings[ 173] = sym_1946;
+  cg_interf_bindings[ 174] = sym_1947;
+  cg_interf_bindings[ 175] = sym_1948;
+  cg_interf_bindings[ 176] = sym_1949;
+  cg_interf_bindings[ 177] = sym_1950;
+  cg_interf_bindings[ 178] = sym_1951;
+  cg_interf_bindings[ 179] = sym_1952;
+  cg_interf_bindings[ 180] = sym_1953;
+  cg_interf_bindings[ 181] = sym_1954;
+  cg_interf_bindings[ 182] = sym_1955;
+  cg_interf_bindings[ 183] = sym_1956;
+  cg_interf_bindings[ 184] = sym_1957;
+  cg_interf_bindings[ 185] = sym_1958;
+  cg_interf_bindings[ 186] = sym_1959;
+  eul_allocate_lambda( cg_interf_bindings[0], "initialize-cg-interf", 0, G001935);
 
   }
 }
