@@ -311,7 +311,8 @@
     =stream.em=.
 *** TODO Improve =--script= option to handle module definition
     See Examples/Test/factScript.em.
-*** TODO =--script= option should switch-off =readline=
+*** DONE =--script= option should switch-off =readline=
+    CLOSED: [2010-10-08 Fri 19:57]
 *** DONE Check =Modules/Pipe=
     CLOSED: [2010-10-08 Fri 08:32]
     Currently the path

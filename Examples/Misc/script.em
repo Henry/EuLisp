@@ -19,9 +19,8 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: test
+;;; Title: Example script using "hash-bang"
 ;;;  Authors: Andreas Kind
-;;; Description: sample EuLisp script using hash-bang
 ;;;-----------------------------------------------------------------------------
 (print 42 nl)
 (print 43 nl)
@@ -29,3 +28,4 @@
 (defclass <foo> () ())
 (print <foo> nl)
 (print (make <foo>) nl)
+;;;-----------------------------------------------------------------------------

@@ -61,10 +61,10 @@
 (defun initialize-interpreter ()
 
   (if *script* ()
-    (format "EuLisp System Youtoo - Version ~a\n" *version*))
-
-  (setq *rl* (initialize-rl))
-  (print nl)
+    (progn
+      (format "EuLisp System Youtoo - Version ~a\n" *version*)
+      (setq *rl* (initialize-rl))
+      (print nl)))
 
   (setq *current-module-name* 'user)
   (dynamic-setq *actual-module* (get-module *current-module-name*))
@@ -281,7 +281,7 @@
    ((loop (x)
           ;; If readline is active it prints the prompt using `prompt-string'
           (setq *prompt-string* (fmt "~a> " *current-module-name*))
-          (unless (= *rl* 1)
+          (unless (or *script* (= *rl* 1))
                   (print *prompt-string*)
                   (flush))
           (reset-interactive-module (dynamic *actual-module*))
