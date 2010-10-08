@@ -18,19 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Example pipe
 ;;;  Library: pipe
 ;;;  Authors: Andreas Kind
-;;; Description: example pipe
 ;;;  Compilation
 ;;    make distclean
 ;;    make
 ;;    make test
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test1
   (syntax (syntax-0)
    import (level-0 pipe))
 
-(let ((x (make <pipe> process: "/home/dm2/henry/EuLisp/EuLisp/Modules/Pipe/../../Bin.x86_64/youtoo.sh"))
+(let ((x (make <pipe> process: "../../Bin.x86_64/youtoo"))
       (str ""))
   (pprint x)
   (system "ps -a")

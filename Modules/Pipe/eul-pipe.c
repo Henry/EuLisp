@@ -184,7 +184,10 @@ int FT_fork_child(LispRef res, char *childname, char **childs_argv, char *path)
 LispRef eul_fork_child(char *arg_string)
 {
     // Compute local_argv, argn
-    char *string = (char *)strdup(arg_string);
+    int n = strlen(arg_string);
+    char *string = (char *)gc_malloc(n + 1);
+    strcpy(string, arg_string);
+
     char *ptr = string;
 
     if (ptr == NULL)
@@ -228,8 +231,6 @@ LispRef eul_fork_child(char *arg_string)
         // Error
         return (c_int_as_eul_int(flag));
     }
-
-    free(string);
 
     return res;
 }

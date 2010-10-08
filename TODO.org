@@ -305,10 +305,20 @@
     CLOSED: [2010-09-20 Mon 22:41]
     If only one super-class is specified allow single-inheritance syntax of
     specifying the class directly rather than as a list.
-*** TODO Correct =write=ing of character digrams and escape sequences in strings
+*** TODO Correct =write= ing of character digrams and escape sequences in strings
 *** TODO Correct =defconstant= to handle character constants correctly
     See =(deflocal nl #\\n)= which should be =(defconstant nl #\\n)= in
     =stream.em=.
+*** TODO Improve =--script= option to handle module definition
+    See Examples/Test/factScript.em.
+*** TODO =--script= option should switch-off =readline=
+*** DONE Check =Modules/Pipe=
+    CLOSED: [2010-10-08 Fri 08:32]
+    Currently the path
+    =/home/dm2/henry/EuLisp/EuLisp/Modules/Pipe/../../Bin.x86_64/youto o.sh= is
+    used which works but the equivalent
+    =/home/dm2/henry/EuLisp/EuLisp/Bin.x86_64/youto o.sh= does not, nor does the
+    relative path =../../Bin.x86_64/youtoo.sh= which should.
 * EuXLisp
 *** TODO Finish reformatting the C source files
 *** DONE Add =slice= method for =<list>=
