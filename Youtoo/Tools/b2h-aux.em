@@ -1,4 +1,4 @@
-;;; Copyright 2005 T. Kurt Bond
+;;; Copyright 2003 T. Kurt Bond
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;  This file is part of
