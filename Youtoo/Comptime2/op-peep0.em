@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: peep-hole optimization rules
 ;;;  Library: eval (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Keith Playford, Andreas Kind
-;;; Description: peep-hole optimization rules
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 (defmodule op-peep0
   (syntax (macros)
@@ -57,5 +58,5 @@
   `(guarded-rule ,lhs () ,rhs))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module op-peep0
 ;;;-----------------------------------------------------------------------------

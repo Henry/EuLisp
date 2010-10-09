@@ -18,15 +18,27 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: handling methods
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: handling methods
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-meth
-  (syntax (_boot0 _mop-gf0 _mop-meth0)
-   import (boot mop-prim mop-key mop-class mop-inspect mop-gf)
-   export (compute-method-lookup-function stable-add-method make-method
-                                          compute-discriminating-function add-method))
+  (syntax (_boot0
+           _mop-gf0
+           _mop-meth0)
+   import (boot
+           mop-prim
+           mop-key
+           mop-class
+           mop-inspect
+           mop-gf)
+   export (compute-method-lookup-function
+           stable-add-method
+           make-method
+           compute-discriminating-function
+           add-method))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Method allocation
@@ -222,5 +234,5 @@
                       (apply (car meth-funs) values))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-meth
 ;;;-----------------------------------------------------------------------------

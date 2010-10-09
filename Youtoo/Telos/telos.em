@@ -18,12 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: The EuLisp Object System (TELOS)
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: The EuLisp Object System (TELOS)
-;;;
+;;;  Maintainer: Henry G. Weller
 ;;;  Attention: Update Comptime2/cg-dld.em if telos modules change!
 ;;;-----------------------------------------------------------------------------
+
 (defmodule telos
   (expose ((rename ((+ int-binary+)
                     (- int-binary-)
@@ -55,5 +56,5 @@
            mop-prim))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module telos
 ;;;-----------------------------------------------------------------------------

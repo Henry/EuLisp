@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: level1 macros
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: level1 macros
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule _macros

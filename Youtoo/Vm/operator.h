@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: lambdas, generic functions, methods
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: lambdas, generic functions, methods
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #ifndef OPERATOR_H

@@ -18,17 +18,32 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: double precision floats
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: double precision floats
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule double1
   (syntax (_telos0)
-   import (telos number integer fpi float string)
-   export (double-binary+ double-binary-
-                          double-binary* double-binary/ double-binary% double-binary-mod
-                          double-ceiling double-round double-floor double-truncate
-                          double-as-string int-as-double))
+   import (telos
+           number
+           integer
+           fpi
+           float
+           string)
+   export (double-binary+
+           double-binary-
+           double-binary*
+           double-binary/
+           double-binary%
+           double-binary-mod
+           double-ceiling
+           double-round
+           double-floor
+           double-truncate
+           double-as-string
+           int-as-double))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Arithmetic
@@ -99,5 +114,5 @@
 (defmethod (converter <int>) ((x <double>)) (double-round x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module double1
 ;;;-----------------------------------------------------------------------------

@@ -18,17 +18,42 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: numbers
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: numbers
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule number
   (syntax (_telos0)
-   import (telos callback compare copy)
-   export (<number> number? + - * / % gcd lcm mod
-                    abs zero? negate signum positive? negative?
-                    binary+ binary- binary* binary/ binary%
-                    binary-mod binary-gcd binary-lcm))
+   import (telos
+           callback
+           compare
+           copy)
+   export (<number>
+           number?
+           +
+           -
+           *
+           /
+           %
+           gcd
+           lcm
+           mod
+           abs
+           zero?
+           negate
+           signum
+           positive?
+           negative?
+           binary+
+           binary-
+           binary*
+           binary/
+           binary%
+           binary-mod
+           binary-gcd
+           binary-lcm))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <number>
@@ -151,5 +176,5 @@
 (defmethod deep-copy ((x <number>)) x)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module number
 ;;;-----------------------------------------------------------------------------

@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: events not yet implemented
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: events not yet implemented
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule event
@@ -41,5 +42,5 @@
 (defconstant ticks-per-second (eul_ticks_per_second))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module event
 ;;;-----------------------------------------------------------------------------

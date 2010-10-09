@@ -18,16 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: test
+;;; Title: Test executable with linked boot library
 ;;;  Authors: Andreas Kind
-;;; Description: Test executable with linked boot library
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo test2 -l boot
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test2
   (import (boot))
 (print "Testing module boot ... OK.")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test2
 ;;;-----------------------------------------------------------------------------

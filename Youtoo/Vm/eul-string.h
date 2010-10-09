@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: strings
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: strings
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_STRING_H
 #define EUL_STRING_H
@@ -28,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// String access
 ///-----------------------------------------------------------------------------
-
 #define STRING_SIZE (1)
 #define EUL_STRING_SIZE c_int_as_eul_int(STRING_SIZE)
 #define STRING_DATA(x) (slot_ref((x), 0))
@@ -44,7 +44,6 @@
 ///-----------------------------------------------------------------------------
 /// String allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_string(loc, str)                                          \
     {                                                                          \
         char *tmp_str = str;                                                   \
@@ -83,7 +82,6 @@
 ///-----------------------------------------------------------------------------
 /// Vector allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_vector(loc, n, list)                                      \
     {                                                                          \
         LispRef last_init_value = eul_nil;                                     \
@@ -111,7 +109,6 @@
             eul_allocate_string(slot_ref(loc, i), vec[i]);                     \
         }                                                                      \
     }
-
 
 ///-----------------------------------------------------------------------------
 #endif // EUL_STRING_H

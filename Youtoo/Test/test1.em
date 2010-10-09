@@ -18,17 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: test
+;;; Title: smallest test program
 ;;;  Authors: Andreas Kind
-;;; Description: smallest test program
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo test1
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test1
   ()
 ((opencoded-lambda (x fd) (write-object))
  "Testing base ... OK.\n" t)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test1
 ;;;-----------------------------------------------------------------------------

@@ -18,9 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: compiler entry point
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind
-;;; Description: compiler entry point
 ;;;-----------------------------------------------------------------------------
 (defmodule youtoo
   ;; Final, proper executable!
@@ -29,5 +29,5 @@
   (main *argv*)
 
 ;;;-----------------------------------------------------------------------------
-  )  ;; end of module
+  )  ;; end of module youtoo
 ;;;-----------------------------------------------------------------------------

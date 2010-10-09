@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: classes and short names for global registers
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: classes and short names for global registers
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef CLASS_H
 #define CLASS_H

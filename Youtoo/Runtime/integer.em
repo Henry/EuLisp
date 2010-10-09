@@ -18,14 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: integers
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: integers
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule integer
   (syntax (_telos0)
-   import (telos number)
-   export (<integer> integer? even? odd?))
+   import (telos
+           number)
+   export (<integer>
+           integer?
+           even?
+           odd?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <integer>
@@ -44,5 +50,5 @@
 ;;(declare-inline odd?)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module integer
 ;;;-----------------------------------------------------------------------------

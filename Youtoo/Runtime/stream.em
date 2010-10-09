@@ -21,6 +21,7 @@
 ;;; Title: streams
 ;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule stream

@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: fixed precision integer
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: fixed precision integer
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "stdc.h"
@@ -49,5 +50,4 @@ void eul_initialize_fpi()
     define_printer(FPI_TAG, fprint_fpi);
 }
 
-
-/** ------------------------------------------------------------------------ **/
+///-----------------------------------------------------------------------------

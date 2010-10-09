@@ -18,12 +18,13 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: fast access to level1 bindings
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
-///  Description: fast access to level1 bindings
-///
-///                !!! CHANGES ONLY TO leveli.skl.c !!!
-///
+///  Maintainer: Henry G. Weller
+//
+//                !!! CHANGES ONLY TO leveli.skl.c !!!
+//
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"

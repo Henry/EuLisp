@@ -18,14 +18,21 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: error handling
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: error handling
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-error
-  (syntax (_macros _i-aux0)
-   import (i-level1 i-param i-notify)
-   export (<ct-error> ct-error ct-exit))
+  (syntax (_macros
+           _i-aux0)
+   import (i-level1
+           i-param
+           i-notify)
+   export (<ct-error>
+           ct-error
+           ct-exit))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Compile-time error conditions
@@ -59,5 +66,5 @@
     (exit value)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-error
 ;;;-----------------------------------------------------------------------------

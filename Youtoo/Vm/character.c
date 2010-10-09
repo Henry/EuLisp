@@ -1,4 +1,3 @@
-
 /// Copyright 1997 A. Kind & University of Bath
 /// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -19,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: characters
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: characters
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "stdc.h"
@@ -36,19 +36,18 @@
 ///-----------------------------------------------------------------------------
 /// Character printer
 ///-----------------------------------------------------------------------------
-
 static void fprint_char(FILE *fd, LispRef o)
 {
     fprintf(fd, "%c", (char)char_value(o));
 }
 
-
 ///-----------------------------------------------------------------------------
 /// Initialization
 ///-----------------------------------------------------------------------------
-
 void eul_initialize_char()
 {
     NOTIFY0(".Initialize characters");
     define_printer(CHAR_TAG, fprint_char);
 }
+
+///-----------------------------------------------------------------------------

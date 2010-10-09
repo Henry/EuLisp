@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: handlers (int*, double* and string*)
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
-///  Description: handlers (int*, double* and string*)
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef HANDLER_H
 #define HANDLER_H

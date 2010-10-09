@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: macro to define abstract syntax tree
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: macro to define abstract syntax tree
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule _sx-obj0
   (syntax (macros)
    import (level1))
@@ -84,5 +86,5 @@
          (,writer-name m (tconc (,reader-name m) ,node))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module sx-obj0
 ;;;-----------------------------------------------------------------------------

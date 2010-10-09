@@ -18,51 +18,108 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: initial class hierarchy
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: initial class hierarchy
-;;
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
 ;;    Some classes are predefined when the Vm is initialized:
 ;;    <keyword>, <simple-generic-funtion>, <simple-function>,
 ;;    <simple-class>, <character>, <cons>, <string>, <null>, <int>, <double>,
 ;;    <vector>, <hash-table>, <simple-method>, <symbol>
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-class
   (syntax (_boot0)
-   import (boot mop-prim)
+   import (boot
+           mop-prim)
    export (<object>
            <metaclass>
-           <simple-class> <class> <function-class>
-           <function> <simple-function>
-           <generic-function> <simple-generic-function>
-           <method> <simple-method>
-           <slot> <local-slot>
-           <list> <cons> <null>
-           <name> <symbol> <keyword>
-           object-size class-size lsd-size gf-size method-size
-           sd-size name-size function-size sf-size cons-size
-           class-slotz sf-slots gf-slots method-slots lsd-slots
-           sd-slots object-slots cons-slots sf-direct-slots name-slots
-           class-slot-defaults lsd-slot-defaults function-slot-defaults
-           sf-slot-defaults gf-slot-defaults cons-slot-defaults
-           method-slot-defaults name-slot-defaults function-slot-defaults
+           <simple-class>
+           <class>
+           <function-class>
+           <function>
+           <simple-function>
+           <generic-function>
+           <simple-generic-function>
+           <method>
+           <simple-method>
+           <slot>
+           <local-slot>
+           <list>
+           <cons>
+           <null>
+           <name>
+           <symbol>
+           <keyword>
+           object-size
+           class-size
+           lsd-size
+           gf-size
+           method-size
+           sd-size
+           name-size
+           function-size
+           sf-size
+           cons-size
+           class-slotz
+           sf-slots
+           gf-slots
+           method-slots
+           lsd-slots
+           sd-slots
+           object-slots
+           cons-slots
+           sf-direct-slots
+           name-slots
+           class-slot-defaults
+           lsd-slot-defaults
+           function-slot-defaults
+           sf-slot-defaults
+           gf-slot-defaults
+           cons-slot-defaults
+           method-slot-defaults
+           name-slot-defaults
+           function-slot-defaults
            sf-direct-slot-defaults
-           class-keywordz lsd-keywords gf-keywords method-keywords sd-keywords
-           object-keywords name-keywords cons-keywords
-           class-name class-instance-length class-direct-superclasses
-           class-direct-subclasses class-slots class-keywords
-           class-precedence-list class-abstract? converter class-code
-           function-name function-domain generic-function-method-class
-           simple-function-environment simple-function-code
+           class-keywordz
+           lsd-keywords
+           gf-keywords
+           method-keywords
+           sd-keywords
+           object-keywords
+           name-keywords
+           cons-keywords
+           class-name
+           class-instance-length
+           class-direct-superclasses
+           class-direct-subclasses
+           class-slots class-keywords
+           class-precedence-list
+           class-abstract?
+           converter class-code
+           function-name
+           function-domain
+           generic-function-method-class
+           simple-function-environment
+           simple-function-code
            generic-function-domain
-           generic-function-method-keywords generic-function-methods
+           generic-function-method-keywords
+           generic-function-methods
            generic-function-method-lookup-function
            generic-function-discriminating-function
            generic-function-method-cache
-           method-generic-function method-domain
-           method-function slot-reader slot-writer slot-keyword slot-name
-           slot-default slot-required? symbol-name keyword-name
-           ))
+           method-generic-function
+           method-domain
+           method-function
+           slot-reader
+           slot-writer
+           slot-keyword
+           slot-name
+           slot-default
+           slot-required?
+           symbol-name
+           keyword-name))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Shape of <class>
@@ -458,5 +515,5 @@
 ((setter primitive-class-of) <null> <simple-class>)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-class
 ;;;-----------------------------------------------------------------------------

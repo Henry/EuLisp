@@ -18,19 +18,34 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: root module of the compiler
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind
-;;; Description: root module of the compiler
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule eval
-  (syntax (_macros _i-aux0)
-   import (i-all i-args i-compile i-modify cg-interf i-rep)
-   export (main eval rep ?
-                dynamic-binding-ref dynamic-binding-set
-                dynamic-load-module as-dynamic-binding
-                module-loaded? as-C-module-name
-                dynamic-binding-ref1 dynamic-binding-set1 dynamic-load-module1
-                *redefine-imported-bindings*))
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           i-args
+           i-compile
+           i-modify
+           cg-interf
+           i-rep)
+   export (main
+           eval
+           rep ?
+           dynamic-binding-ref
+           dynamic-binding-set
+           dynamic-load-module
+           as-dynamic-binding
+           module-loaded?
+           as-C-module-name
+           dynamic-binding-ref1
+           dynamic-binding-set1
+           dynamic-load-module1
+           *redefine-imported-bindings*))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Main function to invoke the interpreter or compiler
@@ -78,5 +93,5 @@
       (ct-exit))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module eval
 ;;;-----------------------------------------------------------------------------

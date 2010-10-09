@@ -18,31 +18,67 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: stream basics
 ;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;; Description: stream basics
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule stream2
   (syntax (_macros)
-   import (telos lock condition convert dynamic stream1 string)
-   export (<stream> stream-lock stream-read-action stream-write-action
-                    stream-source stream-sink stream-mode
-                    stream? from-stream to-stream
-                    <buffered-stream> buffered-stream?
-                    <string-stream> string-stream? string-stream-string-list
-                    <file-stream> file-stream?
-                    <stream-control-block> control-block-buffer
-                    control-block-buffer-size control-block-buffer-pos
-                    control-block-buffer-cnt
-                    <file-control-block> control-block-file-name control-block-mode
-                    control-block-descriptor stream-control-block?
-                    file-control-block?
-                    stdin stdout stderr
-                    generic-print generic-write generic-read flush-buffer fill-buffer
-                    reconnect disconnect generic-connect
-                    open-file-streams *open-file-streams* *open-file-streams*-lock
-                    eos-default-value <stream-condition> <end-of-stream>
-                    end-of-stream))
+   import (telos
+           lock
+           condition
+           convert
+           dynamic
+           stream1
+           string)
+   export (<stream>
+           stream-lock
+           stream-read-action
+           stream-write-action
+           stream-source
+           stream-sink
+           stream-mode
+           stream?
+           from-stream
+           to-stream
+           <buffered-stream>
+           buffered-stream?
+           <string-stream>
+           string-stream?
+           string-stream-string-list
+           <file-stream>
+           file-stream?
+           <stream-control-block>
+           control-block-buffer
+           control-block-buffer-size
+           control-block-buffer-pos
+           control-block-buffer-cnt
+           <file-control-block>
+           control-block-file-name
+           control-block-mode
+           control-block-descriptor
+           stream-control-block?
+           file-control-block?
+           stdin
+           stdout
+           stderr
+           generic-print
+           generic-write
+           generic-read
+           flush-buffer
+           fill-buffer
+           reconnect
+           disconnect
+           generic-connect
+           open-file-streams
+           *open-file-streams*
+           *open-file-streams*-lock
+           eos-default-value
+           <stream-condition>
+           <end-of-stream>
+           end-of-stream))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Control block classes
@@ -240,5 +276,5 @@
 (defun open-file-streams () *open-file-streams*)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module stream2
 ;;;-----------------------------------------------------------------------------

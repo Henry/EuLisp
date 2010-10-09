@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: hash tables
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: hash tables
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #ifndef TABLE_H

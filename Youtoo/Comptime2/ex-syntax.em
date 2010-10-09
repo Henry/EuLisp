@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: expanding syntax import dirctives into syntax nodes
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: expanding syntax import dirctives into syntax nodes
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-syntax
@@ -118,73 +119,81 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install syntax-import expanders
 ;;;-----------------------------------------------------------------------------
-(install-syntax-import-expander 'only
-                                (lambda (x e)
-                                  (with-ct-handler "bad syntax only syntax" x
-                                                   (let ((module (find-syntax-module (caddr x))))
-                                                     (do1-list (lambda (name)
-                                                                 (set-syntax-binding (import-syntax-binding name module)))
-                                                               (cadr x))))))
+(install-syntax-import-expander
+ 'only
+ (lambda (x e)
+   (with-ct-handler
+    "bad syntax only syntax" x
+    (let ((module (find-syntax-module (caddr x))))
+      (do1-list (lambda (name)
+                  (set-syntax-binding (import-syntax-binding name module)))
+                (cadr x))))))
 
-(install-syntax-import-expander 'except
-                                (lambda (x e)
-                                  (with-ct-handler "bad syntax except syntax" x
-                                                   (let* ((module (find-syntax-module (caddr x)))
-                                                          (external-names
-                                                           (map1-list save-binding-local-name?
-                                                                      (access-table-values
-                                                                       (module-external-env? module))))
-                                                          (names (binary- external-names (cadr x))))
-                                                     (do1-list (lambda (name)
-                                                                 (set-syntax-binding (import-syntax-binding name module)))
-                                                               names)))))
+(install-syntax-import-expander
+ 'except
+ (lambda (x e)
+   (with-ct-handler
+    "bad syntax except syntax" x
+    (let* ((module (find-syntax-module (caddr x)))
+           (external-names
+            (map1-list save-binding-local-name?
+                       (access-table-values
+                        (module-external-env? module))))
+           (names (binary- external-names (cadr x))))
+      (do1-list (lambda (name)
+                  (set-syntax-binding (import-syntax-binding name module)))
+                names)))))
 
-(install-syntax-import-expander 'rename
-                                (lambda (x e)
-                                  (with-ct-handler "bad syntax rename syntax" x
-                                                   (let* ((module (find-syntax-module (caddr x)))
-                                                          (env (module-external-env? module))
-                                                          (external-names
-                                                           (map1-list save-binding-local-name?
-                                                                      (access-table-values env)))
-                                                          (other-names
-                                                           (binary- external-names (map1-list car (cadr x)))))
-                                                     (do1-list (lambda (name)
-                                                                 (set-syntax-binding (import-syntax-binding name module)))
-                                                               other-names)
-                                                     (do1-list (lambda (name-pair)
-                                                                 (let* ((name (car name-pair))
-                                                                        (binding (import-syntax-binding name module))
-                                                                        (new-binding (clone-node binding)))
-                                                                   (binding-local-name! new-binding (cadr name-pair))
-                                                                   (set-syntax-binding new-binding)))
-                                                               (cadr x))))))
+(install-syntax-import-expander
+ 'rename
+ (lambda (x e)
+   (with-ct-handler
+    "bad syntax rename syntax" x
+    (let* ((module (find-syntax-module (caddr x)))
+           (env (module-external-env? module))
+           (external-names
+            (map1-list save-binding-local-name?
+                       (access-table-values env)))
+           (other-names
+            (binary- external-names (map1-list car (cadr x)))))
+      (do1-list (lambda (name)
+                  (set-syntax-binding (import-syntax-binding name module)))
+                other-names)
+      (do1-list (lambda (name-pair)
+                  (let* ((name (car name-pair))
+                         (binding (import-syntax-binding name module))
+                         (new-binding (clone-node binding)))
+                    (binding-local-name! new-binding (cadr name-pair))
+                    (set-syntax-binding new-binding)))
+                (cadr x))))))
 
 (defun make-prefix (pfx name)
   (convert (concatenate (symbol-name pfx) (symbol-name name)) <symbol>))
 
-(install-syntax-import-expander 'prefix
-                                (lambda (x e)
-                                  (with-ct-handler "bad syntax prefix syntax" x
-                                                   (let* ((module (find-syntax-module (cadddr x)))
-                                                          (env (module-external-env? module))
-                                                          (prefix (cadr x))
-                                                          (external-names
-                                                           (map1-list save-binding-local-name?
-                                                                      (access-table-values env)))
-                                                          (other-names
-                                                           (binary- external-names (caddr x))))
-                                                     (do1-list (lambda (name)
-                                                                 (set-syntax-binding (import-syntax-binding name module)))
-                                                               other-names)
-                                                     (do1-list (lambda (external-name)
-                                                                 (let* ((binding (import-syntax-binding external-name module))
-                                                                        (new-binding (clone-node binding)))
-                                                                   (binding-local-name! new-binding
-                                                                                        (make-prefix prefix external-name))
-                                                                   (set-syntax-binding new-binding)))
-                                                               (caddr x))))))
+(install-syntax-import-expander
+ 'prefix
+ (lambda (x e)
+   (with-ct-handler
+    "bad syntax prefix syntax" x
+    (let* ((module (find-syntax-module (cadddr x)))
+           (env (module-external-env? module))
+           (prefix (cadr x))
+           (external-names
+            (map1-list save-binding-local-name?
+                       (access-table-values env)))
+           (other-names
+            (binary- external-names (caddr x))))
+      (do1-list (lambda (name)
+                  (set-syntax-binding (import-syntax-binding name module)))
+                other-names)
+      (do1-list (lambda (external-name)
+                  (let* ((binding (import-syntax-binding external-name module))
+                         (new-binding (clone-node binding)))
+                    (binding-local-name! new-binding
+                                         (make-prefix prefix external-name))
+                    (set-syntax-binding new-binding)))
+                (caddr x))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module ex-syntax
 ;;;-----------------------------------------------------------------------------

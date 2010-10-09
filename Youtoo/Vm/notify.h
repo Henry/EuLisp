@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: notification, errors, warnings
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: notification, errors, warnings
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef NOTIFY_H
 #define NOTIFY_H

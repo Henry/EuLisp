@@ -18,18 +18,46 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: elementary functions
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: elementary functions
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule math
   (syntax (_telos0)
-   import (telos double)
-   export (pi acos asin atan atan2 cos sin tan cosh sinh tanh
-              exp log log10 pow sqrt
-              double-acos double-asin double-atan double-atan2 double-cos
-              double-sin double-tan double-cosh double-sinh double-tanh
-              double-exp double-log double-log10 double-pow double-sqrt))
+   import (telos
+           double)
+   export (pi
+           acos
+           asin
+           atan
+           atan2
+           cos
+           sin
+           tan
+           cosh
+           sinh
+           tanh
+           exp
+           log
+           log10
+           pow
+           sqrt
+           double-acos
+           double-asin
+           double-atan
+           double-atan2
+           double-cos
+           double-sin
+           double-tan
+           double-cosh
+           double-sinh
+           double-tanh
+           double-exp
+           double-log
+           double-log10
+           double-pow double-sqrt))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Pi
@@ -94,5 +122,5 @@
 (defmethod sqrt ((x <double>)) (double-sqrt x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module math
 ;;;-----------------------------------------------------------------------------

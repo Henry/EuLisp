@@ -18,10 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Tables
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: tables; fixed comparator and hash-function;
-;;;    assume non-relocating garbage collector!
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    tables; fixed comparator and hash-function;
+;;    assume non-relocating garbage collector!
 ;;;-----------------------------------------------------------------------------
 
 (defmodule table1
@@ -159,5 +162,5 @@
   (error <condition> (fmt "keys of table ~a not accessable" tab)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module table
+)  ;; End of module table1
 ;;;-----------------------------------------------------------------------------

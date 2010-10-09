@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Access tables
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind
-;;; Description: Access tables
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule aux-table
   (syntax (_macros)
    import (level1)
@@ -103,5 +105,5 @@
     (table-size tab)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module aux-table
 ;;;-----------------------------------------------------------------------------

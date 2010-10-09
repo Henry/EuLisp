@@ -18,13 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: let/cc based on downward call/cc
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: let/cc based on downward call/cc
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule let-cc
   (syntax (_macros)
-   import (telos thread dynamic)
+   import (telos
+           thread
+           dynamic)
    export (call/ep))
 
 ;;;-----------------------------------------------------------------------------
@@ -62,5 +66,5 @@
       (if res res ()))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module let-cc
 ;;;-----------------------------------------------------------------------------

@@ -18,13 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: defining all classes of the abstract syntax tree
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: defining all classes of the abstract syntax tree
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule sx-obj2
-  (syntax (_macros _sx-obj0)
-   import (i-level1 sx-obj1)
+  (syntax (_macros
+           _sx-obj0)
+   import (i-level1
+           sx-obj1)
    ;; generated accessors and predicates are automatiacally exported
    )
 
@@ -46,5 +50,5 @@
 (def-syntax-obj <literal-const> (<const>) ())
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module sx-obj2
 ;;;-----------------------------------------------------------------------------

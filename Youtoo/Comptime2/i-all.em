@@ -18,14 +18,22 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: binds together the almost-everywhere-used modules
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: binds together the almost-everywhere-used modules
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-all
-  (import (i-level1 i-param i-error i-notify)
-   expose (i-level1 i-param i-error i-notify))
+  (import (i-level1
+           i-param
+           i-error
+           i-notify)
+   expose (i-level1
+           i-param
+           i-error
+           i-notify))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-all
 ;;;-----------------------------------------------------------------------------

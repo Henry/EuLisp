@@ -18,16 +18,32 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: sockets
 ;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;; Description: sockets
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule socket
   (syntax (_macros)
-   import (telos lock condition convert dynamic stream1 stream2 string)
-   export (<socket> socket? socket-port socket-host socket-descriptor
-                    socket-queue-size
-                    <connection> connection-host connection-port connection?))
+   import (telos
+           lock
+           condition
+           convert
+           dynamic
+           stream1
+           stream2
+           string)
+   export (<socket>
+           socket?
+           socket-port
+           socket-host
+           socket-descriptor
+           socket-queue-size
+           <connection>
+           connection-host
+           connection-port
+           connection?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Sockets
@@ -67,5 +83,5 @@
   predicate: connection?)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module socket
 ;;;-----------------------------------------------------------------------------

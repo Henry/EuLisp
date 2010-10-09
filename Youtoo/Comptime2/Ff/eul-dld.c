@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: dynamic linker
 ///  Library: eval, youtoo
 ///  Authors: Andreas Kind
-///  Description: dynamic linker
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"

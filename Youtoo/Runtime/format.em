@@ -1,7 +1,8 @@
 ;;; ---                         EuLisp System 'Youtoo'
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;;  Description: formatted output (a first attempt!)
+;;;  Maintainer: Henry G. Weller
+;;;  Title: formatted output (a first attempt!)
 
 (defmodule format
   (syntax (_macros)

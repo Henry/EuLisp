@@ -18,14 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: compile-time notifications and warnings
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: compile-time notifications and warnings
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-notify
   (syntax (_macros)
-   import (i-level1 i-param)
-   export (notify0 notify ct-warning ct-serious-warning))
+   import (i-level1
+           i-param)
+   export (notify0
+           notify
+           ct-warning
+           ct-serious-warning))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  Notification ...
@@ -81,5 +87,5 @@
             ct-error-value: (dynamic *actual-module*))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-notify
 ;;;-----------------------------------------------------------------------------

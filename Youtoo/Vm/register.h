@@ -18,11 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: global registers
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: global registers
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef REGISTER_H
 #define REGISTER_H
 

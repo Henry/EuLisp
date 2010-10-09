@@ -1,4 +1,3 @@
-
 /// Copyright 1997 A. Kind & University of Bath
 /// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -19,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: initialization of the bytecode interpreter
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: initialization of the bytecode interpreter
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "stdc.h"

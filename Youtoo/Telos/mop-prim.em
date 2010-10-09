@@ -18,13 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: EuLisp's primitive-* functions
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: EuLisp's primitive-* functions
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-prim
   (import (boot)
-   export (primitive-allocate primitive-class-of primitive-ref))
+   export (primitive-allocate
+           primitive-class-of
+           primitive-ref))
 
 ;;;-----------------------------------------------------------------------------
 (defun primitive-allocate (class size)
@@ -46,5 +50,5 @@
   ((opencoded-lambda (o i v) (set-primitive-ref)) obj index value))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-prim
 ;;;-----------------------------------------------------------------------------

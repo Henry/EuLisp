@@ -18,11 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: stacks
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: stacks
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef STACK_H
 #define STACK_H
 

@@ -18,25 +18,74 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: boot module
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: boot module
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule boot1
   (syntax (_boot0)
-   export (car cdr cons list
-               string? character? symbol? cons? int? int? list? atom? null?
-               simple-function? simple-generic-function? int-zero? object?
-               + - * / % mod < = inc dec
-               eq eql equal
-               format write-object sprin prin sprint print
-               make-symbol make-keyword
-               make-vector make-vector1 vector-size vector-ref
-               member1-string string-ref string-size substring tailstring
-               character-as-int int-as-character
-               else
-               stdout stderr setter
-               *argc* *argv* getenv system exit cpu-time *absent*))
+   export (car
+           cdr
+           cons
+           list
+           string?
+           character?
+           symbol?
+           cons?
+           int?
+           int?
+           list?
+           atom?
+           null?
+           simple-function?
+           simple-generic-function?
+           int-zero?
+           object?
+           +
+           -
+           *
+           /
+           %
+           mod
+           <
+           =
+           inc
+           dec
+           eq
+           eql
+           equal
+           format
+           write-object
+           sprin
+           prin
+           sprint
+           print
+           make-symbol
+           make-keyword
+           make-vector
+           make-vector1
+           vector-size
+           vector-ref
+           member1-string
+           string-ref
+           string-size
+           substring
+           tailstring
+           character-as-int
+           int-as-character
+           else
+           stdout
+           stderr
+           setter
+           *argc*
+           *argv*
+           getenv
+           system
+           exit
+           cpu-time
+           *absent*))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Setter
@@ -279,5 +328,5 @@
 (defun exit x ((opencoded-lambda (x) (exit)) x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module boot1
 ;;;-----------------------------------------------------------------------------

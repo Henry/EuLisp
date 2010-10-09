@@ -18,12 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: compiler parameters
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: compiler parameters
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-param
-  (syntax (_macros _i-aux0)
+  (syntax (_macros
+           _i-aux0)
    import (i-level1)
    export (*version*
            *ostype*
@@ -246,5 +249,5 @@
 (defgeneric get-named-encl-lambda (x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-param
 ;;;-----------------------------------------------------------------------------

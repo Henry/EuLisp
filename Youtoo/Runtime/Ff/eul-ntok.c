@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: tokenizer
 ///  Library: level1, eval, youtoo
 ///  Authors: Julian Padget, Andreas Kind
-///  Description: tokenizer
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"

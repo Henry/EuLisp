@@ -18,16 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: test
+;;; Title: Test executable with linked Telos library
 ;;;  Authors: Andreas Kind
-;;; Description: Test executable with linked Telos library
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo test3 -l telos
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test3
   (import (telos))
 (primitive-print "Testing module telos ... OK.")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test3
 ;;;-----------------------------------------------------------------------------

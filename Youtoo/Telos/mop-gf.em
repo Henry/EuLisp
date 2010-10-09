@@ -18,17 +18,29 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: handling generic functions
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: handling generic functions
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-gf
-  (syntax (_boot0 _mop-gf0)
-   import (boot mop-prim mop-class mop-inspect)
-   export (gf-reset-cache the-method-lookup-function
-                          initialize finalize allocate make
-                          error-no-applicable-methods sig=
-                          discriminating-domain make-generic-function))
+  (syntax (_boot0
+           _mop-gf0)
+   import (boot
+           mop-prim
+           mop-class
+           mop-inspect)
+   export (gf-reset-cache
+           the-method-lookup-function
+           initialize
+           finalize
+           allocate
+           make
+           error-no-applicable-methods
+           sig=
+           discriminating-domain
+           make-generic-function))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Initialize, allocate and make
@@ -223,5 +235,5 @@
                     (format 2 "\n")))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-gf
 ;;;-----------------------------------------------------------------------------

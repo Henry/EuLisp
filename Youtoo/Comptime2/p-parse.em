@@ -18,18 +18,25 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Parse module (defined in i-param)
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind
-;;; Description: Parse module (defined in i-param)
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    ME: Module expander (import, top-lexical bindings)
+;;    SE: Syntax expander (macros)
+;;    EE: Export expander (export)
+;;    XE: Expression expander (expressions)
 ;;;-----------------------------------------------------------------------------
-;;;  ME: Module expander (import, top-lexical bindings)
-;;;  SE: Syntax expander (macros)
-;;;  EE: Export expander (export)
-;;;  XE: Expression expander (expressions)
-;;;-----------------------------------------------------------------------------
+
 (defmodule p-parse
   (syntax (_macros)
-   import (i-all p-env ex-module ex-body sx-write sx-node)
+   import (i-all
+           p-env
+           ex-module
+           ex-body
+           sx-write
+           sx-node)
    export (interactive-parse))
 
 (defmethod parse-module (sexprs)
@@ -58,5 +65,5 @@
     module))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module p-parse
 ;;;-----------------------------------------------------------------------------

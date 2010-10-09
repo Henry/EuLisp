@@ -1,4 +1,3 @@
-
 /// Copyright 1997 A. Kind & University of Bath
 /// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -19,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: list processing
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: list processing
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "stdc.h"
@@ -88,3 +88,5 @@ void eul_initialize_cons()
     define_printer(CONS_TAG, fprint_cons);
 }
 #endif // WITH_CONS_TAG
+
+///-----------------------------------------------------------------------------

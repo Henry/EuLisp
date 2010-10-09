@@ -1,4 +1,3 @@
-
 /// Copyright 1997 A. Kind & University of Bath
 /// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -19,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: hash tables
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind, Pete Broadbery
-///  Description: hash tables
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "stdc.h"
@@ -37,7 +37,6 @@
 #include "operator.h"
 #include "fpi.h"
 #include "table.h"
-
 
 ///-----------------------------------------------------------------------------
 /// Magic numbers from CACM 6/90; extra 1 to avoid arith in hash fn
@@ -289,3 +288,6 @@ LispRef eul_fast_table_set(LispRef tab, char *key, LispRef value)
         }
     }
 }
+
+
+///-----------------------------------------------------------------------------

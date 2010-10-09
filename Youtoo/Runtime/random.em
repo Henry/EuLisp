@@ -1,14 +1,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'youtoo'
 ;;;-----------------------------------------------------------------------------
+;;; Title: Pseudo-random number generator
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind
-;;; Description: Pseudo-random number generator
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule random
   (syntax (_telos0)
    import (telos)
-   export (random *random-max* random-seed random-true-nil))
+   export (random
+           *random-max*
+           random-seed
+           random-true-nil))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Set *random-max*
@@ -45,5 +50,5 @@
   (int-zero? (random 2)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module random
 ;;;-----------------------------------------------------------------------------

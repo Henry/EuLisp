@@ -18,13 +18,16 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: side effect analyses
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: side effect analyses
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule an-side
   (syntax (_macros)
-   import (i-all sx-obj)
+   import (i-all
+           sx-obj)
    export (compute-captured-vars))
 
 ;;;-----------------------------------------------------------------------------
@@ -49,5 +52,5 @@
               vars)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module an-side
 ;;;-----------------------------------------------------------------------------

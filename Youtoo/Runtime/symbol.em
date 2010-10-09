@@ -18,15 +18,32 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: symbols
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: symbols
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule symbol
   (syntax (_telos0)
-   import (telos convert compare collect character string table fpi)
-   export (<symbol> <keyword> <name> symbol? keyword? name
-                    gensym symbol-name keyword-name symbol-exists?))
+   import (telos
+           convert
+           compare
+           collect
+           character
+           string
+           table
+           fpi)
+   export (<symbol>
+           <keyword>
+           <name>
+           symbol?
+           keyword?
+           name
+           gensym
+           symbol-name
+           keyword-name
+           symbol-exists?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Symbol and keyword initialization
@@ -96,5 +113,5 @@
   (make <symbol> name: str))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module symbol
 ;;;-----------------------------------------------------------------------------

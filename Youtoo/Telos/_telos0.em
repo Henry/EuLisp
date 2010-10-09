@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: telos macros
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: telos macros
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule _telos0
   (expose (_boot0
            _mop-gf0
@@ -29,5 +31,5 @@
            _mop-defcl0))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module telos0
 ;;;-----------------------------------------------------------------------------

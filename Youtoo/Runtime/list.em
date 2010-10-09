@@ -18,26 +18,83 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: list processing
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: list processing
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule list
   (syntax (_telos0)
-   import (telos convert compare collect copy number fpi)
-   export (<null> <cons> <list>
-                  accumulate-list accumulate1-list
-                  null? cons? list? atom? cons list list-size
-                  list-ref init-list-ref assoc-list-ref member-alist list-drop
-                  car cdr
-                  caar cadr cdar cddr
-                  caddr cdadr cddar caadr cdaar cadar caaar cdddr
-                  caaaar caaadr caadar caaddr cadaar cadadr caddar cadddr
-                  cdaaar cdaadr cdadar cdaddr cddaar cddadr cdddar cddddr
-                  do1-list map1-list do2-list map2-list select-list
-                  reverse-list member-list member1-list anyp1-list find1-list
-                  do1-list-last-special map1-list-last-special
-                  proper-list? as-proper-list slice-list))
+   import (telos
+           convert
+           compare
+           collect
+           copy
+           number
+           fpi)
+   export (<null>
+           <cons>
+           <list>
+           accumulate-list
+           accumulate1-list
+           null?
+           cons?
+           list?
+           atom?
+           cons
+           list
+           list-size
+           list-ref
+           init-list-ref
+           assoc-list-ref
+           member-alist
+           list-drop
+           car
+           cdr
+           caar
+           cadr
+           cdar
+           cddr
+           caddr
+           cdadr
+           cddar
+           caadr
+           cdaar
+           cadar
+           caaar
+           cdddr
+           caaaar
+           caaadr
+           caadar
+           caaddr
+           cadaar
+           cadadr
+           caddar
+           cadddr
+           cdaaar
+           cdaadr
+           cdadar
+           cdaddr
+           cddaar
+           cddadr
+           cdddar
+           cddddr
+           do1-list
+           map1-list
+           do2-list
+           map2-list
+           select-list
+           reverse-list
+           member-list
+           member1-list
+           anyp1-list
+           find1-list
+           do1-list-last-special
+           map1-list-last-special
+           proper-list?
+           as-proper-list
+           slice-list))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes: <list>, <cons> and <null>
@@ -555,5 +612,5 @@
     res))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module list
 ;;;-----------------------------------------------------------------------------

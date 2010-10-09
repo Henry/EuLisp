@@ -18,15 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: foreign function interface
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: foreign function interface
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-ffi
   (syntax (_macros)
    import (i-all)
-   export (arg-converter-index res-converter-index
-                               arg-converter-as-C-type res-converter-as-C-type))
+   export (arg-converter-index
+           res-converter-index
+           arg-converter-as-C-type
+           res-converter-as-C-type))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Argument converters
@@ -64,5 +68,5 @@
   (vector-ref *result-converter-C-types* i))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-ffi
 ;;;-----------------------------------------------------------------------------

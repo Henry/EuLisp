@@ -19,22 +19,48 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: reader
 ;;; Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;; Description: reader
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule read
   (syntax (_macros)
-   import (telos condition convert convert1 vector string lock dynamic
-                 table stream format)
-   export (<read-error> lispin
-                        read read-line read-char read-s-expression read-token
-                        sread sread-s-expression parse
-                        list-start list-stop dot vector-start vector-stop special-tokens
-                        quote-mark quasiquote-mark unquote-mark unquote-splicing-mark
-                        eos *dispatch-macro-character-table* set-dispatch-macro-character
-                        )
-   )
+   import (telos
+           condition
+           convert
+           convert1
+           vector
+           string
+           lock
+           dynamic
+           table
+           stream
+           format)
+   export (<read-error>
+           lispin
+           read
+           read-line
+           read-char
+           read-s-expression
+           read-token
+           sread
+           sread-s-expression
+           parse
+           list-start
+           list-stop
+           dot
+           vector-start
+           vector-stop
+           special-tokens
+           quote-mark
+           quasiquote-mark
+           unquote-mark
+           unquote-splicing-mark
+           eos
+           *dispatch-macro-character-table*
+           set-dispatch-macro-character))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lispin
@@ -277,7 +303,7 @@
                eos))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module read
 ;;;-----------------------------------------------------------------------------
 
 ;;;-----------------------------------------------------------------------------

@@ -18,20 +18,43 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: vectors
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: vectors
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule vector
   (syntax (_telos0)
-   import (telos convert copy collect compare fpi list callback)
-   export (<vector> vector? make-vector vector-size
-                    maximum-vector-size
-                    vector-ref subvector vector-append vector-empty?
-                    do1-vector do2-vector map1-vector map2-vector
-                    anyp1-vector all1-vector?
-                    reverse-vector member1-vector permute
-                    accumulate-vector accumulate1-vector reverse-vector!))
+   import (telos
+           convert
+           copy
+           collect
+           compare
+           fpi
+           list
+           callback)
+   export (<vector>
+           vector?
+           make-vector
+           vector-size
+           maximum-vector-size
+           vector-ref
+           subvector
+           vector-append
+           vector-empty?
+           do1-vector
+           do2-vector
+           map1-vector
+           map2-vector
+           anyp1-vector
+           all1-vector?
+           reverse-vector
+           member1-vector
+           permute
+           accumulate-vector
+           accumulate1-vector
+           reverse-vector!))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes: <vector>
@@ -409,5 +432,5 @@
 (defconstant maximum-vector-size 536870911)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module vector
 ;;;-----------------------------------------------------------------------------

@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: collections
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: collections
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule collect
@@ -172,5 +173,5 @@
 (defgeneric slice (c s e))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module collect
 ;;;-----------------------------------------------------------------------------

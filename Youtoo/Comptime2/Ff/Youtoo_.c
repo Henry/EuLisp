@@ -18,7 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Description: C hook file of EuLisp module youtoo
+///  Title: C hook file of EuLisp module youtoo
+///  Library: eval, youtoo
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include <eulisp.h>

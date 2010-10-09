@@ -18,17 +18,29 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: characters
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: characters
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule character
   (syntax (_telos0)
-   import (telos compare collect string)
-   export (<character> character? uppercase? lowercase?
-                       alphap alnump digit? graph?
-                       as-lowercase as-uppercase
-                       character-as-string))
+   import (telos
+           compare
+           collect
+           string)
+   export (<character>
+           character?
+           uppercase?
+           lowercase?
+           alphap
+           alnump
+           digit?
+           graph?
+           as-lowercase
+           as-uppercase
+           character-as-string))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <character>
@@ -81,5 +93,5 @@
   (make <string> size: 1 fill-value: x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module character
 ;;;-----------------------------------------------------------------------------

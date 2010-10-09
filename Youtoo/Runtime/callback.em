@@ -18,16 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: callback initialization
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: callback initialization
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule callback
   (syntax (_telos0)
-   import (telos condition)
-   export (first-arithmetic-cb install-callback *callback-vector*
-                               CB-sum-overflow CB-difference-underflow
-                               CB-product-overflow CB-read-overflow))
+   import (telos
+           condition)
+   export (first-arithmetic-cb
+           install-callback
+           *callback-vector*
+           CB-sum-overflow
+           CB-difference-underflow
+           CB-product-overflow
+           CB-read-overflow))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Callback vector
@@ -121,5 +128,5 @@
                            arguments: (list str))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module callback
 ;;;-----------------------------------------------------------------------------

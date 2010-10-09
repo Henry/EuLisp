@@ -18,14 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: conversion
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: conversion
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule convert
   (syntax (_telos0)
-   import (telos condition)
-   export (converter convert))
+   import (telos
+           condition)
+   export (converter
+           convert))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Converter function
@@ -33,5 +37,5 @@
 (defun convert (x cl) ((converter cl) x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module convert
 ;;;-----------------------------------------------------------------------------

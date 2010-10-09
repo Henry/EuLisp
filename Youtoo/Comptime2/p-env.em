@@ -18,21 +18,33 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: access to module bindings
 ;;;  Library: eval (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind
-;;; Description: access to module bindings
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule p-env
   (syntax (_macros)
-   import (i-all sx-obj)
-   export (get-lexical-binding set-lexical-binding
-                               get-external-binding set-external-binding
-                               get-syntax-binding set-syntax-binding ;set-interactive-macro-binding
-                               get-local-static-binding add-local-static-bindings
-                               get-module get-syntax-module
-                               new-module new-syntax-module
-                               find-module find-syntax-module
-                               loaded-modules loaded-syntax-modules))
+   import (i-all
+           sx-obj)
+   export (get-lexical-binding
+           set-lexical-binding
+           get-external-binding
+           set-external-binding
+           get-syntax-binding
+           set-syntax-binding
+           ;set-interactive-macro-binding
+           get-local-static-binding
+           add-local-static-bindings
+           get-module
+           get-syntax-module
+           new-module
+           new-syntax-module
+           find-module
+           find-syntax-module
+           loaded-modules
+           loaded-syntax-modules))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lexical environment
@@ -310,5 +322,5 @@
     (append new-entries env)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module p-env
 ;;;-----------------------------------------------------------------------------

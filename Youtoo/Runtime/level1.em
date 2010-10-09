@@ -20,7 +20,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: Programming Language EuLisp, Level-1
+;;;  Maintainer: Henry G. Weller
+;;; Title: Programming Language EuLisp, Level-1
 ;;;  Attention: Update Comptime2/cg-dld.em if level1 modules change!
 ;;;-----------------------------------------------------------------------------
 (defmodule level1

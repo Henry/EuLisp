@@ -18,22 +18,35 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Accessors
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: accessors
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-access
-  (syntax (_boot0 _mop-gf0 _mop-meth0)
-   import (boot mop-prim mop-key mop-class mop-inspect mop-gf
-                mop-meth mop-defcl)
+  (syntax (_boot0
+           _mop-gf0
+           _mop-meth0)
+   import (boot
+           mop-prim
+           mop-key
+           mop-class
+           mop-inspect
+           mop-gf
+           mop-meth
+           mop-defcl)
    export (compute-primitive-reader-using-slot
            compute-primitive-writer-using-slot
            compute-primitive-reader-using-class
            compute-primitive-writer-using-class
            compute-and-ensure-slot-accessors
-           compute-slot-reader compute-slot-writer
-           ensure-slot-reader ensure-slot-writer
-           find-slot-names spprint pprint))
+           compute-slot-reader
+           compute-slot-writer
+           ensure-slot-reader
+           ensure-slot-writer
+           find-slot-names
+           spprint pprint))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Compute-and-ensure-slot-accessors
@@ -223,5 +236,5 @@
   (spprint stdout x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-access
 ;;;-----------------------------------------------------------------------------

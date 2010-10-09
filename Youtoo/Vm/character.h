@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: characters
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: characters
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef CHARACTER_H
 #define CHARACTER_H

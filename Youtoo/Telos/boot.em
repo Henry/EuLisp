@@ -18,22 +18,46 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: boot module
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: boot module
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule boot
   (syntax (_boot0)
    import (boot1)
    expose (boot1)
-   export (append append! list-ref list-size
-                  map1-list do1-list member-list member1-list
-                  anyp1-list anyp2-list mapcan init-list-ref assoc-list-ref
-                  reverse-list sort-list list-remove list-remove-duplicates
-                  apply error *error* warning *warning*
-                  error *error*
-                  backtrace *backtrace-nframes* stack-values *stack-nvalues*
-                  getchar listify-env-string))
+   export (append
+           append!
+           list-ref
+           list-size
+           map1-list
+           do1-list
+           member-list
+           member1-list
+           anyp1-list
+           anyp2-list
+           mapcan
+           init-list-ref
+           assoc-list-ref
+           reverse-list
+           sort-list
+           list-remove
+           list-remove-duplicates
+           apply
+           error
+           *error*
+           warning
+           *warning*
+           error
+           *error*
+           backtrace
+           *backtrace-nframes*
+           stack-values
+           *stack-nvalues*
+           getchar
+           listify-env-string))
 
 ;;;-----------------------------------------------------------------------------
 ;;; List access
@@ -331,5 +355,5 @@
   (show-stack-values *skip-nvalues*))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module boot
 ;;;-----------------------------------------------------------------------------

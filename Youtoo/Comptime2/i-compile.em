@@ -18,16 +18,34 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: compiling/linking
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: compiling/linking
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-compile
-  (syntax (_macros _i-aux0)
-   import (i-all i-modify p-read p-env p-parse sx-obj sx-write
-                 ex-module ex-body cg-gen cg-asm cg-dld cg-interf cg-link
-                 cg-exec)
-   export (compile interactive-compile link check-stop))
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           i-modify
+           p-read
+           p-env
+           p-parse
+           sx-obj
+           sx-write
+           ex-module
+           ex-body
+           cg-gen
+           cg-asm
+           cg-dld
+           cg-interf
+           cg-link
+           cg-exec)
+   export (compile
+           interactive-compile
+           link
+           check-stop))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Compile (read, parse, encode, assemble, write C-module and interface
@@ -189,5 +207,5 @@
          (ct-exit))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-compile
 ;;;-----------------------------------------------------------------------------

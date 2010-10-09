@@ -18,14 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: class initialization
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: class initialization
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-init
   (syntax (_boot0)
-   import (boot mop-prim mop-class)
-   export (init-class compute-class-codes))
+   import (boot
+           mop-prim
+           mop-class)
+   export (init-class
+           compute-class-codes))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Initialize classes
@@ -197,5 +202,5 @@
 (compute-class-codes)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-init
 ;;;-----------------------------------------------------------------------------

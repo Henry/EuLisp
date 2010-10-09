@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: initialization of the bytecode interpreter
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: initialization of the bytecode interpreter
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #ifndef INIT_H

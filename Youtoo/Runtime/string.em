@@ -18,18 +18,37 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: string processing
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: string processing
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule string
   (syntax (_telos0)
-   import (telos convert copy collect compare fpi)
+   import (telos
+           convert
+           copy
+           collect
+           compare
+           fpi)
    export (<character-sequence>
-           <string> string? string-data string-size string-ref
-           substring tailstring string-compare string-equal string-append
-           string-as-int string-empty? member1-string
-           do1-string map1-string listify-string
+           <string>
+           string?
+           string-data
+           string-size
+           string-ref
+           substring
+           tailstring
+           string-compare
+           string-equal
+           string-append
+           string-as-int
+           string-empty?
+           member1-string
+           do1-string
+           map1-string
+           listify-string
            eul_list_as_eul_string))
 
 ;;;-----------------------------------------------------------------------------
@@ -280,5 +299,5 @@
        (loop str ())))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module string
 ;;;-----------------------------------------------------------------------------

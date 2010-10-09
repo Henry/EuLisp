@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: global variables
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: global variables
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #ifndef SHARED_MEM_H

@@ -18,13 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: non-preemptive threads
 ;;;  Library: level1
 ;;;  Authors: Keith Playford, Andreas Kind
-;;; Description: non-preemptive threads
-;;;    Foreign thread modules need to set the default thread class variable
-;;;    <current-thread> (e.g. to <posix-thread>) and reset the following
-;;;    functions:
-;;;        current-thread current-thread-queue thread-suspend thread-reschedule
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    Foreign thread modules need to set the default thread class variable
+;;    <current-thread> (e.g. to <posix-thread>) and reset the following
+;;    functions:
+;;        current-thread current-thread-queue thread-suspend thread-reschedule
 ;;;-----------------------------------------------------------------------------
 
 (defmodule thread
@@ -32,17 +34,36 @@
    import (telos
            event)
    export (<current-thread>
-           <thread> thread? <simple-thread> simple-thread?
-           thread? current-thread current-thread-queue thread-state
-           thread-continuation thread-returned? thread-return-value
-           thread-reschedule thread-suspend
-           thread-block thread-unblock
-           thread-start thread-value tconc
-           thread-dynamic-variables thread-error-handlers
-           <state> state-value-stack state-value-stack-size
-           state-context-stack state-context-stack-size
-           fill-thread-state restore-thread-state
-           fill-simple-state restore-simple-state call1/cc))
+           <thread>
+           thread?
+           <simple-thread>
+           simple-thread?
+           thread?
+           current-thread
+           current-thread-queue
+           thread-state
+           thread-continuation
+           thread-returned?
+           thread-return-value
+           thread-reschedule
+           thread-suspend
+           thread-block
+           thread-unblock
+           thread-start
+           thread-value
+           tconc
+           thread-dynamic-variables
+           thread-error-handlers
+           <state>
+           state-value-stack
+           state-value-stack-size
+           state-context-stack
+           state-context-stack-size
+           fill-thread-state
+           restore-thread-state
+           fill-simple-state
+           restore-simple-state
+           call1/cc))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Classes <thread> and <simple-thread>
@@ -265,5 +286,5 @@
     (if res res ())))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module thread
 ;;;-----------------------------------------------------------------------------

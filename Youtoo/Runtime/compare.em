@@ -18,14 +18,28 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: comparison
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: comparison
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule compare
   (syntax (_telos0)
-   import (telos callback)
-   export (eq eql = != binary= < <= binary< > >= max min))
+   import (telos
+           callback)
+   export (eq
+           eql
+           =
+           !=
+           binary=
+           <
+           <=
+           binary<
+           >
+           >=
+           max
+           min))
 
 ;;;-----------------------------------------------------------------------------
 ;;; = and binary=
@@ -114,5 +128,5 @@
    (loop args arg)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module compare
 ;;;-----------------------------------------------------------------------------

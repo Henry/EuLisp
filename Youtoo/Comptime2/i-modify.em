@@ -18,16 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: predicates on files, modules and libraries
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: predicates on files, modules and libraries
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-modify
-  (syntax (_macros _i-aux0)
+  (syntax (_macros
+           _i-aux0)
    import (i-all)
-   export (file-newer? file-exist? external-file-exist?
-                       module-modified? C-module-modified? absolute-file-name
-                       library-newer?))
+   export (file-newer?
+           file-exist?
+           external-file-exist?
+           module-modified?
+           C-module-modified?
+           absolute-file-name
+           library-newer?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; File predicates
@@ -95,5 +102,5 @@
       (ct-error "" "file ~a does not exist" file-name))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-modify
 ;;;-----------------------------------------------------------------------------

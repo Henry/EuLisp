@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: Low-level read with readline support
 ///  Library: level1
 ///  Authors: Julian Padget, Andreas Kind
-///  Description: Low-level read with readline support
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #include "eul-ext.h"
 

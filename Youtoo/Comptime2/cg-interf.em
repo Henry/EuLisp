@@ -18,21 +18,35 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: reading/writing interface files
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: reading/writing interface files
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-interf
-  (syntax (_macros _i-aux0)
-   import (i-all i-modify sx-obj sx-node p-env)
-   export (load-module-interface load-library-interfaces
-                                 find-imported-module find-imported-syntax-module
-                                 write-interface-file create-library-interface-file
-                                 make-interface-binding new-literal
-                                 get-full-import-names get-library-names
-                                 get-module-load-dir
-                                 link-string fff-link-string ffl-link-string
-                                 directly-or-indirectly-modified?))
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           i-modify
+           sx-obj
+           sx-node
+           p-env)
+   export (load-module-interface
+           load-library-interfaces
+           find-imported-module
+           find-imported-syntax-module
+           write-interface-file
+           create-library-interface-file
+           make-interface-binding
+           new-literal
+           get-full-import-names
+           get-library-names
+           get-module-load-dir
+           link-string
+           fff-link-string
+           ffl-link-string
+           directly-or-indirectly-modified?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Read interface file
@@ -382,5 +396,5 @@
         (apply concatenate str-list)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cg-interf
 ;;;-----------------------------------------------------------------------------

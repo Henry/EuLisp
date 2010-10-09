@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: help to define instructions of the virtual machine
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: help to define instructions of the virtual machine
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-bycode0
   (syntax (macros)
    import (level1))
@@ -44,5 +46,5 @@
   `((setter get-register) ',name ,code))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cg-bycode0
 ;;;-----------------------------------------------------------------------------

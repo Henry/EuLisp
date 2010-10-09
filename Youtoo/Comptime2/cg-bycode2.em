@@ -18,14 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: instruction set of the virtual machine (see Vm/bytecodes.h)
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: instruction set of the virtual machine (see Vm/bytecodes.h)
-
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-bycode2
-  (syntax (_macros _cg-bycode0 _sx-obj0)
-   import (i-level1 cg-bycode)
+  (syntax (_macros
+           _cg-bycode0
+           _sx-obj0)
+   import (i-level1
+           cg-bycode)
    expose (cg-bycode))
 
 ;;;-----------------------------------------------------------------------------
@@ -183,5 +187,5 @@
 ;  (def-register symbols          23)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cg-bycode2
 ;;;-----------------------------------------------------------------------------

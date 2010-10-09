@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: defining form 'defclass'
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russell Bradford, Andreas Kind
-;;; Description: defining form 'defclass'
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule _mop-defcl0

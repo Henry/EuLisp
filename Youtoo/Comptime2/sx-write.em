@@ -18,13 +18,16 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: print support for abstract syntax tree
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: print support for abstract syntax tree
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule sx-write
   (syntax (_macros)
-   import (i-all sx-obj)
+   import (i-all
+           sx-obj)
    export (pprint-module))
 
 ;;;-----------------------------------------------------------------------------
@@ -153,5 +156,5 @@
   (sformat s "(if ~a ~a ~a)" (if-pred? x) (if-then? x) (if-else? x)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module sx-write
 ;;;-----------------------------------------------------------------------------

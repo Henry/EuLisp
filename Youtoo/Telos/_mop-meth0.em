@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: defmethod macro
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: defmethod macro
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule _mop-meth0
   (syntax (boot0)
    import (level1))
@@ -116,5 +118,5 @@
   `(named-lambda (method ,name) ,args (progn ,@body)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-meth0
 ;;;-----------------------------------------------------------------------------

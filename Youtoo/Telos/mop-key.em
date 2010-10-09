@@ -18,14 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: keywords
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: keywords
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-key
   (syntax (_boot0)
    import (boot)
-   export (find-key filter-keywords))
+   export (find-key
+           filter-keywords))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Find a key in a {key val}* keyword list
@@ -59,5 +62,5 @@
    (loop keywords ())))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-key
 ;;;-----------------------------------------------------------------------------

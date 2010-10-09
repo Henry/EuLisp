@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: foreign socket connection
 ///  Library: fsocket
-///  Authos: Andreas Kind
-///  Description: foreign socket connection
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "eul-sock.h"

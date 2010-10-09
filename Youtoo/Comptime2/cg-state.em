@@ -18,27 +18,33 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: states used during code generation
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: states used during code generation
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-state
-  (syntax (_macros _sx-obj0)
+  (syntax (_macros
+           _sx-obj0)
    import (i-all)
-   export (make-code-state make-asm-function-state make-C-state))
+   export (make-code-state
+           make-asm-function-state
+           make-C-state))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Code generation state
 ;;;-----------------------------------------------------------------------------
-(def-syntax-obj <code-state> ()
-                (handle         ; bytevector name
-                 binding-name   ; related binding name (if available)
-                 asm            ; generated assembler code
-                 stack-size     ; current size of the simulated value stack
-                 stack-vars     ; current pushed parameter variables with positions
-                 display        ; simulated display (captured variables)
-                 enclosed-code  ; sub-code-states resulting from enclosed lambdas
-                 ))
+(def-syntax-obj
+ <code-state> ()
+ (handle         ; bytevector name
+  binding-name   ; related binding name (if available)
+  asm            ; generated assembler code
+  stack-size     ; current size of the simulated value stack
+  stack-vars     ; current pushed parameter variables with positions
+  display        ; simulated display (captured variables)
+  enclosed-code  ; sub-code-states resulting from enclosed lambdas
+  ))
 
 (defun make-code-state name
   (make <code-state>
@@ -82,5 +88,5 @@
         code-vector-str: '(""))) ; avoid to have large strings
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cg-state
 ;;;-----------------------------------------------------------------------------

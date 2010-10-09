@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: input/output
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: input/output
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef IO_H
 #define IO_H

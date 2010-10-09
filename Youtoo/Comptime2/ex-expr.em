@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: expanding expressions into syntax nodes
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: expanding expressions into syntax nodes
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-expr
@@ -88,15 +89,16 @@
          (let ((macro-fun (as-dynamic-binding binding)))
            (and macro-fun
                 (lambda (x env e)
-                  (with-ct-handler (protect-tilde
-                                    (fmt "bad macro expansion of ~a"
-                                         (cons key (cdr x)))) macro-fun
-                                         (notify0 "APPLY MACRO: ~a" (cons key (cdr x)))
-                                         (let ((macro-expanded-form
-                                                (progn (setq *pass* 'execute)
-                                                       (apply macro-fun (cdr x)))))
-                                           (notify0 "RESULT: ~a" macro-expanded-form)
-                                           (e macro-expanded-form env e)))))))))
+                  (with-ct-handler
+                   (protect-tilde
+                    (fmt "bad macro expansion of ~a"
+                         (cons key (cdr x)))) macro-fun
+                         (notify0 "APPLY MACRO: ~a" (cons key (cdr x)))
+                         (let ((macro-expanded-form
+                                (progn (setq *pass* 'execute)
+                                       (apply macro-fun (cdr x)))))
+                           (notify0 "RESULT: ~a" macro-expanded-form)
+                           (e macro-expanded-form env e)))))))))
 
 (defun protect-tilde (str)
   (let ((i (member1-string #\~ str))
@@ -482,11 +484,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; CALL-NEXT-METHOD expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'call-next-method
-                       (lambda (x env e)
-                         (let ((vars (fun-args? (dynamic *encl-lambda*))))
-                           (do1-list (lambda (var) (var-used! var (+ (var-used? var) 1))) vars)
-                           (make <call-next-method>))))
+(install-expr-expander
+ 'call-next-method
+ (lambda (x env e)
+   (let ((vars (fun-args? (dynamic *encl-lambda*))))
+     (do1-list (lambda (var) (var-used! var (+ (var-used? var) 1))) vars)
+     (make <call-next-method>))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Check if lambda is called with right number of arguments
@@ -508,22 +511,24 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install IF expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'if
-                       (lambda (x env e)
-                         (with-ct-handler (fmt "bad if syntax ~a" x) x
-                                          (let* ((pred-expr (cadr x))
-                                                 (then-expr (caddr x))
-                                                 (else-expr1 (cdddr x))
-                                                 (else-expr (and else-expr1 (car else-expr1)))
-                                                 (pred-node (expand-expr pred-expr env))
-                                                 (then-node (expand-expr then-expr env))
-                                                 (else-node (expand-expr else-expr env)))
-                                            (if (or *no-else* else-expr1)
-                                                (if (cdddr (cdr x))
-                                                    (ct-serious-warning () "bad if syntax (if ~a ...)" pred-expr)
-                                                  ())
-                                              (ct-warning () "missing else branch in (if ~a ...)" pred-expr))
-                                            (lift-if pred-node then-node else-node env)))))
+(install-expr-expander
+ 'if
+ (lambda (x env e)
+   (with-ct-handler
+    (fmt "bad if syntax ~a" x) x
+    (let* ((pred-expr (cadr x))
+           (then-expr (caddr x))
+           (else-expr1 (cdddr x))
+           (else-expr (and else-expr1 (car else-expr1)))
+           (pred-node (expand-expr pred-expr env))
+           (then-node (expand-expr then-expr env))
+           (else-node (expand-expr else-expr env)))
+      (if (or *no-else* else-expr1)
+          (if (cdddr (cdr x))
+              (ct-serious-warning () "bad if syntax (if ~a ...)" pred-expr)
+            ())
+        (ct-warning () "missing else branch in (if ~a ...)" pred-expr))
+      (lift-if pred-node then-node else-node env)))))
 
 (defgeneric lift-if (pred-obj then-e else-e env))
 
@@ -559,24 +564,26 @@
   (let ((var-name (gensym)))
     (expand-expr `(let ((,var-name ,pred-e))
                     (if ,var-name ,then-e ,else-e)) env)))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Install PROGN expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'progn
-                       (lambda (x env e)
-                         (cond ((null? (cdr x))                     ; no empty progn?
-                                *nil*)
-                               ((null? (cdr (cdr x)))               ; no one-form progn?
-                                (expand-expr (car (cdr x)) env))
-                               (t
-                                (let ((exprs ())
-                                      (last-expr ())
-                                      (dummy-name (gensym)))
-                                  (do1-list-last-special
-                                   (lambda (x) (setq exprs (cons (list dummy-name x) exprs)))
-                                   (lambda (x) (setq last-expr x))
-                                   (cdr x))
-                                  (expand-expr `(let* ,(reverse-list exprs) ,last-expr) env))))))
+(install-expr-expander
+ 'progn
+ (lambda (x env e)
+   (cond ((null? (cdr x))                     ; no empty progn?
+          *nil*)
+         ((null? (cdr (cdr x)))               ; no one-form progn?
+          (expand-expr (car (cdr x)) env))
+         (t
+          (let ((exprs ())
+                (last-expr ())
+                (dummy-name (gensym)))
+            (do1-list-last-special
+             (lambda (x) (setq exprs (cons (list dummy-name x) exprs)))
+             (lambda (x) (setq last-expr x))
+             (cdr x))
+            (expand-expr `(let* ,(reverse-list exprs) ,last-expr) env))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install RETURN expander
@@ -588,10 +595,12 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install QUOTE expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'quote
-                       (lambda (x env e)
-                         (with-ct-handler "bad quote syntax" x
-                                          (make <literal-const> value: (cadr x)))))
+(install-expr-expander
+ 'quote
+ (lambda (x env e)
+   (with-ct-handler
+    "bad quote syntax" x
+    (make <literal-const> value: (cadr x)))))
 
 ;  (defun trailing-colon? (sym)
 ;    (let ((str (symbol-name sym)))
@@ -600,60 +609,64 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install QUASIQUOTE expander (sometimes called backquote)
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'quasiquote
-                       (lambda (xx env e)
-                         (with-ct-handler "bad quasiquote syntax" xx
-                                          ;; not tail recursive (is it possible?)
-                                          (let ((x (car (cdr xx))))
-                                            (if (atom? x)
-                                                (e (list 'quote x) env e)
-                                              (if (eq (car x) 'unquote)
-                                                  (e (car (cdr x)) env e)
-                                                (labels
-                                                 ((loop (xx)
-                                                        (if (atom? xx)
-                                                            (list 'quasiquote xx)
-                                                          (if (eq (car xx) 'unquote)
-                                                              (list 'quasiquote xx)
-                                                            (let ((x1 (car xx)))
-                                                              (if (cons? x1)
-                                                                  (let ((x11 (car x1)))
-                                                                    (if (eq x11 'unquote)
-                                                                        (list 'cons (car (cdr x1))
-                                                                              (loop (cdr xx)))
-                                                                      (if (eq x11 'unquote-splicing)
-                                                                          (let* ((l1 (car (cdr x1)))
-                                                                                 (l2 (cdr xx))
-                                                                                 (l3 (loop l2)))
-                                                                            (if (null? l2) l1
-                                                                              (list 'append l1 l3)))
-                                                                        (list 'cons (list 'quasiquote x1)
-                                                                              (loop (cdr xx))))))
-                                                                (list 'cons (list 'quasiquote x1)
-                                                                      (loop (cdr xx)))))))))
-                                                 (e (loop x) env e))))))))
+(install-expr-expander
+ 'quasiquote
+ (lambda (xx env e)
+   (with-ct-handler
+    "bad quasiquote syntax" xx
+    ;; not tail recursive (is it possible?)
+    (let ((x (car (cdr xx))))
+      (if (atom? x)
+          (e (list 'quote x) env e)
+        (if (eq (car x) 'unquote)
+            (e (car (cdr x)) env e)
+          (labels
+           ((loop (xx)
+                  (if (atom? xx)
+                      (list 'quasiquote xx)
+                    (if (eq (car xx) 'unquote)
+                        (list 'quasiquote xx)
+                      (let ((x1 (car xx)))
+                        (if (cons? x1)
+                            (let ((x11 (car x1)))
+                              (if (eq x11 'unquote)
+                                  (list 'cons (car (cdr x1))
+                                        (loop (cdr xx)))
+                                (if (eq x11 'unquote-splicing)
+                                    (let* ((l1 (car (cdr x1)))
+                                           (l2 (cdr xx))
+                                           (l3 (loop l2)))
+                                      (if (null? l2) l1
+                                        (list 'append l1 l3)))
+                                  (list 'cons (list 'quasiquote x1)
+                                        (loop (cdr xx))))))
+                          (list 'cons (list 'quasiquote x1)
+                                (loop (cdr xx)))))))))
+           (e (loop x) env e))))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install SETQ expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'setq
-                       (lambda (x env e)
-                         (with-ct-handler "bad setq syntax" x
-                                          (dynamic-let ((tail-pos? ()))
-                                                       (let* ((name (cadr x))
-                                                              (binding (or (get-local-static-binding name env)
-                                                                           (get-lexical-binding name)
-                                                                           (ct-serious-warning
-                                                                            (make-dummy-binding name)
-                                                                            "no binding ~a available" name)))
-                                                              (obj (binding-obj? binding))
-                                                              (set-immutable (cdr (cdr (cdr x)))))
-                                                         (register-binding-ref binding)
-                                                         (and (binding-immutable? binding)
-                                                              (null? set-immutable)
-                                                              (ct-serious-warning
-                                                               () "immutable binding ~a cannot be modified" name))
-                                                         (lift-setq binding (expand-expr (caddr x) env) env))))))
+(install-expr-expander
+ 'setq
+ (lambda (x env e)
+   (with-ct-handler
+    "bad setq syntax" x
+    (dynamic-let ((tail-pos? ()))
+                 (let* ((name (cadr x))
+                        (binding (or (get-local-static-binding name env)
+                                     (get-lexical-binding name)
+                                     (ct-serious-warning
+                                      (make-dummy-binding name)
+                                      "no binding ~a available" name)))
+                        (obj (binding-obj? binding))
+                        (set-immutable (cdr (cdr (cdr x)))))
+                   (register-binding-ref binding)
+                   (and (binding-immutable? binding)
+                        (null? set-immutable)
+                        (ct-serious-warning
+                         () "immutable binding ~a cannot be modified" name))
+                   (lift-setq binding (expand-expr (caddr x) env) env))))))
 
 (defgeneric lift-setq (binding value env))
 
@@ -685,24 +698,28 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install LAMBDA expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'lambda
-                       (lambda (x env e)
-                         (with-ct-handler "bad lambda syntax" x
-                                          (let ((node (make-fun <lambda> 'anonymous
-                                                                (get-lambda-params x) (get-lambda-body x)
-                                                                t)))      ; has unknown applications
-                                            (complete-lambda-node node env)
-                                            node))))
+(install-expr-expander
+ 'lambda
+ (lambda (x env e)
+   (with-ct-handler
+    "bad lambda syntax" x
+    (let ((node (make-fun <lambda> 'anonymous
+                          (get-lambda-params x) (get-lambda-body x)
+                          t)))      ; has unknown applications
+      (complete-lambda-node node env)
+      node))))
 
-(install-expr-expander 'named-lambda
-                       (lambda (x env e)
-                         (with-ct-handler "bad named lambda syntax" x
-                                          (let* ((name (make-symbol (fmt "~a" (car (cdr x)))))
-                                                 (node (make-fun <lambda> (list name)
-                                                                 (get-params x) (get-body x)
-                                                                 t)))     ; has unknown applications
-                                            (complete-lambda-node node env)
-                                            node))))
+(install-expr-expander
+ 'named-lambda
+ (lambda (x env e)
+   (with-ct-handler
+    "bad named lambda syntax" x
+    (let* ((name (make-symbol (fmt "~a" (car (cdr x)))))
+           (node (make-fun <lambda> (list name)
+                           (get-params x) (get-body x)
+                           t)))     ; has unknown applications
+      (complete-lambda-node node env)
+      node))))
 
 (defun complete-lambda-node (fun . envs)
   (let ((env (and envs (car envs)))
@@ -733,75 +750,83 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install INLINED-LAMBDA expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'inlined-lambda
-                       (lambda (x env e)
-                         (with-ct-handler "bad lambda syntax" x
-                                          (let ((node (make-fun <lambda> 'anonymous
-                                                                (get-lambda-params x) (get-lambda-body x)
-                                                                t)))      ; has unknown applications
-                                            (lambda-inlined! node t)
-                                            (complete-lambda-node node env)
-                                            node))))
+(install-expr-expander
+ 'inlined-lambda
+ (lambda (x env e)
+   (with-ct-handler
+    "bad lambda syntax" x
+    (let ((node (make-fun <lambda> 'anonymous
+                          (get-lambda-params x) (get-lambda-body x)
+                          t)))      ; has unknown applications
+      (lambda-inlined! node t)
+      (complete-lambda-node node env)
+      node))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install OPENCODED-LAMBDA expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'opencoded-lambda
-                       (lambda (x env e)
-                         (with-ct-handler "bad opencoded-lambda syntax" x
-                                          (let ((node (make-fun <opencoding> 'anonymous
-                                                                (get-lambda-params x) (get-lambda-body x)
-                                                                t)))      ; unknown applications
-                                            (fun-body! node (cdr (fun-body? node))) ; remove default progn
-                                            node))))
+(install-expr-expander
+ 'opencoded-lambda
+ (lambda (x env e)
+   (with-ct-handler
+    "bad opencoded-lambda syntax" x
+    (let ((node (make-fun <opencoding> 'anonymous
+                          (get-lambda-params x) (get-lambda-body x)
+                          t)))      ; unknown applications
+      (fun-body! node (cdr (fun-body? node))) ; remove default progn
+      node))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install LET expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'let
-                       (lambda (x env e)
-                         (with-ct-handler "bad let syntax" x
-                                          (let ((decls (car (cdr x)))
-                                                (body (cdr (cdr x))))
-                                            (cond ((null? decls)                 ; empty let
-                                                   (e `(progn ,@body) env e))
-                                                  ((cons? decls)                ; simple let
-                                                   (if (= (list-size decls) 1)  ; let -> let*
-                                                       (e `(let* ,decls ,@body) env e)
-                                                     (let* ((args (filter-vars decls))
-                                                            (init-forms (filter-init-forms decls)))
-                                                       (e `((inlined-lambda ,args ,@body) ,@init-forms) env e))))
-                                                  ((symbol? decls)              ; named let
-                                                   (let ((named-let-clauses (car body))
-                                                         (named-let-body (cdr body)))
-                                                     (e `(labels
-                                                          ((,decls (,@(map1-list car named-let-clauses))
-                                                                   ,@named-let-body))
-                                                          (,decls ,@(map1-list (lambda (x) (car (cdr x)))
-                                                                               named-let-clauses)))
-                                                        env e))))))))
+(install-expr-expander
+ 'let
+ (lambda (x env e)
+   (with-ct-handler
+    "bad let syntax" x
+    (let ((decls (car (cdr x)))
+          (body (cdr (cdr x))))
+      (cond ((null? decls)                 ; empty let
+             (e `(progn ,@body) env e))
+            ((cons? decls)                ; simple let
+             (if (= (list-size decls) 1)  ; let -> let*
+                 (e `(let* ,decls ,@body) env e)
+               (let* ((args (filter-vars decls))
+                      (init-forms (filter-init-forms decls)))
+                 (e `((inlined-lambda ,args ,@body) ,@init-forms) env e))))
+            ((symbol? decls)              ; named let
+             (let ((named-let-clauses (car body))
+                   (named-let-body (cdr body)))
+               (e `(labels
+                    ((,decls (,@(map1-list car named-let-clauses))
+                             ,@named-let-body))
+                    (,decls ,@(map1-list (lambda (x) (car (cdr x)))
+                                         named-let-clauses)))
+                  env e))))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install LET* expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'let*
-                       (lambda (x env e)
-                         (with-ct-handler "bad let* syntax" x
-                                          (cond ((null? (cadr x))
-                                                 (expand-expr (list 'progn (caddr x)) env))
-                                                ((cons? (cadr x))
-                                                 (let* ((inits (filter-init-forms (cadr x)))
-                                                        (vars-and-env (expand-local-static-vars*
-                                                                       (filter-vars (cadr x)) inits env))
-                                                        (vars (car vars-and-env))
-                                                        (new-env (cdr vars-and-env))
-                                                        (body (expand-expr `(progn ,@(cdr (cdr x))) new-env))
-                                                        (new-vars (lift-let*-vars vars)))
-                                                   (if (let*? body)
-                                                       (make-let* (append new-vars (fun-args? body))
-                                                                  (fun-body? body))
-                                                     (make-let* new-vars body))))
-                                                (t (error <condition> ""))))))
+(install-expr-expander
+ 'let*
+ (lambda (x env e)
+   (with-ct-handler
+    "bad let* syntax" x
+    (cond ((null? (cadr x))
+           (expand-expr (list 'progn (caddr x)) env))
+          ((cons? (cadr x))
+           (let* ((inits (filter-init-forms (cadr x)))
+                  (vars-and-env (expand-local-static-vars*
+                                 (filter-vars (cadr x)) inits env))
+                  (vars (car vars-and-env))
+                  (new-env (cdr vars-and-env))
+                  (body (expand-expr `(progn ,@(cdr (cdr x))) new-env))
+                  (new-vars (lift-let*-vars vars)))
+             (if (let*? body)
+                 (make-let* (append new-vars (fun-args? body))
+                            (fun-body? body))
+               (make-let* new-vars body))))
+          (t (error <condition> ""))))))
 
 (defun lift-let*-vars (vars)
   (labels
@@ -823,14 +848,16 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install LABELS expander
 ;;;-----------------------------------------------------------------------------
-(install-expr-expander 'labels
-                       (lambda (x env e)
-                         (with-ct-handler "bad labels syntax" x
-                                          (let ((decls (car (cdr x)))
-                                                (body (cdr (cdr x))))
-                                            (expand-expr `(let ,(labelsvar decls)
-                                                            ,@(labelssetq decls)
-                                                            ,@body) env)))))
+(install-expr-expander
+ 'labels
+ (lambda (x env e)
+   (with-ct-handler
+    "bad labels syntax" x
+    (let ((decls (car (cdr x)))
+          (body (cdr (cdr x))))
+      (expand-expr `(let ,(labelsvar decls)
+                      ,@(labelssetq decls)
+                      ,@body) env)))))
 
 (defun labelsvar (decls)
   (and decls
@@ -880,5 +907,5 @@
   (map1-list (lambda (x) (if (cons? x) (cadr x) ())) l))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module ex-expr
 ;;;-----------------------------------------------------------------------------

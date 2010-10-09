@@ -1,4 +1,3 @@
-
 /// Copyright 1997 A. Kind & University of Bath
 /// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -19,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: global register declaration/initialization
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: global register declaration/initialization
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 ///-----------------------------------------------------------------------------
@@ -106,3 +106,6 @@ void eul_initialize_register()
     eul_intern_symbol(eul_true, "t");
     PGLOBAL(glob_encl_lambda) = eul_nil;
 }
+
+
+///-----------------------------------------------------------------------------

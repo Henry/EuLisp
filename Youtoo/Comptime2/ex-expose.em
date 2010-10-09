@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: expanding expose dirctives into syntax nodes
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: expanding expose dirctives into syntax nodes
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-expose
@@ -89,82 +90,90 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install ONLY EXPOSE expanders
 ;;;-----------------------------------------------------------------------------
-(install-expose-expander 'only
-                         (lambda (x e)
-                           (with-ct-handler "bad expose only syntax" x
-                                            (let* ((module (find-imported-module (caddr x))))
-                                              (do1-list (lambda (name)
-                                                          (set-external-binding (expose-binding name module)))
-                                                        (cadr x))))))
+(install-expose-expander
+ 'only
+ (lambda (x e)
+   (with-ct-handler
+    "bad expose only syntax" x
+    (let* ((module (find-imported-module (caddr x))))
+      (do1-list (lambda (name)
+                  (set-external-binding (expose-binding name module)))
+                (cadr x))))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install EXCEPT EXPOSE expanders
 ;;;-----------------------------------------------------------------------------
-(install-expose-expander 'except
-                         (lambda (x e)
-                           (with-ct-handler "bad expose except syntax" x
-                                            (let* ((module (find-imported-module (caddr x)))
-                                                   (env (if (eq module (dynamic *actual-module*))
-                                                            (module-lexical-env? module)
-                                                          (module-external-env? module)))
-                                                   (external-names
-                                                    (map save-binding-local-name? (access-table-values env)))
-                                                   (names (binary- external-names (cadr x))))
-                                              (do1-list (lambda (name)
-                                                          (set-external-binding (expose-binding name module)))
-                                                        names)))))
+(install-expose-expander
+ 'except
+ (lambda (x e)
+   (with-ct-handler
+    "bad expose except syntax" x
+    (let* ((module (find-imported-module (caddr x)))
+           (env (if (eq module (dynamic *actual-module*))
+                    (module-lexical-env? module)
+                  (module-external-env? module)))
+           (external-names
+            (map save-binding-local-name? (access-table-values env)))
+           (names (binary- external-names (cadr x))))
+      (do1-list (lambda (name)
+                  (set-external-binding (expose-binding name module)))
+                names)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install RENAME EXPOSE expanders
 ;;;-----------------------------------------------------------------------------
-(install-expose-expander 'rename
-                         (lambda (x e)
-                           (with-ct-handler "bad expose rename syntax" x
-                                            (let* ((module (find-imported-module (caddr x)))
-                                                   (env (if (eq module (dynamic *actual-module*))
-                                                            (module-lexical-env? module)
-                                                          (module-external-env? module)))
-                                                   (external-names
-                                                    (map save-binding-local-name? (access-table-values env)))
-                                                   (other-names
-                                                    (binary- external-names (map1-list car (cadr x)))))
-                                              (do1-list (lambda (name)
-                                                          (set-external-binding (expose-binding name module)))
-                                                        other-names)
-                                              (do1-list (lambda (name-pair)
-                                                          (let* ((binding (expose-binding (car name-pair) module))
-                                                                 (new-binding (clone-node binding)))
-                                                            (binding-local-name! new-binding (cadr name-pair))
-                                                            (set-external-binding new-binding)))
-                                                        (cadr x))))))
+(install-expose-expander
+ 'rename
+ (lambda (x e)
+   (with-ct-handler
+    "bad expose rename syntax" x
+    (let* ((module (find-imported-module (caddr x)))
+           (env (if (eq module (dynamic *actual-module*))
+                    (module-lexical-env? module)
+                  (module-external-env? module)))
+           (external-names
+            (map save-binding-local-name? (access-table-values env)))
+           (other-names
+            (binary- external-names (map1-list car (cadr x)))))
+      (do1-list (lambda (name)
+                  (set-external-binding (expose-binding name module)))
+                other-names)
+      (do1-list (lambda (name-pair)
+                  (let* ((binding (expose-binding (car name-pair) module))
+                         (new-binding (clone-node binding)))
+                    (binding-local-name! new-binding (cadr name-pair))
+                    (set-external-binding new-binding)))
+                (cadr x))))))
 
 (defun make-prefix (pfx name)
   (convert (concatenate (symbol-name pfx) (symbol-name name)) <symbol>))
 
-(install-expose-expander 'prefix
-                         (lambda (x e)
-                           (with-ct-handler "bad expose prefix syntax" x
-                                            (let* ((module (find-imported-module (cadddr x)))
-                                                   (env (if (eq module (dynamic *actual-module*))
-                                                            (module-lexical-env? module)
-                                                          (module-external-env? module)))
-                                                   (prefix (cadr x))
-                                                   (external-names
-                                                    (map save-binding-local-name? (access-table-values env)))
-                                                   (other-names
-                                                    (binary- external-names (caddr x))))
-                                              (do1-list (lambda (name)
-                                                          (set-external-binding (expose-binding name module)))
-                                                        other-names)
-                                              (do1-list (lambda (internal-name)
-                                                          (let* ((binding (expose-binding internal-name module))
-                                                                 (new-binding (clone-node binding)))
-                                                            (binding-local-name! new-binding
-                                                                                 (make-prefix prefix
-                                                                                              internal-name))
-                                                            (set-external-binding new-binding)))
-                                                        (caddr x))))))
+(install-expose-expander
+ 'prefix
+ (lambda (x e)
+   (with-ct-handler
+    "bad expose prefix syntax" x
+    (let* ((module (find-imported-module (cadddr x)))
+           (env (if (eq module (dynamic *actual-module*))
+                    (module-lexical-env? module)
+                  (module-external-env? module)))
+           (prefix (cadr x))
+           (external-names
+            (map save-binding-local-name? (access-table-values env)))
+           (other-names
+            (binary- external-names (caddr x))))
+      (do1-list (lambda (name)
+                  (set-external-binding (expose-binding name module)))
+                other-names)
+      (do1-list (lambda (internal-name)
+                  (let* ((binding (expose-binding internal-name module))
+                         (new-binding (clone-node binding)))
+                    (binding-local-name! new-binding
+                                         (make-prefix prefix
+                                                      internal-name))
+                    (set-external-binding new-binding)))
+                (caddr x))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module ex-expose
 ;;;-----------------------------------------------------------------------------

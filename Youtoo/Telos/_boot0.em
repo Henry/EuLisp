@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: boot macros
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: boot macros
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule _boot0
   (import (level1))
 
@@ -74,5 +76,5 @@
                       (register-ref ,name))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module _boot0
 ;;;-----------------------------------------------------------------------------

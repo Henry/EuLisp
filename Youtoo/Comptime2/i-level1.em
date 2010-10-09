@@ -18,17 +18,37 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Level-1 but without the generic arithmetic/reversal
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: binds together the almost-everywhere-used modules
-;;;    And we don't need generic arithmetic/reversal.
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    binds together the almost-everywhere-used modules
+;;    And we don't need generic arithmetic/reversal.
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-level1
-  (import ((rename ((reverse-list reverse)) boot))
-   expose ((except (+ - * / % = <  reverse) level1)
+  (import ((rename ((reverse-list reverse))
+                   boot))
+   expose ((except (+
+                    -
+                    *
+                    /
+                    %
+                    =
+                    <
+                    reverse)
+                   level1)
            aux-table)
-   export (+ - * / % = <  reverse))
+   export (+
+           -
+           *
+           /
+           %
+           =
+           <
+           reverse))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-level1
 ;;;-----------------------------------------------------------------------------

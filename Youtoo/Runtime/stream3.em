@@ -18,14 +18,25 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: streams
 ;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;; Description: streams
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule stream3
   (syntax (_telos0)
-   import (telos integer collect list character string vector
-                 float stream1 stream format))
+   import (telos
+           integer
+           collect
+           list
+           character
+           string
+           vector
+           float
+           stream1
+           stream
+           format))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Default generic write/prin method
@@ -245,5 +256,5 @@
   x)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module stream3
 ;;;-----------------------------------------------------------------------------

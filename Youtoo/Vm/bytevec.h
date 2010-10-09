@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: bytevectors (i.e. code vectors and strings)
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: bytevectors (i.e. code vectors and strings)
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef BYTEVEC_H
 #define BYTEVEC_H

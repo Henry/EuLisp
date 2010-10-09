@@ -18,13 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: create nodes of the abstract syntax tree
 ;;;  Library: eval (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind
-;;; Description: create nodes of the abstract syntax tree
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule sx-node
-  (syntax (_macros _i-aux0 _sx-obj0)
-   import (i-all i-ffi sx-obj p-env)
+  (syntax (_macros
+           _i-aux0
+           _sx-obj0)
+   import (i-all
+           i-ffi
+           sx-obj
+           p-env)
    export (make-module
            make-defined-fun
            make-defined-opencoded-fun
@@ -41,9 +48,12 @@
            make-mutable-binding
            make-dummy-binding
            binding-origin-module-name
-           get-binding-info get-binding-spec-info true-local-binding?
+           get-binding-info
+           get-binding-spec-info
+           true-local-binding?
            compute-arity
-           register-delegated-vars register-binding-ref
+           register-delegated-vars
+           register-binding-ref
            clone-node))
 
 ;;;-----------------------------------------------------------------------------
@@ -320,5 +330,5 @@
         info: (binding-info? node)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module sx-node
 ;;;-----------------------------------------------------------------------------

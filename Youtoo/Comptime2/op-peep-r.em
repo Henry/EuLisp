@@ -18,13 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: peep-hole optimization rules
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: peep-hole optimization rules
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule op-peep-r
-  (syntax (_macros _op-peep0)
-   import (i-all op-peep))
+  (syntax (_macros
+           _op-peep0)
+   import (i-all
+           op-peep))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Null
 ;;;-----------------------------------------------------------------------------
@@ -105,5 +110,5 @@
 (simple-rule ((cdr) (cdr) (cdr) (car)) ((cadddr)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module op-peep-r
 ;;;-----------------------------------------------------------------------------

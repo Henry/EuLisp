@@ -18,11 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: tagging
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: tagging
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef TAG_H
 #define TAG_H
 

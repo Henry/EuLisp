@@ -18,15 +18,25 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: floating point numbers
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: floating point numbers
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule float
   (syntax (_telos0)
-   import (telos number)
-   export (<float> float? <double-float> <double> double?
-                   ceiling floor round truncate))
+   import (telos
+           number)
+   export (<float>
+           float?
+           <double-float>
+           <double>
+           double?
+           ceiling
+           floor
+           round
+           truncate))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <float> and <double-float>
@@ -49,5 +59,5 @@
 (defgeneric (converter <double>) (x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module float
 ;;;-----------------------------------------------------------------------------

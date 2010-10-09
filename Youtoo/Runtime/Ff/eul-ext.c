@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: built-in foreign functions
 ///  Library: boot, telos, level1, eval, youtoo
 ///  Authors: Andreas Kind
-///  Description: built-in foreign functions
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"

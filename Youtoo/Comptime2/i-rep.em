@@ -18,16 +18,35 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: read-eval-print loop
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind
-;;; Description: read-eval-print loop
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule i-rep
   (syntax (_macros)
-   import (i-all i-args sx-obj sx-node i-compile cg-interf cg-dld ex-expr
-                 ex-import ex-syntax p-env sx-obj cg-exec read)
-   export (rep eval debug-eval prompt-string
-               show-module-bindings ? show-help show-class-hierarchy)
+   import (i-all
+           i-args
+           sx-obj
+           sx-node
+           i-compile
+           cg-interf
+           cg-dld ex-expr
+           ex-import
+           ex-syntax
+           p-env
+           sx-obj
+           cg-exec
+           read)
+   export (rep
+           eval
+           debug-eval
+           prompt-string
+           show-module-bindings
+           ?
+           show-help
+           show-class-hierarchy)
    expose (cg-dld))
 
 ;;;-----------------------------------------------------------------------------
@@ -405,5 +424,5 @@
                             (loop ()))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module i-rep
 ;;;-----------------------------------------------------------------------------

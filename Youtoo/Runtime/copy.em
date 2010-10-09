@@ -18,14 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: generic copying
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: generic copying
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule copy
   (syntax (_telos0)
-   import (telos thread condition)
-   export (shallow-copy deep-copy))
+   import (telos
+           thread
+           condition)
+   export (shallow-copy
+           deep-copy))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Shallow copy
@@ -71,5 +76,5 @@
        (loop (class-slots cl))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module copy
 ;;;-----------------------------------------------------------------------------

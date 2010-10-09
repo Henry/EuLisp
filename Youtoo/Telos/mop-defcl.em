@@ -20,7 +20,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: handling class definitions
+;;;  Maintainer: Henry G. Weller
+;;; Title: handling class definitions
 ;;;-----------------------------------------------------------------------------
 (defmodule mop-defcl
   (syntax (_boot0 _mop-gf0 _mop-meth0)

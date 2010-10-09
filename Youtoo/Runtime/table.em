@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: tables; fixed comparator and hash-function;
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;;  Description: tables; fixed comparator and hash-function;
-;;;  Note: assumes non-relocating garbage collector!
+;;;  Maintainer: Henry G. Weller
+;;;  Note:
+;;    assumes non-relocating garbage collector!
 ;;;-----------------------------------------------------------------------------
 
 (defmodule table

@@ -18,14 +18,18 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: peep-hole optimization
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: peep-hole optimization
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule op-peep
-  (syntax (_macros _op-peep0)
+  (syntax (_macros
+           _op-peep0)
    import (i-all)
-   export (add-rule peep-hole-optimize))
+   export (add-rule
+           peep-hole-optimize))
 
 (defun peep-hole-optimize (l)
   (labels
@@ -109,7 +113,7 @@
         (loop (cdr r) (cdr l))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module op-peep
 ;;;-----------------------------------------------------------------------------
 
 ;;;-----------------------------------------------------------------------------

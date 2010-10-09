@@ -1,4 +1,3 @@
-
 /// Copyright 1997 A. Kind & University of Bath
 /// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -19,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: fast access to level1 bindings
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
-///  Description: fast access to level1 bindings
- **
+///  Maintainer: Henry G. Weller
 ///                !!! CHANGES ONLY TO leveli.skl.c !!!
- **
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"

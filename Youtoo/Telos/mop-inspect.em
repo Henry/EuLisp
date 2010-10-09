@@ -18,16 +18,29 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: inspection
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: inspection
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-inspect
-  (import (boot mop-prim mop-class mop-init)
+  (import (boot
+           mop-prim
+           mop-class
+           mop-init)
    syntax (_boot0)
-   export (subclass? function? methodp generic-function? cpl-subclass?
-                     class? class-of slotp primitive-metaclass?
-                     primitive-find-slot-position primitive-slot-value))
+   export (subclass?
+           function?
+           methodp
+           generic-function?
+           cpl-subclass?
+           class?
+           class-of
+           slotp
+           primitive-metaclass?
+           primitive-find-slot-position
+           primitive-slot-value))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class-of (identical to primitive-class-of)
@@ -122,5 +135,5 @@
     ((setter primitive-ref) obj i val)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-inspect
 ;;;-----------------------------------------------------------------------------

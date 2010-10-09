@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: foreign function converters
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: foreign function converters
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef FF_H
 #define FF_H

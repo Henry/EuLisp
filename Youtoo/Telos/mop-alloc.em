@@ -18,20 +18,37 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: handling object allocation
 ;;;  Library: telos (The EuLisp Object System -- TELOS)
 ;;;  Authors: Russel Bradford, Andreas Kind
-;;; Description: handling object allocation
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mop-alloc
-  (syntax (_boot0 _mop-gf0 _mop-meth0)
-   import (boot mop-prim mop-key mop-class mop-init mop-inspect mop-gf
-                mop-meth mop-defcl mop-access)
-   export (compute-slots compute-inherited-slots
-                         compute-defined-slot compute-defined-slot-class
-                         compute-specialized-slot compute-specialized-slot-class
-                         compute-keywords compute-inherited-keywords
-                         compatible-superclasses? compatible-superclass?
-                         compute-class-precedence-list))
+  (syntax (_boot0
+           _mop-gf0
+           _mop-meth0)
+   import (boot
+           mop-prim
+           mop-key
+           mop-class
+           mop-init
+           mop-inspect
+           mop-gf
+           mop-meth
+           mop-defcl
+           mop-access)
+   export (compute-slots
+           compute-inherited-slots
+           compute-defined-slot
+           compute-defined-slot-class
+           compute-specialized-slot
+           compute-specialized-slot-class
+           compute-keywords
+           compute-inherited-keywords
+           compatible-superclasses?
+           compatible-superclass?
+           compute-class-precedence-list))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Allocate
@@ -249,5 +266,5 @@
   <local-slot>)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mop-alloc
 ;;;-----------------------------------------------------------------------------

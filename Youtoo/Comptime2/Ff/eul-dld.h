@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: dynamic linker
 ///  Library: eval, youtoo
-///  Authos: Andreas Kind
-///  Description: dynamic linker
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_DLD_H
 #define EUL_DLD_H

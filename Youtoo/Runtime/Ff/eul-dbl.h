@@ -19,8 +19,8 @@
 //
 ///-----------------------------------------------------------------------------
 ///  Library: level1, eval, youtoo
-///  Authos: Andreas Kind
-///  Description: forein function support for double precision floats
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_DBL_H
 #define EUL_DBL_H

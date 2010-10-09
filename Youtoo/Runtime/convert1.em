@@ -18,14 +18,24 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: conversion
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: conversion
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule convert1
   (syntax (_telos0)
-   import (telos condition convert collect fpi character list string vector
-                 table))
+   import (telos
+           condition
+           convert
+           collect
+           fpi
+           character
+           list
+           string
+           vector
+           table))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion list, string, vector, table -> list
@@ -176,5 +186,5 @@
 (defmethod (converter <character>) ((x <int>)) (int-as-character x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module convert1
 ;;;-----------------------------------------------------------------------------

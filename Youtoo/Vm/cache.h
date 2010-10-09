@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: fast method caching
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
-///  Description: fast method caching
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef CACHE_H
 #define CACHE_H

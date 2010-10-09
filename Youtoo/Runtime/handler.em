@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: handler
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: handler
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule handler
   (syntax (_telos0)
    import (telos
@@ -32,7 +34,11 @@
            float
            string
            collect)
-   export (<handler> handle handler? <int*> <double*> <string*>))
+   export (<handler>
+           handle handler?
+           <int*>
+           <double*>
+           <string*>))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Handle foreign C pointers
@@ -119,5 +125,5 @@
            "eul_c_vector_set")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module handler
 ;;;-----------------------------------------------------------------------------

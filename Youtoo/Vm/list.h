@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: list processing
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: list processing
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef LIST_H
 #define LIST_H

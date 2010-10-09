@@ -18,13 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: expand bodies of defining and top-level forms
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: expand bodies of defining and top-level forms
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ex-body
-  (syntax (_macros _sx-obj0)
-   import (i-all p-env ex-expr sx-obj sx-node)
+  (syntax (_macros
+           _sx-obj0)
+   import (i-all
+           p-env
+           ex-expr
+           sx-obj
+           sx-node)
    export (expand-bodies))
 
 ;;;-----------------------------------------------------------------------------
@@ -71,5 +78,5 @@
     (module-top-level-forms! module appl)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module ex-body
 ;;;-----------------------------------------------------------------------------

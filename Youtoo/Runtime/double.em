@@ -18,20 +18,33 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: double precision floats
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: double precision floats
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule double
   (syntax (_telos0)
-   import (telos compare number integer fpi string float double1)
-   export (<double-float> <double> double?
-                          most-positive-double-float
-                          least-positive-double-float
-                          most-negative-double-float
-                          least-negative-double-float
-                          double-binary< double-binary=
-                          double-binary-gcd double-binary-lcm)
+   import (telos
+           compare
+           number
+           integer
+           fpi
+           string
+           float
+           double1)
+   export (<double-float>
+           <double>
+           double?
+           most-positive-double-float
+           least-positive-double-float
+           most-negative-double-float
+           least-negative-double-float
+           double-binary<
+           double-binary=
+           double-binary-gcd
+           double-binary-lcm)
    expose (double1))
 
 ;;;-----------------------------------------------------------------------------
@@ -126,5 +139,5 @@
 (defmethod zero? ((x <double>)) (double-binary= x 0.0))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module double
 ;;;-----------------------------------------------------------------------------

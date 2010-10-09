@@ -20,6 +20,7 @@
 ;;; Title: level-0 syntax
 ;;;  Library: level-0
 ;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule syntax-0

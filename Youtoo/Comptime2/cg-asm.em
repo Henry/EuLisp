@@ -18,13 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: assembling
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: assembling
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-asm
-  (syntax (_macros _i-aux0 _sx-obj0)
-   import (i-all sx-obj cg-bycode1 cg-bycode2 cg-state op-peep op-peep-r)
+  (syntax (_macros
+           _i-aux0
+           _sx-obj0)
+   import (i-all
+           sx-obj
+           cg-bycode1
+           cg-bycode2
+           cg-state
+           op-peep
+           op-peep-r)
    export (assemble))
 
 ;;;-----------------------------------------------------------------------------
@@ -297,5 +307,5 @@
       (neg-fix-bytes-aux div (- pos 1) (cons (- 255 rem) res)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cg-asm
 ;;;-----------------------------------------------------------------------------

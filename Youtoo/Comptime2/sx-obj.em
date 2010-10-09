@@ -18,25 +18,39 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: defining all classes of the abstract syntax tree
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: defining all classes of the abstract syntax tree
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule sx-obj
-  (syntax (_macros _sx-obj0)
-   import (i-level1 sx-obj1)
-   expose (sx-obj1 sx-obj2)
+  (syntax (_macros
+           _sx-obj0)
+   import (i-level1
+           sx-obj1)
+   expose (sx-obj1
+           sx-obj2)
    ;; generated accessors and predicates are automatiacally exported
-   export (local-name? origin-name?
-                       ;binding?
-                       binding!
-                       save-binding-local-name? save-binding-module-name?))
+   export (local-name?
+           origin-name?
+           ;binding?
+           binding!
+           save-binding-local-name?
+           save-binding-module-name?))
 
 ;;;-----------------------------------------------------------------------------
 ;;;  Functional nodes
 ;;;-----------------------------------------------------------------------------
 (def-syntax-obj <fun> (<syntax-expr>)
-                (name binding args arity range-and-domain body appls has-unknown-appls))
+                (name
+                 binding
+                 args
+                 arity
+                 range-and-domain
+                 body
+                 appls
+                 has-unknown-appls))
 
 (def-syntax-obj <lambda> (<fun>) (inlined delegated-vars binding-refs))
 ;;(def-syntax-obj <init-lambda> (<lambda>) (pre-body module))
@@ -111,5 +125,5 @@
     (writer obj value)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module sx-obj
 ;;;-----------------------------------------------------------------------------

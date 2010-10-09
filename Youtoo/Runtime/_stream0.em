@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: stream syntax functions
 ;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;; Description: stream syntax functions
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule _stream0
   (syntax (_boot0)
    import (level1))
@@ -159,5 +161,5 @@
            (with-input-file (,s ,file-name) ,@body))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module stream
 ;;;-----------------------------------------------------------------------------

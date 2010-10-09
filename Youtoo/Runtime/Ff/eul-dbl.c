@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: foreign function support for double precision floats
 ///  Library: level1, eval, youtoo
-///  Authos: Andreas Kind
-///  Description: foreign function support for double precision floats
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"

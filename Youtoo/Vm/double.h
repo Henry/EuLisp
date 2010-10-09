@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: double floats
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
-///  Description: double floats
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef DOUBLE_H
 #define DOUBLE_H
@@ -52,7 +53,6 @@
         slot_ref(loc, 0) = (LispRef) data1;                                    \
         slot_ref(loc, 1) = (LispRef) data2;                                    \
     }
-
 
 ///-----------------------------------------------------------------------------
 #endif // DOUBLE_H

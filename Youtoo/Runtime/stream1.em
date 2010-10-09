@@ -18,19 +18,37 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: posix stream interface
 ;;;  Library: level1
 ;;;  Authors: Julian Padget, Andreas Kind
-;;; Description: posix stream interface
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule stream1
   (import (telos)
-   export (O_RDONLY O_WRONLY O_RDWR O_APPEND O_NONBLOCK
-                    O_CREAT O_TRUNC O_EXCL mode-table
-                    eul_open eul_close eul_read eul_write
-                    eul_make_socket eul_socket_accept eul_make_connection
-                    eul_sprintf eul_sprintf_string
-                    strerror eul_socket_strerror
-                    ntok read-into-buffer hostname))
+   export (O_RDONLY
+           O_WRONLY
+           O_RDWR
+           O_APPEND
+           O_NONBLOCK
+           O_CREAT
+           O_TRUNC
+           O_EXCL
+           mode-table
+           eul_open
+           eul_close
+           eul_read
+           eul_write
+           eul_make_socket
+           eul_socket_accept
+           eul_make_connection
+           eul_sprintf
+           eul_sprintf_string
+           strerror
+           eul_socket_strerror
+           ntok
+           read-into-buffer
+           hostname))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Posix codes
@@ -83,5 +101,5 @@
 (defun hostname () (eul_hostname))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module stream1
 ;;;-----------------------------------------------------------------------------

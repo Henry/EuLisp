@@ -21,8 +21,8 @@
 ;;; Title: Programming Language EuLisp, Level-0
 ;;;  Library: level-0
 ;;;  Authors: Andreas Kind, Julian Padget
-;;;  Attention:
-;;    Update Comptime2/cg-dld.em if level-0 modules change!
+;;;  Maintainer: Henry G. Weller
+;;;  Attention: Update Comptime2/cg-dld.em if level-0 modules change!
 ;;;-----------------------------------------------------------------------------
 
 (defmodule level-0

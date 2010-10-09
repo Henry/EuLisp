@@ -60,7 +60,7 @@
     (get-bytevector-pos . 320)
     (compute-static . 319)
     (write-copyright-to-C-file . 318)
-    (" **  Description: ~a of EuLisp module ~a
+    (" **  Title: ~a of EuLisp module ~a
  **  Copyright: See file ~a.em
  ** ----------------------------------------------------------------------- **/
 

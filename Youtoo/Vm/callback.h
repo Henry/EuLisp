@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+///  Title: callbacks
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
-///  Description: callbacks
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef CALLBACK_H
 #define CALLBACK_H

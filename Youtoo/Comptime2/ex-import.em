@@ -18,9 +18,10 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: expanding import dirctives into syntax nodes
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: expanding import dirctives into syntax nodes
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule ex-import
@@ -33,7 +34,8 @@
            p-env
            cg-interf)
    export (expand-old-imports
-           expand-import import-module
+           expand-import
+           import-module
            register-imported-module))
 
 ;;;-----------------------------------------------------------------------------
@@ -67,23 +69,24 @@
 
 (defun import-module (name)
   (notify0 "  Import module ~a ..." name)
-  (with-ct-handler (fmt "cannot import lexical module ~a" name)
-                   (dynamic *actual-module*)
-                   (let ((module (or (module? name) (find-imported-module name))))
-                     (access-table-do
-                      (lambda (key binding)
-                        ;; Attention -- key is ptr to C string!
-                        (if (cons? binding)
-                            ;; Binding yet unexpanded
-                            (let ((binding-name (c-string-as-eul-symbol key)))
-                              (set-lexical-binding binding binding-name))
-                          (progn
-                            (set-lexical-binding binding)
-                            (binding-imported! binding t))))
-                      (module-external-env? module))
-                     (if (module? name) ()
-                       (register-imported-module module))
-                     module)))
+  (with-ct-handler
+   (fmt "cannot import lexical module ~a" name)
+   (dynamic *actual-module*)
+   (let ((module (or (module? name) (find-imported-module name))))
+     (access-table-do
+      (lambda (key binding)
+        ;; Attention -- key is ptr to C string!
+        (if (cons? binding)
+            ;; Binding yet unexpanded
+            (let ((binding-name (c-string-as-eul-symbol key)))
+              (set-lexical-binding binding binding-name))
+          (progn
+            (set-lexical-binding binding)
+            (binding-imported! binding t))))
+      (module-external-env? module))
+     (if (module? name) ()
+       (register-imported-module module))
+     module)))
 
 (defun import-binding (name module)
   (let ((binding
@@ -112,82 +115,91 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install ONLY IMPORT expander
 ;;;-----------------------------------------------------------------------------
-(install-import-expander 'only
-                         (lambda (x e)
-                           (with-ct-handler "bad only import syntax" x
-                                            (let* ((module-name (caddr x))
-                                                   (module (find-imported-module module-name)))
-                                              (do1-list (lambda (name)
-                                                          (set-lexical-binding (import-binding name module)))
-                                                        (cadr x))
-                                              (new-node module-name 'used-module-name)))))
+(install-import-expander
+  'only
+  (lambda (x e)
+    (with-ct-handler
+     "bad only import syntax" x
+     (let* ((module-name (caddr x))
+            (module (find-imported-module module-name)))
+       (do1-list (lambda (name)
+                   (set-lexical-binding (import-binding name module)))
+                 (cadr x))
+       (new-node module-name 'used-module-name)))))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Install EXCEPT IMPORT expander
 ;;;-----------------------------------------------------------------------------
-(install-import-expander 'except
-                         (lambda (x e)
-                           (with-ct-handler "bad except import syntax" x
-                                            (let* ((module-name (caddr x))
-                                                   (module (find-imported-module module-name))
-                                                   (external-names
-                                                    (map1-list save-binding-local-name?
-                                                               (access-table-values (module-external-env? module))))
-                                                   (names (binary- external-names (cadr x))))
-                                              (do1-list (lambda (name)
-                                                          (set-lexical-binding (import-binding name module)))
-                                                        names)
-                                              (new-node module-name 'used-module-name)))))
+(install-import-expander
+  'except
+  (lambda (x e)
+    (with-ct-handler
+     "bad except import syntax" x
+     (let* ((module-name (caddr x))
+            (module (find-imported-module module-name))
+            (external-names
+             (map1-list save-binding-local-name?
+                        (access-table-values (module-external-env? module))))
+            (names (binary- external-names (cadr x))))
+       (do1-list (lambda (name)
+                   (set-lexical-binding (import-binding name module)))
+                 names)
+       (new-node module-name 'used-module-name)))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Install RENAME IMPORT expander
 ;;;-----------------------------------------------------------------------------
-(install-import-expander 'rename
-                         (lambda (x e)
-                           (with-ct-handler "bad rename import syntax" x
-                                            (let* ((module-name (caddr x))
-                                                   (module (find-imported-module module-name))
-                                                   (env (module-external-env? module))
-                                                   (external-names (map1-list save-binding-local-name?
-                                                                              (access-table-values env)))
-                                                   (other-names
-                                                    (binary- external-names (map1-list car (cadr x)))))
-                                              (do1-list (lambda (name)
-                                                          (set-lexical-binding (import-binding name module)))
-                                                        other-names)
-                                              (do1-list (lambda (name-pair)
-                                                          (let* ((binding (import-binding (car name-pair) module))
-                                                                 (new-binding (clone-node binding)))
-                                                            (binding-local-name! new-binding (cadr name-pair))
-                                                            (set-lexical-binding new-binding)))
-                                                        (cadr x))
-                                              (new-node module-name 'used-module-name)))))
+(install-import-expander
+  'rename
+  (lambda (x e)
+    (with-ct-handler
+     "bad rename import syntax" x
+     (let* ((module-name (caddr x))
+            (module (find-imported-module module-name))
+            (env (module-external-env? module))
+            (external-names (map1-list save-binding-local-name?
+                                       (access-table-values env)))
+            (other-names
+             (binary- external-names (map1-list car (cadr x)))))
+       (do1-list (lambda (name)
+                   (set-lexical-binding (import-binding name module)))
+                 other-names)
+       (do1-list (lambda (name-pair)
+                   (let* ((binding (import-binding (car name-pair) module))
+                          (new-binding (clone-node binding)))
+                     (binding-local-name! new-binding (cadr name-pair))
+                     (set-lexical-binding new-binding)))
+                 (cadr x))
+       (new-node module-name 'used-module-name)))))
 
 (defun make-prefix (pfx name)
   (convert (concatenate (symbol-name pfx) (symbol-name name)) <symbol>))
 
-(install-import-expander 'prefix
-                         (lambda (x e)
-                           (with-ct-handler "bad prefix import syntax" x
-                                            (let* ((module-name (cadddr x))
-                                                   (module (find-imported-module module-name))
-                                                   (env (module-external-env? module))
-                                                   (prefix (cadr x))
-                                                   (external-names (map1-list save-binding-local-name?
-                                                                              (access-table-values env)))
-                                                   (other-names
-                                                    (binary- external-names (caddr x))))
-                                              (do1-list (lambda (name)
-                                                          (set-lexical-binding (import-binding name module)))
-                                                        other-names)
-                                              (do1-list (lambda (external-name)
-                                                          (let* ((binding (import-binding external-name module))
-                                                                 (new-binding (clone-node binding)))
-                                                            (binding-local-name! new-binding
-                                                                                 (make-prefix prefix
-                                                                                              external-name))
-                                                            (set-lexical-binding new-binding)))
-                                                        (caddr x))
-                                              (new-node module-name 'used-module-name)))))
+(install-import-expander
+  'prefix
+  (lambda (x e)
+    (with-ct-handler
+     "bad prefix import syntax" x
+     (let* ((module-name (cadddr x))
+            (module (find-imported-module module-name))
+            (env (module-external-env? module))
+            (prefix (cadr x))
+            (external-names (map1-list save-binding-local-name?
+                                       (access-table-values env)))
+            (other-names
+             (binary- external-names (caddr x))))
+       (do1-list (lambda (name)
+                   (set-lexical-binding (import-binding name module)))
+                 other-names)
+       (do1-list (lambda (external-name)
+                   (let* ((binding (import-binding external-name module))
+                          (new-binding (clone-node binding)))
+                     (binding-local-name! new-binding
+                                          (make-prefix prefix
+                                                       external-name))
+                     (set-lexical-binding new-binding)))
+                 (caddr x))
+       (new-node module-name 'used-module-name)))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module ex-import

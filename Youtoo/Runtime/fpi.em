@@ -18,18 +18,28 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: fixed precision integers (int)
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: fixed precision integers (int)
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule fpi
   (syntax (_telos0)
-   import (telos compare number integer)
-   export (<int> int?
-                 int-binary- int-binary* int-binary/ int-binary% int-binary-mod
-                 int-as-string
-                 most-positive-int
-                 most-negative-int))
+   import (telos
+           compare
+           number
+           integer)
+   export (<int>
+           int?
+           int-binary-
+           int-binary*
+           int-binary/
+           int-binary%
+           int-binary-mod
+           int-as-string
+           most-positive-int
+           most-negative-int))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <int>
@@ -89,5 +99,5 @@
 (defextern int-as-string (<int>) <string> "eul_int_as_str")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module fpi
 ;;;-----------------------------------------------------------------------------

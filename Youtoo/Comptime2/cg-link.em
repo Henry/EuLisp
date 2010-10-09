@@ -18,15 +18,28 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: linker which decodes assembled code into a C code again
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: linker which decodes assembled code into a C code again
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-link
-  (syntax (_macros _i-aux0)
-   import (i-all i-modify p-env sx-obj sx-node cg-state cg-asm cg-interf
-                 i-ffi ex-expr cg-dld)
-   export (decode write-C-module-file))
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           i-modify
+           p-env
+           sx-obj
+           sx-node
+           cg-state
+           cg-asm
+           cg-interf
+           i-ffi
+           ex-expr
+           cg-dld)
+   export (decode
+           write-C-module-file))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Reset decoder
@@ -789,7 +802,7 @@
  ** ----------------------------------------------------------------------- **
 ")
   (write-to-C-file
-   " **  Description: ~a of EuLisp module ~a
+   " **  Title: ~a of EuLisp module ~a
  **  Copyright: See file ~a.em
  ** ----------------------------------------------------------------------- **/
 \n" description module-name module-name))
@@ -823,5 +836,5 @@
      (string-append new-str (loop 0 "")))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cg-link
 ;;;-----------------------------------------------------------------------------

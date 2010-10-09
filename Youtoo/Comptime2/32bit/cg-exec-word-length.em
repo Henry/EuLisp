@@ -21,7 +21,8 @@
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses)
 
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: executes compiled code
+;;;  Maintainer: Henry G. Weller
+;;; Title: executes compiled code
 ;;;-----------------------------------------------------------------------------
 (defmodule cg-exec-word-length
   (syntax (_macros _i-aux0)

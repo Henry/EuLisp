@@ -18,14 +18,24 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: code generation
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: code generation
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule cg-gen
-  (syntax (_macros _i-aux0)
-   import (i-all cg-state cg-stack sx-obj sx-node p-env an-side)
-   export (encode interactive-encode))
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           cg-state
+           cg-stack
+           sx-obj
+           sx-node
+           p-env
+           an-side)
+   export (encode
+           interactive-encode))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Generate assembler code
@@ -610,5 +620,5 @@
       ())))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cg-gen
 ;;;-----------------------------------------------------------------------------

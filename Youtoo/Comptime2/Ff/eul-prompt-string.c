@@ -1,8 +1,11 @@
+/// Copyright 2010 Henry G. Weller
 ///-----------------------------------------------------------------------------
 /// ---                 EuLisp System 'youtoo'
 ///-----------------------------------------------------------------------------
-///  Library: eval
-///  Description: Low-level readline prompt support
+///  Title: Low-level readline prompt support
+///  Library: eval, youtoo
+///  Authors: Henry G. Weller
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #ifdef READLINE

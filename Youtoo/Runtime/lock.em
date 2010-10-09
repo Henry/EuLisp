@@ -18,15 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: locks
 ;;;  Library: level1
 ;;;  Authors: Andreas Kind, Julian Padget
-;;; Description: locks
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule lock
   (syntax (_telos0)
-   import (telos thread)
-   export (<semaphore> semaphore-counter semaphore?
-                       <lock> lock? lock unlock))
+   import (telos
+           thread)
+   export (<semaphore>
+           semaphore-counter
+           semaphore?
+           <lock>
+           lock?
+           lock
+           unlock))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <lock>
@@ -64,5 +72,5 @@
   lk)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module lock
 ;;;-----------------------------------------------------------------------------

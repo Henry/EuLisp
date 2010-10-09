@@ -18,13 +18,17 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: reading sources
 ;;;  Library: comp (EuLisp to Bytecode Compiler -- EuLysses))
 ;;;  Authors: Andreas Kind, Keith Playford
-;;; Description: reading sources
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule p-read
-  (syntax (_macros _i-aux0)
-   import (i-all sx-obj)
+  (syntax (_macros
+           _i-aux0)
+   import (i-all
+           sx-obj)
    export (read-source-file))
 
 ;;;-----------------------------------------------------------------------------
@@ -40,5 +44,5 @@
                              (read-s-expression stream))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module p-read
 ;;;-----------------------------------------------------------------------------

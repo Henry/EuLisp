@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: built-in foreign functions
 ///  Library: boot, telos, level1, eval, youtoo
-///  Authos: Andreas Kind
-///  Description: built-in foreign functions
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_EXT_H
 #define EUL_EXT_H
