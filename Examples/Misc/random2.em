@@ -1,9 +1,12 @@
+;;; Copyright 1997 A. Kind & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 ;;; ---                         EuLisp System 'youtoo'
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Pseudo-random number generator
 ;;;  Authors: Chris McConnell, Andreas Kind
-;;;  Description:
+;;;  Maintainer: Henry G. Weller
+;;;  Title:
 ;;    This file implements a portable pseudo-random number generator for Common
 ;;    LISP.  It has been converted from a C program that was converted from a
 ;;    FORTRAN program.  I did not pick the variable names or pretend to have

@@ -18,12 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: echod daemon
 ;;;  Authors: Andreas Kind
-;;; Description: echod deamon
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo echod -l level1
 ;;;-----------------------------------------------------------------------------
+
 (defmodule echod
   (syntax (macros)
    import (level1))
@@ -41,5 +42,5 @@
     (disconnect s)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module echod
 ;;;-----------------------------------------------------------------------------

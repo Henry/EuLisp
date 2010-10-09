@@ -18,24 +18,20 @@
 ##  this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 ###-----------------------------------------------------------------------------
-
+### Title: Makefile for Youtoo tests
+###  Maintainer: Henry G. Weller
+###  Description:
+##    These specifically use $(U2) because they're used in
+##    bootstrapping to check if everything bootstrapped ok.
 ###-----------------------------------------------------------------------------
-### Makefile for Youtoo tests
-##
-##  These specifically use $(U2) because they're used in
-##  bootstrapping to check if everything bootstrapped ok.
-###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
-
 TESTS = test1 test2 test3 test4
 TESTS_EXE = $(TESTS:%=$(ARCH_DIR)/%)
 
 ###-----------------------------------------------------------------------------
-
 all: $(TESTS_EXE)
 
 $(ARCH_DIR)/test1: test1.em | $(ARCH_DIR)/.
@@ -55,6 +51,9 @@ test: $(TESTS_EXE)
 		export LD_LIBRARY_PATH=$(EUL_LIB_DIR):$(LD_LIBRARY_PATH);\
 		./$(test);)
 
+###-----------------------------------------------------------------------------
+### Miscellaneous commands
+###-----------------------------------------------------------------------------
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)

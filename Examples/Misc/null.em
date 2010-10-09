@@ -18,9 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: Simple null example
 ;;;  Authors: Andreas Kind
-;;; Description: null module
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo null -l level-0
 ;;;-----------------------------------------------------------------------------

@@ -18,15 +18,16 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: cc
+;;; Title: C++ interoperability
 ;;;  Authors: Andreas Kind
-;;; Description: C++ interoperability
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;   youtoo -c test2 -l level-0
 ;;   gcc -c -I../Gc eul-cc2.c
 ;;   g++ -c eul-cc3.cc
 ;;   youtoo test2 -l level-0 -fff eul-cc2 -fff eul-cc3 -recompile
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test2
   (syntax (syntax-0)
    import (level-0)
@@ -45,5 +46,5 @@
 (print (foo "Hello world!" 4) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test2
 ;;;-----------------------------------------------------------------------------

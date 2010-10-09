@@ -18,25 +18,21 @@
 ##  this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 ###-----------------------------------------------------------------------------
-
+### Title: Compile-time Makefile
+###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
-### EuLisp compile-time Makefile
-###-----------------------------------------------------------------------------
-
 ARCH = $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
 ### Reset U2 to use the bootstrap executable
 ###-----------------------------------------------------------------------------
-
 U2_DEV := $(U2)
 U2 = $(U2_BOOT)
 
 ###-----------------------------------------------------------------------------
 ### Output file names
 ###-----------------------------------------------------------------------------
-
 EVAL_LIB = $(EUL_LIB_DIR)/libeval.a
 EVAL_LIB_I = $(EUL_LIB_DIR)/libeval.i
 EVAL_SHARED_LIB = $(EUL_LIB_DIR)/libeval.so
@@ -44,7 +40,6 @@ EVAL_SHARED_LIB = $(EUL_LIB_DIR)/libeval.so
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
-
 EVAL_EM := \
     an-side.em aux-table.em cg-asm.em cg-bycode.em cg-bycode1.em cg-bycode2.em \
     cg-dld.em cg-exec.em cg-gen.em cg-interf.em cg-link.em cg-stack.em cg-state.em eval.em \
@@ -66,7 +61,6 @@ EVAL_O += $(EVAL_FF_C:%.c=$(ARCH_DIR)/%.o)
 ###-----------------------------------------------------------------------------
 ### Link level1 libraries
 ###-----------------------------------------------------------------------------
-
 .PHONY: static
 static:	$(EVAL_LIB)
 
@@ -84,7 +78,6 @@ $(EVAL_SHARED_LIB): $(EVAL_O)
 ###-----------------------------------------------------------------------------
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
-
 .PHONY: boot
 boot: static
 
@@ -160,7 +153,6 @@ $(ARCH_DIR)/cg-exec-word-length.o: \
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 .PHONY: boot-clean
 boot-clean: clean
 	@rm -f *.[ihc]

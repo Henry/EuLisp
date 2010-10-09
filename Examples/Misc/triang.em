@@ -1,16 +1,39 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; File:         triang.em
-; Description:  TRIANG -- Board game benchmark
-; Author:       Richard Gabriel
-; Created:      8-Apr-85
-; Modified:     29-Oct-96 (Andreas Kind)
-; Language:     EuLisp
-; Status:       Public Domain
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Copyright 1997 A. Kind & University of Bath
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Triang -- Board game benchmark
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    Author:       Richard Gabriel
+;;    Created:      8-Apr-85
+;;    Modified:     29-Oct-96 (Andreas Kind)
+;;;  Compilation:
+;;    youtoo triang -l level-0 -l math
+;;;  Interpretation:
+;;    (!> triang)
+;;;-----------------------------------------------------------------------------
 
 (defmodule triang
   (syntax (syntax-0)
-   import (level-0 math))
+   import (level-0
+           math))
 
 (deflocal *answer* ())
 (deflocal *final* ())

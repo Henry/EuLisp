@@ -18,31 +18,32 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: fortran
+;;; Title: FORTRAN interoperability
 ;;;  Authors: Andreas Kind
-;;; Description: Fortran interoperability
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;   youtoo -c test2 -l level-0
 ;;   f77 -c eul-f2.f
 ;;   youtoo test2 -l level-0 -fff eul-f2 -recompile
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test2
   (syntax (syntax-0)
    import (level-0)
    export (bar))
 
 ;;;-----------------------------------------------------------------------------
-;;; In-call from Forran
+;;; In-call from FORTRAN
 ;;;-----------------------------------------------------------------------------
 (defun bar (x y)
   (+ x y))
 
 ;;;-----------------------------------------------------------------------------
-;;; Out-call to Fortran
+;;; Out-call to FORTRAN
 ;;;-----------------------------------------------------------------------------
 (defextern foo (<int*> <double*>) <double>)
 (print (foo (convert 42 <int*)1 (convert 1.0 <double*>)) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test2
 ;;;-----------------------------------------------------------------------------

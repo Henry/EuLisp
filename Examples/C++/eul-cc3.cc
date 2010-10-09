@@ -20,6 +20,7 @@
 ///-----------------------------------------------------------------------------
 /// Title: C++ interoperability
 ///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///  Description: C++ interoperability
 ///  Compilation:
 //    ../youtoo -c test2 -l level1

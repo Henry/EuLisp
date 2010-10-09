@@ -1,19 +1,34 @@
+### Copyright 2010 Henry G. Weller
 ###-----------------------------------------------------------------------------
-### ---                    Programming Language EuLisp
-###  ---                                         Version 0.99
-###  ---                                        Working Draft
+##  This file is part of
+### ---                                     EuLisp
 ###-----------------------------------------------------------------------------
-
+##
+##  Eu2C is free software: you can redistribute it and/or modify it under the
+##  terms of the GNU General Public License version 2 as published by the Free
+##  Software Foundation.
+##
+##  Eu2C is distributed in the hope that it will be useful, but WITHOUT ANY
+##  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+##  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+##  details.
+##
+##  You should have received a copy of the GNU General Public License along with
+##  this program.  If not, see <http://www.gnu.org/licenses/>.
+##
 ###-----------------------------------------------------------------------------
-### LaTeX document Makefile
+### Title: LaTeX EuLisp definition document Makefile
+###  Maintainer: Henry G. Weller
+###  Description:
+##                    Programming Language EuLisp
+##                            Version 0.99
+##                            Working Draft
 ###-----------------------------------------------------------------------------
-
 DOCUMENT = eulisp
 
 ###-----------------------------------------------------------------------------
 ### Source files
 ###-----------------------------------------------------------------------------
-
 TEX_FILES = \
     bibliography.tex  eulisp.tex        modules.tex    level-0.tex \
     float.tex         mop.tex           syntax.tex     character.tex \
@@ -47,7 +62,6 @@ HTML1_DIR = html1
 ###-----------------------------------------------------------------------------
 ### Generate the PDF file
 ###-----------------------------------------------------------------------------
-
 .PHONY: all
 all: pdf html
 
@@ -90,7 +104,6 @@ undefined: $(DOCUMENT).pdf
 ###-----------------------------------------------------------------------------
 ### Generate the index files
 ###-----------------------------------------------------------------------------
-
 .PHONY: index
 index: $(IND_FILES)
 
@@ -121,7 +134,6 @@ hypersed: general.ind
 sed -e 's/\*/\\\*/g' > hypersed
 
 ###-----------------------------------------------------------------------------
-
 .PHONY: clean
 clean:
 	@rm -f *.{aux,bbl,blg,dvi,idx,ilg,ind,lof,log,lot,toc,4ct,4tc,idv,in}

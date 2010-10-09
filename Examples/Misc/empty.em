@@ -18,9 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: Misc
+;;; Title: empty level-0 module
 ;;;  Authors: Andreas Kind
-;;; Description: empty level-0 module
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo empty -l level-0
 ;;;-----------------------------------------------------------------------------

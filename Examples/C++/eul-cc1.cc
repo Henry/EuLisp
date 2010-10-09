@@ -20,6 +20,7 @@
 ///-----------------------------------------------------------------------------
 /// Title: C++ interoperability
 ///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///  Description: C++ interoperability
 ///  Compilation:
 //    g++ -c eul-cc1.cc

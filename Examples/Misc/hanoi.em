@@ -20,10 +20,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Towers of Hanoi
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo hanoi -l level-0
-;;;  EuXLisp Interpretation: (!> hanoi)
-;;;  Youtoo Interpretation: : hanoi
+;;;  EuXLisp Interpretation:
+;;    (!> hanoi)
+;;;  Youtoo Interpretation:
+;;    : hanoi
 ;;;-----------------------------------------------------------------------------
 
 (defmodule hanoi
@@ -104,5 +107,5 @@
 (hanoi)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module hanoi
 ;;;-----------------------------------------------------------------------------

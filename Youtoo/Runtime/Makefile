@@ -18,25 +18,21 @@
 ##  this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 ###-----------------------------------------------------------------------------
-
+### Title: Level-1 runtime Makefile
+###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
-### EuLisp level-1 runtime Makefile
-###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
 ### Reset U2 to use the bootstrap youtoo
 ###-----------------------------------------------------------------------------
-
 U2_DEV := $(U2)
 U2 = $(U2_BOOT)
 
 ###-----------------------------------------------------------------------------
 ### Output file names
 ###-----------------------------------------------------------------------------
-
 LEVEL0_LIB = $(EUL_LIB_DIR)/liblevel-0.a
 LEVEL0_LIB_I = $(EUL_LIB_DIR)/liblevel-0.i
 LEVEL0_SHARED_LIB = $(EUL_LIB_DIR)/liblevel-0.so
@@ -52,13 +48,11 @@ MATH_SHARED_LIB = $(EUL_LIB_DIR)/libmath.so
 ###-----------------------------------------------------------------------------
 ### Library dependencies
 ###-----------------------------------------------------------------------------
-
 TELOS_LIB_I = $(EUL_LIB_DIR)/libtelos.i
 
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
-
 LEVELN_EM = bit.em callback.em character.em collect.em compare.em condition.em \
 	convert.em convert1.em copy.em double.em double1.em dynamic.em event.em \
 	float.em format.em fpi.em \
@@ -101,7 +95,6 @@ MATH_O += $(ARCH_DIR)/Ff/eul-dbl.o
 ###-----------------------------------------------------------------------------
 ### Commands to build library object files
 ###-----------------------------------------------------------------------------
-
 .PHONY: lib
 lib:	$(LEVEL0_LIB) $(LEVEL1_LIB) $(MATH_LIB)
 
@@ -138,7 +131,6 @@ $(MATH_SHARED_LIB): $(MATH_O)
 ###-----------------------------------------------------------------------------
 ### Bootstrapping
 ###-----------------------------------------------------------------------------
-
 .PHONY: boot
 boot:	libtelos.i _macros.i liblevel-0.i liblevel1.i libmath.i
 	@rm -f libtelos.i
@@ -183,7 +175,6 @@ endif
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 .PHONY: boot-clean
 boot-clean: clean
 	@rm -f *.[ihc]

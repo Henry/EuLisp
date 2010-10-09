@@ -2,7 +2,7 @@
 ### Copyright 2010 Henry G. Weller
 ###-----------------------------------------------------------------------------
 ##  This file is part of
-### ---                         EuLisp System 'Youtoo'
+### ---                                     EuLisp
 ###-----------------------------------------------------------------------------
 ##
 ##  Youtoo is free software: you can redistribute it and/or modify it under the
@@ -18,18 +18,15 @@
 ##  this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 ###-----------------------------------------------------------------------------
-
+### Title: EuLisp Top-level Makefile
+###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
-### Top-level Makefile
-###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 .PHONY: default
 default: euxlisp youtoo
 

@@ -18,19 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: Misc
+;;; Title: Dining philosophers example
 ;;;  Authors: Andreas Kind, Chris Murphy
-;;; Description: dining philosophers
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation (default)
 ;;    youtoo dphil -l level1
 ;;;  Compilation (with foreign thread library)
 ;;    youtoo dphil -l level1 -l fthread
 ;;;-----------------------------------------------------------------------------
+
 (defmodule dphil
   (syntax (macros)
-   import (level1 csem)           ;; default
-   ;; import (level1 fthread)     ;; with foreign thread library
-   )
+   import (level1
+           csem))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Initialization
@@ -137,5 +137,5 @@
 (start-dining-philosophers)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module dphil
 ;;;-----------------------------------------------------------------------------

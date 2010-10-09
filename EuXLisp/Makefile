@@ -39,7 +39,6 @@ include ../Lib.$(ARCH)/Makefile
 ###-----------------------------------------------------------------------------
 ### Recall this Makefile for the particular achitecture
 ###-----------------------------------------------------------------------------
-
 it:
 	@$(MAKE) `uname`
 
@@ -109,7 +108,6 @@ CPPFLAGS = -DIMAGE='"$(IMAGE)"' -DIMAGE_MOD='"$(IMAGE_MOD)"' \
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
-
 EUXL_C = osspecific.c xsdmem.c xsfun2.c xsint.c xsobj.c xssym.c \
          xscheme.c xsftab.c xsimage.c xsio.c xsprint.c \
          xscom.c xsfun1.c xsinit.c xsmath.c xsread.c \
@@ -120,7 +118,7 @@ EUXL_H = osdefs.h osptrs.h xsbcode.h xscheme.h xsproto.h xssymbols.h \
 
 EULX_O = $(EUXL_C:%.c=$(ARCH_DIR)/%.o)
 
-LISP = Boot/*.em
+LISP = Level-0/*.em
 
 OTHERS = Makefile saveimage README Modules/*.em euxlisp.man euxlisp.1 \
          eunotes.html
@@ -130,7 +128,6 @@ DISTFILES = $(EUXL_C) $(EUXL_H) $(LISP) $(OTHERS)
 ###-----------------------------------------------------------------------------
 ### Commands to build EuXLisp
 ###-----------------------------------------------------------------------------
-
 all: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
 
 $(EULX_O) : $(EUXL_H)
@@ -139,17 +136,16 @@ $(EUL_BIN_DIR)/euxlisp: $(EULX_O)
 	$(CC) $(LDFLAGS) $(EULX_O) $(LIBS) -o $@
 
 $(IMAGE_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) saveimage
-	EU_MODULE_PATH=Boot $(EUL_BIN_DIR)/euxlisp -n < saveimage
+	EU_MODULE_PATH=Level-0 $(EUL_BIN_DIR)/euxlisp -n < saveimage
 	mv euxlisp.wks $(IMAGE_PLATFORM)
 
 $(IMAGE_MOD_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) savemodimage
-	EU_MODULE_PATH=Boot $(EUL_BIN_DIR)/euxlisp -n < savemodimage
+	EU_MODULE_PATH=Level-0 $(EUL_BIN_DIR)/euxlisp -n < savemodimage
 	mv euxlisp_mod.wks $(IMAGE_MOD_PLATFORM)
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
-
 version: xsbanner.h
 	awk '/define BANNER/ {print $$8}' < xsbanner.h | sed 's/[."]//g' > version
 

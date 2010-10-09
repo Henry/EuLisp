@@ -19,6 +19,7 @@
 ###-----------------------------------------------------------------------------
 ###  Title: Examples Makefile
 ###  Author: Henry G. Weller
+###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile

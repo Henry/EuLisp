@@ -18,9 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: Accessing a URL
 ;;;  Authors: Andreas Kind
-;;; Description: accessing a URL
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo url2 -l level1
 ;;;  Run
@@ -38,5 +38,5 @@
   (disconnect c))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module url2
 ;;;-----------------------------------------------------------------------------

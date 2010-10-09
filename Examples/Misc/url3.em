@@ -18,14 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: accessing a URL
 ;;;  Authors: Andreas Kind
-;;; Description: accessing a URL
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo url3 -l level1
 ;;;  Run
 ;;    url3 http://www.cs.bath.ac.uk/~jap/ak1/youtoo/home.html
 ;;;-----------------------------------------------------------------------------
+
 (defmodule url3
   (syntax (macros)
    import (level1))
@@ -36,5 +37,5 @@
 (open-url (vector-ref *argv* 1))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module url3
 ;;;-----------------------------------------------------------------------------

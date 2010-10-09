@@ -18,9 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: Misc
+;;; Title: Compute the sum up to 10000
 ;;;  Authors: Andreas Kind
-;;; Description: compute the sum up to 10000
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo sumTo -l level-0
 ;;;-----------------------------------------------------------------------------

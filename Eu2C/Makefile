@@ -19,6 +19,7 @@
 ##
 ###-----------------------------------------------------------------------------
 ### Title: Eu2C Top-level Makefile
+###  Maintainer: Henry G. Weller
 ###  Note: set Eu2CROOT e.g. export Eu2CROOT=`pwd`
 ### Usage: make [options]
 ### Options:

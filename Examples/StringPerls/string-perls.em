@@ -1,11 +1,32 @@
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;; ---                  EuLisp System 'youtoo'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; Library: string-perls
-;;; Description: String processing test module
-;;;  Compilation: make
-;;;  Run: make run
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: String processing test module
+;;;  Authors: Henry G. Weller
+;;;  Maintainer: Henry G. Weller
+;;;  Library: string-perls
+;;;  Compilation:
+;;    make
+;;;  Run:
+;;    make run
+;;;-----------------------------------------------------------------------------
+
 (defmodule string-perls
   (syntax (syntax-0)
    import (level-0))
@@ -51,5 +72,5 @@
 0
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module string-perls
 ;;;-----------------------------------------------------------------------------

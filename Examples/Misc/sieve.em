@@ -18,9 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: Misc
+;;; Title: Computing primes
 ;;;  Authors: Andreas Kind
-;;; Description: computing primes
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo sieve -l level-0
 ;;;-----------------------------------------------------------------------------

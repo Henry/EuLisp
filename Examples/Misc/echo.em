@@ -18,12 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: checking out the echo daemon (echod)
 ;;;  Authors: Andreas Kind
-;;; Description: checking out the echo daemon (echod)
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo echo -l level1
 ;;;-----------------------------------------------------------------------------
+
 (defmodule echo
   (syntax (macros)
    import (level1))
@@ -38,5 +39,5 @@
   (disconnect c))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module echo
 ;;;-----------------------------------------------------------------------------

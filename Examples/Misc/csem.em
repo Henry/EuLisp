@@ -18,16 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: Misc
+;;; Title: counting semaphores (see also dphil.em)
 ;;;  Authors: Andreas Kind, Chris Murphy
-;;; Description: counting semaphores (see also dphil.em)
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo -c csem -l level1
 ;;;-----------------------------------------------------------------------------
+
 (defmodule csem
   (syntax (macros)
    import (level1)
-   export (<csemaphore> cwait csignal))
+   export (<csemaphore>
+           cwait
+           csignal))
 
 ;;;-----------------------------------------------------------------------------
 ;;; The counting semaphore class
@@ -63,5 +66,5 @@
   (unlock (mutex-lock csem)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module csem
 ;;;-----------------------------------------------------------------------------

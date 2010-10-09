@@ -18,17 +18,16 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Addition of n numbers, in parallel
 ;;;  Authors: Andreas Kind, Liam Wickins
-;;; Description: Addition of n numbers, in parallel
-;;;  Compilation (default)
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    youtoo padd -l level1
-;;;  Compilation (with foreign thread library)
-;;    youtoo padd -l level1 -l fthread
 ;;;-----------------------------------------------------------------------------
+
 (defmodule padd
   (syntax (macros)
-   import (level1)             ;; default
-   ;; import (level1 fthread)     ;; with foreign thread library
+   import (level1)
    export (p-add))
 
 (defun p-add args
@@ -77,5 +76,5 @@
 (test2)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module padd
 ;;;-----------------------------------------------------------------------------

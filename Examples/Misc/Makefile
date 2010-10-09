@@ -1,29 +1,49 @@
-### ---                             EuLisp Examples
-
-### EuLisp miscellaneous examples Makefile
-
+### Copyright 2010 Henry G. Weller
+###-----------------------------------------------------------------------------
+##  This file is part of
+### ---                                     EuLisp
+###-----------------------------------------------------------------------------
+##
+##  Eu2C is free software: you can redistribute it and/or modify it under the
+##  terms of the GNU General Public License version 2 as published by the Free
+##  Software Foundation.
+##
+##  Eu2C is distributed in the hope that it will be useful, but WITHOUT ANY
+##  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+##  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+##  details.
+##
+##  You should have received a copy of the GNU General Public License along with
+##  this program.  If not, see <http://www.gnu.org/licenses/>.
+##
+###-----------------------------------------------------------------------------
+### Title: Examples Makefile
+###  Maintainer: Henry G. Weller
+###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
-### EuLisp Level-0 examples
+###  EuLisp Level-0 examples
 EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl triang \
 	random2 macro-dispatch-char
 EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
-### EuLisp Level-1 examples
+###  EuLisp Level-1 examples
 EXAMPLES_1 = dphil echo echod padd url url2 url3
 
 OTHERS_EM = csem
 
-### All examples
+###  All examples
 EXAMPLES = $(EXAMPLES_0) $(EXAMPLES_1)
 EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
-### Youtoo default compile rules for Level-0 and Level-1
+###  Youtoo default compile rules for Level-0 and Level-1
 makeExe0 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level-0 -l math
 makeExe1 = ${U2} ${U2FLAGS} $(1) -od $(ARCH_DIR) -l level1 -l math
 
+###-----------------------------------------------------------------------------
 ### Youtoo compile rules for all examples
+###-----------------------------------------------------------------------------
 all: $(EXAMPLES_EXE)
 
 # A stress test
@@ -90,7 +110,9 @@ $(ARCH_DIR)/url2: url2.em
 $(ARCH_DIR)/url3: url3.em
 	$(call makeExe1,url3)
 
-###  Run the examples
+###-----------------------------------------------------------------------------
+### Run the examples
+###-----------------------------------------------------------------------------
 .PHONY: runeuxlisp
 runeuxlisp: $(EXAMPLES_0_EM)
 	@$(foreach example, $(EXAMPLES_0_EM), \
@@ -113,6 +135,9 @@ runyoutoo: $(EXAMPLES_EXE)
 .PHONY: run
 run: runeuxlisp runyoutoo
 
+###-----------------------------------------------------------------------------
+### Miscellaneous commands
+###-----------------------------------------------------------------------------
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR)
@@ -123,3 +148,4 @@ clean:
 distclean: clean
 	@rm -rf platforms
 
+###-----------------------------------------------------------------------------

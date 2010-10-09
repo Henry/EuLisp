@@ -18,13 +18,14 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
-;;;  Author: Andreas Kind
-;;; Description: foreign function test
+;;; Title: foreign function test
+;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    cc $(CFLAGS) -c eul-ffi2.c
 ;;    youtoo ffi2 -l level-0 -fff eul-ffi2
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ffi2
   (syntax (syntax-0)
    import (level-0))
@@ -63,5 +64,5 @@
 (print (eq (ext_nil) '()) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module ffi2
 ;;;-----------------------------------------------------------------------------

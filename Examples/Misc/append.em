@@ -18,13 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: little stress test
 ;;;  Authors: Andreas Kind
-;;; Description: little stress test
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    youtoo append -l level-0
-;;;  Interpretation: (!> append)
+;;;  Interpretation:
+;;    (!> append)
 ;;;-----------------------------------------------------------------------------
+
 (defmodule append
   (syntax (syntax-0)
    import (level-0)

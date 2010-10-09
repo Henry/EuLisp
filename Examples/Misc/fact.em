@@ -18,10 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: test
+;;; Title: Factorial function
 ;;;  Authors: Andreas Kind
-;;; Description: faculty function in EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule fact
   (syntax (syntax-0)
    import (level-0)

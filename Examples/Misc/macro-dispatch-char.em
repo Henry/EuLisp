@@ -20,6 +20,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Common Lisp like dispatch macro characters
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    Needs file macro-dispatch-char.dat
 ;;    with (1 2 3 #M(4 5 6) 7 8 9)

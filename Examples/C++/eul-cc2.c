@@ -18,14 +18,14 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Library: cc
+/// Title: C++ interoperability
 ///  Authors: Andreas Kind
-///  Description: C++ interoperability
+///  Maintainer: Henry G. Weller
 ///  Compilation:
-///   ../youtoo -c test2 -l level1
-///   gcc -c -I../Gc eul-cc2.c
-///   g++ -c eul-cc3.cc
-///   ../youtoo test2 -l level1 -fff eul-cc2 -fff eul-cc3 -recompile
+//    ../youtoo -c test2 -l level1
+//    gcc -c -I../Gc eul-cc2.c
+//    g++ -c eul-cc3.cc
+//    ../youtoo test2 -l level1 -fff eul-cc2 -fff eul-cc3 -recompile
 ///-----------------------------------------------------------------------------
 
 #include "eulisp.h"
@@ -44,6 +44,5 @@ char foo(char *str, int i)
 
     return eul_char_as_c_char(eul_res);
 }
-
 
 ///-----------------------------------------------------------------------------

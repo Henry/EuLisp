@@ -1,16 +1,29 @@
+### Copyright 2010 Henry G. Weller
 ###-----------------------------------------------------------------------------
-### ---                    EuLisp Ffi Examples
+##  This file is part of
+### ---                           EuLisp System 'Youtoo'
 ###-----------------------------------------------------------------------------
-
+##
+##  Eu2C is free software: you can redistribute it and/or modify it under the
+##  terms of the GNU General Public License version 2 as published by the Free
+##  Software Foundation.
+##
+##  Eu2C is distributed in the hope that it will be useful, but WITHOUT ANY
+##  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+##  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+##  details.
+##
+##  You should have received a copy of the GNU General Public License along with
+##  this program.  If not, see <http://www.gnu.org/licenses/>.
+##
 ###-----------------------------------------------------------------------------
-### EuLisp Ffi example Makefile
+### Title: Ffi example Makefile
+###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
-
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
-
 EXAMPLES = ffi ffi1 ffi2
 EXAMPLES_EXE = $(EXAMPLES:%=$(ARCH_DIR)/%)
 
@@ -32,7 +45,7 @@ $(ARCH_DIR)/ffi2: ffi2.em $(ARCH_DIR)/eul-ffi2.o
 	${U2} ${U2FLAGS} ffi2 -od $(ARCH_DIR) -l level-0 -fff eul-ffi2
 
 ###-----------------------------------------------------------------------------
-###  Run the examples
+### Run the examples
 ###-----------------------------------------------------------------------------
 RUN = ffi ffi2
 
@@ -43,6 +56,8 @@ run: $(EXAMPLES_EXE)
 		$(ARCH_DIR)/$(example);)
 	$(ARCH_DIR)/ffi1 "20"
 
+###-----------------------------------------------------------------------------
+### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 .PHONY: clean
 clean:

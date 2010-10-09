@@ -18,10 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Library: misc
-///  Authos: Andreas Kind
-///  Description: foreign function test (see ffi2.em)
-///  Compilation: cc -c eul-ffi2.c
+/// Title: Foreign function test (see ffi2.em)
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
+///  Compilation:
+//    cc -c eul-ffi2.c
 ///-----------------------------------------------------------------------------
 
 #include "eul-ffi2.h"

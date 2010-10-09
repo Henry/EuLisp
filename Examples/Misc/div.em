@@ -1,21 +1,44 @@
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-; File:         div.em
-; Description:  DIV benchmarks
-; Author:       Richard Gabriel
-; Created:      8-Apr-85
-; Modified:     19-Jul-85 18:28:01 (Bob Shaw)
-;               23-Jul-87 (Will Clinger)
-;               30-May-96 (Andreas Kind)
-; Language:     EuLisp
-; Status:       Public Domain
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;; Copyright 1996 Andreas Kind
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Benchmark which divides by 2 using lists of n ()'s.
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    Author:       Richard Gabriel
+;;    Created:      8-Apr-85
+;;    Modified:     19-Jul-85 18:28:01 (Bob Shaw)
+;;                  23-Jul-87 (Will Clinger)
+;;                  30-May-96 (Andreas Kind)
+;;    This file contains a recursive as well as an iterative test.
+;;;  Compilation:
+;;    youtoo div -l level-0 -l math
+;;;  Interpretation:
+;;    (!> arith0)
+;;;-----------------------------------------------------------------------------
 
-;; DIV2 -- Benchmark which divides by 2 using lists of n ()'s.
-;; This file contains a recursive as well as an iterative test.
 (defmodule div
   (syntax (syntax-0)
    import (level-0 math)
-   export (test-1 test-2 *ll*))
+   export (test-1
+           test-2
+           *ll*))
 
 (defun create-n (n)
   (labels

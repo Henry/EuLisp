@@ -1,4 +1,3 @@
-;;; -----------------------------------------------------------------------
 ;;; Copyright 1997 A. Kind & University of Bath
 ;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -18,13 +17,15 @@
 ;;  You should have received a copy of the GNU General Public License along with
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
-;;; -----------------------------------------------------------------------
-;;;  Library: misc
+;;;-----------------------------------------------------------------------------
+;;; Title: Recursion test
 ;;;  Authors: Andreas Kind
-;;;  Description: recursion test
-;;;  Compilation: ../youtoo rec -l level-0
-;;;  Interpretation: (!> rec)
-;;; -----------------------------------------------------------------------
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
+;;    youtoo rec -l level-0
+;;;  Interpretation:
+;;    (!> rec)
+;;;-----------------------------------------------------------------------------
 
 (defmodule rec
   (syntax (syntax-0)

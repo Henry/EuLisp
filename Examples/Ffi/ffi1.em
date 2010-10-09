@@ -18,12 +18,13 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: misc
+;;; Title: Foreign function test
 ;;;  Authors: Andreas Kind
-;;; Description: foreign function test
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo ffi1 -l level-0
 ;;;-----------------------------------------------------------------------------
+
 (defmodule ffi1
   (syntax (syntax-0)
    import (level-0))
@@ -41,5 +42,5 @@
   (error <condition> "no parameter passed"))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module ffi1
 ;;;-----------------------------------------------------------------------------

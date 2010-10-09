@@ -18,9 +18,9 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: cc
+;;; Title: FORTRAN interoperability
 ;;;  Authors: Andreas Kind
-;;; Description: C++ interoperability
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;   f77 -c eul-f1.f
 ;;   youtoo test1 -l level-0 -fff eul-f1
@@ -30,12 +30,12 @@
    import (level-0))
 
 ;;;-----------------------------------------------------------------------------
-;;; Out-call to Fortran
-;;; Future: (defextern ... language: fortran) and no ref types
+;;; Out-call to FORTRAN
+;;; Future: (defextern ... language: FORTRAN) and no ref types
 ;;;-----------------------------------------------------------------------------
 (defextern foo (<int*> <double*>) <double> "foo_")
 (print (foo (convert 42 <int*>) (convert 1.0 <double*>)) nl)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test1
 ;;;-----------------------------------------------------------------------------
