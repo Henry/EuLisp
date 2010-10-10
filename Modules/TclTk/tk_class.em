@@ -20,7 +20,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Basic operations for the widget classes
 ;;;  Library: tcltk
-;;;  Authors: J Garcia
+;;;  Authors: J. Garcia
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_class
@@ -28,13 +29,31 @@
    import (level1
            tk_general)
    export (tk-make-button
-           tk-make-label tk-make-frame tk-make-canvas
-           tk-make-checkbutton tk-make-entry tk-make-listbox tk-make-menu
-           tk-make-menubutton tk-make-message tk-make-radiobutton
-           tk-make-scale tk-make-scrollbar tk-make-text tk-make-toplevel
-           tk-conf-widget tk-menu-add tk-insert tk-delete tk-xview tk-yview
-           tk-get-value-widget tk-scroll-set tk-listbox-curselection
-           tk-button-flash eul-associate tk-set-value-widget))
+           tk-make-label
+           tk-make-frame
+           tk-make-canvas
+           tk-make-checkbutton
+           tk-make-entry
+           tk-make-listbox
+           tk-make-menu
+           tk-make-menubutton
+           tk-make-message
+           tk-make-radiobutton
+           tk-make-scale
+           tk-make-scrollbar
+           tk-make-text
+           tk-make-toplevel
+           tk-conf-widget
+           tk-menu-add
+           tk-insert
+           tk-delete
+           tk-xview tk-yview
+           tk-get-value-widget
+           tk-scroll-set
+           tk-listbox-curselection
+           tk-button-flash
+           eul-associate
+           tk-set-value-widget))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Extern Declarations (Call foreign functions.)
@@ -355,5 +374,5 @@
       (flush))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module tk_class
 ;;;-----------------------------------------------------------------------------

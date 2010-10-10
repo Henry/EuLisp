@@ -18,11 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: Serializing closures
 ///  Library: eul-serial2
-///  Authos: Andreas Kind
-///  Description: serializing closures
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "eulisp.h"
 #include "bytecode.h"
 #include "bytecode2.h"
@@ -428,7 +428,6 @@ LispRef eul_link_bytevector_refs(LispRef bv, LispRef refs)
 ///-----------------------------------------------------------------------------
 /// Test
 ///-----------------------------------------------------------------------------
-
 extern LispRef compare_bindings[];
 extern LispRef stream_bindings[];
 

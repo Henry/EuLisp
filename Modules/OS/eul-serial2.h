@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: Foreign functions for marshaling closures
 ///  Library: serial
-///  Authos: Andreas Kind
-///  Description: Foreign functions for marshaling closures
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_SERIAL2_H
 #define EUL_SERIAL2_H

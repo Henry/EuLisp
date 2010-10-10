@@ -1,39 +1,69 @@
-;; A simple Linda implementation
-;; RJB March 92
-;; EuScheme version RJB Nov 94
-
-;; (make-linda-pool)
-;; (linda-out pool tag . values)
-;; (linda-in pool tag . pattern)
-;; (linda-in? pool tag . pattern)
-;; (linda-read pool tag . pattern)
-;; (linda-read? pool tag . pattern)
-;; (linda-eval fun . args)
-
-;; tag is a constant symbol (not matched)
-
-;; linda-in? and linda-read? are non-blocking versions of linda-in
-;; and linda-read, returning () if no matching tuple, t otherwise.
-
-;; the pattern (? var) matches anything, and assigns that value to var
-;; the pattern ? matches anything, and discards the value
-;; tags, and any other patterns are matched literally
-
-;; e.g.
-;; (setq pp (make-linda-pool))
-;; (linda-out pp 'foo 1 2)
-;; (linda-read pp 'foo ? (? x))      setqs x to 2
-;; (linda-read? pp 'foo 1 2 3)       returns ()
-;; (linda-read pp 'foo 1 2 3)        suspends
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: A simple Linda implementation
+;;;  Authors: Russell Bradford
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    (make-linda-pool)
+;;    (linda-out pool tag . values)
+;;    (linda-in pool tag . pattern)
+;;    (linda-in? pool tag . pattern)
+;;    (linda-read pool tag . pattern)
+;;    (linda-read? pool tag . pattern)
+;;    (linda-eval fun . args)
+;;
+;;    tag is a constant symbol (not matched)
+;;
+;;    linda-in? and linda-read? are non-blocking versions of linda-in
+;;    and linda-read, returning () if no matching tuple, t otherwise.
+;;
+;;    the pattern (? var) matches anything, and assigns that value to var
+;;    the pattern ? matches anything, and discards the value
+;;    tags, and any other patterns are matched literally
+;;
+;;    e.g.
+;;    (setq pp (make-linda-pool))
+;;    (linda-out pp 'foo 1 2)
+;;    (linda-read pp 'foo ? (? x))      setqs x to 2
+;;    (linda-read? pp 'foo 1 2 3)       returns ()
+;;    (linda-read pp 'foo 1 2 3)        suspends
+;;;-----------------------------------------------------------------------------
 
 (defmodule eulinda
   (import (level-0)
-   export (<linda-pool> make-linda-pool linda-in linda-read
-                        linda-out linda-evallinda-in? linda-read?
-                        linda-in-tuple linda-read-tuple
-                        linda-in?-tuple linda-read?-tuple
-                        linda-tuple-value ?
-                        print-linda-pool tril))
+   export (<linda-pool>
+           make-linda-pool
+           linda-in
+           linda-read
+           linda-out
+           linda-evallinda-in?
+           linda-read?
+           linda-in-tuple
+           linda-read-tuple
+           linda-in?-tuple
+           linda-read?-tuple
+           linda-tuple-value
+           ?
+           print-linda-pool
+           tril))
 
 (deflocal trace-linda? ())
 
@@ -307,4 +337,6 @@
 ; a convenient fiddle
 (defconstant ? '?)
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module linda
+;;;-----------------------------------------------------------------------------

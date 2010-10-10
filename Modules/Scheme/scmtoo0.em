@@ -18,12 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Scheme synatx (IEEE Std 1178-1990) in EuLisp
 ;;;  Library: Scheme
 ;;;  Authors: Andreas Kind, Pete Broadbery, Luc Moreau
-;;; Description: Scheme synatx (IEEE Std 1178-1990) in EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule scmtoo0
-  (import (level1 eval))
+  (import (level1
+           eval))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Trace
@@ -43,37 +46,39 @@
        (setq *redefine-imported-bindings*
              (list *redefine-imported-bindings*))
        (setq ,tmp-name ,function-name)
-       (setq ,function-name (named-lambda ,function-name args
-                                          ,(if pre-action
-                                               `(apply ,pre-action ,function-name args)
-                                             `(progn
-                                                (display ">>> ")
-                                                (display (dynamic-variable-ref '*trace-indent*))
-                                                (display "TRACE [")
-                                                (display ',function-name)
-                                                (display "]: ")
-                                                (display args)
-                                                (newline)))
-                                          (let ((res (begin
-                                                      (push-dynamic-variable
-                                                       '*trace-indent*
-                                                       (string-append (dynamic-variable-ref '*trace-indent*)
-                                                                      " "))
-                                                      (apply ,tmp-name args))))
-                                            (pop-dynamic-variables 1)
-                                            ,(if post-action
-                                                 `(apply ,post-action ,function-name args)
-                                               `(progn
-                                                  (display "<<< ")
-                                                  (display (dynamic-variable-ref '*trace-indent*))
-                                                  (display "TRACE [")
-                                                  (display ',function-name)
-                                                  (display "]: ")
-                                                  (display args)
-                                                  (display " => ")
-                                                  (display res)
-                                                  (newline)))
-                                            res)))
+       (setq ,function-name
+             (named-lambda
+              ,function-name args
+              ,(if pre-action
+                   `(apply ,pre-action ,function-name args)
+                 `(progn
+                    (display ">>> ")
+                    (display (dynamic-variable-ref '*trace-indent*))
+                    (display "TRACE [")
+                    (display ',function-name)
+                    (display "]: ")
+                    (display args)
+                    (newline)))
+              (let ((res (begin
+                          (push-dynamic-variable
+                           '*trace-indent*
+                           (string-append (dynamic-variable-ref '*trace-indent*)
+                                          " "))
+                          (apply ,tmp-name args))))
+                (pop-dynamic-variables 1)
+                ,(if post-action
+                     `(apply ,post-action ,function-name args)
+                   `(progn
+                      (display "<<< ")
+                      (display (dynamic-variable-ref '*trace-indent*))
+                      (display "TRACE [")
+                      (display ',function-name)
+                      (display "]: ")
+                      (display args)
+                      (display " => ")
+                      (display res)
+                      (newline)))
+                res)))
        ;; retrieve previous value
        (setq *redefine-imported-bindings*
              (car *redefine-imported-bindings*))
@@ -90,5 +95,5 @@
              (car *redefine-imported-bindings*)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module scmtoo0
 ;;;-----------------------------------------------------------------------------

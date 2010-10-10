@@ -18,13 +18,13 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Library: fthread
+/// Title: FF interface to Unix International (aka Solaris) Threads (UI)
+///  Library: fthread (foreign thread interface)
 ///  Authors: Liam Wickins, Andreas Kind
-///  Description: Foreign threads based on Unix International Threads (UI)
-///    alias Solaris Threads
-///  Compilation: see fthread.em
+///  Maintainer: Henry G. Weller
+///  Description:
+//    see fthread.em
 ///-----------------------------------------------------------------------------
-
 #include <eulisp.h>
 #include <thread.h>
 #include <gc/gc.h>
@@ -32,7 +32,6 @@
 ///-----------------------------------------------------------------------------
 /// Thread access
 ///-----------------------------------------------------------------------------
-
 #define THREAD_FUNCTION(x) (slot_ref((x),2))
 #define THREAD_RETURNED(x) (slot_ref((x),3))
 #define THREAD_RETURN_VALUE(x) (slot_ref((x),4))
@@ -43,7 +42,6 @@
 ///-----------------------------------------------------------------------------
 /// Initialization
 ///-----------------------------------------------------------------------------
-
 thread_key_t eul_thr_key;
 
 LispRef eul_initialize_foreign_threads(LispRef thr)
@@ -63,8 +61,6 @@ LispRef eul_initialize_foreign_threads(LispRef thr)
 /// Returns: void
 /// See also: eul_thr_create()
 ///-----------------------------------------------------------------------------
-
-
 void eul_thr_interpret(LispRef thr)
 {
   RegisterRef tame_regs;
@@ -85,7 +81,6 @@ void eul_thr_interpret(LispRef thr)
 /// Args: Lisp thread plus Lisp args
 /// Returns: thread
 ///-----------------------------------------------------------------------------
-
 LispRef eul_thr_create(LispRef thr, LispRef args)
 {
   int status, arity = 0;
@@ -153,7 +148,6 @@ LispRef eul_thr_create(LispRef thr, LispRef args)
 /// Args: Lisp thread
 /// Returns: Lisp Object
 ///-----------------------------------------------------------------------------
-
 #define THREAD_WAITING 1
 #define THREAD_JOINED  3
 
@@ -201,7 +195,6 @@ int eul_thr_join_all()
 /// Args: none
 /// Returns: eul_nil
 ///-----------------------------------------------------------------------------
-
 LispRef eul_thr_yield()
 {
   thr_yield();
@@ -215,7 +208,6 @@ LispRef eul_thr_yield()
 /// Args: none
 /// Returns: Lisp thread
 ///-----------------------------------------------------------------------------
-
 LispRef eul_thr_self()
 {
   LispRef res;
@@ -231,7 +223,6 @@ LispRef eul_thr_self()
 /// Returns: eul_true, if suspended successfully; eul_nil, otherwise
 /// See also: eul_thr_continue()
 ///-----------------------------------------------------------------------------
-
 LispRef eul_thr_suspend(LispRef thrs)
 {
   thread_t thr_handle_struct, *thr_handle;
@@ -258,7 +249,6 @@ LispRef eul_thr_suspend(LispRef thrs)
 /// Returns: thread, if thread continued successfully; otherwise eul_nil
 /// See also: eul_thr_suspend()
 ///-----------------------------------------------------------------------------
-
 LispRef eul_thr_continue(LispRef thr)
 {
   thread_t *thr_handle;
@@ -278,7 +268,6 @@ LispRef eul_thr_continue(LispRef thr)
 /// Args: thread handle
 /// Returns: priority or eul_nil
 ///-----------------------------------------------------------------------------
-
 LispRef eul_thr_get_priority(thread_t *thr_handle)
 {
   int n;

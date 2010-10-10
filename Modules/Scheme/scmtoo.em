@@ -18,17 +18,24 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Scheme interpreter/compiler entry point
 ;;;  Library: scheme
 ;;;  Authors: Andreas Kind
-;;; Description: Scheme interpreter/compiler entry point
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule scmtoo
-  (import (scheme scheme0 scmtoo0
-                  (only (main *redefine-imported-bindings*) eval)
-                  (only (*argv*
-                         push-dynamic-variable
-                         dynamic-variable-ref
-                         pop-dynamic-variables) level1))
+  (import (scheme
+           scheme0
+           scmtoo0
+           (only (main
+                  *redefine-imported-bindings*)
+                 eval)
+           (only (*argv*
+                  push-dynamic-variable
+                  dynamic-variable-ref
+                  pop-dynamic-variables)
+                 level1))
    export (*redefine-imported-bindings*
            push-dynamic-variable
            dynamic-variable-ref
@@ -37,5 +44,5 @@
 (main *argv*)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module scmtoo
 ;;;-----------------------------------------------------------------------------

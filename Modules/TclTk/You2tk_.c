@@ -18,9 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Description: C hook file of EuLisp module you2tk
+/// Title: C hook file of EuLisp module you2tk
+///  Library: tcltk
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "eulisp.h"
 
 // Initialize module you2tk ...

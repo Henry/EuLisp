@@ -1,10 +1,44 @@
-;; File   : Eulisp input file; wm.em
-;; Date   : 30 Jan 1995
-;; Author : Tracy Gardner
-;; Description: Working Memory Module for OPS5.
+;;; Copyright 1995 Tracy Gardner & University of Bath
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Working Memory Module for OPS5
+;;;  Library: ops5
+;;;  Authors: Tracy Gardner
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    OPS5 for EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+
 (defmodule wm
-  (syntax (syntax-0 macros-tag)
-   import (level-0 basic prod-gf wm-gf cond-el-gf conflict ops-out))
+  (syntax (syntax-0
+           macros-tag)
+   import (level-0
+           basic
+           prod-gf
+           wm-gf
+           cond-el-gf
+           conflict
+           ops-out)
+   export (make-wm-manager
+           insert-wme
+           remove-wme))
 
 (print "### wm" nl)
 
@@ -171,8 +205,7 @@
 
   method: (((cr-manager <cr-manager>) (rem-wme <wm-element>) cr-manager)
            (remove-by-timestamp cr-manager (timestamp rem-wme))))
-(export make-wm-manager insert-wme remove-wme)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module wm
 ;;;-----------------------------------------------------------------------------

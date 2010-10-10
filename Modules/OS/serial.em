@@ -18,32 +18,83 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Object streams
 ;;;  Library: serial
 ;;;  Authors: Andreas Kind
-;;; Description: object streams
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule serial
   (syntax (syntax-0)
    import (level-0)
-   export (<object-stream> object-stream-cache object-stream-cache-index
-                           *serial-standard-modules* serialize deserialize reset
-                           ;; used in eul-serial.c
-                           eul-serial-read-bytes eul-serial-error
-                           eul-serial-make-class eul-serial-make-state
-                           eul-serial-make-instance eul-serial-allocate-instance
-                           eul-serial-initialize-instance eul-serial-make-file-stream))
+   export (<object-stream>
+           object-stream-cache
+           object-stream-cache-index
+           *serial-standard-modules*
+           serialize
+           deserialize
+           reset
+           ;; used in eul-serial.c
+           eul-serial-read-bytes
+           eul-serial-error
+           eul-serial-make-class
+           eul-serial-make-state
+           eul-serial-make-instance
+           eul-serial-allocate-instance
+           eul-serial-initialize-instance
+           eul-serial-make-file-stream))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Define standard EuLisp modules
-;;; This should reflect full-import in Lib.sgi/liblevel-0.i as default
+;;; This should reflect full-import in liblevel-0.i as default
 ;;;-----------------------------------------------------------------------------
 (deflocal *serial-standard-modules*
-  #(level-0 telos boot1 boot
-           mop-defcl mop-meth mop-gf mop-inspect mop-init mop-class mop-key
-           mop-prim mop-access mop-alloc bit condition event thread dynamic
-           let-cc callback string convert copy integer number fpi collect compare
-           character float stream3 vector stream stream1 lock stream2 socket list
-           format convert1 table1 table handler random symbol read))
+  #(level-0
+    telos
+    boot1
+    boot
+    mop-defcl
+    mop-meth
+    mop-gf
+    mop-inspect
+    mop-init
+    mop-class
+    mop-key
+    mop-prim
+    mop-access
+    mop-alloc
+    bit condition
+    event
+    thread
+    dynamic
+    let-cc
+    callback
+    string
+    convert
+    copy
+    integer
+    number
+    fpi
+    collect
+    compare
+    character
+    float
+    stream3
+    vector
+    stream
+    stream1
+    lock
+    stream2
+    socket
+    list
+    format
+    convert1
+    table1
+    table
+    handler
+    random
+    symbol
+    read))
 
 (defun serialize (x . ss)
   (let ((s (if ss (car ss) stdout))
@@ -227,36 +278,37 @@
   (if (prev-object x os) os
     (let* ((sink (stream-sink os))
            (supers (class-direct-superclasses x))
-           (slot-descrs (map (lambda (slot)
-                               (let ((name (slot-name slot))
-                                     (required? (slot-required? slot)))
-                                 (if required?
-                                     (list name: name
-                                           ;; Just following the convention ...
-                                           ; accessor:
-                                           ; (concatenate (class-name x) '- name)
-                                           keyword:
-                                           (slot-keyword slot)
+           (slot-descrs
+            (map (lambda (slot)
+                   (let ((name (slot-name slot))
+                         (required? (slot-required? slot)))
+                     (if required?
+                         (list name: name
+                               ;; Just following the convention ...
+                               ; accessor:
+                               ; (concatenate (class-name x) '- name)
+                               keyword:
+                               (slot-keyword slot)
 
-                                           ;; default:
-                                           ; (slot-default slot)
-                                           required?:
-                                           (slot-required? slot))
-                                   (list name: name
-                                         ;; Just following the convention ...
-                                         ; accessor:
-                                         ; (concatenate (class-name x) '- name)
-                                         keyword:
-                                         (slot-keyword slot)
+                               ;; default:
+                               ; (slot-default slot)
+                               required?:
+                               (slot-required? slot))
+                       (list name: name
+                             ;; Just following the convention ...
+                             ; accessor:
+                             ; (concatenate (class-name x) '- name)
+                             keyword:
+                             (slot-keyword slot)
 
-                                         ;; default:
-                                         ; (slot-default slot)
-                                         ))))
-                             (select (lambda (s)
-                                       (null? (any? (lambda (super)
-                                                      (member s (class-slots super)))
-                                                    supers)))
-                                     (class-slots x)))))
+                             ;; default:
+                             ; (slot-default slot)
+                             ))))
+                 (select (lambda (s)
+                           (null? (any? (lambda (super)
+                                          (member s (class-slots super)))
+                                        supers)))
+                         (class-slots x)))))
       (generic-print TC_CLASS sink)
       (generic-write (class-name x) os)
       (generic-write supers os)
@@ -587,5 +639,5 @@
   c)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module serial
 ;;;-----------------------------------------------------------------------------

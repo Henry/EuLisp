@@ -1,14 +1,38 @@
+;;; Copyright 1995 Tracy Gardner & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;;                 OPS5 for EuLisp System 'youtoo'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; File   : ops-reader.em
-;;; Date   : 10 Jul 1995
-;;; Author : Tracy Gardner (tag@maths.bath.ac.uk)
-;;; Description: Reads literal/production from OPS5 file
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
-(defmodule ops-reader ;; (import (level-0))
-  (syntax (syntax-0 macros-tag)
-   import (level-0 basic))
+;;; Title: Reads literal/production from OPS5 file
+;;;  Library: ops5
+;;;  Authors: Tracy Gardner
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    OPS5 for EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+
+(defmodule ops-reader
+  (syntax (syntax-0
+           macros-tag)
+   import (level-0
+           basic)
+   export (*prog*
+           ops-read))
 
 (deflocal *prog*
   '((literalize monkey
@@ -190,8 +214,6 @@
     (when *prog* (setq *prog* (cdr *prog*)))
     ret))
 
-(export *prog* ops-read)
-
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module ops-reader
 ;;;-----------------------------------------------------------------------------

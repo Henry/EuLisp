@@ -1,96 +1,114 @@
-;;; Verbose META in EuLisp.
+;;; Copyright 2003 T. Kurt Bond
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Verbose META in EuLisp.
 ;;;  Author: T. Kurt Bond
-;;;  Original code: http://unwind-protect.org/~tkb/software.html
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    Original code: http://unwind-protect.org/~tkb/software.html
+;;    This code was inspired by Henry G. Baker's article:
+;;        "Pragmatic Parsing in Common Lisp",
+;;        ACM LISP Pointers IV,2
+;;        (April-June 1991), 3-15.
 ;;
-;;   This code was inspired by Henry G. Baker's article:
-;;       "Pragmatic Parsing in Common Lisp",
-;;       ACM LISP Pointers IV,2
-;;       (April-June 1991), 3-15.
+;;    However, any errors are mine; inefficencies too.  There have been some
+;;    minor changes and additions from the code in that article.
 ;;
-;;   However, any errors are mine; inefficencies too.
-;;   There have been some minor changes and additions from the code in that
-;;   article.
+;;    You can download the original paper from http://home.pipeline.com/~hbaker1
 ;;
-;;   You can download the original paper from http://home.pipeline.com/~hbaker1
-;;;
-;;;  Comments to tkb@access.mountain.net.
-;;;
+;;    Comments to tkb@access.mountain.net.
 ;;;-----------------------------------------------------------------------------
-;;; Description of forms:
-;;;-----------------------------------------------------------------------------
-;;  Non-terminals are in {}s.
+;;;  Description of forms:
+;;    Non-terminals are in {}s.
 ;;
-;;  (match {exp}) => generalized-boolean
+;;    (match {exp}) => generalized-boolean
 ;;
-;;      This form applies the matching expression {exp} to the value of
-;;      `sequence', starting at `index' and ending at `end'.  It returns
-;;      true if the expression matched.
+;;        This form applies the matching expression {exp} to the value of
+;;        `sequence', starting at `index' and ending at `end'.  It returns
+;;        true if the expression matched.
 ;;
-;;      The user must lexically bind `sequence' to the sequence to parse,
-;;      `index' to where the parse should start, and `end' to where the
-;;      parse should end.  The implementation of the matching language
-;;      uses those variables for its own purposes, so the user should
-;;      not assign to them (or even reference them if they do not know
-;;      what they are doing.).
+;;        The user must lexically bind `sequence' to the sequence to parse,
+;;        `index' to where the parse should start, and `end' to where the
+;;        parse should end.  The implementation of the matching language
+;;        uses those variables for its own purposes, so the user should
+;;        not assign to them (or even reference them if they do not know
+;;        what they are doing.).
 ;;
-;;  (match-expr {seq} ([{start} [{end}]]) {exp}) => generalized-boolean
+;;    (match-expr {seq} ([{start} [{end}]]) {exp}) => generalized-boolean
 ;;
-;;      This form binds `sequence' to the value of s and applies the
-;;      matching expression `exp' to `sequence'.  If `start' is
-;;      specified `index' is bound to its value; otherwise `index' is
-;;      bound to zero.  If `end' is specified, `end' is bound to its
-;;      value; otherwise `end' is bound to the length of the sequence.
+;;        This form binds `sequence' to the value of s and applies the
+;;        matching expression `exp' to `sequence'.  If `start' is
+;;        specified `index' is bound to its value; otherwise `index' is
+;;        bound to zero.  If `end' is specified, `end' is bound to its
+;;        value; otherwise `end' is bound to the length of the sequence.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Description of matching expression syntax:
+;;;  Description of matching expression syntax:
+;;    The symbol `...' indicates zero or more of the preceding expression.
+;;
+;;    (seq {exp} ...)
+;;        Matches every one of `{exp} ...'.
+;;
+;;    (alt {exp} ...)
+;;        Matches exactly one of `{exp} ...'
+;;
+;;    (type {type-pred})
+;;    (type {type-pred} {var})
+;;        Matches if, given the current `element', (typep element {type-pred})
+;;        is true.  If {var} was specified, it is assigned the value of
+;;        `element'.
+;;
+;;    (star {exp})
+;;    (star {exp} {min})
+;;    (star {exp} {min} {max})
+;;        Matches zero or more of {exp}.
+;;        If {min} is specified by itself, matches exactly {min} of {exp}.
+;;        If {min} and {max} are specified, matches at least {min} and at most
+;;        {max} of {exp}.
+;;        {min} and {max} can be (), in which case they do not limit
+;;        (Thus, (star {exp} 3 ()) matches at least 3 of {exp}, and possibly
+;;        more.)
+;;
+;;    (not {exp})
+;;        Doesn't match if {exp} does.
+;;
+;;    (name {var} {exp})
+;;        Matches {exp} and sets {var} to the matching sub-sequence.
+;;
+;;    (push {var} {exp})
+;;        Matches {exp} and pushes the matching sub-sequence onto {var}.
+;;
+;;    (end)
+;;       Matches if at the end of the sequence.
+;;
 ;;;-----------------------------------------------------------------------------
-;;  The symbol `...' indicates zero or more of the preceding expression.
-;;
-;;  (seq {exp} ...)
-;;      Matches every one of `{exp} ...'.
-;;
-;;  (alt {exp} ...)
-;;      Matches exactly one of `{exp} ...'
-;;
-;;  (type {type-pred})
-;;  (type {type-pred} {var})
-;;      Matches if, given the current `element', (typep element {type-pred})
-;;      is true.  If {var} was specified, it is assigned the value of `element'.
-;;
-;;  (star {exp})
-;;  (star {exp} {min})
-;;  (star {exp} {min} {max})
-;;      Matches zero or more of {exp}.
-;;      If {min} is specified by itself, matches exactly {min} of {exp}.
-;;      If {min} and {max} are specified, matches at least {min} and at most
-;;      {max} of {exp}.
-;;      {min} and {max} can be (), in which case they do not limit
-;;      (Thus, (star {exp} 3 ()) matches at least 3 of {exp}, and possibly
-;;      more.)
-;;
-;;  (not {exp})
-;;      Doesn't match if {exp} does.
-;;
-;;  (name {var} {exp})
-;;      Matches {exp} and sets {var} to the matching sub-sequence.
-;;
-;;  (push {var} {exp})
-;;      Matches {exp} and pushes the matching sub-sequence onto {var}.
-;;
-;;  (end)
-;;     Matches if at the end of the sequence.
-;;
-;;;-----------------------------------------------------------------------------
-;;;  Note:
+;;; Note:
 ;;    Despite the use of `sequence' as a variable name, I haven't
 ;;    actually tried using this to parse anything but lists.  At least
 ;;    the `name' ecase branch, `match-literal' and `match-type' would
 ;;    have to change for that.
-;;
 ;;;-----------------------------------------------------------------------------
+
 (defmodule vmeta
-  (syntax (syntax-0 vmeta-aux)
+  (syntax (syntax-0
+           vmeta-aux)
    import (level-0))
 
 ;;;-----------------------------------------------------------------------------

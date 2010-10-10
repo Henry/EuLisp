@@ -1,12 +1,53 @@
-;; File   : Eulisp input file; conflict.em
-;; Date   : 31 Jan 1995
-;; Author : Tracy Gardner
-;; Description: Conflict set and conflict resolution classes for OPS5
-;;          implementation.
+;;; Copyright 1995 Tracy Gardner & University of Bath
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Conflict set and conflict resolution classes
+;;;  Library: ops5
+;;;  Authors: Tracy Gardner
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    OPS5 for EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
 
 (defmodule conflict
-  (syntax (syntax-0 macros-tag)
-   import (level-0 basic merge prod-gf ops-out))
+  (syntax (syntax-0
+           macros-tag)
+   import (level-0
+           basic
+           merge
+           prod-gf
+           ops-out)
+   export (make-prod-instantiation
+           make-cr-manager
+           set-cr-strategy
+           remove-by-prod
+           remove-by-timestamp
+           remove-by-bindings
+           cs-insert
+           <cr-manager>
+           <prod-instantiation>
+           fire-prod-inst
+           ce-ts-list
+           pi-bindings
+           pi-prod
+           set-pi-bindings))
 
 (print "### conflict" nl)
 
@@ -243,12 +284,6 @@
     ;;(format "res: ~a~%" res)
     res))
 
-(export make-prod-instantiation make-cr-manager set-cr-strategy
- remove-by-prod remove-by-timestamp remove-by-bindings
- cs-insert <cr-manager> <prod-instantiation>
- fire-prod-inst ce-ts-list pi-bindings pi-prod
- set-pi-bindings)
-
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module conflict
 ;;;-----------------------------------------------------------------------------

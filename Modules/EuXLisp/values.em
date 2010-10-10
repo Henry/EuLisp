@@ -1,24 +1,50 @@
-;;; multiple values as in Scheme
-;;; not wonderfully efficient
-
-;;; If you pass multiple values to a continuation that only expects a single
-;;; value you will probably get strange results
-
-;;; (values 1 2 3)                    multiple values
-;;; (call-with-values
-;;;   (lambda () ...)                 thunk returning values
-;;;   (lambda (a b c ...) ...))       that are passed to here
-;;;
-;;; CL-like macros:
-;;; multiple-value-setq multiple-value-list multiple-value-call
-;;; values-list multiple-value-bind
-;;;
+;;; Copyright 1994 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Multiple values as in Scheme
+;;;  Authors: Russell Bradford
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    not wonderfully efficient.
+;;    If you pass multiple values to a continuation that only expects a single
+;;    value you will probably get strange results
+;;
+;;    (values 1 2 3)                    multiple values
+;;    (call-with-values
+;;      (lambda () ...)                 thunk returning values
+;;      (lambda (a b c ...) ...))       that are passed to here
+;;
+;;    CL-like macros:
+;;    multiple-value-setq multiple-value-list multiple-value-call
+;;    values-list multiple-value-bind
+;;;-----------------------------------------------------------------------------
 
 (defmodule values
   (import (level-0)
-   export (values call-with-values
-                  multiple-value-setq multiple-value-list multiple-value-call
-                  values-list multiple-value-bind))
+   export (values
+           call-with-values
+           multiple-value-setq
+           multiple-value-list
+           multiple-value-call
+           values-list
+           multiple-value-bind))
 
 (defclass <values> ()
   ((values reader: get-values
@@ -109,13 +135,16 @@
   `(call-with-values
     (lambda () ,values-form)
     (lambda ,varlist ,@body)))
-)
 
-(defun split (ls)
-  (if (or (null? ls) (null? (cdr ls)))
-      (values ls ())
-    (call-with-values
-     (lambda () (split (cddr ls)))
-     (lambda (odds evens)
-       (values (cons (car ls) odds)
-               (cons (cadr ls) evens))))))
+;; (defun split (ls)
+;;   (if (or (null? ls) (null? (cdr ls)))
+;;       (values ls ())
+;;     (call-with-values
+;;      (lambda () (split (cddr ls)))
+;;      (lambda (odds evens)
+;;        (values (cons (car ls) odds)
+;;                (cons (cadr ls) evens))))))
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module values
+;;;-----------------------------------------------------------------------------

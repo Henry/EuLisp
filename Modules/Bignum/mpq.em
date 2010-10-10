@@ -18,17 +18,41 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Interface to the GNU mpq library
 ;;;  Library: bignum
 ;;;  Authors: Danius Michaelides, Andreas Kind
-;;; Description: bignums
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mpq
-  (export (mpq-init mpq-init-set mpq-init-set-z
-                    mpq-init-set-ui mpq-init-set-si mpq-clear mpq-get-num mpq-get-den
-                    mpq-get-d mpq-set-num mpq-set-den mpq-mul mpq-mul-init mpq-add
-                    mpq-add-init mpq-sub mpq-sub-init mpq-div mpq-div-init mpq-neg
-                    mpq-neg-init mpq-inv mpq-inv-init mpq-cmp mpq-cmp-ui mpq-sgn
-                    mpq-equal mpq-canonicalize))
+  (export (mpq-init
+           mpq-init-set
+           mpq-init-set-z
+           mpq-init-set-ui
+           mpq-init-set-si
+           mpq-clear
+           mpq-get-num
+           mpq-get-den
+           mpq-get-d
+           mpq-set-num
+           mpq-set-den
+           mpq-mul
+           mpq-mul-init
+           mpq-add
+           mpq-add-init
+           mpq-sub
+           mpq-sub-init
+           mpq-div
+           mpq-div-init
+           mpq-neg
+           mpq-neg-init
+           mpq-inv
+           mpq-inv-init
+           mpq-cmp
+           mpq-cmp-ui
+           mpq-sgn
+           mpq-equal
+           mpq-canonicalize))
 
 ;;;-----------------------------------------------------------------------------
 ;;;
@@ -63,5 +87,5 @@
 (defextern mpq-canonicalize (ptr) boolean "C_mpq_canonicalize")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mpq
 ;;;-----------------------------------------------------------------------------

@@ -18,12 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Scheme synatx (IEEE Std 1178-1990) in EuLisp
 ;;;  Library: Scheme
 ;;;  Authors: Andreas Kind, Pete Broadbery, Luc Moreau
-;;; Description: Scheme synatx (IEEE Std 1178-1990) in EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule scm0
-  (import (level1 eval))
+  (import (level1
+           eval))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Trace
@@ -43,23 +46,25 @@
        (setq *redefine-imported-bindings*
              (list *redefine-imported-bindings*))
        (setq ,tmp-name ,function-name)
-       (setq ,function-name (named-lambda ,function-name args
-                                          ,(if pre-action
-                                               `(apply ,pre-action ,function-name args)
-                                             `(sformat stderr
-                                                       ,(fmt ">>> ~~aTRACE [~a]: ~~a\n" function-name)
-                                                       (dynamic *trace-indent*) args))
-                                          (let ((res (dynamic-let ((*trace-indent*
-                                                                    (concatenate (dynamic *trace-indent*)
-                                                                                 " ")))
-                                                                  (apply ,tmp-name args))))
-                                            ,(if post-action
-                                                 `(apply ,post-action ,function-name args)
-                                               `(sformat stderr
-                                                         ,(fmt "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
-                                                               function-name)
-                                                         (dynamic *trace-indent*) args res))
-                                            res)))
+       (setq ,function-name
+             (named-lambda
+              ,function-name args
+              ,(if pre-action
+                   `(apply ,pre-action ,function-name args)
+                 `(sformat stderr
+                           ,(fmt ">>> ~~aTRACE [~a]: ~~a\n" function-name)
+                           (dynamic *trace-indent*) args))
+              (let ((res (dynamic-let ((*trace-indent*
+                                        (concatenate (dynamic *trace-indent*)
+                                                     " ")))
+                                      (apply ,tmp-name args))))
+                ,(if post-action
+                     `(apply ,post-action ,function-name args)
+                   `(sformat stderr
+                             ,(fmt "<<< ~~aTRACE [~a]: ~~a => ~~a\n"
+                                   function-name)
+                             (dynamic *trace-indent*) args res))
+                res)))
        ;; retrieve previous value
        (setq *redefine-imported-bindings*
              (car *redefine-imported-bindings*))
@@ -76,5 +81,5 @@
              (car *redefine-imported-bindings*)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module scm1
 ;;;-----------------------------------------------------------------------------

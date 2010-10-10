@@ -1,13 +1,52 @@
-;;; module tpl: tiny paralation lisp
-;;; Probably originally written by Simon Merrall.
-;;; EuSchemed by RJB, Sept 95.
+;;; Copyright 1995 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: A tiny paralation lisp
+;;;  Authors: Russell Bradford
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    Probably originally written by Simon Merrall.
+;;    EuSchemed by RJB, Sept 95.
+;;;-----------------------------------------------------------------------------
 
 (defmodule tpl
-  (import (level-0 tpl-base)
-   export (<field> paralation index <mapping> elwise
-                   make-paralation match move inverse
-                   field-ref field-length vref shape shape-class
-                   attributes field-get field-put fieldp))
+  (import (level-0
+           tpl-base)
+   export (<field>
+           paralation
+           index
+           <mapping>
+           elwise
+           make-paralation
+           match
+           move
+           inverse
+           field-ref
+           field-length
+           vref
+           shape
+           shape-class
+           attributes
+           field-get
+           field-put
+           fieldp))
 
 (defun make-paralation (size)
   (let ((new-paralation (make-paralation-internal
@@ -102,8 +141,10 @@
 (defun fieldp (object)
   (subclass? (class-of object) field))
 
-)
-
 ;; (defun inverse (map)
 ;;   (let ((p (index (from-key map))))
 ;;     (match (move p map list nil) p)))
+
+;;;-----------------------------------------------------------------------------
+)  ;; End of module tpl
+;;;-----------------------------------------------------------------------------

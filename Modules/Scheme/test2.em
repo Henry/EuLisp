@@ -18,11 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library:
+;;; Title: Scheme test
+;;;  Library: scheme
 ;;;  Authors: Andreas Kind
-;;; Description:
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test2
   (syntax (scheme0)
    import (scheme)
@@ -38,5 +39,5 @@
 (newline)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test2
 ;;;-----------------------------------------------------------------------------

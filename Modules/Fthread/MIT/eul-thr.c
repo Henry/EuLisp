@@ -18,11 +18,12 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Library: fthread
+/// Title: Foreign threads based on MIT threads
+///  Library: fthread (foreign thread interface)
 ///  Authors: Liam Wickins, Andreas Kind
-///  Description: Foreign threads based on Unix International Threads (UI)
-///    alias Solaris Threads
-///  Compilation: see fthread.em
+///  Maintainer: Henry G. Weller
+///  Description:
+//    see fthread.em
 ///-----------------------------------------------------------------------------
 
 #include <eulisp.h>

@@ -18,9 +18,12 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Library: solaris-semaphore
+/// Title: Foreign function support for locks in POSIX threads
+///  Library: fthread (foreign thread interface)
 ///  Authors: Liam Wickins, Andreas Kind
-///  Description: Foreign function support for solaris locks
+///  Maintainer: Henry G. Weller
+///  Description:
+//    see fthread.em
 ///-----------------------------------------------------------------------------
 
 #include <eulisp.h>

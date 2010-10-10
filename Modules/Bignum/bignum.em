@@ -18,16 +18,21 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Variable-precision numbers
 ;;;  Library: bignum
 ;;;  Authors: Danius Michaelides, Andreas Kind
-;;; Description: bignums
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    see Makefile
 ;;;-----------------------------------------------------------------------------
+
 (defmodule bignum
   (syntax (syntax-0)
-   import (level-0 bigint bigrat)
-   expose (bigint bigrat))
+   import (level-0
+           bigint
+           bigrat)
+   expose (bigint
+           bigrat))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Initialization
@@ -67,5 +72,5 @@
                                    str))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module bignum
 ;;;-----------------------------------------------------------------------------

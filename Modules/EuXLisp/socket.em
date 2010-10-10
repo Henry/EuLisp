@@ -1,18 +1,71 @@
 ;;; Copyright 1994 Russell Bradford
 ;;; Copyright 2010 Henry G. Weller
-;;; this code originally written by David Halls
-
-;;; to use this the interpreter must have been compiled with -DSOCK
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Socket interface for EuXLisp
+;;;  Authors: David Halls, Russell Bradford
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    to use this the interpreter must have been compiled with -DSOCK
+;;;-----------------------------------------------------------------------------
 
 (defmodule socket
-  (import (root setter convert)
-   export (<socket> socket-fd socket? make-socket connect bind
-                    listen accept set-block set-nonblock reuse noreuse close-socket
-                    shutdown peeraddr peerstream sockaddr sockstream host->ip
-                    ip->host fd-zero-read fd-set-read fd-isset-read select-read
-                    fd-zero-write fd-set-write fd-isset-write select-write
-                    send-int recv-int send-float recv-float send-string recv-string
-                    stream-fd stream-unbuffered stream-block-buffered stream-line-buffered))
+  (import (root
+           setter
+           convert)
+   export (<socket>
+           socket-fd
+           socket?
+           make-socket
+           connect bind
+           listen
+           accept
+           set-block
+           set-nonblock
+           reuse
+           noreuse
+           close-socket
+           shutdown
+           peeraddr
+           peerstream
+           sockaddr
+           sockstream
+           host->ip
+           ip->host
+           fd-zero-read
+           fd-set-read
+           fd-isset-read
+           select-read
+           fd-zero-write
+           fd-set-write
+           fd-isset-write
+           select-write
+           send-int
+           recv-int
+           send-float
+           recv-float
+           send-string
+           recv-string
+           stream-fd
+           stream-unbuffered
+           stream-block-buffered
+           stream-line-buffered))
 
 (defclass <socket> ()
   ((fd keyword: fd:
@@ -241,4 +294,6 @@
 (define-method (binary= (s <socket>) (stream <stream>))
                (= (socket-fd s) (stream-fd stream)))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module socket
+;;;-----------------------------------------------------------------------------

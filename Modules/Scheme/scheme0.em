@@ -18,12 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Scheme synatx (IEEE Std 1178-1990) in EuLisp
 ;;;  Library: scheme
 ;;;  Authors: Andreas Kind, Pete Broadbery, Luc Moreau
-;;; Description: Scheme synatx (IEEE Std 1178-1990) in EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule scheme0
-  (import ((except (do) level1)))
+  (import ((except (do)
+                   level1)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Defining forms
@@ -176,5 +179,5 @@
 (defmacro cons-stream (a b) `(cons ,a (delay ,b)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module scheme0
 ;;;-----------------------------------------------------------------------------

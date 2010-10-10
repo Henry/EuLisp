@@ -18,18 +18,19 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: fork child process and control i/o with file stream
 ///  Library: pipe
 ///  Authors: Rob Simmons, Andreas Kind
-///  Description: fork child process and control i/o with a stream object
+///  Maintainer: Henry G. Weller
+///  Description:
+//    See pipe.em
 ///-----------------------------------------------------------------------------
-
 #include "eulisp.h"
 #include <signal.h>
 
 ///-----------------------------------------------------------------------------
 /// Error codes
 ///-----------------------------------------------------------------------------
-
 #define EUL_PIPE_ERROR (-1)
 #define EUL_PIPE_STRDUP_FAILED (-2)
 #define EUL_PIPE_BAD_PROCESS_NAME (-3)
@@ -41,7 +42,6 @@
 ///-----------------------------------------------------------------------------
 /// Pipe related error messages
 ///-----------------------------------------------------------------------------
-
 char *eul_pipe_strerror(int error_code)
 {
     switch (error_code)
@@ -67,7 +67,6 @@ char *eul_pipe_strerror(int error_code)
 ///-----------------------------------------------------------------------------
 /// Start the child process
 ///-----------------------------------------------------------------------------
-
 int FT_fork_child(LispRef res, char *childname, char **childs_argv, char *path)
 {
     int tmp_childs_stdin[2];

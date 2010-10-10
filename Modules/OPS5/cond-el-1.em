@@ -1,14 +1,69 @@
+;;; Copyright 1995 Tracy Gardner & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;;                 OPS5 for EuLisp System 'youtoo'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; File   : cond-el-1.em
-;;; Date   : 20 Jul 1995
-;;; Author : Tracy Gardner (tag@maths.bath.ac.uk)
-;;; Description: Condition Element stuff
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Condition Element
+;;;  Library: ops5
+;;;  Authors: Tracy Gardner
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    OPS5 for EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+
 (defmodule cond-el-1
-  (syntax (syntax-0 macros-tag)
-   import (level-0 basic cond-el-gf prod-gf wm-gf ops5-def ops-out))
+  (syntax (syntax-0
+           macros-tag)
+   import (level-0
+           basic
+           cond-el-gf
+           prod-gf
+           wm-gf
+           ops5-def
+           ops-out)
+   export (make-pos-join-ce
+           make-pos-njoin-ce
+           make-neg-join-ce
+           make-neg-njoin-ce
+           make-neg-from-njoin-ce
+           make-pos-from-njoin-ce
+           ce-c-tests
+           ce-v-tests
+           ce-j-tests
+           set-ce-c-tests
+           set-ce-v-tests
+           set-ce-j-tests
+           ce-class-name
+           <condition-element>
+           <pos-join-ce>
+           <neg-join-ce>
+           <pos-njoin-ce>
+           <neg-njoin-ce>
+           ce-num-matched
+           set-ce-num-matched
+           ce-matches
+           set-ce-matches
+           ce-prods
+           set-ce-prods
+           ce-rating
+           set-ce-rating
+           ce-id
+           set-ce-id))
 
 (print "### cond-el-1.em" nl)
 
@@ -138,21 +193,6 @@
 (defmethod set-ce-jv-vals ((ce <neg-join-ce>) x)
   (set-neg-jv-vals ce x))
 
-(export
- make-pos-join-ce make-pos-njoin-ce
- make-neg-join-ce make-neg-njoin-ce
- make-neg-from-njoin-ce make-pos-from-njoin-ce
- ce-c-tests ce-v-tests ce-j-tests
- set-ce-c-tests set-ce-v-tests set-ce-j-tests
- ce-class-name
- <condition-element>
- <pos-join-ce> <neg-join-ce> <pos-njoin-ce> <neg-njoin-ce>
- ce-num-matched set-ce-num-matched
- ce-matches set-ce-matches
- ce-prods set-ce-prods
- ce-rating set-ce-rating
- ce-id set-ce-id)
-
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cond-el-1
 ;;;-----------------------------------------------------------------------------

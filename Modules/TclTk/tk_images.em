@@ -20,15 +20,22 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Basic operations for the image commands
 ;;;  Library: tcltk
-;;;  Authors: J Garcia
+;;;  Authors: J. Garcia
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_images
   (syntax (macros)
-   import (level1 tk_general)
+   import (level1
+           tk_general)
    export (tk-create-image
-           tk-delete-image tk-height-image tk-names-image
-           tk-type-image tk-types-image tk-width-image tk-photo))
+           tk-delete-image
+           tk-height-image
+           tk-names-image
+           tk-type-image
+           tk-types-image
+           tk-width-image
+           tk-photo))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Image enquiry and manipulation functions
@@ -86,5 +93,5 @@
    (eul_tk_image_photo_cmd (loop (cons img (cons cmd options)) ""))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module tk_images
 ;;;-----------------------------------------------------------------------------

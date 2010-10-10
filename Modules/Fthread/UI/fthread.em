@@ -18,16 +18,25 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Interface to Unix International (aka Solaris) Threads (UI)
 ;;;  Library: fthread (foreign thread interface)
 ;;;  Authors: Andreas Kind, Liam Wickins
-;;; Description: UI (alias Solaris) threads for EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule fthread
   (syntax (macros)
-   import ((except (thread-return-value thread-returned?) level1))
-   expose (flock fcsem)
-   export (<ui-thread> ui-thread? thread-continue
-                       thread-concurrency thread-priority thread-join-all))
+   import ((except (thread-return-value
+                    thread-returned?)
+                   level1))
+   expose (flock
+           fcsem)
+   export (<ui-thread>
+           ui-thread?
+           thread-continue
+           thread-concurrency
+           thread-priority
+           thread-join-all))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <ui-thread>
@@ -134,5 +143,5 @@
 (defextern eul_thr_set_priority (ptr <int>) <int> "thr_setprio")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module fthread
 ;;;-----------------------------------------------------------------------------

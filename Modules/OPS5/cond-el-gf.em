@@ -1,14 +1,54 @@
+;;; Copyright 1995 Tracy Gardner & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;;                 OPS5 for EuLisp System 'youtoo'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; File   : cond-el-gf.em
-;;; Date   : 24 Jul 1995
-;;; Author : Tracy Gardner (tag@maths.bath.ac.uk)
-;;; Description: Generic functions for cond-el.em
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Generic functions for condition element
+;;;  Library: ops5
+;;;  Authors: Tracy Gardner
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    OPS5 for EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+
 (defmodule cond-el-gf
-  (syntax (syntax-0 macros-tag)
-   import (level-0 basic))
+  (syntax (syntax-0
+           macros-tag)
+   import (level-0
+           basic)
+   export (ce-j-tests
+           set-ce-j-tests
+           ce-jv-vals
+           set-ce-jv-vals
+           ce-rating
+           is-satisfied
+           match-insert-ce
+           match-remove-ce
+           make-ce-manager
+           cond-els
+           set-cond-els
+           insert-new-ce
+           <ce-manager>
+           print-ces
+           next-id
+           set-next-id
+           match-insert
+           match-remove))
 
 ;;  (print "### cond-el-gf" nl)
 
@@ -50,15 +90,6 @@
 (defgeneric match-insert (ce-manager wme cr-manager))
 (defgeneric match-remove (ce-manager wme cr-manager))
 
-(export ce-j-tests set-ce-j-tests
- ce-jv-vals set-ce-jv-vals
- ce-rating is-satisfied
- match-insert-ce match-remove-ce
- make-ce-manager cond-els set-cond-els
- insert-new-ce <ce-manager> print-ces
- next-id set-next-id
- match-insert match-remove)
-
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module cond-el-gf
 ;;;-----------------------------------------------------------------------------

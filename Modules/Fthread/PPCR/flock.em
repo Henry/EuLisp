@@ -18,14 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: PPCR locks for EuLisp
 ;;;  Library: fthread (foreign thread interface)
 ;;;  Authors: Andreas Kind, Liam Wickins
-;;; Description: PPCR locks for EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule flock
   (syntax (macros)
    import (level1)
-   export (<ppcr-lock> ppcr-lock? <thread-lock> thread-lock?))
+   export (<ppcr-lock>
+           ppcr-lock?
+           <thread-lock>
+           thread-lock?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lock classes
@@ -92,5 +97,5 @@
 (defextern eul_unlock (ptr) ptr "PCR_Th_ML_Release")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module flock
 ;;;-----------------------------------------------------------------------------

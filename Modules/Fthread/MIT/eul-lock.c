@@ -18,9 +18,12 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: Foreign function support for locks in MIT threads
 ///  Library: fthread (foreign thread interface)
 ///  Authors: Andreas Kind
-///  Description: Foreign function support for locks in MIT threads
+///  Maintainer: Henry G. Weller
+///  Description:
+//    see fthread.em
 ///-----------------------------------------------------------------------------
 
 #include <eulisp.h>

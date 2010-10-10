@@ -18,17 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;;  Library: mpi
+;;; Title: Message Passing Interface (MPI) stream
+;;;  Library: mpis
 ;;;  Authors: Andreas Kind
-;;; Description: Message Passing Interface (MPI)
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    youtoo -ar mpis -l level1
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mpis
   (syntax (macros)
-   import (level1 serial)
-   export (<mpi-stream> mpi-stream? mpi-stream-host mpi-stream-rank
-                        local-mpi-stream?))
+   import (level1
+           serial)
+   export (<mpi-stream>
+           mpi-stream?
+           mpi-stream-host
+           mpi-stream-rank
+           local-mpi-stream?))
 
 ;;;-----------------------------------------------------------------------------
 ;;; MPI stream class
@@ -169,5 +175,5 @@
   (= (mpi-stream-rank x) *mpi-local-rank*))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mpis
 ;;;-----------------------------------------------------------------------------

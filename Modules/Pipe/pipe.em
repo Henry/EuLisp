@@ -18,17 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: fork child process and control i/o with file stream
 ;;;  Library: pipe
 ;;;  Authors: Rob Simmons, Andreas Kind
-;;; Description: fork child process and control i/o with file stream
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    make touch
 ;;    make
 ;;;-----------------------------------------------------------------------------
+
 (defmodule pipe
   (syntax (syntax-0)
    import (level-0)
-   export (<pipe> pipe-process))
+   export (<pipe>
+           pipe-process))
 
 ;;;------------------------------------------------------------------------
 ;;; The pipe class
@@ -79,5 +82,5 @@
 (defextern eul-kill (<int> <int>) <int> "kill")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module pipe
 ;;;-----------------------------------------------------------------------------

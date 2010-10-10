@@ -18,11 +18,13 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: FF interface to Unix International (aka Solaris) Locks (UI)
 ///  Library: fthread (foreign thread interface)
 ///  Authors: Andreas Kind, Liam Wickins
-///  Description: Foreign function support for solaris locks
+///  Maintainer: Henry G. Weller
+///  Description:
+//    see fthread.em
 ///-----------------------------------------------------------------------------
-
 #include <eulisp.h>
 #include <synch.h>
 #include <gc/gc.h>

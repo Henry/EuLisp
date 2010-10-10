@@ -18,14 +18,21 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: MIT semaphores for EuLisp
 ;;;  Library: fthread (foreign thread interface)
 ;;;  Authors: Andreas Kind, Liam Wickins
-;;; Description: UI locks for EuLisp
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    see fthread.em
 ;;;-----------------------------------------------------------------------------
+
 (defmodule fcsem
   (syntax (macros)
    import (level1)
-   export (<csemaphore> csemaphorep cwait csignal))
+   export (<csemaphore>
+           csemaphorep
+           cwait
+           csignal))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <csemaphore>
@@ -63,5 +70,5 @@
 ;(defextern eul_sema_signal (ptr) ptr "sema_post")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module fcsem
 ;;;-----------------------------------------------------------------------------

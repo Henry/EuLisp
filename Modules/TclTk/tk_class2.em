@@ -20,7 +20,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Additional operations for text and canvas widget classes
 ;;;  Library: tcltk
-;;;  Authors: J Garcia
+;;;  Authors: J. Garcia
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_class2
@@ -28,17 +29,30 @@
    import (level1
            tk_general)
    export (tk-add-arc-canvas
-           tk-add-bitmap-canvas tk-add-image-canvas
-           tk-add-line-canvas tk-add-oval-canvas
-           tk-add-polygon-canvas tk-add-rectangle-canvas
-           tk-add-text-canvas tk-add-window-canvas
-           tk-bind-item-canvas tk-conf-item-canvas
-           tk-find-canvas-above tk-find-canvas-all
-           tk-find-canvas-below tk-find-canvas-enclosed
-           tk-find-canvas-overlapping tk-find-canvas-withtag
+           tk-add-bitmap-canvas
+           tk-add-image-canvas
+           tk-add-line-canvas
+           tk-add-oval-canvas
+           tk-add-polygon-canvas
+           tk-add-rectangle-canvas
+           tk-add-text-canvas
+           tk-add-window-canvas
+           tk-bind-item-canvas
+           tk-conf-item-canvas
+           tk-find-canvas-above
+           tk-find-canvas-all
+           tk-find-canvas-below
+           tk-find-canvas-enclosed
+           tk-find-canvas-overlapping
+           tk-find-canvas-withtag
            tk-lower-item-canvas
-           tk-move-item-canvas tk-coords-item-canvas tk-delete-item-canvas
-           tk-text-index tk-text-mark tk-text-tag-add tk-bind-tag-text
+           tk-move-item-canvas
+           tk-coords-item-canvas
+           tk-delete-item-canvas
+           tk-text-index
+           tk-text-mark
+           tk-text-tag-add
+           tk-bind-tag-text
            tk-conf-tag-text))
 
 ;;;-----------------------------------------------------------------------------
@@ -416,5 +430,5 @@
                                               (cdr options)))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module tk_class2
 ;;;-----------------------------------------------------------------------------

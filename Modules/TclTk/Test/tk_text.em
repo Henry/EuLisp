@@ -20,8 +20,9 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: Test text widget
 ;;;  Library: tcltk
-;;;  Authors: J Garcia
-;;;  Description:
+;;;  Authors: J. Garcia
+;;;  Maintainer: Henry G. Weller
+;;;  Title:
 ;;    This exmaple show the way text widgets works, and some of
 ;;    the commands that can be done in YouToo/tk.
 ;;;-----------------------------------------------------------------------------
@@ -87,5 +88,5 @@
 (test-text)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module tk_text
 ;;;-----------------------------------------------------------------------------

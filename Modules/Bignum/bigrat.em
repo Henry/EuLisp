@@ -18,14 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Variable-precision rational numbers
 ;;;  Library: bignum
 ;;;  Authors: Danius Michaelides, Andreas Kind
-;;; Description: bignums
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule bigrat
   (syntax (syntax-0)
-   import (level-0 bigint mpz mpq)
-   export (<bigrat> bigrat? make-bigrat-fast numerator denumerator))
+   import (level-0
+           bigint
+           mpz
+           mpq)
+   export (<bigrat>
+           bigrat?
+           make-bigrat-fast
+           numerator
+           denumerator))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class definition
@@ -210,5 +219,5 @@
 ;(defun odd? (x) (not (even? x)))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module bigrat
 ;;;-----------------------------------------------------------------------------

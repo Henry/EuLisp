@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: C support for marshaling EuLisp objects
 ///  Library: eul-serial
 ///  Authors: Andreas Kind
-///  Description: C support for marshaling EuLisp objects
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_SERIAL_H
 #define EUL_SERIAL_H
@@ -30,14 +31,12 @@
 ///-----------------------------------------------------------------------------
 /// Object stream
 ///-----------------------------------------------------------------------------
-
 #define EUL_OBJECT_STREAM_CACHE(x) slot_ref(x,6)
 #define EUL_OBJECT_STREAM_CACHE_INDEX(x) slot_ref(x,7)
 
 ///-----------------------------------------------------------------------------
 /// Constants
 ///-----------------------------------------------------------------------------
-
 #define STREAM_MAGIC 0xaced
 #define STREAM_VERSION 1
 
@@ -63,7 +62,6 @@
 ///-----------------------------------------------------------------------------
 /// Macros for reading primitives
 ///-----------------------------------------------------------------------------
-
 #define read_bytes(n)                                                          \
   eul_string_as_c_string(eul_read_bytes(n))
 
@@ -121,7 +119,11 @@
         if ((*x) & 128)                                                        \
         {                                                                      \
             LispRef str;                                                       \
-            eul_allocate_string(str, "non standard characters not supported yet"); \
+            eul_allocate_string                                                \
+            (                                                                  \
+                str,                                                           \
+                "non standard characters not supported yet"                    \
+            );                                                                 \
             eul_serial_error(stream, str, eul_nil);                            \
         }                                                                      \
     }
@@ -135,7 +137,11 @@
         if ((*(eul_string_as_c_string(x))) & 128)                              \
         {                                                                      \
             LispRef str;                                                       \
-            eul_allocate_string(str, "non standard characters not supported yet"); \
+            eul_allocate_string                                                \
+            (                                                                  \
+                str,                                                           \
+                "non standard characters not supported yet"                    \
+            );                                                                 \
             eul_serial_error(stream, str, eul_nil);                            \
         }                                                                      \
     }
@@ -144,7 +150,6 @@
 ///-----------------------------------------------------------------------------
 /// Foreign function declarations
 ///-----------------------------------------------------------------------------
-
 extern LispRef eul_serial_read_header
 (
     LispRef stream,

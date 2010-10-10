@@ -18,20 +18,24 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: MIT threads (POSIX) for EuLisp
 ;;;  Library: fthread (foreign thread interface)
 ;;;  Authors: Andreas Kind
-;;; Description: MIT threads (POSIX) for EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo -ar fthread -l level1
 ;;    make
 ;;;-----------------------------------------------------------------------------
+
 (defmodule fthread
   (syntax (macros)
    import (level1)
-   expose (flock fcsem)
-   export (<ui-thread> ui-thread-p
-                       ;thread-concurrency
-                       thread-priority))
+   expose (flock
+           fcsem)
+   export (<ui-thread>
+           ui-thread-p
+           ;thread-concurrency
+           thread-priority))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <ui-thread>
@@ -121,5 +125,5 @@
 ;(defextern eul_thr_set_priority (ptr <int>) <int> "thr_setprio")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module fthread
 ;;;-----------------------------------------------------------------------------

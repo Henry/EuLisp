@@ -18,15 +18,23 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Scheme (IEEE Std 1178-1990) in EuLisp
 ;;;  Library: scheme
 ;;;  Authors: Andreas Kind, Luc Moreau
-;;; Description: Scheme (IEEE Std 1178-1990) in EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule scheme
-  (syntax ((rename ((not Not)) macros))
-   import ((rename ((/ quotient)(member Member)(read Read)
-                    (error Error) (random Random)) level1)
-           math bignum))
+  (syntax ((rename ((not Not))
+                   macros))
+   import ((rename ((/ quotient)
+                    (member Member)
+                    (read Read)
+                    (error Error)
+                    (random Random))
+                   level1)
+           math
+           bignum))
 
 ;;;-----------------------------------------------------------------------------
 ;;; To be removed
@@ -537,5 +545,5 @@
 (export above:)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module scheme
 ;;;-----------------------------------------------------------------------------

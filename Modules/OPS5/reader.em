@@ -1,17 +1,47 @@
+;;; Copyright 1995 Tracy Gardner & University of Bath
+;;; Copyright 2010 Henry G. Weller
 ;;;-----------------------------------------------------------------------------
-;;;                 OPS5 for EuLisp System 'youtoo'
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
 ;;;-----------------------------------------------------------------------------
-;;; File   : reader.em
-;;; Date   :  6 Jul 1995
-;;; Author : Tracy Gardner (tag@maths.bath.ac.uk)
-;;; Description: Code to read in an OPS5 program from file and create
-;;; corresponding objects.
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Read in an OPS5 program from file and create corresponding objects.
+;;;  Library: ops5
+;;;  Authors: Tracy Gardner
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    OPS5 for EuLisp System 'youtoo'
+;;;-----------------------------------------------------------------------------
+
 (defmodule reader
-  (syntax (syntax-0 macros-tag)
-   import (level-0 basic reader-ce reader-vars
-                  prod-gf prod cond-el-gf cond-el-1
-                  reader-act ops-out)) ;; ops-reader))
+  (syntax (syntax-0
+           macros-tag)
+   import (level-0
+           basic
+           reader-ce
+           reader-vars
+           prod-gf
+           prod
+           cond-el-gf
+           cond-el-1
+           reader-act
+           ops-out)
+   export (read-ops-prog
+           ce-man
+           <reader>))
 
 (defconstant <input-port> <file-stream>)
 
@@ -214,23 +244,21 @@
                                     (read-action reader (car prod) curr-prod)
                                     (get-action (cdr prod))))))
              (get-ce new-prod ())))
-    reader)
+    reader))
 
 ;;;-----------------------------------------------------------------------------
 ;;; check-for-ce-var
-  ; Checks to see if a variable is attached to the next condition element
-  ; Returns ()      -- no ce var
-  ;         'before -- ce var appears before ce
-  ;         'after  -- ce var appears after ce
+; Checks to see if a variable is attached to the next condition element
+; Returns ()      -- no ce var
+;         'before -- ce var appears before ce
+;         'after  -- ce var appears after ce
 ;;;-----------------------------------------------------------------------------
-  (defun check-for-ce-var (prod)
-    (unless (eql (car prod) '{) ())
-            (if (atom? (cadr prod))
-                'before
-              'after))
-
-    (export read-ops-prog ce-man <reader>)
+(defun check-for-ce-var (prod)
+  (unless (eql (car prod) '{) ())
+          (if (atom? (cadr prod))
+              'before
+            'after)))
 
 ;;;-----------------------------------------------------------------------------
-    )  ;; End of module
+)  ;; End of module reader
 ;;;-----------------------------------------------------------------------------

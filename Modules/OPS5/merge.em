@@ -22,8 +22,9 @@
 ;;; Title: Merge sort
 ;;;  Library: OPS5
 ;;;  Authors: Juha Heinanen, Tracy Gardner
+;;;  Maintainer: Henry G. Weller
 ;;;  Description:
-;;    Juha Heinanen's merge sort modified to run under euscheme
+;;    Juha Heinanen's merge sort modified to run under EuLisp
 ;;;-----------------------------------------------------------------------------
 
 (defmodule merge
@@ -71,5 +72,5 @@
            (loop (cdr merged-lists))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module merge
 ;;;-----------------------------------------------------------------------------

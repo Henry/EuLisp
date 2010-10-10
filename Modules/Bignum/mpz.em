@@ -18,10 +18,12 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Interface to the GNU mpz library
 ;;;  Library: bignum
 ;;;  Authors: Danius Michaelides, Andreas Kind
-;;; Description: bignums
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule mpz
   (export (mpz-init
            mpz-init-set
@@ -277,5 +279,5 @@
 (defextern mpz-sizeinbase (ptr <int>) <int> "C_mpz_sizeinbase")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module mpz
 ;;;-----------------------------------------------------------------------------

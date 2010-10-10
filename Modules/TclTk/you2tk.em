@@ -21,11 +21,16 @@
 ;;; Title: compiler/interpreter entry point with tck/tk
 ;;;  Library: tcltk
 ;;;  Authors: Andreas Kind
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule you2tk
   (syntax (macros)
-   import (level1 math eval tcltk macros)
+   import (level1
+           math
+           eval
+           tcltk
+           macros)
    expose (tcltk))
 
 ;;;-----------------------------------------------------------------------------
@@ -45,5 +50,5 @@
 (main *argv*)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module you2tk
 ;;;-----------------------------------------------------------------------------

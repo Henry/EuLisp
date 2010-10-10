@@ -20,7 +20,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: General functions
 ;;;  Library: tcltk
-;;;  Authors: J Garcia
+;;;  Authors: J. Garcia
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_commands
@@ -28,9 +29,19 @@
    import (level1
            tk_general)
    export (tk-pack
-           tk-bind tk-destroy tk-exit tk-get-variable tk-set-variable
-           tk-wm tk-selection-get tk-get-result tk-focus tk-map-widget
-           tk-unmap-widget tk-grab-set tk-bell))
+           tk-bind
+           tk-destroy
+           tk-exit
+           tk-get-variable
+           tk-set-variable
+           tk-wm
+           tk-selection-get
+           tk-get-result
+           tk-focus
+           tk-map-widget
+           tk-unmap-widget
+           tk-grab-set
+           tk-bell))
 
 (defextern eul_tk_pack (<string> ptr) ptr)
 (defextern eul_tk_bind (<string> <string> <string> ptr) ptr)
@@ -197,5 +208,5 @@
          (eul_tk_grab_set (tk-name toplevel)))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module tk_commands
 ;;;-----------------------------------------------------------------------------

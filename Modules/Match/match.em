@@ -1,158 +1,172 @@
+;;; Copyright 1997 A. Kind & University of Bath
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                         EuLisp System 'Youtoo'
+;;;-----------------------------------------------------------------------------
+;;
+;;  Youtoo is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  Youtoo is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: Pattern Matching Syntactic Extensions for EuLisp
+;;;  Library: match
+;;;  Authors: Andrew K. Wright, Bruce F. Duba, Kent Dybvig, Andreas Kind
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    Modulized version of match-slib.scm for EuLisp.
+;;
+;;    Report bugs to wright@research.nj.nec.com.  The most recent version of
+;;    this software can be obtained by anonymous FTP from ftp.nj.nec.com
+;;    in file pub/wright/match.tar.Z.  Be sure to set "type binary" when
+;;    transferring this file.
+;;
+;;    Written by Andrew K. Wright, 1993 (wright@research.nj.nec.com).
+;;    Adapted from code originally written by Bruce F. Duba, 1991.
+;;    This package also includes a modified version of Kent Dybvig's
+;;    define-structure (see Dybvig, R.K., The Scheme Programming Language,
+;;    Prentice-Hall, NJ, 1987).
+;;
+;;    This macro package extends EuLisp with several new expression forms.
+;;    Following is a brief summary of the new forms.  See the member-alistiated
+;;    LaTeX documentation for a full description of their functionality.
+;;
+;;            match expressions:
+;;
+;;    exp ::= ...
+;;          | (match exp clause ...)
+;;          | (match-lambda clause ...)
+;;          | (match-lambda* clause ...)
+;;          | (match-let ((pat exp) ...) body)
+;;          | (match-let* ((pat exp) ...) body)
+;;          | (match-letrec ((pat exp) ...) body)
+;;          | (match-define pat exp)
+;;
+;;    clause ::= (pat body) | (pat => exp)
+;;
+;;            patterns:                       matches:
+;;
+;;    pat ::= identifier                      anything, and binds identifier
+;;          | _                               anything
+;;          | ()                              the empty list
+;;          | t                              t
+;;          | string                          a string
+;;          | number                          a number
+;;          | character                       a character
+;;          | 'sexp                           an s-expression
+;;          | 'symbol                         a symbol (special case of s-expr)
+;;          | (pat_1 ... pat_n)               list of n elements
+;;          | (pat_1 ... pat_n . pat_{n+1})   list of n or more
+;;          | (pat_1 ... pat_n pat_n+1 ooo)   list of n or more, each element
+;;                                              of remainder must match pat_n+1
+;;          | #(pat_1 ... pat_n)              vector of n elements
+;;          | #(pat_1 ... pat_n pat_n+1 ooo)  vector of n or more, each element
+;;                                              of remainder must match pat_n+1
+;;          | #&pat                           box
+;;          | ($ struct-name pat_1 ... pat_n) a structure
+;;          | (= field pat)                   a field of a structure
+;;          | (and pat_1 ... pat_n)           if all of pat_1 thru pat_n match
+;;          | (or pat_1 ... pat_n)            if any of pat_1 thru pat_n match
+;;          | (not pat_1 ... pat_n)           if all pat_1 thru pat_n don't match
+;;          | (? predicate pat_1 ... pat_n)   if predicate true and all of
+;;                                              pat_1 thru pat_n match
+;;          | (setq identifier)               anything, and binds setter
+;;          | (get! identifier)               anything, and binds getter
+;;          | `qp                             a quasi-pattern
+;;
+;;    ooo ::= ...                             zero or more
+;;          | ___                             zero or more
+;;          | ..k                             k or more
+;;          | __k                             k or more
+;;
+;;            quasi-patterns:                 matches:
+;;
+;;    qp  ::= ()                              the empty list
+;;          | t                              t
+;;          | ()                              ()
+;;          | string                          a string
+;;          | number                          a number
+;;          | character                       a character
+;;          | identifier                      a symbol
+;;          | (qp_1 ... qp_n)                 list of n elements
+;;          | (qp_1 ... qp_n . qp_{n+1})      list of n or more
+;;          | (qp_1 ... qp_n qp_n+1 ooo)      list of n or more, each element
+;;                                              of remainder must match qp_n+1
+;;          | #(qp_1 ... qp_n)                vector of n elements
+;;          | #(qp_1 ... qp_n qp_n+1 ooo)     vector of n or more, each element
+;;                                              of remainder must match qp_n+1
+;;          | #&qp                            box
+;;          | ,pat                            a pattern
+;;          | ,@pat                           a pattern
+;;
+;;    The names (quote, quasiquote, unquote, unquote-splicing, ?, _, $,
+;;    and, or, not, setq, get!, ..., ___) cannot be used as pattern variables.
+;;
+;;
+;;            structure expressions:
+;;
+;;    exp ::= ...
+;;          | (define-structure (id_0 id_1 ... id_n))
+;;          | (define-structure (id_0 id_1 ... id_n)
+;;                              ((id_{n+1} exp_1) ... (id_{n+m} exp_m)))
+;;          | (define-const-structure (id_0 arg_1 ... arg_n))
+;;          | (define-const-structure (id_0 arg_1 ... arg_n)
+;;                                    ((arg_{n+1} exp_1) ... (arg_{n+m} exp_m)))
+;;
+;;    arg ::= id | (! id) | (@ id)
+;;
+;;
+;;    match:error-control controls what code is generated for failed matches.
+;;    Possible values:
+;;     'unspecified - do nothing, ie., evaluate (cond [() ()])
+;;     'fail - call match:error, or die at car or cdr
+;;     'error - call match:error with the unmatched value
+;;     'match - call match:error with the unmatched value _and_
+;;                the quoted match expression
+;;    match:error-control is set by calling match:set-error-control with
+;;    the new value.
+;;
+;;    match:error is called for a failed match.
+;;    match:error is set by calling match:set-error with the new value.
+;;
+;;    match:structure-control controls the uniqueness of structures
+;;    (does not exist for Scheme 48 version).
+;;    Possible values:
+;;     'vector - (default) structures are vectors with a symbol in position 0
+;;     'disjoint - structures are fully disjoint from all other values
+;;    match:structure-control is set by calling match:set-structure-control
+;;    with the new value.
+;;
+;;    match:runtime-structures controls whether local structure declarations
+;;    generate new structures each time they are reached
+;;    (does not exist for Scheme 48 version).
+;;    Possible values:
+;;     t - (default) each runtime occurrence generates a new structure
+;;     () - each lexical occurrence generates a new structure
+;;
+;;    End of user visible/modifiable stuff.
+;;
+;;;  Problems:
+;;    * Vectors probably don't work right.
+;;      Why doesn't #(a b c ...) match what PLT Scheme gives for the same thing?
+;;    * Structures certainly don't.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;; match.em -- modulized version of match-slib.scm badly hacked for eulisp.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Notes:
-;; * Vectors probably don't work right.
-;;   Why doesn't #(a b c ...) match what PLT Scheme gives for the same thing?
-;; * Structures certainly don't.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
 (defmodule match
   (syntax ((except (match-let) syntax-0) match0)
    import (level-0 match-support)
    export (match match-lambda match-lambda* match-let match-let*))
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Pattern Matching Syntactic Extensions for Scheme
-;;
 (defconstant match:version "Version 1.18, July 17, 1995")
-;;
-;; Report bugs to wright@research.nj.nec.com.  The most recent version of
-;; this software can be obtained by anonymous FTP from ftp.nj.nec.com
-;; in file pub/wright/match.tar.Z.  Be sure to set "type binary" when
-;; transferring this file.
-;;
-;; Written by Andrew K. Wright, 1993 (wright@research.nj.nec.com).
-;; Adapted from code originally written by Bruce F. Duba, 1991.
-;; This package also includes a modified version of Kent Dybvig's
-;; define-structure (see Dybvig, R.K., The Scheme Programming Language,
-;; Prentice-Hall, NJ, 1987).
-;;
-;; This software is in the public domain.  Feel free to copy,
-;; distribute, and modify this software as desired.  No warranties
-;; nor guarantees of any kind apply.  Please return any improvements
-;; or bug fixes to wright@research.nj.nec.com so that they may be included
-;; in future releases.
-;;
-;; This macro package extends Scheme with several new expression forms.
-;; Following is a brief summary of the new forms.  See the member-alistiated
-;; LaTeX documentation for a full description of their functionality.
-;;
-;;
-;;         match expressions:
-;;
-;; exp ::= ...
-;;       | (match exp clause ...)
-;;       | (match-lambda clause ...)
-;;       | (match-lambda* clause ...)
-;;       | (match-let ((pat exp) ...) body)
-;;       | (match-let* ((pat exp) ...) body)
-;;       | (match-letrec ((pat exp) ...) body)
-;;       | (match-define pat exp)
-;;
-;; clause ::= (pat body) | (pat => exp)
-;;
-;;         patterns:                       matches:
-;;
-;; pat ::= identifier                      anything, and binds identifier
-;;       | _                               anything
-;;       | ()                              the empty list
-;;       | t                              t
-;;       | string                          a string
-;;       | number                          a number
-;;       | character                       a character
-;;       | 'sexp                           an s-expression
-;;       | 'symbol                         a symbol (special case of s-expr)
-;;       | (pat_1 ... pat_n)               list of n elements
-;;       | (pat_1 ... pat_n . pat_{n+1})   list of n or more
-;;       | (pat_1 ... pat_n pat_n+1 ooo)   list of n or more, each element
-;;                                           of remainder must match pat_n+1
-;;       | #(pat_1 ... pat_n)              vector of n elements
-;;       | #(pat_1 ... pat_n pat_n+1 ooo)  vector of n or more, each element
-;;                                           of remainder must match pat_n+1
-;;       | #&pat                           box
-;;       | ($ struct-name pat_1 ... pat_n) a structure
-;;       | (= field pat)                   a field of a structure
-;;       | (and pat_1 ... pat_n)           if all of pat_1 thru pat_n match
-;;       | (or pat_1 ... pat_n)            if any of pat_1 thru pat_n match
-;;       | (not pat_1 ... pat_n)           if all pat_1 thru pat_n don't match
-;;       | (? predicate pat_1 ... pat_n)   if predicate true and all of
-;;                                           pat_1 thru pat_n match
-;;       | (setq identifier)               anything, and binds setter
-;;       | (get! identifier)               anything, and binds getter
-;;       | `qp                             a quasi-pattern
-;;
-;; ooo ::= ...                             zero or more
-;;       | ___                             zero or more
-;;       | ..k                             k or more
-;;       | __k                             k or more
-;;
-;;         quasi-patterns:                 matches:
-;;
-;; qp  ::= ()                              the empty list
-;;       | t                              t
-;;       | ()                              ()
-;;       | string                          a string
-;;       | number                          a number
-;;       | character                       a character
-;;       | identifier                      a symbol
-;;       | (qp_1 ... qp_n)                 list of n elements
-;;       | (qp_1 ... qp_n . qp_{n+1})      list of n or more
-;;       | (qp_1 ... qp_n qp_n+1 ooo)      list of n or more, each element
-;;                                           of remainder must match qp_n+1
-;;       | #(qp_1 ... qp_n)                vector of n elements
-;;       | #(qp_1 ... qp_n qp_n+1 ooo)     vector of n or more, each element
-;;                                           of remainder must match qp_n+1
-;;       | #&qp                            box
-;;       | ,pat                            a pattern
-;;       | ,@pat                           a pattern
-;;
-;; The names (quote, quasiquote, unquote, unquote-splicing, ?, _, $,
-;; and, or, not, setq, get!, ..., ___) cannot be used as pattern variables.
-;;
-;;
-;;         structure expressions:
-;;
-;; exp ::= ...
-;;       | (define-structure (id_0 id_1 ... id_n))
-;;       | (define-structure (id_0 id_1 ... id_n)
-;;                           ((id_{n+1} exp_1) ... (id_{n+m} exp_m)))
-;;       | (define-const-structure (id_0 arg_1 ... arg_n))
-;;       | (define-const-structure (id_0 arg_1 ... arg_n)
-;;                                 ((arg_{n+1} exp_1) ... (arg_{n+m} exp_m)))
-;;
-;; arg ::= id | (! id) | (@ id)
-;;
-;;
-;; match:error-control controls what code is generated for failed matches.
-;; Possible values:
-;;  'unspecified - do nothing, ie., evaluate (cond [() ()])
-;;  'fail - call match:error, or die at car or cdr
-;;  'error - call match:error with the unmatched value
-;;  'match - call match:error with the unmatched value _and_
-;;             the quoted match expression
-;; match:error-control is set by calling match:set-error-control with
-;; the new value.
-;;
-;; match:error is called for a failed match.
-;; match:error is set by calling match:set-error with the new value.
-;;
-;; match:structure-control controls the uniqueness of structures
-;; (does not exist for Scheme 48 version).
-;; Possible values:
-;;  'vector - (default) structures are vectors with a symbol in position 0
-;;  'disjoint - structures are fully disjoint from all other values
-;; match:structure-control is set by calling match:set-structure-control
-;; with the new value.
-;;
-;; match:runtime-structures controls whether local structure declarations
-;; generate new structures each time they are reached
-;; (does not exist for Scheme 48 version).
-;; Possible values:
-;;  t - (default) each runtime occurrence generates a new structure
-;;  () - each lexical occurrence generates a new structure
-;;
-;; End of user visible/modifiable stuff.
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; These expander functions are not user visible.
 (defconstant match:expanders
@@ -1872,7 +1886,7 @@
       (g209))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module match
 ;;;-----------------------------------------------------------------------------
 
 ;;;-----------------------------------------------------------------------------

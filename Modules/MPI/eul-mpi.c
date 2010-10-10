@@ -18,11 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: Wrapper for the Message Passing Interface (MPI)
 ///  Library: mpis
-///  Authos: Andreas Kind
-///  Description: Message Passing Interface (MPI)
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include <mpi.h>
 #include <eulisp.h>
 

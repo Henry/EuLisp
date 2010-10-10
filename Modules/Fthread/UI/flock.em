@@ -18,17 +18,21 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Interface to Unix International (aka Solaris) Locks (UI)
 ;;;  Library: fthread (foreign thread interface)
-
 ;;;  Authors: Andreas Kind, Liam Wickins
-;;; Description: UI locks for EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    see fthread.em
 ;;;-----------------------------------------------------------------------------
+
 (defmodule flock
   (syntax (macros)
-   import (level1 fcsem)
-   export (<thread-lock> thread-lock? lock-handle))
+   import (level1
+           fcsem)
+   export (<thread-lock>
+           thread-lock?
+           lock-handle))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lock classes
@@ -78,5 +82,5 @@
 (defextern eul_unlock (ptr) ptr "mutex_unlock")
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module flock
 ;;;-----------------------------------------------------------------------------

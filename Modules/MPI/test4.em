@@ -18,18 +18,21 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: MPI example module
 ;;;  Library: mpis
 ;;;  Authors: Andreas Kind
-;;; Description: MPI example module
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    youtoo test4 -l level1 -l mpis -ld mpicc -static
-;;;  Run
+;;;  Run:
 ;;    edit ./mpi-configure then mpirun -p4pg mpi-configure test3
 ;;    or see Makefile
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test4
   (syntax (macros)
-   import (level1 mpis))
+   import (level1
+           mpis))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Example
@@ -43,5 +46,5 @@
   (disconnect local-s))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test4
 ;;;-----------------------------------------------------------------------------

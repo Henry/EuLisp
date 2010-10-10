@@ -1,16 +1,53 @@
-;;; module tpl: tiny paralation lisp
-;;; Probably originally written by Simon Merrall.
-;;; EuSchemed by RJB, Sept 95.
-
-;;; Basic classes and macros.
+;;; Copyright 1995 Russell Bradford
+;;; Copyright 2010 Henry G. Weller
+;;;-----------------------------------------------------------------------------
+;;  This file is part of
+;;; ---                           EuLisp System 'EuXLisp'
+;;;-----------------------------------------------------------------------------
+;;
+;;  EuXLisp is free software: you can redistribute it and/or modify it under the
+;;  terms of the GNU General Public License version 2 as published by the Free
+;;  Software Foundation.
+;;
+;;  EuXLisp is distributed in the hope that it will be useful, but WITHOUT ANY
+;;  WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+;;  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more
+;;  details.
+;;
+;;  You should have received a copy of the GNU General Public License along with
+;;  this program.  If not, see <http://www.gnu.org/licenses/>.
+;;
+;;;-----------------------------------------------------------------------------
+;;; Title: A tiny paralation lisp, basic classes and macros.
+;;;  Authors: Russell Bradford
+;;;  Maintainer: Henry G. Weller
+;;;  Description:
+;;    Probably originally written by Simon Merrall.
+;;    EuSchemed by RJB, Sept 95.
+;;;-----------------------------------------------------------------------------
 
 (defmodule tpl-base
   (import (level-0)
-   export (<paralation-internal> p-size index-internal shape-internal
-                                 attr make-paralation-internal <field> value paralation make-field
-                                 copy-field <mapping> from-key to-key make-mapping elwise))
+   export (<paralation-internal>
+           p-size
+           index-internal
+           shape-internal
+           attr
+           make-paralation-internal
+           <field>
+           value
+           paralation
+           make-field
+           copy-field
+           <mapping>
+           from-key
+           to-key
+           make-mapping
+           elwise))
 
-;; structures
+;;;-----------------------------------------------------------------------------
+;;; Classes
+;;;-----------------------------------------------------------------------------
 (defclass <paralation-internal> ()
   ((size
     keyword: size:
@@ -73,7 +110,9 @@
   (sformat str "#<mapping ~s -> ~s>"
            (from-key m) (to-key m)))
 
-;; macros
+;;;-----------------------------------------------------------------------------
+;;; Macros
+;;;-----------------------------------------------------------------------------
 (defun do-side-effects (nl i)
   (if (null? nl) nil
     (cons `((setter vector-ref)
@@ -95,4 +134,6 @@
                      (value (index-internal (paralation ,(car fields))))
                      ,@(map (lambda (name) `(value ,name)) fields))))))
 
-)
+;;;-----------------------------------------------------------------------------
+)  ;; End of module tpl-base
+;;;-----------------------------------------------------------------------------

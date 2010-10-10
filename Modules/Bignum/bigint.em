@@ -18,14 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Variable-precision integers
 ;;;  Library: bignum
 ;;;  Authors: Danius Michaelides, Andreas Kind
-;;; Description: bignums
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
+
 (defmodule bigint
   (syntax (syntax-0)
-   import (level-0 mpz)
-   export (<bigint> bigint? bigint-value make-bigint-fast))
+   import (level-0
+           mpz)
+   export (<bigint>
+           bigint?
+           bigint-value
+           make-bigint-fast))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class definition
@@ -185,5 +191,5 @@
   (make-bigint-fast (mpz-neg-init (bigint-value x))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module bigint
 ;;;-----------------------------------------------------------------------------

@@ -18,17 +18,20 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: MPI example module
 ;;;  Library: mpis
 ;;;  Authors: Andreas Kind
-;;; Description: MPI example module
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    youtoo test1 -l level1 -l mpis -ld mpicc -static
-;;;  Run
+;;;  Run:
 ;;    mpirun -np 2 test1
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test1
   (syntax (macros)
-   import (level1 mpis))
+   import (level1
+           mpis))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Symbol echo
@@ -50,5 +53,5 @@
 (echo)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test1
 ;;;-----------------------------------------------------------------------------

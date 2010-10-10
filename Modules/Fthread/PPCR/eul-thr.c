@@ -18,10 +18,12 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Library: fthread
+/// Title: Foreign threads based on POSIX Portable Common Runtime
+///  Library: fthread (foreign thread interface)
 ///  Authors: Andreas Kind, Liam Wickins
-///  Description: Foreign threads based on POSIX Portable Common Runtime
-///  Compilation: see fthread.em
+///  Maintainer: Henry G. Weller
+///  Description:
+//    see fthread.em
 ///-----------------------------------------------------------------------------
 
 #include <eulisp.h>

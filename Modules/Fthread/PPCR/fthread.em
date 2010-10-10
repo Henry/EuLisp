@@ -18,18 +18,21 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: PPCR threads for EuLisp
 ;;;  Library: fthread (foreign thread interface)
 ;;;  Authors: Andreas Kind, Liam Wickins
-;;; Description: PPCR threads for EuLisp
+;;;  Maintainer: Henry G. Weller
 ;;;  Compilation
 ;;    youtoo -ar fthread -l level1
 ;;    make
 ;;;-----------------------------------------------------------------------------
+
 (defmodule fthread
   (syntax (macros)
    import (level1)
    expose (flock)
-   export (<ppcr-thread> ppcr-thread-p))
+   export (<ppcr-thread>
+           ppcr-thread-p))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <ppcr-thread>
@@ -99,5 +102,5 @@
 (defextern eul_thr_join (ptr) ptr)
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module fthread
 ;;;-----------------------------------------------------------------------------

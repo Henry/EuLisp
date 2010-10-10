@@ -20,22 +20,50 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Title: General functions
 ;;;  Library: tcltk
-;;;  Authors: J Garcia
+;;;  Authors: J. Garcia
+;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
 (defmodule tk_general
   (syntax (macros)
    import (level1)
    export (<tk-button>
-           <tk-label> <tk-frame>  <tk-canvas> <tk-checkbutton>
-           <tk-entry> <tk-listbox> <tk-menu> <tk-menubutton> <tk-message>
-           <tk-radiobutton> <tk-scale> <tk-scrollbar> <tk-text> <tk-toplevel>
-           <tk-object> <tk-item-canvas>
-           eul_initialize_tk tk-name tk-handler
-           Tk_MainLoop tk-main-loop Tcl_DoOneEvent tcl-do-one-event
-           tk-item-canvas-id as-c-options as-c-accessors tk-object?
-           tk-button? tk-canvas? tk-entry? tk-listbox? tk-scrollbar?
-           tk-text? tk-toplevel? tk-item-canvas? tk_allocate_registers))
+           <tk-label>
+           <tk-frame>
+           <tk-canvas>
+           <tk-checkbutton>
+           <tk-entry>
+           <tk-listbox>
+           <tk-menu>
+           <tk-menubutton>
+           <tk-message>
+           <tk-radiobutton>
+           <tk-scale>
+           <tk-scrollbar>
+           <tk-text>
+           <tk-toplevel>
+           <tk-object>
+           <tk-item-canvas>
+           eul_initialize_tk
+           tk-name
+           tk-handler
+           Tk_MainLoop
+           tk-main-loop
+           Tcl_DoOneEvent
+           tcl-do-one-event
+           tk-item-canvas-id
+           as-c-options
+           as-c-accessors
+           tk-object?
+           tk-button?
+           tk-canvas?
+           tk-entry?
+           tk-listbox?
+           tk-scrollbar?
+           tk-text?
+           tk-toplevel?
+           tk-item-canvas?
+           tk_allocate_registers))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Foreign Functions Declarations
@@ -208,5 +236,5 @@
     x))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module tk_general
 ;;;-----------------------------------------------------------------------------

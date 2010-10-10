@@ -18,9 +18,10 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: used if no gc is used
 ///  Library: boot, telos, level1, eval, youtoo
-///  Authos: Andreas Kind
-///  Description: used if no gc is used
+///  Authors: Andreas Kind
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 
 #include <stdc.h>

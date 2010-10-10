@@ -18,11 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
+/// Title: marshaling EuLisp objects in a serialized format
 ///  Library: eul-serial
 ///  Authors: Andreas Kind
-///  Description: marshaling EuLisp objects in a serialized format
+///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "eulisp.h"
 #include "eul-serial.h"
 #include "eul-serial2.h"

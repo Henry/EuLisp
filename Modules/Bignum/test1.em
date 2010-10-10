@@ -18,15 +18,19 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
+;;; Title: Bignums test
 ;;;  Library: bignum
 ;;;  Authors: Danius Michaelides, Andreas Kind
-;;; Description: bignums test
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    make test
 ;;;-----------------------------------------------------------------------------
+
 (defmodule test1
   (syntax (syntax-0)
-   import (level-0 bignum))
+   import (level-0
+           bignum))
+
 ;;;-----------------------------------------------------------------------------
 ;;; Bigints
 ;;;-----------------------------------------------------------------------------
@@ -110,5 +114,5 @@
 (format "47: ... == ~a\n" (foo -2))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module
+)  ;; End of module test1
 ;;;-----------------------------------------------------------------------------

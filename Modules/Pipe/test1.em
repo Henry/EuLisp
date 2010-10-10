@@ -18,10 +18,11 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Example pipe
+;;; Title: Test pipe
 ;;;  Library: pipe
 ;;;  Authors: Andreas Kind
-;;;  Compilation
+;;;  Maintainer: Henry G. Weller
+;;;  Compilation:
 ;;    make distclean
 ;;    make
 ;;    make test
@@ -29,7 +30,8 @@
 
 (defmodule test1
   (syntax (syntax-0)
-   import (level-0 pipe))
+   import (level-0
+           pipe))
 
 (let ((x (make <pipe> process: "../../Bin.x86_64/youtoo"))
       (str ""))
