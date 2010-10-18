@@ -25,9 +25,7 @@
 #ifndef OSDEFS_H
 #define OSDEFS_H
 
-#ifdef UNIX
 extern LVAL xsystem();
-#endif
 
 ///-----------------------------------------------------------------------------
 #endif // OSDEFS_H

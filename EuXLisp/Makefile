@@ -20,56 +20,23 @@
 ###-----------------------------------------------------------------------------
 ### Title: EuXLisp Top-level Makefile
 ###  Note: set Eu2CROOT e.g. export Eu2CROOT=`pwd`
-### Usage: make
-###  Notes:
-##    Originally tested on sunos, aix, solaris, Linux, ultrix, stardent, irix,
-##    but this version only on Linux.
+### Usage: make [options]
+### Options:
+###   ARCH=<achitectuer: i686, x86_64...>
+### Optional Flags:
+###   -DSIGNAL when you don't have sigset
+###   -DRESTORE_SIGNAL when signals are not automatically reset
+###   -DSOCK to include socket code, but beware: it is possibly buggy
 ###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
 
 ###-----------------------------------------------------------------------------
-### Options:
-###  -DSIGNAL when you don't have sigset
-###  -DRESTORE_SIGNAL when signals are not automatically reset
-###  -DSOCK to include socket code, but beware: it is possibly buggy
+### Set the compilation flags for the particular achitecture
 ###-----------------------------------------------------------------------------
-
-###-----------------------------------------------------------------------------
-### Recall this Makefile for the particular achitecture
-###-----------------------------------------------------------------------------
-it:
-	@$(MAKE) `uname`
-
-# Generic Linux
-Linux:
-	@$(MAKE) `uname`-$(ARCH)
-
-# Linux 32bit
-Linux-i686:
-	$(MAKE) all \
-	"CFLAGS = -std=gnu99 -Wall -O3 -DWORD_LENGTH=32 -DUNIX -DSIGNAL -DSTRINGH -DREADLINE" \
-        "LIBS = -lm -lreadline" "CC = gcc"
-
-# Linux 64bit
-Linux-x86_64:
-	$(MAKE) all \
-        "CFLAGS = -std=gnu99 -Wall -O3 -DWORD_LENGTH=64 -DUNIX -DSIGNAL -DSTRINGH -DREADLINE" \
-        "LIBS = -lm -lreadline" "CC = gcc"
-
-# Generic SunOS
-SunOS:
-	@$(MAKE) SunOS-`uname -r | awk -F. -e '{print $$1}'`
-
-# Solaris
-# Use -lsocket -lnsl for sockets
-SunOS-5:
-	$(MAKE) all "CFLAGS = -std=gnu99 -DUNIX -g " "LDFLAGS = -g" "LIBS = -lm" "CC = gcc"
-
-# IBM AIX
-AIX:
-	$(MAKE) all "CFLAGS = -std=gnu99 -DUNIX -D_ALL_SOURCE -DSOCK" "LIBS = -lm" "CC = gcc"
+CFLAGS=$(EUXLISP_CFLAGS)
+LIBS=$(EUXLISP_LIBS)
 
 ###-----------------------------------------------------------------------------
 ### Search and installation paths
@@ -93,10 +60,6 @@ IMAGE_PLATFORM = $(EUL_LIB_DIR)/$(IMAGE)
 ###  Name and location of the EuXLisp image for executing modules
 IMAGE_MOD = euxlisp_mod.wks
 IMAGE_MOD_PLATFORM = $(EUL_LIB_DIR)/$(IMAGE_MOD)
-
-###  Installation location
-DESTBIN = /usr/local/bin
-DESTLIB = /usr/local/share/Euxlisp
 
 ###  Transfer paths to the compiler
 # Note: CPPFLAGS is used here because it is already on the used in the
@@ -132,7 +95,7 @@ all: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
 
 $(EULX_O) : $(EUXL_H)
 
-$(EUL_BIN_DIR)/euxlisp: $(EULX_O)
+$(EUL_BIN_DIR)/euxlisp: $(EULX_O) | $(EUL_BIN_DIR)/.
 	$(CC) $(LDFLAGS) $(EULX_O) $(LIBS) -o $@
 
 $(IMAGE_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) saveimage
@@ -155,24 +118,11 @@ TAGS: $(EUXL_C) $(EUXL_H) $(LISP)
 .PHONY: tags
 tags: TAGS
 
-.PHONY: install
-install: install-bin install-img install-mod
-
-.PHONY: install-bin
-install-bin: $(ARCH_DIR)/euxlisp
-	cp $(ARCH_DIR)/euxlisp $(DESTBIN)
-
-.PHONY: install-img
-install-img: $(IMAGE_PLATFORM)
-	cp $(IMAGE_PLATFORM) $(DESTLIB)/Image
-
-.PHONY: install-mod
-install-mod: Modules/*.em
-	mkdir $(DESTLIB)/Modules
-	cp ../Modules/*.em $(DESTLIB)/Modules
-
 .PHONY: clean
 clean:
 	@rm -rf $(ARCH_DIR) TAGS
+
+.PHONY: distclean
+distclean: clean
 
 ###-----------------------------------------------------------------------------

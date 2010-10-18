@@ -67,7 +67,6 @@ void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc);
 #define sigset signal
 #endif
 
-#ifdef UNIX
 #include <signal.h>
 #define CAST (void (*)(int))
 
@@ -126,8 +125,6 @@ void sig_pipe()
     }
     #endif
 }
-#endif
-
 #endif
 
 ///-----------------------------------------------------------------------------
@@ -302,11 +299,9 @@ void xlmain(int argc, char **argv)
         xlsp = xlstktop;
     }
 
-    #ifdef UNIX
     sigset(SIGINT, CAST sig_int);
     #ifdef SOCK
     sigset(SIGPIPE, CAST sig_pipe);
-    #endif
     #endif
 
     // execute the main loop

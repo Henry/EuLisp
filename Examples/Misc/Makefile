@@ -121,8 +121,9 @@ runeuxlisp: $(EXAMPLES_0_EM)
 		$(EUL_BIN_DIR)/euxlisp -m $(example);)
 
 # Currently echo, echod and padd are not run because they are interactive
-RUN = fact append div dphil empty hanoi macro-dispatch-char nfib null \
+RUN = fact append div dphil empty hanoi nfib null \
 	sieve sumTo tak takl triang url2
+#	macro-dispatch-char
 
 .PHONY: runyoutoo
 runyoutoo: $(EXAMPLES_EXE)

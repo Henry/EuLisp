@@ -25,9 +25,7 @@
 #ifndef OSPTRS_H
 #define OSPTRS_H
 
-#ifdef UNIX
 {"system", xsystem},
-#endif
 
 ///-----------------------------------------------------------------------------
 #endif // OSPTRS_H
