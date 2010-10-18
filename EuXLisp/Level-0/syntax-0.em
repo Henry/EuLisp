@@ -24,7 +24,8 @@
 
 (defmodule syntax-0
   (import (root
-           macros)
+           macros
+           thread)
    export (block
            return-from
            labels
