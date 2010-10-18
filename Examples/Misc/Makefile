@@ -25,7 +25,7 @@ include ../../Lib.$(ARCH)/Makefile
 
 ###  EuLisp Level-0 examples
 EXAMPLES_0 = hanoi div append fact empty null nfib sieve sumTo tak takl triang
-#	random2
+	random2
 #	macro-dispatch-char
 EXAMPLES_0_EM = $(EXAMPLES_0:%=%.em)
 
