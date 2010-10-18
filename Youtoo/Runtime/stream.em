@@ -276,9 +276,11 @@
 (defun flush ()
   (flush-buffer stdout))
 
-;;***HGW this should be defconstant
-;; but currently it does not work correctly for characters
-(deflocal nl #\\n)
+;;***HGW this should be just a character
+;; but at the moment Youtoo does not write characters correctly
+;; so the .i file would be incorrect
+;;(defconstant nl '#\\n)
+(defconstant nl #\\n)
 
 ;;;------------------------------------------------------------------------
 ;;; Some low level functions to get things printed on <file-stream>s

@@ -51,6 +51,7 @@
            get-binding-info
            get-binding-spec-info
            true-local-binding?
+           non-folded-local-binding?
            compute-arity
            register-delegated-vars
            register-binding-ref
@@ -119,7 +120,7 @@
            binding))))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Create defined constant node
+;;; Create defined constant node
 ;;;-----------------------------------------------------------------------------
 (defun make-named-const (name value)
   (let* ((node (make <named-const> name: name value: value))
@@ -131,8 +132,12 @@
                                          (binding-info? binding))))
       (let ((info-entries '((class . constant))))
         (binding-info! binding (append info-entries
-                                       (binding-info? binding)))
-        (new-node node 'named-constant t)))
+                                       (binding-info? binding)))))
+    ;; Always create a node to store the constant even if it is foldable.
+    ;; This makes the constant available in the interpreter as an
+    ;; external binding rather than a foldable (inline) binding which are not
+    ;; currently available in the interpreter.
+    (new-node node 'named-constant t)
     (set-lexical-binding binding)
     node))
 
@@ -143,7 +148,7 @@
       (null? x)))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Create global static var (deflocal)
+;;; Create global static var (deflocal)
 ;;;-----------------------------------------------------------------------------
 (defun make-global-var (name value)
   (let ((node (make <global-static-var> name: name value: value used: 0)))
@@ -152,7 +157,7 @@
     node))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Create local static var (let, let*, formal parameters)
+;;; Create local static var (let, let*, formal parameters)
 ;;;-----------------------------------------------------------------------------
 (defun make-local-static-var (name . value)
   (let* ((v (and value (car value)))
@@ -161,7 +166,7 @@
     node))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Create defined function node
+;;; Create defined function node
 ;;;-----------------------------------------------------------------------------
 (defun make-defined-fun (name args body)
   (let ((node (make-fun <lambda> name args body)))
@@ -201,7 +206,7 @@
     n))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Create opencoded function node
+;;; Create opencoded function node
 ;;;-----------------------------------------------------------------------------
 (defun make-defined-opencoded-fun (name args body)
   (let ((binding (make-immutable-binding () name))
@@ -213,7 +218,7 @@
     binding))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Create opencoded function node
+;;; Create opencoded function node
 ;;;-----------------------------------------------------------------------------
 (defun make-defined-external-fun (name1 arg-convs res-conv name2)
   (let* ((arg-conv-codes (map1-list arg-converter-index arg-convs))
@@ -231,7 +236,7 @@
     binding))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Create binding
+;;; Create binding
 ;;;-----------------------------------------------------------------------------
 (defun make-immutable-binding (node . name)
   (let ((binding-name (or (and name (car name)) (slot-value node 'name))))
@@ -276,6 +281,17 @@
                    (function? obj))))                       ; no macro function
     ()))
 
+(defun non-folded-local-binding? (binding)
+  (if (binding? binding)
+      (let ((obj (binding-obj? binding)))
+        (null? (or (interface-binding? binding)  ; from interface file
+                   (binding-imported? binding)    ; from just compiled module
+                   (opencoding? obj)
+                   (get-binding-info binding 'opencoding)
+                   (get-binding-info binding 'ff)
+                   (function? obj))))                       ; no macro function
+    ()))
+
 (defun get-binding-info (binding key)
   (get-binding-spec-info key (binding-info? binding)))
 
@@ -315,7 +331,7 @@
          fun)))
 
 ;;;-----------------------------------------------------------------------------
-;;;  Clone syntax node
+;;; Clone syntax node
 ;;;-----------------------------------------------------------------------------
 (defgeneric clone-node ((node <syntax-obj>)))
 

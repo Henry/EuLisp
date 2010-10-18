@@ -89,6 +89,7 @@
                      (and (true-local-binding? binding)
                           (encode-top-lexical-binding binding state)))
                    (module-interactive-lexical-env? module)))
+
 (defun encode-top-lexical-binding (binding state)
   (let ((obj (binding-obj? binding)))
     (notify0 "  Code for module binding ~a:" (local-name? binding))

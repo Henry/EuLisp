@@ -8,7 +8,7 @@
    export (
     ((name . pop-error-handlers) (pos . 6) (origin dynamic . pop-error-handlers))
     ((name . <general-condition>) (pos . 5) (origin condition . <general-condition>) (class . constant))
-    ((name . error) (pos . 12) (origin boot . error))
+    ((name . error) (pos . 13) (origin boot . error))
     ((name . <condition>) (pos . 8) (origin condition . <condition>) (class . constant))
     ((name . signal) (pos . 2) (origin condition . signal))
     ((name . *default-error-handler*) (pos . 3) (origin condition . *default-error-handler*))

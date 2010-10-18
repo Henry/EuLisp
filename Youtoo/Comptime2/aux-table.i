@@ -14,7 +14,7 @@
     ((name . access-table-print) (pos . 2) (origin aux-table . access-table-print))
     ((name . access-table-size) (pos . 5) (origin aux-table . access-table-size))
     ((name . access-table-map) (pos . 6) (origin aux-table . access-table-map))
-    ((name . c-string-as-eul-symbol) (pos . 10) (origin aux-table . c-string-as-eul-symbol) (class . ff) (arity . 1) (ff (8) 6 (eul_c_str_as_eul_symbol . ff_stub_eul_c_str_as_eul_symbol27)))
+    ((name . c-string-as-eul-symbol) (pos . 10) (origin aux-table . c-string-as-eul-symbol) (class . ff) (arity . 1) (ff (8) 6 ("eul_c_str_as_eul_symbol" . "ff_stub_eul_c_str_as_eul_symbol27")))
    )
    local-literals (
     (access-table-print . 30)

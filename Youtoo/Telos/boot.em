@@ -264,17 +264,6 @@
 ;;;-----------------------------------------------------------------------------
 (deflocal *error* ())
 
-;; (defun error (str . args)
-;;   (if *error*
-;;       (apply *error* str args)
-;;     (progn
-;;       (write-object "*** ERROR [level1]: " stderr)
-;;       (apply format stderr str args)
-;;       (write-object "\n" stderr)  ; #\\n stderr)
-;;       (write-object "***    See Backtrace? (y/n) " stderr)
-;;       (if (eq (getchar) #\y) (backtrace) ())
-;;       (exit))))
-
 (defun error (condclass str . args)
   (if *error*
       (apply *error* condclass str args)
@@ -296,7 +285,7 @@
     (progn
       (write-object "*** WARNING [level1]: " stderr)
       (apply format stderr str args)
-      (write-object "\n" stderr)))) ;#\\n stderr))))
+      (write-object "\n" stderr))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Listify environment string

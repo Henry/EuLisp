@@ -56,33 +56,37 @@
                         (as-C-library-interface-file-name name)
                       (as-interface-file-name name)))
          (spec
-          (with-input-file-of-path (stream file-name dir *load-path*)
-                                   (if lib
-                                       (notify "Reading library interface ~a ..." file-name)
-                                     (notify "  Reading interface ~a ..." file-name))
-                                   (setq *tmp-load-dir* dir)
-                                   (read-s-expression stream))))
-    (dynamic-let ((*actual-module* (make-module name)))
-                 (with-ct-handler (fmt "bad interface syntax ~a" spec) spec
-                                  (let* ((module-name (car (cdr spec)))
-                                         (m (dynamic *actual-module*))
-                                         (rest-spec (car (cdr (cdr spec))))
-                                         (import (get-interface-info 'import rest-spec))
-                                         (full-import (get-interface-info 'full-import rest-spec))
-                                         (syntax (get-interface-info 'syntax rest-spec))
-                                         (export (get-interface-info 'export rest-spec))
-                                         ;                 (literals (get-interface-info 'literals rest-spec))
-                                         (lliterals (get-interface-info 'local-literals rest-spec)))
-                                    (module-used-module-names! m import)
-                                    (module-used-syntax-modules! m
-                                                                 ;             (map1-list find-imported-syntax-module
-                                                                 syntax)
-                                    (module-all-used-module-names! m full-import)
-                                    (module-local-literals! m lliterals)
-                                    (do1-list make-interface-binding export)
-                                    ;            (do1-list (lambda (x)
-                                    ;                        (new-literal (car x) (car (cdr x)))) literals)
-                                    m)))))
+          (with-input-file-of-path
+           (stream file-name dir *load-path*)
+           (if lib
+               (notify "Reading library interface ~a ..." file-name)
+             (notify "  Reading interface ~a ..." file-name))
+           (setq *tmp-load-dir* dir)
+           (read-s-expression stream))))
+    (dynamic-let
+     ((*actual-module* (make-module name)))
+     (with-ct-handler
+      (fmt "bad interface syntax ~a" spec) spec
+      (let* ((module-name (car (cdr spec)))
+             (m (dynamic *actual-module*))
+             (rest-spec (car (cdr (cdr spec))))
+             (import (get-interface-info 'import rest-spec))
+             (full-import (get-interface-info 'full-import rest-spec))
+             (syntax (get-interface-info 'syntax rest-spec))
+             (export (get-interface-info 'export rest-spec))
+             ;(literals (get-interface-info 'literals rest-spec))
+             (lliterals (get-interface-info 'local-literals rest-spec)))
+        (module-used-module-names! m import)
+        (module-used-syntax-modules! m
+                                     ;(map1-list find-imported-syntax-module
+                                     syntax)
+        (module-all-used-module-names! m full-import)
+        (module-local-literals! m lliterals)
+        (do1-list make-interface-binding export)
+        (get-external-binding 'nl)
+        ;(do1-list (lambda (x)
+        ;(new-literal (car x) (car (cdr x)))) literals)
+        m)))))
 
 (defun load-library-interfaces ()
   (let ((tmp-load-path *load-path*))
@@ -145,17 +149,18 @@
          (all-used-module-names
           (module-all-used-module-names? module)))
     (notify "  Creating ~a ..." file-name)
-    (with-output-file (stream absolute-file-name)
-                      (sformat stream ";;; EuLisp system 'youtoo'\n")
-                      (sformat stream ";;;   Interface file for module ~a\n\n" module-name)
-                      (sformat stream "(definterface ~a\n" module-name)
-                      (sformat stream "  (import ~a\n" used-module-names)
-                      (sformat stream "   syntax ~a\n" used-syntax-module-names)
-                      (sformat stream "   full-import ~a\n" all-used-module-names)
-                      (write-interface-export stream module)
-                      (write-interface-local-literals stream module)
-                      (write-interface-literals stream module)
-                      (sformat stream "))\n")))
+    (with-output-file
+     (stream absolute-file-name)
+     (sformat stream ";;; EuLisp system 'youtoo'\n")
+     (sformat stream ";;;   Interface file for module ~a\n\n" module-name)
+     (sformat stream "(definterface ~a\n" module-name)
+     (sformat stream "  (import ~a\n" used-module-names)
+     (sformat stream "   syntax ~a\n" used-syntax-module-names)
+     (sformat stream "   full-import ~a\n" all-used-module-names)
+     (write-interface-export stream module)
+     (write-interface-local-literals stream module)
+     (write-interface-literals stream module)
+     (sformat stream "))\n")))
   module)
 
 ;;;-----------------------------------------------------------------------------
@@ -171,18 +176,19 @@
          (all-used-module-names
           (cons module-name (module-all-used-module-names? module))))
     (notify "  Writing library interface file ~a" file-name)
-    (with-output-file (stream absolute-file-name)
-                      (sformat stream ";;; EuLisp system 'youtoo'\n")
-                      (sformat stream ";;;   Library interface file for module ~a\n\n"
-                               module-name)
-                      (sformat stream "(definterface ~a\n" module-name)
-                      (sformat stream "  (import ()\n")
-                      (sformat stream "   syntax ()\n")
-                      (sformat stream "   full-import ~a\n" all-used-module-names)
-                      (write-interface-export stream module)
-                      ;        (write-interface-literals stream module)
-                      (sformat stream "   literals (\n   )\n")
-                      (sformat stream "  )\n)  ; end of interface")))
+    (with-output-file
+     (stream absolute-file-name)
+     (sformat stream ";;; EuLisp system 'youtoo'\n")
+     (sformat stream ";;;   Library interface file for module ~a\n\n"
+              module-name)
+     (sformat stream "(definterface ~a\n" module-name)
+     (sformat stream "  (import ()\n")
+     (sformat stream "   syntax ()\n")
+     (sformat stream "   full-import ~a\n" all-used-module-names)
+     (write-interface-export stream module)
+     ;(write-interface-literals stream module)
+     (sformat stream "   literals (\n   )\n")
+     (sformat stream "  )\n)  ; end of interface")))
   module)
 
 (defun create-library-interface-file (module-name)
@@ -249,7 +255,8 @@
                                           (binding-local-name? binding)
                                           binding))
                (module-external-env? module)))
-            (map1-list find-imported-module (module-all-used-module-names? module)))
+            (map1-list find-imported-module
+                       (module-all-used-module-names? module)))
   (sformat stream "  )\n"))
 
 (defun write-interface-binding (stream name binding)
@@ -260,7 +267,7 @@
                          name))
         (binding-info (binding-info? binding))
         (index (binding-local-index? binding)))
-    (sformat stream "    ~a\n"
+    (sformat stream "    ~s\n"
              `((name . ,name)
                (pos . ,index)
                (origin ,origin-module-name . ,origin-name)
@@ -305,11 +312,12 @@
                                        (notify0 "  dir ~a ..." dir)
                                        (read-s-expression stream))))
         (notify0 "  Get-full-import-names spec: ~a" spec)
-        (with-ct-handler (fmt "bad interface syntax ~a" spec) spec
-                         (let* ((rest-spec (car (cdr (cdr spec))))
-                                (import (get-interface-info 'full-import rest-spec)))
-                           ((setter *get-full-import*) module-name import)
-                           import)))))
+        (with-ct-handler
+         (fmt "bad interface syntax ~a" spec) spec
+         (let* ((rest-spec (car (cdr (cdr spec))))
+                (import (get-interface-info 'full-import rest-spec)))
+           ((setter *get-full-import*) module-name import)
+           import)))))
 
 (defun get-library-names ()
   (let ((modules (map1-list get-module *linked-C-libraries*))

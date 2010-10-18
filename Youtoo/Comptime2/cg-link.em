@@ -98,7 +98,7 @@
 (defun set-up-bindings (module)
   (let* ((C-module-name (as-C-module-name (module-name? module)))
          (env (module-lexical-env? module))
-         (bindings (select-list true-local-binding?
+         (bindings (select-list non-folded-local-binding?
                                 (access-table-values env)))
          (n (list-size bindings)))
     (and (< 0 n)

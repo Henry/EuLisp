@@ -92,7 +92,7 @@
   ;;(setq *error* cerror)
   (setq *error*
         (named-lambda
-         cerror (str class . rest)
+         cerror (class str . rest)
          (if (and (class? class) (subclass? class <condition>))
              (let/cc k (signal (apply make class message: str rest) k))
            ;; Not EuLisp but very comfortable

@@ -104,15 +104,6 @@
                      (control-block-buffer-pos scb))))))
 
 ;;; Formatted error messages
-;; error already defined in module boot
-;; (setq *error*
-;;       (named-lambda error (str class . rest)
-;;                     (if (and (class? class) (subclass? class <condition>))
-;;                         (signal (apply make class message: str rest) ())
-;;                       ;; Boot-level error handling
-;;                       (signal
-;;                        (make <condition> message: (apply fmt str class rest))
-;;                        ()))))
 (setq *error*
       (named-lambda error (condclass str . rest)
                     (if condclass

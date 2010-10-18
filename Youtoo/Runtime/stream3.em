@@ -145,9 +145,12 @@
 
 (defmethod generic-write ((c <character>) (s <buffered-stream>))
   ;; Certain characters should be interpreted
-  (sprint-one-char s #\# )
-  (sprint-one-char s #\\\ )
-  (sprint-one-char s c)
+  (if (eq c #\\n)
+      (print-string "#\\\\n" 4 s)
+    (progn
+      (sprint-one-char s #\# )
+      (sprint-one-char s #\\\ )
+      (sprint-one-char s c)))
   c)
 
 (defmethod generic-write ((x <string>) (s <buffered-stream>))

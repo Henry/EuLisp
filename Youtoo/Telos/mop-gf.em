@@ -220,7 +220,7 @@
 ;;; Error and warning (using simple format)
 ;;;-----------------------------------------------------------------------------
 (setq *error*
-      (named-lambda error (str . args)
+      (named-lambda error (condclass str . args)
                     (format 2 "*** ERROR [level1]: ")
                     (apply format 2 str args)
                     (format 2 "\n")
