@@ -54,7 +54,7 @@
 (defclass <random-state> ()
   ((ij default: 1802 keyword: ij: accessor: state-ij)
    (kl default: 9373 keyword: kl: accessor: state-kl)
-   (u default: (make-vector 97 0) keyword: u: accessor: state-u)
+   (u default: (make <vector> size: 97 fill-value: 0) keyword: u: accessor: state-u)
    (c default: (/ 362436.0 16777216.0) keyword: c: accessor: state-c)
    (cd default: (/ 7654321.0 16777216.0) keyword: cd: accessor: state-cd)
    (cm default: (/ 16777213.0 16777216.0) accessor: state-cm)
