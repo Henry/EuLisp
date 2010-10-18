@@ -32,6 +32,7 @@ Tools/*.[chi]
 
 # Ignore personal test area
 /Examples/Test
+/Youtoo/Scripts
 /Eu2C/Scripts
 /Modules/Case
 
