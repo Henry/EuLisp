@@ -52,7 +52,7 @@
  (t
   (format
    t
-   "~%First command line argument does not specify machine type m32 or m64~%")
+   "~%First command line argument does not specify machine type i686 or x86_64~%")
   (quit))
  )
 
