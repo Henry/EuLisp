@@ -24,17 +24,10 @@
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
-# Set default word-length option
-WL = m32
-ifeq ($(ARCH),x86_64)
-    WL = m64
-endif
-
-ARCH := $(ARCH)$(WL)
-
 CC = gcc
-GCCFLAGS = -std=gnu99 -Wall -O0 -ggdb3
-EU2C_FLAGS = -$(WL)
+GCCFLAGS = -m$(WORD_LENGTH) -std=gnu99 -Wall -O3
+#GCCDEBUG = -O0 -ggdb3
+EU2C_FLAGS =
 CFLAGS = $(GCCFLAGS) $(EU2C_FLAGS)
 
 .PRECIOUS: %/.
@@ -84,19 +77,19 @@ endif
 all: $(ARCHIVES)
 
 $(ARCH_DIR)/eu2c.a: $(RUNTIME_HC)
-	$(MAKE) makea ARCHIVE=$@ EU2C_FLAGS="-$(WL) -DNOTHREADS"
+	$(MAKE) makea ARCHIVE=$@ EU2C_FLAGS="-DNOTHREADS"
 	$(MAKE) clean
 
 $(ARCH_DIR)/eu2c-s.a: $(RUNTIME_HC)
-	$(MAKE) makea ARCHIVE=$@ EU2C_FLAGS="-$(WL) -DESCURITY_FIRST -DNOTHREADS"
+	$(MAKE) makea ARCHIVE=$@ EU2C_FLAGS="-DESCURITY_FIRST -DNOTHREADS"
 	$(MAKE) clean
 
 $(ARCH_DIR)/eu2c-threads.a: $(RUNTIME_HC) $(THREAD_HC)
-	$(MAKE) makeat ARCHIVE=$@ EU2C_FLAGS=-$(WL)
+	$(MAKE) makeat ARCHIVE=$@
 	$(MAKE) clean
 
 $(ARCH_DIR)/eu2c-threads-s.a: $(RUNTIME_HC) $(THREAD_HC)
-	$(MAKE) makeat ARCHIVE=$@ EU2C_FLAGS="-$(WL) -DESCURITY_FIRST"
+	$(MAKE) makeat ARCHIVE=$@ EU2C_FLAGS="-DESCURITY_FIRST"
 	$(MAKE) clean
 
 .PHONY: makea

@@ -282,14 +282,14 @@
     If you plan to use Eu2C with the precompiled basic system we recommend to
     run make with the targets clean_runtime_sources and clean_eu2c_image.
 *** Building 32bit on a 64bit machine:
-    It is possible to compile 32bit on 64bit machines using the "WL=32" option
-    to build the run-time and the -m32 option when building the applications,
-    e.g.
-    + make clean
-    + make WL=32
-    + cd Examples
-    + ../Bin/eu2c -m32 -bs level-0 gtakl2
-    + ./gtakl2
+    It is possible to compile 32bit on 64bit machines using the =ARCH=i686=
+    option to build the run-time and the =-arch i686= option when building the
+    applications, e.g.
+    + =make clean=
+    + =make ARCH=i686=
+    + =cd Examples=
+    + =../Bin/eu2c -arch i686 -bs level-0 gtakl2=
+    + =./gtakl2=
 * Current Limitations
 *** Not yet implemented:
     + =generic-lambda=.

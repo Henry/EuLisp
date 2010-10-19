@@ -24,28 +24,18 @@
 ### Usage: make [options]
 ### Options:
 ###   CL=<Lisp Compiler: cmu, sbcl>
-###   WL=<Machine word length: m32, m64>
+###   ARCH=<Machine architecture: i686, x86_64...>
 ###   eu2c=<Eu2C compiler image name>
 ###   module=<module name>
 ###   eu2c, runtime, modlib, modeu2c, clean, distclean
 ### Defaults:
 ###   CL=cmu
-###   WL=[m32 on 32bit machines and m64 on 64bit machines]
+###   ARCH=[`uname -m` i.e. the default architecture on the machine]
 ###   eu2c=eu2c
 ###   module=level-0
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
-
-# Set the default machine word-length to 32
-# but override the default for x86_84 architectures
-# May also be overridden on the command-line
-WL = m32
-ifeq ($(ARCH),x86_64)
-    WL = m64
-endif
-
-ARCH := $(ARCH)$(WL)
 
 ###-----------------------------------------------------------------------------
 ### Set Common Lisp compiler
@@ -67,7 +57,7 @@ endif
 ### Set C compiler
 ###-----------------------------------------------------------------------------
 CC = gcc
-CFLAGS = -O2 -Wall -Wno-unused
+CFLAGS = -m$(WORD_LENGTH) -O2 -Wall -Wno-unused
 #CFLAGS = -ggdb3
 
 ###-----------------------------------------------------------------------------
@@ -112,7 +102,7 @@ $(eu2c_image): $(Apply) $(EclModules)
 .PHONY: runtime
 runtime:
 	@echo "===> Compile the C runtime library"
-	@$(MAKE) -C ${Eu2CROOT}/Runtime WL=$(WL)
+	@$(MAKE) -C ${Eu2CROOT}/Runtime
 
 ###-----------------------------------------------------------------------------
 ###  Compile the module library
@@ -126,7 +116,7 @@ ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules
 	cp ti-sys-signatures.em $(ARCH_DIR)/ti-sys-signatures.def && \
 	echo "(apply-compiler::compile-basic-system (cadr ext:*command-line-strings*)) (quit)" | \
 	$(call Eu2C,${Eu2CROOT}/$(eu2c_image),$(module)) && \
-	$(CC) -$(WL) $(CFLAGS) -I${Eu2CROOT}/Runtime -I$(ARCH_DIR) \
+	$(CC) $(CFLAGS) -I${Eu2CROOT}/Runtime -I$(ARCH_DIR) \
 		-c $(ARCH_DIR)/$(module).c -o $(ARCH_DIR)/$(module).o && \
 	ar rcv $(ARCH_DIR)/$(module).a $(ARCH_DIR)/$(module).o && \
 	ranlib $(ARCH_DIR)/$(module).a
@@ -142,14 +132,14 @@ $(module_image): $(eu2c_image) ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
 		$(call Eu2C,$(eu2c_image),$(module))
 
 ###-----------------------------------------------------------------------------
-###  Create all four options on a 64bit machine
+###  Build both 32bit and 64bit on a 64bit machine
 ###-----------------------------------------------------------------------------
 .PHONY: all
 all:
-	@$(MAKE)
-	@$(MAKE) module=level-0x
-	@$(MAKE) WL=m32
-	@$(MAKE) WL=m32 module=level-0x
+	$(MAKE)
+	$(MAKE) module=level-0x
+	$(MAKE) ARCH=i686
+	$(MAKE) ARCH=i686 module=level-0x
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands

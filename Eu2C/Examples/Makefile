@@ -24,16 +24,6 @@
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
-# Set the default machine word-length to 32
-# but override the default for x86_84 architectures
-# May also be overridden on the command-line
-WL = m32
-ifeq ($(ARCH),x86_64)
-    WL = m64
-endif
-
-ARCH := $(ARCH)$(WL)
-
 ###-----------------------------------------------------------------------------
 ### Basic system and optimisation switch
 ###-----------------------------------------------------------------------------
@@ -71,11 +61,11 @@ all0x: $(EXAMPLES_0X_EXE)
 
 $(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em \
 		${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0.def
-	../Bin/eu2c -$(WL) $(BS0) $<
+	../Bin/eu2c -arch $(ARCH) $(BS0) $<
 
 $(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em \
 		${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0x.def
-	../Bin/eu2c -$(WL) $(BS0X) $<
+	../Bin/eu2c -arch $(ARCH) $(BS0X) $<
 
 ###-----------------------------------------------------------------------------
 ###  Run the examples

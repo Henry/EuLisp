@@ -28,21 +28,29 @@ include Lib.$(ARCH)/Makefile
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 .PHONY: default
-default: euxlisp youtoo
+default: euxlisp youtoo eu2c
 
 .PHONY: all
 all: default doc
 
+ALL = $(findstring all,$(MAKECMDGOALS))
+
 .PHONY: euxlisp
 euxlisp:
 	@echo "BUILDING EuXLisp ..."
-	@$(MAKE) -C EuXLisp
+	@$(MAKE) -C EuXLisp $(ALL)
 	@echo "DONE"
 
 .PHONY: youtoo
 youtoo:
 	@echo "BUILDING Youtoo ..."
-	@$(MAKE) -C Youtoo
+	@$(MAKE) -C Youtoo $(ALL)
+	@echo "DONE"
+
+.PHONY: eu2c
+eu2c:
+	@echo "BUILDING Eu2C ..."
+	@$(MAKE) -C Eu2C $(ALL)
 	@echo "DONE"
 
 .PHONY: test

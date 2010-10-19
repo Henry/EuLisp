@@ -91,7 +91,7 @@ DISTFILES = $(EUXL_C) $(EUXL_H) $(LISP) $(OTHERS)
 ###-----------------------------------------------------------------------------
 ### Commands to build EuXLisp
 ###-----------------------------------------------------------------------------
-all: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
+euxlisp: $(EUL_BIN_DIR)/euxlisp $(IMAGE_PLATFORM) $(IMAGE_MOD_PLATFORM)
 
 $(EULX_O) : $(EUXL_H)
 
@@ -105,6 +105,14 @@ $(IMAGE_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) saveimage
 $(IMAGE_MOD_PLATFORM): $(EUL_BIN_DIR)/euxlisp $(LISP) savemodimage
 	EU_MODULE_PATH=Level-0 $(EUL_BIN_DIR)/euxlisp -n < savemodimage
 	mv euxlisp_mod.wks $(IMAGE_MOD_PLATFORM)
+
+###-----------------------------------------------------------------------------
+###  Build both 32bit and 64bit on a 64bit machine
+###-----------------------------------------------------------------------------
+.PHONY: all
+all:
+	$(MAKE)
+	$(MAKE) ARCH=i686
 
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands

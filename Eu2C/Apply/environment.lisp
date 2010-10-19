@@ -45,9 +45,9 @@
 (export '*arch*)
 
 (cond
- ((search "m32" *arch*)
+ ((search "i686" *arch*)
   (setq *features* (append *features* '(:word32))))
- ((search "m64" *arch*)
+ ((search "x86_64" *arch*)
   (setq *features* (append *features* '(:word64))))
  (t
   (format

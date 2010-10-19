@@ -19,28 +19,23 @@
 ##  this program.  If not, see <http://www.gnu.org/licenses/>.
 ##
 ###-----------------------------------------------------------------------------
-###  Title: Script to compile EuLisp applications
-###  Description:
-###  Documentation:
+### Title: Script to compile EuLisp applications
 ###  Notes:
-##  Currently this script is hard-coded to run CMUCL
-##  with the executable name lisp.
-###  Requires:
-###  Problems:
-###  Authors:
+##    Currently this script is hard-coded to run CMUCL
+##    with the executable name lisp.
+###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
 
 # Set standard image name
 if [ $# = 0 -o "$1" = "-H" ]
 then
     echo "usage: eu2c.application" \
-         " [-LCS] [-g][-cards <K>] [-bs basic-system] [-o name]" \
+         " [-LCS] [-g] [-cards <K>] [-arch <arch>] [-bs <basic-system>] [-o <name>]" \
          " <app> [CC-OPTIONS files]..."
     echo "<app>:        the name of the .em application file"
     echo "              may be preceded by a path"
     echo "files:        additional files given to the C-compiler"
-    echo "-m32:         generate 32-bit executable"
-    echo "-m64:         generate 32-bit library and executable"
+    echo "-arch <arch>: generate executable for given arctitecture"
     echo "-g:           generate debugging info for system debugger"
     echo "-w:           generate warnings from C-compiler"
     echo "-threads:     a special thread gc library will be used for linking"
@@ -73,11 +68,6 @@ then
 else
     CC="gcc "
 fi
-
-# Set the default machine word-length to 32bit
-# but override the default for x86_64
-MWORDLEN=m32
-[ $ARCH = "x86_64" ] && MWORDLEN=m64
 
 if [ -n "$Eu2C_CC_OPTIMIZE" ]
 then
@@ -136,12 +126,9 @@ do
             THREADS="-threads"
             shift
             ;;
-        "-m32")
-            MWORDLEN="m32"
+        "-arch")
+            ARCH=$2
             shift
-            ;;
-        "-m64")
-            MWORDLEN="m64"
             shift
             ;;
         "-security")
@@ -158,13 +145,26 @@ do
     esac
 done
 
-ARCH_DIR=platforms/${ARCH}${MWORDLEN}
+case $ARCH in
+    "i686")
+        MWORDLEN=m32
+        ;;
+    "x86_64")
+        MWORDLEN=m64
+        ;;
+    *)
+        echo "Eu2C: unknown architecture " $ARCH
+        exit 1
+        break
+esac
+
+ARCH_DIR=platforms/${ARCH}
 
 if [ -n "$Eu2CIMAGENAME" ]
 then
-    Eu2CIMAGE=$Eu2CROOT/Lib/${ARCH}${MWORDLEN}/$Eu2CIMAGENAME
+    Eu2CIMAGE=$Eu2CROOT/Lib/${ARCH}/$Eu2CIMAGENAME
 else
-    Eu2CIMAGE=$Eu2CROOT/Lib/${ARCH}${MWORDLEN}/eu2c
+    Eu2CIMAGE=$Eu2CROOT/Lib/${ARCH}/eu2c
 fi
 
 CL="cmu"
