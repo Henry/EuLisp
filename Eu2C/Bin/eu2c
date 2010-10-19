@@ -147,10 +147,10 @@ done
 
 case $ARCH in
     "i686")
-        MWORDLEN=m32
+        WORD_LENGTH=32
         ;;
     "x86_64")
-        MWORDLEN=m64
+        WORD_LENGTH=64
         ;;
     *)
         echo "Eu2C: unknown architecture " $ARCH
@@ -276,9 +276,9 @@ fi
 if [ "$STATE" = "-LC" -o "$STATE" = "-C" ]
 then
     set -x
-    $CC -$MWORDLEN -c -o $ARCH_DIR/$APPNAME.o \
+    $CC -m$WORD_LENGTH -c -o $ARCH_DIR/$APPNAME.o \
         $CCWARN $CCOPTIMIZE $CCOPTIONS  $INCLUDE $ARCH_DIR/$APPNAME.c
-    $CC -$MWORDLEN -z muldefs -o $ARCH_DIR/$IMAGE \
+    $CC -m$WORD_LENGTH -z muldefs -o $ARCH_DIR/$IMAGE \
         $CCOPTIMIZE $CCOPTIONS $INCLUDE $CARDS $ARCH_DIR/$APPNAME.o $* \
         $BASIC_SYSTEM $Eu2CROOT$GCLIB $LINKLIBS
     set +x
