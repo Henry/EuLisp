@@ -60,11 +60,11 @@ all0: $(EXAMPLES_0_EXE)
 all0x: $(EXAMPLES_0X_EXE)
 
 $(EXAMPLES_0_EXE): $(ARCH_DIR)/%: %.em \
-		${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0.def
+		$(EUL_DIR)/Eu2C/EuLispModules/$(ARCH_DIR)/level-0.def
 	../Bin/eu2c -arch $(ARCH) $(BS0) $<
 
 $(EXAMPLES_0X_EXE): $(ARCH_DIR)/%: %.em \
-		${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/level-0x.def
+		$(EUL_DIR)/Eu2C/EuLispModules/$(ARCH_DIR)/level-0x.def
 	../Bin/eu2c -arch $(ARCH) $(BS0X) $<
 
 ###-----------------------------------------------------------------------------
