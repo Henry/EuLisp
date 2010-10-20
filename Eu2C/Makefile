@@ -20,7 +20,6 @@
 ###-----------------------------------------------------------------------------
 ### Title: Eu2C Top-level Makefile
 ###  Maintainer: Henry G. Weller
-###  Note: set Eu2CROOT e.g. export Eu2CROOT=`pwd`
 ### Usage: make [options]
 ### Options:
 ###   CL=<Lisp Compiler: cmu, sbcl>
@@ -36,6 +35,11 @@
 ###-----------------------------------------------------------------------------
 ARCH := $(shell uname -m)
 include ../Lib.$(ARCH)/Makefile
+
+###-----------------------------------------------------------------------------
+### Set the Eu2C top-level environment variable
+###-----------------------------------------------------------------------------
+export Eu2CROOT=$(EUL_DIR)/Eu2C
 
 ###-----------------------------------------------------------------------------
 ### Set Common Lisp compiler
@@ -102,16 +106,16 @@ $(eu2c_image): $(Apply) $(EclModules)
 .PHONY: runtime
 runtime:
 	@echo "===> Compile the C runtime library"
-	@$(MAKE) -C ${Eu2CROOT}/Runtime
+	@$(MAKE) -C Runtime
 
 ###-----------------------------------------------------------------------------
 ###  Compile the module library
 ###-----------------------------------------------------------------------------
 .PHONY: modlib
-modlib: ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
-${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules)
+modlib: EuLispModules/$(ARCH_DIR)/$(module).a
+EuLispModules/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules)
 	@echo "===> Compile the module library " $@
-	@cd ${Eu2CROOT}/EuLispModules && \
+	@cd EuLispModules && \
 	mkdir -p $(ARCH_DIR) && \
 	cp ti-sys-signatures.em $(ARCH_DIR)/ti-sys-signatures.def && \
 	echo "(apply-compiler::compile-basic-system (cadr ext:*command-line-strings*)) (quit)" | \
@@ -126,7 +130,7 @@ ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a: $(eu2c_image) $(EuLispModules
 ###-----------------------------------------------------------------------------
 .PHONY: modeu2c
 modeu2c: $(module_image)
-$(module_image): $(eu2c_image) ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)/$(module).a
+$(module_image): $(eu2c_image) EuLispModules/$(ARCH_DIR)/$(module).a
 	@echo "===> Create the module compiler image " $@
 	@echo "(let ((name (cadr ext:*command-line-strings*)))(apply-compiler::load-basic-system :application name) (dump-apply (concatenate 'string (string (quote |$(eu2c).|)) name))) (quit)" | \
 		$(call Eu2C,$(eu2c_image),$(module))
@@ -148,27 +152,27 @@ all:
 README: README.html
 
 clean_images:
-	@rm -f ${Eu2CROOT}/Lib/$(ARCH)/*.$(image_ext)
+	@rm -f Lib/$(ARCH)/*.$(image_ext)
 
 distclean_images:
-	rm -rf ${Eu2CROOT}/Lib/*
+	rm -rf Lib/*
 
 clean_module:
-	@rm -f ${Eu2CROOT}/EuLispModules/ti-sys-signatures.def
-	@rm -rf ${Eu2CROOT}/EuLispModules/$(ARCH_DIR)
+	@rm -f EuLispModules/ti-sys-signatures.def
+	@rm -rf EuLispModules/$(ARCH_DIR)
 
 distclean_module: clean_module
-	@rm -rf ${Eu2CROOT}/EuLispModules/platforms
+	@rm -rf EuLispModules/platforms
 
 clean_fasl:
-	@rm -f ${Eu2CROOT}/{.,Apply,EclModules}/*.{fasl,bin,sse2f}
+	@rm -f {.,Apply,EclModules}/*.{fasl,bin,sse2f}
 
 clean: clean_fasl
-	@$(MAKE) -C ${Eu2CROOT}/Runtime clean
-	@$(MAKE) -C ${Eu2CROOT}/Examples clean
+	@$(MAKE) -C Runtime clean
+	@$(MAKE) -C Examples clean
 
 distclean: clean_fasl distclean_images distclean_module
-	@$(MAKE) -C ${Eu2CROOT}/Runtime distclean
-	@$(MAKE) -C ${Eu2CROOT}/Examples distclean
+	@$(MAKE) -C Runtime distclean
+	@$(MAKE) -C Examples distclean
 
 ###-----------------------------------------------------------------------------

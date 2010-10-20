@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*EuLisp*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=iso-8859-1"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-10-18 23:06:32 BST"/>
+<meta name="generated" content="2010-10-20 10:28:20 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -83,11 +83,9 @@ lang="en" xml:lang="en">
 <li><a href="#sec-2">2 Aim </a></li>
 <li><a href="#sec-3">3 Original Sources </a></li>
 <li><a href="#sec-4">4 General Description </a></li>
-<li><a href="#sec-5">5 Installation of EuXLisp and Youtoo </a></li>
-<li><a href="#sec-6">6 Getting Started with EuXLisp </a></li>
-<li><a href="#sec-7">7 Getting Started with Youtoo </a></li>
-<li><a href="#sec-8">8 Getting Started with Eu2C </a></li>
-<li><a href="#sec-9">9 To Do </a></li>
+<li><a href="#sec-5">5 Installation of EuXLisp, Youtoo and Eu2C </a></li>
+<li><a href="#sec-6">6 Getting Started </a></li>
+<li><a href="#sec-7">7 To Do </a></li>
 </ul>
 </div>
 </div>
@@ -318,24 +316,56 @@ Research and Technology under the project code ITW9102D5.
 </div>
 
 <div id="outline-container-5" class="outline-2">
-<h2 id="sec-5"><span class="section-number-2">5</span> Installation of EuXLisp and Youtoo </h2>
+<h2 id="sec-5"><span class="section-number-2">5</span> Installation of EuXLisp, Youtoo and Eu2C </h2>
 <div class="outline-text-2" id="text-5">
 
 <ul>
-<li>
-Pull the latest version from the GitHub repository:
+<li id="sec-5_1">Prerequisites <br/>
 <ul>
 <li>
-<code>git clone git://github.com/Henry/EuLisp.git</code>
+<b>gcc</b>: All three EuLisp implementations require a C-compiler, in particular <code>gcc</code>
+on most platforms.  It is likely that a suitable <code>gcc</code> is already
+installed, if not install the development package which includes it.
+</li>
+<li>
+<b>GC</b>: EuXLisp and Eu2C include their own garbage collectors bu Youtoo uses
+the Boehm-Demers garbage collector which must be installed before
+compilation:
+<ul>
+<li>
+On SuSE: <code>sudo zypper install gc-devel</code>.
+</li>
+<li>
+On Ubuntu: <code>sudo apt-get install libgc-dev</code>.
+</li>
+<li>
+On RedHat&hellip;: install the appropriate package.
+</li>
+<li>
+From sources: download
+<a href="http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/gc-7.2alpha4.tar.gz">http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/gc-7.2alpha4.tar.gz</a>
+and unpack, configure, make and install in <code>/usr/local</code>.
 </li>
 </ul>
 </li>
 <li>
-"cd" into the <code>EuLisp</code> directory
+<b>CL</b>: Eu2C bootstraps from Common Lisp and currently requires a recent
+version of CMUCL which may be obtained from
+<a href="http://www.cons.org/cmucl/download.html">http://www.cons.org/cmucl/download.html</a>.  SBCL support is expected in the
+future.
+</li>
+<li>
+Pull the latest version from the GitHub repository:
+</li>
+<li>
+<code>git clone git://github.com/Henry/EuLisp.git</code>
+</li>
+<li>
+<code>cd</code> into the <code>EuLisp</code> directory
 </li>
 <li>
 Configure for the default architecture
-<ul>
+</li>
 <li>
 <code>./configure</code>
 </li>
@@ -346,11 +376,9 @@ necessary and re-run
 <li>
 <code>./configure</code>.
 </li>
-</ul>
-</li>
 <li>
 To configure for a specified architecture,
-<ul>
+</li>
 <li>
 <code>./configure &lt;arch&gt;</code>
 </li>
@@ -360,19 +388,15 @@ To configure for a specified architecture,
 <li>
 <code>./configure i686</code>
 </li>
-</ul>
-</li>
 <li>
-Build EuXLisp and Youtoo for the default architecture
-<ul>
+Build EuXLisp, Youtoo and Eu2C for the default architecture
+</li>
 <li>
 <code>make</code>
 </li>
-</ul>
-</li>
 <li>
-Build EuXLisp and Youtoo for a specified architecture
-<ul>
+Build EuXLisp, Youtoo and Eu2C for a specified architecture
+</li>
 <li>
 <code>make ARCH=&lt;arch&gt;</code>
 </li>
@@ -382,88 +406,81 @@ Build EuXLisp and Youtoo for a specified architecture
 <li>
 <code>make ARCH=i686</code>
 </li>
-</ul>
+<li>
+Alternatively you can build <code>euxlisp</code>, <code>youtoo</code> or <code>eu2c</code> by specifying the
+target and optionally the target architecture <i>e.g.</i>:
 </li>
 <li>
-Building with shared libraries for Youtoo (which we really recommend on
-Linux, FreeBSD, Solaris and IRIX)
-<ul>
-<li>
-<code>make shared</code>
+<code>make euxlisp</code>
 </li>
 <li>
-add the directory <code>.../EuLisp/Lib.$ARCH</code> to the environment variable
-<code>$LD_LIBRARY_PATH</code>.
+<code>make youtoo</code>
 </li>
-</ul>
+<li>
+<code>make eu2c</code>
 </li>
 <li>
 Run the <code>euxlisp</code> executable
-<ul>
+</li>
 <li>
 <code>Bin.$ARCH/euxlisp</code>
 </li>
 <li>
-(see next section).
-</li>
-</ul>
-</li>
-<li>
 Run the <code>youtoo</code> executable
-<ul>
+</li>
 <li>
 <code>Bin.$ARCH/youtoo</code>
 </li>
 <li>
-(see next section).
+Run the <code>eu2c</code> compiler script
 </li>
-</ul>
+<li>
+<code>Eu2C/Bin/eu2c</code>
+</li>
+<li>
+For more details and more options for building Youtoo see <a href="Youtoo/README.html">README</a>.
+</li>
+<li>
+For more details and more options for building Eu2C see <a href="Eu2C/README.html">README</a>.
 </li>
 </ul>
 
 
+</li>
+</ul>
 </div>
 
 </div>
 
 <div id="outline-container-6" class="outline-2">
-<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started with <a href="Doc/EuLispIntroRef.html#sec-3">EuXLisp</a> </h2>
+<h2 id="sec-6"><span class="section-number-2">6</span> Getting Started </h2>
 <div class="outline-text-2" id="text-6">
 
-<p>See <a href="Doc/EuLispIntroRef.html#sec-3">An Introduction to EuLisp, EuXLisp and Youtoo</a>.
-</p>
+<ul>
+<li>
+<a href="Doc/EuLispIntroRef.html#sec-3">EuXLisp</a>
+</li>
+<li>
+<a href="Doc/EuLispIntroRef.html#sec-4">Youtoo</a>
+</li>
+<li>
+<a href="Eu2C/README.html">Eu2C</a>
+</li>
+</ul>
+
+
 </div>
 
 </div>
 
 <div id="outline-container-7" class="outline-2">
-<h2 id="sec-7"><span class="section-number-2">7</span> Getting Started with <a href="Doc/EuLispIntroRef.html#sec-4">Youtoo</a> </h2>
+<h2 id="sec-7"><span class="section-number-2">7</span> <a href="TODO.html">To Do</a> </h2>
 <div class="outline-text-2" id="text-7">
-
-<p>See <a href="Doc/EuLispIntroRef.html#sec-4">An Introduction to EuLisp, EuXLisp and Youtoo</a>.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-8" class="outline-2">
-<h2 id="sec-8"><span class="section-number-2">8</span> Getting Started with <a href="Eu2C/README.html">Eu2C</a> </h2>
-<div class="outline-text-2" id="text-8">
-
-<p>See <a href="Eu2C/README.html">README</a>.
-</p>
-</div>
-
-</div>
-
-<div id="outline-container-9" class="outline-2">
-<h2 id="sec-9"><span class="section-number-2">9</span> <a href="TODO.html">To Do</a> </h2>
-<div class="outline-text-2" id="text-9">
 
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-10-18 23:06:32 BST</p>
+<p class="date"> Date: 2010-10-20 10:28:20 BST</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>

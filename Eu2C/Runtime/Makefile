@@ -24,6 +24,9 @@
 ARCH := $(shell uname -m)
 include ../../Lib.$(ARCH)/Makefile
 
+###-----------------------------------------------------------------------------
+### Set Compiler, flags and rules
+###-----------------------------------------------------------------------------
 CC = gcc
 GCCFLAGS = -m$(WORD_LENGTH) -std=gnu99 -Wall -O3
 #GCCDEBUG = -O0 -ggdb3

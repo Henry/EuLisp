@@ -125,10 +125,27 @@
     Research and Technology under the project code ITW9102D5.
 ***** See also  [[http://henry.github.com/EuLisp/Eu2C/README.html][Eu2C README]]
 
-* Installation of EuXLisp and Youtoo
+* Installation of EuXLisp, Youtoo and Eu2C
+*** Prerequisites
+    + *gcc*: All three EuLisp implementations require a C-compiler, in particular =gcc=
+      on most platforms.  It is likely that a suitable =gcc= is already
+      installed, if not install the development package which includes it.
+    + *GC*: EuXLisp and Eu2C include their own garbage collectors bu Youtoo uses
+      the Boehm-Demers garbage collector which must be installed before
+      compilation:
+      - On SuSE: =sudo zypper install gc-devel=.
+      - On Ubuntu: =sudo apt-get install libgc-dev=.
+      - On RedHat...: install the appropriate package.
+      - From sources: download
+        http://www.hpl.hp.com/personal/Hans_Boehm/gc/gc_source/gc-7.2alpha4.tar.gz
+        and unpack, configure, make and install in =/usr/local=.
+    + *CL*: Eu2C bootstraps from Common Lisp and currently requires a recent
+      version of CMUCL which may be obtained from
+      http://www.cons.org/cmucl/download.html.  SBCL support is expected in the
+      future.
   + Pull the latest version from the GitHub repository:
     - =git clone git://github.com/Henry/EuLisp.git=
-  + "cd" into the =EuLisp= directory
+  + =cd= into the =EuLisp= directory
   + Configure for the default architecture
     - =./configure=
     - Check the settings and edit the configure file to reflect your system if
@@ -138,31 +155,29 @@
     - =./configure <arch>=
     - /e.g./ to configure for a 32bit build on a =x86_64= 64bit machine:
     - =./configure i686=
-  + Build EuXLisp and Youtoo for the default architecture
+  + Build EuXLisp, Youtoo and Eu2C for the default architecture
     - =make=
-  + Build EuXLisp and Youtoo for a specified architecture
+  + Build EuXLisp, Youtoo and Eu2C for a specified architecture
     - =make ARCH=<arch>=
     - /e.g./ to build 32bit on a =x86_64= 64bit machine:
     - =make ARCH=i686=
-  + Building with shared libraries for Youtoo (which we really recommend on
-    Linux, FreeBSD, Solaris and IRIX)
-    - =make shared=
-    - add the directory =.../EuLisp/Lib.$ARCH= to the environment variable
-      =$LD_LIBRARY_PATH=.
+  + Alternatively you can build =euxlisp=, =youtoo= or =eu2c= by specifying the
+    target and optionally the target architecture /e.g./:
+    - =make euxlisp=
+    - =make youtoo=
+    - =make eu2c=
   + Run the =euxlisp= executable
     - =Bin.$ARCH/euxlisp=
-    - (see next section).
   + Run the =youtoo= executable
     - =Bin.$ARCH/youtoo=
-    - (see next section).
+  + Run the =eu2c= compiler script
+    - =Eu2C/Bin/eu2c=
+  + For more details and more options for building Youtoo see [[http://henry.github.com/EuLisp/Youtoo/README.html][README]].
+  + For more details and more options for building Eu2C see [[http://henry.github.com/EuLisp/Eu2C/README.html][README]].
 
-* Getting Started with [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-3][EuXLisp]]
-  See [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-3][An Introduction to EuLisp, EuXLisp and Youtoo]].
-
-* Getting Started with [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-4][Youtoo]]
-  See [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-4][An Introduction to EuLisp, EuXLisp and Youtoo]].
-
-* Getting Started with [[http://henry.github.com/EuLisp/Eu2C/README.html][Eu2C]]
-  See [[http://henry.github.com/EuLisp/Eu2C/README.html][README]].
+* Getting Started
+  + [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-3][EuXLisp]]
+  + [[http://henry.github.com/EuLisp/Doc/EuLispIntroRef.html#sec-4][Youtoo]]
+  + [[http://henry.github.com/EuLisp/Eu2C/README.html][Eu2C]]
 
 * [[http://henry.github.com/EuLisp/TODO.org][To Do]]

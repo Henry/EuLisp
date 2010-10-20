@@ -56,8 +56,7 @@ ARCH=`uname -m`
 
 if [ -z "$Eu2CROOT" ]
 then
-    Eu2CROOT=$HOME/EuLisp/Eu2C/Eu2C
-    export Eu2CROOT
+    export Eu2CROOT=$(cd ${0%/*}/.. && pwd -P)
     Eu2CROOTSET="set"
 fi
 

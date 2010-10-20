@@ -150,10 +150,17 @@
 *** Installation Procedure
     + Pull the latest version from the GitHub repository:
       - =git clone git://github.com/Henry/EuLisp.git=
-    + "cd" into the =EuLisp/Eu2C= directory.
-    + Define an environment variable Eu2CROOT to be the path of the
-      distribution directory:
-      - =export Eu2CROOT=`pwd`=
+    + "cd" into the =EuLisp= directory
+    + Configure for the default architecture
+      - =./configure=
+      - Check the settings and edit the configure file to reflect your system if
+        necessary and re-run
+      - =./configure=.
+    + To configure for a specified architecture,
+      - =./configure <arch>=
+      - /e.g./ to configure for a 32bit build on a =x86_64= 64bit machine:
+      - =./configure i686=
+    + =cd= into the =EuLisp/Eu2C= directory.
     + For complete installation, run the command make without any arguments,
       which takes depending on your hardware a few minutes.
       The following will happen:
@@ -235,7 +242,7 @@
       increased on demand in correspondence with the configuration of the
       Mem4C[++]-library.
 *** Examples
-    In the subdirectory $Eu2CROOT/Examples some example EuLisp programs are
+    In the sub-directory =Examples= some example EuLisp programs are
     given, some of them require to be compiled with the module =level-0=
     and some must be compiled with the =level-0x=-module.
 
