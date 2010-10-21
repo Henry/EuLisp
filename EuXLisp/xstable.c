@@ -482,11 +482,11 @@ static int thash_equals(LVAL key)
 }
 
 // c.f. code for equal in xsftab.c
-/* this has problems on user-defined classes, where the user has
- * created new methods on equal.  We could search the entire table,
- * I suppose. :-(
- * (defmethod equal ((a <integer>) (b <foo>)) t)
- */
+// this has problems on user-defined classes, where the user has
+// created new methods on equal.  We could search the entire table,
+// I suppose. :-(
+// (defmethod equal ((a <integer>) (b <foo>)) t)
+//
 static int thash_equal(LVAL key)
 {
     if (key == NIL)

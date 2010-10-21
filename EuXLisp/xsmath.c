@@ -984,3 +984,6 @@ static void badfop()
 {
     xlfail("bad floating point operation", s_arith_error);
 }
+
+
+///-----------------------------------------------------------------------------

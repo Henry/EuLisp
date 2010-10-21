@@ -88,9 +88,6 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
         return;
     }
 
-    int breadth;
-    LVAL next;
-
     // check value type
     switch (ntype(vptr))
     {
@@ -102,37 +99,40 @@ static void print(LVAL fptr, LVAL vptr, int escflag, int depth)
             putsubr(fptr, "CSubr", vptr);
             break;
         case CONS:
-            if (prdepth >= 0 && depth >= prdepth)
             {
-                xlputstr(fptr, "(...)");
-                break;
-            }
-            xlputc(fptr, '(');
-            breadth = 0;
-            for (LVAL nptr = vptr; nptr != NIL;)
-            {
-                if (prbreadth >= 0 && breadth++ >= prbreadth)
+                if (prdepth >= 0 && depth >= prdepth)
                 {
-                    xlputstr(fptr, "...");
+                    xlputstr(fptr, "(...)");
                     break;
                 }
-                print(fptr, car(nptr), escflag, depth + 1);
-                if ((next = cdr(nptr)) != NIL)
+                xlputc(fptr, '(');
+                int breadth = 0;
+                for (LVAL nptr = vptr; nptr != NIL;)
                 {
-                    if (consp(next))
+                    if (prbreadth >= 0 && breadth++ >= prbreadth)
                     {
-                        xlputc(fptr, ' ');
-                    }
-                    else
-                    {
-                        xlputstr(fptr, " . ");
-                        print(fptr, next, escflag, depth + 1);
+                        xlputstr(fptr, "...");
                         break;
                     }
+                    print(fptr, car(nptr), escflag, depth + 1);
+                    LVAL next;
+                    if ((next = cdr(nptr)) != NIL)
+                    {
+                        if (consp(next))
+                        {
+                            xlputc(fptr, ' ');
+                        }
+                        else
+                        {
+                            xlputstr(fptr, " . ");
+                            print(fptr, next, escflag, depth + 1);
+                            break;
+                        }
+                    }
+                    nptr = next;
                 }
-                nptr = next;
+                xlputc(fptr, ')');
             }
-            xlputc(fptr, ')');
             break;
         case VECTOR:
             if (prdepth >= 0 && depth >= prdepth)
@@ -318,13 +318,11 @@ static void putstring(LVAL fptr, char *str, int len)
     xlputc(fptr, '"');
 }
 
-/* do we need to escape this id when printing?
- * yes if (1) it contains a dodgy character
- *        (2) it is the id of zero size
- *        (3) it starts with the syntax of a number
- *        (4) it ends with a : but is not a keyword
- *
- */
+// do we need to escape this id when printing?
+// yes if (1) it contains a dodgy character
+//        (2) it is the id of zero size
+//        (3) it starts with the syntax of a number
+//        (4) it ends with a : but is not a keyword
 static int escaped_id(char *id, int keyword)
 {
     for (int i = 0; id[i]; i++)
@@ -338,7 +336,7 @@ static int escaped_id(char *id, int keyword)
     if
     (
         strpbrk(id, "|\\#()\"',;` ")
-     || id[0] == 0                                            // zero size id
+     || id[0] == 0                                              // zero size id
      || (!keyword && id[strlen(id) - 1] == ':')
      || isdigit(id[0])                                               // 123
      || (id[0] == '.' && !id[1])                                     // |.|
@@ -418,7 +416,7 @@ static void putthread(LVAL fptr, LVAL val, LVAL cls)
     putclassname(fptr, cls);
 
     LVAL slots;
-    int i, len;
+    int i;
     for (slots = getivar(cls, SLOTS), i = 1; slots; slots = cdr(slots), i++)
     {
         xlputstr(fptr, " ");
@@ -426,7 +424,7 @@ static void putthread(LVAL fptr, LVAL val, LVAL cls)
         xlputstr(fptr, " ");
         if (!strcmp(getstring(getpname(getslotname(car(slots)))), "locks"))
         {
-            len = list_size(getivar(val, i));
+            int len = list_size(getivar(val, i));
             xlprin1(cvsfixnum(len), fptr);
         }
         else

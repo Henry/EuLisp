@@ -1270,3 +1270,6 @@ LVAL xsprintf()
     sprintf(buf, fmt, getflonum(val));
     return cvstring(buf);
 }
+
+
+///-----------------------------------------------------------------------------

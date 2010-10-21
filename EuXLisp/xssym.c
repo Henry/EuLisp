@@ -201,8 +201,7 @@ void xlputsyntax(LVAL sym, LVAL val, LVAL prp)
 
 static LVAL findsyntax(LVAL sym, LVAL prp)
 {
-    LVAL p;
-    for (p = getsyntax(sym); consp(p) && consp(cdr(p)); p = cdr(cdr(p)))
+    for (LVAL p = getsyntax(sym); consp(p) && consp(cdr(p)); p = cdr(cdr(p)))
     {
         if (car(p) == prp)      // only ever %macro, %rename or %syntax
         {
@@ -217,11 +216,14 @@ static LVAL findsyntax(LVAL sym, LVAL prp)
 int hash(char *str, int len)
 {
     int i;
+
     for (i = 0; *str;)
     {
         i = (i << 2) ^ *str++;
     }
+
     i %= len;
+
     return (i < 0 ? -i : i);
 }
 

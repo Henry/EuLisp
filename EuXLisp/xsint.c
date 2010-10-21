@@ -887,3 +887,6 @@ static void bad_slot_access(char *msg, LVAL index, LVAL object)
     drop(1);
     xlcerror(buf, object, NIL);
 }
+
+
+///-----------------------------------------------------------------------------

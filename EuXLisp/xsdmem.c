@@ -898,3 +898,6 @@ static void badobjtype(int type)
     sprintf(buf, "bad object type - %d", type);
     xlfatal(buf);
 }
+
+
+///-----------------------------------------------------------------------------

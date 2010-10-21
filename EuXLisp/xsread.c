@@ -61,10 +61,10 @@ static LVAL read_peculiar(LVAL fptr, int ch);
 // xlread - read an expression
 int xlread(LVAL fptr, LVAL * pval)
 {
-    int ch;
-
     // check the next non-blank character
+    int ch;
     while ((ch = scan(fptr)) != EOF)
+    {
         switch (ch)
         {
             case '(':
@@ -97,58 +97,77 @@ int xlread(LVAL fptr, LVAL * pval)
                 *pval = read_symbol_or_number(fptr);
                 return (TRUE);
         }
+    }
     return (FALSE);
 }
 
 // read_list - read a list
 static LVAL read_list(LVAL fptr)
 {
-    LVAL last, val;
-    int ch;
-
     cpush(NIL);
-    last = NIL;
+    LVAL last = NIL;
+    int ch;
     while ((ch = scan(fptr)) != EOF)
+    {
         switch (ch)
         {
             case ';':
                 read_comment(fptr);
                 break;
             case '#':
-                ch = checkeof(fptr);
-                xlungetc(fptr, ch);
-                val = read_special(fptr);
-                val = cons(val, NIL);
-                if (last)
-                    rplacd(last, val);
-                else
-                    settop(val);
-                last = val;
+                {
+                    ch = checkeof(fptr);
+                    xlungetc(fptr, ch);
+                    LVAL val = read_special(fptr);
+                    val = cons(val, NIL);
+                    if (last)
+                    {
+                        rplacd(last, val);
+                    }
+                    else
+                    {
+                        settop(val);
+                    }
+                    last = val;
+                }
                 break;
             case ')':
                 return (pop());
             default:
-                xlungetc(fptr, ch);
-                if (!xlread(fptr, &val))
-                    xlfail("unexpected EOF", s_syntax_error);
-                if (val == xlenter("."))
                 {
-                    if (last == NIL)
-                        xlfail("misplaced dot", s_syntax_error);
-                    read_cdr(fptr, last);
-                    return (pop());
-                }
-                else
-                {
-                    val = cons(val, NIL);
-                    if (last)
-                        rplacd(last, val);
+                    xlungetc(fptr, ch);
+                    LVAL val;
+                    if (!xlread(fptr, &val))
+                    {
+                        xlfail("unexpected EOF", s_syntax_error);
+                    }
+                    if (val == xlenter("."))
+                    {
+                        if (last == NIL)
+                        {
+                            xlfail("misplaced dot", s_syntax_error);
+                        }
+                        read_cdr(fptr, last);
+                        return (pop());
+                    }
                     else
-                        settop(val);
-                    last = val;
+                    {
+                        val = cons(val, NIL);
+                        if (last)
+                        {
+                            rplacd(last, val);
+                        }
+                        else
+                        {
+                            settop(val);
+                        }
+                        last = val;
+                    }
                 }
                 break;
         }
+    }
+
     xlfail("unexpected EOF", s_syntax_error);
     return (NIL);       // never reached
 }
@@ -206,48 +225,71 @@ static void read_comment(LVAL fptr)
 // read_vector - read a vector
 static LVAL read_vector(LVAL fptr)
 {
-    int len = 0, ch, i;
-    LVAL last, val;
+    int len = 0, i;
 
     cpush(NIL);
-    last = NIL;
+    LVAL last = NIL;
+    int ch;
     while ((ch = scan(fptr)) != EOF)
+    {
         switch (ch)
         {
             case ';':
                 read_comment(fptr);
                 break;
             case '#':
-                ch = checkeof(fptr);
-                xlungetc(fptr, ch);
-                val = read_special(fptr);
-                val = cons(val, NIL);
-                if (last)
-                    rplacd(last, val);
-                else
-                    settop(val);
-                last = val;
-                ++len;
+                {
+                    ch = checkeof(fptr);
+                    xlungetc(fptr, ch);
+                    LVAL val = read_special(fptr);
+                    val = cons(val, NIL);
+                    if (last)
+                    {
+                        rplacd(last, val);
+                    }
+                    else
+                    {
+                        settop(val);
+                    }
+                    last = val;
+                    ++len;
+                }
                 break;
             case ')':
-                val = newvector(len);
-                for (last = pop(), i = 0; i < len; ++i, last = cdr(last))
-                    setelement(val, i, car(last));
-                return (val);
+                {
+                    LVAL val = newvector(len);
+                    for (last = pop(), i = 0; i < len; ++i, last = cdr(last))
+                    {
+                        setelement(val, i, car(last));
+                    }
+                    return (val);
+                }
             default:
-                xlungetc(fptr, ch);
-                if (!xlread(fptr, &val))
-                    xlfail("unexpected EOF", s_syntax_error);
-                val = cons(val, NIL);
-                if (last)
-                    rplacd(last, val);
-                else
-                    settop(val);
-                last = val;
-                ++len;
+                {
+                    xlungetc(fptr, ch);
+                    LVAL val;
+                    if (!xlread(fptr, &val))
+                    {
+                        xlfail("unexpected EOF", s_syntax_error);
+                    }
+                    val = cons(val, NIL);
+                    if (last)
+                    {
+                        rplacd(last, val);
+                    }
+                    else
+                    {
+                        settop(val);
+                    }
+                    last = val;
+                    ++len;
+                }
                 break;
         }
+    }
+
     xlfail("unexpected EOF", s_syntax_error);
+
     return (NIL);       // never reached
 }
 
@@ -256,7 +298,9 @@ static LVAL read_comma(LVAL fptr)
 {
     int ch;
     if ((ch = xlgetc(fptr)) == '@')
+    {
         return (read_quote(fptr, "unquote-splicing"));
+    }
     else
     {
         xlungetc(fptr, ch);
@@ -269,7 +313,9 @@ static LVAL read_quote(LVAL fptr, char *sym)
 {
     LVAL val;
     if (!xlread(fptr, &val))
+    {
         xlfail("unexpected EOF", s_syntax_error);
+    }
     cpush(cons(val, NIL));
     settop(cons(xlenter(sym), top()));
     return (pop());
@@ -279,7 +325,7 @@ static LVAL read_quote(LVAL fptr, char *sym)
 static LVAL read_string(LVAL fptr)
 {
     char buf[VSSIZE + 1];
-    int ch, i, x, count, value;
+    int ch, i;
 
     // get symbol name
     for (i = 0; (ch = checkeof(fptr)) != '"';)
@@ -319,31 +365,49 @@ static LVAL read_string(LVAL fptr)
                     break;
                 case 'x':
                 case 'X':
-                x = ch;
-                ch = checkeof(fptr);
-                count = 0;
-                value = 0;
-                while (ch != EOF && isascii(ch) && isxdigit(ch)
-                && count++ < 4)
                 {
-                    value = value * 16 + (('0' <= ch
-                    && ch <= '9') ? ch - '0' : ('a' <= ch
-                    && ch <= 'f') ? ch - 'a' + 10 : ch - 'A' + 10);
-                    ch = xlgetc(fptr);
+                    int x = ch;
+                    ch = checkeof(fptr);
+                    int count = 0;
+                    int value = 0;
+                    while
+                    (
+                        ch != EOF
+                     && isascii(ch)
+                     && isxdigit(ch)
+                     && count++ < 4
+                    )
+                    {
+                        value = value * 16 +
+                        (
+                            ('0' <= ch && ch <= '9') ? ch - '0' :
+                            ('a' <= ch && ch <= 'f') ? ch - 'a' + 10 :
+                            ch - 'A' + 10
+                        );
+                        ch = xlgetc(fptr);
+                    }
+                    xlungetc(fptr, ch);
+                    if (count == 0)
+                    {
+                        ch = x; // just 'x' or 'X'
+                    }
+                    else
+                    {
+                        ch = value;
+                    }
                 }
-                xlungetc(fptr, ch);
-                if (count == 0)
-                    ch = x; // just 'x' or 'X'
-                else
-                    ch = value;
                 break;
                 default:
                     break;
             }
         }
+
         if (i < VSSIZE)
+        {
             buf[i++] = ch;
+        }
     }
+
     buf[i] = 0;
 
     // return a string
@@ -353,23 +417,27 @@ static LVAL read_string(LVAL fptr)
 // read_hex_char: #\x1234
 static LVAL read_hex_char(LVAL fptr, int x)
 {
-    int ch, count, value;
-
-    count = 0;
-    value = 0;
-    ch = xlgetc(fptr);
+    int count = 0;
+    int value = 0;
+    int ch = xlgetc(fptr);
 
     while (ch != EOF && isascii(ch) && isxdigit(ch) && count++ < 4)
     {
-        value = value * 16 + (('0' <= ch && ch <= '9') ? ch - '0' :
-        ('a' <= ch && ch <= 'f') ? ch - 'a' + 10 : ch - 'A' + 10);
+        value = value * 16 +
+        (
+            ('0' <= ch && ch <= '9') ? ch - '0' :
+            ('a' <= ch && ch <= 'f') ? ch - 'a' + 10 :
+            ch - 'A' + 10
+        );
         ch = xlgetc(fptr);
     }
 
     xlungetc(fptr, ch);
 
     if (count == 0)
+    {
         return cvchar(x);       // just #\x or #\X
+    }
 
     return cvchar(value);
 }
@@ -377,17 +445,34 @@ static LVAL read_hex_char(LVAL fptr, int x)
 // read_control_char: #\^r
 static LVAL read_control_char(LVAL fptr)
 {
-    int ch;
-
-    ch = checkeof(fptr);
+    int ch = checkeof(fptr);
     if (isascii(ch))
     {
-        if (isupper(ch) || ch == '@' || ch == '[' || ch == '\\' ||
-        ch == ']' || ch == '^' || ch == '_')
+        if
+        (
+            isupper(ch)
+         || ch == '@'
+         || ch == '['
+         || ch == '\\'
+         || ch == ']'
+         || ch == '^'
+         || ch == '_'
+        )
+        {
             return cvchar(ch - '@');
-        else if (islower(ch) || ch == '`' || ch == '{' || ch == '|' ||
-        ch == '}' || ch == '~')
+        }
+        else if
+        (
+            islower(ch)
+         || ch == '`'
+         || ch == '{'
+         || ch == '|'
+         || ch == '}'
+         || ch == '~'
+        )
+        {
             return cvchar(ch - '`');
+        }
     }
 
     xlungetc(fptr, ch); // just #\^ (caret)
@@ -397,48 +482,80 @@ static LVAL read_control_char(LVAL fptr)
 // read_special - parse an atom starting with '#'
 static LVAL read_special(LVAL fptr)
 {
-    char buf[STRMAX + 1], *p;
+    char buf[STRMAX + 1];
     int ch;
     switch (ch = checkeof(fptr))
     {
         case '\\':
             ch = checkeof(fptr);        // get the next character
             if (ch == 'x' || ch == 'X')
+            {
                 return read_hex_char(fptr, ch);
+            }
             if (ch == '^')
+            {
                 return read_control_char(fptr);
+            }
             xlungetc(fptr, ch); // but allow getsymbol to get it also
             if (getsymbol(fptr, buf))
             {
-                for (p = buf; *p; p++)
+                for (char *p = buf; *p; p++)
+                {
                     if (isupper(*p))
+                    {
                         *p = tolower(*p);
+                    }
+                }
                 if (strcmp(buf, "\\a") == 0) // alert
+                {
                     ch = '\007';        // '\a'
+                }
                 else if (strcmp(buf, "\\b") == 0) // backspace
+                {
                     ch = '\b';
+                }
                 else if (strcmp(buf, "\\d") == 0) // delete
+                {
                     ch = '\177';
+                }
                 else if (strcmp(buf, "\\f") == 0) // formfeed
+                {
                     ch = '\f';
+                }
                 else if (strcmp(buf, "\\l") == 0) // linefeed
+                {
                     ch = '\n';
+                }
                 else if ((strcmp(buf, "\\n") == 0)) // newline
+                {
                     ch = '\n';
+                }
                 else if (strcmp(buf, "\\r") == 0) // return
+                {
                     ch = '\r';
+                }
                 else if (strcmp(buf, "space") == 0)
+                {
                     ch = ' ';
+                }
                 else if (strcmp(buf, "\\t") == 0) // tab
+                {
                     ch = '\t';
+                }
                 else if (strcmp(buf, "\\v") == 0) // vertical-tab
+                {
                     ch = '\v';
+                }
                 else if (strlen(buf) > 1)
+                {
                     xlcerror("unexpected symbol after '#\\'", cvstring(buf),
                     s_syntax_error);
+                }
             }
             else        // wasn't a symbol, get the character
+            {
                 ch = checkeof(fptr);
+            }
             return (cvchar(ch));
         case '(':
             return (read_vector(fptr));
@@ -469,46 +586,64 @@ static LVAL read_special(LVAL fptr)
             xlungetc(fptr, ch);
             if (getsymbol(fptr, buf))
             {
-                for (p = buf; *p; p++)
+                for (char *p = buf; *p; p++)
+                {
                     if (isupper(*p))
+                    {
                         *p = tolower(*p);
+                    }
+                }
                 if (strcmp(buf, "t") == 0)
+                {
                     return (true);
+                }
                 else if (strcmp(buf, "f") == 0)
+                {
                     return (NIL);
+                }
                 else
+                {
                     xlcerror("unexpected symbol after '#'", cvstring(buf),
                     s_syntax_error);
+                }
             }
             else
+            {
                 xlcerror("unexpected character after '#'", cvchar(xlgetc(fptr)),
                 s_syntax_error);
+            }
             break;
     }
+
     return (NIL);       // never reached
 }
 
 // read_radix - read a number in a specified radix
 static LVAL read_radix(LVAL fptr, int radix)
 {
-    FIXTYPE val;
-    int ch;
-
     if (radix < 2 || radix > 36)
+    {
         xlcerror("invalid base in radix integer", cvfixnum(radix),
         s_syntax_error);
+    }
 
     // get symbol name
-    for (val = (FIXTYPE) 0; (ch = xlgetc(fptr)) != EOF && issym(ch);)
+    FIXTYPE val;
+    int ch;
+    for (val = (FIXTYPE)0; (ch = xlgetc(fptr)) != EOF && issym(ch);)
     {
         if (islower(ch))
+        {
             ch = toupper(ch);
+        }
+
         if (!isradixdigit(ch, radix))
         {
             char buf[64];
             sprintf(buf, "invalid digit in radix %d integer", radix);
             xlcerror(buf, cvchar(ch), s_syntax_error);
         }
+
         val = val * radix + getdigit(ch);
     }
 
@@ -525,9 +660,15 @@ static LVAL read_with_radix(LVAL fptr, FIXTYPE radix)
     int ch;
 
     for (; (ch = xlgetc(fptr)) != EOF && ('0' <= ch && ch <= '9');)
+    {
         radix = radix * 10 + getdigit(ch);
+    }
+
     if (ch != 'r')
+    {
         xlcerror("malformed radix integer", cvfixnum(radix), s_syntax_error);
+    }
+
     return read_radix(fptr, radix);
 }
 
@@ -535,7 +676,9 @@ static LVAL read_with_radix(LVAL fptr, FIXTYPE radix)
 static int isradixdigit(int ch, int radix)
 {
     if (radix <= 10)
+    {
         return (ch >= '0' && ch <= '0' + radix - 1);
+    }
 
     return ((ch >= '0' && ch <= '9') || (ch >= 'A' && ch <= 'A' + radix - 11));
 }
@@ -549,13 +692,9 @@ static int getdigit(int ch)
 // scan - scan for the first non-blank character
 static int scan(LVAL fptr)
 {
-    int ch;
-
     // look for a non-blank character
-    while ((ch = xlgetc(fptr)) != EOF && isspace(ch))
-        ;
-
-    // return the character
+    int ch;
+    while ((ch = xlgetc(fptr)) != EOF && isspace(ch));
     return (ch);
 }
 
@@ -564,91 +703,123 @@ static int checkeof(LVAL fptr)
 {
     int ch;
     if ((ch = xlgetc(fptr)) == EOF)
+    {
         xlfail("unexpected EOF", s_syntax_error);
+    }
     return (ch);
 }
 
 // issym - is this a symbol character?
 static int issym(int ch)
 {
-    register char *p;
     if (!isspace(ch))
     {
-        for (p = "()';"; *p != 0;)
+        for (char *p = "()';"; *p != 0;)
+        {
             if (*p++ == ch)
+            {
                 return (FALSE);
+            }
+        }
         return (TRUE);
     }
+
     return (FALSE);
 }
 
 // getsymbol - get a symbol name
 static int getsymbol(LVAL fptr, char *buf)
 {
-    int ch, i;
-
     // get symbol name
+    int ch, i;
     for (i = 0; (ch = xlgetc(fptr)) != EOF && issym(ch);)
+    {
         if (i < STRMAX)
+        {
             buf[i++] = ch;
+        }
+    }
 
     buf[i] = 0;
 
     // save the break character
     xlungetc(fptr, ch);
+
     return (buf[0] != 0);
 }
 
 static LVAL read_symbol_or_number(LVAL fptr)
 {
     char buf[STRMAX + 1];
-    int ch;
 
-    ch = xlgetc(fptr);  // can't be EOF, as just did ungetc
+    int ch = xlgetc(fptr);  // can't be EOF, as just did ungetc
 
     if (isascii(ch))
     {
         if (isdigit(ch))
+        {
             return read_number(fptr, ch, buf, 0);
+        }
 
         if (ch == '.' || ch == '+' || ch == '-')
+        {
             return read_peculiar(fptr, ch);
+        }
 
         return read_symbol(fptr, ch);
 
     }
     else
+    {
         xlcerror("bad character in input", cvchar(ch), s_syntax_error);
+    }
 
     return NIL; // not reached
 }
 
 static LVAL read_symbol(LVAL fptr, int ch)
 {
-    char buf[STRMAX + 1];
-    int keyword;
-
     if (!isprint(ch))
+    {
         xlcerror("bad character in input", cvchar(ch), s_syntax_error);
+    }
 
+    char buf[STRMAX + 1];
     buf[0] = 0;
 
+    int keyword;
+
     if (ch == '|')
+    {
         read_escaped(fptr, buf, 0, &keyword);
+    }
     else
+    {
         read_unescaped(fptr, ch, buf, 0, &keyword);
+    }
 
     if (keyword)
+    {
         return xlenter_keyword(buf);
+    }
 
     return xlenter(buf);
 
 }
 
 #define isconstituent(ch)                                                      \
-    (isgraph(ch) && ch != ' ' && ch != '#' && ch != '(' &&                     \
-    ch != ')' && ch != '"' && ch != '\'' && ch != ',' && ch != ';' &&          \
-    ch != '`')
+    (                                                                          \
+        isgraph(ch)                                                            \
+        && ch != ' '                                                           \
+        && ch != '#'                                                           \
+        && ch != '('                                                           \
+        && ch != ')'                                                           \
+        && ch != '"'                                                           \
+        && ch != '\''                                                          \
+        && ch != ','                                                           \
+        && ch != ';'                                                           \
+        && ch != '`'                                                           \
+    )
 
 static void
 read_unescaped(LVAL fptr, int ch, char *buf, int index, int *keyword)
@@ -670,9 +841,13 @@ read_unescaped(LVAL fptr, int ch, char *buf, int index, int *keyword)
         {
             buf[index++] = ch;
             if (ch == ':')
+            {
                 *keyword = TRUE;
+            }
             else
+            {
                 *keyword = FALSE;
+            }
         }
         ch = xlgetc(fptr);
     }
@@ -683,22 +858,21 @@ read_unescaped(LVAL fptr, int ch, char *buf, int index, int *keyword)
 
 static void read_escaped(LVAL fptr, char *buf, int index, int *keyword)
 {
-    int ch;
-
     *keyword = FALSE;
 
-    ch = checkeof(fptr);
+    int ch = checkeof(fptr);
     while (ch != '|')
     {
         if (ch == '\\')
+        {
             ch = checkeof(fptr);
+        }
         buf[index++] = ch;
         ch = checkeof(fptr);
     }
 
     ch = xlgetc(fptr);
     read_unescaped(fptr, ch, buf, index, keyword);
-
 }
 
 static int read_integer(LVAL fptr, int ch, char *buf, int index)
@@ -715,10 +889,9 @@ static int read_integer(LVAL fptr, int ch, char *buf, int index)
 
 static LVAL read_exponent(LVAL fptr, char *buf, int index)
 {
-    int ch;
-
     buf[index++] = 'E';
-    ch = checkeof(fptr);
+    int ch = checkeof(fptr);
+
     if (ch == '+' || ch == '-')
     {
         buf[index++] = ch;
@@ -751,7 +924,9 @@ static LVAL read_point_float(LVAL fptr, int ch, char *buf, int index)
     }
 
     if (ch == 'e' || ch == 'E' || ch == 'd' || ch == 'D')
+    {
         return read_exponent(fptr, buf, index);
+    }
 
     xlungetc(fptr, ch);
     buf[index] = 0;
@@ -766,7 +941,9 @@ static LVAL read_number(LVAL fptr, int ch, char *buf, int index)
     buf[index] = 0;
     ch = xlgetc(fptr);
     if (ch == EOF)
+    {
         return cvfixnum(ICNV(buf));
+    }
 
     if (ch != '.' && ch != 'e' && ch != 'E' && ch != 'd' && ch != 'D')
     {
@@ -782,7 +959,9 @@ static LVAL read_number(LVAL fptr, int ch, char *buf, int index)
     }
 
     if (ch == 'e' || ch == 'E' || ch == 'd' || ch == 'D')
+    {
         return read_exponent(fptr, buf, index);
+    }
 
     xlungetc(fptr, ch);
     return cvflonum(atof(buf));
@@ -793,99 +972,130 @@ static LVAL read_number(LVAL fptr, int ch, char *buf, int index)
 // ch is . or + or -
 static LVAL read_peculiar(LVAL fptr, int ch)
 {
-    int ch1, ch2;
-    char buf[STRMAX + 1], *p;
-    LVAL val;
-    int keyword;
-
+    char buf[STRMAX + 1];
     buf[0] = ch;
     buf[1] = 0;
 
-    ch1 = xlgetc(fptr);
-
+    int ch1 = xlgetc(fptr);
     if (ch1 == EOF)     // . or + or -
+    {
         return xlenter(buf);
+    }
 
     buf[1] = ch1;
     buf[2] = 0;
 
-    if (ch1 == '#')
-    {   // +#x1 or -#x1
+    if (ch1 == '#')   // +#x1 or -#x1
+    {
 
-        if (ch == '.')
-        {       // .#
+        if (ch == '.')       // .#
+        {
             xlungetc(fptr, ch1);
             buf[1] = 0;
             return xlenter(buf);
         }
 
-        ch2 = xlgetc(fptr);
+        int ch2 = xlgetc(fptr);
 
         if (ch2 == EOF || !isascii(ch2))
+        {
             xlcerror("malformed number", cvstring(buf), s_syntax_error);
+        }
 
-        if (ch2 == 'x' || ch2 == 'X' || ch2 == 'o' || ch2 == 'O' ||
-        ch2 == 'b' || ch2 == 'B' || isdigit(ch2))
+        if
+        (
+            ch2 == 'x'
+         || ch2 == 'X'
+         || ch2 == 'o'
+         || ch2 == 'O'
+         || ch2 == 'b'
+         || ch2 == 'B'
+         || isdigit(ch2)
+        )
         {
             xlungetc(fptr, ch2);
-            val = read_special(fptr);
+            LVAL val = read_special(fptr);
+
             if (ch == '+')
+            {
                 return val;
+            }
+
             return cvfixnum(-getfixnum(val));
         }
 
-        p = &buf[2];
+        char *p = &buf[2];
+
         while (isconstituent(ch2))
         {
             *p++ = ch2;
             ch2 = xlgetc(fptr);
         }
+
         xlungetc(fptr, ch2);
         *p = 0;
         xlcerror("malformed symbol or number", cvstring(buf), s_syntax_error);
     }
 
-    if (!isconstituent(ch1))
-    {   // . or + or -
+    if (!isconstituent(ch1))   // . or + or -
+    {
         xlungetc(fptr, ch1);
         buf[1] = 0;
         return xlenter(buf);
     }
 
-    if (isdigit(ch1))
-    {   // .1 or +1 or -1
+    if (isdigit(ch1))   // .1 or +1 or -1
+    {
         if (ch == '.')
+        {
             return read_point_float(fptr, ch1, buf, 1);
+        }
         else
+        {
             return read_number(fptr, ch1, buf, 1);
+        }
     }
 
-    if (ch == '.')
-    {   // .x
+    if (ch == '.')   // .x
+    {
+        int keyword;
         read_unescaped(fptr, ch1, buf, 1, &keyword);
         if (keyword)
+        {
             return xlenter_keyword(buf);
+        }
+
         return xlenter(buf);
     }
 
-    ch2 = xlgetc(fptr);
+    int ch2 = xlgetc(fptr);
 
     if (ch2 == EOF)     // +x or -x
+    {
         return xlenter(buf);
+    }
 
-    if (!isconstituent(ch2))
-    {   // +x or -x
+    if (!isconstituent(ch2))   // +x or -x
+    {
         xlungetc(fptr, ch2);
         return xlenter(buf);
     }
 
     if (ch1 == '.' && isdigit(ch2))     // +.1 or -.1
+    {
         return read_point_float(fptr, ch2, buf, 2);
+    }
 
     // +xy or -xy
+    int keyword;
     read_unescaped(fptr, ch2, buf, 2, &keyword);
     if (keyword)
+    {
         return xlenter_keyword(buf);
-    return xlenter(buf);
+    }
 
+    return xlenter(buf);
 }
+
+
+///-----------------------------------------------------------------------------
