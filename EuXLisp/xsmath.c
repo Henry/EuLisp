@@ -66,23 +66,21 @@ LVAL xinexactp()
 LVAL xatan()
 {
     static char *cfn_name = "atan";
-    LVAL arg, arg2;
-    FLOTYPE val;
 
     // get the first argument
-    arg = xlganumber();
+    LVAL arg = xlganumber();
 
-    // handle two argument (atan y x)
-    if (moreargs())
+    FLOTYPE val;
+    if (moreargs())    // handle two argument (atan y x)
     {
-        arg2 = xlganumber();
+        LVAL arg2 = xlganumber();
         xllastarg();
         val = atan2(toflotype(arg), toflotype(arg2));
     }
-
-    // handle one argument (atan x)
-    else
+    else    // handle one argument (atan x)
+    {
         val = atan(toflotype(arg));
+    }
 
     // return the resulting flonum
     return (cvflonum(val));
@@ -92,18 +90,23 @@ LVAL xatan()
 LVAL xfloor()
 {
     static char *cfn_name = "floor";
-    LVAL arg;
 
     // get the argument
-    arg = xlgetarg();
+    LVAL arg = xlgetarg();
     xllastarg();
 
     // check its type
     if (fixp(arg))
+    {
         return (arg);
+    }
     else if (floatp(arg))
+    {
         return (cvfixnum((FIXTYPE) floor(getflonum(arg))));
+    }
+
     xlbadtype(arg, "<number>", cfn_name);
+
     return (NIL);       // never reached
 }
 
@@ -111,18 +114,23 @@ LVAL xfloor()
 LVAL xceiling()
 {
     static char *cfn_name = "ceiling";
-    LVAL arg;
 
     // get the argument
-    arg = xlgetarg();
+    LVAL arg = xlgetarg();
     xllastarg();
 
     // check its type
     if (fixp(arg))
+    {
         return (arg);
+    }
     else if (floatp(arg))
+    {
         return (cvfixnum((FIXTYPE) ceil(getflonum(arg))));
+    }
+
     xlbadtype(arg, "<number>", cfn_name);
+
     return (NIL);       // never reached
 }
 
@@ -130,33 +138,42 @@ LVAL xceiling()
 LVAL xround()
 {
     static char *cfn_name = "round";
-    FLOTYPE x, y, z;
-    LVAL arg;
 
     // get the argument
-    arg = xlgetarg();
+    LVAL arg = xlgetarg();
     xllastarg();
 
     // check its type
     if (fixp(arg))
+    {
         return (arg);
+    }
     else if (floatp(arg))
     {
-        x = getflonum(arg);
-        y = floor(x);
-        z = x - y;
+        FLOTYPE x = getflonum(arg);
+        FLOTYPE y = floor(x);
+        FLOTYPE z = x - y;
+
         if (z == 0.5)
         {
             if (((FIXTYPE) y & 1) == 1)
+            {
                 y += 1.0;
+            }
             return (cvfixnum((FIXTYPE) y));
         }
         else if (z < 0.5)
+        {
             return (cvfixnum((FIXTYPE) y));
+        }
         else
+        {
             return (cvfixnum((FIXTYPE) (y + 1.0)));
+        }
     }
+
     xlbadtype(arg, "<number>", cfn_name);
+
     return (NIL);       // never reached
 }
 
@@ -164,99 +181,111 @@ LVAL xround()
 LVAL xtruncate()
 {
     static char *cfn_name = "truncate";
-    LVAL arg;
 
     // get the argument
-    arg = xlgetarg();
+    LVAL arg = xlgetarg();
     xllastarg();
 
     // check its type
     if (fixp(arg))
+    {
         return (arg);
+    }
     else if (floatp(arg))
+    {
         return (cvfixnum((FIXTYPE) (getflonum(arg))));
+    }
+
     xlbadtype(arg, "<number>", cfn_name);
+
     return (NIL);       // never reached
 }
 
-// binary functions
+///-----------------------------------------------------------------------------
+/// binary functions
+///-----------------------------------------------------------------------------
+
 LVAL xadd() // +
 {
     if (!moreargs())
+    {
         return (cvfixnum((FIXTYPE) 0));
+    }
     return (binary('+'));
 }
 
 LVAL xmul() // *
 {
     if (!moreargs())
+    {
         return (cvfixnum((FIXTYPE) 1));
+    }
     return (binary('*'));
 }
 
-LVAL xsub()
+LVAL xsub()  // -
 {
     return (binary('-'));
-}  // -
+}
 
-LVAL xdiv()
+LVAL xdiv()  // /
 {
     return (binary('/'));
-}  // /
+}
 
-LVAL xquo()
+LVAL xquo()  // quotient
 {
     return (binary('Q'));
-}  // quotient
+}
 
-LVAL xrem()
+LVAL xrem()  // remainder
 {
     return (binary('R'));
-}  // remainder
+}
 
 LVAL xmin()
 {
     return (binary('m'));
-}  // min
+}
 
 LVAL xmax()
 {
     return (binary('M'));
-}  // max
+}
 
 LVAL xexpt()
 {
     return (binary('E'));
-}  // expt
+}
 
 LVAL xlogand()
 {
     return (binary('&'));
-}  // logand
+}
 
 LVAL xlogior()
 {
     return (binary('|'));
-}  // logior
+}
 
 LVAL xlogxor()
 {
     return (binary('^'));
-}  // logxor
+}
 
 // binary - handle binary operations
 static LVAL binary(int fcn)
 {
+
     static char *cfn_name = "binary arith op";
-    FIXTYPE ival = 0, iarg = 0;
-    FLOTYPE fval = 0, farg = 0;
-    LVAL arg = NULL;
-    int mode = 0;
 
     // get the first argument
-    arg = xlgetarg();
+    LVAL arg = xlgetarg();
 
     // set the type of the first argument
+    int mode = 0;
+    FIXTYPE ival = 0;
+    FLOTYPE fval = 0;
     if (fixp(arg))
     {
         ival = getfixnum(arg);
@@ -268,7 +297,9 @@ static LVAL binary(int fcn)
         mode = 'F';
     }
     else
+    {
         xlbadtype(arg, "<number>", cfn_name);
+    }
 
     // treat a single argument as a special case
     if (!moreargs())
@@ -301,10 +332,12 @@ static LVAL binary(int fcn)
         }
     }
 
+    FIXTYPE iarg = 0;
+    FLOTYPE farg = 0;
+
     // handle each remaining argument
     while (moreargs())
     {
-
         // get the next argument
         arg = xlgetarg();
 
@@ -336,7 +369,9 @@ static LVAL binary(int fcn)
             }
         }
         else
+        {
             xlbadtype(arg, "<number>", cfn_name);
+        }
 
         // accumulate the result value
         switch (mode)
@@ -438,71 +473,73 @@ static LVAL binary(int fcn)
     return (NIL);       // never reached
 }
 
-// unary functions
+///-----------------------------------------------------------------------------
+/// Unary functions
+///-----------------------------------------------------------------------------
 LVAL xlognot()
 {
     return (unary('~'));
-}  // lognot
+}
 
 LVAL xabs()
 {
     return (unary('A'));
-}  // abs
+}
 
 LVAL xadd1()
 {
     return (unary('+'));
-}  // 1+
+}
 
 LVAL xsub1()
 {
     return (unary('-'));
-}  // -1+
+}
 
 LVAL xsin()
 {
     return (unary('S'));
-}  // sin
+}
 
 LVAL xcos()
 {
     return (unary('C'));
-}  // cos
+}
 
 LVAL xtan()
 {
     return (unary('T'));
-}  // tan
+}
 
 LVAL xasin()
 {
     return (unary('s'));
-}  // asin
+}
 
 LVAL xacos()
 {
     return (unary('c'));
-}  // acos
+}
 
 LVAL xxexp()
 {
     return (unary('E'));
-}  // exp
+}
 
 LVAL xsqrt()
 {
     return (unary('R'));
-}  // sqrt
+}
 
 LVAL xxlog()
 {
     return (unary('L'));
-}  // log
+}
 
 LVAL xrandom()
 {
     return (unary('?'));
-}  // random
+}
 
 static char *unary_to_name(int fcn)
 {
@@ -542,13 +579,12 @@ static char *unary_to_name(int fcn)
 // unary - handle unary operations
 static LVAL unary(int fcn)
 {
-    FLOTYPE fval;
-    FIXTYPE ival;
     LVAL arg = NULL;
 
     // get the argument
     if (moreargs())
-    {   // arg = xlgetarg();
+    {
+        // arg = xlgetarg();
         arg = nextarg();
     }
     else
@@ -564,7 +600,7 @@ static LVAL unary(int fcn)
     // check its type
     if (fixp(arg))
     {
-        ival = getfixnum(arg);
+        FIXTYPE ival = getfixnum(arg);
         switch (fcn)
         {
             case '~':
@@ -608,7 +644,7 @@ static LVAL unary(int fcn)
     }
     else if (floatp(arg))
     {
-        fval = getflonum(arg);
+        FLOTYPE fval = getflonum(arg);
         switch (fcn)
         {
             case 'A':
@@ -662,73 +698,90 @@ static LVAL unary(int fcn)
 LVAL xgcd()
 {
     static char *cfn_name = "gcd";
-    FIXTYPE m, n, r;
-    LVAL arg;
 
     if (!moreargs())    // check for identity case
+    {
         return (cvfixnum((FIXTYPE) 0));
-    arg = xlgafixnum();
-    n = getfixnum(arg);
+    }
+
+    LVAL arg = xlgafixnum();
+    FIXTYPE n = getfixnum(arg);
+
     if (n < (FIXTYPE) 0)
+    {
         n = -n; // absolute value
+    }
+
     while (moreargs())
     {
         arg = xlgafixnum();
-        m = getfixnum(arg);
+        FIXTYPE m = getfixnum(arg);
+
         if (m < (FIXTYPE) 0)
+        {
             m = -m;     // absolute value
+        }
+
         if (n > 0)
+        {
             for (;;)
-            {   // euclid's algorithm
-                r = m % n;
+            {
+                // euclid's algorithm
+                FIXTYPE r = m % n;
                 if (r == (FIXTYPE) 0)
+                {
                     break;
+                }
                 m = n;
                 n = r;
             }
+        }
         else
+        {
             n = m;      // (gcd 0 m)
+        }
     }
     return (cvfixnum(n));
 }
 
-// unary predicates
-LVAL xnegativep()
+///-----------------------------------------------------------------------------
+/// unary predicates
+///-----------------------------------------------------------------------------
+LVAL xnegativep()  // negative?
 {
     return (predicate('-'));
-}  // negative?
+}
 
-LVAL xzerop()
+LVAL xzerop()  // zero?
 {
     return (predicate('Z'));
-}  // zero?
+}
 
-LVAL xpositivep()
+LVAL xpositivep()  // positive?
 {
     return (predicate('+'));
-}  // positive?
+}
 
-LVAL xevenp()
+LVAL xevenp()  // even?
 {
     return (predicate('E'));
-}  // even?
+}
 
-LVAL xoddp()
+LVAL xoddp()  // odd?
 {
     return (predicate('O'));
-}  // odd?
+}
 
 // predicate - handle a predicate function
 static LVAL predicate(int fcn)
 {
     static char *cfn_name = "arith predicate";
-    FLOTYPE fval;
-    FIXTYPE ival = 0;
-    LVAL arg;
 
     // get the argument
-    arg = xlgetarg();
+    LVAL arg = xlgetarg();
     xllastarg();
+
+    FIXTYPE ival = 0;
 
     // check the argument type
     if (fixp(arg))
@@ -757,7 +810,7 @@ static LVAL predicate(int fcn)
     }
     else if (floatp(arg))
     {
-        fval = getflonum(arg);
+        FLOTYPE fval = getflonum(arg);
         switch (fcn)
         {
             case '-':
@@ -774,51 +827,54 @@ static LVAL predicate(int fcn)
         }
     }
     else
+    {
         xlbadtype(arg, "<number>", cfn_name);
+    }
 
     // return the result value
     return (ival ? true : NIL);
 }
 
-// comparison functions
-LVAL xlss()
+///-----------------------------------------------------------------------------
+/// comparison functions
+///-----------------------------------------------------------------------------
+LVAL xlss()  // <
 {
     return (compare('<'));
-}  // <
+}
 
-LVAL xleq()
+LVAL xleq()  // <=
 {
     return (compare('L'));
-}  // <=
+}
 
-LVAL xeql()
+LVAL xeql()  // =
 {
     return (compare('='));
-}  // =
+}
 
-LVAL xgeq()
+LVAL xgeq()  // >=
 {
     return (compare('G'));
-}  // >=
+}
 
-LVAL xgtr()
+LVAL xgtr()  // >
 {
     return (compare('>'));
-}  // >
+}
 
 // compare - common compare function
 static LVAL compare(int fcn)
 {
     static char *cfn_name = "arith compare op";
-    FIXTYPE icmp, ival = 0, iarg = 0;
-    FLOTYPE fcmp, fval = 0, farg = 0;
-    LVAL arg;
-    int mode = 0;
 
     // get the first argument
-    arg = xlgetarg();
+    LVAL arg = xlgetarg();
 
     // set the type of the first argument
+    int mode = 0;
+    FIXTYPE ival = 0;
+    FLOTYPE fval = 0;
     if (fixp(arg))
     {
         ival = getfixnum(arg);
@@ -830,12 +886,15 @@ static LVAL compare(int fcn)
         mode = 'F';
     }
     else
+    {
         xlbadtype(arg, "<number>", cfn_name);
+    }
 
     // handle each remaining argument
+    FIXTYPE icmp, iarg = 0;
+    FLOTYPE fcmp, farg = 0;
     for (icmp = TRUE; icmp && moreargs();)
     {
-
         // get the next argument
         arg = xlgetarg();
 
@@ -867,7 +926,9 @@ static LVAL compare(int fcn)
             }
         }
         else
+        {
             xlbadtype(arg, "<number>", cfn_name);
+        }
 
         // compute result of the compare
         switch (mode)
@@ -923,7 +984,9 @@ static LVAL compare(int fcn)
 
     // get rid of extra arguments
     if (moreargs())
+    {
         xlpoprest();
+    }
 
     // return the result
     return (icmp ? true : NIL);
@@ -947,30 +1010,46 @@ static FLOTYPE toflotype(LVAL val)
 static void checkizero(FIXTYPE iarg, FIXTYPE num)
 {
     if (iarg == 0)
+    {
         xlcerror("division by zero", cvfixnum(num), s_arith_error);
+    }
 }
 
 // checkineg - check for square root of a negative number
 static void checkineg(FIXTYPE iarg)
 {
     if (iarg < 0)
-        xlcerror("square root of a negative number",
-        cvfixnum(iarg), s_arith_error);
+    {
+        xlcerror
+        (
+            "square root of a negative number",
+            cvfixnum(iarg),
+            s_arith_error
+        );
+    }
 }
 
 // checkfzero - check for floating point division by zero
 static void checkfzero(FLOTYPE farg, FLOTYPE num)
 {
     if (farg == 0.0)
+    {
         xlcerror("division by zero", cvflonum(num), s_arith_error);
+    }
 }
 
 // checkfneg - check for square root of a negative number
 static void checkfneg(FLOTYPE farg)
 {
     if (farg < 0.0)
-        xlcerror("square root of a negative number",
-        cvflonum(farg), s_arith_error);
+    {
+        xlcerror
+        (
+            "square root of a negative number",
+            cvflonum(farg),
+            s_arith_error
+        );
+    }
 }
 
 // badiop - bad integer operation
