@@ -249,11 +249,10 @@ extern FILE *filein;
 #define slotp(x)        ((x) && ntype(x) == SLOT)
 #define tablep(x)        ((x) && ntype(x) == TABLE)
 
-/* vector update macro
-   This is necessary because the memory pointed to by the n_vdata field
-   of a vector object can move during a garbage collection.  This macro
-   guarantees that evaluation happens in the right order.
-*/
+// vector update macro
+// This is necessary because the memory pointed to by the n_vdata field
+// of a vector object can move during a garbage collection.  This macro
+// guarantees that evaluation happens in the right order.
 #define vupdate(x,i,v)  { LVAL vutmp=(v); (x)->n_vdata[i] = vutmp; }
 
 // cons access macros

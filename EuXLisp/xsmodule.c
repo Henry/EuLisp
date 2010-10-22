@@ -39,6 +39,9 @@ typedef struct
 } FTDEF;
 extern FTDEF ftab[];
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 void init_root_module()
 {
     keyword_array = newvector(HSIZE);   // all the keywords

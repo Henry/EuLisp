@@ -25,7 +25,9 @@
 
 #include "xscheme.h"
 
-// external variables
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
 extern LVAL true;
 
 // external functions
@@ -34,7 +36,9 @@ extern ITYPE;
 extern LVAL cvstring2(), s_syntax_error, s_unbound;
 extern LVAL xlenter_keyword();
 
-// forward declarations
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
 static void read_cdr(LVAL fptr, LVAL last);
 static void read_comment(LVAL fptr);
 static LVAL read_list(LVAL fptr);
@@ -58,6 +62,9 @@ static void read_escaped(LVAL fptr, char *buf, int index, int *keyword);
 static LVAL read_number(LVAL fptr, int ch, char *buf, int index);
 static LVAL read_peculiar(LVAL fptr, int ch);
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xlread - read an expression
 int xlread(LVAL fptr, LVAL * pval)
 {

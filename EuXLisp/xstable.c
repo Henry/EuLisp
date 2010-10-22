@@ -26,12 +26,17 @@
 #include "xssymbols.h"
 #include "xsproto.h"
 
-// forward declarations
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
 static int thash_eq(LVAL key);
 static int thash_eqv(LVAL key);
 static int thash_equal(LVAL key);
 static int thash_equals(LVAL key);
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xmake_table - make a table
 LVAL xmake_table()
 {

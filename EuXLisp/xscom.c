@@ -30,6 +30,9 @@
 #include "xssymbols.h"
 #include "xsproto.h"
 
+///-----------------------------------------------------------------------------
+/// Macros
+///-----------------------------------------------------------------------------
 #define xlerror(a,b)  xlcerror(a,b,s_compile_error)
 
 static char *module_search_path[] = { MODULE_SEARCH_PATH, 0 };
@@ -43,7 +46,9 @@ static char *module_search_path[] = { MODULE_SEARCH_PATH, 0 };
 
 #define SPACES() (spacy + 20 - (indent > 20 ? 20 : indent < 0 ? 0 : indent))
 
-// local variables
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
 static LVAL info;               // compiler info
 
 // code buffer
@@ -51,7 +56,9 @@ static unsigned char cbuff[CMAX];       // base of code buffer
 static int cbase;               // base for current function
 static int cptr;                // code buffer pointer
 
-// forward declarations
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
 static void do_expr(LVAL expr, int cont);
 static int in_ntab(LVAL expr, int cont);
 static int in_ftab(LVAL expr, int cont);
@@ -221,6 +228,9 @@ FTDEF ftab[] =
     {(char *)0, (void (*)())0}
 };
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xlcompile - compile an expression
 LVAL xlcompile(LVAL expr, LVAL ctenv)
 {
@@ -1121,8 +1131,7 @@ static LVAL make_code_object(LVAL fun)
     cpush(code);
     setbcode(code, newstring(cptr - cbase));
     setcname(code, fun);        // function name
-    setvnames(code, getelement(car(car(info)), 0));     /* lambda list
-                                                         * variables */
+    setvnames(code, getelement(car(car(info)), 0));  // lambda list variables
 
     // copy the literals into the code object
     LVAL p;
@@ -2011,8 +2020,8 @@ static void check_rename_list(LVAL renamelist)
         }
     }
 
-    /* check for repeats (rename ((+ add) (- add)) ...) bad (rename ((+ plus)
-     * (+ add)) ...) seems OK */
+    // check for repeats (rename ((+ add) (- add)) ...) bad (rename ((+ plus)
+    // (+ add)) ...) seems OK
     for (; renamelist; renamelist = cdr(renamelist))
     {
         LVAL rename = car(renamelist);
@@ -2446,15 +2455,14 @@ static void load_dependent_modules(LVAL directives)
     }
 }
 
-/* compile a defmodule
-   (defmodule foo (import a ..) body ...) ->
-   (load-dependent-modules (import a ..))
-   (set-module foo)
-   (module-directives (import ...) current-module-obarray)
-   (reintern (begin body ...))
-   ((compile (begin body ...)))     ; compile and run
-   (set-module root)
-*/
+// compile a defmodule
+//    (defmodule foo (import a ..) body ...) ->
+//    (load-dependent-modules (import a ..))
+//    (set-module foo)
+//    (module-directives (import ...) current-module-obarray)
+//    (reintern (begin body ...))
+//    ((compile (begin body ...)))     ; compile and run
+//    (set-module root)
 static void do_defmodule(LVAL form, int cont)
 {
     if (current_module != root_module)
@@ -3502,8 +3510,10 @@ static void do_predicate(LVAL classname, LVAL classopts)
                 body = cons(s_object, NIL);
                 body = cons(s_class_of, body);
                 body = cons(body, pop());
-                body = cons(s_subclassp, body); /* (subclass? (class-of object)
-                                                 * cl) */
+
+                // (subclass? (class-of object) cl)
+                body = cons(s_subclassp, body);
+
                 body = cons(body, NIL);
                 push(body);
 
@@ -3549,8 +3559,7 @@ static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
     putcbyte(OP_PUSH);
     do_literal(slotname, C_NEXT);
     putcbyte(OP_PUSH);
-    cd_variable(OP_GREF, s_find_slot_index);    /* finds index of slot in class
-                                                 */
+    cd_variable(OP_GREF, s_find_slot_index);    // finds index of slot in class
     putcbyte(OP_CALL);
     putcbyte(2);
     fixup(nxt4);
@@ -3593,9 +3602,9 @@ static void do_named_reader(LVAL readername, LVAL slotname, LVAL classname)
     putcbyte(OP_PUSH);
     do_literal(s_lambda, C_NEXT);
     putcbyte(OP_PUSH);
-    cd_variable(OP_GREF, s_list);       /* (lambda (object) (check-ref class
-                                         * object) */
-    putcbyte(OP_CALL);  // (%getivar object indx))
+    cd_variable(OP_GREF, s_list);       // (lambda (object)
+                                        //   (check-ref class object)
+    putcbyte(OP_CALL);                  // (%getivar object indx))
     #ifndef NO_CHECK_REF
     putcbyte(4);
     #else
@@ -3649,8 +3658,7 @@ static void do_named_writer
     putcbyte(OP_PUSH);
     do_literal(slotname, C_NEXT);
     putcbyte(OP_PUSH);
-    cd_variable(OP_GREF, s_find_slot_index);    /* finds index of slot in class
-                                                 */
+    cd_variable(OP_GREF, s_find_slot_index);    // finds index of slot in class
     putcbyte(OP_CALL);
     putcbyte(2);
     fixup(nxt4);
@@ -3698,8 +3706,8 @@ static void do_named_writer
     putcbyte(OP_PUSH);
     do_literal(s_lambda, C_NEXT);
     putcbyte(OP_PUSH);
-    cd_variable(OP_GREF, s_list);       /* (lambda (object) (check-ref class
-                                         * object) */
+    cd_variable(OP_GREF, s_list);       // (lambda (object)
+                                        //   (check-ref classobject))
     putcbyte(OP_CALL);  // (%setivar object indx val))
     #ifndef NO_CHECK_REF
     putcbyte(4);

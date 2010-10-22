@@ -22,33 +22,41 @@
 /// Title: I/O functions
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "xscheme.h"
 
-// global variables
+///-----------------------------------------------------------------------------
+/// Global variables
+///-----------------------------------------------------------------------------
 FIXTYPE xlfsize;
 
-// external variables
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
 extern LVAL s_stdin, s_stdout, s_stderr, s_unbound;
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xlgetc - get a character from a file or stream
 int xlgetc(LVAL fptr)
 {
-    FILE *fp;
     int ch;
 
     // check for input from nil
     if (fptr == NIL)
     {
         ch = EOF;
-    }   // otherwise, check for a buffered character
+    }
+    // otherwise, check for a buffered character
     else if ((ch = getsavech(fptr)) != '\0')
     {
         setsavech(fptr, '\0');
-    }   // otherwise, check for terminal input or file input
+    }
+    // otherwise, check for terminal input or file input
     else
     {
-        fp = getfile(fptr);
+        FILE *fp = getfile(fptr);
+
         if (fp == NULL)
         {
             xlcerror("attempt to read from a closed stream", fptr, NIL);
@@ -77,7 +85,8 @@ void xlungetc(LVAL fptr, int ch)
 {
     // check for ungetc from nil
     if (fptr == NIL)
-    {}  // otherwise, it must be a file
+    {}
+    // otherwise, it must be a file
     else
     {
         setsavech(fptr, ch);
@@ -87,16 +96,14 @@ void xlungetc(LVAL fptr, int ch)
 // xlpeekchar
 int xlpeekchar(LVAL fptr)
 {
-    FILE *fp;
     int ch;
-
     if (fptr == NIL)
     {
         ch = EOF;
     }
     else if ((ch = getsavech(fptr)) == '\0')
     {
-        fp = getfile(fptr);
+        FILE *fp = getfile(fptr);
         if (fp == NULL)
         {
             xlcerror("attempt to read from a closed stream", fptr, NIL);
@@ -110,17 +117,17 @@ int xlpeekchar(LVAL fptr)
 // xlputc - put a character to a file or stream
 void xlputc(LVAL fptr, int ch)
 {
-    FILE *fp;
-
     // count the character
     ++xlfsize;
 
     // check for output to nil
     if (fptr == NIL)
-    {}  // otherwise, check for terminal output or file output
+    {}
+    // otherwise, check for terminal output or file output
     else
     {
-        fp = getfile(fptr);
+        FILE *fp = getfile(fptr);
+
         if (fp == NULL)
         {
             xlcerror("attempt to write to closed stream", fptr, NIL);

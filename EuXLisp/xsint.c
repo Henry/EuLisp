@@ -37,7 +37,9 @@
 // macros to get the address of the code string for a code object
 #define getcodestr(x) ((unsigned char *)getstring(getbcode(x)))
 
-// globals
+///-----------------------------------------------------------------------------
+/// Globals
+///-----------------------------------------------------------------------------
 int trace = FALSE;              // trace enable
 int xlargc;                     // argument count
 JMP_BUF bc_dispatch;            // bytecode dispatcher
@@ -45,10 +47,14 @@ JMP_BUF bc_dispatch;            // bytecode dispatcher
 #include "xssymbols.h"
 #include "xsproto.h"
 
-// external variables
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
 extern LVAL xlfun, xlenv, xlval;
 
-// local variables
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
 static unsigned char *base, *pc;
 static int sample = SRATE;
 
@@ -62,6 +68,9 @@ static int generic_call(LVAL, LVAL, LVAL);
 void xlstkover();
 static void bad_slot_access(char *msg, LVAL index, LVAL object);
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xtraceon - built-in function 'trace-on'
 LVAL xtraceon()
 {
@@ -81,11 +90,6 @@ LVAL xtraceoff()
 // xlexecute - execute byte codes
 void xlexecute(LVAL fun)
 {
-    register LVAL tmp, tmp2;
-    register unsigned int i;
-    register int k;
-    FIXTYPE fixtmp;
-    int off = 0;
     extern LVAL s_unbound_error, s_arith_error, s_no_next_md_error;
 
     // initialize the registers
@@ -102,10 +106,13 @@ void xlexecute(LVAL fun)
     // setup a target for the error handler
     SETJMP(bc_dispatch);
 
+    register LVAL tmp, tmp2;
+    register unsigned int i;
+    register int k;
+
     // execute the code
     for (;;)
     {
-
         // check for control codes
         if (--sample <= 0)
         {
@@ -115,7 +122,9 @@ void xlexecute(LVAL fun)
 
         // print the trace information
         if (trace)
+        {
             decode_instruction(xstdout(), xlfun, (int)(pc - base), xlenv);
+        }
 
         // execute the next bytecode instruction
         switch (*pc++)
@@ -124,13 +133,17 @@ void xlexecute(LVAL fun)
                 i = *pc++ << 8;
                 i |= *pc++;
                 if (xlval)
+                {
                     pc = base + i;
+                }
                 break;
             case OP_BRF:
                 i = *pc++ << 8;
                 i |= *pc++;
                 if (!xlval)
+                {
                     pc = base + i;
+                }
                 break;
             case OP_BR:
                 i = *pc++ << 8;
@@ -158,35 +171,59 @@ void xlexecute(LVAL fun)
                 k = *pc++;
                 tmp = xlenv;
                 while (--k >= 0)
+                {
                     tmp = cdr(tmp);
+                }
                 xlval = getelement(car(tmp), *pc++);
                 break;
             case OP_ESET:
                 k = *pc++;
                 tmp = xlenv;
                 while (--k >= 0)
+                {
                     tmp = cdr(tmp);
+                }
                 setelement(car(tmp), *pc++, xlval);
                 break;
             case OP_AREF:
-                i = *pc++;
-                tmp = xlval;
-                if (!envp(tmp))
-                    badargtype(tmp, "<env>", "aref");
-                if ((tmp = findvar(tmp, getelement(xlfun, i), &off)) != NIL)
-                    xlval = getelement(car(tmp), off);
-                else
-                    xlval = s_unassigned;
+                {
+                    i = *pc++;
+                    tmp = xlval;
+                    if (!envp(tmp))
+                    {
+                        badargtype(tmp, "<env>", "aref");
+                    }
+                    int off = 0;
+                    if ((tmp = findvar(tmp, getelement(xlfun, i), &off)) != NIL)
+                    {
+                        xlval = getelement(car(tmp), off);
+                    }
+                    else
+                    {
+                        xlval = s_unassigned;
+                    }
+                }
                 break;
             case OP_ASET:
-                i = *pc++;
-                tmp = pop();
-                if (!envp(tmp))
-                    badargtype(tmp, "<env>", "aset");
-                if ((tmp = findvar(tmp, getelement(xlfun, i), &off)) == NIL)
-                    xlinterror("no binding for variable",
-                    getelement(xlfun, i), s_unbound_error);
-                setelement(car(tmp), off, xlval);
+                {
+                    i = *pc++;
+                    tmp = pop();
+                    if (!envp(tmp))
+                    {
+                        badargtype(tmp, "<env>", "aset");
+                    }
+                    int off = 0;
+                    if ((tmp = findvar(tmp, getelement(xlfun, i), &off)) == NIL)
+                    {
+                        xlinterror
+                        (
+                            "no binding for variable",
+                            getelement(xlfun, i),
+                            s_unbound_error
+                        );
+                    }
+                    setelement(car(tmp), off, xlval);
+                }
                 break;
             case OP_SAVE:      // save a continuation
                 i = *pc++ << 8;
@@ -211,7 +248,9 @@ void xlexecute(LVAL fun)
             case OP_MVARG:     // move required argument to frame slot
                 i = *pc++;      // get the slot number
                 if (--xlargc < 0)
+                {
                     xltoofew_int();
+                }
                 setelement(car(xlenv), i, pop());
                 break;
             case OP_MVOARG:    // move optional argument to frame slot
@@ -222,18 +261,24 @@ void xlexecute(LVAL fun)
                     --xlargc;
                 }
                 else
+                {
                     setelement(car(xlenv), i, default_object);
+                }
                 break;
             case OP_MVRARG:    // build rest argument and move to frame slot
                 i = *pc++;      // get the slot number
                 for (xlval = NIL, k = xlargc; --k >= 0;)
+                {
                     xlval = cons(xlsp[k], xlval);
+                }
                 setelement(car(xlenv), i, xlval);
                 drop(xlargc);
                 break;
             case OP_ALAST:     // make sure there are no more arguments
                 if (xlargc > 0)
+                {
                     xltoomany_int();
+                }
                 break;
             case OP_T:
                 xlval = true;
@@ -246,12 +291,16 @@ void xlexecute(LVAL fun)
                 break;
             case OP_CLOSE:
                 if (!codep(xlval))
+                {
                     badargtype(xlval, "<code>", "close");
+                }
                 xlval = cvclosure(xlval, xlenv);
                 break;
             case OP_DELAY:
                 if (!codep(xlval))
+                {
                     badargtype(xlval, "<code>", "delay");
+                }
                 xlval = cvpromise(xlval, xlenv);
                 break;
             case OP_ATOM:
@@ -260,9 +309,13 @@ void xlexecute(LVAL fun)
             case OP_EQ:
                 tmp = pop();
                 if (symbolp(xlval) && symbolp(tmp))
+                {
                     xlval = (symboleq(xlval, tmp) ? true : NIL);
+                }
                 else
+                {
                     xlval = (xlval == tmp ? true : NIL);
+                }
                 break;
             case OP_NULL:
                 xlval = (xlval ? NIL : true);
@@ -272,24 +325,32 @@ void xlexecute(LVAL fun)
                 break;
             case OP_CAR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "car");
+                }
                 xlval = car(xlval);
                 break;
             case OP_CDR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "cdr");
+                }
                 xlval = cdr(xlval);
                 break;
             case OP_SETCAR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "set-car!");
+                }
                 tmp = pop();
                 rplaca(xlval, tmp);
                 xlval = tmp;
                 break;
             case OP_SETCDR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "set-cdr!");
+                }
                 tmp = pop();
                 rplacd(xlval, tmp);
                 xlval = tmp;
@@ -320,9 +381,13 @@ void xlexecute(LVAL fun)
             case OP_ADD:
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))
+                {
                     xlval = cvfixnum(getfixnum(xlval) + getfixnum(tmp));
+                }
                 else if (floatp(xlval) && floatp(tmp))
+                {
                     xlval = cvflonum(getflonum(xlval) + getflonum(tmp));
+                }
                 else if (!generic_call(s_binary_plus, tmp, xlval))
                 {
                     push(tmp);
@@ -334,9 +399,13 @@ void xlexecute(LVAL fun)
             case OP_SUB:
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))
+                {
                     xlval = cvfixnum(getfixnum(xlval) - getfixnum(tmp));
+                }
                 else if (floatp(xlval) && floatp(tmp))
+                {
                     xlval = cvflonum(getflonum(xlval) - getflonum(tmp));
+                }
                 else if (!generic_call(s_binary_minus, tmp, xlval))
                 {
                     push(tmp);
@@ -348,9 +417,13 @@ void xlexecute(LVAL fun)
             case OP_MUL:
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))
+                {
                     xlval = cvfixnum(getfixnum(xlval) * getfixnum(tmp));
+                }
                 else if (floatp(xlval) && floatp(tmp))
+                {
                     xlval = cvflonum(getflonum(xlval) * getflonum(tmp));
+                }
                 else if (!generic_call(s_binary_times, tmp, xlval))
                 {
                     push(tmp);
@@ -364,13 +437,17 @@ void xlexecute(LVAL fun)
                 if (fixp(xlval) && fixp(tmp))
                 {
                     if (getfixnum(tmp) == (FIXTYPE) 0)
+                    {
                         xlinterror("division by zero", xlval, s_arith_error);
+                    }
                     xlval = cvfixnum(getfixnum(xlval) / getfixnum(tmp));
                 }
                 else if (floatp(xlval) && floatp(tmp))
                 {
                     if (getflonum(tmp) == (FLOTYPE) 0.0)
+                    {
                         xlinterror("division by zero", xlval, s_arith_error);
+                    }
                     xlval = cvflonum(getflonum(xlval) / getflonum(tmp));
                 }
                 else if (!generic_call(s_binary_divide, tmp, xlval))
@@ -385,8 +462,11 @@ void xlexecute(LVAL fun)
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))
                 {
+                    FIXTYPE fixtmp;
                     if ((fixtmp = getfixnum(tmp)) == (FIXTYPE) 0)
+                    {
                         xlinterror("division by zero", xlval, s_arith_error);
+                    }
                     xlval = cvfixnum(getfixnum(xlval) / fixtmp);
                 }
                 else if (!generic_call(s_quotient, tmp, xlval))
@@ -400,9 +480,13 @@ void xlexecute(LVAL fun)
             case OP_LSS:
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))
+                {
                     xlval = (getfixnum(xlval) < getfixnum(tmp) ? true : NIL);
+                }
                 else if (floatp(xlval) && floatp(tmp))
+                {
                     xlval = (getflonum(xlval) < getflonum(tmp) ? true : NIL);
+                }
                 else if (!generic_call(s_binary_less, tmp, xlval))
                 {
                     push(tmp);
@@ -414,9 +498,13 @@ void xlexecute(LVAL fun)
             case OP_EQL:
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))
+                {
                     xlval = (getfixnum(xlval) == getfixnum(tmp) ? true : NIL);
+                }
                 else if (floatp(xlval) && floatp(tmp))
+                {
                     xlval = (getflonum(xlval) == getflonum(tmp) ? true : NIL);
+                }
                 else if (!generic_call(s_binary_equal, tmp, xlval))
                 {
                     push(tmp);
@@ -428,9 +516,13 @@ void xlexecute(LVAL fun)
             case OP_GTR:
                 tmp = pop();
                 if (fixp(xlval) && fixp(tmp))
+                {
                     xlval = (getfixnum(xlval) > getfixnum(tmp) ? true : NIL);
+                }
                 else if (floatp(xlval) && floatp(tmp))
+                {
                     xlval = (getflonum(xlval) > getflonum(tmp) ? true : NIL);
+                }
                 else if (!generic_call(s_binary_less, xlval, tmp))
                 {
                     push(tmp);
@@ -444,7 +536,8 @@ void xlexecute(LVAL fun)
                 break;
             case OP_CNM:       // (apply (car mfl) (cdr mfl) al al)
                 if (xlval == NIL)
-                {       // next method list
+                {
+                    // next method list
                     drop(1);    // arg list
                     xlcerror("no next method in call-next-method", xlfun,
                     s_no_next_md_error);
@@ -457,9 +550,15 @@ void xlexecute(LVAL fun)
                     xlargc = list_size(al);
                     check(xlargc + 2);
                     args = al;
-                    for (xlsp -= xlargc, p = xlsp; consp(args);
-                         args = cdr(args))
+                    for
+                    (
+                        xlsp -= xlargc, p = xlsp;
+                        consp(args);
+                        args = cdr(args)
+                    )
+                    {
                         *p++ = car(args);
+                    }
                     push(al);
                     push(cdr(mfl));
                     xlval = car(mfl);
@@ -470,9 +569,13 @@ void xlexecute(LVAL fun)
             case OP_GETIVAR:
                 tmp = pop();
                 #ifdef CHECK_REF
-                if (!fixp(tmp) || !objectp(xlval) ||
-                getfixnum(tmp) > getfixnum(getivar(getclass(xlval),
-                INSTSIZE)))
+                if
+                (
+                    !fixp(tmp)
+                 || !objectp(xlval)
+                 || getfixnum(tmp)
+                  > getfixnum(getivar(getclass(xlval), INSTSIZE))
+                )
                 {
                     bad_slot_access("read", tmp, xlval);
                 }
@@ -480,36 +583,50 @@ void xlexecute(LVAL fun)
                 xlval = getivar(xlval, getfixnum(tmp));
                 break;
             case OP_SETIVAR:
-                tmp = pop();
-                #ifdef CHECK_REF
-                if (!fixp(tmp) || !objectp(xlval) ||
-                getfixnum(tmp) > getfixnum(getivar(getclass(xlval),
-                INSTSIZE)))
                 {
-                    bad_slot_access("write", tmp, xlval);
+                    tmp = pop();
+                    #ifdef CHECK_REF
+                    if
+                    (
+                        !fixp(tmp)
+                     || !objectp(xlval)
+                     || getfixnum(tmp)
+                      > getfixnum(getivar(getclass(xlval), INSTSIZE))
+                    )
+                    {
+                        bad_slot_access("write", tmp, xlval);
+                    }
+                    #endif
+                    FIXTYPE fixtmp = getfixnum(tmp);        // macro
+                    tmp = pop();
+                    setivar(xlval, fixtmp, tmp);
+                    xlval = tmp;
                 }
-                #endif
-                fixtmp = getfixnum(tmp);        // macro
-                tmp = pop();
-                setivar(xlval, fixtmp, tmp);
-                xlval = tmp;
                 break;
                 // these don't need the bother of frames and are used a lot
             case OP_GET:
                 tmp = pop();
                 if (!symbolp(xlval))
+                {
                     badargtype(xlval, "<symbol>", "get");
+                }
                 if (!symbolp(tmp))
+                {
                     badargtype(tmp, "<symbol>", "get");
+                }
                 xlval = xlgetprop(xlval, tmp);
                 break;
             case OP_PUT:
                 tmp = pop();
                 tmp2 = pop();
                 if (!symbolp(xlval))
+                {
                     badargtype(xlval, "<symbol>", "put");
+                }
                 if (!symbolp(tmp))
+                {
                     badargtype(tmp, "<symbol>", "put");
+                }
                 xlputprop(xlval, tmp2, tmp);
                 xlval = tmp2;
                 break;
@@ -529,9 +646,13 @@ void xlexecute(LVAL fun)
             case OP_APPEND:    // 2 args
                 tmp = pop();
                 if (!listp(xlval))
+                {
                     badargtype(xlval, "<list>", "append");
+                }
                 if (xlval == NIL)
+                {
                     xlval = tmp;
+                }
                 else
                 {
                     LVAL end;
@@ -553,65 +674,93 @@ void xlexecute(LVAL fun)
                 break;
             case OP_SIZE:
                 if (!listp(xlval))
+                {
                     badargtype(xlval, "<list>", "list-size");
+                }
                 cpush(xlval);
                 xlargc = 1;
                 xlval = xsize();
                 break;
             case OP_REVERSE:
                 if (!listp(xlval))
+                {
                     badargtype(xlval, "<list>", "reverse");
+                }
                 cpush(xlval);
                 xlargc = 1;
                 xlval = xreverse();
                 break;
             case OP_CAAR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "caar");
+                }
                 xlval = car(xlval);
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "caar");
+                }
                 xlval = car(xlval);
                 break;
             case OP_CADR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "cadr");
+                }
                 xlval = cdr(xlval);
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "cadr");
+                }
                 xlval = car(xlval);
                 break;
             case OP_CDAR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "cdar");
+                }
                 xlval = car(xlval);
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "cdar");
+                }
                 xlval = cdr(xlval);
                 break;
             case OP_CDDR:
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "cddr");
+                }
                 xlval = cdr(xlval);
                 if (!consp(xlval))
+                {
                     badargtype(xlval, "<cons>", "cddr");
+                }
                 xlval = cdr(xlval);
                 break;
             case OP_GETSYNTAX:
                 tmp = pop();
                 if (!symbolp(xlval))
+                {
                     badargtype(xlval, "<symbol>", "get");
+                }
                 if (!symbolp(tmp))
+                {
                     badargtype(tmp, "<symbol>", "get");
+                }
                 xlval = xlgetsyntax(xlval, tmp);
                 break;
             case OP_PUTSYNTAX:
                 tmp = pop();
                 tmp2 = pop();
                 if (!symbolp(xlval))
+                {
                     badargtype(xlval, "<symbol>", "put");
+                }
                 if (!symbolp(tmp))
+                {
                     badargtype(tmp, "<symbol>", "put");
+                }
                 xlputsyntax(xlval, tmp2, tmp);
                 xlval = tmp2;
                 break;
@@ -619,10 +768,18 @@ void xlexecute(LVAL fun)
             case OP_CHECKREF:
                 tmp = pop();    // the object
                 if (!classp(xlval))     // the class
-                    xlinterror("not a class in check-ref", xlval,
-                    s_telos_error);
+                {
+                    xlinterror
+                    (
+                        "not a class in check-ref",
+                        xlval,
+                        s_telos_error
+                    );
+                }
                 if (!xlsubclassp(class_of(tmp), xlval))
+                {
                     telos_bad_ref_error(tmp, xlval, TRUE);
+                }
                 xlval = true;
                 break;
                 #endif
@@ -636,12 +793,10 @@ void xlexecute(LVAL fun)
 // findvar - find a variable in an environment
 static LVAL findvar(LVAL env, LVAL var, int *poff)
 {
-    LVAL names;
-    int off;
     for (; env != NIL; env = cdr(env))
     {
-        names = getelement(car(env), 0);
-        for (off = 1; names != NIL; ++off, names = cdr(names))
+        LVAL names = getelement(car(env), 0);
+        for (int off = 1; names != NIL; ++off, names = cdr(names))
             if (var == car(names))
             {
                 *poff = off;
@@ -652,18 +807,19 @@ static LVAL findvar(LVAL env, LVAL var, int *poff)
 }
 
 // xlapply - apply a function to arguments
-/*	The function should be in xlval and the arguments should
-	be on the stack.  The number of arguments should be in xlargc.
-*/
+// The function should be in xlval and the arguments should
+// be on the stack.  The number of arguments should be in xlargc.
 void xlapply()
 {
     static char *cfn_name = "function apply";
-    LVAL tmp;
+
     extern LVAL s_no_applic_error;
 
     // check for null function
     if (null(xlval))
+    {
         badfuntype(xlval);
+    }
 
     // dispatch on function type
     switch (ntype(xlval))
@@ -686,7 +842,9 @@ void xlapply()
                 int i;
                 al = NIL;       // consing on function call :-(
                 for (i = xlargc - 1; i >= 0; i--)
+                {
                     al = cons(xlsp[i], al);     // the arg list
+                }
                 cpush(al);
                 applicable = find_and_cache_methods(xlval, al);
                 if (applicable == NIL)
@@ -702,11 +860,13 @@ void xlapply()
             }
             break;
         case CONTINUATION:
-            tmp = moreargs()? xlgetarg() : NIL; // zero or one arg allowed
-            xllastarg();
-            restore_continuation();
-            xlval = tmp;
-            xlreturn();
+            {
+                LVAL tmp = moreargs()? xlgetarg() : NIL; // zero or one arg allowed
+                xllastarg();
+                restore_continuation();
+                xlval = tmp;
+                xlreturn();
+            }
             break;
         default:
             badfuntype(xlval);
@@ -716,11 +876,9 @@ void xlapply()
 // xlreturn - return to a continuation on the stack
 void xlreturn()
 {
-    LVAL tmp;
-
     // restore the environment and the continuation function
     xlenv = pop();
-    tmp = pop();
+    LVAL tmp = pop();
 
     // dispatch on the function type
     switch (ntype(tmp))
@@ -743,8 +901,6 @@ void xlreturn()
 // cc is TRUE if return address is needed, e.g., in the interpreter
 LVAL current_continuation(int cc)
 {
-    LVAL cont, *src, *dst;
-    int size;
     extern LVAL s_current_thread;
 
     if (cc)
@@ -755,7 +911,9 @@ LVAL current_continuation(int cc)
         push(xlenv);
     }
     else
+    {
         check(3);
+    }
 
     // store the thread dynamic state
     // c.f. thread.em get-state
@@ -767,10 +925,13 @@ LVAL current_continuation(int cc)
     #endif
 
     // create and initialize a continuation object
-    size = (int)(xlstktop - xlsp);
-    cont = newcontinuation(size);
+    int size = (int)(xlstktop - xlsp);
+    LVAL cont = newcontinuation(size);
+    LVAL *src, *dst;
     for (src = xlsp, dst = &cont->n_vdata[0]; --size >= 0;)
+    {
         *dst++ = *src++;
+    }
 
     drop(1);    // drop the state
 
@@ -779,16 +940,15 @@ LVAL current_continuation(int cc)
 }
 
 // restore_continuation - restore a continuation to the stack
-/*      The continuation should be in xlval.
- */
+//      The continuation should be in xlval.
 static void restore_continuation()
 {
+    int size = getsize(xlval);
     LVAL *src;
-    int size;
-
-    size = getsize(xlval);
     for (src = &xlval->n_vdata[size], xlsp = xlstktop; --size >= 0;)
+    {
         *--xlsp = *--src;
+    }
 
     // restore the thread dynamic state
     // c.f. thread.em set-state
@@ -804,15 +964,14 @@ static void restore_continuation()
 // call gf associated with an inlined operator
 static int generic_call(LVAL sym, LVAL val1, LVAL val2)
 {
-    LVAL op;
-    int i;
-
-    op = getvalue(sym);
+    LVAL op = getvalue(sym);
     if (!genericp(op))
+    {
         return FALSE;   // generic not defined yet
+    }
 
     // OP_SAVE
-    i = (int)(pc - base);
+    int i = (int)(pc - base);
     check(5);
     push(cvsfixnum((FIXTYPE) i));
     push(xlfun);
@@ -831,8 +990,7 @@ static int generic_call(LVAL sym, LVAL val1, LVAL val2)
 // gc_protect - protect the state of the interpreter from the collector
 void gc_protect(void (*protected_fcn) ())
 {
-    int pcoff;
-    pcoff = pc - base;
+    int pcoff = pc - base;
     (*protected_fcn) ();
     if (xlfun)
     {
@@ -851,16 +1009,14 @@ static void badfuntype(LVAL arg)
 // cf xlbadtype in xsftab.c
 static void badargtype(LVAL arg, char *name, char *fn)
 {
-    char buf[256];
-    LVAL cond, class;
     extern LVAL s_bad_type_error;
 
+    char buf[256];
     sprintf(buf, "incorrect type in %s", fn);
-
-    cond = getvalue(s_bad_type_error);
+    LVAL cond = getvalue(s_bad_type_error);
     if (cond != s_unbound)
     {
-        class = name[0] == '<' ?
+        LVAL class = name[0] == '<' ?
         getvalue(xlenter_module(name, root_module)) : cvstring(name);
         setivar(cond, 3, class);        // cf condcl.em
     }
@@ -876,9 +1032,8 @@ void xlstkover()
 
 static void bad_slot_access(char *msg, LVAL index, LVAL object)
 {
-    char buf[20];
-
     cpush(index);
+    char buf[20];
     sprintf(buf, "bad slot %s", msg);
     object = cons(object, NIL);
     object = cons(xlenter("object:"), object);

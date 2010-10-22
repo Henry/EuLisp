@@ -30,38 +30,54 @@
 #define _path_open_path_sep ":"
 #define _path_open_string_format "%s/%s"
 
-// virtual machine registers
+///-----------------------------------------------------------------------------
+/// Virtual machine registers
+///-----------------------------------------------------------------------------
 extern LVAL xlfun;              // current function
 extern LVAL xlenv;              // current environment
 extern LVAL xlval;              // value of most recent instruction
 
-// stack limits
+///-----------------------------------------------------------------------------
+/// Stack limits
+///-----------------------------------------------------------------------------
 extern LVAL *xlstkbase;         // base of value stack
 extern LVAL *xlstktop;          // top of value stack
 
-// node space
+///-----------------------------------------------------------------------------
+/// Node space
+///-----------------------------------------------------------------------------
 extern NSEGMENT *nsegments;     // list of node segments
 
-// vector (and string) space
+///-----------------------------------------------------------------------------
+/// Vector (and string) space
+///-----------------------------------------------------------------------------
 extern VSEGMENT *vsegments;     // list of vector segments
 extern LVAL *vfree;             // next free location in vector space
 extern LVAL *vtop;              // top of vector space
 
-// global variables
+///-----------------------------------------------------------------------------
+/// Global variables
+///-----------------------------------------------------------------------------
 extern LVAL eof_object, default_object;
 extern JMP_BUF top_level;
 extern FUNDEF funtab[];
 
-// local variables
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
 static OFFTYPE off, foff;
 static FILE *fp;
 
-// external functions
+///-----------------------------------------------------------------------------
+/// External functions
+///-----------------------------------------------------------------------------
 extern FILE *osbopen();
 
 static char *image_search_path[] = { IMAGE_SEARCH_PATH, 0 };
 
-// forward declarations
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
 static void freeimage();
 static void setoffset();
 static void writenode(LVAL node);
@@ -72,6 +88,9 @@ static LVAL cviptr(OFFTYPE o);
 OFFTYPE cvoptr(LVAL p);
 static LVAL *getvspace(LVAL node, unsigned int size);
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xlisave - save the memory image
 int xlisave(char *fname)
 {
@@ -185,9 +204,8 @@ int xlisave(char *fname)
     return (TRUE);
 }
 
-/* search for a file: first looking at an env variable,
- * then a built-in path
- * NULL if not found */
+// search for a file: first looking at an env variable, then a built-in path
+// NULL if not found
 FILE *path_open
 (
     char *fname,
@@ -267,7 +285,6 @@ FILE *path_open
 
     return fp;
 }
-
 
 // xlirestore - restore a saved memory image
 int xlirestore(char *fname)
@@ -423,8 +440,6 @@ done:
 // freeimage - free the current memory image
 static void freeimage()
 {
-    FILE *fp;
-
     // close all open streams and free each node segment
     while (nsegments != NULL)
     {
@@ -436,13 +451,16 @@ static void freeimage()
             switch (ntype(p))
             {
                 case STREAM:
-                    if
-                    (
-                        (fp = getfile(p)) != NULL
-                     && (fp != stdin && fp != stdout && fp != stderr)
-                    )
                     {
-                        osclose(getfile(p));
+                        FILE *fp;
+                        if
+                        (
+                            (fp = getfile(p)) != NULL
+                            && (fp != stdin && fp != stdout && fp != stderr)
+                        )
+                        {
+                            osclose(getfile(p));
+                        }
                     }
                     break;
             }

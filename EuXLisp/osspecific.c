@@ -38,7 +38,9 @@
 #include "../RLCompletion/keyword_completion.h"
 #endif
 
-// external variables
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
 #include "xssymbols.h"
 extern FILE *tfp;
 extern int errno;
@@ -49,7 +51,9 @@ int reading;
 // Line buffer size when not using readline
 #define LBSIZE 200
 
-// local variables
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
 #ifdef READLINE
 static char* lbuf;
 static char rl_histfile[255];
@@ -72,10 +76,16 @@ typedef struct fd_set
 } fd_set;
 #endif
 
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
 static void osflushn();
 void ostputc(), ostputs(), oscheck(), osflush();
 void check_if_disabled();
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // main - the main function
 int main(int argc, char *argv[])
 {

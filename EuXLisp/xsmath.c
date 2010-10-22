@@ -26,10 +26,14 @@
 #include "xscheme.h"
 #include <math.h>
 
-// external variables
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
 extern LVAL true, s_arith_error;
 
-// forward declarations
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
 static LVAL binary(int fcn);
 static LVAL unary(int fcn);
 static LVAL predicate(int fcn);
@@ -42,8 +46,11 @@ static void checkfneg(FLOTYPE farg);
 static void badiop();
 static void badfop();
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xexactp - built-in function 'exact?'
-//*** THIS IS REALLY JUST A STUB FOR NOW ***
+// *** THIS IS REALLY JUST A STUB FOR NOW ***
 LVAL xexactp()
 {
     static char *cfn_name = "exact?";
@@ -53,7 +60,7 @@ LVAL xexactp()
 }
 
 // xinexactp - built-in function 'inexact?'
-//*** THIS IS REALLY JUST A STUB FOR NOW ***
+// *** THIS IS REALLY JUST A STUB FOR NOW ***
 LVAL xinexactp()
 {
     static char *cfn_name = "inexact?";

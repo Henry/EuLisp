@@ -25,16 +25,21 @@
 
 #include "xscheme.h"
 
-// local variables
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
 LVAL obarray;
 
-// forward declarations
+///-----------------------------------------------------------------------------
+/// Forward declarations
+///-----------------------------------------------------------------------------
 static LVAL findprop(LVAL sym, LVAL prp), findsyntax(LVAL sym, LVAL prp);
 
 extern LVAL c_dot, s_rename_flag;
 
 ///-----------------------------------------------------------------------------
-
+/// Functions
+///-----------------------------------------------------------------------------
 // xlsubr - define a builtin function
 void xlsubr(char *sname, int type, LVAL(*fcn) (void), int offset)
 {

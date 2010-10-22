@@ -27,11 +27,15 @@
 #include "xsobj.h"
 #include "xssymbols.h"
 
-// global variables
+///-----------------------------------------------------------------------------
+/// Global variables
+///-----------------------------------------------------------------------------
 int prbreadth = 200;
 int prdepth = 30;
 
-// local variables
+///-----------------------------------------------------------------------------
+/// Local variables
+///-----------------------------------------------------------------------------
 static char buf[200];
 
 static void print(LVAL fptr, LVAL vptr, int escflag, int depth);
@@ -51,6 +55,9 @@ static void putslot(LVAL fptr, LVAL vptr);
 static void puttable(LVAL fptr, LVAL vptr);
 static void putclassname(LVAL fptr, LVAL vptr);
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xlprin1 - print an expression with quoting
 void xlprin1(LVAL expr, LVAL file)
 {

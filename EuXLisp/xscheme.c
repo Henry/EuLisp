@@ -28,13 +28,15 @@
 #include "xsbanner.h"
 #include <getopt.h>
 
+///-----------------------------------------------------------------------------
+/// Macros
+///-----------------------------------------------------------------------------
 #define is_cont(sp)                                                            \
     (envp(sp[0]) && (codep(sp[1]) || csubrp(sp[1])) && !ispointer(sp[2]))
 
 ///-----------------------------------------------------------------------------
 /// Global variable
 ///-----------------------------------------------------------------------------
-
 const char* program_name;       // The name of this program (euxlisp).
 int clargc;                     // command line argument count
 char **clargv;                  // array of command line arguments
@@ -45,7 +47,9 @@ void do_backtrace();
 // trace file pointer
 FILE *tfp = NULL;
 
-// external variables
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
 extern LVAL xlfun, xlenv, xlval;
 
 #include "xssymbols.h"
@@ -76,7 +80,6 @@ extern int reading, quiet;
 ///-----------------------------------------------------------------------------
 /// Signal handling
 ///-----------------------------------------------------------------------------
-
 void sig_int()
 {
     ctrl_c = 1;
@@ -130,7 +133,6 @@ void sig_pipe()
 ///-----------------------------------------------------------------------------
 /// xlmain - the main function
 ///-----------------------------------------------------------------------------
-
 void xlmain(int argc, char **argv)
 {
     int image = TRUE;
@@ -316,7 +318,6 @@ void xlmain(int argc, char **argv)
 ///-----------------------------------------------------------------------------
 /// print_usage helper function
 ///-----------------------------------------------------------------------------
-
 static void print_usage(FILE* stream, int exit_code)
 {
     fprintf(stream, "Usage: %s options [ files ... ]\n", program_name);

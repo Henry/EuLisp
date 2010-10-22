@@ -27,10 +27,15 @@
 #include "xsbcode.h"
 #include "xssymbols.h"
 
+///-----------------------------------------------------------------------------
+/// Macros
+///-----------------------------------------------------------------------------
 // macro to store a byte into a bytecode vector
 #define pb(x) (*bcode++ = (x))
 
-// global variables
+///-----------------------------------------------------------------------------
+/// Global variables
+///-----------------------------------------------------------------------------
 LVAL true, eof_object, default_object, s_unassigned;
 LVAL cs_map1, cs_foreach1, cs_withfile1, cs_load1, cs_force1, cs_initloop1;
 LVAL c_lpar, c_rpar, c_dot, c_quote, s_quote;
@@ -64,7 +69,9 @@ LVAL s_check_ref;
 LVAL s_socket_error;
 #endif
 
-// external variables
+///-----------------------------------------------------------------------------
+/// External variables
+///-----------------------------------------------------------------------------
 extern JMP_BUF top_level;
 extern FUNDEF funtab[];
 extern int xsubrcnt;
@@ -76,6 +83,9 @@ extern void init_root_exports();
 
 void xlsymbols();
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xlinitws - create an initial workspace
 void xlinitws(unsigned int ssize)
 {
@@ -196,20 +206,18 @@ void xlinitws(unsigned int ssize)
 
     setvalue(getelement(code, 1), cvclosure(code, NIL));
 
-    /*
-      (define (*toplev*)
-      (if prompt?
-      (begin
-      (newline)
-      (display (current-module))
-      (display "> ")))
-      (setq *last* (read *FILE-INPUT*))
-      (if (eq *last* **eof**) (exit))
-      (if prompt?
-      (write (eval *last*))
-      (eval *last*))
-      (*toplev*))
-    */
+    // (define (*toplev*)
+    // (if prompt?
+    // (begin
+    // (newline)
+    // (display (current-module))
+    // (display "> ")))
+    // (setq *last* (read *FILE-INPUT*))
+    // (if (eq *last* **eof**) (exit))
+    // (if prompt?
+    // (write (eval *last*))
+    // (eval *last*))
+    // (*toplev*))
 
     // setup the main loop code
     code = newcode(15);
@@ -238,58 +246,56 @@ void xlinitws(unsigned int ssize)
     // store the byte codes
     bcode = (unsigned char *)getstring(getbcode(code));
 
-    /*
-      0000 12 01    FRAME 01
-      0002 1a       ALAST
-      0003 05 03    GREF 15 ; prompt?@root
-      0005 02 00 22 BRF 0022
-      0008 0b 00 0f SAVE 000f
-      000b 05 04    GREF 04 ; newline@root
-      000d 0c 00    CALL 00
-      000f 0b 00 18 SAVE 0018
-      0012 50       current-module
-      0013 10       PUSH
-      0014 05 05    GREF 05 ; display@root
-      0016 0c 01    CALL 01
-      0018 0b 00 22 SAVE 0022
-      001b 04 06    LIT 06 ; "> "
-      001d 10       PUSH
-      001e 05 05    GREF 05 ; display@root
-      0020 0c 01    CALL 01
-      0022 0b 00 2c SAVE 002c
-      0025 05 07    GREF 07 ; *FILE-INPUT*@root
-      0027 10       PUSH
-      0028 05 08    GREF 08 ; read@root
-      002a 0c 01    CALL 01
-      002c 06 09    GSET 09 ; *last*@root
-      002e 05 0a    GREF 0a ; **eof**@root
-      0030 10       PUSH
-      0031 05 09    GREF 09 ; *last*@root
-      0033 1f       eq
-      0034 02 00 3e BRF 003e
-      0037 0b 00 3e SAVE 003e
-      003a 05 0b    GREF 0b ; exit@root
-      003c 0c 00    CALL 00
-      003e 05 03    GREF 03 ; prompt?@root
-      0040 02 00 58 BRF 0058
-      0043 0b 00 55 SAVE 0055
-      0046 0b 00 50 SAVE 0050
-      0049 05 09    GREF 09 ; *last*@root
-      004b 10       PUSH
-      004c 05 0c    GREF 0c ; eval@root
-      004e 0c 01    CALL 01
-      0050 10       PUSH
-      0051 05 0d    GREF 0d ; write@root
-      0053 0c 01    CALL 01
-      0055 03 00 62 BR 0062
-      0058 0b 00 62 SAVE 0062
-      005b 05 09    GREF 09 ; *last*@root
-      005d 10       PUSH
-      005e 05 0c    GREF 0c ; eval@root
-      0060 0c 01    CALL 01
-      0062 05 0e    GREF 0e ; *toplev*@root
-      0064 0c 00    CALL 00
-    */
+    //  0000 12 01    FRAME 01
+    //  0002 1a       ALAST
+    //  0003 05 03    GREF 15 ; prompt?@root
+    //  0005 02 00 22 BRF 0022
+    //  0008 0b 00 0f SAVE 000f
+    //  000b 05 04    GREF 04 ; newline@root
+    //  000d 0c 00    CALL 00
+    //  000f 0b 00 18 SAVE 0018
+    //  0012 50       current-module
+    //  0013 10       PUSH
+    //  0014 05 05    GREF 05 ; display@root
+    //  0016 0c 01    CALL 01
+    //  0018 0b 00 22 SAVE 0022
+    //  001b 04 06    LIT 06 ; "> "
+    //  001d 10       PUSH
+    //  001e 05 05    GREF 05 ; display@root
+    //  0020 0c 01    CALL 01
+    //  0022 0b 00 2c SAVE 002c
+    //  0025 05 07    GREF 07 ; *FILE-INPUT*@root
+    //  0027 10       PUSH
+    //  0028 05 08    GREF 08 ; read@root
+    //  002a 0c 01    CALL 01
+    //  002c 06 09    GSET 09 ; *last*@root
+    //  002e 05 0a    GREF 0a ; **eof**@root
+    //  0030 10       PUSH
+    //  0031 05 09    GREF 09 ; *last*@root
+    //  0033 1f       eq
+    //  0034 02 00 3e BRF 003e
+    //  0037 0b 00 3e SAVE 003e
+    //  003a 05 0b    GREF 0b ; exit@root
+    //  003c 0c 00    CALL 00
+    //  003e 05 03    GREF 03 ; prompt?@root
+    //  0040 02 00 58 BRF 0058
+    //  0043 0b 00 55 SAVE 0055
+    //  0046 0b 00 50 SAVE 0050
+    //  0049 05 09    GREF 09 ; *last*@root
+    //  004b 10       PUSH
+    //  004c 05 0c    GREF 0c ; eval@root
+    //  004e 0c 01    CALL 01
+    //  0050 10       PUSH
+    //  0051 05 0d    GREF 0d ; write@root
+    //  0053 0c 01    CALL 01
+    //  0055 03 00 62 BR 0062
+    //  0058 0b 00 62 SAVE 0062
+    //  005b 05 09    GREF 09 ; *last*@root
+    //  005d 10       PUSH
+    //  005e 05 0c    GREF 0c ; eval@root
+    //  0060 0c 01    CALL 01
+    //  0062 05 0e    GREF 0e ; *toplev*@root
+    //  0064 0c 00    CALL 00
 
     pb(OP_FRAME);
     pb(0x01);

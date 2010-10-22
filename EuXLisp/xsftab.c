@@ -35,7 +35,9 @@ int csubrcnt = 17;              // number of CSUBR functions + xsubrcnt
 
 typedef LVAL(*FP) ();
 
-// built-in functions
+///-----------------------------------------------------------------------------
+/// Built-in functions
+///-----------------------------------------------------------------------------
 FUNDEF funtab[] =
 {
     // functions that call eval or apply (# must match xsubrcnt)
@@ -456,10 +458,12 @@ FUNDEF funtab[] =
     {0, 0}      // end of table marker
 };
 
-/* Notes:
-   (1) This version only supports integers and reals.
-*/
+// Notes:
+// (1) This version only supports integers and reals.
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 // xstdin - get the stdin stream
 LVAL xstdin()
 {

@@ -48,6 +48,9 @@ extern LVAL s_keyword, s_telos_error, s_incompatible_md;
 
 static char *expect_class = "<simple-class>";
 
+///-----------------------------------------------------------------------------
+/// Functions
+///-----------------------------------------------------------------------------
 LVAL class_of(LVAL obj)
 {
     // small integers
