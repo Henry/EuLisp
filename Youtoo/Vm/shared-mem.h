@@ -18,19 +18,17 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: global variables
+/// Title: Global variables
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef SHARED_MEM_H
 #define SHARED_MEM_H
 
 ///-----------------------------------------------------------------------------
 /// Global variable access and declaration
 ///-----------------------------------------------------------------------------
-
 #define DEFINE_PGLOBAL(loc) LispRef loc
 #define PGLOBAL_EXTERN(loc) extern LispRef loc
 #define PGLOBAL_EXTERN_CLASS(loc) extern LispRef loc[]

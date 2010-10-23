@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: global register declaration/initialization
+/// Title: global register declaration/initialization
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -27,7 +27,6 @@
 ///-----------------------------------------------------------------------------
 /// Global registers and their initialisation
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "notify.h"
@@ -47,7 +46,6 @@
 ///-----------------------------------------------------------------------------
 /// Global Register set
 ///-----------------------------------------------------------------------------
-
 static RegisterSet tame_regs_struct;
 RegisterRef tame_regs = &tame_regs_struct;
 
@@ -55,7 +53,6 @@ RegisterRef tame_regs = &tame_regs_struct;
 ///-----------------------------------------------------------------------------
 /// Define registers
 ///-----------------------------------------------------------------------------
-
 eul_allocate_static_nil(glob_nil);
 DEFINE_PGLOBAL(glob_symbols);
 DEFINE_PGLOBAL(glob_keywords);
@@ -90,7 +87,6 @@ eul_allocate_static_class(glob_table_class);
 ///-----------------------------------------------------------------------------
 /// Initialize registers
 ///-----------------------------------------------------------------------------
-
 void eul_initialize_register()
 {
     INITIALISE_REGISTER_SET(tame_regs);
@@ -101,8 +97,12 @@ void eul_initialize_register()
     eul_allocate_table(PGLOBAL(glob_symbols), eul_nil);
     eul_allocate_table(PGLOBAL(glob_keywords), eul_nil);
     eul_allocate_table(PGLOBAL(glob_modules), eul_nil);
-    eul_allocate_object(PGLOBAL(glob_callbacks),
-        PGLOBAL(glob_vector_class), HIGHEST_CB, eul_nil);
+    eul_allocate_object
+    (
+        PGLOBAL(glob_callbacks),
+        PGLOBAL(glob_vector_class),
+        HIGHEST_CB, eul_nil
+    );
     eul_intern_symbol(eul_true, "t");
     PGLOBAL(glob_encl_lambda) = eul_nil;
 }

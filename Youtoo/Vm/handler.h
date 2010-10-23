@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: handlers (int*, double* and string*)
+/// Title: Handlers (int*, double* and string*)
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// HANDLER access
 ///-----------------------------------------------------------------------------
-
 #define HANDLER_SIZE (1)
 #define HANDLER_HANDLE(x) (slot_ref((x), 0))
 
@@ -57,7 +56,6 @@
 ///-----------------------------------------------------------------------------
 /// Handler allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_int_ref(loc, x)                                           \
     eul_allocate_object(loc, PGLOBAL(glob_fpi_ref_class), HANDLER_SIZE,        \
     (LispRef) x)

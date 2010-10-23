@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: initialization of the bytecode interpreter
+/// Title: Initialization of the bytecode interpreter
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "init.h"
@@ -47,7 +46,6 @@ extern long eul_profiling_table[];
 ///-----------------------------------------------------------------------------
 /// Initialise the system
 ///-----------------------------------------------------------------------------
-
 int EUL_INITIALIZE(int argc, char **argv)
 {
     if (eul_initialize_runtime_system() != 1)
@@ -105,7 +103,6 @@ int EUL_INITIALIZE(int argc, char **argv)
 
     return 1;
 }
-
 
 int eul_initialize_runtime_system()
 {

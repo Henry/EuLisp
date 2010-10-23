@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: built-in foreign functions
+/// Title: Built-in foreign functions
 ///  Library: boot, telos, level1, eval, youtoo
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "eulisp.h"
 
 ///-----------------------------------------------------------------------------
@@ -60,8 +59,6 @@ LispRef c_strn_as_eul_str(char *str, int n)
 
 LispRef eul_int_as_hex_str(int x)
 {
-    // printf("eul_int_as_hex_str %d\n", x); fflush(stdout);
-
     if (x < 0)
     {
         if (x < -127)

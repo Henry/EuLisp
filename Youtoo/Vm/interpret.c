@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: interpreter function
+/// Title: Interpreter function
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind, Keith Playford
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "notify.h"
@@ -55,7 +54,6 @@
 ///-----------------------------------------------------------------------------
 /// Instrumentation
 ///-----------------------------------------------------------------------------
-
 #ifdef INSTRUMENTED
 ptrInt eul_allocated_memory = 0;
 ptrInt eul_gf_calls = 0;
@@ -73,7 +71,6 @@ long eul_profiling_table[HIGHEST_BYTE_CODE + 1];
 ///-----------------------------------------------------------------------------
 /// Get inlined arguments when little endian
 ///-----------------------------------------------------------------------------
-
 #if BYTE_ORDER == LITTLE_ENDIAN
 
 ptrInt get_fixarg_fn(Instruction ** pcptr, uPtrInt rel_reg_pc_arg)
@@ -105,7 +102,6 @@ ptrInt get_fixarg_fn(Instruction ** pcptr, uPtrInt rel_reg_pc_arg)
 ///-----------------------------------------------------------------------------
 /// Main emulation loop
 ///-----------------------------------------------------------------------------
-
 ptrInt interpret(RegisterRef set)
 {
     #if BYTE_ORDER == LITTLE_ENDIAN

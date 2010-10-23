@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: fast method caching
+/// Title: fast method caching
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -36,11 +36,8 @@
             if (slot_ref(gf_dom, i) != eul_nil)                                \
             {                                                                  \
                 LispRef arg;                                                   \
-                REFVAL(reg_arg_count-i-1, arg);                                \
+                REFVAL(reg_arg_count - i - 1, arg);                            \
                 slot_ref(loc, i) = eul_class_of(arg);                          \
-                /* fprintf(stderr, "val_dom[%d, %d]: ", i, reg_arg_count-i-1); */ \
-                /* fprint_ref(stderr, slot_ref(eul_class_of(arg), 0)); */      \
-                /* putc(' ', stderr); fprint_ref(stderr, arg);  putc('\n', stderr); */ \
             }                                                                  \
         }                                                                      \
     }
@@ -85,13 +82,19 @@
         {                                                                      \
             /* Allocate method cache */                                        \
             n = min;                                                           \
-            eul_allocate_object(loc, PGLOBAL(glob_vector_class),               \
-            (min+GF_METHOD_CACHE_HEADER_SIZE), eul_nil);                       \
+            eul_allocate_object                                                \
+            (                                                                  \
+                loc,                                                           \
+                PGLOBAL(glob_vector_class),                                    \
+                (min + GF_METHOD_CACHE_HEADER_SIZE),                           \
+                eul_nil                                                        \
+            );                                                                 \
             GF_METHOD_CACHE(gf) = loc;                                         \
         }                                                                      \
         else                                                                   \
         {                                                                      \
-            n = eul_int_as_c_int(object_size(loc))-GF_METHOD_CACHE_HEADER_SIZE; \
+            n = eul_int_as_c_int(object_size(loc))                             \
+              - GF_METHOD_CACHE_HEADER_SIZE;                                   \
         }                                                                      \
     }
 
@@ -109,9 +112,6 @@
                 }                                                              \
             }                                                                  \
         }                                                                      \
-        /* fprintf(stderr, "GF_SIG_EQ: n=%d res=%d\n", n, res); */             \
-        /* fprint_ref(stderr, dom1); fprintf(stderr, "\n"); */                 \
-        /* fprint_ref(stderr, dom2); fprintf(stderr, "\n"); */                 \
     }                                                                          \
 
 
@@ -140,8 +140,7 @@
         ptrInt n;                                                              \
         GF_GET_METHOD_CACHE(vec, n, gf, GF_DEFAULT_METHOD_CACHE_SIZE);         \
         GF_GET_VALUE_DOMAIN(val_dom, gf_dom, m);                               \
-        /* k = i = (((ptrInt) key)%n)+GF_METHOD_CACHE_HEADER_SIZE; */          \
-        ptrInt i = (((ptrInt) key)&(n-1))+GF_METHOD_CACHE_HEADER_SIZE;         \
+        ptrInt i = (((ptrInt) key)&(n - 1)) + GF_METHOD_CACHE_HEADER_SIZE;     \
         ptrInt k = i;                                                          \
                                                                                \
         ptrInt res;                                                            \
@@ -155,25 +154,31 @@
                 tab_val_dom = TABLE_ENTRY_KEY(entry);                          \
                 GF_SIG_EQ(res, tab_val_dom, val_dom, m);                       \
                 if (res)                                                       \
+                {                                                              \
                     break;                                                     \
+                }                                                              \
                 i++;                                                           \
             }                                                                  \
             else                                                               \
             {                                                                  \
                 break;                                                         \
             }                                                                  \
-            if (i==n+GF_METHOD_CACHE_HEADER_SIZE)                              \
+            if (i == n + GF_METHOD_CACHE_HEADER_SIZE)                          \
             {                                                                  \
-                i = 0+GF_METHOD_CACHE_HEADER_SIZE;                             \
+                i = 0 + GF_METHOD_CACHE_HEADER_SIZE;                           \
             }                                                                  \
-            if (i==k)                                                          \
+            if (i == k)                                                        \
             {                                                                  \
-                eul_allocate_object(vec, PGLOBAL(glob_vector_class),           \
-                (2*n)+GF_METHOD_CACHE_HEADER_SIZE, eul_nil);                   \
+                eul_allocate_object                                            \
+                (                                                              \
+                    vec,                                                       \
+                    PGLOBAL(glob_vector_class),                                \
+                    (2*n) + GF_METHOD_CACHE_HEADER_SIZE,                       \
+                    eul_nil                                                    \
+                );                                                             \
                 GF_METHOD_CACHE(gf) = vec;                                     \
                 WHEN_INSTRUMENTED(eul_gf_cache_exts++; )                       \
-                /* i = (((ptrInt) key)%(2*n))+GF_METHOD_CACHE_HEADER_SIZE; */  \
-                i = (((ptrInt) key)&((2*n)-1))+GF_METHOD_CACHE_HEADER_SIZE;    \
+                i = (((ptrInt) key)&((2*n) - 1)) + GF_METHOD_CACHE_HEADER_SIZE;  \
                 entry = eul_nil;                                               \
                 break;                                                         \
             }                                                                  \
@@ -206,7 +211,9 @@
         GF_GET_METHOD_CACHE(vec, n, gf, GF_DEFAULT_METHOD_CACHE_SIZE);         \
         GF_GET_VALUE_DOMAIN(val_dom, gf_dom, m);                               \
         if (GF_METHOD_CACHE_INDEX(vec) == eul_nil)                             \
-            k = i = 0+GF_METHOD_CACHE_HEADER_SIZE;                             \
+        {                                                                      \
+            k = i = 0 + GF_METHOD_CACHE_HEADER_SIZE;                           \
+        }                                                                      \
         else                                                                   \
         {                                                                      \
             i = eul_int_as_c_int(GF_METHOD_CACHE_INDEX(vec));                  \
@@ -219,7 +226,7 @@
                 {                                                              \
                     goto goon;                                                 \
                 }                                                              \
-                k = i = 0+GF_METHOD_CACHE_HEADER_SIZE;                         \
+                k = i = 0 + GF_METHOD_CACHE_HEADER_SIZE;                       \
             }                                                                  \
         }                                                                      \
         while (1)                                                              \
@@ -239,17 +246,17 @@
             {                                                                  \
                 break;                                                         \
             }                                                                  \
-            if (i==n+GF_METHOD_CACHE_HEADER_SIZE)                              \
+            if (i == n + GF_METHOD_CACHE_HEADER_SIZE)                          \
             {                                                                  \
-                i = 0+GF_METHOD_CACHE_HEADER_SIZE;                             \
+                i = 0 + GF_METHOD_CACHE_HEADER_SIZE;                           \
             }                                                                  \
-            if (i==k)                                                          \
+            if (i == k)                                                        \
             {                                                                  \
                 WHEN_INSTRUMENTED(eul_gf_cache_exts++; )                       \
                 eul_allocate_object(vec, PGLOBAL(glob_vector_class),           \
-                (2*n)+GF_METHOD_CACHE_HEADER_SIZE, eul_nil);                   \
+                (2*n) + GF_METHOD_CACHE_HEADER_SIZE, eul_nil);                 \
                 GF_METHOD_CACHE(gf) = vec;                                     \
-                i = 0+GF_METHOD_CACHE_HEADER_SIZE;                             \
+                i = 0 + GF_METHOD_CACHE_HEADER_SIZE;                           \
                 entry = eul_nil;                                               \
                 break;                                                         \
             }                                                                  \
@@ -276,13 +283,13 @@ goon:                                                                          \
     {                                                                          \
         LispRef vec, val_dom;                                                  \
         ptrInt n;                                                              \
-        ptrInt i = key+GF_METHOD_CACHE_HEADER_SIZE;                            \
+        ptrInt i = key + GF_METHOD_CACHE_HEADER_SIZE;                          \
         LispRef gf_dom = GF_DOMAIN(gf);                                        \
         ptrInt m = eul_int_as_c_int(object_size(gf_dom));                      \
         GF_GET_METHOD_CACHE(vec, n, gf, 1);                                    \
         /* fprintf(stderr, "dummy cache: "); fprint_ref(stderr, vec); */       \
         GF_GET_VALUE_DOMAIN(val_dom, gf_dom, m);                               \
-        i = key+GF_METHOD_CACHE_HEADER_SIZE;                                   \
+        i = key + GF_METHOD_CACHE_HEADER_SIZE;                                 \
         GF_METHOD_CACHE_VALUE_DOMAIN(vec) = val_dom;                           \
         GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_int(i);                      \
         gf = GF_DISC_FN(gf);                                                   \
@@ -292,7 +299,7 @@ goon:                                                                          \
     {                                                                          \
         LispRef vec, val_dom, entry, tab_val_dom, meth_funs;                   \
         ptrInt n, i, res=0;                                                    \
-        i = key+GF_METHOD_CACHE_HEADER_SIZE;                                   \
+        i = key + GF_METHOD_CACHE_HEADER_SIZE;                                 \
         GF_GET_METHOD_CACHE(vec, n, gf, GF_DEFAULT_METHOD_CACHE_SIZE);         \
         GF_GET_VALUE_DOMAIN##m(val_dom);                                       \
         if ((entry = slot_ref(vec, i)) != eul_nil)                             \
@@ -320,10 +327,11 @@ goon:                                                                          \
         ptrInt ii = GF_METHOD_CACHE_HEADER_SIZE;                               \
         LispRef cache = GF_METHOD_CACHE(gf);                                   \
         LispRef gf_name = LAMBDA_NAME(gf);                                     \
-        ptrInt nn = eul_int_as_c_int(object_size(cache))-GF_METHOD_CACHE_HEADER_SIZE; \
+        ptrInt nn = eul_int_as_c_int(object_size(cache))                       \
+                  - GF_METHOD_CACHE_HEADER_SIZE;                               \
         ptrInt arity = eul_int_as_c_int(object_size(val_dom));                 \
                                                                                \
-        while (ii<nn+GF_METHOD_CACHE_HEADER_SIZE)                              \
+        while (ii < nn + GF_METHOD_CACHE_HEADER_SIZE)                          \
         {                                                                      \
             if (slot_ref(cache, ii++) != eul_nil)                              \
             {                                                                  \
@@ -347,7 +355,7 @@ goon:                                                                          \
         }                                                                      \
         fprintf(stderr, " %d %d %d %d %d %d\n",                                \
         m, cache_entries, nn, eul_gf_cache_exts, eul_gf_cache_misses,          \
-        probe_depth-1);                                                        \
+        probe_depth - 1);                                                      \
     }
 
 ///-----------------------------------------------------------------------------

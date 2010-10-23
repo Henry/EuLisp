@@ -18,17 +18,17 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: instruction set of the bytecode interpreter
+/// Title: Instruction set of the bytecode interpreter
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef BYTECODE_H
 #define BYTECODE_H
+
 ///-----------------------------------------------------------------------------
 /// Instruction case macro
 ///-----------------------------------------------------------------------------
-
 #ifndef WITH_TRACE
 
 #ifdef WITH_LABELS
@@ -98,7 +98,6 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 /// Setup lambda context
 ///-----------------------------------------------------------------------------
-
 #define SET_LAMBDA_CONTEXT()                                                   \
     reg_env = LAMBDA_ENV(reg_arg_operator);                                    \
     reg_current_cv = (Instruction *) LAMBDA_CODE(reg_arg_operator);            \
@@ -108,7 +107,6 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 /// Get inlined argruments
 ///-----------------------------------------------------------------------------
-
 #define get_unsigned_bytearg() (*((unsigned char *)(++reg_pc)))
 #define get_signed_bytearg() (*((signed char *)(++reg_pc)))
 
@@ -129,7 +127,6 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 /// These variables are used in nearly all instruction definitions
 ///-----------------------------------------------------------------------------
-
 #define DECLARE_BC_VARIABLES()                                                 \
     LispRef arg1, arg2, arg3, arg4; /* Stack-passed arguments */               \
     LispRef tmp1, tmp2, tmp3;       /* Intermediate results */                 \
@@ -141,7 +138,6 @@ int eul_trace=0;
 ///-----------------------------------------------------------------------------
 /// Define instruction NOP
 ///-----------------------------------------------------------------------------
-
 #define BC_NOP 0
 #define BCA_NOP()                                                              \
     ++reg_pc;                                                                  \
@@ -154,7 +150,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (allocate-object) (class, fpi)->(obj)
-
 #define BC_PRIMITIVE_ALLOCATE 1
 #define BCA_PRIMITIVE_ALLOCATE()                                               \
     POPVAL1(arg2);                                                             \
@@ -164,7 +159,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (primitive-ref) (obj1, fpi)->(obj2)
-
 #define BC_PRIMITIVE_REF 2
 #define BCA_PRIMITIVE_REF()                                                    \
     POPVAL1(arg2);                                                             \
@@ -175,13 +169,12 @@ int eul_trace=0;
         PUSHVAL1(arg2); ,                                                      \
         CB_BAD_SLOT_ACCESS,                                                    \
         2                                                                      \
-    )                                                                          \
+    );                                                                         \
     LVPEEKVAL() = slot_ref(LVPEEKVAL(), fpi_value(arg2));                      \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (primitive-relative-ref) (obj1, fpi, class)->(obj2)
-
 #define BC_PRIMITIVE_RELATIVE_REF 8
 #define BCA_PRIMITIVE_RELATIVE_REF()                                           \
     POPVAL1(arg3);                                                             \
@@ -190,45 +183,50 @@ int eul_trace=0;
     CALLBACK_TRAP                                                              \
     (                                                                          \
         (fpi_value(object_size(LVPEEKVAL())) > i),                             \
-        PUSHVAL1(c_int_as_eul_int(i)); ,                                       \
+        PUSHVAL1(c_int_as_eul_int(i));,                                        \
         CB_BAD_SLOT_ACCESS,                                                    \
         2                                                                      \
-    )                                                                          \
+    );                                                                         \
     LVPEEKVAL() = slot_ref(LVPEEKVAL(), i);                                    \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (set-primitive-ref) (obj1, fpi, ob2)->()
-
 #define BC_SET_PRIMITIVE_REF 3
 #define BCA_SET_PRIMITIVE_REF()                                                \
     POPVAL3(arg3, arg2, arg1);                                                 \
-    CALLBACK_TRAP(((!is_immediate(arg1)) &&                                    \
-    (fpi_value(object_size(arg1)) > fpi_value(arg2))),                         \
-    {PUSHVAL1(arg1); PUSHVAL1(arg2); PUSHVAL1(arg3); },                        \
-    CB_BAD_SLOT_ACCESS, 3)                                                     \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        ((!is_immediate(arg1))                                                 \
+     && (fpi_value(object_size(arg1)) > fpi_value(arg2))),                     \
+        {PUSHVAL1(arg1); PUSHVAL1(arg2); PUSHVAL1(arg3);},                     \
+        CB_BAD_SLOT_ACCESS,                                                    \
+        3                                                                      \
+    );                                                                         \
     slot_ref(arg1, fpi_value(arg2)) = arg3;                                    \
     PUSHVAL1(arg3);                                                            \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (set-primitive-relative-ref) (obj1, fpi, ob2, class)->(obj2)
-
 #define BC_SET_PRIMITIVE_RELATIVE_REF 9
 #define BCA_SET_PRIMITIVE_RELATIVE_REF()                                       \
     POPVAL1(arg4);                                                             \
     POPVAL3(arg3, arg2, arg1);                                                 \
     ptrInt i = (fpi_value(slot_ref(arg4, 1)) - fpi_value(arg2)) - 1;           \
-    CALLBACK_TRAP((fpi_value(object_size(arg1)) > i),                          \
-    {PUSHVAL1(arg1); PUSHVAL1(c_int_as_eul_int(i));                            \
-        PUSHVAL1(arg3); }, CB_BAD_SLOT_ACCESS, 3)                              \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        (fpi_value(object_size(arg1)) > i),                                    \
+        {PUSHVAL1(arg1); PUSHVAL1(c_int_as_eul_int(i));PUSHVAL1(arg3);},       \
+        CB_BAD_SLOT_ACCESS,                                                    \
+        3                                                                      \
+    );                                                                         \
     slot_ref(arg1, i) = arg3;                                                  \
-                      PUSHVAL1(arg3);                                          \
-                      ++reg_pc;
+    PUSHVAL1(arg3);                                                            \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (object-class) (obj)->(class)
-
 #define BC_PRIMITIVE_CLASS_OF 4
 #define BCA_PRIMITIVE_CLASS_OF()                                               \
     LVPEEKVAL() = eul_class_of(LVPEEKVAL());                                   \
@@ -236,19 +234,21 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (set-object-class) (obj, class)->()
-
 #define BC_SET_PRIMITIVE_CLASS_OF 5
 #define BCA_SET_PRIMITIVE_CLASS_OF()                                           \
     POPVAL2(arg2, arg1);                                                       \
-    CALLBACK_TRAP(!is_immediate(arg1), PUSHVAL1(arg1); PUSHVAL1(arg2); ,       \
-    CB_BAD_SET_CLASS_OF, 2)                                                    \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        !is_immediate(arg1), PUSHVAL1(arg1); PUSHVAL1(arg2);,                  \
+        CB_BAD_SET_CLASS_OF,                                                   \
+        2                                                                      \
+    );                                                                         \
     object_class(arg1) = arg2;                                                 \
-                       PUSHVAL1(arg2);                                         \
-                       ++reg_pc;
+    PUSHVAL1(arg2);                                                            \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (object-size) (obj)->(fpi)
-
 #define BC_PRIMITIVE_SIZE 6
 #define BCA_PRIMITIVE_SIZE()                                                   \
     LVPEEKVAL() = computed_object_size(LVPEEKVAL());                           \
@@ -261,33 +261,44 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (string-ref) (str, fpi)->(char)
-
 #define BC_STRING_REF 11
 #define BCA_STRING_REF()                                                       \
     POPVAL1(arg2);                                                             \
     fix1 = fpi_value(arg2);                                                    \
-    CALLBACK_TRAP((eul_is_string(LVPEEKVAL()) && eul_is_int(arg2) &&           \
-    (fix1 < fpi_value(eul_string_size(LVPEEKVAL())))),                         \
-    PUSHVAL1(arg2); , CB_BAD_STRING_ACCESS, 2)                                 \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        (                                                                      \
+            eul_is_string(LVPEEKVAL())                                         \
+         && eul_is_int(arg2)                                                   \
+         && (fix1 < fpi_value(eul_string_size(LVPEEKVAL())))                   \
+        ),                                                                     \
+        PUSHVAL1(arg2);,                                                       \
+        CB_BAD_STRING_ACCESS,                                                  \
+        2                                                                      \
+    );                                                                         \
     fix1 = (ptrInt) eul_string_ref(LVPEEKVAL(), fix1);                         \
     eul_allocate_char(LVPEEKVAL(), fix1);                                      \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (set-string-ref) (str, fpi, char)->(char)
-
 #define BC_SET_STRING_REF 12
 #define BCA_SET_STRING_REF()                                                   \
     POPVAL3(arg3, arg2, arg1);                                                 \
     fix1 = fpi_value(arg2);                                                    \
-    CALLBACK_TRAP((eul_is_string(arg1) && eul_is_int(arg2) &&                  \
-    eul_is_char(arg3) &&                                                       \
-    (fix1 < fpi_value(eul_string_size(arg1)))),                                \
-    PUSHVAL1(arg1); PUSHVAL1(arg2); PUSHVAL1(arg3); ,                          \
-    CB_BAD_STRING_ACCESS, 3)                                                   \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        (eul_is_string(arg1)                                                   \
+     && eul_is_int(arg2)                                                       \
+     && eul_is_char(arg3)                                                      \
+     && (fix1 < fpi_value(eul_string_size(arg1)))),                            \
+        PUSHVAL1(arg1); PUSHVAL1(arg2); PUSHVAL1(arg3);,                       \
+        CB_BAD_STRING_ACCESS,                                                  \
+        3                                                                      \
+    );                                                                         \
     eul_string_ref(arg1, fix1) = eul_char_as_c_char(arg3);                     \
-                               PUSHVAL1(arg3);                                 \
-                               ++reg_pc;
+    PUSHVAL1(arg3);                                                            \
+    ++reg_pc;
 
 
 ///-----------------------------------------------------------------------------
@@ -307,11 +318,10 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (car) (cons)->(obj)
-
 #define BC_THE_CAR 16
 #define BCA_THE_CAR()                                                          \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+0, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 0, 1);                   \
     LVPEEKVAL() = eul_car(arg1);                                               \
     ++reg_pc;
 
@@ -319,21 +329,22 @@ int eul_trace=0;
 #define BCA_THE_CAR2()                                                         \
     /* Fast CommonLisp compatibility */                                        \
     if ((arg1 = LVPEEKVAL()) == eul_nil)                                       \
+    {                                                                          \
         ++reg_pc;                                                              \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+0, 1)                  \
+        CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 0, 1);               \
         LVPEEKVAL() = eul_car(arg1);                                           \
         ++reg_pc;                                                              \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (cdr) (cons)->(obj)
-
 #define BC_THE_CDR 17
 #define BCA_THE_CDR()                                                          \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+1, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 1, 1);                   \
     LVPEEKVAL() = eul_cdr(arg1);                                               \
     ++reg_pc;
 
@@ -341,97 +352,96 @@ int eul_trace=0;
 #define BCA_THE_CDR2()                                                         \
     /* Fast CommonLisp compatibility */                                        \
     if ((arg1 = LVPEEKVAL()) == eul_nil)                                       \
+    {                                                                          \
         ++reg_pc;                                                              \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+0, 1)                  \
+        CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 0, 1);               \
         LVPEEKVAL() = eul_cdr(arg1);                                           \
         ++reg_pc;                                                              \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (c*r) (cons)->(obj)
-
 #define BC_THE_CAAR 114
 #define BCA_THE_CAAR()                                                         \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+1, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 1, 1);                   \
     tmp1 = eul_car(arg1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS + 1, 1);  \
     LVPEEKVAL() = eul_car(tmp1);                                               \
     ++reg_pc;
 
 #define BC_THE_CADR 115
 #define BCA_THE_CADR()                                                         \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+1, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 1, 1);                   \
     tmp1 = eul_cdr(arg1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS + 1, 1);  \
     LVPEEKVAL() = eul_car(tmp1);                                               \
     ++reg_pc;
 
 #define BC_THE_CDAR 116
 #define BCA_THE_CDAR()                                                         \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+1, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 1, 1);                   \
     tmp1 = eul_car(arg1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS + 1, 1);  \
     LVPEEKVAL() = eul_cdr(tmp1);                                               \
     ++reg_pc;
 
 #define BC_THE_CDDR 117
 #define BCA_THE_CDDR()                                                         \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+1, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 1, 1);                   \
     tmp1 = eul_cdr(arg1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS + 1, 1);  \
     LVPEEKVAL() = eul_cdr(tmp1);                                               \
     ++reg_pc;
 
 #define BC_THE_CADDR 118
 #define BCA_THE_CADDR()                                                        \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+1, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 1, 1);                   \
     tmp1 = eul_cdr(arg1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS + 1, 1);  \
     tmp2 = eul_cdr(tmp1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp2), LVPEEKVAL()=tmp2, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp2), LVPEEKVAL()=tmp2, CB_FIRST_CONS + 1, 1);  \
     LVPEEKVAL() = eul_car(tmp2);                                               \
     ++reg_pc;
 
 #define BC_THE_CADDDR 119
 #define BCA_THE_CADDDR()                                                       \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS+1, 1)                      \
+    CALLBACK_TRAP(eul_is_cons(arg1), ,CB_FIRST_CONS + 1, 1);                   \
     tmp1 = eul_cdr(arg1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp1), LVPEEKVAL()=tmp1, CB_FIRST_CONS + 1, 1);  \
     tmp2 = eul_cdr(tmp1);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp2), LVPEEKVAL()=tmp2, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp2), LVPEEKVAL()=tmp2, CB_FIRST_CONS + 1, 1);  \
     tmp3 = eul_cdr(tmp2);                                                      \
-    CALLBACK_TRAP(eul_is_cons(tmp3), LVPEEKVAL()=tmp3, CB_FIRST_CONS+1, 1)     \
+    CALLBACK_TRAP(eul_is_cons(tmp3), LVPEEKVAL()=tmp3, CB_FIRST_CONS + 1, 1);  \
     LVPEEKVAL() = eul_car(tmp3);                                               \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (setter car) (cons, obj)->(obj)
-
 #define BC_SET_CAR 143
 #define BCA_SET_CAR()                                                          \
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), PUSHVAL1(arg2), CB_FIRST_SETTER+3, 2)     \
+    CALLBACK_TRAP(eul_is_cons(arg1), PUSHVAL1(arg2), CB_FIRST_SETTER+3, 2);    \
     eul_car(arg1) = arg2;                                                      \
-                  LVPEEKVAL() = arg2;                                          \
-                  ++reg_pc;
+    LVPEEKVAL() = arg2;                                                        \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (setter cdr) (cons, obj)->(obj)
-
 #define BC_SET_CDR 144
 #define BCA_SET_CDR()                                                          \
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_cons(arg1), PUSHVAL1(arg2), CB_FIRST_SETTER+4, 2)     \
+    CALLBACK_TRAP(eul_is_cons(arg1), PUSHVAL1(arg2), CB_FIRST_SETTER+4, 2);    \
     eul_cdr(arg1) = arg2;                                                      \
     LVPEEKVAL() = arg2;                                                        \
    ++reg_pc;
@@ -443,71 +453,62 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (null) (obj)->(obj)
-
 #define BC_NULLP 18
 #define BCA_NULLP()                                                            \
     LVPEEKVAL() = (eul_null(LVPEEKVAL()) ? eul_true : eul_nil);                \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (consp) (obj)->(obj)
-
+///  (cons?) (obj)->(obj)
 #define BC_CONSP 122
 #define BCA_CONSP()                                                            \
     if (!eul_is_cons(LVPEEKVAL())) LVPEEKVAL() = eul_nil;                      \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (listp) (obj)->(obj)
-
+///  (list?) (obj)->(obj)
 #define BC_LISTP 123
 #define BCA_LISTP()                                                            \
     LVPEEKVAL() = (eul_is_list(LVPEEKVAL()) ? eul_true : eul_nil);             \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (symbolp) (obj)->(obj)
-
+///  (symbol?) (obj)->(obj)
 #define BC_SYMBOLP 124
 #define BCA_SYMBOLP()                                                          \
     if (!eul_is_symbol(LVPEEKVAL())) LVPEEKVAL() = eul_nil;                    \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (stringp) (obj)->(obj)
-
+///  (string?) (obj)->(obj)
 #define BC_STRINGP 125
 #define BCA_STRINGP()                                                          \
     if (!eul_is_string(LVPEEKVAL())) LVPEEKVAL() = eul_nil;                    \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpip) (obj)->(obj)
-
+///  (fpi?) (obj)->(obj)
 #define BC_FPIP 126
 #define BCA_FPIP()                                                             \
     if (!eul_is_int(LVPEEKVAL())) LVPEEKVAL() = eul_nil;                       \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (lambdap) (obj)->(obj)
-
+///  (lambda?) (obj)->(obj)
 #define BC_LAMBDAP 127
 #define BCA_LAMBDAP()                                                          \
     if (!eul_is_lambda(LVPEEKVAL())) LVPEEKVAL() = eul_nil;                    \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (gfp) (obj)->(obj)
-
+///  (gf?) (obj)->(obj)
 #define BC_GFP 128
 #define BCA_GFP()                                                              \
     if (!eul_is_gf(LVPEEKVAL())) LVPEEKVAL() = eul_nil;                        \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (characterp) (obj)->(obj)
-
+///  (character?) (obj)->(obj)
 #define BC_CHARACTERP 129
 #define BCA_CHARACTERP()                                                       \
     if (!eul_is_char(LVPEEKVAL())) LVPEEKVAL() = eul_nil;                      \
@@ -520,23 +521,33 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (setter) (obj)->(obj)
-
 #define BC_SETTER 145
 #define BCA_SETTER()                                                           \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_function(arg1), ,CB_FIRST_SETTER+0, 1)                \
+    CALLBACK_TRAP(eul_is_function(arg1), ,CB_FIRST_SETTER + 0, 1);             \
     LVPEEKVAL() = OPERATOR_SETTER(arg1);                                       \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (setter setter) (obj, obj)->(obj)
-
 #define BC_SET_SETTER 146
 #define BCA_SET_SETTER()                                                       \
     POPVAL1(arg2);                                                             \
-    CALLBACK_TRAP(eul_is_function(arg2), PUSHVAL1(arg2), CB_FIRST_SETTER+1, 2) \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        eul_is_function(arg2),                                                 \
+        PUSHVAL1(arg2),                                                        \
+        CB_FIRST_SETTER + 1,                                                   \
+        2                                                                      \
+    );                                                                         \
     arg1 = LVPEEKVAL();                                                        \
-    CALLBACK_TRAP(eul_is_function(arg1), PUSHVAL1(arg2), CB_FIRST_SETTER+2, 2) \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        eul_is_function(arg1),                                                 \
+        PUSHVAL1(arg2),                                                        \
+        CB_FIRST_SETTER + 2,                                                   \
+        2                                                                      \
+    );                                                                         \
     OPERATOR_SETTER(arg1) = arg2;                                              \
     LVPEEKVAL() = arg2;                                                        \
     ++reg_pc;
@@ -548,7 +559,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-sum) (fpi, fpi)->(fpi)
-
 #define BC_FPI_SUM 20
 #define BCA_FPI_SUM()                                                          \
     register LispRef res;                                                      \
@@ -559,73 +569,122 @@ int eul_trace=0;
         if (eul_is_int(arg2))                                                  \
         {                                                                      \
             eul_allocate_int(res, fpi_value(arg1)+fpi_value(arg2));            \
-            CALLBACK_TRAP(!fpi_value_overflow(res), PUSHVAL1(arg2), CB_SUM_OVERFLOW, 2) \
+            CALLBACK_TRAP                                                      \
+            (                                                                  \
+                !fpi_value_overflow(res),                                      \
+                PUSHVAL1(arg2),                                                \
+                CB_SUM_OVERFLOW,                                               \
+                2                                                              \
+            );                                                                 \
         }                                                                      \
         else if (eul_is_double(arg2))                                          \
         {                                                                      \
-            eul_allocate_double(res, fpi_value(arg1)+eul_double_as_c_double(arg2)) \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                fpi_value(arg1) + eul_double_as_c_double(arg2)                 \
+            );                                                                 \
         }                                                                      \
         else                                                                   \
         {                                                                      \
-            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+0, 2)              \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 0, 2);           \
         }                                                                      \
     }                                                                          \
     else if (eul_is_double(arg1))                                              \
     {                                                                          \
         if (eul_is_int(arg2))                                                  \
         {                                                                      \
-            eul_allocate_double(res, eul_double_as_c_double(arg1)+fpi_value(arg2)) \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1) + fpi_value(arg2)                 \
+            );                                                                 \
         }                                                                      \
         else if (eul_is_double(arg2))                                          \
         {                                                                      \
-            eul_allocate_double(res, eul_double_as_c_double(arg1)+             \
-            eul_double_as_c_double(arg2))                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1) + eul_double_as_c_double(arg2)    \
+            );                                                                 \
         }                                                                      \
         else                                                                   \
         {                                                                      \
-            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+0, 2)              \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 0, 2);           \
         }                                                                      \
     }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+0, 2)                  \
+        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 0, 2);               \
     }                                                                          \
     LVPEEKVAL() = res;                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-difference) (fpi, fpi)->(fpi)
-
 #define BC_FPI_DIFFERENCE 21
 #define BCA_FPI_DIFFERENCE()                                                   \
     register LispRef res;                                                      \
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
     if (eul_is_int(arg1))                                                      \
-        if (eul_is_int(arg2)) {                                                \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
             eul_allocate_int(res, fpi_value(arg1)-fpi_value(arg2));            \
-            CALLBACK_TRAP(!fpi_value_overflow(res), PUSHVAL1(arg2), CB_DIFFERENCE_OVERFLOW, 2) \
-            }                                                                  \
+            CALLBACK_TRAP                                                      \
+            (                                                                  \
+                !fpi_value_overflow(res),                                      \
+                PUSHVAL1(arg2),                                                \
+                CB_DIFFERENCE_OVERFLOW,                                        \
+                2                                                              \
+            );                                                                 \
+        }                                                                      \
         else if (eul_is_double(arg2))                                          \
-            eul_allocate_double(res, fpi_value(arg1)-eul_double_as_c_double(arg2)) \
-            else                                                               \
-                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+1, 2)          \
-                else if (eul_is_double(arg1))                                  \
-                    if (eul_is_int(arg2))                                      \
-                        eul_allocate_double(res, eul_double_as_c_double(arg1)-fpi_value(arg2)) \
-                        else if (eul_is_double(arg2))                          \
-                            eul_allocate_double(res, eul_double_as_c_double(arg1)- \
-                            eul_double_as_c_double(arg2))                      \
-                            else                                               \
-                                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+1, 2) \
-                                else                                           \
-                                    CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+1, 2) \
-                                    LVPEEKVAL() = res;                         \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                fpi_value(arg1) - eul_double_as_c_double(arg2)                 \
+            );                                                                 \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 1, 2);           \
+        }                                                                      \
+    }                                                                          \
+    else if (eul_is_double(arg1))                                              \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1) - fpi_value(arg2)                 \
+            );                                                                 \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1) - eul_double_as_c_double(arg2)    \
+            );                                                                 \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 1, 2);           \
+        }                                                                      \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 1, 2);               \
+    }                                                                          \
+    LVPEEKVAL() = res;                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-product) (fpi, fpi)->(fpi)
-
 #define BC_FPI_PRODUCT 22
 #define BCA_FPI_PRODUCT()                                                      \
     register LispRef res;                                                      \
@@ -633,92 +692,188 @@ int eul_trace=0;
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
     if (eul_is_int(arg1))                                                      \
-        if (eul_is_int(arg2)) {                                                \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
             dbl_res = ((double)fpi_value(arg1))*((double)fpi_value(arg2));     \
-            CALLBACK_TRAP(ABS(dbl_res)<=((double)MAX_FPI),                     \
-            PUSHVAL1(arg2), CB_PRODUCT_OVERFLOW, 2)                            \
+            CALLBACK_TRAP                                                      \
+            (                                                                  \
+                ABS(dbl_res)<=((double)MAX_FPI),                               \
+                PUSHVAL1(arg2),                                                \
+                CB_PRODUCT_OVERFLOW,                                           \
+                2                                                              \
+            );                                                                 \
             eul_allocate_int(res, (ptrInt)dbl_res);                            \
         }                                                                      \
         else if (eul_is_double(arg2))                                          \
-            eul_allocate_double(res, fpi_value(arg1)*eul_double_as_c_double(arg2)) \
-            else                                                               \
-                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+2, 2)          \
-                else if (eul_is_double(arg1))                                  \
-                    if (eul_is_int(arg2))                                      \
-                        eul_allocate_double(res, eul_double_as_c_double(arg1)*fpi_value(arg2)) \
-                        else if (eul_is_double(arg2))                          \
-                            eul_allocate_double(res, eul_double_as_c_double(arg1)* \
-                            eul_double_as_c_double(arg2))                      \
-                            else                                               \
-                                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+2, 2) \
-                                else                                           \
-                                    CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+2, 2) \
-                                    LVPEEKVAL() = res;                         \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                fpi_value(arg1)*eul_double_as_c_double(arg2)                   \
+            );                                                                 \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 2, 2);           \
+        }                                                                      \
+    }                                                                          \
+    else if (eul_is_double(arg1))                                              \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1)*fpi_value(arg2)                   \
+            );                                                                 \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1)*eul_double_as_c_double(arg2)      \
+            );                                                                 \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 2, 2);           \
+        }                                                                      \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH + 2, 2);               \
+    }                                                                          \
+    LVPEEKVAL() = res;                                                         \
     ++reg_pc;
+
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-quotient) (fpi, fpi)->(fpi)
-
 #define BC_FPI_QUOTIENT 23
 #define BCA_FPI_QUOTIENT()                                                     \
     register LispRef res;                                                      \
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
     if (eul_is_int(arg1))                                                      \
-        if (eul_is_int(arg2)) {                                                \
-            CALLBACK_TRAP(fpi_value(arg2), PUSHVAL1(arg2), CB_DIVISION_BY_ZERO, 2) \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            CALLBACK_TRAP                                                      \
+            (                                                                  \
+                fpi_value(arg2),                                               \
+                PUSHVAL1(arg2),                                                \
+                CB_DIVISION_BY_ZERO,                                           \
+                2                                                              \
+            )                                                                  \
             eul_allocate_int(res, fpi_value(arg1)/fpi_value(arg2));            \
         }                                                                      \
         else if (eul_is_double(arg2))                                          \
-            eul_allocate_double(res, fpi_value(arg1)/eul_double_as_c_double(arg2)) \
-            else                                                               \
-                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+3, 2)          \
-                else if (eul_is_double(arg1))                                  \
-                    if (eul_is_int(arg2))                                      \
-                        eul_allocate_double(res, eul_double_as_c_double(arg1)/fpi_value(arg2)) \
-                        else if (eul_is_double(arg2))                          \
-                            eul_allocate_double(res, eul_double_as_c_double(arg1)/ \
-                            eul_double_as_c_double(arg2))                      \
-                            else                                               \
-                                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+3, 2) \
-                                else                                           \
-                                    CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+3, 2) \
-                                    LVPEEKVAL() = res;                         \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                fpi_value(arg1)/eul_double_as_c_double(arg2)                   \
+            );                                                                 \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+3, 2);             \
+        }                                                                      \
+    }                                                                          \
+    else if (eul_is_double(arg1))                                              \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1)/fpi_value(arg2)                   \
+            );                                                                 \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                eul_double_as_c_double(arg1)/eul_double_as_c_double(arg2)      \
+            );                                                                 \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+3, 2);             \
+        }                                                                      \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+3, 2);                 \
+    }                                                                          \
+    LVPEEKVAL() = res;                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-remainder) (fpi, fpi)->(fpi)
-
 #define BC_FPI_REMAINDER 24
 #define BCA_FPI_REMAINDER()                                                    \
     register LispRef res;                                                      \
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
     if (eul_is_int(arg1))                                                      \
-        if (eul_is_int(arg2)) {                                                \
-            CALLBACK_TRAP(fpi_value(arg2), PUSHVAL1(arg2), CB_DIVISION_BY_ZERO, 2) \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            CALLBACK_TRAP                                                      \
+            (                                                                  \
+                fpi_value(arg2),                                               \
+                PUSHVAL1(arg2),                                                \
+                CB_DIVISION_BY_ZERO,                                           \
+                2                                                              \
+            )                                                                  \
             eul_allocate_int(res, fpi_value(arg1)%fpi_value(arg2));            \
         }                                                                      \
         else if (eul_is_double(arg2))                                          \
-            eul_allocate_double(res, fmod(fpi_value(arg1), eul_double_as_c_double(arg2))) \
-            else                                                               \
-                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+4, 2)          \
-                else if (eul_is_double(arg1))                                  \
-                    if (eul_is_int(arg2))                                      \
-                        eul_allocate_double(res, fmod(eul_double_as_c_double(arg1), fpi_value(arg2))) \
-                        else if (eul_is_double(arg2))                          \
-                            eul_allocate_double(res, fmod(eul_double_as_c_double(arg1), \
-                            eul_double_as_c_double(arg2)))                     \
-                            else                                               \
-                                CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+4, 2) \
-                                else                                           \
-                                    CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+4, 2) \
-                                    LVPEEKVAL() = res;                         \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                fmod(fpi_value(arg1), eul_double_as_c_double(arg2))            \
+            );                                                                 \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+4, 2);             \
+        }                                                                      \
+    }                                                                          \
+    else if (eul_is_double(arg1))                                              \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            eul_allocate_double                                                \
+            (                                                                  \
+                res,                                                           \
+                fmod(eul_double_as_c_double(arg1), fpi_value(arg2))            \
+            );                                                                 \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            eul_allocate_double(res, fmod(eul_double_as_c_double(arg1),        \
+            eul_double_as_c_double(arg2)));                                    \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+4, 2);             \
+        }                                                                      \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+4, 2);                 \
+    }                                                                          \
+    LVPEEKVAL() = res;                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-equal) (fpi, fpi)->(bool)
-
 #define BC_FPI_EQUAL 25
 #define BCA_FPI_EQUAL()                                                        \
     POPVAL1(arg2);                                                             \
@@ -793,88 +948,126 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-inc) (fpi)->(bool)
-
 #define BC_FPI_LT 26
 #define BCA_FPI_LT()                                                           \
     POPVAL1(arg2);                                                             \
     arg1 = LVPEEKVAL();                                                        \
     if (eul_is_int(arg1))                                                      \
-        if (eul_is_int(arg2)) {                                                \
-            if (!(fpi_value(arg1) < fpi_value(arg2))) LVPEEKVAL() = eul_nil;   \
-        }                                                                      \
-        else if (eul_is_double(arg2)) {                                        \
-            if (!(fpi_value(arg1) < eul_double_as_c_double(arg2)))             \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            if (!(fpi_value(arg1) < fpi_value(arg2)))                          \
+            {                                                                  \
                 LVPEEKVAL() = eul_nil;                                         \
+            }                                                                  \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            if (!(fpi_value(arg1) < eul_double_as_c_double(arg2)))             \
+            {                                                                  \
+                LVPEEKVAL() = eul_nil;                                         \
+            }                                                                  \
         }                                                                      \
         else                                                                   \
-            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+6, 2)              \
-            else if (eul_is_double(arg1))                                      \
-                if (eul_is_int(arg2)) {                                        \
-                    if (!(eul_double_as_c_double(arg1) < fpi_value(arg2)))     \
-                        LVPEEKVAL() = eul_nil;                                 \
-                }                                                              \
-                else if (eul_is_double(arg2)) {                                \
-                    if (!(eul_double_as_c_double(arg1) < eul_double_as_c_double(arg2))) \
-                        LVPEEKVAL() = eul_nil;                                 \
-                }                                                              \
-                else                                                           \
-                    CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+6, 2)      \
-                    else                                                       \
-                        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+6, 2)  \
-                        ++reg_pc;
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+6, 2);             \
+        }                                                                      \
+    }                                                                          \
+    else if (eul_is_double(arg1))                                              \
+    {                                                                          \
+        if (eul_is_int(arg2))                                                  \
+        {                                                                      \
+            if (!(eul_double_as_c_double(arg1) < fpi_value(arg2)))             \
+            {                                                                  \
+                LVPEEKVAL() = eul_nil;                                         \
+            }                                                                  \
+        }                                                                      \
+        else if (eul_is_double(arg2))                                          \
+        {                                                                      \
+            if (!(eul_double_as_c_double(arg1) < eul_double_as_c_double(arg2)))\
+            {                                                                  \
+                LVPEEKVAL() = eul_nil;                                         \
+            }                                                                  \
+        }                                                                      \
+        else                                                                   \
+        {                                                                      \
+            CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+6, 2);             \
+        }                                                                      \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(arg2), CB_FIRST_ARITH+6, 2);                 \
+    }                                                                          \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-inc) (fpi)->(fpi)
-
 #define BC_FPI_INC 43
 #define BCA_FPI_INC()                                                          \
     register LispRef res;                                                      \
     arg1 = LVPEEKVAL();                                                        \
-    if (eul_is_int(arg1)) {                                                    \
-        eul_allocate_int(res, fpi_value(arg1)+1);                              \
-        CALLBACK_TRAP(!fpi_value_overflow(res), ,CB_SUM_OVERFLOW, 1)           \
-        }                                                                      \
+    if (eul_is_int(arg1))                                                      \
+    {                                                                          \
+        eul_allocate_int(res, fpi_value(arg1) + 1);                            \
+        CALLBACK_TRAP(!fpi_value_overflow(res), ,CB_SUM_OVERFLOW, 1);          \
+    }                                                                          \
     else if (eul_is_double(arg1))                                              \
-        eul_allocate_double(res, eul_double_as_c_double(arg1)+1.0)             \
-        else                                                                   \
-            CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(1)), CB_FIRST_ARITH+0, 2) \
-            LVPEEKVAL() = res;                                                 \
+    {                                                                          \
+        eul_allocate_double(res, eul_double_as_c_double(arg1) + 1.0);          \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(1)), CB_FIRST_ARITH + 0, 2); \
+    }                                                                          \
+    LVPEEKVAL() = res;                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (fpi-dec) (fpi)->(fpi)
-
 #define BC_FPI_DEC 44
 #define BCA_FPI_DEC()                                                          \
     register LispRef res;                                                      \
     arg1 = LVPEEKVAL();                                                        \
-    if (eul_is_int(arg1)) {                                                    \
+    if (eul_is_int(arg1))                                                      \
+    {                                                                          \
         eul_allocate_int(res, fpi_value(arg1)-1);                              \
-        CALLBACK_TRAP(!fpi_value_overflow(res), ,CB_DIFFERENCE_OVERFLOW, 1)    \
-        }                                                                      \
+        CALLBACK_TRAP(!fpi_value_overflow(res), ,CB_DIFFERENCE_OVERFLOW, 1);   \
+    }                                                                          \
     else if (eul_is_double(arg1))                                              \
-        eul_allocate_double(res, eul_double_as_c_double(arg1)-1.0)             \
-        else                                                                   \
-            CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(1)), CB_FIRST_ARITH+1, 2) \
-            LVPEEKVAL() = res;                                                 \
+    {                                                                          \
+        eul_allocate_double(res, eul_double_as_c_double(arg1)-1.0);            \
+    }                                                                          \
+    else                                                                       \
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(1)), CB_FIRST_ARITH + 1, 2); \
+    }                                                                          \
+    LVPEEKVAL() = res;                                                         \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
-///  (fpi-zerop) (fpi)->(bool)
-
+///  (fpi-zero?) (fpi)->(bool)
 #define BC_FPI_ZEROP 45
 #define BCA_FPI_ZEROP()                                                        \
     arg1 = LVPEEKVAL();                                                        \
-    if (eul_is_int(arg1)) {                                                    \
-        if (fpi_value(arg1) != 0) LVPEEKVAL() = eul_nil;                       \
-    }                                                                          \
-    else if (eul_is_double(arg1)) {                                            \
-        if (eul_double_as_c_double(arg1) != 0.0)                               \
+    if (eul_is_int(arg1))                                                      \
+    {                                                                          \
+        if (fpi_value(arg1) != 0)                                              \
+        {                                                                      \
             LVPEEKVAL() = eul_nil;                                             \
+        }                                                                      \
+    }                                                                          \
+    else if (eul_is_double(arg1))                                              \
+    {                                                                          \
+        if (eul_double_as_c_double(arg1) != 0.0)                               \
+        {                                                                      \
+            LVPEEKVAL() = eul_nil;                                             \
+        }                                                                      \
     }                                                                          \
     else                                                                       \
-        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(0)), CB_FIRST_ARITH+5, 2)   \
-        ++reg_pc;
+    {                                                                          \
+        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(0)), CB_FIRST_ARITH+5, 2);  \
+    }                                                                          \
+    ++reg_pc;
 
 
 ///-----------------------------------------------------------------------------
@@ -883,7 +1076,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (stack-ref0) ()->(obj)
-
 #define BC_STACK_REF0 27
 #define BCA_STACK_REF0()                                                       \
     REFVAL(0, tmp1);                                                           \
@@ -892,7 +1084,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (stack-ref1) ()->(obj)
-
 #define BC_STACK_REF1 28
 #define BCA_STACK_REF1()                                                       \
     REFVAL(1, tmp1);                                                           \
@@ -901,7 +1092,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (stack-ref2) ()->(obj)
-
 #define BC_STACK_REF2 29
 #define BCA_STACK_REF2()                                                       \
     PRINT_REG_PC("STACK_REF2");                                                \
@@ -913,7 +1103,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (stack-ref fpi) ()->(obj)
-
 #define BC_STACK_REF 31
 #define BCA_STACK_REF()                                                        \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -923,7 +1112,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (swap) (o1, o2)->(o1, o2)
-
 #define BC_SWAP 30
 #define BCA_SWAP()                                                             \
     tmp1 = LVPEEKVAL();                                                        \
@@ -933,7 +1121,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (value_stack_ref) (obj)->(obj)
-
 #define BC_VALUE_STACK_REF 141
 #define BCA_VALUE_STACK_REF()                                                  \
     arg1 = LVPEEKVAL(); /* index */                                            \
@@ -942,7 +1129,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (set-stack-ref fix) (obj)->()
-
 #define BC_SET_STACK_REF 32
 #define BCA_SET_STACK_REF()                                                    \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -952,7 +1138,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (pop n) (obj*n)->()
-
 #define BC_POP 33
 #define BCA_POP()                                                              \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -961,7 +1146,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (pop*) (obj*)->()
-
 #define BC_POP1 42
 #define BCA_POP1()                                                             \
     POPVALN(1);                                                                \
@@ -969,7 +1153,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (nobble n) (obj*n, obj1)->(obj1)
-
 #define BC_NOBBLE 34
 #define BCA_NOBBLE()                                                           \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -991,7 +1174,7 @@ int eul_trace=0;
     {                                                                          \
         arg1 = LVPEEKVAL();                                                    \
         fix1 = fpi_value(arg1);                                                \
-        REFCONTEXT(fix1+1, tmp1);                                              \
+        REFCONTEXT(fix1 + 1, tmp1);                                            \
         LVPEEKVAL() = tmp1;                                                    \
         ++reg_pc;                                                              \
     }
@@ -1003,19 +1186,16 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (binding-ref fix) ()->(obj)
-
 #define BC_BINDING_REF 36
 #define BCA_BINDING_REF()                                                      \
     PRINT_REG_PC("BINDING_REF");                                               \
     tmp1 = get_binding();                                                      \
     PRINT_REG_PC("BINDING_REF");                                               \
-    /* fprint_ref(stdout, tmp1); fflush(stdout); */                            \
     PUSHVAL1(tmp1);                                                            \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (set-binding-ref fix) (obj)->()
-
 #define BC_SET_BINDING_REF 37
 #define BCA_SET_BINDING_REF()                                                  \
     POPVAL1(tmp1);                                                             \
@@ -1173,53 +1353,79 @@ int eul_trace=0;
 #define BC_REGISTER_REF 40
 #define BCA_REGISTER_REF()                                                     \
     imm1 = get_unsigned_bytearg();                                             \
-    switch (imm1) {                                                            \
-        case REG_CODE_ARGC: PUSHVAL1(eul_argc);                                \
+    switch (imm1)                                                              \
+    {                                                                          \
+        case REG_CODE_ARGC:                                                    \
+            PUSHVAL1(eul_argc);                                                \
             break;                                                             \
-        case REG_CODE_ARGV: PUSHVAL1(eul_argv);                                \
+        case REG_CODE_ARGV:                                                    \
+            PUSHVAL1(eul_argv);                                                \
             break;                                                             \
-        case REG_CODE_BYTEVECTOR_CLASS: PUSHVAL1(PGLOBAL(glob_bytevector_class)); \
+        case REG_CODE_BYTEVECTOR_CLASS:                                        \
+            PUSHVAL1(PGLOBAL(glob_bytevector_class));                          \
             break;                                                             \
-        case REG_CODE_CHAR_CLASS: PUSHVAL1(PGLOBAL(glob_char_class));          \
+        case REG_CODE_CHAR_CLASS:                                              \
+            PUSHVAL1(PGLOBAL(glob_char_class));                                \
             break;                                                             \
-        case REG_CODE_CONS_CLASS: PUSHVAL1(PGLOBAL(glob_cons_class));          \
+        case REG_CODE_CONS_CLASS:                                              \
+            PUSHVAL1(PGLOBAL(glob_cons_class));                                \
             break;                                                             \
-        case REG_CODE_DOUBLE_CLASS: PUSHVAL1(PGLOBAL(glob_double_class));      \
+        case REG_CODE_DOUBLE_CLASS:                                            \
+            PUSHVAL1(PGLOBAL(glob_double_class));                              \
             break;                                                             \
-        case REG_CODE_DOUBLE_REF_CLASS: PUSHVAL1(PGLOBAL(glob_double_ref_class)); \
+        case REG_CODE_DOUBLE_REF_CLASS:                                        \
+            PUSHVAL1(PGLOBAL(glob_double_ref_class));                          \
             break;                                                             \
-     /* case REG_CODE_ENV_CLASS: PUSHVAL1(PGLOBAL(glob_env_class)); break; */  \
-        case REG_CODE_FPI_CLASS: PUSHVAL1(PGLOBAL(glob_fpi_class));            \
+        /*case REG_CODE_ENV_CLASS:                                             \
+            PUSHVAL1(PGLOBAL(glob_env_class));                                 \
+            break;*/                                                           \
+        case REG_CODE_FPI_CLASS:                                               \
+            PUSHVAL1(PGLOBAL(glob_fpi_class));                                 \
             break;                                                             \
-        case REG_CODE_FPI_REF_CLASS: PUSHVAL1(PGLOBAL(glob_fpi_ref_class));    \
+        case REG_CODE_FPI_REF_CLASS:                                           \
+            PUSHVAL1(PGLOBAL(glob_fpi_ref_class));                             \
             break;                                                             \
-        case REG_CODE_GENERIC_CLASS: PUSHVAL1(PGLOBAL(glob_gf_class));         \
+        case REG_CODE_GENERIC_CLASS:                                           \
+            PUSHVAL1(PGLOBAL(glob_gf_class));                                  \
             break;                                                             \
-        case REG_CODE_KEYWORD_CLASS: PUSHVAL1(PGLOBAL(glob_keyword_class));    \
+        case REG_CODE_KEYWORD_CLASS:                                           \
+            PUSHVAL1(PGLOBAL(glob_keyword_class));                             \
             break;                                                             \
-        case REG_CODE_LAMBDA_CLASS: PUSHVAL1(PGLOBAL(glob_lambda_class));      \
+        case REG_CODE_LAMBDA_CLASS:                                            \
+            PUSHVAL1(PGLOBAL(glob_lambda_class));                              \
             break;                                                             \
-        case REG_CODE_METHOD_CLASS: PUSHVAL1(PGLOBAL(glob_method_class));      \
+        case REG_CODE_METHOD_CLASS:                                            \
+            PUSHVAL1(PGLOBAL(glob_method_class));                              \
             break;                                                             \
-        case REG_CODE_NULL_CLASS: PUSHVAL1(PGLOBAL(glob_null_class));          \
+        case REG_CODE_NULL_CLASS:                                              \
+            PUSHVAL1(PGLOBAL(glob_null_class));                                \
             break;                                                             \
-        case REG_CODE_STRING_CLASS: PUSHVAL1(PGLOBAL(glob_string_class));      \
+        case REG_CODE_STRING_CLASS:                                            \
+            PUSHVAL1(PGLOBAL(glob_string_class));                              \
             break;                                                             \
-        case REG_CODE_STRING_REF_CLASS: PUSHVAL1(PGLOBAL(glob_string_ref_class)); \
+        case REG_CODE_STRING_REF_CLASS:                                        \
+            PUSHVAL1(PGLOBAL(glob_string_ref_class));                          \
             break;                                                             \
-        case REG_CODE_SYMBOL_CLASS: PUSHVAL1(PGLOBAL(glob_symbol_class));      \
+        case REG_CODE_SYMBOL_CLASS:                                            \
+            PUSHVAL1(PGLOBAL(glob_symbol_class));                              \
             break;                                                             \
-        case REG_CODE_TABLE_CLASS: PUSHVAL1(PGLOBAL(glob_table_class));        \
+        case REG_CODE_TABLE_CLASS:                                             \
+            PUSHVAL1(PGLOBAL(glob_table_class));                               \
             break;                                                             \
-        case REG_CODE_VECTOR_CLASS: PUSHVAL1(PGLOBAL(glob_vector_class));      \
+        case REG_CODE_VECTOR_CLASS:                                            \
+            PUSHVAL1(PGLOBAL(glob_vector_class));                              \
             break;                                                             \
-        case REG_CODE_CALLBACKS: PUSHVAL1(PGLOBAL(glob_callbacks));            \
+        case REG_CODE_CALLBACKS:                                               \
+            PUSHVAL1(PGLOBAL(glob_callbacks));                                 \
             break;                                                             \
-        case REG_CODE_NEXT_METHODS: PUSHVAL1(reg_next_methods);                \
+        case REG_CODE_NEXT_METHODS:                                            \
+            PUSHVAL1(reg_next_methods);                                        \
             break;                                                             \
-        case REG_CODE_KEYWORDS: PUSHVAL1(eul_keywords);                        \
+        case REG_CODE_KEYWORDS:                                                \
+            PUSHVAL1(eul_keywords);                                            \
             break;                                                             \
-        case REG_CODE_SYMBOLS: PUSHVAL1(eul_symbols);                          \
+        case REG_CODE_SYMBOLS:                                                 \
+            PUSHVAL1(eul_symbols);                                             \
             break;                                                             \
         default: SERIOUS_WARNING1("unknown register %d", imm1);                \
             goto exit;                                                         \
@@ -1228,11 +1434,11 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (set-register byte) (obj)->()
-
 #define BC_SET_REGISTER_REF 41
 #define BCA_SET_REGISTER_REF()                                                 \
     imm1 = get_unsigned_bytearg();                                             \
-    switch (imm1) {                                                            \
+    switch (imm1)                                                              \
+    {                                                                          \
         case REG_CODE_NEXT_METHODS: POPVAL1(reg_next_methods); break;          \
         default: SERIOUS_WARNING1("unknown register %d", imm1); goto exit;     \
     }                                                                          \
@@ -1245,20 +1451,18 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (branch fix) ()->()
-
 #define BC_BRANCH 50
 #define BCA_BRANCH()                                                           \
     Instruction *save_pc = reg_pc;                                             \
-    WHEN_DB(printf("reg_pc 1: %" ptrIntPM "x \n", (ptrInt)reg_pc); )           \
+    WHEN_DB(printf("reg_pc 1: %" ptrIntPM "x \n", (ptrInt)reg_pc); );          \
     fix1 = get_fixarg();                                                       \
-    WHEN_DB(printf("reg_pc 2: %" ptrIntPM "x \n", (ptrInt)reg_pc); )           \
+    WHEN_DB(printf("reg_pc 2: %" ptrIntPM "x \n", (ptrInt)reg_pc); );          \
     NOTIFY1("{BRANCHING: %" ptrIntPM "d}", fix1);                              \
     reg_pc = save_pc + fix1;                                                   \
-    WHEN_DB(printf("reg_pc 3: %" ptrIntPM "x \n", (ptrInt)reg_pc); )
+    WHEN_DB(printf("reg_pc 3: %" ptrIntPM "x \n", (ptrInt)reg_pc); );
 
 ///-----------------------------------------------------------------------------
 ///  (branch-long-neg byte) ()->()
-
 #define BC_BRANCH_LONG_NEG 75
 #define BCA_BRANCH_LONG_NEG()                                                  \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -1267,7 +1471,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (branch-neg byte) ()->()
-
 #define BC_BRANCH_NEG 53
 #define BCA_BRANCH_NEG()                                                       \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -1276,7 +1479,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (branch-pos byte) ()->()
-
 #define BC_BRANCH_POS 54
 #define BCA_BRANCH_POS()                                                       \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -1285,7 +1487,6 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (branch-long-pos byte) ()->()
-
 #define BC_BRANCH_LONG_POS 57
 #define BCA_BRANCH_LONG_POS()                                                  \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
@@ -1294,11 +1495,13 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (branch-true fix) (bool)->()
-
 #define BC_BRANCH_TRUE 51
 #define BCA_BRANCH_TRUE()                                                      \
     POPVAL1(arg1);                                                             \
-    if (!eul_null(arg1)) {BCA_BRANCH()}                                        \
+    if (!eul_null(arg1))                                                       \
+    {                                                                          \
+        BCA_BRANCH();                                                          \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
@@ -1308,64 +1511,74 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (branch-true-long-neg byte) (bool)->()
-
 #define BC_BRANCH_TRUE_LONG_NEG 76
 #define BCA_BRANCH_TRUE_LONG_NEG()                                             \
     POPVAL1(arg1);                                                             \
-    if (!eul_null(arg1)) {BCA_BRANCH_LONG_NEG()}                               \
+    if (!eul_null(arg1))                                                       \
+    {                                                                          \
+        BCA_BRANCH_LONG_NEG();                                                 \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (branch-true-neg byte) (bool)->()
-
 #define BC_BRANCH_TRUE_NEG 58
 #define BCA_BRANCH_TRUE_NEG()                                                  \
     POPVAL1(arg1);                                                             \
-    if (!eul_null(arg1)) {BCA_BRANCH_NEG()}                                    \
+    if (!eul_null(arg1))                                                       \
+    {                                                                          \
+        BCA_BRANCH_NEG();                                                      \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (branch-true-pos byte) (bool)->()
-
 #define BC_BRANCH_TRUE_POS 62
 #define BCA_BRANCH_TRUE_POS()                                                  \
     POPVAL1(arg1);                                                             \
-    if (!eul_null(arg1)) {BCA_BRANCH_POS()}                                    \
+    if (!eul_null(arg1))                                                       \
+    {                                                                          \
+        BCA_BRANCH_POS();                                                      \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (branch-true-long-pos byte) (bool)->()
-
 #define BC_BRANCH_TRUE_LONG_POS 63
 #define BCA_BRANCH_TRUE_LONG_POS()                                             \
     POPVAL1(arg1);                                                             \
-    if (!eul_null(arg1)) {BCA_BRANCH_LONG_POS()}                               \
+    if (!eul_null(arg1))                                                       \
+    {                                                                          \
+        BCA_BRANCH_LONG_POS();                                                 \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (branch-nil fix) (bool)->()
-
 #define BC_BRANCH_NIL 52
 #define BCA_BRANCH_NIL()                                                       \
     POPVAL1(arg1);                                                             \
     WHEN_DB(printf("reg_pc 0: %" ptrIntPM "x \n", (ptrInt)reg_pc); )           \
-    if (eul_null(arg1)) {BCA_BRANCH()}                                         \
+    if (eul_null(arg1))                                                        \
+    {                                                                          \
+        BCA_BRANCH();                                                          \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
@@ -1375,54 +1588,62 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (branch-nil-long-neg byte) (bool)->()
-
 #define BC_BRANCH_NIL_LONG_NEG 77
 #define BCA_BRANCH_NIL_LONG_NEG()                                              \
     POPVAL1(arg1);                                                             \
-    if (eul_null(arg1)) {BCA_BRANCH_LONG_NEG()}                                \
+    if (eul_null(arg1))                                                        \
+    {                                                                          \
+        BCA_BRANCH_LONG_NEG();                                                 \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (branch-nil-neg byte) (bool)->()
-
 #define BC_BRANCH_NIL_NEG 64
 #define BCA_BRANCH_NIL_NEG()                                                   \
     POPVAL1(arg1);                                                             \
-    if (eul_null(arg1)) {BCA_BRANCH_NEG()}                                     \
+    if (eul_null(arg1))                                                        \
+    {                                                                          \
+        BCA_BRANCH_NEG();                                                      \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (branch-nil-pos byte) (bool)->()
-
 #define BC_BRANCH_NIL_POS 68
 #define BCA_BRANCH_NIL_POS()                                                   \
     POPVAL1(arg1);                                                             \
-    if (eul_null(arg1)) {BCA_BRANCH_POS()}                                     \
+    if (eul_null(arg1))                                                        \
+    {                                                                          \
+        BCA_BRANCH_POS();                                                      \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 ///-----------------------------------------------------------------------------
 ///  (branch-nil-long-pos byte) (bool)->()
-
 #define BC_BRANCH_NIL_LONG_POS 74
 #define BCA_BRANCH_NIL_LONG_POS()                                              \
     POPVAL1(arg1);                                                             \
-    if (eul_null(arg1)) {BCA_BRANCH_LONG_POS()}                                \
+    if (eul_null(arg1))                                                        \
+    {                                                                          \
+        BCA_BRANCH_LONG_POS();                                                 \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         NOTIFY0("{STAYING}");                                                  \
-        reg_pc = reg_pc+2;                                                     \
+        reg_pc = reg_pc + 2;                                                   \
     }
 
 
@@ -1432,26 +1653,29 @@ int eul_trace=0;
 
 ///-----------------------------------------------------------------------------
 ///  (call-next-method byte)
-
 #define BC_CALL_NEXT_METHOD 55
 #define BCA_CALL_NEXT_METHOD()                                                 \
     fix1 = (ptrInt) get_unsigned_bytearg();                                    \
     PUSHCONTEXT();                                                             \
     reg_arg_count = fix1;                                                      \
 tail_c_n_m_entry_point:                                                        \
-CALLBACK_TRAP(reg_next_methods != eul_nil,                                     \
-PUSHVAL1(reg_arg_operator), CB_NO_NEXT_METHOD, fix1+1)                         \
+CALLBACK_TRAP                                                                  \
+(                                                                              \
+    reg_next_methods != eul_nil,                                               \
+    PUSHVAL1(reg_arg_operator),                                                \
+    CB_NO_NEXT_METHOD,                                                         \
+    fix1 + 1                                                                   \
+)                                                                              \
 reg_arg_operator = eul_car(reg_next_methods);                                  \
 reg_next_methods = eul_cdr(reg_next_methods);                                  \
 SET_LAMBDA_CONTEXT();
 
 ///-----------------------------------------------------------------------------
 ///  (tail-call-next-method byte byte)
-
 #define BC_TAIL_CALL_NEXT_METHOD 56
 #define BCA_TAIL_CALL_NEXT_METHOD()                                            \
-    reg_arg_count = (int) get_unsigned_bytearg();                              \
-    fix1 = (ptrInt) get_unsigned_bytearg();                                    \
+    reg_arg_count = (int)get_unsigned_bytearg();                               \
+    fix1 = (ptrInt)get_unsigned_bytearg();                                     \
     POPVALN(fix1);                                                             \
     goto tail_c_n_m_entry_point;
 
@@ -1476,7 +1700,6 @@ SET_LAMBDA_CONTEXT();
 
 ///-----------------------------------------------------------------------------
 ///  (call-operator byte) (arg* op)->(result)
-
 #define BC_CALL_OPERATOR 60
 #define BCA_CALL_OPERATOR()                                                    \
     WHEN_DB(ptrInt entry = 1; )                                                \
@@ -1495,9 +1718,14 @@ tail_call_entry_point:                                                         \
     WHEN_DB(PRINT_OPERATOR_CALL(entry); )                                      \
     WHEN_DB(entry = 0; )                                                       \
     /* Check for signals */                                                    \
-    CALLBACK_TRAP(eul_no_signal(),                                             \
-    eul_clear_signal(); PUSHVAL1(reg_arg_operator),                            \
-    eul_signal_cb, reg_arg_count+1)                                            \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        eul_no_signal(),                                                       \
+        eul_clear_signal();                                                    \
+        PUSHVAL1(reg_arg_operator),                                            \
+        eul_signal_cb,                                                         \
+        reg_arg_count + 1                                                      \
+    )                                                                          \
     /* Is it lambda call ? */                                                  \
     WHEN_DB(printf("CALL LAMBDA OR GF ? \n"); )                                \
     if (eul_is_lambda(reg_arg_operator))                                       \
@@ -1511,8 +1739,13 @@ tail_call_entry_point:                                                         \
     }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(eul_is_gf(reg_arg_operator), PUSHVAL1(reg_arg_operator), \
-        CB_BAD_OPERATOR, reg_arg_count+1)                                      \
+        CALLBACK_TRAP                                                          \
+        (                                                                      \
+            eul_is_gf(reg_arg_operator),                                       \
+            PUSHVAL1(reg_arg_operator),                                        \
+            CB_BAD_OPERATOR,                                                   \
+            reg_arg_count + 1                                                  \
+        )                                                                      \
         WHEN_DB                                                                \
         (                                                                      \
             printf("CALL GF %s\n",                                             \
@@ -1521,14 +1754,22 @@ tail_call_entry_point:                                                         \
         WHEN_INSTRUMENTED                                                      \
         (                                                                      \
             eul_gf_calls++;                                                    \
-            if (reg_arg_count==1)                                              \
+            if (reg_arg_count == 1)                                            \
+            {                                                                  \
                 eul_gf_calls1++;                                               \
-            else if (reg_arg_count==2)                                         \
+            }                                                                  \
+            else if (reg_arg_count == 2)                                       \
+            {                                                                  \
                 eul_gf_calls2++;                                               \
-            else if (reg_arg_count==3)                                         \
+            }                                                                  \
+            else if (reg_arg_count == 3)                                       \
+            {                                                                  \
                 eul_gf_calls3++;                                               \
+            }                                                                  \
             else                                                               \
+            {                                                                  \
                 eul_gf_calls4++;                                               \
+            }                                                                  \
         )                                                                      \
         /* FULL_METHOD_LOOKUP(reg_arg_operator, 0); */                         \
         /* SLOW_METHOD_LOOKUP(reg_arg_operator, reg_next_methods); */          \
@@ -1539,14 +1780,14 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (tail-call-operator byte byte) (arg* op)->(result)
-
 #define BC_TAIL_CALL_OPERATOR 61
 #define BCA_TAIL_CALL_OPERATOR()                                               \
     POPVAL1(reg_arg_operator);                                                 \
-    reg_arg_count = (int) get_unsigned_bytearg();  /* nargs */                 \
-    fix1 = (ptrInt) get_unsigned_bytearg();  /* to pop */                      \
+    reg_arg_count = (int)get_unsigned_bytearg();  /* nargs */                  \
+    fix1 = (ptrInt)get_unsigned_bytearg();        /* to pop */                 \
     /* Copy the real arguments down the stack */                               \
-    for (int i=0; i<reg_arg_count; ++i) {                                      \
+    for (int i=0; i<reg_arg_count; ++i)                                        \
+    {                                                                          \
         REFVAL(reg_arg_count-i-1, tmp1);                                       \
         SET_REFVAL(fix1+reg_arg_count-i-1, tmp1);                              \
     }                                                                          \
@@ -1562,8 +1803,10 @@ tail_call_entry_point:                                                         \
     reg_arg_count = 0;                                                         \
     POPVAL1(args);                                                             \
     POPVAL1(reg_arg_operator);                                                 \
-    while (args != eul_nil) {                                                  \
-        if (eul_cdr(args) == eul_nil) {                                        \
+    while (args != eul_nil)                                                    \
+    {                                                                          \
+        if (eul_cdr(args) == eul_nil)                                          \
+        {                                                                      \
             rest = eul_car(args);                                              \
             break;                                                             \
         }                                                                      \
@@ -1574,10 +1817,15 @@ tail_call_entry_point:                                                         \
             args = eul_cdr(args);                                              \
         }                                                                      \
     }                                                                          \
-    CALLBACK_TRAP(eul_is_list(rest),                                           \
-    {POPVALN(reg_arg_count); PUSHVAL1(reg_arg_operator); },                    \
-    CB_FIRST_ERROR+2, 1)                                                       \
-    while (rest != eul_nil) {                                                  \
+    CALLBACK_TRAP                                                              \
+    (                                                                          \
+        eul_is_list(rest),                                                     \
+        {POPVALN(reg_arg_count); PUSHVAL1(reg_arg_operator); },                \
+        CB_FIRST_ERROR + 2,                                                    \
+        1                                                                      \
+    )                                                                          \
+    while (rest != eul_nil)                                                    \
+    {                                                                          \
         reg_arg_count++;                                                       \
         PUSHVAL1(eul_car(rest));                                               \
         rest = eul_cdr(rest);                                                  \
@@ -1586,30 +1834,47 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (check-arguments nargs) ()->()
-
 #define ABS(x) (x < 0 ? -x : x)
 
 #define BC_CHECK_ARGUMENTS 67
 #define BCA_CHECK_ARGUMENTS()                                                  \
     fix1 = (ptrInt) get_signed_bytearg(); /* expected nargs */                 \
-    if (reg_arg_count != fix1) {                                               \
+    if (reg_arg_count != fix1)                                                 \
+    {                                                                          \
         /* Either listify or just plain wrong */                               \
-        if ((fix1 < 0) && ((fix2 = ABS(fix1) - 1) <= reg_arg_count)) {         \
-            LISTIFY(reg_arg_count - fix2); }                                   \
+        if ((fix1 < 0) && ((fix2 = ABS(fix1) - 1) <= reg_arg_count))           \
+        {                                                                      \
+            LISTIFY(reg_arg_count - fix2);                                     \
+        }                                                                      \
         else                                                                   \
         {                                                                      \
-            CALLBACK_TRAP(0, PUSHVAL1(reg_arg_operator),                       \
-            CB_FIRST_ERROR+0, reg_arg_count+1); } }                            \
+            CALLBACK_TRAP                                                      \
+            (                                                                  \
+                0,                                                             \
+                PUSHVAL1(reg_arg_operator),                                    \
+                CB_FIRST_ERROR + 0,                                            \
+                reg_arg_count + 1                                              \
+            );                                                                 \
+        }                                                                      \
+    }                                                                          \
     ++reg_pc;
 
 #define BC_CHECK_ARGUMENTS_2 167
 #define BCA_CHECK_ARGUMENTS_2()                                                \
-    if (1 <= reg_arg_count) {                                                  \
-        LISTIFY(reg_arg_count - 1); }                                          \
+    if (1 <= reg_arg_count)                                                    \
+    {                                                                          \
+        LISTIFY(reg_arg_count - 1);                                            \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(0, PUSHVAL1(reg_arg_operator),                           \
-        CB_FIRST_ERROR+0, reg_arg_count+1); }                                  \
+        CALLBACK_TRAP                                                          \
+        (                                                                      \
+            0,                                                                 \
+            PUSHVAL1(reg_arg_operator),                                        \
+            CB_FIRST_ERROR + 0,                                                \
+            reg_arg_count + 1                                                  \
+        );                                                                     \
+    }                                                                          \
     ++reg_pc;
 
 #define BC_CHECK_ARGUMENTS_1 168
@@ -1620,29 +1885,49 @@ tail_call_entry_point:                                                         \
 #define BC_CHECK_ARGUMENTS0 169
 #define BCA_CHECK_ARGUMENTS0()                                                 \
     if (reg_arg_count !=0)                                                     \
-        CALLBACK_TRAP(0, PUSHVAL1(reg_arg_operator),                           \
-        CB_FIRST_ERROR+0, reg_arg_count+1);                                    \
+    {                                                                          \
+        CALLBACK_TRAP                                                          \
+        (                                                                      \
+            0,                                                                 \
+            PUSHVAL1(reg_arg_operator),                                        \
+            CB_FIRST_ERROR + 0,                                                \
+            reg_arg_count + 1                                                  \
+        );                                                                     \
+    }                                                                          \
     ++reg_pc;
 
 #define BC_CHECK_ARGUMENTS1 170
 #define BCA_CHECK_ARGUMENTS1()                                                 \
     if (reg_arg_count != 1)                                                    \
-        CALLBACK_TRAP(0, PUSHVAL1(reg_arg_operator),                           \
-        CB_FIRST_ERROR+0, reg_arg_count+1);                                    \
+    {                                                                          \
+        CALLBACK_TRAP                                                          \
+        (                                                                      \
+            0,                                                                 \
+            PUSHVAL1(reg_arg_operator),                                        \
+            CB_FIRST_ERROR + 0,                                                \
+            reg_arg_count + 1                                                  \
+        );                                                                     \
+    }                                                                          \
     ++reg_pc;
 
 #define BC_CHECK_ARGUMENTS2 171
 #define BCA_CHECK_ARGUMENTS2()                                                 \
     if (reg_arg_count != 2)                                                    \
-        CALLBACK_TRAP(0, PUSHVAL1(reg_arg_operator),                           \
-        CB_FIRST_ERROR+0, reg_arg_count+1);                                    \
+    {                                                                          \
+        CALLBACK_TRAP                                                          \
+        (                                                                      \
+            0,                                                                 \
+            PUSHVAL1(reg_arg_operator),                                        \
+            CB_FIRST_ERROR + 0,                                                \
+            reg_arg_count + 1                                                  \
+        );                                                                     \
+    }                                                                          \
     ++reg_pc;
 
 
 ///-----------------------------------------------------------------------------
 /// Foreign function call
 ///-----------------------------------------------------------------------------
-
 #define BC_CALL_FOREIGN_FUNCTION 65
 #define BCA_CALL_FOREIGN_FUNCTION()                                            \
     {                                                                          \
@@ -1657,7 +1942,7 @@ tail_call_entry_point:                                                         \
             eul_clear_signal(); PUSHVAL1(reg_arg_operator);,                   \
             eul_signal_cb,                                                     \
             1                                                                  \
-        )                                                                      \
+        );                                                                     \
         PUSHVAL1(res);                                                         \
         ++reg_pc;                                                              \
     }
@@ -1666,7 +1951,6 @@ tail_call_entry_point:                                                         \
 ///-----------------------------------------------------------------------------
 /// Write object (only used for booting)
 ///-----------------------------------------------------------------------------
-
 #define BC_WRITE_OBJECT 66
 
 #define EUL_STDOUT (1)
@@ -1714,7 +1998,6 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (alloc byte) ()->()
-
 #define BC_ALLOC 70
 #define BCA_ALLOC()                                                            \
     fix1 = (ptrInt) get_unsigned_bytearg(); /* size */                         \
@@ -1725,7 +2008,6 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (dealloc) ()->()
-
 #define BC_DEALLOC 73
 #define BCA_DEALLOC()                                                          \
     reg_env = slot_ref(reg_env, 0);                                            \
@@ -1733,34 +2015,38 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (display-ref byte byte) ()->(obj)
-
 #define BC_DISPLAY_REF 71
 #define BCA_DISPLAY_REF()                                                      \
     fix1 = (ptrInt) get_unsigned_bytearg(); /* display index*/                 \
     fix2 = (ptrInt) get_unsigned_bytearg(); /* offset */                       \
-    if (fix1 == 0) {                                                           \
-        PUSHVAL1(slot_ref(reg_env, fix2+1)); }                                 \
+    if (fix1 == 0)                                                             \
+    {                                                                          \
+        PUSHVAL1(slot_ref(reg_env, fix2+1));                                   \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         LispRef env = slot_ref(reg_env, 0);                                    \
         while (--fix1) env = slot_ref(env, 0);                                 \
-        PUSHVAL1(slot_ref(env, fix2+1)); }                                     \
+        PUSHVAL1(slot_ref(env, fix2+1));                                       \
+    }                                                                          \
     ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (set-display-ref byte byte) (obj)->()
-
 #define BC_SET_DISPLAY_REF 72
 #define BCA_SET_DISPLAY_REF()                                                  \
     fix1 = (ptrInt) get_unsigned_bytearg(); /* display index*/                 \
     fix2 = (ptrInt) get_unsigned_bytearg(); /* offset */                       \
-    if (fix1 == 0) {                                                           \
-        POPVAL1(slot_ref(reg_env, fix2+1)); }                                  \
+    if (fix1 == 0)                                                             \
+    {                                                                          \
+        POPVAL1(slot_ref(reg_env, fix2+1));                                    \
+    }                                                                          \
     else                                                                       \
     {                                                                          \
         LispRef env = slot_ref(reg_env, 0);                                    \
         while (--fix1) env = slot_ref(env, 0);                                 \
-        POPVAL1(slot_ref(env, fix2+1)); }                                      \
+        POPVAL1(slot_ref(env, fix2+1));                                        \
+    }                                                                          \
     ++reg_pc;
 
 
@@ -1770,14 +2056,17 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (test-and-set-lock) (lock)->(obj)
-
 #define BC_TEST_AND_SET_LOCK 7
 #define BCA_TEST_AND_SET_LOCK()                                                \
     tmp1 = LVPEEKVAL();                                                        \
     if (fpi_value(slot_ref(tmp1, 0)))                                          \
+    {                                                                          \
         LVPEEKVAL() = eul_nil;                                                 \
+    }                                                                          \
     else                                                                       \
+    {                                                                          \
         slot_ref(tmp1, 0) = c_int_as_eul_int(1);                               \
+    }                                                                          \
     ++reg_pc;
 
 
@@ -1785,32 +2074,36 @@ tail_call_entry_point:                                                         \
 /// State
 ///-----------------------------------------------------------------------------
 
-/* All of the following is a little shaky in one way or another. We know
-   that the stack contains at least one value so FLUSHVAL(1) will work
-   without the need for a check. Later on though, we reset the stack
-   to its base value (ie empty) which contravenes this rule but luckily
-   enough we push something immediately so all is cool. The context stack
-   is still rather shaky... */
+// All of the following is a little shaky in one way or another. We know
+// that the stack contains at least one value so FLUSHVAL(1) will work
+// without the need for a check. Later on though, we reset the stack
+// to its base value (ie empty) which contravenes this rule but luckily
+// enough we push something immediately so all is cool. The context stack
+// is still rather shaky...
 
 ///-----------------------------------------------------------------------------
 ///  (fill-state) (state)->(state)
-
 #define BC_FILL_STATE 92
 #define BCA_FILL_STATE()                                                       \
     LispRef state = LVPEEKVAL();                                               \
     FLUSH_STACK(reg_value_stack, sreg_value_sp, 1);                            \
     FLUSH_STACK(reg_context_stack, sreg_context_sp, 0);                        \
     STATE_VALUE_STACK(state) = reg_value_stack->segment;                       \
-                             eul_allocate_int(STATE_VALUE_STACK_SIZE(state),   \
-                             (ptrInt)(reg_value_stack->size));                 \
-                             STATE_CONTEXT_STACK(state) = reg_context_stack->segment; \
-                                                        eul_allocate_int(STATE_CONTEXT_STACK_SIZE(state), \
-                                                        (ptrInt)(reg_context_stack->size)); \
-                                                        ++reg_pc;
+    eul_allocate_int                                                           \
+    (                                                                          \
+        STATE_VALUE_STACK_SIZE(state),                                         \
+        (ptrInt)(reg_value_stack->size)                                        \
+    );                                                                         \
+    STATE_CONTEXT_STACK(state) = reg_context_stack->segment;                   \
+    eul_allocate_int                                                           \
+    (                                                                          \
+        STATE_CONTEXT_STACK_SIZE(state),                                       \
+        (ptrInt)(reg_context_stack->size)                                      \
+    );                                                                         \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (restore-state) (state, obj)->(obj)
-
 #define BC_RESTORE_STATE 93
 #define BCA_RESTORE_STATE()                                                    \
     LispRef state, value;                                                      \
@@ -1831,24 +2124,28 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (fill-thread-state) (state)->(state)
-
 #define BC_FILL_THREAD_STATE 90
 #define BCA_FILL_THREAD_STATE()                                                \
     LispRef state = LVPEEKVAL();                                               \
     FLUSH_STACK(reg_value_stack, sreg_value_sp, 1);                            \
     FLUSH_STACK(reg_context_stack, sreg_context_sp, 0);                        \
     STATE_VALUE_STACK(state) = copy_stack_segment(reg_value_stack->segment);   \
-                             eul_allocate_int(STATE_VALUE_STACK_SIZE(state),   \
-                             (ptrInt)(reg_value_stack->size));                 \
-                             STATE_CONTEXT_STACK(state) = copy_stack_segment(reg_context_stack->segment); \
-                                                        eul_allocate_int(STATE_CONTEXT_STACK_SIZE(state), \
-                                                        (ptrInt)(reg_context_stack->size)); \
-                                                        ++reg_pc;
-
+    eul_allocate_int                                                           \
+    (                                                                          \
+        STATE_VALUE_STACK_SIZE(state),                                         \
+        (ptrInt)(reg_value_stack->size)                                        \
+    );                                                                         \
+    STATE_CONTEXT_STACK(state) =                                               \
+    copy_stack_segment(reg_context_stack->segment);                            \
+    eul_allocate_int                                                           \
+    (                                                                          \
+        STATE_CONTEXT_STACK_SIZE(state),                                       \
+        (ptrInt)(reg_context_stack->size)                                      \
+    );                                                                         \
+    ++reg_pc;
 
 ///-----------------------------------------------------------------------------
 ///  (restore-thread-state) (value, state)->(obj)
-
 #define BC_RESTORE_THREAD_STATE 91
 #define BCA_RESTORE_THREAD_STATE()                                             \
     LispRef state, value;                                                      \
@@ -1874,11 +2171,15 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (unflush-stacks) ()->(obj)
-
 #define BC_UNFLUSH_STACKS 88
 #define BCA_UNFLUSH_STACKS()                                                   \
     UNFLUSH_STACK(reg_value_stack, sreg_value_sp, value_stack_size+1);         \
-    UNFLUSH_STACK(reg_context_stack, sreg_context_sp, context_stack_size+CONTEXT_FRAME_SIZE); \
+    UNFLUSH_STACK                                                              \
+    (                                                                          \
+        reg_context_stack,                                                     \
+        sreg_context_sp,                                                       \
+        context_stack_size + CONTEXT_FRAME_SIZE                                \
+    );                                                                         \
     PUSHVAL1(eul_nil);                                                         \
     ++reg_pc;
 
@@ -1889,7 +2190,6 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (character->fpi) (char)->(fpi)
-
 #define BC_CHARACTER_TO_FPI 98
 #define BCA_CHARACTER_TO_FPI()                                                 \
     eul_allocate_int(res, char_value(LVPEEKVAL()));                            \
@@ -1898,7 +2198,6 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (fpi->character) (fpi)->(char)
-
 #define BC_FPI_TO_CHARACTER 99
 #define BCA_FPI_TO_CHARACTER()                                                 \
     eul_allocate_char(res, fpi_value(LVPEEKVAL()));                            \
@@ -1912,20 +2211,20 @@ tail_call_entry_point:                                                         \
 
 ///-----------------------------------------------------------------------------
 ///  (exit) ()->()
-
 #define BC_EXIT 102
 #define BCA_EXIT()                                                             \
-    /* Return code is handeled in eul-appl.c; exit is rest argument function */ \
+    /* Return code is handeled in eul-appl.c; exit is rest argument function*/ \
     res = LVPEEKVAL();                                                         \
     if (eul_is_cons(res))                                                      \
+    {                                                                          \
         LVPEEKVAL() = eul_car(res);                                            \
+    }                                                                          \
     goto exit;
 
 
 ///-----------------------------------------------------------------------------
 /// Symbols
 ///-----------------------------------------------------------------------------
-
 #define BC_INTERN 105
 #define BCA_INTERN()                                                           \
     LispRef str, loc;                                                          \
@@ -1938,66 +2237,91 @@ tail_call_entry_point:                                                         \
 ///-----------------------------------------------------------------------------
 /// Association list searching
 ///-----------------------------------------------------------------------------
-
 #define BC_ASSQ 106
 #define BCA_ASSQ()                                                             \
     LispRef list, key, fail;                                                   \
     POPVAL3(fail, list, key);                                                  \
     PUSHVAL1(fail);                                                            \
-    while (eul_is_cons(list)) {                                                \
+    while (eul_is_cons(list))                                                  \
+    {                                                                          \
         tmp1 = eul_car(list);                                                  \
-        CALLBACK_TRAP(eul_is_cons(tmp1), PUSHVAL1(key); PUSHVAL1(tmp1),        \
-        CB_FIRST_CONS+2, 2)                                                    \
-        if (eul_car(tmp1)==key) {                                              \
+        CALLBACK_TRAP                                                          \
+        (                                                                      \
+            eul_is_cons(tmp1),                                                 \
+            PUSHVAL1(key); PUSHVAL1(tmp1),                                     \
+            CB_FIRST_CONS + 2,                                                 \
+            2                                                                  \
+        )                                                                      \
+        if (eul_car(tmp1) == key)                                                \
+        {                                                                      \
             LVPEEKVAL() = tmp1;                                                \
-            break; }                                                           \
+            break;                                                             \
+        }                                                                      \
         else                                                                   \
-            list=eul_cdr(list); }                                              \
+        {                                                                      \
+            list=eul_cdr(list);                                                \
+        }                                                                      \
+    }                                                                          \
     ++reg_pc;
+
 
 ///-----------------------------------------------------------------------------
 /// Initialisation list searching
 ///-----------------------------------------------------------------------------
-
 #define BC_INIQ 107
 #define BCA_INIQ()                                                             \
     LispRef list, key, fail;                                                   \
     POPVAL3(fail, list, key);                                                  \
     PUSHVAL1(fail);                                                            \
-    while (eul_is_cons(list)) {                                                \
+    while (eul_is_cons(list))                                                  \
+    {                                                                          \
         tmp1 = eul_cdr(list);                                                  \
-        CALLBACK_TRAP(eul_is_cons(tmp1), PUSHVAL1(key); PUSHVAL1(tmp1),        \
-        CB_FIRST_CONS+3, 2)                                                    \
-        if (eul_car(list)==key) {                                              \
+        CALLBACK_TRAP                                                          \
+        (                                                                      \
+            eul_is_cons(tmp1),                                                 \
+            PUSHVAL1(key); PUSHVAL1(tmp1),                                     \
+            CB_FIRST_CONS+3,                                                   \
+            2                                                                  \
+        )                                                                      \
+        if (eul_car(list) == key)                                              \
+        {                                                                      \
             LVPEEKVAL() = eul_car(tmp1);                                       \
-            break; }                                                           \
+            break;                                                             \
+        }                                                                      \
         else                                                                   \
-            list = eul_cdr(tmp1); }                                            \
+        {                                                                      \
+            list = eul_cdr(tmp1);                                              \
+        }                                                                      \
+    }                                                                          \
     ++reg_pc;
 
 
 ///-----------------------------------------------------------------------------
 /// List-list searching
 ///-----------------------------------------------------------------------------
-
 #define BC_MEMQ 108
 #define BCA_MEMQ()                                                             \
     LispRef list, key, fail;                                                   \
     POPVAL3(fail, list, key);                                                  \
     PUSHVAL1(fail);                                                            \
     while (eul_is_cons(list))                                                  \
-        if (eul_car(list)==key) {                                              \
+    {                                                                          \
+        if (eul_car(list) == key)                                              \
+        {                                                                      \
             LVPEEKVAL() = list;                                                \
-            break; }                                                           \
+            break;                                                             \
+        }                                                                      \
         else                                                                   \
+        {                                                                      \
             list = eul_cdr(list);                                              \
+        }                                                                      \
+    }                                                                          \
     ++reg_pc;
 
 
 ///-----------------------------------------------------------------------------
 /// Logic
 ///-----------------------------------------------------------------------------
-
 #define BC_EQ 80
 #define BCA_EQ()                                                               \
     POPVAL1(tmp1);                                                             \
@@ -2021,6 +2345,7 @@ tail_call_entry_point:                                                         \
         LVPEEKVAL() = (arg1 == arg2 ? eul_true : eul_nil);                     \
     }                                                                          \
     ++reg_pc;
+
 
 ///-----------------------------------------------------------------------------
 #endif // BYTECODE_H

@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: keywords
+/// Title: Keywords
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -40,7 +40,6 @@
 ///-----------------------------------------------------------------------------
 /// Keyword allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_keyword(loc, str)                                         \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_keyword_class), KEYWORD_SIZE);      \
     eul_allocate_string(KEYWORD_NAME(loc), str)

@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: foreign function converters
+/// Title: Foreign function converters
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// Foreign function argument conversion
 ///-----------------------------------------------------------------------------
-
 #define FF_ARG_CONVERT(x, conv_index) FF_ARG_CONVERT##conv_index(x)
 
 #define FF_ARG_CONVERT0(x) eul_int_as_c_int_checked(x)
@@ -48,27 +47,38 @@
 ///-----------------------------------------------------------------------------
 /// Foreign function argument conversion error notification
 ///-----------------------------------------------------------------------------
-
 #ifdef WITH_SIGNALS
 
 #define ff_notify_arg_error(x, clazz)                                          \
-    (fprintf(stderr, "\n*** WARNING [system]: bad foreign function argument"), \
-    fprintf(stderr, "\n    value: "),                                          \
-    fprint_ref(stderr, x),                                                     \
-    fprintf(stderr, "\n    expected instance of class: %s\n", #clazz),         \
-    fflush(stderr),                                                            \
-    eul_signal = 1,                                                            \
-    eul_signal_cb = CB_FIRST_SIGNAL+3)
+    (                                                                          \
+        fprintf                                                                \
+        (                                                                      \
+            stderr,                                                            \
+            "\n*** WARNING [system]: bad foreign function argument"            \
+        ),                                                                     \
+        fprintf(stderr, "\n    value: "),                                      \
+        fprint_ref(stderr, x),                                                 \
+        fprintf(stderr, "\n    expected instance of class: %s\n", #clazz),     \
+        fflush(stderr),                                                        \
+        eul_signal = 1,                                                        \
+        eul_signal_cb = CB_FIRST_SIGNAL+3                                      \
+    )
 
 #else
 
 #define ff_notify_arg_error(x, clazz)                                          \
-    (fprintf(stderr, "\n*** ERROR [system]: bad foreign function argument"),   \
-    fprintf(stderr, "\n    value: "),                                          \
-    fprint_ref(stderr, x),                                                     \
-    fprintf(stderr, "\n    expected instance of class: %s\n", #clazz),         \
-    fflush(stderr),                                                            \
-    exit(-1))
+    (                                                                          \
+        fprintf                                                                \
+        (                                                                      \
+            stderr,                                                            \
+            "\n*** ERROR [system]: bad foreign function argument"              \
+        ),                                                                     \
+        fprintf(stderr, "\n    value: "),                                      \
+        fprint_ref(stderr, x),                                                 \
+        fprintf(stderr, "\n    expected instance of class: %s\n", #clazz),     \
+        fflush(stderr),                                                        \
+        exit(-1)                                                               \
+    )
 
 #endif
 
@@ -103,7 +113,6 @@
 ///-----------------------------------------------------------------------------
 /// Foreign function result conversion
 ///-----------------------------------------------------------------------------
-
 #define FF_RES_CONVERT(loc, x, conv_index)                                     \
     FF_RES_CONVERT##conv_index(loc, x)
 
@@ -122,7 +131,6 @@
 ///-----------------------------------------------------------------------------
 /// Foreign function result conversion error notification
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_string_checked(loc, x)                                    \
     {                                                                          \
         char *tmp_value;                                                       \
@@ -154,7 +162,6 @@
 ///-----------------------------------------------------------------------------
 /// Foreign in-calls
 ///-----------------------------------------------------------------------------
-
 #define EUL_DEFINTERN(c_fn_name, eul_fn_name, arity, eul_module_name)          \
     EUL_DEFINTERN##arity(c_fn_name, eul_fn_name, eul_module_name)
 
@@ -197,32 +204,29 @@
 ///-----------------------------------------------------------------------------
 /// Foreign in-call (arity 0)
 ///-----------------------------------------------------------------------------
-
 #define EUL_DEFINTERN0(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
     LispRef c_fn_name ()                                                       \
     {                                                                          \
-        DEFINTERN_DECLARATIONS(c_fn_name, 0, eul_module_name)                  \
-        DEFINTERN_TAIL()                                                       \
-        }
+        DEFINTERN_DECLARATIONS(c_fn_name, 0, eul_module_name);                 \
+        DEFINTERN_TAIL();                                                      \
+    }
 
 ///-----------------------------------------------------------------------------
 /// Foreign in-call (arity 1)
 ///-----------------------------------------------------------------------------
-
 #define EUL_DEFINTERN1(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
     LispRef c_fn_name (LispRef c_arg1)                                         \
     {                                                                          \
         DEFINTERN_DECLARATIONS(c_fn_name, 1, eul_module_name)                  \
         EXTERNAL_PUSHVAL1(c_arg1);                                             \
-        DEFINTERN_TAIL()                                                       \
-        }
+        DEFINTERN_TAIL();                                                      \
+    }
 
 ///-----------------------------------------------------------------------------
 /// Foreign in-call (arity 2)
 ///-----------------------------------------------------------------------------
-
 #define EUL_DEFINTERN2(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
     LispRef c_fn_name (LispRef c_arg1, LispRef c_arg2)                         \
@@ -230,13 +234,12 @@
         DEFINTERN_DECLARATIONS(c_fn_name, 2, eul_module_name)                  \
         EXTERNAL_PUSHVAL1(c_arg1);                                             \
         EXTERNAL_PUSHVAL1(c_arg2);                                             \
-        DEFINTERN_TAIL()                                                       \
-        }
+        DEFINTERN_TAIL();                                                      \
+    }
 
 ///-----------------------------------------------------------------------------
 /// Foreign in-call (arity 3)
 ///-----------------------------------------------------------------------------
-
 #define EUL_DEFINTERN3(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
     LispRef c_fn_name (LispRef c_arg1, LispRef c_arg2, LispRef c_arg3)         \
@@ -245,32 +248,43 @@
         EXTERNAL_PUSHVAL1(c_arg1);                                             \
         EXTERNAL_PUSHVAL1(c_arg2);                                             \
         EXTERNAL_PUSHVAL1(c_arg3);                                             \
-        DEFINTERN_TAIL()                                                       \
-        }
+        DEFINTERN_TAIL();                                                      \
+    }
 
 ///-----------------------------------------------------------------------------
 /// Foreign in-call (arity 4)
 ///-----------------------------------------------------------------------------
-
 #define EUL_DEFINTERN4(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
-    LispRef c_fn_name (LispRef c_arg1, LispRef c_arg2, LispRef c_arg3, LispRef c_arg4) \
+    LispRef c_fn_name                                                          \
+    (                                                                          \
+        LispRef c_arg1,                                                        \
+        LispRef c_arg2,                                                        \
+        LispRef c_arg3,                                                        \
+        LispRef c_arg4                                                         \
+    )                                                                          \
     {                                                                          \
         DEFINTERN_DECLARATIONS(c_fn_name, 4, eul_module_name)                  \
         EXTERNAL_PUSHVAL1(c_arg1);                                             \
         EXTERNAL_PUSHVAL1(c_arg2);                                             \
         EXTERNAL_PUSHVAL1(c_arg3);                                             \
         EXTERNAL_PUSHVAL1(c_arg4);                                             \
-        DEFINTERN_TAIL()                                                       \
-        }
+        DEFINTERN_TAIL();                                                      \
+    }
 
 ///-----------------------------------------------------------------------------
 /// Foreign in-call (arity 5)
 ///-----------------------------------------------------------------------------
-
 #define EUL_DEFINTERN5(c_fn_name, eul_fn_name, eul_module_name)                \
     extern int eul_module_name##_index;                                        \
-    LispRef c_fn_name (LispRef c_arg1, LispRef c_arg2, LispRef c_arg3, LispRef c_arg4, LispRef c_arg5) \
+    LispRef c_fn_name                                                          \
+    (                                                                          \
+        LispRef c_arg1,                                                        \
+        LispRef c_arg2,                                                        \
+        LispRef c_arg3,                                                        \
+        LispRef c_arg4,                                                        \
+        LispRef c_arg5                                                         \
+    )                                                                          \
     {                                                                          \
         DEFINTERN_DECLARATIONS(c_fn_name, 5, eul_module_name)                  \
         EXTERNAL_PUSHVAL1(c_arg1);                                             \
@@ -278,13 +292,12 @@
         EXTERNAL_PUSHVAL1(c_arg3);                                             \
         EXTERNAL_PUSHVAL1(c_arg4);                                             \
         EXTERNAL_PUSHVAL1(c_arg5);                                             \
-        DEFINTERN_TAIL()                                                       \
-        }
+        DEFINTERN_TAIL();                                                      \
+    }
 
 ///-----------------------------------------------------------------------------
 /// Initialise and run the system
 ///-----------------------------------------------------------------------------
-
 extern int EUL_INITIALIZE (int, char **);
 
 #define EUL_IMPORT(module_name)                                                \

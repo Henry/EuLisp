@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Interface to POSIX time
+/// Title: Interface to POSIX time
 ///  Library: Tools
 ///  Authors: T. Kurt Bond
 ///  Maintainer: Henry G. Weller

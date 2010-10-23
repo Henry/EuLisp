@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: printing, etc.
+/// Title: Printing, etc.
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "notify.h"
@@ -45,8 +44,7 @@
 /// Check if Lisp object; the GC should help us here, but what is the
 /// function?
 ///-----------------------------------------------------------------------------
-
-/* These setting are somewhat arbitrary ... */
+// These setting are somewhat arbitrary ...
 #define MAX_CLASS_SIZE 64
 #define MAX_OBJECT_SIZE 10000
 
@@ -61,13 +59,7 @@ LispRef eul_is_object(void *o)
             #ifndef WITH_CONS_TAG
             (tag_field(x) != SPARE_TAG)
             #endif // WITH_CONS_TAG
-         && (
-                // printf("loc=%x\n", (ptrInt) x),
-                // printf("object_size (raw) %x\n", (ptrInt) object_size(x)),
-                // printf("object_size %i\n", eul_int_as_c_int(object_size(x))),
-                // printf("object_class %x\n", (ptrInt) object_class(x)),
-                is_immediate(m = object_size(x))
-            )
+         && (is_immediate(m = object_size(x)))
          && !is_immediate(cl = object_class(x))
          && ((((uPtrInt)eul_int_as_c_int(m)) < MAX_OBJECT_SIZE)
          || (cl == PGLOBAL(glob_vector_class)))
@@ -86,14 +78,12 @@ LispRef eul_is_object(void *o)
 ///-----------------------------------------------------------------------------
 /// Generic printer
 ///-----------------------------------------------------------------------------
-
 void (*printer_table[PRINTER_TABLE_SIZE])(FILE *, LispRef);
 
 
 ///-----------------------------------------------------------------------------
 /// Default object printer
 ///-----------------------------------------------------------------------------
-
 static void fprint_object(FILE *fd, LispRef o)
 {
     #ifdef WITH_PRIMITIVE_PRINTER
@@ -119,7 +109,6 @@ static void fprint_object(FILE *fd, LispRef o)
     }
     #endif
 }
-
 
 void fprint_ref(FILE *fd, LispRef o)
 {
@@ -187,7 +176,6 @@ void fprint_ref(FILE *fd, LispRef o)
 ///-----------------------------------------------------------------------------
 /// Initialize utilities
 ///-----------------------------------------------------------------------------
-
 void eul_initialize_util()
 {
     NOTIFY0(".Initialize utilities");

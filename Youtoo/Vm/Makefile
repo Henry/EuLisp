@@ -33,6 +33,11 @@ VM_SHARED_LIB = $(EUL_LIB_DIR)/libeulvm.so
 ###-----------------------------------------------------------------------------
 ### Source and object files
 ###-----------------------------------------------------------------------------
+VM_H = 	bytecode.h bytevec.h cache.h callback.h character.h class.h double.h \
+	eul-string.h ff.h fpi.h handler.h init.h io.h keyword.h level1i.h \
+	list.h notify.h object.h operator.h register.h shared-mem.h signals.h \
+	stack.h state.h stdc.h symbol.h table.h tag.h util.h
+
 VM_C = character.c fpi.c init.c rl_init.c interpret.c level1i.c list.c \
        register.c stack.c signals.c table.c util.c
 VM_O = $(VM_C:%.c=$(ARCH_DIR)/%.o)
@@ -56,6 +61,10 @@ $(VM_SHARED_LIB): $(VM_O)
 ###-----------------------------------------------------------------------------
 ### Dependency checking
 ###-----------------------------------------------------------------------------
+
+# Simple dependency of .o files on all of the .h files
+$(VM_O): $(VM_H)
+
 .PHONY: depend
 depend: | $(ARCH_DIR)/.
 	@touch $(ARCH_DIR)/Makefile.dep

@@ -18,8 +18,8 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-/// Title: built-in foreign functions
-///  Library: boot, telos, level1, eval, youtoo
+/// Title: Built-in foreign functions
+///  Library: Runtime
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -29,7 +29,6 @@
 #include "eulisp.h"
 
 ///-----------------------------------------------------------------------------
-
 extern LispRef eul_init_string(LispRef str, int n, char c);
 extern LispRef c_strn_as_eul_str(char *str, int n);
 // extern LispRef c_string_as_eul_string(char * str);
@@ -99,6 +98,7 @@ extern int read_into_buffer(int _file, char *buf, int n);
 
 // Return prompt-string
 extern char* eul_prompt_string();
+
 
 ///-----------------------------------------------------------------------------
 #endif // EUL_EXT_H

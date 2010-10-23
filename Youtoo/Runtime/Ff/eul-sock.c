@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: foreign socket connection
-///  Library: fsocket
+/// Title: Foreign socket connection
+///  Library: Runtime
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "eul-sock.h"
 #include "eulisp.h"
 #include <arpa/inet.h>

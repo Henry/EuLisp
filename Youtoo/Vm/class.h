@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: classes and short names for global registers
+/// Title: Classes and short names for global registers
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// Global register short names
 ///-----------------------------------------------------------------------------
-
 #define eul_true PGLOBAL(glob_true)
 #define eul_nil PGLOBAL(glob_nil)
 #define eul_symbols PGLOBAL(glob_symbols)
@@ -48,7 +47,6 @@
 ///-----------------------------------------------------------------------------
 /// nil allocation
 ///-----------------------------------------------------------------------------
-
 #define EUL_NIL_SIZE (c_int_as_eul_int(0))
 
 #define eul_allocate_static_nil(loc)                                           \
@@ -61,7 +59,6 @@
 ///-----------------------------------------------------------------------------
 /// Dynamic class allocation
 ///-----------------------------------------------------------------------------
-
 #define CLASS_SIZE (10)
 #define EUL_CLASS_SIZE (c_int_as_eul_int(CLASS_SIZE))
 #define CLASS_NAME(o) (slot_ref((o), 0))

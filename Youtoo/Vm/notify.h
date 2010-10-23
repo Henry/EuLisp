@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: notification, errors, warnings
+/// Title: Notification, errors, warnings
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// Basic notification
 ///-----------------------------------------------------------------------------
-
 #define BASIC_NOTIFY0(stream, str)                                             \
     fprintf(stream, str);                                                      \
     fprintf(stream, "\n");                                                     \
@@ -63,7 +62,6 @@
 ///-----------------------------------------------------------------------------
 /// Notification and warnings
 ///-----------------------------------------------------------------------------
-
 #ifdef SILENT
 
 #define NOTIFY0(str)

@@ -18,8 +18,8 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: dynamic linker
-///  Library: eval, youtoo
+/// Title: Dynamic linker
+///  Library: Comptime2
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -43,15 +43,25 @@ extern LispRef *create_binding_vector(char *module_name, FILE * fp);
 
 extern int load_compiled_module(char *module_name, FILE * fp);
 
-extern int create_next_bytevector(LispRef * bv_ptr, FILE * fp,
-LispRef * binding_vec);
+extern int create_next_bytevector
+(
+    LispRef *bv_ptr,
+    FILE *fp,
+    LispRef *binding_vec
+);
 
 extern int eul_dyn_load_module(char *module_name, char *file_name);
 
-extern LispRef eul_write_next_bv_binding_ref1(LispRef bv, int bv_index,
-char *module_name, int local_index);
+extern LispRef eul_write_next_bv_binding_ref1
+(
+    LispRef bv,
+    int bv_index,
+    char *module_name,
+    int local_index
+);
 
 extern LispRef eul_allocate_lambda2(LispRef name, LispRef arity, LispRef bv);
+
 
 ///-----------------------------------------------------------------------------
 #endif // EUL_DLD_H

@@ -2,12 +2,11 @@
 ///-----------------------------------------------------------------------------
 /// ---                 EuLisp System 'youtoo'
 ///-----------------------------------------------------------------------------
-///  Title: Low-level readline prompt support
-///  Library: eval, youtoo
+/// Title: Low-level readline prompt support
+///  Library: Comptime2
 ///  Authors: Henry G. Weller
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifdef READLINE
 #include "../Runtime/Ff/eul-ext.h"
 

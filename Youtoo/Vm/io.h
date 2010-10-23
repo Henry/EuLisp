@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: input/output
+/// Title: input/output
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// File information
 ///-----------------------------------------------------------------------------
-
 #define EUL_FILE_CONTROL_BLOCK_HANDLE(x) slot_ref(x, 6)
 #define EUL_STREAM_SINK(x) slot_ref(x, 4)
 #define eul_file_control_block_handle_as_fd(x) ((FILE *) fpi_value(x))

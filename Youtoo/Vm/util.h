@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: utilities (e.g. printing)
+/// Title: Utilities (e.g. printing)
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef UTIL_H
 #define UTIL_H
 
@@ -41,19 +40,21 @@ extern int eul_trace;
 ///-----------------------------------------------------------------------------
 /// Generic printing extention
 ///-----------------------------------------------------------------------------
-
 #define PRINTER_TABLE_SIZE (5)
 
 extern void (*printer_table[]) (FILE *, LispRef);
-
 #define define_printer(tag, fn) (printer_table[(ptrInt) tag]=(fn))
 #define printer(ref) (printer_table[(ptrInt) tag_field(ref)])
 
 #define fprimitive_print_object(fd, o)                                         \
-    fprintf(fd, "#<class=%" ptrIntPM "x nslots=%" ptrIntPM "d &=%" ptrIntPM "x>", \
-    (ptrInt) computed_object_class(o),                                         \
-    fpi_value(computed_object_size(o)),                                        \
-    (ptrInt) o);
+    fprintf                                                                    \
+    (                                                                          \
+        fd,                                                                    \
+        "#<class=%" ptrIntPM "x nslots=%" ptrIntPM "d &=%" ptrIntPM "x>",      \
+        (ptrInt) computed_object_class(o),                                     \
+        fpi_value(computed_object_size(o)),                                    \
+        (ptrInt) o                                                             \
+    );
 
 ///-----------------------------------------------------------------------------
 /// Print function call

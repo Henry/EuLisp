@@ -18,25 +18,22 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: fixed precision integers
+/// Title: Fixed precision integers
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef FPI_H
 #define FPI_H
 
 ///-----------------------------------------------------------------------------
 /// Initialization
 ///-----------------------------------------------------------------------------
-
 extern void eul_initialize_fpi();
 
 ///-----------------------------------------------------------------------------
 /// Fpi allocation
 ///-----------------------------------------------------------------------------
-
 #define fpi_value(x) (((ptrInt) x) >> TAG_BITS)
 #define eul_int_as_c_int(x) fpi_value(x)
 #define eul_bool_as_c_bool(x) (eul_null(x) ? false : true)

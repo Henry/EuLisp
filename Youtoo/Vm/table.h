@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: hash tables
+/// Title: Hash tables
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef TABLE_H
 #define TABLE_H
 
@@ -35,11 +34,9 @@ extern LispRef eul_fast_table_set (LispRef, char *, LispRef);
 extern int eul_hash_object(LispRef key);
 extern int eul_hash_object_aux(LispRef key, int *leaves);
 
-
 ///-----------------------------------------------------------------------------
 /// Table access
 ///-----------------------------------------------------------------------------
-
 #define TABLE_ENTRIES(x) (slot_ref((x), 0))
 #define TABLE_FILL_VALUE(x) (slot_ref((x), 1))
 #define TABLE_POPULATION(x) (slot_ref((x), 2))
@@ -54,19 +51,23 @@ extern int eul_hash_object_aux(LispRef key, int *leaves);
 #define TABLE_ENTRY_VALUE(x) eul_cdr(x)
 #define IS_TABLE_ENTRY(x) eul_is_cons(x)
 
-
 ///-----------------------------------------------------------------------------
 /// Table allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_table(loc, fill_value)                                    \
     {                                                                          \
-        eul_allocate_object(loc, PGLOBAL(glob_table_class), TABLE_SIZE, eul_nil); \
+        eul_allocate_object                                                    \
+        (                                                                      \
+            loc,                                                               \
+            PGLOBAL(glob_table_class),                                         \
+            TABLE_SIZE, eul_nil                                                \
+        );                                                                     \
         eul_allocate_object(TABLE_ENTRIES(loc), PGLOBAL(glob_vector_class),    \
         MIN_TABLE_ENTRIES, eul_nil);                                           \
         TABLE_ENTRIES(loc) = eul_nil;                                          \
         TABLE_POPULATION(loc) = c_int_as_eul_int(0);                           \
-        TABLE_THRESHOLD(loc) = c_int_as_eul_int(MIN_TABLE_ENTRIES-TABLE_UNUSED); \
+        TABLE_THRESHOLD(loc) =                                                 \
+            c_int_as_eul_int(MIN_TABLE_ENTRIES-TABLE_UNUSED);                  \
         TABLE_FILL_VALUE(loc) = fill_value;                                    \
     }
 

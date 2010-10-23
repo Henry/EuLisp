@@ -18,19 +18,17 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: lambdas, generic functions, methods
+/// Title: Lambdas, generic functions, methods
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef OPERATOR_H
 #define OPERATOR_H
 
 ///-----------------------------------------------------------------------------
 /// Lambda access
 ///-----------------------------------------------------------------------------
-
 #define LAMBDA_SIZE (5)
 
 #define LAMBDA_NAME(x) (slot_ref((x), 0))
@@ -44,28 +42,27 @@
 ///-----------------------------------------------------------------------------
 /// Dynamic lambda allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_lambda(loc, name, arity, bv)                              \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_lambda_class), LAMBDA_SIZE);        \
     eul_intern_symbol(LAMBDA_NAME(loc), name);                                 \
     eul_allocate_int(LAMBDA_DOMAIN(loc), arity);                               \
     LAMBDA_ENV(loc) = eul_nil;                                                 \
-                    LAMBDA_CODE(loc) = BYTEVECTOR_DATA(bv);                    \
-                                     LAMBDA_SETTER(loc) = eul_nil;             \
-                                                        object_size(loc) = object_size(bv)
+    LAMBDA_CODE(loc) = BYTEVECTOR_DATA(bv);                                    \
+    LAMBDA_SETTER(loc) = eul_nil;                                              \
+    object_size(loc) = object_size(bv)
 
 #define eul_allocate_lambda1(loc, name, arity, bv)                             \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_lambda_class), LAMBDA_SIZE);        \
     LAMBDA_NAME(loc) = name;                                                   \
-                     LAMBDA_DOMAIN(loc) = arity;                               \
-                                        LAMBDA_ENV(loc) = eul_nil;             \
-                                                        LAMBDA_CODE(loc) = BYTEVECTOR_DATA(bv); \
-                                                                         LAMBDA_SETTER(loc) = eul_nil; \
-                                                                                            object_size(loc) = object_size(bv)
+    LAMBDA_DOMAIN(loc) = arity;                                                \
+    LAMBDA_ENV(loc) = eul_nil;                                                 \
+    LAMBDA_CODE(loc) = BYTEVECTOR_DATA(bv);                                    \
+    LAMBDA_SETTER(loc) = eul_nil;                                              \
+    object_size(loc) = object_size(bv)
 
 #define eul_clone_lambda(loc, lambda)                                          \
-    { int n;                                                                   \
-        n = eul_int_as_c_int(object_size(lambda));                             \
+    {                                                                          \
+        int n = eul_int_as_c_int(object_size(lambda));                         \
         ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_lambda_class), LAMBDA_SIZE);    \
         LAMBDA_NAME(loc) = LAMBDA_NAME(lambda);                                \
         LAMBDA_DOMAIN(loc) = LAMBDA_DOMAIN(lambda);                            \
@@ -79,7 +76,6 @@
 ///-----------------------------------------------------------------------------
 /// Lambda execution
 ///-----------------------------------------------------------------------------
-
 #define execute_lambda(lambda)                                                 \
     tame_regs->reg_value_stack->sp = tame_regs->reg_value_stack->base;         \
     tame_regs->reg_context_stack->sp = tame_regs->reg_context_stack->base;     \
@@ -94,7 +90,6 @@
 ///-----------------------------------------------------------------------------
 /// GF shape
 ///-----------------------------------------------------------------------------
-
 #define GF_SIZE 9
 
 #define GF_NAME(x) (slot_ref((x), 0))
@@ -110,15 +105,18 @@
 #define eul_is_function(x) (eul_is_lambda(x) || eul_is_gf(x))
 #define eul_is_simple_gf(x) (eul_class_of(x) == PGLOBAL(glob_gf_class))
 #define eul_is_gf(x)                                                           \
-    (eul_is_simple_gf(x) ||                                                    \
-    (!is_immediate(x) &&                                                       \
-    fpi_value(object_size(x)) >= GF_SIZE &&                                    \
-    eul_is_lambda(GF_DISC_FN(x))))
+    (                                                                          \
+        eul_is_simple_gf(x)                                                    \
+     || (                                                                      \
+            !is_immediate(x)                                                   \
+         && fpi_value(object_size(x)) >= GF_SIZE                               \
+         && eul_is_lambda(GF_DISC_FN(x))                                       \
+        )                                                                      \
+    )
 
 ///-----------------------------------------------------------------------------
 /// Method shape
 ///-----------------------------------------------------------------------------
-
 #define METHOD_SIZE (3)
 
 #define METHOD_GF(m)        (slot_ref((m), 0))

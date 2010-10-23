@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: tokenizer
-///  Library: level1, eval, youtoo
+/// Title: Tokenizer
+///  Library: Runtime
 ///  Authors: Julian Padget, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "eulisp.h"
 #include <limits.h>
 #include "eul-ext.h"
@@ -31,7 +30,7 @@
 
 #ifdef WITH_PCR_THREADS
     // See alse Vm/stdc.h
-#   define read PCR_read
+    #define read PCR_read
 #endif
 
 #define BUFFER_SIZE 1024

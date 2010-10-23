@@ -18,19 +18,17 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: symbols
+/// Title: Symbols
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef SYMBOL_H
 #define SYMBOL_H
 
 ///-----------------------------------------------------------------------------
 /// Symbol access
 ///-----------------------------------------------------------------------------
-
 #define SYMBOL_SIZE (1)
 #define SYMBOL_NAME(x) (slot_ref((x), 0))
 #define eul_symbol_name(x) SYMBOL_NAME(x)
@@ -41,7 +39,6 @@
 ///-----------------------------------------------------------------------------
 /// Symbol allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_symbol(loc, str)                                          \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_symbol_class), SYMBOL_SIZE);        \
     eul_allocate_string(SYMBOL_NAME(loc), str)

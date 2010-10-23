@@ -18,13 +18,12 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: fast access to level1 bindings
+/// Title: fast access to level1 bindings
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///                !!! CHANGES ONLY TO leveli.skl.c !!!
 ///-----------------------------------------------------------------------------
-
 #include "eulisp.h"
 
 static LispRef level1_tab;
@@ -34,7 +33,6 @@ static char *eul_level1_lexical_module_name, *eul_level1_syntax_module_name;
 
 void fill_level1_table();
 void fill_level1_syntax_table();
-
 
 LispRef eul_dyn_level1_binding_info(LispRef binding_name)
 {
@@ -48,7 +46,6 @@ LispRef eul_dyn_level1_binding_info(LispRef binding_name)
     return entry;
 }
 
-
 LispRef eul_dyn_level1_syntax_binding_info(LispRef binding_name)
 {
     char *binding_name_str;
@@ -61,26 +58,23 @@ LispRef eul_dyn_level1_syntax_binding_info(LispRef binding_name)
     return entry;
 }
 
-
 LispRef eul_dyn_level1_binding_ref(LispRef binding_name, LispRef absent)
 {
     char *module_name_str;
-
     LispRef entry;
-
     int pos;
-
     entry = eul_dyn_level1_binding_info(binding_name);
 
     if (eul_null(entry))
+    {
         return absent;
+    }
 
     pos = eul_int_as_c_int(eul_car(entry));
     module_name_str = eul_symbol_as_c_string(eul_car(eul_cdr(entry)));
 
     return eul_dyn_binding_ref(module_name_str, pos);
 }
-
 
 LispRef eul_initialize_level1_tables()
 {
@@ -110,7 +104,6 @@ LispRef eul_initialize_level1_tables()
 /// Initialize level1_tab with liblevel1.i contents
 /// e.g. eul_fast_table_set(level1_tab, <key>, make_entry(<pos>, <module_name>));
 ///-----------------------------------------------------------------------------
-
 LispRef make_entry(int pos, char *module_str, char *origin_str)
 {
     LispRef res, tmp, module_name, origin_name;

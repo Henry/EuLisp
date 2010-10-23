@@ -18,15 +18,14 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: foreign socket connection
-///  Library: fsocket
+/// Title: Foreign socket connection
+///  Library: Runtime
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_SOCK_H
 #define EUL_SOCK_H
 ///-----------------------------------------------------------------------------
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <netinet/in.h>

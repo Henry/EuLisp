@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: fixed precision integer
+/// Title: Fixed precision integer
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "notify.h"
@@ -40,7 +39,6 @@ static void fprint_fpi(FILE *fd, LispRef o)
 {
     fprintf(fd, "%"ptrIntPM"d", fpi_value(o));
 }
-
 
 ///-----------------------------------------------------------------------------
 /// Initialization

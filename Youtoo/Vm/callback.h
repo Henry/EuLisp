@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: callbacks
+/// Title: Callbacks
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -73,8 +73,18 @@
             else                                                               \
             {                                                                  \
                 LispRef arg;                                                   \
-                fprintf(stderr, "\n*** ERROR [system]: uninstalled callback %d \n", (cb)); \
-                fprintf(stderr, "    instruction: %d \n", (unsigned char) reg_current_op); \
+                fprintf                                                        \
+                (                                                              \
+                    stderr,                                                    \
+                    "\n*** ERROR [system]: uninstalled callback %d \n",        \
+                    (cb)                                                       \
+                );                                                             \
+                fprintf                                                        \
+                (                                                              \
+                    stderr,                                                    \
+                    "    instruction: %d \n",                                  \
+                    (unsigned char)reg_current_op                              \
+                );                                                             \
                 for (int i = nargs; i > 0; i--)                                \
                 {                                                              \
                     fprintf(stderr, "    argument%d: ", i);                    \

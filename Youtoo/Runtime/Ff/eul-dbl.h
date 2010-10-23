@@ -18,14 +18,13 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Library: level1, eval, youtoo
+/// Library: Runtime
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef EUL_DBL_H
 #define EUL_DBL_H
 ///-----------------------------------------------------------------------------
-
 extern double eul_get_dbl_max();
 extern double eul_get_dbl_min();
 extern double eul_get_dbl_epsilon();

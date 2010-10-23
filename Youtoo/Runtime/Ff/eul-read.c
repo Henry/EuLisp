@@ -18,8 +18,8 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Low-level read with readline support
-///  Library: level1
+/// Title: Low-level read with readline support
+///  Library: Runtime
 ///  Authors: Julian Padget, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
@@ -34,15 +34,6 @@ extern char *rl_histfile;
 
 int read_into_buffer(int _file, char *buf, int n)
 {
-    /*
-    fprintf
-    (
-        stderr,
-        "About to read with %d, %" ptrIntPM "x, %d\n",
-        _file, (ptrInt)(buf+(n>>1)), n>>1
-    );
-    */
-
     static int status;
 
     #ifdef READLINE
@@ -101,5 +92,6 @@ int read_into_buffer(int _file, char *buf, int n)
 
     return status;
 }
+
 
 ///-----------------------------------------------------------------------------

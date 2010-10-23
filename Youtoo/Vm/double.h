@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: double floats
+/// Title: Double floats
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// Double access
 ///-----------------------------------------------------------------------------
-
 #define DOUBLE_SIZE (2)
 #define eul_double_as_c_double(x) (*((double *) &(slot_ref(x, 0))))
 #define eul_is_double(x)                                                       \
@@ -38,11 +37,15 @@
 ///-----------------------------------------------------------------------------
 /// Double allocation
 ///-----------------------------------------------------------------------------
-
 #define eul_allocate_double(loc, x)                                            \
     {                                                                          \
         double *d_ptr;                                                         \
-        ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_double_class), DOUBLE_SIZE);    \
+        ALLOCATE_WARM_OBJECT                                                   \
+        (                                                                      \
+            loc,                                                               \
+            PGLOBAL(glob_double_class),                                        \
+            DOUBLE_SIZE                                                        \
+        );                                                                     \
         d_ptr = (double *) &(slot_ref(loc, 0));                                \
         *d_ptr = x;                                                            \
     }

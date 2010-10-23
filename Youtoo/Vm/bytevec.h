@@ -18,13 +18,14 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: bytevectors (i.e. code vectors and strings)
+/// Title: bytevectors (i.e. code vectors and strings)
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
 #ifndef BYTEVEC_H
 #define BYTEVEC_H
+
 ///-----------------------------------------------------------------------------
 /// Bytevector access
 ///-----------------------------------------------------------------------------
@@ -73,12 +74,12 @@
 #define eul_allocate_bytevector1(loc, data, size)                              \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_bytevector_class), 1);              \
     bytevector_size(loc) = c_int_as_eul_int(size);                             \
-                         BYTEVECTOR_DATA(loc) = (LispRef) data
+    BYTEVECTOR_DATA(loc) = (LispRef) data
 
 #define eul_allocate_empty_bytevector(loc, size)                               \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_bytevector_class), 1);              \
     bytevector_size(loc) = c_int_as_eul_int(size);                             \
-                         BYTEVECTOR_DATA(loc) = (LispRef) gc_malloc(size);
+    BYTEVECTOR_DATA(loc) = (LispRef) gc_malloc(size);
 
 
 ///-----------------------------------------------------------------------------

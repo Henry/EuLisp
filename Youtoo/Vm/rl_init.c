@@ -17,12 +17,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: Initialization of readline
+/// Title: Initialization of readline
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Henry G. Weller
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifdef READLINE
 #include <stdlib.h>
 #include <stdio.h>

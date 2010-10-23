@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: list processing
+/// Title: List processing
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,9 +29,7 @@
 ///-----------------------------------------------------------------------------
 /// Initialization
 ///-----------------------------------------------------------------------------
-
 extern void fprint_cons (FILE *, LispRef);
-
 extern void fprint_vector (FILE *, LispRef);
 
 #ifdef WITH_CONS_TAG
@@ -41,7 +39,6 @@ extern void eul_initialize_cons();
 ///-----------------------------------------------------------------------------
 /// Cons access
 ///-----------------------------------------------------------------------------
-
 #define CONS_SIZE (2)
 #define EUL_CONS_SIZE c_int_as_eul_int(CONS_SIZE)
 
@@ -59,7 +56,6 @@ extern void eul_initialize_cons();
 ///-----------------------------------------------------------------------------
 /// Dynamic cons allocation
 ///-----------------------------------------------------------------------------
-
 #ifdef WITH_CONS_TAG
 #define eul_allocate_cons(loc, the_car, the_cdr)                               \
     {                                                                          \

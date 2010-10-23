@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: signals
+/// Title: Signals
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef EUL_SIGNALS_H
 #define EUL_SIGNALS_H
 
@@ -38,7 +37,6 @@ extern int eul_signal_enabled;
 ///-----------------------------------------------------------------------------
 /// With signals
 ///-----------------------------------------------------------------------------
-
 #ifdef WITH_SIGNALS
 
 #define eul_no_signal() ((eul_signal==0)||(eul_signal_enabled==0))
@@ -48,7 +46,6 @@ extern int eul_signal_enabled;
 ///-----------------------------------------------------------------------------
 /// Without signals
 ///-----------------------------------------------------------------------------
-
 #else
 
 #define eul_no_signal() (1)

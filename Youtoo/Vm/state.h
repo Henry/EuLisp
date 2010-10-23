@@ -18,15 +18,13 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: state used for call/cc
+/// Title: State used for call/cc
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef STATE_H
 #define STATE_H
-
 
 #define STATE_VALUE_STACK(x)        (slot_ref(x, 0))
 #define STATE_VALUE_STACK_SIZE(x)   (slot_ref(x, 1))

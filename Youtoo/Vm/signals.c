@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: signals
+/// Title: Signals
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "notify.h"
@@ -41,13 +40,11 @@ int eul_signal_enabled = 0;
 ///-----------------------------------------------------------------------------
 /// With signals ...
 ///-----------------------------------------------------------------------------
-
 #ifdef WITH_SIGNALS
 
 ///-----------------------------------------------------------------------------
 /// Signal handlers
 ///-----------------------------------------------------------------------------
-
 static void eul_signal_handler_int(int signo)
 {
     if (eul_signal_enabled == 0)
@@ -59,7 +56,6 @@ static void eul_signal_handler_int(int signo)
     eul_signal_cb = CB_FIRST_SIGNAL + 0;
 }
 
-
 static void eul_signal_handler_bus(int signo)
 {
     if (eul_signal_enabled == 0)
@@ -70,7 +66,6 @@ static void eul_signal_handler_bus(int signo)
     WARNING0("bus error");
     eul_signal_cb = CB_FIRST_SIGNAL + 1;
 }
-
 
 static void eul_signal_handler_segv(int signo)
 {
@@ -87,7 +82,6 @@ static void eul_signal_handler_segv(int signo)
 ///-----------------------------------------------------------------------------
 /// Initialize signals
 ///-----------------------------------------------------------------------------
-
 void eul_initialize_signal()
 {
     struct sigaction eul_sa_int, eul_sa_bus, eul_sa_segv; ;
@@ -128,7 +122,6 @@ void eul_initialize_signal()
     eul_signal_enabled = 1;
 }
 
-
 int eul_signal_enable(int flag)
 {
     int res = eul_signal_enabled;
@@ -141,7 +134,6 @@ int eul_signal_enable(int flag)
 ///-----------------------------------------------------------------------------
 /// Without signals ...
 ///-----------------------------------------------------------------------------
-
 #else
 
 void eul_initialize_signal()

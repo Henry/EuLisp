@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: hash tables
+/// Title: Hash tables
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Andreas Kind, Pete Broadbery
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "symbol.h"
@@ -41,7 +40,6 @@
 ///-----------------------------------------------------------------------------
 /// Magic numbers from CACM 6/90; extra 1 to avoid arith in hash fn
 ///-----------------------------------------------------------------------------
-
 const unsigned char hash_table[] =
 {
     1, 87, 49, 12, 176, 178, 102, 166, 121, 193, 6, 84, 249, 230, 44, 163,
@@ -68,7 +66,6 @@ const unsigned char hash_table[] =
 ///-----------------------------------------------------------------------------
 /// Hash function
 ///-----------------------------------------------------------------------------
-
 int eul_hash_string(char *key)
 {
     unsigned char h1 = 0, h2 = 0, h3 = 0;
@@ -83,14 +80,12 @@ int eul_hash_string(char *key)
     return (((int)h1 << 16) | ((int)h2 << 8) | (int)h3);
 }
 
-
 int eul_hash_object(LispRef key)
 {
     int leaves = 0;
     int res = eul_hash_object_aux(key, &leaves);
     return (res > 0x1fffffff ? res >> 2 : res);
 }
-
 
 #define NUMBER_OF_CONSIDERED_LEAVES (4)
 
@@ -159,7 +154,6 @@ int eul_hash_object_aux(LispRef key, int *leaves)
 ///-----------------------------------------------------------------------------
 /// Rehash
 ///-----------------------------------------------------------------------------
-
 LispRef eul_table_fast_rehash(LispRef tab)
 {
     LispRef old_vec = TABLE_ENTRIES(tab);
@@ -199,7 +193,6 @@ LispRef eul_table_fast_rehash(LispRef tab)
 ///-----------------------------------------------------------------------------
 /// Get table entry; key is always a char *
 ///-----------------------------------------------------------------------------
-
 LispRef eul_fast_table_ref(LispRef tab, char *key)
 {
     LispRef vec = TABLE_ENTRIES(tab);
@@ -240,7 +233,6 @@ LispRef eul_fast_table_ref(LispRef tab, char *key)
 ///-----------------------------------------------------------------------------
 /// Set table entry; key is always a char *
 ///-----------------------------------------------------------------------------
-
 LispRef eul_fast_table_set(LispRef tab, char *key, LispRef value)
 {
     LispRef vec = TABLE_ENTRIES(tab);
@@ -274,7 +266,7 @@ LispRef eul_fast_table_set(LispRef tab, char *key, LispRef value)
             return (TABLE_FILL_VALUE(tab));
         }
 
-        /*  else if (((char *) TABLE_ENTRY_KEY(slot_ref(vec, i))) == key) { */
+        //  else if (((char *) TABLE_ENTRY_KEY(slot_ref(vec, i))) == key) {
         else if (!strcmp(((char *)TABLE_ENTRY_KEY(slot_ref(vec, i))), key))
         {
             LispRef old = TABLE_ENTRY_VALUE(slot_ref(vec, i));

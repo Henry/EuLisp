@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: stack handling
+/// Title: Stack handling
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "notify.h"
@@ -39,7 +38,6 @@
 ///-----------------------------------------------------------------------------
 /// Allocate stack
 ///-----------------------------------------------------------------------------
-
 StackRef eul_allocate_stack()
 {
     StackRef stk = (StackRef) gc_malloc(sizeof(Stack));
@@ -55,10 +53,9 @@ StackRef eul_allocate_stack()
 ///-----------------------------------------------------------------------------
 /// Flush stack buffer
 ///  Dump the stack buffer's contents to the heap leaving the given
-///  amount. Based on Oaklisp code: Copyright (C) 1987, B Pearlmutter
-///  & K Lang.
+///  amount.
+///  Based on Oaklisp code: Copyright (C) 1987, B Pearlmutter & K Lang.
 ///-----------------------------------------------------------------------------
-
 void flush_stack_buffer(StackRef stk, int hangover)
 {
     NOTIFY5
@@ -121,7 +118,6 @@ void flush_stack_buffer(StackRef stk, int hangover)
 /// Unflush stack buffer
 ///  Based on Oaklisp code: Copyright (C) 1987, B Pearlmutter & K Lang.
 ///-----------------------------------------------------------------------------
-
 void unflush_stack_buffer(StackRef stk, int hangover)
 {
     NOTIFY4
@@ -201,7 +197,6 @@ void unflush_stack_buffer(StackRef stk, int hangover)
 ///-----------------------------------------------------------------------------
 /// Copy stack segment
 ///-----------------------------------------------------------------------------
-
 LispRef copy_stack_segment(LispRef seg)
 {
     if (seg == eul_nil)

@@ -18,7 +18,7 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: tagging
+/// Title: Tagging
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
@@ -29,7 +29,6 @@
 ///-----------------------------------------------------------------------------
 /// Tag codes
 ///-----------------------------------------------------------------------------
-
 #define TAG_BITS (2)
 
 #define OBJECT_TAG ((char) 0)
@@ -45,7 +44,6 @@
 ///-----------------------------------------------------------------------------
 /// Tag access
 ///-----------------------------------------------------------------------------
-
 #define tag_field(loc) (((ptrInt)(loc))&0x3)
 #define tag(loc, tag_value) ((LispRef) (((ptrInt) loc)|tag_value))
 #define untag(loc, tag_value) ((LispRef) (((ptrInt) (loc))-tag_value))
@@ -58,11 +56,13 @@
 #define eul_is_cons(loc) (tag_field(loc) == CONS_TAG)
 
 #define computed_object_class(loc)                                             \
-    (is_immediate(loc) ?                                                       \
-    (eul_is_int(loc) ? PGLOBAL(glob_fpi_class) :                               \
-    (eul_is_cons(loc) ? PGLOBAL(glob_cons_class):                              \
-    PGLOBAL(glob_char_class))) :                                               \
-    object_class(loc))
+    (                                                                          \
+        is_immediate(loc) ?                                                    \
+        (eul_is_int(loc) ? PGLOBAL(glob_fpi_class) :                           \
+        (eul_is_cons(loc) ? PGLOBAL(glob_cons_class):                          \
+        PGLOBAL(glob_char_class))) :                                           \
+        object_class(loc)                                                      \
+    )
 
 #else
 
@@ -70,10 +70,12 @@
     (computed_object_class(x) == PGLOBAL(glob_cons_class))
 
 #define computed_object_class(loc)                                             \
-    (is_immediate(loc) ?                                                       \
-    (eul_is_int(loc) ? PGLOBAL(glob_fpi_class) :                               \
-    PGLOBAL(glob_char_class)) :                                                \
-    object_class(loc))
+    (                                                                          \
+        is_immediate(loc) ?                                                    \
+        (eul_is_int(loc) ? PGLOBAL(glob_fpi_class) :                           \
+        PGLOBAL(glob_char_class)) :                                            \
+        object_class(loc)                                                      \
+    )
 
 #endif // WITH_CONS_TAG
 

@@ -18,19 +18,17 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: general instances
+/// Title: General instances
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #ifndef OBJECT_H
 #define OBJECT_H
 
 ///-----------------------------------------------------------------------------
 /// Default object
 ///-----------------------------------------------------------------------------
-
 typedef struct eul_object_structure
 {
     struct eul_object_structure *size;
@@ -46,7 +44,6 @@ typedef EulObject *LispRef;
 ///-----------------------------------------------------------------------------
 /// Object access
 ///-----------------------------------------------------------------------------
-
 #define object_size(loc) ((loc)->size)
 #define object_class(loc) ((loc)->class)
 #define slot_ref(loc, i) (*((&((loc)->slot1))+i))
@@ -59,7 +56,6 @@ typedef EulObject *LispRef;
 ///-----------------------------------------------------------------------------
 /// Dynamic object allocation
 ///-----------------------------------------------------------------------------
-
 #define INITIALIZE_OBJECT(loc, cl, nslots)                                     \
     object_size(loc) = c_int_as_eul_int(nslots);                               \
     object_class(loc) = (cl)
@@ -77,7 +73,9 @@ typedef EulObject *LispRef;
         int iii, nnn = nslots;                                                 \
         ALLOCATE_WARM_OBJECT(loc, class, nnn);                                 \
         for (iii = 0; iii < nnn; ++iii)                                        \
+        {                                                                      \
             slot_ref(loc, iii) = (init);                                       \
+        }                                                                      \
     }
 
 ///-----------------------------------------------------------------------------

@@ -18,12 +18,11 @@
 //  this program.  If not, see <http://www.gnu.org/licenses/>.
 //
 ///-----------------------------------------------------------------------------
-///  Title: list processing
+/// Title: List processing
 ///  Library: eulvm (Bytecode Interpreter -- Eutopia)
 ///  Authors: Keith Playford, Andreas Kind
 ///  Maintainer: Henry G. Weller
 ///-----------------------------------------------------------------------------
-
 #include "stdc.h"
 #include "config.h"
 #include "notify.h"
@@ -39,7 +38,6 @@
 ///-----------------------------------------------------------------------------
 /// Printer
 ///-----------------------------------------------------------------------------
-
 void fprint_cons(FILE *fd, LispRef o)
 {
     LispRef rest = o;
@@ -50,7 +48,9 @@ void fprint_cons(FILE *fd, LispRef o)
     {
         putc(' ', fd);
         if (eul_is_cons(rest))
+        {
             fprint_ref(fd, eul_car(rest));
+        }
         else
         {
             putc('.', fd);
@@ -72,7 +72,9 @@ void fprint_vector(FILE * fd, LispRef o)
     {
         fprint_ref(fd, slot_ref(o, i));
         if (i != (n - 1))
+        {
             putc(' ', fd);
+        }
     }
     putc(')', fd);
 }
@@ -88,5 +90,6 @@ void eul_initialize_cons()
     define_printer(CONS_TAG, fprint_cons);
 }
 #endif // WITH_CONS_TAG
+
 
 ///-----------------------------------------------------------------------------
