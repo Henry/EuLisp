@@ -265,10 +265,6 @@
       system-dependent and can be created using hexadecimal characters.  Also
       fix the number of hexadecimal digits for a character to 4 which is
       sufficient to support unicode but also avoids parsing problems.
-*** TODO Correct the echoing of complex characters
-      [user]: (print #\\\)
-      \
-      - #\\
 *** DONE Change the parser to map ='nil= to ='()=
     CLOSED: [2010-05-09 Sun 21:06]
     so that (eq 'nil '()) => t
@@ -306,7 +302,8 @@
     If only one super-class is specified allow single-inheritance syntax of
     specifying the class directly rather than as a list.
 *** TODO Correct =write= ing of character digrams and escape sequences in strings
-*** TODO Correct =defconstant= to handle character constants correctly
+*** DONE Correct =defconstant= to handle character constants correctly
+    CLOSED: [2010-10-23 Sat 19:06]
     See =(deflocal nl #\\n)= which should be =(defconstant nl #\\n)= in
     =stream.em=.
 *** TODO Improve =--script= option to handle module definition
@@ -320,14 +317,17 @@
     used which works but the equivalent
     =/home/dm2/henry/EuLisp/EuLisp/Bin.x86_64/youto o.sh= does not, nor does the
     relative path =../../Bin.x86_64/youtoo.sh= which should.
+*** TODO Consider replacing the built-in GC with =xalloc= in Eu2C
+*** TODO Rename =level1= -> =level-1=
 * EuXLisp
-*** TODO Finish reformatting the C source files
+*** DONE Finish reformatting the C source files
+    CLOSED: [2010-10-23 Sat 19:03]
 *** DONE Add =slice= method for =<list>=
     CLOSED: [2010-07-01 Thu 23:04]
 *** DONE Add =flush= and =sflush=
     CLOSED: [2010-06-27 Sun 22:59]
 *** TODO Update the class hierarchy
-    + remove =simple-string=, =simple-vector= /etc./
+    + remove =<simple-string>=, =<simple-vector>= /etc./
     + add =<sequence>=, =<character-sequence>= /etc./
 *** DONE Remove the export of =<make-...>= functions
     CLOSED: [2010-07-05 Mon 15:20]
@@ -358,7 +358,7 @@
     CLOSED: [2010-07-05 Mon 22:03]
 *** TODO Complete =double-float= functionality in =arith.em=
     See =Youtoo/Runtime/double.em=
-*** TODO Consider replacing the built-in GC with Boehm-Demers
+*** TODO Consider replacing the built-in GC with =xalloc= in Eu2C
 * Eu2C
 *** DONE Hack CMUCL to write exponent "e"
     CLOSED: [2010-08-30 Mon 11:15]
@@ -436,7 +436,8 @@
        connection to the variable declarations.
 *** TODO Split =defglobal= and =dynamic-???= from =Apply/el2lzs-rules.ecl=
     into a =level-1= file.
-*** TODO Create a =level-1= module
+*** DONE Create a =level-1= module
+    CLOSED: [2010-10-23 Sat 19:09]
     including the =level-0=, =dynamic= and =exit-1= modules.
 *** TODO Create the =exit-1= module
     containing the =throw= and =catch= functionality.  Perhaps the macros from

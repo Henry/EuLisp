@@ -7,7 +7,7 @@ lang="en" xml:lang="en">
 <title>*TODO*</title>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
 <meta name="generator" content="Org-mode"/>
-<meta name="generated" content="2010-10-08 19:58:52 BST"/>
+<meta name="generated" content="2010-10-23 19:11:16 BST"/>
 <meta name="author" content="nil"/>
 <meta name="description" content=""/>
 <meta name="keywords" content=""/>
@@ -689,30 +689,18 @@ sufficient to support unicode but also avoids parsing problems.
 </li>
 </ul>
 <ul>
-<li id="sec-3_25"><span class="todo TODO"> TODO</span> Correct the echoing of complex characters <br/>
-[user]: (print #\\\)
-\
-<ul>
-<li>
-#<br/>
-</li>
-</ul>
-
-</li>
-</ul>
-<ul>
-<li id="sec-3_26"><span class="done DONE"> DONE</span> Change the parser to map ='nil= to ='()= <br/>
+<li id="sec-3_25"><span class="done DONE"> DONE</span> Change the parser to map ='nil= to ='()= <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-09 Sun 21:06</span></span><br/>
 so that (eq 'nil '()) =&gt; t
 </li>
 </ul>
 <ul>
-<li id="sec-3_27"><span class="done DONE"> DONE</span> (eql 3.0 3.0) should return t but it returns () <br/>
+<li id="sec-3_26"><span class="done DONE"> DONE</span> (eql 3.0 3.0) should return t but it returns () <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-05-10 Mon 21:50</span></span><br/>
 </li>
 </ul>
 <ul>
-<li id="sec-3_28"><span class="todo TODO"> TODO</span> Finish <code>format</code> <br/>
+<li id="sec-3_27"><span class="todo TODO"> TODO</span> Finish <code>format</code> <br/>
 Currently <code>format</code> only handles a subset of the functionality in the
 definition, in particular <code>e</code> and <code>g</code> formatting of floating-point numbers
 is missing.  <code>format</code> is complete in EuXLisp and it may be possible to reuse
@@ -720,83 +708,92 @@ some of this functionality.
 </li>
 </ul>
 <ul>
-<li id="sec-3_29"><span class="done DONE"> DONE</span> Enable level-0 modules to be loaded interactively <br/>
+<li id="sec-3_28"><span class="done DONE"> DONE</span> Enable level-0 modules to be loaded interactively <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-21 Mon 14:32</span></span><br/>
 into a level1 environment by creating a dummy level-0 which is a copy of the
 default env
 </li>
 </ul>
 <ul>
-<li id="sec-3_30"><span class="done DONE"> DONE</span> Include default environment variables directly into <code>youtoo</code> <br/>
+<li id="sec-3_29"><span class="done DONE"> DONE</span> Include default environment variables directly into <code>youtoo</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-21 Mon 17:12</span></span><br/>
 to avoid the need for the start-up script to set them.
 </li>
 </ul>
 <ul>
-<li id="sec-3_31"><span class="todo TODO"> TODO</span> Add the <code>-m</code> load module option <br/>
+<li id="sec-3_30"><span class="todo TODO"> TODO</span> Add the <code>-m</code> load module option <br/>
 compatible with the equivalent option added to EuXLisp.|
 </li>
 </ul>
 <ul>
-<li id="sec-3_32"><span class="done DONE"> DONE</span> Add a Scheme-style <code>else</code> <br/>
+<li id="sec-3_31"><span class="done DONE"> DONE</span> Add a Scheme-style <code>else</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-06-22 Tue 22:34</span></span><br/>
 for the default clause of <code>cond</code> forms.  <code>else</code> is simply an alias for <code>t</code>.
 </li>
 </ul>
 <ul>
-<li id="sec-3_33"><span class="todo TODO"> TODO</span> Develop <code>map</code> and <code>do</code> to handle more than 2 sequences <br/>
+<li id="sec-3_32"><span class="todo TODO"> TODO</span> Develop <code>map</code> and <code>do</code> to handle more than 2 sequences <br/>
 for <code>&lt;list&gt;</code>, <code>&lt;vector&gt;</code> <i>etc.</i>
 </li>
 </ul>
 <ul>
-<li id="sec-3_34"><span class="todo TODO"> TODO</span> Fix output of very large and very small <code>&lt;double&gt;</code> numbers <br/>
+<li id="sec-3_33"><span class="todo TODO"> TODO</span> Fix output of very large and very small <code>&lt;double&gt;</code> numbers <br/>
 <code>print</code> can output numbers of the order of 1e30 but does not use exponential
 format.  There appears to be a limit on the number of decimal places that
 can be output which might relate to the size of on output formatting buffer.
 </li>
 </ul>
 <ul>
-<li id="sec-3_35"><span class="todo TODO"> TODO</span> Consider adding an expander for <code>element</code> to <code>get-appl-expander</code> <br/>
+<li id="sec-3_34"><span class="todo TODO"> TODO</span> Consider adding an expander for <code>element</code> to <code>get-appl-expander</code> <br/>
 for <code>&lt;vector&gt;</code>, <code>&lt;string&gt; and maybe =&lt;list&gt;</code> in file <code>ex-expr.em</code>.  This
 might avoid the generic function call overhead for returning an element of a
 primitive container.
 </li>
 </ul>
 <ul>
-<li id="sec-3_36"><span class="done DONE"> DONE</span> Add support for Level-0 style super-class specification <br/>
+<li id="sec-3_35"><span class="done DONE"> DONE</span> Add support for Level-0 style super-class specification <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-09-20 Mon 22:41</span></span><br/>
 If only one super-class is specified allow single-inheritance syntax of
 specifying the class directly rather than as a list.
 </li>
 </ul>
 <ul>
-<li id="sec-3_37"><span class="todo TODO"> TODO</span> Correct <code>write</code> ing of character digrams and escape sequences in strings <br/>
+<li id="sec-3_36"><span class="todo TODO"> TODO</span> Correct <code>write</code> ing of character digrams and escape sequences in strings <br/>
 </li>
 </ul>
 <ul>
-<li id="sec-3_38"><span class="todo TODO"> TODO</span> Correct <code>defconstant</code> to handle character constants correctly <br/>
+<li id="sec-3_37"><span class="done DONE"> DONE</span> Correct <code>defconstant</code> to handle character constants correctly <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-23 Sat 19:06</span></span><br/>
 See <code>(deflocal nl #\\n)</code> which should be <code>(defconstant nl #\\n)</code> in
 <code>stream.em</code>.
 </li>
 </ul>
 <ul>
-<li id="sec-3_39"><span class="todo TODO"> TODO</span> Improve <code>--script</code> option to handle module definition <br/>
+<li id="sec-3_38"><span class="todo TODO"> TODO</span> Improve <code>--script</code> option to handle module definition <br/>
 See Examples/Test/factScript.em.
 </li>
 </ul>
 <ul>
-<li id="sec-3_40"><span class="done DONE"> DONE</span> <code>--script</code> option should switch-off <code>readline</code> <br/>
+<li id="sec-3_39"><span class="done DONE"> DONE</span> <code>--script</code> option should switch-off <code>readline</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-08 Fri 19:57</span></span><br/>
 </li>
 </ul>
 <ul>
-<li id="sec-3_41"><span class="done DONE"> DONE</span> Check <code>Modules/Pipe</code> <br/>
+<li id="sec-3_40"><span class="done DONE"> DONE</span> Check <code>Modules/Pipe</code> <br/>
 <span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-08 Fri 08:32</span></span><br/>
 Currently the path
 <code>/home/dm2/henry/EuLisp/EuLisp/Modules/Pipe/../../Bin.x86_64/youto o.sh</code> is
 used which works but the equivalent
 <code>/home/dm2/henry/EuLisp/EuLisp/Bin.x86_64/youto o.sh</code> does not, nor does the
 relative path <code>../../Bin.x86_64/youtoo.sh</code> which should.
+</li>
+</ul>
+<ul>
+<li id="sec-3_41"><span class="todo TODO"> TODO</span> Consider replacing the built-in GC with <code>xalloc</code> in Eu2C <br/>
+</li>
+</ul>
+<ul>
+<li id="sec-3_42"><span class="todo TODO"> TODO</span> Rename <code>level1</code> -&gt; <code>level-1</code> <br/>
 </li>
 </ul>
 </div>
@@ -808,7 +805,8 @@ relative path <code>../../Bin.x86_64/youtoo.sh</code> which should.
 <div class="outline-text-2" id="text-4">
 
 <ul>
-<li id="sec-4_1"><span class="todo TODO"> TODO</span> Finish reformatting the C source files <br/>
+<li id="sec-4_1"><span class="done DONE"> DONE</span> Finish reformatting the C source files <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-23 Sat 19:03</span></span><br/>
 </li>
 </ul>
 <ul>
@@ -825,7 +823,7 @@ relative path <code>../../Bin.x86_64/youtoo.sh</code> which should.
 <li id="sec-4_4"><span class="todo TODO"> TODO</span> Update the class hierarchy <br/>
 <ul>
 <li>
-remove <code>simple-string</code>, <code>simple-vector</code> <i>etc.</i>
+remove <code>&lt;simple-string&gt;</code>, <code>&lt;simple-vector&gt;</code> <i>etc.</i>
 </li>
 <li>
 add <code>&lt;sequence&gt;</code>, <code>&lt;character-sequence&gt;</code> <i>etc.</i>
@@ -892,7 +890,7 @@ See <code>Youtoo/Runtime/double.em</code>
 </li>
 </ul>
 <ul>
-<li id="sec-4_13"><span class="todo TODO"> TODO</span> Consider replacing the built-in GC with Boehm-Demers <br/>
+<li id="sec-4_13"><span class="todo TODO"> TODO</span> Consider replacing the built-in GC with <code>xalloc</code> in Eu2C <br/>
 </li>
 </ul>
 </div>
@@ -1067,7 +1065,8 @@ into a <code>level-1</code> file.
 </li>
 </ul>
 <ul>
-<li id="sec-5_24"><span class="todo TODO"> TODO</span> Create a <code>level-1</code> module <br/>
+<li id="sec-5_24"><span class="done DONE"> DONE</span> Create a <code>level-1</code> module <br/>
+<span class="timestamp-wrapper"><span class="timestamp-kwd">CLOSED: </span> <span class="timestamp">2010-10-23 Sat 19:09</span></span><br/>
 including the <code>level-0</code>, <code>dynamic</code> and <code>exit-1</code> modules.
 </li>
 </ul>
@@ -1146,7 +1145,7 @@ non-interactive, i.e. no REPL.
 </div>
 </div>
 <div id="postamble">
-<p class="date"> Date: 2010-10-08 19:58:52 BST</p>
+<p class="date"> Date: 2010-10-23 19:11:16 BST</p>
 <p class="creator">HTML generated by org-mode 7.01trans in emacs 23</p>
 </div>
 </div>
