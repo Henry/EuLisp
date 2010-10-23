@@ -244,7 +244,7 @@
          (module-name (binding-origin-module-name binding))
          (local-index (binding-local-index? binding))
          (module-name-str (as-C-module-name module-name)))
-    (if (int? local-index)
+    (if (fpi? local-index)
         (write-next-bv-binding-ref module-name-str local-index)
       (ct-error -1 "bad index ~a of foreign function ~a"
                 local-index binding-name))))

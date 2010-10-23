@@ -68,13 +68,13 @@ void initialize_module_convert1()
   /* Byte-vector with size: 1 is_init: 0 index: 2 binding: (method-(converter <character>)) */
   static const void *G008956[] = {I(aa,63,45,00)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 3 binding: (method-(converter <int>)) */
+  /* Byte-vector with size: 1 is_init: 0 index: 3 binding: (method-(converter <fpi>)) */
   static const void *G008958[] = {I(aa,1b,45,01)};
 
-  /* Byte-vector with size: 1 is_init: 0 index: 4 binding: (method-(converter <int>)) */
+  /* Byte-vector with size: 1 is_init: 0 index: 4 binding: (method-(converter <fpi>)) */
   static const void *G008960[] = {I(aa,62,45,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 5 binding: (method-(converter <int>)) */
+  /* Byte-vector with size: 3 is_init: 0 index: 5 binding: (method-(converter <fpi>)) */
   static const void *G008962[] = {I(aa,41,00,00),B(string ,22),I(45,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 6 binding: (method-(converter <string>)) */
@@ -193,7 +193,7 @@ void initialize_module_convert1()
   eul_intern_symbol(sym_9018,"(method (converter <string>))");
   eul_intern_symbol(sym_9019,"(method (converter <vector>))");
   eul_intern_symbol(sym_9020,"(method (converter <table>))");
-  eul_intern_symbol(sym_9021,"(method (converter <int>))");
+  eul_intern_symbol(sym_9021,"(method (converter <fpi>))");
   eul_intern_symbol(sym_9022,"(method (converter <character>))");
   eul_allocate_bytevector( G009016,G009015);
   eul_intern_symbol(sym_9025,"top-level");

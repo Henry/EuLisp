@@ -18,46 +18,46 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: int-i
+;;; Title: fpi-i
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-(defmodule int-i
+(defmodule fpi-i
   (import (eulisp-kernel)
    syntax (eulisp-kernel)
-   export (<int>
-           int?
-           make-fpint
+   export (<fpi>
+           fpi?
+           make-fpi
            make-swi))
 
-(defun int?
+(defun fpi?
   (i)
-  (%instance-of? i <int>))
+  (%instance-of? i <fpi>))
 
-(defgeneric (converter <int>)
+(defgeneric (converter <fpi>)
   (object))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference
 ;;;-----------------------------------------------------------------------------
 ;;(%annotate-function
-;; int? new-signature
+;; fpi? new-signature
 ;; (((var0 var1)
 ;;   ((var var0) (atom? (and <object> (not <null>))))
-;;   ((var var1) (atom? <int>)))
+;;   ((var var1) (atom? <fpi>)))
 ;;  ((var0 var1)
 ;;   ((var var0) (atom? <null>))
-;;   ((var var1) (atom? (and <object> (not <int>)))))))
+;;   ((var var1) (atom? (and <object> (not <fpi>)))))))
 
 (%annotate-function
-  int? new-signature
+  fpi? new-signature
   (((var0 var1)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>)))
    ((var0 var1)
     ((var var0) (atom? <null>))
-    ((var var1) (atom? (and <object> (not <int>)))))))
+    ((var var1) (atom? (and <object> (not <fpi>)))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module int-i
+)  ;; End of module fpi-i
 ;;;-----------------------------------------------------------------------------

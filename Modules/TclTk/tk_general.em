@@ -71,7 +71,7 @@
 (defextern eul_initialize_tk () ptr)
 (defextern tk_allocate_registers (<string> ptr) ptr)
 (defextern Tk_MainLoop () boolean)
-(defextern Tcl_DoOneEvent (<int>) <int> "Tcl_DoOneEventAux")
+(defextern Tcl_DoOneEvent (<fpi>) <fpi> "Tcl_DoOneEventAux")
 
 ;; These defexterns should be first-class
 (defun tk-main-loop () (Tk_MainLoop))

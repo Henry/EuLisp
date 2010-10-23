@@ -10,7 +10,7 @@ extern LispRef stream2_bindings[];
 /* Module binding indices */
 #define control_block_buffer_size_fn_index 8 
 #define control_block_mode_fn_index 28 
-#define control_block_descriptor_fn_index 41 
+#define control_block_descriptor_fn_index 42 
 #define stdout_fn_index 34 
 #define generic_write_fn_index 27 
 #define stream_read_action_fn_index 7 
@@ -45,13 +45,13 @@ extern LispRef stream2_bindings[];
 #define from_stream_fn_index 46 
 #define stream_mode_fn_index 16 
 #define _open_file_streams__lock_X42_X42_fn_index 11 
-#define generic_connect_fn_index 44 
+#define generic_connect_fn_index 43 
 #define file_control_block__X63_fn_index 24 
 #define control_block_buffer_pos_fn_index 10 
 #define flush_buffer_fn_index 23 
 #define stream_control_block__X63_fn_index 29 
 #define fill_buffer_fn_index 2 
-#define generic_read_fn_index 43 
+#define generic_read_fn_index 44 
 #define stderr_fn_index 9 
 #define stdin_fn_index 50 
 

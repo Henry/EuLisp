@@ -54,7 +54,7 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric push ((x <object>) (y <object>)))
 
-(defmethod push ((x <tower>) (y <int>))
+(defmethod push ((x <tower>) (y <fpi>))
   (let ((blocks (tower-blocks x)))
     (if (or (null? blocks) (< y (car blocks)))
         ((setter tower-blocks) x (cons y blocks))
@@ -75,7 +75,7 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric move (n x1 x2 x3))
 
-(defmethod move ((n <int>) (x1 <tower>) (x2 <tower>) (x3 <tower>))
+(defmethod move ((n <fpi>) (x1 <tower>) (x2 <tower>) (x3 <tower>))
   (if (= n 1)
       (progn
         (push x2 (pop x1))

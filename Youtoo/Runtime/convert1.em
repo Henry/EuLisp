@@ -169,21 +169,21 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion int, character -> string
 ;;;-----------------------------------------------------------------------------
-(defmethod (converter <string>) ((x <int>)) (int-as-string x))
+(defmethod (converter <string>) ((x <fpi>)) (int-as-string x))
 (defmethod (converter <string>) ((x <character>)) (character-as-string x))
 (defmethod (converter <string>) ((x <name>)) (name x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion character, string, int -> int
 ;;;-----------------------------------------------------------------------------
-(defmethod (converter <int>) ((str <string>)) (string-as-int str))
-(defmethod (converter <int>) ((c <character>)) (character-as-int c))
-(defmethod (converter <int>) ((x <int>)) x)
+(defmethod (converter <fpi>) ((str <string>)) (string-as-int str))
+(defmethod (converter <fpi>) ((c <character>)) (character-as-int c))
+(defmethod (converter <fpi>) ((x <fpi>)) x)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion int -> character
 ;;;-----------------------------------------------------------------------------
-(defmethod (converter <character>) ((x <int>)) (int-as-character x))
+(defmethod (converter <character>) ((x <fpi>)) (int-as-character x))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module convert1

@@ -34,8 +34,8 @@
            character?
            symbol?
            cons?
-           int?
-           int?
+           fpi?
+           fpi?
            list?
            atom?
            null?
@@ -136,8 +136,8 @@
 (defun cons? (x) ((opencoded-lambda (u) (consp)) x))
 (declare-inline cons?)
 
-(defun int? (x) ((opencoded-lambda (u) (fpip)) x))
-(declare-inline int?)
+(defun fpi? (x) ((opencoded-lambda (u) (fpip)) x))
+(declare-inline fpi?)
 
 (defun simple-function? (x) ((opencoded-lambda (u) (lambdap)) x))
 (declare-inline simple-function?)
@@ -261,8 +261,8 @@
 (defopencoded character-as-int (x) (character-as-fpi))
 (defopencoded int-as-character (i) (fpi-as-character))
 
-(defextern substring (<string> <int> <int>) <string> "eul_substr")
-(defextern tailstring (<string> <int>) <string> "eul_tailstr")
+(defextern substring (<string> <fpi> <fpi>) <string> "eul_substr")
+(defextern tailstring (<string> <fpi>) <string> "eul_tailstr")
 (defextern member1-string (<character> <string>) ptr "eul_str_member1")
 (defextern make-symbol (<string>) ptr "eul_make_symbol")
 (defextern make-keyword (<string>) ptr "eul_make_keyword")
@@ -270,7 +270,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Vectors
 ;;;-----------------------------------------------------------------------------
-(defextern make-vector1 (<int> ptr) ptr "eul_make_vector")
+(defextern make-vector1 (<fpi> ptr) ptr "eul_make_vector")
 
 (defun make-vector (n . init) (make-vector1 n init))
 
@@ -314,7 +314,7 @@
 
 (defun getenv (str) (eul_getenv str))
 
-(defextern eul_system (<string>) <int> "system")
+(defextern eul_system (<string>) <fpi> "system")
 (defun system (str) (eul_system str))
 
 (defextern eul_cpu_time () ptr)

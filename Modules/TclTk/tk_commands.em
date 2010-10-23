@@ -59,7 +59,7 @@
 (defextern eul_tk_grab_set (<string>) ptr)
 
 ;; the next function only allows getting int variables.
-(defextern eul_tk_get_variable (<string>) <int>)
+(defextern eul_tk_get_variable (<string>) <fpi>)
 
 ;; To store an int variable you need to pass as a string.
 (defextern eul_tk_set_variable (<string> <string>) ptr)

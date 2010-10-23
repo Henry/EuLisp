@@ -29,7 +29,7 @@
    syntax (syntax-0))
 
 (print 1.9e0 nl)
-(print ((converter <int>) 1.9e0) nl)
+(print ((converter <fpi>) 1.9e0) nl)
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module test-double

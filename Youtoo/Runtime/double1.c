@@ -165,7 +165,7 @@ void initialize_module_double1()
   LispRef sym_295, G00294, sym_292, sym_291, sym_290, sym_289, sym_288, sym_287, sym_286, sym_285, sym_284, G00283, G00281, G00279, G00277, G00275, G00273, G00271, G00269, G00267, G00265, G00263, G00261, G00259, G00257, G00255, G00253, G00251, G00249, G00247, G00245, G00243, G00241, G00239;
 
   /* Code vector and literal definitions */
-  /* Byte-vector with size: 3 is_init: 0 index: 14 binding: (method-(converter <int>)) */
+  /* Byte-vector with size: 3 is_init: 0 index: 14 binding: (method-(converter <fpi>)) */
   static const void *G00238[] = {I(aa,41,00,00),B(double1 ,10),I(45,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 15 binding: (method-(converter <string>)) */
@@ -269,7 +269,7 @@ void initialize_module_double1()
   eul_intern_symbol(sym_289,"(method binary-mod)");
   eul_intern_symbol(sym_290,"(method (converter <double>))");
   eul_intern_symbol(sym_291,"(method (converter <string>))");
-  eul_intern_symbol(sym_292,"(method (converter <int>))");
+  eul_intern_symbol(sym_292,"(method (converter <fpi>))");
   eul_allocate_bytevector( G00283,G00282);
   eul_intern_symbol(sym_295,"top-level");
   eul_allocate_bytevector( G00294,G00293);

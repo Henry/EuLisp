@@ -10,7 +10,7 @@
    local-literals (
     (top-level . 40)
     (|(method (converter <character>))| . 38)
-    (|(method (converter <int>))| . 37)
+    (|(method (converter <fpi>))| . 37)
     (|(method (converter <table>))| . 36)
     (|(method (converter <vector>))| . 35)
     (|(method (converter <string>))| . 34)

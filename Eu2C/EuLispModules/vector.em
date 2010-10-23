@@ -30,8 +30,8 @@
   (import (tail
            (only (%pair-size)
                  basic-list)
-           (only (make-fpint)
-                 int-i)
+           (only (make-fpi)
+                 fpi-i)
            (only (deep-copy
                   shallow-copy)
                  copy)
@@ -109,7 +109,7 @@
 ;;            (convert-vector-list1 vector (%plus i #%I1) l))))
 
 ;;(defun length(l)            ;; For what ? rr
-;;  (make-fpint (%pair-size l))) ;;(((.. size-1 l)))
+;;  (make-fpi (%pair-size l))) ;;(((.. size-1 l)))
 
 ;;(defun size-1 (l)        ; better basic-pair ?
 ;;    (if (null? l)
@@ -136,7 +136,7 @@
 ;;; Size
 ;;;-----------------------------------------------------------------------------
 (defun vector-size (object)
-  (make-fpint (%cast %signed-word-integer (primitive-vector-size object))))
+  (make-fpi (%cast %signed-word-integer (primitive-vector-size object))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; make-initialized-vector

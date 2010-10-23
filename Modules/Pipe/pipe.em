@@ -78,8 +78,8 @@
 ;;; External functions from eul-pipe.c
 ;;;-----------------------------------------------------------------------------
 (defextern eul-fork-child (<string>) ptr  "eul_fork_child")
-(defextern eul-pipe-strerror (<int>) <string> "eul_pipe_strerror")
-(defextern eul-kill (<int> <int>) <int> "kill")
+(defextern eul-pipe-strerror (<fpi>) <string> "eul_pipe_strerror")
+(defextern eul-kill (<fpi> <fpi>) <fpi> "kill")
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module pipe

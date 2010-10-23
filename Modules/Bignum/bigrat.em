@@ -49,19 +49,19 @@
     (if (cons? val)
         (let ((a (car val))
               (b (cdr val)))
-          (cond ((and (int? a) (int? b))
+          (cond ((and (fpi? a) (fpi? b))
                  ((setter bigrat-value) x (mpq-init-set-si a b)))
                 ((and (bigint? a) (bigint? b))
                  (let ((blah (mpq-init)))
                    (mpq-set-num blah (bigint-value a))
                    (mpq-set-den blah (bigint-value b))
                    ((setter bigrat-value) x blah)))
-                ((and (int? a) (bigint? b))
+                ((and (fpi? a) (bigint? b))
                  (let ((blah (mpq-init)))
                    (mpq-set-num blah (mpz-init-set-si a))
                    (mpq-set-den blah (bigint-value b))
                    ((setter bigrat-value) x blah)))
-                ((and (bigint? a) (int? b))
+                ((and (bigint? a) (fpi? b))
                  (let ((blah (mpq-init)))
                    (mpq-set-num blah (bigint-value a))
                    (mpq-set-den blah (mpz-init-set-si b))
@@ -94,11 +94,11 @@
 (defmethod binary+ ((x <bigrat>) (y <bigrat>))
   (make-bigrat-fast (mpq-add-init (bigrat-value x) (bigrat-value y))))
 
-(defmethod binary+ ((x <bigrat>) (y <int>))
+(defmethod binary+ ((x <bigrat>) (y <fpi>))
   (let ((blah (mpq-init-set-si y 1)))
     (make-bigrat-fast (mpq-add-init (bigrat-value x) blah))))
 
-(defmethod binary+ ((x <int>) (y <bigrat>))
+(defmethod binary+ ((x <fpi>) (y <bigrat>))
   (let ((blah (mpq-init-set-si y 1)))
     (make-bigrat-fast (mpq-add-init blah (bigrat-value y) ))))
 
@@ -116,11 +116,11 @@
 (defmethod binary* ((x <bigrat>) (y <bigrat>))
   (make-bigrat-fast (mpq-mul-init (bigrat-value x) (bigrat-value y))))
 
-(defmethod binary* ((x <bigrat>) (y <int>))
+(defmethod binary* ((x <bigrat>) (y <fpi>))
   (let ((blah (mpq-init-set-si y 1)))
     (make-bigrat-fast (mpq-mul-init (bigrat-value x) blah))))
 
-(defmethod binary* ((x <int>) (y <bigrat>))
+(defmethod binary* ((x <fpi>) (y <bigrat>))
   (let ((blah (mpq-init-set-si x 1)))
     (make-bigrat-fast (mpq-mul-init blah (bigrat-value y) ))))
 
@@ -138,11 +138,11 @@
 (defmethod binary- ((x <bigrat>) (y <bigrat>))
   (make-bigrat-fast (mpq-sub-init (bigrat-value x) (bigrat-value y))))
 
-(defmethod binary- ((x <bigrat>) (y <int>))
+(defmethod binary- ((x <bigrat>) (y <fpi>))
   (let ((blah (mpq-init-set-si y 1)))
     (make-bigrat-fast (mpq-sub-init (bigrat-value x) blah))))
 
-(defmethod binary- ((x <int>) (y <bigrat>))
+(defmethod binary- ((x <fpi>) (y <bigrat>))
   (let ((blah (mpq-init-set-si x 1)))
     (make-bigrat-fast (mpq-sub-init blah (bigrat-value y) ))))
 
@@ -160,11 +160,11 @@
 (defmethod binary/ ((x <bigrat>) (y <bigrat>))
   (make-bigrat-fast (mpq-div-init (bigrat-value x) (bigrat-value y))))
 
-(defmethod binary/ ((x <bigrat>) (y <int>))
+(defmethod binary/ ((x <bigrat>) (y <fpi>))
   (let ((blah (mpq-init-set-si y 1)))
     (make-bigrat-fast (mpq-div-init (bigrat-value x) blah))))
 
-(defmethod binary/ ((x <int>) (y <bigrat>))
+(defmethod binary/ ((x <fpi>) (y <bigrat>))
   (let ((blah (mpq-init-set-si x 1)))
     (make-bigrat-fast (mpq-div-init blah (bigrat-value y) ))))
 
@@ -179,10 +179,10 @@
 (defmethod binary/ ((x <bigint>) (y <bigint>))
   (make <bigrat> value: `(,x ,y)))
 
-(defmethod binary/ ((x <bigint>) (y <int>))
+(defmethod binary/ ((x <bigint>) (y <fpi>))
   (make <bigrat> value: (list x (make <bigint> value: y))))
 
-(defmethod binary/ ((x <int>) (y <bigint>))
+(defmethod binary/ ((x <fpi>) (y <bigint>))
   (make <bigrat> value: (list (make <bigint> value: x) y)))
 
 ;;;-----------------------------------------------------------------------------
@@ -191,22 +191,22 @@
 (defmethod binary= ((x <bigrat>) (y <bigrat>))
   (= 0 (mpq-cmp (bigrat-value x) (bigrat-value y))))
 
-(defmethod binary= ((x <bigrat>) (y <int>))
+(defmethod binary= ((x <bigrat>) (y <fpi>))
   (let ((blah (mpq-init-set-si y 1)))
     (= 0 (mpq-cmp (bigrat-value x) blah))))
 
-(defmethod binary= ((x <int>) (y <bigrat>))
+(defmethod binary= ((x <fpi>) (y <bigrat>))
   (let ((blah (mpq-init-set-si x 1)))
     (= 0 (mpq-cmp (bigrat-value y) blah))))
 
 (defmethod binary< ((x <bigrat>) (y <bigrat>))
   (= 0 (mpq-cmp (bigrat-value x) (bigrat-value y))))
 
-(defmethod binary< ((x <bigrat>) (y <int>))
+(defmethod binary< ((x <bigrat>) (y <fpi>))
   (let ((blah (mpq-init-set-si y 1)))
     (< 0 (mpq-cmp (bigrat-value x) blah))))
 
-(defmethod binary< ((x <int>) (y <bigrat>))
+(defmethod binary< ((x <fpi>) (y <bigrat>))
   (let ((blah (mpq-init-set-si x 1)))
     (< 0 (mpq-cmp (bigrat-value y) blah))))
 

@@ -43,7 +43,7 @@
                   %minus
                   %mult
                   make-swi
-                  make-fpint
+                  make-fpi
                   cons
                   car
                   cdr
@@ -53,8 +53,8 @@
            (only (error
                   <condition>)
                  condition-i)
-           (only (int?)
-                 int-i)
+           (only (fpi?)
+                 fpi-i)
            (only (stdout
                   %write-unit
                   %read-unit
@@ -196,7 +196,7 @@
                  (%cast %signed-word-integer (%extract fstring-c cur-index))))
             (if (%eq ch $char-tilde)
                 (progn
-                  (dynamic-setq *tilde-index* (make-fpint cur-index))
+                  (dynamic-setq *tilde-index* (make-fpi cur-index))
                   (format2 stream fstring-c
                            (%plus #%i1 cur-index) length args #%i0 #%i0))
               (progn (%write-unit stream ch)
@@ -274,7 +274,7 @@
       (if (%eq ch $char-ascii-d-l)
           (generic-write (car args) stream ) ;write test int
         (if (%eq ch $char-ascii-b-l) ;test int
-            (if (int? (car args))
+            (if (fpi? (car args))
                 (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                        (print-based-int-0 stream
                                           (make-swi (car args))
@@ -301,7 +301,7 @@
         (if (%eq ch $char-ascii-g-l)
             (format-float stream (car args) fstring-c cur-index)
           (if (%eq ch $char-ascii-o-l)
-              (if (int? (car args))
+              (if (fpi? (car args))
                   (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                          (print-based-int-0
                           stream
@@ -310,7 +310,7 @@
                           (%cast <string-stack> *buffer-1*)))
                 (generic-write (car args) stream ))
             (if (%eq ch $char-string-hex-l)
-                (if (int? (car args))
+                (if (fpi? (car args))
                     (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                            (print-based-int-0
                             stream
@@ -319,7 +319,7 @@
                             (%cast <string-stack> *buffer-1*)))
                   (generic-write (car args) stream ))
               (if (%eq ch $char-ascii-r-l)
-                  (if (int? (car args))
+                  (if (fpi? (car args))
                       (progn (clear-buffer (%cast <string-stack> *buffer-1*))
                              (print-based-int-0
                               stream
@@ -465,7 +465,7 @@
                                 (%plus #%i1 cur-index) length)
               ;; bad command char
               (progn (dynamic-setq saved-cur-index
-                                   (make-fpint cur-index))
+                                   (make-fpi cur-index))
                      ()))))))))
 
 (%define-function (read-integer-0 <list>)
@@ -478,7 +478,7 @@
     (if (integer? obj)
         (cons obj (scan1 stream fstring-c cur-index length))
       (progn (dynamic-setq saved-cur-index
-                           (make-fpint cur-index))
+                           (make-fpi cur-index))
              (cons obj ())))))
 
 (%define-function (read-integer <object>)
@@ -502,7 +502,7 @@
     (if (character? obj)
         (cons obj (scan1 stream fstring-c cur-index length))
       (progn (dynamic-setq saved-cur-index
-                           (make-fpint cur-index))
+                           (make-fpi cur-index))
              (cons obj ())))))
 
 (%define-function (read-character <object>)
@@ -522,7 +522,7 @@
     (if (float? obj)
         (cons obj (scan1 stream fstring-c cur-index length))
       (progn (dynamic-setq saved-cur-index
-                           (make-fpint cur-index))
+                           (make-fpi cur-index))
              (cons obj ())))))
 
 (%define-function (read-float <object>)

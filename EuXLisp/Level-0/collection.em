@@ -642,14 +642,14 @@
 
 (define-generic (slice c s e))
 
-(define-method (slice (str <string>) (s <int>) (e <int>))
+(define-method (slice (str <string>) (s <fpi>) (e <fpi>))
                (substring str s e))
 
 (define (slice-list list from to)
         (if (>= from to) ()
           (cons (list-ref list from) (slice-list list (+ from 1) to))))
 
-(define-method (slice (list <list>) (s <int>) (e <int>))
+(define-method (slice (list <list>) (s <fpi>) (e <fpi>))
                (slice-list list s e))
 
 ;;;-----------------------------------------------------------------------------

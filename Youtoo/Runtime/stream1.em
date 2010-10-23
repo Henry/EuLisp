@@ -74,16 +74,16 @@
 ;;;-----------------------------------------------------------------------------
 ;;; C interface
 ;;;-----------------------------------------------------------------------------
-(defextern eul_open (<string> <int> <int>) <int> "open")
-(defextern eul_close (<int>) <int> "close")
-(defextern eul_read (<int> <string> <int>) <int> "read")
-(defextern eul_write (<int> <string> <int>) <int> "write")
-(defextern eul_sprintf (<string> <int> <string> ptr) <int>)
-(defextern eul_sprintf_string (<string> <int> <int> <int> <string> <string>) <int>)
-(defextern eul_make_socket (<string> <string> <int>) <int>)
-(defextern eul_socket_accept (<int>) <int>)
-(defextern eul_make_connection (<string> <string> <string>) <int>)
-(defextern eul_socket_strerror (<int>) <string>)
+(defextern eul_open (<string> <fpi> <fpi>) <fpi> "open")
+(defextern eul_close (<fpi>) <fpi> "close")
+(defextern eul_read (<fpi> <string> <fpi>) <fpi> "read")
+(defextern eul_write (<fpi> <string> <fpi>) <fpi> "write")
+(defextern eul_sprintf (<string> <fpi> <string> ptr) <fpi>)
+(defextern eul_sprintf_string (<string> <fpi> <fpi> <fpi> <string> <string>) <fpi>)
+(defextern eul_make_socket (<string> <string> <fpi>) <fpi>)
+(defextern eul_socket_accept (<fpi>) <fpi>)
+(defextern eul_make_connection (<string> <string> <string>) <fpi>)
+(defextern eul_socket_strerror (<fpi>) <string>)
 (defextern eul_strerror () <string>)
 
 (defun strerror () (eul_strerror))
@@ -92,7 +92,7 @@
 ;;; Tokenizer
 ;;;-----------------------------------------------------------------------------
 (defextern ntok (ptr ptr) ptr "ntok")
-(defextern read-into-buffer (<int> <string> <int>) <int> "read_into_buffer")
+(defextern read-into-buffer (<fpi> <string> <fpi>) <fpi> "read_into_buffer")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Hostname

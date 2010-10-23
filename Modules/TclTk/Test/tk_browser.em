@@ -143,7 +143,7 @@
     (*objects-inspected*
      (let ((position (convert
                       (car (tk-listbox-curselection *lb-previous*))
-                      <int>)))
+                      <fpi>)))
        (setq *actual-object* (element *objects-inspected* position))
        (setq *objects-inspected* (remove-element *objects-inspected* position))
        (generate-layout)))))

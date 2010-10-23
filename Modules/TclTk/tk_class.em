@@ -203,7 +203,7 @@
 (defmethod tk-insert ((listbox <tk-listbox>) (type <string>) (text <string>))
   (eul_insert_command (tk-name listbox) (tk-handler listbox) type text))
 
-(defmethod tk-insert ((listbox <tk-listbox>) (type <string>) (num  <int>))
+(defmethod tk-insert ((listbox <tk-listbox>) (type <string>) (num  <fpi>))
   (eul_insert_command
    (tk-name listbox) (tk-handler listbox) type (convert num <string>)))
 

@@ -84,7 +84,7 @@
 
 #define eul_int_as_c_int_checked(x)                                            \
     (eul_is_int(x) ? eul_int_as_c_int(x) :                                     \
-    (ff_notify_arg_error(x, <int>), 0))
+    (ff_notify_arg_error(x, <fpi>), 0))
 
 #define eul_double_as_c_double_checked(x)                                      \
     (eul_is_double(x) ? eul_double_as_c_double(x) :                            \

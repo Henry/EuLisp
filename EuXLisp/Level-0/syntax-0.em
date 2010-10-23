@@ -111,7 +111,7 @@
                   value: name))))
 
 ; (defgeneric foo (x)
-;    method: ((x <int>) ...)
+;    method: ((x <fpi>) ...)
 ;    method: ((y <flt>) ...)
 ;    ...)
 (defmacro defgeneric (name args . body)

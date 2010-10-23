@@ -40,8 +40,8 @@
                   lower2upper)
                  char-tables)
            (only (make-swi
-                  make-fpint)
-                 int-i)
+                  make-fpi)
+                 fpi-i)
            basic-compare)
    syntax (tail)
    export (<character>
@@ -104,16 +104,16 @@
 ;;       (make-character-box-vector))
 
 (%define-function (convert-int-char <character>)
-  ((int <int>))
+  ((int <fpi>))
   ;;  (%cast <character> (%plus  (%cast %signed-word-integer
   ;;                                    $character-box-vector )
   ;;                             (%ashiftl (%plus (make-swi int) #%i1) #%B2))))
   (make-character       ;(%cast %unsigned-word-integer ;RR
    (make-swi int)))     ;)  ;;RR
 
-(%define-function (convert-char-int <int>)
+(%define-function (convert-char-int <fpi>)
   ((char <character>))
-  (make-fpint
+  (make-fpi
    ;;         (%minus (%ashiftr (%minus (%cast %signed-word-integer char)
    ;;                                   (%cast %signed-word-integer
    ;;                                          $character-box-vector))

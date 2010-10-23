@@ -33,7 +33,7 @@ TEX_FILES = \
     bibliography.tex  eulisp.tex        modules.tex    level-0.tex \
     float.tex         mop.tex           syntax.tex     character.tex \
     foreword.tex      table.tex         collection.tex formatted-io.tex \
-    number.tex        telos-0.tex       condition.tex  fpint.tex \
+    number.tex        telos-0.tex       condition.tex  fpi.tex \
     prim.tex          telos-1.tex       control-0.tex  terms.tex \
     dynamic.tex       integer.tex       stream.tex     thread.tex \
     convert.tex       introduction.tex  string.tex     vector.tex \

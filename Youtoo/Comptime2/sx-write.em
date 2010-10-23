@@ -80,7 +80,7 @@
          (local-name (binding-local-name? x))
          (local-index (binding-local-index? x))
          (module-name (if (module? module) (module-name? module) module)))
-    (if (int? local-index)
+    (if (fpi? local-index)
         (sformat s "#<binding: ~a:~a:~a>" module-name local-name local-index)
       (sformat s "#<binding: ~a:~a>" module-name local-name))))
 

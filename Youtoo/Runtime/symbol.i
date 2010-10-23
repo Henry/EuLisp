@@ -8,7 +8,7 @@
    export (
     ((name . <keyword>) (pos . 92) (origin mop-class . <keyword>) (class . constant))
     ((name . name) (pos . 8) (origin collect . name))
-    ((name . symbol-name) (pos . 67) (origin mop-class . symbol-name) (inline (G00764 (static-ref0) (primitive-ref))))
+    ((name . symbol-name) (pos . 70) (origin mop-class . symbol-name) (inline (G00764 (static-ref0) (primitive-ref))))
     ((name . symbol-exists?) (pos . 4) (origin symbol . symbol-exists?))
     ((name . keyword?) (pos . 2) (origin symbol . keyword?))
     ((name . <name>) (pos . 39) (origin mop-class . <name>) (class . constant))

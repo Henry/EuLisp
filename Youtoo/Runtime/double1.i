@@ -21,7 +21,7 @@
    )
    local-literals (
     (top-level . 46)
-    (|(method (converter <int>))| . 44)
+    (|(method (converter <fpi>))| . 44)
     (|(method (converter <string>))| . 43)
     (|(method (converter <double>))| . 42)
     (|(method binary-mod)| . 41)

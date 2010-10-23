@@ -2,7 +2,7 @@
 %
 \begin{optDefinition}
 The defined name of this module is {\tt fpi}.  Arithmetic operations for
-\classref{int} are defined by methods on the generic
+\classref{fpi} are defined by methods on the generic
 functions defined in the compare module (\ref{compare}):
 %
 \begin{flushleft}
@@ -36,7 +36,7 @@ and in the integer module:
 The behaviour of these functions is defined in the modules noted
 above.
 
-\derivedclass{int}{integer}
+\derivedclass{fpi}{integer}
 %
 The class of all instances of fixed precision integers.
 
@@ -49,7 +49,7 @@ The class of all instances of fixed precision integers.
 Returns {\em object\/} if it is fixed precision integer, otherwise
 \nil{}.
 
-\constant{most-positive-int}{int}
+\constant{most-positive-int}{fpi}
 \index{general}{implementation-defined!most positive fixed precision integer}
 \index{general}{conformity-clause!most positive fixed precision integer}
 
@@ -61,7 +61,7 @@ maximum-vector-index}\index{general}{implementation-defined!most positive
 fixed precision integer}\index{general}{conformity-clause!most positive
 fixed precision integer}.
 
-\constant{most-negative-int}{int}
+\constant{most-negative-int}{fpi}
 \index{general}{implementation-defined!most negative fixed precision integer}
 \index{general}{conformity-clause!most negative fixed precision integer}
 
@@ -75,7 +75,7 @@ precision integer}.
 \converter{string}
 %
 \begin{specargs}
-    \item[integer, \classref{int}] An integer.
+    \item[integer, \classref{fpi}] An integer.
 \end{specargs}
 %
 \result%
@@ -84,16 +84,16 @@ the external representation of {\em integer\/} in decimal notation.
 
 \converter{double-float}
 \begin{specargs}
-\item[integer, \classref{int}] An integer.
+\item[integer, \classref{fpi}] An integer.
 \end{specargs}
 
 \result%
 Returns a double float whose value is the floating point approximation
 to {\em integer}.
 
-\method{generic-print}{int}
+\method{generic-print}{fpi}
 \begin{specargs}
-\item[integer, \classref{int}] An integer to be output on {\em stream}.
+\item[integer, \classref{fpi}] An integer to be output on {\em stream}.
 \item[stream, \classref{stream}] The stream on which the representation is
 to be output.
 \end{specargs}
@@ -106,9 +106,9 @@ Outputs external representation of {\em integer\/} on {\em stream\/}
 in decimal as defined by {\em decimal integer} at the beginning of
 this section.
 
-\method{generic-write}{int}
+\method{generic-write}{fpi}
 \begin{specargs}
-\item[integer, \classref{int}] An integer to be output on {\em stream}.
+\item[integer, \classref{fpi}] An integer to be output on {\em stream}.
 \item[stream, \classref{stream}] The stream on which the representation is
 to be output.
 \end{specargs}

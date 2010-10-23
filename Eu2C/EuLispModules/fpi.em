@@ -18,15 +18,15 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: Level-0 module int
+;;; Title: Level-0 module fpi
 ;;;  Authors: E. Ulrich Kriegel
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
 
-(defmodule int
+(defmodule fpi
   (import (tail
            eulisp-kernel
-           int-i
+           fpi-i
            integer
            (only (<double-float>
                   make-dble)
@@ -63,89 +63,87 @@
            negate
            zero?
            equal
-           int?
+           fpi?
            <fpi>
            most-positive-int
-           most-negative-int
-           <int>))
-
-(defconstant <fpi> <int>)
-#-(:int :big)
-(defconstant most-positive-int #xffff)
+           most-negative-int))
 
 #-(:int :big)
-(defconstant most-negative-int #x-10000)
+(defconstant most-positive-fpi #xffff)
+
+#-(:int :big)
+(defconstant most-negative-fpi #x-10000)
 
 #+(:int :big)
-(defconstant most-positive-int #x3fffffff)
+(defconstant most-positive-fpi #x3fffffff)
 
 #+(:int :big)
-(defconstant most-negative-int #x-40000000)
+(defconstant most-negative-fpi #x-40000000)
 
 ;;;-----------------------------------------------------------------------------
 ;;; methods and functions
 ;;;-----------------------------------------------------------------------------
 (defmethod binary+
-  ((a <int>)
-   (b <int>))
-  (make-fpint (%plus (make-swi a)
+  ((a <fpi>)
+   (b <fpi>))
+  (make-fpi (%plus (make-swi a)
                      (make-swi b))))
 
 (defmethod binary-
-  ((a <int>)
-   (b <int>))
-  (make-fpint (%minus (make-swi a)
+  ((a <fpi>)
+   (b <fpi>))
+  (make-fpi (%minus (make-swi a)
                       (make-swi b))))
 
 (defmethod binary*
-  ((a <int>)
-   (b <int>))
-  (make-fpint (%mult (make-swi a)
+  ((a <fpi>)
+   (b <fpi>))
+  (make-fpi (%mult (make-swi a)
                      (make-swi b))))
 
 (defmethod binary/
-  ((a <int>)
-   (b <int>))
-  (make-fpint (%div (make-swi a)
+  ((a <fpi>)
+   (b <fpi>))
+  (make-fpi (%div (make-swi a)
                     (make-swi b))))
 (defmethod binary%
-  ((a <int>)
-   (b <int>))
-  (make-fpint (%rem (make-swi a)
+  ((a <fpi>)
+   (b <fpi>))
+  (make-fpi (%rem (make-swi a)
                     (make-swi b))))
 
 (defmethod binary-mod
-  ((a <int>)
-   (b <int>))
-  (make-fpint (%rem (make-swi a)
+  ((a <fpi>)
+   (b <fpi>))
+  (make-fpi (%rem (make-swi a)
                     (make-swi b))))
 
 (defmethod binary=
-  ((a <int>)
-   (b <int>))
+  ((a <fpi>)
+   (b <fpi>))
   (if (%eq (%cast %signed-word-integer a)
            (%cast %signed-word-integer b))
       a
     ()))
 
 (defmethod binary<
-  ((a <int>)
-   (b <int>))
+  ((a <fpi>)
+   (b <fpi>))
   (if (%lt (%cast %signed-word-integer a)
            (%cast %signed-word-integer b))
       a
     ()))
 
-(defmethod binary-gcd ((a <int>)
-                       (b <int>))
-  (make-fpint (fpi-gcd (%swi-abs (make-swi a))
+(defmethod binary-gcd ((a <fpi>)
+                       (b <fpi>))
+  (make-fpi (fpi-gcd (%swi-abs (make-swi a))
                        (%swi-abs (make-swi b)))))
 
-(defmethod binary-lcm ((a <int>)
-                       (b <int>))
+(defmethod binary-lcm ((a <fpi>)
+                       (b <fpi>))
   (%let ((aa %signed-word-integer (%swi-abs(make-swi a)))
          (bb %signed-word-integer (%swi-abs(make-swi b))))
-        (make-fpint (%div (%mult aa bb)
+        (make-fpi (%div (%mult aa bb)
                           (fpi-gcd aa bb)))))
 
 (%define-function (%swi-abs %signed-word-integer)
@@ -163,22 +161,22 @@
         (fpi-gcd (%div b a) a)
       a)
     ))
-(defmethod negate ((a <int>))
-  (make-fpint (%neg (make-swi a))))
+(defmethod negate ((a <fpi>))
+  (make-fpi (%neg (make-swi a))))
 
-(defmethod zero? ((a <int>))
+(defmethod zero? ((a <fpi>))
   (binary= a 0))
 
 (defmethod equal
-  ((a <int>)
-   (b <int>))
+  ((a <fpi>)
+   (b <fpi>))
   (binary= a b))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Converter
 ;;;-----------------------------------------------------------------------------
 (defmethod (converter <double-float>)
-  ((object <int>))
+  ((object <fpi>))
   (make-dble(%citod (make-swi object))))
 
 ;;;-----------------------------------------------------------------------------
@@ -187,123 +185,123 @@
 (%annotate-function
   binary+ new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 (%annotate-function
   binary- new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 (%annotate-function
   binary/ new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 (%annotate-function
   binary* new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 (%annotate-function
   binary% new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 (%annotate-function
   binary-mod new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 (%annotate-function
   binary-gcd new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 (%annotate-function
   binary-lcm new-signature
   (((var0 var1 var2)
-    ((var var0) (atom? <int>))
-    ((var var1) (atom? <int>))
-    ((var var2) (atom? <int>)))
+    ((var var0) (atom? <fpi>))
+    ((var var1) (atom? <fpi>))
+    ((var var2) (atom? <fpi>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
-    ((var var1) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
+    ((var var1) (atom? (and <number> (not <fpi>))))
     ((var var2) (atom? <number>)))
    ((var0 var1 var2)
-    ((var var0) (atom? (and <number> (not <int>))))
+    ((var var0) (atom? (and <number> (not <fpi>))))
     ((var var1) (atom? <number>))
-    ((var var2) (atom? (and <number> (not <int>)))))))
+    ((var var2) (atom? (and <number> (not <fpi>)))))))
 
 ;;;-----------------------------------------------------------------------------
-)  ;; End of module int
+)  ;; End of module fpi
 ;;;-----------------------------------------------------------------------------

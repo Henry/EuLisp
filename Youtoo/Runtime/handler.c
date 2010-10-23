@@ -217,7 +217,7 @@ void initialize_module_handler()
   /* Byte-vector with size: 3 is_init: 0 index: 36 binding: (method-element) */
   static const void *G009934[] = {I(ab,41,00,00),B(handler ,13),I(45,02,00,00)};
 
-  /* Byte-vector with size: 3 is_init: 0 index: 37 binding: (method-(converter <int>)) */
+  /* Byte-vector with size: 3 is_init: 0 index: 37 binding: (method-(converter <fpi>)) */
   static const void *G009936[] = {I(aa,41,00,00),B(handler ,12),I(45,01,00,00)};
 
   /* Byte-vector with size: 3 is_init: 0 index: 38 binding: (method-(converter <int*>)) */
@@ -304,7 +304,7 @@ void initialize_module_handler()
   object_class(cons_9969) = eul_static_cons_class;
   eul_car(cons_9969) = sym_9970;
   eul_intern_symbol(sym_9973,"(method (converter <int*>))");
-  eul_intern_symbol(sym_9974,"(method (converter <int>))");
+  eul_intern_symbol(sym_9974,"(method (converter <fpi>))");
   eul_intern_symbol(sym_9975,"(method element)");
   eul_intern_symbol(sym_9976,"(method (setter element))");
   eul_intern_symbol(sym_9977,"double*");

@@ -152,7 +152,7 @@
   (let ((ascii-value (character-as-int n)))
     (add-asm `(static-character-ref ,ascii-value) 1 state)))
 
-(defmethod encode-literal ((n <int>) (state <code-state>))
+(defmethod encode-literal ((n <fpi>) (state <code-state>))
   (cond ((= n 0) (add-asm `(static-ref0) 1 state))
         ((= n 1) (add-asm `(static-ref1) 1 state))
         ((= n 2) (add-asm `(static-ref2) 1 state))

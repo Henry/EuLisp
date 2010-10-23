@@ -243,7 +243,7 @@
   (convert x <double-float>))
 
 (defun exact? (x)
-  (int? x))
+  (fpi? x))
 (declare-inline exact?)
 
 (export exp)
@@ -283,7 +283,7 @@
   (nyi 'imag-part))
 
 (defun inexact->exact (x)
-  (convert x <int>))
+  (convert x <fpi>))
 
 (defun inexact? (x)
   (double? x))
@@ -455,7 +455,7 @@
 
 (defun string->number (x)
   ;; floats not addressed!
-  (convert x <int>))
+  (convert x <fpi>))
 (declare-inline string->number)
 
 (defun string->symbol (str)

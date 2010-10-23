@@ -18,7 +18,7 @@
 ;;  this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 ;;;-----------------------------------------------------------------------------
-;;; Title: EL-in-CL: module fpint
+;;; Title: EL-in-CL: module fpi
 ;;;  Description:
 ;;;  Authors: Ingo Mohr
 ;;;  Maintainer: Henry G. Weller
@@ -31,7 +31,7 @@
                common-lisp)
          (only (fixnump)
                ext))
- export (int?)
+ export (fpi?)
  expose (number)
  syntax (eulisp-kernel))
 
@@ -41,7 +41,7 @@
   ;; rename the CL-class to int and not to fpi
   (make-eulisp-class int fixnum))
 
-(defun int? (x)
+(defun fpi? (x)
   (fixnump x))
 
 ;;;-----------------------------------------------------------------------------

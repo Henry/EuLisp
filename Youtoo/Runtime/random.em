@@ -19,12 +19,12 @@
 ;;; Set *random-max*
 ;;;-----------------------------------------------------------------------------
 (defconstant *random-max* (eul_rand_max))
-(defextern eul_rand_max () <int>)
+(defextern eul_rand_max () <fpi>)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Return a random value between 0 and random-max
 ;;;-----------------------------------------------------------------------------
-(defextern rand () <int>)
+(defextern rand () <fpi>)
 
 (defun random x
   (if x
@@ -36,14 +36,14 @@
 ;;; new sequence of pseudo-random numbers to be returned by subsequent
 ;;; calls to the function random
 ;;;-----------------------------------------------------------------------------
-(defextern eul_srand (<int>) <int>)
+(defextern eul_srand (<fpi>) <fpi>)
 
 (defun random-seed (x) (eul_srand x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Fifty-fifty function
 ;;;-----------------------------------------------------------------------------
-;; The result of (random 2) should always be a fixnum (<int> class),
+;; The result of (random 2) should always be a fixnum (<fpi> class),
 ;; so use int-zero?, which is available during bootstrapping, instead of
 ;; zero?, the generic function.
 (defun random-true-nil ()

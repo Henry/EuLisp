@@ -28,14 +28,14 @@
 (defmodule read
   (import ((only (<class>
                   <object>
-                  <int>
+                  <fpi>
                   <symbol>
                   <integer>
                   %signed-word-integer
                   %unsigned-word-integer
                   %signed-byte-integer
                   %string
-                  make-fpint
+                  make-fpi
                   make-swi
                   %extract
                   %cast
@@ -109,8 +109,8 @@
                   set-dble
                   make-dble)
                  double-float-i)
-           (only (int?)
-                 int-i)
+           (only (fpi?)
+                 fpi-i)
            (only (strcmp)
                  c-string-interface)
            (only (make-symbol)
@@ -127,7 +127,7 @@
                   convert-char-int
                   <character>)
                  character)
-           ;; for <int>
+           ;; for <fpi>
            (only (<string-stack>
                   ?stack-string
                   ?cur-index
@@ -155,7 +155,7 @@
            keyword stream:
            default ()
            accessor stream)
-   (error-number type <int>
+   (error-number type <fpi>
                  keyword error-number:
                  default 77
                  accessor error-number)))
@@ -173,7 +173,7 @@
                         (progn
                           (read-error stream #%i10)
                           (%read-unit stdin))))))
-        (convert-int-char (make-fpint unit))))
+        (convert-int-char (make-fpi unit))))
 
 (defmethod putback-char ((stream <stream>) (object <object>))
   (if (ensure-open-character-input-stream stream)
@@ -199,7 +199,7 @@
     (read-error stream #%i10)))
 
 (defun read-line-eos-action (stream)
-  (make-fpint $char-eof))
+  (make-fpi $char-eof))
 
 (%define-function (read-line-1 <string>)
   ((stream <stream>))
@@ -317,7 +317,7 @@
    (err-nr %signed-word-integer))
   (error <read-error> "Read Error"
          stream: stream
-         error-number: (make-fpint err-nr))
+         error-number: (make-fpi err-nr))
   (clear-buffer (%cast <string-stack> *buffer-1*))
   (clear-buffer (%cast <string-stack> *buffer-2*))
   ())
@@ -452,7 +452,7 @@
         ;;(print ch nl)
         (%let ((ch1 %signed-word-integer
                     (read-character-1 ch stream)))
-              (convert-int-char (make-fpint ch1)))))
+              (convert-int-char (make-fpi ch1)))))
 
 (%define-function (read-character-1 %signed-word-integer)
   ((ch %signed-word-integer)
@@ -678,7 +678,7 @@
 (%define-function (scan-integer <integer>)
   ((sign %signed-word-integer)
    (string-stack <string-stack>))
-  (make-fpint (%mult sign
+  (make-fpi (%mult sign
                      (scan-integer1 string-stack
                                     #%i0 #%i0
                                     (?cur-index string-stack)))))
@@ -731,7 +731,7 @@
                               (if (%eq ch2 #%i82)  ; R
                                   (progn (read-based-int2 stream ifix))
                                 (let* ((subchar (convert-int-char
-                                                 (make-fpint ch2)))
+                                                 (make-fpi ch2)))
                                        (function (get-dispatch-macro-character
                                                   #\# subchar)))
                                   (if (null? function)
@@ -741,7 +741,7 @@
 (%define-function (read-based-int <integer>)
   ((stream <stream>))
   (let ((obj (read-extended-extension stream #%i0)))
-    (if (int? obj)
+    (if (fpi? obj)
         obj
       (progn
         (read-error stream #%i20)
@@ -763,7 +763,7 @@
             (progn (%read-unit stream)
                    (read-based-int1 stream base (%plus (%mult base res)
                                                        (digit2figure16 ch))))
-          (make-fpint (%mult *sign* res)))))
+          (make-fpi (%mult *sign* res)))))
 
 (%define-function (based-digit? <object>)
   ((ch %signed-word-integer)
@@ -822,7 +822,7 @@
 ;;                (%peek-unit (car o-stream))
 ;;               (read-error stream #%i10))
 ;;            (%peek-unit stdin))))
-;;       (convert-int-char (make-fpint unit))))
+;;       (convert-int-char (make-fpi unit))))
 
 ;;   (defun read-unit o-stream
 ;;     (let ((unit
@@ -831,7 +831,7 @@
 ;;                (%read-unit (car o-stream))
 ;;               read-error stream #%i10))
 ;;               (%read-unit stdin))))
-;;       (convert-int-char (make-fpint unit))))
+;;       (convert-int-char (make-fpi unit))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Type schemes for type inference

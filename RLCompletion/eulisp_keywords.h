@@ -278,7 +278,7 @@ char *eulisp_keywords[] =
     "<null>",
     "<number>",
     "<integer>",
-    "<int>",
+    "<fpi>",
     "<float>",
     "<double-float>",
     "<symbol>",

@@ -65,7 +65,7 @@
         (c (init-list-ref inits fill-value: #\ )))
     (eul_init_string str n c)))
 
-(defextern eul_init_string (ptr <int> <character>) ptr)
+(defextern eul_init_string (ptr <fpi> <character>) ptr)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
@@ -79,7 +79,7 @@
   (int-binary= (string-compare str1 str2) 0))
 (declare-inline string-equal)
 
-(defextern string-compare (<string> <string>) <int> "strcmp")
+(defextern string-compare (<string> <string>) <fpi> "strcmp")
 
 (defmethod binary= ((str1 <string>) (str2 <string>))
   (if (string-equal str1 str2) t ()))
@@ -222,7 +222,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Access
 ;;;-----------------------------------------------------------------------------
-(defmethod element ((str <string>) (i <int>))
+(defmethod element ((str <string>) (i <fpi>))
   (string-ref str i))
 
 ;;;-----------------------------------------------------------------------------
@@ -264,7 +264,7 @@
         (jj (or j (string-size str))))
     (substring1 str ii jj)))
 
-(defmethod slice ((str <string>) (s <int>) (e <int>))
+(defmethod slice ((str <string>) (s <fpi>) (e <fpi>))
   (substring1 str s e))
 
 ;;;-----------------------------------------------------------------------------
@@ -283,7 +283,7 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric (converter <string>) (x))
 
-(defextern string-as-int (<string>) <int> "atoi")
+(defextern string-as-int (<string>) <fpi> "atoi")
 
 (defun listify-string (str . separators)
   (let ((c (if separators (car separators) #\ )))

@@ -34,7 +34,7 @@
            collection-convert
            (only (binary+
                   binary<)
-                 int)
+                 fpi)
            basic-list
            (only (list
                   atom?)

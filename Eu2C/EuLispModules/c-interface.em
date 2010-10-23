@@ -26,9 +26,9 @@
   (import (tail)
    syntax (tail)
    expose ((rename ((make-swi c.long)
-                    (make-fpint lisp.fpint))
+                    (make-fpi lisp.fpi))
                    (only (make-swi
-                          make-fpint)
+                          make-fpi)
                          basic-number))
            (rename ((make-string lisp.string)
                     (string-pointer c.string))

@@ -348,10 +348,10 @@
 (defun (setter cddddr) (l x)
   ((setter cdr) (cdddr l) x))
 
-(defmethod element ((l <list>) (i <int>))
+(defmethod element ((l <list>) (i <fpi>))
   (list-ref l i))
 
-(defmethod (setter element) ((l <list>) (i <int>) x)
+(defmethod (setter element) ((l <list>) (i <fpi>) x)
   ((setter list-ref) l i x))
 
 (defun list-drop (l n)
@@ -487,7 +487,7 @@
   (if (>= from to) ()
     (cons (element list from) (slice-list list (+ from 1) to))))
 
-(defmethod slice ((list <list>) (s <int>) (e <int>))
+(defmethod slice ((list <list>) (s <fpi>) (e <fpi>))
   (slice-list list s e))
 
 ;;;-----------------------------------------------------------------------------

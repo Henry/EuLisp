@@ -74,11 +74,11 @@
   (if (%gt (%cast %unsigned-word-integer obj)
            (%cast %unsigned-word-integer UpperHeapLimit))
       ;; neg fixnum
-      <int>
+      <fpi>
     (if (%gt (%literal %signed-word-integer #x10000)
              (%cast %signed-word-integer obj))
         ;; pos fixnum
-        <int>
+        <fpi>
       (if (%gt (%cast %signed-word-integer obj)
                (%cast %signed-word-integer LowerHeapLimit))
           ;; dynamic objects
@@ -92,7 +92,7 @@
 (%define-function (%class-of <class> )
   ((obj <object>))
   (if (%eq (%and #%i1 (%cast %signed-word-integer obj)) #%i1)
-      <int>
+      <fpi>
     (if (%gt (%cast %signed-word-integer obj)
              (%cast %signed-word-integer LowerHeapLimit))
         ;; dynamic object

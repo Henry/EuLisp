@@ -67,7 +67,7 @@
 (defconstant *table-unused* 4)
 (defconstant *default-hash-function* hash-object)
 
-(defextern hash-object (ptr) <int> "eul_hash_object")
+(defextern hash-object (ptr) <fpi> "eul_hash_object")
 
 (defclass <table> <collection>
   ((entries accessor: table-entries)

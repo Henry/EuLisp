@@ -51,7 +51,7 @@
 ;     ((setter csemaphore-handle) csem (eul_sema_create 1)))
 ;    csem))
 
-;(defextern eul_sema_create (<int>) ptr)
+;(defextern eul_sema_create (<fpi>) ptr)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Wait

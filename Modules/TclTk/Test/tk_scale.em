@@ -47,9 +47,9 @@
 ;; The next function converts the three integers R,G,B into a string in the form
 ;; #RRRRGGGGBBBB  , when each letter represents an hexadecimal number.
 (defun newColour (value)
-  (let* ((red-value (convert (tk-get-value-widget *red*) <int>))
-         (green-value (convert (tk-get-value-widget *green*) <int>))
-         (blue-value (convert (tk-get-value-widget *blue*) <int>))
+  (let* ((red-value (convert (tk-get-value-widget *red*) <fpi>))
+         (green-value (convert (tk-get-value-widget *green*) <fpi>))
+         (blue-value (convert (tk-get-value-widget *blue*) <fpi>))
          (aux ())
          new-colour)
     (do (lambda (c)

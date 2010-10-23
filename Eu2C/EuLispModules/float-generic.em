@@ -58,13 +58,13 @@
 (%annotate-function
   round new-signature
   (((var0 var1)
-    ((var var0) (atom? <int>))
+    ((var var0) (atom? <fpi>))
     ((var var1) (atom? <float>)))))
 
 (%annotate-function
   truncate new-signature
   (((var0 var1)
-    ((var var0) (atom? <int>))
+    ((var var0) (atom? <fpi>))
     ((var var1) (atom? <float>)))))
 
 ;;;-----------------------------------------------------------------------------

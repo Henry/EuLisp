@@ -22,7 +22,7 @@
 ;;;  Description:
 ;;    tables provide a general key to value association mechanism
 ;;;  Problems:
-;;    hash function only for symbols, strings and fpint
+;;    hash function only for symbols, strings and fpi
 ;;;  Authors: Winfried Heicking
 ;;;  Maintainer: Henry G. Weller
 ;;;-----------------------------------------------------------------------------
@@ -58,7 +58,7 @@
 (%setf $standard-table-mask
        (%minus (%cast %unsigned-word-integer
                       (make-swi
-                       (%cast <int> $standard-table-size))) #%I1))
+                       (%cast <fpi> $standard-table-size))) #%I1))
 
 (defun mapc (function . lists)
   ;;(function &rest lists)
@@ -126,10 +126,10 @@
 ;;           (car alist))
 ;;          (t (assq-aux object (cdr alist)))))
 
-;;  (%define-function (logand <int>)
-;;                    ((a <int>)
-;;                     (b <int>))
-;;    (make-fpint (%and (make-swi a) (make-swi b))))
+;;  (%define-function (logand <fpi>)
+;;                    ((a <fpi>)
+;;                     (b <fpi>))
+;;    (make-fpi (%and (make-swi a) (make-swi b))))
 
 ;;------------------------------------------------------------
 ;;;hash takes an object and generates an index (for the vector)
@@ -148,8 +148,8 @@
 ;;  (defun hash (number) ;only for numbers
 ;;    (print 'hash-number nl)
 ;;    (print (logand number $standard-table-mask) nl)
-;;    (logand (%cast <int> number)
-;;            (%cast <int> $standard-table-mask)))
+;;    (logand (%cast <fpi> number)
+;;            (%cast <fpi> $standard-table-mask)))
 
 ;;  (%define-function (hash %unsigned-word-integer)
 ;;                    ((obj <object>))

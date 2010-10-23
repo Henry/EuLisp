@@ -43,7 +43,7 @@
   (setq *bv* (make <string> size: n))
   (setq *bv-index* 0))
 (defopencoded bytevector-set (bv i x) (set-byte-vector-ref))
-(defextern write-next-bv-binding-ref1 (ptr <int> <string> <int>) ptr
+(defextern write-next-bv-binding-ref1 (ptr <fpi> <string> <fpi>) ptr
            "eul_write_next_bv_binding_ref1")
 
 (defun write-next-bv-binding-ref (module-name-str index)

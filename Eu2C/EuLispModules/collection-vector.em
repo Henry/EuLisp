@@ -356,11 +356,11 @@
 ;;; element and (setter element)
 ;;;-----------------------------------------------------------------------------
 (defmethod element ((vec <vector>)
-                    (key <int>))
+                    (key <fpi>))
   (vector-ref vec key))
 
 (defmethod (setter element) ((vec <vector>)
-                             (key <int>)
+                             (key <fpi>)
                              (value <object>))
   (setf-vector-ref vec key value))
 
@@ -382,8 +382,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;  (defmethod fill ((vec <vector>)
 ;;                   (object <character>) ;object to fill
-;;                   (start <int>)
-;;                   (end <int>))
+;;                   (start <fpi>)
+;;                   (end <fpi>))
 ;;    (fill-vector vec object start end))
 
 (defmethod fill ((vec <vector>)

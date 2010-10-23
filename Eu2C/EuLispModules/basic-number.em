@@ -29,8 +29,8 @@
    syntax (%tail)
    export (<number>
            <integer>
-           <int>
-           make-fpint
+           <fpi>
+           make-fpi
            make-swi))
 
 (%define-abstract-class (<number> <abstract-class>)
@@ -41,52 +41,52 @@
   <number>
   ())
 
-(%define-standard-class (<int> <class>)
+(%define-standard-class (<fpi> <class>)
   <integer>
-  ((fpint type %signed-word-integer
-          reader fpint))
-  ;;constructor (make-fpint fpint) will be handmaded
+  ((fpi type %signed-word-integer
+          reader fpi))
+  ;;constructor (make-fpi fpi) will be handmaded
   representation direct)
 
 
 #+(:int :big)
-(%define-function (make-fpint <int>)
+(%define-function (make-fpi <fpi>)
   ((val %signed-word-integer))
-  (%cast <int>
+  (%cast <fpi>
          (%or (%plus val val) #%i1)))
 
 #+(:int :big)
 (%define-function (make-swi %signed-word-integer)
-  ((val <int>))
-  (%ashiftr (fpint val) #%I1))
+  ((val <fpi>))
+  (%ashiftr (fpi val) #%I1))
 
 
 #-(:int :big)
-(%define-function (make-fpint <int>)
+(%define-function (make-fpi <fpi>)
   ((val %signed-word-integer))
-  (%cast <int>
+  (%cast <fpi>
          (%ashiftr (%lshiftl val #%I16) #%I16)))
 
 #-(:int :big)
 (%define-function (make-swi %signed-word-integer)
-  ((val <int>))
-  (fpint val))
+  ((val <fpi>))
+  (fpi val))
 
 
 ;;;-----------------------------------------------------------------------------
 ;;; refined lattice types for type inference
 ;;;-----------------------------------------------------------------------------
-;; Singleton subtypes of <int>.
+;; Singleton subtypes of <fpi>.
 (%define-lattice-type fpi-zero
-  (<int> singleton)
+  (<fpi> singleton)
   (bottom) () 0)
 
 (%define-lattice-type fpi-one
-  (<int> singleton)
+  (<fpi> singleton)
   (bottom) () 1)
 
 (%define-lattice-type fpi-rest
-  (<int>)
+  (<fpi>)
   (bottom))
 
 (%define-lattice-type zero
@@ -97,7 +97,7 @@
   (fpi-one)
   (bottom))
 
-;; Compound list for elements of type <int>.
+;; Compound list for elements of type <fpi>.
 (%define-lattice-type fpi-list
   (mono-list)
   (bottom) t)

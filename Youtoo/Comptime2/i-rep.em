@@ -75,7 +75,7 @@
   *prompt-string*)
 
 ;; Readline history initializer
-(defextern initialize-rl () <int> "eul_rl_initialize")
+(defextern initialize-rl () <fpi> "eul_rl_initialize")
 
 (defun initialize-interpreter ()
 

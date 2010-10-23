@@ -111,8 +111,8 @@
 (define (mkint inits)
         (find-key value: inits 0))
 
-(set-class-keywords! <int> '(value:))
-(table-set! builtin-make-table <int> mkint)
+(set-class-keywords! <fpi> '(value:))
+(table-set! builtin-make-table <fpi> mkint)
 
 ;; double-float
 (define (mkdfloat inits)

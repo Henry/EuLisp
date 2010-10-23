@@ -29,7 +29,7 @@
     (double* . 68)
     (|(method (setter element))| . 67)
     (|(method element)| . 66)
-    (|(method (converter <int>))| . 65)
+    (|(method (converter <fpi>))| . 65)
     (|(method (converter <int*>))| . 64)
     ((converter <int*>) . 63)
     (<int*> . 62)

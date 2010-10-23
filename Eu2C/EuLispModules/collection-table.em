@@ -36,7 +36,7 @@
                  compare)
            (only (binary+
                   binary<)
-                 int)
+                 fpi)
            (only (print
                   nl)
                  print)
@@ -482,7 +482,7 @@
 ;;; size
 ;;;-----------------------------------------------------------------------------
 (defmethod size ((table <table>))
-  (make-fpint
+  (make-fpi
    (%cast %signed-word-integer
           (dotimes-with-size
            #%I0

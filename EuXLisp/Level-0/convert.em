@@ -191,7 +191,7 @@
                obj)
 
 ((setter converter) <integer> converter->integer)
-((setter converter) <int> converter->integer)
+((setter converter) <fpi> converter->integer)
 
 (define-generic (converter->float obj))
 (define-method (converter->float (obj <integer>))

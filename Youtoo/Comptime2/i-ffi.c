@@ -127,7 +127,7 @@ void initialize_module_i_ffi()
 
 
   /* Initializations */
-  eul_intern_symbol(sym_2768,"<int>");
+  eul_intern_symbol(sym_2768,"<fpi>");
   eul_intern_symbol(sym_2770,"<character>");
   eul_intern_symbol(sym_2772,"<double>");
   eul_intern_symbol(sym_2774,"<string>");

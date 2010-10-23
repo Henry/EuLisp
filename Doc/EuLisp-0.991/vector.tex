@@ -12,7 +12,7 @@ A vector\index{general}{external representation!vector} is written as
 \verb+#(1 2 3)+ is a vector of three elements, the integers {\tt 1}, {\tt 2} and
 {\tt 3}.  The representations of {\em obj$_i$} are determined by the external
 representations defined in other sections of this definition (see
-\classref{character}\ (\ref{character}), \classref{int}\
+\classref{character}\ (\ref{character}), \classref{fpi}\
 (\ref{fpi}), \classref{float}\ (\ref{float}), \classref{list}\ (\ref{list}),
 \classref{string}\ (\ref{string}) and \classref{symbol}\ (\ref{symbol}), as well
 as instances of \classref{vector}\ itself.  The syntax for the external
@@ -32,7 +32,7 @@ representation of vectors is defined below.
 The class of all instances of \classref{vector}.
 %
 \begin{initoptions}
-    \item[size:, \classref{int}] The number of elements in
+    \item[size:, \classref{fpi}] The number of elements in
     the vector.  Vectors are zero-based and thus the maximum index is {\em
         size-1}.  If not supplied the {\em size\/} is zero.
 

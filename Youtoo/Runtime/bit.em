@@ -35,19 +35,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; All external functions
 ;;;-----------------------------------------------------------------------------
-(defextern eul_bit_and (<int> <int>) <int>)
+(defextern eul_bit_and (<fpi> <fpi>) <fpi>)
 (defun bit-and (x y) (eul_bit_and x y))
 
-(defextern eul_bit_ior (<int> <int>) <int>)
+(defextern eul_bit_ior (<fpi> <fpi>) <fpi>)
 (defun bit-ior (x y) (eul_bit_ior x y))
 
-(defextern eul_bit_xor (<int> <int>) <int>)
+(defextern eul_bit_xor (<fpi> <fpi>) <fpi>)
 (defun bit-xor (x y) (eul_bit_xor x y))
 
-(defextern eul_bit_not (<int>) <int>)
+(defextern eul_bit_not (<fpi>) <fpi>)
 (defun bit-not (x) (eul_bit_not x))
 
-(defextern eul_bit_shift (<int> <int>) <int>)
+(defextern eul_bit_shift (<fpi> <fpi>) <fpi>)
 (defun bit-shift (x n) (eul_bit_shift x n))
 
 ;;;-----------------------------------------------------------------------------

@@ -273,10 +273,10 @@
 ;;; Access
 ;;;-----------------------------------------------------------------------------
 
-(defmethod element ((vec <vector>) (i <int>))
+(defmethod element ((vec <vector>) (i <fpi>))
   (vector-ref vec i))
 
-(defmethod (setter element) ((vec <vector>) (i <int>) x)
+(defmethod (setter element) ((vec <vector>) (i <fpi>) x)
   ((setter vector-ref) vec i x))
 
 (defun subvector (vec i j)

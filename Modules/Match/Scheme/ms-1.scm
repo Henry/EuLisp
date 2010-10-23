@@ -576,7 +576,7 @@
 				    (lambda (p a) (k `(and ,@p) a))))
 			   ((and (pair? p)
 				 (eq? 'or (car p)))
-			    (bound 
+			    (bound
 			     (cadr p)
 			     a
 			     (lambda (first-p first-a)
@@ -1422,7 +1422,7 @@
 (defun boolean? (obj) (or (eq obj t) (eq obj '())))
 (defconstant string? stringp)
 (defconstant display prin)
-(defmacro begin body 
+(defmacro begin body
   `(progn ,@body))
 
 (defun cddddr (l)
@@ -1432,7 +1432,7 @@
 (defconstant else t)
 (defconstant char-numeric? digitp)
 (defconstant string-length string-size)
-(defun string->number (str) (convert str <int>))
+(defun string->number (str) (convert str <fpi>))
 
 (defun symbol->string (sym)
   (convert sym <string>))

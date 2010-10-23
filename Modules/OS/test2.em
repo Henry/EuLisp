@@ -43,7 +43,7 @@
 (defun boo x x)
 
 (defgeneric boz (x y))
-(defmethod boz ((x <int>) (y <string>))
+(defmethod boz ((x <fpi>) (y <string>))
   (format "method1: ~a ~a\n" x y))
 (defmethod boz ((x <double>) (y <symbol>))
   (format "method1: ~a ~a\n" x y))

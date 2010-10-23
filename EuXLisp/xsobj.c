@@ -1208,7 +1208,7 @@ static void init_builtin_classes()
 
     LVAL number_cl = init_class(-1, "<number>", object, true);
     LVAL integer_cl = init_class(-1, "<integer>", number_cl, true);
-    init_class(FIXNUM, "<int>", integer_cl, NIL);
+    init_class(FIXNUM, "<fpi>", integer_cl, NIL);
     LVAL float_cl = init_class(-1, "<float>", number_cl, true);
     init_class(FLONUM, "<double-float>", float_cl, NIL);
 

@@ -235,7 +235,7 @@
     (generic-print str sink)
     os))
 
-(defmethod generic-write ((x <int>) (os <object-stream>))
+(defmethod generic-write ((x <fpi>) (os <object-stream>))
   (let ((sink (stream-sink os))
         (data (eul-serial-int-data x)))
     (generic-print TC_INT sink)
@@ -436,14 +436,14 @@
       (new-handle x os)
       os)))
 
-(defextern eul-serial-short-data (<int>) ptr "eul_serial_short_data")
-(defextern eul-serial-int-data (<int>) ptr "eul_serial_int_data")
+(defextern eul-serial-short-data (<fpi>) ptr "eul_serial_short_data")
+(defextern eul-serial-int-data (<fpi>) ptr "eul_serial_int_data")
 (defextern eul-serial-double-data (ptr) ptr "eul_serial_double_data")
 (defextern eul-serial-lambda-data (ptr) ptr "eul_serial_lambda_data")
 (defextern eul-lambda-refs (ptr ptr) ptr "eul_lambda_refs")
 (defextern eul-serial-bytevector-data (ptr) ptr "eul_serial_bytevector_data")
 (defextern eul-bytevector-refs (ptr ptr) ptr "eul_bytevector_refs")
-(defextern eul-serial-relative-pc (ptr ptr) <int> "eul_serial_relative_pc")
+(defextern eul-serial-relative-pc (ptr ptr) <fpi> "eul_serial_relative_pc")
 
 ;;;-----------------------------------------------------------------------------
 ;;; The impossible things ...
@@ -534,7 +534,7 @@
   (debug-format stderr "make-instance: ~a ~a\n" cl inits)
   (cond ((eq cl <character>)
          (init-list-ref inits value:))
-        ((eq cl <int>)
+        ((eq cl <fpi>)
          (init-list-ref inits value:))
         ((eq cl <number>)
          (init-list-ref inits value:))
@@ -549,7 +549,7 @@
   (debug-format stderr "allocate-instance: ~a\n" cl)
   (cond ((eq cl <character>)
          ())
-        ((eq cl <int>)
+        ((eq cl <fpi>)
          ())
         ((eq cl <string>)
          ())

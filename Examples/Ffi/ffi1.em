@@ -32,7 +32,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Make use of C's atoi function
 ;;;-----------------------------------------------------------------------------
-(defextern lisp-atoi (<string>) <int> "atoi")
+(defextern lisp-atoi (<string>) <fpi> "atoi")
 
 (if (< 1 *argc*)
     (progn

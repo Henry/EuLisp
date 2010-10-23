@@ -28,7 +28,7 @@
                   <object>
                   <symbol>
                   <null>
-                  <int>
+                  <fpi>
                   %cast
                   %signed-word-integer
                   %unsigned-word-integer
@@ -41,7 +41,7 @@
                   %minus
                   eq
                   cons
-                  make-fpint
+                  make-fpi
                   make-swi
                   %void
                   %extract)
@@ -454,7 +454,7 @@
             (%let* ((ch %signed-word-integer (fgetc fd)))
                    (if (%eq ch #%i-1)
                        (make-swi
-                        (%cast <int>
+                        (%cast <fpi>
                                ((stream-eos-action stream) stream)))
                      ; EOS (%cast %signed-word-integer $char-eof)
                      (progn
@@ -466,7 +466,7 @@
               (%let* ((ch %signed-word-integer (getc-buffer fd)))
                      (if (%eq ch #%i-1)
                          (make-swi
-                          (%cast <int>
+                          (%cast <fpi>
                                  ((stream-eos-action stream) stream)))
                        ; EOS (%cast %signed-word-integer $char-eof)
                        (progn
@@ -483,7 +483,7 @@
             (%let* ((ch %signed-word-integer (fgetc fd)))
                    (if (%eq ch #%i-1)
                        (make-swi
-                        (%cast <int>
+                        (%cast <fpi>
                                ((stream-eos-action stream) stream)))
                      ; EOS (%cast %signed-word-integer $char-eof)
                      ch))
@@ -493,7 +493,7 @@
               (%let* ((ch %signed-word-integer (getc-buffer fd)))
                      (if (%eq ch #%i-1)
                          (make-swi
-                          (%cast <int>
+                          (%cast <fpi>
                                  ((stream-eos-action stream) stream)))
                        ; EOS (%cast %signed-word-integer $char-eof)
                        (progn
@@ -576,7 +576,7 @@
 
 (defun default-eos-action (stream)
   (if *not-eof-action*
-      (%cast <object> (make-fpint $char-eof))
+      (%cast <object> (make-fpi $char-eof))
     (progn
       (error <end-of-stream>
              "end of stream" 'stream stream)
@@ -683,12 +683,12 @@
 (defmethod stream-position ((stream <stream>))
   (if (ensure-open-stream stream)
       (if (file-stream? stream)
-          (make-fpint (%cast %signed-word-integer
+          (make-fpi (%cast %signed-word-integer
                              (ftell ;;(%cast %unsigned-word-integer
                               (file-descriptor-pointer stream)))) ;;)
         (if (string-stream? stream)
             (%let ((fd <string-stack> (stream-string-stack stream)))
-                  (make-fpint (?cur-index fd)))
+                  (make-fpi (?cur-index fd)))
           ()))
     ()))
 
@@ -881,7 +881,7 @@
 ;;  (if (stream? obj)
 ;;    (if (binarystream? (stream-transaction-unit obj))
 ;;      obj
-;;      (if (eq <int> (stream-transaction-unit obj))
+;;      (if (eq <fpi> (stream-transaction-unit obj))
 ;;        obj
 ;;        ()))
 ;;    ()))

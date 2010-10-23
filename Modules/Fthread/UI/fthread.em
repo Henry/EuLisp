@@ -105,7 +105,7 @@
 
 (defextern eul_thr_join (ptr) ptr)
 
-(defextern thread-join-all () <int> "eul_thr_join_all")
+(defextern thread-join-all () <fpi> "eul_thr_join_all")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Thread suspend
@@ -126,8 +126,8 @@
 ;;;-----------------------------------------------------------------------------
 (defun thread-concurrency () (eul_thr_get_concurrency))
 (defun (setter thread-concurrency) (x) (eul_thr_set_concurrency x))
-(defextern eul_thr_get_concurrency () <int> "thr_getconcurrency")
-(defextern eul_thr_set_concurrency (<int>) ptr "thr_setconcurrency")
+(defextern eul_thr_get_concurrency () <fpi> "thr_getconcurrency")
+(defextern eul_thr_set_concurrency (<fpi>) ptr "thr_setconcurrency")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Thread priority
@@ -138,9 +138,9 @@
 (defun (setter thread-priority) (thrd x)
   (eul_thr_set_priority (thread-handle thrd) x))
 
-(defextern eul_thr_get_priority (ptr) <int>)
+(defextern eul_thr_get_priority (ptr) <fpi>)
 
-(defextern eul_thr_set_priority (ptr <int>) <int> "thr_setprio")
+(defextern eul_thr_set_priority (ptr <fpi>) <fpi> "thr_setprio")
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module fthread

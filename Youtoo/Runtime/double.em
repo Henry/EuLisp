@@ -73,19 +73,19 @@
 (defmethod binary= ((x <double>) (y <double>))
   (double-binary= x y))
 
-(defmethod binary= ((x <int>) (y <double>))
+(defmethod binary= ((x <fpi>) (y <double>))
   (double-binary= (int-as-double x) y))
 
-(defmethod binary= ((x <double>) (y <int>))
+(defmethod binary= ((x <double>) (y <fpi>))
   (double-binary= x (int-as-double y)))
 
 (defmethod binary< ((x <double>) (y <double>))
   (double-binary< x y))
 
-(defmethod binary< ((x <int>) (y <double>))
+(defmethod binary< ((x <fpi>) (y <double>))
   (double-binary< (int-as-double x) y))
 
-(defmethod binary< ((x <double>) (y <int>))
+(defmethod binary< ((x <double>) (y <fpi>))
   (double-binary< x (int-as-double y)))
 
 ;;;-----------------------------------------------------------------------------
@@ -102,10 +102,10 @@
 (defmethod binary-gcd ((x <double>) (y <double>))
   (double-binary-gcd x y))
 
-(defmethod binary-gcd ((x <int>) (y <double>))
+(defmethod binary-gcd ((x <fpi>) (y <double>))
   (double-binary-gcd (int-as-double x) y))
 
-(defmethod binary-gcd ((x <double>) (y <int>))
+(defmethod binary-gcd ((x <double>) (y <fpi>))
   (double-binary-gcd x (int-as-double y)))
 
 (defun double-binary-gcd (x y)
@@ -122,10 +122,10 @@
 (defmethod binary-lcm ((x <double>) (y <double>))
   (double-binary-lcm x y))
 
-(defmethod binary-lcm ((x <int>) (y <double>))
+(defmethod binary-lcm ((x <fpi>) (y <double>))
   (double-binary-lcm (int-as-double x) y))
 
-(defmethod binary-lcm ((x <double>) (y <int>))
+(defmethod binary-lcm ((x <double>) (y <fpi>))
   (double-binary-lcm x (int-as-double y)))
 
 (defun double-binary-lcm (x y)

@@ -176,7 +176,7 @@ available:
 
      Lisp                        C
     -----------------------------------------
-     <int>                      int
+     <fpi>                      int
      <character>                char
      <double>                   double
      <string>                   char *

@@ -138,11 +138,11 @@
 (%define-lattice-type mono-list (<cons>) (bottom) t)
 (%define-lattice-type singleton (%object) (bottom))
 (%define-lattice-type fpi-one
-  (<int> singleton)
+  (<fpi> singleton)
   (bottom) () 1)
 
 (%define-lattice-type fpi-zero
-  (<int> singleton)
+  (<fpi> singleton)
   (bottom) () 0)
 "))
 

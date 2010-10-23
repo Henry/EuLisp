@@ -46,7 +46,7 @@
     (cond ((null? (object? val))) ;;This gives sometimes as SIGV!
           ((bigint? val)
            ((setter bigint-value) x (mpz-init-set (bigint-value val))))
-          ((int? val)
+          ((fpi? val)
            ((setter bigint-value) x (mpz-init-set-si val)))
           ((double? val)
            ((setter bigint-value) x (mpz-init-set-d val)))
@@ -71,10 +71,10 @@
 (defmethod binary+ ((x <bigint>) (y <bigint>))
   (make-bigint-fast (mpz-add-init (bigint-value x) (bigint-value y))))
 
-(defmethod binary+ ((x <bigint>) (y <int>))
+(defmethod binary+ ((x <bigint>) (y <fpi>))
   (make-bigint-fast (mpz-add-ui-init (bigint-value x) y)))
 
-(defmethod binary+ ((x <int>) (y <bigint>))
+(defmethod binary+ ((x <fpi>) (y <bigint>))
   (make-bigint-fast (mpz-add-ui-init (bigint-value y) x)))
 
 ;;;-----------------------------------------------------------------------------
@@ -83,10 +83,10 @@
 (defmethod binary- ((x <bigint>) (y <bigint>))
   (make-bigint-fast (mpz-sub-init (bigint-value x) (bigint-value y))))
 
-(defmethod binary- ((x <bigint>) (y <int>))
+(defmethod binary- ((x <bigint>) (y <fpi>))
   (make-bigint-fast (mpz-sub-ui-init (bigint-value x) y)))
 
-(defmethod binary- ((x <int>) (y <bigint>))
+(defmethod binary- ((x <fpi>) (y <bigint>))
   (make-bigint-fast (mpz-sub-init (mpz-init-set-si x) (bigint-value y))))
 
 ;;;-----------------------------------------------------------------------------
@@ -95,10 +95,10 @@
 (defmethod binary* ((x <bigint>) (y <bigint>))
   (make-bigint-fast (mpz-mul-init (bigint-value x) (bigint-value y))))
 
-(defmethod binary* ((x <bigint>) (y <int>))
+(defmethod binary* ((x <bigint>) (y <fpi>))
   (make-bigint-fast (mpz-mul-ui-init (bigint-value x) y)))
 
-(defmethod binary* ((x <int>) (y <bigint>))
+(defmethod binary* ((x <fpi>) (y <bigint>))
   (make-bigint-fast (mpz-mul-ui-init (bigint-value y) x)))
 
 ;;;-----------------------------------------------------------------------------
@@ -107,19 +107,19 @@
 (defmethod binary= ((x <bigint>) (y <bigint>))
   (= (mpz-cmp (bigint-value x) (bigint-value y)) 0))
 
-(defmethod binary= ((x <bigint>) (y <int>))
+(defmethod binary= ((x <bigint>) (y <fpi>))
   (= (mpz-cmp-si (bigint-value x) y) 0))
 
-(defmethod binary= ((x <int>) (y <bigint>))
+(defmethod binary= ((x <fpi>) (y <bigint>))
   (= (mpz-cmp-si (bigint-value y) x) 0))
 
 (defmethod binary< ((x <bigint>) (y <bigint>))
   (< (mpz-cmp (bigint-value x) (bigint-value y)) 0))
 
-(defmethod binary< ((x <bigint>) (y <int>))
+(defmethod binary< ((x <bigint>) (y <fpi>))
   (< (mpz-cmp-si (bigint-value x) y) 0))
 
-(defmethod binary< ((x <int>) (y <bigint>))
+(defmethod binary< ((x <fpi>) (y <bigint>))
   (< (mpz-cmp (mpz-init-set-si x) (bigint-value y)) 0))
 
 ;;;-----------------------------------------------------------------------------
@@ -128,32 +128,32 @@
 (defmethod binary-gcd ((x <bigint>) (y <bigint>))
   (make-bigint-fast (mpz-gcd-init (bigint-value x) (bigint-value y))))
 
-(defmethod binary-gcd ((x <bigint>) (y <int>))
+(defmethod binary-gcd ((x <bigint>) (y <fpi>))
   (let ((result (mpz-init)))
     (mpz-gcd-ui result (bigint-value x) y)
     (make-bigint-fast result)))
 
-(defmethod binary-gcd ((x <int>) (y <bigint>))
+(defmethod binary-gcd ((x <fpi>) (y <bigint>))
   (make-bigint-fast (mpz-gcd-init (mpz-init-set-si x) (bigint-value y))))
 
 (defmethod binary-mod ((x <bigint>) (y <bigint>))
   (make-bigint-fast (mpz-mod-init (bigint-value x) (bigint-value y))))
 
-(defmethod binary-mod ((x <bigint>) (y <int>))
+(defmethod binary-mod ((x <bigint>) (y <fpi>))
   (let ((result (mpz-init)))
     (mpz-mod-ui result (bigint-value x) y)
     (make-bigint-fast result)))
 
-(defmethod binary-mod ((x <int>) (y <bigint>))
+(defmethod binary-mod ((x <fpi>) (y <bigint>))
   (make-bigint-fast (mpz-mod-init (mpz-init-set-si x) (bigint-value y))))
 
 (defmethod binary% ((x <bigint>) (y <bigint>))
   (make-bigint-fast (mpz-tdiv-r-init (bigint-value x) (bigint-value y))))
 
-(defmethod binary% ((x <bigint>) (y <int>))
+(defmethod binary% ((x <bigint>) (y <fpi>))
   (make-bigint-fast (mpz-tdiv-r-ui-init (bigint-value x) y)))
 
-(defmethod binary% ((x <int>) (y <bigint>))
+(defmethod binary% ((x <fpi>) (y <bigint>))
   (let ((result (mpz-init)))
     (mpz-tdiv-r-ui result (bigint-value x) y)
     (make-bigint-fast result)))
@@ -164,10 +164,10 @@
 (defmethod binary/ ((x <bigint>) (y <bigint>))
   (binary/ (convert x <double>) (convert y <double>)))
 
-(defmethod binary/ ((x <bigint>) (y <int>))
+(defmethod binary/ ((x <bigint>) (y <fpi>))
   (binary/ (convert x <double>) (convert y <double>)))
 
-(defmethod binary/ ((x <int>) (y <bigint>))
+(defmethod binary/ ((x <fpi>) (y <bigint>))
   (binary/ (convert x <double>) (convert y <double>)))
 
 (defmethod binary/ ((x <bigint>) (y <double>))

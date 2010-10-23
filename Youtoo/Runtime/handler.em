@@ -55,22 +55,22 @@
 
 (defgeneric (converter <int*>) (x))
 
-(defmethod (converter <int*>) ((x <int>))
+(defmethod (converter <int*>) ((x <fpi>))
   (eul_int_as_eul_int_ref x))
 
-(defmethod (converter <int>) ((x <int*>))
+(defmethod (converter <fpi>) ((x <int*>))
   (eul_int_ref_as_c_int x))
 
-(defmethod element ((x <int*>) (i <int>))
+(defmethod element ((x <int*>) (i <fpi>))
   (eul_int_ref_ref x i))
 
-(defmethod (setter element) ((x <int*>) (i <int>) y)
+(defmethod (setter element) ((x <int*>) (i <fpi>) y)
   (eul_int_ref_set x i y))
 
 (defextern eul_int_as_eul_int_ref (ptr) ptr)
-(defextern eul_int_ref_as_c_int (ptr) <int>)
-(defextern eul_int_ref_ref (<int*> <int>) <int> "eul_c_vector_ref")
-(defextern eul_int_ref_set (<int*> <int> <int>) <int> "eul_c_vector_set")
+(defextern eul_int_ref_as_c_int (ptr) <fpi>)
+(defextern eul_int_ref_ref (<int*> <fpi>) <fpi> "eul_c_vector_ref")
+(defextern eul_int_ref_set (<int*> <fpi> <fpi>) <fpi> "eul_c_vector_set")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <double*>
@@ -86,16 +86,16 @@
 (defmethod (converter <double>) ((x <double*>))
   (eul_double_ref_as_c_double x))
 
-(defmethod element ((x <double*>) (i <int>))
+(defmethod element ((x <double*>) (i <fpi>))
   (eul_double_ref_ref x i))
 
-(defmethod (setter element) ((x <double*>) (i <int>) y)
+(defmethod (setter element) ((x <double*>) (i <fpi>) y)
   (eul_double_ref_set x i y))
 
 (defextern eul_double_as_eul_double_ref (ptr) ptr)
 (defextern eul_double_ref_as_c_double (ptr) <double>)
-(defextern eul_double_ref_ref (<double*> <int>) <double> "eul_c_vector_ref")
-(defextern eul_double_ref_set (<double*> <int> <double>) <double>
+(defextern eul_double_ref_ref (<double*> <fpi>) <double> "eul_c_vector_ref")
+(defextern eul_double_ref_set (<double*> <fpi> <double>) <double>
            "eul_c_vector_set")
 
 ;;;-----------------------------------------------------------------------------
@@ -112,16 +112,16 @@
 (defmethod (converter <string>) ((x <string*>))
   (eul_string_ref_as_c_string x))
 
-(defmethod element ((x <string*>) (i <int>))
+(defmethod element ((x <string*>) (i <fpi>))
   (eul_string_ref_ref x i))
 
-(defmethod (setter element) ((x <string*>) (i <int>) y)
+(defmethod (setter element) ((x <string*>) (i <fpi>) y)
   (eul_string_ref_set x i y))
 
 (defextern eul_string_as_eul_string_ref (ptr) ptr)
 (defextern eul_string_ref_as_c_string (ptr) <string>)
-(defextern eul_string_ref_ref (<string*> <int>) <string> "eul_c_vector_ref")
-(defextern eul_string_ref_set (<string*> <int> <string>) <string>
+(defextern eul_string_ref_ref (<string*> <fpi>) <string> "eul_c_vector_ref")
+(defextern eul_string_ref_set (<string*> <fpi> <string>) <string>
            "eul_c_vector_set")
 
 ;;;-----------------------------------------------------------------------------

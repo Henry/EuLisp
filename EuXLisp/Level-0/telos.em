@@ -34,7 +34,7 @@
            <null>
            <number>
            <integer>
-           <int>
+           <fpi>
            <float>
            <double-float>
            <symbol>

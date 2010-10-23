@@ -30,8 +30,8 @@
            compare
            number
            integer)
-   export (<int>
-           int?
+   export (<fpi>
+           fpi?
            int-binary-
            int-binary*
            int-binary/
@@ -42,9 +42,9 @@
            most-negative-int))
 
 ;;;-----------------------------------------------------------------------------
-;;; Class <int>
+;;; Class <fpi>
 ;;;-----------------------------------------------------------------------------
-(defprimclass <int> fpi-class (<integer>) ())
+(defprimclass <fpi> fpi-class (<integer>) ())
 
 ;;;-----------------------------------------------------------------------------
 ;;; Limits (-2^29 - 1  ... 2^29 - 1)
@@ -55,19 +55,19 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Arithmetic
 ;;;-----------------------------------------------------------------------------
-(defmethod binary+ ((x <int>) (y <int>)) (int-binary+ x y))
-(defmethod binary= ((x <int>) (y <int>)) (if (int-binary= x y) t ()))
-(defmethod binary< ((x <int>) (y <int>)) (int-binary< x y))
-(defmethod binary- ((x <int>) (y <int>)) (int-binary- x y))
-(defmethod binary* ((x <int>) (y <int>)) (int-binary* x y))
-(defmethod binary/ ((x <int>) (y <int>)) (int-binary/ x y))
-(defmethod binary% ((x <int>) (y <int>)) (int-binary% x y))
-(defmethod binary-mod ((x <int>) (y <int>)) (int-binary-mod x y))
+(defmethod binary+ ((x <fpi>) (y <fpi>)) (int-binary+ x y))
+(defmethod binary= ((x <fpi>) (y <fpi>)) (if (int-binary= x y) t ()))
+(defmethod binary< ((x <fpi>) (y <fpi>)) (int-binary< x y))
+(defmethod binary- ((x <fpi>) (y <fpi>)) (int-binary- x y))
+(defmethod binary* ((x <fpi>) (y <fpi>)) (int-binary* x y))
+(defmethod binary/ ((x <fpi>) (y <fpi>)) (int-binary/ x y))
+(defmethod binary% ((x <fpi>) (y <fpi>)) (int-binary% x y))
+(defmethod binary-mod ((x <fpi>) (y <fpi>)) (int-binary-mod x y))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Gcd and lcm
 ;;;-----------------------------------------------------------------------------
-(defmethod binary-gcd ((x <int>) (y <int>)) (int-binary-gcd x y))
+(defmethod binary-gcd ((x <fpi>) (y <fpi>)) (int-binary-gcd x y))
 
 (defun int-binary-gcd (x y)
   (cond ((int-binary< x y)
@@ -80,7 +80,7 @@
              (int-binary-gcd (int-binary- x p) y))))
         (t x)))
 
-(defmethod binary-lcm ((x <int>) (y <int>)) (int-binary-lcm x y))
+(defmethod binary-lcm ((x <fpi>) (y <fpi>)) (int-binary-lcm x y))
 
 (defun int-binary-lcm (x y)
   (if (or (= x 0) (= y 0))
@@ -90,13 +90,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-(defmethod zero? ((x <int>)) (int-binary= x 0))
+(defmethod zero? ((x <fpi>)) (int-binary= x 0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Conversion
 ;;;-----------------------------------------------------------------------------
-(defgeneric (converter <int>) (x))
-(defextern int-as-string (<int>) <string> "eul_int_as_str")
+(defgeneric (converter <fpi>) (x))
+(defextern int-as-string (<fpi>) <string> "eul_int_as_str")
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module fpi

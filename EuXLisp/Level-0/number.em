@@ -107,7 +107,7 @@
 
 (defgeneric binary% (a b))
 
-(defmethod binary% ((a <int>) (b <int>))
+(defmethod binary% ((a <fpi>) (b <fpi>))
   (remainder a b))
 
 (defun % (arg . args)
@@ -117,7 +117,7 @@
 
 (defgeneric binary-mod (a b))
 
-(defmethod binary-mod ((a <int>) (b <int>))
+(defmethod binary-mod ((a <fpi>) (b <fpi>))
   (remainder a b))
 
 (defun mod (arg . args)
@@ -141,7 +141,7 @@
       a
     (binary-gcd b (remainder a b))))
 
-(defmethod binary-gcd ((a <int>) (b <int>))
+(defmethod binary-gcd ((a <fpi>) (b <fpi>))
   (%gcd a b))
 
 (deflocal %abs abs)

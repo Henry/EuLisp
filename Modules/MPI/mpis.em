@@ -81,7 +81,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Writing
 ;;;-----------------------------------------------------------------------------
-(defmethod generic-write ((x <int>) (s <mpi-stream>))
+(defmethod generic-write ((x <fpi>) (s <mpi-stream>))
   (let* ((rank (mpi-stream-rank s))
          (tag (mpi-stream-tag s))
          (res (eul-mpi-send x rank tag)))
@@ -154,10 +154,10 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Foreign functions
 ;;;-----------------------------------------------------------------------------
-(defextern eul-mpi-send (ptr <int> ptr) ptr "eul_mpi_send")
-(defextern eul-mpi-receive (ptr ptr <int>) ptr "eul_mpi_receive")
+(defextern eul-mpi-send (ptr <fpi> ptr) ptr "eul_mpi_send")
+(defextern eul-mpi-receive (ptr ptr <fpi>) ptr "eul_mpi_receive")
 (defextern eul-mpi-probe (ptr ptr ptr) ptr "eul_mpi_probe")
-(defextern eul-mpi-finalize () <int> "MPI_Finalize")
+(defextern eul-mpi-finalize () <fpi> "MPI_Finalize")
 (defextern eul-mpi-initialize () ptr "eul_mpi_initialize")
 
 ;;;-----------------------------------------------------------------------------

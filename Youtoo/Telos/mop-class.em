@@ -25,7 +25,7 @@
 ;;;  Description:
 ;;    Some classes are predefined when the Vm is initialized:
 ;;    <keyword>, <simple-generic-funtion>, <simple-function>,
-;;    <simple-class>, <character>, <cons>, <string>, <null>, <int>, <double>,
+;;    <simple-class>, <character>, <cons>, <string>, <null>, <fpi>, <double>,
 ;;    <vector>, <hash-table>, <simple-method>, <symbol>
 ;;;-----------------------------------------------------------------------------
 

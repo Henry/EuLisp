@@ -19,11 +19,11 @@ extern LispRef stream_bindings[];
 #define O_TRUNC_fn_index 13 
 #define eul_sprintf_string_fn_index 20 
 #define from_stream_fn_index 46 
-#define generic_connect_fn_index 44 
+#define generic_connect_fn_index 43 
 #define O_EXCL_fn_index 12 
 #define O_WRONLY_fn_index 11 
-#define generic_read_fn_index 43 
-#define control_block_descriptor_fn_index 41 
+#define generic_read_fn_index 44 
+#define control_block_descriptor_fn_index 42 
 #define file_lookup_fn_index 19 
 #define socket_host_fn_index 11 
 #define sprint_one_char_fn_index 23 

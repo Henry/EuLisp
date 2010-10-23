@@ -116,7 +116,7 @@ void initialize_module_fpi()
   eul_allocate_bytevector( G002357,G002356);
   eul_allocate_bytevector( G002359,G002358);
   eul_intern_keyword(key_2362,"name");
-  eul_intern_symbol(sym_2363,"int");
+  eul_intern_symbol(sym_2363,"fpi");
   eul_intern_keyword(key_2364,"direct-superclasses");
   eul_intern_keyword(key_2365,"direct-slots");
   eul_intern_keyword(key_2366,"direct-keywords");
@@ -132,7 +132,7 @@ void initialize_module_fpi()
   eul_intern_symbol(sym_2376,"(method binary-lcm)");
   eul_intern_symbol(sym_2377,"(method zero?)");
   eul_intern_symbol(sym_2379,"converter");
-  eul_intern_symbol(sym_2381,"<int>");
+  eul_intern_symbol(sym_2381,"<fpi>");
   object_class(cons_2380) = eul_static_cons_class;
   eul_car(cons_2380) = sym_2381;
   eul_cdr(cons_2380) = eul_nil;

@@ -1416,7 +1416,7 @@
 (defconstant else t)
 (defconstant char-numeric? digit?)
 (defconstant string-length string-size)
-(defun string->number (str) (convert str <int>))
+(defun string->number (str) (convert str <fpi>))
 (defun symbol->string (sym)
   (convert sym <string>))
 (defmacro letrec (inits . body)

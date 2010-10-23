@@ -231,16 +231,16 @@
 (defextern initialize-default-binding-tables () ptr
            "eul_initialize_level1_tables")
 
-(defextern dynamic-binding-ref1 (<string> <int>) ptr
+(defextern dynamic-binding-ref1 (<string> <fpi>) ptr
            "eul_dyn_binding_ref")
 
 ;  (defextern dynamic-level1-binding-ref (ptr ptr) ptr
 ;    "eul_dyn_level1_binding_ref")
 
-(defextern dynamic-binding-set1 (<string> <int> ptr) ptr
+(defextern dynamic-binding-set1 (<string> <fpi> ptr) ptr
            "eul_dyn_binding_set")
 
-(defextern dynamic-load-module1 (<string> <string>) <int>
+(defextern dynamic-load-module1 (<string> <string>) <fpi>
            "eul_dyn_load_module")
 
 (defextern as-C-module-name (ptr) <string>

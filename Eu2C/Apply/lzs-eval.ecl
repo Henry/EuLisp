@@ -248,7 +248,7 @@ c  (make-list-syntactic obj))
     round
     truncate
     ;;--- fpi
-    int?
+    fpi?
     ;;--- formatted-io
     ;;   scan
     format

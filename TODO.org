@@ -144,7 +144,9 @@
 *** DONE Rename =abstractp:= -> =abstract?:=
     CLOSED: [2010-06-29 Tue 21:47]
 *** TODO Add =slice= method for =<vector>=
-*** TODO Reconsider =<int>=, should it be =<fpi>=?
+*** DONE Reconsider =<int>=, should it be =<fpi>=?
+    Yes.
+    CLOSED: [2010-10-23 Sat 23:10]
 *** TODO What should =<double-float>= be called?
     =<double>= as in Youtoo?  If so then the name =<float>= as the abstract base
     class is odd.
@@ -345,7 +347,7 @@
     #+END_SRC
 *** DONE Add =binary-mod= function
     CLOSED: [2010-07-05 Mon 21:35]
-    This is equivalent to =binary%= for integers but returns an <int> for
+    This is equivalent to =binary%= for integers but returns an <fpi> for
     <double-float>s, see definition.
 *** DONE Add =time= function
     CLOSED: [2010-07-06 Tue 13:01]
@@ -376,7 +378,7 @@
     conforms to this style and may be used to automatically re-indent code.
 *** TODO Reformat trailing parentheses in all CL and EuLisp code
 *** TODO Change the =initlist= keywords to use the post-fix ":"
-*** DONE Rename =<fixed-precision-integer>= -> =<int>=
+*** DONE Rename =<fixed-precision-integer>= -> =<fpi>=
     CLOSED: [2010-08-30 Mon 14:35]
 *** TODO Consider adding a special list for the keywords
     Currently they are simply symbols which happen to end in a ":".

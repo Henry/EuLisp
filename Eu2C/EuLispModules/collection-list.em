@@ -231,11 +231,11 @@
 ;;; element and (setter element)
 ;;;-----------------------------------------------------------------------------
 (defmethod element ((lst <list>)
-                    (key <int>))
+                    (key <fpi>))
   (element-list lst key))
 
 (defmethod (setter element) ((lst <list>)
-                             (key <int>)
+                             (key <fpi>)
                              (value <object>))
   (setter-element-list lst key value))
 
@@ -284,8 +284,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;  (defmethod fill ((lst <list>)
 ;;                   (object <object>) ;object to fill
-;;                   (start <int>)
-;;                   (end <int>))
+;;                   (start <fpi>)
+;;                   (end <fpi>))
 ;;    (fill-list lst lst object start end))
 
 (defmethod fill ((lst <list>)
@@ -488,7 +488,7 @@
 ;;; size
 ;;;-----------------------------------------------------------------------------
 (defmethod size ((lst <cons>))
-  (make-fpint (%pair-size lst)))
+  (make-fpi (%pair-size lst)))
 
 (defmethod size ((lst <null>))
   0)

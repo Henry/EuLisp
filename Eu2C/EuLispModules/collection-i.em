@@ -67,7 +67,7 @@
   (%setf (%extract (string-pointer string) n) value))
 
 ;;  (defun string-size (string)
-;;    (make-fpint (strlen (string-pointer string))))
+;;    (make-fpi (strlen (string-pointer string))))
 
 (%define-function (primitive-string-size %unsigned-word-integer)
   ((string <string>))
@@ -80,7 +80,7 @@
 
 ;;  (defun string-ref (string n)
 ;;    (convert-int-char
-;;     (make-fpint
+;;     (make-fpi
 ;;      (%cast %signed-word-integer
 ;;             (%extract (string-pointer string)
 ;;                       (%cast %unsigned-word-integer
@@ -90,16 +90,16 @@
   ((string <string>)
    (n %unsigned-word-integer))
   (convert-int-char
-   (make-fpint
+   (make-fpi
     (%cast %signed-word-integer
            (%extract (string-pointer string) n)))))
 
 (defun string-size (string)
-  (make-fpint (strlen (string-pointer string))))
+  (make-fpi (strlen (string-pointer string))))
 
 (defun string-ref (string n)
   (convert-int-char
-   (make-fpint
+   (make-fpi
     (%cast %signed-word-integer
            (%extract (string-pointer string)
                      (%cast %unsigned-word-integer

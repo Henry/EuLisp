@@ -32,7 +32,7 @@
                  basic-syntax)
            basic-list
            basic-compare
-           (only (make-fpint)
+           (only (make-fpi)
                  eulisp-kernel))
    syntax (tail
            (only (cond)
@@ -73,7 +73,7 @@
 ;;  (pair-size pair))
 
 (defun pair-size(pair)
-  (make-fpint (pair-size-1)))
+  (make-fpi (pair-size-1)))
 
 (defun pair-size-1 (pair)         ;s.o. cons??
   (if (cons? (cdr pair))
@@ -141,7 +141,7 @@
 (%annotate-function
   pair-size new-signature
   (((var0 var1)
-    ((var var0) (atom? <int>))
+    ((var var0) (atom? <fpi>))
     ((var var1) (atom? <cons>)))))
 
 ;;;-----------------------------------------------------------------------------

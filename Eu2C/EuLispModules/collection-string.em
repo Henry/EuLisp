@@ -378,11 +378,11 @@
 ;;; element and (setter element)
 ;;;-----------------------------------------------------------------------------
 (defmethod element ((str <string>)
-                    (key <int>))
+                    (key <fpi>))
   (string-ref str key))
 
 (defmethod (setter element) ((str <string>)
-                             (key <int>)
+                             (key <fpi>)
                              (value <character>))
   (%setf (%extract (string-pointer str)
                    (%cast %unsigned-word-integer
@@ -409,8 +409,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;  (defmethod fill ((str <string>)
 ;;                   (object <character>) ;object to fill
-;;                   (start <int>)
-;;                   (end <int>))
+;;                   (start <fpi>)
+;;                   (end <fpi>))
 ;;    (fill-string str object start end))
 
 (defmethod fill ((str <string>)
@@ -635,7 +635,7 @@
 ;;; size
 ;;;-----------------------------------------------------------------------------
 (defmethod size ((str <string>))
-  (make-fpint (strlen (string-pointer str))))
+  (make-fpi (strlen (string-pointer str))))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module collection-string

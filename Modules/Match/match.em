@@ -282,7 +282,7 @@
                      (memq (string-ref s 1) '(#\. #\_))
                      (match:andmap digit?
                                    (convert (substring s 2 n) <list>))
-                     (convert (substring s 2 n) <int>)))))))
+                     (convert (substring s 2 n) <fpi>)))))))
     (error-maker
      (lambda (match-expr)
        (cond

@@ -58,8 +58,8 @@
 
 (defun mkNode (x y)
   (tk-bell)
-  (let ((X (convert x <int>))
-        (Y (convert y <int>))
+  (let ((X (convert x <fpi>))
+        (Y (convert y <fpi>))
         (node (make <node>)))
     ((setter coordx) node X)
     ((setter coordy) node Y)
@@ -88,8 +88,8 @@
          (mkEdge cur-node))))
 
 (defun update-position (x y)
-  (setq *pos-x* (convert x <int>))
-  (setq *pos-y* (convert y <int>)))
+  (setq *pos-x* (convert x <fpi>))
+  (setq *pos-y* (convert y <fpi>)))
 
 (defconstant first car)
 (defconstant second cadr)
@@ -97,8 +97,8 @@
 (defconstant fourth cadddr)
 
 (defun moveNode (x y)
-  (setq x (convert x <int>))
-  (setq y (convert y <int>))
+  (setq x (convert x <fpi>))
+  (setq y (convert y <fpi>))
   (let ((id (tk-find-canvas-withtag *canvas* "current"))
         cur-node
         (x-incr (- x *pos-x*))

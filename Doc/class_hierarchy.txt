@@ -56,7 +56,7 @@ A    <number>
 A      <float>
          <double>
 A      <integer>
-         <int>
+         <fpi>
      <condition>
        <ct-error>
        <read-error>

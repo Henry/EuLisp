@@ -88,13 +88,13 @@
 
   (%define-literal-expansion
     integer
-    `(%literal ,<int>
+    `(%literal ,<fpi>
                ,(auxplus (auxplus value value) 1))))
 
 #-(:int :big)
 (%define-literal-expansion
   integer
-  `(%literal ,<int>
+  `(%literal ,<fpi>
              ,value))
 
 ;;;-----------------------------------------------------------------------------
@@ -108,7 +108,7 @@
 
 (%annotate-class <list> is-special-class <list>)
 (%annotate-class <null> is-special-class <null>)
-(%annotate-class <int> is-special-class <fpi>)
+(%annotate-class <fpi> is-special-class <fpi>)
 (%annotate-class <function> is-special-class <function>)
 
 (%annotate-function cons is-special-function cons)

@@ -273,7 +273,7 @@ and named constant values.")
            "<handler>"
            "<hash-table>"
            "<int*>"
-           "<int>"
+           "<fpi>"
            "<integer>"
            "<keyword>"
            "<list>"

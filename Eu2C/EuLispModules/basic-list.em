@@ -35,7 +35,7 @@
            basic-list-0
            basic-compare
            tail-introspection
-           (only (<int>)
+           (only (<fpi>)
                  basic-number)
            apply-level-1)
    syntax (%tail)
@@ -115,7 +115,7 @@
 ;;     ((var var0) (atom? <object>))
 ;;     ((var var1) (atom? poly-list)))
 ;;    ((var0 var1)
-;;     ((var var0) (atom? <int>))
+;;     ((var var0) (atom? <fpi>))
 ;;     ((var var1) (atom? fpi-list)))))
 ;;
 ;; Redefinition of the type scheme for compound types;
@@ -124,11 +124,11 @@
 ;;   cons comp-signature
 ;;   (((var0 var1 var2)
 ;;     ((var var0) (atom? fpi-list))
-;;     ((var var1) (atom? <int>))
+;;     ((var var1) (atom? <fpi>))
 ;;     ((var var2) (atom? (or <null> fpi-list))))
 ;;    ((var0 var1 var2)
 ;;     ((var var0) (atom? poly-list))
-;;     ((var var1) (atom? (not <int>)))
+;;     ((var var1) (atom? (not <fpi>)))
 ;;     ((var var2) (atom? <object>)))
 ;;    ((var0 var1 var2)
 ;;     ((var var0) (atom? poly-list))

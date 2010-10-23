@@ -70,9 +70,9 @@
                   string-pointer
                   <string>)
                  string-ii)
-           (only (int?
-                  <int>)
-                 int-i)
+           (only (fpi?
+                  <fpi>)
+                 fpi-i)
            (only (double-float?
                   <double-float>
                   dble)
@@ -152,7 +152,7 @@
            keyword stream:
            default ()
            accessor stream)
-   (error-number type <int>
+   (error-number type <fpi>
                  keyword error-number:
                  default 78
                  accessor error-number)))
@@ -267,7 +267,7 @@
 (defmethod generic-print ((object <null>) (stream <stream>))
   (%write-string stream (%literal %string () "()")) ())
 
-(defmethod generic-print ((object <int>) (stream <stream>))
+(defmethod generic-print ((object <fpi>) (stream <stream>))
   (%write-int stream (make-swi object)) object)
 
 (defmethod generic-print ((object <character>) (stream <stream>))
@@ -340,7 +340,7 @@
 (defmethod generic-write ((object <null>) (stream <stream>))
   (%write-string stream (%literal %string () "()")) ())
 
-(defmethod generic-write ((object <int>) (stream <stream>))
+(defmethod generic-write ((object <fpi>) (stream <stream>))
   (%write-int stream (make-swi object))
   object)
 

@@ -241,7 +241,7 @@
 (deflocal *bytevector-cache* (make <vector> size: 3))
 (deflocal *bytevector-cache-index* 0)
 (deflocal *bytevector-size* 0)
-(defextern as-hex-aux (<int>) ptr "eul_int_as_hex_str")
+(defextern as-hex-aux (<fpi>) ptr "eul_int_as_hex_str")
 
 (defun as-hex (x)
   (or (as-hex-aux x)
@@ -334,7 +334,7 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric convert-constant (value))
 
-(defmethod convert-constant ((value <int>))
+(defmethod convert-constant ((value <fpi>))
   (make-symbol (fmt "c_int_as_eul_int(~a)" value)))
 
 (defmethod convert-constant ((value <double>))

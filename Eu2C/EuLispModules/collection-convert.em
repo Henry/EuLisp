@@ -41,7 +41,7 @@
            (only (<string>)
                  string-i)
            (only (binary+)
-                 int)
+                 fpi)
            (only (eql)
                  compare)
            (only (<conversion-condition>
@@ -267,7 +267,7 @@
       (progn
         (setter-table-ref
          result-table
-         (make-fpint (%cast %signed-word-integer index))
+         (make-fpi (%cast %signed-word-integer index))
          (primitive-vector-ref vec index))
         (convert-vector-to-table vec
                                  result-table
@@ -291,7 +291,7 @@
   (if (%lt index str-size)
       (progn
         (setter-table-ref result-table
-                          (make-fpint (%cast %signed-word-integer index))
+                          (make-fpi (%cast %signed-word-integer index))
                           (string-ref-u str index))
         (convert-string-to-table str
                                  result-table
