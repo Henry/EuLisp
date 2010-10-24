@@ -52,9 +52,9 @@ extern LispRef cg_state_bindings[];
 #define code_state_stack_size__X63_fn_index 22 
 #define asm_function_state_handle__X33_fn_index 9 
 #define asm_function_state_binding_name__X63_fn_index 14 
-#define C_state_decls__X33_fn_index 39 
+#define C_state_decls__X33_fn_index 38 
 #define C_state_code_vector_str__X33_fn_index 50 
-#define _asm_function_state__X60_X62_fn_index 38 
+#define _asm_function_state__X60_X62_fn_index 39 
 #define C_state_initializations__X33_fn_index 34 
 #define code_state_asm__X33_fn_index 13 
 #define C_state_used_module_names__X63_fn_index 8 

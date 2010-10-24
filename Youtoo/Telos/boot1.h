@@ -13,6 +13,7 @@ extern LispRef boot1_bindings[];
 #define equal_fn_index 50 
 #define simple_generic_function__X63_fn_index 49 
 #define write_object_fn_index () 
+#define fpi_as_character_fn_index () 
 #define format_fn_index 48 
 #define _absent__X42_X42_fn_index 47 
 #define dec_fn_index 46 
@@ -34,7 +35,7 @@ extern LispRef boot1_bindings[];
 #define stderr_fn_index 31 
 #define make_symbol_fn_index 56 
 #define member1_string_fn_index 55 
-#define int_as_character_fn_index () 
+#define character_as_fpi_fn_index () 
 #define int_zero__X63_fn_index 30 
 #define tailstring_fn_index 54 
 #define car_fn_index 29 
@@ -42,7 +43,6 @@ extern LispRef boot1_bindings[];
 #define sprint_fn_index 27 
 #define _argv__X42_X42_fn_index 26 
 #define list_fn_index 25 
-#define character_as_int_fn_index () 
 #define sprin_fn_index 24 
 #define symbol__X63_fn_index 23 
 #define inc_fn_index 21 

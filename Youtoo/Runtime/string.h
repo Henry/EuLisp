@@ -14,7 +14,7 @@ extern LispRef string_bindings[];
 #define do1_string_fn_index 10 
 #define _string__X60_X62_fn_index 13 
 #define string_append_fn_index 11 
-#define string_as_int_fn_index 22 
+#define string_as_fpi_fn_index 22 
 #define map1_string_fn_index 4 
 #define listify_string_fn_index 5 
 #define string_ref_fn_index 9 

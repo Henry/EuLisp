@@ -37,9 +37,9 @@
            int-binary/
            int-binary%
            int-binary-mod
-           int-as-string
-           most-positive-int
-           most-negative-int))
+           fpi-as-string
+           most-positive-fpi
+           most-negative-fpi))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <fpi>
@@ -49,8 +49,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Limits (-2^29 - 1  ... 2^29 - 1)
 ;;;-----------------------------------------------------------------------------
-(defconstant most-positive-int 536870911)
-(defconstant most-negative-int -536870911)
+(defconstant most-positive-fpi 536870911)
+(defconstant most-negative-fpi -536870911)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Arithmetic
@@ -96,7 +96,7 @@
 ;;; Conversion
 ;;;-----------------------------------------------------------------------------
 (defgeneric (converter <fpi>) (x))
-(defextern int-as-string (<fpi>) <string> "eul_int_as_str")
+(defextern fpi-as-string (<fpi>) <string> "eul_int_as_str")
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module fpi

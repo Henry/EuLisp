@@ -106,7 +106,7 @@ void initialize_module_cg_exec()
   eul_allocate_static_cons(cons_8139, c_int_as_eul_int(172), NULL);
   eul_allocate_static_string(str_8140, "initialize-", 11);
   /* Byte-vector with size: 29 is_init: 0 index: 26 binding: run-init-bytevector */
-  static const void *G008137[] = {I(aa,1b,82,24),B(cg_state ,38),I(08,1c,83,24),B(cg_state ,38),I(08,23,00,00),B(cg_exec ,24),I(24,00,00,00),B(boot ,8),I(3c,02,1c,83),I(14,86,24,00),B(cg_exec ,12),I(3c,03,24,00),B(cg_exec ,16),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1b,82,02),I(23,00,00,00),B(cg_exec ,25),I(1c,24,00,00),B(string ,11),I(3c,02,41,00),B(boot1 ,56),I(22,01,1b,82),I(1f,05,41,00),B(cg_exec ,21),I(22,03,1b,3d),I(00,07,45,07)};
+  static const void *G008137[] = {I(aa,1b,82,24),B(cg_state ,39),I(08,1c,83,24),B(cg_state ,39),I(08,23,00,00),B(cg_exec ,24),I(24,00,00,00),B(boot ,8),I(3c,02,1c,83),I(14,86,24,00),B(cg_exec ,12),I(3c,03,24,00),B(cg_exec ,16),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1b,82,02),I(23,00,00,00),B(cg_exec ,25),I(1c,24,00,00),B(string ,11),I(3c,02,41,00),B(boot1 ,56),I(22,01,1b,82),I(1f,05,41,00),B(cg_exec ,21),I(22,03,1b,3d),I(00,07,45,07)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 27 binding: anonymous */
   static const void *G008141[] = {I(a9,47,00,00),I(24,00,00,00),B(cg_exec ,18),I(3c,01,2a,83),I(24,00,00,00),B(dynamic ,8),I(3d,01,00,00)};
@@ -163,7 +163,7 @@ void initialize_module_cg_exec()
   static const void *G008188[] = {I(a9,46,02,24),B(cg_exec ,16),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1b,48,00),I(01,47,00,01),I(24,00,00,00),B(p_env ,14),I(3c,01,1b,34),I(00,00,00,0d),I(1b,32,00,00),I(00,00,00,2f),I(86,1b,48,00),I(00,23,00,00),B(cg_exec ,30),I(23,00,00,00),B(cg_exec ,59),I(3b,01,48,00),I(00,24,00,00),B(i_param ,14),I(47,00,00,3d),I(01,03,22,01),I(45,02,00,00)};
 
   /* Byte-vector with size: 21 is_init: 0 index: 61 binding: anonymous */
-  static const void *G008190[] = {I(aa,1b,83,24),B(cg_state ,38),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,38),I(08,1d,84,24),B(cg_state ,38),I(08,1f,03,82),I(24,00,00,00),B(cg_state ,38),I(08,1f,03,1c),I(1f,03,24,00),B(cg_exec ,12),I(3c,03,1b,24),B(cg_exec ,13),I(3c,01,1f,04),I(1c,24,00,00),B(cg_exec ,2),I(3d,02,07,45),I(07,00,00,00)};
+  static const void *G008190[] = {I(aa,1b,83,24),B(cg_state ,39),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,39),I(08,1d,84,24),B(cg_state ,39),I(08,1f,03,82),I(24,00,00,00),B(cg_state ,39),I(08,1f,03,1c),I(1f,03,24,00),B(cg_exec ,12),I(3c,03,1b,24),B(cg_exec ,13),I(3c,01,1f,04),I(1c,24,00,00),B(cg_exec ,2),I(3d,02,07,45),I(07,00,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 62 binding: set-up-bytevectors */
   static const void *G008192[] = {I(aa,23,00,00),B(cg_exec ,30),I(23,00,00,00),B(cg_exec ,61),I(3b,01,1c,24),B(boot ,17),I(3d,02,01,00)};

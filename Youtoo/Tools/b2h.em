@@ -119,7 +119,7 @@
                   ))
      (when debug (sformat stderr "match! ~d\n" number))
      (setq bytecodes-found (+ bytecodes-found 1))
-     (let ((n (string-as-int number)))
+     (let ((n (string-as-fpi number)))
        (if (element bytecodes n)
            (format "~a:~d: warning: bytecode ~d redefined" filename lineno n)
          ((setter element) bytecodes n

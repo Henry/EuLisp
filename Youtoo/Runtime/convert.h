@@ -8,7 +8,7 @@
 extern LispRef convert_bindings[];
 
 /* Module binding indices */
-#define converter_fn_index 14 
+#define converter_fn_index 13 
 #define convert_fn_index 2 
 
 

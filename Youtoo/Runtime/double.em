@@ -74,19 +74,19 @@
   (double-binary= x y))
 
 (defmethod binary= ((x <fpi>) (y <double>))
-  (double-binary= (int-as-double x) y))
+  (double-binary= (fpi-as-double x) y))
 
 (defmethod binary= ((x <double>) (y <fpi>))
-  (double-binary= x (int-as-double y)))
+  (double-binary= x (fpi-as-double y)))
 
 (defmethod binary< ((x <double>) (y <double>))
   (double-binary< x y))
 
 (defmethod binary< ((x <fpi>) (y <double>))
-  (double-binary< (int-as-double x) y))
+  (double-binary< (fpi-as-double x) y))
 
 (defmethod binary< ((x <double>) (y <fpi>))
-  (double-binary< x (int-as-double y)))
+  (double-binary< x (fpi-as-double y)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Rounding ...
@@ -103,10 +103,10 @@
   (double-binary-gcd x y))
 
 (defmethod binary-gcd ((x <fpi>) (y <double>))
-  (double-binary-gcd (int-as-double x) y))
+  (double-binary-gcd (fpi-as-double x) y))
 
 (defmethod binary-gcd ((x <double>) (y <fpi>))
-  (double-binary-gcd x (int-as-double y)))
+  (double-binary-gcd x (fpi-as-double y)))
 
 (defun double-binary-gcd (x y)
   (cond ((double-binary< x y)
@@ -123,10 +123,10 @@
   (double-binary-lcm x y))
 
 (defmethod binary-lcm ((x <fpi>) (y <double>))
-  (double-binary-lcm (int-as-double x) y))
+  (double-binary-lcm (fpi-as-double x) y))
 
 (defmethod binary-lcm ((x <double>) (y <fpi>))
-  (double-binary-lcm x (int-as-double y)))
+  (double-binary-lcm x (fpi-as-double y)))
 
 (defun double-binary-lcm (x y)
   (if (or (= x 0) (= y 0))

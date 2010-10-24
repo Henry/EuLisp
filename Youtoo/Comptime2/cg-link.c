@@ -384,7 +384,7 @@ void initialize_module_cg_link()
   eul_allocate_static_string(str_7760, "~a_bindings[0]", 14);
   eul_allocate_static_string(str_7761, "initialize-", 11);
   /* Byte-vector with size: 32 is_init: 0 index: 245 binding: set-up-init-bytevector */
-  static const void *G007758[] = {I(ab,24,00,00),B(cg_link ,55),I(3c,00,2a,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1d,83,24),B(cg_state ,38),I(08,1b,1f,03),I(24,00,00,00),B(cg_link ,35),I(3c,02,1d,41),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,243),I(1c,24,00,00),B(format ,2),I(3c,02,41,00),B(boot1 ,56),I(22,01,1f,04),I(82,02,23,00),B(cg_link ,244),I(1c,24,00,00),B(string ,11),I(3c,02,41,00),B(boot1 ,56),I(22,01,1f,04),I(1c,1f,04,24),B(cg_link ,38),I(3d,03,09,45),I(09,00,00,00)};
+  static const void *G007758[] = {I(ab,24,00,00),B(cg_link ,55),I(3c,00,2a,1b),I(26,00,00,00),I(00,00,00,15),I(24,00,00,00),B(sx_obj1 ,59),I(08,1d,83,24),B(cg_state ,39),I(08,1b,1f,03),I(24,00,00,00),B(cg_link ,35),I(3c,02,1d,41),B(cg_dld ,14),I(22,01,23,00),B(cg_link ,243),I(1c,24,00,00),B(format ,2),I(3c,02,41,00),B(boot1 ,56),I(22,01,1f,04),I(82,02,23,00),B(cg_link ,244),I(1c,24,00,00),B(string ,11),I(3c,02,41,00),B(boot1 ,56),I(22,01,1f,04),I(1c,1f,04,24),B(cg_link ,38),I(3d,03,09,45),I(09,00,00,00)};
 
   eul_allocate_static_string(str_7764, "  eul_allocate_lambda( ~a, \"~a\", 0, ~a);\n", 41);
   /* Byte-vector with size: 28 is_init: 0 index: 247 binding: compute-bytevector */
@@ -485,7 +485,7 @@ void initialize_module_cg_link()
 
   eul_allocate_static_string(str_7842, "  Processing bv: ~s binding-name: ~a code: ~a", 45);
   /* Byte-vector with size: 23 is_init: 0 index: 306 binding: anonymous */
-  static const void *G007840[] = {I(aa,1b,83,24),B(cg_state ,38),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,38),I(08,1d,84,24),B(cg_state ,38),I(08,23,00,00),B(cg_link ,305),I(1d,1d,1f,05),I(24,00,00,00),B(i_notify ,4),I(3c,04,2a,1d),I(1c,24,00,00),B(cg_link ,38),I(3c,02,1b,24),B(cg_link ,56),I(3c,01,1f,03),I(1c,24,00,00),B(cg_link ,3),I(3d,02,06,45),I(06,00,00,00)};
+  static const void *G007840[] = {I(aa,1b,83,24),B(cg_state ,39),I(08,1c,26,00),I(00,00,00,03),I(24,00,00,00),B(cg_state ,39),I(08,1d,84,24),B(cg_state ,39),I(08,23,00,00),B(cg_link ,305),I(1d,1d,1f,05),I(24,00,00,00),B(i_notify ,4),I(3c,04,2a,1d),I(1c,24,00,00),B(cg_link ,38),I(3c,02,1b,24),B(cg_link ,56),I(3c,01,1f,03),I(1c,24,00,00),B(cg_link ,3),I(3d,02,06,45),I(06,00,00,00)};
 
   /* Byte-vector with size: 7 is_init: 0 index: 307 binding: set-up-bytevectors */
   static const void *G007843[] = {I(aa,23,00,00),B(cg_link ,117),I(23,00,00,00),B(cg_link ,306),I(3b,01,1c,24),B(boot ,17),I(3d,02,01,00)};

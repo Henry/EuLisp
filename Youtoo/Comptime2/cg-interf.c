@@ -231,7 +231,7 @@ void initialize_module_cg_interf()
 
   eul_allocate_static_string(str_4187, "", 0);
   /* Byte-vector with size: 20 is_init: 0 index: 145 binding: ffl-link-string */
-  static const void *G004185[] = {I(a9,24,00,00),B(i_param ,4),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,144),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,143),I(3b,01,1d,24),B(boot ,11),I(3c,02,24,00),B(collect ,17),I(1c,24,00,00),B(boot ,5),I(3d,02,03,22),I(01,45,02,00)};
+  static const void *G004185[] = {I(a9,24,00,00),B(i_param ,3),I(1b,12,1b,34),I(00,00,00,15),I(23,00,00,00),B(cg_interf ,144),I(32,00,00,00),I(00,00,00,35),I(23,00,00,00),B(cg_interf ,27),I(23,00,00,00),B(cg_interf ,143),I(3b,01,1d,24),B(boot ,11),I(3c,02,24,00),B(collect ,17),I(1c,24,00,00),B(boot ,5),I(3d,02,03,22),I(01,45,02,00)};
 
   eul_allocate_static_string(str_4190, "    (~s ~a)\n", 12);
   /* Byte-vector with size: 12 is_init: 0 index: 147 binding: anonymous */

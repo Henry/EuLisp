@@ -73,8 +73,8 @@
            string-size
            substring
            tailstring
-           character-as-int
-           int-as-character
+           character-as-fpi
+           fpi-as-character
            else
            stdout
            stderr
@@ -258,8 +258,8 @@
 (defun (setter string-ref) (str i c)
   ((opencoded-lambda (s i c) (set-string-ref)) str i c))
 
-(defopencoded character-as-int (x) (character-as-fpi))
-(defopencoded int-as-character (i) (fpi-as-character))
+(defopencoded character-as-fpi (x) (character-as-fpi))
+(defopencoded fpi-as-character (i) (fpi-as-character))
 
 (defextern substring (<string> <fpi> <fpi>) <string> "eul_substr")
 (defextern tailstring (<string> <fpi>) <string> "eul_tailstr")

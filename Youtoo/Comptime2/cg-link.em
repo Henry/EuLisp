@@ -829,7 +829,7 @@
                        ((setter string-ref) new-str i #\_)
                        (loop (+ i 1)
                              (fmt "~a_X~a" post-str
-                                  (character-as-int c))))
+                                  (character-as-fpi c))))
                       (t
                        ((setter string-ref) new-str i c)
                        (loop (+ i 1) post-str)))))))

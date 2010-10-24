@@ -43,7 +43,7 @@
            string-compare
            string-equal
            string-append
-           string-as-int
+           string-as-fpi
            string-empty?
            member1-string
            do1-string
@@ -283,7 +283,7 @@
 ;;;-----------------------------------------------------------------------------
 (defgeneric (converter <string>) (x))
 
-(defextern string-as-int (<string>) <fpi> "atoi")
+(defextern string-as-fpi (<string>) <fpi> "atoi")
 
 (defun listify-string (str . separators)
   (let ((c (if separators (car separators) #\ )))

@@ -12,7 +12,7 @@
     ((name . do1-string) (pos . 10) (origin string . do1-string))
     ((name . <string>) (pos . 13) (origin string . <string>) (class . constant))
     ((name . string-append) (pos . 11) (origin string . string-append))
-    ((name . string-as-int) (pos . 22) (origin string . string-as-int) (class . ff) (arity . 1) (ff (3) 0 ("atoi" . "ff_stub_atoi2793")))
+    ((name . string-as-fpi) (pos . 22) (origin string . string-as-fpi) (class . ff) (arity . 1) (ff (3) 0 ("atoi" . "ff_stub_atoi2793")))
     ((name . map1-string) (pos . 4) (origin string . map1-string))
     ((name . listify-string) (pos . 5) (origin string . listify-string))
     ((name . string-ref) (pos . 9) (origin boot1 . string-ref) (inline (G0090 (string-ref))) (setter (G00100 (set-string-ref))))

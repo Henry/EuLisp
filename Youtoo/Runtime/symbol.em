@@ -67,7 +67,7 @@
 (defun gensym strs
   (let* ((prestr (if strs (car strs) "G00"))
          (sym (make-symbol
-               (string-append prestr (int-as-string *symbol-count*)))))
+               (string-append prestr (fpi-as-string *symbol-count*)))))
     (setq *symbol-count* (int-binary+ *symbol-count* 1))
     sym))
 
