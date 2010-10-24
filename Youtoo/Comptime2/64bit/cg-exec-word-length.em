@@ -53,8 +53,8 @@
   (setq *bv-index* (+ *bv-index* 8)))
 
 (defun write-next-bv-byte (x)
-  ((setter string-ref) *bv* *bv-index* (int-as-character x))
-  ((setter string-ref) *bv* (+ *bv-index* 1) (int-as-character 0))
+  ((setter string-ref) *bv* *bv-index* (fpi-as-character x))
+  ((setter string-ref) *bv* (+ *bv-index* 1) (fpi-as-character 0))
   (setq *bv-index* (+ *bv-index* 2)))
 
 ;;;-----------------------------------------------------------------------------
