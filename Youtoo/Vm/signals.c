@@ -56,6 +56,12 @@ static void eul_signal_handler_int(int signo)
     eul_signal_cb = CB_FIRST_SIGNAL + 0;
 }
 
+static void eul_signal_handler_quit(int signo)
+{
+    fprintf(stderr,"\nReceived SIGQUIT\n");
+    exit(signo);
+}
+
 static void eul_signal_handler_bus(int signo)
 {
     if (eul_signal_enabled == 0)
@@ -84,38 +90,50 @@ static void eul_signal_handler_segv(int signo)
 ///-----------------------------------------------------------------------------
 void eul_initialize_signal()
 {
-    struct sigaction eul_sa_int, eul_sa_bus, eul_sa_segv; ;
-
-    // Interupt
+    // Interrupt
+    struct sigaction eul_sa_int;
     eul_sa_int.sa_handler = eul_signal_handler_int;
     sigemptyset(&eul_sa_int.sa_mask);
     eul_sa_int.sa_flags = 0;
 
     if (sigaction(SIGINT, &eul_sa_int, NULL))
     {
-        WARNING0("cannot install signal handler");
+        WARNING0("cannot install SIGINT signal handler");
+    }
+
+    // Quit
+    struct sigaction eul_sa_quit;
+    eul_sa_quit.sa_handler = eul_signal_handler_quit;
+    sigemptyset(&eul_sa_quit.sa_mask);
+    eul_sa_quit.sa_flags = 0;
+
+    if (sigaction(SIGQUIT, &eul_sa_quit, NULL))
+    {
+        WARNING0("cannot install SIGQUIT signal handler");
     }
 
     #ifndef WITH_PCR_THREADS
     // Bus error
+    struct sigaction eul_sa_bus;
     eul_sa_bus.sa_handler = eul_signal_handler_bus;
     sigemptyset(&eul_sa_bus.sa_mask);
     eul_sa_bus.sa_flags = 0;
 
     if (sigaction(SIGBUS, &eul_sa_bus, NULL))
     {
-        WARNING0("cannot install signal handler");
+        WARNING0("cannot install SIGBUS signal handler");
     }
     #endif // WITH_PCR_THREADS
 
     // Segmentation fault
+    struct sigaction eul_sa_segv;
     eul_sa_segv.sa_handler = eul_signal_handler_segv;
     sigemptyset(&eul_sa_segv.sa_mask);
     eul_sa_segv.sa_flags = 0;
 
     if (sigaction(SIGSEGV, &eul_sa_segv, NULL))
     {
-        WARNING0("cannot install signal handler");
+        WARNING0("cannot install SIGSEGV signal handler");
     }
 
     eul_signal = 0;

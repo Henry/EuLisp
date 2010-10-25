@@ -56,6 +56,7 @@ extern LVAL xlfun, xlenv, xlval;
 #include "xsproto.h"
 
 extern int trace;
+extern int reading;
 int quiet, no_system;
 FILE *filein;
 
@@ -67,30 +68,17 @@ void callerrorhandler();
 void xlwrapup(int);
 void do_xlerror(char *msg, LVAL arg, LVAL errname, int cc);
 
-#ifdef SIGNAL
-#define sigset signal
-#endif
-
-#include <signal.h>
-#define CAST (void (*)(int))
-
-int ctrl_c = 0;
-extern int reading, quiet;
-
 ///-----------------------------------------------------------------------------
 /// Signal handling
 ///-----------------------------------------------------------------------------
-void sig_int()
+#include <signal.h>
+
+int ctrl_c = 0;
+
+static void eux_signal_handler_int(int signo)
 {
     ctrl_c = 1;
 
-    // various signal behaviours
-    #ifdef RESTORE_SIGNAL
-    // one-shot signal
-    sigset(SIGINT, (void (*)(int))sig_int);
-    #endif
-
-    #ifdef SIGNAL
     // restarting syscalls
     if (reading)
     {
@@ -100,23 +88,21 @@ void sig_int()
         ostputc('\n');
         xltoplevel();
     }
-    #endif
+}
+
+static void eux_signal_handler_quit(int signo)
+{
+    fprintf(stderr,"\nReceived SIGQUIT\n");
+    exit(0);
 }
 
 #ifdef SOCK
 int broken_pipe = 0;
 
-void sig_pipe()
+static void eux_signal_handler_pipe(int signo)
 {
     broken_pipe = 1;
 
-    // various signal behaviours
-    #ifdef RESTORE_SIGNAL
-    // one-shot signal
-    sigset(SIGPIPE, (void (*)(int))sig_pipe);
-    #endif
-
-    #ifdef SIGNAL
     // restarting syscalls
     if (reading)
     {
@@ -126,7 +112,6 @@ void sig_pipe()
         ostputc('\n');
         xltoplevel();
     }
-    #endif
 }
 #endif
 
@@ -301,9 +286,37 @@ void xlmain(int argc, char **argv)
         xlsp = xlstktop;
     }
 
-    sigset(SIGINT, CAST sig_int);
+    // SIGINT
+    struct sigaction eux_sa_int;
+    eux_sa_int.sa_handler = eux_signal_handler_int;
+    sigemptyset(&eux_sa_int.sa_mask);
+    eux_sa_int.sa_flags = 0;
+    if (sigaction(SIGINT, &eux_sa_int, NULL))
+    {
+        fprintf(stderr,"\nWarning: cannot install SIGINT signal handler\n");
+    }
+
+    // SIGQUIT
+    struct sigaction eux_sa_quit;
+    eux_sa_quit.sa_handler = eux_signal_handler_quit;
+    sigemptyset(&eux_sa_quit.sa_mask);
+    eux_sa_quit.sa_flags = 0;
+    if (sigaction(SIGQUIT, &eux_sa_quit, NULL))
+    {
+        fprintf(stderr,"\nWarning: cannot install SIGQUIT signal handler\n");
+    }
+
     #ifdef SOCK
-    sigset(SIGPIPE, CAST sig_pipe);
+    // SIGPIPE
+    struct sigaction eux_sa_pipe;
+    eux_sa_pipe.sa_handler = eux_signal_handler_pipe;
+    sigemptyset(&eux_sa_pipe.sa_mask);
+    eux_sa_pipe.sa_flags = 0;
+    if (sigaction(SIGPIPE, &eux_sa_pipe, NULL))
+    {
+        fprintf(stderr,"\nWarning: cannot install SIGPIPE signal handler\n");
+    }
+
     #endif
 
     // execute the main loop

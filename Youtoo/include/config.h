@@ -76,7 +76,7 @@
 // #define WITH_BC
 
 #define SAFETY
-// #define WITH_SIGNALS
+#define WITH_SIGNALS
 
 // #define WITH_CONS_TAG
 

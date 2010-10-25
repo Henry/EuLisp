@@ -29,11 +29,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <setjmp.h>
-#ifdef STRINGH
 #include <string.h>
-#else
-#include <strings.h>
-#endif
 
 // save signal masks
 #ifdef _POSIX_SOURCE

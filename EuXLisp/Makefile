@@ -24,8 +24,6 @@
 ### Options:
 ###   ARCH=<achitectuer: i686, x86_64...>
 ### Optional Flags:
-###   -DSIGNAL when you don't have sigset
-###   -DRESTORE_SIGNAL when signals are not automatically reset
 ###   -DSOCK to include socket code, but beware: it is possibly buggy
 ###  Maintainer: Henry G. Weller
 ###-----------------------------------------------------------------------------
