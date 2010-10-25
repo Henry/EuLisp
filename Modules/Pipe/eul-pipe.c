@@ -171,9 +171,9 @@ int FT_fork_child(LispRef res, char *childname, char **childs_argv, char *path)
         signal(SIGCHLD, SIG_IGN);
 
         // Put childs pid and the two file descriptors in the result vector
-        slot_ref(res, 0) = c_int_as_eul_int(((int)child_id));
-        slot_ref(res, 1) = c_int_as_eul_int(tmp_childs_stdout[0]);
-        slot_ref(res, 2) = c_int_as_eul_int(tmp_childs_stdin[1]);
+        slot_ref(res, 0) = c_int_as_eul_fpi(((int)child_id));
+        slot_ref(res, 1) = c_int_as_eul_fpi(tmp_childs_stdout[0]);
+        slot_ref(res, 2) = c_int_as_eul_fpi(tmp_childs_stdin[1]);
     }
 
     return (0);
@@ -191,7 +191,7 @@ LispRef eul_fork_child(char *arg_string)
 
     if (ptr == NULL)
     {
-        return (c_int_as_eul_int(EUL_PIPE_STRDUP_FAILED));
+        return (c_int_as_eul_fpi(EUL_PIPE_STRDUP_FAILED));
     }
 
     int local_argc = 0;
@@ -217,7 +217,7 @@ LispRef eul_fork_child(char *arg_string)
 
     if (local_argc == 0)
     {
-        return (c_int_as_eul_int(EUL_PIPE_BAD_PROCESS_NAME));
+        return (c_int_as_eul_fpi(EUL_PIPE_BAD_PROCESS_NAME));
     }
 
     LispRef res;
@@ -228,7 +228,7 @@ LispRef eul_fork_child(char *arg_string)
     if (flag != 0)
     {
         // Error
-        return (c_int_as_eul_int(flag));
+        return (c_int_as_eul_fpi(flag));
     }
 
     return res;

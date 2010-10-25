@@ -24,12 +24,12 @@ extern LispRef sx_obj2_bindings[];
 #define _const__X60_X62_fn_index 29 
 #define _named_const__X60_X62_fn_index 22 
 #define named_const_binding__X33_fn_index 41 
-#define setq_obj__X63_fn_index 5 
+#define setq_obj__X63_fn_index 6 
 #define const_value__X63_fn_index 19 
 #define local_static_var_lambda__X63_fn_index 39 
 #define named_const_name__X33_fn_index 16 
 #define var_name__X33_fn_index 30 
-#define var_value__X33_fn_index 6 
+#define var_value__X33_fn_index 5 
 #define named_const_name__X63_fn_index 13 
 #define named_const_binding__X63_fn_index 38 
 #define global_var__X63_fn_index 3 

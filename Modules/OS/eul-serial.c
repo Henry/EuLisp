@@ -64,7 +64,7 @@ LispRef eul_serial_double_data(LispRef ref)
 LispRef eul_serial_lambda_data(LispRef x)
 {
     Instruction *code = (Instruction *) LAMBDA_CODE(x);
-    int n = eul_int_as_c_int(eul_size_of(x));
+    int n = eul_fpi_as_c_int(eul_size_of(x));
     LispRef res;
     eul_allocate_blank_string(res, n);
     Instruction *data = (Instruction *)eul_string_as_c_string(res);
@@ -76,7 +76,7 @@ LispRef eul_serial_lambda_data(LispRef x)
 LispRef eul_serial_bytevector_data(LispRef x)
 {
     char *data = (char *)BYTEVECTOR_DATA(x);
-    int n = eul_int_as_c_int(eul_size_of(x));
+    int n = eul_fpi_as_c_int(eul_size_of(x));
     LispRef res;
     eul_allocate_nstring(res, data, n);
     return res;
@@ -134,8 +134,8 @@ LispRef eul_serial_initialize()
     LispRef res;
     eul_allocate_vector(res, 21, eul_nil);
 
-    slot_ref(res, 0) = c_int_as_eul_int(STREAM_MAGIC);
-    slot_ref(res, 1) = c_int_as_eul_int(STREAM_VERSION);
+    slot_ref(res, 0) = c_int_as_eul_fpi(STREAM_MAGIC);
+    slot_ref(res, 1) = c_int_as_eul_fpi(STREAM_VERSION);
     slot_ref(res, 2) = c_char_as_eul_char(TC_NULL);
     slot_ref(res, 3) = c_char_as_eul_char(TC_REFERENCE);
     slot_ref(res, 4) = c_char_as_eul_char(TC_CLASS);
@@ -166,7 +166,7 @@ LispRef eul_serial_initialize()
 LispRef eul_symbol_as_eul_keyword(LispRef sym)
 {
     char *str1 = eul_symbol_as_c_string(sym);
-    int n = eul_int_as_c_int(eul_string_size(eul_symbol_name(sym)));
+    int n = eul_fpi_as_c_int(eul_string_size(eul_symbol_name(sym)));
     char *str2 = (char *)gc_malloc(n + 1);
     strcpy(str2, str1);
     LispRef key;
@@ -491,7 +491,7 @@ LispRef newState(LispRef stream, LispRef eos_error_p, LispRef eos_value)
     LispRef vec = eul_nil + 1;
     while (vec != eul_nil)
     {
-        int n = eul_int_as_c_int(eul_size_of(vec));
+        int n = eul_fpi_as_c_int(eul_size_of(vec));
         for (int i = 1; i < n; i++)
         {
             LispRef fun = slot_ref(vec, i + 3);
@@ -641,7 +641,7 @@ LispRef prevObject(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 
     LispRef prev_objects = EUL_OBJECT_STREAM_CACHE(stream);
 
-    int n = eul_int_as_c_int(object_size(prev_objects));
+    int n = eul_fpi_as_c_int(object_size(prev_objects));
 
     if (handle > n)
     {
@@ -683,7 +683,7 @@ LispRef nullReference(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 LispRef reset(LispRef stream, LispRef eos_error_p, LispRef eos_value)
 {
     WITH_DEBUG(fprintf(stderr, "reset\n"));
-    EUL_OBJECT_STREAM_CACHE_INDEX(stream) = c_int_as_eul_int(0);
+    EUL_OBJECT_STREAM_CACHE_INDEX(stream) = c_int_as_eul_fpi(0);
     return eul_nil;
 }
 
@@ -698,13 +698,13 @@ void newHandle(LispRef stream, LispRef obj)
     WITH_DEBUG(fprint_ref(stderr, obj));
     WITH_DEBUG(fprintf(stderr, "\n"));
 
-    int handle = eul_int_as_c_int(EUL_OBJECT_STREAM_CACHE_INDEX(stream));
-    EUL_OBJECT_STREAM_CACHE_INDEX(stream) = c_int_as_eul_int(handle + 1);
+    int handle = eul_fpi_as_c_int(EUL_OBJECT_STREAM_CACHE_INDEX(stream));
+    EUL_OBJECT_STREAM_CACHE_INDEX(stream) = c_int_as_eul_fpi(handle + 1);
 
     WITH_DEBUG(fprintf(stderr, "  handle: %x\n", handle));
 
     LispRef prev_objects = EUL_OBJECT_STREAM_CACHE(stream);
-    int n = eul_int_as_c_int(eul_size_of(prev_objects));
+    int n = eul_fpi_as_c_int(eul_size_of(prev_objects));
 
     WITH_DEBUG(fprintf(stderr, "  cache size: %d\n", n));
 

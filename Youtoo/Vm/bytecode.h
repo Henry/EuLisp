@@ -183,7 +183,7 @@ int eul_trace=0;
     CALLBACK_TRAP                                                              \
     (                                                                          \
         (fpi_value(object_size(LVPEEKVAL())) > i),                             \
-        PUSHVAL1(c_int_as_eul_int(i));,                                        \
+        PUSHVAL1(c_int_as_eul_fpi(i));,                                        \
         CB_BAD_SLOT_ACCESS,                                                    \
         2                                                                      \
     );                                                                         \
@@ -217,7 +217,7 @@ int eul_trace=0;
     CALLBACK_TRAP                                                              \
     (                                                                          \
         (fpi_value(object_size(arg1)) > i),                                    \
-        {PUSHVAL1(arg1); PUSHVAL1(c_int_as_eul_int(i));PUSHVAL1(arg3);},       \
+        {PUSHVAL1(arg1); PUSHVAL1(c_int_as_eul_fpi(i));PUSHVAL1(arg3);},       \
         CB_BAD_SLOT_ACCESS,                                                    \
         3                                                                      \
     );                                                                         \
@@ -1017,7 +1017,7 @@ int eul_trace=0;
     }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(1)), CB_FIRST_ARITH + 0, 2); \
+        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_fpi(1)), CB_FIRST_ARITH + 0, 2); \
     }                                                                          \
     LVPEEKVAL() = res;                                                         \
     ++reg_pc;
@@ -1039,7 +1039,7 @@ int eul_trace=0;
     }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(1)), CB_FIRST_ARITH + 1, 2); \
+        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_fpi(1)), CB_FIRST_ARITH + 1, 2); \
     }                                                                          \
     LVPEEKVAL() = res;                                                         \
     ++reg_pc;
@@ -1065,7 +1065,7 @@ int eul_trace=0;
     }                                                                          \
     else                                                                       \
     {                                                                          \
-        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_int(0)), CB_FIRST_ARITH+5, 2);  \
+        CALLBACK_TRAP(0, PUSHVAL1(c_int_as_eul_fpi(0)), CB_FIRST_ARITH+5, 2);  \
     }                                                                          \
     ++reg_pc;
 
@@ -1219,22 +1219,22 @@ int eul_trace=0;
 
 #define BC_STATIC_REF0 130
 #define BCA_STATIC_REF0()                                                      \
-    PUSHVAL1(c_int_as_eul_int(0));                                             \
+    PUSHVAL1(c_int_as_eul_fpi(0));                                             \
     ++reg_pc;
 
 #define BC_STATIC_REF1 131
 #define BCA_STATIC_REF1()                                                      \
-    PUSHVAL1(c_int_as_eul_int(1));                                             \
+    PUSHVAL1(c_int_as_eul_fpi(1));                                             \
     ++reg_pc;
 
 #define BC_STATIC_REF2 132
 #define BCA_STATIC_REF2()                                                      \
-    PUSHVAL1(c_int_as_eul_int(2));                                             \
+    PUSHVAL1(c_int_as_eul_fpi(2));                                             \
     ++reg_pc;
 
 #define BC_STATIC_REF_1 133
 #define BCA_STATIC_REF_1()                                                     \
-    PUSHVAL1(c_int_as_eul_int(-1));                                            \
+    PUSHVAL1(c_int_as_eul_fpi(-1));                                            \
     ++reg_pc;
 
 #define BC_STATIC_REF_NIL 134
@@ -1690,7 +1690,7 @@ SET_LAMBDA_CONTEXT();
     PRINT_REG_PC("MAKE_LAMBDA");                                               \
     fix1 = get_signed_bytearg();  /* arity */                                  \
     PRINT_REG_PC("MAKE_LAMBDA");                                               \
-    eul_allocate_lambda1(res, arg1, c_int_as_eul_int(fix1), arg2);             \
+    eul_allocate_lambda1(res, arg1, c_int_as_eul_fpi(fix1), arg2);             \
     PRINT_REG_PC("MAKE_LAMBDA");                                               \
     LAMBDA_ENV(res) = reg_env;                                                 \
     PRINT_REG_PC("MAKE_LAMBDA");                                               \
@@ -2065,7 +2065,7 @@ tail_call_entry_point:                                                         \
     }                                                                          \
     else                                                                       \
     {                                                                          \
-        slot_ref(tmp1, 0) = c_int_as_eul_int(1);                               \
+        slot_ref(tmp1, 0) = c_int_as_eul_fpi(1);                               \
     }                                                                          \
     ++reg_pc;
 

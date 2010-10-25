@@ -58,7 +58,7 @@ int main(int argc, char **argv)
     EXTERNAL_POPVAL1(res);
     if (eul_is_int(res))
     {
-        return eul_int_as_c_int(res);
+        return eul_fpi_as_c_int(res);
     }
 
     return 0;
@@ -84,7 +84,7 @@ int PCR_youtoo_main(int argc, char **argv, void *data)
 
     if (eul_is_int(res))
     {
-        return eul_int_as_c_int(res);
+        return eul_fpi_as_c_int(res);
     }
 
     return 0;

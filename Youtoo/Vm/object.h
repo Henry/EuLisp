@@ -51,13 +51,13 @@ typedef EulObject *LispRef;
 #define eul_size_of(loc) computed_object_size(loc)
 #define eul_class_of(loc) computed_object_class(loc)
 #define eul_slot_ref(loc, i) slot_ref(loc, i)
-#define eul_vector_size(x) eul_int_as_c_int(object_size(x))
+#define eul_vector_size(x) eul_fpi_as_c_int(object_size(x))
 
 ///-----------------------------------------------------------------------------
 /// Dynamic object allocation
 ///-----------------------------------------------------------------------------
 #define INITIALIZE_OBJECT(loc, cl, nslots)                                     \
-    object_size(loc) = c_int_as_eul_int(nslots);                               \
+    object_size(loc) = c_int_as_eul_fpi(nslots);                               \
     object_class(loc) = (cl)
 
 #define ALLOCATE_RAW_OBJECT(loc, bytesize)                                     \

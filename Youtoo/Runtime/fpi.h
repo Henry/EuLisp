@@ -8,16 +8,16 @@
 extern LispRef fpi_bindings[];
 
 /* Module binding indices */
-#define int_binary__X37_fn_index 32 
-#define int_binary_mod_fn_index 41 
+#define fpi_binary__fn_index 16 
 #define most_positive_fpi_fn_index 3 
+#define fpi_binary__X47_fn_index 12 
 #define _fpi__X60_X62_fn_index 6 
-#define int_binary__X47_fn_index 12 
-#define int_binary__X42_fn_index 35 
+#define fpi_binary__X42_fn_index 35 
+#define fpi_binary_mod_fn_index 41 
 #define most_negative_fpi_fn_index 2 
 #define fpi_as_string_fn_index 7 
+#define fpi_binary__X37_fn_index 32 
 #define fpi__X63_fn_index 34 
-#define int_binary__fn_index 16 
 
 
 

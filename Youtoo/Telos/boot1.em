@@ -41,7 +41,7 @@
            null?
            simple-function?
            simple-generic-function?
-           int-zero?
+           fpi-zero?
            object?
            +
            -
@@ -184,8 +184,8 @@
 (defun dec (x) ((opencoded-lambda (x) (fpi-dec)) x))
 (declare-inline dec)
 
-(defun int-zero? (x) ((opencoded-lambda (x) (fpi-zerop)) x))
-(declare-inline int-zero?)
+(defun fpi-zero? (x) ((opencoded-lambda (x) (fpi-zerop)) x))
+(declare-inline fpi-zero?)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Lists

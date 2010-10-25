@@ -67,8 +67,8 @@ static int compare_module_vectors(LispRef *x, LispRef *y)
 LispRef eul_sort_modules()
 {
     LispRef vec = TABLE_ENTRIES(eul_modules);
-    int n = eul_int_as_c_int(object_size(vec));
-    eul_nmodules = eul_int_as_c_int(TABLE_POPULATION(eul_modules));
+    int n = eul_fpi_as_c_int(object_size(vec));
+    eul_nmodules = eul_fpi_as_c_int(TABLE_POPULATION(eul_modules));
     eul_sorted_modules = (LispRef *) gc_malloc(eul_nmodules*sizeof(LispRef));
 
     // Initialize the new vector of module vectors
@@ -179,7 +179,7 @@ LispRef eul_get_binding_location(LispRef *ptr, LispRef std_modules)
     eul_intern_symbol(sym, module_name);
     if (eul_is_object(obj))
     {
-        int n = eul_int_as_c_int(eul_size_of(std_modules));
+        int n = eul_fpi_as_c_int(eul_size_of(std_modules));
         for (int i = 0; i < n; i++)
         {
             if (eul_slot_ref(std_modules, i) == sym)
@@ -198,7 +198,7 @@ LispRef eul_get_binding_location(LispRef *ptr, LispRef std_modules)
     eul_allocate_vector(res, 3, eul_nil);
     eul_slot_ref(res, 0) = obj;
     eul_slot_ref(res, 1) = sym;
-    eul_slot_ref(res, 2) = c_int_as_eul_int(index);
+    eul_slot_ref(res, 2) = c_int_as_eul_fpi(index);
 
     return res;
 }
@@ -293,7 +293,7 @@ LispRef eul_raw_bytevector_refs(Instruction *code, int n, LispRef std_modules)
 LispRef eul_lambda_refs(LispRef fun, LispRef std_modules)
 {
     Instruction *code = (Instruction *) LAMBDA_CODE(fun);
-    int n = 4*eul_int_as_c_int(object_size(fun))/ptrNBytes;
+    int n = 4*eul_fpi_as_c_int(object_size(fun))/ptrNBytes;
     return eul_raw_bytevector_refs(code, n, std_modules);
 }
 
@@ -301,7 +301,7 @@ LispRef eul_lambda_refs(LispRef fun, LispRef std_modules)
 LispRef eul_bytevector_refs(LispRef bv, LispRef std_modules)
 {
     Instruction *code = (Instruction *) BYTEVECTOR_DATA(bv);
-    int n = 4*eul_int_as_c_int(object_size(bv))/ptrNBytes;
+    int n = 4*eul_fpi_as_c_int(object_size(bv))/ptrNBytes;
     return eul_raw_bytevector_refs(code, n, std_modules);
 }
 
@@ -367,7 +367,7 @@ LispRef eul_link_raw_bytevector_refs(Instruction *code, int n, LispRef refs)
                         LispRef obj = eul_slot_ref(ref, 0);
                         char *module_name =
                             eul_symbol_as_c_string(eul_slot_ref(ref, 1));
-                        int index = eul_int_as_c_int(eul_slot_ref(ref, 2));
+                        int index = eul_fpi_as_c_int(eul_slot_ref(ref, 2));
                         WITH_DEBUG
                         (
                             fprintf
@@ -412,7 +412,7 @@ LispRef eul_link_raw_bytevector_refs(Instruction *code, int n, LispRef refs)
 LispRef eul_link_lambda_refs(LispRef fun, LispRef refs)
 {
     Instruction *code = (Instruction *) LAMBDA_CODE(fun);
-    int n = 4*eul_int_as_c_int(object_size(fun))/ptrNBytes;
+    int n = 4*eul_fpi_as_c_int(object_size(fun))/ptrNBytes;
     return eul_link_raw_bytevector_refs(code, n, refs);
 }
 
@@ -420,7 +420,7 @@ LispRef eul_link_lambda_refs(LispRef fun, LispRef refs)
 LispRef eul_link_bytevector_refs(LispRef bv, LispRef refs)
 {
     Instruction *code = (Instruction *) BYTEVECTOR_DATA(bv);
-    int n = 4*eul_int_as_c_int(object_size(bv))/ptrNBytes;
+    int n = 4*eul_fpi_as_c_int(object_size(bv))/ptrNBytes;
     return eul_link_raw_bytevector_refs(code, n, refs);
 }
 

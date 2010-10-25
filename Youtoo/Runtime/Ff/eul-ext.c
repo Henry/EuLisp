@@ -41,7 +41,7 @@ LispRef eul_init_string(LispRef str, int n, char c)
     memset(data, c, n);
     *(data + n) = '\0';
     STRING_DATA(str) = (LispRef) data;
-    eul_string_size(str) = c_int_as_eul_int(n);
+    eul_string_size(str) = c_int_as_eul_fpi(n);
 
     return str;
 }
@@ -57,7 +57,7 @@ LispRef c_strn_as_eul_str(char *str, int n)
     return loc;
 }
 
-LispRef eul_int_as_hex_str(int x)
+LispRef eul_fpi_as_hex_str(int x)
 {
     if (x < 0)
     {
@@ -110,11 +110,11 @@ LispRef eul_list_as_eul_string(LispRef x)
         tmp = eul_car(l);
         if (eul_is_string(tmp))
         {
-            n += eul_int_as_c_int(eul_string_size(tmp));
+            n += eul_fpi_as_c_int(eul_string_size(tmp));
         }
         else if (eul_is_symbol(tmp))
         {
-            n += eul_int_as_c_int(eul_string_size(eul_symbol_name(tmp)));
+            n += eul_fpi_as_c_int(eul_string_size(eul_symbol_name(tmp)));
         }
         else if (eul_is_char(tmp))
         {
@@ -132,13 +132,13 @@ LispRef eul_list_as_eul_string(LispRef x)
         tmp = eul_car(l);
         if (eul_is_string(tmp))
         {
-            n = eul_int_as_c_int(eul_string_size(tmp));
+            n = eul_fpi_as_c_int(eul_string_size(tmp));
             strcpy(str + i, eul_string_as_c_string(tmp));
             i += n;
         }
         else if (eul_is_symbol(tmp))
         {
-            n = eul_int_as_c_int(eul_string_size(eul_symbol_name(tmp)));
+            n = eul_fpi_as_c_int(eul_string_size(eul_symbol_name(tmp)));
             strcpy(str + i, eul_symbol_as_c_string(tmp));
             i += n;
         }
@@ -231,7 +231,7 @@ LispRef c_strn_as_eul_symbol_or_keyword(char *str, int n)
 ///-----------------------------------------------------------------------------
 /// Conversion int -> string
 ///-----------------------------------------------------------------------------
-char *eul_int_as_str(int x)
+char *eul_fpi_as_str(int x)
 {
     sprintf(buffer, "%d", x);
     char *res = (char *)gc_malloc(strlen(buffer) + 1);
@@ -458,7 +458,7 @@ int eul_sprintf(char *buf, int buf_offset, char *fmt_str, LispRef x)
 {
     if (eul_is_int(x))
     {
-        return sprintf(buf + buf_offset, fmt_str, eul_int_as_c_int(x));
+        return sprintf(buf + buf_offset, fmt_str, eul_fpi_as_c_int(x));
     }
     else if (eul_is_double(x))
     {
@@ -538,15 +538,15 @@ LispRef eul_format_info(char *str)
         {
             if (c == '\0')
             {
-                eul_allocate_cons(res, c_int_as_eul_int(j), res);
-                eul_allocate_cons(res, c_int_as_eul_int(i - j), res);
+                eul_allocate_cons(res, c_int_as_eul_fpi(j), res);
+                eul_allocate_cons(res, c_int_as_eul_fpi(i - j), res);
                 eul_allocate_cons(res, c_char_as_eul_char('\0'), res);
                 return res;
             }
             else
             {
-                eul_allocate_cons(res, c_int_as_eul_int(j), res);
-                eul_allocate_cons(res, c_int_as_eul_int(i - j), res);
+                eul_allocate_cons(res, c_int_as_eul_fpi(j), res);
+                eul_allocate_cons(res, c_int_as_eul_fpi(i - j), res);
                 eul_allocate_cons(res, c_char_as_eul_char(*(str + (++i))), res);
                 j = ++i;
             }
@@ -677,10 +677,10 @@ int eul_srand(int n)
 ///-----------------------------------------------------------------------------
 /// Convert Lisp values to Lisp references
 ///-----------------------------------------------------------------------------
-LispRef eul_int_as_eul_int_ref(LispRef x)
+LispRef eul_fpi_as_eul_fpi_ref(LispRef x)
 {
     int *ptr = (int *)gc_malloc(sizeof(int *));
-    (*ptr) = eul_int_as_c_int(x);
+    (*ptr) = eul_fpi_as_c_int(x);
 
     LispRef res;
     eul_allocate_int_ref(res, ptr);
@@ -740,9 +740,9 @@ LispRef eul_cpu_time()
     int u = (int)buffer.tms_utime;
     int s = (int)buffer.tms_stime;
 
-    TIMES_REAL(res) = c_int_as_eul_int(r);
-    TIMES_USER(res) = c_int_as_eul_int(u);
-    TIMES_SYS(res) = c_int_as_eul_int(s);
+    TIMES_REAL(res) = c_int_as_eul_fpi(r);
+    TIMES_USER(res) = c_int_as_eul_fpi(u);
+    TIMES_SYS(res) = c_int_as_eul_fpi(s);
 
     return res;
 }

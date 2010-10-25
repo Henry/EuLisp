@@ -80,7 +80,7 @@
 #endif // WITH_CONS_TAG
 
 #define computed_object_size(loc)                                              \
-    (is_immediate(loc) ? c_int_as_eul_int(0) : object_size(loc))
+    (is_immediate(loc) ? c_int_as_eul_fpi(0) : object_size(loc))
 
 ///-----------------------------------------------------------------------------
 #endif // TAG_H

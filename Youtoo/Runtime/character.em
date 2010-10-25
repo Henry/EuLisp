@@ -53,11 +53,11 @@
 (defmethod binary< ((c1 <character>) (c2 <character>))
   (cond
     ((and (uppercase? c1) (uppercase? c2))
-     (int-binary< (character-as-fpi c1) (character-as-fpi c2)))
+     (fpi-binary< (character-as-fpi c1) (character-as-fpi c2)))
     ((and (lowercase? c1) (lowercase? c2))
-     (int-binary< (character-as-fpi c1) (character-as-fpi c2)))
+     (fpi-binary< (character-as-fpi c1) (character-as-fpi c2)))
     ((and (digit? c1) (digit? c2))
-     (int-binary< (character-as-fpi c1) (character-as-fpi c2)))
+     (fpi-binary< (character-as-fpi c1) (character-as-fpi c2)))
     (t ())))
 
 ;;;-----------------------------------------------------------------------------

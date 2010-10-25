@@ -290,7 +290,7 @@
     (get-literal-entry . 102)
     (get-constant-loc . 101)
     (*actual-module* . 97)
-    ("c_int_as_eul_int(~a)" . 94)
+    ("c_int_as_eul_fpi(~a)" . 94)
     ("  eul_allocate_double(~a,~a);
 " . 92)
     ("dbl_" . 91)

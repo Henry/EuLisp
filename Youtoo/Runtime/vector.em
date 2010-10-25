@@ -70,7 +70,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-(defun vector-empty? (vec) (int-binary= (vector-size vec) 0))
+(defun vector-empty? (vec) (fpi-binary= (vector-size vec) 0))
 (declare-inline vector-empty?)
 
 (defmethod emptyp ((vec <vector>)) (vector-empty? vec))
@@ -88,10 +88,10 @@
   (let ((n (vector-size vec)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   (setq init (fun init (vector-ref vec i)))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               init)))
      (loop 0))))
 
@@ -99,7 +99,7 @@
   (accumulate1-vector fun vec))
 
 (defun accumulate1-vector (fun vec)
-  (if (int-binary= (vector-size vec) 0) ()
+  (if (fpi-binary= (vector-size vec) 0) ()
     (accumulate-vector fun (vector-ref vec 0) (subvector vec 1 ()))))
 
 ;;;-----------------------------------------------------------------------------
@@ -114,9 +114,9 @@
   (let ((n (vector-size vec)))
     (labels
      ((loop (i)
-            (and (int-binary< i n)
+            (and (fpi-binary< i n)
                  (or (fun (vector-ref vec i))
-                     (loop (int-binary+ i 1))))))
+                     (loop (fpi-binary+ i 1))))))
      (loop 0))))
 
 ;;;-----------------------------------------------------------------------------
@@ -131,9 +131,9 @@
   (let ((n (vector-size vec)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (and (fun (vector-ref vec i))
-                     (loop (int-binary+ i 1)))
+                     (loop (fpi-binary+ i 1)))
               t)))
      (loop 0))))
 
@@ -149,10 +149,10 @@
   (let ((n (vector-size vec)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   (fun (vector-ref vec i))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               ())))
      (loop 0))))
 
@@ -160,10 +160,10 @@
   (let ((n (vector-size vec1)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   (fun (vector-ref vec1 i) (vector-ref vec2 i))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               ())))
      (loop 0))))
 
@@ -182,10 +182,10 @@
          (res (make-vector n)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   ((setter vector-ref) res i (fun (vector-ref vec i)))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               res)))
      (loop 0))))
 
@@ -194,11 +194,11 @@
          (res (make-vector n)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   ((setter vector-ref) res i
                    (fun (vector-ref vec1 i) (vector-ref vec2 i)))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               res)))
      (loop 0))))
 
@@ -212,20 +212,20 @@
           (n (vector-size vec)))
       (labels
        ((loop (i)
-              (and (int-binary< i n)
+              (and (fpi-binary< i n)
                    (if (eql x (vector-ref vec i))
                        i
-                     (loop (int-binary+ i 1))))))
+                     (loop (fpi-binary+ i 1))))))
        (loop 0)))))
 
 (defun member1-vector (x vec)
   (let ((n (vector-size vec)))
     (labels
      ((loop (i)
-            (and (int-binary< i n)
+            (and (fpi-binary< i n)
                  (if (eql x (vector-ref vec i))
                      i
-                   (loop (int-binary+ i 1))))))
+                   (loop (fpi-binary+ i 1))))))
      (loop 0))))
 
 ;;;-----------------------------------------------------------------------------
@@ -240,11 +240,11 @@
          (n (apply min (map1-list size ccs))))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   (apply fun (map1-list (lambda (cc)
                                           (element cc i)) ccs))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               ())))
      (loop 0))))
 
@@ -259,13 +259,13 @@
          (res (make-vector n)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   ((setter vector-ref)
                    res i
                    (apply fun (map1-list (lambda (cc)
                                            (element cc i)) ccs)))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               res)))
      (convert (loop 0) (class-of c)))))
 
@@ -282,16 +282,16 @@
 (defun subvector (vec i j)
   (let* ((ii (or i 0))
          (jj (or j (vector-size vec)))
-         (n (max (int-binary- jj ii) 0))
+         (n (max (fpi-binary- jj ii) 0))
          (k ii)
          (res (make-vector n)))
     (labels
      ((loop ()
-            (if (int-binary< k jj)
+            (if (fpi-binary< k jj)
                 (progn
-                  ((setter vector-ref) res (int-binary- k ii)
+                  ((setter vector-ref) res (fpi-binary- k ii)
                    (vector-ref vec k))
-                  (setq k (int-binary+ k 1))
+                  (setq k (fpi-binary+ k 1))
                   (loop))
               res)))
      (loop))))
@@ -299,12 +299,12 @@
 (defmethod reset ((vec <vector>))
   (labels
    ((loop (i)
-          (if (int-binary< i 0)
+          (if (fpi-binary< i 0)
               vec
             (progn
               ((setter vector-ref) vec i ())
-              (loop (int-binary- i 1))))))
-   (loop (int-binary- (vector-size vec) 1))))
+              (loop (fpi-binary- i 1))))))
+   (loop (fpi-binary- (vector-size vec) 1))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Concatenation
@@ -322,14 +322,14 @@
 (defun vector-append (vec1 vec2)
   (let* ((n1 (vector-size vec1))
          (n2 (vector-size vec2))
-         (res (make-vector (int-binary+ n1 n2))))
+         (res (make-vector (fpi-binary+ n1 n2))))
     (labels
      ((loop (i j n vec)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   ((setter vector-ref)
                    res j (vector-ref vec i))
-                  (loop (int-binary+ i 1) (int-binary+ j 1) n vec))
+                  (loop (fpi-binary+ i 1) (fpi-binary+ j 1) n vec))
               res)))
      (loop 0 0 n1 vec1)
      (loop 0 n1 n2 vec2))))
@@ -354,28 +354,28 @@
          (new-vec (make-vector n)))
     (labels
      ((loop (i j)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   ((setter vector-ref) new-vec i
                    (vector-ref vec j))
-                  (loop (int-binary+ i 1)
-                        (int-binary- j 1)))
+                  (loop (fpi-binary+ i 1)
+                        (fpi-binary- j 1)))
               new-vec)))
-     (loop 0 (int-binary- n 1)))))
+     (loop 0 (fpi-binary- n 1)))))
 
 (defun reverse-vector! (vec)
   ;; destructive reverse
   (labels
    ((loop (i j)
-          (if (int-binary< i j)
+          (if (fpi-binary< i j)
               (let ((u (vector-ref vec i))
                     (v (vector-ref vec j)))
                 ((setter vector-ref) vec i v)
                 ((setter vector-ref) vec j u)
-                (loop (int-binary+ i 1)
-                      (int-binary- j 1)))
+                (loop (fpi-binary+ i 1)
+                      (fpi-binary- j 1)))
             vec)))
-   (loop 0 (int-binary- (vector-size vec) 1))))
+   (loop 0 (fpi-binary- (vector-size vec) 1))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Permute collections
@@ -407,10 +407,10 @@
          (res (make <vector> size: n)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (let ((x (vector-ref vec i)))
                   ((setter vector-ref) res i x)
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               res)))
      (loop 0))))
 
@@ -419,10 +419,10 @@
          (res (make <vector> size: n)))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (let ((x (vector-ref vec i)))
                   ((setter vector-ref) res i (deep-copy x))
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               res)))
      (loop 0))))
 

@@ -64,18 +64,18 @@
 (defun push-dynamic-variable (name val)
   (let ((thrd (current-thread)))
     (setq *current-no-dynamic-variables*
-          (int-binary+ *current-no-dynamic-variables* 1))
+          (fpi-binary+ *current-no-dynamic-variables* 1))
     ((setter thread-dynamic-variables) thrd
      (cons name (cons val (thread-dynamic-variables thrd))))))
 
 (defun pop-dynamic-variables (n)
   (labels
    ((loop (nn ll)
-          (if (int-binary= nn 0) ll
-            (loop (int-binary- nn 1) (cdr (cdr ll))))))
+          (if (fpi-binary= nn 0) ll
+            (loop (fpi-binary- nn 1) (cdr (cdr ll))))))
    (let ((thrd (current-thread)))
      (setq *current-no-dynamic-variables*
-           (int-binary- *current-no-dynamic-variables* n))
+           (fpi-binary- *current-no-dynamic-variables* n))
      ((setter thread-dynamic-variables) thrd
       (loop n (thread-dynamic-variables thrd))))))
 
@@ -87,18 +87,18 @@
 (defun push-error-handler (fun)
   (let ((thrd (current-thread)))
     (setq *current-no-error-handlers*
-          (int-binary+ *current-no-error-handlers* 1))
+          (fpi-binary+ *current-no-error-handlers* 1))
     ((setter thread-error-handlers)
      thrd (cons fun (thread-error-handlers thrd)))))
 
 (defun pop-error-handlers (n)
   (labels
    ((loop (nn ll)
-          (if (int-binary= nn 0) ll
-            (loop (int-binary- nn 1) (cdr ll)))))
+          (if (fpi-binary= nn 0) ll
+            (loop (fpi-binary- nn 1) (cdr ll)))))
    (let ((thrd (current-thread)))
      (setq *current-no-error-handlers*
-           (int-binary- *current-no-error-handlers* n))
+           (fpi-binary- *current-no-error-handlers* n))
      ((setter thread-error-handlers) thrd
       (loop n (thread-error-handlers thrd))))))
 

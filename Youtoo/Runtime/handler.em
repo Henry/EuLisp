@@ -56,21 +56,21 @@
 (defgeneric (converter <int*>) (x))
 
 (defmethod (converter <int*>) ((x <fpi>))
-  (eul_int_as_eul_int_ref x))
+  (eul_fpi_as_eul_fpi_ref x))
 
 (defmethod (converter <fpi>) ((x <int*>))
-  (eul_int_ref_as_c_int x))
+  (eul_fpi_ref_as_c_int x))
 
 (defmethod element ((x <int*>) (i <fpi>))
-  (eul_int_ref_ref x i))
+  (eul_fpi_ref_ref x i))
 
 (defmethod (setter element) ((x <int*>) (i <fpi>) y)
-  (eul_int_ref_set x i y))
+  (eul_fpi_ref_set x i y))
 
-(defextern eul_int_as_eul_int_ref (ptr) ptr)
-(defextern eul_int_ref_as_c_int (ptr) <fpi>)
-(defextern eul_int_ref_ref (<int*> <fpi>) <fpi> "eul_c_vector_ref")
-(defextern eul_int_ref_set (<int*> <fpi> <fpi>) <fpi> "eul_c_vector_set")
+(defextern eul_fpi_as_eul_fpi_ref (ptr) ptr)
+(defextern eul_fpi_ref_as_c_int (ptr) <fpi>)
+(defextern eul_fpi_ref_ref (<int*> <fpi>) <fpi> "eul_c_vector_ref")
+(defextern eul_fpi_ref_set (<int*> <fpi> <fpi>) <fpi> "eul_c_vector_set")
 
 ;;;-----------------------------------------------------------------------------
 ;;; Class <double*>

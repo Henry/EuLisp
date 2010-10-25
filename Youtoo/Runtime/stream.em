@@ -100,11 +100,11 @@
     (if (file-control-block? sink)
         (progn
           (flush-buffer fstream)
-          (if (int-binary= (eul_close (control-block-descriptor sink)) 0) ()
+          (if (fpi-binary= (eul_close (control-block-descriptor sink)) 0) ()
             (error <stream-condition> (strerror) value: fstream)))
       ())
     (if (file-control-block? source)
-        (if (int-binary= (eul_close (control-block-descriptor source)) 0) ()
+        (if (fpi-binary= (eul_close (control-block-descriptor source)) 0) ()
           (error <stream-condition> (strerror) value: fstream))
       ())
     (with-lock *open-file-streams*-lock
@@ -113,7 +113,7 @@
     (call-next-method)))
 
 (defmethod disconnect ((x <socket>))
-  (if (int-binary= (eul_close (socket-descriptor x)) 0)
+  (if (fpi-binary= (eul_close (socket-descriptor x)) 0)
       (with-lock *open-file-streams*-lock
                  (setq *open-file-streams*
                        (list-remove x *open-file-streams*)))
@@ -142,7 +142,7 @@
                               n)))
     ((setter control-block-buffer-cnt) fcb i)
     ((setter control-block-buffer-pos) fcb
-     (int-binary- (int-binary/ n 2) 1))
+     (fpi-binary- (fpi-binary/ n 2) 1))
     i))
 
 (defmethod fill-buffer ((sstream <string-stream>))
@@ -172,7 +172,7 @@
          (i (eul_write (control-block-descriptor fcb)
                        (control-block-buffer fcb)
                        (control-block-buffer-pos fcb))))
-    (if (int-binary= i -1)
+    (if (fpi-binary= i -1)
         ;; indicates failure
         ()
       (progn
@@ -206,25 +206,25 @@
 
 (defmethod generic-read ((fstream <file-stream>) eos-error? eos-value)
   (let ((fcb (stream-source fstream)))
-    (if (and (int-binary= (control-block-buffer-cnt fcb) 0)
-             (int-binary= (fill-buffer fstream) 0))
+    (if (and (fpi-binary= (control-block-buffer-cnt fcb) 0)
+             (fpi-binary= (fill-buffer fstream) 0))
         (if eos-error? (end-of-stream fstream) eos-value)
       (let* ((cnt (control-block-buffer-cnt fcb))
              (pos (control-block-buffer-pos fcb))
-             (new-pos (int-binary+ pos 1)))
-        ((setter control-block-buffer-cnt) fcb (int-binary- cnt 1))
+             (new-pos (fpi-binary+ pos 1)))
+        ((setter control-block-buffer-cnt) fcb (fpi-binary- cnt 1))
         ((setter control-block-buffer-pos) fcb new-pos)
         (string-ref (control-block-buffer fcb) new-pos)))))
 
 (defmethod generic-read ((sstream <string-stream>) eos-error? eos-value)
   (let ((scb (stream-source sstream)))
-    (if (and (int-binary= (control-block-buffer-cnt scb)
+    (if (and (fpi-binary= (control-block-buffer-cnt scb)
                           (string-size (control-block-buffer scb)))
-             (int-binary= (fill-buffer sstream) 0))
+             (fpi-binary= (fill-buffer sstream) 0))
         (if eos-error? (end-of-stream sstream) eos-value)
       (let* ((cnt (control-block-buffer-cnt scb))
              (c (string-ref (control-block-buffer scb) cnt)))
-        ((setter control-block-buffer-cnt) scb (int-binary+ cnt 1))
+        ((setter control-block-buffer-cnt) scb (fpi-binary+ cnt 1))
         c))))
 
 ;;;------------------------------------------------------------------------
@@ -298,12 +298,12 @@
 (defun sprint-one-char (stream char)
   (let* ((scb (stream-sink stream))
          (pos (control-block-buffer-pos scb))
-         (new-pos (int-binary+ pos 1))
+         (new-pos (fpi-binary+ pos 1))
          (bufsiz (control-block-buffer-size scb)))
     ((setter string-ref) (control-block-buffer scb) pos char)
     ((setter control-block-buffer-pos) scb new-pos)
     (if (or (eql char #\\n)
-            (null? (int-binary< new-pos bufsiz)))
+            (null? (fpi-binary< new-pos bufsiz)))
         (flush-buffer stream)
       ())))
 
@@ -312,16 +312,16 @@
          (bufsiz (control-block-buffer-size scb)))
     (labels
      ((loop (i)
-            (if (int-binary< i times)
+            (if (fpi-binary< i times)
                 (let* ((pos (control-block-buffer-pos scb))
-                       (new-pos (int-binary+ pos 1)))
+                       (new-pos (fpi-binary+ pos 1)))
                   ((setter string-ref) (control-block-buffer scb) pos char)
                   ((setter control-block-buffer-pos) scb new-pos)
                   (if (or (eql char #\\n)
-                          (null? (int-binary< new-pos bufsiz)))
+                          (null? (fpi-binary< new-pos bufsiz)))
                       (flush-buffer stream)
                     ())
-                  (loop (int-binary+ i 1)))
+                  (loop (fpi-binary+ i 1)))
               ())))
      (loop 0))))
 
@@ -330,12 +330,12 @@
   (let* ((scb (stream-sink stream))
          (bufsiz (control-block-buffer-size scb))
          (pos (control-block-buffer-pos scb))
-         (left (int-binary- bufsiz pos)))
-    (if (int-binary< n left) t
+         (left (fpi-binary- bufsiz pos)))
+    (if (fpi-binary< n left) t
       (progn
         (flush-buffer stream)
         ;; Buffer size greater than n?
-        (int-binary< n bufsiz)))))
+        (fpi-binary< n bufsiz)))))
 
 ;; Will be 16 for 64 bit addresses
 ;(defconstant *address-size-in-hex-digits* 8)
@@ -362,12 +362,12 @@
 (defun print-string (str n s)
   (let* ((scb (stream-sink s))
          (bufsiz (control-block-buffer-size scb))
-         (max (int-binary- bufsiz 1)))
+         (max (fpi-binary- bufsiz 1)))
     (labels
      ((loop (i)
-            (let ((m (int-binary- n i)))
+            (let ((m (fpi-binary- n i)))
               ;; m chars still need to be printed
-              (if (int-binary< 0 m)
+              (if (fpi-binary< 0 m)
                   (let ((flag (make-space s m))
                         (pos (control-block-buffer-pos scb))
                         (buf (control-block-buffer scb)))
@@ -376,16 +376,16 @@
                           ;; str fits into buffer
                           (eul_sprintf_string buf pos m i "%s" str)
                           ((setter control-block-buffer-pos) scb
-                           (int-binary+ pos m)))
+                           (fpi-binary+ pos m)))
                       (progn
                         ;; str does not fit into buffer
                         (eul_sprintf_string buf pos max i "%s" str)
                         ((setter control-block-buffer-pos) scb
-                         (int-binary+ pos max))
-                        (loop (int-binary+ i max)))))
+                         (fpi-binary+ pos max))
+                        (loop (fpi-binary+ i max)))))
                 ()))))
      (loop 0)
-     (if (eql (string-ref str (int-binary- n 1)) #\\n)
+     (if (eql (string-ref str (fpi-binary- n 1)) #\\n)
          (flush-buffer s)
        ())
      str)))

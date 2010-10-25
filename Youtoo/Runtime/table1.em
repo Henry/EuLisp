@@ -73,7 +73,7 @@
   ((entries accessor: table-entries)
    (fill-value keyword: fill-value: reader: table-fill-value)
    (size default: 0 accessor: table-size)
-   (threshold default: (int-binary- *min-table-entries* *table-unused*)
+   (threshold default: (fpi-binary- *min-table-entries* *table-unused*)
               accessor: table-threshold))
   ;; not abstract, so that instance creation is always (make <table> ...)
   predicate: table?)
@@ -118,7 +118,7 @@
   ((setter table-entries) tab ())
   ((setter table-size) tab 0)
   ((setter table-threshold)
-   tab (int-binary- *min-table-entries* *table-unused*))
+   tab (fpi-binary- *min-table-entries* *table-unused*))
   tab)
 
 (defmethod reset ((tab <table>))

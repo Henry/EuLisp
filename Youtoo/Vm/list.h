@@ -40,7 +40,7 @@ extern void eul_initialize_cons();
 /// Cons access
 ///-----------------------------------------------------------------------------
 #define CONS_SIZE (2)
-#define EUL_CONS_SIZE c_int_as_eul_int(CONS_SIZE)
+#define EUL_CONS_SIZE c_int_as_eul_fpi(CONS_SIZE)
 
 #ifdef WITH_CONS_TAG
 #define eul_car(loc) object_size(untag(loc, CONS_TAG))

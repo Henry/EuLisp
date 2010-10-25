@@ -65,11 +65,11 @@
 (defconstant O_EXCL (primitive-ref *posix-codes* 7))
 (defconstant mode-table
   (list 'r O_RDONLY
-        'w (int-binary+ O_WRONLY (int-binary+ O_CREAT O_TRUNC))
-        'a (int-binary+ O_WRONLY O_APPEND)
+        'w (fpi-binary+ O_WRONLY (fpi-binary+ O_CREAT O_TRUNC))
+        'a (fpi-binary+ O_WRONLY O_APPEND)
         '|r+| O_RDWR
         '|w+| O_RDWR
-        '|a+| (int-binary+ O_RDWR O_APPEND)))
+        '|a+| (fpi-binary+ O_RDWR O_APPEND)))
 
 ;;;-----------------------------------------------------------------------------
 ;;; C interface

@@ -259,7 +259,7 @@
 ;;;-----------------------------------------------------------------------------
 ;;; APPLICATION expander
 ;;  (+ - * / % = < <= > >= can be simplified in some cases into
-;;  int-binary or int-inc/inc-dec calls assuming a trap to the gf from the
+;;  fpi-binary or fpi-inc/inc-dec calls assuming a trap to the gf from the
 ;;  correspondin vm instruction)
 ;;;-----------------------------------------------------------------------------
 (defun get-appl-expander (key)
@@ -291,7 +291,7 @@
             ((and (eq op '>)
                   (= 2 nargs)
                   (eq (binding-module? (get-lexical-binding op)) 'compare))
-             (e `(int-binary< ,@(reverse params)) env e))
+             (e `(fpi-binary< ,@(reverse params)) env e))
             ((and (or (eq op '=) (eq op '<))
                   (= 2 nargs)
                   (eq (binding-module? (get-lexical-binding op)) 'compare))
@@ -299,17 +299,17 @@
             ((and (eq op '>=)
                   (= 2 nargs)
                   (eq (binding-module? (get-lexical-binding op)) 'compare))
-             (e `(if (int-binary< ,@(reverse params))
+             (e `(if (fpi-binary< ,@(reverse params))
                      t
-                   (int-binary= ,@params))
+                   (fpi-binary= ,@params))
                 env e))
             ((and (eq op '<=)
                   (= 2 nargs)
                   (eq (binding-module? (get-lexical-binding op)) 'compare))
-             (e `(if (int-binary< ,@params)
+             (e `(if (fpi-binary< ,@params)
                      t
-                   (int-binary= ,@params)) env e))
-            ((or (and (eq op 'int-binary+)
+                   (fpi-binary= ,@params)) env e))
+            ((or (and (eq op 'fpi-binary+)
                       (eq (binding-module? (get-lexical-binding op)) 'boot1))
                  (and (eq op 'binary+)
                       (eq (binding-module? (get-lexical-binding op)) 'number)))
@@ -330,7 +330,7 @@
                       (e `(dec ,arg1) env e))
                      (t
                       (default-appl-expander op params nargs env)))))
-            ((or (and (eq op 'int-binary-)
+            ((or (and (eq op 'fpi-binary-)
                       (eq (binding-module? (get-lexical-binding op)) 'boot1))
                  (and (eq op 'binary-)
                       (eq (binding-module? (get-lexical-binding op)) 'number)))
@@ -350,7 +350,7 @@
                       (e `(inc ,arg1) env e))
                      (t
                       (default-appl-expander op params nargs env)))))
-            ((or (and (eq op 'int-binary=)
+            ((or (and (eq op 'fpi-binary=)
                       (eq (binding-module? (get-lexical-binding op)) 'boot1))
                  (and (eq op 'binary=)
                       (eq (binding-module? (get-lexical-binding op)) 'compare)))
@@ -363,11 +363,11 @@
                      ;; x = 0
                      ((and (integer? arg2)
                            (= arg2 0))
-                      (e `(int-zero? ,arg1) env e))
+                      (e `(fpi-zero? ,arg1) env e))
                      ;; 0 = x
                      ((and (integer? arg1)
                            (= arg1 0))
-                      (e `(int-zero? ,arg2) env e))
+                      (e `(fpi-zero? ,arg2) env e))
                      (t
                       (default-appl-expander op params nargs env)))))
             ((and (cons? op) (eq (car op) 'lambda))
@@ -394,7 +394,7 @@
         (make-let* new-vars appl)))))
 
 (defun unfold-rest-arg-appl (op args)
-  (let ((binary-op (concatenate 'int-binary op)))
+  (let ((binary-op (concatenate 'fpi-binary op)))
     (labels
      ((loop (l)
             (if (null? (cdr l))

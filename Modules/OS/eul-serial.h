@@ -66,7 +66,7 @@
   eul_string_as_c_string(eul_read_bytes(n))
 
 #define eul_read_bytes(n)                                                      \
-  eul_serial_read_bytes(stream, c_int_as_eul_int(n), eos_error_p, eos_value)
+  eul_serial_read_bytes(stream, c_int_as_eul_fpi(n), eos_error_p, eos_value)
 
 #define read_byte(x)                                                           \
     {                                                                          \
@@ -89,7 +89,7 @@
 #define eul_read_short(x)                                                      \
     {                                                                          \
         char *buf = read_bytes(sizeof(unsigned short));                        \
-        x = c_int_as_eul_int(*((unsigned short *) buf));                       \
+        x = c_int_as_eul_fpi(*((unsigned short *) buf));                       \
     }
 
 #define read_int(x)                                                            \
@@ -101,7 +101,7 @@
 #define eul_read_int(x)                                                        \
     {                                                                          \
         char *buf = read_bytes(sizeof(int));                                   \
-        x = c_int_as_eul_int(*((int *) buf));                                  \
+        x = c_int_as_eul_fpi(*((int *) buf));                                  \
     }
 
 #define eul_read_double(x)                                                     \

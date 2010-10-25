@@ -177,7 +177,7 @@
                                           rest)
                                         (+ i 2)
                                         (cons
-                                         (string-append "eul_interpret "
+                                         (string-append "eul_fpierpret "
                                                         function-key)
                                          (cons
                                           (string-append "-" (keyword-name key))

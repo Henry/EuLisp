@@ -171,7 +171,7 @@ the <b><em>LispRef</em></b> pointer to the function, and the <b><em>LispRef</em>
 <p>
 <dt>
 <b><em>How the callback is invoked?</em></b> 
-<dd>Every time a callback has to be invoked, the <b><em>eul_interpret</em></b> command is invoked. <b><em>eul_interpret</em></b> is the Tk command bound to the event. Tk libraries do not know anything about EuLisp closures. This command is bound when the callback is initilized. It receives the name of the EuLisp function, looks it up in the C hash table, and executes the callback.
+<dd>Every time a callback has to be invoked, the <b><em>eul_fpierpret</em></b> command is invoked. <b><em>eul_fpierpret</em></b> is the Tk command bound to the event. Tk libraries do not know anything about EuLisp closures. This command is bound when the callback is initilized. It receives the name of the EuLisp function, looks it up in the C hash table, and executes the callback.
 </dl>
 
 </BODY></HTML>

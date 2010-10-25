@@ -83,8 +83,7 @@ boot: static
 
 .PHONY: boot-preliminary
 boot-preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
-		libboot.i liblevel1.i libmath.i \
-		$(ARCH_DIR)/cg-exec-word-length.o
+		libboot.i liblevel1.i libmath.i | $(ARCH_DIR)/.
 	$(U2) $(U2FLAGS) -od $(ARCH_DIR) -c ex-aux0 op-peep0 cg-bycode0 i-aux0 sx-obj0 \
 	       -load_path $(U2_DIR)/Comptime2 \
 	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
@@ -95,6 +94,8 @@ boot-preliminary: _ex-aux0.i _op-peep0.i _cg-bycode0.i _i-aux0.i _sx-obj0.i \
 	       -load_path $(U2_DIR)/Runtime \
 	       -load_path $(U2_DIR)/Telos \
 	       -l boot -l level1 -l math
+	@ln -fs ../../$(WORD_LENGTH)bit/$(ARCH_DIR)/cg-exec-word-length.o \
+		$(ARCH_DIR)/cg-exec-word-length.o
 	$(U2) $(U2FLAGS) -ar eval -od $(ARCH_DIR) \
 	       -load_path $(U2_DIR)/Comptime2 \
 	       -load_path $(U2_DIR)/Comptime2/$(WORD_LENGTH)bit \
@@ -146,16 +147,12 @@ ifeq ($(findstring boot,$(MAKECMDGOALS)),boot)
 		-l level1
 endif
 
-$(ARCH_DIR)/cg-exec-word-length.o: \
-		$(ARCH_DIR)/$(WORD_LENGTH)bit/cg-exec-word-length.o
-	@cp $< $@
-
 ###-----------------------------------------------------------------------------
 ### Miscellaneous commands
 ###-----------------------------------------------------------------------------
 .PHONY: boot-clean
 boot-clean: clean
-	@rm -f *.[ihc]
+	@rm -f *.[ihc] $(WORD_LENGTH)bit/*.[ihc]
 
 .PHONY: clean
 clean:

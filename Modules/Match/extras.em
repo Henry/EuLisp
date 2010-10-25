@@ -38,19 +38,19 @@
 (defmethod end-of-stream? ((s <stream>))
   (let ((scb (stream-source s)))
     (and (null? (control-block-buffer scb))
-         (int-binary= (fill-buffer s) 0))))
+         (fpi-binary= (fill-buffer s) 0))))
 
 (defmethod end-of-stream? ((ss <string-stream>))
   (let ((scb (stream-source ss)))
-    (and (int-binary= (control-block-buffer-cnt scb)
+    (and (fpi-binary= (control-block-buffer-cnt scb)
                       (string-size (control-block-buffer scb)))
-         (int-binary= (fill-buffer ss) 0)
+         (fpi-binary= (fill-buffer ss) 0)
          t)))
 
 (defmethod end-of-stream? ((fs <file-stream>))
   (let ((fcb (stream-source fs)))
-    (and (int-binary= (control-block-buffer-cnt fcb) 0)
-         (int-binary= (fill-buffer fs) 0)
+    (and (fpi-binary= (control-block-buffer-cnt fcb) 0)
+         (fpi-binary= (fill-buffer fs) 0)
          t)))
 
 ;;;-----------------------------------------------------------------------------

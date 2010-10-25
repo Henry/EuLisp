@@ -99,8 +99,8 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install callback traps
 ;;;-----------------------------------------------------------------------------
-(install-callback (int-binary+ first-arithmetic-cb 5) binary=)
-(install-callback (int-binary+ first-arithmetic-cb 6) binary<)
+(install-callback (fpi-binary+ first-arithmetic-cb 5) binary=)
+(install-callback (fpi-binary+ first-arithmetic-cb 6) binary<)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Max and Min

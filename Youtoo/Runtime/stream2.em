@@ -188,7 +188,7 @@
              (file-name (init-list-ref inits file-name: ""))
              (flag (init-list-ref mode-table mode O_RDONLY))
              (fd (eul_open file-name flag #o666)))
-        (if (int-binary= fd -1)
+        (if (fpi-binary= fd -1)
             (error <stream-condition> (strerror) value: fs)
           (let ((fcb (make <file-control-block>
                            file-name: file-name
@@ -247,7 +247,7 @@
 (defun default-read-action (s eos-error? eos-value)
   (let ((source (stream-source s)))
     (if (and (null? (control-block-buffer source))
-             (int-binary= (fill-buffer s) 0))
+             (fpi-binary= (fill-buffer s) 0))
         (if eos-error? (end-of-stream s) eos-value)
       (let* ((buf (control-block-buffer source))
              (r (car buf)))

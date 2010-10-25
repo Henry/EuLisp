@@ -46,20 +46,20 @@
                                   ;; 1. call clean-up funs of unwind-protect
                                   (labels
                                    ((loop (i ll)
-                                          (if (int-binary< prev-no-clean-ups i)
+                                          (if (fpi-binary< prev-no-clean-ups i)
                                               (progn
                                                 ((car ll))
-                                                (loop (int-binary- i 1) (cdr ll)))
+                                                (loop (fpi-binary- i 1) (cdr ll)))
                                             ())))
                                    (let ((l (dynamic *clean-ups*)))
                                      (loop (list-size l) l)))
                                   ;; 2. reset error-handlers
                                   (pop-error-handlers
-                                   (int-binary- *current-no-error-handlers*
+                                   (fpi-binary- *current-no-error-handlers*
                                                 prev-no-error-handlers))
                                   ;; 3. reset dynamic variables
                                   (pop-dynamic-variables
-                                   (int-binary- *current-no-dynamic-variables*
+                                   (fpi-binary- *current-no-dynamic-variables*
                                                 prev-no-dynamic-variables))
                                   ;; 4. restore vm state
                                   (restore-simple-state st value)))))

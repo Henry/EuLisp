@@ -60,10 +60,10 @@
   (let* ((port (convert (socket-port x) <string>))
          (n (socket-queue-size x))
          (fd (eul_make_socket port "tcp" n)))
-    (if (int-binary= fd -1)
+    (if (fpi-binary= fd -1)
         (error <stream-condition>
                 (strerror) value: x)
-      (if (int-binary< fd -1)
+      (if (fpi-binary< fd -1)
           (error <stream-condition>
                  (eul_socket_strerror fd) <stream-condition> value: x)
         (progn

@@ -273,7 +273,7 @@ LispRef eul_thr_get_priority(thread_t *thr_handle)
   int n;
 
   if (thr_getprio(*thr_handle, &n) == 0)
-    return c_int_as_eul_int(n);
+    return c_int_as_eul_fpi(n);
   else
     return eul_nil;
 }

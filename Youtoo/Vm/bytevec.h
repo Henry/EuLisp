@@ -73,12 +73,12 @@
 
 #define eul_allocate_bytevector1(loc, data, size)                              \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_bytevector_class), 1);              \
-    bytevector_size(loc) = c_int_as_eul_int(size);                             \
+    bytevector_size(loc) = c_int_as_eul_fpi(size);                             \
     BYTEVECTOR_DATA(loc) = (LispRef) data
 
 #define eul_allocate_empty_bytevector(loc, size)                               \
     ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_bytevector_class), 1);              \
-    bytevector_size(loc) = c_int_as_eul_int(size);                             \
+    bytevector_size(loc) = c_int_as_eul_fpi(size);                             \
     BYTEVECTOR_DATA(loc) = (LispRef) gc_malloc(size);
 
 

@@ -70,13 +70,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Predicates
 ;;;-----------------------------------------------------------------------------
-(defun string-empty? (str) (int-binary= (string-size str) 0))
+(defun string-empty? (str) (fpi-binary= (string-size str) 0))
 (declare-inline string-empty?)
 
 (defmethod emptyp ((str <string>)) (string-empty? str))
 
 (defun string-equal (str1 str2)
-  (int-binary= (string-compare str1 str2) 0))
+  (fpi-binary= (string-compare str1 str2) 0))
 (declare-inline string-equal)
 
 (defextern string-compare (<string> <string>) <fpi> "strcmp")
@@ -85,7 +85,7 @@
   (if (string-equal str1 str2) t ()))
 
 (defmethod binary< ((str1 <string>) (str2 <string>))
-  (int-binary< (string-compare str1 str2) 0))
+  (fpi-binary< (string-compare str1 str2) 0))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Iteration
@@ -101,10 +101,10 @@
         (i 0))
     (labels
      ((loop ()
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   (setq init (fun init (string-ref str i)))
-                  (setq i (int-binary+ i 1))
+                  (setq i (fpi-binary+ i 1))
                   (loop))
               init)))
      (loop))))
@@ -113,7 +113,7 @@
   (accumulate1-string fun str))
 
 (defun accumulate1-string (fun str)
-  (if (int-binary= (string-size str) 0) ()
+  (if (fpi-binary= (string-size str) 0) ()
     (accumulate-string fun (string-ref str 0) (tailstring str 1))))
 
 ;;;-----------------------------------------------------------------------------
@@ -129,10 +129,10 @@
         (i 0))
     (labels
      ((loop ()
-            (and (int-binary< i n)
+            (and (fpi-binary< i n)
                  (or (fun (string-ref str i))
                      (progn
-                       (setq i (int-binary+ i 1))
+                       (setq i (fpi-binary+ i 1))
                        (loop))))))
      (loop))))
 
@@ -149,10 +149,10 @@
         (i 0))
     (labels
      ((loop ()
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (and (fun (string-ref str i))
                      (progn
-                       (setq i (int-binary+ i 1))
+                       (setq i (fpi-binary+ i 1))
                        (loop)))
               str)))
      (loop))))
@@ -170,10 +170,10 @@
         (i 0))
     (labels
      ((loop ()
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   (fun (string-ref str i))
-                  (setq i (int-binary+ i 1))
+                  (setq i (fpi-binary+ i 1))
                   (loop))
               ())))
      (loop))))
@@ -192,10 +192,10 @@
          (i 0))
     (labels
      ((loop ()
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (progn
                   ((setter string-ref) res i (fun (string-ref str i)))
-                  (setq i (int-binary+ i 1))
+                  (setq i (fpi-binary+ i 1))
                   (loop))
               res)))
      (loop))))
@@ -211,11 +211,11 @@
           (i 0))
       (labels
        ((loop ()
-              (and (int-binary< i n)
+              (and (fpi-binary< i n)
                    (if (eql x (string-ref str i))
                        i
                      (progn
-                       (setq i (int-binary+ i 1))
+                       (setq i (fpi-binary+ i 1))
                        (loop))))))
        (loop)))))
 
@@ -291,8 +291,8 @@
      ((loop (s res)
             (let* ((i (member c s))
                    (x (make <symbol> name: (substring s () i))))
-              (if (and i (int-binary< i (int-binary- (string-size s) 1)))
-                  (loop (substring s (int-binary+ i 1) ()) (cons x res))
+              (if (and i (fpi-binary< i (fpi-binary- (string-size s) 1)))
+                  (loop (substring s (fpi-binary+ i 1) ()) (cons x res))
                 (reverse-list (cons x res))))))
      (if (eql c (string-ref str 0))
          (loop (substring str 1 ()) ())

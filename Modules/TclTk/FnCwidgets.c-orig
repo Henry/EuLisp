@@ -491,7 +491,7 @@ LispRef eul_tk_bind_element (char * nameWidget, Tcl_CmdInfo * cmdPtr, char * typ
   int argc, result, i=0;
   char **argv;
   char command[] = "bind";
-  char tk_command[] = "eul_interpret ";
+  char tk_command[] = "eul_fpierpret ";
  
   if (strcmp(type, "tag")==0)
     argc = 6;

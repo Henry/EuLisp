@@ -65,7 +65,7 @@ void fprint_cons(FILE *fd, LispRef o)
 
 void fprint_vector(FILE * fd, LispRef o)
 {
-    int n = eul_int_as_c_int(object_size(o));
+    int n = eul_fpi_as_c_int(object_size(o));
     putc('#', fd);
     putc('(', fd);
     for (int i = 0; i < n; i++)

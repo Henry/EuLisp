@@ -62,7 +62,7 @@
 
 #define eul_clone_lambda(loc, lambda)                                          \
     {                                                                          \
-        int n = eul_int_as_c_int(object_size(lambda));                         \
+        int n = eul_fpi_as_c_int(object_size(lambda));                         \
         ALLOCATE_WARM_OBJECT(loc, PGLOBAL(glob_lambda_class), LAMBDA_SIZE);    \
         LAMBDA_NAME(loc) = LAMBDA_NAME(lambda);                                \
         LAMBDA_DOMAIN(loc) = LAMBDA_DOMAIN(lambda);                            \

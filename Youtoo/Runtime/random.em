@@ -28,7 +28,7 @@
 
 (defun random x
   (if x
-      (int-binary/ (rand) (int-binary/ *random-max* (car x)))
+      (fpi-binary/ (rand) (fpi-binary/ *random-max* (car x)))
     (rand)))
 
 ;;;-----------------------------------------------------------------------------
@@ -44,10 +44,10 @@
 ;;; Fifty-fifty function
 ;;;-----------------------------------------------------------------------------
 ;; The result of (random 2) should always be a fixnum (<fpi> class),
-;; so use int-zero?, which is available during bootstrapping, instead of
+;; so use fpi-zero?, which is available during bootstrapping, instead of
 ;; zero?, the generic function.
 (defun random-true-nil ()
-  (int-zero? (random 2)))
+  (fpi-zero? (random 2)))
 
 ;;;-----------------------------------------------------------------------------
 )  ;; End of module random

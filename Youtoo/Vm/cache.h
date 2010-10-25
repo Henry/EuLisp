@@ -93,7 +93,7 @@
         }                                                                      \
         else                                                                   \
         {                                                                      \
-            n = eul_int_as_c_int(object_size(loc))                             \
+            n = eul_fpi_as_c_int(object_size(loc))                             \
               - GF_METHOD_CACHE_HEADER_SIZE;                                   \
         }                                                                      \
     }
@@ -135,7 +135,7 @@
         WHEN_INSTRUMENTED(int probe_depth=0; )                                 \
                                                                                \
         LispRef gf_dom = GF_DOMAIN(gf);                                        \
-        ptrInt m = eul_int_as_c_int(object_size(gf_dom));                      \
+        ptrInt m = eul_fpi_as_c_int(object_size(gf_dom));                      \
         LispRef vec, val_dom;                                                  \
         ptrInt n;                                                              \
         GF_GET_METHOD_CACHE(vec, n, gf, GF_DEFAULT_METHOD_CACHE_SIZE);         \
@@ -195,7 +195,7 @@
             WHEN_INSTRUMENTED(eul_gf_cache_misses++; )                         \
             WHEN_INSTRUMENTED(instrument_cache("fast", "miss", gf, key); )     \
             GF_METHOD_CACHE_VALUE_DOMAIN(vec) = val_dom;                       \
-            GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_int(i);                  \
+            GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_fpi(i);                  \
             gf = GF_DISC_FN(gf);                                               \
         }                                                                      \
     }
@@ -207,7 +207,7 @@
         WHEN_INSTRUMENTED(int probe_depth=0; )                                 \
                                                                                \
         gf_dom = GF_DOMAIN(gf);                                                \
-        m = eul_int_as_c_int(object_size(gf_dom));                             \
+        m = eul_fpi_as_c_int(object_size(gf_dom));                             \
         GF_GET_METHOD_CACHE(vec, n, gf, GF_DEFAULT_METHOD_CACHE_SIZE);         \
         GF_GET_VALUE_DOMAIN(val_dom, gf_dom, m);                               \
         if (GF_METHOD_CACHE_INDEX(vec) == eul_nil)                             \
@@ -216,7 +216,7 @@
         }                                                                      \
         else                                                                   \
         {                                                                      \
-            i = eul_int_as_c_int(GF_METHOD_CACHE_INDEX(vec));                  \
+            i = eul_fpi_as_c_int(GF_METHOD_CACHE_INDEX(vec));                  \
             /* First check the entry previously used */                        \
             if ((entry = slot_ref(vec, i)) != eul_nil)                         \
             {                                                                  \
@@ -262,7 +262,7 @@
             }                                                                  \
         }                                                                      \
 goon:                                                                          \
-        GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_int(i);                      \
+        GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_fpi(i);                      \
         if (entry != eul_nil)                                                  \
         {                                                                      \
             WHEN_INSTRUMENTED(instrument_cache("slow", "hit", gf, key); )      \
@@ -285,13 +285,13 @@ goon:                                                                          \
         ptrInt n;                                                              \
         ptrInt i = key + GF_METHOD_CACHE_HEADER_SIZE;                          \
         LispRef gf_dom = GF_DOMAIN(gf);                                        \
-        ptrInt m = eul_int_as_c_int(object_size(gf_dom));                      \
+        ptrInt m = eul_fpi_as_c_int(object_size(gf_dom));                      \
         GF_GET_METHOD_CACHE(vec, n, gf, 1);                                    \
         /* fprintf(stderr, "dummy cache: "); fprint_ref(stderr, vec); */       \
         GF_GET_VALUE_DOMAIN(val_dom, gf_dom, m);                               \
         i = key + GF_METHOD_CACHE_HEADER_SIZE;                                 \
         GF_METHOD_CACHE_VALUE_DOMAIN(vec) = val_dom;                           \
-        GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_int(i);                      \
+        GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_fpi(i);                      \
         gf = GF_DISC_FN(gf);                                                   \
     }
 
@@ -316,7 +316,7 @@ goon:                                                                          \
         if (!res)                                                              \
         {                                                                      \
             GF_METHOD_CACHE_VALUE_DOMAIN(vec) = val_dom;                       \
-            GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_int(i);                  \
+            GF_METHOD_CACHE_INDEX(vec) = c_int_as_eul_fpi(i);                  \
             gf = GF_DISC_FN(gf);                                               \
         }                                                                      \
     }
@@ -327,9 +327,9 @@ goon:                                                                          \
         ptrInt ii = GF_METHOD_CACHE_HEADER_SIZE;                               \
         LispRef cache = GF_METHOD_CACHE(gf);                                   \
         LispRef gf_name = LAMBDA_NAME(gf);                                     \
-        ptrInt nn = eul_int_as_c_int(object_size(cache))                       \
+        ptrInt nn = eul_fpi_as_c_int(object_size(cache))                       \
                   - GF_METHOD_CACHE_HEADER_SIZE;                               \
-        ptrInt arity = eul_int_as_c_int(object_size(val_dom));                 \
+        ptrInt arity = eul_fpi_as_c_int(object_size(val_dom));                 \
                                                                                \
         while (ii < nn + GF_METHOD_CACHE_HEADER_SIZE)                          \
         {                                                                      \

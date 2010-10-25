@@ -51,7 +51,7 @@ LispRef eul_mpi_initialize()
     char *name;
 
     /* Get argc and argv */
-    argc = eul_int_as_c_int(eul_argc);
+    argc = eul_fpi_as_c_int(eul_argc);
     argv = (char **)gc_malloc(argc * sizeof(LispRef));
 
     for (i = 0; i < argc; i++)
@@ -69,8 +69,8 @@ LispRef eul_mpi_initialize()
 
     /* Return id, nprocs and host name */
     eul_allocate_vector(info, 3, eul_nil);
-    slot_ref(info, 0) = c_int_as_eul_int(process_id);
-    slot_ref(info, 1) = c_int_as_eul_int(nprocs);
+    slot_ref(info, 0) = c_int_as_eul_fpi(process_id);
+    slot_ref(info, 1) = c_int_as_eul_fpi(nprocs);
     slot_ref(info, 2) = eul_processor_name;
 
 /*   printf("Initialize process %d with %d processes ...\n", */
@@ -99,7 +99,7 @@ LispRef eul_mpi_send(LispRef x, int dest, LispRef eul_tag)
         char *val;
 
         datatype = MPI_BYTE;
-        n = eul_int_as_c_int(eul_string_size(x));
+        n = eul_fpi_as_c_int(eul_string_size(x));
         val = eul_string_as_c_string(x);
         data = (void *)val;
         tag = (int)(eul_tag == eul_nil ? MPI_EUL_STRING : MPI_EUL_OBJECT);
@@ -110,7 +110,7 @@ LispRef eul_mpi_send(LispRef x, int dest, LispRef eul_tag)
 
         datatype = MPI_INT;
         n = 1;
-        val = eul_int_as_c_int(x);
+        val = eul_fpi_as_c_int(x);
         data = (void *)&val;
         tag = (int)MPI_INT;
     }
@@ -165,12 +165,12 @@ LispRef eul_mpi_probe(LispRef eul_source, LispRef eul_tag, LispRef eul_timeout)
     if (eul_source == eul_nil)
         source = MPI_ANY_SOURCE;
     else
-        source = eul_int_as_c_int(eul_source);
+        source = eul_fpi_as_c_int(eul_source);
 
     if (eul_tag == eul_nil)
         tag = MPI_ANY_TAG;
     else
-        tag = eul_int_as_c_int(eul_tag);
+        tag = eul_fpi_as_c_int(eul_tag);
 
     if (eul_timeout == eul_nil)
         MPI_Probe(source, tag, MPI_COMM_WORLD, &status);
@@ -197,8 +197,8 @@ LispRef eul_mpi_probe(LispRef eul_source, LispRef eul_tag, LispRef eul_timeout)
         {
             eul_allocate_vector(res, 3, eul_nil);
             slot_ref(res, 0, is_obj);
-            slot_ref(res, 1, c_int_as_eul_int(tag));
-            slot_ref(res, 2, c_int_as_eul_int(n));
+            slot_ref(res, 1, c_int_as_eul_fpi(tag));
+            slot_ref(res, 2, c_int_as_eul_fpi(n));
         }
     }
     return res;
@@ -221,14 +221,14 @@ LispRef eul_mpi_receive(LispRef eul_source, LispRef eul_tag, int n)
     if (eul_source == eul_nil)
         source = MPI_ANY_SOURCE;
     else
-        source = eul_int_as_c_int(eul_source);
+        source = eul_fpi_as_c_int(eul_source);
 
     if (eul_tag == eul_nil)
         tag = (int)MPI_ANY_TAG;
     else if (eul_tag == eul_true)
         tag = (int)MPI_EUL_OBJECT;
     else
-        tag = eul_int_as_c_int(eul_tag);
+        tag = eul_fpi_as_c_int(eul_tag);
 
     switch (tag)
     {
@@ -251,7 +251,7 @@ LispRef eul_mpi_receive(LispRef eul_source, LispRef eul_tag, int n)
                 MPI_Recv(&val, n, MPI_INT, source, tag, MPI_COMM_WORLD,
                     &status);
                 if ((status.MPI_ERROR) == 0)
-                    res = c_int_as_eul_int(val);
+                    res = c_int_as_eul_fpi(val);
                 break;
             }
         case ((int)MPI_DOUBLE):

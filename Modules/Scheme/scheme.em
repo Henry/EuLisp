@@ -111,7 +111,7 @@
 (export car cddr cdddr cdr ceiling)
 
 (defun char->integer (x)
-  (character-as-int x))
+  (character-as-fpi x))
 (declare-inline char->integer)
 
 (defun char-alphabetic? (x)
@@ -294,7 +294,7 @@
        (Member (stream-mode x) '(r rw))))
 
 (defun integer->char (x)
-  (int-as-character x))
+  (fpi-as-character x))
 (declare-inline integer->char)
 
 (defun last-pair (x)
@@ -529,13 +529,13 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Some youtoo bindings the compiler expects
 ;;;-----------------------------------------------------------------------------
-(export int-binary+)
-(export int-binary-)
-(export int-binary*)
-(export int-binary/)
-(export int-binary%)
-(export int-binary<)
-(export int-binary=)
+(export fpi-binary+)
+(export fpi-binary-)
+(export fpi-binary*)
+(export fpi-binary/)
+(export fpi-binary%)
+(export fpi-binary<)
+(export fpi-binary=)
 (export inc)
 (export dec)
 

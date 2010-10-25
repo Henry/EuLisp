@@ -355,8 +355,8 @@
   ((setter list-ref) l i x))
 
 (defun list-drop (l n)
-  (if (int-binary= n 0) l
-    (list-drop (cdr l) (int-binary- n 1))))
+  (if (fpi-binary= n 0) l
+    (list-drop (cdr l) (fpi-binary- n 1))))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Length
@@ -378,7 +378,7 @@
        ((loop (ll i)
               (if (atom? ll) ll
                 (if (pred x (car ll)) i
-                  (loop (cdr ll) (int-binary+ i 1))))))
+                  (loop (cdr ll) (fpi-binary+ i 1))))))
        (loop l 0)))))
 
 (defun find1-list (x l)
@@ -386,7 +386,7 @@
    ((loop (ll i)
           (if (atom? ll) ll
             (if (eql x (car ll)) i
-              (loop (cdr ll) (int-binary+ i 1))))))
+              (loop (cdr ll) (fpi-binary+ i 1))))))
    (loop l 0)))
 
 (defmethod any? ((fun <function>) (l <list>) . cs)

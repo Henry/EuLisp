@@ -142,7 +142,7 @@ LispRef eul_initialize_tk()
 
     // Get argc and argv
     static int argc;
-    argc = eul_int_as_c_int(eul_argc);
+    argc = eul_fpi_as_c_int(eul_argc);
 
     static char **argv;
     argv = (char **)gc_malloc(argc*sizeof(LispRef));

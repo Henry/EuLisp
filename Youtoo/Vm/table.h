@@ -65,9 +65,9 @@ extern int eul_hash_object_aux(LispRef key, int *leaves);
         eul_allocate_object(TABLE_ENTRIES(loc), PGLOBAL(glob_vector_class),    \
         MIN_TABLE_ENTRIES, eul_nil);                                           \
         TABLE_ENTRIES(loc) = eul_nil;                                          \
-        TABLE_POPULATION(loc) = c_int_as_eul_int(0);                           \
+        TABLE_POPULATION(loc) = c_int_as_eul_fpi(0);                           \
         TABLE_THRESHOLD(loc) =                                                 \
-            c_int_as_eul_int(MIN_TABLE_ENTRIES-TABLE_UNUSED);                  \
+            c_int_as_eul_fpi(MIN_TABLE_ENTRIES-TABLE_UNUSED);                  \
         TABLE_FILL_VALUE(loc) = fill_value;                                    \
     }
 

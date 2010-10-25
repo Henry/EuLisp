@@ -129,23 +129,23 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Around zero ...
 ;;;-----------------------------------------------------------------------------
-;; int-arithmetic traps to generic call if necessary
-(defun abs (x) (if (int-binary< x 0) (int-binary- 0 x) x))
+;; fpi-arithmetic traps to generic call if necessary
+(defun abs (x) (if (fpi-binary< x 0) (fpi-binary- 0 x) x))
 (declare-inline abs)
 
-(defun signum (x) (or (int-binary= x 0) (int-binary/ x (abs x))))
+(defun signum (x) (or (fpi-binary= x 0) (fpi-binary/ x (abs x))))
 (declare-inline signum)
 
-(defun positive? (x) (int-binary< 0 x))
+(defun positive? (x) (fpi-binary< 0 x))
 (declare-inline positive?)
 
-(defun negative? (x) (int-binary< x 0))
+(defun negative? (x) (fpi-binary< x 0))
 (declare-inline negative?)
 
 (defgeneric zero? ((x <object>)))
 
 (defgeneric negate ((x <object>)))
-(defmethod negate ((x <number>)) (int-binary- 0 x))
+(defmethod negate ((x <number>)) (fpi-binary- 0 x))
 
 ;;;-----------------------------------------------------------------------------
 ;;; Generic arithmetic (also for collections ...)
@@ -163,11 +163,11 @@
 ;;;-----------------------------------------------------------------------------
 ;;; Install callback traps
 ;;;-----------------------------------------------------------------------------
-(install-callback (int-binary+ first-arithmetic-cb 0) binary+)
-(install-callback (int-binary+ first-arithmetic-cb 1) binary-)
-(install-callback (int-binary+ first-arithmetic-cb 2) binary*)
-(install-callback (int-binary+ first-arithmetic-cb 3) binary/)
-(install-callback (int-binary+ first-arithmetic-cb 4) binary%)
+(install-callback (fpi-binary+ first-arithmetic-cb 0) binary+)
+(install-callback (fpi-binary+ first-arithmetic-cb 1) binary-)
+(install-callback (fpi-binary+ first-arithmetic-cb 2) binary*)
+(install-callback (fpi-binary+ first-arithmetic-cb 3) binary/)
+(install-callback (fpi-binary+ first-arithmetic-cb 4) binary%)
 
 ;;;-----------------------------------------------------------------------------
 ;;; Copying

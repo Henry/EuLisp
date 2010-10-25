@@ -61,11 +61,11 @@ LispRef eul_is_object(void *o)
             #endif // WITH_CONS_TAG
          && (is_immediate(m = object_size(x)))
          && !is_immediate(cl = object_class(x))
-         && ((((uPtrInt)eul_int_as_c_int(m)) < MAX_OBJECT_SIZE)
+         && ((((uPtrInt)eul_fpi_as_c_int(m)) < MAX_OBJECT_SIZE)
          || (cl == PGLOBAL(glob_vector_class)))
          && is_immediate(n = object_size(cl))
-         && (eul_int_as_c_int(n) >= CLASS_SIZE)
-         && (eul_int_as_c_int(n) < MAX_CLASS_SIZE))
+         && (eul_fpi_as_c_int(n) >= CLASS_SIZE)
+         && (eul_fpi_as_c_int(n) < MAX_CLASS_SIZE))
     ) // C ints and chars with FPI_TAG cannot be distinguished!
     {
         return eul_true;

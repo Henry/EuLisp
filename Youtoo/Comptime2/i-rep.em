@@ -53,10 +53,10 @@
 ;;; To be removed!
 ;;;-----------------------------------------------------------------------------
 (defmethod binary< ((str1 <string>) (str2 <string>))
-  (int-binary< (string-compare str1 str2) 0))
+  (fpi-binary< (string-compare str1 str2) 0))
 
 (defmethod binary< ((sym1 <symbol>) (sym2 <symbol>))
-  (int-binary< (string-compare (symbol-name sym1)
+  (fpi-binary< (string-compare (symbol-name sym1)
                                (symbol-name sym2)) 0))
 
 ;;;-----------------------------------------------------------------------------

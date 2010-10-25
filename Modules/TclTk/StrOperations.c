@@ -34,7 +34,7 @@ int ParseArguments2
     LispRef listArgs
 )
 {
-    int argc = (listArgs != eul_nil)? eul_int_as_c_int(eul_car(listArgs)) : 0;
+    int argc = (listArgs != eul_nil)? eul_fpi_as_c_int(eul_car(listArgs)) : 0;
     const char **argv = (const char **)gc_malloc((argc + 2)*sizeof(char*));
     argv[0] = command;
     argv[1] = name;
@@ -66,7 +66,7 @@ int ParseArguments3
     LispRef listArgs
 )
 {
-    int argc = (listArgs != eul_nil) ? eul_int_as_c_int(eul_car(listArgs)) : 0;
+    int argc = (listArgs != eul_nil) ? eul_fpi_as_c_int(eul_car(listArgs)) : 0;
     const char **argv = (const char **)gc_malloc((argc + 3)*sizeof(char*));
     argv[0] = command;
     argv[1] = name;

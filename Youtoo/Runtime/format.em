@@ -42,7 +42,7 @@
                     (buf (control-block-buffer scb)))
                 (eul_sprintf_string buf pos n j "%s" str)
                 ((setter control-block-buffer-pos) scb
-                 (int-binary+ pos n)))
+                 (fpi-binary+ pos n)))
               (if (eq c #\\x0000) l
                 (cond ((or (eq c #\a) (eq c #\d))
                        (if (null? l)
@@ -135,10 +135,10 @@
         (setq port (connection-port x))
         (setq fd (eul_make_connection host (convert port <string>) "tcp"))))
     ;; error handling
-    (if (int-binary= fd -1)
+    (if (fpi-binary= fd -1)
         (error <stream-condition>
                (strerror) value: x)
-      (if (int-binary< fd -1)
+      (if (fpi-binary< fd -1)
           (error <stream-condition>
                  (eul_socket_strerror fd) value: x)
         ()))

@@ -80,7 +80,7 @@
 EUL_DEFINTERN(fill_buffer, "fill-buffer", 1, stream2)
 #define EOB (c>=maxc)
 #define EOB_LOOKAHEAD(n) ((c+n)>=maxc)
-#define FILL_BUFFER() (eul_int_as_c_int(fill_buffer(stream)))
+#define FILL_BUFFER() (eul_fpi_as_c_int(fill_buffer(stream)))
 #define BUFFER_RESET() (c = buffer, c[n] = (char)0, maxc = c+n)
 
 /*
@@ -92,12 +92,12 @@ EUL_DEFINTERN(fill_buffer, "fill-buffer", 1, stream2)
 
 #define UPDATE_FCB_POS(y)                                                      \
     {                                                                          \
-        CONTROL_BLOCK_BUFFER_POS(fcb) = c_int_as_eul_int(c-buffer);            \
+        CONTROL_BLOCK_BUFFER_POS(fcb) = c_int_as_eul_fpi(c-buffer);            \
         return y;                                                              \
     }
 
 #define RETURN_CHARACTER(x) UPDATE_FCB_POS(c_char_as_eul_char(x))
-#define RETURN_FPI(x) UPDATE_FCB_POS(c_int_as_eul_int(x))
+#define RETURN_FPI(x) UPDATE_FCB_POS(c_int_as_eul_fpi(x))
 #define RETURN_DOUBLE(x) UPDATE_FCB_POS(c_double_as_eul_double(x))
 #define RETURN_STRING(x, s) UPDATE_FCB_POS(c_strn_as_eul_str(x, s))
 #define RETURN_NIL() UPDATE_FCB_POS(eul_nil)
@@ -308,11 +308,11 @@ LispRef ntok(LispRef stream, LispRef special_tokens)
     LispRef fcb = STREAM_SOURCE(stream);
     char *siding = eul_string_as_c_string(CONTROL_BLOCK_BUFFER(fcb));
     char *buffer =
-    siding + (eul_int_as_c_int(CONTROL_BLOCK_BUFFER_SIZE(fcb)) >> 1);
+    siding + (eul_fpi_as_c_int(CONTROL_BLOCK_BUFFER_SIZE(fcb)) >> 1);
 
     // ntok state variables
-    char *c = buffer + eul_int_as_c_int(CONTROL_BLOCK_BUFFER_POS(fcb));
-    char *maxc = buffer + eul_int_as_c_int(CONTROL_BLOCK_BUFFER_CNT(fcb));
+    char *c = buffer + eul_fpi_as_c_int(CONTROL_BLOCK_BUFFER_POS(fcb));
+    char *maxc = buffer + eul_fpi_as_c_int(CONTROL_BLOCK_BUFFER_CNT(fcb));
     int negative = 0;
     int token_overflow = 0;
 

@@ -125,7 +125,7 @@ int eul_hash_object_aux(LispRef key, int *leaves)
         return (ptrInt)key;
     }
 
-    int n = eul_int_as_c_int(eul_size_of(key));
+    int n = eul_fpi_as_c_int(eul_size_of(key));
     if (n == 0)
     {
         return (ptrInt)key;
@@ -160,10 +160,10 @@ LispRef eul_table_fast_rehash(LispRef tab)
     if (computed_object_class(old_vec) != PGLOBAL(glob_vector_class))
         return (tab);
 
-    int old_n = eul_int_as_c_int(object_size(old_vec));
+    int old_n = eul_fpi_as_c_int(object_size(old_vec));
     int new_n = old_n * TABLE_FILL_FACTOR;
-    int threshold = eul_int_as_c_int(TABLE_THRESHOLD(tab)) * TABLE_FILL_FACTOR;
-    TABLE_THRESHOLD(tab) = c_int_as_eul_int(threshold);
+    int threshold = eul_fpi_as_c_int(TABLE_THRESHOLD(tab)) * TABLE_FILL_FACTOR;
+    TABLE_THRESHOLD(tab) = c_int_as_eul_fpi(threshold);
 
     LispRef new_vec;
     eul_allocate_object(new_vec, PGLOBAL(glob_vector_class), new_n, eul_nil);
@@ -202,7 +202,7 @@ LispRef eul_fast_table_ref(LispRef tab, char *key)
         return (TABLE_FILL_VALUE(tab));
     }
 
-    int n = eul_int_as_c_int(object_size(vec));
+    int n = eul_fpi_as_c_int(object_size(vec));
     LispRef *last_ptr = &(slot_ref(vec, n));
 
     int i = eul_hash_string(key) % n;
@@ -244,7 +244,7 @@ LispRef eul_fast_table_set(LispRef tab, char *key, LispRef value)
         TABLE_ENTRIES(tab) = vec;
     }
 
-    int n = eul_int_as_c_int(object_size(vec));
+    int n = eul_fpi_as_c_int(object_size(vec));
     int i = eul_hash_string(key) % n;
 
     while (1)
@@ -254,9 +254,9 @@ LispRef eul_fast_table_set(LispRef tab, char *key, LispRef value)
             int population, threshold;
 
             eul_allocate_table_entry(slot_ref(vec, i), ((LispRef) key), value);
-            population = eul_int_as_c_int(TABLE_POPULATION(tab)) + 1;
-            threshold = eul_int_as_c_int(TABLE_THRESHOLD(tab));
-            TABLE_POPULATION(tab) = c_int_as_eul_int(population);
+            population = eul_fpi_as_c_int(TABLE_POPULATION(tab)) + 1;
+            threshold = eul_fpi_as_c_int(TABLE_THRESHOLD(tab));
+            TABLE_POPULATION(tab) = c_int_as_eul_fpi(population);
 
             if (population == threshold)
             {

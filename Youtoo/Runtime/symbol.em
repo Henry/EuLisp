@@ -68,7 +68,7 @@
   (let* ((prestr (if strs (car strs) "G00"))
          (sym (make-symbol
                (string-append prestr (fpi-as-string *symbol-count*)))))
-    (setq *symbol-count* (int-binary+ *symbol-count* 1))
+    (setq *symbol-count* (fpi-binary+ *symbol-count* 1))
     sym))
 
 ;;;-----------------------------------------------------------------------------
@@ -89,7 +89,7 @@
 ;;; Comparison
 ;;;-----------------------------------------------------------------------------
 (defmethod binary< ((sym1 <symbol>) (sym2 <symbol>))
-  (int-binary< (string-compare (symbol-name sym1)
+  (fpi-binary< (string-compare (symbol-name sym1)
                                (symbol-name sym2)) 0))
 
 ;;;-----------------------------------------------------------------------------

@@ -138,7 +138,7 @@ char *eul_dbl_as_str(double x)
 }
 
 
-// double eul_int_as_dbl(int x)
+// double eul_fpi_as_dbl(int x)
 // {
 //     return (double) x;
 // }

@@ -26,14 +26,14 @@
 ;;;-----------------------------------------------------------------------------
 
 (defmodule telos
-  (expose ((rename ((+ int-binary+)
-                    (- int-binary-)
-                    (* int-binary*)
-                    (/ int-binary/)
-                    (% int-binary%)
-                    (mod int-binary-mod)
-                    (= int-binary=)
-                    (< int-binary<)
+  (expose ((rename ((+ fpi-binary+)
+                    (- fpi-binary-)
+                    (* fpi-binary*)
+                    (/ fpi-binary/)
+                    (% fpi-binary%)
+                    (mod fpi-binary-mod)
+                    (= fpi-binary=)
+                    (< fpi-binary<)
                     (sprin primitive-sprin)
                     (prin primitive-prin)
                     (sprint primitive-sprint)

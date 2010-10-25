@@ -58,7 +58,7 @@ LispRef eul_dyn_level1_binding_ref(LispRef binding_name, LispRef absent)
         return absent;
     }
 
-    int pos = eul_int_as_c_int(eul_car(entry));
+    int pos = eul_fpi_as_c_int(eul_car(entry));
     char *module_name_str = eul_symbol_as_c_string(eul_car(eul_cdr(entry)));
 
     return eul_dyn_binding_ref(module_name_str, pos);
@@ -102,7 +102,7 @@ LispRef make_entry(int pos, char *module_str, char *origin_str)
     eul_intern_symbol(module_name, module_str);
     eul_intern_symbol(origin_name, origin_str);
     eul_allocate_cons(tmp, module_name, origin_name);
-    eul_allocate_cons(res, c_int_as_eul_int(pos), tmp);
+    eul_allocate_cons(res, c_int_as_eul_fpi(pos), tmp);
 
     return res;
 }

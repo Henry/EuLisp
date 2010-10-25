@@ -39,7 +39,7 @@ char foo(char *str, int i)
     LispRef eul_str, eul_i, eul_res;
 
     eul_allocate_string(eul_str, str);
-    eul_i = c_int_as_eul_int(i);
+    eul_i = c_int_as_eul_fpi(i);
     eul_res = baz(eul_str, eul_i);
 
     return eul_char_as_c_char(eul_res);

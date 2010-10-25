@@ -92,7 +92,7 @@
   (and (eq (class-of c1) (class-of c2))
        (if (list? c1)
            (all? binary= c1 c2)
-         (and (int-binary= (size c1) (size c2))
+         (and (fpi-binary= (size c1) (size c2))
               (all? binary= c1 c2)))))
 
 ;;;-----------------------------------------------------------------------------
@@ -116,9 +116,9 @@
          (n (apply min (map size ccs))))
     (labels
      ((loop (i)
-            (and (int-binary< i n)
+            (and (fpi-binary< i n)
                  (or (apply fun (map (lambda (x) (element x i)) ccs))
-                     (loop (int-binary+ i 1))))))
+                     (loop (fpi-binary+ i 1))))))
      (loop 0))))
 
 (defmethod all? ((fun <function>) (c <collection>) . cs)
@@ -126,9 +126,9 @@
          (n (apply min (map size ccs))))
     (labels
      ((loop (i)
-            (if (int-binary< i n)
+            (if (fpi-binary< i n)
                 (and (apply fun (map (lambda (x) (element x i)) ccs))
-                     (loop (int-binary+ i 1)))
+                     (loop (fpi-binary+ i 1)))
               t)))
      (loop 0))))
 

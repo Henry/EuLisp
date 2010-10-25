@@ -55,7 +55,7 @@ void initialize_module_boot()
 
   eul_allocate_static_string(str_433, "*** STACK VALUES:", 17);
   /* Byte-vector with size: 8 is_init: 0 index: 44 binding: stack-values */
-  static const void *G00431[] = {I(a9,84,23,00),B(boot ,43),I(24,00,00,00),B(boot1 ,27),I(3c,02,2a,58),I(2a,82,24,00),B(boot ,21),I(3d,01,00,00)};
+  static const void *G00431[] = {I(a9,84,23,00),B(boot ,43),I(24,00,00,00),B(boot1 ,28),I(3c,02,2a,58),I(2a,82,24,00),B(boot ,21),I(3d,01,00,00)};
 
   /* Byte-vector with size: 2 is_init: 0 index: 45 binding: apply */
   static const void *G00434[] = {I(43,fe,8e,45),I(00,00,00,00)};
@@ -74,7 +74,7 @@ void initialize_module_boot()
 
   eul_allocate_static_string(str_446, "*** BACKTRACE:", 14);
   /* Byte-vector with size: 8 is_init: 0 index: 51 binding: backtrace */
-  static const void *G00444[] = {I(a9,84,23,00),B(boot ,50),I(24,00,00,00),B(boot1 ,27),I(3c,02,2a,58),I(2a,82,24,00),B(boot ,2),I(3d,01,00,00)};
+  static const void *G00444[] = {I(a9,84,23,00),B(boot ,50),I(24,00,00,00),B(boot1 ,28),I(3c,02,2a,58),I(2a,82,24,00),B(boot ,2),I(3d,01,00,00)};
 
   /* Byte-vector with size: 14 is_init: 0 index: 52 binding: anonymous */
   static const void *G00447[] = {I(ab,1c,12,1b),I(34,00,00,00),I(00,00,00,18),I(1c,24,00,00),B(boot ,28),I(3d,01,03,32),I(00,00,00,1f),I(1d,11,1f,03),I(10,1b,47,00),I(00,3c,01,1b),I(1f,05,0f,1f),I(03,1c,47,00),I(01,3d,02,07),I(22,04,45,03)};
@@ -107,10 +107,10 @@ void initialize_module_boot()
   static const void *G00466[] = {I(aa,1b,47,00),I(03,47,00,01),I(3d,02,01,00)};
 
   /* Byte-vector with size: 36 is_init: 0 index: 64 binding: anonymous */
-  static const void *G00468[] = {I(ab,1b,11,1b),I(12,1b,34,00),I(00,00,00,4e),I(1d,10,1f,04),I(1c,47,00,00),I(3c,02,12,1b),I(34,00,00,00),I(00,00,00,20),I(1f,05,24,00),B(boot1 ,25),I(3c,01,1f,05),I(1c,90,22,01),I(32,00,00,00),I(00,00,00,1b),I(1f,04,10,1f),I(05,1f,07,8f),I(2a,1b,1f,05),I(0f,1f,06,1c),I(90,22,02,22),I(02,32,00,00),I(00,00,00,40),I(1d,10,1f,04),I(1c,47,00,00),I(3c,02,12,1b),I(34,00,00,00),I(00,00,00,18),I(1f,05,1f,04),I(47,00,01,3d),I(02,06,32,00),I(00,00,00,19),I(1f,04,10,1f),I(05,1f,07,8f),I(2a,1b,1f,05),I(0f,1f,06,1c),I(90,22,02,22),I(02,45,04,00)};
+  static const void *G00468[] = {I(ab,1b,11,1b),I(12,1b,34,00),I(00,00,00,4e),I(1d,10,1f,04),I(1c,47,00,00),I(3c,02,12,1b),I(34,00,00,00),I(00,00,00,20),I(1f,05,24,00),B(boot1 ,26),I(3c,01,1f,05),I(1c,90,22,01),I(32,00,00,00),I(00,00,00,1b),I(1f,04,10,1f),I(05,1f,07,8f),I(2a,1b,1f,05),I(0f,1f,06,1c),I(90,22,02,22),I(02,32,00,00),I(00,00,00,40),I(1d,10,1f,04),I(1c,47,00,00),I(3c,02,12,1b),I(34,00,00,00),I(00,00,00,18),I(1f,05,1f,04),I(47,00,01,3d),I(02,06,32,00),I(00,00,00,19),I(1f,04,10,1f),I(05,1f,07,8f),I(2a,1b,1f,05),I(0f,1f,06,1c),I(90,22,02,22),I(02,45,04,00)};
 
   /* Byte-vector with size: 25 is_init: 0 index: 65 binding: sort-list */
-  static const void *G00470[] = {I(ab,46,05,1b),I(48,00,00,1c),I(12,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,4f),I(1d,10,24,00),B(boot1 ,25),I(3c,01,1b,48),I(00,03,86,1b),I(48,00,01,23),B(boot ,37),I(23,00,00,00),B(boot ,64),I(3b,02,48,00),I(01,1f,04,11),I(23,00,00,00),B(boot ,37),I(23,00,00,00),B(boot ,63),I(3b,01,1c,24),B(boot ,17),I(3c,02,2a,47),I(00,03,22,03),I(45,03,00,00)};
+  static const void *G00470[] = {I(ab,46,05,1b),I(48,00,00,1c),I(12,1b,34,00),I(00,00,00,0e),I(86,32,00,00),I(00,00,00,4f),I(1d,10,24,00),B(boot1 ,26),I(3c,01,1b,48),I(00,03,86,1b),I(48,00,01,23),B(boot ,37),I(23,00,00,00),B(boot ,64),I(3b,02,48,00),I(01,1f,04,11),I(23,00,00,00),B(boot ,37),I(23,00,00,00),B(boot ,63),I(3b,01,1c,24),B(boot ,17),I(3c,02,2a,47),I(00,03,22,03),I(45,03,00,00)};
 
   /* Byte-vector with size: 10 is_init: 0 index: 66 binding: anonymous */
   static const void *G00472[] = {I(aa,1b,12,1b),I(34,00,00,00),I(00,00,00,10),I(86,32,00,00),I(00,00,00,17),I(1c,10,47,00),I(00,3c,01,2a),I(1c,11,47,00),I(01,3d,01,02),I(45,02,00,00)};

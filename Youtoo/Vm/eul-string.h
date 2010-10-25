@@ -30,7 +30,7 @@
 /// String access
 ///-----------------------------------------------------------------------------
 #define STRING_SIZE (1)
-#define EUL_STRING_SIZE c_int_as_eul_int(STRING_SIZE)
+#define EUL_STRING_SIZE c_int_as_eul_fpi(STRING_SIZE)
 #define STRING_DATA(x) (slot_ref((x), 0))
 #define eul_string_size(x) object_size(x)
 #define eul_string_ref(str, i) (*(((char *) STRING_DATA(str))+i))
@@ -72,7 +72,7 @@
 #define eul_allocate_static_string(loc, str, n)                                \
     static LispRef loc##_static[] =                                            \
     {                                                                          \
-        c_int_as_eul_int(n),                                                   \
+        c_int_as_eul_fpi(n),                                                   \
         NULL,                                                                  \
         (LispRef) str                                                          \
     };                                                                         \

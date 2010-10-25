@@ -39,11 +39,11 @@
 #define eul_is_string_ref(x)                                                   \
     (!is_immediate(x) && (object_class(x)==PGLOBAL(glob_string_ref_class)))
 
-#define eul_int_ref_as_c_int_ref(x) ((int *) HANDLER_HANDLE(x))
+#define eul_fpi_ref_as_c_int_ref(x) ((int *) HANDLER_HANDLE(x))
 #define eul_double_ref_as_c_double_ref(x) ((double *) HANDLER_HANDLE(x))
 #define eul_string_ref_as_c_string_ref(x) ((char **) HANDLER_HANDLE(x))
 
-#define eul_int_ref_as_c_int(x)                                                \
+#define eul_fpi_ref_as_c_int(x)                                                \
     (*((int *) HANDLER_HANDLE((LispRef) x)))
 #define eul_double_ref_as_c_double(x)                                          \
     (*((double *) HANDLER_HANDLE((LispRef) x)))

@@ -47,7 +47,7 @@
 ///-----------------------------------------------------------------------------
 /// nil allocation
 ///-----------------------------------------------------------------------------
-#define EUL_NIL_SIZE (c_int_as_eul_int(0))
+#define EUL_NIL_SIZE (c_int_as_eul_fpi(0))
 
 #define eul_allocate_static_nil(loc)                                           \
     LispRef loc##_static[] = {EUL_NIL_SIZE, NULL};                             \
@@ -60,7 +60,7 @@
 /// Dynamic class allocation
 ///-----------------------------------------------------------------------------
 #define CLASS_SIZE (10)
-#define EUL_CLASS_SIZE (c_int_as_eul_int(CLASS_SIZE))
+#define EUL_CLASS_SIZE (c_int_as_eul_fpi(CLASS_SIZE))
 #define CLASS_NAME(o) (slot_ref((o), 0))
 
 #define eul_allocate_class(loc)                                                \

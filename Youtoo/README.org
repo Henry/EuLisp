@@ -64,10 +64,10 @@
 
 ***** Data conversion from EuLisp to C:
       #+BEGIN_SRC c
-        int     eul_int_as_c_int(LispRef x);
+        int     eul_fpi_as_c_int(LispRef x);
         int     eul_bool_as_c_bool(LispRef x);
         double  eul_double_as_c_double(LispRef x);
-        LispRef eul_int_as_dbl(LispRef x);
+        LispRef eul_fpi_as_dbl(LispRef x);
         char    eul_char_as_c_char(LispRef x);
         char    *eul_string_as_c_string(LispRef x);
         char    *eul_symbol_as_c_string(LispRef x);
@@ -75,7 +75,7 @@
 
 ***** Data conversion from C to EuLisp:
       #+BEGIN_SRC c
-        LispRef c_int_as_eul_int(int x);
+        LispRef c_int_as_eul_fpi(int x);
         LispRef c_bool_as_eul_bool(bool x)
         LispRef c_char_as_eul_char(char x);
       #+END_SRC

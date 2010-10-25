@@ -70,7 +70,7 @@ LispRef eul_dyn_level1_binding_ref(LispRef binding_name, LispRef absent)
         return absent;
     }
 
-    pos = eul_int_as_c_int(eul_car(entry));
+    pos = eul_fpi_as_c_int(eul_car(entry));
     module_name_str = eul_symbol_as_c_string(eul_car(eul_cdr(entry)));
 
     return eul_dyn_binding_ref(module_name_str, pos);
@@ -111,7 +111,7 @@ LispRef make_entry(int pos, char *module_str, char *origin_str)
     eul_intern_symbol(module_name, module_str);
     eul_intern_symbol(origin_name, origin_str);
     eul_allocate_cons(tmp, module_name, origin_name);
-    eul_allocate_cons(res, c_int_as_eul_int(pos), tmp);
+    eul_allocate_cons(res, c_int_as_eul_fpi(pos), tmp);
     return res;
 }
 
@@ -157,7 +157,7 @@ void fill_level1_table()
     eul_fast_table_set(level1_tab, "asin", make_entry(10, "math", "asin"));
     eul_fast_table_set(level1_tab, "remainder", make_entry(23, "scheme",
             "remainder"));
-    eul_fast_table_set(level1_tab, "int-binary%", make_entry(34, "boot1", "%"));
+    eul_fast_table_set(level1_tab, "fpi-binary%", make_entry(34, "boot1", "%"));
     eul_fast_table_set(level1_tab, "current-input-port", make_entry(54,
             "scheme", "current-input-port"));
     eul_fast_table_set(level1_tab, "vector-set!", make_entry(52, "scheme",
@@ -184,8 +184,8 @@ void fill_level1_table()
     eul_fast_table_set(level1_tab, "memv", make_entry(75, "scheme", "memv"));
     eul_fast_table_set(level1_tab, "make-string", make_entry(18, "scheme",
             "make-string"));
-    eul_fast_table_set(level1_tab, "int-zerop", make_entry(33, "boot1",
-            "int-zerop"));
+    eul_fast_table_set(level1_tab, "fpi-zerop", make_entry(33, "boot1",
+            "fpi-zerop"));
     eul_fast_table_set(level1_tab, "inexact->exact", make_entry(109, "scheme",
             "inexact->exact"));
     eul_fast_table_set(level1_tab, "rational?", make_entry(49, "scheme",
@@ -202,13 +202,13 @@ void fill_level1_table()
     eul_fast_table_set(level1_tab, "exp", make_entry(7, "math", "exp"));
     eul_fast_table_set(level1_tab, "string-set!", make_entry(48, "scheme",
             "string-set!"));
-    eul_fast_table_set(level1_tab, "int-binary+", make_entry(17, "boot1", "+"));
+    eul_fast_table_set(level1_tab, "fpi-binary+", make_entry(17, "boot1", "+"));
     eul_fast_table_set(level1_tab, "char-ready", make_entry(50, "scheme",
             "char-ready"));
     eul_fast_table_set(level1_tab, "caar", make_entry(27, "list", "caar"));
     eul_fast_table_set(level1_tab, "max", make_entry(5, "compare", "max"));
-    eul_fast_table_set(level1_tab, "int-binary=", make_entry(12, "boot1", "="));
-    eul_fast_table_set(level1_tab, "int-binary-", make_entry(18, "boot1", "-"));
+    eul_fast_table_set(level1_tab, "fpi-binary=", make_entry(12, "boot1", "="));
+    eul_fast_table_set(level1_tab, "fpi-binary-", make_entry(18, "boot1", "-"));
     eul_fast_table_set(level1_tab, "symbol?", make_entry(47, "scheme",
             "symbol?"));
     eul_fast_table_set(level1_tab, "inc", make_entry(23, "boot1", "inc"));
@@ -254,7 +254,7 @@ void fill_level1_table()
             "char=?"));
     eul_fast_table_set(level1_tab, "char-ci>?", make_entry(96, "scheme",
             "char-ci>?"));
-    eul_fast_table_set(level1_tab, "int-binary*", make_entry(35, "boot1", "*"));
+    eul_fast_table_set(level1_tab, "fpi-binary*", make_entry(35, "boot1", "*"));
     eul_fast_table_set(level1_tab, "char-downcase", make_entry(95, "scheme",
             "char-downcase"));
     eul_fast_table_set(level1_tab, "current-output-port", make_entry(70,
@@ -278,7 +278,7 @@ void fill_level1_table()
     eul_fast_table_set(level1_tab, "char>=?", make_entry(39, "scheme",
             "char>=?"));
     eul_fast_table_set(level1_tab, "dec", make_entry(45, "boot1", "dec"));
-    eul_fast_table_set(level1_tab, "int-binary<", make_entry(42, "boot1", "<"));
+    eul_fast_table_set(level1_tab, "fpi-binary<", make_entry(42, "boot1", "<"));
     eul_fast_table_set(level1_tab, "<", make_entry(3, "compare", "<"));
     eul_fast_table_set(level1_tab, "vector?", make_entry(12, "scheme",
             "vector?"));
@@ -375,7 +375,7 @@ void fill_level1_table()
     eul_fast_table_set(level1_tab, "cddddr", make_entry(3, "scheme", "cddddr"));
     eul_fast_table_set(level1_tab, "string->symbol", make_entry(26, "scheme",
             "string->symbol"));
-    eul_fast_table_set(level1_tab, "int-binary/", make_entry(14, "boot1", "/"));
+    eul_fast_table_set(level1_tab, "fpi-binary/", make_entry(14, "boot1", "/"));
     eul_fast_table_set(level1_tab, "odd?", make_entry(81, "scheme", "odd?"));
     eul_fast_table_set(level1_tab, "open-input-file", make_entry(27, "scheme",
             "open-input-file"));

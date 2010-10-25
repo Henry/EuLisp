@@ -123,7 +123,7 @@
                   (read-error s "unexpected end of file during list ~a"
                               ;; Avoid printing very long lists
                               (let ((l (reverse-list so-far)))
-                                (if (int-binary< (list-size l) 128) l
+                                (if (fpi-binary< (list-size l) 128) l
                                   (list (car l) (car (cdr l))
                                         (car (car (cdr l))) " ... "
                                         (car (car (cdr so-far)))

@@ -31,7 +31,7 @@
 ///-----------------------------------------------------------------------------
 #define FF_ARG_CONVERT(x, conv_index) FF_ARG_CONVERT##conv_index(x)
 
-#define FF_ARG_CONVERT0(x) eul_int_as_c_int_checked(x)
+#define FF_ARG_CONVERT0(x) eul_fpi_as_c_int_checked(x)
 #define FF_ARG_CONVERT1(x) eul_char_as_c_char_checked(x)
 #define FF_ARG_CONVERT2(x) eul_double_as_c_double(x)
 #define FF_ARG_CONVERT3(x) eul_string_as_c_string_checked(x)
@@ -40,7 +40,7 @@
 #define FF_ARG_CONVERT6(x) eul_symbol_as_c_string_checked(x)
 #define FF_ARG_CONVERT7(x) eul_bool_as_c_bool(x)
 #define FF_ARG_CONVERT8(x) ((void *) x)
-#define FF_ARG_CONVERT9(x) eul_int_ref_as_c_int_ref_checked(x)
+#define FF_ARG_CONVERT9(x) eul_fpi_ref_as_c_int_ref_checked(x)
 #define FF_ARG_CONVERT10(x) eul_double_ref_as_c_double_ref_checked(x)
 #define FF_ARG_CONVERT11(x) eul_string_ref_as_c_string_ref_checked(x)
 
@@ -82,8 +82,8 @@
 
 #endif
 
-#define eul_int_as_c_int_checked(x)                                            \
-    (eul_is_int(x) ? eul_int_as_c_int(x) :                                     \
+#define eul_fpi_as_c_int_checked(x)                                            \
+    (eul_is_int(x) ? eul_fpi_as_c_int(x) :                                     \
     (ff_notify_arg_error(x, <fpi>), 0))
 
 #define eul_double_as_c_double_checked(x)                                      \
@@ -98,8 +98,8 @@
     (eul_is_string(x) ? eul_string_as_c_string(x) :                            \
     (ff_notify_arg_error(x, <string>), ""))
 
-#define eul_int_ref_as_c_int_ref_checked(x)                                    \
-    (eul_is_int_ref(x) ? eul_int_ref_as_c_int_ref(x) :                         \
+#define eul_fpi_ref_as_c_int_ref_checked(x)                                    \
+    (eul_is_int_ref(x) ? eul_fpi_ref_as_c_int_ref(x) :                         \
     (ff_notify_arg_error(x, <int*>), (int *)NULL))
 
 #define eul_double_ref_as_c_double_ref_checked(x)                              \

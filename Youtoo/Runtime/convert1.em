@@ -43,22 +43,22 @@
 (defmethod (converter <list>) ((l <list>)) l)
 
 (defmethod (converter <list>) ((str <string>))
-  (let ((n (int-binary- (string-size str) 1)))
+  (let ((n (fpi-binary- (string-size str) 1)))
     (labels
      ((loop (res)
-            (if (int-binary< n 0) res
+            (if (fpi-binary< n 0) res
               (let ((char (string-ref str n)))
-                (setq n (int-binary- n 1))
+                (setq n (fpi-binary- n 1))
                 (loop (cons char res))))))
      (loop ()))))
 
 (defmethod (converter <list>) ((vec <vector>))
-  (let ((n (int-binary- (vector-size vec) 1)))
+  (let ((n (fpi-binary- (vector-size vec) 1)))
     (labels
      ((loop (res)
-            (if (int-binary< n 0) res
+            (if (fpi-binary< n 0) res
               (let ((char (vector-ref vec n)))
-                (setq n (int-binary- n 1))
+                (setq n (fpi-binary- n 1))
                 (loop (cons char res))))))
      (loop ()))))
 
@@ -76,13 +76,13 @@
 ;;         (i 0))
 ;;      (labels
 ;;       ((loop (ll)
-;;            (if (int-binary< i n)
+;;            (if (fpi-binary< i n)
 ;;                (let ((x (car ll)))
 ;;                  (if (character? x) ()
 ;;                    (error <condition>
 ;;                           "conversion to string with non character element"))
 ;;                  ((setter string-ref) res i x)
-;;                  (setq i (int-binary+ i 1))
+;;                  (setq i (fpi-binary+ i 1))
 ;;                  (loop (cdr ll)))
 ;;              res)))
 ;;       (loop l))))
@@ -92,16 +92,16 @@
 (defmethod (converter <string>) ((vec <vector>))
   (let* ((n (vector-size vec))
          (res (make <string> size: n)))
-    (setq n (int-binary- n 1))
+    (setq n (fpi-binary- n 1))
     (labels
      ((loop ()
-            (if (int-binary< n 0) res
+            (if (fpi-binary< n 0) res
               (let ((x (vector-ref vec n)))
                 (if (character? x) ()
                   (error <condition>
                          "conversion to string with non character element "))
                 ((setter string-ref) res n x)
-                (setq n (int-binary- n 1))
+                (setq n (fpi-binary- n 1))
                 (loop)))))
      (loop))))
 
@@ -117,13 +117,13 @@
 (defmethod (converter <vector>) ((str <string>))
   (let* ((n (string-size str))
          (res (make-vector n)))
-    (setq n (int-binary- n 1))
+    (setq n (fpi-binary- n 1))
     (labels
      ((loop ()
-            (if (int-binary< n 0) res
+            (if (fpi-binary< n 0) res
               (let ((x (string-ref str n)))
                 ((setter vector-ref) res n x)
-                (setq n (int-binary- n 1))
+                (setq n (fpi-binary- n 1))
                 (loop)))))
      (loop))))
 
@@ -143,7 +143,7 @@
             (if (null? ll) res
               (let ((x (car ll)))
                 ((setter table-ref) res i x)
-                (setq i (int-binary+ i 1))
+                (setq i (fpi-binary+ i 1))
                 (loop (cdr ll))))))
      (loop l))))
 
@@ -154,13 +154,13 @@
 (defmethod (converter <table>) ((vec <vector>))
   (let ((n (vector-size vec))
         (res (make <table>)))
-    (setq n (int-binary- n 1))
+    (setq n (fpi-binary- n 1))
     (labels
      ((loop ()
-            (if (int-binary< n 0) res
+            (if (fpi-binary< n 0) res
               (let ((x (vector-ref vec n)))
                 ((setter table-ref) res n x)
-                (setq n (int-binary- n 1))
+                (setq n (fpi-binary- n 1))
                 (loop)))))
      (loop))))
 
