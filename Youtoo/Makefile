@@ -35,12 +35,14 @@ SYS_DIRS = Vm Telos Runtime Comptime2 Youtoo
 .PHONY: static
 static:
 	@echo "COMPILING youtoo ..."
+	@cp Lib/lib*.i $(EUL_LIB_DIR)
 	@$(call makeAll,$(SYS_DIRS),)
 	@echo "DONE"
 
 .PHONY: shared
 shared:
 	@echo "COMPILING youtoo with shared libraries ..."
+	@cp Lib/lib*.i $(EUL_LIB_DIR)
 	@$(call makeAll,$(SYS_DIRS),$@)
 	@echo "DONE"
 
